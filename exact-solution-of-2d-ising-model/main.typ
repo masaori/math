@@ -77,11 +77,15 @@
 == 線型空間の一般論
 
 #include "parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ"
+#include "parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ"
+#include "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ"
 
 == 線型写像のexp
 
 #include "parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ"
 #include "parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ"
+#include "parts/003_線型写像のexp/002_theorem_可換行列のexpの積公式.typ"
+#include "parts/003_線型写像のexp/003_theorem_零行列のexpはI.typ"
 
 = 対角化の計算 (ホロノミック量子場 付録B)
 
@@ -126,6 +130,7 @@
 #include "parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ"
 #include "parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ"
 #include "parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ"
+#include "parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ"
 
 == $e^(X) Y e^(-X) = e^("ad"(X))(Y)$ の証明
 
@@ -189,6 +194,7 @@
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ"
+#include "parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ"
 
 (次回 0531)
 - $gamma_(theta_mu)$を求める

@@ -4,7 +4,7 @@
   $K := bb(R)$もしくは$bb(C)$, $d in bold(Z)_(gt.eq)$
 
   $X, Y in M(K, d)$について、
-  
+
   $
     overbrace(
       #$[X, [X, dots.c , [X, Y] dots.c ]$,
@@ -16,5 +16,9 @@
   #proof[
     TODO:
     帰納法で行ける
+  ]
+
+  #note[
+    この定理は "Lie Groups, Lie Algebras, and Representations"（Brian Hall）Exercise 14 の参考記述であり、このリポジトリでは未証明である。証明の根拠として使用することは禁止する。
   ]
 ]

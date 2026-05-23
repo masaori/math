@@ -20,4 +20,8 @@
   =
   Y$
   とする。
+
+  #note[
+    この定理は "Lie Groups, Lie Algebras, and Representations"（Brian Hall）Proposition 3.35 の参考記述であり、このリポジトリでは未証明である。証明の根拠として使用することは禁止する。
+  ]
 ]<brianhall_exc14>

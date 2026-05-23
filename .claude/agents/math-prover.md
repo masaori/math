@@ -33,6 +33,44 @@ Your task is to produce **complete, rigorous mathematical proofs** that withstan
    - Proper mathematical notation and formatting
    - Clear structure (e.g., base case / inductive step for induction)
 
+## Typst 証明記述スタイル（このリポジトリ固有）
+
+Typst ファイルに証明を書くときは以下のスタイルに従う。
+
+### 式変形の連鎖では `quad (because ...)` を使う
+
+**禁止**：式と式の間に日本語説明文を挟む
+
+```typst
+// NG
+$A = B$ より $C$ に代入すると、
+
+$D = E$
+```
+
+**推奨**：`quad (because ...)` を式の行末にインラインで書く
+
+```typst
+// OK
+$
+  A
+  &=
+  B
+  \
+  &=
+  C
+  quad (because "理由")
+  \
+  &=
+  D
+$
+```
+
+「Xであるから、」「これを代入すると、」「したがって、」「以上より」のような接続文は、
+式変形の連鎖中では `quad (because "X")` または `quad (because #ref(<label>))` に変換する。
+
+構造の説明（ステップ番号、場合分け見出し、帰納法の仮定宣言など）はテキストで書いてよい。
+
 ## Mandatory Iterative Review Process (最重要)
 
 After drafting the proof, you MUST perform the following cycle. **This is non-negotiable.**

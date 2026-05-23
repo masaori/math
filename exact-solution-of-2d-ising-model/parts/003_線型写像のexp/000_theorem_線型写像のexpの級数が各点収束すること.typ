@@ -8,7 +8,7 @@
   sum_(n=0)^(infinity) (1/n!) overbrace(X compose X compose dots compose X, n "times")
   $
   は、線型写像 $V -> V$に各点収束する
-]
+]<exp_converges>
 #proof[
   $V$は有限次元なので、基底$E subset V$が存在するので、$X$は有限次元行列$A in M(K)$として表せる。
   
