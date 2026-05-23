@@ -15,11 +15,11 @@ jobs:
           sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra
       - uses: typst-community/setup-typst@v4
       - name: Build main document
-        run: typst compile main.typ
+        run: typst compile exact-solution-of-2d-ising-model/main.typ
       - name: Create pages directory
         run: mkdir -p pages
       - name: Copy PDF to pages directory
-        run: cp main.pdf pages/
+        run: cp exact-solution-of-2d-ising-model/main.pdf pages/
       - name: Create index.html
         run: |
           cat > pages/index.html << 'EOF'
