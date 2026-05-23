@@ -2,6 +2,17 @@
 
 ## 次回やること（優先度順）
 
+### 0. Typst 残りファイルの structured-latex 変換
+
+`structured-latex/` への初回移行として `parts/000_計算公式/000` から `029` までの30件は変換済み。次回は残りの `.typ` ファイルを、既存 `.typ` を編集せずに `structured-latex/content/` 以下へ追加変換する。
+
+作業方針:
+- `structured-latex/schema.mjs` / `schema.d.ts` の object DSL を正本形式として使う
+- 数式は KaTeX compatible LaTeX 文字列へ変換する
+- 変換単位は既存 `parts/**/*.typ` の theorem / definition / claim / remark / note 単位
+- 各バッチ後に `node structured-latex/tools/validate-content.mjs` を通す
+- 完全変換が怪しい箇所は `conversion.notes` と `todo(...)` に残す
+
 ### 1. 037 の SageMath 数値検証
 
 `037_claim_T_Vprimeのpsiへの作用.typ` の証明が完成した。`sagemath/check/037_claim_T_Vprimeのpsi/` を新規作成し、具体的な小さい $M$（例: $M=2, 4$）でフェルミオン演算子を行列表現し、$T_{(V')}(\psi^\dagger_\mu) = e^{-\gamma(\theta_\mu)} \psi^\dagger_\mu$ および $T_{(V')}(\psi_\mu) = e^{+\gamma(\theta_\mu)} \psi_\mu$ を数値確認する。
