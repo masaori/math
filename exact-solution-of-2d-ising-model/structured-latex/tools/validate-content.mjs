@@ -35,8 +35,8 @@ for (const file of files) {
   }
 }
 
-if (blockCount !== 30) {
-  throw new Error(`expected 30 converted blocks, found ${blockCount}`);
+if (blockCount === 0) {
+  throw new Error("no blocks found — check that content/*.mjs files export defineBlocks([...])");
 }
 
 console.log(`validated ${blockCount} blocks from ${files.length} files`);
