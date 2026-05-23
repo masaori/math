@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Extract"
+  short_description: "Extract statement fragments from lattice papers."
+  default_prompt: "Extract statement fragments for the integrable-lattice project."

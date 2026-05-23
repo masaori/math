@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Verify"
+  short_description: "Check novelty and solved-status risks."
+  default_prompt: "Verify unresolved statement candidates for the integrable-lattice project."

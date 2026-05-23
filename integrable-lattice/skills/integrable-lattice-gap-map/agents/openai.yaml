@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Gap Map"
+  short_description: "Build solved and missing statement maps."
+  default_prompt: "Build a gap map for the integrable-lattice project."

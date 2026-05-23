@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Generate"
+  short_description: "Generate unresolved statement candidates."
+  default_prompt: "Generate unresolved statement candidates for the integrable-lattice project."

@@ -1,0 +1,16 @@
+# Large downloaded corpora
+inputs/corpus/*
+!inputs/corpus/.gitkeep
+
+# Generated outputs can be large; keep curated markdown files manually.
+outputs/maps/*.json
+outputs/maps/*.jsonl
+outputs/candidates/*.json
+outputs/candidates/*.jsonl
+outputs/reports/*.json
+outputs/reports/*.jsonl
+
+# Python
+__pycache__/
+.venv/
+

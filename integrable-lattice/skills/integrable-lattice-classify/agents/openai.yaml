@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Classify"
+  short_description: "Classify extracted lattice-model statements."
+  default_prompt: "Classify statement fragments for the integrable-lattice project."

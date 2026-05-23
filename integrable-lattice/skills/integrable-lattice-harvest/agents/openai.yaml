@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Harvest"
+  short_description: "Collect integrable lattice literature candidates."
+  default_prompt: "Harvest candidate literature for the integrable-lattice project."

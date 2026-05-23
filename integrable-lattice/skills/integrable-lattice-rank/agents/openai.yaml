@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrable Lattice Rank"
+  short_description: "Rank candidates by paper potential."
+  default_prompt: "Rank unresolved statement candidates for the integrable-lattice project."
