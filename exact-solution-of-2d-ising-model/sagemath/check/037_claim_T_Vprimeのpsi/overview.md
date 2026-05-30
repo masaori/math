@@ -5,8 +5,8 @@
 `parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ` の Claim:
 
 ```typst
-T_((V'))(psi_mu^dagger) = e^(-gamma(theta_mu)) psi_mu^dagger
-T_((V'))(psi_mu) = e^(gamma(theta_mu)) psi_mu
+T_((V'))(psi_mu^dagger) = e^(gamma(theta_mu)) psi_mu^dagger
+T_((V'))(psi_mu) = e^(-gamma(theta_mu)) psi_mu
 ```
 
 ## 検証方針
@@ -28,7 +28,7 @@ psi_nu^dagger psi_(-nu) = c_nu^dagger c_nu
 となる。よって
 
 ```text
-X = - sum_(nu=1)^M gamma(theta_nu) (psi_nu^dagger psi_(-nu) - 1/2 I)
+X = + sum_(nu=1)^M gamma(theta_nu) (psi_nu^dagger psi_(-nu) - 1/2 I)
 V' = exp(X)
 ```
 
@@ -38,8 +38,8 @@ V' = exp(X)
 
 | # | ファイル | 検証内容 | ステータス | 結果 |
 |---|---------|---------|-----------|------|
-| 01 | `check_01_TVprime_psi_dagger_action.sage` | `T_(V')(psi_mu^dagger) = exp(-gamma(theta_mu)) psi_mu^dagger` | PASS | 最大絶対誤差 `3.28e-16`, 最大相対誤差 `3.28e-16` |
-| 02 | `check_02_TVprime_psi_action.sage` | `T_(V')(psi_mu) = exp(gamma(theta_mu)) psi_mu` | PASS | 最大絶対誤差 `2.30e-6`, 最大相対誤差 `2.13e-15` |
+| 01 | `check_01_TVprime_psi_dagger_action.sage` | `T_(V')(psi_mu^dagger) = exp(gamma(theta_mu)) psi_mu^dagger` | PASS | 最大絶対誤差 `2.30e-6`, 最大相対誤差 `2.13e-15` |
+| 02 | `check_02_TVprime_psi_action.sage` | `T_(V')(psi_mu) = exp(-gamma(theta_mu)) psi_mu` | PASS | 最大絶対誤差 `3.28e-16`, 最大相対誤差 `3.28e-16` |
 
 ## 実行条件
 
@@ -78,4 +78,4 @@ for f in sagemath/check/037_claim_T_Vprimeのpsi/check_*.sage; do echo "=== $f =
 for f in sagemath/check/037_claim_T_Vprimeのpsi/check_*.sage; do echo "=== $f ==="; sage "$f"; done
 ```
 
-`psi` 側の最大絶対誤差は極端なパラメータ `K1=10.4, K2=1.8` で大きく出るが、期待値のスケールが大きいため相対誤差は `2.13e-15` に留まる。
+`psi_mu^dagger` 側の最大絶対誤差は極端なパラメータ `K1=10.4, K2=1.8` で大きく出るが、期待値のスケールが大きいため相対誤差は `2.13e-15` に留まる。

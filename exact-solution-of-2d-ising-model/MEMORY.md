@@ -2,24 +2,30 @@
 
 ## 次回やること（優先度順）
 
-### 0. Typst 残りファイルの structured-latex 変換
+### 1. 038 `T_V = T_{V'}` の proof
 
-`structured-latex/` への初回移行として `parts/000_計算公式/000` から `029` までの30件は変換済み。次回は残りの `.typ` ファイルを、既存 `.typ` を編集せずに `structured-latex/content/` 以下へ追加変換する。
+032/037 の符号を `T_(V)` と一致する向きに修正済み。次は `038_claim_T_V_eq_T_Vprime.typ` の `#proof[TODO]` を完成させる。
 
-作業方針:
-- `structured-latex/schema.mjs` / `schema.d.ts` の object DSL を正本形式として使う
-- 数式は KaTeX compatible LaTeX 文字列へ変換する
-- 変換単位は既存 `parts/**/*.typ` の theorem / definition / claim / remark / note 単位
-- 各バッチ後に `node structured-latex/tools/validate-content.mjs` を通す
-- 完全変換が怪しい箇所は `conversion.notes` と `todo(...)` に残す
+使う結果:
+- `030_claim_Vとpsiの交換関係.typ`: `T_(V)(psi_mu^dagger) = e^(gamma(theta_mu)) psi_mu^dagger`, `T_(V)(psi_mu) = e^(-gamma(theta_mu)) psi_mu`
+- `037_claim_T_Vprimeのpsiへの作用.typ`: `T_(V')(psi_mu^dagger) = e^(gamma(theta_mu)) psi_mu^dagger`, `T_(V')(psi_mu) = e^(-gamma(theta_mu)) psi_mu`
+- 033: `lambda_(plus, mu) = e^(gamma(theta_mu))`, `lambda_(minus, mu) = e^(-gamma(theta_mu))`
 
-### 1. 037 の SageMath 数値検証
+証明方針:
+- `psi_mu^dagger, psi_mu` が `hat(Z)_mu^((minus)), hat(Y)_mu` の線形結合で、逆に `hat(Z), hat(Y)` も `psi` で張られることを `P_mu` の可逆性から使う
+- `T_(V)` と `T_(V')` が全ての `psi_mu^dagger, psi_mu` 上で一致することから、生成元 `hat(Z), hat(Y)` 上で一致し、線型性で対象空間上も一致することを示す
 
-`037_claim_T_Vprimeのpsiへの作用.typ` の証明が完成した。`sagemath/check/037_claim_T_Vprimeのpsi/` を新規作成し、具体的な小さい $M$（例: $M=2, 4$）でフェルミオン演算子を行列表現し、$T_{(V')}(\psi^\dagger_\mu) = e^{-\gamma(\theta_\mu)} \psi^\dagger_\mu$ および $T_{(V')}(\psi_\mu) = e^{+\gamma(\theta_\mu)} \psi_\mu$ を数値確認する。
+### 2. 039 `V = cV'` の proof
 
-### 2. 038, 039 の proof 完成
+038 完了後に着手する。T の単射性が必要。009（クリフォード群の定義、TODO）に依存。
 
-### （完了済み）032 V' の定義の修正
+## 完了済み（2026-05-30）
+
+### structured-latex 残りファイルの変換
+
+`structured-latex/content/` 以下へ残りの `parts/**/*.typ` の変換を追加済み。`node structured-latex/tools/validate-content.mjs` は 123 blocks で通過。
+
+### 032/037 V' 符号修正と SageMath 検証
 
 005（P_μ 正規化）の修正により、新しい反交換関係 $[ψ†_μ, ψ_ν]_+ = δ^M_{μ+ν,0} I$ で 031 が成立することは数値検証済み。しかし、現状の $V' := exp(-Σ_{μ∈M} γ(θ_μ)(ψ†_μ ψ_μ - 1/2))$ では:
 
@@ -40,17 +46,16 @@ $
 
 これにより `[ψ†_μ ψ_{-μ}, ψ†_ν] = δ^M_{ν-μ,0} ψ†_μ` で、$ψ†_ν$ が固有ベクトルになる。
 
-### 2. 037 の proof 完成
+実施済み:
+- `032_definition_Vprimeの定義.typ`: `V' = exp(+Σ γ(ψ†_μ ψ_{-μ} - 1/2))` に修正
+- `037_claim_T_Vprimeのpsiへの作用.typ`: `T_(V')(ψ†_μ) = e^(+γ)ψ†_μ`, `T_(V')(ψ_μ) = e^(-γ)ψ_μ` に修正
+- `sagemath/check/037_claim_T_Vprimeのpsi/`: `M=2,4`、`K1,K2` 7組で PASS
+- `structured-latex/content/008_TV1_hatZ_hatY_20_40.mjs`: 032/037 の符号を同期
+- `typst compile main.typ`: 警告のみで成功
 
-032 修正後、037 の proof を再構築（$ψ†_μ ψ_{-μ}$ ベース）。
+### main.pdf の追跡停止
 
-### 3. 038 `T_V = T_{V'}` の proof
-
-032, 037 が片付いたら、030 と 037 を組み合わせて proof。
-
-### 4. 039 `V = cV'` の proof
-
-T の単射性が必要。009（クリフォード群の定義、TODO）に依存。
+`exact-solution-of-2d-ising-model/main.pdf` は生成物として Git から削除し、`.gitignore` に追加した。
 
 ## 完了済み（2026-05-02）
 

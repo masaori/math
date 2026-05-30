@@ -434,7 +434,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
     labels: ["def_Vprime"],
     statement: [
       displayMath(
-        String.raw`V' := \exp\!\Biggl(-\sum_{\mu=1}^M \gamma(\theta_\mu)\Bigl(\psi_\mu^\dagger \psi_{-\mu} - \tfrac{1}{2}\Bigr)\Biggr)`,
+        String.raw`V' := \exp\!\Biggl(+\sum_{\mu=1}^M \gamma(\theta_\mu)\Bigl(\psi_\mu^\dagger \psi_{-\mu} - \tfrac{1}{2}\Bigr)\Biggr)`,
       ),
     ],
     proof: [],
@@ -603,15 +603,15 @@ B_2 := \begin{pmatrix}
     statement: [
       paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
       displayMath(
-        String.raw`T_{(V')}(\psi_\mu^\dagger) = e^{-\gamma(\theta_\mu)}\psi_\mu^\dagger,
+        String.raw`T_{(V')}(\psi_\mu^\dagger) = e^{+\gamma(\theta_\mu)}\psi_\mu^\dagger,
 \quad
-T_{(V')}(\psi_\mu) = e^{+\gamma(\theta_\mu)}\psi_\mu`,
+T_{(V')}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`,
       ),
     ],
     proof: [
       paragraph([ref("def_Vprime"), " より ", math(String.raw`V' = e^X`), " ただし"]),
       displayMath(
-        String.raw`X := -\sum_{\nu=1}^M \gamma(\theta_\nu)\Bigl(\psi_\nu^\dagger \psi_{-\nu} - \tfrac{1}{2}\Bigr)`,
+        String.raw`X := +\sum_{\nu=1}^M \gamma(\theta_\nu)\Bigl(\psi_\nu^\dagger \psi_{-\nu} - \tfrac{1}{2}\Bigr)`,
       ),
       paragraph(["Step 1:", math(String.raw`[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu^\dagger] = \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger`)]),
       displayMath(
@@ -628,11 +628,11 @@ T_{(V')}(\psi_\mu) = e^{+\gamma(\theta_\mu)}\psi_\mu`,
         math(String.raw`[\psi_\nu^\dagger, \psi_\mu^\dagger]_+ = 0`),
         " を使用）",
       ]),
-      paragraph(["Step 2:", math(String.raw`[X, \psi_\mu^\dagger] = -\gamma(\theta_\mu)\psi_\mu^\dagger`)]),
+      paragraph(["Step 2:", math(String.raw`[X, \psi_\mu^\dagger] = +\gamma(\theta_\mu)\psi_\mu^\dagger`)]),
       displayMath(
         String.raw`[X, \psi_\mu^\dagger]
-= -\sum_{\nu=1}^M \gamma(\theta_\nu)\,\delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
-= -\gamma(\theta_\mu)\psi_\mu^\dagger`,
+= +\sum_{\nu=1}^M \gamma(\theta_\nu)\,\delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+= +\gamma(\theta_\mu)\psi_\mu^\dagger`,
       ),
       paragraph([
         "（",
@@ -653,17 +653,17 @@ T_{(V')}(\psi_\mu) = e^{+\gamma(\theta_\mu)}\psi_\mu`,
       ]),
       paragraph([
         "Step 3: 帰納法で ",
-        math(String.raw`X^n \psi_\mu^\dagger = \psi_\mu^\dagger (X - \gamma(\theta_\mu)I)^n`),
+        math(String.raw`X^n \psi_\mu^\dagger = \psi_\mu^\dagger (X + \gamma(\theta_\mu)I)^n`),
         "。",
       ]),
-      paragraph(["Step 4:", math(String.raw`e^X \psi_\mu^\dagger = \psi_\mu^\dagger e^{X-\gamma(\theta_\mu)I}`)]),
+      paragraph(["Step 4:", math(String.raw`e^X \psi_\mu^\dagger = \psi_\mu^\dagger e^{X+\gamma(\theta_\mu)I}`)]),
       paragraph(["Step 5: 結論"]),
       displayMath(
         String.raw`T_{(V')}(\psi_\mu^\dagger)
 = e^X \psi_\mu^\dagger e^{-X}
-= \psi_\mu^\dagger e^{X-\gamma(\theta_\mu)I} e^{-X}
-= \psi_\mu^\dagger e^{-\gamma(\theta_\mu)I}
-= e^{-\gamma(\theta_\mu)}\psi_\mu^\dagger`,
+= \psi_\mu^\dagger e^{X+\gamma(\theta_\mu)I} e^{-X}
+= \psi_\mu^\dagger e^{+\gamma(\theta_\mu)I}
+= e^{+\gamma(\theta_\mu)}\psi_\mu^\dagger`,
       ),
       paragraph([math(String.raw`T_{(V')}(\psi_\mu)`), " についても同様（符号反転）。"]),
     ],

@@ -69,7 +69,7 @@ def Vprime_exponent(M_val, val_K1, val_K2, c_ops, cd_ops):
     for nu in range(1, M_val + 1):
         gamma_nu = gamma_value(nu, M_val, val_K1, val_K2)
         number_op = psi_dagger_op(nu, M_val, c_ops, cd_ops) * psi_op(-nu, M_val, c_ops, cd_ops)
-        X += -gamma_nu * (number_op - (CF(1) / 2) * ident)
+        X += gamma_nu * (number_op - (CF(1) / 2) * ident)
 
     return X
 
@@ -122,11 +122,11 @@ def run_TVprime_action_check(kind):
 
                 if kind == 'psi_dagger':
                     op = psi_dagger_op(mu, M_val, c_ops, cd_ops)
-                    expected = exp(-gamma_mu) * op
+                    expected = exp(gamma_mu) * op
                     label = "psi_dagger"
                 else:
                     op = psi_op(mu, M_val, c_ops, cd_ops)
-                    expected = exp(gamma_mu) * op
+                    expected = exp(-gamma_mu) * op
                     label = "psi"
 
                 actual = Vprime * op * Vprime_inv
