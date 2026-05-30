@@ -1,14 +1,8 @@
-# Large downloaded corpora
-inputs/corpus/*
-!inputs/corpus/.gitkeep
-
-# Generated outputs can be large; keep curated markdown files manually.
-outputs/maps/*.json
-outputs/maps/*.jsonl
-outputs/candidates/*.json
-outputs/candidates/*.jsonl
-outputs/reports/*.json
-outputs/reports/*.jsonl
+# Truly large raw downloads (LaTeX source archives, PDFs)
+inputs/corpus/sources/
+inputs/corpus/pdfs/
+inputs/corpus/*.tar.gz
+inputs/corpus/*.pdf
 
 # Python
 __pycache__/

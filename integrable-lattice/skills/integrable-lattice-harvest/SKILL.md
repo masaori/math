@@ -17,6 +17,7 @@ Before deciding queries or scope, read:
 - `integrable-lattice/inputs/seeds/models.md`
 - `integrable-lattice/inputs/seeds/operations.md`
 - `integrable-lattice/inputs/seeds/axes.md`
+- `integrable-lattice/inputs/seeds/open_problem_collections.md`
 - `integrable-lattice/inputs/queries/seed-queries.md`
 
 ## Workflow
