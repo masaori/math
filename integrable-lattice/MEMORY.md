@@ -2,11 +2,11 @@
 
 ## 次回やること
 
-- `inputs/seeds/` に seed taxonomy を追加する。
-- `inputs/queries/` に arXiv/OpenAlex/Semantic Scholar 用の初期クエリを追加する。
-- `docs/schemas.md` に候補ステートメントの最小スキーマを固める。
-- MVPとして、既存ノート `docs/research/可積分格子モデル一覧.md` から模型と解法を seed 化する。
+- `inputs/seeds/canonical-papers.md` の `Immediate Harvest Slices` から、最初は `six_vertex_dwbc_determinant` を `inputs/corpus/` に収集する。
+- 収集結果から `outputs/maps/001_six_vertex_dwbc_determinant_seed_map.md` を作る。
+- その map の `unknown` / `needs_review` セルから `outputs/candidates/000_seed_candidates.md` に候補を追加する。
 - `outputs/paper-plans/` から `outputs/papers/` へ昇格させる判断基準を作る。
+- `six_vertex_dwbc_determinant` の first pass では reflecting / partial / symmetry-class / triangular boundary variants に絞る。
 
 ## 未解決
 
@@ -20,3 +20,8 @@
 - プロジェクト雛形を作成した。
 - `outputs/papers/` を最終論文の置き場として追加した。
 - `integrable-lattice-` prefix のプロジェクト専用 skill を7つ作成した。
+- `inputs/seeds/` に seed taxonomy と初期クエリを追加した。
+- `docs/schemas.md` に候補ステートメントの最小スキーマを追加した。
+- `inputs/seeds/canonical-papers.md` を追加し、MVPの代表文献アンカーを seed 化した。
+- `inputs/seeds/canonical-papers.md` に mvp_role / operation_type / gap_axes と追加アンカーを入れて補強した。
+- 補強後の subagent review で「harvestへ進む」と判定され、minor 指摘の first-pass axis を反映した。
