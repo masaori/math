@@ -21,6 +21,7 @@
 - [03_exp近似の物理的正当性.md](03_exp近似の物理的正当性.md) — 数表 $w$ を $\exp$ で近似してよい物理的正当性の階層（接線代用・熱浴巨大・相加性・局在）。
 - [04_ZEと自由エネルギー.md](04_ZEと自由エネルギー.md) — $Z_E=\Omega_{AB}(U)$ から自由エネルギーへ。$\log_E Z_E=S_{AB}$（無条件 $E$）、Massieu 自由エントロピー $\Phi_A=S_{AB}-S_B$（$E$ ネイティブ）、$F_A=-T\Phi_A$（温度＝量子 $\delta$ 必要）、$F=\langle E\rangle-TS$ の厳密 $E$ 版。
 - [05_相転移はΦで論じられるか.md](05_相転移はΦで論じられるか.md) — Massieu $\Phi$ で相転移の足跡を $E$ 内に表現（Fisher 零点の代数性・感受率の非有界性・$\beta(U)$ プラトーと Maxwell 凸包）。転移本体（非解析性・$\beta_c$・臨界指数）は脱出 (b) $N\to\infty$ で $\mathbb{R}/\mathbb{C}$。
+- [06_文献調査_Ising臨界指数.md](06_文献調査_Ising臨界指数.md) — $Z_E$→Massieu→2 次元 Ising 臨界指数の先行研究調査。実体は Lee–Yang/Fisher 零点プログラム（arXiv:1905.02379 ほか）。整数係数 $Z=Z_E$・零点代数的＝$E$ 内・指数抽出＝$N\to\infty$＝$\mathbb{R}$。$E$ 上の可算再定式化が未踏＝差分。
 
 ## 集合帰属の早見表
 
@@ -52,4 +53,4 @@
 - 示量極限 $N\to\infty$ の $E$／$\mathbb{R}$ 上での扱い。→ [05](05_相転移はΦで論じられるか.md) で相転移の足跡として部分的に $E$ 内化。
 - 誤差関数 $r(\varepsilon)=f(\varepsilon)+\beta\varepsilon$ の $E$ 内での評価（凹性・熱容量との対応）。
 - Fisher 零点の代数性（[05](05_相転移はΦで論じられるか.md) (a)）と Maxwell＝凸包（[05](05_相転移はΦで論じられるか.md) (c)）の厳密化。
-- $Z_E$ → Massieu → 2 次元 Ising 厳密解（臨界指数）の先行研究調査。
+- ~~$Z_E$ → Massieu → 2 次元 Ising 厳密解（臨界指数）の先行研究調査。~~ → [06](06_文献調査_Ising臨界指数.md) で実施。次は Lee–Yang/Fisher 零点の $E$ 内（代数的・可算）再定式化の具体化。
