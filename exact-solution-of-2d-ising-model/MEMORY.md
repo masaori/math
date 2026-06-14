@@ -2,12 +2,11 @@
 
 ## 次回やること（優先度順）
 
-### 0. 構造化テキストのリアルタイム Web プレビュー（未着手）
+### 0. 構造化テキストのリアルタイム Web プレビュー（未着手・別ツール）
 
-要件を `structured-latex/docs/realtime-web-preview-requirements.md` にまとめた。
-Mac ローカルで編集した構造化テキストのレンダー結果を、LAN 内の別 PC / スマホから
-リアルタイム閲覧（read-only + ライブリロード）する。ビューア・ライブリロード・
-LAN 配信はいずれも未実装。実装前に同ドキュメント §10 の未決事項を確認すること。
+汎用ツールとしてリポジトリ直下 `realtime-web-preview/` に切り出した。要件は
+`realtime-web-preview/docs/requirements.md`。本プロジェクトの `structured-latex/` は
+その入力ソースのリファレンス実装という位置づけ。ビューア等は未実装、技術スタック未決定。
 
 ### 1. 038 `T_V = T_{V'}` の proof
 
