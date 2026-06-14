@@ -2,6 +2,12 @@
 
 ## 次回やること（優先度順）
 
+### 0. 構造化テキストのリアルタイム Web プレビュー（未着手・別ツール）
+
+汎用ツールとしてリポジトリ直下 `realtime-web-preview/` に切り出した。要件は
+`realtime-web-preview/docs/requirements.md`。本プロジェクトの `structured-latex/` は
+その入力ソースのリファレンス実装という位置づけ。ビューア等は未実装、技術スタック未決定。
+
 ### 1. 038 `T_V = T_{V'}` の proof
 
 032/037 の符号を `T_(V)` と一致する向きに修正済み。次は `038_claim_T_V_eq_T_Vprime.typ` の `#proof[TODO]` を完成させる。

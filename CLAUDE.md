@@ -8,6 +8,10 @@
 
 - `exact-solution-of-2d-ising-model/` — 2次元Ising模型の厳密解の証明
 
+### 共通ツール
+
+- `realtime-web-preview/` — 構造化テキストのレンダー結果を LAN 内でリアルタイム閲覧する汎用ビューア（ドメイン非依存）
+
 ## 全体構成
 
 ```

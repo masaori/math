@@ -1,0 +1,24 @@
+{
+  "name": "realtime-web-preview",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "構造化テキストのレンダー結果を LAN 内でリアルタイム閲覧する汎用ビューア",
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "start": "node backend/dist/entrypoint/server.js"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

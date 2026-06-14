@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f8fafc;
+}
+
+/* displayMath が横に溢れたときはブロック単位でスクロールさせる */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}

@@ -1,0 +1,4 @@
+packages:
+  - 'domain-model'
+  - 'backend'
+  - 'frontend'
