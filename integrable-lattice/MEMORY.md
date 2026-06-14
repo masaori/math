@@ -2,7 +2,6 @@
 
 ## 次回やること
 
-- `inputs/seeds/canonical-papers.md` の `Immediate Harvest Slices` から、最初は `six_vertex_dwbc_determinant` を `inputs/corpus/` に収集する。
 - 収集結果から `outputs/maps/001_six_vertex_dwbc_determinant_seed_map.md` を作る。
 - その map の `unknown` / `needs_review` セルから `outputs/candidates/000_seed_candidates.md` に候補を追加する。
 - `outputs/paper-plans/` から `outputs/papers/` へ昇格させる判断基準を作る。
@@ -25,3 +24,4 @@
 - `inputs/seeds/canonical-papers.md` を追加し、MVPの代表文献アンカーを seed 化した。
 - `inputs/seeds/canonical-papers.md` に mvp_role / operation_type / gap_axes と追加アンカーを入れて補強した。
 - 補強後の subagent review で「harvestへ進む」と判定され、minor 指摘の first-pass axis を反映した。
+- `six_vertex_dwbc_determinant` の first-pass query log と curated corpus を追加した。
