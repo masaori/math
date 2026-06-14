@@ -6,26 +6,26 @@
 
 ## 0. 何を正当化したいか
 
-厳密重み $w(\varepsilon)=\Omega_B(U-\varepsilon)/\Omega_B(U)\in\mathbb{Q}$ を $\widetilde w(\varepsilon)=\exp_\mathbb{R}(-\beta\varepsilon)\in\mathbb{R}$ で置く。$\log_E$ を取れば、主張は
+厳密重み $w(\varepsilon)=\Omega_B(U-\varepsilon)/\Omega_B(U)\in\mathbb{Q}$ を $\widetilde w(\varepsilon)=\exp_\mathbb{R}(-\beta\varepsilon)\in\mathbb{R}$ で置く。$\log$ を取れば、主張は
 
 $$
 f(\varepsilon)=S_B(U-\varepsilon)-S_B(U)\ \approx\ -\beta\varepsilon
 $$
 
-すなわち **$S_B$ が帯域でアフィン**（一次）。誤差 $r(\varepsilon)=f(\varepsilon)+\beta\varepsilon\in E$。正当化＝「効く $\varepsilon$ の範囲で $r$ が無視できる」根拠を与えること。
+すなわち **$S_B$ が帯域でアフィン**（一次）。誤差 $r(\varepsilon)=f(\varepsilon)+\beta\varepsilon\in\Lambda$。正当化＝「効く $\varepsilon$ の範囲で $r$ が無視できる」根拠を与えること。
 
 ## 1. 一次の根拠：$\varepsilon\ll U$（テイラー的・最弱だが普遍）
 
-$\varepsilon=n\delta$ で望遠鏡和
+$\varepsilon=n$（単一量子 $\delta=1$）で望遠鏡和
 
 $$
-f(\varepsilon)=-\sum_{k=0}^{n-1}\beta_B(k\delta)\,\delta\in E,\qquad \beta_B(V)=\frac{S_B(U-V+\delta)-S_B(U-V)}{\delta}\in E.
+f(\varepsilon)=-\sum_{k=0}^{n-1}\beta_B(k)\in\Lambda,\qquad \beta_B(V)=S_B(U-V+1)-S_B(U-V)\in\Lambda.
 $$
 
-$\beta_B$ は $V$ の単調関数（凹性より）。注目系が熱浴から引き出すエネルギー $\varepsilon$ が $U$ に比べ小さければ、和の各 $\beta_B(k\delta)$ は $\beta_B(0)=\beta$ からほとんど動かず、$f\approx-\beta\varepsilon$。誤差は二階差分のオーダー：
+$\beta_B$ は $V$ の単調関数（凹性より）。注目系が熱浴から引き出すエネルギー $\varepsilon$ が $U$ に比べ小さければ、和の各 $\beta_B(k)$ は $\beta_B(0)=\beta$ からほとんど動かず、$f\approx-\beta\varepsilon$。誤差は二階差分のオーダー：
 
 $$
-r(\varepsilon)\sim\tfrac12\,\beta_B'\,\varepsilon^2,\qquad \beta_B'=\frac{\partial\beta_B}{\partial V}\Big|_0\in E.
+r(\varepsilon)\sim\tfrac12\,\beta_B'\,\varepsilon^2,\qquad \beta_B'=\beta_B(1)-\beta_B(0)\in\Lambda.
 $$
 
 **正当性の中身：$|\beta_B'\varepsilon^2|\ll|\beta\varepsilon|$、つまり $\varepsilon\ll|\beta/\beta_B'|$。** これは単に「割線をその場の接線で代用してよい」だけで、$B$ が大きい必要すらない。ただし帯域が狭いときしか効かない局所近似。
@@ -69,12 +69,12 @@ $$
 | 相加性 | $f$ 一次 ⇒ $w$ 乗法的 | — | 指数形を強制 |
 | 局在 | 確率窓 $O(1)$ | 窓外無視 | 範囲限定 |
 
-一文で：**指数化が正当なのは、熱浴が大きく（$N_B\to\infty$）その温度が $A$ のエネルギー授受で動かないから（$\beta_B'\sim1/N_B\to0$）、エントロピー差 $f$ が帯域でアフィンになり、アフィン差は相加性ゆえ乗法的重み＝指数に一意に化けるから。** 誤差は熱浴サイズの逆数で系統的に消え、$N_B\to\infty$ で指数形は近似でなく厳密な極限像になる ── ただしその極限値 $\exp_\mathbb{R}(-\beta\varepsilon)$ は $E$ の外（$\mathbb{R}$）。
+一文で：**指数化が正当なのは、熱浴が大きく（$N_B\to\infty$）その温度が $A$ のエネルギー授受で動かないから（$\beta_B'\sim1/N_B\to0$）、エントロピー差 $f$ が帯域でアフィンになり、アフィン差は相加性ゆえ乗法的重み＝指数に一意に化けるから。** 誤差は熱浴サイズの逆数で系統的に消え、$N_B\to\infty$ で指数形は近似でなく厳密な極限像になる ── ただしその極限値 $\exp_\mathbb{R}(-\beta\varepsilon)$ は $\Lambda$ の外（一気に $\mathbb{R}$）。
 
 ---
 
-## メモ：この階層の中の $E$／$\mathbb{R}$ 境界
+## メモ：この階層の中の $\Lambda$／$\mathbb{R}$ 境界
 
-- §1〜§2 の誤差評価（$r(\varepsilon)$、$\beta_B'$、$\beta_B(V)=\beta-V/C+\dots$ の係数）はすべて $E$ 内の量で書ける。
-- $\beta_B'$ や $C$ を「微分・熱容量」として連続量で書いた瞬間、§1 の二階差分・$O(\varepsilon^2)$ 展開は $\mathbb{R}$ 上の解析に乗る。$E$ 内に留めるなら二階差分商として書く。
-- $N_B\to\infty$ の極限と $\exp_\mathbb{R}$ 評価は $\mathbb{R}$（[01](01_β定数化はEを出るか.md) の (a)(b) と整合）。
+- §1〜§2 の誤差評価（$r(\varepsilon)$、$\beta_B'$、$\beta_B(V)=\beta-V/C+\dots$ の係数）はすべて $\Lambda$ 内の量で書ける（差分商）。
+- $\beta_B'$ や $C$ を「微分・熱容量」として連続量で書いた瞬間、§1 の二階差分・$O(\varepsilon^2)$ 展開は $\mathbb{R}$ 上の解析に乗る。$\Lambda$ 内に留めるなら二階差分として書く。
+- $N_B\to\infty$ の極限と $\exp_\mathbb{R}$ 評価は $\mathbb{R}$（[01](01_β定数化はΛを出るか.md) の (a)(b) と整合）。
