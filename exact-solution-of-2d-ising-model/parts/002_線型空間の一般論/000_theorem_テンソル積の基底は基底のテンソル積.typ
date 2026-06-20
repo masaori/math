@@ -7,6 +7,6 @@
   $forall (i_1, dots, i_m) in {1, dots, m}^(m)$
 
   $
-    e_{i_1} times.o dots.c times.o e_{i_m} "は、" V^(times.o m)"の基底である"
+    e_(i_1) times.o dots.c times.o e_(i_m) "は、" V^(times.o m)"の基底である"
   $
-]
+]<tensor_basis>

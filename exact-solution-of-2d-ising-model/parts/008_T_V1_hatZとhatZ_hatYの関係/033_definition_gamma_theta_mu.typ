@@ -60,4 +60,4 @@
 
     より $cosh(gamma(theta_mu)) = gamma_1(theta_mu)$ であり、定義と整合する。
   ]
-]
+]<lambda_eq_exp_gamma>

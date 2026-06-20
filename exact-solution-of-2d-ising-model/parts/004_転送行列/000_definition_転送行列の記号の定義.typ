@@ -25,4 +25,4 @@
 - $c_i^* := cosh 2K_i^*, quad s_i^* := sinh 2K_i^*$
 
 $K_i, K_i^* > 0$ より、 $c_i, s_i, c_i^*, s_i^* > 0$
-]
+]<def_転送行列記号>
