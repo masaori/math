@@ -1,9 +1,8 @@
 #import "../../theorem.typ": theorem, claim, proof, definition, remark, note, theorem_rules
 
 #claim([$hat(Z), hat(Y)$から$Z, Y$の復元])[
-  #ref(<def_hatZ_hatY>) の記号のもと、
-  $c_j := cases(-1 "if" j = 1, 1 "if" j != 1)$ とおく
-  （これは $hat(Z)^((-))$ の重みである。すなわち $hat(Z)_mu^((-)) = sum_(j=1)^M c_j Z_j exp(- sqrt(-1) j (2 pi mu) / M)$）。
+  #ref(<def_hatZ_hatY>) の記号のもと、$hat(Z)^((-))$ は全 $j$ について重み $+1$（uniform）であり、
+  すなわち $hat(Z)_mu^((-)) = sum_(j=1)^M Z_j exp(- sqrt(-1) j (2 pi mu) / M)$ である。
 
   各 $m in {1, dots.c, M}$ について、次が成り立つ。
 
@@ -30,10 +29,10 @@
       )
     )
     =
-    M c_m Z_m
+    M Z_m
   $
 
-  ゆえに、$c_m in {-1, 1}$ より $1 \/ c_m = c_m$ であるから、
+  ゆえに、
 
   $
     Y_m
@@ -52,7 +51,7 @@
   $
     Z_m
     =
-    c_m/M
+    1/M
     sum_(mu=1)^M (
       hat(Z)_mu^((-))
       exp(
@@ -195,7 +194,6 @@
       sum_(mu=1)^M (
         (
           sum_(j=1)^M (
-            c_j
             Z_j
             exp(
               -
@@ -216,7 +214,6 @@
       &=
       sum_(mu=1)^M (
         sum_(j=1)^M (
-          c_j
           Z_j
           exp(
             sqrt(-1)
@@ -229,7 +226,6 @@
       \
       &=
       sum_(j=1)^M (
-        c_j
         Z_j
         sum_(mu=1)^M (
           exp(
@@ -243,7 +239,6 @@
       \
       &=
       sum_(j=1)^M (
-        c_j
         Z_j
         dot
         cases(
@@ -254,7 +249,7 @@
       quad (because (star))
       \
       &=
-      M c_m Z_m
+      M Z_m
     $
 
     === Step 3: 復元式
@@ -275,10 +270,9 @@
       )
     $
 
-    を得る。Step 2 で得た等式の両辺を $M$ で割ると、
+    を得る。Step 2 で得た等式の両辺を $M$ で割って、
 
     $
-      c_m
       Z_m
       =
       1/M
@@ -290,23 +284,6 @@
           (2 pi mu) / M
         )
       )
-    $
-
-    となる。両辺に $c_m$ を掛けると、$c_m in {-1, 1}$ より $c_m^2 = 1$ であるから、
-
-    $
-      Z_m
-      =
-      c_m/M
-      sum_(mu=1)^M (
-        hat(Z)_mu^((-))
-        exp(
-          sqrt(-1)
-          m
-          (2 pi mu) / M
-        )
-      )
-      quad (because c_m^2 = 1)
     $
 
     を得る。

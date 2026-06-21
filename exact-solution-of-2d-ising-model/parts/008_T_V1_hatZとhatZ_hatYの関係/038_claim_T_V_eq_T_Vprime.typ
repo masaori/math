@@ -55,12 +55,12 @@
 
     === Step 2: $T_((V))$ と $T_((V'))$ は各 $Z_m, Y_m$ 上で一致する
 
-    各 $m in {1, dots, M}$ について、$#ref(<recover_Z_Y_from_hatZ_hatY>)$ より $c_m := cases(-1 "if" m = 1, 1 "if" m != 1)$ として
+    各 $m in {1, dots, M}$ について、$#ref(<recover_Z_Y_from_hatZ_hatY>)$ より
 
     $
       Z_m
       =
-      c_m/M
+      1/M
       sum_(mu=1)^M (
         hat(Z)_mu^((minus))
         exp(
@@ -89,7 +89,7 @@
       T_((V))(Z_m)
       &=
       T_((V))(
-        c_m/M
+        1/M
         sum_(mu=1)^M (
           hat(Z)_mu^((minus))
           exp(
@@ -102,7 +102,7 @@
       quad (because #ref(<recover_Z_Y_from_hatZ_hatY>))
       \
       &=
-      c_m/M
+      1/M
       sum_(mu=1)^M (
         exp(
           sqrt(-1)
@@ -114,7 +114,7 @@
       quad (because T_((V)) "の線型性")
       \
       &=
-      c_m/M
+      1/M
       sum_(mu=1)^M (
         exp(
           sqrt(-1)
@@ -127,7 +127,7 @@
       \
       &=
       T_((V'))(
-        c_m/M
+        1/M
         sum_(mu=1)^M (
           hat(Z)_mu^((minus))
           exp(
