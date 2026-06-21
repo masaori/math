@@ -11,7 +11,14 @@
 - 各 step 完了ごとに MVP コンセプトマッチ点検 → main へ差分 push → 次 step。
 - 下の「次回やること」は runbook の step 列の人間向け要約（実体は state ファイル）。
 
-## 次回やること（cycle 0 を広く薄く1周）
+## cycle 0 完了（2026-06-21, 自動ループで1周）
+
+- 4 slice すべて 01_harvest→04_gap_map→05_generate を薄く完了。corpus/query/map 各 002-004、候補 001-003、観察 `outputs/reports/001_cycle0_observation.md`。
+- **横断観察**: 全 slice で「境界（数・パラメータ・defect）× 有限記号閉形式」が共通の unknown 筋。six-vertex↔loop↔dimer は vertex-face/loop 対応で接続可能。
+- **cycle 1 方向確定**: `boundary_finite_formula` 束を深掘り（resolved 確認 → 06_verify → sagemath → paper-plan）。step 列は `docs/tasks/auto-loop-state.md` の「cycle 1 step 列」。
+- daily cron は `boundary_finite_formula` 束を runbook 手順で自動継続する。
+
+## （旧）次回やること（cycle 0 を広く薄く1周）— 完了済み
 
 ### 1. 残り3 slice を浅く通す（最優先）
 

@@ -3,7 +3,7 @@
 daily cron が読み書きする状態ファイル。手順は `auto-loop-runbook.md`。
 
 ```yaml
-current_cycle: 0
+current_cycle: 1        # cycle 0 完了。cycle 1 = boundary_finite_formula 束の深掘り。
 last_run: 2026-06-21     # 最後に daily 実行した日付（YYYY-MM-DD）
 cron_armed: 2026-06-21   # cron を作成/再武装した日付（session-only, 7日で失効）
 ```
@@ -24,7 +24,21 @@ slice は `inputs/seeds/canonical-papers.md` 準拠。slice 1（six_vertex_dwbc_
 | 8 | gap_map:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/maps/004_...`。known 4（square/planar Pfaffian, Aztec 有限領域 enum, inverse-Kasteleyn 相関）/ needs_review 2（free 境界 inverse-Kasteleyn, 有限領域 corner 相関）/ unknown 3（U1 境界 defect/monomer Pfaffian【最有力】, U2 境界パラメータ依存重み付き有限領域 det, U3 graph-class product【novelty_risk 高】）。dimer slice は全 pfaffian/determinant 操作型で有限記号性最強。**4 slice 横断確定**: 全 slice で「境界×有限記号閉形式」が共通 unknown 筋。 |
 | 9 | generate:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/candidates/003_...` に U1/U2/U3（境界 monomer/defect Pfaffian [medium]、境界パラメータ依存重み付き有限領域 det [low]、graph-class 明示積 [low・novelty_risk 高]）。全 unchecked。slice 4 完了 → 4 slice すべて harvest→gap_map→generate 完了。 |
 | 10 | rank:cycle0 | done | 2026-06-21 | `outputs/reports/001_cycle0_observation.md`。12候補を暫定ランク（resolved 未確認のため literature_risk は暫定）。横断観察: 全 slice で「境界×有限記号閉形式」が共通筋。high bucket: U1-corr-partial-dwbc（最有力）, U1-boundary-defect-monomer-pfaffian, loop-U3-boundary-correlation。bundle `boundary_finite_formula` を cycle 1 方向に提案。**cycle 0 成功条件達成**（根拠付きで次方向を選べる状態）。 |
-| 11 | decide:cycle1 | todo | | 観察に基づき cycle 1 step 列をこのファイルへ書き起こす。 |
+| 11 | decide:cycle1 | done | 2026-06-21 | 方向を **`boundary_finite_formula` 束**（標準境界の有限公式 → 境界の数/パラメータ/defect 一般化; six-vertex↔loop↔dimer を vertex-face/loop 対応で接続）に確定。cycle 1 step 列を下に書き起こした。current_cycle=1 へ。 |
+
+## cycle 1 step 列（boundary_finite_formula 束の深掘り）
+
+cycle 0 と異なり **深掘りサイクル**。MVP 原則「方向が定まったセル/家族にのみ後続サイクルで深さを集中投下」に従い、ここで初めて 06_verify・sagemath を行う。各 step も従来どおり完了ごとに MVP 点検（深掘りが**確定方向に限定**されているか／束から逸脱していないか）→ main push。
+
+| # | step | status | done日 | 観察メモ |
+|---|------|--------|--------|----------|
+| 1 | harvest:boundary_finite_formula_reinforce | todo | | 上位3件の resolved 確認用 harvest 補強: partial-DWBC 相関の後続文献 / monomer-dimer(Wu, Tzeng-Wu 系) / loop 境界相関(Morin-Duchesne-Saleur 後続)。 |
+| 2 | verify:U1-corr-partial-dwbc-boundary-onepoint | todo | | 06_verify（既出・自明従属リスク）。anchor BPZ×Foda-Wheeler の合成が既出でないか。 |
+| 3 | verify:U1-boundary-defect-monomer-pfaffian | todo | | 06_verify。monomer-dimer 文献に同値結果がないか（literature_risk H）。 |
+| 4 | verify:U3-loop-boundary-correlation-finite-formula | todo | | 06_verify。vertex-face/loop 対応で slice1 U1-corr と接続可能か。 |
+| 5 | sagemath:high-bucket-survivors | todo | | verify を抜けた候補のみ小サイズ数値検証（六頂点 n∈{1,2},N∈{2,3} 等／小領域 Pfaffian）。 |
+| 6 | paper_plan:boundary_finite_formula | todo | | survivor を `outputs/paper-plans/` に。vertex-face/loop 対応で1本に束ねられるか。 |
+| 7 | rank:cycle1 | todo | | 深掘り結果で再ランク → cycle 2 方向（論文化 or 別束 or 撤退）を決定。 |
 
 ## 逸脱ログ
 
