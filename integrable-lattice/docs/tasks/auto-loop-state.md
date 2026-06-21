@@ -4,8 +4,8 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 current_cycle: 0
-last_run: null          # 最後に daily 実行した日付（YYYY-MM-DD）
-cron_armed: null        # cron を作成/再武装した日付
+last_run: 2026-06-21     # 最後に daily 実行した日付（YYYY-MM-DD）
+cron_armed: 2026-06-21   # cron を作成/再武装した日付（session-only, 7日で失効）
 ```
 
 ## cycle 0 step 列
@@ -14,7 +14,7 @@ slice は `inputs/seeds/canonical-papers.md` 準拠。slice 1（six_vertex_dwbc_
 
 | # | step | status | done日 | 観察メモ |
 |---|------|--------|--------|----------|
-| 1 | harvest:rsos_character_identity | todo | | |
+| 1 | harvest:rsos_character_identity | done | 2026-06-21 | corpus 002 + query 002 作成。13 record / 6 coverage axis（unitary_minimal_finitized, nonunitary_forrester_baxter, bailey_construction, branching_coset, rank_affine_generalization, representation_root_of_unity）。多数 attribution は `verify` 留め（cycle 0 は固めない）。unknown 候補源: 境界/欠陥付き RSOS の finitized character、高ランク(A_{n-1}^{(1)}, n>2)の boson=fermion 多項式恒等式。 |
 | 2 | gap_map:rsos_character_identity | todo | | |
 | 3 | generate:rsos_character_identity | todo | | |
 | 4 | harvest:tl_loop_finitized_character | todo | | |
