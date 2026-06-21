@@ -80,6 +80,7 @@
 
 #include "parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ"
 #include "parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ"
+#include "parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ"
 #include "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ"
 
 == 線型写像のexp
