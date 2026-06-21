@@ -9,4 +9,4 @@
   $
     e_{i_1} times.o dots.c times.o e_{i_m} "は、" V^(times.o m)"の基底である"
   $
-]
+]<tensor_basis>

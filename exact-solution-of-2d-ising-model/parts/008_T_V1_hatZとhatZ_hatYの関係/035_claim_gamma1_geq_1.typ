@@ -41,4 +41,4 @@
 
     よって $gamma_1(theta_mu) > 0$ であり、$gamma_1(theta_mu)^2 >= 1$ と合わせて $gamma_1(theta_mu) >= 1$ である。
   ]
-]
+]<gamma1_geq_1>

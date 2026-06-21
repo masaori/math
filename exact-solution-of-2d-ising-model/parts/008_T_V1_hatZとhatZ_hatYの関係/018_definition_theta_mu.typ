@@ -9,6 +9,4 @@
   $
   
   と定める。
-]
-
-$gamma_2(theta_mu)$を$[r, theta]$と表すときに、代表元$theta$を撮る方法
+]<def_theta_mu>

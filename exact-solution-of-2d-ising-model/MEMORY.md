@@ -8,18 +8,21 @@
 `realtime-web-preview/docs/requirements.md`。本プロジェクトの `structured-latex/` は
 その入力ソースのリファレンス実装という位置づけ。ビューア等は未実装、技術スタック未決定。
 
-### 1. 038 `T_V = T_{V'}` の proof
+### 1. 038 `T_V = T_{V'}` の proof（完了 2026-06-21）
 
-032/037 の符号を `T_(V)` と一致する向きに修正済み。次は `038_claim_T_V_eq_T_Vprime.typ` の `#proof[TODO]` を完成させる。
+`038_claim_T_V_eq_T_Vprime.typ` の `#proof[TODO]` を完成。`typst compile main.typ` は exit 0（警告は既存の cetz deprecation と 002 の linebreak の2件のみ、新規由来の警告・未解決 ref なし）。
 
-使う結果:
-- `030_claim_Vとpsiの交換関係.typ`: `T_(V)(psi_mu^dagger) = e^(gamma(theta_mu)) psi_mu^dagger`, `T_(V)(psi_mu) = e^(-gamma(theta_mu)) psi_mu`
-- `037_claim_T_Vprimeのpsiへの作用.typ`: `T_(V')(psi_mu^dagger) = e^(gamma(theta_mu)) psi_mu^dagger`, `T_(V')(psi_mu) = e^(-gamma(theta_mu)) psi_mu`
-- 033: `lambda_(plus, mu) = e^(gamma(theta_mu))`, `lambda_(minus, mu) = e^(-gamma(theta_mu))`
+証明構成（環準同型 + 生成元一致）:
+- Step1: 合成則 `<conjugation_is_ring_homomorphism>`（新規 000/045）で `T_(V) = T_V`（`V := (V_1^pm)^(1/2) V_2 (V_1^pm)^(1/2)`）。`T_(V), T_(V')` ともに単位的・乗法的・線型。
+- Step2: `<recover_Z_Y_from_hatZ_hatY>`（新規 004/013, DFT逆変換）+ `<T_V_eq_T_Vprime_on_hatZ_hatY>`（新規 008/042）で各 `Z_m, Y_m` 上で一致。
+- Step3-4: 一致元の集合が部分多元環をなし、`<Z_Y_generate_algebra>`（新規 004/014）より全空間。
 
-証明方針:
-- `psi_mu^dagger, psi_mu` が `hat(Z)_mu^((minus)), hat(Y)_mu` の線形結合で、逆に `hat(Z), hat(Y)` も `psi` で張られることを `P_mu` の可逆性から使う
-- `T_(V)` と `T_(V')` が全ての `psi_mu^dagger, psi_mu` 上で一致することから、生成元 `hat(Z), hat(Y)` 上で一致し、線型性で対象空間上も一致することを示す
+新規ファイル: 000/045（共役写像は環準同型）, 000/046（交換子と反交換子 `[ab,c]=a[b,c]_+-[a,c]_+b`）, 004/013（DFT逆変換）, 004/014（Z,Y が環を生成）, 008/041（gamma_2=0 のとき T_(V') が hatZ,hatY を固定）, 008/042（T_(V) と T_(V') が hatZ,hatY 上で一致）。
+ラベル付与した既存: 010(`def_T_g`),015(`def_T_V`),018(`def_theta_mu`),027(`diagonalization_P_D`),030(`commutation_V_psi`),033(`def_gamma_theta_mu`,`lambda_eq_exp_gamma`),034(`det_A_theta`),035(`gamma1_geq_1`),002/000(`tensor_basis`),004/000(`def_transfer_matrix_symbols`)。
+
+gamma_2=0 障害の処理: gamma_2(theta_mu)=0 の mu ではフェルミオン未定義で P_mu 経路が使えない。041 で T_(V') が `[X,hatZ_mu]=[X,hatY_mu]=O` 経由で hatZ,hatY を固定と直接証明（鍵: gamma_2=0 ⇔ sin theta=0 かつ c_1 cos theta=s_1 c_2、mu≡±nu mod M ⇒ cos,sin 保存 ⇒ gamma_2(theta_nu)=0 ⇒ gamma(theta_nu)=0 で X の該当項が消える。普遍反交換子 `<anticommutator_of_hat_Z_and_hat_Y>` 使用）。042 で gamma_2≠0 は P_mu 可逆経由、gamma_2=0 は 041 + A(theta_mu)=I で統合。
+
+【未解決の基盤上の注意】032 の V' 定義 `sum_(mu=1)^M psi_mu^dagger psi_(-mu)` は mu=M（gamma_2=0）で psi_M が未定義。041 では「係数 gamma(theta_M)=0 ゆえ当該項を省く」規約を note で明示し Step1 で coefficient=0 を別証。完全厳密化するなら 032 の和を「gamma_2(theta_mu)≠0 の mu に限定」へ書き換えるのが望ましい（今回は既存 proof を壊さない方針で規約対応）。
 
 ### 2. 039 `V = cV'` の proof
 

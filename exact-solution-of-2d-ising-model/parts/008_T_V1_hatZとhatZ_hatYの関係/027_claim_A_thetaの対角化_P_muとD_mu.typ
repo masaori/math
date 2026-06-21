@@ -91,4 +91,4 @@
     =
     I "(単位行列)"
   $
-]
+]<diagonalization_P_D>

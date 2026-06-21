@@ -9,7 +9,7 @@
   $
 
   と定める。
-]
+]<def_gamma_theta_mu>
 
 #claim([$lambda_(plus.minus, mu) = e^(plus.minus gamma(theta_mu))$])[
   $mu in cal(M)$について、
@@ -60,4 +60,4 @@
 
     より $cosh(gamma(theta_mu)) = gamma_1(theta_mu)$ であり、定義と整合する。
   ]
-]
+]<lambda_eq_exp_gamma>

@@ -19,4 +19,4 @@
   #mapDef($T_g$, $"Mat"(2, CC)^(times.o M)$, $"Mat"(2, CC)^(times.o M)$, $h$, $g dot.op h dot.op g^(-1)$, "")
 
   と定める
-]
+]<def_T_g>

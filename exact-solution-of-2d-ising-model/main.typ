@@ -66,6 +66,8 @@
 #include "parts/000_計算公式/042_claim_CCの逆数のsqrtとremark.typ"
 #include "parts/000_計算公式/043_claim_CCのsqrtの逆数とremark.typ"
 #include "parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ"
+#include "parts/000_計算公式/045_claim_共役写像は環準同型.typ"
+#include "parts/000_計算公式/046_claim_交換子と反交換子の関係.typ"
 
 == 2次元ising模型の分配関数
 
@@ -131,6 +133,8 @@
 #include "parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ"
 #include "parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ"
 #include "parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ"
+#include "parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ"
+#include "parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ"
 
 == $e^(X) Y e^(-X) = e^("ad"(X))(Y)$ の証明
 
@@ -192,6 +196,8 @@
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ"
+#include "parts/008_T_V1_hatZとhatZ_hatYの関係/041_claim_T_VprimeのhatZ_hatYへの作用_gamma2が0の場合.typ"
+#include "parts/008_T_V1_hatZとhatZ_hatYの関係/042_claim_T_VとT_VprimeはhatZ_hatY上で一致.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ"
