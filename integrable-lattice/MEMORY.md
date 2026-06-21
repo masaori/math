@@ -5,6 +5,12 @@
 - MVP = 固定成果物（「30件」）ではなく、**広く薄く集めて観察し方向を絞るサイクルを1周回すこと**。詳細は `README.md`「MVP の意味（サイクル）」/ `docs/architecture.md`「サイクル」。
 - 幅/深さ・操作型や模型の取捨・投資量は事前決定しない。cycle 0 の 07_rank 観察で cycle 1 の方向を決める。
 
+## 自動ループ（daily）
+
+- cycle 0 を daily cron で広く薄く自動進行する。手順 `docs/tasks/auto-loop-runbook.md`、状態 `docs/tasks/auto-loop-state.md`。
+- 各 step 完了ごとに MVP コンセプトマッチ点検 → main へ差分 push → 次 step。
+- 下の「次回やること」は runbook の step 列の人間向け要約（実体は state ファイル）。
+
 ## 次回やること（cycle 0 を広く薄く1周）
 
 ### 1. 残り3 slice を浅く通す（最優先）
