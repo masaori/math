@@ -20,11 +20,13 @@ Read:
 ## Workflow
 
 1. Choose a bounded map scope: model family, operation type, or paper cluster.
-2. Define the cell key:
+2. Define the cell key (Λ ladder + four axes; NOT the literature operation-type taxonomy):
 
 ```text
-model_family × model × boundary_condition × parameter_regime × operation_type × statement_type
+model × direction(A–F) × target_quantity × home × complexity × solvability × decidable × formal_verifiable
 ```
+
+where `home ∈ {ℤ[x], Λ, ℚ̄, ℝ-escape}`, `complexity ∈ {poly, #P, unknown}`, `solvability ∈ {closed, none, unknown}`, `decidable ∈ {yes, schanuel, no}`, `formal_verifiable ∈ {yes, partial, no}`. Vocabulary: `inputs/seeds/lambda-statement-program.md`.
 
 3. Fill cells from classified fragments.
 4. Assign cell status:
@@ -40,16 +42,17 @@ model_family × model × boundary_condition × parameter_regime × operation_typ
 
 ```yaml
 cell_id:
-model_family:
 model:
-boundary_condition:
-parameter_regime:
-operation_type:
-statement_type:
-status:
+direction:            # A–F (lambda-statement-program)
+target_quantity:      # 例: Fisher zeros, transfer matrix T(x), Massieu Φ_N
+home:                 # ℤ[x] / Λ / ℚ̄ / ℝ-escape
+complexity:           # poly / #P / unknown
+solvability:          # closed / none / unknown
+decidable:            # yes / schanuel / no
+formal_verifiable:    # yes / partial / no
+status:               # known / probably_known / unknown / impossible / needs_review
 known_anchors:
 missing_generalization:
-evidence_papers:
 coverage_notes:
 review_notes:
 ```
