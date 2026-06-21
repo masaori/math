@@ -22,7 +22,7 @@ slice は `inputs/seeds/canonical-papers.md` 準拠。slice 1（six_vertex_dwbc_
 | 6 | generate:tl_loop_finitized_character | done | 2026-06-21 | `outputs/candidates/002_...` に U1/U2/U3（一般2境界パラメータ finitized char [medium]、fused-TL finitized char [low]、loop 境界相関の有限公式 [medium・横断テーマ結節点]）。全 unchecked。slice 3 完了。 |
 | 7 | harvest:dimer_pfaffian_boundary | done | 2026-06-21 | corpus/query 004 作成。9 record / 5 coverage axis（square_lattice_pfaffian, planar_graph_pfaffian, finite_domain_enumeration, boundary_defect_weighted, local_correlations_inverse_kasteleyn）。Kasteleyn/Aztec/inverse-Kasteleyn + free 境界。attribution は verify 留め。 |
 | 8 | gap_map:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/maps/004_...`。known 4（square/planar Pfaffian, Aztec 有限領域 enum, inverse-Kasteleyn 相関）/ needs_review 2（free 境界 inverse-Kasteleyn, 有限領域 corner 相関）/ unknown 3（U1 境界 defect/monomer Pfaffian【最有力】, U2 境界パラメータ依存重み付き有限領域 det, U3 graph-class product【novelty_risk 高】）。dimer slice は全 pfaffian/determinant 操作型で有限記号性最強。**4 slice 横断確定**: 全 slice で「境界×有限記号閉形式」が共通 unknown 筋。 |
-| 9 | generate:dimer_pfaffian_boundary | todo | | |
+| 9 | generate:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/candidates/003_...` に U1/U2/U3（境界 monomer/defect Pfaffian [medium]、境界パラメータ依存重み付き有限領域 det [low]、graph-class 明示積 [low・novelty_risk 高]）。全 unchecked。slice 4 完了 → 4 slice すべて harvest→gap_map→generate 完了。 |
 | 10 | rank:cycle0 | todo | | 4 slice 出揃ってから。cycle 0 成功条件。 |
 | 11 | decide:cycle1 | todo | | 観察に基づき cycle 1 step 列をこのファイルへ書き起こす。 |
 
