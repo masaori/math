@@ -69,8 +69,9 @@ $\lambda_j(x)$ は $T(x)$ の固有値。
 
 固有値が代数的なのは Step 2 で確定済み。Onsager–Kaufman の対角化は、その代数的固有値を**具体的に書き下す手段**であり、各部品の住処は次の通り（どれも円分体つき $\mathbb{Q}(x)$ の中、解析・実数なし）。
 
-**部品の住処**
-- 指数形 $V_h,V_v$（$e^{K\dots}$ 等）：成分は $\mathbb{Q}[x]$。$K,e^K$ は再パラメタにすぎず $x$ で書ける。
+**方針：指数形は使わない。** 転送行列 $T(x)\in M_{2^L}(\mathbb{Z}[x])$ のまま扱い、固有値は整数係数特性多項式 $\det(\lambda I-T(x))$ の根＝代数的、で済ます。物理の標準解法の「指数形」$V_h=e^{K\sum\sigma^z\sigma^z}$, $V_v=e^{K^*\sum\sigma^x}$ は、演算子が $M^2=I$（$(\sigma^x_j)^2=(\sigma^z_j\sigma^z_{j+1})^2=I$）を満たすので $e^{aM}=\cosh a\,I+\sinh a\,M$ と**有限の代数的式に畳まれる**（無限級数・$\mathbb{R}$ ではない）。ただし $\cosh K=(1+x)/(2\sqrt x)$ 等で**不要な平方根 $\sqrt x$ を持ち込む**（1 ボンドあたり $\sqrt x$、関係 $x^{\mathbf1[\sigma\ne\sigma']}=\sqrt x\cdot e^{K\sigma\sigma'}$）。この $\sqrt x$ は全体因子に集まり最終式では有理数の対数（前因子、後述）に化けて消えるので、初めから整数形で進めばよい。
+
+**対角化の道具の住処**（どれも円分体つき $\mathbb{Q}(x)$ の中、解析・実数なし）
 - Jordan–Wigner（スピン→フェルミオン）：厳密な演算子の代数的恒等式。
 - Fourier：$\theta_k=2\pi k/L$ は使わず、**1 の冪根** $\omega=e^{2\pi i/L}$（$z^L=1$ の根、円分体 $\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$）を使う。
 - Bogoliubov・対角化：$\mathbb{Q}(x,\omega)$ 上の線形代数（平方根が出ても代数的）。
@@ -92,7 +93,7 @@ $$
 \frac1L\log\lambda_{\max}=\frac12\log(2\sinh2K)+\frac1{2L}\sum_k\gamma(\theta_k).
 $$
 
-**脱出 (1)：代数的数の対数で加法化**。$\lambda_{\max}$ は代数的でも、その対数 $\log\lambda_{\max}$ や $\gamma_k=\log(e^{\gamma_k})$（代数的数の対数）は**有理数の対数でないので $\Lambda$ の外**（Baker 圏の実数）。有限 $L$ の厳密値 $\log Z_L(q)\in\Lambda$ は $\mathbb{R}$ を使わないが、固有値表示で近似 $\log Z_L\approx L\log\lambda_{\max}$ を使う瞬間に $\mathbb{R}$ に出る。
+**脱出 (1)：モード和の対数（arccosh）**。$\log\lambda_{\max}$ を分けると、前因子 $\tfrac{L}2\log(2\sinh2K)$（有理数の対数＝$\Lambda_\mathbb{Q}$、可算）と、モード和 $\tfrac12\sum_k\gamma_k$（$\gamma_k=\log(e^{\gamma_k})$＝代数的数の対数で**有理数の対数でないので $\Lambda$ の外**、Baker 圏の実数）に分かれる。**$\mathbb{R}$ なのはモード和の方だけ**。有限 $L$ の厳密値 $\log Z_L(q)\in\Lambda$ は $\mathbb{R}$ を使わないが、固有値表示で近似 $\log Z_L\approx L\log\lambda_{\max}$ を使い、そのモード和を取る所で $\mathbb{R}$ に出る。
 
 **脱出 (2)：Riemann 和 → 積分**。$\theta_k=2\pi k/L$ は $[0,2\pi)$ の $L$ 等分点、間隔 $\Delta\theta=2\pi/L$。$\frac1L\sum_k\gamma(\theta_k)=\frac1{2\pi}\sum_k\gamma(\theta_k)\Delta\theta$ は Riemann 和で、$L\to\infty$ で
 $$
@@ -104,7 +105,7 @@ $$
 $$
 -\beta f=\frac12\log(2\sinh2K)+\frac1{4\pi}\int_{-\pi}^{\pi}\gamma(\theta)\,d\theta,
 $$
-あるいは恒等式で二角の対称形にして
+ここで前因子 $\tfrac12\log(2\sinh2K)=\tfrac12\log\bigl((1-x^2)/x\bigr)=\tfrac12[\log(1-x^2)-\log x]$ は、有理点 $x=q$ で**有理数の対数＝$\Lambda_\mathbb{Q}$（可算・厳密、$\mathbb{R}$ 不要）**。指数形で出た $\sqrt x$ はこの前因子に吸収され痕跡を残さない。**$\mathbb{R}$ は積分項だけ**。あるいは恒等式で二角の対称形にして
 $$
 -\beta f=\log2+\frac1{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\!\bigl[\cosh^2 2K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]d\theta_1d\theta_2.
 $$
@@ -124,12 +125,12 @@ $$
 - $\Phi_L=\log Z_L(q)$（$q\in\mathbb{Q}_{>0}$）：$\Lambda$（素因数分解の指数ベクトル、厳密）
 - 転送行列 $T(x)$：$M_{2^L}(\mathbb{Z}[x])$
 - 固有値 $\lambda_j(x)$・分散 $\cosh\gamma(\theta_k)$・$\cos\theta_k$：$\overline{\mathbb{Q}(x)}$（円分体つき、代数的）
-- $\log\lambda_{\max}$・$\gamma_k$（加法化）：$\mathbb{R}$（代数的数の対数）
-- $\int\gamma(\theta)d\theta$（連続極限）：$\mathbb{R}$
+- 前因子 $\tfrac12\log((1-x^2)/x)$（有理点）：$\Lambda_\mathbb{Q}$（可算・厳密）
+- モード和 $\tfrac12\sum_k\gamma_k$／積分 $\int\gamma(\theta)d\theta$：$\mathbb{R}$（代数的数の対数 arccosh ＋ 連続極限）
 - 臨界点 $x_c=\sqrt2-1$：$\overline{\mathbb{Q}}$（代数的）
 - 自由エネルギーの非解析性：$\mathbb{R}$
 
-**一言**：Step 1–3（有限格子の数え上げ・転送行列・対角化）は整数・代数的・可算で閉じ、$\mathbb{R}$ が要るのは Step 4 の二箇所（代数的数の対数で加法化＋Riemann 和→積分）だけ。閉形式と相転移はそこに宿り、臨界点の位置だけは代数的に残る。
+**一言**：Step 1–3（有限格子の数え上げ・転送行列・対角化）は整数・代数的・可算で閉じる（指数形は使わず $T(x)\in M(\mathbb{Z}[x])$ のまま）。最終式 $-\beta f$ は **可算な前因子 $\Lambda_\mathbb{Q}$ ＋ $\mathbb{R}$ の積分項**に綺麗に分かれ、$\mathbb{R}$ は積分（arccosh ＋ Riemann 和→積分）だけ。閉形式と相転移はそこに宿り、臨界点の位置だけは代数的に残る。
 
 ---
 
