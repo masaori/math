@@ -23,7 +23,7 @@ slice は `inputs/seeds/canonical-papers.md` 準拠。slice 1（six_vertex_dwbc_
 | 7 | harvest:dimer_pfaffian_boundary | done | 2026-06-21 | corpus/query 004 作成。9 record / 5 coverage axis（square_lattice_pfaffian, planar_graph_pfaffian, finite_domain_enumeration, boundary_defect_weighted, local_correlations_inverse_kasteleyn）。Kasteleyn/Aztec/inverse-Kasteleyn + free 境界。attribution は verify 留め。 |
 | 8 | gap_map:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/maps/004_...`。known 4（square/planar Pfaffian, Aztec 有限領域 enum, inverse-Kasteleyn 相関）/ needs_review 2（free 境界 inverse-Kasteleyn, 有限領域 corner 相関）/ unknown 3（U1 境界 defect/monomer Pfaffian【最有力】, U2 境界パラメータ依存重み付き有限領域 det, U3 graph-class product【novelty_risk 高】）。dimer slice は全 pfaffian/determinant 操作型で有限記号性最強。**4 slice 横断確定**: 全 slice で「境界×有限記号閉形式」が共通 unknown 筋。 |
 | 9 | generate:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/candidates/003_...` に U1/U2/U3（境界 monomer/defect Pfaffian [medium]、境界パラメータ依存重み付き有限領域 det [low]、graph-class 明示積 [low・novelty_risk 高]）。全 unchecked。slice 4 完了 → 4 slice すべて harvest→gap_map→generate 完了。 |
-| 10 | rank:cycle0 | todo | | 4 slice 出揃ってから。cycle 0 成功条件。 |
+| 10 | rank:cycle0 | done | 2026-06-21 | `outputs/reports/001_cycle0_observation.md`。12候補を暫定ランク（resolved 未確認のため literature_risk は暫定）。横断観察: 全 slice で「境界×有限記号閉形式」が共通筋。high bucket: U1-corr-partial-dwbc（最有力）, U1-boundary-defect-monomer-pfaffian, loop-U3-boundary-correlation。bundle `boundary_finite_formula` を cycle 1 方向に提案。**cycle 0 成功条件達成**（根拠付きで次方向を選べる状態）。 |
 | 11 | decide:cycle1 | todo | | 観察に基づき cycle 1 step 列をこのファイルへ書き起こす。 |
 
 ## 逸脱ログ
