@@ -1,43 +1,15 @@
 # MEMORY
 
-## MVP の方針（是正済み）
+## 収集対象の再定義（2026-06-21, ユーザー合意）
 
-- MVP = 固定成果物（「30件」）ではなく、**広く薄く集めて観察し方向を絞るサイクルを1周回すこと**。詳細は `README.md`「MVP の意味（サイクル）」/ `docs/architecture.md`「サイクル」。
-- 幅/深さ・操作型や模型の取捨・投資量は事前決定しない。cycle 0 の 07_rank 観察で cycle 1 の方向を決める。
+- 集める statement = **「Λ/ℚ̄ で決定可能・ℝ脱出隔離・形式検証可能」**。整理軸は決定可能性の梯子（ℕ⊂ℚ⊂Λ⊂ℚ̄ ⊂ ℝ）＋四軸（帰属／計算可能性／複雑性／可解性）。定義 `inputs/seeds/lambda-statement-program.md`、土台 `docs/discussion/対数順序群上の統計力学/`。
+- 旧アプローチ（文献の exact 分類＝determinant/character で集めた cycle 0）は**全削除**。文献分類に引きずられて帰属と可解性を混同していたため。**復元点 918af09**（全 intact）／削除コミット c7fe283。
+- 探索方向 A–F（A 零点∈ℚ̄ / B 臨界点代数性・双対 / C ℝ脱出隔離・自由フェルミオン / D Massieu Φ∈Λ / E 複雑性×可解性分類 / F 形式検証可能性）は **絞らず広く** 探す（ユーザー指示）。
 
 ## 自動ループ（daily）
 
-- cycle 0 を daily cron で広く薄く自動進行する。手順 `docs/tasks/auto-loop-runbook.md`、状態 `docs/tasks/auto-loop-state.md`。
-- 各 step 完了ごとに MVP コンセプトマッチ点検 → main へ差分 push → 次 step。
-- 下の「次回やること」は runbook の step 列の人間向け要約（実体は state ファイル）。
-
-## cycle 0 完了（2026-06-21, 自動ループで1周）
-
-- 4 slice すべて 01_harvest→04_gap_map→05_generate を薄く完了。corpus/query/map 各 002-004、候補 001-003、観察 `outputs/reports/001_cycle0_observation.md`。
-- **横断観察**: 全 slice で「境界（数・パラメータ・defect）× 有限記号閉形式」が共通の unknown 筋。six-vertex↔loop↔dimer は vertex-face/loop 対応で接続可能。
-- **cycle 1 方向確定**: `boundary_finite_formula` 束を深掘り（resolved 確認 → 06_verify → sagemath → paper-plan）。step 列は `docs/tasks/auto-loop-state.md` の「cycle 1 step 列」。
-- daily cron は `boundary_finite_formula` 束を runbook 手順で自動継続する。
-
-## （旧）次回やること（cycle 0 を広く薄く1周）— 完了済み
-
-### 1. 残り3 slice を浅く通す（最優先）
-
-- `rsos_character_identity` / `tl_loop_finitized_character` / `dimer_pfaffian_boundary` を 01_harvest → 04_gap_map → 05_generate まで **浅く** 回す。
-- 候補は anchor 付きの粗い形でよい。`resolved_risk`/`novelty_risk` は `unchecked` のまま、06_verify・sagemath はこの周ではやらない。
-
-### 2. 観察パス（07_rank）
-
-- 4 slice 出揃ったら 07_rank を回し、「どの 模型 × 操作型 × 境界 が筋良いか・なぜか」を `outputs/reports/` に出す。
-- これが cycle 0 の成功条件（件数ではない）。
-
-### 3. cycle 1 の方向決定（観察後）
-
-- 操作型 slice の追加（star-triangle / transfer-matrix は anchor 有・即可、T-system は anchor 収集が1段必要）や特定家族への深掘りを、観察結果に基づいて決める。
-
-## 保留（cycle 0 ではやらない）
-
-- slice 1 の候補 U1-corr / U1-efp / U3-corr は cycle 0 に対し深掘りしすぎた先行サンプル。verify・sagemath 検証・残り unknown(U2/U4/U5/U6) の候補化・needs_review(NR1-4) 振り分けは、観察で六頂点 det 方向が選ばれてから後続サイクルで実施。
-- Paper planning（`outputs/paper-plans/`→`outputs/papers/` 昇格基準）も方向確定後。
+- 手順 `docs/tasks/auto-loop-runbook.md`、状態 `docs/tasks/auto-loop-state.md`。各 step 完了ごとに点検 → main 差分 push（マージ結果を必ず報告）→ 次 step。
+- cron は session-only（Claude 起動中のみ・7日失効）。次回やること＝state の cycle 0 step 列（explore:A_zeros から）。
 
 ## 未解決
 

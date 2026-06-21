@@ -1,47 +1,31 @@
-# 自動ループ 状態
+# 自動ループ 状態（Λ-statement 版）
 
-daily cron が読み書きする状態ファイル。手順は `auto-loop-runbook.md`。
+daily cron が読み書きする状態ファイル。手順は `auto-loop-runbook.md`、収集定義は `inputs/seeds/lambda-statement-program.md`。
 
 ```yaml
-current_cycle: 1        # cycle 0 完了。cycle 1 = boundary_finite_formula 束の深掘り。
-last_run: 2026-06-21     # 最後に daily 実行した日付（YYYY-MM-DD）
-cron_armed: 2026-06-21   # cron を作成/再武装した日付（session-only, 7日で失効）
+program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
+current_cycle: 0
+last_run: 2026-06-21
+cron_armed: 2026-06-21       # session-only, 7日で失効
+restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。削除コミット c7fe283。
 ```
 
-## cycle 0 step 列
+## cycle 0 step 列（探索方向 A–F を絞らず広く浅く）
 
-slice は `inputs/seeds/canonical-papers.md` 準拠。slice 1（six_vertex_dwbc_determinant）は既に harvest/gap_map/generate 済み（`outputs/maps/001_...`, `outputs/candidates/000_...`）なので step 列から除外。
-
-| # | step | status | done日 | 観察メモ |
-|---|------|--------|--------|----------|
-| 1 | harvest:rsos_character_identity | done | 2026-06-21 | corpus 002 + query 002 作成。13 record / 6 coverage axis（unitary_minimal_finitized, nonunitary_forrester_baxter, bailey_construction, branching_coset, rank_affine_generalization, representation_root_of_unity）。多数 attribution は `verify` 留め（cycle 0 は固めない）。unknown 候補源: 境界/欠陥付き RSOS の finitized character、高ランク(A_{n-1}^{(1)}, n>2)の boson=fermion 多項式恒等式。 |
-| 2 | gap_map:rsos_character_identity | done | 2026-06-21 | `outputs/maps/002_...` 作成。known 4（単位/非単位 minimal finitized char, su(2) coset 分岐, A_n config-sum=character）/ needs_review 2（Bailey 経路重複, root-of-unity Hecke）/ unknown 3（U1 境界付き RSOS finitized char【最有力】, U2 高ランク finitized 恒等式, U3 su(2)外 coset finitization）。harvest 補強候補(Behrend-Pearce 境界 RSOS, Kirillov-Reshetikhin 高ランク fermionic form)は観察に留め cycle 0 では未実施。 |
-| 3 | generate:rsos_character_identity | done | 2026-06-21 | `outputs/candidates/001_...` に U1/U2/U3 を粗く起こした（境界つき RSOS finitized char [medium]、高ランク A_n finitized 恒等式 [medium, novelty_risk 高]、su(2)外 coset finitization [low]）。全て unchecked。slice 2 完了。 |
-| 4 | harvest:tl_loop_finitized_character | done | 2026-06-21 | corpus/query 003 作成。11 record / 6 coverage axis（strip_finitized_character, boundary_sector_character, boundary_tl_algebra, loop_correlation_combinatorics, tl_relation_anchor, loop_critical_context）。Pearce 系 LM(p,p') finitized Kac character + blob/2-boundary TL link-state。多数 attribution は verify 留め。 |
-| 5 | gap_map:tl_loop_finitized_character | done | 2026-06-21 | `outputs/maps/003_...`。known 4（LM(p,p') strip finitized char, dense polymers defect char, blob/2BTL link-state, dense loop 共形境界分類）/ needs_review 2（Robin・NS-R 超共形, 2点境界 loop 相関）/ unknown 3（U1 一般2境界パラメータ finitized char【最有力】, U2 fused-TL finitized char, U3 loop 境界相関の有限公式）。**横断観察**: slice 1/2/3 すべてで「境界軸 × 有限公式」が共通 unknown 筋 → vertex-face/loop 対応で束ねられる可能性、cycle 1 方向候補。 |
-| 6 | generate:tl_loop_finitized_character | done | 2026-06-21 | `outputs/candidates/002_...` に U1/U2/U3（一般2境界パラメータ finitized char [medium]、fused-TL finitized char [low]、loop 境界相関の有限公式 [medium・横断テーマ結節点]）。全 unchecked。slice 3 完了。 |
-| 7 | harvest:dimer_pfaffian_boundary | done | 2026-06-21 | corpus/query 004 作成。9 record / 5 coverage axis（square_lattice_pfaffian, planar_graph_pfaffian, finite_domain_enumeration, boundary_defect_weighted, local_correlations_inverse_kasteleyn）。Kasteleyn/Aztec/inverse-Kasteleyn + free 境界。attribution は verify 留め。 |
-| 8 | gap_map:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/maps/004_...`。known 4（square/planar Pfaffian, Aztec 有限領域 enum, inverse-Kasteleyn 相関）/ needs_review 2（free 境界 inverse-Kasteleyn, 有限領域 corner 相関）/ unknown 3（U1 境界 defect/monomer Pfaffian【最有力】, U2 境界パラメータ依存重み付き有限領域 det, U3 graph-class product【novelty_risk 高】）。dimer slice は全 pfaffian/determinant 操作型で有限記号性最強。**4 slice 横断確定**: 全 slice で「境界×有限記号閉形式」が共通 unknown 筋。 |
-| 9 | generate:dimer_pfaffian_boundary | done | 2026-06-21 | `outputs/candidates/003_...` に U1/U2/U3（境界 monomer/defect Pfaffian [medium]、境界パラメータ依存重み付き有限領域 det [low]、graph-class 明示積 [low・novelty_risk 高]）。全 unchecked。slice 4 完了 → 4 slice すべて harvest→gap_map→generate 完了。 |
-| 10 | rank:cycle0 | done | 2026-06-21 | `outputs/reports/001_cycle0_observation.md`。12候補を暫定ランク（resolved 未確認のため literature_risk は暫定）。横断観察: 全 slice で「境界×有限記号閉形式」が共通筋。high bucket: U1-corr-partial-dwbc（最有力）, U1-boundary-defect-monomer-pfaffian, loop-U3-boundary-correlation。bundle `boundary_finite_formula` を cycle 1 方向に提案。**cycle 0 成功条件達成**（根拠付きで次方向を選べる状態）。 |
-| 11 | decide:cycle1 | done | 2026-06-21 | 方向を **`boundary_finite_formula` 束**（標準境界の有限公式 → 境界の数/パラメータ/defect 一般化; six-vertex↔loop↔dimer を vertex-face/loop 対応で接続）に確定。cycle 1 step 列を下に書き起こした。current_cycle=1 へ。 |
-
-## cycle 1 step 列（boundary_finite_formula 束の深掘り）
-
-cycle 0 と異なり **深掘りサイクル**。MVP 原則「方向が定まったセル/家族にのみ後続サイクルで深さを集中投下」に従い、ここで初めて 06_verify・sagemath を行う。各 step も従来どおり完了ごとに MVP 点検（深掘りが**確定方向に限定**されているか／束から逸脱していないか）→ main push。
+各 step = 1方向を模型横断で薄く explore（Λ gap-map セル + 粗い候補, unchecked）。06_verify・sagemath はこの周ではやらない。
 
 | # | step | status | done日 | 観察メモ |
 |---|------|--------|--------|----------|
-| 1 | harvest:boundary_finite_formula_reinforce | todo | | 上位3件の resolved 確認用 harvest 補強: partial-DWBC 相関の後続文献 / monomer-dimer(Wu, Tzeng-Wu 系) / loop 境界相関(Morin-Duchesne-Saleur 後続)。 |
-| 2 | verify:U1-corr-partial-dwbc-boundary-onepoint | todo | | 06_verify（既出・自明従属リスク）。anchor BPZ×Foda-Wheeler の合成が既出でないか。 |
-| 3 | verify:U1-boundary-defect-monomer-pfaffian | todo | | 06_verify。monomer-dimer 文献に同値結果がないか（literature_risk H）。 |
-| 4 | verify:U3-loop-boundary-correlation-finite-formula | todo | | 06_verify。vertex-face/loop 対応で slice1 U1-corr と接続可能か。 |
-| 5 | sagemath:high-bucket-survivors | todo | | verify を抜けた候補のみ小サイズ数値検証（六頂点 n∈{1,2},N∈{2,3} 等／小領域 Pfaffian）。 |
-| 6 | paper_plan:boundary_finite_formula | todo | | survivor を `outputs/paper-plans/` に。vertex-face/loop 対応で1本に束ねられるか。 |
-| 7 | rank:cycle1 | todo | | 深掘り結果で再ランク → cycle 2 方向（論文化 or 別束 or 撤退）を決定。 |
+| 1 | explore:A_zeros | todo | | 分配関数零点 ∈ ℚ̄（Fisher/Lee–Yang）の厳密軌跡・代数性。模型横断。 |
+| 2 | explore:B_critical_point | todo | | 臨界点 x_c ∈ ℚ̄ の代数性・双対(KW/star-triangle)固定。 |
+| 3 | explore:C_R_escape_structure | todo | | T(x)∈M(ℤ[x]) 保存・対角化が ℚ̄(x) で閉じる・ℝ脱出一点隔離（自由フェルミオン）。 |
+| 4 | explore:D_massieu_phi | todo | | Massieu Φ_N ∈ Λ の有限サイズ恒等式・漸化式。 |
+| 5 | explore:E_complexity_solvability | todo | | 各模型・境界の 07 テーブル(poly/#P × closed/none)配置。 |
+| 6 | explore:F_formal_verifiable | todo | | どの厳密結果が Λ/ℚ̄ 上 decide 可能か（β_A=β_B 整数比較化等）。 |
+| 7 | rank:cycle0 | todo | | A–F 出揃ってから観察 → cycle 1 で深掘る Λ-statement の筋を根拠付きで選ぶ。成功条件。 |
 
 ## 逸脱ログ
 
-MVP コンセプトマッチ点検で不合格になり是正した内容を、step 番号・日付付きで記録する。
+点検で不合格→是正した内容を step 番号・日付付きで記録。
 
 （なし）

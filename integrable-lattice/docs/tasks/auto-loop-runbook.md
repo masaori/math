@@ -1,63 +1,53 @@
-# 自動ループ Runbook（daily）
+# 自動ループ Runbook（daily, Λ-statement 版）
 
-このファイルは、daily cron が **毎回まっさらな文脈で** 読み、決定論的に1日分を実行するための手順書。
-状態は `auto-loop-state.md` に永続化する。判断の根拠はこの2ファイル + リポジトリ内一次情報のみ。
+このファイルは daily cron が **毎回まっさらな文脈で** 読み、決定論的に1日分を実行するための手順書。
+状態は `auto-loop-state.md` に永続化する。判断の根拠はこの2ファイル + リポジトリ内一次情報（特に `inputs/seeds/lambda-statement-program.md` と `docs/discussion/対数順序群上の統計力学/`）のみ。
 
 ## 大方針（最重要・絶対遵守）
 
-MVP は固定成果物ではなく **広く薄く集めて観察し方向を絞るサイクル**（`README.md`「MVP の意味（サイクル）」、`docs/architecture.md`「サイクル」）。
-このループは cycle 0 を **広く薄く** 1周回すためのもの。**各 step 完了ごとに**「MVP コンセプトとの一致」を点検し、合格してから **main に差分 push** し、次 step へ進む。
+集める statement は **「Λ/ℚ̄ で決定可能・ℝ脱出隔離・形式検証可能」**（再定義）。整理軸は **決定可能性の梯子（ℕ⊂ℚ⊂Λ⊂ℚ̄ ⊂ ℝ）＋四軸（帰属／計算可能性／複雑性／可解性）**。文献の「厳密可解」分類（determinant か character か）で整理してはならない。
+cycle 0 は探索方向 **A–F を絞らず広く浅く** 1周回す。各 step 完了ごとに点検 → main 差分 push → 次 step。
 
 ## 1日の実行手順
 
-1. **同期**: 作業ツリー（`integrable-lattice` を含む worktree）で `git fetch origin main && git reset --hard origin/main`。作業ツリーがクリーンであることが前提（前日 step は push 済みのはず）。
-2. `auto-loop-state.md` を読み、`status: todo` の最初の step を特定する。todo が無ければ「サイクル完了処理」へ。
-3. その step を **1つだけ** 実行する（下の「step 種別」参照）。対応する `skills/integrable-lattice-*` の手順に従う。
-4. **MVP コンセプトマッチ点検**（下のチェックリスト）。1つでも不合格なら、行き過ぎた深さを削る／巻き戻し、逸脱を `auto-loop-state.md` の「逸脱ログ」に記録してから合格させる。
-5. `auto-loop-state.md` を更新（当該 step を `done`、観察メモ・日付を追記）。必要なら `MEMORY.md` も更新。
-6. **main へ push**（下の git レシピ）。push 後に `git rev-parse origin/main` を取り、**main へマージされたことを確認する**。
-7. まだ当日の時間/予算に余裕があり、かつ次 step があれば 3 に戻る。無ければ当日終了し、完了報告を残す。
+1. **同期**: 作業ツリーで `git fetch origin main && git reset --hard origin/main`。
+2. `auto-loop-state.md` を読み、`status: todo` の最初の step を特定する。無ければ「サイクル完了処理」へ。
+3. その step を **1つだけ** 実行する（下の「step 種別」）。`inputs/seeds/lambda-statement-program.md` の梯子・四軸・台帳・選別基準を使う。
+4. **点検チェックリスト**（下）。不合格なら是正、逸脱を `auto-loop-state.md` の「逸脱ログ」へ記録してから合格させる。
+5. `auto-loop-state.md` を更新（step を `done`、観察メモ・日付）。必要なら `MEMORY.md` も更新。
+6. **main へ push**（下の git レシピ）。push 後 `git rev-parse origin/main` でマージを確認。
+7. 余力があり次 step があれば 3 に戻る。無ければ当日終了し完了報告を残す。
 
-> step ごとに必ず 4→5→6 を回す。複数 step をまとめて1回 push してはならない（「各 step 完了ごとに push」がユーザー指示）。
+> step ごとに必ず 4→5→6 を回す。まとめ push 禁止。
 
 ### main マージ結果の報告（厳守・ユーザー指示）
 
-各 step の完了報告では、**main にマージしたか否かを必ず明示する**。最低限つぎを含める。
+各 step の完了報告で **main にマージしたか否かを必ず明示**: 成否／成功時は `<before>..<after>` commit ハッシュ／失敗・未push時は理由。`origin/main` が前進した事実をもって「マージ済み」と報告する。
 
-- マージ成否（成功／失敗）。
-- 成功時: `<before>..<after>` の commit ハッシュ（例 `48ffc54..840d26b`）。
-- 失敗・未 push 時: その理由（non-fast-forward で rebase したか、点検不合格で push しなかったか等）。
+## 点検チェックリスト（push 前に毎回）
 
-push したつもりで `origin/main` が動いていない場合はマージ失敗として扱い、報告する。「push した」だけで済ませず、`origin/main` が前進した事実をもって「マージ済み」と報告すること。
+すべて満たすこと。1つでも×なら是正。
 
-## MVP コンセプトマッチ点検チェックリスト（push 前に毎回）
-
-すべて満たすこと。1つでも×なら是正してから push。
-
-- [ ] **薄く広く**: この step で 06_verify を回していない／sagemath 数値検証をしていない／anchor を深掘り固めしていない／厳密な定理形を書いていない（cycle 0 では全て禁止）。
-- [ ] **粗くてよい**: 生成候補は `resolved_risk: unchecked` / `novelty_risk: unchecked` のまま、anchor 付きの粗い形。
-- [ ] **per-item コスト最小**: 特定の1セル/1候補に不均衡な深さを投下していない。
-- [ ] **ループ目的に資する**: この step は4 slice 横断のカバレッジを進め、07_rank で「模型 × 操作型 × 境界」を比較できる状態に近づけている（= cycle 0 成功条件「根拠付きで cycle 1 方向を選べる」に寄与。固定件数を目的にしていない）。
-- [ ] **スコープ固定**: `inputs/seeds/canonical-papers.md` の当該 slice の model_family / operation の範囲内。幅/深さ・取捨・投資量を**事前に**決め打ちしていない（それは 07_rank 観察後に決める）。
+- [ ] **帰属を明示**: 各候補で対象量の home（ℤ[x] / Λ / ℚ̄ / ℝ脱出箇所）を書いた。
+- [ ] **選別基準 (i)–(iv)**: Λ/ℚ̄ で決定可能・ℝ脱出隔離（一点 or ℝ不使用）・形式検証可能・単一軸のずれ（`lambda-statement-program.md`）。
+- [ ] **梯子/四軸で整理**: 文献操作型（determinant / character / Yang-Baxter…）で整理していない。模型は基質として使ってよいが、整理軸は梯子＋四軸。
+- [ ] **Schanuel 層・ℝ本体回避**: 対象量の本体が exp/log 積（$\ell_p\ell_q$）や $\mathbb{R}$ に住んでいない。住むなら ℝ脱出として隔離・明示。
+- [ ] **広く浅く（cycle 0）**: A–F を絞っていない。深い証明・06_verify・sagemath 厳密検証はこの周ではしない（深さは方向確定後）。
 
 ## step 種別（cycle 0 の step 列）
 
-各 slice につき harvest → gap_map → generate を **浅く**。slice は `inputs/seeds/canonical-papers.md` 準拠。
+探索方向 A–F（`lambda-statement-program.md`）を1方向ずつ、模型横断で **広く浅く**。
 
-- `harvest:<slice>` … `skills/integrable-lattice-harvest`。first-pass query log + curated corpus を `inputs/` に薄く作る。
-- `gap_map:<slice>` … `skills/integrable-lattice-gap-map`。`outputs/maps/` に既解決/空白セル表。
-- `generate:<slice>` … `skills/integrable-lattice-generate`。空白セルから候補を `outputs/candidates/` に粗く（unchecked のまま）。
-- `rank:cycle0` … `skills/integrable-lattice-rank`。4 slice 出揃ってから観察を `outputs/reports/` に。これが cycle 0 成功条件。
-- `decide:cycle1` … 観察に基づき cycle 1 の方向（操作型 slice 追加 / 家族絞り込み）を `MEMORY.md` と report に。
+- `explore:<dir>` … `skills/integrable-lattice-harvest` + `gap-map` + `generate` を1方向ぶん薄く回す。出力: `outputs/maps/`（Λ gap-map セル）＋ `outputs/candidates/`（選別基準を満たす粗い候補、`resolved_risk: unchecked`）。必要な一次情報は `docs/discussion/対数順序群上の統計力学/` と最小限の web 検索。
+- `rank:cycle0` … `skills/integrable-lattice-rank`。A–F 出揃ってから観察を `outputs/reports/` へ。決定可能性・形式検証可能性・複雑性×可解性で順位付け。これが cycle 0 成功条件（件数でなく、次に深掘りする Λ-statement の筋を根拠付きで選べる状態）。
 
 ## サイクル完了処理
 
-`rank:cycle0` と `decide:cycle1` まで done になったら cycle 0 完了。
-`decide:cycle1` の結論に基づき、`auto-loop-state.md` に cycle 1 の step 列を新規に書き起こし、`current_cycle` を進める。次の daily 実行はその step 列を回す。これがサイクルの **ループ**。
+`rank:cycle0` まで done になったら cycle 0 完了。観察に基づき cycle 1 の方向（A–F のどれを深掘りするか／どの模型に絞るか）を決め、`auto-loop-state.md` に cycle 1 step 列を書き起こし `current_cycle` を進める。cycle 1 以降で初めて 06_verify・sagemath 厳密検証（SageMath `ZZ/QQ/QQbar`・素因数分解）を確定方向に投下する。
 
 ## git レシピ（main へ直接 push）
 
-`main` は branch protection 無し → 直接 fast-forward push でよい。
+`main` は branch protection 無し → 直接 fast-forward push。
 
 ```bash
 git -C <worktree> add -A
@@ -65,14 +55,14 @@ git -C <worktree> commit -m "integrable-lattice auto-loop(cycle0): <step>"
 git -C <worktree> push origin HEAD:main
 ```
 
-push が non-fast-forward で蹴られたら（他 worktree が main を進めた場合）:
+non-fast-forward で蹴られたら:
 
 ```bash
 git -C <worktree> fetch origin main && git -C <worktree> rebase origin/main && git -C <worktree> push origin HEAD:main
 ```
 
-`--delete-branch` や `main` の local checkout は使わない（他 worktree が main を占有しているため失敗する）。
+`--delete-branch` や `main` の local checkout は使わない。
 
 ## cron 再武装（7日 auto-expire 対策）
 
-recurring cron は7日で自動失効する。daily 実行時、もしループが未完なのに cron が失効間近/失効済みなら、同等の daily cron を `CronCreate`（durable, recurring）で再作成し、`auto-loop-state.md` に再武装日を記録する。
+recurring cron は7日で失効（session-only）。ループ未完なのに失効間近/失効済みなら同等の daily cron を `CronCreate` で再作成し、`auto-loop-state.md` に再武装日を記録する。
