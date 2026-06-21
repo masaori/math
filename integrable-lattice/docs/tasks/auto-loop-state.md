@@ -19,7 +19,7 @@ slice は `inputs/seeds/canonical-papers.md` 準拠。slice 1（six_vertex_dwbc_
 | 3 | generate:rsos_character_identity | done | 2026-06-21 | `outputs/candidates/001_...` に U1/U2/U3 を粗く起こした（境界つき RSOS finitized char [medium]、高ランク A_n finitized 恒等式 [medium, novelty_risk 高]、su(2)外 coset finitization [low]）。全て unchecked。slice 2 完了。 |
 | 4 | harvest:tl_loop_finitized_character | done | 2026-06-21 | corpus/query 003 作成。11 record / 6 coverage axis（strip_finitized_character, boundary_sector_character, boundary_tl_algebra, loop_correlation_combinatorics, tl_relation_anchor, loop_critical_context）。Pearce 系 LM(p,p') finitized Kac character + blob/2-boundary TL link-state。多数 attribution は verify 留め。 |
 | 5 | gap_map:tl_loop_finitized_character | done | 2026-06-21 | `outputs/maps/003_...`。known 4（LM(p,p') strip finitized char, dense polymers defect char, blob/2BTL link-state, dense loop 共形境界分類）/ needs_review 2（Robin・NS-R 超共形, 2点境界 loop 相関）/ unknown 3（U1 一般2境界パラメータ finitized char【最有力】, U2 fused-TL finitized char, U3 loop 境界相関の有限公式）。**横断観察**: slice 1/2/3 すべてで「境界軸 × 有限公式」が共通 unknown 筋 → vertex-face/loop 対応で束ねられる可能性、cycle 1 方向候補。 |
-| 6 | generate:tl_loop_finitized_character | todo | | |
+| 6 | generate:tl_loop_finitized_character | done | 2026-06-21 | `outputs/candidates/002_...` に U1/U2/U3（一般2境界パラメータ finitized char [medium]、fused-TL finitized char [low]、loop 境界相関の有限公式 [medium・横断テーマ結節点]）。全 unchecked。slice 3 完了。 |
 | 7 | harvest:dimer_pfaffian_boundary | todo | | |
 | 8 | gap_map:dimer_pfaffian_boundary | todo | | |
 | 9 | generate:dimer_pfaffian_boundary | todo | | |
