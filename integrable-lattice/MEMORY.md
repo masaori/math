@@ -1,26 +1,30 @@
 # MEMORY
 
-## 次回やること
+## MVP の方針（是正済み）
 
-### 1. 候補の検証 / verify（次の主作業）
+- MVP = 固定成果物（「30件」）ではなく、**広く薄く集めて観察し方向を絞るサイクルを1周回すこと**。詳細は `README.md`「MVP の意味（サイクル）」/ `docs/architecture.md`「サイクル」。
+- 幅/深さ・操作型や模型の取捨・投資量は事前決定しない。cycle 0 の 07_rank 観察で cycle 1 の方向を決める。
 
-- 生成済み候補 U1-corr / U1-efp / U3-corr（`outputs/candidates/000_seed_candidates.md`）の `resolved_risk` / `novelty_risk` を `06_verify` で確定する。
-- 特に U3-corr: half-turn 分配関数の有限行列式が Kuperberg 2002 / Bleher-Liechty 2017 で既出か精査（既出なら新規性は相関部分に限定）。
-- small_case_experiment を `sagemath/` で実装し小サイズ数値検証（U1: n≤2,N≤3 / U3: N∈{2,4}）。
+## 次回やること（cycle 0 を広く薄く1周）
 
-### 2. 残り unknown の候補化
+### 1. 残り3 slice を浅く通す（最優先）
 
-- U2 / U4 / U5（reflecting 系の相関/EFP）は needs_review 振り分け後に候補化。
-- U6（triangular DWBC）は corpus 未収集由来 → 追加 harvest するか needs_review 相当で扱うか要判断。
+- `rsos_character_identity` / `tl_loop_finitized_character` / `dimer_pfaffian_boundary` を 01_harvest → 04_gap_map → 05_generate まで **浅く** 回す。
+- 候補は anchor 付きの粗い形でよい。`resolved_risk`/`novelty_risk` は `unchecked` のまま、06_verify・sagemath はこの周ではやらない。
 
-### 3. needs_review の振り分け
+### 2. 観察パス（07_rank）
 
-- NR1（非対角 reflecting、出版状態）/ NR2（partially reflecting、有限行列式形か）/ NR3（half-turn 漸近、有限記号該当性）/ NR4（reflecting 境界相関の被覆範囲）を検証し known/unknown へ確定。
-- 結果により U2/U4/U5 の anchor 確度が更新される。
+- 4 slice 出揃ったら 07_rank を回し、「どの 模型 × 操作型 × 境界 が筋良いか・なぜか」を `outputs/reports/` に出す。
+- これが cycle 0 の成功条件（件数ではない）。
 
-### 3. Paper planning
+### 3. cycle 1 の方向決定（観察後）
 
-- `outputs/paper-plans/` から `outputs/papers/` へ昇格させる判断基準を作る。
+- 操作型 slice の追加（star-triangle / transfer-matrix は anchor 有・即可、T-system は anchor 収集が1段必要）や特定家族への深掘りを、観察結果に基づいて決める。
+
+## 保留（cycle 0 ではやらない）
+
+- slice 1 の候補 U1-corr / U1-efp / U3-corr は cycle 0 に対し深掘りしすぎた先行サンプル。verify・sagemath 検証・残り unknown(U2/U4/U5/U6) の候補化・needs_review(NR1-4) 振り分けは、観察で六頂点 det 方向が選ばれてから後続サイクルで実施。
+- Paper planning（`outputs/paper-plans/`→`outputs/papers/` 昇格基準）も方向確定後。
 
 ## 未解決
 

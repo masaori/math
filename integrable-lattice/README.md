@@ -85,10 +85,33 @@ integrable-lattice/
 
 これらは一般用途ではなく、`integrable-lattice` の入力・パイプライン・出力の設計に合わせた作業手順である。
 
-## 最初のMVP
+## MVP の意味（サイクル）
 
-まずは以下に絞る。
+MVP は固定成果物（「30件出す」等）ではない。MVP とは **広く薄く集めて観察し、筋のいい方向を絞り込むサイクルを1周回すこと**。
+良い方向は事前には分からない。だからこのプロジェクトは 01→07 の一方向パイプラインではなく、07 の観察を seed・スコープへ戻す**ループ**として回す。
 
-1. 模型: six-vertex/XXZ, RSOS/ABF, loop/Temperley-Lieb, dimer/Pfaffian。
-2. 操作型: Yang-Baxter, star-triangle, transfer matrix commutativity, T-system/Y-system, determinant/Pfaffian formula, character/q-series identity。
-3. 出力: `outputs/candidates/000_seed_candidates.md` に未解決候補を30件以上出す。
+```text
+seed → harvest → … → generate → rank/観察 → 次サイクルの seed・スコープを絞り込む → …
+```
+
+事前に決めてはいけないもの（サイクルが観察で決めるべきもの）:
+
+- 幅優先か深さ優先か。
+- どの操作型・模型を残し、どれを切るか。
+- どこにどれだけ投資するか。
+
+### cycle 0（最初の1周）
+
+- 対象: `inputs/seeds/canonical-papers.md` の4 slice（`six_vertex_dwbc_determinant` / `rsos_character_identity` / `tl_loop_finitized_character` / `dimer_pfaffian_boundary`）を **全て薄く** 通す。
+- 各 slice を 01_harvest → 04_gap_map → 05_generate まで **浅く** 回す。候補は anchor 付きの粗い形でよい。`resolved_risk` / `novelty_risk` は `unchecked` のまま、06_verify・sagemath 数値検証は **この周ではやらない**（深さは方向が定まってから投下する）。
+- その上で 07_rank（観察）を回し、「どの 模型 × 操作型 × 境界 方向が筋良さそうか・なぜか」を `outputs/reports/` に書く。
+
+### cycle 0 の成功条件
+
+- 件数ではない。**観察結果として、次サイクルで深掘りする方向を根拠付きで選べる状態**になること。
+- 操作型・模型の取捨（star-triangle / transfer-matrix / T-system の slice を足すか、特定家族へ絞るか）は、この観察に基づいて cycle 1 で決める。
+
+### per-item コストの原則
+
+- cycle 0 では1候補あたりのコストを最小化する（深い anchor 固め・厳密な定理形・数値検証は cycle 0 では行わない）。
+- 深さは、観察で方向が定まったセル/家族にのみ後続サイクルで集中投下する。
