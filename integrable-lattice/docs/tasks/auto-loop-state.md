@@ -28,13 +28,14 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 
 | # | step | status | done日 | 観察メモ |
 |---|------|--------|--------|----------|
-| 1 | verify:A-U1_resolved_check | done | 2026-06-22 | `outputs/reports/cycle1_01_verify_A-U1_resolved.md`。**判定: A-U1 の数学内容は本質的に既知**（Z_N∈ℤ[x] と零点の厳密計算は標準: Kaufman/Beale, cond-mat/9707072, FOCS2017）。「整数多項式の根は代数的」は自明な再言。差分は数学新規性でなく**形式化・decide・witness(F)と逆数学 calibration**＝基礎論寄与。含意: A 単体は新規性薄。残る価値候補は C-U3(Bethe, 非自明)/D-U2(数論的)/F(形式検証)。**束全体の筋に関わるため深掘り投資前にユーザー判断要**。 |
-| 2 | sagemath:A-U1_ising_fisher_zeros_qqbar | todo | | 小 L Ising の Z_L(x)∈ℤ[x] を構築→QQbar で Fisher 零点を厳密計算・witness 化(F-U2)。 |
-| 3 | sagemath:C-U3_xxz_bethe_roots_qqbar | todo | | 小 N XXZ の Bethe 根を QQbar で厳密に解き ℚ̄ 帰属を確認。 |
-| 4 | sagemath:D-U1_phi_factorization | todo | | Φ_N=log Z_N(q) の素因数分解と Λ 漸化を小 N で確認。 |
+| 1 | verify:A-U1_resolved_check | done | 2026-06-22 | `outputs/reports/cycle1_01_verify_A-U1_resolved.md`。**判定: A-U1 の数学内容は本質的に既知**（Z_N∈ℤ[x] と零点の厳密計算は標準）。差分は形式化(F)＝基礎論寄与で、A 単体は薄い。→ 母集団を既解 Ising から未解決模型へ移すべき（step 1b）。 |
+| 1b | harvest:integrable_unsolved_catalog | done | 2026-06-22 | `outputs/maps/integrable_unsolved_catalog.md`。「可積分(YBE)だが厳密解未確定」の原典付き first-pass カタログ。出典 McCoy(math-ph/9904003), Baxter chiral Potts(cond-mat/0510683), 分類(cond-mat/0304309)。本命=カイラル Potts(相関・スペクトル)/高ランク・高スピン vertex・IRF(極限閉形式・Bethe 完全性)。**ここでは「有限 N∈ℚ̄ 決定可能だが極限未解決」が非自明**＝本プロジェクトの本命母集団。**cycle 1 を Ising→未解決模型へ refocus**。 |
+| 2 | sagemath:C-U3_bethe_roots_qqbar（未解決模型で） | todo | | 既解 Ising でなく**未解決母集団**（まず XXZ/六頂点→高スピン）で小 N の Bethe 根を QQbar 厳密化し ℚ̄ 帰属を確認。非自明性を見る。 |
+| 3 | sagemath:D_phi_factorization（未解決模型で） | todo | | 未解決模型の小 N で Φ_N=log Z_N(q) の素因数構造(D-U2 数論的内容)を観察。 |
+| 4 | apply:finite_N_qqbar_to_chiral_potts_or_higher_rank | todo | | カタログ本命（カイラル Potts / 高ランク）に C-U3 を当て、「有限 N スペクトル∈ℚ̄ だが極限未解決」を具体命題化。 |
 | 5 | lean:F-U1_decide_minimal | todo | | 第〇法則 or Φ 恒等式の Lean decide/reflection 最小例。 |
-| 6 | paper_plan:finite_N_decidable | todo | | survivor を `outputs/paper-plans/` に。A/B/C/D を自由フェルミ/vertex-face 対応で1本に束ねられるか。 |
-| 7 | rank:cycle1 | todo | | 深掘り結果で再ランク → cycle 2 方向（論文化 or 別束 or 撤退）。 |
+| 6 | paper_plan:finite_N_decidable_unsolved | todo | | survivor を `outputs/paper-plans/` に。未解決模型での「有限 N 可算決定可能 vs 極限未解決」を軸に。 |
+| 7 | rank:cycle1 | todo | | 深掘り結果で再ランク → cycle 2 方向。 |
 
 ## 逸脱ログ
 
