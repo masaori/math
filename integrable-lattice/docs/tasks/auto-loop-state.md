@@ -4,7 +4,7 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
-current_cycle: 0
+current_cycle: 1            # cycle 0(A-F 広い探索)完了。cycle 1 = finite_N_decidable 束の深掘り。
 last_run: 2026-06-21
 cron_armed: 2026-06-21       # session-only, 7日で失効
 restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。削除コミット c7fe283。
@@ -22,7 +22,19 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | 4 | explore:D_massieu_phi | done | 2026-06-22 | `outputs/maps/D_massieu_phi_lambda_map.md` + 候補。核心: 有理点 q で Φ_N=log Z_N(q)∈Λ(素因数分解), β=ΔS∈Λ(整数比較)。ℝ 不使用の有限 N 命題=選別(ii)最強・形式検証(F)に最も乗る。known 3(Φ∈Λ/第〇法則/Φ=S_AB−S_B)/unknown 4。候補 D-U1(Φ 漸化式=Λ関係), D-U3(β 単調性 整数比較 decide), D-U4(Φ=Σlog|q−root|, D×A 統合)。 |
 | 5 | explore:E_complexity_solvability | done | 2026-06-22 | `outputs/maps/E_complexity_solvability_map.md` + 候補。07 の複雑性×可解性 2×2 が土台。known 5(2D Ising poly×closed / SK #P×変分 / 3D Ising #P×none / 1D ランダム鎖 poly×none / #P×初等閉形式は空)/unknown 3。候補 E-U1(可積分模型のテーブル網羅配置=A-D の整理枠), E-U3(境界が poly→#P 反転=C の複雑性版)。所見: E は分類メタ。A-D の核は (poly,closed) セル=2D Ising 型に対応。単体新規性低、整理枠として効く。 |
 | 6 | explore:F_formal_verifiable | done | 2026-06-22 | `outputs/maps/F_formal_verifiable_map.md` + 候補。可算性の効用が土台: Λ 等号=素因数分解/ℚ̄=根分離 ⇒ decide/reflection・witness, RCA₀。known 4(Λ/ℚ̄ decidable, 逆数学 Big Five calibration, 第〇法則)/unknown 4。候補 F-U1(Lean decide 最小例=D 直結), F-U2(Lee–Yang 円・x_c の QQbar 証明書=A×B 結節), F-U4(有限 N 可積分は Λ/ℚ̄ decide のメタ定理=A-D 統一の総括)。所見: F は A-D に形式検証保証を与える横断方向。 |
-| 7 | rank:cycle0 | todo | | A–F 出揃ってから観察 → cycle 1 で深掘る Λ-statement の筋を根拠付きで選ぶ。成功条件。 |
+| 7 | rank:cycle0 | done | 2026-06-22 | `outputs/reports/cycle0_lambda_observation.md`。**横断観察: A-F が「有限・離散・可積分⇒全量 Λ/ℚ̄ で決定可能・形式検証可能, 相転移=ℝ脱出 N→∞ 一点」に収束**。high bucket: A-U1(零点 ℚ̄ witness), C-U3(Bethe 有限 N∈ℚ̄=最射程), D-U1(Φ 漸化=Λ), F-U2(QQbar 証明書), F-U1(Lean decide)。束 `finite_N_decidable` を cycle 1 方向に確定。**cycle 0 成功条件達成**。 |
+
+## cycle 1 step 列（finite_N_decidable 束の深掘り。方向確定後なので sagemath/Lean 投下可）
+
+| # | step | status | done日 | 観察メモ |
+|---|------|--------|--------|----------|
+| 1 | verify:A-U1_resolved_check | todo | | A(有限 N 零点∈ℚ̄ の厳密計算)がどこまで既出か文献確認。06「未踏」の精査。 |
+| 2 | sagemath:A-U1_ising_fisher_zeros_qqbar | todo | | 小 L Ising の Z_L(x)∈ℤ[x] を構築→QQbar で Fisher 零点を厳密計算・witness 化(F-U2)。 |
+| 3 | sagemath:C-U3_xxz_bethe_roots_qqbar | todo | | 小 N XXZ の Bethe 根を QQbar で厳密に解き ℚ̄ 帰属を確認。 |
+| 4 | sagemath:D-U1_phi_factorization | todo | | Φ_N=log Z_N(q) の素因数分解と Λ 漸化を小 N で確認。 |
+| 5 | lean:F-U1_decide_minimal | todo | | 第〇法則 or Φ 恒等式の Lean decide/reflection 最小例。 |
+| 6 | paper_plan:finite_N_decidable | todo | | survivor を `outputs/paper-plans/` に。A/B/C/D を自由フェルミ/vertex-face 対応で1本に束ねられるか。 |
+| 7 | rank:cycle1 | todo | | 深掘り結果で再ランク → cycle 2 方向（論文化 or 別束 or 撤退）。 |
 
 ## 逸脱ログ
 
