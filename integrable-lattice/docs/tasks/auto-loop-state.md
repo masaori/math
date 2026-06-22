@@ -28,7 +28,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 
 | # | step | status | done日 | 観察メモ |
 |---|------|--------|--------|----------|
-| 1 | verify:A-U1_resolved_check | todo | | A(有限 N 零点∈ℚ̄ の厳密計算)がどこまで既出か文献確認。06「未踏」の精査。 |
+| 1 | verify:A-U1_resolved_check | done | 2026-06-22 | `outputs/reports/cycle1_01_verify_A-U1_resolved.md`。**判定: A-U1 の数学内容は本質的に既知**（Z_N∈ℤ[x] と零点の厳密計算は標準: Kaufman/Beale, cond-mat/9707072, FOCS2017）。「整数多項式の根は代数的」は自明な再言。差分は数学新規性でなく**形式化・decide・witness(F)と逆数学 calibration**＝基礎論寄与。含意: A 単体は新規性薄。残る価値候補は C-U3(Bethe, 非自明)/D-U2(数論的)/F(形式検証)。**束全体の筋に関わるため深掘り投資前にユーザー判断要**。 |
 | 2 | sagemath:A-U1_ising_fisher_zeros_qqbar | todo | | 小 L Ising の Z_L(x)∈ℤ[x] を構築→QQbar で Fisher 零点を厳密計算・witness 化(F-U2)。 |
 | 3 | sagemath:C-U3_xxz_bethe_roots_qqbar | todo | | 小 N XXZ の Bethe 根を QQbar で厳密に解き ℚ̄ 帰属を確認。 |
 | 4 | sagemath:D-U1_phi_factorization | todo | | Φ_N=log Z_N(q) の素因数分解と Λ 漸化を小 N で確認。 |
