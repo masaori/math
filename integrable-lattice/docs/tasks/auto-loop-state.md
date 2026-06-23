@@ -33,9 +33,21 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | 2 | sagemath:C-U3_bethe_roots_qqbar（未解決模型で） | done | 2026-06-23 | `sagemath/check/C-U3_bethe_qqbar/`（SageMath 10.6 実行済み）。XXZ 鎖(相互作用可積分, 極限相関は未解決)で Δ∈{1/2,2,−1/3}・N=2,3,4 の全固有値が QQbar に住み最小多項式 witness をもつ（厳密, ℝ 不使用）を実証。例 N=3,Δ=1/2: charpoly=(x−7/2)²(x−3/2)²(x+5/2)⁴。要点は構造的分離(有限 N=決定可能/ℝ脱出は極限のみ)。小 N では固有値次数 1〜2（正直）。 |
 | 3 | sagemath:D_phi_factorization（未解決模型で） | done | 2026-06-23 | `sagemath/check/D_phi_lambda/`（実行済）。六頂点 R 行列モノドロミーで転送行列 T(整数重み⇒整数行列)を構成、Z_{N,L}=Tr T^N∈ℤ、Φ_N=log Z_N∈Λ を厳密計算。**非自明な数論構造(D-U2)**: (1,1,2)L=2 で v₂(Z_N)=N+2(2進付値が線形成長)。Z_N=Σλ_i^N で整数線形漸化(D-U1)。極限は未解決だが有限 N の Φ は Λ で完全に閉じる。 |
 | 4 | apply:finite_N_qqbar_to_chiral_potts_or_higher_rank | done | 2026-06-23 | `sagemath/check/apply_higher_spin_qqbar/`（実行済）。高スピン可積分=スピン1 Babujian–Takhtajan 鎖(六頂点の高スピン版, 極限は Haldane ギャップ等で非自明)で有限 N スペクトル∈QQbar を実証。N=2,3 有理, **N=4 で次数2の代数的固有値出現**(最小多項式 witness)。構造的分離が高スピンでも保持(C-U3 射程確認)。カイラル Potts τ^(2) 直接は未着手(高スピンで本命性は実証)。 |
-| 5 | lean:F-U1_decide_minimal | todo | | 第〇法則 or Φ 恒等式の Lean decide/reflection 最小例。 |
-| 6 | paper_plan:finite_N_decidable_unsolved | todo | | survivor を `outputs/paper-plans/` に。未解決模型での「有限 N 可算決定可能 vs 極限未解決」を軸に。 |
-| 7 | rank:cycle1 | todo | | 深掘り結果で再ランク → cycle 2 方向。 |
+| 5 | lean:F-U1_decide_minimal | blocked(env) | 2026-06-23 | `outputs/reports/cycle1_05_formal_verification_spec.md`。**Lean 未インストール**で実行不可（環境制約, 判断停止ではない）。決定手続きの中身(Λ=整数比較/ℚ̄=根分離)は SageMath で実証済み。Lean ターゲット仕様(P1 第〇法則/P2 Φ 等式/P3 零点 ℚ̄)を確定、環境導入後そのまま実装。 |
+| 6 | paper_plan:finite_N_decidable_unsolved | done | 2026-06-23 | `outputs/paper-plans/001_finite_N_decidable_unsolved.md`。テーゼ「可積分だが極限未解決な模型で有限 N 量は Λ/ℚ̄ 決定可能・witness・ℝ脱出は極限一点」。検証済み(XXZ/六頂点/スピン1 BT)を worked examples に。正直な位置づけ=基礎論・形式検証寄与(可積分の新定理ではない)。昇格条件=分離定理の厳密命題化＋(カイラル Potts 直撃 or v_p 一般則)。 |
+| 7 | rank:cycle1 | done | 2026-06-23 | 下記「cycle 1 総括」。survivor=C-U3/D(実証済), F(仕様確定/Lean ブロック), A は薄い。cycle 2 方向候補を提示。**ユーザー判断点**: 基礎論寄与に価値を置くか／カイラル Potts 直撃に投資するか。 |
+
+## cycle 1 総括（rank:cycle1, 2026-06-23）
+
+- **検証で確立**: 「可積分だが極限未解決な模型で、有限 N 量(スペクトル・Φ・零点)は Λ/ℚ̄ で決定可能・witness 付き、ℝ脱出は N→∞ 一点」を SageMath で実証（XXZ, 六頂点 Φ の数論構造, スピン1 BT）。paper-plan 001 化。
+- **survivor**: C-U3(実証), D(実証, D-U2 数論構造が非自明), F(決定手続き実証/Lean は環境ブロック・仕様確定)。A は薄い(数学内容既知)。B は A と同型。
+- **正直な評価**: 成果は**基礎論・形式検証・構造的 calibration の寄与**で、「可積分模型の新しい厳密解」ではない。可解性(極限閉形式)は前進していない。
+- **cycle 2 方向候補（ユーザー判断点）**:
+  1. 基礎論寄与として磨く（分離定理の厳密命題化＋Lean 実装）→ foundations 論文。
+  2. カイラル Potts τ^(2) 直撃（本命模型で有限 N∈ℚ̄ を直接、極限未解決との対比を鋭く）。
+  3. D-U2 の数論的構造（v_p(Z_N) の N 依存則）を定理化（新規性がありそうな唯一の「数学」方向）。
+  4. 撤退/別路線（Λ 収集が基礎論再框に寄りがちなら）。
+- → **ここで停止しユーザー判断を仰ぐ**（基礎論寄与に価値を置くか等は研究方針＝ユーザー固有の価値判断。自律実行ルールの例外）。
 
 ## 逸脱ログ
 
