@@ -1,5 +1,13 @@
 # MEMORY
 
+## テーマ3トラック化（2026-06-24, ユーザー合意。正典 `docs/themes.md`）
+
+- **T1 Reframe（本流）**: 理論物理の既知結果を可算（Λ/ℚ̄）で厳密化・自動証明可能化。D-U2 等。「既知の再框」は first-class 成果。
+- **T2 Solve**: 未解決模型の実際の厳密解（カタログ `outputs/maps/integrable_unsolved_catalog.md`）。
+- **T3 Pure（追加）**: 道具(Λ,ℚ̄,p進,決定可能性,逆数学,形式検証)が効く基礎論・数論の未解決問題。
+- 2本立て(T1,T2)主軸＋T3 随時。共通土台＝梯子＋四軸＋選別 (i)-(iv)（`lambda-statement-program.md`）。cycle 3 step 列は state 参照。
+- **ℝ/Λ 双対**（D-U2 で発見: 同じ固有値集合の絶対値↔ℝ側自由エネルギー / p 進付値↔Λ側 Φ 数論）はユーザー依頼で root `docs/research/R-Lambda-duality/` に切り出し（別セッションで深掘り）。
+
 ## 収集対象の再定義（2026-06-21, ユーザー合意）
 
 - 集める statement = **「Λ/ℚ̄ で決定可能・ℝ脱出隔離・形式検証可能」**。整理軸は決定可能性の梯子（ℕ⊂ℚ⊂Λ⊂ℚ̄ ⊂ ℝ）＋四軸（帰属／計算可能性／複雑性／可解性）。定義 `inputs/seeds/lambda-statement-program.md`、土台 `docs/discussion/対数順序群上の統計力学/`。

@@ -4,7 +4,8 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
-current_cycle: 2            # cycle 0,1 完了。cycle 2 = D-U2 数論(v_p(Z_N) の N 依存則)を定理候補化。
+current_cycle: 3            # cycle 0-2 完了。2026-06-24 ユーザーが3トラック(docs/themes.md)へ再スコープ。cycle 3 以降はトラック明記。
+# 3トラック: 1 Reframe(本流) / 2 Solve(未解決模型の実厳密解) / 3 Pure(基礎論・数論)。2本立て(1,2)主軸 + 3 随時。
 last_run: 2026-06-21
 cron_armed: 2026-06-21       # session-only, 7日で失効
 restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。削除コミット c7fe283。
@@ -48,6 +49,18 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
   3. **方針転換**: 「可算で再框」でなく、未解決模型の**実際の厳密解**（自由エネルギー/相関）に正面から挑む別プロジェクト設計。
   4. 撤退/凍結。
 - → **停止しユーザー判断を仰ぐ**（自律実行ルールの価値判断例外）。私見: これまでの方向は基礎論寄与どまりで「新しい数学」に届きにくい。3 か、テーマ自体の再設定が要ると考える。
+
+## cycle 3 step 列（3トラック再スコープ後。2026-06-24 起こし）
+
+ユーザー再スコープ（`docs/themes.md`）を受け、2本立て(T1,T2)＋T3 で進める。各 step にトラックを明記。
+別途、ℝ/Λ 双対はユーザー依頼で root `docs/research/R-Lambda-duality/` に切り出し（深掘り・別セッション質問用）。
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | formalize:D-U2_rigorous | todo | | D-U2 定理候補を厳密命題化（周期上界・特殊素数 p|q・ℝ/Λ 双対）。可能なら SageMath で周期上界を検証。 |
+| 2 | T2 Solve | sagemath:chiral_potts_tau2_spectrum_qqbar | todo | | カイラル Potts τ^(2)（本命）の小サイズ転送行列/スペクトルを ℚ̄ で直接。極限未解決への足場。 |
+| 3 | T3 Pure | padic_recurrence_period_bound | todo | | 線形漸化列の p 進付値の周期上界（D-U2 派生の pure-math 問題）を文献確認＋小実験で命題化。 |
+| 4 | — | rank:cycle3 | todo | | 各トラックの前進を再ランク → cycle 4 方向。 |
 
 ## cycle 2 step 列（D-U2 数論を主・Potts を従。2026-06-24 起こし）
 
