@@ -37,6 +37,18 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | 6 | paper_plan:finite_N_decidable_unsolved | done | 2026-06-23 | `outputs/paper-plans/001_finite_N_decidable_unsolved.md`。テーゼ「可積分だが極限未解決な模型で有限 N 量は Λ/ℚ̄ 決定可能・witness・ℝ脱出は極限一点」。検証済み(XXZ/六頂点/スピン1 BT)を worked examples に。正直な位置づけ=基礎論・形式検証寄与(可積分の新定理ではない)。昇格条件=分離定理の厳密命題化＋(カイラル Potts 直撃 or v_p 一般則)。 |
 | 7 | rank:cycle1 | done | 2026-06-23 | 下記「cycle 1 総括」。survivor=C-U3/D(実証済), F(仕様確定/Lean ブロック), A は薄い。cycle 2 方向候補を提示。**ユーザー判断点**: 基礎論寄与に価値を置くか／カイラル Potts 直撃に投資するか。 |
 
+## cycle 2 総括（rank:cycle2, 2026-06-24）
+
+- **成果**: 定理候補 D-U2「整数転送行列の Massieu Φ_N の ℓ_p 係数 v_p(Z_N)=μ_min(p)N+最終周期(SML 例外), μ_min=p 進 Newton 多角形」を SageMath で検証（六頂点・Potts で族横断, ℝ/Λ 双対 λ_max↔μ_min を発見）。
+- **正直な評価**: これは **既知の p 進線形漸化理論を可積分 Φ に適用した構造的定理**で、可積分模型の新厳密解ではない。新規性は適用・Newton 多角形公式・族横断・双対の明示にとどまり、SML 例外で完全閉形式はない。paper_potential low-medium。
+- **A-F/cycle0-2 を通した正直な総括**: Λ-statement 収集は一貫して「**既知の数学（代数性・p 進付値・決定可能性）を可算の言葉で再框・適用**」に流れ、**可積分模型の新しい数学的結果は出ていない**。価値があるとすれば基礎論・形式検証の calibration 寄与。
+- **cycle 3 方向候補（ユーザー判断点。研究方針＝価値判断）**:
+  1. D-U2 を基礎論/数論ノートとして厳密化（周期上界・特殊素数 p|q・双対の命題化）。
+  2. カイラル Potts τ^(2) 直撃（本命未着手, 高種数で非自明だが極めて重い）。
+  3. **方針転換**: 「可算で再框」でなく、未解決模型の**実際の厳密解**（自由エネルギー/相関）に正面から挑む別プロジェクト設計。
+  4. 撤退/凍結。
+- → **停止しユーザー判断を仰ぐ**（自律実行ルールの価値判断例外）。私見: これまでの方向は基礎論寄与どまりで「新しい数学」に届きにくい。3 か、テーマ自体の再設定が要ると考える。
+
 ## cycle 2 step 列（D-U2 数論を主・Potts を従。2026-06-24 起こし）
 
 cycle 1 総括の推奨どおり、ユーザー再発火（方向指定なし）を「推奨方向で進めよ」と解釈して起こした。
@@ -47,8 +59,8 @@ cycle 1 総括の推奨どおり、ユーザー再発火（方向指定なし）
 | 1 | sagemath:D-U2_padic_valuation_law | done | 2026-06-24 | `sagemath/check/D-U2_padic_law/`（実行済）。六頂点 v_p(Z_N) は三型: 恒0/末尾線形/周期。例 v_2(Z_N)=N+2,N+3。**固有値の p 進 Newton 多角形で説明**（Z_N=Σλ_i^N, 例 (1,1,2)L2 固有値 6,−2,2,2）。双対性発見: ℝ側自由エネルギー=log λ_max(絶対値最大), Λ側 Φ 数論構造=最小 p 進付値固有値。 |
 | 2 | analyze:eigenvalue_padic_link | done | 2026-06-24 | `sagemath/check/D-U2_padic_law/eigenvalue_link.*`。予想 v_p(Z_N)=μ_min(p)·N + r_p(N)(r_p 最終周期)を検証。大半成立(例 v_2=N+2)。**1例((1,1,1)L2,p=7)で周期検出失敗＝SML(Skolem-Mahler-Lech)スパイク**。正直な位置づけ: 既知の p 進線形漸化理論の可積分 Φ への適用。新規性は (a)適用 (b)ℝ側 log λ_max / Λ側 最小付値固有値の双対。厳密定理化には SML 例外の caveat 要。 |
 | 3 | sagemath:potts_phi_structure（従） | done | 2026-06-24 | `sagemath/check/potts_phi/`（実行済）。3-状態 Potts 転送行列でも Z_N∈ℤ, Φ_N∈Λ, v_p 則(μ_min·N+最終周期)成立。**普遍性確認(六頂点固有でない)**。正直な caveat: 早期 SML スパイク＋特殊素数 p|q(状態数)で周期増大(検出器が過小報告、手検証で最終周期確認)。カイラル Potts τ^(2) 直接は未(3-Potts で族横断性は実証)。 |
-| 4 | theorem_candidate:vp_law | todo | | v_p(Z_{N,L}) の N 依存則を定理候補として `outputs/candidates/` に明文化。 |
-| 5 | rank:cycle2 | todo | | 再ランク → cycle 3 方向。 |
+| 4 | theorem_candidate:vp_law | done | 2026-06-24 | `outputs/candidates/D-U2_vp_law_theorem_candidate.md`。定理候補「v_p(Z_N)=μ_min(p)N+r_p(N)(最終周期, SML 例外), μ_min=charpoly の p 進 Newton 多角形最小傾き」。ℝ/Λ 双対(λ_max↔μ_min)明示。正直: 既知 p 進線形漸化理論の可積分 Φ への適用＝構造的/適用的, 新厳密解でない。paper_potential low-medium。 |
+| 5 | rank:cycle2 | done | 2026-06-24 | 下記「cycle 2 総括」。**ユーザー判断点**: 基礎論/数論的構造の方向(low-medium)を続けるか、別路線か。 |
 
 ## cycle 1 総括（rank:cycle1, 2026-06-23）
 
