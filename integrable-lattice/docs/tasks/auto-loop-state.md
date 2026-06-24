@@ -46,7 +46,7 @@ cycle 1 総括の推奨どおり、ユーザー再発火（方向指定なし）
 |---|------|--------|--------|----------|
 | 1 | sagemath:D-U2_padic_valuation_law | done | 2026-06-24 | `sagemath/check/D-U2_padic_law/`（実行済）。六頂点 v_p(Z_N) は三型: 恒0/末尾線形/周期。例 v_2(Z_N)=N+2,N+3。**固有値の p 進 Newton 多角形で説明**（Z_N=Σλ_i^N, 例 (1,1,2)L2 固有値 6,−2,2,2）。双対性発見: ℝ側自由エネルギー=log λ_max(絶対値最大), Λ側 Φ 数論構造=最小 p 進付値固有値。 |
 | 2 | analyze:eigenvalue_padic_link | done | 2026-06-24 | `sagemath/check/D-U2_padic_law/eigenvalue_link.*`。予想 v_p(Z_N)=μ_min(p)·N + r_p(N)(r_p 最終周期)を検証。大半成立(例 v_2=N+2)。**1例((1,1,1)L2,p=7)で周期検出失敗＝SML(Skolem-Mahler-Lech)スパイク**。正直な位置づけ: 既知の p 進線形漸化理論の可積分 Φ への適用。新規性は (a)適用 (b)ℝ側 log λ_max / Λ側 最小付値固有値の双対。厳密定理化には SML 例外の caveat 要。 |
-| 3 | sagemath:potts_phi_structure（従） | todo | | 3-状態 Potts / カイラル Potts τ^(2) の有限 N Φ 構造を確認（本命模型直撃）。 |
+| 3 | sagemath:potts_phi_structure（従） | done | 2026-06-24 | `sagemath/check/potts_phi/`（実行済）。3-状態 Potts 転送行列でも Z_N∈ℤ, Φ_N∈Λ, v_p 則(μ_min·N+最終周期)成立。**普遍性確認(六頂点固有でない)**。正直な caveat: 早期 SML スパイク＋特殊素数 p|q(状態数)で周期増大(検出器が過小報告、手検証で最終周期確認)。カイラル Potts τ^(2) 直接は未(3-Potts で族横断性は実証)。 |
 | 4 | theorem_candidate:vp_law | todo | | v_p(Z_{N,L}) の N 依存則を定理候補として `outputs/candidates/` に明文化。 |
 | 5 | rank:cycle2 | todo | | 再ランク → cycle 3 方向。 |
 
