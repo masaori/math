@@ -4,7 +4,7 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
-current_cycle: 1            # cycle 0(A-F 広い探索)完了。cycle 1 = finite_N_decidable 束の深掘り。
+current_cycle: 2            # cycle 0,1 完了。cycle 2 = D-U2 数論(v_p(Z_N) の N 依存則)を定理候補化。
 last_run: 2026-06-21
 cron_armed: 2026-06-21       # session-only, 7日で失効
 restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。削除コミット c7fe283。
@@ -36,6 +36,19 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | 5 | lean:F-U1_decide_minimal | blocked(env) | 2026-06-23 | `outputs/reports/cycle1_05_formal_verification_spec.md`。**Lean 未インストール**で実行不可（環境制約, 判断停止ではない）。決定手続きの中身(Λ=整数比較/ℚ̄=根分離)は SageMath で実証済み。Lean ターゲット仕様(P1 第〇法則/P2 Φ 等式/P3 零点 ℚ̄)を確定、環境導入後そのまま実装。 |
 | 6 | paper_plan:finite_N_decidable_unsolved | done | 2026-06-23 | `outputs/paper-plans/001_finite_N_decidable_unsolved.md`。テーゼ「可積分だが極限未解決な模型で有限 N 量は Λ/ℚ̄ 決定可能・witness・ℝ脱出は極限一点」。検証済み(XXZ/六頂点/スピン1 BT)を worked examples に。正直な位置づけ=基礎論・形式検証寄与(可積分の新定理ではない)。昇格条件=分離定理の厳密命題化＋(カイラル Potts 直撃 or v_p 一般則)。 |
 | 7 | rank:cycle1 | done | 2026-06-23 | 下記「cycle 1 総括」。survivor=C-U3/D(実証済), F(仕様確定/Lean ブロック), A は薄い。cycle 2 方向候補を提示。**ユーザー判断点**: 基礎論寄与に価値を置くか／カイラル Potts 直撃に投資するか。 |
+
+## cycle 2 step 列（D-U2 数論を主・Potts を従。2026-06-24 起こし）
+
+cycle 1 総括の推奨どおり、ユーザー再発火（方向指定なし）を「推奨方向で進めよ」と解釈して起こした。
+方向: Massieu Φ_N の数論的構造 $v_p(Z_{N,L})$ の N 依存則を定理候補化（新規性のある唯一の「数学」方向）。
+
+| # | step | status | done日 | 観察メモ |
+|---|------|--------|--------|----------|
+| 1 | sagemath:D-U2_padic_valuation_law | done | 2026-06-24 | `sagemath/check/D-U2_padic_law/`（実行済）。六頂点 v_p(Z_N) は三型: 恒0/末尾線形/周期。例 v_2(Z_N)=N+2,N+3。**固有値の p 進 Newton 多角形で説明**（Z_N=Σλ_i^N, 例 (1,1,2)L2 固有値 6,−2,2,2）。双対性発見: ℝ側自由エネルギー=log λ_max(絶対値最大), Λ側 Φ 数論構造=最小 p 進付値固有値。 |
+| 2 | analyze:eigenvalue_padic_link | todo | | v_p 則を固有値(Z_N=Σλ_i^N, 整数線形漸化)と結合し予想命題化。 |
+| 3 | sagemath:potts_phi_structure（従） | todo | | 3-状態 Potts / カイラル Potts τ^(2) の有限 N Φ 構造を確認（本命模型直撃）。 |
+| 4 | theorem_candidate:vp_law | todo | | v_p(Z_{N,L}) の N 依存則を定理候補として `outputs/candidates/` に明文化。 |
+| 5 | rank:cycle2 | todo | | 再ランク → cycle 3 方向。 |
 
 ## cycle 1 総括（rank:cycle1, 2026-06-23）
 
