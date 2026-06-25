@@ -57,7 +57,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T1 Reframe | formalize:D-U2_rigorous | todo | | D-U2 定理候補を厳密命題化（周期上界・特殊素数 p|q・ℝ/Λ 双対）。可能なら SageMath で周期上界を検証。 |
+| 1 | T1 Reframe | formalize:D-U2_rigorous | done | 2026-06-25 | `outputs/reports/cycle3_T1_D-U2_rigorous.md` + `sagemath/check/cycle3_T1_period_bound/`(全ケース True)。**命題 A(rigorous・決定可能)**: min(v_p(Z_N),k) は T^N mod p^k の最終周期 π(p,k) で最終周期(証明＋検証)。**命題 B**: 線形傾き μ_min=Newton 多角形(SML caveat)。形式検証: 命題 A は Z/p^k 有限計算⇒Lean decide 可・RCA₀・witness=(N_0,π,値表)。p|q は π 増大で説明。 |
 | 2 | T2 Solve | sagemath:chiral_potts_tau2_spectrum_qqbar | todo | | カイラル Potts τ^(2)（本命）の小サイズ転送行列/スペクトルを ℚ̄ で直接。極限未解決への足場。 |
 | 3 | T3 Pure | padic_recurrence_period_bound | todo | | 線形漸化列の p 進付値の周期上界（D-U2 派生の pure-math 問題）を文献確認＋小実験で命題化。 |
 | 4 | — | rank:cycle3 | todo | | 各トラックの前進を再ランク → cycle 4 方向。 |
