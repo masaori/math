@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 3 完了（2026-06-25, 3トラック並走）
+
+- **T1**: D-U2 厳密命題化 `outputs/reports/cycle3_T1_D-U2_rigorous.md`。命題 A（min(v_p(Z_N),k) は T^N mod p^k の周期 π で最終周期, 決定可能・Lean decide 可）＋命題 B（線形傾き=Newton 多角形）。`sagemath/check/cycle3_T1_period_bound/` 全例検証。
+- **T2**: 本命カイラル Potts（超可積分 ℤ_3）で有限 N スペクトル∈ℚ̄・全実・代数的（witness x²−6）。`sagemath/check/cycle3_T2_chiral_potts/`。
+- **T3**: 周期を Pisano/Wall 理論に接続。`outputs/candidates/T3_wall_type_period_candidate.md`。上界 π(p,k)|p^{k-1}π(p,1)（rigorous）、Wall 等式（一般未証明）が全テスト例成立 → 候補命題。
+- cycle 4 step 列（state）: T1 ℝ/Λ 双対命題化 / T2 有限 N→極限(Onsager) / T3 Wall 証明 or 反例。次発火で連続消化。
+
 ## テーマ3トラック化（2026-06-24, ユーザー合意。正典 `docs/themes.md`）
 
 - **T1 Reframe（本流）**: 理論物理の既知結果を可算（Λ/ℚ̄）で厳密化・自動証明可能化。D-U2 等。「既知の再框」は first-class 成果。

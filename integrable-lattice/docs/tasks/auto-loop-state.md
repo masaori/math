@@ -50,6 +50,23 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
   4. 撤退/凍結。
 - → **停止しユーザー判断を仰ぐ**（自律実行ルールの価値判断例外）。私見: これまでの方向は基礎論寄与どまりで「新しい数学」に届きにくい。3 か、テーマ自体の再設定が要ると考える。
 
+## cycle 3 総括（rank:cycle3, 2026-06-25）
+
+3トラックすべてで具体的前進（全 SageMath 検証付き）:
+- **T1 Reframe**: D-U2 を厳密命題化。**命題 A**（min(v_p(Z_N),k) は π(p,k) で最終周期, 決定可能・Lean decide 可・RCA₀, 証明＋全例検証）。命題 B（線形傾き=Newton 多角形, SML caveat）。
+- **T2 Solve**: 本命カイラル Potts（超可積分 ℤ_3）で有限 N スペクトル∈ℚ̄・全実・代数的（witness x²−6 等）を直接実証。「有限 N 決定可能/極限未解決」分離が本命で成立。
+- **T3 Pure**: D-U2 の周期を Pisano/Wall 理論に接続。上界 π(p,k)|p^{k-1}π(p,1)（rigorous）、Wall 等式（一般未証明予想）が全テスト例で成立 → 候補命題「整数転送行列で Wall 等式は常に成立か」。
+- 横断: T1 命題 A の周期を T3 が上から押さえ、T2 が本命模型での適用例 → 3トラックが D-U2 を核に連結。
+
+## cycle 4 step 列（3トラック継続。2026-06-25 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | reframe:R_Lambda_duality_proposition | todo | | ℝ/Λ 双対(λ_max↔μ_min)を命題形に。Mahler 測度/代数力学(Lind–Schmidt–Ward)との接続を文献確認し厳密化の足場。`docs/research/R-Lambda-duality/` と連携。 |
+| 2 | T2 Solve | chiral_potts_finite_N_to_limit | todo | | カイラル Potts 有限 N ℚ̄ スペクトルから極限(Onsager/TQ)へ。有限 N データで Onsager 代数構造・準位の√型を系統観察。 |
+| 3 | T3 Pure | wall_equality_attempt | todo | | Wall 等式の証明方針(固有値の mod p^k リフト)or 反例探索(p|det 系統)。π(p,1) の閉形(固有値順序 lcm)。 |
+| 4 | — | rank:cycle4 | todo | | 再ランク → cycle 5 方向。 |
+
 ## cycle 3 step 列（3トラック再スコープ後。2026-06-24 起こし）
 
 ユーザー再スコープ（`docs/themes.md`）を受け、2本立て(T1,T2)＋T3 で進める。各 step にトラックを明記。
@@ -59,8 +76,8 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | formalize:D-U2_rigorous | done | 2026-06-25 | `outputs/reports/cycle3_T1_D-U2_rigorous.md` + `sagemath/check/cycle3_T1_period_bound/`(全ケース True)。**命題 A(rigorous・決定可能)**: min(v_p(Z_N),k) は T^N mod p^k の最終周期 π(p,k) で最終周期(証明＋検証)。**命題 B**: 線形傾き μ_min=Newton 多角形(SML caveat)。形式検証: 命題 A は Z/p^k 有限計算⇒Lean decide 可・RCA₀・witness=(N_0,π,値表)。p|q は π 増大で説明。 |
 | 2 | T2 Solve | sagemath:chiral_potts_tau2_spectrum_qqbar | done | 2026-06-25 | `sagemath/check/cycle3_T2_chiral_potts/`(実行済)。本命 ℤ_3 超可積分カイラル Potts 鎖(係数 ℚ(ω))で有限 N スペクトル∈ℚ̄・全実・次数2(witness 例 x²−6=±√6, Onsager 的構造と整合), N=3 で次数4も。「有限 N=可算決定可能/極限=未解決」が**本命模型で直接成立**(T2 足場)。一般カイラル Potts(高種数)は未。 |
-| 3 | T3 Pure | padic_recurrence_period_bound | todo | | 線形漸化列の p 進付値の周期上界（D-U2 派生の pure-math 問題）を文献確認＋小実験で命題化。 |
-| 4 | — | rank:cycle3 | todo | | 各トラックの前進を再ランク → cycle 4 方向。 |
+| 3 | T3 Pure | padic_recurrence_period_bound | done | 2026-06-25 | `outputs/candidates/T3_wall_type_period_candidate.md` + `sagemath/check/cycle3_T3_period/`。**既知 rigorous 上界 π(p,k)|p^{k-1}π(p,1)**(Pisano 理論)で D-U2 命題 A の周期を押さえた。等号(Wall–Sun–Sun 型, 一般は未証明予想)は全テスト例で成立 → 候補命題「整数転送行列で Wall 等式が常に成立か」(証明 or 反例)。正直: 既知難問への構造付き接続。 |
+| 4 | — | rank:cycle3 | done | 2026-06-25 | 下記「cycle 3 総括」。T1/T2/T3 各前進。**ユーザー判断点**: cycle 4 で(T2 一般カイラル Potts の極限/T1 Lean 実装/T3 Wall 証明)のどれを主にするか。 |
 
 ## cycle 2 step 列（D-U2 数論を主・Potts を従。2026-06-24 起こし）
 
