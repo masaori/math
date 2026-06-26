@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 4 完了（2026-06-26, 3トラック並走）
+
+- **T1**: ℝ/Λ 双対を Mahler 測度で命題化 `outputs/reports/cycle4_T1_R_Lambda_mahler.md`。ℝ側=自由エネルギー=log m(P)(既知, Ising で楕円曲線/L 函数)。Λ側=同 P の p 進 Mahler(予想)。研究ノート `docs/research/R-Lambda-duality/` 更新。
+- **T2**: カイラル Potts スペクトルの Onsager/多重2次体構造を有限 N 観察(全2冪次数・全実・少数√, λ=1/2 で ℚ(√33,√57) 安定)。`sagemath/check/cycle3_T2_chiral_potts/onsager_*`。
+- **T3**: Wall 等式は一般には不成立(退化+Pell p=13 で破れ)。rigorous 上界は不変。可積分での成立は退化交絡で未確定。`sagemath/check/cycle3_T3_period/wall_search*`。
+- cycle 5 step 列(state): T1 スペクトル曲線 m(P) 両素点実証 / T2 √集合 N 依存則 / T3 非退化 Wall 比較。
+
 ## cycle 3 完了（2026-06-25, 3トラック並走）
 
 - **T1**: D-U2 厳密命題化 `outputs/reports/cycle3_T1_D-U2_rigorous.md`。命題 A（min(v_p(Z_N),k) は T^N mod p^k の周期 π で最終周期, 決定可能・Lean decide 可）＋命題 B（線形傾き=Newton 多角形）。`sagemath/check/cycle3_T1_period_bound/` 全例検証。

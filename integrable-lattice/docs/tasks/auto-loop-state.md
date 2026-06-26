@@ -58,14 +58,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure**: D-U2 の周期を Pisano/Wall 理論に接続。上界 π(p,k)|p^{k-1}π(p,1)（rigorous）、Wall 等式（一般未証明予想）が全テスト例で成立 → 候補命題「整数転送行列で Wall 等式は常に成立か」。
 - 横断: T1 命題 A の周期を T3 が上から押さえ、T2 が本命模型での適用例 → 3トラックが D-U2 を核に連結。
 
+## cycle 4 総括（rank:cycle4, 2026-06-26）
+
+- **T1 Reframe**: ℝ/Λ 双対を **Mahler 測度**で命題化。ℝ側=自由エネルギー=log m(P)(スペクトル曲線 P=det(wI−T(z)), **既知・深い**: Ising で楕円曲線/L 函数 arXiv:2407.19531, LSW)。Λ側=有限 N v_p=同 P の p 進 Mahler(予想, 命題 A は厳密)。`outputs/reports/cycle4_T1_R_Lambda_mahler.md`, 研究ノート更新。
+- **T2 Solve**: カイラル Potts スペクトルの **Onsager/多重2次体構造**を有限 N 観察（全2冪次数・全実・少数の√生成, λ=1/2 で ℚ(√33,√57) 安定）。極限フェルミオン準位への橋。
+- **T3 Pure**: Wall 等式 反例探索 → **一般には不成立**（退化＋Pell p=13 非退化候補で破れ）。rigorous 上界 π(p,k)|p^{k-1}π(p,1) は不変。可積分での成立は退化交絡で未確定。
+- 横断: 3トラックとも「有限 N=ℚ̄/Λ 決定可能 / 極限・大域=深い既知数論(Mahler 測度・L 函数・Wall)」の対比を深めた。本流 Reframe が Mahler 測度という深い既知理論に接続。
+
+## cycle 5 step 列（3トラック継続。2026-06-26 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | spectral_curve_mahler_both_places | todo | | 六頂点/dimer のスペクトル曲線 P(z,w)∈ℤ[z±,w] を明示し、m(P)(ℝ, 数値)と v_p(Λ)を同一 P から計算して双対を実証。p 進 Mahler 測度(Besser–Deninger)文献精査。 |
+| 2 | T2 Solve | chiral_potts_sqrt_set_N_law | todo | | カイラル Potts の√集合 α_k(N) の N 依存則を定式化(Onsager 準位の代数記述)。判別式とλの関係。 |
+| 3 | T3 Pure | wall_nondegenerate_comparison | todo | | 非退化(固有値が1の冪根でない)に限定し可積分 vs 一般で Wall 破れ率比較。Pell p=13 確認。π(p,1)閉形。 |
+| 4 | — | rank:cycle5 | todo | | 再ランク → cycle 6 方向。 |
+
 ## cycle 4 step 列（3トラック継続。2026-06-25 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | reframe:R_Lambda_duality_proposition | done | 2026-06-26 | `outputs/reports/cycle4_T1_R_Lambda_mahler.md` + 研究ノート更新。ℝ/Λ 双対を **Mahler 測度**で命題化。スペクトル曲線 P(z,w)=det(wI−T(z))∈ℤ[z±,w]。ℝ側=自由エネルギー=log m(P)(アルキメデス Mahler, **既知・深い**: Ising で arXiv:2407.19531=楕円曲線/L 函数, LSW)。Λ側=有限 N の v_p 構造=同じ P の p 進 Mahler(**予想**, 命題 A は厳密)。確立/予想を明示分離。 |
 | 2 | T2 Solve | chiral_potts_finite_N_to_limit | done | 2026-06-26 | `sagemath/check/cycle3_T2_chiral_potts/onsager_*`（実行済）。カイラル Potts スペクトルは**全2冪次数・全実・少数の√で生成(多重2次体)**=Onsager/自由フェルミ構造の有限 N 足跡。λ=1/2 で√中身{33/4,57/4}が N=2,3 安定→splitting 体 ℚ(√33,√57)。準位 E=A±Σ√α_k 型。極限フェルミオン準位への橋。N≥4 は QQbar 計算重(背景 exit144)→小 N で構造明瞭。 |
-| 3 | T3 Pure | wall_equality_attempt | todo | | Wall 等式の証明方針(固有値の mod p^k リフト)or 反例探索(p|det 系統)。π(p,1) の閉形(固有値順序 lcm)。 |
-| 4 | — | rank:cycle4 | todo | | 再ランク → cycle 5 方向。 |
+| 3 | T3 Pure | wall_equality_attempt | done | 2026-06-26 | `sagemath/check/cycle3_T3_period/wall_search*`。反例探索: 一般 companion で Wall 破れ18件(大半は退化=1の冪根/unipotent, ただし x²−2x−1 Pell p=13 は非退化候補), 六頂点で0件。**結論修正: Wall 等式は一般には不成立**(rigorous 上界 π(p,k)|p^{k-1}π(p,1) は不変)。「可積分性が保証」は退化交絡で未確定→非退化限定の系統比較が要(cycle5)。候補ドキュメント更新。 |
+| 4 | — | rank:cycle4 | done | 2026-06-26 | 下記「cycle 4 総括」。T1(Mahler 命題化)/T2(Onsager 構造)/T3(Wall は一般不成立, 上界は不変)。cycle 5 step 列起こし。 |
 
 ## cycle 3 step 列（3トラック再スコープ後。2026-06-24 起こし）
 
