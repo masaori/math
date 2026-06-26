@@ -63,7 +63,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | reframe:R_Lambda_duality_proposition | done | 2026-06-26 | `outputs/reports/cycle4_T1_R_Lambda_mahler.md` + 研究ノート更新。ℝ/Λ 双対を **Mahler 測度**で命題化。スペクトル曲線 P(z,w)=det(wI−T(z))∈ℤ[z±,w]。ℝ側=自由エネルギー=log m(P)(アルキメデス Mahler, **既知・深い**: Ising で arXiv:2407.19531=楕円曲線/L 函数, LSW)。Λ側=有限 N の v_p 構造=同じ P の p 進 Mahler(**予想**, 命題 A は厳密)。確立/予想を明示分離。 |
-| 2 | T2 Solve | chiral_potts_finite_N_to_limit | todo | | カイラル Potts 有限 N ℚ̄ スペクトルから極限(Onsager/TQ)へ。有限 N データで Onsager 代数構造・準位の√型を系統観察。 |
+| 2 | T2 Solve | chiral_potts_finite_N_to_limit | done | 2026-06-26 | `sagemath/check/cycle3_T2_chiral_potts/onsager_*`（実行済）。カイラル Potts スペクトルは**全2冪次数・全実・少数の√で生成(多重2次体)**=Onsager/自由フェルミ構造の有限 N 足跡。λ=1/2 で√中身{33/4,57/4}が N=2,3 安定→splitting 体 ℚ(√33,√57)。準位 E=A±Σ√α_k 型。極限フェルミオン準位への橋。N≥4 は QQbar 計算重(背景 exit144)→小 N で構造明瞭。 |
 | 3 | T3 Pure | wall_equality_attempt | todo | | Wall 等式の証明方針(固有値の mod p^k リフト)or 反例探索(p|det 系統)。π(p,1) の閉形(固有値順序 lcm)。 |
 | 4 | — | rank:cycle4 | todo | | 再ランク → cycle 5 方向。 |
 
