@@ -69,7 +69,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T1 Reframe | spectral_curve_mahler_both_places | todo | | 六頂点/dimer のスペクトル曲線 P(z,w)∈ℤ[z±,w] を明示し、m(P)(ℝ, 数値)と v_p(Λ)を同一 P から計算して双対を実証。p 進 Mahler 測度(Besser–Deninger)文献精査。 |
+| 1 | T1 Reframe | spectral_curve_mahler_both_places | done | 2026-06-27 | `sagemath/check/cycle5_T1_mahler/`(実行済)。**ℝ/Λ 双対の最小・厳密実証**: 同一 P=5−(z+1/z)−(w+1/w) の周期点数 a_L=Π_{z^L=w^L=1}P∈ℤ(LSW)で、(1/L²)log a_L→log m(P)=1.50798(ℝ/Mahler/自由エネルギー)と、同じ a_L の素因数分解=Φ_L∈Λ(Λ側)。同一整数多項式から両素点。p 進 Mahler(Besser–Deninger)厳密同定は cycle6+。 |
 | 2 | T2 Solve | chiral_potts_sqrt_set_N_law | todo | | カイラル Potts の√集合 α_k(N) の N 依存則を定式化(Onsager 準位の代数記述)。判別式とλの関係。 |
 | 3 | T3 Pure | wall_nondegenerate_comparison | todo | | 非退化(固有値が1の冪根でない)に限定し可積分 vs 一般で Wall 破れ率比較。Pell p=13 確認。π(p,1)閉形。 |
 | 4 | — | rank:cycle5 | todo | | 再ランク → cycle 6 方向。 |
