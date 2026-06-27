@@ -70,7 +70,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | spectral_curve_mahler_both_places | done | 2026-06-27 | `sagemath/check/cycle5_T1_mahler/`(実行済)。**ℝ/Λ 双対の最小・厳密実証**: 同一 P=5−(z+1/z)−(w+1/w) の周期点数 a_L=Π_{z^L=w^L=1}P∈ℤ(LSW)で、(1/L²)log a_L→log m(P)=1.50798(ℝ/Mahler/自由エネルギー)と、同じ a_L の素因数分解=Φ_L∈Λ(Λ側)。同一整数多項式から両素点。p 進 Mahler(Besser–Deninger)厳密同定は cycle6+。 |
-| 2 | T2 Solve | chiral_potts_sqrt_set_N_law | todo | | カイラル Potts の√集合 α_k(N) の N 依存則を定式化(Onsager 準位の代数記述)。判別式とλの関係。 |
+| 2 | T2 Solve | chiral_potts_sqrt_set_N_law | done | 2026-06-27 | `sagemath/check/cycle3_T2_chiral_potts/sqrt_set_*`(N=2..5, CyclotomicField 高速化)。**重要な自己訂正**: charpoly ℚ 因数分解で N=4,5 に次数3,6,16 の非2冪因子出現 ⇒ スペクトルは**純粋多重2次体(Onsager 自由フェルミ)ではない**。cycle4 の「Onsager 構造」は小 N 早合点で**撤回**(一般 λ は超可積分点でない)。robust に残るのは「有限 N∈ℚ̄・決定可能」のみ。2次部分の√中身は安定(λ=1/2:{33,57} N=2..5 不変)だが部分構造。Onsager 主張は真の超可積分点で再検証要(cycle6)。 |
 | 3 | T3 Pure | wall_nondegenerate_comparison | todo | | 非退化(固有値が1の冪根でない)に限定し可積分 vs 一般で Wall 破れ率比較。Pell p=13 確認。π(p,1)閉形。 |
 | 4 | — | rank:cycle5 | todo | | 再ランク → cycle 6 方向。 |
 

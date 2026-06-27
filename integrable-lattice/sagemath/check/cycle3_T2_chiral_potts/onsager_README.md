@@ -1,5 +1,7 @@
 # cycle 4 / T2: カイラル Potts 有限 N スペクトルの Onsager 構造
 
+> **⚠️ cycle 5 で自己訂正**: 本ノートの「全2冪次数＝Onsager 多重2次体」は **N=2,3 のみの早合点**。N=4,5 で次数3,6,16 等の非2冪因子が出現し、純粋多重2次体ではない。詳細・訂正は `sqrt_set_README.md`。robust に残るのは「有限 N スペクトル∈ℚ̄・決定可能」のみ。
+
 スクリプト `onsager_structure.sage`、出力 `onsager_structure.out`（SageMath 10.6, N=2,3）。
 
 ## 観察（厳密, ℚ̄）
