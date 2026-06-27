@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 5 完了（2026-06-27, 3トラック並走）
+
+- **T1（大成果）**: ℝ/Λ 双対を最小・厳密に実証。`sagemath/check/cycle5_T1_mahler/`。同一 P の周期点数 a_L∈ℤ で (1/L²)log a_L→log m(P)(ℝ)と a_L 素因数分解=Φ_L∈Λ(Λ)。
+- **T2（自己訂正）**: cycle4 の「カイラル Potts=Onsager 多重2次体」撤回（N=4,5 で非2冪因子, 一般 λ は超可積分点でない）。robust は有限 N∈ℚ̄ のみ。`sqrt_set_*`。
+- **T3（統計的に正直）**: Wall は非退化でも一般不成立（Pell p=13 確定）。六頂点 0/43 は有意でない→可積分の効果未確定。`wall_nondegenerate_*`。
+- cycle6 step列: T1 p 進 Mahler 同定 / T2 真の超可積分点で再検証 / T3 Wall 大規模統計。
+
 ## cycle 4 完了（2026-06-26, 3トラック並走）
 
 - **T1**: ℝ/Λ 双対を Mahler 測度で命題化 `outputs/reports/cycle4_T1_R_Lambda_mahler.md`。ℝ側=自由エネルギー=log m(P)(既知, Ising で楕円曲線/L 函数)。Λ側=同 P の p 進 Mahler(予想)。研究ノート `docs/research/R-Lambda-duality/` 更新。

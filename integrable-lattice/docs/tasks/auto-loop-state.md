@@ -65,14 +65,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure**: Wall 等式 反例探索 → **一般には不成立**（退化＋Pell p=13 非退化候補で破れ）。rigorous 上界 π(p,k)|p^{k-1}π(p,1) は不変。可積分での成立は退化交絡で未確定。
 - 横断: 3トラックとも「有限 N=ℚ̄/Λ 決定可能 / 極限・大域=深い既知数論(Mahler 測度・L 函数・Wall)」の対比を深めた。本流 Reframe が Mahler 測度という深い既知理論に接続。
 
+## cycle 5 総括（rank:cycle5, 2026-06-27）
+
+- **T1 Reframe（大きい前進）**: ℝ/Λ 双対を**最小・厳密に実証**。同一 P=5−(z+1/z)−(w+1/w) の周期点数 a_L∈ℤ(LSW)で (1/L²)log a_L→log m(P)=1.50798(ℝ/Mahler/自由エネルギー)と a_L 素因数分解=Φ_L∈Λ(Λ側)。同一整数多項式から両素点を実計算。
+- **T2 Solve（自己訂正）**: cycle4 の「カイラル Potts=Onsager 多重2次体」を**撤回**(N=4,5 で次数3,6,16 出現, 一般 λ は超可積分点でない)。robust は「有限 N∈ℚ̄・決定可能」のみ。
+- **T3 Pure（統計的に正直）**: Wall 等式は非退化でも一般不成立(一般 2.1%, Pell p=13 確定)。六頂点 0/43 は**有意でない**(偶然 40%)→可積分の保護効果は**未確定**。rigorous 上界は不変。
+- 全体: T1 が最大成果(双対の具体・厳密実証)。T2/T3 は誠実な訂正・保留。「既知の深い数論(Mahler/LSW/Wall)に可算側から接続」という本流 Reframe の価値は維持。
+
+## cycle 6 step 列（3トラック継続。2026-06-27 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | padic_mahler_identify | todo | | v_p(a_L) と P の p 進 Mahler 測度(Besser–Deninger)/p 進エントロピー の厳密同定を文献精査＋小計算で詰める(双対の Λ 側の証明)。 |
+| 2 | T2 Solve | superintegrable_point_recheck | todo | | 真の超可積分点(von Gehlen–Rittenberg の具体パラメータ)でカイラル Potts スペクトルを計算し Onsager/自由フェルミ(2冪次数)を再検証。 |
+| 3 | T3 Pure | wall_large_scale_stats | todo | | 六頂点 Wall 検査を数百件に大規模化し一般 2.1% と統計比較(有意差判定)。破れ素数の特徴づけ。 |
+| 4 | — | rank:cycle6 | todo | | 再ランク → cycle 7 方向。 |
+
 ## cycle 5 step 列（3トラック継続。2026-06-26 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | spectral_curve_mahler_both_places | done | 2026-06-27 | `sagemath/check/cycle5_T1_mahler/`(実行済)。**ℝ/Λ 双対の最小・厳密実証**: 同一 P=5−(z+1/z)−(w+1/w) の周期点数 a_L=Π_{z^L=w^L=1}P∈ℤ(LSW)で、(1/L²)log a_L→log m(P)=1.50798(ℝ/Mahler/自由エネルギー)と、同じ a_L の素因数分解=Φ_L∈Λ(Λ側)。同一整数多項式から両素点。p 進 Mahler(Besser–Deninger)厳密同定は cycle6+。 |
 | 2 | T2 Solve | chiral_potts_sqrt_set_N_law | done | 2026-06-27 | `sagemath/check/cycle3_T2_chiral_potts/sqrt_set_*`(N=2..5, CyclotomicField 高速化)。**重要な自己訂正**: charpoly ℚ 因数分解で N=4,5 に次数3,6,16 の非2冪因子出現 ⇒ スペクトルは**純粋多重2次体(Onsager 自由フェルミ)ではない**。cycle4 の「Onsager 構造」は小 N 早合点で**撤回**(一般 λ は超可積分点でない)。robust に残るのは「有限 N∈ℚ̄・決定可能」のみ。2次部分の√中身は安定(λ=1/2:{33,57} N=2..5 不変)だが部分構造。Onsager 主張は真の超可積分点で再検証要(cycle6)。 |
-| 3 | T3 Pure | wall_nondegenerate_comparison | todo | | 非退化(固有値が1の冪根でない)に限定し可積分 vs 一般で Wall 破れ率比較。Pell p=13 確認。π(p,1)閉形。 |
-| 4 | — | rank:cycle5 | todo | | 再ランク → cycle 6 方向。 |
+| 3 | T3 Pure | wall_nondegenerate_comparison | done | 2026-06-27 | `sagemath/check/cycle3_T3_period/wall_nondegenerate_*`。非退化限定: 一般 companion 10/472≈2.1% で Wall 破れ(Pell p=13 等, genuine)。六頂点 0/43。**統計的に正直**: 基準率2%なら43件中0件は偶然でも≈40%→**0/43 は有意でない, 可積分の保護効果は未確定**。確定: Wall は非退化でも一般不成立, rigorous 上界は不変。cycle6 で六頂点を大規模化し有意差判定。 |
+| 4 | — | rank:cycle5 | done | 2026-06-27 | 下記「cycle 5 総括」。T1(双対 最小実証=大成果)/T2(Onsager 主張撤回, 有限 N∈ℚ̄ は不変)/T3(Wall 一般不成立, 可積分効果は標本不足で未確定)。cycle6 step列起こし。 |
 
 ## cycle 4 step 列（3トラック継続。2026-06-25 起こし）
 
