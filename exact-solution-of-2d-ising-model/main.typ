@@ -202,6 +202,7 @@
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ"
+#include "parts/008_T_V1_hatZとhatZ_hatYの関係/043_claim_臨界条件_c1_eq_s1c2.typ"
 
 (次回 0531)
 - $gamma_(theta_mu)$を求める
