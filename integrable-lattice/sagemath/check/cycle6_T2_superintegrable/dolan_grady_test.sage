@@ -1,0 +1,63 @@
+# cycle 6 / T2: 私の chiral Potts H=H0+λH1 が超可積分(Onsager 代数)かを
+# Dolan–Grady 関係で決定的にテスト:
+#   [H0,[H0,[H0,H1]]] = k^2 [H0,H1]  かつ  [H1,[H1,[H1,H0]]] = k^2 [H1,H0]
+# (定数 k は正規化依存)。満たせば Onsager/自由フェルミ構造確定。
+# H0 = -Σ_j Σ_{a=1,2} c_a X_j^a,  H1 = -Σ_j Σ_{a=1,2} c_a Z_j^a Z_{j+1}^{n-a},  c_a=(1-ω^{-a})^{-1}.
+
+K.<om>=CyclotomicField(3); n=3
+Z=matrix(K,[[1,0,0],[0,om,0],[0,0,om^2]])
+X=matrix(K,[[0,0,1],[1,0,0],[0,1,0]])
+I3=identity_matrix(K,3)
+def emb(op,i,N):
+    m=[op if k==i else I3 for k in range(N)]
+    M=m[0]
+    for k in range(1,N): M=M.tensor_product(m[k])
+    return M
+def H0H1(N):
+    c={a:(1-om^(-a))^(-1) for a in [1,2]}
+    Zi={i:emb(Z,i,N) for i in range(N)}; Xi={i:emb(X,i,N) for i in range(N)}
+    H0=matrix(K,3^N,3^N); H1=matrix(K,3^N,3^N)
+    for j in range(N):
+        jp=(j+1)%N
+        for a in [1,2]:
+            H0 += -c[a]*Xi[j]^a
+            H1 += -c[a]*Zi[j]^a*Zi[jp]^(n-a)
+    return H0,H1
+def comm(A,B): return A*B-B*A
+
+def proportional(M, Mref):
+    # M = k^2 * Mref か(スカラー比一定)を判定
+    # 非零成分で比を取り一定か
+    ratio=None
+    for i in range(M.nrows()):
+        for j in range(M.ncols()):
+            r=Mref[i,j]
+            if r!=0:
+                q=M[i,j]/r
+                if ratio is None: ratio=q
+                elif q!=ratio: return False,None
+            else:
+                if M[i,j]!=0: return False,None
+    return True,ratio
+
+print("="*70)
+print("Dolan–Grady / Onsager 関係テスト (chiral Potts H0,H1)")
+print("="*70)
+for N in [2,3]:
+    H0,H1=H0H1(N)
+    C01=comm(H0,H1)
+    DG0=comm(H0,comm(H0,comm(H0,H1)))   # [H0,[H0,[H0,H1]]]
+    ok0,k0=proportional(DG0,C01)
+    C10=comm(H1,H0)
+    DG1=comm(H1,comm(H1,comm(H1,H0)))
+    ok1,k1=proportional(DG1,C10)
+    print(f"\n N={N}:")
+    print(f"  [H0,[H0,[H0,H1]]] = k^2·[H0,H1] か: {ok0}, 比 k^2 = {k0}")
+    print(f"  [H1,[H1,[H1,H0]]] = k^2·[H1,H0] か: {ok1}, 比 k^2 = {k1}")
+
+print("\n"+"="*70)
+print("判定: 両方 True なら H は Dolan–Grady を満たす=Onsager 代数=超可積分。")
+print(" その場合, cycle5 の『非2冪次数ゆえ Onsager でない』は誤りで、次数3,6 は")
+print(" cubic な量子化運動量 cos θ_k 由来(自由フェルミ構造は base 体上で健在)。")
+print(" False なら私の H は超可積分でなく, 正しいパラメータで作り直す必要。")
+print("="*70)

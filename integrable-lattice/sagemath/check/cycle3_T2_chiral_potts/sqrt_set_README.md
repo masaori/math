@@ -1,5 +1,7 @@
 # cycle 5 / T2: √集合の N 依存 と cycle 4 の自己訂正
 
+> **⚠️ cycle 6 で再訂正（本ノートの撤回は過剰だった）**: Dolan–Grady 関係（k²=9, N=2,3）で**超可積分＝Onsager は確定**。次数3,6 は cubic な量子化運動量 cos θ_k 由来で、自由フェルミ構造は base 体上で健在。「非2冪ゆえ Onsager でない」という本ノートの推論は誤り（2冪は base=ℚ のときのみの必要条件）。詳細 `../cycle6_T2_superintegrable/README.md`。
+
 スクリプト `sqrt_set_N_law.sage`、出力 `.out`（SageMath 10.6, CyclotomicField で高速化, N=2..5）。
 
 ## データ（charpoly を ℚ 上因数分解）

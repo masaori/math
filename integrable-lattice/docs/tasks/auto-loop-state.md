@@ -77,7 +77,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | padic_mahler_identify | done | 2026-06-28 | `outputs/reports/cycle6_T1_padic_mahler_grounding.md` + `sagemath/check/cycle6_T1_padic_mahler/` + 研究ノート更新。**双対の Λ 側は予想でなく既知理論**: 岩澤塔 L=p^n の v_p(a_{p^n}) 成長率 = Deninger の p 進エントロピー = Besser–Deninger p 進 Mahler 測度 = 岩澤 μ_p 不変量。ℝ側=アルキメデス Mahler(LSW, Ising で L 函数)。検証: (1/L²)log a_L→1.508, p=2,3 塔で v_p 一定=0(この P は μ_p=0, p 進自明)。D-U2 は有限・決定可能な顔。 |
-| 2 | T2 Solve | superintegrable_point_recheck | todo | | 真の超可積分点(von Gehlen–Rittenberg の具体パラメータ)でカイラル Potts スペクトルを計算し Onsager/自由フェルミ(2冪次数)を再検証。 |
+| 2 | T2 Solve | superintegrable_point_recheck | done | 2026-06-28 | `sagemath/check/cycle6_T2_superintegrable/`。**Dolan–Grady 関係 [H0,[H0,[H0,H1]]]=9[H0,H1] 両方 True(N=2,3)⇒超可積分=Onsager 確定**。⇒ **cycle5 の撤回は過剰訂正で誤り**を再訂正: 次数3,6 は cubic 運動量 cos θ_k 由来, 自由フェルミ構造は base 体上で健在(2冪は base=ℚ 限定の必要条件)。教訓: 自由フェルミ性は次数でなく Dolan–Grady で判定。robust: カイラル Potts スペクトル∈ℚ̄ かつ Onsager 構造あり。 |
 | 3 | T3 Pure | wall_large_scale_stats | todo | | 六頂点 Wall 検査を数百件に大規模化し一般 2.1% と統計比較(有意差判定)。破れ素数の特徴づけ。 |
 | 4 | — | rank:cycle6 | todo | | 再ランク → cycle 7 方向。 |
 
