@@ -73,6 +73,16 @@ $$v_p(Z_N)=\mu_{\min}(p)\,N+r_p(N),$$
 
 質問の核（更新）: $p$ 進 Mahler 測度（Besser–Deninger, $p$ 進エントロピー）と $\mu_{\min}(p)$ の厳密対応。同一 $P$ のアルキメデス Mahler（ℝ自由エネルギー）と $p$ 進 Mahler（Λ の $\Phi$ 構造）を結ぶ積公式。
 
+### 4.2 接地（2026-06-28 追記, cycle 6 T1）— Λ 側も既知理論だった
+
+**Λ 側は予想でなく既存理論**: 周期点数 $a_L=\prod_{z^L=w^L=1}P\in\mathbb{Z}$ について、
+- ℝ側 $\frac1{L^2}\log|a_L|\to m(P)$（アルキメデス Mahler＝自由エネルギー, LSW）。
+- Λ側 岩澤塔 $L=p^n$ での $v_p(a_{p^n})$ の線形成長率 ＝ **Deninger の $p$ 進エントロピー** ＝ **Besser–Deninger の $p$ 進 Mahler 測度** ＝ **岩澤 $\mu_p$ 不変量**。
+
+文献: Besser–Deninger "p-adic Mahler measures"; Deninger "p-adic entropy and a p-adic Fuglede–Kadison determinant"; "p-adic Mahler measure and ℤ-covers of links"（torsion 成長・Alexander 多項式・p 進エントロピー・μ_p の balance formula）。
+⇒ ℝ/Λ 双対は **同一 $P$ の二つの素点での Mahler 測度**として両側とも確立理論に乗る。D-U2 はその有限・決定可能な顔。検証 `integrable-lattice/sagemath/check/cycle6_T1_padic_mahler/`, 命題 `integrable-lattice/outputs/reports/cycle6_T1_padic_mahler_grounding.md`。
+注意: 例 $P=5-(z+1/z)-(w+1/w)$ は小素数で μ_p=0（p 進自明）。非自明 μ_p には $P\bmod p$ が p 冪根上に零点をもつ $P$ が必要。
+
 ---
 
 ## 5. 具体例（本セッション, 確立済み）
