@@ -72,14 +72,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure（統計的に正直）**: Wall 等式は非退化でも一般不成立(一般 2.1%, Pell p=13 確定)。六頂点 0/43 は**有意でない**(偶然 40%)→可積分の保護効果は**未確定**。rigorous 上界は不変。
 - 全体: T1 が最大成果(双対の具体・厳密実証)。T2/T3 は誠実な訂正・保留。「既知の深い数論(Mahler/LSW/Wall)に可算側から接続」という本流 Reframe の価値は維持。
 
+## cycle 6 総括（rank:cycle6, 2026-06-28）
+
+- **T1 Reframe（大成果・継続）**: ℝ/Λ 双対の **Λ 側が既知理論**と判明。岩澤塔 v_p(a_{p^n}) 成長率 = Deninger p 進エントロピー = Besser–Deninger p 進 Mahler 測度 = 岩澤 μ_p。双方とも確立理論への接続(予想でない)。`cycle6_T1_padic_mahler_grounding.md`。
+- **T2 Solve（再訂正）**: Dolan–Grady [H0,[H0,[H0,H1]]]=9[H0,H1] で**超可積分=Onsager 確定**。cycle5 の「Onsager でない」撤回は過剰訂正で誤りと再訂正(次数3,6 は cubic 運動量由来)。構造判定は Dolan–Grady で行うべき(次数でなく)。
+- **T3 Pure（仮説棄却）**: 六頂点 Wall 大規模検査 572件で破れ4.5%(一般2.1%同等以上)→「可積分が Wall 保護」棄却。0/43,0/91 は小標本偶然。rigorous 上界のみ残る。
+- 全体: T1 が一貫して堅実(双方既知理論への可算側接続)。T2/T3 は誠実な訂正・棄却の連続(科学的に健全)。**正直さの実践**(統計的有意性・予想/定理の別)が機能している。
+
+## cycle 7 step 列（3トラック継続。2026-06-28 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | nontrivial_mu_p_example | todo | | 非自明 μ_p(p 進エントロピー>0)をもつ P を構成し v_p(a_{p^n}) の線形成長=μ_p を実証(Iwasawa μ の具体例)。P mod p が p 冪根上に零点をもつ P。 |
+| 2 | T2 Solve | onsager_dispersion_extract | todo | | カイラル Potts 有限 N ℚ̄ スペクトルから Onsager 分散(Albertini–McCoy–Perk: E=a+bλ+Σ m_k√(1+λ²−2λcosθ_k))を照合・抽出。運動量 cosθ_k と √中身の同定。 |
+| 3 | T3 Pure | period_bound_closed_form | todo | | Wall は棄却済。残る rigorous 部: π(p,1) の閉形(固有値の mod p 乗法的順序 lcm)を命題化＋検証。Wall 破れ素数(p=3 優勢)の特徴づけは観察に留める。 |
+| 4 | — | rank:cycle7 | todo | | 再ランク → cycle 8 方向。 |
+
 ## cycle 6 step 列（3トラック継続。2026-06-27 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | padic_mahler_identify | done | 2026-06-28 | `outputs/reports/cycle6_T1_padic_mahler_grounding.md` + `sagemath/check/cycle6_T1_padic_mahler/` + 研究ノート更新。**双対の Λ 側は予想でなく既知理論**: 岩澤塔 L=p^n の v_p(a_{p^n}) 成長率 = Deninger の p 進エントロピー = Besser–Deninger p 進 Mahler 測度 = 岩澤 μ_p 不変量。ℝ側=アルキメデス Mahler(LSW, Ising で L 函数)。検証: (1/L²)log a_L→1.508, p=2,3 塔で v_p 一定=0(この P は μ_p=0, p 進自明)。D-U2 は有限・決定可能な顔。 |
 | 2 | T2 Solve | superintegrable_point_recheck | done | 2026-06-28 | `sagemath/check/cycle6_T2_superintegrable/`。**Dolan–Grady 関係 [H0,[H0,[H0,H1]]]=9[H0,H1] 両方 True(N=2,3)⇒超可積分=Onsager 確定**。⇒ **cycle5 の撤回は過剰訂正で誤り**を再訂正: 次数3,6 は cubic 運動量 cos θ_k 由来, 自由フェルミ構造は base 体上で健在(2冪は base=ℚ 限定の必要条件)。教訓: 自由フェルミ性は次数でなく Dolan–Grady で判定。robust: カイラル Potts スペクトル∈ℚ̄ かつ Onsager 構造あり。 |
-| 3 | T3 Pure | wall_large_scale_stats | todo | | 六頂点 Wall 検査を数百件に大規模化し一般 2.1% と統計比較(有意差判定)。破れ素数の特徴づけ。 |
-| 4 | — | rank:cycle6 | todo | | 再ランク → cycle 7 方向。 |
+| 3 | T3 Pure | wall_large_scale_stats | done | 2026-06-28 | `sagemath/check/cycle3_T3_period/wall_large_scale*`。六頂点 L=2 を572件検査→**Wall 破れ26件≈4.5%**(一般2.1%と同等以上)。**「可積分が Wall を保護」仮説を棄却**(0/43,0/91 は小標本の偶然)。残るは rigorous 上界 π(p,k)|p^{k-1}π(p,1) のみ。T3 のこの筋は否定的決着。教訓: 0件を有意性検定せず肯定結論にしない(cycle5 の慎重姿勢が正解)。 |
+| 4 | — | rank:cycle6 | done | 2026-06-28 | 下記「cycle 6 総括」。T1(双対の Λ 側=p 進エントロピー既知理論に接地, 大成果)/T2(Dolan–Grady で超可積分確定, cycle5 撤回を再訂正)/T3(可積分 Wall 特別性を棄却)。cycle7 step列起こし。 |
 
 ## cycle 5 step 列（3トラック継続。2026-06-26 起こし）
 

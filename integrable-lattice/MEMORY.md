@@ -1,5 +1,13 @@
 # MEMORY
 
+## cycle 6 完了（2026-06-28, 3トラック並走）
+
+- **T1（大成果）**: ℝ/Λ 双対の Λ 側＝既知理論(Deninger p 進エントロピー＝Besser–Deninger p 進 Mahler 測度＝岩澤 μ_p)に接地。`cycle6_T1_padic_mahler_grounding.md`, 研究ノート更新。
+- **T2（再訂正）**: Dolan–Grady で超可積分=Onsager 確定。cycle5 の「Onsager でない」撤回は過剰訂正で誤り(次数3,6 は cubic 運動量由来)。`cycle6_T2_superintegrable/`。
+- **T3（仮説棄却）**: 六頂点 Wall 572件で破れ4.5%→「可積分が Wall 保護」棄却(0/43,0/91 は小標本偶然)。rigorous 上界のみ残る。`wall_large_scale*`。
+- 教訓: 構造判定は Dolan–Grady で(次数でなく); 0件は有意性検定してから結論。
+- cycle7 step列: T1 非自明 μ_p 例 / T2 Onsager 分散抽出 / T3 π(p,1) 閉形(Wall は棄却済)。
+
 ## cycle 5 完了（2026-06-27, 3トラック並走）
 
 - **T1（大成果）**: ℝ/Λ 双対を最小・厳密に実証。`sagemath/check/cycle5_T1_mahler/`。同一 P の周期点数 a_L∈ℤ で (1/L²)log a_L→log m(P)(ℝ)と a_L 素因数分解=Φ_L∈Λ(Λ)。
