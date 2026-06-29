@@ -84,7 +84,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | nontrivial_mu_p_example | done | 2026-06-29 | `sagemath/check/cycle7_T1_lte/`。clean 例 P=z−c, a_L=c^L−1。ℝ側 (1/L)log a_L→log c=m(P)。**Λ側 v_p(c^L−1)=LTE で厳密・決定可能**(予測=実測 L=1..24 全 True)。**岩澤 μ_p は generic に 0**(ord_p(c) が p 冪のとき以外, Wieferich 的で稀=岩澤 μ=0 領域)。⇒ 双対の Λ側の本体は単一数 μ_p でなく**全 L の LTE 構造**(cycle6 を精密化)。LTE は Lean decide 可。 |
-| 2 | T2 Solve | onsager_dispersion_extract | todo | | カイラル Potts 有限 N ℚ̄ スペクトルから Onsager 分散(Albertini–McCoy–Perk: E=a+bλ+Σ m_k√(1+λ²−2λcosθ_k))を照合・抽出。運動量 cosθ_k と √中身の同定。 |
+| 2 | T2 Solve | onsager_dispersion_extract | done | 2026-06-29 | `sagemath/check/cycle7_T2_dispersion/`。N=2 λ 記号 charpoly 因数分解 → 2次因子判別式 disc=9(1+λ²−2λ·(±1/3))=9(1+λ²−2λcosθ), **cosθ=±1/3**。**Onsager 分散 ε∝√(1+λ²−2λcosθ) を有限 N の ℚ̄ スペクトルから直接抽出**(自由フェルミ ±ペアリング, Dolan–Grady と整合)。N 大で cosθ は cubic 等→次数3,6(cycle6 確証)。極限で cosθ∈[−1,1] 連続=ℝ脱出一点。 |
 | 3 | T3 Pure | period_bound_closed_form | todo | | Wall は棄却済。残る rigorous 部: π(p,1) の閉形(固有値の mod p 乗法的順序 lcm)を命題化＋検証。Wall 破れ素数(p=3 優勢)の特徴づけは観察に留める。 |
 | 4 | — | rank:cycle7 | todo | | 再ランク → cycle 8 方向。 |
 
