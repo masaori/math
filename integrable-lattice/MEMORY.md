@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 7 完了（2026-06-29, 3トラック並走）
+
+- **T1**: 双対の Λ 側の本体=全 L の LTE 構造(z−c で v_p(c^L−1)=LTE, 岩澤 μ_p generic 0)。`cycle7_T1_lte/`。
+- **T2（白眉）**: カイラル Potts N=2 から Onsager 分散 ε∝√(1+λ²−2λcosθ), cosθ=±1/3 を有限 N ℚ̄ から抽出。`cycle7_T2_dispersion/`。
+- **T3**: π(p,1)=lcm{固有値順序}(全25例 等号)→ D-U2 命題 A の周期に閉形上界 π(p,k)|p^{k-1}lcm{ord}。`pi_p1_closed_form*`。
+- cycle8 step列: T1 LTE 命題化/Lean / T2 N=3,4 運動量 cosθ_k 抽出 / T3 π(p,1) 等号条件。
+
 ## cycle 6 完了（2026-06-28, 3トラック並走）
 
 - **T1（大成果）**: ℝ/Λ 双対の Λ 側＝既知理論(Deninger p 進エントロピー＝Besser–Deninger p 進 Mahler 測度＝岩澤 μ_p)に接地。`cycle6_T1_padic_mahler_grounding.md`, 研究ノート更新。

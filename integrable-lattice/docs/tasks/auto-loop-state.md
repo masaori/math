@@ -79,14 +79,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure（仮説棄却）**: 六頂点 Wall 大規模検査 572件で破れ4.5%(一般2.1%同等以上)→「可積分が Wall 保護」棄却。0/43,0/91 は小標本偶然。rigorous 上界のみ残る。
 - 全体: T1 が一貫して堅実(双方既知理論への可算側接続)。T2/T3 は誠実な訂正・棄却の連続(科学的に健全)。**正直さの実践**(統計的有意性・予想/定理の別)が機能している。
 
+## cycle 7 総括（rank:cycle7, 2026-06-29）
+
+- **T1 Reframe**: 双対の Λ 側の本体は単一数 μ_p でなく**全 L の LTE 構造**（clean 例 z−c で v_p(c^L−1)=LTE 厳密・決定可能・Lean decide 可。岩澤 μ_p は generic 0）。cycle6 を精密化。
+- **T2 Solve（きれい）**: カイラル Potts N=2 から **Onsager 分散 ε∝√(1+λ²−2λcosθ), cosθ=±1/3 を有限 N ℚ̄ スペクトルから直接抽出**。自由フェルミ ±ペアリング, Dolan–Grady と整合。有限 N→極限分散の橋。
+- **T3 Pure**: Wall 棄却後に残る rigorous 部 = **π(p,1)=lcm{固有値順序}(全25例 等号)** → D-U2 命題 A の周期に閉形・決定可能上界 π(p,k)|p^{k-1}lcm{ord}。
+- 全体: 3トラックとも具体的・堅実な前進。T2 の Onsager 分散抽出が今サイクルの白眉(既知物理を有限 N 可算データから記号的に再導出=T1/T2 融合)。
+
+## cycle 8 step 列（3トラック継続。2026-06-29 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | lte_lean_or_writeup | todo | | LTE(v_p(c^L−1))の厳密命題化＋(Lean 環境あれば decide 実装, なければ仕様)。双対の「自由エネルギー=log c / Φ_L の LTE」を Reframe ノートに統合。 |
+| 2 | T2 Solve | dispersion_N3_momenta | todo | | N=3,4 で cosθ_k 集合(cubic 等)を λ 記号抽出し量子化条件を同定。連続分散への外挿を可算データで明示。 |
+| 3 | T3 Pure | pi_p1_equality_when | todo | | π(p,1)=lcm{ord} の等号がいつ成り立つか(トレース coincidence の条件)を詰める。または別 pure-math 筋へ。 |
+| 4 | — | rank:cycle8 | todo | | 再ランク → cycle 9 方向。 |
+
 ## cycle 7 step 列（3トラック継続。2026-06-28 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | nontrivial_mu_p_example | done | 2026-06-29 | `sagemath/check/cycle7_T1_lte/`。clean 例 P=z−c, a_L=c^L−1。ℝ側 (1/L)log a_L→log c=m(P)。**Λ側 v_p(c^L−1)=LTE で厳密・決定可能**(予測=実測 L=1..24 全 True)。**岩澤 μ_p は generic に 0**(ord_p(c) が p 冪のとき以外, Wieferich 的で稀=岩澤 μ=0 領域)。⇒ 双対の Λ側の本体は単一数 μ_p でなく**全 L の LTE 構造**(cycle6 を精密化)。LTE は Lean decide 可。 |
 | 2 | T2 Solve | onsager_dispersion_extract | done | 2026-06-29 | `sagemath/check/cycle7_T2_dispersion/`。N=2 λ 記号 charpoly 因数分解 → 2次因子判別式 disc=9(1+λ²−2λ·(±1/3))=9(1+λ²−2λcosθ), **cosθ=±1/3**。**Onsager 分散 ε∝√(1+λ²−2λcosθ) を有限 N の ℚ̄ スペクトルから直接抽出**(自由フェルミ ±ペアリング, Dolan–Grady と整合)。N 大で cosθ は cubic 等→次数3,6(cycle6 確証)。極限で cosθ∈[−1,1] 連続=ℝ脱出一点。 |
-| 3 | T3 Pure | period_bound_closed_form | todo | | Wall は棄却済。残る rigorous 部: π(p,1) の閉形(固有値の mod p 乗法的順序 lcm)を命題化＋検証。Wall 破れ素数(p=3 優勢)の特徴づけは観察に留める。 |
-| 4 | — | rank:cycle7 | todo | | 再ランク → cycle 8 方向。 |
+| 3 | T3 Pure | period_bound_closed_form | done | 2026-06-29 | `sagemath/check/cycle3_T3_period/pi_p1_closed_form*`。**π(p,1)=lcm{固有値の F̄_p 乗法的順序}**(全25例 等号; rigorous には割り切る)。⇒ D-U2 命題 A の周期に**閉形・決定可能な上界 π(p,k)|p^{k-1}·lcm{ord(λ_i)}**。Wall 等号は棄却済だが上界は不変・rigorous。T3 確定事項: 命題A(周期存在)+周期上界(閉形)+Wall 棄却。 |
+| 4 | — | rank:cycle7 | done | 2026-06-29 | 下記「cycle 7 総括」。T1(双対 Λ 側=LTE 構造)/T2(Onsager 分散 cosθ=±1/3 抽出, きれい)/T3(π(p,1) 閉形上界)。cycle8 step列起こし。 |
 
 ## cycle 6 step 列（3トラック継続。2026-06-27 起こし）
 
