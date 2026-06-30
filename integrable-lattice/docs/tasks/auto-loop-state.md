@@ -90,7 +90,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T1 Reframe | lte_lean_or_writeup | todo | | LTE(v_p(c^L−1))の厳密命題化＋(Lean 環境あれば decide 実装, なければ仕様)。双対の「自由エネルギー=log c / Φ_L の LTE」を Reframe ノートに統合。 |
+| 1 | T1 Reframe | lte_lean_or_writeup | done | 2026-06-30 | `outputs/reports/cycle8_T1_lte_proposition.md` + `sagemath/check/cycle7_T1_lte/lte_p2_complete*`(p=2 LTE も全 True)。完結した双対命題: モデル a_L=c^L−1, 命題 R(自由エネルギー f=log c=m(z−c)), 命題 Λ(v_p=LTE 完全形 p 奇/p=2, 決定可能)。形式検証: LTE は Lean decide 可・Mathlib に LTE 補題あり(仕様確定, 環境未導入で実装は後)。Λ 側本体=全 L の LTE 構造。 |
 | 2 | T2 Solve | dispersion_N3_momenta | todo | | N=3,4 で cosθ_k 集合(cubic 等)を λ 記号抽出し量子化条件を同定。連続分散への外挿を可算データで明示。 |
 | 3 | T3 Pure | pi_p1_equality_when | todo | | π(p,1)=lcm{ord} の等号がいつ成り立つか(トレース coincidence の条件)を詰める。または別 pure-math 筋へ。 |
 | 4 | — | rank:cycle8 | todo | | 再ランク → cycle 9 方向。 |
