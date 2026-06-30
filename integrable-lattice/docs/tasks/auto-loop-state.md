@@ -86,14 +86,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure**: Wall 棄却後に残る rigorous 部 = **π(p,1)=lcm{固有値順序}(全25例 等号)** → D-U2 命題 A の周期に閉形・決定可能上界 π(p,k)|p^{k-1}lcm{ord}。
 - 全体: 3トラックとも具体的・堅実な前進。T2 の Onsager 分散抽出が今サイクルの白眉(既知物理を有限 N 可算データから記号的に再導出=T1/T2 融合)。
 
+## cycle 8 総括（rank:cycle8, 2026-06-30）
+
+- **T1 Reframe**: 最小双対モデル $z-c$ の**完結した命題**（命題 R: $f=\log c=m(z-c)$; 命題 Λ: $v_p(c^L-1)=$ LTE 完全形 p 奇・p=2、決定可能・Lean decide 可・Mathlib 補題あり）。`outputs/reports/cycle8_T1_lte_proposition.md`。
+- **T2 Solve**: N=3 でも Onsager 分散 confirmed、deg-2 運動量 $\cos\theta=\pm1/3$（ℤ_3 由来）、deg-4 に追加運動量。cubic は N≥4。
+- **T3 Pure**: **π(p,1) の精密公式 $=\mathrm{lcm}\{\mathrm{ord}(\lambda): p\nmid m_\lambda\}$（rigorous, 全31例）**＋等号条件確定＋strict 構成例実演。D-U2 の Λ 側周期が固有値 order と mod-p 重複度で完全決定可能に。
+- 全体: 訂正なしの堅実サイクル。T1/T3 が rigorous な命題として固まり、T2 が分散抽出を N=3 へ拡張。「既知物理・数論を可算・決定可能・形式検証可能に書き換える」本流が積み上がっている。
+
+## cycle 9 step 列（3トラック継続。2026-06-30 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | spectral_curve_2var_both_places | todo | | 2変数スペクトル曲線 P(z,w)(六頂点 or dimer)で ℝ側 m(P) と Λ側 v_p(a_L) を同一 P から計算し双対を2変数で実証(cycle5 の z-c を P(z,w) へ拡張)。 |
+| 2 | T2 Solve | dispersion_N4_cubic_momenta | todo | | N=4 で cubic 運動量 cosθ_k を抽出し、超可積分の量子化条件(どの代数的数か)を同定。重い場合は λ 固定で。 |
+| 3 | T3 Pure | phi_period_full_proposition | todo | | D-U2 の Λ 側(命題A+π(p,1)精密+上界)を1つの厳密命題に統合し outputs/candidates/ に確定版として明文化。Lean 仕様も。 |
+| 4 | — | rank:cycle9 | todo | | 再ランク → cycle 10 方向。 |
+
 ## cycle 8 step 列（3トラック継続。2026-06-29 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | lte_lean_or_writeup | done | 2026-06-30 | `outputs/reports/cycle8_T1_lte_proposition.md` + `sagemath/check/cycle7_T1_lte/lte_p2_complete*`(p=2 LTE も全 True)。完結した双対命題: モデル a_L=c^L−1, 命題 R(自由エネルギー f=log c=m(z−c)), 命題 Λ(v_p=LTE 完全形 p 奇/p=2, 決定可能)。形式検証: LTE は Lean decide 可・Mathlib に LTE 補題あり(仕様確定, 環境未導入で実装は後)。Λ 側本体=全 L の LTE 構造。 |
 | 2 | T2 Solve | dispersion_N3_momenta | done | 2026-06-30 | `sagemath/check/cycle7_T2_dispersion/dispersion_N3*`。N=3 λ 記号: 因子次数{1:15,2:4,4:1}。deg-2 因子の cosθ=±1/3(N=2 と同, ℤ_3 由来), deg-4 因子に追加運動量。**Onsager 分散 N=3 でも confirmed**。cubic 運動量は N≥4(cycle5 の次数3,6 に対応)。deg-4 運動量の明示抽出と N=4 cubic 同定は cycle9+。連続極限で cosθ∈[−1,1] 稠密=ℝ脱出一点。 |
-| 3 | T3 Pure | pi_p1_equality_when | todo | | π(p,1)=lcm{ord} の等号がいつ成り立つか(トレース coincidence の条件)を詰める。または別 pure-math 筋へ。 |
-| 4 | — | rank:cycle8 | todo | | 再ランク → cycle 9 方向。 |
+| 3 | T3 Pure | pi_p1_equality_when | done | 2026-06-30 | `sagemath/check/cycle3_T3_period/pi_p1_refined*`。**精密公式 π(p,1)=lcm{ord(λ): p∤m_λ}**(一次独立より rigorous, 全31例 confirmed)。等号 π=lcm_all ⟺ order に効く全固有値の重複度が p∤。**strict ケースを構成例で実演**(T=diag(A^×p,B): p=7 で π=3<lcm_all=24)。⇒ D-U2 の Λ 側周期は固有値 order と mod-p 重複度で完全決定可能。T3 確定事項まとまる。 |
+| 4 | — | rank:cycle8 | done | 2026-06-30 | 下記「cycle 8 総括」。T1(z−c 双対命題 完結, LTE p=2 込み)/T2(N=3 でも cosθ=±1/3, 分散 confirmed)/T3(π(p,1) 精密公式＋等号条件 確定)。cycle9 step列起こし。 |
 
 ## cycle 7 step 列（3トラック継続。2026-06-28 起こし）
 

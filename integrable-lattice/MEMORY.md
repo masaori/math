@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 8 完了（2026-06-30, 3トラック並走）
+
+- **T1**: z−c の完結双対命題(R: f=log c=m(z−c); Λ: v_p(c^L−1)=LTE 完全形 p 奇/p=2, 決定可能・Lean decide 可)。`outputs/reports/cycle8_T1_lte_proposition.md`。
+- **T2**: N=3 でも Onsager 分散 confirmed, cosθ=±1/3, deg-4 に追加運動量。`cycle7_T2_dispersion/dispersion_N3*`。
+- **T3**: π(p,1)=lcm{ord(λ): p∤m_λ}(精密, rigorous, 全31例)＋等号条件＋strict 構成例。`pi_p1_refined*`。
+- cycle9 step列: T1 2変数 P(z,w) 双対 / T2 N=4 cubic 運動量 / T3 Λ側周期を統合命題化(Lean 仕様)。
+
 ## cycle 7 完了（2026-06-29, 3トラック並走）
 
 - **T1**: 双対の Λ 側の本体=全 L の LTE 構造(z−c で v_p(c^L−1)=LTE, 岩澤 μ_p generic 0)。`cycle7_T1_lte/`。

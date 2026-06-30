@@ -1,0 +1,38 @@
+======================================================================
+π(p,1) 精密公式: = lcm{ord(λ): p∤mult_λ}
+======================================================================
+  (1,1,2)L2 p=5: π=4, lcm_refined=4, lcm_all=4 [OK]
+  (1,1,2)L2 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (1,1,2)L2 p=11: π=10, lcm_refined=10, lcm_all=10 [OK]
+  (1,1,1)L2 p=5: π=4, lcm_refined=4, lcm_all=4 [OK]
+  (1,1,1)L2 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (1,1,1)L2 p=11: π=10, lcm_refined=10, lcm_all=10 [OK]
+  (2,1,1)L2 p=2: π=1, lcm_refined=1, lcm_all=1 [OK]
+  (2,1,1)L2 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (2,1,1)L2 p=11: π=5, lcm_refined=5, lcm_all=5 [OK]
+  (1,1,2)L3 p=3: π=2, lcm_refined=2, lcm_all=2 [OK]
+  (1,1,2)L3 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (1,1,2)L3 p=11: π=10, lcm_refined=10, lcm_all=10 [OK]
+  (2,1,3)L2 p=2: π=1, lcm_refined=1, lcm_all=1 [OK]
+  (2,1,3)L2 p=3: π=2, lcm_refined=2, lcm_all=2 [OK]
+  (2,1,3)L2 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (2,1,3)L2 p=11: π=10, lcm_refined=10, lcm_all=10 [OK]
+  (1,1,1)L3 p=3: π=2, lcm_refined=2, lcm_all=2 [OK]
+  (1,1,1)L3 p=5: π=4, lcm_refined=4, lcm_all=4 [OK]
+  (1,1,1)L3 p=7: π=3, lcm_refined=3, lcm_all=3 [OK]
+  (1,1,1)L3 p=11: π=10, lcm_refined=10, lcm_all=10 [OK]
+  (3,2,1)L2 p=2: π=1, lcm_refined=1, lcm_all=1 [OK]
+  (3,2,1)L2 p=3: π=2, lcm_refined=2, lcm_all=2 [OK]
+  (3,2,1)L2 p=5: π=4, lcm_refined=4, lcm_all=4 [OK]
+  (3,2,1)L2 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (1,3,2)L2 p=3: π=2, lcm_refined=2, lcm_all=2 [OK]
+  (1,3,2)L2 p=7: π=6, lcm_refined=6, lcm_all=6 [OK]
+  (1,3,2)L2 p=11: π=10, lcm_refined=10, lcm_all=10 [OK]
+
+  合計 27: π=lcm_refined が 27 件; lcm_refined<lcm_all(mult≡0脱落) が 0 件
+
+======================================================================
+結論: π(p,1) = lcm{ord(λ): p∤mult_λ}(一次独立より, rigorous)。
+ 等号 π=lcm_all は『order に効く全固有値の重複度が p∤』のとき。
+ mult≡0 mod p の固有値はトレース mod p から脱落し周期を下げうる(精密<全)。
+======================================================================
