@@ -91,7 +91,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | lte_lean_or_writeup | done | 2026-06-30 | `outputs/reports/cycle8_T1_lte_proposition.md` + `sagemath/check/cycle7_T1_lte/lte_p2_complete*`(p=2 LTE も全 True)。完結した双対命題: モデル a_L=c^L−1, 命題 R(自由エネルギー f=log c=m(z−c)), 命題 Λ(v_p=LTE 完全形 p 奇/p=2, 決定可能)。形式検証: LTE は Lean decide 可・Mathlib に LTE 補題あり(仕様確定, 環境未導入で実装は後)。Λ 側本体=全 L の LTE 構造。 |
-| 2 | T2 Solve | dispersion_N3_momenta | todo | | N=3,4 で cosθ_k 集合(cubic 等)を λ 記号抽出し量子化条件を同定。連続分散への外挿を可算データで明示。 |
+| 2 | T2 Solve | dispersion_N3_momenta | done | 2026-06-30 | `sagemath/check/cycle7_T2_dispersion/dispersion_N3*`。N=3 λ 記号: 因子次数{1:15,2:4,4:1}。deg-2 因子の cosθ=±1/3(N=2 と同, ℤ_3 由来), deg-4 因子に追加運動量。**Onsager 分散 N=3 でも confirmed**。cubic 運動量は N≥4(cycle5 の次数3,6 に対応)。deg-4 運動量の明示抽出と N=4 cubic 同定は cycle9+。連続極限で cosθ∈[−1,1] 稠密=ℝ脱出一点。 |
 | 3 | T3 Pure | pi_p1_equality_when | todo | | π(p,1)=lcm{ord} の等号がいつ成り立つか(トレース coincidence の条件)を詰める。または別 pure-math 筋へ。 |
 | 4 | — | rank:cycle8 | todo | | 再ランク → cycle 9 方向。 |
 
