@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 9 完了（2026-07-01, 3トラック並走）
+
+- **T1**: 2変数曲線=離散ラプラシアン(全域木)。ℝ側 (1/L²)logτ(L)→4G/π(既知 Catalan)一致=枠組み裏付け, Λ側=τ(L)素因数分解。`cycle9_T1_spanning_tree/`。
+- **T2**: N=4 で cubic 因子(判別式621=S₃)=cubic 運動量存在 confirmed。厳密 cosθ 同定は超可積分スペクトル理論照合が要(cycle10+)。`dispersion_N4*`。
+- **T3**: D-U2 Λ 側の統合命題確定 `outputs/candidates/D-U2_consolidated_proposition.md`(周期性+π(p,1)精密+上界+Newton+Wall 否定, 決定可能, Lean 仕様)。
+- cycle10 step列: T1 τ(L) の v_p 則 / T2 超可積分スペクトル公式照合 / T3 Mahler-Lehmer 接続。
+
 ## cycle 8 完了（2026-06-30, 3トラック並走）
 
 - **T1**: z−c の完結双対命題(R: f=log c=m(z−c); Λ: v_p(c^L−1)=LTE 完全形 p 奇/p=2, 決定可能・Lean decide 可)。`outputs/reports/cycle8_T1_lte_proposition.md`。

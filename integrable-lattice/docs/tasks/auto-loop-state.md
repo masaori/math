@@ -93,14 +93,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure**: **π(p,1) の精密公式 $=\mathrm{lcm}\{\mathrm{ord}(\lambda): p\nmid m_\lambda\}$（rigorous, 全31例）**＋等号条件確定＋strict 構成例実演。D-U2 の Λ 側周期が固有値 order と mod-p 重複度で完全決定可能に。
 - 全体: 訂正なしの堅実サイクル。T1/T3 が rigorous な命題として固まり、T2 が分散抽出を N=3 へ拡張。「既知物理・数論を可算・決定可能・形式検証可能に書き換える」本流が積み上がっている。
 
+## cycle 9 総括（rank:cycle9, 2026-07-01）
+
+- **T1 Reframe**: 2変数スペクトル曲線を実模型（離散ラプラシアン=全域木/ダイマー/GFF）へ。**ℝ側 (1/L²)logτ(L)→4G/π（既知 Catalan 全域木エントロピー）と一致=枠組み裏付け**、Λ側=τ(L) 素因数分解。cycle5 toy を実模型へ拡張。
+- **T2 Solve**: N=4 で cubic 因子（判別式621=S₃）=cubic 運動量の存在 confirmed。厳密 cosθ 同定は超可積分スペクトル理論照合が要（cycle10+, 正直な限界明記）。
+- **T3 Pure**: D-U2 の Λ 側を**統合命題**に確定（`outputs/candidates/D-U2_consolidated_proposition.md`: 周期性+π(p,1)精密+上界+Newton+Wall 否定, 決定可能, Lean 仕様, 双対 cross-ref）。
+- 全体: T1 が「既知物理定数(4G/π)の可算側からの再現」で本流を強化。T3 が確定命題として結実。T2 は誠実に限界明記。
+
+## cycle 10 step 列（3トラック継続。2026-07-01 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | spanning_tree_vp_law | todo | | τ(L)(全域木数)の v_p(τ(L)) の L 依存則を定式化(2変数 LTE/円分)。v_5(τ(5))=14 等の規則を命題化。 |
+| 2 | T2 Solve | superintegrable_spectrum_formula | todo | | Albertini–McCoy–Perk の超可積分スペクトル公式を文献精査し, 有限 N ℚ̄ スペクトル(N=2,3)と厳密照合。cosθ=±1/3 の意味(運動量 vs 模型定数)を確定。 |
+| 3 | T3 Pure | mahler_lehmer_connection | todo | | ℝ/Λ 双対から派生する pure-math: Mahler 測度の下界(Lehmer 問題)と可積分スペクトル曲線の関係を文献精査＋小実験。 |
+| 4 | — | rank:cycle10 | todo | | 再ランク → cycle 11 方向。 |
+
 ## cycle 9 step 列（3トラック継続。2026-06-30 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | spectral_curve_2var_both_places | done | 2026-07-01 | `sagemath/check/cycle9_T1_spanning_tree/`。実際の格子曲線 P=4−(z+1/z)−(w+1/w)(離散ラプラシアン=全域木/ダイマー/GFF)。matrix-tree で τ(L)=トーラス全域木数∈ℤ。**ℝ側 (1/L²)logτ→4G/π=1.16624(既知の Catalan 全域木エントロピー, 一致で枠組み裏付け)**、Λ側=τ(L) 素因数分解(v_5(τ(5))=14 等, 2変数 LTE 的規則)。cycle5 の toy を実模型へ拡張。 |
 | 2 | T2 Solve | dispersion_N4_cubic_momenta | done | 2026-07-01 | `sagemath/check/cycle7_T2_dispersion/dispersion_N4*`(λ=1 固定, symbolic-λ は81次で計算困難)。N=4 charpoly ℚ 因数分解に **cubic 因子2個(x³−3x²−3x+2,+8, 判別式621=S₃)** = **cubic 運動量の存在 confirmed**(cycle5 の次数3,6 を再確認)。正直な限界: λ 固定では cosθ 一意抽出不可, 厳密同定は超可積分スペクトル理論(Albertini–McCoy–Perk)照合が要(cycle10+)。cosθ=±1/3 が模型定数か運動量かも要確認。 |
-| 3 | T3 Pure | phi_period_full_proposition | todo | | D-U2 の Λ 側(命題A+π(p,1)精密+上界)を1つの厳密命題に統合し outputs/candidates/ に確定版として明文化。Lean 仕様も。 |
-| 4 | — | rank:cycle9 | todo | | 再ランク → cycle 10 方向。 |
+| 3 | T3 Pure | phi_period_full_proposition | done | 2026-07-01 | `outputs/candidates/D-U2_consolidated_proposition.md`。D-U2 の Λ 側を1命題に統合: (A)周期性 (B)π(p,1)=lcm{ord(λ): p∤m_λ} (C)上界 π(p,k)|p^{k-1}π(p,1) (D)Newton 多角形 μ_min +(否定)Wall 不成立。決定可能・Lean 仕様・ℝ/Λ 双対 cross-ref。正直な位置づけ(既知数論の可算化・形式検証可能化)明記。 |
+| 4 | — | rank:cycle9 | done | 2026-07-01 | 下記「cycle 9 総括」。T1(2変数曲線=全域木, ℝ側 4G/π 一致)/T2(N=4 cubic 運動量存在)/T3(D-U2 統合命題 確定)。cycle10 step列起こし。 |
 
 ## cycle 8 step 列（3トラック継続。2026-06-29 起こし）
 
