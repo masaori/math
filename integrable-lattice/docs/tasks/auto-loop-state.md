@@ -98,7 +98,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | spectral_curve_2var_both_places | done | 2026-07-01 | `sagemath/check/cycle9_T1_spanning_tree/`。実際の格子曲線 P=4−(z+1/z)−(w+1/w)(離散ラプラシアン=全域木/ダイマー/GFF)。matrix-tree で τ(L)=トーラス全域木数∈ℤ。**ℝ側 (1/L²)logτ→4G/π=1.16624(既知の Catalan 全域木エントロピー, 一致で枠組み裏付け)**、Λ側=τ(L) 素因数分解(v_5(τ(5))=14 等, 2変数 LTE 的規則)。cycle5 の toy を実模型へ拡張。 |
-| 2 | T2 Solve | dispersion_N4_cubic_momenta | todo | | N=4 で cubic 運動量 cosθ_k を抽出し、超可積分の量子化条件(どの代数的数か)を同定。重い場合は λ 固定で。 |
+| 2 | T2 Solve | dispersion_N4_cubic_momenta | done | 2026-07-01 | `sagemath/check/cycle7_T2_dispersion/dispersion_N4*`(λ=1 固定, symbolic-λ は81次で計算困難)。N=4 charpoly ℚ 因数分解に **cubic 因子2個(x³−3x²−3x+2,+8, 判別式621=S₃)** = **cubic 運動量の存在 confirmed**(cycle5 の次数3,6 を再確認)。正直な限界: λ 固定では cosθ 一意抽出不可, 厳密同定は超可積分スペクトル理論(Albertini–McCoy–Perk)照合が要(cycle10+)。cosθ=±1/3 が模型定数か運動量かも要確認。 |
 | 3 | T3 Pure | phi_period_full_proposition | todo | | D-U2 の Λ 側(命題A+π(p,1)精密+上界)を1つの厳密命題に統合し outputs/candidates/ に確定版として明文化。Lean 仕様も。 |
 | 4 | — | rank:cycle9 | todo | | 再ランク → cycle 10 方向。 |
 
