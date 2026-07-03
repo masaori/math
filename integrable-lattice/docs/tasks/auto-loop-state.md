@@ -105,7 +105,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | spanning_tree_vp_law | done | 2026-07-03 | `sagemath/check/cycle10_T1_vp_law/`(spanning_trees_count で厳密, L=2..12)。**clean 法則: 奇数 L で v_2(τ(L))=2(L−1)**(L=3..11 全一致)=2変数 LTE 的。偶 L・対角 v_p(τ(p))(2,6,14,14,22)は円分的で単純式でない(p=5 が 2p 破れ, 1−ζ_p の分岐)。正直: 一般 v_p は per-prime 円分構造。ℝ側 4G/π と対。 |
-| 2 | T2 Solve | superintegrable_spectrum_formula | todo | | Albertini–McCoy–Perk の超可積分スペクトル公式を文献精査し, 有限 N ℚ̄ スペクトル(N=2,3)と厳密照合。cosθ=±1/3 の意味(運動量 vs 模型定数)を確定。 |
+| 2 | T2 Solve | superintegrable_spectrum_formula | done | 2026-07-03 | `sagemath/check/cycle7_T2_dispersion/amp_reconcile_README.md`。文献 AMP 1989: スペクトルは Ising 的自由フェルミ √(1+λ²−2λcosθ), ただし「準粒子形をもたない励起も存在」。私の判別式 9(1+λ²−2λcosθ) と整合(Dolan–Grady とも)。**未確定**: cosθ=±1/3 が AMP 量子化運動量か模型定数かは論文本体の量子化多項式照合が要(cycle11+, abstract では不足)。高次因子は cubic 運動量 or 非準粒子励起。到達点: Ising 的構造を有限 N 可算データから確認, 運動量辞書は未到達(正直)。 |
 | 3 | T3 Pure | mahler_lehmer_connection | todo | | ℝ/Λ 双対から派生する pure-math: Mahler 測度の下界(Lehmer 問題)と可積分スペクトル曲線の関係を文献精査＋小実験。 |
 | 4 | — | rank:cycle10 | todo | | 再ランク → cycle 11 方向。 |
 
