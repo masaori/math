@@ -41,12 +41,23 @@ $\lambda_{\max}$ は**絶対値最大の固有値**（Perron）。住処は $\ma
 
 各素数 $p$ について、$\Phi_N$ の $\ell_p$ 係数（$=v_p(Z_N)$）は
 $$v_p(Z_N)=\mu_{\min}(p)\,N+r_p(N),$$
-- $\mu_{\min}(p)$ = charpoly の **$p$ 進 Newton 多角形の最小傾き** = 固有値の**最小 $p$ 進付値**。
+- $\mu_{\min}(p)=\min_i v_p(\lambda_i)\in\mathbb{Z}_{\ge0}$ = 固有値の**最小 $p$ 進付値** = charpoly の **$p$ 進 Newton 多角形**の一端の辺の傾き（符号は多角形の描き方の規約に依存。曖昧さのない定義は「付値の最小」）。
 - $r_p(N)$ = 最終周期的な残差（ただし Skolem–Mahler–Lech 由来の疎な例外指数でスパイクしうる。特殊素数 $p\mid$（模型の対称性位数）で周期増大）。
 
 住処は $\Lambda$（係数は $\mathbb{Z}$）、決定可能・有限 $N$・$\mathbb{R}$ 不使用。支配するのは $|\lambda|_p$（最小付値固有値）。
 
 機構: $Z_N=p^{\mu_{\min}N}\sum_i u_i^N$（$u_i=\lambda_i/p^{\mu_{\min}}$、最小付値群は $p$ 進単位）。単位和は単位係数の線形漸化列で mod $p^k$ 周期的 ⇒ その $v_p=r_p$ が最終周期。
+
+### 3.1 $\Lambda$ 側は $\mathbb{Q}_p$ を必要としない（可算・決定可能であることの精密化）
+
+上の記述で $p$ 進完備体 $\mathbb{Q}_p$（およびその代数閉包 $\overline{\mathbb{Q}_p}$）は説明上の足場にすぎない。$\mathbb{Q}_p$ は濃度 $2^{\aleph_0}$ の**非可算**集合であり、その導入は $\mathbb{R}$ 脱出と同格の非可算化なので、$\Lambda$ 側の主張には**使わない**のが本プロジェクトの立場として正確。D-U2 で実際に触れる対象はすべて可算・有限・決定可能:
+
+- **$v_p(Z_N)\in\mathbb{Z}_{\ge0}$**: $Z_N\in\mathbb{Z}_{>0}$ を $p$ で割り切れる回数。$\mathbb{Z}$ 上の有限手続き。これが $\Phi_N$ の $\ell_p$ 係数そのもの。
+- **$\mu_{\min}(p)$**: $\operatorname{char}_T(x)=\sum_j c_j x^j$ の**整数係数の付値 $v_p(c_j)\in\mathbb{Z}$** から、点集合 $\{(j,v_p(c_j))\}$ の下方凸包（有限個の整数点の凸包）として計算。固有値 $\lambda_i$ を個別に構成する必要はなく、埋め込みの選択に依らない組合せ的手続き。
+- **固有値の付値の可算な意味づけ**: 「$v_p$ を $\lambda_i\in\overline{\mathbb{Q}}$ へ拡張」も $\overline{\mathbb{Q}_p}$ を経ず、可算数体 $K=\mathbb{Q}(\lambda_i)$ の整数環 $\mathcal O_K$ における素イデアル $\mathfrak p\mid p$ の分解という有限・代数的手続きで済む（$\overline{\mathbb{Q}}$ 自身も可算）。
+- **機構**: mod $p^k$ 線形漸化の最終周期性は、位数 $p^{kd}$ の**有限**集合 $(\mathbb{Z}/p^k\mathbb{Z})^d$ 上の鳩の巣論法。
+
+含意: $\Lambda$ 側の非可算性（$\mathbb{Q}_p$）は本質的でなく**除去できる**。対して $\mathbb{R}$ 側（§2）の非可算性は $\log_\mathbb{R}$ と極限 $N\to\infty$ の収束に本質的で**除去できない**。この非対称性が「$\mathbb{R}/\Lambda$ 双対」で $\Lambda$ 側を「決定可能・可算」と呼べる根拠であり、双対の対比をむしろ強める。
 
 ---
 
