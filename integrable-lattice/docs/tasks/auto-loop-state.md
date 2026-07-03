@@ -100,14 +100,30 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure**: D-U2 の Λ 側を**統合命題**に確定（`outputs/candidates/D-U2_consolidated_proposition.md`: 周期性+π(p,1)精密+上界+Newton+Wall 否定, 決定可能, Lean 仕様, 双対 cross-ref）。
 - 全体: T1 が「既知物理定数(4G/π)の可算側からの再現」で本流を強化。T3 が確定命題として結実。T2 は誠実に限界明記。
 
+## cycle 10 総括（rank:cycle10, 2026-07-03）
+
+- **T1 Reframe**: 全域木数 τ(L) の Λ 側 clean 法則 **奇 L で v_2(τ(L))=2(L−1)**（L=3..11 全一致, 2変数 LTE 的）。一般 v_p・対角 v_p(τ(p)) は円分的で複雑（p=5 が 2p 破れ）。
+- **T2 Solve**: AMP 1989 文献照合 — 超可積分スペクトルは Ising 的自由フェルミ √(1+λ²−2λcosθ)（私の数値と整合, 準粒子外励起もあり）。cosθ=±1/3 の AMP 運動量同定は論文本体照合が要（未確定, 正直）。
+- **T3 Pure**: 自由エネルギー=Mahler 測度=エントロピー → Lehmer 問題（最小正エントロピー）への接続を地図化。**スケール違いの偶然（4G/π vs Lehmer 数）に注意**を明記。Mahler/エントロピーは ℝ 側で決定可能成果とは別。
+- 全体: T1 で clean な Λ 側法則, T2/T3 は既知理論への正確な接続と限界の明示。誇張なし。
+
+## cycle 11 step 列（3トラック継続。2026-07-03 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | prove_v2_spanning_tree | todo | | 奇 L で v_2(τ(L))=2(L−1) を Kirchhoff 行列式の2進解析で証明(or 既知結果を文献確認)。厳密命題化。 |
+| 2 | T2 Solve | tau2_model_finite_N | todo | | カイラル Potts の τ^(2)-model(Baxter-Bazhanov-Perk, より扱いやすい補助転送行列)を小サイズ構成し有限 N スペクトル∈ℚ̄・Onsager を確認。運動量の別ルート。 |
+| 3 | T3 Pure | padic_analog_lehmer | todo | | Lehmer の Λ(p 進)版があるか: 岩澤 μ_p や p 進 Mahler 測度の「最小正値」問題。文献確認＋位置づけ。 |
+| 4 | — | rank:cycle11 | todo | | 再ランク → cycle 12 方向。 |
+
 ## cycle 10 step 列（3トラック継続。2026-07-01 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | spanning_tree_vp_law | done | 2026-07-03 | `sagemath/check/cycle10_T1_vp_law/`(spanning_trees_count で厳密, L=2..12)。**clean 法則: 奇数 L で v_2(τ(L))=2(L−1)**(L=3..11 全一致)=2変数 LTE 的。偶 L・対角 v_p(τ(p))(2,6,14,14,22)は円分的で単純式でない(p=5 が 2p 破れ, 1−ζ_p の分岐)。正直: 一般 v_p は per-prime 円分構造。ℝ側 4G/π と対。 |
 | 2 | T2 Solve | superintegrable_spectrum_formula | done | 2026-07-03 | `sagemath/check/cycle7_T2_dispersion/amp_reconcile_README.md`。文献 AMP 1989: スペクトルは Ising 的自由フェルミ √(1+λ²−2λcosθ), ただし「準粒子形をもたない励起も存在」。私の判別式 9(1+λ²−2λcosθ) と整合(Dolan–Grady とも)。**未確定**: cosθ=±1/3 が AMP 量子化運動量か模型定数かは論文本体の量子化多項式照合が要(cycle11+, abstract では不足)。高次因子は cubic 運動量 or 非準粒子励起。到達点: Ising 的構造を有限 N 可算データから確認, 運動量辞書は未到達(正直)。 |
-| 3 | T3 Pure | mahler_lehmer_connection | todo | | ℝ/Λ 双対から派生する pure-math: Mahler 測度の下界(Lehmer 問題)と可積分スペクトル曲線の関係を文献精査＋小実験。 |
-| 4 | — | rank:cycle10 | todo | | 再ランク → cycle 11 方向。 |
+| 3 | T3 Pure | mahler_lehmer_connection | done | 2026-07-03 | `sagemath/check/cycle10_T3_lehmer/`。接続: 自由エネルギー=log Mahler 測度=エントロピー; 1変数(転送行列特性多項式)の最小正エントロピー=**Lehmer 問題**(最小 m>1=Lehmer 数1.17628, 未解決); 2D は Boyd–Lawton で下限なし。**正直な注記: 4G/π=1.166(エントロピー)と Lehmer 数1.176(Mahler 測度)の近さはスケール違いの偶然=無意味**。Mahler/エントロピーは ℝ 側(非決定可能)=双対の地図であり我々が解く対象でない。 |
+| 4 | — | rank:cycle10 | done | 2026-07-03 | 下記「cycle 10 総括」。T1(τ(L) の v_2=2(L−1) 奇 L)/T2(AMP Ising 的照合, 運動量辞書未)/T3(Lehmer 接続, スケール偶然に注意)。cycle11 step列起こし。 |
 
 ## cycle 9 step 列（3トラック継続。2026-06-30 起こし）
 

@@ -1,5 +1,12 @@
 # MEMORY
 
+## cycle 10 完了（2026-07-03, 3トラック並走）
+
+- **T1**: 全域木数 τ(L) の clean 法則 奇 L で v_2(τ(L))=2(L−1)(L=3..11)。一般 v_p は円分的。`cycle10_T1_vp_law/`。
+- **T2**: AMP 1989 照合 — 超可積分は Ising 的 √(1+λ²−2λcosθ)(整合)。cosθ=±1/3 の運動量同定は論文本体照合が要(未)。`amp_reconcile_README.md`。
+- **T3**: 自由エネルギー=Mahler 測度=エントロピー→Lehmer 問題への地図。4G/π vs Lehmer 数はスケール違いの偶然(注意)。`cycle10_T3_lehmer/`。
+- cycle11 step列: T1 v_2=2(L−1) 証明 / T2 τ^(2)-model / T3 Lehmer の p 進版。
+
 ## cycle 9 完了（2026-07-01, 3トラック並走）
 
 - **T1**: 2変数曲線=離散ラプラシアン(全域木)。ℝ側 (1/L²)logτ(L)→4G/π(既知 Catalan)一致=枠組み裏付け, Λ側=τ(L)素因数分解。`cycle9_T1_spanning_tree/`。
