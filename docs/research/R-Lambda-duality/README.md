@@ -164,7 +164,11 @@ $g$ は $T$ から決まる**固定整数**（$N$ 非依存, $g\mid a_0=\pm\det 
 
 **主張 2（$\Lambda$-内部双対法則）.** 各 $N\in\mathbb{N}_{>0}$ に対し
 $$\Phi_N=N\cdot M+R(N),\qquad R(N):=\sum_{p}r_p(N)\,\ell_p\in\Lambda,$$
-$R(N)$ は各座標が $N$ について最終周期的。これは定理 P（$v_p(Z_N)=\mu_{\min}(p)N+r_p(N)$）の全 $p$ 集約。$R(N)\in\Lambda$（有限台）は固定 $N$ で $Z_N\in\mathbb{Z}_{>0}$ の素因数が有限だから。
+$r_p(N):=v_p(Z_N)-\mu_{\min}(p)N\in\mathbb{Z}_{\ge0}$（床の上の超過分, 系より非負）、各座標が $N$ について最終周期的。これは定理 P（$v_p(Z_N)=\mu_{\min}(p)N+r_p(N)$）の全 $p$ 集約。$R(N)\in\Lambda$（有限台）は固定 $N$ で $Z_N\in\mathbb{Z}_{>0}$ の素因数が有限だから。
+
+**閉じた形.** 傾き含量整数 $c:=\prod_p p^{\mu_{\min}(p)}=\prod_{p\mid g}p^{\mu_{\min}(p)}\in\mathbb{Z}_{>0}$（$M$ に対応, $T$ で固定・$N$ 非依存）を使うと、全 $p$ で $v_p(Z_N)\ge N\mu_{\min}(p)$ ゆえ $Z_N/c^N\in\mathbb{Z}_{>0}$ で
+$$R(N)=\log(Z_N/c^N)\in\Lambda,$$
+すなわち $R(N)$ は整数 $Z_N/c^N$ の素因数分解（$\Phi_N=N\log c+\log(Z_N/c^N)=N M+R(N)$）。$R(N)$ の台 $\{p:r_p(N)>0\}=(Z_N/c^N$ の素因数$)$ は $N$ で増え列挙困難（$Z_N/c^N$ の分解）だが、法則は列挙を要さず名指し $p$ の $r_p(N)$ を $\bmod p^k$ 漸化で個別に与える。例：六頂点 $L=2$ で $c=2$, $Z_N/2^N=3^N+(-1)^N+2$, $R(N)=\log(3^N+(-1)^N+2)$（$N{=}1$: $4{=}2^2$, $N{=}2$: $12{=}2^2\cdot3$）。
 
 ⇒ 列 $(\Phi_N)_N\subset\Lambda$ は傾き $M\in\Lambda$ で**最終的に $\Lambda$-線形**。$\mathbb{R}$ 不使用。
 
