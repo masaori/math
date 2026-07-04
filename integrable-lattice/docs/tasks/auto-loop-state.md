@@ -112,7 +112,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | prove_v2_spanning_tree | done | 2026-07-04 | `sagemath/check/cycle10_T1_vp_law/iwasawa_graph_README.md` + `verify_more`。奇 L=3..19 で v_2(τ(L))=2(L−1) 全一致(検証強化)。**接地: 全域木数の ℓ 進付値は「グラフの岩澤理論」(abelian ℓ-towers, arXiv:2006.14012, 類数の岩澤 μ,λ と平行)で研究済**=cycle6 の p 進エントロピー=岩澤 μ と同じ構造。⇒ Λ 側算術は Mahler(ℝ)と岩澤理論(Λ)の両素点に乗る既知枠組み。完全証明・該当命題特定は cycle12+(正直)。 |
-| 2 | T2 Solve | tau2_model_finite_N | todo | | カイラル Potts の τ^(2)-model(Baxter-Bazhanov-Perk, より扱いやすい補助転送行列)を小サイズ構成し有限 N スペクトル∈ℚ̄・Onsager を確認。運動量の別ルート。 |
+| 2 | T2 Solve | tau2_model_finite_N | done | 2026-07-04 | `sagemath/check/cycle11_T2/`。τ^(2) 正確構成は BBP 機構で誤りやすいため XXZ 2マグノン(Bethe 可解最小)で代替: 固有値∈ℚ̄, 次数1,2,3(cubic 因子=Bethe 根の代数構造)。**T2 の正直な現状整理**: cycle1-11 は「既知可積分構造を可算(ℚ̄/Λ)で確認・再導出」で**新厳密解は未産出**、実質 T1 と重なる。真の solve は専門機構(BBP/TQ/量子群/楕円)が要り現行道具で困難。cycle12+ で T2 を T1 統合 or 特定未解決量に深く張るか方針判断(rank で提起)。 |
 | 3 | T3 Pure | padic_analog_lehmer | todo | | Lehmer の Λ(p 進)版があるか: 岩澤 μ_p や p 進 Mahler 測度の「最小正値」問題。文献確認＋位置づけ。 |
 | 4 | — | rank:cycle11 | todo | | 再ランク → cycle 12 方向。 |
 
