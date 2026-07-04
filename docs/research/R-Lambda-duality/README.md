@@ -143,3 +143,49 @@ $$v_p(Z_N)=\mu_{\min}(p)\,N+r_p(N),$$
 - `integrable-lattice/sagemath/check/D-U2_padic_law/`（計算検証）。
 - `docs/discussion/対数順序群上の統計力学/09_2DIsing閉形式の可算的導出.md`（$\mathbb{R}$ 脱出の隔離・転送行列）。
 - `docs/discussion/可算性の効用/`（可算/$\mathbb{R}$ = 決定可能性の境界）。
+
+---
+
+## 8. $\Lambda$-内部定式化（6-6 の確定, 層0/1）
+
+6-6（双対を $\Lambda$ の言葉で書く）を、確立済みの定理 P だけで層0/1で確定する。$\mu_p$・積公式（層2）に非依存。6-1（積公式）はこの土台の上で初めて意味を持つ。
+
+### 8.1 $\Lambda$ 側は単一の $\Lambda$-内部命題
+
+**主張 1（$\Lambda$-傾き $M$ の well-defined 性）.** $T\in M_d(\mathbb{Z})$、$\det T\ne0$ とする。
+$$M:=\sum_{p\in\mathcal P}\mu_{\min}(p)\,\ell_p\in\Lambda.$$
+すなわち $\mu_{\min}(p)>0$ となる $p$ は有限個。
+*証明*: $\mu_{\min}(p)=\min_i v_p(\lambda_i)>0$ なら全固有値が $v_p>0$、よって $v_p(\det T)=\sum_i v_p(\lambda_i)\ge d>0$、ゆえ $p\mid\det T$。$\det T\in\mathbb{Z}\setminus\{0\}$ の素因数は有限。∎（$\det T=0$ は $0$ 固有値を分離した $T'$ で同様。）
+
+**主張 2（$\Lambda$-内部双対法則）.** 各 $N\in\mathbb{N}_{>0}$ に対し
+$$\Phi_N=N\cdot M+R(N),\qquad R(N):=\sum_{p}r_p(N)\,\ell_p\in\Lambda,$$
+$R(N)$ は各座標が $N$ について最終周期的。これは定理 P（$v_p(Z_N)=\mu_{\min}(p)N+r_p(N)$）の全 $p$ 集約。$R(N)\in\Lambda$（有限台）は固定 $N$ で $Z_N\in\mathbb{Z}_{>0}$ の素因数が有限だから。
+
+⇒ 列 $(\Phi_N)_N\subset\Lambda$ は傾き $M\in\Lambda$ で**最終的に $\Lambda$-線形**。$\mathbb{R}$ 不使用。
+
+### 8.2 $\mathbb{R}$ 脱出の隔離
+
+**観察 3（スペクトル・データは可算）.** $\lambda_i\in\overline{\mathbb{Q}}$、$\bar\lambda_i\in\overline{\mathbb{Q}}$ ゆえ $|\lambda_i|_\infty^2=\lambda_i\bar\lambda_i\in\overline{\mathbb{Q}}\cap\mathbb{R}_{\ge0}$、したがって $|\lambda_i|_\infty\in\overline{\mathbb{Q}}\cap\mathbb{R}_{\ge0}$、$\lambda_{\max}\in\overline{\mathbb{Q}}\cap\mathbb{R}_{>0}$（絶対値も最大固有値も代数的・可算）。
+
+**観察 4（唯一の $\mathbb{R}$ 脱出は $\log_{\mathbb{R}}$）.** $-\beta f=\frac1L\log_{\mathbb{R}}\lambda_{\max}$ で $\lambda_{\max}\in\overline{\mathbb{Q}}$ は可算、$\mathbb{R}$ へ出るのは $\log_{\mathbb{R}}:\overline{\mathbb{Q}}_{>0}\to\mathbb{R}$ 一つ。Baker により代数的 $\alpha\ne0,1$ で $\log_{\mathbb{R}}\alpha$ は超越、ゆえ一般に $\log_{\mathbb{R}}\lambda_{\max}\notin\overline{\mathbb{Q}}$。
+
+**観察 5（同一スペクトルの二種の対数）.** 双対の両側は共通の有限多重集合 $\{\lambda_i\}\subset\overline{\mathbb{Q}}$ の「対数」：$\Lambda$ 側は $\log:\mathbb{Q}_{>0}\to\Lambda$（$\min$-$v_p$ 集約 $=M$、厳密・可算）、$\mathbb{R}$ 側は $\log_{\mathbb{R}}:\overline{\mathbb{Q}}_{>0}\to\mathbb{R}$（$\max$-$|\cdot|_\infty$ の $\lambda_{\max}$、超越脱出）。
+
+**観察 6（脱出が消える条件）.** $\lambda_{\max}\in\mathbb{Q}_{>0}$ のときに限り $\log_{\mathbb{R}}\lambda_{\max}=\sum_p v_p(\lambda_{\max})\ell_p\in\Lambda$ に落ち $\mathbb{R}$ 脱出が消える。例：六頂点 $(1,1,2),L=2$ で $\lambda_{\max}=6$、$-\beta f=\frac12(\ell_2+\ell_3)\in\Lambda\otimes\mathbb{Q}$。一般の可積分模型では $\lambda_{\max}$ は既約因子の Perron 根＝代数的無理数で脱出は不可避。
+
+### 8.3 注意：$\lambda_{\max}\in\mathbb{Q}$ は可積分性・閉形式と独立（三軸の分離）
+
+$\lambda_{\max}\in\mathbb{Q}$（固定 $L$ で charpoly が有理 Perron 根をもつ、$\iff$ 整数根、決定可能な算術的条件）は、次の三つの独立な軸のうち**軸 C のみ**の性質で、他を含意しない。
+
+- **軸 A：可積分性**（層1）＝ 転送行列の族 $T(u)$ が Yang–Baxter を満たす。単一行列の一根が有理かどうかとは無関係。
+- **軸 B：閉形式／可解性**（層2）＝ 熱力学極限 $L,N\to\infty$ の $-\beta f$ が明示式を持つか。これは別個の達成で、可積分でも保証されない（`07_Λ帰属と可解性は別.md` と同じ独立性）。
+- **軸 C：有限 $L$ スペクトルの算術**（層0）＝ $\lambda_{\max}\in\mathbb{Q}$ など、charpoly の $\mathbb{Q}$ 上分解。
+
+$\lambda_{\max}\in\mathbb{Q}$ が与えるのは「その有限 $L$ で $\mathbb{R}$ 脱出が消え $-\beta f\in\Lambda\otimes\mathbb{Q}$」だけ（観察 6）。極限 $L\to\infty$ は依然 $\mathbb{R}$ を要し、$\lambda_{\max}\in\mathbb{Q}$ は $L$ 増大で一般に崩れる不安定な性質。可積分性も閉形式も含意しない。
+
+### 8.4 残タスク（確定に向けて）
+
+1. 主張 1・2 を正式命題として（$\det T=0$ 縮退込みで）証明整備。
+2. 観察 3–6 を命題化（$|\lambda_i|_\infty\in\overline{\mathbb{Q}}$、$\log_{\mathbb{R}}$ の超越性、脱出消滅条件 $\lambda_{\max}\in\mathbb{Q}$、三軸独立）。
+3. $M\in\Lambda$（$\min$-$v_p$）と $\lambda_{\max}\in\overline{\mathbb{Q}}$（$\max$-$|\cdot|_\infty$）を、同一 $\{\lambda_i\}$ 上の二つの付値汎関数として並置する構造的定式化（積公式 6-1 を使わずに言える対）。
+4. 2 から 6-7（形式検証）が従う：$\Lambda$ 側（主張 1・2）は決定可能・機械検証可能、$\mathbb{R}$ 側は $\log_{\mathbb{R}}\lambda_{\max}$ の一点のみ検証外、という境界の確定。
