@@ -1,5 +1,13 @@
 # MEMORY
 
+## cycle 11 完了（2026-07-04, 3トラック並走）
+
+- **T1**: v_2(τ(L))=2(L−1)(奇 L, L=3..19)+グラフ岩澤理論接地(全域木の ℓ 進付値=類数の岩澤と平行)=cycle6 の p 進エントロピー=岩澤 μ と同構造。`cycle10_T1_vp_law/iwasawa_graph_README.md`。
+- **T2**: XXZ 2マグノン∈ℚ̄。**T2 正直整理: 新厳密解未産出=T1 重複**。真の solve は専門機構要。`cycle11_T2/`。
+- **T3**: Lehmer は ℝ側固有, Λ側(岩澤 μ_p∈ℤ, Ferrero–Washington)は決定可能=双対の非対称集約。`cycle10_T3_lehmer/padic_analog_README.md`。
+- **方針判断点**: T2 の扱い(1.T1 統合 / 2.特定量に深張り / 3.現状維持)。指定なければ cycle12 は 1+paper-plan 化。
+- cycle12 step列: T1 双対 paper-plan / T2→T1 Ising Onsager 可算 Reframe / T3 非自明 μ_p グラフ例。
+
 ## cycle 10 完了（2026-07-03, 3トラック並走）
 
 - **T1**: 全域木数 τ(L) の clean 法則 奇 L で v_2(τ(L))=2(L−1)(L=3..11)。一般 v_p は円分的。`cycle10_T1_vp_law/`。

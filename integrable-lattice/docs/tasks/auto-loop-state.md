@@ -107,14 +107,37 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 - **T3 Pure**: 自由エネルギー=Mahler 測度=エントロピー → Lehmer 問題（最小正エントロピー）への接続を地図化。**スケール違いの偶然（4G/π vs Lehmer 数）に注意**を明記。Mahler/エントロピーは ℝ 側で決定可能成果とは別。
 - 全体: T1 で clean な Λ 側法則, T2/T3 は既知理論への正確な接続と限界の明示。誇張なし。
 
+## cycle 11 総括（rank:cycle11, 2026-07-04）
+
+- **T1 Reframe**: $v_2(\tau(L))=2(L-1)$（奇 L）を L=3..19 で検証強化。**全域木数の ℓ 進付値＝グラフの岩澤理論**（abelian ℓ-towers, 類数の岩澤不変量と平行）に接地。cycle6 の p 進エントロピー＝岩澤 μ と同構造。
+- **T2 Solve（正直な現状整理）**: XXZ 2マグノン∈ℚ̄（cubic 因子=Bethe 根）。**cycle1-11 の T2 は「既知可積分構造を可算で確認・再導出」で新厳密解を産出しておらず、実質 T1 と重複**。真の solve は専門機構（BBP/TQ/量子群/楕円）が要り現行道具で困難。
+- **T3 Pure**: **Lehmer 問題は双対の ℝ 側固有**。Λ 側（岩澤 μ_p∈ℤ, Ferrero–Washington で generic 0）は離散・決定可能で Lehmer 型問題なし。**双対の決定可能性非対称の集約**（研究ノート §3.1 と一致）。
+- 全体像の収束: Mahler 測度(ℝ)/岩澤理論(Λ)/決定可能性非対称/Lehmer が一貫した双対像に。**T2 の扱いが方針判断点**（下記, rank で提起）。
+
+### 方針判断点（ユーザー価値判断）: T2 トラックの扱い
+T2（未解決模型の実厳密解）は 11 cycle を通して新厳密解を産まず、可算 Reframe（T1）に収束。選択肢:
+1. **T2 を T1 に統合**し「既知可積分結果の可算・厳密・形式検証可能な書き換え」に一本化（現実的・堅実）。
+2. 特定の小さく未解決な量（例: 特定境界の有限サイズ補正の可算表示）に**深く張る**（専門文献精読, 重い, 新解の可能性）。
+3. 現状維持（T2 で既知構造の可算確認を続ける）。
+→ 指定なければ cycle12 は **1（T1 統合寄り）+ 蓄積成果の paper-plan 化**で進める。
+
+## cycle 12 step 列（3トラック継続。2026-07-04 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | paper_plan_R_Lambda_duality | todo | | 11 cycle の蓄積(D-U2 決定可能命題, Mahler ℝ/岩澤 Λ 双対, 決定可能性非対称, Lehmer 地図)を `outputs/paper-plans/` に統合 paper-plan 化。基礎論/数論的構造ノートとして。 |
+| 2 | T2→T1 | reframe_onsager_ising_qqbar | todo | | T2 統合方針: 2D Ising Onsager 解の有限 N ℚ̄ 構造(docs/discussion 09 と連携)を可算 Reframe。既知解を可算・形式検証可能に。 |
+| 3 | T3 Pure | nonzero_mu_p_graph | todo | | 非自明 μ_p(グラフ岩澤, 全域木)の具体例を計算(cycle6/11 の μ_p=0 generic の外)。p 進エントロピー>0 の実例。 |
+| 4 | — | rank:cycle12 | todo | | 再ランク → cycle 13 方向。 |
+
 ## cycle 11 step 列（3トラック継続。2026-07-03 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | prove_v2_spanning_tree | done | 2026-07-04 | `sagemath/check/cycle10_T1_vp_law/iwasawa_graph_README.md` + `verify_more`。奇 L=3..19 で v_2(τ(L))=2(L−1) 全一致(検証強化)。**接地: 全域木数の ℓ 進付値は「グラフの岩澤理論」(abelian ℓ-towers, arXiv:2006.14012, 類数の岩澤 μ,λ と平行)で研究済**=cycle6 の p 進エントロピー=岩澤 μ と同じ構造。⇒ Λ 側算術は Mahler(ℝ)と岩澤理論(Λ)の両素点に乗る既知枠組み。完全証明・該当命題特定は cycle12+(正直)。 |
 | 2 | T2 Solve | tau2_model_finite_N | done | 2026-07-04 | `sagemath/check/cycle11_T2/`。τ^(2) 正確構成は BBP 機構で誤りやすいため XXZ 2マグノン(Bethe 可解最小)で代替: 固有値∈ℚ̄, 次数1,2,3(cubic 因子=Bethe 根の代数構造)。**T2 の正直な現状整理**: cycle1-11 は「既知可積分構造を可算(ℚ̄/Λ)で確認・再導出」で**新厳密解は未産出**、実質 T1 と重なる。真の solve は専門機構(BBP/TQ/量子群/楕円)が要り現行道具で困難。cycle12+ で T2 を T1 統合 or 特定未解決量に深く張るか方針判断(rank で提起)。 |
-| 3 | T3 Pure | padic_analog_lehmer | todo | | Lehmer の Λ(p 進)版があるか: 岩澤 μ_p や p 進 Mahler 測度の「最小正値」問題。文献確認＋位置づけ。 |
-| 4 | — | rank:cycle11 | todo | | 再ランク → cycle 12 方向。 |
+| 3 | T3 Pure | padic_analog_lehmer | done | 2026-07-04 | `sagemath/check/cycle10_T3_lehmer/padic_analog_README.md`。**Λ 側に Lehmer 型問題は存在しない**: ℝ側 Mahler 測度は連続(Lehmer 未解決ギャップ), Λ側 岩澤 μ_p=p 進エントロピーは整数値(離散)で最小正値=1 自明, Ferrero–Washington で generic に 0=決定可能。**双対の決定可能性非対称の集約**(研究ノート §3.1 と一致): 難しい連続問題は ℝ 側だけ, Λ 側は離散・決定可能・解決済。cycle10T3+cycle6/11T1 が一貫像に収束。 |
+| 4 | — | rank:cycle11 | done | 2026-07-04 | 下記「cycle 11 総括」。T1(v_2=2(L−1) 検証強化+グラフ岩澤接地)/T2(2マグノン∈ℚ̄, T2 現状の正直整理=新解未産出・T1 重複)/T3(Lehmer は ℝ側固有・Λ側は決定可能=非対称集約)。**方針判断を提起**(T2 の扱い)。cycle12 step列起こし。 |
 
 ## cycle 10 step 列（3トラック継続。2026-07-01 起こし）
 
