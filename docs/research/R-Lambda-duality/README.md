@@ -157,6 +157,11 @@ $$M:=\sum_{p\in\mathcal P}\mu_{\min}(p)\,\ell_p\in\Lambda.$$
 すなわち $\mu_{\min}(p)>0$ となる $p$ は有限個。
 *証明*: $\mu_{\min}(p)=\min_i v_p(\lambda_i)>0$ なら全固有値が $v_p>0$、よって $v_p(\det T)=\sum_i v_p(\lambda_i)\ge d>0$、ゆえ $p\mid\det T$。$\det T\in\mathbb{Z}\setminus\{0\}$ の素因数は有限。∎（$\det T=0$ は $0$ 固有値を分離した $T'$ で同様。）
 
+**主張 1′（$M$ の台の陽な特徴づけと計算容易性）.** $\chi_T(x)=x^d+a_{d-1}x^{d-1}+\dots+a_0\in\mathbb{Z}[x]$（$T\in M_d(\mathbb{Z})$ ゆえ固有値は代数的整数, $\chi_T$ は monic 整数係数）に対し $g:=\gcd(a_0,a_1,\dots,a_{d-1})\in\mathbb{Z}$ とおくと
+$$\{p:\mu_{\min}(p)>0\}=\{p:p\mid g\}.$$
+*証明*: $\mu_{\min}(p)>0\iff$ 全固有値が $v_p>0\iff$ 全対称式 $a_k\ (k<d)$ が $v_p>0\iff \chi_T\equiv x^d\ (\mathrm{mod}\ p)\iff p\mid g$。∎
+$g$ は $T$ から決まる**固定整数**（$N$ 非依存, $g\mid a_0=\pm\det T$）で、傾き $M$ の台はその素因数という有限・容易な集合。これは $\Phi_N$ の**全台** $\{p:v_p(Z_N)>0\}$（$Z_N\sim\lambda_{\max}^N$, $N$ で発散, 列挙は分解困難）と対照的：$M$ の台の決定は固定小整数 $g$ 一回の分解、メンバーシップ $p\mid g$ は割り算一回で分解不要。値 $\mu_{\min}(p)$ 自体は指定 $p$ の Newton 多角形で個別に得る。例：六頂点 $L=2$ で $\chi_T=x^4-8x^3+8x^2+32x-48$, $g=\gcd(8,8,32,48)=8$, $\{p\mid8\}=\{2\}$（$3\mid\det T=48$ だが $3\nmid g$ ゆえ $\mu_{\min}(3)=0$）。
+
 **主張 2（$\Lambda$-内部双対法則）.** 各 $N\in\mathbb{N}_{>0}$ に対し
 $$\Phi_N=N\cdot M+R(N),\qquad R(N):=\sum_{p}r_p(N)\,\ell_p\in\Lambda,$$
 $R(N)$ は各座標が $N$ について最終周期的。これは定理 P（$v_p(Z_N)=\mu_{\min}(p)N+r_p(N)$）の全 $p$ 集約。$R(N)\in\Lambda$（有限台）は固定 $N$ で $Z_N\in\mathbb{Z}_{>0}$ の素因数が有限だから。
