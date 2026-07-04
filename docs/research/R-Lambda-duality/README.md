@@ -168,6 +168,8 @@ $R(N)$ は各座標が $N$ について最終周期的。これは定理 P（$v_
 
 ⇒ 列 $(\Phi_N)_N\subset\Lambda$ は傾き $M\in\Lambda$ で**最終的に $\Lambda$-線形**。$\mathbb{R}$ 不使用。
 
+**系（傾き素点は恒久的因子）.** $p\mid g$（$\iff\mu_{\min}(p)>0$）なら全 $N\ge1$ で $p\mid Z_N$。*証明*: 超距離不等式で $v_p(Z_N)=v_p(\sum_i\lambda_i^N)\ge\min_i N\,v_p(\lambda_i)=N\mu_{\min}(p)>0$、$Z_N\in\mathbb{Z}$ ゆえ $\ge1$。∎ よって $r_p(N)\ge0$ は床 $\mu_{\min}(p)N$ の上に乗る（$v_p(Z_N)\ge\mu_{\min}(p)N$, 線形成長）。対して $p\nmid g$（$\mu_{\min}(p)=0$, 例 六頂点 $p=3$: $Z_N\equiv1+(-1)^{N+1}\bmod3$, $N$ 偶のみ割る）は $N$ 依存で割ったり割らなかったりする残差素点。傾き $M$ の台（$T$ で固定・有限）＝恒久的因子、残差 $R(N)$ の台（$N$ 依存）＝断続的因子。
+
 ### 8.2 $\mathbb{R}$ 脱出の隔離
 
 **観察 3（スペクトル・データは可算）.** $\lambda_i\in\overline{\mathbb{Q}}$、$\bar\lambda_i\in\overline{\mathbb{Q}}$ ゆえ $|\lambda_i|_\infty^2=\lambda_i\bar\lambda_i\in\overline{\mathbb{Q}}\cap\mathbb{R}_{\ge0}$、したがって $|\lambda_i|_\infty\in\overline{\mathbb{Q}}\cap\mathbb{R}_{\ge0}$、$\lambda_{\max}\in\overline{\mathbb{Q}}\cap\mathbb{R}_{>0}$（絶対値も最大固有値も代数的・可算）。
