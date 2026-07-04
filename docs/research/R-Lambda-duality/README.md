@@ -200,6 +200,12 @@ $$R(N)=\log(Z_N/c^N)\in\Lambda,$$
 
 **観察 6（脱出が消える条件）.** $\lambda_{\max}\in\mathbb{Q}_{>0}$ のときに限り $\log_{\mathbb{R}}\lambda_{\max}=\sum_p v_p(\lambda_{\max})\ell_p\in\Lambda$ に落ち $\mathbb{R}$ 脱出が消える。例：六頂点 $(1,1,2),L=2$ で $\lambda_{\max}=6$、$-\beta f=\frac12(\ell_2+\ell_3)\in\Lambda\otimes\mathbb{Q}$。一般の可積分模型では $\lambda_{\max}$ は既約因子の Perron 根＝代数的無理数で脱出は不可避。
 
+**観察 7（$\log\lambda_{\max}$ と $\rho(M)$ の物理的意味＝別概念）.** 実現 $\rho:\Lambda\to\mathbb{R}$, $\rho(\sum a_p\ell_p)=\sum a_p\log_{\mathbb{R}}p$ で両側を $\mathbb{R}$ に並べる。
+- $\log_{\mathbb{R}}\lambda_{\max}=\max_i\log|\lambda_i|_\infty$（アルキメデス）＝ $Z_N$ の**指数的成長率** ＝ **自由エネルギー密度** $-\beta f=\frac1L\log\lambda_{\max}$。物理の実体（エントロピー・比熱・相転移）はここ。
+- $\rho(M)=\sum_p\mu_{\min}(p)\log p=\log_{\mathbb{R}}c$（$c=\prod_p p^{\mu_{\min}(p)}$, 非アルキメデスの $\min$-$v_p$ を集約）＝ 成長率でなく **$c^N\mid Z_N$ の割り切れの床**。物理的には $\mu_{\min}(p)>0\iff T\bmod p$ 冪零（$\chi_T\equiv x^d\bmod p$）＝ **重みの自明な乗法的含量**（全体規格化・自由対称群の位数, 各行あたり因子 $c$）で、相互作用が生む自由エネルギーではない。
+- 一般に $\rho(M)\ne\log\lambda_{\max}$。同一 $\{\lambda_i\}$ の二付値汎関数（$\max$-$|\cdot|_\infty$ vs $\min$-$v_p$）で、$\log\lambda_{\max}=\rho(M)+(\text{アルキメデス・ドリフト})$、主要物理は後者。
+- 例：六頂点 $(1,1,2),L=2$ は成分が全偶で $T=2T'$（$T'$ 固有値 $\{3,-1,1,1\}$）。$c=2$ は重み $c{=}2$ の全体因子、$\rho(M)=\log2\approx0.693$（自明含量）、$\log\lambda_{\max}=\log6\approx1.792$（自由エネルギー$\times L$）、$\log6=\log2+\log3$ で真の相互作用分は $\log3$。
+
 ### 8.3 注意：$\lambda_{\max}\in\mathbb{Q}$ は可積分性・閉形式と独立（三軸の分離）
 
 $\lambda_{\max}\in\mathbb{Q}$（固定 $L$ で charpoly が有理 Perron 根をもつ、$\iff$ 整数根、決定可能な算術的条件）は、次の三つの独立な軸のうち**軸 C のみ**の性質で、他を含意しない。
