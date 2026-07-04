@@ -111,7 +111,7 @@ restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T1 Reframe | prove_v2_spanning_tree | todo | | 奇 L で v_2(τ(L))=2(L−1) を Kirchhoff 行列式の2進解析で証明(or 既知結果を文献確認)。厳密命題化。 |
+| 1 | T1 Reframe | prove_v2_spanning_tree | done | 2026-07-04 | `sagemath/check/cycle10_T1_vp_law/iwasawa_graph_README.md` + `verify_more`。奇 L=3..19 で v_2(τ(L))=2(L−1) 全一致(検証強化)。**接地: 全域木数の ℓ 進付値は「グラフの岩澤理論」(abelian ℓ-towers, arXiv:2006.14012, 類数の岩澤 μ,λ と平行)で研究済**=cycle6 の p 進エントロピー=岩澤 μ と同じ構造。⇒ Λ 側算術は Mahler(ℝ)と岩澤理論(Λ)の両素点に乗る既知枠組み。完全証明・該当命題特定は cycle12+(正直)。 |
 | 2 | T2 Solve | tau2_model_finite_N | todo | | カイラル Potts の τ^(2)-model(Baxter-Bazhanov-Perk, より扱いやすい補助転送行列)を小サイズ構成し有限 N スペクトル∈ℚ̄・Onsager を確認。運動量の別ルート。 |
 | 3 | T3 Pure | padic_analog_lehmer | todo | | Lehmer の Λ(p 進)版があるか: 岩澤 μ_p や p 進 Mahler 測度の「最小正値」問題。文献確認＋位置づけ。 |
 | 4 | — | rank:cycle11 | todo | | 再ランク → cycle 12 方向。 |
