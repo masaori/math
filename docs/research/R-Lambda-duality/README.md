@@ -209,3 +209,19 @@ $\lambda_{\max}\in\mathbb{Q}$ が与えるのは「その有限 $L$ で $\mathbb
 - $\Lambda$-閉形式は極限を要しない：成長率 $M=\sum_p\mu_{\min}(p)\ell_p\in\Lambda$ は単一 charpoly の Newton 多角形（有限代数）で得る。$\mathbb{R}$ 側が熱力学率に極限 $\frac1L\sum\to\int$ を要し $\int$ が出る（Onsager 解は極限を取った後の量ゆえ積分が現れる。有限 $L$ には有限和 $\sum$ しかなく $\int$ は $L\to\infty$ の痕跡）のと対照的。
 - 同じ「閉形式」でも $\Lambda$-閉形式（定義 X, 決定可能・可算・極限なし）と解析的閉形式（定義 Y, $\mathbb{R}$・極限・積分）は別物。$\S8.3$ 軸 B「閉形式」は定義 Y を指す。$\Lambda$ 側の $\Phi_N=NM+R(N)$（主張 2）は定義 X の意味で既に閉形式が**ある**——これが $\Lambda$ 側の「解けている」の正確な意味。
 - 注意：$\Lambda$ 側の熱力学極限（岩澤塔 $L=p^n\to\infty$ の $\mu_p$, 層2）は $\Lambda$-閉形式で済む保証がない（未確定）。$\Lambda$-閉形式で書けているのは有限 $L$・全 $N$ の段まで。
+
+### 8.6 「$\Lambda$-閉形式列の収束先＝$\mathbb{R}$-閉形式」は真、ただし対象は $\Phi_N$（傾き $M$ ではない）
+
+「$\Lambda$-閉形式の列を作れば、その収束先が $\mathbb{R}$-閉形式に対応する」——この picture は正しい。ただし列として**何を取るか**で真偽が分かれる。
+
+**実現写像（新規, 集合明示）.** $\rho:\Lambda\to\mathbb{R}$ を $\rho(\sum_p a_p\ell_p):=\sum_p a_p\log_{\mathbb{R}}p$（$a_p\in\mathbb{Z}$, 有限台）で定める。順序群の単射準同型で、$\log_{\mathbb{R}}$ による**唯一の $\mathbb{R}$ 脱出**。$\log_{\mathbb{R}}Z_N=\rho(\Phi_N)$（$\Phi_N\in\Lambda$ は素因数分解, $\log_{\mathbb{R}}$ は実対数）。
+
+**(A) 完全な $\Phi_N$ を取れば真.** 各 $\Phi_N\in\Lambda$ は定義 X の意味で $\Lambda$-閉形式（$Z_N$ の厳密素因数分解, 決定可能, 有限台）。列を $\rho$ で実現・規格化すると
+$$\frac1{NL}\rho(\Phi_N)=\frac1{NL}\log_{\mathbb{R}}Z_{N,L}\xrightarrow[N,L\to\infty]{}\log m(P)=-\beta f.$$
+各項は $\Lambda$-閉（可算・決定可能）、極限（$=\rho$＋$N,L\to\infty$）が $\mathbb{R}$-閉形式（Onsager）。**これが「$\Lambda$-閉形式列の収束先＝$\mathbb{R}$-閉形式」の正しい実現**。
+
+**(B) 傾き $M$ を取ると偽.** $\rho(M)=\sum_p\mu_{\min}(p)\log_{\mathbb{R}}p\ne\log_{\mathbb{R}}\lambda_{\max}$。$M$ は非アルキメデス的な影（$\min$-$v_p$）のみを射影し、自由エネルギーを与えるアルキメデス的成長（$\max$-$|\cdot|_\infty=\lambda_{\max}$）を落とす。
+
+**(B) が落ちる機構（六頂点 $\{6,-2,2,2\}$, $L=2$）.** $M=\ell_2$（$\mu_{\min}(2)=1,\mu_{\min}(3)=0$）ゆえ $\rho(M)=\log2\approx0.693$、一方 $\log\lambda_{\max}=\log6\approx1.792$。差 $\log3$ は $R(N)$ に潜む：$\rho(R(N))=\log Z_N-N\rho(M)\approx N\log3$ は **$N$ 線形で非有界**。各座標 $r_p(N)$ は最終周期的（有界）なのに、台が $N$ で増える（$Z_N$ が新素因数を獲得する）ため $\rho$ の無限和が線形に伸びる。すなわち **$R(N)$ は「各素点で有界・アルキメデス実現で非有界」**。自由エネルギーの分解：$\log\lambda_{\max}=\rho(M)+(\text{$R$ のアルキメデス・ドリフト})$、主要項は後者。
+
+**帰結（対応の正確な形）.** 同一の整数列 $Z_{N,L}$ を、素点 $\infty$ で読むと（真の極限を経て）$\mathbb{R}$-閉形式、各素点 $p$ で読むと（極限なしで）$\Lambda$-閉の傾き $M$。「収束先が $\mathbb{R}$-閉形式」は $\Phi_N$ を丸ごと $\rho$ 実現した**アルキメデスの顔**の話であり、$\S8$ の非アルキメデス傾き $M$ とは**別射影**。$\S8.5$ 表の $\mathbb{R}$ 側・$\Lambda$ 側は「同じ $\Phi_N$ の二素点射影」であって、片方の極限がもう片方になるのではない。
