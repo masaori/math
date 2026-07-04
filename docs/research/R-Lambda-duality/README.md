@@ -152,9 +152,9 @@ $$v_p(Z_N)=\mu_{\min}(p)\,N+r_p(N),$$
 
 ### 8.1 $\Lambda$ 側は単一の $\Lambda$-内部命題
 
-**主張 1（$\Lambda$-傾き $M$ の well-defined 性）.** $T\in M_d(\mathbb{Z})$、$\det T\ne0$ とする。
-$$M:=\sum_{p\in\mathcal P}\mu_{\min}(p)\,\ell_p\in\Lambda.$$
-すなわち $\mu_{\min}(p)>0$ となる $p$ は有限個。
+**主張 1（$\Lambda$-傾き $M$ の well-defined 性＝有限台）.** $T\in M_d(\mathbb{Z})$、$\det T\ne0$ とする。
+$$M:=\sum_{p\in\mathcal P}\mu_{\min}(p)\,\ell_p\in\Lambda\otimes\mathbb{Q}\quad(\mu_{\min}(p)\in\mathbb{Z}\ \forall p\ \text{なら}\ \in\Lambda;\ \text{audit (2)}).$$
+すなわち $\mu_{\min}(p)>0$ となる $p$（＝台）は有限個。
 *証明*: $\mu_{\min}(p)=\min_i v_p(\lambda_i)>0$ なら全固有値が $v_p>0$、よって $v_p(\det T)=\sum_i v_p(\lambda_i)\ge d>0$、ゆえ $p\mid\det T$。$\det T\in\mathbb{Z}\setminus\{0\}$ の素因数は有限。∎（$\det T=0$ は $0$ 固有値を分離した $T'$ で同様。）
 
 **主張 1′（$M$ の台の陽な特徴づけと計算容易性）.** $\chi_T(x)=x^d+a_{d-1}x^{d-1}+\dots+a_0\in\mathbb{Z}[x]$（$T\in M_d(\mathbb{Z})$ ゆえ固有値は代数的整数, $\chi_T$ は monic 整数係数）に対し $g:=\gcd(a_0,a_1,\dots,a_{d-1})\in\mathbb{Z}$ とおくと
@@ -164,15 +164,31 @@ $g$ は $T$ から決まる**固定整数**（$N$ 非依存, $g\mid a_0=\pm\det 
 
 **主張 2（$\Lambda$-内部双対法則）.** 各 $N\in\mathbb{N}_{>0}$ に対し
 $$\Phi_N=N\cdot M+R(N),\qquad R(N):=\sum_{p}r_p(N)\,\ell_p\in\Lambda,$$
-$r_p(N):=v_p(Z_N)-\mu_{\min}(p)N\in\mathbb{Z}_{\ge0}$（床の上の超過分, 系より非負）、各座標が $N$ について最終周期的。これは定理 P（$v_p(Z_N)=\mu_{\min}(p)N+r_p(N)$）の全 $p$ 集約。$R(N)\in\Lambda$（有限台）は固定 $N$ で $Z_N\in\mathbb{Z}_{>0}$ の素因数が有限だから。
+$r_p(N):=v_p(Z_N)-\mu_{\min}(p)N\in\mathbb{Z}_{\ge0}$（床の上の超過分, 系より非負）、各座標は **$p$ で非退化なら**（下記 audit (1)）$N$ について最終周期的。これは定理 P（$v_p(Z_N)=\mu_{\min}(p)N+r_p(N)$）の全 $p$ 集約。$R(N)\in\Lambda$（有限台）は固定 $N$ で $Z_N\in\mathbb{Z}_{>0}$ の素因数が有限だから。
 
-**閉じた形.** 傾き含量整数 $c:=\prod_p p^{\mu_{\min}(p)}=\prod_{p\mid g}p^{\mu_{\min}(p)}\in\mathbb{Z}_{>0}$（$M$ に対応, $T$ で固定・$N$ 非依存）を使うと、全 $p$ で $v_p(Z_N)\ge N\mu_{\min}(p)$ ゆえ $Z_N/c^N\in\mathbb{Z}_{>0}$ で
+**閉じた形（前提 $\mu_{\min}(p)\in\mathbb{Z}$; audit (2)(3)）.** 傾き含量整数 $c:=\prod_p p^{\mu_{\min}(p)}=\prod_{p\mid g}p^{\mu_{\min}(p)}\in\mathbb{Z}_{>0}$（$M$ に対応, $T$ で固定・$N$ 非依存）を使うと、全 $p$ で $v_p(Z_N)\ge N\mu_{\min}(p)$ ゆえ $Z_N/c^N\in\mathbb{Z}_{>0}$ で
 $$R(N)=\log(Z_N/c^N)\in\Lambda,$$
 すなわち $R(N)$ は整数 $Z_N/c^N$ の素因数分解（$\Phi_N=N\log c+\log(Z_N/c^N)=N M+R(N)$）。$R(N)$ の台 $\{p:r_p(N)>0\}=(Z_N/c^N$ の素因数$)$ は $N$ で増え列挙困難（$Z_N/c^N$ の分解）だが、法則は列挙を要さず名指し $p$ の $r_p(N)$ を $\bmod p^k$ 漸化で個別に与える。例：六頂点 $L=2$ で $c=2$, $Z_N/2^N=3^N+(-1)^N+2$, $R(N)=\log(3^N+(-1)^N+2)$（$N{=}1$: $4{=}2^2$, $N{=}2$: $12{=}2^2\cdot3$）。
 
 ⇒ 列 $(\Phi_N)_N\subset\Lambda$ は傾き $M\in\Lambda$ で**最終的に $\Lambda$-線形**。$\mathbb{R}$ 不使用。
 
 **系（傾き素点は恒久的因子）.** $p\mid g$（$\iff\mu_{\min}(p)>0$）なら全 $N\ge1$ で $p\mid Z_N$。*証明*: 超距離不等式で $v_p(Z_N)=v_p(\sum_i\lambda_i^N)\ge\min_i N\,v_p(\lambda_i)=N\mu_{\min}(p)>0$、$Z_N\in\mathbb{Z}$ ゆえ $\ge1$。∎ よって $r_p(N)\ge0$ は床 $\mu_{\min}(p)N$ の上に乗る（$v_p(Z_N)\ge\mu_{\min}(p)N$, 線形成長）。対して $p\nmid g$（$\mu_{\min}(p)=0$, 例 六頂点 $p=3$: $Z_N\equiv1+(-1)^{N+1}\bmod3$, $N$ 偶のみ割る）は $N$ 依存で割ったり割らなかったりする残差素点。傾き $M$ の台（$T$ で固定・有限）＝恒久的因子、残差 $R(N)$ の台（$N$ 依存）＝断続的因子。
+
+### 8.1a 素点ごとのアクセス（算法）と前提の精密化（audit）
+
+**素点ごとのアクセス（名指し $p$, 分解不要）.** $Z_N=\mathrm{Tr}(T^N)$ は $\chi_T$ を特性多項式とする $\mathbb{Z}$-線形漸化列。$p$ を固定して:
+1. $T^N\bmod p^k$ を繰り返し二乗法（$O(\log N)$ 回の行列積, 各 $O(d^3)$ の $\bmod p^k$ 乗算）で計算しトレース ⇒ $Z_N\bmod p^k$。
+2. $Z_N\equiv0\ (p^j),\not\equiv0\ (p^{j+1})$ の $j=v_p(Z_N)$。$k>v_p(Z_N)$ で確定。
+
+コスト $\mathrm{poly}(d,\log N,\log p,k)$。$p\mid g$ では $v_p(Z_N)\approx\mu_{\min}(p)N=\Theta(N)$ ゆえ $k=\Theta(N)$、生計算は $\mathrm{poly}(N)$（分解 $\exp(\Theta(N^{1/3}))$ より桁違いに安い）。近道：$\mu_{\min}(p)$ は Newton 多角形で一度、超過 $r_p(N)$ は非退化なら最終周期ゆえ周期一回計算で以後 $O(1)$。**$\Phi_N$ 全体（＝ $Z_N$ 分解）を経ず、$p$ を名指しして座標だけ取る**のがこの構図。
+
+**audit（無条件では不成立・要前提）.**
+- **(1) 最終周期性は非退化前提.** 進行 $N\equiv a\ (\mathrm{mod}\ M)$ 上で $Z_N$ は $p$ 進解析関数 $f_a(t)$（$t=(N-a)/M\in\mathbb{Z}_p$）に補間される。$f_a$ が $\mathbb{Z}_p$ に零点を持たないとき $r_p(N)$ は最終周期。零点 $t_0\in\mathbb{Z}_p$ を持つと（Skolem–Mahler–Lech 退化）、$t_0$ に $p$ 進収束する整数 $N$ に沿い $v_p(Z_N)\to\infty$、$r_p$ は非有界・非周期。一般の周期上界・例外集合は SML 由来で非可効（決定可能なのは各 $N$ の $v_p(Z_N)$ 点別計算まで）。
+- **(2) $M\in\Lambda$ は $\mu_{\min}(p)\in\mathbb{Z}$ 前提.** $\mu_{\min}(p)=\min_i v_p(\lambda_i)$ は Newton 多角形の最小傾きで分数になりうる（分岐拡大の固有値）。一般には $M\in\Lambda\otimes\mathbb{Q}$、$M\in\Lambda$ は全 $p$ で $\mu_{\min}(p)\in\mathbb{Z}$（固有値が有理整数等）のとき。$\{p:\mu_{\min}(p)>0\}=\{p\mid g\}$（主張1′）は分数でも成立（閾値判定）。
+- **(3) $R(N)=\log(Z_N/c^N)$ も (2) 前提.** $c=\prod_p p^{\mu_{\min}(p)}$ は $\mu_{\min}\in\mathbb{Z}$ でないと有理数ですらない。加えて $\Phi_N=\log Z_N\in\Lambda$ には $Z_N>0$ が要る（$Z_N=0$ は素因数分解なし）。真の転送行列（非負・原始的）は Perron–Frobenius で $Z_N=\mathrm{Tr}\,T^N>0$ ゆえ全零進行は排除されるが、劣支配固有値の分数付値・退化は残りうる。
+- **反例（(1)-(3) を同時に破る）.** $\chi_T=x^2-2$（$T=\bigl[\begin{smallmatrix}0&2\\1&0\end{smallmatrix}\bigr]$）: $Z_N=(\sqrt2)^N+(-\sqrt2)^N$、$N$ 奇で $0$（全奇数進行が例外, (1)破綻）、$N$ 偶で $2^{N/2+1}$。$\mu_{\min}(2)=v_2(\sqrt2)=1/2\notin\mathbb{Z}$（(2)破綻）、$c=\sqrt2\notin\mathbb{Q}$（(3)破綻）。ただし非負行列でないので真の転送行列ではない。
+
+**六頂点が綺麗な理由.** 固有値 $\{6,-2,2,2\}\subset\mathbb{Z}$ ゆえ $\mu_{\min}\in\mathbb{Z}$（(2)(3)成立）、各素点で $r_p$ 純周期（(1)成立）。一般の可積分模型（無理代数的 Perron 根）ではこれらは前提付きで、無条件で言えるのは床 $v_p(Z_N)\ge\mu_{\min}(p)N$（系）と各 $N$ の点別計算可能性のみ。
 
 ### 8.2 $\mathbb{R}$ 脱出の隔離
 
