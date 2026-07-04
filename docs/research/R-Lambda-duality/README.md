@@ -189,3 +189,23 @@ $\lambda_{\max}\in\mathbb{Q}$ が与えるのは「その有限 $L$ で $\mathbb
 2. 観察 3–6 を命題化（$|\lambda_i|_\infty\in\overline{\mathbb{Q}}$、$\log_{\mathbb{R}}$ の超越性、脱出消滅条件 $\lambda_{\max}\in\mathbb{Q}$、三軸独立）。
 3. $M\in\Lambda$（$\min$-$v_p$）と $\lambda_{\max}\in\overline{\mathbb{Q}}$（$\max$-$|\cdot|_\infty$）を、同一 $\{\lambda_i\}$ 上の二つの付値汎関数として並置する構造的定式化（積公式 6-1 を使わずに言える対）。
 4. 2 から 6-7（形式検証）が従う：$\Lambda$ 側（主張 1・2）は決定可能・機械検証可能、$\mathbb{R}$ 側は $\log_{\mathbb{R}}\lambda_{\max}$ の一点のみ検証外、という境界の確定。
+
+### 8.5 閉形式の二種：$\Lambda$-閉形式 vs 解析的閉形式
+
+「閉形式」は許す演算集合 $\mathcal F$ に相対的（$\mathcal F$ 抜きでは無定義）。双対の両側で $\mathcal F$ が異なるので二種に分ける。
+
+**定義 X（$\Lambda$-閉形式）.** 演算集合 $\mathcal F_\Lambda:=\{$ $\Lambda$ の $\mathbb{Z}$-線形結合; $\log:\mathbb{Q}_{>0}\to\Lambda$（素因数分解）; $\mathbb{Z}[x]$ の Newton 多角形による $v_p$; 有限多重集合の $\min/\max$; $\bmod p^k$ 線形漸化＋最終周期の有限記述; 整数算術・有限場合分け $\}$（$\lim,\int,\exp,\log_{\mathbb{R}},\mathbb{R}/\mathbb{C}$ を含まない）。量・列が $\mathcal F_\Lambda$ の有限表現で書け値が $\Lambda$（または $\Lambda\otimes\mathbb{Q}$）に住むとき **$\Lambda$-閉形式を持つ**という。**決定可能・機械検証可能・可算・極限なし**。
+
+**定義 Y（解析的閉形式＝通常の閉形式）.** $\mathcal F_{\mathbb{R}}:=\{$ 体演算, 根号, $\exp,\log_{\mathbb{R}}$, 固定領域の定積分, 指定特殊関数（楕円積分・$L$ 函数等）, $\lim$ $\}$。量が $\mathcal F_{\mathbb{R}}$ の有限表現で書け値が $\mathbb{R}/\mathbb{C}$ に住むとき **（解析的）閉形式を持つ**という。一般に**非可算・極限/積分を含み決定不能**。Onsager 解はこれ。
+
+**対応**:
+
+| | 有限（極限なし） | 熱力学極限（極限あり） |
+|---|---|---|
+| $\mathbb{R}$ 側 | $-\beta f_L=\frac1L\log_{\mathbb{R}}\lambda_{\max}(L)$（$\lambda_{\max}\in\overline{\mathbb{Q}}$）| $m(P)$／Onsager, $\int$ ＝**解析的閉形式**（定義 Y）|
+| $\Lambda$ 側 | $\Phi_N=N\cdot M+R(N)$, $M\in\Lambda$ ＝**$\Lambda$-閉形式**（定義 X, 全 $N$ 厳密）| $\mu_p$（岩澤, 層2, 未確定）|
+
+**要点**:
+- $\Lambda$-閉形式は極限を要しない：成長率 $M=\sum_p\mu_{\min}(p)\ell_p\in\Lambda$ は単一 charpoly の Newton 多角形（有限代数）で得る。$\mathbb{R}$ 側が熱力学率に極限 $\frac1L\sum\to\int$ を要し $\int$ が出る（Onsager 解は極限を取った後の量ゆえ積分が現れる。有限 $L$ には有限和 $\sum$ しかなく $\int$ は $L\to\infty$ の痕跡）のと対照的。
+- 同じ「閉形式」でも $\Lambda$-閉形式（定義 X, 決定可能・可算・極限なし）と解析的閉形式（定義 Y, $\mathbb{R}$・極限・積分）は別物。$\S8.3$ 軸 B「閉形式」は定義 Y を指す。$\Lambda$ 側の $\Phi_N=NM+R(N)$（主張 2）は定義 X の意味で既に閉形式が**ある**——これが $\Lambda$ 側の「解けている」の正確な意味。
+- 注意：$\Lambda$ 側の熱力学極限（岩澤塔 $L=p^n\to\infty$ の $\mu_p$, 層2）は $\Lambda$-閉形式で済む保証がない（未確定）。$\Lambda$-閉形式で書けているのは有限 $L$・全 $N$ の段まで。
