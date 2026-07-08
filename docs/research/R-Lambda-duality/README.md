@@ -172,7 +172,15 @@ $$R(N)=\log(Z_N/c^N)\in\Lambda,$$
 
 ⇒ 列 $(\Phi_N)_N\subset\Lambda$ は傾き $M\in\Lambda$ で**最終的に $\Lambda$-線形**。$\mathbb{R}$ 不使用。
 
-**系（傾き素点は恒久的因子）.** $p\mid g$（$\iff\mu_{\min}(p)>0$）なら全 $N\ge1$ で $p\mid Z_N$。*証明*: 超距離不等式で $v_p(Z_N)=v_p(\sum_i\lambda_i^N)\ge\min_i N\,v_p(\lambda_i)=N\mu_{\min}(p)>0$、$Z_N\in\mathbb{Z}$ ゆえ $\ge1$。∎ よって $r_p(N)\ge0$ は床 $\mu_{\min}(p)N$ の上に乗る（$v_p(Z_N)\ge\mu_{\min}(p)N$, 線形成長）。対して $p\nmid g$（$\mu_{\min}(p)=0$, 例 六頂点 $p=3$: $Z_N\equiv1+(-1)^{N+1}\bmod3$, $N$ 偶のみ割る）は $N$ 依存で割ったり割らなかったりする残差素点。傾き $M$ の台（$T$ で固定・有限）＝恒久的因子、残差 $R(N)$ の台（$N$ 依存）＝断続的因子。
+**系（傾き素点は恒久的因子）.** $p\mid g$（$\iff\mu_{\min}(p)>0$）なら全 $N\ge1$ で $p\mid Z_N$。*証明*: 超距離不等式で $v_p(Z_N)=v_p(\sum_i\lambda_i^N)\ge\min_i N\,v_p(\lambda_i)=N\mu_{\min}(p)>0$、$Z_N\in\mathbb{Z}$ ゆえ $\ge1$。∎ よって $r_p(N)\ge0$ は床 $\mu_{\min}(p)N$ の上に乗る（$v_p(Z_N)\ge\mu_{\min}(p)N$, 線形成長）。
+
+**系の逆は偽（恒久因子 $\supsetneq$ 傾き素点）.** 「全 $N$ で $p\mid Z_N$」は $\mu_{\min}(p)>0$ を**含意しない**。$\mu_{\min}(p)=0$ でも残差 $r_p(N)$ が周期内で決して $0$ にならなければ全 $N$ で割る。正確には
+$$\{p\mid g\}\ (\text{傾き素点})\ \subseteq\ \{p:\forall N,\ p\mid Z_N\}\ =\ \{p:\min_N r_p(N)\ge1\},$$
+包含は一般に真の包含。例：六頂点 $p=3$ は $Z_N\equiv1+(-1)^{N+1}\bmod3$ で $N$ 偶のみ割る（$\min_N r_3=0$, 断続）。対して蜂の巣 dimer（下記）$p=3$ は $Z_N=2\cdot4^N+1\equiv0\bmod3$ で全 $N$ を割る（$\min_N r_3=1$, 恒久）が $\mu_{\min}(3)=0$ で傾きには寄与しない。同じ $\mu_{\min}=0$ 残差素点でも周期パターンで全 $N$ 割りうる。ゆえ「恒久 vs 断続」は $\{p\mid g\}$ でなく $\{p:\min_N r_p(N)\ge1\}$ で切る。
+
+**蜂の巣 dimer 例（$M=0$ でも恒久残差素点）.** 蜂の巣格子（3 価・二部）dimer 模型, 円周 $W=4$, 二部性ゆえ転送行列は 2 副格子の積 $T=T_AT_B\in M_4(\mathbb{Z})$:
+$$T=\begin{pmatrix}4&0&0&0\\0&2&2&0\\0&2&2&0\\0&0&0&1\end{pmatrix},\quad\{\lambda_i\}=\{4,4,1,0\},\quad Z_N=\mathrm{Tr}(T^N)=2\cdot4^N+1\in\mathbb{Z}_{>0},\ \Phi_N=\log Z_N\in\Lambda.$$
+$0$ 固有値を分離した $T'$ の charpoly $=(x-1)(x-4)^2$, $g=\gcd(9,24,16)=1$ ⇒ 傾き $M=0$（傾き素点なし）。だが $3\mid Z_N$ 全 $N$（$v_3(Z_N)=2,1,1,3,1,1,2,\dots$ 最終周期・常に $\ge1$）。$\lambda_{\max}=4\in\mathbb{Q}$ ゆえ $-\beta f=\frac12\log4$ でこの有限サイズは $\mathbb{R}$ 脱出が消える（観察6）。物理：対称蜂の巣八頂点＝外場中 Ising ゆえ、Λ 帰属は可解性と独立（軸 C ○・軸 B ×, §8.3）の格子例。詳細 `docs/research/頂点模型/`。
 
 ### 8.1a 素点ごとのアクセス（算法）と前提の精密化（audit）
 
