@@ -213,6 +213,7 @@ $0$ 固有値を分離した $T'$ の charpoly $=(x-1)(x-4)^2$, $g=\gcd(9,24,16)
 - $\rho(M)=\sum_p\mu_{\min}(p)\log p=\log_{\mathbb{R}}c$（$c=\prod_p p^{\mu_{\min}(p)}$, 非アルキメデスの $\min$-$v_p$ を集約）＝ 成長率でなく **$c^N\mid Z_N$ の割り切れの床**。物理的には $\mu_{\min}(p)>0\iff T\bmod p$ 冪零（$\chi_T\equiv x^d\bmod p$）＝ **重みの自明な乗法的含量**（全体規格化・自由対称群の位数, 各行あたり因子 $c$）で、相互作用が生む自由エネルギーではない。
 - 一般に $\rho(M)\ne\log\lambda_{\max}$。同一 $\{\lambda_i\}$ の二付値汎関数（$\max$-$|\cdot|_\infty$ vs $\min$-$v_p$）で、$\log\lambda_{\max}=\rho(M)+(\text{アルキメデス・ドリフト})$、主要物理は後者。
 - 例：六頂点 $(1,1,2),L=2$ は成分が全偶で $T=2T'$（$T'$ 固有値 $\{3,-1,1,1\}$）。$c=2$ は重み $c{=}2$ の全体因子、$\rho(M)=\log2\approx0.693$（自明含量）、$\log\lambda_{\max}=\log6\approx1.792$（自由エネルギー$\times L$）、$\log6=\log2+\log3$ で真の相互作用分は $\log3$。
+- **$M=0$ の物理**: $M=0\iff c=1\iff\forall p,T\bmod p$ 非冪零 ⇒ 自明含量ゼロ。示量自由エネルギー $\log\lambda_{\max}$ の**全部が真の相互作用・エントロピー分**で、どの部分も行あたり規格化因子（全体スケール・$\bmod p$ 冪零構造）では説明されない。すなわち重み行列が算術的に原始的。例：蜂の巣 dimer（重み全 1, スケール無し）は $M=0$、$\log\lambda_{\max}=\log4$ 全部が真の dimer エントロピー（§8.1 蜂の巣例）。
 
 ### 8.3 注意：$\lambda_{\max}\in\mathbb{Q}$ は可積分性・閉形式と独立（三軸の分離）
 
