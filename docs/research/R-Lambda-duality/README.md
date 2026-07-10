@@ -320,3 +320,18 @@ $-\beta f=\log m(P)$、$P\in\mathbb{Z}[z^\pm,w]$ スペクトル曲線。Onsager
 全域木 $\mathbb{Z}^2$ の $\frac4\pi\beta(2)$ と Smyth の $\frac{3\sqrt3}{4\pi}L(\chi_{-3},2)$ が同形（$(\text{定数}/\pi)L(\chi,2)$）なのは両方種数0の Mahler 測度＝$L$ 値だから。
 
 **軌道修正（重要）**: この枠は **Yang–Baxter 可積分性より広く本質的**。全域木は YBE 可積分でないが、そのエントロピーは綺麗な $L$ 値（種数0）。「解ける／閉形式が出る」を決めるのは YBE でなく**スペクトル曲線の数論**。可解系の族の特徴づけには「Mahler 測度＝$L$ 値」の数論的枠が正しい分類子。$\Lambda$ 側（点数・Newton, 決定可能）が数論型の検出器。
+
+**素材はグラフに限らない**: 整数値の数え上げなら何でも素材。グラフは転送行列に直結するので使いやすいだけ。
+
+### 9.5 ウルトラ離散／トロピカル隅と箱玉系（Newton 多角形＝共通骨格）
+
+**箱玉系 (BBS)** はこの分類の特別な隅として綺麗に入る。BBS（Takahashi–Satsuma 1990）は離散ソリトン方程式の**ウルトラ離散（tropical, max-plus）極限**であり、同時に $U_q(\widehat{\mathfrak{sl}}_2)$ の**結晶（$q\to0$）極限**＝六頂点/XXZ の crystal 極限。
+
+- **付随する数え上げ**: 状態数は rigged configuration 全単射で **Kostka–Foulkes 多項式 $K_{\lambda\mu}(q)\in\mathbb{Z}[q]$**（fermionic formula）。
+- **本来の住処＝トロピカル極限**: 我々の枠（$\log Z=\log\sum\prod w$, $Z_N=\mathrm{Tr}\,T^N$, 成長率＝Mahler 測度）のウルトラ離散極限が BBS。$(+,\times)\to(\max,+)$ で $\log Z\to$ max-plus 評価、スペクトル曲線 $\to$ tropical 曲線（Newton 多角形）。BBS ソリトンはこの Newton 多角形上に住む。
+
+**深い接続（Newton 多角形＝共通骨格）**: $\mu_{\min}(p)$ を与えるのは charpoly の **$p$ 進 Newton 多角形**（$p$ 進付値でのトロピカル化）。BBS/amoeba を与えるのは同じスペクトル曲線の**アルキメデス的トロピカル化**（amoeba の spine ＝ tropical 曲線）。
+$$\underbrace{p\text{ 進 Newton 多角形}(\mu_{\min},\Lambda\text{側})}_{\text{非アルキメデス・トロピカル}}\ \longleftrightarrow\ \underbrace{\text{amoeba/tropical 曲線}(\text{BBS ソリトン})}_{\text{アルキメデス・トロピカル}}$$
+双対の「同一 $P$ を各素点で読む」が「同一 Newton 多角形を各素点でトロピカル化」として現れる。BBS は双対のアルキメデス・トロピカル隅、$\mu_{\min}$ は非アルキメデス・トロピカル隅、共通骨格が Newton 多角形。
+
+**含意（BBS では $L$ 値が消える）**: トロピカル極限は $\mathbb{R}$ 脱出／$L$ 値の難所を消す。Mahler 測度 $\int\log|P|$ はトロピカル化で Newton 多面体の体積・格子点データ（区分線形・有理）に潰れ、$L$ 値の繊細な数論は劣次項として捨てられる。ゆえ **BBS は「可積分だが閉形式的に算術的に自明」な極**（全て組合せ・max-plus で決定可能, $\Lambda$-native, $\mathbb{R}$ 脱出なし）。難しい $L$ 値は脱トロピカル化した $q>0$ の模型（六頂点・XXZ）に住む。⇒ §9 の非自明例（$L$ 値）を探すには**BBS を脱トロピカル化して $q>0$ を見る**。非自明な $\log Z$ 極限を BBS から出すならランダム化 BBS/GHD/ソリトン気体（Croydon–Kato–Sasada, Ferrari–Nguyen–Rolla–Wang, 2018–）の電流大偏差率関数。
