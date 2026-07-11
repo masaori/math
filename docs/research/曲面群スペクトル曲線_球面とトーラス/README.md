@@ -53,6 +53,8 @@ RΛ 双対の立場（[`R-Lambda-duality/`](../R-Lambda-duality/)）を貫く：
 
 - [`01_トーラス_π1=Z2.md`](01_トーラス_π1=Z2.md) — $\pi_1(T^2)=\mathbb{Z}^2$。**$N=1$：Bloch トーラス $(\mathbb{C}^\times)^2$ 上の $P(z,w)$＝dimer/Ising Mahler 曲線（RΛ 基底）**。$N\ge2$：可換対多様体 $\mathrm{Sym}^N((\mathbb{C}^\times)^2)$（Florentino–Lawton）、楕円曲線 $E$ 上 Higgs 束のスペクトル曲線 $\lambda^N+c_1\lambda^{N-1}+\dots+c_N=0$（$N$ 枚の $E$、étale）、1 点穴で楕円 Calogero–Moser（Krichever Lax・D'Hoker–Phong SW 曲線）。$\mathbb{F}_q$ 点数（Feit–Fine）。
 - [`02_球面と穴あき球面_自由群.md`](02_球面と穴あき球面_自由群.md) — $S^2$ の退化（$\deg K=-2$）と穴による救済。$n$ 点穴＝自由群 $F_{n-1}$、Deligne–Simpson／Crawley-Boevey。放物 Higgs の $\lambda^2=a_2$、種数 $g_S=n-3$。**$n=3$：剛性・超幾何（Katz、点）／$n=4$：楕円スペクトル曲線＝Painlevé VI（Manin 楕円形・Levin–Olshanetsky・Takasaki）**。
+- [`03_任意次元トーラス_Zd.md`](03_任意次元トーラス_Zd.md) — 「なぜトーラスを $d=2$ に絞ったか」。**曲面分類では $T^2$ が唯一の $g{=}1$ 平坦曲面ゆえ強制、しかし RΛ エンジン $\mathbb{Z}^d$ は任意 $d$**。$N{=}1$：LSW スペクトル多様体 $P(z_1,\dots,z_d)$（$\dim d{-}1$、梯子 $d{=}2$曲線→$d{=}3$ K3→$d{=}4$ CY）。$N\ge2$：$\mathrm{Sym}^N((\mathbb{C}^\times)^d)$、可換 $d$-組多様体は **$d{=}2$ で既約・$d\ge3$ で可約**（Motzkin–Taussky／Ngô–Šivic）。高次元アーベル多様体上 Higgs 場＝可換 $d$-組、高次 Hitchin は Chen–Ngô で未解決。
+- [`04_スペクトル多様体カタログ_R脱出一覧.md`](04_スペクトル多様体カタログ_R脱出一覧.md) — **具体例 約100件**を $\mathbb{R}$ 脱出の4分類（Ⅰ脱出なし／Ⅱ代数的 $\log$／Ⅲ特殊値 $L$値・周期／Ⅳ一般超越）で一覧。$d{=}1$ Lehmer/Salem、$d{=}2$ dimer・Ising・Boyd $n(k)/g(k)$・全域木・hard hexagon・SAW、$d{=}3$ K3（Bertin・Samart）、$d{=}4$ CY（Papanikolas–Rogers–Samart）、階数 $N$ の指標多様体・表現数。証明/予想・導手・weight を明記。
 
 ---
 
