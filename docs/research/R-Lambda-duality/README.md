@@ -182,6 +182,20 @@ $$\{p\mid g\}\ (\text{傾き素点})\ \subseteq\ \{p:\forall N,\ p\mid Z_N\}\ =\
 $$T=\begin{pmatrix}4&0&0&0\\0&2&2&0\\0&2&2&0\\0&0&0&1\end{pmatrix},\quad\{\lambda_i\}=\{4,4,1,0\},\quad Z_N=\mathrm{Tr}(T^N)=2\cdot4^N+1\in\mathbb{Z}_{>0},\ \Phi_N=\log Z_N\in\Lambda.$$
 $0$ 固有値を分離した $T'$ の charpoly $=(x-1)(x-4)^2$, $g=\gcd(9,24,16)=1$ ⇒ 傾き $M=0$（傾き素点なし）。だが $3\mid Z_N$ 全 $N$（$v_3(Z_N)=2,1,1,3,1,1,2,\dots$ 最終周期・常に $\ge1$）。$\lambda_{\max}=4\in\mathbb{Q}$ ゆえ $-\beta f=\frac12\log4$ でこの有限サイズは $\mathbb{R}$ 脱出が消える（観察6）。物理：対称蜂の巣八頂点＝外場中 Ising ゆえ、Λ 帰属は可解性と独立（軸 C ○・軸 B ×, §8.3）の格子例。詳細 `docs/research/頂点模型/`。
 
+### 8.1b Newton 多角形の定義（$\Lambda$ 言語, $\mathbb{R}$ 不使用）
+
+$\mu_{\min}(p)$ を与える $p$ 進 Newton 多角形を $\Lambda$ の座標だけで定義。素点 $p$ ＝ $\Lambda$ の座標函数 $[\sum_q c_q\ell_q]_p=c_p$、$0\ne n\in\mathbb{Z}$ で $[\log|n|]_p=v_p(n)$。
+
+**入力** $\chi(x)=\sum_{k=0}^d a_k x^k\in\mathbb{Z}[x]$（$a_d\ne0$）。**定義**: 係数列の $\ell_p$ 座標をプロットした $S_p=\{(k,v_p(a_k)):a_k\ne0\}\subset\mathbb{Z}^2$（$a_k=0$ は $v_p=+\infty$ で除外）の**下側凸包**が $p$ 進 Newton 多角形 $\mathrm{NP}_p(\chi)$。$\mathbb{Z}$ 上の凸幾何のみ、$\mathbb{R}$・アルキメデス絶対値なし。
+
+**根の付値**: 辺の傾きを左から $\sigma_1<\dots<\sigma_r$、水平長 $m_j$（$\sum m_j=d$）とすると、$\chi$ は $\overline{\mathbb{Q}_p}$ で付値 $v_p(\lambda)=-\sigma_j$ の根を $m_j$ 個持つ。ゆえ
+$$\mu_{\min}(p)=\min_i v_p(\lambda_i)=-\max_j\sigma_j=-(\text{右端の辺の傾き}),\qquad M=\sum_p\mu_{\min}(p)\ell_p\in\Lambda\otimes\mathbb{Q}.$$
+$\mu_{\min}(p)>0\iff$ 右端の辺が負傾き $\iff\chi\equiv x^d\bmod p$（主張1′）。
+
+**$\Lambda$-native の核心**: 使うのは $v_p(a_k)\in\mathbb{Z}$（$\Lambda$ の $\ell_p$ 座標）だけ＝有限・決定可能・可算、$\mathbb{R}$ 脱出なし。対比：アルキメデス版は $\log|a_k|_\infty$（実対数）で凸包を取り amoeba/Mahler 測度・tropical spine につながるが $\mathbb{R}$ を要す。Newton 多角形は「素点 $p$ でのトロピカル化」で、$p$ 進版が $\Lambda$-内部・$\infty$ 版が $\mathbb{R}$（§9.5 の二トロピカル影）。$M$（決定可能）と $\lambda_{\max}$（$\mathbb{R}$ 脱出）の非対称性がこの段で現れる。
+
+例：$\chi=x^2-p$ は $S_p=\{(0,1),(2,0)\}$ 単一辺 傾き $-\tfrac12$、$\mu_{\min}(p)=\tfrac12$。六頂点 $\chi=x^4-8x^3+8x^2+32x-48$, $p=2$：$v_2=(4,5,3,3,0)$、$(1,5)(2,3)(3,3)$ は直線 $(0,4)$–$(4,0)$ の上ゆえ非頂点、下側凸包は単一辺 傾き $-1$、$\mu_{\min}(2)=1$（固有値 $\{6,-2,2,2\}$ 全て $v_2=1$）。
+
 ### 8.1a 素点ごとのアクセス（算法）と前提の精密化（audit）
 
 **素点ごとのアクセス（名指し $p$, 分解不要）.** $Z_N=\mathrm{Tr}(T^N)$ は $\chi_T$ を特性多項式とする $\mathbb{Z}$-線形漸化列。$p$ を固定して:
