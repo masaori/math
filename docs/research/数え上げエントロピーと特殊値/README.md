@@ -33,6 +33,7 @@ $$
 - [02_数え上げの成長率が特殊値になる例.md](02_数え上げの成長率が特殊値になる例.md) — 全域木（tree entropy＝Laplacian Mahler 測度, $\mathbb{Z}^2=\frac4\pi\beta(2)$）、dimer（KOS, 正方＝Catalan）、代数力学（LSW, 高さ辞書）、Ising、SAW 連結定数（蜂の巣＝$\sqrt{2+\sqrt2}$）、hard hexagon・square ice（代数的）、格子動物（generic）。
 - [03_スペクトル曲線の数論とトロピカル.md](03_スペクトル曲線の数論とトロピカル.md) — dimer スペクトル曲線＝Harnack 曲線・amoeba＝相図（KOS, Kenyon–Okounkov）、種数＝ガス相数、Ising/八頂点/カイラル Potts（種数10）、トロピカル化（amoeba spine と $p$ 進 Newton 多角形＝共通骨格）、cluster 可積分系（Goncharov–Kenyon）、Newton 多角形＝master datum。
 - [04_周期と特殊値の一般論.md](04_周期と特殊値の一般論.md) — Kontsevich–Zagier 周期、格子和・格子 Green 函数（Watson, Chowla–Selberg, Gamma/CM 周期）、Bessel moment、Feynman 積分＝周期（MZV/Brown, elliptic/modular, Calabi–Yau）、Ising 感受率（Fuchsian ODE, diagonal of rational functions, modular/CY）、分類プログラム（motivic Galois, cosmic Galois/coaction, globally nilpotent $G$-function）。
+- [05_スペクトル曲線の定義.md](05_スペクトル曲線の定義.md) — スペクトル曲線を定義から：周期的作用素の Bloch–Fourier 変換 $A(z,w)$、$P(z,w)=\det A(z,w)$、曲線 $C=\{P=0\}$、固有値・分配関数・自由エネルギー（dimer で $=m(P)$、一般で LSW）、Newton 多角形・amoeba・種数・算術、具体例（蜂の巣 dimer＝直線／Ising＝楕円）。
 
 ---
 
