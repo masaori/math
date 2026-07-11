@@ -34,7 +34,8 @@ $$
 - [03_スペクトル曲線の数論とトロピカル.md](03_スペクトル曲線の数論とトロピカル.md) — dimer スペクトル曲線＝Harnack 曲線・amoeba＝相図（KOS, Kenyon–Okounkov）、種数＝ガス相数、Ising/八頂点/カイラル Potts（種数10）、トロピカル化（amoeba spine と $p$ 進 Newton 多角形＝共通骨格）、cluster 可積分系（Goncharov–Kenyon）、Newton 多角形＝master datum。
 - [04_周期と特殊値の一般論.md](04_周期と特殊値の一般論.md) — Kontsevich–Zagier 周期、格子和・格子 Green 函数（Watson, Chowla–Selberg, Gamma/CM 周期）、Bessel moment、Feynman 積分＝周期（MZV/Brown, elliptic/modular, Calabi–Yau）、Ising 感受率（Fuchsian ODE, diagonal of rational functions, modular/CY）、分類プログラム（motivic Galois, cosmic Galois/coaction, globally nilpotent $G$-function）。
 - [05_スペクトル曲線の定義.md](05_スペクトル曲線の定義.md) — スペクトル曲線を定義から：周期的作用素の Bloch–Fourier 変換 $A(z,w)$、$P(z,w)=\det A(z,w)$、曲線 $C=\{P=0\}$、固有値・分配関数・自由エネルギー（dimer で $=m(P)$、一般で LSW）、Newton 多角形・amoeba・種数・算術、具体例（蜂の巣 dimer＝直線／Ising＝楕円）。Λ-native な書き方（1 の冪根特殊化）と次元・周期性 vs 平面性。
-- [06_非周期グラフと双曲格子.md](06_非周期グラフと双曲格子.md) — $\mathbb{Z}^d$-周期の枠外（双曲格子・非可換 Fuchsian 群）での R-Λ 双対の対応物。アルキメデス側＝FK 行列式／$L^2$-torsion／双曲体積（Deninger, Li–Thom, Lück–Schick）、非アルキメデス側＝$p$ 進 torsion 成長／$\mu_p$（**Ueki 2020 が abelian ℤ-被覆で完全実現**）、双曲バンド理論（flat bundle モジュライ／2D YM）、翻訳表、非可換 $\mu_p$ の未発達＝自然な標的。文献照合済み。
+- [06_非周期グラフと双曲格子.md](06_非周期グラフと双曲格子.md) — $\mathbb{Z}^d$-周期の枠外（双曲格子・非可換 Fuchsian 群）での R-Λ 双対の対応物。アルキメデス側＝FK 行列式／$L^2$-torsion／双曲体積（Deninger, Li–Thom, Lück–Schick）、非アルキメデス側＝$p$ 進 torsion 成長／$\mu_p$（**Ueki 2020 が abelian ℤ-被覆で完全実現**）、双曲バンド理論（flat bundle モジュライ／2D YM）、翻訳表、非可換 $\mu_p$ の未発達＝自然な標的。§1a：FK 行列式は「決定不可能」でなく $\mathbb{R}$ 脱出（可算性は保たれる）。文献照合済み。
+- [07_曲面群のスペクトル曲線_Λ言語.md](07_曲面群のスペクトル曲線_Λ言語.md) — 曲面群 $\pi_1(\Sigma_g)$ の「スペクトル曲線」を全部 Λ の言葉で。Λ-native な本体＝有限群への表現数（Frobenius–Mednykh $\#\mathrm{Hom}=|G|^{2g-1}\sum_\chi\chi(1)^{2-2g}$）・指標多様体の有限体点数（Hausel–RV）；$\mathbb{C}$ の Hitchin スペクトル曲線＝アルキメデスの顔；Witten 体積＝唯一の $\mathbb{R}$ 脱出。$\mathbb{Z}^d$↔$\Gamma_g$ 翻訳表。
 
 ---
 
