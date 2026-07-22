@@ -73,19 +73,35 @@ graph TD
 | P1-7 | `042` 場合2の `A=I@γ₂=0` の裏打ち確認・必要なら小補題追加 | 1 | P1-2 | ⬜ |
 | P1-8 | `typst compile` + 数値再検証(030/037/038/039 PASS維持) | 1 | P1-1..7 | ⬜ |
 | X-1  | SageMath数値検証を全工程で維持(claim↔sagemath/check 対応保全) | 横断 | — | 🟡 |
-| P2-0 | Typst→構造化TeX 全面移行の作業洗い出し | 2 | P1-8 | 🔬 |
-| P2-x | 章単位で移行(洗い出し後に細分化) | 2 | P2-0 | ⬜ |
-| P2-v | 相互参照・ビルド・レンダリング整備 | 2 | P2-x | ⬜ |
-| P2-c | sagemath連携(claim↔check)の張り替え確認 | 2 | P2-v | ⬜ |
+| P2-0 | Typst→構造化TeX 全面移行の作業洗い出し | 2 | — | ✅ |
+| T1   | 残8ファイルの新規変換(045/046, 002-003, 004-013/014, 008-041/042/043) | 2 | P1-8 | ⬜ |
+| T2   | partially_simplified 25件の全厳密再変換(圧縮を除去) | 2 | P1-8 | ⬜ |
+| T3   | main.typ のインライン内容移行(記号表/見出し/散文・メモ) ※要設計判断 | 2 | 設計判断 | ⬜ |
+| T4   | 相互参照モデルの統一(ラベル vs id 不整合)＋ref解決チェックを validate に追加 | 2 | T1 | ⬜ |
+| T5   | realtime-web-preview で全ブロックの KaTeX 描画疎通確認・可換図式代替 | 2 | T1..T4 | ⬜ |
+| T6   | sagemath連携(claim↔check, sourcePath経由)の維持確認 | 2 | T1 | ⬜ |
+| T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・要ユーザー判断 | 2 | T1..T6 | ⬜ |
 | P3-0 | Lean/Coq/Isabelle/Agda の選定リサーチ(本問題との相性・mathlib被覆・事例) | 3 | なし | ✅ |
 | P3-1 | 使用する系を決定 → **推奨: Lean 4 + mathlib4**(要ユーザー最終確認) | 3 | P3-0 | 🟡 |
 | P3-2 | 最小formalizationターゲットでPoC | 3 | P3-1 | ⬜ |
 | P3-x | 段階的に formal 化(決定後に細分化) | 3 | P3-2 | ⬜ |
 
+## Phase 2 監査結論(2026-07) — 構造化TeX移行
+
+- **実態はほぼ完了**: content 13ファイル/123ブロックで parts 129中 **121をカバー済み**(`validate-content.mjs` PASS 確認)。「部分移行」ではなく残8ファイル+品質整合の詰め。
+- **残8ファイル(staleness)**: 045,046(000章)/002-003/004-013,014/008-041,042,043。全て 2026-06以降の新規追加分で content が未追随なだけ(表現力の問題ではない)。
+- **品質ギャップ**: `partially_simplified` 25ブロックは proof を要点圧縮した劣化変換 → CLAUDE.md 厳密性要件から再変換対象。TODO保持27箇所。
+- **レンダラは既存**: `realtime-web-preview/`(React+**KaTeX**, HTMLプレビュー/PDFではない, source=structured-latex/content)。MEMORY の「ビューア未実装」は古い。数式は Typst構文でなく **KaTeX向けLaTeX文字列**で保持(手翻訳、自動コンバータは無い)。
+- **相互参照の不整合(要対処)**: content は ref target に**ラベル**を入れる規約だが、レンダラは**block.id**でアンカー化 → ラベル参照37件がブラウザ上デッドリンク。`validate-content.mjs` は ref解決を検査しない(未解決ref 2件検出)。
+- **schema の構造的ギャップ**: heading/section, figure/可換図式(005/000 の fletcher), table/grid の node が無い。文書順・章題は main.typ の #include 順にしか無く、ファイル名順と不一致。
+
 ## 決定待ち(ユーザー判断が要る論点)
 
-- **P3-1 系の決定**: research agent の推奨を受けて、Lean4/Coq 等のどれを採用するか(大きなアーキテクチャ選択のため最終確認したい)。
-- **移行と formal 化の source 単一化方針**: 構造化TeXの source から formal proof をどう対応づけるか(二重管理回避)。P2-0/P3-0 の結果を見て詰める。
+- **P3-1 系の決定**: **Lean4+mathlib4 を推奨・暫定決定**。大きな投資のため最終確認したい(異論なければ確定)。
+- **T4 相互参照モデル**: ref.target をラベルに統一(レンダラにラベル→id解決を実装)か、id に統一か。content は既にラベル規約なので**ラベル統一+レンダラ改修**が自然だが最終確認したい。
+- **T3 main.typ の散文・メモ・埋め込みsagemath**: 移行するか破棄するか(価値判断)。見出し/章題を schema拡張(heading node追加)で正準保持するか、章メタ別持ちにするか。
+- **T7 Typst 廃止のタイミング**: parts/ を SSOT から外すのは不可逆に近い。T1..T6 完了・レンダリング疎通確認後に実行してよいか。
+- **source 単一化**: leanblueprint(LaTeX blueprint) と 構造化TeX(KaTeX LaTeX) を寄せて、人手証明↔formal↔閲覧の source を一本化するか。Phase 2/3 を跨ぐ設計。
 
 ## Phase 3 調査結論(2026-07) — 機械証明の系
 
