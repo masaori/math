@@ -1,7 +1,7 @@
 #import "../../theorem.typ": theorem, claim, proof, definition, remark, note, theorem_rules
 #claim([$gamma_2(theta_mu), gamma_2(-theta_mu)$の$arg$])[
-  
-  $mu in cal(M)$ について、
+
+  $gamma_2(theta_mu) eq.not 0$ なる $mu in cal(M)$ について（$#ref(<relation_of_gamma_2>)$ より $gamma_2(theta_mu) eq.not 0 <=> gamma_2(-theta_mu) eq.not 0$ であるから、$gamma_2(theta_mu), gamma_2(-theta_mu)$ はともに非零であり、その偏角 $arg^([0, 2pi))$ が定義される）、
 
   $r_plus, r_minus in RR_(>=0), theta_plus, theta_minus in RR$ として、
 

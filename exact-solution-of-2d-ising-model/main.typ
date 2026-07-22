@@ -197,6 +197,7 @@
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ"
+#include "parts/008_T_V1_hatZとhatZ_hatYの関係/044_claim_gamma2_0のときA_thetaは単位行列.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/041_claim_T_VprimeのhatZ_hatYへの作用_gamma2が0の場合.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/042_claim_T_VとT_VprimeはhatZ_hatY上で一致.typ"
 #include "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ"

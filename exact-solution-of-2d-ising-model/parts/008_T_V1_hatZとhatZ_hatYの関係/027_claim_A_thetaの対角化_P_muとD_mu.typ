@@ -84,11 +84,12 @@
     (-1)
   $
 
-  $gamma_2(theta_mu) = 0$のとき、
+  $gamma_2(theta_mu) = 0$のとき、$P_mu$ は定義されないが、
 
   $
     A(theta_(mu))
     =
     I "(単位行列)"
+    quad (because #ref(<A_theta_is_identity_when_gamma2_zero>))
   $
 ]<diagonalization_P_D>

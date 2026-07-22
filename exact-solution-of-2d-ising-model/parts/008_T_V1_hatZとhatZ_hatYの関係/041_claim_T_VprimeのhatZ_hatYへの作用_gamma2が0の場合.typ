@@ -11,7 +11,7 @@
   $
 
   #note[
-    $#ref(<def_Vprime>)$ の $X := sum_(nu=1)^M gamma(theta_nu) (psi_nu^dagger psi_(-nu) - 1/2)$ において、$gamma_2(theta_nu) = 0$ となる $nu in {1, dots, M}$ では $psi_nu$ は $#ref(<def_fermi>)$ で定義されないが、そのような $nu$ では後述（Step 1）のとおり $gamma(theta_nu) = 0$ であり当該項の係数が $0$ である。よって $X$ は $gamma_2(theta_nu) eq.not 0$ となる $nu in {1, dots, M}$ にわたる和としてwell-definedであるとみなす。以下この規約のもとで議論する。
+    $#ref(<def_Vprime>)$ の定義により、$X$ の和は最初から $gamma_2(theta_nu) eq.not 0$ となる $nu in {1, dots, M}$ のみにわたる。この $nu$ については $#ref(<def_fermi>)$ と $#ref(<relation_of_gamma_2>)$ より $psi_nu^dagger, psi_(-nu)$ がともに定義されるので、$X$ の各項は well-defined である（$gamma_2(theta_nu) = 0$ となる $nu$ ははじめから和に含まれない）。
   ]
 
   #proof[
@@ -22,14 +22,14 @@
     $
       X
       :=
-      sum_(nu = 1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       gamma(theta_nu)
       (
         psi_nu^dagger psi_(-nu) - 1/2
       )
     $
 
-    である。$#ref(<action_of_T_Vprime_on_psi>)$ の証明冒頭と同様に $V'^(-1) = exp(-X)$ であり、$#ref(<def_T_g>)$ より $T_((V'))(W) = V' W V'^(-1) = exp(X) W exp(-X)$（$W in "Mat"(2, CC)^(times.o M)$）である。
+    である（和は $gamma_2(theta_nu) eq.not 0$ なる $nu in {1, dots, M}$ にわたる）。$#ref(<action_of_T_Vprime_on_psi>)$ の証明冒頭と同様に $V'^(-1) = exp(-X)$ であり、$#ref(<def_T_g>)$ より $T_((V'))(W) = V' W V'^(-1) = exp(X) W exp(-X)$（$W in "Mat"(2, CC)^(times.o M)$）である。
 
     === Step 1: $gamma_2(theta_nu) = 0 => gamma(theta_nu) = 0$
 
@@ -66,7 +66,7 @@
 
     である。
 
-    === Step 2: $gamma_2(theta_mu) = 0$ かつ $delta^M_(mu plus.minus nu, 0) eq.not 0$ ならば $gamma(theta_nu) = 0$
+    === Step 2: $gamma_2(theta_mu) = 0$ かつ $delta^M_(mu plus.minus nu, 0) eq.not 0$ ならば $gamma_2(theta_nu) = 0$（ゆえに $gamma(theta_nu) = 0$）
 
     $nu in {1, dots, M}$ とし、$delta^M_(mu - nu, 0) eq.not 0$ または $delta^M_(mu + nu, 0) eq.not 0$ と仮定する。すなわち $mu equiv nu quad (mod M)$ または $mu equiv -nu quad (mod M)$ である。
 
@@ -207,11 +207,9 @@
 
     である（$[hat(Z)_kappa^((minus)), hat(Y)_mu]_(+) = 0$ を用いた）。
 
-    いま $gamma_2(theta_mu) = 0$ である。$W in {hat(Z)_mu^((minus)), hat(Y)_mu}$ を1つ固定する。各 $nu in {1, dots, M}$ について場合分けする。
+    いま $gamma_2(theta_mu) = 0$ である。$W in {hat(Z)_mu^((minus)), hat(Y)_mu}$ を1つ固定する。$X$ の和の各 $nu in {1, dots, M}$（$gamma_2(theta_nu) eq.not 0$）について、第 $nu$ 項と $W$ の交換子を評価する。
 
-    場合 (i): $gamma(theta_nu) = 0$ のとき。$X$ における第 $nu$ 項 $gamma(theta_nu)(psi_nu^dagger psi_(-nu) - 1/2)$ は係数 $0$ ゆえ $O$ であり、$[O, W] = O$ である。
-
-    場合 (ii): $gamma(theta_nu) eq.not 0$ のとき。Step 1 の対偶より $gamma_2(theta_nu) eq.not 0$ であり $psi_nu, psi_nu^dagger$ は定義される。さらに $#ref(<gamma_2_theta_is_0>)$ と $#ref(<relation_of_gamma_2>)$（$gamma_2(-theta_nu) = -overline(gamma_2(theta_nu))$ ゆえ $gamma_2(theta_nu) eq.not 0 <=> gamma_2(-theta_nu) eq.not 0$）より $psi_(-nu)$ も定義される。このとき Step 2 の対偶より $delta^M_(mu + nu, 0) = 0$ かつ $delta^M_(mu - nu, 0) = 0$ である。よって上で求めた反交換子はすべて $O$ となる:
+    $gamma_2(theta_nu) eq.not 0$ より $psi_nu, psi_nu^dagger$ は定義される。さらに $#ref(<relation_of_gamma_2>)$（$gamma_2(-theta_nu) = -overline(gamma_2(theta_nu))$ ゆえ $gamma_2(theta_nu) eq.not 0 <=> gamma_2(-theta_nu) eq.not 0$）より $psi_(-nu)$ も定義される。Step 2 より「$gamma_2(theta_mu) = 0$ かつ（$delta^M_(mu - nu, 0) eq.not 0$ または $delta^M_(mu + nu, 0) eq.not 0$）ならば $gamma_2(theta_nu) = 0$」であるから、その対偶と $gamma_2(theta_mu) = 0$、$gamma_2(theta_nu) eq.not 0$ より $delta^M_(mu + nu, 0) = 0$ かつ $delta^M_(mu - nu, 0) = 0$ である。よって Step 3 冒頭で求めた反交換子はすべて $O$ となる:
 
     $
       [psi_nu^dagger, W]_(+) = O,
@@ -252,17 +250,17 @@
 
     である。ゆえに第 $nu$ 項について $[gamma(theta_nu)(psi_nu^dagger psi_(-nu) - 1/2), W] = gamma(theta_nu) [psi_nu^dagger psi_(-nu) - 1/2, W] = O$ である。
 
-    場合 (i), (ii) いずれでも第 $nu$ 項と $W$ の交換子は $O$ であるから、交換子の加法性より
+    和の各 $nu$ について第 $nu$ 項と $W$ の交換子は $O$ であるから、交換子の加法性より
 
     $
       [X, W]
       &=
-      sum_(nu = 1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       [gamma(theta_nu)(psi_nu^dagger psi_(-nu) - 1/2), W]
       quad (because "交換子の加法性")
       \
       &=
-      sum_(nu = 1)^M O
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0) O
       \
       &=
       O

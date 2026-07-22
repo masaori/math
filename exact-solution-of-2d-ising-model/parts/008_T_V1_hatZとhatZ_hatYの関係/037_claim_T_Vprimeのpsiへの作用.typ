@@ -1,6 +1,6 @@
 #import "../../theorem.typ": theorem, claim, proof, definition, remark, note, theorem_rules
 #claim([$T_((V'))$の$psi$への作用])[
-  $mu in cal(M)$について、
+  $gamma_2(theta_mu) eq.not 0$ なる $mu in cal(M)$について（このとき $#ref(<def_fermi>)$ より $psi_mu, psi_mu^dagger$ が定義される）、
 
   $
     T_((V'))(psi_mu^dagger) &= e^(gamma(theta_mu)) psi_mu^dagger
@@ -15,12 +15,14 @@
       X
       :=
       +
-      sum_(nu = 1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       gamma(theta_nu)
       (
         psi_nu^dagger psi_(-nu) - 1/2
       )
     $
+
+    である（$#ref(<def_Vprime>)$ の和と同じく $gamma_2(theta_nu) eq.not 0$ なる $nu in {1, dots, M}$ にわたる。この $nu$ については $#ref(<def_fermi>)$ と $#ref(<relation_of_gamma_2>)$ より $psi_nu^dagger, psi_(-nu)$ がともに定義される）。
 
     $X$ と $-X$ は可換（$X(-X) = -X^2 = (-X)X$）だから $#ref(<theorem_exp_product>)$ より
 
@@ -74,7 +76,7 @@
       [X, psi_mu^dagger]
       &=
       +
-      sum_(nu = 1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       gamma(theta_nu)
       [psi_nu^dagger psi_(-nu), psi_mu^dagger]
       quad
@@ -82,7 +84,7 @@
       \
       &=
       +
-      sum_(nu = 1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       gamma(theta_nu)
       delta^M_(mu - nu, 0)
       psi_nu^dagger
@@ -90,7 +92,7 @@
       (because "Step 1")
     $
 
-    $delta^M_(mu - nu, 0) eq.not 0$ となる $nu in {1, dots, M}$ を $mu$ の場合分けで特定する。
+    $delta^M_(mu - nu, 0) eq.not 0$ となる $nu in {1, dots, M}$ を $mu$ の場合分けで特定する。以下で特定する $nu$ はいずれも $theta_nu equiv plus.minus theta_mu quad (mod 2pi)$ を満たし、$gamma_2$ は $theta$ の $cos, sin, e^(sqrt(-1) theta)$ のみに依存するから $gamma_2(theta_nu) = gamma_2(plus.minus theta_mu)$ である。$gamma_2(theta_mu) eq.not 0$ と $#ref(<relation_of_gamma_2>)$（$gamma_2(-theta_mu) = -overline(gamma_2(theta_mu))$）より $gamma_2(plus.minus theta_mu) eq.not 0$ であるから、特定される $nu$ は上の和の添字集合 $gamma_2(theta_nu) eq.not 0$ に属する。
 
     ==== a) $mu in {1, dots, M}$ のとき
 
@@ -299,13 +301,13 @@
       [X, psi_mu]
       &=
       +
-      sum_(nu=1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       gamma(theta_nu)
       [psi_nu^dagger psi_(-nu), psi_mu]
       \
       &=
       -
-      sum_(nu=1)^M
+      sum_(nu in {1, dots, M} : gamma_2(theta_nu) eq.not 0)
       gamma(theta_nu)
       delta^M_(nu + mu, 0)
       psi_(-nu)
@@ -313,7 +315,7 @@
       (because "Step 1'")
     $
 
-    $delta^M_(nu + mu, 0) eq.not 0$ となる $nu in {1, dots, M}$ を $mu$ の場合分けで特定し、$psi_(-nu) = psi_mu$ を確認する（周期性の計算は Step 2 と対称的）。
+    $delta^M_(nu + mu, 0) eq.not 0$ となる $nu in {1, dots, M}$ を $mu$ の場合分けで特定し、$psi_(-nu) = psi_mu$ を確認する（周期性の計算は Step 2 と対称的）。特定される $nu$ が和の添字集合 $gamma_2(theta_nu) eq.not 0$ に属することも Step 2 と同様に確認できる。
 
     a) $mu in {1, dots, M-1}$: $nu = M - mu$。$psi_(-(M-mu)) = psi_(mu-M) = psi_mu$（Step 2 b) と同様）、$gamma(theta_(M-mu)) = gamma(theta_mu)$。
     b) $mu = M$: $nu = M$。$psi_(-M) = psi_M$（Step 2 c) より）、$gamma(theta_M) = gamma(theta_M)$。

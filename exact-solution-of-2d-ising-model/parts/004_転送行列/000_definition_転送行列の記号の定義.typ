@@ -19,8 +19,8 @@
 
 - $epsilon := sigma_1^x dots.c sigma_M^x = (sqrt(-1))^M Z_1 Y_1 + dots.c + Z_M Y_M in "Mat"(2, CC)^(times.o M)$
 
-- $K_1^* := -1/2 log(tanh K_1) arrow.l.r sinh(K_1) sinh(K_1^*) = 1$
-- $K_2^* := -1/2 log(tanh K_2) arrow.l.r sinh(K_2) sinh(K_2^*) = 1$
+- $K_1^* := -1/2 log(tanh K_1) arrow.l.r sinh(2 K_1) sinh(2 K_1^*) = 1$
+- $K_2^* := -1/2 log(tanh K_2) arrow.l.r sinh(2 K_2) sinh(2 K_2^*) = 1$
 - $c_i := cosh 2K_i, quad s_i := sinh 2K_i,$
 - $c_i^* := cosh 2K_i^*, quad s_i^* := sinh 2K_i^*$
 

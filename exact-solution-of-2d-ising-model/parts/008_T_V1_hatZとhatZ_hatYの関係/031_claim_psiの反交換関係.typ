@@ -2,7 +2,7 @@
 #claim([$psi$の反交換関係])[
   $cal(M) := {-M, dots, -2, -1, 1, 2, dots, M}$ とする。
 
-  $mu, nu in cal(M)$について、
+  $gamma_2(theta_mu) eq.not 0$ かつ $gamma_2(theta_nu) eq.not 0$ なる $mu, nu in cal(M)$について（このとき $#ref(<def_fermi>)$ より $psi_mu, psi_mu^dagger, psi_nu, psi_nu^dagger$ が定義される）、
 
   $
     [psi_mu^dagger, psi_nu^dagger]_(+) &= 0

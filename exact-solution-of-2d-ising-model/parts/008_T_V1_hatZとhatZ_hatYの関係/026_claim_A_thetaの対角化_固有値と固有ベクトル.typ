@@ -567,7 +567,7 @@
 
     より、$v$は任意の値をとる
 
-    (この時 $A(theta_mu)$は単位行列になっている　TODO: 証明)
+    （この時 $A(theta_mu) = I$（$2 times 2$ 単位行列）となる。証明は $#ref(<A_theta_is_identity_when_gamma2_zero>)$ を参照）
 
     2) $gamma_2(theta_mu) eq.not 0$ のとき、
 

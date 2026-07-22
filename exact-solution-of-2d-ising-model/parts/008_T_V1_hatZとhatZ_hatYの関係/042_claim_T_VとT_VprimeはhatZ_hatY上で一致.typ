@@ -198,14 +198,14 @@
       A(theta_mu)
     $
 
-    であり、$#ref(<diagonalization_P_D>)$ より $gamma_2(theta_mu) = 0$ のとき $A(theta_mu) = I$（$2 times 2$ 単位行列）であるから、
+    であり、$#ref(<A_theta_is_identity_when_gamma2_zero>)$ より $gamma_2(theta_mu) = 0$ のとき $A(theta_mu) = I$（$2 times 2$ 単位行列）であるから、
 
     $
       (T_((V))(hat(Z)_mu^((minus))), T_((V))(hat(Y)_mu))
       &=
       (hat(Z)_mu^((minus)), hat(Y)_mu)
       I
-      quad (because #ref(<diagonalization_P_D>))
+      quad (because #ref(<A_theta_is_identity_when_gamma2_zero>))
       \
       &=
       (hat(Z)_mu^((minus)), hat(Y)_mu)

@@ -2,7 +2,7 @@
 #claim([$V$と$psi$の交換関係(B.13)])[
   $cal(M) := {-M, dots, -2, -1, 1, 2, dots, M}$ とする。
 
-  $mu in cal(M)$について、
+  $gamma_2(theta_mu) eq.not 0$ なる $mu in cal(M)$について（このとき $#ref(<def_fermi>)$ より $psi_mu, psi_mu^dagger$ が定義される）、
 
   $
     T_((V))(psi_mu^dagger)
