@@ -77,8 +77,8 @@ graph TD
 | P2-x | 章単位で移行(洗い出し後に細分化) | 2 | P2-0 | ⬜ |
 | P2-v | 相互参照・ビルド・レンダリング整備 | 2 | P2-x | ⬜ |
 | P2-c | sagemath連携(claim↔check)の張り替え確認 | 2 | P2-v | ⬜ |
-| P3-0 | Lean/Coq/Isabelle/Agda の選定リサーチ(本問題との相性・mathlib被覆・事例) | 3 | なし | 🔬 |
-| P3-1 | 使用する系を決定(要ユーザー確認) | 3 | P3-0 | ⬜ |
+| P3-0 | Lean/Coq/Isabelle/Agda の選定リサーチ(本問題との相性・mathlib被覆・事例) | 3 | なし | ✅ |
+| P3-1 | 使用する系を決定 → **推奨: Lean 4 + mathlib4**(要ユーザー最終確認) | 3 | P3-0 | 🟡 |
 | P3-2 | 最小formalizationターゲットでPoC | 3 | P3-1 | ⬜ |
 | P3-x | 段階的に formal 化(決定後に細分化) | 3 | P3-2 | ⬜ |
 
@@ -86,6 +86,14 @@ graph TD
 
 - **P3-1 系の決定**: research agent の推奨を受けて、Lean4/Coq 等のどれを採用するか(大きなアーキテクチャ選択のため最終確認したい)。
 - **移行と formal 化の source 単一化方針**: 構造化TeXの source から formal proof をどう対応づけるか(二重管理回避)。P2-0/P3-0 の結果を見て詰める。
+
+## Phase 3 調査結論(2026-07) — 機械証明の系
+
+- **推奨: Lean 4 + mathlib4**（次点 Isabelle/HOL、Coq/Rocq は第3、Agda 非推奨）。
+- 根拠: (1) 中核数学の被覆が単一ライブラリ最良（`MatrixExponential`/Kronecker⇔TensorProduct 線型同値/`CliffordAlgebra`/`Complex.arg`(-π,π]）、(2) フェルミオン第二量子化の既存形式化(PhysLean: Wick・反交換代数)が Lean のみ存在、(3) leanblueprint で人手証明↔formal の同期＋進捗可視化(構造化TeX移行と直結・二重管理回避)、(4) 単独+AIエージェント運用で最有利、(5) 実解析/熱力学極限の将来被覆も厚い。
+- ギャップ(ブロッカーでない): `Real.arccosh` は自前定義(容易)、`Ad(exp)=exp(ad)`(005/008) は級数展開ルート(003/007)で回避、Ising厳密解の既存形式化は無く新規(全系共通)。
+- **最初の formalization ターゲット**: ① `002/000`テンソル基底(= `Mat(2,ℂ)^{⊗M}` の表現を「抽象テンソル冪 vs Fin(2^M) Kronecker」で確定させる最重要設計判断を最初に固める) → ② `000/045` 共役=環準同型(自己完結・038を支える)。005 は級数ルートで 045 の後。
+- SageMath は反例探索/予想生成のオラクルとして併存(Sage↔Lean 自動ブリッジは無い)。有限代数的恒等式は Lean で `ring`/`norm_num`/`Finset.sum` により「証明」に格上げ可(注: ℝ/ℂ上は `decide`/`native_decide` 不可)。
 
 ## メモ
 
