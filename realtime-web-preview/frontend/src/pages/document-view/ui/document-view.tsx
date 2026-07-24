@@ -1,7 +1,8 @@
-import type { LoadDocumentError } from '@rwp/domain-model'
+import { type LoadDocumentError, buildLabelIndex } from '@rwp/domain-model'
 import type { ReactElement } from 'react'
 import type { ConnectionStatus, DocumentViewPageDomainModel } from '../model/page-domain-model'
 import { BlockCard } from './block-card'
+import { LabelIndexProvider } from './ref-resolver'
 
 const errorMessages: Record<LoadDocumentError['code'], string> = {
   source_not_found: '入力ソースが見つかりません。サーバ起動時のソース dir 設定を確認してください。',
@@ -70,11 +71,13 @@ export const DocumentView = ({
           {document.value.meta.sourceLabel} · {document.value.blocks.length} blocks ·{' '}
           {document.value.meta.generatedAt}
         </p>
-        <div className="space-y-4">
-          {document.value.blocks.map((block) => (
-            <BlockCard key={block.id} block={block} />
-          ))}
-        </div>
+        <LabelIndexProvider value={buildLabelIndex(document.value.blocks)}>
+          <div className="space-y-4">
+            {document.value.blocks.map((block) => (
+              <BlockCard key={block.id} block={block} />
+            ))}
+          </div>
+        </LabelIndexProvider>
       </>
     ) : null}
   </div>

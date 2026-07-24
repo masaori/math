@@ -19,27 +19,59 @@ export default defineBlocks([
       paragraph([math(String.raw`\mu, \nu \in \mathcal{M}`), " について、"]),
       paragraph([math(String.raw`\mu = \nu`), " のとき、"]),
       displayMath(
-        String.raw`[Z_\mu, Z_\mu]_+ = Z_\mu Z_\mu + Z_\mu Z_\mu = 2I_{(\mathbb{C}^2)^{\otimes M}}`,
+        String.raw`\begin{aligned}
+[Z_\mu, Z_\mu]_+
+&= Z_\mu Z_\mu + Z_\mu Z_\mu \\
+&= 2 I_{(\mathbb{C}^2)^{\otimes M}}
+\end{aligned}`,
       ),
-      paragraph([math(String.raw`\mu < \nu`), " のとき、テンソル積の反交換関係から"]),
+      paragraph([
+        math(String.raw`\mu < \nu`),
+        " のとき、",
+        math(String.raw`Z_\mu, Z_\nu`),
+        " をテンソル積で表して各サイトごとに積をとると、",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 [Z_\mu, Z_\nu]_+
-&= \sum_{j,k=1}^{M} (\pm 1)_j (\pm 1)_k
-   \exp\!\left(-i\tfrac{2\pi}{M}(j\mu+k\nu)\right)
-   [Z_j, Z_k]_+ \\
-&= \sum_{j=1}^{M} \exp\!\left(-i\tfrac{2\pi j}{M}(\mu+\nu)\right)
-   \cdot 2I_{(\mathbb{C}^2)^{\otimes M}}
-   = 0
+&= Z_\mu Z_\nu + Z_\nu Z_\mu \\
+&= (\sigma_1^x\cdots\sigma_{\mu-1}^x\cdot\sigma_\mu^z)(\sigma_1^x\cdots\sigma_\mu^x\cdots\sigma_{\nu-1}^x\sigma_\nu^z)
++ (\sigma_1^x\cdots\sigma_\mu^x\cdots\sigma_{\nu-1}^x\sigma_\nu^z)(\sigma_1^x\cdots\sigma_{\mu-1}^x\cdot\sigma_\mu^z) \\
+&= \left(\sigma^x\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\mu\text{th}}\right)
+\left(\sigma^x\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right) \\
+&\quad + \left(\sigma^x\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right)
+\left(\sigma^x\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\mu\text{th}}\right) \\
+&= \left(\sigma^x\sigma^x\otimes\cdots\otimes\overbrace{\sigma^x\sigma^x}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^z\sigma^x}^{\mu\text{th}}\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right) \\
+&\quad + \left(\sigma^x\sigma^x\otimes\cdots\otimes\overbrace{\sigma^x\sigma^x}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^x\sigma^z}^{\mu\text{th}}\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right) \\
+&= \left(I_{(\mathbb{C}^2)^{\otimes M}}\otimes\cdots\otimes\overbrace{I_{(\mathbb{C}^2)^{\otimes M}}}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^z\sigma^x}^{\mu\text{th}}\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right) \\
+&\quad + \left(I_{(\mathbb{C}^2)^{\otimes M}}\otimes\cdots\otimes\overbrace{I_{(\mathbb{C}^2)^{\otimes M}}}^{(\mu-1)\text{th}}\otimes\overbrace{\sigma^x\sigma^z}^{\mu\text{th}}\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right) \\
+&= \left(I_{(\mathbb{C}^2)^{\otimes M}}\otimes\cdots\otimes\overbrace{\sigma^z\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right)
+- \left(I_{(\mathbb{C}^2)^{\otimes M}}\otimes\cdots\otimes\overbrace{\sigma^z\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^z}^{\nu\text{th}}\right) \\
+&= 0
 \end{aligned}`,
       ),
-      paragraph([todo("TODO: [Z_μ, Y_ν]_+ = 0 および [Y_μ, Y_ν]_+ も同様（原文も TODO）")]),
+      paragraph([
+        "最後から 2 つ目の等号は、第 ",
+        math(String.raw`\mu`),
+        " 因子について ",
+        math(String.raw`\sigma^x\sigma^z = -\sigma^z\sigma^x`),
+        " より第 2 項が第 1 項の ",
+        math(String.raw`-1`),
+        " 倍になることによる。",
+        math(String.raw`\mu > \nu`),
+        " のときも左右対称に同様であるから、",
+        math(String.raw`\mu\neq\nu`),
+        " では ",
+        math(String.raw`[Z_\mu,Z_\nu]_+ = 0 = 2I_{(\mathbb{C}^2)^{\otimes M}}\delta^M_{(\mu,\nu)}`),
+        "。",
+      ]),
+      paragraph([todo("TODO: [Z_μ, Y_ν]_+ = 0 および [Y_μ, Y_ν]_+ も同様（原文も TODO のまま）")]),
     ],
     conversion: {
-      status: "partially_simplified",
+      status: "converted",
       notes: [
-        "原文の証明は μ<ν の場合のテンソル積計算を詳述しているが、要点のみ抽出。",
-        "[Z_μ,Y_ν]_+ と [Y_μ,Y_ν]_+ は原文も TODO のまま。",
+        "原文の μ<ν のテンソル積展開を全ステップ忠実に再現した（σ^x σ^z = -σ^z σ^x による相殺）。",
+        "[Z_μ,Y_ν]_+ と [Y_μ,Y_ν]_+ は原文自体が TODO のため todo() で保持。",
       ],
     },
   },

@@ -59,3 +59,22 @@ export const blockSchema = z.object({
 export type Block = z.infer<typeof blockSchema>
 
 export const blocksSchema = z.array(blockSchema)
+
+/** ラベル文字列 → そのラベルを持つブロックの id。ref.target を id アンカーへ解決するための表。 */
+export type LabelIndex = Readonly<Record<string, string>>
+
+/**
+ * 各ブロックの label（複数可）→ block.id の解決インデックスを作る。
+ * ref.target（＝ラベル）を、対応ブロックの id アンカーへ解決するために使う。
+ * ラベルの一意性は入力ソース側の検証責務（structured-latex/tools/validate-content.mjs）で
+ * 担保される前提で、重複時は後勝ちで上書きする。ドメイン非依存の純関数。
+ */
+export function buildLabelIndex(blocks: readonly Block[]): LabelIndex {
+  const index: Record<string, string> = {}
+  for (const block of blocks) {
+    for (const label of block.labels) {
+      index[label] = block.id
+    }
+  }
+  return index
+}

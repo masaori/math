@@ -215,66 +215,182 @@ export default defineBlocks([
       ]),
     ],
     proof: [
-      paragraph(["1. モノイド準同型性"]),
-      displayMath(
-        String.raw`\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim})
-=\phi_{\mathrm{cartesian}}([(rr',\theta+\theta')]_{\sim})
-=(rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta'))`,
-      ),
-      displayMath(
-        String.raw`\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim})\cdot\phi_{\mathrm{cartesian}}([(r',\theta')]_{\sim})
-=(r\cos\theta,r\sin\theta)\cdot(r'\cos\theta',r'\sin\theta')
-=\left(rr'(\cos\theta\cos\theta'-\sin\theta\sin\theta'),\ rr'(\cos\theta\sin\theta'+\sin\theta\cos\theta')\right)
-=(rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta'))`,
-      ),
-      paragraph(["よって両者は一致する。"]),
-      paragraph(["2. 合成 ", math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}`), " の計算"]),
-      paragraph([math(String.raw`\rho:=\sqrt{x^2+y^2}`), " とおくと、"]),
-      displayMath(
-        String.raw`(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)=
-\begin{cases}
-\left(\rho\cos(\arctan(y/x)),\ \rho\sin(\arctan(y/x))\right) & (x>0),\\
-\left(-\rho\cos(\arctan(y/x)),\ -\rho\sin(\arctan(y/x))\right) & (x<0),\\
-\left(y\cos(\pi/2),\ y\sin(\pi/2)\right) & (x=0,\ y>0),\\
-\left(-y\cos(-\pi/2),\ -y\sin(-\pi/2)\right) & (x=0,\ y<0),\\
-(0,0) & (x=0,\ y=0).
-\end{cases}`,
-      ),
       paragraph([
-        math(String.raw`\cos(\arctan t),\sin(\arctan t)`),
-        " の公式は ",
-        ref("cos_arctan_sin_arctan"),
-        " を使う。",
+        "1. モノイド準同型性。",
+        math(String.raw`[(r,\theta)]_{\sim}, [(r',\theta')]_{\sim} \in (\text{極座標表現})`),
+        " に対して、",
       ]),
       displayMath(
-        String.raw`\cos(\arctan(y/x))=\frac{1}{\sqrt{1+(y/x)^2}},\quad
-\sin(\arctan(y/x))=\frac{(y/x)}{\sqrt{1+(y/x)^2}}`,
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim})
+&= \phi_{\mathrm{cartesian}}([(rr',\theta+\theta')]_{\sim}) \\
+&= (rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta'))
+\end{aligned}`,
+      ),
+      paragraph(["また、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim})\cdot\phi_{\mathrm{cartesian}}([(r',\theta')]_{\sim})
+&= (r\cos\theta,\ r\sin\theta)\cdot(r'\cos\theta',\ r'\sin\theta') \\
+&= (rr'\cos\theta\cos\theta' - rr'\sin\theta\sin\theta',\ rr'\cos\theta\sin\theta' + rr'\sin\theta\cos\theta') \\
+&= (rr'(\cos\theta\cos\theta'-\sin\theta\sin\theta'),\ rr'(\cos\theta\sin\theta'+\sin\theta\cos\theta')) \\
+&= (rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta'))
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって両者は一致する（積 ",
+        math(String.raw`(a,b)\cdot(c,d) := (ac-bd,\ ad+bc)`),
+        " と三角関数の加法定理を用いた）。",
+      ]),
+      paragraph([
+        "2. 全単射性。合成 ",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}`),
+        " を計算する。以下で ",
+        math(String.raw`\cos(\arctan(y/x))=\dfrac{1}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}`),
+        "、",
+        math(String.raw`\sin(\arctan(y/x))=\dfrac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}`),
+        "（",
+        ref("cos_arctan_sin_arctan"),
+        "）と、",
+        math(String.raw`x<0`),
+        " のとき ",
+        math(String.raw`x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}`),
+        "（",
+        ref("negative_number_to_sqrt"),
+        "）を用いる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\!\left(
+\begin{cases}
+[(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x))]_{\sim} & (x>0) \\
+[(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)+\pi)]_{\sim} & (x<0,\ y\geq 0) \\
+[(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)-\pi)]_{\sim} & (x<0,\ y<0) \\
+[(y,\ \pi/2)]_{\sim} & (x=0 \wedge y>0) \\
+[(-y,\ -\pi/2)]_{\sim} & (x=0 \wedge y<0) \\
+[(0,0)]_{\sim} & (x=0 \wedge y=0)
+\end{cases}\right) \\[4pt]
+&= \begin{cases}
+(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))) & (x>0) \\
+(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)+\pi),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x)+\pi)) & (x<0,\ y\geq 0) \\
+(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)-\pi),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x)-\pi)) & (x<0,\ y<0) \\
+(y\cos(\pi/2),\ y\sin(\pi/2)) & (x=0 \wedge y>0) \\
+(-y\cos(-\pi/2),\ -y\sin(-\pi/2)) & (x=0 \wedge y<0) \\
+(0,0) & (x=0 \wedge y=0)
+\end{cases} \\[4pt]
+&= \begin{cases}
+(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))) & (x>0) \\
+(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))) & (x<0) \\
+(y\cos(\pi/2),\ y\sin(\pi/2)) & (x=0 \wedge y>0) \\
+(-y\cos(-\pi/2),\ -y\sin(-\pi/2)) & (x=0 \wedge y<0) \\
+(0,0) & (x=0 \wedge y=0)
+\end{cases} \\[4pt]
+&\overset{(\ast)}{=} \begin{cases}
+\left(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{1}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x>0) \\
+\left(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{1}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x<0) \\
+(0,\ y) & (x=0 \wedge y>0) \\
+(0,\ y) & (x=0 \wedge y<0) \\
+(0,0) & (x=0 \wedge y=0)
+\end{cases} \\[4pt]
+&\overset{(\ast\ast)}{=} \begin{cases}
+\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x>0) \\
+\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x<0) \\
+(0,\ y) & (x=0 \wedge y>0) \\
+(0,\ y) & (x=0 \wedge y<0) \\
+(0,0) & (x=0 \wedge y=0)
+\end{cases} \\[4pt]
+&= \begin{cases}
+\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x>0) \\
+\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x<0) \\
+(0,\ y) & (x=0 \wedge y>0) \\
+(0,\ y) & (x=0 \wedge y<0) \\
+(0,0) & (x=0 \wedge y=0)
+\end{cases} \\[4pt]
+&= (x,y)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`(\ast)`),
+        " は ",
+        ref("cos_arctan_sin_arctan"),
+        " による（",
+        math(String.raw`x=0`),
+        " の行では ",
+        math(String.raw`\cos(\pm\pi/2)=0`),
+        "、",
+        math(String.raw`\sin(\pi/2)=1`),
+        "、",
+        math(String.raw`\sin(-\pi/2)=-1`),
+        " を用いた）。",
+        math(String.raw`(\ast\ast)`),
+        " は分母・分子に ",
+        math(String.raw`x`),
+        " を掛け、",
+        ref("negative_number_to_sqrt"),
+        " により ",
+        math(String.raw`x>0`),
+        " のとき ",
+        math(String.raw`x=\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}`),
+        "、",
+        math(String.raw`x<0`),
+        " のとき ",
+        math(String.raw`x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}`),
+        " を用いた（",
+        math(String.raw`x<0`),
+        " では負号が分母の負号と相殺する）。続いて ",
+        math(String.raw`x^2(1+(y/x)^2)=x^2+y^2`),
+        "、",
+        math(String.raw`(-x)^2=x^2`),
+        " による。",
+      ]),
+    ],
+    notes: [
+      paragraph([
+        "（原文の note の補足計算）",
+        math(String.raw`x<0`),
+        " のとき、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sin(\arctan(y/x))
+&= \sin\!\left(\arcsin\!\frac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) \\
+&= \frac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
+&= \frac{y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
+&= \frac{y}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
+&= \frac{y}{-\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
+&= -\frac{y}{\sqrt{x^2(1+(y/x)^2)}^{\,\mathbb{R}_{\geq 0}}} \\
+&= -\frac{y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`x<0`),
-        " の場合の符号処理には ",
-        ref("negative_number_to_sqrt"),
-        "（",
-        math(String.raw`x=-\sqrt{(-x)^2}`),
-        "）を使う。",
+        " における符号の根拠は、",
+        math(String.raw`-\sqrt{a}^{\,\mathbb{R}_{\geq 0}}=x`),
+        " となる ",
+        math(String.raw`a`),
+        " が ",
+        math(String.raw`\sqrt{a}^{\,\mathbb{R}_{\geq 0}}=-x`),
+        "、両辺を自乗して ",
+        math(String.raw`a=(-x)^2`),
+        "、すなわち ",
+        math(String.raw`x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}`),
+        " であること。",
       ]),
-      displayMath(
-        String.raw`(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-=\begin{cases}
-(x,y) & (x>0),\\
-(x,y) & (x<0),\\
-(0,y) & (x=0,\ y>0),\\
-(0,y) & (x=0,\ y<0),\\
-(0,0) & (x=0,\ y=0),
-\end{cases}
-=(x,y)`,
-      ),
+      paragraph([
+        "また例えば ",
+        math(String.raw`(x,y)=(-1/2,\ \sqrt{3}^{\,\mathbb{R}_{\geq 0}}/2)`),
+        " のとき ",
+        math(String.raw`\cos(\arctan(y/x)+\pi)=-\cos(\arctan(-\sqrt{3}^{\,\mathbb{R}_{\geq 0}}))=-\sqrt{1-\tfrac{3}{4}}^{\,\mathbb{R}_{\geq 0}}=-\tfrac{1}{2}`),
+        "、",
+        math(String.raw`\sin(\arctan(y/x))=-\sqrt{3}^{\,\mathbb{R}_{\geq 0}}/2`),
+        "。",
+      ]),
     ],
     conversion: {
-      status: "partially_simplified",
+      status: "converted",
       notes: [
-        "原文の長大な三角関数・平方根変形は、論理順序を維持したまま displayMath の要点列に圧縮した。",
-        "原文は phi_cartesian ∘ phi_polar = id_CC を詳細計算しているが、全単射のうち単射性の明示的証明は省略されている。",
+        "原文の part 2 は phi_cartesian ∘ phi_polar = id_CC を示すところまでで、全単射（特に単射性）の明示的な導出は原文にない。ここでは原文の計算を全ステップ忠実に再現した。",
       ],
     },
   },

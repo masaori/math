@@ -1,6 +1,7 @@
 import { type Node, assertNever } from '@rwp/domain-model'
 import * as katex from 'katex'
 import type { ReactElement } from 'react'
+import { useResolveLabel } from './ref-resolver'
 
 const KatexMath = ({ tex, display }: { tex: string; display: boolean }): ReactElement => {
   // throwOnError: false → 不正な TeX でも例外を投げず、赤字で表示する（F-9: 画面を落とさない）。
@@ -14,6 +15,31 @@ const KatexMath = ({ tex, display }: { tex: string; display: boolean }): ReactEl
       className={display ? 'block my-2' : 'inline'}
       dangerouslySetInnerHTML={{ __html: html }}
     />
+  )
+}
+
+/**
+ * ref ノードを描画する。target（ラベル）を id アンカーへ解決してリンクにする。
+ * 未解決（ラベル未定義）なら、描画時に検出できるよう赤字・点線下線で明示する。
+ */
+const RefLink = ({ target, label }: { target: string; label?: string }): ReactElement => {
+  const resolveLabel = useResolveLabel()
+  const anchorId = resolveLabel(target)
+  const displayText = label ?? target
+  if (anchorId === undefined) {
+    return (
+      <span
+        className="text-rose-600 underline decoration-dotted"
+        title={`未解決の参照: ラベル "${target}" が定義されていません`}
+      >
+        {displayText}
+      </span>
+    )
+  }
+  return (
+    <a href={`#${anchorId}`} className="text-sky-700 hover:underline">
+      {displayText}
+    </a>
   )
 }
 
@@ -43,11 +69,7 @@ export const NodeView = ({ node }: { node: Node }): ReactElement => {
         </ul>
       )
     case 'ref':
-      return (
-        <a href={`#${node.target}`} className="text-sky-700 hover:underline">
-          {node.label ?? node.target}
-        </a>
-      )
+      return <RefLink target={node.target} label={node.label} />
     case 'todo':
       return (
         <span className="mx-0.5 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-800">

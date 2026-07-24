@@ -10,6 +10,9 @@ const files = readdirSync(contentDir).filter((file) => file.endsWith(".mjs")).so
 
 const ids = new Set();
 const labels = new Map();
+// ref 解決チェック用に、全ブロックの ref を一旦集約してから（ラベルは後続ファイルで
+// 定義されうるため）全ラベル確定後に target を検証する。
+const refs = [];
 let blockCount = 0;
 
 for (const file of files) {
@@ -32,6 +35,7 @@ for (const file of files) {
       labels.set(label, block.id);
     }
     scanForTypstMath(block, file);
+    collectRefTargets(block, file, refs);
   }
 }
 
@@ -39,7 +43,22 @@ if (blockCount === 0) {
   throw new Error("no blocks found — check that content/*.mjs files export defineBlocks([...])");
 }
 
-console.log(`validated ${blockCount} blocks from ${files.length} files`);
+// ref 解決チェック: ref.target は必ず定義済みラベルでなければならない
+// （Typst の `<label>`↔`#ref(<label>)` に対応。未解決 ref は Typst の警告に相当）。
+const unresolved = refs.filter((r) => !labels.has(r.target));
+if (unresolved.length > 0) {
+  const detail = unresolved
+    .map((r) => `  ${r.file}:${r.blockId} -> ref target "${r.target}"`)
+    .join("\n");
+  throw new Error(
+    `unresolved ref target(s) — target must be a defined label:\n${detail}`,
+  );
+}
+
+console.log(
+  `validated ${blockCount} blocks from ${files.length} files ` +
+    `(${labels.size} labels, ${refs.length} refs, all resolved)`,
+);
 
 function scanForTypstMath(block, file) {
   const strings = [];
@@ -63,5 +82,19 @@ function collectStrings(nodes, out) {
     if (node.type === "math" || node.type === "displayMath") out.push(node.tex);
     if (node.type === "paragraph") collectStrings(node.children, out);
     if (node.type === "list") node.items.forEach((item) => collectStrings(item, out));
+  }
+}
+
+function collectRefTargets(block, file, out) {
+  walkRefs(block.statement ?? [], block.id, file, out);
+  walkRefs(block.proof ?? [], block.id, file, out);
+  walkRefs(block.notes ?? [], block.id, file, out);
+}
+
+function walkRefs(nodes, blockId, file, out) {
+  for (const node of nodes) {
+    if (node.type === "ref") out.push({ target: node.target, blockId, file });
+    if (node.type === "paragraph") walkRefs(node.children, blockId, file, out);
+    if (node.type === "list") node.items.forEach((item) => walkRefs(item, blockId, file, out));
   }
 }

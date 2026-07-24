@@ -56,8 +56,8 @@ export default defineBlocks([
       paragraph([todo("TODO: 証明略")]),
     ],
     conversion: {
-      status: "partially_simplified",
-      notes: ["原文も「証明略」として詳細を省いている。"],
+      status: "converted",
+      notes: ["原文自体が詳細を「証明略」とし、内側に TODO を置いている。ここでは原文の記述（有限次元行列表現と各成分の絶対収束への帰着、および証明略の TODO）を忠実に反映した。"],
     },
   },
   {
@@ -130,15 +130,16 @@ export default defineBlocks([
           " の部分和を比較する。",
         ],
         [
-          "exp 級数がノルム収束することから、劣乗法性 ",
+          "exp 級数がノルム収束することから、有限次元行列のノルムの劣乗法性 ",
           math(String.raw`\|XY\| \leq \|X\|\|Y\|`),
           " を用いて、部分和の差がノルムで 0 に収束することを示す。",
         ],
       ]),
+      paragraph(["これらはすべて行列計算と級数のノルム収束のみで完結し、微分は不要。"]),
     ],
     conversion: {
-      status: "partially_simplified",
-      notes: ["原文も証明のアウトラインのみで詳細は省いている。"],
+      status: "converted",
+      notes: ["原文の proof は証明の骨格（3 ステップの outline）と結語のみで、詳細計算は原文自体が省いている。ここでは原文の outline を忠実に反映した。"],
     },
   },
   {

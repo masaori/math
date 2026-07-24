@@ -89,18 +89,19 @@ export default defineBlocks([
 (V_1 V_2)_{\mu,\mu'}
 &= \sum_{\nu:\{1,\dots,N\}\to\{-1,1\}} (V_1)_{\mu,\nu}(V_2)_{\nu,\mu'} \\
 &= \sum_{\nu} \delta_{\mu=\nu}
-   \exp\!\left(\sum_j J\,\mu(j)\mu(j+1)\right)
-   \exp\!\left(\sum_j J'\,\nu(j)\mu'(j)\right) \\
-&= \exp\!\left(\sum_j J\,\mu(j)\mu(j+1)\right)
-   \exp\!\left(\sum_j J'\,\mu(j)\mu'(j)\right) \\
-&= \exp\!\left(\sum_j \bigl(J\,\mu(j)\mu(j+1) + J'\,\mu(j)\mu'(j)\bigr)\right)
+   \exp\!\left(\sum_{j\in\{1,\dots,N\}} J\,\mu(j)\mu(j+1)\right)
+   \exp\!\left(\sum_{j\in\{1,\dots,N\}} J'\,\nu(j)\mu'(j)\right) \\
+&= \exp\!\left(\sum_{j\in\{1,\dots,N\}} J\,\mu(j)\mu(j+1)\right)
+   \exp\!\left(\sum_{j\in\{1,\dots,N\}} J'\,\mu(j)\mu'(j)\right) \\
+&= \exp\!\left(\sum_{j\in\{1,\dots,N\}} J\,\mu(j)\mu(j+1) + \sum_{j\in\{1,\dots,N\}} J'\,\mu(j)\mu'(j)\right) \\
+&= \exp\!\left(\sum_{j\in\{1,\dots,N\}} \bigl(J\,\mu(j)\mu(j+1) + J'\,\mu(j)\mu'(j)\bigr)\right)
 \end{aligned}`,
       ),
       paragraph([todo("TODO: トレースの展開によって分配関数の式と一致することの証明")]),
     ],
     conversion: {
-      status: "partially_simplified",
-      notes: ["原文のproofは (V_1 V_2) の (μ,μ') 成分の計算のみで、trace展開の部分は省略されている。"],
+      status: "converted",
+      notes: ["原文の proof は (V_1 V_2) の (μ,μ') 成分の計算までで、trace 展開による Z との一致は原文自体が未記載（TODO）。ここでは成分計算を全ステップ忠実に再現し、原文の TODO を保持した。"],
     },
   },
 ]);

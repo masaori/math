@@ -1,9 +1,11 @@
 export {
   type Block,
   type BlockKind,
+  type LabelIndex,
   type Node,
   type Title,
   blockKindSchema,
+  buildLabelIndex,
   nodeSchema,
   titleSchema,
   blockSchema,

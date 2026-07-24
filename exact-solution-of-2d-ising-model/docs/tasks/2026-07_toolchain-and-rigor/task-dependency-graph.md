@@ -74,9 +74,10 @@ graph TD
 | P1-8 | `typst compile` exit 0(新規警告/未解決ref なし) + 数値再検証 030/038/039 **ALL PASS**(限定は数値不変) | 1 | P1-1..7 | ✅ |
 | X-1  | SageMath数値検証を全工程で維持(claim↔sagemath/check 対応保全) | 横断 | — | 🟡 |
 | P2-0 | Typst→構造化TeX 全面移行の作業洗い出し | 2 | — | ✅ |
-| T1/T2 | content を parts/ 現状に完全同期(残ファイル変換＋Phase1改変分の再同期＋劣化変換25件の厳密再変換) | 2 | P1-8 | 🟡 |
+| T1/T2 | content を parts/ 現状に完全同期完了(9ブロック追加・Phase1改変分再同期・劣化変換25→0)。validate 132ブロック/参照142全解決 | 2 | P1-8 | ✅ |
 | T3   | main.typ のインライン内容移行(記号表/見出し) ※heading node追加・作業メモは非移行 | 2 | T4-schema | ⬜ |
-| T4   | ref をラベルに統一(レンダラにラベル→id解決)＋validateにref解決チェック追加＋heading node追加 | 2 | — | 🟡 |
+| T4   | ref をラベルに統一(レンダラにラベル→id解決)＋validateにref解決チェック追加(実装・疎通確認済、未コミット) | 2 | — | ✅ |
+| T4b  | heading node をスキーマに追加(章題保持) → T3 と一体で実施 | 2 | — | ⬜ |
 | T5   | realtime-web-preview で全ブロックの KaTeX 描画疎通確認・可換図式代替 | 2 | T1..T4 | ⬜ |
 | T6   | sagemath連携(claim↔check, sourcePath経由)の維持確認 | 2 | T1 | ⬜ |
 | T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・レンダリング疎通後に別途確認 | 2 | T1..T6 | ⏸ |

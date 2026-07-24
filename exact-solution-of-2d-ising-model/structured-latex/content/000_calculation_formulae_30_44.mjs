@@ -336,42 +336,152 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
+        math(String.raw`r_1, r_2 \in \mathbb{R}_{\geq 0}`),
+        "、",
+        math(String.raw`\theta_1, \theta_2 \in \mathbb{R}`),
+        " を用いて ",
+        math(String.raw`\phi_{\mathrm{polar}}(z_1)=[(r_1,\theta_1)]_{\sim}`),
+        "、",
+        math(String.raw`\phi_{\mathrm{polar}}(z_2)=[(r_2,\theta_2)]_{\sim}`),
+        " とする。まず ",
         math(String.raw`\sqrt{z_1 z_2}`),
-        " と ",
-        math(String.raw`\sqrt{z_1}\sqrt{z_2}`),
-        " をそれぞれ ",
+        " を ",
         math(String.raw`\phi_{\mathrm{cartesian}}`),
-        " で表し比較する。",
+        " で表す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{z_1 z_2}
+&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1 z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2))))]_{\sim}\right) \\
+&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1)\phi_{\mathrm{polar}}(z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\phi_{\mathrm{polar}}(z_2))))]_{\sim}\right) \quad (\because \phi_{\mathrm{polar}} \text{ の同型性}) \\
+&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1([(r_1,\theta_1)]_{\sim}[(r_2,\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}[(r_2,\theta_2)]_{\sim})))]_{\sim}\right) \\
+&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1([(r_1 r_2,\theta_1+\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim})))]_{\sim}\right) \\
+&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}))]_{\sim}\right) \\
+&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})\right)
+\end{aligned}`,
+      ),
+      paragraph(["次に ", math(String.raw`\sqrt{z_1}\sqrt{z_2}`), " を計算する。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{z_1}\sqrt{z_2}
+&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}}))]_{\sim}\right)\,
+\phi_{\mathrm{cartesian}}\!\left([(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}))]_{\sim}\right) \\
+&= \left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\right)
+\left(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right) \\
+&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}) - \sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\right. \\
+&\qquad \left.\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}) + \sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right) \\
+&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "i. ",
         math(String.raw`r_1=0`),
         " または ",
         math(String.raw`r_2=0`),
-        " のときは自明。",
-        math(String.raw`r_1,r_2\neq 0`),
+        " のとき、",
+        math(String.raw`\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}=0`),
+        " より両者はともに ",
+        math(String.raw`(0,0)`),
+        " に等しく ",
+        math(String.raw`\sqrt{z_1 z_2}=\sqrt{z_1}\sqrt{z_2}`),
+        "。",
+      ]),
+      paragraph([
+        "ii. ",
+        math(String.raw`r_1\neq 0`),
+        " かつ ",
+        math(String.raw`r_2\neq 0`),
+        " のとき、",
+        math(String.raw`n_1, n_2 \in \mathbb{Z}`),
+        " で ",
+        math(String.raw`0\leq\theta_1-2n_1\pi<2\pi`),
+        "、",
+        math(String.raw`0\leq\theta_2-2n_2\pi<2\pi`),
+        " を満たすものがそれぞれただ一つ存在する。このとき、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cos\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
+&= \cos\!\tfrac{1}{2}\!\left(\theta_1-2n_1\pi+\theta_2-2n_2\pi\right) \\
+&= \cos\!\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right) \\
+&= \begin{cases}
+\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
+-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
+\end{cases}
+\end{aligned}`,
+      ),
+      paragraph(["同様に"]),
+      displayMath(
+        String.raw`\sin\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
+= \begin{cases}
+\sin\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
+-\sin\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
+\end{cases}`,
+      ),
+      paragraph([
+        "また ",
+        math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi`),
+        " であるから、次で場合分けする。",
+      ]),
+      paragraph([
+        "ii.a ",
+        math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<2\pi`),
         " のとき、",
       ]),
       displayMath(
-        String.raw`\sqrt{z_1 z_2}
-= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\frac{s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim})}{2},\;
-   \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\frac{s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim})}{2}\right)`,
-      ),
-      displayMath(
-        String.raw`\sqrt{z_1}\sqrt{z_2}
-= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\frac{(\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)}{2},\;
-   \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\frac{(\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)}{2}\right)`,
+        String.raw`\begin{aligned}
+\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
+&= \cos\!\tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
+= \cos\!\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right) \\
+&= \begin{cases}
+\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
+-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
+\end{cases}
+\end{aligned}`,
       ),
       paragraph([
-        math(String.raw`s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim})`),
-        " の値が ",
-        math(String.raw`[0,2\pi)`),
-        " か ",
-        math(String.raw`[2\pi,4\pi)`),
-        " に属するかで cosおよびsinの符号が決まり、結論を得る。",
+        "同様に ",
+        math(String.raw`\sin`),
+        " も一致するので、この場合 ",
+        math(String.raw`\sqrt{z_1 z_2}=\sqrt{z_1}\sqrt{z_2}`),
+        "。",
+      ]),
+      paragraph([
+        "ii.b ",
+        math(String.raw`2\pi\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi`),
+        " のとき、",
+        math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2+1)\pi<2\pi`),
+        " より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
+&= \cos\!\tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2+1)\pi\right)
+= \cos\!\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2+1)\pi\right) \\
+&= \begin{cases}
+\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2+1 \text{ は偶数}) \\
+-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2+1 \text{ は奇数})
+\end{cases}
+= \begin{cases}
+-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
+\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
+\end{cases}
+\end{aligned}`,
+      ),
+      paragraph([
+        "同様に ",
+        math(String.raw`\sin`),
+        " も符号が反転するので、この場合 ",
+        math(String.raw`\sqrt{z_1 z_2}=-\sqrt{z_1}\sqrt{z_2}`),
+        "。",
+      ]),
+      paragraph([
+        "以上より、",
+        math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<2\pi \iff 0\leq\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)<2\pi`),
+        " などから結論を得る。",
       ]),
     ],
-    conversion: {
-      status: "partially_simplified",
-      notes: ["原文の cos/sin 展開の詳細計算を要点のみに圧縮した。"],
-    },
+    conversion: { status: "converted" },
   },
   {
     id: "calculation_formulae_041_claim_sqrt_squared_is_original",

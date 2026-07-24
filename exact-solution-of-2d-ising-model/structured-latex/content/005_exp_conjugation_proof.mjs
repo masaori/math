@@ -9,6 +9,34 @@ export default defineBlocks([
     title: null,
     labels: [],
     statement: [
+      paragraph(["リー群・リー環を使うアプローチの概要（参考: 「Lie群とLie環1」定理 5.49）。"]),
+      paragraph([
+        math(String.raw`G, H`),
+        ": Lie群、連続な準同型写像 ",
+        math(String.raw`\phi : G \to H`),
+        " について、",
+      ]),
+      list([
+        [math(String.raw`\phi`), " は ", math(String.raw`C^{\omega}`), " 級である。"],
+        [
+          "Lie環 ",
+          math(String.raw`\mathfrak{g} := \mathrm{Lie}(G)`),
+          " から ",
+          math(String.raw`\mathfrak{h} := \mathrm{Lie}(H)`),
+          " への準同型写像 ",
+          math(String.raw`\mathrm{d}\phi_e : \mathfrak{g} \to \mathfrak{h}`),
+          " が存在し、",
+          math(String.raw`\phi(\exp(X)) = \exp(\mathrm{d}\phi_e(X))`),
+          " を満たす。",
+        ],
+      ]),
+      paragraph([
+        "この定理の証明を参考に、以下の定理を示したい。以下、",
+        math(String.raw`\mathrm{Ad}`),
+        "、",
+        math(String.raw`\mathrm{ad}`),
+        " を定める。",
+      ]),
       paragraph([
         math(String.raw`G`),
         ": リー群、",
@@ -23,8 +51,8 @@ export default defineBlocks([
       ),
     ],
     conversion: {
-      status: "partially_simplified",
-      notes: ["原文の概要説明（Lie群定理 5.49 の参照）を省略。"],
+      status: "converted",
+      notes: ["原文冒頭の概要説明（Lie群・Lie環アプローチと参考定理 5.49）と Ad, ad の定義を忠実に反映した。"],
     },
   },
   {
