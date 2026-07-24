@@ -74,15 +74,14 @@ graph TD
 | P1-8 | `typst compile` exit 0(新規警告/未解決ref なし) + 数値再検証 030/038/039 **ALL PASS**(限定は数値不変) | 1 | P1-1..7 | ✅ |
 | X-1  | SageMath数値検証を全工程で維持(claim↔sagemath/check 対応保全) | 横断 | — | 🟡 |
 | P2-0 | Typst→構造化TeX 全面移行の作業洗い出し | 2 | — | ✅ |
-| T1   | 残8ファイルの新規変換(045/046, 002-003, 004-013/014, 008-041/042/043) | 2 | P1-8 | ⬜ |
-| T2   | partially_simplified 25件の全厳密再変換(圧縮を除去) | 2 | P1-8 | ⬜ |
-| T3   | main.typ のインライン内容移行(記号表/見出し/散文・メモ) ※要設計判断 | 2 | 設計判断 | ⬜ |
-| T4   | 相互参照モデルの統一(ラベル vs id 不整合)＋ref解決チェックを validate に追加 | 2 | T1 | ⬜ |
+| T1/T2 | content を parts/ 現状に完全同期(残ファイル変換＋Phase1改変分の再同期＋劣化変換25件の厳密再変換) | 2 | P1-8 | 🟡 |
+| T3   | main.typ のインライン内容移行(記号表/見出し) ※heading node追加・作業メモは非移行 | 2 | T4-schema | ⬜ |
+| T4   | ref をラベルに統一(レンダラにラベル→id解決)＋validateにref解決チェック追加＋heading node追加 | 2 | — | 🟡 |
 | T5   | realtime-web-preview で全ブロックの KaTeX 描画疎通確認・可換図式代替 | 2 | T1..T4 | ⬜ |
 | T6   | sagemath連携(claim↔check, sourcePath経由)の維持確認 | 2 | T1 | ⬜ |
-| T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・要ユーザー判断 | 2 | T1..T6 | ⬜ |
+| T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・レンダリング疎通後に別途確認 | 2 | T1..T6 | ⏸ |
 | P3-0 | Lean/Coq/Isabelle/Agda の選定リサーチ(本問題との相性・mathlib被覆・事例) | 3 | なし | ✅ |
-| P3-1 | 使用する系を決定 → **推奨: Lean 4 + mathlib4**(要ユーザー最終確認) | 3 | P3-0 | 🟡 |
+| P3-1 | 使用する系を決定 → **Lean 4 + mathlib4 に確定(ユーザー承認済 2026-07)** | 3 | P3-0 | ✅ |
 | P3-2 | 最小formalizationターゲットでPoC | 3 | P3-1 | ⬜ |
 | P3-x | 段階的に formal 化(決定後に細分化) | 3 | P3-2 | ⬜ |
 
