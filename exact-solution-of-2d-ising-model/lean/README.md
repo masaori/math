@@ -1,7 +1,12 @@
 # Lean 4 + mathlib4 による機械的証明
 
-`exact-solution-of-2d-ising-model` の人手証明（正本は `parts/**/*.typ`）を Lean 4 で
-機械的に検証するためのプロジェクト。SageMath による数値検証（`sagemath/`）と併用する。
+`exact-solution-of-2d-ising-model` の人手証明を Lean 4 で機械的に検証するためのプロジェクト。
+SageMath による数値検証（`sagemath/`）と併用する。
+
+**人手証明の正本は `structured-latex/content/*.mjs`（構造化TeX、140ブロック）**である。
+旧 Typst 一式は `_old/typst/` へ参照用に退避されており（更新されない）、
+本 README で `parts/…/*.typ` と書いているのは `_old/typst/parts/…` のことである。
+対応づけは**ラベル**（`labels` フィールド、例 `def_hatZ_hatY`）で辿る。
 
 ## セットアップ
 
@@ -78,8 +83,14 @@ EOF
   | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/Part002/Lemma001_ScalarIdentityCommutes.lean` |
   | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/Part002/Lemma003_CentralizerIsScalar.lean` |
   | `parts/004_転送行列/000_definition_転送行列の記号の定義.typ` | `Ising2D/Part004/Definition000_TransferMatrixSymbols.lean` |
+  | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | `Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean` |
+  | `parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ` | `Ising2D/Part004/Claim008_ExpSum.lean` |
+  | `parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ` | `Ising2D/Part004/Definition009_HatZHatY.lean` |
+  | `parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ` | `Ising2D/Part004/Claim012_HatPeriodicity.lean` |
+  | `parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ` | `Ising2D/Part004/Claim013_RecoverZY.lean` |
   | `parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` | `Ising2D/Part004/Claim014_ZYGenerateAlgebra.lean` |
   | `parts/006_ZとYの反交換関係/000_claim_Z_muとZ_nuとY_muとY_nuの反交換関係.typ` | `Ising2D/Part006/Claim000_AnticommutatorZY.lean` |
+  | `parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ` | `Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean` |
   | （表現の選択と両表現の同型） | `Ising2D/Basic.lean`, `Ising2D/Representation.lean` |
 
 - 各 Lean ファイルの冒頭コメントに、対応する `.typ` ファイル名と Typst のラベル（`<...>`）を書く。
@@ -156,6 +167,24 @@ EOF
 | `Ising2D.anticomm_Y_Y` | `[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}` | 同 第 3 式（**原文は TODO**） |
 | `Ising2D.matrix_two_decomp` | `Mat(2,ℂ)` の元の `{I, σ^x, σ^y, σ^z}` 展開 | `<Z_Y_generate_algebra>` Step 3 の成分比較 |
 | `Ising2D.Z_Y_generate_algebra` | `Algebra.adjoin ℂ {Z_m, Y_m} = ⊤` | `<Z_Y_generate_algebra>` |
+| `Ising2D.acomm_sum_smul` / `acomm_sum_smul_left` | 反交換子の双線型性（有限線型結合の展開） | 補助（原文は暗黙に使用） |
+| `Ising2D.ZY_linearIndependent` | `(Z_1,…,Z_M,Y_1,…,Y_M)` は線型独立 | `004/001`（**原文は TODO**） |
+| `Ising2D.ZYSet_linearIndepOn` | 同上を集合 `S` の形で述べた版 | 同上 |
+| `Ising2D.expPhase` | 位相因子 `exp(-√-1·2πk/M)`（`k : ℤ`） | `<def_hatZ_hatY>` |
+| `Ising2D.expPhase_eq_one_iff` | `exp(-√-1·2πk/M) = 1 ⟺ M ∣ k` | `<exp_sum>` (a)(b) の場合分け |
+| `Ising2D.expPhase_sum` | `∑_{j=1}^M exp(-√-1·2πjk/M) = M δ^M_{k,0}` | `<exp_sum>` |
+| `Ising2D.deltaMod` | `δ^M_{(μ,ν)}` の整数添字版 | `parts/004/007_definition_…` |
+| `Ising2D.hatZ` / `hatZPlus` / `hatZMinus` / `hatY` | `hat(Z)_μ^{(±)}`, `hat(Y)_μ` | `<def_hatZ_hatY>` |
+| `Ising2D.hatZMinus_eq` | `hat(Z)^{(-)}` は一様和 | `<recover_Z_Y_from_hatZ_hatY>` 冒頭 |
+| `Ising2D.hatZ_periodic` / `hatY_periodic` | `hat(Z)_{μ+M} = hat(Z)_μ` ほか（一般の `μ`） | `<hatZ_hatY_M_periodicity>` の一般化 |
+| `Ising2D.hatZMinus_M_eq_neg_M` / `hatY_M_eq_neg_M` | `hat(Z)_M^{(-)} = hat(Z)_{-M}^{(-)}` ほか | `<hatZ_hatY_M_periodicity>` |
+| `Ising2D.inverse_dft` | 離散フーリエ逆変換（任意の族に対する形） | `<recover_Z_Y_from_hatZ_hatY>` Step 1/2 の共通部分 |
+| `Ising2D.recover_Y` / `recover_Z` | `∑_μ hat(Y)_μ e^{√-1 m 2πμ/M} = M Y_m` ほか | `<recover_Z_Y_from_hatZ_hatY>` |
+| `Ising2D.Y_eq_inverse_dft` / `Z_eq_inverse_dft` | `Y_m = (1/M)∑_μ …` ほか | 同 Step 3 |
+| `Ising2D.acomm_hatZ_hatZ_same` | `[hat(Z)_μ^{(±)}, hat(Z)_ν^{(±)}]₊ = 2M δ^M_{μ+ν,0} I` | `<anticommutator_of_hat_Z_and_hat_Y>` 1 |
+| `Ising2D.acomm_hatZ_hatZ_opp` | `[hat(Z)_μ^{(±)}, hat(Z)_ν^{(∓)}]₊` | 同 2 |
+| `Ising2D.acomm_hatZ_hatY` | `[hat(Z)_μ^{(±)}, hat(Y)_ν]₊ = 0` | 同 3（**原文は「同様」で省略**） |
+| `Ising2D.acomm_hatY_hatY` | `[hat(Y)_μ, hat(Y)_ν]₊ = 2M δ^M_{μ+ν,0} I` | 同 4（**原文は「同様」で省略**） |
 
 ## 形式化の過程で見つかった原文の問題
 
@@ -164,17 +193,20 @@ EOF
 | `parts/002_線型空間の一般論/000_theorem_...`（`<tensor_basis>`） | 「各元が基底」「添字 `m` の二重使用」 | `Ising2D/Part002/Theorem000_TensorBasis.lean` 冒頭に修正版を明記 |
 | `parts/004_転送行列/000_definition_...`（`<def_transfer_matrix_symbols>`） | `ε = (√-1)^M Z_1 Y_1 + ⋯ + Z_M Y_M` の `+` は**積の誤り**（`M = 2` で反例） | `Ising2D/Part004/Definition000_...` 冒頭に記載。`Z_mul_Y_same`（`Z_m Y_m = -√-1 σ^x_m`）と `xString_succ_eq` が積であることの根拠 |
 | `parts/006_ZとYの反交換関係/000_claim_...`（`<anticommutator_of_Z_and_Y>`） | `[Z_μ, Y_ν]₊`, `[Y_μ, Y_ν]₊` の証明が TODO のまま | Lean 側で 3 式とも証明済み（`Ising2D/Part006/Claim000_AnticommutatorZY.lean`） |
+| `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
+| `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
 
 ## 今後の方針
 
 - **次の形式化対象**（人手証明側で自己完結しており依存が浅い順）
-  1. `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ`
-     （`Z_Y_generate_algebra` と `matrixUnitBasis` が使える）
-  2. `parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ` と
-     `parts/007_hatZとhatYの反交換関係`（`siteProd_anticomm_of_single_site` がそのまま効く）
-  3. `parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ`
+  1. `parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ` と
+     `parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ`（`<H1_H2_via_hatZ_hatY>`）。
+     `expPhase_sum` と `hatZ`/`hatY` の定義が揃ったので、原文の二重和の計算はそのまま写せる。
+     ただし `Y_{k_1} Z_{k_2}` の添字の巡回（`k_1 = k_2 - 1`、`k_2 = 1` のとき `k_1 = M`）を
+     `Fin M` 上でどう書くかを決める必要がある
+  2. `parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ`
      （`V_1, V_2` の定義そのものが未形式化。`matExp` と `sigmaZ`/`sigmaX` を使って定義する）
-  4. `ε = (√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`（積）の完全形。
+  3. `ε = (√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`（積）の完全形。
      現状は再帰形 `xString_succ_eq` まで。順序つき積（`List.prod` / `Finset.noncommProd`）の
      整備が要る
 - **mathlib に無いことが分かっているもの**

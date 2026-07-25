@@ -18,6 +18,8 @@
 交換子は mathlib の Lie 括弧 `⁅·,·⁆`（`Ring.lie_def : ⁅x, y⁆ = x * y - y * x`）と
 一致するので、その形の言い換えも与える。
 -/
+import Mathlib.Algebra.Algebra.Basic
+import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Algebra.Lie.OfAssociative
 import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Matrix.Basic
@@ -61,6 +63,49 @@ theorem lie_mul_eq_acomm_sub_acomm (a b c : R) :
   exact commutator_via_anticommutators a b c
 
 end Ring
+
+/-! ## 反交換子の双線型性（線型結合の展開）
+
+原文には対応する主張が無い**補助補題**。
+`parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` と
+`parts/007_hatZとhatYの反交換関係/000_claim_....typ` の計算は、いずれも
+「反交換子の中の有限線型結合を外へ出す」操作を暗黙に使っているので、
+その操作をここで一度だけ証明しておく。 -/
+
+section Bilinear
+
+variable {R : Type*} [Ring R] {S : Type*} [CommSemiring S] [Algebra S R]
+variable {ι κ : Type*} [Fintype ι] [Fintype κ]
+
+/-- 線型結合どうしの積の展開 `(∑ᵢ cᵢ xᵢ)(∑ⱼ dⱼ yⱼ) = ∑ᵢ∑ⱼ (cᵢdⱼ) (xᵢ yⱼ)`。 -/
+theorem sum_smul_mul_sum_smul (c : ι → S) (d : κ → S) (x : ι → R) (y : κ → R) :
+    (∑ i, c i • x i) * (∑ j, d j • y j) = ∑ i, ∑ j, (c i * d j) • (x i * y j) := by
+  rw [Finset.sum_mul_sum]
+  exact Finset.sum_congr rfl fun i _ =>
+    Finset.sum_congr rfl fun j _ => smul_mul_smul_comm _ _ _ _
+
+/-- 反交換子は左の引数について線型: `[∑ᵢ cᵢ xᵢ, y]₊ = ∑ᵢ cᵢ [xᵢ, y]₊`。 -/
+theorem acomm_sum_smul_left (c : ι → S) (x : ι → R) (y : R) :
+    acomm (∑ i, c i • x i) y = ∑ i, c i • acomm (x i) y := by
+  simp only [acomm, Finset.sum_mul, Finset.mul_sum, Algebra.smul_mul_assoc,
+    Algebra.mul_smul_comm, smul_add, Finset.sum_add_distrib]
+
+/-- 反交換子の両引数を線型結合で展開する:
+`[∑ᵢ cᵢ xᵢ, ∑ⱼ dⱼ yⱼ]₊ = ∑ᵢ∑ⱼ (cᵢdⱼ) [xᵢ, yⱼ]₊`。 -/
+theorem acomm_sum_smul (c : ι → S) (d : κ → S) (x : ι → R) (y : κ → R) :
+    acomm (∑ i, c i • x i) (∑ j, d j • y j)
+      = ∑ i, ∑ j, (c i * d j) • acomm (x i) (y j) := by
+  have hBA : (∑ j, d j • y j) * (∑ i, c i • x i)
+      = ∑ i, ∑ j, (c i * d j) • (y j * x i) := by
+    rw [sum_smul_mul_sum_smul, Finset.sum_comm]
+    exact Finset.sum_congr rfl fun i _ =>
+      Finset.sum_congr rfl fun j _ => by rw [mul_comm]
+  rw [acomm, sum_smul_mul_sum_smul, hBA, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [← Finset.sum_add_distrib]
+  exact Finset.sum_congr rfl fun j _ => by rw [acomm, smul_add]
+
+end Bilinear
 
 section Matrix
 

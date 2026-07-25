@@ -7,7 +7,7 @@ export default defineBlocks([
     sourcePath: "_old/typst/parts/000_計算公式/030_definition_絶対値と偏角_abs_arg.typ",
     sourceOrdinal: 31,
     title: { text: "絶対値, 偏角" },
-    labels: [],
+    labels: ["def_abs_arg"],
     statement: [
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、"]),
       paragraph([
@@ -26,6 +26,355 @@ export default defineBlocks([
       paragraph(["と定め、", math(String.raw`z`), " の偏角と呼ぶ。"]),
     ],
     conversion: { status: "converted" },
+  },
+  {
+    id: "calculation_formulae_031b_claim_abs_basic_properties",
+    kind: "claim",
+    sourcePath: "structured-latex/content/000_calculation_formulae_30_44.mjs",
+    sourceOrdinal: 31,
+    title: { text: "絶対値の基本性質" },
+    labels: ["abs_basic_properties"],
+    statement: [
+      paragraph([
+        ref("def_abs_arg"),
+        " の絶対値 ",
+        math(String.raw`|\cdot| : \mathbb{C}\to\mathbb{R}_{\ge 0}`),
+        " について、次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) ",
+          math(String.raw`z=(x,y)\in\mathbb{C}`),
+          " について ",
+          math(String.raw`|z|=\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}`),
+          "。",
+        ],
+        [
+          "(2) ",
+          math(String.raw`z=(x,y)\in\mathbb{C}`),
+          " について ",
+          math(String.raw`|z|^2=x^2+y^2`),
+          "。",
+        ],
+        [
+          "(3) ",
+          math(String.raw`|z|=0\iff z=0_{\mathbb{C}}`),
+          "。",
+        ],
+        [
+          "(4) ",
+          math(String.raw`z_1,z_2\in\mathbb{C}`),
+          " について ",
+          math(String.raw`|z_1z_2|=|z_1|\,|z_2|`),
+          "。",
+        ],
+        [
+          "(5) ",
+          math(String.raw`z_1,z_2\in\mathbb{C}`),
+          " について ",
+          math(String.raw`|z_1+z_2|\le|z_1|+|z_2|`),
+          "。",
+        ],
+        [
+          "(6) ",
+          math(String.raw`x\in\mathbb{R}`),
+          " について ",
+          math(String.raw`|\iota_{\mathbb{R}\to\mathbb{C}}(x)|=|x|`),
+          "（右辺は実数の絶対値）。",
+        ],
+      ]),
+      paragraph([
+        "ここで ",
+        math(String.raw`\mathbb{C}`),
+        " の加法は ",
+        ref("complex_numbers_form_a_field"),
+        " で定めた ",
+        math(String.raw`\mathbb{R}^2`),
+        " の成分ごとの加法である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 0: ",
+        math(String.raw`\operatorname{pr}_1`),
+        " が well-defined であること。",
+        ref("first_and_second_projections"),
+        " は ",
+        math(String.raw`\operatorname{pr}_1([(r,\theta)]_{\sim}):=r`),
+        " と代表元を用いて定めている。",
+        math(String.raw`(r,\theta)\sim(r',\theta')`),
+        " とすると ",
+        ref("polar_equivalence_class"),
+        " より ",
+        math(String.raw`r=r'=0`),
+        " または ",
+        math(String.raw`r=r'`),
+        " であり、いずれの場合も ",
+        math(String.raw`r=r'`),
+        "。よって値は代表元によらない。",
+      ]),
+      paragraph([
+        "Step 1: (1) の証明。",
+        ref("def_abs_arg"),
+        " より ",
+        math(String.raw`|z|=\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))`),
+        " であるから、",
+        ref("def_phi_polar"),
+        " の場合分けに従って計算する。",
+      ]),
+      displayMath(
+        String.raw`\operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))=
+\begin{cases}
+\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})} & (x>0),\\
+\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})} & (x<0,\ y\ge 0),\\
+\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})} & (x<0,\ y<0),\\
+y & (x=0,\ y>0),\\
+-y & (x=0,\ y<0),\\
+0 & (x=0,\ y=0).
+\end{cases}`,
+      ),
+      paragraph([
+        "上 3 つの場合は主張の形をしている。残りの 3 つの場合を確かめる。",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\sqrt{a}^{(\mathbb{R}_{\ge 0})}`),
+        " は ",
+        math(String.raw`u\ge 0`),
+        " かつ ",
+        math(String.raw`u^2=a`),
+        " を満たす唯一の ",
+        math(String.raw`u`),
+        " である。",
+      ]),
+      list([
+        [
+          math(String.raw`x=0,\ y>0`),
+          " のとき ",
+          math(String.raw`x^2+y^2=y^2`),
+          " であり、",
+          math(String.raw`y>0`),
+          " すなわち ",
+          math(String.raw`y\ge 0`),
+          " かつ ",
+          math(String.raw`y^2=y^2`),
+          " であるから ",
+          math(String.raw`\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}=y`),
+          "。",
+        ],
+        [
+          math(String.raw`x=0,\ y<0`),
+          " のとき ",
+          math(String.raw`x^2+y^2=y^2=(-y)^2`),
+          " であり、",
+          math(String.raw`-y>0`),
+          " すなわち ",
+          math(String.raw`-y\ge 0`),
+          " であるから ",
+          math(String.raw`\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}=-y`),
+          "。",
+        ],
+        [
+          math(String.raw`x=0,\ y=0`),
+          " のとき ",
+          math(String.raw`x^2+y^2=0`),
+          " であり ",
+          math(String.raw`0\ge 0`),
+          " かつ ",
+          math(String.raw`0^2=0`),
+          " であるから ",
+          math(String.raw`\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}=0`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        "以上より、すべての場合で ",
+        math(String.raw`|z|=\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}`),
+        "。",
+      ]),
+      paragraph([
+        "Step 2: (2) の証明。",
+        math(String.raw`x^2+y^2\ge 0`),
+        " であり、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
+        "（",
+        math(String.raw`a\ge 0`),
+        "）であるから、",
+      ]),
+      displayMath(
+        String.raw`|z|^2=\left(\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}\right)^2=x^2+y^2
+\quad (\because \text{Step 1})`,
+      ),
+      paragraph([
+        "Step 3: 補題（非負実数の平方の比較）。",
+        math(String.raw`u,v\in\mathbb{R}_{\ge 0}`),
+        " について ",
+        math(String.raw`u^2\le v^2\Rightarrow u\le v`),
+        " が成り立つ。実際、対偶を示す。",
+        math(String.raw`u>v\ (\ge 0)`),
+        " とすると ",
+        math(String.raw`u>0`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`u^2=u\cdot u>v\cdot u\ge v\cdot v=v^2
+\quad (\because u>v,\ u>0,\ v\ge 0)`,
+      ),
+      paragraph([
+        "であるから ",
+        math(String.raw`u^2>v^2`),
+        "。特に ",
+        math(String.raw`u,v\ge 0`),
+        " かつ ",
+        math(String.raw`u^2=v^2`),
+        " ならば ",
+        math(String.raw`u\le v`),
+        " かつ ",
+        math(String.raw`v\le u`),
+        " より ",
+        math(String.raw`u=v`),
+        "。",
+      ]),
+      paragraph([
+        "Step 4: (3) の証明。",
+        math(String.raw`|z|=0`),
+        " とすると Step 2 より ",
+        math(String.raw`x^2+y^2=|z|^2=0`),
+        "。",
+        ref("multiplicative_group_of_cc"),
+        " の Step 4 で示したとおり ",
+        math(String.raw`x^2+y^2=0\iff(x,y)=(0,0)`),
+        " であるから ",
+        math(String.raw`z=0_{\mathbb{C}}`),
+        "。逆に ",
+        math(String.raw`z=0_{\mathbb{C}}=(0,0)`),
+        " なら Step 1 より ",
+        math(String.raw`|z|=\sqrt{0}^{(\mathbb{R}_{\ge 0})}=0`),
+        "。",
+      ]),
+      paragraph([
+        "Step 5: (4) の証明。",
+        math(String.raw`z_1=(a,b),\ z_2=(c,d)`),
+        " とすると ",
+        ref("definition_of_cc"),
+        " より ",
+        math(String.raw`z_1z_2=(ac-bd,\ ad+bc)`),
+        " であるから、Step 2 と ",
+        ref("multiplicative_group_of_cc"),
+        " の Step 5 の恒等式より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|z_1z_2|^2
+&= (ac-bd)^2+(ad+bc)^2 \quad (\because \text{Step 2}) \\
+&= (a^2+b^2)(c^2+d^2) \\
+&= |z_1|^2|z_2|^2 \quad (\because \text{Step 2}) \\
+&= \left(|z_1|\,|z_2|\right)^2
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`|z_1z_2|\ge 0`),
+        " かつ ",
+        math(String.raw`|z_1|\,|z_2|\ge 0`),
+        " であるから、Step 3 より ",
+        math(String.raw`|z_1z_2|=|z_1|\,|z_2|`),
+        "。",
+      ]),
+      paragraph([
+        "Step 6: Cauchy--Schwarz の不等式（2 成分の場合）。",
+        math(String.raw`a,b,c,d\in\mathbb{R}`),
+        " について次の恒等式（Lagrange の恒等式）が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(ac+bd)^2+(ad-bc)^2
+&= a^2c^2+2abcd+b^2d^2+a^2d^2-2abcd+b^2c^2 \\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2 \\
+&= (a^2+b^2)(c^2+d^2)
+\quad (\because \mathbb{R} \text{ の分配律})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`(ad-bc)^2\ge 0`),
+        " であるから ",
+        math(String.raw`(ac+bd)^2\le(a^2+b^2)(c^2+d^2)=\left(|z_1|\,|z_2|\right)^2`),
+        "（最後の等号は Step 2）。",
+        math(String.raw`ac+bd\le 0`),
+        " のときは ",
+        math(String.raw`ac+bd\le 0\le|z_1|\,|z_2|`),
+        "。",
+        math(String.raw`ac+bd>0`),
+        " のときは Step 3 を ",
+        math(String.raw`u=ac+bd,\ v=|z_1|\,|z_2|`),
+        " に適用して ",
+        math(String.raw`ac+bd\le|z_1|\,|z_2|`),
+        "。いずれの場合も",
+      ]),
+      displayMath(String.raw`ac+bd\le|z_1|\,|z_2|`),
+      paragraph([
+        "Step 7: (5) の証明。",
+        math(String.raw`z_1+z_2=(a+c,\ b+d)`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|z_1+z_2|^2
+&= (a+c)^2+(b+d)^2 \quad (\because \text{Step 2}) \\
+&= (a^2+b^2)+(c^2+d^2)+2(ac+bd)
+\quad (\because \mathbb{R} \text{ の分配律}) \\
+&= |z_1|^2+|z_2|^2+2(ac+bd) \quad (\because \text{Step 2}) \\
+&\le |z_1|^2+|z_2|^2+2|z_1|\,|z_2| \quad (\because \text{Step 6}) \\
+&= \left(|z_1|+|z_2|\right)^2
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`|z_1+z_2|\ge 0`),
+        " かつ ",
+        math(String.raw`|z_1|+|z_2|\ge 0`),
+        " であるから、Step 3 より ",
+        math(String.raw`|z_1+z_2|\le|z_1|+|z_2|`),
+        "。",
+      ]),
+      paragraph([
+        "Step 8: (6) の証明。",
+        ref("inclusion_rr_to_cc"),
+        " より ",
+        math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}(x)=(x,0)`),
+        " であるから、Step 1 より",
+      ]),
+      displayMath(
+        String.raw`\left|\iota_{\mathbb{R}\to\mathbb{C}}(x)\right|
+=\sqrt{x^2+0^2}^{(\mathbb{R}_{\ge 0})}
+=\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}`,
+      ),
+      paragraph([
+        math(String.raw`x\ge 0`),
+        " のときは ",
+        math(String.raw`x\ge 0`),
+        " かつ ",
+        math(String.raw`x^2=x^2`),
+        " より ",
+        math(String.raw`\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}=x=|x|`),
+        "、",
+        math(String.raw`x<0`),
+        " のときは ",
+        math(String.raw`-x>0`),
+        " かつ ",
+        math(String.raw`(-x)^2=x^2`),
+        " より ",
+        math(String.raw`\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}=-x=|x|`),
+        "。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。行列ノルムの劣乗法性（labels: matrix_norm_submultiplicativity）の" +
+          "証明が K=CC の場合に必要とする絶対値の性質（成分表示・乗法性・三角不等式）を、" +
+          "絶対値の定義（labels: def_abs_arg）の直後にまとめて置いた。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_032_claim_arg_of_product",

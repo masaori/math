@@ -224,7 +224,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
     sourcePath: "_old/typst/parts/000_計算公式/016_definition_角度表現の同値類.typ",
     sourceOrdinal: 17,
     title: { text: "角度表現の同値類" },
-    labels: [],
+    labels: ["angle_equivalence_class"],
     statement: [
       paragraph([
         math("\\mathbb{R}"),

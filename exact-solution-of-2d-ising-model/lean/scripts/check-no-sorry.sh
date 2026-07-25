@@ -54,6 +54,9 @@ targets=(
   Ising2D.commutator_via_anticommutators
   Ising2D.lie_mul_eq_acomm_sub_acomm
   Ising2D.matrix_commutator_via_anticommutators
+  Ising2D.sum_smul_mul_sum_smul
+  Ising2D.acomm_sum_smul_left
+  Ising2D.acomm_sum_smul
   Ising2D.siteOp_one
   Ising2D.siteOp_mul_same
   Ising2D.siteOp_mul_comm
@@ -76,6 +79,44 @@ targets=(
   Ising2D.siteProd_mem
   Ising2D.E_eq_siteProd
   Ising2D.Z_Y_generate_algebra
+  Ising2D.acomm_ZY
+  Ising2D.linearIndependent_of_clifford
+  Ising2D.ZY_linearIndependent
+  Ising2D.ZY_injective
+  Ising2D.ZYSet_eq_range
+  Ising2D.ZYSet_linearIndepOn
+  Ising2D.expPhase_add
+  Ising2D.expPhase_neg
+  Ising2D.expPhase_natCast_mul
+  Ising2D.expPhase_eq_zpow
+  Ising2D.expPhase_eq_one_iff
+  Ising2D.expPhase_sum
+  Ising2D.dvd_sub_iff_eq
+  Ising2D.hatZMinus_eq
+  Ising2D.hatZPlus_eq_hatZMinus_sub
+  Ising2D.expPhase_add_mul_natCast
+  Ising2D.hatZ_periodic
+  Ising2D.hatY_periodic
+  Ising2D.hatZMinus_M_eq_neg_M
+  Ising2D.hatY_M_eq_neg_M
+  Ising2D.inverse_dft
+  Ising2D.recover_Y
+  Ising2D.recover_Z
+  Ising2D.Y_eq_inverse_dft
+  Ising2D.Z_eq_inverse_dft
+  Ising2D.acomm_sum_smul_clifford
+  Ising2D.acomm_sum_smul_zero
+  Ising2D.acomm_Z_Z_clifford
+  Ising2D.acomm_Y_Y_clifford
+  Ising2D.expPhase_site_mul
+  Ising2D.acomm_hatZ_hatZ_same
+  Ising2D.acomm_hatZ_hatZ_opp
+  Ising2D.acomm_hatZ_hatY
+  Ising2D.acomm_hatY_hatZ
+  Ising2D.acomm_hatY_hatY
+  Ising2D.acomm_hatZPlus_hatZPlus
+  Ising2D.acomm_hatZMinus_hatZMinus
+  Ising2D.acomm_hatZPlus_hatZMinus
 )
 
 {

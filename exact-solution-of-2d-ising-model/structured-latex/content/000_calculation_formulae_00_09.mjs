@@ -205,7 +205,7 @@ B(\alpha A)B^{-1}
     sourcePath: "_old/typst/parts/000_計算公式/006_definition_CCの定義.typ",
     sourceOrdinal: 7,
     title: { tex: "\\mathbb{C}\\text{の定義}" },
-    labels: [],
+    labels: ["definition_of_cc"],
     statement: [
       paragraph([math("\\mathbb{C}:=\\mathbb{R}^2"), " に、以下の演算を入れたもの。"]),
       paragraph(["積"]),
@@ -218,7 +218,7 @@ B(\alpha A)B^{-1}
     sourcePath: "_old/typst/parts/000_計算公式/007_definition_RRからCCへの包含写像.typ",
     sourceOrdinal: 8,
     title: { tex: "\\mathbb{R}\\to\\mathbb{C}\\text{の包含写像}" },
-    labels: [],
+    labels: ["inclusion_rr_to_cc"],
     statement: [
       paragraph([math("\\iota_{\\mathbb{R}\\to\\mathbb{C}}:\\mathbb{R}\\to\\mathbb{C}"), " を"]),
       displayMath("\\iota_{\\mathbb{R}\\to\\mathbb{C}}(x):=(x,0)"),
@@ -234,7 +234,7 @@ B(\alpha A)B^{-1}
     sourcePath: "_old/typst/parts/000_計算公式/008_definition_マイナス1倍.typ",
     sourceOrdinal: 9,
     title: { tex: "-1\\text{倍}" },
-    labels: [],
+    labels: ["multiply_by_minus_one"],
     statement: [
       paragraph([math("z\\in\\mathbb{C}"), " について、"]),
       displayMath("-z:=(-1_{\\mathbb{C}})\\cdot z"),

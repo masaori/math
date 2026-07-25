@@ -14,3 +14,9 @@ import Ising2D.Representation
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
 import Ising2D.Part006.Claim000_AnticommutatorZY
+import Ising2D.Part004.Claim001_ZYLinearlyIndependent
+import Ising2D.Part004.Claim008_ExpSum
+import Ising2D.Part004.Definition009_HatZHatY
+import Ising2D.Part004.Claim012_HatPeriodicity
+import Ising2D.Part004.Claim013_RecoverZY
+import Ising2D.Part007.Claim000_AnticommutatorHatZHatY

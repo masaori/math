@@ -117,14 +117,371 @@ export default defineBlocks([
     sourcePath: "_old/typst/parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ",
     sourceOrdinal: 2,
     title: { tex: String.raw`Z_m, Y_m \text{ は線型独立}` },
-    labels: [],
+    labels: ["Z_Y_linearly_independent"],
     statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`Z_1,\dots,Z_M,Y_1,\dots,Y_M \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " を考える。",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        "-線型空間とみなすとき、",
+      ]),
       displayMath(
         String.raw`\{Z_1, \dots, Z_M, Y_1, \dots, Y_M\} \text{ は線型独立}`,
       ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\alpha_1,\dots,\alpha_M,\beta_1,\dots,\beta_M \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{m=1}^{M}\alpha_m Z_m+\sum_{m=1}^{M}\beta_m Y_m=0`),
+        " を満たすならば、すべての ",
+        math(String.raw`m`),
+        " について ",
+        math(String.raw`\alpha_m=\beta_m=0`),
+        " である。",
+      ]),
     ],
-    proof: [paragraph([todo("TODO: 証明略")])],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        "以下、",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z\in\mathrm{Mat}(2,\mathbb{C})`),
+        " を標準的な Pauli 行列",
+      ]),
+      displayMath(
+        String.raw`\sigma^x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+\sigma^y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+\sigma^z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
+I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
+      ),
+      paragraph([
+        "とする。",
+        ref("def_transfer_matrix_symbols"),
+        " のとおり ",
+        math(String.raw`\sigma_k^a`),
+        "（",
+        math(String.raw`a\in\{x,y,z\}`),
+        "）は第 ",
+        math(String.raw`k`),
+        " テンソル因子のみが ",
+        math(String.raw`\sigma^a`),
+        " で他の因子がすべて ",
+        math(String.raw`I`),
+        " である元である。",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`\mathcal{B}:=\{I,\sigma^x,\sigma^y,\sigma^z\}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-基底である。任意の ",
+        math(String.raw`A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\in\mathrm{Mat}(2,\mathbb{C})`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`A=\frac{a_{11}+a_{22}}{2}I
++\frac{a_{12}+a_{21}}{2}\sigma^x
++\frac{i(a_{12}-a_{21})}{2}\sigma^y
++\frac{a_{11}-a_{22}}{2}\sigma^z
+\quad (\because \text{成分比較})`,
+      ),
+      paragraph([
+        "が成り立つ（右辺の ",
+        math(String.raw`(1,1)`),
+        " 成分は ",
+        math(String.raw`\frac{a_{11}+a_{22}}{2}+\frac{a_{11}-a_{22}}{2}=a_{11}`),
+        "、",
+        math(String.raw`(2,2)`),
+        " 成分は ",
+        math(String.raw`\frac{a_{11}+a_{22}}{2}-\frac{a_{11}-a_{22}}{2}=a_{22}`),
+        "、",
+        math(String.raw`(1,2)`),
+        " 成分は ",
+        math(String.raw`\frac{a_{12}+a_{21}}{2}-i\cdot\frac{i(a_{12}-a_{21})}{2}=a_{12}`),
+        "、",
+        math(String.raw`(2,1)`),
+        " 成分は ",
+        math(String.raw`\frac{a_{12}+a_{21}}{2}+i\cdot\frac{i(a_{12}-a_{21})}{2}=a_{21}`),
+        "）。よって ",
+        math(String.raw`\mathcal{B}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " を張り、",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{B}`),
+        " であるから ",
+        math(String.raw`\mathcal{B}`),
+        " は基底である。以下",
+      ]),
+      displayMath(
+        String.raw`e_1:=I,\quad e_2:=\sigma^x,\quad e_3:=\sigma^y,\quad e_4:=\sigma^z`,
+      ),
+      paragraph(["と番号を付ける。"]),
+      paragraph([
+        "Step 2: テンソル冪の基底。",
+        ref("tensor_basis"),
+        " を ",
+        math(String.raw`V=\mathrm{Mat}(2,\mathbb{C})`),
+        "（",
+        math(String.raw`n=4`),
+        "、基底 ",
+        math(String.raw`E=\{e_1,e_2,e_3,e_4\}`),
+        "）、",
+        math(String.raw`m=M`),
+        " に適用すると、多重添字 ",
+        math(String.raw`(i_1,\dots,i_M)\in\{1,2,3,4\}^M`),
+        " で添字づけられた族",
+      ]),
+      displayMath(
+        String.raw`\mathcal{E}:=\left\{\,e_{i_1}\otimes\cdots\otimes e_{i_M}
+\;\middle|\;(i_1,\dots,i_M)\in\{1,2,3,4\}^M\,\right\}`,
+      ),
+      paragraph([
+        "は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-基底である。",
+      ]),
+      paragraph([
+        "Step 3: ",
+        math(String.raw`Z_m,Y_m`),
+        " のテンソル表示。まず ",
+        math(String.raw`1\le r\le M`),
+        " と ",
+        math(String.raw`a_1,\dots,a_r\in\{x,y,z\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}
+= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes
+\overbrace{I\otimes\cdots\otimes I}^{M-r}`,
+      ),
+      paragraph([
+        "が成り立つことを ",
+        math(String.raw`r`),
+        " に関する帰納法で示す。",
+        math(String.raw`r=1`),
+        " のときは ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\sigma_1^{a_1}`),
+        " の定義そのものである。",
+        math(String.raw`r`),
+        " で成り立つとすると、テンソル積上の積が因子ごとの積であること",
+      ]),
+      displayMath(
+        String.raw`(A_1\otimes\cdots\otimes A_M)(B_1\otimes\cdots\otimes B_M)
+= (A_1B_1)\otimes\cdots\otimes(A_MB_M)`,
+      ),
+      paragraph(["と ", math(String.raw`AI=IA=A`), " より、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
+&= \left(\sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes I\otimes I\otimes\cdots\otimes I\right)
+   \left(I\otimes\cdots\otimes I\otimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+\quad (\because \text{帰納法の仮定}) \\
+&= (\sigma^{a_1}I)\otimes\cdots\otimes(\sigma^{a_r}I)\otimes(I\sigma^{a_{r+1}})\otimes(II)\otimes\cdots\otimes(II)
+\quad (\because \text{テンソル積上の積の定義}) \\
+&= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes\sigma^{a_{r+1}}\otimes
+   \overbrace{I\otimes\cdots\otimes I}^{M-(r+1)}
+\quad (\because AI=IA=A)
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`Z_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
+        "、",
+        math(String.raw`Y_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
+        " にこれを適用すると（",
+        math(String.raw`m=1`),
+        " のときは前半の積が空積で ",
+        math(String.raw`Z_1=\sigma_1^z`),
+        "、",
+        math(String.raw`Y_1=\sigma_1^y`),
+        " であり、下の式で ",
+        math(String.raw`\sigma^x`),
+        " の個数を ",
+        math(String.raw`0`),
+        " とすればよい）、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
+\otimes\overbrace{\sigma^z}^{m\text{th}}
+\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m} \\
+Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
+\otimes\overbrace{\sigma^y}^{m\text{th}}
+\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m}
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 4: 対応する多重添字。Step 1 の番号付け ",
+        math(String.raw`e_1=I,\ e_2=\sigma^x,\ e_3=\sigma^y,\ e_4=\sigma^z`),
+        " のもとで、Step 3 の表示は ",
+        math(String.raw`Z_m,Y_m`),
+        " がそれぞれ多重添字",
+      ]),
+      displayMath(
+        String.raw`\zeta(m)_k:=\begin{cases}2 & (k<m)\\ 4 & (k=m)\\ 1 & (k>m)\end{cases}
+\qquad
+\eta(m)_k:=\begin{cases}2 & (k<m)\\ 3 & (k=m)\\ 1 & (k>m)\end{cases}`,
+      ),
+      paragraph([
+        "に対応する ",
+        math(String.raw`\mathcal{E}`),
+        " の元であることを意味する。すなわち ",
+        math(String.raw`Z_m=e_{\zeta(m)_1}\otimes\cdots\otimes e_{\zeta(m)_M}`),
+        "、",
+        math(String.raw`Y_m=e_{\eta(m)_1}\otimes\cdots\otimes e_{\eta(m)_M}`),
+        "。",
+      ]),
+      paragraph([
+        "Step 5: これら ",
+        math(String.raw`2M`),
+        " 個の多重添字は相異なる。",
+        math(String.raw`m,m'\in\{1,\dots,M\}`),
+        " について次のように場合分けする。",
+      ]),
+      list([
+        [
+          math(String.raw`\zeta(m)`),
+          " と ",
+          math(String.raw`\zeta(m')`),
+          "（",
+          math(String.raw`m<m'`),
+          "）: 第 ",
+          math(String.raw`m`),
+          " 成分は ",
+          math(String.raw`\zeta(m)_m=4`),
+          "、",
+          math(String.raw`\zeta(m')_m=2`),
+          "（",
+          math(String.raw`m<m'`),
+          " より）であり相異なる。",
+        ],
+        [
+          math(String.raw`\eta(m)`),
+          " と ",
+          math(String.raw`\eta(m')`),
+          "（",
+          math(String.raw`m<m'`),
+          "）: 第 ",
+          math(String.raw`m`),
+          " 成分は ",
+          math(String.raw`\eta(m)_m=3`),
+          "、",
+          math(String.raw`\eta(m')_m=2`),
+          " であり相異なる。",
+        ],
+        [
+          math(String.raw`\zeta(m)`),
+          " と ",
+          math(String.raw`\eta(m')`),
+          " で ",
+          math(String.raw`m=m'`),
+          " のとき: 第 ",
+          math(String.raw`m`),
+          " 成分は ",
+          math(String.raw`4`),
+          " と ",
+          math(String.raw`3`),
+          " で相異なる。",
+        ],
+        [
+          math(String.raw`\zeta(m)`),
+          " と ",
+          math(String.raw`\eta(m')`),
+          " で ",
+          math(String.raw`m<m'`),
+          " のとき: 第 ",
+          math(String.raw`m`),
+          " 成分は ",
+          math(String.raw`4`),
+          " と ",
+          math(String.raw`2`),
+          " で相異なる。",
+        ],
+        [
+          math(String.raw`\zeta(m)`),
+          " と ",
+          math(String.raw`\eta(m')`),
+          " で ",
+          math(String.raw`m>m'`),
+          " のとき: 第 ",
+          math(String.raw`m'`),
+          " 成分は ",
+          math(String.raw`\zeta(m)_{m'}=2`),
+          "（",
+          math(String.raw`m'<m`),
+          " より）と ",
+          math(String.raw`\eta(m')_{m'}=3`),
+          " で相異なる。",
+        ],
+      ]),
+      paragraph([
+        "以上より ",
+        math(String.raw`\zeta(1),\dots,\zeta(M),\eta(1),\dots,\eta(M)`),
+        " は相異なる ",
+        math(String.raw`2M`),
+        " 個の多重添字であり、対応する ",
+        math(String.raw`Z_1,\dots,Z_M,Y_1,\dots,Y_M`),
+        " は基底 ",
+        math(String.raw`\mathcal{E}`),
+        " の相異なる ",
+        math(String.raw`2M`),
+        " 個の元である。",
+      ]),
+      paragraph([
+        "Step 6: 結論。",
+        math(String.raw`\alpha_1,\dots,\alpha_M,\beta_1,\dots,\beta_M\in\mathbb{C}`),
+        " が",
+      ]),
+      displayMath(
+        String.raw`\sum_{m=1}^{M}\alpha_m Z_m+\sum_{m=1}^{M}\beta_m Y_m=0`,
+      ),
+      paragraph([
+        "を満たすとする。Step 5 より左辺は基底 ",
+        math(String.raw`\mathcal{E}`),
+        " の相異なる元の ",
+        math(String.raw`\mathbb{C}`),
+        "-線型結合であり、",
+        math(String.raw`\mathcal{E}`),
+        " のそれ以外の元の係数は ",
+        math(String.raw`0`),
+        " である。基底による表示は一意（特に ",
+        math(String.raw`0`),
+        " の表示はすべての係数が ",
+        math(String.raw`0`),
+        "）であるから、",
+      ]),
+      displayMath(
+        String.raw`\alpha_1=\cdots=\alpha_M=\beta_1=\cdots=\beta_M=0`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\{Z_1,\dots,Z_M,Y_1,\dots,Y_M\}`),
+        " は線型独立である。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文の proof は「TODO: 証明略」のみ。ここで証明を与えた。",
+        "原文の statement は式のみで、どの体上・どの空間での線型独立かが書かれていなかったため、" +
+          "Mat(2,C)^{⊗M} を C-線型空間とみなしたときの線型独立性であることを statement に明示した" +
+          "（主張の内容自体は変えていない）。",
+        "記号の定義（labels: def_transfer_matrix_symbols）は sigma^x, sigma^y, sigma^z を" +
+          "定義せずに sigma_k^x 等を導入している。本証明では標準的な Pauli 行列として明示した" +
+          "（Z_Y_generate_algebra の証明も同じ扱いをしている）。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_003_claim_V1_V2_in_Z_Y_epsilon",

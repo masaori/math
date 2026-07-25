@@ -1,5 +1,51 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-25）: Phase 3 継続 — 線型独立性・離散フーリエ変換（hatZ/hatY）・その反交換関係を形式化
+
+`lake build` 成功・`lean/scripts/check-no-sorry.sh` exit 0（`sorry` 0、主要定理 **84 件**が `sorryAx` 非依存）。
+**このセッションでも commit / push はしていない。**
+
+### 追加したファイル（人手証明の正本は `structured-latex/content/004_transfer_matrix.mjs` ほか）
+
+| Lean | 人手証明（ラベル） |
+| --- | --- |
+| `lean/Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean` | `004/001`（`<Z_Y_linearly_independent>`。**形式化時点では原文が TODO**） |
+| `lean/Ising2D/Part004/Claim008_ExpSum.lean` | `004/008`（`<exp_sum>`）＋ `004/007` の `δ^M` |
+| `lean/Ising2D/Part004/Definition009_HatZHatY.lean` | `004/009`（`<def_hatZ_hatY>`） |
+| `lean/Ising2D/Part004/Claim012_HatPeriodicity.lean` | `004/012`（`<hatZ_hatY_M_periodicity>`） |
+| `lean/Ising2D/Part004/Claim013_RecoverZY.lean` | `004/013`（`<recover_Z_Y_from_hatZ_hatY>`） |
+| `lean/Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean` | `007/000`（`<anticommutator_of_hat_Z_and_hat_Y>`） |
+
+既存の `Part000/Claim046_...` へ、反交換子の双線型性（有限線型結合の展開）を補助補題として追加した。
+
+### 形式化した命題（主なもの）
+
+- **線型独立性**（形式化時点で原文は「TODO: 証明略」。その後、別セッションが
+  `{I,σ^x,σ^y,σ^z}^{⊗M}` 基底を使う人手証明を追記している）: Lean 側は
+  `{Z_μ, Y_ν}` が Clifford 関係 `[e_a, e_b]₊ = 2 δ_{ab} I` を満たすことから、
+  `∑ g_a e_a = 0` と `e_b` の反交換子をとって `2 g_b I = 0` を出す、という 3 行の議論で済んだ。
+  既存の `Z_Y_generate_algebra` も `matrixUnitBasis` も不要だった。
+- **離散フーリエ変換**: 位相因子 `expPhase M k = exp(-√-1·2πk/M)`（`k : ℤ`）を定義し、
+  `expPhase M k = 1 ⟺ M ∣ k` を mathlib の `Complex.isPrimitiveRoot_exp` +
+  `IsPrimitiveRoot.zpow_eq_one_iff_dvd` に帰着。`<exp_sum>` は原文どおり (a) 全項 1、
+  (b) 等比和 `geom_sum_eq` の 2 ケースで証明。
+- `hat(Z)_μ^{(±)}`, `hat(Y)_μ` の定義。`(±)` の符号は `j = 1` の項の係数 `η : ℂ` として持たせ、
+  以降で効くのは `η² = 1` だけであることを明示した（`hatZPlus = hatZ (-1)`, `hatZMinus = hatZ 1`）。
+  `M` 周期性は原文の特殊値 `μ = ±M` ではなく一般の `μ ∈ ℤ` で証明し、原文の主張を系として得た。
+- **逆変換（復元）**: `Z` と `Y` で証明が同一なので、任意の族に対する `inverse_dft` を先に証明して
+  両者を特殊化した。これにより「原文が `hat(Z)^{(-)}`（一様和）でしか復元を述べない理由」も明確になる
+  （`hat(Z)^{(+)}` は `j = 1` の重みが `-1` なのでこの形の逆変換は成り立たない）。
+- **`hat(Z), hat(Y)` の反交換関係 4 式すべて**（原文は後ろ 2 つを「同様」として省略）。
+  原文の二重和展開を、(1) 反交換子の双線型性 → (2) `[Z_j,Z_k]₊ = 2Iδ_{jk}` で対角項だけ残す →
+  (3) `<exp_sum>` を適用、の 3 段に整理した。
+
+### 添字づけの規約（重要・以降も踏襲する）
+
+原文のサイト添字は `1, …, M`、Lean は `Fin M`（`0, …, M-1`）。**原文の `j` は Lean の `(j : ℕ) + 1`。**
+したがって位相因子は `expPhase M (((j : ℕ) + 1) * μ)` と書き、原文の「`j = 1` の項」は
+Lean の `(j : ℕ) = 0` の項である。`hat` の添字 `μ` は `ℤ` のまま扱う（原文の `ℳ = {-M,…,-1,1,…,M}` は
+定義式の意味には不要で、`M` 周期性も `μ ∈ ℤ` で成り立つ）。
+
 ## 完了（2026-07-25）: 出版を見据えたノートの分離（本文＝出版対象、ノート＝参照用）
 
 構造化テキスト化の狙いは最終的に**論文・書籍**にすること。そこで
