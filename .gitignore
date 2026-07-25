@@ -2,3 +2,8 @@ disttypst-*
 .claude/worktrees/
 .codex/worktrees/
 exact-solution-of-2d-ising-model/main.pdf
+
+# Lean 4 (lake) のビルド生成物・依存クローン
+.lake/
+lean/.lake/
+*.olean
