@@ -261,4 +261,25 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
       ]),
     ],
   },
+  {
+    // 元は V_eq_Vprime の #note。証明の依存関係についての方針メモであり、
+    // 主張の正しさそのものには不要なのでノートへ置く。
+    id: "note_TV1_hatZ_hatY_039_proof_does_not_use_clifford_group",
+    targets: ["V_eq_Vprime"],
+    title: { text: "この証明はクリフォード群の性質に依存しない（原文の note）" },
+    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
+    body: [
+      paragraph([
+        "この証明はクリフォード群（",
+        ref("def_T_g"),
+        " とは別の TODO 項目 009）の性質には依存しない。",
+        ref("T_V_eq_T_Vprime"),
+        " の共役写像としての一致から、全行列環 ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の中心がスカラーに限ること（",
+        ref("centralizer_is_scalar"),
+        "）を用いて結論する。",
+      ]),
+    ],
+  },
 ]);

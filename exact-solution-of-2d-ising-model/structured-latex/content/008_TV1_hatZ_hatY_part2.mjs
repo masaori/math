@@ -34,13 +34,22 @@ export default defineBlocks([
     statement: [
       paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
       displayMath(
-        String.raw`\gamma_2(\theta_\mu) = 0
-\iff \begin{cases} \sin\theta_\mu = 0 \\ c_2 s_1 - c_1\cos\theta_\mu = 0 \end{cases}
-\iff \begin{cases} \mu = \pm M \\ c_2 s_1 = c_1\cos\theta_\mu \end{cases}`,
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\mu) = 0
+&\iff \begin{cases} \sin\theta_\mu = 0 \\ c_2 s_1 - c_1\cos\theta_\mu = 0 \end{cases} \\
+&\iff \begin{cases} \theta_\mu = 0,\ \pm\pi,\ \pm 2\pi,\ \dots \\ c_2 s_1 = c_1\cos\theta_\mu \end{cases} \\
+&\iff \begin{cases} \mu = \pm M \\ c_2 s_1 = c_1\cos\theta_\mu \end{cases}
+\end{aligned}`,
       ),
     ],
-    proof: [paragraph([todo("TODO")])],
-    conversion: { status: "converted" },
+    proof: [paragraph([todo("TODO（原文の #proof は空で、証明は存在しない）")])],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（021_claim_gamma2_thetaが0になる条件.typ）の #proof は空であり、証明は原文にも存在しない。",
+        "移行時に落ちていた同値変形の中間段（sin θ_μ = 0 ⟺ θ_μ = 0, ±π, ±2π, …）を原文どおり復旧した。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_023_claim_relation_of_gamma2",
@@ -2233,15 +2242,308 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
     statement: [
       displayMath(String.raw`T_{(V)} = T_{(V')}`),
       paragraph([
-        "すなわち任意の ",
+        "すなわち、任意の ",
         math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
         " に対して ",
-        math(String.raw`V x V^{-1} = V' x V'^{-1}`),
-        "。",
+        math(String.raw`T_{(V)}(x) = T_{(V')}(x)`),
+        " である。",
       ]),
     ],
-    proof: [paragraph([todo("TODO")])],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        "Step 1: ",
+        math(String.raw`T_{(V)}`),
+        " と ",
+        math(String.raw`T_{(V')}`),
+        " は単位的環準同型かつ線型である。",
+      ]),
+      paragraph([
+        ref("def_T_V"),
+        " より、任意の ",
+        math(String.raw`X \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(V)}(X)
+= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(X)\right)\right)`,
+      ),
+      paragraph([
+        "である。すなわち ",
+        math(
+          String.raw`T_{(V)} = T_{(V_1^{(\pm)})^{1/2}} \circ T_{V_2} \circ T_{(V_1^{(\pm)})^{1/2}}`,
+        ),
+        " である。各因子 ",
+        math(String.raw`T_{(V_1^{(\pm)})^{1/2}},\ T_{V_2}`),
+        " は ",
+        math(String.raw`T_g`),
+        "（",
+        ref("def_T_g"),
+        "）の形であり、",
+        ref("def_T_V"),
+        " で ",
+        math(String.raw`T_g`),
+        " が用いられている時点で ",
+        math(String.raw`(V_1^{(\pm)})^{1/2},\ V_2`),
+        " は可逆である。",
+      ]),
+      displayMath(String.raw`V := (V_1^{(\pm)})^{1/2}\, V_2\, (V_1^{(\pm)})^{1/2}`),
+      paragraph([
+        "とおく。可逆行列の積は可逆だから ",
+        math(String.raw`V`),
+        " は可逆である。",
+        ref("conjugation_is_ring_homomorphism"),
+        " の合成則を 2 回適用すると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V)}
+&= T_{(V_1^{(\pm)})^{1/2}} \circ T_{V_2} \circ T_{(V_1^{(\pm)})^{1/2}}
+   \quad (\because \text{def\_T\_V}) \\
+&= T_{(V_1^{(\pm)})^{1/2} V_2} \circ T_{(V_1^{(\pm)})^{1/2}}
+   \quad (\because \text{conjugation\_is\_ring\_homomorphism}) \\
+&= T_{(V_1^{(\pm)})^{1/2} V_2 (V_1^{(\pm)})^{1/2}}
+   \quad (\because \text{conjugation\_is\_ring\_homomorphism}) \\
+&= T_V
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。よって ",
+        math(String.raw`T_{(V)} = T_V`),
+        " であり、",
+        math(String.raw`V`),
+        " は可逆だから ",
+        ref("conjugation_is_ring_homomorphism"),
+        " より ",
+        math(String.raw`T_{(V)}`),
+        " は乗法的かつ単位的（",
+        math(String.raw`T_{(V)}(I) = I`),
+        "）であり、",
+        ref("mat_conj"),
+        " より線型である。",
+      ]),
+      paragraph([
+        math(String.raw`T_{(V')}`),
+        " は ",
+        math(String.raw`T_g`),
+        "（",
+        ref("def_T_g"),
+        "）の ",
+        math(String.raw`g = V'`),
+        " の場合であり、",
+        ref("def_Vprime"),
+        " より ",
+        math(String.raw`V'`),
+        " は可逆である。したがって ",
+        ref("conjugation_is_ring_homomorphism"),
+        " より ",
+        math(String.raw`T_{(V')}`),
+        " は乗法的かつ単位的であり、",
+        ref("mat_conj"),
+        " より線型である。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`T_{(V)}`),
+        " と ",
+        math(String.raw`T_{(V')}`),
+        " は各 ",
+        math(String.raw`Z_m, Y_m`),
+        " 上で一致する。",
+      ]),
+      paragraph([
+        "各 ",
+        math(String.raw`m \in \{1,\dots,M\}`),
+        " について、",
+        ref("recover_Z_Y_from_hatZ_hatY"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)}\exp\!\left(i\,m\frac{2\pi\mu}{M}\right),
+\quad
+Y_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`T_{(V)}, T_{(V')}`),
+        " は線型（Step 1）であり、",
+        ref("T_V_eq_T_Vprime_on_hatZ_hatY"),
+        " より各 ",
+        math(String.raw`\mu \in \mathcal{M}`),
+        " で ",
+        math(String.raw`T_{(V)}(\hat{Z}_\mu^{(-)}) = T_{(V')}(\hat{Z}_\mu^{(-)})`),
+        " かつ ",
+        math(String.raw`T_{(V)}(\hat{Y}_\mu) = T_{(V')}(\hat{Y}_\mu)`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V)}(Z_m)
+&= T_{(V)}\!\left(\frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)}\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)\right)
+   \quad (\because \text{recover\_Z\_Y\_from\_hatZ\_hatY}) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \exp\!\left(i\,m\frac{2\pi\mu}{M}\right) T_{(V)}(\hat{Z}_\mu^{(-)})
+   \quad (\because T_{(V)}\text{ の線型性}) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \exp\!\left(i\,m\frac{2\pi\mu}{M}\right) T_{(V')}(\hat{Z}_\mu^{(-)})
+   \quad (\because \text{T\_V\_eq\_T\_Vprime\_on\_hatZ\_hatY}) \\
+&= T_{(V')}\!\left(\frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)}\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)\right)
+   \quad (\because T_{(V')}\text{ の線型性}) \\
+&= T_{(V')}(Z_m)
+   \quad (\because \text{recover\_Z\_Y\_from\_hatZ\_hatY})
+\end{aligned}`,
+      ),
+      paragraph(["が成り立つ。同様に、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V)}(Y_m)
+&= T_{(V)}\!\left(\frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)\right)
+   \quad (\because \text{recover\_Z\_Y\_from\_hatZ\_hatY}) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \exp\!\left(i\,m\frac{2\pi\mu}{M}\right) T_{(V)}(\hat{Y}_\mu)
+   \quad (\because T_{(V)}\text{ の線型性}) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \exp\!\left(i\,m\frac{2\pi\mu}{M}\right) T_{(V')}(\hat{Y}_\mu)
+   \quad (\because \text{T\_V\_eq\_T\_Vprime\_on\_hatZ\_hatY}) \\
+&= T_{(V')}\!\left(\frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)\right)
+   \quad (\because T_{(V')}\text{ の線型性}) \\
+&= T_{(V')}(Y_m)
+   \quad (\because \text{recover\_Z\_Y\_from\_hatZ\_hatY})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。よってすべての ",
+        math(String.raw`m \in \{1,\dots,M\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(V)}(Z_m) = T_{(V')}(Z_m), \quad T_{(V)}(Y_m) = T_{(V')}(Y_m)`,
+      ),
+      paragraph(["である。"]),
+      paragraph(["Step 3: 一致する元の集合は部分多元環をなす。"]),
+      paragraph(["集合"]),
+      displayMath(
+        String.raw`\mathcal{E} := \left\{\, x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \;:\; T_{(V)}(x) = T_{(V')}(x) \,\right\}`,
+      ),
+      paragraph([
+        "を考える。",
+        math(String.raw`\mathcal{E}`),
+        " が ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-部分多元環（",
+        math(String.raw`\mathbb{C}`),
+        "-線型結合と積について閉じ、単位元を含む）であることを示す。",
+      ]),
+      paragraph([
+        "（加法・スカラー倍について閉じる）",
+        math(String.raw`x, y \in \mathcal{E}`),
+        " と ",
+        math(String.raw`\alpha, \beta \in \mathbb{C}`),
+        " について、",
+        math(String.raw`T_{(V)}, T_{(V')}`),
+        " は線型（Step 1）であるから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V)}(\alpha x + \beta y)
+&= \alpha T_{(V)}(x) + \beta T_{(V)}(y)
+   \quad (\because T_{(V)}\text{ の線型性}) \\
+&= \alpha T_{(V')}(x) + \beta T_{(V')}(y)
+   \quad (\because x, y \in \mathcal{E}) \\
+&= T_{(V')}(\alpha x + \beta y)
+   \quad (\because T_{(V')}\text{ の線型性})
+\end{aligned}`,
+      ),
+      paragraph([
+        "ゆえ ",
+        math(String.raw`\alpha x + \beta y \in \mathcal{E}`),
+        " である。",
+      ]),
+      paragraph([
+        "（積について閉じる）",
+        math(String.raw`x, y \in \mathcal{E}`),
+        " について、",
+        math(String.raw`T_{(V)}, T_{(V')}`),
+        " は乗法的（Step 1）であるから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V)}(x y)
+&= T_{(V)}(x)\, T_{(V)}(y)
+   \quad (\because T_{(V)}\text{ の乗法性、conjugation\_is\_ring\_homomorphism}) \\
+&= T_{(V')}(x)\, T_{(V')}(y)
+   \quad (\because x, y \in \mathcal{E}) \\
+&= T_{(V')}(x y)
+   \quad (\because T_{(V')}\text{ の乗法性、conjugation\_is\_ring\_homomorphism})
+\end{aligned}`,
+      ),
+      paragraph(["ゆえ ", math(String.raw`x y \in \mathcal{E}`), " である。"]),
+      paragraph([
+        "（単位元を含む）",
+        math(String.raw`T_{(V)}(I) = I = T_{(V')}(I)`),
+        "（Step 1 の単位性）より ",
+        math(String.raw`I \in \mathcal{E}`),
+        " である。",
+      ]),
+      paragraph([
+        "以上より ",
+        math(String.raw`\mathcal{E}`),
+        " は単位元を含み、",
+        math(String.raw`\mathbb{C}`),
+        "-線型結合と積について閉じるから、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-部分多元環である。",
+      ]),
+      paragraph(["Step 4: 結論。"]),
+      paragraph([
+        "Step 2 より ",
+        math(String.raw`Z_1,\dots,Z_M, Y_1,\dots,Y_M \in \mathcal{E}`),
+        " である。",
+        math(String.raw`\mathcal{E}`),
+        " は ",
+        math(String.raw`S := \{Z_1,\dots,Z_M, Y_1,\dots,Y_M\}`),
+        " を含む ",
+        math(String.raw`\mathbb{C}`),
+        "-部分多元環（Step 3）であるから、",
+        math(String.raw`S`),
+        " を含む最小の ",
+        math(String.raw`\mathbb{C}`),
+        "-部分多元環 ",
+        math(String.raw`\mathcal{A}`),
+        " について ",
+        math(String.raw`\mathcal{A} \subseteq \mathcal{E}`),
+        " である。",
+        ref("Z_Y_generate_algebra"),
+        " より ",
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+= \mathcal{A}
+\subseteq \mathcal{E}
+\subseteq \mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+\quad (\because \text{Z\_Y\_generate\_algebra})`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\mathcal{E} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " である。これは、任意の ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " について ",
+        math(String.raw`T_{(V)}(x) = T_{(V')}(x)`),
+        "、すなわち",
+      ]),
+      displayMath(String.raw`T_{(V)} = T_{(V')}`),
+      paragraph(["が成り立つことを意味する。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "移行漏れだった証明を _old/typst の原本（038_claim_T_V_eq_T_Vprime.typ）から復旧。Step 1〜4 を圧縮せず全ステップ再現した。",
+        "原文の statement は「任意の x に対して T_((V))(x) = T_((V'))(x)」であり、構造化側にあった「V x V^{-1} = V' x V'^{-1}」という別表記を原文どおりに戻した（V x V^{-1} = T_V(x) であることは Step 1 の T_((V)) = T_V を経由して初めて言えるため、statement 段階では原文の形が正しい）。",
+        "原文の T_((V_2)) は、構造化側の def_T_V が用いる T_{V_2} の表記に統一した。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_040_claim_V_eq_cVprime",
@@ -2251,11 +2553,271 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
     title: { tex: String.raw`V = c V' \text{（定数倍を除いて一致）}` },
     labels: ["V_eq_Vprime"],
     statement: [
-      paragraph(["ある ", math(String.raw`c \in \mathbb{C}^\times`), " が存在して "]),
+      paragraph(["ある ", math(String.raw`c \in \mathbb{C}^\times`), " が存在して、"]),
       displayMath(String.raw`V = c \cdot V'`),
+      paragraph([
+        "ここで ",
+        math(String.raw`V := (V_1^{(\pm)})^{1/2}\, V_2\, (V_1^{(\pm)})^{1/2}`),
+        "（",
+        ref("def_T_V"),
+        " で導入され、",
+        ref("T_V_eq_T_Vprime"),
+        " の Step 1 で ",
+        math(String.raw`T_{(V)} = T_V`),
+        " が示された行列）とする。",
+      ]),
     ],
-    proof: [paragraph([todo("TODO: T の単射性（クリフォード群の性質）を用いる")])],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        "Step 1: ",
+        math(String.raw`W := V'^{-1} V`),
+        " は可逆である。",
+      ]),
+      paragraph([
+        ref("T_V_eq_T_Vprime"),
+        " の Step 1 より、",
+        math(String.raw`V := (V_1^{(\pm)})^{1/2}\, V_2\, (V_1^{(\pm)})^{1/2}`),
+        " は可逆である。また ",
+        ref("def_Vprime"),
+        " より ",
+        math(String.raw`V'`),
+        " は可逆であり、可逆行列の逆行列 ",
+        math(String.raw`V'^{-1}`),
+        " も可逆である。",
+      ]),
+      displayMath(String.raw`W := V'^{-1} V`),
+      paragraph([
+        "とおく。可逆行列の積は可逆であるから ",
+        math(String.raw`W`),
+        " は可逆である。特に ",
+        math(String.raw`W`),
+        " の逆行列 ",
+        math(String.raw`W^{-1}`),
+        " が存在する。",
+      ]),
+      paragraph(["左から ", math(String.raw`V'`), " を掛けると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+V' W
+&= V'(V'^{-1} V)
+   \quad (\because W = V'^{-1} V) \\
+&= (V' V'^{-1}) V
+   \quad (\because \text{行列の積の結合法則}) \\
+&= I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\, V
+   \quad (\because V' V'^{-1} = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+&= V
+   \quad (\because \text{単位元の性質})
+\end{aligned}`,
+      ),
+      paragraph(["すなわち"]),
+      displayMath(String.raw`V = V' W`),
+      paragraph(["を得る。"]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`W`),
+        " はすべての ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " と可換である。",
+      ]),
+      paragraph([
+        ref("T_V_eq_T_Vprime"),
+        " より ",
+        math(String.raw`T_{(V)} = T_{(V')}`),
+        " であり、",
+        ref("T_V_eq_T_Vprime"),
+        " の Step 1 で示された ",
+        math(String.raw`T_{(V)} = T_V`),
+        " と合わせると、任意の ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_V(x)
+&= T_{(V)}(x)
+   \quad (\because \text{T\_V\_eq\_T\_Vprime の Step 1: } T_{(V)} = T_V) \\
+&= T_{(V')}(x)
+   \quad (\because \text{T\_V\_eq\_T\_Vprime}: T_{(V)} = T_{(V')})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。両辺を ",
+        ref("mat_conj"),
+        " の共役写像の定義で書き下すと、任意の ",
+        math(String.raw`x`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V x V^{-1}
+&= T_V(x)
+   \quad (\because \text{mat\_conj}) \\
+&= T_{(V')}(x)
+   \quad (\because \text{上の等式}) \\
+&= V' x V'^{-1}
+   \quad (\because \text{mat\_conj})
+\end{aligned}`,
+      ),
+      paragraph(["すなわち"]),
+      displayMath(String.raw`V x V^{-1} = V' x V'^{-1}`),
+      paragraph(["である。"]),
+      paragraph([
+        "ここで Step 1 の ",
+        math(String.raw`V = V' W`),
+        " を代入する。まず逆行列について、",
+        ref("conjugation_is_ring_homomorphism"),
+        " の Step 3 で確認された積の逆元の公式 ",
+        math(String.raw`(AB)^{-1} = B^{-1}A^{-1}`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V^{-1}
+&= (V' W)^{-1}
+   \quad (\because V = V' W) \\
+&= W^{-1} V'^{-1}
+   \quad (\because (AB)^{-1} = B^{-1}A^{-1})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。これらを上の等式 ",
+        math(String.raw`V x V^{-1} = V' x V'^{-1}`),
+        " の左辺に代入すると、任意の ",
+        math(String.raw`x`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V'\left(W x W^{-1}\right)V'^{-1}
+&= (V' W)\, x\, (W^{-1} V'^{-1})
+   \quad (\because \text{行列の積の結合法則}) \\
+&= V x V^{-1}
+   \quad (\because V = V' W,\ V^{-1} = W^{-1}V'^{-1}) \\
+&= V' x V'^{-1}
+   \quad (\because V x V^{-1} = V' x V'^{-1})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。両辺に左から ",
+        math(String.raw`V'^{-1}`),
+        "、右から ",
+        math(String.raw`V'`),
+        " を掛けると、任意の ",
+        math(String.raw`x`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+W x W^{-1}
+&= V'^{-1}\left(V'\left(W x W^{-1}\right)V'^{-1}\right)V'
+   \quad (\because V'^{-1}V' = V'V'^{-1} = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+&= V'^{-1}\left(V' x V'^{-1}\right)V'
+   \quad (\because V'(W x W^{-1})V'^{-1} = V' x V'^{-1}) \\
+&= x
+   \quad (\because V'^{-1}V' = V'V'^{-1} = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}})
+\end{aligned}`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`W x W^{-1} = x`),
+        " である。両辺に右から ",
+        math(String.raw`W`),
+        " を掛けると、任意の ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+W x
+&= (W x W^{-1}) W
+   \quad (\because W^{-1}W = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+&= x W
+   \quad (\because W x W^{-1} = x)
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。したがって ",
+        math(String.raw`W`),
+        " はすべての ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " と可換である。",
+      ]),
+      paragraph(["Step 3: ", math(String.raw`W`), " はスカラーである。"]),
+      paragraph([
+        "Step 2 より ",
+        math(String.raw`W`),
+        " はすべての ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " と可換であるから、",
+        ref("centralizer_is_scalar"),
+        " より、ある ",
+        math(String.raw`c \in \mathbb{C}`),
+        " が存在して",
+      ]),
+      displayMath(
+        String.raw`W = c \cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+\quad (\because \text{centralizer\_is\_scalar})`,
+      ),
+      paragraph(["が成り立つ。"]),
+      paragraph(["Step 4: ", math(String.raw`c \neq 0`), " であること。"]),
+      paragraph([
+        "Step 1 より ",
+        math(String.raw`W`),
+        " は可逆である。仮に ",
+        math(String.raw`c = 0`),
+        " ならば ",
+        math(String.raw`W = 0\cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} = O`),
+        "（零行列）となるが、零行列は可逆でない（任意の ",
+        math(String.raw`A`),
+        " について ",
+        math(String.raw`O A = O \neq I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        "）から、",
+        math(String.raw`W`),
+        " が可逆であることに矛盾する。よって ",
+        math(String.raw`c \neq 0`),
+        "、すなわち ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " である。",
+      ]),
+      paragraph(["Step 5: 結論。"]),
+      paragraph([
+        "Step 1 の ",
+        math(String.raw`V = V' W`),
+        " に Step 3 の ",
+        math(String.raw`W = c \cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        " を代入すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V
+&= V' W
+   \quad (\because \text{Step 1}) \\
+&= V'\left(c \cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right)
+   \quad (\because \text{Step 3}) \\
+&= c \cdot \left(V' I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right)
+   \quad (\because \text{スカラー倍と行列積の可換性}) \\
+&= c \cdot V'
+   \quad (\because \text{単位元の性質})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。Step 4 より ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " であるから、求める ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " が存在して ",
+        math(String.raw`V = c \cdot V'`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "移行漏れだった証明を _old/typst の原本（039_claim_V_eq_Vprime.typ）から復旧。Step 1〜5 を圧縮せず全ステップ再現した。",
+        "構造化側にあった旧 TODO『T の単射性（クリフォード群の性質）を用いる』は原本の証明方針と異なる（原本は centralizer_is_scalar を用い、クリフォード群には依存しない）。原本の方針に従って復旧し、その旨は原文 note として notes/008_TV1_hatZ_hatY.mjs に収めた。",
+        "原文 statement にあった V の定義（def_T_V で導入し T_V_eq_T_Vprime の Step 1 で T_((V)) = T_V を示した行列）は、主張の意味の確定に必要なため statement に復旧した。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_041_claim_gamma2_periodicity",

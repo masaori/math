@@ -910,7 +910,7 @@ b
     id: "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
     kind: "claim",
     sourcePath:
-      "parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ",
+      "_old/typst/parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ",
     sourceOrdinal: 29,
     title: {
       tex: "\\phi_{\\mathrm{cartesian}}\\text{の同型性}",
