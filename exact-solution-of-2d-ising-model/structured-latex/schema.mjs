@@ -98,6 +98,18 @@ export function validateBlock(block) {
   if (block.conversion !== undefined) {
     assertObject(block.conversion, `${block.id}.conversion`);
     assertString(block.conversion.status, `${block.id}.conversion.status`);
+    // conversion.notes は文字列の配列。文字列を直接書く誤りをここで捕まえる
+    // （ビューア側の Zod は弾くが、こちらが素通しすると検証が二重基準になる）。
+    if (block.conversion.notes !== undefined) {
+      if (!Array.isArray(block.conversion.notes)) {
+        throw new TypeError(
+          `${block.id}.conversion.notes must be an array of strings`,
+        );
+      }
+      for (const note of block.conversion.notes) {
+        assertString(note, `${block.id}.conversion.notes[]`);
+      }
+    }
   }
   if (block.kind === HEADING_KIND) {
     validateHeadingBlock(block);

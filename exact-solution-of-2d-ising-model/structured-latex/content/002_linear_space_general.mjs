@@ -77,11 +77,12 @@ export default defineBlocks([
     ],
     conversion: {
       status: "converted",
-      notes:
+      notes: [
         "原文(Typst)のステートメントは「単一のテンソル積が基底である」と読め、" +
-        "かつ V の次元とテンソル冪の階数に同じ記号 m を二重使用していた。" +
-        "Lean 形式化(lean/Ising2D/Part002/Theorem000_TensorBasis.lean)で判明したため、" +
-        "原文側を修正し本ブロックも同期済み。",
+          "かつ V の次元とテンソル冪の階数に同じ記号 m を二重使用していた。" +
+          "Lean 形式化(lean/Ising2D/Part002/Theorem000_TensorBasis.lean)で判明したため、" +
+          "原文側を修正し本ブロックも同期済み。",
+      ],
     },
   },
   {
