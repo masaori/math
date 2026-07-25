@@ -18,6 +18,9 @@
   - 数式は LaTeX 文字列（`math` / `displayMath` ノード）として保持される。
   - 各ブロックは `kind`（theorem/definition/claim/remark/note）, `title`, `statement`,
     `proof`, `notes`, `sourcePath`, `sourceOrdinal` 等を持つ。
+  - `kind` には章見出しを表す `heading` もある。見出しブロックは `level`（1 が最上位）と
+    `title` を持ち、本文（`statement`/`proof`/`notes`）を持たない。
+  - **ブロック配列の並びが文書順**である（ビューアは並べ替えない）。
   - 現時点の具体例 / リファレンスとなる入力ソースは
     `exact-solution-of-2d-ising-model/structured-latex/`（スキーマは同ディレクトリの
     `schema.d.ts`、データは `content/*.mjs`、検証は `tools/validate-content.mjs`）。
@@ -53,7 +56,7 @@
 |----|------|--------|
 | F-1 | 設定された入力ソースのブロック列を読み込み、HTML として表示する | 必須 |
 | F-2 | `math` / `displayMath` を KaTeX で描画する | 必須 |
-| F-3 | `kind` ごとに見出し・体裁を分けて表示（theorem/definition/claim/remark/note） | 必須 |
+| F-3 | `kind` ごとに見出し・体裁を分けて表示（theorem/definition/claim/remark/note、および章見出し `heading`） | 必須 |
 | F-4 | `title`, `statement`, `proof`, `notes` を構造的に表示する | 必須 |
 | F-5 | ファイル保存を検知し、閲覧ブラウザを自動更新する（ライブリロード） | 必須 |
 | F-6 | LAN 内の別端末（PC / スマホ）からアクセスできる | 必須 |

@@ -2,6 +2,16 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_linear_space_general",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 3,
+    title: { text: "線型空間の一般論" },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     sourcePath: "parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
@@ -60,64 +70,6 @@ export default defineBlocks([
 &= 0
 \end{aligned}`,
       ),
-    ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "linear_space_general_003_claim_matrix_norm_submultiplicativity",
-    kind: "claim",
-    sourcePath: "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
-    sourceOrdinal: 3,
-    title: { text: "行列ノルムの劣乗法性" },
-    labels: ["matrix_norm_submultiplicativity"],
-    statement: [
-      paragraph([
-        math(String.raw`K := \mathbb{R}`),
-        " または ",
-        math(String.raw`K := \mathbb{C}`),
-        "、",
-        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
-        "、",
-        math(String.raw`A, B \in \mathrm{Mat}(n, K)`),
-        " について、",
-      ]),
-      displayMath(String.raw`\|AB\| \leq \|A\| \cdot \|B\|`),
-    ],
-    proof: [todo("TODO")],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "linear_space_general_003b_claim_matrix_multiplication_continuity",
-    kind: "claim",
-    sourcePath: "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
-    sourceOrdinal: 3,
-    title: { text: "行列乗算の連続性" },
-    labels: ["matrix_multiplication_continuity"],
-    statement: [
-      paragraph([
-        math(String.raw`K := \mathbb{R}`),
-        " または ",
-        math(String.raw`K := \mathbb{C}`),
-        "、",
-        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
-        "、",
-        math(String.raw`A_N, A, B \in \mathrm{Mat}(n, K)`),
-        "、",
-        math(String.raw`\|A_N - A\| \to 0`),
-        " のとき、",
-      ]),
-      displayMath(String.raw`\|A_N B - AB\| \to 0`),
-    ],
-    proof: [
-      displayMath(
-        String.raw`\begin{aligned}
-\|A_N B - AB\|
-&= \|(A_N - A)B\| \\
-&\leq \|A_N - A\| \cdot \|B\| \\
-&\to 0
-\end{aligned}`,
-      ),
-      paragraph(["（", ref("matrix_norm_submultiplicativity"), " を使用）"]),
     ],
     conversion: { status: "converted" },
   },
@@ -343,6 +295,64 @@ W
 &= c\cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} \quad (\because I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}=\sum_{P\in\{1,2\}^M} E_{PP})
 \end{aligned}`,
       ),
+    ],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    kind: "claim",
+    sourcePath: "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
+    sourceOrdinal: 3,
+    title: { text: "行列ノルムの劣乗法性" },
+    labels: ["matrix_norm_submultiplicativity"],
+    statement: [
+      paragraph([
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(n, K)`),
+        " について、",
+      ]),
+      displayMath(String.raw`\|AB\| \leq \|A\| \cdot \|B\|`),
+    ],
+    proof: [todo("TODO")],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "linear_space_general_003b_claim_matrix_multiplication_continuity",
+    kind: "claim",
+    sourcePath: "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
+    sourceOrdinal: 3,
+    title: { text: "行列乗算の連続性" },
+    labels: ["matrix_multiplication_continuity"],
+    statement: [
+      paragraph([
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A_N, A, B \in \mathrm{Mat}(n, K)`),
+        "、",
+        math(String.raw`\|A_N - A\| \to 0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\|A_N B - AB\| \to 0`),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\|A_N B - AB\|
+&= \|(A_N - A)B\| \\
+&\leq \|A_N - A\| \cdot \|B\| \\
+&\to 0
+\end{aligned}`,
+      ),
+      paragraph(["（", ref("matrix_norm_submultiplicativity"), " を使用）"]),
     ],
     conversion: { status: "converted" },
   },

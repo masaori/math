@@ -2,6 +2,16 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_exp_linear_map",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 4,
+    title: { text: "線型写像のexp" },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "exp_linear_map_001_theorem_exp_series_pointwise_converges",
     kind: "theorem",
     sourcePath: "parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",

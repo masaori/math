@@ -2,6 +2,16 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_hatZ_hatY_anticommutation",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 9,
+    title: { tex: String.raw`\hat{Z}\text{と}\hat{Y}\text{の反交換関係}` },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "hatZ_hatY_anticommutation_001_claim_anticommutation_relations",
     kind: "claim",
     sourcePath: "parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ",

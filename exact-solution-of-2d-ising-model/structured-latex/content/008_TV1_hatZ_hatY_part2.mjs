@@ -1,5 +1,8 @@
 import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
 
+// 章「T_{V_1}(hat Z) と hat Z, hat Y の関係」の後半（文書順）。
+// 収録範囲は parts/008 の 020〜031, 034, 035, 033, 032, 037, 044, 041, 042, 038, 039,
+// 040, 043（文書順はソースのファイル名連番と一致しない）。並びが文書順の正準表現。
 export default defineBlocks([
   {
     id: "TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2",
@@ -1237,6 +1240,116 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
     },
   },
   {
+    id: "TV1_hatZ_hatY_035_claim_det_A_theta",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/034_claim_det_A_theta_mu.typ",
+    sourceOrdinal: 35,
+    title: { tex: String.raw`\det A(\theta_\mu) = 1` },
+    labels: ["det_A_theta"],
+    statement: [
+      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
+      displayMath(
+        String.raw`\det A(\theta_\mu) = 1, \quad
+\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = 1, \quad
+\lambda_{+,\mu} \cdot \lambda_{-,\mu} = 1`,
+      ),
+    ],
+    proof: [
+      paragraph([ref("factorization_of_A_theta"), " より ", math(String.raw`A(\theta_\mu) = B_1(\theta_\mu) \cdot B_2 \cdot B_1(\theta_\mu)`), " であり、"]),
+      displayMath(
+        String.raw`\det B_1(\theta_\mu) = \cosh^2 K_1 - \sinh^2 K_1 = 1, \quad
+\det B_2 = \cosh^2(2K_2^*) - \sinh^2(2K_2^*) = 1`,
+      ),
+      paragraph([math(String.raw`\det A = (\det B_1)^2 \cdot \det B_2 = 1`)]),
+    ],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "TV1_hatZ_hatY_036_claim_gamma1_geq_1",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/035_claim_gamma1_geq_1.typ",
+    sourceOrdinal: 36,
+    title: { tex: String.raw`\gamma_1(\theta_\mu) \geq 1` },
+    labels: ["gamma1_geq_1"],
+    statement: [
+      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
+      displayMath(String.raw`\gamma_1(\theta_\mu) \geq 1`),
+    ],
+    proof: [
+      paragraph([
+        ref("relation_of_gamma_2"),
+        " より ",
+        math(String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}`),
+        " すなわち ",
+        math(String.raw`-\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = |\gamma_2(\theta_\mu)|^2`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\gamma_1(\theta_\mu)^2
+= 1 - \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+= 1 + |\gamma_2(\theta_\mu)|^2 \geq 1`,
+      ),
+      paragraph([
+        math(String.raw`\gamma_1(\theta_\mu) = c_1 c_2^* - s_1 s_2^*\cos\theta_\mu \geq c_1 c_2^* - s_1 s_2^* > 0`),
+        "（",
+        math(String.raw`\cosh > \sinh`),
+        " より ",
+        math(String.raw`c_1 c_2^* > s_1 s_2^*`),
+        "）から正であるので ",
+        math(String.raw`\gamma_1(\theta_\mu) \geq 1`),
+        "。",
+      ]),
+    ],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "TV1_hatZ_hatY_034a_definition_gamma_theta_mu",
+    kind: "definition",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
+    sourceOrdinal: 34,
+    title: { tex: String.raw`\gamma(\theta_\mu) \text{ の定義}` },
+    labels: ["def_gamma_theta_mu"],
+    statement: [
+      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、", math(String.raw`\gamma_1(\theta_\mu) \geq 1`), " より well-defined であり、"]),
+      displayMath(
+        String.raw`\gamma(\theta_\mu) := \mathrm{arccosh}(\gamma_1(\theta_\mu)) \in \mathbb{R}_{\geq 0}`,
+      ),
+    ],
+    proof: [],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
+    sourceOrdinal: 34,
+    title: { tex: String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}` },
+    labels: ["lambda_eq_exp_gamma"],
+    statement: [
+      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
+      displayMath(
+        String.raw`\lambda_{+,\mu} = e^{\gamma(\theta_\mu)}, \quad \lambda_{-,\mu} = e^{-\gamma(\theta_\mu)}`,
+      ),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\det A(\theta_\mu) = 1`),
+        " より ",
+        math(String.raw`\lambda_{+,\mu}\cdot\lambda_{-,\mu} = 1`),
+        "。",
+        math(String.raw`\lambda_{+,\mu} + \lambda_{-,\mu} = 2\gamma_1(\theta_\mu) \geq 2 > 0`),
+        " かつ積が正であるから両固有値は正。",
+        math(String.raw`\gamma(\theta_\mu) \geq 0`),
+        " を用いて ",
+        math(String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}`),
+        " と書け、",
+        math(String.raw`\cosh(\gamma(\theta_\mu)) = \gamma_1(\theta_\mu)`),
+        " と定義が整合する。",
+      ]),
+    ],
+    conversion: { status: "converted" },
+  },
+  {
     id: "TV1_hatZ_hatY_033_definition_Vprime",
     kind: "definition",
     sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ",
@@ -1335,164 +1448,6 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       status: "converted",
       notes: ["現行ソースに再同期：V' の和を γ2(θμ)≠0 なる μ∈{1,...,M} に限定し、限定理由（臨界点 μ=M の除外と γ(θμ)=0）およびホロノミック量子場との相違の注を反映。"],
     },
-  },
-  {
-    id: "TV1_hatZ_hatY_034a_definition_gamma_theta_mu",
-    kind: "definition",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
-    sourceOrdinal: 34,
-    title: { tex: String.raw`\gamma(\theta_\mu) \text{ の定義}` },
-    labels: ["def_gamma_theta_mu"],
-    statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、", math(String.raw`\gamma_1(\theta_\mu) \geq 1`), " より well-defined であり、"]),
-      displayMath(
-        String.raw`\gamma(\theta_\mu) := \mathrm{arccosh}(\gamma_1(\theta_\mu)) \in \mathbb{R}_{\geq 0}`,
-      ),
-    ],
-    proof: [],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
-    sourceOrdinal: 34,
-    title: { tex: String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}` },
-    labels: ["lambda_eq_exp_gamma"],
-    statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
-      displayMath(
-        String.raw`\lambda_{+,\mu} = e^{\gamma(\theta_\mu)}, \quad \lambda_{-,\mu} = e^{-\gamma(\theta_\mu)}`,
-      ),
-    ],
-    proof: [
-      paragraph([
-        math(String.raw`\det A(\theta_\mu) = 1`),
-        " より ",
-        math(String.raw`\lambda_{+,\mu}\cdot\lambda_{-,\mu} = 1`),
-        "。",
-        math(String.raw`\lambda_{+,\mu} + \lambda_{-,\mu} = 2\gamma_1(\theta_\mu) \geq 2 > 0`),
-        " かつ積が正であるから両固有値は正。",
-        math(String.raw`\gamma(\theta_\mu) \geq 0`),
-        " を用いて ",
-        math(String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}`),
-        " と書け、",
-        math(String.raw`\cosh(\gamma(\theta_\mu)) = \gamma_1(\theta_\mu)`),
-        " と定義が整合する。",
-      ]),
-    ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "TV1_hatZ_hatY_035_claim_det_A_theta",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/034_claim_det_A_theta_mu.typ",
-    sourceOrdinal: 35,
-    title: { tex: String.raw`\det A(\theta_\mu) = 1` },
-    labels: ["det_A_theta"],
-    statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
-      displayMath(
-        String.raw`\det A(\theta_\mu) = 1, \quad
-\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = 1, \quad
-\lambda_{+,\mu} \cdot \lambda_{-,\mu} = 1`,
-      ),
-    ],
-    proof: [
-      paragraph([ref("factorization_of_A_theta"), " より ", math(String.raw`A(\theta_\mu) = B_1(\theta_\mu) \cdot B_2 \cdot B_1(\theta_\mu)`), " であり、"]),
-      displayMath(
-        String.raw`\det B_1(\theta_\mu) = \cosh^2 K_1 - \sinh^2 K_1 = 1, \quad
-\det B_2 = \cosh^2(2K_2^*) - \sinh^2(2K_2^*) = 1`,
-      ),
-      paragraph([math(String.raw`\det A = (\det B_1)^2 \cdot \det B_2 = 1`)]),
-    ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "TV1_hatZ_hatY_036_claim_gamma1_geq_1",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/035_claim_gamma1_geq_1.typ",
-    sourceOrdinal: 36,
-    title: { tex: String.raw`\gamma_1(\theta_\mu) \geq 1` },
-    labels: ["gamma1_geq_1"],
-    statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
-      displayMath(String.raw`\gamma_1(\theta_\mu) \geq 1`),
-    ],
-    proof: [
-      paragraph([
-        ref("relation_of_gamma_2"),
-        " より ",
-        math(String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}`),
-        " すなわち ",
-        math(String.raw`-\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = |\gamma_2(\theta_\mu)|^2`),
-        " であるから、",
-      ]),
-      displayMath(
-        String.raw`\gamma_1(\theta_\mu)^2
-= 1 - \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-= 1 + |\gamma_2(\theta_\mu)|^2 \geq 1`,
-      ),
-      paragraph([
-        math(String.raw`\gamma_1(\theta_\mu) = c_1 c_2^* - s_1 s_2^*\cos\theta_\mu \geq c_1 c_2^* - s_1 s_2^* > 0`),
-        "（",
-        math(String.raw`\cosh > \sinh`),
-        " より ",
-        math(String.raw`c_1 c_2^* > s_1 s_2^*`),
-        "）から正であるので ",
-        math(String.raw`\gamma_1(\theta_\mu) \geq 1`),
-        "。",
-      ]),
-    ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "TV1_hatZ_hatY_037_claim_factorization_A_theta",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/036_claim_A_thetaの行列分解.typ",
-    sourceOrdinal: 37,
-    title: { tex: String.raw`A(\theta_\mu) \text{ の行列分解}` },
-    labels: ["factorization_of_A_theta"],
-    statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
-      displayMath(
-        String.raw`B_1(\theta_\mu)
-:= \begin{pmatrix}
-\cosh K_1 & -ie^{i\theta_\mu}\sinh K_1 \\
-ie^{-i\theta_\mu}\sinh K_1 & \cosh K_1
-\end{pmatrix},
-\quad
-B_2 := \begin{pmatrix}
-\cosh(2K_2^*) & i\sinh(2K_2^*) \\
--i\sinh(2K_2^*) & \cosh(2K_2^*)
-\end{pmatrix}`,
-      ),
-      paragraph(["とおくと"]),
-      displayMath(String.raw`A(\theta_\mu) = B_1(\theta_\mu) \cdot B_2 \cdot B_1(\theta_\mu)`),
-    ],
-    proof: [
-      paragraph([
-        ref("calc_of_TxT_hatZxhatY"),
-        " より ",
-        math(String.raw`T_{(V_1^{(\pm)})^{1/2}}`),
-        " は ",
-        math(String.raw`(\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)`),
-        " に右から ",
-        math(String.raw`B_1(\theta_\mu)`),
-        " を掛け、",
-        math(String.raw`T_{(V_2)}`),
-        " は右から ",
-        math(String.raw`B_2`),
-        " を掛ける。",
-        math(String.raw`T_{(V)} = T_{(V_1^{(\pm)})^{1/2}} \circ T_{(V_2)} \circ T_{(V_1^{(\pm)})^{1/2}}`),
-        " と ",
-        ref("def_A_theta"),
-        " の定義から ",
-        math(String.raw`A(\theta_\mu) = B_1(\theta_\mu) B_2 B_1(\theta_\mu)`),
-        "。",
-      ]),
-    ],
-    conversion: { status: "converted" },
   },
   {
     id: "TV1_hatZ_hatY_038_claim_action_T_Vprime_psi",
@@ -1843,77 +1798,48 @@ T_{(V')}(\psi_\mu)
     },
   },
   {
-    id: "TV1_hatZ_hatY_039_claim_T_V_eq_T_Vprime",
+    id: "TV1_hatZ_hatY_045_claim_A_theta_is_identity",
     kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ",
-    sourceOrdinal: 39,
-    title: { tex: String.raw`T_{(V)} = T_{(V')}` },
-    labels: ["T_V_eq_T_Vprime"],
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/044_claim_gamma2_0のときA_thetaは単位行列.typ",
+    sourceOrdinal: 45,
+    title: { tex: String.raw`\gamma_2(\theta_\mu) = 0 \text{ のとき } A(\theta_\mu) = I` },
+    labels: ["A_theta_is_identity_when_gamma2_zero"],
     statement: [
-      displayMath(String.raw`T_{(V)} = T_{(V')}`),
-      paragraph([
-        "すなわち任意の ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-        " に対して ",
-        math(String.raw`V x V^{-1} = V' x V'^{-1}`),
-        "。",
-      ]),
-    ],
-    proof: [paragraph([todo("TODO")])],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "TV1_hatZ_hatY_040_claim_V_eq_cVprime",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
-    sourceOrdinal: 40,
-    title: { tex: String.raw`V = c V' \text{（定数倍を除いて一致）}` },
-    labels: ["V_eq_Vprime"],
-    statement: [
-      paragraph(["ある ", math(String.raw`c \in \mathbb{C}^\times`), " が存在して "]),
-      displayMath(String.raw`V = c \cdot V'`),
-    ],
-    proof: [paragraph([todo("TODO: T の単射性（クリフォード群の性質）を用いる")])],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "TV1_hatZ_hatY_041_claim_gamma2_periodicity",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ",
-    sourceOrdinal: 41,
-    title: {
-      tex: String.raw`\gamma_2(\theta_M) = \gamma_2(\theta_{-M}),\;
-\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`,
-    },
-    labels: ["gamma2_theta_M_periodicity"],
-    statement: [
-      displayMath(
-        String.raw`\gamma_2(\theta_M) = \gamma_2(\theta_{-M}), \quad
-\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`,
-      ),
+      paragraph([math(String.raw`\mathcal{M} := \{-M, \dots, -1, 1, \dots, M\}`), " とする。", math(String.raw`\mu \in \mathcal{M}`), " が ", math(String.raw`\gamma_2(\theta_\mu) = 0`), " を満たすとき、"]),
+      displayMath(String.raw`A(\theta_\mu) = I \quad (2 \times 2 \text{ 単位行列})`),
     ],
     proof: [
+      paragraph([math(String.raw`\gamma_2(\theta_\mu) = 0`), " を満たす ", math(String.raw`\mu \in \mathcal{M}`), " を固定する。"]),
+      paragraph(["Step 1: ", math(String.raw`\gamma_2(-\theta_\mu) = 0`), "。", ref("relation_of_gamma_2"), " より ", math(String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}`), " であるから、"]),
+      displayMath(
+        String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)} = -\overline{0} = 0 \quad (\because \gamma_2(\theta_\mu) = 0)`,
+      ),
+      paragraph(["Step 2: ", math(String.raw`\gamma_1(\theta_\mu) = 1`), "。", ref("det_A_theta"), " より ", math(String.raw`\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1`), " であるから、"]),
+      displayMath(
+        String.raw`\gamma_1(\theta_\mu)^2 = 1 - \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1 - 0\cdot 0 = 1 \quad (\because \gamma_2(\theta_\mu) = 0,\ \text{Step 1})`,
+      ),
+      paragraph([ref("gamma1_geq_1"), " より ", math(String.raw`\gamma_1(\theta_\mu) \geq 1 > 0`), " であるから、", math(String.raw`\gamma_1(\theta_\mu)^2 = 1`), " と合わせて ", math(String.raw`\gamma_1(\theta_\mu) = 1`), " を得る。"]),
       paragraph([
-        math(String.raw`\theta_M = 2\pi`),
-        "、",
-        math(String.raw`\theta_{-M} = -2\pi`),
-        " より ",
-        math(String.raw`e^{i\theta_M} = 1 = e^{i\theta_{-M}}`),
-        "、",
-        math(String.raw`\cos\theta_M = \cos\theta_{-M} = 1`),
-        "、",
-        math(String.raw`\sin\theta_M = \sin\theta_{-M} = 0`),
+        "Step 3: ",
+        math(String.raw`A(\theta_\mu) = I`),
         "。",
+        ref("det_A_theta"),
+        " の証明中で確認したとおり、",
+        math(String.raw`A(\theta_\mu) = \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}`),
+        " と表される（",
         ref("def_A_theta"),
-        " より",
+        " の各成分の ",
+        math(String.raw`\gamma_1, \gamma_2`),
+        " による書き換え）。Step 1, Step 2 の結果を代入すると、",
       ]),
       displayMath(
-        String.raw`\gamma_2(\theta_M)
-= i \cdot 1 \cdot s_2^*(c_1 \cdot 1 - i \cdot 0 - s_1 c_2)
-= i\,s_2^*(c_1 - s_1 c_2)
-= \gamma_2(\theta_{-M})`,
+        String.raw`A(\theta_\mu)
+= \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}
+= \begin{pmatrix} 1 & 0 \\ -0 & 1 \end{pmatrix}
+= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+= I`,
       ),
-      paragraph([math(String.raw`\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`), " も同様。"]),
+      paragraph(["である。"]),
     ],
     conversion: { status: "converted" },
   },
@@ -2377,6 +2303,81 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
     },
   },
   {
+    id: "TV1_hatZ_hatY_039_claim_T_V_eq_T_Vprime",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ",
+    sourceOrdinal: 39,
+    title: { tex: String.raw`T_{(V)} = T_{(V')}` },
+    labels: ["T_V_eq_T_Vprime"],
+    statement: [
+      displayMath(String.raw`T_{(V)} = T_{(V')}`),
+      paragraph([
+        "すなわち任意の ",
+        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " に対して ",
+        math(String.raw`V x V^{-1} = V' x V'^{-1}`),
+        "。",
+      ]),
+    ],
+    proof: [paragraph([todo("TODO")])],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "TV1_hatZ_hatY_040_claim_V_eq_cVprime",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
+    sourceOrdinal: 40,
+    title: { tex: String.raw`V = c V' \text{（定数倍を除いて一致）}` },
+    labels: ["V_eq_Vprime"],
+    statement: [
+      paragraph(["ある ", math(String.raw`c \in \mathbb{C}^\times`), " が存在して "]),
+      displayMath(String.raw`V = c \cdot V'`),
+    ],
+    proof: [paragraph([todo("TODO: T の単射性（クリフォード群の性質）を用いる")])],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "TV1_hatZ_hatY_041_claim_gamma2_periodicity",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ",
+    sourceOrdinal: 41,
+    title: {
+      tex: String.raw`\gamma_2(\theta_M) = \gamma_2(\theta_{-M}),\;
+\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`,
+    },
+    labels: ["gamma2_theta_M_periodicity"],
+    statement: [
+      displayMath(
+        String.raw`\gamma_2(\theta_M) = \gamma_2(\theta_{-M}), \quad
+\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`,
+      ),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta_M = 2\pi`),
+        "、",
+        math(String.raw`\theta_{-M} = -2\pi`),
+        " より ",
+        math(String.raw`e^{i\theta_M} = 1 = e^{i\theta_{-M}}`),
+        "、",
+        math(String.raw`\cos\theta_M = \cos\theta_{-M} = 1`),
+        "、",
+        math(String.raw`\sin\theta_M = \sin\theta_{-M} = 0`),
+        "。",
+        ref("def_A_theta"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\gamma_2(\theta_M)
+= i \cdot 1 \cdot s_2^*(c_1 \cdot 1 - i \cdot 0 - s_1 c_2)
+= i\,s_2^*(c_1 - s_1 c_2)
+= \gamma_2(\theta_{-M})`,
+      ),
+      paragraph([math(String.raw`\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`), " も同様。"]),
+    ],
+    conversion: { status: "converted" },
+  },
+  {
     id: "TV1_hatZ_hatY_044_claim_critical_condition",
     kind: "claim",
     sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/043_claim_臨界条件_c1_eq_s1c2.typ",
@@ -2442,51 +2443,5 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
       status: "converted",
       notes: ["原文の証明が TODO（未完成）であるため、ステートメントと note を忠実に反映し proof は TODO として保持。"],
     },
-  },
-  {
-    id: "TV1_hatZ_hatY_045_claim_A_theta_is_identity",
-    kind: "claim",
-    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/044_claim_gamma2_0のときA_thetaは単位行列.typ",
-    sourceOrdinal: 45,
-    title: { tex: String.raw`\gamma_2(\theta_\mu) = 0 \text{ のとき } A(\theta_\mu) = I` },
-    labels: ["A_theta_is_identity_when_gamma2_zero"],
-    statement: [
-      paragraph([math(String.raw`\mathcal{M} := \{-M, \dots, -1, 1, \dots, M\}`), " とする。", math(String.raw`\mu \in \mathcal{M}`), " が ", math(String.raw`\gamma_2(\theta_\mu) = 0`), " を満たすとき、"]),
-      displayMath(String.raw`A(\theta_\mu) = I \quad (2 \times 2 \text{ 単位行列})`),
-    ],
-    proof: [
-      paragraph([math(String.raw`\gamma_2(\theta_\mu) = 0`), " を満たす ", math(String.raw`\mu \in \mathcal{M}`), " を固定する。"]),
-      paragraph(["Step 1: ", math(String.raw`\gamma_2(-\theta_\mu) = 0`), "。", ref("relation_of_gamma_2"), " より ", math(String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}`), " であるから、"]),
-      displayMath(
-        String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)} = -\overline{0} = 0 \quad (\because \gamma_2(\theta_\mu) = 0)`,
-      ),
-      paragraph(["Step 2: ", math(String.raw`\gamma_1(\theta_\mu) = 1`), "。", ref("det_A_theta"), " より ", math(String.raw`\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1`), " であるから、"]),
-      displayMath(
-        String.raw`\gamma_1(\theta_\mu)^2 = 1 - \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1 - 0\cdot 0 = 1 \quad (\because \gamma_2(\theta_\mu) = 0,\ \text{Step 1})`,
-      ),
-      paragraph([ref("gamma1_geq_1"), " より ", math(String.raw`\gamma_1(\theta_\mu) \geq 1 > 0`), " であるから、", math(String.raw`\gamma_1(\theta_\mu)^2 = 1`), " と合わせて ", math(String.raw`\gamma_1(\theta_\mu) = 1`), " を得る。"]),
-      paragraph([
-        "Step 3: ",
-        math(String.raw`A(\theta_\mu) = I`),
-        "。",
-        ref("det_A_theta"),
-        " の証明中で確認したとおり、",
-        math(String.raw`A(\theta_\mu) = \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}`),
-        " と表される（",
-        ref("def_A_theta"),
-        " の各成分の ",
-        math(String.raw`\gamma_1, \gamma_2`),
-        " による書き換え）。Step 1, Step 2 の結果を代入すると、",
-      ]),
-      displayMath(
-        String.raw`A(\theta_\mu)
-= \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}
-= \begin{pmatrix} 1 & 0 \\ -0 & 1 \end{pmatrix}
-= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
-= I`,
-      ),
-      paragraph(["である。"]),
-    ],
-    conversion: { status: "converted" },
   },
 ]);

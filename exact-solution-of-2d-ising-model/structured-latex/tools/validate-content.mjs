@@ -14,6 +14,7 @@ const labels = new Map();
 // 定義されうるため）全ラベル確定後に target を検証する。
 const refs = [];
 let blockCount = 0;
+let headingCount = 0;
 
 for (const file of files) {
   const mod = await import(pathToFileURL(join(contentDir, file)).href);
@@ -24,6 +25,7 @@ for (const file of files) {
   for (const block of blocks) {
     validateBlock(block);
     blockCount += 1;
+    if (block.kind === "heading") headingCount += 1;
     if (ids.has(block.id)) {
       throw new Error(`duplicate block id: ${block.id}`);
     }
@@ -57,14 +59,19 @@ if (unresolved.length > 0) {
 
 console.log(
   `validated ${blockCount} blocks from ${files.length} files ` +
-    `(${labels.size} labels, ${refs.length} refs, all resolved)`,
+    `(${headingCount} headings, ${labels.size} labels, ${refs.length} refs, all resolved)`,
 );
 
 function scanForTypstMath(block, file) {
   const strings = [];
-  collectStrings(block.statement, strings);
+  // 見出しブロックは本文を持たないため statement は undefined になりうる。
+  collectStrings(block.statement ?? [], strings);
   collectStrings(block.proof ?? [], strings);
   collectStrings(block.notes ?? [], strings);
+  // タイトルの tex も KaTeX へ渡るので同じ規約で検査する。
+  if (block.title !== null && block.title !== undefined && block.title.tex !== undefined) {
+    strings.push(block.title.tex);
+  }
   const suspicious = strings.filter((value) =>
     /(^|[^\\])\b(dot\.op|times\.o|arrow\.l\.r|eq\.not|sqrt\(|mat\(|cases\(|quad)\b/.test(
       value.replaceAll("\\quad", ""),

@@ -2,6 +2,26 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_diagonalization_appendix_B",
+    kind: "heading",
+    level: 1,
+    sourcePath: "main.typ",
+    sourceOrdinal: 5,
+    title: { text: "対角化の計算 (ホロノミック量子場 付録B)" },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
+    id: "heading_transfer_matrix",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 6,
+    title: { text: "転送行列" },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     sourcePath: "parts/004_転送行列/000_definition_転送行列の記号の定義.typ",
@@ -17,10 +37,16 @@ export default defineBlocks([
           " 上の単位行列",
         ],
         [
-          math(String.raw`\sigma_k^x := I \otimes \cdots \otimes \overbrace{\sigma^x}^{k\text{th}} \otimes \cdots \otimes I \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-          "（",
-          math(String.raw`\sigma_k^y, \sigma_k^z`),
-          " も同様）",
+          math(String.raw`\sigma_k^x := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes \overbrace{\sigma^x}^{k\text{th}} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        ],
+        [
+          math(String.raw`\sigma_k^y := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes \overbrace{\sigma^y}^{k\text{th}} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        ],
+        [
+          math(String.raw`\sigma_k^z := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes \overbrace{\sigma^z}^{k\text{th}} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        ],
+        [
+          math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
         ],
         [
           math(String.raw`V_1 := \exp\!\left(i K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
@@ -29,19 +55,23 @@ export default defineBlocks([
           math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
         ],
         [
-          math(String.raw`Z_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^z`),
+          math(String.raw`Z_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^z \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
           "（ただし ",
           math(String.raw`Z_1 := \sigma_1^z`),
           "、",
           math(String.raw`Z_{M+1} := Z_1`),
+          "。ホロノミック量子場では ",
+          math(String.raw`p_m`),
           "）",
         ],
         [
-          math(String.raw`Y_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^y`),
+          math(String.raw`Y_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^y \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
           "（ただし ",
           math(String.raw`Y_1 := \sigma_1^y`),
           "、",
           math(String.raw`Y_{M+1} := Y_1`),
+          "。ホロノミック量子場では ",
+          math(String.raw`q_m`),
           "）",
         ],
         [
@@ -63,7 +93,16 @@ export default defineBlocks([
         math(String.raw`c_i, s_i, c_i^*, s_i^* > 0`),
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
+          "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
+          "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
+          "本ブロックへ集約した（インライン側にのみ在った σ_k^y, σ_k^z, I_{(Mat(2,C))^{⊗M}}, " +
+          "p_m/q_m の対応は本ブロックへ補記済み）。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_002_claim_Z_Y_linearly_independent",

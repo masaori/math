@@ -1,4 +1,13 @@
-const KINDS = new Set(["theorem", "definition", "claim", "remark", "note"]);
+// 定理型ブロック(証明環境)の kind。
+const THEOREM_LIKE_KINDS = new Set(["theorem", "definition", "claim", "remark", "note"]);
+
+// 章見出しブロックの kind。定理型ブロックと同じ配列に、文書順のとおり並べる。
+const HEADING_KIND = "heading";
+
+const KINDS = new Set([...THEOREM_LIKE_KINDS, HEADING_KIND]);
+
+// 見出しの深さ。1 が最上位（Typst の `=`、`==` は 2）。
+const MAX_HEADING_LEVEL = 6;
 
 const NODE_TYPES = new Set([
   "paragraph",
@@ -10,6 +19,14 @@ const NODE_TYPES = new Set([
   "todo",
 ]);
 
+/**
+ * 1ファイル分のブロック列を定義する。
+ * **配列の並びが文書順の正準表現**であり、文書全体の順序は
+ * 「content/*.mjs をファイル名昇順に並べ、各ファイル内は配列順」で復元される
+ * （旧 main.typ の `#include` 順がこれに一致するように content 側を並べる）。
+ * `sourceOrdinal` は「ソース内での通し番号」であって文書順ではない
+ * （parts/ のファイル名連番と `#include` 順は一致しないため）。
+ */
 export function defineBlocks(blocks) {
   if (!Array.isArray(blocks)) {
     throw new TypeError("defineBlocks expects an array");
@@ -78,6 +95,14 @@ export function validateBlock(block) {
   for (const label of block.labels) {
     assertString(label, `${block.id}.labels[]`);
   }
+  if (block.conversion !== undefined) {
+    assertObject(block.conversion, `${block.id}.conversion`);
+    assertString(block.conversion.status, `${block.id}.conversion.status`);
+  }
+  if (block.kind === HEADING_KIND) {
+    validateHeadingBlock(block);
+    return;
+  }
   validateNodes(block.statement ?? [], `${block.id}.statement`);
   if (block.proof !== undefined) {
     validateNodes(block.proof, `${block.id}.proof`);
@@ -85,9 +110,27 @@ export function validateBlock(block) {
   if (block.notes !== undefined) {
     validateNodes(block.notes, `${block.id}.notes`);
   }
-  if (block.conversion !== undefined) {
-    assertObject(block.conversion, `${block.id}.conversion`);
-    assertString(block.conversion.status, `${block.id}.conversion.status`);
+}
+
+/**
+ * 見出しブロックの検証。
+ * 見出しは「文書構造」だけを持ち、本文（statement/proof/notes）を持たない。
+ */
+function validateHeadingBlock(block) {
+  assertInteger(block.level, `${block.id}.level`);
+  if (block.level < 1 || block.level > MAX_HEADING_LEVEL) {
+    throw new TypeError(`${block.id}.level must be between 1 and ${MAX_HEADING_LEVEL}`);
+  }
+  if (block.title === null || block.title === undefined) {
+    throw new TypeError(`${block.id}.title is required for kind "${HEADING_KIND}"`);
+  }
+  if (block.title.text === undefined && block.title.tex === undefined) {
+    throw new TypeError(`${block.id}.title must have text or tex`);
+  }
+  for (const field of ["statement", "proof", "notes"]) {
+    if (block[field] !== undefined) {
+      throw new TypeError(`${block.id}.${field} is not allowed for kind "${HEADING_KIND}"`);
+    }
   }
 }
 

@@ -2,6 +2,16 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_partition_function_2d_ising",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 2,
+    title: { text: "2次元ising模型の分配関数" },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "partition_function_2d_ising_001_definition_lattice_size",
     kind: "definition",
     sourcePath: "parts/001_2次元ising模型の分配関数/000_definition_格子サイズ.typ",

@@ -1,6 +1,19 @@
 import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
 
+// 章「T_{V_1}(hat Z) と hat Z, hat Y の関係」の前半（文書順）。
+// 収録範囲は parts/008 の 000〜017, 036, 018, 019（文書順はソースのファイル名連番と
+// 一致しないため、ファイル名に連番範囲は入れない）。並びが文書順の正準表現。
 export default defineBlocks([
+  {
+    id: "heading_TV1_hatZ_hatY",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 10,
+    title: { tex: String.raw`T_{V_1}(\hat{Z})\text{と}\hat{Z},\hat{Y}\text{の関係}` },
+    labels: [],
+    conversion: { status: "converted" },
+  },
   {
     id: "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y",
     kind: "claim",
@@ -1269,6 +1282,54 @@ T_{(V)}(\hat{Y}_\mu)
         "原文の (z)/(y) 個別鎖では第1行列の (1,2)/(2,1) 成分を i e^{-iθ} 形（別表示）で書く箇所があり、原文『よって』段の B1（calc_of_TxT と整合する -i e^{iθ}, i e^{-iθ} 形）と内部で不整合。ここでは確立済みの B1（calc_of_TxT_hatZxhatY, 014）に統一して原文の最終結論を再現した。",
       ],
     },
+  },
+  {
+    id: "TV1_hatZ_hatY_037_claim_factorization_A_theta",
+    kind: "claim",
+    sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/036_claim_A_thetaの行列分解.typ",
+    sourceOrdinal: 37,
+    title: { tex: String.raw`A(\theta_\mu) \text{ の行列分解}` },
+    labels: ["factorization_of_A_theta"],
+    statement: [
+      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
+      displayMath(
+        String.raw`B_1(\theta_\mu)
+:= \begin{pmatrix}
+\cosh K_1 & -ie^{i\theta_\mu}\sinh K_1 \\
+ie^{-i\theta_\mu}\sinh K_1 & \cosh K_1
+\end{pmatrix},
+\quad
+B_2 := \begin{pmatrix}
+\cosh(2K_2^*) & i\sinh(2K_2^*) \\
+-i\sinh(2K_2^*) & \cosh(2K_2^*)
+\end{pmatrix}`,
+      ),
+      paragraph(["とおくと"]),
+      displayMath(String.raw`A(\theta_\mu) = B_1(\theta_\mu) \cdot B_2 \cdot B_1(\theta_\mu)`),
+    ],
+    proof: [
+      paragraph([
+        ref("calc_of_TxT_hatZxhatY"),
+        " より ",
+        math(String.raw`T_{(V_1^{(\pm)})^{1/2}}`),
+        " は ",
+        math(String.raw`(\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)`),
+        " に右から ",
+        math(String.raw`B_1(\theta_\mu)`),
+        " を掛け、",
+        math(String.raw`T_{(V_2)}`),
+        " は右から ",
+        math(String.raw`B_2`),
+        " を掛ける。",
+        math(String.raw`T_{(V)} = T_{(V_1^{(\pm)})^{1/2}} \circ T_{(V_2)} \circ T_{(V_1^{(\pm)})^{1/2}}`),
+        " と ",
+        ref("def_A_theta"),
+        " の定義から ",
+        math(String.raw`A(\theta_\mu) = B_1(\theta_\mu) B_2 B_1(\theta_\mu)`),
+        "。",
+      ]),
+    ],
+    conversion: { status: "converted" },
   },
   {
     id: "TV1_hatZ_hatY_019_definition_theta_mu",

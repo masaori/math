@@ -1,7 +1,8 @@
-import { type LoadDocumentError, buildLabelIndex } from '@rwp/domain-model'
+import { type Block, type LoadDocumentError, buildLabelIndex } from '@rwp/domain-model'
 import type { ReactElement } from 'react'
 import type { ConnectionStatus, DocumentViewPageDomainModel } from '../model/page-domain-model'
 import { BlockCard } from './block-card'
+import { HeadingView } from './heading-view'
 import { LabelIndexProvider } from './ref-resolver'
 
 const errorMessages: Record<LoadDocumentError['code'], string> = {
@@ -21,6 +22,10 @@ const ConnectionBadge = ({ status }: { status: ConnectionStatus }): ReactElement
   const { text, className } = connectionLabels[status]
   return <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${className}`}>{text}</span>
 }
+
+/** ブロック1件を kind に応じて（章見出し / 定理型ブロック）描画する。 */
+const BlockView = ({ block }: { block: Block }): ReactElement =>
+  block.kind === 'heading' ? <HeadingView heading={block} /> : <BlockCard block={block} />
 
 const ErrorPanel = ({ error }: { error: LoadDocumentError }): ReactElement => (
   <div className="rounded-md border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
@@ -74,7 +79,7 @@ export const DocumentView = ({
         <LabelIndexProvider value={buildLabelIndex(document.value.blocks)}>
           <div className="space-y-4">
             {document.value.blocks.map((block) => (
-              <BlockCard key={block.id} block={block} />
+              <BlockView key={block.id} block={block} />
             ))}
           </div>
         </LabelIndexProvider>

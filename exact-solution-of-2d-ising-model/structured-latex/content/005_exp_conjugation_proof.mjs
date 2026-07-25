@@ -2,6 +2,16 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_exp_conjugation_proof",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 7,
+    title: { tex: String.raw`e^{X} Y e^{-X} = e^{\mathrm{ad}(X)}(Y) \text{ の証明}` },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "exp_conjugation_proof_001_definition_Ad_ad_lie",
     kind: "definition",
     sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/000_リー群リー環アプローチの概要とAd_adの定義.typ",

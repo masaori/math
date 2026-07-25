@@ -2,6 +2,16 @@ import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../
 
 export default defineBlocks([
   {
+    id: "heading_calculation_formulae",
+    kind: "heading",
+    level: 2,
+    sourcePath: "main.typ",
+    sourceOrdinal: 1,
+    title: { text: "計算公式" },
+    labels: [],
+    conversion: { status: "converted" },
+  },
+  {
     id: "calc_formulae_000_cosh_sinh_product",
     kind: "theorem",
     sourcePath: "parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ",

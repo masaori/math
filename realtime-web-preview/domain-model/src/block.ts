@@ -7,7 +7,22 @@ import { z } from 'zod'
  * 本スキーマはその契約と一致させる。入力は backend の境界（adapter）で safeParse する。
  */
 
-export const blockKindSchema = z.enum(['theorem', 'definition', 'claim', 'remark', 'note'])
+/** 定理型ブロック（証明環境）の kind。 */
+export const theoremLikeKindSchema = z.enum(['theorem', 'definition', 'claim', 'remark', 'note'])
+export type TheoremLikeKind = z.infer<typeof theoremLikeKindSchema>
+
+/** 章見出しの kind。文書構造を表し、本文を持たない。 */
+export const headingKindSchema = z.literal('heading')
+
+/** ブロックの kind。定理型ブロックに加えて章見出しを持つ。 */
+export const blockKindSchema = z.enum([
+  'theorem',
+  'definition',
+  'claim',
+  'remark',
+  'note',
+  'heading',
+])
 export type BlockKind = z.infer<typeof blockKindSchema>
 
 export type Node =
@@ -31,31 +46,62 @@ export const nodeSchema: z.ZodType<Node> = z.lazy(() =>
   ]),
 )
 
-export const titleSchema = z
-  .object({
-    text: z.string().optional(),
-    tex: z.string().optional(),
-  })
-  .nullable()
+/** タイトルの中身。`text` は素のテキスト、`tex` は KaTeX で描画する LaTeX 文字列。 */
+export const titleContentSchema = z.object({
+  text: z.string().optional(),
+  tex: z.string().optional(),
+})
+export type TitleContent = z.infer<typeof titleContentSchema>
+
+export const titleSchema = titleContentSchema.nullable()
 export type Title = z.infer<typeof titleSchema>
 
-export const blockSchema = z.object({
+const conversionSchema = z.object({
+  status: z.string(),
+  notes: z.array(z.string()).optional(),
+})
+
+/** 全ブロック共通のフィールド。 */
+const blockBaseShape = {
   id: z.string(),
-  kind: blockKindSchema,
   sourcePath: z.string(),
+  /**
+   * ソース内での通し番号。文書順ではない
+   * （文書順はブロック配列の並びで表す。入力ソース側の schema 参照）。
+   */
   sourceOrdinal: z.number().int(),
-  title: titleSchema.optional(),
   labels: z.array(z.string()).default([]),
+  conversion: conversionSchema.optional(),
+}
+
+/** 定理型ブロック（本文を持つ）。 */
+export const theoremLikeBlockSchema = z.object({
+  ...blockBaseShape,
+  kind: theoremLikeKindSchema,
+  title: titleSchema.optional(),
   statement: z.array(nodeSchema).default([]),
   proof: z.array(nodeSchema).optional(),
   notes: z.array(nodeSchema).optional(),
-  conversion: z
-    .object({
-      status: z.string(),
-      notes: z.array(z.string()).optional(),
-    })
-    .optional(),
 })
+export type TheoremLikeBlock = z.infer<typeof theoremLikeBlockSchema>
+
+/**
+ * 章見出しブロック（文書構造のみ。本文を持たない）。
+ * `level` は 1 が最上位。
+ */
+export const headingBlockSchema = z.object({
+  ...blockBaseShape,
+  kind: headingKindSchema,
+  level: z.number().int().min(1).max(6),
+  title: titleContentSchema,
+})
+export type HeadingBlock = z.infer<typeof headingBlockSchema>
+
+/** 文書を構成するブロック。配列の並びが文書順。 */
+export const blockSchema = z.discriminatedUnion('kind', [
+  theoremLikeBlockSchema,
+  headingBlockSchema,
+])
 export type Block = z.infer<typeof blockSchema>
 
 export const blocksSchema = z.array(blockSchema)

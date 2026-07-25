@@ -1,8 +1,8 @@
-import type { Block } from '@rwp/domain-model'
+import type { TheoremLikeBlock, TheoremLikeKind } from '@rwp/domain-model'
 import type { ReactElement } from 'react'
-import { NodeList } from './nodes'
+import { NodeList, TitleView } from './nodes'
 
-const kindLabels: Record<Block['kind'], string> = {
+const kindLabels: Record<TheoremLikeKind, string> = {
   theorem: 'Theorem',
   definition: 'Definition',
   claim: 'Claim',
@@ -10,7 +10,7 @@ const kindLabels: Record<Block['kind'], string> = {
   note: 'Note',
 }
 
-const kindAccent: Record<Block['kind'], string> = {
+const kindAccent: Record<TheoremLikeKind, string> = {
   theorem: 'border-l-indigo-500',
   definition: 'border-l-emerald-500',
   claim: 'border-l-sky-500',
@@ -18,9 +18,9 @@ const kindAccent: Record<Block['kind'], string> = {
   note: 'border-l-slate-400',
 }
 
-/** ブロック1件を kind 別体裁で描画する。 */
-export const BlockCard = ({ block }: { block: Block }): ReactElement => {
-  const title = block.title?.text ?? block.title?.tex
+/** 定理型ブロック1件を kind 別体裁で描画する。 */
+export const BlockCard = ({ block }: { block: TheoremLikeBlock }): ReactElement => {
+  const title = block.title ?? null
   const hasProof = block.proof !== undefined && block.proof.length > 0
   const hasNotes = block.notes !== undefined && block.notes.length > 0
 
@@ -33,7 +33,11 @@ export const BlockCard = ({ block }: { block: Block }): ReactElement => {
         <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
           {kindLabels[block.kind]}
         </span>
-        {title ? <h2 className="text-base font-bold text-slate-800">{title}</h2> : null}
+        {title ? (
+          <h2 className="text-base font-bold text-slate-800">
+            <TitleView title={title} />
+          </h2>
+        ) : null}
         {block.labels.length > 0 ? (
           <span className="text-xs text-slate-400">[{block.labels.join(', ')}]</span>
         ) : null}

@@ -1,4 +1,4 @@
-import { type Node, assertNever } from '@rwp/domain-model'
+import { type Node, type TitleContent, assertNever } from '@rwp/domain-model'
 import * as katex from 'katex'
 import type { ReactElement } from 'react'
 import { useResolveLabel } from './ref-resolver'
@@ -41,6 +41,17 @@ const RefLink = ({ target, label }: { target: string; label?: string }): ReactEl
       {displayText}
     </a>
   )
+}
+
+/**
+ * タイトル（ブロック見出し・章見出し）を描画する。
+ * `text` は素のテキスト、`tex` は KaTeX（LaTeX ソースをそのまま出さない）。
+ * 両方無い場合は何も描画しない。
+ */
+export const TitleView = ({ title }: { title: TitleContent }): ReactElement | null => {
+  if (title.text !== undefined) return <>{title.text}</>
+  if (title.tex !== undefined) return <KatexMath tex={title.tex} display={false} />
+  return null
 }
 
 /** Node 1件を描画する。 */

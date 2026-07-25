@@ -75,9 +75,9 @@ graph TD
 | X-1  | SageMath数値検証を全工程で維持(claim↔sagemath/check 対応保全) | 横断 | — | 🟡 |
 | P2-0 | Typst→構造化TeX 全面移行の作業洗い出し | 2 | — | ✅ |
 | T1/T2 | content を parts/ 現状に完全同期完了(9ブロック追加・Phase1改変分再同期・劣化変換25→0)。validate 132ブロック/参照142全解決 | 2 | P1-8 | ✅ |
-| T3   | main.typ のインライン内容移行(記号表/見出し) ※heading node追加・作業メモは非移行 | 2 | T4-schema | ⬜ |
+| T3   | main.typ のインライン内容移行(記号表/見出し/文書順) ※作業メモは非移行 | 2 | T4b | ✅ |
 | T4   | ref をラベルに統一(レンダラにラベル→id解決)＋validateにref解決チェック追加(実装・疎通確認済、未コミット) | 2 | — | ✅ |
-| T4b  | heading node をスキーマに追加(章題保持) → T3 と一体で実施 | 2 | — | ⬜ |
+| T4b  | heading ブロックをスキーマに追加(章題保持) → T3 と一体で実施 | 2 | — | ✅ |
 | T5   | realtime-web-preview で全ブロックの KaTeX 描画疎通確認・可換図式代替 | 2 | T1..T4 | ⬜ |
 | T6   | sagemath連携をラベル対応に移行＋機械検証(`sagemath/tools/verify-check-linkage.mjs`)。移行で落ちていた主要2定理のラベルを復旧 | 2 | T1 | ✅ |
 | T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・レンダリング疎通後に別途確認 | 2 | T1..T6 | ⏸ |
@@ -94,12 +94,14 @@ graph TD
 - **レンダラは既存**: `realtime-web-preview/`(React+**KaTeX**, HTMLプレビュー/PDFではない, source=structured-latex/content)。MEMORY の「ビューア未実装」は古い。数式は Typst構文でなく **KaTeX向けLaTeX文字列**で保持(手翻訳、自動コンバータは無い)。
 - **相互参照の不整合(要対処)**: content は ref target に**ラベル**を入れる規約だが、レンダラは**block.id**でアンカー化 → ラベル参照37件がブラウザ上デッドリンク。`validate-content.mjs` は ref解決を検査しない(未解決ref 2件検出)。
 - **schema の構造的ギャップ**: heading/section, figure/可換図式(005/000 の fletcher), table/grid の node が無い。文書順・章題は main.typ の #include 順にしか無く、ファイル名順と不一致。
+  → heading と文書順は T3/T4b で解消済(後述)。figure/可換図式・table/grid は未解消。
 
 ## 決定待ち(ユーザー判断が要る論点)
 
 - **P3-1 系の決定**: **Lean4+mathlib4 を推奨・暫定決定**。大きな投資のため最終確認したい(異論なければ確定)。
 - **T4 相互参照モデル**: ref.target をラベルに統一(レンダラにラベル→id解決を実装)か、id に統一か。content は既にラベル規約なので**ラベル統一+レンダラ改修**が自然だが最終確認したい。
-- **T3 main.typ の散文・メモ・埋め込みsagemath**: 移行するか破棄するか(価値判断)。見出し/章題を schema拡張(heading node追加)で正準保持するか、章メタ別持ちにするか。
+- ~~**T3 main.typ の散文・メモ・埋め込みsagemath**~~: 決定済 — 作業メモは非移行、章題は schema の
+  `heading` ブロックで正準保持(T3/T4b 完了、下記参照)。
 - **T7 Typst 廃止のタイミング**: parts/ を SSOT から外すのは不可逆に近い。T1..T6 完了・レンダリング疎通確認後に実行してよいか。
 - **source 単一化**: leanblueprint(LaTeX blueprint) と 構造化TeX(KaTeX LaTeX) を寄せて、人手証明↔formal↔閲覧の source を一本化するか。Phase 2/3 を跨ぐ設計。
 
@@ -122,10 +124,33 @@ graph TD
   - 008/000 part(2) の `−0` 項消滅が非自明、008/011・017 の行列符号不整合を確立済み `B_1` に正規化して整合を取った。
 - 対処: 021/043 の proof(TODO保持)と併せ、Phase 1 とは別の「原文厳密化」トラックとして扱う候補。
 
+## T3/T4b 完了(2026-07) — 章見出し・文書順・記号表の移行
+
+- **schema に `heading` ブロックを追加**(`structured-latex/schema.{mjs,d.ts}`)。`kind: "heading"` +
+  `level`(1 が最上位, Typst `=` が 1 / `==` が 2) + 必須 `title`、本文(statement/proof/notes)は不許可。
+  レンダラ側の契約(`realtime-web-preview/domain-model/src/block.ts`)も `kind` による
+  discriminated union へ更新し、`heading-view.tsx` で描画。タイトルの `tex` は KaTeX で描画するよう修正
+  (従来は LaTeX ソースがそのまま文字列表示されていた)。
+- **文書順の正準表現 = ブロック配列の並び**(content/*.mjs をファイル名昇順 → 各ファイル内は配列順)。
+  この順序が旧 main.typ の `#include` 順と**完全一致**することを機械照合済み(130 include / 130 sourcePath, 差分0)。
+  `sourceOrdinal` は「parts 章内でのソースファイル通し番号」であって文書順ではない(名前順と `#include` 順が
+  不一致のため)。002章(000,001,**003,002**)と 008章(017 の直後に **036**、031 の後 034,035,033,032,037,044,
+  041,042,038,039,040,043)を実文書順へ並べ替えた。008 の content 2ファイルは連番範囲で命名できなくなったため
+  `008_TV1_hatZ_hatY_part{1,2}.mjs` へ改名。
+- **記号表**: main.typ のインライン `#definition("記号の定義")` は `parts/004_転送行列/000`
+  (`def_transfer_matrix_symbols`)と同内容の重複(相違は双対関係注記の旧版 `sinh(K)sinh(K*)=1` のみ、
+  P1-1 で訂正済み)。よって重複ブロックは作らず、インライン側にのみ在った σ_k^y, σ_k^z,
+  I_{(Mat(2,C))^{⊗M}}, Z_m/Y_m の p_m/q_m 対応を既存ブロックへ補記して集約した。
+- **非移行(確定)**: main.typ 末尾の作業メモ(`= 全体のノリ` / `= メモ` / 「次回やること」と埋め込み
+  SageMath スニペット)は証明本体でないため移行しない。
+- 検証: `validate-content.mjs` = 142ブロック/14ファイル(見出し10, ラベル72, ref142 全解決)、
+  `pnpm -r build` / `pnpm -r typecheck` / `biome check` 通過、KaTeX 全1647式レンダー0エラー、
+  API 疎通(GET /api/document)で見出し10件が文書順で配信されることを確認。
+
 ## Phase 2 残り
 
-- **T3**(main.typ の記号定義表・章見出しの移行, heading node 追加): 未着手。
-- **T5**(realtime-web-preview で全132ブロックの KaTeX 描画疎通・可換図式代替): ref整合の1例確認済、全ブロック疎通は未。
+- **T5**(realtime-web-preview で全142ブロックの KaTeX 描画疎通・可換図式代替): KaTeX 側の機械検証
+  (全1647式 0エラー)と API 疎通は済。ブラウザ実表示の目視確認と可換図式(005/000 の fletcher)代替は未。
 - **T6**(sagemath連携 claim↔check の維持確認): 未。
 - **T7**(Typst 廃止): ⏸ T3/T5/T6 完了・描画疎通後に別途確認。
 
