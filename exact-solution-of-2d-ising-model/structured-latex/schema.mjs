@@ -163,8 +163,15 @@ export function validateBlock(block) {
   if (block.proof !== undefined) {
     validateNodes(block.proof, `${block.id}.proof`);
   }
+  // 本文ブロックは注記欄を持てない。
+  // 参照用ノートは notes/ に分離し targets でラベル紐づけする（最終成果物は content のみから生成）。
+  // ここを許すと注記が出版物へ混入する経路になるため、明示的に拒否する。
   if (block.notes !== undefined) {
-    validateNodes(block.notes, `${block.id}.notes`);
+    throw new TypeError(
+      `${block.id}.notes は使えない: 参照用の注記は structured-latex/notes/ へ置き、` +
+        "targets でこのブロックのラベルに紐づけること。" +
+        "出版本文で述べる必要がある事柄は statement（証明中なら proof）に書くこと。",
+    );
   }
 }
 

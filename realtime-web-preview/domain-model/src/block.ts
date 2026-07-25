@@ -81,7 +81,6 @@ export const theoremLikeBlockSchema = z.object({
   title: titleSchema.optional(),
   statement: z.array(nodeSchema).default([]),
   proof: z.array(nodeSchema).optional(),
-  notes: z.array(nodeSchema).optional(),
 })
 export type TheoremLikeBlock = z.infer<typeof theoremLikeBlockSchema>
 

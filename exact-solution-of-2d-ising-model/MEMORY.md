@@ -1,5 +1,32 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-25）: データモデルの穴を塞いだ（本文ブロックは注記欄を持てない）
+
+ノート分離の狙いは「最終成果物は content のみから生成するので、ノートは構造上混入しない」こと。
+ところが**本文ブロック側に注記欄（`notes`）が残っており、ビューアも描画していた**（使用は0件だが、
+書けば出版物へ漏れる経路）。これを塞いだ。
+
+- `structured-latex/schema.mjs`: 本文ブロックの `notes` を**明示的に拒否**（エラーメッセージで
+  「参照用は notes/ へ、出版本文で述べる必要があるものは statement/proof へ」と誘導）。負テスト済み。
+- `schema.d.ts` と ビューアの契約（`realtime-web-preview/domain-model/src/block.ts`）からも型を削除。
+- ビューアの本文カードから注記欄の描画を削除（参照用ノートの表示は別経路で維持）。
+
+### データモデル（確定形）
+
+- **文書本体** `content/*.mjs`: ブロックの配列。**並びが文書順の正準表現**。
+  共通フィールドは id / kind / sourcePath / sourceOrdinal / title / **labels** / conversion。
+  定理型は + statement, proof。見出しは + level（本文を持てない）。**注記欄は持てない。**
+- **参照用ノート** `notes/*.mjs`: id / **targets（紐づけ先ラベル、1件以上必須）** / title / sourcePath / body。
+- ノード（本文の中身、両者共通）: text / math / displayMath / paragraph / list / **ref** / todo。
+- 紐づけは**ノート → 本文の一方向**で、**ラベル**で指す（パス非依存）。数値検証との対応も同じくラベル基準。
+
+### 残っている検討事項
+
+`kind` に `note` / `remark` が残っているが content では**使用0件**（heading 10 / theorem 14 /
+definition 50 / claim 72）。出版物の Remark 環境として将来使う余地はあるが、
+「不要な構造を持ち込まない」方針からは削除候補。判断待ち。
+
+
 ## 完了（2026-07-25）: Phase 3 継続 — 線型独立性・離散フーリエ変換（hatZ/hatY）・その反交換関係を形式化
 
 `lake build` 成功・`lean/scripts/check-no-sorry.sh` exit 0（`sorry` 0、主要定理 **84 件**が `sorryAx` 非依存）。

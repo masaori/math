@@ -39,7 +39,7 @@ export type TheoremLikeBlock = {
   labels: string[];
   statement: Node[];
   proof?: Node[];
-  notes?: Node[];
+  /** 注記欄は持てない。参照用ノートは Note（notes/）として分離する。 */
   conversion?: Conversion;
 };
 

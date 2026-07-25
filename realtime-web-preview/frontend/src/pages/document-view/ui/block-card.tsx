@@ -32,7 +32,6 @@ export const BlockCard = ({
 }): ReactElement => {
   const title = block.title ?? null
   const hasProof = block.proof !== undefined && block.proof.length > 0
-  const hasNotes = block.notes !== undefined && block.notes.length > 0
 
   return (
     <section
@@ -63,12 +62,6 @@ export const BlockCard = ({
           <div className="text-slate-700">
             <NodeList nodes={block.proof ?? []} />
           </div>
-        </div>
-      ) : null}
-
-      {hasNotes ? (
-        <div className="mt-3 rounded bg-slate-50 p-2 text-sm text-slate-600">
-          <NodeList nodes={block.notes ?? []} />
         </div>
       ) : null}
 
