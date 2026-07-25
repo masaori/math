@@ -37,6 +37,9 @@
 ├── sagemath/              # SageMath による数値検証コード
 │   ├── _shared/defs.sage  # 共通定義
 │   └── check/<NNN>_<対象>/# parts/ のファイル番号に対応
+├── lean/                  # Lean 4 + mathlib4 による機械的証明（任意）
+│   ├── README.md          # セットアップ・人手証明との対応規約
+│   └── <Lib>/Part<NNN>/   # parts/ のディレクトリ・ファイル番号に対応
 ├── docs/
 │   └── tasks/             # タスク管理・作業指示書
 └── _old/                  # 非推奨・旧コード（削除候補の退避先）

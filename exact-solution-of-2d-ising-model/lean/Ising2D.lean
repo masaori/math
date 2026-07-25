@@ -1,1 +1,12 @@
--- root module (populated later)
+/-
+# Ising2D — 2次元 Ising 模型の厳密解の機械的証明
+
+人手証明（`exact-solution-of-2d-ising-model/parts/**/*.typ`）に対応する Lean 4 + mathlib4 の
+形式化。ファイルと人手証明の対応規約は `lean/README.md` を参照。
+-/
+import Ising2D.Basic
+import Ising2D.Part000.Claim045_ConjugationIsRingHom
+import Ising2D.Part002.Theorem000_TensorBasis
+import Ising2D.Part002.Lemma001_ScalarIdentityCommutes
+import Ising2D.Part002.Lemma003_CentralizerIsScalar
+import Ising2D.Representation

@@ -83,8 +83,9 @@ graph TD
 | T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・レンダリング疎通後に別途確認 | 2 | T1..T6 | ⏸ |
 | P3-0 | Lean/Coq/Isabelle/Agda の選定リサーチ(本問題との相性・mathlib被覆・事例) | 3 | なし | ✅ |
 | P3-1 | 使用する系を決定 → **Lean 4 + mathlib4 に確定(ユーザー承認済 2026-07)** | 3 | P3-0 | ✅ |
-| P3-2 | 最小formalizationターゲットでPoC | 3 | P3-1 | ⬜ |
-| P3-x | 段階的に formal 化(決定後に細分化) | 3 | P3-2 | ⬜ |
+| P3-2 | 最小formalizationターゲットでPoC(`lean/` 雛形・`002/000`・`000/045`・`002/001`・`002/003` を `lake build` 通過・sorry 0) | 3 | P3-1 | ✅ |
+| P3-3 | `Mat(2,ℂ)^{⊗M}` の表現方式を決定 → **行列表現 `Matrix (Fin M → Fin 2) (Fin M → Fin 2) ℂ` を採用**(両表現の ℂ-代数同型も証明済) | 3 | P3-2 | ✅ |
+| P3-x | 段階的に formal 化(次: `000/046` 交換子恒等式 → `004/000` の σ,Z,Y 定義と反交換関係 → `004/014`) | 3 | P3-2 | ⬜ |
 
 ## Phase 2 監査結論(2026-07) — 構造化TeX移行
 
@@ -112,6 +113,33 @@ graph TD
 - ギャップ(ブロッカーでない): `Real.arccosh` は自前定義(容易)、`Ad(exp)=exp(ad)`(005/008) は級数展開ルート(003/007)で回避、Ising厳密解の既存形式化は無く新規(全系共通)。
 - **最初の formalization ターゲット**: ① `002/000`テンソル基底(= `Mat(2,ℂ)^{⊗M}` の表現を「抽象テンソル冪 vs Fin(2^M) Kronecker」で確定させる最重要設計判断を最初に固める) → ② `000/045` 共役=環準同型(自己完結・038を支える)。005 は級数ルートで 045 の後。
 - SageMath は反例探索/予想生成のオラクルとして併存(Sage↔Lean 自動ブリッジは無い)。有限代数的恒等式は Lean で `ring`/`norm_num`/`Finset.sum` により「証明」に格上げ可(注: ℝ/ℂ上は `decide`/`native_decide` 不可)。
+
+## Phase 3 着手結果(2026-07) — Lean 4 プロジェクト構築と最初の formalization
+
+実体は `exact-solution-of-2d-ising-model/lean/`(セットアップ・対応規約は `lean/README.md`)。
+
+- **環境**: elan 導入、`lean-toolchain` = `leanprover/lean4:v4.32.1`、mathlib4 を同名タグ
+  `v4.32.1` に固定(`lakefile.toml` の `rev` / `lake-manifest.json`)。`lake exe cache get` で
+  ビルド済み .olean を取得、`lake build` 成功。`.lake/` は追跡外。
+- **`Mat(2,ℂ)^{⊗M}` の表現(最重要設計判断) — 行列表現を採用**。
+  - 採用: `TensorPow M := Matrix (Fin M → Fin 2) (Fin M → Fin 2) ℂ`(添字型 = スピン配置)。
+  - 比較対象: `AbstractTensorPow M := ⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ`。
+  - **両者が ℂ-代数同型であることを証明済**(`Ising2D.tensorPowAlgEquiv`。同型写像は
+    `⨂ₜ x ↦ [(s,t) ↦ ∏ᵢ (xᵢ)_{s(i)t(i)}]` = Kronecker 積)。よって命題は相互移送できる。
+  - 決め手: 抽象テンソル冪には `NormedRing` インスタンスが無く **`NormedSpace.exp` が使えない**
+    (`infer_instance` 失敗を確認)。`V_1, V_2` が exp を含む本プロジェクトでは致命的。行列表現なら
+    `Matrix.exp_units_conj` 等がそのまま使える。加えて `Matrix.center_eq_scalar_image` で
+    `<centralizer_is_scalar>` が既存に帰着、行列式・跡・`Matrix.reindex` も利用可。
+- **形式化済み**: `<tensor_basis>`(`Basis.piTensorProduct` へ帰着)、
+  `<conjugation_is_ring_homomorphism>`(mathlib の `MulSemiringAction (ConjAct Rˣ) R` へ帰着、
+  加法性まで込みで環準同型)、`<scalar_identity_commutes>`、`<centralizer_is_scalar>`、
+  行列単位の積公式・単位元展開。**`sorry` は 0**(`lean/scripts/check-no-sorry.sh` で機械確認)。
+- **原文の要修正点(形式化で表面化)**:
+  - `002/000`(`<tensor_basis>`): 「各 `(i_1,…,i_m)` について `e_{i_1}⊗⋯⊗e_{i_m}` **は基底である**」は
+    誤り。基底なのは**族全体**であって個々の元ではない。また添字 `m` を「`V` の次元」と
+    「テンソル冪の階数」に二重使用している(独立な量なので分離が必要)。
+  - `000/045` Step 3: 合成則 `T_A ∘ T_B = T_{AB}` に `A, B` の正則性は不要
+    (mathlib の `Matrix.mul_inv_rev` は特異行列込みで成立するため)。原文が仮定しているのは冗長。
 
 ## 移行で表面化した原文(Typst)の要検証箇所(2026-07) — 別トラック
 

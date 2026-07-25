@@ -1,5 +1,71 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-25）: Phase 3 着手 — Lean 4 + mathlib4 の基盤構築と最初の formalization
+
+実体は `lean/`。セットアップ手順・人手証明との対応規約・表現方針の根拠は `lean/README.md` に集約した。
+**このセッションでは commit / push をしていない**（`lean/` 配下は作業ツリーに未コミットで存在）。
+
+### 環境（バージョン固定済み）
+
+- elan を新規導入（`~/.elan`）。`lean/lean-toolchain` = `leanprover/lean4:v4.32.1`。
+- mathlib4 を **同名タグ `v4.32.1`** に固定（`lean/lakefile.toml` の `rev`、`lean/lake-manifest.json`）。
+  toolchain とタグを揃えないとビルド済みキャッシュが効かないので、更新時は必ず両方同時に変える。
+- `lake exe cache get` → `lake build` 成功（2405 jobs）。`.lake/` はリポジトリ直下 `.gitignore` で除外済み。
+
+### `Mat(2,ℂ)^{⊗M}` の表現 — **行列表現を採用（最重要の設計判断）**
+
+| | Lean での型 | 実装名 |
+| --- | --- | --- |
+| 採用 | `Matrix (Fin M → Fin 2) (Fin M → Fin 2) ℂ` | `Ising2D.TensorPow` |
+| 比較 | `⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ` | `Ising2D.AbstractTensorPow` |
+
+**両者の ℂ-代数同型を証明済み**（`Ising2D.tensorPowAlgEquiv`）。同型写像は
+`⨂ₜ x ↦ [(s,t) ↦ ∏ᵢ (xᵢ)_{s(i)t(i)}]`（= Kronecker 積）。構成は `PiTensorProduct.liftAlgHom` +
+`Basis.piTensorProduct` と行列標準基底の突き合わせ。したがってどちらの表現で述べた命題も移送できる。
+
+採用根拠（実際に両方書いて確認した事実）:
+
+1. **抽象テンソル冪には `NormedRing` インスタンスが無く `NormedSpace.exp` が使えない**
+   （`infer_instance` が失敗することを確認）。`V_1, V_2` が `exp` を含む本プロジェクトでは致命的。
+   行列表現なら `Mathlib.Analysis.Normed.Algebra.MatrixExponential`（`Matrix.exp_units_conj` 等）が直接使える。
+2. `<centralizer_is_scalar>`（`002/003`）が mathlib の `Matrix.center_eq_scalar_image` に帰着して数行で済む。
+   人手証明の 4 ステップ（基底展開→積公式→係数比較→結論）が丸ごと既存で賄える。
+3. 添字型 `Fin M → Fin 2` がスピン配置そのものなので、サイト局所演算子 `σ^x_k` 等を
+   Kronecker 積の再帰なしに書ける。`Fin (2^M)` を使うと `finFunctionFinEquiv` の添字変換が散らばる
+   （必要なら `Matrix.reindex finFunctionFinEquiv` で移せる）。
+4. 行列式・跡・固有値・`Matrix.reindex` が全部使える（`008` の対角化 `P_μ, D_μ` で必要）。
+
+### 形式化した命題（`sorry` 0。`lean/scripts/check-no-sorry.sh` で機械確認）
+
+- `<tensor_basis>`（`002/000`）→ `Ising2D.tensorPowBasis` / `matTensorPowBasis`。
+  mathlib の `Basis.piTensorProduct` に完全に帰着（自前で積んだ部分は「テンソル冪への特殊化」のみ）。
+- `<conjugation_is_ring_homomorphism>`（`000/045`）→ `Ising2D.Conjugation.T_mul/T_one/T_add/T_comp/TMonoidHom`。
+  mathlib の `MulSemiringAction (ConjAct Rˣ) R` に帰着（加法性まで込みで環準同型が出る）。
+  原文の `Matrix.inv` 記法版も `matrix_conj_mul/one/comp` として併記。
+- `<scalar_identity_commutes>`（`002/001`）→ `Ising2D.scalar_identity_commutes`。
+- `<centralizer_is_scalar>`（`002/003`）→ `Ising2D.centralizer_is_scalar`（抽象側へ移送した版も併記）。
+- 補助: 行列単位の積公式 `E_IJ E_KL = δ_JK E_IL`（`Ising2D.E_mul_E`）、`I = Σ_P E_PP`（`one_eq_sum_E`）、
+  `exp(U A U⁻¹) = U (exp A) U⁻¹`（`matExp_units_conj`）。
+
+### 形式化で表面化した原文の要修正点
+
+- **`002/000`（`<tensor_basis>`）のステートメントが不正確**。
+  (a) 「各 `(i_1,…,i_m)` について `e_{i_1}⊗⋯⊗e_{i_m}` **は基底である**」は誤り。基底なのは**族全体**。
+  (b) 添字 `m` を「`V` の次元」と「テンソル冪の階数」に二重使用している（独立な量なので分離が必要）。
+  Lean 側では修正版（基底の添字集合 `ι`、階数 `M` を分離し、族が基底）を形式化してある。
+- **`000/045` Step 3 の正則性仮定は冗長**。合成則 `T_A ∘ T_B = T_{AB}` は
+  `Matrix.mul_inv_rev`（mathlib では特異行列込みで成立）から仮定なしに従う。
+
+### 次にやること（Lean 側）
+
+1. `000/046`（交換子と反交換子の恒等式）— 自己完結で依存が浅い。
+2. `004/000` の `σ^x_k, σ^y_k, σ^z_k, Z_m, Y_m, ε` を `TensorPow M` 上で定義し、
+   `006`（Z,Y の反交換関係）を証明する。
+3. `004/014`（`Z, Y` が `Mat(2,ℂ)^{⊗M}` を環として生成）。
+4. leanblueprint の導入検討は Phase 2（構造化TeX 移行）の完了状況を見てから。
+5. mathlib に無いことが分かっているもの: `Real.arccosh`（自前定義が必要）。
+   `Ad(exp X) = exp(ad X)` は `005/003, 007` の級数展開ルートで回避可能。
+
 ## 完了（2026-07-25）: Phase 2 T3/T4b — 章見出し・文書順・記号表を構造化TeXへ移行
 
 `main.typ` にしか無かった「章題」「文書順」「インライン記号表」を `structured-latex/content/` へ移した。
