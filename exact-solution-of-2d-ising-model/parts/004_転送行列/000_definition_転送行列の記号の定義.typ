@@ -17,7 +17,10 @@
 
 正し、$Y_(M+1) := Y_1$
 
-- $epsilon := sigma_1^x dots.c sigma_M^x = (sqrt(-1))^M Z_1 Y_1 + dots.c + Z_M Y_M in "Mat"(2, CC)^(times.o M)$
+- $epsilon := sigma_1^x dots.c sigma_M^x = (sqrt(-1))^M (Z_1 Y_1) (Z_2 Y_2) dots.c (Z_M Y_M) in "Mat"(2, CC)^(times.o M)$
+
+  右辺は $Z_m Y_m$ の**積**である（和ではない）。実際 $Z_m Y_m = sigma_m^z sigma_m^y = - sqrt(-1) sigma_m^x$ であるから、
+  $(sqrt(-1))^M (- sqrt(-1))^M sigma_1^x dots.c sigma_M^x = sigma_1^x dots.c sigma_M^x$ となって一致する。
 
 - $K_1^* := -1/2 log(tanh K_1) arrow.l.r sinh(2 K_1) sinh(2 K_1^*) = 1$
 - $K_2^* := -1/2 log(tanh K_2) arrow.l.r sinh(2 K_2) sinh(2 K_2^*) = 1$

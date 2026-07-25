@@ -75,7 +75,14 @@ export default defineBlocks([
           "）",
         ],
         [
-          math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1 + \cdots + Z_M Y_M) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          "（右辺は ",
+          math(String.raw`Z_m Y_m`),
+          " の積であって和ではない。",
+          math(String.raw`Z_m Y_m = \sigma_m^z \sigma_m^y = -i\,\sigma_m^x`),
+          " より ",
+          math(String.raw`i^M(-i)^M \sigma_1^x \cdots \sigma_M^x = \sigma_1^x \cdots \sigma_M^x`),
+          " で一致する）",
         ],
         [
           math(String.raw`K_1^* := -\tfrac{1}{2}\log(\tanh K_1) \iff \sinh(2K_1)\sinh(2K_1^*) = 1`),

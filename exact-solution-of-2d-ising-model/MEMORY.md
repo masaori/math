@@ -1,5 +1,56 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-25）: Phase 3 継続 — 転送行列の記号定義・Z/Y の反交換関係・生成定理を形式化
+
+`lake build` 成功・`lean/scripts/check-no-sorry.sh` exit 0（`sorry` 0、主要定理 43 件が `sorryAx` 非依存）。
+**このセッションでも commit / push はしていない。**
+
+### 追加したファイル
+
+| Lean | 人手証明 |
+| --- | --- |
+| `lean/Ising2D/Part000/Claim046_CommutatorViaAnticommutators.lean` | `000/046`（`<commutator_via_anticommutators>`） |
+| `lean/Ising2D/Part004/Definition000_TransferMatrixSymbols.lean` | `004/000`（`<def_transfer_matrix_symbols>`） |
+| `lean/Ising2D/Part004/Claim014_ZYGenerateAlgebra.lean` | `004/014`（`<Z_Y_generate_algebra>`） |
+| `lean/Ising2D/Part006/Claim000_AnticommutatorZY.lean` | `006/000`（`<anticommutator_of_Z_and_Y>`） |
+
+### 形式化した命題（主なもの）
+
+- `[a b, c] = a [b,c]₊ - [a,c]₊ b` を**任意の環**で（`Ising2D.commutator_via_anticommutators`）。
+  反交換子 `Ising2D.acomm` は mathlib に無いので自前定義。交換子は mathlib の Lie 括弧と一致することも示した。
+- Pauli 行列 `pauliX/Y/Z` と積公式（mathlib に Pauli 行列は**無い**ので自前）。
+- サイト局所作用素 `siteOp k : Mat(2,ℂ) →ₗ[ℂ] TensorPow M`。
+  `siteProd`（既存）の多重線型性から `MultilinearMap.toLinearMap` で作ったので、線型性はタダで付く。
+  `sigmaX/sigmaY/sigmaZ`、同サイトの積 `siteOp_mul_same`、異サイトの可換性 `siteOp_mul_comm`。
+- Jordan–Wigner 文字列 `Z m`, `Y m`（`m : Fin M`、0 始まり）、`xString`（`P_m = σ^x_1⋯σ^x_m`）、`epsilon`。
+  原文が場合分けで書く `Z_1 := σ^z_1` は、空文字列 `xString M 0 = 1` から自動で従う（特別扱い不要）。
+- **反交換関係 3 式すべて**: `anticomm_Z_Z`, `anticomm_Z_Y`, `anticomm_Y_Y`（原文は後ろ 2 つが TODO）。
+  核は `siteProd_anticomm_of_single_site`（1 サイトだけ反可換ならテンソル積は反交換）。
+  原文の「サイト μ の因子だけ符号が違う」という計算を、`MultilinearMap.map_smul_univ`
+  （各サイトのスカラーがテンソル積の外へ ∏ で出る）で一般化した。
+- **`Z_Y_generate_algebra`**: `Algebra.adjoin ℂ ({Z_m} ∪ {Y_m}) = ⊤`。
+  原文 Step 2（帰納法）はそのまま写した。Step 3 だけ経路が違い、原文の `{I,σ^x,σ^y,σ^z}^{⊗M}` 基底ではなく
+  既存の**行列単位基底** `matrixUnitBasis` を使った（どちらも `<tensor_basis>` の帰結で論法は同じ）。
+
+### 形式化で表面化した原文の要修正点（新規）
+
+- **`004/000` の `ε` の定義式が誤り**。`ε := σ^x_1 ⋯ σ^x_M = (√-1)^M Z_1 Y_1 + ⋯ + Z_M Y_M` の
+  右辺は**和ではなく積** `(√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`。
+  根拠: `Z_m Y_m = σ^z_m σ^y_m = -√-1 σ^x_m`（Lean: `Ising2D.Z_mul_Y_same`）なので積なら一致するが、
+  和だと `M = 2` で `(√-1)^2 (Z_1Y_1 + Z_2Y_2) = √-1 (σ^x_1 + σ^x_2) ≠ σ^x_1 σ^x_2` となり反例になる。
+  Lean 側は `ε := σ^x_1⋯σ^x_M`（左辺）を定義とし、積表示の再帰形 `xString_succ_eq` まで証明済み。
+- **`006/000` の証明が未完（TODO 2 箇所）**。`[Z_μ,Y_ν]₊` と `[Y_μ,Y_ν]₊` の計算が原文に無い。
+  Lean 側で 3 式とも証明したので、原文へ書き戻すべき。
+  なお `[Z_μ,Y_ν]₊ = 0` は `μ = ν` でも成立する（`σ^y σ^z = -σ^z σ^y` で対角も消える）。
+
+### 次にやること（Lean 側）
+
+1. `004/001`（`Z_m, Y_m` は線型独立）— `Z_Y_generate_algebra` と `matrixUnitBasis` が使える。
+2. `004/009` の `hat Z, hat Y` と `007`（その反交換関係）— `siteProd_anticomm_of_single_site` がそのまま効く。
+3. `004/002`（`V_1 V_2` を `Z, Y, ε` で表す）— `V_1, V_2` の定義自体がまだ未形式化。
+   `matExp` と `sigmaZ`/`sigmaX` で定義するところから。
+4. `ε = (√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`（積）の完全形。順序つき積（`List.prod` / `Finset.noncommProd`）の整備が要る。
+
 ## 完了（2026-07-25）: Phase 3 着手 — Lean 4 + mathlib4 の基盤構築と最初の formalization
 
 実体は `lean/`。セットアップ手順・人手証明との対応規約・表現方針の根拠は `lean/README.md` に集約した。
@@ -56,12 +107,11 @@
 - **`000/045` Step 3 の正則性仮定は冗長**。合成則 `T_A ∘ T_B = T_{AB}` は
   `Matrix.mul_inv_rev`（mathlib では特異行列込みで成立）から仮定なしに従う。
 
-### 次にやること（Lean 側）
+### 次にやること（Lean 側）※ 1–3 は上の「Phase 3 継続」で完了済み
 
-1. `000/046`（交換子と反交換子の恒等式）— 自己完結で依存が浅い。
-2. `004/000` の `σ^x_k, σ^y_k, σ^z_k, Z_m, Y_m, ε` を `TensorPow M` 上で定義し、
-   `006`（Z,Y の反交換関係）を証明する。
-3. `004/014`（`Z, Y` が `Mat(2,ℂ)^{⊗M}` を環として生成）。
+1. ~~`000/046`（交換子と反交換子の恒等式）~~ → 完了。
+2. ~~`004/000` の記号定義と `006`（Z,Y の反交換関係）~~ → 完了。
+3. ~~`004/014`（`Z, Y` が環として生成）~~ → 完了。
 4. leanblueprint の導入検討は Phase 2（構造化TeX 移行）の完了状況を見てから。
 5. mathlib に無いことが分かっているもの: `Real.arccosh`（自前定義が必要）。
    `Ad(exp X) = exp(ad X)` は `005/003, 007` の級数展開ルートで回避可能。

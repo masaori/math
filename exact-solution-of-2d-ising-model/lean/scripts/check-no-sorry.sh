@@ -51,6 +51,31 @@ targets=(
   Ising2D.Conjugation.matrix_conj_mul
   Ising2D.Conjugation.matrix_conj_one
   Ising2D.Conjugation.matrix_conj_comp
+  Ising2D.commutator_via_anticommutators
+  Ising2D.lie_mul_eq_acomm_sub_acomm
+  Ising2D.matrix_commutator_via_anticommutators
+  Ising2D.siteOp_one
+  Ising2D.siteOp_mul_same
+  Ising2D.siteOp_mul_comm
+  Ising2D.sigmaX_eq
+  Ising2D.jw_eq_xString_mul
+  Ising2D.Z_eq_xString_mul
+  Ising2D.Y_eq_xString_mul
+  Ising2D.xString_mul_self
+  Ising2D.jw_mul_jw_same
+  Ising2D.Z_mul_Y_same
+  Ising2D.xString_succ_eq
+  Ising2D.siteProd_smul_family
+  Ising2D.siteProd_anticomm_of_single_site
+  Ising2D.jw_sq
+  Ising2D.jw_anticomm
+  Ising2D.anticomm_Z_Z
+  Ising2D.anticomm_Z_Y
+  Ising2D.anticomm_Y_Y
+  Ising2D.matrix_two_decomp
+  Ising2D.siteProd_mem
+  Ising2D.E_eq_siteProd
+  Ising2D.Z_Y_generate_algebra
 )
 
 {
