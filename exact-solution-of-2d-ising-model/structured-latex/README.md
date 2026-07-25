@@ -24,6 +24,27 @@ The original `.typ` files remain untouched.
   from `main.typ` (`sourcePath: "main.typ"`, `sourceOrdinal` = 1-based position
   among that file's headings).
 
+### 本文とノートの使い分け（重要）
+
+`content/` は**出版物（論文・書籍）の本体**である。最終成果物の生成は `content/` だけを
+読むので、`notes/` に置いたものは構造上いっさい出版物に混入しない。
+
+- **正しさに必要ならそれは注記ではない。** 定義が意味をもつ条件、主張の適用範囲、
+  well-defined 性、主張から従う数学的帰結など、**それが無いと定義・主張・証明の正しさが
+  崩れる／主張の意味が変わる**ものは、注記ではなくブロックの `statement`（証明中の事柄なら
+  `proof`）に書く。
+- **`notes/` に置くのは参照用の素材だけ。** 補足計算、具体例、参考公式、原文由来のメモ、
+  物理的解釈、先行研究との比較など、出版の本文には必須でないが、証明以外の部分
+  （動機・背景・読み方の説明）を書くときに参照しうるもの。
+
+各ノートは `targets` で紐づけ先の定理・主張を**ラベル**で参照する（パス非依存）。
+紐づけ先にラベルが無ければ、まず対象ブロックにラベルを付けてから参照する。
+`tools/validate-content.mjs` は `targets` が `content/` の実在ラベルへ解決できることを検査し、
+解決できなければ落ちる（未解決 `ref` と同じ扱い）。
+
+ブロック側の `notes` フィールドはスキーマ上まだ存在するが、このリポジトリの `content/` では
+使っていない（すべて `statement` への格上げか `notes/` への移設で解消済み）。
+
 ### Document order
 
 **The array order is the canonical document order**: the document is
@@ -43,11 +64,12 @@ Work notes at the end of the old `main.typ` (`= 全体のノリ`, `= メモ`, th
 
 ## Files
 
-- `schema.mjs` - Runtime validators and small helpers.
+- `schema.mjs` - Runtime validators and small helpers (`defineBlocks` / `defineNotes`).
 - `schema.d.ts` - TypeScript declarations for the content model.
 - `tools/extract-source-blocks.mjs` - Repository-specific source index extractor.
-- `tools/validate-content.mjs` - Runtime validation for converted content.
-- `content/` - Converted block modules.
+- `tools/validate-content.mjs` - Runtime validation for converted content and notes.
+- `content/` - Converted block modules (the publication body).
+- `notes/` - Reference-only notes attached to blocks by label; never part of the output.
 
 ## Validation
 

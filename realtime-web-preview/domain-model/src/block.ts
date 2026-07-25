@@ -106,6 +106,22 @@ export type Block = z.infer<typeof blockSchema>
 
 export const blocksSchema = z.array(blockSchema)
 
+/**
+ * 参照用ノート（入力ソースの notes 側）。**文書本体ではない**。
+ * 本体（blocks）とは別ソースとして配信し、ビューア上でも本文と視覚的に区別する。
+ * `targets` は紐づけ先ブロックの**ラベル**（1件以上）。
+ */
+export const noteSchema = z.object({
+  id: z.string(),
+  targets: z.array(z.string()).min(1),
+  title: titleSchema.optional(),
+  sourcePath: z.string().optional(),
+  body: z.array(nodeSchema).default([]),
+})
+export type Note = z.infer<typeof noteSchema>
+
+export const notesSchema = z.array(noteSchema)
+
 /** ラベル文字列 → そのラベルを持つブロックの id。ref.target を id アンカーへ解決するための表。 */
 export type LabelIndex = Readonly<Record<string, string>>
 
@@ -123,4 +139,47 @@ export function buildLabelIndex(blocks: readonly Block[]): LabelIndex {
     }
   }
   return index
+}
+
+/** ノートの配置先。block.id ごとの一覧と、どのブロックにも解決できなかったもの。 */
+export type NotePlacement = {
+  byBlockId: Readonly<Record<string, Note[]>>
+  /** targets がどのブロックのラベルにも解決しなかったノート（黙って捨てず表示するため）。 */
+  orphans: Note[]
+}
+
+/**
+ * ノートを targets（ラベル）経由で block.id へ割り当てる。
+ * 同一ブロックに複数の targets が当たっても 1 回だけ現れる。
+ * 未解決 targets は捨てずに orphans へ集める（未解決 ref と同じ思想で、画面上で気付けるようにする）。
+ * ドメイン非依存の純関数。
+ */
+export function placeNotes(blocks: readonly Block[], notes: readonly Note[]): NotePlacement {
+  const labelIndex = buildLabelIndex(blocks)
+  const byBlockId: Record<string, Note[]> = {}
+  const orphans: Note[] = []
+
+  for (const note of notes) {
+    const blockIds = new Set<string>()
+    for (const target of note.targets) {
+      const blockId = labelIndex[target]
+      if (blockId !== undefined) {
+        blockIds.add(blockId)
+      }
+    }
+    if (blockIds.size === 0) {
+      orphans.push(note)
+      continue
+    }
+    for (const blockId of blockIds) {
+      const bucket = byBlockId[blockId]
+      if (bucket === undefined) {
+        byBlockId[blockId] = [note]
+      } else {
+        bucket.push(note)
+      }
+    }
+  }
+
+  return { byBlockId, orphans }
 }

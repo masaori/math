@@ -31,8 +31,9 @@
 <project-name>/
 ├── MEMORY.md              # プロジェクト固有の引き継ぎメモ（次回やること・未解決問題・完了済み）
 ├── structured-latex/      # 証明本体の正本（構造化テキスト）
-│   ├── schema.mjs         # ブロック/ノードのスキーマと検証
-│   ├── content/*.mjs      # 証明ブロック群（配列の並びが文書順の正本）
+│   ├── schema.mjs         # ブロック/ノート/ノードのスキーマと検証
+│   ├── content/*.mjs      # 証明ブロック群（配列の並びが文書順の正本。**最終成果物はここだけから生成**）
+│   ├── notes/*.mjs        # 参照用ノート（文書本体ではない。targets にラベルで紐づける）
 │   └── tools/             # validate-content.mjs 等
 ├── sagemath/              # SageMath による数値検証コード
 │   ├── _shared/defs.sage  # 共通定義
@@ -54,10 +55,19 @@
 - ブロックの `id` は `<章>_<連番>_<type>_<内容>`、`labels` に安定識別子（相互参照のキー）を置く
 - type は `definition`, `claim`, `theorem`, `remark`, `note`, `heading`
 - **相互参照・数値検証との対応はすべて `labels` を使う**（ファイルパスに依存させない）
+- ノート（`notes/`）の `id` は `note_<紐づけ先ブロックの id>_<内容>`、`targets` に紐づけ先のラベル
+
+### 本文とノートの使い分け
+
+- **正しさに必要ならそれは注記ではない。** 定義が意味をもつ条件・適用範囲・well-defined 性・
+  主張から従う数学的帰結は、ノートではなく `statement`（証明中の事柄なら `proof`）に書く
+- 補足計算・具体例・参考公式・原文由来のメモ・物理的解釈・先行研究との比較は `notes/` に置く
+  （出版の解説パートで参照する素材。最終成果物には載らない）
 
 ### 検証（変更したら必ず通す）
 
-- `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**を検査
+- `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**・
+  ノートの **未解決 targets** を検査（content と notes の両方）
 - `node sagemath/tools/verify-check-linkage.mjs` — 数値検証と証明の対応が切れていないかを検査
 - `lean/` があれば `lake build` と `bash lean/scripts/check-no-sorry.sh`
 

@@ -276,7 +276,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
     sourcePath: "_old/typst/parts/000_計算公式/018_definition_RRの角度表現.typ",
     sourceOrdinal: 19,
     title: { tex: "\\mathbb{R}\\text{の角度表現}" },
-    labels: [],
+    labels: ["angle_representation_of_rr"],
     statement: [
       paragraph([
         math("\\mathbb{R}"),
@@ -296,42 +296,6 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
       ),
       paragraph(["を入れたものとして定める。"]),
     ],
-    notes: [
-      paragraph([
-        "この積 ",
-        math("\\cdot_{\\mathrm{real}}"),
-        " は、例えば次のようになり、スカラー積とはならない。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\frac{1}{2}\cdot_{\mathrm{real}}\left(-2\cdot_{\mathrm{real}}[\pi/2]_{\sim_{\mathrm{angle}}}\right)
-&=
-\left[\frac{1}{2}\cdot s_{[0,2\pi)}\left(\left[-2\cdot s_{[0,2\pi)}([\pi/2]_{\sim_{\mathrm{angle}}})\right]_{\sim_{\mathrm{angle}}}\right)\right]_{\sim_{\mathrm{angle}}}
-\\
-&=
-\left[\frac{1}{2}\cdot s_{[0,2\pi)}([-2\cdot\pi/2]_{\sim_{\mathrm{angle}}})\right]_{\sim_{\mathrm{angle}}}
-\\
-&=
-\left[\frac{1}{2}\cdot s_{[0,2\pi)}([-\pi]_{\sim_{\mathrm{angle}}})\right]_{\sim_{\mathrm{angle}}}
-\\
-&=
-\left[\frac{1}{2}\cdot\pi\right]_{\sim_{\mathrm{angle}}}
-\\
-&=
-\pi/2
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\left(\frac{1}{2}\cdot(-2)\right)\cdot_{\mathrm{real}}[\pi/2]_{\sim_{\mathrm{angle}}}
-&=
-\left[-1\cdot s_{[0,2\pi)}([\pi/2]_{\sim_{\mathrm{angle}}})\right]_{\sim_{\mathrm{angle}}}
-\\
-&=
-[-1\cdot\pi/2]_{\sim_{\mathrm{angle}}}
-\\
-&=
--\pi/2
-\end{aligned}`),
-      paragraph(["より、スカラー積とはならない。"]),
-    ],
     conversion: {
       status: "converted",
       notes: [
@@ -345,7 +309,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
     sourcePath: "_old/typst/parts/000_計算公式/019_definition_極座標表現の同値類.typ",
     sourceOrdinal: 20,
     title: { text: "極座標表現の同値類" },
-    labels: [],
+    labels: ["polar_equivalence_class"],
     statement: [
       paragraph([
         math("\\mathbb{R}_{\\ge 0}\\times\\mathbb{R}"),

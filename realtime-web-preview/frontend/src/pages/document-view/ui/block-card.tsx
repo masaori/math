@@ -1,6 +1,7 @@
-import type { TheoremLikeBlock, TheoremLikeKind } from '@rwp/domain-model'
+import type { Note, TheoremLikeBlock, TheoremLikeKind } from '@rwp/domain-model'
 import type { ReactElement } from 'react'
 import { NodeList, TitleView } from './nodes'
+import { AttachedNotes } from './note-view'
 
 const kindLabels: Record<TheoremLikeKind, string> = {
   theorem: 'Theorem',
@@ -18,8 +19,17 @@ const kindAccent: Record<TheoremLikeKind, string> = {
   note: 'border-l-slate-400',
 }
 
-/** 定理型ブロック1件を kind 別体裁で描画する。 */
-export const BlockCard = ({ block }: { block: TheoremLikeBlock }): ReactElement => {
+/**
+ * 定理型ブロック1件を kind 別体裁で描画する。
+ * `notes` はこのブロックのラベルに紐づく参照用ノート（文書本体ではない）。
+ */
+export const BlockCard = ({
+  block,
+  notes,
+}: {
+  block: TheoremLikeBlock
+  notes: Note[]
+}): ReactElement => {
   const title = block.title ?? null
   const hasProof = block.proof !== undefined && block.proof.length > 0
   const hasNotes = block.notes !== undefined && block.notes.length > 0
@@ -61,6 +71,8 @@ export const BlockCard = ({ block }: { block: TheoremLikeBlock }): ReactElement 
           <NodeList nodes={block.notes ?? []} />
         </div>
       ) : null}
+
+      <AttachedNotes notes={notes} />
 
       <footer className="mt-2 text-[11px] text-slate-400">{block.sourcePath}</footer>
     </section>

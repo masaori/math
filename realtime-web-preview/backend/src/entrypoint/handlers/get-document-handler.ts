@@ -6,6 +6,7 @@ import {
 } from '@rwp/domain-model'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { BlockSourceGateway } from '../../preview/domain/interfaces/gateways/block-source-gateway.js'
+import type { NoteSourceGateway } from '../../preview/domain/interfaces/gateways/note-source-gateway.js'
 import { getDocument } from '../../preview/domain/usecases/get-document.js'
 
 const statusForError = (error: LoadDocumentError): number => {
@@ -28,13 +29,14 @@ const statusForError = (error: LoadDocumentError): number => {
  * usecase の Result を api-contract 準拠のレスポンスにシリアライズするだけ（薄く保つ）。
  */
 export const makeGetDocumentHandler =
-  (blockSource: BlockSourceGateway) =>
+  (blockSource: BlockSourceGateway, noteSource: NoteSourceGateway) =>
   async (_request: FastifyRequest, reply: FastifyReply): Promise<void> => {
-    const result = await getDocument(blockSource)
+    const result = await getDocument(blockSource, noteSource)
 
     if (result.success) {
       const body: DocumentResponseBody = {
         blocks: result.data.blocks,
+        notes: result.data.notes,
         generatedAt: new Date().toISOString(),
         sourceLabel: result.data.sourceLabel,
       }

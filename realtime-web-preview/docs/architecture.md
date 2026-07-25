@@ -60,7 +60,7 @@ realtime-web-preview/
 │   └── architecture.md       # 本ファイル
 ├── domain-model/             # @rwp/domain-model（SSOT。何にも依存しない）
 │   └── src/
-│       ├── block.ts          # Block / Node の Zod schema + 型（入力ソース契約）
+│       ├── block.ts          # Block / Node / Note の Zod schema + 型（入力ソース契約）
 │       ├── api-contract.ts   # DocumentResponse / error code / SSE event の型
 │       ├── result.ts         # Result<T, E>
 │       └── index.ts
@@ -70,13 +70,16 @@ realtime-web-preview/
 │       │   ├── domain/
 │       │   │   ├── interfaces/gateways/
 │       │   │   │   ├── block-source-gateway.ts     # 構造化テキストソース読込 I/F
+│       │   │   │   ├── note-source-gateway.ts      # 参照用ノートソース読込 I/F（任意ソース）
 │       │   │   │   └── source-watcher-gateway.ts   # 変更監視 I/F
 │       │   │   └── usecases/
-│       │   │       ├── get-document.ts
+│       │   │       ├── get-document.ts             # 本体 + 参照用ノートを束ねて返す
 │       │   │       └── subscribe-to-changes.ts
 │       │   └── adapter/gateways/
+│       │       ├── mjs-module-loader.ts            # .mjs の動的 import（スキーマ非依存の共通処理）
 │       │       ├── mjs-block-source-gateway.ts     # .mjs を動的 import + Zod safeParse
-│       │       └── fs-source-watcher-gateway.ts    # fs.watch
+│       │       ├── mjs-note-source-gateway.ts      # ノート dir（無くてもよい）を同様に読む
+│       │       └── fs-source-watcher-gateway.ts    # fs.watch（本体 dir とノート dir を監視）
 │       ├── entrypoint/
 │       │   ├── server.ts     # Fastify 構築・DI・静的配信
 │       │   └── handlers/
@@ -159,8 +162,14 @@ LoadDocumentError =
 ## 8. 受け入れ基準との対応
 
 [requirements.md](./requirements.md) §9 の各項目を、上記 §5–§7 の構成で満たす。
-入力ソースの差し替え（F-7）は §5 の `config.ts`（env/CLI で source dir 指定）で実現する。
-リファレンス入力は `exact-solution-of-2d-ising-model/structured-latex/content/`。
+入力ソースの差し替え（F-7）は §5 の `config.ts`（env/CLI で source dir / notes dir 指定）で実現する。
+リファレンス入力は `exact-solution-of-2d-ising-model/structured-latex/content/`、
+参照用ノートは同 `structured-latex/notes/`（任意。無ければノート 0 件）。
+
+参照用ノートは**文書本体ではない**（最終成果物は content 側だけから生成される）ため、
+API でも `blocks` と別フィールド `notes` で運び、FE では `placeNotes`（domain-model の純関数）で
+`targets`（ラベル）→ ブロック id に解決して、該当ブロック内に折りたたみ表示する。
+どのブロックにも解決できなかったノートは捨てずに警告表示する（未解決 ref と同じ思想）。
 
 ## 9. 本ツールで「適用対象なし」とした機構（明示）
 

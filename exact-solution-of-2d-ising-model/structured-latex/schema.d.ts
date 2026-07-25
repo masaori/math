@@ -62,7 +62,24 @@ export type HeadingBlock = {
 /** 文書を構成するブロック。配列の並びが文書順の正準表現。 */
 export type ConvertedBlock = TheoremLikeBlock | HeadingBlock;
 
+/**
+ * 参照用ノート（`notes/*.mjs`）。**文書本体ではない**。
+ * 最終成果物（論文・書籍）の生成は `content/` だけを読むため、ここに置いたものは
+ * 出版物に混入しない。出版の本文で述べる必要がある事柄は statement に書く
+ * （「正しさに必要ならそれは注記ではない」）。
+ */
+export type Note = {
+  id: string;
+  /** 紐づける定理・主張の**ラベル**（1件以上必須。パス非依存）。 */
+  targets: string[];
+  title?: Title;
+  /** 由来となった原文のパス（任意）。 */
+  sourcePath?: string;
+  body: Node[];
+};
+
 export function defineBlocks(blocks: ConvertedBlock[]): ConvertedBlock[];
+export function defineNotes(notes: Note[]): Note[];
 export function text(value: string): Node;
 export function math(tex: string): Node;
 export function displayMath(tex: string): Node;

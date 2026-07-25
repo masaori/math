@@ -29,7 +29,7 @@ export default defineBlocks([
     sourcePath: "_old/typst/parts/001_2次元ising模型の分配関数/001_definition_2次元ising模型の分配関数.typ",
     sourceOrdinal: 2,
     title: { text: "2次元ising模型の分配関数" },
-    labels: [],
+    labels: ["def_partition_function_2d_ising"],
     statement: [
       paragraph([
         math(String.raw`Z : \mathbb{R}_{>0} \times \mathbb{R}_{>0} \to \mathbb{R}_{>0}`),
@@ -43,10 +43,6 @@ export default defineBlocks([
         String.raw`Z(J, J') := \sum_{s \in \mathfrak{S}} \exp\!\left(\sum_{\substack{i\in\{1,\dots,M\}\\j\in\{1,\dots,N\}}} \bigl(J\,s(i,j)s(i+1,j) + J'\,s(i,j)s(i,j+1)\bigr)\right)`,
       ),
     ],
-    notes: [
-      paragraph(["", math(String.raw`s`), " は格子の状態（スピンの配置）を表している。"]),
-      paragraph([math(String.raw`\mathfrak{S}`), " は全ての状態の集合である。"]),
-    ],
     conversion: { status: "converted" },
   },
   {
@@ -55,7 +51,7 @@ export default defineBlocks([
     sourcePath: "_old/typst/parts/001_2次元ising模型の分配関数/002_definition_転送行列.typ",
     sourceOrdinal: 3,
     title: { text: "転送行列" },
-    labels: [],
+    labels: ["def_transfer_matrix"],
     statement: [
       paragraph([
         math(String.raw`V_1, V_2 \in \mathrm{Mat}(2^N, \mathbb{C})`),
@@ -71,11 +67,6 @@ export default defineBlocks([
 (V_2)_{\mu,\mu'} &:= \exp\!\left(\sum_{j\in\{1,\dots,N\}} J'\,\mu(j)\,\mu'(j)\right)
 \end{aligned}`,
       ),
-    ],
-    notes: [
-      paragraph([math(String.raw`V_1`), " は格子のある行内の横の相互作用を表している。"]),
-      paragraph([math(String.raw`V_2`), " はそれを縦に積み上げた時の隣り合う行同士の相互作用を表している。"]),
-      paragraph([math(String.raw`V_1`), " は対角行列になっている。"]),
     ],
     conversion: { status: "converted" },
   },

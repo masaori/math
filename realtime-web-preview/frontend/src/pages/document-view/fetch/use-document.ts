@@ -80,6 +80,7 @@ const toLoadable = (
     status: 'ready',
     value: {
       blocks: query.data.blocks,
+      notes: query.data.notes,
       meta: { generatedAt: query.data.generatedAt, sourceLabel: query.data.sourceLabel },
     },
   }

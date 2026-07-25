@@ -1,8 +1,15 @@
-import { type Block, type LoadDocumentError, buildLabelIndex } from '@rwp/domain-model'
+import {
+  type Block,
+  type LoadDocumentError,
+  type Note,
+  buildLabelIndex,
+  placeNotes,
+} from '@rwp/domain-model'
 import type { ReactElement } from 'react'
 import type { ConnectionStatus, DocumentViewPageDomainModel } from '../model/page-domain-model'
 import { BlockCard } from './block-card'
 import { HeadingView } from './heading-view'
+import { OrphanNotes } from './note-view'
 import { LabelIndexProvider } from './ref-resolver'
 
 const errorMessages: Record<LoadDocumentError['code'], string> = {
@@ -24,8 +31,12 @@ const ConnectionBadge = ({ status }: { status: ConnectionStatus }): ReactElement
 }
 
 /** ブロック1件を kind に応じて（章見出し / 定理型ブロック）描画する。 */
-const BlockView = ({ block }: { block: Block }): ReactElement =>
-  block.kind === 'heading' ? <HeadingView heading={block} /> : <BlockCard block={block} />
+const BlockView = ({ block, notes }: { block: Block; notes: Note[] }): ReactElement =>
+  block.kind === 'heading' ? (
+    <HeadingView heading={block} />
+  ) : (
+    <BlockCard block={block} notes={notes} />
+  )
 
 const ErrorPanel = ({ error }: { error: LoadDocumentError }): ReactElement => (
   <div className="rounded-md border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
@@ -44,6 +55,21 @@ const ErrorPanel = ({ error }: { error: LoadDocumentError }): ReactElement => (
     ) : null}
   </div>
 )
+
+/** 本文と参照用ノートを描画する（ノートは紐づけ先ブロックの中に折りたたんで置く）。 */
+const DocumentBody = ({ blocks, notes }: { blocks: Block[]; notes: Note[] }): ReactElement => {
+  const placement = placeNotes(blocks, notes)
+  return (
+    <LabelIndexProvider value={buildLabelIndex(blocks)}>
+      <div className="space-y-4">
+        {blocks.map((block) => (
+          <BlockView key={block.id} block={block} notes={placement.byBlockId[block.id] ?? []} />
+        ))}
+      </div>
+      <OrphanNotes notes={placement.orphans} />
+    </LabelIndexProvider>
+  )
+}
 
 /** PageDomainModel を Props で受け取り描画する（外界を一切知らない）。 */
 export const DocumentView = ({
@@ -74,15 +100,10 @@ export const DocumentView = ({
       <>
         <p className="mb-4 text-xs text-slate-400">
           {document.value.meta.sourceLabel} · {document.value.blocks.length} blocks ·{' '}
+          {document.value.notes.length} notes（参照用・最終成果物には載りません） ·{' '}
           {document.value.meta.generatedAt}
         </p>
-        <LabelIndexProvider value={buildLabelIndex(document.value.blocks)}>
-          <div className="space-y-4">
-            {document.value.blocks.map((block) => (
-              <BlockView key={block.id} block={block} />
-            ))}
-          </div>
-        </LabelIndexProvider>
+        <DocumentBody blocks={document.value.blocks} notes={document.value.notes} />
       </>
     ) : null}
   </div>

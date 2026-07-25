@@ -4,6 +4,7 @@ import Fastify from 'fastify'
 import { loadConfig } from '../config.js'
 import { FsSourceWatcherGateway } from '../preview/adapter/gateways/fs-source-watcher-gateway.js'
 import { MjsBlockSourceGateway } from '../preview/adapter/gateways/mjs-block-source-gateway.js'
+import { MjsNoteSourceGateway } from '../preview/adapter/gateways/mjs-note-source-gateway.js'
 import { makeEventsHandler } from './handlers/events-handler.js'
 import { makeGetDocumentHandler } from './handlers/get-document-handler.js'
 
@@ -12,9 +13,11 @@ const app = Fastify({ logger: true })
 
 // DI: adapter 実装を domain の interface に注入する。
 const blockSource = new MjsBlockSourceGateway(config.sourceDir, config.sourceLabel)
-const watcher = new FsSourceWatcherGateway(config.sourceDir)
+const noteSource = new MjsNoteSourceGateway(config.notesDir)
+// 本体と参照用ノートのどちらの変更でもライブ更新する。
+const watcher = new FsSourceWatcherGateway([config.sourceDir, config.notesDir])
 
-app.get('/api/document', makeGetDocumentHandler(blockSource))
+app.get('/api/document', makeGetDocumentHandler(blockSource, noteSource))
 app.get('/api/events', makeEventsHandler(watcher))
 
 // frontend ビルド成果物を同一ポートで静的配信する（未ビルドでも API は動く）。
@@ -37,6 +40,7 @@ if (existsSync(config.staticDir)) {
 try {
   await app.listen({ host: config.host, port: config.port })
   app.log.info(`source: ${config.sourceDir}`)
+  app.log.info(`notes: ${config.notesDir}`)
 } catch (cause) {
   app.log.error(cause)
   process.exit(1)

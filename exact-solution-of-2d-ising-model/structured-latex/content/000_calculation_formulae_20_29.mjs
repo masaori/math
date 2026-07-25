@@ -1,23 +1,9 @@
 import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
 
+// 旧 calculation_formulae_021（極座標表現の同値類の性質の remark）は、定義から直ちに従う
+// 読み手向けの補足であり出版本文には載らないため、
+// notes/000_calculation_formulae.mjs（targets: polar_equivalence_class）へ移設した。
 export default defineBlocks([
-  {
-    id: "calculation_formulae_021_remark_polar_equivalence_class_properties",
-    kind: "remark",
-    sourcePath: "_old/typst/parts/000_計算公式/020_remark_極座標表現の同値類の性質.typ",
-    sourceOrdinal: 21,
-    title: null,
-    labels: [],
-    statement: [
-      displayMath(String.raw`[(r,\theta)]_{\sim} = [(r,\theta + 2n\pi)]_{\sim}\quad \forall n \in \mathbb{Z}`),
-      displayMath(
-        String.raw`[(0,\theta)]_{\sim} = [(0,\theta')]_{\sim}\quad \forall \theta,\theta' \in \mathbb{R}`,
-      ),
-    ],
-    conversion: {
-      status: "converted",
-    },
-  },
   {
     id: "calculation_formulae_022_definition_operations_on_polar_representation",
     kind: "definition",
@@ -176,8 +162,11 @@ export default defineBlocks([
       displayMath(
         String.raw`\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim}) := (r\cos\theta,\ r\sin\theta)`,
       ),
-    ],
-    notes: [
+      paragraph([
+        "この右辺は同値類の代表元の取り方によらないので、",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " は well-defined である。実際、",
+      ]),
       displayMath(
         String.raw`[\theta]_{\sim_{\mathrm{angle}}}=[\theta']_{\sim_{\mathrm{angle}}}
 \Rightarrow \exists n\in\mathbb{Z}\ \text{s.t.}\ \theta-\theta'=2n\pi
@@ -186,6 +175,10 @@ export default defineBlocks([
     ],
     conversion: {
       status: "converted",
+      notes: [
+        "定義の well-defined 性（代表元によらないこと）は、原文では note に置かれていたが" +
+          "定義の妥当性そのものなので statement へ格上げした。",
+      ],
     },
   },
   {
@@ -197,7 +190,7 @@ export default defineBlocks([
     title: {
       tex: "\\phi_{\\mathrm{cartesian}}\\text{の同型性}",
     },
-    labels: [],
+    labels: ["isomorphism_of_phi_cartesian"],
     statement: [
       paragraph(["（TODO: 原稿注記「体として同型を示す」あり）"]),
       paragraph([
@@ -343,48 +336,6 @@ export default defineBlocks([
         "、",
         math(String.raw`(-x)^2=x^2`),
         " による。",
-      ]),
-    ],
-    notes: [
-      paragraph([
-        "（原文の note の補足計算）",
-        math(String.raw`x<0`),
-        " のとき、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sin(\arctan(y/x))
-&= \sin\!\left(\arcsin\!\frac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) \\
-&= \frac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
-&= \frac{y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
-&= \frac{y}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
-&= \frac{y}{-\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}} \\
-&= -\frac{y}{\sqrt{x^2(1+(y/x)^2)}^{\,\mathbb{R}_{\geq 0}}} \\
-&= -\frac{y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`x<0`),
-        " における符号の根拠は、",
-        math(String.raw`-\sqrt{a}^{\,\mathbb{R}_{\geq 0}}=x`),
-        " となる ",
-        math(String.raw`a`),
-        " が ",
-        math(String.raw`\sqrt{a}^{\,\mathbb{R}_{\geq 0}}=-x`),
-        "、両辺を自乗して ",
-        math(String.raw`a=(-x)^2`),
-        "、すなわち ",
-        math(String.raw`x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}`),
-        " であること。",
-      ]),
-      paragraph([
-        "また例えば ",
-        math(String.raw`(x,y)=(-1/2,\ \sqrt{3}^{\,\mathbb{R}_{\geq 0}}/2)`),
-        " のとき ",
-        math(String.raw`\cos(\arctan(y/x)+\pi)=-\cos(\arctan(-\sqrt{3}^{\,\mathbb{R}_{\geq 0}}))=-\sqrt{1-\tfrac{3}{4}}^{\,\mathbb{R}_{\geq 0}}=-\tfrac{1}{2}`),
-        "、",
-        math(String.raw`\sin(\arctan(y/x))=-\sqrt{3}^{\,\mathbb{R}_{\geq 0}}/2`),
-        "。",
       ]),
     ],
     conversion: {

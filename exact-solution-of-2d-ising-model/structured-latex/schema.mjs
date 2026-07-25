@@ -37,6 +37,50 @@ export function defineBlocks(blocks) {
   return blocks;
 }
 
+/**
+ * 参照用ノートの列を定義する（`notes/*.mjs` から使う）。
+ *
+ * **ノートは文書本体ではない。** 最終成果物（論文・書籍）の生成は `content/` だけを読むので、
+ * ここに置いたものは構造上いっさい出版物に混入しない。出版の本文で述べる必要がある事柄は
+ * ノートではなくブロックの `statement` に書くこと（「正しさに必要ならそれは注記ではない」）。
+ *
+ * 各ノートは `targets` で関連する定理・主張を**ラベル**で参照する（パス非依存）。
+ * 用途は、出版物の証明以外の部分（動機・背景・読み方の説明）を書くときの素材。
+ */
+export function defineNotes(notes) {
+  if (!Array.isArray(notes)) {
+    throw new TypeError("defineNotes expects an array");
+  }
+  for (const note of notes) {
+    validateNote(note);
+  }
+  return notes;
+}
+
+function validateNote(note) {
+  assertObject(note, "note");
+  assertString(note.id, "note.id");
+  if (!Array.isArray(note.targets)) {
+    throw new TypeError(`${note.id}.targets must be an array of labels`);
+  }
+  if (note.targets.length === 0) {
+    throw new TypeError(
+      `${note.id}.targets must reference at least one label ` +
+        "（ノートは必ず関連する定理・主張に紐づける）",
+    );
+  }
+  for (const target of note.targets) {
+    assertString(target, `${note.id}.targets[]`);
+  }
+  if (note.title !== null && note.title !== undefined) {
+    validateTitle(note.title, `${note.id}.title`);
+  }
+  if (note.sourcePath !== undefined) {
+    assertString(note.sourcePath, `${note.id}.sourcePath`);
+  }
+  validateNodes(note.body ?? [], `${note.id}.body`);
+}
+
 export function text(value) {
   return { type: "text", value };
 }

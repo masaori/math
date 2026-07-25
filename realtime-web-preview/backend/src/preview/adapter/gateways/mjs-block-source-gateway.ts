@@ -1,7 +1,4 @@
 import { existsSync } from 'node:fs'
-import { readdir } from 'node:fs/promises'
-import path from 'node:path'
-import { pathToFileURL } from 'node:url'
 import {
   type Block,
   type LoadDocumentError,
@@ -15,6 +12,7 @@ import type {
   BlockSourceGateway,
   LoadedDocument,
 } from '../../domain/interfaces/gateways/block-source-gateway.js'
+import { loadMjsDefaultExports } from './mjs-module-loader.js'
 
 /**
  * `.mjs` 形式の構造化テキストソースを読む adapter。
@@ -34,38 +32,27 @@ export class MjsBlockSourceGateway implements BlockSourceGateway {
       return err({ code: 'source_not_found' })
     }
 
-    let fileNames: string[]
-    try {
-      const entries = await readdir(this.sourceDir, { withFileTypes: true })
-      fileNames = entries
-        .filter((entry) => entry.isFile() && entry.name.endsWith('.mjs'))
-        .map((entry) => entry.name)
-        .sort()
-    } catch (cause) {
-      return err({ code: 'source_read_error', message: messageOf(cause) })
+    // 動的 import のモジュールキャッシュを跨ぐため、読み込みごとにバージョンを進める。
+    this.importVersion += 1
+    const outcome = await loadMjsDefaultExports(this.sourceDir, this.importVersion)
+    if (!outcome.ok) {
+      const { failure } = outcome
+      return err({
+        code: 'source_read_error',
+        message:
+          failure.kind === 'read_error'
+            ? failure.message
+            : `${failure.fileName}: ${failure.message}`,
+      })
     }
-
-    if (fileNames.length === 0) {
+    if (outcome.modules.length === 0) {
       return err({ code: 'source_empty' })
     }
 
-    // 動的 import のモジュールキャッシュを跨ぐため、読み込みごとにバージョンを進める。
-    this.importVersion += 1
     const blocks: Block[] = []
     const issues: ValidationIssue[] = []
 
-    for (const fileName of fileNames) {
-      const absolutePath = path.join(this.sourceDir, fileName)
-      const moduleUrl = `${pathToFileURL(absolutePath).href}?v=${this.importVersion}`
-
-      let defaultExport: unknown
-      try {
-        const imported = (await import(moduleUrl)) as { default?: unknown }
-        defaultExport = imported.default
-      } catch (cause) {
-        return err({ code: 'source_read_error', message: `${fileName}: ${messageOf(cause)}` })
-      }
-
+    for (const { fileName, defaultExport } of outcome.modules) {
       const parsed = blocksSchema.safeParse(defaultExport)
       if (!parsed.success) {
         for (const issue of parsed.error.issues) {
@@ -85,6 +72,3 @@ export class MjsBlockSourceGateway implements BlockSourceGateway {
     return ok({ blocks, sourceLabel: this.sourceLabel })
   }
 }
-
-const messageOf = (cause: unknown): string =>
-  cause instanceof Error ? cause.message : String(cause)

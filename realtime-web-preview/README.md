@@ -39,20 +39,24 @@ pnpm start
 
 ### 入力ソースの差し替え
 
-既定はリファレンス入力（`exact-solution-of-2d-ising-model/structured-latex/content`）。
-環境変数または CLI 引数で差し替えられる。
+既定はリファレンス入力（`exact-solution-of-2d-ising-model/structured-latex/content`、
+参照用ノートは同 `structured-latex/notes`）。環境変数または CLI 引数で差し替えられる。
 
 ```sh
 RWP_SOURCE_DIR=/path/to/content RWP_PORT=4321 pnpm start
 # または
-node backend/dist/entrypoint/server.js --source /path/to/content --port 4321 --host 0.0.0.0
+node backend/dist/entrypoint/server.js --source /path/to/content --notes /path/to/notes --port 4321 --host 0.0.0.0
 ```
 
 | 設定 | env | CLI | 既定 |
 |---|---|---|---|
 | 入力ソース dir | `RWP_SOURCE_DIR` | `--source` | structured-latex/content |
+| 参照用ノート dir | `RWP_NOTES_DIR` | `--notes` | structured-latex/notes（`--source` 指定時はその隣の `notes`） |
 | ポート | `RWP_PORT` | `--port` | 4321 |
 | バインド host | `RWP_HOST` | `--host` | 0.0.0.0 |
+
+参照用ノート dir は**任意**で、無ければノート 0 件として動く。ノートは文書本体ではないため、
+画面では紐づけ先ブロックの中に折りたたみで表示し、「参照用ノート・最終成果物には載りません」と明示する。
 
 ## 開発
 

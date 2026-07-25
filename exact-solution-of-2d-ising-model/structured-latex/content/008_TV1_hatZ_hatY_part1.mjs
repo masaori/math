@@ -47,7 +47,7 @@ export default defineBlocks([
         ref("H1_H2_via_hatZ_hatY"),
         " の表式と ",
         ref("anticommutator_of_hat_Z_and_hat_Y"),
-        " の反交換関係（下記 notes 参照）を用いる。",
+        " の反交換関係を用いる。",
       ]),
       paragraph([
         "(1) ",
@@ -351,21 +351,6 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
 \end{aligned}`,
       ),
     ],
-    notes: [
-      paragraph(["証明で用いる表式と反交換関係（原文 note）："]),
-      displayMath(
-        String.raw`\begin{aligned}
-H_1^{(\pm)} &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right) \\
-H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
-[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}} \\
-[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\mp)}]_+ &= \overbrace{2M\,\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(\mu+\nu)}\cdot 2\,I_{(\mathbb{C}^2)^{\otimes M}}\right) \\
-[\hat{Z}_\mu^{(\pm)},\hat{Y}_\nu]_+ &= 0 \\
-[\hat{Y}_\mu,\hat{Y}_\nu]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I \\
-\sum_{j=1}^{M} e^{k\cdot\frac{2\pi i j}{M}} &= M\,\delta^M_{(k,0)}
-\end{aligned}`,
-      ),
-    ],
     conversion: {
       status: "converted",
       notes: [
@@ -425,135 +410,8 @@ H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
       paragraph([
         "帰納法の各ステップでは ",
         ref("commutator_of_H_and_Z_Y"),
-        " を繰り返し適用する。原文 note の具体例 ",
-        math(String.raw`n = 0,1,2,3,4`),
-        " は下記 notes を参照。",
+        " を繰り返し適用する。",
       ]),
-    ],
-    notes: [
-      paragraph([
-        "原文 note の具体例（",
-        ref("commutator_of_H_and_Z_Y"),
-        " を繰り返し適用）：",
-      ]),
-      paragraph(["(h1.z) ", math(String.raw`n=0`), "："]),
-      displayMath(
-        String.raw`\underbrace{[K_1 H_1^{(\pm)},\dots,[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}]\dots]}_{0\text{ times}}
-= \hat{Z}_\mu^{(\pm)}`,
-      ),
-      paragraph(["(h1.z) ", math(String.raw`n=1`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]
-&= K_1[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
-&= K_1\cdot 2\cdot\begin{cases}
-\hat{Y}_M & (\mu = -M) \\
-e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
-e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
-\hat{Y}_M & (\mu = M)
-\end{cases} \\
-&= K_1\cdot 2\cdot\left(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu\right)
-   \quad (\because \hat{Y}\text{ の }M\text{ 周期性})
-\end{aligned}`,
-      ),
-      paragraph(["(h1.z) ", math(String.raw`n=2`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, [K_1 H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]]
-&= [K_1 H_1^{(\pm)},\ K_1\cdot 2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu)] \\
-&= K_1^2\cdot 2\cdot e^{-i\frac{2\pi\mu}{M}}[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1^2\cdot 2\cdot e^{-i\frac{2\pi\mu}{M}}\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^2\cdot 2^2\cdot(-1)^1\cdot e^{\overbrace{-i\frac{2\pi\mu}{M}-i\frac{2\pi(-\mu)}{M}}^{0}}\hat{Z}_\mu^{(\pm)} \\
-&= K_1^2\cdot 2^2\cdot(-1)^1\cdot\hat{Z}_\mu^{(\pm)}
-\end{aligned}`,
-      ),
-      paragraph(["(h1.z) ", math(String.raw`n=3`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}]]}^{n=2}]
-&= [K_1 H_1^{(\pm)},\ K_1^2\cdot 2^2\cdot(-1)^1\cdot\hat{Z}_\mu^{(\pm)}] \\
-&= K_1\cdot K_1^2\cdot 2^2\cdot(-1)^1\cdot[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
-&= K_1\cdot K_1^2\cdot 2^2\cdot(-1)^1\cdot\left(2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu)\right) \\
-&= K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
-\end{aligned}`,
-      ),
-      paragraph(["(h1.z) ", math(String.raw`n=4`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}]]]}^{n=3}]
-&= [K_1 H_1^{(\pm)},\ K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu] \\
-&= K_1\cdot K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1\cdot K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^4\cdot 2^4\cdot(-1)^2\cdot e^{-i\frac{2\pi\mu}{M}}e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)} \\
-&= K_1^4\cdot 2^4\cdot(-1)^2\cdot e^{\overbrace{-i\frac{2\pi\mu}{M}-i\frac{2\pi(-\mu)}{M}}^{0}}\hat{Z}_\mu^{(\pm)} \\
-&= K_1^4\cdot 2^4\cdot(-1)^2\cdot\hat{Z}_\mu^{(\pm)}
-\end{aligned}`,
-      ),
-      paragraph(["(h1.y) ", math(String.raw`n=0`), "："]),
-      displayMath(
-        String.raw`\underbrace{[K_1 H_1^{(\pm)},\dots,[K_1 H_1^{(\pm)},\hat{Y}_\mu]\dots]}_{0\text{ times}}
-= \hat{Y}_\mu`,
-      ),
-      paragraph(["(h1.y) ", math(String.raw`n=1`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, \hat{Y}_\mu]
-&= K_1[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)}
-\end{aligned}`,
-      ),
-      paragraph(["(h1.y) ", math(String.raw`n=2`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},\hat{Y}_\mu]}^{n=1}]
-&= [K_1 H_1^{(\pm)},\ K_1\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)}] \\
-&= K_1^2\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
-&= K_1^2\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}\left(2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu)\right) \\
-&= K_1^2\cdot 2^2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu \\
-&= K_1^2\cdot 2^2\cdot(-1)\cdot e^{\overbrace{-i\frac{2\pi(-\mu)}{M}-i\frac{2\pi\mu}{M}}^{0}}\hat{Y}_\mu \\
-&= K_1^2\cdot 2^2\cdot(-1)\cdot\hat{Y}_\mu
-\end{aligned}`,
-      ),
-      paragraph(["(h1.y) ", math(String.raw`n=3`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Y}_\mu]]}^{n=2}]
-&= [K_1 H_1^{(\pm)},\ K_1^2\cdot 2^2\cdot(-1)\cdot\hat{Y}_\mu] \\
-&= K_1^3\cdot 2^2\cdot(-1)\cdot[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1^3\cdot 2^2\cdot(-1)\cdot\left(-2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^3\cdot 2^3\cdot(-1)^2\cdot e^{-i\frac{2\pi\mu}{M}}\hat{Z}_\mu^{(\pm)}
-\end{aligned}`,
-      ),
-      paragraph(["(h2.z−) ", math(String.raw`n=1`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_2^* H_2, \hat{Z}_\mu^{(-)}]
-&= K_2^*[H_2, \hat{Z}_\mu^{(-)}] \\
-&= K_2^*(-2\cdot\hat{Y}_\mu) \\
-&= (K_2^*)^1\cdot 2^1\cdot(-1)^1\cdot\hat{Y}_\mu
-\end{aligned}`,
-      ),
-      paragraph(["(h2.z−) ", math(String.raw`n=2`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_2^* H_2, \overbrace{[K_2^* H_2,\hat{Z}_\mu^{(-)}]}^{n=1}]
-&= [K_2^* H_2,\ (K_2^*)^1\cdot 2^1\cdot(-1)^1\cdot\hat{Y}_\mu] \\
-&= (K_2^*)^2\cdot 2^1\cdot(-1)^1\cdot[H_2, \hat{Y}_\mu] \\
-&= (K_2^*)^2\cdot 2^1\cdot(-1)^1\cdot(2\cdot\hat{Z}_\mu^{(-)}) \\
-&= (K_2^*)^2\cdot 2^2\cdot(-1)^1\cdot\hat{Z}_\mu^{(-)}
-\end{aligned}`,
-      ),
-      paragraph(["(h2.z−) ", math(String.raw`n=3`), "："]),
-      displayMath(
-        String.raw`\begin{aligned}
-[K_2^* H_2, \overbrace{[K_2^* H_2,[K_2^* H_2,\hat{Z}_\mu^{(-)}]]}^{n=2}]
-&= [K_2^* H_2,\ (K_2^*)^2\cdot 2^2\cdot(-1)^1\cdot\hat{Z}_\mu^{(-)}] \\
-&= (K_2^*)^3\cdot 2^2\cdot(-1)^1\cdot[H_2, \hat{Z}_\mu^{(-)}] \\
-&= (K_2^*)^3\cdot 2^2\cdot(-1)^1\cdot(-2\cdot\hat{Y}_\mu) \\
-&= (K_2^*)^3\cdot 2^3\cdot(-1)^2\cdot\hat{Y}_\mu
-\end{aligned}`,
-      ),
     ],
     conversion: {
       status: "converted",
@@ -696,7 +554,7 @@ K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
         ref("cosh_sinh_coefficient_conversion"),
         " により偶数項・奇数項に分け、",
         ref("nesting_of_commutator_of_H_and_Z"),
-        " 直後の sinh/cosh テイラー展開（下記 notes）を用いる。",
+        " 直後の sinh/cosh テイラー展開を用いる。",
       ]),
       paragraph(["(h1.z) について、"]),
       displayMath(
@@ -747,13 +605,6 @@ i\cdot (K_2^*)^{n}\cdot\hat{Y}_\mu & (n\text{ is odd})
 &= \sum_{\substack{n\geq 0\\ n\text{ is even}}}\left(\frac{1}{n!}(K_2^*)^{n}\hat{Z}_\mu^{(-)}\right)
    + \sum_{\substack{n\geq 1\\ n\text{ is odd}}}\left(\frac{1}{n!}\,i\,(K_2^*)^{n}\,\hat{Y}_\mu\right)
 \end{aligned}`,
-      ),
-    ],
-    notes: [
-      paragraph(["sinh, cosh のテイラー展開（原文 note）："]),
-      displayMath(
-        String.raw`\sinh x = x + \frac{1}{3!}x^3 + \frac{1}{5!}x^5 + \frac{1}{7!}x^7 + \cdots, \qquad
-\cosh x = 1 + \frac{1}{2!}x^2 + \frac{1}{4!}x^4 + \frac{1}{6!}x^6 + \cdots`,
       ),
     ],
     conversion: {

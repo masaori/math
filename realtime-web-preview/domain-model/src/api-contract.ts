@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { blockSchema } from './block.js'
+import { blockSchema, noteSchema } from './block.js'
 
 /**
  * BE / FE 間の API 契約（共通語彙）。
@@ -27,6 +27,11 @@ export type LoadDocumentErrorCode = LoadDocumentError['code']
 /** GET /api/document の成功レスポンス。 */
 export const documentResponseSchema = z.object({
   blocks: z.array(blockSchema),
+  /**
+   * 参照用ノート（文書本体ではない）。ソースに notes が無ければ空配列。
+   * 本体（blocks）と別フィールドで運び、FE 側でも本文と区別して描画する。
+   */
+  notes: z.array(noteSchema).default([]),
   /** サーバが応答を生成した時刻（ISO 8601）。 */
   generatedAt: z.string(),
   /** 入力ソースの表示名（例: ソース dir の相対パス）。 */

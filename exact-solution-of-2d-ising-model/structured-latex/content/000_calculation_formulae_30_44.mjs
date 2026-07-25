@@ -239,36 +239,8 @@ export default defineBlocks([
     ],
     conversion: { status: "converted" },
   },
-  {
-    id: "calculation_formulae_037_note_arg_calculation_tip",
-    kind: "note",
-    sourcePath: "_old/typst/parts/000_計算公式/036_note_arg計算のコツ_極座標表現を使った偏角の計算方法.typ",
-    sourceOrdinal: 37,
-    title: null,
-    labels: [],
-    statement: [
-      paragraph([math(String.raw`\arg`), " 計算のコツ："]),
-      paragraph([
-        math(String.raw`\phi_{\mathrm{polar}}(z_i)=[(r_i,\theta_i)]_{\sim}`),
-        " で、",
-        math(String.raw`\arg^{[0,2\pi)}(z_i)`),
-        " の範囲がわかっているとき、",
-        math(String.raw`z_1 z_2`),
-        " の偏角を計算するには、まず",
-      ]),
-      displayMath(
-        String.raw`\arg^{[0,2\pi)}(z_1 z_2)
-= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\phi_{\mathrm{polar}}(z_2))\right)
-= s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)`,
-      ),
-      paragraph([
-        "と変形し、",
-        math(String.raw`?\leq\theta_1+\theta_2-2(n_1+n_2)\pi<?`),
-        " の形の不等式から場合分けするとよい。",
-      ]),
-    ],
-    conversion: { status: "converted" },
-  },
+  // 旧 calculation_formulae_037（arg 計算のコツ）は計算の進め方の助言であって主張ではないため、
+  // notes/000_calculation_formulae.mjs（targets: arg_of_product_of_complex_numbers）へ移設した。
   {
     id: "calculation_formulae_038_definition_sqrt_of_complex_number",
     kind: "definition",
@@ -543,16 +515,6 @@ export default defineBlocks([
       ),
       paragraph([math(String.raw`\sqrt{z}\sqrt{z}=z`), " より結論を得る。"]),
     ],
-    notes: [
-      paragraph([
-        math(String.raw`z \in \mathbb{R}_{<0}`),
-        " のとき ",
-        math(String.raw`\arg^{[0,2\pi)}(z) = \pi`),
-        " であるから ",
-        math(String.raw`z = -\sqrt{z^2}`),
-        "。",
-      ]),
-    ],
     conversion: { status: "converted" },
   },
   {
@@ -592,16 +554,6 @@ export default defineBlocks([
         " から結論。",
       ]),
     ],
-    notes: [
-      paragraph([
-        math(String.raw`z \in \mathbb{C}^\times`),
-        " について: ",
-        math(String.raw`\sqrt{1/z} = 1/\sqrt{z}`),
-        " iff ",
-        math(String.raw`z \in \mathbb{R}_{>0}`),
-        "。",
-      ]),
-    ],
     conversion: { status: "converted" },
   },
   {
@@ -623,16 +575,6 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([ref("inverse_of_sqrt_cc"), " より。"]),
-    ],
-    notes: [
-      paragraph([
-        math(String.raw`z \in \mathbb{C}^\times`),
-        " について: ",
-        math(String.raw`(\sqrt{z})^{-1} = \sqrt{1/z}`),
-        " iff ",
-        math(String.raw`z \in \mathbb{R}_{>0}`),
-        "。",
-      ]),
     ],
     conversion: { status: "converted" },
   },

@@ -3,11 +3,13 @@ import { fileURLToPath } from 'node:url'
 
 /**
  * サーバ設定。入力ソース dir は CLI 引数 / 環境変数で差し替え可能（F-7）。
- * 既定はリファレンス入力ソース（structured-latex/content）。
+ * 既定はリファレンス入力ソース（structured-latex/content, structured-latex/notes）。
  */
 export type ServerConfig = {
   sourceDir: string
   sourceLabel: string
+  /** 参照用ノートの dir。存在しなくてもよい（その場合ノート無しで動く）。 */
+  notesDir: string
   host: string
   port: number
   staticDir: string
@@ -23,6 +25,12 @@ const DEFAULT_SOURCE_DIR = path.join(
   'exact-solution-of-2d-ising-model',
   'structured-latex',
   'content',
+)
+const DEFAULT_NOTES_DIR = path.join(
+  repoRoot,
+  'exact-solution-of-2d-ising-model',
+  'structured-latex',
+  'notes',
 )
 const STATIC_DIR = path.join(rwpRoot, 'frontend', 'dist')
 const DEFAULT_PORT = 4321
@@ -49,5 +57,15 @@ export const loadConfig = (): ServerConfig => {
   const host = readArg('host') ?? process.env.RWP_HOST ?? DEFAULT_HOST
   const sourceLabel = path.relative(repoRoot, sourceDir) || sourceDir
 
-  return { sourceDir, sourceLabel, host, port, staticDir: STATIC_DIR }
+  // --source だけ差し替えられた場合は、その隣の `notes` を既定の探索先にする
+  // （content/ と notes/ が並ぶ構成を前提にしすぎないよう、--notes で上書きできる）。
+  const notesDirRaw =
+    readArg('notes') ??
+    process.env.RWP_NOTES_DIR ??
+    (sourceDirRaw === DEFAULT_SOURCE_DIR
+      ? DEFAULT_NOTES_DIR
+      : path.join(path.dirname(sourceDir), 'notes'))
+  const notesDir = path.resolve(notesDirRaw)
+
+  return { sourceDir, sourceLabel, notesDir, host, port, staticDir: STATIC_DIR }
 }

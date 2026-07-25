@@ -1,4 +1,4 @@
-import type { Block, LoadDocumentError } from '@rwp/domain-model'
+import type { Block, LoadDocumentError, Note } from '@rwp/domain-model'
 
 /** ロード中・失敗・取得済みを型で強制する（fetch/ui はこの形だけを介してやり取りする）。 */
 export type Loadable<T> =
@@ -16,6 +16,8 @@ export type DocumentMeta = {
 
 export type DocumentContent = {
   blocks: Block[]
+  /** 参照用ノート（文書本体ではない。最終成果物には載らない）。 */
+  notes: Note[]
   meta: DocumentMeta
 }
 

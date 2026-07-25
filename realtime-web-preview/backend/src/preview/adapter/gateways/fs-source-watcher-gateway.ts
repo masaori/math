@@ -1,4 +1,4 @@
-import { type FSWatcher, watch } from 'node:fs'
+import { type FSWatcher, existsSync, watch } from 'node:fs'
 import type {
   SourceWatcherGateway,
   Unsubscribe,
@@ -6,13 +6,19 @@ import type {
 
 /**
  * `fs.watch` で入力ソース dir を監視する adapter。
+ * 複数の dir（例: 本体と参照用ノート）を同時に監視でき、
  * 連続して飛ぶ変更イベントはデバウンスして 1 回の onChange にまとめる。
+ * 存在しない dir は監視対象から外す（任意ソースを許すため）。
  */
 export class FsSourceWatcherGateway implements SourceWatcherGateway {
+  private readonly sourceDirs: readonly string[]
+
   constructor(
-    private readonly sourceDir: string,
+    sourceDirs: readonly string[] | string,
     private readonly debounceMs = 150,
-  ) {}
+  ) {
+    this.sourceDirs = typeof sourceDirs === 'string' ? [sourceDirs] : sourceDirs
+  }
 
   subscribe(onChange: () => void): Unsubscribe {
     let timer: NodeJS.Timeout | undefined
@@ -25,23 +31,34 @@ export class FsSourceWatcherGateway implements SourceWatcherGateway {
       }, this.debounceMs)
     }
 
-    let watcher: FSWatcher
-    try {
-      watcher = watch(this.sourceDir, { recursive: true }, () => {
-        trigger()
-      })
-    } catch {
-      // recursive 非対応プラットフォーム向けのフォールバック（dir 直下のみ監視）。
-      watcher = watch(this.sourceDir, () => {
-        trigger()
-      })
+    const watchers: FSWatcher[] = []
+    for (const dir of this.sourceDirs) {
+      if (!existsSync(dir)) {
+        continue
+      }
+      try {
+        watchers.push(
+          watch(dir, { recursive: true }, () => {
+            trigger()
+          }),
+        )
+      } catch {
+        // recursive 非対応プラットフォーム向けのフォールバック（dir 直下のみ監視）。
+        watchers.push(
+          watch(dir, () => {
+            trigger()
+          }),
+        )
+      }
     }
 
     return () => {
       if (timer) {
         clearTimeout(timer)
       }
-      watcher.close()
+      for (const watcher of watchers) {
+        watcher.close()
+      }
     }
   }
 }
