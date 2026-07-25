@@ -841,30 +841,6 @@ b
     },
   },
   {
-    id: "calculation_formulae_026_claim_polar_representation_forms_a_field",
-    kind: "claim",
-    sourcePath: "_old/typst/parts/000_計算公式/025_claim_極座標表現は体をなす.typ",
-    sourceOrdinal: 26,
-    title: {
-      text: "極座標表現は体",
-    },
-    labels: [],
-    statement: [paragraph(["（極座標表現）は体をなす。"])],
-    proof: [todo("TODO")],
-    conversion: {
-      status: "converted",
-      notes: [
-        "未証明のまま残した。理由: （極座標表現）に定義されている演算は " +
-          "極座標表現の演算の定義（labels: operations_on_polar_representation）の積 · だけであり、" +
-          "加法がこの文書のどこにも定義されていない。体は加法と乗法の 2 演算をもつ構造なので、" +
-          "本主張は加法を与えない限り意味が確定しない。" +
-          "本ブロックは phi_cartesian の定義（極座標表現 → CC）より前に置かれているため、" +
-          "phi_cartesian による構造の移送で加法を定める、という読み方も原文からは確定できない。" +
-          "原文側の意図（どの加法を入れるか）の確認が必要。",
-      ],
-    },
-  },
-  {
     id: "calculation_formulae_027_definition_phi_polar",
     kind: "definition",
     sourcePath: "_old/typst/parts/000_計算公式/026_definition_極座標表現のCCへの写像_phi_polar.typ",

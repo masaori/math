@@ -208,8 +208,19 @@ B(\alpha A)B^{-1}
     labels: ["definition_of_cc"],
     statement: [
       paragraph([math("\\mathbb{C}:=\\mathbb{R}^2"), " に、以下の演算を入れたもの。"]),
+      paragraph(["和（成分ごと）"]),
+      displayMath("(a,b)+(c,d):=(a+c,\\; b+d)"),
       paragraph(["積"]),
       displayMath("(a,b)\\cdot(c,d):=(ac-bd,ad+bc)"),
+      paragraph([
+        "本論文で ",
+        math("\\mathbb{C}"),
+        " に必要な構造はこの2つの演算だけである。和は指数関数の級数（",
+        ref("matrix_exp_series_converges"),
+        "）と絶対値の三角不等式（",
+        ref("abs_basic_properties"),
+        "）で必要になる。",
+      ]),
     ],
   },
   {

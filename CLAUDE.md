@@ -68,6 +68,8 @@
 
 - `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**・
   ノートの **未解決 targets** を検査（content と notes の両方）
+- `node structured-latex/tools/verify-no-lost-proofs.mjs` — **移行漏れ**（`_old/typst` の原本に証明が
+  あるのに構造化側が TODO のまま）を検出
 - `node sagemath/tools/verify-check-linkage.mjs` — 数値検証と証明の対応が切れていないかを検査
 - `lean/` があれば `lake build` と `bash lean/scripts/check-no-sorry.sh`
 
