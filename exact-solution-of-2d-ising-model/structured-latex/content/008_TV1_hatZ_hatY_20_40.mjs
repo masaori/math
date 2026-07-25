@@ -1848,7 +1848,7 @@ T_{(V')}(\psi_\mu)
     sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ",
     sourceOrdinal: 39,
     title: { tex: String.raw`T_{(V)} = T_{(V')}` },
-    labels: [],
+    labels: ["T_V_eq_T_Vprime"],
     statement: [
       displayMath(String.raw`T_{(V)} = T_{(V')}`),
       paragraph([
@@ -1868,7 +1868,7 @@ T_{(V')}(\psi_\mu)
     sourcePath: "parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
     sourceOrdinal: 40,
     title: { tex: String.raw`V = c V' \text{（定数倍を除いて一致）}` },
-    labels: [],
+    labels: ["V_eq_Vprime"],
     statement: [
       paragraph(["ある ", math(String.raw`c \in \mathbb{C}^\times`), " が存在して "]),
       displayMath(String.raw`V = c \cdot V'`),

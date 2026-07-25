@@ -2,6 +2,8 @@
 
 ## 対象
 
+**対象ラベル**: `equation_of_a_theta_mu` （structured-latex 側の安定識別子。Typst 廃止後はこれで対応付ける）
+
 - ファイル: `parts/008_T_V1_hatZとhatZ_hatYの関係/028_claim_a_theta_mu.typ`
 - 範囲: 全体 (Part A Step 1-8, Part B Step 9-18, Claim本体)
 

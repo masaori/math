@@ -79,7 +79,7 @@ graph TD
 | T4   | ref をラベルに統一(レンダラにラベル→id解決)＋validateにref解決チェック追加(実装・疎通確認済、未コミット) | 2 | — | ✅ |
 | T4b  | heading node をスキーマに追加(章題保持) → T3 と一体で実施 | 2 | — | ⬜ |
 | T5   | realtime-web-preview で全ブロックの KaTeX 描画疎通確認・可換図式代替 | 2 | T1..T4 | ⬜ |
-| T6   | sagemath連携(claim↔check, sourcePath経由)の維持確認 | 2 | T1 | ⬜ |
+| T6   | sagemath連携をラベル対応に移行＋機械検証(`sagemath/tools/verify-check-linkage.mjs`)。移行で落ちていた主要2定理のラベルを復旧 | 2 | T1 | ✅ |
 | T7   | Typst 廃止(main.typ/theorem.typ/parts を _old/ 退避) ※不可逆・レンダリング疎通後に別途確認 | 2 | T1..T6 | ⏸ |
 | P3-0 | Lean/Coq/Isabelle/Agda の選定リサーチ(本問題との相性・mathlib被覆・事例) | 3 | なし | ✅ |
 | P3-1 | 使用する系を決定 → **Lean 4 + mathlib4 に確定(ユーザー承認済 2026-07)** | 3 | P3-0 | ✅ |

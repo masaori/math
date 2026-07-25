@@ -2,6 +2,8 @@
 
 ## 対象
 
+**対象ラベル**: `anticommutator_of_psi` （structured-latex 側の安定識別子。Typst 廃止後はこれで対応付ける）
+
 `parts/008_T_V1_hatZとhatZ_hatYの関係/031_claim_psiの反交換関係.typ` の Claim:
 
 ```

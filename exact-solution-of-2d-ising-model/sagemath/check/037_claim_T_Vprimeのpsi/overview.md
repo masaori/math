@@ -2,6 +2,8 @@
 
 ## 対象
 
+**対象ラベル**: `action_of_T_Vprime_on_psi` （structured-latex 側の安定識別子。Typst 廃止後はこれで対応付ける）
+
 `parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ` の Claim:
 
 ```typst
