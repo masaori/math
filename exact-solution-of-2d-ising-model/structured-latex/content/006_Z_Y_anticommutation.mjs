@@ -5,7 +5,7 @@ export default defineBlocks([
     id: "heading_Z_Y_anticommutation",
     kind: "heading",
     level: 2,
-    sourcePath: "main.typ",
+    sourcePath: "_old/typst/main.typ",
     sourceOrdinal: 8,
     title: { tex: String.raw`Z\text{と}Y\text{の反交換関係}` },
     labels: [],
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y",
     kind: "claim",
-    sourcePath: "parts/006_ZとYの反交換関係/000_claim_Z_muとZ_nuとY_muとY_nuの反交換関係.typ",
+    sourcePath: "_old/typst/parts/006_ZとYの反交換関係/000_claim_Z_muとZ_nuとY_muとY_nuの反交換関係.typ",
     sourceOrdinal: 1,
     title: { tex: String.raw`Z\text{と}Y\text{の反交換関係}` },
     labels: ["anticommutator_of_Z_and_Y"],

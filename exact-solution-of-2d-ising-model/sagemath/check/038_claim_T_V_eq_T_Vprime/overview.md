@@ -3,7 +3,7 @@
 ## 対象
 **対象ラベル**: `T_V_eq_T_Vprime` （structured-latex 側の安定識別子。Typst 廃止後はこれで対応付ける）
 
-`parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ`:
+`_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ`:
 任意の `x ∈ Mat(2,CC)^(⊗M)` で `V x V^(-1) = V' x V'^(-1)`。
 
 ## 検証方針

@@ -4,7 +4,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/045_claim_共役写像は環準同型.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/045_claim_共役写像は環準同型.typ",
     sourceOrdinal: 46,
     title: { text: "共役写像は環準同型" },
     labels: ["conjugation_is_ring_homomorphism"],
@@ -114,7 +114,7 @@ T_B(I)
   {
     id: "calculation_formulae_047_claim_commutator_via_anticommutators",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/046_claim_交換子と反交換子の関係.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/046_claim_交換子と反交換子の関係.typ",
     sourceOrdinal: 47,
     title: { text: "交換子と反交換子の関係" },
     labels: ["commutator_via_anticommutators"],

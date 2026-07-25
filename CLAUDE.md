@@ -30,26 +30,36 @@
 ```
 <project-name>/
 ├── MEMORY.md              # プロジェクト固有の引き継ぎメモ（次回やること・未解決問題・完了済み）
-├── main.typ               # メインの Typst ファイル
-├── parts/                 # 証明の各パート（Typst ファイル群）
-│   └── <NNN>_<セクション名>/
-│       └── <NNN>_<type>_<内容>.typ    # type: definition, claim, theorem, remark, note
+├── structured-latex/      # 証明本体の正本（構造化テキスト）
+│   ├── schema.mjs         # ブロック/ノードのスキーマと検証
+│   ├── content/*.mjs      # 証明ブロック群（配列の並びが文書順の正本）
+│   └── tools/             # validate-content.mjs 等
 ├── sagemath/              # SageMath による数値検証コード
 │   ├── _shared/defs.sage  # 共通定義
-│   └── check/<NNN>_<対象>/# parts/ のファイル番号に対応
+│   ├── check/<NNN>_<対象>/# overview.md に「対象ラベル」を宣言する
+│   └── tools/             # verify-check-linkage.mjs（検証↔証明の対応を機械検証）
 ├── lean/                  # Lean 4 + mathlib4 による機械的証明（任意）
 │   ├── README.md          # セットアップ・人手証明との対応規約
-│   └── <Lib>/Part<NNN>/   # parts/ のディレクトリ・ファイル番号に対応
+│   └── <Lib>/Part<NNN>/   # 証明の章番号に対応
 ├── docs/
 │   └── tasks/             # タスク管理・作業指示書
-└── _old/                  # 非推奨・旧コード（削除候補の退避先）
+└── _old/                  # 旧コードの退避先（typst/ など。温存するものも置く）
 ```
+
+閲覧はリポジトリ直下の `realtime-web-preview/`（React + KaTeX）を `structured-latex/content` に
+向けて起動する。
 
 ### 命名規則
 
-- `parts/` 内のディレクトリ・ファイルは3桁の連番プレフィックス（`000_`, `001_`, ...）
-- ファイル名に type を含める: `definition`, `claim`, `theorem`, `remark`, `note`
-- `sagemath/check/` のディレクトリ名は対応する `parts/` のファイル番号に揃える
+- ブロックの `id` は `<章>_<連番>_<type>_<内容>`、`labels` に安定識別子（相互参照のキー）を置く
+- type は `definition`, `claim`, `theorem`, `remark`, `note`, `heading`
+- **相互参照・数値検証との対応はすべて `labels` を使う**（ファイルパスに依存させない）
+
+### 検証（変更したら必ず通す）
+
+- `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**を検査
+- `node sagemath/tools/verify-check-linkage.mjs` — 数値検証と証明の対応が切れていないかを検査
+- `lean/` があれば `lake build` と `bash lean/scripts/check-no-sorry.sh`
 
 ## MEMORY.md の運用
 

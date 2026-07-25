@@ -3,7 +3,7 @@
 ## 対象
 **対象ラベル**: `commutation_V_psi` （structured-latex 側の安定識別子。Typst 廃止後はこれで対応付ける）
 
-`parts/008_T_V1_hatZとhatZ_hatYの関係/030_claim_Vとpsiの交換関係.typ`（+033 `λ_±=e^{±γ}`）:
+`_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/030_claim_Vとpsiの交換関係.typ`（+033 `λ_±=e^{±γ}`）:
 `T_(V)(ψ_μ^†)=e^{γ(θ_μ)}ψ_μ^†`、`T_(V)(ψ_μ)=e^{-γ(θ_μ)}ψ_μ`。
 
 ## 位置づけ

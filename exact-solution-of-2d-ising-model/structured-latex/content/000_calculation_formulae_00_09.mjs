@@ -5,7 +5,7 @@ export default defineBlocks([
     id: "heading_calculation_formulae",
     kind: "heading",
     level: 2,
-    sourcePath: "main.typ",
+    sourcePath: "_old/typst/main.typ",
     sourceOrdinal: 1,
     title: { text: "計算公式" },
     labels: [],
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_000_cosh_sinh_product",
     kind: "theorem",
-    sourcePath: "parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ",
     sourceOrdinal: 1,
     title: { tex: "\\cosh,\\sinh\\text{の掛け算}" },
     labels: [],
@@ -86,7 +86,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_001_sqrt_nonnegative_real",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/001_definition_非負実数のsqrt.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/001_definition_非負実数のsqrt.typ",
     sourceOrdinal: 2,
     title: { tex: "\\sqrt{\\cdot}" },
     labels: ["definition_of_sqrt_r_positive"],
@@ -107,7 +107,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_002_negative_number_to_sqrt",
     kind: "theorem",
-    sourcePath: "parts/000_計算公式/002_theorem_負数からsqrtへの変換.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/002_theorem_負数からsqrtへの変換.typ",
     sourceOrdinal: 3,
     title: { tex: "\\text{負数 }\\to\\sqrt{\\cdot}" },
     labels: ["negative_number_to_sqrt"],
@@ -130,7 +130,7 @@ x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_003_matrix_decomposition",
     kind: "theorem",
-    sourcePath: "parts/000_計算公式/003_theorem_行列の分解.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/003_theorem_行列の分解.typ",
     sourceOrdinal: 4,
     title: { text: "行列の分解" },
     labels: ["mat_mult"],
@@ -142,7 +142,7 @@ x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_004_action_on_matrix_pair",
     kind: "theorem",
-    sourcePath: "parts/000_計算公式/004_theorem_行列の組みへの作用.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/004_theorem_行列の組みへの作用.typ",
     sourceOrdinal: 5,
     title: { text: "行列の組みへの作用" },
     labels: [],
@@ -154,7 +154,7 @@ x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_005_matrix_conjugation",
     kind: "theorem",
-    sourcePath: "parts/000_計算公式/005_theorem_行列の共役.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/005_theorem_行列の共役.typ",
     sourceOrdinal: 6,
     title: { text: "行列の共役" },
     labels: ["mat_conj"],
@@ -202,7 +202,7 @@ B(\alpha A)B^{-1}
   {
     id: "calc_formulae_006_definition_of_cc",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/006_definition_CCの定義.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/006_definition_CCの定義.typ",
     sourceOrdinal: 7,
     title: { tex: "\\mathbb{C}\\text{の定義}" },
     labels: [],
@@ -215,7 +215,7 @@ B(\alpha A)B^{-1}
   {
     id: "calc_formulae_007_inclusion_rr_to_cc",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/007_definition_RRからCCへの包含写像.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/007_definition_RRからCCへの包含写像.typ",
     sourceOrdinal: 8,
     title: { tex: "\\mathbb{R}\\to\\mathbb{C}\\text{の包含写像}" },
     labels: [],
@@ -231,7 +231,7 @@ B(\alpha A)B^{-1}
   {
     id: "calc_formulae_008_multiply_by_minus_one",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/008_definition_マイナス1倍.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/008_definition_マイナス1倍.typ",
     sourceOrdinal: 9,
     title: { tex: "-1\\text{倍}" },
     labels: [],
@@ -243,7 +243,7 @@ B(\alpha A)B^{-1}
   {
     id: "calc_formulae_009_sqrt_minus_one",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/009_definition_sqrt_minus_1.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/009_definition_sqrt_minus_1.typ",
     sourceOrdinal: 10,
     title: { tex: "\\sqrt{-1}" },
     labels: [],

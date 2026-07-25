@@ -3,7 +3,7 @@
 ## 対象
 **対象ラベル**: `V_eq_Vprime` （structured-latex 側の安定識別子。Typst 廃止後はこれで対応付ける）
 
-`parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ`:
+`_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ`:
 ある `c ∈ CC^×` で `V = c V'`。
 
 ## 検証方針

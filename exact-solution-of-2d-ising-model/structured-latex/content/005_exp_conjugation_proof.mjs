@@ -5,7 +5,7 @@ export default defineBlocks([
     id: "heading_exp_conjugation_proof",
     kind: "heading",
     level: 2,
-    sourcePath: "main.typ",
+    sourcePath: "_old/typst/main.typ",
     sourceOrdinal: 7,
     title: { tex: String.raw`e^{X} Y e^{-X} = e^{\mathrm{ad}(X)}(Y) \text{ の証明}` },
     labels: [],
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_001_definition_Ad_ad_lie",
     kind: "definition",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/000_リー群リー環アプローチの概要とAd_adの定義.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/000_リー群リー環アプローチの概要とAd_adの定義.typ",
     sourceOrdinal: 1,
     title: null,
     labels: [],
@@ -68,7 +68,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_002_theorem_Ad_exp_lie",
     kind: "theorem",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ",
     sourceOrdinal: 2,
     title: null,
     labels: [],
@@ -93,7 +93,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_003_definition_M_n_C_convergence",
     kind: "definition",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/002_式変形アプローチの概要と行列空間の内積ノルム収束の定義.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/002_式変形アプローチの概要と行列空間の内積ノルム収束の定義.typ",
     sourceOrdinal: 3,
     title: { tex: String.raw`M(n;\mathbb{C}) \text{ の内積・ノルム・収束}` },
     labels: [],
@@ -115,7 +115,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_004_theorem_ad_binomial",
     kind: "theorem",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003_theorem_ad展開の二項定理的公式_BrianHall_exercise14.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003_theorem_ad展開の二項定理的公式_BrianHall_exercise14.typ",
     sourceOrdinal: 4,
     title: { text: "ad 展開の二項定理的公式（Brian Hall exercise 14）" },
     labels: [],
@@ -146,7 +146,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_005_definition_GL_n_C",
     kind: "definition",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/004_definition_一般線型群GL(n,CC)とその群構造.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/004_definition_一般線型群GL(n,CC)とその群構造.typ",
     sourceOrdinal: 5,
     title: { tex: String.raw`\mathbf{GL}(n,\mathbb{C}) \text{ の定義}（\text{Brian Hall Definition 1.4}）` },
     labels: [],
@@ -164,7 +164,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_006_definition_matrix_lie_group",
     kind: "definition",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/005_definition_Matrix_Lie群の定義.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/005_definition_Matrix_Lie群の定義.typ",
     sourceOrdinal: 6,
     title: { text: "Matrix Lie群（Brian Hall Definition 1.4）" },
     labels: [],
@@ -197,7 +197,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_007_definition_Ad_g_ad_X_matrix",
     kind: "definition",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/006_definition_Matrix_Lie群上のAd_gとad_Xの定義.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/006_definition_Matrix_Lie群上のAd_gとad_Xの定義.typ",
     sourceOrdinal: 7,
     title: { text: "Ad_g と ad_X の定義（Brian Hall Definition 3.32）" },
     labels: [],
@@ -224,7 +224,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_008_theorem_exp_ad_series",
     kind: "theorem",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
     sourceOrdinal: 8,
     title: { tex: String.raw`e^{\mathrm{ad}_X}(Y) \text{ の級数展開}` },
     labels: ["brianhall_exc14"],
@@ -257,7 +257,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_009_theorem_exp_conjugation_main",
     kind: "theorem",
-    sourcePath: "parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
     sourceOrdinal: 9,
     title: { tex: String.raw`e^X Y e^{-X} = \mathrm{Ad}_{e^X}(Y) = e^{\mathrm{ad}_X}(Y)` },
     labels: ["brianhall_3.35"],

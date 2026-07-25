@@ -5,7 +5,7 @@ export default defineBlocks([
     id: "heading_exp_linear_map",
     kind: "heading",
     level: 2,
-    sourcePath: "main.typ",
+    sourcePath: "_old/typst/main.typ",
     sourceOrdinal: 4,
     title: { text: "線型写像のexp" },
     labels: [],
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_001_theorem_exp_series_pointwise_converges",
     kind: "theorem",
-    sourcePath: "parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
+    sourcePath: "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
     sourceOrdinal: 1,
     title: null,
     labels: ["exp_converges"],
@@ -73,7 +73,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_002_definition_exp_of_endomorphism",
     kind: "definition",
-    sourcePath: "parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
+    sourcePath: "_old/typst/parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
     sourceOrdinal: 2,
     title: null,
     labels: [],
@@ -97,7 +97,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
     kind: "theorem",
-    sourcePath: "parts/003_線型写像のexp/002_theorem_可換行列のexpの積公式.typ",
+    sourcePath: "_old/typst/parts/003_線型写像のexp/002_theorem_可換行列のexpの積公式.typ",
     sourceOrdinal: 3,
     title: { text: "可換行列の exp 積公式" },
     labels: ["theorem_exp_product"],
@@ -155,7 +155,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_004_theorem_exp_zero_is_identity",
     kind: "theorem",
-    sourcePath: "parts/003_線型写像のexp/003_theorem_零行列のexpはI.typ",
+    sourcePath: "_old/typst/parts/003_線型写像のexp/003_theorem_零行列のexpはI.typ",
     sourceOrdinal: 4,
     title: { tex: String.raw`\exp(O) = I` },
     labels: ["theorem_exp_zero"],

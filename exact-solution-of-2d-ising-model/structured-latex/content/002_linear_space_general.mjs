@@ -5,7 +5,7 @@ export default defineBlocks([
     id: "heading_linear_space_general",
     kind: "heading",
     level: 2,
-    sourcePath: "main.typ",
+    sourcePath: "_old/typst/main.typ",
     sourceOrdinal: 3,
     title: { text: "線型空間の一般論" },
     labels: [],
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
-    sourcePath: "parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
+    sourcePath: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
     sourceOrdinal: 1,
     title: { text: "テンソル冪の基底は基底のテンソル積の族" },
     labels: ["tensor_basis"],
@@ -88,7 +88,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_002_claim_scalar_identity_commutes",
     kind: "claim",
-    sourcePath: "parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ",
+    sourcePath: "_old/typst/parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ",
     sourceOrdinal: 2,
     title: { tex: String.raw`c \cdot I \text{ は全行列と可換}` },
     labels: ["scalar_identity_commutes"],
@@ -121,7 +121,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_004_lemma_centralizer_is_scalar",
     kind: "claim",
-    sourcePath: "parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ",
+    sourcePath: "_old/typst/parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ",
     sourceOrdinal: 4,
     title: { tex: String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} \text{ の中で全元と可換な元はスカラー}` },
     labels: ["centralizer_is_scalar"],
@@ -346,7 +346,7 @@ W
   {
     id: "linear_space_general_003_claim_matrix_norm_submultiplicativity",
     kind: "claim",
-    sourcePath: "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
+    sourcePath: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
     sourceOrdinal: 3,
     title: { text: "行列ノルムの劣乗法性" },
     labels: ["matrix_norm_submultiplicativity"],
@@ -369,7 +369,7 @@ W
   {
     id: "linear_space_general_003b_claim_matrix_multiplication_continuity",
     kind: "claim",
-    sourcePath: "parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
+    sourcePath: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
     sourceOrdinal: 3,
     title: { text: "行列乗算の連続性" },
     labels: ["matrix_multiplication_continuity"],

@@ -4,7 +4,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_021_remark_polar_equivalence_class_properties",
     kind: "remark",
-    sourcePath: "parts/000_計算公式/020_remark_極座標表現の同値類の性質.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/020_remark_極座標表現の同値類の性質.typ",
     sourceOrdinal: 21,
     title: null,
     labels: [],
@@ -21,7 +21,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_022_definition_operations_on_polar_representation",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/021_definition_極座標表現の演算.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/021_definition_極座標表現の演算.typ",
     sourceOrdinal: 22,
     title: {
       text: "極座標表現の演算",
@@ -49,7 +49,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/022_claim_極座標表現の乗法群.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/022_claim_極座標表現の乗法群.typ",
     sourceOrdinal: 23,
     title: {
       text: "（極座標表現）の乗法群",
@@ -77,7 +77,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/023_claim_CCの乗法群.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/023_claim_CCの乗法群.typ",
     sourceOrdinal: 24,
     title: {
       tex: "\\mathbb{C}\\text{の乗法群}",
@@ -102,7 +102,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_025_claim_complex_numbers_form_a_field",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/024_claim_CCは体をなす.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/024_claim_CCは体をなす.typ",
     sourceOrdinal: 25,
     title: {
       tex: "\\mathbb{C}\\text{は体}",
@@ -117,7 +117,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_026_claim_polar_representation_forms_a_field",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/025_claim_極座標表現は体をなす.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/025_claim_極座標表現は体をなす.typ",
     sourceOrdinal: 26,
     title: {
       text: "極座標表現は体",
@@ -132,7 +132,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_027_definition_phi_polar",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/026_definition_極座標表現のCCへの写像_phi_polar.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/026_definition_極座標表現のCCへの写像_phi_polar.typ",
     sourceOrdinal: 27,
     title: {
       tex: "\\text{極座標表現の}\\mathbb{C}\\text{への写像}",
@@ -162,7 +162,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_028_definition_phi_cartesian",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/027_definition_CCの極座標表現への写像_phi_cartesian.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/027_definition_CCの極座標表現への写像_phi_cartesian.typ",
     sourceOrdinal: 28,
     title: {
       tex: "\\mathbb{C}\\text{の極座標表現への写像}",
@@ -397,7 +397,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_030_definition_first_and_second_projections",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/029_definition_第1座標と第2座標_pr1_pr2.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/029_definition_第1座標と第2座標_pr1_pr2.typ",
     sourceOrdinal: 30,
     title: {
       text: "第1座標, 第2座標",

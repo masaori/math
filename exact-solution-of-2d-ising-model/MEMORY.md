@@ -1,5 +1,25 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-25）: Typst を廃止し `_old/typst/` へ温存退避（証明の正本が構造化TeXへ）
+
+**証明の正本は `structured-latex/content/`（142ブロック）になった。** Typst 一式
+（`main.typ` / `theorem.typ` / `parts/` 130ファイル）は削除せず `_old/typst/` へ退避し、
+参照用に**温存**する（削除候補ではない。破棄は改めて判断する）。
+
+- 退避先 `_old/typst/README.md` に、温存の趣旨・現在の正本の所在・「ここを直しても正本には
+  反映されない」旨を明記。**退避先で `typst compile main.typ` が成功することを確認済み**
+  （作業ディレクトリをそこにすれば `parts` への相対パスがそのまま効く）。
+- 出自パスを新所在へ一括更新（構造化TeX の `sourcePath` 131件 + 見出し10件、数値検証の
+  overview 6件）。**全130種の出自パスが実在することを機械確認**。
+- リポジトリ直下 `CLAUDE.md` のプロジェクト構成を更新（Typst 前提 → 構造化TeX 前提。
+  「相互参照・数値検証の対応はラベルで張る」「変更したら通す検証コマンド3種」を明記）。
+- 移行の健全性: `validate-content` 142ブロック・ラベル72・参照144全解決 /
+  `verify-check-linkage` 6件 / ビューア描画 数式1659件エラー0・リンク切れ0。
+
+### 今後の作業場所（重要）
+
+証明の修正は**必ず `structured-latex/content/` 側**に入れる。`_old/typst/` は更新しない。
+
 ## 完了（2026-07-25）: Phase 3 継続 — 転送行列の記号定義・Z/Y の反交換関係・生成定理を形式化
 
 `lake build` 成功・`lean/scripts/check-no-sorry.sh` exit 0（`sorry` 0、主要定理 43 件が `sorryAx` 非依存）。

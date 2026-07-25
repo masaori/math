@@ -4,7 +4,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_031_definition_abs_arg",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/030_definition_絶対値と偏角_abs_arg.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/030_definition_絶対値と偏角_abs_arg.typ",
     sourceOrdinal: 31,
     title: { text: "絶対値, 偏角" },
     labels: [],
@@ -30,7 +30,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_032_claim_arg_of_product",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/031_claim_複素数の積のarg.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/031_claim_複素数の積のarg.typ",
     sourceOrdinal: 32,
     title: null,
     labels: ["arg_of_product_of_complex_numbers"],
@@ -92,7 +92,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_033_claim_arg_of_quotient",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/032_claim_複素数の商のarg.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/032_claim_複素数の商のarg.typ",
     sourceOrdinal: 33,
     title: null,
     labels: ["arg_of_quotient_of_complex_numbers"],
@@ -125,7 +125,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/033_claim_複素数の積のargがpiのときのarg同士の関係.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/033_claim_複素数の積のargがpiのときのarg同士の関係.typ",
     sourceOrdinal: 34,
     title: null,
     labels: ["range_of_args_of_multiple_of_complex_numbers"],
@@ -168,7 +168,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_035_claim_arg_of_square",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/034_claim_CCの自乗のarg.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/034_claim_CCの自乗のarg.typ",
     sourceOrdinal: 35,
     title: { tex: String.raw`\mathbb{C}\text{の自乗の}\arg` },
     labels: ["range_of_args_of_square_of_complex_numbers"],
@@ -202,7 +202,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_036_claim_arg_of_reciprocal",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/035_claim_CCの逆数のarg.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/035_claim_CCの逆数のarg.typ",
     sourceOrdinal: 36,
     title: { tex: String.raw`\mathbb{C}\text{の逆数の}\arg` },
     labels: ["range_of_args_of_reciprocal_of_complex_numbers"],
@@ -242,7 +242,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_037_note_arg_calculation_tip",
     kind: "note",
-    sourcePath: "parts/000_計算公式/036_note_arg計算のコツ_極座標表現を使った偏角の計算方法.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/036_note_arg計算のコツ_極座標表現を使った偏角の計算方法.typ",
     sourceOrdinal: 37,
     title: null,
     labels: [],
@@ -272,7 +272,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_038_definition_sqrt_of_complex_number",
     kind: "definition",
-    sourcePath: "parts/000_計算公式/037_definition_CCのsqrt_複素数の平方根の定義.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/037_definition_CCのsqrt_複素数の平方根の定義.typ",
     sourceOrdinal: 38,
     title: { tex: String.raw`\mathbb{C}\text{の}\sqrt{\cdot}` },
     labels: [],
@@ -291,7 +291,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_039_claim_sqrt_expansion_via_polar",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/038_claim_CCのsqrtの極座標表現による展開.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/038_claim_CCのsqrtの極座標表現による展開.typ",
     sourceOrdinal: 39,
     title: null,
     labels: [],
@@ -317,7 +317,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_040_claim_sqrt_commutativity_condition",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/039_claim_sqrtと積が可換になる条件_argの範囲による場合分け.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/039_claim_sqrtと積が可換になる条件_argの範囲による場合分け.typ",
     sourceOrdinal: 40,
     title: { text: "sqrt と積が可換になる条件" },
     labels: ["condition_of_commutativity_of_sqrt_and_product"],
@@ -486,7 +486,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_041_claim_sqrt_squared_is_original",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/040_claim_sqrtの2乗は元に戻る.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/040_claim_sqrtの2乗は元に戻る.typ",
     sourceOrdinal: 41,
     title: { text: "sqrt の2乗は元に戻る" },
     labels: [],
@@ -519,7 +519,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_042_claim_square_of_sqrt",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/041_claim_自乗のsqrtとremark_負の実数の場合.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/041_claim_自乗のsqrtとremark_負の実数の場合.typ",
     sourceOrdinal: 42,
     title: { tex: String.raw`z = \pm\sqrt{z^2}` },
     labels: ["square_of_sqrt"],
@@ -558,7 +558,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_043_claim_sqrt_of_reciprocal",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/042_claim_CCの逆数のsqrtとremark.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/042_claim_CCの逆数のsqrtとremark.typ",
     sourceOrdinal: 43,
     title: { tex: String.raw`\mathbb{C}\text{の逆数の}\sqrt{\cdot}` },
     labels: ["inverse_of_sqrt_cc"],
@@ -607,7 +607,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_044_claim_reciprocal_of_sqrt",
     kind: "claim",
-    sourcePath: "parts/000_計算公式/043_claim_CCのsqrtの逆数とremark.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/043_claim_CCのsqrtの逆数とremark.typ",
     sourceOrdinal: 44,
     title: { tex: String.raw`\mathbb{C}\text{の}\sqrt{\cdot}\text{の逆数}` },
     labels: ["sqrt_cc_of_inverse"],
@@ -639,7 +639,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_045_theorem_euler_formula_cos_sin",
     kind: "theorem",
-    sourcePath: "parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ",
+    sourcePath: "_old/typst/parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ",
     sourceOrdinal: 45,
     title: { tex: String.raw`\cos,\sin\text{のEuler表示}` },
     labels: ["euler_formula_cos_sin"],
