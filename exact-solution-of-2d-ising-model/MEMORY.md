@@ -1,6 +1,60 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
-## 進行中（2026-07-26）: 章 C′ の C′-13・C′-14 完了 — `V^{(+)} = c·checkV'` まで到達
+## 完了（2026-07-26）: 章 C′ の C′-15 完了 — `V^{(+)} の固有値`と `Λ̌_max = Λ^{(1/2)}_M` の単純性
+
+### 到達点
+
+`structured-latex/content/017_even_sector_eigenvalues.ts`（11 ブロック）で、009 章と同じ道筋を
+半整数運動量で辿り、次まで到達した。**これで章 C′（C′-1〜C′-15）はすべて完了。**
+
+- `def_check_number_operator`: `ň_μ := ψ̌_μ^† ψ̌_{1−μ}`（**全 `μ ∈ ℤ` で定義可能**）、`M` 周期性
+- `check_number_operator_idempotent` / `check_number_operators_commute` /
+  `trace_of_check_number_operator_product`（`tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M−k}`、`k` は `M` まで走れる）
+- `check_joint_eigenspace_decomposition`: `Q̌_ε`（`ε ∈ {0,1}^{1..M}`）は `2^M` 個で
+  **各同時固有空間は 1 次元**（`tr(Q̌_ε) = 1`）
+- `eigenvalues_of_check_Vprime`: `V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`、`ǧ(ε) = Σ_μ γ(θ~_μ)(ε_μ − 1/2)`
+- `trace_of_check_Vprime`: `tr(V̌') = tr((V̌')^{−1}) = Π_μ 2cosh(γ(θ~_μ)/2) > 0`
+- `V_plus_is_positive_definite`: `V^{(+)} = (2s_2)^{M/2} exp(S_1^{(+)}/2) exp(S_2) exp(S_1^{(+)}/2)` は正定値
+- **`constant_c_value_even_sector`: `c = (2 sinh 2K_2)^{M/2}`**（016 章で未決定だった `c` を決定）
+- **`eigenvalues_of_V_plus`: `Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(ǧ(ε))` が `V^{(+)}` の固有値を尽くす**
+- **`max_eigenvalue_of_V_plus_simple`: `Λ̌_max = Λ^{(1/2)}_M` かつ単純固有値**
+
+### 次にやること（残っている一手）
+
+**`c_+(M) = Λ̌_max`**、すなわち `sector_decomposition_of_rayleigh_sup` の `c_+(M)`（`ε` の固有値
+`+1` の固有空間上での Rayleigh 上限）が `V^{(+)}` の最大固有値に等しいことを本文で示す。
+これが済めば `remark_remaining_input_even_sector` が解消され、Onsager の自由エネルギーが本文で閉じる。
+手がかりと注意は `docs/tasks/free-energy-roadmap/task-dependency-graph.md` の
+章 C′「接続（残っている一手）」に書いた。
+**`V^{(+)}` は `Mat(2^M,ℂ)` 全体に作用する行列であって `ε = +1` の固有空間への制限ではないので、
+両者を同一視してはならない**（この点はまだ本文に無い）。
+
+### 一次情報で確認した重要な事実
+
+1. **`iH_is_real_symmetric` と `sign_flip_conjugation` は `S_1^{(±)}` について複号同順で
+   述べられているので、(+) 側にそのまま使える。** `H_1^{(+)}` 用に書き直す必要はなかった
+   （数値でも実対称性と `U S_1^{(+)} U^{−1} = −S_1^{(+)}` の残差は `0.0`）。
+   一方 009 章の `V_is_positive_definite` は `V_eq_Vprime` の `V`（実質 `(−)` 専用）に
+   結びついているので、`V_plus_is_positive_definite` として改めて述べた（証明の内容は同一）。
+2. **`V^{(+)}` の固有値が「すべて相異なる」ことは成り立たない。**
+   `periodicity_of_check_fermi` (1)(3) から `γ(θ~_μ) = γ(θ~_{M+1−μ})` なので、`ε` の成分を
+   `μ ↔ M+1−μ` で入れ替えても `Λ̌_ε` は変わらない。数値でも縮退ペアが 144 件現れる
+   （`050_.../check_03`）。**単純性を主張してよいのは最大固有値だけ**である。
+   この点を取り違えると 011 章との接続で誤った補題を立てることになる。
+3. 009 章の臨界点の例外処理（`m = |I| = M−1`、同時固有空間が 2 次元、前因子 `2^{M−m}`）は
+   `gamma_2_theta_tilde_nonzero` により偶セクターでは一つも要らない（`m = M`、次元 1、前因子 1）。
+
+### 数値検証
+
+`sagemath/check/050_claim_even_sector_eigenvalues/`（6 チェック、全 PASS）。
+`M = 2,3,4,5`、`{0,1}^M` を**全列挙**、厳密な臨界点 2 組を含む 6 組の `(K_1,K_2)`。
+
+- `V^{(+)}` の `2^M` 個の固有値全体が `{Λ̌_ε}` と**相対誤差 9.0e-12 以下**で一致（check_06）
+- `c = (2 sinh 2K_2)^{M/2}` の相対差 ≤ 4.3e-15、`Λ̌_max = Λ^{(1/2)}_M` の相対差 `0.0`（check_05, 06）
+- 最大固有値と 2 番目の固有値の相対差の最小 `4.17e-1`（＝単純性）、`min γ(θ~_μ) = 5.4e-1`
+- 対照: 対を `−μ` に取り違えると `ň_μ² = ň_μ` が残差 `2.59` で破れる（check_01）
+
+## 完了（2026-07-26）: 章 C′ の C′-13・C′-14 — `V^{(+)} = c·checkV'` まで到達
 
 ### 到達点
 
