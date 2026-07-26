@@ -1,5 +1,32 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補6）: Lean の 2 本立てを 3 主張ぶん追加（線型独立・指数和・hat の反交換関係）
+
+README 4 節の方針にしたがい、**具体版しか無かった 3 主張**に抽象版を足し、
+具体版を抽象版の系として導出した（既存の具体版はそのまま残してある）。
+
+| 主張（人手証明のラベル） | 追加した抽象版 | 抽象版で分かった「効いているもの」 |
+|---|---|---|
+| `Z_Y_linearly_independent` | `Abstract/CliffordIndependence.lean` | Clifford 関係 `[e_a,e_b]₊ = 2δ_{ab}·1`、スカラーの忠実性 `s·1 = 0 ⇒ s = 0`、`2` が零因子でないこと。**この 3 つだけ**。行列・テンソル冪・Jordan–Wigner の具体形・有限次元性・係数が体であることは不要（係数は任意の可換環、台は任意の環） |
+| `exp_sum` | `Abstract/RootOfUnitySum.lean` | 「1 の原始 `M` 乗根であること」と「割り算ができること」だけ。指数関数・円周率・複素数であることは不要（任意の体で成立）。**`M ≠ 0` も証明には不要**（`M = 0` なら両辺 `0`）だったので、引数は `_hM` として残し理由を明記 |
+| `anticommutator_of_hat_Z_and_hat_Y` | `Abstract/FourierClifford.lean` | Clifford 関係＋原始根の直交性だけ。さらに **`(±)` の重みは「両側の積 `u_j v_j`」しか結論に現れない**ので、原文の複号同順／複号逆は「積が全サイト `1`」と「`j = 1` でだけ `-1`」に整理できる。原文の `η^2 = 1` は積が `1` になる十分条件にすぎない |
+
+具体版の導出（人手証明と 1 対 1 対応する主張は別に立ててある）:
+`Part004/Claim001_ZYLinearlyIndependentAbstract.lean`（`ZY_linearIndependent_of_abstract`）、
+`Part004/Claim008_ExpSumAbstract.lean`（`expPhase_sum_of_abstract`）、
+`Part007/Claim000_AnticommutatorHatZHatYAbstract.lean`
+（`acomm_hatZ_hatZ_same_of_abstract` / `acomm_hatY_hatY_of_abstract` /
+`acomm_hatZPlus_hatZMinus_of_abstract`）。
+
+実装メモ: `if (M:ℤ) ∣ k then …` の中を `dvd_neg` で `rw` すると Decidable インスタンス依存で
+motive が型付かない。`congr 1` の後に `simp only [dvd_neg]` で通す。
+
+`lake build` 成功、`check-no-sorry.sh` は exit 0（新規 22 件を targets に追加）。
+**残作業**: 抽象版が無い主張はまだある（`Part006` の `Z,Y` の反交換関係、
+`Part004` の `Z,Y` が全行列環を生成、周期性・離散 Fourier 逆変換、`Part002` のテンソル冪の基底）。
+
+---
+
 ## 完了（2026-07-26・追補5）: 型で落とせる範囲を拡張（実行時検査からの移管）
 
 **新たにコンパイル時に落ちるようになったもの**（負テスト 16 件で実証。`npm run test:types`）:
