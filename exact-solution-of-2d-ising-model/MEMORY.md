@@ -98,8 +98,35 @@ README 4 節の方針にしたがい、**具体版しか無かった 3 主張**�
 motive が型付かない。`congr 1` の後に `simp only [dvd_neg]` で通す。
 
 `lake build` 成功、`check-no-sorry.sh` は exit 0（新規 22 件を targets に追加）。
-**残作業**: 抽象版が無い主張はまだある（`Part006` の `Z,Y` の反交換関係、
-`Part004` の `Z,Y` が全行列環を生成、周期性・離散 Fourier 逆変換、`Part002` のテンソル冪の基底）。
+
+---
+
+## 完了（2026-07-26・追補7）: Lean の 2 本立てをさらに 3 主張ぶん追加（Z,Y の反交換関係・hat の周期性・離散 Fourier 逆変換）
+
+README 4 節の方針にしたがい、**具体版しか無かった 3 主張**に抽象版を足し、
+具体版を抽象版の系として導出した（既存の具体版はそのまま残してある）。
+
+| 主張（人手証明のラベル） | 追加した抽象版 | 抽象版で分かった「効いているもの」 |
+|---|---|---|
+| `anticommutator_of_Z_and_Y`（`Z_μ, Y_ν` の反交換関係 3 式） | `Abstract/SiteLocalAnticomm.lean` | 「サイトごとの族から 1 元を作る写像 `P` が**単位的・乗法的・多重線型**であること」と「食い違うサイトがちょうど 1 つであること」**だけ**。テンソル積／クロネッカー積の具体形も、2×2 であることも、複素数であることも、Pauli 行列の成分計算も効いていない（使うのは `A σ^x = -σ^x A` 型の関係式のみ）。Jordan–Wigner 文字列を書くのに要るのは「サイトの添字に線型順序があること」だけで、文字列に使う元が `σ^x` である必要もない |
+| `hatZ_hatY_M_periodicity` | `Abstract/DiscreteFourier.lean`（`transform_periodic`） | **`ζ^M = 1` の一点のみ**。原始根であることすら不要で、`Z_j, Y_j` の代数的性質も `hat(Z)^{(±)}` の重みも指数の符号の取り方も効かない（重み・周波数を任意の族にしたまま証明できる） |
+| `recover_Z_Y_from_hatZ_hatY`（離散 Fourier 逆変換） | `Abstract/DiscreteFourier.lean`（`inverse_dft_abstract`） | **1 の原始 `M` 乗根の直交性**と**対象が係数体上の加群であること**だけ。行列であること・積があること・`Z,Y` の反交換関係は不要。原文が `hat(Z)^{(+)}` で復元を述べていない理由も抽象版から一意に説明できる（抽象版の仮定は「重みが一様」で、`(+)` は `j = 1` の重みだけ `-1`） |
+
+具体版の導出（人手証明と 1 対 1 対応する主張は別に立ててある）:
+`Part006/Claim000_AnticommutatorZYAbstract.lean`（`anticomm_Z_Z_of_abstract` /
+`anticomm_Z_Y_of_abstract` / `anticomm_Y_Y_of_abstract`）、
+`Part004/Claim012_HatPeriodicityAbstract.lean`（`hatZ_periodic_of_abstract` ほか）、
+`Part004/Claim013_RecoverZYAbstract.lean`（`inverse_dft_of_abstract` /
+`recover_Y_of_abstract` / `recover_Z_of_abstract`）。
+
+実装メモ:
+- `omit [Inst] in` はドキュメンテーションコメントより**前**に置く（後ろだと構文エラー）。
+- `Z μ` は `def` なので `rw` の対象にならない。`have h : acomm (Z μ) (Z ν) = 0 := ...` と
+  定義展開に任せて term-mode で受ける。
+
+`lake build` 成功、`check-no-sorry.sh` は exit 0（新規 24 件を targets に追加）。
+**残作業**: 抽象版が無い主張はまだある（`Part004` の `Z,Y` が全行列環を生成、
+`Part002` のテンソル冪の基底、`Part000` の共役写像が環準同型）。
 
 ---
 

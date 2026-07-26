@@ -356,6 +356,30 @@ targets=(
   Ising2D.acomm_hatZ_hatZ_same_of_abstract
   Ising2D.acomm_hatY_hatY_of_abstract
   Ising2D.acomm_hatZPlus_hatZMinus_of_abstract
+  Ising2D.Abstract.acomm_of_single_site
+  Ising2D.Abstract.sq_eq_one_of_site_sq_eq_one
+  Ising2D.Abstract.jwStr
+  Ising2D.Abstract.acomm_jwStr
+  Ising2D.Abstract.jwStr_sq
+  Ising2D.siteProd_isSiteProd
+  Ising2D.jwFamily_eq_jwStr
+  Ising2D.jw_anticomm_of_abstract
+  Ising2D.jw_sq_of_abstract
+  Ising2D.anticomm_Z_Z_of_abstract
+  Ising2D.anticomm_Z_Y_of_abstract
+  Ising2D.anticomm_Y_Y_of_abstract
+  Ising2D.Abstract.fin_dvd_sub_iff_eq
+  Ising2D.Abstract.zpow_mul_add_natCast
+  Ising2D.Abstract.transform_periodic
+  Ising2D.Abstract.inverse_dft_abstract
+  Ising2D.expPhase_eq_zetaM_zpow_freq
+  Ising2D.hatZ_periodic_of_abstract
+  Ising2D.hatY_periodic_of_abstract
+  Ising2D.hatZMinus_M_eq_neg_M_of_abstract
+  Ising2D.hatY_M_eq_neg_M_of_abstract
+  Ising2D.inverse_dft_of_abstract
+  Ising2D.recover_Y_of_abstract
+  Ising2D.recover_Z_of_abstract
 )
 
 {
