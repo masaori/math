@@ -36,7 +36,7 @@ export default defineNotes([
         " を固定し、",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`Z_1,\dots,Z_M, Y_1,\dots,Y_M \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`Z_1,\dots,Z_M, Y_1,\dots,Y_M \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を考える。",
       ]),
     ],
@@ -51,9 +51,9 @@ export default defineNotes([
         " で示した関係は、",
       ]),
       displayMath(
-        String.raw`[Z_\mu, Z_\nu]_+ = 2\,\delta^M_{(\mu,\nu)}\,I_{(\mathbb{C}^2)^{\otimes M}}, \qquad
+        String.raw`[Z_\mu, Z_\nu]_+ = 2\,\delta^M_{(\mu,\nu)}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}, \qquad
 [Z_\mu, Y_\nu]_+ = 0, \qquad
-[Y_\mu, Y_\nu]_+ = 2\,\delta^M_{(\mu,\nu)}\,I_{(\mathbb{C}^2)^{\otimes M}}`,
+[Y_\mu, Y_\nu]_+ = 2\,\delta^M_{(\mu,\nu)}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
       ),
       paragraph([
         "であった。ここで ",
@@ -65,7 +65,7 @@ export default defineNotes([
       ),
       paragraph(["と書き直すと、上の 3 本はまとめて 1 本の式になる："]),
       displayMath(
-        String.raw`e_a e_b + e_b e_a = 2\,\delta_{ab}\,I_{(\mathbb{C}^2)^{\otimes M}}
+        String.raw`e_a e_b + e_b e_a = 2\,\delta_{ab}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
 \qquad (a, b \in \{1,\dots,2M\}).`,
       ),
       paragraph([
@@ -107,7 +107,7 @@ export default defineNotes([
         " 個ある。一方、",
       ]),
       displayMath(
-        String.raw`\dim_{\mathbb{C}} \mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+        String.raw`\dim_{\mathbb{C}} \mathrm{Mat}(2^M,\mathbb{C})
 = \dim_{\mathbb{C}} \mathrm{Mat}(2^M, \mathbb{C})
 = 2^M \times 2^M = 2^{2M}`,
       ),
@@ -149,7 +149,7 @@ Y_m = \sigma_1^x \cdots \sigma_{m-1}^x\, \sigma_m^y`,
         "（",
         math(String.raw`Z, Y`),
         " が ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " を環として生成する）と ",
         ref("Z_Y_linearly_independent"),
         " が、この同型の 2 つの側面（全射性・単射性）に対応している。",
@@ -288,7 +288,7 @@ V_2 = (2 s_2)^{M/2} \exp\!\bigl(i K_2^{*} (Z_1 Y_1 + \cdots + Z_M Y_M)\bigr)`,
     body: [
       paragraph([
         "前項の対応を、写像として書き直す。可逆な ",
-        math(String.raw`W \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`W \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " のうち共役が ",
         math(String.raw`\mathcal{V}`),
         " を保つものを集めると群（クリフォード群）になり、",
@@ -310,7 +310,7 @@ V_2 = (2 s_2)^{M/2} \exp\!\bigl(i K_2^{*} (Z_1 Y_1 + \cdots + Z_M Y_M)\bigr)`,
         "前項の同型（",
         ref("Z_Y_generate_algebra"),
         "）により、生成元の積と線型結合は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " 全体を尽くすので、",
         math(String.raw`W`),
         " は全行列環の中心の元になる。そして中心はスカラーに限る（",
@@ -318,7 +318,7 @@ V_2 = (2 s_2)^{M/2} \exp\!\bigl(i K_2^{*} (Z_1 Y_1 + \cdots + Z_M Y_M)\bigr)`,
         "）。すなわち",
       ]),
       displayMath(
-        String.raw`\ker\bigl(W \mapsto T_{(W)}\bigr) = \{\, c\, I_{(\mathbb{C}^2)^{\otimes M}} \;:\; c \in \mathbb{C}^{\times} \,\}`,
+        String.raw`\ker\bigl(W \mapsto T_{(W)}\bigr) = \{\, c\, I_{\mathrm{Mat}(2^M,\mathbb{C})} \;:\; c \in \mathbb{C}^{\times} \,\}`,
       ),
       paragraph([
         "である。核がスカラーちょうどであることが、「共役が一致する 2 つの行列は定数倍を除いて一致する」",

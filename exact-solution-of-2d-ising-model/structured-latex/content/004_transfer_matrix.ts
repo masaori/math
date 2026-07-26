@@ -37,20 +37,20 @@ export default defineBlocks([
           " 上の単位行列",
         ],
         [
-          math(String.raw`\sigma_k^x := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes \overbrace{\sigma^x}^{k\text{th}} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`\sigma_k^x := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^x}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
         ],
         [
-          math(String.raw`\sigma_k^y := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes \overbrace{\sigma^y}^{k\text{th}} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`\sigma_k^y := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^y}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
         ],
         [
-          math(String.raw`\sigma_k^z := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes \overbrace{\sigma^z}^{k\text{th}} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`\sigma_k^z := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^z}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
         ],
         [
-          math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
+          math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
         ],
         [
           math(String.raw`V_1 := \exp\!\left(K_1 \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
-= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
           "（",
           math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
           " とし、",
@@ -58,10 +58,10 @@ export default defineBlocks([
           " と周期的に延長した上での和である）",
         ],
         [
-          math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
         ],
         [
-          math(String.raw`Z_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^z \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`Z_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^z \in \mathrm{Mat}(2^M,\mathbb{C})`),
           "（ただし ",
           math(String.raw`Z_1 := \sigma_1^z`),
           "、",
@@ -71,7 +71,7 @@ export default defineBlocks([
           "）",
         ],
         [
-          math(String.raw`Y_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^y \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`Y_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^y \in \mathrm{Mat}(2^M,\mathbb{C})`),
           "（ただし ",
           math(String.raw`Y_1 := \sigma_1^y`),
           "、",
@@ -81,7 +81,7 @@ export default defineBlocks([
           "）",
         ],
         [
-          math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2^M,\mathbb{C})`),
           "（右辺は ",
           math(String.raw`Z_m Y_m`),
           " の積であって和ではない。",
@@ -107,18 +107,14 @@ export default defineBlocks([
       ]),
       paragraph([
         "ここで ",
-        math(String.raw`\otimes`),
+        math(String.raw`\boxtimes`),
         " は ",
         ref("def_kronecker"),
-        " のクロネッカー積 ",
-        math(String.raw`\boxtimes`),
-        " の別記法であり、",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " のクロネッカー積であり、",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " は ",
         math(String.raw`2^M`),
-        " 次の複素正方行列全体 ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " のことである。すなわち上の ",
+        " 次の複素正方行列全体である。すなわち上の ",
         math(String.raw`\sigma_k^x, \sigma_k^y, \sigma_k^z, Z_m, Y_m, \varepsilon`),
         " などはすべて具体的な ",
         math(String.raw`2^M`),
@@ -133,7 +129,7 @@ export default defineBlocks([
         " の同型 ",
         math(String.raw`\mathbf{end}`),
         " による同一視 ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} \cong \mathrm{End}(\mathcal{F})`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \cong \mathrm{End}(\mathcal{F})`),
         " のもとでの ",
         ref("def_exp"),
         " の ",
@@ -144,6 +140,7 @@ export default defineBlocks([
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（および本ブロックの旧版）の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と" +
           "虚数単位を含んでいたが、これは誤りなので K_1 に訂正した。根拠: Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} " +
           "（<V1_V2_in_Z_Y_epsilon> の証明 Step 2）であるから、定義を原文どおり √-1 K_1 とすると " +
@@ -177,9 +174,9 @@ export default defineBlocks([
         " とし、",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`Z_1,\dots,Z_M,Y_1,\dots,Y_M \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`Z_1,\dots,Z_M,Y_1,\dots,Y_M \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を考える。",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " を ",
         math(String.raw`\mathbb{C}`),
         "-線型空間とみなすとき、",
@@ -285,12 +282,12 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         " で添字づけられた族",
       ]),
       displayMath(
-        String.raw`\mathcal{E}:=\left\{\,e_{i_1}\otimes\cdots\otimes e_{i_M}
+        String.raw`\mathcal{E}:=\left\{\,e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}
 \;\middle|\;(i_1,\dots,i_M)\in\{1,2,3,4\}^M\,\right\}`,
       ),
       paragraph([
         "は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の ",
         math(String.raw`\mathbb{C}`),
         "-基底である。",
@@ -306,8 +303,8 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
       ]),
       displayMath(
         String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}
-= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes
-\overbrace{I\otimes\cdots\otimes I}^{M-r}`,
+= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}`,
       ),
       paragraph([
         "が成り立つことを ",
@@ -325,20 +322,20 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         " (1)）",
       ]),
       displayMath(
-        String.raw`(A_1\otimes\cdots\otimes A_M)(B_1\otimes\cdots\otimes B_M)
-= (A_1B_1)\otimes\cdots\otimes(A_MB_M)`,
+        String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M)
+= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)`,
       ),
       paragraph(["と ", math(String.raw`AI=IA=A`), " より、"]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
-&= \left(\sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes I\otimes I\otimes\cdots\otimes I\right)
-   \left(I\otimes\cdots\otimes I\otimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+&= \left(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes I\boxtimes I\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{帰納法の仮定}) \\
-&= (\sigma^{a_1}I)\otimes\cdots\otimes(\sigma^{a_r}I)\otimes(I\sigma^{a_{r+1}})\otimes(II)\otimes\cdots\otimes(II)
+&= (\sigma^{a_1}I)\boxtimes\cdots\boxtimes(\sigma^{a_r}I)\boxtimes(I\sigma^{a_{r+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
 \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes\sigma^{a_{r+1}}\otimes
-   \overbrace{I\otimes\cdots\otimes I}^{M-(r+1)}
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes\sigma^{a_{r+1}}\boxtimes
+   \overbrace{I\boxtimes\cdots\boxtimes I}^{M-(r+1)}
 \quad (\because AI=IA=A)
 \end{aligned}`,
       ),
@@ -362,12 +359,12 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Z_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
-\otimes\overbrace{\sigma^z}^{m\text{th}}
-\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m} \\
-Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
-\otimes\overbrace{\sigma^y}^{m\text{th}}
-\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m}
+Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{\sigma^z}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m} \\
+Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{\sigma^y}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
 \end{aligned}`,
       ),
       paragraph([
@@ -386,9 +383,9 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
         "に対応する ",
         math(String.raw`\mathcal{E}`),
         " の元であることを意味する。すなわち ",
-        math(String.raw`Z_m=e_{\zeta(m)_1}\otimes\cdots\otimes e_{\zeta(m)_M}`),
+        math(String.raw`Z_m=e_{\zeta(m)_1}\boxtimes\cdots\boxtimes e_{\zeta(m)_M}`),
         "、",
-        math(String.raw`Y_m=e_{\eta(m)_1}\otimes\cdots\otimes e_{\eta(m)_M}`),
+        math(String.raw`Y_m=e_{\eta(m)_1}\boxtimes\cdots\boxtimes e_{\eta(m)_M}`),
         "。",
       ]),
       paragraph([
@@ -522,6 +519,7 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の proof は「TODO: 証明略」のみ。ここで証明を与えた。",
         "原文の statement は式のみで、どの体上・どの空間での線型独立かが書かれていなかったため、" +
           "Mat(2,C)^{⊗M} を C-線型空間とみなしたときの線型独立性であることを statement に明示した" +
@@ -547,7 +545,7 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
         " の ",
         math(String.raw`V_1, V_2, Z_m, Y_m, \varepsilon, K_1, K_2^*, s_2 \;(= \sinh 2K_2)`),
         " を考える。このとき ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の中で",
       ]),
       displayMath(
@@ -567,7 +565,7 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
         "証明の方針: ",
         math(String.raw`\exp`),
         " の中身どうしが ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の元として等しいことを示す。",
         math(String.raw`\exp`),
         " は写像であるから、これが示されれば ",
@@ -588,8 +586,8 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
         " (1)）",
       ]),
       displayMath(
-        String.raw`(A_1\otimes\cdots\otimes A_M)(B_1\otimes\cdots\otimes B_M)
-= (A_1B_1)\otimes\cdots\otimes(A_MB_M)
+        String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M)
+= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)
 \quad (\because \text{クロネッカー積の積の規則})`,
       ),
       paragraph([
@@ -600,8 +598,8 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
         "）",
       ]),
       displayMath(
-        String.raw`C_1\otimes\cdots\otimes\overbrace{(c\,C_j)}^{j\text{th}}\otimes\cdots\otimes C_M
-= c\,(C_1\otimes\cdots\otimes C_M) \quad (c\in\mathbb{C})
+        String.raw`C_1\boxtimes\cdots\boxtimes\overbrace{(c\,C_j)}^{j\text{th}}\boxtimes\cdots\boxtimes C_M
+= c\,(C_1\boxtimes\cdots\boxtimes C_M) \quad (c\in\mathbb{C})
 \quad (\because \text{第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})`,
       ),
       paragraph(["を繰り返し用いる。"]),
@@ -640,8 +638,8 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
       ]),
       displayMath(
         String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}
-= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes
-\overbrace{I\otimes\cdots\otimes I}^{M-r}`,
+= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}`,
       ),
       paragraph([
         "が成り立つ。これを ",
@@ -659,13 +657,13 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
       displayMath(
         String.raw`\begin{aligned}
 \sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
-&= \left(\sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes I\otimes\cdots\otimes I\right)
-   \left(I\otimes\cdots\otimes I\otimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+&= \left(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes I\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{帰納法の仮定}) \\
-&= (\sigma^{a_1}I)\otimes\cdots\otimes(\sigma^{a_r}I)\otimes(I\sigma^{a_{r+1}})\otimes(II)\otimes\cdots\otimes(II)
+&= (\sigma^{a_1}I)\boxtimes\cdots\boxtimes(\sigma^{a_r}I)\boxtimes(I\sigma^{a_{r+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
 \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_{r+1}}\otimes
-   \overbrace{I\otimes\cdots\otimes I}^{M-(r+1)}
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_{r+1}}\boxtimes
+   \overbrace{I\boxtimes\cdots\boxtimes I}^{M-(r+1)}
 \quad (\because AI=IA=A)
 \end{aligned}`,
       ),
@@ -692,13 +690,13 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Z_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
-\otimes\overbrace{\sigma^z}^{m\text{th}}
-\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m} \\
-Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
-\otimes\overbrace{\sigma^y}^{m\text{th}}
-\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m} \\
-\varepsilon &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M}
+Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{\sigma^z}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m} \\
+Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{\sigma^y}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m} \\
+\varepsilon &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}
 \end{aligned}`,
       ),
       paragraph([
@@ -722,7 +720,7 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
       ]),
       displayMath(
         String.raw`\sigma_m^z\sigma_{m+1}^z
-= \overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m-1}
+= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}
 \quad (\because \text{クロネッカー積の積の規則})`,
       ),
       paragraph([
@@ -736,7 +734,7 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
       ]),
       displayMath(
         String.raw`\sigma_M^z\sigma_1^z
-= \overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-2}\otimes\overbrace{\sigma^z}^{M\text{th}}
+= \overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{\sigma^z}^{M\text{th}}
 = \sigma_1^z\sigma_M^z
 \quad (\because \text{クロネッカー積の積の規則})`,
       ),
@@ -750,15 +748,15 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
       displayMath(
         String.raw`\begin{aligned}
 Y_m Z_{m+1}
-&= \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^y}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
-   \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^x}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+&= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^y}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
+   \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^x}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{Step 1}) \\
-&= \overbrace{(\sigma^x\sigma^x)\otimes\cdots\otimes(\sigma^x\sigma^x)}^{m-1}
-   \otimes\overbrace{(\sigma^y\sigma^x)}^{m\text{th}}\otimes\overbrace{(I\sigma^z)}^{(m+1)\text{th}}\otimes(II)\otimes\cdots\otimes(II)
+&= \overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}
+   \boxtimes\overbrace{(\sigma^y\sigma^x)}^{m\text{th}}\boxtimes\overbrace{(I\sigma^z)}^{(m+1)\text{th}}\boxtimes(II)\boxtimes\cdots\boxtimes(II)
 \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{(-i\,\sigma^z)}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes I\otimes\cdots\otimes I
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{(-i\,\sigma^z)}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I
 \quad (\because \sigma^x\sigma^x = I,\ \sigma^y\sigma^x = -i\,\sigma^z \text{（Step 0）}) \\
-&= (-i)\left(\overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+&= (-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
 &= -i\,\sigma_m^z\sigma_{m+1}^z \quad (\because \text{Step 1})
 \end{aligned}`,
@@ -793,17 +791,17 @@ Y_m Z_{m+1}
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\, Y_M Z_1
-&= \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M}\right)
-   \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M-1}\otimes\overbrace{\sigma^y}^{M\text{th}}\right)
-   \left(\overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-1}\right)
+&= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}\right)
+   \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\overbrace{\sigma^y}^{M\text{th}}\right)
+   \left(\overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}\right)
 \quad (\because \text{Step 1}) \\
 &= \overbrace{(\sigma^x\sigma^x\sigma^z)}^{1\text{st}}
-   \otimes\overbrace{(\sigma^x\sigma^x I)\otimes\cdots\otimes(\sigma^x\sigma^x I)}^{2\text{nd},\dots,(M-1)\text{th}}
-   \otimes\overbrace{(\sigma^x\sigma^y I)}^{M\text{th}}
+   \boxtimes\overbrace{(\sigma^x\sigma^x I)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x I)}^{2\text{nd},\dots,(M-1)\text{th}}
+   \boxtimes\overbrace{(\sigma^x\sigma^y I)}^{M\text{th}}
 \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-2}\otimes\overbrace{(i\,\sigma^z)}^{M\text{th}}
+&= \overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{(i\,\sigma^z)}^{M\text{th}}
 \quad (\because \sigma^x\sigma^x = I,\ AI=A,\ \sigma^x\sigma^y = i\,\sigma^z \text{（Step 0）}) \\
-&= i\left(\overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-2}\otimes\overbrace{\sigma^z}^{M\text{th}}\right)
+&= i\left(\overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{\sigma^z}^{M\text{th}}\right)
 \quad (\because \text{第 } M \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
 &= i\,\sigma_M^z\sigma_1^z \quad (\because \text{Step 1 の最後の式})
 \end{aligned}`,
@@ -828,14 +826,14 @@ Y_m Z_{m+1}
       displayMath(
         String.raw`\begin{aligned}
 Z_m Y_m
-&= \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
-   \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^y}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
+&= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
+   \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^y}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{Step 1}) \\
-&= \overbrace{(\sigma^x\sigma^x)\otimes\cdots\otimes(\sigma^x\sigma^x)}^{m-1}\otimes\overbrace{(\sigma^z\sigma^y)}^{m\text{th}}\otimes(II)\otimes\cdots\otimes(II)
+&= \overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}\boxtimes\overbrace{(\sigma^z\sigma^y)}^{m\text{th}}\boxtimes(II)\boxtimes\cdots\boxtimes(II)
 \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{(-i\,\sigma^x)}^{m\text{th}}\otimes I\otimes\cdots\otimes I
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{(-i\,\sigma^x)}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I
 \quad (\because \sigma^x\sigma^x = I,\ \sigma^z\sigma^y = -i\,\sigma^x \text{（Step 0）}) \\
-&= (-i)\left(\overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{\sigma^x}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
+&= (-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^x}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
 &= -i\,\sigma_m^x
 \end{aligned}`,
@@ -872,13 +870,13 @@ K_1\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z
 &= K_1\left(\sum_{m=1}^{M-1} i\,Y_m Z_{m+1}\right) + K_1\left(-i\,\varepsilon\,Y_M Z_1\right)
 \quad (\because \text{Step 2, Step 3}) \\
 &= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} - \varepsilon\, Y_M Z_1\right)
-\quad (\because \mathbb{C}\text{-線型空間 } \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \text{ でのスカラー倍の分配律}) \\
+\quad (\because \mathbb{C}\text{-線型空間 } \mathrm{Mat}(2^M,\mathbb{C}) \text{ でのスカラー倍の分配律}) \\
 &= i K_1\left(Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - \varepsilon\,Y_M Z_1\right)
 \end{aligned}`,
       ),
       paragraph([
         "両辺は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の同一の元であるから、",
         math(String.raw`\exp`),
         " の値も等しく、",
@@ -917,6 +915,7 @@ K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の proof は「TODO」のみ。ここで証明を与えた。",
         "証明の過程で、原文の V_1 の定義に含まれていた虚数単位が誤りであることが判明したため、" +
           "<def_transfer_matrix_symbols> 側を訂正した（理由はそちらの conversion.notes を参照）。",
@@ -930,20 +929,22 @@ K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
     kind: "definition",
     sourcePath: "_old/typst/parts/004_転送行列/004_definition_EndFとMat2Cテンソル積Mの同型.typ",
     sourceOrdinal: 5,
-    title: { tex: String.raw`\mathbf{end}: \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{End}(\mathcal{F})` },
+    title: { tex: String.raw`\mathbf{end}: \mathrm{Mat}(2^M,\mathbb{C}) \to \mathrm{End}(\mathcal{F})` },
     labels: ["def_end_iso"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
         " とし、",
       ]),
-      displayMath(String.raw`\mathcal{F} := (\mathbb{C}^2)^{\otimes M} = \mathbb{C}^{2^M}`),
+      displayMath(String.raw`\mathcal{F} := \mathbb{C}^{2^M}`),
       paragraph([
         "とおく（",
-        ref("def_kronecker"),
-        " の同一視により、これは ",
         math(String.raw`2^M`),
-        " 次元の数ベクトル全体である）。",
+        " 次元の数ベクトル全体。",
+        ref("def_kronecker"),
+        " のクロネッカー積 ",
+        math(String.raw`v_1\boxtimes\cdots\boxtimes v_M`),
+        " が住む空間である）。",
         math(String.raw`\mathbb{C}^2`),
         " の標準基底を ",
         math(String.raw`e_1 := (1,0),\ e_2 := (0,1)`),
@@ -966,8 +967,8 @@ K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
         " について",
       ]),
       displayMath(
-        String.raw`f_I := e_{i_1}\otimes\cdots\otimes e_{i_M} \in \mathcal{F}, \qquad
-E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+        String.raw`f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathcal{F}, \qquad
+E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "とおく（",
@@ -991,7 +992,7 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
         "）であり、",
         math(String.raw`(E_{I,J})_{I,J\in\mathcal{I}}`),
         " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の ",
         math(String.raw`\mathbb{C}`),
         "-基底（",
@@ -1023,7 +1024,7 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
         "-線型に拡張した写像",
       ]),
       displayMath(
-        String.raw`\mathbf{end}: \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{End}(\mathcal{F})`,
+        String.raw`\mathbf{end}: \mathrm{Mat}(2^M,\mathbb{C}) \to \mathrm{End}(\mathcal{F})`,
       ),
       paragraph([
         "とおく（",
@@ -1031,7 +1032,7 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
         " より、これは単位的 ",
         math(String.raw`\mathbb{C}`),
         "-代数の同型である）。",
-        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`A \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " の ",
         math(String.raw`\mathcal{F}`),
         " への作用 ",
@@ -1061,20 +1062,20 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
         " の ",
         math(String.raw`\exp : \mathrm{End}(\mathcal{F}) \to \mathrm{End}(\mathcal{F})`),
         " が定まる。そこで ",
-        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`A \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " に対する ",
         math(String.raw`\exp(A)`),
         " を、この同型による移送で",
       ]),
       displayMath(
         String.raw`\exp(A) := \mathbf{end}^{-1}\!\left(\exp(\mathbf{end}(A))\right)
-\in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "と定める。定義から直ちに",
       ]),
       displayMath(
-        String.raw`\mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A)) \qquad (A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M})`,
+        String.raw`\mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A)) \qquad (A \in \mathrm{Mat}(2^M,\mathbb{C}))`,
       ),
       paragraph([
         "が成り立つ（",
@@ -1087,6 +1088,7 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文は「End(F) と Mat(2,C)^{⊗M} の線型同型写像を一つ取る」としか書いていないが、" +
           "任意に取った線型同型では積・単位元が保たれず、<V1_restriction_to_eigenspaces> の証明" +
           "（ε の作用と exp の級数を交換する）が成立しない。そこで、正準な単位的 C-代数同型を" +
@@ -1125,12 +1127,12 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
           "(2) ",
           math(String.raw`\mathbf{end}(AB) = \mathbf{end}(A)\circ\mathbf{end}(B)`),
           "（",
-          math(String.raw`A,B\in\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`A,B\in\mathrm{Mat}(2^M,\mathbb{C})`),
           "）。",
         ],
         [
           "(3) ",
-          math(String.raw`\mathbf{end}\!\left(I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right) = \mathrm{id}_{\mathcal{F}}`),
+          math(String.raw`\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) = \mathrm{id}_{\mathcal{F}}`),
           "。",
         ],
         [
@@ -1140,8 +1142,8 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
           math(String.raw`v_1,\dots,v_M \in \mathbb{C}^2`),
           " について ",
           math(
-            String.raw`\left(\mathbf{end}(A_1\otimes\cdots\otimes A_M)\right)(v_1\otimes\cdots\otimes v_M)
-= (A_1v_1)\otimes\cdots\otimes(A_Mv_M)`,
+            String.raw`\left(\mathbf{end}(A_1\boxtimes\cdots\boxtimes A_M)\right)(v_1\boxtimes\cdots\boxtimes v_M)
+= (A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)`,
           ),
           "。",
         ],
@@ -1251,9 +1253,9 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
       displayMath(
         String.raw`\begin{aligned}
 E_{I,J}E_{K,L}
-&= (E_{i_1j_1}E_{k_1l_1})\otimes\cdots\otimes(E_{i_Mj_M}E_{k_Ml_M})
+&= (E_{i_1j_1}E_{k_1l_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}E_{k_Ml_M})
 \quad (\because \text{クロネッカー積の積の規則}) \\
-&= (\delta_{j_1,k_1}E_{i_1l_1})\otimes\cdots\otimes(\delta_{j_M,k_M}E_{i_Ml_M}) \\
+&= (\delta_{j_1,k_1}E_{i_1l_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}E_{i_Ml_M}) \\
 &= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right) E_{I,L}
 \quad (\because \text{各因子についての } \mathbb{C}\text{-線型性})
 = \delta_{J,K}E_{I,L}
@@ -1287,8 +1289,8 @@ E_{I,J}E_{K,L}
         "。和で展開する）より",
       ]),
       displayMath(
-        String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
-= \underbrace{(E_{11}+E_{22})\otimes\cdots\otimes(E_{11}+E_{22})}_{M}
+        String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}
+= \underbrace{(E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})}_{M}
 = \sum_{I\in\mathcal{I}} E_{I,I}`,
       ),
       paragraph([
@@ -1299,7 +1301,7 @@ E_{I,J}E_{K,L}
         " だから ",
         math(String.raw`\sum_{I}\Theta_{I,I} = \mathrm{id}_{\mathcal{F}}`),
         "。よって ",
-        math(String.raw`\mathbf{end}\!\left(I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right) = \mathrm{id}_{\mathcal{F}}`),
+        math(String.raw`\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) = \mathrm{id}_{\mathcal{F}}`),
         "。",
       ]),
       paragraph([
@@ -1316,7 +1318,7 @@ E_{I,J}E_{K,L}
         "（成分計算）より右辺は",
       ]),
       displayMath(
-        String.raw`(E_{i_1j_1}e_{k_1})\otimes\cdots\otimes(E_{i_Mj_M}e_{k_M})
+        String.raw`(E_{i_1j_1}e_{k_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}e_{k_M})
 = \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)f_I
 = \delta_{J,K}f_I`,
       ),
@@ -1329,6 +1331,7 @@ E_{I,J}E_{K,L}
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（Typst）に対応ブロックは無い。原文が「線型同型を一つ取る」で済ませていた end を" +
           "正準な単位的代数同型として構成したため、その性質（<V1_restriction_to_eigenspaces> の証明で" +
           "実際に使うのは線型性・乗法性・単位元の保存）をここで証明した。",
@@ -1346,9 +1349,9 @@ E_{I,J}E_{K,L}
       paragraph([
         ref("def_end_iso"),
         " の ",
-        math(String.raw`\mathcal{F} = (\mathbb{C}^2)^{\otimes M}`),
+        math(String.raw`\mathcal{F} = \mathbb{C}^{2^M}`),
         " と、",
-        math(String.raw`\varepsilon \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2^M,\mathbb{C})`),
         "（",
         ref("def_transfer_matrix_symbols"),
         "）の ",
@@ -1376,7 +1379,7 @@ E_{I,J}E_{K,L}
         "なお ",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x = \sigma^x\otimes\cdots\otimes\sigma^x`),
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
         " と ",
         ref("pauli_matrix_products"),
         " の ",
@@ -1386,8 +1389,8 @@ E_{I,J}E_{K,L}
         " (1)(2) より",
       ]),
       displayMath(
-        String.raw`\varepsilon^2 = (\sigma^x\sigma^x)\otimes\cdots\otimes(\sigma^x\sigma^x)
-= I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+        String.raw`\varepsilon^2 = (\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)
+= I_{\mathrm{Mat}(2^M,\mathbb{C})}
 \quad (\because \text{クロネッカー積の積の規則})`,
       ),
       paragraph([
@@ -1413,6 +1416,7 @@ E_{I,J}E_{K,L}
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文は εf の意味（ε は Mat(2,C)^{⊗M} の元であって F の自己準同型ではない）を書いていないため、" +
           "<def_end_iso> の end による作用であることを明示した。あわせて、原文が「ε² = 1 より固有値は ±1」と" +
           "根拠なしに述べていた部分に、ε² = I の因子ごとの計算と固有値が ±1 に限る理由を補った。",
@@ -1477,14 +1481,14 @@ E_{I,J}E_{K,L}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-W &:= Y_M Z_1 \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \\
-G &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} - \varepsilon W\right) \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \\
-G^{(\pm)} &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} \mp W\right) \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+W &:= Y_M Z_1 \ \in \mathrm{Mat}(2^M,\mathbb{C}) \\
+G &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} - \varepsilon W\right) \ \in \mathrm{Mat}(2^M,\mathbb{C}) \\
+G^{(\pm)} &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} \mp W\right) \ \in \mathrm{Mat}(2^M,\mathbb{C})
 \end{aligned}`,
       ),
       paragraph([
         "である（複号同順）。以下 ",
-        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`A \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " に対し ",
         math(String.raw`\hat{A} := \mathbf{end}(A) \in \mathrm{End}(\mathcal{F})`),
         " と書く。",
@@ -1514,9 +1518,9 @@ G^{(\pm)} &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} \mp W\right) \ \in \mathrm
         " の証明 Step 1 と同じクロネッカー積による表示",
       ]),
       displayMath(
-        String.raw`\varepsilon = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M},\qquad
-Z_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m},\qquad
-Y_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^y}^{m\text{th}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m}`,
+        String.raw`\varepsilon = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M},\qquad
+Z_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m},\qquad
+Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^y}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}`,
       ),
       paragraph([
         "のもとで ",
@@ -1663,7 +1667,7 @@ Y_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\s
         " に対し ",
         math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
         "。まず ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の中で",
       ]),
       displayMath(
@@ -1823,6 +1827,7 @@ Y_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\s
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の proof は「TODO」のみ。ここで証明を与えた。",
         "証明には end が単位的代数の同型であること（積の保存）が必要であり、原文のように" +
           "「線型同型を一つ取る」だけでは Step 3・Step 4 が成立しない。<def_end_iso> を書き換えた理由はそちら参照。",
@@ -1845,7 +1850,7 @@ Y_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\s
       ]),
       displayMath(
         String.raw`V_1^{(\pm)} := \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)
-\in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "とおく。",
@@ -1862,6 +1867,7 @@ Y_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\s
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "参照のためラベル <def_V1_pm> を付け、M の範囲と exp の意味（<def_end_iso> の同一視による）を" +
           "明示した（定義の内容自体は変えていない）。",
       ],
@@ -2261,13 +2267,13 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
       paragraph([
         ref("def_transfer_matrix_symbols"),
         "（004 章冒頭の記号の定義）で定義された ",
-        math(String.raw`Z_1,\dots,Z_M, Y_1,\dots,Y_M \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`Z_1,\dots,Z_M, Y_1,\dots,Y_M \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について、集合 ",
         math(String.raw`S := \{Z_1,\dots,Z_M, Y_1,\dots,Y_M\}`),
         " を考える（",
         ref("def_kronecker"),
         " の同一視により ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} = \mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C}) = \mathrm{Mat}(2^M,\mathbb{C})`),
         " であり、",
         math(String.raw`S`),
         " の元はいずれも ",
@@ -2275,7 +2281,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
         " 次の複素行列である）。",
       ]),
       paragraph([
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の部分集合 ",
         math(String.raw`T`),
         " が「閉じている」とは、次の 4 条件を満たすことをいう。",
@@ -2290,7 +2296,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
         ],
         [
           "(ii) ",
-          math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} \in T`),
+          math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} \in T`),
           "（単位行列を含む）。",
         ],
         [
@@ -2313,7 +2319,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
         ],
       ]),
       paragraph([
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " 自身は閉じているからそのような ",
         math(String.raw`T`),
         " は少なくとも 1 つ存在し、閉じている部分集合すべての共通部分もまた (i)〜(iv) を満たす",
@@ -2327,7 +2333,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
       ]),
       paragraph([
         "このとき ",
-        math(String.raw`\mathcal{A} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^M,\mathbb{C})`),
         " である。すなわち、",
         math(String.raw`Z_1,\dots,Z_M,Y_1,\dots,Y_M`),
         " と単位行列から出発して、和・スカラー倍・行列の積を有限回繰り返すだけで ",
@@ -2370,9 +2376,9 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
         "（",
         math(String.raw`i^{-1}=-i`),
         "）。これらをクロネッカー積へ持ち上げる。",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の積は各因子ごとの積であり ",
-        math(String.raw`(A_1\otimes\cdots\otimes A_M)(B_1\otimes\cdots\otimes B_M) = (A_1 B_1)\otimes\cdots\otimes(A_M B_M)`),
+        math(String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M) = (A_1 B_1)\boxtimes\cdots\boxtimes(A_M B_M)`),
         "（",
         ref("kronecker_product_rule"),
         " (1)）。第 ",
@@ -2386,14 +2392,14 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
       displayMath(
         String.raw`\begin{aligned}
 \sigma_k^a \sigma_k^b
-&= (I\otimes\cdots\otimes\overbrace{\sigma^a}^{k\text{th}}\otimes\cdots\otimes I)(I\otimes\cdots\otimes\overbrace{\sigma^b}^{k\text{th}}\otimes\cdots\otimes I) \\
-&= (II)\otimes\cdots\otimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\otimes\cdots\otimes(II) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= I\otimes\cdots\otimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\otimes\cdots\otimes I \quad (\because II=I)
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{k\text{th}}\boxtimes\cdots\boxtimes I) \\
+&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes(II) \quad (\because \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes I \quad (\because II=I)
 \end{aligned}`,
       ),
       paragraph([
         "これより ",
-        math(String.raw`\sigma_k^x\sigma_k^x = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`\sigma_k^x\sigma_k^x = I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "、",
         math(String.raw`\sigma_k^x = -i\,\sigma_k^y\sigma_k^z`),
         " を得る。また異なるサイト ",
@@ -2407,9 +2413,9 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
       displayMath(
         String.raw`\begin{aligned}
 \sigma_k^a \sigma_l^b
-&= (I\otimes\cdots\otimes\overbrace{\sigma^a}^{k\text{th}}\otimes\cdots\otimes I)(I\otimes\cdots\otimes\overbrace{\sigma^b}^{l\text{th}}\otimes\cdots\otimes I) \\
-&= I\otimes\cdots\otimes\overbrace{\sigma^a}^{k\text{th}}\otimes\cdots\otimes\overbrace{\sigma^b}^{l\text{th}}\otimes\cdots\otimes I \quad (\because \text{クロネッカー積の積の規則}) \\
-&= (I\otimes\cdots\otimes\overbrace{\sigma^b}^{l\text{th}}\otimes\cdots\otimes I)(I\otimes\cdots\otimes\overbrace{\sigma^a}^{k\text{th}}\otimes\cdots\otimes I) \quad (\because \text{クロネッカー積の積の規則}) \\
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I \quad (\because \text{クロネッカー積の積の規則}) \\
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \text{クロネッカー積の積の規則}) \\
 &= \sigma_l^b \sigma_k^a
 \end{aligned}`,
       ),
@@ -2445,7 +2451,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
         "（",
         math(String.raw`m=1`),
         " では空積 ",
-        math(String.raw`P_0:=I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`P_0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "）。異サイトの可換性と ",
         math(String.raw`\sigma_k^x\sigma_k^x=I`),
         " より",
@@ -2455,7 +2461,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
 P_{m-1}P_{m-1}
 &= (\sigma_1^x\cdots\sigma_{m-1}^x)(\sigma_1^x\cdots\sigma_{m-1}^x) \\
 &= (\sigma_1^x\sigma_1^x)(\sigma_2^x\sigma_2^x)\cdots(\sigma_{m-1}^x\sigma_{m-1}^x) \quad (\because \text{異サイトの可換性}) \\
-&= I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} \quad (\because \sigma_k^x\sigma_k^x=I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}})
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})} \quad (\because \sigma_k^x\sigma_k^x=I_{\mathrm{Mat}(2^M,\mathbb{C})})
 \end{aligned}`,
       ),
       paragraph([
@@ -2471,7 +2477,7 @@ P_{m-1}P_{m-1}
         String.raw`\begin{aligned}
 P_{m-1}Z_m
 &= P_{m-1}P_{m-1}\sigma_m^z \quad (\because Z_m = P_{m-1}\sigma_m^z) \\
-&= I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\sigma_m^z \quad (\because P_{m-1}P_{m-1}=I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}\sigma_m^z \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
 &= \sigma_m^z
 \end{aligned}`,
       ),
@@ -2497,7 +2503,7 @@ P_{m-1}Z_m
       ]),
       paragraph([
         "Step 3: ",
-        math(String.raw`\mathcal{A} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^M,\mathbb{C})`),
         "。まず ",
         math(String.raw`\mathcal{B}:=\{I_{\mathrm{Mat}(2,\mathbb{C})}, \sigma^x, \sigma^y, \sigma^z\}`),
         " は ",
@@ -2517,57 +2523,58 @@ P_{m-1}Z_m
         " は張り、",
         math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{B}`),
         " より基底である。次に ",
-        math(String.raw`\mathcal{B}^{\otimes M}:=\{e_1\otimes\cdots\otimes e_M: e_1,\dots,e_M\in\mathcal{B}\}`),
+        math(String.raw`\mathcal{B}^{\boxtimes M}:=\{e_1\boxtimes\cdots\boxtimes e_M: e_1,\dots,e_M\in\mathcal{B}\}`),
         " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の基底である（",
         ref("tensor_basis"),
         " (2) を基底 ",
         math(String.raw`\mathcal{B}`),
         " に適用した）。一方、各 ",
-        math(String.raw`e_1\otimes\cdots\otimes e_M`),
+        math(String.raw`e_1\boxtimes\cdots\boxtimes e_M`),
         " について、各 ",
         math(String.raw`k`),
         " で ",
-        math(String.raw`\sigma_k^{a_k}:=I\otimes\cdots\otimes\overbrace{e_k}^{k\text{th}}\otimes\cdots\otimes I`),
+        math(String.raw`\sigma_k^{a_k}:=I\boxtimes\cdots\boxtimes\overbrace{e_k}^{k\text{th}}\boxtimes\cdots\boxtimes I`),
         " とおくと、Step 1 の異サイト積公式を繰り返して",
       ]),
       displayMath(
-        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_M^{a_M} = e_1\otimes e_2\otimes\cdots\otimes e_M \quad (\because \text{クロネッカー積の積の規則})`,
+        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_M^{a_M} = e_1\boxtimes e_2\boxtimes\cdots\boxtimes e_M \quad (\because \text{クロネッカー積の積の規則})`,
       ),
       paragraph([
         "Step 2 より各 ",
         math(String.raw`\sigma_k^{a_k}\in\mathcal{A}`),
         "（",
-        math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\in\mathcal{A}`),
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}\in\mathcal{A}`),
         " も含む）であり、",
         math(String.raw`\mathcal{A}`),
         " は積について閉じるから ",
-        math(String.raw`e_1\otimes\cdots\otimes e_M = \sigma_1^{a_1}\cdots\sigma_M^{a_M}\in\mathcal{A}`),
+        math(String.raw`e_1\boxtimes\cdots\boxtimes e_M = \sigma_1^{a_1}\cdots\sigma_M^{a_M}\in\mathcal{A}`),
         "。よって ",
-        math(String.raw`\mathcal{B}^{\otimes M}\subseteq\mathcal{A}`),
+        math(String.raw`\mathcal{B}^{\boxtimes M}\subseteq\mathcal{A}`),
         "。",
         math(String.raw`\mathcal{A}`),
         " は ",
         math(String.raw`\mathbb{C}`),
         "-線型結合について閉じ、",
-        math(String.raw`\mathcal{B}^{\otimes M}`),
+        math(String.raw`\mathcal{B}^{\boxtimes M}`),
         " は基底であるから",
       ]),
       displayMath(
-        String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} = \mathrm{span}_{\mathbb{C}}(\mathcal{B}^{\otimes M}) \subseteq \mathcal{A} \quad (\because \mathcal{A} \text{ は } \mathbb{C}\text{-線型結合について閉じる})`,
+        String.raw`\mathrm{Mat}(2^M,\mathbb{C}) = \mathrm{span}_{\mathbb{C}}(\mathcal{B}^{\boxtimes M}) \subseteq \mathcal{A} \quad (\because \mathcal{A} \text{ は } \mathbb{C}\text{-線型結合について閉じる})`,
       ),
       paragraph([
         "一方 ",
-        math(String.raw`\mathcal{A}\subseteq\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathcal{A}\subseteq\mathrm{Mat}(2^M,\mathbb{C})`),
         " は定義より明らかであるから ",
-        math(String.raw`\mathcal{A} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^M,\mathbb{C})`),
         "。",
       ]),
     ],
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "タイトルと statement にあった多元環の一般論の語彙（「環として生成する」「C 上の単位的結合多元環」" +
           "「S を含む最小の C-部分多元環」）を、「和・スカラー倍・積で閉じた最小の集合」という具体的な" +
           "言い換えへ直した（goal-alignment-audit の A-6。README 2 節「環・体などの一般論に持ち上げた証明」" +

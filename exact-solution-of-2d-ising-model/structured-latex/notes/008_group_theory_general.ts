@@ -817,7 +817,7 @@ export default defineNotes([
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 一般の環についての定義であり、読者に環と群の定義を先に要求するため。本文で必要なのは ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の可逆元だけなので、そこへ具体的に落とした ",
         ref("def_invertible_elements_of_R"),
         " を本文に置き、この一般の環についての記述はここへ退避した。",
