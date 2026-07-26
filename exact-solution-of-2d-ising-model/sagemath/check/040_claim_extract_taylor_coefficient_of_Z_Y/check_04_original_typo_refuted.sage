@@ -1,0 +1,62 @@
+# ---------------------------------------------------------
+# SageMath: 原文 proof の cases（誤植）が成り立たないことの確認
+#
+# 原文（_old/typst/parts/008_.../004_claim_テイラー係数の抽出.typ）の proof は
+#   (h1.y)  奇数項: i K_1^n e^{ i theta} hatY_mu        （正しくは -i K_1^n e^{i theta} hatZ_mu^{(pm)}）
+#           偶数項:   K_1^n hatZ_mu^{(pm)}              （正しくは    K_1^n hatY_mu）
+#   (h2.z-) 偶数項: i (K_2^*)^n hatZ_mu^{(-)}           （正しくは    (2K_2^*)^n hatZ_mu^{(-)}）
+#           奇数項: i (K_2^*)^n hatY_mu                 （正しくは -i (2K_2^*)^n hatY_mu）
+# と書いていた。これらが数値的に成り立たないこと（= statement 側ではなく proof 側が誤り）を示す。
+#
+# 対象: structured-latex extract_taylor_coefficient_of_Z_Y
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '../../_shared/spin_ops.sage'))
+
+MISMATCH_FLOOR = 1e-3   # 「明確に不一致」と判定する残差の下限
+
+print("=== 原文 proof の cases（誤植）と修正後の cases の比較 ===")
+all_ok = True
+for M in SPIN_TEST_M:
+    O = SpinOps(M)
+    K1v = RDF(0.7)
+    K2s = K_star(RDF(0.45))
+    fixed_worst = {'h1.y': 0.0, 'h2.z-': 0.0}
+    typo_min = {'h1.y': None, 'h2.z-': None}
+    for sgn in [1, -1]:
+        for mu in O.mu_range():
+            t = O.theta(mu)
+            Zh = O.Zhat(mu, sgn)
+            Zm = O.Zhat(mu, -1)
+            Yh = O.Yhat(mu)
+            X1 = CDF(I) / 2 * K1v * O.H1(sgn)
+            X2 = CDF(I) * K2s * O.H2
+            for n in [1, 2, 3, 4]:
+                odd = (n % 2 == 1)
+                a1 = CDF(K1v) ** n
+                a2 = CDF(2 * K2s) ** n
+                a2_typo = CDF(K2s) ** n
+                lhs_h1y = adpow(X1, Yh, n)
+                lhs_h2z = adpow(X2, Zm, n)
+                # 修正後（statement と整合する形）
+                fixed_h1y = (-CDF(I) * a1 * eiph(t) * Zh) if odd else (a1 * Yh)
+                fixed_h2z = (-CDF(I) * a2 * Yh) if odd else (a2 * Zm)
+                fixed_worst['h1.y'] = max(fixed_worst['h1.y'], opnorm(lhs_h1y - fixed_h1y))
+                fixed_worst['h2.z-'] = max(fixed_worst['h2.z-'], opnorm(lhs_h2z - fixed_h2z))
+                # 原文（誤植）
+                typo_h1y = (CDF(I) * a1 * eiph(t) * Yh) if odd else (a1 * Zh)
+                typo_h2z = (CDF(I) * a2_typo * Yh) if odd else (CDF(I) * a2_typo * Zm)
+                for key, res in [('h1.y', opnorm(lhs_h1y - typo_h1y)),
+                                 ('h2.z-', opnorm(lhs_h2z - typo_h2z))]:
+                    cur = typo_min[key]
+                    typo_min[key] = res if cur is None else min(cur, res)
+    print(f"M = {M}:")
+    for key in ['h1.y', 'h2.z-']:
+        all_ok = report(f"{key} 修正後（0 であるべき）", fixed_worst[key], tol=1e-8) and all_ok
+        ok = typo_min[key] >= MISMATCH_FLOOR
+        print(f"  {key} 原文（0 でないはず）: min residual = {typo_min[key]:.3e}"
+              f"  ->  {'PASS（不一致を確認）' if ok else 'FAIL'}")
+        all_ok = ok and all_ok
+
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")

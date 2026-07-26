@@ -1,0 +1,162 @@
+# 実行ログ — sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y
+# 実行日: 2026-07-26 / SageMath version 10.6 (Release Date: 2025-03-31) / macOS (Darwin 25.4.0)
+# 実行コマンド: for f in sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_*.sage; do sage "$f"; done
+
+##### 040_claim_extract_taylor_coefficient_of_Z_Y/check_01_single_commutators.sage
+=== 1 重の交換子 (A)-(D) ===
+M = 3:
+  (A): max residual = 3.114e-15  ->  PASS
+  (B): max residual = 3.120e-15  ->  PASS
+  (C): max residual = 1.110e-16  ->  PASS
+  (D): max residual = 9.154e-17  ->  PASS
+M = 4:
+  (A): max residual = 1.959e-15  ->  PASS
+  (B): max residual = 1.959e-15  ->  PASS
+  (C): max residual = 2.958e-31  ->  PASS
+  (D): max residual = 0.000e-12  ->  PASS
+M = 5:
+  (A): max residual = 2.449e-15  ->  PASS
+  (B): max residual = 2.512e-15  ->  PASS
+  (C): max residual = 3.331e-16  ->  PASS
+  (D): max residual = 4.246e-16  ->  PASS
+RESULT: PASS
+##### 040_claim_extract_taylor_coefficient_of_Z_Y/check_02_scaled_nested_commutators.sage
+  h1.z: max residual = 6.465e-16  ->  PASS
+  h1.y: max residual = 6.417e-16  ->  PASS
+  h2.z-: max residual = 4.279e-17  ->  PASS
+  h2.y: max residual = 7.578e-17  ->  PASS
+M = 3, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 6.201e-15  ->  PASS
+  h1.y: max residual = 5.901e-15  ->  PASS
+  h2.z-: max residual = 6.889e-14  ->  PASS
+  h2.y: max residual = 9.714e-14  ->  PASS
+M = 3, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 7.371e-16  ->  PASS
+  h1.y: max residual = 6.753e-16  ->  PASS
+  h2.z-: max residual = 3.675e-15  ->  PASS
+  h2.y: max residual = 8.651e-15  ->  PASS
+M = 3, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 8.082e-17  ->  PASS
+  h1.y: max residual = 8.021e-17  ->  PASS
+  h2.z-: max residual = 2.949e-11  ->  PASS
+  h2.y: max residual = 2.876e-11  ->  PASS
+M = 4, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 5.584e-16  ->  PASS
+  h1.y: max residual = 5.584e-16  ->  PASS
+  h2.z-: max residual = 3.698e-32  ->  PASS
+  h2.y: max residual = 1.849e-32  ->  PASS
+M = 4, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 1.421e-14  ->  PASS
+  h1.y: max residual = 1.421e-14  ->  PASS
+  h2.z-: max residual = 5.660e-29  ->  PASS
+  h2.y: max residual = 9.200e-29  ->  PASS
+M = 4, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 5.983e-16  ->  PASS
+  h1.y: max residual = 5.983e-16  ->  PASS
+  h2.z-: max residual = 4.441e-16  ->  PASS
+  h2.y: max residual = 4.441e-16  ->  PASS
+M = 4, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 6.980e-17  ->  PASS
+  h1.y: max residual = 6.980e-17  ->  PASS
+  h2.z-: max residual = 1.421e-14  ->  PASS
+  h2.y: max residual = 1.421e-14  ->  PASS
+M = 5, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 4.899e-16  ->  PASS
+  h1.y: max residual = 4.899e-16  ->  PASS
+  h2.z-: max residual = 1.176e-16  ->  PASS
+  h2.y: max residual = 1.124e-16  ->  PASS
+M = 5, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 6.187e-15  ->  PASS
+  h1.y: max residual = 6.187e-15  ->  PASS
+  h2.z-: max residual = 1.314e-12  ->  PASS
+  h2.y: max residual = 1.767e-12  ->  PASS
+M = 5, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 5.702e-16  ->  PASS
+  h1.y: max residual = 6.331e-16  ->  PASS
+  h2.z-: max residual = 2.724e-14  ->  PASS
+  h2.y: max residual = 4.841e-14  ->  PASS
+M = 5, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 6.123e-17  ->  PASS
+  h1.y: max residual = 6.123e-17  ->  PASS
+  h2.z-: max residual = 2.048e-10  ->  PASS
+  h2.y: max residual = 1.448e-10  ->  PASS
+RESULT: PASS
+##### 040_claim_extract_taylor_coefficient_of_Z_Y/check_03_taylor_sums.sage
+  h1.z: max residual = 1.077e-15  ->  PASS
+  h1.y: max residual = 1.112e-15  ->  PASS
+  h2.z-: max residual = 1.665e-15  ->  PASS
+  h2.y: max residual = 1.665e-15  ->  PASS
+M = 3, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 2.768e-15  ->  PASS
+  h1.y: max residual = 2.839e-15  ->  PASS
+  h2.z-: max residual = 1.503e-15  ->  PASS
+  h2.y: max residual = 2.481e-15  ->  PASS
+M = 3, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 1.198e-15  ->  PASS
+  h1.y: max residual = 1.208e-15  ->  PASS
+  h2.z-: max residual = 8.326e-16  ->  PASS
+  h2.y: max residual = 9.867e-16  ->  PASS
+M = 3, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 7.167e-16  ->  PASS
+  h1.y: max residual = 7.167e-16  ->  PASS
+  h2.z-: max residual = 1.110e-14  ->  PASS
+  h2.y: max residual = 1.058e-14  ->  PASS
+M = 4, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 1.402e-15  ->  PASS
+  h1.y: max residual = 1.402e-15  ->  PASS
+  h2.z-: max residual = 2.331e-15  ->  PASS
+  h2.y: max residual = 2.331e-15  ->  PASS
+M = 4, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 3.050e-15  ->  PASS
+  h1.y: max residual = 3.050e-15  ->  PASS
+  h2.z-: max residual = 1.973e-15  ->  PASS
+  h2.y: max residual = 2.105e-15  ->  PASS
+M = 4, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 1.337e-15  ->  PASS
+  h1.y: max residual = 1.337e-15  ->  PASS
+  h2.z-: max residual = 8.953e-16  ->  PASS
+  h2.y: max residual = 8.034e-16  ->  PASS
+M = 4, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 9.482e-16  ->  PASS
+  h1.y: max residual = 9.482e-16  ->  PASS
+  h2.z-: max residual = 6.217e-15  ->  PASS
+  h2.y: max residual = 6.217e-15  ->  PASS
+M = 5, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 1.835e-15  ->  PASS
+  h1.y: max residual = 1.835e-15  ->  PASS
+  h2.z-: max residual = 2.998e-15  ->  PASS
+  h2.y: max residual = 2.998e-15  ->  PASS
+M = 5, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 3.769e-15  ->  PASS
+  h1.y: max residual = 3.880e-15  ->  PASS
+  h2.z-: max residual = 3.374e-15  ->  PASS
+  h2.y: max residual = 3.244e-15  ->  PASS
+M = 5, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 1.670e-15  ->  PASS
+  h1.y: max residual = 1.670e-15  ->  PASS
+  h2.z-: max residual = 1.775e-15  ->  PASS
+  h2.y: max residual = 3.222e-15  ->  PASS
+M = 5, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 1.181e-15  ->  PASS
+  h1.y: max residual = 1.181e-15  ->  PASS
+  h2.z-: max residual = 4.641e-14  ->  PASS
+  h2.y: max residual = 4.390e-14  ->  PASS
+RESULT: PASS
+##### 040_claim_extract_taylor_coefficient_of_Z_Y/check_04_original_typo_refuted.sage
+=== 原文 proof の cases（誤植）と修正後の cases の比較 ===
+M = 3:
+  h1.y 修正後（0 であるべき）: max residual = 1.171e-15  ->  PASS
+  h1.y 原文（0 でないはず）: min residual = 1.159e+00  ->  PASS（不一致を確認）
+  h2.z- 修正後（0 であるべき）: max residual = 8.152e-16  ->  PASS
+  h2.z- 原文（0 でないはず）: min residual = 1.667e+00  ->  PASS（不一致を確認）
+M = 4:
+  h1.y 修正後（0 であるべき）: max residual = 1.019e-15  ->  PASS
+  h1.y 原文（0 でないはず）: min residual = 1.499e+00  ->  PASS（不一致を確認）
+  h2.z- 修正後（0 であるべき）: max residual = 4.441e-16  ->  PASS
+  h2.z- 原文（0 でないはず）: min residual = 2.223e+00  ->  PASS（不一致を確認）
+M = 5:
+  h1.y 修正後（0 であるべき）: max residual = 9.073e-16  ->  PASS
+  h1.y 原文（0 でないはず）: min residual = 1.838e+00  ->  PASS（不一致を確認）
+  h2.z- 修正後（0 であるべき）: max residual = 1.641e-15  ->  PASS
+  h2.z- 原文（0 でないはず）: min residual = 2.779e+00  ->  PASS（不一致を確認）
+RESULT: PASS
