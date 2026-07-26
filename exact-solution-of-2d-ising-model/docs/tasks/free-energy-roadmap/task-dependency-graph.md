@@ -222,18 +222,44 @@ A(θ~_μ) = B_1(θ~_μ) B_2 B_1(θ~_μ)
 
 | # | 対応する既存ブロック | 内容 |
 |---|---|---|
-| C′-12 | `eigenvector_of_A_theta` / `diagonalization_P_D` / `det_A_theta` / `gamma1_geq_1` / `lambda_eq_exp_gamma` | `A(θ~)` の対角化。**これらは θ の関数についての主張なので再利用できる見込み**（ただし `μ ∈ calM` で量化されているものは C′-11 と同様に θ ∈ R 一般へ立て直しが要る。θ~ での `γ_2 ≠ 0` は下記のとおり常に成立） |
+| C′-8 | `nesting_of_commutator_of_H_and_Z` | (A)〜(D) の n 重交換子。**完了**（`content/014_even_sector_T_action.ts`、`nesting_of_commutator_of_H_and_check_Z`） |
+| C′-9 | `cosh_sinh_coefficient_conversion` / `extract_taylor_coefficient_of_Z_Y` | 生成子のスケールとテイラー係数の抽出。**完了**（014 章、`cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y`） |
+| C′-10 | `ホロノミック量子場_p142下段_1` / `calc_of_TxT_hatZxhatY` | `T_{(V_1^{(+)})^{1/2}}, T_{V_2}` の作用と `B_1(θ~), B_2`。**完了**（014 章、`T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `def_B1_theta_B2`） |
+| C′-11 | `T_V_hatZ_hatY` / `factorization_of_A_theta` | `B_1B_2B_1 = A(θ~)` と `T_{(V^{(+)})}(Ž,Y̌) = (Ž,Y̌)A(θ~_μ)`。**完了**（014 章、`factorization_of_A_theta_general` / `T_V_plus_check_Z_Y` / `def_V_plus_and_T_V_plus`）。既存 `factorization_of_A_theta` は `μ ∈ calM` で量化されていて再利用できず、θ ∈ R 一般へ立て直した |
+| C′-12 | `eigenvector_of_A_theta` / `diagonalization_P_D` / `det_A_theta` / `gamma1_geq_1` / `lambda_eq_exp_gamma` | `A(θ~)` の対角化。**完了**（`structured-latex/content/015_A_theta_tilde_diagonalization.ts`、9 ブロック。下記） |
 | C′-13 | `def_fermi` / `anticommutator_of_psi` | 半整数運動量のフェルミオン `checkψ_μ`。対は `μ+ν ≡ 1` |
 | C′-14 | `commutation_V_psi` / `action_of_T_Vprime_on_psi` / `T_V_eq_T_Vprime` / `V_eq_Vprime` | `V^{(+)} = c checkV'` |
 | C′-15 | 009 章全体 | 数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`・固有値 |
 
-**簡単になる点（見込み）**: 半整数運動量では `γ_2(θ~_μ) ≠ 0` が**常に**成り立つ。
+**簡単になる点（見込みではなく確定した）**: 半整数運動量では `γ_2(θ~_μ) ≠ 0` が**常に**成り立つ。
 実際 `γ_2(θ) = 0` は `sin θ = 0` かつ `c_1 cos θ = s_1 c_2` を要するが、
-`sin θ~_μ = 0` は `(2μ−1)/M ∈ Z` すなわち `θ~_μ = π`（`M` 奇数）の場合しかなく、
-そのとき `cos θ~_μ = −1` で `−c_1 = s_1c_2 > 0` となり不可能である。
+`sin θ~_μ = 0` は `2μ−1 = kM` を要し、**左辺が奇数なので `k` は奇数**、よって `cos θ~_μ = cos(kπ) = −1`。
+すると `s_1c_2 = −c_1 < 0` となり `c_1, s_1, c_2 > 0` に矛盾する。
 したがって 008 章・009 章にあった臨界点の例外処理（`μ = M` の除外、`m = M−1`）が
-偶セクターでは**不要**になる。数値でも `M = 2,3,4,5`・臨界点上を含む 5 組の `(K1,K2)` で
-`min |γ_2(θ~_μ)| ≥ 0.56` を確認済み（`047_.../check_04` の (4)）。
+偶セクターでは**不要**になる。C′-12（下記）でこれを本文の主張 `gamma_2_theta_tilde_nonzero` として確定させた。
+
+#### C′-12 の成果（`structured-latex/content/015_A_theta_tilde_diagonalization.ts`、9 ブロック）
+
+| ラベル | 内容 |
+|---|---|
+| `def_gamma1_gamma2_of_theta` | `γ_1(θ), γ_2(θ)` を `θ ∈ R` の関数として**ラベル付きで**定義し、`A(θ)` の成分表示を与える（008 章の同じ定義はラベルが無く参照できない） |
+| `gamma_2_theta_tilde_nonzero` | **`γ_2(θ~_μ) ≠ 0`（全 `μ`、全 `K_1,K_2 > 0`、臨界点を含む）** |
+| `relation_of_gamma_2_theta_tilde` | `γ_2(−θ~) = −conj(γ_2(θ~))`、積 `= −|γ_2|² < 0`、`arg = π`、`sqrt(−積) = |γ_2| > 0`、`sqrt(積) = i|γ_2|` |
+| `eigenvector_of_A_theta_tilde` | `λ_{±,μ} = γ_1 ± |γ_2| ∈ R`（実数・相異なる）と固有ベクトル。**場合分けなし** |
+| `diagonalization_check_P_D` | `A(θ~_μ) = P̌_μ Ď_μ P̌_μ^{-1}`、`det P̌_μ = −|γ_2|/(2M γ_2(−θ~_μ)) ≠ 0`。正規化は 008 章の `P_μ` と同じ `c = 1/(2√M γ_2(−θ~_μ))` |
+| `det_A_theta_tilde` | `det A = 1`、`γ_1² + γ_2γ_2(−) = 1`、`λ_+λ_- = 1`、`γ_1² = 1 + |γ_2|²` |
+| `gamma1_gt_1_theta_tilde` | **`γ_1(θ~_μ) > 1`（狭義）** |
+| `def_gamma_theta_tilde_mu` | `γ(θ~_μ) := arccosh(γ_1(θ~_μ)) > 0`（狭義） |
+| `lambda_eq_exp_gamma_theta_tilde` | `λ_± = e^{±γ(θ~_μ)}`、`λ_+ > 1 > λ_- > 0`（**固有値は常に分離**） |
+
+数値検証は `sagemath/check/048_claim_A_theta_tilde/`（5 チェック、全 PASS、`M = 2..8` の全 `μ`、
+厳密な臨界点とその近傍を含む 16 組の `(K_1, K_2)`）。整数運動量では同じ `K` の臨界点で
+`γ_2(2π) = 0`、`γ(2π) = 0` になることも対比として記録してある。
+
+**C′-13 以降へ引き継ぐ道具**: `γ(θ~_μ) > 0` と `λ_+ > 1 > λ_- > 0`。
+C′-15 で最大固有値の一意性を言うときに、整数運動量側で必要だった臨界点の例外処理を持ち込まずに済む。
+なお `def_gamma1_gamma2_of_theta` は `θ ∈ R` について述べてあるので、C′-13 以降でも
+`θ~` 版を作り直さずそのまま使える。
 
 #### 接続（C′ が済んだあと）
 
@@ -264,11 +290,10 @@ A(θ~_μ) = B_1(θ~_μ) B_2 B_1(θ~_μ)
 ## 作業順の推奨
 
 - 章 A（009 章）・章 B・章 B2（010 章）・章 C（011 章）・章 D（012 章）は**完了**。
-  章 C′ は **C′-1〜C′-11 まで完了**（013 章・014 章）。
-- **次は章 C′ の C′-12 以降。** `T_{(V^{(+)})}(checkZ, checkY) = (checkZ, checkY)A(θ~_μ)` まで
-  到達済みなので、`A(θ~)` の対角化 → フェルミオン → `V^{(+)} = c checkV'` → 固有値 と、
-  009 章と同じ順序で辿れる。C′-12 は既存ブロックの再利用が効く見込みだが、
-  `μ ∈ calM` で量化されているものは C′-11 でやったのと同じく θ ∈ R 一般へ立て直す必要がある。
+  章 C′ は **C′-1〜C′-12 まで完了**（013 章・014 章・015 章）。
+- **次は章 C′ の C′-13 以降**（フェルミオン `checkψ` → `V^{(+)} = c checkV'` → 固有値）。
+  入力はすべて揃っている: (A)〜(D) と反交換関係は 013 章、`T_{(V^{(+)})}(Ž,Y̌) = (Ž,Y̌)A(θ~_μ)` は 014 章、
+  `A(θ~_μ) = P̌_μ Ď_μ P̌_μ^{-1}`・`γ(θ~_μ) > 0`・`λ_+ > 1 > λ_- > 0` は 015 章。
 - 章 C′ が済めば `c_+(M) = Λ^{(1/2)}_M` が確定し、章 C・章 D と合わせて
   Onsager の自由エネルギーが本文で閉じる。
 - 章 E（臨界点）はそのあと。
