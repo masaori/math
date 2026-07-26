@@ -1,0 +1,13 @@
+name = "IntegrableLattice"
+defaultTargets = ["IntegrableLattice"]
+
+# mathlib4 は Lean toolchain と同じタグ v4.32.1 に固定する。
+# exact-solution-of-2d-ising-model/lean と同一タグに揃えてある（環境の再現性のため）。
+# lean-toolchain (leanprover/lean4:v4.32.1) と必ず対にして更新すること。
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.32.1"
+
+[[lean_lib]]
+name = "IntegrableLattice"
