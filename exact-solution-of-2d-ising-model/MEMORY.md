@@ -24,6 +24,168 @@ README 4 節の方針（同じ主張に、人手証明と1対1に対応する具
 `lake build` と `check-no-sorry.sh`（新規 9 件を targets へ追加）はいずれも通過。
 **残作業**: 他の主張も順次 2 本立てにする（未着手のものが多数）。
 
+---
+
+## 完了（2026-07-26）: 「原文の誤植・不整合をそのまま再現」と記録されていた箇所を解消
+
+### ゴールと結果
+
+`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の conversion.notes に
+「原文の誤植・不整合をそのまま再現し fix していない」と記録されていた 2 件を、
+**数値検証で正誤を確定 → statement と整合する形へ修正 → 証明を最後まで記述** の順で解消した。
+併せて、同じファイル群で見つかった同種の未修正誤植 2 件も解消した（下記 3, 4）。
+
+### 解消した 4 件
+
+1. **テイラー係数の抽出（`extract_taylor_coefficient_of_Z_Y`）の proof が未完・不整合**
+   （ブロック `TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`）。
+   原文 proof は (h1.z) だけが cosh/sinh まで到達し、(h1.y) と (h2.z−) は偶奇分割の途中で終わり、
+   さらに cases 内の項・係数が同じ原文の statement と食い違っていた（(h2.y) は proof 自体が無かった）。
+   **数値検証の結論: 誤りは proof 側で、statement は正しい。**
+   原文 proof の cases 表式（(h1.y) 奇数項 `i K1^n e^{iθ} hatY`・偶数項 `K1^n hatZ`、
+   (h2.z−) の `(K2*)^n` と偶数項に残る `i`）は残差が O(1) で成立せず、
+   statement と整合する形は残差 1e-14 オーダーで成立する。3 式すべてを cosh/sinh まで書き切った。
+
+2. **`hatY` への作用の行列表示が scalar 表示と不整合**
+   （ブロック `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`、原文「ホロノミック量子場 p142 下段」）。
+   scalar 表示 `-i e^{iθ} sinh(K1) hatZ + cosh(K1) hatY` に対し、列ベクトル表示の第 1 成分が
+   `i e^{-iθ} sinh(K1)` と**符号も exp も**食い違っていた。
+   **数値検証の結論: 誤りは行列表示側。** scalar 表示に合わせて修正した。
+   下流の `calc_of_TxT_hatZxhatY`（014）が既に修正後の形（`B_1(θ)` の (1,2) 成分 `-i e^{iθ} sinh K1`）を
+   使っていたので、原文の行列表示だけが文書内で孤立して誤っていたことになる。
+   併せて `T_{(V1)^{1/2}}(hatY)` と `T_{V2}(hatY)` の proof（原文は「同様」の一言）を書き下した。
+
+3. **`V_2^{-1}` の exp の符号**（同ブロックの proof）。
+   `V_2 = (2s2)^{M/2} exp(i K2* H2)` の逆元を `((2s2)^{M/2} exp(-i K2* H2))^{-1}` と書いていた誤植を修正。
+
+4. **note の (h1.y) n=3 の exp の符号**（`structured-latex/notes/008_TV1_hatZ_hatY.mjs`）。
+   n=1 では `e^{-i2π(-μ)/M}`（= `e^{+iθ}`、1 重公式 (B) と整合）なのに n=3 だけ `e^{-i2πμ/M}` になっていた。
+   n=1 と同じ形へ修正。
+
+### 併せて行った証明の強化（`cosh_sinh_coefficient_conversion`、ブロック 003）
+
+- 原文 statement は (h1.z), (h2.z−) だけを書き「(h1.y), (h2.y) も同様」で済ませていた。
+  下流の proof が 4 式すべてを必要とするので、**4 式すべてを statement に明示**し、
+  proof でも 4 式すべての代入計算を書き下した。
+- 原文の指数簡約は `(-1)^{1/2}` という**実数の範囲で意味をなさない中間式**を経由していた
+  （`(n-1)/2 + n/2` を `(2n+2)/2 + 1/2` と書く等）。最終結果は正しいが各ステップの正当化ができない。
+  次の 2 補題を明示的に立てて、**すべての指数を整数の範囲で扱う形**に書き改めた。
+  - 補題 1（生成子のスカラー倍）: `ad_{αX}^n = α^n ad_X^n`（交換子の第 1 引数についての線型性から）。
+  - 補題 2（虚数単位の冪）: `i^n = i(-1)^{(n-1)/2}`（n 奇数）/ `(-1)^{n/2}`（n 偶数）。
+
+### 数値検証（新規追加）
+
+共通基盤 `sagemath/_shared/spin_ops.sage` を新設した。`Mat(2,C)^{⊗M}` 上の
+`Z_m, Y_m, H_1^{(±)}, H_2, hatZ_mu^{(±)}, hatY_mu` を**定義に戻って明示的な複素行列として構成**する。
+既存の `_shared/defs.sage`（転送行列のスカラー記号）と役割が違うので別ファイルにした。
+
+- `sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/`（対象ラベル `extract_taylor_coefficient_of_Z_Y`）
+  - check_01: 1 重交換子 (A)〜(D)
+  - check_02: 生成子スケール後の n 重交換子 4 式（n=0..8）
+  - check_03: テイラー係数の抽出 4 式（級数 40 次打ち切り）
+  - check_04: **原文 proof の cases が成り立たないこと**（残差 ≥ 1e-3）と修正版が成り立つこと
+- `sagemath/check/041_claim_TV1_TV2_actions/`（対象ラベル `ホロノミック量子場_p142下段_1`）
+  - check_01: 4 つの作用を**行列指数関数の直接計算**で確認（交換子の級数展開に依存しない独立経路）
+  - check_02: `hatY` の列ベクトル表示について、修正版が成立・原文版が不成立であることを確認
+
+パラメータは `M = 3,4,5`、`μ ∈ calM = {-M,…,-1,1,…,M}` の全域、`(K1,K2)` は臨界点上・高温極限付近を含む 4 組。
+
+### 注意（次に触る人へ）
+
+- `spin_ops.sage` の検証は `M ≤ 5`（行列サイズ 32×32）でも**マシン負荷次第で 1 ファイル 10 分以上かかる**。
+  ノルム計算より Sage の型変換が支配的なので、増やすなら `SPIN_TEST_M` を減らすほうが速い。
+- ブロック 012 の statement は `T_{(V_1^{(±)})^{1/2}}` が `hatZ_mu^{(-)}` に作用する形で書かれている
+  （`H_1` の符号と `hatZ` の符号が見かけ上そろっていない）。proof では
+  `extract_taylor_coefficient_of_Z_Y` を `± = -` で適用する旨を明示した。
+  数値検証も `H_1^{(-)}` と `hatZ_mu^{(-)}` の組で行っている。
+
+---
+
+## 完了（2026-07-26）: ゴール基準に反する本文記述の点検（修正はしていない）
+
+`docs/tasks/goal-alignment-audit.md` に結果を置いた。`structured-latex/content/` の
+全 14 ファイルを通読し、README のゴール設定に反する箇所を優先度 A/B で一覧にしたもの。
+**修正方針は依頼者判断待ちなので、本文には一切手を付けていない。**
+
+優先度 A（本文の骨格に関わる、局所的な書き換えでは済まないもの）:
+
+- A-1 抽象テンソル積の定理 `tensor_basis`（基底のテンソル積が基底）が本文にあり、
+  `centralizer_is_scalar` / `Z_Y_linearly_independent` / `def_end_iso` / `Z_Y_generate_algebra`
+  がそこに依存している。README 2 節が名指しで禁じた主張。
+- A-2 `Mat(2,C)^{⊗M}` 記法が本文全域（`\otimes` が 454 箇所）。クロネッカー積の定義ブロックが無い。
+- A-3 「テンソル積代数の積の定義」「第 j 因子についての C-線型性」を 20 箇所以上で根拠に使うが、
+  定義も証明も本文に無い（未定義概念）。
+- A-5 群の一般論一式（`def_aut_inn_out` / `def_group_hom_ker_im` / `def_center_of_group` /
+  `inn_is_normal_in_aut` / `def_exact_sequence` / `exact_sequence_of_aut` / 環の乗法群）。
+  実際に効いているのは `injectivity_of_T_up_to_scalar` 内の $\mathrm{Ker}(\varphi)=Z(R^\times)$
+  の 1 点だけで、そこは `centralizer_is_scalar` を当てれば群論なしで書ける。
+- A-6 多元環の一般論（`Z_Y_generate_algebra` の「単位的結合多元環」「最小の C-部分多元環」、
+  `V_eq_Vprime` の Step 3）。
+- A-7 exp の土台が抽象的な有限次元ノルム線型空間（`exp_converges` / `def_exp`）。
+  「ノルム線型空間」の定義が本文に無い（`def_matrix_norm` は $K^d$ と $\mathrm{Mat}(n,K)$ のみ）。
+- A-8 パウリ群・クリフォード群（`def_pauli_group` / `def_clifford_group` /
+  `V2_not_in_clifford_group`）。本文自身が「本証明では使わない」と書いている。
+
+A-4（リー群・リー環）は点検中に取り込んだ `origin/main` で解消済みだった（下記の項目）。
+
+優先度 B の主なもの: 体 `K` を一般のまま置いた 11 ブロック、未定義のまま使われている
+実数の `exp` / `log` / `tanh` / `(2 sinh 2K_2)^{M/2}` / 複素指数 $e^{i\theta}$ / `det` /
+`π` と弧長（外部文献「齋藤微積分」に委ねている）、`I_{(C^2)^{⊗M}}` と
+`I_{(Mat(2,C))^{⊗M}}` の記号不整合、複素数をモノイド・群・体の言葉で述べている 000 章。
+
+## 完了（2026-07-26）: リー群・リー環の経路を参照用ノートへ退避
+
+README のゴール設定（1 節「典型例がリー群・リー環である」／6 節「採用しなかった経路の扱い」）に従い、
+`structured-latex/content/005_exp_conjugation_proof.mjs` からリー群・リー環を使う 6 ブロックを
+`structured-latex/notes/005_exp_conjugation_lie_route.mjs` へ**要約せず原文のまま**移した。
+各ノートの冒頭に「ゴールに照らして本文には採用しなかった。理由: リー群の一般論を先に理解しないと
+証明を追えなくなり、本筋と無関係なところで読者の負担を生むため」を明記してある。
+
+移したもの: Ad/ad のリー環的定義、リー群上の $\mathrm{Ad}(\exp X)=\exp(\mathrm{ad}X)$（未証明の
+TODO ごと）、$\mathbf{GL}(n,\mathbb{C})$ の定義、Matrix Lie群の定義（旧 `def_matrix_lie_group`）、
+Brian Hall Def 3.32 の $\mathrm{Ad}_g/\mathrm{ad}_X$、Matrix Lie群版の主定理（旧 `brianhall_3.35`）。
+
+本文に残したのは級数展開だけで済む経路: $M(n;\mathbb{C})$ のノルム・収束（`def_frobenius_inner_product`）、
+`ad_binomial`、`matrix_exp_conjugation`（主定理 $e^XYe^{-X}=e^{\mathrm{ad}_X}(Y)$）、`brianhall_exc14`。
+
+参照が切れないようにした処置（重要）:
+
+- `def_ad_X_matrix` は 005 章の 3 ブロックと 008 章の 2 箇所から参照されているので、**同じラベルのまま**
+  Matrix Lie群を使わない具体版の定義ブロック（`exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix`）へ
+  差し替えた。$\mathrm{ad}_X(Y)=[X,Y]$ と、正則な $g$ に対する $\mathrm{Ad}_g(Y)=gYg^{-1}$（逆行列の
+  一意性の証明つき）だけを述べており、リー群は出てこない。008 章側が期待していた記号とも一致する。
+- ノートから `def_matrix_lie_group` への `ref` はラベルが content に無くなるため解決しない
+  （`validate-content.mjs` はノートの ref も content のラベルへ解決することを要求する）。該当箇所は
+  ノート ID への言及に置き換えた。
+- 旧 `brianhall_3.35` はどこからも参照されていなかった（grep 確認済み）。
+
+検証3種すべて通過（origin/main のクリフォード代数ノートをマージ後: 156 ブロック・130 ラベル・
+579 参照すべて解決、ノート 28 件）。
+
+## 完了（2026-07-26）: クリフォード代数の読み物ノートを追加
+
+README 5 節「なぜこの計算を思いついたのかを説明する材料（読み物）」に該当するものとして、
+`structured-latex/notes/009_clifford_algebra.mjs`（5 件）を新規作成した。厳密証明ではない。
+
+内容と、それぞれが対応する本文のラベル:
+
+- 反交換関係（`anticommutator_of_Z_and_Y`）が、$2M$ 個の生成元に通し番号を振ると
+  $e_a e_b + e_b e_a = 2\delta_{ab}I$ という**クリフォード代数の定義関係式そのもの**であること。
+- 生成元から作られる代数の次元が $2^{2M} = 2^M \times 2^M$ で全行列環と一致し、
+  Jordan--Wigner 構成（$Z_m,Y_m$ の定義に現れる $\sigma^x$ の弦）がその同型を具体的に与えること
+  （`Z_Y_generate_algebra` / `Z_Y_linearly_independent`）。
+- 二次式の指数関数による共役が生成元の張る $2M$ 次元空間を保ち直交変換になること。これが
+  「共役が $A(\theta)$ という $2\times 2$ 行列の作用に化ける」理由であること
+  （`T_V_hatZ_hatY` / `def_T_V` / `V1_V2_in_Z_Y_epsilon`）。
+- その対応の核がスカラーちょうどであることが、「$V$ と $V'$ が定数倍を除いて一致する」の
+  構造的な意味であること（`V_eq_Vprime` / `T_V_eq_T_Vprime` / `centralizer_is_scalar`）。
+
+ノート冒頭に、(1) クリフォード代数はテンソル代数の商代数として定義されるため README 2 節の基準により
+厳密証明には含めない、(2) 本文の証明はこのノートに依存していない（本文は具体計算だけで自足）、
+の 2 点を明記してある。検証3種はすべて通過（notes 22 件・targets 29 件すべて解決）。
+
+---
+
 ## 完了（2026-07-26）: 人手証明に残っていた未完（TODO）を全件解消 — **総括**
 
 本セッションのゴールは「`structured-latex/content/*.mjs` に残る未完を、証明完成か、
@@ -91,6 +253,63 @@ README 4 節の方針（同じ主張に、人手証明と1対1に対応する具
 - クリフォード群まわりで、`T_g` の定義域をクリフォード群へ狭める案は採れないことが
   `V2_not_in_clifford_group` で確定した（$V_2\sigma_1^zV_2^{-1}$ が Pauli 基底で 2 成分をもつ）。
   代わりに単射性は `injectivity_of_T_up_to_scalar` で直接証明済み。
+
+## 完了（2026-07-26）: フェルミオン ψ の定義・反交換関係・T_(V) の作用を Lean で形式化
+
+対象ブロック（`structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
+`TV1_hatZ_hatY_030_definition_fermi`（`def_fermi`）/ `TV1_hatZ_hatY_031_claim_V_psi_commutator`
+（`commutation_V_psi`）/ `TV1_hatZ_hatY_032_claim_anticommutator_psi`（`anticommutator_of_psi`）。
+新規ファイル `lean/Ising2D/Part008/Definition030_Fermi.lean`。
+
+### 引き継ぎ: `A(θ)` の二重定義は未解消（橋渡し補題だけ置いた）
+
+`Ising2D.Amat`（複素パラメータ版、`Definition016_TV.lean`）と `Ising2D.AMat`（`IsingConst` と実 θ 版、
+`Definition019_ThetaGamma.lean`）が**同じ行列の二重定義**で、名前も大文字小文字違いだけである。
+
+一本化は既存 Lean ファイルのリファクタになり、**既存ファイルを「具体版＋抽象版の2本立て」へ整える
+別トラックの作業と衝突する**ため、ここでは既存ファイルを変更していない。代わりに新規ファイル
+`Ising2D/Part008/Definition030_Fermi.lean` の末尾に橋渡しを置いた。
+
+- `Amat_eq_AMat`: 実パラメータ・実 θ へ coe すれば両者が一致する
+- `B1_mul_B2_mul_B1_eq_AMat'` / `TV_hatZ_hatY_of_action_AMat`: 既存の `Amat` 版を `AMat` 版へ移送
+
+**次にやること**: 既存ファイルのリファクタ時に `Amat` を削除し `AMat` へ一本化する
+（接続に必要なのは、モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
+`Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけであることを確認済み）。
+
+### 発見した原文の穴: `anticommutator_of_psi` は平方根の分枝の一致を暗黙に仮定している
+
+原文は `M ∣ μ+ν` のとき `γ_2(θ_ν) = γ_2(-θ_μ)` から
+`√(γ_2(θ_ν)γ_2(-θ_ν)) = √(γ_2(θ_μ)γ_2(-θ_μ))` を使っているが、根号の中身が等しいことから
+従うのは `t_ν = ±t_μ` までで、**μ と ν で分枝が同じであることは自明でない**。
+
+自分で計算して確定した結果（Lean 側でも機械的に確認）:
+
+- `[ψ_μ^†, ψ_ν^†]₊` の係数は `c_μ c_ν(γ_2(-θ_μ)γ_2(-θ_ν) - t_μ t_ν)·2Mδ` で、
+  `M ∣ μ+ν` のとき `γ_2(-θ_μ)γ_2(-θ_ν) = t_μ^2` だから括弧は `t_μ(t_μ - t_ν)`。
+- `γ_2(θ_μ) ≠ 0` より `t_μ^2 = -|γ_2(θ_μ)|^2 ≠ 0`、すなわち `t_μ ≠ 0`。
+- したがって**同一分枝 `t_ν = t_μ` なら原文どおり `0`、逆分枝 `t_ν = -t_μ` なら `2t_μ^2 ≠ 0` で原文は偽**。
+- `[ψ_μ^†, ψ_ν]₊` も同様で、逆分枝だと `δ^M_{μ+ν,0} I` ではなく `0` になる。
+
+**結論: 同一分枝の選択は必要不可欠で、原文の穴である。** Lean 側では
+仮定 `hbr : (M : ℤ) ∣ (μ + ν) → tν = tμ` として明示した（`M ∤ μ+ν` なら分枝は結論に効かない）。
+原文（`structured-latex/content`）は書き換えていない。
+
+### 未証明の穴（sorry ではなく仮定として持った箇所）
+
+`T_(V)` が `(hat(Z)_μ^{(-)}, hat(Y)_μ)` に `A(θ_μ)` で作用すること（原文 `T_V_hatZ_hatY`）は、
+`parts 008` の 001〜005（ネストした交換子のテイラー係数抽出）が未形式化のため証明できない。
+`ActsBy T … (AMat K (thetaMu M μ))` を明示的な仮定として持ち、そこから先
+（`P_μ` の各列が固有ベクトル ⇒ `ψ_μ^†, ψ_μ` が `T` の固有ベクトル、固有値は `D_μ` の対角成分）は
+完全に証明した。`sorry` / `admit` は無い。
+
+### 追加した主な定理
+
+`psiDag` / `psi`（`P_μ` の第 0 列・第 1 列）、`psiDag_eq` / `psi_eq`（原文の「すなわち」の検算）、
+`acomm_lin2` / `acomm_hatZMinus_hatY_lin2`（双線型性）、
+`acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（反交換関係 3 式）、
+`Pmat_col_zero` / `Pmat_col_one` / `AMat_mulVec_Pmat_col_zero` / `AMat_mulVec_Pmat_col_one`、
+`TV_psiDag_of_action` / `TV_psi_of_action` / `TV_psiDag_psi_of_action`。
 
 ## 完了（2026-07-26）: 転送行列 V1/V2 の定義と共役作用 T_g / T_V を Lean で形式化
 

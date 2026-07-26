@@ -1,0 +1,54 @@
+# ---------------------------------------------------------
+# SageMath: T_{(V_1^{(pm)})^{1/2}} と T_{V_2} の hatZ, hatY への作用
+#
+#   T_{(V_1)^{1/2}}(hatZ_mu^{(-)}) = cosh(K_1) hatZ_mu^{(-)} + i e^{-i theta} sinh(K_1) hatY_mu
+#   T_{(V_1)^{1/2}}(hatY_mu)       = -i e^{i theta} sinh(K_1) hatZ_mu^{(-)} + cosh(K_1) hatY_mu
+#   T_{V_2}(hatZ_mu^{(-)})         = cosh(2K_2^*) hatZ_mu^{(-)} - i sinh(2K_2^*) hatY_mu
+#   T_{V_2}(hatY_mu)               = i sinh(2K_2^*) hatZ_mu^{(-)} + cosh(2K_2^*) hatY_mu
+#
+# ここで T_g(X) := g X g^{-1}、(V_1^{(pm)})^{1/2} = exp((1/2) i K_1 H_1^{(pm)})、
+# V_2 = (2 s_2)^{M/2} exp(i K_2^* H_2)（スカラー (2 s_2)^{M/2} は共役で相殺する）。
+#
+# 対象: structured-latex ホロノミック量子場_p142下段_1
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '../../_shared/spin_ops.sage'))
+
+print("=== T_{(V_1)^{1/2}}, T_{V_2} の作用（行列指数関数で直接計算）===")
+all_ok = True
+for M in SPIN_TEST_M:
+    O = SpinOps(M)
+    for params in SPIN_TEST_PARAMS:
+        K1v = RDF(params['K1'])
+        K2s = K_star(params['K2'])
+        # (V_1^{(-)})^{1/2} = exp((1/2) i K_1 H_1^{(-)}) と V_2 の exp 部分
+        A1 = CDF(I) / 2 * K1v * O.H1(-1)
+        A2 = CDF(I) * K2s * O.H2
+        E1, E1inv = matrix(CDF, A1.exp()), matrix(CDF, (-A1).exp())
+        E2, E2inv = matrix(CDF, A2.exp()), matrix(CDF, (-A2).exp())
+        # V_2 の前因子 (2 s_2)^{M/2} を明示的に付けて相殺を確認する
+        s2 = RDF(sinh(2 * RDF(params['K2'])))
+        pref = CDF((2 * s2) ** (RDF(M) / 2))
+        worst = {'TV1(Z)': 0.0, 'TV1(Y)': 0.0, 'TV2(Z)': 0.0, 'TV2(Y)': 0.0}
+        for mu in O.mu_range():
+            t = O.theta(mu)
+            Zm = O.Zhat(mu, -1)
+            Yh = O.Yhat(mu)
+            ch1, sh1 = CDF(cosh(K1v)), CDF(sinh(K1v))
+            ch2, sh2 = CDF(cosh(2 * K2s)), CDF(sinh(2 * K2s))
+            V2 = pref * E2
+            V2inv = (1 / pref) * E2inv
+            worst['TV1(Z)'] = max(worst['TV1(Z)'], opnorm(
+                E1 * Zm * E1inv - (ch1 * Zm + CDF(I) * eiph(-t) * sh1 * Yh)))
+            worst['TV1(Y)'] = max(worst['TV1(Y)'], opnorm(
+                E1 * Yh * E1inv - (-CDF(I) * eiph(t) * sh1 * Zm + ch1 * Yh)))
+            worst['TV2(Z)'] = max(worst['TV2(Z)'], opnorm(
+                V2 * Zm * V2inv - (ch2 * Zm - CDF(I) * sh2 * Yh)))
+            worst['TV2(Y)'] = max(worst['TV2(Y)'], opnorm(
+                V2 * Yh * V2inv - (CDF(I) * sh2 * Zm + ch2 * Yh)))
+        print(f"M = {M}, K1 = {params['K1']}, K2 = {params['K2']} (K2* = {float(K2s):.6f}):")
+        for key in ['TV1(Z)', 'TV1(Y)', 'TV2(Z)', 'TV2(Y)']:
+            all_ok = report(key, worst[key], tol=1e-8) and all_ok
+
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")

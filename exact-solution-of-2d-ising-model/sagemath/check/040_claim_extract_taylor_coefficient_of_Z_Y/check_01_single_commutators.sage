@@ -1,0 +1,35 @@
+# ---------------------------------------------------------
+# SageMath: 1 重の交換子 (A)-(D)
+#   (A) [H_1^{(pm)}, hatZ_mu^{(pm)}] =  2 e^{-i theta} hatY_mu
+#   (B) [H_1^{(pm)}, hatY_mu]        = -2 e^{ i theta} hatZ_mu^{(pm)}
+#   (C) [H_2,        hatZ_mu^{(-)}]  = -2 hatY_mu
+#   (D) [H_2,        hatY_mu]        =  2 hatZ_mu^{(-)}
+#
+# 対象: structured-latex commutator_of_H_and_Z_Y
+#   （nesting_of_commutator_of_H_and_Z の帰納法が土台に用いる 1 重公式）
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '../../_shared/spin_ops.sage'))
+
+print("=== 1 重の交換子 (A)-(D) ===")
+all_ok = True
+for M in SPIN_TEST_M:
+    O = SpinOps(M)
+    worst = {'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.0}
+    for sgn in [1, -1]:
+        for mu in O.mu_range():
+            t = O.theta(mu)
+            Zh = O.Zhat(mu, sgn)      # hatZ_mu^{(pm)}（H_1^{(pm)} と符号を揃える）
+            Zm = O.Zhat(mu, -1)       # hatZ_mu^{(-)}
+            Yh = O.Yhat(mu)
+            H1 = O.H1(sgn)
+            worst['A'] = max(worst['A'], opnorm(comm(H1, Zh) - 2 * eiph(-t) * Yh))
+            worst['B'] = max(worst['B'], opnorm(comm(H1, Yh) + 2 * eiph(t) * Zh))
+            worst['C'] = max(worst['C'], opnorm(comm(O.H2, Zm) + 2 * Yh))
+            worst['D'] = max(worst['D'], opnorm(comm(O.H2, Yh) - 2 * Zm))
+    print(f"M = {M}:")
+    for key in ['A', 'B', 'C', 'D']:
+        all_ok = report(f"({key})", worst[key]) and all_ok
+
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")

@@ -26,3 +26,4 @@ import Ising2D.Part004.Definition010_H1H2V1V2
 import Ising2D.Part008.Definition016_TV
 import Ising2D.Part008.Definition019_ThetaGamma
 import Ising2D.Part008.Claim027_EigenATheta
+import Ising2D.Part008.Definition030_Fermi

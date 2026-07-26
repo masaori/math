@@ -1,0 +1,63 @@
+# cycle 12 / T2→T1: 2D Ising（L×L トーラス）Step 1–2 の厳密検証。
+#   Step 1: Z_L(x) = Σ_σ x^{m(σ)} ∈ ℤ[x]（破れボンド数の数え上げ。全 2^{L²} 配位を直接列挙）
+#   Step 2: T(x) ∈ M_{2^L}(ℤ[x])（各成分が単項式）かつ Tr T(x)^L = Z_L(x)（ℤ[x] での恒等式）
+#   Step 2': 特性多項式 det(λI − T(x)) ∈ ℤ[x][λ] ⇒ 固有値は ℚ(x) 上代数的（定義から）
+# 参照: docs/discussion/対数順序群上の統計力学/09_2DIsing閉形式の可算的導出.md Step 1–2
+# 既知結果（Onsager 1944 / Kaufman 1949）の可算・厳密な書き換えであり、新しい厳密解ではない。
+
+R = PolynomialRing(ZZ, 'x')
+x = R.gen()
+
+def states(L):
+    # ビット表現 i の第 j ビットが 1 なら σ = −1
+    return [tuple(1 - 2*((i >> j) & 1) for j in range(L)) for i in range(2^L)]
+
+def h(s):
+    L = len(s)
+    return sum(1 for j in range(L) if s[j] != s[(j+1) % L])
+
+def v(s, t):
+    return sum(1 for j in range(len(s)) if s[j] != t[j])
+
+def transfer(L):
+    S = states(L)
+    n = len(S)
+    return matrix(R, n, n, lambda i, j: x^(h(S[j]) + v(S[i], S[j])))
+
+def Z_bruteforce(L):
+    # トーラス L×L の全配位 σ を直接列挙し、破れ辺（水平 L² 本・垂直 L² 本）を辺ごとに数える
+    S = states(L)
+    coeffs = [0] * (2*L^2 + 1)
+    for rows in cartesian_product_iterator([range(2^L)] * L):
+        sig = [S[r] for r in rows]
+        m = 0
+        for i in range(L):
+            for j in range(L):
+                if sig[i][j] != sig[i][(j+1) % L]:
+                    m += 1              # 水平辺
+                if sig[i][j] != sig[(i+1) % L][j]:
+                    m += 1              # 垂直辺
+        coeffs[m] += 1
+    return R(coeffs)
+
+print("=== Step 1–2: T(x) ∈ M(ℤ[x]) と Tr T^L = Z_L(x) ===")
+for L in [2, 3, 4]:
+    T = transfer(L)
+    entries_in_ZZx = all(e.parent() is R for e in T.list())
+    entries_monomial = all(len(e.coefficients()) == 1 and e.coefficients()[0] == 1 for e in T.list())
+    Zt = (T^L).trace()
+    Zb = Z_bruteforce(L)
+    print(f"L={L}: dim T = {T.nrows()}, 全成分∈ℤ[x] = {entries_in_ZZx}, 全成分が単項式 x^k = {entries_monomial}")
+    print(f"      Tr T^L == Z_L(bruteforce) : {Zt == Zb}")
+    print(f"      Z_L(x) = {Zb}")
+    print(f"      Σ係数 = {Zb(1)} == 2^(L²) = {2^(L^2)} : {Zb(1) == 2^(L^2)}")
+
+print()
+print("=== Step 2': 特性多項式 det(λI − T(x)) ∈ ℤ[x][λ] ===")
+for L in [2, 3]:
+    T = transfer(L)
+    cp = T.charpoly('lam')
+    in_ZZxlam = all(c.parent() is R for c in cp.coefficients(sparse=False))
+    print(f"L={L}: 係数が全て ℤ[x] の元 = {in_ZZxlam}")
+    print(f"      charpoly の ℚ(x)[λ] 上の因数分解:")
+    print(f"        {cp.factor()}")
