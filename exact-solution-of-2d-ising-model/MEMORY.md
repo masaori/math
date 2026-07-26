@@ -73,8 +73,9 @@ Z(J,J') = tr( P^{(+)} (V^{(+)})^{N_row} ) + tr( P^{(-)} (V^{(-)})^{N_row} )
 
 ### やったこと
 
-本文のラベル 128 件に対して、数値検証が紐づいていたのは **7 件**しかなかった。
-これを **96 件**へ広げた（`sagemath/tools/verify-check-linkage.ts` が確認する check は 9 → 98 件）。
+数値検証が紐づいていたラベルは **7 件**しかなかった。これを **97 件**へ広げた
+（`sagemath/tools/verify-check-linkage.ts` が確認する check は 9 → 99 件）。
+作業中に別セッションが本文を TypeScript 化し、本文のラベル総数も 128 → 146 件へ増えている。
 
 土台として `sagemath/_shared/operators.sage` を新設した。ここが無かったことが、
 これまでカバレッジが広がらなかった直接の原因である（`Mat(2,C)^{⊗M}` の元を数値で作る手段が無く、
@@ -122,7 +123,7 @@ FAIL のまま見逃されていた）。次の 2 点で塞いだ。
    「不一致」と報告していた。相対誤差に変えたことで 028 の check_06 は PASS になった。
 2. `run-all-checks.sh` が、終了コードに加えて**ログ本文の `RESULT: FAIL` も失敗として拾う**ようにした。
 
-### 未カバーのラベル（32 件）とその理由
+### 未カバーのラベルとその理由
 
 残りはほぼ**定義ブロック**（`def_*`）で、それ単体では反証できる等式を持たない
 （`def_exp`, `def_abs_arg`, `def_transfer_matrix_symbols`, `def_fermi` など）。
@@ -131,12 +132,12 @@ FAIL のまま見逃されていた）。次の 2 点で塞いだ。
 
 `exact_sequence_of_aut` ほか群の一般論のラベルに対しては check を書いたが、
 **作業中に別セッション（コミット `e181c2c`）が該当ブロックを本文から削除した**ため、
-紐づけ先が消えて `verify-check-linkage.ts` が通らなくなり、その check は取り下げた。
+紐づけ先が消えて `verify-check-linkage.mjs` が通らなくなり、その check は取り下げた。
 群の一般論は本文から排除する方針（プロジェクト README）なので、これは正しい状態である。
 
 ## 数値検証で見つかった不一致
 
-### `commutator_of_H_and_Z_Y`（`008_TV1_hatZ_hatY_part1.ts`）の 6 式のうち 2 式
+### `commutator_of_H_and_Z_Y`（`008_TV1_hatZ_hatY_part1.mjs`）の 6 式のうち 2 式
 
 `sagemath/check/195_commutator_of_H_and_Z_Y/` に、成り立つ 4 式（`check_01`）と
 **成り立たない 2 式**（`check_02`）を分けて置いた。`check_02` は「本文の式が一致しないこと」と
@@ -212,7 +213,7 @@ FAIL のまま見逃されていた）。次の 2 点で塞いだ。
 
 ### **原文の誤り 2 件（本文修正は別セッションの担当）**
 
-対象ブロック: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の
+対象ブロック: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
 `TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`（ラベル `commutator_of_H_and_Z_Y`）。
 
 1. **第 2 式 `[H_1^{(±)}, hat(Z)_μ^{(∓)}] = 2e^{-iθ_μ}hat(Y)_μ` は偽。**
@@ -279,7 +280,7 @@ content を書き換え中のため衝突を避けた。変換は `node tools/co
 
 ## 完了（2026-07-26・追補2）: Lean 形式化が検出した本文の穴 5 件を content 側で解消
 
-対象は `structured-latex/content/008_TV1_hatZ_hatY_part2.ts` のみ（ラベルは一切変更していない）。
+対象は `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs` のみ（ラベルは一切変更していない）。
 
 1. **`anticommutator_of_psi`（ψ の反交換関係）— 平方根の分枝の一致が暗黙だった。**
    statement に「ここでの √ は `def_sqrt_cc` の単一値写像 ℂ→ℂ である」ことを明記し、proof に Step 0 を追加。
@@ -348,7 +349,7 @@ content・notes とも 0 件）。この未到達部分について **(1) 依存
 004 章以降は 001 章から切り離された島になっている。**固有値をいくら求めても、この橋が無いと分配関数へ戻れない。**
 加えて 001 章は「M 行 N 列」、004 章以降は鎖長が M で、**M と N の役割が入れ替わっている**。
 
-### (2) 執筆した章: `structured-latex/content/009_eigenvalues_of_V.ts`（18 ブロック）
+### (2) 執筆した章: `structured-latex/content/009_eigenvalues_of_V.mjs`（18 ブロック）
 
 主結果:
 
@@ -541,7 +542,7 @@ README 4 節の方針（同じ主張に、人手証明と1対1に対応する具
 
 ### ゴールと結果
 
-`structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の conversion.notes に
+`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の conversion.notes に
 「原文の誤植・不整合をそのまま再現し fix していない」と記録されていた 2 件を、
 **数値検証で正誤を確定 → statement と整合する形へ修正 → 証明を最後まで記述** の順で解消した。
 併せて、同じファイル群で見つかった同種の未修正誤植 2 件も解消した（下記 3, 4）。
@@ -666,7 +667,7 @@ Brian Hall Def 3.32 の $\mathrm{Ad}_g/\mathrm{ad}_X$、Matrix Lie群版の主�
   差し替えた。$\mathrm{ad}_X(Y)=[X,Y]$ と、正則な $g$ に対する $\mathrm{Ad}_g(Y)=gYg^{-1}$（逆行列の
   一意性の証明つき）だけを述べており、リー群は出てこない。008 章側が期待していた記号とも一致する。
 - ノートから `def_matrix_lie_group` への `ref` はラベルが content に無くなるため解決しない
-  （`validate-content.ts` はノートの ref も content のラベルへ解決することを要求する）。該当箇所は
+  （`validate-content.mjs` はノートの ref も content のラベルへ解決することを要求する）。該当箇所は
   ノート ID への言及に置き換えた。
 - 旧 `brianhall_3.35` はどこからも参照されていなかった（grep 確認済み）。
 
@@ -699,13 +700,13 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: 人手証明に残っていた未完（TODO）を全件解消 — **総括**
 
-本セッションのゴールは「`structured-latex/content/*.ts` に残る未完を、証明完成か、
+本セッションのゴールは「`structured-latex/content/*.mjs` に残る未完を、証明完成か、
 埋められない根拠の一次情報による特定か、のどちらかに到達させる」ことだった。到達した。
 以下は個別セッションの記録（このすぐ下から並ぶ各節）の索引であり、**残っている未完はこの節に全部書いてある**。
 
 ### 数え方の注意（重要）
 
-「TODO 8 件」という数字は `verify-no-lost-proofs.ts` の出力であり、これは
+「TODO 8 件」という数字は `verify-no-lost-proofs.mjs` の出力であり、これは
 **proof が `todo()` だけのブロック**を数えている。実際には `statement` 側の `todo()` や、
 証明の途中まで書いて末尾が `todo()` のブロックもあり、**`todo()` ノードを含むブロックは全部で 16 件**だった。
 本セッションはこの 16 件すべてを対象にした。
@@ -713,7 +714,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 ### 結果
 
 - `todo()` を含むブロック: **16 件 → 1 件**。
-- `verify-no-lost-proofs.ts` の「proof が todo のみ」: **8 件 → 0 件**。
+- `verify-no-lost-proofs.mjs` の「proof が todo のみ」: **8 件 → 0 件**。
 - 併せて、`todo()` を使わない形で残っていた未完 4 箇所（「証明略」「（暫定）一旦受け入れる」
   「未証明につき使用禁止」）も解消した。**本文に未証明の主張を根拠として使っている箇所は無い**
   （grep で確認済み）。
@@ -767,7 +768,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: フェルミオン ψ の定義・反交換関係・T_(V) の作用を Lean で形式化
 
-対象ブロック（`structured-latex/content/008_TV1_hatZ_hatY_part2.ts`）:
+対象ブロック（`structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
 `TV1_hatZ_hatY_030_definition_fermi`（`def_fermi`）/ `TV1_hatZ_hatY_031_claim_V_psi_commutator`
 （`commutation_V_psi`）/ `TV1_hatZ_hatY_032_claim_anticommutator_psi`（`anticommutator_of_psi`）。
 新規ファイル `lean/Ising2D/Part008/Definition030_Fermi.lean`。
@@ -864,7 +865,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 ## 完了（2026-07-26）: `A(θ)` の対角化（γ_1, γ_2, 固有値・固有ベクトル、P D P⁻¹）を形式化
 
 追加ファイル: `lean/Ising2D/Part008/Definition019_ThetaGamma.lean`, `lean/Ising2D/Part008/Claim027_EigenATheta.lean`。
-対応する原本ブロックは `structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の
+対応する原本ブロックは `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
 `TV1_hatZ_hatY_017/019/020` と `..._part2.mjs` の `TV1_hatZ_hatY_022/023/027/028/035`。
 
 ### 方針（要点だけ）
@@ -927,7 +928,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
   併せて **`matrix_exp_conjugation` のブロックを `brianhall_exc14` より前へ移動**し、
   証明が後方のブロックを参照する依存の逆転を解消した。
   Matrix Lie群の定義ブロックに `def_matrix_lie_group` ラベルを新設。
-- **`exp_X_Y_exp_-X`（`008_TV1_hatZ_hatY_part1.ts`）**:
+- **`exp_X_Y_exp_-X`（`008_TV1_hatZ_hatY_part1.mjs`）**:
   「（暫定）リー群・リー環の掘り下げを避けて一旦受け入れる」を撤回し、`matrix_exp_conjugation` を
   根拠に完全な証明へ書き換えた。statement 側に $X,Y\in\mathrm{Mat}(d,\mathbb{C})$ と記号の定義元を明示。
   これで **`brianhall_3.35` を根拠に使っている証明は本文に 1 件も無い**（grep 済み）。
@@ -949,7 +950,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: γ_1, γ_2 の偏角・零点・臨界条件（008 後半の 4 ブロック）
 
-`008_TV1_hatZ_hatY_part2.ts` の TODO 4 件をすべて人手証明で埋め、`todo()` を除去した。
+`008_TV1_hatZ_hatY_part2.mjs` の TODO 4 件をすべて人手証明で埋め、`todo()` を除去した。
 
 - **`cosh_sinh_basic_properties`（新設・`000_calculation_formulae_00_09.mjs`）**:
   cosh/sinh の基本性質がどのブロックにも主張として無かったため新設した。
@@ -1022,7 +1023,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: 008 part1 の残り 4 ブロック（交換子のネスト・自己同型群の完全列・クリフォード群・T_(V) の作用）
 
-`structured-latex/content/008_TV1_hatZ_hatY_part1.ts` に残っていた 4 件の TODO をすべて埋め、`todo()` を除去した。
+`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` に残っていた 4 件の TODO をすべて埋め、`todo()` を除去した。
 
 ### 交換子のネスト（`<nesting_of_commutator_of_H_and_Z>`）
 
@@ -1401,7 +1402,7 @@ Lean の `(j : ℕ) = 0` の項である。`hat` の添字 `μ` は `ℤ` のま
   σ_k^y, σ_k^z, I_{(Mat(2,C))^{⊗M}}, Z_m/Y_m の p_m/q_m 対応を既存ブロックへ補記して集約。
 - **非移行（確定）**: main.typ 末尾の作業メモ（`= 全体のノリ` / `= メモ` / 「次回やること」と
   埋め込み SageMath スニペット）は証明本体でないため移さない。
-- 検証: `node structured-latex/tools/validate-content.ts` → 142ブロック/14ファイル（見出し10・ラベル72・
+- 検証: `node structured-latex/tools/validate-content.mjs` → 142ブロック/14ファイル（見出し10・ラベル72・
   ref142 全解決）。`pnpm -r build` / `pnpm -r typecheck` / `biome check` 通過。KaTeX 全1647式 0エラー。
   `GET /api/document` で見出し10件が文書順に配信されることを確認。
 
@@ -1483,7 +1484,7 @@ gamma_2=0 障害の処理: gamma_2(theta_mu)=0 の mu ではフェルミオン�
 
 ### structured-latex 残りファイルの変換
 
-`structured-latex/content/` 以下へ残りの `parts/**/*.typ` の変換を追加済み。`node structured-latex/tools/validate-content.ts` は 123 blocks で通過。
+`structured-latex/content/` 以下へ残りの `parts/**/*.typ` の変換を追加済み。`node structured-latex/tools/validate-content.mjs` は 123 blocks で通過。
 
 ### 032/037 V' 符号修正と SageMath 検証
 
@@ -1552,7 +1553,7 @@ $
   **定義したブロックはリポジトリに 1 件も存在しない**。すなわち主張の記号が意味をもつ土台が未整備で、
   証明以前に statement が定義されていない状態である。
 - 原本 `_old/typst/parts/005_.../001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ` も
-  proof は `TODO:` のみで、移行漏れではない（`verify-no-lost-proofs.ts` も同判定）。
+  proof は `TODO:` のみで、移行漏れではない（`verify-no-lost-proofs.mjs` も同判定）。
 - **本論はこの一般版に依存しない。** 本プロジェクトで必要なのは行列環 $\mathrm{Mat}(n,K)$ 上の
   $e^{X}Ye^{-X}=e^{\mathrm{ad}_X}(Y)$ だけであり、これは新規ブロック
   `exp_conjugation_proof_010_theorem_matrix_exp_conjugation`（labels: `matrix_exp_conjugation`）で
@@ -1579,7 +1580,7 @@ $\mathrm{Aut}(G)$ が Lie 群で $\mathrm{End}(\mathfrak{g})$ がその Lie 環�
 
 `exp_conjugation_proof_008_theorem_exp_ad_series`（labels: `brianhall_exc14`）、
 `exp_conjugation_proof_009_theorem_exp_conjugation_main`（labels: `brianhall_3.35`）の
-「未証明につき使用禁止」注記、および `008_TV1_hatZ_hatY_part1.ts` の `exp_X_Y_exp_-X` の
+「未証明につき使用禁止」注記、および `008_TV1_hatZ_hatY_part1.mjs` の `exp_X_Y_exp_-X` の
 「暫定」proof は、いずれも `matrix_exp_conjugation` を根拠に完全証明へ書き換えて解消した。
 詳細は本ファイル冒頭の「完了（2026-07-26）: `todo()` 以外の形で残っていた未完 4 箇所」を見よ。
 なお `exp_conjugation_proof_002`（一般 Lie 群版）は上記の根拠により **`todo()` のまま残置**である。
