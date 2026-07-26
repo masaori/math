@@ -139,6 +139,9 @@ EOF
 | `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.Abstract.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
 | `<commutator_of_H_and_Z_Y>` | `Ising2D.lie_H1_hatZ_same` / `lie_H1_hatY` / `lie_H1_hatZ_opp` / `lie_H2_hatZMinus` / `lie_H2_hatY` / `lie_H2_hatZPlus`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim001_CommutatorHZY.lean`） | `Ising2D.Abstract.CliffordTriple.lie_sum_yz_z` ほか 6 本（台は任意の環、係数は任意の可換半環、族の添字型も任意。`Abstract/CommutatorClifford.lean`） |
 | `<ホロノミック量子場_p142下段_1>` / `<T_V_hatZ_hatY>`（exp 共役の 2 次元部分空間への「行列としての」作用） | `Ising2D.actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` / `actsBy_TConj_V1half` / `actsBy_TConj_V2` / `TV_hatZ_hatY`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim012_TVActions.lean`） | `Ising2D.Abstract.twoDimConjMat` / `Abstract.exp_conj_two_dim_actsBy` / `Abstract.conj_smul_eq`（ℂ 上の完備ノルム環。スカラー相殺は任意の ℂ-代数。`Abstract/TVAction.lean`） |
+| `anticommutator_of_Z_and_Y` | `Ising2D.anticomm_Z_Z` / `anticomm_Z_Y` / `anticomm_Y_Y`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.anticomm_Z_Z_of_abstract` / `anticomm_Z_Y_of_abstract` / `anticomm_Y_Y_of_abstract`、`Part006/Claim000_AnticommutatorZYAbstract.lean`） | `Ising2D.Abstract.acomm_jwStr` / `Abstract.jwStr_sq` / `Abstract.acomm_of_single_site`（台は任意の環、サイトごとの積は「単位的・乗法的・多重線型」な写像なら何でもよい。`Abstract/SiteLocalAnticomm.lean`） |
+| `hatZ_hatY_M_periodicity` | `Ising2D.hatZ_periodic` / `hatY_periodic` / `hatZMinus_M_eq_neg_M` / `hatY_M_eq_neg_M`（複素指数関数。抽象版からの導出は `Ising2D.hatZ_periodic_of_abstract` ほか、`Part004/Claim012_HatPeriodicityAbstract.lean`） | `Ising2D.Abstract.transform_periodic` / `Abstract.zpow_mul_add_natCast`（任意の体、`ζ^M = 1` だけ。`Abstract/DiscreteFourier.lean`） |
+| `recover_Z_Y_from_hatZ_hatY` | `Ising2D.inverse_dft` / `recover_Y` / `recover_Z`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.inverse_dft_of_abstract` / `recover_Y_of_abstract` / `recover_Z_of_abstract`、`Part004/Claim013_RecoverZYAbstract.lean`） | `Ising2D.Abstract.inverse_dft_abstract`（任意の体の 1 の原始 `M` 乗根と、その体上の任意の加群。`Abstract/DiscreteFourier.lean`） |
 
 抽象版から得られた知見（本文には持ち込まないが、解説パートの素材になる）:
 
@@ -185,6 +188,24 @@ EOF
   **両側の重みの積 `u_j v_j` しか結論に現れない**ので、原文の「複号同順／複号逆」は
   「積が全サイトで `1`」と「`j = 1` でだけ `-1`」の 2 通りに整理できる。
   原文が課している `η^2 = 1` は、積が `1` になるための十分条件にすぎない。
+
+- `Z_μ, Y_ν` の反交換関係 3 式に効いているのは、**サイトごとの積を作る写像が
+  「単位的・乗法的・多重線型」であること**（符号 `-1` が積の外へ出る）と、
+  **食い違うサイトがちょうど 1 つであること**だけである。テンソル積・クロネッカー積の具体形も、
+  成分が 2×2 であることも、複素数であることも、Pauli 行列の成分計算も効いていない
+  （使うのは `A σ^x = -σ^x A` 型の関係式だけ）。
+  Jordan–Wigner 文字列を書くのに要るのは「サイトの添字に線型順序があること」だけで、
+  文字列に使う元が `σ^x` である必要もない（`Abstract/SiteLocalAnticomm.lean`）。
+
+- `hat(Z), hat(Y)` の `M` 周期性に効いているのは **`ζ^M = 1` の一点のみ**である。
+  原始根であることすら要らず、`Z_j, Y_j` の代数的性質も、`hat(Z)^{(±)}` の重みも、
+  指数の符号の取り方も効いていない。
+
+- `hat(Z)^{(-)}, hat(Y)` からの復元（離散フーリエ逆変換）に効いているのは、
+  **1 の原始 `M` 乗根の直交性**と、**変換される対象が係数体上の加群であること**だけである。
+  行列であることも、積があることも、`Z, Y` の反交換関係も効いていない。
+  原文が `hat(Z)^{(+)}` で復元を述べていない理由も抽象版から一意に説明できる:
+  抽象版の仮定は「重みが一様」であり、`hat(Z)^{(+)}` は `j = 1` の重みだけが `-1` だからである。
 
 - 交換子と反交換子の恒等式には、行列であることも複素数であることも効いていない
   （分配法則と結合法則だけで足りる）。

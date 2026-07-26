@@ -44,7 +44,7 @@ The original `.typ` files remain untouched.
 **何が型で落ち、何が型では落とせないのか（およびその根拠）は
 [docs/type-coverage.md](../docs/type-coverage.md) に記録してある。**
 
-この実証は `node tools/negative-type-test.ts` が行う（16 ケース）。存在しないラベルを使った一時ファイルで
+この実証は `node tools/negative-type-test.ts` が行う（18 ケース）。存在しないラベルを使った一時ファイルで
 実際に `tsc` を落とし、その診断が当該ラベルを指していることを確認する（正しいラベル版が
 通ることも対にして確認するので、「設定不備で常に落ちている」状態とは区別できる）。
 回帰テストは `type-tests/label-typing.test-d.ts`（`@ts-expect-error` の並び）と
@@ -126,10 +126,26 @@ Work notes at the end of the old `main.typ` (`= 全体のノリ`, `= メモ`, th
 - `tools/verify-no-lost-proofs.ts` - Typst 原本からの証明の移行漏れ検出。
 - `tools/extract-source-blocks.ts` - Typst 原本（`_old/typst/`）の索引抽出。
 - `tools/codemod-mjs-to-ts.ts` - `.mjs` → `.ts` 一括変換（過去の移行に使用。以後の保険）。
+- `tools/build-latex.ts` - **最終成果物の生成器**（content のみ → LaTeX → PDF）。
+- `tools/verify-no-notes-in-output.ts` - 生成物へノートが混入していないことの検査。
 - `tools/negative-type-test.ts` - 「存在しないラベルは tsc が拒否する」ことの実証テスト。
 - `tools/schema-runtime-test.ts` - 実行時検証（未知フィールド等）のテスト。
 - `content/` - 証明ブロック群（出版物の本体）。
 - `notes/` - 参照用ノート（ラベルで紐づく。最終成果物には載らない）。
+
+## 最終成果物の生成（LaTeX / PDF）
+
+`content/` **だけ**を入力に LaTeX を組み、PDF まで作る（`tools/build-latex.ts`）。
+`notes/` は読まない。混入していないことは `tools/verify-no-notes-in-output.ts` が検査する。
+
+```sh
+npm run build:tex   # build/document.tex を生成
+npm run build:pdf   # 生成 → PDF ビルド → ノート混入の検査
+```
+
+PDF 化には tectonic が要る（未導入なら `brew install tectonic`）。日本語は xeCJK ＋ ヒラギノ。
+出力は `build/`（git 管理外）。現在の実測: **173 ページ / 相互参照 945 件すべて解決 / 未解決参照 0 / 組めない文字 0 / 版面外へ出た行 0**。
+変換規則と数式の互換性の実測結果は [docs/publication-output.md](../docs/publication-output.md)。
 
 ## Validation
 
@@ -149,6 +165,7 @@ npm run check
 
 ```sh
 node structured-latex/tools/generate-index.ts         # 生成物（ラベル型・集約モジュール）を再生成
+node structured-latex/tools/build-latex.ts --pdf      # 最終成果物（PDF）を生成
 node structured-latex/tools/validate-content.ts       # 実行時検証
 node structured-latex/tools/verify-no-lost-proofs.ts  # 移行漏れ検出
 node sagemath/tools/verify-check-linkage.ts           # 数値検証 ↔ 証明の対応
