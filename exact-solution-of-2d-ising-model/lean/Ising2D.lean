@@ -25,3 +25,4 @@ import Ising2D.Part008.Definition016_TV
 import Ising2D.Part008.Definition019_ThetaGamma
 import Ising2D.Part008.Claim027_EigenATheta
 import Ising2D.Part008.Definition030_Fermi
+import Ising2D.Part008.Claim032_AnticommutatorPsiAbstract
