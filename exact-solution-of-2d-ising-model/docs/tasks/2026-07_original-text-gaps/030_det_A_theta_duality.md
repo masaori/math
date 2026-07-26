@@ -1,8 +1,17 @@
 # det A(θ\_μ) = 1 には双対関係 c₂s₂\* = c₂\* が要る件
 
-**現況: 一部未解消。** 必要な等式そのものは本文に入っており、証明の連鎖もつながっているが、
-`det_A_theta` の proof が参照している先が実質的に空証明であり、
-「どの前提から det A = 1 が出るのか」が本文から追えない。**本文の修正が必要。**
+**現況: 解消済み（コミット `733a5ee`）。本文の修正は不要。**
+
+このファイルを書いた時点では未解消だった。並行セッションが下記 (2) の「案 A」に近い形
+——`factorization_of_A_theta` を経由せず `def_A_theta` の定義から直接 det を計算し、
+3 つの関係 (i) `c₁²−s₁²=1`、(ii) `(c₂*)²−(s₂*)²=1`、(iii) `c₂s₂*=c₂*` を明示的に使う
+6 ステップの証明——へ書き直して解消した。statement 側にも前提 `K₁, K₂ ∈ ℝ_{>0}` が補われ、
+`λ_{+,μ}λ_{−,μ} = 1` の証明も追加されている。
+以下の (1)〜(3) は、**何がどう穴だったのか**と**解消の根拠**の記録である。
+
+なお `factorization_of_A_theta` の proof が作用素の等式から行列の等式へ飛んでいる点
+（下記 (1) の 2.）は手つかずで残っているが、**`det_A_theta` はもうそこに依存していない**ので、
+det A = 1 の正しさには影響しない。
 
 ## 対象
 
@@ -17,9 +26,9 @@
 | `TV1_hatZ_hatY_016a_claim_duality_c2_star` | `duality_c2_star_eq_s2_star_c2` | `s₂* = 1/s₂`, `c₂* = c₂/s₂`, ゆえに `c₂* = s₂*c₂`（証明済み） |
 | `TV1_hatZ_hatY_018_claim_T_V_action` | `T_V_hatZ_hatY` | proof の Step 2〜6 で `B₁(θ)B₂B₁(θ) = A(θ)` を 4 成分すべて計算（双対関係を使用） |
 | `TV1_hatZ_hatY_037_claim_factorization_A_theta` | `factorization_of_A_theta` | 同じ行列等式を主張するが、proof は「作用行列が B₁B₂B₁ であり def\_A\_theta より A(θ)」の 1 段落のみ |
-| `TV1_hatZ_hatY_035_claim_det_A_theta` | `det_A_theta` | `factorization_of_A_theta` を参照して det を計算 |
+| `TV1_hatZ_hatY_035_claim_det_A_theta` | `det_A_theta` | **（修正前）**`factorization_of_A_theta` を参照して det を計算。**（修正後）**`def_A_theta` から直接計算し 3 関係を明示 |
 
-## (1) どの条件が抜けているか
+## (1) どの条件が抜けていたか
 
 `det A(θ) = 1` は **`def_A_theta` の A(θ) の定義だけからは出ない。**
 A(θ) を γ₁, γ₂ で書くと
@@ -39,7 +48,7 @@ c₁² − s₁² = 1,    (c₂*)² − (s₂*)² = 1,    c₂ s₂* = c₂*
 の 3 本である。前 2 本は cosh/sinh の恒等式だが、**3 本目 `c₂s₂* = c₂*` は K₂ と K₂\* の
 双対関係（`sinh 2K₂ · sinh 2K₂* = 1`）の帰結であり、cosh/sinh の恒等式からは出ない。**
 
-現在の `det_A_theta` の proof は
+**修正前の** `det_A_theta` の proof は
 
 > `factorization_of_A_theta` より A(θ\_μ) = B₁(θ\_μ)·B₂·B₁(θ\_μ) であり、
 > det B₁ = cosh²K₁ − sinh²K₁ = 1、det B₂ = cosh²(2K₂\*) − sinh²(2K₂\*) = 1、
@@ -73,11 +82,12 @@ P₁₂ = i e^{iθ}[ s₂*(c₁cos θ − i sin θ) − c₂* s₁ ]
 と、`duality_c2_star_eq_s2_star_c2` を明示的に参照して使っている。**つまり必要な情報は
 本文に揃っているが、`det_A_theta` からそこへ辿れない。**
 
-## (2) 正しくはどうあるべきか（修正後のステートメント案）
+## (2) 正しくはどうあるべきか（当時書いた修正案。実際の修正は案 A に近い形で行われた）
 
 ### 案 A（最小の修正・推奨）
 
 `det_A_theta` の statement に前提を明記し、proof の参照先を実証のあるブロックへ張り替える。
+（**実際にはこれよりさらに直接的に、`def_A_theta` の定義から det を計算する形が採られた。**）
 
 > **statement 案**
 >
