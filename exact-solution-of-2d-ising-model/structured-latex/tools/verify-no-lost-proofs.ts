@@ -112,6 +112,7 @@ function typstHasRealProof(source: string): boolean {
 
 async function main(): Promise<void> {
   const lost: { id: string; sourcePath: string; lines: number }[] = [];
+  const missingSource: { id: string; sourcePath: string }[] = [];
   let checked = 0;
 
   for (const { blocks } of await loadContentFiles()) {
@@ -121,13 +122,25 @@ async function main(): Promise<void> {
       const sourcePath = block.sourcePath;
       if (!sourcePath) continue;
       const abs = join(projectRoot, sourcePath);
-      if (!existsSync(abs)) continue;
+      if (!existsSync(abs)) {
+        // 黙って飛ばすと、パスが古びた瞬間にこの検査が無言で無効化される。
+        missingSource.push({ id: block.id, sourcePath });
+        continue;
+      }
       checked += 1;
       const source = await readFile(abs, "utf8");
       if (typstHasRealProof(source)) {
         lost.push({ id: block.id, sourcePath, lines: source.split("\n").length });
       }
     }
+  }
+
+  if (missingSource.length > 0) {
+    console.error("sourcePath が実在しないブロックがある（移行漏れ検査が無効化される）:");
+    for (const entry of missingSource) {
+      console.error(`  - ${entry.id}: ${entry.sourcePath}`);
+    }
+    process.exit(1);
   }
 
   if (lost.length > 0) {

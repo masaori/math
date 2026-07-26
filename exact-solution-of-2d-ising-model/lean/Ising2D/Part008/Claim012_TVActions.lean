@@ -1,7 +1,7 @@
 /-
 # 具体版: `T_{(V_1^{(±)})^{1/2}}`, `T_{V_2}`, `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用
 
-対応する人手証明のラベル（正本は `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`）:
+対応する人手証明のラベル（正本は `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`）:
 
 * **`<nesting_of_commutator_of_H_and_Z>`**（`TV1_hatZ_hatY_002_claim_nesting_commutator`）
   — `n` 重の入れ子交換子の偶奇による閉じた形

@@ -1,0 +1,62 @@
+=== T_{(V_1)^{1/2}}, T_{V_2} の作用（行列指数関数で直接計算）===
+M = 3, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  TV1(Z): max residual = 1.301e-15  ->  PASS
+  TV1(Y): max residual = 1.179e-15  ->  PASS
+  TV2(Z): max residual = 1.246e-15  ->  PASS
+  TV2(Y): max residual = 1.099e-15  ->  PASS
+M = 3, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  TV1(Z): max residual = 4.085e-15  ->  PASS
+  TV1(Y): max residual = 4.135e-15  ->  PASS
+  TV2(Z): max residual = 1.014e-14  ->  PASS
+  TV2(Y): max residual = 9.818e-15  ->  PASS
+M = 3, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  TV1(Z): max residual = 1.115e-15  ->  PASS
+  TV1(Y): max residual = 1.243e-15  ->  PASS
+  TV2(Z): max residual = 2.786e-15  ->  PASS
+  TV2(Y): max residual = 2.734e-15  ->  PASS
+M = 3, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  TV1(Z): max residual = 6.125e-16  ->  PASS
+  TV1(Y): max residual = 6.367e-16  ->  PASS
+  TV2(Z): max residual = 2.021e-13  ->  PASS
+  TV2(Y): max residual = 2.077e-13  ->  PASS
+M = 4, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  TV1(Z): max residual = 1.595e-15  ->  PASS
+  TV1(Y): max residual = 1.606e-15  ->  PASS
+  TV2(Z): max residual = 2.617e-15  ->  PASS
+  TV2(Y): max residual = 2.399e-15  ->  PASS
+M = 4, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  TV1(Z): max residual = 5.757e-15  ->  PASS
+  TV1(Y): max residual = 6.596e-15  ->  PASS
+  TV2(Z): max residual = 2.963e-14  ->  PASS
+  TV2(Y): max residual = 3.690e-14  ->  PASS
+M = 4, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  TV1(Z): max residual = 1.129e-15  ->  PASS
+  TV1(Y): max residual = 1.354e-15  ->  PASS
+  TV2(Z): max residual = 6.941e-15  ->  PASS
+  TV2(Y): max residual = 7.224e-15  ->  PASS
+M = 4, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  TV1(Z): max residual = 9.849e-16  ->  PASS
+  TV1(Y): max residual = 9.880e-16  ->  PASS
+  TV2(Z): max residual = 1.835e-12  ->  PASS
+  TV2(Y): max residual = 2.039e-12  ->  PASS
+M = 5, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  TV1(Z): max residual = 1.896e-15  ->  PASS
+  TV1(Y): max residual = 1.885e-15  ->  PASS
+  TV2(Z): max residual = 4.963e-15  ->  PASS
+  TV2(Y): max residual = 5.114e-15  ->  PASS
+M = 5, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  TV1(Z): max residual = 2.423e-14  ->  PASS
+  TV1(Y): max residual = 2.397e-14  ->  PASS
+  TV2(Z): max residual = 9.005e-14  ->  PASS
+  TV2(Y): max residual = 1.009e-13  ->  PASS
+M = 5, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  TV1(Z): max residual = 3.357e-15  ->  PASS
+  TV1(Y): max residual = 3.228e-15  ->  PASS
+  TV2(Z): max residual = 2.267e-14  ->  PASS
+  TV2(Y): max residual = 2.100e-14  ->  PASS
+M = 5, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  TV1(Z): max residual = 9.780e-16  ->  PASS
+  TV1(Y): max residual = 9.780e-16  ->  PASS
+  TV2(Z): max residual = 1.725e-11  ->  PASS
+  TV2(Y): max residual = 1.850e-11  ->  PASS
+RESULT: PASS

@@ -16,7 +16,7 @@ type Case = { name: string; run: () => void; expect: RegExp };
 const cases: Case[] = [
   {
     name: "ブロックの未知フィールド（proof の打ち間違い）を拒む",
-    expect: /未知のフィールド.*proofs/s,
+    expect: /未知のフィールドがある: proofs（/,
     run: () =>
       defineBlocks([
         {
@@ -65,13 +65,29 @@ const cases: Case[] = [
   },
   {
     name: "ノートの未知フィールドを拒む",
-    expect: /未知のフィールド.*target/s,
+    expect: /未知のフィールドがある: target（/,
     run: () =>
       defineNotes([
         {
           id: "note_runtime_test_typo",
           target: ["def_kronecker"],
           body: [],
+        } as never,
+      ]),
+  },
+  {
+    name: "定理型ブロックに level があれば拒む（見出しとの取り違え）",
+    expect: /level is not allowed/,
+    run: () =>
+      defineBlocks([
+        {
+          id: "runtime_test_level",
+          kind: "claim",
+          level: 3,
+          sourcePath: "tools/schema-runtime-test.ts",
+          sourceOrdinal: 5,
+          labels: [],
+          statement: [],
         } as never,
       ]),
   },

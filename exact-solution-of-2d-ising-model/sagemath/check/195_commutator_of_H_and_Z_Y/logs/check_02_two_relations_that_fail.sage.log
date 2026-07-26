@@ -1,0 +1,5 @@
+=== commutator_of_H_and_Z_Y: 本文と一致しない 2 式（不一致を固定する） ===
+  (a) 本文の式との差の最大値: 4.000000
+  (b) 本文の式との差の最大値: 6.000000
+checks: 280, max relative error: 3.553e-15, tol: 1.0e-09
+RESULT: PASS

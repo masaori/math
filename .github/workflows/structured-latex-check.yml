@@ -1,12 +1,12 @@
 name: structured-latex check
 
 # 証明の構造化テキストの機械検査。
-# 生成ラベルの鮮度 → 型検査（存在しないラベルへの参照はここで落ちる）→ 実行時検証 → 負テスト。
+# 存在しないラベルへの参照は型検査で落ちる。
 on:
   push:
     paths:
       - 'exact-solution-of-2d-ising-model/structured-latex/**'
-      - 'exact-solution-of-2d-ising-model/sagemath/tools/**'
+      - 'exact-solution-of-2d-ising-model/sagemath/**'
       - 'realtime-web-preview/tsconfig.base.json'
       - '.github/workflows/structured-latex-check.yml'
   pull_request:
@@ -27,8 +27,8 @@ jobs:
           # .ts を型ストリップで直接実行するため 22.18 以上が要る。
           node-version: '22'
       - run: pnpm install --frozen-lockfile
-      # 生成ラベルの鮮度 → 型検査（.ts / .mjs）→ 実行時検証 → 移行漏れ検出 → 負テスト。
+      # 生成ラベルの鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
       - run: npm run check
       - name: verify check linkage (sagemath ↔ proof)
         working-directory: exact-solution-of-2d-ising-model
-        run: node sagemath/tools/verify-check-linkage.mjs
+        run: node sagemath/tools/verify-check-linkage.ts

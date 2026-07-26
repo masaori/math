@@ -110,6 +110,16 @@ const noteWithUnknownTarget: Note = {
 };
 void noteWithUnknownTarget;
 
+void defineNotes([
+  {
+    id: "note_type_test_typo",
+    targets: ["def_kronecker"],
+    // @ts-expect-error `body` の打ち間違い。
+    bodyy: [paragraph(["本文のつもり"])],
+    body: [],
+  },
+]);
+
 const noteWithEmptyTargets: Note = {
   id: "note_type_test_empty",
   // @ts-expect-error ノートは必ず 1 件以上のラベルに紐づく（空配列は型で落ちる）。

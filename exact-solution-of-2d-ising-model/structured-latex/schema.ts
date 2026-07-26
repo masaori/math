@@ -10,7 +10,7 @@
  *   - ノートの `targets` が 1 件以上あること（空タプル不可）
  *
  * 実行時にしか捕まえられないこと（`tools/validate-content.ts`）:
- *   - id / ラベルの重複、未変換の Typst 記法の混入、`.mjs` 側（型検査対象外）の値の妥当性
+ *   - id / ラベルの重複、未変換の Typst 記法の混入、型を経由せず組み立てられた値の妥当性
  *
  * 実行方法: Node 22.18+ の型ストリップにより、この `.ts` は変換なしでそのまま import できる。
  * ビルド成果物（dist）は作らない。`tsc` は検査専用（noEmit）。
@@ -300,6 +300,13 @@ export function validateBlock(block: ConvertedBlock): void {
   if (block.kind === HEADING_KIND) {
     validateHeadingBlock(block);
     return;
+  }
+  // `level` は見出しだけのフィールド。定理型で書かれていたら kind の取り違えなので拒む
+  // （型では `never` で落ちるが、型を経由しない値のために実行時でも塞ぐ）。
+  // 型では `never` なので、値としての存在確認は型の外側で行う（narrowing を避ける）。
+  const levelOnTheoremLike = (block as { level?: unknown }).level;
+  if (levelOnTheoremLike !== undefined) {
+    throw new TypeError(`${block.id}.level is not allowed for kind "${block.kind}"`);
   }
   validateNodes(block.statement ?? [], `${block.id}.statement`);
   if (block.proof !== undefined) {

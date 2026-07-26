@@ -4,7 +4,7 @@
 
 **対象ラベル**: `ホロノミック量子場_p142下段_1` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`（ブロック `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`）
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`（ブロック `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`）
 - 範囲: `T_{(V_1^{(±)})^{1/2}}` と `T_{V_2}` の `hatZ_mu^{(-)}`, `hatY_mu` への作用（4 式）と、その行ベクトル×列ベクトル表示
 
 ### 何を確定させるための検証か

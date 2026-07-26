@@ -1,0 +1,4 @@
+=== theorem_exp_product ===
+  非可換な組で等式が破れた事例: 30 件（可換性の仮定が本質的）
+checks: 76, max relative error: 5.972e-16, tol: 1.0e-09
+RESULT: PASS

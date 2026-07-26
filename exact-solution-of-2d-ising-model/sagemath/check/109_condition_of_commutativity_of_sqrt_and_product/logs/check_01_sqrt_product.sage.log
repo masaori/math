@@ -1,0 +1,8 @@
+=== condition_of_commutativity_of_sqrt_and_product ===
+  境界 t=0.300000000000000: arg1+arg2=6.283185307180, sqrt(z1z2)-sqrt z1 sqrt z2 = 1.442e-16, 和 = 2.000e+00
+  境界 t=1.00000000000000: arg1+arg2=6.283185307180, sqrt(z1z2)-sqrt z1 sqrt z2 = 7.688e-19, 和 = 2.000e+00
+  境界 t=2.00000000000000: arg1+arg2=6.283185307180, sqrt(z1z2)-sqrt z1 sqrt z2 = 2.512e-17, 和 = 2.000e+00
+  境界 t=3.00000000000000: arg1+arg2=6.283185307180, sqrt(z1z2)-sqrt z1 sqrt z2 = 4.080e-18, 和 = 2.000e+00
+  第1の場合 750 件、第2の場合 449 件、境界近傍 30 件
+checks: 1204, max relative error: 7.081e-16, tol: 1.0e-09
+RESULT: PASS

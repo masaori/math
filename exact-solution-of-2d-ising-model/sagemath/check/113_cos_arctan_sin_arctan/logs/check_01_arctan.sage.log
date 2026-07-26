@@ -1,0 +1,3 @@
+=== cos_arctan_sin_arctan ===
+checks: 204, max relative error: 2.070e-11, tol: 1.0e-09
+RESULT: PASS

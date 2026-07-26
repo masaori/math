@@ -1,0 +1,3 @@
+=== critical_condition_c1_eq_s1_c2 ===
+checks: 34, max relative error: 1.410e-14, tol: 1.0e-09
+RESULT: PASS

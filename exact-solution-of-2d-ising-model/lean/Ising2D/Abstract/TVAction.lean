@@ -4,7 +4,7 @@
 対応する人手証明のラベル:
 
 * **`<extract_taylor_coefficient_of_Z_Y>`**
-  （`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
+  （`structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の
   `TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`）
 * **`<ホロノミック量子場_p142下段_1>`**（同 `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`）
 * **`<T_V_hatZ_hatY>`**（同 `TV1_hatZ_hatY_018_claim_T_V_action`）

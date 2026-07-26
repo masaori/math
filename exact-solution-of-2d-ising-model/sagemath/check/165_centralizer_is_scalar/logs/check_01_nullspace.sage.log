@@ -1,0 +1,6 @@
+=== centralizer_is_scalar: 連立一次方程式 [W, g] = 0 の解空間 ===
+  M=1: 未知数=4, 解空間の次元=1
+  M=2: 未知数=16, 解空間の次元=1
+  M=3: 未知数=64, 解空間の次元=1
+checks: 15, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS
