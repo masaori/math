@@ -49,7 +49,13 @@ export default defineBlocks([
           math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} := I_{\mathrm{Mat}(2,\mathbb{C})} \otimes \cdots \otimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
         ],
         [
-          math(String.raw`V_1 := \exp\!\left(i K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          math(String.raw`V_1 := \exp\!\left(K_1 \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
+= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          "（",
+          math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+          " とし、",
+          math(String.raw`\sigma_{M+1}^z := \sigma_1^z`),
+          " と周期的に延長した上での和である）",
         ],
         [
           math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
@@ -99,10 +105,38 @@ export default defineBlocks([
         " より、",
         math(String.raw`c_i, s_i, c_i^*, s_i^* > 0`),
       ]),
+      paragraph([
+        math(String.raw`V_1, V_2`),
+        " に現れる ",
+        math(String.raw`\exp`),
+        " は、",
+        ref("def_end_iso"),
+        " の同型 ",
+        math(String.raw`\mathbf{end}`),
+        " による同一視 ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} \cong \mathrm{End}(\mathcal{F})`),
+        " のもとでの ",
+        ref("def_exp"),
+        " の ",
+        math(String.raw`\exp`),
+        " である。",
+      ]),
     ],
     conversion: {
       status: "converted",
       notes: [
+        "原文（および本ブロックの旧版）の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と" +
+          "虚数単位を含んでいたが、これは誤りなので K_1 に訂正した。根拠: Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} " +
+          "（<V1_V2_in_Z_Y_epsilon> の証明 Step 2）であるから、定義を原文どおり √-1 K_1 とすると " +
+          "V_1 = exp(-K_1(Y_1Z_2+⋯)) となり、原文の主張 <V1_V2_in_Z_Y_epsilon>（V_1 = exp(√-1 K_1(Y_1Z_2+⋯)））と" +
+          "矛盾する。さらに 004 章以降（H_1^{(±)} の定義ブロック、V_1^{(±)} の定義、008 章）はすべて " +
+          "V_1 = exp(√-1 K_1 H_1) 側と整合しており、虚数単位は Jordan--Wigner 置換 σ^z_mσ^z_{m+1} = √-1 Y_mZ_{m+1} " +
+          "から生じるものである。V_2 の定義（虚数単位なし）とその主張（√-1 K_2^* が付く）も同じ理由で整合している。" +
+          "また 001 章の転送行列 (V_1)_{μ,μ'} は実正値行列であり、σ^z 表示の V_1 に虚数単位が付かないことと合う。",
+        "V_1 の指数の中の巡回和は M ≥ 2 でなければ意味を持たない（M = 1 では σ^z_1σ^z_2 が未定義）ため、" +
+          "M ≥ 2 と σ^z_{M+1} := σ^z_1 を明示した。σ_k^a, Z_m, Y_m, ε 自体は M ≥ 1 で定義される。",
+        "exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_end_iso> の同一視のもとでの " +
+          "<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
@@ -489,17 +523,780 @@ Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
     sourcePath: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ",
     sourceOrdinal: 3,
     title: { tex: String.raw`V_1, V_2 \text{ を } Z, Y, \varepsilon \text{ で表す}` },
-    labels: [],
+    labels: ["V1_V2_in_Z_Y_epsilon"],
     statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_1, V_2, Z_m, Y_m, \varepsilon, K_1, K_2^*, s_2 \;(= \sinh 2K_2)`),
+        " を考える。このとき ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の中で",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 V_1 &= \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M - \varepsilon Y_M Z_1)\right) \\
 V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\right)
 \end{aligned}`,
       ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`i \in \mathbb{C}`),
+        " は虚数単位）。",
+      ]),
     ],
-    proof: [paragraph([todo("TODO")])],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        "証明の方針: ",
+        math(String.raw`\exp`),
+        " の中身どうしが ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の元として等しいことを示す。",
+        math(String.raw`\exp`),
+        " は写像であるから、これが示されれば ",
+        math(String.raw`\exp`),
+        " の値も等しく、主張が従う（したがって ",
+        ref("theorem_exp_product"),
+        " のような ",
+        math(String.raw`\exp`),
+        " の分解は用いない）。",
+      ]),
+      paragraph([
+        "以下、",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z, I := I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})`),
+        " は ",
+        ref("pauli_matrix_products"),
+        " の Pauli 行列とし、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の積が各テンソル因子ごとの積であること",
+      ]),
+      displayMath(
+        String.raw`(A_1\otimes\cdots\otimes A_M)(B_1\otimes\cdots\otimes B_M)
+= (A_1B_1)\otimes\cdots\otimes(A_MB_M)
+\quad (\because \text{テンソル積代数の積の定義})`,
+      ),
+      paragraph([
+        "と、テンソル積が各因子について ",
+        math(String.raw`\mathbb{C}`),
+        "-線型であること",
+      ]),
+      displayMath(
+        String.raw`C_1\otimes\cdots\otimes\overbrace{(c\,C_j)}^{j\text{th}}\otimes\cdots\otimes C_M
+= c\,(C_1\otimes\cdots\otimes C_M) \quad (c\in\mathbb{C})
+\quad (\because \text{テンソル積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})`,
+      ),
+      paragraph(["を繰り返し用いる。"]),
+      paragraph([
+        "Step 0: 単一サイトの Pauli 行列の積。",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x\sigma^x = I`),
+        " に加えて、以下の 3 式を ",
+        math(String.raw`2\times 2`),
+        " 行列の積の成分計算（",
+        ref("mat_mult"),
+        "）で確かめる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^y\sigma^x &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
+= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix} = -i\,\sigma^z \\
+\sigma^x\sigma^y &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
+= i\begin{pmatrix}1&0\\0&-1\end{pmatrix} = i\,\sigma^z \\
+\sigma^z\sigma^y &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+= -i\begin{pmatrix}0&1\\1&0\end{pmatrix} = -i\,\sigma^x
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`Z_m, Y_m, \varepsilon, \sigma_m^z\sigma_{m+1}^z, \sigma_m^x`),
+        " のテンソル表示。まず ",
+        math(String.raw`1\le r\le M`),
+        " と ",
+        math(String.raw`a_1,\dots,a_r\in\{x,y,z\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}
+= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes
+\overbrace{I\otimes\cdots\otimes I}^{M-r}`,
+      ),
+      paragraph([
+        "が成り立つ。これを ",
+        math(String.raw`r`),
+        " に関する帰納法で示す。",
+        math(String.raw`r=1`),
+        " のときは ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\sigma_1^{a_1}`),
+        " の定義そのものである。",
+        math(String.raw`r`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
+&= \left(\sigma^{a_1}\otimes\cdots\otimes\sigma^{a_r}\otimes I\otimes\cdots\otimes I\right)
+   \left(I\otimes\cdots\otimes I\otimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+\quad (\because \text{帰納法の仮定}) \\
+&= (\sigma^{a_1}I)\otimes\cdots\otimes(\sigma^{a_r}I)\otimes(I\sigma^{a_{r+1}})\otimes(II)\otimes\cdots\otimes(II)
+\quad (\because \text{テンソル積代数の積の定義}) \\
+&= \sigma^{a_1}\otimes\cdots\otimes\sigma^{a_{r+1}}\otimes
+   \overbrace{I\otimes\cdots\otimes I}^{M-(r+1)}
+\quad (\because AI=IA=A)
+\end{aligned}`,
+      ),
+      paragraph([
+        "これを ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`Z_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
+        "、",
+        math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
+        "、",
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
+        " に適用すると（",
+        math(String.raw`m=1`),
+        " のときは前半の積が空積で ",
+        math(String.raw`Z_1=\sigma_1^z`),
+        "、",
+        math(String.raw`Y_1=\sigma_1^y`),
+        "。以下の式で ",
+        math(String.raw`\sigma^x`),
+        " の個数を ",
+        math(String.raw`0`),
+        " とすればよい）、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
+\otimes\overbrace{\sigma^z}^{m\text{th}}
+\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m} \\
+Y_m &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}
+\otimes\overbrace{\sigma^y}^{m\text{th}}
+\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m} \\
+\varepsilon &= \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M}
+\end{aligned}`,
+      ),
+      paragraph([
+        "また ",
+        math(String.raw`\sigma_m^x`),
+        " は第 ",
+        math(String.raw`m`),
+        " 因子のみ ",
+        math(String.raw`\sigma^x`),
+        " で他は ",
+        math(String.raw`I`),
+        " であり、",
+        math(String.raw`1\le m\le M-1`),
+        " について（第 ",
+        math(String.raw`m`),
+        " 因子と第 ",
+        math(String.raw`m+1`),
+        " 因子以外はすべて ",
+        math(String.raw`II=I`),
+        "）",
+      ]),
+      displayMath(
+        String.raw`\sigma_m^z\sigma_{m+1}^z
+= \overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m-1}
+\quad (\because \text{テンソル積代数の積の定義})`,
+      ),
+      paragraph([
+        "である。同様に ",
+        math(String.raw`M\ge 2`),
+        " より第 ",
+        math(String.raw`1`),
+        " 因子と第 ",
+        math(String.raw`M`),
+        " 因子は異なるので",
+      ]),
+      displayMath(
+        String.raw`\sigma_M^z\sigma_1^z
+= \overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-2}\otimes\overbrace{\sigma^z}^{M\text{th}}
+= \sigma_1^z\sigma_M^z
+\quad (\because \text{テンソル積代数の積の定義})`,
+      ),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`1\le m\le M-1`),
+        " について ",
+        math(String.raw`Y_m Z_{m+1} = -i\,\sigma_m^z\sigma_{m+1}^z`),
+        "。Step 1 の表示を用いて因子ごとに計算する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Y_m Z_{m+1}
+&= \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^y}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
+   \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^x}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+\quad (\because \text{Step 1}) \\
+&= \overbrace{(\sigma^x\sigma^x)\otimes\cdots\otimes(\sigma^x\sigma^x)}^{m-1}
+   \otimes\overbrace{(\sigma^y\sigma^x)}^{m\text{th}}\otimes\overbrace{(I\sigma^z)}^{(m+1)\text{th}}\otimes(II)\otimes\cdots\otimes(II)
+\quad (\because \text{テンソル積代数の積の定義}) \\
+&= \overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{(-i\,\sigma^z)}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes I\otimes\cdots\otimes I
+\quad (\because \sigma^x\sigma^x = I,\ \sigma^y\sigma^x = -i\,\sigma^z \text{（Step 0）}) \\
+&= (-i)\left(\overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes\overbrace{\sigma^z}^{(m+1)\text{th}}\otimes I\otimes\cdots\otimes I\right)
+\quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
+&= -i\,\sigma_m^z\sigma_{m+1}^z \quad (\because \text{Step 1})
+\end{aligned}`,
+      ),
+      paragraph([
+        "両辺に ",
+        math(String.raw`i \in \mathbb{C}`),
+        " を掛け ",
+        math(String.raw`i\cdot(-i) = 1`),
+        " を使うと",
+      ]),
+      displayMath(
+        String.raw`\sigma_m^z\sigma_{m+1}^z = i\,Y_m Z_{m+1} \qquad (1\le m\le M-1)`,
+      ),
+      paragraph([
+        "Step 3: 境界項 ",
+        math(String.raw`\varepsilon\, Y_M Z_1 = i\,\sigma_M^z\sigma_1^z`),
+        "。ここで Jordan--Wigner 文字列 ",
+        math(String.raw`\sigma_1^x\cdots\sigma_{M-1}^x`),
+        " が周期境界で一周し、",
+        math(String.raw`Z_1 = \sigma_1^z`),
+        " の側に文字列が付いていないため、Step 2 の計算では第 ",
+        math(String.raw`1`),
+        " 因子の ",
+        math(String.raw`\sigma^x`),
+        " が相殺せずに残る。これを打ち消すのが ",
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
+        " である。実際、",
+        math(String.raw`M\ge 2`),
+        " のもとで 3 つの元の積を（テンソル積代数の積の定義を 2 回使って）因子ごとに計算すると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\, Y_M Z_1
+&= \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M}\right)
+   \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M-1}\otimes\overbrace{\sigma^y}^{M\text{th}}\right)
+   \left(\overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-1}\right)
+\quad (\because \text{Step 1}) \\
+&= \overbrace{(\sigma^x\sigma^x\sigma^z)}^{1\text{st}}
+   \otimes\overbrace{(\sigma^x\sigma^x I)\otimes\cdots\otimes(\sigma^x\sigma^x I)}^{2\text{nd},\dots,(M-1)\text{th}}
+   \otimes\overbrace{(\sigma^x\sigma^y I)}^{M\text{th}}
+\quad (\because \text{テンソル積代数の積の定義}) \\
+&= \overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-2}\otimes\overbrace{(i\,\sigma^z)}^{M\text{th}}
+\quad (\because \sigma^x\sigma^x = I,\ AI=A,\ \sigma^x\sigma^y = i\,\sigma^z \text{（Step 0）}) \\
+&= i\left(\overbrace{\sigma^z}^{1\text{st}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-2}\otimes\overbrace{\sigma^z}^{M\text{th}}\right)
+\quad (\because \text{第 } M \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
+&= i\,\sigma_M^z\sigma_1^z \quad (\because \text{Step 1 の最後の式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "両辺に ",
+        math(String.raw`-i`),
+        " を掛け ",
+        math(String.raw`(-i)\cdot i = 1`),
+        " を使うと",
+      ]),
+      displayMath(
+        String.raw`\sigma_M^z\sigma_1^z = -i\,\varepsilon\, Y_M Z_1`,
+      ),
+      paragraph([
+        "Step 4: ",
+        math(String.raw`1\le m\le M`),
+        " について ",
+        math(String.raw`Z_m Y_m = -i\,\sigma_m^x`),
+        "。同様に因子ごとに計算すると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_m Y_m
+&= \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
+   \left(\overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^y}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
+\quad (\because \text{Step 1}) \\
+&= \overbrace{(\sigma^x\sigma^x)\otimes\cdots\otimes(\sigma^x\sigma^x)}^{m-1}\otimes\overbrace{(\sigma^z\sigma^y)}^{m\text{th}}\otimes(II)\otimes\cdots\otimes(II)
+\quad (\because \text{テンソル積代数の積の定義}) \\
+&= \overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{(-i\,\sigma^x)}^{m\text{th}}\otimes I\otimes\cdots\otimes I
+\quad (\because \sigma^x\sigma^x = I,\ \sigma^z\sigma^y = -i\,\sigma^x \text{（Step 0）}) \\
+&= (-i)\left(\overbrace{I\otimes\cdots\otimes I}^{m-1}\otimes\overbrace{\sigma^x}^{m\text{th}}\otimes I\otimes\cdots\otimes I\right)
+\quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
+&= -i\,\sigma_m^x
+\end{aligned}`,
+      ),
+      paragraph([
+        "（これは ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " の項に書かれている等式 ",
+        math(String.raw`Z_m Y_m = -i\,\sigma_m^x`),
+        " の証明でもある。）両辺に ",
+        math(String.raw`i`),
+        " を掛けて",
+      ]),
+      displayMath(String.raw`\sigma_m^x = i\,Z_m Y_m \qquad (1\le m\le M)`),
+      paragraph([
+        "Step 5: ",
+        math(String.raw`V_1`),
+        " の表式。",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_1`),
+        " の指数の中身を、",
+        math(String.raw`\sigma_{M+1}^z = \sigma_1^z`),
+        " により最後の項 ",
+        math(String.raw`\sigma_M^z\sigma_{M+1}^z = \sigma_M^z\sigma_1^z`),
+        " だけ分けて書くと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+K_1\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z
+&= K_1\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right) + K_1\,\sigma_M^z\sigma_1^z \\
+&= K_1\left(\sum_{m=1}^{M-1} i\,Y_m Z_{m+1}\right) + K_1\left(-i\,\varepsilon\,Y_M Z_1\right)
+\quad (\because \text{Step 2, Step 3}) \\
+&= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} - \varepsilon\, Y_M Z_1\right)
+\quad (\because \mathbb{C}\text{-線型空間 } \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \text{ でのスカラー倍の分配律}) \\
+&= i K_1\left(Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - \varepsilon\,Y_M Z_1\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "両辺は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の同一の元であるから、",
+        math(String.raw`\exp`),
+        " の値も等しく、",
+      ]),
+      displayMath(
+        String.raw`V_1 = \exp\!\left(K_1\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
+= \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M - \varepsilon Y_M Z_1)\right)`,
+      ),
+      paragraph([
+        "Step 6: ",
+        math(String.raw`V_2`),
+        " の表式。同様に、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
+&= K_2^*\sum_{m=1}^{M} i\,Z_m Y_m \quad (\because \text{Step 4}) \\
+&= i K_2^*\left(Z_1Y_1 + Z_2Y_2 + \cdots + Z_MY_M\right)
+\quad (\because \text{スカラー倍の分配律})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`s_2 = \sinh 2K_2`),
+        " より係数は ",
+        math(String.raw`(2\sinh 2K_2)^{M/2} = (2s_2)^{M/2}`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\right)`,
+      ),
+      paragraph(["以上で 2 式が示された。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文の proof は「TODO」のみ。ここで証明を与えた。",
+        "証明の過程で、原文の V_1 の定義に含まれていた虚数単位が誤りであることが判明したため、" +
+          "<def_transfer_matrix_symbols> 側を訂正した（理由はそちらの conversion.notes を参照）。",
+        "原文の statement は式のみで M の範囲・記号の出典が書かれていなかったため、M ≥ 2 と" +
+          "参照先（<def_transfer_matrix_symbols>）を明示した（主張の内容自体は変えていない）。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_005_definition_end_isomorphism",
+    kind: "definition",
+    sourcePath: "_old/typst/parts/004_転送行列/004_definition_EndFとMat2Cテンソル積Mの同型.typ",
+    sourceOrdinal: 5,
+    title: { tex: String.raw`\mathbf{end}: \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{End}(\mathcal{F})` },
+    labels: ["def_end_iso"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\mathcal{F} := (\mathbb{C}^2)^{\otimes M}`),
+      paragraph([
+        "とおく。",
+        math(String.raw`\mathbb{C}^2`),
+        " の標準基底を ",
+        math(String.raw`e_1 := (1,0),\ e_2 := (0,1)`),
+        "、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の行列単位を ",
+        math(String.raw`E_{ij}`),
+        "（",
+        math(String.raw`(i,j)`),
+        " 成分が ",
+        math(String.raw`1`),
+        " で他が ",
+        math(String.raw`0`),
+        "、",
+        math(String.raw`i,j\in\{1,2\}`),
+        "）とする。多重添字 ",
+        math(String.raw`\mathcal{I} := \{1,2\}^M`),
+        " の元 ",
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`f_I := e_{i_1}\otimes\cdots\otimes e_{i_M} \in \mathcal{F}, \qquad
+E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+      ),
+      paragraph([
+        "とおく。",
+        ref("tensor_basis"),
+        " より ",
+        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
+        " は ",
+        math(String.raw`\mathcal{F}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-基底（",
+        math(String.raw`\dim_{\mathbb{C}}\mathcal{F} = 2^M`),
+        "）であり、",
+        math(String.raw`(E_{I,J})_{I,J\in\mathcal{I}}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-基底（",
+        math(String.raw`\dim_{\mathbb{C}} = 4^M`),
+        "）である。さらに ",
+        math(String.raw`\Theta_{I,J} \in \mathrm{End}(\mathcal{F})`),
+        " を、基底 ",
+        math(String.raw`(f_K)_{K\in\mathcal{I}}`),
+        " 上の値",
+      ]),
+      displayMath(
+        String.raw`\Theta_{I,J}(f_K) := \begin{cases} f_I & (K=J) \\ 0 & (K\neq J)\end{cases}`,
+      ),
+      paragraph([
+        "で定まる ",
+        math(String.raw`\mathbb{C}`),
+        "-線型写像とする（基底上の値を与えれば線型写像が一意に定まる）。このとき ",
+        math(String.raw`\mathbf{end}`),
+        " を、基底 ",
+        math(String.raw`(E_{I,J})`),
+        " 上で",
+      ]),
+      displayMath(
+        String.raw`\mathbf{end}(E_{I,J}) := \Theta_{I,J} \qquad (I,J\in\mathcal{I})`,
+      ),
+      paragraph([
+        "と定めて ",
+        math(String.raw`\mathbb{C}`),
+        "-線型に拡張した写像",
+      ]),
+      displayMath(
+        String.raw`\mathbf{end}: \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{End}(\mathcal{F})`,
+      ),
+      paragraph([
+        "とおく（",
+        ref("end_is_algebra_isomorphism"),
+        " より、これは単位的 ",
+        math(String.raw`\mathbb{C}`),
+        "-代数の同型である）。",
+        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の ",
+        math(String.raw`\mathcal{F}`),
+        " への作用 ",
+        math(String.raw`Af`),
+        "（",
+        math(String.raw`f\in\mathcal{F}`),
+        "）は、以後つねに ",
+        math(String.raw`(\mathbf{end}(A))(f)`),
+        " を意味する。",
+      ]),
+      paragraph([
+        math(String.raw`\mathcal{F}`),
+        " は基底 ",
+        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
+        " による座標表示で ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " と同一視され、",
+        ref("def_matrix_norm"),
+        " のノルムにより有限次元 ",
+        math(String.raw`\mathbb{C}`),
+        "-ノルム線型空間となる。この同一視のもとで ",
+        math(String.raw`\mathrm{End}(\mathcal{F})`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " と同一視され、",
+        ref("def_exp"),
+        " の ",
+        math(String.raw`\exp : \mathrm{End}(\mathcal{F}) \to \mathrm{End}(\mathcal{F})`),
+        " が定まる。そこで ",
+        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " に対する ",
+        math(String.raw`\exp(A)`),
+        " を、この同型による移送で",
+      ]),
+      displayMath(
+        String.raw`\exp(A) := \mathbf{end}^{-1}\!\left(\exp(\mathbf{end}(A))\right)
+\in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+      ),
+      paragraph([
+        "と定める。定義から直ちに",
+      ]),
+      displayMath(
+        String.raw`\mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A)) \qquad (A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M})`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathbf{end}`),
+        " は単位的代数の同型なので、部分和も ",
+        math(String.raw`\mathbf{end}\!\left(\sum_{n=0}^{N}\frac{1}{n!}A^n\right) = \sum_{n=0}^{N}\frac{1}{n!}(\mathbf{end}(A))^n`),
+        " と対応する）。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文は「End(F) と Mat(2,C)^{⊗M} の線型同型写像を一つ取る」としか書いていないが、" +
+          "任意に取った線型同型では積・単位元が保たれず、<V1_restriction_to_eigenspaces> の証明" +
+          "（ε の作用と exp の級数を交換する）が成立しない。そこで、正準な単位的 C-代数同型を" +
+          "具体的に構成する形に書き換えた（正しさに必要な事項なので statement に置く）。",
+        "写像の向きも原文は End(F) → Mat(2,C)^{⊗M} だが、原文の <V1_restriction_to_eigenspaces> は " +
+          "end(V_1)|_{F^{(±)}} と、Mat(2,C)^{⊗M} の元 V_1 に end を適用して F 上の写像として制限している。" +
+          "向きが逆でなければ型が合わないため、Mat(2,C)^{⊗M} → End(F) に訂正した。",
+        "Mat(2,C)^{⊗M} 上の exp（<def_transfer_matrix_symbols> の V_1, V_2 で使われている）は、" +
+          "どの位相での級数か原文に書かれていない。ここで end による移送として定義を与えた。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
+    kind: "claim",
+    sourcePath: "structured-latex/content/004_transfer_matrix.mjs",
+    sourceOrdinal: 5,
+    title: { tex: String.raw`\mathbf{end} \text{ は単位的 } \mathbb{C}\text{-代数の同型}` },
+    labels: ["end_is_algebra_isomorphism"],
+    statement: [
+      paragraph([
+        ref("def_end_iso"),
+        " の ",
+        math(String.raw`\mathbf{end}`),
+        " について、次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) ",
+          math(String.raw`\mathbf{end}`),
+          " は ",
+          math(String.raw`\mathbb{C}`),
+          "-線型同型（全単射）である。",
+        ],
+        [
+          "(2) ",
+          math(String.raw`\mathbf{end}(AB) = \mathbf{end}(A)\circ\mathbf{end}(B)`),
+          "（",
+          math(String.raw`A,B\in\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          "）。",
+        ],
+        [
+          "(3) ",
+          math(String.raw`\mathbf{end}\!\left(I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right) = \mathrm{id}_{\mathcal{F}}`),
+          "。",
+        ],
+        [
+          "(4) ",
+          math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
+          " と ",
+          math(String.raw`v_1,\dots,v_M \in \mathbb{C}^2`),
+          " について ",
+          math(
+            String.raw`\left(\mathbf{end}(A_1\otimes\cdots\otimes A_M)\right)(v_1\otimes\cdots\otimes v_M)
+= (A_1v_1)\otimes\cdots\otimes(A_Mv_M)`,
+          ),
+          "。",
+        ],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "記号は ",
+        ref("def_end_iso"),
+        " のものとする。多重添字 ",
+        math(String.raw`I,J\in\mathcal{I}=\{1,2\}^M`),
+        " について ",
+        math(String.raw`\delta_{I,J} := 1`),
+        "（",
+        math(String.raw`I=J`),
+        "）、",
+        math(String.raw`0`),
+        "（",
+        math(String.raw`I\neq J`),
+        "）とおく。成分ごとの ",
+        math(String.raw`\delta_{i,j}`),
+        " についても同様とし、",
+        math(String.raw`I=J \iff \forall m,\ i_m=j_m`),
+        " より",
+      ]),
+      displayMath(String.raw`\delta_{I,J} = \prod_{m=1}^{M}\delta_{i_m,j_m}`),
+      paragraph(["が成り立つ。"]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`(\Theta_{I,J})_{I,J\in\mathcal{I}}`),
+        " は ",
+        math(String.raw`\mathrm{End}(\mathcal{F})`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-基底である。まず張ること: ",
+        math(String.raw`T\in\mathrm{End}(\mathcal{F})`),
+        " を任意に取り、基底 ",
+        math(String.raw`(f_I)`),
+        " による表示 ",
+        math(String.raw`T(f_J) = \sum_{I\in\mathcal{I}} t_{I,J} f_I`),
+        "（",
+        math(String.raw`t_{I,J}\in\mathbb{C}`),
+        " は一意）を取ると、任意の ",
+        math(String.raw`K\in\mathcal{I}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left(\sum_{I,J\in\mathcal{I}} t_{I,J}\Theta_{I,J}\right)(f_K)
+= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\delta_{J,K} f_I
+= \sum_{I\in\mathcal{I}} t_{I,K} f_I
+= T(f_K)`,
+      ),
+      paragraph([
+        "であり、基底上で一致する線型写像は等しいから ",
+        math(String.raw`T = \sum_{I,J} t_{I,J}\Theta_{I,J}`),
+        "。次に線型独立性: ",
+        math(String.raw`c_{I,J}\in\mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{I,J} c_{I,J}\Theta_{I,J} = 0`),
+        " を満たすとすると、各 ",
+        math(String.raw`K`),
+        " について ",
+        math(String.raw`0 = \sum_{I,J} c_{I,J}\delta_{J,K}f_I = \sum_{I} c_{I,K}f_I`),
+        " であり、",
+        math(String.raw`(f_I)`),
+        " が基底だからすべての ",
+        math(String.raw`I`),
+        " で ",
+        math(String.raw`c_{I,K}=0`),
+        "。",
+        math(String.raw`K`),
+        " は任意だからすべての係数が ",
+        math(String.raw`0`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 2: (1)。",
+        math(String.raw`\mathbf{end}`),
+        " は基底 ",
+        math(String.raw`(E_{I,J})`),
+        " を基底 ",
+        math(String.raw`(\Theta_{I,J})`),
+        " へ、添字を保って一対一に写す線型写像である。基底を基底へ写す線型写像は全単射である" +
+          "（基底の像が張るので全射、基底の像が線型独立なので単射）。",
+      ]),
+      paragraph([
+        "Step 3: (2)。両辺は ",
+        math(String.raw`(A,B)`),
+        " について ",
+        math(String.raw`\mathbb{C}`),
+        "-双線型（左辺は積の双線型性と ",
+        math(String.raw`\mathbf{end}`),
+        " の線型性、右辺は写像の合成の双線型性）だから、基底の元 ",
+        math(String.raw`A=E_{I,J},\ B=E_{K,L}`),
+        " について示せば十分である。",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の行列単位の積は ",
+        math(String.raw`E_{ij}E_{kl} = \delta_{j,k}E_{il}`),
+        "（成分計算）であるから、テンソル積代数の積の定義と各因子についての ",
+        math(String.raw`\mathbb{C}`),
+        "-線型性より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+E_{I,J}E_{K,L}
+&= (E_{i_1j_1}E_{k_1l_1})\otimes\cdots\otimes(E_{i_Mj_M}E_{k_Ml_M})
+\quad (\because \text{テンソル積代数の積の定義}) \\
+&= (\delta_{j_1,k_1}E_{i_1l_1})\otimes\cdots\otimes(\delta_{j_M,k_M}E_{i_Ml_M}) \\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right) E_{I,L}
+\quad (\because \text{各因子についての } \mathbb{C}\text{-線型性})
+= \delta_{J,K}E_{I,L}
+\end{aligned}`,
+      ),
+      paragraph(["一方、任意の ", math(String.raw`P\in\mathcal{I}`), " について"]),
+      displayMath(
+        String.raw`\left(\Theta_{I,J}\circ\Theta_{K,L}\right)(f_P)
+= \Theta_{I,J}\!\left(\delta_{L,P}f_K\right)
+= \delta_{L,P}\,\delta_{J,K}\,f_I
+= \delta_{J,K}\,\Theta_{I,L}(f_P)`,
+      ),
+      paragraph([
+        "であり、基底上で一致するから ",
+        math(String.raw`\Theta_{I,J}\circ\Theta_{K,L} = \delta_{J,K}\Theta_{I,L}`),
+        "。よって",
+      ]),
+      displayMath(
+        String.raw`\mathbf{end}(E_{I,J}E_{K,L}) = \delta_{J,K}\mathbf{end}(E_{I,L}) = \delta_{J,K}\Theta_{I,L}
+= \Theta_{I,J}\circ\Theta_{K,L} = \mathbf{end}(E_{I,J})\circ\mathbf{end}(E_{K,L})`,
+      ),
+      paragraph([
+        "Step 4: (3)。",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})} = E_{11}+E_{22}`),
+        " とテンソル積の各因子についての ",
+        math(String.raw`\mathbb{C}`),
+        "-線型性（分配）より",
+      ]),
+      displayMath(
+        String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+= \underbrace{(E_{11}+E_{22})\otimes\cdots\otimes(E_{11}+E_{22})}_{M}
+= \sum_{I\in\mathcal{I}} E_{I,I}`,
+      ),
+      paragraph([
+        "であり、各 ",
+        math(String.raw`K\in\mathcal{I}`),
+        " について ",
+        math(String.raw`\left(\sum_{I}\Theta_{I,I}\right)(f_K) = \sum_{I}\delta_{I,K}f_I = f_K`),
+        " だから ",
+        math(String.raw`\sum_{I}\Theta_{I,I} = \mathrm{id}_{\mathcal{F}}`),
+        "。よって ",
+        math(String.raw`\mathbf{end}\!\left(I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right) = \mathrm{id}_{\mathcal{F}}`),
+        "。",
+      ]),
+      paragraph([
+        "Step 5: (4)。両辺は ",
+        math(String.raw`A_1,\dots,A_M,v_1,\dots,v_M`),
+        " の各々について ",
+        math(String.raw`\mathbb{C}`),
+        "-線型であるから、",
+        math(String.raw`A_m = E_{i_mj_m}`),
+        "、",
+        math(String.raw`v_m = e_{k_m}`),
+        " の場合に示せば十分である。",
+        math(String.raw`E_{ij}e_k = \delta_{j,k}e_i`),
+        "（成分計算）より右辺は",
+      ]),
+      displayMath(
+        String.raw`(E_{i_1j_1}e_{k_1})\otimes\cdots\otimes(E_{i_Mj_M}e_{k_M})
+= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)f_I
+= \delta_{J,K}f_I`,
+      ),
+      paragraph([
+        "であり、左辺は ",
+        math(String.raw`\left(\mathbf{end}(E_{I,J})\right)(f_K) = \Theta_{I,J}(f_K) = \delta_{J,K}f_I`),
+        " であるから一致する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。原文が「線型同型を一つ取る」で済ませていた end を" +
+          "正準な単位的代数同型として構成したため、その性質（<V1_restriction_to_eigenspaces> の証明で" +
+          "実際に使うのは線型性・乗法性・単位元の保存）をここで証明した。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
@@ -507,44 +1304,83 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
     sourcePath: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ",
     sourceOrdinal: 4,
     title: { tex: String.raw`\varepsilon \text{ の固有空間}` },
-    labels: [],
+    labels: ["def_eigenspaces_of_epsilon"],
     statement: [
+      paragraph([
+        ref("def_end_iso"),
+        " の ",
+        math(String.raw`\mathcal{F} = (\mathbb{C}^2)^{\otimes M}`),
+        " と、",
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        "（",
+        ref("def_transfer_matrix_symbols"),
+        "）の ",
+        math(String.raw`\mathbf{end}`),
+        " による ",
+        math(String.raw`\mathcal{F}`),
+        " への作用について、",
+      ]),
       displayMath(
-        String.raw`\mathcal{F} := (\mathbb{C}^2)^{\otimes M}, \qquad
-\mathcal{F}^{(\pm)} := \{f \in \mathcal{F} \mid \varepsilon f = \pm f\}`,
+        String.raw`\mathcal{F}^{(\pm)} := \{f \in \mathcal{F} \mid \varepsilon f = \pm f\}
+= \{f \in \mathcal{F} \mid (\mathbf{end}(\varepsilon))(f) = \pm f\}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`\varepsilon^2 = 1`),
-        " より ",
-        math(String.raw`\varepsilon`),
+        "とおく。",
+        math(String.raw`\mathbf{end}(\varepsilon)`),
+        " は線型写像だから、",
+        math(String.raw`\mathcal{F}^{(\pm)}`),
+        " は ",
+        math(String.raw`\mathcal{F}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-部分線型空間である。",
+      ]),
+      paragraph([
+        "なお ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x = \sigma^x\otimes\cdots\otimes\sigma^x`),
+        " と ",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x\sigma^x = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\varepsilon^2 = (\sigma^x\sigma^x)\otimes\cdots\otimes(\sigma^x\sigma^x)
+= I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+\quad (\because \text{テンソル積代数の積の定義})`,
+      ),
+      paragraph([
+        "であるから、",
+        ref("end_is_algebra_isomorphism"),
+        " (2)(3) より ",
+        math(String.raw`(\mathbf{end}(\varepsilon))^2 = \mathrm{id}_{\mathcal{F}}`),
+        " であり、",
+        math(String.raw`\mathbf{end}(\varepsilon)`),
         " の固有値は ",
         math(String.raw`\pm 1`),
-        "）",
+        " に限る（固有値 ",
+        math(String.raw`\lambda`),
+        " と固有ベクトル ",
+        math(String.raw`f\neq 0`),
+        " について ",
+        math(String.raw`f = (\mathbf{end}(\varepsilon))^2 f = \lambda^2 f`),
+        " より ",
+        math(String.raw`\lambda^2=1`),
+        "）。",
       ]),
     ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "transfer_matrix_005_definition_end_isomorphism",
-    kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/004_definition_EndFとMat2Cテンソル積Mの同型.typ",
-    sourceOrdinal: 5,
-    title: { tex: String.raw`\mathbf{end}: \mathrm{End}(\mathcal{F}) \to \mathrm{Mat}(2,\mathbb{C})^{\otimes M}` },
-    labels: [],
-    statement: [
-      paragraph([
-        math(String.raw`\mathrm{End}(\mathcal{F})`),
-        " と ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-        " の線型同型写像を一つ取り、",
-      ]),
-      displayMath(
-        String.raw`\mathbf{end}: \mathrm{End}(\mathcal{F}) \to \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
-      ),
-      paragraph(["とおく。"]),
-    ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文は εf の意味（ε は Mat(2,C)^{⊗M} の元であって F の自己準同型ではない）を書いていないため、" +
+          "<def_end_iso> の end による作用であることを明示した。あわせて、原文が「ε² = 1 より固有値は ±1」と" +
+          "根拠なしに述べていた部分に、ε² = I の因子ごとの計算と固有値が ±1 に限る理由を補った。",
+        "本ブロックは原文では end の定義より前に置かれていたが、εf の意味が end を要するため、" +
+          "<def_end_iso> の後ろへ移した（内容は変えていない）。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
@@ -552,15 +1388,409 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
     sourcePath: "_old/typst/parts/004_転送行列/005_claim_V1の固有空間への制限.typ",
     sourceOrdinal: 6,
     title: { tex: String.raw`V_1 \text{ の固有空間への制限}` },
-    labels: [],
+    labels: ["V1_restriction_to_eigenspaces"],
     statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_1`),
+        "、",
+        ref("def_end_iso"),
+        " の ",
+        math(String.raw`\mathbf{end}`),
+        "、",
+        ref("def_eigenspaces_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(\pm)}`),
+        " について（複号同順）、",
+      ]),
       displayMath(
         String.raw`\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
 = \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}`,
       ),
+      paragraph([
+        "が成り立つ。両辺は ",
+        math(String.raw`\mathcal{F}^{(\pm)}`),
+        " から ",
+        math(String.raw`\mathcal{F}`),
+        " への写像として一致する、という意味である（右辺の ",
+        math(String.raw`\exp(\cdots)`),
+        " は ",
+        ref("def_V1_pm"),
+        " の ",
+        math(String.raw`V_1^{(\pm)}`),
+        " に他ならない）。",
+      ]),
     ],
-    proof: [paragraph([todo("TODO")])],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        "記号を固定する。",
+        ref("V1_V2_in_Z_Y_epsilon"),
+        " より ",
+        math(String.raw`V_1 = \exp(G)`),
+        "、また ",
+        ref("def_V1_pm"),
+        " より ",
+        math(String.raw`V_1^{(\pm)} = \exp(G^{(\pm)})`),
+        "。ここで",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+W &:= Y_M Z_1 \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \\
+G &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} - \varepsilon W\right) \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \\
+G^{(\pm)} &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} \mp W\right) \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（複号同順）。以下 ",
+        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " に対し ",
+        math(String.raw`\hat{A} := \mathbf{end}(A) \in \mathrm{End}(\mathcal{F})`),
+        " と書く。",
+        ref("end_is_algebra_isomorphism"),
+        " より ",
+        math(String.raw`\widehat{AB} = \hat{A}\circ\hat{B}`),
+        " かつ ",
+        math(String.raw`A \mapsto \hat{A}`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        "-線型である。",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`\varepsilon`),
+        " は各 ",
+        math(String.raw`Z_m, Y_m`),
+        "（",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        "）と反交換する。すなわち",
+      ]),
+      displayMath(
+        String.raw`\varepsilon Z_m = -\,Z_m\varepsilon, \qquad \varepsilon Y_m = -\,Y_m\varepsilon`,
+      ),
+      paragraph([
+        ref("V1_V2_in_Z_Y_epsilon"),
+        " の証明 Step 1 と同じテンソル表示",
+      ]),
+      displayMath(
+        String.raw`\varepsilon = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{M},\qquad
+Z_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^z}^{m\text{th}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m},\qquad
+Y_m = \overbrace{\sigma^x\otimes\cdots\otimes\sigma^x}^{m-1}\otimes\overbrace{\sigma^y}^{m\text{th}}\otimes\overbrace{I\otimes\cdots\otimes I}^{M-m}`,
+      ),
+      paragraph([
+        "のもとで ",
+        ref("tensor_anticommutation_from_single_site"),
+        " を ",
+        math(String.raw`X=\varepsilon`),
+        "、",
+        math(String.raw`Y=Z_m`),
+        " に適用する。第 ",
+        math(String.raw`k`),
+        " 因子の組 ",
+        math(String.raw`(x_k,y_k)`),
+        " は",
+      ]),
+      list([
+        [
+          math(String.raw`k<m`),
+          " のとき ",
+          math(String.raw`(\sigma^x,\sigma^x)`),
+          "。",
+          math(String.raw`\sigma^x\sigma^x = \sigma^x\sigma^x`),
+          " より可換。",
+        ],
+        [
+          math(String.raw`k=m`),
+          " のとき ",
+          math(String.raw`(\sigma^x,\sigma^z)`),
+          "。",
+          ref("pauli_matrix_products"),
+          " の ",
+          math(String.raw`\sigma^z\sigma^x = -\,\sigma^x\sigma^z`),
+          " より反可換。",
+        ],
+        [
+          math(String.raw`k>m`),
+          " のとき ",
+          math(String.raw`(\sigma^x,I)`),
+          "。",
+          math(String.raw`I\sigma^x = \sigma^x I`),
+          " より可換。",
+        ],
+      ]),
+      paragraph([
+        "であり、反可換なサイトはちょうど 1 つ（",
+        math(String.raw`k=m`),
+        "）だから ",
+        math(String.raw`[\varepsilon, Z_m]_+ = \varepsilon Z_m + Z_m\varepsilon = 0`),
+        "、すなわち ",
+        math(String.raw`\varepsilon Z_m = -Z_m\varepsilon`),
+        "。",
+        math(String.raw`Y_m`),
+        " についても、",
+        math(String.raw`k=m`),
+        " の組が ",
+        math(String.raw`(\sigma^x,\sigma^y)`),
+        " で ",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^y\sigma^x = -\,\sigma^x\sigma^y`),
+        " より反可換、他のサイトは同じく可換であるから ",
+        math(String.raw`\varepsilon Y_m = -Y_m\varepsilon`),
+        "。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`\varepsilon`),
+        " は ",
+        math(String.raw`W`),
+        "、各 ",
+        math(String.raw`Y_mZ_{m+1}`),
+        "、",
+        math(String.raw`\varepsilon W`),
+        "、および ",
+        math(String.raw`G, G^{(\pm)}`),
+        " と可換である。実際、",
+        math(String.raw`a,b\in\{1,\dots,M\}`),
+        " について Step 1 を 2 回使うと",
+      ]),
+      displayMath(
+        String.raw`\varepsilon (Y_a Z_b)
+= (\varepsilon Y_a) Z_b
+= (-Y_a\varepsilon)Z_b
+= -Y_a(\varepsilon Z_b)
+= -Y_a(-Z_b\varepsilon)
+= (Y_a Z_b)\varepsilon`,
+      ),
+      paragraph([
+        "（積の結合律とスカラー倍の可換性を使った）。特に ",
+        math(String.raw`\varepsilon W = W\varepsilon`),
+        " かつ ",
+        math(String.raw`\varepsilon(Y_mZ_{m+1}) = (Y_mZ_{m+1})\varepsilon`),
+        "。また",
+      ]),
+      displayMath(
+        String.raw`\varepsilon(\varepsilon W) = \varepsilon(W\varepsilon) = (\varepsilon W)\varepsilon`,
+      ),
+      paragraph([
+        "であるから、",
+        math(String.raw`G, G^{(\pm)}`),
+        " はいずれも ",
+        math(String.raw`\varepsilon`),
+        " と可換な元の ",
+        math(String.raw`\mathbb{C}`),
+        "-線型結合であり、積の双線型性より ",
+        math(String.raw`\varepsilon G = G\varepsilon`),
+        "、",
+        math(String.raw`\varepsilon G^{(\pm)} = G^{(\pm)}\varepsilon`),
+        "。",
+      ]),
+      paragraph([
+        "Step 3: ",
+        math(String.raw`\mathcal{F}^{(\pm)}`),
+        " は ",
+        math(String.raw`\hat{W}, \hat{G}, \hat{G}^{(\pm)}`),
+        " で不変である。",
+        math(String.raw`A \in \{W, G, G^{(\pm)}\}`),
+        " は Step 2 より ",
+        math(String.raw`\varepsilon A = A\varepsilon`),
+        " を満たすから、",
+        ref("end_is_algebra_isomorphism"),
+        " (2) より ",
+        math(String.raw`\hat{\varepsilon}\circ\hat{A} = \widehat{\varepsilon A} = \widehat{A\varepsilon} = \hat{A}\circ\hat{\varepsilon}`),
+        "。よって ",
+        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        "（すなわち ",
+        math(String.raw`\hat{\varepsilon}f = \pm f`),
+        "）に対し",
+      ]),
+      displayMath(
+        String.raw`\hat{\varepsilon}\left(\hat{A}f\right)
+= \hat{A}\left(\hat{\varepsilon}f\right)
+= \hat{A}(\pm f)
+= \pm\,\hat{A}f
+\quad (\because \hat{A} \text{ の線型性})`,
+      ),
+      paragraph([
+        "であり ",
+        math(String.raw`\hat{A}f \in \mathcal{F}^{(\pm)}`),
+        "。",
+      ]),
+      paragraph([
+        "Step 4: ",
+        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        " に対し ",
+        math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
+        "。まず ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の中で",
+      ]),
+      displayMath(
+        String.raw`G - G^{(\pm)}
+= i K_1\left(-\varepsilon W \pm W\right)
+\quad (\because G, G^{(\pm)} \text{ の定義。} \textstyle\sum_{m=1}^{M-1} Y_mZ_{m+1} \text{ の項は打ち消し合う})`,
+      ),
+      paragraph([
+        "である。",
+        ref("end_is_algebra_isomorphism"),
+        " の線型性と (2) より ",
+        math(String.raw`\widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}`),
+        " だから、Step 3 の ",
+        math(String.raw`\hat{W}f\in\mathcal{F}^{(\pm)}`),
+        " を使って",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\hat{G} - \hat{G}^{(\pm)}\right)f
+&= i K_1\left(-\hat{\varepsilon}\!\left(\hat{W}f\right) \pm \hat{W}f\right)
+\quad (\because \mathbf{end} \text{ の線型性と } \widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}) \\
+&= i K_1\left(-(\pm\hat{W}f) \pm \hat{W}f\right)
+\quad (\because \hat{W}f\in\mathcal{F}^{(\pm)} \text{ より } \hat{\varepsilon}(\hat{W}f) = \pm\hat{W}f) \\
+&= i K_1\cdot 0 = 0
+\end{aligned}`,
+      ),
+      paragraph([
+        "（複号同順。",
+        math(String.raw`-(\pm x)\pm x = \mp x \pm x = 0`),
+        "）。よって ",
+        math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
+        "。",
+      ]),
+      paragraph([
+        "Step 5: ",
+        math(String.raw`n\in\mathbb{Z}_{\geq 0}`),
+        " と ",
+        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        " について ",
+        math(String.raw`\hat{G}^{\,n}f = \left(\hat{G}^{(\pm)}\right)^{n}f`),
+        "（",
+        math(String.raw`\hat{G}^{\,0} := \mathrm{id}_{\mathcal{F}}`),
+        "）。",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n=0`),
+        " は両辺 ",
+        math(String.raw`f`),
+        " で成立。",
+        math(String.raw`n`),
+        " で成立するとし ",
+        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        " を取ると、Step 4 より ",
+        math(String.raw`g := \hat{G}f = \hat{G}^{(\pm)}f`),
+        " であり、Step 3 より ",
+        math(String.raw`g\in\mathcal{F}^{(\pm)}`),
+        " だから帰納法の仮定を ",
+        math(String.raw`g`),
+        " に適用でき、",
+      ]),
+      displayMath(
+        String.raw`\hat{G}^{\,n+1}f = \hat{G}^{\,n}\!\left(\hat{G}f\right) = \hat{G}^{\,n}g
+= \left(\hat{G}^{(\pm)}\right)^{n}g
+= \left(\hat{G}^{(\pm)}\right)^{n}\!\left(\hat{G}^{(\pm)}f\right)
+= \left(\hat{G}^{(\pm)}\right)^{n+1}f`,
+      ),
+      paragraph([
+        "Step 6: ",
+        math(String.raw`\exp`),
+        " への持ち上げ。",
+        ref("def_end_iso"),
+        " の ",
+        math(String.raw`\mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\mathbf{end}(V_1) = \mathbf{end}(\exp(G)) = \exp\!\left(\hat{G}\right), \qquad
+\mathbf{end}\!\left(V_1^{(\pm)}\right) = \mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right) = \exp\!\left(\hat{G}^{(\pm)}\right)`,
+      ),
+      paragraph([
+        math(String.raw`\mathcal{F}`),
+        " は有限次元 ",
+        math(String.raw`\mathbb{C}`),
+        "-ノルム線型空間（",
+        ref("def_end_iso"),
+        "）であるから、",
+        ref("def_exp"),
+        " と ",
+        ref("exp_converges"),
+        " により、任意の ",
+        math(String.raw`X\in\mathrm{End}(\mathcal{F})`),
+        " と ",
+        math(String.raw`f\in\mathcal{F}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left(\exp(X)\right)f = \lim_{N\to\infty} \sum_{n=0}^{N}\frac{1}{n!}X^{n}f
+\qquad (\mathcal{F} \text{ のノルムに関する収束})`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        ref("exp_converges"),
+        " は級数の各点収束を主張し、",
+        ref("def_exp"),
+        " の ",
+        math(String.raw`\exp(X)`),
+        " はその極限として定まる線型写像である）。ここで解析的操作（",
+        math(String.raw`\mathbb{C}`),
+        " 上の無限級数の極限）へ移行するのはこの箇所だけであり、Step 1〜5 はすべて有限個の元の" +
+          "代数的な等式である。",
+      ]),
+      paragraph([
+        "いま ",
+        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        " を任意に取る。Step 5 より、各 ",
+        math(String.raw`N\in\mathbb{Z}_{\geq 0}`),
+        " について部分和が",
+      ]),
+      displayMath(
+        String.raw`S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
+= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f =: S_N^{(\pm)}`,
+      ),
+      paragraph([
+        "と一致する。上の各点収束より ",
+        math(String.raw`S_N \to \left(\exp(\hat{G})\right)f`),
+        " かつ ",
+        math(String.raw`S_N^{(\pm)} = S_N \to \left(\exp(\hat{G}^{(\pm)})\right)f`),
+        " であり、同一の点列が 2 つの極限 ",
+        math(String.raw`\alpha,\beta`),
+        " を持てば、ノルムの三角不等式より任意の ",
+        math(String.raw`N`),
+        " で ",
+        math(String.raw`\|\alpha-\beta\| \leq \|\alpha - S_N\| + \|S_N - \beta\| \to 0`),
+        "、すなわち ",
+        math(String.raw`\|\alpha-\beta\|=0`),
+        " だから ",
+        math(String.raw`\alpha=\beta`),
+        "。よって",
+      ]),
+      displayMath(
+        String.raw`\left(\mathbf{end}(V_1)\right)f = \left(\exp(\hat{G})\right)f
+= \left(\exp(\hat{G}^{(\pm)})\right)f = \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f`,
+      ),
+      paragraph([
+        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        " は任意だったから、",
+        math(String.raw`\mathcal{F}^{(\pm)}`),
+        " 上の写像として",
+      ]),
+      displayMath(
+        String.raw`\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
+= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)\big|_{\mathcal{F}^{(\pm)}}
+= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}`,
+      ),
+      paragraph(["が示された。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文の proof は「TODO」のみ。ここで証明を与えた。",
+        "証明には end が単位的代数の同型であること（積の保存）が必要であり、原文のように" +
+          "「線型同型を一つ取る」だけでは Step 3・Step 4 が成立しない。<def_end_iso> を書き換えた理由はそちら参照。",
+        "原文の statement は式のみで、両辺が F^{(±)} 上の写像として一致するという意味であることと" +
+          "M の範囲が書かれていなかったため明示した（主張の内容自体は変えていない）。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_007_definition_V1_pm",
@@ -568,13 +1798,35 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
     sourcePath: "_old/typst/parts/004_転送行列/006_definition_V1_plus_minusの定義.typ",
     sourceOrdinal: 7,
     title: { tex: String.raw`V_1^{(\pm)} \text{ の定義}` },
-    labels: [],
+    labels: ["def_V1_pm"],
     statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とし（複号同順）、",
+      ]),
       displayMath(
-        String.raw`V_1^{(\pm)} := \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)`,
+        String.raw`V_1^{(\pm)} := \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)
+\in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
       ),
+      paragraph([
+        "とおく。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_end_iso"),
+        " の同一視のもとでの ",
+        ref("def_exp"),
+        " の ",
+        math(String.raw`\exp`),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "参照のためラベル <def_V1_pm> を付け、M の範囲と exp の意味（<def_end_iso> の同一視による）を" +
+          "明示した（定義の内容自体は変えていない）。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_008_definition_delta_M",
@@ -582,7 +1834,7 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
     sourcePath: "_old/typst/parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ",
     sourceOrdinal: 8,
     title: { tex: String.raw`\delta^M_{(\mu,\nu)} \text{ の定義}` },
-    labels: [],
+    labels: ["def_delta_M"],
     statement: [
       displayMath(
         String.raw`\delta^M_{(\mu,\nu)} :=

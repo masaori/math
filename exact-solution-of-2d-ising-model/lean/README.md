@@ -185,6 +185,26 @@ EOF
 | `Ising2D.acomm_hatZ_hatZ_opp` | `[hat(Z)_μ^{(±)}, hat(Z)_ν^{(∓)}]₊` | 同 2 |
 | `Ising2D.acomm_hatZ_hatY` | `[hat(Z)_μ^{(±)}, hat(Y)_ν]₊ = 0` | 同 3（**原文は「同様」で省略**） |
 | `Ising2D.acomm_hatY_hatY` | `[hat(Y)_μ, hat(Y)_ν]₊ = 2M δ^M_{μ+ν,0} I` | 同 4（**原文は「同様」で省略**） |
+| `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
+| `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
+| `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
+| `Ising2D.gamma2_neg_eq_neg_conj` | `γ_2(-θ) = -conj(γ_2(θ))` | `relation_of_gamma_2` |
+| `Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq` | `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2` | 同上 |
+| `Ising2D.gamma2_neg_eq_zero_iff` | `γ_2(-θ) = 0 ⟺ γ_2(θ) = 0` | 同上の系 |
+| `Ising2D.gamma2_add_int_mul_two_pi` / `gamma2_thetaMu_of_dvd` | `γ_2` の `2π` 周期性と `M ∣ μ+ν ⇒ γ_2(θ_ν) = γ_2(-θ_μ)` | `gamma_2_periodicity`（後段で必須） |
+| `Ising2D.gamma2_eq_zero_iff` | `γ_2(θ) = 0 ⟺ s_2^* = 0 ∨ (sin θ = 0 ∧ c_1cos θ = s_1c_2)` | `gamma_2_theta_is_0`（**原文は `s_2^* = 0` を落としている**） |
+| `Ising2D.sin_thetaMu_eq_zero_iff` | `sin θ_μ = 0 ⟺ M ∣ 2μ` | 同上（**原文の「⟺ μ = ±M」は不足**） |
+| `Ising2D.charPoly_expand` / `charPoly_root` / `charPoly_factor` | 特性多項式 `λ^2 - 2γ_1λ + (γ_1^2 + γ_2γ_2(-θ))` とその根 `γ_1 ± s` | `eigenvector_of_A_theta` 前半 |
+| `Ising2D.AMat_mulVec_eigen` / `AMat_mulVec_eigen'` | `s^2 = -γ_2(θ)γ_2(-θ)` のとき `(-s, γ_2(-θ))`, `(γ_2(θ), s)` が固有値 `γ_1+s` の固有ベクトル | `eigenvector_of_A_theta` 後半 |
+| `Ising2D.AMat_mulVec_col_pos` / `AMat_mulVec_col_neg` | 原文の `v_± = c(±i√(γ_2γ_2(-θ)), γ_2(-θ))` に対応（固有値は `γ_1 ∓ i t`） | 同上（分枝の突き合わせ） |
+| `Ising2D.AMat_of_gamma2_eq_zero` | `γ_2(θ) = 0 ⇒ A(θ) = γ_1(θ) I` | `eigenvector_of_A_theta` の場合分け 1) |
+| `Ising2D.det_AMat` | `det A(θ) = γ_1^2 + γ_2(θ)γ_2(-θ)`（無条件） | `det_A_theta` |
+| `Ising2D.det_AMat_eq_one` | 上が `1` になるのは `c_1^2-s_1^2 = 1`, `(c_2^*)^2-(s_2^*)^2 = 1`, `c_2s_2^* = c_2^*` の下 | `det_A_theta`（**追加関係が必要**） |
+| `Ising2D.lambda_mul_lambda` | `λ_+λ_- = det A(θ)` | `det_A_theta` の第 3 式 |
+| `Ising2D.Pmat` / `Ising2D.Dmat` | `P_μ`, `D_μ`（平方根は `t^2 = γ_2(θ)γ_2(-θ)` の仮定として持つ） | `diagonalization_P_D` |
+| `Ising2D.det_Pmat` / `det_Pmat_ne_zero` | `det P_μ = i t/(2(√M)^2γ_2(-θ)) ≠ 0`（`P_μ` は可逆） | 同上（原文は可逆性を確認していない） |
+| `Ising2D.AMat_mul_Pmat` / `AMat_eq_Pmat_mul_Dmat_mul_inv` | `A P = P D` および `A(θ) = P D P⁻¹` | `diagonalization_P_D` |
+| `Ising2D.AMat_thetaMu_eq_Pmat_mul_Dmat_mul_inv` | 上を `θ_μ`, `√M = Real.sqrt M`, `M ≠ 0` で具体化した版 | 同上 |
 
 ## 形式化の過程で見つかった原文の問題
 
@@ -195,6 +215,10 @@ EOF
 | `parts/006_ZとYの反交換関係/000_claim_...`（`<anticommutator_of_Z_and_Y>`） | `[Z_μ, Y_ν]₊`, `[Y_μ, Y_ν]₊` の証明が TODO のまま | Lean 側で 3 式とも証明済み（`Ising2D/Part006/Claim000_AnticommutatorZY.lean`） |
 | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
+| `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_022`（`gamma_2_theta_is_0`） | 形式化時点の原文は `γ_2(θ_μ) = 0` の同値条件で **`s_2^* = 0` の場合を落としていた**（`γ_2` は `s_2^*` を因子に持つ）。また「`sin θ_μ = 0 ⟺ μ = ±M`」は単独では偽で、正しくは `M ∣ 2μ`（`M` が偶数なら `μ = ±M/2` も該当） | **並行して原文側が修正済み**（現在は `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、`μ = ±M/2` が排除される理由も明記）。Lean 側は `gamma2_eq_zero_iff` と `sin_thetaMu_eq_zero_iff` として機械的裏づけを残した |
+| `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_035`（`det_A_theta`） | `det A(θ_μ) = 1` は `A(θ)` の定義からは出ず、**`c_2 s_2^* = c_2^*`（双対関係の帰結）が要る**。原文は `A = B_1B_2B_1` からこれを出しているが、`B_1, B_2` には `c_2^*, s_2^*` しか現れず `c_2` は展開の結果 `c_2^*/s_2^*` として出る。つまり (iii) は `factorization_of_A_theta`（proof が原文では TODO）に埋め込まれた前提 | `Ising2D/Part008/Claim027_EigenATheta.lean` の `det_AMat`（無条件）と `det_AMat_eq_one`（3 関係を仮定）に分離 |
+| `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_027`（`eigenvector_of_A_theta`） | 固有値と固有ベクトルの符号対応（`λ_± = γ_1 ± √(-γ_2γ_2)` と `v_± = c(±i√(γ_2γ_2), γ_2(-θ))`）は、**`arg^{[0,2π)}` 分枝での `√(-1·z) = -√(-1)√z` を使ってはじめて整合する**。原文は proof 中でこの分枝規約を導いているが statement 側に分枝の指定が無い | 検算の結果**原文は正しい**。Lean 側は平方根関数を使わず `t^2 = γ_2(θ)γ_2(-θ)` の仮定形にし、`i t` 側の固有値が `γ_1 - i t` であることを明示（`AMat_mulVec_col_pos`） |
+| `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_028`（`diagonalization_P_D`） | `A(θ_μ) = P_μ D_μ P_μ^{-1}` と書くが、**`P_μ` が可逆であること（`det P_μ ≠ 0`）を確認していない** | `det_Pmat` / `det_Pmat_ne_zero` で `det P_μ = i t/(2(√M)^2γ_2(-θ_μ))` を計算し、`γ_2(θ_μ) ≠ 0`, `M ≠ 0` の下で非零を証明 |
 
 ## 今後の方針
 

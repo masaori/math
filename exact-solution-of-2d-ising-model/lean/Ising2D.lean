@@ -20,3 +20,5 @@ import Ising2D.Part004.Definition009_HatZHatY
 import Ising2D.Part004.Claim012_HatPeriodicity
 import Ising2D.Part004.Claim013_RecoverZY
 import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
+import Ising2D.Part008.Definition019_ThetaGamma
+import Ising2D.Part008.Claim027_EigenATheta

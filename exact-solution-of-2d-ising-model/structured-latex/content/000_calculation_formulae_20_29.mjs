@@ -878,7 +878,7 @@ b
     title: {
       tex: "\\mathbb{C}\\text{の極座標表現への写像}",
     },
-    labels: [],
+    labels: ["def_phi_cartesian"],
     statement: [
       paragraph([
         math(String.raw`\phi_{\mathrm{cartesian}} : (\text{極座標表現}) \to \mathbb{C}`),
