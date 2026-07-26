@@ -1,5 +1,37 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26）: ゴール基準に反する本文記述の点検（修正はしていない）
+
+`docs/tasks/goal-alignment-audit.md` に結果を置いた。`structured-latex/content/` の
+全 14 ファイルを通読し、README のゴール設定に反する箇所を優先度 A/B で一覧にしたもの。
+**修正方針は依頼者判断待ちなので、本文には一切手を付けていない。**
+
+優先度 A（本文の骨格に関わる、局所的な書き換えでは済まないもの）:
+
+- A-1 抽象テンソル積の定理 `tensor_basis`（基底のテンソル積が基底）が本文にあり、
+  `centralizer_is_scalar` / `Z_Y_linearly_independent` / `def_end_iso` / `Z_Y_generate_algebra`
+  がそこに依存している。README 2 節が名指しで禁じた主張。
+- A-2 `Mat(2,C)^{⊗M}` 記法が本文全域（`\otimes` が 454 箇所）。クロネッカー積の定義ブロックが無い。
+- A-3 「テンソル積代数の積の定義」「第 j 因子についての C-線型性」を 20 箇所以上で根拠に使うが、
+  定義も証明も本文に無い（未定義概念）。
+- A-5 群の一般論一式（`def_aut_inn_out` / `def_group_hom_ker_im` / `def_center_of_group` /
+  `inn_is_normal_in_aut` / `def_exact_sequence` / `exact_sequence_of_aut` / 環の乗法群）。
+  実際に効いているのは `injectivity_of_T_up_to_scalar` 内の $\mathrm{Ker}(\varphi)=Z(R^\times)$
+  の 1 点だけで、そこは `centralizer_is_scalar` を当てれば群論なしで書ける。
+- A-6 多元環の一般論（`Z_Y_generate_algebra` の「単位的結合多元環」「最小の C-部分多元環」、
+  `V_eq_Vprime` の Step 3）。
+- A-7 exp の土台が抽象的な有限次元ノルム線型空間（`exp_converges` / `def_exp`）。
+  「ノルム線型空間」の定義が本文に無い（`def_matrix_norm` は $K^d$ と $\mathrm{Mat}(n,K)$ のみ）。
+- A-8 パウリ群・クリフォード群（`def_pauli_group` / `def_clifford_group` /
+  `V2_not_in_clifford_group`）。本文自身が「本証明では使わない」と書いている。
+
+A-4（リー群・リー環）は点検中に取り込んだ `origin/main` で解消済みだった（下記の項目）。
+
+優先度 B の主なもの: 体 `K` を一般のまま置いた 11 ブロック、未定義のまま使われている
+実数の `exp` / `log` / `tanh` / `(2 sinh 2K_2)^{M/2}` / 複素指数 $e^{i\theta}$ / `det` /
+`π` と弧長（外部文献「齋藤微積分」に委ねている）、`I_{(C^2)^{⊗M}}` と
+`I_{(Mat(2,C))^{⊗M}}` の記号不整合、複素数をモノイド・群・体の言葉で述べている 000 章。
+
 ## 完了（2026-07-26）: リー群・リー環の経路を参照用ノートへ退避
 
 README のゴール設定（1 節「典型例がリー群・リー環である」／6 節「採用しなかった経路の扱い」）に従い、
