@@ -42,6 +42,8 @@ const HEADING_KIND: HeadingKind = "heading";
 const KINDS = new Set<string>([...THEOREM_LIKE_KINDS, HEADING_KIND]);
 
 /** 見出しの深さ。1 が最上位（Typst の `=`、`==` は 2）。 */
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 const MAX_HEADING_LEVEL = 6;
 
 const NODE_TYPES = new Set<string>([
@@ -54,10 +56,12 @@ const NODE_TYPES = new Set<string>([
   "todo",
 ]);
 
-export type TitleContent = {
-  text?: string;
-  tex?: string;
-};
+/**
+ * タイトルの中身。`text`（素のテキスト）か `tex`（KaTeX で描画する LaTeX）の
+ * **少なくとも一方が必須**（両方書いてもよい）。空の `{}` はコンパイル時に落ちる
+ * （旧実装では見出しについてのみ実行時に検査していた条件を、全ブロックへ型で広げたもの）。
+ */
+export type TitleContent = { text: string; tex?: string } | { text?: string; tex: string };
 
 export type Title = TitleContent | null;
 
@@ -82,8 +86,14 @@ export type Node =
 /** 段落・リストの子として、素の文字列を書けるようにするための入力型。 */
 export type InlineInput = string | Node;
 
+/**
+ * 変換の由来。`converted` は Typst 原本からの移行、`added` は構造化テキスト側での新規追加。
+ * 値域を union にしてあるので、綴り違いはコンパイル時に落ちる。
+ */
+export type ConversionStatus = "converted" | "added";
+
 export type Conversion = {
-  status: string;
+  status: ConversionStatus;
   notes?: string[];
 };
 
@@ -117,7 +127,8 @@ export type TheoremLikeBlock = {
 export type HeadingBlock = {
   id: string;
   kind: HeadingKind;
-  level: number;
+  /** 1〜6 の範囲は型で縛る（範囲外はコンパイル時に落ちる）。 */
+  level: HeadingLevel;
   sourcePath: string;
   /** 見出しの、`sourcePath` 内での 1 始まり通し番号。 */
   sourceOrdinal: number;
@@ -149,6 +160,92 @@ export type Note = {
   body: readonly Node[];
 };
 
+
+// --- 一意性をコンパイル時に検査するための型ユーティリティ ---------------------
+//
+// TypeScript は「タプル型の要素の重複」を再帰的な条件型で判定できる。ブロック配列を
+// `const` 型引数でリテラルのタプルとして受け取れば、id やラベルの重複を**コンパイル時**に
+// 落とせる（実行時検証を待たない）。
+// `T & readonly ConvertedBlock[]` という交差にしているのは、`const` 型引数だけだと
+// 余剰プロパティ検査（`proof` の打ち間違い等）が効かなくなるため（実測で確認）。
+
+/** タプル中で最初に重複した要素を返す（重複が無ければ never）。 */
+export type FindDuplicate<T extends readonly string[], Seen = never> = T extends readonly [
+  infer H extends string,
+  ...infer R extends readonly string[],
+]
+  ? H extends Seen
+    ? H
+    : FindDuplicate<R, Seen | H>
+  : never;
+
+/** ブロック列の id のタプル。 */
+export type BlockIdsOf<T extends readonly ConvertedBlock[]> = {
+  -readonly [K in keyof T]: T[K]["id"];
+};
+
+/** ノート列の id のタプル。 */
+export type NoteIdsOf<T extends readonly Note[]> = { -readonly [K in keyof T]: T[K]["id"] };
+
+/**
+ * ブロック列が宣言するラベルを平坦化したタプル。
+ * 末尾再帰の形にしてある（累積引数 `Acc`）。素朴な `[...H, ...LabelsOf<R>]` の形だと
+ * TypeScript の再帰上限に当たり、173 ブロック規模で TS2589
+ * （Type instantiation is excessively deep）になって検査が無効化される（実測）。
+ */
+export type LabelsOf<
+  T extends readonly ConvertedBlock[],
+  Acc extends readonly string[] = [],
+> = T extends readonly [infer H extends ConvertedBlock, ...infer R extends readonly ConvertedBlock[]]
+  ? LabelsOf<R, [...Acc, ...H["labels"]]>
+  : Acc;
+
+/** 重複があればエラーになる制約（`never` を要求する）。 */
+export type AssertNoDuplicate<D extends never> = D;
+
+/** 条件が満たされないとエラーになる制約（`true` を要求する）。 */
+export type Assert<T extends true> = T;
+
+/**
+ * 数値リテラル型が「正の整数」か。
+ * TypeScript に整数型・数値範囲型は無いが、数値リテラル型は
+ * テンプレートリテラル型で文字列化して判定できる（小数点・負符号・0 を弾く）。
+ */
+type PositiveIntegerString<S extends string> = S extends `${string}.${string}`
+  ? never
+  : S extends `-${string}`
+    ? never
+    : S extends "0" | "NaN" | "Infinity"
+      ? never
+      : S;
+
+type BadOrdinal<T extends readonly { sourceOrdinal: number }[]> = {
+  [K in keyof T]: `${T[K]["sourceOrdinal"]}` extends PositiveIntegerString<
+    `${T[K]["sourceOrdinal"]}`
+  >
+    ? never
+    : { __sourceOrdinalが正の整数でない: T[K]["sourceOrdinal"] };
+}[number];
+
+type AssertOrdinals<T extends readonly ConvertedBlock[]> = [BadOrdinal<T>] extends [never]
+  ? unknown
+  : BadOrdinal<T>;
+
+type DuplicateBlockId<T extends readonly ConvertedBlock[]> =
+  FindDuplicate<BlockIdsOf<T>> extends never
+    ? unknown
+    : { __ブロックidが重複している: FindDuplicate<BlockIdsOf<T>> };
+
+type DuplicateLabel<T extends readonly ConvertedBlock[]> =
+  FindDuplicate<LabelsOf<T>> extends never
+    ? unknown
+    : { __ラベルが重複している: FindDuplicate<LabelsOf<T>> };
+
+type DuplicateNoteId<T extends readonly Note[]> =
+  FindDuplicate<NoteIdsOf<T>> extends never
+    ? unknown
+    : { __ノートidが重複している: FindDuplicate<NoteIdsOf<T>> };
+
 /**
  * 1ファイル分のブロック列を定義する。
  * **配列の並びが文書順の正準表現**であり、文書全体の順序は
@@ -157,7 +254,9 @@ export type Note = {
  * `sourceOrdinal` は「ソース内での通し番号」であって文書順ではない
  * （parts/ のファイル名連番と `#include` 順は一致しないため）。
  */
-export function defineBlocks(blocks: readonly ConvertedBlock[]): readonly ConvertedBlock[] {
+export function defineBlocks<const T extends readonly ConvertedBlock[]>(
+  blocks: T & readonly ConvertedBlock[] & DuplicateBlockId<T> & DuplicateLabel<T> & AssertOrdinals<T>,
+): T {
   if (!Array.isArray(blocks)) {
     throw new TypeError("defineBlocks expects an array");
   }
@@ -177,7 +276,9 @@ export function defineBlocks(blocks: readonly ConvertedBlock[]): readonly Conver
  * 各ノートは `targets` で関連する定理・主張を**ラベル**で参照する（パス非依存）。
  * 用途は、出版物の証明以外の部分（動機・背景・読み方の説明）を書くときの素材。
  */
-export function defineNotes(notes: readonly Note[]): readonly Note[] {
+export function defineNotes<const T extends readonly Note[]>(
+  notes: T & readonly Note[] & DuplicateNoteId<T>,
+): T {
   if (!Array.isArray(notes)) {
     throw new TypeError("defineNotes expects an array");
   }
@@ -255,6 +356,9 @@ const BLOCK_KEYS = new Set([
 
 const NOTE_KEYS = new Set(["id", "targets", "title", "sourcePath", "body"]);
 
+/** `conversion.status` に許される値（型の `ConversionStatus` と同じ集合）。 */
+const CONVERSION_STATUSES = new Set<string>(["converted", "added"] satisfies ConversionStatus[]);
+
 function assertNoUnknownKeys(value: object, allowed: ReadonlySet<string>, path: string): void {
   const unknown = Object.keys(value).filter((key) => !allowed.has(key));
   if (unknown.length > 0) {
@@ -286,6 +390,12 @@ export function validateBlock(block: ConvertedBlock): void {
   if (block.conversion !== undefined) {
     assertObject(block.conversion, `${block.id}.conversion`);
     assertString(block.conversion.status, `${block.id}.conversion.status`);
+    // 値域は型でも縛っているが、型を迂回した値のためにここでも見る。
+    if (!CONVERSION_STATUSES.has(block.conversion.status)) {
+      throw new Error(
+        `${block.id}.conversion.status must be one of ${[...CONVERSION_STATUSES].join(", ")}`,
+      );
+    }
     // conversion.notes は文字列の配列。文字列を直接書く誤りをここで捕まえる
     // （ビューア側の Zod は弾くが、こちらが素通しすると検証が二重基準になる）。
     if (block.conversion.notes !== undefined) {
@@ -373,8 +483,15 @@ function validateHeadingBlock(block: HeadingBlock): void {
 
 function validateTitle(title: TitleContent, path: string): void {
   assertObject(title, path);
-  if (title.text !== undefined) assertString(title.text, `${path}.text`);
-  if (title.tex !== undefined) assertString(title.tex, `${path}.tex`);
+  const text = (title as { text?: unknown }).text;
+  const tex = (title as { tex?: unknown }).tex;
+  if (text !== undefined) assertString(text, `${path}.text`);
+  if (tex !== undefined) assertString(tex, `${path}.tex`);
+  // 「text か tex の少なくとも一方」は型でも縛っているが、見出しに限らず全ブロック・
+  // ノートで成り立つべき条件なので、実行時にも同じ基準で見る。
+  if (text === undefined && tex === undefined) {
+    throw new TypeError(`${path} must have text or tex`);
+  }
 }
 
 export function validateNodes(nodes: readonly Node[], path: string): void {

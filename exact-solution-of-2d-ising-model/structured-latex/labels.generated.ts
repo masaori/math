@@ -1,6 +1,6 @@
 // 自動生成ファイル — 直接編集しない。
-// 生成元: content/ の全ブロックの labels（tools/generate-labels.ts）
-// 再生成: node tools/generate-labels.ts
+// 生成元: content/ の全ブロックの labels（tools/generate-index.ts）
+// 再生成: node tools/generate-index.ts
 //
 // このユニオン型が「実在するラベル」の全体であり、ref() / notes の targets は
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。

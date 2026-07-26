@@ -386,7 +386,7 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
       displayMath(
         String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j\tilde\theta_\mu},\qquad
 \check{Y}_\mu := \sum_{j=1}^{M} Y_j\,e^{-i j\tilde\theta_\mu}
-\ \in\ \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "と定める（",
@@ -764,7 +764,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
       ),
       paragraph([
         "が成り立つ。ここで ",
-        math(String.raw`I := I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "、",
         math(String.raw`\delta^M`),
         " は ",
@@ -880,7 +880,7 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
         " の ",
         math(String.raw`Z_j, Y_j`),
         " を生成するので、",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " を（単位的 ",
         math(String.raw`\mathbb{C}`),
         " 代数として）生成する。",
