@@ -1,0 +1,339 @@
+==============================================================================
+E. 主定理の照合: cycle 12 の全例 ＋ 追加例で v_ℓ(κ_n) = μ·ℓ^n + (λ(f)−1)·n + ν
+==============================================================================
+
+[cycle12 例1 (content 12)]  ℓ = 2
+    det L(z) = -12*z^-1 + 24 - 12*z
+    d = 1,  content_z = 2^2 * 3
+    (☆) v_ℓ(content) = 2 ,  Weierstrass μ(f) = 2 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 2·ℓ^n + 1·n + -2   (ν は n=6 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              3          3  True
+     2              8          8  True
+     3             17         17  True
+     4             34         34  True
+     5             67         67  True
+     6            132        132  True
+    → n = 0..6 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例1 (content 12)]  ℓ = 3
+    det L(z) = -12*z^-1 + 24 - 12*z
+    d = 1,  content_z = 2^2 * 3
+    (☆) v_ℓ(content) = 1 ,  Weierstrass μ(f) = 1 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 1·ℓ^n + 1·n + 0   (ν は n=4 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              1          1  True
+     1              4          4  True
+     2             11         11  True
+     3             30         30  True
+     4             85         85  True
+    → n = 0..4 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例1 (content 12)]  ℓ = 5
+    det L(z) = -12*z^-1 + 24 - 12*z
+    d = 1,  content_z = 2^2 * 3
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 0   (ν は n=2 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              1          1  True
+     2              2          2  True
+    → n = 0..2 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例2 (content 16)]  ℓ = 2
+    det L(z) = -16*z^-1 + 32 - 16*z
+    d = 1,  content_z = 2^4
+    (☆) v_ℓ(content) = 4 ,  Weierstrass μ(f) = 4 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 4·ℓ^n + 1·n + -2   (ν は n=6 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              2          2  True
+     1              7          7  True
+     2             16         16  True
+     3             33         33  True
+     4             66         66  True
+     5            131        131  True
+     6            260        260  True
+    → n = 0..6 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例3 (content 23)]  ℓ = 2
+    det L(z) = -23*z^-1 + 46 - 23*z
+    d = 1,  content_z = 23
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 2   (ν は n=4 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              2          2  True
+     1              3          3  True
+     2              4          4  True
+     3              5          5  True
+     4              6          6  True
+    → n = 0..4 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例3 (content 23)]  ℓ = 23
+    det L(z) = -23*z^-1 + 46 - 23*z
+    d = 1,  content_z = 23
+    (☆) v_ℓ(content) = 1 ,  Weierstrass μ(f) = 1 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 1·ℓ^n + 1·n + -1   (ν は n=1 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1             23         23  True
+    → n = 0..1 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例4 (3頂点, content 48)]  ℓ = 2
+    det L(z) = -48*z^-1 + 96 - 48*z
+    d = 1,  content_z = 2^4 * 3
+    (☆) v_ℓ(content) = 4 ,  Weierstrass μ(f) = 4 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 4·ℓ^n + 1·n + -2   (ν は n=5 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              2          2  True
+     1              7          7  True
+     2             16         16  True
+     3             33         33  True
+     4             66         66  True
+     5            131        131  True
+    → n = 0..5 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例4 (3頂点, content 48)]  ℓ = 3
+    det L(z) = -48*z^-1 + 96 - 48*z
+    d = 1,  content_z = 2^4 * 3
+    (☆) v_ℓ(content) = 1 ,  Weierstrass μ(f) = 1 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 1·ℓ^n + 1·n + 0   (ν は n=3 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              1          1  True
+     1              4          4  True
+     2             11         11  True
+     3             30         30  True
+    → n = 0..3 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例5 (content 9, λ≠1)]  ℓ = 3
+    det L(z) = 9*z^-2 - 63*z^-1 + 108 - 63*z + 9*z^2
+    d = 1,  content_z = 3^2
+    (☆) v_ℓ(content) = 2 ,  Weierstrass μ(f) = 2 ,  一致 = True
+    Weierstrass λ(f) = 4  →  塔の λ 予測 = λ(f) − 1 = 3
+    予測式: v_ℓ(κ_n) = 2·ℓ^n + 3·n + -2   (ν は n=3 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              7          7  True
+     2             22         22  True
+     3             61         61  True
+    → n = 0..3 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例5 (content 9, λ≠1)]  ℓ = 2
+    det L(z) = 9*z^-2 - 63*z^-1 + 108 - 63*z + 9*z^2
+    d = 1,  content_z = 3^2
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 2   (ν は n=4 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              2          2  True
+     1              3          3  True
+     2              4          4  True
+     3              5          5  True
+     4              6          6  True
+    → n = 0..4 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例6 (content 5)]  ℓ = 5
+    det L(z) = -5*z^-1 + 10 - 5*z
+    d = 1,  content_z = 5
+    (☆) v_ℓ(content) = 1 ,  Weierstrass μ(f) = 1 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 1·ℓ^n + 1·n + -1   (ν は n=2 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              5          5  True
+     2             26         26  True
+    → n = 0..2 の全てで一致（n_0 = 0 が取れている）
+
+[cycle12 例6 (content 5)]  ℓ = 2
+    det L(z) = -5*z^-1 + 10 - 5*z
+    d = 1,  content_z = 5
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 1   (ν は n=4 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              1          1  True
+     1              2          2  True
+     2              3          3  True
+     3              4          4  True
+     4              5          5  True
+    → n = 0..4 の全てで一致（n_0 = 0 が取れている）
+
+------------------------------------------------------------------------------
+追加例（μ = 0 側・退化側・λ が大きい側）
+------------------------------------------------------------------------------
+
+[bouquet ループ voltage 1（最小）]  ℓ = 2
+    det L(z) = -z^-1 + 2 - z
+    d = 1,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 0   (ν は n=6 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              1          1  True
+     2              2          2  True
+     3              3          3  True
+     4              4          4  True
+     5              5          5  True
+     6              6          6  True
+    → n = 0..6 の全てで一致（n_0 = 0 が取れている）
+
+[bouquet ループ voltage 1,2]  ℓ = 2
+    det L(z) = -z^-2 - z^-1 + 4 - z - z^2
+    d = 1,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 0   (ν は n=5 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              1          1  True
+     2              2          2  True
+     3              3          3  True
+     4              4          4  True
+     5              5          5  True
+    → n = 0..5 の全てで一致（n_0 = 0 が取れている）
+
+[bouquet ループ voltage 1,2]  ℓ = 3
+    det L(z) = -z^-2 - z^-1 + 4 - z - z^2
+    d = 1,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 0   (ν は n=3 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              1          1  True
+     2              2          2  True
+     3              3          3  True
+    → n = 0..3 の全てで一致（n_0 = 0 が取れている）
+
+[bouquet ループ voltage 1,1,1（ℓ=3 で自明 μ=1）]  ℓ = 3
+    det L(z) = -3*z^-1 + 6 - 3*z
+    d = 1,  content_z = 3
+    (☆) v_ℓ(content) = 1 ,  Weierstrass μ(f) = 1 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 1·ℓ^n + 1·n + -1   (ν は n=3 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              3          3  True
+     2             10         10  True
+     3             29         29  True
+    → n = 0..3 の全てで一致（n_0 = 0 が取れている）
+
+[3 頂点サイクル voltage 0,0,1]  ℓ = 2
+    det L(z) = -z^-1 + 2 - z
+    d = 1,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 2  →  塔の λ 予測 = λ(f) − 1 = 1
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 1·n + 0   (ν は n=5 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              1          1  True
+     2              2          2  True
+     3              3          3  True
+     4              4          4  True
+     5              5          5  True
+    → n = 0..5 の全てで一致（n_0 = 0 が取れている）
+
+[4 頂点（λ が大きい例）]  ℓ = 2
+    det L(z) = -z^-4 - 3*z^-3 - 6*z^-2 - 5*z^-1 + 30 - 5*z - 6*z^2 - 3*z^3 - z^4
+    d = 1,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 6  →  塔の λ 予測 = λ(f) − 1 = 5
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 5·n + 3   (ν は n=4 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              4          3  False
+     1              8          8  True
+     2             13         13  True
+     3             18         18  True
+     4             23         23  True
+    → n = 1..4 で一致（定理が主張するのは n ≫ 0 のみ。n_0 > 0 の実例）
+
+[d = 2（ℓ=2 は仮定外, ℓ=3 は成立）]  ℓ = 2
+    det L(z) = -2*z^-4 - z^-2 + 6 - z^2 - 2*z^4
+    d = 2,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 4  →  塔の λ 予測 = λ(f) − 1 = 3
+    ℓ | d → 全ての n ≥ 1 で X_{ℓ^n} は非連結（定理の仮定外）。
+    確認: κ_n = 0 (n=1..): True
+
+[d = 2（ℓ=3 は成立）]  ℓ = 3
+    det L(z) = -2*z^-4 - z^-2 + 6 - z^2 - 2*z^4
+    d = 2,  content_z = 1
+    (☆) v_ℓ(content) = 0 ,  Weierstrass μ(f) = 0 ,  一致 = True
+    Weierstrass λ(f) = 4  →  塔の λ 予測 = λ(f) − 1 = 3
+    予測式: v_ℓ(κ_n) = 0·ℓ^n + 3·n + 0   (ν は n=3 から決定)
+     n    実測 v_ℓ(κ_n)         予測  一致
+     0              0          0  True
+     1              3          3  True
+     2              6          6  True
+     3              9          9  True
+    → n = 0..3 の全てで一致（n_0 = 0 が取れている）
+
+[d = 0（potential voltage）]  ℓ = 2
+    det L ≡ 0（d = 0）→ 全ての n ≥ 1 で X_{ℓ^n} は非連結。定理の仮定外。
+    確認: κ_n = 0 (n=1..): True
+
+==============================================================================
+F. μ_ℓ > 0 ⟺ det(L(z) mod ℓ) = 0（𝔽_ℓ(z) 上で L̄ が特異）
+==============================================================================
+              例1 ℓ= 2: μ_ℓ = 2, det(L mod ℓ) = 0 ? True, 同値 = True
+              例1 ℓ= 3: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True
+              例1 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例1 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例2 ℓ= 2: μ_ℓ = 4, det(L mod ℓ) = 0 ? True, 同値 = True
+              例2 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例2 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例2 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例3 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例3 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例3 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例3 ℓ=23: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True
+              例4 ℓ= 2: μ_ℓ = 4, det(L mod ℓ) = 0 ? True, 同値 = True
+              例4 ℓ= 3: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True
+              例4 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例4 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例5 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例5 ℓ= 3: μ_ℓ = 2, det(L mod ℓ) = 0 ? True, 同値 = True
+              例5 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例5 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例6 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例6 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+              例6 ℓ= 5: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True
+              例6 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,2} ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,2} ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,2} ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,2} ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,1} ℓ= 2: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True
+   bouquet {1,1} ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,1} ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+   bouquet {1,1} ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True
+
+==============================================================================
+G. p ≠ ℓ の場合: v_p(κ_n) ≥ μ_p·ℓ^n + (v_p(κ_0) − μ_p)  （証明した下界）
+==============================================================================
+   等号が成り立つとは限らない＝『残差が有界か』は本セッションで証明していない。
+              例1 ℓ=2 p= 3 (μ_p=1): n=0: v=1 (下界 1), n=1: v=2 (下界 2), n=2: v=4 (下界 4), n=3: v=8 (下界 8), n=4: v=16 (下界 16), n=5: v=32 (下界 32)  下界成立=True
+              例1 ℓ=2 p= 5 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=0 (下界 0), n=3: v=0 (下界 0), n=4: v=0 (下界 0), n=5: v=0 (下界 0)  下界成立=True
+              例1 ℓ=2 p= 7 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=0 (下界 0), n=3: v=0 (下界 0), n=4: v=0 (下界 0), n=5: v=0 (下界 0)  下界成立=True
+              例1 ℓ=3 p= 2 (μ_p=2): n=0: v=0 (下界 0), n=1: v=4 (下界 4), n=2: v=16 (下界 16), n=3: v=52 (下界 52)  下界成立=True
+              例1 ℓ=3 p= 5 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=0 (下界 0), n=3: v=0 (下界 0)  下界成立=True
+              例4 ℓ=2 p= 3 (μ_p=1): n=0: v=1 (下界 1), n=1: v=2 (下界 2), n=2: v=4 (下界 4), n=3: v=8 (下界 8), n=4: v=16 (下界 16)  下界成立=True
+              例4 ℓ=2 p= 5 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=0 (下界 0), n=3: v=0 (下界 0), n=4: v=0 (下界 0)  下界成立=True
+              例5 ℓ=2 p= 3 (μ_p=2): n=0: v=0 (下界 0), n=1: v=2 (下界 2), n=2: v=6 (下界 6), n=3: v=14 (下界 14), n=4: v=30 (下界 30)  下界成立=True
+              例5 ℓ=2 p= 5 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=2 (下界 0), n=3: v=2 (下界 0), n=4: v=2 (下界 0)  下界成立=True
+   bouquet {1,2} ℓ=2 p= 3 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=2 (下界 0), n=3: v=2 (下界 0), n=4: v=2 (下界 0), n=5: v=2 (下界 0)  下界成立=True
+   bouquet {1,2} ℓ=2 p= 5 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=0 (下界 0), n=3: v=0 (下界 0), n=4: v=0 (下界 0), n=5: v=0 (下界 0)  下界成立=True
+   bouquet {1,2} ℓ=2 p=11 (μ_p=0): n=0: v=0 (下界 0), n=1: v=0 (下界 0), n=2: v=0 (下界 0), n=3: v=0 (下界 0), n=4: v=0 (下界 0), n=5: v=0 (下界 0)  下界成立=True
+
+==============================================================================
+FAIL 数: 0
+==============================================================================

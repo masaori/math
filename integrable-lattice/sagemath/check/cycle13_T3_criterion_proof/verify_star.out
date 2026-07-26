@@ -1,0 +1,182 @@
+==============================================================================
+A. (★) N·κ(X_N) = κ(X)·∏_{ζ≠1} det L(ζ) を N = 1..12 で厳密検証
+==============================================================================
+
+[bouquet 1 ループ voltage 1]  m=1, |E|=1
+    det L(z) = -z^-1 + 2 - z
+    κ(X) = 1, content_z = 1
+    (★) N=1..12 全一致: True
+
+[bouquet 2 ループ voltage 1,2]  m=1, |E|=2
+    det L(z) = -z^-2 - z^-1 + 4 - z - z^2
+    κ(X) = 1, content_z = 1
+    (★) N=1..12 全一致: True
+
+[bouquet ループ voltage 0 のみ（退化）]  m=1, |E|=1
+    det L(z) = 0
+    κ(X) = 1, content_z = 0
+    (★) N=1..12 全一致: True
+
+[bouquet voltage 0 と 1 の混在]  m=1, |E|=2
+    det L(z) = -z^-1 + 2 - z
+    κ(X) = 1, content_z = 1
+    (★) N=1..12 全一致: True
+
+[cycle12 例1（2頂点, content 12）]  m=2, |E|=5
+    det L(z) = -12*z^-1 + 24 - 12*z
+    κ(X) = 3, content_z = 12
+    (★) N=1..12 全一致: True
+
+[cycle12 例2（content 16）]  m=2, |E|=6
+    det L(z) = -16*z^-1 + 32 - 16*z
+    κ(X) = 4, content_z = 16
+    (★) N=1..12 全一致: True
+
+[cycle12 例3（content 23）]  m=2, |E|=7
+    det L(z) = -23*z^-1 + 46 - 23*z
+    κ(X) = 4, content_z = 23
+    (★) N=1..12 全一致: True
+
+[cycle12 例4（3頂点, content 48）]  m=3, |E|=8
+    det L(z) = -48*z^-1 + 96 - 48*z
+    κ(X) = 12, content_z = 48
+    (★) N=1..12 全一致: True
+
+[cycle12 例5（content 9, λ≠1）]  m=2, |E|=10
+    det L(z) = 9*z^-2 - 63*z^-1 + 108 - 63*z + 9*z^2
+    κ(X) = 4, content_z = 9
+    (★) N=1..12 全一致: True
+
+[cycle12 例6（content 5, 辺4本）]  m=2, |E|=4
+    det L(z) = -5*z^-1 + 10 - 5*z
+    κ(X) = 2, content_z = 5
+    (★) N=1..12 全一致: True
+
+[多重辺のみ・voltage 全て 0（全 N で非連結）]  m=2, |E|=3
+    det L(z) = 0
+    κ(X) = 3, content_z = 0
+    (★) N=1..12 全一致: True
+
+[voltage が potential（d=0, D≡0）]  m=3, |E|=3
+    det L(z) = 0
+    κ(X) = 3, content_z = 0
+    (★) N=1..12 全一致: True
+
+[d=2（偶数 N で非連結）]  m=2, |E|=3
+    det L(z) = -2*z^-4 - z^-2 + 6 - z^2 - 2*z^4
+    κ(X) = 2, content_z = 1
+    (★) N=1..12 全一致: True
+
+[d=6（N=2,3,6 の倍数で非連結）]  m=2, |E|=3
+    det L(z) = -3*z^-6 + 6 - 3*z^6
+    κ(X) = 2, content_z = 3
+    (★) N=1..12 全一致: True
+
+[木（サイクル無し, D≡0）]  m=3, |E|=2
+    det L(z) = 0
+    κ(X) = 1, content_z = 0
+    (★) N=1..12 全一致: True
+
+[底グラフ自体が非連結]  m=3, |E|=2
+    det L(z) = 0
+    κ(X) = 0, content_z = 0
+    (★) N=1..12 全一致: True
+
+[ループ voltage 0 を含む 2 頂点]  m=2, |E|=4
+    det L(z) = -z^-1 + 2 - z
+    κ(X) = 2, content_z = 1
+    (★) N=1..12 全一致: True
+
+[負 voltage]  m=2, |E|=3
+    det L(z) = -3*z^-3 + 6 - 3*z^3
+    κ(X) = 2, content_z = 3
+    (★) N=1..12 全一致: True
+
+[大きめ 4 頂点]  m=4, |E|=7
+    det L(z) = -3*z^-4 - 28*z^-2 + 62 - 28*z^2 - 3*z^4
+    κ(X) = 16, content_z = 1
+    (★) N=1..12 全一致: True
+
+==============================================================================
+B. 連結性判定: X_N の連結成分数 = gcd(d, N)（d = サイクル voltage の生成元）
+==============================================================================
+   ＋ 系: X_N 連結 ⟺ 全ての ζ ∈ μ_N \ {1} で det L(ζ) ≠ 0
+
+[bouquet 1 ループ voltage 1] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[bouquet 2 ループ voltage 1,2] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[bouquet ループ voltage 0 のみ（退化）] d = 0: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[bouquet voltage 0 と 1 の混在] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[cycle12 例1（2頂点, content 12）] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[cycle12 例2（content 16）] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[cycle12 例3（content 23）] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[cycle12 例4（3頂点, content 48）] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[cycle12 例5（content 9, λ≠1）] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[cycle12 例6（content 5, 辺4本）] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[多重辺のみ・voltage 全て 0（全 N で非連結）] d = 0: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[voltage が potential（d=0, D≡0）] d = 0: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[d=2（偶数 N で非連結）] d = 2: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[d=6（N=2,3,6 の倍数で非連結）] d = 6: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[木（サイクル無し, D≡0）] d = 0: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[底グラフ自体が非連結] 底が非連結のため d は定義しない（判定命題の仮定外）
+
+[ループ voltage 0 を含む 2 頂点] d = 1: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[負 voltage] d = 3: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+[大きめ 4 頂点] d = 2: 成分数 = gcd(d,N) と det L(ζ)≠0 同値, N=1..12 全一致: True
+
+==============================================================================
+C. content 保存: content_z(D(z)) = content_T(P(1+T))  （z ↦ 1+T は ℤ 上可逆）
+==============================================================================
+[bouquet 1 ループ voltage 1] content_z = 1, content_T(P(1+T)) = 1, 一致 = True
+[bouquet 2 ループ voltage 1,2] content_z = 1, content_T(P(1+T)) = 1, 一致 = True
+[bouquet ループ voltage 0 のみ（退化）] D ≡ 0（content 未定義, 判定式の仮定外）
+[bouquet voltage 0 と 1 の混在] content_z = 1, content_T(P(1+T)) = 1, 一致 = True
+[cycle12 例1（2頂点, content 12）] content_z = 12, content_T(P(1+T)) = 12, 一致 = True
+[cycle12 例2（content 16）] content_z = 16, content_T(P(1+T)) = 16, 一致 = True
+[cycle12 例3（content 23）] content_z = 23, content_T(P(1+T)) = 23, 一致 = True
+[cycle12 例4（3頂点, content 48）] content_z = 48, content_T(P(1+T)) = 48, 一致 = True
+[cycle12 例5（content 9, λ≠1）] content_z = 9, content_T(P(1+T)) = 9, 一致 = True
+[cycle12 例6（content 5, 辺4本）] content_z = 5, content_T(P(1+T)) = 5, 一致 = True
+[多重辺のみ・voltage 全て 0（全 N で非連結）] D ≡ 0（content 未定義, 判定式の仮定外）
+[voltage が potential（d=0, D≡0）] D ≡ 0（content 未定義, 判定式の仮定外）
+[d=2（偶数 N で非連結）] content_z = 1, content_T(P(1+T)) = 1, 一致 = True
+[d=6（N=2,3,6 の倍数で非連結）] content_z = 3, content_T(P(1+T)) = 3, 一致 = True
+[木（サイクル無し, D≡0）] D ≡ 0（content 未定義, 判定式の仮定外）
+[底グラフ自体が非連結] D ≡ 0（content 未定義, 判定式の仮定外）
+[ループ voltage 0 を含む 2 頂点] content_z = 1, content_T(P(1+T)) = 1, 一致 = True
+[負 voltage] content_z = 3, content_T(P(1+T)) = 3, 一致 = True
+[大きめ 4 頂点] content_z = 1, content_T(P(1+T)) = 1, 一致 = True
+
+==============================================================================
+D. bouquet（m=1）では content = ループ重複度の gcd（＝μ>0 は ℓ 重多重グラフの自明例のみ）
+==============================================================================
+  loops=[1]: det L = -z^-1 + 2 - z, content = 1, 重複度 gcd = 1, 一致 = True
+  loops=[1, 1]: det L = -2*z^-1 + 4 - 2*z, content = 2, 重複度 gcd = 2, 一致 = True
+  loops=[1, 2]: det L = -z^-2 - z^-1 + 4 - z - z^2, content = 1, 重複度 gcd = 1, 一致 = True
+  loops=[1, 1, 2, 2]: det L = -2*z^-2 - 2*z^-1 + 8 - 2*z - 2*z^2, content = 2, 重複度 gcd = 2, 一致 = True
+  loops=[2, 2, 2]: det L = -3*z^-2 + 6 - 3*z^2, content = 3, 重複度 gcd = 3, 一致 = True
+  loops=[1, 2, 3]: det L = -z^-3 - z^-2 - z^-1 + 6 - z - z^2 - z^3, content = 1, 重複度 gcd = 1, 一致 = True
+  loops=[3, 3, 3, 3]: det L = -4*z^-3 + 8 - 4*z^3, content = 4, 重複度 gcd = 4, 一致 = True
+  loops=[1, 1, 1, 5, 5, 5]: det L = -3*z^-5 - 3*z^-1 + 12 - 3*z - 3*z^5, content = 3, 重複度 gcd = 3, 一致 = True
+  loops=[0, 1, 1]: det L = -2*z^-1 + 4 - 2*z, content = 2, 重複度 gcd = 2, 一致 = True
+  loops=[0, 0, 2, 2]: det L = -2*z^-2 + 4 - 2*z^2, content = 2, 重複度 gcd = 2, 一致 = True
+
+==============================================================================
+FAIL 数: 0
+==============================================================================
