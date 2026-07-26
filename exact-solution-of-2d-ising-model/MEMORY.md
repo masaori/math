@@ -4,8 +4,9 @@
 
 ### やったこと
 
-本文のラベル 128 件に対して、数値検証が紐づいていたのは **7 件**しかなかった。
-これを **96 件**へ広げた（`sagemath/tools/verify-check-linkage.mjs` が確認する check は 9 → 98 件）。
+数値検証が紐づいていたラベルは **7 件**しかなかった。これを **97 件**へ広げた
+（`sagemath/tools/verify-check-linkage.ts` が確認する check は 9 → 99 件）。
+作業中に別セッションが本文を TypeScript 化し、本文のラベル総数も 128 → 146 件へ増えている。
 
 土台として `sagemath/_shared/operators.sage` を新設した。ここが無かったことが、
 これまでカバレッジが広がらなかった直接の原因である（`Mat(2,C)^{⊗M}` の元を数値で作る手段が無く、
@@ -53,7 +54,7 @@ FAIL のまま見逃されていた）。次の 2 点で塞いだ。
    「不一致」と報告していた。相対誤差に変えたことで 028 の check_06 は PASS になった。
 2. `run-all-checks.sh` が、終了コードに加えて**ログ本文の `RESULT: FAIL` も失敗として拾う**ようにした。
 
-### 未カバーのラベル（32 件）とその理由
+### 未カバーのラベルとその理由
 
 残りはほぼ**定義ブロック**（`def_*`）で、それ単体では反証できる等式を持たない
 （`def_exp`, `def_abs_arg`, `def_transfer_matrix_symbols`, `def_fermi` など）。
@@ -110,7 +111,7 @@ FAIL のまま見逃されていた）。次の 2 点で塞いだ。
   `git mv` で履歴維持）。変換は import 行の書き換え・未使用 import の除去・本文中の
   自ファイルパス参照（`sourcePath` 等）の追随だけで、**証明の中身は 1 文字も変えていない**。
 - `schema.mjs`、`tools/*.mjs` の互換入口、`tsconfig.mjs-content.json`（checkJs 用）を削除。
-- `sagemath/tools/verify-check-linkage.mjs` も `.ts` 化し、ラベル一覧は
+- `sagemath/tools/verify-check-linkage.ts` も `.ts` 化し、ラベル一覧は
   `structured-latex/labels.generated.ts` を直接読むようにした（読み込み処理の重複を解消）。
 - `tools/content-modules.ts` は `content/` `notes/` に `.mjs` を見つけたらエラーで落とす（再発防止）。
 - ビューア（realtime-web-preview）の入力ソースも `.ts` のみに統一。
