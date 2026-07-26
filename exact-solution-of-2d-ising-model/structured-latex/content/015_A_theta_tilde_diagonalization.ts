@@ -9,7 +9,7 @@ export default defineBlocks([
     level: 2,
     sourcePath: SRC,
     sourceOrdinal: 1,
-    title: { text: "半整数運動量における A(θ~) の対角化" },
+    title: { tex: String.raw`\text{半整数運動量における } A(\tilde\theta) \text{ の対角化}` },
     labels: [],
     conversion: { status: "added" },
   },

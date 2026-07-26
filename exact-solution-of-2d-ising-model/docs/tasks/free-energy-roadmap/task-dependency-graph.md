@@ -148,7 +148,7 @@ $V$ は $V_1^{(\pm)}$ を使って定義されており、$V_1^{(\pm)}$ は $\ma
 `δ ∈ [0,1)` を許す形にしたので、整数運動量（`δ=0`）と半整数運動量（`δ=1/2`）を 1 つの主張で扱える。
 **どちらでも極限が同じ**であることが、熱力学極限でセクターの区別が消える理由である。
 
-### 章 C′: 偶セクターの固有値（半整数運動量） ← **C′-1〜C′-11 完了**（`013_even_sector_modes.ts` / `014_even_sector_T_action.ts`）。残りは C′-12〜C′-15
+### 章 C′: 偶セクターの固有値（半整数運動量） ← **C′-1〜C′-14 完了**（`013`〜`016` の 4 章）。残りは C′-15 のみ
 
 章 C・章 D により、分配関数から自由エネルギーまでの経路で**残っているのは 1 点だけ**である：
 
@@ -216,7 +216,7 @@ A(θ~_μ) = B_1(θ~_μ) B_2 B_1(θ~_μ)
 - `B_1(θ), B_2` は 008 章では `θ_μ` に限って導入されているので、`θ ∈ R` 一般の定義
   `def_B1_theta_B2` を新設した。
 
-#### 残っている部分（C′-12〜C′-15、未着手）
+#### 残っている部分（C′-15 のみ）
 
 `A(θ~_μ)` の対角化から `V^{(+)}` の固有値までは、**009 章と同じ道筋**を半整数運動量で辿る必要がある。
 
@@ -227,8 +227,8 @@ A(θ~_μ) = B_1(θ~_μ) B_2 B_1(θ~_μ)
 | C′-10 | `ホロノミック量子場_p142下段_1` / `calc_of_TxT_hatZxhatY` | `T_{(V_1^{(+)})^{1/2}}, T_{V_2}` の作用と `B_1(θ~), B_2`。**完了**（014 章、`T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `def_B1_theta_B2`） |
 | C′-11 | `T_V_hatZ_hatY` / `factorization_of_A_theta` | `B_1B_2B_1 = A(θ~)` と `T_{(V^{(+)})}(Ž,Y̌) = (Ž,Y̌)A(θ~_μ)`。**完了**（014 章、`factorization_of_A_theta_general` / `T_V_plus_check_Z_Y` / `def_V_plus_and_T_V_plus`）。既存 `factorization_of_A_theta` は `μ ∈ calM` で量化されていて再利用できず、θ ∈ R 一般へ立て直した |
 | C′-12 | `eigenvector_of_A_theta` / `diagonalization_P_D` / `det_A_theta` / `gamma1_geq_1` / `lambda_eq_exp_gamma` | `A(θ~)` の対角化。**完了**（`structured-latex/content/015_A_theta_tilde_diagonalization.ts`、9 ブロック。下記） |
-| C′-13 | `def_fermi` / `anticommutator_of_psi` | 半整数運動量のフェルミオン `checkψ_μ`。対は `μ+ν ≡ 1` |
-| C′-14 | `commutation_V_psi` / `action_of_T_Vprime_on_psi` / `T_V_eq_T_Vprime` / `V_eq_Vprime` | `V^{(+)} = c checkV'` |
+| C′-13 | `def_fermi` / `anticommutator_of_psi` | 半整数運動量のフェルミオン `checkψ_μ`（対は `μ+ν ≡ 1`）。**完了**（`structured-latex/content/016_even_sector_fermions.ts`、`def_check_fermi` / `periodicity_of_check_fermi` / `anticommutator_of_check_psi`。下記） |
+| C′-14 | `commutation_V_psi` / `action_of_T_Vprime_on_psi` / `T_V_eq_T_Vprime` / `V_eq_Vprime` | `V^{(+)} = c checkV'`。**完了**（016 章、`commutation_V_plus_check_psi` / `def_check_Vprime` / `action_of_T_check_Vprime_on_check_psi` / `T_V_plus_eq_T_check_Vprime` / `V_plus_eq_c_check_Vprime`。下記） |
 | C′-15 | 009 章全体 | 数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`・固有値 |
 
 **簡単になる点（見込みではなく確定した）**: 半整数運動量では `γ_2(θ~_μ) ≠ 0` が**常に**成り立つ。
@@ -261,6 +261,46 @@ C′-15 で最大固有値の一意性を言うときに、整数運動量側で
 なお `def_gamma1_gamma2_of_theta` は `θ ∈ R` について述べてあるので、C′-13 以降でも
 `θ~` 版を作り直さずそのまま使える。
 
+#### C′-13・C′-14 の成果（`structured-latex/content/016_even_sector_fermions.ts`、10 ブロック）
+
+到達点は `V^{(+)} = c checkV'`（ある `c ∈ C^×` について）。**`c` の値の決定は C′-15 で行う。**
+
+| ラベル | 内容 |
+|---|---|
+| `def_check_fermi` | `(checkψ_μ^†, checkψ_μ) := (Ž_μ, Y̌_μ) P̌_μ`。**すべての `μ ∈ Z` で定義できる**（`γ_2(θ~_μ) ≠ 0` ゆえ分母が 0 にならない） |
+| `periodicity_of_check_fermi` | (1) `γ_1, γ_2(±), γ` の `M` 周期性、(2) `checkψ_{μ+kM} = checkψ_μ`、(3) 共役添字 `γ_2(θ~_{1−μ}) = γ_2(−θ~_μ)`、`γ(θ~_{1−μ}) = γ(θ~_μ)` |
+| `anticommutator_of_check_psi` | `[ψ̌^†_μ, ψ̌^†_ν]_+ = 0`、`[ψ̌^†_μ, ψ̌_ν]_+ = δ^M_{(μ+ν,1)} I`、`[ψ̌_μ, ψ̌_ν]_+ = 0`。**対は `μ+ν ≡ 1 (mod M)`** |
+| `commutation_V_plus_check_psi` | `T_{(V^{(+)})}(ψ̌^†_μ) = e^{+γ(θ~_μ)} ψ̌^†_μ`、`T_{(V^{(+)})}(ψ̌_μ) = e^{−γ(θ~_μ)} ψ̌_μ` |
+| `def_check_Vprime` | `X̌ = Σ_{μ=1}^{M} γ(θ~_μ)(ψ̌^†_μ ψ̌_{1−μ} − I/2)`、`checkV' = exp(X̌)`。**和の範囲に例外が要らない**。可逆性も示した |
+| `action_of_T_check_Vprime_on_check_psi` | `T_{(checkV')}(ψ̌^†_μ) = e^{+γ} ψ̌^†_μ`、`T_{(checkV')}(ψ̌_μ) = e^{−γ} ψ̌_μ` |
+| `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` | `T_{(V^{(+)})}` と `T_{(checkV')}` が `Ž_μ, Y̌_μ` 上で一致（**場合分けなし**） |
+| `T_V_plus_eq_T_check_Vprime` | `T_{(V^{(+)})} = T_{(checkV')}`（`Mat(2^M,C)` 全体。復元公式 `recover_Z_Y_from_check_Z_Y` と `Z_Y_generate_algebra` を経由） |
+| `V_plus_eq_c_check_Vprime` | **`V^{(+)} = c checkV'`（ある `c ∈ C^×`）**。`centralizer_is_scalar` による（クリフォード群には依存しない） |
+
+数値検証は `sagemath/check/049_claim_even_sector_fermions/`（6 チェック、全 PASS、`M = 2,3,4,5`、
+厳密な臨界点 2 組を含む 6 組の `(K_1,K_2)`）。`V^{(+)}` と `checkV'` はどちらも行列指数関数から
+直接構成しており、証明が使う交換子の級数展開とは独立な経路になっている。
+`T_{(V^{(+)})} = T_{(checkV')}` は行列単位 `e_{ij}`（`2^M × 2^M` 個）すべてで直接確認した。
+
+**008 章から消えたもの（一次情報で確認済み）**:
+
+1. **臨界点の場合分けが全部消えた。** 008 章の `def_fermi` の定義域限定、`def_Vprime` の和の範囲限定、
+   `A_theta_is_identity_when_gamma2_zero`、`T_Vprime_fixes_hatZ_hatY_when_gamma2_zero`、
+   `T_V_eq_T_Vprime_on_hatZ_hatY` の「場合 2」は、いずれも `γ_2(θ_μ) = 0` になりうることだけに
+   由来していた。`gamma_2_theta_tilde_nonzero`（C′-12）により偶セクターでは起こらない。
+2. **複素平方根の分枝の議論が消えた。** 008 章の `anticommutator_of_psi` は Step 0 で
+   `√(γ_2(θ_μ)γ_2(−θ_μ))` の分枝が `μ` と `ν` で一致することを示す必要があったが、
+   `relation_of_gamma_2_theta_tilde` (4)(5) により根号が `|γ_2|`（非負実数）と `i|γ_2|` に確定するので、
+   係数の一致は絶対値の計算だけで従う。
+3. **`μ` の符号による場合分けが消えた。** 008 章の `action_of_T_Vprime_on_psi` は添字集合が
+   `calM = {−M,…,−1,1,…,M}` だったため `μ` の符号で 3 通りに分けていた。016 章は `μ ∈ Z` で扱い、
+   `periodicity_of_check_fermi` を先に立てることで場合分けを不要にした。
+
+**C′-15 へ引き継ぐ道具**: `anticommutator_of_check_psi`（数演算子 `ψ̌^†_μ ψ̌_{1−μ}` の冪等性に使う）、
+`def_check_Vprime` の `X̌`、`V_plus_eq_c_check_Vprime`、および C′-12 の `γ(θ~_μ) > 0` / `λ_+ > 1 > λ_- > 0`。
+`c = (2 sinh 2K_2)^{M/2}` は数値では全ケースで一致を確認済み（`049_.../check_06`、相対差 ≤ 2.3e-13）だが、
+**証明は C′-15 の仕事**である。
+
 #### 接続（C′ が済んだあと）
 
 `c_+(M) = Λ^{(1/2)}_M` が確定すれば、`sector_decomposition_of_rayleigh_sup` の
@@ -290,10 +330,11 @@ C′-15 で最大固有値の一意性を言うときに、整数運動量側で
 ## 作業順の推奨
 
 - 章 A（009 章）・章 B・章 B2（010 章）・章 C（011 章）・章 D（012 章）は**完了**。
-  章 C′ は **C′-1〜C′-12 まで完了**（013 章・014 章・015 章）。
-- **次は章 C′ の C′-13 以降**（フェルミオン `checkψ` → `V^{(+)} = c checkV'` → 固有値）。
-  入力はすべて揃っている: (A)〜(D) と反交換関係は 013 章、`T_{(V^{(+)})}(Ž,Y̌) = (Ž,Y̌)A(θ~_μ)` は 014 章、
-  `A(θ~_μ) = P̌_μ Ď_μ P̌_μ^{-1}`・`γ(θ~_μ) > 0`・`λ_+ > 1 > λ_- > 0` は 015 章。
+  章 C′ は **C′-1〜C′-14 まで完了**（013 章・014 章・015 章・016 章）。
+- **次は章 C′ の C′-15**（数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`・`V^{(+)}` の固有値）。
+  入力はすべて揃っている: 反交換関係は `anticommutator_of_check_psi`（016 章）、
+  `V^{(+)} = c checkV'` は `V_plus_eq_c_check_Vprime`（016 章）、
+  `γ(θ~_μ) > 0`・`λ_+ > 1 > λ_- > 0` は 015 章。009 章（整数運動量版の固有値）が対応する既存章である。
 - 章 C′ が済めば `c_+(M) = Λ^{(1/2)}_M` が確定し、章 C・章 D と合わせて
   Onsager の自由エネルギーが本文で閉じる。
 - 章 E（臨界点）はそのあと。

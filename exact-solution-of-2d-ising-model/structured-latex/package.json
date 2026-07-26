@@ -12,7 +12,10 @@
     "test:types": "node tools/negative-type-test.ts",
     "test:runtime": "node tools/schema-runtime-test.ts",
     "verify:proofs": "node tools/verify-no-lost-proofs.ts",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:proofs && npm run test:types && npm run test:runtime"
+    "build:tex": "node tools/build-latex.ts",
+    "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
+    "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:proofs && npm run verify:no-notes && npm run test:types && npm run test:runtime"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

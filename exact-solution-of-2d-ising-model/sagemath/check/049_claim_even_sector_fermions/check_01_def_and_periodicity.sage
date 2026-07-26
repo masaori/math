@@ -1,0 +1,69 @@
+# =========================================================================
+# check_01: def_check_fermi / periodicity_of_check_fermi
+#
+#  (a) 定義式そのもの:
+#      psi^dagger_mu = (-r/(2 sqrt(M) b)) checkZ_mu + (1/(2 sqrt(M))) checkY_mu
+#      psi_mu        = (+r/(2 sqrt(M) b)) checkZ_mu + (1/(2 sqrt(M))) checkY_mu
+#      が (checkZ_mu, checkY_mu) P^_mu の 2 列に一致する（r = |gamma_2|, b = gamma_2(-t)）
+#  (b) 分母 2 sqrt(M) gamma_2(-t~_mu) が 0 から離れている（全 mu で定義可能＝例外なし）
+#  (c) periodicity_of_check_fermi (1): gamma_1, gamma_2(±), gamma の M 周期性
+#  (d) periodicity_of_check_fermi (2): psi^dagger_{mu+kM} = psi^dagger_mu, psi_{mu+kM} = psi_mu
+#  (e) periodicity_of_check_fermi (3): gamma_2(t~_{1-mu}) = gamma_2(-t~_mu) 等の共役添字関係
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_01: def_check_fermi / periodicity_of_check_fermi ===")
+
+ok_all = True
+min_den = None
+w_def = w_per1 = w_per2 = w_per3 = 0
+
+for M in FERMI_M:
+    O = SpinOps(M)
+    for p in FERMI_PARAMS:
+        P = coeffs(p['K1'], p['K2'])
+        s = RDF(sqrt(RDF(M)))
+        for mu in list(range(1, M + 1)) + [0, -1, -M, M + 1]:
+            t = th_tilde(M, mu)
+            r = RDF(abs(g2(t, P)))
+            b = g2(-t, P)
+            den = abs(2 * s * b)
+            min_den = den if min_den is None else min(min_den, den)
+
+            # (a) 定義式 = P^_mu の列
+            Zc = checkZ(O, mu); Yc = checkY(O, mu)
+            pdag_def = (-r / (2 * s * b)) * Zc + (CDF(1) / (2 * s)) * Yc
+            psi_def = (r / (2 * s * b)) * Zc + (CDF(1) / (2 * s)) * Yc
+            pdag, psi = psi_pair(O, mu, P)
+            w_def = max(w_def, opnorm(pdag - pdag_def), opnorm(psi - psi_def))
+
+            # (c)(d) M 周期性
+            for k in [-1, 1, 2]:
+                nu = mu + k * M
+                w_per1 = max(w_per1,
+                             abs(g1(th_tilde(M, nu), P) - g1(t, P)),
+                             abs(g2(th_tilde(M, nu), P) - g2(t, P)),
+                             abs(g2(-th_tilde(M, nu), P) - g2(-t, P)),
+                             abs(gamma_tilde(M, nu, P) - gamma_tilde(M, mu, P)))
+                pd2, ps2 = psi_pair(O, nu, P)
+                w_per2 = max(w_per2, opnorm(pd2 - pdag), opnorm(ps2 - psi))
+
+            # (e) 共役添字
+            t1 = th_tilde(M, 1 - mu)
+            w_per3 = max(w_per3,
+                         abs(g2(t1, P) - g2(-t, P)),
+                         abs(g2(-t1, P) - g2(t, P)),
+                         abs(g1(t1, P) - g1(t, P)),
+                         abs(gamma_tilde(M, 1 - mu, P) - gamma_tilde(M, mu, P)))
+
+ok_all &= report("(a) 定義式 = (checkZ, checkY) P^_mu の列", w_def, TOL)
+print(f"  (b) 分母 |2 sqrt(M) gamma_2(-t~_mu)| の全体最小 = {float(min_den):.3e}  ->  "
+      f"{'PASS（全 mu で定義可能。例外なし）' if min_den > 1e-3 else 'FAIL'}")
+ok_all &= (min_den > 1e-3)
+ok_all &= report("(c) gamma_1, gamma_2(±), gamma の M 周期性", w_per1, TOL)
+ok_all &= report("(d) psi^dagger, psi の M 周期性", w_per2, TOL)
+ok_all &= report("(e) 共役添字 1-mu の関係", w_per3, TOL)
+
+print("check_01:", "PASS" if ok_all else "FAIL")

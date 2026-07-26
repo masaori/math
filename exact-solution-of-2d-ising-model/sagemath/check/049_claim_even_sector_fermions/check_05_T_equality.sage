@@ -1,0 +1,61 @@
+# =========================================================================
+# check_05: T_V_plus_eq_T_check_Vprime_on_check_Z_Y / T_V_plus_eq_T_check_Vprime
+#
+#  (a) T_{(V^{(+)})}(checkZ_mu) = T_{(V^')}(checkZ_mu)、checkY についても同様
+#  (b) T_{(V^{(+)})}(Z_m) = T_{(V^')}(Z_m)、Y_m についても同様
+#      （証明の Step 2 で復元公式 recover_Z_Y_from_check_Z_Y を経由する段）
+#  (c) T_{(V^{(+)})} = T_{(V^')}（Mat(2^M,C) 全体）
+#      行列単位 e_{ij}（2^M x 2^M 個）すべてについて共役が一致することを直接確認する。
+#      これは Z_Y_generate_algebra を経由する Step 3-4 の結論そのものにあたる。
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_05: T_{(V^{(+)})} = T_{(V^')} ===")
+
+ok_all = True
+w_zy = w_site = w_all = 0
+w_recover = 0
+
+for M in FERMI_M:
+    O = SpinOps(M)
+    for p in FERMI_PARAMS:
+        P = coeffs(p['K1'], p['K2'])
+        Vp, Vpi = V_plus(O, p['K1'], p['K2'])
+        Vpr, Vpri, _ = Vprime_check(O, P)
+        # (a)
+        for mu in list(range(1, M + 1)) + [0, -1]:
+            Zc = checkZ(O, mu); Yc = checkY(O, mu)
+            w_zy = max(w_zy,
+                       opnorm(Vp * Zc * Vpi - Vpr * Zc * Vpri),
+                       opnorm(Vp * Yc * Vpi - Vpr * Yc * Vpri))
+        # 復元公式そのもの（Step 2 の入力）
+        for m in range(1, M + 1):
+            accZ = matrix(CDF, O.d, O.d, 0)
+            accY = matrix(CDF, O.d, O.d, 0)
+            for mu in range(1, M + 1):
+                ph = eiph(m * th_tilde(M, mu))
+                accZ = accZ + checkZ(O, mu) * ph
+                accY = accY + checkY(O, mu) * ph
+            w_recover = max(w_recover,
+                            opnorm(accZ / M - O.Z[m]), opnorm(accY / M - O.Y[m]))
+        # (b)
+        for m in range(1, M + 1):
+            w_site = max(w_site,
+                         opnorm(Vp * O.Z[m] * Vpi - Vpr * O.Z[m] * Vpri),
+                         opnorm(Vp * O.Y[m] * Vpi - Vpr * O.Y[m] * Vpri))
+        # (c) 行列単位すべて
+        d = O.d
+        for i in range(d):
+            for j in range(d):
+                E = matrix(CDF, d, d, 0)
+                E[i, j] = CDF(1)
+                w_all = max(w_all, opnorm(Vp * E * Vpi - Vpr * E * Vpri))
+
+ok_all &= report("復元公式 Z_m, Y_m = (1/M) sum_mu checkZ/checkY e^{i m t~_mu}", w_recover, TOL)
+ok_all &= report("(a) checkZ_mu, checkY_mu 上での一致", w_zy, TOL)
+ok_all &= report("(b) Z_m, Y_m 上での一致", w_site, TOL)
+ok_all &= report("(c) 行列単位 e_{ij} すべての上での一致（= 全体での一致）", w_all, TOL)
+
+print("check_05:", "PASS" if ok_all else "FAIL")

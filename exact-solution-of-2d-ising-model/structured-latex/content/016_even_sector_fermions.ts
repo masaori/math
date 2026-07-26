@@ -1,0 +1,1636 @@
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
+
+const SRC = "structured-latex/content/016_even_sector_fermions.ts";
+
+export default defineBlocks([
+  {
+    id: "heading_even_sector_fermions",
+    kind: "heading",
+    level: 2,
+    sourcePath: SRC,
+    sourceOrdinal: 1,
+    title: { tex: String.raw`\text{半整数運動量のフェルミオンと } V^{(+)} = c\,\check{V}'` },
+    labels: [],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evenfermi_000_remark_overview",
+    kind: "remark",
+    sourcePath: SRC,
+    sourceOrdinal: 2,
+    title: { text: "この章の目的と、008 章との違い" },
+    labels: [],
+    statement: [
+      paragraph([
+        ref("T_V_plus_check_Z_Y"),
+        " で ",
+        math(String.raw`\left(T_{(V^{(+)})}(\check{Z}_\mu),\ T_{(V^{(+)})}(\check{Y}_\mu)\right)
+= \left(\check{Z}_\mu,\ \check{Y}_\mu\right) A(\tilde\theta_\mu)`),
+        " を、",
+        ref("diagonalization_check_P_D"),
+        " で ",
+        math(String.raw`A(\tilde\theta_\mu) = \check{P}_\mu \check{D}_\mu \check{P}_\mu^{-1}`),
+        " を得た。この章では、",
+        math(String.raw`\check{P}_\mu`),
+        " の列で ",
+        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+        " を組み替えた**半整数運動量のフェルミオン** ",
+        math(String.raw`\check\psi_\mu, \check\psi_\mu^\dagger`),
+        " を導入し、",
+      ]),
+      displayMath(
+        String.raw`\check{V}' := \exp\!\left(\sum_{\mu=1}^{M}
+\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\,\check\psi_{1-\mu}
+- \tfrac12 I\right)\right)`,
+      ),
+      paragraph([
+        "とおいたとき、ある ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " について ",
+        math(String.raw`V^{(+)} = c\,\check{V}'`),
+        " が成り立つこと（",
+        ref("V_plus_eq_c_check_Vprime"),
+        "）まで到達する。",
+        math(String.raw`c`),
+        " の値の決定は次章で扱う。",
+      ]),
+      paragraph([
+        "**008 章との違いは、場合分けが一つも要らないことである。** 008 章では ",
+        math(String.raw`\gamma_2(\theta_\mu) = 0`),
+        " となる ",
+        math(String.raw`\mu`),
+        "（臨界点の ",
+        math(String.raw`\mu = \pm M`),
+        "）でフェルミオン ",
+        math(String.raw`\psi_\mu, \psi_\mu^\dagger`),
+        " が定義できず、",
+        ref("def_fermi"),
+        " の定義域の限定、",
+        ref("def_Vprime"),
+        " の和の範囲の限定、",
+        ref("A_theta_is_identity_when_gamma2_zero"),
+        "・",
+        ref("T_Vprime_fixes_hatZ_hatY_when_gamma2_zero"),
+        " による例外処理、",
+        ref("T_V_eq_T_Vprime_on_hatZ_hatY"),
+        " の「場合 2」が必要だった。",
+        "半整数運動量では ",
+        ref("gamma_2_theta_tilde_nonzero"),
+        " により ",
+        math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0`),
+        " が**すべての ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " とすべての ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " について**成り立つので、これらはすべて不要になる。",
+      ]),
+      paragraph([
+        "**平方根の分枝の議論も要らない。** 008 章の ",
+        ref("anticommutator_of_psi"),
+        " は、",
+        math(String.raw`\psi`),
+        " の係数に現れる ",
+        math(String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}`),
+        " が ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`\nu`),
+        " で同じ分枝を取ることを Step 0 で確かめる必要があった。半整数運動量では ",
+        ref("relation_of_gamma_2_theta_tilde"),
+        " (4)(5) により根号が ",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right| \in \mathbb{R}_{>0}`),
+        " と ",
+        math(String.raw`i\left|\gamma_2(\tilde\theta_\mu)\right|`),
+        " に確定しているので、",
+        ref("diagonalization_check_P_D"),
+        " の ",
+        math(String.raw`\check{P}_\mu`),
+        " の成分は最初から実の絶対値だけで書かれており、分枝の問題が生じない。",
+      ]),
+      paragraph([
+        "**対になる添字は ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`1-\mu`),
+        " である。** ",
+        ref("def_half_integer_modes"),
+        " (3) の ",
+        math(String.raw`\tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
+        " と ",
+        ref("anticommutator_of_check_Z_Y"),
+        " の ",
+        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        " に対応する。008 章の ",
+        math(String.raw`-\mu`),
+        " をそのまま写してはならない。",
+      ]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evenfermi_001_definition_check_fermi",
+    kind: "definition",
+    sourcePath: SRC,
+    sourceOrdinal: 3,
+    title: { tex: String.raw`\check\psi_\mu, \check\psi_\mu^\dagger \text{（半整数運動量のフェルミオン）}` },
+    labels: ["def_check_fermi"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " とする。",
+        ref("diagonalization_check_P_D"),
+        " の ",
+        math(String.raw`\check{P}_\mu`),
+        " を用いて ",
+        math(String.raw`\check\psi_\mu^\dagger, \check\psi_\mu \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}
+:= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu`,
+      ),
+      paragraph([
+        "すなわち（",
+        math(String.raw`a := \gamma_2(\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`b := \gamma_2(-\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`r := |a| \in \mathbb{R}_{>0}`),
+        " と略記して）",
+      ]),
+      displayMath(
+        String.raw`\check\psi_\mu^\dagger := \frac{-r}{2\sqrt{M}\,b}\,\check{Z}_\mu + \frac{1}{2\sqrt{M}}\,\check{Y}_\mu,
+\qquad
+\check\psi_\mu := \frac{+r}{2\sqrt{M}\,b}\,\check{Z}_\mu + \frac{1}{2\sqrt{M}}\,\check{Y}_\mu`,
+      ),
+      paragraph([
+        "と定める（行ベクトルと ",
+        math(String.raw`2\times 2`),
+        " 行列の積は ",
+        ref("calc_of_TxT_check_Z_Y"),
+        " の ",
+        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p & q \\ r & s\end{pmatrix} = (pA + rB,\ qA + sB)`),
+        "）。",
+      ]),
+      paragraph([
+        "**この定義は ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " のすべてについて意味をもつ。** ",
+        ref("gamma_2_theta_tilde_nonzero"),
+        " より ",
+        math(String.raw`a \neq 0`),
+        " すなわち ",
+        math(String.raw`r > 0`),
+        "、",
+        ref("relation_of_gamma_2_theta_tilde"),
+        " より ",
+        math(String.raw`b \neq 0`),
+        " であり、",
+        math(String.raw`M \geq 2`),
+        " より ",
+        math(String.raw`\sqrt{M} > 0`),
+        " なので分母 ",
+        math(String.raw`2\sqrt{M}\,b`),
+        " は ",
+        math(String.raw`0`),
+        " でない（",
+        ref("diagonalization_check_P_D"),
+        " の Step 1）。",
+        ref("def_fermi"),
+        " が ",
+        math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
+        " なる ",
+        math(String.raw`\mu`),
+        " にしか定義できなかったのと違い、**除外される ",
+        math(String.raw`\mu`),
+        " は無い**。",
+      ]),
+      paragraph([
+        math(String.raw`\dagger`),
+        " は転置共役を表す記号ではなく、2 つの元を区別する添え字の一部として使う（",
+        ref("def_fermi"),
+        " と同じ扱い）。",
+      ]),
+    ],
+    proof: [],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の def_fermi の半整数運動量版。008 章の P_μ の (1,1) 成分 +i√(γ_2(θ_μ)γ_2(−θ_μ))/(2√M γ_2(−θ_μ)) は、" +
+          "relation_of_gamma_2_theta_tilde (5)（√(γ_2 γ_2(−)) = i|γ_2|）により半整数運動量では −|γ_2|/(2√M γ_2(−θ~_μ)) に等しい。" +
+          "したがって定義式の形は 008 章と同一であり、根号が実の絶対値に書き換わっているだけである。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_01（定義式と P̌_μ の列の一致、および ψ̌ の M 周期性）。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_002_claim_periodicity",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 4,
+    title: { tex: String.raw`\check\psi \text{ の } M \text{ 周期性と共役添字}` },
+    labels: ["periodicity_of_check_fermi"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\mu, k \in \mathbb{Z}`),
+        " について次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) ",
+          math(String.raw`\gamma_1(\tilde\theta_{\mu+kM}) = \gamma_1(\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma_2(\pm\tilde\theta_{\mu+kM}) = \gamma_2(\pm\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma(\tilde\theta_{\mu+kM}) = \gamma(\tilde\theta_\mu)`),
+          "。",
+        ],
+        [
+          "(2) ",
+          math(String.raw`\check\psi_{\mu+kM}^\dagger = \check\psi_\mu^\dagger`),
+          "、",
+          math(String.raw`\check\psi_{\mu+kM} = \check\psi_\mu`),
+          "。",
+        ],
+        [
+          "(3) ",
+          math(String.raw`\gamma_2(\tilde\theta_{1-\mu}) = \gamma_2(-\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma_2(-\tilde\theta_{1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma_1(\tilde\theta_{1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`),
+          "。",
+        ],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(1) ",
+        ref("def_half_integer_modes"),
+        " より ",
+        math(String.raw`\tilde\theta_{\mu+kM} = \dfrac{2\pi(\mu+kM-\frac12)}{M} = \tilde\theta_\mu + 2k\pi`),
+        " である。実数 ",
+        math(String.raw`t`),
+        " について ",
+        math(String.raw`\cos(t+2k\pi) = \cos t`),
+        "、",
+        math(String.raw`\sin(t+2k\pi) = \sin t`),
+        " であり、",
+        ref("euler_formula_cos_sin"),
+        " より ",
+        math(String.raw`e^{i(t+2k\pi)} = e^{it}`),
+        "。",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の ",
+        math(String.raw`\gamma_1(\theta), \gamma_2(\theta)`),
+        " は ",
+        math(String.raw`\cos\theta, \sin\theta, e^{i\theta}`),
+        " のみを通じて ",
+        math(String.raw`\theta`),
+        " に依存するから、",
+      ]),
+      displayMath(
+        String.raw`\gamma_1(\theta + 2k\pi) = \gamma_1(\theta), \qquad
+\gamma_2(\theta + 2k\pi) = \gamma_2(\theta) \qquad (\theta \in \mathbb{R},\ k \in \mathbb{Z})`,
+      ),
+      paragraph([
+        "これを ",
+        math(String.raw`\theta = \tilde\theta_\mu`),
+        " と ",
+        math(String.raw`\theta = -\tilde\theta_\mu`),
+        "（後者は ",
+        math(String.raw`-\tilde\theta_{\mu+kM} = -\tilde\theta_\mu - 2k\pi`),
+        " なので ",
+        math(String.raw`-k`),
+        " を取る）に使えば第 1・第 2 の等式を得る。",
+        ref("def_gamma_theta_tilde_mu"),
+        " の ",
+        math(String.raw`\gamma(\tilde\theta_\mu) = \mathrm{arccosh}(\gamma_1(\tilde\theta_\mu))`),
+        " は ",
+        math(String.raw`\gamma_1`),
+        " の値だけで決まるので第 3 の等式も従う。",
+      ]),
+      paragraph([
+        "(2) ",
+        ref("def_half_integer_modes"),
+        " (2) より ",
+        math(String.raw`\check{Z}_{\mu+M} = \check{Z}_\mu`),
+        "、",
+        math(String.raw`\check{Y}_{\mu+M} = \check{Y}_\mu`),
+        " であり、これを ",
+        math(String.raw`|k|`),
+        " 回繰り返して ",
+        math(String.raw`\check{Z}_{\mu+kM} = \check{Z}_\mu`),
+        "、",
+        math(String.raw`\check{Y}_{\mu+kM} = \check{Y}_\mu`),
+        "。また (1) より ",
+        math(String.raw`\check{P}_{\mu+kM} = \check{P}_\mu`),
+        "（",
+        ref("diagonalization_check_P_D"),
+        " の ",
+        math(String.raw`\check{P}_\mu`),
+        " の成分は ",
+        math(String.raw`|\gamma_2(\tilde\theta_\mu)|`),
+        " と ",
+        math(String.raw`\gamma_2(-\tilde\theta_\mu)`),
+        " と ",
+        math(String.raw`M`),
+        " だけで書かれている）。よって ",
+        ref("def_check_fermi"),
+        " の右辺が一致し、(2) を得る。",
+      ]),
+      paragraph([
+        "(3) ",
+        ref("def_half_integer_modes"),
+        " (3) より ",
+        math(String.raw`\tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
+        " なので、",
+        math(String.raw`\gamma_2(\tilde\theta_{1-\mu}) = \gamma_2(-\tilde\theta_\mu)`),
+        " と ",
+        math(String.raw`\gamma_2(-\tilde\theta_{1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
+        " は代入するだけである。",
+        math(String.raw`\gamma_1`),
+        " については ",
+        ref("def_gamma1_gamma2_of_theta"),
+        " より ",
+        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
+        " が ",
+        math(String.raw`\cos\theta`),
+        " のみに依存し、",
+        math(String.raw`\cos(-\tilde\theta_\mu) = \cos\tilde\theta_\mu`),
+        " だから ",
+        math(String.raw`\gamma_1(\tilde\theta_{1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
+        "、したがって ",
+        math(String.raw`\gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`),
+        "。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章では対応する事実が gamma2_theta_M_periodicity と hatZ_hatY_M_periodicity に分かれ、" +
+          "action_of_T_Vprime_on_psi の proof の中で μ の符号ごとの場合分け（a)〜c)）として使われていた。" +
+          "半整数運動量では添字を μ ∈ Z 全体で扱うので、M 周期性 (2) と共役添字 (3) を一度まとめておけば場合分けが要らない。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_01。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_003_claim_anticommutator",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 5,
+    title: { tex: String.raw`\check\psi \text{ の反交換関係}` },
+    labels: ["anticommutator_of_check_psi"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\mu, \nu \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+ = 0,
+\qquad
+\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+ = \delta^M_{(\mu+\nu,\,1)}\,I,
+\qquad
+\left[\check\psi_\mu, \check\psi_\nu\right]_+ = 0`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "、",
+        math(String.raw`\delta^M`),
+        " は ",
+        ref("def_delta_M"),
+        "）。",
+        ref("anticommutator_of_psi"),
+        " では対になる添字が ",
+        math(String.raw`\mu+\nu \equiv 0`),
+        " だったのに対し、ここでは ",
+        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`a_\mu := \gamma_2(\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`b_\mu := \gamma_2(-\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`r_\mu := |a_\mu| \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`c_\mu := \dfrac{1}{2\sqrt{M}\,b_\mu} \in \mathbb{C}^\times`),
+        " と略記する（",
+        ref("gamma_2_theta_tilde_nonzero"),
+        " と ",
+        ref("relation_of_gamma_2_theta_tilde"),
+        " より ",
+        math(String.raw`a_\mu \neq 0`),
+        "、",
+        math(String.raw`b_\mu \neq 0`),
+        "）。",
+        ref("def_check_fermi"),
+        " は",
+      ]),
+      displayMath(
+        String.raw`\check\psi_\mu^\dagger = c_\mu\left(-r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right),
+\qquad
+\check\psi_\mu = c_\mu\left(+r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right)`,
+      ),
+      paragraph([
+        "と書ける。また ",
+        ref("anticommutator_of_check_Z_Y"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\left[\check{Z}_\mu, \check{Z}_\nu\right]_+ = 2M\,\delta\,I,
+\qquad
+\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ = \left[\check{Y}_\mu, \check{Z}_\nu\right]_+ = 0,
+\qquad
+\left[\check{Y}_\mu, \check{Y}_\nu\right]_+ = 2M\,\delta\,I,
+\qquad \delta := \delta^M_{(\mu+\nu,\,1)}`,
+      ),
+      paragraph([
+        "である（",
+        math(String.raw`[\check{Y}_\mu, \check{Z}_\nu]_+ = [\check{Z}_\nu, \check{Y}_\mu]_+ = 0`),
+        " は反交換子の対称性による）。",
+      ]),
+      paragraph([
+        "Step 1（",
+        math(String.raw`\delta \neq 0`),
+        " のときの係数の関係）。",
+        math(String.raw`\delta^M_{(\mu+\nu,1)} = 1`),
+        " とは ",
+        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        "、すなわち ",
+        math(String.raw`\nu = (1-\mu) + kM`),
+        " なる ",
+        math(String.raw`k \in \mathbb{Z}`),
+        " が存在することである（",
+        ref("def_delta_M"),
+        "）。このとき ",
+        ref("periodicity_of_check_fermi"),
+        " (1)(3) より",
+      ]),
+      displayMath(
+        String.raw`a_\nu = \gamma_2(\tilde\theta_{(1-\mu)+kM}) = \gamma_2(\tilde\theta_{1-\mu}) = b_\mu,
+\qquad
+b_\nu = \gamma_2(-\tilde\theta_{(1-\mu)+kM}) = \gamma_2(-\tilde\theta_{1-\mu}) = a_\mu`,
+      ),
+      paragraph([
+        "であり、",
+        ref("relation_of_gamma_2_theta_tilde"),
+        " (1) の ",
+        math(String.raw`b_\mu = -\overline{a_\mu}`),
+        " と ",
+        math(String.raw`|\overline{z}| = |z|`),
+        "（",
+        ref("abs_basic_properties"),
+        "）より",
+      ]),
+      displayMath(
+        String.raw`r_\nu = |a_\nu| = |b_\mu| = \left|-\overline{a_\mu}\right| = |a_\mu| = r_\mu`,
+      ),
+      paragraph([
+        "である。以下この共通の値を ",
+        math(String.raw`r := r_\mu = r_\nu > 0`),
+        " と書く。さらに ",
+        ref("relation_of_gamma_2_theta_tilde"),
+        " (2) より",
+      ]),
+      displayMath(
+        String.raw`b_\mu b_\nu = b_\mu a_\mu = a_\mu b_\mu = -r^2,
+\qquad
+c_\mu c_\nu = \frac{1}{4M\,b_\mu b_\nu} = \frac{1}{4M\left(-r^2\right)} = \frac{-1}{4Mr^2}`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`r > 0`),
+        " なので分母は ",
+        math(String.raw`0`),
+        " でない）。",
+        "**ここが 008 章との差である。** ",
+        ref("anticommutator_of_psi"),
+        " では係数に平方根 ",
+        math(String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}`),
+        " が入るため、",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`\nu`),
+        " で同じ分枝が選ばれることを別途示す必要があった。ここでの ",
+        math(String.raw`r_\mu`),
+        " は複素数の絶対値、すなわち非負の実数として一意に定まる量なので、",
+        math(String.raw`r_\nu = r_\mu`),
+        " は上の絶対値の計算だけで従い、分枝の議論は生じない。",
+      ]),
+      paragraph([
+        "Step 2（第 1 式）。反交換子 ",
+        math(String.raw`[X,W]_+ := XW + WX`),
+        " は両引数について ",
+        math(String.raw`\mathbb{C}`),
+        " 双線型（",
+        math(String.raw`[\alpha X, \beta W]_+ = \alpha\beta[X,W]_+`),
+        "）なので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+
+&= c_\mu c_\nu\Bigl(
+\left(-r_\mu\right)\left(-r_\nu\right)\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
++ \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
+&\qquad\qquad
++ b_\mu\left(-r_\nu\right)\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
++ b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
+\Bigr) \\
+&= c_\mu c_\nu\left(r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
+\end{aligned}`,
+      ),
+      paragraph([
+        "（中間 2 項は ",
+        math(String.raw`[\check{Z},\check{Y}]_+ = 0`),
+        " で消える）。",
+        math(String.raw`\delta = 0`),
+        " なら全体が ",
+        math(String.raw`0`),
+        "。",
+        math(String.raw`\delta \neq 0`),
+        " なら Step 1 より ",
+        math(String.raw`r_\mu r_\nu = r^2`),
+        "、",
+        math(String.raw`b_\mu b_\nu = -r^2`),
+        " なので括弧は ",
+        math(String.raw`r^2 - r^2 = 0`),
+        "。いずれの場合も ",
+        math(String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+ = 0`),
+        "。",
+      ]),
+      paragraph([
+        "Step 3（第 3 式）。",
+        math(String.raw`\check\psi_\mu, \check\psi_\nu`),
+        " では ",
+        math(String.raw`\check{Z}`),
+        " の係数の符号がともに ",
+        math(String.raw`+`),
+        " になるだけで、積 ",
+        math(String.raw`(+r_\mu)(+r_\nu) = r_\mu r_\nu`),
+        " は Step 2 の ",
+        math(String.raw`(-r_\mu)(-r_\nu)`),
+        " と同じである。よってまったく同じ計算により ",
+        math(String.raw`\left[\check\psi_\mu, \check\psi_\nu\right]_+ = 0`),
+        "。",
+      ]),
+      paragraph(["Step 4（第 2 式）。同じ展開で ", math(String.raw`\check{Z}`), " の係数の積が ", math(String.raw`(-r_\mu)(+r_\nu) = -r_\mu r_\nu`), " になるので"]),
+      displayMath(
+        String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
+= c_\mu c_\nu\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I`,
+      ),
+      paragraph([
+        math(String.raw`\delta = 0`),
+        " なら全体が ",
+        math(String.raw`0`),
+        " であり、",
+        math(String.raw`\delta^M_{(\mu+\nu,1)}I = 0`),
+        " と一致する。",
+        math(String.raw`\delta \neq 0`),
+        "（すなわち ",
+        math(String.raw`\delta = 1`),
+        "）なら Step 1 より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
+&= \frac{-1}{4Mr^2}\left(-r^2 + \left(-r^2\right)\right)\cdot 2M\,I \\
+&= \frac{-1}{4Mr^2}\cdot\left(-2r^2\right)\cdot 2M\,I
+= \frac{4Mr^2}{4Mr^2}\,I = I
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\delta^M_{(\mu+\nu,1)}I = I`),
+        " と一致する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の anticommutator_of_psi の半整数運動量版。008 章が Step 0（√ の分枝の一致）に費やしていた部分は、" +
+          "係数が |γ_2|（非負実数）で書かれることにより絶対値の計算 1 行に置き換わった。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_02（M=2,3,4,5、μ,ν ∈ {1..M}（および負の μ）、5 組の (K1,K2)）。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_004_claim_commutation_V_plus_psi",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 6,
+    title: { tex: String.raw`V^{(+)} \text{ と } \check\psi \text{ の交換関係}` },
+    labels: ["commutation_V_plus_check_psi"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger,
+\qquad
+T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`T_{(V^{(+)})}`),
+        " は ",
+        ref("def_V_plus_and_T_V_plus"),
+        "、",
+        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        " は ",
+        ref("def_gamma_theta_tilde_mu"),
+        "）。",
+        ref("commutation_V_psi"),
+        " と違い ",
+        math(String.raw`\gamma_2 = 0`),
+        " による定義域の限定は無い。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下、行ベクトルと ",
+        math(String.raw`2\times 2`),
+        " 行列の積は ",
+        ref("calc_of_TxT_check_Z_Y"),
+        " のものとする。まず、",
+        math(String.raw`A_0, B_0 \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " と ",
+        math(String.raw`G, H \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)H
+= \begin{pmatrix}A_0, & B_0\end{pmatrix}\left(GH\right)`,
+      ),
+      paragraph([
+        "が成り立つ（結合律）。実際 ",
+        math(String.raw`G = \begin{pmatrix}g_{11} & g_{12} \\ g_{21} & g_{22}\end{pmatrix}`),
+        "、",
+        math(String.raw`H = \begin{pmatrix}h_{11} & h_{12} \\ h_{21} & h_{22}\end{pmatrix}`),
+        " とすると、左辺の第 ",
+        math(String.raw`l`),
+        " 列は ",
+        math(String.raw`\sum_{k=1}^{2} h_{kl}\left(g_{1k}A_0 + g_{2k}B_0\right)`),
+        "、右辺の第 ",
+        math(String.raw`l`),
+        " 列は ",
+        math(String.raw`\left(\sum_{k}g_{1k}h_{kl}\right)A_0 + \left(\sum_{k}g_{2k}h_{kl}\right)B_0`),
+        " であり、",
+        math(String.raw`\mathbb{C}`),
+        " 上のスカラー倍の分配律により両者は一致する。",
+      ]),
+      paragraph([
+        "Step 1（",
+        math(String.raw`T_{(V^{(+)})}`),
+        " の線型性を行ベクトルへ持ち上げる）。",
+        ref("def_V_plus_and_T_V_plus"),
+        " (1)(3) より ",
+        math(String.raw`V^{(+)} \in R^\times`),
+        " かつ ",
+        math(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
+        " なので、",
+        ref("linearity_of_T_on_check_Z_Y"),
+        " の一般形（",
+        math(String.raw`g \in R^\times`),
+        " について ",
+        math(String.raw`T_g(aX+bW) = aT_g(X) + bT_g(W)`),
+        "）が使える。よって ",
+        math(String.raw`G \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}\!\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)
+:= \left(T_{(V^{(+)})}\!\left(g_{11}A_0 + g_{21}B_0\right),\ T_{(V^{(+)})}\!\left(g_{12}A_0 + g_{22}B_0\right)\right)
+= \begin{pmatrix}T_{(V^{(+)})}(A_0), & T_{(V^{(+)})}(B_0)\end{pmatrix}G`,
+      ),
+      paragraph([
+        "が成り立つ（各列に線型性を使った。",
+        math(String.raw`G`),
+        " の成分は ",
+        math(String.raw`A_0, B_0`),
+        " に依らない複素数である）。",
+      ]),
+      paragraph([
+        "Step 2（計算）。",
+        ref("def_check_fermi"),
+        "、Step 1、",
+        ref("T_V_plus_check_Z_Y"),
+        "、",
+        ref("diagonalization_check_P_D"),
+        " を順に使う。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\begin{pmatrix}T_{(V^{(+)})}(\check\psi_\mu^\dagger), & T_{(V^{(+)})}(\check\psi_\mu)\end{pmatrix}
+&= T_{(V^{(+)})}\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)
+   \quad (\because \text{def\_check\_fermi}) \\
+&= \begin{pmatrix}T_{(V^{(+)})}(\check{Z}_\mu), & T_{(V^{(+)})}(\check{Y}_\mu)\end{pmatrix}\check{P}_\mu
+   \quad (\because \text{Step 1}) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}A(\tilde\theta_\mu)\right)\check{P}_\mu
+   \quad (\because \text{T\_V\_plus\_check\_Z\_Y}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(A(\tilde\theta_\mu)\check{P}_\mu\right)
+   \quad (\because \text{結合律}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \left(\check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}\check{P}_\mu\right)
+   \quad (\because A(\tilde\theta_\mu) = \check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(\check{P}_\mu\check{D}_\mu\right)
+   \quad (\because \check{P}_\mu^{-1}\check{P}_\mu = I_{\mathrm{Mat}(2,\mathbb{C})}) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{D}_\mu
+   \quad (\because \text{結合律}) \\
+&= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{D}_\mu
+= \begin{pmatrix}\lambda_{+,\mu}\,\check\psi_\mu^\dagger, & \lambda_{-,\mu}\,\check\psi_\mu\end{pmatrix}
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後の等号は ",
+        math(String.raw`\check{D}_\mu = \begin{pmatrix}\lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu}\end{pmatrix}`),
+        " が対角行列であることによる。両辺の第 1 列・第 2 列を比べ、",
+        ref("lambda_eq_exp_gamma_theta_tilde"),
+        " の ",
+        math(String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\tilde\theta_\mu)}`),
+        " を代入して statement を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の commutation_V_psi の半整数運動量版。008 章は行ベクトル×行列の結合律を暗黙に使っていたが、" +
+          "本章では行ベクトル×行列の積を calc_of_TxT_check_Z_Y の定義で入れているので、結合律を proof の冒頭で明示的に確かめた。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_03（V^{(+)} を行列指数関数から直接構成して共役を計算）。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_005_definition_check_Vprime",
+    kind: "definition",
+    sourcePath: SRC,
+    sourceOrdinal: 7,
+    title: { tex: String.raw`\check{V}' \text{ の定義}` },
+    labels: ["def_check_Vprime"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+      ]),
+      displayMath(
+        String.raw`\check{X} := \sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+\left(\check\psi_\mu^\dagger\,\check\psi_{1-\mu} - \tfrac12 I\right)
+\ \in\ \mathrm{Mat}(2^M,\mathbb{C}),
+\qquad
+\check{V}' := \exp\!\left(\check{X}\right)`,
+      ),
+      paragraph([
+        "と定める（",
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "）。次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) **和の範囲に例外は要らない。** ",
+          ref("def_check_fermi"),
+          " により ",
+          math(String.raw`\check\psi_\mu^\dagger`),
+          " と ",
+          math(String.raw`\check\psi_{1-\mu}`),
+          " はすべての ",
+          math(String.raw`\mu \in \mathbb{Z}`),
+          " について定義されているので、",
+          math(String.raw`\mu = 1, \dots, M`),
+          " のすべての項が意味をもつ。",
+        ],
+        [
+          "(2) ",
+          math(String.raw`\check{V}'`),
+          " は可逆であり ",
+          math(String.raw`\left(\check{V}'\right)^{-1} = \exp(-\check{X})`),
+          "。したがって ",
+          ref("def_T_g"),
+          " の ",
+          math(String.raw`T_{(\check{V}')}(W) := \check{V}'\,W\,\left(\check{V}'\right)^{-1}`),
+          " が定義される。",
+        ],
+      ]),
+      paragraph([
+        ref("def_Vprime"),
+        " が和を ",
+        math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
+        " なる ",
+        math(String.raw`\mu \in \{1,\dots,M\}`),
+        " に限定し、除外した ",
+        math(String.raw`\mu`),
+        " を ",
+        ref("T_Vprime_fixes_hatZ_hatY_when_gamma2_zero"),
+        " で別扱いしていたのと違い、ここでは ",
+        math(String.raw`\mu = 1,\dots,M`),
+        " が例外なく走る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(1) ",
+        ref("gamma_2_theta_tilde_nonzero"),
+        " はすべての ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " と ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " について ",
+        math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0`),
+        " を与えるので、",
+        ref("def_check_fermi"),
+        " の分母 ",
+        math(String.raw`2\sqrt{M}\,\gamma_2(-\tilde\theta_\mu)`),
+        " は ",
+        math(String.raw`0`),
+        " でない。",
+        math(String.raw`\mu \in \{1,\dots,M\}`),
+        " に対して ",
+        math(String.raw`1-\mu \in \{1-M,\dots,0\} \subset \mathbb{Z}`),
+        " であり、これも定義域に入る。",
+        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
+        " はスカラーなので各項は ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の元であり、有限和 ",
+        math(String.raw`\check{X}`),
+        " も同様である。",
+      ]),
+      paragraph([
+        "(2) ",
+        ref("matrix_exp_conjugation"),
+        " (3) より、任意の ",
+        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " について ",
+        math(String.raw`\exp(X)`),
+        " は可逆で ",
+        math(String.raw`\exp(X)^{-1} = \exp(-X)`),
+        " である。",
+        math(String.raw`X = \check{X}`),
+        " とすればよい。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の def_Vprime の半整数運動量版。対になる添字は −μ ではなく 1−μ である（def_half_integer_modes (3)）。",
+        "和の範囲が μ = 1,…,M で尽きること（重複も数え落としも無いこと）は、anticommutator_of_check_psi の対 " +
+          "μ+ν ≡ 1 (mod M) が {1,…,M} 上で μ ↔ 1−μ の対応として全単射になることに対応する。" +
+          "数値では、この形の V̌' が T_{(V^{(+)})} と一致する（T_V_plus_eq_T_check_Vprime）ことで確認している" +
+          "（sagemath/check/049_claim_even_sector_fermions/check_04, check_05）。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_006_claim_action_T_check_Vprime",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 8,
+    title: { tex: String.raw`T_{(\check{V}')} \text{ の } \check\psi \text{ への作用}` },
+    labels: ["action_of_T_check_Vprime_on_check_psi"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger,
+\qquad
+T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu`,
+      ),
+    ],
+    proof: [
+      paragraph([
+        ref("def_check_Vprime"),
+        " の ",
+        math(String.raw`\check{X}`),
+        "、",
+        math(String.raw`\check{V}' = \exp(\check{X})`),
+        "、",
+        math(String.raw`\left(\check{V}'\right)^{-1} = \exp(-\check{X})`),
+        " を用いる。すなわち ",
+        math(String.raw`T_{(\check{V}')}(W) = \exp(\check{X})\,W\,\exp(-\check{X})`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 1（1 項ぶんの交換子、",
+        math(String.raw`\check\psi_\mu^\dagger`),
+        " 側）。",
+        math(String.raw`\nu \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left[\check\psi_\nu^\dagger\,\check\psi_{1-\nu},\ \check\psi_\mu^\dagger\right]
+= \delta^M_{(\mu-\nu,\,0)}\,\check\psi_\nu^\dagger`,
+      ),
+      paragraph([
+        "を示す。",
+        ref("anticommutator_of_check_psi"),
+        " より ",
+        math(String.raw`\left[\check\psi_{1-\nu}, \check\psi_\mu^\dagger\right]_+ = \delta^M_{((1-\nu)+\mu,\,1)}I = \delta^M_{(\mu-\nu,\,0)}I`),
+        "（",
+        math(String.raw`(1-\nu)+\mu \equiv 1 \iff \mu-\nu \equiv 0 \pmod M`),
+        "）および ",
+        math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+ = 0`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,\check\psi_\mu^\dagger
+&= \check\psi_\nu^\dagger\left(\delta^M_{(\mu-\nu,0)}I - \check\psi_\mu^\dagger\,\check\psi_{1-\nu}\right) \\
+&= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{1-\nu} \\
+&= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu}
+\end{aligned}`,
+      ),
+      paragraph(["となり、第 2 項を右辺へ移して交換子の定義に戻すと上の式を得る。"]),
+      paragraph([
+        "Step 2（",
+        math(String.raw`[\check{X}, \check\psi_\mu^\dagger] = \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger`),
+        "）。",
+        math(String.raw`\tfrac12 I`),
+        " は任意の元と可換（",
+        ref("scalar_identity_commutes"),
+        "）なので交換子に寄与せず、交換子は第 1 引数について ",
+        math(String.raw`\mathbb{C}`),
+        " 線型だから、Step 1 より",
+      ]),
+      displayMath(
+        String.raw`\left[\check{X},\ \check\psi_\mu^\dagger\right]
+= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu^\dagger\right]
+= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\,\delta^M_{(\mu-\nu,\,0)}\,\check\psi_\nu^\dagger`,
+      ),
+      paragraph([
+        math(String.raw`\nu`),
+        " が ",
+        math(String.raw`1`),
+        " から ",
+        math(String.raw`M`),
+        " まで走るとき、",
+        math(String.raw`\nu \equiv \mu \pmod M`),
+        " を満たす ",
+        math(String.raw`\nu`),
+        " は**ちょうど 1 つ**であり（",
+        math(String.raw`\{1,\dots,M\}`),
+        " は ",
+        math(String.raw`M`),
+        " を法とする剰余類の完全代表系）、それを ",
+        math(String.raw`\nu_0 = \mu + kM`),
+        "（",
+        math(String.raw`k \in \mathbb{Z}`),
+        "）と書く。",
+        ref("periodicity_of_check_fermi"),
+        " (1)(2) より ",
+        math(String.raw`\gamma(\tilde\theta_{\nu_0}) = \gamma(\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`\check\psi_{\nu_0}^\dagger = \check\psi_\mu^\dagger`),
+        " なので",
+      ]),
+      displayMath(
+        String.raw`\left[\check{X},\ \check\psi_\mu^\dagger\right] = \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger,
+\qquad\text{すなわち}\qquad
+\check{X}\,\check\psi_\mu^\dagger = \check\psi_\mu^\dagger\left(\check{X} + \gamma(\tilde\theta_\mu)I\right)`,
+      ),
+      paragraph([
+        "（008 章の ",
+        ref("action_of_T_Vprime_on_psi"),
+        " が ",
+        math(String.raw`\mu`),
+        " の符号で 3 通りに場合分けしていたのは添字集合が ",
+        math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
+        " だったためである。ここでは ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " を ",
+        ref("periodicity_of_check_fermi"),
+        " (2) の ",
+        math(String.raw`M`),
+        " 周期性でそのまま扱えるので場合分けが要らない。）",
+      ]),
+      paragraph([
+        "Step 3（帰納法）。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`\check{X}^n\,\check\psi_\mu^\dagger = \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n`),
+        " が成り立つ。",
+        math(String.raw`n=0`),
+        " では両辺 ",
+        math(String.raw`\check\psi_\mu^\dagger`),
+        " で一致し、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{X}^{n+1}\check\psi_\mu^\dagger
+&= \check{X}\left(\check{X}^{n}\check\psi_\mu^\dagger\right)
+ = \check{X}\,\check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
+   \quad (\because \text{帰納法の仮定}) \\
+&= \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
+   \quad (\because \text{Step 2}) \\
+&= \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n+1}
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 4（指数関数へ）。Step 3 より各 ",
+        math(String.raw`N`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left(\sum_{n=0}^{N}\frac{\check{X}^n}{n!}\right)\check\psi_\mu^\dagger
+= \sum_{n=0}^{N}\frac{\check{X}^n\check\psi_\mu^\dagger}{n!}
+= \check\psi_\mu^\dagger\sum_{n=0}^{N}\frac{\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n}{n!}`,
+      ),
+      paragraph([
+        "であり、",
+        ref("exp_converges"),
+        " より両辺の部分和は ",
+        math(String.raw`N \to \infty`),
+        " で収束する。行列の積は連続（",
+        ref("matrix_multiplication_continuity"),
+        "）だから極限をとって",
+      ]),
+      displayMath(
+        String.raw`\exp(\check{X})\,\check\psi_\mu^\dagger
+= \check\psi_\mu^\dagger\,\exp\!\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)`,
+      ),
+      paragraph([
+        "Step 5（結論）。",
+        math(String.raw`\check{X}+\gamma(\tilde\theta_\mu)I`),
+        " と ",
+        math(String.raw`-\check{X}`),
+        " は可換（",
+        ref("scalar_identity_commutes"),
+        " と ",
+        math(String.raw`\check{X}(-\check{X}) = (-\check{X})\check{X}`),
+        "）だから ",
+        ref("theorem_exp_product"),
+        " が使えて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
+&= \exp(\check{X})\,\check\psi_\mu^\dagger\,\exp(-\check{X}) \\
+&= \check\psi_\mu^\dagger\,\exp\!\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)\exp(-\check{X})
+   \quad (\because \text{Step 4}) \\
+&= \check\psi_\mu^\dagger\,\exp\!\left(\gamma(\tilde\theta_\mu)I\right)
+   \quad (\because \text{theorem\_exp\_product}) \\
+&= \check\psi_\mu^\dagger\cdot e^{\gamma(\tilde\theta_\mu)}I
+   = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger
+\end{aligned}`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`\left(\gamma I\right)^n = \gamma^n I`),
+        " より ",
+        math(String.raw`\exp(\gamma I) = e^{\gamma}I`),
+        "。）",
+      ]),
+      paragraph([
+        "Step 1'（",
+        math(String.raw`\check\psi_\mu`),
+        " 側）。",
+        ref("anticommutator_of_check_psi"),
+        " の ",
+        math(String.raw`\left[\check\psi_{1-\nu}, \check\psi_\mu\right]_+ = 0`),
+        " と ",
+        math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+ = \delta^M_{(\nu+\mu,\,1)}I`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,\check\psi_\mu
+&= \check\psi_\nu^\dagger\left(-\check\psi_\mu\,\check\psi_{1-\nu}\right)
+ = -\left(\delta^M_{(\nu+\mu,1)}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{1-\nu} \\
+&= -\delta^M_{(\nu+\mu,1)}\,\check\psi_{1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu}
+\end{aligned}`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu\right] = -\delta^M_{(\mu+\nu,\,1)}\,\check\psi_{1-\nu}`),
+        "。",
+      ]),
+      paragraph([
+        "Step 2'（",
+        math(String.raw`[\check{X}, \check\psi_\mu] = -\gamma(\tilde\theta_\mu)\check\psi_\mu`),
+        "）。Step 2 と同様に",
+      ]),
+      displayMath(
+        String.raw`\left[\check{X},\ \check\psi_\mu\right]
+= -\sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)\,\delta^M_{(\mu+\nu,\,1)}\,\check\psi_{1-\nu}`,
+      ),
+      paragraph([
+        math(String.raw`\nu \in \{1,\dots,M\}`),
+        " のうち ",
+        math(String.raw`\nu \equiv 1-\mu \pmod M`),
+        " を満たすものはちょうど 1 つで、それを ",
+        math(String.raw`\nu_1 = (1-\mu) + kM`),
+        "（",
+        math(String.raw`k \in \mathbb{Z}`),
+        "）と書く。このとき ",
+        math(String.raw`1-\nu_1 = \mu - kM`),
+        " なので ",
+        ref("periodicity_of_check_fermi"),
+        " (2) より ",
+        math(String.raw`\check\psi_{1-\nu_1} = \check\psi_\mu`),
+        "、また同 (1)(3) より",
+      ]),
+      displayMath(
+        String.raw`\gamma(\tilde\theta_{\nu_1}) = \gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`,
+      ),
+      paragraph([
+        "である。よって ",
+        math(String.raw`\left[\check{X}, \check\psi_\mu\right] = -\gamma(\tilde\theta_\mu)\check\psi_\mu`),
+        "、すなわち ",
+        math(String.raw`\check{X}\check\psi_\mu = \check\psi_\mu\left(\check{X} - \gamma(\tilde\theta_\mu)I\right)`),
+        "。",
+      ]),
+      paragraph([
+        "Steps 3'〜5'（結論）。Step 3〜5 の議論で ",
+        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        " を ",
+        math(String.raw`-\gamma(\tilde\theta_\mu)`),
+        " に置き換えるだけで同じ計算が通り、",
+      ]),
+      displayMath(
+        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu\right)
+= \check\psi_\mu\,\exp\!\left(-\gamma(\tilde\theta_\mu)I\right)
+= e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の action_of_T_Vprime_on_psi の半整数運動量版。008 章にあった μ の符号による 3 通りの場合分け" +
+          "（a) μ ∈ {1..M}、b) μ = -k、c) μ = -M）は、添字を μ ∈ Z で扱い periodicity_of_check_fermi を先に" +
+          "用意したことで不要になった。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_04（V̌' を行列指数関数から直接構成して共役を計算）。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_007_claim_T_eq_on_check_Z_Y",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 9,
+    title: {
+      tex: String.raw`T_{(V^{(+)})} \text{ と } T_{(\check{V}')} \text{ は } \check{Z}, \check{Y} \text{ 上で一致する}`,
+    },
+    labels: ["T_V_plus_eq_T_check_Vprime_on_check_Z_Y"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とする。すべての ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}\!\left(\check{Z}_\mu\right) = T_{(\check{V}')}\!\left(\check{Z}_\mu\right),
+\qquad
+T_{(V^{(+)})}\!\left(\check{Y}_\mu\right) = T_{(\check{V}')}\!\left(\check{Y}_\mu\right)`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        ref("T_V_eq_T_Vprime_on_hatZ_hatY"),
+        " と違い ",
+        math(String.raw`\gamma_2 = 0`),
+        " による場合分け（同ブロックの「場合 2」）は不要である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " を固定する。",
+        ref("def_V_plus_and_T_V_plus"),
+        " (1)(3) より ",
+        math(String.raw`V^{(+)} \in R^\times`),
+        "、",
+        ref("def_check_Vprime"),
+        " (2) より ",
+        math(String.raw`\check{V}'`),
+        " も可逆なので、",
+        ref("mat_conj"),
+        " より ",
+        math(String.raw`T_{(V^{(+)})}`),
+        " と ",
+        math(String.raw`T_{(\check{V}')}`),
+        " はともに ",
+        math(String.raw`\mathbb{C}`),
+        " 線型写像である。",
+      ]),
+      paragraph([
+        "Step 1（",
+        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+        " をフェルミオンで書く）。",
+        ref("diagonalization_check_P_D"),
+        " より ",
+        math(String.raw`\det\check{P}_\mu \neq 0`),
+        " なので ",
+        math(String.raw`\check{P}_\mu^{-1}`),
+        " が存在する。その成分を ",
+        math(String.raw`\check{P}_\mu^{-1} = \begin{pmatrix}q_{11} & q_{12} \\ q_{21} & q_{22}\end{pmatrix}`),
+        "（",
+        math(String.raw`q_{ij} \in \mathbb{C}`),
+        "）とおくと、",
+        ref("commutation_V_plus_check_psi"),
+        " の proof で確かめた結合律と ",
+        ref("def_check_fermi"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(\check{P}_\mu\check{P}_\mu^{-1}\right)
+= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{P}_\mu^{-1}
+= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{P}_\mu^{-1}`,
+      ),
+      paragraph(["すなわち"]),
+      displayMath(
+        String.raw`\check{Z}_\mu = q_{11}\,\check\psi_\mu^\dagger + q_{21}\,\check\psi_\mu,
+\qquad
+\check{Y}_\mu = q_{12}\,\check\psi_\mu^\dagger + q_{22}\,\check\psi_\mu`,
+      ),
+      paragraph([
+        "Step 2（フェルミオン上での一致）。",
+        ref("commutation_V_plus_check_psi"),
+        " と ",
+        ref("action_of_T_check_Vprime_on_check_psi"),
+        " より、いずれも ",
+        math(String.raw`e^{\pm\gamma(\tilde\theta_\mu)}`),
+        " 倍であるから",
+      ]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right),
+\qquad
+T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = T_{(\check{V}')}\!\left(\check\psi_\mu\right)`,
+      ),
+      paragraph(["Step 3（線型性で移す）。Step 1・Step 2 と線型性より"]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
+&= T_{(V^{(+)})}\!\left(q_{11}\check\psi_\mu^\dagger + q_{21}\check\psi_\mu\right) \\
+&= q_{11}T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) + q_{21}T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
+   \quad (\because T_{(V^{(+)})} \text{ の線型性}) \\
+&= q_{11}T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) + q_{21}T_{(\check{V}')}\!\left(\check\psi_\mu\right)
+   \quad (\because \text{Step 2}) \\
+&= T_{(\check{V}')}\!\left(q_{11}\check\psi_\mu^\dagger + q_{21}\check\psi_\mu\right)
+   \quad (\because T_{(\check{V}')} \text{ の線型性}) \\
+&= T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\check{Y}_\mu`),
+        " についても ",
+        math(String.raw`q_{12}, q_{22}`),
+        " を使って同じ計算である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の T_V_eq_T_Vprime_on_hatZ_hatY の半整数運動量版。008 章は γ_2(θ_μ) = 0 のとき ψ が存在しないため" +
+          "「場合 2」（A(θ_μ) = I と T_Vprime_fixes_hatZ_hatY_when_gamma2_zero を経由）を必要としたが、" +
+          "gamma_2_theta_tilde_nonzero によりその場合は起こらないので、008 章の「場合 1」に相当する議論だけで尽きる。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_05。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_008_claim_T_eq",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 10,
+    title: { tex: String.raw`T_{(V^{(+)})} = T_{(\check{V}')}` },
+    labels: ["T_V_plus_eq_T_check_Vprime"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とする。すべての ",
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（両者は単位的環準同型かつ線型）。",
+        ref("def_V_plus_and_T_V_plus"),
+        " (1)(3) より ",
+        math(String.raw`V^{(+)} \in R^\times`),
+        " かつ ",
+        math(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
+        "、",
+        ref("def_check_Vprime"),
+        " (2) より ",
+        math(String.raw`\check{V}'`),
+        " は可逆で ",
+        math(String.raw`T_{(\check{V}')} = T_{\check{V}'}`),
+        " である。可逆元による共役は ",
+        ref("conjugation_is_ring_homomorphism"),
+        " より乗法的かつ単位的（",
+        math(String.raw`T_g(I) = I`),
+        "）であり、",
+        ref("mat_conj"),
+        " より線型である。",
+      ]),
+      paragraph([
+        "Step 2（各 ",
+        math(String.raw`Z_m, Y_m`),
+        " 上で一致）。",
+        ref("recover_Z_Y_from_check_Z_Y"),
+        " より ",
+        math(String.raw`m \in \{1,\dots,M\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`Z_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{im\tilde\theta_\mu},
+\qquad
+Y_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`e^{im\tilde\theta_\mu}/M \in \mathbb{C}`),
+        " はスカラーなので、Step 1 の線型性と ",
+        ref("T_V_plus_eq_T_check_Vprime_on_check_Z_Y"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}(Z_m)
+&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
+   \quad (\because \text{線型性}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
+   \quad (\because \text{T\_V\_plus\_eq\_T\_check\_Vprime\_on\_check\_Z\_Y}) \\
+&= T_{(\check{V}')}(Z_m)
+   \quad (\because \text{線型性})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`Y_m`),
+        " についても同じ計算で ",
+        math(String.raw`T_{(V^{(+)})}(Y_m) = T_{(\check{V}')}(Y_m)`),
+        "。",
+      ]),
+      paragraph(["Step 3（一致する元の集合）。"]),
+      displayMath(
+        String.raw`\mathcal{E} := \left\{\,x \in \mathrm{Mat}(2^M,\mathbb{C})\ :\
+T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
+      ),
+      paragraph([
+        "とおく。",
+        math(String.raw`x, y \in \mathcal{E}`),
+        "、",
+        math(String.raw`\alpha, \beta \in \mathbb{C}`),
+        " について、Step 1 の線型性から",
+      ]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}(\alpha x + \beta y)
+= \alpha T_{(V^{(+)})}(x) + \beta T_{(V^{(+)})}(y)
+= \alpha T_{(\check{V}')}(x) + \beta T_{(\check{V}')}(y)
+= T_{(\check{V}')}(\alpha x + \beta y)`,
+      ),
+      paragraph(["ゆえ ", math(String.raw`\alpha x + \beta y \in \mathcal{E}`), "。Step 1 の乗法性から"]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}(xy) = T_{(V^{(+)})}(x)T_{(V^{(+)})}(y)
+= T_{(\check{V}')}(x)T_{(\check{V}')}(y) = T_{(\check{V}')}(xy)`,
+      ),
+      paragraph([
+        "ゆえ ",
+        math(String.raw`xy \in \mathcal{E}`),
+        "。また Step 1 の単位性より ",
+        math(String.raw`T_{(V^{(+)})}(I) = I = T_{(\check{V}')}(I)`),
+        " なので ",
+        math(String.raw`I \in \mathcal{E}`),
+        "。すなわち ",
+        math(String.raw`\mathcal{E}`),
+        " は単位元を含み、和・スカラー倍・積について閉じる。",
+      ]),
+      paragraph([
+        "Step 4（結論）。Step 2 より ",
+        math(String.raw`S := \{Z_1,\dots,Z_M,Y_1,\dots,Y_M\} \subseteq \mathcal{E}`),
+        " である。",
+        ref("Z_Y_generate_algebra"),
+        " の ",
+        math(String.raw`\mathcal{A}`),
+        "（",
+        math(String.raw`S`),
+        " を含み和・スカラー倍・積で閉じ単位元を含む最小の部分集合）について Step 3 より ",
+        math(String.raw`\mathcal{A} \subseteq \mathcal{E}`),
+        " であり、",
+        ref("Z_Y_generate_algebra"),
+        " より ",
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^M,\mathbb{C})`),
+        " であるから",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Mat}(2^M,\mathbb{C}) = \mathcal{A} \subseteq \mathcal{E} \subseteq \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\mathcal{E} = \mathrm{Mat}(2^M,\mathbb{C})`),
+        "。これが statement である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の T_V_eq_T_Vprime の半整数運動量版。復元公式が recover_Z_Y_from_hatZ_hatY から " +
+          "recover_Z_Y_from_check_Z_Y（半整数運動量版）へ差し替わるほかは同じ議論である。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_05（Z_m, Y_m だけでなく、" +
+          "行列単位 e_{ij} 全体（2^M × 2^M 個）についても両者の共役が一致することを直接確認）。",
+      ],
+    },
+  },
+
+  {
+    id: "evenfermi_009_claim_V_plus_eq_c_Vprime",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 11,
+    title: { tex: String.raw`V^{(+)} = c\,\check{V}' \text{（定数倍を除いて一致）}` },
+    labels: ["V_plus_eq_c_check_Vprime"],
+    statement: [
+      paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とする。ある ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " が存在して",
+      ]),
+      displayMath(String.raw`V^{(+)} = c\,\check{V}'`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`V^{(+)}`),
+        " は ",
+        ref("def_V_plus_and_T_V_plus"),
+        "、",
+        math(String.raw`\check{V}'`),
+        " は ",
+        ref("def_check_Vprime"),
+        "）。**",
+        math(String.raw`c`),
+        " の値の決定はここでは行わない。**",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（",
+        math(String.raw`W := \left(\check{V}'\right)^{-1}V^{(+)}`),
+        " は可逆）。",
+        ref("def_V_plus_and_T_V_plus"),
+        " (1) より ",
+        math(String.raw`V^{(+)}`),
+        " は可逆、",
+        ref("def_check_Vprime"),
+        " (2) より ",
+        math(String.raw`\check{V}'`),
+        " は可逆であり、可逆行列の逆行列も可逆である（",
+        ref("def_invertible_elements_of_R"),
+        "）。可逆行列の積は可逆なので ",
+        math(String.raw`W`),
+        " は可逆であり、",
+      ]),
+      displayMath(
+        String.raw`\check{V}'\,W = \check{V}'\left(\left(\check{V}'\right)^{-1}V^{(+)}\right)
+= \left(\check{V}'\left(\check{V}'\right)^{-1}\right)V^{(+)} = I\,V^{(+)} = V^{(+)}`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`V^{(+)} = \check{V}'W`),
+        "（行列の積の結合律を使った）。",
+      ]),
+      paragraph([
+        "Step 2（",
+        math(String.raw`W`),
+        " はすべての元と可換）。",
+        ref("T_V_plus_eq_T_check_Vprime"),
+        " と ",
+        ref("def_V_plus_and_T_V_plus"),
+        " (3) より、任意の ",
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`V^{(+)}\,x\,\left(V^{(+)}\right)^{-1}
+= T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)
+= \check{V}'\,x\,\left(\check{V}'\right)^{-1}`,
+      ),
+      paragraph([
+        "である。",
+        ref("conjugation_is_ring_homomorphism"),
+        " の ",
+        math(String.raw`(AB)^{-1} = B^{-1}A^{-1}`),
+        " より Step 1 の ",
+        math(String.raw`V^{(+)} = \check{V}'W`),
+        " から ",
+        math(String.raw`\left(V^{(+)}\right)^{-1} = W^{-1}\left(\check{V}'\right)^{-1}`),
+        " なので、左辺は",
+      ]),
+      displayMath(
+        String.raw`V^{(+)}x\left(V^{(+)}\right)^{-1}
+= \left(\check{V}'W\right)x\left(W^{-1}\left(\check{V}'\right)^{-1}\right)
+= \check{V}'\left(W x W^{-1}\right)\left(\check{V}'\right)^{-1}`,
+      ),
+      paragraph([
+        "と書ける。したがって ",
+        math(String.raw`\check{V}'\left(WxW^{-1}\right)\left(\check{V}'\right)^{-1} = \check{V}'x\left(\check{V}'\right)^{-1}`),
+        " であり、両辺に左から ",
+        math(String.raw`\left(\check{V}'\right)^{-1}`),
+        "、右から ",
+        math(String.raw`\check{V}'`),
+        " を掛けると ",
+        math(String.raw`WxW^{-1} = x`),
+        "、さらに右から ",
+        math(String.raw`W`),
+        " を掛けて",
+      ]),
+      displayMath(String.raw`Wx = xW \qquad \left(x \in \mathrm{Mat}(2^M,\mathbb{C}) \text{ は任意}\right)`),
+      paragraph([
+        "Step 3（スカラーであること）。Step 2 と ",
+        ref("centralizer_is_scalar"),
+        " より、ある ",
+        math(String.raw`c \in \mathbb{C}`),
+        " が存在して ",
+        math(String.raw`W = c\,I`),
+        "。",
+      ]),
+      paragraph([
+        "Step 4（",
+        math(String.raw`c \neq 0`),
+        "）。仮に ",
+        math(String.raw`c = 0`),
+        " なら ",
+        math(String.raw`W = O`),
+        "（零行列）だが、任意の ",
+        math(String.raw`A`),
+        " について ",
+        math(String.raw`OA = O \neq I`),
+        " なので ",
+        math(String.raw`O`),
+        " は可逆でなく、Step 1 に矛盾する。よって ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        "。",
+      ]),
+      paragraph([
+        "Step 5（結論）。Step 1 と Step 3 より",
+      ]),
+      displayMath(
+        String.raw`V^{(+)} = \check{V}'W = \check{V}'\left(c\,I\right) = c\,\check{V}'`,
+      ),
+      paragraph([
+        "（スカラー倍が行列の積と可換であること（",
+        ref("scalar_identity_commutes"),
+        "）と ",
+        math(String.raw`\check{V}'I = \check{V}'`),
+        " を使った。）",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "008 章の V_eq_Vprime の半整数運動量版。008 章と同じく centralizer_is_scalar を用いる筋であり、" +
+          "クリフォード群（def_clifford_group / V2_not_in_clifford_group）には依存しない。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_06（W = (V̌')^{-1} V^{(+)} がスカラー行列に" +
+          "なることを確認し、その c が (2 sinh 2K_2)^{M/2} に一致することも併せて確認した。" +
+          "ただし c の値そのものの証明は本章では行わない）。",
+      ],
+    },
+  },
+]);

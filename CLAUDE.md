@@ -85,6 +85,9 @@
 - `node structured-latex/tools/verify-no-lost-proofs.ts` — **移行漏れ**（`_old/typst` の原本に証明が
   あるのに構造化側が TODO のまま）を検出
 - `node sagemath/tools/verify-check-linkage.ts` — 数値検証と証明の対応が切れていないかを検査
+- `(cd structured-latex && npm run build:pdf)` — **最終成果物（PDF）を生成**し、未解決参照ゼロと
+  ノート非混入を検査（tectonic が必要。詳細は
+  [docs/publication-output.md](exact-solution-of-2d-ising-model/docs/publication-output.md)）
 - `lean/` があれば `lake build` と `bash lean/scripts/check-no-sorry.sh`
 
 ## MEMORY.md の運用
