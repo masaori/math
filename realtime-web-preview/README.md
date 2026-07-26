@@ -55,6 +55,10 @@ node backend/dist/entrypoint/server.js --source /path/to/content --notes /path/t
 | ポート | `RWP_PORT` | `--port` | 4321 |
 | バインド host | `RWP_HOST` | `--host` | 0.0.0.0 |
 
+入力ソースのファイル形式は `.mjs`（素の ESM）と `.ts`（TypeScript）の両方を読む。
+`.ts` は Node 22.18 以降の型ストリップでそのまま実行されるため、入力ソース側にビルド工程は要らない
+（型付きソースの実例: `exact-solution-of-2d-ising-model/structured-latex/`）。
+
 参照用ノート dir は**任意**で、無ければノート 0 件として動く。ノートは文書本体ではないため、
 画面では紐づけ先ブロックの中に折りたたみで表示し、「参照用ノート・最終成果物には載りません」と明示する。
 

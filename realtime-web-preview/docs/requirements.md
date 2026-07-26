@@ -23,7 +23,7 @@
   - **ブロック配列の並びが文書順**である（ビューアは並べ替えない）。
   - 現時点の具体例 / リファレンスとなる入力ソースは
     `exact-solution-of-2d-ising-model/structured-latex/`（スキーマは同ディレクトリの
-    `schema.d.ts`、データは `content/*.mjs`、検証は `tools/validate-content.mjs`）。
+    `schema.ts`、データは `content/*.mjs`（`.ts` も可）、検証は `tools/validate-content.mjs`）。
 - **参照用ノート**: 文書本体とは別に置かれる補足（`Note[]`）。`targets`（紐づけ先ブロックの
   ラベル、1件以上）と `body`（ブロック本文と同じ Node 列）を持つ。**文書本体ではない**ので、
   ビューアは本文と視覚的に区別して表示する。ソース側にノートが無い構成も正常系。

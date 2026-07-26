@@ -32,10 +32,11 @@
 <project-name>/
 ├── MEMORY.md              # プロジェクト固有の引き継ぎメモ（次回やること・未解決問題・完了済み）
 ├── structured-latex/      # 証明本体の正本（構造化テキスト）
-│   ├── schema.mjs         # ブロック/ノート/ノードのスキーマと検証
+│   ├── schema.ts          # ブロック/ノート/ノードの型と検証（型の正本）
+│   ├── labels.generated.ts# 自動生成: 実在ラベルのユニオン型（参照はこの型しか指せない）
 │   ├── content/*.mjs      # 証明ブロック群（配列の並びが文書順の正本。**最終成果物はここだけから生成**）
 │   ├── notes/*.mjs        # 参照用ノート（文書本体ではない。targets にラベルで紐づける）
-│   └── tools/             # validate-content.mjs 等
+│   └── tools/             # validate-content.ts / generate-labels.ts 等
 ├── sagemath/              # SageMath による数値検証コード
 │   ├── _shared/defs.sage  # 共通定義
 │   ├── check/<NNN>_<対象>/# overview.md に「対象ラベル」を宣言する
@@ -67,8 +68,12 @@
 
 ### 検証（変更したら必ず通す）
 
+- `(cd structured-latex && npm run check)` — 生成ラベルの鮮度 → **型検査** → 実行時検証 → 負テストを一括で回す
+  （初回のみ `cd structured-latex && pnpm install`。Node 22.18 以降が必要）
+  - 型検査で落ちるもの: 存在しないラベルへの `ref` / ノートの `targets`、未登録ラベルの宣言、
+    見出しへの本文混入、本文ブロックの `notes`
 - `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**・
-  ノートの **未解決 targets** を検査（content と notes の両方）
+  ノートの **未解決 targets** を検査（content と notes の両方。実体は `validate-content.ts`）
 - `node structured-latex/tools/verify-no-lost-proofs.mjs` — **移行漏れ**（`_old/typst` の原本に証明が
   あるのに構造化側が TODO のまま）を検出
 - `node sagemath/tools/verify-check-linkage.mjs` — 数値検証と証明の対応が切れていないかを検査

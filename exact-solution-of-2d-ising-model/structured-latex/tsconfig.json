@@ -1,0 +1,17 @@
+{
+  // コンパイラ設定は realtime-web-preview のワークスペース基準を正本として共有する
+  // （同じリポジトリ内で strict の水準を二重管理しないため）。
+  "extends": "../../realtime-web-preview/tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    // Node 22.18+ の型ストリップで .ts を直接実行する。ビルド成果物を持たないため、
+    // 相対 import は実行時に解決できる `.ts` 拡張子で書き、tsc は検査専用（noEmit）にする。
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": ["schema.ts", "labels.generated.ts", "content", "notes", "tools", "type-tests"],
+  "exclude": ["type-tests/.tmp", "node_modules"]
+}

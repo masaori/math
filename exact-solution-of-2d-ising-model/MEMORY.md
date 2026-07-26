@@ -1,5 +1,31 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補3）: structured-latex の TypeScript 化（第1段：基盤・スキーマ・ツール）
+
+**目的**: 「存在しない定理・ラベルへの参照」を実行時の検証スクリプトではなく**コンパイル時**に落とす。
+
+- `schema.mjs` → **`schema.ts` が型と実行時検証の正本**。`schema.mjs` は再エクスポートだけの互換入口
+  （未変換の `content/*.mjs` が読むため。全変換後に削除する）。手書きの `schema.d.ts` は削除。
+- `tools/generate-labels.ts` が `content/` の実在ラベル 146 件を集めて **`labels.generated.ts`**
+  （ユニオン型 `Label`）を生成する。`ref(target: Label)` / ノートの `targets: [Label, ...Label[]]` /
+  ブロックの `labels: readonly Label[]` がこの型で縛られる。
+- 型で落ちるようになったもの: 存在しないラベルへの参照・ノートの紐づけ、未登録ラベルの宣言
+  （＝生成物の再生成漏れ）、`targets` の空配列、見出しへの本文混入、本文ブロックの `notes`。
+- 実証: `node tools/negative-type-test.ts`（正しいラベル版が通り、壊した版で tsc が落ち、
+  診断が当該ラベルを指すことまで確認）。回帰は `type-tests/label-typing.test-d.ts`。
+- ツールも TS 化（`validate-content.ts` / `verify-no-lost-proofs.ts` / `extract-source-blocks.ts`）。
+  CLAUDE.md が案内する `.mjs` のコマンドは同名の互換入口として残してある。
+  `extract-source-blocks` は原本の退避（`_old/typst/`）に追随していなかったので参照先を直した。
+- 実行方式: **Node 22.18+ の型ストリップで `.ts` を直接実行する**（`dist/` を作らない。`tsc` は検査専用）。
+  ビューア（realtime-web-preview）の入力ソース読み込みも `.mjs` / `.ts` の両対応にし、
+  変換後の `.ts` content を実際に配信できることを確認済み（173 blocks / 38 notes）。
+- 一括検査: `cd structured-latex && npm run check`（初回のみ `pnpm install`）。
+
+**第2段（content/notes の一括 `.ts` 変換）は未実行**。別セッションが記法置換（⊗→⊠）で
+content を書き換え中のため衝突を避けた。変換は `node tools/codemod-mjs-to-ts.ts --apply`
+（既定は dry-run。`--out-dir` で試験変換）。**試験変換 23 ファイルは既に型検査を通ることを確認済み**
+なので、記法置換が main に入り次第そのまま実行してよい。
+
 ## 完了（2026-07-26・追補2）: Lean 形式化が検出した本文の穴 5 件を content 側で解消
 
 対象は `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs` のみ（ラベルは一切変更していない）。
