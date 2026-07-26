@@ -15,7 +15,7 @@
 #           （r = |gamma_2(t~_mu)|, b = gamma_2(-t~_mu)）
 #   (psi^dagger_mu, psi_mu) := (checkZ_mu, checkY_mu) P^_mu
 #
-#   X^ := sum_{mu=1}^{M} gamma(t~_mu) ( psi^dagger_mu psi_{1-mu} - (1/2) I )
+#   X^ := sum_{mu in 𝓜̌} gamma(t~_mu) ( psi^dagger_mu psi_{M+1-mu} - (1/2) I )
 #   V^' := exp(X^)
 #
 #   V_1^{(+)}         = exp(i K_1 H_1^{(+)})
@@ -120,12 +120,12 @@ def V_plus(O, K1, K2):
 
 
 def Vprime_check(O, P):
-    """V^' = exp(X^)、X^ = sum_{mu=1}^{M} gamma(t~_mu)(psi^dagger_mu psi_{1-mu} - I/2)"""
+    """V^' = exp(X^)、X^ = sum_{mu in 𝓜̌} gamma(t~_mu)(psi^dagger_mu psi_{M+1-mu} - I/2)"""
     Id = identity_matrix(CDF, O.d)
     X = matrix(CDF, O.d, O.d, 0)
     for mu in range(1, O.M + 1):
         pdag, _ = psi_pair(O, mu, P)
-        _, psi1m = psi_pair(O, 1 - mu, P)
+        _, psi1m = psi_pair(O, O.M + 1 - mu, P)
         X = X + gamma_tilde(O.M, mu, P) * (pdag * psi1m - Id / 2)
     X = matrix(CDF, X)
     return matrix(CDF, X.exp()), matrix(CDF, (-X).exp()), X

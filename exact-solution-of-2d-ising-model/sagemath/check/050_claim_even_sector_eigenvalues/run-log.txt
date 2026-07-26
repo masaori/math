@@ -1,46 +1,48 @@
-########## check_01_number_operator.sage ##########
+# 実行ログ — sagemath/check/050_claim_even_sector_eigenvalues
+# 実行日: 2026-07-27 / SageMath version 10.6, Release Date: 2025-03-31 / macOS (Darwin 25.4.0)
+# 実行コマンド: for f in sagemath/check/050_claim_even_sector_eigenvalues/check_*.sage; do sage "$f"; done
+# 注: μ の量化範囲を ℤ から 𝓜̌ = {1,…,M} へ絞り、共役添字を 1−μ から M+1−μ へ書き換えた版で再実行したもの。
+
+##### check_01_number_operator.sage
 === check_01: 数演算子 n^_mu の冪等性・可換性・トレース ===
   (psi^dagger_mu)^2 = 0: max residual = 5.304e-16  ->  PASS
-  (psi_{1-mu})^2 = 0: max residual = 5.312e-16  ->  PASS
-  psi_{1-mu} psi^dagger_mu = I - n^_mu: max residual = 7.385e-16  ->  PASS
-  (n^_mu)^2 = n^_mu: max residual = 1.614e-15  ->  PASS
-  [psi^dagger_mu, n^_nu] = [psi_{1-mu}, n^_nu] = 0 (mu != nu): max residual = 9.975e-16  ->  PASS
-  n^_mu n^_nu = n^_nu n^_mu: max residual = 1.307e-15  ->  PASS
-  tr(prod_{mu in T} n^_mu) = 2^{M-|T|}: max residual = 7.105e-15  ->  PASS
-  対照（対を -mu にした n = psi^dagger_mu psi_{-mu} の冪等性の破れ）= 2.587e+00  ->  PASS（大きく破れる＝対は 1-mu）
+  (psi_{M+1-mu})^2 = 0: max residual = 5.312e-16  ->  PASS
+  psi_{M+1-mu} psi^dagger_mu = I - n^_mu: max residual = 1.981e-15  ->  PASS
+  (n^_mu)^2 = n^_mu: max residual = 3.402e-15  ->  PASS
+  [psi^dagger_mu, n^_nu] = [psi_{M+1-mu}, n^_nu] = 0 (mu != nu): max residual = 1.602e-15  ->  PASS
+  psi_{M+1-mu} = psi_{1-mu}（周期性による書き換え）: max residual = 2.932e-15  ->  PASS
+  n^_mu n^_nu = n^_nu n^_mu: max residual = 1.510e-15  ->  PASS
+  tr(prod_{mu in T} n^_mu) = 2^{M-|T|}: max residual = 1.194e-14  ->  PASS
+  対照（対を -mu にした n = psi^dagger_mu psi_{-mu} の冪等性の破れ）= 2.587e+00  ->  PASS（大きく破れる＝対は M+1-mu）
 check_01: PASS
-
-########## check_02_joint_eigenspace.sage ##########
+##### check_02_joint_eigenspace.sage
 === check_02: 同時固有空間分解 Q^_eps ===
-  Q^_eps Q^_eps' = 0 (eps != eps'): max residual = 1.694e-15  ->  PASS
-  (Q^_eps)^2 = Q^_eps: max residual = 1.775e-15  ->  PASS
-  sum_eps Q^_eps = I: max residual = 2.629e-15  ->  PASS
-  n^_nu Q^_eps = eps_nu Q^_eps: max residual = 1.795e-15  ->  PASS
-  tr(Q^_eps) = 1: max residual = 1.111e-15  ->  PASS
+  Q^_eps Q^_eps' = 0 (eps != eps'): max residual = 2.986e-15  ->  PASS
+  (Q^_eps)^2 = Q^_eps: max residual = 5.740e-15  ->  PASS
+  sum_eps Q^_eps = I: max residual = 2.387e-15  ->  PASS
+  n^_nu Q^_eps = eps_nu Q^_eps: max residual = 3.113e-15  ->  PASS
+  tr(Q^_eps) = 1: max residual = 4.274e-15  ->  PASS
   rank Q^_eps = 1 に反した例の個数 = 0  ->  PASS
   |{0,1}^M| = 2^M に反した例の個数 = 0  ->  PASS
 check_02: PASS
-
-########## check_03_Vprime_eigenvalues.sage ##########
+##### check_03_Vprime_eigenvalues.sage
 === check_03: V^' の固有値 ===
-  X^ Q^_eps = g^(eps) Q^_eps: max residual = 5.701e-15  ->  PASS
-  V^' Q^_eps = e^{g^(eps)} Q^_eps: max residual = 7.997e-12  ->  PASS
-  V^' の固有値集合 = { e^{g^(eps)} }（相対差）: max residual = 2.997e-12  ->  PASS
+  X^ Q^_eps = g^(eps) Q^_eps: max residual = 1.329e-14  ->  PASS
+  V^' Q^_eps = e^{g^(eps)} Q^_eps: max residual = 7.530e-12  ->  PASS
+  V^' の固有値集合 = { e^{g^(eps)} }（相対差）: max residual = 3.538e-13  ->  PASS
   固有値の虚部が 0（実数）: PASS
   固有値の全体最小 = 9.413e-04  ->  PASS（すべて正）
   相異なる eps で固有値が一致した隣接ペアの個数 = 144（>0 が正常。mu <-> M+1-mu の縮退。本文は「固有値がすべて相異なる」とは主張しない）
 check_03: PASS
-
-########## check_04_trace_Vprime.sage ##########
+##### check_04_trace_Vprime.sage
 === check_04: tr(V^') = prod 2 cosh(gamma/2) ===
-  V^' (V^')^{-1} = I: max residual = 6.853e-12  ->  PASS
-  tr(V^') = prod_mu 2 cosh(gamma(theta~_mu)/2)（相対差）: max residual = 3.799e-15  ->  PASS
-  tr((V^')^{-1}) = tr(V^')（相対差）: max residual = 2.512e-15  ->  PASS
+  V^' (V^')^{-1} = I: max residual = 9.364e-12  ->  PASS
+  tr(V^') = prod_mu 2 cosh(gamma(theta~_mu)/2)（相対差）: max residual = 8.905e-15  ->  PASS
+  tr((V^')^{-1}) = tr(V^')（相対差）: max residual = 9.762e-15  ->  PASS
   tr(V^') の全体最小 = 4.902e+00  ->  PASS（正）
   前因子 2^{M-m} は m = M なので 1（009 章の 2^{M-m} が消えることに対応）
 check_04: PASS
-
-########## check_05_positive_definite_and_c.sage ##########
+##### check_05_positive_definite_and_c.sage
 === check_05: V^{(+)} の正定値性と定数 c の決定 ===
   S_1^{(+)} = i K_1 H_1^{(+)} は実対称: max residual = 0.000e+00  ->  PASS
   S_2 = i K_2^* H_2 は実対称: max residual = 0.000e+00  ->  PASS
@@ -52,7 +54,7 @@ check_04: PASS
   U S_2 U^{-1} = -S_2: max residual = 0.000e+00  ->  PASS
   tr(exp(-S_1)exp(-S_2)) = tr(exp(S_1)exp(S_2))（相対差）: max residual = 6.110e-16  ->  PASS
   tr(V^{(+)})/tr((V^{(+)})^{-1}) = (2 s_2)^M（相対差）: max residual = 6.597e-16  ->  PASS
-  c = (2 sinh 2K_2)^{M/2} と V^{(+)} = c V^'（相対差）: max residual = 4.346e-15  ->  PASS
+  c = (2 sinh 2K_2)^{M/2} と V^{(+)} = c V^'（相対差）: max residual = 1.016e-14  ->  PASS
 
   c の実測値:
     M=2 K1=0.4, K2=0.48385917 (s1*s2=1): c = 2.25198348, (2 sinh 2K_2)^(M/2) = 2.25198348
@@ -64,10 +66,9 @@ check_04: PASS
     M=3 K1=0.4, K2=0.48385917 (s1*s2=1): c = 3.379463812, (2 sinh 2K_2)^(M/2) = 3.379463812
     M=3 K1=0.44068679, K2=0.44068679 (s1*s2=1): c = 2.828427125, (2 sinh 2K_2)^(M/2) = 2.828427125
 check_05: PASS
-
-########## check_06_eigenvalues_V_plus.sage ##########
+##### check_06_eigenvalues_V_plus.sage
 === check_06: V^{(+)} の固有値と最大固有値の単純性 ===
-  V^{(+)} Q^_eps = Lambda^_eps Q^_eps（相対差）: max residual = 1.485e-11  ->  PASS
+  V^{(+)} Q^_eps = Lambda^_eps Q^_eps（相対差）: max residual = 1.543e-11  ->  PASS
   V^{(+)} の固有値集合（2^M 個）= { Lambda^_eps }（相対差）: max residual = 9.021e-12  ->  PASS
   Lambda^_max = Lambda^_{(1,..,1)} = Lambda^{(1/2)}_M（相対差）: max residual = 0.000e+00  ->  PASS
   gamma(theta~_mu) の全体最小 = 5.387e-01  ->  PASS（全 mu で正）
@@ -87,4 +88,3 @@ check_05: PASS
     M=3 K1=0.44, K2=0.4413747 (s1*s2=1.0000012): Lambda^_max = 17.87357866, Lambda^(1/2)_M = 17.87357866, Lambda^(0)_M = 13.5568713, 単純性の相対差 = 6.174e-01
     M=3 K1=0.4, K2=0.8 (s1*s2=2.1097561): Lambda^_max = 38.63058686, Lambda^(1/2)_M = 38.63058686, Lambda^(0)_M = 36.95513116, 単純性の相対差 = 5.092e-01
 check_06: PASS
-

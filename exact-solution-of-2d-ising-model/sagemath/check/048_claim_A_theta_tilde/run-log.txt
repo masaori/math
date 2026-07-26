@@ -1,8 +1,9 @@
-# 実行ログ: sagemath/check/048_claim_A_theta_tilde
-# 実行日: 2026-07-26
-# sage: SageMath version 10.6, Release Date: 2025-03-31
+# 実行ログ — sagemath/check/048_claim_A_theta_tilde
+# 実行日: 2026-07-27 / SageMath version 10.6, Release Date: 2025-03-31 / macOS (Darwin 25.4.0)
+# 実行コマンド: for f in sagemath/check/048_claim_A_theta_tilde/check_*.sage; do sage "$f"; done
+# 注: μ の量化範囲を ℤ から 𝓜̌ = {1,…,M} へ絞り、共役添字を 1−μ から M+1−μ へ書き換えた版で再実行したもの。
 
-===== $ sage check_01_gamma2_tilde_nonzero.sage =====
+##### check_01_gamma2_tilde_nonzero.sage
 === (a) 半整数運動量: |gamma_2(theta~_mu)| の最小値 ===
   K1=0.4, K2=0.4838591726 (s1*s2=1): min_M,mu |gamma_2(theta~)| = 3.516845e-01 -> PASS
   K1=0.4406867935, K2=0.4406867935 (s1*s2=1): min_M,mu |gamma_2(theta~)| = 3.975365e-01 -> PASS
@@ -60,8 +61,7 @@
   M=39, mu=20: (2mu-1)/M = 1, cos(theta~) = -1.000000000000 -> PASS
   該当した (M, mu) の個数: 19（M が奇数かつ (2mu-1)/M が奇数のときのみ）
 RESULT: PASS
-
-===== $ sage check_02_relation_of_gamma2.sage =====
+##### check_02_relation_of_gamma2.sage
 === gamma_2 の共役関係と根号 ===
   K1=0.4, K2=0.4838591726 (s1*s2=1): conj 0.0e-14, 積 8.9e-16, arg 0.0e-14, sqrt(-prod) 0.0e-14, sqrt(prod) 1.5e-16 -> PASS
   K1=0.4406867935, K2=0.4406867935 (s1*s2=1): conj 0.0e-14, 積 9.0e-16, arg 0.0e-14, sqrt(-prod) 0.0e-14, sqrt(prod) 1.7e-16 -> PASS
@@ -80,8 +80,7 @@ RESULT: PASS
   K1=0.05, K2=0.1 (s1*s2=0.02016717304): conj 0.0e-14, 積 3.6e-15, arg 0.0e-14, sqrt(-prod) 0.0e-14, sqrt(prod) 3.4e-16 -> PASS
   K1=0.3, K2=5 (s1*s2=7011.614161): conj 0.0e-14, 積 1.1e-16, arg 0.0e-14, sqrt(-prod) 1.1e-16, sqrt(prod) 1.2e-16 -> PASS
 RESULT: PASS
-
-===== $ sage check_03_eigen_and_diagonalization.sage =====
+##### check_03_eigen_and_diagonalization.sage
 === 固有値・固有ベクトル・対角化 ===
   K1=0.4, K2=0.4838591726 (s1*s2=1): 特性式 3.6e-15, sqrt 0.0e-14, 固有ベクトル(+) 2.5e-15 (-) 1.0e-15, 固有値集合 2.7e-15, det式 8.8e-17, min|det checkP| 6.25e-02, 対角化 1.1e-15 -> PASS
   K1=0.4406867935, K2=0.4406867935 (s1*s2=1): 特性式 8.9e-15, sqrt 0.0e-14, 固有ベクトル(+) 2.2e-15 (-) 1.5e-15, 固有値集合 3.6e-15, det式 1.6e-16, min|det checkP| 6.25e-02, 対角化 1.3e-15 -> PASS
@@ -100,8 +99,7 @@ RESULT: PASS
   K1=0.05, K2=0.1 (s1*s2=0.02016717304): 特性式 2.1e-14, sqrt 0.0e-14, 固有ベクトル(+) 1.4e-14 (-) 5.5e-15, 固有値集合 7.1e-15, det式 5.6e-17, min|det checkP| 6.25e-02, 対角化 3.8e-15 -> PASS
   K1=0.3, K2=5 (s1*s2=7011.614161): 特性式 6.7e-16, sqrt 1.1e-16, 固有ベクトル(+) 3.3e-16 (-) 1.3e-16, 固有値集合 1.3e-15, det式 1.1e-16, min|det checkP| 6.25e-02, 対角化 5.8e-16 -> PASS
 RESULT: PASS
-
-===== $ sage check_04_det_and_gamma1.sage =====
+##### check_04_det_and_gamma1.sage
 === det A(theta~) = 1 と gamma_1(theta~) > 1 ===
   K1=0.4, K2=0.4838591726 (s1*s2=1): det 2.9e-15, gamma_1^2+gamma_2gamma_2(-) 2.7e-15, lambda_+lambda_- 3.0e-15, gamma_1^2-1-|gamma_2|^2 2.7e-15, min(gamma_1 - 1) = 6.004e-02 -> PASS
   K1=0.4406867935, K2=0.4406867935 (s1*s2=1): det 2.8e-15, gamma_1^2+gamma_2gamma_2(-) 2.7e-15, lambda_+lambda_- 3.8e-15, gamma_1^2-1-|gamma_2|^2 3.6e-15, min(gamma_1 - 1) = 7.612e-02 -> PASS
@@ -120,8 +118,7 @@ RESULT: PASS
   K1=0.05, K2=0.1 (s1*s2=0.02016717304): det 1.7e-14, gamma_1^2+gamma_2gamma_2(-) 1.8e-14, lambda_+lambda_- 1.6e-14, gamma_1^2-1-|gamma_2|^2 1.8e-14, min(gamma_1 - 1) = 3.632e+00 -> PASS
   K1=0.3, K2=5 (s1*s2=7011.614161): det 1.2e-12, gamma_1^2+gamma_2gamma_2(-) 1.2e-12, lambda_+lambda_- 1.2e-12, gamma_1^2-1-|gamma_2|^2 1.2e-12, min(gamma_1 - 1) = 1.854e-01 -> PASS
 RESULT: PASS
-
-===== $ sage check_05_gamma_and_exp.sage =====
+##### check_05_gamma_and_exp.sage
 === gamma(theta~) = arccosh(gamma_1) と lambda_pm = e^{pm gamma} ===
   K1=0.4, K2=0.4838591726 (s1*s2=1): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 8.9e-16, lambda_- 6.7e-16, min gamma(theta~) = 3.448e-01 -> PASS
   K1=0.4406867935, K2=0.4406867935 (s1*s2=1): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 8.9e-16, lambda_- 8.9e-16, min gamma(theta~) = 3.877e-01 -> PASS

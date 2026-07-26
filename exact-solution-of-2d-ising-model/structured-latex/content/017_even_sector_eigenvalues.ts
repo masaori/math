@@ -103,8 +103,10 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       list([
         [
           "(a) 添字の集合が ",
-          math(String.raw`\{1,\dots,M\}`),
-          " の全部になる。009 章の ",
+          math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+          "（",
+          ref("def_check_index_set"),
+          "）の全部になる。009 章の ",
           ref("def_number_operator"),
           " は ",
           math(String.raw`\mathcal{I} = \{\mu \mid \gamma_2(\theta_\mu) \neq 0\}`),
@@ -147,14 +149,24 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         "**対になる添字は ",
         math(String.raw`\mu`),
         " と ",
-        math(String.raw`1-\mu`),
+        math(String.raw`M+1-\mu`),
         " である**（",
-        ref("def_half_integer_modes"),
-        " (3)、",
+        ref("conjugate_index_of_check_Z_Y"),
+        "、",
         ref("anticommutator_of_check_psi"),
         "）。009 章の ",
         math(String.raw`-\mu`),
         " をそのまま写してはならない。",
+        ref("def_check_index_set"),
+        " (2) により ",
+        math(String.raw`M+1-\mu`),
+        " は ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の中にとどまるので、**この章の主張はすべて ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " について述べられ、",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外の添字は現れない。**",
       ]),
       paragraph([
         "この章で用いる道具は、複素数を成分とする行列の積・和・スカラー倍、行列の指数関数（",
@@ -186,21 +198,25 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " とする。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）とする。",
+        ref("def_check_index_set"),
+        " (2) より ",
+        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        " なので、",
         ref("def_check_fermi"),
         " により ",
         math(String.raw`\check\psi_\mu^\dagger`),
         " と ",
-        math(String.raw`\check\psi_{1-\mu}`),
-        " は**すべての ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " について定義されている**ので、",
+        math(String.raw`\check\psi_{M+1-\mu}`),
+        " は**ともに定義されている**。そこで",
       ]),
       displayMath(
-        String.raw`\check{n}_\mu := \check\psi_\mu^\dagger\,\check\psi_{1-\mu}
+        String.raw`\check{n}_\mu := \check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
 \ \in\ \mathrm{Mat}(2^M,\mathbb{C})
-\qquad (\mu \in \mathbb{Z})`,
+\qquad (\mu \in \check{\mathcal{M}})`,
       ),
       paragraph([
         "と定める。以下、",
@@ -213,15 +229,21 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       ]),
       list([
         [
-          "(1) ",
-          math(String.raw`\check{n}_{\mu+kM} = \check{n}_\mu \quad (k \in \mathbb{Z})`),
-          "。したがって本質的に相異なる ",
+          "(1) 共役添字の対応 ",
+          math(String.raw`\mu \mapsto M+1-\mu`),
+          " は ",
+          math(String.raw`\check{\mathcal{M}}`),
+          " 上の対合である：",
+          math(String.raw`M+1-(M+1-\mu) = \mu`),
+          "。したがって ",
           math(String.raw`\check{n}_\mu`),
           " は ",
-          math(String.raw`\mu = 1,\dots,M`),
+          math(String.raw`\mu \in \check{\mathcal{M}}`),
           " の ",
           math(String.raw`M`),
-          " 個で尽きる。",
+          " 個で尽き、",
+          math(String.raw`\check{\mathcal{M}}`),
+          " の外の添字は要らない。",
         ],
         [
           "(2) ",
@@ -234,7 +256,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         ],
       ]),
       displayMath(
-        String.raw`\check{X} = \sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+        String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)
 \left(\check{n}_\mu - \tfrac12 I\right),
 \qquad
 \check{V}' = \exp\!\left(\check{X}\right)`,
@@ -250,7 +272,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         " の上でしか定義できず、臨界点では ",
         math(String.raw`m := |\mathcal{I}| = M-1`),
         " だったのと違い、**ここでは ",
-        math(String.raw`\mu = 1,\dots,M`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " が例外なく走る**（",
         ref("gamma_2_theta_tilde_nonzero"),
         "）。009 章の記号でいえば ",
@@ -261,24 +283,29 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
     proof: [
       paragraph([
         "(1) ",
-        ref("periodicity_of_check_fermi"),
+        math(String.raw`M+1-(M+1-\mu) = \mu`),
+        " は展開するだけである。",
+        ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`\check\psi_{\mu+kM}^\dagger = \check\psi_\mu^\dagger`),
-        " であり、また ",
-        math(String.raw`1-(\mu+kM) = (1-\mu) + (-k)M`),
-        " なので同じ (2) を ",
-        math(String.raw`-k`),
-        " について使って ",
-        math(String.raw`\check\psi_{1-(\mu+kM)} = \check\psi_{1-\mu}`),
-        "。積を取って ",
-        math(String.raw`\check{n}_{\mu+kM} = \check{n}_\mu`),
-        "。",
+        math(String.raw`\mu \mapsto M+1-\mu`),
+        " は ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " から ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " への写像であり、いま示したとおり 2 回施すと恒等写像になるので全単射（対合）である。",
+        "したがって ",
+        math(String.raw`\check{n}_\mu`),
+        "（",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "）を作るのに ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外の添字は現れない。",
       ]),
       paragraph([
         "(2) ",
         ref("def_check_Vprime"),
         " の ",
-        math(String.raw`\check{X} = \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{1-\mu} - \tfrac12 I\right)`),
+        math(String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu} - \tfrac12 I\right)`),
         " の各項の第 1 因子が定義により ",
         math(String.raw`\check{n}_\mu`),
         " である。",
@@ -287,7 +314,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
     conversion: {
       status: "added",
       notes: [
-        "009 章の def_number_operator の半整数運動量版。対になる添字は −μ ではなく 1−μ である（def_half_integer_modes (3)）。",
+        "009 章の def_number_operator の半整数運動量版。対になる添字は −μ ではなく M+1−μ である（conjugate_index_of_check_Z_Y、def_check_index_set (2)）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01。対を −μ に取り違えると冪等性が残差 2.59 で破れることも対照として確認した。",
       ],
     },
@@ -301,14 +328,19 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
     title: { tex: String.raw`\check{n}_\mu^2 = \check{n}_\mu` },
     labels: ["check_number_operator_idempotent"],
     statement: [
-      paragraph([math(String.raw`\mu \in \mathbb{Z}`), " について、"]),
+      paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について、",
+      ]),
       list([
         [
           math(String.raw`\text{(1)}\quad \left(\check\psi_\mu^\dagger\right)^2 = 0,
-\qquad \left(\check\psi_{1-\mu}\right)^2 = 0`),
+\qquad \left(\check\psi_{M+1-\mu}\right)^2 = 0`),
         ],
         [
-          math(String.raw`\text{(2)}\quad \check\psi_{1-\mu}\,\check\psi_\mu^\dagger = I - \check{n}_\mu`),
+          math(String.raw`\text{(2)}\quad \check\psi_{M+1-\mu}\,\check\psi_\mu^\dagger = I - \check{n}_\mu`),
         ],
         [math(String.raw`\text{(3)}\quad \check{n}_\mu^2 = \check{n}_\mu`)],
       ]),
@@ -326,9 +358,15 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         " より",
       ]),
       displayMath(
-        String.raw`0 = \left[\check\psi_\mu^\dagger, \check\psi_\mu^\dagger\right]_+
-= \check\psi_\mu^\dagger\check\psi_\mu^\dagger + \check\psi_\mu^\dagger\check\psi_\mu^\dagger
-= 2\left(\check\psi_\mu^\dagger\right)^2`,
+        String.raw`\begin{aligned}
+0
+&= \left[\check\psi_\mu^\dagger, \check\psi_\mu^\dagger\right]_+
+   \quad (\because \text{anticommutator\_of\_check\_psi の第 1 式で } \nu = \mu) \\
+&= \check\psi_\mu^\dagger\check\psi_\mu^\dagger + \check\psi_\mu^\dagger\check\psi_\mu^\dagger
+   \quad (\because \text{反交換子の定義}) \\
+&= 2\left(\check\psi_\mu^\dagger\right)^2
+   \quad (\because \text{同じ項の和})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`2 \neq 0`),
@@ -336,38 +374,44 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         math(String.raw`\left(\check\psi_\mu^\dagger\right)^2 = 0`),
         "。同じく第 3 式 ",
         math(String.raw`[\check\psi_\mu, \check\psi_\nu]_+ = 0`),
-        " を ",
-        math(String.raw`\mu = \nu = 1-\mu`),
-        "（すなわち添字 ",
-        math(String.raw`1-\mu \in \mathbb{Z}`),
-        " について）適用して ",
-        math(String.raw`\left(\check\psi_{1-\mu}\right)^2 = 0`),
+        " を、",
+        ref("def_check_index_set"),
+        " (2) により ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " に属する添字 ",
+        math(String.raw`M+1-\mu`),
+        " について（",
+        math(String.raw`\mu = \nu = M+1-\mu`),
+        " と取って）適用して ",
+        math(String.raw`\left(\check\psi_{M+1-\mu}\right)^2 = 0`),
         "。",
         ref("anticommutator_of_check_psi"),
         " は ",
-        math(String.raw`\mu, \nu \in \mathbb{Z}`),
-        " のすべてについて成り立つので、009 章の ",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        " のすべてについて成り立ち、共役添字 ",
+        math(String.raw`M+1-\mu`),
+        " も ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " に属するので、009 章の ",
         ref("number_operator_idempotent"),
-        " のように添字が定義域に入ることを確かめる必要は無い。",
+        " のように添字が定義域に入ることを個別に確かめる必要は無い。",
       ]),
       paragraph([
         "(2) ",
         ref("anticommutator_of_check_psi"),
         " の第 2 式 ",
-        math(String.raw`[\check\psi_\mu^\dagger, \check\psi_\nu]_+ = \delta^M_{(\mu+\nu,\,1)}\,I`),
+        math(String.raw`[\check\psi_\mu^\dagger, \check\psi_\nu]_+ = \delta_{\nu,\,M+1-\mu}\,I`),
         " において ",
-        math(String.raw`\nu = 1-\mu`),
-        " と取る。",
-        math(String.raw`\mu + (1-\mu) = 1 \equiv 1 \pmod M`),
-        " なので ",
-        ref("def_delta_M"),
-        " より ",
-        math(String.raw`\delta^M_{(\mu+(1-\mu),\,1)} = 1`),
-        " であり、",
+        math(String.raw`\nu = M+1-\mu`),
+        " と取る。このとき ",
+        math(String.raw`\delta_{M+1-\mu,\,M+1-\mu} = 1`),
+        " なので（**",
+        math(String.raw`\check{\mathcal{M}}`),
+        " へ絞ったので合同式の計算が要らない**）、",
       ]),
       displayMath(
-        String.raw`\check\psi_\mu^\dagger\check\psi_{1-\mu}
-+ \check\psi_{1-\mu}\check\psi_\mu^\dagger = I`,
+        String.raw`\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
++ \check\psi_{M+1-\mu}\check\psi_\mu^\dagger = I`,
       ),
       paragraph([
         "左辺第 1 項は ",
@@ -375,27 +419,28 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         " より ",
         math(String.raw`\check{n}_\mu`),
         " だから、移項して ",
-        math(String.raw`\check\psi_{1-\mu}\check\psi_\mu^\dagger = I - \check{n}_\mu`),
+        math(String.raw`\check\psi_{M+1-\mu}\check\psi_\mu^\dagger = I - \check{n}_\mu`),
         "。",
       ]),
       paragraph(["(3) (1)(2) を使って"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu^2
-&= \left(\check\psi_\mu^\dagger\check\psi_{1-\mu}\right)
-   \left(\check\psi_\mu^\dagger\check\psi_{1-\mu}\right) \\
-&= \check\psi_\mu^\dagger\left(\check\psi_{1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{1-\mu}
+&= \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)
+   \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)
+   \quad (\because \text{def\_check\_number\_operator}) \\
+&= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
    \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)\check\psi_{1-\mu}
+&= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)\check\psi_{M+1-\mu}
    \quad (\because \text{(2)}) \\
-&= \check\psi_\mu^\dagger\check\psi_{1-\mu}
-   - \check\psi_\mu^\dagger\,\check{n}_\mu\,\check\psi_{1-\mu}
+&= \check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+   - \check\psi_\mu^\dagger\,\check{n}_\mu\,\check\psi_{M+1-\mu}
    \quad (\because \text{行列の積の分配法則}) \\
 &= \check{n}_\mu
-   - \check\psi_\mu^\dagger\left(\check\psi_\mu^\dagger\check\psi_{1-\mu}\right)\check\psi_{1-\mu}
-   \quad (\because \check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{1-\mu}) \\
+   - \check\psi_\mu^\dagger\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)\check\psi_{M+1-\mu}
+   \quad (\because \check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M+1-\mu}) \\
 &= \check{n}_\mu
-   - \left(\check\psi_\mu^\dagger\right)^2\left(\check\psi_{1-\mu}\right)^2
+   - \left(\check\psi_\mu^\dagger\right)^2\left(\check\psi_{M+1-\mu}\right)^2
    \quad (\because \text{結合法則}) \\
 &= \check{n}_\mu - 0\cdot 0
    \quad (\because \text{(1)})
@@ -421,7 +466,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
     labels: ["check_number_operators_commute"],
     statement: [
       paragraph([
-        math(String.raw`\mu, \nu \in \{1,\dots,M\}`),
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         " が ",
         math(String.raw`\mu \neq \nu`),
         " を満たすとき、",
@@ -429,7 +474,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       list([
         [
           math(String.raw`\text{(1)}\quad \check\psi_\mu^\dagger\,\check{n}_\nu = \check{n}_\nu\,\check\psi_\mu^\dagger,
-\qquad \check\psi_{1-\mu}\,\check{n}_\nu = \check{n}_\nu\,\check\psi_{1-\mu}`),
+\qquad \check\psi_{M+1-\mu}\,\check{n}_\nu = \check{n}_\nu\,\check\psi_{M+1-\mu}`),
         ],
         [math(String.raw`\text{(2)}\quad \check{n}_\mu \check{n}_\nu = \check{n}_\nu \check{n}_\mu`)],
       ]),
@@ -437,81 +482,92 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
     proof: [
       paragraph([
         "Step 1（4 つの反交換関係）。",
-        math(String.raw`\mu, \nu \in \{1,\dots,M\}`),
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         " かつ ",
         math(String.raw`\mu \neq \nu`),
-        " なので ",
-        math(String.raw`1 \leq |\mu-\nu| \leq M-1`),
-        " であり、とくに ",
-        math(String.raw`\mu - \nu \not\equiv 0 \pmod M`),
-        "。よって ",
-        ref("def_delta_M"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\delta^M_{(\mu+(1-\nu),\,1)} = \delta^M_{(\mu-\nu,\,0)} = 0,
-\qquad
-\delta^M_{(\nu+(1-\mu),\,1)} = \delta^M_{(\nu-\mu,\,0)} = 0`,
-      ),
-      paragraph([
-        "である（",
-        math(String.raw`x \equiv 1 \pmod M`),
-        " と ",
-        math(String.raw`x-1 \equiv 0 \pmod M`),
-        " は同じ条件である）。",
+        " である。",
+        ref("def_check_index_set"),
+        " (2) より ",
+        math(String.raw`M+1-\mu, M+1-\nu \in \check{\mathcal{M}}`),
+        " なので、",
         ref("anticommutator_of_check_psi"),
         " を ",
         math(String.raw`(\mu,\nu)`),
         "、",
-        math(String.raw`(\mu,1-\nu)`),
+        math(String.raw`(\mu,M+1-\nu)`),
         "、",
-        math(String.raw`(\nu,1-\mu)`),
+        math(String.raw`(\nu,M+1-\mu)`),
         "、",
-        math(String.raw`(1-\mu,1-\nu)`),
-        " に適用すると",
+        math(String.raw`(M+1-\mu,M+1-\nu)`),
+        " の 4 通りに適用できる。まず対の条件を見る：",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-{\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0, &
-{\left[\check\psi_\mu^\dagger, \check\psi_{1-\nu}\right]_+}
-  &= \delta^M_{(\mu-\nu,\,0)}\,I = 0, \\
-{\left[\check\psi_{1-\mu}, \check\psi_\nu^\dagger\right]_+}
-  &= \delta^M_{(\nu-\mu,\,0)}\,I = 0, &
-{\left[\check\psi_{1-\mu}, \check\psi_{1-\nu}\right]_+} &= 0
+\delta_{M+1-\nu,\,M+1-\mu}
+&= \delta_{\mu,\,\nu}
+   \quad (\because M+1-\nu = M+1-\mu \iff \mu = \nu) \\
+&= 0
+   \quad (\because \mu \neq \nu)
 \end{aligned}`,
       ),
       paragraph([
-        "（第 3 式は ",
+        "である。**009 章および以前の版で必要だった合同式の書き換え（",
+        math(String.raw`\mu+(1-\nu) \equiv 1 \pmod M \iff \mu-\nu \equiv 0 \pmod M`),
+        "）は、添字を ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " に絞ったことで不要になっている**（",
+        ref("def_check_index_set"),
+        " (5)）。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+{\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0
+   \quad (\because \text{anticommutator\_of\_check\_psi の第 1 式}), \\
+{\left[\check\psi_\mu^\dagger, \check\psi_{M+1-\nu}\right]_+}
+  &= \delta_{M+1-\nu,\,M+1-\mu}\,I = 0
+   \quad (\because \text{anticommutator\_of\_check\_psi の第 2 式と直前の displayMath}), \\
+{\left[\check\psi_{M+1-\mu}, \check\psi_\nu^\dagger\right]_+}
+  &= \delta_{M+1-\mu,\,M+1-\nu}\,I = 0
+   \quad (\because \text{同第 2 式を } (\nu, M+1-\mu) \text{ へ適用し、反交換子の対称性}), \\
+{\left[\check\psi_{M+1-\mu}, \check\psi_{M+1-\nu}\right]_+} &= 0
+   \quad (\because \text{anticommutator\_of\_check\_psi の第 3 式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（第 3 式では ",
         ref("anticommutator_of_check_psi"),
         " の第 2 式を添字 ",
-        math(String.raw`(\nu, 1-\mu)`),
+        math(String.raw`(\nu, M+1-\mu)`),
         " に適用し、反交換子が引数の順序に依らないこと ",
         math(String.raw`[X,W]_+ = XW + WX = [W,X]_+`),
         " を使った。）すなわち、",
-        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{1-\mu}\}`),
+        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M+1-\mu}\}`),
         " と ",
-        math(String.raw`B \in \{\check\psi_\nu^\dagger, \check\psi_{1-\nu}\}`),
+        math(String.raw`B \in \{\check\psi_\nu^\dagger, \check\psi_{M+1-\nu}\}`),
         " のどの組み合わせでも ",
         math(String.raw`AB = -BA`),
         " が成り立つ。",
       ]),
       paragraph([
         "Step 2（(1) の証明）。",
-        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{1-\mu}\}`),
+        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M+1-\mu}\}`),
         " を取ると、Step 1 を 2 回使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 A\,\check{n}_\nu
-&= A\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu} \\
-&= \left(-\check\psi_\nu^\dagger A\right)\check\psi_{1-\nu}
+&= A\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
+   \quad (\because \text{def\_check\_number\_operator}) \\
+&= \left(-\check\psi_\nu^\dagger A\right)\check\psi_{M+1-\nu}
    \quad (\because A\check\psi_\nu^\dagger = -\check\psi_\nu^\dagger A) \\
-&= -\check\psi_\nu^\dagger\left(A\,\check\psi_{1-\nu}\right)
+&= -\check\psi_\nu^\dagger\left(A\,\check\psi_{M+1-\nu}\right)
    \quad (\because \text{結合法則}) \\
-&= -\check\psi_\nu^\dagger\left(-\check\psi_{1-\nu}A\right)
-   \quad (\because A\check\psi_{1-\nu} = -\check\psi_{1-\nu}A) \\
-&= \check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,A
-= \check{n}_\nu\,A
+&= -\check\psi_\nu^\dagger\left(-\check\psi_{M+1-\nu}A\right)
+   \quad (\because A\check\psi_{M+1-\nu} = -\check\psi_{M+1-\nu}A) \\
+&= \check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,A
+   \quad (\because (-1)^2 = 1) \\
+&= \check{n}_\nu\,A
+   \quad (\because \text{def\_check\_number\_operator})
 \end{aligned}`,
       ),
       paragraph([
@@ -520,24 +576,24 @@ A\,\check{n}_\nu
         " となって消える。",
         math(String.raw`A = \check\psi_\mu^\dagger`),
         " と ",
-        math(String.raw`A = \check\psi_{1-\mu}`),
+        math(String.raw`A = \check\psi_{M+1-\mu}`),
         " の両方でこれが成り立つ。",
       ]),
       paragraph(["Step 3（(2) の証明）。(1) を 2 回使って"]),
       displayMath(
         String.raw`\check{n}_\mu \check{n}_\nu
-= \check\psi_\mu^\dagger\left(\check\psi_{1-\mu}\,\check{n}_\nu\right)
-= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{1-\mu}\right)
-= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{1-\mu}
-= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{1-\mu}
-= \check{n}_\nu\,\check\psi_\mu^\dagger\check\psi_{1-\mu}
+= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\,\check{n}_\nu\right)
+= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{M+1-\mu}\right)
+= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{M+1-\mu}
+= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
+= \check{n}_\nu\,\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
 = \check{n}_\nu \check{n}_\mu`,
       ),
     ],
     conversion: {
       status: "added",
       notes: [
-        "009 章の number_operators_commute の半整数運動量版。反交換子の対が μ+ν ≡ 0 から μ+ν ≡ 1 (mod M) に変わるので、消えることを確かめる 2 つの δ は δ^M_{(μ+(1−ν),1)} = δ^M_{(μ−ν,0)} と δ^M_{(ν+(1−μ),1)} = δ^M_{(ν−μ,0)} である。",
+        "009 章の number_operators_commute の半整数運動量版。反交換子の対は ν = M+1−μ であり、添字を 𝓜̌ = {1,…,M} に絞ったので、消えることを確かめる δ は δ_{M+1−ν, M+1−μ} = δ_{μ,ν} = 0（μ ≠ ν）だけで済む。合同式の書き換えは要らない（def_check_index_set (5)）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（M=2,3,4,5、μ ≠ ν の全組、残差 ≤ 1.3e-15）。",
       ],
     },
@@ -556,7 +612,7 @@ A\,\check{n}_\nu
       paragraph([
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
         " と、相異なる ",
-        math(String.raw`\mu_1,\dots,\mu_k \in \{1,\dots,M\}`),
+        math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
         " について、",
       ]),
       displayMath(
@@ -609,7 +665,7 @@ A\,\check{n}_\nu
         " とし、相異なる ",
         math(String.raw`k-1`),
         " 個の添字については主張が成り立つと仮定する。相異なる ",
-        math(String.raw`\mu_1,\dots,\mu_k \in \{1,\dots,M\}`),
+        math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
         " を取り、",
       ]),
       displayMath(String.raw`P := \check{n}_{\mu_2}\check{n}_{\mu_3}\cdots\check{n}_{\mu_k}`),
@@ -623,7 +679,7 @@ A\,\check{n}_\nu
         " (1) より ",
         math(String.raw`\check\psi_{\mu_1}^\dagger`),
         " と ",
-        math(String.raw`\check\psi_{1-\mu_1}`),
+        math(String.raw`\check\psi_{M+1-\mu_1}`),
         " はどの ",
         math(String.raw`\check{n}_{\mu_j}`),
         " とも可換であり、したがって積 ",
@@ -637,13 +693,13 @@ A\,\check{n}_\nu
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-&= \mathrm{tr}\!\left(\check\psi_{\mu_1}^\dagger\,\check\psi_{1-\mu_1}\,P\right)
+&= \mathrm{tr}\!\left(\check\psi_{\mu_1}^\dagger\,\check\psi_{M+1-\mu_1}\,P\right)
    \quad (\because \text{定義}) \\
-&= \mathrm{tr}\!\left(\check\psi_{1-\mu_1}\,P\,\check\psi_{\mu_1}^\dagger\right)
+&= \mathrm{tr}\!\left(\check\psi_{M+1-\mu_1}\,P\,\check\psi_{\mu_1}^\dagger\right)
    \quad (\because \text{巡回性を } A = \check\psi_{\mu_1}^\dagger,\
-       B = \check\psi_{1-\mu_1}P \text{ に適用}) \\
-&= \mathrm{tr}\!\left(P\,\check\psi_{1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
-   \quad (\because \check\psi_{1-\mu_1} \text{ と } P \text{ が可換}) \\
+       B = \check\psi_{M+1-\mu_1}P \text{ に適用}) \\
+&= \mathrm{tr}\!\left(P\,\check\psi_{M+1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
+   \quad (\because \check\psi_{M+1-\mu_1} \text{ と } P \text{ が可換}) \\
 &= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_1}\right)\right)
    \quad (\because \text{check\_number\_operator\_idempotent (2)}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\,\check{n}_{\mu_1}\right)
@@ -687,7 +743,7 @@ A\,\check{n}_\nu
     labels: ["check_joint_eigenspace_decomposition"],
     statement: [
       paragraph([
-        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M} \in \{0,1\}^{\{1,\dots,M\}}`),
+        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M} \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対して",
       ]),
       displayMath(
@@ -706,12 +762,12 @@ A\,\check{n}_\nu
 \quad (\epsilon \neq \epsilon'), \qquad \check{Q}_\epsilon^2 = \check{Q}_\epsilon`),
         ],
         [
-          math(String.raw`\text{(2)}\quad \sum_{\epsilon \in \{0,1\}^{\{1,\dots,M\}}}
+          math(String.raw`\text{(2)}\quad \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}
 \check{Q}_\epsilon = I`),
         ],
         [
           math(String.raw`\text{(3)}\quad \check{n}_\nu \check{Q}_\epsilon
-= \epsilon_\nu \check{Q}_\epsilon \quad (\nu \in \{1,\dots,M\})`),
+= \epsilon_\nu \check{Q}_\epsilon \quad (\nu \in \check{\mathcal{M}})`),
         ],
         [
           math(String.raw`\text{(4)}\quad \mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 1,
@@ -719,7 +775,7 @@ A\,\check{n}_\nu
         ],
         [
           math(String.raw`\text{(5)}\quad \mathbb{C}^{2^M}
-= \bigoplus_{\epsilon \in \{0,1\}^{\{1,\dots,M\}}} \mathrm{im}\,\check{Q}_\epsilon`),
+= \bigoplus_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{im}\,\check{Q}_\epsilon`),
         ],
       ]),
       paragraph([
@@ -748,7 +804,7 @@ A\,\check{n}_\nu
     proof: [
       paragraph([
         "以下、",
-        math(String.raw`\mu \in \{1,\dots,M\}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " と ",
         math(String.raw`e \in \{0,1\}`),
         " に対して ",
@@ -768,11 +824,14 @@ A\,\check{n}_\nu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-R_\mu^{(1)}R_\mu^{(1)} &= \check{n}_\mu^2 = \check{n}_\mu = R_\mu^{(1)}, \\
+R_\mu^{(1)}R_\mu^{(1)} &= \check{n}_\mu^2 = \check{n}_\mu = R_\mu^{(1)}
+   \quad (\because \text{check\_number\_operator\_idempotent (3)}), \\
 R_\mu^{(0)}R_\mu^{(0)} &= \left(I-\check{n}_\mu\right)^2
-  = I - 2\check{n}_\mu + \check{n}_\mu^2 = I - \check{n}_\mu = R_\mu^{(0)}, \\
+  = I - 2\check{n}_\mu + \check{n}_\mu^2 = I - \check{n}_\mu = R_\mu^{(0)}
+   \quad (\because \text{scalar\_identity\_commutes と check\_number\_operator\_idempotent (3)}), \\
 R_\mu^{(1)}R_\mu^{(0)} &= \check{n}_\mu\left(I - \check{n}_\mu\right)
-  = \check{n}_\mu - \check{n}_\mu^2 = 0 = R_\mu^{(0)}R_\mu^{(1)}, \\
+  = \check{n}_\mu - \check{n}_\mu^2 = 0 = R_\mu^{(0)}R_\mu^{(1)}
+   \quad (\because \text{check\_number\_operator\_idempotent (3)}), \\
 R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
 \end{aligned}`,
       ),
@@ -797,7 +856,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         "Step 1（(1) の証明）。",
         math(String.raw`\epsilon \neq \epsilon'`),
         " なら、ある ",
-        math(String.raw`\nu \in \{1,\dots,M\}`),
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
         " で ",
         math(String.raw`\epsilon_\nu \neq \epsilon'_\nu`),
         "。因子はすべて可換なので、",
@@ -826,8 +885,8 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ]),
       displayMath(
         String.raw`I = \prod_{\mu=1}^{M}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
-= \sum_{\epsilon \in \{0,1\}^{\{1,\dots,M\}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
-= \sum_{\epsilon \in \{0,1\}^{\{1,\dots,M\}}} \check{Q}_\epsilon`,
+= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
+= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon`,
       ),
       paragraph([
         "（展開して現れる項は、各 ",
@@ -837,14 +896,14 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         " と ",
         math(String.raw`R_\mu^{(0)}`),
         " のどちらを選ぶかの全ての選び方に 1 対 1 に対応し、その選び方の全体が ",
-        math(String.raw`\{0,1\}^{\{1,\dots,M\}}`),
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
         "（要素数 ",
         math(String.raw`2^M`),
         "）である。）",
       ]),
       paragraph([
         "Step 3（(3) の証明）。",
-        math(String.raw`\nu \in \{1,\dots,M\}`),
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
         " を固定する。因子はすべて可換なので",
       ]),
       displayMath(
@@ -868,15 +927,15 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ]),
       paragraph([
         "Step 4（(4) の証明）。",
-        math(String.raw`T := \{\mu \in \{1,\dots,M\} \mid \epsilon_\mu = 1\}`),
+        math(String.raw`T := \{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\}`),
         " とおくと ",
         math(String.raw`\check{Q}_\epsilon = \left(\prod_{\mu \in T} \check{n}_\mu\right)
 \prod_{\mu \notin T}\left(I - \check{n}_\mu\right)`),
         "。第 2 の積を分配法則で展開すると",
       ]),
       displayMath(
-        String.raw`\prod_{\mu \in \{1,\dots,M\}\setminus T}\left(I - \check{n}_\mu\right)
-= \sum_{S \subseteq \{1,\dots,M\}\setminus T} (-1)^{|S|}
+        String.raw`\prod_{\mu \in \check{\mathcal{M}}\setminus T}\left(I - \check{n}_\mu\right)
+= \sum_{S \subseteq \check{\mathcal{M}}\setminus T} (-1)^{|S|}
   \prod_{\mu \in S} \check{n}_\mu`,
       ),
       paragraph([
@@ -897,15 +956,18 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-&= \sum_{S \subseteq \{1,\dots,M\}\setminus T} (-1)^{|S|}\,
-   \mathrm{tr}\!\left(\prod_{\mu \in T \cup S} \check{n}_\mu\right) \\
-&= \sum_{S \subseteq \{1,\dots,M\}\setminus T} (-1)^{|S|}\, 2^{M - |T| - |S|} \\
+&= \sum_{S \subseteq \check{\mathcal{M}}\setminus T} (-1)^{|S|}\,
+   \mathrm{tr}\!\left(\prod_{\mu \in T \cup S} \check{n}_\mu\right)
+   \quad (\because \text{直前の展開と trace\_basic\_properties (1)}) \\
+&= \sum_{S \subseteq \check{\mathcal{M}}\setminus T} (-1)^{|S|}\, 2^{M - |T| - |S|}
+   \quad (\because \text{trace\_of\_check\_number\_operator\_product}) \\
 &= 2^{M-|T|}\sum_{j=0}^{M-|T|}\binom{M-|T|}{j}(-1)^{j}\,2^{-j}
-   \quad \left(\because \left|\{1,\dots,M\}\setminus T\right| = M - |T|
+   \quad \left(\because \left|\check{\mathcal{M}}\setminus T\right| = M - |T|
    \text{ で、大きさ } j \text{ の部分集合は } \tbinom{M-|T|}{j} \text{ 個}\right) \\
 &= 2^{M-|T|}\left(1 - \tfrac{1}{2}\right)^{M-|T|}
    \quad (\because \text{二項定理}) \\
 &= 2^{M-|T|}\cdot 2^{-(M-|T|)} = 1
+   \quad \left(\because \left(\tfrac12\right)^{M-|T|} = 2^{-(M-|T|)}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -954,7 +1016,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ]),
       paragraph([
         "（次元の整合：",
-        math(String.raw`\left|\{0,1\}^{\{1,\dots,M\}}\right| = 2^M`),
+        math(String.raw`\left|\{0,1\}^{\check{\mathcal{M}}}\right| = 2^M`),
         " 個の空間がそれぞれ ",
         math(String.raw`1`),
         " 次元で、合計 ",
@@ -982,7 +1044,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
     labels: ["eigenvalues_of_check_Vprime"],
     statement: [
       paragraph([
-        math(String.raw`\epsilon \in \{0,1\}^{\{1,\dots,M\}}`),
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対して",
       ]),
       displayMath(
@@ -1008,7 +1070,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ]),
       displayMath(
         String.raw`\left\{\,e^{\check{g}(\epsilon)} \ \middle|\
-\epsilon \in \{0,1\}^{\{1,\dots,M\}}\,\right\}
+\epsilon \in \{0,1\}^{\check{\mathcal{M}}}\,\right\}
 \qquad (\text{各 } \epsilon \text{ が重複度 } 1 \text{ を与え、総個数 } 2^M)`,
       ),
       paragraph([
@@ -1019,15 +1081,9 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       paragraph([
         "**「固有値がすべて相異なる」ことは主張しない。** ",
         ref("periodicity_of_check_fermi"),
-        " (1)(3) より ",
-        math(String.raw`\gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`),
-        " であり、",
-        math(String.raw`1-\mu \equiv M+1-\mu \pmod M`),
-        " と同 (1) の ",
-        math(String.raw`M`),
-        " 周期性から ",
+        " (3) より ",
         math(String.raw`\gamma(\tilde\theta_{M+1-\mu}) = \gamma(\tilde\theta_\mu)`),
-        " が従うので、",
+        " なので、",
         math(String.raw`\epsilon`),
         " の成分を ",
         math(String.raw`\mu \leftrightarrow M+1-\mu`),
@@ -1065,7 +1121,9 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
    \quad (\because \text{同時固有空間分解 (3)}) \\
 &= \left(\sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
    \left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
-= \check{g}(\epsilon)\,\check{Q}_\epsilon
+   \quad (\because \text{有限和のくくり出し}) \\
+&= \check{g}(\epsilon)\,\check{Q}_\epsilon
+   \quad (\because \check{g} \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1232,7 +1290,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
    \quad (\because \text{トレースの線型性}) \\
 &= \sum_{\epsilon} e^{\check{g}(\epsilon)}\,\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
    \quad (\because \check{V}'\check{Q}_\epsilon = e^{\check{g}(\epsilon)}\check{Q}_\epsilon) \\
-&= \sum_{\epsilon \in \{0,1\}^{\{1,\dots,M\}}} e^{\check{g}(\epsilon)}
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} e^{\check{g}(\epsilon)}
    \quad (\because \mathrm{tr}(\check{Q}_\epsilon) = 1)
 \end{aligned}`,
       ),
@@ -1244,7 +1302,8 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ]),
       displayMath(
         String.raw`e^{\check{g}(\epsilon)} = \prod_{\mu=1}^{M}
-\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)`,
+\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+\quad (\because \text{theorem\_exp\_product}\ (n=1))`,
       ),
       paragraph([
         math(String.raw`\epsilon`),
@@ -1258,10 +1317,11 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\epsilon \in \{0,1\}^{\{1,\dots,M\}}} e^{\check{g}(\epsilon)}
+\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} e^{\check{g}(\epsilon)}
 &= \prod_{\mu=1}^{M}
    \left(\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
-   + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right) \\
+   + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
+   \quad (\because \text{直前の積表示と、有限個の因子の積の展開}) \\
 &= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
    \quad \left(\because \cosh x = \frac{e^x + e^{-x}}{2}\right)
 \end{aligned}`,
@@ -1540,6 +1600,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
 &= (2s_2)^{M/2}\,\mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)
    \quad \left(\because \text{可換なので } \exp\!\left(\tfrac12 S_1\right)^2 = \exp(S_1)\right) \\
 &= (2s_2)^{M/2}\,\tau
+   \quad (\because \tau := \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right))
 \end{aligned}`,
       ),
       paragraph([
@@ -1717,7 +1778,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
     labels: ["eigenvalues_of_V_plus"],
     statement: [
       paragraph([
-        math(String.raw`\epsilon \in \{0,1\}^{\{1,\dots,M\}}`),
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対して",
       ]),
       displayMath(
@@ -1948,7 +2009,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         "この ",
         math(String.raw`M`),
         " 個の値は互いに相異なる。実際 ",
-        math(String.raw`\mu, \nu \in \{1,\dots,M\}`),
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         "、",
         math(String.raw`\mu \neq \nu`),
         " なら ",
@@ -2004,7 +2065,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         "(2) ",
         math(String.raw`\epsilon \neq (1,\dots,1)`),
         " とすると、ある ",
-        math(String.raw`\mu_0 \in \{1,\dots,M\}`),
+        math(String.raw`\mu_0 \in \check{\mathcal{M}}`),
         " で ",
         math(String.raw`\epsilon_{\mu_0} = 0`),
         " である。",

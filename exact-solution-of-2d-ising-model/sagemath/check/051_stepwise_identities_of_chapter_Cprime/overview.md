@@ -85,6 +85,24 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
 - 判定閾値は `TOL = 1e-8`（`check_04` のみ `1e-7`。`V_2` の前因子 `(2 s_2)^{M/2}` と
   `exp(K_1 ...)` により行列のスケールが開くため）
 
+## μ の量化範囲の絞り込み（2026-07-27）
+
+章 C′ の主張の量化範囲を `μ ∈ ℤ` から `𝓜̌ = {1,…,M}`（`def_check_index_set`）へ絞り、
+共役添字を `1−μ` から `M+1−μ` へ書き換えたのに合わせて、各段の検証を更新し
+**再実行した**（`run-log.txt` はその出力）。
+
+- check_01（013 章）: `def_check_index_set` (1)〜(5) と `conjugate_index_of_check_Z_Y`
+  (1)(2)(3) の各段を追加。`H1_H2_via_check_Z_Y` の `Ž_{1−μ}` の 3 段は、
+  `Ž_{M+1−μ}` の **2 段**（`def_half_integer_modes` → `conjugate_index_of_check_Z_Y` (2)）に
+  置き換わった（合同式・符号反転の段が消えた）。段数 92 → 105。
+- check_04（016 章）: `periodicity_of_check_fermi` の (1)(2)(3) の組み替えに追随。
+  `anticommutator_of_check_psi` の Step 1 と `action_of_T_check_Vprime_on_check_psi` の
+  Step 1 / Step 1' で、合同式のデルタと `M+1−μ` 形のデルタが一致することを 1 段として検証。
+  段数 58 → 62。
+- `μ` を走らせる範囲も、主張が `𝓜̌` 上のものになった箇所は `𝓜̌` に合わせた
+  （`def_half_integer_modes` (1)(2)(3) の検証だけは `μ = 0, −1, M+1` を含めたまま残してある。
+  これは `μ ∈ ℤ` で量化してよい 2 主張のうちの 1 つだからである）。
+
 ## 実行
 
 ```

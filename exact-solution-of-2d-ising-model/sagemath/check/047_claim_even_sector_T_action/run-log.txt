@@ -1,6 +1,7 @@
 # 実行ログ — sagemath/check/047_claim_even_sector_T_action
-# 実行日: 2026-07-26 / SageMath version 10.6, Release Date: 2025-03-31 / macOS (Darwin 25.4.0)
+# 実行日: 2026-07-27 / SageMath version 10.6, Release Date: 2025-03-31 / macOS (Darwin 25.4.0)
 # 実行コマンド: for f in sagemath/check/047_claim_even_sector_T_action/check_*.sage; do sage "$f"; done
+# 注: μ の量化範囲を ℤ から 𝓜̌ = {1,…,M} へ絞り、共役添字を 1−μ から M+1−μ へ書き換えた版で再実行したもの。
 
 ##### check_01_nested_commutators.sage
 === n 重交換子（生成子 K1 H1^{(+)}, K2* H2）と、そのスケール済み版 ===
