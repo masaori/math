@@ -1,5 +1,28 @@
 # MEMORY
 
+## cycle 14 完了（2026-07-26, 目標=002 の G1 解消。未達だが理由を2点へ絞った）
+
+- **T1 命題 V（初等証明）**: `outputs/reports/cycle14_T1_vp_growth_two_variable.md`。
+  $a_{p^n}\equiv P(1,\dots,1)^{p^{dn}}\pmod p$ から **$v_p(a_{p^n})>0\iff p\mid P(1,\dots,1)$**。
+  $\bmod p$ で $z^{p^n}-1=(z-1)^{p^n}$ となり終結式が潰れるだけ。$\mathbb{Q}_p$ も代数的整数論も不使用。
+  併せて **cycle 13 の content 判定式が $d=2$ で崩れる反例**（content=1 でも増大）と
+  **レジームの三分法**（$p\nmid P(1,1)$ 自明／$p\mid P(1,1)\ne0$ 非自明／$P(1,1)=0$ トーラス零点）を確定。
+  敵対的レビューで**誤り3件を検出・訂正**（Deninger との包含関係、4段フィットの数値的誤り、$X^2$ 係数の未証明断定）。
+- **T3 $(★_2)$ と命題 W**: 起動事故で**2経路が独立に走り同じ境界に到達**
+  （`cycle14_T3_two_variable_criterion.md` 第1経路 / `cycle14_T3_Zl2_tower_criterion.md` 第2経路）。
+  下界 $a\ge v_\ell(\mathrm{content})$ は自証明、**上界は自前では証明できない**（外部定理に依拠）。
+  第1経路は非退化条件下で**完全な閉形式** $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^{2n}+\frac{k(\ell+1)}{\ell-1}\ell^n-2n+\nu$（命題 W）。
+  $L\times L$ トーラスの $\ell=3$ 塔で $\mathrm{ord}_3(\tau(3^n))=4\cdot3^n-2n-4$（独立検算、$n=0,1,2$ で 0,6,28）。$\ell=2$ は退化で射程外。
+  **文献 Kataoka arXiv:2606.03579 を発見**（$\mathbb{Z}_p^d$ グラフ被覆の主要係数の明示公式）。
+- **T1 命題 T の一般化**: `outputs/reports/cycle14_T1_proposition_T_generalization.md`。
+  定理 A–F を証明（判定条件／次元の漸化式／$L$ 奇なら任意の $d$ で $4\mid v_p$／命題 T の10行証明／
+  部分トーラス下界 $\ge L^{\lfloor d/p\rfloor}-1$／$p=2,d=2$ が特別な理由＝$\bmod2$ で零点集合が2部分トーラスの合併）。
+  **負の結果も確定**: 奇素数に clean な法則は無い（$L=13,p=5$ 等）、$d\ge3$ で等号不成立、$c(L^{d-1}-1)$ 型は誤り。
+- **新規性はいずれも主張しない**（命題 V は folklore の可能性、命題 W は Kataoka が同種公式、定理 A–F は本文未確認）。
+- **002 の G1 は依然未達**。残るのは **(a) グラフのラプラシアンでない一般の $P$ で $p\mid P(1,1)$ の増大の完全な形、
+  (b) $\ell^{2n}$ 係数の上界方向（Kataoka 本文未取得）** の2点のみ。
+- cycle15 step列: Kataoka 本文取得で (b) を閉じる / 一般の $P$ で (a) / $d=3,p=2$ の追加解の分類。
+
 ## cycle 13 完了（2026-07-26, 証明のサイクル）
 
 - **T1 step1（誤りの検出＝最大の成果）**: `outputs/reports/cycle13_T1_padic_entropy_generality.md`。
