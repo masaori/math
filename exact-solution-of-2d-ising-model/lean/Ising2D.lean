@@ -29,3 +29,5 @@ import Ising2D.Part008.Claim027_EigenATheta
 import Ising2D.Part008.Definition030_Fermi
 import Ising2D.Abstract.Fermion
 import Ising2D.Part008.Claim032_AnticommutatorPsiAbstract
+import Ising2D.Abstract.ExpConjugation
+import Ising2D.Part008.Claim006_ExpConjugation

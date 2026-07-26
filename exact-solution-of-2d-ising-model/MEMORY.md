@@ -182,11 +182,53 @@ README のゴール設定 4 節が要求する「具体版＋抽象版の 2 本�
 
 ### 引き継ぎ
 
-- **`AMat` と `Amat` の二重定義を一本化する。** 橋渡し補題は既に
-  `Ising2D.Amat_eq_AMat`（`lean/Ising2D/Part008/Definition030_Fermi.lean`）にある。
-  既存ファイルのリファクタなので「具体版＋抽象版の 2 本立て」整備の担当セッションの作業とする。
+- ~~**`AMat` と `Amat` の二重定義を一本化する。**~~ → **完了（下記「完了（2026-07-26）:
+  `A(θ)` の二重定義の一本化」を参照）。**
 - **他の主張にも抽象版が無いものが多く残っている**（README 8 節）。本追補と同じ要領で、
   既存の具体版を消さずに抽象版を別ファイルへ足し、系として具体版を導く形が使える。
+
+---
+
+## 完了（2026-07-26）: `A(θ)` の二重定義を `AMat` へ一本化し、原文の穴 5 件を docs/tasks へ書き出した
+
+### (1) `A(θ)` の二重定義の解消
+
+`Ising2D.Amat`（複素パラメータ 5 個版）を削除し、`Ising2D.AMat`（`IsingConst` と実 θ 版）に
+一本化した。詳細な変更内容は `lean/README.md` の「`A(θ)` の二重定義（解消済み・2026-07-26）」に記録。
+要点だけ:
+
+- `Part008/Definition016_TV.lean` が `Part008/Definition019_ThetaGamma.lean` を import。
+- 旧 `B1_mul_B2_mul_B1_eq_Amat` を `B1_mul_B2_mul_B1_eq_explicit`（重い行列計算。証明は元のまま）と
+  `B1_mul_B2_mul_B1_eq_AMat`（`AMat` への cast）に分割。
+- `TV_hatZ_hatY_of_action` / `..._of_action'` の作用行列を `AMat K θ` へ。
+- `Definition030_Fermi.lean` 末尾の橋渡し 3 補題は不要になったので削除。
+- `scripts/check-no-sorry.sh` の `targets` も整合させた。
+
+`lake build` 成功、`bash lean/scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
+
+### (2) 原文の穴 5 件の一次情報を `docs/tasks/2026-07_original-text-gaps/` へ
+
+**本文（`structured-latex/content/`）は編集していない。修正は別セッションの担当。**
+各ファイルに (a) 対象ブロックの id と label、(b) 修正後のステートメント案、
+(c) 反例・数値検算・対応する Lean 定理名 を書いた。
+
+**5 件とも解消済みで、本文の修正作業は残っていない。**
+
+- 調査に着手した時点で 3 件（010・020・040）は既に解消されていた。
+- 残る 2 件（030 `det_A_theta` / 050 `anticommutator_of_psi`）は調査時点で未解消だったが、
+  並行セッションのコミット `733a5ee`（「008: Lean 形式化が検出した本文の穴 5 件を解消」）が
+  本スコープの修正案とほぼ同じ形で解消した（030 は `def_A_theta` から直接 det を計算して
+  (i) c₁²−s₁²=1 (ii) (c₂*)²−(s₂*)²=1 (iii) c₂s₂*=c₂* を明示、050 は γ₂ の 2π 周期性を
+  Step 0 として追加）。
+
+記録として残した重要な訂正 2 点:
+
+- **050 の当初の指摘「平方根の分枝の一致を暗黙に仮定」は不正確**。本リポジトリの √ は
+  `def_sqrt_cc` の単一値写像 ℂ→ℂ なので分枝の不一致は起こらない。実際に飛んでいたのは
+  手前の一段「μ+ν ≡ 0 (mod M) すなわち θ_ν = −θ_μ」で、正しくは θ_ν = −θ_μ + 2kπ。
+  反例: M = 4, μ = 1, ν = 3 で θ_ν − (−θ_μ) = 2π（γ₂ の値は 2π 周期性により一致する）。
+- **`factorization_of_A_theta` の proof が作用素の等式から行列の等式へ飛んでいる点は未解消**
+  （Ẑ, Ŷ の線型独立性が要る）。ただし `det_A_theta` はもうそこに依存していない。
 ## 完了（2026-07-26）: 群の一般論一式を本文から排除した（点検レポート A-5 と A-6 の part2 分）
 
 `docs/tasks/goal-alignment-audit.md` の A-5（群の一般論が本文にある）と
@@ -1298,3 +1340,65 @@ $\mathrm{Aut}(G)$ が Lie 群で $\mathrm{End}(\mathfrak{g})$ がその Lie 環�
 「暫定」proof は、いずれも `matrix_exp_conjugation` を根拠に完全証明へ書き換えて解消した。
 詳細は本ファイル冒頭の「完了（2026-07-26）: `todo()` 以外の形で残っていた未完 4 箇所」を見よ。
 なお `exp_conjugation_proof_002`（一般 Lie 群版）は上記の根拠により **`todo()` のまま残置**である。
+
+---
+
+## 完了（2026-07-26・追補2）: `exp(X) A exp(-X)` の級数展開（`<exp_X_Y_exp_-X>`）を Lean で形式化
+
+`Definition016_TV.lean` / `Definition030_Fermi.lean` で仮定に持ち上げてある `T_V_hatZ_hatY` を
+閉じるための土台。**既存 Lean ファイルは変更せず**（`Ising2D.lean` の import 行追加と
+`scripts/check-no-sorry.sh` の targets 追記のみ）、新規 2 ファイルで 2 本立てにした。
+
+- 抽象版 `lean/Ising2D/Abstract/ExpConjugation.lean`（`Ising2D.Abstract`）
+- 具体版 `lean/Ising2D/Part008/Claim006_ExpConjugation.lean`（`Mat(2,ℂ)^{⊗M}`、抽象版の系）
+
+### 証明の骨格（リー環を使わない・級数展開ルート）
+
+左乗法 `L_X : A ↦ X A` と右乗法 `R_X : A ↦ A X` は**線型作用素として可換**（結合律だけで出る）。
+`ad X = L_X - R_X` なので、可換な作用素の指数法則から `exp(ad X) = exp(L_X) ∘ exp(-R_X)`。
+`(L_X)^n = L_{X^n}`, `(R_X)^n = R_{X^n}` と `L`, `R` の連続線型性から
+`exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}`。よって `exp(ad X)(A) = exp(X) A exp(-X)`。
+**`L` が代数準同型であることすら使っていない**（冪の式と連続線型性だけ）。右乗法は反同型だが
+`(R_X)^n = R_{X^n}` は左乗法と同形なので、反対環 `Aᵐᵒᵖ` を経由する必要が無い。
+
+### 導出して確定させた係数（後段で必ず使う）
+
+`ad X z = α y`, `ad X y = β z` で `s^2 = αβ` のとき
+
+```
+exp(X) z exp(-X) = cosh(s) z + α sinhc(s) y
+exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z
+```
+
+`sinhc(s) := sinh(s)/s`（`s = 0` では `1`。`Ising2D.Abstract.sinhc`）。`sinh(s)/s` のままだと
+`s = 0` で 0 割りになるので分けて定義した。冪級数 `sinhc(s) = Σ_k s^{2k}/(2k+1)!` も証明済み
+（`Abstract.hasSum_sinhc`）。
+
+原文 `<extract_taylor_coefficient_of_Z_Y>` の (h1.z) `cosh(K_1)Ẑ_μ + i e^{-iθ_μ} sinh(K_1)Ŷ_μ` は
+`s = K_1`, `α = i e^{-iθ_μ}K_1`, `β = -i e^{iθ_μ}K_1`（`αβ = K_1^2 = s^2`）の場合として
+上式から出る。**すなわち原文の cosh/sinh の形は正しい。**
+
+### 次に必要なもの（`T_V_hatZ_hatY` を無条件にするために残っているのはこれだけ）
+
+`<commutator_of_H_and_Z_Y>`（1 重交換子 `[i K_1 H_1^{(±)}/2, Ẑ_μ^{(±)}]` 等の具体計算）。
+これを `Ising2D.matExp_conj_two_dim_z` / `..._y` に代入すれば
+`<extract_taylor_coefficient_of_Z_Y>` の 4 式がそのまま出て、
+`TV_hatZ_hatY_of_action` の仮定 `hT1`, `hT2` と `TV_psiDag_of_action` の `hT` が外せる。
+
+### 原文について気づいたこと（穴ではない）
+
+`<exp_X_Y_exp_-X>` の statement は `exp(X)` の正則性を述べるが、逆行列が `exp(-X)` である
+ことは `<matrix_exp_conjugation>` (3) に委ねている。Lean 側は `Ising2D.matExpUnits` が
+`exp X` を単元として与え逆元が定義から `exp(-X)` なので、この点に穴は無い
+（`Ising2D.matExpUnits_conj_eq_tsum`）。
+
+### 実装上の注意（次に触る人へ）
+
+`Matrix` にはノルムの標準的な選び方が無いため、抽象版（ℂ 上の完備ノルム環が前提）を
+`TensorPow M` へ特殊化するには `open scoped Matrix.Norms.Operator`（`l^∞` 作用素ノルム）で
+局所的に instance を入れる必要がある。**公開する定理の statement にはこの instance を
+持ち込まない**ため、mathlib の `Matrix.exp_add_of_commute` と同じ形で
+「statement は instance 無しで書き、証明だけ scoped instance 付きの補題へ委ねる」構成にし、
+照合のため `set_option backward.isDefEq.respectTransparency false` を使っている。
+`open scoped ... in by ...`（tactic への `in`）では instance が入らないので、
+**scoped instance を要する補題は独立した宣言として `open scoped ... in theorem` で書くこと。**
