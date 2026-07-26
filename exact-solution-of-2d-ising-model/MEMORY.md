@@ -96,11 +96,49 @@ README のゴール設定 4 節が要求する「具体版＋抽象版の 2 本�
 
 ### 引き継ぎ
 
-- **`AMat` と `Amat` の二重定義を一本化する。** 橋渡し補題は既に
-  `Ising2D.Amat_eq_AMat`（`lean/Ising2D/Part008/Definition030_Fermi.lean`）にある。
-  既存ファイルのリファクタなので「具体版＋抽象版の 2 本立て」整備の担当セッションの作業とする。
+- ~~**`AMat` と `Amat` の二重定義を一本化する。**~~ → **完了（下記「完了（2026-07-26）:
+  `A(θ)` の二重定義の一本化」を参照）。**
 - **他の主張にも抽象版が無いものが多く残っている**（README 8 節）。本追補と同じ要領で、
   既存の具体版を消さずに抽象版を別ファイルへ足し、系として具体版を導く形が使える。
+
+---
+
+## 完了（2026-07-26）: `A(θ)` の二重定義を `AMat` へ一本化し、原文の穴 5 件を docs/tasks へ書き出した
+
+### (1) `A(θ)` の二重定義の解消
+
+`Ising2D.Amat`（複素パラメータ 5 個版）を削除し、`Ising2D.AMat`（`IsingConst` と実 θ 版）に
+一本化した。詳細な変更内容は `lean/README.md` の「`A(θ)` の二重定義（解消済み・2026-07-26）」に記録。
+要点だけ:
+
+- `Part008/Definition016_TV.lean` が `Part008/Definition019_ThetaGamma.lean` を import。
+- 旧 `B1_mul_B2_mul_B1_eq_Amat` を `B1_mul_B2_mul_B1_eq_explicit`（重い行列計算。証明は元のまま）と
+  `B1_mul_B2_mul_B1_eq_AMat`（`AMat` への cast）に分割。
+- `TV_hatZ_hatY_of_action` / `..._of_action'` の作用行列を `AMat K θ` へ。
+- `Definition030_Fermi.lean` 末尾の橋渡し 3 補題は不要になったので削除。
+- `scripts/check-no-sorry.sh` の `targets` も整合させた。
+
+`lake build` 成功、`bash lean/scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
+
+### (2) 原文の穴 5 件の一次情報を `docs/tasks/2026-07_original-text-gaps/` へ
+
+**本文（`structured-latex/content/`）は編集していない。修正は別セッションの担当。**
+各ファイルに (a) 対象ブロックの id と label、(b) 修正後のステートメント案、
+(c) 反例・数値検算・対応する Lean 定理名 を書いた。
+
+現物を読んで判定した結果、**5 件のうち 3 件は既に原文側が修正済みだった**（010・020・040）。
+残る 2 件が要修正:
+
+- **030（`det_A_theta`）**: 必要な双対関係 `c₂s₂* = c₂*` は本文に
+  `duality_c2_star_eq_s2_star_c2` として入っており `T_V_hatZ_hatY` の proof で使われているが、
+  `det_A_theta` が参照している `factorization_of_A_theta` の proof が実質空で、
+  det A = 1 が何に依存するのかを本文から追えない。参照先の張り替えが要る。
+- **050（`anticommutator_of_psi`）**: 当初の指摘「平方根の分枝の一致を暗黙に仮定」は**誤り**。
+  本リポジトリの √ は `def_sqrt_cc` の単一値関数なので分枝の不一致は起こらない。
+  実際に飛んでいるのは手前の一段「μ+ν ≡ 0 (mod M) すなわち θ_ν = −θ_μ」で、
+  正しくは θ_ν = −θ_μ + 2πk。γ₂ の**一般の 2π 周期性**の claim を立てて参照する必要がある
+  （本文にある `gamma2_theta_M_periodicity` は μ = ±M の特殊形で使えない）。
+  反例: M = 4, μ = 1, ν = 3 で θ_ν − (−θ_μ) = 2π。
 ## 完了（2026-07-26）: 群の一般論一式を本文から排除した（点検レポート A-5 と A-6 の part2 分）
 
 `docs/tasks/goal-alignment-audit.md` の A-5（群の一般論が本文にある）と

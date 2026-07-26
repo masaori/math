@@ -251,17 +251,34 @@ EOF
 | `Ising2D.ActsBy.comp` | 合成則 `Q P`（原文の `B_1 B_2 B_1` の根拠） | `T_V_hatZ_hatY` の証明 |
 | `Ising2D.ActsBy.eigen` | **固有ベクトルの移送**（`B v = λ v ⇒ T(v_0 z + v_1 y) = λ(⋯)`） | 後段（`ψ` が `V` の固有ベクトル）への一般補題 |
 | `Ising2D.B1mat` / `B2mat` | `B_1(θ)`, `B_2` | `T_V_hatZ_hatY` の証明 |
-| `Ising2D.B1_mul_B2_mul_B1_eq_Amat` | `B_1(θ) B_2 B_1(θ) = A(θ)` | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
-| `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**） | `T_V_hatZ_hatY` |
+| `Ising2D.B1_mul_B2_mul_B1_eq_explicit` | `B_1(θ) B_2 B_1(θ)` の 4 成分の明示計算（5 個の複素パラメータで書いた右辺） | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
+| `Ising2D.B1_mul_B2_mul_B1_eq_AMat` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`AMat` 版。上を実パラメータ・実 `θ` へ cast したもの） | 同上 |
+| `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**。作用行列は `AMat K θ`） | `T_V_hatZ_hatY` |
 
-> **`A(θ)` の二重定義（未解消・引き継ぎ事項）**: `A(θ)` は `Ising2D.Amat`
+> **`A(θ)` の二重定義（解消済み・2026-07-26）**: 以前は `A(θ)` が `Ising2D.Amat`
 > （`Part008/Definition016_TV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
-> （`Part008/Definition019_ThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっている。
-> 一本化は既存ファイルのリファクタになるため、**既存ファイルは変更せず**、新規ファイル
-> `Part008/Definition030_Fermi.lean` の末尾に橋渡し（`Amat_eq_AMat`、`B1_mul_B2_mul_B1_eq_AMat'`、
-> `TV_hatZ_hatY_of_action_AMat`）を置くにとどめた。
-> 接続に要るのは、モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
-> `Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけである。
+> （`Part008/Definition019_ThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっており、
+> 名前が大文字小文字違いだけで紛らわしかった。**`AMat` に一本化し `Amat` を削除した。**
+> 現在 `A(θ)` の定義は `Ising2D.AMat` ただ 1 つである。
+>
+> 具体的な変更:
+>
+> - `Part008/Definition016_TV.lean` が `Part008/Definition019_ThetaGamma.lean` を import するようにした
+>   （`Definition019` は mathlib 以外に依存しないので循環しない）。
+> - `Ising2D.Amat` の定義を削除。`B1_mul_B2_mul_B1_eq_Amat` は
+>   **`B1_mul_B2_mul_B1_eq_explicit`**（右辺を `Amat` の代わりに同じ内容の `!![…]` リテラルで書いた版。
+>   証明は元のまま）と、それを `AMat` へ移す **`B1_mul_B2_mul_B1_eq_AMat`** の 2 本に分けた。
+>   重い行列計算（`maxHeartbeats 2000000`）は前者に閉じている。
+> - `TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'` のステートメントを
+>   `(K : IsingConst) … (θ : ℝ)` を取り作用行列が `AMat K θ` になる形へ移した。
+> - これにより不要になった橋渡し補題（`Part008/Definition030_Fermi.lean` 末尾の
+>   `Amat_eq_AMat` / `B1_mul_B2_mul_B1_eq_AMat'` / `TV_hatZ_hatY_of_action_AMat`）を削除した。
+>   `Amat_eq_AMat` の cast の証明（`Complex.ofReal_cos` / `Complex.ofReal_sin` /
+>   `Complex.exp_mul_I` による三角関数の cast）は `B1_mul_B2_mul_B1_eq_AMat` の中へ移してある。
+> - `scripts/check-no-sorry.sh` の `targets` から `Ising2D.Amat`,
+>   `Ising2D.B1_mul_B2_mul_B1_eq_Amat`, `Ising2D.Amat_eq_AMat`,
+>   `Ising2D.B1_mul_B2_mul_B1_eq_AMat'`, `Ising2D.TV_hatZ_hatY_of_action_AMat` を削除し、
+>   `Ising2D.B1_mul_B2_mul_B1_eq_explicit`, `Ising2D.B1_mul_B2_mul_B1_eq_AMat` を追加した。
 | `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
 | `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
 | `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
@@ -312,7 +329,7 @@ EOF
 | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
 | `transfer_matrix_001_definition_symbols` と `transfer_matrix_011_definition_H1_H2`（`V_2` の 2 つの表式） | 一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていない | `Ising2D/Part004/Definition010_H1H2V1V2.lean` 冒頭に記載。`I_smul_H2_eq_sum_sigmaX` として証明 |
-| `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_Amat` の仮定 `hdual` として明示 |
+| `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |
 | `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（`ホロノミック量子場_p142下段_1`） | ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）に依存し、本リポジトリでは未形式化 | `Ising2D/Part008/Definition016_TV.lean` では**明示的な仮定 `hT1`, `hT2`** として持ち、そこから先は完全に証明（未証明の穴は残していない） |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_022`（`gamma_2_theta_is_0`） | 形式化時点の原文は `γ_2(θ_μ) = 0` の同値条件で **`s_2^* = 0` の場合を落としていた**（`γ_2` は `s_2^*` を因子に持つ）。また「`sin θ_μ = 0 ⟺ μ = ±M`」は単独では偽で、正しくは `M ∣ 2μ`（`M` が偶数なら `μ = ±M/2` も該当） | **並行して原文側が修正済み**（現在は `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、`μ = ±M/2` が排除される理由も明記）。Lean 側は `gamma2_eq_zero_iff` と `sin_thetaMu_eq_zero_iff` として機械的裏づけを残した |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_035`（`det_A_theta`） | `det A(θ_μ) = 1` は `A(θ)` の定義からは出ず、**`c_2 s_2^* = c_2^*`（双対関係の帰結）が要る**。原文は `A = B_1B_2B_1` からこれを出しているが、`B_1, B_2` には `c_2^*, s_2^*` しか現れず `c_2` は展開の結果 `c_2^*/s_2^*` として出る。つまり (iii) は `factorization_of_A_theta`（proof が原文では TODO）に埋め込まれた前提 | `Ising2D/Part008/Claim027_EigenATheta.lean` の `det_AMat`（無条件）と `det_AMat_eq_one`（3 関係を仮定）に分離 |

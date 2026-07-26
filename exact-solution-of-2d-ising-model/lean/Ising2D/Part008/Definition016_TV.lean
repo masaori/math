@@ -54,10 +54,18 @@
   である。両者が一致するには**双対関係から従う等式 `c_2^* = s_2^* c_2` が必要**
   （`sinh 2K_2 · sinh 2K_2^* = 1` より `s_2^* = 1/s_2`、`c_2^* = coth 2K_2 = c_2/s_2 = s_2^* c_2`）。
   原文はこの等式を `def_A_theta` でも `T_V_hatZ_hatY` の証明でも明示していない。
-  本ファイルでは `B1_mul_B2_mul_B1_eq_Amat` の仮定 `hdual : s_2^* c_2 = c_2^*` として明示する。
+  本ファイルでは `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual : s_2^* c_2 = c_2^*` として明示する。
+
+## `A(θ)` の定義の所在
+
+`A(θ)` の定義は `Part008/Definition019_ThetaGamma.lean` の `Ising2D.AMat`
+（`IsingConst` の 5 実数パラメータと実 `θ`）**ただ 1 つ**である。
+以前は本ファイルにも 5 個の複素パラメータ版 `Ising2D.Amat` があり二重定義になっていたが、
+`AMat` へ一本化して削除した（`lean/README.md` の該当節を参照）。
 -/
 import Ising2D.Part004.Definition010_H1H2V1V2
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
+import Ising2D.Part008.Definition019_ThetaGamma
 import Mathlib.Algebra.Algebra.Equiv
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Analysis.Complex.Trigonometric
@@ -180,29 +188,30 @@ noncomputable def B2mat (K2star : ℂ) : Matrix (Fin 2) (Fin 2) ℂ :=
   !![Complex.cosh (2 * K2star), Complex.I * Complex.sinh (2 * K2star);
      -Complex.I * Complex.sinh (2 * K2star), Complex.cosh (2 * K2star)]
 
-/-- **原文 `def_A_theta`** の `A(θ)`。 -/
-noncomputable def Amat (c1 s1 c2 c2star s2star θ : ℂ) : Matrix (Fin 2) (Fin 2) ℂ :=
-  !![c1 * c2star - s1 * s2star * Complex.cos θ,
-     Complex.I * Complex.exp (θ * Complex.I) * s2star *
-       (c1 * Complex.cos θ - Complex.I * Complex.sin θ - s1 * c2);
-     -Complex.I * Complex.exp (-θ * Complex.I) * s2star *
-       (c1 * Complex.cos θ + Complex.I * Complex.sin θ - s1 * c2),
-     c1 * c2star - s1 * s2star * Complex.cos θ]
-
 set_option maxHeartbeats 2000000 in
-/-- **`B_1(θ) B_2 B_1(θ) = A(θ)`**（原文 `T_V_hatZ_hatY` の最後の一行）。
+/-- **`B_1(θ) B_2 B_1(θ)` の明示計算**（原文 `T_V_hatZ_hatY` の最後の一行）。
+
+右辺は原文 `def_A_theta` の `A(θ)` を 5 個の複素パラメータで書き下したものである
+（`A(θ)` の定義そのものは `Ising2D.AMat` ただ 1 つで、こちらは実パラメータ版。
+両者をつなぐのが次の `B1_mul_B2_mul_B1_eq_AMat`）。
 
 `hdual` は双対関係 `sinh 2K_2 · sinh 2K_2^* = 1` から従う等式 `c_2^* = s_2^* c_2`。
 原文はこれを明示していない（ファイル冒頭「原文の問題」参照）。 -/
-theorem B1_mul_B2_mul_B1_eq_Amat (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
+theorem B1_mul_B2_mul_B1_eq_explicit (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
     (hc1 : c1 = Complex.cosh (2 * K1)) (hs1 : s1 = Complex.sinh (2 * K1))
     (hc2star : c2star = Complex.cosh (2 * K2star))
     (hs2star : s2star = Complex.sinh (2 * K2star))
     (hdual : s2star * c2 = c2star) :
-    B1mat K1 θ * B2mat K2star * B1mat K1 θ = Amat c1 s1 c2 c2star s2star θ := by
+    B1mat K1 θ * B2mat K2star * B1mat K1 θ =
+      !![c1 * c2star - s1 * s2star * Complex.cos θ,
+         Complex.I * Complex.exp (θ * Complex.I) * s2star *
+           (c1 * Complex.cos θ - Complex.I * Complex.sin θ - s1 * c2);
+         -Complex.I * Complex.exp (-θ * Complex.I) * s2star *
+           (c1 * Complex.cos θ + Complex.I * Complex.sin θ - s1 * c2),
+         c1 * c2star - s1 * s2star * Complex.cos θ] := by
   subst hc1; subst hs1; subst hc2star; subst hs2star
   -- 先に行列を展開してから双対関係を使い、`cosh 2K_2^*` を左右とも `s_2^* c_2` に揃える。
-  simp only [B1mat, B2mat, Amat]
+  simp only [B1mat, B2mat]
   rw [← hdual]
   have hu : Complex.exp K1 ≠ 0 := Complex.exp_ne_zero _
   have hq : Complex.exp K2star ≠ 0 := Complex.exp_ne_zero _
@@ -217,6 +226,26 @@ theorem B1_mul_B2_mul_B1_eq_Amat (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
     (try simp only [Complex.I_sq]) <;>
     (try ring)
 
+/-- **`B_1(θ) B_2 B_1(θ) = A(θ)`**（原文 `T_V_hatZ_hatY` の最後の一行、`AMat` 版）。
+
+原文の `c_1, s_1, c_2, c_2^*, s_2^*` はすべて実数、`θ = θ_μ = 2πμ/M` も実数なので、
+`B1_mul_B2_mul_B1_eq_explicit` の複素パラメータへ `IsingConst` の実数を coe すれば
+`AMat`（`Part008/Definition019_ThetaGamma.lean`、`A(θ)` の唯一の定義）に一致する。 -/
+theorem B1_mul_B2_mul_B1_eq_AMat (K : IsingConst) (K1 K2star : ℂ) (θ : ℝ)
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    B1mat K1 (θ : ℂ) * B2mat K2star * B1mat K1 (θ : ℂ) = AMat K θ := by
+  rw [B1_mul_B2_mul_B1_eq_explicit K1 K2star (θ : ℂ)
+    (K.c1 : ℂ) (K.s1 : ℂ) (K.c2 : ℂ) (K.c2star : ℂ) (K.s2star : ℂ)
+    hc1 hs1 hc2star hs2star hdual]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [AMat, Complex.ofReal_cos, Complex.ofReal_sin, Complex.exp_mul_I,
+      mul_comm (Complex.I : ℂ)]
+
 /-! ## `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（仮定つき） -/
 
 /-- **原文 `T_V_hatZ_hatY`（仮定つきの形）**。
@@ -226,32 +255,32 @@ theorem B1_mul_B2_mul_B1_eq_Amat (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
 本リポジトリでは証明できない。ここでは仮定として明示的に持つ。
 
 仮定から先（合成則による `B_1 B_2 B_1` の計算と `B_1 B_2 B_1 = A(θ)`）は完全に証明されている。 -/
-theorem TV_hatZ_hatY_of_action {M : ℕ} (μ : ℤ) (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
+theorem TV_hatZ_hatY_of_action {M : ℕ} (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ) (θ : ℝ)
     (T1 T2 : TensorPow M →ₗ[ℂ] TensorPow M)
-    (hT1 : ActsBy T1 (hatZMinus M μ) (hatY M μ) (B1mat K1 θ))
+    (hT1 : ActsBy T1 (hatZMinus M μ) (hatY M μ) (B1mat K1 (θ : ℂ)))
     (hT2 : ActsBy T2 (hatZMinus M μ) (hatY M μ) (B2mat K2star))
-    (hc1 : c1 = Complex.cosh (2 * K1)) (hs1 : s1 = Complex.sinh (2 * K1))
-    (hc2star : c2star = Complex.cosh (2 * K2star))
-    (hs2star : s2star = Complex.sinh (2 * K2star))
-    (hdual : s2star * c2 = c2star) :
-    ActsBy (T1 ∘ₗ T2 ∘ₗ T1) (hatZMinus M μ) (hatY M μ) (Amat c1 s1 c2 c2star s2star θ) := by
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    ActsBy (T1 ∘ₗ T2 ∘ₗ T1) (hatZMinus M μ) (hatY M μ) (AMat K θ) := by
   have h := (hT1.comp hT2).comp hT1
   rw [← mul_assoc] at h
-  rwa [B1_mul_B2_mul_B1_eq_Amat K1 K2star θ c1 s1 c2 c2star s2star
-    hc1 hs1 hc2star hs2star hdual] at h
+  rwa [B1_mul_B2_mul_B1_eq_AMat K K1 K2star θ hc1 hs1 hc2star hs2star hdual] at h
 
 /-- 上を `T_{(V)} = T_{g_1} ∘ T_{g_2} ∘ T_{g_1}` の形で述べたもの。 -/
-theorem TV_hatZ_hatY_of_action' {M : ℕ} (μ : ℤ) (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
+theorem TV_hatZ_hatY_of_action' {M : ℕ} (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ) (θ : ℝ)
     (g1 g2 : (TensorPow M)ˣ)
-    (hT1 : ActsBy (TConj g1).toLinearMap (hatZMinus M μ) (hatY M μ) (B1mat K1 θ))
+    (hT1 : ActsBy (TConj g1).toLinearMap (hatZMinus M μ) (hatY M μ) (B1mat K1 (θ : ℂ)))
     (hT2 : ActsBy (TConj g2).toLinearMap (hatZMinus M μ) (hatY M μ) (B2mat K2star))
-    (hc1 : c1 = Complex.cosh (2 * K1)) (hs1 : s1 = Complex.sinh (2 * K1))
-    (hc2star : c2star = Complex.cosh (2 * K2star))
-    (hs2star : s2star = Complex.sinh (2 * K2star))
-    (hdual : s2star * c2 = c2star) :
-    ActsBy (TV g1 g2).toLinearMap (hatZMinus M μ) (hatY M μ)
-      (Amat c1 s1 c2 c2star s2star θ) := by
-  have h := TV_hatZ_hatY_of_action μ K1 K2star θ c1 s1 c2 c2star s2star
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    ActsBy (TV g1 g2).toLinearMap (hatZMinus M μ) (hatY M μ) (AMat K θ) := by
+  have h := TV_hatZ_hatY_of_action K μ K1 K2star θ
     (TConj g1).toLinearMap (TConj g2).toLinearMap hT1 hT2 hc1 hs1 hc2star hs2star hdual
   exact h
 

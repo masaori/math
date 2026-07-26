@@ -16,8 +16,9 @@ main.typ およびそこから include されている .typ ファイル中の T
 | [fermion-B13](fermion-B13/) | 3 | フェルミオン対角化と T\_(V) の指数関数表式 | WIP |
 | [fix\_arg\_interval](fix_arg_interval/) | 21 | arg の区間を (-π,π] → [0,2π) に統一 | WIP |
 | [free-energy-roadmap](free-energy-roadmap/) | 6章 | V=cV' から Onsager の自由エネルギー・熱力学極限までの章立て | 章 A 完了、章 B 以降 未着手 |
+| [2026-07\_original-text-gaps](2026-07_original-text-gaps/) | 5 | Lean 形式化で見つかった原文の穴 5 件の一次情報（本文修正は別セッション担当） | 3 件 解消済み、2 件（030・050）未着手 |
 
-**合計: 50 タスク** (7 スコープ)
+**合計: 50 タスク** (7 スコープ) ＋ 原文の穴 5 件
 
 ---
 
