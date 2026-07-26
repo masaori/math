@@ -1,0 +1,4 @@
+=== range_of_args_of_square_of_complex_numbers ===
+  0 <= arg < pi の場合 37 件、pi <= arg < 2pi の場合 41 件
+checks: 79, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

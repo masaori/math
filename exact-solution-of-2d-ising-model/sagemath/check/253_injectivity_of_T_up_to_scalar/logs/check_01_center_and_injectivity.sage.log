@@ -1,0 +1,6 @@
+=== injectivity_of_T_up_to_scalar ===
+  M=1: [W,g]=0 の解空間の次元 = 1
+  M=2: [W,g]=0 の解空間の次元 = 1
+  M=3: [W,g]=0 の解空間の次元 = 1
+checks: 30, max relative error: 8.856e-14, tol: 1.0e-09
+RESULT: PASS

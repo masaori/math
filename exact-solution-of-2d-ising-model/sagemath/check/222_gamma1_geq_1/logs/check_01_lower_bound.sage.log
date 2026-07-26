@@ -1,0 +1,4 @@
+=== gamma1_geq_1 ===
+  gamma_1 の最小値: 1.000000000000000 at (M,mu,K1,K2)=(2, -2, 0.11125998429077752, 1.10000000000000)
+checks: 3910, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

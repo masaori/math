@@ -314,9 +314,22 @@ def psi_ops(mu, M, K1, K2):
 
 
 def lambda_pm_of(mu, M, K1, K2):
+    """lambda_± := gamma_1 ± sqrt(-gamma_2(theta) gamma_2(-theta))（<eigenvector_of_A_theta>）。
+
+    平方根の中身は、<relation_of_gamma_2>（gamma_2(-theta) = -conj(gamma_2(theta))）により
+    **厳密には非負実数** -gamma_2(theta)gamma_2(-theta) = |gamma_2(theta)|^2 である
+    （この事実自体は check 227 で独立に数値検証している）。
+    ところが倍精度で計算すると虚部に ~1e-17 の丸めが乗り、それが負側に出ると
+    arg^{[0,2pi)} が 0 ではなく ~2pi を返すため、本プロジェクト定義の sqrt
+    （偏角を半分にする分枝）が符号を反転させてしまう。これは主張の誤りではなく
+    純粋な浮動小数点の分枝跨ぎなので、虚部が実部に対して無視できるときは実軸へ落とす。
+    """
     th = theta_mu_of(mu, M)
     g1 = gamma1_of(th, K1, K2)
-    r = sqrt_cc_np(-gamma2_of(th, K1, K2) * gamma2_of(-th, K1, K2))
+    prod = -gamma2_of(th, K1, K2) * gamma2_of(-th, K1, K2)
+    if abs(prod.imag) <= 1e-10 * max(1.0, abs(prod.real)) and prod.real >= 0:
+        prod = complex(prod.real, 0.0)
+    r = sqrt_cc_np(prod)
     return g1 + r, g1 - r
 
 

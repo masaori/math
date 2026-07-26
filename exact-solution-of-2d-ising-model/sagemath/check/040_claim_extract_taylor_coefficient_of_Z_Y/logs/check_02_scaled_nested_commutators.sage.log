@@ -1,0 +1,62 @@
+=== 生成子スケール後の n 重交換子（n = 0..8）===
+M = 3, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 6.465e-16  ->  PASS
+  h1.y: max residual = 6.417e-16  ->  PASS
+  h2.z-: max residual = 4.279e-17  ->  PASS
+  h2.y: max residual = 7.578e-17  ->  PASS
+M = 3, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 6.201e-15  ->  PASS
+  h1.y: max residual = 5.901e-15  ->  PASS
+  h2.z-: max residual = 6.889e-14  ->  PASS
+  h2.y: max residual = 9.714e-14  ->  PASS
+M = 3, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 7.371e-16  ->  PASS
+  h1.y: max residual = 6.753e-16  ->  PASS
+  h2.z-: max residual = 3.675e-15  ->  PASS
+  h2.y: max residual = 8.651e-15  ->  PASS
+M = 3, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 8.082e-17  ->  PASS
+  h1.y: max residual = 8.021e-17  ->  PASS
+  h2.z-: max residual = 2.949e-11  ->  PASS
+  h2.y: max residual = 2.876e-11  ->  PASS
+M = 4, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 5.584e-16  ->  PASS
+  h1.y: max residual = 5.584e-16  ->  PASS
+  h2.z-: max residual = 3.698e-32  ->  PASS
+  h2.y: max residual = 1.849e-32  ->  PASS
+M = 4, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 1.421e-14  ->  PASS
+  h1.y: max residual = 1.421e-14  ->  PASS
+  h2.z-: max residual = 5.660e-29  ->  PASS
+  h2.y: max residual = 9.200e-29  ->  PASS
+M = 4, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 5.983e-16  ->  PASS
+  h1.y: max residual = 5.983e-16  ->  PASS
+  h2.z-: max residual = 4.441e-16  ->  PASS
+  h2.y: max residual = 4.441e-16  ->  PASS
+M = 4, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 6.980e-17  ->  PASS
+  h1.y: max residual = 6.980e-17  ->  PASS
+  h2.z-: max residual = 1.421e-14  ->  PASS
+  h2.y: max residual = 1.421e-14  ->  PASS
+M = 5, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 4.899e-16  ->  PASS
+  h1.y: max residual = 4.899e-16  ->  PASS
+  h2.z-: max residual = 1.176e-16  ->  PASS
+  h2.y: max residual = 1.124e-16  ->  PASS
+M = 5, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 6.187e-15  ->  PASS
+  h1.y: max residual = 6.187e-15  ->  PASS
+  h2.z-: max residual = 1.314e-12  ->  PASS
+  h2.y: max residual = 1.767e-12  ->  PASS
+M = 5, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 5.702e-16  ->  PASS
+  h1.y: max residual = 6.331e-16  ->  PASS
+  h2.z-: max residual = 2.724e-14  ->  PASS
+  h2.y: max residual = 4.841e-14  ->  PASS
+M = 5, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 6.123e-17  ->  PASS
+  h1.y: max residual = 6.123e-17  ->  PASS
+  h2.z-: max residual = 2.048e-10  ->  PASS
+  h2.y: max residual = 1.448e-10  ->  PASS
+RESULT: PASS

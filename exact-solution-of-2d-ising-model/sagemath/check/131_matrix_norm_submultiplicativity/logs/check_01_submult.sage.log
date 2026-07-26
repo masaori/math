@@ -1,0 +1,4 @@
+=== matrix_norm_submultiplicativity ===
+  等号に近い（比 > 0.999）事例: 50 件
+checks: 155, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

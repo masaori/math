@@ -1,0 +1,4 @@
+=== A_theta_is_identity_when_gamma2_zero ===
+  gamma_2 = 0 を実際に踏んだ事例: 32 件
+checks: 103, max relative error: 3.847e-16, tol: 1.0e-09
+RESULT: PASS

@@ -1,0 +1,7 @@
+=== Z_Y_linearly_independent: 特異値による数値ランク ===
+  M=2: 2M=4, sigma_min=2.000000e+00, sigma_max=2.000000e+00, cond=1.000
+  M=3: 2M=6, sigma_min=2.828427e+00, sigma_max=2.828427e+00, cond=1.000
+  M=4: 2M=8, sigma_min=4.000000e+00, sigma_max=4.000000e+00, cond=1.000
+  M=5: 2M=10, sigma_min=5.656854e+00, sigma_max=5.656854e+00, cond=1.000
+checks: 12, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

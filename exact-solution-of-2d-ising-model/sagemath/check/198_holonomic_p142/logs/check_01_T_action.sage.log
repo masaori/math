@@ -1,0 +1,5 @@
+=== holonomic p142: T の hatZ^{(-)}, hatY への作用 ===
+  [観察] V_1^(+) の平方根で hatZ^(-) を共役すると本文の閉じた表示から 8.215e-01 ずれる
+         （[H_1^(±), hatY] = -2 e^{i theta} hatZ^{(±)} なので軌道が閉じるのは同符号のときだけ）
+checks: 360, max relative error: 2.212e-15, tol: 1.0e-09
+RESULT: PASS

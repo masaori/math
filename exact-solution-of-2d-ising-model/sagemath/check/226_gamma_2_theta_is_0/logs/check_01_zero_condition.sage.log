@@ -1,0 +1,4 @@
+=== gamma_2_theta_is_0 ===
+  M 偶数・mu=±M/2（sin=0 だが gamma_2!=0）の事例: 80 件
+checks: 780, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

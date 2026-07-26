@@ -1,0 +1,4 @@
+=== diagonalization_P_D ===
+  P_mu の条件数の最大値: 1.000000e+00
+checks: 616, max relative error: 5.168e-16, tol: 1.0e-09
+RESULT: PASS

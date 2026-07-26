@@ -56,7 +56,9 @@ for dir in "${check_root}"/*/; do
     # check ディレクトリへ cd してから相対名で呼ぶ。SageMath が生成する `<name>.sage.py` の
     # 冒頭コメントに渡したパスがそのまま埋め込まれるため、絶対パスで呼ぶと生成物が毎回
     # 差分になってしまう（中身は同じなのに git が汚れる）。
-    if (cd "$dir" && sage "$base") >"$log" 2>&1; then
+    # 終了コードだけでなく、ログ本文の `RESULT: FAIL` も失敗として扱う。
+    # 検証スクリプトが失敗を exit コードで伝え忘れても見逃さないための二重の安全網。
+    if (cd "$dir" && sage "$base") >"$log" 2>&1 && ! grep -q 'RESULT: FAIL' "$log"; then
       printf 'PASS\n'
     else
       printf 'FAIL (see %s)\n' "${log#${project_root}/}"

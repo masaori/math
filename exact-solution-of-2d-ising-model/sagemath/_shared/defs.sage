@@ -173,9 +173,14 @@ def numerical_check(expr1, expr2, test_params=None, M_val=None, tol=None, label=
             subs_dict = {K1: val_K1, K2: val_K2, theta_mu: th}
             v1 = CC(expr1.subs(subs_dict))
             v2 = CC(expr2.subs(subs_dict))
-            err = abs(v1 - v2)
+            # 絶対誤差ではなく**相対誤差**で判定する。
+            # 理由: c_1 = cosh(2K_1) は K_1 = 10.4 で ~5e8 に達し、式の値が 1e3〜1e9 の
+            # 桁になる。絶対誤差 1e-10 で判定すると、倍精度の丸め（相対 ~1e-16）でしかない
+            # 差を「不一致」と報告してしまう（実際に 028 の check_06 がそれで FAIL していた）。
+            scale = max(1.0, abs(v1), abs(v2))
+            err = abs(v1 - v2) / scale
             if err > tol:
-                print(f"  MISMATCH at mu={mu}: |expr1 - expr2| = {err}")
+                print(f"  MISMATCH at mu={mu}: relative |expr1 - expr2| = {err}")
                 print(f"    expr1 = {v1}")
                 print(f"    expr2 = {v2}")
                 all_ok = False
@@ -184,5 +189,10 @@ def numerical_check(expr1, expr2, test_params=None, M_val=None, tol=None, label=
         print("RESULT: PASS")
     else:
         print("RESULT: FAIL")
+        # **失敗を終了コードで伝える。**
+        # これが無いと、RESULT: FAIL を出しても終了コードが 0 のままになり、
+        # run-all-checks.sh が PASS と誤認する（実際にそうなっていた）。
+        import sys
+        sys.exit(1)
 
     return all_ok
