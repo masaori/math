@@ -1,5 +1,55 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補5）: **`T_V_hatZ_hatY` を無条件の定理へ閉じた**（未形式化由来の仮定がゼロに）
+
+### 何が変わったか
+
+`Ising2D/Part008/Definition016_TV.lean` の `TV_hatZ_hatY_of_action` と
+`Ising2D/Part008/Definition030_Fermi.lean` の `TV_psiDag_of_action` / `TV_psi_of_action` は、
+「`T_{(V_1^{(-)})^{1/2}}` と `T_{V_2}` が `(hat(Z)_μ^{(-)}, hat(Y)_μ)` に `B_1(θ_μ)`, `B_2` で
+作用する」ことを**明示的な仮定 `ActsBy`** として持っていた。**この仮定を証明して除去した。**
+
+| ファイル | 内容 |
+| --- | --- |
+| `lean/Ising2D/Abstract/TVAction.lean` | 抽象版。`Abstract.twoDimConjMat`（exp 共役の 2 次元部分空間への作用行列 `!![cosh s, β sinhc s; α sinhc s, cosh s]`）、`Abstract.exp_conj_two_dim_actsBy`、`Abstract.conj_smul_eq`（スカラー因子は共役で打ち消える） |
+| `lean/Ising2D/Part008/Claim012_TVActions.lean` | 具体版。`actsBy_TConj_V1half` / `actsBy_TConj_V2`（原文 `012` の 4 式、**証明済み**）、`TV_hatZ_hatY`（原文 `018` の無条件版）、`TV_psiDag` / `TV_psi` / `TV_psiDag_psi`（原文 `031` の無条件版） |
+
+`lake build` 成功、`scripts/check-no-sorry.sh` exit 0（新規定理 20 本を targets へ追記済み）。
+構造化テキスト側の検証 3 種（`npm run check` / `verify-no-lost-proofs` /
+`verify-check-linkage`）も通っている。
+
+### 証明の骨格
+
+原文が「入れ子交換子を偶奇で場合分け（`002`）→ テイラー係数の抽出（`005`）」の 2 段で
+やっていることは、**「`ad X` が `span{Ẑ_μ^{(-)}, Ŷ_μ}` を保つ」という 1 つの事実に集約できる**。
+そこから先は既に形式化済みの `matExp_conj_two_dim_z` / `..._y` が閉じた形を返す。
+
+- `X_1 = (1/2) i K_1 H_1^{(-)}`: (1)(3) より `α = i K_1 e^{-iθ_μ}`, `β = -i K_1 e^{iθ_μ}`, `s = K_1`
+- `X_2 = i K_2^* H_2`: (4)(6) より `α = -2i K_2^*`, `β = 2i K_2^*`, `s = 2K_2^*`
+
+`<commutator_of_H_and_Z_Y>` のうち**偽と判明している (2)(5) はこの経路で一切使わない**
+（原文 `012` 自身が「`±` はいずれも `-` を選ぶ」と明記している）。
+
+### 原文の検算結果: **誤りは無かった**
+
+係数を原文と独立に導出して突き合わせた結果、原文 `005` / `012` / `018` の
+`cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` は**すべて正しい**。
+否定的結果の記録として `docs/tasks/2026-07_original-text-gaps/060_TV_action_coefficients_verified.md`
+に残した（`B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` が突き合わせそのもの）。
+
+### 残っている仮定（いずれも数学的に必要。未形式化由来ではない）
+
+1. `hdual : s_2^* c_2 = c_2^*`（双対関係の帰結）と、`IsingConst` の成分が `K_1, K_2^*` の
+   双曲線関数であること — 原文が明示していない前提（既知。`030_det_A_theta_duality.md`）
+2. `ψ` の反交換関係の `hbr`（平方根の分枝の選択） — 原文の穴（既知。`050_...md`）
+
+**これで「未形式化に由来する仮定」は本リポジトリから無くなった。**
+
+### 次にやること
+
+`lean/README.md`「今後の方針」の 3.（`V_1, V_2` を `Z, Y, ε` で表す表式）と
+4.（`ε` の順序つき積の完全形）へ進む。
+
 ## 完了（2026-07-26・追補）: `H_1, H_2` の hat 表示と 6 本の交換関係を Lean で形式化（**原文の誤り 2 件を検出**）
 
 ### 成果物
