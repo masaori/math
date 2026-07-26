@@ -806,7 +806,7 @@ F_{n+1}
       status: "converted",
       notes: [
         "原文の proof は「TODO : note 参考にして、帰納法で行ける」というアウトラインのみで帰納法本体は未記述だった。4 式それぞれについて n に関する帰納法（基底 n=0 と、偶数 n→奇数 n+1 / 奇数 n→偶数 n+1 の 2 つの帰納段階）を人手で書き下し、todo を除去した。",
-        "原文 note の n=0..4 具体例を block-level notes に忠実に翻訳。原文の (h2.z^+) は「これは使われない」というメモのみで式が無いため statement・notes とも省いた。原文 note の (h1.y) n=3 は exp の符号が n=1 と不整合（原文どおり再現）。帰納法の証明は note の具体例ではなく commutator_of_H_and_Z_Y の 1 重公式から直接構成した。",
+        "原文 note の n=0..4 具体例を block-level notes に忠実に翻訳。原文の (h2.z^+) は「これは使われない」というメモのみで式が無いため statement・notes とも省いた。原文 note の (h1.y) n=3 は exp の符号が n=1 と不整合（誤植）だったため、本作業で n=1 と同じ e^{-i2π(-μ)/M}（= e^{+iθ}）へ修正した。用いる 1 重公式 [H_1^{(±)}, hat(Y)_mu] = -2 e^{iθ} hat(Z)_mu^{(±)} は sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_01_single_commutators.sage の (B) で数値的に確認済み。帰納法の証明は note の具体例ではなく commutator_of_H_and_Z_Y の 1 重公式から直接構成した。",
         "原文 statement の (h1.y) 奇数側は hat(Z)_mu^{(+)} と書かれているが、用いる 1 重公式 [H_1^{(±)}, hat(Y)_mu] = -2 e^{iθ} hat(Z)_mu^{(±)} は H_1 と同符号の hat(Z) を返すため、構造化側では hat(Z)_mu^{(±)} とした（移行時点からの表記であり、本作業で変更していない）。",
       ],
     },
@@ -827,6 +827,14 @@ i K_1^n e^{-i 2\pi\mu/M} \hat{Y}_\mu & (n \text{ 奇数}) \\
 K_1^n \hat{Z}_\mu^{(\pm)} & (n \text{ 偶数})
 \end{cases}`,
       ),
+      paragraph(["(h1.y)"]),
+      displayMath(
+        String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
+= \begin{cases}
+-i K_1^n e^{i 2\pi\mu/M} \hat{Z}_\mu^{(\pm)} & (n \text{ 奇数}) \\
+K_1^n \hat{Y}_\mu & (n \text{ 偶数})
+\end{cases}`,
+      ),
       paragraph(["(h2.z−)"]),
       displayMath(
         String.raw`\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n}
@@ -835,60 +843,287 @@ K_1^n \hat{Z}_\mu^{(\pm)} & (n \text{ 偶数})
 (2K_2^*)^n \hat{Z}_\mu^{(-)} & (n \text{ 偶数})
 \end{cases}`,
       ),
-      paragraph(["（(h1.y), (h2.y) も同様）"]),
+      paragraph(["(h2.y)"]),
+      displayMath(
+        String.raw`\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Y}_\mu\right]\dots\right]}_{n}
+= \begin{cases}
+i (2K_2^*)^n \hat{Z}_\mu^{(-)} & (n \text{ 奇数}) \\
+(2K_2^*)^n \hat{Y}_\mu & (n \text{ 偶数})
+\end{cases}`,
+      ),
     ],
     proof: [
+      paragraph([
+        "以下、",
+        math(String.raw`\theta := \dfrac{2\pi\mu}{M} \in \mathbb{R}`),
+        " と略記する。まず 4 式すべてで用いる次の 2 つの補題を用意する。",
+      ]),
+      paragraph([
+        "補題 1（生成子のスカラー倍）：",
+        math(String.raw`\alpha \in \mathbb{C}`),
+        "、",
+        math(String.raw`X, W \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        "、",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\underbrace{[\alpha X,\dots,[\alpha X, W]\dots]}_{n}
+= \alpha^{n}\,\underbrace{[X,\dots,[X, W]\dots]}_{n}`,
+      ),
+      paragraph([
+        "が成り立つ。実際、交換子の第 1 引数についての ",
+        math(String.raw`\mathbb{C}`),
+        " 線型性より、任意の ",
+        math(String.raw`W`),
+        " について ",
+        math(String.raw`\mathrm{ad}_{\alpha X}(W) = [\alpha X, W] = \alpha[X, W] = \alpha\,\mathrm{ad}_X(W)`),
+        " であるから、線型写像として ",
+        math(String.raw`\mathrm{ad}_{\alpha X} = \alpha\,\mathrm{ad}_X`),
+        " が成り立つ。よって ",
+        math(String.raw`\mathrm{ad}_{\alpha X}^{\,n} = (\alpha\,\mathrm{ad}_X)^n = \alpha^{n}\,\mathrm{ad}_X^{\,n}`),
+        "（",
+        math(String.raw`\mathrm{ad}_X`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " 線型なのでスカラー倍と可換であり、合成の各段からスカラーを前へ出せる）。",
+        math(String.raw`n = 0`),
+        " のときは両辺とも恒等写像で ",
+        math(String.raw`\alpha^0 = 1`),
+        " により成立する。",
+      ]),
+      paragraph([
+        "補題 2（虚数単位の冪）：",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`i^{n} = \begin{cases}
+i\,(-1)^{(n-1)/2} & (n \text{ 奇数}) \\
+(-1)^{n/2} & (n \text{ 偶数})
+\end{cases}`,
+      ),
+      paragraph([
+        "が成り立つ。実際 ",
+        math(String.raw`i^2 = -1`),
+        " より、",
+        math(String.raw`n`),
+        " が偶数なら ",
+        math(String.raw`i^n = (i^2)^{n/2} = (-1)^{n/2}`),
+        "、",
+        math(String.raw`n`),
+        " が奇数なら ",
+        math(String.raw`i^n = i\cdot i^{n-1} = i\,(i^2)^{(n-1)/2} = i\,(-1)^{(n-1)/2}`),
+        " である（",
+        math(String.raw`n`),
+        " 奇数のとき ",
+        math(String.raw`(n-1)/2 \in \mathbb{Z}_{\geq 0}`),
+        "、偶数のとき ",
+        math(String.raw`n/2 \in \mathbb{Z}_{\geq 0}`),
+        " なので、いずれの指数も整数である）。",
+      ]),
       paragraph([
         "(h1.z) について、",
         ref("nesting_of_commutator_of_H_and_Z"),
         " (h1.z) の生成子を ",
         math(String.raw`K_1 H_1^{(\pm)} \to \tfrac{i}{2}K_1 H_1^{(\pm)}`),
-        " に置き換えて代入する。",
+        " に置き換えて代入する。すなわち補題 1 を ",
+        math(String.raw`\alpha = \tfrac{i}{2}`),
+        "、",
+        math(String.raw`X = K_1 H_1^{(\pm)}`),
+        " として使い、さらに補題 2 で ",
+        math(String.raw`i^n`),
+        " を書き換える。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n\text{ times}}
+\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
+&= \left(\tfrac{i}{2}\right)^{n}
+   \underbrace{\left[K_1 H_1^{(\pm)},\dots,\left[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
+   \quad (\because \text{補題 1}) \\
+&= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
+(-1)^{(n-1)/2}(2K_1)^{n} e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}(2K_1)^{n}\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{交換子のネスト (h1.z)}) \\
 &= \begin{cases}
-(-1)^{(n-1)/2}\cdot\left(2\cdot\tfrac{i}{2}K_1\right)^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-(-1)^{n/2}\cdot\left(2\cdot\tfrac{i}{2}K_1\right)^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
+i^{n}\,2^{-n}\,(-1)^{(n-1)/2}\,2^{n}K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,2^{-n}\,(-1)^{n/2}\,2^{n}K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
+\end{cases}
+   \quad \left(\because \left(\tfrac{i}{2}\right)^{n} = i^{n}2^{-n},\ (2K_1)^n = 2^n K_1^n\right) \\
+&= \begin{cases}
+i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,(-1)^{n/2}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
+\end{cases}
+   \quad (\because 2^{-n}2^{n} = 1) \\
+&= \begin{cases}
+i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{補題 2}) \\
+&= \begin{cases}
+i\,(-1)^{n-1}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases} \\
 &= \begin{cases}
-(-1)^{(n-1)/2}\cdot(i)^{n}\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-(-1)^{n/2}\cdot(i)^{n}\cdot K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
-\end{cases} \\
-&= \begin{cases}
-(-1)^{(n-1)/2}\cdot(-1)^{n/2}\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-(-1)^{n/2}\cdot(-1)^{n/2}\cdot K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
-\end{cases} \\
-&= \begin{cases}
-(-1)^{((n-1)/2 + n/2)}\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-(-1)^{(n/2 + n/2)}\cdot K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
-\end{cases} \\
-&= \begin{cases}
-(-1)^{((2n+2)/2 + 1/2)}\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-(-1)^{(n/2 + n/2)}\cdot K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
-\end{cases} \\
-&= \begin{cases}
-(-1)^{n+1}\cdot(-1)^{1/2}\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-(-1)^{n}\cdot K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
-\end{cases} \\
-&= \begin{cases}
-i\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
+i\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 \end{aligned}`,
       ),
       paragraph([
-        "(h1.y), (h2.z−), (h2.y) も同様に ",
+        "最後の等号は、",
+        math(String.raw`n`),
+        " が奇数なら ",
+        math(String.raw`n-1`),
+        " は偶数で ",
+        math(String.raw`(-1)^{n-1} = 1`),
+        "、",
+        math(String.raw`n`),
+        " が偶数なら ",
+        math(String.raw`(-1)^{n} = 1`),
+        " による。",
+        math(String.raw`e^{-i\theta} = e^{-i 2\pi\mu/M}`),
+        " なので (h1.z) の主張の形になる。",
+      ]),
+      paragraph([
+        "(h1.y) について、同じく補題 1 を ",
+        math(String.raw`\alpha = \tfrac{i}{2}`),
+        "、",
+        math(String.raw`X = K_1 H_1^{(\pm)}`),
+        "、",
+        math(String.raw`W = \hat{Y}_\mu`),
+        " として使う。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
+&= \left(\tfrac{i}{2}\right)^{n}
+   \underbrace{\left[K_1 H_1^{(\pm)},\dots,\left[K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
+   \quad (\because \text{補題 1}) \\
+&= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
+(-1)^{(n+1)/2}(2K_1)^{n} e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+(-1)^{n/2}(2K_1)^{n}\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{交換子のネスト (h1.y)}) \\
+&= \begin{cases}
+i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+i^{n}\,(-1)^{n/2}\,K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because 2^{-n}2^{n} = 1) \\
+&= \begin{cases}
+i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+(-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{補題 2}) \\
+&= \begin{cases}
+i\,(-1)^{n}\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+(-1)^{n}\,K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad \left(\because \frac{n-1}{2}+\frac{n+1}{2} = n\right) \\
+&= \begin{cases}
+-i\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後の等号は、",
+        math(String.raw`n`),
+        " が奇数なら ",
+        math(String.raw`(-1)^{n} = -1`),
+        "、",
+        math(String.raw`n`),
+        " が偶数なら ",
+        math(String.raw`(-1)^{n} = 1`),
+        " による。",
+      ]),
+      paragraph([
+        "(h2.z−) について、補題 1 を ",
+        math(String.raw`\alpha = i`),
+        "、",
+        math(String.raw`X = K_2^* H_2`),
+        "、",
+        math(String.raw`W = \hat{Z}_\mu^{(-)}`),
+        " として使う。今回は ",
+        math(String.raw`\alpha = i`),
+        " で 2 の冪が現れないので、",
+        math(String.raw`(2K_2^*)^n`),
+        " はそのまま残る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n}
+&= i^{n}
+   \underbrace{\left[K_2^* H_2,\dots,\left[K_2^* H_2,\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n}
+   \quad (\because \text{補題 1}) \\
+&= i^{n}\begin{cases}
+(-1)^{(n+1)/2}(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{交換子のネスト (h2.z−)}) \\
+&= \begin{cases}
+i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}(-1)^{n/2}(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{補題 2}) \\
+&= \begin{cases}
+i\,(-1)^{n}(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n}(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 偶数})
+\end{cases} \\
+&= \begin{cases}
+-i\,(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 偶数})
+\end{cases}
+\end{aligned}`,
+      ),
+      paragraph([
+        "(h2.y) について、補題 1 を ",
+        math(String.raw`\alpha = i`),
+        "、",
+        math(String.raw`X = K_2^* H_2`),
+        "、",
+        math(String.raw`W = \hat{Y}_\mu`),
+        " として使う。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Y}_\mu\right]\dots\right]}_{n}
+&= i^{n}
+   \underbrace{\left[K_2^* H_2,\dots,\left[K_2^* H_2,\hat{Y}_\mu\right]\dots\right]}_{n}
+   \quad (\because \text{補題 1}) \\
+&= i^{n}\begin{cases}
+(-1)^{(n-1)/2}(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
+(-1)^{n/2}(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{交換子のネスト (h2.y)}) \\
+&= \begin{cases}
+i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
+(-1)^{n/2}(-1)^{n/2}(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{補題 2}) \\
+&= \begin{cases}
+i\,(-1)^{n-1}(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
+(-1)^{n}(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases} \\
+&= \begin{cases}
+i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
+(2K_2^*)^{n}\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+\end{aligned}`,
+      ),
+      paragraph([
+        "以上 4 式が、",
         ref("nesting_of_commutator_of_H_and_Z"),
-        " の対応する生成子へのスケール置換で得られる。",
+        " の各式に補題 1・補題 2 を適用して得られた。",
       ]),
     ],
     conversion: {
       status: "converted",
       notes: [
-        "原文 proof の (h1.z) 代入計算を各ステップ忠実に翻訳。原文 proof は (h1.z) のみを扱い、(h1.y)/(h2.z−)/(h2.y) は statement で「同様」とされ本文計算は無い（原文どおり）。",
-        "原文の指数簡約（虚数単位の n 乗 i^n を (-1)^{n/2} と書く、(n-1)/2+n/2 を (2n+2)/2+1/2 と書く等）はやや略式だが最終結果は正しい。原文どおり再現した。",
+        "原文 proof は (h1.z) の代入計算のみを扱い、(h1.y)/(h2.z−)/(h2.y) は statement で「同様」とされ本文計算が無かった。下流の extract_taylor_coefficient_of_Z_Y の proof が 4 式すべてを必要とするため、statement に (h1.y)/(h2.y) の式を明示的に書き足し、proof でも 4 式すべての代入計算を書き下した。",
+        "原文の指数簡約は (-1)^{1/2} という実数の範囲で意味をなさない中間式を経由しており（(n-1)/2+n/2 を (2n+2)/2+1/2 と書く等）、最終結果は正しいものの各ステップの正当化が不能だった。生成子のスカラー倍に関する補題 1（ad_{αX}^n = α^n ad_X^n）と虚数単位の冪に関する補題 2（i^n の偶奇分解）を明示的に立て、すべての指数を整数の範囲で扱う形へ書き改めた。",
+        "4 式すべての結果は sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_02_scaled_nested_commutators.sage で n=0..8、M=3,4,5、複数の (K1,K2) について数値的に確認済み。",
       ],
     },
   },
@@ -923,7 +1158,8 @@ K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
       ),
       paragraph(["(h1.y)"]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}(\cdots)
+        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
+\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
 = -i e^{i 2\pi\mu/M}\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu`,
       ),
       paragraph(["(h2.z−)"]),
@@ -934,7 +1170,8 @@ K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
       ),
       paragraph(["(h2.y)"]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}(\cdots)
+        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
+\underbrace{[i K_2^* H_2,\dots,[i K_2^* H_2,\hat{Y}_\mu]\dots]}_{n}
 = i\sinh(2K_2^*)\hat{Z}_\mu^{(-)} + \cosh(2K_2^*)\hat{Y}_\mu`,
       ),
     ],
@@ -952,55 +1189,96 @@ K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
 (\text{左辺})
 &= \frac{1}{0!}\hat{Z}_\mu^{(\pm)}
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
+i\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ 奇数}) \\
+K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases} \\
-&= \sum_{\substack{n\geq 0\\ n\text{ is even}}}\left(\frac{1}{n!}K_1^{n}\hat{Z}_\mu^{(\pm)}\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ is odd}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\frac{2\pi\mu}{M}}\,\hat{Y}_\mu\right) \\
-&= \left(\sum_{\substack{n\geq 0\\ n\text{ is even}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
-   + i\,e^{-i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ is odd}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu \\
+&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\hat{Z}_\mu^{(\pm)}\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\frac{2\pi\mu}{M}}\,\hat{Y}_\mu\right) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
+   + i\,e^{-i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu \\
 &= \cosh(K_1)\hat{Z}_\mu^{(\pm)} + i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Y}_\mu
 \end{aligned}`,
       ),
       paragraph([
-        "(h1.y) について（原文の proof は途中まで。かつ cases 内の項が statement と不整合。原文どおり再現）、",
+        "ここで 1 行目の ",
+        math(String.raw`n = 0`),
+        " 項を分けて書いたが、",
+        ref("cosh_sinh_coefficient_conversion"),
+        " (h1.z) の偶数側は ",
+        math(String.raw`n = 0`),
+        " でも ",
+        math(String.raw`K_1^{0}\hat{Z}_\mu^{(\pm)} = \hat{Z}_\mu^{(\pm)} = \frac{1}{0!}\hat{Z}_\mu^{(\pm)}`),
+        " と一致するので、2 行目では ",
+        math(String.raw`n = 0`),
+        " 項を偶数側の和へ吸収した（以下の 3 式でも同様）。3 行目では ",
+        math(String.raw`\hat{Z}_\mu^{(\pm)}, \hat{Y}_\mu`),
+        " および ",
+        math(String.raw`i\,e^{-i 2\pi\mu/M}`),
+        " が ",
+        math(String.raw`n`),
+        " に依らないので和の外へ出した。",
       ]),
+      paragraph(["(h1.y) について、"]),
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
 &= \frac{1}{0!}\hat{Y}_\mu
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\cdot K_1^{n}\cdot e^{i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ is odd}) \\
-K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ is even})
+-i\cdot K_1^{n}\cdot e^{i\frac{2\pi\mu}{M}}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+K_1^{n}\cdot\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases} \\
-&= \sum_{\substack{n\geq 0\\ n\text{ is even}}}\left(\frac{1}{n!}K_1^{n}\hat{Z}_\mu^{(\pm)}\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ is odd}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{i\frac{2\pi\mu}{M}}\,\hat{Y}_\mu\right)
+&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\hat{Y}_\mu\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\frac{2\pi\mu}{M}}\,\hat{Z}_\mu^{(\pm)}\right) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu
+   - i\,e^{i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)} \\
+&= \cosh(K_1)\hat{Y}_\mu - i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)} \\
+&= -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu
 \end{aligned}`,
       ),
-      paragraph([
-        "(h2.z−) について（原文の proof は途中まで。cases 内で ",
-        math(String.raw`(K_2^*)^{n}`),
-        " と書かれ偶数項に ",
-        math(String.raw`i`),
-        " が残る等 statement と不整合。原文どおり再現）、",
-      ]),
+      paragraph(["(h2.z−) について、"]),
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
 &= \frac{1}{0!}\hat{Z}_\mu^{(-)}
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\cdot (K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ is even}) \\
-i\cdot (K_2^*)^{n}\cdot\hat{Y}_\mu & (n\text{ is odd})
+-i\cdot (2K_2^*)^{n}\cdot\hat{Y}_\mu & (n\text{ 奇数}) \\
+(2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 偶数})
 \end{cases} \\
-&= \sum_{\substack{n\geq 0\\ n\text{ is even}}}\left(\frac{1}{n!}(K_2^*)^{n}\hat{Z}_\mu^{(-)}\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ is odd}}}\left(\frac{1}{n!}\,i\,(K_2^*)^{n}\,\hat{Y}_\mu\right)
+&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\hat{Z}_\mu^{(-)}\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\hat{Y}_\mu\right) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Z}_\mu^{(-)}
+   - i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Y}_\mu \\
+&= \cosh(2K_2^*)\hat{Z}_\mu^{(-)} - i\sinh(2K_2^*)\hat{Y}_\mu
 \end{aligned}`,
       ),
+      paragraph(["(h2.y) について、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\text{左辺})
+&= \frac{1}{0!}\hat{Y}_\mu
+   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
+i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
+(2K_2^*)^{n}\cdot\hat{Y}_\mu & (n\text{ 偶数})
+\end{cases} \\
+&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\hat{Y}_\mu\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,(2K_2^*)^{n}\,\hat{Z}_\mu^{(-)}\right) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Y}_\mu
+   + i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Z}_\mu^{(-)} \\
+&= \cosh(2K_2^*)\hat{Y}_\mu + i\sinh(2K_2^*)\hat{Z}_\mu^{(-)} \\
+&= i\sinh(2K_2^*)\hat{Z}_\mu^{(-)} + \cosh(2K_2^*)\hat{Y}_\mu
+\end{aligned}`,
+      ),
+      paragraph([
+        "以上 4 式がいずれも statement の右辺と一致するので、主張が成り立つ。",
+      ]),
     ],
     conversion: {
       status: "converted",
       notes: [
-        "原文 proof の (h1.z) は完全（cosh/coshまで到達）。(h1.y) と (h2.z−) は原文 proof が偶奇分割の途中で終わっており、かつ cases 内の項・係数が statement と不整合（誤植）である。忠実性のため原文の未完・不整合状態をそのまま再現し、fix はしていない。",
+        "原文 proof の (h1.z) は完全（cosh/sinh まで到達）。(h1.y) と (h2.z−) は原文 proof が偶奇分割の途中で終わっており、かつ cases 内の項・係数が statement と不整合だった。(h2.y) には原文 proof が無かった。本作業でこの 3 式を statement と整合する形へ直し、いずれも cosh/sinh まで書き切った。",
+        "どちらが誤りかは数値検証で確定させた。sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_04_original_typo_refuted.sage により、原文 proof の cases 表式 —— (h1.y) 奇数項 i K_1^n e^{iθ} hat(Y)_mu・偶数項 K_1^n hat(Z)_mu、(h2.z−) の (K_2^*)^n と偶数項に残る i —— は M=3,4,5・n=1..4 のすべてで残差が 1e-3 を大きく超えて成り立たない一方、statement と整合する修正後の cases は残差 1e-8 以下で成立することを確認した。したがって誤りは proof 側にあり、statement は正しい。",
+        "4 式の最終形（cosh/sinh 表示）そのものも check_03_taylor_sums.sage で、級数を 40 次で打ち切って M=3,4,5・全 mu ∈ calM・複数の (K1,K2) について残差 1e-8 以下であることを確認済み。土台となる 1 重公式 (A)〜(D) は check_01_single_commutators.sage で確認した。",
+        "原文 statement は (h1.y)/(h2.y) の左辺を「Σ (⋯)」と省略していたが、どの生成子でネストした交換子かが左辺だけで確定しないため、他の 2 式と同じ形へ明示的に書き下した。",
       ],
     },
   },
@@ -2581,6 +2859,21 @@ T_{V_2}(\hat{Y}_\mu)
     ],
     proof: [
       paragraph([
+        "以下、",
+        ref("extract_taylor_coefficient_of_Z_Y"),
+        " の (h1.z), (h1.y) は ",
+        math(String.raw`\pm`),
+        " の 2 つの符号選択について成り立つが、本主張では ",
+        math(String.raw`\hat{Z}_\mu^{(-)}`),
+        " に作用させるので、いずれも ",
+        math(String.raw`\pm = -`),
+        "（すなわち ",
+        math(String.raw`H_1^{(-)}`),
+        " と ",
+        math(String.raw`\hat{Z}_\mu^{(-)}`),
+        " の組）を選んで適用する。",
+      ]),
+      paragraph([
         math(String.raw`T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})`),
         " について、次の変形で ",
         ref("exp_X_Y_exp_-X"),
@@ -2605,14 +2898,36 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
       ),
       paragraph([
         math(String.raw`T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)`),
-        " について、同様（原文 proof も「同様」）。結果は",
+        " について、作用させる元が ",
+        math(String.raw`\hat{Z}_\mu^{(-)}`),
+        " から ",
+        math(String.raw`\hat{Y}_\mu`),
+        " へ変わるだけで、共役の展開はまったく同じ手順である。",
       ]),
       displayMath(
-        String.raw`T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
-= -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu
-= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}`,
+        String.raw`\begin{aligned}
+T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
+&= (V_1^{(\pm)})^{1/2}\cdot\hat{Y}_\mu\cdot(V_1^{(\pm)})^{-1/2} \\
+&= \left(\exp(i K_1 H_1^{(\pm)})\right)^{1/2}\cdot\hat{Y}_\mu\cdot\left(\exp(i K_1 H_1^{(\pm)})\right)^{-1/2} \\
+&= \exp\!\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\cdot\hat{Y}_\mu\cdot\exp\!\left(-\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\right) \\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}
+   \underbrace{\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\dots,\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n\text{ times}}
+   \quad (\because \text{exp 共役の級数展開}) \\
+&= -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu
+   \quad (\because \text{テイラー係数の抽出 (h1.y)}) \\
+&= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}-i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+\end{aligned}`,
       ),
+      paragraph([
+        "最後の等号は、行ベクトルと列ベクトルの積の定義",
+        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} = aA + bB`),
+        " による（",
+        math(String.raw`A, B \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        "、",
+        math(String.raw`a, b \in \mathbb{C}`),
+        "）。",
+      ]),
       paragraph([
         math(String.raw`T_{V_2}(\hat{Z}_\mu^{(-)})`),
         " について、",
@@ -2623,7 +2938,7 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
         String.raw`\begin{aligned}
 T_{V_2}(\hat{Z}_\mu^{(-)})
 &= V_2\cdot\hat{Z}_\mu^{(-)}\cdot V_2^{-1} \\
-&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Z}_\mu^{(-)}\cdot\left((2s_2)^{M/2}\exp(-i K_2^* H_2)\right)^{-1} \\
+&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Z}_\mu^{(-)}\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1} \\
 &= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot
    \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n\text{ times}}
@@ -2636,20 +2951,47 @@ T_{V_2}(\hat{Z}_\mu^{(-)})
       ),
       paragraph([
         math(String.raw`T_{V_2}(\hat{Y}_\mu)`),
-        " について、同様（原文 proof も「同様」）。結果は",
+        " についても、スカラー ",
+        math(String.raw`(2s_2)^{M/2}`),
+        " が共役で打ち消し合うことは同じで、作用させる元だけが ",
+        math(String.raw`\hat{Y}_\mu`),
+        " に変わる。",
       ]),
       displayMath(
-        String.raw`T_{V_2}(\hat{Y}_\mu)
-= i\sinh(2K_2^*)\hat{Z}_\mu^{(-)} + \cosh(2K_2^*)\hat{Y}_\mu
-= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}`,
+        String.raw`\begin{aligned}
+T_{V_2}(\hat{Y}_\mu)
+&= V_2\cdot\hat{Y}_\mu\cdot V_2^{-1} \\
+&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Y}_\mu\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1} \\
+&= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot
+   \sum_{n=0}^{\infty}\frac{1}{n!}
+   \underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Y}_\mu\right]\dots\right]}_{n\text{ times}}
+   \quad (\because \text{exp 共役の級数展開}) \\
+&= i\sinh(2K_2^*)\hat{Z}_\mu^{(-)} + \cosh(2K_2^*)\hat{Y}_\mu
+   \quad (\because \text{テイラー係数の抽出 (h2.y)}) \\
+&= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}
+\end{aligned}`,
       ),
+      paragraph([
+        "スカラー ",
+        math(String.raw`(2s_2)^{M/2} \in \mathbb{C}^{\times}`),
+        " は ",
+        ref("scalar_identity_commutes"),
+        " により ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の任意の元と可換なので前へ出せて、",
+        math(String.raw`(2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1`),
+        " により消える。以上 4 式が statement と一致する。",
+      ]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "原文 proof を忠実に翻訳。原文の V1 分・V2 分の共役展開（exp の (1/2) スケール、(2s2)^{M/2} の相殺）と、原文 statement にある行列表示（行ベクトル×列ベクトル）を proof 内に取り込んだ。",
-        "T_{(V1)^{1/2}}(hat(Y)) と T_{V2}(hat(Y)) は原文 proof が「同様」とのみ記す。原文 statement の hat(Y) 行列表示は scalar 表示と exp 符号が不整合（誤植）だが、ここでは statement と整合する scalar 形を採った。",
+        "T_{(V1)^{1/2}}(hat(Y)) と T_{V2}(hat(Y)) は原文 proof が「同様」とのみ記していたため、本作業で共役の級数展開から最終形・行列表示までを両方とも書き下した。",
+        "原文 statement の hat(Y) 行列表示は第 1 成分が i e^{-i2πμ/M} sinh(K1) で、同じ原文の scalar 表示 -i e^{i2πμ/M} sinh(K1) hat(Z) + cosh(K1) hat(Y) と符号・exp の両方が食い違っていた。どちらが誤りかは数値検証で確定させた。sagemath/check/041_claim_TV1_TV2_actions/check_02_hatY_column_vector.sage により、scalar 表示と整合する列ベクトル (-i e^{i2πμ/M} sinh K1, cosh K1)^T は M=3,4,5・全 mu ∈ calM・複数の (K1,K2) で残差 1e-8 以下、原文の列ベクトル (i e^{-i2πμ/M} sinh K1, cosh K1)^T は残差が 1e-3 を大きく超えることを確認した。よって誤りは行列表示側であり、これを scalar 表示に合わせて修正した。下流の calc_of_TxT_hatZxhatY（013/014）が既に修正後の形を使っているので、これで文書内が整合する。",
+        "V_2 の共役で原文は V_2^{-1} を ((2s2)^{M/2} exp(-i K2^* H2))^{-1} と書いていたが、V_2 = (2s2)^{M/2} exp(i K2^* H2) の逆元なので exp の符号は正（+i）が正しい。誤植として修正した。",
+        "4 つの作用そのものは check_01_T_actions.sage で、行列指数関数 exp((1/2) i K1 H1^{(-)}), exp(i K2^* H2) を明示的に構成した直接計算により確認済み（前因子 (2 s_2)^{M/2} を明示的に付けた形で相殺も確認）。",
       ],
     },
   },

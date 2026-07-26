@@ -120,8 +120,8 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
 [K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Y}_\mu]]}^{n=2}]
 &= [K_1 H_1^{(\pm)},\ K_1^2\cdot 2^2\cdot(-1)\cdot\hat{Y}_\mu] \\
 &= K_1^3\cdot 2^2\cdot(-1)\cdot[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1^3\cdot 2^2\cdot(-1)\cdot\left(-2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^3\cdot 2^3\cdot(-1)^2\cdot e^{-i\frac{2\pi\mu}{M}}\hat{Z}_\mu^{(\pm)}
+&= K_1^3\cdot 2^2\cdot(-1)\cdot\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
+&= K_1^3\cdot 2^3\cdot(-1)^2\cdot e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)}
 \end{aligned}`,
       ),
       paragraph(["(h2.z−) ", math(String.raw`n=1`), "："]),
