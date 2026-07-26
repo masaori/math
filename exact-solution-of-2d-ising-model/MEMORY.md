@@ -1,5 +1,30 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補6）: 最終成果物（PDF）の生成器を作った
+
+**README 7 節が定める「content だけから最終成果物を生成する」を、実行可能にした。**
+それまで生成器が存在せず、証明が論文として出せる状態か誰も確認できていなかった。
+
+- `structured-latex/tools/build-latex.ts` — content のみを入力に LaTeX を組み、
+  tectonic（XeTeX 系・日本語は xeCJK ＋ ヒラギノ）で PDF まで作る。
+  `npm run build:tex` / `npm run build:pdf`。出力は `build/`（git 管理外）。
+- **実測: 175 ページ、ブロック 217（見出し 15・証明 141）、ラベル 183、相互参照 945 件すべて解決、
+  未解決参照 0、LaTeX エラー 0。** 目次・定理番号（章.通し番号）・証明環境・相互参照リンク・
+  数式と日本語の混植を PDF の目視で確認済み（1/2/5/40/120 ページ）。
+- 変換規則: 文書順は配列順のまま、`level` 1 → `\part` / 2 → `\section` / 3 以降は下位の節。
+  定義・主張・定理・注意・ノートは amsthm の各環境、`proof` は proof 環境、
+  `ref()` は `\cref`（cleveref）。
+  素直に level 1 → section にすると章より前のブロックが「定義 0.4」になるため part を使う（実測で選択）。
+- **ノート非混入を 3 重で検査**（`tools/verify-no-notes-in-output.ts`、`npm run check` に組み込み）:
+  生成器のコードが notes を参照しないこと／生成物にノート id が無いこと／ノート地の文の
+  特徴的な文字列 107 件が生成物に無いこと。検査が効くことは注入実験で確認済み。
+- **数式は 6,683 ノード・366,329 文字・マクロ 154 種すべてが LaTeX でそのまま組めた**（組めないもの 0）。
+  必要なパッケージは amsmath / amssymb / mathtools のみ。詳細は
+  [docs/publication-output.md](docs/publication-output.md)。
+
+次にやるなら: 出版形態（article → book / 章割り）の検討、参考文献・索引、
+図（現在 0 件）の扱い。本文の記法・内容の変更は別セッションの担当。
+
 ## 完了（2026-07-26・追補5）: 型で落とせる範囲を拡張（実行時検査からの移管）
 
 **新たにコンパイル時に落ちるようになったもの**（負テスト 16 件で実証。`npm run test:types`）:
