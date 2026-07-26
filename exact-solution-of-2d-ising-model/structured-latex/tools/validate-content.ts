@@ -141,6 +141,8 @@ function scanForTypstMath(block: ConvertedBlock, file: string): void {
     strings.push(title.tex);
   }
   assertNoTypstToken(strings, `${file}:${block.id}`);
+  // 本文（content/）のみ。notes/ は抽象的な見方を残す場所なので検査しない。
+  assertNoAbstractTensorNotation(strings, `${file}:${block.id}`);
 }
 
 function scanForTypstMathInNodes(nodes: readonly Node[], where: string): void {
@@ -158,6 +160,32 @@ function assertNoTypstToken(strings: readonly string[], where: string): void {
   const first = suspicious[0];
   if (first !== undefined) {
     throw new Error(`${where} has suspicious unconverted Typst math token: ${first}`);
+  }
+}
+
+/**
+ * 抽象テンソル積の記法が本文に混入していないことを検査する。
+ *
+ * README 2 節の要求: 「M 個の 2×2 行列のテンソル積は、具体的な 2^M × 2^M の複素行列
+ * （クロネッカー積）として専用の記号で定義する。抽象的なテンソル積の一般論は本文に出さない」。
+ *
+ * 経緯: 本文全章の記法をクロネッカー積へ置換した後、**後から書かれた章で `\otimes` が
+ * 揺り戻る事故**が実際に起きた（011 章・013 章に 4 箇所）。人手で気づくのに頼らず機械検査にする。
+ *
+ * 対象は `content/`（本文＝出版対象）のみ。`notes/`（参照用ノート）は
+ * 抽象的な見方を「採用しなかった経路」として記録する場所なので検査しない。
+ */
+function assertNoAbstractTensorNotation(strings: readonly string[], where: string): void {
+  const offending = strings.filter((value) => /\\otimes/.test(value));
+  const first = offending[0];
+  if (first !== undefined) {
+    throw new Error(
+      `${where} に抽象テンソル積の記法 \\otimes がある: ${first}\n` +
+        "  → クロネッカー積の記法に直すこと（空間は \\mathrm{Mat}(2^M,\\mathbb{C})、" +
+        "単位行列は I_{\\mathrm{Mat}(2^M,\\mathbb{C})}、積は \\boxtimes）。\n" +
+        "  抽象テンソル積の一般論は本文に出さない（README 2 節）。" +
+        "抽象的な見方を残したい場合は notes/ へ。",
+    );
   }
 }
 
