@@ -1,0 +1,66 @@
+# ---------------------------------------------------------
+# SageMath: テイラー係数の抽出（半整数運動量版）
+#
+# 対象: structured-latex extract_taylor_coefficient_of_check_Z_Y
+#
+# (h1.z) sum_n 1/n! [ (i/2)K1 H1^{(+)},...,checkZ_mu ]_n
+#          = cosh(K1) checkZ_mu + i e^{-i th~} sinh(K1) checkY_mu
+# (h1.y) sum_n 1/n! [ (i/2)K1 H1^{(+)},...,checkY_mu ]_n
+#          = -i e^{ i th~} sinh(K1) checkZ_mu + cosh(K1) checkY_mu
+# (h2.z) sum_n 1/n! [ i K2* H2,...,checkZ_mu ]_n
+#          = cosh(2K2*) checkZ_mu - i sinh(2K2*) checkY_mu
+# (h2.y) sum_n 1/n! [ i K2* H2,...,checkY_mu ]_n
+#          = i sinh(2K2*) checkZ_mu + cosh(2K2*) checkY_mu
+#
+# 級数は 40 次で打ち切る。
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+NTRUNC = 40
+
+
+def series_sum(G, W, ntrunc=NTRUNC):
+    """sum_{n=0}^{ntrunc} (1/n!) ad_G^n (W)"""
+    out = matrix(CDF, W)
+    term = matrix(CDF, W)
+    for n in range(1, ntrunc + 1):
+        term = comm(G, term) / CDF(n)
+        out = out + term
+    return out
+
+
+print("=== テイラー係数の抽出（級数を 40 次で打ち切り）===")
+all_ok = True
+for M in EVEN_M:
+    O = SpinOps(M)
+    H1p = O.H1(+1)
+    for params in EVEN_PARAMS:
+        K1v = RDF(params['K1'])
+        K2s = K_star(params['K2'])
+        G1s = CDF(I) / 2 * K1v * H1p
+        G2s = CDF(I) * K2s * O.H2
+        ch1, sh1 = CDF(cosh(K1v)), CDF(sinh(K1v))
+        ch2, sh2 = CDF(cosh(2 * K2s)), CDF(sinh(2 * K2s))
+        w = {'h1.z': 0.0, 'h1.y': 0.0, 'h2.z': 0.0, 'h2.y': 0.0}
+        for mu in range(1, M + 1):
+            t = th_tilde(M, mu)
+            Zc, Yc = checkZ(O, mu), checkY(O, mu)
+            w['h1.z'] = max(w['h1.z'], opnorm(
+                series_sum(G1s, Zc) - (ch1 * Zc + CDF(I) * eiph(-t) * sh1 * Yc)))
+            w['h1.y'] = max(w['h1.y'], opnorm(
+                series_sum(G1s, Yc) - (-CDF(I) * eiph(t) * sh1 * Zc + ch1 * Yc)))
+            w['h2.z'] = max(w['h2.z'], opnorm(
+                series_sum(G2s, Zc) - (ch2 * Zc - CDF(I) * sh2 * Yc)))
+            w['h2.y'] = max(w['h2.y'], opnorm(
+                series_sum(G2s, Yc) - (CDF(I) * sh2 * Zc + ch2 * Yc)))
+        worst = max(w.values())
+        ok = worst <= TOL
+        print(f"  M={M}, K1={params['K1']}, K2={params['K2']}: "
+              f"(h1.z) {w['h1.z']:.1e} (h1.y) {w['h1.y']:.1e} "
+              f"(h2.z) {w['h2.z']:.1e} (h2.y) {w['h2.y']:.1e}"
+              f"  -> {'PASS' if ok else 'FAIL'}")
+        all_ok = ok and all_ok
+
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")
