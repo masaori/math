@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "A_theta_is_identity_when_gamma2_zero",
+  "H1_H2_via_check_Z_Y",
   "H1_H2_via_hatZ_hatY",
   "T_V_eq_T_Vprime",
   "T_V_eq_T_Vprime_on_hatZ_hatY",
@@ -31,8 +32,10 @@ export const ALL_LABELS = [
   "angle_representation_of_rr",
   "angle_section_existence_uniqueness",
   "anticommutator_of_Z_and_Y",
+  "anticommutator_of_check_Z_Y",
   "anticommutator_of_hat_Z_and_hat_Y",
   "anticommutator_of_psi",
+  "antiperiodic_exp_sum",
   "arg_of_gamma2_quotient",
   "arg_of_gamma_2_mu",
   "arg_of_product_of_complex_numbers",
@@ -43,6 +46,7 @@ export const ALL_LABELS = [
   "centralizer_is_scalar",
   "commutation_V_psi",
   "commutator_of_H_and_Z_Y",
+  "commutator_of_H_and_check_Z_Y",
   "commutator_via_anticommutators",
   "complex_numbers_form_a_field",
   "condition_of_commutativity_of_sqrt_and_product",
@@ -69,6 +73,7 @@ export const ALL_LABELS = [
   "def_fermi",
   "def_frobenius_inner_product",
   "def_gamma_theta_mu",
+  "def_half_integer_modes",
   "def_hatZ_hatY",
   "def_hermitian_positive_definite",
   "def_invertible_elements_of_R",
@@ -155,6 +160,7 @@ export const ALL_LABELS = [
   "range_of_args_of_square_of_complex_numbers",
   "rayleigh_bounds_operator_norm",
   "real_exp_series_converges",
+  "recover_Z_Y_from_check_Z_Y",
   "recover_Z_Y_from_hatZ_hatY",
   "relation_of_gamma_2",
   "remark_real_analysis_escape_point",
@@ -181,6 +187,7 @@ export const ALL_LABELS = [
   "trace_of_number_operator_product",
   "trace_power_sandwich",
   "two_by_two_transfer_identity",
+  "why_008_applies_only_to_minus_sector",
   "ホロノミック量子場_p142下段_1",
 ] as const;
 
