@@ -162,14 +162,62 @@ cycle 11 で提起した T2 の扱いは既定方針 1（T1 統合）で実行�
 ### 方針判断点は無し（cycle 13）
 新たなユーザー判断点は生じていない。
 
+## cycle 14 総括（rank:cycle14, 2026-07-26）
+
+目標は 002 の G1 の残るボトルネック（2 変数・$\mathbb{Z}_p^2$ 塔での $v_p$ 増大則）の解消。**完全解消には至らなかったが、
+未達の理由を 2 点まで絞り込み、その過程で 4 つの命題を証明した。**
+
+- **T1 step 2（呼び出し元が担当）: 命題 V**。`outputs/reports/cycle14_T1_vp_growth_two_variable.md`。
+  $a_{p^n}\equiv P(1,\dots,1)^{p^{dn}}\pmod p$（$\bmod p$ で $z^{p^n}-1=(z-1)^{p^n}$ となり終結式が潰れる）から
+  **$v_p(a_{p^n})>0\iff p\mid P(1,\dots,1)$** を初等的に証明（$\mathbb{Q}_p$ も代数的整数論も不使用）。
+  併せて **cycle 13 の content 判定式が $d=2$ で崩れる反例**（content$=1$ でも増大、8 件）と、
+  **レジームの三分法**（$p\nmid P(1,1)$ 自明／$p\mid P(1,1)\ne0$ 非自明／$P(1,1)=0$ トーラス零点）を確定。
+  敵対的レビューで**誤り 3 件を検出・訂正**（Deninger との包含関係の誤り、4 段フィットの数値的誤り、$X^2$ 係数の未証明断定）。
+- **T3 step 1: $(★_2)$ と非退化塔の閉形式**。起動事故で**2 経路が独立に走り**、
+  `cycle14_T3_two_variable_criterion.md`（第 1 経路）と `cycle14_T3_Zl2_tower_criterion.md`（第 2 経路）が
+  **同じ境界に到達**した: $(★_2)$・連結性判定・下界 $a\ge v_\ell(\mathrm{content})$ は自前で証明でき、
+  **上界 $a\le v_\ell(\mathrm{content})$ は自前では証明できない**。第 1 経路はさらに非退化条件
+  （$H$ が $\mathbb{P}^1(\mathbb{F}_\ell)$ 上に零点なし）の下で**完全な閉形式**
+  $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^{2n}+\frac{k(\ell+1)}{\ell-1}\ell^n-2n+\nu$ を証明（命題 W）。
+  $L\times L$ トーラスの $\ell=3$ 塔で $\mathrm{ord}_3(\tau(3^n))=4\cdot3^n-2n-4$ を独立に検算（$n=0,1,2$ で $0,6,28$）。
+  $\ell=2$ は退化ケースで射程外。**文献 Kataoka arXiv:2606.03579 を発見**（$\mathbb{Z}_p^d$ グラフ被覆の主要係数の明示公式。abstract 確認）。
+- **T1 step 3: 命題 T の一般化**。`outputs/reports/cycle14_T1_proposition_T_generalization.md`。
+  定理 A（判定条件）・B（次元の漸化式）・C（$L$ 奇なら任意の $d$ で $4\mid v_p$）・D（命題 T の 10 行証明）・
+  E（部分トーラス下界 $v_p(\tau_d(L))\ge L^{\lfloor d/p\rfloor}-1$）・F（$p=2,d=2$ が特別な理由＝
+  $\bmod 2$ で零点集合が 2 つの部分トーラスの合併）を証明。
+  **負の結果も確定**: 奇素数に clean な法則は無い（$L=13,p=5$ 等の反例）、$d\ge3$ で等号は成らない、
+  $c(L^{d-1}-1)$ 型は誤りで正しい指数は $L^{\lfloor d/p\rfloor}$。
+- **新規性はいずれも主張しない**（命題 V は初等的で folklore の可能性、命題 W は Kataoka が同種の公式を与えている、
+  定理 A–F は本文未確認）。
+- **002 の G1 は依然未達**。ただし残るのは **(a) 一般の $P$（グラフのラプラシアンでないもの）で $p\mid P(1,1)$ のときの
+  増大の完全な形、(b) $\ell^{2n}$ 係数の上界方向（Cuoco–Monsky / Kataoka に依拠、本文未取得）** の 2 点。
+- **cycle 15 の焦点**: (b) は Kataoka arXiv:2606.03579 の本文取得で決着する可能性が高い（文献参照で済むなら
+  自前証明は不要）。(a) は一般の $P$ を扱う必要があり、命題 W の機構が $\det L$ 以外へ広がるかが鍵。
+
+### 方針判断点は無し（cycle 14）
+新たなユーザー判断点は生じていない。
+
+### 逸脱（記録）
+cycle 14 step 1 の起動でシェル展開の事故があり、同じ課題が 2 回走った。成果は破棄せず、
+**独立な 2 経路**として両方を残し、相互に参照ヘッダを付けた（両者が同じ境界に到達したことは境界の信頼性を高める）。
+
+## cycle 15 step 列（2026-07-26 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | fetch_kataoka_and_close_upper_bound | todo | | G1 の未達点 (b)。Kataoka arXiv:2606.03579 の**本文を取得**し、$\mathbb{Z}_p^d$ グラフ被覆の主要係数（$\mu$ = Cuoco–Monsky の $m_0$）の明示公式と仮定を命題番号まで特定する。本プロジェクトの命題 W の上界方向がこれで埋まるなら、自前証明は不要と判断して 002 に反映する。取得できなければ「本文未確認」を維持し、上界方向の自前証明を試みる。 |
+| 2 | T1 Reframe | general_P_growth_beyond_laplacian | todo | | G1 の未達点 (a)。$p\mid P(1,1)\ne0$ かつ $P$ がグラフのラプラシアンでない場合の増大の完全な形。命題 W の機構（$f=P(1+T,1+S)$ の最低次斉次部分と非退化条件）が一般の $P$ へそのまま効くかを、まず数値で当たってから証明を試みる。効くなら G1 が閉じる。 |
+| 3 | T3 Pure | proposition_T_d3_structure | todo | | cycle 14 step 3 が残した「$d=3,p=2$ で下界より真に大きくなる散発的な追加解」（$L=9,15,17,21,27$）の構造を特定する。定理 A の判定条件を使って追加解を分類できるか。clean な法則が無いことは確定しているので、目標は法則でなく**追加解の分類**である。 |
+| 4 | — | rank:cycle15 | todo | | 再ランク → cycle 16 方向。 |
+
 ## cycle 14 step 列（2026-07-26 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T3 Pure | extend_criterion_to_Z_ell_2_towers | todo | | cycle 13 step 2 の証明機構（(★) のブロック巡回対角化＋Weierstrass 準備定理）を $\mathbb{Z}_\ell^2$-塔へ拡張する。目標形は DuBose–Vallières Thm A の $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）。2 変数の $\det L(z,w)$ の content が主要項の係数を与えるかを、まず数値で当たってから証明を試みる。 |
-| 2 | T1 Reframe | vp_growth_law_two_variable | todo | | 002 の G1 の残る唯一のボトルネック。一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$・$\mathbb{Z}_p^2$ 塔での $v_p(a_{p^n})$ 増大則。step 1 が成功すればグラフ側から移植できる可能性がある。文献の特定も継続（Cuoco–Monsky 1981 の本文取得を含む）。 |
-| 3 | T1 Reframe | proposition_T_generalization | todo | | 命題 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を一般化できるか。奇素数 $p$ での $v_p(\tau(L))$、および $d$ 次元トーラスへの拡張。命題 T の証明機構（不分岐性＋Newton 多角形＋LTE）がどこまで効くかを見る。 |
-| 4 | — | rank:cycle14 | todo | | 再ランク → cycle 15 方向。 |
+| 1 | T3 Pure | extend_criterion_to_Z_ell_2_towers | done | 2026-07-26 | cycle 13 step 2 の証明機構（(★) のブロック巡回対角化＋Weierstrass 準備定理）を $\mathbb{Z}_\ell^2$-塔へ拡張する。目標形は DuBose–Vallières Thm A の $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）。2 変数の $\det L(z,w)$ の content が主要項の係数を与えるかを、まず数値で当たってから証明を試みる。 |
+| 2 | T1 Reframe | vp_growth_law_two_variable | done | 2026-07-26 | 002 の G1 の残る唯一のボトルネック。一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$・$\mathbb{Z}_p^2$ 塔での $v_p(a_{p^n})$ 増大則。step 1 が成功すればグラフ側から移植できる可能性がある。文献の特定も継続（Cuoco–Monsky 1981 の本文取得を含む）。 |
+| 3 | T1 Reframe | proposition_T_generalization | done | 2026-07-26 | 命題 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を一般化できるか。奇素数 $p$ での $v_p(\tau(L))$、および $d$ 次元トーラスへの拡張。命題 T の証明機構（不分岐性＋Newton 多角形＋LTE）がどこまで効くかを見る。 |
+| 4 | — | rank:cycle14 | done | 2026-07-26 | 下記「cycle 14 総括」。T3(★_2 と非退化塔の完全な閉形式を証明。**起動事故で 2 経路が独立に走り同じ境界に到達**)/T1(**命題 V**: v_p(a_{p^n})>0 ⟺ p|P(1,1) を初等証明。d=2 で content 判定式が崩れる反例も)/T1(命題 T の一般化: 定理 A–F を証明、**奇素数と d≥3 では clean な法則が無いことを確定**)。cycle15 step列起こし。 |
 
 ## cycle 13 step 列（2026-07-26 起こし）
 

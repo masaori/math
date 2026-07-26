@@ -27,7 +27,10 @@
 | **1 変数**で、付値の増大率 $\mu_p$ ＝ $-\log_p\mathrm M_p(f)$ ＝ 係数 content の $p$ 進付値 | **既知** | Ueki, arXiv:1702.03819, Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7 |
 | グラフの $\mathbb{Z}_\ell$ 塔で $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^n+\lambda n+\nu$ | **既知** | McGown–Vallières III, arXiv:2107.07639, Theorem 6.1（仮定: $\chi(X)\neq0$、全導来グラフが連結） |
 | グラフの $\mathbb{Z}_\ell^d$ 塔（$d\ge2$）では単一の線形成長率では書けず $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$） | **既知** | DuBose–Vallières, Algebraic Combinatorics **6** (2023) 1331–1346, Theorem A（仮定: 次数 1 の頂点なし、$\chi(X)\neq0$） |
-| 一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$ の $v_p(a_{p^n})$ の増大則 | **未特定**（cycle 13 step 1 の調査で文献に見つけられず） | — |
+| $v_p(a_{p^n})>0\iff p\mid P(1,1)$（$d$ 変数、非自明性の完全な判定） | 本プロジェクト（cycle 14 で証明。初等的で folklore の可能性が高く**新規性は主張しない**） | `outputs/reports/cycle14_T1_vp_growth_two_variable.md` 命題 V・補題 V0 |
+| グラフの $\mathbb{Z}_\ell^d$ 塔での $\mathrm{ord}_\ell(\kappa_n)$ の**明示的な主要係数**（誤差項なし） | **既知** | Kataoka, *An Iwasawa-type asymptotic formula for multiple $\mathbb{Z}_p$-coverings of graphs*, arXiv:2606.03579（abstract 確認。主要係数 $\lambda,\mu$ を明示し先行研究の誤差項を除去したと述べている。**本文未取得**）。$\ell^{2n}$ 係数は Cuoco–Monsky の $m_0$ 不変量 |
+| 非退化なグラフ $\mathbb{Z}_\ell^2$ 塔での完全な閉形式 $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^{2n}+\frac{k(\ell+1)}{\ell-1}\ell^n-2n+\nu$ | 本プロジェクト（cycle 14 で証明。**新規性は主張しない**＝上記 Kataoka が同種の公式を与えている） | `outputs/reports/cycle14_T3_two_variable_criterion.md` 定理 5（第 1 経路）。独立な第 2 経路 `cycle14_T3_Zl2_tower_criterion.md` |
+| 一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$（グラフのラプラシアンでないもの）の $v_p(a_{p^n})$ の**増大の完全な形** | **未特定・未証明** | — |
 | 円分 $\mathbb{Z}_p$ 拡大（アーベル体）で $\mu_p=0$ | **既知** | Ferrero–Washington (1979) |
 | 全域木数の $\ell$ 進付値が岩澤 $\mu,\lambda$ と平行に振る舞う（グラフの岩澤理論） | **既知** | arXiv:2006.14012「On abelian $\ell$-towers of multigraphs」ほか（Vallières, McGown, Gonet 系） |
 | $\mathbb{Z}^2$ トーラス全域木エントロピー $\to 4G/\pi$（$G$＝Catalan 定数） | **既知** | 古典（Kirchhoff の matrix-tree 定理＋格子和）。本リポジトリでは枠組みの妥当性検査に使用（`sagemath/check/cycle9_T1_spanning_tree/`） |
@@ -72,13 +75,27 @@ Deninger の $p$ 進エントロピー $\hbar_p$ と Besser–Deninger の $p$ �
 $v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になるのは $P$ が $p$ 進トーラス上に零点をもつ場合で、
 そこは $m_p$ が定義されない領域である（Ueki arXiv:1702.03819 Remark 2.4 が両者の相違を明記）。
 
-**($p$) 側の残る未確定点**: 付値の増大を測る正しい量は $\log|\cdot|_p$ で定義される Ueki の $\mathrm M_p$ であり、
+**($p$) 側の cycle 14 での前進**: 付値の増大を測る正しい量は $\log|\cdot|_p$ で定義される Ueki の $\mathrm M_p$ であり、
 **1 変数**では $\mu_p=-\log_p\mathrm M_p=$ 係数 content の $p$ 進付値という同一視が確立している
-（Ueki, Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7）。しかし**2 変数・$\mathbb{Z}_p^2$ 塔**では、
-グラフの場合ですら単一の線形成長率では書けず $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）となる
-（DuBose–Vallières, Algebraic Combinatorics 6 (2023), Thm A）。
-一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$ の $v_p(a_{p^n})$ の増大則を述べた文献命題は**特定できていない**。
-**この一般性が確定するまで命題 D を主定理として書けない（G1 未達）。**
+（Ueki, Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7）。**2 変数・$\mathbb{Z}_p^2$ 塔**では単一の線形成長率では書けず
+$\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）となる（DuBose–Vallières, Algebraic Combinatorics 6 (2023), Thm A）。
+cycle 14 で次の 3 点が加わった。
+
+1. **非自明性の判定は完全に決着した**（命題 V, `cycle14_T1_vp_growth_two_variable.md`）:
+   任意の $d$、任意の $P$ について $v_p(a_{p^n})>0\iff p\mid P(1,\dots,1)$。
+   実体は $a_{p^n}\equiv P(1,\dots,1)^{p^{dn}}\pmod p$ で、$\mathbb{Z}/p$ 上の初等的な議論のみ（$\mathbb{Q}_p$ 不使用）。
+2. **レジームの三分法が確定した**: $p\nmid P(1,1)$ は恒等的に $0$（$\Lambda$ 側自明）／$p\mid P(1,1)\ne0$ は非自明（完全な形は未証明）／
+   $P(1,1)=0$ はトーラス零点レジーム（本稿の離散ラプラシアン・全域木数がここ。命題 T がその一部の答え）。
+3. **グラフの場合（$P(1,1)=0$ 側）は、非退化条件の下で完全な閉形式が付いた**
+   （`cycle14_T3_two_variable_criterion.md` 定理 5）。例: $L\times L$ トーラスの $\ell=3$ 塔で
+   $\mathrm{ord}_3(\tau(3^n))=4\cdot3^n-2n-4$（$n=0,1,2$ で $0,6,28$ と厳密一致）。
+   $\ell=2$ は退化ケースで射程外。
+
+**($p$) 側に残る未確定点（G1 未達の理由）**:
+一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$（グラフのラプラシアンでないもの）について、$p\mid P(1,1)$ の場合の
+**増大の完全な形は未証明**である。また $\ell^{2n}$ 項の係数が $v_\ell(\mathrm{content})$ に一致することの
+**上から抑える向きは自前で証明できておらず**、Cuoco–Monsky / Kataoka（arXiv:2606.03579、本文未取得）に依拠する。
+**したがって命題 D を主定理として書き切れない（G1 未達）。**
 
 ### 現時点で厳密に確定している部分命題（すべて $\mathbb{R}$ 不使用・決定可能）
 
@@ -106,6 +123,23 @@ $v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になる
   Hensel の補題、Newton 多角形、二項展開のみで $\mathbb{R}$ を使わない。
   検証 `sagemath/check/cycle13_T1_tau_v2/`。**新規性は主張しない**（文献は abstract のみ確認、本文未確認。report §5）。）
   偶数 $L$ では成立しない（$L=2,\dots,14$ で $v_2=5,19,29,61,53,83,77$。証明が使う 2 条件が破れる。report §4）。
+
+- **命題 V（$\Lambda$ 側が非自明になる条件, 証明済み）.** $P\in\mathbb{Z}[z_1^{\pm},\dots,z_d^{\pm}]$、$p$ 素数、$L=p^n$ とすると
+  $$a_{p^n}\equiv P(1,\dots,1)^{\,p^{dn}}\pmod p,\qquad\text{ゆえに}\quad v_p(a_{p^n})>0\iff p\mid P(1,\dots,1).$$
+  （証明: `outputs/reports/cycle14_T1_vp_growth_two_variable.md` §3。$\bmod p$ で $z^{p^n}-1=(z-1)^{p^n}$ となるので
+  終結式表示 $a_L=\mathrm{Res}(z^L-1,\mathrm{Res}(w^L-1,P))$ が潰れる。$\mathbb{Q}_p$ も代数的整数論も使わない初等証明。
+  検証 `sagemath/check/cycle14_T1_vp_two_var/`。**新規性は主張しない**。）
+  これにより「いつ $\Lambda$ 側に内容があるか」が有限手続きで決定できる。
+
+- **命題 W（非退化グラフ塔の閉形式, 証明済み）.** $X$ を有限連結多重グラフ、$\alpha:E\to\mathbb{Z}^2$ を voltage、
+  $\ell$ 素数とし、$f=\det L(1+T,1+S)$ の $\bmod\,\ell$ 還元の最低次斉次部分 $H$（次数 $k$）が
+  $\mathbb{P}^1(\mathbb{F}_\ell)$ 上に零点をもたない（＝非退化。係数の有限計算で判定可能）とする。このとき $n\gg0$ で
+  $$\mathrm{ord}_\ell(\kappa_n)=\mu\,\ell^{2n}+\frac{k(\ell+1)}{\ell-1}\,\ell^{n}-2n+\nu,\qquad \mu=v_\ell(\mathrm{content}_{z,w}\det L).$$
+  （証明: `outputs/reports/cycle14_T3_two_variable_criterion.md` 定理 5。独立な第 2 経路
+  `cycle14_T3_Zl2_tower_criterion.md` が同じ境界に到達している。$\mu$ の上界方向のみ外部定理に依拠。
+  **新規性は主張しない**＝Kataoka arXiv:2606.03579 が同種の明示公式を与えている。）
+  本稿の $L\times L$ トーラス（$P(1,1)=0$ のレジーム）は $\ell=3,7,\dots$（$-1$ が非平方な $\ell$）で射程内、
+  $\ell=2$ は退化ケースで射程外。
 
 ### 検証済みだが未証明の観察（証明ではないと明示する）
 
@@ -219,7 +253,7 @@ $v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になる
 
 ## 8. 未確定・昇格前に必要な作業
 
-1. **命題 D の ($p$) 側の一般性の確定**: 一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$・$\mathbb{Z}_p^2$ 塔での $v_p(a_{p^n})$ の増大則を述べた文献命題を特定する（cycle 13 step 1 の調査では見つからなかった）。$d\ge2$ では単一の線形成長率にならない（DuBose–Vallières Thm A）ので、$P(\ell^n,n)$ 型の形を前提に探すこと。**($\infty$) 側の一般性は cycle 13 step 1 で確定済み**（LSW Thm 7.1 / LSV Thm 1.2, 1.3。ただし $\mathsf P_\Gamma$ と $a_L$ の $c_\Gamma$ 差を明示すること）。
+1. **命題 D の ($p$) 側の一般性の確定**（G1 の残るボトルネック）。cycle 14 で次まで進んだ: 非自明性の判定は完全（命題 V）／グラフの非退化塔は完全な閉形式（命題 W）／レジームの三分法が確定。**残るのは (a) 一般の $P$（グラフのラプラシアンでないもの）で $p\mid P(1,1)$ のときの増大の完全な形、(b) $\ell^{2n}$ 係数の上界方向（現状 Cuoco–Monsky / Kataoka arXiv:2606.03579 に依拠、本文未取得）**の 2 点。**($\infty$) 側の一般性は cycle 13 step 1 で確定済み**（LSW Thm 7.1 / LSV Thm 1.2, 1.3。ただし $\mathsf P_\Gamma$ と $a_L$ の $c_\Gamma$ 差を明示すること）。
 2. **観察 T の決着**: （消化済み。cycle 13 step 3 で**証明した**。命題 T として §2 の確定部分命題へ移した。`outputs/reports/cycle13_T1_observation_T_settlement.md`。既出かどうかは本文未確認なので新規性は主張しない。）
 3. **非自明な $\mu_p>0$ の実例**: （消化済み。cycle 12 step 3 で判定式 $\mu_\ell=v_\ell(\mathrm{content}_z\det L(z))$ とともに $\mu_2=2,\mu_3=1,\mu_{23}=1$ 等の例を構成。`sagemath/check/cycle12_T3_nonzero_mu_p/`。判定式は cycle 13 step 2 で**証明した**（`outputs/reports/cycle13_T3_mu_content_criterion_proof.md`
 定理 1・2・3。$(★)$ と岩澤型漸近そのものも証明。新規性は主張しない＝McGown–Vallières III Thm 6.1 の言い換え）。
@@ -237,7 +271,7 @@ $v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になる
 
 | ゲート | 判定 | 根拠 |
 |---|---|---|
-| G1 中核命題が厳密に書き下されている | **未達** | cycle 13 step 1 で **($\infty$) 側の一般性は文献本文で確定**（LSW Thm 7.1 / LSV Thm 1.2・1.3）。しかし **($p$) 側は旧稿の同一視が誤りと判明**（$\hbar_p,m_p$ は $\log_p$ 定義ゆえ付値を測らない）、正しい量での一般性（2 変数・$\mathbb{Z}_p^2$ 塔）は文献に特定できていない（§2, §8-1、`outputs/reports/cycle13_T1_padic_entropy_generality.md`）。片側だけでは命題 D を書けない。部分命題 A・B・C・N・L・T は厳密（cycle 13 step 3 で命題 T の証明が付き、未証明の観察は無くなった）だが、テーゼ（双対）を単独で担わない。plan が挙げた必要計算は削除していない |
+| G1 中核命題が厳密に書き下されている | **未達** | ($\infty$) 側は cycle 13 で文献本文により確定（LSW Thm 7.1 / LSV Thm 1.2・1.3）。($p$) 側は cycle 13 で誤った同一視を撤回し、cycle 14 で**非自明性の判定（命題 V）とグラフ非退化塔の閉形式（命題 W）を証明**したが、**(a) 一般の $P$ で $p\mid P(1,1)$ のときの増大の完全な形、(b) $\ell^{2n}$ 係数の上界方向（外部定理に依拠・本文未取得）**が残る（§2, §8-1）。命題 D を主定理として書き切れない。部分命題 A・B・C・N・L・T・V・W は厳密だが、テーゼ（双対）を単独で担わない。plan が挙げた必要計算は削除していない |
 | G2 帰属と $\mathbb{R}$ 脱出の明示 | **評価不能** | §3 に本企画の各量の帰属台帳、$\mathbb{R}$ 脱出の一点（$L\to\infty$ での $\frac1{L^2}\log|a_L|\to\log m(P)$）、$\overline{\mathbb{Q}}(\ell_p)$ 非線形部を含まないことをいずれも記載済み。ただし G1 未達（中核命題 D の一般性が未確定）のため、台帳が中核命題の扱う量を**網羅しているか**を確認できない。README の G1 前提ルールにより `達成` にはしない |
 | G3 検証計算が実行済みで再現可能 | **達成** | SageMath 側: §6 の 9 ディレクトリはすべて実行ログ（`.out`）をもち、**対象・手順・結論・限界を書いた `README.md` も 9 ディレクトリすべてに存在する**。欠落していた `sagemath/check/cycle6_T1_padic_mahler/`・`cycle3_T1_period_bound/` に `README.md` を新規作成し、`cycle3_T3_period/` にはスクリプト別 `*_README.md` を統合する `README.md` を追加した（いずれも実行ログに現れる値のみを根拠とし、数値一致を証明と呼ばず、0 件観察を仮説の支持根拠にしない旨を「限界」節に明記）。本プロジェクトの運用規約（`README.md` ＋ `.out`）を満たす。Lean 側: 本 plan は Lean 成果物を宣言せず、plan 本体から Lean 実装の計画を外している（§6）ため Lean 条項は適用しない |
 | G4 既知性リスクが調査済み | **評価不能** | `resolved_risk` / `novelty_risk` を根拠文献名つきで記載（§7）、先行研究アンカーを Deninger／Besser–Deninger／岩澤 $\mu_p$、LSW と特定、動かした軸を 1 本（メタ軸）と明示、候補の `paper_potential` を `low` へ是正して引用済み（記載欠落なし）。ただし G1 未達のため、その調査範囲が中核命題に対して十分かを確認できない。加えて寄与 (b) の既知性が未調査（§8-4）、(iv) のメタ軸の扱いが未決（§7）で、いずれも `達成` を阻む |

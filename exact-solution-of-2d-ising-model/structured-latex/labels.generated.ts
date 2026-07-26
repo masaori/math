@@ -122,6 +122,7 @@ export const ALL_LABELS = [
   "joint_eigenspace_decomposition",
   "kronecker_multilinear",
   "kronecker_product_rule",
+  "kronecker_transpose",
   "lambda_eq_exp_gamma",
   "limit_of_log_Z_in_N_row",
   "linearity_of_T",

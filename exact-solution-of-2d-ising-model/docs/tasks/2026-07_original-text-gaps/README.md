@@ -45,6 +45,7 @@
 | 030 | 030_det_A_theta_duality.md                 | `TV1_hatZ_hatY_035`（`det_A_theta`）                | **解消済み**（`733a5ee`） | なし（記録のみ） |
 | 040 | 040_A_theta_identity_gamma1_geq_1.md       | `TV1_hatZ_hatY_027`（`eigenvector_of_A_theta`）     | **解消済み** | なし（記録のみ） |
 | 050 | 050_psi_anticommutator_sqrt_branch.md      | `TV1_hatZ_hatY_032`（`anticommutator_of_psi`）      | **解消済み**（`733a5ee`）。当初の指摘「分枝の一致を暗黙に仮定」は不正確だった | なし（記録のみ） |
+| 060 | 060_TV_action_coefficients_verified.md     | `TV1_hatZ_hatY_002/005/012/018`（`T_V_hatZ_hatY` 系） | **穴なし**。係数を独立に導出して突き合わせた結果、原文はすべて正しかった（2026-07-26） | なし（否定的結果の記録のみ） |
 
 ## 依存関係
 

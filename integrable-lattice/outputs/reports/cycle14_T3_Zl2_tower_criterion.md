@@ -1,5 +1,14 @@
 # cycle 14 / T3 Pure: 判定式の $\mathbb{Z}_\ell^2$-塔（$d=2$）への拡張
 
+> **本 report は 2 つの独立な導出のうちの第 2 経路である。**
+> cycle 14 step 1 は起動事故により 2 回走り、同じ課題を**互いを参照せずに**解いた。
+> もう一方は `cycle14_T3_two_variable_criterion.md`（第 1 経路）。
+> 両者が一致した点: $(★_2)$ の証明、連結性の判定条件、**下界 $a\ge v_\ell(\mathrm{content})$ は自前で証明できるが
+> 上界 $a\le v_\ell(\mathrm{content})$ は自前では証明できない**という境界、および新規性を主張しないこと。
+> 相違点: 第 1 経路は非退化条件の下で完全な閉形式を出し、本経路は単項式還元の仮定の下で主要 2 項を出している。
+> 独立に同じ境界へ到達したことは、境界の位置づけの信頼性を高める。
+
+
 対象: `outputs/reports/cycle13_T3_mu_content_criterion_proof.md`（以下「cycle13 report」）で証明した
 $d=1$ の機構を、**2 変数 voltage（$\mathbb{Z}^2$ 値）と $\mathbb{Z}_\ell^2$-塔**へ拡張する。
 cycle13 report §10-8 が明記したとおり、$d=1$ の結果は本プロジェクトの $L\times L$ トーラスには適用できない。
