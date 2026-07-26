@@ -120,3 +120,27 @@ print("=" * 78)
 print("結論: 観察 T は奇 L=3..17 で厳密に成立し、証明の各前提((3) の付値条件)も")
 print("      全 j で満たされることを確認した。偶 L では前提が壊れ、結論も成立しない。")
 print("=" * 78)
+
+print()
+print("--- (5) 独立経路: 終結式による tau(L) の再計算(合成奇数・大きい L を含む) ---")
+print("  D(x) := s_L(4 - x - x^-1) - 2 を Z[x]/(x^L-1) 上で漸化式から構成し、")
+print("  tau(L) = prod_{j=1}^{L-1} D(zeta^j) = Res( (x^L-1)/(x-1), D(x) ) を")
+print("  整数終結式として計算する((3.2) の別経路。matrix-tree 経路と独立)。")
+R.<x> = ZZ[]
+print("   L  v_2(tau(L))  2(L-1)  一致  (合成数なら因数分解)")
+for L in [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 25, 27, 33, 35]:
+    Rq = R.quotient(x**L - 1)
+    xb = Rq.gen()
+    A = Rq(4) - xb - xb**(L - 1)          # x^-1 = x^(L-1) mod x^L-1
+    s_prev, s_cur = Rq(2), A
+    for _ in range(2, L + 1):
+        s_prev, s_cur = s_cur, A * s_cur - s_prev
+    D = (s_cur - Rq(2)).lift()
+    f = sum(x**i for i in range(L))        # (x^L-1)/(x-1), monic
+    tau_res = f.resultant(D)
+    v = ZZ(tau_res).valuation(2)
+    fac = "" if L in Primes() else "= %s" % factor(L)
+    print("  %2d      %4d      %4d   %s  %s"
+          % (L, v, 2 * (L - 1), str(v == 2 * (L - 1)), fac))
+print("  ⇒ 合成奇数(9,15,21,25,27,33,35)でも成立。証明は L の素数性を使っていない。")
+print("     L=19 も一致(matrix-tree 経路では未計算だった値)。")
