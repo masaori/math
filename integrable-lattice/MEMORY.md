@@ -1,5 +1,20 @@
 # MEMORY
 
+## 昇格基準を文書化（2026-07-26）
+
+- `outputs/paper-plans/README.md` を新設。**paper-plans → papers の昇格ゲート G1–G6 ＋ユーザー承認の最終ゲート**を定義。判定語彙（達成/未達/評価不能/非該当）、G1 を他ゲートの前提とする規則、状態語彙、昇格手順、昇格後にゲートが崩れた場合の扱いを含む。
+- G3 は本プロジェクトの実運用規約（`sagemath/check/<dir>/` に `README.md` ＋ `.out` 実行ログ）に合わせた。Ising プロジェクト側の `overview.md` / `verify-check-linkage.mjs` / `lean/scripts/` は integrable-lattice に**存在しない**ので要求しない。
+- G6 は過去サイクルの実際の誤り（cycle 4→5→6 の代理指標による構造判定、cycle 5→6 の 0/43→572件で 4.5% 反例、cycle 10 のスケール偶然一致）を再発防止条項として明文化。
+- `001_finite_N_decidable_unsolved.md` に G1–G6 判定表を追加。現状**全ゲート未達 ＋ 最終ゲート未取得＝据え置き**。旧「昇格条件（cycle 1 総括時点）」の記述は削除せず保存。
+- レビューを5周回して一次情報と突合（存在しないツール参照・MEMORY 誤引用・`paper_potential: high` は1件も無い等を是正）。
+
+## ブロッカー: 依頼された gap map / candidates は削除済みアプローチ（2026-07-26）
+
+- 依頼「収集済みコーパスから `outputs/maps/001_six_vertex_dwbc_determinant_seed_map.md` を作り、unknown/needs_review から `outputs/candidates/000_seed_candidates.md` へ候補を起こす」は、**2026-06-21 にユーザー合意で全削除した cycle 0（文献分類版）の成果物そのもの**。削除コミット c7fe283、復元点 918af09。`inputs/corpus/` は空で「収集済みコーパス」は現存しない。
+- 削除理由（`lambda-statement-program.md` に明記）: 文献分類（determinant か character か・境界が何か）で集めたため、梯子・四軸を使わず**可解性（文献の exact）と帰属（Λ）を混同していた**。
+- 以後 cycle 1–11 は Λ-statement プログラム（3トラック）で進行。MEMORY.md 末尾の「完了」節に残る cycle 0 の記録（gap map 作成済み等）は削除前の記述で、現状と食い違う。
+- **ユーザー判断待ち**（この判断なしに再作成すると、棄却済みアプローチへ無断で回帰する）。
+
 ## cycle 11 完了（2026-07-04, 3トラック並走）
 
 - **T1**: v_2(τ(L))=2(L−1)(奇 L, L=3..19)+グラフ岩澤理論接地(全域木の ℓ 進付値=類数の岩澤と平行)=cycle6 の p 進エントロピー=岩澤 μ と同構造。`cycle10_T1_vp_law/iwasawa_graph_README.md`。

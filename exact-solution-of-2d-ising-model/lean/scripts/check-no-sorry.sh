@@ -164,6 +164,39 @@ targets=(
   Ising2D.B1_mul_B2_mul_B1_eq_Amat
   Ising2D.TV_hatZ_hatY_of_action
   "Ising2D.TV_hatZ_hatY_of_action'"
+  Ising2D.gamma2_neg
+  Ising2D.gamma1_neg
+  Ising2D.AMat_eq
+  Ising2D.gamma2_neg_eq_neg_conj
+  Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq
+  Ising2D.gamma2_neg_eq_zero_iff
+  Ising2D.gamma2_add_int_mul_two_pi
+  Ising2D.gamma2_add_two_pi
+  Ising2D.thetaMu_neg
+  Ising2D.thetaMu_add_int_mul
+  Ising2D.gamma2_thetaMu_add_M
+  Ising2D.gamma2_thetaMu_of_dvd
+  Ising2D.gamma2_eq_zero_iff
+  Ising2D.gamma2_eq_zero_iff_of_s2star_ne_zero
+  Ising2D.sin_thetaMu_eq_zero_iff
+  Ising2D.charPoly_expand
+  Ising2D.charPoly_root
+  Ising2D.charPoly_factor
+  Ising2D.AMat_mulVec_eigen
+  "Ising2D.AMat_mulVec_eigen'"
+  Ising2D.AMat_mulVec_col_pos
+  Ising2D.AMat_mulVec_col_neg
+  Ising2D.AMat_of_gamma2_eq_zero
+  Ising2D.det_AMat
+  Ising2D.gamma2_mul_gamma2_neg
+  Ising2D.det_AMat_eq_one
+  Ising2D.gamma1_sq_eq_one_of_gamma2_eq_zero
+  Ising2D.lambda_mul_lambda
+  Ising2D.det_Pmat
+  Ising2D.det_Pmat_ne_zero
+  Ising2D.AMat_mul_Pmat
+  Ising2D.AMat_eq_Pmat_mul_Dmat_mul_inv
+  Ising2D.AMat_thetaMu_eq_Pmat_mul_Dmat_mul_inv
 )
 
 {

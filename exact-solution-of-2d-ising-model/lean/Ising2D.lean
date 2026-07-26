@@ -22,3 +22,5 @@ import Ising2D.Part004.Claim013_RecoverZY
 import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
 import Ising2D.Part004.Definition010_H1H2V1V2
 import Ising2D.Part008.Definition016_TV
+import Ising2D.Part008.Definition019_ThetaGamma
+import Ising2D.Part008.Claim027_EigenATheta

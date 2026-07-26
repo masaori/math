@@ -21,7 +21,7 @@
 2. **分離定理**: 有限・離散・可積分 ⇒ Ω∈ℕ, Z∈ℤ[x], Φ∈Λ, スペクトル/零点∈ℚ̄（決定可能・witness）。ℝ脱出は (a)(b)(c) のみ（00, 09）。
 3. **未解決母集団での非自明性**: カイラル Potts / 高ランク・高スピン（カタログ `outputs/maps/integrable_unsolved_catalog.md`, McCoy/Baxter）。極限未解決でも有限 N は完全決定可能。
 4. **worked examples**: XXZ・六頂点・スピン1 BT（上記検証）。Φ の数論構造（D-U2）。
-5. **形式検証**: Λ=整数比較／ℚ̄=根分離 ⇒ decide/witness, RCA₀。Lean ターゲット仕様（`cycle1_05_formal_verification_spec.md`）。
+5. **形式検証**: Λ=整数比較／ℚ̄=根分離 ⇒ decide/witness, RCA₀。Lean ターゲット仕様（`outputs/reports/cycle1_05_formal_verification_spec.md`）。
 6. **スコープと限界**: 可解性（極限閉形式）は別問題で本稿は主張しない。#P 側（3D/スピングラス）は有限でも計算困難で射程外（E）。
 
 ## 未確定・要追加（cycle 2 候補）
@@ -33,5 +33,21 @@
 
 ## 昇格判断
 
+状態: **据え置き**。判断基準は `outputs/paper-plans/README.md` の G1–G6 ＋最終ゲート。
+
+### 昇格条件（cycle 1 総括時点の記述, 保存）
+
 - 現状: paper-plan 段階。**基礎論・形式検証寄り**の論文として筋は通るが、「可積分の新定理」ではない点は明確化必須。
 - `outputs/papers/` 昇格は、(a) 分離定理の厳密命題化と (b) カイラル Potts 直撃 or $v_p$ 一般則のどちらかの確立後。ユーザーの方針判断（基礎論寄与に価値を置くか）も要。
+
+### G1–G6 の充足状況
+
+| ゲート | 判定 | 根拠 |
+|---|---|---|
+| G1 中核命題の厳密化 | **未達** | 「分離定理」がどの一般性で成立するかが未記述（本ファイル「未確定・要追加」）。中核計算＝カイラル Potts τ^(2) 直撃 or $v_p(Z_{N,L})$ 一般則も未確立 |
+| G2 帰属と ℝ脱出の明示 | **未達** | 構成案 2 に量ごとの帰属（$\Omega\in\mathbb{N}$ / $Z\in\mathbb{Z}[x]$ / $\Phi\in\Lambda$ / スペクトル・零点 $\in\overline{\mathbb{Q}}$）と ℝ脱出点（$N\to\infty$ の一点）の記載はあるが、中核命題が未確定のため網羅性を確認できない。$\overline{\mathbb{Q}}(\ell_p)$ 非線形部の不使用は未言及 |
+| G3 検証計算の実行 | **未達** | SageMath 側は `sagemath/check/{C-U3_bethe_qqbar, D_phi_lambda, apply_higher_spin_qqbar}` に `README.md` と `.out` があり充足。ただし本 plan は構成案 5（Lean ターゲット仕様 `outputs/reports/cycle1_05_formal_verification_spec.md`）で Lean 成果物を宣言しており、`lean/` が未整備のため Lean 条項が未達 |
+| G4 既知性リスク | **未達** | `resolved_risk` / `novelty_risk` の調査結果と根拠文献が本 plan に未記載 |
+| G5 トラック位置づけ | **未達** | T1 Reframe と明記し「可積分の新定理ではない」も明示済みだが、厳密化の対象となった既知結果の文献特定と、新たに機械検証可能になった命題の列挙が未提示 |
+| G6 健全性チェック | **未達** | 4項目の該当/非該当が未記載（達成しているのは項目4「数値検証と証明の区別」のみ）。無言の省略は未達 |
+| 最終ゲート | 未取得 | 基礎論寄与に価値を置くかのユーザー方針判断が要（MEMORY.md cycle 1・2 総括） |
