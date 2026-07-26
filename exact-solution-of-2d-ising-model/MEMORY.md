@@ -1212,3 +1212,65 @@ $\mathrm{Aut}(G)$ が Lie 群で $\mathrm{End}(\mathfrak{g})$ がその Lie 環�
 「暫定」proof は、いずれも `matrix_exp_conjugation` を根拠に完全証明へ書き換えて解消した。
 詳細は本ファイル冒頭の「完了（2026-07-26）: `todo()` 以外の形で残っていた未完 4 箇所」を見よ。
 なお `exp_conjugation_proof_002`（一般 Lie 群版）は上記の根拠により **`todo()` のまま残置**である。
+
+---
+
+## 完了（2026-07-26・追補2）: `exp(X) A exp(-X)` の級数展開（`<exp_X_Y_exp_-X>`）を Lean で形式化
+
+`Definition016_TV.lean` / `Definition030_Fermi.lean` で仮定に持ち上げてある `T_V_hatZ_hatY` を
+閉じるための土台。**既存 Lean ファイルは変更せず**（`Ising2D.lean` の import 行追加と
+`scripts/check-no-sorry.sh` の targets 追記のみ）、新規 2 ファイルで 2 本立てにした。
+
+- 抽象版 `lean/Ising2D/Abstract/ExpConjugation.lean`（`Ising2D.Abstract`）
+- 具体版 `lean/Ising2D/Part008/Claim006_ExpConjugation.lean`（`Mat(2,ℂ)^{⊗M}`、抽象版の系）
+
+### 証明の骨格（リー環を使わない・級数展開ルート）
+
+左乗法 `L_X : A ↦ X A` と右乗法 `R_X : A ↦ A X` は**線型作用素として可換**（結合律だけで出る）。
+`ad X = L_X - R_X` なので、可換な作用素の指数法則から `exp(ad X) = exp(L_X) ∘ exp(-R_X)`。
+`(L_X)^n = L_{X^n}`, `(R_X)^n = R_{X^n}` と `L`, `R` の連続線型性から
+`exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}`。よって `exp(ad X)(A) = exp(X) A exp(-X)`。
+**`L` が代数準同型であることすら使っていない**（冪の式と連続線型性だけ）。右乗法は反同型だが
+`(R_X)^n = R_{X^n}` は左乗法と同形なので、反対環 `Aᵐᵒᵖ` を経由する必要が無い。
+
+### 導出して確定させた係数（後段で必ず使う）
+
+`ad X z = α y`, `ad X y = β z` で `s^2 = αβ` のとき
+
+```
+exp(X) z exp(-X) = cosh(s) z + α sinhc(s) y
+exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z
+```
+
+`sinhc(s) := sinh(s)/s`（`s = 0` では `1`。`Ising2D.Abstract.sinhc`）。`sinh(s)/s` のままだと
+`s = 0` で 0 割りになるので分けて定義した。冪級数 `sinhc(s) = Σ_k s^{2k}/(2k+1)!` も証明済み
+（`Abstract.hasSum_sinhc`）。
+
+原文 `<extract_taylor_coefficient_of_Z_Y>` の (h1.z) `cosh(K_1)Ẑ_μ + i e^{-iθ_μ} sinh(K_1)Ŷ_μ` は
+`s = K_1`, `α = i e^{-iθ_μ}K_1`, `β = -i e^{iθ_μ}K_1`（`αβ = K_1^2 = s^2`）の場合として
+上式から出る。**すなわち原文の cosh/sinh の形は正しい。**
+
+### 次に必要なもの（`T_V_hatZ_hatY` を無条件にするために残っているのはこれだけ）
+
+`<commutator_of_H_and_Z_Y>`（1 重交換子 `[i K_1 H_1^{(±)}/2, Ẑ_μ^{(±)}]` 等の具体計算）。
+これを `Ising2D.matExp_conj_two_dim_z` / `..._y` に代入すれば
+`<extract_taylor_coefficient_of_Z_Y>` の 4 式がそのまま出て、
+`TV_hatZ_hatY_of_action` の仮定 `hT1`, `hT2` と `TV_psiDag_of_action` の `hT` が外せる。
+
+### 原文について気づいたこと（穴ではない）
+
+`<exp_X_Y_exp_-X>` の statement は `exp(X)` の正則性を述べるが、逆行列が `exp(-X)` である
+ことは `<matrix_exp_conjugation>` (3) に委ねている。Lean 側は `Ising2D.matExpUnits` が
+`exp X` を単元として与え逆元が定義から `exp(-X)` なので、この点に穴は無い
+（`Ising2D.matExpUnits_conj_eq_tsum`）。
+
+### 実装上の注意（次に触る人へ）
+
+`Matrix` にはノルムの標準的な選び方が無いため、抽象版（ℂ 上の完備ノルム環が前提）を
+`TensorPow M` へ特殊化するには `open scoped Matrix.Norms.Operator`（`l^∞` 作用素ノルム）で
+局所的に instance を入れる必要がある。**公開する定理の statement にはこの instance を
+持ち込まない**ため、mathlib の `Matrix.exp_add_of_commute` と同じ形で
+「statement は instance 無しで書き、証明だけ scoped instance 付きの補題へ委ねる」構成にし、
+照合のため `set_option backward.isDefEq.respectTransparency false` を使っている。
+`open scoped ... in by ...`（tactic への `in`）では instance が入らないので、
+**scoped instance を要する補題は独立した宣言として `open scoped ... in theorem` で書くこと。**
