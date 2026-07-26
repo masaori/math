@@ -14,7 +14,7 @@
 `structured-latex/content/` を全走査して確認した:
 
 - 「自由エネルギー」「熱力学極限」「free energy」に相当するブロックは content・notes とも **0 件**。
-- 到達点は `008_TV1_hatZ_hatY_part2.mjs` の `V_eq_Vprime`:
+- 到達点は `008_TV1_hatZ_hatY_part2.ts` の `V_eq_Vprime`:
   「ある $c \in \mathbb{C}^\times$ が存在して $V = cV'$」。**$c$ の値は決めていない。**
 - `V := (V_1^{(\pm)})^{1/2} V_2 (V_1^{(\pm)})^{1/2}$、
   `V' := exp( Σ_{μ∈{1..M}, γ₂(θ_μ)≠0} γ(θ_μ)(ψ_μ† ψ_{-μ} − 1/2) )`。
@@ -45,7 +45,7 @@ graph TD
 
 ### 章 A: 定数 $c$ の決定と $V$ の固有値 ← **本セッションで執筆済み**
 
-ファイル: `structured-latex/content/009_eigenvalues_of_V.mjs`
+ファイル: `structured-latex/content/009_eigenvalues_of_V.ts`
 
 | # | 命題 | ラベル | 状態 |
 |---|---|---|---|
@@ -69,7 +69,7 @@ $\mathrm{tr}(e^{2S}e^{R}) = \mathrm{tr}(e^{-2S}e^{-R})$ から $c^2 = (2s_2)^M$ 
 行列式経由（$\det V = c^{2^M}\det V'$）でも同じ結果になるが、そちらは
 $\det(AB) = \det A \det B$ の証明（置換と符号の一般論）を新たに要するため採らなかった。
 
-### 章 B: 分配関数と転送行列の橋渡し ← **完了**（`structured-latex/content/010_transfer_matrix_bridge.mjs`）
+### 章 B: 分配関数と転送行列の橋渡し ← **完了**（`structured-latex/content/010_transfer_matrix_bridge.ts`）
 
 **これが無いと、どれだけ固有値を求めても分配関数に戻れない。**
 

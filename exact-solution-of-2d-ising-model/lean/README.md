@@ -132,12 +132,30 @@ EOF
 | `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.Abstract.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
 | `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.Abstract.one_eq_sum_single`（任意の半環・任意の有限添字型） |
 | `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.Abstract.acomm_lincomb_clifford` / `Abstract.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
+| `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim006_ExpConjugation.lean`） | `Ising2D.Abstract.exp_adCLM_apply` / `Abstract.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`Abstract/ExpConjugation.lean`） |
+| `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.Abstract.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
+| `<commutator_of_H_and_Z_Y>` | `Ising2D.lie_H1_hatZ_same` / `lie_H1_hatY` / `lie_H1_hatZ_opp` / `lie_H2_hatZMinus` / `lie_H2_hatY` / `lie_H2_hatZPlus`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim001_CommutatorHZY.lean`） | `Ising2D.Abstract.CliffordTriple.lie_sum_yz_z` ほか 6 本（台は任意の環、係数は任意の可換半環、族の添字型も任意。`Abstract/CommutatorClifford.lean`） |
 
 抽象版から得られた知見（本文には持ち込まないが、解説パートの素材になる）:
 
 - `ψ` の反交換関係に効いているのは `hat(Z)^{(-)}, hat(Y)` の 4 本の反交換関係と、
   係数についてのスカラー恒等式 2 本だけである。`hat(Z)`, `hat(Y)` の具体形も、複素行列であることも、
   テンソル冪であることも、`M`・`δ^M_{μ+ν,0}`・`γ_2` も効いていない。
+
+- `exp(X) A exp(-X) = exp(ad X)(A)` に効いているのは、**左乗法 `L_X` と右乗法 `R_X` が
+  線型作用素として可換であること**（結合律から出る）と、**`(L_X)^n = L_{X^n}`・`(R_X)^n = R_{X^n}`**
+  の 2 つだけである。行列であることも有限次元であることも効いておらず、ℂ 上の完備ノルム環なら成り立つ。
+  リー群・リー環はもちろん、`L` が代数準同型であることすら使っていない。
+  なお右乗法は反同型だが `(R_X)^n = R_{X^n}` は左乗法と同形なので、反対環を経由する必要がない。
+
+- `H_1^{(±)}, H_2` と `hat(Z)^{(±)}, hat(Y)` の 6 本の交換関係に効いているのは、恒等式
+  `[a b, c] = a [b,c]₊ - [a,c]₊ b` と、**反交換子が係数のスカラー倍の `1` になること**
+  （`[z_μ,z_ν]₊ = D_z(μ,ν)·1`、`[z_μ,y_ν]₊ = 0`、`[y_μ,y_ν]₊ = D_y(μ,ν)·1`）だけである。
+  `hat(Z), hat(Y)` の具体形（離散フーリエ変換）も、行列であることも、
+  `D` の中身（`2M δ^M_{μ+ν,0}` や `-4 e^{-i2π(μ+ν)/M}`）も効いていない。
+  `hat(Z)^{(±)}` と `hat(Z)^{(∓)}` の違いは `D_z` と `D_{z'}` という**別のスカラー関数**として
+  抽象化でき、原文が符号ごとに書き分けている 6 本は抽象版では
+  「積の並びが `y z` か `z y` か」×「交換相手が `z` か `z'` か `y` か」の 6 通りに対応する。
 
 - 交換子と反交換子の恒等式には、行列であることも複素数であることも効いていない
   （分配法則と結合法則だけで足りる）。
@@ -251,17 +269,34 @@ EOF
 | `Ising2D.ActsBy.comp` | 合成則 `Q P`（原文の `B_1 B_2 B_1` の根拠） | `T_V_hatZ_hatY` の証明 |
 | `Ising2D.ActsBy.eigen` | **固有ベクトルの移送**（`B v = λ v ⇒ T(v_0 z + v_1 y) = λ(⋯)`） | 後段（`ψ` が `V` の固有ベクトル）への一般補題 |
 | `Ising2D.B1mat` / `B2mat` | `B_1(θ)`, `B_2` | `T_V_hatZ_hatY` の証明 |
-| `Ising2D.B1_mul_B2_mul_B1_eq_Amat` | `B_1(θ) B_2 B_1(θ) = A(θ)` | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
-| `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**） | `T_V_hatZ_hatY` |
+| `Ising2D.B1_mul_B2_mul_B1_eq_explicit` | `B_1(θ) B_2 B_1(θ)` の 4 成分の明示計算（5 個の複素パラメータで書いた右辺） | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
+| `Ising2D.B1_mul_B2_mul_B1_eq_AMat` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`AMat` 版。上を実パラメータ・実 `θ` へ cast したもの） | 同上 |
+| `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**。作用行列は `AMat K θ`） | `T_V_hatZ_hatY` |
 
-> **`A(θ)` の二重定義（未解消・引き継ぎ事項）**: `A(θ)` は `Ising2D.Amat`
+> **`A(θ)` の二重定義（解消済み・2026-07-26）**: 以前は `A(θ)` が `Ising2D.Amat`
 > （`Part008/Definition016_TV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
-> （`Part008/Definition019_ThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっている。
-> 一本化は既存ファイルのリファクタになるため、**既存ファイルは変更せず**、新規ファイル
-> `Part008/Definition030_Fermi.lean` の末尾に橋渡し（`Amat_eq_AMat`、`B1_mul_B2_mul_B1_eq_AMat'`、
-> `TV_hatZ_hatY_of_action_AMat`）を置くにとどめた。
-> 接続に要るのは、モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
-> `Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけである。
+> （`Part008/Definition019_ThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっており、
+> 名前が大文字小文字違いだけで紛らわしかった。**`AMat` に一本化し `Amat` を削除した。**
+> 現在 `A(θ)` の定義は `Ising2D.AMat` ただ 1 つである。
+>
+> 具体的な変更:
+>
+> - `Part008/Definition016_TV.lean` が `Part008/Definition019_ThetaGamma.lean` を import するようにした
+>   （`Definition019` は mathlib 以外に依存しないので循環しない）。
+> - `Ising2D.Amat` の定義を削除。`B1_mul_B2_mul_B1_eq_Amat` は
+>   **`B1_mul_B2_mul_B1_eq_explicit`**（右辺を `Amat` の代わりに同じ内容の `!![…]` リテラルで書いた版。
+>   証明は元のまま）と、それを `AMat` へ移す **`B1_mul_B2_mul_B1_eq_AMat`** の 2 本に分けた。
+>   重い行列計算（`maxHeartbeats 2000000`）は前者に閉じている。
+> - `TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'` のステートメントを
+>   `(K : IsingConst) … (θ : ℝ)` を取り作用行列が `AMat K θ` になる形へ移した。
+> - これにより不要になった橋渡し補題（`Part008/Definition030_Fermi.lean` 末尾の
+>   `Amat_eq_AMat` / `B1_mul_B2_mul_B1_eq_AMat'` / `TV_hatZ_hatY_of_action_AMat`）を削除した。
+>   `Amat_eq_AMat` の cast の証明（`Complex.ofReal_cos` / `Complex.ofReal_sin` /
+>   `Complex.exp_mul_I` による三角関数の cast）は `B1_mul_B2_mul_B1_eq_AMat` の中へ移してある。
+> - `scripts/check-no-sorry.sh` の `targets` から `Ising2D.Amat`,
+>   `Ising2D.B1_mul_B2_mul_B1_eq_Amat`, `Ising2D.Amat_eq_AMat`,
+>   `Ising2D.B1_mul_B2_mul_B1_eq_AMat'`, `Ising2D.TV_hatZ_hatY_of_action_AMat` を削除し、
+>   `Ising2D.B1_mul_B2_mul_B1_eq_explicit`, `Ising2D.B1_mul_B2_mul_B1_eq_AMat` を追加した。
 | `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
 | `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
 | `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
@@ -301,6 +336,32 @@ EOF
 | `Ising2D.acomm_psi_relations_of_car` | `ψ` の反交換関係 3 式を**抽象版の系として**導出した版（具体版と同じ主張） | 同上 |
 | `Ising2D.acomm_psiDag_psiDag_of_opposite_branch` | **逆分枝 `t_ν = -t_μ` では `[ψ_μ^†, ψ_ν^†]₊ = I`**（同一分枝の仮定が必要なことの証明） | 同上 |
 | `Ising2D.acomm_psiDag_psi_of_opposite_branch` | **逆分枝では `[ψ_μ^†, ψ_ν]₊ = 0`**（原文第 2 式が破れる） | 同上 |
+| `Ising2D.Abstract.sinhc` | `sinhc(s) = sinh(s)/s`（`s = 0` では `1`）と冪級数 `Σ s^{2k}/(2k+1)!` | 新規（0 割りを避けるため導入） |
+| `Ising2D.Abstract.lmulCLM` / `rmulCLM` / `adCLM` | 左乗法 `L_X`、右乗法 `R_X`、随伴作用 `ad X = L_X - R_X`（連続 ℂ-線型作用素） | `<def_ad_X_matrix>` |
+| `Ising2D.Abstract.commute_lmulCLM_rmulCLM` | **`L_X` と `R_Y` は可換**（級数展開ルートの核） | `<matrix_exp_conjugation>` の証明の骨格 |
+| `Ising2D.Abstract.exp_lmulCLM` / `exp_rmulCLM` | `exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}` | 同上 |
+| `Ising2D.Abstract.exp_adCLM_apply` | `exp(ad X)(A) = exp(X) A exp(-X)`（**抽象版**） | `<exp_X_Y_exp_-X>` |
+| `Ising2D.Abstract.hasSum_exp_conj` / `exp_conj_eq_tsum` | 級数 `Σ_n (1/n!) ad_X^n(A)` の収束と和 | 同上 |
+| `Ising2D.Abstract.exp_conj_two_dim_z` / `..._y` | `ad X` が `span{z,y}` を保つときの閉じた形 `cosh(s) z + α sinhc(s) y` | `<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠 |
+| `Ising2D.adPow` | `ad_X^n(A)`（`n` 重の入れ子交換子、人手証明の再帰そのまま） | `<ad_binomial>` の再帰定義 |
+| `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum` | `exp(X) A exp(-X) = Σ_n (1/n!) ad_X^n(A)`（**具体版**、`Mat(2,ℂ)^{⊗M}`） | `<exp_X_Y_exp_-X>` |
+| `Ising2D.matExpUnits_conj_eq_tsum` | 上を単元 `matExpUnits X` の共役 `Ad_{exp X}` の形で述べた版 | 同 (3) |
+| `Ising2D.matExp_conj_two_dim_z` / `..._y` | 2 次元不変部分空間での閉じた形（具体版） | `<extract_taylor_coefficient_of_Z_Y>` |
+| `Ising2D.expPhase_congr` / `hatZ_congr` / `hatY_congr` | 添字が `M` を法として合同なら位相因子・`hat(Z)`・`hat(Y)` は等しい（`M` 周期性の一般形） | `<commutator_of_H_and_Z_Y>` の場合分けの代用 |
+| `Ising2D.dvd_succ_sub_iff_eq_nextSite` | `M ∣ (k_1 - k_2 + 1) ⟺ k_2 = nextSite k_1`（原文の 2 通りの場合分けの一意性） | `<H1_H2_via_hatZ_hatY>` |
+| `Ising2D.firstSign_nextSite` | `hat(Z)^{(±)}` の `j = 1` の係数と `H_1^{(±)}` の `m = M` の係数が同じ `η` で対応すること | 同上 |
+| `Ising2D.H1_eq_hat_sum` / `H2_eq_hat_sum` | `H_1^{(±)} = (1/M)∑_j e^{-i2πj/M} hat(Y)_j hat(Z)^{(±)}_{-j}`、`H_2 = (1/M)∑_j hat(Z)^{(-)}_{-j} hat(Y)_j` | `<H1_H2_via_hatZ_hatY>` |
+| `Ising2D.sum_deltaMod_select` | `∑_{j=1}^M δ^M_{μ-j,0} F(j) = F(μ)`（`F` が `M` を法として合同不変なら） | `<commutator_of_H_and_Z_Y>` の 3 通りの場合分けの代用 |
+| `Ising2D.sum_hatY` / `sum_expPhase_neg_smul_hatY` | `∑_j hat(Y)_j = M Y_M`、`∑_j e^{i2πj/M} hat(Y)_j = M Y_1` | 同上（**原文が `0` と置いた項の正体**） |
+| `Ising2D.hatCliffordTriple` | `hat(Z)^{(η)}, hat(Z)^{(-η)}, hat(Y)` を抽象版の Clifford 3 族として与える橋渡し | 同上 |
+| `Ising2D.lie_H1_hatZ_same` | `[H_1^{(±)}, hat(Z)_μ^{(±)}] = 2e^{-iθ_μ}hat(Y)_μ` | `<commutator_of_H_and_Z_Y>` (1) |
+| `Ising2D.lie_H1_hatY` | `[H_1^{(±)}, hat(Y)_μ] = -2e^{iθ_μ}hat(Z)_μ^{(±)}` | 同 (3) |
+| `Ising2D.lie_H2_hatZMinus` | `[H_2, hat(Z)_μ^{(-)}] = -2 hat(Y)_μ` | 同 (4) |
+| `Ising2D.lie_H2_hatY` | `[H_2, hat(Y)_μ] = 2 hat(Z)_μ^{(-)}` | 同 (6) |
+| `Ising2D.lie_H1_hatZ_opp` | `[H_1^{(±)}, hat(Z)_μ^{(∓)}] = 2e^{-iθ_μ}hat(Y)_μ - 4e^{-iθ_μ}Y_M`（**原文 (2) の訂正版**） | 同 (2) |
+| `Ising2D.lie_H2_hatZPlus` | `[H_2, hat(Z)_μ^{(+)}] = -2 hat(Y)_μ + 4e^{-iθ_μ}Y_1`（**原文 (5) の訂正版**） | 同 (5) |
+| `Ising2D.Y_ne_zero` | `Y_m ≠ 0`（`Y_m^2 = I` より） | 上 2 件の反証に使用 |
+| `Ising2D.lie_H1_hatZ_opp_ne_orig` / `lie_H2_hatZPlus_ne_orig` | **原文 (2), (5) が偽であることの証明** | 同上 |
 
 ## 形式化の過程で見つかった原文の問題
 
@@ -312,23 +373,35 @@ EOF
 | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
 | `transfer_matrix_001_definition_symbols` と `transfer_matrix_011_definition_H1_H2`（`V_2` の 2 つの表式） | 一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていない | `Ising2D/Part004/Definition010_H1H2V1V2.lean` 冒頭に記載。`I_smul_H2_eq_sum_sigmaX` として証明 |
-| `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_Amat` の仮定 `hdual` として明示 |
+| `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |
 | `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（`ホロノミック量子場_p142下段_1`） | ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）に依存し、本リポジトリでは未形式化 | `Ising2D/Part008/Definition016_TV.lean` では**明示的な仮定 `hT1`, `hT2`** として持ち、そこから先は完全に証明（未証明の穴は残していない） |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_022`（`gamma_2_theta_is_0`） | 形式化時点の原文は `γ_2(θ_μ) = 0` の同値条件で **`s_2^* = 0` の場合を落としていた**（`γ_2` は `s_2^*` を因子に持つ）。また「`sin θ_μ = 0 ⟺ μ = ±M`」は単独では偽で、正しくは `M ∣ 2μ`（`M` が偶数なら `μ = ±M/2` も該当） | **並行して原文側が修正済み**（現在は `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、`μ = ±M/2` が排除される理由も明記）。Lean 側は `gamma2_eq_zero_iff` と `sin_thetaMu_eq_zero_iff` として機械的裏づけを残した |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_035`（`det_A_theta`） | `det A(θ_μ) = 1` は `A(θ)` の定義からは出ず、**`c_2 s_2^* = c_2^*`（双対関係の帰結）が要る**。原文は `A = B_1B_2B_1` からこれを出しているが、`B_1, B_2` には `c_2^*, s_2^*` しか現れず `c_2` は展開の結果 `c_2^*/s_2^*` として出る。つまり (iii) は `factorization_of_A_theta`（proof が原文では TODO）に埋め込まれた前提 | `Ising2D/Part008/Claim027_EigenATheta.lean` の `det_AMat`（無条件）と `det_AMat_eq_one`（3 関係を仮定）に分離 |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_027`（`eigenvector_of_A_theta`） | 固有値と固有ベクトルの符号対応（`λ_± = γ_1 ± √(-γ_2γ_2)` と `v_± = c(±i√(γ_2γ_2), γ_2(-θ))`）は、**`arg^{[0,2π)}` 分枝での `√(-1·z) = -√(-1)√z` を使ってはじめて整合する**。原文は proof 中でこの分枝規約を導いているが statement 側に分枝の指定が無い | 検算の結果**原文は正しい**。Lean 側は平方根関数を使わず `t^2 = γ_2(θ)γ_2(-θ)` の仮定形にし、`i t` 側の固有値が `γ_1 - i t` であることを明示（`AMat_mulVec_col_pos`） |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_028`（`diagonalization_P_D`） | `A(θ_μ) = P_μ D_μ P_μ^{-1}` と書くが、**`P_μ` が可逆であること（`det P_μ ≠ 0`）を確認していない** | `det_Pmat` / `det_Pmat_ne_zero` で `det P_μ = i t/(2(√M)^2γ_2(-θ_μ))` を計算し、`γ_2(θ_μ) ≠ 0`, `M ≠ 0` の下で非零を証明 |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_032`（`anticommutator_of_psi`） | `M ∣ μ+ν` のとき、原文は `√(γ_2(θ_ν)γ_2(-θ_ν)) = √(γ_2(θ_μ)γ_2(-θ_μ))` を根号の中身が等しいことだけから使っている。**中身が等しいことから従うのは `t_ν = ±t_μ` までで、`μ` と `ν` で分枝が同じであることは自明でない。**検算の結果、逆分枝だと 3 式のうち第 1・第 2 式が偽になる（`t_μ ≠ 0` なので符号は結論に効く） | `Ising2D/Part008/Definition030_Fermi.lean` 冒頭に検算を記載。同一分枝の選択を仮定 `hbr : (M:ℤ) ∣ (μ+ν) → tν = tμ` として明示 |
+| `008_TV1_hatZ_hatY_part1.mjs` の `TV1_hatZ_hatY_001`（`commutator_of_H_and_Z_Y`）の第 2 式 | `[H_1^{(±)}, hat(Z)_μ^{(∓)}] = 2e^{-iθ_μ}hat(Y)_μ` は**偽**。原文自身が最終段で余分な項 `-(4/M)e^{-iθ_μ}∑_{k=1}^M Y_k M δ^M_{(k,0)}` を持ちながら、それを `0` と置いて結論している。`k ∈ {1,…,M}` で `δ^M_{(k,0)} = 1` になるのは `k = M` なので、この項は `-4e^{-iθ_μ}Y_M` であり消えない（原文ブロックの `conversion.notes` にも「正当化が不完全」と記録済み） | `Ising2D/Part008/Claim001_CommutatorHZY.lean` 冒頭に記載。訂正版を `lie_H1_hatZ_opp` として証明し、原文の主張が偽であることを `lie_H1_hatZ_opp_ne_orig` で証明した |
+| 同ブロックの第 5 式（`[H_2, hat(Z)_μ^{(+)}]`） | 原文の値 `-2hat(Y)_μ + (1/M)∑_j(-2e^{-i(2π/M)(-j+μ)}hat(Y)_j)` は**偽**。`-[hat(Z)_μ^{(+)}, hat(Z)_{-j}^{(-)}]₊` の展開でマイナス符号を第 1 項にしか分配しておらず（第 2 項の符号が変わっていない）、さらに次の行で係数 `4` が `2` になっている。正しくは `-2hat(Y)_μ + 4e^{-iθ_μ}Y_1`（`hat(Z)^{(+)}_μ = hat(Z)^{(-)}_μ - 2e^{-iθ_μ}Z_1` と `[H_2, Z_1] = -2Y_1` からの独立な検算でも一致） | 同上。訂正版を `lie_H2_hatZPlus`、原文が偽であることを `lie_H2_hatZPlus_ne_orig` で証明した。**後段（`nesting_of_commutator_of_H_and_Z` 以降）が使うのは (1)(3)(4)(6) の 4 本だけ**なので、この誤りは後段の結論には波及しない |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_031`（`commutation_V_psi`） | 原文の証明は `T_V_hatZ_hatY`（未形式化）に依存する | `Ising2D/Part008/Definition030_Fermi.lean` では `ActsBy T … (AMat K (thetaMu M μ))` を明示的な仮定として持ち、そこから先は完全に証明（未証明の穴は残していない） |
 
 ## 今後の方針
 
 - **次の形式化対象**（人手証明側で自己完結しており依存が浅い順）
-  1. `transfer_matrix_012_claim_H1_H2_via_hatZ_hatY`（`<H1_H2_via_hatZ_hatY>`）。
-     `expPhase_sum`・`hatZ`/`hatY`・`H1`/`H2` が揃い、添字の巡回も `Ising2D.nextSite`
-     （`Part004/Definition010_H1H2V1V2.lean`）で確定したので、原文の二重和の計算をそのまま写せる
+  1. ~~`transfer_matrix_012_claim_H1_H2_via_hatZ_hatY`（`<H1_H2_via_hatZ_hatY>`）~~ **形式化済み**
+     （`Ising2D/Part004/Claim011_H1H2ViaHat.lean`）
   2. `parts 008` の 001〜005（`exp(X) Y exp(-X)` の級数展開と**ネストした交換子の
-     テイラー係数抽出**）。ここが埋まると `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`
+     テイラー係数抽出**）。
+     **このうち `exp(X) Y exp(-X)` の級数展開（`<exp_X_Y_exp_-X>`）と、`ad X` が
+     2 次元部分空間を保つ場合の閉じた形（cosh/sinhc）は形式化済み**
+     （`Ising2D/Abstract/ExpConjugation.lean` と `Ising2D/Part008/Claim006_ExpConjugation.lean`）。
+     `<commutator_of_H_and_Z_Y>`（1 重交換子 `[H_1^{(±)}, Ẑ_μ^{(±)}]` 等の具体計算）も
+     **形式化済み**（`Ising2D/Part008/Claim001_CommutatorHZY.lean`、抽象版は
+     `Ising2D/Abstract/CommutatorClifford.lean`）。
+     残るのは、この 2 つを `matExp_conj_two_dim_z` / `..._y` に代入して
+     `<extract_taylor_coefficient_of_Z_Y>` の 4 式がそのまま出る
+     （`s = K_1`, `α = i e^{-iθ_μ}K_1`, `β = -i e^{iθ_μ}K_1` 等。対応は
+     `Part008/Claim006_ExpConjugation.lean` の冒頭コメントに書いた）。
+     そこまで行くと `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`
      （`B_1(θ)`, `B_2` の作用）が証明でき、`Ising2D.TV_hatZ_hatY_of_action` の仮定
      `hT1`, `hT2`、および `Ising2D.TV_psiDag_of_action` / `TV_psi_of_action` の仮定 `hT` を
      外して `T_V_hatZ_hatY` と `commutation_V_psi` を無条件の定理にできる。
@@ -344,6 +417,12 @@ EOF
   - `Real.arccosh`（自前定義が必要）
   - 一般の `Ad(exp X) = exp(ad X)`。ただし本プロジェクトは級数展開ルート
     （`parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003, 007`）を持つので回避可能。
+    **回避済み**: `Ising2D/Abstract/ExpConjugation.lean` で、リー環を使わず
+    「`L_X` と `R_X` が可換」＋「可換な作用素の指数法則 `NormedSpace.exp_add_of_commute`」
+    だけから証明した。
+  - `sinhc`（`sinh s / s` を `s = 0` へ延長したもの）。自前定義した
+    （`Ising2D.Abstract.sinhc`）。`Complex.hasSum_cosh` / `Complex.hasSum_sinh` は
+    `Mathlib.Analysis.SpecialFunctions.Trigonometric.Series` にある。
 - **leanblueprint の導入検討**: 人手証明（Typst / 構造化TeX）と Lean の対応を機械的に追跡し、
   未形式化箇所を可視化する。導入の前提として、`docs/tasks/2026-07_toolchain-and-rigor` の
   Phase 2（構造化TeX への全面移行）の完了状況を確認する必要がある

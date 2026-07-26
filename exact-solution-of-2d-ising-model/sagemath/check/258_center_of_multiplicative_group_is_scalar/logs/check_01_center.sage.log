@@ -1,0 +1,6 @@
+=== center_of_multiplicative_group_is_scalar ===
+  M=1: すべての生成元と可換な W の空間の次元 = 1
+  M=2: すべての生成元と可換な W の空間の次元 = 1
+  M=3: すべての生成元と可換な W の空間の次元 = 1
+checks: 93, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

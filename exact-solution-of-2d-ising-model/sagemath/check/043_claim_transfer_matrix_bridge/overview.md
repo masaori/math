@@ -4,7 +4,7 @@
 
 **対象ラベル**: `partition_function_in_pauli_form` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/010_transfer_matrix_bridge.mjs`
+- ファイル: `structured-latex/content/010_transfer_matrix_bridge.ts`
 - 併せて検証:
   - `sigma_z_diagonal_action` / `exp_of_diagonal_matrix` / `V1_component_equals_pauli`
   - `two_by_two_transfer_identity` / `V2_component_equals_pauli`

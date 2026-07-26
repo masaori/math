@@ -19,7 +19,7 @@
 | monorepo（domain-model/codegen/backend/frontend/infra/docs） | 既存 `math` monorepo 内の 1 アプリ `realtime-web-preview/`。内部を pnpm workspace 化し `domain-model/` `backend/` `frontend/` `docs/` のサブパッケージに分割 | monorepo 原則は踏襲。`codegen/` `infra/` `frontend/mobile` `frontend/_shared` は下記理由で不採用 |
 | SSOT（zod-to-entity-definitions で ER 定義 → repository/DB/CRUD/クライアントを生成） | `domain-model/` に **Block/Node の Zod schema** と **api-contract 型**を唯一の定義として置く。ER・DB・CRUD 生成はしない | 本ツールは**所有 entity を永続化しない**。入力は外部の read-only ソース。ER/DB/Repository/CRUD という生成ターゲットが存在しない。SSOT の**思想**（単一の正準スキーマ＋境界での実行時 validation）だけ採用し、**機構**（codegen）は対象が無いため持たない |
 | `codegen/` generator パッケージ | 不採用 | 生成すべき CRUD/DB 成果物が無い。ターゲット不在の generator を作らない（[programming-philosophy](./_template/docs/programming-philosophy.md) のエントロピー最小化に反する） |
-| backend: Clean Architecture（domain/adapter/entrypoint、repository と gateway の2 interface） | **採用**。所有 entity が無いので **repository は持たない**。gateway を2つ持つ: ①構造化テキストソース読込 ②ソース変更監視。usecase: ドキュメント取得 / 変更購読。entrypoint: Fastify ハンドラ＋静的配信＋DI | 入力ソース（ファイルシステム＋`.mjs` ソース形式）は **技術詳細としての外部 domain** → adapter に隔離（[architecture-backend](./_template/docs/architecture-backend.md)）。「永続化でない外部依存はすべて gateway」原則どおり |
+| backend: Clean Architecture（domain/adapter/entrypoint、repository と gateway の2 interface） | **採用**。所有 entity が無いので **repository は持たない**。gateway を2つ持つ: ①構造化テキストソース読込 ②ソース変更監視。usecase: ドキュメント取得 / 変更購読。entrypoint: Fastify ハンドラ＋静的配信＋DI | 入力ソース（ファイルシステム＋`.ts` ソース形式）は **技術詳細としての外部 domain** → adapter に隔離（[architecture-backend](./_template/docs/architecture-backend.md)）。「永続化でない外部依存はすべて gateway」原則どおり |
 | frontend: FSD（app→pages→widgets→features→shared→frontend-shared） | **単一ページ** `pages/document-view/` を model/fetch/ui/index の4セグメントで実装。widgets/features は作らない | 「デフォルトは pages に実装、再利用が確認されるまで抽出しない」（[architecture-frontend](./_template/docs/architecture-frontend.md)）。表示対象は 1 ドキュメントのみ |
 | frontend: Web + Mobile を `_shared` で共通化 | **Web のみ**。`frontend/mobile` と web/mobile 共通の `_shared` は作らない | ユーザー指示により **mobile 対象外**。クライアントが1つの段階で共通化層を立てるのは早すぎる共通化 |
 | デザイン: Tailwind CSS + shadcn/ui | **Tailwind は採用、shadcn/ui は不採用** | shadcn/ui はフォーム/ダイアログ等**操作系コンポーネント**のためのもの。本ツールは read-only ドキュメント表示で操作系がほぼ無く、導入は早すぎる依存。要件次第で後から導入可（テンプレートも「デザインFWは要件に応じ選定」と明記） |
@@ -76,8 +76,8 @@ realtime-web-preview/
 │       │   │       ├── get-document.ts             # 本体 + 参照用ノートを束ねて返す
 │       │   │       └── subscribe-to-changes.ts
 │       │   └── adapter/gateways/
-│       │       ├── mjs-module-loader.ts            # .mjs の動的 import（スキーマ非依存の共通処理）
-│       │       ├── mjs-block-source-gateway.ts     # .mjs を動的 import + Zod safeParse
+│       │       ├── mjs-module-loader.ts            # .ts の動的 import（スキーマ非依存の共通処理）
+│       │       ├── mjs-block-source-gateway.ts     # .ts を動的 import + Zod safeParse
 │       │       ├── mjs-note-source-gateway.ts      # ノート dir（無くてもよい）を同様に読む
 │       │       └── fs-source-watcher-gateway.ts    # fs.watch（本体 dir とノート dir を監視）
 │       ├── entrypoint/
@@ -118,8 +118,8 @@ realtime-web-preview/
 - **domain / usecases**（throw せず Result を返す）
   - `getDocument(blockSource)`: ドキュメント（`Block[]`）を取得。
   - `subscribeToChanges(watcher, onChange)`: 変更購読を確立。
-- **adapter / gateways**（外部 domain＝FS と `.mjs` ソース形式に依存してよい唯一の層）
-  - `MjsBlockSourceGateway`: ソース dir 配下の `*.mjs` をファイル名順に動的 import し、
+- **adapter / gateways**（外部 domain＝FS と `.ts` ソース形式に依存してよい唯一の層）
+  - `MjsBlockSourceGateway`: ソース dir 配下の `*.ts` をファイル名順に動的 import し、
     default export を **Zod `safeParse`** で検証して結合。失敗は Result のエラーに変換（境界の try/catch）。
   - `FsSourceWatcherGateway`: `fs.watch`（再帰）でソース dir を監視。デバウンスして onChange。
 - **entrypoint**（薄く保つ: 認証無し→ DI → usecase → シリアライズ）

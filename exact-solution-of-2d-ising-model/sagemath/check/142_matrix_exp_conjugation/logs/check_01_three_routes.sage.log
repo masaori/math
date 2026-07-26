@@ -1,0 +1,3 @@
+=== matrix_exp_conjugation: 3 経路の一致 ===
+checks: 80, max relative error: 5.769e-16, tol: 1.0e-09
+RESULT: PASS

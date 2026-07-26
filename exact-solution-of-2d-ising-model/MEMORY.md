@@ -6,7 +6,7 @@
 
 前セッションで見つけた断絶——**001 章の成分定義の転送行列と 004 章以降のパウリ行列表示の
 `V_1, V_2` を同一視する主張が本文に存在せず、004 章以降が 001 章から切り離された島だった**——を解消した。
-`structured-latex/content/010_transfer_matrix_bridge.mjs`（13 ブロック、新規）。
+`structured-latex/content/010_transfer_matrix_bridge.ts`（13 ブロック、新規）。
 これで **分配関数の定義 → 転送行列 → フェルミオン → 固有値** の経路が本文でつながった。
 
 ### 記号の対応（一次情報で確定させた）
@@ -67,6 +67,268 @@ Z(J,J') = tr( P^{(+)} (V^{(+)})^{N_row} ) + tr( P^{(-)} (V^{(-)})^{N_row} )
 `eigenvalues_of_V` の `Λ_ε` を代入するところから始める。詳細は
 `docs/tasks/free-energy-roadmap/task-dependency-graph.md`（章 A・B・B2 は完了に更新済み）。
 
+---
+
+## 完了（2026-07-26）: 数値検証（SageMath）のカバレッジを 7 ラベル → 96 ラベルへ拡張
+
+### やったこと
+
+本文のラベル 128 件に対して、数値検証が紐づいていたのは **7 件**しかなかった。
+これを **96 件**へ広げた（`sagemath/tools/verify-check-linkage.ts` が確認する check は 9 → 98 件）。
+
+土台として `sagemath/_shared/operators.sage` を新設した。ここが無かったことが、
+これまでカバレッジが広がらなかった直接の原因である（`Mat(2,C)^{⊗M}` の元を数値で作る手段が無く、
+既存の検証が 2×2 のスカラー式レベルに限られていた）。
+
+- **`_shared/operators.sage`**: Pauli 行列・`σ^a_k`・Jordan–Wigner 文字列 `Z_m, Y_m`・`ε`・
+  `V_1, V_2`・`H_1^{(±)}, H_2`・`V_1^{(±)}`・`hatZ^{(±)}_μ, hatY_μ`・`ψ_μ, ψ^†_μ`・
+  `A(θ), B_1, B_2`・本プロジェクト定義の `sqrt` と `arg^{[0,2π)}` を、
+  **具体的なクロネッカー積**（numpy complex128、行列指数は `scipy.linalg.expm`）で構成する。
+  合否レポート `CheckReport` は**相対誤差**で判定する（`c_1 = cosh 2K_1` が 1e8 規模になるため）。
+- **`sagemath/README.md`**: ディレクトリ構成、`overview.md` の必須要件、2 つの共有ライブラリの
+  使い分け、不一致が出たときは本文を直さず MEMORY.md に記録する方針。
+- **`sagemath/tools/run-all-checks.sh`**: 全 check を実行して各ディレクトリの `logs/` へ保存する。
+- 各 check は `check_*.sage`（コード）＋ `logs/*.log`（**実際の実行出力**）＋ `overview.md`（README 兼）。
+  overview の判定数・最大相対誤差は**ログから機械的に転記**しており、手で書いた数値ではない。
+
+### 検証の設計方針（同語反復を避ける）
+
+定義をそのまま両辺に書いて比べる check は作らない。必ず**独立な経路**を突き合わせる。例:
+
+- `partition_function_via_transfer_matrix`: 全 2^{MN} 配位のブルートフォース vs 転送行列のトレース。
+- `matrix_exp_conjugation`: 行列指数による共役 vs m 重交換子の級数 vs `ad_X` を n²×n² 行列表示した指数（3 経路）。
+- `V1_V2_in_Z_Y_epsilon`: `σ^zσ^z / σ^x` による定義 vs `Z, Y, ε` による表示。
+- `sqrt_expansion_via_polar`: `pr_1, pr_2, s_{[0,2π)}` 経由の定義式 vs 代表元 `(r,θ)` からの構成。
+- 複素数まわりは `_prelude.sage` で `φ_polar, φ_cartesian, pr_1, pr_2, s_{[0,2π)}`、
+  さらに非負実数の平方根まで**二分法で自前に組み直して**おり、標準ライブラリに依存しない。
+
+**仮定の必要性**も併せて確認している（可換でないと `exp A exp B = exp(A+B)` が破れる、
+反可換サイトが 2 つだとテンソル積が反交換にならない、`J` と `J'` を入れ替えると分配関数が合わない、等）。
+**臨界点ちょうど**（`K_1 = arcsinh(1/sinh 2K_2)/2`）のパラメータを明示的に作って踏んでいる
+（`γ_2 = 0` はそこでしか起きないため。実際に 24 事例踏んでいる）。
+
+### 見つかった不一致（本文は修正していない）
+
+下の「## 数値検証で見つかった不一致」節に詳細。**本文の編集は別セッションの担当範囲なので触っていない。**
+
+### ついでに塞いだ検証ハーネスの穴（重要）
+
+既存の `_shared/defs.sage` の `numerical_check` は、**`RESULT: FAIL` を出しても終了コード 0 を返していた**。
+そのため `run-all-checks.sh` が失敗を PASS と誤認していた（実際 `028_claim_a_theta_mu/check_06` が
+FAIL のまま見逃されていた）。次の 2 点で塞いだ。
+
+1. `numerical_check` を**相対誤差**判定に変え、失敗時に `sys.exit(1)` するようにした。
+   絶対誤差 1e-10 で判定していたため、値が 6.4e3 規模の式で倍精度の丸め（相対 3e-13）を
+   「不一致」と報告していた。相対誤差に変えたことで 028 の check_06 は PASS になった。
+2. `run-all-checks.sh` が、終了コードに加えて**ログ本文の `RESULT: FAIL` も失敗として拾う**ようにした。
+
+### 未カバーのラベル（32 件）とその理由
+
+残りはほぼ**定義ブロック**（`def_*`）で、それ単体では反証できる等式を持たない
+（`def_exp`, `def_abs_arg`, `def_transfer_matrix_symbols`, `def_fermi` など）。
+これらは、それを使う主張の check の中で実質的に検算されている。
+例外的に計算で確かめられる定義（`def_kronecker` の添字写像 ν の全単射性など）は check を立てた。
+
+`exact_sequence_of_aut` ほか群の一般論のラベルに対しては check を書いたが、
+**作業中に別セッション（コミット `e181c2c`）が該当ブロックを本文から削除した**ため、
+紐づけ先が消えて `verify-check-linkage.ts` が通らなくなり、その check は取り下げた。
+群の一般論は本文から排除する方針（プロジェクト README）なので、これは正しい状態である。
+
+## 数値検証で見つかった不一致
+
+### `commutator_of_H_and_Z_Y`（`008_TV1_hatZ_hatY_part1.ts`）の 6 式のうち 2 式
+
+`sagemath/check/195_commutator_of_H_and_Z_Y/` に、成り立つ 4 式（`check_01`）と
+**成り立たない 2 式**（`check_02`）を分けて置いた。`check_02` は「本文の式が一致しないこと」と
+「どの形なら一致するか」の両方を固定しているので、本文を直せばこの check が壊れて気づける。
+実行ログは同ディレクトリの `logs/` にある。
+
+**(a) `[H_1^{(±)}, hatZ_μ^{(∓)}] = 2 e^{-i 2πμ/M} hatY_μ` は成り立たない。**
+
+- 本文の式との差は、max ノルムでちょうど **4**（同符号版 `[H_1^{(±)}, hatZ_μ^{(±)}]` は機械精度で一致する）。
+- 成り立つ形: `[H_1^{(±)}, hatZ_μ^{(∓)}] = 2 e^{-iθ_μ} hatY_μ − 4 e^{-iθ_μ} Y_M`。
+- 由来: `hatZ^{(-)}_μ − hatZ^{(+)}_μ = 2 Z_1 e^{-iθ_μ}` と `[H_1^{(±)}, Z_1] = ∓2 Y_M`。
+  後者は `[Y_mZ_{m+1}, Z_1] = 0`（m < M）と `[∓Y_MZ_1, Z_1] = ∓2Y_M` から従う。
+
+**(b) `[H_2, hatZ_μ^{(+)}] = −2 hatY_μ + (1/M)Σ_j(−2 e^{−i(2π/M)(−j+μ)} hatY_j)` は成り立たない。**
+
+- 補正項の係数が **−2 ではなく +4** でなければ合わない。
+- 成り立つ形: `[H_2, hatZ_μ^{(+)}] = −2 hatY_μ + (4/M)Σ_j e^{−i(2π/M)(μ−j)} hatY_j = −2 hatY_μ + 4 e^{−iθ_μ} Y_1`。
+- 由来: `[H_2, Z_1] = −2 Y_1` と、`Y_1 = (1/M)Σ_j hatY_j e^{i2πj/M}`（`recover_Z_Y_from_hatZ_hatY`）。
+
+どちらも **M = 2,3,4,5 の全 μ、両符号**で、修正形が相対誤差 ~1e-15 で一致することを確認済み。
+なお `nesting_of_commutator_of_H_and_Z`（196）は同符号の組み合わせしか使っていないので、
+この不一致の影響を受けない（196 は 2268 件すべて PASS）。
+`198_holonomic_p142` の実行ログにも、`V_1^{(+)}` の平方根で `hatZ^{(-)}` を共役すると
+閉じた表示からずれることが観察値として記録してある（同じ原因）。
+
+### 本文の主張ではなく浮動小数点の問題だったもの（記録）
+
+`λ_± = γ_1 ± √(−γ_2(θ)γ_2(−θ))` の平方根の中身は、`relation_of_gamma_2` により厳密には
+非負実数 `|γ_2|²` である（227 で独立に検証済み）。ところが倍精度では虚部に ~1e-17 の丸めが乗り、
+それが負側に出ると `arg^{[0,2π)}` が 0 ではなく ~2π を返すため、本プロジェクト定義の `sqrt`
+（偏角を半分にする分枝）が**符号を反転させてしまう**。主張の誤りではないので、
+`_shared/operators.sage` の `lambda_pm_of` で虚部が無視できるときは実軸へ落とす処理を入れ、
+理由をコードのコメントに明記した。
+
+## 完了（2026-07-26・追補4）: ソース形式を TypeScript に完全統一（`.mjs` を全廃）
+
+**このプロジェクトに `.mjs` は 1 ファイルも残っていない。** 混在させると片方が型検査の網から漏れるため。
+
+- `content/` 15 ファイル・`notes/` 8 ファイルを `.ts` へ変換（`tools/codemod-mjs-to-ts.ts --apply`、
+  `git mv` で履歴維持）。変換は import 行の書き換え・未使用 import の除去・本文中の
+  自ファイルパス参照（`sourcePath` 等）の追随だけで、**証明の中身は 1 文字も変えていない**。
+- `schema.mjs`、`tools/*.mjs` の互換入口、`tsconfig.mjs-content.json`（checkJs 用）を削除。
+- `sagemath/tools/verify-check-linkage.ts` も `.ts` 化し、ラベル一覧は
+  `structured-latex/labels.generated.ts` を直接読むようにした（読み込み処理の重複を解消）。
+- `tools/content-modules.ts` は `content/` `notes/` に `.mjs` を見つけたらエラーで落とす（再発防止）。
+- ビューア（realtime-web-preview）の入力ソースも `.ts` のみに統一。
+  ビルド・型検査・lint と、HTTP 経由で 173 blocks / 38 notes の配信を確認済み。
+- レビュー第2ラウンドの指摘も反映: 定理型ブロックの `level` を実行時にも拒否、
+  `verify-no-lost-proofs` は `sourcePath` が実在しないブロックをエラーにする（黙って skip しない）、
+  codemod の裸ファイル名置換をパス区切りで限定、実行時検証テストの判定を厳密化。
+
+**784 箇所の相互参照がすべて `.ts` として型検査される状態になった。**
+## 完了（2026-07-26・追補）: `H_1, H_2` の hat 表示と 6 本の交換関係を Lean で形式化（**原文の誤り 2 件を検出**）
+
+### 成果物
+
+| ファイル | 内容 |
+| --- | --- |
+| `lean/Ising2D/Part004/Claim011_H1H2ViaHat.lean` | `<H1_H2_via_hatZ_hatY>` の具体版（`H_1^{(±)} = (1/M)∑_j e^{-i2πj/M} hat(Y)_j hat(Z)^{(±)}_{-j}`、`H_2 = (1/M)∑_j hat(Z)^{(-)}_{-j} hat(Y)_j`） |
+| `lean/Ising2D/Part008/Claim001_CommutatorHZY.lean` | `<commutator_of_H_and_Z_Y>` の具体版（6 本） |
+| `lean/Ising2D/Abstract/CommutatorClifford.lean` | 同ラベルの抽象版（`Ising2D.Abstract.CliffordTriple`） |
+
+`lake build` 成功、`scripts/check-no-sorry.sh` exit 0（新規定理はすべて targets へ追記済み）。
+
+### 抽象版で分かったこと
+
+6 本の交換関係に効いているのは `[a b, c] = a[b,c]₊ - [a,c]₊ b` と
+「反交換子が係数のスカラー倍の `1` になること」だけである。`hat(Z), hat(Y)` の具体形も、
+行列であることも、`D` の中身（`2M δ^M`、`-4 e^{-i2π(μ+ν)/M}`）も効いていない。
+`hat(Z)^{(±)}` と `hat(Z)^{(∓)}` の差は「`D_z` と `D_{z'}` という別のスカラー関数」に
+抽象化でき、原文が符号で書き分けている 6 本は
+「積の並びが `y z` か `z y` か」×「交換相手が `z` / `z'` / `y`」の 6 通りに対応する。
+
+### **原文の誤り 2 件（本文修正は別セッションの担当）**
+
+対象ブロック: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の
+`TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`（ラベル `commutator_of_H_and_Z_Y`）。
+
+1. **第 2 式 `[H_1^{(±)}, hat(Z)_μ^{(∓)}] = 2e^{-iθ_μ}hat(Y)_μ` は偽。**
+   正しくは `2e^{-iθ_μ}hat(Y)_μ - 4e^{-iθ_μ}Y_M`。
+   原文自身が最終段で余分な項 `-(4/M)e^{-iθ_μ}∑_{k=1}^M Y_k M δ^M_{(k,0)}` を持ちながら
+   それを `0` と置いている。`k ∈ {1,…,M}` で `δ^M_{(k,0)} = 1` になるのは `k = M` なので、
+   この項は `-4e^{-iθ_μ}Y_M` であって消えない（`Y_M^2 = I` より `Y_M ≠ 0`）。
+   当該ブロックの `conversion.notes` にも「原文の該当ステップの正当化は不完全」と記録済み。
+   Lean: 訂正版 `Ising2D.lie_H1_hatZ_opp`、偽であることの証明 `lie_H1_hatZ_opp_ne_orig`。
+2. **第 5 式 `[H_2, hat(Z)_μ^{(+)}] = -2hat(Y)_μ + (1/M)∑_j(-2e^{-i(2π/M)(-j+μ)}hat(Y)_j)` は偽。**
+   正しくは `-2hat(Y)_μ + 4e^{-iθ_μ}Y_1`。原文は `-[hat(Z)_μ^{(+)}, hat(Z)_{-j}^{(-)}]₊` の展開で
+   マイナス符号を第 1 項にしか分配しておらず、次の行で係数 `4` も `2` に化けている。
+   独立な検算（`hat(Z)^{(+)}_μ = hat(Z)^{(-)}_μ - 2e^{-iθ_μ}Z_1` と `[H_2, Z_1] = -2Y_1`）でも
+   訂正版と一致する。Lean: `Ising2D.lie_H2_hatZPlus` / `lie_H2_hatZPlus_ne_orig`。
+
+**波及範囲**: 後段（`nesting_of_commutator_of_H_and_Z` 以降）が使うのは (1)(3)(4)(6) の 4 本だけで
+（当該ブロックの proof が (A)(B)(C)(D) として明示している）、誤っている (2)(5) は使われていない。
+したがって結論には波及しない。**本文の修正は `docs/tasks/2026-07_original-text-gaps/` と同じく
+別セッションの担当**（このセッションは `structured-latex/content/` を編集していない）。
+
+### 次にやること
+
+`<H1_H2_via_hatZ_hatY>` と `<commutator_of_H_and_Z_Y>` が揃ったので、
+`Ising2D.matExp_conj_two_dim_z` / `..._y`（`Part008/Claim006_ExpConjugation.lean`）へ代入すれば
+`<extract_taylor_coefficient_of_Z_Y>` の 4 式が出る。そこまで行けば
+`TV1_hatZ_hatY_012_claim_TV1_TV2_actions` が証明でき、`Ising2D.TV_hatZ_hatY_of_action` の
+仮定 `hT1`, `hT2` を外して `T_V_hatZ_hatY` を無条件の定理にできる。
+
+---
+
+## 完了（2026-07-26・追補3）: structured-latex の TypeScript 化（第1段：基盤・スキーマ・ツール）
+
+**目的**: 「存在しない定理・ラベルへの参照」を実行時の検証スクリプトではなく**コンパイル時**に落とす。
+
+- `schema.mjs` → **`schema.ts` が型と実行時検証の正本**。`schema.mjs` は再エクスポートだけの互換入口
+  （未変換の `content/*.mjs` が読むため。全変換後に削除する）。手書きの `schema.d.ts` は削除。
+- `tools/generate-labels.ts` が `content/` の実在ラベル 146 件を集めて **`labels.generated.ts`**
+  （ユニオン型 `Label`）を生成する。`ref(target: Label)` / ノートの `targets: [Label, ...Label[]]` /
+  ブロックの `labels: readonly Label[]` がこの型で縛られる。
+- 型で落ちるようになったもの: 存在しないラベルへの参照・ノートの紐づけ、未登録ラベルの宣言
+  （＝生成物の再生成漏れ）、`targets` の空配列、見出しへの本文混入、本文ブロックの `notes`。
+- **未変換の `content/*.mjs` も既に型検査されている**（`tsconfig.mjs-content.json` の
+  `allowJs` + `checkJs`。`schema.mjs` が `schema.ts` の再エクスポートなので型が流れる）。
+  つまり「存在しないラベルへの参照をコンパイル時に落とす」は第2段を待たずに達成済み。
+- 実証: `node tools/negative-type-test.ts`（正しいラベル版が通り、壊した版で tsc が落ち、
+  診断が当該ラベルを指すことまで確認。`.ts` 経路と `.mjs` 経路の両方）。
+  回帰は `type-tests/label-typing.test-d.ts`。CI は `.github/workflows/structured-latex-check.yml`。
+- ツールも TS 化（`validate-content.ts` / `verify-no-lost-proofs.ts` / `extract-source-blocks.ts`）。
+  CLAUDE.md が案内する `.mjs` のコマンドは同名の互換入口として残してある。
+  `extract-source-blocks` は原本の退避（`_old/typst/`）に追随していなかったので参照先を直した。
+- 実行方式: **Node 22.18+ の型ストリップで `.ts` を直接実行する**（`dist/` を作らない。`tsc` は検査専用）。
+  ビューア（realtime-web-preview）の入力ソース読み込みも `.mjs` / `.ts` の両対応にし、
+  変換後の `.ts` content を実際に配信できることを確認済み（173 blocks / 38 notes）。
+- **フィールド名の打ち間違い（`proof` → `proofs` 等）も落ちる**: `defineBlocks` を非ジェネリックに
+  戻して余剰プロパティ検査を効かせ、実行時にも未知キーで throw する（`tools/schema-runtime-test.ts`）。
+  レビューで「証明が黙って消える経路」として指摘された穴を塞いだもの。
+- 一括検査: `cd structured-latex && npm run check`（初回のみ `pnpm install`）。
+  中身は 生成物の鮮度 → 型検査(.ts) → 型検査(.mjs) → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
+
+**第2段（content/notes の一括 `.ts` 変換）は未実行**。別セッションが記法置換（⊗→⊠）で
+content を書き換え中のため衝突を避けた。変換は `node tools/codemod-mjs-to-ts.ts --apply`
+（既定は dry-run。`--out-dir` で試験変換）。**試験変換 23 ファイルは既に型検査を通ることを確認済み**
+なので、記法置換が main に入り次第そのまま実行してよい。
+
+## 完了（2026-07-26・追補2）: Lean 形式化が検出した本文の穴 5 件を content 側で解消
+
+対象は `structured-latex/content/008_TV1_hatZ_hatY_part2.ts` のみ（ラベルは一切変更していない）。
+
+1. **`anticommutator_of_psi`（ψ の反交換関係）— 平方根の分枝の一致が暗黙だった。**
+   statement に「ここでの √ は `def_sqrt_cc` の単一値写像 ℂ→ℂ である」ことを明記し、proof に Step 0 を追加。
+   Step 0-1（γ_2 の 2π 周期性）→ 0-2（μ+ν ≡ 0 mod M ⟹ θ_ν = -θ_μ + 2kπ ⟹ 根号の中身が ℂ の元として一致）
+   → 0-3（√ が写像であることから t_ν = t_μ、±の自由度は無い）→ 0-4（t_μ ≠ 0 なので、逆分枝を取ると
+   第 1 式・第 2 式が偽になる＝分枝の一致は不可欠）。旧 proof の「θ_ν = -θ_μ」という誤った 1 行も直した
+   （正しくは 2π の差を許す）。
+2. **`det_A_theta` — 双対関係 c_2 s_2^* = c_2^* が明示されていなかった。** proof を書き直し、
+   `factorization_of_A_theta` 経由（この分解自体に双対関係が埋め込まれている）ではなく `def_A_theta` の
+   定義から直接 det A = γ_1^2 + γ_2(θ)γ_2(-θ) を計算し、(i) c_1^2-s_1^2=1、(ii) (c_2^*)^2-(s_2^*)^2=1、
+   (iii) c_2 s_2^* = c_2^*（`duality_c2_star_eq_s2_star_c2`）の 3 関係を使う 6 ステップに分けた。
+   (iii) を落とすと det A は θ に依存し 1 にならない（数値で確認済み: 1.06, 1.31, 2.17, …）。
+   statement 側にも前提 K_1,K_2 ∈ R_{>0} を補い、λ_+λ_- = 1 の証明も追加した（原文には無かった）。
+3. **`gamma_2_theta_is_0` — s_2^* ≠ 0 が暗黙だった。** Step 0 で K_2 > 0 ⟹ 0 < tanh K_2 < 1 ⟹
+   K_2^* > 0 ⟹ s_2^* = sinh 2K_2^* > 0 を 1 段ずつ書き、s_2^* ≠ 0 を statement にも明記した。
+4. **同ブロック — sin θ_μ = 0 の μ 表現。** Step 3' を新設し、sin θ_μ = 0 ⟺ M | 2μ ⟺
+   (M が奇数) μ ≡ 0 (mod M) / (M が偶数) μ ≡ 0 または M/2 (mod M) と正しく書いた。
+   「sin θ_μ = 0 ⟺ μ = ±M」は偽であることを明示。最終結論は変わらず、μ = ±M/2 の排除は Step 4 の
+   c_2 s_1 = -c_1 < 0 と正値性の矛盾で行う。
+5. **`diagonalization_P_D` — P_μ の可逆性が未確認だった。** proof を 6 ステップに分け、
+   det P_μ = i√(γ_2(θ_μ)γ_2(-θ_μ))/(2M γ_2(-θ_μ)) を計算し、γ_2(θ_μ) ≠ 0（⟹ 根号の中身 -|γ_2|^2 ≠ 0）と
+   M ≥ 1 の下で非零であることを示した（Lean の `det_Pmat`/`det_Pmat_ne_zero` と同じ計算。数値でも一致）。
+   AP = PD から A = PDP^{-1} への移行も分けて書いた。
+
+検証は `validate-content` / `verify-no-lost-proofs` / `verify-check-linkage` の 3 本とも通過。
+Lean 側は本作業では触っていない。
+
+## 完了（2026-07-26）: 006 章・007 章の抽象テンソル積記法をクロネッカー積へ置換
+
+`Z と Y の反交換関係`（006）と `hatZ と hatY の反交換関係`（007）から、抽象テンソル積の記法を
+すべて排除した。002 章に新設された `def_kronecker` / `kronecker_product_rule` /
+`kronecker_multilinear` を参照する形へ直してある。
+
+- 記法: `⊗` → `⊠`（006 で 208 箇所）、`Mat(2,C)^{⊗M}` → `Mat(2^M,C)`、
+  `I_{(C^2)^{⊗M}}` → `2^M` 次の単位行列 `I_{Mat(2^M,C)}`。両ファイルとも `\otimes` は 0 件。
+- 根拠の付け替え: 「テンソル積代数の積の定義」→ `<kronecker_product_rule>` (1)、
+  「テンソル積の第 j 因子についての C-線型性」→ `<kronecker_multilinear>`、
+  `I⊠⋯⊠I = I_{Mat(2^M,C)}` → `<kronecker_product_rule>` (2)。
+- 併せて直した点: (a) 006 の μ>ν の場合に符号 −1 を外へ出す 3 箇所が根拠無しだったので
+  `<kronecker_multilinear>` を明示した。(b) 007 の第 1 式・第 4 式の右辺の単位行列が裸の `I` で
+  何次か不定だったので `I_{Mat(2^M,C)}` に揃え、等式が `2^M` 次の複素行列の等式であることを
+  statement 冒頭に明示した。
+- 証明の内容・段階構造・ラベルは変更していない。検証は validate-content /
+  verify-no-lost-proofs / verify-check-linkage をすべて通した。
+
+**未了（他タスクの担当範囲）**: 004 章は本作業の時点でも `\otimes` が 140 箇所残っており、
+`def_kronecker` (3) の「⊗ は ⊠ の別記法」という同一視の注記で吸収されている状態。
+002/003/004/008 の置換は別セッション。
+
 ## 完了（2026-07-26）: 自由エネルギーまでの道筋を確定し、その最初の章（定数 c と V の固有値）を執筆
 
 ### ゴールと結果
@@ -86,7 +348,7 @@ content・notes とも 0 件）。この未到達部分について **(1) 依存
 004 章以降は 001 章から切り離された島になっている。**固有値をいくら求めても、この橋が無いと分配関数へ戻れない。**
 加えて 001 章は「M 行 N 列」、004 章以降は鎖長が M で、**M と N の役割が入れ替わっている**。
 
-### (2) 執筆した章: `structured-latex/content/009_eigenvalues_of_V.mjs`（18 ブロック）
+### (2) 執筆した章: `structured-latex/content/009_eigenvalues_of_V.ts`（18 ブロック）
 
 主結果:
 
@@ -163,11 +425,53 @@ README のゴール設定 4 節が要求する「具体版＋抽象版の 2 本�
 
 ### 引き継ぎ
 
-- **`AMat` と `Amat` の二重定義を一本化する。** 橋渡し補題は既に
-  `Ising2D.Amat_eq_AMat`（`lean/Ising2D/Part008/Definition030_Fermi.lean`）にある。
-  既存ファイルのリファクタなので「具体版＋抽象版の 2 本立て」整備の担当セッションの作業とする。
+- ~~**`AMat` と `Amat` の二重定義を一本化する。**~~ → **完了（下記「完了（2026-07-26）:
+  `A(θ)` の二重定義の一本化」を参照）。**
 - **他の主張にも抽象版が無いものが多く残っている**（README 8 節）。本追補と同じ要領で、
   既存の具体版を消さずに抽象版を別ファイルへ足し、系として具体版を導く形が使える。
+
+---
+
+## 完了（2026-07-26）: `A(θ)` の二重定義を `AMat` へ一本化し、原文の穴 5 件を docs/tasks へ書き出した
+
+### (1) `A(θ)` の二重定義の解消
+
+`Ising2D.Amat`（複素パラメータ 5 個版）を削除し、`Ising2D.AMat`（`IsingConst` と実 θ 版）に
+一本化した。詳細な変更内容は `lean/README.md` の「`A(θ)` の二重定義（解消済み・2026-07-26）」に記録。
+要点だけ:
+
+- `Part008/Definition016_TV.lean` が `Part008/Definition019_ThetaGamma.lean` を import。
+- 旧 `B1_mul_B2_mul_B1_eq_Amat` を `B1_mul_B2_mul_B1_eq_explicit`（重い行列計算。証明は元のまま）と
+  `B1_mul_B2_mul_B1_eq_AMat`（`AMat` への cast）に分割。
+- `TV_hatZ_hatY_of_action` / `..._of_action'` の作用行列を `AMat K θ` へ。
+- `Definition030_Fermi.lean` 末尾の橋渡し 3 補題は不要になったので削除。
+- `scripts/check-no-sorry.sh` の `targets` も整合させた。
+
+`lake build` 成功、`bash lean/scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
+
+### (2) 原文の穴 5 件の一次情報を `docs/tasks/2026-07_original-text-gaps/` へ
+
+**本文（`structured-latex/content/`）は編集していない。修正は別セッションの担当。**
+各ファイルに (a) 対象ブロックの id と label、(b) 修正後のステートメント案、
+(c) 反例・数値検算・対応する Lean 定理名 を書いた。
+
+**5 件とも解消済みで、本文の修正作業は残っていない。**
+
+- 調査に着手した時点で 3 件（010・020・040）は既に解消されていた。
+- 残る 2 件（030 `det_A_theta` / 050 `anticommutator_of_psi`）は調査時点で未解消だったが、
+  並行セッションのコミット `733a5ee`（「008: Lean 形式化が検出した本文の穴 5 件を解消」）が
+  本スコープの修正案とほぼ同じ形で解消した（030 は `def_A_theta` から直接 det を計算して
+  (i) c₁²−s₁²=1 (ii) (c₂*)²−(s₂*)²=1 (iii) c₂s₂*=c₂* を明示、050 は γ₂ の 2π 周期性を
+  Step 0 として追加）。
+
+記録として残した重要な訂正 2 点:
+
+- **050 の当初の指摘「平方根の分枝の一致を暗黙に仮定」は不正確**。本リポジトリの √ は
+  `def_sqrt_cc` の単一値写像 ℂ→ℂ なので分枝の不一致は起こらない。実際に飛んでいたのは
+  手前の一段「μ+ν ≡ 0 (mod M) すなわち θ_ν = −θ_μ」で、正しくは θ_ν = −θ_μ + 2kπ。
+  反例: M = 4, μ = 1, ν = 3 で θ_ν − (−θ_μ) = 2π（γ₂ の値は 2π 周期性により一致する）。
+- **`factorization_of_A_theta` の proof が作用素の等式から行列の等式へ飛んでいる点は未解消**
+  （Ẑ, Ŷ の線型独立性が要る）。ただし `det_A_theta` はもうそこに依存していない。
 ## 完了（2026-07-26）: 群の一般論一式を本文から排除した（点検レポート A-5 と A-6 の part2 分）
 
 `docs/tasks/goal-alignment-audit.md` の A-5（群の一般論が本文にある）と
@@ -237,7 +541,7 @@ README 4 節の方針（同じ主張に、人手証明と1対1に対応する具
 
 ### ゴールと結果
 
-`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の conversion.notes に
+`structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の conversion.notes に
 「原文の誤植・不整合をそのまま再現し fix していない」と記録されていた 2 件を、
 **数値検証で正誤を確定 → statement と整合する形へ修正 → 証明を最後まで記述** の順で解消した。
 併せて、同じファイル群で見つかった同種の未修正誤植 2 件も解消した（下記 3, 4）。
@@ -362,7 +666,7 @@ Brian Hall Def 3.32 の $\mathrm{Ad}_g/\mathrm{ad}_X$、Matrix Lie群版の主�
   差し替えた。$\mathrm{ad}_X(Y)=[X,Y]$ と、正則な $g$ に対する $\mathrm{Ad}_g(Y)=gYg^{-1}$（逆行列の
   一意性の証明つき）だけを述べており、リー群は出てこない。008 章側が期待していた記号とも一致する。
 - ノートから `def_matrix_lie_group` への `ref` はラベルが content に無くなるため解決しない
-  （`validate-content.mjs` はノートの ref も content のラベルへ解決することを要求する）。該当箇所は
+  （`validate-content.ts` はノートの ref も content のラベルへ解決することを要求する）。該当箇所は
   ノート ID への言及に置き換えた。
 - 旧 `brianhall_3.35` はどこからも参照されていなかった（grep 確認済み）。
 
@@ -395,13 +699,13 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: 人手証明に残っていた未完（TODO）を全件解消 — **総括**
 
-本セッションのゴールは「`structured-latex/content/*.mjs` に残る未完を、証明完成か、
+本セッションのゴールは「`structured-latex/content/*.ts` に残る未完を、証明完成か、
 埋められない根拠の一次情報による特定か、のどちらかに到達させる」ことだった。到達した。
 以下は個別セッションの記録（このすぐ下から並ぶ各節）の索引であり、**残っている未完はこの節に全部書いてある**。
 
 ### 数え方の注意（重要）
 
-「TODO 8 件」という数字は `verify-no-lost-proofs.mjs` の出力であり、これは
+「TODO 8 件」という数字は `verify-no-lost-proofs.ts` の出力であり、これは
 **proof が `todo()` だけのブロック**を数えている。実際には `statement` 側の `todo()` や、
 証明の途中まで書いて末尾が `todo()` のブロックもあり、**`todo()` ノードを含むブロックは全部で 16 件**だった。
 本セッションはこの 16 件すべてを対象にした。
@@ -409,7 +713,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 ### 結果
 
 - `todo()` を含むブロック: **16 件 → 1 件**。
-- `verify-no-lost-proofs.mjs` の「proof が todo のみ」: **8 件 → 0 件**。
+- `verify-no-lost-proofs.ts` の「proof が todo のみ」: **8 件 → 0 件**。
 - 併せて、`todo()` を使わない形で残っていた未完 4 箇所（「証明略」「（暫定）一旦受け入れる」
   「未証明につき使用禁止」）も解消した。**本文に未証明の主張を根拠として使っている箇所は無い**
   （grep で確認済み）。
@@ -463,7 +767,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: フェルミオン ψ の定義・反交換関係・T_(V) の作用を Lean で形式化
 
-対象ブロック（`structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
+対象ブロック（`structured-latex/content/008_TV1_hatZ_hatY_part2.ts`）:
 `TV1_hatZ_hatY_030_definition_fermi`（`def_fermi`）/ `TV1_hatZ_hatY_031_claim_V_psi_commutator`
 （`commutation_V_psi`）/ `TV1_hatZ_hatY_032_claim_anticommutator_psi`（`anticommutator_of_psi`）。
 新規ファイル `lean/Ising2D/Part008/Definition030_Fermi.lean`。
@@ -560,7 +864,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 ## 完了（2026-07-26）: `A(θ)` の対角化（γ_1, γ_2, 固有値・固有ベクトル、P D P⁻¹）を形式化
 
 追加ファイル: `lean/Ising2D/Part008/Definition019_ThetaGamma.lean`, `lean/Ising2D/Part008/Claim027_EigenATheta.lean`。
-対応する原本ブロックは `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
+対応する原本ブロックは `structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の
 `TV1_hatZ_hatY_017/019/020` と `..._part2.mjs` の `TV1_hatZ_hatY_022/023/027/028/035`。
 
 ### 方針（要点だけ）
@@ -623,7 +927,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
   併せて **`matrix_exp_conjugation` のブロックを `brianhall_exc14` より前へ移動**し、
   証明が後方のブロックを参照する依存の逆転を解消した。
   Matrix Lie群の定義ブロックに `def_matrix_lie_group` ラベルを新設。
-- **`exp_X_Y_exp_-X`（`008_TV1_hatZ_hatY_part1.mjs`）**:
+- **`exp_X_Y_exp_-X`（`008_TV1_hatZ_hatY_part1.ts`）**:
   「（暫定）リー群・リー環の掘り下げを避けて一旦受け入れる」を撤回し、`matrix_exp_conjugation` を
   根拠に完全な証明へ書き換えた。statement 側に $X,Y\in\mathrm{Mat}(d,\mathbb{C})$ と記号の定義元を明示。
   これで **`brianhall_3.35` を根拠に使っている証明は本文に 1 件も無い**（grep 済み）。
@@ -645,7 +949,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: γ_1, γ_2 の偏角・零点・臨界条件（008 後半の 4 ブロック）
 
-`008_TV1_hatZ_hatY_part2.mjs` の TODO 4 件をすべて人手証明で埋め、`todo()` を除去した。
+`008_TV1_hatZ_hatY_part2.ts` の TODO 4 件をすべて人手証明で埋め、`todo()` を除去した。
 
 - **`cosh_sinh_basic_properties`（新設・`000_calculation_formulae_00_09.mjs`）**:
   cosh/sinh の基本性質がどのブロックにも主張として無かったため新設した。
@@ -718,7 +1022,7 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 
 ## 完了（2026-07-26）: 008 part1 の残り 4 ブロック（交換子のネスト・自己同型群の完全列・クリフォード群・T_(V) の作用）
 
-`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` に残っていた 4 件の TODO をすべて埋め、`todo()` を除去した。
+`structured-latex/content/008_TV1_hatZ_hatY_part1.ts` に残っていた 4 件の TODO をすべて埋め、`todo()` を除去した。
 
 ### 交換子のネスト（`<nesting_of_commutator_of_H_and_Z>`）
 
@@ -1097,7 +1401,7 @@ Lean の `(j : ℕ) = 0` の項である。`hat` の添字 `μ` は `ℤ` のま
   σ_k^y, σ_k^z, I_{(Mat(2,C))^{⊗M}}, Z_m/Y_m の p_m/q_m 対応を既存ブロックへ補記して集約。
 - **非移行（確定）**: main.typ 末尾の作業メモ（`= 全体のノリ` / `= メモ` / 「次回やること」と
   埋め込み SageMath スニペット）は証明本体でないため移さない。
-- 検証: `node structured-latex/tools/validate-content.mjs` → 142ブロック/14ファイル（見出し10・ラベル72・
+- 検証: `node structured-latex/tools/validate-content.ts` → 142ブロック/14ファイル（見出し10・ラベル72・
   ref142 全解決）。`pnpm -r build` / `pnpm -r typecheck` / `biome check` 通過。KaTeX 全1647式 0エラー。
   `GET /api/document` で見出し10件が文書順に配信されることを確認。
 
@@ -1179,7 +1483,7 @@ gamma_2=0 障害の処理: gamma_2(theta_mu)=0 の mu ではフェルミオン�
 
 ### structured-latex 残りファイルの変換
 
-`structured-latex/content/` 以下へ残りの `parts/**/*.typ` の変換を追加済み。`node structured-latex/tools/validate-content.mjs` は 123 blocks で通過。
+`structured-latex/content/` 以下へ残りの `parts/**/*.typ` の変換を追加済み。`node structured-latex/tools/validate-content.ts` は 123 blocks で通過。
 
 ### 032/037 V' 符号修正と SageMath 検証
 
@@ -1248,7 +1552,7 @@ $
   **定義したブロックはリポジトリに 1 件も存在しない**。すなわち主張の記号が意味をもつ土台が未整備で、
   証明以前に statement が定義されていない状態である。
 - 原本 `_old/typst/parts/005_.../001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ` も
-  proof は `TODO:` のみで、移行漏れではない（`verify-no-lost-proofs.mjs` も同判定）。
+  proof は `TODO:` のみで、移行漏れではない（`verify-no-lost-proofs.ts` も同判定）。
 - **本論はこの一般版に依存しない。** 本プロジェクトで必要なのは行列環 $\mathrm{Mat}(n,K)$ 上の
   $e^{X}Ye^{-X}=e^{\mathrm{ad}_X}(Y)$ だけであり、これは新規ブロック
   `exp_conjugation_proof_010_theorem_matrix_exp_conjugation`（labels: `matrix_exp_conjugation`）で
@@ -1275,7 +1579,69 @@ $\mathrm{Aut}(G)$ が Lie 群で $\mathrm{End}(\mathfrak{g})$ がその Lie 環�
 
 `exp_conjugation_proof_008_theorem_exp_ad_series`（labels: `brianhall_exc14`）、
 `exp_conjugation_proof_009_theorem_exp_conjugation_main`（labels: `brianhall_3.35`）の
-「未証明につき使用禁止」注記、および `008_TV1_hatZ_hatY_part1.mjs` の `exp_X_Y_exp_-X` の
+「未証明につき使用禁止」注記、および `008_TV1_hatZ_hatY_part1.ts` の `exp_X_Y_exp_-X` の
 「暫定」proof は、いずれも `matrix_exp_conjugation` を根拠に完全証明へ書き換えて解消した。
 詳細は本ファイル冒頭の「完了（2026-07-26）: `todo()` 以外の形で残っていた未完 4 箇所」を見よ。
 なお `exp_conjugation_proof_002`（一般 Lie 群版）は上記の根拠により **`todo()` のまま残置**である。
+
+---
+
+## 完了（2026-07-26・追補2）: `exp(X) A exp(-X)` の級数展開（`<exp_X_Y_exp_-X>`）を Lean で形式化
+
+`Definition016_TV.lean` / `Definition030_Fermi.lean` で仮定に持ち上げてある `T_V_hatZ_hatY` を
+閉じるための土台。**既存 Lean ファイルは変更せず**（`Ising2D.lean` の import 行追加と
+`scripts/check-no-sorry.sh` の targets 追記のみ）、新規 2 ファイルで 2 本立てにした。
+
+- 抽象版 `lean/Ising2D/Abstract/ExpConjugation.lean`（`Ising2D.Abstract`）
+- 具体版 `lean/Ising2D/Part008/Claim006_ExpConjugation.lean`（`Mat(2,ℂ)^{⊗M}`、抽象版の系）
+
+### 証明の骨格（リー環を使わない・級数展開ルート）
+
+左乗法 `L_X : A ↦ X A` と右乗法 `R_X : A ↦ A X` は**線型作用素として可換**（結合律だけで出る）。
+`ad X = L_X - R_X` なので、可換な作用素の指数法則から `exp(ad X) = exp(L_X) ∘ exp(-R_X)`。
+`(L_X)^n = L_{X^n}`, `(R_X)^n = R_{X^n}` と `L`, `R` の連続線型性から
+`exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}`。よって `exp(ad X)(A) = exp(X) A exp(-X)`。
+**`L` が代数準同型であることすら使っていない**（冪の式と連続線型性だけ）。右乗法は反同型だが
+`(R_X)^n = R_{X^n}` は左乗法と同形なので、反対環 `Aᵐᵒᵖ` を経由する必要が無い。
+
+### 導出して確定させた係数（後段で必ず使う）
+
+`ad X z = α y`, `ad X y = β z` で `s^2 = αβ` のとき
+
+```
+exp(X) z exp(-X) = cosh(s) z + α sinhc(s) y
+exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z
+```
+
+`sinhc(s) := sinh(s)/s`（`s = 0` では `1`。`Ising2D.Abstract.sinhc`）。`sinh(s)/s` のままだと
+`s = 0` で 0 割りになるので分けて定義した。冪級数 `sinhc(s) = Σ_k s^{2k}/(2k+1)!` も証明済み
+（`Abstract.hasSum_sinhc`）。
+
+原文 `<extract_taylor_coefficient_of_Z_Y>` の (h1.z) `cosh(K_1)Ẑ_μ + i e^{-iθ_μ} sinh(K_1)Ŷ_μ` は
+`s = K_1`, `α = i e^{-iθ_μ}K_1`, `β = -i e^{iθ_μ}K_1`（`αβ = K_1^2 = s^2`）の場合として
+上式から出る。**すなわち原文の cosh/sinh の形は正しい。**
+
+### 次に必要なもの（`T_V_hatZ_hatY` を無条件にするために残っているのはこれだけ）
+
+`<commutator_of_H_and_Z_Y>`（1 重交換子 `[i K_1 H_1^{(±)}/2, Ẑ_μ^{(±)}]` 等の具体計算）。
+これを `Ising2D.matExp_conj_two_dim_z` / `..._y` に代入すれば
+`<extract_taylor_coefficient_of_Z_Y>` の 4 式がそのまま出て、
+`TV_hatZ_hatY_of_action` の仮定 `hT1`, `hT2` と `TV_psiDag_of_action` の `hT` が外せる。
+
+### 原文について気づいたこと（穴ではない）
+
+`<exp_X_Y_exp_-X>` の statement は `exp(X)` の正則性を述べるが、逆行列が `exp(-X)` である
+ことは `<matrix_exp_conjugation>` (3) に委ねている。Lean 側は `Ising2D.matExpUnits` が
+`exp X` を単元として与え逆元が定義から `exp(-X)` なので、この点に穴は無い
+（`Ising2D.matExpUnits_conj_eq_tsum`）。
+
+### 実装上の注意（次に触る人へ）
+
+`Matrix` にはノルムの標準的な選び方が無いため、抽象版（ℂ 上の完備ノルム環が前提）を
+`TensorPow M` へ特殊化するには `open scoped Matrix.Norms.Operator`（`l^∞` 作用素ノルム）で
+局所的に instance を入れる必要がある。**公開する定理の statement にはこの instance を
+持ち込まない**ため、mathlib の `Matrix.exp_add_of_commute` と同じ形で
+「statement は instance 無しで書き、証明だけ scoped instance 付きの補題へ委ねる」構成にし、
+照合のため `set_option backward.isDefEq.respectTransparency false` を使っている。
+`open scoped ... in by ...`（tactic への `in`）では instance が入らないので、
+**scoped instance を要する補題は独立した宣言として `open scoped ... in theorem` で書くこと。**

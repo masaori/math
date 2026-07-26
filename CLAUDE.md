@@ -7,6 +7,7 @@
 ### プロジェクト一覧
 
 - `exact-solution-of-2d-ising-model/` — 2次元Ising模型の厳密解の証明
+- `integrable-lattice/` — 可算（対数順序群 Λ / ℚ̄）で厳密化できる可解格子模型の statement 探索
 
 ### 共通ツール
 
@@ -31,14 +32,15 @@
 <project-name>/
 ├── MEMORY.md              # プロジェクト固有の引き継ぎメモ（次回やること・未解決問題・完了済み）
 ├── structured-latex/      # 証明本体の正本（構造化テキスト）
-│   ├── schema.mjs         # ブロック/ノート/ノードのスキーマと検証
-│   ├── content/*.mjs      # 証明ブロック群（配列の並びが文書順の正本。**最終成果物はここだけから生成**）
-│   ├── notes/*.mjs        # 参照用ノート（文書本体ではない。targets にラベルで紐づける）
-│   └── tools/             # validate-content.mjs 等
+│   ├── schema.ts          # ブロック/ノート/ノードの型と検証（型の正本）
+│   ├── labels.generated.ts # 自動生成: 実在ラベルのユニオン型（参照はこの型しか指せない）
+│   ├── content/*.ts       # 証明ブロック群（配列の並びが文書順の正本。**最終成果物はここだけから生成**）
+│   ├── notes/*.ts         # 参照用ノート（文書本体ではない。targets にラベルで紐づける）
+│   └── tools/             # validate-content.ts / generate-labels.ts 等（すべて TypeScript）
 ├── sagemath/              # SageMath による数値検証コード
 │   ├── _shared/defs.sage  # 共通定義
 │   ├── check/<NNN>_<対象>/# overview.md に「対象ラベル」を宣言する
-│   └── tools/             # verify-check-linkage.mjs（検証↔証明の対応を機械検証）
+│   └── tools/             # verify-check-linkage.ts（検証↔証明の対応を機械検証）
 ├── lean/                  # Lean 4 + mathlib4 による機械的証明（任意）
 │   ├── README.md          # セットアップ・人手証明との対応規約
 │   └── <Lib>/Part<NNN>/   # 証明の章番号に対応
@@ -66,11 +68,19 @@
 
 ### 検証（変更したら必ず通す）
 
-- `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**・
+- `(cd structured-latex && npm run check)` — 生成ラベルの鮮度 → **型検査** → 実行時検証 →
+  移行漏れ検出 → 負テスト → 実行時検証テスト を一括で回す
+  （初回のみ `cd structured-latex && pnpm install`。Node 22.18 以降が必要）
+  - 型検査で落ちるもの: 存在しないラベルへの `ref` / ノートの `targets`、未登録ラベルの宣言、
+    見出しへの本文混入、本文ブロックの `notes`
+  - ラベルを増減したら `node structured-latex/tools/generate-labels.ts` で
+    `labels.generated.ts` を再生成する（忘れると型検査が落ちる）
+  - **ソース形式は TypeScript に統一する**（`.mjs` は使わない。混在させない）
+- `node structured-latex/tools/validate-content.ts` — スキーマ・ラベル重複・**未解決参照**・
   ノートの **未解決 targets** を検査（content と notes の両方）
-- `node structured-latex/tools/verify-no-lost-proofs.mjs` — **移行漏れ**（`_old/typst` の原本に証明が
+- `node structured-latex/tools/verify-no-lost-proofs.ts` — **移行漏れ**（`_old/typst` の原本に証明が
   あるのに構造化側が TODO のまま）を検出
-- `node sagemath/tools/verify-check-linkage.mjs` — 数値検証と証明の対応が切れていないかを検査
+- `node sagemath/tools/verify-check-linkage.ts` — 数値検証と証明の対応が切れていないかを検査
 - `lean/` があれば `lake build` と `bash lean/scripts/check-no-sorry.sh`
 
 ## MEMORY.md の運用
@@ -90,6 +100,22 @@
   **Lean は同じ主張に2つの証明を置く**: 人手証明と1対1に対応する具体版（人手証明の保証）と、
   不要な構造を取り払った抽象版（何が本質的かを示し、具体版が過剰な構造を要求していないかの検査）。
 - サブエージェントにこのプロジェクトの作業を委譲するときは、**指示に README を読ませることを含める。**
+
+- **`integrable-lattice/` で作業するときは、着手前に必ず
+  [その README](integrable-lattice/README.md) と
+  [自動ループ Runbook](integrable-lattice/docs/tasks/auto-loop-runbook.md) を読むこと。**
+- 要点: **できる限り対数順序群 Λ の言葉で証明を書き、可算（ℕ/ℚ/Λ/ℚ̄）と非可算（ℝ/ℂ）を
+  分別しながら証明する**（ℝ へ脱出した箇所を必ず明示する）。
+  **証明は構造化 LaTeX の形式で残す**（新規に Typst で書かない。既存分は順次移行し、
+  移行完了後に Typst を廃止する）。流儀は `exact-solution-of-2d-ising-model/structured-latex/` が正本。
+
+### 証明の記述形式（全プロジェクト共通）
+
+- **証明の正本は構造化テキスト（`structured-latex/`）とする。** Typst で新規に証明を書かない。
+- 移行が済んだ Typst は削除せず `_old/typst/` へ温存退避し、退避先に「正本は構造化テキスト側」と明記する。
+- **移行時にブロック数や参照解決だけを見て「完了」と判断しない。証明の中身が原本から確実に
+  運ばれたことを突き合わせて確認する**（過去に主要定理の証明が移行漏れで失われた事故がある。
+  `structured-latex/tools/verify-no-lost-proofs.ts` で機械検証できる）。
 
 ## 共通ルール
 

@@ -1,0 +1,4 @@
+=== extract_taylor_coefficient_of_Z_Y: 級数和 = cosh/sinh 表示 ===
+打ち切り項数 NTERMS = 40
+checks: 432, max relative error: 5.014e-16, tol: 1.0e-09
+RESULT: PASS
