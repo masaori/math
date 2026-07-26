@@ -1012,29 +1012,441 @@ i\cdot (K_2^*)^{n}\cdot\hat{Y}_\mu & (n\text{ is odd})
     title: null,
     labels: ["exp_X_Y_exp_-X"],
     statement: [
+      paragraph([
+        math(String.raw`R := \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " とし、",
+        math(String.raw`X, Y \in R`),
+        " とする。",
+      ]),
+      paragraph([
+        "記号を確定させる。",
+        math(String.raw`\mathrm{ad}_X : R \to R,\ W \mapsto [X,W] := XW - WX`),
+        " は ",
+        ref("nesting_of_commutator_of_H_and_Z"),
+        " の ",
+        math(String.raw`\mathrm{ad}_X`),
+        " であり、",
+      ]),
       displayMath(
-        String.raw`\exp(X)\,Y\,\exp(-X)
-= \mathrm{Ad}_{\exp(X)}(Y)
-= \exp(\mathrm{ad}_X)(Y)
-= \sum_{n=0}^{\infty} \frac{1}{n!}
-  \underbrace{[X,[X,\dots,[X,Y]\dots]]}_{n}`,
+        String.raw`\underbrace{[X,[X,\dots,[X,W]\dots]]}_{m}
+:= \mathrm{ad}_X^{m}(W),
+\qquad
+\mathrm{ad}_X^{m} := \underbrace{\mathrm{ad}_X\circ\cdots\circ\mathrm{ad}_X}_{m},
+\qquad
+\mathrm{ad}_X^{0} := \mathrm{id}_R`,
       ),
       paragraph([
-        "（",
-        math(String.raw`n=0`),
-        " のとき括弧なしで ",
-        math(String.raw`Y`),
-        "）",
+        "とする（",
+        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
+        "。",
+        math(String.raw`m=0`),
+        " のとき値は ",
+        math(String.raw`W`),
+        " そのもの）。",
+        math(String.raw`R`),
+        " 上の ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_end_iso"),
+        " のもの、すなわち代数同型 ",
+        math(String.raw`\mathbf{end} : R \to \mathrm{End}(\mathcal{F})`),
+        " による移送 ",
+        math(String.raw`\exp(A):=\mathbf{end}^{-1}(\exp(\mathbf{end}(A)))`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`R`),
+        " における収束を定めるため、",
+        ref("def_end_iso"),
+        " の同一視 ",
+        math(String.raw`\mathrm{End}(\mathcal{F})\cong\mathrm{Mat}(2^M,\mathbb{C})`),
+        "（基底 ",
+        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
+        " による座標表示、",
+        math(String.raw`\dim_{\mathbb{C}}\mathcal{F}=2^M`),
+        "）を与える ",
+        math(String.raw`\mathbb{C}`),
+        "-代数同型を ",
+        math(String.raw`\kappa : \mathrm{End}(\mathcal{F}) \to \mathrm{Mat}(2^M,\mathbb{C})`),
+        " と書き、",
+      ]),
+      displayMath(
+        String.raw`\Phi := \kappa\circ\mathbf{end} : R \to \mathrm{Mat}(2^M,\mathbb{C}),
+\qquad
+\|A\|_R := \left\|\Phi(A)\right\| \quad (A\in R)`,
+      ),
+      paragraph([
+        "と定める（右辺の ",
+        math(String.raw`\|\cdot\|`),
+        " は ",
+        ref("def_matrix_norm"),
+        " のノルム）。",
+        math(String.raw`\Phi`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        "-線型全単射なので ",
+        math(String.raw`\|\cdot\|_R`),
+        " は ",
+        math(String.raw`R`),
+        " のノルムであり、",
+        math(String.raw`R`),
+        " における収束はこのノルムに関する収束とする（",
+        math(String.raw`\dim_{\mathbb{C}}R=4^M<\infty`),
+        "）。このとき次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) 級数 ",
+          math(String.raw`\displaystyle\sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`),
+          " は ",
+          math(String.raw`R`),
+          " において収束する。",
+        ],
+        [
+          "(2) ",
+          math(String.raw`\exp(X)`),
+          " は ",
+          math(String.raw`R`),
+          " の可逆元で ",
+          math(String.raw`\exp(X)^{-1}=\exp(-X)`),
+          "。",
+        ],
+        [
+          "(3) ",
+          math(String.raw`\displaystyle
+\exp(X)\,Y\,\exp(-X)
+= \mathrm{Ad}_{\exp(X)}(Y)
+= \exp(\mathrm{ad}_X)(Y)
+= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`),
+          "。ここで ",
+          math(String.raw`\mathrm{Ad}_{\exp(X)}(Y):=\exp(X)\,Y\,\exp(X)^{-1}`),
+          "、",
+          math(String.raw`\exp(\mathrm{ad}_X)`),
+          " は ",
+          ref("def_exp"),
+          " の ",
+          math(String.raw`\exp:\mathrm{End}(R)\to\mathrm{End}(R)`),
+          " を ",
+          math(String.raw`\mathrm{ad}_X\in\mathrm{End}(R)`),
+          " に適用したものである。",
+        ],
       ]),
     ],
     proof: [
       paragraph([
-        "（暫定）リー群・リー環の掘り下げを避けて一旦受け入れる（",
-        ref("brianhall_3.35"),
-        " 参照）。行列級数の直接計算でも示せると思われる。",
+        "本主張は行列環（有限次元結合代数）の中だけの主張であり、Lie 群・Lie 環の理論を使わずに ",
+        ref("matrix_exp_conjugation"),
+        " へ帰着できる。以下 ",
+        math(String.raw`n_0 := 2^M \in\mathbb{Z}_{\ge 1}`),
+        " とおき、",
+        math(String.raw`\mathrm{Mat}(n_0,\mathbb{C})`),
+        " のノルムと収束は ",
+        ref("def_matrix_norm"),
+        " のものとする。",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`\Phi`),
+        " は単位的 ",
+        math(String.raw`\mathbb{C}`),
+        "-代数の同型かつ等長。",
+        ref("end_is_algebra_isomorphism"),
+        " より ",
+        math(String.raw`\mathbf{end}`),
+        " は単位的 ",
+        math(String.raw`\mathbb{C}`),
+        "-代数の同型であり、",
+        math(String.raw`\kappa`),
+        " は基底による座標表示が与える単位的 ",
+        math(String.raw`\mathbb{C}`),
+        "-代数の同型（",
+        ref("def_end_iso"),
+        "）であるから、合成 ",
+        math(String.raw`\Phi=\kappa\circ\mathbf{end}`),
+        " も単位的 ",
+        math(String.raw`\mathbb{C}`),
+        "-代数の同型である。すなわち ",
+        math(String.raw`A,B\in R`),
+        "、",
+        math(String.raw`c\in\mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\Phi(A+B)=\Phi(A)+\Phi(B),\quad
+\Phi(cA)=c\,\Phi(A),\quad
+\Phi(AB)=\Phi(A)\Phi(B),\quad
+\Phi(I_R)=I_{n_0}`,
+      ),
+      paragraph([
+        "が成り立ち、",
+        math(String.raw`\Phi`),
+        " は全単射である。また ",
+        math(String.raw`\|A\|_R=\|\Phi(A)\|`),
+        " は定義そのものなので ",
+        math(String.raw`\Phi`),
+        " は等長であり、",
+        math(String.raw`R`),
+        " の列 ",
+        math(String.raw`(A_N)_{N\in\mathbb{Z}_{\ge 0}}`),
+        " と ",
+        math(String.raw`A\in R`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`A_N \to A \ \text{in } R
+\iff \left\|A_N-A\right\|_R\to 0
+\iff \left\|\Phi(A_N)-\Phi(A)\right\|\to 0
+\iff \Phi(A_N)\to\Phi(A) \ \text{in } \mathrm{Mat}(n_0,\mathbb{C})`,
+      ),
+      paragraph([
+        "（2 番目の同値は ",
+        math(String.raw`\Phi(A_N)-\Phi(A)=\Phi(A_N-A)`),
+        " と ",
+        math(String.raw`\|\cdot\|_R`),
+        " の定義による）。すなわち ",
+        math(String.raw`\Phi`),
+        " と ",
+        math(String.raw`\Phi^{-1}`),
+        " は収束を両向きに保つ。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`\Phi`),
+        " は交換子とその反復を保つ。",
+        math(String.raw`A,B\in R`),
+        " について Step 1 より",
+      ]),
+      displayMath(
+        String.raw`\Phi([A,B])=\Phi(AB-BA)=\Phi(AB)-\Phi(BA)
+=\Phi(A)\Phi(B)-\Phi(B)\Phi(A)=\left[\Phi(A),\Phi(B)\right]`,
+      ),
+      paragraph([
+        "そこで ",
+        math(String.raw`X':=\Phi(X)`),
+        "、",
+        math(String.raw`Y':=\Phi(Y)\in\mathrm{Mat}(n_0,\mathbb{C})`),
+        " とおくと、",
+        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
+        " についての帰納法で",
+      ]),
+      displayMath(
+        String.raw`\Phi\!\left(\mathrm{ad}_X^{m}(W)\right)=\mathrm{ad}_{X'}^{m}\!\left(\Phi(W)\right)
+\qquad (W\in R)`,
+      ),
+      paragraph([
+        "が成り立つ。実際 ",
+        math(String.raw`m=0`),
+        " のとき両辺とも ",
+        math(String.raw`\Phi(W)`),
+        " であり、",
+        math(String.raw`m`),
+        " で成り立つとすると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Phi\!\left(\mathrm{ad}_X^{m+1}(W)\right)
+&= \Phi\!\left(\left[X,\ \mathrm{ad}_X^{m}(W)\right]\right)
+   \quad (\because \mathrm{ad}_X^{m+1}=\mathrm{ad}_X\circ\mathrm{ad}_X^{m}) \\
+&= \left[\Phi(X),\ \Phi\!\left(\mathrm{ad}_X^{m}(W)\right)\right]
+   \quad (\because \text{上の交換子の保存}) \\
+&= \left[X',\ \mathrm{ad}_{X'}^{m}(\Phi(W))\right]
+   \quad (\because \text{帰納法の仮定}) \\
+&= \mathrm{ad}_{X'}^{m+1}\!\left(\Phi(W)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 3: ",
+        math(String.raw`\Phi`),
+        " は ",
+        math(String.raw`\exp`),
+        " を保つ。",
+        ref("def_end_iso"),
+        " の定義 ",
+        math(String.raw`\exp(A)=\mathbf{end}^{-1}(\exp(\mathbf{end}(A)))`),
+        " の両辺に ",
+        math(String.raw`\mathbf{end}`),
+        " を施すと ",
+        math(String.raw`\mathbf{end}(\exp(A))=\exp(\mathbf{end}(A))`),
+        " であり、同一視 ",
+        math(String.raw`\kappa`),
+        " のもとで ",
+        math(String.raw`\mathrm{End}(\mathcal{F})`),
+        " の ",
+        math(String.raw`\exp`),
+        "（",
+        ref("def_exp"),
+        "）は ",
+        math(String.raw`\mathrm{Mat}(n_0,\mathbb{C})`),
+        " の ",
+        math(String.raw`\exp`),
+        " に対応するから",
+      ]),
+      displayMath(
+        String.raw`\Phi(\exp(A))=\exp(\Phi(A)) \qquad (A\in R)`,
+      ),
+      paragraph([
+        "とくに ",
+        math(String.raw`\Phi(\exp(X))=\exp(X')`),
+        " であり、",
+        math(String.raw`\Phi(-X)=-\Phi(X)=-X'`),
+        "（Step 1 の線型性）より ",
+        math(String.raw`\Phi(\exp(-X))=\exp(-X')`),
+        "。",
+      ]),
+      paragraph([
+        "Step 4: 行列版の適用。",
+        ref("matrix_exp_conjugation"),
+        " を ",
+        math(String.raw`K=\mathbb{C}`),
+        "、",
+        math(String.raw`n=n_0=2^M`),
+        "、",
+        math(String.raw`X',Y'\in\mathrm{Mat}(n_0,\mathbb{C})`),
+        " に適用すると、同主張の (1)(2)(3) より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_{X'}^{m}(Y') \text{ は } \mathrm{Mat}(n_0,\mathbb{C}) \text{ で収束し}, \\
+&\exp(X')\,Y'\,\exp(-X')
+= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_{X'}^{m}(Y')
+= \exp(\mathrm{ad}_{X'})(Y'), \\
+&\exp(X') \text{ は正則で } \exp(X')^{-1}=\exp(-X')
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 5: 主張 (2)。Step 4 の第 3 式に ",
+        math(String.raw`\Phi^{-1}`),
+        " を施す。Step 1 より ",
+        math(String.raw`\Phi^{-1}`),
+        " も単位的代数同型なので、Step 3 と合わせて",
+      ]),
+      displayMath(
+        String.raw`\exp(X)\exp(-X)
+= \Phi^{-1}\!\left(\exp(X')\right)\Phi^{-1}\!\left(\exp(-X')\right)
+= \Phi^{-1}\!\left(\exp(X')\exp(-X')\right)
+= \Phi^{-1}(I_{n_0}) = I_R`,
+      ),
+      paragraph([
+        "同様に ",
+        math(String.raw`\exp(-X)\exp(X)=I_R`),
+        "。よって ",
+        math(String.raw`\exp(X)`),
+        " は ",
+        math(String.raw`R`),
+        " の可逆元で ",
+        math(String.raw`\exp(X)^{-1}=\exp(-X)`),
+        "。これが (2) である。したがって ",
+        math(String.raw`\mathrm{Ad}_{\exp(X)}(Y)=\exp(X)Y\exp(X)^{-1}=\exp(X)\,Y\,\exp(-X)`),
+        "。",
+      ]),
+      paragraph([
+        "Step 6: 主張 (1) と (3) の第 3 の等号。",
+        math(String.raw`N\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`P_N:=\sum_{m=0}^{N}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)\in R`),
+        " とおくと、Step 1 の線型性（有限和）と Step 2 より",
+      ]),
+      displayMath(
+        String.raw`\Phi(P_N)
+= \sum_{m=0}^{N}\frac{1}{m!}\,\Phi\!\left(\mathrm{ad}_X^{m}(Y)\right)
+= \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_{X'}^{m}(Y')`,
+      ),
+      paragraph([
+        "であり、Step 4 よりこれは ",
+        math(String.raw`N\to\infty`),
+        " で ",
+        math(String.raw`\exp(X')Y'\exp(-X')`),
+        " に収束する。Step 1 の同値（",
+        math(String.raw`\Phi^{-1}`),
+        " が収束を保つこと）より ",
+        math(String.raw`P_N`),
+        " は ",
+        math(String.raw`R`),
+        " で収束し、その極限は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\lim_{N\to\infty}P_N
+&= \Phi^{-1}\!\left(\exp(X')\,Y'\,\exp(-X')\right) \\
+&= \Phi^{-1}\!\left(\exp(X')\right)\,\Phi^{-1}(Y')\,\Phi^{-1}\!\left(\exp(-X')\right)
+   \quad (\because \Phi^{-1} \text{ は乗法的}) \\
+&= \exp(X)\,Y\,\exp(-X)
+   \quad (\because \text{Step 3},\ \Phi^{-1}(Y')=Y)
+\end{aligned}`,
+      ),
+      paragraph([
+        "これで (1) と、(3) の等式 ",
+        math(String.raw`\exp(X)Y\exp(-X)=\sum_{m=0}^{\infty}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)`),
+        " が示された。",
+      ]),
+      paragraph([
+        "Step 7: (3) の ",
+        math(String.raw`\exp(\mathrm{ad}_X)(Y)`),
+        " との一致。",
+        math(String.raw`A,B\in R`),
+        "、",
+        math(String.raw`c\in\mathbb{C}`),
+        " について ",
+        math(String.raw`\mathrm{ad}_X(A+B)=\mathrm{ad}_X(A)+\mathrm{ad}_X(B)`),
+        "、",
+        math(String.raw`\mathrm{ad}_X(cA)=c\,\mathrm{ad}_X(A)`),
+        "（結合代数 ",
+        math(String.raw`R`),
+        " の分配律とスカラー倍の結合性から直ちに従う。",
+        ref("nesting_of_commutator_of_H_and_Z"),
+        " でも述べている）ので ",
+        math(String.raw`\mathrm{ad}_X\in\mathrm{End}(R)`),
+        " であり、",
+        math(String.raw`R`),
+        " は ",
+        math(String.raw`\|\cdot\|_R`),
+        " について有限次元 ",
+        math(String.raw`\mathbb{C}`),
+        "-ノルム線型空間である。したがって ",
+        ref("exp_converges"),
+        " を ",
+        math(String.raw`V=R`),
+        "、線型写像 ",
+        math(String.raw`\mathrm{ad}_X`),
+        " に適用でき、",
+        ref("def_exp"),
+        " の ",
+        math(String.raw`\exp(\mathrm{ad}_X)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\exp(\mathrm{ad}_X)(Y)
+= \lim_{N\to\infty}\sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
+= \lim_{N\to\infty}P_N
+= \exp(X)\,Y\,\exp(-X)`,
+      ),
+      paragraph([
+        "（最後の等号は Step 6）。Step 5 と合わせて (3) の 3 つの等号がすべて示された。",
+      ]),
+      paragraph([
+        "Step 8: 解析的操作の所在。本証明で非可算集合 ",
+        math(String.raw`\mathbb{C}`),
+        "（および ",
+        math(String.raw`\mathbb{R}`),
+        "）の解析を使うのは、Step 4 で引用した ",
+        ref("matrix_exp_conjugation"),
+        " の中の極限操作と Step 7 の ",
+        ref("exp_converges"),
+        " だけである。Step 1〜3、Step 5、Step 6 の代数部分はすべて有限次元代数の有限回の演算である。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（Typst）の proof は「（暫定）リー群・リー環の掘り下げを避けて一旦受け入れる」" +
+          "だけだった。本主張は結合代数 Mat(2,C)^{⊗M} の中だけの主張であり、" +
+          "labels: def_end_iso / end_is_algebra_isomorphism の代数同型で Mat(2^M,C) へ移送すれば " +
+          "labels: matrix_exp_conjugation（行列版、Lie 群論を使わず証明済み）へ完全に帰着できるので、" +
+          "暫定扱いを撤回して証明を書いた。あわせて statement に X, Y の所属・ad_X^m の定義・" +
+          "R 上のノルム（移送ノルム）・級数の収束を明示した（元の statement は量化子もノルムも無く、" +
+          "収束の意味が確定していなかった）。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_007_definition_automorphism_groups",
