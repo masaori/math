@@ -32,3 +32,5 @@ import Ising2D.Abstract.Fermion
 import Ising2D.Part008.Claim032_AnticommutatorPsiAbstract
 import Ising2D.Abstract.CommutatorClifford
 import Ising2D.Part008.Claim001_CommutatorHZY
+import Ising2D.Abstract.ExpConjugation
+import Ising2D.Part008.Claim006_ExpConjugation

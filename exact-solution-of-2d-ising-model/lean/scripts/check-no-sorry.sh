@@ -168,8 +168,8 @@ targets=(
   Ising2D.ActsBy.eigen
   Ising2D.B1mat
   Ising2D.B2mat
-  Ising2D.Amat
-  Ising2D.B1_mul_B2_mul_B1_eq_Amat
+  Ising2D.B1_mul_B2_mul_B1_eq_explicit
+  Ising2D.B1_mul_B2_mul_B1_eq_AMat
   Ising2D.TV_hatZ_hatY_of_action
   "Ising2D.TV_hatZ_hatY_of_action'"
   Ising2D.gamma2_neg
@@ -229,9 +229,6 @@ targets=(
   Ising2D.TV_psiDag_of_action
   Ising2D.TV_psi_of_action
   Ising2D.TV_psiDag_psi_of_action
-  Ising2D.Amat_eq_AMat
-  "Ising2D.B1_mul_B2_mul_B1_eq_AMat'"
-  Ising2D.TV_hatZ_hatY_of_action_AMat
   Ising2D.Abstract.acomm_lincomb
   Ising2D.Abstract.acomm_lincomb_clifford
   Ising2D.Abstract.car_of_coeffs
@@ -284,6 +281,41 @@ targets=(
   "Ising2D.lie_H2_hatZMinus'"
   "Ising2D.lie_H2_hatY'"
   "Ising2D.lie_H2_hatZPlus'"
+  Ising2D.Abstract.sinhc
+  Ising2D.Abstract.sinhc_zero
+  Ising2D.Abstract.sinhc_of_ne_zero
+  Ising2D.Abstract.mul_sinhc
+  Ising2D.Abstract.hasSum_sinhc
+  Ising2D.Abstract.lmulCLM
+  Ising2D.Abstract.rmulCLM
+  Ising2D.Abstract.adCLM
+  Ising2D.Abstract.lmulCLM_apply
+  Ising2D.Abstract.rmulCLM_apply
+  Ising2D.Abstract.adCLM_apply
+  Ising2D.Abstract.commute_lmulCLM_rmulCLM
+  Ising2D.Abstract.lmulCLM_pow
+  Ising2D.Abstract.rmulCLM_pow
+  Ising2D.Abstract.exp_lmulCLM
+  Ising2D.Abstract.exp_rmulCLM
+  Ising2D.Abstract.exp_adCLM_apply
+  Ising2D.Abstract.hasSum_exp_conj
+  Ising2D.Abstract.exp_conj_eq_tsum
+  Ising2D.Abstract.adCLM_sq_z
+  Ising2D.Abstract.adCLM_sq_y
+  Ising2D.Abstract.adCLM_pow_even
+  Ising2D.Abstract.adCLM_pow_odd_z
+  Ising2D.Abstract.adCLM_pow_odd_y
+  Ising2D.Abstract.exp_conj_two_dim_z
+  Ising2D.Abstract.exp_conj_two_dim_y
+  Ising2D.adPow
+  Ising2D.adPow_zero
+  Ising2D.adPow_succ
+  Ising2D.adPow_eq_adCLM
+  Ising2D.hasSum_matExp_conj
+  Ising2D.matExp_conj_eq_tsum
+  Ising2D.matExpUnits_conj_eq_tsum
+  Ising2D.matExp_conj_two_dim_z
+  Ising2D.matExp_conj_two_dim_y
 )
 
 {

@@ -23,7 +23,11 @@ export default defineBlocks([
         ref("def_transfer_matrix_symbols"),
         " の ",
         math(String.raw`\sigma_k^x,\sigma_k^y,\sigma_k^z`),
-        " の各テンソル因子に現れる Pauli 行列を",
+        " をクロネッカー積（",
+        ref("def_kronecker"),
+        "）で書いたときの各因子に現れる ",
+        math(String.raw`2`),
+        " 次の複素行列を",
       ]),
       displayMath(
         String.raw`\sigma^x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
@@ -126,7 +130,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
     kind: "claim",
     sourcePath: "structured-latex/content/006_Z_Y_anticommutation.mjs",
     sourceOrdinal: 2,
-    title: { text: "1 サイトだけ反可換ならテンソル積は反交換する" },
+    title: { text: "1 サイトだけ反可換ならクロネッカー積は反交換する" },
     labels: ["tensor_anticommutation_from_single_site"],
     statement: [
       paragraph([
@@ -136,8 +140,8 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
         " に対して",
       ]),
       displayMath(
-        String.raw`X := x_1\otimes\cdots\otimes x_M,\qquad
-Y := y_1\otimes\cdots\otimes y_M \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+        String.raw`X := x_1\boxtimes\cdots\boxtimes x_M,\qquad
+Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "とおく。ある ",
@@ -157,52 +161,58 @@ Y := y_1\otimes\cdots\otimes y_M \ \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
     ],
     proof: [
       paragraph([
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-        " の積は各テンソル因子ごとの積で定まる。すなわち ",
+        math(String.raw`2^M`),
+        " 次の複素行列としての積は、クロネッカー積で書かれた行列どうしでは各サイトごとの ",
+        math(String.raw`2`),
+        " 次の行列の積になる。すなわち ",
         math(String.raw`A_1,\dots,A_M,B_1,\dots,B_M \in \mathrm{Mat}(2,\mathbb{C})`),
-        " に対し",
+        " に対し、",
+        ref("kronecker_product_rule"),
+        " (1) より",
       ]),
       displayMath(
-        String.raw`(A_1\otimes\cdots\otimes A_M)(B_1\otimes\cdots\otimes B_M)
-= (A_1B_1)\otimes\cdots\otimes(A_MB_M)
-\quad (\because \text{テンソル積代数の積の定義})`,
+        String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M)
+= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)
+\quad (\because \text{クロネッカー積の積の規則})`,
       ),
       paragraph([
         "また ",
-        math(String.raw`\otimes`),
+        math(String.raw`\boxtimes`),
         " は各因子について ",
         math(String.raw`\mathbb{C}`),
-        "-線型（多重線型）であるから、",
+        "-線型であるから（",
+        ref("kronecker_multilinear"),
+        "）、",
         math(String.raw`c \in \mathbb{C}`),
         " と ",
         math(String.raw`j \in \{1,\dots,M\}`),
         " に対し",
       ]),
       displayMath(
-        String.raw`C_1\otimes\cdots\otimes\overbrace{(c\,C_j)}^{j\text{th}}\otimes\cdots\otimes C_M
-= c\,\left(C_1\otimes\cdots\otimes C_M\right)
-\quad (\because \text{テンソル積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})`,
+        String.raw`C_1\boxtimes\cdots\boxtimes\overbrace{(c\,C_j)}^{j\text{th}}\boxtimes\cdots\boxtimes C_M
+= c\,\left(C_1\boxtimes\cdots\boxtimes C_M\right)
+\quad (\because \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})`,
       ),
       paragraph(["が成り立つ。これらを使って計算する。まず"]),
       displayMath(
         String.raw`\begin{aligned}
-XY &= (x_1\otimes\cdots\otimes x_M)(y_1\otimes\cdots\otimes y_M) \\
-&= (x_1y_1)\otimes\cdots\otimes(x_My_M)
-\quad (\because \text{テンソル積代数の積の定義})
+XY &= (x_1\boxtimes\cdots\boxtimes x_M)(y_1\boxtimes\cdots\boxtimes y_M) \\
+&= (x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)
+\quad (\because \text{クロネッカー積の積の規則})
 \end{aligned}`,
       ),
       paragraph(["同様に（積の順序だけを入れ替えて）"]),
       displayMath(
         String.raw`\begin{aligned}
-YX &= (y_1\otimes\cdots\otimes y_M)(x_1\otimes\cdots\otimes x_M) \\
-&= (y_1x_1)\otimes\cdots\otimes(y_Mx_M)
-\quad (\because \text{テンソル積代数の積の定義}) \\
-&= (x_1y_1)\otimes\cdots\otimes\overbrace{(y_jx_j)}^{j\text{th}}\otimes\cdots\otimes(x_My_M)
+YX &= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M) \\
+&= (y_1x_1)\boxtimes\cdots\boxtimes(y_Mx_M)
+\quad (\because \text{クロネッカー積の積の規則}) \\
+&= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{(y_jx_j)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
 \quad (\because\ i\neq j \text{ では } y_ix_i = x_iy_i) \\
-&= (x_1y_1)\otimes\cdots\otimes\overbrace{\left((-1)\,(x_jy_j)\right)}^{j\text{th}}\otimes\cdots\otimes(x_My_M)
+&= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{\left((-1)\,(x_jy_j)\right)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
 \quad (\because\ y_jx_j = -(x_jy_j)) \\
-&= (-1)\left((x_1y_1)\otimes\cdots\otimes(x_My_M)\right)
-\quad (\because \text{第 } j \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
+&= (-1)\left((x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)\right)
+\quad (\because \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
 &= -\,XY
 \end{aligned}`,
       ),
@@ -231,22 +241,28 @@ YX &= (y_1\otimes\cdots\otimes y_M)(x_1\otimes\cdots\otimes x_M) \\
     labels: ["anticommutator_of_Z_and_Y"],
     statement: [
       displayMath(
-        String.raw`[Z_\mu, Z_\nu]_+ = 2I_{(\mathbb{C}^2)^{\otimes M}} \delta^M_{(\mu,\nu)}, \quad
+        String.raw`[Z_\mu, Z_\nu]_+ = 2I_{\mathrm{Mat}(2^M,\mathbb{C})} \delta^M_{(\mu,\nu)}, \quad
 [Z_\mu, Y_\nu]_+ = 0, \quad
-[Y_\mu, Y_\nu]_+ = 2I_{(\mathbb{C}^2)^{\otimes M}} \delta^M_{(\mu,\nu)}`,
+[Y_\mu, Y_\nu]_+ = 2I_{\mathrm{Mat}(2^M,\mathbb{C})} \delta^M_{(\mu,\nu)}`,
       ),
     ],
     proof: [
       paragraph([
         "記号を固定する。",
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " とし、",
-        math(String.raw`I_{(\mathbb{C}^2)^{\otimes M}} := I\otimes\cdots\otimes I`),
         "（",
+        math(String.raw`2`),
+        " 次の単位行列）とし、",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        " を ",
+        math(String.raw`2^M`),
+        " 次の単位行列とする。",
+        ref("kronecker_product_rule"),
+        " (2) より",
+        math(String.raw`\ I\boxtimes\cdots\boxtimes I = I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "（左辺は ",
         math(String.raw`M`),
-        " 個）を ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-        " の単位元とする。",
+        " 個のクロネッカー積）である。",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " は ",
         ref("pauli_matrix_products"),
@@ -286,10 +302,8 @@ YX &= (y_1\otimes\cdots\otimes y_M)(x_1\otimes\cdots\otimes x_M) \\
 \qquad (\mu,\nu \in \{1,\dots,M\})`,
       ),
       paragraph([
-        "テンソル因子による表示。",
+        "クロネッカー積による表示。",
         math(String.raw`m \in \{1,\dots,M\}`),
-        " と ",
-        math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})`),
         " に対し、",
         ref("def_transfer_matrix_symbols"),
         " の ",
@@ -300,13 +314,17 @@ YX &= (y_1\otimes\cdots\otimes y_M)(x_1\otimes\cdots\otimes x_M) \\
         math(String.raw`\sigma^a`),
         " で他は ",
         math(String.raw`I`),
-        "」であることと、テンソル積代数の積が因子ごとの積であることから、",
+        " であるクロネッカー積」であることと、",
+        ref("kronecker_product_rule"),
+        " (1)（クロネッカー積どうしの積は各サイトごとの積）および ",
+        math(String.raw`I\sigma^a = \sigma^a I = \sigma^a`),
+        " から、",
       ]),
       displayMath(
         String.raw`\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^a
-= \overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(m-1)\text{th}}
-\otimes\overbrace{\sigma^a}^{m\text{th}}
-\otimes\overbrace{I}^{(m+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}
+= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(m-1)\text{th}}
+\boxtimes\overbrace{\sigma^a}^{m\text{th}}
+\boxtimes\overbrace{I}^{(m+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}
 \quad (a \in \{x,y,z\})`,
       ),
       paragraph([
@@ -316,21 +334,21 @@ YX &= (y_1\otimes\cdots\otimes y_M)(x_1\otimes\cdots\otimes x_M) \\
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Z_\mu &= \overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}} \\
-Y_\mu &= \overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}
+Z_\mu &= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}} \\
+Y_\mu &= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}
 \end{aligned}`,
       ),
       paragraph([
         "（",
         math(String.raw`\mu = 1`),
         " のときは第 1 因子の左に因子が無く、",
-        math(String.raw`Z_1 = \sigma^z\otimes I\otimes\cdots\otimes I = \sigma_1^z`),
+        math(String.raw`Z_1 = \sigma^z\boxtimes I\boxtimes\cdots\boxtimes I = \sigma_1^z`),
         "、",
-        math(String.raw`Y_1 = \sigma^y\otimes I\otimes\cdots\otimes I = \sigma_1^y`),
+        math(String.raw`Y_1 = \sigma^y\boxtimes I\boxtimes\cdots\boxtimes I = \sigma_1^y`),
         " で、定義の ",
         math(String.raw`Z_1 := \sigma_1^z, Y_1 := \sigma_1^y`),
         " と一致する。",
@@ -348,20 +366,21 @@ Y_\mu &= \overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^
 
       paragraph([
         "【第 1 式】",
-        math(String.raw`[Z_\mu, Z_\nu]_+ = 2I_{(\mathbb{C}^2)^{\otimes M}}\delta^M_{(\mu,\nu)}`),
+        math(String.raw`[Z_\mu, Z_\nu]_+ = 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\delta^M_{(\mu,\nu)}`),
         "。",
       ]),
       paragraph([math(String.raw`\mu = \nu`), " のとき、因子ごとの積をとると"]),
       displayMath(
         String.raw`\begin{aligned}
 Z_\mu Z_\mu
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^z\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{(II)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}}
-\quad (\because \text{テンソル積代数の積の定義}) \\
-&= I\otimes\cdots\otimes I
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+\quad (\because \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
 \quad (\because\ \sigma^x\sigma^x = \sigma^z\sigma^z = II = I,\ \text{すなわち } \text{pauli\_matrix\_products}) \\
-&= I_{(\mathbb{C}^2)^{\otimes M}}
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}
+\quad (\because \text{クロネッカー積の積の規則 (2)})
 \end{aligned}`,
       ),
       paragraph(["であるから"]),
@@ -369,9 +388,9 @@ Z_\mu Z_\mu
         String.raw`\begin{aligned}
 [Z_\mu, Z_\mu]_+
 &= Z_\mu Z_\mu + Z_\mu Z_\mu \\
-&= I_{(\mathbb{C}^2)^{\otimes M}} + I_{(\mathbb{C}^2)^{\otimes M}} \\
-&= 2 I_{(\mathbb{C}^2)^{\otimes M}}
-= 2 I_{(\mathbb{C}^2)^{\otimes M}}\,\delta^M_{(\mu,\mu)}
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})} + I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
+&= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}
+= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}\,\delta^M_{(\mu,\mu)}
 \quad (\because\ \delta^M_{(\mu,\mu)} = 1)
 \end{aligned}`,
       ),
@@ -379,50 +398,50 @@ Z_\mu Z_\mu
         math(String.raw`\mu < \nu`),
         " のとき、",
         math(String.raw`Z_\mu, Z_\nu`),
-        " をテンソル積で表して各サイトごとに積をとると、",
+        " をクロネッカー積で表して各サイトごとに積をとると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 Z_\mu Z_\nu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
-\otimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(I\sigma^z)}^{\nu\text{th}}
-\otimes\overbrace{(II)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\nu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(I\sigma^z)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 Z_\nu Z_\mu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(\sigma^z I)}^{\nu\text{th}}
-\otimes\overbrace{(II)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\nu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z I)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       paragraph([
@@ -432,13 +451,13 @@ Z_\nu Z_\mu
         math(String.raw`\sigma^x\sigma^z = -\,\sigma^z\sigma^x`),
         "（",
         ref("pauli_matrix_products"),
-        "）である。テンソル積の第 ",
+        "）である。クロネッカー積の第 ",
         math(String.raw`\mu`),
         " 因子についての ",
         math(String.raw`\mathbb{C}`),
         "-線型性（",
-        ref("tensor_anticommutation_from_single_site"),
-        " の証明中の式）よりスカラー ",
+        ref("kronecker_multilinear"),
+        "）よりスカラー ",
         math(String.raw`-1`),
         " が外へ出て、",
       ]),
@@ -458,17 +477,17 @@ Z_\nu Z_\mu
       displayMath(
         String.raw`\begin{aligned}
 Z_\mu Z_\nu
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^x\sigma^z)}^{\nu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I \\
 Z_\nu Z_\mu
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^z\sigma^x)}^{\nu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       paragraph([
@@ -496,7 +515,15 @@ Z_\nu Z_\mu
         math(String.raw`\nu`),
         " 因子だけで ",
         math(String.raw`\sigma^z\sigma^x = -\,\sigma^x\sigma^z`),
-        " であるから、同じく ",
+        " であるから、クロネッカー積の第 ",
+        math(String.raw`\nu`),
+        " 因子についての ",
+        math(String.raw`\mathbb{C}`),
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）でスカラー ",
+        math(String.raw`-1`),
+        " を外へ出して、同じく ",
         math(String.raw`Z_\nu Z_\mu = -\,Z_\mu Z_\nu`),
         " すなわち ",
         math(String.raw`[Z_\mu,Z_\nu]_+ = 0`),
@@ -506,7 +533,7 @@ Z_\nu Z_\mu
         "よって ",
         math(String.raw`\mu \neq \nu`),
         " では ",
-        math(String.raw`[Z_\mu,Z_\nu]_+ = 0 = 2I_{(\mathbb{C}^2)^{\otimes M}}\delta^M_{(\mu,\nu)}`),
+        math(String.raw`[Z_\mu,Z_\nu]_+ = 0 = 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\delta^M_{(\mu,\nu)}`),
         " であり、第 1 式が示された。",
       ]),
 
@@ -538,30 +565,30 @@ Z_\nu Z_\mu
       displayMath(
         String.raw`\begin{aligned}
 Z_\mu Y_\mu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
-\otimes\overbrace{(II)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \quad (\because\ \sigma^x\sigma^x = II = I)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 Y_\mu Z_\mu
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{(II)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \quad (\because\ \sigma^x\sigma^x = II = I)
 \end{aligned}`,
       ),
@@ -572,11 +599,13 @@ Y_\mu Z_\mu
         ref("pauli_matrix_products"),
         " より ",
         math(String.raw`\sigma^y\sigma^z = -\,\sigma^z\sigma^y`),
-        "。第 ",
+        "。クロネッカー積の第 ",
         math(String.raw`\mu`),
         " 因子についての ",
         math(String.raw`\mathbb{C}`),
-        "-線型性でスカラー ",
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）でスカラー ",
         math(String.raw`-1`),
         " を外へ出すと",
       ]),
@@ -601,45 +630,45 @@ Y_\mu Z_\mu
       displayMath(
         String.raw`\begin{aligned}
 Z_\mu Y_\nu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
-\otimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
-\otimes\overbrace{(II)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 Y_\nu Z_\mu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
-\otimes\overbrace{(II)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       paragraph([
@@ -671,11 +700,13 @@ Y_\nu Z_\mu
         math(String.raw`\sigma^x\sigma^z = -\,\sigma^z\sigma^x`),
         "（",
         ref("pauli_matrix_products"),
-        "）である。第 ",
+        "）である。クロネッカー積の第 ",
         math(String.raw`\mu`),
         " 因子についての ",
         math(String.raw`\mathbb{C}`),
-        "-線型性でスカラー ",
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）でスカラー ",
         math(String.raw`-1`),
         " を外へ出して",
       ]),
@@ -703,45 +734,45 @@ Y_\nu Z_\mu
       displayMath(
         String.raw`\begin{aligned}
 Z_\mu Y_\nu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\nu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
-\otimes\overbrace{(\sigma^x I)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(\sigma^x I)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^z I)}^{\mu\text{th}}
-\otimes\overbrace{(II)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\nu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{(\sigma^x I)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z I)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 Y_\nu Z_\mu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\nu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
-\otimes\overbrace{(I\sigma^x)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(I\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(I\sigma^z)}^{\mu\text{th}}
-\otimes\overbrace{(II)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^z}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\nu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{(I\sigma^x)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(I\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       paragraph([
@@ -753,7 +784,13 @@ Y_\nu Z_\mu
         math(String.raw`\sigma^y\sigma^x = -\,\sigma^x\sigma^y`),
         "（",
         ref("pauli_matrix_products"),
-        "）である。よって同様にスカラー ",
+        "）である。よって同様に、クロネッカー積の第 ",
+        math(String.raw`\nu`),
+        " 因子についての ",
+        math(String.raw`\mathbb{C}`),
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）でスカラー ",
         math(String.raw`-1`),
         " が外へ出て",
       ]),
@@ -770,20 +807,21 @@ Y_\nu Z_\mu
 
       paragraph([
         "【第 3 式】",
-        math(String.raw`[Y_\mu, Y_\nu]_+ = 2I_{(\mathbb{C}^2)^{\otimes M}}\delta^M_{(\mu,\nu)}`),
+        math(String.raw`[Y_\mu, Y_\nu]_+ = 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\delta^M_{(\mu,\nu)}`),
         "。",
       ]),
       paragraph([math(String.raw`\mu = \nu`), " のとき、因子ごとの積をとると"]),
       displayMath(
         String.raw`\begin{aligned}
 Y_\mu Y_\mu
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^y\sigma^y)}^{\mu\text{th}}
-\otimes\overbrace{(II)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}}
-\quad (\because \text{テンソル積代数の積の定義}) \\
-&= I\otimes\cdots\otimes I
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+\quad (\because \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
 \quad (\because\ \sigma^x\sigma^x = \sigma^y\sigma^y = II = I,\ \text{すなわち } \text{pauli\_matrix\_products}) \\
-&= I_{(\mathbb{C}^2)^{\otimes M}}
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}
+\quad (\because \text{クロネッカー積の積の規則 (2)})
 \end{aligned}`,
       ),
       paragraph(["であるから"]),
@@ -791,9 +829,9 @@ Y_\mu Y_\mu
         String.raw`\begin{aligned}
 [Y_\mu, Y_\mu]_+
 &= Y_\mu Y_\mu + Y_\mu Y_\mu \\
-&= I_{(\mathbb{C}^2)^{\otimes M}} + I_{(\mathbb{C}^2)^{\otimes M}} \\
-&= 2 I_{(\mathbb{C}^2)^{\otimes M}}
-= 2 I_{(\mathbb{C}^2)^{\otimes M}}\,\delta^M_{(\mu,\mu)}
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})} + I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
+&= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}
+= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}\,\delta^M_{(\mu,\mu)}
 \quad (\because\ \delta^M_{(\mu,\mu)} = 1)
 \end{aligned}`,
       ),
@@ -801,45 +839,45 @@ Y_\mu Y_\mu
       displayMath(
         String.raw`\begin{aligned}
 Y_\mu Y_\nu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
-\otimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
-\otimes\overbrace{(II)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 Y_\nu Y_\mu
-&= \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^x}^{\mu\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes\overbrace{I}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\mu\text{th}}
-\otimes\overbrace{I}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{I}^{M\text{th}}\right) \\
-&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\otimes\cdots\otimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
-\otimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
-\otimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
-\otimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
-\otimes\overbrace{(II)}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{(II)}^{M\text{th}} \\
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\nu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+&= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       paragraph([
@@ -851,11 +889,13 @@ Y_\nu Y_\mu
         math(String.raw`\sigma^x\sigma^y = -\,\sigma^y\sigma^x`),
         "（",
         ref("pauli_matrix_products"),
-        "）である。第 ",
+        "）である。クロネッカー積の第 ",
         math(String.raw`\mu`),
         " 因子についての ",
         math(String.raw`\mathbb{C}`),
-        "-線型性でスカラー ",
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）でスカラー ",
         math(String.raw`-1`),
         " を外へ出して",
       ]),
@@ -875,17 +915,17 @@ Y_\nu Y_\mu
       displayMath(
         String.raw`\begin{aligned}
 Y_\mu Y_\nu
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I \\
 Y_\nu Y_\mu
-&= I\otimes\cdots\otimes I
-\otimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
-\otimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\otimes\cdots\otimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
-\otimes\overbrace{\sigma^y}^{\mu\text{th}}
-\otimes I\otimes\cdots\otimes I
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
 \end{aligned}`,
       ),
       paragraph([
@@ -913,7 +953,15 @@ Y_\nu Y_\mu
         math(String.raw`\nu`),
         " 因子だけで ",
         math(String.raw`\sigma^y\sigma^x = -\,\sigma^x\sigma^y`),
-        " であるから、同じく ",
+        " であるから、クロネッカー積の第 ",
+        math(String.raw`\nu`),
+        " 因子についての ",
+        math(String.raw`\mathbb{C}`),
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）でスカラー ",
+        math(String.raw`-1`),
+        " を外へ出して、同じく ",
         math(String.raw`Y_\nu Y_\mu = -\,Y_\mu Y_\nu`),
         " すなわち ",
         math(String.raw`[Y_\mu,Y_\nu]_+ = 0`),
@@ -923,7 +971,7 @@ Y_\nu Y_\mu
         "よって ",
         math(String.raw`\mu \neq \nu`),
         " では ",
-        math(String.raw`[Y_\mu,Y_\nu]_+ = 0 = 2I_{(\mathbb{C}^2)^{\otimes M}}\delta^M_{(\mu,\nu)}`),
+        math(String.raw`[Y_\mu,Y_\nu]_+ = 0 = 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\delta^M_{(\mu,\nu)}`),
         " であり、第 3 式が示された。以上で 3 式すべてが証明された。",
       ]),
     ],
@@ -940,6 +988,13 @@ Y_\nu Y_\mu
           "テンソル因子に入るのは 2×2 の単位行列 I_{Mat(2,C)} なので、そちらへ直した。",
         "原文は μ>ν の場合を「左右対称に同様」で済ませていたが、食い違うサイトが μ から ν へ移るので、" +
           "その場合も因子ごとに書き下した。",
+        "抽象テンソル積の記法を廃した。⊗ を <def_kronecker> のクロネッカー積 ⊠ へ、" +
+          "Mat(2,C)^{⊗M} を Mat(2^M,C) へ、I_{(C^2)^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ" +
+          "置き換えた。根拠として挙げていた「テンソル積代数の積の定義」は " +
+          "<kronecker_product_rule> (1)、「テンソル積の第 j 因子についての C-線型性」は " +
+          "<kronecker_multilinear> の参照に直した。μ>ν の場合に符号 -1 を外へ出す箇所は" +
+          "根拠を書いていなかったので、同じく <kronecker_multilinear> を明示した" +
+          "（README のゴール設定 2 節に従う）。",
       ],
     },
   },
