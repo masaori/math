@@ -1,0 +1,137 @@
+==============================================================================
+cycle 14 / T3: Z_ell^2-塔（d=2）の検証
+SageMath SageMath version 10.6, Release Date: 2025-03-31
+==============================================================================
+
+### Step 1  補題 A2: charpoly(L_{X_{N,N'}}) = prod_{zeta,xi} charpoly(L(zeta,xi))
+  照合 180 件、不一致 0 件
+
+### Step 2  補題 B2: c(X_{N,N'}) = sum_{zeta,xi} dim ker L(zeta,xi)
+  照合 576 件、不一致 0 件
+
+### Step 3  補題 C2: X_{N,N'} 連結 <=> X 連結 かつ B + (N Z + N' Z) = Z^2
+  照合 1296 件（うち非連結 549 件）、不一致 0 件
+
+### Step 4  定理 1: N N' kappa(X_{N,N'}) = kappa(X) * prod_{(zeta,xi)!=(1,1)} det L(zeta,xi)
+    左辺 = Kirchhoff 余因子 / 右辺(a) = 円分体上の直接積 / 右辺(b) = 2 段終結式
+  照合 563 件（うち両辺 0 の退化ケース 222 件）、不一致 0 件
+
+### Step 5  補題 D2: v_ell(content_{z,w} det L) = min_{i,j} v_ell(c_{ij}),  f = det L(1+T,1+S)
+  照合 155 件、不一致 0 件
+
+### Step 6  DuBose-Vallieres (Algebr. Comb. 6 (2023) 1331-1346) Section 7 の再現
+    論文の表 ord_ell(kappa_n) と、本スクリプトの (★) 経由の計算を突き合わせる。
+  例 (1) ell=2: 本計算 n=1..6 -> [5, 19, 61, 167, 417, 987]
+      論文の表と一致: True / 論文の公式(n>=1)が表を再現: True / 公式 2*n*2^n + 4*2^n - 6*n - 1  [3.0s]
+  例 (2) ell=2: 本計算 n=1..6 -> [8, 34, 124, 422, 1440, 5082]
+      論文の表と一致: True / 論文の公式(n>=1)が表を再現: True / 公式 2^(2*n) + 2*n*2^n + 4*2^n - 6*n - 2  [2.2s]
+  例 (3) ell=2: 本計算 n=1..6 -> [5, 19, 65, 179, 403, 887]
+      論文の表と一致: True / 論文の公式(n>=4)が表を再現: True / 公式 n*2^n + 33/4*2^n - 4*n - 1  [6.9s]
+  例 (4) ell=3: 本計算 n=1..4 -> [6, 28, 98, 312]
+      論文の表と一致: True / 論文の公式(n>=1)が表を再現: True / 公式 4*3^n - 2*n - 4  [6.8s]
+  例 (5) ell=3: 本計算 n=1..4 -> [10, 48, 166, 524]
+      論文の表と一致: True / 論文の公式(n>=1)が表を再現: True / 公式 20/3*3^n - 2*n - 8  [10.2s]
+  5 例すべて一致: True
+
+### Step 7  fit した a（ell^{2n} の係数）と mu = v_ell(content_{z,w} det L) の比較
+    fit は最大の 5 段 [n_max-4 .. n_max] で行い、それより小さい n で検算する。
+    列: ell | mu=v_ell(content) | a | b(n*ell^n) | c(ell^n) | d(n) | e | 小さい n での検算
+  DV1 bouquet (1,0),(0,1)  = ell^n x ell^n トーラス        ell=2 | mu=0 | a=0 b=2 c=4 d=-6 e=-1 | fit外の n[1]: True
+  DV1 bouquet (1,0),(0,1)  = ell^n x ell^n トーラス        ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  DV2 bouquet (1,0)x2,(0,1)x2  (content 2)             ell=2 | mu=1 | a=1 b=2 c=4 d=-6 e=-2 | fit外の n[1]: True
+  DV2 bouquet (1,0)x2,(0,1)x2  (content 2)             ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  DV3 bouquet (1,5),(0,3),(1,2),(0,1)                  ell=2 | mu=0 | a=23/144 b=-9 c=261/4 d=-236/3 e=-137/9 | fit外の n[1]: False  <<< fit 無効（out-of-sample 検算が失敗 = 漸近域に未到達）
+      （参考: a=23/144 は整数でない。文献 [Monsky Remark 2 / Cuoco-Monsky Def 1.1] は ell^{2n} の係数が非負整数であると述べているので、これは fit 窓が漸近域に入っていないことの徴候である。）
+  DV3 bouquet (1,5),(0,3),(1,2),(0,1)                  ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  DV5 bouquet (1,0),(2,3),(1,1)                        ell=2 | mu=0 | a=0 b=1 c=14 d=-4 e=-21 | fit外の n[1]: False  <<< fit 無効（out-of-sample 検算が失敗 = 漸近域に未到達）
+  DV5 bouquet (1,0),(2,3),(1,1)                        ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  2 頂点 平行 3 重辺 voltage (0,0),(1,0),(0,1)               ell=2 | mu=0 | a=0 b=3 c=9 d=-8 e=-9 | fit外の n[1]: True
+  2 頂点 平行 3 重辺 voltage (0,0),(1,0),(0,1)               ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  2 頂点 + ループ  (0,0),(1,0) と ループ (0,1)                  ell=2 | mu=0 | a=0 b=2 c=0 d=2 e=2 | fit外の n[1]: False  <<< fit 無効（out-of-sample 検算が失敗 = 漸近域に未到達）
+  2 頂点 + ループ  (0,0),(1,0) と ループ (0,1)                  ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  bouquet 3 ループ (1,0),(0,1),(1,1)                      ell=2 | mu=0 | a=0 b=3 c=9 d=-8 e=-9 | fit外の n[1]: True
+  bouquet 3 ループ (1,0),(0,1),(1,1)                      ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  bouquet (1,0),(0,1) を 3 重化（content 3）                ell=2 | mu=0 | a=0 b=2 c=4 d=-6 e=-1 | fit外の n[1]: True
+  bouquet (1,0),(0,1) を 3 重化（content 3）                ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  bouquet (2,0),(0,2)（塔が非連結になる退化例）                     ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  bouquet (2,0),(0,2)（塔が非連結になる退化例）                     ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  bouquet (1,0) のみ（w 方向が無い退化例）                         ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  bouquet (1,0) のみ（w 方向が無い退化例）                         ell=3: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  3 頂点三角形 voltage (1,0),(0,1),(0,0)                    ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  3 頂点三角形 voltage (1,0),(0,1),(0,0)                    ell=3: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  bouquet (1,0),(0,1),(1,-1)                           ell=2 | mu=0 | a=0 b=3 c=9 d=-8 e=-9 | fit外の n[1]: True
+  bouquet (1,0),(0,1),(1,-1)                           ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #1 (m=3, |E|=3)                               ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #1 (m=3, |E|=3)                               ell=3: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #2 (m=3, |E|=3)                               ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #2 (m=3, |E|=3)                               ell=3: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #3 (m=1, |E|=3)                               ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #3 (m=1, |E|=3)                               ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #4 (m=1, |E|=3)                               ell=2 | mu=0 | a=0 b=1 c=14 d=-4 e=-21 | fit外の n[1]: False  <<< fit 無効（out-of-sample 検算が失敗 = 漸近域に未到達）
+  random #4 (m=1, |E|=3)                               ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #5 (m=3, |E|=2)                               ell=2: det L = 0（全段非連結）→ 対象外
+  random #5 (m=3, |E|=2)                               ell=3: det L = 0（全段非連結）→ 対象外
+  random #6 (m=2, |E|=4)                               ell=2 | mu=0 | a=0 b=2 c=6 d=-6 e=-2 | fit外の n[1]: True
+  random #6 (m=2, |E|=4)                               ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #7 (m=1, |E|=3)                               ell=2 | mu=0 | a=0 b=0 c=8 d=-2 e=-5 | fit外の n[1]: False  <<< fit 無効（out-of-sample 検算が失敗 = 漸近域に未到達）
+  random #7 (m=1, |E|=3)                               ell=3: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #8 (m=2, |E|=3)                               ell=2 | mu=0 | a=0 b=2 c=4 d=-6 e=-1 | fit外の n[1]: True
+  random #8 (m=2, |E|=3)                               ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #9 (m=1, |E|=2)                               ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #9 (m=1, |E|=2)                               ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #10 (m=2, |E|=4)                              ell=2: X_{ell,ell} 非連結（ell | 基本閉路格子の指数）→ 対象外
+  random #10 (m=2, |E|=4)                              ell=3: 段数 4 では 5 係数を fit できない → Step 8 で扱う
+  random #11 (m=3, |E|=2)                              ell=2: det L = 0（全段非連結）→ 対象外
+  random #11 (m=3, |E|=2)                              ell=3: det L = 0（全段非連結）→ 対象外
+  random #12 (m=3, |E|=2)                              ell=2: det L = 0（全段非連結）→ 対象外
+  random #12 (m=3, |E|=2)                              ell=3: det L = 0（全段非連結）→ 対象外
+  DV1 = トーラス                                           ell=5: 段数 3 では 5 係数を fit できない → Step 8 で扱う
+  DV1 = トーラス                                           ell=7: 段数 2 では 5 係数を fit できない → Step 8 で扱う
+  bouquet (1,0),(0,1),(1,1)                            ell=5: 段数 3 では 5 係数を fit できない → Step 8 で扱う
+  対象 13 件: fit が out-of-sample 検算を通った 8 件（うち a != v_ell(content) は 0 件）、検算が失敗して fit が無効な 5 件
+  注: fit は 5 点から 5 係数を解いたものであり、それ自体は証明ではない。
+
+### Step 8  非退化条件（H が P^1(F_ell) 上に零点をもたない）と閉形式
+    非退化なら ord_ell(kappa_n) = mu*ell^{2n} + k(ell+1)/(ell-1)*ell^n - 2n + nu
+    （nu は最大の n で 1 回だけ決め、他の全ての n で照合する）
+  DV1 bouquet (1,0),(0,1)  = ell^n x ell^n トーラス  ell=2 k=2 mu=0 退化 (1:1)               -> （定理の射程外）
+  DV1 bouquet (1,0),(0,1)  = ell^n x ell^n トーラス  ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  DV2 bouquet (1,0)x2,(0,1)x2  (content 2)       ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  DV3 bouquet (1,5),(0,3),(1,2),(0,1)            ell=2 k=2 mu=0 退化 (1:0)               -> （定理の射程外）
+  DV3 bouquet (1,5),(0,3),(1,2),(0,1)            ell=3 k=2 mu=0 退化 (0:1),(1:2)         -> （定理の射程外）
+  DV5 bouquet (1,0),(2,3),(1,1)                  ell=2 k=3 mu=0 退化 (0:1),(1:0),(1:1)   -> （定理の射程外）
+  DV5 bouquet (1,0),(2,3),(1,1)                  ell=3 k=2 mu=0 退化 (1:0),(1:1)         -> （定理の射程外）
+  2 頂点 平行 3 重辺 voltage (0,0),(1,0),(0,1)         ell=2 k=3 mu=0 退化 (0:1),(1:0),(1:1)   -> （定理の射程外）
+  2 頂点 平行 3 重辺 voltage (0,0),(1,0),(0,1)         ell=3 k=2 mu=0 退化 (1:2)               -> （定理の射程外）
+  2 頂点 + ループ  (0,0),(1,0) と ループ (0,1)            ell=2 k=2 mu=0 退化 (0:1)               -> （定理の射程外）
+  2 頂点 + ループ  (0,0),(1,0) と ループ (0,1)            ell=3 k=2 mu=0 退化 (1:1),(1:2)         -> （定理の射程外）
+  bouquet 3 ループ (1,0),(0,1),(1,1)                ell=2 k=3 mu=0 退化 (0:1),(1:0),(1:1)   -> （定理の射程外）
+  bouquet 3 ループ (1,0),(0,1),(1,1)                ell=3 k=2 mu=0 退化 (1:1)               -> （定理の射程外）
+  bouquet (1,0),(0,1) を 3 重化（content 3）          ell=2 k=2 mu=0 退化 (1:1)               -> （定理の射程外）
+  bouquet (2,0),(0,2)（塔が非連結になる退化例）               ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  bouquet (1,0),(0,1),(1,-1)                     ell=2 k=3 mu=0 退化 (0:1),(1:0),(1:1)   -> （定理の射程外）
+  bouquet (1,0),(0,1),(1,-1)                     ell=3 k=2 mu=0 退化 (1:2)               -> （定理の射程外）
+  random #3 (m=1, |E|=3)                         ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  random #4 (m=1, |E|=3)                         ell=2 k=3 mu=0 退化 (0:1),(1:0),(1:1)   -> （定理の射程外）
+  random #4 (m=1, |E|=3)                         ell=3 k=2 mu=0 退化 (0:1),(1:1)         -> （定理の射程外）
+  random #6 (m=2, |E|=4)                         ell=2 k=2 mu=0 退化 (0:1)               -> （定理の射程外）
+  random #6 (m=2, |E|=4)                         ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  random #7 (m=1, |E|=3)                         ell=2 k=2 mu=0 退化 (1:0)               -> （定理の射程外）
+  random #8 (m=2, |E|=3)                         ell=2 k=2 mu=0 退化 (1:1)               -> （定理の射程外）
+  random #8 (m=2, |E|=3)                         ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  random #9 (m=1, |E|=2)                         ell=3 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-4, n=1..4)
+  random #10 (m=2, |E|=4)                        ell=3 k=2 mu=0 退化 (1:2)               -> （定理の射程外）
+  DV1 = トーラス                                     ell=5 k=2 mu=0 退化 (1:2),(1:3)         -> （定理の射程外）
+  DV1 = トーラス                                     ell=7 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-8/3, n=1..2)
+  bouquet (1,0),(0,1),(1,1)                      ell=5 k=2 mu=0 非退化                    -> 閉形式 一致=True (nu=-3, n=1..3)
+  判定 30 件、うち非退化 9 件、非退化で閉形式が破れた件数 0
+
+### Step 9  非退化なら v_ell(det L(zeta,xi)) = mu + k/phi(ell^max(i,j))
+    （ord zeta = ell^i, ord xi = ell^j, i,j >= 1, phi(ell^max) > k のとき）
+    円分体 Q(zeta_{ell^n}) の ell の上の唯一の素イデアルで直接計算する。
+  照合 472 件、不一致 0 件（phi(ell^max) <= k で対象外としたもの 56 件）
+
+==============================================================================
+終了
+==============================================================================
+EXIT=0
