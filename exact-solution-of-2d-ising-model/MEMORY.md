@@ -31,6 +31,46 @@
   導出も Step 3 に書いた（`gamma_2_theta_is_0` の最終形を使う）。
 - 数値検証: K_1,K_2,M の 4 組で γ_1 > 0、|γ_2(θ_μ)/γ_2(−θ_μ)| = 1、偏角 = 2φ_μ+π (mod 2π)、
   および c_1 = s_1c_2 ⟺ s_1s_2 = 1 を確認済み（誤差 1e-15 以下）。
+## 完了（2026-07-26）: $V_1, V_2$ の $Z,Y,\varepsilon$ 表示と $V_1$ の固有空間への制限（004）
+
+`004_transfer_matrix.mjs` の 2 つの TODO を解消した。
+
+- `<V1_V2_in_Z_Y_epsilon>`（$V_1,V_2$ を $Z,Y,\varepsilon$ で表す）: Jordan--Wigner 置換
+  $\sigma^z_m\sigma^z_{m+1} = i\,Y_mZ_{m+1}$（$1\le m\le M-1$）、$\sigma^z_M\sigma^z_1 = -i\,\varepsilon Y_MZ_1$、
+  $\sigma^x_m = i\,Z_mY_m$ をテンソル因子ごとの計算で全部書き下した。**exp の分解（可換性）は不要**で、
+  指数の中身が $\mathrm{Mat}(2,\mathbb{C})^{\otimes M}$ の元として等しいことを示せば済む。
+  境界項に $\varepsilon$ が付くのは、$Y_M$ の Jordan--Wigner 文字列が一周しても $Z_1=\sigma^z_1$ 側に
+  文字列が無く、第 1 因子の $\sigma^x$ が相殺せず残るため（それを打ち消すのが $\varepsilon$）。
+- `<V1_restriction_to_eigenspaces>`（$V_1$ の $\mathcal{F}^{(\pm)}$ への制限）: $\varepsilon$ が各 $Z_m,Y_m$ と
+  **反交換**すること（`<tensor_anticommutation_from_single_site>` を適用）→ 2 次式 $Y_aZ_b$ とは可換 →
+  $\mathcal{F}^{(\pm)}$ が $\hat{G}$ 不変 → 部分和が $n$ の帰納法で一致 → 各点収束（`<exp_converges>`）と
+  極限の一意性、という順で証明した。解析へ移行するのは最後の級数の極限だけであることを明記した。
+
+### 原本の誤りを 2 点訂正した（要レビュー）
+
+1. **`<def_transfer_matrix_symbols>` の $V_1$ の定義に虚数単位が余分だった。** 原文は
+   $V_1 := \exp(\sqrt{-1}K_1(\sigma^z_1\sigma^z_2+\cdots+\sigma^z_M\sigma^z_1))$ だが、これでは
+   $V_1 = \exp(-K_1(Y_1Z_2+\cdots))$ となり原文自身の主張 `<V1_V2_in_Z_Y_epsilon>` と矛盾する。
+   $\sqrt{-1}$ は Jordan--Wigner 置換から生じるものなので、定義側を $K_1$ に訂正した
+   （$V_2$ の定義には $\sqrt{-1}$ が無く、主張側には付く。同じ構造で整合する）。
+   004 章以降（$H_1^{(\pm)}$、$V_1^{(\pm)}$、008 章）はすべて訂正後と整合している。
+   NumPy で $M=2,3,4,5$ について両辺の一致を数値確認済み。
+2. **`<def_end_iso>`（旧「$\mathrm{End}(\mathcal{F})$ と $\mathrm{Mat}(2,\mathbb{C})^{\otimes M}$ の同型」）が弱すぎ、向きも逆だった。**
+   原文は「線型同型を一つ取る」だけだが、任意の線型同型では積が保たれず
+   `<V1_restriction_to_eigenspaces>` の証明が成立しない。行列単位 $E_{I,J} \mapsto \Theta_{I,J}$ で
+   **正準な単位的 $\mathbb{C}$-代数同型** $\mathbf{end}: \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{End}(\mathcal{F})$
+   を具体的に構成し、その性質を新ブロック `<end_is_algebra_isomorphism>` で証明した。
+   また $\mathrm{Mat}(2,\mathbb{C})^{\otimes M}$ 上の $\exp$ の意味（どの位相の級数か）が未定義だったので、
+   $\mathbf{end}$ による移送として定義した（$\mathbf{end}(\exp A) = \exp(\mathbf{end}A)$）。
+
+### 付随して直した点
+
+- $\varepsilon$ の固有空間の定義（`<def_eigenspaces_of_epsilon>`）: $\varepsilon f$ の意味が
+  $\mathbf{end}(\varepsilon)$ による作用であることを明示し、$\varepsilon^2 = I$ と固有値が $\pm1$ に限る理由を補った。
+  $\mathbf{end}$ を要するため、ブロックの位置を `<def_end_iso>` の後ろへ移した。
+- 新ラベル: `V1_V2_in_Z_Y_epsilon`, `V1_restriction_to_eigenspaces`, `def_end_iso`,
+  `end_is_algebra_isomorphism`, `def_eigenspaces_of_epsilon`, `def_V1_pm`。
+- $V_1$ の巡回和は $M\ge 2$ でなければ意味を持たないので、該当ブロックに $M\ge 2$ を明示した。
 
 ## 完了（2026-07-26）: `Z` と `Y` の反交換関係 3 式を人手証明で完成（`006/000`）
 
