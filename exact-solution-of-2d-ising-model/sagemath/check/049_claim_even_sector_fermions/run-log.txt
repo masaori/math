@@ -1,0 +1,68 @@
+# run-log: 049_claim_even_sector_fermions
+
+実行環境: /usr/local/bin/sage (SageMath 10.6), macOS
+実行日: 2026-07-26
+
+$ sage check_01_def_and_periodicity.sage
+=== check_01: def_check_fermi / periodicity_of_check_fermi ===
+  (a) 定義式 = (checkZ, checkY) P^_mu の列: max residual = 0.000e+00  ->  PASS
+  (b) 分母 |2 sqrt(M) gamma_2(-t~_mu)| の全体最小 = 2.527e+00  ->  PASS（全 mu で定義可能。例外なし）
+  (c) gamma_1, gamma_2(±), gamma の M 周期性: max residual = 2.809e-14  ->  PASS
+  (d) psi^dagger, psi の M 周期性: max residual = 1.975e-14  ->  PASS
+  (e) 共役添字 1-mu の関係: max residual = 0.000e+00  ->  PASS
+check_01: PASS
+
+$ sage check_02_anticommutator.sage
+=== check_02: anticommutator_of_check_psi ===
+  [psi^dagger_mu, psi^dagger_nu]_+ = 0: max residual = 1.061e-15  ->  PASS
+  [psi_mu, psi_nu]_+ = 0: max residual = 1.062e-15  ->  PASS
+  [psi^dagger_mu, psi_nu]_+ = I   (mu+nu = 1 mod M): max residual = 1.981e-15  ->  PASS
+  [psi^dagger_mu, psi_nu]_+ = 0   (mu+nu != 1 mod M): max residual = 1.031e-15  ->  PASS
+  対照: 対を mu+nu = 0 (mod M) と誤ると残差 = 1.000e+00 -> 期待どおり不成立
+check_02: PASS
+
+$ sage check_03_V_plus_action.sage
+=== check_03: commutation_V_plus_check_psi ===
+  (a) (T(checkZ), T(checkY)) = (checkZ, checkY) A(t~_mu): max residual = 8.368e-11  ->  PASS
+  (b) A(t~_mu) P^_mu = P^_mu D^_mu: max residual = 3.780e-15  ->  PASS
+  T_{(V^{(+)})}(psi^dagger_mu) = e^{+gamma} psi^dagger_mu: max residual = 3.620e-11  ->  PASS
+  T_{(V^{(+)})}(psi_mu)        = e^{-gamma} psi_mu: max residual = 2.508e-12  ->  PASS
+check_03: PASS
+
+$ sage check_04_Vprime_action.sage
+=== check_04: def_check_Vprime / action_of_T_check_Vprime_on_check_psi ===
+  V^' (V^')^{-1} = I: max residual = 6.853e-12  ->  PASS
+  (a) [X^, psi^dagger_mu] = +gamma psi^dagger_mu: max residual = 4.776e-15  ->  PASS
+  (b) [X^, psi_mu]        = -gamma psi_mu: max residual = 6.024e-15  ->  PASS
+  T_{(V^')}(psi^dagger_mu) = e^{+gamma} psi^dagger_mu: max residual = 1.705e-11  ->  PASS
+  T_{(V^')}(psi_mu)        = e^{-gamma} psi_mu: max residual = 1.192e-12  ->  PASS
+  和の範囲を {1..M-1} に狭めると (a) の残差 = 4.744e+00 -> 期待どおり不成立（数え落とし）
+  和の範囲を {1..M+1} に広げると (a) の残差 = 4.744e+00 -> 期待どおり不成立（重複）
+check_04: PASS
+
+$ sage check_05_T_equality.sage
+=== check_05: T_{(V^{(+)})} = T_{(V^')} ===
+  復元公式 Z_m, Y_m = (1/M) sum_mu checkZ/checkY e^{i m t~_mu}: max residual = 1.045e-15  ->  PASS
+  (a) checkZ_mu, checkY_mu 上での一致: max residual = 1.213e-10  ->  PASS
+  (b) Z_m, Y_m 上での一致: max residual = 3.053e-11  ->  PASS
+  (c) 行列単位 e_{ij} すべての上での一致（= 全体での一致）: max residual = 5.447e-09  ->  PASS
+check_05: PASS
+
+$ sage check_06_V_eq_cVprime.sage
+=== check_06: V^{(+)} = c V^' ===
+  W := (V^')^{-1} V^{(+)} がスカラー行列: max residual = 5.806e-12  ->  PASS
+  V^{(+)} - c V^' = O: max residual = 9.767e-12  ->  PASS
+  |c| の全体最小 = 1.029e-01  ->  PASS（c != 0）
+  （参考・次章の内容）c = (2 sinh 2K_2)^{M/2} との相対差: max residual = 2.347e-13  ->  PASS
+
+  c の実測値（虚部は丸め誤差の範囲）:
+    M=2 K1=0.4, K2=0.48385917 (s1*s2=1): c = 2.25198348 (虚部 -2.6e-16), (2 sinh 2K_2)^(M/2) = 2.25198348
+    M=2 K1=0.44068679, K2=0.44068679 (s1*s2=1): c = 2 (虚部 1.1e-17), (2 sinh 2K_2)^(M/2) = 2
+    M=2 K1=0.44, K2=0.4413747 (s1*s2=1.0000012): c = 2.003893259 (虚部 1.1e-16), (2 sinh 2K_2)^(M/2) = 2.003893259
+    M=2 K1=0.4, K2=0.8 (s1*s2=2.1097561): c = 4.751135906 (虚部 6.0e-17), (2 sinh 2K_2)^(M/2) = 4.751135906
+    M=2 K1=1.2, K2=0.3 (s1*s2=3.4800944): c = 1.273307164 (虚部 -5.1e-17), (2 sinh 2K_2)^(M/2) = 1.273307164
+    M=2 K1=0.05, K2=0.1 (s1*s2=0.020167173): c = 0.4026720051 (虚部 3.5e-17), (2 sinh 2K_2)^(M/2) = 0.4026720051
+    M=3 K1=0.4, K2=0.48385917 (s1*s2=1): c = 3.379463812 (虚部 -5.4e-16), (2 sinh 2K_2)^(M/2) = 3.379463812
+    M=3 K1=0.44068679, K2=0.44068679 (s1*s2=1): c = 2.828427125 (虚部 6.5e-16), (2 sinh 2K_2)^(M/2) = 2.828427125
+check_06: PASS
+

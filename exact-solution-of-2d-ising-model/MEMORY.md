@@ -1,6 +1,59 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
-## 進行中（2026-07-26）: 章 C′ の C′-8〜C′-11 完了 — `T_{(V^{(+)})}` の作用まで到達
+## 進行中（2026-07-26）: 章 C′ の C′-13・C′-14 完了 — `V^{(+)} = c·checkV'` まで到達
+
+### 到達点
+
+`structured-latex/content/016_even_sector_fermions.ts`（10 ブロック）で、半整数運動量のフェルミオンを
+導入し、ある `c ∈ C^×` について
+
+```
+V^{(+)} = c · checkV',
+checkV' = exp( Σ_{μ=1}^{M} γ(θ~_μ)( checkψ^†_μ checkψ_{1-μ} - I/2 ) )
+```
+
+まで到達した。**`c` の値（`= (2 sinh 2K_2)^{M/2}` と予想される）の決定は C′-15 の仕事**であり、
+`remark_remaining_input_even_sector` もまだ解消されていない（固有値は C′-15）。
+
+| ラベル | 内容 |
+|---|---|
+| `def_check_fermi` | `(checkψ^†_μ, checkψ_μ) := (Ž_μ, Y̌_μ) P̌_μ`。**すべての `μ ∈ Z` で定義可能** |
+| `periodicity_of_check_fermi` | `γ_1, γ_2(±), γ` の `M` 周期性、`checkψ_{μ+kM} = checkψ_μ`、共役添字 `1−μ` の関係 |
+| `anticommutator_of_check_psi` | `[ψ̌^†_μ, ψ̌_ν]_+ = δ^M_{(μ+ν,1)} I` ほか。**対は `μ+ν ≡ 1 (mod M)`** |
+| `commutation_V_plus_check_psi` | `T_{(V^{(+)})}(ψ̌^†_μ) = e^{+γ(θ~_μ)} ψ̌^†_μ` ほか |
+| `def_check_Vprime` | `checkV' = exp(X̌)`。**和の範囲 `μ = 1..M` に例外が要らない**。可逆性も証明 |
+| `action_of_T_check_Vprime_on_check_psi` | `T_{(checkV')}(ψ̌^†_μ) = e^{+γ} ψ̌^†_μ` ほか |
+| `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` / `T_V_plus_eq_T_check_Vprime` | `T_{(V^{(+)})} = T_{(checkV')}`（`Mat(2^M,C)` 全体） |
+| `V_plus_eq_c_check_Vprime` | `V^{(+)} = c checkV'`（`centralizer_is_scalar` による。クリフォード群に依存しない） |
+
+### 008 章から消えた 3 種類の場合分け（次に着手する人へ）
+
+いずれも**一次情報（008 章の該当ブロックの本文）を読んで、`γ_2 = 0` のみに起因することを確認**したうえで
+落とした。C′-15 でも同じ観点で 009 章を読むこと。
+
+1. **臨界点の場合分け**。008 章の `def_fermi` の定義域限定、`def_Vprime` の和の範囲限定、
+   `A_theta_is_identity_when_gamma2_zero`、`T_Vprime_fixes_hatZ_hatY_when_gamma2_zero`、
+   `T_V_eq_T_Vprime_on_hatZ_hatY` の「場合 2」は、すべて `γ_2(θ_μ) = 0` になりうることだけに由来する。
+   `gamma_2_theta_tilde_nonzero`（015 章）により偶セクターでは起こらない。
+2. **複素平方根の分枝の議論**。`relation_of_gamma_2_theta_tilde` (4)(5) で根号が `|γ_2|` と `i|γ_2|` に
+   確定しているので、`P̌_μ` の成分は最初から実の絶対値で書かれ、分枝の一致（008 章 `anticommutator_of_psi`
+   の Step 0）を示す必要がない。
+3. **`μ` の符号による場合分け**。008 章は添字集合が `calM = {−M,…,−1,1,…,M}` なので
+   `action_of_T_Vprime_on_psi` を `μ` の符号で 3 通りに分けていた。016 章は `μ ∈ Z` で扱い、
+   `periodicity_of_check_fermi` を先に立てて場合分けを消した。
+
+### 数値検証
+
+`sagemath/check/049_claim_even_sector_fermions/`（6 チェック、全 PASS）。`M = 2,3,4,5`、
+`(K_1,K_2)` は**厳密な臨界点 2 組**（非等方・等方）＋近傍 1 組＋一般 2 組＋高温 1 組。
+`V^{(+)}` も `checkV'` も行列指数関数から直接構成しており、証明が使う交換子の級数展開とは独立。
+- 対を `μ+ν ≡ 0 (mod M)` と誤ると反交換関係が残差 1.0 で壊れることを対照として記録（check_02）。
+- `checkV'` の和の範囲を `{1..M−1}` / `{1..M+1}` に変えると `[X̌, ψ̌^†_μ] = γψ̌^†_μ` が壊れることを
+  記録（check_04）— 和の範囲 `μ = 1..M` に数え落としも重複も無いことの裏づけ。
+- `T_{(V^{(+)})} = T_{(checkV')}` は行列単位 `e_{ij}`（`2^M × 2^M` 個）すべてで直接確認（check_05）。
+- `c = (2 sinh 2K_2)^{M/2}` は全ケースで一致（相対差 ≤ 2.3e-13）。**ただし証明は C′-15**（check_06）。
+
+## 完了（2026-07-26）: 章 C′ の C′-8〜C′-11 — `T_{(V^{(+)})}` の作用まで到達
 
 ### 到達点
 
