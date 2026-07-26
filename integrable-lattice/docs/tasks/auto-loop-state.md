@@ -127,7 +127,7 @@ T2（未解決模型の実厳密解）は 11 cycle を通して新厳密解を�
 |---|------|------|--------|--------|----------|
 | 1 | T1 Reframe | paper_plan_R_Lambda_duality | todo | | 11 cycle の蓄積(D-U2 決定可能命題, Mahler ℝ/岩澤 Λ 双対, 決定可能性非対称, Lehmer 地図)を `outputs/paper-plans/` に統合 paper-plan 化。基礎論/数論的構造ノートとして。 |
 | 2 | T2→T1 | reframe_onsager_ising_qqbar | todo | | T2 統合方針: 2D Ising Onsager 解の有限 N ℚ̄ 構造(docs/discussion 09 と連携)を可算 Reframe。既知解を可算・形式検証可能に。 |
-| 3 | T3 Pure | nonzero_mu_p_graph | todo | | 非自明 μ_p(グラフ岩澤, 全域木)の具体例を計算(cycle6/11 の μ_p=0 generic の外)。p 進エントロピー>0 の実例。 |
+| 3 | T3 Pure | nonzero_mu_p_graph | done | 2026-07-26 | `sagemath/check/cycle12_T3_nonzero_mu_p/`（探索 `mu_search`, 直接検証 `mu_verify`, 広域探索 `mu_large`）。**μ_ℓ>0 の非自明な具体例を構成**（cycle6/7/11 の「μ_p は generic に 0」の外側）。voltage 多重グラフの abelian ℓ-tower で、κ_n=全域木数を導来グラフの Kirchhoff 行列式から厳密計算し v_ℓ(κ_n)=μℓ^n+λn+ν にフィット。**例1**: 2頂点+voltage{0,1,2}平行3重辺+各頂点にvoltage1ループ → det L(z)=−12z^{-1}(z−1)², **μ_2=2, μ_3=1**(λ=1, n≤6/n≤4 全一致), μ_5=0。**例2** μ_2=4, **例3** μ_23=1, **例4**(3頂点) μ_2=4,μ_3=1, **例5** μ_3=2 かつ λ=3(det L が c·z^{-1}(z-1)² 型でない=閉形式不可, フィットのみ), **例6** 辺4本の最小級で μ_5=1。広域探索 100794 件での非自明最大は μ_2=4, μ_3=2, μ_5=1（範囲内の最大であって上界ではない）。判定式 **μ_ℓ=v_ℓ(content_z det L(z))**（Weierstrass 準備＋(★) κ(X_N)=(κ(X)/N)Π_{ζ≠1}det L(ζ)）が全例で的中＝**μ_p は決定可能**。構造的知見: **bouquet 底では μ>0 は ℓ 重多重グラフの自明例に限る**(125件全探索)、m≥2 頂点で行列式の非自明な content 相殺が μ>0 を生む。正直: 数値一致は証明でない(有限 n のみ、(★)は既知公式に依拠)、**グラフ側 μ>0 例が文献既知かは abstract では確認できず未確定**(arXiv:2006.14012/2105.08661/2107.07639/2201.05186 の abstract に記述なし、本文 PDF は本セッションで機械可読取得不可)→ 新規性は主張しない。 |
 | 4 | — | rank:cycle12 | todo | | 再ランク → cycle 13 方向。 |
 
 ## cycle 11 step 列（3トラック継続。2026-07-03 起こし）

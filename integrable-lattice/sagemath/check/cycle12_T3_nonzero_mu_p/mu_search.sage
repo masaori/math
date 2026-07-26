@@ -1,0 +1,217 @@
+# cycle 12 / T3 Pure: グラフの岩澤理論で μ_ℓ > 0 となる具体例の探索。
+#
+# 設定（voltage graph = 被覆の記述）:
+#   底グラフ X（多重グラフ, ループ可）の各辺 e に voltage α(e)∈ℤ を割り当てる。
+#   N∈ℕ に対し導来グラフ（derived graph）X_N: 頂点 V(X)×ℤ/N,
+#   底の辺 e=(u,v,α) は N 本の辺 (u,i)—(v,i+α mod N) に持ち上がる。
+#   N=ℓ^n の列 X_1 ⊂ X_ℓ ⊂ X_{ℓ^2} ⊂ … が abelian ℓ-tower。
+#
+# voltage ラプラシアン L(z)（m×m, ℤ[z,z^{-1}] 係数）:
+#   非ループ辺 (u,v,α): L[u,u]+=1, L[v,v]+=1, L[u,v]-=z^α, L[v,u]-=z^{-α}
+#   ループ (u,u,α)    : L[u,u] += 2 - z^α - z^{-α}
+# X_N のラプラシアンはブロック巡回で、その固有値は ζ^N=1 を走る L(ζ) の固有値の合併。
+# よって全域木数（matrix-tree）:
+#   κ(X_N) = (κ(X)/N) · Π_{ζ^N=1, ζ≠1} det L(ζ).      (★)
+# （この (★) は既知の公式。本スクリプトでは使わず、verify 側で直接の
+#   matrix-tree 計算と突き合わせて数値的に確認する。）
+#
+# 岩澤理論の言葉: D(z)=det L(z) を z=1+T で ℤ_ℓ[[T]] の元と見る。z^{-1} は
+# ℤ_ℓ[[T]] の単元なので、係数の ℓ 進 content は z の Laurent 係数の content と一致する。
+# Weierstrass 準備により D = ℓ^μ · (distinguished) · (unit) だから
+#       μ_ℓ = v_ℓ( content_z( det L(z) ) )            (☆)
+# が予測される μ 不変量（ord_ℓ κ_n = μ ℓ^n + λ n + ν の μ）。
+# 本スクリプトは (☆) を判定基準にして小さな voltage 多重グラフを全探索する。
+# （μ の値そのものは verify スクリプトで実際の κ_n から独立に確認する。）
+
+R = LaurentPolynomialRing(ZZ, 'z')
+z = R.gen()
+
+def volt_laplacian(m, edges):
+    L = matrix(R, m, m)
+    for (u, v, a) in edges:
+        if u == v:
+            L[u, u] += 2 - z**a - z**(-a)
+        else:
+            L[u, u] += 1
+            L[v, v] += 1
+            L[u, v] -= z**a
+            L[v, u] -= z**(-a)
+    return L
+
+def content_of(f):
+    cs = f.coefficients()
+    if len(cs) == 0:
+        return 0
+    return gcd([ZZ(c) for c in cs])
+
+def base_connected(m, edges):
+    if m == 1:
+        return True
+    seen = {0}
+    changed = True
+    while changed:
+        changed = False
+        for (u, v, a) in edges:
+            if u in seen and v not in seen:
+                seen.add(v); changed = True
+            if v in seen and u not in seen:
+                seen.add(u); changed = True
+    return len(seen) == m
+
+def edge_multiplicity_gcd(edges):
+    """全ての辺タイプの重複度の gcd。ℓ で割れるなら『ℓ 重多重グラフ』という自明な μ>0。"""
+    from collections import Counter
+    c = Counter(tuple(sorted((u, v))) + (min(a, -a) if u == v else a,) for (u, v, a) in edges)
+    return gcd(list(c.values()))
+
+def cycle_voltage_gcd(m, edges):
+    """サイクル voltage が生成する部分群 dℤ の d。d が ℓ と素でないと ℓ 被覆が非連結。"""
+    # 全域木を取り、各非木辺の基本サイクル voltage を集める
+    parent = list(range(m)); pot = [0]*m
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]; x = parent[x]
+        return x
+    tree_edges = []
+    rest = []
+    for e in edges:
+        (u, v, a) = e
+        ru, rv = find(u), find(v)
+        if u != v and ru != rv:
+            parent[ru] = rv; tree_edges.append(e)
+        else:
+            rest.append(e)
+    # 木上の potential を BFS で決める
+    adj = {i: [] for i in range(m)}
+    for (u, v, a) in tree_edges:
+        adj[u].append((v, a)); adj[v].append((u, -a))
+    seen = {0}; stack = [0]; pot[0] = 0
+    while stack:
+        x = stack.pop()
+        for (y, a) in adj[x]:
+            if y not in seen:
+                pot[y] = pot[x] + a; seen.add(y); stack.append(y)
+    d = 0
+    for (u, v, a) in rest:
+        d = gcd(d, pot[u] + a - pot[v])
+    return abs(d)
+
+PRIMES = [2, 3, 5, 7]
+
+print("=" * 78)
+print("グラフの岩澤理論: μ_ℓ > 0 となる voltage 多重グラフの探索")
+print("判定基準 (☆): μ_ℓ = v_ℓ(content_z(det L(z)))")
+print("=" * 78)
+
+# ---------------------------------------------------------------- 探索 1: bouquet
+print("\n[探索 1] 底グラフ = bouquet（頂点 1 個 + ループ）")
+print("  ループ voltage の多重集合 S ⊂ {1..5}（重複度 ≤ 3, 総ループ数 ≤ 4）を全探索")
+from itertools import combinations_with_replacement
+bouquet_hits = []
+bouquet_total = 0
+for k in range(1, 5):
+    for S in combinations_with_replacement(range(1, 6), k):
+        edges = [(0, 0, a) for a in S]
+        if cycle_voltage_gcd(1, edges) == 0:
+            continue
+        D = det(volt_laplacian(1, edges))
+        if D == 0:
+            continue
+        bouquet_total += 1
+        c = content_of(D)
+        if c != 1:
+            g = edge_multiplicity_gcd(edges)
+            bouquet_hits.append((S, c, g))
+print(f"  検査数 {bouquet_total} 件、content≠1 は {len(bouquet_hits)} 件")
+for (S, c, g) in bouquet_hits[:20]:
+    print(f"    S={S}: content={factor(c)}  辺重複度 gcd={g}  → 自明（ℓ|重複度）か? {g % c == 0}")
+print("  観察: bouquet では det L(z) = Σ_a m_a (2 - z^a - z^{-a}) で、content が ℓ で割れるのは")
+print("        全ループ重複度 m_a が ℓ で割れる（＝ℓ 重多重グラフ）自明な場合に限る。")
+
+# ---------------------------------------------------------------- 探索 2: 2 頂点
+print("\n[探索 2] 底グラフ = 2 頂点（頂点間の平行辺 + 各頂点のループ）")
+print("  平行辺 voltage 多重集合 A（|A|≤4, 値 0..3, 平行移動対称性より min A=0 に正規化）")
+print("  ループ: 頂点 0 に B（|B|≤2, 値 1..3）, 頂点 1 に C（同）")
+hits = []
+total = 0
+loopsets = []
+for kb in range(0, 3):
+    for B in combinations_with_replacement(range(1, 4), kb):
+        loopsets.append(B)
+for ka in range(1, 5):
+    for A in combinations_with_replacement(range(0, 4), ka):
+        if A[0] != 0:
+            continue
+        for B in loopsets:
+            for C in loopsets:
+                edges = [(0, 1, a) for a in A] + [(0, 0, b) for b in B] + [(1, 1, c) for c in C]
+                if not base_connected(2, edges):
+                    continue
+                d = cycle_voltage_gcd(2, edges)
+                if d == 0:
+                    continue
+                D = det(volt_laplacian(2, edges))
+                if D == 0:
+                    continue
+                total += 1
+                cont = content_of(D)
+                if cont != 1:
+                    hits.append((A, B, C, cont, d, edge_multiplicity_gcd(edges), D))
+print(f"  検査数 {total} 件、content≠1 は {len(hits)} 件")
+hits.sort(key=lambda h: -h[3])
+print(f"\n  {'A(平行辺)':<16}{'B(loop at u)':<14}{'C(loop at v)':<14}{'content':<12}{'cyc gcd':<9}{'mult gcd':<9}")
+for (A, B, C, cont, d, mg, D) in hits[:25]:
+    print(f"  {str(A):<16}{str(B):<14}{str(C):<14}{str(factor(cont)):<12}{d:<9}{mg:<9}")
+print("\n  各 hit の det L(z)（先頭 10 件）と予測 μ_ℓ:")
+for (A, B, C, cont, d, mg, D) in hits[:10]:
+    mus = {p: ZZ(cont).valuation(p) for p in PRIMES if cont % p == 0}
+    print(f"    A={A} B={B} C={C}: det L = {D}")
+    print(f"       content={factor(cont)}, 辺重複度 gcd={mg}（1 なら ℓ 重多重グラフではない）, 予測 μ={mus}")
+
+# ---------------------------------------------------------------- 探索 3: 3 頂点
+print("\n[探索 3] 底グラフ = 3 頂点（各頂点対に voltage 0/1 の辺を重複度 0..2, 各頂点にループ voltage 1 を 0..1）")
+pairs = [(0, 1), (0, 2), (1, 2)]
+etypes = [(u, v, a) for (u, v) in pairs for a in (0, 1)]
+hits3 = []
+total3 = 0
+import itertools
+for mult in itertools.product(range(0, 3), repeat=len(etypes)):
+    if sum(mult) == 0 or sum(mult) > 6:
+        continue
+    base = []
+    for t, mm in zip(etypes, mult):
+        base += [t] * mm
+    if not base_connected(3, base):
+        continue
+    for lp in itertools.product(range(0, 2), repeat=3):
+        edges = base + [(i, i, 1) for i in range(3) if lp[i]]
+        d = cycle_voltage_gcd(3, edges)
+        if d == 0:
+            continue
+        D = det(volt_laplacian(3, edges))
+        if D == 0:
+            continue
+        total3 += 1
+        cont = content_of(D)
+        if cont != 1:
+            hits3.append((tuple(edges), cont, d, edge_multiplicity_gcd(edges), D))
+print(f"  検査数 {total3} 件、content≠1 は {len(hits3)} 件")
+hits3.sort(key=lambda h: -h[1])
+seen_sig = set()
+shown = 0
+for (edges, cont, d, mg, D) in hits3:
+    sig = (cont, mg)
+    if shown >= 12:
+        break
+    shown += 1
+    print(f"    edges={list(edges)}")
+    print(f"       content={factor(cont)}, cyc gcd={d}, 辺重複度 gcd={mg}, det L={D}")
+
+# ---------------------------------------------------------------- まとめ
+print("\n" + "=" * 78)
+print("探索範囲（一次情報として明示）:")
+print("  bouquet: ループ voltage 多重集合 ⊂ {1..5}, 総ループ数 ≤ 4")
+print("  2 頂点 : 平行辺 voltage ⊂ {0..3}（|A|≤4, min A=0 正規化）, 各頂点ループ voltage ⊂{1..3}（≤2 本）")
+print("  3 頂点 : 頂点対ごとに voltage 0/1 の辺を重複度 0..2（総数 ≤6）, 各頂点にループ voltage 1 を 0/1")
+print("  素数   : content の素因数分解で判定（p の上限なし）")
+print("=" * 78)
