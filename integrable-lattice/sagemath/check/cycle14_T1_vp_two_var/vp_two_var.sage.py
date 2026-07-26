@@ -54,14 +54,16 @@ CASES = [
     ("7 - 2z - 2w",              _sage_const_7  - _sage_const_2 *z - _sage_const_2 *w),
     ("9 - z - w",                _sage_const_9  - z - w),
     ("4 - z - 2w",               _sage_const_4  - z - _sage_const_2 *w),
+    ("2zw (Deninger 条件を満たす)", _sage_const_2 *z*w),
+    ("6zw",                      _sage_const_6 *z*w),
 ]
 PRIMES = [_sage_const_2 , _sage_const_3 , _sage_const_5 , _sage_const_7 ]
 
 print()
 print("--- (1) 判定式: v_p(a_{p^n}) > 0  <=>  p | P(1,1) ---")
-print("  根拠(証明は report §3): L=p^n なら全ての L 乗根 zeta について zeta ≡ 1 (mod m) なので")
-print("  P(zeta,xi) ≡ P(1,1) (mod m)。ゆえに p ∤ P(1,1) なら全因子が単数で v_p(a_L)=0、")
-print("  p | P(1,1) なら全 p^(2n) 因子が正の付値をもち v_p(a_L)>0。")
+print("  根拠(証明は report §3, 補題 V0): mod p では z^(p^n)-1 = (z-1)^(p^n) なので終結式が潰れて")
+print("  a_{p^n} ≡ P(1,1)^(p^(2n)) (mod p)。ゆえに p ∤ P(1,1) なら a は p で割れず v_p=0、")
+print("  p | P(1,1) なら a ≡ 0 で v_p ≥ 1。代数的整数論も p 進体も使わない。")
 print()
 print("%-26s %8s %8s %5s %-9s %s" % ("P", "P(1,1)", "content", "p", "p|P(1,1)?", "v_p(a_{p^n}) n=0,1,2,..."))
 bad = _sage_const_0 
@@ -146,26 +148,34 @@ print("  総次数<=2, n について次数<=1 なので a X^2 + b X Y + c X + d
 print("  4 段しか取れない場合は未知数 5 個に対し方程式 4 本で一意に定まらない。")
 print("  ここでは a=0(content=1 なので X^2 項なしと仮定)として b,c,d,e を解き、整合を見るだけ。")
 print("  **これはフィットであって証明ではない。**")
-for name, P in CASES:
-    if content(P) != _sage_const_1 :
-        continue
-    for p in PRIMES:
-        vals = records.get((name, p), [])
-        nums = [x for x in vals if x != "deg"]
-        if len(nums) < _sage_const_4  or nums[-_sage_const_1 ] == _sage_const_0 :
-            continue
-        rows = []
-        rhs = []
-        for n in range(_sage_const_4 ):
+print("  **重要**: 4 段だけのフィットは誤る。実際 P=6-z-w, p=2 を n<=3 の 4 段で解くと")
+print("  2n2^n-4*2^n+5n+6 が得られるが、n=4,5 の真値 86,199 に対しこの式は 90,223 を与えて外れる。")
+print("  以下は n<=5 の 6 段を使い、n=0 を含める場合と n>=1 に限る場合を分けて解く。")
+for name, P in [("6 - z - w", _sage_const_6  - z - w), ("2 + 3z + 3w", _sage_const_2  + _sage_const_3 *z + _sage_const_3 *w)]:
+    p = _sage_const_2 
+    seq = []
+    for n in range(_sage_const_0 , _sage_const_6 ):
+        v = a_L(P, p**n)
+        seq.append(ZZ(v).valuation(p))
+    print("    P=%-14s p=%d: v_p(a_{p^n}) (n=0..5) = %s" % (name, p, seq))
+    for lo, tag in [(_sage_const_0 , "n>=0"), (_sage_const_1 , "n>=1")]:
+        rows, rhs = [], []
+        for n in range(lo, lo + _sage_const_5 ):
             X = p**n
-            rows.append([X*n, X, n, _sage_const_1 ])
-            rhs.append(nums[n])
+            rows.append([X*X, X*n, X, n, _sage_const_1 ])
+            rhs.append(seq[n])
         M = matrix(QQ, rows)
-        if M.rank() < _sage_const_4 :
+        if M.rank() < _sage_const_5 :
+            print("      %s: 階数不足で一意に定まらない" % tag)
             continue
         sol = M.solve_right(vector(QQ, rhs))
-        print("    P=%-22s p=%d: v_p(a_{p^n}) = %s*n*%d^n + %s*%d^n + %s*n + %s   (a=0 と仮定, 4 段一致)"
-              % (name, p, sol[_sage_const_0 ], p, sol[_sage_const_1 ], p, sol[_sage_const_2 ], sol[_sage_const_3 ]))
+        pred = [sol[_sage_const_0 ]*(p**n)**_sage_const_2  + sol[_sage_const_1 ]*(p**n)*n + sol[_sage_const_2 ]*(p**n) + sol[_sage_const_3 ]*n + sol[_sage_const_4 ]
+                for n in range(_sage_const_0 , _sage_const_6 )]
+        ok = all(pred[n] == seq[n] for n in range(_sage_const_0 , _sage_const_6 ))
+        print("      %s で解く: (a,b,c,d,e)=%s -> 全 n=0..5 と一致? %s  予測=%s"
+              % (tag, tuple(sol), ok, [QQ(x) for x in pred]))
+print("  => n>=1 の 5 段で解いた式は n=0 では外れる(DuBose-Vallieres も n>>0 でのみ主張している)。")
+print("  => いずれにせよ 5 未知数に 5 方程式なので、これは同定であって証明ではない。")
 
 print()
 print("=" * _sage_const_92 )
