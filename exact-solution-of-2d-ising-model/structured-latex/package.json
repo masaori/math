@@ -1,0 +1,25 @@
+{
+  "name": "@ising/structured-latex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "2次元Ising模型の厳密解の証明本体（構造化テキスト）。型検査で参照の誤りを検出する。",
+  "scripts": {
+    "gen:labels": "node tools/generate-labels.ts",
+    "check:labels": "node tools/generate-labels.ts --check",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:mjs": "tsc -p tsconfig.mjs-content.json --noEmit",
+    "validate": "node tools/validate-content.ts",
+    "test:types": "node tools/negative-type-test.ts",
+    "test:runtime": "node tools/schema-runtime-test.ts",
+    "verify:proofs": "node tools/verify-no-lost-proofs.ts",
+    "check": "npm run check:labels && npm run typecheck && npm run typecheck:mjs && npm run validate && npm run verify:proofs && npm run test:types && npm run test:runtime"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.10.2"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

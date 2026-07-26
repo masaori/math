@@ -1,0 +1,17 @@
+{
+  // 移行期の追加検査: まだ `.ts` へ変換していない `content/*.mjs` と `notes/*.mjs` を
+  // JS のまま型検査する（`checkJs`）。schema.mjs は schema.ts の再エクスポートなので、
+  // 変換前でも「存在しないラベルへの ref / targets」はここで落ちる。
+  //
+  // `.mjs` は型注釈を持てないぶん検査は弱い（未使用 import 等は無効化する）。
+  // content/notes を `.ts` へ変換し終えたら、この設定ファイルは削除する。
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": ["schema.ts", "labels.generated.ts", "content/**/*.mjs", "notes/**/*.mjs"],
+  "exclude": []
+}

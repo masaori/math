@@ -76,8 +76,8 @@ realtime-web-preview/
 │       │   │       ├── get-document.ts             # 本体 + 参照用ノートを束ねて返す
 │       │   │       └── subscribe-to-changes.ts
 │       │   └── adapter/gateways/
-│       │       ├── mjs-module-loader.ts            # .mjs の動的 import（スキーマ非依存の共通処理）
-│       │       ├── mjs-block-source-gateway.ts     # .mjs を動的 import + Zod safeParse
+│       │       ├── mjs-module-loader.ts            # .mjs / .ts の動的 import（スキーマ非依存の共通処理）
+│       │       ├── mjs-block-source-gateway.ts     # .mjs / .ts を動的 import + Zod safeParse
 │       │       ├── mjs-note-source-gateway.ts      # ノート dir（無くてもよい）を同様に読む
 │       │       └── fs-source-watcher-gateway.ts    # fs.watch（本体 dir とノート dir を監視）
 │       ├── entrypoint/
@@ -119,7 +119,7 @@ realtime-web-preview/
   - `getDocument(blockSource)`: ドキュメント（`Block[]`）を取得。
   - `subscribeToChanges(watcher, onChange)`: 変更購読を確立。
 - **adapter / gateways**（外部 domain＝FS と `.mjs` ソース形式に依存してよい唯一の層）
-  - `MjsBlockSourceGateway`: ソース dir 配下の `*.mjs` をファイル名順に動的 import し、
+  - `MjsBlockSourceGateway`: ソース dir 配下の `*.mjs` / `*.ts` をファイル名順に動的 import し、
     default export を **Zod `safeParse`** で検証して結合。失敗は Result のエラーに変換（境界の try/catch）。
   - `FsSourceWatcherGateway`: `fs.watch`（再帰）でソース dir を監視。デバウンスして onChange。
 - **entrypoint**（薄く保つ: 認証無し→ DI → usecase → シリアライズ）
