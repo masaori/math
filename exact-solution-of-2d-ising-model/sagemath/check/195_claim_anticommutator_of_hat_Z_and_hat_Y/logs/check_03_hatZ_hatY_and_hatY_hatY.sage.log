@@ -1,0 +1,4 @@
+=== anticommutator: [hatZ,hatY]_+ = 0 と [hatY,hatY]_+ = 2M δ I ===
+  μ+ν ≡ 0 (mod M) の組: 56 件、そうでない組: 160 件
+checks: 811, max relative error: 7.065e-15, tol: 1.0e-09
+RESULT: PASS

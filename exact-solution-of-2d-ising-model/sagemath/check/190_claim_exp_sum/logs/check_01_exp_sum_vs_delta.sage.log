@@ -1,0 +1,5 @@
+=== exp_sum: 素朴な有限和 vs M*delta^M_{(k,0)} ===
+  k が M の倍数の場合: 49 件、そうでない場合: 168 件
+  k 非倍数のときの |和| の最大: 2.419e-14 at (M,k)=(8, -22)
+checks: 218, max relative error: 2.419e-14, tol: 1.0e-09
+RESULT: PASS

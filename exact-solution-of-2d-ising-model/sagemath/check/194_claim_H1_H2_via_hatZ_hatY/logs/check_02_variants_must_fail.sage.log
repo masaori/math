@@ -1,0 +1,5 @@
+=== H1_H2_via_hatZ_hatY: 変種が破れること（式の一意性の確認） ===
+  [skip] M=2 sign=+ (d): -j ≡ +j (mod 2) のため変種と原式が一致し判定不能
+  [skip] M=2 sign=- (d): -j ≡ +j (mod 2) のため変種と原式が一致し判定不能
+checks: 30, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

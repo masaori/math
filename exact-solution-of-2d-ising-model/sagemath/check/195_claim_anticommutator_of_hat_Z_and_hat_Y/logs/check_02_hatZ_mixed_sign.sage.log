@@ -1,0 +1,5 @@
+=== anticommutator: [hatZ^{(±)}_mu, hatZ^{(∓)}_nu]_+ の補正項 ===
+  μ+ν ≡ 0 (mod M) の組: 112 件、そうでない組: 320 件
+  変種判定: 22 件は本文の式と数値的に一致するため判定不能としてスキップ
+checks: 531, max relative error: 2.939e-15, tol: 1.0e-09
+RESULT: PASS

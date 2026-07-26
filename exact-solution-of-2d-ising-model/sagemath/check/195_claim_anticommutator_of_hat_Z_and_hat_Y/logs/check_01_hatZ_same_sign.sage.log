@@ -1,0 +1,4 @@
+=== anticommutator: [hatZ^{(±)}_mu, hatZ^{(±)}_nu]_+ = 2M δ^M_{μ+ν,0} I ===
+  μ+ν ≡ 0 (mod M) の組: 112 件、そうでない組: 320 件
+checks: 433, max relative error: 7.063e-15, tol: 1.0e-09
+RESULT: PASS
