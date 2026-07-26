@@ -44,7 +44,7 @@ resolved_risk: >
 novelty_risk: >
   unchecked。SML 例外の存在で「完全な閉形式」は一般に無い。特殊素数 p|q(対称性位数)で
   周期増大。厳密化はこれらの caveat 込みでのみ可能。
-paper_potential: low-medium(基礎論/構造寄り。新規性は適用と双対の明示に依存)
+paper_potential: low  # 基礎論/構造寄り。新規性は適用と双対の明示に依存。旧値 low-medium は docs/schemas.md の値域(high/medium/low)外だったため切り下げて是正(2026-07-26, paper-plans/README.md G4)
 references: [線形漸化列の p 進付値(古典), Skolem–Mahler–Lech, 09_2DIsing, 04_分配関数と自由エネルギー]
 notes: >
   cycle 2 の主成果。正直に「既知 p 進理論の可積分 Φ への適用＋双対の明示」で、

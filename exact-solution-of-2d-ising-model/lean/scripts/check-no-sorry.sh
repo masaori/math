@@ -117,6 +117,53 @@ targets=(
   Ising2D.acomm_hatZPlus_hatZPlus
   Ising2D.acomm_hatZMinus_hatZMinus
   Ising2D.acomm_hatZPlus_hatZMinus
+  Ising2D.nextSite
+  Ising2D.nextSite_val_of_lt
+  Ising2D.nextSite_val_of_last
+  Ising2D.lastSign_of_last
+  Ising2D.lastSign_of_not_last
+  Ising2D.lastSign_one
+  Ising2D.H1
+  Ising2D.H2
+  Ising2D.I_smul_H2_eq_sum_sigmaX
+  Ising2D.V1
+  Ising2D.V1half
+  Ising2D.V2
+  Ising2D.V1half_sq
+  Ising2D.matExpUnits
+  Ising2D.matExpUnits_val
+  Ising2D.matExpUnits_inv
+  Ising2D.smulUnits
+  Ising2D.smulUnits_val
+  Ising2D.V1Units
+  Ising2D.V1halfUnits
+  Ising2D.V1Units_val
+  Ising2D.V1halfUnits_val
+  Ising2D.isUnit_V1
+  Ising2D.isUnit_V1half
+  Ising2D.rpow_two_s2_ne_zero
+  Ising2D.V2Units
+  Ising2D.V2Units_val
+  Ising2D.isUnit_V2
+  Ising2D.TConj
+  Ising2D.TConj_apply
+  Ising2D.TConj_linear
+  Ising2D.TConj_trans
+  Ising2D.TV
+  Ising2D.TV_apply
+  Ising2D.TV_eq_TConj
+  Ising2D.TV_linear
+  Ising2D.TV_mul
+  Ising2D.TV_one
+  Ising2D.ActsBy
+  Ising2D.ActsBy.comp
+  Ising2D.ActsBy.eigen
+  Ising2D.B1mat
+  Ising2D.B2mat
+  Ising2D.Amat
+  Ising2D.B1_mul_B2_mul_B1_eq_Amat
+  Ising2D.TV_hatZ_hatY_of_action
+  "Ising2D.TV_hatZ_hatY_of_action'"
   Ising2D.gamma2_neg
   Ising2D.gamma1_neg
   Ising2D.AMat_eq
