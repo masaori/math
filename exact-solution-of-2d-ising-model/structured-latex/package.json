@@ -11,7 +11,9 @@
     "typecheck:mjs": "tsc -p tsconfig.mjs-content.json --noEmit",
     "validate": "node tools/validate-content.ts",
     "test:types": "node tools/negative-type-test.ts",
-    "check": "npm run check:labels && npm run typecheck && npm run typecheck:mjs && npm run validate && npm run test:types"
+    "test:runtime": "node tools/schema-runtime-test.ts",
+    "verify:proofs": "node tools/verify-no-lost-proofs.ts",
+    "check": "npm run check:labels && npm run typecheck && npm run typecheck:mjs && npm run validate && npm run verify:proofs && npm run test:types && npm run test:runtime"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

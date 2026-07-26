@@ -23,7 +23,11 @@
 - 実行方式: **Node 22.18+ の型ストリップで `.ts` を直接実行する**（`dist/` を作らない。`tsc` は検査専用）。
   ビューア（realtime-web-preview）の入力ソース読み込みも `.mjs` / `.ts` の両対応にし、
   変換後の `.ts` content を実際に配信できることを確認済み（173 blocks / 38 notes）。
+- **フィールド名の打ち間違い（`proof` → `proofs` 等）も落ちる**: `defineBlocks` を非ジェネリックに
+  戻して余剰プロパティ検査を効かせ、実行時にも未知キーで throw する（`tools/schema-runtime-test.ts`）。
+  レビューで「証明が黙って消える経路」として指摘された穴を塞いだもの。
 - 一括検査: `cd structured-latex && npm run check`（初回のみ `pnpm install`）。
+  中身は 生成物の鮮度 → 型検査(.ts) → 型検査(.mjs) → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
 
 **第2段（content/notes の一括 `.ts` 変換）は未実行**。別セッションが記法置換（⊗→⊠）で
 content を書き換え中のため衝突を避けた。変換は `node tools/codemod-mjs-to-ts.ts --apply`

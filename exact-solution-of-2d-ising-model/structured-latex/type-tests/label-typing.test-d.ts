@@ -78,6 +78,21 @@ const blockWithNotes: ConvertedBlock = {
 };
 void blockWithNotes;
 
+// フィールド名の打ち間違いは余剰プロパティ検査で落ちる。
+// （ここが素通りすると `proof` が捨てられ、証明が正本から黙って消える。）
+void defineBlocks([
+  {
+    id: "type_test_typo_field",
+    kind: "claim",
+    sourcePath: "type-tests/label-typing.test-d.ts",
+    sourceOrdinal: 5,
+    labels: [],
+    statement: [],
+    // @ts-expect-error `proof` の打ち間違い。
+    proofs: [paragraph(["証明のつもり"])],
+  },
+]);
+
 // --- ノートの targets --------------------------------------------------------
 
 const okNote: Note = {

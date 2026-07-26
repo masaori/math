@@ -157,7 +157,7 @@ export type Note = {
  * `sourceOrdinal` は「ソース内での通し番号」であって文書順ではない
  * （parts/ のファイル名連番と `#include` 順は一致しないため）。
  */
-export function defineBlocks<const T extends readonly ConvertedBlock[]>(blocks: T): T {
+export function defineBlocks(blocks: readonly ConvertedBlock[]): readonly ConvertedBlock[] {
   if (!Array.isArray(blocks)) {
     throw new TypeError("defineBlocks expects an array");
   }
@@ -177,7 +177,7 @@ export function defineBlocks<const T extends readonly ConvertedBlock[]>(blocks: 
  * 各ノートは `targets` で関連する定理・主張を**ラベル**で参照する（パス非依存）。
  * 用途は、出版物の証明以外の部分（動機・背景・読み方の説明）を書くときの素材。
  */
-export function defineNotes<const T extends readonly Note[]>(notes: T): T {
+export function defineNotes(notes: readonly Note[]): readonly Note[] {
   if (!Array.isArray(notes)) {
     throw new TypeError("defineNotes expects an array");
   }
@@ -232,9 +232,43 @@ function normalizeChildren(children: readonly InlineInput[]): Node[] {
   });
 }
 
+/**
+ * ブロックが持ってよいキー。
+ * 型（`ConvertedBlock`）の余剰プロパティ検査と同じ規則を実行時にも掛ける。
+ * これが無いと `proof` を `proofs` と打ち間違えたときに、型でも実行時でも素通りして
+ * **証明が正本から黙って消える**（過去に証明 2 件を移行漏れで失った事故と同じクラス）。
+ */
+const BLOCK_KEYS = new Set([
+  "id",
+  "kind",
+  "sourcePath",
+  "sourceOrdinal",
+  "title",
+  "labels",
+  "statement",
+  "proof",
+  "conversion",
+  "level",
+  // `notes` は許可キーに入れる（下で専用のエラーメッセージを出して拒否するため）。
+  "notes",
+]);
+
+const NOTE_KEYS = new Set(["id", "targets", "title", "sourcePath", "body"]);
+
+function assertNoUnknownKeys(value: object, allowed: ReadonlySet<string>, path: string): void {
+  const unknown = Object.keys(value).filter((key) => !allowed.has(key));
+  if (unknown.length > 0) {
+    throw new TypeError(
+      `${path} に未知のフィールドがある: ${unknown.join(", ")}` +
+        `（許可されるのは ${[...allowed].join(", ")}。打ち間違いだと中身が黙って捨てられる）`,
+    );
+  }
+}
+
 export function validateBlock(block: ConvertedBlock): void {
   assertObject(block, "block");
   assertString(block.id, "block.id");
+  assertNoUnknownKeys(block, BLOCK_KEYS, `block ${block.id}`);
   assertString(block.sourcePath, `${block.id}.sourcePath`);
   assertInteger(block.sourceOrdinal, `${block.id}.sourceOrdinal`);
   if (!KINDS.has(block.kind)) {
@@ -286,6 +320,7 @@ export function validateBlock(block: ConvertedBlock): void {
 function validateNote(note: Note): void {
   assertObject(note, "note");
   assertString(note.id, "note.id");
+  assertNoUnknownKeys(note, NOTE_KEYS, `note ${note.id}`);
   if (!Array.isArray(note.targets)) {
     throw new TypeError(`${note.id}.targets must be an array of labels`);
   }

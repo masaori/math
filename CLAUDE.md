@@ -33,7 +33,7 @@
 ├── MEMORY.md              # プロジェクト固有の引き継ぎメモ（次回やること・未解決問題・完了済み）
 ├── structured-latex/      # 証明本体の正本（構造化テキスト）
 │   ├── schema.ts          # ブロック/ノート/ノードの型と検証（型の正本）
-│   ├── labels.generated.ts# 自動生成: 実在ラベルのユニオン型（参照はこの型しか指せない）
+│   ├── labels.generated.ts # 自動生成: 実在ラベルのユニオン型（参照はこの型しか指せない）
 │   ├── content/*.mjs      # 証明ブロック群（配列の並びが文書順の正本。**最終成果物はここだけから生成**）
 │   ├── notes/*.mjs        # 参照用ノート（文書本体ではない。targets にラベルで紐づける）
 │   └── tools/             # validate-content.ts / generate-labels.ts 等
