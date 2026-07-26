@@ -1,5 +1,27 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26）: クリフォード代数の読み物ノートを追加
+
+README 5 節「なぜこの計算を思いついたのかを説明する材料（読み物）」に該当するものとして、
+`structured-latex/notes/009_clifford_algebra.mjs`（5 件）を新規作成した。厳密証明ではない。
+
+内容と、それぞれが対応する本文のラベル:
+
+- 反交換関係（`anticommutator_of_Z_and_Y`）が、$2M$ 個の生成元に通し番号を振ると
+  $e_a e_b + e_b e_a = 2\delta_{ab}I$ という**クリフォード代数の定義関係式そのもの**であること。
+- 生成元から作られる代数の次元が $2^{2M} = 2^M \times 2^M$ で全行列環と一致し、
+  Jordan--Wigner 構成（$Z_m,Y_m$ の定義に現れる $\sigma^x$ の弦）がその同型を具体的に与えること
+  （`Z_Y_generate_algebra` / `Z_Y_linearly_independent`）。
+- 二次式の指数関数による共役が生成元の張る $2M$ 次元空間を保ち直交変換になること。これが
+  「共役が $A(\theta)$ という $2\times 2$ 行列の作用に化ける」理由であること
+  （`T_V_hatZ_hatY` / `def_T_V` / `V1_V2_in_Z_Y_epsilon`）。
+- その対応の核がスカラーちょうどであることが、「$V$ と $V'$ が定数倍を除いて一致する」の
+  構造的な意味であること（`V_eq_Vprime` / `T_V_eq_T_Vprime` / `centralizer_is_scalar`）。
+
+ノート冒頭に、(1) クリフォード代数はテンソル代数の商代数として定義されるため README 2 節の基準により
+厳密証明には含めない、(2) 本文の証明はこのノートに依存していない（本文は具体計算だけで自足）、
+の 2 点を明記してある。検証3種はすべて通過（notes 22 件・targets 29 件すべて解決）。
+
 ## 完了（2026-07-26）: 人手証明に残っていた未完（TODO）を全件解消 — **総括**
 
 本セッションのゴールは「`structured-latex/content/*.mjs` に残る未完を、証明完成か、
