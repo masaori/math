@@ -125,7 +125,7 @@ T2（未解決模型の実厳密解）は 11 cycle を通して新厳密解を�
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T1 Reframe | paper_plan_R_Lambda_duality | todo | | 11 cycle の蓄積(D-U2 決定可能命題, Mahler ℝ/岩澤 Λ 双対, 決定可能性非対称, Lehmer 地図)を `outputs/paper-plans/` に統合 paper-plan 化。基礎論/数論的構造ノートとして。 |
+| 1 | T1 Reframe | paper_plan_R_Lambda_duality | done | 2026-07-26 | `outputs/paper-plans/002_R_Lambda_duality.md` 新規作成。cycle 1–11 を統合（同一整数スペクトル曲線 P の二素点＝ℝ側 Mahler 測度/自由エネルギー と Λ側 Φ_L の素因数構造、決定可能性の非対称）。**既知/寄与を表で分離**: 両側とも既知理論（LSW, arXiv:2407.19531, Besser–Deninger, Deninger, arXiv:1702.03819, Ferrero–Washington, arXiv:2006.14012, Lehmer 1933, LTE/Pisano/SML）で、本プロジェクトの寄与は再框（(a) 二素点の辞書 (b) ℚ_p 不使用の可算化 (c) 決定可能命題群 A/B/C/N/L (d) 非対称の地図）。paper-plans/README.md の G1–G6 判定表を記載＝**G5 達成 / G1・G3 未達 / G2・G4・G6 評価不能（G1 前提ルール）/ 最終ゲート未取得 ⇒ 状態「据え置き」**。副次: 候補の値域外 `paper_potential: low-medium` を `low` へ是正、README「現在の plan」表に 002 行を追加。**新たに判明した積み残し**: 検証3ディレクトリ（cycle6_T1_padic_mahler, cycle3_T1_period_bound, cycle3_T3_period）に規約どおりの `README.md` が無く G3 を阻んでいる。選別基準 (iv) の軸リストに本企画の「メタ軸（可算化・決定可能性）」が無く 1本判定が文言どおり適用できない点も未決。 |
 | 2 | T2→T1 | reframe_onsager_ising_qqbar | todo | | T2 統合方針: 2D Ising Onsager 解の有限 N ℚ̄ 構造(docs/discussion 09 と連携)を可算 Reframe。既知解を可算・形式検証可能に。 |
 | 3 | T3 Pure | nonzero_mu_p_graph | todo | | 非自明 μ_p(グラフ岩澤, 全域木)の具体例を計算(cycle6/11 の μ_p=0 generic の外)。p 進エントロピー>0 の実例。 |
 | 4 | — | rank:cycle12 | todo | | 再ランク → cycle 13 方向。 |
