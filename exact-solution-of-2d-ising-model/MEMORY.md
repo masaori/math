@@ -396,3 +396,47 @@ $
 - 036: `A(theta_mu) = B_1 B_2 B_1` の行列分解 claim/proof
 - 037: `T_{V'}` の psi への作用 claim/proof（→ 005 で構造的問題が判明）
 - 038, 039: claim のみ（proof TODO）
+
+## 未完 TODO の根拠（005 行列空間の内積・ノルム・収束と ad 展開公式）
+
+### `exp_conjugation_proof_002_theorem_Ad_exp_lie`（一般 Lie 群上の $\mathrm{Ad}(\exp X)=\exp(\mathrm{ad}X)$）
+
+`todo()` を残した。根拠（一次情報）:
+
+- `grep -rn "Lie群\|リー群\|\\mathrm{Lie}" structured-latex/content/` の結果、ヒットは
+  `005_exp_conjugation_proof.mjs` 内の**この主張自身と、その直前の概要文だけ**である。
+  多様体・Lie 群・Lie 環・$\mathrm{Lie}(G)$・$\mathrm{Aut}(G)$ の Lie 群構造を
+  **定義したブロックはリポジトリに 1 件も存在しない**。すなわち主張の記号が意味をもつ土台が未整備で、
+  証明以前に statement が定義されていない状態である。
+- 原本 `_old/typst/parts/005_.../001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ` も
+  proof は `TODO:` のみで、移行漏れではない（`verify-no-lost-proofs.mjs` も同判定）。
+- **本論はこの一般版に依存しない。** 本プロジェクトで必要なのは行列環 $\mathrm{Mat}(n,K)$ 上の
+  $e^{X}Ye^{-X}=e^{\mathrm{ad}_X}(Y)$ だけであり、これは新規ブロック
+  `exp_conjugation_proof_010_theorem_matrix_exp_conjugation`（labels: `matrix_exp_conjugation`）で
+  **完全に証明済み**。その旨をこのブロックの statement 本文にも明記した。
+
+埋めるための条件: 多様体・Lie 群・Lie 環・指数写像の定義ブロックを整備し、
+$\mathrm{Aut}(G)$ が Lie 群で $\mathrm{End}(\mathfrak{g})$ がその Lie 環であることを示すこと。
+
+### 同章で完成させたもの（参考）
+
+- `exp_conjugation_proof_003_definition_M_n_C_convergence`（内積・ノルム・収束、TODO 3 件）→ 完成。
+  Frobenius 内積 $\langle A,B\rangle=\mathrm{tr}(A^{*}B)$ を新規定義（labels: `def_frobenius_inner_product`）。
+  ノルム・収束・完備性は 002 章で既に定義・証明済み（`def_matrix_norm` / `matrix_norm_triangle_inequality` /
+  `matrix_norm_submultiplicativity` / `matrix_completeness`）なので**重複定義せず参照で結んだ**。
+  非可算集合 $\mathbb{R}/\mathbb{C}$ の完備性へ移行する箇所を statement (5) で明示。
+- 新規 `exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms`（labels: `frobenius_inner_product_axioms`）:
+  Hermite 内積の公理・Cauchy--Schwarz・そこからの三角不等式を証明。
+- `exp_conjugation_proof_004_theorem_ad_binomial`（labels: `ad_binomial`）→ $m$ の帰納法で完成
+  （Pascal の法則を Step 1 で明示）。原本 note の「未証明につき使用禁止」は撤回した。
+- 新規 `exp_conjugation_proof_010_theorem_matrix_exp_conjugation`（labels: `matrix_exp_conjugation`）:
+  $\|Q_N-P_N\|\le 2\|Y\|E(a)R_{\lfloor N/2\rfloor}(a)\to 0$ という評価で、二重級数の一般論を使わずに証明。
+
+### 未着手の隣接 TODO（本タスクの担当範囲外）
+
+`exp_conjugation_proof_008_theorem_exp_ad_series`（labels: `brianhall_exc14`）と
+`exp_conjugation_proof_009_theorem_exp_conjugation_main`（labels: `brianhall_3.35`）の
+「未証明につき使用禁止」注記は残置。内容は `matrix_exp_conjugation` が包含するので、
+次はこの 2 件を `matrix_exp_conjugation` 参照で置き換えるか統合するのが自然。
+併せて `008_TV1_hatZ_hatY_part1.mjs` の `exp_X_Y_exp_-X`（proof が「暫定・一旦受け入れる」）も
+`matrix_exp_conjugation` を根拠に書き換えられる。
