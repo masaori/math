@@ -15,7 +15,7 @@ main.typ およびそこから include されている .typ ファイル中の T
 | [T\_V-diagonalization](T_V-diagonalization/) | 5 | T\_V の作用の証明完成 + 対角化の次ステップ | 未着手 |
 | [fermion-B13](fermion-B13/) | 3 | フェルミオン対角化と T\_(V) の指数関数表式 | WIP |
 | [fix\_arg\_interval](fix_arg_interval/) | 21 | arg の区間を (-π,π] → [0,2π) に統一 | WIP |
-| [free-energy-roadmap](free-energy-roadmap/) | 6章 | V=cV' から Onsager の自由エネルギー・熱力学極限までの章立て | 章 A 完了、章 B 以降 未着手 |
+| [free-energy-roadmap](free-energy-roadmap/) | 6章 | V=cV' から Onsager の自由エネルギー・熱力学極限までの章立て | 章 A・B・B2 完了、章 C 以降 未着手 |
 
 **合計: 50 タスク** (7 スコープ)
 
