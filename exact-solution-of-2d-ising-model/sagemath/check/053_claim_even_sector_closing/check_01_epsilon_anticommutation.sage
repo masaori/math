@@ -1,0 +1,48 @@
+# =========================================================================
+# check_01: epsilon_anticommutes_with_check_Z_Y
+#   (1) ε Z_j = −Z_j ε,  ε Y_j = −Y_j ε
+#   (2) ε Ž_μ = −Ž_μ ε,  ε Y̌_μ = −Y̌_μ ε
+#   (3) ε ψ̌_μ^† = −ψ̌_μ^† ε,  ε ψ̌_μ = −ψ̌_μ ε
+#   (4) ε ň_μ = ň_μ ε,  ε Q̌_ε = Q̌_ε ε
+#   対照: ε は σ^x_k とは可換、σ^y_k, σ^z_k とは反可換（010 章 Step 1）
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_01: ε と Ž, Y̌, ψ̌, ň, Q̌ の交換・反交換関係 ===")
+
+ok_all = True
+w1 = w2 = w3 = w4 = w4q = wpauli = 0
+
+for M in EIG_M:
+    O = SpinOps(M)
+    E = eps_op(O)
+    for k in range(1, M + 1):
+        wpauli = max(wpauli, opnorm(E * O.SX[k] - O.SX[k] * E))
+        wpauli = max(wpauli, opnorm(E * O.SY[k] + O.SY[k] * E))
+        wpauli = max(wpauli, opnorm(E * O.SZ[k] + O.SZ[k] * E))
+    for j in range(1, M + 1):
+        w1 = max(w1, opnorm(E * O.Z[j] + O.Z[j] * E))
+        w1 = max(w1, opnorm(E * O.Y[j] + O.Y[j] * E))
+    for p in EIG_PARAMS:
+        P = coeffs(p['K1'], p['K2'])
+        ns = n_check_all(O, P)
+        for mu in range(1, M + 1):
+            Zc = checkZ(O, mu); Yc = checkY(O, mu)
+            w2 = max(w2, opnorm(E * Zc + Zc * E), opnorm(E * Yc + Yc * E))
+            pdag, psi = psi_pair(O, mu, P)
+            w3 = max(w3, opnorm(E * pdag + pdag * E), opnorm(E * psi + psi * E))
+            w4 = max(w4, opnorm(E * ns[mu] - ns[mu] * E))
+        for e in eps_list(M):
+            Q = Q_check(O, e, ns)
+            w4q = max(w4q, opnorm(E * Q - Q * E))
+
+ok_all &= report("(0) ε σ^x_k = σ^x_k ε / ε σ^{y,z}_k = −σ^{y,z}_k ε", wpauli, TOL)
+ok_all &= report("(1) ε Z_j = −Z_j ε, ε Y_j = −Y_j ε", w1, TOL)
+ok_all &= report("(2) ε Ž_μ = −Ž_μ ε, ε Y̌_μ = −Y̌_μ ε", w2, TOL)
+ok_all &= report("(3) ε ψ̌_μ^† = −ψ̌_μ^† ε, ε ψ̌_μ = −ψ̌_μ ε", w3, TOL)
+ok_all &= report("(4a) ε ň_μ = ň_μ ε", w4, TOL)
+ok_all &= report("(4b) ε Q̌_ε = Q̌_ε ε", w4q, TOL)
+
+print("=== check_01: " + ("ALL PASS" if ok_all else "FAIL") + " ===")
