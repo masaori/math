@@ -65,7 +65,7 @@ export default defineBlocks([
         " 以降の章では、鎖の長さが ",
         math(String.raw`M`),
         " と書かれている（",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         "、",
         math(String.raw`\sigma_1^z\sigma_2^z + \cdots + \sigma_M^z\sigma_1^z`),
         "）。すなわち **001 章の ",
@@ -147,6 +147,7 @@ export default defineBlocks([
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "M と N の役割の対応は、001 章の V_1 が同一の μ の隣接成分を結び、004 章の V_1 が同一鎖の隣接サイトを結ぶ、という一次情報から確定させた。数値でも Z の直接和と tr((V_1V_2)^{N_row}) が K_1 = J'、K_2 = J のときに一致することを確認済み（sagemath/check/043_claim_transfer_matrix_bridge/check_04_partition_function.sage）。",
       ],
     },
@@ -171,7 +172,7 @@ export default defineBlocks([
         " の多重添字 ",
         math(String.raw`\mathcal{I} = \{1,2\}^M`),
         "・基底 ",
-        math(String.raw`f_I = e_{i_1}\otimes\cdots\otimes e_{i_M} \in \mathcal{F} = \mathbb{C}^{2^M}`),
+        math(String.raw`f_I = e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathcal{F} = \mathbb{C}^{2^M}`),
         " について、写像 ",
         math(String.raw`\iota : \mathfrak{M} \to \mathcal{I}`),
         " を",
@@ -214,7 +215,12 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         "と読む。取り方に依らないと述べられているので、この選択で一般性を失わない。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -276,7 +282,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
       paragraph([
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\sigma_m^z = I \otimes\cdots\otimes \sigma^z \otimes\cdots\otimes I`),
+        math(String.raw`\sigma_m^z = I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I`),
         "（第 ",
         math(String.raw`m`),
         " 因子だけが ",
@@ -288,12 +294,12 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
       displayMath(
         String.raw`\begin{aligned}
 \sigma_m^z\, f_{\iota(\mu)}
-&= \left(I \otimes\cdots\otimes \sigma^z \otimes\cdots\otimes I\right)
-   \left(e_{i_1}\otimes\cdots\otimes e_{i_m}\otimes\cdots\otimes e_{i_M}\right) \\
-&= (I e_{i_1})\otimes\cdots\otimes(\sigma^z e_{i_m})\otimes\cdots\otimes(I e_{i_M})
+&= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
+   \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_M}\right) \\
+&= (I e_{i_1})\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes(I e_{i_M})
    \quad (\because \text{クロネッカー積の積の規則}) \\
-&= e_{i_1}\otimes\cdots\otimes\left(\mu(m)e_{i_m}\right)\otimes\cdots\otimes e_{i_M} \\
-&= \mu(m)\,\left(e_{i_1}\otimes\cdots\otimes e_{i_M}\right)
+&= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_M} \\
+&= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)
    \quad (\because \text{クロネッカー積の多重線型性}) \\
 &= \mu(m)\, f_{\iota(\mu)}
 \end{aligned}`,
@@ -313,7 +319,12 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " に関して対角行列である。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -777,7 +788,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
       displayMath(
         String.raw`\exp\!\left(\sum_{m=1}^{M} K_2\,\mu(m)\mu'(m)\right)
 = \prod_{m=1}^{M} A_{i_m j_m}
-= \left(\underbrace{A \otimes \cdots \otimes A}_{M}\right)_{\iota(\mu),\iota(\mu')}`,
+= \left(\underbrace{A \boxtimes \cdots \boxtimes A}_{M}\right)_{\iota(\mu),\iota(\mu')}`,
       ),
       paragraph([
         "最後の等号は ",
@@ -798,11 +809,11 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
         " 個の因子から前へ出せて",
       ]),
       displayMath(
-        String.raw`\underbrace{A \otimes \cdots \otimes A}_{M}
+        String.raw`\underbrace{A \boxtimes \cdots \boxtimes A}_{M}
 = \left((2s_2)^{1/2}\right)^{M}
-  \underbrace{\exp(K_2^*\sigma^x) \otimes \cdots \otimes \exp(K_2^*\sigma^x)}_{M}
+  \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M}
 = (2s_2)^{M/2}\,
-  \underbrace{\exp(K_2^*\sigma^x) \otimes \cdots \otimes \exp(K_2^*\sigma^x)}_{M}`,
+  \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M}`,
       ),
       paragraph([
         "Step 3（1 因子の ",
@@ -814,7 +825,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
         " を固定する。",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\sigma_m^x = I\otimes\cdots\otimes\sigma^x\otimes\cdots\otimes I`),
+        math(String.raw`\sigma_m^x = I\boxtimes\cdots\boxtimes\sigma^x\boxtimes\cdots\boxtimes I`),
         "（第 ",
         math(String.raw`m`),
         " 因子だけが ",
@@ -827,7 +838,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
       ]),
       displayMath(
         String.raw`(\sigma_m^x)^{p}
-= I\otimes\cdots\otimes(\sigma^x)^{p}\otimes\cdots\otimes I`,
+= I\boxtimes\cdots\boxtimes(\sigma^x)^{p}\boxtimes\cdots\boxtimes I`,
       ),
       paragraph([
         "であり（",
@@ -846,7 +857,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
       ]),
       displayMath(
         String.raw`\exp\!\left(K_2^*\sigma_m^x\right)
-= I\otimes\cdots\otimes\exp\!\left(K_2^*\sigma^x\right)\otimes\cdots\otimes I`,
+= I\boxtimes\cdots\boxtimes\exp\!\left(K_2^*\sigma^x\right)\boxtimes\cdots\boxtimes I`,
       ),
       paragraph([
         "Step 4（積にまとめる）。相異なる ",
@@ -888,13 +899,13 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
       ]),
       displayMath(
         String.raw`\prod_{m=1}^{M}\exp\!\left(K_2^*\sigma_m^x\right)
-= \underbrace{\exp(K_2^*\sigma^x)\otimes\cdots\otimes\exp(K_2^*\sigma^x)}_{M}`,
+= \underbrace{\exp(K_2^*\sigma^x)\boxtimes\cdots\boxtimes\exp(K_2^*\sigma^x)}_{M}`,
       ),
       paragraph([
         "Step 5（結論）。Step 2 と Step 4 を合わせると",
       ]),
       displayMath(
-        String.raw`\underbrace{A \otimes \cdots \otimes A}_{M}
+        String.raw`\underbrace{A \boxtimes \cdots \boxtimes A}_{M}
 = (2s_2)^{M/2}\exp\!\left(K_2^*\sum_{m=1}^{M}\sigma_m^x\right)`,
       ),
       paragraph([
@@ -906,6 +917,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "M=2,3,4 と複数の K_2 について、成分定義の V_2 とパウリ表示の V_2 が残差 1e-14 以下で一致することを確認した（sagemath/check/043_claim_transfer_matrix_bridge/check_02_V2_bridge.sage）。2×2 の恒等式も同ファイルで確認している。",
       ],
     },
@@ -942,7 +954,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
         " と読み替える）は、",
         ref("def_transfer_matrix_symbols"),
         " のパウリ行列表示の ",
-        math(String.raw`V_1, V_2 \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`V_1, V_2 \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を用いて",
       ]),
       displayMath(
@@ -1003,6 +1015,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "Z の定義（スピン配置についての直接和）と tr((V_1V_2)^{N_row}) が、K_1 = J'、K_2 = J のもとで一致することを N_row, M = 2,3 の全 4 組・複数の (K_1,K_2) について数値確認した（sagemath/check/043_claim_transfer_matrix_bridge/check_04_partition_function.sage）。これは 001 章の主張の再確認も兼ねる。",
       ],
     },
@@ -1019,20 +1032,25 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
       paragraph([
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について（複号同順）",
       ]),
       displayMath(
         String.raw`P^{(\pm)} := \tfrac{1}{2}\left(I \pm \varepsilon\right)
-\in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "と定める。ここで ",
-        math(String.raw`I := I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         " である。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -1194,7 +1212,7 @@ P^{(+)}P^{(-)}
         math(String.raw`\sigma^z\sigma^x = -\sigma^x\sigma^z`),
         "、",
         math(String.raw`\sigma^y\sigma^x = -\sigma^x\sigma^y`),
-        "。相異なるテンソル因子どうしは可換（",
+        "。相異なるサイトに置かれた因子どうしは可換（",
         ref("kronecker_product_rule"),
         " (1)）なので、",
         math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
@@ -1490,7 +1508,7 @@ P^{(+)}P^{(-)}
         " と ",
         ref("trace_basic_properties"),
         " (1) の線型性より、任意の ",
-        math(String.raw`X \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について",
       ]),
       displayMath(
@@ -1599,6 +1617,7 @@ P^{(+)}P^{(-)}
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "N_row = 2,3 と M = 2,3,4、複数の (K_1,K_2) について、tr((V_1V_2)^{N_row}) と右辺のセクター和が相対誤差 2e-15 以下で一致することを確認した（sagemath/check/043_claim_transfer_matrix_bridge/check_05_sector_decomposition.sage）。",
         "この主張は docs/tasks/free-energy-roadmap の章 C（最大固有値）の直接の入口になる。eigenvalues_of_V の Λ_ε をここへ代入すればよい。",
       ],
