@@ -1,5 +1,20 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26）: 複素数の平方根の極座標表示（計算公式 039）の証明を追加
+
+`structured-latex/content/000_calculation_formulae_30_44.mjs` の
+`calculation_formulae_039_claim_sqrt_expansion_via_polar`（原文も TODO のままだったもの）に証明を付けた。
+
+- 複素数の平方根はリポジトリ内で **主値等の分枝選択ではなく明示式で定義**されている
+  （`calculation_formulae_038_definition_sqrt_of_complex_number`、新ラベル `def_sqrt_cc`）。
+  すなわち偏角の切断 $s_{[0,2\pi)}$ を半分にしたもの。したがって本主張は「2乗して戻る根の選択」ではなく、
+  **定義式の $\mathrm{pr}_1,\mathrm{pr}_2,s_{[0,2\pi)}$ を代表元で書き下しただけ**の等式である。
+- 証明の構成: (1) $0\le\theta-2n\pi<2\pi$ なる $n\in\mathbb{Z}$ の存在と一意性
+  （$\mathbb{R}$ のアルキメデス性から。角度表現の切断の定義が「証明略」としていた事実をここで証明した）、
+  (2) 右辺の代表元非依存性、(3) $r\ne0$ の場合、(4) $r=0$ の場合（$\mathrm{pr}_2$ が $[0]$ を返す規約が効く）。
+- 参照のために新ラベルを 3 件追加: `def_sqrt_cc`、`def_phi_cartesian`、`section_of_angle_representation`。
+  本主張自体にも `sqrt_expansion_via_polar` を付け、`041_claim_sqrt_squared_is_original` の証明から参照させた。
+
 ## 完了（2026-07-25）: データモデルの穴を塞いだ（本文ブロックは注記欄を持てない）
 
 ノート分離の狙いは「最終成果物は content のみから生成するので、ノートは構造上混入しない」こと。
