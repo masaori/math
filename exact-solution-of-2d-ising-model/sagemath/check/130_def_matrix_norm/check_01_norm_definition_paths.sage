@@ -1,0 +1,40 @@
+# ---------------------------------------------------------
+# <def_matrix_norm> のノルムが「定義どおりの量」であることを、独立な 4 経路で突き合わせる。
+#
+#   (a) 定義そのまま: sqrt(Σ_{i,j} |a_ij|^2) を素の二重ループで
+#   (b) numpy.linalg.norm（既定の Frobenius ノルム）
+#   (c) sqrt(tr(A^* A))   … <def_frobenius_inner_product> 側の定義
+#   (d) sqrt(Σ σ_k^2)     … 特異値分解（(a)-(c) とは全く別のアルゴリズム）
+#
+# 同語反復を避けるため、(a) 以外は「定義式を書き写したもの」ではない経路を選んである。
+# ベクトルのノルムについても (a) 定義 vs (b) numpy を突き合わせる。
+#
+# 対象: structured-latex def_matrix_norm
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '../../_shared/operators.sage'))
+load(os.path.join(_dir, '_prelude.sage'))
+
+rep = CheckReport("def_matrix_norm: ノルムの値を 4 経路で突き合わせる")
+
+mats = test_matrices(n_random=8, n=5, scale=2.0)
+print("試験行列: %d 個（乱数 + 退化行列 + Ising 作用素）" % len(mats))
+
+for name, A in mats:
+    a = fro_naive(A)
+    rep.close(a, fro(A), "‖A‖ 定義 vs numpy: %s" % name)
+    rep.close(a, fro_trace(A), "‖A‖ 定義 vs sqrt(tr(A^*A)): %s" % name)
+    rep.close(a, fro_svd(A), "‖A‖ 定義 vs 特異値: %s" % name)
+
+# ベクトルのノルム
+for k in range(6):
+    w = rand_vec(5, 2000 + k, 1.5)
+    rep.close(vec_norm(w), fro_naive(w), "‖w‖ numpy vs 定義 #%d" % k)
+
+# スケールが極端な場合（丸めが効く場所）でも定義と一致するか
+for e in [-8, -4, 0, 4, 8]:
+    A = rand_mat(4, 3001 + e, 10.0 ** e)
+    rep.close(fro_naive(A), fro(A), "‖A‖ 定義 vs numpy（scale=1e%d）" % e)
+
+rep.finish()
