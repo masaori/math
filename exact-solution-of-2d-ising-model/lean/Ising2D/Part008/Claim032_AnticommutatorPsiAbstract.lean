@@ -14,7 +14,7 @@
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **抽象版** | `acomm_lincomb_clifford`, `car_of_coeffs` | ℂ-代数の 4 元 `z, y, z', y'` の反交換関係 `[z,z']₊ = D·1`, `[z,y']₊ = 0`, `[y,z']₊ = 0`, `[y,y']₊ = D·1` と、係数のスカラー恒等式 2 本**だけ**。行列であることも `hat(Z)`, `hat(Y)` の具体形も、`M`・`δ^M`・`γ_2` も使わない |
+| **抽象版** | `Abstract.acomm_lincomb_clifford`, `Abstract.car_of_coeffs` | ℂ-代数の 4 元 `z, y, z', y'` の反交換関係 `[z,z']₊ = D·1`, `[z,y']₊ = 0`, `[y,z']₊ = 0`, `[y,y']₊ = D·1` と、係数のスカラー恒等式 2 本**だけ**。行列であることも `hat(Z)`, `hat(Y)` の具体形も、`M`・`δ^M`・`γ_2` も使わない |
 | **具体版** | `Definition030_Fermi.lean` の 3 定理。本ファイルの `acomm_psi_relations_of_car` はそれと同じ主張を**抽象版の系として**導いたもの | 上に `z = hat(Z)_μ^{(-)}`, `y = hat(Y)_μ`, `D = 2Mδ^M_{μ+ν,0}`, `p = i t_μ/(2√M γ_2(-θ_μ))`, `q = 1/(2√M)` を代入 |
 
 抽象版が明らかにしているのは「**この主張に効いているのは反交換関係と係数の 2 本の恒等式だけ**」
@@ -41,59 +41,18 @@
 **原文が誤っているわけではない**（statement に分枝の指定が無い、という穴である）。
 -/
 import Ising2D.Part008.Definition030_Fermi
+import Ising2D.Abstract.Fermion
 
 namespace Ising2D
-
-/-! ## 抽象版 -/
-
-section Abstract
-
-variable {A : Type*} [Ring A] [Algebra ℂ A]
-
-/-- **抽象版の本体**（人手証明 `anticommutator_of_psi` の a), b), c) の計算はすべてこれ 1 本）。
-
-`z, y, z', y'` が `[z, z']₊ = D·1`, `[z, y']₊ = 0`, `[y, z']₊ = 0`, `[y, y']₊ = D·1`
-を満たすとき、線型結合どうしの反交換子は `((p p' + q q')·D)·1`。 -/
-theorem acomm_lincomb_clifford (p q p' q' D : ℂ) (z y z' y' : A)
-    (hzz : acomm z z' = D • (1 : A)) (hzy : acomm z y' = 0)
-    (hyz : acomm y z' = 0) (hyy : acomm y y' = D • (1 : A)) :
-    acomm (p • z + q • y) (p' • z' + q' • y') = ((p * p' + q * q') * D) • (1 : A) := by
-  rw [acomm_lin2, hzz, hzy, hyz, hyy, smul_zero, smul_zero, add_zero, add_zero,
-    smul_smul, smul_smul, ← add_smul]
-  congr 1
-  ring
-
-/-- **抽象版の CAR（正準反交換関係）**。
-
-`ψ^†` にあたるのが `p·z + q·y`、`ψ` にあたるのが `(-p)·z + q·y`
-（原文 `def_fermi` の `±i√(γ_2(θ_μ)γ_2(-θ_μ))` が第 1 係数の符号反転にあたる）。
-
-必要な仮定は反交換関係のほかには**係数のスカラー恒等式 2 本だけ**である。 -/
-theorem car_of_coeffs (p q p' q' D δ : ℂ) (z y z' y' : A)
-    (hzz : acomm z z' = D • (1 : A)) (hzy : acomm z y' = 0)
-    (hyz : acomm y z' = 0) (hyy : acomm y y' = D • (1 : A))
-    (hzero : (p * p' + q * q') * D = 0)
-    (hone : (-(p * p') + q * q') * D = δ) :
-    acomm (p • z + q • y) (p' • z' + q' • y') = 0
-      ∧ acomm (p • z + q • y) ((-p') • z' + q' • y') = δ • (1 : A)
-      ∧ acomm ((-p) • z + q • y) ((-p') • z' + q' • y') = 0 := by
-  refine ⟨?_, ?_, ?_⟩
-  · rw [acomm_lincomb_clifford p q p' q' D z y z' y' hzz hzy hyz hyy, hzero, zero_smul]
-  · rw [acomm_lincomb_clifford p q (-p') q' D z y z' y' hzz hzy hyz hyy]
-    rw [show (p * -p' + q * q') * D = (-(p * p') + q * q') * D by ring, hone]
-  · rw [acomm_lincomb_clifford (-p) q (-p') q' D z y z' y' hzz hzy hyz hyy]
-    rw [show (-p * -p' + q * q') * D = (p * p' + q * q') * D by ring, hzero, zero_smul]
-
-end Abstract
 
 /-! ## 具体版が抽象版の特殊化であることの確認 -/
 
 /-- `Definition030_Fermi.lean` の `acomm_hatZMinus_hatY_lin2` は
-抽象版 `acomm_lincomb_clifford` に `Part007` の 4 つの反交換関係を代入しただけである。 -/
+抽象版 `Abstract.acomm_lincomb_clifford` に `Part007` の 4 つの反交換関係を代入しただけである。 -/
 theorem acomm_hatZMinus_hatY_lin2_of_abstract {M : ℕ} (hM : M ≠ 0) (a b c d : ℂ) (μ ν : ℤ) :
     acomm (a • hatZMinus M μ + b • hatY M μ) (c • hatZMinus M ν + d • hatY M ν)
       = ((a * c + b * d) * (2 * (M : ℂ) * deltaMod M (μ + ν) 0)) • (1 : TensorPow M) :=
-  acomm_lincomb_clifford a b c d (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
+  Abstract.acomm_lincomb_clifford a b c d (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
     (acomm_hatZMinus_hatZMinus hM μ ν)
     (acomm_hatZ_hatY (M := M) 1 μ ν)
     (acomm_hatY_hatZ (M := M) 1 μ ν)
@@ -157,7 +116,7 @@ theorem psi_coeff_identities (hM : M ≠ 0)
   · have hδ : deltaMod M (μ + ν) 0 = 0 := by simp [deltaMod, sub_zero, hd]
     constructor <;> rw [hδ] <;> ring
 
-/-- **原文 `anticommutator_of_psi` の 3 式を、抽象版 `car_of_coeffs` の系として導いたもの。**
+/-- **原文 `anticommutator_of_psi` の 3 式を、抽象版 `Abstract.car_of_coeffs` の系として導いたもの。**
 
 `Definition030_Fermi.lean` の `acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`
 と同じ主張であり、**具体版が抽象版の特殊化で得られる**ことを示している
@@ -171,7 +130,7 @@ theorem acomm_psi_relations_of_car (hM : M ≠ 0)
           = deltaMod M (μ + ν) 0 • (1 : TensorPow M)
       ∧ acomm (psi K M μ tμ) (psi K M ν tν) = 0 := by
   obtain ⟨hzero, hone⟩ := psi_coeff_identities K μ ν tμ tν hM htμ hgμ hbr
-  have h := car_of_coeffs
+  have h := Abstract.car_of_coeffs
     (Complex.I * tμ / (2 * sqrtM M * gamma2 K (-thetaMu M μ))) ((1 : ℂ) / (2 * sqrtM M))
     (Complex.I * tν / (2 * sqrtM M * gamma2 K (-thetaMu M ν))) ((1 : ℂ) / (2 * sqrtM M))
     (2 * (M : ℂ) * deltaMod M (μ + ν) 0) (deltaMod M (μ + ν) 0)
@@ -213,7 +172,7 @@ theorem acomm_psiDag_psiDag_of_opposite_branch (hM : M ≠ 0)
     rw [div_mul_div_comm, show (2 * sqrtM M) * (2 * sqrtM M) = 4 * sqrtM M ^ 2 by ring, hsq]
     norm_num
   rw [psiDag_eq K M μ tμ, psiDag_eq K M ν tν,
-    acomm_lincomb_clifford _ _ _ _ (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
+    Abstract.acomm_lincomb_clifford _ _ _ _ (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
       (acomm_hatZMinus_hatZMinus hM μ ν)
       (acomm_hatZ_hatY (M := M) 1 μ ν)
       (acomm_hatY_hatZ (M := M) 1 μ ν)
@@ -252,7 +211,7 @@ theorem acomm_psiDag_psi_of_opposite_branch (hM : M ≠ 0)
     rw [div_mul_div_comm, show (2 * sqrtM M) * (2 * sqrtM M) = 4 * sqrtM M ^ 2 by ring, hsq]
     norm_num
   rw [psiDag_eq K M μ tμ, psi_eq_neg_coeff K ν tν,
-    acomm_lincomb_clifford _ _ _ _ (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
+    Abstract.acomm_lincomb_clifford _ _ _ _ (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
       (acomm_hatZMinus_hatZMinus hM μ ν)
       (acomm_hatZ_hatY (M := M) 1 μ ν)
       (acomm_hatY_hatZ (M := M) 1 μ ν)

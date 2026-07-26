@@ -118,4 +118,54 @@ theorem matrix_commutator_via_anticommutators (a b c : Matrix n n ℂ) :
 
 end Matrix
 
+/-! ## 原文と 1 対 1 に対応する具体版（複素行列）
+
+`exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、上の抽象版
+（任意の環 `R`）とは別に、**人手証明 `<commutator_via_anticommutators>` と 1 対 1 に
+対応する形**をここで立てる。原文は
+
+> `n ∈ ℤ_{≥1}`、`a, b, c ∈ Mat(n, ℂ)`、
+> `[x, y] := x y - y x`、`[x, y]₊ := x y + y x` とするとき
+> `[a b, c] = a [b, c]₊ - [a, c]₊ b`
+
+であり、`Mat(n, ℂ)` は `Matrix (Fin n) (Fin n) ℂ` である。
+交換子・反交換子も、原文と同じく**複素行列に対する演算として**定義し直す
+（抽象版の `acomm` は任意の環の上の演算なので、記法としては原文と一致しない）。
+
+仮定 `1 ≤ n` は**証明では使わない**。抽象版から分かるとおりこの恒等式は分配法則と
+結合法則だけで従うので、`n = 0`（自明な零環）でも成り立つ。原文との対応を明示するために
+引数としては残してある。 -/
+section ConcreteMatrix
+
+variable {n : ℕ}
+
+/-- 原文の交換子 `[x, y] := x y - y x`（複素行列に対する演算として定義）。 -/
+def matComm (x y : Matrix (Fin n) (Fin n) ℂ) : Matrix (Fin n) (Fin n) ℂ := x * y - y * x
+
+/-- 原文の反交換子 `[x, y]₊ := x y + y x`（複素行列に対する演算として定義）。 -/
+def matAcomm (x y : Matrix (Fin n) (Fin n) ℂ) : Matrix (Fin n) (Fin n) ℂ := x * y + y * x
+
+@[simp]
+theorem matComm_def (x y : Matrix (Fin n) (Fin n) ℂ) : matComm x y = x * y - y * x := rfl
+
+@[simp]
+theorem matAcomm_def (x y : Matrix (Fin n) (Fin n) ℂ) : matAcomm x y = x * y + y * x := rfl
+
+/-- 複素行列に対する交換子・反交換子が、抽象版の対応物と一致すること
+（具体版を抽象版の特殊化として導くための橋渡し）。 -/
+theorem matAcomm_eq_acomm (x y : Matrix (Fin n) (Fin n) ℂ) : matAcomm x y = acomm x y := rfl
+
+/-- **`<commutator_via_anticommutators>` の具体版（原文と 1 対 1 に対応する形）**:
+`n ∈ ℤ_{≥1}`、`a, b, c ∈ Mat(n, ℂ)` について `[a b, c] = a [b, c]₊ - [a, c]₊ b`。
+
+証明は抽象版 `commutator_via_anticommutators` を `R := Matrix (Fin n) (Fin n) ℂ` へ
+特殊化するだけである。 -/
+theorem matComm_mul_eq_matAcomm_sub_matAcomm (_hn : 1 ≤ n)
+    (a b c : Matrix (Fin n) (Fin n) ℂ) :
+    matComm (a * b) c = a * matAcomm b c - matAcomm a c * b := by
+  rw [matComm_def, matAcomm_eq_acomm, matAcomm_eq_acomm]
+  exact commutator_via_anticommutators a b c
+
+end ConcreteMatrix
+
 end Ising2D
