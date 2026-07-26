@@ -203,6 +203,34 @@ export type LabelsOf<
 /** 重複があればエラーになる制約（`never` を要求する）。 */
 export type AssertNoDuplicate<D extends never> = D;
 
+/** 条件が満たされないとエラーになる制約（`true` を要求する）。 */
+export type Assert<T extends true> = T;
+
+/**
+ * 数値リテラル型が「正の整数」か。
+ * TypeScript に整数型・数値範囲型は無いが、数値リテラル型は
+ * テンプレートリテラル型で文字列化して判定できる（小数点・負符号・0 を弾く）。
+ */
+type PositiveIntegerString<S extends string> = S extends `${string}.${string}`
+  ? never
+  : S extends `-${string}`
+    ? never
+    : S extends "0" | "NaN" | "Infinity"
+      ? never
+      : S;
+
+type BadOrdinal<T extends readonly { sourceOrdinal: number }[]> = {
+  [K in keyof T]: `${T[K]["sourceOrdinal"]}` extends PositiveIntegerString<
+    `${T[K]["sourceOrdinal"]}`
+  >
+    ? never
+    : { __sourceOrdinalが正の整数でない: T[K]["sourceOrdinal"] };
+}[number];
+
+type AssertOrdinals<T extends readonly ConvertedBlock[]> = [BadOrdinal<T>] extends [never]
+  ? unknown
+  : BadOrdinal<T>;
+
 type DuplicateBlockId<T extends readonly ConvertedBlock[]> =
   FindDuplicate<BlockIdsOf<T>> extends never
     ? unknown
@@ -227,7 +255,7 @@ type DuplicateNoteId<T extends readonly Note[]> =
  * （parts/ のファイル名連番と `#include` 順は一致しないため）。
  */
 export function defineBlocks<const T extends readonly ConvertedBlock[]>(
-  blocks: T & readonly ConvertedBlock[] & DuplicateBlockId<T> & DuplicateLabel<T>,
+  blocks: T & readonly ConvertedBlock[] & DuplicateBlockId<T> & DuplicateLabel<T> & AssertOrdinals<T>,
 ): T {
   if (!Array.isArray(blocks)) {
     throw new TypeError("defineBlocks expects an array");
@@ -328,6 +356,9 @@ const BLOCK_KEYS = new Set([
 
 const NOTE_KEYS = new Set(["id", "targets", "title", "sourcePath", "body"]);
 
+/** `conversion.status` に許される値（型の `ConversionStatus` と同じ集合）。 */
+const CONVERSION_STATUSES = new Set<string>(["converted", "added"] satisfies ConversionStatus[]);
+
 function assertNoUnknownKeys(value: object, allowed: ReadonlySet<string>, path: string): void {
   const unknown = Object.keys(value).filter((key) => !allowed.has(key));
   if (unknown.length > 0) {
@@ -359,6 +390,12 @@ export function validateBlock(block: ConvertedBlock): void {
   if (block.conversion !== undefined) {
     assertObject(block.conversion, `${block.id}.conversion`);
     assertString(block.conversion.status, `${block.id}.conversion.status`);
+    // 値域は型でも縛っているが、型を迂回した値のためにここでも見る。
+    if (!CONVERSION_STATUSES.has(block.conversion.status)) {
+      throw new Error(
+        `${block.id}.conversion.status must be one of ${[...CONVERSION_STATUSES].join(", ")}`,
+      );
+    }
     // conversion.notes は文字列の配列。文字列を直接書く誤りをここで捕まえる
     // （ビューア側の Zod は弾くが、こちらが素通しすると検証が二重基準になる）。
     if (block.conversion.notes !== undefined) {
@@ -446,8 +483,15 @@ function validateHeadingBlock(block: HeadingBlock): void {
 
 function validateTitle(title: TitleContent, path: string): void {
   assertObject(title, path);
-  if (title.text !== undefined) assertString(title.text, `${path}.text`);
-  if (title.tex !== undefined) assertString(title.tex, `${path}.tex`);
+  const text = (title as { text?: unknown }).text;
+  const tex = (title as { tex?: unknown }).tex;
+  if (text !== undefined) assertString(text, `${path}.text`);
+  if (tex !== undefined) assertString(tex, `${path}.tex`);
+  // 「text か tex の少なくとも一方」は型でも縛っているが、見出しに限らず全ブロック・
+  // ノートで成り立つべき条件なので、実行時にも同じ基準で見る。
+  if (text === undefined && tex === undefined) {
+    throw new TypeError(`${path} must have text or tex`);
+  }
 }
 
 export function validateNodes(nodes: readonly Node[], path: string): void {

@@ -29,7 +29,15 @@
 SageMath の overview.md との対応（Markdown 解析）、生成物とディレクトリ一覧の一致（FS 列挙）。
 
 生成ツールは `tools/generate-index.ts`（旧 generate-labels.ts）に統合。
-検査は `npm run check`（生成物の鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト16 → 実行時テスト7）。
+**レビュー指摘で追加・訂正した点**:
+- `sourceOrdinal` の整数性は「型で不可能」と書いていたが**誤り**。数値リテラル型を
+  テンプレートリテラル型で文字列化すれば判定でき、型へ移した（2.5 / -3 / 0 が落ちる）。
+- `document.generated.ts` が tsconfig の include から落ちると検査が無音で全滅する穴を二重に封鎖
+  （型テストからの型 import ＋ generate-index による include 検査）。
+- 制約の無い `A extends B ? true : never` は何も検査しない（`Assert<T extends true>` へ修正）。
+- 実行時側の非対称（status の値域・タイトルの text|tex・ノートのタイトルの Typst 記法）も解消。
+
+検査は `npm run check`（生成物の鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト18 → 実行時テスト10。約 2.5 分）。
 
 ## 完了（2026-07-26・追補4）: ソース形式を TypeScript に完全統一（`.mjs` を全廃）
 

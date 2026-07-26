@@ -77,7 +77,14 @@ for (const { file, notes } of noteFiles) {
     for (const target of note.targets) {
       noteTargets.push({ target, noteId: note.id, file });
     }
-    scanForTypstMathInNodes(note.body ?? [], `${file}:${note.id}`);
+    // ノートのタイトルの tex も KaTeX へ渡るので、本文と同じ規約で検査する
+    // （ブロック側は scanForTypstMath が見ている。ここが抜けていた）。
+    const noteTitle = note.title;
+    const noteStrings: Node[] = [...(note.body ?? [])];
+    scanForTypstMathInNodes(noteStrings, `${file}:${note.id}`);
+    if (noteTitle !== null && noteTitle !== undefined && noteTitle.tex !== undefined) {
+      assertNoTypstToken([noteTitle.tex], `${file}:${note.id}.title`);
+    }
     walkRefs(note.body ?? [], note.id, file, refs);
   }
 }

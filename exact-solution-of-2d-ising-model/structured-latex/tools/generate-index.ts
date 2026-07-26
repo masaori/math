@@ -84,6 +84,19 @@ const outputs: { path: string; rendered: string; what: string }[] = [
   },
 ];
 
+// 生成物が tsconfig の検査対象に入っていること。
+// document.generated.ts は誰からも import されないため、include から外れると
+// ファイル跨ぎの検査が**無音で全滅する**（実際に一度その状態になった）。
+const tsconfigSource = readFileSync(join(structuredLatexDir, "tsconfig.json"), "utf8");
+for (const required of ["labels.generated.ts", "document.generated.ts"]) {
+  if (!tsconfigSource.includes(`"${required}"`)) {
+    throw new Error(
+      `tsconfig.json の include に ${required} が無い` +
+        "（生成物が型検査の対象から外れると、検査が無音で無効になる）",
+    );
+  }
+}
+
 if (checkOnly) {
   for (const output of outputs) {
     let current: string | null = null;
@@ -153,6 +166,7 @@ function renderDocument(content: readonly string[], notes: readonly string[]): s
 
 import type { Label } from "./labels.generated.ts";
 import type {
+  Assert,
   AssertNoDuplicate,
   BlockIdsOf,
   ConvertedBlock,
@@ -178,12 +192,16 @@ type AllBlockIds = BlockIdsOf<AllBlocks>;
 type AllNoteIds = NoteIdsOf<AllNotes>;
 type AllLabels = LabelsOf<AllBlocks>;
 
-/** 型が壊れていないことの確認（ここが落ちたら生成物か schema の不整合）。 */
-export type _BlocksAreBlocks = AllBlocks extends readonly ConvertedBlock[] ? true : never;
-export type _NotesAreNotes = AllNotes extends readonly Note[] ? true : never;
+/**
+ * 型が壊れていないことの確認（ここが落ちたら生成物か schema の不整合）。
+ * Assert<T extends true> の制約で包む。制約なしの "A extends B ? true : never" だと
+ * 条件が偽でも「never という別名が定義されるだけ」でエラーにならない（実測）。
+ */
+export type _BlocksAreBlocks = Assert<AllBlocks extends readonly ConvertedBlock[] ? true : never>;
+export type _NotesAreNotes = Assert<AllNotes extends readonly Note[] ? true : never>;
 
 /** content が空でないこと（空なら「ブロック 0 件で検証通過」という無意味な状態になる）。 */
-export type _ContentIsNotEmpty = AllBlocks extends readonly [] ? never : true;
+export type _ContentIsNotEmpty = Assert<AllBlocks extends readonly [] ? never : true>;
 
 /** ブロック id・ノート id・ラベルは文書全体で一意。重複するとその値が型エラーに出る。 */
 export type _UniqueBlockIds = AssertNoDuplicate<FindDuplicate<AllBlockIds>>;

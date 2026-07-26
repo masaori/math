@@ -14,7 +14,7 @@
  * 使い方: node tools/negative-type-test.ts
  */
 
-import { spawnSync } from "node:child_process";
+import { execFile } from "node:child_process";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -55,7 +55,7 @@ const block = (options: {
   },`;
 
 const blocksModule = (body: string, imports = "defineBlocks, paragraph, ref"): string =>
-  `import { ${imports} } from "../../schema.ts";
+  `import { ${imports} } from "../../../schema.ts";
 
 export default defineBlocks([
 ${body}
@@ -63,7 +63,7 @@ ${body}
 `;
 
 const noteModule = (body: string): string =>
-  `import { defineNotes, paragraph } from "../../schema.ts";
+  `import { defineNotes, paragraph } from "../../../schema.ts";
 
 void paragraph;
 
@@ -79,7 +79,7 @@ const aggregatorModule = (): string => `import type {
   FindDuplicate,
   LabelsOf,
   NoteIdsOf,
-} from "../../schema.ts";
+} from "../../../schema.ts";
 import blocksA from "./a.ts";
 import blocksB from "./b.ts";
 import notesC from "./c.ts";
@@ -208,7 +208,7 @@ const cases: Case[] = [
     name: "見出しブロックが本文を持つ",
     expect: "statement",
     files: (broken) => ({
-      "fixture.ts": `import { defineBlocks, paragraph } from "../../schema.ts";
+      "fixture.ts": `import { defineBlocks, paragraph } from "../../../schema.ts";
 
 void paragraph;
 
@@ -240,7 +240,7 @@ export default defineBlocks([
     name: "見出しの level が 1〜6 の範囲外",
     expect: "Type '7' is not assignable",
     files: (broken) => ({
-      "fixture.ts": `import { defineBlocks } from "../../schema.ts";
+      "fixture.ts": `import { defineBlocks } from "../../../schema.ts";
 
 export default defineBlocks([
   {
@@ -293,6 +293,26 @@ export default defineBlocks([
     }),
   },
   {
+    name: "sourceOrdinal が整数でない",
+    expect: "__sourceOrdinalが正の整数でない",
+    files: (broken) => ({
+      "fixture.ts": blocksModule(
+        block({ id: "neg_ordinal" }).replace("sourceOrdinal: 1,", `sourceOrdinal: ${broken ? "2.5" : "2"},`),
+        "defineBlocks",
+      ),
+    }),
+  },
+  {
+    name: "sourceOrdinal が 0 以下",
+    expect: "__sourceOrdinalが正の整数でない",
+    files: (broken) => ({
+      "fixture.ts": blocksModule(
+        block({ id: "neg_ordinal_zero" }).replace("sourceOrdinal: 1,", `sourceOrdinal: ${broken ? "0" : "1"},`),
+        "defineBlocks",
+      ),
+    }),
+  },
+  {
     name: "ノートの targets が空",
     expect: "Source has 0 element(s) but target requires 1",
     files: (broken) => ({
@@ -305,32 +325,48 @@ export default defineBlocks([
   },
 ];
 
+// ケース数 × 2 回（対照・破壊）の tsc 起動になるので、並列に回す（逐次だと数分かかる）。
+const CONCURRENCY = 6;
+const results: string[] = [];
 let failed = 0;
-for (const testCase of cases) {
-  // 1. 正しい版はコンパイルが通る（対照）。
-  const control = runCase(testCase, false);
-  if (control.status !== 0) {
-    failed += 1;
-    console.error(`✗ ${testCase.name}: 正しい入力なのに型検査が落ちた（テストの設定不備）`);
-    console.error(indent(control.output));
-    continue;
-  }
+let nextIndex = 0;
 
-  // 2. 壊すと型検査が落ち、期待する語が診断に出る。
-  const broken = runCase(testCase, true);
-  if (broken.status === 0) {
-    failed += 1;
-    console.error(`✗ ${testCase.name}: 誤った入力なのに型検査が通ってしまった`);
-    continue;
+async function worker(): Promise<void> {
+  for (;;) {
+    const index = nextIndex;
+    nextIndex += 1;
+    const testCase = cases[index];
+    if (testCase === undefined) return;
+
+    // 1. 正しい版はコンパイルが通る（対照）。
+    const control = await runCase(testCase, index, false);
+    if (control.status !== 0) {
+      failed += 1;
+      results[index] = `✗ ${testCase.name}: 正しい入力なのに型検査が落ちた（テストの設定不備）\n${indent(control.output)}`;
+      continue;
+    }
+
+    // 2. 壊すと型検査が落ち、期待する語が診断に出る。
+    const broken = await runCase(testCase, index, true);
+    if (broken.status === 0) {
+      failed += 1;
+      results[index] = `✗ ${testCase.name}: 誤った入力なのに型検査が通ってしまった`;
+      continue;
+    }
+    if (!broken.output.includes(testCase.expect)) {
+      failed += 1;
+      results[index] = `✗ ${testCase.name}: 型検査は落ちたが、診断が期待と違う\n${indent(broken.output)}`;
+      continue;
+    }
+    results[index] = `✓ ${testCase.name}\n${indent(firstDiagnostic(broken.output))}`;
   }
-  if (!broken.output.includes(testCase.expect)) {
-    failed += 1;
-    console.error(`✗ ${testCase.name}: 型検査は落ちたが、診断が期待と違う`);
-    console.error(indent(broken.output));
-    continue;
-  }
-  console.log(`✓ ${testCase.name}`);
-  console.log(indent(firstDiagnostic(broken.output)));
+}
+
+await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
+
+for (const line of results) {
+  if (line.startsWith("✗")) console.error(line);
+  else console.log(line);
 }
 
 rmSync(tmpDir, { recursive: true, force: true });
@@ -341,18 +377,24 @@ if (failed > 0) {
 }
 console.log(`\nすべての負テストが期待どおり: 誤った入力は tsc が拒否する（${cases.length} 件）`);
 
-function runCase(testCase: Case, broken: boolean): { status: number; output: string } {
-  rmSync(tmpDir, { recursive: true, force: true });
-  mkdirSync(tmpDir, { recursive: true });
+async function runCase(
+  testCase: Case,
+  index: number,
+  broken: boolean,
+): Promise<{ status: number; output: string }> {
+  // ケースごとに別ディレクトリを使う（並列実行のため）。
+  const caseDir = join(tmpDir, `case${index}${broken ? "_broken" : "_ok"}`);
+  rmSync(caseDir, { recursive: true, force: true });
+  mkdirSync(caseDir, { recursive: true });
   const files = testCase.files(broken);
   for (const [fileName, source] of Object.entries(files)) {
-    writeFileSync(join(tmpDir, fileName), source, "utf8");
+    writeFileSync(join(caseDir, fileName), source, "utf8");
   }
   writeFileSync(
-    join(tmpDir, "tsconfig.json"),
+    join(caseDir, "tsconfig.json"),
     `${JSON.stringify(
       {
-        extends: "../../tsconfig.json",
+        extends: "../../../tsconfig.json",
         compilerOptions: { noEmit: true, noUnusedLocals: false },
         include: Object.keys(files),
         // 親の exclude（type-tests/.tmp）を打ち消す。ここでは fixture だけを検査する。
@@ -363,16 +405,26 @@ function runCase(testCase: Case, broken: boolean): { status: number; output: str
     )}\n`,
     "utf8",
   );
-  const result = spawnSync(tsc, ["-p", join(tmpDir, "tsconfig.json")], {
-    cwd: structuredLatexDir,
-    encoding: "utf8",
-  });
-  if (result.error !== undefined) {
-    throw new Error(
-      `tsc を起動できなかった（${tsc}）: ${result.error.message}\n  修正: (cd ${structuredLatexDir} && pnpm install)`,
+  return await new Promise((resolve, reject) => {
+    execFile(
+      tsc,
+      ["-p", join(caseDir, "tsconfig.json")],
+      { cwd: structuredLatexDir, encoding: "utf8", maxBuffer: 8 * 1024 * 1024 },
+      (error, stdout, stderr) => {
+        const output = `${stdout}${stderr}`;
+        if (error !== null && typeof error.code !== "number") {
+          reject(
+            new Error(
+              `tsc を起動できなかった（${tsc}）: ${error.message}` +
+                `\n  修正: (cd ${structuredLatexDir} && pnpm install)`,
+            ),
+          );
+          return;
+        }
+        resolve({ status: error === null ? 0 : (error.code as number), output });
+      },
     );
-  }
-  return { status: result.status ?? 1, output: `${result.stdout ?? ""}${result.stderr ?? ""}` };
+  });
 }
 
 function firstDiagnostic(output: string): string {

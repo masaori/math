@@ -8,7 +8,13 @@
  * ここで使う実在ラベルは content/ に存在するもの（labels.generated.ts のユニオン）。
  */
 
+// 生成した集約モジュールを**型として引き込む**。tsconfig の include から
+// document.generated.ts が落ちても、この import 経由で検査対象に残る
+// （include 漏れでファイル跨ぎの検査が無音で消えた事故があるため）。
+import type { _UniqueBlockIds } from "../document.generated.ts";
 import { defineBlocks, defineNotes, math, paragraph, ref } from "../schema.ts";
+
+export type _AggregatedDocumentIsChecked = _UniqueBlockIds;
 import type { ConvertedBlock, Note } from "../schema.ts";
 
 // --- ref -------------------------------------------------------------------
