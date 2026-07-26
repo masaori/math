@@ -12,40 +12,840 @@ export default defineBlocks([
     conversion: { status: "converted" },
   },
   {
+    id: "linear_space_general_000_definition_kronecker_product",
+    kind: "definition",
+    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourceOrdinal: 1,
+    title: { text: "クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）" },
+    labels: ["def_kronecker"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とする。各成分が ",
+        math(String.raw`1`),
+        " か ",
+        math(String.raw`2`),
+        " である ",
+        math(String.raw`M`),
+        " 個組の全体",
+      ]),
+      displayMath(
+        String.raw`\mathcal{I}_M := \{1,2\}^M
+= \left\{\,(i_1,\dots,i_M) \;\middle|\; i_1,\dots,i_M \in \{1,2\}\,\right\}`,
+      ),
+      paragraph([
+        "を添字集合とする。",
+        math(String.raw`\#\mathcal{I}_M = 2^M`),
+        " である（下の Step 1）。写像",
+      ]),
+      displayMath(
+        String.raw`\nu : \mathcal{I}_M \to \{1,2,\dots,2^M\},\qquad
+\nu(I) := 1 + \sum_{k=1}^{M} (i_k - 1)\,2^{M-k}
+\quad (I = (i_1,\dots,i_M))`,
+      ),
+      paragraph([
+        "は全単射である（下の Step 2・Step 3）。以後、",
+        math(String.raw`\mathcal{I}_M`),
+        " の元 ",
+        math(String.raw`I`),
+        " を、行番号・列番号 ",
+        math(String.raw`\nu(I) \in \{1,\dots,2^M\}`),
+        " と同一視して使う。",
+      ]),
+      paragraph([
+        "（1）数ベクトルのクロネッカー積。",
+        math(String.raw`v_1,\dots,v_M \in \mathbb{C}^2`),
+        " に対し、",
+        math(String.raw`v_1 \boxtimes \cdots \boxtimes v_M \in \mathbb{C}^{2^M}`),
+        " を成分で",
+      ]),
+      displayMath(
+        String.raw`\left(v_1 \boxtimes \cdots \boxtimes v_M\right)_{\nu(I)}
+:= \prod_{k=1}^{M} (v_k)_{i_k}
+\qquad (I = (i_1,\dots,i_M) \in \mathcal{I}_M)`,
+      ),
+      paragraph([
+        "と定める（右辺は複素数の有限個の積であり、",
+        math(String.raw`(v_k)_{i_k}\in\mathbb{C}`),
+        " は ",
+        math(String.raw`v_k`),
+        " の第 ",
+        math(String.raw`i_k`),
+        " 成分）。",
+        math(String.raw`\nu`),
+        " が全単射だから、これで ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の元が 1 つ確定する。",
+      ]),
+      paragraph([
+        "（2）行列のクロネッカー積。",
+        math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
+        " に対し、",
+        math(String.raw`A_1 \boxtimes \cdots \boxtimes A_M \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " を成分で",
+      ]),
+      displayMath(
+        String.raw`\left(A_1 \boxtimes \cdots \boxtimes A_M\right)_{\nu(I),\,\nu(J)}
+:= \prod_{k=1}^{M} (A_k)_{i_k j_k}
+\qquad (I = (i_1,\dots,i_M),\ J = (j_1,\dots,j_M) \in \mathcal{I}_M)`,
+      ),
+      paragraph([
+        "と定める。これは ",
+        math(String.raw`2^M`),
+        " 行 ",
+        math(String.raw`2^M`),
+        " 列の複素行列であって、抽象的なテンソル積ではない。",
+      ]),
+      paragraph([
+        "（3）記号の同一視。本文の他の章では、同じ対象を次の記号でも書く。",
+      ]),
+      list([
+        [
+          math(String.raw`A_1 \otimes \cdots \otimes A_M`),
+          " は ",
+          math(String.raw`A_1 \boxtimes \cdots \boxtimes A_M`),
+          " のことである（数ベクトルについても同様）。",
+        ],
+        [
+          math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+          " は ",
+          math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+          " のことである（",
+          math(String.raw`2^M`),
+          " 次の複素正方行列全体。",
+          ref("tensor_basis"),
+          " (1) のとおり、この集合はクロネッカー積 ",
+          math(String.raw`A_1\boxtimes\cdots\boxtimes A_M`),
+          " たちの ",
+          math(String.raw`\mathbb{C}`),
+          "-線型結合をすべて集めたものに一致する）。",
+        ],
+        [
+          math(String.raw`(\mathbb{C}^2)^{\otimes M}`),
+          " は ",
+          math(String.raw`\mathbb{C}^{2^M}`),
+          " のことである。",
+        ],
+        [
+          math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+          " は ",
+          math(String.raw`2^M`),
+          " 次の単位行列 ",
+          math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+          " のことである（",
+          ref("kronecker_product_rule"),
+          " (2) のとおり ",
+          math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
+          " に等しい）。",
+        ],
+      ]),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\otimes`),
+        " は本定義のクロネッカー積の別記法であり、以下の章に現れる ",
+        math(String.raw`\otimes`),
+        " はすべてこの意味で読む。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\nu`),
+        " が定義どおりの写像であり全単射であること（定義が意味をもつために必要な事項）を確かめる。",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`\#\mathcal{I}_M = 2^M`),
+        "。",
+        math(String.raw`M`),
+        " についての帰納法による。",
+        math(String.raw`M=1`),
+        " のとき ",
+        math(String.raw`\mathcal{I}_1=\{(1),(2)\}`),
+        " で元数は ",
+        math(String.raw`2=2^1`),
+        "。",
+        math(String.raw`M`),
+        " で ",
+        math(String.raw`\#\mathcal{I}_M=2^M`),
+        " とすると、",
+        math(String.raw`\mathcal{I}_{M+1}`),
+        " の元は ",
+        math(String.raw`(I, i_{M+1})`),
+        "（",
+        math(String.raw`I\in\mathcal{I}_M`),
+        "、",
+        math(String.raw`i_{M+1}\in\{1,2\}`),
+        "）と一対一に対応するから ",
+        math(String.raw`\#\mathcal{I}_{M+1}=2\cdot 2^M=2^{M+1}`),
+        "。",
+      ]),
+      paragraph([
+        "Step 2: 値域。まず ",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`\sum_{t=0}^{n-1}2^{t}=2^{n}-1`),
+        "（",
+        math(String.raw`n=0`),
+        " のときは空和で ",
+        math(String.raw`0=2^0-1`),
+        "、",
+        math(String.raw`n`),
+        " で成り立てば ",
+        math(String.raw`\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1`),
+        "）。各 ",
+        math(String.raw`k`),
+        " について ",
+        math(String.raw`i_k-1\in\{0,1\}`),
+        " であるから",
+      ]),
+      displayMath(
+        String.raw`0 \le \sum_{k=1}^{M}(i_k-1)2^{M-k} \le \sum_{k=1}^{M}2^{M-k}
+= \sum_{t=0}^{M-1}2^{t} = 2^{M}-1`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`1\le\nu(I)\le 2^M`),
+        "。よって ",
+        math(String.raw`\nu`),
+        " は ",
+        math(String.raw`\mathcal{I}_M`),
+        " から ",
+        math(String.raw`\{1,\dots,2^M\}`),
+        " への写像である。",
+      ]),
+      paragraph([
+        "Step 3: 単射性、および全単射性。",
+        math(String.raw`I=(i_1,\dots,i_M)\neq J=(j_1,\dots,j_M)`),
+        " とし、",
+        math(String.raw`i_k\neq j_k`),
+        " となる最小の ",
+        math(String.raw`k`),
+        " をとる。必要なら ",
+        math(String.raw`I`),
+        " と ",
+        math(String.raw`J`),
+        " を入れ替えて ",
+        math(String.raw`i_k=2,\ j_k=1`),
+        " としてよい。",
+        math(String.raw`l<k`),
+        " では ",
+        math(String.raw`i_l=j_l`),
+        " だから",
+      ]),
+      displayMath(
+        String.raw`\nu(I)-\nu(J)
+= \sum_{l=k}^{M}(i_l-j_l)2^{M-l}
+= 2^{M-k} + \sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`i_l-j_l\in\{-1,0,1\}`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\left|\sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}\right|
+\le \sum_{l=k+1}^{M}2^{M-l}
+= \sum_{t=0}^{M-k-1}2^{t}
+= 2^{M-k}-1 < 2^{M-k}`,
+      ),
+      paragraph([
+        "（Step 2 の等比和を使った）。よって ",
+        math(String.raw`\nu(I)-\nu(J)\neq 0`),
+        " すなわち ",
+        math(String.raw`\nu`),
+        " は単射である。Step 1 より ",
+        math(String.raw`\#\mathcal{I}_M=2^M=\#\{1,\dots,2^M\}`),
+        " であり、有限集合の間の単射で元数が等しいものは全射でもあるから（像は ",
+        math(String.raw`2^M`),
+        " 個の元をもつ ",
+        math(String.raw`\{1,\dots,2^M\}`),
+        " の部分集合、すなわち全体）、",
+        math(String.raw`\nu`),
+        " は全単射である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。原文および旧構造化テキストは ⊗ を抽象テンソル積の記号として" +
+          "定義せずに使っていたため、README のゴール設定（M 個の 2×2 行列の積は具体的な 2^M × 2^M の" +
+          "複素行列として専用記号で定義する）に従い、成分の式によるクロネッカー積 ⊠ を本文に置いた。" +
+          "既存章の ⊗ 記法はこの ⊠ の別記法として同一視する（記号の書き換えは順次行う）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_000b_claim_kronecker_product_rule",
+    kind: "claim",
+    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourceOrdinal: 1,
+    title: { text: "クロネッカー積の積の規則（各サイトごとの積になること）" },
+    labels: ["kronecker_product_rule"],
+    statement: [
+      paragraph([
+        ref("def_kronecker"),
+        " の記号のもと、",
+        math(String.raw`A_1,\dots,A_M,B_1,\dots,B_M \in \mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`v_1,\dots,v_M \in \mathbb{C}^2`),
+        " について次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) ",
+          math(
+            String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)\left(B_1\boxtimes\cdots\boxtimes B_M\right)
+= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)`,
+          ),
+          "（左辺は ",
+          math(String.raw`2^M`),
+          " 次の行列の積、右辺の各 ",
+          math(String.raw`A_kB_k`),
+          " は ",
+          math(String.raw`2`),
+          " 次の行列の積）。",
+        ],
+        [
+          "(2) ",
+          math(
+            String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
+= I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
+          ),
+          "。",
+        ],
+        [
+          "(3) ",
+          math(
+            String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)\left(v_1\boxtimes\cdots\boxtimes v_M\right)
+= (A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)`,
+          ),
+          "。",
+        ],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 0: 多重添字についての和と、各サイトごとの和の入れ替え。",
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " と、各 ",
+        math(String.raw`k\in\{1,\dots,M\}`),
+        " ごとに与えられた複素数 ",
+        math(String.raw`c_k(1),c_k(2)\in\mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\sum_{K\in\mathcal{I}_M}\ \prod_{k=1}^{M}c_k(t_k)
+= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}c_k(t)\right)
+\qquad (K=(t_1,\dots,t_M))`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`M`),
+        " についての帰納法で示す。",
+        math(String.raw`M=1`),
+        " のときは両辺とも ",
+        math(String.raw`c_1(1)+c_1(2)`),
+        "。",
+        math(String.raw`M`),
+        " で成り立つとすると、",
+        math(String.raw`\mathcal{I}_{M+1}`),
+        " の元は ",
+        math(String.raw`(K,t)`),
+        "（",
+        math(String.raw`K\in\mathcal{I}_M,\ t\in\{1,2\}`),
+        "）と一対一に対応するから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{(t_1,\dots,t_{M+1})\in\mathcal{I}_{M+1}}\prod_{k=1}^{M+1}c_k(t_k)
+&= \sum_{t=1}^{2}\sum_{K\in\mathcal{I}_M}\left(\prod_{k=1}^{M}c_k(t_k)\right)c_{M+1}(t)
+\quad (\because \text{最後の成分 } t_{M+1}=t \text{ で場合分けした有限和の分割}) \\
+&= \left(\sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}c_k(t_k)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
+\quad (\because \text{分配律}) \\
+&= \left(\prod_{k=1}^{M}\left(\sum_{s=1}^{2}c_k(s)\right)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
+\quad (\because \text{帰納法の仮定}) \\
+&= \prod_{k=1}^{M+1}\left(\sum_{t=1}^{2}c_k(t)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 1: (1)。",
+        math(String.raw`I=(i_1,\dots,i_M),\ L=(l_1,\dots,l_M)\in\mathcal{I}_M`),
+        " を任意に取る。行列の積の定義と、",
+        ref("def_kronecker"),
+        " の ",
+        math(String.raw`\nu`),
+        " が全単射であること（和の変数 ",
+        math(String.raw`p\in\{1,\dots,2^M\}`),
+        " を ",
+        math(String.raw`p=\nu(K),\ K=(t_1,\dots,t_M)\in\mathcal{I}_M`),
+        " と書き換えてよい）より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\left(A_1\boxtimes\cdots\boxtimes A_M\right)\left(B_1\boxtimes\cdots\boxtimes B_M\right)\right)_{\nu(I),\nu(L)}
+&= \sum_{p=1}^{2^M}
+\left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),p}
+\left(B_1\boxtimes\cdots\boxtimes B_M\right)_{p,\nu(L)}
+\quad (\because \text{行列の積の定義}) \\
+&= \sum_{K\in\mathcal{I}_M}
+\left(\prod_{k=1}^{M}(A_k)_{i_kt_k}\right)\left(\prod_{k=1}^{M}(B_k)_{t_kl_k}\right)
+\quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
+&= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(B_k)_{t_kl_k}\right)
+\quad (\because \text{複素数の積の可換律・結合律}) \\
+&= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(B_k)_{tl_k}\right)
+\quad (\because \text{Step 0 を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
+&= \prod_{k=1}^{M}(A_kB_k)_{i_kl_k}
+\quad (\because \text{行列の積の定義}) \\
+&= \left((A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)\right)_{\nu(I),\nu(L)}
+\quad (\because \boxtimes \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\nu`),
+        " は全単射だから、これで両辺のすべての成分が一致することが示された。",
+      ]),
+      paragraph([
+        "Step 2: (2)。",
+        math(String.raw`\left(I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{ij}=\delta_{ij}`),
+        "（",
+        math(String.raw`i=j`),
+        " のとき ",
+        math(String.raw`1`),
+        "、そうでなければ ",
+        math(String.raw`0`),
+        "）であるから、",
+      ]),
+      displayMath(
+        String.raw`\left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{\nu(I),\nu(J)}
+= \prod_{k=1}^{M}\delta_{i_kj_k}
+= \begin{cases}1 & (I=J)\\ 0 & (I\neq J)\end{cases}`,
+      ),
+      paragraph([
+        "（積が ",
+        math(String.raw`1`),
+        " になるのは全 ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`i_k=j_k`),
+        " のとき、すなわち ",
+        math(String.raw`I=J`),
+        " のときに限り、そうでなければ因子に ",
+        math(String.raw`0`),
+        " が現れる）。",
+        math(String.raw`\nu`),
+        " は単射だから ",
+        math(String.raw`I=J \iff \nu(I)=\nu(J)`),
+        " であり、右辺は ",
+        math(String.raw`2^M`),
+        " 次の単位行列の ",
+        math(String.raw`(\nu(I),\nu(J))`),
+        " 成分に等しい。",
+      ]),
+      paragraph([
+        "Step 3: (3)。Step 1 と同じ計算を、第 2 の因子を数ベクトルに置き換えて行う。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\left(A_1\boxtimes\cdots\boxtimes A_M\right)\left(v_1\boxtimes\cdots\boxtimes v_M\right)\right)_{\nu(I)}
+&= \sum_{p=1}^{2^M}\left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),p}
+\left(v_1\boxtimes\cdots\boxtimes v_M\right)_{p}
+\quad (\because \text{行列と数ベクトルの積の定義}) \\
+&= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
+\quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
+&= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(v_k)_{t}\right)
+\quad (\because \text{Step 0}) \\
+&= \prod_{k=1}^{M}(A_kv_k)_{i_k}
+= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。「テンソル積上の積は各因子ごとの積」という規則は" +
+          "004 章以降の証明で繰り返し根拠として使われているのに、定義も証明も本文に無かった" +
+          "（goal-alignment-audit の A-3）。クロネッカー積として定義したことで、成分計算で証明できる" +
+          "主張になったのでここに置いた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_000c_claim_kronecker_multilinear",
+    kind: "claim",
+    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourceOrdinal: 1,
+    title: { text: "クロネッカー積の各因子についての線型性" },
+    labels: ["kronecker_multilinear"],
+    statement: [
+      paragraph([
+        ref("def_kronecker"),
+        " の記号のもと、",
+        math(String.raw`j\in\{1,\dots,M\}`),
+        " を固定し、",
+        math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`r\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`c_1,\dots,c_r\in\mathbb{C}`),
+        "、",
+        math(String.raw`B_1,\dots,B_r\in\mathrm{Mat}(2,\mathbb{C})`),
+        " とする。第 ",
+        math(String.raw`j`),
+        " 因子が ",
+        math(String.raw`A_j=\sum_{a=1}^{r}c_aB_a`),
+        " と書けているとき、",
+      ]),
+      displayMath(
+        String.raw`A_1\boxtimes\cdots\boxtimes\overbrace{\left(\sum_{a=1}^{r}c_aB_a\right)}^{j\text{ 番目}}\boxtimes\cdots\boxtimes A_M
+= \sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes\overbrace{B_a}^{j\text{ 番目}}\boxtimes\cdots\boxtimes A_M\right)`,
+      ),
+      paragraph([
+        "が成り立つ。特に ",
+        math(String.raw`r=1`),
+        " として、",
+        math(String.raw`c\in\mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`A_1\boxtimes\cdots\boxtimes\overbrace{(c\,A_j)}^{j\text{ 番目}}\boxtimes\cdots\boxtimes A_M
+= c\left(A_1\boxtimes\cdots\boxtimes A_M\right)`,
+      ),
+      paragraph([
+        "である。数ベクトルのクロネッカー積についても、",
+        math(String.raw`\mathbb{C}^2`),
+        " の元を同じ形に分解したとき同じ等式が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
+        " を任意に取り、両辺の ",
+        math(String.raw`(\nu(I),\nu(J))`),
+        " 成分を比べる。",
+        math(String.raw`\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}=\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}`),
+        "（行列の和・スカラー倍は成分ごとの演算）であるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(A_1\boxtimes\cdots\boxtimes\left(\sum_{a=1}^{r}c_aB_a\right)\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
+&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \sum_{a=1}^{r}c_a\left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)(B_a)_{i_jj_j}
+\quad (\because \text{複素数の分配律}) \\
+&= \sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \left(\sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)\right)_{\nu(I),\nu(J)}
+\quad (\because \text{行列の和・スカラー倍は成分ごと})
+\end{aligned}`,
+      ),
+      paragraph([
+        "ここで ",
+        math(String.raw`\prod_{k\neq j}(A_k)_{i_kj_k}`),
+        " は ",
+        math(String.raw`k\in\{1,\dots,M\}\setminus\{j\}`),
+        " についての積である。",
+        math(String.raw`\nu`),
+        " は全単射だから、すべての成分が一致し両辺は等しい。",
+        math(String.raw`r=1,\ c_1=c,\ B_1=A_j`),
+        " とすればスカラーを前に出す式を得る。数ベクトルの場合は、上の計算で ",
+        math(String.raw`(A_k)_{i_kj_k}`),
+        " を ",
+        math(String.raw`(v_k)_{i_k}`),
+        " に置き換えれば同じ議論がそのまま通用する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。「テンソル積の各因子についての C-線型性」" +
+          "（スカラーを前に出す・和で展開する）は 004 章以降で繰り返し根拠として使われているのに、" +
+          "定義も証明も本文に無かった（goal-alignment-audit の A-3）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     sourcePath: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
     sourceOrdinal: 1,
-    title: { text: "テンソル冪の基底は基底のテンソル積の族" },
+    title: { text: "クロネッカー積がつくる基底" },
     labels: ["tensor_basis"],
     statement: [
       paragraph([
-        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、記号は ",
+        ref("def_kronecker"),
+        " のものとする。",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の行列単位を ",
+        math(String.raw`E_{ij}`),
+        "（",
+        math(String.raw`(i,j)`),
+        " 成分が ",
+        math(String.raw`1`),
+        " で他の成分が ",
+        math(String.raw`0`),
+        "、",
+        math(String.raw`i,j\in\{1,2\}`),
+        "）、",
+        math(String.raw`\mathbb{C}^2`),
+        " の標準基底を ",
+        math(String.raw`e_1=(1,0),\ e_2=(0,1)`),
         " とする。",
-        math(String.raw`V`),
-        " を ",
-        math(String.raw`n`),
-        " 次元 ",
-        math(String.raw`K`),
-        "-線型空間、",
-        math(String.raw`E = \{e_1,\dots,e_n\}`),
-        " を ",
-        math(String.raw`V`),
-        " の基底とするとき、多重添字 ",
-        math(String.raw`(i_1,\dots,i_m) \in \{1,\dots,n\}^m`),
-        " で添字づけられた族",
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
+        " について",
       ]),
       displayMath(
-        String.raw`\left\{\, e_{i_1} \otimes \cdots \otimes e_{i_m} \;\middle|\; (i_1,\dots,i_m) \in \{1,\dots,n\}^m \,\right\}`,
+        String.raw`E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\mathbb{C}),
+\qquad
+f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
+      ),
+      paragraph(["とおく。次が成り立つ。"]),
+      list([
+        [
+          "(1) 族 ",
+          math(String.raw`\left(E_{I,J}\right)_{I,J\in\mathcal{I}_M}`),
+          " は ",
+          math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+          " の ",
+          math(String.raw`\mathbb{C}`),
+          "-基底である。特に ",
+          math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C}) = 4^M`),
+          "。",
+        ],
+        [
+          "(2) ",
+          math(String.raw`\mathcal{B}=\{b_1,b_2,b_3,b_4\}`),
+          " を ",
+          math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+          " の任意の ",
+          math(String.raw`\mathbb{C}`),
+          "-基底とするとき、多重添字 ",
+          math(String.raw`(a_1,\dots,a_M)\in\{1,2,3,4\}^M`),
+          " で添字づけられた ",
+          math(String.raw`4^M`),
+          " 個の元からなる族",
+          math(String.raw`\ \left(b_{a_1}\boxtimes\cdots\boxtimes b_{a_M}\right)_{(a_1,\dots,a_M)\in\{1,2,3,4\}^M}`),
+          " は ",
+          math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+          " の ",
+          math(String.raw`\mathbb{C}`),
+          "-基底である。",
+        ],
+        [
+          "(3) ",
+          math(String.raw`\{u_1,u_2\}`),
+          " を ",
+          math(String.raw`\mathbb{C}^2`),
+          " の任意の ",
+          math(String.raw`\mathbb{C}`),
+          "-基底とするとき、族 ",
+          math(String.raw`\left(u_{a_1}\boxtimes\cdots\boxtimes u_{a_M}\right)_{(a_1,\dots,a_M)\in\{1,2\}^M}`),
+          " は ",
+          math(String.raw`\mathbb{C}^{2^M}`),
+          " の ",
+          math(String.raw`\mathbb{C}`),
+          "-基底である。特に ",
+          math(String.raw`\left(f_I\right)_{I\in\mathcal{I}_M}`),
+          " は ",
+          math(String.raw`\mathbb{C}^{2^M}`),
+          " の基底であり ",
+          math(String.raw`\dim_{\mathbb{C}}\mathbb{C}^{2^M}=2^M`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        ref("def_kronecker"),
+        " の同一視により、(1)(2) は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " の基底についての主張、(3) は ",
+        math(String.raw`(\mathbb{C}^2)^{\otimes M}`),
+        " の基底についての主張として読める。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1: (3) の特別な場合（標準基底）。",
+        math(String.raw`(e_i)_t=\delta_{it}`),
+        " であるから、",
+        math(String.raw`K=(k_1,\dots,k_M)\in\mathcal{I}_M`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`(f_I)_{\nu(K)} = \prod_{k=1}^{M}(e_{i_k})_{k_k}
+= \prod_{k=1}^{M}\delta_{i_kk_k}
+= \begin{cases}1 & (I=K)\\ 0 & (I\neq K)\end{cases}
+\quad (\because \boxtimes \text{ の定義})`,
       ),
       paragraph([
-        "は、",
-        math(String.raw`m`),
-        " 階テンソル冪 ",
-        math(String.raw`V^{\otimes m}`),
-        " の基底である。特に ",
-        math(String.raw`\dim_K V^{\otimes m} = n^m`),
-        " である。",
+        "すなわち ",
+        math(String.raw`f_I`),
+        " は第 ",
+        math(String.raw`\nu(I)`),
+        " 成分だけが ",
+        math(String.raw`1`),
+        " で他が ",
+        math(String.raw`0`),
+        " の数ベクトル、つまり ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の標準基底ベクトルである。",
+        math(String.raw`\nu`),
+        " が全単射だから ",
+        math(String.raw`(f_I)_{I\in\mathcal{I}_M}`),
+        " は標準基底全体と一致し、これは ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の基底である（任意の ",
+        math(String.raw`w=(w_1,\dots,w_{2^M})`),
+        " は ",
+        math(String.raw`w=\sum_{p=1}^{2^M}w_p\,(\text{第 } p \text{ 標準基底ベクトル})`),
+        " と成分比較で一意に書ける）。特に ",
+        math(String.raw`\dim_{\mathbb{C}}\mathbb{C}^{2^M}=2^M`),
+        "。",
+      ]),
+      paragraph([
+        "Step 2: (1)。同様に ",
+        math(String.raw`(E_{ij})_{st}=\delta_{is}\delta_{jt}`),
+        " であるから、",
+        math(String.raw`K,L\in\mathcal{I}_M`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\left(E_{I,J}\right)_{\nu(K),\nu(L)}
+= \prod_{k=1}^{M}\delta_{i_kk_k}\delta_{j_kl_k}
+= \begin{cases}1 & (I=K \text{ かつ } J=L)\\ 0 & (\text{それ以外})\end{cases}
+\quad (\because \boxtimes \text{ の定義})`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`E_{I,J}`),
+        " は ",
+        math(String.raw`(\nu(I),\nu(J))`),
+        " 成分だけが ",
+        math(String.raw`1`),
+        " で他が ",
+        math(String.raw`0`),
+        " の ",
+        math(String.raw`2^M`),
+        " 次行列（",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の行列単位）である。",
+        math(String.raw`\nu`),
+        " が全単射だから ",
+        math(String.raw`(E_{I,J})_{I,J\in\mathcal{I}_M}`),
+        " は ",
+        math(String.raw`2^M`),
+        " 次の行列単位全体と一致する。任意の ",
+        math(String.raw`A=(a_{pq})\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " は成分比較により ",
+        math(String.raw`A=\sum_{p,q=1}^{2^M}a_{pq}\,(\text{第 }(p,q)\text{ 行列単位})`),
+        " と一意に書けるから、これは基底であり、元数は ",
+        math(String.raw`2^M\cdot 2^M=4^M`),
+        "。よって ",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C})=4^M`),
+        "。",
+      ]),
+      paragraph([
+        "Step 3: 有限次元線型空間についての 2 つの事実。以下で次を使う。",
+      ]),
+      list([
+        [
+          "(a) ",
+          math(String.raw`d`),
+          " 次元 ",
+          math(String.raw`\mathbb{C}`),
+          "-線型空間を張る有限族の元数は ",
+          math(String.raw`d`),
+          " 以上である。",
+        ],
+        [
+          "(b) したがって、",
+          math(String.raw`d`),
+          " 次元 ",
+          math(String.raw`\mathbb{C}`),
+          "-線型空間を張る、ちょうど ",
+          math(String.raw`d`),
+          " 個の元からなる族は基底である。実際、線型独立でなければ、ある元が他の元の線型結合になり、その元を除いた ",
+          math(String.raw`d-1`),
+          " 個の族がなお全体を張るので (a) に反する。",
+        ],
+      ]),
+      paragraph([
+        "Step 4: (2)。",
+        math(String.raw`\mathcal{B}=\{b_1,\dots,b_4\}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の基底だから、各行列単位 ",
+        math(String.raw`E_{ij}`),
+        "（",
+        math(String.raw`i,j\in\{1,2\}`),
+        "）は",
+      ]),
+      displayMath(
+        String.raw`E_{ij} = \sum_{a=1}^{4} d^{(ij)}_{a}\,b_a \qquad (d^{(ij)}_{a}\in\mathbb{C})`,
+      ),
+      paragraph([
+        "と書ける。",
+        math(String.raw`I,J\in\mathcal{I}_M`),
+        " を固定し、",
+        math(String.raw`E_{I,J}=E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M}`),
+        " の第 ",
+        math(String.raw`1`),
+        " 因子から順にこの展開を代入する。",
+        ref("kronecker_multilinear"),
+        " を第 ",
+        math(String.raw`j`),
+        " 因子に適用する操作を ",
+        math(String.raw`j=1,2,\dots,M`),
+        " と繰り返す（",
+        math(String.raw`j`),
+        " についての帰納法）と、",
+      ]),
+      displayMath(
+        String.raw`E_{I,J}
+= \sum_{(a_1,\dots,a_M)\in\{1,2,3,4\}^M}
+\left(\prod_{k=1}^{M} d^{(i_kj_k)}_{a_k}\right)
+\left(b_{a_1}\boxtimes\cdots\boxtimes b_{a_M}\right)
+\quad (\because \text{各因子についての線型性})`,
+      ),
+      paragraph([
+        "を得る（各段階で和の項数が ",
+        math(String.raw`4`),
+        " 倍になり、",
+        math(String.raw`M`),
+        " 段階で ",
+        math(String.raw`4^M`),
+        " 項になる）。よって ",
+        math(String.raw`E_{I,J}`),
+        " は族 ",
+        math(String.raw`\left(b_{a_1}\boxtimes\cdots\boxtimes b_{a_M}\right)`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-線型結合である。Step 2 より ",
+        math(String.raw`(E_{I,J})`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を張るから、",
+        math(String.raw`\left(b_{a_1}\boxtimes\cdots\boxtimes b_{a_M}\right)`),
+        " も ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を張る（張る族の線型結合で書ける族は、同じ空間を張る）。この族の元数は ",
+        math(String.raw`\#\{1,2,3,4\}^M=4^M`),
+        " であり、Step 2 より ",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C})=4^M`),
+        " であるから、Step 3 (b) よりこの族は基底である。",
+      ]),
+      paragraph([
+        "Step 5: (3) の一般の基底の場合。Step 4 とまったく同じ議論を、",
+        math(String.raw`e_i=\sum_{a=1}^{2}d^{(i)}_{a}u_a`),
+        "、",
+        ref("kronecker_multilinear"),
+        " の数ベクトル版、Step 1 の ",
+        math(String.raw`(f_I)`),
+        " が ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " を張ること、",
+        math(String.raw`\#\{1,2\}^M=2^M=\dim_{\mathbb{C}}\mathbb{C}^{2^M}`),
+        " に対して行えばよい。",
       ]),
     ],
     conversion: {
@@ -55,6 +855,16 @@ export default defineBlocks([
           "かつ V の次元とテンソル冪の階数に同じ記号 m を二重使用していた。" +
           "Lean 形式化(lean/Ising2D/Part002/Theorem000_TensorBasis.lean)で判明したため、" +
           "原文側を修正し本ブロックも同期済み。",
+        "さらに本ブロックは「任意の体 K 上の任意の n 次元線型空間のテンソル冪の基底」という" +
+          "抽象テンソル積の一般論だった。README 2 節がまさにこの主張（基底のテンソル積が基底）を" +
+          "本文に置くことを禁じているため、クロネッカー積（<def_kronecker>）についての具体的な主張" +
+          "（行列単位のクロネッカー積が Mat(2^M,C) の基底、次元は 4^M）へ置き換えた。" +
+          "ラベル <tensor_basis> は参照元（<centralizer_is_scalar>, <Z_Y_linearly_independent>, " +
+          "<def_end_iso>, <Z_Y_generate_algebra>, 008 章）を保つためそのままにしている。" +
+          "抽象的な見方は notes/002_linear_space_general.mjs へ退避した。",
+        "参照元が必要とする形はそれぞれ、(1) 行列単位（<centralizer_is_scalar>, <def_end_iso>）、" +
+          "(2) 一般の基底 {I,σ^x,σ^y,σ^z}（<Z_Y_linearly_independent>, <Z_Y_generate_algebra>, 008 章）、" +
+          "(3) 数ベクトルの標準基底（<def_end_iso> の F の基底）であるため、3 つの形を並べた。",
       ],
     },
   },
@@ -160,18 +970,18 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         "。多重添字 ",
         math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\{1,2\}^M`),
         " について ",
-        math(String.raw`E_{IJ}:=E_{i_1 j_1}\otimes E_{i_2 j_2}\otimes\cdots\otimes E_{i_M j_M}\in\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-        " とおく。",
-        math(String.raw`\mathcal{E}_0`),
-        " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " の基底であるから、",
+        math(String.raw`E_{IJ}:=E_{i_1 j_1}\boxtimes E_{i_2 j_2}\boxtimes\cdots\boxtimes E_{i_M j_M}\in\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        " とおく（",
+        ref("def_kronecker"),
+        " のクロネッカー積。以下、この章では ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} = \mathrm{Mat}(2^M,\mathbb{C})`),
+        " である）。",
         math(String.raw`\mathcal{E}:=\{E_{IJ}:I,J\in\{1,2\}^M\}`),
         " は ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
         " の基底である（",
         ref("tensor_basis"),
-        "）。その元数は ",
+        " (1)）。その元数は ",
         math(String.raw`\#\mathcal{E}=(2^M)^2=4^M`),
         "。",
       ]),
@@ -180,15 +990,19 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         math(String.raw`E_{IJ}`),
         " の積公式。",
         math(String.raw`I,J,K,L\in\{1,2\}^M`),
-        " について、テンソル積上の積の定義と Step 1 より",
+        " について、",
+        ref("kronecker_product_rule"),
+        " (1)、",
+        ref("kronecker_multilinear"),
+        " と Step 1 より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E_{IJ} E_{KL}
-&= (E_{i_1 j_1}\otimes\cdots\otimes E_{i_M j_M})(E_{k_1 l_1}\otimes\cdots\otimes E_{k_M l_M}) \\
-&= (E_{i_1 j_1}E_{k_1 l_1})\otimes\cdots\otimes(E_{i_M j_M}E_{k_M l_M}) \quad (\because \text{テンソル積上の積の定義}) \\
-&= (\delta_{j_1 k_1}E_{i_1 l_1})\otimes\cdots\otimes(\delta_{j_M k_M}E_{i_M l_M}) \quad (\because E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
-&= \left(\prod_{r=1}^M \delta_{j_r k_r}\right)E_{IL} \quad (\because \text{スカラーのテンソル多重線型性})
+&= (E_{i_1 j_1}\boxtimes\cdots\boxtimes E_{i_M j_M})(E_{k_1 l_1}\boxtimes\cdots\boxtimes E_{k_M l_M}) \\
+&= (E_{i_1 j_1}E_{k_1 l_1})\boxtimes\cdots\boxtimes(E_{i_M j_M}E_{k_M l_M}) \quad (\because \text{クロネッカー積の積の規則}) \\
+&= (\delta_{j_1 k_1}E_{i_1 l_1})\boxtimes\cdots\boxtimes(\delta_{j_M k_M}E_{i_M l_M}) \quad (\because E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
+&= \left(\prod_{r=1}^M \delta_{j_r k_r}\right)E_{IL} \quad (\because \text{各因子についての線型性を } M \text{ 回})
 \end{aligned}`,
       ),
       paragraph([
@@ -203,10 +1017,15 @@ E_{IJ} E_{KL}
         math(String.raw`E_{IJ}E_{KL}=\delta_{JK}E_{IL}`),
         "。また各因子に ",
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}`),
-        " を代入して多重線型性で展開すると",
+        " を代入して各因子についての線型性（",
+        ref("kronecker_multilinear"),
+        "）で展開すると",
       ]),
       displayMath(
-        String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} = \sum_{P\in\{1,2\}^M} E_{PP} \quad (\because I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22} \text{ とテンソル積の多重線型性})`,
+        String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
+= \sum_{P\in\{1,2\}^M} E_{PP}
+\quad (\because \text{クロネッカー積の積の規則 (2)、} I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22} \text{、各因子についての線型性})`,
       ),
       paragraph([
         "Step 3: ",
