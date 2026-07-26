@@ -133,14 +133,52 @@ T2（未解決模型の実厳密解）は 11 cycle を通して新厳密解を�
 ### 方針判断点は無し（cycle 12）
 cycle 11 で提起した T2 の扱いは既定方針 1（T1 統合）で実行し、機能することを確認した。新たなユーザー判断点は生じていない。
 
+## cycle 13 総括（rank:cycle13, 2026-07-26）
+
+- **T1 step 1（誤りの検出）**: `outputs/reports/cycle13_T1_padic_entropy_generality.md`。
+  ($\infty$) 側の一般性を**文献本文で確定**（LSW Invent. math. 101 Thm 3.1 / Thm 7.1、LSV arXiv:1108.4989 Thm 1.2・1.3 の 3 段）。
+  一方 ($p$) 側は、002 が既知として並置していた「$p$ 進エントロピー ＝ $p$ 進 Mahler 測度 ＝ 岩澤 $\mu_p$」が**誤り**と判明。
+  $\hbar_p, m_p$ は岩澤対数 $\log_p$（$\log_p p=0$）で定義され付値部分を捨てるので $v_p$ の増大を測らず、
+  定義域もほぼ排他的（定義できる条件下では $v_p(a_L)=L^d v_p(c)$ と自明化）。002 を訂正した。
+  **正しい量は Ueki の $\mathrm M_p$ だが、2 変数・$\mathbb{Z}_p^2$ 塔での増大則は文献に特定できず、G1 は未達のまま。**
+- **T3 step 2（証明）**: `outputs/reports/cycle13_T3_mu_content_criterion_proof.md`。
+  cycle 12 で数値照合のみだった $(★)$ と $(☆)$ を**証明**。さらに cycle 12 が既知理論に依拠していた
+  岩澤型漸近 $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^n+\lambda n+\nu$ **そのものを証明**し、$\lambda=\lambda_{\mathrm W}-1\ge1$ も決定。
+  $(★)$ は連結性の仮定なしで成立する形へ強化。**新規性は主張しない**（McGown–Vallières III Thm 6.1 の言い換え）。
+  **射程の限界も特定**: $\ell\nmid N$ の段では content が支配しない（反例 6 件）、$d\ge2$ の塔は対象外
+  ＝本プロジェクトの $L\times L$ トーラスにはそのまま適用できない。
+- **T1 step 3（証明）**: `outputs/reports/cycle13_T1_observation_T_settlement.md`。
+  観察 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を**証明**し、002 の「検証済みだが未証明の観察」から
+  確定部分命題「命題 T」へ移した。骨子は $\tau(L)=\prod_j(r_j^L-1)^2/r_j^L$ への分解＋2 の不分岐性＋
+  Newton 多角形（$v(m_j)=1$）＋LTE 段。敵対的レビューで反証されず、独立経路（終結式）で
+  合成奇数 $9,15,21,25,27,33,35$ と $L=19$ まで確認。**新規性は主張しない**（本文未確認）。
+- **全体**: cycle 13 は「証明のサイクル」になった。cycle 12 で数値・観察だった 3 件のうち 2 件
+  （判定式、観察 T）に証明が付き、1 件（双対命題 D）は**既知だと思っていた同一視が誤りだった**ことが判明した。
+  誤りの検出は前進であり、002 の G1 は依然未達だが理由が正確になった。
+- **cycle 14 の焦点**: 002 の G1 の残る唯一のボトルネック＝2 変数・$\mathbb{Z}_p^2$ 塔での $v_p$ 増大則。
+  cycle 13 step 2 の証明機構（$(★)$＋Weierstrass）を $d=2$ へ拡張できるかが自然な筋
+  （DuBose–Vallières Thm A の $P(\ell^n,n)$ 型を目標形とする）。
+
+### 方針判断点は無し（cycle 13）
+新たなユーザー判断点は生じていない。
+
+## cycle 14 step 列（2026-07-26 起こし）
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T3 Pure | extend_criterion_to_Z_ell_2_towers | todo | | cycle 13 step 2 の証明機構（(★) のブロック巡回対角化＋Weierstrass 準備定理）を $\mathbb{Z}_\ell^2$-塔へ拡張する。目標形は DuBose–Vallières Thm A の $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）。2 変数の $\det L(z,w)$ の content が主要項の係数を与えるかを、まず数値で当たってから証明を試みる。 |
+| 2 | T1 Reframe | vp_growth_law_two_variable | todo | | 002 の G1 の残る唯一のボトルネック。一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$・$\mathbb{Z}_p^2$ 塔での $v_p(a_{p^n})$ 増大則。step 1 が成功すればグラフ側から移植できる可能性がある。文献の特定も継続（Cuoco–Monsky 1981 の本文取得を含む）。 |
+| 3 | T1 Reframe | proposition_T_generalization | todo | | 命題 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を一般化できるか。奇素数 $p$ での $v_p(\tau(L))$、および $d$ 次元トーラスへの拡張。命題 T の証明機構（不分岐性＋Newton 多角形＋LTE）がどこまで効くかを見る。 |
+| 4 | — | rank:cycle14 | todo | | 再ランク → cycle 15 方向。 |
+
 ## cycle 13 step 列（2026-07-26 起こし）
 
 | # | track | step | status | done日 | 観察メモ |
 |---|------|------|--------|--------|----------|
-| 1 | T1 Reframe | identify_padic_entropy_generality | todo | | 002 の G1 ボトルネック。Deninger の p 進エントロピーと v_p(a_{p^n}) 線形成長の同定が**どのクラスの P で成立するか**を文献の該当命題まで特定する（トーラス上零点をもつ P の扱いを含む）。特定できたら 002 の中核命題 D を命題文として書き下す。 |
-| 2 | T3 Pure | prove_mu_content_criterion | todo | | cycle 12 T3 の判定式 μ_ℓ=v_ℓ(content_z det L(z)) を、Weierstrass 準備定理＋(★)（ブロック巡回の対角化＋matrix-tree）から**証明**する。(★) 自体の厳密証明も含める。現状は数値照合のみ。 |
-| 3 | T1 Reframe | settle_observation_T | todo | | 観察 T（奇 L で v_2(τ(L))=2(L−1), L=3..19）の証明 or 文献での既出確認。cycle 12 T3 で得た content 判定式がトーラス族に適用できるかを試す。できなければ「検証済みの観察」として 002 の主定理から外す。 |
-| 4 | — | rank:cycle13 | todo | | 再ランク → cycle 14 方向。 |
+| 1 | T1 Reframe | identify_padic_entropy_generality | done | 2026-07-26 | 002 の G1 ボトルネック。Deninger の p 進エントロピーと v_p(a_{p^n}) 線形成長の同定が**どのクラスの P で成立するか**を文献の該当命題まで特定する（トーラス上零点をもつ P の扱いを含む）。特定できたら 002 の中核命題 D を命題文として書き下す。 |
+| 2 | T3 Pure | prove_mu_content_criterion | done | 2026-07-26 | cycle 12 T3 の判定式 μ_ℓ=v_ℓ(content_z det L(z)) を、Weierstrass 準備定理＋(★)（ブロック巡回の対角化＋matrix-tree）から**証明**する。(★) 自体の厳密証明も含める。現状は数値照合のみ。 |
+| 3 | T1 Reframe | settle_observation_T | done | 2026-07-26 | 観察 T（奇 L で v_2(τ(L))=2(L−1), L=3..19）の証明 or 文献での既出確認。cycle 12 T3 で得た content 判定式がトーラス族に適用できるかを試す。できなければ「検証済みの観察」として 002 の主定理から外す。 |
+| 4 | — | rank:cycle13 | done | 2026-07-26 | 下記「cycle 13 総括」。T1(∞側の一般性を文献本文で確定＋**p 側の同一視の誤りを検出・訂正**)/T3(判定式 (★)(☆) と岩澤型漸近そのものを証明、射程 d=1 の限界も特定)/T1(**観察 T を証明**し命題 T へ昇格)。cycle14 step列起こし。 |
 
 ## cycle 12 step 列（3トラック継続。2026-07-04 起こし）
 

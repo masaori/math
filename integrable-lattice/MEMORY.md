@@ -1,5 +1,24 @@
 # MEMORY
 
+## cycle 13 完了（2026-07-26, 証明のサイクル）
+
+- **T1 step1（誤りの検出＝最大の成果）**: `outputs/reports/cycle13_T1_padic_entropy_generality.md`。
+  002 が既知として並置していた「**$p$ 進エントロピー ＝ $p$ 進 Mahler 測度 ＝ 岩澤 $\mu_p$**」は**誤り**。
+  $\hbar_p,m_p$ は岩澤対数（$\log_p p=0$）で定義され**付値部分を捨てる**ので $v_p$ の増大を測らない。
+  定義域もほぼ排他的（定義できる条件 $P=ct^\nu(1+pg)$ の下では $v_p(a_L)=L^d v_p(c)$ と自明化）。
+  正しい量は Ueki の $\mathrm M_p$。**($\infty$) 側の一般性は文献本文で確定**（LSW Thm 3.1/7.1、LSV Thm 1.2/1.3 の3段）。002 を訂正した。
+- **T3 step2（証明）**: `outputs/reports/cycle13_T3_mu_content_criterion_proof.md`。
+  cycle 12 で数値照合のみだった $(★)$ と判定式 $(☆)$ を**証明**。さらに cycle 12 が既知理論に依拠していた
+  **岩澤型漸近そのものを証明**し $\lambda=\lambda_{\mathrm W}-1\ge1$ も決定。$(★)$ は連結性の仮定なしの形へ強化。
+  **射程の限界も特定**: $\ell\nmid N$ の段は content が支配しない（反例6件）、**$d\ge2$ の塔は対象外
+  ＝$L\times L$ トーラスにはそのまま適用できない**。新規性は主張しない（McGown–Vallières III Thm 6.1 の言い換え）。
+- **T1 step3（証明）**: `outputs/reports/cycle13_T1_observation_T_settlement.md`。
+  **観察 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を証明**し、002 の未証明観察から確定部分命題「命題 T」へ昇格。
+  骨子: $\tau(L)=\prod_j(r_j^L-1)^2/r_j^L$ へ分解 → 2 の不分岐性 → Newton 多角形で $v(m_j)=1$ → LTE 段。
+  敵対的レビューで反証されず、独立経路（終結式）で合成奇数 $9,15,21,25,27,33,35$ と $L=19$ まで確認。新規性は主張しない。
+- **002 の状態**: G1 は依然**未達**だが理由が正確になった。残るボトルネックは**2 変数・$\mathbb{Z}_p^2$ 塔での $v_p$ 増大則**の1点のみ。
+- cycle14 step列: T3 判定式の $\mathbb{Z}_\ell^2$-塔への拡張 / T1 2変数の $v_p$ 増大則 / T1 命題 T の一般化。
+
 ## cycle 12 完了（2026-07-26, 3トラック並走）
 
 - **T1**: 11 cycle の蓄積を統合した paper-plan `outputs/paper-plans/002_R_Lambda_duality.md`（ℝ/Λ 双対）。既知と寄与を表で分離、確定部分命題 A/B/C/N/L と未証明の観察 T を分節。**据え置き**（G1 未達＝双対命題 D の一般性が未確定）。

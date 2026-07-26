@@ -221,7 +221,9 @@ $v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になる
 
 1. **命題 D の ($p$) 側の一般性の確定**: 一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$・$\mathbb{Z}_p^2$ 塔での $v_p(a_{p^n})$ の増大則を述べた文献命題を特定する（cycle 13 step 1 の調査では見つからなかった）。$d\ge2$ では単一の線形成長率にならない（DuBose–Vallières Thm A）ので、$P(\ell^n,n)$ 型の形を前提に探すこと。**($\infty$) 側の一般性は cycle 13 step 1 で確定済み**（LSW Thm 7.1 / LSV Thm 1.2, 1.3。ただし $\mathsf P_\Gamma$ と $a_L$ の $c_\Gamma$ 差を明示すること）。
 2. **観察 T の決着**: （消化済み。cycle 13 step 3 で**証明した**。命題 T として §2 の確定部分命題へ移した。`outputs/reports/cycle13_T1_observation_T_settlement.md`。既出かどうかは本文未確認なので新規性は主張しない。）
-3. **非自明な $\mu_p>0$ の実例**: （消化済み。cycle 12 step 3 で判定式 $\mu_\ell=v_\ell(\mathrm{content}_z\det L(z))$ とともに $\mu_2=2,\mu_3=1,\mu_{23}=1$ 等の例を構成。`sagemath/check/cycle12_T3_nonzero_mu_p/`。ただし判定式の証明は cycle 13 step 2 の課題。）
+3. **非自明な $\mu_p>0$ の実例**: （消化済み。cycle 12 step 3 で判定式 $\mu_\ell=v_\ell(\mathrm{content}_z\det L(z))$ とともに $\mu_2=2,\mu_3=1,\mu_{23}=1$ 等の例を構成。`sagemath/check/cycle12_T3_nonzero_mu_p/`。判定式は cycle 13 step 2 で**証明した**（`outputs/reports/cycle13_T3_mu_content_criterion_proof.md`
+定理 1・2・3。$(★)$ と岩澤型漸近そのものも証明。新規性は主張しない＝McGown–Vallières III Thm 6.1 の言い換え）。
+ただし射程は $d=1$ の $\ell$-塔に限られ、本稿の $L\times L$ トーラス（$\mathbb{Z}_\ell^2$-塔）には**そのままでは適用できない**。)
 4. **寄与 (b) の既知性調査**: 「$\mathbb{Q}_p$ 不使用の可算化」が逆数学・構成的数学の文献に既出でないかを調べる。
 5. **選別基準 (iv) のメタ軸の扱い**: （消化済み。cycle 12 で `inputs/seeds/lambda-statement-program.md` の (iv) に対象軸5本＋メタ軸3本を明文化。本稿はメタ軸1本のみを動かし、対象軸は1本も動かしていない。）
 
