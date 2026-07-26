@@ -1,0 +1,58 @@
+# 251-01: def_transfer_matrix が述べている V_1, V_2 の構造の確認
+#
+# 本文が主張していること:
+#   * V_1 は δ_{μ=μ'} を含むので**対角行列**であり、対角成分は exp(Σ_j J' μ(j)μ(j+1))。
+#   * 指数の肩は R の元、exp の値は R_{>0} ⊂ C に属する（成分がすべて正の実数）。
+#   * 添字集合 𝔐 = Map({1,…,N},{-1,1}) の濃度は 2^N（行列のサイズが 2^N × 2^N）。
+#
+# 独立な計算経路として、V_2 を「N 個の 2×2 行列 ((e^J, e^{-J}), (e^{-J}, e^J)) の
+# クロネッカー積」として構成したものと突き合わせる。
+#   (V_2)_{μ,μ'} = Π_j exp(J μ(j)μ'(j))
+# であり、μ(j) ∈ {-1,1} を第 j ビットとみなす標準的な全単射のもとでこれはクロネッカー積に一致する。
+# 同様に V_1 の対角成分を「1 次元 Ising 環のエネルギー」から直接組み上げたものと比較する。
+
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '../../_shared/operators.sage'))
+load(os.path.join(_dir, '../252_partition_function_via_transfer_matrix/_prelude.sage'))
+
+import numpy as np
+
+rep = CheckReport("def_transfer_matrix: V_1 の対角性・成分の正値性・V_2 のクロネッカー積表示")
+
+for N in [1, 2, 3, 4, 5]:
+    order = spin_maps(N)   # μ(j) = -1 → ビット 0, μ(j) = +1 → ビット 1 の標準順
+    rep.truth(len(order) == 2 ** N, "N=%d: |𝔐| = 2^N = %d" % (N, 2 ** N))
+    for (J, Jp) in JJ_PAIRS:
+        V1, V2 = transfer_matrices(N, J, Jp, order=order)
+
+        # V_1 の対角性
+        offdiag = float(np.max(np.abs(V1 - np.diag(np.diag(V1)))))
+        rep.close(offdiag, 0.0, "N=%d J'=%.4g: V_1 は対角行列" % (N, Jp))
+
+        # 成分の正値性（R_{>0} ⊂ C に属する）
+        rep.truth(float(np.min(np.diag(V1))) > 0, "N=%d: V_1 の対角成分 > 0" % N)
+        rep.truth(float(np.min(V2)) > 0, "N=%d: V_2 の全成分 > 0" % N)
+        rep.truth(bool(np.all(np.isreal(V1))) and bool(np.all(np.isreal(V2))),
+                  "N=%d: V_1, V_2 の成分は実数" % N)
+
+        # V_2 のクロネッカー積表示（独立な構成経路）
+        t = np.array([[np.exp(J), np.exp(-J)], [np.exp(-J), np.exp(J)]], dtype=float)
+        V2kron = np.array([[1.0]])
+        for _ in range(N):
+            V2kron = np.kron(V2kron, t)
+        rep.close(V2, V2kron, "N=%d J=%.4g: V_2 = (2×2 の転送行列)^{⊗N}" % (N, J))
+
+        # V_1 の対角成分を 1 次元 Ising 環のエネルギーから直接組み上げたもの
+        diag_direct = np.array([
+            float(np.exp(sum(Jp * mu[j] * mu[(j + 1) % N] for j in range(N))))
+            for mu in order
+        ])
+        rep.close(np.diag(V1), diag_direct, "N=%d: V_1 の対角成分" % N)
+
+        # V_2 は対称行列（μ↔μ' の入れ替えで不変）
+        rep.close(V2, V2.T, "N=%d: V_2 は対称" % N)
+    print("  N=%d : |𝔐|=%d, V_1 対角・正値, V_2 = t^{⊗N}（t は 2×2 転送行列）を全パラメータで確認"
+          % (N, 2 ** N))
+
+rep.finish()
