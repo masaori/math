@@ -34,3 +34,5 @@ import Ising2D.Abstract.CommutatorClifford
 import Ising2D.Part008.Claim001_CommutatorHZY
 import Ising2D.Abstract.ExpConjugation
 import Ising2D.Part008.Claim006_ExpConjugation
+import Ising2D.Abstract.TVAction
+import Ising2D.Part008.Claim012_TVActions

@@ -1,0 +1,4 @@
+=== arg_of_product_of_complex_numbers ===
+  第1の場合 794 件、第2の場合 431 件
+checks: 1226, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

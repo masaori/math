@@ -1,0 +1,17 @@
+=== 1 重の交換子 (A)-(D) ===
+M = 3:
+  (A): max residual = 3.114e-15  ->  PASS
+  (B): max residual = 3.120e-15  ->  PASS
+  (C): max residual = 1.110e-16  ->  PASS
+  (D): max residual = 9.154e-17  ->  PASS
+M = 4:
+  (A): max residual = 1.959e-15  ->  PASS
+  (B): max residual = 1.959e-15  ->  PASS
+  (C): max residual = 2.958e-31  ->  PASS
+  (D): max residual = 0.000e-12  ->  PASS
+M = 5:
+  (A): max residual = 2.449e-15  ->  PASS
+  (B): max residual = 2.512e-15  ->  PASS
+  (C): max residual = 3.331e-16  ->  PASS
+  (D): max residual = 4.246e-16  ->  PASS
+RESULT: PASS

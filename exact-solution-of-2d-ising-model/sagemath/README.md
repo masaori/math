@@ -17,13 +17,13 @@ sagemath/
 │   ├── check_NN_*.sage        # 検証コード（1ファイル1論点）
 │   └── logs/check_NN_*.log    # 実行ログ（実際に走らせた出力をそのまま保存する）
 └── tools/
-    ├── verify-check-linkage.mjs  # 検証 ↔ 証明 の対応を機械検証
+    ├── verify-check-linkage.ts  # 検証 ↔ 証明 の対応を機械検証
     └── run-all-checks.sh         # 全 check を実行してログを更新する
 ```
 
 ## overview.md の必須要件
 
-`tools/verify-check-linkage.mjs` は各 check ディレクトリの `overview.md` に
+`tools/verify-check-linkage.ts` は各 check ディレクトリの `overview.md` に
 
 ```
 **対象ラベル**: `<label>`
@@ -78,7 +78,7 @@ sage sagemath/check/<dir>/check_01_....sage
 bash sagemath/tools/run-all-checks.sh
 
 # 検証 ↔ 証明 の対応
-node sagemath/tools/verify-check-linkage.mjs
+node sagemath/tools/verify-check-linkage.ts
 ```
 
 ## 不一致が出たときの扱い

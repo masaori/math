@@ -1,0 +1,62 @@
+=== テイラー係数の抽出（級数を n < 40 で打ち切り）===
+M = 3, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 1.077e-15  ->  PASS
+  h1.y: max residual = 1.112e-15  ->  PASS
+  h2.z-: max residual = 1.665e-15  ->  PASS
+  h2.y: max residual = 1.665e-15  ->  PASS
+M = 3, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 2.768e-15  ->  PASS
+  h1.y: max residual = 2.839e-15  ->  PASS
+  h2.z-: max residual = 1.503e-15  ->  PASS
+  h2.y: max residual = 2.481e-15  ->  PASS
+M = 3, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 1.198e-15  ->  PASS
+  h1.y: max residual = 1.208e-15  ->  PASS
+  h2.z-: max residual = 8.326e-16  ->  PASS
+  h2.y: max residual = 9.867e-16  ->  PASS
+M = 3, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 7.167e-16  ->  PASS
+  h1.y: max residual = 7.167e-16  ->  PASS
+  h2.z-: max residual = 1.110e-14  ->  PASS
+  h2.y: max residual = 1.058e-14  ->  PASS
+M = 4, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 1.402e-15  ->  PASS
+  h1.y: max residual = 1.402e-15  ->  PASS
+  h2.z-: max residual = 2.331e-15  ->  PASS
+  h2.y: max residual = 2.331e-15  ->  PASS
+M = 4, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 3.050e-15  ->  PASS
+  h1.y: max residual = 3.050e-15  ->  PASS
+  h2.z-: max residual = 1.973e-15  ->  PASS
+  h2.y: max residual = 2.105e-15  ->  PASS
+M = 4, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 1.337e-15  ->  PASS
+  h1.y: max residual = 1.337e-15  ->  PASS
+  h2.z-: max residual = 8.953e-16  ->  PASS
+  h2.y: max residual = 8.034e-16  ->  PASS
+M = 4, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 9.482e-16  ->  PASS
+  h1.y: max residual = 9.482e-16  ->  PASS
+  h2.z-: max residual = 6.217e-15  ->  PASS
+  h2.y: max residual = 6.217e-15  ->  PASS
+M = 5, K1 = 0.400000000000000, K2 = 0.800000000000000 (K2* = 0.204709):
+  h1.z: max residual = 1.835e-15  ->  PASS
+  h1.y: max residual = 1.835e-15  ->  PASS
+  h2.z-: max residual = 2.998e-15  ->  PASS
+  h2.y: max residual = 2.998e-15  ->  PASS
+M = 5, K1 = 1.20000000000000, K2 = 0.300000000000000 (K2* = 0.616679):
+  h1.z: max residual = 3.769e-15  ->  PASS
+  h1.y: max residual = 3.880e-15  ->  PASS
+  h2.z-: max residual = 3.374e-15  ->  PASS
+  h2.y: max residual = 3.244e-15  ->  PASS
+M = 5, K1 = 0.440700000000000, K2 = 0.440700000000000 (K2* = 0.440674):
+  h1.z: max residual = 1.670e-15  ->  PASS
+  h1.y: max residual = 1.670e-15  ->  PASS
+  h2.z-: max residual = 1.775e-15  ->  PASS
+  h2.y: max residual = 3.222e-15  ->  PASS
+M = 5, K1 = 0.0500000000000000, K2 = 0.100000000000000 (K2* = 1.152955):
+  h1.z: max residual = 1.181e-15  ->  PASS
+  h1.y: max residual = 1.181e-15  ->  PASS
+  h2.z-: max residual = 4.641e-14  ->  PASS
+  h2.y: max residual = 4.390e-14  ->  PASS
+RESULT: PASS

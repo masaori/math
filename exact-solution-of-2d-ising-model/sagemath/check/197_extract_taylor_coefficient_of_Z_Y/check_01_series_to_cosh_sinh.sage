@@ -1,0 +1,43 @@
+# <extract_taylor_coefficient_of_Z_Y>: n 重交換子の級数和が cosh/sinh の閉じた表示になる
+# 左辺は級数を項別に足し上げ、右辺は cosh/sinh から独立に計算する。
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
+load(os.path.join(_dir, "../../_shared/operators.sage"))
+import numpy as np
+rep = CheckReport("extract_taylor_coefficient_of_Z_Y: 級数和 = cosh/sinh 表示")
+NTERMS = 40
+import math
+for M in [2,3,4]:
+    rng_mu = list(range(-M,0)) + list(range(1,M+1))
+    for p in OP_TEST_PARAMS[:4]:
+        K1 = p['K1']; K2s = K_star(p['K2'])
+        for mu in rng_mu:
+            e_m = np.exp(-1j*2*np.pi*mu/M); e_p = np.exp(+1j*2*np.pi*mu/M)
+            for sgn in ['+','-']:
+                X1 = 1j*(K1/2.0)*H1_op(M, sgn)      # (i/2) K_1 H_1^{(±)}
+                Zs = hatZ_op(mu,M,sgn); Ys = hatY_op(mu,M)
+                # (h1.z)
+                s = np.zeros_like(Zs); t = Zs.copy()
+                for n in range(NTERMS+1):
+                    s = s + t/math.factorial(n)
+                    t = comm(X1, t)
+                rep.close(s, np.cosh(K1)*Zs + 1j*e_m*np.sinh(K1)*Ys, f"M={M} sgn={sgn} mu={mu}: (h1.z)")
+                # (h1.y)
+                s = np.zeros_like(Ys); t = Ys.copy()
+                for n in range(NTERMS+1):
+                    s = s + t/math.factorial(n)
+                    t = comm(X1, t)
+                rep.close(s, -1j*e_p*np.sinh(K1)*Zs + np.cosh(K1)*Ys, f"M={M} sgn={sgn} mu={mu}: (h1.y)")
+            # (h2.z-) / (h2.y)  with X = i K_2^* H_2
+            X2 = 1j*K2s*H2_op(M)
+            Zm = hatZ_op(mu,M,'-'); Ym = hatY_op(mu,M)
+            s = np.zeros_like(Zm); t = Zm.copy()
+            for n in range(NTERMS+1):
+                s = s + t/math.factorial(n); t = comm(X2, t)
+            rep.close(s, np.cosh(2*K2s)*Zm - 1j*np.sinh(2*K2s)*Ym, f"M={M} mu={mu}: (h2.z-)")
+            s = np.zeros_like(Ym); t = Ym.copy()
+            for n in range(NTERMS+1):
+                s = s + t/math.factorial(n); t = comm(X2, t)
+            rep.close(s, 1j*np.sinh(2*K2s)*Zm + np.cosh(2*K2s)*Ym, f"M={M} mu={mu}: (h2.y)")
+print("打ち切り項数 NTERMS =", NTERMS)
+rep.finish()

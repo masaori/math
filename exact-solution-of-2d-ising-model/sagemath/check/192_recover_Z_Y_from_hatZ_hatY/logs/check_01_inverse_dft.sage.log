@@ -1,0 +1,3 @@
+=== recover_Z_Y_from_hatZ_hatY: 逆離散 Fourier 変換 ===
+checks: 74, max relative error: 6.852e-16, tol: 1.0e-09
+RESULT: PASS

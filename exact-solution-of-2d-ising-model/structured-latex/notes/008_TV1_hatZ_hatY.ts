@@ -14,9 +14,9 @@ export default defineNotes([
         String.raw`\begin{aligned}
 H_1^{(\pm)} &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right) \\
 H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
-[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}} \\
-[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\mp)}]_+ &= \overbrace{2M\,\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(\mu+\nu)}\cdot 2\,I_{(\mathbb{C}^2)^{\otimes M}}\right) \\
+[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
+[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\mp)}]_+ &= \overbrace{2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+}
+   + \left(-2\,e^{-i\frac{2\pi}{M}(\mu+\nu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) \\
 [\hat{Z}_\mu^{(\pm)},\hat{Y}_\nu]_+ &= 0 \\
 [\hat{Y}_\mu,\hat{Y}_\nu]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I \\
 \sum_{j=1}^{M} e^{k\cdot\frac{2\pi i j}{M}} &= M\,\delta^M_{(k,0)}
@@ -275,7 +275,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
         " とは別の TODO 項目 009）の性質には依存しない。",
         ref("T_V_eq_T_Vprime"),
         " の共役写像としての一致から、全行列環 ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の中心がスカラーに限ること（",
         ref("centralizer_is_scalar"),
         "）を用いて結論する。",

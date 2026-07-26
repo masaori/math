@@ -323,7 +323,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
         " がともに定義される。そこで",
       ]),
       displayMath(
-        String.raw`n_\mu := \psi_\mu^\dagger \psi_{-\mu} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+        String.raw`n_\mu := \psi_\mu^\dagger \psi_{-\mu} \in \mathrm{Mat}(2^M,\mathbb{C})
 \qquad (\mu \in \mathcal{I})`,
       ),
       paragraph([
@@ -355,11 +355,16 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
       displayMath(
         String.raw`V' = \exp(X), \qquad
 X := \sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)\left(n_\mu - \tfrac{1}{2}
-I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right)`,
+I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
       ),
       paragraph(["と書ける。"]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -374,12 +379,16 @@ I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right)`,
       list([
         [math(String.raw`\text{(1)}\quad (\psi_\mu^\dagger)^2 = 0, \qquad (\psi_{-\mu})^2 = 0`)],
         [
-          math(String.raw`\text{(2)}\quad \psi_{-\mu}\psi_\mu^\dagger = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} - n_\mu`),
+          math(String.raw`\text{(2)}\quad \psi_{-\mu}\psi_\mu^\dagger = I_{\mathrm{Mat}(2^M,\mathbb{C})} - n_\mu`),
         ],
         [math(String.raw`\text{(3)}\quad n_\mu^2 = n_\mu`)],
       ]),
       paragraph([
-        "以下、単位元を単に ",
+        "以下、",
+        math(String.raw`2^M`),
+        " 次の単位行列 ",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        " を単に ",
         math(String.raw`I`),
         " と書く。",
       ]),
@@ -471,7 +480,12 @@ n_\mu^2
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -618,8 +632,12 @@ A\,n_\nu
     ],
     proof: [
       paragraph([
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} = \mathrm{Mat}(2^M,\mathbb{C})`),
-        " なので、",
+        math(String.raw`n_\mu \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " であり ",
+        math(String.raw`I = I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        " は ",
+        math(String.raw`2^M`),
+        " 次の単位行列なので、",
         ref("trace_basic_properties"),
         " (3) より ",
         math(String.raw`\mathrm{tr}(I) = 2^M`),
@@ -701,7 +719,12 @@ A\,n_\nu
         " (2) より、添字の並べ替えで値は変わらないので、一般の相異なる添字列についても同じ結論を得る。）",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -719,7 +742,7 @@ A\,n_\nu
       displayMath(
         String.raw`Q_\epsilon := \prod_{\mu \in \mathcal{I}}
 \Bigl(\epsilon_\mu\, n_\mu + (1 - \epsilon_\mu)\,(I - n_\mu)\Bigr)
-\in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "と定める（因子は ",
@@ -945,7 +968,12 @@ R_\mu^{(1)} + R_\mu^{(0)} &= n_\mu + (I - n_\mu) = I
         " の次元に一致する。）",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
 
   {
@@ -1571,13 +1599,19 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
         ref("pauli_matrix_products"),
         " より ",
         math(String.raw`\sigma^x\sigma^x = I`),
-        "、相異なるテンソル因子に置かれた ",
+        "、相異なるサイトに置かれた ",
         math(String.raw`\sigma_j^a`),
         " と ",
         math(String.raw`\sigma_k^b`),
         "（",
         math(String.raw`j \neq k`),
-        "）は可換である（テンソル積代数の積の定義より、因子ごとの積になるため）。",
+        "）は可換である（",
+        ref("kronecker_product_rule"),
+        " (1) より、クロネッカー積どうしの積は各サイトごとの ",
+        math(String.raw`2`),
+        " 次の行列の積になり、各サイトでは一方が ",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " だから）。",
       ]),
       paragraph([
         "Step 1（",
@@ -1665,11 +1699,16 @@ Y_M Z_1
         math(String.raw`\sigma^y = \begin{pmatrix}0&-i\\i&0\end{pmatrix}`),
         " は成分が純虚数で交代（",
         math(String.raw`(\sigma^y)^\top = -\sigma^y`),
-        "）である。テンソル積の成分は各因子の成分の積であり、転置は因子ごとの転置になる：",
+        "）である。クロネッカー積（",
+        ref("def_kronecker"),
+        "）の成分は各因子の成分の積であり、転置は因子ごとの転置になる（",
+        ref("kronecker_transpose"),
+        "）：",
       ]),
       displayMath(
-        String.raw`\left(A_1\otimes\cdots\otimes A_M\right)^\top
-= A_1^\top\otimes\cdots\otimes A_M^\top`,
+        String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top
+= A_1^\top\boxtimes\cdots\boxtimes A_M^\top
+\quad (\because \text{クロネッカー積の転置})`,
       ),
       paragraph([
         "したがって、",
@@ -1722,6 +1761,7 @@ Y_M Z_1
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "iK_1H_1^{(±)} と iK_2^*H_2 が厳密に実対称（成分が実かつ転置不変）であることは、M=2,3,4,5 と両符号について数値的にも残差 0 で確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_01_real_symmetric.sage）。",
       ],
     },
@@ -1868,10 +1908,14 @@ Y_M Z_1
       displayMath(
         String.raw`E := \prod_{\substack{1 \leq m \leq M \\ m\ \text{奇数}}} \sigma_m^x, \qquad
 F := \prod_{m=1}^{M} \sigma_m^z, \qquad
-U := E F \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+U := E F \in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
-        "とおく（積の因子は相異なるテンソル因子に置かれるので互いに可換であり、順序は問わない）。このとき ",
+        "とおく（積の因子は相異なるサイトに置かれた ",
+        math(String.raw`2`),
+        " 次の行列のクロネッカー積なので、",
+        ref("kronecker_product_rule"),
+        " (1) より互いに可換であり、順序は問わない）。このとき ",
         math(String.raw`U`),
         " は可逆で、複号同順に",
       ]),
@@ -2089,6 +2133,7 @@ U\sigma_k^z U^{-1} = \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "この U は M の偶奇によらず両方の符号 (±) について働く。M=2,3,4,5,6 と両符号で残差 0 を数値確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_02_sign_flip_conjugation.sage）。",
       ],
     },
@@ -2183,7 +2228,7 @@ U\sigma_k^z U^{-1} = \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^
       ]),
       displayMath(
         String.raw`U\exp(S)U^{-1} = \exp\!\left(U S U^{-1}\right)
-\qquad (S \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M})`,
+\qquad (S \in \mathrm{Mat}(2^M,\mathbb{C}))`,
       ),
       paragraph([
         "これを ",
@@ -2301,6 +2346,7 @@ U\sigma_k^z U^{-1} = \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "M=2,3,4,5 と複数の (K1,K2) について V'^{-1}V = c I が成り立ち、その c が (2 sinh 2K2)^{M/2} に一致することを数値確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_04_constant_c.sage）。",
       ],
     },

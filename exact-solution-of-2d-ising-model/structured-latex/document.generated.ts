@@ -33,6 +33,10 @@ import blocks_007_hatZ_hatY_anticommutation from "./content/007_hatZ_hatY_antico
 import blocks_008_TV1_hatZ_hatY_part1 from "./content/008_TV1_hatZ_hatY_part1.ts";
 import blocks_008_TV1_hatZ_hatY_part2 from "./content/008_TV1_hatZ_hatY_part2.ts";
 import blocks_009_eigenvalues_of_V from "./content/009_eigenvalues_of_V.ts";
+import blocks_010_transfer_matrix_bridge from "./content/010_transfer_matrix_bridge.ts";
+import blocks_011_max_eigenvalue from "./content/011_max_eigenvalue.ts";
+import blocks_012_free_energy from "./content/012_free_energy.ts";
+import blocks_013_even_sector_modes from "./content/013_even_sector_modes.ts";
 import notes_000_calculation_formulae from "./notes/000_calculation_formulae.ts";
 import notes_001_partition_function_2d_ising from "./notes/001_partition_function_2d_ising.ts";
 import notes_002_linear_space_general from "./notes/002_linear_space_general.ts";
@@ -59,6 +63,10 @@ export type AllBlocks = [
   ...typeof blocks_008_TV1_hatZ_hatY_part1,
   ...typeof blocks_008_TV1_hatZ_hatY_part2,
   ...typeof blocks_009_eigenvalues_of_V,
+  ...typeof blocks_010_transfer_matrix_bridge,
+  ...typeof blocks_011_max_eigenvalue,
+  ...typeof blocks_012_free_energy,
+  ...typeof blocks_013_even_sector_modes,
 ];
 
 /** 全ノート。 */

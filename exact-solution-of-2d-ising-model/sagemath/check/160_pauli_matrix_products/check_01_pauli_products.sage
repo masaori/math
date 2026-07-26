@@ -1,0 +1,20 @@
+# <pauli_matrix_products>: sigma^a sigma^a = I と 3 つの反可換関係
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
+load(os.path.join(_dir, "../../_shared/operators.sage"))
+import numpy as np
+rep = CheckReport("pauli_matrix_products: 2x2 Pauli 行列の積")
+# 左辺は行列積、右辺は定義から独立に書いた行列。numpy の @ で成分計算される。
+rep.close(SX @ SX, I2, "sigma^x sigma^x = I")
+rep.close(SY @ SY, I2, "sigma^y sigma^y = I")
+rep.close(SZ @ SZ, I2, "sigma^z sigma^z = I")
+rep.close(SZ @ SX, -(SX @ SZ), "sigma^z sigma^x = -sigma^x sigma^z")
+rep.close(SY @ SX, -(SX @ SY), "sigma^y sigma^x = -sigma^x sigma^y")
+rep.close(SY @ SZ, -(SZ @ SY), "sigma^y sigma^z = -sigma^z sigma^y")
+# 反例側: 同じ行列どうしは反可換ではない（関係式が非自明であることの確認）
+rep.truth(np.max(np.abs(SX @ SX + SX @ SX)) > 1.0, "sigma^x sigma^x = -sigma^x sigma^x は偽（非自明性）")
+# 追加: sigma^x sigma^y = i sigma^z 型の関係（本文には無いが Pauli 群の閉性の根拠）
+rep.close(SX @ SY, 1j * SZ, "sigma^x sigma^y = i sigma^z")
+rep.close(SY @ SZ, 1j * SX, "sigma^y sigma^z = i sigma^x")
+rep.close(SZ @ SX, 1j * SY, "sigma^z sigma^x = i sigma^y")
+rep.finish()

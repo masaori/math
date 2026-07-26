@@ -1,0 +1,39 @@
+# <V2_not_in_clifford_group>: V_2 sigma^z_1 V_2^{-1} が Pauli 群へ写らない
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
+load(os.path.join(_dir, "../../_shared/operators.sage"))
+import numpy as np
+import itertools
+rep = CheckReport("V2_not_in_clifford_group")
+def pauli_basis(M):
+    labels, mats = [], []
+    for combo in itertools.product('0xyz', repeat=M):
+        labels.append(''.join(combo))
+        mats.append(kron_list([PAULI[a] for a in combo]))
+    return labels, mats
+for M in [2,3]:
+    labels, basis = pauli_basis(M)
+    n = 2**M
+    for K2 in [0.4, 0.8, 1.2]:
+        V2 = V2_op(K2, M)
+        W = T_conj(V2, sz(1,M))
+        coeffs = [np.trace(B.conj().T @ W)/n for B in basis]
+        nz = [(labels[k], coeffs[k]) for k in range(len(coeffs)) if abs(coeffs[k]) > 1e-8]
+        print(f"  M={M} K2={K2}: 非零な Pauli 成分 {len(nz)} 個")
+        for lab, c in nz:
+            print(f"      {lab}: {c.real:+.10f} {c.imag:+.10f}i")
+        rep.truth(len(nz) >= 2, f"M={M} K2={K2}: 非零成分が 2 個以上 ⟹ Pauli 群の元ではない")
+        # 展開が完全であること（係数から W を再構成できる）
+        recon = sum(coeffs[k]*basis[k] for k in range(len(basis)))
+        rep.close(recon, W, f"M={M} K2={K2}: Pauli 基底での展開が完全")
+        # V_2 はユニタリではない（正定値エルミート）ので係数の平方和は 1 にならない。
+        # Clifford 群の元なら W は単一の Pauli 元（係数の平方和 1、非零成分 1 個）になるはず。
+        print(f"      係数の平方和 = {sum(abs(c)**2 for c in coeffs):.6f}"
+              f"（Clifford 群の元なら 1 かつ非零成分 1 個になる）")
+    K1 = 0.4
+    g = principal_sqrt_of_V1pm(K1, M, '-')
+    W = T_conj(g, Zop(1,M))
+    coeffs = [np.trace(B.conj().T @ W)/n for B in basis]
+    nzc = sum(1 for c in coeffs if abs(c) > 1e-8)
+    print(f"  [参考] M={M}: (V_1^(-))^(1/2) で Z_1 を共役した場合の非零 Pauli 成分は {nzc} 個")
+rep.finish()

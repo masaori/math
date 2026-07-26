@@ -4,7 +4,7 @@
 
 **対象ラベル**: `T_V_hatZ_hatY` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`（ブロック `TV1_hatZ_hatY_018_claim_T_V_action`）
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`（ブロック `TV1_hatZ_hatY_018_claim_T_V_action`）
 - 範囲: proof の Step 1〜6、すなわち行列積 `B_1(theta) B_2 B_1(theta) = A(theta)` の 4 成分
 - 併せて検証: `duality_c2_star_eq_s2_star_c2`（(1,2)/(2,1) 成分の一致に必要な双対関係 `c_2^* = s_2^* c_2`）
 

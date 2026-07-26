@@ -74,9 +74,9 @@ export default defineBlocks([
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    + \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+ \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}\right)
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
    \quad (\because \text{反交換子の値}) \\
-&= 2\sum_{j\in\{1,\dots,M\}} \delta^M_{-j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Y}_j\, I_{(\mathbb{C}^2)^{\otimes M}} \\
+&= 2\sum_{j\in\{1,\dots,M\}} \delta^M_{-j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Y}_j\, I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
 &= 2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j
 \end{aligned}`,
       ),
@@ -141,10 +141,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
    + \hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\mp)}]_+ \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(
-   \overbrace{2M\,\delta^M_{-j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}}^{[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{(\mathbb{C}^2)^{\otimes M}}\right)\right) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}\right)
-   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{(\mathbb{C}^2)^{\otimes M}}\right) \\
+   \overbrace{2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}^{[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+}
+   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right) \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) \\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
    - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}-i\frac{2\pi}{M}(-j+\mu)}\hat{Y}_j \\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
@@ -209,7 +209,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-\hat{Y}_j\hat{Y}_\mu
    - \hat{Y}_\mu\hat{Y}_j\right)\hat{Z}_{-j}^{(\pm)} \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-[\hat{Y}_j,\hat{Y}_\mu]_+\right)\hat{Z}_{-j}^{(\pm)} \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-2M\,\delta^M_{j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}\right)\hat{Z}_{-j}^{(\pm)} \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-2M\,\delta^M_{j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Z}_{-j}^{(\pm)} \\
 &= -2\sum_{j\in\{1,\dots,M\}} \delta^M_{j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Z}_{-j}^{(\pm)}
 \end{aligned}`,
       ),
@@ -285,8 +285,8 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
       displayMath(
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-[\hat{Z}_\mu^{(-)},\hat{Z}_{-j}^{(-)}]_+\right)\hat{Y}_j
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}\right)\hat{Y}_j \\
-&= -2\sum_{j\in\{1,\dots,M\}}\delta^M_{-j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}\,\hat{Y}_j \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Y}_j \\
+&= -2\sum_{j\in\{1,\dots,M\}}\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\,\hat{Y}_j \\
 &= -2\begin{cases}
 \hat{Y}_M & (\mu = -M) \\
 \hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
@@ -304,8 +304,8 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
         String.raw`\begin{aligned}
 &\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-[\hat{Z}_\mu^{(+)},\hat{Z}_{-j}^{(-)}]_+\right)\hat{Y}_j \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(
-   -\overbrace{2M\,\delta^M_{-j+\mu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_{-j}^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{(\mathbb{C}^2)^{\otimes M}}\right)\right)\hat{Y}_j \\
+   -\overbrace{2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_{-j}^{(\pm)}]_+}
+   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)\hat{Y}_j \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j
    + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)\right) \\
 &= -2\begin{cases}
@@ -354,6 +354,7 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の全計算過程を各ステップ忠実に翻訳。statement に原文にある [H2, hatZ^(+)] の関係式を追加した。",
         "(2) [H1, hatZ^(∓)] の最終段で原文は第2項（-4/M e^{-i2πμ/M} Σ_k Y_k M δ^M_{(k,0)}）を 0 として結論しているが、この項は一般に消えず（k=M で δ=1）、原文の該当ステップの正当化は不完全。忠実性のため原文どおり `- 0` を残した。",
       ],
@@ -374,7 +375,7 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
         " とする。以下に現れる ",
         math(String.raw`H_1^{(\pm)}, H_2, \hat{Z}_\mu^{(\pm)}, \hat{Y}_\mu`),
         " はすべて結合代数 ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の元であり（",
         ref("H1_H2_via_hatZ_hatY"),
         "、",
@@ -387,7 +388,7 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
       ]),
       paragraph([
         "また、",
-        math(String.raw`X \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を固定するごとに ",
         math(String.raw`n`),
         " 重の交換子を",
@@ -399,7 +400,7 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
       ),
       paragraph([
         "と定める（",
-        math(String.raw`\mathrm{ad}_X : \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{ad}_X : \mathrm{Mat}(2^M,\mathbb{C}) \to \mathrm{Mat}(2^M,\mathbb{C})`),
         " は ",
         math(String.raw`\mathbb{C}`),
         " 線型写像）。とくに ",
@@ -470,7 +471,7 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
       ]),
       displayMath(
         String.raw`[\alpha X, \beta W] = \alpha\beta\,[X, W]
-\qquad (\alpha, \beta \in \mathbb{C},\ X, W \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M})`,
+\qquad (\alpha, \beta \in \mathbb{C},\ X, W \in \mathrm{Mat}(2^M,\mathbb{C}))`,
       ),
       paragraph([
         "のみを用いる（後者は ",
@@ -805,6 +806,7 @@ F_{n+1}
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の proof は「TODO : note 参考にして、帰納法で行ける」というアウトラインのみで帰納法本体は未記述だった。4 式それぞれについて n に関する帰納法（基底 n=0 と、偶数 n→奇数 n+1 / 奇数 n→偶数 n+1 の 2 つの帰納段階）を人手で書き下し、todo を除去した。",
         "原文 note の n=0..4 具体例を block-level notes に忠実に翻訳。原文の (h2.z^+) は「これは使われない」というメモのみで式が無いため statement・notes とも省いた。原文 note の (h1.y) n=3 は exp の符号が n=1 と不整合（誤植）だったため、本作業で n=1 と同じ e^{-i2π(-μ)/M}（= e^{+iθ}）へ修正した。用いる 1 重公式 [H_1^{(±)}, hat(Y)_mu] = -2 e^{iθ} hat(Z)_mu^{(±)} は sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_01_single_commutators.sage の (B) で数値的に確認済み。帰納法の証明は note の具体例ではなく commutator_of_H_and_Z_Y の 1 重公式から直接構成した。",
         "原文 statement の (h1.y) 奇数側は hat(Z)_mu^{(+)} と書かれているが、用いる 1 重公式 [H_1^{(±)}, hat(Y)_mu] = -2 e^{iθ} hat(Z)_mu^{(±)} は H_1 と同符号の hat(Z) を返すため、構造化側では hat(Z)_mu^{(±)} とした（移行時点からの表記であり、本作業で変更していない）。",
@@ -862,7 +864,7 @@ i (2K_2^*)^n \hat{Z}_\mu^{(-)} & (n \text{ 奇数}) \\
         "補題 1（生成子のスカラー倍）：",
         math(String.raw`\alpha \in \mathbb{C}`),
         "、",
-        math(String.raw`X, W \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`X, W \in \mathrm{Mat}(2^M,\mathbb{C})`),
         "、",
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
         " について",
@@ -1121,6 +1123,7 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文 proof は (h1.z) の代入計算のみを扱い、(h1.y)/(h2.z−)/(h2.y) は statement で「同様」とされ本文計算が無かった。下流の extract_taylor_coefficient_of_Z_Y の proof が 4 式すべてを必要とするため、statement に (h1.y)/(h2.y) の式を明示的に書き足し、proof でも 4 式すべての代入計算を書き下した。",
         "原文の指数簡約は (-1)^{1/2} という実数の範囲で意味をなさない中間式を経由しており（(n-1)/2+n/2 を (2n+2)/2+1/2 と書く等）、最終結果は正しいものの各ステップの正当化が不能だった。生成子のスカラー倍に関する補題 1（ad_{αX}^n = α^n ad_X^n）と虚数単位の冪に関する補題 2（i^n の偶奇分解）を明示的に立て、すべての指数を整数の範囲で扱う形へ書き改めた。",
         "4 式すべての結果は sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_02_scaled_nested_commutators.sage で n=0..8、M=3,4,5、複数の (K1,K2) について数値的に確認済み。",
@@ -1420,13 +1423,13 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
     kind: "definition",
     sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/008_definition_環の乗法群.typ",
     sourceOrdinal: 9,
-    title: { tex: String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} \text{ の可逆元}` },
+    title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の可逆元}` },
     labels: ["def_invertible_elements_of_R"],
     statement: [
       paragraph([
-        math(String.raw`R := \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
         " と書き、その単位元を ",
-        math(String.raw`I := I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         " と書く。",
         math(String.raw`g \in R`),
         " が可逆であるとは、",
@@ -1549,6 +1552,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（parts/008/008）は「環 R の乗法群 R^×」という一般の環についての定義だった。README 2 節「環・体などの一般論に持ち上げた証明は使わない」・3 節 2「脇道の一般論なら具体的な形に落として本文に書く」に従い、Mat(2,C)^{⊗M} の可逆元についての具体的な定義へ書き換え、以降の証明で実際に使う性質（逆元の一意性、単位元・積・逆元・スカラー倍についての可逆性）だけを主張として立てた。一般の環についての元の記述は notes/008_group_theory_general.ts へ移した。",
       ],
     },
@@ -1563,7 +1567,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     statement: [
       paragraph([
         "以下 ",
-        math(String.raw`R := \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
         " と書き、",
         ref("pauli_matrix_products"),
         " の Pauli 行列 ",
@@ -1579,7 +1583,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         " サイトの Pauli 群を",
       ]),
       displayMath(
-        String.raw`\mathcal{P}_M := \left\{\,i^{k}\,\sigma^{a_1}\otimes\sigma^{a_2}\otimes\cdots\otimes\sigma^{a_M}
+        String.raw`\mathcal{P}_M := \left\{\,i^{k}\,\sigma^{a_1}\boxtimes\sigma^{a_2}\boxtimes\cdots\boxtimes\sigma^{a_M}
 \ \middle|\ k \in \{0,1,2,3\},\ (a_1,\dots,a_M) \in \mathbb{A}^M \right\} \subseteq R`,
       ),
       paragraph([
@@ -1591,7 +1595,13 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         math(String.raw`\sigma^a\sigma^b`),
         " は ",
         math(String.raw`i^k\sigma^c`),
-        " の形になり、テンソル積の積は成分ごとの積である）。",
+        " の形になり、クロネッカー積どうしの積は各サイトごとの ",
+        math(String.raw`2`),
+        " 次の行列の積になる：",
+        ref("kronecker_product_rule"),
+        " (1)。スカラー倍を外へ出すのは ",
+        ref("kronecker_multilinear"),
+        "）。",
         math(String.raw`\#\mathcal{P}_M = 4\cdot 4^M`),
         " であり、とくに有限群である。",
       ]),
@@ -1651,6 +1661,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（parts/008/009）は definition の体裁だが中身は著者の検討メモであり、箇条書き 3 項目（クリフォード群の定義／T_g の定義をクリフォード群へ狭める／T の定数倍を除いた単射性を示す）と、3 つ目に付随する『3 つのアプローチ』が書かれていた。原文の 3 つのアプローチは次のとおり（原文の文言）: 試す1「V を具体的な行列として書く、がゴールなので T_((V)) からその表式を見つけられないか？」／試す2「T の（定数倍除いた）単射性を（Cl に触れずに）示す」／だめだったら3「Cl と行列環の同型を認め、T の（定数倍除いた）単射性も認め、計算を先に進める」。",
         "本作業でこの検討は決着した。(a) T の（定数倍を除いた）単射性は Clifford 代数と行列環の同型を経由せず、すべての元と可換な元がスカラー倍の単位行列に限ること（centralizer_is_scalar）から直接示せる（injectivity_of_T_up_to_scalar）。すなわち原文の『試す2』が成立し、『試す1』『だめだったら3』は不要である。(b) 一方『T_g の定義をクリフォード群の元に狭める』は採れない。V_2 がクリフォード群に属さないためで、これは V2_not_in_clifford_group で証明した。したがって本文では T_g の定義域を R^× のままとし（def_T_g）、クリフォード群は本証明では使わない。",
         "クリフォード群の定義そのものは、上記 (b) の主張（V_2 ∉ C_M）を述べるために必要なので本文に残した。標準的な定義がユニタリ群上で与えられるのに対しここでは R^× 上の正規化群としたのは、V_2 がユニタリでないため（statement 内に理由を明記）。",
@@ -1719,7 +1730,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         " なので基底である。",
         ref("tensor_basis"),
         " より ",
-        math(String.raw`\{\sigma^{a_1}\otimes\cdots\otimes\sigma^{a_M} \mid (a_1,\dots,a_M)\in\mathbb{A}^M\}`),
+        math(String.raw`\{\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_M} \mid (a_1,\dots,a_M)\in\mathbb{A}^M\}`),
         " は ",
         math(String.raw`R`),
         " の基底である。",
@@ -1763,7 +1774,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
       ]),
       paragraph([
         "Step 3: ",
-        math(String.raw`\sigma_1^z := \sigma^z\otimes\sigma^0\otimes\cdots\otimes\sigma^0 \in \mathcal{P}_M`),
+        math(String.raw`\sigma_1^z := \sigma^z\boxtimes\sigma^0\boxtimes\cdots\boxtimes\sigma^0 \in \mathcal{P}_M`),
         " の ",
         math(String.raw`V_2`),
         " による共役を計算する。",
@@ -1772,7 +1783,15 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         math(String.raw`\sigma_k^x`),
         " と ",
         math(String.raw`\sigma_l^x`),
-        " は異なるテンソル因子にのみ非自明に作用するので可換であり、",
+        " はクロネッカー積の異なるサイトにのみ ",
+        math(String.raw`\sigma^x`),
+        " を置き（他のサイトは ",
+        math(String.raw`\sigma^0 = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "）、",
+        ref("kronecker_product_rule"),
+        " (1) より積は各サイトごとの ",
+        math(String.raw`2`),
+        " 次の行列の積になるから可換であり、",
         ref("theorem_exp_product"),
         " より",
       ]),
@@ -1798,7 +1817,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
       displayMath(
         String.raw`V_2\,\sigma_1^z\,V_2^{-1}
 = \exp\!\left(K_2^*\sigma_1^x\right)\sigma_1^z\exp\!\left(-K_2^*\sigma_1^x\right)
-= \left(\exp\!\left(K_2^*\sigma^x\right)\sigma^z\exp\!\left(-K_2^*\sigma^x\right)\right)\otimes\sigma^0\otimes\cdots\otimes\sigma^0`,
+= \left(\exp\!\left(K_2^*\sigma^x\right)\sigma^z\exp\!\left(-K_2^*\sigma^x\right)\right)\boxtimes\sigma^0\boxtimes\cdots\boxtimes\sigma^0`,
       ),
       paragraph([
         "Step 4: 第 1 因子を計算する。",
@@ -1863,8 +1882,8 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
       ]),
       displayMath(
         String.raw`V_2\,\sigma_1^z\,V_2^{-1}
-= c_2^*\left(\sigma^z\otimes\sigma^0\otimes\cdots\otimes\sigma^0\right)
-- i\,s_2^*\left(\sigma^y\otimes\sigma^0\otimes\cdots\otimes\sigma^0\right)`,
+= c_2^*\left(\sigma^z\boxtimes\sigma^0\boxtimes\cdots\boxtimes\sigma^0\right)
+- i\,s_2^*\left(\sigma^y\boxtimes\sigma^0\boxtimes\cdots\boxtimes\sigma^0\right)`,
       ),
       paragraph([
         "は Step 1 の基底に関して相異なる 2 つの基底元の係数がともに ",
@@ -1872,7 +1891,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         " でない。一方 ",
         math(String.raw`\mathcal{P}_M`),
         " の元 ",
-        math(String.raw`i^k\sigma^{a_1}\otimes\cdots\otimes\sigma^{a_M}`),
+        math(String.raw`i^k\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_M}`),
         " は同じ基底に関して非零の係数をちょうど 1 つしかもたない。基底に関する表示の一意性より ",
         math(String.raw`V_2\sigma_1^zV_2^{-1} \notin \mathcal{P}_M`),
         "。したがって ",
@@ -1885,6 +1904,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の検討メモにあった『T_g の定義をクリフォード群の元に狭める』という方針が採れないことを示す主張。原文には無く、本作業で新規に追加した。",
       ],
     },
@@ -1898,14 +1918,19 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     labels: ["def_T_g"],
     statement: [
       paragraph([
-        math(String.raw`g \in (\mathrm{Mat}(2,\mathbb{C})^{\otimes M})^\times`),
+        math(String.raw`g \in (\mathrm{Mat}(2^M,\mathbb{C}))^\times`),
         " について、",
       ]),
       displayMath(
-        String.raw`T_g : \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \to \mathrm{Mat}(2,\mathbb{C})^{\otimes M}, \quad h \mapsto g \cdot h \cdot g^{-1}`,
+        String.raw`T_g : \mathrm{Mat}(2^M,\mathbb{C}) \to \mathrm{Mat}(2^M,\mathbb{C}), \quad h \mapsto g \cdot h \cdot g^{-1}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
@@ -1916,9 +1941,9 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     labels: ["injectivity_of_T_up_to_scalar", "center_of_multiplicative_group_is_scalar"],
     statement: [
       paragraph([
-        math(String.raw`R := \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
         "、",
-        math(String.raw`I := I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         " とし、",
         math(String.raw`R^\times`),
         " を ",
@@ -1996,7 +2021,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         " は ",
         math(String.raw`\mathbb{C}`),
         " 上の有限次元線型空間 ",
-        math(String.raw`(\mathbb{C}^2)^{\otimes M}`),
+        math(String.raw`\mathbb{C}^{2^M}`),
         " の自己準同型を表す行列であり、その固有値の集合 ",
         math(String.raw`\Lambda(x) \subseteq \mathbb{C}`),
         " は特性多項式（",
@@ -2279,6 +2304,7 @@ g\left(u\,h\right)g'^{-1} = g\left(g^{-1}g'\right) h\, g'^{-1} = g' h g'^{-1}`,
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の検討メモ（parts/008/009）にあった『T の（定数倍を除いた）単射性が大事そうなので示す』を、メモの『試す2』の方針（Clifford 代数と行列環の同型に触れずに示す）で実際に証明したもの。",
         "当初は自己同型群・核・中心・完全列という群の一般論を経由していたが、README のゴール設定（環・体などの一般論に持ち上げない／脇道の一般論は具体的な形に落とす）に従い、群論の語彙を一切使わない形へ書き直した。要点は Step 3 の同値『g h g^{-1} = g' h g'^{-1} ⟺ (g^{-1}g') h = h (g^{-1}g')』で、これにより centralizer_is_scalar を直接当てられる。退避した群論の記述は notes/008_group_theory_general.ts にある。",
         "R^× のすべての元と可換な元が R 全体のすべての元と可換であることは自明ではないため、x + tI が可逆になる t を選ぶ議論で明示的に示した（(i) および Step 1）。",
@@ -2372,7 +2398,7 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
         "最後の等号は、行ベクトルと列ベクトルの積の定義",
         math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} = aA + bB`),
         " による（",
-        math(String.raw`A, B \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`A, B \in \mathrm{Mat}(2^M,\mathbb{C})`),
         "、",
         math(String.raw`a, b \in \mathbb{C}`),
         "）。",
@@ -2427,7 +2453,7 @@ T_{V_2}(\hat{Y}_\mu)
         " は ",
         ref("scalar_identity_commutes"),
         " により ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の任意の元と可換なので前へ出せて、",
         math(String.raw`(2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1`),
         " により消える。以上 4 式が statement と一致する。",
@@ -2436,6 +2462,7 @@ T_{V_2}(\hat{Y}_\mu)
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文 proof を忠実に翻訳。原文の V1 分・V2 分の共役展開（exp の (1/2) スケール、(2s2)^{M/2} の相殺）と、原文 statement にある行列表示（行ベクトル×列ベクトル）を proof 内に取り込んだ。",
         "T_{(V1)^{1/2}}(hat(Y)) と T_{V2}(hat(Y)) は原文 proof が「同様」とのみ記していたため、本作業で共役の級数展開から最終形・行列表示までを両方とも書き下した。",
         "原文 statement の hat(Y) 行列表示は第 1 成分が i e^{-i2πμ/M} sinh(K1) で、同じ原文の scalar 表示 -i e^{i2πμ/M} sinh(K1) hat(Z) + cosh(K1) hat(Y) と符号・exp の両方が食い違っていた。どちらが誤りかは数値検証で確定させた。sagemath/check/041_claim_TV1_TV2_actions/check_02_hatY_column_vector.sage により、scalar 表示と整合する列ベクトル (-i e^{i2πμ/M} sinh K1, cosh K1)^T は M=3,4,5・全 mu ∈ calM・複数の (K1,K2) で残差 1e-8 以下、原文の列ベクトル (i e^{-i2πμ/M} sinh K1, cosh K1)^T は残差が 1e-3 を大きく超えることを確認した。よって誤りは行列表示側であり、これを scalar 表示に合わせて修正した。下流の calc_of_TxT_hatZxhatY（013/014）が既に修正後の形を使っているので、これで文書内が整合する。",
@@ -2575,14 +2602,19 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
     labels: ["def_T_V"],
     statement: [
       paragraph([
-        math(String.raw`\forall X \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\forall X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について、",
       ]),
       displayMath(
         String.raw`T_{(V)}(X) := T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(X)\right)\right)`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_016a_claim_duality_c2_star",

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `extract_taylor_coefficient_of_Z_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`（ブロック `TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`）
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`（ブロック `TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`）
 - 併せて検証:
   - `cosh_sinh_coefficient_conversion`（ブロック `TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion`、生成子をスケールした n 重交換子）
   - `commutator_of_H_and_Z_Y`（ブロック `TV1_hatZ_hatY_001_claim_commutator`、土台となる 1 重交換子 (A)〜(D)）
