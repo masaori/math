@@ -8,12 +8,17 @@
 - `001_finite_N_decidable_unsolved.md` に G1–G6 判定表を追加。現状**全ゲート未達 ＋ 最終ゲート未取得＝据え置き**。旧「昇格条件（cycle 1 総括時点）」の記述は削除せず保存。
 - レビューを5周回して一次情報と突合（存在しないツール参照・MEMORY 誤引用・`paper_potential: high` は1件も無い等を是正）。
 
-## ブロッカー: 依頼された gap map / candidates は削除済みアプローチ（2026-07-26）
+## 解決済み: gap map / candidates 再作成の依頼は撤回（2026-07-26）
+
+- 依頼元が **140 コミット古い MEMORY.md**（削除前の cycle 0 の「完了」節）を読んで出した誤依頼だった。ユーザーが訂正し、**作らない・現行の Λ-statement プログラムを継続**で確定。正しいゴールは cycle 12 step 列の完遂。
+- 以下は判断の根拠として保存する。
+
+### 根拠
 
 - 依頼「収集済みコーパスから `outputs/maps/001_six_vertex_dwbc_determinant_seed_map.md` を作り、unknown/needs_review から `outputs/candidates/000_seed_candidates.md` へ候補を起こす」は、**2026-06-21 にユーザー合意で全削除した cycle 0（文献分類版）の成果物そのもの**。削除コミット c7fe283、復元点 918af09。`inputs/corpus/` は空で「収集済みコーパス」は現存しない。
 - 削除理由（`lambda-statement-program.md` に明記）: 文献分類（determinant か character か・境界が何か）で集めたため、梯子・四軸を使わず**可解性（文献の exact）と帰属（Λ）を混同していた**。
 - 以後 cycle 1–11 は Λ-statement プログラム（3トラック）で進行。MEMORY.md 末尾の「完了」節に残る cycle 0 の記録（gap map 作成済み等）は削除前の記述で、現状と食い違う。
-- **ユーザー判断待ち**（この判断なしに再作成すると、棄却済みアプローチへ無断で回帰する）。
+- **ユーザー判断（2026-07-26）: 作らない。現行の Λ-statement プログラムを継続する。** gap map 001 / candidates 000 の再作成・復元はしない。以後この依頼が再来しても、この判断を根拠に再作成しないこと。
 
 ## cycle 11 完了（2026-07-04, 3トラック並走）
 

@@ -85,6 +85,46 @@
    Lean 側では依存関係が見えるよう `AMat_of_gamma2_eq_zero`（`A = γ_1 I` まで）と
    `gamma1_sq_eq_one_of_gamma2_eq_zero`（3 関係から `γ_1^2 = 1`）に分離してある。
 
+## 完了（2026-07-26）: `todo()` 以外の形で残っていた未完 4 箇所
+
+`todo()` を使わない形（「未証明につき使用禁止」注記・「暫定」proof・「証明略」）で残っていた
+4 箇所をすべて人手証明で閉じた。**未証明のまま残した差分は無い**（＝ MEMORY への「根拠つき記録」に
+回した項目は 0 件）。
+
+- **`brianhall_exc14` / `brianhall_3.35`（`005_exp_conjugation_proof.mjs`）**:
+  「Brian Hall Prop 3.35 の参考記述であり未証明・使用禁止」注記を撤回し、
+  `matrix_exp_conjugation`（行列版 $e^XYe^{-X}=e^{\mathrm{ad}_X}(Y)$、同ファイルで完全証明済み）と
+  `ad_binomial` から証明を書いた。**一般 Lie 群でしか意味をもたない差分はこの 2 ブロックには無い**：
+  `brianhall_exc14` は $\mathrm{M}(n,\mathbb{C})$ 上の主張そのもの、
+  `brianhall_3.35` の Matrix Lie群 $G$ に関する仮定
+  （$\forall t\in\mathbb{R},\ \exp(tX)\in G$ と $Y\in G$）は
+  $\mathrm{Ad}_{\exp X}$ を $G\to G$ の写像として読むためにのみ使われ、等式自体は任意の
+  $X,Y\in\mathrm{M}(n,\mathbb{C})$ で成り立つ。Matrix Lie群の定義の第2条件（極限に関する閉性）は不要。
+  一般 Lie 群版が未証明なのは `exp_conjugation_proof_002` のみで、これは従来どおり `todo()` のまま
+  （根拠は後述の「未完 TODO の根拠（005 …）」節）。
+  併せて **`matrix_exp_conjugation` のブロックを `brianhall_exc14` より前へ移動**し、
+  証明が後方のブロックを参照する依存の逆転を解消した。
+  Matrix Lie群の定義ブロックに `def_matrix_lie_group` ラベルを新設。
+- **`exp_X_Y_exp_-X`（`008_TV1_hatZ_hatY_part1.mjs`）**:
+  「（暫定）リー群・リー環の掘り下げを避けて一旦受け入れる」を撤回し、`matrix_exp_conjugation` を
+  根拠に完全な証明へ書き換えた。statement 側に $X,Y\in\mathrm{Mat}(d,\mathbb{C})$ と記号の定義元を明示。
+  これで **`brianhall_3.35` を根拠に使っている証明は本文に 1 件も無い**（grep 済み）。
+- **`sqrt_nonnegative_existence_uniqueness`（新設・`000_calculation_formulae_00_09.mjs`）**:
+  `definition_of_sqrt_r_positive` が「証明略」としていた
+  「$x\ge0$ に対し $y\ge0\land y^2=x$ なる $y$ がただ一つ存在」を独立 claim として切り出し証明した。
+  存在は $S=\{s\ge0\mid s^2\le x\}$ の上限をとる（**ここで非可算集合 $\mathbb{R}$ の完備性＝上限性質へ
+  移行することを proof 冒頭で明示**。$\mathbb{Q}$ では成り立たないことも記載）。
+  一意性は $x=0$ を場合分けしたうえで既存の `cosh_sinh_basic_properties` (4)
+  （正実数について $a^2=b^2\iff a=b$）を参照し、重複証明を避けた。
+- **`angle_section_existence_uniqueness`（新設・`000_calculation_formulae_10_19.mjs`）**:
+  `section_of_angle_representation`（角度表現の切断）が「証明略」としていた
+  「$0\le\theta-2n\pi<2\pi$ なる $n\in\mathbb{Z}$ の一意存在」を独立 claim として切り出した。
+  従来はこの証明が `sqrt_expansion_via_polar` の proof Step 1 に書かれており、
+  **定義が依存する事実を、その定義を使う側の主張の中で証明する依存の逆転**が起きていた。
+  切り出したブロックは文書順で `section_of_angle_representation` より前に配置し、
+  定義側と `sqrt_expansion_via_polar` の Step 1 の両方から参照する形にした（証明内容は元の Step 1 と同一。
+  $\mathbb{R}$ のアルキメデス性を使う）。
+
 ## 完了（2026-07-26）: γ_1, γ_2 の偏角・零点・臨界条件（008 後半の 4 ブロック）
 
 `008_TV1_hatZ_hatY_part2.mjs` の TODO 4 件をすべて人手証明で埋め、`todo()` を除去した。
@@ -713,11 +753,11 @@ $\mathrm{Aut}(G)$ が Lie 群で $\mathrm{End}(\mathfrak{g})$ がその Lie 環�
 - 新規 `exp_conjugation_proof_010_theorem_matrix_exp_conjugation`（labels: `matrix_exp_conjugation`）:
   $\|Q_N-P_N\|\le 2\|Y\|E(a)R_{\lfloor N/2\rfloor}(a)\to 0$ という評価で、二重級数の一般論を使わずに証明。
 
-### 未着手の隣接 TODO（本タスクの担当範囲外）
+### 隣接 TODO（2026-07-26 に解消済み）
 
-`exp_conjugation_proof_008_theorem_exp_ad_series`（labels: `brianhall_exc14`）と
+`exp_conjugation_proof_008_theorem_exp_ad_series`（labels: `brianhall_exc14`）、
 `exp_conjugation_proof_009_theorem_exp_conjugation_main`（labels: `brianhall_3.35`）の
-「未証明につき使用禁止」注記は残置。内容は `matrix_exp_conjugation` が包含するので、
-次はこの 2 件を `matrix_exp_conjugation` 参照で置き換えるか統合するのが自然。
-併せて `008_TV1_hatZ_hatY_part1.mjs` の `exp_X_Y_exp_-X`（proof が「暫定・一旦受け入れる」）も
-`matrix_exp_conjugation` を根拠に書き換えられる。
+「未証明につき使用禁止」注記、および `008_TV1_hatZ_hatY_part1.mjs` の `exp_X_Y_exp_-X` の
+「暫定」proof は、いずれも `matrix_exp_conjugation` を根拠に完全証明へ書き換えて解消した。
+詳細は本ファイル冒頭の「完了（2026-07-26）: `todo()` 以外の形で残っていた未完 4 箇所」を見よ。
+なお `exp_conjugation_proof_002`（一般 Lie 群版）は上記の根拠により **`todo()` のまま残置**である。

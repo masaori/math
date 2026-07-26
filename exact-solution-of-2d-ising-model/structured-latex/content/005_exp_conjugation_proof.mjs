@@ -922,7 +922,7 @@ export default defineBlocks([
     sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/005_definition_Matrix_Lie群の定義.typ",
     sourceOrdinal: 6,
     title: { text: "Matrix Lie群（Brian Hall Definition 1.4）" },
-    labels: [],
+    labels: ["def_matrix_lie_group"],
     statement: [
       paragraph([
         math(String.raw`G \subset \mathbf{GL}(n,\mathbb{C})`),
@@ -973,66 +973,6 @@ export default defineBlocks([
       displayMath(
         String.raw`\mathrm{ad}_X : \mathrm{M}(n,\mathbb{C}) \to \mathrm{M}(n,\mathbb{C}), \quad Y \mapsto [X, Y]`,
       ),
-    ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "exp_conjugation_proof_008_theorem_exp_ad_series",
-    kind: "theorem",
-    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
-    sourceOrdinal: 8,
-    title: { tex: String.raw`e^{\mathrm{ad}_X}(Y) \text{ の級数展開}` },
-    labels: ["brianhall_exc14"],
-    statement: [
-      paragraph([
-        math(String.raw`\forall X, Y \in \mathrm{M}(n,\mathbb{C})`),
-        " について、",
-      ]),
-      displayMath(
-        String.raw`e^{\mathrm{ad}_X}(Y)
-= \sum_{n=0}^{\infty} \frac{1}{n!}
-  \underbrace{[X,[X,\dots,[X,Y]\dots]]}_{n\text{ times}}
-= Y + [X,Y] + \tfrac{1}{2}[X,[X,Y]] + \tfrac{1}{6}[X,[X,[X,Y]]] + \cdots`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`n=0`),
-        " のときは ",
-        math(String.raw`Y`),
-        " とする）",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        "注意: Brian Hall「Lie Groups, Lie Algebras, and Representations」Proposition 3.35 の参考記述であり、このリポジトリでは未証明。証明の根拠として使用することは禁止する。",
-      ]),
-    ],
-    conversion: { status: "converted" },
-  },
-  {
-    id: "exp_conjugation_proof_009_theorem_exp_conjugation_main",
-    kind: "theorem",
-    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
-    sourceOrdinal: 9,
-    title: { tex: String.raw`e^X Y e^{-X} = \mathrm{Ad}_{e^X}(Y) = e^{\mathrm{ad}_X}(Y)` },
-    labels: ["brianhall_3.35"],
-    statement: [
-      paragraph([
-        math(String.raw`\forall X \in \mathrm{M}(n,\mathbb{C})`),
-        " s.t. ",
-        math(String.raw`\forall t \in \mathbb{R},\; \exp(tX) \in G`),
-        "、",
-        math(String.raw`\forall Y \in G`),
-        " について、",
-      ]),
-      displayMath(
-        String.raw`\exp(X)\, Y\, \exp(-X) = \mathrm{Ad}_{\exp(X)}(Y) = \exp(\mathrm{ad}_X)(Y)`,
-      ),
-    ],
-    proof: [
-      paragraph([
-        "注意: Brian Hall「Lie Groups, Lie Algebras, and Representations」Proposition 3.35 の参考記述であり、このリポジトリでは未証明。証明の根拠として使用することは禁止する。",
-      ]),
     ],
     conversion: { status: "converted" },
   },
@@ -1508,6 +1448,311 @@ D_N := \{0,\dots,N\}^{2}\setminus T_N
           "そちらは labels: ad_binomial（純代数）と labels: real_exp_series_converges / " +
           "matrix_norm_submultiplicativity / matrix_exp_series_converges（絶対収束と劣乗法性）" +
           "だけから完全に証明できるので、Lie 群論を経由せずここで証明した。",
+      ],
+    },
+  },
+  {
+    id: "exp_conjugation_proof_008_theorem_exp_ad_series",
+    kind: "theorem",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
+    sourceOrdinal: 8,
+    title: { tex: String.raw`e^{\mathrm{ad}_X}(Y) \text{ の級数展開}` },
+    labels: ["brianhall_exc14"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`\forall X, Y \in \mathrm{M}(n,\mathbb{C})`),
+        " について考える。ここで ",
+        math(String.raw`\mathrm{ad}_X:\mathrm{M}(n,\mathbb{C})\to\mathrm{M}(n,\mathbb{C})`),
+        " は ",
+        ref("def_ad_X_matrix"),
+        " の写像 ",
+        math(String.raw`Z\mapsto[X,Z]=XZ-ZX`),
+        "、",
+        math(String.raw`\mathrm{ad}_X^{m}`),
+        "（",
+        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
+        "）は ",
+        ref("ad_binomial"),
+        " の再帰 ",
+        math(String.raw`\mathrm{ad}_X^{0}(Y)=Y,\ \mathrm{ad}_X^{m+1}(Y)=[X,\mathrm{ad}_X^{m}(Y)]`),
+        " で定まる ",
+        math(String.raw`m`),
+        " 重交換子、",
+        math(String.raw`e^{\mathrm{ad}_X}:=\exp(\mathrm{ad}_X)`),
+        " は ",
+        ref("def_exp"),
+        " の指数写像を有限次元 ",
+        math(String.raw`\mathbb{C}`),
+        "-線型空間 ",
+        math(String.raw`\mathrm{M}(n,\mathbb{C})`),
+        "（次元 ",
+        math(String.raw`n^2`),
+        "、ノルムは ",
+        ref("def_matrix_norm"),
+        "）の自己準同型 ",
+        math(String.raw`\mathrm{ad}_X`),
+        " に適用したものとする。このとき右辺の級数は ",
+        math(String.raw`\mathrm{M}(n,\mathbb{C})`),
+        " において収束し、",
+      ]),
+      displayMath(
+        String.raw`e^{\mathrm{ad}_X}(Y)
+= \sum_{n=0}^{\infty} \frac{1}{n!}
+  \underbrace{[X,[X,\dots,[X,Y]\dots]]}_{n\text{ times}}
+= Y + [X,Y] + \tfrac{1}{2}[X,[X,Y]] + \tfrac{1}{6}[X,[X,[X,Y]]] + \cdots`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`Y`),
+        " とする）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("matrix_exp_conjugation"),
+        " を ",
+        math(String.raw`K:=\mathbb{C}`),
+        " として適用する（同ブロックは Lie 群論を使わず、",
+        ref("ad_binomial"),
+        "（純代数）と ",
+        ref("real_exp_series_converges"),
+        "・",
+        ref("matrix_norm_submultiplicativity"),
+        "・",
+        ref("matrix_exp_series_converges"),
+        " だけから証明されているので、循環しない）。",
+      ]),
+      paragraph([
+        "Step 1: 記号の一致。",
+        ref("ad_binomial"),
+        " の再帰の定義より ",
+        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{ad}_X^{m}(Y)
+= \underbrace{\left[X,\left[X,\dots,\left[X,Y\right]\dots\right]\right]}_{m\text{ times}}
+\qquad (m=0 \text{ のときは } Y)`,
+      ),
+      paragraph([
+        "であるから、主張の右辺は ",
+        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)`),
+        " に他ならない。",
+      ]),
+      paragraph([
+        "Step 2: 収束。",
+        ref("matrix_exp_conjugation"),
+        " (1) より、級数 ",
+        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)`),
+        " は ",
+        math(String.raw`\mathrm{M}(n,\mathbb{C})`),
+        " において収束する。より正確には、同ブロックの証明 Step 6 で有限和 ",
+        math(String.raw`P_N=\sum_{m=0}^{N}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)`),
+        " が ",
+        math(String.raw`\exp(X)Y\exp(-X)`),
+        " に収束することが示されている。",
+      ]),
+      paragraph([
+        "Step 3: 等号。",
+        ref("matrix_exp_conjugation"),
+        " の証明 Step 1 より ",
+        math(String.raw`\mathrm{ad}_X\in\mathrm{End}\!\left(\mathrm{M}(n,\mathbb{C})\right)`),
+        " であり、",
+        ref("def_exp"),
+        " と ",
+        ref("exp_converges"),
+        " により ",
+        math(String.raw`\exp(\mathrm{ad}_X)`),
+        " が定まって",
+      ]),
+      displayMath(
+        String.raw`e^{\mathrm{ad}_X}(Y)
+= \exp\!\left(\mathrm{ad}_X\right)(Y)
+= \lim_{N\to\infty}P_N
+= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        ref("matrix_exp_conjugation"),
+        " (2) の第 2 の等号）。Step 1 の記号の一致と合わせて主張を得る。",
+      ]),
+      paragraph([
+        "解析（非可算集合 ",
+        math(String.raw`\mathbb{R}/\mathbb{C}`),
+        " の極限）を使うのは Step 2・Step 3 の極限操作だけであり、その根拠は ",
+        ref("matrix_completeness"),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の完備性）である。Step 1 は ",
+        math(String.raw`\mathrm{M}(n,\mathbb{C})`),
+        " の環構造だけを使う純代数的な議論である。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（Typst）の proof は Brian Hall Prop 3.35 への参照のみで、構造化側でも" +
+          "「未証明につき使用禁止」の注記を置いていた。行列版 e^X Y e^{-X} = e^{ad_X}(Y)" +
+          "（labels: matrix_exp_conjugation）をこのファイルで完全に証明済みであり、" +
+          "本ブロックの主張はその (1)(2) の M(n,C) への特殊化にすぎないため、" +
+          "証明を書いて使用禁止の注記を撤回した。statement 側にも、記号の所属集合" +
+          "（ad_X の定義域・exp の適用先が有限次元線型空間の自己準同型であること）を明示した。",
+      ],
+    },
+  },
+  {
+    id: "exp_conjugation_proof_009_theorem_exp_conjugation_main",
+    kind: "theorem",
+    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
+    sourceOrdinal: 9,
+    title: { tex: String.raw`e^X Y e^{-X} = \mathrm{Ad}_{e^X}(Y) = e^{\mathrm{ad}_X}(Y)` },
+    labels: ["brianhall_3.35"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`G\subset\mathbf{GL}(n,\mathbb{C})`),
+        " を ",
+        ref("def_matrix_lie_group"),
+        " の意味の Matrix Lie群とする。",
+        math(String.raw`\forall X \in \mathrm{M}(n,\mathbb{C})`),
+        " s.t. ",
+        math(String.raw`\forall t \in \mathbb{R},\; \exp(tX) \in G`),
+        "、",
+        math(String.raw`\forall Y \in G`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\exp(X)\, Y\, \exp(-X) = \mathrm{Ad}_{\exp(X)}(Y) = \exp(\mathrm{ad}_X)(Y)`,
+      ),
+      paragraph([
+        "ここで ",
+        math(String.raw`\mathrm{Ad}_{g}`),
+        "、",
+        math(String.raw`\mathrm{ad}_X`),
+        " は ",
+        ref("def_ad_X_matrix"),
+        "、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        "、",
+        math(String.raw`\exp(\mathrm{ad}_X)(Y)`),
+        " は ",
+        ref("brianhall_exc14"),
+        " の級数 ",
+        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 0: 記号がどの集合に属するか。",
+        math(String.raw`G\subset\mathbf{GL}(n,\mathbb{C})\subset\mathrm{M}(n,\mathbb{C})`),
+        " であるから ",
+        math(String.raw`Y\in G\subset\mathrm{M}(n,\mathbb{C})`),
+        " であり、仮定より ",
+        math(String.raw`X\in\mathrm{M}(n,\mathbb{C})`),
+        "。したがって ",
+        ref("matrix_exp_conjugation"),
+        " を ",
+        math(String.raw`K:=\mathbb{C}`),
+        "、この ",
+        math(String.raw`X,Y`),
+        " に対して適用できる。",
+      ]),
+      paragraph([
+        "Step 1: 等式そのもの。",
+        ref("matrix_exp_conjugation"),
+        " (2) より",
+      ]),
+      displayMath(
+        String.raw`\exp(X)\,Y\,\exp(-X)
+= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
+= \exp\!\left(\mathrm{ad}_X\right)(Y)`,
+      ),
+      paragraph([
+        "であり、",
+        ref("matrix_exp_conjugation"),
+        " (3) より ",
+        math(String.raw`\exp(X)`),
+        " は正則で ",
+        math(String.raw`\exp(X)^{-1}=\exp(-X)`),
+        " であるから、",
+        ref("def_ad_X_matrix"),
+        " の ",
+        math(String.raw`\mathrm{Ad}_{\exp(X)}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Ad}_{\exp(X)}(Y)=\exp(X)\,Y\,\exp(X)^{-1}=\exp(X)\,Y\,\exp(-X)`,
+      ),
+      paragraph([
+        "。以上を合わせて主張の 2 つの等号を得る。",
+      ]),
+      paragraph([
+        "Step 2: 仮定 ",
+        math(String.raw`\forall t\in\mathbb{R},\ \exp(tX)\in G`),
+        " と ",
+        math(String.raw`Y\in G`),
+        " が使われる箇所。",
+        ref("def_ad_X_matrix"),
+        " の ",
+        math(String.raw`\mathrm{Ad}_g`),
+        " は ",
+        math(String.raw`G\to G`),
+        " の写像として定義されているので、",
+        math(String.raw`\mathrm{Ad}_{\exp(X)}(Y)`),
+        " という記号が意味をもつためには ",
+        math(String.raw`\exp(X)\in G`),
+        " かつ ",
+        math(String.raw`\exp(X)Y\exp(X)^{-1}\in G`),
+        " が必要である。前者は仮定を ",
+        math(String.raw`t=1`),
+        " として適用すれば得られ、後者は ",
+        math(String.raw`G`),
+        " が ",
+        math(String.raw`\mathbf{GL}(n,\mathbb{C})`),
+        " の部分群である（",
+        ref("def_matrix_lie_group"),
+        " の第 1 条件）ことから ",
+        math(String.raw`\exp(X)\in G,\ \exp(X)^{-1}\in G,\ Y\in G`),
+        " の積として従う。",
+      ]),
+      paragraph([
+        "すなわち、仮定 ",
+        math(String.raw`\forall t\in\mathbb{R},\ \exp(tX)\in G`),
+        "・",
+        math(String.raw`Y\in G`),
+        " は ",
+        math(String.raw`\mathrm{Ad}_{\exp(X)}`),
+        " を ",
+        math(String.raw`G`),
+        " 上の写像として読むためだけに使われ、等式 ",
+        math(String.raw`\exp(X)Y\exp(-X)=\exp(\mathrm{ad}_X)(Y)`),
+        " 自体は ",
+        ref("matrix_exp_conjugation"),
+        " により任意の ",
+        math(String.raw`X,Y\in\mathrm{M}(n,\mathbb{C})`),
+        " について成り立つ。",
+        ref("def_matrix_lie_group"),
+        " の第 2 条件（極限に関する閉性）は本証明では使わない。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（Typst）の proof は Brian Hall Prop 3.35 への参照のみで、構造化側でも" +
+          "「未証明につき使用禁止」の注記を置いていた。しかし本ブロックの主張は" +
+          "labels: matrix_exp_conjugation（行列版、このファイルで完全証明済み）の系であり、" +
+          "G に関する仮定は Ad_{exp X} を G 上の写像として読むためにしか使われない。" +
+          "そのことを含めて証明を書き、使用禁止の注記を撤回した。" +
+          "一般 Lie 群でしか意味をもたない部分は本ブロックには含まれない" +
+          "（それは exp_conjugation_proof_002 の側の主張である）。",
       ],
     },
   },
