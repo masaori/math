@@ -4,7 +4,7 @@
 
 **対象ラベル**: `real_exp_series_converges` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/003_exp_linear_map.mjs`
+- ファイル: `structured-latex/content/003_exp_linear_map.ts`
 
 - 範囲: (1) 単調非減少・上に有界、(2) E_N(a) ≤ E(a)、(3) 剰余 R_N(a) → 0 と Σ_{m=p}^{q} a^m/m! ≤ R_{p-1}(a)
 

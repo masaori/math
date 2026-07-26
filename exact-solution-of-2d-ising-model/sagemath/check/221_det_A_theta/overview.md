@@ -4,7 +4,7 @@
 
 **対象ラベル**: `det_A_theta` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: det A(θ_μ) = 1、γ₁² + γ₂(θ)γ₂(−θ) = 1、λ₊λ₋ = 1
 

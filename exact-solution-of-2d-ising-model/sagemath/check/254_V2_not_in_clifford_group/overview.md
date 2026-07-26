@@ -4,7 +4,7 @@
 
 **対象ラベル**: `V2_not_in_clifford_group` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: V₂σ^z_1V₂^{-1} が Pauli 群の元にならないこと
 

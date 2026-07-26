@@ -4,7 +4,7 @@
 
 **対象ラベル**: `Z_Y_generate_algebra` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.mjs`
+- ファイル: `structured-latex/content/004_transfer_matrix.ts`
 
 - 範囲: Z,Y の生成する部分多元環が Mat(2,C)^{⊗M} 全体（次元 4^M）
 

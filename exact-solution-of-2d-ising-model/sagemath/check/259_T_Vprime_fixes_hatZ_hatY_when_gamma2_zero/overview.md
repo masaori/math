@@ -4,7 +4,7 @@
 
 **対象ラベル**: `T_Vprime_fixes_hatZ_hatY_when_gamma2_zero` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: γ₂(θ_μ) = 0 のとき T_{(V′)} が hatZ^{(−)}_μ, hatY_μ を固定すること
 

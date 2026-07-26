@@ -4,7 +4,7 @@
 
 **対象ラベル**: `multiplicative_group_of_cc` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_20_29.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_20_29.ts`
 
 - 範囲: C^× = C∖{0} が乗法群をなすこと、z^{-1} = 1/z
 

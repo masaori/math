@@ -4,7 +4,7 @@
 
 **対象ラベル**: `anticommutator_of_hat_Z_and_hat_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/007_hatZ_hatY_anticommutation.mjs`
+- ファイル: `structured-latex/content/007_hatZ_hatY_anticommutation.ts`
 
 - 範囲: hat の反交換関係 4 式（同符号・異符号・hatZ と hatY・hatY どうし）
 

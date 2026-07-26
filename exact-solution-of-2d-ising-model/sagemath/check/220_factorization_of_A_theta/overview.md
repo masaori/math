@@ -4,7 +4,7 @@
 
 **対象ラベル**: `factorization_of_A_theta` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: A(θ_μ) = B₁(θ_μ)B₂B₁(θ_μ)
 

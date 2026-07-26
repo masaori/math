@@ -4,7 +4,7 @@
 
 **対象ラベル**: `brianhall_exc14` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/005_exp_conjugation_proof.mjs`
+- ファイル: `structured-latex/content/005_exp_conjugation_proof.ts`
 
 - 範囲: e^{ad_X}(Y) の級数表示
 

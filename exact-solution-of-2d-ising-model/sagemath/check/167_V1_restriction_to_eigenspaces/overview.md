@@ -4,7 +4,7 @@
 
 **対象ラベル**: `V1_restriction_to_eigenspaces` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.mjs`
+- ファイル: `structured-latex/content/004_transfer_matrix.ts`
 
 - 範囲: (end(V₁))|_{F^{(±)}} = (end(V₁^{(±)}))|_{F^{(±)}}
 

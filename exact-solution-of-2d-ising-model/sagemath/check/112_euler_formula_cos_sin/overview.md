@@ -4,7 +4,7 @@
 
 **対象ラベル**: `euler_formula_cos_sin` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: cos θ = (e^{iθ}+e^{−iθ})/2、sin θ = (e^{iθ}−e^{−iθ})/(2i)
 

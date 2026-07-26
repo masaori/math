@@ -4,7 +4,7 @@
 
 **対象ラベル**: `kronecker_multilinear` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: 第 j 因子についての線型性（有限線型結合の展開）と、スカラーが外へ出ること
 

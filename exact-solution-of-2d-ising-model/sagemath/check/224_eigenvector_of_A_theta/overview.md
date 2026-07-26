@@ -4,7 +4,7 @@
 
 **対象ラベル**: `eigenvector_of_A_theta` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: 固有値 λ_± と固有ベクトル v_±（γ₂ = 0 の場合と ≠ 0 の場合）
 

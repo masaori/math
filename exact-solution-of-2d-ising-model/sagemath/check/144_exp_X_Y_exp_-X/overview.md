@@ -4,7 +4,7 @@
 
 **対象ラベル**: `exp_X_Y_exp_-X` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: exp(X)Y exp(−X) = Ad_{exp X}(Y) = exp(ad_X)(Y) = Σ(1/n!)[X,…[X,Y]…]
 

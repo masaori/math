@@ -4,7 +4,7 @@
 
 **対象ラベル**: `complex_numbers_form_a_field` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_20_29.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_20_29.ts`
 
 - 範囲: 体の公理（和・積の可換律・結合律・分配律・単位元・逆元）と <multiplicative_group_of_cc>
 

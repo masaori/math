@@ -4,7 +4,7 @@
 
 **対象ラベル**: `calc_of_TxT_hatZxhatY` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: (T×T)(hatZ^{(−)}, hatY) = (hatZ^{(−)}, hatY)·B の行列表示 B₁(θ_μ), B₂
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `arg_of_gamma2_quotient` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: |γ₂(θ_μ)/γ₂(−θ_μ)| = 1 と arg^[0,2π)(商) = s_[0,2π)([2φ_μ + π])
 

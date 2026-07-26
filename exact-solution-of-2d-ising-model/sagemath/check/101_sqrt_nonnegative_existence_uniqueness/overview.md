@@ -4,7 +4,7 @@
 
 **対象ラベル**: `sqrt_nonnegative_existence_uniqueness` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_00_09.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 
 - 範囲: 非負実数の平方根 y≥0, y²=x の存在と一意性
 

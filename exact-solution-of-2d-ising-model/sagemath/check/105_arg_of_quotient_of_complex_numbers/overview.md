@@ -4,7 +4,7 @@
 
 **対象ラベル**: `arg_of_quotient_of_complex_numbers` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: arg^[0,2π)(z₁/z₂) の 2 通りの場合分け
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `sqrt_expansion_via_polar` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: √z の定義式（pr₁,pr₂,s_[0,2π) 経由）と代表元表示 (√r, θ/2 − nπ) の一致
 

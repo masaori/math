@@ -4,7 +4,7 @@
 
 **対象ラベル**: `matrix_norm_vector_bound` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: ‖Aw‖ ≤ ‖A‖‖w‖
 

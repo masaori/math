@@ -4,7 +4,7 @@
 
 **対象ラベル**: `anticommutator_of_Z_and_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/006_Z_Y_anticommutation.mjs`
+- ファイル: `structured-latex/content/006_Z_Y_anticommutation.ts`
 
 - 範囲: [Z_μ,Z_ν]₊ = 2Iδ^M、[Z_μ,Y_ν]₊ = 0、[Y_μ,Y_ν]₊ = 2Iδ^M（M = 2..6 の全 (μ,ν)）
 

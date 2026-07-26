@@ -4,7 +4,7 @@
 
 **対象ラベル**: `range_of_args_of_multiple_of_complex_numbers` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: arg(z₁z₂) = π のとき arg z₁ + arg z₂ = π または π + 2π
 

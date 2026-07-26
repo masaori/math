@@ -4,7 +4,7 @@
 
 **対象ラベル**: `theorem_exp_zero` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/003_exp_linear_map.mjs`
+- ファイル: `structured-latex/content/003_exp_linear_map.ts`
 
 - 範囲: exp(O) = I
 

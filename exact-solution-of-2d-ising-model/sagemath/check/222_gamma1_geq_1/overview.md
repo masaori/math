@@ -4,7 +4,7 @@
 
 **対象ラベル**: `gamma1_geq_1` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: γ₁(θ_μ) ≥ 1
 
@@ -20,7 +20,7 @@
 
 ## 備考
 
-本文の `TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2`（γ₁ の偏角）にはラベルが付いていないため、`verify-check-linkage.mjs` で紐づけられる check を独立に立てられない。その内容はこの check の中で確認している。
+本文の `TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2`（γ₁ の偏角）にはラベルが付いていないため、`verify-check-linkage.ts` で紐づけられる check を独立に立てられない。その内容はこの check の中で確認している。
 
 ## 実行時に出力された観測値
 

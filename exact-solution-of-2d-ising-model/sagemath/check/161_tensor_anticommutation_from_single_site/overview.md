@@ -4,7 +4,7 @@
 
 **対象ラベル**: `tensor_anticommutation_from_single_site` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/006_Z_Y_anticommutation.mjs`
+- ファイル: `structured-latex/content/006_Z_Y_anticommutation.ts`
 
 - 範囲: 1 サイトだけ反可換ならテンソル積全体が反交換
 

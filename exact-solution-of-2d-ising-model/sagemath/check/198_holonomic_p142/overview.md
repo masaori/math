@@ -4,7 +4,7 @@
 
 **対象ラベル**: `ホロノミック量子場_p142下段_1` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: T_{(V₁^{(±)})^{1/2}} と T_{V₂} の hatZ^{(−)}, hatY への作用 4 式
 

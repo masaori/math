@@ -4,7 +4,7 @@
 
 **対象ラベル**: `abs_basic_properties` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: (1) |z|=√(x²+y²)、(2) |z|²=x²+y²、(3) |z|=0⟺z=0、(4) 乗法性、(5) 三角不等式、(6) 実数の包含との整合
 

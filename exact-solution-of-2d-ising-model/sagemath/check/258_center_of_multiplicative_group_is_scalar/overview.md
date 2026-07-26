@@ -4,7 +4,7 @@
 
 **対象ラベル**: `center_of_multiplicative_group_is_scalar` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: Z(R^×) = {cI | c ∈ C∖{0}}
 

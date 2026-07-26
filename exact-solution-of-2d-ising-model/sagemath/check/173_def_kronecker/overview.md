@@ -4,7 +4,7 @@
 
 **対象ラベル**: `def_kronecker` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: 添字写像 ν の全単射性と、クロネッカー積の成分の定義式
 

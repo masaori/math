@@ -4,7 +4,7 @@
 
 **対象ラベル**: `isomorphism_of_phi_cartesian` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_20_29.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_20_29.ts`
 
 - 範囲: φ_cartesian が積を保つこと（モノイド準同型）と全単射性
 

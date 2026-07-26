@@ -4,7 +4,7 @@
 
 **対象ラベル**: `V1_V2_in_Z_Y_epsilon` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.mjs`
+- ファイル: `structured-latex/content/004_transfer_matrix.ts`
 
 - 範囲: V₁ = exp(iK₁(Y₁Z₂+…+Y_{M−1}Z_M − εY_MZ₁))、V₂ = (2s₂)^{M/2}exp(iK₂*(Z₁Y₁+…+Z_MY_M))
 

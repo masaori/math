@@ -4,7 +4,7 @@
 
 **対象ラベル**: `def_transfer_matrix` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/001_partition_function_2d_ising.mjs`
+- ファイル: `structured-latex/content/001_partition_function_2d_ising.ts`
 
 - 範囲: V₁ が対角、V₂ が対称、成分が正、サイズが 2^N×2^N、および全成分の値
 

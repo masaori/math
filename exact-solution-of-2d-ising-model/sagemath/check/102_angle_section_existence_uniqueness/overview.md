@@ -4,7 +4,7 @@
 
 **対象ラベル**: `angle_section_existence_uniqueness` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_10_19.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_10_19.ts`
 
 - 範囲: 0 ≤ θ−2nπ < 2π なる n ∈ Z の一意存在と、切断 s_[0,2π) の well-defined 性
 

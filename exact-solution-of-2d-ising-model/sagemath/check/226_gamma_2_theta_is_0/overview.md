@@ -4,7 +4,7 @@
 
 **対象ラベル**: `gamma_2_theta_is_0` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: γ₂(θ_μ) = 0 ⟺ {sin θ_μ = 0 かつ c₂s₁ = c₁cos θ_μ} ⟺ μ = ±M かつ c₁ = s₁c₂
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `mat_conj` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_00_09.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 
 - 範囲: T_B(A) := BAB^{-1} が線型写像であること
 

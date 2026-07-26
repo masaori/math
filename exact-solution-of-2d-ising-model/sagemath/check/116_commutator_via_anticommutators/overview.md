@@ -4,7 +4,7 @@
 
 **対象ラベル**: `commutator_via_anticommutators` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_45_46.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_45_46.ts`
 
 - 範囲: [ab,c] = a[b,c]₊ − [a,c]₊b
 

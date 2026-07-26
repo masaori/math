@@ -4,7 +4,7 @@
 
 **対象ラベル**: `ad_binomial` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/005_exp_conjugation_proof.mjs`
+- ファイル: `structured-latex/content/005_exp_conjugation_proof.ts`
 
 - 範囲: ad_X^m(Y) = Σ_k C(m,k) X^k Y (−X)^{m−k}（m = 0..8）
 

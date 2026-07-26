@@ -4,7 +4,7 @@
 
 **対象ラベル**: `matrix_exp_conjugation` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/005_exp_conjugation_proof.mjs`
+- ファイル: `structured-latex/content/005_exp_conjugation_proof.ts`
 
 - 範囲: exp(X)Y exp(−X) = Σ(1/m!)ad_X^m(Y) = exp(ad_X)(Y)、および exp(X)^{-1} = exp(−X)
 

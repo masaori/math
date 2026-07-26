@@ -4,7 +4,7 @@
 
 **対象ラベル**: `sqrt_cc_of_inverse` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: (√z)^{-1} = 1/√z = ±√(1/z)
 

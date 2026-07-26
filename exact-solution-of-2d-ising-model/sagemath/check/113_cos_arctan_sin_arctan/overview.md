@@ -4,7 +4,7 @@
 
 **対象ラベル**: `cos_arctan_sin_arctan` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_10_19.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_10_19.ts`
 
 - 範囲: cos(arctan x) = 1/√(1+x²)、sin(arctan x) = x/√(1+x²)
 

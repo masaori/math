@@ -4,7 +4,7 @@
 
 **対象ラベル**: `def_pauli_group` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: Pauli 群 P_M が積で閉じ、位数が 4·4^M であること
 

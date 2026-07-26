@@ -4,7 +4,7 @@
 
 **対象ラベル**: `condition_of_commutativity_of_sqrt_and_product` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: √(z₁z₂) = ±√z₁√z₂ の場合分け
 

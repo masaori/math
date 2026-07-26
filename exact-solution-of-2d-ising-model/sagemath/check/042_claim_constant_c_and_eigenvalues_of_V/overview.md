@@ -4,7 +4,7 @@
 
 **対象ラベル**: `constant_c_value` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/009_eigenvalues_of_V.mjs`
+- ファイル: `structured-latex/content/009_eigenvalues_of_V.ts`
 - 併せて検証:
   - `iH_is_real_symmetric`（`i K_1 H_1^{(±)}`、`i K_2^* H_2` が実対称であること）
   - `sign_flip_conjugation`（符号反転共役 `U`）

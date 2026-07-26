@@ -4,7 +4,7 @@
 
 **対象ラベル**: `critical_condition_c1_eq_s1_c2` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: c₁ = s₁c₂ ⟺ s₁s₂ = 1
 

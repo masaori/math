@@ -4,7 +4,7 @@
 
 **対象ラベル**: `kronecker_product_rule` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: (1) (A₁⊠…⊠A_M)(B₁⊠…⊠B_M) = (A₁B₁)⊠…⊠(A_MB_M)、(2) I⊠…⊠I = I_{2^M}、(3) ベクトルへの作用
 

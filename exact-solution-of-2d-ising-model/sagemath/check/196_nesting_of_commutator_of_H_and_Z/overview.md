@@ -4,7 +4,7 @@
 
 **対象ラベル**: `nesting_of_commutator_of_H_and_Z` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: (h1.z)/(h1.y)/(h2.z−)/(h2.y) の n 重交換子の閉じた表示（n = 0..6）
 

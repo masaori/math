@@ -4,7 +4,7 @@
 
 **対象ラベル**: `extract_taylor_coefficient_of_Z_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: n 重交換子の級数和が cosh/sinh の閉じた表示になること
 

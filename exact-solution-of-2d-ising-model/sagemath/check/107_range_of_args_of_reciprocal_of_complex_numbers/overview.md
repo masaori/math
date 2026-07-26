@@ -4,7 +4,7 @@
 
 **対象ラベル**: `range_of_args_of_reciprocal_of_complex_numbers` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_30_44.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_30_44.ts`
 
 - 範囲: arg^[0,2π)(1/z) = 0 または 2π − arg z
 

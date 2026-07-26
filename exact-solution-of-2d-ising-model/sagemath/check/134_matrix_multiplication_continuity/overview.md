@@ -4,7 +4,7 @@
 
 **対象ラベル**: `matrix_multiplication_continuity` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: ‖A_N−A‖→0 ⟹ ‖A_N B − AB‖→0
 

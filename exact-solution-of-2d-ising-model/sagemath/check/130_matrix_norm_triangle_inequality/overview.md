@@ -4,7 +4,7 @@
 
 **対象ラベル**: `matrix_norm_triangle_inequality` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: (1) 正定値性、(2) 斉次性、(3) 三角不等式、および定義式との一致
 

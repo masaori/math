@@ -4,7 +4,7 @@
 
 **対象ラベル**: `frobenius_inner_product_axioms` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/005_exp_conjugation_proof.mjs`
+- ファイル: `structured-latex/content/005_exp_conjugation_proof.ts`
 
 - 範囲: (0) 成分表示、(1) 共役対称性、(2) 第2変数線型・第1変数共役線型、(3) 正定値性、Cauchy–Schwarz、三角不等式
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `diagonalization_P_D` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: A(θ_μ) = P_μ D_μ P_μ^{-1}
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `conjugation_is_ring_homomorphism` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_45_46.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_45_46.ts`
 
 - 範囲: T_B(A)=BAB^{-1} の乗法性・単位性・合成則、および <mat_conj> の線型性
 

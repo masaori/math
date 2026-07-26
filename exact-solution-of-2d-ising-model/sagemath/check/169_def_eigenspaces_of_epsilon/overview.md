@@ -4,7 +4,7 @@
 
 **対象ラベル**: `def_eigenspaces_of_epsilon` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.mjs`
+- ファイル: `structured-latex/content/004_transfer_matrix.ts`
 
 - 範囲: ε² = I、固有値 ±1、F^{(±)} の次元がそれぞれ 2^{M−1}
 

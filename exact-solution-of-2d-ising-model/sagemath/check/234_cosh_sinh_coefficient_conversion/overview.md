@@ -4,7 +4,7 @@
 
 **対象ラベル**: `cosh_sinh_coefficient_conversion` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: (i/2)K₁H₁^{(±)} 版と iK₂*H₂ 版の n 重交換子の係数
 

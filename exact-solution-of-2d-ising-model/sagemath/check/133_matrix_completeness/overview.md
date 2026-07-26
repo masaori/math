@@ -4,7 +4,7 @@
 
 **対象ラベル**: `matrix_completeness` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: (2) 絶対収束判定: Σ‖B_m‖ が収束 ⟹ ΣB_m が収束し ‖ΣB_m‖ ≤ Σ‖B_m‖
 

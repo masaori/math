@@ -4,7 +4,7 @@
 
 **対象ラベル**: `T_V_eq_T_Vprime_on_hatZ_hatY` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: T_{(V)} と T_{(V′)} の hatZ^{(−)}_μ, hatY_μ への作用の一致、および γ₂ = 0 のとき T_{(V′)} がそれらを固定すること
 

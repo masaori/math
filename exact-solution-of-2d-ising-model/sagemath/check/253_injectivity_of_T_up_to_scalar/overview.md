@@ -4,7 +4,7 @@
 
 **対象ラベル**: `injectivity_of_T_up_to_scalar` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`
 
 - 範囲: (i) 乗法群の中心がスカラー行列全体、(ii) T_g = T_{g′} ⟺ g′ = cg
 

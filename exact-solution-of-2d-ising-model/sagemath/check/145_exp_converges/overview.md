@@ -4,7 +4,7 @@
 
 **対象ラベル**: `exp_converges` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/003_exp_linear_map.mjs`
+- ファイル: `structured-latex/content/003_exp_linear_map.ts`
 
 - 範囲: 有限次元ノルム線型空間上の線型写像 X について Σ(1/n!)X^n が各点収束すること
 

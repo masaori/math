@@ -4,7 +4,7 @@
 
 **対象ラベル**: `lambda_eq_exp_gamma` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: γ(θ_μ) := arccosh(γ₁(θ_μ)) と λ_± = e^{±γ}
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `def_partition_function_2d_ising` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/001_partition_function_2d_ising.mjs`
+- ファイル: `structured-latex/content/001_partition_function_2d_ising.ts`
 
 - 範囲: 定義の健全性と、独立に計算できる特別な場合との一致
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `arg_of_gamma_2_mu` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`
+- ファイル: `structured-latex/content/008_TV1_hatZ_hatY_part2.ts`
 
 - 範囲: arg^[0,2π)(γ₂(θ_μ)γ₂(−θ_μ)) = π
 

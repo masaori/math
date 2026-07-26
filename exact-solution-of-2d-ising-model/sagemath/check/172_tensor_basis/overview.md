@@ -4,7 +4,7 @@
 
 **対象ラベル**: `tensor_basis` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: 行列単位のクロネッカー積 E_{I,J} が Mat(2^M,C) の基底、f_I = e_{i₁}⊠…⊠e_{i_M} が C^{2^M} の基底
 

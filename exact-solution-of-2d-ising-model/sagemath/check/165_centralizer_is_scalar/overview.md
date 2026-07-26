@@ -4,7 +4,7 @@
 
 **対象ラベル**: `centralizer_is_scalar` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/002_linear_space_general.mjs`
+- ファイル: `structured-latex/content/002_linear_space_general.ts`
 
 - 範囲: すべての元と可換な W はスカラー行列
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `cosh_sinh_basic_properties` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/000_calculation_formulae_00_09.mjs`
+- ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 
 - 範囲: (1) cosh−sinh=exp(−x) 等、(2) cosh²−sinh²=1、(3) x>0 で cosh>sinh>0、(4) a,b>0 で a²=b² ⟺ a=b
 

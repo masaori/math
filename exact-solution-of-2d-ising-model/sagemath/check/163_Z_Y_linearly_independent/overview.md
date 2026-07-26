@@ -4,7 +4,7 @@
 
 **対象ラベル**: `Z_Y_linearly_independent` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.mjs`
+- ファイル: `structured-latex/content/004_transfer_matrix.ts`
 
 - 範囲: {Z_1..Z_M, Y_1..Y_M} の C-線型独立性
 

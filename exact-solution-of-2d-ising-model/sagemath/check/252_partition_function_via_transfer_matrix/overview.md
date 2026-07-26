@@ -4,7 +4,7 @@
 
 **対象ラベル**: `partition_function_via_transfer_matrix` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/001_partition_function_2d_ising.mjs`
+- ファイル: `structured-latex/content/001_partition_function_2d_ising.ts`
 
 - 範囲: Z(J,J′) = tr((V₁V₂)^M)
 

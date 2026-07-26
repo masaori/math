@@ -4,7 +4,7 @@
 
 **対象ラベル**: `pauli_matrix_products` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/006_Z_Y_anticommutation.mjs`
+- ファイル: `structured-latex/content/006_Z_Y_anticommutation.ts`
 
 - 範囲: σ^aσ^a = I の 3 式と σ^zσ^x = −σ^xσ^z 等の 3 式
 
