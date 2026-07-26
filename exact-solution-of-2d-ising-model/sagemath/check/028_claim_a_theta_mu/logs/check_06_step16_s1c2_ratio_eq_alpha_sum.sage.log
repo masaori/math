@@ -1,0 +1,610 @@
+
+--- Numerical Verification: Step 16: (2*s_1*c_2)/(c_1+1) = alpha_1 + 1/alpha_2 ---
+Parameters: K1=0.400000000000000, K2=0.800000000000000, M=100
+Parameters: K1=1.20000000000000, K2=0.300000000000000, M=100
+Parameters: K1=10.4000000000000, K2=1.80000000000000, M=100
+Parameters: K1=0.440700000000000, K2=0.440700000000000, M=100
+Parameters: K1=0.200000000000000, K2=0.813000000000000, M=100
+Parameters: K1=0.0500000000000000, K2=0.100000000000000, M=100
+Parameters: K1=0.300000000000000, K2=5.00000000000000, M=100
+  MISMATCH at mu=-100: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-99: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-98: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-97: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-96: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-95: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-94: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-93: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-92: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-91: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-90: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-89: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-88: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-87: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-86: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-85: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-84: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-83: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-82: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-81: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-80: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-79: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-78: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-77: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-76: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-75: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-74: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-73: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-72: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-71: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-70: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-69: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-68: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-67: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-66: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-65: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-64: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-63: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-62: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-61: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-60: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-59: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-58: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-57: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-56: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-55: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-54: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-53: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-52: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-51: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-50: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-49: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-48: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-47: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-46: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-45: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-44: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-43: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-42: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-41: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-40: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-39: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-38: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-37: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-36: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-35: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-34: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-33: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-32: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-31: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-30: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-29: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-28: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-27: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-26: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-25: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-24: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-23: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-22: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-21: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-20: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-19: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-18: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-17: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-16: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-15: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-14: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-13: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-12: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-11: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-10: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-9: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-8: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-7: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-6: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-5: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-4: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-3: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-2: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=-1: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=1: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=2: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=3: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=4: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=5: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=6: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=7: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=8: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=9: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=10: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=11: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=12: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=13: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=14: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=15: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=16: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=17: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=18: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=19: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=20: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=21: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=22: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=23: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=24: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=25: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=26: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=27: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=28: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=29: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=30: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=31: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=32: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=33: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=34: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=35: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=36: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=37: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=38: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=39: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=40: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=41: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=42: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=43: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=44: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=45: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=46: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=47: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=48: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=49: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=50: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=51: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=52: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=53: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=54: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=55: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=56: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=57: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=58: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=59: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=60: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=61: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=62: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=63: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=64: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=65: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=66: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=67: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=68: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=69: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=70: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=71: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=72: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=73: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=74: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=75: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=76: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=77: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=78: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=79: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=80: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=81: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=82: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=83: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=84: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=85: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=86: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=87: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=88: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=89: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=90: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=91: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=92: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=93: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=94: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=95: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=96: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=97: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=98: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=99: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+  MISMATCH at mu=100: |expr1 - expr2| = 1.93358573596925e-9
+    expr1 = 6416.58730698633
+    expr2 = 6416.58730698439
+RESULT: FAIL

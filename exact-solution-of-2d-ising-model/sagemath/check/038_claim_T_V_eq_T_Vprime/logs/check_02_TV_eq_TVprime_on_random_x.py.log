@@ -1,0 +1,16 @@
+M=2 K=(0.4,0.8): max|T_V(x)-T_Vp(x)| (3 random x)=2.3e-15 PASS
+M=2 K=(1.2,0.3): max|T_V(x)-T_Vp(x)| (3 random x)=2.4e-13 PASS
+M=2 K=(0.4407,0.4407): max|T_V(x)-T_Vp(x)| (3 random x)=3.4e-11 PASS
+M=2 K=(0.2,0.813): max|T_V(x)-T_Vp(x)| (3 random x)=4.9e-13 PASS
+M=2 K=(0.3,5.0): max|T_V(x)-T_Vp(x)| (3 random x)=3.7e-15 PASS
+M=3 K=(0.4,0.8): max|T_V(x)-T_Vp(x)| (3 random x)=2.1e-14 PASS
+M=3 K=(1.2,0.3): max|T_V(x)-T_Vp(x)| (3 random x)=7.4e-12 PASS
+M=3 K=(0.4407,0.4407): max|T_V(x)-T_Vp(x)| (3 random x)=8.8e-11 PASS
+M=3 K=(0.2,0.813): max|T_V(x)-T_Vp(x)| (3 random x)=6.0e-13 PASS
+M=3 K=(0.3,5.0): max|T_V(x)-T_Vp(x)| (3 random x)=3.2e-15 PASS
+M=4 K=(0.4,0.8): max|T_V(x)-T_Vp(x)| (3 random x)=2.8e-14 PASS
+M=4 K=(1.2,0.3): max|T_V(x)-T_Vp(x)| (3 random x)=4.6e-10 PASS
+M=4 K=(0.4407,0.4407): max|T_V(x)-T_Vp(x)| (3 random x)=3.3e-10 PASS
+M=4 K=(0.2,0.813): max|T_V(x)-T_Vp(x)| (3 random x)=1.0e-12 PASS
+M=4 K=(0.3,5.0): max|T_V(x)-T_Vp(x)| (3 random x)=1.8e-14 PASS
+ALL PASS
