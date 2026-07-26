@@ -266,7 +266,13 @@ s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t = 0)
         math(String.raw`\mathcal{M} := \{-M, \dots, -1, 1, \dots, M\}`),
         "、",
         math(String.raw`\theta_\mu := \dfrac{2\pi\mu}{M} \in \mathbb{R}`),
-        " とする。",
+        " とする。この前提から ",
+        math(String.raw`c_1, s_1, c_2, s_2^* > 0`),
+        "、特に ",
+        math(String.raw`s_2^* \neq 0`),
+        " が従う（証明の Step 0。",
+        math(String.raw`s_2^* \neq 0`),
+        " は以下の同値のすべてに不可欠である）。",
         math(String.raw`\mu \in \mathcal{M}`),
         " について、",
         math(String.raw`\gamma_2(\theta) := i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2)`),
@@ -320,10 +326,51 @@ s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t = 0)
         "、",
         math(String.raw`s_2^* = \sinh 2K_2^*`),
         " はいずれも実数であり、",
-        math(String.raw`K_1, K_2, K_2^* \in \mathbb{R}_{>0}`),
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " である。ここで ",
+        math(String.raw`K_2^* > 0`),
+        " を確認しておく：",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`K_2^* := -\tfrac{1}{2}\log(\tanh K_2)`),
+        " において、",
+        math(String.raw`K_2 > 0`),
         " より ",
-        math(String.raw`c_1, s_1, c_2, s_2^* > 0`),
-        "。また ",
+        math(String.raw`0 < \tanh K_2 < 1`),
+        " であるから ",
+        math(String.raw`\log(\tanh K_2) < 0`),
+        "、よって ",
+        math(String.raw`K_2^* = -\tfrac{1}{2}\log(\tanh K_2) > 0`),
+        "。したがって ",
+        math(String.raw`K_1, K_2, K_2^* \in \mathbb{R}_{>0}`),
+        " であり、",
+        math(String.raw`x > 0`),
+        " で ",
+        math(String.raw`\cosh x > 0`),
+        "、",
+        math(String.raw`\sinh x > 0`),
+        " であることから",
+      ]),
+      displayMath(
+        String.raw`c_1 = \cosh 2K_1 > 0, \quad s_1 = \sinh 2K_1 > 0, \quad c_2 = \cosh 2K_2 > 0, \quad
+s_2^* = \sinh 2K_2^* > 0`,
+      ),
+      paragraph([
+        "特に ",
+        math(String.raw`s_2^* \neq 0`),
+        " である。この ",
+        math(String.raw`s_2^* \neq 0`),
+        " は Step 1（",
+        math(String.raw`\gamma_2(\theta_\mu)`),
+        " の第 1 因子が ",
+        math(String.raw`0`),
+        " でないこと）に不可欠であり、これが無いと第 1 の同値そのものが成り立たない（",
+        math(String.raw`s_2^* = 0`),
+        " ならすべての ",
+        math(String.raw`\mu`),
+        " について ",
+        math(String.raw`\gamma_2(\theta_\mu) = 0`),
+        " になってしまう）。また ",
         math(String.raw`\mu \in \mathcal{M} \subset \mathbb{Z}`),
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
@@ -425,6 +472,62 @@ s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t = 0)
       ),
       paragraph(["となり、第 2 の同値を得る。"]),
       paragraph([
+        "Step 3': 第 1 式だけを ",
+        math(String.raw`\mu`),
+        " の言葉に翻訳しておく（第 3 の同値を正しく述べるために必要）。",
+        math(String.raw`\theta_\mu = 2\pi\mu/M`),
+        " であるから、",
+        math(String.raw`k \in \mathbb{Z}`),
+        " を用いて",
+      ]),
+      displayMath(
+        String.raw`\theta_\mu \in \pi\mathbb{Z}
+\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\mu}{M} = k\pi
+\iff \exists k \in \mathbb{Z}:\ 2\mu = kM
+\iff M \mid 2\mu`,
+      ),
+      paragraph([
+        "ここで ",
+        math(String.raw`M \mid 2\mu`),
+        " を ",
+        math(String.raw`M`),
+        " の偶奇で言い換える。",
+        math(String.raw`M`),
+        " が奇数のときは ",
+        math(String.raw`\gcd(M,2) = 1`),
+        " より ",
+        math(String.raw`M \mid 2\mu \iff M \mid \mu`),
+        "。",
+        math(String.raw`M`),
+        " が偶数のとき、",
+        math(String.raw`M = 2M'`),
+        " とおくと ",
+        math(String.raw`M \mid 2\mu \iff 2M' \mid 2\mu \iff M' \mid \mu`),
+        " であり、",
+        math(String.raw`M' = M/2`),
+        " だから、",
+        math(String.raw`\mu \equiv 0 \pmod{M}`),
+        " または ",
+        math(String.raw`\mu \equiv M/2 \pmod{M}`),
+        " と同値である。まとめると",
+      ]),
+      displayMath(
+        String.raw`\sin\theta_\mu = 0
+\iff \begin{cases}
+\mu \equiv 0 \pmod{M} & (M \text{ が奇数}) \\
+\mu \equiv 0 \pmod{M} \ \text{または}\ \mu \equiv M/2 \pmod{M} & (M \text{ が偶数})
+\end{cases}`,
+      ),
+      paragraph([
+        "特に、",
+        math(String.raw`M`),
+        " が偶数のときは ",
+        math(String.raw`\mu = \pm M/2 \in \mathcal{M}`),
+        " も第 1 式を満たすので、",
+        math(String.raw`\sin\theta_\mu = 0 \iff \mu = \pm M`),
+        " は偽である。第 3 の同値が成り立つのは、あくまで第 2 式との連立の下だけである。",
+      ]),
+      paragraph([
         "Step 4: 第 3 の同値。ここは連立条件の下ではじめて成立するので、両向きを分けて示す。",
       ]),
       paragraph([
@@ -517,6 +620,11 @@ s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t = 0)
           "（M が偶数なら μ = ±M/2 でも sin θ_μ = 0）。連立条件全体としてのみ同値であることを statement に明記し、" +
           "排除の根拠（c_2 s_1 = -c_1 < 0 が正値性と矛盾）を証明 Step 4 に書いた。",
         "最終形 μ = ±M かつ c_1 = s_1 c_2 を第 4 の同値として追加した（後続ブロックが参照する形）。",
+        "Lean 形式化での指摘を受けて 2 点を明示化した。(a) Step 0 で K_2 > 0 ⟹ 0 < tanh K_2 < 1 ⟹ K_2^* > 0 ⟹ s_2^* > 0 " +
+          "を 1 段ずつ書き、s_2^* ≠ 0（Step 1 の第 1 因子が非零であることに不可欠。s_2^* = 0 なら γ_2 は恒等的に 0）を " +
+          "statement 側にも明記した。(b) 第 1 式 sin θ_μ = 0 だけを μ の言葉に翻訳した中間段を Step 3' として独立させ、" +
+          "sin θ_μ = 0 ⟺ M | 2μ ⟺（M が偶数なら）μ ≡ 0 または μ ≡ M/2 (mod M) という正しい形で書いた。" +
+          "μ = ±M/2 の排除は Step 4 の（⇒）で c_2 s_1 = -c_1 < 0 と正値性の矛盾として行う。",
       ],
     },
   },
@@ -1209,6 +1317,8 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
     labels: ["diagonalization_P_D"],
     statement: [
       paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        "、",
         math(String.raw`\mu \in \mathcal{M}`),
         "、",
         math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
@@ -1228,7 +1338,17 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
 \quad
 D_\mu := \begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu} \end{pmatrix}`,
       ),
-      paragraph(["とおけば ", math(String.raw`A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}`), "。"]),
+      paragraph([
+        "とおく。このとき ",
+        math(String.raw`\det P_\mu \neq 0`),
+        " であり（したがって ",
+        math(String.raw`P_\mu^{-1}`),
+        " が存在し）、",
+      ]),
+      displayMath(
+        String.raw`\det P_\mu = \frac{i\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{2M\,\gamma_2(-\theta_\mu)} \neq 0_{\mathbb{C}},
+\qquad A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}`,
+      ),
       paragraph([
         math(String.raw`\gamma_2(\theta_\mu) = 0`),
         " のとき ",
@@ -1237,9 +1357,156 @@ D_\mu := \begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu} \end{pmatrix
       ]),
     ],
     proof: [
-      paragraph([ref("eigenvector_of_A_theta"), " の固有ベクトルに任意定数を代入することで得られる。"]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`P_\mu`),
+        " の各成分が定義される（分母が ",
+        math(String.raw`0`),
+        " でない）こと。仮定 ",
+        math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
+        " と ",
+        ref("relation_of_gamma_2"),
+        " の ",
+        math(String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}`),
+        " より ",
+        math(String.raw`\gamma_2(-\theta_\mu) \neq 0`),
+        "（複素共役は ",
+        math(String.raw`0`),
+        " を ",
+        math(String.raw`0`),
+        " にしか写さない）。また ",
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " より ",
+        math(String.raw`\sqrt{M} > 0`),
+        "。よって ",
+        math(String.raw`2\sqrt{M}\,\gamma_2(-\theta_\mu) \neq 0`),
+        " であり、",
+        math(String.raw`P_\mu`),
+        " の 4 成分はすべて定まる。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`P_\mu`),
+        " の 2 つの列が ",
+        ref("eigenvector_of_A_theta"),
+        " の固有ベクトルであること。",
+        ref("eigenvector_of_A_theta"),
+        " の固有ベクトルは任意定数 ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " を用いて ",
+        math(String.raw`v_{\pm,\mu} = c\bigl(\pm i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)},\ \gamma_2(-\theta_\mu)\bigr)^{\mathsf{T}}`),
+        " であった。Step 1 より ",
+        math(String.raw`c := \dfrac{1}{2\sqrt{M}\,\gamma_2(-\theta_\mu)} \in \mathbb{C}^\times`),
+        " と選べて、このとき第 2 成分は ",
+        math(String.raw`c\,\gamma_2(-\theta_\mu) = \dfrac{1}{2\sqrt{M}}`),
+        " となり、",
+        math(String.raw`v_{+,\mu}, v_{-,\mu}`),
+        " はそれぞれ上に書いた ",
+        math(String.raw`P_\mu`),
+        " の第 1 列・第 2 列に一致する。すなわち",
+      ]),
+      displayMath(
+        String.raw`A(\theta_\mu)\,v_{\pm,\mu} = \lambda_{\pm,\mu}\,v_{\pm,\mu}
+\quad\Longrightarrow\quad
+A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
+      ),
+      paragraph([
+        "（右の等式は、行列の積を列ごとに見れば左辺の第 1 列が ",
+        math(String.raw`A(\theta_\mu)v_{+,\mu} = \lambda_{+,\mu}v_{+,\mu}`),
+        "、右辺の第 1 列が ",
+        math(String.raw`v_{+,\mu}\lambda_{+,\mu}`),
+        " で一致すること、第 2 列も同様であることによる。）",
+      ]),
+      paragraph([
+        "Step 3: ",
+        math(String.raw`\det P_\mu`),
+        " の計算。以下 ",
+        math(String.raw`t := \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \in \mathbb{C}`),
+        " と略記する。",
+        math(String.raw`2 \times 2`),
+        " 行列の行列式の定義より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\det P_\mu
+&= \frac{+i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}\cdot\frac{1}{2\sqrt{M}}
+ - \frac{-i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}\cdot\frac{1}{2\sqrt{M}} \\
+&= 2\cdot\frac{i\,t}{4M\,\gamma_2(-\theta_\mu)}
+ = \frac{i\,t}{2M\,\gamma_2(-\theta_\mu)}
+\end{aligned}`,
+      ),
+      paragraph(["（", math(String.raw`(2\sqrt{M})^2 = 4M`), " を使った。）"]),
+      paragraph([
+        "Step 4: ",
+        math(String.raw`\det P_\mu \neq 0`),
+        "。",
+        ref("relation_of_gamma_2"),
+        " より ",
+        math(String.raw`\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = -|\gamma_2(\theta_\mu)|^2`),
+        " であり、仮定 ",
+        math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
+        " より ",
+        math(String.raw`|\gamma_2(\theta_\mu)|^2 > 0`),
+        " であるから ",
+        math(String.raw`t^2 = -|\gamma_2(\theta_\mu)|^2 \neq 0_{\mathbb{C}}`),
+        "、ゆえに ",
+        math(String.raw`t \neq 0_{\mathbb{C}}`),
+        "。さらに ",
+        math(String.raw`i \neq 0`),
+        "、",
+        math(String.raw`2M \neq 0`),
+        "（",
+        math(String.raw`M \geq 1`),
+        "）、Step 1 より ",
+        math(String.raw`\gamma_2(-\theta_\mu) \neq 0`),
+        "。",
+        math(String.raw`\mathbb{C}`),
+        " は体（",
+        ref("complex_numbers_form_a_field"),
+        "）ゆえ零因子を持たないから",
+      ]),
+      displayMath(
+        String.raw`\det P_\mu = \frac{i\,t}{2M\,\gamma_2(-\theta_\mu)} \neq 0_{\mathbb{C}}`,
+      ),
+      paragraph([
+        "Step 5: 対角化。",
+        math(String.raw`\det P_\mu \neq 0`),
+        " より ",
+        math(String.raw`P_\mu`),
+        " は可逆であり ",
+        math(String.raw`P_\mu^{-1}`),
+        " が存在する。Step 2 の ",
+        math(String.raw`A(\theta_\mu)P_\mu = P_\mu D_\mu`),
+        " の両辺に右から ",
+        math(String.raw`P_\mu^{-1}`),
+        " を掛けて",
+      ]),
+      displayMath(String.raw`A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}`),
+      paragraph([
+        "Step 6: ",
+        math(String.raw`\gamma_2(\theta_\mu) = 0`),
+        " の場合。この場合は ",
+        math(String.raw`P_\mu`),
+        " が定義されない（Step 1 の分母が ",
+        math(String.raw`0`),
+        " になる）が、",
+        ref("A_theta_is_identity_when_gamma2_zero"),
+        " より ",
+        math(String.raw`A(\theta_\mu) = I`),
+        " であって対角化は不要である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（027_claim_A_thetaの対角化_P_muとD_mu.typ）は A(θ_μ) = P_μ D_μ P_μ^{-1} と書きながら P_μ^{-1} の存在" +
+          "（det P_μ ≠ 0）を述べていなかった。Lean 形式化（Part008/Claim027_EigenATheta.lean の det_Pmat / " +
+          "det_Pmat_ne_zero）と同じ計算を人手で行い、det P_μ = i√(γ_2(θ_μ)γ_2(-θ_μ))/(2M γ_2(-θ_μ)) を求め、" +
+          "γ_2(θ_μ) ≠ 0（ゆえに根号の中身 -|γ_2(θ_μ)|^2 ≠ 0）と M ≥ 1 の下で非零であることを示すステップを追加した。" +
+          "あわせて、原文が 1 行で済ませていた『固有ベクトルに任意定数を代入する』段も、任意定数 c の選択が可能である" +
+          "こと（γ_2(-θ_μ) ≠ 0）と AP = PD から A = PDP^{-1} への移行に分けて書いた。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_029_claim_a_theta_mu",
@@ -1828,8 +2095,151 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
 [\psi_\mu^\dagger, \psi_\nu]_+ = \delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}, \quad
 [\psi_\mu, \psi_\nu]_+ = 0`,
       ),
+      paragraph([
+        "ここで ",
+        math(String.raw`\sqrt{\cdot}`),
+        "（",
+        ref("def_fermi"),
+        " を通じて ",
+        math(String.raw`\psi_\mu^\dagger, \psi_\mu`),
+        " の係数に現れる）は ",
+        ref("def_sqrt_cc"),
+        " で定めた単一値の写像 ",
+        math(String.raw`\sqrt{\cdot} : \mathbb{C} \to \mathbb{C}`),
+        " である。すなわち、平方根は根号の中身だけで一意に定まる複素数であって、",
+        math(String.raw`\mu`),
+        " ごとに ",
+        math(String.raw`\pm`),
+        " を選ぶ自由度は無い。この一意性は主張の成立に不可欠であり、証明の Step 0 で明示的に使う。",
+      ]),
     ],
     proof: [
+      paragraph([
+        "Step 0: 平方根の値が ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`\nu`),
+        " で一致すること（分枝の一致）。以下 ",
+        math(String.raw`t_\mu := \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \in \mathbb{C}`),
+        "、",
+        math(String.raw`t_\nu := \sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} \in \mathbb{C}`),
+        " と略記する。",
+      ]),
+      paragraph([
+        "Step 0-1: ",
+        math(String.raw`\gamma_2`),
+        " は ",
+        math(String.raw`2\pi`),
+        " 周期である。実際 ",
+        math(String.raw`k \in \mathbb{Z}`),
+        " と ",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\cos(\theta + 2k\pi) = \cos\theta`),
+        "、",
+        math(String.raw`\sin(\theta + 2k\pi) = \sin\theta`),
+        " であり、",
+        ref("euler_formula_cos_sin"),
+        " の Euler の公式 ",
+        math(String.raw`e^{i\theta} = \cos\theta + i\sin\theta`),
+        " より ",
+        math(String.raw`e^{i(\theta + 2k\pi)} = e^{i\theta}`),
+        "。",
+        math(String.raw`\gamma_2(\theta) = i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2)`),
+        " は ",
+        math(String.raw`e^{i\theta}, \cos\theta, \sin\theta`),
+        " のみを通じて ",
+        math(String.raw`\theta`),
+        " に依存するから、",
+      ]),
+      displayMath(String.raw`\gamma_2(\theta + 2k\pi) = \gamma_2(\theta) \qquad (k \in \mathbb{Z},\ \theta \in \mathbb{R})`),
+      paragraph([
+        "Step 0-2: ",
+        math(String.raw`\delta^M_{\mu+\nu,0} \neq 0`),
+        " のとき ",
+        math(String.raw`\mu + \nu \equiv 0 \pmod{M}`),
+        " すなわち ",
+        math(String.raw`\nu = -\mu + kM`),
+        " なる ",
+        math(String.raw`k \in \mathbb{Z}`),
+        " が存在する。このとき ",
+        math(String.raw`\theta_\nu = \dfrac{2\pi\nu}{M} = -\dfrac{2\pi\mu}{M} + 2k\pi = -\theta_\mu + 2k\pi`),
+        " であるから、Step 0-1 より",
+      ]),
+      displayMath(
+        String.raw`\gamma_2(\theta_\nu) = \gamma_2(-\theta_\mu), \qquad
+\gamma_2(-\theta_\nu) = \gamma_2(\theta_\mu - 2k\pi) = \gamma_2(\theta_\mu)`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`\theta_\nu = -\theta_\mu + 2k\pi`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " における等式であって ",
+        math(String.raw`\theta_\nu = -\theta_\mu`),
+        " とは限らない。両者が ",
+        math(String.raw`\gamma_2`),
+        " の値として一致するのは、Step 0-1 の周期性による。）したがって根号の中身は ",
+        math(String.raw`\mathbb{C}`),
+        " の元として一致する：",
+      ]),
+      displayMath(
+        String.raw`\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu) = \gamma_2(-\theta_\mu)\gamma_2(\theta_\mu) = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`,
+      ),
+      paragraph([
+        "Step 0-3: ",
+        ref("def_sqrt_cc"),
+        " の ",
+        math(String.raw`\sqrt{\cdot}`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " から ",
+        math(String.raw`\mathbb{C}`),
+        " への写像である。写像は等しい入力に等しい値を返すから、Step 0-2 の等式より",
+      ]),
+      displayMath(String.raw`t_\nu = \sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} = \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} = t_\mu`),
+      paragraph([
+        "すなわち ",
+        math(String.raw`t_\nu`),
+        " と ",
+        math(String.raw`t_\mu`),
+        " は同一の複素数である（",
+        math(String.raw`t_\nu = -t_\mu`),
+        " という可能性は残らない）。",
+      ]),
+      paragraph([
+        "Step 0-4: この一致は結論に不可欠である。",
+        ref("relation_of_gamma_2"),
+        " より ",
+        math(String.raw`\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = -|\gamma_2(\theta_\mu)|^2`),
+        " であり、仮定 ",
+        math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
+        " より ",
+        math(String.raw`|\gamma_2(\theta_\mu)|^2 > 0`),
+        " であるから",
+      ]),
+      displayMath(String.raw`t_\mu^2 = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = -|\gamma_2(\theta_\mu)|^2 \neq 0_{\mathbb{C}}, \qquad \text{ゆえに } t_\mu \neq 0_{\mathbb{C}}`),
+      paragraph([
+        "後述の a) の係数の括弧は ",
+        math(String.raw`-t_\mu t_\nu + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = t_\mu^2 - t_\mu t_\nu = t_\mu(t_\mu - t_\nu)`),
+        " であり（Step 0-2 より ",
+        math(String.raw`\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = \gamma_2(-\theta_\mu)\gamma_2(\theta_\mu) = t_\mu^2`),
+        "）、Step 0-3 の ",
+        math(String.raw`t_\nu = t_\mu`),
+        " によってのみ ",
+        math(String.raw`0`),
+        " になる。仮に ",
+        math(String.raw`t_\nu = -t_\mu`),
+        " であれば括弧は ",
+        math(String.raw`2t_\mu^2 \neq 0`),
+        " となり第 1 の等式は偽になる（同様に b) の括弧は ",
+        math(String.raw`t_\mu t_\nu + t_\mu^2`),
+        " で、",
+        math(String.raw`t_\nu = -t_\mu`),
+        " なら ",
+        math(String.raw`0`),
+        " となって第 2 の等式も偽になる）。",
+      ]),
       paragraph([
         ref("def_fermi"),
         " より、",
@@ -1864,18 +2274,26 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       ),
       paragraph([
         math(String.raw`\delta^M_{\mu+\nu,0} \neq 0`),
-        " のとき ",
-        math(String.raw`\mu + \nu \equiv 0 \pmod{M}`),
-        " すなわち ",
-        math(String.raw`\theta_\nu = -\theta_\mu`),
-        " である。よって",
+        " のとき、Step 0-3 の ",
+        math(String.raw`t_\nu = t_\mu`),
+        "（平方根が単一値であることから従う分枝の一致）を使うと",
       ]),
       displayMath(
         String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}
-= \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)}
+= t_\mu t_\nu
+= t_\mu^2
 = \bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\bigr)^2
 = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) \quad (\because (\sqrt{z})^2 = z)`,
       ),
+      paragraph([
+        "（第 2 の等号が Step 0-3 の ",
+        math(String.raw`t_\nu = t_\mu`),
+        " である。ここを ",
+        math(String.raw`t_\nu = \pm t_\mu`),
+        " までしか言えないと結論は得られない。）また Step 0-2 の ",
+        math(String.raw`\gamma_2(-\theta_\nu) = \gamma_2(\theta_\mu)`),
+        " より",
+      ]),
       displayMath(
         String.raw`\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = \gamma_2(-\theta_\mu)\gamma_2(\theta_\mu) = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`,
       ),
@@ -1944,7 +2362,18 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
     ],
     conversion: {
       status: "converted",
-      notes: ["現行ソースに再同期（定義域を γ2(θμ),γ2(θν)≠0 に限定）し、三つの反交換子の計算を全展開。"],
+      notes: [
+        "現行ソースに再同期（定義域を γ2(θμ),γ2(θν)≠0 に限定）し、三つの反交換子の計算を全展開。",
+        "原文（および本ブロックの旧版）は δ^M_{μ+ν,0} ≠ 0 のとき『θ_ν = -θ_μ』と書いて根号の中身を置き換えていたが、" +
+          "μ+ν ≡ 0 (mod M) から従うのは θ_ν = -θ_μ + 2kπ（k ∈ Z）までであり、また根号の中身が等しいことだけからは " +
+          "t_ν = ±t_μ しか従わない。Lean 側の形式化（Part008/Claim032_AnticommutatorPsiAbstract.lean）で、" +
+          "t_ν = -t_μ（逆分枝）を取ると第 1 式・第 2 式がいずれも偽になることが定理として確認されている。" +
+          "本リポジトリの √ は def_sqrt_cc で単一値の写像 C → C として定義されているので逆分枝は起こらないが、" +
+          "その一意性を使っていることが statement にも proof にも書かれていなかった。" +
+          "そこで (a) statement に『√ は def_sqrt_cc の単一値写像である』ことを明記し、" +
+          "(b) proof に Step 0（γ_2 の 2π 周期性 → 根号の中身の一致 → 写像の一価性から t_ν = t_μ → " +
+          "t_μ ≠ 0 ゆえ分枝の一致が不可欠であること）を追加した。主張そのものは変えていない。",
+      ],
     },
   },
   {
@@ -1955,7 +2384,14 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
     title: { tex: String.raw`\det A(\theta_\mu) = 1` },
     labels: ["det_A_theta"],
     statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
+      paragraph([
+        ref("def_transfer_matrix_symbols"),
+        " の記号のもと ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とする。",
+        math(String.raw`\mu \in \mathcal{M}`),
+        " について、",
+      ]),
       displayMath(
         String.raw`\det A(\theta_\mu) = 1, \quad
 \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = 1, \quad
@@ -1963,14 +2399,226 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       ),
     ],
     proof: [
-      paragraph([ref("factorization_of_A_theta"), " より ", math(String.raw`A(\theta_\mu) = B_1(\theta_\mu) \cdot B_2 \cdot B_1(\theta_\mu)`), " であり、"]),
+      paragraph([
+        "Step 0: 使う 3 つの関係式。",
+        ref("def_transfer_matrix_symbols"),
+        " の記号のもと、",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とする。次の 3 つを使う。",
+      ]),
       displayMath(
-        String.raw`\det B_1(\theta_\mu) = \cosh^2 K_1 - \sinh^2 K_1 = 1, \quad
-\det B_2 = \cosh^2(2K_2^*) - \sinh^2(2K_2^*) = 1`,
+        String.raw`\text{(i)}\ c_1^2 - s_1^2 = 1, \qquad
+\text{(ii)}\ (c_2^*)^2 - (s_2^*)^2 = 1, \qquad
+\text{(iii)}\ c_2\, s_2^* = c_2^*`,
       ),
-      paragraph([math(String.raw`\det A = (\det B_1)^2 \cdot \det B_2 = 1`)]),
+      paragraph([
+        "(i) は ",
+        math(String.raw`c_1 = \cosh 2K_1`),
+        "、",
+        math(String.raw`s_1 = \sinh 2K_1`),
+        " と恒等式 ",
+        math(String.raw`\cosh^2 x - \sinh^2 x = 1`),
+        "（",
+        math(String.raw`x = 2K_1`),
+        "）による。(ii) は同じ恒等式を ",
+        math(String.raw`x = 2K_2^*`),
+        " に適用したものである。(iii) は ",
+        ref("duality_c2_star_eq_s2_star_c2"),
+        " そのもの、すなわち ",
+        math(String.raw`K_2`),
+        " と ",
+        math(String.raw`K_2^*`),
+        " の双対関係 ",
+        math(String.raw`\sinh(2K_2)\sinh(2K_2^*) = 1`),
+        "（",
+        ref("def_transfer_matrix_symbols"),
+        "）の帰結 ",
+        math(String.raw`c_2^* = s_2^*\,c_2`),
+        " である。",
+      ]),
+      paragraph([
+        "（(iii) は ",
+        math(String.raw`A(\theta)`),
+        " の定義に現れる ",
+        math(String.raw`c_2`),
+        " と ",
+        math(String.raw`B_2`),
+        " に現れる ",
+        math(String.raw`c_2^*`),
+        " を結ぶ関係であり、これを落とすと以下の計算は成立しない。",
+        ref("factorization_of_A_theta"),
+        " の分解 ",
+        math(String.raw`A(\theta_\mu) = B_1(\theta_\mu)B_2B_1(\theta_\mu)`),
+        " 自体がこの関係を経由して成り立っているので、ここでは分解を経由せず ",
+        ref("def_A_theta"),
+        " の定義から直接計算する。）",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`\det A(\theta_\mu)`),
+        " の定義からの計算。",
+        ref("def_A_theta"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`A(\theta_\mu) = \begin{pmatrix}
+\gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\
+-\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu)
+\end{pmatrix}`,
+      ),
+      paragraph([math(String.raw`2 \times 2`), " 行列の行列式の定義より"]),
+      displayMath(
+        String.raw`\det A(\theta_\mu)
+= \gamma_1(\theta_\mu)\cdot\gamma_1(\theta_\mu) - \gamma_2(\theta_\mu)\cdot\bigl(-\gamma_2(-\theta_\mu)\bigr)
+= \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)`,
+      ),
+      paragraph([
+        "これで statement の第 1 の量と第 2 の量が等しいことが言えた。残りは、この値が ",
+        math(String.raw`1`),
+        " であることである。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`),
+        " の実部表示。以下 ",
+        math(String.raw`u := \cos\theta_\mu \in \mathbb{R}`),
+        "、",
+        math(String.raw`v := \sin\theta_\mu \in \mathbb{R}`),
+        " と略記する（",
+        math(String.raw`u^2 + v^2 = 1`),
+        "）。",
+        ref("def_A_theta"),
+        " の ",
+        math(String.raw`\gamma_2`),
+        " の定義より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\mu) &= i\,e^{i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) - i v\bigr) \\
+\gamma_2(-\theta_\mu) &= i\,e^{-i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) + i v\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`\cos(-\theta_\mu) = u`),
+        "、",
+        math(String.raw`\sin(-\theta_\mu) = -v`),
+        " を代入した。）",
+        math(String.raw`i \cdot i = -1`),
+        " と ",
+        math(String.raw`e^{i\theta_\mu}e^{-i\theta_\mu} = e^{0} = 1`),
+        "、および ",
+        math(String.raw`(a - iv)(a + iv) = a^2 + v^2`),
+        "（",
+        math(String.raw`a := c_1 u - s_1 c_2 \in \mathbb{R}`),
+        "）より",
+      ]),
+      displayMath(
+        String.raw`\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+= -(s_2^*)^2\Bigl((c_1 u - s_1 c_2)^2 + v^2\Bigr)
+= -(s_2^*)^2\Bigl((c_1 u - s_1 c_2)^2 + 1 - u^2\Bigr)`,
+      ),
+      paragraph([
+        "Step 3: 展開。",
+        math(String.raw`\gamma_1(\theta_\mu) = c_1 c_2^* - s_1 s_2^* u`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\gamma_1(\theta_\mu)^2 = c_1^2 (c_2^*)^2 - 2 c_1 c_2^* s_1 s_2^* u + s_1^2 (s_2^*)^2 u^2`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&= -(s_2^*)^2\Bigl(c_1^2 u^2 - 2 c_1 s_1 c_2 u + s_1^2 c_2^2 + 1 - u^2\Bigr) \\
+&= -c_1^2 (s_2^*)^2 u^2 + 2 c_1 s_1 c_2 (s_2^*)^2 u - s_1^2 c_2^2 (s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2 u^2
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 4: (iii) による ",
+        math(String.raw`c_2`),
+        " の消去。(iii) ",
+        math(String.raw`c_2 s_2^* = c_2^*`),
+        " を使うと",
+      ]),
+      displayMath(
+        String.raw`2 c_1 s_1 c_2 (s_2^*)^2 u = 2 c_1 s_1 (c_2 s_2^*) s_2^* u = 2 c_1 s_1 c_2^* s_2^* u,
+\qquad
+s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
+      ),
+      paragraph(["これを代入して Step 3 の 2 式を足すと"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&= \bigl(c_1^2 (c_2^*)^2 - 2 c_1 c_2^* s_1 s_2^* u + s_1^2 (s_2^*)^2 u^2\bigr) \\
+&\quad + \bigl(-c_1^2 (s_2^*)^2 u^2 + 2 c_1 s_1 c_2^* s_2^* u - s_1^2 (c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2 u^2\bigr) \\
+&= \bigl(c_1^2 - s_1^2\bigr)(c_2^*)^2 - (s_2^*)^2
+ + (s_2^*)^2 u^2\bigl(s_1^2 - c_1^2 + 1\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`u`),
+        " の 1 次の項 ",
+        math(String.raw`-2 c_1 c_2^* s_1 s_2^* u`),
+        " と ",
+        math(String.raw`+2 c_1 s_1 c_2^* s_2^* u`),
+        " は相殺した。これが (iii) を使った箇所である。）",
+      ]),
+      paragraph([
+        "Step 5: (i)(ii) による結論。(i) ",
+        math(String.raw`c_1^2 - s_1^2 = 1`),
+        " より ",
+        math(String.raw`s_1^2 - c_1^2 + 1 = 0`),
+        " であるから ",
+        math(String.raw`u^2`),
+        " の項は消え、同じく (i) より第 1 項は ",
+        math(String.raw`(c_2^*)^2`),
+        " になる。よって (ii) ",
+        math(String.raw`(c_2^*)^2 - (s_2^*)^2 = 1`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+= (c_2^*)^2 - (s_2^*)^2 = 1`,
+      ),
+      paragraph([
+        "Step 1 と合わせて ",
+        math(String.raw`\det A(\theta_\mu) = \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1`),
+        "。",
+      ]),
+      paragraph([
+        "Step 6: 固有値の積。",
+        ref("eigenvector_of_A_theta"),
+        " より ",
+        math(String.raw`\lambda_{\pm,\mu} = \gamma_1(\theta_\mu) \pm \sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}`),
+        " であり、",
+        math(String.raw`(\sqrt{z})^2 = z`),
+        "（",
+        ref("def_sqrt_cc"),
+        "）を ",
+        math(String.raw`z = -\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`),
+        " に適用して",
+      ]),
+      displayMath(
+        String.raw`\lambda_{+,\mu}\,\lambda_{-,\mu}
+= \gamma_1(\theta_\mu)^2 - \Bigl(\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\Bigr)^2
+= \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1`,
+      ),
+      paragraph(["以上で statement の 3 つの等式がすべて示された。"]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（034_claim_det_A_theta_mu.typ）の証明は factorization_of_A_theta の分解 A = B_1 B_2 B_1 から " +
+          "det A = (det B_1)^2 det B_2 = 1 を出すだけで、(a) det A を A(θ) の定義から計算した値 " +
+          "γ_1^2 + γ_2(θ)γ_2(-θ) と結びつける段が無く、(b) その値が 1 になるのに必要な双対関係 c_2 s_2^* = c_2^* が " +
+          "明示されていなかった（分解 A = B_1B_2B_1 の成立そのものにこの関係が埋め込まれている）。" +
+          "実際 c_2 s_2^* = c_2^* を落とすと det A(θ_μ) は θ_μ に依存し 1 にならない（Lean 側 det_AMat / det_AMat_eq_one で確認済み）。" +
+          "そこで証明を、def_A_theta の定義から直接 det を計算し、(i) c_1^2 - s_1^2 = 1、(ii) (c_2^*)^2 - (s_2^*)^2 = 1、" +
+          "(iii) c_2 s_2^* = c_2^*（duality_c2_star_eq_s2_star_c2）の 3 関係を明示的に使う形へ書き直した。" +
+          "また statement の残り 2 式（γ_1^2 + γ_2γ_2(-θ) = 1 と λ_+λ_- = 1）の証明も原文には無かったので補った。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_036_claim_gamma1_geq_1",
