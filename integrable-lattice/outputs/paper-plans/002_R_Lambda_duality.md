@@ -22,7 +22,12 @@
 |---|---|---|
 | 自由エネルギー密度 ＝ アルキメデス Mahler 測度 $\log m(P)$ | **既知**（古典） | Lind–Schmidt–Ward（$\mathbb{Z}^d$ 作用の位相的エントロピー＝Mahler 測度） |
 | Ising 自由エネルギーの Mahler 測度表示、特殊温度で楕円曲線 Hasse–Weil $L$、臨界点で Dirichlet $L$ | **既知** | arXiv:2407.19531 / Phys. Rev. E **110**, 054134 (2024) |
-| $p$ 進エントロピー ＝ $p$ 進 Mahler 測度 ＝ 岩澤 $\mu_p$ 不変量 | **既知** | Besser–Deninger "p-adic Mahler measures"; Deninger "p-adic entropy and a p-adic Fuglede–Kadison determinant"; arXiv:1702.03819（$\mathbb{Z}$-covers of links, balance formula） |
+| $p$ 進トーラス上に零点をもたない $f$ について、Deninger の $p$ 進エントロピー $\hbar_p$ ＝ Besser–Deninger の $p$ 進 Mahler 測度 $m_p$ | **既知** | Deninger, arXiv:math/0608539, Theorem 1.1（仮定は同 Prop 2.4 c): $f=ct^\nu(1+pg)$） |
+| その $\hbar_p, m_p$ は $\log_p$（$\log_p p=0$）で定義される量であり、**岩澤 $\mu_p$（付値の増大率）ではない** | **既知** | Ueki, arXiv:1702.03819, Remark 2.4「Besser and Deninger defined the purely $p$-adic Mahler measure with use of the $p$-adic log, which is different from ours」 |
+| **1 変数**で、付値の増大率 $\mu_p$ ＝ $-\log_p\mathrm M_p(f)$ ＝ 係数 content の $p$ 進付値 | **既知** | Ueki, arXiv:1702.03819, Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7 |
+| グラフの $\mathbb{Z}_\ell$ 塔で $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^n+\lambda n+\nu$ | **既知** | McGown–Vallières III, arXiv:2107.07639, Theorem 6.1（仮定: $\chi(X)\neq0$、全導来グラフが連結） |
+| グラフの $\mathbb{Z}_\ell^d$ 塔（$d\ge2$）では単一の線形成長率では書けず $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$） | **既知** | DuBose–Vallières, Algebraic Combinatorics **6** (2023) 1331–1346, Theorem A（仮定: 次数 1 の頂点なし、$\chi(X)\neq0$） |
+| 一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$ の $v_p(a_{p^n})$ の増大則 | **未特定**（cycle 13 step 1 の調査で文献に見つけられず） | — |
 | 円分 $\mathbb{Z}_p$ 拡大（アーベル体）で $\mu_p=0$ | **既知** | Ferrero–Washington (1979) |
 | 全域木数の $\ell$ 進付値が岩澤 $\mu,\lambda$ と平行に振る舞う（グラフの岩澤理論） | **既知** | arXiv:2006.14012「On abelian $\ell$-towers of multigraphs」ほか（Vallières, McGown, Gonet 系） |
 | $\mathbb{Z}^2$ トーラス全域木エントロピー $\to 4G/\pi$（$G$＝Catalan 定数） | **既知** | 古典（Kirchhoff の matrix-tree 定理＋格子和）。本リポジトリでは枠組みの妥当性検査に使用（`sagemath/check/cycle9_T1_spanning_tree/`） |
@@ -48,9 +53,32 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 に対し、
 
 - **($\infty$ 素点)** $\dfrac{1}{L^2}\log|a_L|\longrightarrow \log m(P)$（Mahler 測度＝位相的エントロピー＝自由エネルギー密度）。住処 $\mathbb{R}$。
-- **($p$ 素点)** $\Phi_L=\log|a_L|\in\Lambda$ の $\ell_p$ 係数 $v_p(a_L)\in\mathbb{Z}_{\ge0}$ が、塔 $L=p^n$ 上で線形成長率 $\mu_p$（＝$p$ 進エントロピー＝$p$ 進 Mahler 測度＝岩澤 $\mu_p$）をもち、有限 $L$ での挙動は $\mathbb{Z}$ 上の有限手続きで決定可能。
+- **($p$ 素点)** $\Phi_L=\log|a_L|\in\Lambda$ の $\ell_p$ 係数 $v_p(a_L)\in\mathbb{Z}_{\ge0}$ の増大が、$\mathbb{Z}$ 上の有限手続きで決定可能。
 
-**未確定点**: ($\infty$) 側の LSW は $P$ のトーラス上零点の扱いに条件が要る。($p$) 側の同定（Deninger の $p$ 進エントロピーとの一致）が**どの $P$ のクラスで成り立つか**を、本稿はまだ文献の該当命題まで特定できていない（cycle 11 T1 で「特定は cycle 12+」と記録）。**この一般性が確定するまで命題 D を主定理として書けない。**
+**($\infty$) 側の一般性は確定した**（cycle 13 step 1、`outputs/reports/cycle13_T1_padic_entropy_generality.md` §2）。文献本文で確認した3段:
+エントロピー＝Mahler 測度は**無条件**（Lind–Schmidt–Ward, Invent. math. 101 (1990), Thm 3.1）。
+周期点の増大率＝エントロピーは一般には**成立せず**、expansive（$\mathsf U(P)=\varnothing$）で成立（同 Thm 7.1）、
+$\mathsf U(P)$ 有限で成立（Lind–Schmidt–Verbitskiy, arXiv:1108.4989, Thm 1.2）、
+$\dim\mathsf U(P)\le d-2$（atoral）で成立（同 Thm 1.3）。本稿の 2 例（$5-(z+z^{-1})-(w+w^{-1})$ は $\mathsf U=\varnothing$、
+離散ラプラシアンは $\mathsf U=\{(1,1)\}$）はいずれも射程内。ただし LSV は「周期成分の個数 $\mathsf P_\Gamma$ と
+トーラス零点を除いた積 $a_L$ は $c_\Gamma(f)$ 因子だけずれる（漸近的には一致）」と明記しているので、
+命題化の際はこの差を書くこと。
+
+**($p$) 側は、旧稿の同一視が誤りであることが判明した**（同 report §3、cycle 13 step 1 で訂正）。
+Deninger の $p$ 進エントロピー $\hbar_p$ と Besser–Deninger の $p$ 進 Mahler 測度 $m_p$ は
+**岩澤対数 $\log_p$（$\log_p p=0$）** で定義されるため、$|{\rm Fix}|$ の $p$ 冪部分を最初から捨てており、
+**$v_p$ の増大を測る量ではない**。さらに両者の定義域はほぼ排他的で、$\hbar_p,m_p$ が定義できる条件
+（$P$ が $p$ 進トーラス上に零点をもたない ⟺ $P=ct^\nu(1+pg)$, Deninger arXiv:math/0608539 Prop 2.4）の下では
+$v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になるのは $P$ が $p$ 進トーラス上に零点をもつ場合で、
+そこは $m_p$ が定義されない領域である（Ueki arXiv:1702.03819 Remark 2.4 が両者の相違を明記）。
+
+**($p$) 側の残る未確定点**: 付値の増大を測る正しい量は $\log|\cdot|_p$ で定義される Ueki の $\mathrm M_p$ であり、
+**1 変数**では $\mu_p=-\log_p\mathrm M_p=$ 係数 content の $p$ 進付値という同一視が確立している
+（Ueki, Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7）。しかし**2 変数・$\mathbb{Z}_p^2$ 塔**では、
+グラフの場合ですら単一の線形成長率では書けず $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）となる
+（DuBose–Vallières, Algebraic Combinatorics 6 (2023), Thm A）。
+一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$ の $v_p(a_{p^n})$ の増大則を述べた文献命題は**特定できていない**。
+**この一般性が確定するまで命題 D を主定理として書けない（G1 未達）。**
 
 ### 現時点で厳密に確定している部分命題（すべて $\mathbb{R}$ 不使用・決定可能）
 
@@ -180,11 +208,11 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 
 ## 8. 未確定・昇格前に必要な作業
 
-1. **命題 D の一般性の確定**: Deninger の $p$ 進エントロピーと本稿の $v_p(a_{p^n})$ 線形成長の同定が、**どのクラスの $P$ で成り立つか**を文献の該当命題まで特定する（cycle 11 T1 で「cycle 12+」と記録した積み残し）。トーラス上零点をもつ $P$（離散ラプラシアンはこれに該当）の扱いを含む。
+1. **命題 D の ($p$) 側の一般性の確定**: 一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$・$\mathbb{Z}_p^2$ 塔での $v_p(a_{p^n})$ の増大則を述べた文献命題を特定する（cycle 13 step 1 の調査では見つからなかった）。$d\ge2$ では単一の線形成長率にならない（DuBose–Vallières Thm A）ので、$P(\ell^n,n)$ 型の形を前提に探すこと。**($\infty$) 側の一般性は cycle 13 step 1 で確定済み**（LSW Thm 7.1 / LSV Thm 1.2, 1.3。ただし $\mathsf P_\Gamma$ と $a_L$ の $c_\Gamma$ 差を明示すること）。
 2. **観察 T の決着**: $v_2(\tau(L))=2(L-1)$（奇 $L$）の証明、または文献での既出確認。証明できないなら「検証済みの観察」として提示し、主定理から外す。
-3. **非自明な $\mu_p>0$ の実例**: 現在の検証例はすべて $\mu_p=0$（$p$ 進自明）であり、$\Lambda$ 側の内容が薄い。$P\bmod p$ が $p$ 冪根上に零点をもつ $P$ を構成して $v_p(a_{p^n})$ の線形成長を実証する（cycle 12 step 3 として起票済み）。
+3. **非自明な $\mu_p>0$ の実例**: （消化済み。cycle 12 step 3 で判定式 $\mu_\ell=v_\ell(\mathrm{content}_z\det L(z))$ とともに $\mu_2=2,\mu_3=1,\mu_{23}=1$ 等の例を構成。`sagemath/check/cycle12_T3_nonzero_mu_p/`。ただし判定式の証明は cycle 13 step 2 の課題。）
 4. **寄与 (b) の既知性調査**: 「$\mathbb{Q}_p$ 不使用の可算化」が逆数学・構成的数学の文献に既出でないかを調べる。
-5. **選別基準 (iv) のメタ軸の扱い**を決める（§7 参照）。
+5. **選別基準 (iv) のメタ軸の扱い**: （消化済み。cycle 12 で `inputs/seeds/lambda-statement-program.md` の (iv) に対象軸5本＋メタ軸3本を明文化。本稿はメタ軸1本のみを動かし、対象軸は1本も動かしていない。）
 
 （消化済み）**`README.md` の欠落補完**: `sagemath/check/cycle6_T1_padic_mahler/`, `cycle3_T1_period_bound/`, `cycle3_T3_period/` の 3 ディレクトリに `README.md` を追加し、G3 の運用規約を満たした（G3 は `達成` へ）。
 
@@ -196,7 +224,7 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 
 | ゲート | 判定 | 根拠 |
 |---|---|---|
-| G1 中核命題が厳密に書き下されている | **未達** | 中核命題 D の**一般性の範囲が未確定**（$p$ 進エントロピーとの同定が成り立つ $P$ のクラスを文献の該当命題まで特定できていない。§2, §8-1）。部分命題 A・B・C・N・L は厳密だが、テーゼ（双対）を単独で担わない。観察 T は未証明（§2「検証済みだが未証明」）。plan が挙げた必要計算は削除していない |
+| G1 中核命題が厳密に書き下されている | **未達** | cycle 13 step 1 で **($\infty$) 側の一般性は文献本文で確定**（LSW Thm 7.1 / LSV Thm 1.2・1.3）。しかし **($p$) 側は旧稿の同一視が誤りと判明**（$\hbar_p,m_p$ は $\log_p$ 定義ゆえ付値を測らない）、正しい量での一般性（2 変数・$\mathbb{Z}_p^2$ 塔）は文献に特定できていない（§2, §8-1、`outputs/reports/cycle13_T1_padic_entropy_generality.md`）。片側だけでは命題 D を書けない。部分命題 A・B・C・N・L は厳密だが、テーゼ（双対）を単独で担わない。観察 T は未証明（§2）。plan が挙げた必要計算は削除していない |
 | G2 帰属と $\mathbb{R}$ 脱出の明示 | **評価不能** | §3 に本企画の各量の帰属台帳、$\mathbb{R}$ 脱出の一点（$L\to\infty$ での $\frac1{L^2}\log|a_L|\to\log m(P)$）、$\overline{\mathbb{Q}}(\ell_p)$ 非線形部を含まないことをいずれも記載済み。ただし G1 未達（中核命題 D の一般性が未確定）のため、台帳が中核命題の扱う量を**網羅しているか**を確認できない。README の G1 前提ルールにより `達成` にはしない |
 | G3 検証計算が実行済みで再現可能 | **達成** | SageMath 側: §6 の 9 ディレクトリはすべて実行ログ（`.out`）をもち、**対象・手順・結論・限界を書いた `README.md` も 9 ディレクトリすべてに存在する**。欠落していた `sagemath/check/cycle6_T1_padic_mahler/`・`cycle3_T1_period_bound/` に `README.md` を新規作成し、`cycle3_T3_period/` にはスクリプト別 `*_README.md` を統合する `README.md` を追加した（いずれも実行ログに現れる値のみを根拠とし、数値一致を証明と呼ばず、0 件観察を仮説の支持根拠にしない旨を「限界」節に明記）。本プロジェクトの運用規約（`README.md` ＋ `.out`）を満たす。Lean 側: 本 plan は Lean 成果物を宣言せず、plan 本体から Lean 実装の計画を外している（§6）ため Lean 条項は適用しない |
 | G4 既知性リスクが調査済み | **評価不能** | `resolved_risk` / `novelty_risk` を根拠文献名つきで記載（§7）、先行研究アンカーを Deninger／Besser–Deninger／岩澤 $\mu_p$、LSW と特定、動かした軸を 1 本（メタ軸）と明示、候補の `paper_potential` を `low` へ是正して引用済み（記載欠落なし）。ただし G1 未達のため、その調査範囲が中核命題に対して十分かを確認できない。加えて寄与 (b) の既知性が未調査（§8-4）、(iv) のメタ軸の扱いが未決（§7）で、いずれも `達成` を阻む |
