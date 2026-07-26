@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
     kind: "claim",
-    sourcePath: "structured-latex/content/006_Z_Y_anticommutation.mjs",
+    sourcePath: "structured-latex/content/006_Z_Y_anticommutation.ts",
     sourceOrdinal: 1,
     title: { text: "Pauli 行列の積" },
     labels: ["pauli_matrix_products"],
@@ -128,7 +128,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
   {
     id: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     kind: "claim",
-    sourcePath: "structured-latex/content/006_Z_Y_anticommutation.mjs",
+    sourcePath: "structured-latex/content/006_Z_Y_anticommutation.ts",
     sourceOrdinal: 2,
     title: { text: "1 サイトだけ反可換ならクロネッカー積は反交換する" },
     labels: ["tensor_anticommutation_from_single_site"],

@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_000_definition_kronecker_product",
     kind: "definition",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 1,
     title: { text: "クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）" },
     labels: ["def_kronecker"],
@@ -277,7 +277,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_000b_claim_kronecker_product_rule",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 1,
     title: { text: "クロネッカー積の積の規則（各サイトごとの積になること）" },
     labels: ["kronecker_product_rule"],
@@ -472,7 +472,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_000c_claim_kronecker_multilinear",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 1,
     title: { text: "クロネッカー積の各因子についての線型性" },
     labels: ["kronecker_multilinear"],
@@ -861,7 +861,7 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
           "（行列単位のクロネッカー積が Mat(2^M,C) の基底、次元は 4^M）へ置き換えた。" +
           "ラベル <tensor_basis> は参照元（<centralizer_is_scalar>, <Z_Y_linearly_independent>, " +
           "<def_end_iso>, <Z_Y_generate_algebra>, 008 章）を保つためそのままにしている。" +
-          "抽象的な見方は notes/002_linear_space_general.mjs へ退避した。",
+          "抽象的な見方は notes/002_linear_space_general.ts へ退避した。",
         "参照元が必要とする形はそれぞれ、(1) 行列単位（<centralizer_is_scalar>, <def_end_iso>）、" +
           "(2) 一般の基底 {I,σ^x,σ^y,σ^z}（<Z_Y_linearly_independent>, <Z_Y_generate_algebra>, 008 章）、" +
           "(3) 数ベクトルの標準基底（<def_end_iso> の F の基底）であるため、3 つの形を並べた。",
@@ -1138,7 +1138,7 @@ W
   {
     id: "linear_space_general_002b_definition_matrix_norm",
     kind: "definition",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 3,
     title: { text: "数ベクトル・行列のノルムと収束" },
     labels: ["def_matrix_norm"],
@@ -1244,7 +1244,7 @@ W
   {
     id: "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 3,
     title: { text: "ノルムの基本性質（非退化性・斉次性・三角不等式）" },
     labels: ["matrix_norm_triangle_inequality"],
@@ -1753,7 +1753,7 @@ W
   {
     id: "linear_space_general_003c_claim_matrix_norm_vector_bound",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 3,
     title: { text: "行列ノルムによる数ベクトルの評価" },
     labels: ["matrix_norm_vector_bound"],
@@ -1836,7 +1836,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
   {
     id: "linear_space_general_003d_claim_matrix_completeness",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.mjs",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
     sourceOrdinal: 3,
     title: { tex: String.raw`\mathrm{Mat}(n,K) \text{ の完備性と絶対収束判定}` },
     labels: ["matrix_completeness"],

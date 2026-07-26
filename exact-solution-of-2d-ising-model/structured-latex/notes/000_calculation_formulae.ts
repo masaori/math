@@ -1,4 +1,4 @@
-import { defineNotes, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath } from "../schema.ts";
 
 // 章「計算公式」に紐づく参照用ノート。文書本体ではないので最終成果物には載らない。
 

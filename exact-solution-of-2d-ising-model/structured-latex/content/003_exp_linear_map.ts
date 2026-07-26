@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -14,7 +14,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_000a_claim_real_exp_series_converges",
     kind: "claim",
-    sourcePath: "structured-latex/content/003_exp_linear_map.mjs",
+    sourcePath: "structured-latex/content/003_exp_linear_map.ts",
     sourceOrdinal: 1,
     title: { text: "非負実数の指数級数の収束" },
     labels: ["real_exp_series_converges"],
@@ -173,7 +173,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_000b_claim_matrix_exp_series_converges",
     kind: "claim",
-    sourcePath: "structured-latex/content/003_exp_linear_map.mjs",
+    sourcePath: "structured-latex/content/003_exp_linear_map.ts",
     sourceOrdinal: 1,
     title: { text: "行列の exp 級数はノルム収束する" },
     labels: ["matrix_exp_series_converges"],
@@ -784,7 +784,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
           "行列単位 E^(k,l) による展開は「基底が存在する」という一般論ではなく、" +
           "行列の成分の定義からその場で確かめられる等式である。" +
           "抽象的な一般化（任意の有限次元ノルム線型空間で同じ結論が成り立つこと）は " +
-          "notes/003_exp_abstract_normed_space.mjs へ退避した。",
+          "notes/003_exp_abstract_normed_space.ts へ退避した。",
       ],
     },
   },
@@ -873,7 +873,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
           "Mat(2^M,C) の行列として扱われる）、" +
           "(2) は Mat(n,K) 上の K-線型写像（labels: def_ad_X_matrix の ad_X がこれに当たる）である。" +
           "抽象的な有限次元線型空間 V と End(V) は本文から取り除いた。" +
-          "採用しなかった一般化は notes/003_exp_abstract_normed_space.mjs に記録している。",
+          "採用しなかった一般化は notes/003_exp_abstract_normed_space.ts に記録している。",
       ],
     },
   },

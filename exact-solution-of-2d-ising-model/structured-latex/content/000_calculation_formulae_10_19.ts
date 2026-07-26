@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -249,7 +249,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_016b_claim_angle_section_existence_uniqueness",
     kind: "claim",
-    sourcePath: "structured-latex/content/000_calculation_formulae_10_19.mjs",
+    sourcePath: "structured-latex/content/000_calculation_formulae_10_19.ts",
     sourceOrdinal: 17,
     title: { tex: String.raw`0\le\theta-2n\pi<2\pi \text{ なる } n\in\mathbb{Z} \text{ の存在と一意性}` },
     labels: ["angle_section_existence_uniqueness"],

@@ -13,55 +13,39 @@
  *   2. そのラベルが structured-latex/content に実在すること
  * を検査し、破れていれば exit 1 で落とす。
  *
- * 使い方: node sagemath/tools/verify-check-linkage.mjs
+ * ラベルの実在判定には `structured-latex/labels.generated.ts`（content から生成される
+ * ユニオン型の元データ）を使う。生成物と content の一致は
+ * `structured-latex/tools/validate-content.ts` が担保している。
+ *
+ * 使い方: node sagemath/tools/verify-check-linkage.ts
  */
 
-import { readdir, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { readdir, readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
+
+import { ALL_LABELS } from "../../structured-latex/labels.generated.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(here, "..", "..");
 const checkRoot = join(projectRoot, "sagemath", "check");
-const contentRoot = join(projectRoot, "structured-latex", "content");
 
 const LABEL_RE = /^\*\*対象ラベル\*\*:\s*`([^`]+)`/m;
 
-/** structured-latex/content の全ブロックが定義するラベル集合を集める。 */
-async function collectContentLabels() {
-  const labels = new Set();
-  // content は `.mjs` から `.ts` へ移行中（Node 22.18+ は `.ts` を型ストリップで直接読める）。
-  // 型宣言ファイルは値を持たないので除く。
-  const files = (await readdir(contentRoot)).filter(
-    (f) => (f.endsWith(".mjs") || f.endsWith(".ts")) && !f.endsWith(".d.ts"),
-  );
-  for (const file of files) {
-    const mod = await import(pathToFileURL(join(contentRoot, file)).href);
-    for (const exported of Object.values(mod)) {
-      const blocks = Array.isArray(exported) ? exported : [exported];
-      for (const block of blocks) {
-        if (!block || typeof block !== "object") continue;
-        for (const label of block.labels ?? []) labels.add(label);
-      }
-    }
-  }
-  return labels;
-}
-
-async function main() {
+async function main(): Promise<void> {
   if (!existsSync(checkRoot)) {
     console.error(`check ディレクトリが無い: ${checkRoot}`);
     process.exit(1);
   }
 
-  const contentLabels = await collectContentLabels();
+  const contentLabels = new Set<string>(ALL_LABELS);
   const dirs = (await readdir(checkRoot, { withFileTypes: true }))
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
     .sort();
 
-  const problems = [];
+  const problems: string[] = [];
   let ok = 0;
 
   for (const dir of dirs) {
@@ -72,17 +56,13 @@ async function main() {
     }
     const text = await readFile(overview, "utf8");
     const match = text.match(LABEL_RE);
-    if (!match) {
-      problems.push(
-        `${dir}: overview.md に「**対象ラベル**: \`<label>\`」の宣言が無い`,
-      );
+    const label = match?.[1];
+    if (label === undefined) {
+      problems.push(`${dir}: overview.md に「**対象ラベル**: \`<label>\`」の宣言が無い`);
       continue;
     }
-    const label = match[1];
     if (!contentLabels.has(label)) {
-      problems.push(
-        `${dir}: 対象ラベル \`${label}\` が structured-latex/content に存在しない`,
-      );
+      problems.push(`${dir}: 対象ラベル \`${label}\` が structured-latex/content に存在しない`);
       continue;
     }
     ok += 1;
@@ -90,7 +70,7 @@ async function main() {
 
   if (problems.length > 0) {
     console.error("検証 ↔ 証明 の対応が壊れている:");
-    for (const p of problems) console.error(`  - ${p}`);
+    for (const problem of problems) console.error(`  - ${problem}`);
     process.exit(1);
   }
 

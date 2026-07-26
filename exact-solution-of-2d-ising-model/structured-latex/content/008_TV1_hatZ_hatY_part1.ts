@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 // 章「T_{V_1}(hat Z) と hat Z, hat Y の関係」の前半（文書順）。
 // 収録範囲は parts/008 の 000〜017, 036, 018, 019（文書順はソースのファイル名連番と
@@ -1549,7 +1549,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
     conversion: {
       status: "converted",
       notes: [
-        "原文（parts/008/008）は「環 R の乗法群 R^×」という一般の環についての定義だった。README 2 節「環・体などの一般論に持ち上げた証明は使わない」・3 節 2「脇道の一般論なら具体的な形に落として本文に書く」に従い、Mat(2,C)^{⊗M} の可逆元についての具体的な定義へ書き換え、以降の証明で実際に使う性質（逆元の一意性、単位元・積・逆元・スカラー倍についての可逆性）だけを主張として立てた。一般の環についての元の記述は notes/008_group_theory_general.mjs へ移した。",
+        "原文（parts/008/008）は「環 R の乗法群 R^×」という一般の環についての定義だった。README 2 節「環・体などの一般論に持ち上げた証明は使わない」・3 節 2「脇道の一般論なら具体的な形に落として本文に書く」に従い、Mat(2,C)^{⊗M} の可逆元についての具体的な定義へ書き換え、以降の証明で実際に使う性質（逆元の一意性、単位元・積・逆元・スカラー倍についての可逆性）だけを主張として立てた。一般の環についての元の記述は notes/008_group_theory_general.ts へ移した。",
       ],
     },
   },
@@ -1660,7 +1660,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
   {
     id: "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group",
     kind: "claim",
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     sourceOrdinal: 10,
     title: { tex: String.raw`V_2 \notin \mathcal{C}_M` },
     labels: ["V2_not_in_clifford_group"],
@@ -1910,7 +1910,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
   {
     id: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
     kind: "claim",
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     sourceOrdinal: 11,
     title: { tex: String.raw`T \text{ の（定数倍を除いた）単射性}` },
     labels: ["injectivity_of_T_up_to_scalar", "center_of_multiplicative_group_is_scalar"],
@@ -2280,7 +2280,7 @@ g\left(u\,h\right)g'^{-1} = g\left(g^{-1}g'\right) h\, g'^{-1} = g' h g'^{-1}`,
       status: "added",
       notes: [
         "原文の検討メモ（parts/008/009）にあった『T の（定数倍を除いた）単射性が大事そうなので示す』を、メモの『試す2』の方針（Clifford 代数と行列環の同型に触れずに示す）で実際に証明したもの。",
-        "当初は自己同型群・核・中心・完全列という群の一般論を経由していたが、README のゴール設定（環・体などの一般論に持ち上げない／脇道の一般論は具体的な形に落とす）に従い、群論の語彙を一切使わない形へ書き直した。要点は Step 3 の同値『g h g^{-1} = g' h g'^{-1} ⟺ (g^{-1}g') h = h (g^{-1}g')』で、これにより centralizer_is_scalar を直接当てられる。退避した群論の記述は notes/008_group_theory_general.mjs にある。",
+        "当初は自己同型群・核・中心・完全列という群の一般論を経由していたが、README のゴール設定（環・体などの一般論に持ち上げない／脇道の一般論は具体的な形に落とす）に従い、群論の語彙を一切使わない形へ書き直した。要点は Step 3 の同値『g h g^{-1} = g' h g'^{-1} ⟺ (g^{-1}g') h = h (g^{-1}g')』で、これにより centralizer_is_scalar を直接当てられる。退避した群論の記述は notes/008_group_theory_general.ts にある。",
         "R^× のすべての元と可換な元が R 全体のすべての元と可換であることは自明ではないため、x + tI が可逆になる t を選ぶ議論で明示的に示した（(i) および Step 1）。",
       ],
     },
@@ -2587,7 +2587,7 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
   {
     id: "TV1_hatZ_hatY_016a_claim_duality_c2_star",
     kind: "claim",
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     sourceOrdinal: 17,
     title: { tex: String.raw`K_2 \text{ と } K_2^* \text{ の双対関係}` },
     labels: ["duality_c2_star_eq_s2_star_c2"],

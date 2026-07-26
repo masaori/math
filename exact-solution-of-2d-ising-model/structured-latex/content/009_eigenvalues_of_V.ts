@@ -1,6 +1,6 @@
-import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
-const SRC = "structured-latex/content/009_eigenvalues_of_V.mjs";
+const SRC = "structured-latex/content/009_eigenvalues_of_V.ts";
 
 export default defineBlocks([
   {

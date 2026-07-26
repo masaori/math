@@ -1,10 +1,10 @@
-import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 // 章「線型写像のexp」に紐づく参照用ノート。文書本体ではない。
 //
 // ここに集めたのは、exp 級数の収束を「体 K（R または C）上の抽象的な有限次元ノルム線型空間 V」と
 // その自己準同型 X : V -> V について述べる経路である。これはもともと
-// content/003_exp_linear_map.mjs の本文ブロック
+// content/003_exp_linear_map.ts の本文ブロック
 // exp_linear_map_001_theorem_exp_series_pointwise_converges（labels: exp_converges）と
 // exp_linear_map_002_definition_exp_of_endomorphism（labels: def_exp）の記述そのものだったが、
 // README のゴール設定（4 節「主張は複素行列について具体的に述べる。一般の環・体へ持ち上げない」、
@@ -39,7 +39,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/003_exp_linear_map.mjs のブロック ",
+        "（もと content/003_exp_linear_map.ts のブロック ",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges の記述。",
         "以下は退避時点のものを要約したものであり、厳密である必要はない。）",
       ]),
@@ -179,7 +179,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/003_exp_linear_map.mjs のブロック ",
+        "（もと content/003_exp_linear_map.ts のブロック ",
         "exp_linear_map_002_definition_exp_of_endomorphism の記述。以下は退避時点のまま。）",
       ]),
       paragraph(["有限次元線型空間 ", math(String.raw`V`)]),

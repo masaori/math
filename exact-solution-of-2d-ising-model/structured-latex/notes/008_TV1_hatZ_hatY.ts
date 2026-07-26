@@ -1,4 +1,4 @@
-import { defineNotes, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath, ref } from "../schema.ts";
 
 // 章「T_{V_1}(hat Z) と hat Z, hat Y の関係」に紐づく参照用ノート。文書本体ではない。
 

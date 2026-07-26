@@ -1,8 +1,8 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 // 旧 calculation_formulae_021（極座標表現の同値類の性質の remark）は、定義から直ちに従う
 // 読み手向けの補足であり出版本文には載らないため、
-// notes/000_calculation_formulae.mjs（targets: polar_equivalence_class）へ移設した。
+// notes/000_calculation_formulae.ts（targets: polar_equivalence_class）へ移設した。
 export default defineBlocks([
   {
     id: "calculation_formulae_022_definition_operations_on_polar_representation",

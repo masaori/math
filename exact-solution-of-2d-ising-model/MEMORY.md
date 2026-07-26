@@ -1,5 +1,24 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補4）: ソース形式を TypeScript に完全統一（`.mjs` を全廃）
+
+**このプロジェクトに `.mjs` は 1 ファイルも残っていない。** 混在させると片方が型検査の網から漏れるため。
+
+- `content/` 15 ファイル・`notes/` 8 ファイルを `.ts` へ変換（`tools/codemod-mjs-to-ts.ts --apply`、
+  `git mv` で履歴維持）。変換は import 行の書き換え・未使用 import の除去・本文中の
+  自ファイルパス参照（`sourcePath` 等）の追随だけで、**証明の中身は 1 文字も変えていない**。
+- `schema.mjs`、`tools/*.mjs` の互換入口、`tsconfig.mjs-content.json`（checkJs 用）を削除。
+- `sagemath/tools/verify-check-linkage.mjs` も `.ts` 化し、ラベル一覧は
+  `structured-latex/labels.generated.ts` を直接読むようにした（読み込み処理の重複を解消）。
+- `tools/content-modules.ts` は `content/` `notes/` に `.mjs` を見つけたらエラーで落とす（再発防止）。
+- ビューア（realtime-web-preview）の入力ソースも `.ts` のみに統一。
+  ビルド・型検査・lint と、HTTP 経由で 173 blocks / 38 notes の配信を確認済み。
+- レビュー第2ラウンドの指摘も反映: 定理型ブロックの `level` を実行時にも拒否、
+  `verify-no-lost-proofs` は `sourcePath` が実在しないブロックをエラーにする（黙って skip しない）、
+  codemod の裸ファイル名置換をパス区切りで限定、実行時検証テストの判定を厳密化。
+
+**784 箇所の相互参照がすべて `.ts` として型検査される状態になった。**
+
 ## 完了（2026-07-26・追補3）: structured-latex の TypeScript 化（第1段：基盤・スキーマ・ツール）
 
 **目的**: 「存在しない定理・ラベルへの参照」を実行時の検証スクリプトではなく**コンパイル時**に落とす。

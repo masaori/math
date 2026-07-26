@@ -1,9 +1,9 @@
 /**
  * `content/` と `notes/` のモジュールを読み込む共通処理。
  *
- * 移行期は `.mjs`（未変換）と `.ts`（変換済み）が混在しうるので、両方を同じ規則
- * （ファイル名昇順 = 文書順）で読む。Node 22.18+ の型ストリップにより `.ts` は
- * ビルドなしでそのまま import できる。
+ * ソース形式は **`.ts` に統一**する（書き方の種類を増やさない）。ファイル名昇順が文書順。
+ * Node 22.18+ の型ストリップにより、`.ts` はビルドなしでそのまま import できる。
+ * `.mjs` が残っていれば「型検査から漏れたファイル」なので、読まずにエラーで落とす。
  */
 
 import { existsSync, readdirSync } from "node:fs";
@@ -19,16 +19,24 @@ export const structuredLatexDir = join(here, "..");
 export const contentDir = join(structuredLatexDir, "content");
 export const notesDir = join(structuredLatexDir, "notes");
 
-/** 文書ソースとして扱う拡張子（移行期は両方を受け付ける）。 */
-const SOURCE_EXTENSIONS = [".ts", ".mjs"] as const;
-
 const isSourceFile = (fileName: string): boolean =>
-  SOURCE_EXTENSIONS.some((ext) => fileName.endsWith(ext)) && !fileName.endsWith(".d.ts");
+  fileName.endsWith(".ts") && !fileName.endsWith(".d.ts");
 
-/** dir 直下のソースファイル名をファイル名昇順（＝文書順）で返す。 */
+/**
+ * dir 直下のソースファイル名をファイル名昇順（＝文書順）で返す。
+ * `.mjs` を見つけたら、型検査の網から漏れている証拠なのでエラーにする。
+ */
 export function listSourceFiles(dir: string): string[] {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter(isSourceFile).sort();
+  const entries = readdirSync(dir);
+  const legacy = entries.filter((fileName) => fileName.endsWith(".mjs"));
+  if (legacy.length > 0) {
+    throw new Error(
+      `${dir} に .mjs が残っている: ${legacy.join(", ")}` +
+        "（ソース形式は .ts に統一する。node tools/codemod-mjs-to-ts.ts --apply で変換する）",
+    );
+  }
+  return entries.filter(isSourceFile).sort();
 }
 
 async function loadDefaultExport(dir: string, fileName: string): Promise<unknown> {

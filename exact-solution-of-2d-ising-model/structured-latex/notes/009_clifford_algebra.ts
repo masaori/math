@@ -1,4 +1,4 @@
-import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 // 「なぜこの計算に至ったのか」を説明するための読み物（README 5 節）。
 // クリフォード代数はテンソル代数の商代数として定義されるため、README 2 節の基準により

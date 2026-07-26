@@ -1,8 +1,8 @@
-import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 // 群の一般論（自己同型群・群準同型・核・像・中心・完全列・環の乗法群）。
 //
-// これらは 008 章の本文（content/008_TV1_hatZ_hatY_part1.mjs）に定義・主張として
+// これらは 008 章の本文（content/008_TV1_hatZ_hatY_part1.ts）に定義・主張として
 // 置かれていたが、README のゴール設定（「環・体などの一般論に持ち上げた証明は使わない」
 // 「脇道の一般論なら具体的な形に落とす」）に照らして本文からは外し、ここへ退避した。
 // 内容は要約せずそのまま移してある。ただし本文から消えたラベルへの相互参照だけは、
@@ -105,7 +105,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007a_definition_group_hom_ker_im",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "群準同型・核・像" },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -262,7 +262,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007b_definition_center_of_group",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "群の中心" },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -328,7 +328,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007c_claim_inn_normal_in_aut",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { tex: String.raw`\mathrm{Inn}(G) \trianglelefteq \mathrm{Aut}(G)` },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -487,7 +487,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007d_definition_exact_sequence",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "群の完全列" },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.mjs",
+    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -806,7 +806,7 @@ export default defineNotes([
       paragraph(["（本文からノートへ移す前の変換記録）"]),
       paragraph(["原文（parts/008/007）は statement に「TODO: Ker, Im の定義、Z(G) の定義、完全列の定義」、proof に「TODO:」と書かれただけで中身が無かった。必要な定義を def_group_hom_ker_im / def_center_of_group / def_exact_sequence / inn_is_normal_in_aut として新規に追加し、4 箇所すべての完全性を証明して todo を除去した。"]),
       paragraph(["原文は kind が definition だが内容は主張（完全列をなす）である。原文の構造を保つため kind は definition のままとし、proof に証明を置いた。"]),
-      paragraph(["この完全列そのものは、本文の他のブロックからは参照されていない（grep で確認：Aut / Out / Inn / 完全列 の語は本章のこの一連のブロックと、005_exp_conjugation_proof.mjs の Ad : G → Aut(G) の記述にしか現れず、後者はこの完全列を使っていない）。ただし『T の（定数倍を除いた）単射性』（injectivity_of_T_up_to_scalar）の証明でこの完全列の (2) Ker(φ) = Z(G) の部分を使うため、削除せず本文に残している。"]),
+      paragraph(["この完全列そのものは、本文の他のブロックからは参照されていない（grep で確認：Aut / Out / Inn / 完全列 の語は本章のこの一連のブロックと、005_exp_conjugation_proof.ts の Ad : G → Aut(G) の記述にしか現れず、後者はこの完全列を使っていない）。ただし『T の（定数倍を除いた）単射性』（injectivity_of_T_up_to_scalar）の証明でこの完全列の (2) Ker(φ) = Z(G) の部分を使うため、削除せず本文に残している。"]),
     ],
   },
   {

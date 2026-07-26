@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -30,7 +30,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_031b_claim_abs_basic_properties",
     kind: "claim",
-    sourcePath: "structured-latex/content/000_calculation_formulae_30_44.mjs",
+    sourcePath: "structured-latex/content/000_calculation_formulae_30_44.ts",
     sourceOrdinal: 31,
     title: { text: "絶対値の基本性質" },
     labels: ["abs_basic_properties"],
@@ -589,7 +589,7 @@ y & (x=0,\ y>0),\\
     conversion: { status: "converted" },
   },
   // 旧 calculation_formulae_037（arg 計算のコツ）は計算の進め方の助言であって主張ではないため、
-  // notes/000_calculation_formulae.mjs（targets: arg_of_product_of_complex_numbers）へ移設した。
+  // notes/000_calculation_formulae.ts（targets: arg_of_product_of_complex_numbers）へ移設した。
   {
     id: "calculation_formulae_038_definition_sqrt_of_complex_number",
     kind: "definition",

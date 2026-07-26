@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -86,7 +86,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_000b_claim_cosh_sinh_basic_properties",
     kind: "claim",
-    sourcePath: "structured-latex/content/000_calculation_formulae_00_09.mjs",
+    sourcePath: "structured-latex/content/000_calculation_formulae_00_09.ts",
     sourceOrdinal: 1,
     title: { tex: String.raw`\cosh,\ \sinh\text{ の基本性質}` },
     labels: ["cosh_sinh_basic_properties"],
@@ -239,7 +239,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
     kind: "claim",
-    sourcePath: "structured-latex/content/000_calculation_formulae_00_09.mjs",
+    sourcePath: "structured-latex/content/000_calculation_formulae_00_09.ts",
     sourceOrdinal: 1,
     title: { tex: String.raw`\text{非負実数の平方根の存在と一意性}` },
     labels: ["sqrt_nonnegative_existence_uniqueness"],

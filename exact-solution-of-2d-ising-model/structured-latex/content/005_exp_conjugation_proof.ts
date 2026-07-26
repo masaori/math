@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -184,7 +184,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
     kind: "claim",
-    sourcePath: "structured-latex/content/005_exp_conjugation_proof.mjs",
+    sourcePath: "structured-latex/content/005_exp_conjugation_proof.ts",
     sourceOrdinal: 3,
     title: { text: "Frobenius 内積の性質（Hermite 内積の公理と Cauchy--Schwarz の不等式）" },
     labels: ["frobenius_inner_product_axioms"],
@@ -776,7 +776,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
     kind: "definition",
-    sourcePath: "structured-latex/content/005_exp_conjugation_proof.mjs",
+    sourcePath: "structured-latex/content/005_exp_conjugation_proof.ts",
     sourceOrdinal: 7,
     title: { tex: String.raw`\mathrm{ad}_X \text{ と } \mathrm{Ad}_g \text{ の定義（複素行列）}` },
     labels: ["def_ad_X_matrix"],
@@ -868,14 +868,14 @@ export default defineBlocks([
           "定義していた（旧ブロック exp_conjugation_proof_007_definition_Ad_g_ad_X_matrix）。" +
           "README のゴール設定によりリー群の経路を本文から外したので、同じ labels: def_ad_X_matrix で" +
           "複素行列だけを使う具体版へ置き換えた。旧ブロックは " +
-          "structured-latex/notes/005_exp_conjugation_lie_route.mjs に原文のまま退避してある。",
+          "structured-latex/notes/005_exp_conjugation_lie_route.ts に原文のまま退避してある。",
       ],
     },
   },
   {
     id: "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
     kind: "theorem",
-    sourcePath: "structured-latex/content/005_exp_conjugation_proof.mjs",
+    sourcePath: "structured-latex/content/005_exp_conjugation_proof.ts",
     sourceOrdinal: 9,
     title: {
       tex: String.raw`\text{行列版: } e^{X} Y e^{-X} = e^{\mathrm{ad}_X}(Y)`,

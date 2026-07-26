@@ -1,10 +1,10 @@
-import { defineNotes, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath, list, todo, ref } from "../schema.ts";
 
 // 章「e^X Y e^{-X} = e^{ad(X)}(Y) の証明」に紐づく参照用ノート。文書本体ではない。
 //
 // ここに集めたのは、指数関数の共役をリー群・リー環の一般論（随伴表現 Ad / ad、
 // リー群上の Ad(exp X) = exp(ad X)、GL(n,C)、Matrix Lie 群）で扱う経路である。
-// これらはもともと content/005_exp_conjugation_proof.mjs の本文ブロックだったが、
+// これらはもともと content/005_exp_conjugation_proof.ts の本文ブロックだったが、
 // README のゴール設定（1 節「典型例がリー群・リー環である」、6 節「採用しなかった経路の扱い」）
 // に従ってここへ退避した。**ゴールに照らして本文には採用しなかった。**
 // 理由: リー群の一般論を先に理解しないと証明を追えなくなり、本筋と無関係なところで
@@ -31,7 +31,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/005_exp_conjugation_proof.mjs のブロック ",
+        "（もと content/005_exp_conjugation_proof.ts のブロック ",
         "exp_conjugation_proof_001_definition_Ad_ad_lie。labels は付いていなかった。以下は原文のまま。）",
       ]),
       paragraph(["リー群・リー環を使うアプローチの概要（参考: 「Lie群とLie環1」定理 5.49）。"]),
@@ -89,7 +89,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/005_exp_conjugation_proof.mjs のブロック ",
+        "（もと content/005_exp_conjugation_proof.ts のブロック ",
         "exp_conjugation_proof_002_theorem_Ad_exp_lie。labels は付いていなかった。以下は原文のまま。）",
       ]),
       paragraph([
@@ -160,7 +160,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/005_exp_conjugation_proof.mjs のブロック ",
+        "（もと content/005_exp_conjugation_proof.ts のブロック ",
         "exp_conjugation_proof_005_definition_GL_n_C。labels は付いていなかった。以下は原文のまま。）",
       ]),
       displayMath(
@@ -181,7 +181,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/005_exp_conjugation_proof.mjs のブロック ",
+        "（もと content/005_exp_conjugation_proof.ts のブロック ",
         "exp_conjugation_proof_006_definition_matrix_lie_group、labels: def_matrix_lie_group。",
         "本文から外したのでこのラベルは content 側に存在しない。以下は原文のまま。）",
       ]),
@@ -218,7 +218,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/005_exp_conjugation_proof.mjs のブロック ",
+        "（もと content/005_exp_conjugation_proof.ts のブロック ",
         "exp_conjugation_proof_007_definition_Ad_g_ad_X_matrix、labels: def_ad_X_matrix。",
         "本文では、Matrix Lie群 ",
         math(String.raw`G`),
@@ -251,7 +251,7 @@ export default defineNotes([
     body: [
       NOT_ADOPTED,
       paragraph([
-        "（もと content/005_exp_conjugation_proof.mjs のブロック ",
+        "（もと content/005_exp_conjugation_proof.ts のブロック ",
         "exp_conjugation_proof_009_theorem_exp_conjugation_main、labels: brianhall_3.35。",
         "本文に残した ",
         ref("matrix_exp_conjugation"),

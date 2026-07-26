@@ -118,8 +118,9 @@ function rewriteSelfPathReferences(source: string, convertedNames: ReadonlySet<s
       convertedNames.has(`${stem}.mjs`) ? `${prefix}${stem}.ts` : whole,
   );
   // ディレクトリを伴わない裸のファイル名（本文中の言及。例: 「005_….mjs を参照」）。
-  // 変換対象と完全一致する名前だけを置き換える。
-  return withDir.replace(/([\w.-]+)\.mjs/g, (whole, stem: string) =>
+  // 変換対象と完全一致し、かつ**パスの一部でない**もの（直前が区切り文字でない）だけを置き換える。
+  // 直前の `/` を除外しないと、別ディレクトリの同名ファイル（原本の Typst パス等）を巻き込む。
+  return withDir.replace(/(?<![\w./-])([\w.-]+)\.mjs/g, (whole, stem: string) =>
     convertedNames.has(`${stem}.mjs`) ? `${stem}.ts` : whole,
   );
 }

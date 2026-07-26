@@ -1,4 +1,4 @@
-import { defineNotes, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math } from "../schema.ts";
 
 // 章「2次元ising模型の分配関数」に紐づく参照用ノート。文書本体ではない。
 

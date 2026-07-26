@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -1102,7 +1102,7 @@ E_{I,J} := E_{i_1j_1}\otimes\cdots\otimes E_{i_Mj_M} \in \mathrm{Mat}(2,\mathbb{
   {
     id: "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
     kind: "claim",
-    sourcePath: "structured-latex/content/004_transfer_matrix.mjs",
+    sourcePath: "structured-latex/content/004_transfer_matrix.ts",
     sourceOrdinal: 5,
     title: { tex: String.raw`\mathbf{end} \text{ は単位的 } \mathbb{C}\text{-代数の同型}` },
     labels: ["end_is_algebra_isomorphism"],

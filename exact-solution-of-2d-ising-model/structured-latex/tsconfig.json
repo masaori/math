@@ -12,6 +12,15 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["schema.ts", "labels.generated.ts", "content", "notes", "tools", "type-tests"],
+  "include": [
+    "schema.ts",
+    "labels.generated.ts",
+    "content",
+    "notes",
+    "tools",
+    "type-tests",
+    // 同じプロジェクトの検証スクリプト（構造化テキストのラベルに依存する）も検査対象にする。
+    "../sagemath/tools"
+  ],
   "exclude": ["type-tests/.tmp", "node_modules"]
 }

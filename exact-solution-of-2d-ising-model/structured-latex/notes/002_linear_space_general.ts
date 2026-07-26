@@ -1,4 +1,4 @@
-import { defineNotes, paragraph, math, displayMath, list, todo, ref } from "../schema.mjs";
+import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 // 章「線型空間の一般論」に紐づく参照用ノート。文書本体ではない。
 
