@@ -1,0 +1,113 @@
+# cycle 12 / T2→T1: 臨界点の代数性・KW 自己双対・Λ 帰属・ℝ 脱出の隔離を厳密に確認する。
+#
+# (A) ギャップが閉じる条件（分散の隙間 coshγ(θ=0) = 1）が ℤ[x] の恒等式 (x²+2x−1)² = 0 に等価
+#     ⇒ 臨界点 x_c = √2 − 1 ∈ ℚ̄（2 次代数的数、witness = 最小多項式 x²+2x−1）
+# (B) Kramers–Wannier 双対 x ↦ (1−x)/(1+x) の固定点も同じ x²+2x−1 = 0
+#     さらに分散関数 C(x) = (1+x²)²/(2x(1−x²)) は KW 双対で不変（ℚ(x) の恒等式）
+# (C) 有理点 q ≠ x_c ではギャップは厳密に正（ℚ 上の有理数比較）
+# (D) Λ 帰属: Φ_L = log Z_L(q) は素因数分解の指数ベクトル（q∈ℚ_{>0}）。ℝ を一切使わず厳密。
+# (E) ℝ 脱出の隔離: 閉形式の前因子 (1/2)log((1−x²)/x) は有理数の対数（Λ_ℚ）。
+#     一方モード和 Σ log ρ(θ_k) は Λ_ℚ の外（ρ の最小多項式が 2 次・定数項 1・ρ>1 から
+#     「任意の n で ρ^n ∉ ℚ」が従い、log ρ ∈ Λ_ℚ ⇔ ∃n: ρ^n ∈ ℚ_{>0} を否定できる）。
+#     ⇒ ℝ が要るのはモード和と連続極限（Riemann 和→積分）の一点だけ。
+# (F) 既知の Onsager 閉形式との突き合わせ（**数値。証明ではない**）。
+#
+# 参照: 09_2DIsing閉形式の可算的導出.md Step 4 / 08_KW双対性_補足.md
+# 位置づけ: 既知結果（Onsager 1944, Kramers–Wannier 1941）の可算・厳密な書き換え。新しい厳密解ではない。
+
+Rx = PolynomialRing(ZZ, 'x')
+x = Rx.gen()
+Fx = Rx.fraction_field()
+
+print("=== (A) ギャップ閉塞条件 ⇔ (x²+2x−1)² = 0、臨界点 x_c = √2−1 ∈ ℚ̄ ===")
+# coshγ(0) = C(x) − 1 = 1  ⇔  (1+x²)² = 4x(1−x²)  ⇔  (1+x²)² − 4x(1−x²) = 0
+lhs = (1 + x^2)^2 - 4*x*(1 - x^2)
+rhs = (x^2 + 2*x - 1)^2
+print(f"  (1+x²)² − 4x(1−x²) == (x²+2x−1)²  : {lhs == rhs}   [{lhs}]")
+xc = AA(2).sqrt() - 1
+print(f"  x_c := √2 − 1 の最小多項式 = {QQbar(xc).minpoly()}, 次数 {QQbar(xc).minpoly().degree()}, "
+      f"x_c ∈ ℚ̄ = True, 数値 {RR(xc)}")
+print(f"  x_c は x²+2x−1 の根 : {(xc^2 + 2*xc - 1) == 0}")
+
+print()
+print("=== (B) KW 双対 x ↦ (1−x)/(1+x) ===")
+d = (1 - x)/(1 + x)
+print(f"  自己双対点の条件 (1−x)/(1+x) = x ⇔ x²+2x−1 = 0 : "
+      f"{Fx(d - x).numerator().factor()} （分子 = −(x²+2x−1)）")
+C = (1 + x^2)^2 / (2*x*(1 - x^2))
+C_dual = ((1 + d^2)^2) / (2*d*(1 - d^2))
+print(f"  分散関数 C(x) の KW 双対不変性 C((1−x)/(1+x)) == C(x) : {Fx(C_dual) == Fx(C)}")
+print(f"  KW 双対で写り合う有理点の例: q=1/3 の双対 = {(1 - QQ(1)/3)/(1 + QQ(1)/3)}"
+      f"  （03/04 で使った q=1/3 と q=1/2 は KW 双対の対）")
+
+print()
+print("=== (C) ギャップ coshγ(0) − 1 = (x²+2x−1)²/(2x(1−x²)) ≥ 0、有理点で厳密に正 ===")
+gap = Fx(C - 1 - 1)
+print(f"  恒等式 C(x) − 2 == (x²+2x−1)²/(2x(1−x²)) : "
+      f"{gap == Fx((x^2 + 2*x - 1)^2/(2*x*(1 - x^2)))}")
+for q in [QQ(1)/2, QQ(1)/3, QQ(2)/5]:
+    val = (q^2 + 2*q - 1)^2/(2*q*(1 - q^2))
+    print(f"  q={q}: ギャップ = {val} > 0 : {val > 0}")
+
+print()
+print("=== (D) Λ 帰属: Φ_L = log Z_L(q) の素因数分解指数ベクトル（q=1/2）===")
+
+def states(L):
+    return [tuple(1 - 2*((i >> j) & 1) for j in range(L)) for i in range(2^L)]
+
+def h(s):
+    LL = len(s)
+    return sum(1 for j in range(LL) if s[j] != s[(j+1) % LL])
+
+def v(s, t):
+    return sum(1 for j in range(len(s)) if s[j] != t[j])
+
+def Z_at(L, q):
+    S = states(L)
+    n = len(S)
+    T = matrix(QQ, n, n, lambda i, j: q^(h(S[j]) + v(S[i], S[j])))
+    return (T^L).trace()
+
+q0 = QQ(1)/2
+for L in range(2, 7):
+    Zq = Z_at(L, q0)
+    print(f"  L={L}: Z_L(1/2) = {Zq} = {Zq.factor()}   ⇒ Φ_L ∈ Λ（指数ベクトル、ℝ 不要・厳密）")
+
+print()
+print("=== (E) ℝ 脱出の隔離 ===")
+# 前因子: (1/2)log((1−x²)/x) は有理点で有理数の対数 ⇒ Λ_ℚ
+for q in [QQ(1)/2, QQ(1)/3]:
+    pre = (1 - q^2)/q
+    print(f"  q={q}: 前因子の中身 (1−q²)/q = {pre} ∈ ℚ ⇒ (1/2)log(...) ∈ Λ_ℚ（素因数分解 {pre.factor()}）")
+# モード和: ρ(θ) は無理な代数的数
+z = QQbar.zeta(2*3)
+Cq = (1 + q0^2)^2/(2*q0*(1 - q0^2))
+for e, name in [(1, 'NS θ=π/3'), (2, 'R θ=2π/3')]:
+    cg = AA(Cq) - AA((z^e + z^(-e))/2)
+    rho = cg + (cg^2 - 1).sqrt()
+    mp = rho.minpoly()
+    # log ρ ∈ Λ_ℚ ⇔ ある n≥1 で ρ^n ∈ ℚ_{>0}。
+    # minpoly が 2 次で定数項 1 ⇒ 共役は ρ' = 1/ρ。ρ^n = r ∈ ℚ なら共役を取って (1/ρ)^n = r、
+    # よって ρ^{2n} = 1、ρ > 1 に矛盾。⇒ 任意の n で ρ^n ∉ ℚ ⇒ log ρ ∉ Λ_ℚ。
+    cond = (mp.degree() == 2 and mp[0] == 1 and rho > 1)
+    print(f"  q=1/2, L=3, {name}: ρ(θ) の最小多項式 = {mp} (次数 {mp.degree()}, 定数項 {mp[0]}, ρ>1: {rho > 1})")
+    print(f"      ⇒ 共役 = 1/ρ かつ ρ>1 ⇒ 任意の n≥1 で ρ^n ∉ ℚ ⇒ log ρ(θ) ∉ Λ_ℚ : {cond}")
+print("  ⇒ ℝ が要るのは (1) モード和 Σ log ρ(θ_k)（代数的数の対数）と")
+print("     (2) 連続極限 (1/L)Σ_k γ(θ_k) → (1/2π)∫γ(θ)dθ（Riemann 和→積分）の一点だけ。")
+print("     有限 L の Z_L(q) ∈ ℚ、Φ_L ∈ Λ、固有値 ∈ ℚ̄ はいずれも ℝ を使わない。")
+
+print()
+print("=== (F) 既知 Onsager 閉形式との突き合わせ（**数値であり証明ではない**）===")
+print("  注意: 以下は数値的な整合の確認にすぎず、極限の存在も一致も証明していない。")
+print("        有限 L の決定可能性は極限の可解性を含意しない（四軸 3 と 4 は独立）。")
+Kc = -RR(log(q0))/2                       # K = βJ, x = e^{−2K}
+cosh2K = (1 + RR(q0)^2)/(2*RR(q0))
+sinh2K = (1 - RR(q0)^2)/(2*RR(q0))
+Cnum = cosh2K^2/sinh2K
+integ = numerical_integral(lambda t: arccosh(Cnum - cos(t)), 0, pi)[0]
+minus_beta_f = RR(log(2*sinh2K))/2 + integ/(2*RR(pi))
+print(f"  Onsager 閉形式（x=1/2, K={Kc}）: −βf = {minus_beta_f}")
+print(f"  有限 L からの推定 (1/L²)·log Z_L(1/2) − log(1/2):")
+for L in range(2, 9):
+    est = RR(log(Z_at(L, q0)))/L^2 - RR(log(q0))
+    print(f"    L={L}: {est}   （差 {est - minus_beta_f}）")
