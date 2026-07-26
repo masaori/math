@@ -37,6 +37,7 @@ import blocks_010_transfer_matrix_bridge from "./content/010_transfer_matrix_bri
 import blocks_011_max_eigenvalue from "./content/011_max_eigenvalue.ts";
 import blocks_012_free_energy from "./content/012_free_energy.ts";
 import blocks_013_even_sector_modes from "./content/013_even_sector_modes.ts";
+import blocks_015_A_theta_tilde_diagonalization from "./content/015_A_theta_tilde_diagonalization.ts";
 import notes_000_calculation_formulae from "./notes/000_calculation_formulae.ts";
 import notes_001_partition_function_2d_ising from "./notes/001_partition_function_2d_ising.ts";
 import notes_002_linear_space_general from "./notes/002_linear_space_general.ts";
@@ -67,6 +68,7 @@ export type AllBlocks = [
   ...typeof blocks_011_max_eigenvalue,
   ...typeof blocks_012_free_energy,
   ...typeof blocks_013_even_sector_modes,
+  ...typeof blocks_015_A_theta_tilde_diagonalization,
 ];
 
 /** 全ノート。 */
