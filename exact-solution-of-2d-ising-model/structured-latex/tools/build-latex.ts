@@ -26,6 +26,7 @@ import { join } from "node:path";
 
 import type { ConvertedBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { escapeText } from "./latex-escape.ts";
 
 const buildDir = join(structuredLatexDir, "build");
 const texPath = join(buildDir, "document.tex");
@@ -57,6 +58,7 @@ const SECTION_COMMANDS = [
   "subparagraph",
 ] as const;
 
+
 const contentFiles = await loadContentFiles();
 
 // ラベル → ブロック id。相互参照の解決に使う（型でも保証済みだが、生成時にも確かめる）。
@@ -68,6 +70,7 @@ for (const { blocks } of contentFiles) {
 }
 
 const usedRefs: { target: string; blockId: string }[] = [];
+const suspiciousTexts: { blockId: string; sample: string }[] = [];
 const body: string[] = [];
 let blockCount = 0;
 let headingCount = 0;
@@ -95,6 +98,18 @@ if (unresolved.length > 0) {
 
 mkdirSync(buildDir, { recursive: true });
 writeFileSync(texPath, renderDocument(body.join("\n\n")), "utf8");
+
+// 地の文に「数式のつもりの記法」が混じっていると、そのまま素の文字として組まれる
+// （例: text ノードの "2^M" は上付きにならない）。content 側の判断材料として警告する。
+if (suspiciousTexts.length > 0) {
+  console.warn(
+    `警告: 地の文に数式記法らしき文字がある ${suspiciousTexts.length} 件` +
+      "（そのままの文字として組まれる。math ノードにするか記法を直すこと）:",
+  );
+  for (const item of suspiciousTexts.slice(0, 10)) {
+    console.warn(`  ${item.blockId}: ${item.sample}`);
+  }
+}
 
 console.log(
   `generated ${texPath}\n` +
@@ -130,14 +145,47 @@ if (result.status !== 0) {
   );
 }
 
-// 未解決参照は LaTeX の警告に出る。1 件でもあれば失敗にする。
-const undefinedRefs = [...output.matchAll(/Reference `([^']+)' on page/g)].map((m) => m[1]);
+// LaTeX の警告は **stdout ではなくログファイル**にしか出ない（tectonic は要約しか出さない）。
+// 実測: `\cref{lab:missing}` を含む文書でも tectonic の終了コードは 0、stdout に警告は無い。
+const logText = readFileSync(join(buildDir, "document.log"), "utf8");
+
+// 1. 未解決参照。
+const undefinedRefs = [
+  ...logText.matchAll(/Reference `([^']+)' on page [^ ]+ undefined/g),
+].map((m) => m[1]);
 if (undefinedRefs.length > 0) {
   throw new Error(`PDF に未解決参照が残っている: ${[...new Set(undefinedRefs)].join(", ")}`);
 }
 
-// ページ数は LaTeX のログから取る（PDF のオブジェクトは圧縮されていて数えられない）。
-const logText = readFileSync(join(buildDir, "document.log"), "utf8");
+// 2. ラベルの重複（参照先が一意に決まらなくなる）。
+if (/There were multiply-defined labels/.test(logText)) {
+  const duplicated = [...logText.matchAll(/Label `([^']+)' multiply defined/g)].map((m) => m[1]);
+  throw new Error(`PDF にラベルの重複がある: ${[...new Set(duplicated)].join(", ")}`);
+}
+
+// 3. フォントに無い文字は**無言で消える**ので、1 件でも許さない。
+const missingChars = [...new Set([...logText.matchAll(/Missing character: There is no (.) /g)].map((m) => m[1]))];
+if (missingChars.length > 0) {
+  throw new Error(
+    `PDF に組めない文字がある（出力から無言で消える）: ${missingChars.join(" ")}\n` +
+      "  対処: プリアンブルの xeCJKDeclareCharClass にコードポイントを追加する",
+  );
+}
+
+// 4. 版面をはみ出した行。右余白（geometry の margin）を超えると紙の外へ出て内容が読めなくなる。
+const RIGHT_MARGIN_PT = 71; // 25mm ≒ 71pt
+const overfull = [...logText.matchAll(/Overfull \\hbox \(([0-9.]+)pt too wide\)/g)]
+  .map((m) => Number(m[1]))
+  .filter((width) => width > RIGHT_MARGIN_PT);
+if (overfull.length > 0) {
+  throw new Error(
+    `版面から出て内容が切れている行が ${overfull.length} 件ある` +
+      `（最大 ${Math.max(...overfull).toFixed(1)}pt 超過）。\n` +
+      "  別行立て数式は fitdisplay が自動で縮めるので、残るのは地の文か行内数式。\n" +
+      `  詳細: ${join(buildDir, "document.log")} の Overfull \\hbox`,
+  );
+}
+
 const pageMatch = logText.match(/Output written on [^(]+\((\d+) pages?/);
 const pageCount = pageMatch?.[1];
 if (pageCount === undefined) {
@@ -145,7 +193,11 @@ if (pageCount === undefined) {
 }
 
 // 生成物にノートが混入していないことは verify-no-notes-in-output.ts が検査する。
-console.log(`built ${pdfPath}: ${pageCount} ページ、未解決参照 0 件`);
+const overfullAll = [...logText.matchAll(/Overfull \\hbox \(([0-9.]+)pt too wide\)/g)].length;
+console.log(
+  `built ${pdfPath}: ${pageCount} ページ、未解決参照 0 件、組めない文字 0 件、` +
+    `版面外へ出た行 0 件（軽微な overfull ${overfullAll} 件は余白内）`,
+);
 
 // --- レンダリング ------------------------------------------------------------
 
@@ -158,13 +210,35 @@ function renderDocument(inner: string): string {
 \\usepackage{amsmath}
 \\usepackage{amssymb}
 \\usepackage{amsthm}
-\\usepackage{mathtools}
 \\usepackage[margin=25mm]{geometry}
+\\usepackage{graphicx}
 \\usepackage{xeCJK}
 \\setCJKmainfont{Hiragino Mincho ProN}
 \\setCJKsansfont{Hiragino Sans}
-\\usepackage{hyperref}
+% 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム）は
+% 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
+\\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033}
+\\usepackage[hidelinks]{hyperref}
 \\usepackage[nameinlink]{cleveref}
+
+% 見出し語を日本語にする。
+\\renewcommand{\\contentsname}{目次}
+\\renewcommand{\\partname}{部}
+\\renewcommand{\\proofname}{証明}
+
+% 版面より広い別行立て数式を、はみ出す分だけ自動で縮める。
+% 縮めないと紙の外へ出て**内容が読めなくなる**（実測で 22 箇所）。
+\\newsavebox{\\displaymathbox}
+\\newlength{\\displaymathwidth}
+\\newcommand{\\fitdisplay}[1]{%
+  \\sbox{\\displaymathbox}{\\ensuremath{\\displaystyle #1}}%
+  \\setlength{\\displaymathwidth}{\\wd\\displaymathbox}%
+  \\ifdim\\displaymathwidth>\\linewidth
+    \\begin{equation*}\\resizebox{\\linewidth}{!}{\\usebox{\\displaymathbox}}\\end{equation*}%
+  \\else
+    \\begin{equation*}#1\\end{equation*}%
+  \\fi
+}
 
 \\theoremstyle{definition}
 \\newtheorem{definition}{定義}[section]
@@ -196,14 +270,18 @@ ${inner}
 
 function renderHeading(block: ConvertedBlock & { kind: "heading" }): string {
   const command = SECTION_COMMANDS[block.level - 1] ?? "paragraph";
-  const title = renderTitle(block.title);
+  const title = renderTitle(block.title, block.id);
   const labels = block.labels.map((label) => `\\label{lab:${label}}`).join("");
   return `\\${command}{${title}}${labels}`;
 }
 
 function renderTheoremLike(block: TheoremLikeBlock): string {
   const { env } = THEOREM_ENVIRONMENTS[block.kind];
-  const title = block.title === null || block.title === undefined ? "" : `[${renderTitle(block.title)}]`;
+  // `]` を含むタイトル（例: `\arg^{[0,2\pi)}`）で引数が途中で切れないよう波括弧で包む。
+  const title =
+    block.title === null || block.title === undefined
+      ? ""
+      : `[{${renderTitle(block.title, block.id)}}]`;
   const anchors = [
     `\\label{blk:${block.id}}`,
     ...block.labels.map((label) => `\\label{lab:${label}}`),
@@ -217,24 +295,45 @@ function renderTheoremLike(block: TheoremLikeBlock): string {
   return parts.join("\n\n");
 }
 
-function renderTitle(title: { text?: string; tex?: string } | null | undefined): string {
+function renderTitle(
+  title: { text?: string; tex?: string } | null | undefined,
+  blockId = "(title)",
+): string {
   if (title === null || title === undefined) return "";
   if (title.tex !== undefined) return `$${title.tex}$`;
-  return escapeText(title.text ?? "");
+  const text = title.text ?? "";
+  // 地の文と同じく、数式記法らしき文字は素の文字として組まれてしまう
+  // （実測: タイトルの "2^M" が上付きにならない）。
+  if (/[\^_`]/.test(text)) suspiciousTexts.push({ blockId, sample: text.slice(0, 60) });
+  return escapeText(text);
 }
 
 function renderNodes(nodes: readonly Node[], blockId: string): string {
-  return nodes.map((node) => renderNode(node, blockId)).join("\n\n");
+  // 別行立て数式の直後に続く地の文は、同じ文の続きであることが多い。
+  // 空行で連結すると LaTeX が新段落として字下げしてしまうので `\noindent` を付ける
+  // （日本語の数学組版の通例に合わせる）。
+  return nodes
+    .map((node, index) => {
+      const rendered = renderNode(node, blockId);
+      const previous = nodes[index - 1];
+      const continuesAfterDisplay =
+        previous?.type === "displayMath" && (node.type === "text" || node.type === "paragraph");
+      return continuesAfterDisplay ? `\\noindent ${rendered}` : rendered;
+    })
+    .join("\n\n");
 }
 
 function renderNode(node: Node, blockId: string): string {
   switch (node.type) {
     case "text":
+      if (/[\^_`]/.test(node.value)) {
+        suspiciousTexts.push({ blockId, sample: node.value.slice(0, 60) });
+      }
       return escapeText(node.value);
     case "math":
       return `$${node.tex}$`;
     case "displayMath":
-      return `\\[\n${node.tex}\n\\]`;
+      return renderDisplayMath(node.tex);
     case "paragraph":
       // 段落の中身は連結する（数式と地の文が交互に並ぶため、間に空行を入れない）。
       return node.children.map((child) => renderInline(child, blockId)).join("");
@@ -246,6 +345,11 @@ function renderNode(node: Node, blockId: string): string {
     }
     case "ref": {
       usedRefs.push({ target: node.target, blockId });
+      // `label` は参照の表示テキストを上書きする任意フィールド（現在 content では未使用）。
+      // 指定があれば、その文字列をリンクにする。
+      if (node.label !== undefined) {
+        return `\\hyperref[lab:${node.target}]{${escapeText(node.label)}}`;
+      }
       return `\\cref{lab:${node.target}}`;
     }
     case "todo":
@@ -254,28 +358,21 @@ function renderNode(node: Node, blockId: string): string {
   }
 }
 
-/** 段落・リスト項目の内部（改行を挟まない）。 */
-function renderInline(node: Node, blockId: string): string {
-  if (node.type === "displayMath") return `\n\\[\n${node.tex}\n\\]\n`;
-  if (node.type === "list") return `\n${renderNode(node, blockId)}\n`;
-  return renderNode(node, blockId);
+/**
+ * 別行立て数式。既定では幅を測って必要なら縮める `\fitdisplay` を通す。
+ * ただし `\tag` は箱の中では使えない（amsmath: "\tag not allowed here"）ので、
+ * その 1 件だけは素の `equation*` で組む。
+ */
+function renderDisplayMath(tex: string): string {
+  if (tex.includes("\\tag")) {
+    return `\\begin{equation*}\n${tex}\n\\end{equation*}`;
+  }
+  return `\\fitdisplay{%\n${tex}%\n}`;
 }
 
-/**
- * 地の文の LaTeX エスケープ。
- * 本文は日本語の散文で、`_` や `%` などが素のまま入りうる（`content/` は KaTeX 前提で
- * 書かれており、地の文のエスケープは想定されていない）。
- */
-function escapeText(value: string): string {
-  return value
-    .replaceAll("\\", "\\textbackslash{}")
-    .replaceAll("{", "\\{")
-    .replaceAll("}", "\\}")
-    .replaceAll("$", "\\$")
-    .replaceAll("&", "\\&")
-    .replaceAll("%", "\\%")
-    .replaceAll("#", "\\#")
-    .replaceAll("_", "\\_")
-    .replaceAll("~", "\\textasciitilde{}")
-    .replaceAll("^", "\\textasciicircum{}");
+/** 段落・リスト項目の内部（改行を挟まない）。 */
+function renderInline(node: Node, blockId: string): string {
+  if (node.type === "displayMath") return `\n${renderDisplayMath(node.tex)}\n`;
+  if (node.type === "list") return `\n${renderNode(node, blockId)}\n`;
+  return renderNode(node, blockId);
 }

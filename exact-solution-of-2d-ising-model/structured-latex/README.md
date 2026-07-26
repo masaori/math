@@ -44,7 +44,7 @@ The original `.typ` files remain untouched.
 **何が型で落ち、何が型では落とせないのか（およびその根拠）は
 [docs/type-coverage.md](../docs/type-coverage.md) に記録してある。**
 
-この実証は `node tools/negative-type-test.ts` が行う（16 ケース）。存在しないラベルを使った一時ファイルで
+この実証は `node tools/negative-type-test.ts` が行う（18 ケース）。存在しないラベルを使った一時ファイルで
 実際に `tsc` を落とし、その診断が当該ラベルを指していることを確認する（正しいラベル版が
 通ることも対にして確認するので、「設定不備で常に落ちている」状態とは区別できる）。
 回帰テストは `type-tests/label-typing.test-d.ts`（`@ts-expect-error` の並び）と
@@ -144,7 +144,7 @@ npm run build:pdf   # 生成 → PDF ビルド → ノート混入の検査
 ```
 
 PDF 化には tectonic が要る（未導入なら `brew install tectonic`）。日本語は xeCJK ＋ ヒラギノ。
-出力は `build/`（git 管理外）。現在の実測: **175 ページ / 相互参照 945 件すべて解決 / 未解決参照 0**。
+出力は `build/`（git 管理外）。現在の実測: **173 ページ / 相互参照 945 件すべて解決 / 未解決参照 0 / 組めない文字 0 / 版面外へ出た行 0**。
 変換規則と数式の互換性の実測結果は [docs/publication-output.md](../docs/publication-output.md)。
 
 ## Validation

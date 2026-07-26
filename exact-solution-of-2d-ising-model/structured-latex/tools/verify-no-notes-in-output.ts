@@ -19,6 +19,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import type { Node } from "../schema.ts";
+import { escapeText } from "./latex-escape.ts";
 import { loadNoteFiles, structuredLatexDir } from "./content-modules.ts";
 
 const texPath = join(structuredLatexDir, "build", "document.tex");
@@ -46,6 +47,7 @@ for (const forbidden of ["loadNoteFiles", "notesDir", "notes/"]) {
 const noteFiles = await loadNoteFiles();
 const leakedIds: string[] = [];
 const leakedTexts: { noteId: string; sample: string }[] = [];
+const notesWithoutSample: string[] = [];
 let noteCount = 0;
 let checkedSamples = 0;
 
@@ -53,9 +55,14 @@ for (const { notes } of noteFiles) {
   for (const note of notes) {
     noteCount += 1;
     if (tex.includes(note.id)) leakedIds.push(note.id);
-    for (const sample of distinctiveTexts(note.body ?? [])) {
+    const samples = distinctiveTexts(note.body ?? []);
+    if (samples.length === 0) notesWithoutSample.push(note.id);
+    for (const sample of samples) {
       checkedSamples += 1;
-      if (tex.includes(sample)) leakedTexts.push({ noteId: note.id, sample });
+      // 生成物は地の文をエスケープするので、エスケープ後の形でも照合する。
+      if (tex.includes(sample) || tex.includes(escapeText(sample))) {
+        leakedTexts.push({ noteId: note.id, sample });
+      }
     }
   }
 }
@@ -72,6 +79,13 @@ console.log(
   `no notes in output: ノート ${noteCount} 件（本文サンプル ${checkedSamples} 件）は ` +
     "いずれも build/document.tex に現れない",
 );
+if (notesWithoutSample.length > 0) {
+  // 本文がほぼ数式のノートは、地の文サンプルを取れない。id 検査だけが効いている状態なので明示する。
+  console.log(
+    `  うち ${notesWithoutSample.length} 件は地の文サンプルを取れず id 検査のみ: ` +
+      `${notesWithoutSample.slice(0, 5).join(", ")}${notesWithoutSample.length > 5 ? " ほか" : ""}`,
+  );
+}
 
 /**
  * ノート本文から「偶然一致しない程度に長い」地の文を取り出す。
@@ -89,5 +103,5 @@ function distinctiveTexts(nodes: readonly Node[]): string[] {
     }
   };
   walk(nodes);
-  return out.slice(0, 5);
+  return out;
 }
