@@ -3,11 +3,13 @@
  * 構造化テキストの実行時検証。
  *
  * 型検査（`tsc -p tsconfig.json --noEmit`）と役割を分ける:
- *   - **コンパイル時**に落とせるもの（存在しないラベルへの ref / targets、kind ごとの
- *     フィールド、targets の空配列）は `schema.ts` の型が担当する。ここでは再検査しない
- *     …のではなく、`.mjs`（型検査対象外）が残っている移行期のために**同じ検査を実行時にも回す**。
- *   - 型では表現できないもの（id・ラベルの重複、未変換 Typst 記法の混入、
- *     生成済みラベル一覧と実状の一致）はこのスクリプトだけが検出できる。
+ *   - **コンパイル時**に落ちるもの（存在しないラベルへの ref / targets、id・ラベルの重複、
+ *     kind ごとのフィールド、targets の空配列 ほか）は `schema.ts` の型と
+ *     `document.generated.ts` が担当する。ここでの再検査は、型を経由せずに値が作られる経路
+ *     （動的生成・`as` による回避）への保険である。
+ *   - **型では表現できないもの**（未変換 Typst 記法の混入、生成物とファイル一覧の一致、
+ *     sourcePath の実在）はこのスクリプトだけが検出できる。
+ *     何が型で無理かとその根拠は docs/type-coverage.md に記録してある。
  *
  * 使い方: node structured-latex/tools/validate-content.ts
  */
@@ -75,7 +77,14 @@ for (const { file, notes } of noteFiles) {
     for (const target of note.targets) {
       noteTargets.push({ target, noteId: note.id, file });
     }
-    scanForTypstMathInNodes(note.body ?? [], `${file}:${note.id}`);
+    // ノートのタイトルの tex も KaTeX へ渡るので、本文と同じ規約で検査する
+    // （ブロック側は scanForTypstMath が見ている。ここが抜けていた）。
+    const noteTitle = note.title;
+    const noteStrings: Node[] = [...(note.body ?? [])];
+    scanForTypstMathInNodes(noteStrings, `${file}:${note.id}`);
+    if (noteTitle !== null && noteTitle !== undefined && noteTitle.tex !== undefined) {
+      assertNoTypstToken([noteTitle.tex], `${file}:${note.id}.title`);
+    }
     walkRefs(note.body ?? [], note.id, file, refs);
   }
 }
@@ -106,7 +115,7 @@ const missingInGenerated = [...labels.keys()].filter((label) => !generated.has(l
 const staleInGenerated = [...generated].filter((label) => !labels.has(label));
 if (missingInGenerated.length > 0 || staleInGenerated.length > 0) {
   throw new Error(
-    "labels.generated.ts が content/ の実状と一致していない（node tools/generate-labels.ts で再生成する）:\n" +
+    "labels.generated.ts が content/ の実状と一致していない（node tools/generate-index.ts で再生成する）:\n" +
       `  生成物に無い実在ラベル: ${missingInGenerated.join(", ") || "なし"}\n` +
       `  実在しない生成物のラベル: ${staleInGenerated.join(", ") || "なし"}`,
   );
@@ -132,6 +141,8 @@ function scanForTypstMath(block: ConvertedBlock, file: string): void {
     strings.push(title.tex);
   }
   assertNoTypstToken(strings, `${file}:${block.id}`);
+  // 本文（content/）のみ。notes/ は抽象的な見方を残す場所なので検査しない。
+  assertNoAbstractTensorNotation(strings, `${file}:${block.id}`);
 }
 
 function scanForTypstMathInNodes(nodes: readonly Node[], where: string): void {
@@ -149,6 +160,32 @@ function assertNoTypstToken(strings: readonly string[], where: string): void {
   const first = suspicious[0];
   if (first !== undefined) {
     throw new Error(`${where} has suspicious unconverted Typst math token: ${first}`);
+  }
+}
+
+/**
+ * 抽象テンソル積の記法が本文に混入していないことを検査する。
+ *
+ * README 2 節の要求: 「M 個の 2×2 行列のテンソル積は、具体的な 2^M × 2^M の複素行列
+ * （クロネッカー積）として専用の記号で定義する。抽象的なテンソル積の一般論は本文に出さない」。
+ *
+ * 経緯: 本文全章の記法をクロネッカー積へ置換した後、**後から書かれた章で `\otimes` が
+ * 揺り戻る事故**が実際に起きた（011 章・013 章に 4 箇所）。人手で気づくのに頼らず機械検査にする。
+ *
+ * 対象は `content/`（本文＝出版対象）のみ。`notes/`（参照用ノート）は
+ * 抽象的な見方を「採用しなかった経路」として記録する場所なので検査しない。
+ */
+function assertNoAbstractTensorNotation(strings: readonly string[], where: string): void {
+  const offending = strings.filter((value) => /\\otimes/.test(value));
+  const first = offending[0];
+  if (first !== undefined) {
+    throw new Error(
+      `${where} に抽象テンソル積の記法 \\otimes がある: ${first}\n` +
+        "  → クロネッカー積の記法に直すこと（空間は \\mathrm{Mat}(2^M,\\mathbb{C})、" +
+        "単位行列は I_{\\mathrm{Mat}(2^M,\\mathbb{C})}、積は \\boxtimes）。\n" +
+        "  抽象テンソル積の一般論は本文に出さない（README 2 節）。" +
+        "抽象的な見方を残したい場合は notes/ へ。",
+    );
   }
 }
 

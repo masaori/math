@@ -27,7 +27,7 @@ jobs:
           # .ts を型ストリップで直接実行するため 22.18 以上が要る。
           node-version: '22'
       - run: pnpm install --frozen-lockfile
-      # 生成ラベルの鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
+      # 生成物の鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
       - run: npm run check
       - name: verify check linkage (sagemath ↔ proof)
         working-directory: exact-solution-of-2d-ising-model

@@ -8,7 +8,13 @@
  * ここで使う実在ラベルは content/ に存在するもの（labels.generated.ts のユニオン）。
  */
 
+// 生成した集約モジュールを**型として引き込む**。tsconfig の include から
+// document.generated.ts が落ちても、この import 経由で検査対象に残る
+// （include 漏れでファイル跨ぎの検査が無音で消えた事故があるため）。
+import type { _UniqueBlockIds } from "../document.generated.ts";
 import { defineBlocks, defineNotes, math, paragraph, ref } from "../schema.ts";
+
+export type _AggregatedDocumentIsChecked = _UniqueBlockIds;
 import type { ConvertedBlock, Note } from "../schema.ts";
 
 // --- ref -------------------------------------------------------------------
@@ -127,6 +133,65 @@ const noteWithEmptyTargets: Note = {
   body: [],
 };
 void noteWithEmptyTargets;
+
+// --- 一意性・値域 ------------------------------------------------------------
+
+// 同一ファイル内での id 重複は型で落ちる（ファイル跨ぎは document.generated.ts が見る）。
+// @ts-expect-error id が重複している。
+void defineBlocks([
+  {
+    id: "type_test_dup",
+    kind: "claim",
+    sourcePath: "type-tests/label-typing.test-d.ts",
+    sourceOrdinal: 6,
+    labels: [],
+    statement: [],
+  },
+  {
+    id: "type_test_dup",
+    kind: "claim",
+    sourcePath: "type-tests/label-typing.test-d.ts",
+    sourceOrdinal: 7,
+    labels: [],
+    statement: [],
+  },
+]);
+
+const headingWithBadLevel: ConvertedBlock = {
+  id: "type_test_level_range",
+  kind: "heading",
+  // @ts-expect-error level は 1〜6 のみ。
+  level: 7,
+  sourcePath: "type-tests/label-typing.test-d.ts",
+  sourceOrdinal: 8,
+  title: { text: "見出し" },
+  labels: [],
+};
+void headingWithBadLevel;
+
+const blockWithEmptyTitle: ConvertedBlock = {
+  id: "type_test_empty_title",
+  kind: "claim",
+  sourcePath: "type-tests/label-typing.test-d.ts",
+  sourceOrdinal: 9,
+  // @ts-expect-error タイトルは text か tex の少なくとも一方が必要。
+  title: {},
+  labels: [],
+  statement: [],
+};
+void blockWithEmptyTitle;
+
+const blockWithBadStatus: ConvertedBlock = {
+  id: "type_test_status",
+  kind: "claim",
+  sourcePath: "type-tests/label-typing.test-d.ts",
+  sourceOrdinal: 10,
+  labels: [],
+  statement: [],
+  // @ts-expect-error status は converted か added のみ。
+  conversion: { status: "convertd" },
+};
+void blockWithBadStatus;
 
 // --- 定義ヘルパの受け口 ------------------------------------------------------
 

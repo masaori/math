@@ -97,6 +97,53 @@ const cases: Case[] = [
     run: () => defineNotes([{ id: "note_runtime_test_empty", targets: [], body: [] } as never]),
   },
   {
+    name: "conversion.status が想定外の値なら拒む",
+    expect: /conversion.status must be one of/,
+    run: () =>
+      defineBlocks([
+        {
+          id: "runtime_test_status",
+          kind: "claim",
+          sourcePath: "tools/schema-runtime-test.ts",
+          sourceOrdinal: 6,
+          labels: [],
+          statement: [],
+          conversion: { status: "convertd" },
+        } as never,
+      ]),
+  },
+  {
+    name: "タイトルが text も tex も持たないなら拒む",
+    expect: /must have text or tex/,
+    run: () =>
+      defineBlocks([
+        {
+          id: "runtime_test_title",
+          kind: "claim",
+          sourcePath: "tools/schema-runtime-test.ts",
+          sourceOrdinal: 7,
+          title: {},
+          labels: [],
+          statement: [],
+        } as never,
+      ]),
+  },
+  {
+    name: "sourceOrdinal が整数でないなら拒む",
+    expect: /sourceOrdinal must be an integer/,
+    run: () =>
+      defineBlocks([
+        {
+          id: "runtime_test_ordinal",
+          kind: "claim",
+          sourcePath: "tools/schema-runtime-test.ts",
+          sourceOrdinal: 2.5,
+          labels: [],
+          statement: [],
+        } as never,
+      ]),
+  },
+  {
     name: "ノードの type が不正なら拒む",
     expect: /type is invalid/,
     run: () =>
