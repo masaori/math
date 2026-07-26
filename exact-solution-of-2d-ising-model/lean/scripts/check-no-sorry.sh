@@ -316,6 +316,25 @@ targets=(
   Ising2D.matExpUnits_conj_eq_tsum
   Ising2D.matExp_conj_two_dim_z
   Ising2D.matExp_conj_two_dim_y
+  Ising2D.Abstract.conj_smul_eq
+  Ising2D.Abstract.twoDimConjMat
+  Ising2D.Abstract.exp_conj_two_dim_actsBy
+  Ising2D.expPhase_eq_exp_neg_thetaMu
+  Ising2D.expPhase_neg_eq_exp_thetaMu
+  Ising2D.B1mat_eq_twoDimConjMat
+  Ising2D.B2mat_eq_twoDimConjMat
+  Ising2D.actsBy_TConj_matExpUnits
+  Ising2D.actsBy_TConj_smulUnits
+  Ising2D.ad_V1half_hatZMinus
+  Ising2D.ad_V1half_hatY
+  Ising2D.actsBy_TConj_V1half
+  Ising2D.ad_V2_hatZMinus
+  Ising2D.ad_V2_hatY
+  Ising2D.actsBy_TConj_V2
+  Ising2D.TV_hatZ_hatY
+  Ising2D.TV_psiDag
+  Ising2D.TV_psi
+  Ising2D.TV_psiDag_psi
 )
 
 {

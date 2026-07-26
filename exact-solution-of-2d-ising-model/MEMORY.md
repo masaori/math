@@ -1,5 +1,124 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補5）: **`T_V_hatZ_hatY` を無条件の定理へ閉じた**（未形式化由来の仮定がゼロに）
+
+### 何が変わったか
+
+`Ising2D/Part008/Definition016_TV.lean` の `TV_hatZ_hatY_of_action` と
+`Ising2D/Part008/Definition030_Fermi.lean` の `TV_psiDag_of_action` / `TV_psi_of_action` は、
+「`T_{(V_1^{(-)})^{1/2}}` と `T_{V_2}` が `(hat(Z)_μ^{(-)}, hat(Y)_μ)` に `B_1(θ_μ)`, `B_2` で
+作用する」ことを**明示的な仮定 `ActsBy`** として持っていた。**この仮定を証明して除去した。**
+
+| ファイル | 内容 |
+| --- | --- |
+| `lean/Ising2D/Abstract/TVAction.lean` | 抽象版。`Abstract.twoDimConjMat`（exp 共役の 2 次元部分空間への作用行列 `!![cosh s, β sinhc s; α sinhc s, cosh s]`）、`Abstract.exp_conj_two_dim_actsBy`、`Abstract.conj_smul_eq`（スカラー因子は共役で打ち消える） |
+| `lean/Ising2D/Part008/Claim012_TVActions.lean` | 具体版。`actsBy_TConj_V1half` / `actsBy_TConj_V2`（原文 `012` の 4 式、**証明済み**）、`TV_hatZ_hatY`（原文 `018` の無条件版）、`TV_psiDag` / `TV_psi` / `TV_psiDag_psi`（原文 `031` の無条件版） |
+
+`lake build` 成功、`scripts/check-no-sorry.sh` exit 0（新規定理 20 本を targets へ追記済み）。
+構造化テキスト側の検証 3 種（`npm run check` / `verify-no-lost-proofs` /
+`verify-check-linkage`）も通っている。
+
+### 証明の骨格
+
+原文が「入れ子交換子を偶奇で場合分け（`002`）→ テイラー係数の抽出（`005`）」の 2 段で
+やっていることは、**「`ad X` が `span{Ẑ_μ^{(-)}, Ŷ_μ}` を保つ」という 1 つの事実に集約できる**。
+そこから先は既に形式化済みの `matExp_conj_two_dim_z` / `..._y` が閉じた形を返す。
+
+- `X_1 = (1/2) i K_1 H_1^{(-)}`: (1)(3) より `α = i K_1 e^{-iθ_μ}`, `β = -i K_1 e^{iθ_μ}`, `s = K_1`
+- `X_2 = i K_2^* H_2`: (4)(6) より `α = -2i K_2^*`, `β = 2i K_2^*`, `s = 2K_2^*`
+
+`<commutator_of_H_and_Z_Y>` のうち**偽と判明している (2)(5) はこの経路で一切使わない**
+（原文 `012` 自身が「`±` はいずれも `-` を選ぶ」と明記している）。
+
+### 原文の検算結果: **誤りは無かった**
+
+係数を原文と独立に導出して突き合わせた結果、原文 `005` / `012` / `018` の
+`cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` は**すべて正しい**。
+否定的結果の記録として `docs/tasks/2026-07_original-text-gaps/060_TV_action_coefficients_verified.md`
+に残した（`B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` が突き合わせそのもの）。
+
+### 残っている仮定（いずれも数学的に必要。未形式化由来ではない）
+
+1. `hdual : s_2^* c_2 = c_2^*`（双対関係の帰結）と、`IsingConst` の成分が `K_1, K_2^*` の
+   双曲線関数であること — 原文が明示していない前提（既知。`030_det_A_theta_duality.md`）
+2. `ψ` の反交換関係の `hbr`（平方根の分枝の選択） — 原文の穴（既知。`050_...md`）
+
+**これで「未形式化に由来する仮定」は本リポジトリから無くなった。**
+
+### 次にやること
+
+`lean/README.md`「今後の方針」の 3.（`V_1, V_2` を `Z, Y, ε` で表す表式）と
+4.（`ε` の順序つき積の完全形）へ進む。
+
+## 完了（2026-07-26）: 001 章と 004 章の断絶を解消（章 B・章 B2）— 分配関数から固有値までつながった
+
+### ゴールと結果
+
+前セッションで見つけた断絶——**001 章の成分定義の転送行列と 004 章以降のパウリ行列表示の
+`V_1, V_2` を同一視する主張が本文に存在せず、004 章以降が 001 章から切り離された島だった**——を解消した。
+`structured-latex/content/010_transfer_matrix_bridge.ts`（13 ブロック、新規）。
+これで **分配関数の定義 → 転送行列 → フェルミオン → 固有値** の経路が本文でつながった。
+
+### 記号の対応（一次情報で確定させた）
+
+| | 001 章 | 004 章以降 / 010 章 |
+|---|---|---|
+| 鎖の長さ（転送行列が作用する向き） | `N` | **`M`** |
+| 転送の回数 | `M` | **`N_row`**（004 章以降に対応物が無いので新設） |
+| 鎖内（行内）の結合定数 | `J'` | **`K_1`** |
+| 鎖間（行間）の結合定数 | `J` | **`K_2`** |
+
+**根拠**: 001 章の `V_1` の指数には `J' μ(j)μ(j+1)`（同一の `μ` の隣接成分＝同一の鎖の隣接サイト）が
+現れ、004 章の `V_1 = exp(K_1 Σ σ^z_m σ^z_{m+1})` も同じ役割。`V_2` はどちらも隣り合う 2 本の鎖の
+同じサイトどうしを結ぶ。役割が一致するのはこの組み合わせだけである。
+**どちらかが「誤り」なのではなく、2 つの章が同じ文字を別の意味で使っていた**というのが結論。
+
+数値でも裏を取った: `N_row ≠ M` のとき `K_1` と `K_2` を取り違えると `Z` と相対誤差 0.09〜0.44 で
+合わない（`N_row = M` のときは対称性から一致してしまうので判定から除外した）。
+
+### 章 B（橋渡し）で示したこと
+
+- `def_config_basis_iso`: 配置 `μ` と標準基底 `f_I` の全単射 `ι`（`μ(m)=+1 ↦ i_m=1`）。
+  001 章が「全単射をひとつ固定して同一視する。取り方に依らない」と述べていた自由度をここで固定した。
+- `sigma_z_diagonal_action`: `σ^z_m f_{ι(μ)} = μ(m) f_{ι(μ)}`。
+- `exp_of_diagonal_matrix`: 対角行列の exp（成分ごとの収束で示した）。
+- `V1_component_equals_pauli`: `V_1` は両定義で一致（**数値では残差 0.00e+00 の厳密一致**）。
+- `two_by_two_transfer_identity`: `[[e^{K_2}, e^{-K_2}],[e^{-K_2}, e^{K_2}]] = (2 sinh 2K_2)^{1/2} exp(K_2^* σ^x)`。
+  ここで双対関係 `K_2^* = -½ log tanh K_2` が効く。前因子 `(2 sinh 2K_2)^{M/2}` の由来はこれ。
+- `V2_component_equals_pauli`: `V_2` も一致（`A` のクロネッカー冪を経由）。
+- `partition_function_in_pauli_form`: `Z(J,J') = tr((V_1V_2)^{N_row})` を 004 章の記号で書き直した。
+
+### 章 B2（偶奇セクター分解）で示したこと
+
+- `def_epsilon_projectors` / `epsilon_projector_properties`: `P^{(±)} = (I ± ε)/2`、`im P^{(±)} = F^{(±)}`。
+- `epsilon_commutes_with_transfer_matrices`: `ε` は `V_1, V_2, V_1^{(±)}, (V_1^{(±)})^{1/2}` と可換。
+- `sector_replacement_of_V1`: `V_1 P^{(±)} = V_1^{(±)} P^{(±)}` とその冪。
+- `partition_function_sector_decomposition`:
+
+```
+Z(J,J') = tr( P^{(+)} (V^{(+)})^{N_row} ) + tr( P^{(-)} (V^{(-)})^{N_row} )
+        = ½( tr((V^{(+)})^n) + tr(ε(V^{(+)})^n) + tr((V^{(-)})^n) − tr(ε(V^{(-)})^n) )
+```
+
+**当初ロードマップに書いた「`ε` をフェルミオン数で書く」は、ここまでには不要だった。**
+射影子を使えば `ε` を書き直さずに到達できる。ただし章 C で `tr(ε (V^{(±)})^{N_row})` を
+固有値で評価する段では要る見込みなので、そのときは符号を数値で先に確定させること。
+
+### 数値検証: `sagemath/check/043_claim_transfer_matrix_bridge/`（5 チェック、全 PASS）
+
+`M = 2,3,4`、`(K1,K2)` 数組。`V_1` の一致は**残差 0.00e+00（厳密）**、他は 3e-14 以下。
+**check_04 は分配関数の定義（`2^{N_row·M}` 通りのスピン配置の直接和）から出発している**ので、
+001 章の `partition_function_via_transfer_matrix` の独立な再確認にもなっている。
+直接和のコストの都合で `N_row·M ≤ 9` に限った（`M=4` は `N_row=2` のみ）。実行ログは `run-log.txt`。
+
+### 次にやること
+
+**章 C（最大固有値）。** `partition_function_sector_decomposition` の右辺へ
+`eigenvalues_of_V` の `Λ_ε` を代入するところから始める。詳細は
+`docs/tasks/free-energy-roadmap/task-dependency-graph.md`（章 A・B・B2 は完了に更新済み）。
+
+---
+
 ## 完了（2026-07-26）: 数値検証（SageMath）のカバレッジを 7 ラベル → 96 ラベルへ拡張
 
 ### やったこと
