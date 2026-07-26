@@ -132,12 +132,20 @@ EOF
 | `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.Abstract.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
 | `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.Abstract.one_eq_sum_single`（任意の半環・任意の有限添字型） |
 | `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.Abstract.acomm_lincomb_clifford` / `Abstract.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
+| `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim006_ExpConjugation.lean`） | `Ising2D.Abstract.exp_adCLM_apply` / `Abstract.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`Abstract/ExpConjugation.lean`） |
+| `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.Abstract.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
 
 抽象版から得られた知見（本文には持ち込まないが、解説パートの素材になる）:
 
 - `ψ` の反交換関係に効いているのは `hat(Z)^{(-)}, hat(Y)` の 4 本の反交換関係と、
   係数についてのスカラー恒等式 2 本だけである。`hat(Z)`, `hat(Y)` の具体形も、複素行列であることも、
   テンソル冪であることも、`M`・`δ^M_{μ+ν,0}`・`γ_2` も効いていない。
+
+- `exp(X) A exp(-X) = exp(ad X)(A)` に効いているのは、**左乗法 `L_X` と右乗法 `R_X` が
+  線型作用素として可換であること**（結合律から出る）と、**`(L_X)^n = L_{X^n}`・`(R_X)^n = R_{X^n}`**
+  の 2 つだけである。行列であることも有限次元であることも効いておらず、ℂ 上の完備ノルム環なら成り立つ。
+  リー群・リー環はもちろん、`L` が代数準同型であることすら使っていない。
+  なお右乗法は反同型だが `(R_X)^n = R_{X^n}` は左乗法と同形なので、反対環を経由する必要がない。
 
 - 交換子と反交換子の恒等式には、行列であることも複素数であることも効いていない
   （分配法則と結合法則だけで足りる）。
@@ -318,6 +326,17 @@ EOF
 | `Ising2D.acomm_psi_relations_of_car` | `ψ` の反交換関係 3 式を**抽象版の系として**導出した版（具体版と同じ主張） | 同上 |
 | `Ising2D.acomm_psiDag_psiDag_of_opposite_branch` | **逆分枝 `t_ν = -t_μ` では `[ψ_μ^†, ψ_ν^†]₊ = I`**（同一分枝の仮定が必要なことの証明） | 同上 |
 | `Ising2D.acomm_psiDag_psi_of_opposite_branch` | **逆分枝では `[ψ_μ^†, ψ_ν]₊ = 0`**（原文第 2 式が破れる） | 同上 |
+| `Ising2D.Abstract.sinhc` | `sinhc(s) = sinh(s)/s`（`s = 0` では `1`）と冪級数 `Σ s^{2k}/(2k+1)!` | 新規（0 割りを避けるため導入） |
+| `Ising2D.Abstract.lmulCLM` / `rmulCLM` / `adCLM` | 左乗法 `L_X`、右乗法 `R_X`、随伴作用 `ad X = L_X - R_X`（連続 ℂ-線型作用素） | `<def_ad_X_matrix>` |
+| `Ising2D.Abstract.commute_lmulCLM_rmulCLM` | **`L_X` と `R_Y` は可換**（級数展開ルートの核） | `<matrix_exp_conjugation>` の証明の骨格 |
+| `Ising2D.Abstract.exp_lmulCLM` / `exp_rmulCLM` | `exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}` | 同上 |
+| `Ising2D.Abstract.exp_adCLM_apply` | `exp(ad X)(A) = exp(X) A exp(-X)`（**抽象版**） | `<exp_X_Y_exp_-X>` |
+| `Ising2D.Abstract.hasSum_exp_conj` / `exp_conj_eq_tsum` | 級数 `Σ_n (1/n!) ad_X^n(A)` の収束と和 | 同上 |
+| `Ising2D.Abstract.exp_conj_two_dim_z` / `..._y` | `ad X` が `span{z,y}` を保つときの閉じた形 `cosh(s) z + α sinhc(s) y` | `<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠 |
+| `Ising2D.adPow` | `ad_X^n(A)`（`n` 重の入れ子交換子、人手証明の再帰そのまま） | `<ad_binomial>` の再帰定義 |
+| `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum` | `exp(X) A exp(-X) = Σ_n (1/n!) ad_X^n(A)`（**具体版**、`Mat(2,ℂ)^{⊗M}`） | `<exp_X_Y_exp_-X>` |
+| `Ising2D.matExpUnits_conj_eq_tsum` | 上を単元 `matExpUnits X` の共役 `Ad_{exp X}` の形で述べた版 | 同 (3) |
+| `Ising2D.matExp_conj_two_dim_z` / `..._y` | 2 次元不変部分空間での閉じた形（具体版） | `<extract_taylor_coefficient_of_Z_Y>` |
 
 ## 形式化の過程で見つかった原文の問題
 
@@ -345,7 +364,16 @@ EOF
      `expPhase_sum`・`hatZ`/`hatY`・`H1`/`H2` が揃い、添字の巡回も `Ising2D.nextSite`
      （`Part004/Definition010_H1H2V1V2.lean`）で確定したので、原文の二重和の計算をそのまま写せる
   2. `parts 008` の 001〜005（`exp(X) Y exp(-X)` の級数展開と**ネストした交換子の
-     テイラー係数抽出**）。ここが埋まると `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`
+     テイラー係数抽出**）。
+     **このうち `exp(X) Y exp(-X)` の級数展開（`<exp_X_Y_exp_-X>`）と、`ad X` が
+     2 次元部分空間を保つ場合の閉じた形（cosh/sinhc）は形式化済み**
+     （`Ising2D/Abstract/ExpConjugation.lean` と `Ising2D/Part008/Claim006_ExpConjugation.lean`）。
+     残るのは `<commutator_of_H_and_Z_Y>`（1 重交換子 `[H_1^{(±)}, Ẑ_μ^{(±)}]` 等の具体計算）で、
+     これが埋まれば `matExp_conj_two_dim_z` / `..._y` に代入して
+     `<extract_taylor_coefficient_of_Z_Y>` の 4 式がそのまま出る
+     （`s = K_1`, `α = i e^{-iθ_μ}K_1`, `β = -i e^{iθ_μ}K_1` 等。対応は
+     `Part008/Claim006_ExpConjugation.lean` の冒頭コメントに書いた）。
+     そこまで行くと `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`
      （`B_1(θ)`, `B_2` の作用）が証明でき、`Ising2D.TV_hatZ_hatY_of_action` の仮定
      `hT1`, `hT2`、および `Ising2D.TV_psiDag_of_action` / `TV_psi_of_action` の仮定 `hT` を
      外して `T_V_hatZ_hatY` と `commutation_V_psi` を無条件の定理にできる。
@@ -361,6 +389,12 @@ EOF
   - `Real.arccosh`（自前定義が必要）
   - 一般の `Ad(exp X) = exp(ad X)`。ただし本プロジェクトは級数展開ルート
     （`parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003, 007`）を持つので回避可能。
+    **回避済み**: `Ising2D/Abstract/ExpConjugation.lean` で、リー環を使わず
+    「`L_X` と `R_X` が可換」＋「可換な作用素の指数法則 `NormedSpace.exp_add_of_commute`」
+    だけから証明した。
+  - `sinhc`（`sinh s / s` を `s = 0` へ延長したもの）。自前定義した
+    （`Ising2D.Abstract.sinhc`）。`Complex.hasSum_cosh` / `Complex.hasSum_sinh` は
+    `Mathlib.Analysis.SpecialFunctions.Trigonometric.Series` にある。
 - **leanblueprint の導入検討**: 人手証明（Typst / 構造化TeX）と Lean の対応を機械的に追跡し、
   未形式化箇所を可視化する。導入の前提として、`docs/tasks/2026-07_toolchain-and-rigor` の
   Phase 2（構造化TeX への全面移行）の完了状況を確認する必要がある

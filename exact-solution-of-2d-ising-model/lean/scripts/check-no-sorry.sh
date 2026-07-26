@@ -238,6 +238,41 @@ targets=(
   Ising2D.acomm_psi_relations_of_car
   Ising2D.acomm_psiDag_psiDag_of_opposite_branch
   Ising2D.acomm_psiDag_psi_of_opposite_branch
+  Ising2D.Abstract.sinhc
+  Ising2D.Abstract.sinhc_zero
+  Ising2D.Abstract.sinhc_of_ne_zero
+  Ising2D.Abstract.mul_sinhc
+  Ising2D.Abstract.hasSum_sinhc
+  Ising2D.Abstract.lmulCLM
+  Ising2D.Abstract.rmulCLM
+  Ising2D.Abstract.adCLM
+  Ising2D.Abstract.lmulCLM_apply
+  Ising2D.Abstract.rmulCLM_apply
+  Ising2D.Abstract.adCLM_apply
+  Ising2D.Abstract.commute_lmulCLM_rmulCLM
+  Ising2D.Abstract.lmulCLM_pow
+  Ising2D.Abstract.rmulCLM_pow
+  Ising2D.Abstract.exp_lmulCLM
+  Ising2D.Abstract.exp_rmulCLM
+  Ising2D.Abstract.exp_adCLM_apply
+  Ising2D.Abstract.hasSum_exp_conj
+  Ising2D.Abstract.exp_conj_eq_tsum
+  Ising2D.Abstract.adCLM_sq_z
+  Ising2D.Abstract.adCLM_sq_y
+  Ising2D.Abstract.adCLM_pow_even
+  Ising2D.Abstract.adCLM_pow_odd_z
+  Ising2D.Abstract.adCLM_pow_odd_y
+  Ising2D.Abstract.exp_conj_two_dim_z
+  Ising2D.Abstract.exp_conj_two_dim_y
+  Ising2D.adPow
+  Ising2D.adPow_zero
+  Ising2D.adPow_succ
+  Ising2D.adPow_eq_adCLM
+  Ising2D.hasSum_matExp_conj
+  Ising2D.matExp_conj_eq_tsum
+  Ising2D.matExpUnits_conj_eq_tsum
+  Ising2D.matExp_conj_two_dim_z
+  Ising2D.matExp_conj_two_dim_y
 )
 
 {
