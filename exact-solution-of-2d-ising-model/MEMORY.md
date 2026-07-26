@@ -1,5 +1,33 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26）: リー群・リー環の経路を参照用ノートへ退避
+
+README のゴール設定（1 節「典型例がリー群・リー環である」／6 節「採用しなかった経路の扱い」）に従い、
+`structured-latex/content/005_exp_conjugation_proof.mjs` からリー群・リー環を使う 6 ブロックを
+`structured-latex/notes/005_exp_conjugation_lie_route.mjs` へ**要約せず原文のまま**移した。
+各ノートの冒頭に「ゴールに照らして本文には採用しなかった。理由: リー群の一般論を先に理解しないと
+証明を追えなくなり、本筋と無関係なところで読者の負担を生むため」を明記してある。
+
+移したもの: Ad/ad のリー環的定義、リー群上の $\mathrm{Ad}(\exp X)=\exp(\mathrm{ad}X)$（未証明の
+TODO ごと）、$\mathbf{GL}(n,\mathbb{C})$ の定義、Matrix Lie群の定義（旧 `def_matrix_lie_group`）、
+Brian Hall Def 3.32 の $\mathrm{Ad}_g/\mathrm{ad}_X$、Matrix Lie群版の主定理（旧 `brianhall_3.35`）。
+
+本文に残したのは級数展開だけで済む経路: $M(n;\mathbb{C})$ のノルム・収束（`def_frobenius_inner_product`）、
+`ad_binomial`、`matrix_exp_conjugation`（主定理 $e^XYe^{-X}=e^{\mathrm{ad}_X}(Y)$）、`brianhall_exc14`。
+
+参照が切れないようにした処置（重要）:
+
+- `def_ad_X_matrix` は 005 章の 3 ブロックと 008 章の 2 箇所から参照されているので、**同じラベルのまま**
+  Matrix Lie群を使わない具体版の定義ブロック（`exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix`）へ
+  差し替えた。$\mathrm{ad}_X(Y)=[X,Y]$ と、正則な $g$ に対する $\mathrm{Ad}_g(Y)=gYg^{-1}$（逆行列の
+  一意性の証明つき）だけを述べており、リー群は出てこない。008 章側が期待していた記号とも一致する。
+- ノートから `def_matrix_lie_group` への `ref` はラベルが content に無くなるため解決しない
+  （`validate-content.mjs` はノートの ref も content のラベルへ解決することを要求する）。該当箇所は
+  ノート ID への言及に置き換えた。
+- 旧 `brianhall_3.35` はどこからも参照されていなかった（grep 確認済み）。
+
+検証3種すべて通過（156 ブロック・130 ラベル・565 参照すべて解決、ノート 23 件）。
+
 ## 完了（2026-07-26）: 人手証明に残っていた未完（TODO）を全件解消 — **総括**
 
 本セッションのゴールは「`structured-latex/content/*.mjs` に残る未完を、証明完成か、
