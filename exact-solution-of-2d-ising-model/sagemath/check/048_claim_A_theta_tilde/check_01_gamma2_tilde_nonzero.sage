@@ -1,0 +1,64 @@
+# ---------------------------------------------------------
+# SageMath: 半整数運動量では gamma_2(theta~_mu) が決して 0 にならない
+# 対象: structured-latex gamma_2_theta_tilde_nonzero
+#   (a) すべての M, mu, K_1, K_2 について |gamma_2(theta~_mu)| > 0（臨界点を含む）
+#   (b) 対比: 同じ K・同じ M でも整数運動量 mu = M（theta = 2pi）では
+#       臨界点 sinh 2K_1 sinh 2K_2 = 1 のとき gamma_2(theta_M) = 0 になる
+#   (c) sin(theta~_mu) = 0 となる (M, mu) では必ず cos(theta~_mu) = -1 であること
+#       （本文の証明の要：そこでは c_2 s_1 = -c_1 < 0 が要求され矛盾する）
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== (a) 半整数運動量: |gamma_2(theta~_mu)| の最小値 ===")
+all_ok = True
+worst_min = None
+for (K1, K2) in K_CASES:
+    P = coeffs(K1, K2)
+    mins = []
+    for M in M_CASES:
+        m = min([abs(g2(th_tilde(M, mu), P)) for mu in range(1, M + 1)])
+        mins.append((M, m))
+    mmin = min([m for (_, m) in mins])
+    ok = mmin > 1e-6
+    all_ok = ok and all_ok
+    worst_min = mmin if worst_min is None else min(worst_min, mmin)
+    print(f"  {case_label(K1, K2)}: min_M,mu |gamma_2(theta~)| = {float(mmin):.6e} -> {'PASS' if ok else 'FAIL'}")
+print(f"  全ケースを通じた最小値: {float(worst_min):.6e}")
+
+print("=== (b) 対比: 整数運動量 mu = M（theta = 2pi）での gamma_2 ===")
+for (K1, K2) in K_CASES:
+    P = coeffs(K1, K2)
+    v = abs(g2(th_int(4, 4), P))          # theta_M = 2 pi（M に依らない）
+    crit = abs(P['s1'] * P['s2'] - 1)      # 臨界からのずれ
+    dual = abs(P['c1'] - P['s1'] * P['c2'])  # critical_condition_c1_eq_s1_c2 の左右差
+    print(f"  {case_label(K1, K2)}: |gamma_2(2pi)| = {float(v):.6e}, "
+          f"|sinh2K1 sinh2K2 - 1| = {float(crit):.3e}, |c_1 - s_1 c_2| = {float(dual):.3e}")
+    # 臨界点なら gamma_2(2pi) = 0、臨界でなければ非零
+    if crit < 1e-12:
+        ok = v < 1e-8
+    else:
+        ok = True
+    all_ok = ok and all_ok
+    if not ok:
+        print("    -> FAIL（臨界点なのに gamma_2(2pi) が 0 でない）")
+
+print("=== (c) sin(theta~_mu) = 0 となる (M, mu) では cos(theta~_mu) = -1 ===")
+cnt = 0
+for M in range(2, 41):
+    for mu in range(1, M + 1):
+        t = th_tilde(M, mu)
+        if abs(sin(t)) < 1e-12:
+            cnt += 1
+            c = RDF(cos(t))
+            ok = abs(c + 1) < 1e-12
+            all_ok = ok and all_ok
+            print(f"  M={M}, mu={mu}: (2mu-1)/M = {(2*mu-1)/M}, cos(theta~) = {float(c):+.12f} "
+                  f"-> {'PASS' if ok else 'FAIL'}")
+print(f"  該当した (M, mu) の個数: {cnt}（M が奇数かつ (2mu-1)/M が奇数のときのみ）")
+
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")
+if not all_ok:
+    import sys
+    sys.exit(1)
