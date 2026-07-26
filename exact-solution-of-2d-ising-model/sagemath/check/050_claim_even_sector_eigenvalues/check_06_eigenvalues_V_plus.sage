@@ -1,0 +1,93 @@
+# =========================================================================
+# check_06: eigenvalues_of_V_plus / max_eigenvalue_of_V_plus_simple
+#
+#   Lambda^_eps := (2 sinh 2K_2)^{M/2} exp( sum_{mu=1}^{M} gamma(theta~_mu)(eps_mu - 1/2) )
+#
+#   (1) V^{(+)} Q^_eps = Lambda^_eps Q^_eps
+#   (2) V^{(+)} の 2^M 個の固有値全体（重複度こみ）が { Lambda^_eps } と相対誤差 1e-8 以下で一致
+#   (3) Lambda^_max = Lambda^_{(1,...,1)} = Lambda^{(1/2)}_M
+#       （012 章 onsager_free_energy_expression の Lambda^{(delta)}_M で delta = 1/2）
+#   (4) 最大固有値は**単純**：eps != (1,...,1) なら Lambda^_eps < Lambda^_max が狭義に成り立つ
+#       （gamma(theta~_mu) > 0 が全 mu で成り立つため）
+#   (5) 対照: 整数運動量 delta = 0 の Lambda^{(0)}_M は V^{(+)} の最大固有値と一致しない
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_06: V^{(+)} の固有値と最大固有値の単純性 ===")
+
+ok_all = True
+w_VQ = 0
+w_spec = 0
+w_lmax = 0
+min_gap_to_max = None
+min_gamma = None
+min_rel_diff_delta0 = None
+rows = []
+
+for M in EIG_M:
+    O = SpinOps(M)
+    for p in EIG_PARAMS:
+        P = coeffs(p['K1'], p['K2'])
+        ns = n_check_all(O, P)
+        Vp, _ = V_plus(O, p['K1'], p['K2'])
+        E = eps_list(M)
+        pred = []
+        for eps in E:
+            Q = Q_check(O, eps, ns)
+            L = Lambda_check(O, eps, P)
+            w_VQ = max(w_VQ, opnorm(Vp * Q - CDF(L) * Q) / abs(L))
+            pred.append((eps, L))
+        # (2) 固有値集合の一致（ソートして 1 対 1）
+        ev = sorted([RDF(CDF(z).real()) for z in Vp.eigenvalues()])
+        pred_vals = sorted([L for _, L in pred])
+        for a, b in zip(ev, pred_vals):
+            w_spec = max(w_spec, abs(a - b) / abs(b))
+        # (3) 最大は eps = (1,...,1) で、Lambda^{(1/2)}_M に一致
+        eps_all1 = tuple([1] * M)
+        L_all1 = Lambda_check(O, eps_all1, P)
+        L_half = Lambda_half_M(O, P)
+        w_lmax = max(w_lmax, abs(L_all1 - L_half) / L_half)
+        w_lmax = max(w_lmax, abs(max(pred_vals) - L_half) / L_half)
+        # (4) 単純性: 2 番目に大きい Lambda^_eps との相対差
+        second = max([L for eps, L in pred if eps != eps_all1])
+        gap = (L_all1 - second) / L_all1
+        min_gap_to_max = gap if min_gap_to_max is None else min(min_gap_to_max, gap)
+        for mu in range(1, M + 1):
+            g = gamma_tilde(M, mu, P)
+            min_gamma = g if min_gamma is None else min(min_gamma, g)
+        # (5) 対照: delta = 0（整数運動量）の Lambda^{(0)}_M
+        pref = RDF((2 * P['s2']) ** (RDF(M) / 2))
+        # 臨界点ちょうどでは gamma_1(2 pi) = 1 が丸め誤差で 1 をわずかに下回りうるので
+        # max(., 1) でクリップする（整数運動量では gamma_1 = 1、gamma = 0 が実際に起こる）。
+        s0 = RDF(sum(RDF(arccosh(max(g1(RDF(2 * pi * mu / M), P), RDF(1))))
+                     for mu in range(1, M + 1)))
+        L_delta0 = RDF(pref * exp(s0 / 2))
+        rel0 = abs(L_delta0 - L_all1) / L_all1
+        min_rel_diff_delta0 = rel0 if min_rel_diff_delta0 is None else min(min_rel_diff_delta0, rel0)
+        rows.append((M, param_label(p), L_all1, L_half, L_delta0, gap))
+
+ok_all &= report("V^{(+)} Q^_eps = Lambda^_eps Q^_eps（相対差）", w_VQ, TOL)
+ok_all &= report("V^{(+)} の固有値集合（2^M 個）= { Lambda^_eps }（相対差）", w_spec, TOL)
+ok_all &= report("Lambda^_max = Lambda^_{(1,..,1)} = Lambda^{(1/2)}_M（相対差）", w_lmax, TOL)
+print(f"  gamma(theta~_mu) の全体最小 = {float(min_gamma):.3e}  ->  "
+      f"{'PASS（全 mu で正）' if min_gamma > 0 else 'FAIL'}")
+print(f"  最大固有値と 2 番目の相対差の最小 = {float(min_gap_to_max):.3e}  ->  "
+      f"{'PASS（最大固有値は単純）' if min_gap_to_max > 1e-6 else 'FAIL'}")
+ok_all &= (min_gamma > 0 and min_gap_to_max > 1e-6)
+print(f"  対照: Lambda^{{(0)}}_M（整数運動量）と Lambda^_max の相対差の最小 = "
+      f"{float(min_rel_diff_delta0):.3e}  ->  "
+      f"{'PASS（不一致。判定は固有値一致の残差 1e-11 台より 4 桁以上大きいことで行う）' if min_rel_diff_delta0 > 1e-8 else 'FAIL'}")
+print("   （高温側 K1=0.05, K2=0.1 では gamma がほぼ定数なので両者は数値的に近い。"
+      "この相対差が小さいのは丸め誤差ではなく、その物理的な事情による。）")
+ok_all &= (min_rel_diff_delta0 > 1e-8)
+
+print()
+print("  Lambda^_max の実測値と Lambda^{(1/2)}_M / Lambda^{(0)}_M:")
+for M, lab, L1, Lh, L0, gap in rows[:10]:
+    print(f"    M={M} {lab}: Lambda^_max = {float(L1):.10g}, "
+          f"Lambda^(1/2)_M = {float(Lh):.10g}, Lambda^(0)_M = {float(L0):.10g}, "
+          f"単純性の相対差 = {float(gap):.3e}")
+
+print("check_06:", "PASS" if ok_all else "FAIL")

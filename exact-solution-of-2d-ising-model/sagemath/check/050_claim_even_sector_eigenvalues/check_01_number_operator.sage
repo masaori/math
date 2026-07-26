@@ -1,0 +1,77 @@
+# =========================================================================
+# check_01: def_check_number_operator / check_number_operator_idempotent
+#           / check_number_operators_commute / trace_of_check_number_operator_product
+#
+#   (1) n^_mu := psi^dagger_mu psi_{1-mu}
+#   (2) (psi^dagger_mu)^2 = 0, (psi_{1-mu})^2 = 0
+#   (3) psi_{1-mu} psi^dagger_mu = I - n^_mu
+#   (4) (n^_mu)^2 = n^_mu
+#   (5) mu != nu なら psi^dagger_mu, psi_{1-mu} は n^_nu と可換、n^_mu n^_nu = n^_nu n^_mu
+#   (6) tr(n^_{mu_1} ... n^_{mu_k}) = 2^{M-k}（相異なる添字、k = 0..M）
+#
+#  対照: 対を 1-mu ではなく -mu にすると (3)(4) が壊れる（半整数運動量の共役添字は 1-mu）。
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_01: 数演算子 n^_mu の冪等性・可換性・トレース ===")
+
+ok_all = True
+w_sq_dag = 0
+w_sq_psi = 0
+w_comp = 0
+w_idem = 0
+w_comm_psi = 0
+w_comm_n = 0
+w_trace = 0
+w_wrong_pair = 0
+
+for M in EIG_M:
+    O = SpinOps(M)
+    Id = identity_matrix(CDF, O.d)
+    for p in EIG_PARAMS:
+        P = coeffs(p['K1'], p['K2'])
+        ns = n_check_all(O, P)
+        for mu in range(1, M + 1):
+            pdag, _ = psi_pair(O, mu, P)
+            _, psi1m = psi_pair(O, 1 - mu, P)
+            # (2)
+            w_sq_dag = max(w_sq_dag, opnorm(pdag * pdag))
+            w_sq_psi = max(w_sq_psi, opnorm(psi1m * psi1m))
+            # (3)
+            w_comp = max(w_comp, opnorm(psi1m * pdag - (Id - ns[mu])))
+            # (4)
+            w_idem = max(w_idem, opnorm(ns[mu] * ns[mu] - ns[mu]))
+            # 対照: 対を -mu にすると (3) が壊れる
+            _, psi_neg = psi_pair(O, -mu, P)
+            n_wrong = pdag * psi_neg
+            w_wrong_pair = max(w_wrong_pair, opnorm(n_wrong * n_wrong - n_wrong))
+            # (5)
+            for nu in range(1, M + 1):
+                if nu == mu:
+                    continue
+                w_comm_psi = max(w_comm_psi, opnorm(comm(pdag, ns[nu])))
+                w_comm_psi = max(w_comm_psi, opnorm(comm(psi1m, ns[nu])))
+                w_comm_n = max(w_comm_n, opnorm(comm(ns[mu], ns[nu])))
+        # (6) すべての部分集合 T ⊆ {1..M} について tr(prod_{mu in T} n^_mu) = 2^{M-|T|}
+        for eps in eps_list(M):
+            T = [mu for mu in range(1, M + 1) if eps[mu - 1] == 1]
+            prod = Id
+            for mu in T:
+                prod = prod * ns[mu]
+            w_trace = max(w_trace, abs(prod.trace() - CDF(2) ** (M - len(T))))
+
+ok_all &= report("(psi^dagger_mu)^2 = 0", w_sq_dag, TOL)
+ok_all &= report("(psi_{1-mu})^2 = 0", w_sq_psi, TOL)
+ok_all &= report("psi_{1-mu} psi^dagger_mu = I - n^_mu", w_comp, TOL)
+ok_all &= report("(n^_mu)^2 = n^_mu", w_idem, TOL)
+ok_all &= report("[psi^dagger_mu, n^_nu] = [psi_{1-mu}, n^_nu] = 0 (mu != nu)", w_comm_psi, TOL)
+ok_all &= report("n^_mu n^_nu = n^_nu n^_mu", w_comm_n, TOL)
+ok_all &= report("tr(prod_{mu in T} n^_mu) = 2^{M-|T|}", w_trace, 1e-7)
+
+print(f"  対照（対を -mu にした n = psi^dagger_mu psi_{{-mu}} の冪等性の破れ）= "
+      f"{float(w_wrong_pair):.3e}  ->  {'PASS（大きく破れる＝対は 1-mu）' if w_wrong_pair > 1e-2 else 'FAIL'}")
+ok_all &= (w_wrong_pair > 1e-2)
+
+print("check_01:", "PASS" if ok_all else "FAIL")
