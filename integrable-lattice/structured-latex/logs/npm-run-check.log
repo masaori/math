@@ -1,0 +1,113 @@
+# integrable-lattice/structured-latex — npm run check の実行ログ
+
+実行日: 2026-07-26
+実行ディレクトリ: integrable-lattice/structured-latex
+node: v22.22.3 / pnpm: 10.33.2
+
+```
+
+> @integrable-lattice/structured-latex@0.1.0 check
+> npm run check:generated && npm run typecheck && npm run validate && npm run test:types && npm run test:runtime
+
+
+> @integrable-lattice/structured-latex@0.1.0 check:generated
+> node tools/generate-index.ts --check
+
+generated files are up to date (2 labels, 1 content + 1 notes files)
+
+> @integrable-lattice/structured-latex@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @integrable-lattice/structured-latex@0.1.0 validate
+> node tools/validate-content.ts
+
+validated 3 blocks from 1 files (1 headings, 2 labels, 1 refs, all resolved)
+notes: 1件（内部参照用・出版物には載らない） from 1 files (1 targets, all resolved)
+linkage: SageMath 検証 1 件（全て実在）、Lean 定理 0 件
+ℝ/ℂ への脱出を宣言しているブロック: 1 件
+  - scaffold_002_claim_placeholder [mixed] 足場としての例示のみ。可算な対象（Λ の元）を扱いながら、指数評価のために一度だけ 実数の順序完備性を使う、という形の脱…
+
+> @integrable-lattice/structured-latex@0.1.0 test:types
+> node tools/negative-type-test.ts
+
+✓ 本文中の ref が存在しないラベルを指す
+    type-tests/.tmp/case0_broken/fixture.ts(11,40): error TS2345: Argument of type '"scaffold_claim_placeholder__does_not_exist"' is not assignable to parameter of type '"scaffold_claim_placeholder" | "scaffold_def_placeholder"'.
+✓ ノートの targets が存在しないラベルを指す
+    type-tests/.tmp/case1_broken/fixture.ts(8,15): error TS2322: Type '"scaffold_claim_placeholder__does_not_exist"' is not assignable to type '"scaffold_claim_placeholder" | "scaffold_def_placeholder"'.
+✓ ブロックが未登録のラベルを宣言する（生成物の再生成漏れ）
+    type-tests/.tmp/case2_broken/fixture.ts(9,14): error TS2322: Type '"scaffold_claim_placeholder__does_not_exist"' is not assignable to type '"scaffold_claim_placeholder" | "scaffold_def_placeholder"'.
+✓ 同一ファイル内でブロック id が重複する
+    type-tests/.tmp/case3_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_dup_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: []; habitat: "Lambda"; statement: []; }, { id: "neg_dup_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: []; habitat: "Lambda"; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_dup_a"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 1; readonly labels: readonly []; readonly habitat: "Lambda"; readonly statement: readonly []; }, { ...; }] & readonly ConvertedBlock[] & { ...; }'.
+✓ 同一ファイル内でラベルが重複する
+    type-tests/.tmp/case4_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_lbl_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: ["scaffold_claim_placeholder"]; habitat: "Lambda"; statement: []; }, { id: "neg_lbl_b"; kind: "claim"; ... 4 more ...; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_lbl_a"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 1; readonly labels: readonly ["scaffold_claim_placeholder"]; readonly habitat: "Lambda"; readonly statement: readonly []; }, { ...; }] & readonly ConvertedBlock[] & { ...; }'.
+✓ 同一ファイル内でノート id が重複する
+    type-tests/.tmp/case5_broken/fixture.ts(5,28): error TS2345: Argument of type '[{ id: "note_neg_dup_a"; targets: ["scaffold_claim_placeholder"]; body: []; }, { id: "note_neg_dup_a"; targets: ["scaffold_claim_placeholder"]; body: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "note_neg_dup_a"; readonly targets: readonly ["scaffold_claim_placeholder"]; readonly body: readonly []; }, { readonly id: "note_neg_dup_a"; readonly targets: readonly ["scaffold_claim_placeholder"]; readonly body: readonly []; }] & readonly Note[] & { ...; }'.
+✓ ファイルを跨いでブロック id が重複する
+    type-tests/.tmp/case6_broken/fixture.ts(17,49): error TS2344: Type '"neg_cross_a"' does not satisfy the constraint 'never'.
+✓ ファイルを跨いでラベルが重複する
+    type-tests/.tmp/case7_broken/fixture.ts(18,47): error TS2344: Type '"scaffold_claim_placeholder"' does not satisfy the constraint 'never'.
+✓ ノート id がブロック id と衝突する
+    type-tests/.tmp/case8_broken/fixture.ts(20,48): error TS2344: Type '"neg_collide_block"' does not satisfy the constraint 'never'.
+✓ 見出しブロックが本文を持つ
+    type-tests/.tmp/case9_broken/fixture.ts(6,3): error TS2322: Type '{ id: string; kind: "heading"; level: 2; sourcePath: string; sourceOrdinal: number; title: { text: string; }; labels: never[]; statement: ParagraphNode[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 定理型ブロックが見出し専用の level を持つ
+    type-tests/.tmp/case10_broken/fixture.ts(12,5): error TS2322: Type 'number' is not assignable to type 'HeadingLevel | undefined'.
+✓ 見出しの level が 1〜6 の範囲外
+    type-tests/.tmp/case11_broken/fixture.ts(7,5): error TS2322: Type '7' is not assignable to type 'HeadingLevel | undefined'.
+✓ タイトルが text も tex も持たない
+    type-tests/.tmp/case12_broken/fixture.ts(12,5): error TS2322: Type '{}' is not assignable to type '{ text: string; tex?: string | undefined; } | { text?: string | undefined; tex: string; } | null | undefined'.
+✓ conversion.status が想定外の値
+    type-tests/.tmp/case13_broken/fixture.ts(12,19): error TS2820: Type '"convertd"' is not assignable to type 'ConversionStatus'. Did you mean '"converted"'?
+✓ フィールド名の打ち間違い（proof → proofs）
+    type-tests/.tmp/case14_broken/fixture.ts(12,5): error TS2345: Argument of type '[{ id: "neg_typo"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: []; habitat: "Lambda"; statement: []; proofs: [ParagraphNode]; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_typo"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 1; readonly labels: readonly []; readonly habitat: "Lambda"; readonly statement: readonly []; readonly proofs: readonly [...]; }] & readonly ConvertedBlock[]'.
+✓ sourceOrdinal が整数でない
+    type-tests/.tmp/case15_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_ordinal"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 2.5; labels: []; habitat: "Lambda"; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_ordinal"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 2.5; readonly labels: readonly []; readonly habitat: "Lambda"; readonly statement: readonly []; }] & readonly ConvertedBlock[] & { ...; }'.
+✓ sourceOrdinal が 0 以下
+    type-tests/.tmp/case16_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_ordinal_zero"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 0; labels: []; habitat: "Lambda"; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_ordinal_zero"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 0; readonly labels: readonly []; readonly habitat: "Lambda"; readonly statement: readonly []; }] & readonly ConvertedBlock[] & { ...; }'.
+✓ ノートの targets が空
+    type-tests/.tmp/case17_broken/fixture.ts(8,5): error TS2322: Type '[]' is not assignable to type 'readonly ["scaffold_claim_placeholder" | "scaffold_def_placeholder", ...("scaffold_claim_placeholder" | "scaffold_def_placeholder")[]]'.
+✓ 【固有】本文ブロックが habitat を宣言していない
+    type-tests/.tmp/case18_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; sourcePath: string; sourceOrdinal: number; labels: never[]; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】habitat が未知の値（住処の綴り違い）
+    type-tests/.tmp/case19_broken/fixture.ts(10,5): error TS2820: Type '"Lamda"' is not assignable to type 'CountableHabitat | EscapingHabitat | undefined'. Did you mean '"Lambda"'?
+✓ 【固有】可算な habitat（Z）なのに realEscape を書いている
+    type-tests/.tmp/case20_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; sourcePath: string; sourceOrdinal: number; labels: never[]; habitat: "Z"; statement: never[]; realEscape: string; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】非可算な habitat（R）なのに realEscape が無い
+    type-tests/.tmp/case21_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; sourcePath: string; sourceOrdinal: number; labels: never[]; habitat: "R"; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】mixed なのに realEscape が無い
+    type-tests/.tmp/case22_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; sourcePath: string; sourceOrdinal: number; labels: never[]; habitat: "mixed"; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】見出しブロックが habitat を持つ
+    type-tests/.tmp/case23_broken/fixture.ts(12,5): error TS2322: Type 'string' is not assignable to type 'CountableHabitat | EscapingHabitat | undefined'.
+✓ 【固有】verification が文字列の配列でない
+    type-tests/.tmp/case24_broken/fixture.ts(12,5): error TS2322: Type 'string' is not assignable to type 'readonly string[]'.
+✓ 【固有】lean が文字列の配列でない
+    type-tests/.tmp/case25_broken/fixture.ts(12,5): error TS2322: Type 'string' is not assignable to type 'readonly string[]'.
+
+すべての負テストが期待どおり: 誤った入力は tsc が拒否する（26 件）
+
+> @integrable-lattice/structured-latex@0.1.0 test:runtime
+> node tools/schema-runtime-test.ts
+
+✓ ブロックの未知フィールド（proof の打ち間違い）を拒む
+✓ 本文ブロックの notes を拒む（注記は notes/ へ）
+✓ 見出しに本文があれば拒む
+✓ 見出しに habitat があれば拒む（見出しは量を扱わない）
+✓ ノートの未知フィールドを拒む
+✓ 定理型ブロックに level があれば拒む（見出しとの取り違え）
+✓ ノートの targets が空なら拒む
+✓ conversion.status が想定外の値なら拒む
+✓ タイトルが text も tex も持たないなら拒む
+✓ sourceOrdinal が整数でないなら拒む
+✓ ノードの type が不正なら拒む
+✓ 【固有】本文ブロックに habitat が無ければ拒む
+✓ 【固有】habitat が未知の値なら拒む
+✓ 【固有】可算な habitat に realEscape があれば拒む
+✓ 【固有】非可算な habitat に realEscape が無ければ拒む
+✓ 【固有】realEscape が空文字なら拒む（脱出箇所を具体的に書かせる）
+✓ 【固有】verification が配列でなければ拒む
+✓ 【固有】lean の要素が文字列でなければ拒む
+
+実行時検証テスト 18 件すべて期待どおり
+exit=0
+```

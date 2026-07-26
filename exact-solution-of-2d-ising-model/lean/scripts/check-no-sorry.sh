@@ -335,6 +335,27 @@ targets=(
   Ising2D.TV_psiDag
   Ising2D.TV_psi
   Ising2D.TV_psiDag_psi
+  Ising2D.Abstract.acomm_sum_smul_clifford_left
+  Ising2D.Abstract.linearIndependent_of_clifford_abstract
+  Ising2D.smul_one_faithful_tensorPow
+  Ising2D.ZY_linearIndependent_of_abstract
+  Ising2D.Abstract.sum_zpow_primitiveRoot
+  Ising2D.zetaM
+  Ising2D.isPrimitiveRoot_zetaM
+  Ising2D.zetaM_ne_zero
+  Ising2D.expPhase_eq_zetaM_zpow
+  Ising2D.expPhase_eq_zetaM_zpow_neg
+  Ising2D.expPhase_sum_of_abstract
+  Ising2D.Abstract.acomm_sum_smul_clifford_abstract
+  Ising2D.Abstract.acomm_fourier_clifford_weights
+  Ising2D.Abstract.acomm_fourier_clifford
+  Ising2D.Abstract.acomm_fourier_clifford_flip
+  Ising2D.hatZ_eq_weighted_zetaM
+  Ising2D.hatY_eq_weighted_zetaM
+  Ising2D.deltaMod_eq_ite_neg
+  Ising2D.acomm_hatZ_hatZ_same_of_abstract
+  Ising2D.acomm_hatY_hatY_of_abstract
+  Ising2D.acomm_hatZPlus_hatZMinus_of_abstract
 )
 
 {
