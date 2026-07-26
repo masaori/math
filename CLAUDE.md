@@ -72,6 +72,8 @@
   （初回のみ `cd structured-latex && pnpm install`。Node 22.18 以降が必要）
   - 型検査で落ちるもの: 存在しないラベルへの `ref` / ノートの `targets`、未登録ラベルの宣言、
     見出しへの本文混入、本文ブロックの `notes`
+  - **`.mjs` のままの content / notes も型検査される**（`checkJs`）。ラベルを増減したら
+    `node structured-latex/tools/generate-labels.ts` で `labels.generated.ts` を再生成する
 - `node structured-latex/tools/validate-content.mjs` — スキーマ・ラベル重複・**未解決参照**・
   ノートの **未解決 targets** を検査（content と notes の両方。実体は `validate-content.ts`）
 - `node structured-latex/tools/verify-no-lost-proofs.mjs` — **移行漏れ**（`_old/typst` の原本に証明が

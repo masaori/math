@@ -34,7 +34,11 @@ The original `.typ` files remain untouched.
 
 ### 移行状況
 
-`content/` と `notes/` は現在まだ `.mjs`（型検査の対象外。誤りは実行時検証で捕まる）。
+`content/` と `notes/` は現在まだ `.mjs` だが、**`.mjs` のままでも上表の検査は効く**。
+`tsconfig.mjs-content.json`（`allowJs` + `checkJs`）で JS のまま型検査しており、
+`schema.mjs` が `schema.ts` の再エクスポートであるため型が流れ込むためである
+（`npm run typecheck:mjs`。負テストの 3 件目がこの経路を実証する）。
+`.mjs` は型注釈を書けないぶん検査は弱いので、`.ts` への変換は引き続き行う。
 `.ts` への一括変換は `tools/codemod-mjs-to-ts.ts` で行う（`--apply`。既定は dry-run）。
 変換が済むまでの互換のため `schema.mjs` が `schema.ts` を再エクスポートしている
 （実体は持たない。全変換後に削除する）。

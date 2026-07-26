@@ -31,7 +31,11 @@ const LABEL_RE = /^\*\*対象ラベル\*\*:\s*`([^`]+)`/m;
 /** structured-latex/content の全ブロックが定義するラベル集合を集める。 */
 async function collectContentLabels() {
   const labels = new Set();
-  const files = (await readdir(contentRoot)).filter((f) => f.endsWith(".mjs"));
+  // content は `.mjs` から `.ts` へ移行中（Node 22.18+ は `.ts` を型ストリップで直接読める）。
+  // 型宣言ファイルは値を持たないので除く。
+  const files = (await readdir(contentRoot)).filter(
+    (f) => (f.endsWith(".mjs") || f.endsWith(".ts")) && !f.endsWith(".d.ts"),
+  );
   for (const file of files) {
     const mod = await import(pathToFileURL(join(contentRoot, file)).href);
     for (const exported of Object.values(mod)) {

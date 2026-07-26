@@ -36,6 +36,8 @@ type Case = {
   name: string;
   /** ラベルを埋め込んでソースを作る。 */
   source: (label: string) => string;
+  /** 検査対象のファイル名。`.mjs` は移行前の content と同じ経路（checkJs）で検査する。 */
+  fixtureName?: string;
 };
 
 const cases: Case[] = [
@@ -69,6 +71,23 @@ export default defineNotes([
 `,
   },
   {
+    name: "未変換の .mjs でも ref のラベル誤りを検出する（移行前でも型で守られる）",
+    fixtureName: "fixture.mjs",
+    source: (label) => `import { defineBlocks, paragraph, ref } from "../../schema.mjs";
+
+export default defineBlocks([
+  {
+    id: "negative_type_test_mjs",
+    kind: "claim",
+    sourcePath: "type-tests/.tmp",
+    sourceOrdinal: 1,
+    labels: [],
+    statement: [paragraph([ref(${JSON.stringify(label)})])],
+  },
+]);
+`,
+  },
+  {
     name: "ブロックが未登録のラベルを宣言する（生成物の再生成漏れ）",
     source: (label) => `import { defineBlocks } from "../../schema.ts";
 
@@ -88,26 +107,30 @@ export default defineBlocks([
 
 rmSync(tmpDir, { recursive: true, force: true });
 mkdirSync(tmpDir, { recursive: true });
-writeFileSync(
-  join(tmpDir, "tsconfig.json"),
-  `${JSON.stringify(
-    {
-      extends: "../../tsconfig.json",
-      compilerOptions: { noEmit: true },
-      include: ["fixture.ts"],
-      // 親の exclude（type-tests/.tmp）を打ち消す。ここでは fixture だけを検査する。
-      exclude: [],
-    },
-    null,
-    2,
-  )}\n`,
-  "utf8",
-);
 
 let failed = 0;
 for (const testCase of cases) {
+  const fixtureName = testCase.fixtureName ?? "fixture.ts";
+  // `.mjs` は移行前の content と同じ経路（allowJs + checkJs）で検査する。
+  const base = fixtureName.endsWith(".mjs") ? "../../tsconfig.mjs-content.json" : "../../tsconfig.json";
+  writeFileSync(
+    join(tmpDir, "tsconfig.json"),
+    `${JSON.stringify(
+      {
+        extends: base,
+        compilerOptions: { noEmit: true },
+        include: [fixtureName],
+        // 親の exclude（type-tests/.tmp）を打ち消す。ここでは fixture だけを検査する。
+        exclude: [],
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
+
   // 1. 正しいラベル版はコンパイルが通る（対照）。
-  writeFileSync(join(tmpDir, "fixture.ts"), testCase.source(realLabel), "utf8");
+  writeFileSync(join(tmpDir, fixtureName), testCase.source(realLabel), "utf8");
   const control = runTsc();
   if (control.status !== 0) {
     failed += 1;
@@ -117,7 +140,7 @@ for (const testCase of cases) {
   }
 
   // 2. ラベルを壊すと型検査が落ち、壊したラベル名が診断に出る。
-  writeFileSync(join(tmpDir, "fixture.ts"), testCase.source(brokenLabel), "utf8");
+  writeFileSync(join(tmpDir, fixtureName), testCase.source(brokenLabel), "utf8");
   const broken = runTsc();
   if (broken.status === 0) {
     failed += 1;

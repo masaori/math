@@ -11,8 +11,12 @@
   ブロックの `labels: readonly Label[]` がこの型で縛られる。
 - 型で落ちるようになったもの: 存在しないラベルへの参照・ノートの紐づけ、未登録ラベルの宣言
   （＝生成物の再生成漏れ）、`targets` の空配列、見出しへの本文混入、本文ブロックの `notes`。
+- **未変換の `content/*.mjs` も既に型検査されている**（`tsconfig.mjs-content.json` の
+  `allowJs` + `checkJs`。`schema.mjs` が `schema.ts` の再エクスポートなので型が流れる）。
+  つまり「存在しないラベルへの参照をコンパイル時に落とす」は第2段を待たずに達成済み。
 - 実証: `node tools/negative-type-test.ts`（正しいラベル版が通り、壊した版で tsc が落ち、
-  診断が当該ラベルを指すことまで確認）。回帰は `type-tests/label-typing.test-d.ts`。
+  診断が当該ラベルを指すことまで確認。`.ts` 経路と `.mjs` 経路の両方）。
+  回帰は `type-tests/label-typing.test-d.ts`。CI は `.github/workflows/structured-latex-check.yml`。
 - ツールも TS 化（`validate-content.ts` / `verify-no-lost-proofs.ts` / `extract-source-blocks.ts`）。
   CLAUDE.md が案内する `.mjs` のコマンドは同名の互換入口として残してある。
   `extract-source-blocks` は原本の退避（`_old/typst/`）に追随していなかったので参照先を直した。

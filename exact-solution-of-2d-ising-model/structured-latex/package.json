@@ -8,9 +8,10 @@
     "gen:labels": "node tools/generate-labels.ts",
     "check:labels": "node tools/generate-labels.ts --check",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:mjs": "tsc -p tsconfig.mjs-content.json --noEmit",
     "validate": "node tools/validate-content.ts",
     "test:types": "node tools/negative-type-test.ts",
-    "check": "npm run check:labels && npm run typecheck && npm run validate && npm run test:types"
+    "check": "npm run check:labels && npm run typecheck && npm run typecheck:mjs && npm run validate && npm run test:types"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
