@@ -84,6 +84,159 @@ export default defineBlocks([
     ],
   },
   {
+    id: "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    kind: "claim",
+    sourcePath: "structured-latex/content/000_calculation_formulae_00_09.mjs",
+    sourceOrdinal: 1,
+    title: { tex: String.raw`\cosh,\ \sinh\text{ の基本性質}` },
+    labels: ["cosh_sinh_basic_properties"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " について、実数値の指数関数 ",
+        math(String.raw`\exp : \mathbb{R} \to \mathbb{R}_{>0}`),
+        " を用いて",
+      ]),
+      displayMath(
+        String.raw`\cosh x := \frac{\exp(x) + \exp(-x)}{2} \in \mathbb{R}, \qquad
+\sinh x := \frac{\exp(x) - \exp(-x)}{2} \in \mathbb{R}`,
+      ),
+      paragraph(["と定める（", math(String.raw`\exp(x) := e^x`), " とも書く）。このとき次が成り立つ。"]),
+      list([
+        [
+          "(1) ",
+          math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
+          " かつ ",
+          math(String.raw`\cosh x + \sinh x = \exp(x) > 0`),
+          "。特に ",
+          math(String.raw`\cosh x > 0`),
+          " かつ ",
+          math(String.raw`\cosh x > \sinh x`),
+          "。",
+        ],
+        ["(2) ", math(String.raw`(\cosh x)^2 - (\sinh x)^2 = 1`), "。"],
+        [
+          "(3) ",
+          math(String.raw`x > 0`),
+          " ならば ",
+          math(String.raw`\cosh x > \sinh x > 0`),
+          "。",
+        ],
+        [
+          "(4) ",
+          math(String.raw`a, b \in \mathbb{R}_{>0}`),
+          " について ",
+          math(String.raw`a^2 = b^2 \iff a = b`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        "ここで ",
+        math(String.raw`\exp`),
+        " については、実数の指数関数の基本性質として ",
+        math(String.raw`\exp(x)\exp(y) = \exp(x+y)`),
+        "、",
+        math(String.raw`\exp(0) = 1`),
+        "、",
+        math(String.raw`\exp(x) > 0`),
+        "、および ",
+        math(String.raw`\exp`),
+        " が狭義単調増加であること（",
+        math(String.raw`x < y \Rightarrow \exp(x) < \exp(y)`),
+        "）のみを用いる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(1) の証明。定義より直ちに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x - \sinh x
+&= \frac{\exp(x) + \exp(-x)}{2} - \frac{\exp(x) - \exp(-x)}{2}
+= \frac{2\exp(-x)}{2} = \exp(-x) \\
+\cosh x + \sinh x
+&= \frac{\exp(x) + \exp(-x)}{2} + \frac{\exp(x) - \exp(-x)}{2}
+= \frac{2\exp(x)}{2} = \exp(x)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\exp(\pm x) > 0`),
+        " である。特に ",
+        math(String.raw`2\cosh x = (\cosh x - \sinh x) + (\cosh x + \sinh x) = \exp(-x) + \exp(x) > 0`),
+        " より ",
+        math(String.raw`\cosh x > 0`),
+        "、また ",
+        math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
+        " より ",
+        math(String.raw`\cosh x > \sinh x`),
+        "。",
+      ]),
+      paragraph(["(2) の証明。(1) の 2 式の積をとると、"]),
+      displayMath(
+        String.raw`(\cosh x)^2 - (\sinh x)^2
+= (\cosh x - \sinh x)(\cosh x + \sinh x)
+= \exp(-x)\exp(x)
+= \exp(-x + x)
+= \exp(0)
+= 1`,
+      ),
+      paragraph([
+        "(3) の証明。",
+        math(String.raw`x > 0`),
+        " のとき ",
+        math(String.raw`-x < 0 < x`),
+        " であり、",
+        math(String.raw`\exp`),
+        " は狭義単調増加であるから ",
+        math(String.raw`\exp(-x) < \exp(0) = 1 < \exp(x)`),
+        "。よって ",
+        math(String.raw`\exp(x) - \exp(-x) > 0`),
+        " すなわち ",
+        math(String.raw`\sinh x = \dfrac{\exp(x) - \exp(-x)}{2} > 0`),
+        "。(1) より ",
+        math(String.raw`\cosh x > \sinh x`),
+        " であるから ",
+        math(String.raw`\cosh x > \sinh x > 0`),
+        "。",
+      ]),
+      paragraph([
+        "(4) の証明。",
+        math(String.raw`a = b`),
+        " ならば ",
+        math(String.raw`a^2 = b^2`),
+        " は明らか。逆に ",
+        math(String.raw`a^2 = b^2`),
+        " とすると ",
+        math(String.raw`(a - b)(a + b) = a^2 - b^2 = 0`),
+        " であり、",
+        math(String.raw`a, b > 0`),
+        " より ",
+        math(String.raw`a + b > 0`),
+        " すなわち ",
+        math(String.raw`a + b \neq 0`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " は整域であるから ",
+        math(String.raw`a - b = 0`),
+        " すなわち ",
+        math(String.raw`a = b`),
+        "。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。cosh, sinh の定義から直ちに従う基本性質" +
+          "（cosh - sinh = e^{-x} > 0、cosh^2 - sinh^2 = 1、x>0 での正値性、正実数の自乗の単射性）は、" +
+          "008_TV1_hatZ_hatY_part2 の γ_1 の偏角・臨界条件 c_1 = s_1 c_2 ⟺ s_1 s_2 = 1 の証明で必要になるが、" +
+          "従来どのブロックにも主張として置かれていなかったため、cosh, sinh の積公式" +
+          "（calc_formulae_000_cosh_sinh_product）の直後に追加した。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_001_sqrt_nonnegative_real",
     kind: "definition",
     sourcePath: "_old/typst/parts/000_計算公式/001_definition_非負実数のsqrt.typ",
