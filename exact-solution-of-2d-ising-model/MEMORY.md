@@ -1,5 +1,45 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26）: 転送行列 V1/V2 の定義と共役作用 T_g / T_V を Lean で形式化
+
+新規ファイル 2 つ（`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+- `lean/Ising2D/Part004/Definition010_H1H2V1V2.lean`
+  - `H1 η`（`Y_m Z_{m+1}` の和、最終項の符号を `η : ℂ` で持つ）と `H2`。
+    site 添字の巡回は `Fin M` の加法（`NeZero M` を要求する）を避け、
+    自前の `nextSite m = ⟨(m+1) % M, _⟩` で表す（`M` に追加仮定を置かないため）
+  - `V1`, `V1half`, `V2`（`(2s_2)^{M/2}` は `Real.rpow`）と、その可逆性
+    （`V1Units` / `V1halfUnits` / `V2Units`。`V_2` のスカラー因子が 0 でないために `s_2 > 0` が要る）
+- `lean/Ising2D/Part008/Definition016_TV.lean`
+  - `TConj g`（原文 `def_T_g`）を **ℂ-代数自己同型**として構成（既存の
+    `Ising2D.Conjugation.*` を再利用し、`commutes'` だけ足した）
+  - `TV g1 g2`（原文 `def_T_V`）と `TV_eq_TConj : T_{(V)} = T_{g_1 g_2 g_1}`、
+    ℂ-線型性・乗法性・単位性
+  - 行ベクトル記法 `(T z, T y) = (z, y) B` の述語 `ActsBy` と合成則 `ActsBy.comp`、
+    および**固有ベクトル移送の一般補題 `ActsBy.eigen`**（後段で ψ が V の固有ベクトルで
+    あることを導く鍵）
+  - 行列等式 `B_1(θ) B_2 B_1(θ) = A(θ)` を証明（`B1_mul_B2_mul_B1_eq_Amat`）
+  - 原文 `T_V_hatZ_hatY` は、`B_1`, `B_2` の作用（`parts 008` の 001〜005 のテイラー係数
+    抽出に依存し未形式化）を**明示的な仮定 `hT1`, `hT2`** として持つ定理
+    `TV_hatZ_hatY_of_action` の形で述べた。仮定から先は完全に証明済み
+
+### 形式化で見つかった原文の問題（原文は書き換えていない）
+
+1. **`V_2` の 2 つの表式の一致が未説明。**
+   `transfer_matrix_001_definition_symbols` は `V_2 = (2 sinh 2K_2)^{M/2} exp(K_2^*(σ^x_1+⋯+σ^x_M))`、
+   `transfer_matrix_011_definition_H1_H2` は `V_2 = (2s_2)^{M/2} exp(√-1 K_2^* H_2)` と書くが、
+   一致には `√-1 Z_m Y_m = σ^x_m`（`Z_m Y_m = -√-1 σ^x_m` から従う）が要る。原文は「よって、」
+   とだけ書いて根拠を示していない。Lean では `I_smul_H2_eq_sum_sigmaX` として補って証明した。
+2. **`A(θ)` に `c_2` が現れるのに、その出所（双対関係）が明示されていない。**
+   `def_A_theta` の非対角成分は `s_2^*(c_1 cos θ ∓ i sin θ - s_1 c_2)` だが、
+   `B_1(θ) B_2 B_1(θ)` を計算して同じ位置に出るのは `c_2^*` である。両者が一致するには
+   `c_2^* = s_2^* c_2`（`sinh 2K_2 · sinh 2K_2^* = 1` から従う）が必要。原文は
+   `def_A_theta` でも `T_V_hatZ_hatY` の証明でもこの等式に触れていない。
+   Lean では `B1_mul_B2_mul_B1_eq_Amat` の仮定 `hdual : s_2^* c_2 = c_2^*` として明示した。
+3. **`(V_1^{(±)})^{1/2}` の意味が未定義。** 原文は `exp(X)^{1/2}` を無断で `exp(X/2)` と
+   読み替えているが、一般に行列の平方根は一意でない。Lean では `V1half := exp(X/2)` を定義とし、
+   `V1half_sq : V1half^2 = V1` を証明して「平方根であること」を確認した。
+
 ## 完了（2026-07-25）: データモデルの穴を塞いだ（本文ブロックは注記欄を持てない）
 
 ノート分離の狙いは「最終成果物は content のみから生成するので、ノートは構造上混入しない」こと。
