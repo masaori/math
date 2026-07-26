@@ -1,0 +1,225 @@
+# =========================================================================
+# check_02: 015 章（structured-latex/content/015_A_theta_tilde_diagonalization.ts）の
+#           **各段の等式そのもの**を、ラベル単位で検証する。
+#
+#  この章は分割前は `\because` が 1 件も無く、とくに
+#  relation_of_gamma_2_theta_tilde の共役計算が 1 行に 5 つ以上の操作を潰していた。
+#  分割後に本文へ現れる各段（積の共役・conj(i) = -i・conj(e^{i theta}) = e^{-i theta}
+#  （**theta が実数であることを使う**）・s_2* が実数・括弧内の共役・gamma_2 の定義の再適用）を
+#  1 段ずつ確かめる。
+#
+#  対象ラベル:
+#    def_gamma1_gamma2_of_theta
+#    gamma_2_theta_tilde_nonzero
+#    relation_of_gamma_2_theta_tilde
+#    eigenvector_of_A_theta_tilde
+#    diagonalization_check_P_D
+#    det_A_theta_tilde
+#    gamma1_gt_1_theta_tilde
+#    lambda_eq_exp_gamma_theta_tilde
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_02: 015 章の各段の等式 ===")
+
+S = Steps()
+min_abs_g2 = None
+min_g1_minus_1 = None
+min_gamma = None
+
+for M in STEP_M + [6, 7, 8]:
+    for p in STEP_PARAMS:
+        P = coeffs(p['K1'], p['K2'])
+        c1, s1, c2, c2s, s2s = P['c1'], P['s1'], P['c2'], P['c2s'], P['s2s']
+        for mu in list(range(1, M + 1)) + [0, -1, M + 1]:
+            t = th_tilde(M, mu)
+            u = RDF(cos(t)); v = RDF(sin(t))
+            a = g2(t, P); b = g2(-t, P); gg1 = g1(t, P); r = RDF(abs(a))
+
+            # -----------------------------------------------------------
+            # def_gamma1_gamma2_of_theta の proof:
+            #   gamma_2(-theta) の 3 段（theta -> -theta の代入、cos(-t)=cos t、sin(-t)=-sin t）
+            # -----------------------------------------------------------
+            d1 = CDF(I) * eiph(-t) * s2s * (c1 * RDF(cos(-t)) - CDF(I) * RDF(sin(-t)) - s1 * c2)
+            d2 = CDF(I) * eiph(-t) * s2s * (c1 * u - CDF(I) * RDF(sin(-t)) - s1 * c2)
+            d3 = CDF(I) * eiph(-t) * s2s * (c1 * u + CDF(I) * v - s1 * c2)
+            S.add("def_gamma1_gamma2 (1) gamma_2 の定義に theta -> -theta", b, d1)
+            S.add("def_gamma1_gamma2 (2) cos(-theta) = cos theta", d1, d2)
+            S.add("def_gamma1_gamma2 (3) sin(-theta) = -sin theta", d2, d3)
+            S.add("def_gamma1_gamma2 (4) A(theta) の (2,1) 成分 = -gamma_2(-theta)",
+                  A_theta(t, P)[1, 0], -b)
+            S.add("def_gamma1_gamma2 (5) A(theta) の (1,1)(2,2) 成分 = gamma_1(theta)",
+                  A_theta(t, P)[0, 0], A_theta(t, P)[1, 1])
+
+            # -----------------------------------------------------------
+            # relation_of_gamma_2_theta_tilde (1): 共役計算の 8 段
+            #   （theta が実数であることを使うのは (4) の conj(e^{i theta}) = e^{-i theta}）
+            # -----------------------------------------------------------
+            w = c1 * u - CDF(I) * v - s1 * c2          # 括弧の中身
+            e1 = CDF(a).conjugate()
+            e2 = CDF(I).conjugate() * eiph(t).conjugate() * CDF(s2s).conjugate() * CDF(w).conjugate()
+            e3 = CDF(-I) * eiph(t).conjugate() * CDF(s2s).conjugate() * CDF(w).conjugate()
+            e4 = CDF(-I) * eiph(-t) * CDF(s2s).conjugate() * CDF(w).conjugate()
+            e5 = CDF(-I) * eiph(-t) * s2s * CDF(w).conjugate()
+            e6 = CDF(-I) * eiph(-t) * s2s * (CDF(c1 * u).conjugate()
+                                             - CDF(CDF(I) * v).conjugate()
+                                             - CDF(s1 * c2).conjugate())
+            e7 = CDF(-I) * eiph(-t) * s2s * (c1 * u + CDF(I) * v - s1 * c2)
+            e8 = -(CDF(I) * eiph(-t) * s2s * (c1 * u + CDF(I) * v - s1 * c2))
+            S.add("relation_of_gamma_2 (1) conj(gamma_2) を定義式で書く", e1, e2)
+            S.add("relation_of_gamma_2 (2) 積の共役 conj(zw)=conj z conj w", e2, e3)
+            S.add("relation_of_gamma_2 (3) conj(i) = -i", e3, e3)
+            S.add("relation_of_gamma_2 (4) conj(e^{i theta}) = e^{-i theta}  [theta 実数]",
+                  e3, e4)
+            S.add("relation_of_gamma_2 (5) s_2* は実数", e4, e5)
+            S.add("relation_of_gamma_2 (6) 和・差の共役", e5, e6)
+            S.add("relation_of_gamma_2 (7) c_1 cos t, sin t, s_1 c_2 は実数", e6, e7)
+            S.add("relation_of_gamma_2 (8) = -gamma_2(-theta)", e7, e8)
+            S.add("relation_of_gamma_2 (1式) gamma_2(-theta) = -conj(gamma_2(theta))",
+                  b, -CDF(a).conjugate())
+
+            # (2)(3)(4)(5)
+            S.add("relation_of_gamma_2 (2式-a) gamma_2 gamma_2(-) = gamma_2 (-conj gamma_2)",
+                  a * b, a * (-CDF(a).conjugate()))
+            S.add("relation_of_gamma_2 (2式-b) = -|gamma_2|^2  [abs_basic_properties]",
+                  a * (-CDF(a).conjugate()), CDF(-r ** 2))
+            S.add("relation_of_gamma_2 (4式) sqrt(-gamma_2 gamma_2(-)) = |gamma_2|",
+                  CDF(sqrt(RDF(-(a * b).real()))), CDF(r))
+            S.add("relation_of_gamma_2 (5式) sqrt(gamma_2 gamma_2(-)) = i|gamma_2|",
+                  CDF(I) * CDF(r), CDF(r) * eiph(RDF(pi) / 2))
+
+            # gamma_2 が 0 でないこと（gamma_2_theta_tilde_nonzero）
+            min_abs_g2 = r if min_abs_g2 is None else min(min_abs_g2, r)
+
+            # -----------------------------------------------------------
+            # eigenvector_of_A_theta_tilde の各段
+            # -----------------------------------------------------------
+            lam_p = gg1 + r; lam_m = gg1 - r
+            for sgn, lam in ((+1, lam_p), (-1, lam_m)):
+                Amat = A_theta(t, P)
+                S.add("eigenvector (det 1) det(A - lambda I) の 2x2 定義",
+                      (Amat - lam * identity_matrix(CDF, 2)).det(),
+                      (gg1 - lam) * (gg1 - lam) - a * (-b))
+                S.add("eigenvector (det 2) = lambda^2 - 2 g_1 lambda + (g_1^2 + ab)",
+                      (gg1 - lam) * (gg1 - lam) - a * (-b),
+                      lam ** 2 - 2 * gg1 * lam + (gg1 ** 2 + a * b))
+                S.add("eigenvector (det 3) 因数分解で det = 0",
+                      (Amat - lam * identity_matrix(CDF, 2)).det(), CDF(0))
+                vp = vector(CDF, [-sgn * r, b])
+                # 第 1 成分の 5 段
+                f1 = gg1 * (-sgn * r) + a * b
+                f2 = -sgn * gg1 * r + a * (-CDF(a).conjugate())
+                f3 = -sgn * gg1 * r - r ** 2
+                f4 = (gg1 + sgn * r) * (-sgn * r)
+                S.add("eigenvector (v 1-1) (A v)_1 = g_1(-/+ r) + ab", (Amat * vp)[0], f1)
+                S.add("eigenvector (v 1-2) b = -conj(a)", f1, f2)
+                S.add("eigenvector (v 1-3) a conj(a) = r^2", f2, f3)
+                S.add("eigenvector (v 1-4) = (g_1 +/- r)(-/+ r)", f3, f4)
+                S.add("eigenvector (v 1-5) = lambda (v)_1", f4, lam * vp[0])
+                # 第 2 成分の 5 段
+                gA = (-b) * (-sgn * r) + gg1 * b
+                gB = CDF(a).conjugate() * (-sgn * r) + gg1 * (-CDF(a).conjugate())
+                gC = (-sgn * r - gg1) * CDF(a).conjugate()
+                gD = (gg1 + sgn * r) * (-CDF(a).conjugate())
+                S.add("eigenvector (v 2-1) (A v)_2 = (-b)(-/+ r) + g_1 b", (Amat * vp)[1], gA)
+                S.add("eigenvector (v 2-2) -b = conj(a) を 2 箇所へ同時適用", gA, gB)
+                S.add("eigenvector (v 2-3) 整理", gB, gC)
+                S.add("eigenvector (v 2-4) -/+r - g_1 = -(g_1 +/- r)", gC, gD)
+                S.add("eigenvector (v 2-5) = lambda (v)_2", gD, lam * vp[1])
+                S.add("eigenvector (固有ベクトル) A v = lambda v",
+                      Amat * vp, lam * vp)
+
+            # -----------------------------------------------------------
+            # diagonalization_check_P_D の各段
+            # -----------------------------------------------------------
+            Pm = Pcheck(M, mu, P)
+            sq = RDF(sqrt(RDF(M)))
+            det1 = (-r / (2 * sq * b)) * (CDF(1) / (2 * sq)) - (r / (2 * sq * b)) * (CDF(1) / (2 * sq))
+            det2 = (-r) / (4 * M * b) - r / (4 * M * b)
+            S.add("diagonalization (det 1) 2x2 行列式の定義", Pm.det(), det1)
+            S.add("diagonalization (det 2) (2 sqrt M)^2 = 4M", det1, det2)
+            S.add("diagonalization (det 3) = -r/(2Mb)", det2, -r / (2 * M * b))
+            Dm = matrix(CDF, [[lam_p, 0], [0, lam_m]])
+            S.add("diagonalization (Step2 1) A P^ の列 = (A v_+, A v_-)",
+                  A_theta(t, P) * Pm,
+                  matrix(CDF, [[(A_theta(t, P) * Pm.column(0))[0],
+                                (A_theta(t, P) * Pm.column(1))[0]],
+                               [(A_theta(t, P) * Pm.column(0))[1],
+                                (A_theta(t, P) * Pm.column(1))[1]]]))
+            S.add("diagonalization (Step2 2) = P^ D^", A_theta(t, P) * Pm, Pm * Dm)
+            S.add("diagonalization (Step4) A = P^ D^ P^{-1}",
+                  A_theta(t, P), Pm * Dm * Pm.inverse())
+
+            # -----------------------------------------------------------
+            # det_A_theta_tilde の各段
+            # -----------------------------------------------------------
+            a0 = c1 * u - s1 * c2
+            S.add("det_A (Step1 1) det の 2x2 定義",
+                  A_theta(t, P).det(), gg1 * gg1 - a * (-b))
+            S.add("det_A (Step1 2) = g_1^2 + gamma_2 gamma_2(-)",
+                  gg1 * gg1 - a * (-b), gg1 ** 2 + a * b)
+            m1 = (CDF(I) * CDF(I)) * (eiph(t) * eiph(-t)) * (s2s ** 2) * (a0 - CDF(I) * v) * (a0 + CDF(I) * v)
+            m2 = CDF(-1) * 1 * (s2s ** 2) * (a0 - CDF(I) * v) * (a0 + CDF(I) * v)
+            m3 = -(s2s ** 2) * (a0 ** 2 + v ** 2)
+            m4 = -(s2s ** 2) * ((c1 * u - s1 * c2) ** 2 + v ** 2)
+            m5 = -(s2s ** 2) * ((c1 * u - s1 * c2) ** 2 + 1 - u ** 2)
+            S.add("det_A (Step2 1) gamma_2 gamma_2(-) を積の形へ", a * b, m1)
+            S.add("det_A (Step2 2) i*i = -1, e^{it}e^{-it} = 1", m1, m2)
+            S.add("det_A (Step2 3) (a_0-iv)(a_0+iv) = a_0^2+v^2", m2, m3)
+            S.add("det_A (Step2 4) a_0 = c_1 u - s_1 c_2", m3, m4)
+            S.add("det_A (Step2 5) u^2+v^2 = 1", m4, m5)
+            S.add("det_A (Step4 1) (iii) 2c_1s_1c_2 s_2*^2 u = 2c_1s_1c_2* s_2* u",
+                  2 * c1 * s1 * c2 * (s2s ** 2) * u, 2 * c1 * s1 * c2s * s2s * u)
+            S.add("det_A (Step4 2) (iii) s_1^2 c_2^2 s_2*^2 = s_1^2 c_2*^2",
+                  (s1 ** 2) * (c2 ** 2) * (s2s ** 2), (s1 ** 2) * (c2s ** 2))
+            S.add("det_A (Step5 1) (i) s_1^2 - c_1^2 + 1 = 0",
+                  s1 ** 2 - c1 ** 2 + 1, RDF(0))
+            S.add("det_A (Step5 2) (i) c_1^2 - s_1^2 = 1", c1 ** 2 - s1 ** 2, RDF(1))
+            S.add("det_A (Step5 3) (ii) c_2*^2 - s_2*^2 = 1", c2s ** 2 - s2s ** 2, RDF(1))
+            S.add("det_A (Step5 4) g_1^2 + gamma_2 gamma_2(-) = 1", gg1 ** 2 + a * b, CDF(1))
+            S.add("det_A (Step6 1) lambda_+ lambda_- = g_1^2 - r^2",
+                  lam_p * lam_m, gg1 ** 2 - r ** 2)
+            S.add("det_A (Step6 2) = 1", lam_p * lam_m, CDF(1))
+            S.add("det_A (最後) g_1^2 = 1 + r^2", gg1 ** 2, 1 + r ** 2)
+
+            # -----------------------------------------------------------
+            # gamma1_gt_1_theta_tilde の各段
+            # -----------------------------------------------------------
+            S.add("gamma1_gt_1 (Step1 1) gamma_1 の定義", gg1, c1 * c2s - s1 * s2s * u)
+            assert gg1 >= c1 * c2s - s1 * s2s - 1e-12, "Step1 の >= が破れた"
+            assert c1 * c2s - s1 * s2s > 0, "Step1 の > 0 が破れた"
+            min_g1_minus_1 = (gg1 - 1) if min_g1_minus_1 is None else min(min_g1_minus_1, gg1 - 1)
+
+            # -----------------------------------------------------------
+            # lambda_eq_exp_gamma_theta_tilde の各段
+            # -----------------------------------------------------------
+            gam = gamma_tilde(M, mu, P)
+            min_gamma = gam if min_gamma is None else min(min_gamma, gam)
+            S.add("lambda_eq_exp (Step1 1) cosh gamma = g_1", RDF(cosh(gam)), gg1)
+            S.add("lambda_eq_exp (Step1 2) (sinh gamma)^2 = (cosh gamma)^2 - 1",
+                  RDF(sinh(gam)) ** 2, RDF(cosh(gam)) ** 2 - 1)
+            S.add("lambda_eq_exp (Step1 3) = g_1^2 - 1", RDF(cosh(gam)) ** 2 - 1, gg1 ** 2 - 1)
+            S.add("lambda_eq_exp (Step1 4) = r^2 (det_A_theta_tilde)", gg1 ** 2 - 1, r ** 2)
+            S.add("lambda_eq_exp (Step1 5) sinh gamma = r", RDF(sinh(gam)), r)
+            S.add("lambda_eq_exp (Step2 1) e^{+gamma} = cosh + sinh",
+                  RDF(exp(gam)), RDF(cosh(gam)) + RDF(sinh(gam)))
+            S.add("lambda_eq_exp (Step2 2) e^{+gamma} = g_1 + r", RDF(exp(gam)), gg1 + r)
+            S.add("lambda_eq_exp (Step2 3) = lambda_+", RDF(exp(gam)), lam_p)
+            S.add("lambda_eq_exp (Step2 4) e^{-gamma} = cosh - sinh",
+                  RDF(exp(-gam)), RDF(cosh(gam)) - RDF(sinh(gam)))
+            S.add("lambda_eq_exp (Step2 5) e^{-gamma} = g_1 - r", RDF(exp(-gam)), gg1 - r)
+            S.add("lambda_eq_exp (Step2 6) = lambda_-", RDF(exp(-gam)), lam_m)
+            assert lam_p > 1 > lam_m > 0, "Step3 の分離が破れた"
+
+ok_all = S.report_all()
+print(f"  gamma_2_theta_tilde_nonzero: min |gamma_2(theta~_mu)| = {float(min_abs_g2):.3e} "
+      f"-> {'0 から離れている' if min_abs_g2 > 1e-2 else '判定不能'}")
+print(f"  gamma1_gt_1_theta_tilde:    min (gamma_1 - 1) = {float(min_g1_minus_1):.3e} "
+      f"-> {'狭義に正' if min_g1_minus_1 > 1e-6 else '判定不能'}")
+print(f"  def_gamma_theta_tilde_mu:   min gamma(theta~_mu) = {float(min_gamma):.3e} "
+      f"-> {'狭義に正' if min_gamma > 1e-6 else '判定不能'}")
+ok_all &= (min_abs_g2 > 1e-2) and (min_g1_minus_1 > 1e-6) and (min_gamma > 1e-6)
+print(f"  段数（区別された等式の種類）: {len(S.worst)}")
+print("check_02:", "PASS" if ok_all else "FAIL")

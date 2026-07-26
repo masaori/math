@@ -1,6 +1,7 @@
 # ---------------------------------------------------------
 # SageMath: 半整数運動量モードの交換関係と反周期性
-#   e^{-i M theta~_mu} = -1,  checkZ_{mu+M} = checkZ_mu,  theta~_{1-mu} = -theta~_mu
+#   e^{-i M theta~_mu} = -1,  checkZ_{mu+M} = checkZ_mu,
+#   theta~_{M+1-mu} = 2pi - theta~_mu,  checkZ_{M+1-mu} = checkZ_{1-mu}
 #   (A) [H_1^{(+)}, checkZ_mu] =  2 e^{-i theta~} checkY_mu
 #   (B) [H_1^{(+)}, checkY_mu] = -2 e^{ i theta~} checkZ_mu
 #   (C) [H_2,       checkZ_mu] = -2 checkY_mu
@@ -23,7 +24,10 @@ for M in EVEN_CASES_M:
         w['antiper'] = max(w['antiper'], abs(eiph(-M * t) + 1))
         w['period'] = max(w['period'], opnorm(checkZ(O, mu + M) - checkZ(O, mu)),
                           opnorm(checkY(O, mu + M) - checkY(O, mu)))
-        w['conj'] = max(w['conj'], abs(th_tilde(M, 1 - mu) + t))
+        # conjugate_index_of_check_Z_Y (1)(3): 共役添字は M+1-mu で取る（1-mu と同じ値）
+        w['conj'] = max(w['conj'], abs(th_tilde(M, M + 1 - mu) - (CDF(2 * pi) - t)),
+                        opnorm(checkZ(O, M + 1 - mu) - checkZ(O, 1 - mu)),
+                        opnorm(checkY(O, M + 1 - mu) - checkY(O, 1 - mu)))
         cZ = checkZ(O, mu); cY = checkY(O, mu)
         w['A'] = max(w['A'], opnorm(comm(H1p, cZ) - 2 * eiph(-t) * cY))
         w['B'] = max(w['B'], opnorm(comm(H1p, cY) + 2 * eiph(t) * cZ))

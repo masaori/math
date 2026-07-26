@@ -1,0 +1,81 @@
+# =========================================================================
+# check_03: H1_plus_in_sigma_z_form / open_chain_spin_sums / trace_of_epsilon_V_plus
+#            / trace_of_epsilon_V_plus_via_check_eigenvalues
+#   (1) i Y_m Z_{m+1} = σ^z_m σ^z_{m+1}  (m ≤ M−1),  −i Y_M Z_1 = ε σ^z_M σ^z_1
+#   (2) i H_1^{(+)} = D_0 + ε G,  および ε・D_0・G の可換性と (εG)^2 = I
+#   (3) Σ_s e^{K E(s)} = 2(2cosh K)^{M−1},  Σ_s s(M)s(1) e^{K E(s)} = 2(2 sinh K)^{M−1}
+#   (4) tr(ε V^{(+)}) = (2 e^{−K_2} cosh K_1)^M + (2 e^{K_2} sinh K_1)^M > 0
+#   (5) tr(ε V^{(+)}) = η_{(1,…,1)} (2 sinh 2K_2)^{M/2} Π_μ 2 sinh(γ(θ~_μ)/2)
+#       （η_{(1,…,1)} = +1 と整合すること）
+# =========================================================================
+import os, itertools
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_03: iH_1^{(+)} の σ^z 表示と tr(ε V^{(+)}) の閉じた式 ===")
+
+ok_all = True
+w_pauli = w_H1 = w_comm = w_sq = 0
+w_tr = w_eta = 0
+
+for M in EIG_M:
+    O = SpinOps(M)
+    E = eps_op(O); D0 = D0_op(O); G = G_op(O)
+    Id = identity_matrix(CDF, O.d)
+    # (1)
+    for m in range(1, M):
+        w_pauli = max(w_pauli, opnorm(CDF(I) * O.Y[m] * O.Z[m + 1] - O.SZ[m] * O.SZ[m + 1]))
+    w_pauli = max(w_pauli, opnorm(-CDF(I) * O.Y[M] * O.Z[1] - E * O.SZ[M] * O.SZ[1]))
+    # (2)
+    w_H1 = max(w_H1, opnorm(CDF(I) * O.H1(+1) - (D0 + E * G)))
+    w_comm = max(w_comm, opnorm(comm(E, D0)), opnorm(comm(E, G)), opnorm(comm(D0, G)))
+    w_sq = max(w_sq, opnorm((E * G) * (E * G) - Id))
+
+# (3) 1 次元開鎖のスピン和（M = 2,…,8 を全配置で直接列挙）
+# 高精度実数で行う（M=8, K=2.5 では項の大きさが e^{17.5} に達し、
+# 倍精度の丸め誤差が相対 1e-8 程度まで積み上がるため）。
+RR200 = RealField(200)
+w_sum = 0
+for M in range(2, 9):
+    for K in [RR200(0.05), RR200(0.4), RR200(1.2), RR200(2.5)]:
+        s1 = RR200(0); s2 = RR200(0)
+        for s in itertools.product([-1, 1], repeat=M):
+            Es = sum(s[m] * s[m + 1] for m in range(M - 1))
+            w = exp(K * RR200(Es))
+            s1 += w
+            s2 += RR200(s[M - 1] * s[0]) * w
+        p1 = 2 * (2 * cosh(K)) ** (M - 1)
+        p2 = 2 * (2 * sinh(K)) ** (M - 1)
+        w_sum = max(w_sum, RDF(abs(s1 - p1) / p1), RDF(abs(s2 - p2) / p2))
+        assert s1 > 0 and s2 > 0, "K > 0 では両方とも正のはず"
+
+# (4)(5)
+min_tr = None
+for M in EIG_M:
+    O = SpinOps(M)
+    E = eps_op(O)
+    for p in EIG_PARAMS:
+        K1 = RDF(p['K1']); K2 = RDF(p['K2'])
+        P = coeffs(K1, K2)
+        Vp, _ = V_plus(O, K1, K2)
+        t = CDF((E * Vp).trace())
+        pred = RDF((2 * exp(-K2) * cosh(K1)) ** M + (2 * exp(K2) * sinh(K1)) ** M)
+        w_tr = max(w_tr, abs(t.imag()) / abs(pred), abs(RDF(t.real()) - pred) / pred)
+        min_tr = RDF(t.real()) if min_tr is None else min(min_tr, RDF(t.real()))
+        # (5) 固有値側の表示（η = +1 を代入したもの）
+        pr = RDF((2 * P['s2']) ** (RDF(M) / 2))
+        for mu in range(1, M + 1):
+            pr = pr * 2 * sinh(gamma_tilde(M, mu, P) / 2)
+        w_eta = max(w_eta, abs(RDF(t.real()) - pr) / abs(pr))
+
+ok_all &= report("(1) iY_mZ_{m+1} = σ^z_mσ^z_{m+1} / −iY_MZ_1 = εσ^z_Mσ^z_1", w_pauli, TOL)
+ok_all &= report("(2a) iH_1^{(+)} = D_0 + εG", w_H1, TOL)
+ok_all &= report("(2b) [ε,D_0] = [ε,G] = [D_0,G] = 0", w_comm, TOL)
+ok_all &= report("(2c) (εG)^2 = I", w_sq, TOL)
+ok_all &= report("(3) 開鎖スピン和（M=2..8、K=0.05,0.4,1.2,2.5）", w_sum, TOL)
+ok_all &= report("(4) tr(εV^{(+)}) = (2e^{−K_2}cosh K_1)^M + (2e^{K_2}sinh K_1)^M", w_tr, TOL)
+ok_all &= report("(5) tr(εV^{(+)}) = (2 sinh 2K_2)^{M/2} Π 2 sinh(γ/2)（η=+1）", w_eta, TOL)
+print(f"  tr(εV^{{(+)}}) の全体最小値: {float(min_tr):.4e}  ->  {'PASS（正）' if min_tr > 0 else 'FAIL'}")
+ok_all &= (min_tr > 0)
+
+print("=== check_03: " + ("ALL PASS" if ok_all else "FAIL") + " ===")

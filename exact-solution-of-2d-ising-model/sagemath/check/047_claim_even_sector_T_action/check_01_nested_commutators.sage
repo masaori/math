@@ -1,0 +1,88 @@
+# ---------------------------------------------------------
+# SageMath: 半整数運動量モードに対する n 重交換子の閉じ方
+#
+# 対象: structured-latex nesting_of_commutator_of_H_and_check_Z
+#       （併せて cosh_sinh_coefficient_conversion_for_check）
+#
+# (h1.z) [K1 H1^{(+)},...,[K1 H1^{(+)}, checkZ_mu]...]_n
+#          = (-1)^{(n-1)/2}(2K1)^n e^{-i th~} checkY_mu   (n 奇数)
+#          = (-1)^{n/2}(2K1)^n checkZ_mu                  (n 偶数)
+# (h1.y) [K1 H1^{(+)},...,[K1 H1^{(+)}, checkY_mu]...]_n
+#          = (-1)^{(n+1)/2}(2K1)^n e^{ i th~} checkZ_mu   (n 奇数)
+#          = (-1)^{n/2}(2K1)^n checkY_mu                  (n 偶数)
+# (h2.z) [K2* H2,...,[K2* H2, checkZ_mu]...]_n
+#          = (-1)^{(n+1)/2}(2K2*)^n checkY_mu             (n 奇数)
+#          = (-1)^{n/2}(2K2*)^n checkZ_mu                 (n 偶数)
+# (h2.y) [K2* H2,...,[K2* H2, checkY_mu]...]_n
+#          = (-1)^{(n-1)/2}(2K2*)^n checkZ_mu             (n 奇数)
+#          = (-1)^{n/2}(2K2*)^n checkY_mu                 (n 偶数)
+#
+# スケール済み版（生成子 (i/2)K1 H1^{(+)}, i K2* H2）:
+# (h1.z) = i K1^n e^{-i th~} checkY / K1^n checkZ
+# (h1.y) = -i K1^n e^{ i th~} checkZ / K1^n checkY
+# (h2.z) = -i (2K2*)^n checkY      / (2K2*)^n checkZ
+# (h2.y) =  i (2K2*)^n checkZ      / (2K2*)^n checkY
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+NMAX = 8
+
+print("=== n 重交換子（生成子 K1 H1^{(+)}, K2* H2）と、そのスケール済み版 ===")
+all_ok = True
+for M in EVEN_M:
+    O = SpinOps(M)
+    H1p = O.H1(+1)
+    for params in EVEN_PARAMS:
+        K1v = RDF(params['K1'])
+        K2s = K_star(params['K2'])
+        G1 = K1v * H1p
+        G2 = K2s * O.H2
+        G1s = CDF(I) / 2 * K1v * H1p     # (i/2) K1 H1^{(+)}
+        G2s = CDF(I) * K2s * O.H2        # i K2* H2
+        w = {'h1.z': 0.0, 'h1.y': 0.0, 'h2.z': 0.0, 'h2.y': 0.0,
+             's.h1.z': 0.0, 's.h1.y': 0.0, 's.h2.z': 0.0, 's.h2.y': 0.0}
+        for mu in range(1, M + 1):
+            t = th_tilde(M, mu)
+            Zc, Yc = checkZ(O, mu), checkY(O, mu)
+            for n in range(0, NMAX + 1):
+                odd = (n % 2 == 1)
+                c1n = CDF((2 * K1v) ** n)
+                c2n = CDF((2 * K2s) ** n)
+                if odd:
+                    e1z = CDF((-1) ** ((n - 1) // 2)) * c1n * eiph(-t) * Yc
+                    e1y = CDF((-1) ** ((n + 1) // 2)) * c1n * eiph(t) * Zc
+                    e2z = CDF((-1) ** ((n + 1) // 2)) * c2n * Yc
+                    e2y = CDF((-1) ** ((n - 1) // 2)) * c2n * Zc
+                    s1z = CDF(I) * CDF(K1v ** n) * eiph(-t) * Yc
+                    s1y = -CDF(I) * CDF(K1v ** n) * eiph(t) * Zc
+                    s2z = -CDF(I) * c2n * Yc
+                    s2y = CDF(I) * c2n * Zc
+                else:
+                    e1z = CDF((-1) ** (n // 2)) * c1n * Zc
+                    e1y = CDF((-1) ** (n // 2)) * c1n * Yc
+                    e2z = CDF((-1) ** (n // 2)) * c2n * Zc
+                    e2y = CDF((-1) ** (n // 2)) * c2n * Yc
+                    s1z = CDF(K1v ** n) * Zc
+                    s1y = CDF(K1v ** n) * Yc
+                    s2z = c2n * Zc
+                    s2y = c2n * Yc
+                w['h1.z'] = max(w['h1.z'], opnorm(adpow(G1, Zc, n) - e1z))
+                w['h1.y'] = max(w['h1.y'], opnorm(adpow(G1, Yc, n) - e1y))
+                w['h2.z'] = max(w['h2.z'], opnorm(adpow(G2, Zc, n) - e2z))
+                w['h2.y'] = max(w['h2.y'], opnorm(adpow(G2, Yc, n) - e2y))
+                w['s.h1.z'] = max(w['s.h1.z'], opnorm(adpow(G1s, Zc, n) - s1z))
+                w['s.h1.y'] = max(w['s.h1.y'], opnorm(adpow(G1s, Yc, n) - s1y))
+                w['s.h2.z'] = max(w['s.h2.z'], opnorm(adpow(G2s, Zc, n) - s2z))
+                w['s.h2.y'] = max(w['s.h2.y'], opnorm(adpow(G2s, Yc, n) - s2y))
+        worst = max(w.values())
+        ok = worst <= 1e-6
+        print(f"  M={M}, K1={params['K1']}, K2={params['K2']}: "
+              f"(h1.z) {w['h1.z']:.1e} (h1.y) {w['h1.y']:.1e} "
+              f"(h2.z) {w['h2.z']:.1e} (h2.y) {w['h2.y']:.1e} | "
+              f"scaled {max(w['s.h1.z'], w['s.h1.y'], w['s.h2.z'], w['s.h2.y']):.1e}"
+              f"  -> {'PASS' if ok else 'FAIL'}")
+        all_ok = ok and all_ok
+
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")

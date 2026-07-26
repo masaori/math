@@ -1,10 +1,11 @@
 # ---------------------------------------------------------
 # SageMath: 反交換関係・復元公式・H の表示
-#   [checkZ_mu, checkZ_nu]_+ = 2M delta^M_{mu+nu,1} I,  [checkZ, checkY]_+ = 0,
-#   [checkY_mu, checkY_nu]_+ = 2M delta^M_{mu+nu,1} I
+#   [checkZ_mu, checkZ_nu]_+ = 2M delta_{nu, M+1-mu} I,  [checkZ, checkY]_+ = 0,
+#   [checkY_mu, checkY_nu]_+ = 2M delta_{nu, M+1-mu} I
+#   （def_check_index_set (5): mu, nu in 𝓜̌ では mu+nu = 1 (mod M) <=> nu = M+1-mu）
 #   Z_j = (1/M) sum_mu checkZ_mu e^{i j theta~_mu}（Y_j も同様）
-#   H_1^{(+)} = (1/M) sum_mu checkY_mu checkZ_{1-mu} e^{-i theta~_mu}
-#   H_2       = (1/M) sum_mu checkZ_{1-mu} checkY_mu
+#   H_1^{(+)} = (1/M) sum_mu checkY_mu checkZ_{M+1-mu} e^{-i theta~_mu}
+#   H_2       = (1/M) sum_mu checkZ_{M+1-mu} checkY_mu
 #   さらに半整数運動量の指数和（antiperiodic_exp_sum）
 # 対象: structured-latex H1_H2_via_check_Z_Y
 #   （anticommutator_of_check_Z_Y / recover_Z_Y_from_check_Z_Y / antiperiodic_exp_sum も検証）
@@ -23,7 +24,9 @@ for M in EVEN_CASES_M:
     # 反交換関係
     for mu in range(1, M + 1):
         for nu in range(1, M + 1):
-            delta = 1 if (mu + nu - 1) % M == 0 else 0
+            # def_check_index_set (5): 合同式を使わずに書ける
+            delta = 1 if nu == M + 1 - mu else 0
+            assert delta == (1 if (mu + nu - 1) % M == 0 else 0)
             cZm = checkZ(O, mu); cZn = checkZ(O, nu)
             cYm = checkY(O, mu); cYn = checkY(O, nu)
             w['zz'] = max(w['zz'], opnorm(cZm * cZn + cZn * cZm - 2 * M * delta * Id))
@@ -42,8 +45,8 @@ for M in EVEN_CASES_M:
     s1 = matrix(CDF, O.d, O.d, 0); s2 = matrix(CDF, O.d, O.d, 0)
     for mu in range(1, M + 1):
         t = th_tilde(M, mu)
-        s1 = s1 + checkY(O, mu) * checkZ(O, 1 - mu) * eiph(-t)
-        s2 = s2 + checkZ(O, 1 - mu) * checkY(O, mu)
+        s1 = s1 + checkY(O, mu) * checkZ(O, M + 1 - mu) * eiph(-t)
+        s2 = s2 + checkZ(O, M + 1 - mu) * checkY(O, mu)
     w['H1'] = opnorm(s1 / M - O.H1(+1))
     w['H2'] = opnorm(s2 / M - O.H2)
     # 指数和
