@@ -97,17 +97,19 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         ref("def_half_integer_modes"),
         " は ",
         math(String.raw`\mu \in \mathbb{Z}`),
-        " について定義されており、",
+        " について定義されているが、",
         ref("def_half_integer_modes"),
         " (2) の添字周期性 ",
         math(String.raw`\check{Z}_{\mu+M} = \check{Z}_\mu`),
-        " により本質的な相異なる添字は ",
+        " により本質的に相異なる添字は ",
         math(String.raw`M`),
-        " 個である。この章の主張はすべて ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " について述べる（008 章のように ",
+        " 個である。**この章の主張はすべて ",
+        ref("def_check_index_set"),
+        " の ",
+        math(String.raw`\mu \in \check{\mathcal{M}} = \{1,\dots,M\}`),
+        " について述べる。** これは 008 章の ",
         math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
-        " へ制限する必要はない）。",
+        " に対応する、半整数運動量側の必要最小の有限集合である。",
       ]),
     ],
     conversion: { status: "added" },
@@ -335,7 +337,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " とする。",
         math(String.raw`H_1^{(+)}, H_2, \check{Z}_\mu, \check{Y}_\mu`),
         " はすべて ",
@@ -755,7 +757,7 @@ F_{n+1}
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " とし、",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
         " と略記する。",
@@ -1079,7 +1081,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
     labels: ["extract_taylor_coefficient_of_check_Z_Y"],
     statement: [
       paragraph([
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " とし ",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
         " と略記する。次の 4 つの級数は ",
@@ -1221,7 +1223,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
     labels: ["T_actions_on_check_Z_Y"],
     statement: [
       paragraph([
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について（",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
         "）、",
@@ -1405,7 +1407,7 @@ T_{V_2}(\check{Y}_\mu)
         "、",
         math(String.raw`g = V_2`),
         " について、",
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " と ",
         math(String.raw`a, b \in \mathbb{C}`),
         " に対し",
@@ -1507,7 +1509,7 @@ B_2 := \begin{pmatrix}
     title: { tex: String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2} \text{ の } (\check{Z}, \check{Y}) \text{ への直積作用}` },
     labels: ["calc_of_TxT_check_Z_Y"],
     statement: [
-      paragraph([math(String.raw`\mu \in \mathbb{Z}`), " について、"]),
+      paragraph([math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）", " について、"]),
       displayMath(
         String.raw`\left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)
@@ -1634,7 +1636,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
         "が成り立つ。とくに ",
         math(String.raw`\theta = \tilde\theta_\mu`),
         "（",
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         "）とすれば ",
         math(String.raw`B_1(\tilde\theta_\mu) B_2 B_1(\tilde\theta_\mu) = A(\tilde\theta_\mu)`),
         " である。",
@@ -1903,7 +1905,7 @@ P_{21}
     title: { tex: String.raw`T_{(V^{(+)})} \text{ の } \check{Z}, \check{Y} \text{ への作用}` },
     labels: ["T_V_plus_check_Z_Y"],
     statement: [
-      paragraph([math(String.raw`\mu \in \mathbb{Z}`), " について、"]),
+      paragraph([math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）", " について、"]),
       displayMath(
         String.raw`\left(T_{(V^{(+)})}(\check{Z}_\mu),\; T_{(V^{(+)})}(\check{Y}_\mu)\right)
 = \left(\check{Z}_\mu,\; \check{Y}_\mu\right) A\!\left(\tilde\theta_\mu\right),

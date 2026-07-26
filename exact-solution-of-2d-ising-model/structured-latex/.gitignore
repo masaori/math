@@ -2,3 +2,4 @@ node_modules/
 .migration-trial/
 type-tests/.tmp/
 build/
+package-lock.json

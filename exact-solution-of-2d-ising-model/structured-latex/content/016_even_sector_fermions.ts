@@ -40,8 +40,8 @@ export default defineBlocks([
         " を導入し、",
       ]),
       displayMath(
-        String.raw`\check{V}' := \exp\!\left(\sum_{\mu=1}^{M}
-\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\,\check\psi_{1-\mu}
+        String.raw`\check{V}' := \exp\!\left(\sum_{\mu \in \check{\mathcal{M}}}
+\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
 - \tfrac12 I\right)\right)`,
       ),
       paragraph([
@@ -80,8 +80,10 @@ export default defineBlocks([
         " により ",
         math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0`),
         " が**すべての ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " とすべての ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）とすべての ",
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         " について**成り立つので、これらはすべて不要になる。",
       ]),
@@ -112,18 +114,26 @@ export default defineBlocks([
         "**対になる添字は ",
         math(String.raw`\mu`),
         " と ",
-        math(String.raw`1-\mu`),
+        math(String.raw`M+1-\mu`),
         " である。** ",
-        ref("def_half_integer_modes"),
-        " (3) の ",
-        math(String.raw`\tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
+        ref("conjugate_index_of_check_Z_Y"),
+        " の ",
+        math(String.raw`\tilde\theta_{M+1-\mu} = 2\pi - \tilde\theta_\mu`),
         " と ",
         ref("anticommutator_of_check_Z_Y"),
         " の ",
-        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        math(String.raw`\nu = M+1-\mu`),
         " に対応する。008 章の ",
         math(String.raw`-\mu`),
         " をそのまま写してはならない。",
+        ref("def_check_index_set"),
+        " (2) により ",
+        math(String.raw`M+1-\mu`),
+        " は ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の中にとどまるので、**この章では ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外の添字が現れない。**",
       ]),
     ],
     conversion: { status: "added" },
@@ -142,8 +152,10 @@ export default defineBlocks([
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " とする。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）とする。",
         ref("diagonalization_check_P_D"),
         " の ",
         math(String.raw`\check{P}_\mu`),
@@ -180,7 +192,7 @@ export default defineBlocks([
       ]),
       paragraph([
         "**この定義は ",
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " のすべてについて意味をもつ。** ",
         ref("gamma_2_theta_tilde_nonzero"),
         " より ",
@@ -235,54 +247,91 @@ export default defineBlocks([
     kind: "claim",
     sourcePath: SRC,
     sourceOrdinal: 4,
-    title: { tex: String.raw`\check\psi \text{ の } M \text{ 周期性と共役添字}` },
+    title: { tex: String.raw`\gamma_1, \gamma_2 \text{ の周期性と共役添字 } M+1-\mu` },
     labels: ["periodicity_of_check_fermi"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-        "、",
-        math(String.raw`\mu, k \in \mathbb{Z}`),
-        " について次が成り立つ。",
+        " とする。次が成り立つ。",
       ]),
       list([
         [
-          "(1) ",
+          "(1) **",
+          math(String.raw`\gamma_1, \gamma_2`),
+          " の ",
+          math(String.raw`2\pi`),
+          " 周期性**（",
+          math(String.raw`\theta \in \mathbb{R}`),
+          "、",
+          math(String.raw`k \in \mathbb{Z}`),
+          "）：",
+          math(String.raw`\gamma_1(\theta + 2k\pi) = \gamma_1(\theta)`),
+          "、",
+          math(String.raw`\gamma_2(\theta + 2k\pi) = \gamma_2(\theta)`),
+          "。",
+        ],
+        [
+          "(2) **添字の ",
+          math(String.raw`M`),
+          " 周期性**（",
+          math(String.raw`\mu, k \in \mathbb{Z}`),
+          "）：",
+          math(String.raw`\tilde\theta_{\mu+kM} = \tilde\theta_\mu + 2k\pi`),
+          "、したがって ",
           math(String.raw`\gamma_1(\tilde\theta_{\mu+kM}) = \gamma_1(\tilde\theta_\mu)`),
           "、",
           math(String.raw`\gamma_2(\pm\tilde\theta_{\mu+kM}) = \gamma_2(\pm\tilde\theta_\mu)`),
-          "、",
-          math(String.raw`\gamma(\tilde\theta_{\mu+kM}) = \gamma(\tilde\theta_\mu)`),
           "。",
         ],
         [
-          "(2) ",
-          math(String.raw`\check\psi_{\mu+kM}^\dagger = \check\psi_\mu^\dagger`),
+          "(3) **共役添字**（",
+          math(String.raw`\mu \in \check{\mathcal{M}}`),
+          "）：",
+          math(String.raw`\gamma_2(\tilde\theta_{M+1-\mu}) = \gamma_2(-\tilde\theta_\mu)`),
           "、",
-          math(String.raw`\check\psi_{\mu+kM} = \check\psi_\mu`),
-          "。",
+          math(String.raw`\gamma_2(-\tilde\theta_{M+1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma_1(\tilde\theta_{M+1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\gamma(\tilde\theta_{M+1-\mu}) = \gamma(\tilde\theta_\mu)`),
+          "、",
+          math(String.raw`\check{P}_{M+1-\mu}`),
+          " は ",
+          math(String.raw`\check{P}_\mu`),
+          " の ",
+          math(String.raw`\gamma_2(\pm\tilde\theta_\mu)`),
+          " を入れ替えたもの。",
         ],
-        [
-          "(3) ",
-          math(String.raw`\gamma_2(\tilde\theta_{1-\mu}) = \gamma_2(-\tilde\theta_\mu)`),
-          "、",
-          math(String.raw`\gamma_2(-\tilde\theta_{1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
-          "、",
-          math(String.raw`\gamma_1(\tilde\theta_{1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
-          "、",
-          math(String.raw`\gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`),
-          "。",
-        ],
+      ]),
+      paragraph([
+        "**この主張の (2) だけは ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " で量化する。** ",
+        ref("def_check_index_set"),
+        " が述べたとおり、013 章から 017 章で ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外の添字を扱うのは、",
+        ref("def_half_integer_modes"),
+        " (2) とこの (2) の 2 箇所だけである。(2) は ",
+        math(String.raw`\gamma_1, \gamma_2`),
+        " が ",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " の関数（",
+        ref("def_gamma1_gamma2_of_theta"),
+        "）であることによって意味をもつ主張であり、",
+        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        " や ",
+        math(String.raw`\check\psi_\mu`),
+        "（これらは ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " 上でしか定義していない）には言及していない。",
       ]),
     ],
     proof: [
       paragraph([
-        "(1) ",
-        ref("def_half_integer_modes"),
-        " より ",
-        math(String.raw`\tilde\theta_{\mu+kM} = \dfrac{2\pi(\mu+kM-\frac12)}{M} = \tilde\theta_\mu + 2k\pi`),
-        " である。実数 ",
+        "(1) 実数 ",
         math(String.raw`t`),
         " について ",
         math(String.raw`\cos(t+2k\pi) = \cos t`),
@@ -290,92 +339,132 @@ export default defineBlocks([
         math(String.raw`\sin(t+2k\pi) = \sin t`),
         " であり、",
         ref("euler_formula_cos_sin"),
-        " より ",
-        math(String.raw`e^{i(t+2k\pi)} = e^{it}`),
-        "。",
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{i(t+2k\pi)}
+&= \cos(t+2k\pi) + i\sin(t+2k\pi)
+   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+&= \cos t + i\sin t
+   \quad (\because \cos, \sin \text{ の } 2\pi \text{ 周期性}) \\
+&= e^{it}
+   \quad (\because \text{euler\_formula\_cos\_sin})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
         ref("def_gamma1_gamma2_of_theta"),
         " の ",
-        math(String.raw`\gamma_1(\theta), \gamma_2(\theta)`),
+        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
+        " と ",
+        math(String.raw`\gamma_2(\theta) = ie^{i\theta}s_2^*\left(c_1\cos\theta - i\sin\theta - s_1c_2\right)`),
         " は ",
         math(String.raw`\cos\theta, \sin\theta, e^{i\theta}`),
         " のみを通じて ",
         math(String.raw`\theta`),
-        " に依存するから、",
-      ]),
-      displayMath(
-        String.raw`\gamma_1(\theta + 2k\pi) = \gamma_1(\theta), \qquad
-\gamma_2(\theta + 2k\pi) = \gamma_2(\theta) \qquad (\theta \in \mathbb{R},\ k \in \mathbb{Z})`,
-      ),
-      paragraph([
-        "これを ",
-        math(String.raw`\theta = \tilde\theta_\mu`),
-        " と ",
-        math(String.raw`\theta = -\tilde\theta_\mu`),
-        "（後者は ",
-        math(String.raw`-\tilde\theta_{\mu+kM} = -\tilde\theta_\mu - 2k\pi`),
-        " なので ",
-        math(String.raw`-k`),
-        " を取る）に使えば第 1・第 2 の等式を得る。",
-        ref("def_gamma_theta_tilde_mu"),
-        " の ",
-        math(String.raw`\gamma(\tilde\theta_\mu) = \mathrm{arccosh}(\gamma_1(\tilde\theta_\mu))`),
-        " は ",
-        math(String.raw`\gamma_1`),
-        " の値だけで決まるので第 3 の等式も従う。",
+        " に依存するから、(1) が従う。",
       ]),
       paragraph([
         "(2) ",
-        ref("def_half_integer_modes"),
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta`),
+        " の定義より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\tilde\theta_{\mu+kM}
+&= \frac{2\pi\left(\mu+kM-\frac12\right)}{M}
+   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+&= \frac{2\pi\left(\mu-\frac12\right)}{M} + \frac{2\pi kM}{M} \\
+&= \tilde\theta_\mu + 2k\pi
+   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "これを (1) に ",
+        math(String.raw`\theta = \tilde\theta_\mu`),
+        " として使えば ",
+        math(String.raw`\gamma_1(\tilde\theta_{\mu+kM}) = \gamma_1(\tilde\theta_\mu)`),
+        " と ",
+        math(String.raw`\gamma_2(\tilde\theta_{\mu+kM}) = \gamma_2(\tilde\theta_\mu)`),
+        "。また ",
+        math(String.raw`-\tilde\theta_{\mu+kM} = -\tilde\theta_\mu + 2(-k)\pi`),
+        " なので (1) を ",
+        math(String.raw`\theta = -\tilde\theta_\mu`),
+        "、",
+        math(String.raw`k \to -k`),
+        " として使えば ",
+        math(String.raw`\gamma_2(-\tilde\theta_{\mu+kM}) = \gamma_2(-\tilde\theta_\mu)`),
+        "。",
+      ]),
+      paragraph([
+        "(3) ",
+        ref("conjugate_index_of_check_Z_Y"),
+        " (1) より ",
+        math(String.raw`\tilde\theta_{M+1-\mu} = 2\pi - \tilde\theta_\mu = \left(-\tilde\theta_\mu\right) + 2\pi`),
+        " である。よって (1) を ",
+        math(String.raw`\theta = -\tilde\theta_\mu`),
+        "、",
+        math(String.raw`k = 1`),
+        " として使うと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(\tilde\theta_{M+1-\mu})
+&= \gamma_2\!\left(\left(-\tilde\theta_\mu\right) + 2\pi\right)
+   \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (1)}) \\
+&= \gamma_2(-\tilde\theta_\mu)
+   \quad (\because \text{本ブロックの (1)}\ (k=1))
+\end{aligned}`,
+      ),
+      paragraph([
+        "同様に ",
+        math(String.raw`-\tilde\theta_{M+1-\mu} = \tilde\theta_\mu - 2\pi`),
+        " なので (1) を ",
+        math(String.raw`\theta = \tilde\theta_\mu`),
+        "、",
+        math(String.raw`k = -1`),
+        " として使い ",
+        math(String.raw`\gamma_2(-\tilde\theta_{M+1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
+        "。",
+        math(String.raw`\gamma_1`),
+        " についても同じ計算で ",
+        math(String.raw`\gamma_1(\tilde\theta_{M+1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
+        " を得る。",
+      ]),
+      paragraph([
+        ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`\check{Z}_{\mu+M} = \check{Z}_\mu`),
-        "、",
-        math(String.raw`\check{Y}_{\mu+M} = \check{Y}_\mu`),
-        " であり、これを ",
-        math(String.raw`|k|`),
-        " 回繰り返して ",
-        math(String.raw`\check{Z}_{\mu+kM} = \check{Z}_\mu`),
-        "、",
-        math(String.raw`\check{Y}_{\mu+kM} = \check{Y}_\mu`),
-        "。また (1) より ",
-        math(String.raw`\check{P}_{\mu+kM} = \check{P}_\mu`),
-        "（",
+        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        " なので ",
+        ref("def_gamma_theta_tilde_mu"),
+        " の ",
+        math(String.raw`\gamma(\tilde\theta_{M+1-\mu}) = \mathrm{arccosh}\!\left(\gamma_1(\tilde\theta_{M+1-\mu})\right)`),
+        " が定義されており、これは ",
+        math(String.raw`\gamma_1`),
+        " の値だけで決まるので ",
+        math(String.raw`\gamma(\tilde\theta_{M+1-\mu}) = \gamma(\tilde\theta_\mu)`),
+        "。",
+      ]),
+      paragraph([
         ref("diagonalization_check_P_D"),
         " の ",
         math(String.raw`\check{P}_\mu`),
         " の成分は ",
-        math(String.raw`|\gamma_2(\tilde\theta_\mu)|`),
-        " と ",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right|`),
+        "、",
         math(String.raw`\gamma_2(-\tilde\theta_\mu)`),
-        " と ",
+        "、",
         math(String.raw`M`),
-        " だけで書かれている）。よって ",
-        ref("def_check_fermi"),
-        " の右辺が一致し、(2) を得る。",
-      ]),
-      paragraph([
-        "(3) ",
-        ref("def_half_integer_modes"),
-        " (3) より ",
-        math(String.raw`\tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
-        " なので、",
-        math(String.raw`\gamma_2(\tilde\theta_{1-\mu}) = \gamma_2(-\tilde\theta_\mu)`),
+        " だけで書かれているので、上の 2 式を代入すれば ",
+        math(String.raw`\check{P}_{M+1-\mu}`),
+        " の成分が ",
+        math(String.raw`\left|\gamma_2(-\tilde\theta_\mu)\right|`),
         " と ",
-        math(String.raw`\gamma_2(-\tilde\theta_{1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
-        " は代入するだけである。",
-        math(String.raw`\gamma_1`),
-        " については ",
-        ref("def_gamma1_gamma2_of_theta"),
-        " より ",
-        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
-        " が ",
-        math(String.raw`\cos\theta`),
-        " のみに依存し、",
-        math(String.raw`\cos(-\tilde\theta_\mu) = \cos\tilde\theta_\mu`),
-        " だから ",
-        math(String.raw`\gamma_1(\tilde\theta_{1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
-        "、したがって ",
-        math(String.raw`\gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`),
-        "。",
+        math(String.raw`\gamma_2(\tilde\theta_\mu)`),
+        " で書けることが分かる。",
       ]),
     ],
     conversion: {
@@ -383,7 +472,10 @@ export default defineBlocks([
       notes: [
         "008 章では対応する事実が gamma2_theta_M_periodicity と hatZ_hatY_M_periodicity に分かれ、" +
           "action_of_T_Vprime_on_psi の proof の中で μ の符号ごとの場合分け（a)〜c)）として使われていた。" +
-          "半整数運動量では添字を μ ∈ Z 全体で扱うので、M 周期性 (2) と共役添字 (3) を一度まとめておけば場合分けが要らない。",
+          "半整数運動量では添字を 𝓜̌ = {1,…,M} に絞り、共役添字を M+1−μ で取ることで場合分けが要らない。",
+        "以前この主張は ψ̌_{μ+kM} = ψ̌_μ（μ ∈ Z）を含んでいたが、共役添字を 1−μ から M+1−μ へ書き換えたことで " +
+          "ψ̌ を 𝓜̌ の外の添字で評価する箇所が本文から消えたため、その項目は不要になった。" +
+          "γ_1, γ_2 は θ ∈ R の関数なので (2) だけは μ ∈ Z のまま残してある。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_01。",
       ],
     },
@@ -402,13 +494,15 @@ export default defineBlocks([
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         "、",
-        math(String.raw`\mu, \nu \in \mathbb{Z}`),
-        " について",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
       ]),
       displayMath(
         String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+ = 0,
 \qquad
-\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+ = \delta^M_{(\mu+\nu,\,1)}\,I,
+\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+ = \delta_{\nu,\,M+1-\mu}\,I,
 \qquad
 \left[\check\psi_\mu, \check\psi_\nu\right]_+ = 0`,
       ),
@@ -416,16 +510,18 @@ export default defineBlocks([
         "が成り立つ（",
         math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "、",
-        math(String.raw`\delta^M`),
+        math(String.raw`\delta_{\nu,\,M+1-\mu}`),
         " は ",
-        ref("def_delta_M"),
-        "）。",
+        ref("anticommutator_of_check_Z_Y"),
+        " と同じ通常のクロネッカーのデルタ）。",
         ref("anticommutator_of_psi"),
         " では対になる添字が ",
-        math(String.raw`\mu+\nu \equiv 0`),
+        math(String.raw`\nu = -\mu`),
         " だったのに対し、ここでは ",
-        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        math(String.raw`\nu = M+1-\mu`),
         " である。",
+        ref("def_check_index_set"),
+        " (5) により、この対の条件は合同式なしで書ける。",
       ]),
     ],
     proof: [
@@ -466,7 +562,7 @@ export default defineBlocks([
 \left[\check{Z}_\mu, \check{Y}_\nu\right]_+ = \left[\check{Y}_\mu, \check{Z}_\nu\right]_+ = 0,
 \qquad
 \left[\check{Y}_\mu, \check{Y}_\nu\right]_+ = 2M\,\delta\,I,
-\qquad \delta := \delta^M_{(\mu+\nu,\,1)}`,
+\qquad \delta := \delta_{\nu,\,M+1-\mu}`,
       ),
       paragraph([
         "である（",
@@ -477,33 +573,27 @@ export default defineBlocks([
         "Step 1（",
         math(String.raw`\delta \neq 0`),
         " のときの係数の関係）。",
-        math(String.raw`\delta^M_{(\mu+\nu,1)} = 1`),
+        math(String.raw`\delta = \delta_{\nu,\,M+1-\mu} = 1`),
         " とは ",
-        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
-        "、すなわち ",
-        math(String.raw`\nu = (1-\mu) + kM`),
-        " なる ",
-        math(String.raw`k \in \mathbb{Z}`),
-        " が存在することである（",
-        ref("def_delta_M"),
-        "）。このとき ",
+        math(String.raw`\nu = M+1-\mu`),
+        " そのものである（",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        " に絞ったので合同式を解く必要がない。",
+        ref("def_check_index_set"),
+        " (5)）。このとき ",
         ref("periodicity_of_check_fermi"),
-        " (1)(3) より",
+        " (3) より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 a_\nu
-&= \gamma_2(\tilde\theta_{(1-\mu)+kM})
-   \quad (\because a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = (1-\mu)+kM) \\
-&= \gamma_2(\tilde\theta_{1-\mu})
-   \quad (\because \text{periodicity\_of\_check\_fermi (1)}) \\
+&= \gamma_2(\tilde\theta_{M+1-\mu})
+   \quad (\because a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = M+1-\mu) \\
 &= \gamma_2(-\tilde\theta_\mu) = b_\mu
    \quad (\because \text{periodicity\_of\_check\_fermi (3)}) \\
 b_\nu
-&= \gamma_2(-\tilde\theta_{(1-\mu)+kM})
-   \quad (\because b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = (1-\mu)+kM) \\
-&= \gamma_2(-\tilde\theta_{1-\mu})
-   \quad (\because \text{periodicity\_of\_check\_fermi (1)}) \\
+&= \gamma_2(-\tilde\theta_{M+1-\mu})
+   \quad (\because b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = M+1-\mu) \\
 &= \gamma_2(\tilde\theta_\mu) = a_\mu
    \quad (\because \text{periodicity\_of\_check\_fermi (3)})
 \end{aligned}`,
@@ -675,7 +765,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
         " なら全体が ",
         math(String.raw`0`),
         " であり、",
-        math(String.raw`\delta^M_{(\mu+\nu,1)}I = 0`),
+        math(String.raw`\delta_{\nu,\,M+1-\mu}I = 0`),
         " と一致する。",
         math(String.raw`\delta \neq 0`),
         "（すなわち ",
@@ -695,7 +785,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
       ),
       paragraph([
         "であり、",
-        math(String.raw`\delta^M_{(\mu+\nu,1)}I = I`),
+        math(String.raw`\delta_{\nu,\,M+1-\mu}I = I`),
         " と一致する。",
       ]),
     ],
@@ -722,8 +812,10 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " について",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
       ]),
       displayMath(
         String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger,
@@ -876,8 +968,8 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         " とし、",
       ]),
       displayMath(
-        String.raw`\check{X} := \sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
-\left(\check\psi_\mu^\dagger\,\check\psi_{1-\mu} - \tfrac12 I\right)
+        String.raw`\check{X} := \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)
+\left(\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu} - \tfrac12 I\right)
 \ \in\ \mathrm{Mat}(2^M,\mathbb{C}),
 \qquad
 \check{V}' := \exp\!\left(\check{X}\right)`,
@@ -890,15 +982,17 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
       list([
         [
           "(1) **和の範囲に例外は要らない。** ",
+          ref("def_check_index_set"),
+          " (2) より ",
+          math(String.raw`\mu \in \check{\mathcal{M}} \implies M+1-\mu \in \check{\mathcal{M}}`),
+          " なので、",
           ref("def_check_fermi"),
           " により ",
           math(String.raw`\check\psi_\mu^\dagger`),
           " と ",
-          math(String.raw`\check\psi_{1-\mu}`),
-          " はすべての ",
-          math(String.raw`\mu \in \mathbb{Z}`),
-          " について定義されているので、",
-          math(String.raw`\mu = 1, \dots, M`),
+          math(String.raw`\check\psi_{M+1-\mu}`),
+          " はともに定義されており、",
+          math(String.raw`\mu \in \check{\mathcal{M}}`),
           " のすべての項が意味をもつ。",
         ],
         [
@@ -933,7 +1027,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         "(1) ",
         ref("gamma_2_theta_tilde_nonzero"),
         " はすべての ",
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " と ",
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         " について ",
@@ -945,10 +1039,14 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         " は ",
         math(String.raw`0`),
         " でない。",
-        math(String.raw`\mu \in \{1,\dots,M\}`),
+        ref("def_check_index_set"),
+        " (2) より ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " に対して ",
-        math(String.raw`1-\mu \in \{1-M,\dots,0\} \subset \mathbb{Z}`),
-        " であり、これも定義域に入る。",
+        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        " なので、",
+        math(String.raw`\check\psi_{M+1-\mu}`),
+        " も同じ理由で定義されている。",
         math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
         " はスカラーなので各項は ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
@@ -973,9 +1071,9 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
     conversion: {
       status: "added",
       notes: [
-        "008 章の def_Vprime の半整数運動量版。対になる添字は −μ ではなく 1−μ である（def_half_integer_modes (3)）。",
-        "和の範囲が μ = 1,…,M で尽きること（重複も数え落としも無いこと）は、anticommutator_of_check_psi の対 " +
-          "μ+ν ≡ 1 (mod M) が {1,…,M} 上で μ ↔ 1−μ の対応として全単射になることに対応する。" +
+        "008 章の def_Vprime の半整数運動量版。対になる添字は −μ ではなく M+1−μ である（conjugate_index_of_check_Z_Y、def_check_index_set (2)）。",
+        "和の範囲が 𝓜̌ = {1,…,M} で尽きること（重複も数え落としも無いこと）は、anticommutator_of_check_psi の対 " +
+          "ν = M+1−μ が 𝓜̌ 上の対合（involution）になることに対応する（def_check_index_set (2)(4)）。" +
           "数値では、この形の V̌' が T_{(V^{(+)})} と一致する（T_V_plus_eq_T_check_Vprime）ことで確認している" +
           "（sagemath/check/049_claim_even_sector_fermions/check_04, check_05）。",
       ],
@@ -995,8 +1093,10 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " について",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
       ]),
       displayMath(
         String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger,
@@ -1021,38 +1121,68 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         "Step 1（1 項ぶんの交換子、",
         math(String.raw`\check\psi_\mu^\dagger`),
         " 側）。",
-        math(String.raw`\nu \in \mathbb{Z}`),
-        " について",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
       ]),
       displayMath(
-        String.raw`\left[\check\psi_\nu^\dagger\,\check\psi_{1-\nu},\ \check\psi_\mu^\dagger\right]
-= \delta^M_{(\mu-\nu,\,0)}\,\check\psi_\nu^\dagger`,
+        String.raw`\left[\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu},\ \check\psi_\mu^\dagger\right]
+= \delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger`,
       ),
       paragraph([
         "を示す。",
         ref("anticommutator_of_check_psi"),
+        " を ",
+        math(String.raw`(\mu, M+1-\nu)`),
+        " の対に適用すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check\psi_{M+1-\nu},\ \check\psi_\mu^\dagger\right]_+
+&= \left[\check\psi_\mu^\dagger,\ \check\psi_{M+1-\nu}\right]_+
+   \quad (\because \text{反交換子の対称性}) \\
+&= \delta_{M+1-\nu,\,M+1-\mu}\,I
+   \quad (\because \text{anticommutator\_of\_check\_psi}) \\
+&= \delta_{\mu,\,\nu}\,I
+   \quad (\because M+1-\nu = M+1-\mu \iff \mu = \nu)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（",
+        ref("def_check_index_set"),
+        " (2) より ",
+        math(String.raw`M+1-\nu \in \check{\mathcal{M}}`),
+        " なので ",
+        ref("anticommutator_of_check_psi"),
+        " が適用できる）。また ",
+        ref("anticommutator_of_check_psi"),
         " より ",
-        math(String.raw`\left[\check\psi_{1-\nu}, \check\psi_\mu^\dagger\right]_+ = \delta^M_{((1-\nu)+\mu,\,1)}I = \delta^M_{(\mu-\nu,\,0)}I`),
-        "（",
-        math(String.raw`(1-\nu)+\mu \equiv 1 \iff \mu-\nu \equiv 0 \pmod M`),
-        "）および ",
         math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+ = 0`),
         " であるから、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,\check\psi_\mu^\dagger
-&= \check\psi_\nu^\dagger\left(\check\psi_{1-\nu}\,\check\psi_\mu^\dagger\right)
+\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,\check\psi_\mu^\dagger
+&= \check\psi_\nu^\dagger\left(\check\psi_{M+1-\nu}\,\check\psi_\mu^\dagger\right)
    \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\nu^\dagger\left(\delta^M_{(\mu-\nu,0)}I - \check\psi_\mu^\dagger\,\check\psi_{1-\nu}\right)
-   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_{1-\nu}, \check\psi_\mu^\dagger]_+ = \delta^M_{(\mu-\nu,0)}I)) \\
-&= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{1-\nu}
+&= \check\psi_\nu^\dagger\left(\delta_{\mu,\nu}I - \check\psi_\mu^\dagger\,\check\psi_{M+1-\nu}\right)
+   \quad (\because \text{直前の displayMath}\ ([\check\psi_{M+1-\nu}, \check\psi_\mu^\dagger]_+ = \delta_{\mu,\nu}I)) \\
+&= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{M+1-\nu}
    \quad (\because \text{行列の積の分配法則と結合法則}) \\
-&= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu}
+&= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
    \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu^\dagger]_+ = 0))
 \end{aligned}`,
       ),
-      paragraph(["となり、第 2 項を右辺へ移して交換子の定義に戻すと上の式を得る。"]),
+      paragraph([
+        "となり、第 2 項を右辺へ移して交換子の定義に戻すと上の式を得る。**",
+        math(String.raw`\check{\mathcal{M}}`),
+        " へ絞ったことで、合同式 ",
+        math(String.raw`(1-\nu)+\mu \equiv 1 \pmod M`),
+        " を ",
+        math(String.raw`\mu \equiv \nu`),
+        " に書き換える段が要らなくなっている。**",
+      ]),
       paragraph([
         "Step 2（",
         math(String.raw`[\check{X}, \check\psi_\mu^\dagger] = \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger`),
@@ -1071,51 +1201,18 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{X},\ \check\psi_\mu^\dagger\right]
-&= \left[\sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)
-   \left(\check\psi_\nu^\dagger\check\psi_{1-\nu} - \tfrac12 I\right),\ \check\psi_\mu^\dagger\right]
+&= \left[\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
+   \left(\check\psi_\nu^\dagger\check\psi_{M+1-\nu} - \tfrac12 I\right),\ \check\psi_\mu^\dagger\right]
    \quad (\because \text{def\_check\_Vprime}) \\
-&= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)
-   \left[\check\psi_\nu^\dagger\check\psi_{1-\nu} - \tfrac12 I,\ \check\psi_\mu^\dagger\right]
+&= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)
+   \left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu} - \tfrac12 I,\ \check\psi_\mu^\dagger\right]
    \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu^\dagger\right]
+&= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu^\dagger\right]
    \quad (\because \text{scalar\_identity\_commutes より } \left[\tfrac12 I,\ \check\psi_\mu^\dagger\right] = 0) \\
-&= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\,\delta^M_{(\mu-\nu,\,0)}\,\check\psi_\nu^\dagger
-   \quad (\because \text{Step 1})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\nu`),
-        " が ",
-        math(String.raw`1`),
-        " から ",
-        math(String.raw`M`),
-        " まで走るとき、",
-        math(String.raw`\nu \equiv \mu \pmod M`),
-        " を満たす ",
-        math(String.raw`\nu`),
-        " は**ちょうど 1 つ**であり（",
-        math(String.raw`\{1,\dots,M\}`),
-        " は ",
-        math(String.raw`M`),
-        " を法とする剰余類の完全代表系）、それを ",
-        math(String.raw`\nu_0 = \mu + kM`),
-        "（",
-        math(String.raw`k \in \mathbb{Z}`),
-        "）と書く。",
-        ref("periodicity_of_check_fermi"),
-        " (1)(2) より ",
-        math(String.raw`\gamma(\tilde\theta_{\nu_0}) = \gamma(\tilde\theta_\mu)`),
-        "、",
-        math(String.raw`\check\psi_{\nu_0}^\dagger = \check\psi_\mu^\dagger`),
-        " なので",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check{X},\ \check\psi_\mu^\dagger\right]
-&= \gamma(\tilde\theta_{\nu_0})\,\check\psi_{\nu_0}^\dagger
-   \quad (\because \nu = \nu_0 \text{ の項だけが残る}) \\
+&= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)\,\delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger
+   \quad (\because \text{Step 1}) \\
 &= \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger
-   \quad (\because \text{periodicity\_of\_check\_fermi (1)(2)}) \\
+   \quad (\because \mu \in \check{\mathcal{M}} \text{ なので } \nu = \mu \text{ の項だけが残る}) \\
 \text{すなわち}\quad
 \check{X}\,\check\psi_\mu^\dagger
 &= \check\psi_\mu^\dagger\left(\check{X} + \gamma(\tilde\theta_\mu)I\right)
@@ -1130,12 +1227,16 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         " の符号で 3 通りに場合分けしていたのは添字集合が ",
         math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
         " だったためである。ここでは ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " を ",
-        ref("periodicity_of_check_fermi"),
-        " (2) の ",
-        math(String.raw`M`),
-        " 周期性でそのまま扱えるので場合分けが要らない。）",
+        math(String.raw`\mu`),
+        " も和の添字 ",
+        math(String.raw`\nu`),
+        " も同じ ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " を走るので、残る項が ",
+        math(String.raw`\nu = \mu`),
+        " ただ 1 つであることが直ちに分かり、合同式を解く段も場合分けも要らない。",
+        ref("def_check_index_set"),
+        " へ範囲を絞ったことの効果である。）",
       ]),
       paragraph([
         "Step 3（帰納法）。",
@@ -1228,29 +1329,35 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
         " 側）。",
         ref("anticommutator_of_check_psi"),
         " の ",
-        math(String.raw`\left[\check\psi_{1-\nu}, \check\psi_\mu\right]_+ = 0`),
+        math(String.raw`\left[\check\psi_{M+1-\nu}, \check\psi_\mu\right]_+ = 0`),
         " と ",
-        math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+ = \delta^M_{(\nu+\mu,\,1)}I`),
-        " より",
+        math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+ = \delta_{\mu,\,M+1-\nu}I`),
+        " より（",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        "、",
+        ref("def_check_index_set"),
+        " (2) より ",
+        math(String.raw`M+1-\nu \in \check{\mathcal{M}}`),
+        "）",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,\check\psi_\mu
-&= \check\psi_\nu^\dagger\left(\check\psi_{1-\nu}\,\check\psi_\mu\right)
+\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,\check\psi_\mu
+&= \check\psi_\nu^\dagger\left(\check\psi_{M+1-\nu}\,\check\psi_\mu\right)
    \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\nu^\dagger\left(-\check\psi_\mu\,\check\psi_{1-\nu}\right)
-   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_{1-\nu}, \check\psi_\mu]_+ = 0)) \\
-&= -\left(\check\psi_\nu^\dagger\,\check\psi_\mu\right)\check\psi_{1-\nu}
+&= \check\psi_\nu^\dagger\left(-\check\psi_\mu\,\check\psi_{M+1-\nu}\right)
+   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_{M+1-\nu}, \check\psi_\mu]_+ = 0)) \\
+&= -\left(\check\psi_\nu^\dagger\,\check\psi_\mu\right)\check\psi_{M+1-\nu}
    \quad (\because \text{行列の積の結合法則とスカラー倍}) \\
-&= -\left(\delta^M_{(\nu+\mu,1)}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{1-\nu}
-   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu]_+ = \delta^M_{(\nu+\mu,1)}I)) \\
-&= -\delta^M_{(\nu+\mu,1)}\,\check\psi_{1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu}
+&= -\left(\delta_{\mu,\,M+1-\nu}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{M+1-\nu}
+   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu]_+ = \delta_{\mu,\,M+1-\nu}I)) \\
+&= -\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
    \quad (\because \text{行列の積の分配法則と結合法則})
 \end{aligned}`,
       ),
       paragraph([
         "すなわち ",
-        math(String.raw`\left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu\right] = -\delta^M_{(\mu+\nu,\,1)}\,\check\psi_{1-\nu}`),
+        math(String.raw`\left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu\right] = -\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu}`),
         "。",
       ]),
       paragraph([
@@ -1269,31 +1376,38 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{X},\ \check\psi_\mu\right]
-&= \sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)
-   \left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu\right]
+&= \sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
+   \left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu\right]
    \quad (\because \text{def\_check\_Vprime、交換子の第 1 引数の線型性、scalar\_identity\_commutes}) \\
-&= -\sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)\,\delta^M_{(\mu+\nu,\,1)}\,\check\psi_{1-\nu}
+&= -\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)\,\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu}
    \quad (\because \text{Step 1'})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\nu \in \{1,\dots,M\}`),
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
         " のうち ",
-        math(String.raw`\nu \equiv 1-\mu \pmod M`),
-        " を満たすものはちょうど 1 つで、それを ",
-        math(String.raw`\nu_1 = (1-\mu) + kM`),
-        "（",
-        math(String.raw`k \in \mathbb{Z}`),
-        "）と書く。このとき ",
-        math(String.raw`1-\nu_1 = \mu - kM`),
+        math(String.raw`\delta_{\mu,\,M+1-\nu} = 1`),
+        " すなわち ",
+        math(String.raw`M+1-\nu = \mu`),
+        " を満たすものは ",
+        math(String.raw`\nu = M+1-\mu`),
+        " ただ 1 つであり、",
+        ref("def_check_index_set"),
+        " (2) よりこれは ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " に属する（**合同式を解く段が消えている**）。この ",
+        math(String.raw`\nu`),
+        " に対して ",
+        math(String.raw`M+1-\nu = \mu`),
         " なので ",
+        math(String.raw`\check\psi_{M+1-\nu} = \check\psi_\mu`),
+        "、また ",
         ref("periodicity_of_check_fermi"),
-        " (2) より ",
-        math(String.raw`\check\psi_{1-\nu_1} = \check\psi_\mu`),
-        "、また同 (1)(3) より",
+        " (3) より",
       ]),
       displayMath(
-        String.raw`\gamma(\tilde\theta_{\nu_1}) = \gamma(\tilde\theta_{1-\mu}) = \gamma(\tilde\theta_\mu)`,
+        String.raw`\gamma(\tilde\theta_\nu) = \gamma(\tilde\theta_{M+1-\mu}) = \gamma(\tilde\theta_\mu)
+\quad (\because \text{periodicity\_of\_check\_fermi (3)})`,
       ),
       paragraph([
         "である。よって ",
@@ -1341,8 +1455,10 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とする。すべての ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " について",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
       ]),
       displayMath(
         String.raw`T_{(V^{(+)})}\!\left(\check{Z}_\mu\right) = T_{(\check{V}')}\!\left(\check{Z}_\mu\right),
@@ -1359,7 +1475,7 @@ T_{(V^{(+)})}\!\left(\check{Y}_\mu\right) = T_{(\check{V}')}\!\left(\check{Y}_\m
     ],
     proof: [
       paragraph([
-        math(String.raw`\mu \in \mathbb{Z}`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " を固定する。",
         ref("def_V_plus_and_T_V_plus"),
         " (1)(3) より ",

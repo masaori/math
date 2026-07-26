@@ -325,7 +325,27 @@ export default defineBlocks([
       displayMath(
         String.raw`\tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M} \in \mathbb{R}`,
       ),
-      paragraph(["とおく。このとき ", math(String.raw`k \in \mathbb{Z}`), " について"]),
+      paragraph([
+        "とおく（ここで ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " としているのは**記号 ",
+        math(String.raw`\tilde\theta_\mu`),
+        " の定義域**であって、主張を述べる添字の範囲ではない。主張の範囲は ",
+        ref("def_check_index_set"),
+        " で ",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+        " に絞る。下の指数和も ",
+        math(String.raw`\mu`),
+        " を ",
+        math(String.raw`1`),
+        " から ",
+        math(String.raw`M`),
+        " まで、すなわち ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " 全体にわたって取っている）。このとき ",
+        math(String.raw`k \in \mathbb{Z}`),
+        " について",
+      ]),
       displayMath(
         String.raw`\sum_{\mu=1}^{M} e^{i k \tilde\theta_\mu}
 = \begin{cases}
@@ -461,6 +481,19 @@ e^{-i\frac{\pi k}{M}}
         math(String.raw`e^{-ij\tilde\theta_\mu}`),
         "）。",
       ]),
+      paragraph([
+        "**定義域を ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " としているのは、下の (2)（添字の周期性）を述べるためである。** 主張を述べる添字の範囲は ",
+        ref("def_check_index_set"),
+        " の ",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+        " に絞る。以降 ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " 全体で述べるのは、この (2) と ",
+        ref("periodicity_of_check_fermi"),
+        " の 2 つだけである。",
+      ]),
       paragraph(["次の 3 つの性質を後で繰り返し使う。"]),
       list([
         [
@@ -554,16 +587,457 @@ e^{-ij\tilde\theta_{\mu+M}}
   },
 
   {
+    id: "evensector_003a_definition_check_index_set",
+    kind: "definition",
+    sourcePath: SRC,
+    sourceOrdinal: 6,
+    title: { tex: String.raw`\check{\mathcal{M}} \text{（半整数運動量の添字集合）}` },
+    labels: ["def_check_index_set"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_half_integer_modes"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu`),
+        "（",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " について定義されている）を用いる。",
+      ]),
+      displayMath(
+        String.raw`\check{\mathcal{M}} := \left\{1, 2, \dots, M\right\} \subset \mathbb{Z}`,
+      ),
+      paragraph([
+        "と定める。008 章で整数運動量の添字集合が ",
+        ref("def_hatZ_hatY"),
+        " の ",
+        math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
+        " だったのに対応する、**半整数運動量側の添字集合**である。",
+      ]),
+      paragraph([
+        "**以降、013 章から 017 章までのすべての主張は ",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        " について述べる。** ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " 全体で述べるのは、記号 ",
+        math(String.raw`\tilde\theta_\mu, \check{Z}_\mu, \check{Y}_\mu, \check\psi_\mu`),
+        " の**定義域**と、添字の周期性を述べる 2 つの主張 ",
+        ref("def_half_integer_modes"),
+        " (2) と ",
+        ref("periodicity_of_check_fermi"),
+        " だけである。これら 2 つは、計算の途中で ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外に現れた添字を ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の中へ引き戻すための橋渡しなので、",
+        math(String.raw`\mathbb{Z}`),
+        " で述べる必要がある。",
+      ]),
+      paragraph(["次の 5 つの性質を後で繰り返し使う。"]),
+      list([
+        [
+          math(
+            String.raw`\text{(1) 相異なる } M \text{ 個の運動量：}\quad
+\mu, \nu \in \check{\mathcal{M}},\ \mu \neq \nu \implies \tilde\theta_\mu \neq \tilde\theta_\nu,
+\qquad 0 < \tilde\theta_\mu < 2\pi`,
+          ),
+        ],
+        [
+          math(
+            String.raw`\text{(2) 共役添字の閉性：}\quad \mu \in \check{\mathcal{M}} \implies M+1-\mu \in \check{\mathcal{M}}`,
+          ),
+        ],
+        [
+          math(
+            String.raw`\text{(3) 共役添字の言い換え：}\quad \left(M+1-\mu\right) - \left(1-\mu\right) = M,
+\quad \text{すなわち } 1-\mu \equiv M+1-\mu \pmod M`,
+          ),
+        ],
+        [
+          math(
+            String.raw`\text{(4) 自己共役点：}\quad
+\mu \in \check{\mathcal{M}},\ M+1-\mu = \mu
+\iff M \text{ が奇数かつ } \mu = \tfrac{M+1}{2}`,
+          ),
+          "。このとき ",
+          math(String.raw`\tilde\theta_\mu = \pi`),
+          "。",
+        ],
+        [
+          math(
+            String.raw`\text{(5) 対の判定：}\quad
+\mu, \nu \in \check{\mathcal{M}} \implies
+\left(\mu+\nu \equiv 1 \pmod M \iff \nu = M+1-\mu\right)`,
+          ),
+          "。したがって ",
+          math(String.raw`\mu,\nu \in \check{\mathcal{M}}`),
+          " では ",
+          math(String.raw`\delta^M_{(\mu+\nu,\,1)} = \delta_{\nu,\,M+1-\mu}`),
+          " である（右辺は通常のクロネッカーのデルタ、すなわち ",
+          math(String.raw`\nu = M+1-\mu`),
+          " のとき ",
+          math(String.raw`1`),
+          "、そうでないとき ",
+          math(String.raw`0`),
+          "）。",
+        ],
+      ]),
+      paragraph([
+        "(5) は、",
+        math(String.raw`\check{\mathcal{M}}`),
+        " へ範囲を絞ったことで**合同式が消える**ことを述べている。",
+        ref("anticommutator_of_check_Z_Y"),
+        " 以降で対を指定するのに合同式が要らなくなるのはこのためである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(1) ",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\left(\mu-\frac12\right)}{M}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\tilde\theta_\nu - \tilde\theta_\mu
+&= \frac{2\pi\left(\nu-\frac12\right)}{M} - \frac{2\pi\left(\mu-\frac12\right)}{M}
+   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+&= \frac{2\pi}{M}\left(\nu - \mu\right)
+   \quad (\because \text{通分と分配法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり ",
+        math(String.raw`\frac{2\pi}{M} > 0`),
+        " なので、",
+        math(String.raw`\mu \neq \nu`),
+        " なら ",
+        math(String.raw`\tilde\theta_\mu \neq \tilde\theta_\nu`),
+        "。また同じ式は ",
+        math(String.raw`\mu \mapsto \tilde\theta_\mu`),
+        " が狭義単調増加であることを与えるので、",
+        math(String.raw`1 \leq \mu \leq M`),
+        " では",
+      ]),
+      displayMath(
+        String.raw`\tilde\theta_1 = \frac{2\pi\cdot\frac12}{M} = \frac{\pi}{M}
+\ \leq\ \tilde\theta_\mu \ \leq\
+\tilde\theta_M = \frac{2\pi\left(M-\frac12\right)}{M} = 2\pi - \frac{\pi}{M}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`M \geq 2`),
+        " より ",
+        math(String.raw`0 < \frac{\pi}{M}`),
+        " かつ ",
+        math(String.raw`2\pi - \frac{\pi}{M} < 2\pi`),
+        " なので ",
+        math(String.raw`0 < \tilde\theta_\mu < 2\pi`),
+        "。",
+      ]),
+      paragraph([
+        "(2) ",
+        math(String.raw`1 \leq \mu \leq M`),
+        " の各辺に ",
+        math(String.raw`-1`),
+        " を掛けると ",
+        math(String.raw`-M \leq -\mu \leq -1`),
+        "、さらに ",
+        math(String.raw`M+1`),
+        " を足すと ",
+        math(String.raw`1 \leq M+1-\mu \leq M`),
+        "。",
+        math(String.raw`M+1-\mu \in \mathbb{Z}`),
+        " なので ",
+        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        "。",
+      ]),
+      paragraph([
+        "(3) ",
+        math(String.raw`(M+1-\mu) - (1-\mu) = M`),
+        " は展開するだけである。",
+        ref("def_delta_M"),
+        " の合同の意味により、差が ",
+        math(String.raw`M`),
+        " の倍数であることが ",
+        math(String.raw`1-\mu \equiv M+1-\mu \pmod M`),
+        " である。",
+      ]),
+      paragraph([
+        "(4) ",
+        math(String.raw`M+1-\mu = \mu`),
+        " は ",
+        math(String.raw`M+1 = 2\mu`),
+        " と同値であり、これは ",
+        math(String.raw`\mu = \frac{M+1}{2}`),
+        " と同値である。",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " なので ",
+        math(String.raw`M+1`),
+        " は偶数、すなわち ",
+        math(String.raw`M`),
+        " は奇数でなければならない。逆に ",
+        math(String.raw`M`),
+        " が奇数なら ",
+        math(String.raw`\frac{M+1}{2} \in \mathbb{Z}`),
+        " であり、",
+        math(String.raw`M \geq 2`),
+        " と併せて ",
+        math(String.raw`1 \leq \frac{M+1}{2} \leq M`),
+        "（右の不等式は ",
+        math(String.raw`M+1 \leq 2M \iff 1 \leq M`),
+        "）なので ",
+        math(String.raw`\frac{M+1}{2} \in \check{\mathcal{M}}`),
+        "。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\tilde\theta_{\frac{M+1}{2}}
+&= \frac{2\pi\left(\frac{M+1}{2}-\frac12\right)}{M}
+   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+&= \frac{2\pi\cdot\frac{M}{2}}{M}
+   \quad \left(\because \tfrac{M+1}{2}-\tfrac12 = \tfrac{M}{2}\right) \\
+&= \pi
+   \quad (\because \text{約分})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`\tilde\theta`),
+        " の定義は ",
+        ref("antiperiodic_exp_sum"),
+        " による。）",
+      ]),
+      paragraph([
+        "(5) ",
+        math(String.raw`(\Leftarrow)`),
+        " ",
+        math(String.raw`\nu = M+1-\mu`),
+        " なら ",
+        math(String.raw`\mu+\nu = M+1`),
+        " なので ",
+        math(String.raw`(\mu+\nu) - 1 = M`),
+        "、すなわち ",
+        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        "。",
+      ]),
+      paragraph([
+        math(String.raw`(\Rightarrow)`),
+        " ",
+        math(String.raw`1 \leq \mu \leq M`),
+        " と ",
+        math(String.raw`1 \leq \nu \leq M`),
+        " を足すと ",
+        math(String.raw`2 \leq \mu+\nu \leq 2M`),
+        "、よって ",
+        math(String.raw`1 \leq \mu+\nu-1 \leq 2M-1`),
+        "。仮定 ",
+        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        " は ",
+        math(String.raw`\mu+\nu-1`),
+        " が ",
+        math(String.raw`M`),
+        " の倍数であることを意味する（",
+        ref("def_delta_M"),
+        " の合同の意味）。",
+      ]),
+      paragraph([
+        math(String.raw`M`),
+        " の倍数 ",
+        math(String.raw`lM`),
+        "（",
+        math(String.raw`l \in \mathbb{Z}`),
+        "）が ",
+        math(String.raw`1 \leq lM \leq 2M-1`),
+        " を満たすのは ",
+        math(String.raw`l = 1`),
+        " のときに限る（",
+        math(String.raw`l \leq 0`),
+        " なら ",
+        math(String.raw`lM \leq 0 < 1`),
+        "、",
+        math(String.raw`l \geq 2`),
+        " なら ",
+        math(String.raw`lM \geq 2M > 2M-1`),
+        "）。よって ",
+        math(String.raw`\mu+\nu-1 = M`),
+        " すなわち ",
+        math(String.raw`\nu = M+1-\mu`),
+        "。",
+      ]),
+      paragraph([
+        "デルタの等式は、",
+        ref("def_delta_M"),
+        " より ",
+        math(String.raw`\delta^M_{(\mu+\nu,1)} = 1 \iff \mu+\nu \equiv 1 \pmod M`),
+        " であり、いま示した同値によりこれが ",
+        math(String.raw`\nu = M+1-\mu`),
+        " と同値だからである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "𝓜̌ = {1,…,M} はこれ以上減らせない: θ~_μ (μ = 1..M) は (0,2π) 内の相異なる M 個であり ((1))、共役 μ ↦ M+1−μ について閉じている ((2))。008 章の 𝓜 = {−M,…,−1,1,…,M} が μ ↦ −μ について閉じていたのと同じ構造である。",
+      ],
+    },
+  },
+
+  {
+    id: "evensector_003b_claim_conjugate_index_of_check_Z_Y",
+    kind: "claim",
+    sourcePath: SRC,
+    sourceOrdinal: 7,
+    title: { tex: String.raw`\check{\mathcal{M}} \text{ の内側で共役添字を取る}` },
+    labels: ["conjugate_index_of_check_Z_Y"],
+    statement: [
+      paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
+      ]),
+      list([
+        [math(String.raw`\text{(1)}\quad \tilde\theta_{M+1-\mu} = 2\pi - \tilde\theta_\mu`)],
+        [
+          math(
+            String.raw`\text{(2)}\quad e^{-ij\tilde\theta_{M+1-\mu}} = e^{ij\tilde\theta_\mu}
+\qquad (j \in \mathbb{Z})`,
+          ),
+        ],
+        [
+          math(
+            String.raw`\text{(3)}\quad \check{Z}_{M+1-\mu} = \check{Z}_{1-\mu},
+\qquad \check{Y}_{M+1-\mu} = \check{Y}_{1-\mu}`,
+          ),
+        ],
+      ]),
+      paragraph([
+        "が成り立つ。とくに (3) により、",
+        ref("def_half_integer_modes"),
+        " (3) の共役添字 ",
+        math(String.raw`1-\mu`),
+        "（これは ",
+        math(String.raw`\mu \geq 2`),
+        " では ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外に出る）を、つねに ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の元である ",
+        math(String.raw`M+1-\mu`),
+        " で置き換えてよい。**013 章から 017 章では以降つねにそうする。**",
+      ]),
+      paragraph([
+        "(2) は ",
+        ref("def_half_integer_modes"),
+        " (3) の ",
+        math(String.raw`\tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
+        " が果たしていた役割を、",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の内側で果たす（位相としては ",
+        math(String.raw`\tilde\theta_{M+1-\mu}`),
+        " は ",
+        math(String.raw`-\tilde\theta_\mu`),
+        " と ",
+        math(String.raw`2\pi`),
+        " しか違わない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(1) ",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta`),
+        " の定義より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\tilde\theta_{M+1-\mu}
+&= \frac{2\pi\left(M+1-\mu-\frac12\right)}{M}
+   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+&= \frac{2\pi\left(M - \left(\mu-\frac12\right)\right)}{M}
+   \quad \left(\because M+1-\mu-\tfrac12 = M - \left(\mu-\tfrac12\right)\right) \\
+&= 2\pi - \frac{2\pi\left(\mu-\frac12\right)}{M} \\
+&= 2\pi - \tilde\theta_\mu
+   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(2) ",
+        math(String.raw`j \in \mathbb{Z}`),
+        " について、(1) と指数法則より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{-ij\tilde\theta_{M+1-\mu}}
+&= e^{-ij\left(2\pi - \tilde\theta_\mu\right)}
+   \quad (\because \text{直前の (1)}) \\
+&= e^{-2\pi i j}\,e^{ij\tilde\theta_\mu}
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= \left(\cos(2\pi j) - i\sin(2\pi j)\right)e^{ij\tilde\theta_\mu}
+   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+&= e^{ij\tilde\theta_\mu}
+   \quad (\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "（指数法則は ",
+        ref("theorem_exp_product"),
+        " を ",
+        math(String.raw`n=1`),
+        " すなわち ",
+        math(String.raw`\mathrm{Mat}(1,\mathbb{C}) = \mathbb{C}`),
+        " に適用したもの、三角関数への書き換えは ",
+        ref("euler_formula_cos_sin"),
+        " による。）",
+      ]),
+      paragraph([
+        "(3) ",
+        ref("def_half_integer_modes"),
+        " (2)（添字の周期性）を添字 ",
+        math(String.raw`1-\mu \in \mathbb{Z}`),
+        " に適用すると ",
+        math(String.raw`\check{Z}_{(1-\mu)+M} = \check{Z}_{1-\mu}`),
+        " であり、",
+        math(String.raw`(1-\mu)+M = M+1-\mu`),
+        " なので ",
+        math(String.raw`\check{Z}_{M+1-\mu} = \check{Z}_{1-\mu}`),
+        "。",
+        math(String.raw`\check{Y}`),
+        " についても同じである。",
+      ]),
+      paragraph([
+        "（ここで ",
+        ref("def_half_integer_modes"),
+        " (2) を ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の外の添字 ",
+        math(String.raw`1-\mu`),
+        " に適用している。",
+        ref("def_check_index_set"),
+        " が述べたとおり、この主張を ",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        " で残してあるのはまさにこの橋渡しのためである。）",
+      ]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
     id: "evensector_004_claim_commutator_H_check_Z_Y",
     kind: "claim",
     sourcePath: SRC,
-    sourceOrdinal: 6,
+    sourceOrdinal: 8,
     title: { tex: String.raw`H_1^{(+)}, H_2 \text{ と } \check{Z}, \check{Y} \text{ の交換関係}` },
     labels: ["commutator_of_H_and_check_Z_Y"],
     statement: [
       paragraph([
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " について（",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について（",
         math(String.raw`H_1^{(+)}`),
         " は ",
         ref("def_V1_pm"),
@@ -1016,39 +1490,61 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
     id: "evensector_005_claim_anticommutator_check_Z_Y",
     kind: "claim",
     sourcePath: SRC,
-    sourceOrdinal: 7,
+    sourceOrdinal: 9,
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ の反交換関係}` },
     labels: ["anticommutator_of_check_Z_Y"],
     statement: [
-      paragraph([math(String.raw`\mu, \nu \in \mathbb{Z}`), " について"]),
+      paragraph([
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について",
+      ]),
       displayMath(
-        String.raw`\left[\check{Z}_\mu, \check{Z}_\nu\right]_+ = 2M\,\delta^M_{(\mu+\nu,\,1)}\,I,
+        String.raw`\left[\check{Z}_\mu, \check{Z}_\nu\right]_+ = 2M\,\delta_{\nu,\,M+1-\mu}\,I,
 \qquad
 \left[\check{Z}_\mu, \check{Y}_\nu\right]_+ = 0,
 \qquad
-\left[\check{Y}_\mu, \check{Y}_\nu\right]_+ = 2M\,\delta^M_{(\mu+\nu,\,1)}\,I`,
+\left[\check{Y}_\mu, \check{Y}_\nu\right]_+ = 2M\,\delta_{\nu,\,M+1-\mu}\,I`,
       ),
       paragraph([
         "が成り立つ。ここで ",
         math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "、",
-        math(String.raw`\delta^M`),
-        " は ",
-        ref("def_delta_M"),
-        " のものである。",
+        math(String.raw`\delta_{\nu,\,M+1-\mu}`),
+        " は通常のクロネッカーのデルタ（",
+        math(String.raw`\nu = M+1-\mu`),
+        " のとき ",
+        math(String.raw`1`),
+        "、そうでないとき ",
+        math(String.raw`0`),
+        "）である。",
+      ]),
+      paragraph([
+        "**対になる添字に合同式が現れない**のは、添字の範囲を ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " に絞ったからである：",
+        ref("def_check_index_set"),
+        " (5) により ",
+        math(String.raw`\mu,\nu \in \check{\mathcal{M}}`),
+        " では ",
+        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        " と ",
+        math(String.raw`\nu = M+1-\mu`),
+        " が同値である。",
       ]),
       paragraph([
         ref("anticommutator_of_hat_Z_and_hat_Y"),
         " では対になる添字が ",
-        math(String.raw`\mu+\nu \equiv 0`),
+        math(String.raw`\nu = -\mu`),
         " だったのに対し、ここでは ",
-        math(String.raw`\mu+\nu \equiv 1 \pmod M`),
+        math(String.raw`\nu = M+1-\mu`),
         " である。これは ",
-        ref("def_half_integer_modes"),
-        " (3) の共役添字が ",
+        ref("conjugate_index_of_check_Z_Y"),
+        " の共役添字が ",
         math(String.raw`-\mu`),
         " ではなく ",
-        math(String.raw`1-\mu`),
+        math(String.raw`M+1-\mu`),
         " であることに対応する。",
       ]),
     ],
@@ -1118,15 +1614,23 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= M\,\delta^M_{(-(\mu+\nu-1),\,0)}
    \quad (\because \text{exp\_sum}) \\
 &= M\,\delta^M_{(\mu+\nu,\,1)}
-   \quad (\because \text{def\_delta\_M})
+   \quad (\because \text{def\_delta\_M}) \\
+&= M\,\delta_{\nu,\,M+1-\mu}
+   \quad (\because \text{def\_check\_index\_set (5)}\ (\mu,\nu \in \check{\mathcal{M}}))
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
+        "（3 番目の等号は ",
         ref("def_delta_M"),
         " より ",
         math(String.raw`-(\mu+\nu-1) \equiv 0 \iff \mu+\nu \equiv 1 \pmod M`),
-        "）。よって第 1 式を得る。",
+        "。最後の等号は ",
+        ref("def_check_index_set"),
+        " (5) により、",
+        math(String.raw`\mu,\nu \in \check{\mathcal{M}}`),
+        " ではこの合同式が ",
+        math(String.raw`\nu = M+1-\mu`),
+        " と同値だからである。）よって第 1 式を得る。",
       ]),
       paragraph([
         ref("anticommutator_of_Z_and_Y"),
@@ -1151,7 +1655,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
     id: "evensector_006_claim_recover_Z_Y",
     kind: "claim",
     sourcePath: SRC,
-    sourceOrdinal: 8,
+    sourceOrdinal: 10,
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ から } Z_j, Y_j \text{ を復元する}` },
     labels: ["recover_Z_Y_from_check_Z_Y"],
     statement: [
@@ -1262,14 +1766,14 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
     id: "evensector_007_claim_H1_H2_via_check_Z_Y",
     kind: "claim",
     sourcePath: SRC,
-    sourceOrdinal: 9,
+    sourceOrdinal: 11,
     title: { tex: String.raw`H_1^{(+)}, H_2 \text{ を } \check{Z}, \check{Y} \text{ で表す}` },
     labels: ["H1_H2_via_check_Z_Y"],
     statement: [
       displayMath(
-        String.raw`H_1^{(+)} = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,\check{Z}_{1-\mu}\,e^{-i\tilde\theta_\mu},
+        String.raw`H_1^{(+)} = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,\check{Z}_{M+1-\mu}\,e^{-i\tilde\theta_\mu},
 \qquad
-H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{1-\mu}\,\check{Y}_\mu`,
+H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       ),
       paragraph([
         "が成り立つ（",
@@ -1277,39 +1781,50 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{1-\mu}\,\check{Y}_\mu`,
         " の半整数運動量版。共役添字が ",
         math(String.raw`-\mu`),
         " から ",
-        math(String.raw`1-\mu`),
-        " に変わっている）。",
+        math(String.raw`M+1-\mu`),
+        " に変わっている）。和の添字 ",
+        math(String.raw`\mu`),
+        " も共役添字 ",
+        math(String.raw`M+1-\mu`),
+        " も ",
+        ref("def_check_index_set"),
+        " (2) により ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の中にとどまる。",
       ]),
     ],
     proof: [
       paragraph([
         "まず ",
         ref("def_half_integer_modes"),
-        " から ",
-        math(String.raw`\check{Z}_{1-\mu}`),
+        " と ",
+        ref("conjugate_index_of_check_Z_Y"),
+        " (2) から ",
+        math(String.raw`\check{Z}_{M+1-\mu}`),
         " の表示を用意する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check{Z}_{1-\mu}
-&= \sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_{1-\mu}}
+\check{Z}_{M+1-\mu}
+&= \sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_{M+1-\mu}}
    \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{k=1}^{M} Z_k\,e^{-ik\left(-\tilde\theta_\mu\right)}
-   \quad (\because \text{def\_half\_integer\_modes (3)}) \\
 &= \sum_{k=1}^{M} Z_k\,e^{ik\tilde\theta_\mu}
+   \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
 \end{aligned}`,
       ),
       paragraph([
         "（1 行目は ",
         ref("def_half_integer_modes"),
-        " の定義、2 行目は同 (3) の ",
-        math(String.raw`\tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
+        " の定義、2 行目は ",
+        ref("conjugate_index_of_check_Z_Y"),
+        " (2) の ",
+        math(String.raw`e^{-ik\tilde\theta_{M+1-\mu}} = e^{ik\tilde\theta_\mu}`),
         " による。）",
       ]),
       paragraph([math(String.raw`H_2`), " について、"]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{1-\mu}\check{Y}_\mu
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
    \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
    \quad (\because \text{直前の displayMath と def\_half\_integer\_modes}) \\
@@ -1351,7 +1866,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{1-\mu}\,\check{Y}_\mu`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{1-\mu}\check{Y}_\mu
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
 &= \frac{1}{M}\sum_{j=1}^{M} Z_jY_j\cdot M
    \quad (\because \text{antiperiodic\_exp\_sum}) \\
 &= \sum_{j=1}^{M} Z_jY_j \\
@@ -1372,10 +1887,10 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{1-\mu}\,\check{Y}_\mu`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{1-\mu}e^{-i\tilde\theta_\mu}
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
    \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
-   \quad (\because \text{def\_half\_integer\_modes と上の } \check{Z}_{1-\mu} \text{ の表示}) \\
+   \quad (\because \text{def\_half\_integer\_modes と上の } \check{Z}_{M+1-\mu} \text{ の表示}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
    e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
    \quad (\because \text{積を二重和へ分配}) \\
@@ -1393,7 +1908,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{1-\mu}\,\check{Y}_\mu`,
         " の ",
         math(String.raw`\check{Y}_\mu`),
         " の定義と、上で用意した ",
-        math(String.raw`\check{Z}_{1-\mu}`),
+        math(String.raw`\check{Z}_{M+1-\mu}`),
         " の表示による。指数法則は ",
         ref("theorem_exp_product"),
         " を ",
@@ -1449,7 +1964,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{1-\mu}\,\check{Y}_\mu`,
       paragraph(["したがって"]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{1-\mu}e^{-i\tilde\theta_\mu}
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
 &= \frac{1}{M}\left(\sum_{j=1}^{M-1} Y_jZ_{j+1}\cdot M + Y_MZ_1\cdot(-M)\right)
    \quad (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\
 &= \sum_{j=1}^{M-1} Y_jZ_{j+1} - Y_MZ_1

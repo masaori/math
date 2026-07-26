@@ -2,14 +2,16 @@
 # check_01: def_check_number_operator / check_number_operator_idempotent
 #           / check_number_operators_commute / trace_of_check_number_operator_product
 #
-#   (1) n^_mu := psi^dagger_mu psi_{1-mu}
-#   (2) (psi^dagger_mu)^2 = 0, (psi_{1-mu})^2 = 0
-#   (3) psi_{1-mu} psi^dagger_mu = I - n^_mu
+#   (1) n^_mu := psi^dagger_mu psi_{M+1-mu}   (mu in 𝓜̌ = {1,...,M})
+#   (2) (psi^dagger_mu)^2 = 0, (psi_{M+1-mu})^2 = 0
+#   (3) psi_{M+1-mu} psi^dagger_mu = I - n^_mu
 #   (4) (n^_mu)^2 = n^_mu
-#   (5) mu != nu なら psi^dagger_mu, psi_{1-mu} は n^_nu と可換、n^_mu n^_nu = n^_nu n^_mu
+#   (5) mu != nu なら psi^dagger_mu, psi_{M+1-mu} は n^_nu と可換、n^_mu n^_nu = n^_nu n^_mu
 #   (6) tr(n^_{mu_1} ... n^_{mu_k}) = 2^{M-k}（相異なる添字、k = 0..M）
+#   (7) def_check_index_set (2): mu in 𝓜̌ => M+1-mu in 𝓜̌、対合 M+1-(M+1-mu) = mu
+#   (8) conjugate_index / periodicity: psi_{M+1-mu} = psi_{1-mu}（周期性による書き換えの正当性）
 #
-#  対照: 対を 1-mu ではなく -mu にすると (3)(4) が壊れる（半整数運動量の共役添字は 1-mu）。
+#  対照: 対を M+1-mu ではなく -mu にすると (3)(4) が壊れる（半整数運動量の共役添字は M+1-mu）。
 # =========================================================================
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
@@ -26,6 +28,7 @@ w_comm_psi = 0
 w_comm_n = 0
 w_trace = 0
 w_wrong_pair = 0
+w_rewrite = 0
 
 for M in EIG_M:
     O = SpinOps(M)
@@ -35,7 +38,12 @@ for M in EIG_M:
         ns = n_check_all(O, P)
         for mu in range(1, M + 1):
             pdag, _ = psi_pair(O, mu, P)
-            _, psi1m = psi_pair(O, 1 - mu, P)
+            # def_check_index_set (2): M+1-mu も 𝓜̌ に属する
+            assert 1 <= M + 1 - mu <= M and M + 1 - (M + 1 - mu) == mu
+            _, psi1m = psi_pair(O, M + 1 - mu, P)
+            # 周期性による書き換えの正当性: psi_{M+1-mu} = psi_{1-mu}
+            _, psi_old = psi_pair(O, 1 - mu, P)
+            w_rewrite = max(w_rewrite, opnorm(psi1m - psi_old))
             # (2)
             w_sq_dag = max(w_sq_dag, opnorm(pdag * pdag))
             w_sq_psi = max(w_sq_psi, opnorm(psi1m * psi1m))
@@ -63,15 +71,16 @@ for M in EIG_M:
             w_trace = max(w_trace, abs(prod.trace() - CDF(2) ** (M - len(T))))
 
 ok_all &= report("(psi^dagger_mu)^2 = 0", w_sq_dag, TOL)
-ok_all &= report("(psi_{1-mu})^2 = 0", w_sq_psi, TOL)
-ok_all &= report("psi_{1-mu} psi^dagger_mu = I - n^_mu", w_comp, TOL)
+ok_all &= report("(psi_{M+1-mu})^2 = 0", w_sq_psi, TOL)
+ok_all &= report("psi_{M+1-mu} psi^dagger_mu = I - n^_mu", w_comp, TOL)
 ok_all &= report("(n^_mu)^2 = n^_mu", w_idem, TOL)
-ok_all &= report("[psi^dagger_mu, n^_nu] = [psi_{1-mu}, n^_nu] = 0 (mu != nu)", w_comm_psi, TOL)
+ok_all &= report("[psi^dagger_mu, n^_nu] = [psi_{M+1-mu}, n^_nu] = 0 (mu != nu)", w_comm_psi, TOL)
+ok_all &= report("psi_{M+1-mu} = psi_{1-mu}（周期性による書き換え）", w_rewrite, TOL)
 ok_all &= report("n^_mu n^_nu = n^_nu n^_mu", w_comm_n, TOL)
 ok_all &= report("tr(prod_{mu in T} n^_mu) = 2^{M-|T|}", w_trace, 1e-7)
 
 print(f"  対照（対を -mu にした n = psi^dagger_mu psi_{{-mu}} の冪等性の破れ）= "
-      f"{float(w_wrong_pair):.3e}  ->  {'PASS（大きく破れる＝対は 1-mu）' if w_wrong_pair > 1e-2 else 'FAIL'}")
+      f"{float(w_wrong_pair):.3e}  ->  {'PASS（大きく破れる＝対は M+1-mu）' if w_wrong_pair > 1e-2 else 'FAIL'}")
 ok_all &= (w_wrong_pair > 1e-2)
 
 print("check_01:", "PASS" if ok_all else "FAIL")

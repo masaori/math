@@ -13,12 +13,12 @@
 #   gamma_2(t)  = i e^{i t} s_2* (c_1 cos t - i sin t - s_1 c_2)
 #   gamma(t~_mu)= arccosh(gamma_1(t~_mu))
 #   (psi^dagger_mu, psi_mu) := (checkZ_mu, checkY_mu) P^_mu
-#   X^ := sum_{mu=1}^{M} gamma(t~_mu) ( psi^dagger_mu psi_{1-mu} - (1/2) I )
+#   X^ := sum_{mu in 𝓜̌} gamma(t~_mu) ( psi^dagger_mu psi_{M+1-mu} - (1/2) I )
 #   V^' := exp(X^)
 #   V^{(+)} = (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}
 #
 #   本章で新しく入るもの:
-#   n^_mu   := psi^dagger_mu psi_{1-mu}                     (def_check_number_operator)
+#   n^_mu   := psi^dagger_mu psi_{M+1-mu}                   (def_check_number_operator)
 #   Q^_eps  := prod_{mu=1}^{M} ( eps_mu n^_mu + (1-eps_mu)(I - n^_mu) )
 #   S_1^{(+)} := i K_1 H_1^{(+)},  S_2 := i K_2^* H_2        (iH_is_real_symmetric)
 #   U := E F,  E = prod_{m odd} sigma_m^x,  F = prod_m sigma_m^z   (sign_flip_conjugation)
@@ -125,9 +125,9 @@ def delta_M(M, x, y):
 # 017 章で新しく入るもの
 # ---------------------------------------------------------
 def n_check(O, mu, P):
-    """def_check_number_operator: n^_mu := psi^dagger_mu psi_{1-mu}"""
+    """def_check_number_operator: n^_mu := psi^dagger_mu psi_{M+1-mu}"""
     pdag, _ = psi_pair(O, mu, P)
-    _, psi1m = psi_pair(O, 1 - mu, P)
+    _, psi1m = psi_pair(O, O.M + 1 - mu, P)
     return matrix(CDF, pdag * psi1m)
 
 

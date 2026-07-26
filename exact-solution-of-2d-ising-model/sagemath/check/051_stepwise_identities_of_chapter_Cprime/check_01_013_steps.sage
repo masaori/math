@@ -170,9 +170,46 @@ for M in STEP_M:
               th_tilde(M, 1 - mu), -t)
 
     # -----------------------------------------------------------------
+    # def_check_index_set / conjugate_index_of_check_Z_Y の各段（mu ∈ 𝓜̌ のみ）
+    # -----------------------------------------------------------------
+    for mu in range(1, M + 1):
+        t = th_tilde(M, mu)
+        # --- def_check_index_set の各段（新規） ---
+        if mu + 1 <= M:
+            S.add("def_check_index_set (1) theta~_nu - theta~_mu = 2pi(nu-mu)/M",
+                  th_tilde(M, mu + 1) - t, CDF(2 * pi) / M)
+        S.add("def_check_index_set (1) theta~_1 = pi/M", th_tilde(M, 1), CDF(pi) / M)
+        S.add("def_check_index_set (1) theta~_M = 2pi - pi/M",
+              th_tilde(M, M), CDF(2 * pi) - CDF(pi) / M)
+        S.add("def_check_index_set (1) 0 < theta~_mu < 2pi",
+              CDF(1 if 0 < t.real() < float(2 * pi) else 0), CDF(1))
+        S.add("def_check_index_set (2) 1 <= M+1-mu <= M",
+              CDF(1 if 1 <= M + 1 - mu <= M else 0), CDF(1))
+        S.add("def_check_index_set (3) (M+1-mu) - (1-mu) = M", CDF(M), CDF(M))
+        S.add("def_check_index_set (4) 自己共役点は M 奇数の mu=(M+1)/2 のみ",
+              CDF(1 if ((M + 1 - mu == mu) == (M % 2 == 1 and 2 * mu == M + 1)) else 0),
+              CDF(1))
+        if M % 2 == 1 and 2 * mu == M + 1:
+            S.add("def_check_index_set (4) そのとき theta~_mu = pi", t, CDF(pi))
+        for nu in range(1, M + 1):
+            S.add("def_check_index_set (5) (mu+nu = 1 mod M) <=> (nu = M+1-mu)",
+                  CDF(1 if (((mu + nu - 1) % M == 0) == (nu == M + 1 - mu)) else 0),
+                  CDF(1))
+        # --- conjugate_index_of_check_Z_Y の各段（新規） ---
+        S.add("conjugate_index (1) theta~_{M+1-mu} = 2pi - theta~_mu",
+              th_tilde(M, M + 1 - mu), CDF(2 * pi) - t)
+        for j in range(1, M + 1):
+            S.add("conjugate_index (2) e^{-ij theta~_{M+1-mu}} = e^{ij theta~_mu}",
+                  eiph(-j * th_tilde(M, M + 1 - mu)), eiph(j * t))
+        S.add("conjugate_index (3) checkZ_{M+1-mu} = checkZ_{1-mu}",
+              checkZ(O, M + 1 - mu), checkZ(O, 1 - mu))
+        S.add("conjugate_index (3) checkY_{M+1-mu} = checkY_{1-mu}",
+              checkY(O, M + 1 - mu), checkY(O, 1 - mu))
+
+    # -----------------------------------------------------------------
     # commutator_of_H_and_check_Z_Y / Step 2〜4 の各段
     # -----------------------------------------------------------------
-    for mu in list(range(1, M + 1)) + [0, -1]:
+    for mu in range(1, M + 1):
         t = th_tilde(M, mu)
         Zc, Yc = checkZ(O, mu), checkY(O, mu)
 
@@ -251,6 +288,8 @@ for M in STEP_M:
                   tm + tn, RDF(2 * pi * (mu + nu - 1)) / M)
             S.add("anticommutator_of_check_Z_Y (5) exp_sum で M delta^M_{(mu+nu,1)}",
                   expsum, 2 * Id * CDF(M * d))
+            S.add("anticommutator_of_check_Z_Y (5b) def_check_index_set (5) で delta_{nu,M+1-mu}",
+                  CDF(d), CDF(1 if nu == M + 1 - mu else 0))
             S.add("anticommutator_of_check_Z_Y (6) 第 2 式 [checkZ,checkY]_+ = 0",
                   Zm * Yn + Yn * Zm, matrix(CDF, O.d, O.d, 0))
             S.add("anticommutator_of_check_Z_Y (7) 第 3 式 [checkY,checkY]_+",
@@ -284,20 +323,17 @@ for M in STEP_M:
     # -----------------------------------------------------------------
     for mu in range(1, M + 1):
         t = th_tilde(M, mu)
-        # checkZ_{1-mu} の 3 段
-        c0 = checkZ(O, 1 - mu)
-        c1 = sum([O.Z[k] * eiph(-k * th_tilde(M, 1 - mu)) for k in range(1, M + 1)],
-                 matrix(CDF, O.d, O.d, 0))
-        c2 = sum([O.Z[k] * eiph(-k * (-t)) for k in range(1, M + 1)],
+        # checkZ_{M+1-mu} の 2 段（合同式なし）
+        c0 = checkZ(O, M + 1 - mu)
+        c1 = sum([O.Z[k] * eiph(-k * th_tilde(M, M + 1 - mu)) for k in range(1, M + 1)],
                  matrix(CDF, O.d, O.d, 0))
         c3 = sum([O.Z[k] * eiph(k * t) for k in range(1, M + 1)],
                  matrix(CDF, O.d, O.d, 0))
-        S.add("H1_H2_via_check (Z1-mu 1) def_half_integer_modes", c0, c1)
-        S.add("H1_H2_via_check (Z1-mu 2) def_half_integer_modes (3)", c1, c2)
-        S.add("H1_H2_via_check (Z1-mu 3) 整理", c2, c3)
+        S.add("H1_H2_via_check (ZM+1-mu 1) def_half_integer_modes", c0, c1)
+        S.add("H1_H2_via_check (ZM+1-mu 2) conjugate_index_of_check_Z_Y (2)", c1, c3)
 
     # H_2 側の 4 段
-    h0 = sum([checkZ(O, 1 - mu) * checkY(O, mu) for mu in range(1, M + 1)],
+    h0 = sum([checkZ(O, M + 1 - mu) * checkY(O, mu) for mu in range(1, M + 1)],
              matrix(CDF, O.d, O.d, 0)) / M
     h1 = sum([(sum([O.Z[k] * eiph(k * th_tilde(M, mu)) for k in range(1, M + 1)],
                    matrix(CDF, O.d, O.d, 0)))
@@ -323,7 +359,7 @@ for M in STEP_M:
     S.add("H1_H2_via_check (H2 6) = H_2", h0, H2)
 
     # H_1^{(+)} 側の 4 段
-    k0 = sum([checkY(O, mu) * checkZ(O, 1 - mu) * eiph(-th_tilde(M, mu))
+    k0 = sum([checkY(O, mu) * checkZ(O, M + 1 - mu) * eiph(-th_tilde(M, mu))
               for mu in range(1, M + 1)], matrix(CDF, O.d, O.d, 0)) / M
     k1 = sum([(sum([O.Y[j] * eiph(-j * th_tilde(M, mu)) for j in range(1, M + 1)],
                    matrix(CDF, O.d, O.d, 0)))
