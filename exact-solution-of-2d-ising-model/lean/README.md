@@ -103,6 +103,50 @@ EOF
   **冒頭コメントに原文の問題点と、形式化した修正版ステートメントを明記する**
   （例: `Ising2D/Part002/Theorem000_TensorBasis.lean`）。
 
+## 具体版と抽象版の 2 本立て
+
+`exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、**同じ主張について
+具体版と抽象版の 2 つを置く**。
+
+| | 何を書くか | 何のためか |
+| --- | --- | --- |
+| 具体版 | 人手証明と同じ抽象度（複素行列）で、1 対 1 に対応する主張 | 人手証明の正当性を保証する |
+| 抽象版 | 不要な構造を取り払い、証明に必要な概念だけを残した主張 | 何が本質的かを示す。具体版が過剰な構造を要求していないかの検査 |
+
+規約:
+
+- 両版のファイル冒頭コメントに**同じ人手証明のラベル**を書き、相互に参照させる。
+- 抽象版から具体版が特殊化で得られる場合は、**具体版を抽象版の系として導出する**。
+  ただし人手証明と 1 対 1 に対応する形の主張は必ず別に立てる。
+- **抽象版は Lean の中だけに置く。** 人手証明の本文（`structured-latex/content/`）にも
+  参照用ノート（`structured-latex/notes/`）にも持ち込まない。
+- 抽象版は `Ising2D/Abstract/` 以下、名前空間 `Ising2D.Abstract` に置く。
+
+現在 2 本立てになっている主張:
+
+| 人手証明のラベル | 具体版 | 抽象版 |
+| --- | --- | --- |
+| `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`） | `Ising2D.commutator_via_anticommutators`（任意の環） |
+| `<scalar_identity_commutes>` | `Ising2D.scalar_identity_commutes_fin`（体 `K` 上の `Mat(n, K)`） | `Ising2D.Abstract.smul_one_commute` / `smul_one_sub_comm`（任意の `S`-代数） |
+| `<centralizer_is_scalar>` | `Ising2D.centralizer_is_scalar`（`Mat(2,ℂ)^{⊗M}`） | `Ising2D.Abstract.centralizer_is_scalar_semiring`（係数は任意の半環） |
+| `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.Abstract.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
+| `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.Abstract.one_eq_sum_single`（任意の半環・任意の有限添字型） |
+| `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.Abstract.acomm_lincomb_clifford` / `Abstract.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
+
+抽象版から得られた知見（本文には持ち込まないが、解説パートの素材になる）:
+
+- `ψ` の反交換関係に効いているのは `hat(Z)^{(-)}, hat(Y)` の 4 本の反交換関係と、
+  係数についてのスカラー恒等式 2 本だけである。`hat(Z)`, `hat(Y)` の具体形も、複素行列であることも、
+  テンソル冪であることも、`M`・`δ^M_{μ+ν,0}`・`γ_2` も効いていない。
+
+- 交換子と反交換子の恒等式には、行列であることも複素数であることも効いていない
+  （分配法則と結合法則だけで足りる）。
+- スカラー倍の恒等行列が全行列と可換であることに効いているのは、スカラー作用と積の
+  両立則だけである。次数 `n ≥ 1` は本質的でなく、引き算すら「差が `0`」という述べ方の
+  ためにしか使っていない。
+- 中心がスカラーであることに効いているのは、添字集合が有限で等号判定可能なことだけである。
+  係数が非可換だとスカラーは「係数環の中心の元」に限られ、ℂ の可換性がその条件を消している。
+
 ## `Mat(2, ℂ)^{⊗M}` の表現方針（決定事項）
 
 人手証明の `Mat(2, CC)^(times.o M)` は、Lean では次の 2 通りに表せる。
@@ -251,6 +295,12 @@ EOF
 | `Ising2D.AMat_mulVec_Pmat_col_zero` / `..._col_one` | `P_μ` の各列は `A(θ_μ)` の固有ベクトル（固有値は `D_μ` の対角成分） | `commutation_V_psi` |
 | `Ising2D.TV_psiDag_of_action` / `TV_psi_of_action` | `T(ψ_μ^†) = λ_{+,μ}ψ_μ^†`, `T(ψ_μ) = λ_{-,μ}ψ_μ`（**`T` の作用を仮定**） | `commutation_V_psi` |
 | `Ising2D.TV_psiDag_psi_of_action` | 上を `λ_{±,μ} = γ_1 ∓ i t` の明示形で述べた版 | 同上 |
+| `Ising2D.Abstract.acomm_lincomb` / `Abstract.acomm_lincomb_clifford` | 反交換関係を満たす 4 元の線型結合の反交換子 `= ((pp'+qq')D)·1`（**抽象版**、任意の ℂ-代数） | `anticommutator_of_psi` |
+| `Ising2D.Abstract.car_of_coeffs` | 抽象版 CAR（仮定は反交換関係＋係数のスカラー恒等式 2 本だけ） | 同上 |
+| `Ising2D.acomm_hatZMinus_hatY_lin2_of_abstract` | `acomm_hatZMinus_hatY_lin2` が抽象版の特殊化であることの確認 | 同上 |
+| `Ising2D.acomm_psi_relations_of_car` | `ψ` の反交換関係 3 式を**抽象版の系として**導出した版（具体版と同じ主張） | 同上 |
+| `Ising2D.acomm_psiDag_psiDag_of_opposite_branch` | **逆分枝 `t_ν = -t_μ` では `[ψ_μ^†, ψ_ν^†]₊ = I`**（同一分枝の仮定が必要なことの証明） | 同上 |
+| `Ising2D.acomm_psiDag_psi_of_opposite_branch` | **逆分枝では `[ψ_μ^†, ψ_ν]₊ = 0`**（原文第 2 式が破れる） | 同上 |
 
 ## 形式化の過程で見つかった原文の問題
 

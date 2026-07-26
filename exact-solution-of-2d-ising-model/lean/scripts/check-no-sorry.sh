@@ -40,6 +40,14 @@ targets=(
   Ising2D.E_mul_E
   Ising2D.one_eq_sum_E
   Ising2D.scalar_identity_commutes
+  Ising2D.scalar_identity_commutes_fin
+  Ising2D.Abstract.smul_one_commute
+  Ising2D.Abstract.smul_one_sub_comm
+  Ising2D.Abstract.centralizer_is_scalar_semiring
+  Ising2D.Abstract.centralizer_is_scalar_commSemiring
+  Ising2D.Abstract.single_mul_single_eq_ite
+  Ising2D.Abstract.one_eq_sum_single
+  Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm
   Ising2D.centralizer_is_scalar
   Ising2D.centralizer_is_scalar_abstract
   Ising2D.matExp_units_conj
@@ -224,6 +232,15 @@ targets=(
   Ising2D.Amat_eq_AMat
   "Ising2D.B1_mul_B2_mul_B1_eq_AMat'"
   Ising2D.TV_hatZ_hatY_of_action_AMat
+  Ising2D.Abstract.acomm_lincomb
+  Ising2D.Abstract.acomm_lincomb_clifford
+  Ising2D.Abstract.car_of_coeffs
+  Ising2D.acomm_hatZMinus_hatY_lin2_of_abstract
+  Ising2D.psi_eq_neg_coeff
+  Ising2D.psi_coeff_identities
+  Ising2D.acomm_psi_relations_of_car
+  Ising2D.acomm_psiDag_psiDag_of_opposite_branch
+  Ising2D.acomm_psiDag_psi_of_opposite_branch
 )
 
 {

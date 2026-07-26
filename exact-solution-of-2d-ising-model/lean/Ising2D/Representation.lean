@@ -17,6 +17,7 @@
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Data.Matrix.Basis
 import Mathlib.LinearAlgebra.Multilinear.Basic
+import Ising2D.Abstract.MatrixUnits
 import Ising2D.Part002.Theorem000_TensorBasis
 
 open scoped TensorProduct
@@ -137,26 +138,20 @@ theorem matrixUnitBasis_apply (IJ : Conf M × Conf M) :
     matrixUnitBasis M IJ = E IJ.1 IJ.2 :=
   Matrix.stdBasis_eq_single _ _ _
 
-/-- 人手証明 003 Step 2 の積公式 `E_{IJ} E_{KL} = δ_{JK} E_{IL}`。 -/
-theorem E_mul_E (I J K L : Conf M) :
-    E I J * E K L = if J = K then E I L else 0 := by
-  by_cases h : J = K
-  · subst h; simp [E]
-  · rw [if_neg h]
-    ext a b
-    rw [Matrix.mul_apply]
-    refine Finset.sum_eq_zero fun x _ => ?_
-    simp only [E, Matrix.single_apply]
-    by_cases hx : J = x
-    · subst hx
-      simp [Ne.symm h]
-    · simp [hx]
+/-- 人手証明 003 Step 2 の積公式 `E_{IJ} E_{KL} = δ_{JK} E_{IL}`。
 
-/-- 人手証明 003 Step 2 の単位元の展開 `I = Σ_P E_{PP}`。 -/
-theorem one_eq_sum_E : (1 : TensorPow M) = ∑ P : Conf M, E P P := by
-  ext s t
-  rw [Matrix.sum_apply]
-  simp [E, Matrix.single_apply, Matrix.one_apply, ite_and]
+抽象版は `Ising2D/Abstract/MatrixUnits.lean` の
+`Ising2D.Abstract.single_mul_single_eq_ite`（係数は任意の半環、添字は 4 つとも別の型でよい）。
+ここではその特殊化として、係数 `ℂ`・添字 `Conf M` の場合を人手証明の記法で述べる。 -/
+theorem E_mul_E (I J K L : Conf M) :
+    E I J * E K L = if J = K then E I L else 0 :=
+  Abstract.single_mul_single_eq_ite I J K L
+
+/-- 人手証明 003 Step 2 の単位元の展開 `I = Σ_P E_{PP}`。
+
+抽象版は `Ising2D.Abstract.one_eq_sum_single`（係数は任意の半環、添字は任意の有限型）。 -/
+theorem one_eq_sum_E : (1 : TensorPow M) = ∑ P : Conf M, E P P :=
+  Abstract.one_eq_sum_single
 
 end MatrixUnits
 

@@ -301,294 +301,490 @@ export default defineBlocks([
     kind: "theorem",
     sourcePath: "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
     sourceOrdinal: 1,
-    title: null,
+    title: { text: "exp 級数の各点収束（数ベクトルへの作用・成分・行列への線型写像）" },
     labels: ["exp_converges"],
     statement: [
       paragraph([
-        "体 ",
-        math(String.raw`K`),
-        ": ",
-        math(String.raw`\mathbb{R}`),
+        math(String.raw`K := \mathbb{R}`),
         " または ",
-        math(String.raw`\mathbb{C}`),
+        math(String.raw`K := \mathbb{C}`),
         "、",
-        math(String.raw`V`),
-        ": 有限次元 ",
-        math(String.raw`K`),
-        "-ノルム線型空間",
+        math(String.raw`n \in \mathbb{Z}_{\ge 1}`),
+        " とし、ノルムと収束は ",
+        ref("def_matrix_norm"),
+        " のものとする。",
       ]),
       paragraph([
-        "線型写像 ",
-        math(String.raw`X : V \to V`),
-        " について、",
+        "(1) ",
+        math(String.raw`A \in \mathrm{Mat}(n,K)`),
+        " とし、",
       ]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!} \underbrace{X \circ X \circ \cdots \circ X}_{n \text{ times}}`,
+        String.raw`S_N := \sum_{m=0}^{N}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K), \qquad
+S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
       ),
-      paragraph(["は線型写像 ", math(String.raw`V \to V`), " に各点収束する。"]),
+      paragraph([
+        "とおく（",
+        math(String.raw`S`),
+        " の存在は ",
+        ref("matrix_exp_series_converges"),
+        " (1) による）。このとき次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1a)（数ベクトルへの作用の各点収束）すべての ",
+          math(String.raw`v \in K^n`),
+          " について ",
+          math(String.raw`S_N v \to S v`),
+          " が ",
+          math(String.raw`K^n`),
+          " において成り立つ。",
+        ],
+        [
+          "(1b)（成分ごとの収束）すべての ",
+          math(String.raw`i, j \in \{1,\dots,n\}`),
+          " について ",
+          math(String.raw`(S_N)_{ij} \to S_{ij}`),
+          "、すなわち ",
+          math(String.raw`\left|(S_N)_{ij}-S_{ij}\right| \to 0`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        "(2) ",
+        math(String.raw`\Phi : \mathrm{Mat}(n,K) \to \mathrm{Mat}(n,K)`),
+        " を ",
+        math(String.raw`K`),
+        "-線型写像とする。すなわち ",
+        math(String.raw`Y, Z \in \mathrm{Mat}(n,K)`),
+        "、",
+        math(String.raw`c \in K`),
+        " について ",
+        math(String.raw`\Phi(Y+Z)=\Phi(Y)+\Phi(Z)`),
+        " かつ ",
+        math(String.raw`\Phi(cY)=c\,\Phi(Y)`),
+        " が成り立つとする。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について行列単位 ",
+        math(String.raw`E^{(k,l)} \in \mathrm{Mat}(n,K)`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\left(E^{(k,l)}\right)_{ij} :=
+\begin{cases} 1 & ((i,j)=(k,l)) \\ 0 & (\text{それ以外}) \end{cases}`,
+      ),
+      paragraph([" で定め、"]),
+      displayMath(
+        String.raw`c_{\Phi} := \sqrt{\sum_{k=1}^{n}\sum_{l=1}^{n}\left\|\Phi\!\left(E^{(k,l)}\right)\right\|^2}^{\,(\mathbb{R}_{\ge 0})}
+\in \mathbb{R}_{\ge 0}`,
+      ),
+      paragraph([
+        " とおく。また ",
+        math(String.raw`\Phi^0 := \mathrm{id}_{\mathrm{Mat}(n,K)}`),
+        "、",
+        math(String.raw`\Phi^{m+1} := \Phi \circ \Phi^{m}`),
+        "（",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        "）とおく。このとき次が成り立つ。",
+      ]),
+      list([
+        [
+          "(2a) すべての ",
+          math(String.raw`Y \in \mathrm{Mat}(n,K)`),
+          " について ",
+          math(String.raw`\|\Phi(Y)\| \le c_{\Phi}\,\|Y\|`),
+          "。",
+        ],
+        [
+          "(2b) すべての ",
+          math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+          " について ",
+          math(String.raw`\Phi^m`),
+          " は ",
+          math(String.raw`K`),
+          "-線型であり、",
+          math(String.raw`\|\Phi^m(Y)\| \le c_{\Phi}^{\,m}\,\|Y\|`),
+          "（",
+          math(String.raw`c_{\Phi}^{\,0}:=1`),
+          "）。",
+        ],
+        [
+          "(2c)（各点収束）すべての ",
+          math(String.raw`Y \in \mathrm{Mat}(n,K)`),
+          " について、部分和 ",
+          math(String.raw`T_N(Y) := \sum_{m=0}^{N}\frac{1}{m!}\Phi^m(Y)`),
+          " は ",
+          math(String.raw`\mathrm{Mat}(n,K)`),
+          " において収束する。その極限を ",
+          math(String.raw`T(Y) := \sum_{m=0}^{\infty}\frac{1}{m!}\Phi^m(Y)`),
+          " と書く。",
+        ],
+        [
+          "(2d) ",
+          math(String.raw`T : \mathrm{Mat}(n,K) \to \mathrm{Mat}(n,K)`),
+          " は ",
+          math(String.raw`K`),
+          "-線型写像である。",
+        ],
+      ]),
     ],
     proof: [
       paragraph([
         "以下、",
-        math(String.raw`V`),
-        " のノルムを ",
-        math(String.raw`\|\cdot\|_V`),
-        " と書く。ノルム線型空間の公理として、",
-        math(String.raw`v,v'\in V`),
-        "、",
-        math(String.raw`\lambda\in K`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\|v\|_V\ge 0,\qquad
-\left(\|v\|_V=0\iff v=0\right),\qquad
-\|\lambda v\|_V=|\lambda|\,\|v\|_V,\qquad
-\|v+v'\|_V\le\|v\|_V+\|v'\|_V`,
-      ),
-      paragraph([
-        "を用いる。",
-        math(String.raw`K^d`),
-        " と ",
-        math(String.raw`\mathrm{Mat}(d,K)`),
-        " のノルム ",
         math(String.raw`\|\cdot\|`),
         " と収束は ",
         ref("def_matrix_norm"),
-        " のものとする。",
-        math(String.raw`d := \dim_K V`),
-        " とおく。",
+        " のもの（",
+        math(String.raw`K^n`),
+        " と ",
+        math(String.raw`\mathrm{Mat}(n,K)`),
+        " の成分の平方和の平方根）である。",
       ]),
       paragraph([
-        "Step 0: ",
-        math(String.raw`d=0`),
-        " の場合。このとき ",
-        math(String.raw`V=\{0\}`),
-        " であり、",
-        math(String.raw`V`),
-        " 上の線型写像は零写像のみである。部分和はすべて零写像であり、各 ",
-        math(String.raw`v\in V`),
-        " について部分和の値は ",
-        math(String.raw`0`),
-        " で一定だから零写像（線型写像）に各点収束する。以下 ",
-        math(String.raw`d\ge 1`),
-        " とする。",
-      ]),
-      paragraph([
-        "Step 1: 座標写像と行列表現。",
-        math(String.raw`V`),
-        " は有限次元なので基底 ",
-        math(String.raw`E=\{e_1,\dots,e_d\}\subset V`),
-        " が存在する。",
-        math(String.raw`v\in V`),
-        " を ",
-        math(String.raw`v=\sum_{i=1}^{d}w_ie_i`),
-        "（",
-        math(String.raw`w_i\in K`),
-        " は一意）と表し、",
+        "Step 1: 成分の絶対値はノルム以下である。",
+        math(String.raw`B=(b_{ij})\in\mathrm{Mat}(n,K)`),
+        " と ",
+        math(String.raw`i,j\in\{1,\dots,n\}`),
+        " について、",
+        ref("def_matrix_norm"),
+        " の定義に現れる平方和は非負項の有限和であり ",
+        math(String.raw`|b_{ij}|^2`),
+        " はその項の 1 つであるから",
       ]),
       displayMath(
-        String.raw`c : V \to K^d, \qquad c(v) := (w_1,\dots,w_d)`,
+        String.raw`|b_{ij}|^2 \le \sum_{k=1}^{n}\sum_{l=1}^{n}|b_{kl}|^2 = \|B\|^2`,
       ),
       paragraph([
-        "とおくと ",
-        math(String.raw`c`),
-        " は線型同型写像である（基底による座標表示の一意性）。",
-        math(String.raw`X`),
-        " は線型なので ",
-        math(String.raw`X(e_j)`),
-        " を基底で展開して ",
-        math(String.raw`X(e_j)=\sum_{i=1}^{d}A_{ij}e_i`),
-        "（",
-        math(String.raw`A_{ij}\in K`),
-        "）と書ける。",
-        math(String.raw`A:=(A_{ij})\in\mathrm{Mat}(d,K)`),
-        " とおくと、",
+        "（最後の等号は ",
+        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
+        " による）。",
+        math(String.raw`|b_{ij}|\ge 0`),
+        " かつ ",
+        math(String.raw`\|B\|\ge 0`),
+        " であるから ",
+        ref("matrix_norm_triangle_inequality"),
+        " の Step 0（非負実数の平方の単調性）より",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-X(v)
-&= X\!\left(\sum_{j=1}^{d}w_je_j\right) \\
-&= \sum_{j=1}^{d}w_jX(e_j) \quad (\because X \text{ の線型性}) \\
-&= \sum_{j=1}^{d}w_j\sum_{i=1}^{d}A_{ij}e_i \\
-&= \sum_{i=1}^{d}\left(\sum_{j=1}^{d}A_{ij}w_j\right)e_i
-\quad (\because \text{有限和の順序交換})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`|b_{ij}| \le \|B\| \qquad (i,j\in\{1,\dots,n\})`),
       paragraph([
-        "すなわち ",
-        math(String.raw`c(X(v))=A\,c(v)`),
-        "。これを ",
-        math(String.raw`n`),
-        " 回繰り返すと（",
-        math(String.raw`n`),
-        " に関する帰納法。",
-        math(String.raw`n=0`),
-        " では ",
-        math(String.raw`X^0=\mathrm{id}_V`),
-        "、",
-        math(String.raw`A^0=I`),
-        " で成立）",
-      ]),
-      displayMath(String.raw`c(X^n(v))=A^n\,c(v) \qquad (n\in\mathbb{Z}_{\ge 0})`),
-      paragraph([
-        "Step 2: 行列側の級数の収束。",
+        "Step 2: (1b)。",
         ref("matrix_exp_series_converges"),
+        " (1) と ",
+        ref("def_matrix_norm"),
+        " の収束の定義より ",
+        math(String.raw`\|S_N-S\|\to 0`),
+        "。行列の差は成分ごとの差であるから ",
+        math(String.raw`(S_N-S)_{ij}=(S_N)_{ij}-S_{ij}`),
+        " であり、Step 1 を ",
+        math(String.raw`B=S_N-S`),
+        " に適用して",
+      ]),
+      displayMath(
+        String.raw`0\le\left|(S_N)_{ij}-S_{ij}\right|\le\|S_N-S\|`,
+      ),
+      paragraph([
+        "右辺は ",
+        math(String.raw`0`),
+        " に収束するから ",
+        math(String.raw`\left|(S_N)_{ij}-S_{ij}\right|\to 0`),
+        "。",
+      ]),
+      paragraph([
+        "Step 3: (1a)。",
+        math(String.raw`v\in K^n`),
+        " を固定する。行列と数ベクトルの積は分配律を満たすから ",
+        math(String.raw`S_Nv-Sv=(S_N-S)v`),
+        " であり、",
+        ref("matrix_norm_vector_bound"),
         " より",
       ]),
       displayMath(
-        String.raw`S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m
-= \lim_{N\to\infty}S_N, \qquad S_N := \sum_{m=0}^{N}\frac{1}{m!}A^m`,
+        String.raw`0\le\|S_Nv-Sv\|=\|(S_N-S)v\|\le\|S_N-S\|\cdot\|v\|`,
       ),
       paragraph([
-        "が ",
-        math(String.raw`\mathrm{Mat}(d,K)`),
-        " において存在する。すなわち ",
-        math(String.raw`\|S_N-S\|\to 0`),
-        "。",
-      ]),
-      paragraph([
-        "Step 3: 座標から ",
-        math(String.raw`V`),
-        " のノルムへの評価。",
-      ]),
-      displayMath(
-        String.raw`C := \sqrt{\sum_{i=1}^{d}\|e_i\|_V^2}^{\,(\mathbb{R}_{\ge 0})} \in\mathbb{R}_{\ge 0}`,
-      ),
-      paragraph([
-        " とおく。",
-        math(String.raw`t=(t_1,\dots,t_d)\in K^d`),
-        " について ",
-        math(String.raw`c^{-1}(t)=\sum_{i=1}^{d}t_ie_i`),
-        " であるから、",
-        math(String.raw`V`),
-        " の三角不等式を ",
-        math(String.raw`d`),
-        " 項に繰り返し適用して（項数に関する帰納法）、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\|c^{-1}(t)\|_V
-&= \left\|\sum_{i=1}^{d}t_ie_i\right\|_V \\
-&\le \sum_{i=1}^{d}\|t_ie_i\|_V \quad (\because \text{三角不等式の反復}) \\
-&= \sum_{i=1}^{d}|t_i|\,\|e_i\|_V \quad (\because \|\lambda v\|_V=|\lambda|\|v\|_V) \\
-&\le \sqrt{\sum_{i=1}^{d}|t_i|^2}^{\,(\mathbb{R}_{\ge 0})}\cdot
-     \sqrt{\sum_{i=1}^{d}\|e_i\|_V^2}^{\,(\mathbb{R}_{\ge 0})} \\
-&= C\,\|t\|
-\end{aligned}`,
-      ),
-      paragraph([
-        "最後から 2 番目の不等号は次による。",
-        ref("matrix_norm_triangle_inequality"),
-        " の Step 4（Cauchy--Schwarz の不等式）を ",
-        math(String.raw`u_i=|t_i|,\ v_i=\|e_i\|_V`),
-        " に適用すると",
-      ]),
-      displayMath(
-        String.raw`\left(\sum_{i=1}^{d}|t_i|\,\|e_i\|_V\right)^2
-\le\left(\sum_{i=1}^{d}|t_i|^2\right)\left(\sum_{i=1}^{d}\|e_i\|_V^2\right)
-= \|t\|^2C^2=(C\,\|t\|)^2`,
-      ),
-      paragraph([
-        "（中央の等号は ",
-        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
-        " による）。左辺の平方の中身 ",
-        math(String.raw`\sum_i|t_i|\,\|e_i\|_V`),
-        " と ",
-        math(String.raw`C\|t\|`),
-        " はともに非負であるから、",
-        ref("matrix_norm_triangle_inequality"),
-        " の Step 0 より ",
-        math(String.raw`\sum_i|t_i|\,\|e_i\|_V\le C\|t\|`),
-        "。",
-      ]),
-      paragraph([
-        "Step 4: 各点収束。",
-        math(String.raw`T_N := \sum_{n=0}^{N}\frac{1}{n!}X^n`),
-        "（有限和なので ",
-        math(String.raw`V`),
-        " 上の線型写像）とおき、",
-      ]),
-      displayMath(String.raw`T : V\to V, \qquad T(v) := c^{-1}\!\left(S\,c(v)\right)`),
-      paragraph([
-        " とおく。",
-        math(String.raw`c`),
-        " の線型性と Step 1 より、",
-      ]),
-      displayMath(
-        String.raw`c(T_N(v))
-= c\!\left(\sum_{n=0}^{N}\frac{1}{n!}X^n(v)\right)
-= \sum_{n=0}^{N}\frac{1}{n!}c\!\left(X^n(v)\right)
-= \sum_{n=0}^{N}\frac{1}{n!}A^n\,c(v)
-= S_N\,c(v)`,
-      ),
-      paragraph([
-        "である。",
-        math(String.raw`c^{-1}`),
-        " は線型であるから ",
-        math(String.raw`v\in V`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\|T_N(v)-T(v)\|_V
-&= \left\|c^{-1}\!\left(S_N\,c(v)\right)-c^{-1}\!\left(S\,c(v)\right)\right\|_V \\
-&= \left\|c^{-1}\!\left((S_N-S)\,c(v)\right)\right\|_V
-\quad (\because c^{-1} \text{ の線型性}) \\
-&\le C\,\left\|(S_N-S)\,c(v)\right\| \quad (\because \text{Step 3}) \\
-&\le C\,\|S_N-S\|\cdot\|c(v)\|
-\end{aligned}`,
-      ),
-      paragraph([
-        "最後の不等号は ",
-        ref("matrix_norm_vector_bound"),
-        " による。",
-        math(String.raw`C`),
-        " と ",
-        math(String.raw`\|c(v)\|`),
+        math(String.raw`\|v\|`),
         " は ",
         math(String.raw`N`),
         " によらない非負定数であり、Step 2 より ",
         math(String.raw`\|S_N-S\|\to 0`),
-        " であるから ",
-        math(String.raw`\|T_N(v)-T(v)\|_V\to 0`),
-        "。すなわち各 ",
-        math(String.raw`v\in V`),
-        " について ",
-        math(String.raw`T_N(v)\to T(v)`),
-        " が ",
-        math(String.raw`V`),
-        " において成り立つ。",
+        " であるから右辺は ",
+        math(String.raw`0`),
+        " に収束する。よって ",
+        math(String.raw`\|S_Nv-Sv\|\to 0`),
+        " すなわち ",
+        math(String.raw`S_Nv\to Sv`),
+        "。",
       ]),
       paragraph([
-        "Step 5: 極限が線型写像であること。",
-        math(String.raw`T=c^{-1}\circ(\,\cdot\,\mapsto S\,\cdot\,)\circ c`),
-        " は線型写像の合成（",
-        math(String.raw`c`),
-        "、行列 ",
-        math(String.raw`S`),
-        " の左からの積、",
-        math(String.raw`c^{-1}`),
-        " はいずれも線型）であるから線型写像である。",
+        "Step 4: 行列単位による展開。",
+        math(String.raw`Y=(y_{kl})\in\mathrm{Mat}(n,K)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`Y=\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}E^{(k,l)}`,
+      ),
+      paragraph([
+        "が成り立つ。実際、行列の和とスカラー倍は成分ごとに定まるので右辺の ",
+        math(String.raw`(i,j)`),
+        " 成分は ",
+        math(String.raw`\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}\left(E^{(k,l)}\right)_{ij}`),
+        " であり、",
+        math(String.raw`E^{(k,l)}`),
+        " の定義よりこの和では ",
+        math(String.raw`(k,l)=(i,j)`),
+        " の項が ",
+        math(String.raw`y_{ij}\cdot 1=y_{ij}`),
+        "、他の項は ",
+        math(String.raw`y_{kl}\cdot 0=0`),
+        " であるから、和は ",
+        math(String.raw`y_{ij}`),
+        " に等しい。また ",
+        ref("def_matrix_norm"),
+        " より ",
+        math(String.raw`\left\|E^{(k,l)}\right\|=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}=1`),
+        "。",
       ]),
       paragraph([
-        "以上より、",
-        math(String.raw`\sum_{n=0}^{\infty}\frac{1}{n!}X^n`),
-        " は線型写像 ",
-        math(String.raw`T : V\to V`),
-        " に各点収束する。",
+        "Step 5: (2a)。",
+        math(String.raw`\Phi`),
+        " の線型性を Step 4 の有限和に繰り返し適用すると（項数に関する帰納法）",
+      ]),
+      displayMath(
+        String.raw`\Phi(Y)=\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}\,\Phi\!\left(E^{(k,l)}\right)`,
+      ),
+      paragraph([
+        ref("matrix_norm_triangle_inequality"),
+        " (3) を有限個の項に繰り返し用い、続いて同 (2) を用いると",
+      ]),
+      displayMath(
+        String.raw`\|\Phi(Y)\|
+\le \sum_{k=1}^{n}\sum_{l=1}^{n}\left\|y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
+= \sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`,
+      ),
+      paragraph([
+        "この二重和に Cauchy--Schwarz の不等式を適用する。全単射",
+      ]),
+      displayMath(
+        String.raw`\sigma : \{1,\dots,n\}^2 \to \{1,\dots,n^2\},
+\qquad \sigma(k,l) := (k-1)n+l`,
+      ),
+      paragraph([
+        " により二重和を 1 重の和へ書き換え（有限和の項の並べ替え）、",
+        ref("matrix_norm_triangle_inequality"),
+        " の Step 4（有限列に対する Cauchy--Schwarz の不等式）を ",
+        math(String.raw`u_{\sigma(k,l)}:=|y_{kl}|`),
+        "、",
+        math(String.raw`v_{\sigma(k,l)}:=\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`),
+        " に適用すると",
+      ]),
+      displayMath(
+        String.raw`\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|\right)^2
+\le\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|^2\right)
+\left(\sum_{k=1}^{n}\sum_{l=1}^{n}\left\|\Phi\!\left(E^{(k,l)}\right)\right\|^2\right)
+=\|Y\|^2\,c_{\Phi}^2=\left(c_{\Phi}\|Y\|\right)^2`,
+      ),
+      paragraph([
+        "（最後から 2 番目の等号は ",
+        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
+        " による）。左辺の平方の中身 ",
+        math(String.raw`\sum_{k,l}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`),
+        " と ",
+        math(String.raw`c_{\Phi}\|Y\|`),
+        " はともに非負であるから、",
+        ref("matrix_norm_triangle_inequality"),
+        " の Step 0 より",
+      ]),
+      displayMath(
+        String.raw`\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|
+\le c_{\Phi}\|Y\|`,
+      ),
+      paragraph([
+        "以上を合わせて ",
+        math(String.raw`\|\Phi(Y)\|\le c_{\Phi}\|Y\|`),
+        "。",
+      ]),
+      paragraph([
+        "Step 6: (2b)。",
+        math(String.raw`m`),
+        " に関する帰納法で示す。",
+        math(String.raw`m=0`),
+        " のとき ",
+        math(String.raw`\Phi^0=\mathrm{id}_{\mathrm{Mat}(n,K)}`),
+        " は線型であり ",
+        math(String.raw`\left\|\Phi^0(Y)\right\|=\|Y\|=c_{\Phi}^{\,0}\|Y\|`),
+        "。",
+        math(String.raw`m`),
+        " で成り立つとすると、",
+        math(String.raw`Y,Z\in\mathrm{Mat}(n,K)`),
+        "、",
+        math(String.raw`c\in K`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Phi^{m+1}(Y+Z)
+&= \Phi\!\left(\Phi^m(Y+Z)\right) \\
+&= \Phi\!\left(\Phi^m(Y)+\Phi^m(Z)\right)
+\quad (\because \Phi^m \text{ の線型性}) \\
+&= \Phi\!\left(\Phi^m(Y)\right)+\Phi\!\left(\Phi^m(Z)\right)
+\quad (\because \Phi \text{ の線型性}) \\
+&= \Phi^{m+1}(Y)+\Phi^{m+1}(Z) \\
+\Phi^{m+1}(cY)
+&= \Phi\!\left(\Phi^m(cY)\right)
+= \Phi\!\left(c\,\Phi^m(Y)\right)
+= c\,\Phi\!\left(\Phi^m(Y)\right)
+= c\,\Phi^{m+1}(Y)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから ",
+        math(String.raw`\Phi^{m+1}`),
+        " は ",
+        math(String.raw`K`),
+        "-線型。ノルムについては Step 5 と帰納法の仮定より",
+      ]),
+      displayMath(
+        String.raw`\left\|\Phi^{m+1}(Y)\right\|
+= \left\|\Phi\!\left(\Phi^m(Y)\right)\right\|
+\le c_{\Phi}\left\|\Phi^m(Y)\right\|
+\le c_{\Phi}\cdot c_{\Phi}^{\,m}\|Y\|
+= c_{\Phi}^{\,m+1}\|Y\|`,
+      ),
+      paragraph([
+        "（2 番目の不等号では ",
+        math(String.raw`c_{\Phi}\ge 0`),
+        " を用いた）。",
+      ]),
+      paragraph([
+        "Step 7: (2c)。",
+        math(String.raw`Y\in\mathrm{Mat}(n,K)`),
+        " を固定する。",
+        ref("matrix_norm_triangle_inequality"),
+        " (2)（",
+        math(String.raw`1/m!>0`),
+        " なので ",
+        math(String.raw`|1/m!|=1/m!`),
+        "）と (2b) より",
+      ]),
+      displayMath(
+        String.raw`\sum_{m=0}^{N}\left\|\frac{1}{m!}\Phi^m(Y)\right\|
+= \sum_{m=0}^{N}\frac{\left\|\Phi^m(Y)\right\|}{m!}
+\le \|Y\|\sum_{m=0}^{N}\frac{c_{\Phi}^{\,m}}{m!}
+\le \|Y\|\,E(c_{\Phi})`,
+      ),
+      paragraph([
+        "（最後の不等号は ",
+        ref("real_exp_series_converges"),
+        " (2) を ",
+        math(String.raw`a=c_{\Phi}`),
+        " に適用したもの。",
+        math(String.raw`\|Y\|\ge 0`),
+        " なので両辺に掛けても不等号の向きは変わらない）。左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
+        math(String.raw`\|Y\|\,E(c_{\Phi})`),
+        " で上に有界であるから収束する（",
+        math(String.raw`\mathbb{R}`),
+        " の連続性）。よって ",
+        ref("matrix_completeness"),
+        " (2)（絶対収束判定）より ",
+        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}\Phi^m(Y)`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(n,K)`),
+        " において収束する。極限が一意であることは ",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) による。",
+      ]),
+      paragraph([
+        "Step 8: (2d)。まず ",
+        math(String.raw`T_N`),
+        " は線型である。実際 (2b) より各 ",
+        math(String.raw`\Phi^m`),
+        " は線型であり、行列の和とスカラー倍の性質から ",
+        math(String.raw`T_N(Y+Z)=T_N(Y)+T_N(Z)`),
+        "、",
+        math(String.raw`T_N(cY)=c\,T_N(Y)`),
+        " が成り立つ（有限和なので項ごとに確かめればよい）。",
+      ]),
+      paragraph([
+        math(String.raw`Y,Z\in\mathrm{Mat}(n,K)`),
+        " について、",
+        math(String.raw`T_N`),
+        " の線型性と ",
+        ref("matrix_norm_triangle_inequality"),
+        " (3) より",
+      ]),
+      displayMath(
+        String.raw`0\le\left\|T_N(Y+Z)-\left(T(Y)+T(Z)\right)\right\|
+=\left\|\left(T_N(Y)-T(Y)\right)+\left(T_N(Z)-T(Z)\right)\right\|
+\le\left\|T_N(Y)-T(Y)\right\|+\left\|T_N(Z)-T(Z)\right\|`,
+      ),
+      paragraph([
+        "右辺は Step 7（",
+        math(String.raw`T_N(Y)\to T(Y)`),
+        " と ",
+        math(String.raw`T_N(Z)\to T(Z)`),
+        "）より ",
+        math(String.raw`0`),
+        " に収束するから ",
+        math(String.raw`T_N(Y+Z)\to T(Y)+T(Z)`),
+        "。一方、",
+        math(String.raw`T`),
+        " の定義より ",
+        math(String.raw`T_N(Y+Z)\to T(Y+Z)`),
+        " であるから、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4)（極限の一意性）より ",
+        math(String.raw`T(Y+Z)=T(Y)+T(Z)`),
+        "。",
+      ]),
+      paragraph([
+        "同様に ",
+        math(String.raw`c\in K`),
+        " について、",
+        math(String.raw`T_N`),
+        " の線型性と ",
+        ref("matrix_norm_triangle_inequality"),
+        " (2) より",
+      ]),
+      displayMath(
+        String.raw`0\le\left\|T_N(cY)-c\,T(Y)\right\|
+=\left\|c\left(T_N(Y)-T(Y)\right)\right\|
+=|c|\cdot\left\|T_N(Y)-T(Y)\right\|`,
+      ),
+      paragraph([
+        "であり、右辺は Step 7 より ",
+        math(String.raw`0`),
+        " に収束する。よって ",
+        math(String.raw`T_N(cY)\to c\,T(Y)`),
+        " であり、",
+        math(String.raw`T_N(cY)\to T(cY)`),
+        " と極限の一意性より ",
+        math(String.raw`T(cY)=c\,T(Y)`),
+        "。したがって ",
+        math(String.raw`T`),
+        " は ",
+        math(String.raw`K`),
+        "-線型写像である。",
       ]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "原文は「有限次元行列表現に帰着し、各成分が絶対収束する（証明略）」として TODO を置いていた。" +
-          "ここでは原文の道筋（基底による行列表現への帰着、絶対収束）を保ったまま証明を完成させた。" +
+          "ここでは原文の道筋（行列への帰着、絶対収束）を保ったまま証明を完成させた。" +
           "行列側のノルム収束は別ブロック（labels: matrix_exp_series_converges）に切り出している。",
-        "原文の「各成分は絶対収束する」を、Mat(d,K) におけるノルムでの絶対収束" +
-          "（labels: matrix_completeness の絶対収束判定）として実装した。" +
-          "V のノルムが基底から定まるノルムと異なりうる点は、Step 3 の評価 ||c^{-1}(t)||_V <= C ||t|| " +
-          "（三角不等式と Cauchy--Schwarz のみを使う片側評価）で処理しており、" +
-          "有限次元ノルムの同値性定理は使っていない。",
+        "原文の「各成分は絶対収束する」を、Mat(n,K) におけるノルムでの絶対収束" +
+          "（labels: matrix_completeness の絶対収束判定）と、成分ごとの評価 |b_ij| <= ||B||（Step 1）" +
+          "として実装した。",
+        "この主張は以前、体 K 上の抽象的な有限次元ノルム線型空間 V とその自己準同型 X : V -> V " +
+          "について述べており、証明で基底の存在・座標写像 c : V -> K^d・線型同型・dim_K V を使っていた。" +
+          "README 4 節（主張は複素行列について具体的に述べる。一般論へ持ち上げない）と " +
+          "README 3 節 4（未定義の概念を残さない。本文には「ノルム線型空間」の定義が無かった）に反するため、" +
+          "本文で実際に必要な 2 つの形（(1) Mat(n,K) の行列が K^n のベクトルへ作用する場合、" +
+          "(2) Mat(n,K) 上の K-線型写像の場合）へ具体的に述べ直した。" +
+          "行列単位 E^(k,l) による展開は「基底が存在する」という一般論ではなく、" +
+          "行列の成分の定義からその場で確かめられる等式である。" +
+          "抽象的な一般化（任意の有限次元ノルム線型空間で同じ結論が成り立つこと）は " +
+          "notes/003_exp_abstract_normed_space.mjs へ退避した。",
       ],
     },
   },
@@ -597,24 +793,89 @@ X(v)
     kind: "definition",
     sourcePath: "_old/typst/parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
     sourceOrdinal: 2,
-    title: null,
+    title: { text: "exp の定義（行列の場合と、行列への線型写像の場合）" },
     labels: ["def_exp"],
     statement: [
-      paragraph(["有限次元線型空間 ", math(String.raw`V`)]),
       paragraph([
-        math(String.raw`\exp : \mathrm{End}(V) \to \mathrm{End}(V)`),
-        " を以下のように定める。",
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \mathbb{Z}_{\ge 1}`),
+        " とし、ノルムと収束は ",
+        ref("def_matrix_norm"),
+        " のものとする。",
       ]),
       paragraph([
-        "線型写像 ",
-        math(String.raw`X \in \mathrm{End}(V)`),
+        "(1)（行列の exp）",
+        math(String.raw`A \in \mathrm{Mat}(n,K)`),
         " について、",
+        math(String.raw`A^0 := I`),
+        "（単位行列）、",
+        math(String.raw`A^{m+1} := A^m A`),
+        " とおき",
       ]),
       displayMath(
-        String.raw`\exp(X) := \sum_{n=0}^{\infty} \frac{1}{n!} \underbrace{X \circ X \circ \cdots \circ X}_{n \text{ times}}`,
+        String.raw`\exp(A) := \sum_{m=0}^{\infty}\frac{1}{m!}A^m
+= \lim_{N\to\infty}\sum_{m=0}^{N}\frac{1}{m!}A^m
+\in \mathrm{Mat}(n,K)`,
       ),
+      paragraph([
+        " と定める。この極限は ",
+        ref("matrix_exp_series_converges"),
+        " (1) により存在し、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) により一意である。これにより写像 ",
+        math(String.raw`\exp : \mathrm{Mat}(n,K) \to \mathrm{Mat}(n,K)`),
+        " が定まる。",
+      ]),
+      paragraph([
+        "(2)（行列への線型写像の exp）",
+        math(String.raw`\Phi : \mathrm{Mat}(n,K) \to \mathrm{Mat}(n,K)`),
+        " を ",
+        math(String.raw`K`),
+        "-線型写像とし、",
+        math(String.raw`\Phi^0 := \mathrm{id}_{\mathrm{Mat}(n,K)}`),
+        "、",
+        math(String.raw`\Phi^{m+1} := \Phi \circ \Phi^{m}`),
+        " とおく。写像 ",
+        math(String.raw`\exp(\Phi) : \mathrm{Mat}(n,K) \to \mathrm{Mat}(n,K)`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\left(\exp(\Phi)\right)(Y) := \sum_{m=0}^{\infty}\frac{1}{m!}\Phi^m(Y)
+= \lim_{N\to\infty}\sum_{m=0}^{N}\frac{1}{m!}\Phi^m(Y)
+\qquad (Y \in \mathrm{Mat}(n,K))`,
+      ),
+      paragraph([
+        " で定める。各 ",
+        math(String.raw`Y`),
+        " についてこの極限が存在すること（各点収束）は ",
+        ref("exp_converges"),
+        " (2c) により、一意であることは ",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) による。また ",
+        ref("exp_converges"),
+        " (2d) より ",
+        math(String.raw`\exp(\Phi)`),
+        " は ",
+        math(String.raw`K`),
+        "-線型写像である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文は「有限次元線型空間 V の自己準同型 X ∈ End(V) の exp」として定義していた。" +
+          "README 4 節（主張は複素行列について具体的に述べる）に従い、" +
+          "本文で exp が実際に適用される 2 つの形だけを具体的に定義した。" +
+          "(1) は Mat(n,K) の行列（転送行列の V_1, V_2 は labels: def_end_iso の同一視により " +
+          "Mat(2^M,C) の行列として扱われる）、" +
+          "(2) は Mat(n,K) 上の K-線型写像（labels: def_ad_X_matrix の ad_X がこれに当たる）である。" +
+          "抽象的な有限次元線型空間 V と End(V) は本文から取り除いた。" +
+          "採用しなかった一般化は notes/003_exp_abstract_normed_space.mjs に記録している。",
+      ],
+    },
   },
   {
     id: "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
@@ -642,12 +903,8 @@ X(v)
     proof: [
       paragraph([
         "以下、",
-        math(String.raw`\mathrm{Mat}(n,K)`),
-        " を ",
-        math(String.raw`K^n`),
-        " の自己準同型全体と同一視し、",
         ref("def_exp"),
-        " の ",
+        " (1) の ",
         math(String.raw`\exp`),
         " を",
       ]),
