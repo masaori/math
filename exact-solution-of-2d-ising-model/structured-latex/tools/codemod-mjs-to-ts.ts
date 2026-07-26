@@ -206,7 +206,7 @@ if (!apply) {
     );
   }
   console.log(
-    "\n変換後に回すこと: node tools/generate-labels.ts && npx tsc -p tsconfig.json --noEmit " +
+    "\n変換後に回すこと: node tools/generate-index.ts && npx tsc -p tsconfig.json --noEmit " +
       "&& node tools/validate-content.ts",
   );
   process.exit(0);
@@ -231,6 +231,6 @@ for (const conversion of conversions) {
 
 console.log(
   `\n${conversions.length} ファイルを .ts へ変換した。` +
-    "\n次: node tools/generate-labels.ts && npx tsc -p tsconfig.json --noEmit && node tools/validate-content.ts" +
+    "\n次: node tools/generate-index.ts && npx tsc -p tsconfig.json --noEmit && node tools/validate-content.ts" +
     "\n（`schema.mjs` は全ファイルの変換完了後に削除する）",
 );

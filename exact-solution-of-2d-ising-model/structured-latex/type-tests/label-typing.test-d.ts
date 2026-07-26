@@ -128,6 +128,65 @@ const noteWithEmptyTargets: Note = {
 };
 void noteWithEmptyTargets;
 
+// --- 一意性・値域 ------------------------------------------------------------
+
+// 同一ファイル内での id 重複は型で落ちる（ファイル跨ぎは document.generated.ts が見る）。
+// @ts-expect-error id が重複している。
+void defineBlocks([
+  {
+    id: "type_test_dup",
+    kind: "claim",
+    sourcePath: "type-tests/label-typing.test-d.ts",
+    sourceOrdinal: 6,
+    labels: [],
+    statement: [],
+  },
+  {
+    id: "type_test_dup",
+    kind: "claim",
+    sourcePath: "type-tests/label-typing.test-d.ts",
+    sourceOrdinal: 7,
+    labels: [],
+    statement: [],
+  },
+]);
+
+const headingWithBadLevel: ConvertedBlock = {
+  id: "type_test_level_range",
+  kind: "heading",
+  // @ts-expect-error level は 1〜6 のみ。
+  level: 7,
+  sourcePath: "type-tests/label-typing.test-d.ts",
+  sourceOrdinal: 8,
+  title: { text: "見出し" },
+  labels: [],
+};
+void headingWithBadLevel;
+
+const blockWithEmptyTitle: ConvertedBlock = {
+  id: "type_test_empty_title",
+  kind: "claim",
+  sourcePath: "type-tests/label-typing.test-d.ts",
+  sourceOrdinal: 9,
+  // @ts-expect-error タイトルは text か tex の少なくとも一方が必要。
+  title: {},
+  labels: [],
+  statement: [],
+};
+void blockWithEmptyTitle;
+
+const blockWithBadStatus: ConvertedBlock = {
+  id: "type_test_status",
+  kind: "claim",
+  sourcePath: "type-tests/label-typing.test-d.ts",
+  sourceOrdinal: 10,
+  labels: [],
+  statement: [],
+  // @ts-expect-error status は converted か added のみ。
+  conversion: { status: "convertd" },
+};
+void blockWithBadStatus;
+
 // --- 定義ヘルパの受け口 ------------------------------------------------------
 
 void defineBlocks([okBlock]);

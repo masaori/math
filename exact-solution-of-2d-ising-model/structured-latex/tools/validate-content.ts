@@ -3,11 +3,13 @@
  * 構造化テキストの実行時検証。
  *
  * 型検査（`tsc -p tsconfig.json --noEmit`）と役割を分ける:
- *   - **コンパイル時**に落とせるもの（存在しないラベルへの ref / targets、kind ごとの
- *     フィールド、targets の空配列）は `schema.ts` の型が担当する。ここでは再検査しない
- *     …のではなく、`.mjs`（型検査対象外）が残っている移行期のために**同じ検査を実行時にも回す**。
- *   - 型では表現できないもの（id・ラベルの重複、未変換 Typst 記法の混入、
- *     生成済みラベル一覧と実状の一致）はこのスクリプトだけが検出できる。
+ *   - **コンパイル時**に落ちるもの（存在しないラベルへの ref / targets、id・ラベルの重複、
+ *     kind ごとのフィールド、targets の空配列 ほか）は `schema.ts` の型と
+ *     `document.generated.ts` が担当する。ここでの再検査は、型を経由せずに値が作られる経路
+ *     （動的生成・`as` による回避）への保険である。
+ *   - **型では表現できないもの**（未変換 Typst 記法の混入、生成物とファイル一覧の一致、
+ *     sourcePath の実在）はこのスクリプトだけが検出できる。
+ *     何が型で無理かとその根拠は docs/type-coverage.md に記録してある。
  *
  * 使い方: node structured-latex/tools/validate-content.ts
  */
@@ -106,7 +108,7 @@ const missingInGenerated = [...labels.keys()].filter((label) => !generated.has(l
 const staleInGenerated = [...generated].filter((label) => !labels.has(label));
 if (missingInGenerated.length > 0 || staleInGenerated.length > 0) {
   throw new Error(
-    "labels.generated.ts が content/ の実状と一致していない（node tools/generate-labels.ts で再生成する）:\n" +
+    "labels.generated.ts が content/ の実状と一致していない（node tools/generate-index.ts で再生成する）:\n" +
       `  生成物に無い実在ラベル: ${missingInGenerated.join(", ") || "なし"}\n` +
       `  実在しない生成物のラベル: ${staleInGenerated.join(", ") || "なし"}`,
   );

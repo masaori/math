@@ -1,5 +1,36 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補5）: 型で落とせる範囲を拡張（実行時検査からの移管）
+
+**新たにコンパイル時に落ちるようになったもの**（負テスト 16 件で実証。`npm run test:types`）:
+
+- **ブロック id・ラベル・ノート id の重複**。同一ファイル内は `defineBlocks` / `defineNotes` の
+  `const` 型引数＋重複検出型で、**ファイル跨ぎ**は生成した集約モジュール
+  `document.generated.ts`（全ファイルを import して 1 本のタプル型へ連結）で落とす。
+  診断には重複した値そのものが出る。
+- ノート id とブロック id の衝突、`labels.generated.ts` と content のズレ（両方向）。
+- 見出し `level` の範囲（1〜6 のリテラル union）、タイトルが `text` も `tex` も無い場合、
+  `conversion.status` の綴り違い（`"converted" | "added"`）。
+- 既存分（存在しないラベルへの参照・ノートの紐づけ、見出しへの本文混入、定理型への `level`、
+  フィールド名の打ち間違い）も維持。
+
+**実装で踏んだ罠（同じ轍を踏まないこと）**:
+1. `const` 型引数だけにすると**余剰プロパティ検査が消える**。`T & readonly ConvertedBlock[]` と
+   具体型との交差にすると両立する（実測）。
+2. 重複検出の再帰型を素朴に書くと 173 ブロック規模で TS2589 になり、**検査が黙って無効化される**。
+   末尾再帰（累積引数）で書き直した。
+3. 生成した集約モジュールを `tsconfig.json` の `include` に入れ忘れており、
+   一時的に検査が完全に無効だった。**負テストを書いて初めて気づいた。**
+
+**型では表現できないと実測で確認したもの**（実行時検査として維持。根拠は
+[docs/type-coverage.md](docs/type-coverage.md)）: 未変換 Typst 記法の混入（テンプレートリテラル型で
+制約自体は書けるが、content が使う `String.raw` がリテラル型を返さないため効かない）、
+`sourceOrdinal` の整数性（TS に整数型・数値範囲型が無い）、`sourcePath` の実在（FS 参照）、
+SageMath の overview.md との対応（Markdown 解析）、生成物とディレクトリ一覧の一致（FS 列挙）。
+
+生成ツールは `tools/generate-index.ts`（旧 generate-labels.ts）に統合。
+検査は `npm run check`（生成物の鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト16 → 実行時テスト7）。
+
 ## 完了（2026-07-26・追補4）: ソース形式を TypeScript に完全統一（`.mjs` を全廃）
 
 **このプロジェクトに `.mjs` は 1 ファイルも残っていない。** 混在させると片方が型検査の網から漏れるため。

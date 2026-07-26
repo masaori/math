@@ -13,9 +13,11 @@ The original `.typ` files remain untouched.
 **Node 22.18 以降の型ストリップにより、これらの `.ts` はビルドせずそのまま実行できる**
 （`dist/` のようなビルド成果物は作らない。`tsc` は検査専用 = `noEmit`）。
 
-`content/` に実在するラベルは `tools/generate-labels.ts` が集めて `labels.generated.ts`
-（ラベル文字列のユニオン型 `Label`）へ書き出す。`schema.ts` はこの型で参照を縛るので、
-次の誤りは**実行時の検証を待たずコンパイル時に落ちる**。
+`content/` に実在するラベルは `tools/generate-index.ts` が集めて `labels.generated.ts`
+（ラベル文字列のユニオン型 `Label`）へ書き出し、同時に `document.generated.ts`
+（全ファイルを 1 本のタプル型へ連結する集約モジュール）を作る。`schema.ts` はこの型で参照を縛り、
+集約モジュールはファイルを跨いだ一意性を主張するので、次の誤りは
+**実行時の検証を待たずコンパイル時に落ちる**。
 
 | 誤り | 検出 |
 |---|---|
@@ -27,14 +29,22 @@ The original `.typ` files remain untouched.
 | 本文ブロックに `notes` を書く | 型検査 |
 | フィールド名の打ち間違い（`proof` → `proofs` 等） | 型検査（余剰プロパティ検査）＋実行時（未知キーで throw） |
 | 定理型ブロックに `level`（見出し用フィールド）を書く | 型検査＋実行時 |
-| id・ラベルの重複、未変換 Typst 記法の混入 | 実行時（`tools/validate-content.ts`） |
+| 見出しの `level` が 1〜6 の範囲外 | 型検査 |
+| タイトルが `text` も `tex` も持たない | 型検査 |
+| `conversion.status` の綴り違い | 型検査（候補付き） |
+| ブロック id・ノート id・ラベルの重複（同一ファイル内／**ファイル跨ぎ**とも） | 型検査 |
+| ノート id とブロック id の衝突 | 型検査 |
+| 未変換 Typst 記法の混入、`sourcePath` の実在 | 実行時（型では不可能。理由は下記 docs） |
 
 **型が守るのは参照側**である点に注意する。`Label` はブロックの `labels` から生成されるので、
 **ラベル自体の綴り間違いは、再生成した時点で「実在するラベル」として正当化される**
 （型検査が落ちるのは、生成物を再生成するまでの間だけ）。ラベルを直すときは、
 それを指す `ref` が一斉に型エラーになることで改名漏れが分かる、という守り方になる。
 
-この実証は `node tools/negative-type-test.ts` が行う。存在しないラベルを使った一時ファイルで
+**何が型で落ち、何が型では落とせないのか（およびその根拠）は
+[docs/type-coverage.md](../docs/type-coverage.md) に記録してある。**
+
+この実証は `node tools/negative-type-test.ts` が行う（16 ケース）。存在しないラベルを使った一時ファイルで
 実際に `tsc` を落とし、その診断が当該ラベルを指していることを確認する（正しいラベル版が
 通ることも対にして確認するので、「設定不備で常に落ちている」状態とは区別できる）。
 回帰テストは `type-tests/label-typing.test-d.ts`（`@ts-expect-error` の並び）と
@@ -110,7 +120,8 @@ Work notes at the end of the old `main.typ` (`= 全体のノリ`, `= メモ`, th
 
 - `schema.ts` - 型 + 実行時検証の正本（`defineBlocks` / `defineNotes` とノード生成ヘルパ）。
 - `labels.generated.ts` - 自動生成。実在ラベルのユニオン型 `Label`（直接編集しない）。
-- `tools/generate-labels.ts` - `content/` からラベルを集めて `labels.generated.ts` を生成（`--check` で検査のみ）。
+- `document.generated.ts` - 自動生成。全 content / notes を連結し、ファイル跨ぎの一意性を型で主張する。
+- `tools/generate-index.ts` - 生成物 2 種を作る（`--check` で鮮度検査のみ）。
 - `tools/validate-content.ts` - content / notes の実行時検証。
 - `tools/verify-no-lost-proofs.ts` - Typst 原本からの証明の移行漏れ検出。
 - `tools/extract-source-blocks.ts` - Typst 原本（`_old/typst/`）の索引抽出。
@@ -137,7 +148,7 @@ npm run check
 個別に回す場合（プロジェクトディレクトリから）:
 
 ```sh
-node structured-latex/tools/generate-labels.ts        # ラベルのユニオン型を再生成
+node structured-latex/tools/generate-index.ts         # 生成物（ラベル型・集約モジュール）を再生成
 node structured-latex/tools/validate-content.ts       # 実行時検証
 node structured-latex/tools/verify-no-lost-proofs.ts  # 移行漏れ検出
 node sagemath/tools/verify-check-linkage.ts           # 数値検証 ↔ 証明の対応
