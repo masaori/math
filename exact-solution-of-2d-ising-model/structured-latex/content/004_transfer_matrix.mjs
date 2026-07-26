@@ -582,7 +582,7 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
     sourcePath: "_old/typst/parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ",
     sourceOrdinal: 8,
     title: { tex: String.raw`\delta^M_{(\mu,\nu)} \text{ の定義}` },
-    labels: [],
+    labels: ["def_delta_M"],
     statement: [
       displayMath(
         String.raw`\delta^M_{(\mu,\nu)} :=

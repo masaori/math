@@ -252,7 +252,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
     sourcePath: "_old/typst/parts/000_計算公式/017_definition_角度表現の切断.typ",
     sourceOrdinal: 18,
     title: { text: "角度表現の切断" },
-    labels: [],
+    labels: ["section_of_angle_representation"],
     statement: [
       paragraph([math("s_{[0,2\\pi)}:\\mathbb{R}/\\sim_{\\mathrm{angle}}\\to[0,2\\pi)"), " を以下のように定める。"]),
       paragraph([math("[\\theta]_{\\sim_{\\mathrm{angle}}}\\in\\mathbb{R}/\\sim_{\\mathrm{angle}}"), " に対して、"]),
