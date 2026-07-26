@@ -82,7 +82,7 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1 D\right), \qquad
-W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`,
+W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "と定める。",
