@@ -232,6 +232,15 @@ targets=(
   Ising2D.Amat_eq_AMat
   "Ising2D.B1_mul_B2_mul_B1_eq_AMat'"
   Ising2D.TV_hatZ_hatY_of_action_AMat
+  Ising2D.Abstract.acomm_lincomb
+  Ising2D.Abstract.acomm_lincomb_clifford
+  Ising2D.Abstract.car_of_coeffs
+  Ising2D.acomm_hatZMinus_hatY_lin2_of_abstract
+  Ising2D.psi_eq_neg_coeff
+  Ising2D.psi_coeff_identities
+  Ising2D.acomm_psi_relations_of_car
+  Ising2D.acomm_psiDag_psiDag_of_opposite_branch
+  Ising2D.acomm_psiDag_psi_of_opposite_branch
 )
 
 {

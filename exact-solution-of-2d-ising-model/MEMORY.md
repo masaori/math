@@ -1,5 +1,40 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-26・追補）: ψ の反交換関係に**抽象版**を追加し、分枝の必要性を定理として証明
+
+同じブロック（`anticommutator_of_psi`）の形式化が並行トラックで先に main へ入っていたため
+（`lean/Ising2D/Part008/Definition030_Fermi.lean`）、**既存ファイルには一切手を触れず**、
+README のゴール設定 4 節が要求する「具体版＋抽象版の 2 本立て」の**抽象版**だけを
+新規ファイル 2 本として追加した（抽象版の置き場所は先行トラックが定めた規約に合わせ、
+`lean/Ising2D/Abstract/`・名前空間 `Ising2D.Abstract` とした）:
+`lean/Ising2D/Abstract/Fermion.lean`（抽象版）と
+`lean/Ising2D/Part008/Claim032_AnticommutatorPsiAbstract.lean`（具体版の導出と分枝の必要性）。
+
+- 抽象版 `Ising2D.Abstract.acomm_lincomb_clifford` / `Ising2D.Abstract.car_of_coeffs`:
+  **4 元の反交換関係と係数のスカラー恒等式 2 本だけ**を仮定した形（係数は任意の可換環、台は任意の環）。
+  行列であることも `hat(Z)`, `hat(Y)` の具体形も `γ_2`・`δ^M` も使わない。
+  持ち込んだ抽象化は ℂ-代数までで、テンソル積の一般論は使っていない。
+- 具体版が抽象版の特殊化で得られることを `acomm_psi_relations_of_car`
+  （既存の 3 定理と同じ主張を抽象版の系として導出）と
+  `acomm_hatZMinus_hatY_lin2_of_abstract` で明示した。
+- **平方根の同一分枝の仮定 `hbr` が省略できないことを定理として証明した**:
+  `M ∣ μ+ν` かつ `t_ν = -t_μ`（逆分枝）のとき
+  `acomm_psiDag_psiDag_of_opposite_branch` により `[ψ_μ^†, ψ_ν^†]₊ = I ≠ 0`、
+  `acomm_psiDag_psi_of_opposite_branch` により `[ψ_μ^†, ψ_ν]₊ = 0`（本来 `I` のはず）。
+  すなわち原文第 1 式・第 2 式は逆分枝では**偽**である。
+  なお原文の `√` を「積の値だけで決まる単一値関数」と読めば逆分枝は起こらないので、
+  **原文が誤っているわけではない**（statement に分枝の指定が無い、という穴）。
+  原文（`structured-latex/content`）は書き換えていない。
+
+`lake build` 成功、`bash lean/scripts/check-no-sorry.sh` exit 0、構造化テキストの 3 検証も通過。
+
+### 引き継ぎ
+
+- **`AMat` と `Amat` の二重定義を一本化する。** 橋渡し補題は既に
+  `Ising2D.Amat_eq_AMat`（`lean/Ising2D/Part008/Definition030_Fermi.lean`）にある。
+  既存ファイルのリファクタなので「具体版＋抽象版の 2 本立て」整備の担当セッションの作業とする。
+- **他の主張にも抽象版が無いものが多く残っている**（README 8 節）。本追補と同じ要領で、
+  既存の具体版を消さずに抽象版を別ファイルへ足し、系として具体版を導く形が使える。
 ## 完了（2026-07-26）: 群の一般論一式を本文から排除した（点検レポート A-5 と A-6 の part2 分）
 
 `docs/tasks/goal-alignment-audit.md` の A-5（群の一般論が本文にある）と
