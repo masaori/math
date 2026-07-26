@@ -491,9 +491,22 @@ export default defineBlocks([
         " (1)(3) より",
       ]),
       displayMath(
-        String.raw`a_\nu = \gamma_2(\tilde\theta_{(1-\mu)+kM}) = \gamma_2(\tilde\theta_{1-\mu}) = b_\mu,
-\qquad
-b_\nu = \gamma_2(-\tilde\theta_{(1-\mu)+kM}) = \gamma_2(-\tilde\theta_{1-\mu}) = a_\mu`,
+        String.raw`\begin{aligned}
+a_\nu
+&= \gamma_2(\tilde\theta_{(1-\mu)+kM})
+   \quad (\because a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = (1-\mu)+kM) \\
+&= \gamma_2(\tilde\theta_{1-\mu})
+   \quad (\because \text{periodicity\_of\_check\_fermi (1)}) \\
+&= \gamma_2(-\tilde\theta_\mu) = b_\mu
+   \quad (\because \text{periodicity\_of\_check\_fermi (3)}) \\
+b_\nu
+&= \gamma_2(-\tilde\theta_{(1-\mu)+kM})
+   \quad (\because b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = (1-\mu)+kM) \\
+&= \gamma_2(-\tilde\theta_{1-\mu})
+   \quad (\because \text{periodicity\_of\_check\_fermi (1)}) \\
+&= \gamma_2(\tilde\theta_\mu) = a_\mu
+   \quad (\because \text{periodicity\_of\_check\_fermi (3)})
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
@@ -507,7 +520,20 @@ b_\nu = \gamma_2(-\tilde\theta_{(1-\mu)+kM}) = \gamma_2(-\tilde\theta_{1-\mu}) =
         "）より",
       ]),
       displayMath(
-        String.raw`r_\nu = |a_\nu| = |b_\mu| = \left|-\overline{a_\mu}\right| = |a_\mu| = r_\mu`,
+        String.raw`\begin{aligned}
+r_\nu
+&= |a_\nu|
+   \quad (\because r_\nu := |a_\nu|) \\
+&= |b_\mu|
+   \quad (\because \text{直前の displayMath}\ (a_\nu = b_\mu)) \\
+&= \left|-\overline{a_\mu}\right|
+   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (1)}\ (b_\mu = -\overline{a_\mu})) \\
+&= \left|\overline{a_\mu}\right|
+   \quad (\because \text{abs\_basic\_properties}\ (|-z| = |z|)) \\
+&= |a_\mu|
+   \quad (\because \text{abs\_basic\_properties}\ (|\bar z| = |z|)) \\
+&= r_\mu
+\end{aligned}`,
       ),
       paragraph([
         "である。以下この共通の値を ",
@@ -517,9 +543,22 @@ b_\nu = \gamma_2(-\tilde\theta_{(1-\mu)+kM}) = \gamma_2(-\tilde\theta_{1-\mu}) =
         " (2) より",
       ]),
       displayMath(
-        String.raw`b_\mu b_\nu = b_\mu a_\mu = a_\mu b_\mu = -r^2,
-\qquad
-c_\mu c_\nu = \frac{1}{4M\,b_\mu b_\nu} = \frac{1}{4M\left(-r^2\right)} = \frac{-1}{4Mr^2}`,
+        String.raw`\begin{aligned}
+b_\mu b_\nu
+&= b_\mu a_\mu
+   \quad (\because \text{上の displayMath}\ (b_\nu = a_\mu)) \\
+&= a_\mu b_\mu \\
+&= -r^2
+   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (2)}) \\
+c_\mu c_\nu
+&= \frac{1}{2\sqrt{M}\,b_\mu}\cdot\frac{1}{2\sqrt{M}\,b_\nu}
+   \quad (\because c_\mu := \tfrac{1}{2\sqrt{M}\,b_\mu}) \\
+&= \frac{1}{4M\,b_\mu b_\nu}
+   \quad \left(\because \left(2\sqrt{M}\right)^2 = 4M\right) \\
+&= \frac{1}{4M\left(-r^2\right)}
+   \quad (\because \text{上の } b_\mu b_\nu = -r^2) \\
+&= \frac{-1}{4Mr^2}
+\end{aligned}`,
       ),
       paragraph([
         "（",
@@ -546,27 +585,45 @@ c_\mu c_\nu = \frac{1}{4M\,b_\mu b_\nu} = \frac{1}{4M\left(-r^2\right)} = \frac{
         math(String.raw`[X,W]_+ := XW + WX`),
         " は両引数について ",
         math(String.raw`\mathbb{C}`),
-        " 双線型（",
-        math(String.raw`[\alpha X, \beta W]_+ = \alpha\beta[X,W]_+`),
-        "）なので",
+        " 双線型である。実際 ",
+        math(String.raw`[\alpha X, \beta W]_+ = (\alpha X)(\beta W) + (\beta W)(\alpha X) = \alpha\beta(XW + WX)`),
+        " であり、スカラー倍が行列の積と可換であることは ",
+        ref("scalar_identity_commutes"),
+        " による。和についての加法性も行列の積の分配法則から従う。これを使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+
+&= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
+   c_\nu\left(-r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
+   \quad (\because \text{def\_check\_fermi}) \\
 &= c_\mu c_\nu\Bigl(
 \left(-r_\mu\right)\left(-r_\nu\right)\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 + \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
 &\qquad\qquad
 + b_\mu\left(-r_\nu\right)\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
 + b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
-\Bigr) \\
+\Bigr)
+   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
+&= c_\mu c_\nu\Bigl(
+r_\mu r_\nu\cdot 2M\,\delta\,I
++ \left(-r_\mu\right)b_\nu\cdot 0 \\
+&\qquad\qquad
++ b_\mu\left(-r_\nu\right)\cdot 0
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\Bigr)
+   \quad (\because \text{anticommutator\_of\_check\_Z\_Y を 4 箇所へ同時適用}) \\
 &= c_\mu c_\nu\left(r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
 \end{aligned}`,
       ),
       paragraph([
-        "（中間 2 項は ",
+        "（1 行目は ",
+        ref("def_check_fermi"),
+        "、3 行目は ",
+        ref("anticommutator_of_check_Z_Y"),
+        " による。中間 2 項は ",
         math(String.raw`[\check{Z},\check{Y}]_+ = 0`),
-        " で消える）。",
+        " で消える。）",
         math(String.raw`\delta = 0`),
         " なら全体が ",
         math(String.raw`0`),
@@ -597,10 +654,21 @@ c_\mu c_\nu = \frac{1}{4M\,b_\mu b_\nu} = \frac{1}{4M\left(-r^2\right)} = \frac{
         math(String.raw`\left[\check\psi_\mu, \check\psi_\nu\right]_+ = 0`),
         "。",
       ]),
-      paragraph(["Step 4（第 2 式）。同じ展開で ", math(String.raw`\check{Z}`), " の係数の積が ", math(String.raw`(-r_\mu)(+r_\nu) = -r_\mu r_\nu`), " になるので"]),
+      paragraph([
+        "Step 4（第 2 式）。Step 2 とまったく同じ展開（",
+        ref("def_check_fermi"),
+        " の代入 → 反交換子の双線型性 → ",
+        ref("anticommutator_of_check_Z_Y"),
+        " の適用）を行う。違いは ",
+        math(String.raw`\check{Z}`),
+        " の係数の積が ",
+        math(String.raw`(-r_\mu)(+r_\nu) = -r_\mu r_\nu`),
+        " になる点だけなので",
+      ]),
       displayMath(
         String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
-= c_\mu c_\nu\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I`,
+= c_\mu c_\nu\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
+\quad (\because \text{Step 2 と同じ展開})`,
       ),
       paragraph([
         math(String.raw`\delta = 0`),
@@ -617,9 +685,12 @@ c_\mu c_\nu = \frac{1}{4M\,b_\mu b_\nu} = \frac{1}{4M\left(-r^2\right)} = \frac{
       displayMath(
         String.raw`\begin{aligned}
 \left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
-&= \frac{-1}{4Mr^2}\left(-r^2 + \left(-r^2\right)\right)\cdot 2M\,I \\
-&= \frac{-1}{4Mr^2}\cdot\left(-2r^2\right)\cdot 2M\,I
-= \frac{4Mr^2}{4Mr^2}\,I = I
+&= \frac{-1}{4Mr^2}\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
+   \quad (\because \text{Step 1}\ (c_\mu c_\nu = \tfrac{-1}{4Mr^2})) \\
+&= \frac{-1}{4Mr^2}\left(-r^2 + \left(-r^2\right)\right)\cdot 2M\,I
+   \quad (\because \text{Step 1}\ (r_\mu r_\nu = r^2,\ b_\mu b_\nu = -r^2),\ \delta = 1) \\
+&= \frac{-1}{4Mr^2}\cdot\left(-2r^2\right)\cdot 2M\,I \\
+&= \frac{4Mr^2}{4Mr^2}\,I = I
 \end{aligned}`,
       ),
       paragraph([
@@ -971,9 +1042,14 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
       displayMath(
         String.raw`\begin{aligned}
 \check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,\check\psi_\mu^\dagger
-&= \check\psi_\nu^\dagger\left(\delta^M_{(\mu-\nu,0)}I - \check\psi_\mu^\dagger\,\check\psi_{1-\nu}\right) \\
-&= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{1-\nu} \\
+&= \check\psi_\nu^\dagger\left(\check\psi_{1-\nu}\,\check\psi_\mu^\dagger\right)
+   \quad (\because \text{行列の積の結合法則}) \\
+&= \check\psi_\nu^\dagger\left(\delta^M_{(\mu-\nu,0)}I - \check\psi_\mu^\dagger\,\check\psi_{1-\nu}\right)
+   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_{1-\nu}, \check\psi_\mu^\dagger]_+ = \delta^M_{(\mu-\nu,0)}I)) \\
+&= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{1-\nu}
+   \quad (\because \text{行列の積の分配法則と結合法則}) \\
 &= \delta^M_{(\mu-\nu,0)}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu}
+   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu^\dagger]_+ = 0))
 \end{aligned}`,
       ),
       paragraph(["となり、第 2 項を右辺へ移して交換子の定義に戻すと上の式を得る。"]),
@@ -981,6 +1057,10 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         "Step 2（",
         math(String.raw`[\check{X}, \check\psi_\mu^\dagger] = \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger`),
         "）。",
+        ref("def_check_Vprime"),
+        " の ",
+        math(String.raw`\check{X}`),
+        " の定義を代入する。",
         math(String.raw`\tfrac12 I`),
         " は任意の元と可換（",
         ref("scalar_identity_commutes"),
@@ -989,9 +1069,19 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         " 線型だから、Step 1 より",
       ]),
       displayMath(
-        String.raw`\left[\check{X},\ \check\psi_\mu^\dagger\right]
-= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu^\dagger\right]
-= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\,\delta^M_{(\mu-\nu,\,0)}\,\check\psi_\nu^\dagger`,
+        String.raw`\begin{aligned}
+\left[\check{X},\ \check\psi_\mu^\dagger\right]
+&= \left[\sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)
+   \left(\check\psi_\nu^\dagger\check\psi_{1-\nu} - \tfrac12 I\right),\ \check\psi_\mu^\dagger\right]
+   \quad (\because \text{def\_check\_Vprime}) \\
+&= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)
+   \left[\check\psi_\nu^\dagger\check\psi_{1-\nu} - \tfrac12 I,\ \check\psi_\mu^\dagger\right]
+   \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu^\dagger\right]
+   \quad (\because \text{scalar\_identity\_commutes より } \left[\tfrac12 I,\ \check\psi_\mu^\dagger\right] = 0) \\
+&= \sum_{\nu=1}^{M} \gamma(\tilde\theta_\nu)\,\delta^M_{(\mu-\nu,\,0)}\,\check\psi_\nu^\dagger
+   \quad (\because \text{Step 1})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\nu`),
@@ -1020,9 +1110,17 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         " なので",
       ]),
       displayMath(
-        String.raw`\left[\check{X},\ \check\psi_\mu^\dagger\right] = \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger,
-\qquad\text{すなわち}\qquad
-\check{X}\,\check\psi_\mu^\dagger = \check\psi_\mu^\dagger\left(\check{X} + \gamma(\tilde\theta_\mu)I\right)`,
+        String.raw`\begin{aligned}
+\left[\check{X},\ \check\psi_\mu^\dagger\right]
+&= \gamma(\tilde\theta_{\nu_0})\,\check\psi_{\nu_0}^\dagger
+   \quad (\because \nu = \nu_0 \text{ の項だけが残る}) \\
+&= \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger
+   \quad (\because \text{periodicity\_of\_check\_fermi (1)(2)}) \\
+\text{すなわち}\quad
+\check{X}\,\check\psi_\mu^\dagger
+&= \check\psi_\mu^\dagger\left(\check{X} + \gamma(\tilde\theta_\mu)I\right)
+   \quad (\because \text{交換子の定義と scalar\_identity\_commutes})
+\end{aligned}`,
       ),
       paragraph([
         "（008 章の ",
@@ -1067,9 +1165,17 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         " について",
       ]),
       displayMath(
-        String.raw`\left(\sum_{n=0}^{N}\frac{\check{X}^n}{n!}\right)\check\psi_\mu^\dagger
-= \sum_{n=0}^{N}\frac{\check{X}^n\check\psi_\mu^\dagger}{n!}
-= \check\psi_\mu^\dagger\sum_{n=0}^{N}\frac{\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n}{n!}`,
+        String.raw`\begin{aligned}
+\left(\sum_{n=0}^{N}\frac{\check{X}^n}{n!}\right)\check\psi_\mu^\dagger
+&= \sum_{n=0}^{N}\frac{\check{X}^n\check\psi_\mu^\dagger}{n!}
+   \quad (\because \text{行列の積の分配法則}) \\
+&= \sum_{n=0}^{N}\frac{\check\psi_\mu^\dagger
+   \left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n}{n!}
+   \quad (\because \text{Step 3 を各項へ同時適用}) \\
+&= \check\psi_\mu^\dagger\sum_{n=0}^{N}
+   \frac{\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n}{n!}
+   \quad (\because \text{行列の積の分配法則})
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
@@ -1130,9 +1236,16 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
       displayMath(
         String.raw`\begin{aligned}
 \check\psi_\nu^\dagger\,\check\psi_{1-\nu}\,\check\psi_\mu
+&= \check\psi_\nu^\dagger\left(\check\psi_{1-\nu}\,\check\psi_\mu\right)
+   \quad (\because \text{行列の積の結合法則}) \\
 &= \check\psi_\nu^\dagger\left(-\check\psi_\mu\,\check\psi_{1-\nu}\right)
- = -\left(\delta^M_{(\nu+\mu,1)}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{1-\nu} \\
+   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_{1-\nu}, \check\psi_\mu]_+ = 0)) \\
+&= -\left(\check\psi_\nu^\dagger\,\check\psi_\mu\right)\check\psi_{1-\nu}
+   \quad (\because \text{行列の積の結合法則とスカラー倍}) \\
+&= -\left(\delta^M_{(\nu+\mu,1)}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{1-\nu}
+   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu]_+ = \delta^M_{(\nu+\mu,1)}I)) \\
 &= -\delta^M_{(\nu+\mu,1)}\,\check\psi_{1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{1-\nu}
+   \quad (\because \text{行列の積の分配法則と結合法則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1143,11 +1256,25 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
       paragraph([
         "Step 2'（",
         math(String.raw`[\check{X}, \check\psi_\mu] = -\gamma(\tilde\theta_\mu)\check\psi_\mu`),
-        "）。Step 2 と同様に",
+        "）。Step 2 と同様に、",
+        ref("def_check_Vprime"),
+        " の ",
+        math(String.raw`\check{X}`),
+        " を代入し、交換子の第 1 引数についての線型性と ",
+        ref("scalar_identity_commutes"),
+        "（",
+        math(String.raw`\tfrac12 I`),
+        " は交換子に寄与しない）を使うと",
       ]),
       displayMath(
-        String.raw`\left[\check{X},\ \check\psi_\mu\right]
-= -\sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)\,\delta^M_{(\mu+\nu,\,1)}\,\check\psi_{1-\nu}`,
+        String.raw`\begin{aligned}
+\left[\check{X},\ \check\psi_\mu\right]
+&= \sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)
+   \left[\check\psi_\nu^\dagger\check\psi_{1-\nu},\ \check\psi_\mu\right]
+   \quad (\because \text{def\_check\_Vprime、交換子の第 1 引数の線型性、scalar\_identity\_commutes}) \\
+&= -\sum_{\nu=1}^{M}\gamma(\tilde\theta_\nu)\,\delta^M_{(\mu+\nu,\,1)}\,\check\psi_{1-\nu}
+   \quad (\because \text{Step 1'})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\nu \in \{1,\dots,M\}`),
@@ -1271,10 +1398,16 @@ T_{(V^{(+)})}\!\left(\check{Y}_\mu\right) = T_{(\check{V}')}\!\left(\check{Y}_\m
         " より",
       ]),
       displayMath(
-        String.raw`\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(\check{P}_\mu\check{P}_\mu^{-1}\right)
-= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{P}_\mu^{-1}
-= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{P}_\mu^{-1}`,
+        String.raw`\begin{aligned}
+\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \left(\check{P}_\mu\check{P}_\mu^{-1}\right)
+   \quad (\because \check{P}_\mu\check{P}_\mu^{-1} = I_{\mathrm{Mat}(2,\mathbb{C})}) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{P}_\mu^{-1}
+   \quad (\because \text{commutation\_V\_plus\_check\_psi の proof で確かめた結合律}) \\
+&= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{P}_\mu^{-1}
+   \quad (\because \text{def\_check\_fermi})
+\end{aligned}`,
       ),
       paragraph(["すなわち"]),
       displayMath(
@@ -1420,15 +1553,33 @@ T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
         " について、Step 1 の線型性から",
       ]),
       displayMath(
-        String.raw`T_{(V^{(+)})}(\alpha x + \beta y)
-= \alpha T_{(V^{(+)})}(x) + \beta T_{(V^{(+)})}(y)
-= \alpha T_{(\check{V}')}(x) + \beta T_{(\check{V}')}(y)
-= T_{(\check{V}')}(\alpha x + \beta y)`,
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}(\alpha x + \beta y)
+&= \alpha T_{(V^{(+)})}(x) + \beta T_{(V^{(+)})}(y)
+   \quad (\because \text{Step 1 の線型性}) \\
+&= \alpha T_{(\check{V}')}(x) + \beta T_{(\check{V}')}(y)
+   \quad (\because x, y \in \mathcal{E}) \\
+&= T_{(\check{V}')}(\alpha x + \beta y)
+   \quad (\because \text{Step 1 の線型性})
+\end{aligned}`,
       ),
-      paragraph(["ゆえ ", math(String.raw`\alpha x + \beta y \in \mathcal{E}`), "。Step 1 の乗法性から"]),
+      paragraph([
+        "ゆえ ",
+        math(String.raw`\alpha x + \beta y \in \mathcal{E}`),
+        "。Step 1 の乗法性（",
+        ref("conjugation_is_ring_homomorphism"),
+        "）から",
+      ]),
       displayMath(
-        String.raw`T_{(V^{(+)})}(xy) = T_{(V^{(+)})}(x)T_{(V^{(+)})}(y)
-= T_{(\check{V}')}(x)T_{(\check{V}')}(y) = T_{(\check{V}')}(xy)`,
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}(xy)
+&= T_{(V^{(+)})}(x)\,T_{(V^{(+)})}(y)
+   \quad (\because \text{conjugation\_is\_ring\_homomorphism}) \\
+&= T_{(\check{V}')}(x)\,T_{(\check{V}')}(y)
+   \quad (\because x, y \in \mathcal{E}) \\
+&= T_{(\check{V}')}(xy)
+   \quad (\because \text{conjugation\_is\_ring\_homomorphism})
+\end{aligned}`,
       ),
       paragraph([
         "ゆえ ",
@@ -1528,8 +1679,16 @@ T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
         " は可逆であり、",
       ]),
       displayMath(
-        String.raw`\check{V}'\,W = \check{V}'\left(\left(\check{V}'\right)^{-1}V^{(+)}\right)
-= \left(\check{V}'\left(\check{V}'\right)^{-1}\right)V^{(+)} = I\,V^{(+)} = V^{(+)}`,
+        String.raw`\begin{aligned}
+\check{V}'\,W
+&= \check{V}'\left(\left(\check{V}'\right)^{-1}V^{(+)}\right)
+   \quad (\because W := \left(\check{V}'\right)^{-1}V^{(+)}) \\
+&= \left(\check{V}'\left(\check{V}'\right)^{-1}\right)V^{(+)}
+   \quad (\because \text{行列の積の結合律}) \\
+&= I\,V^{(+)}
+   \quad (\because \text{def\_invertible\_elements\_of\_R}) \\
+&= V^{(+)}
+\end{aligned}`,
       ),
       paragraph([
         "すなわち ",
@@ -1541,16 +1700,26 @@ T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
         math(String.raw`W`),
         " はすべての元と可換）。",
         ref("T_V_plus_eq_T_check_Vprime"),
-        " と ",
+        "、",
         ref("def_V_plus_and_T_V_plus"),
-        " (3) より、任意の ",
+        " (3)、",
+        ref("def_check_Vprime"),
+        " (2)、",
+        ref("def_T_g"),
+        " より、任意の ",
         math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について",
       ]),
       displayMath(
-        String.raw`V^{(+)}\,x\,\left(V^{(+)}\right)^{-1}
-= T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)
-= \check{V}'\,x\,\left(\check{V}'\right)^{-1}`,
+        String.raw`\begin{aligned}
+V^{(+)}\,x\,\left(V^{(+)}\right)^{-1}
+&= T_{(V^{(+)})}(x)
+   \quad (\because \text{def\_V\_plus\_and\_T\_V\_plus (3) と def\_T\_g}) \\
+&= T_{(\check{V}')}(x)
+   \quad (\because \text{T\_V\_plus\_eq\_T\_check\_Vprime}) \\
+&= \check{V}'\,x\,\left(\check{V}'\right)^{-1}
+   \quad (\because \text{def\_check\_Vprime (2) と def\_T\_g})
+\end{aligned}`,
       ),
       paragraph([
         "である。",
@@ -1564,9 +1733,13 @@ T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
         " なので、左辺は",
       ]),
       displayMath(
-        String.raw`V^{(+)}x\left(V^{(+)}\right)^{-1}
-= \left(\check{V}'W\right)x\left(W^{-1}\left(\check{V}'\right)^{-1}\right)
-= \check{V}'\left(W x W^{-1}\right)\left(\check{V}'\right)^{-1}`,
+        String.raw`\begin{aligned}
+V^{(+)}x\left(V^{(+)}\right)^{-1}
+&= \left(\check{V}'W\right)x\left(W^{-1}\left(\check{V}'\right)^{-1}\right)
+   \quad (\because \text{Step 1 と conjugation\_is\_ring\_homomorphism}\ ((AB)^{-1} = B^{-1}A^{-1})) \\
+&= \check{V}'\left(W x W^{-1}\right)\left(\check{V}'\right)^{-1}
+   \quad (\because \text{行列の積の結合律})
+\end{aligned}`,
       ),
       paragraph([
         "と書ける。したがって ",
@@ -1612,7 +1785,16 @@ T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
         "Step 5（結論）。Step 1 と Step 3 より",
       ]),
       displayMath(
-        String.raw`V^{(+)} = \check{V}'W = \check{V}'\left(c\,I\right) = c\,\check{V}'`,
+        String.raw`\begin{aligned}
+V^{(+)}
+&= \check{V}'W
+   \quad (\because \text{Step 1}) \\
+&= \check{V}'\left(c\,I\right)
+   \quad (\because \text{Step 3}) \\
+&= c\left(\check{V}'I\right)
+   \quad (\because \text{scalar\_identity\_commutes}) \\
+&= c\,\check{V}'
+\end{aligned}`,
       ),
       paragraph([
         "（スカラー倍が行列の積と可換であること（",

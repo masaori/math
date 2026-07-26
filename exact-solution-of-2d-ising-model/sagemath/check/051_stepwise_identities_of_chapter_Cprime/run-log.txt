@@ -1,0 +1,343 @@
+# 051_stepwise_identities_of_chapter_Cprime の実行ログ
+# sage: SageMath version 10.6, Release Date: 2025-03-31
+
+$ sage check_01_013_steps.sage
+=== check_01: 013 章の各段の等式 ===
+  why_008 Step1 (1) (Z_mY_m)Z_j = Z_m(Y_mZ_j): max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (2) Y_mZ_j = -Z_jY_m  [anticommutator_of_Z_and_Y]: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (3) Z_m(-Z_jY_m) = -(Z_mZ_j)Y_m: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (4) Z_mZ_j = -Z_jZ_m  [anticommutator_of_Z_and_Y]: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (5) = Z_j(Z_mY_m): max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (1) 交換子の定義: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (2) 結合法則: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (3) Y_jZ_j = -Z_jY_j: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (4) 結合法則とスカラー倍: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (5) Z_jZ_j = I: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (6) = -2Y_j: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 まとめ [H_2, Z_j] = -2Y_j: max residual = 0.000e+00  ->  PASS
+  commutator_of_H_and_check_Z_Y Step1 [H_2, Y_j] = 2Z_j: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Z_jY_j,Y_j] (1) 交換子の定義: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Z_jY_j,Y_j] (2) 結合法則: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Z_jY_j,Y_j] (3) Y_jY_j = I: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Z_jY_j,Y_j] (4) Y_jZ_j = -Z_jY_j: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Z_jY_j,Y_j] (5) 結合法則とスカラー倍: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Z_jY_j,Y_j] (6) = 2Z_j: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (1) 交換子の定義: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (2) 結合法則: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (3) Z_{m+1}Z_{m+1} = I: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (4) Z_{m+1}Y_m = -Y_mZ_{m+1}: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (5) = 2Y_m: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [Y_mZ_{m+1},Y_m] = -2Z_{m+1}: max residual = 0.000e+00  ->  PASS
+  commutator Step1 境界 [-Y_MZ_1,Z_1] (1) 第 1 引数の線型性: max residual = 0.000e+00  ->  PASS
+  commutator Step1 境界 [-Y_MZ_1,Z_1] (2) = -2Y_M: max residual = 0.000e+00  ->  PASS
+  commutator Step1 境界 [-Y_MZ_1,Z_1] (3) = 2 Y^flat_0: max residual = 0.000e+00  ->  PASS
+  commutator Step1 境界 [-Y_MZ_1,Y_M] (1) 第 1 引数の線型性: max residual = 0.000e+00  ->  PASS
+  commutator Step1 境界 [-Y_MZ_1,Y_M] (2) = 2Z_1: max residual = 0.000e+00  ->  PASS
+  commutator Step1 境界 [-Y_MZ_1,Y_M] (3) = -2 Z^flat_{M+1}: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [H_1^{(+)}, Z_j] = 2 Y^flat_{j-1}: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [H_1^{(+)}, Y_j] = -2 Z^flat_{j+1}: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (1) theta~ の書き換え: max residual = 7.065e-15  ->  PASS
+  antiperiodic_exp_sum (2) 指数法則 [theorem_exp_product n=1]: max residual = 8.132e-15  ->  PASS
+  antiperiodic_exp_sum (3) 前因子を和の外へ: max residual = 2.811e-16  ->  PASS
+  antiperiodic_exp_sum (4c) 和 = 0  (k != 0 mod M): max residual = 7.158e-15  ->  PASS
+  antiperiodic_exp_sum (4a) 前因子 e^{-i pi k/M} = (-1)^l: max residual = 2.449e-16  ->  PASS
+  antiperiodic_exp_sum (4b) 和 = M(-1)^l: max residual = 5.757e-15  ->  PASS
+  def_half_integer_modes (1a) M theta~ = 2 pi mu - pi: max residual = 7.105e-15  ->  PASS
+  def_half_integer_modes (1b) e^{-iM theta~} = e^{-2pi i mu} e^{i pi}: max residual = 3.553e-15  ->  PASS
+  def_half_integer_modes (1c) = -1: max residual = 4.410e-15  ->  PASS
+  def_half_integer_modes (2a) theta~_{mu+M} = theta~_mu + 2 pi: max residual = 1.776e-15  ->  PASS
+  def_half_integer_modes (2b) e^{-ij theta~_{mu+M}} = e^{-ij theta~_mu}: max residual = 9.433e-15  ->  PASS
+  def_half_integer_modes (2c) checkZ_{mu+M} = checkZ_mu: max residual = 2.289e-14  ->  PASS
+  def_half_integer_modes (2d) checkY_{mu+M} = checkY_mu: max residual = 2.289e-14  ->  PASS
+  def_half_integer_modes (3) theta~_{1-mu} = -theta~_mu: max residual = 0.000e+00  ->  PASS
+  commutator (C) (1) 第 2 引数の線型性: max residual = 3.331e-16  ->  PASS
+  commutator (C) (2) Step 1 の第 1 式: max residual = 0.000e+00  ->  PASS
+  commutator (C) (3) = -2 checkY_mu: max residual = 0.000e+00  ->  PASS
+  commutator (D) [H_2, checkY] = 2 checkZ: max residual = 3.560e-16  ->  PASS
+  commutator (A) (1) 第 2 引数の線型性: max residual = 3.140e-16  ->  PASS
+  commutator (A) (2) Step 1 の第 3 式: max residual = 0.000e+00  ->  PASS
+  commutator (A) (3) 添字の付け替え l = j-1: max residual = 0.000e+00  ->  PASS
+  commutator (A) (4) 指数法則 [theorem_exp_product n=1]: max residual = 3.947e-15  ->  PASS
+  commutator (A) (5) l=0 の項と l=M の項の入れ替え: max residual = 4.779e-15  ->  PASS
+  commutator (A) (5') 入れ替えの根拠: e^{0} Y^flat_0 = e^{-iM theta~} Y^flat_M: max residual = 2.389e-15  ->  PASS
+  commutator (A) (6) = 2 e^{-i theta~} checkY_mu: max residual = 0.000e+00  ->  PASS
+  commutator (B) (1) 第 2 引数の線型性: max residual = 6.280e-16  ->  PASS
+  commutator (B) (2) Step 1 の第 4 式: max residual = 0.000e+00  ->  PASS
+  commutator (B) (3) 添字の付け替え l = j+1: max residual = 0.000e+00  ->  PASS
+  commutator (B) (4) 指数法則 [theorem_exp_product n=1]: max residual = 5.472e-15  ->  PASS
+  commutator (B) (5) l=M+1 の項と l=1 の項の入れ替え: max residual = 4.875e-15  ->  PASS
+  commutator (B) (5') 入れ替えの根拠: e^{-i(M+1)theta~} Z^flat_{M+1} = e^{-i theta~} Z_1: max residual = 2.437e-15  ->  PASS
+  commutator (B) (6) = -2 e^{i theta~} checkZ_mu: max residual = 0.000e+00  ->  PASS
+  anticommutator_of_check_Z_Y (1) 双線型性で二重和へ: max residual = 2.172e-15  ->  PASS
+  anticommutator_of_check_Z_Y (2) [Z_j,Z_k]_+ = 2I delta で j=k のみ: max residual = 0.000e+00  ->  PASS
+  anticommutator_of_check_Z_Y (3) 指数法則 [theorem_exp_product n=1]: max residual = 8.706e-15  ->  PASS
+  anticommutator_of_check_Z_Y (4) theta~_mu+theta~_nu = 2pi(mu+nu-1)/M: max residual = 1.776e-15  ->  PASS
+  anticommutator_of_check_Z_Y (5) exp_sum で M delta^M_{(mu+nu,1)}: max residual = 1.537e-14  ->  PASS
+  anticommutator_of_check_Z_Y (6) 第 2 式 [checkZ,checkY]_+ = 0: max residual = 1.950e-15  ->  PASS
+  anticommutator_of_check_Z_Y (7) 第 3 式 [checkY,checkY]_+: max residual = 1.085e-14  ->  PASS
+  recover_Z_Y (1) def_half_integer_modes の代入と分配: max residual = 0.000e+00  ->  PASS
+  recover_Z_Y (2) 指数法則 [theorem_exp_product n=1]: max residual = 1.055e-15  ->  PASS
+  recover_Z_Y (3) 有限和の順序交換: max residual = 0.000e+00  ->  PASS
+  recover_Z_Y (4) antiperiodic_exp_sum で k=j の項のみ -> Z_j: max residual = 6.474e-16  ->  PASS
+  recover_Z_Y (5) Y_j についても同様: max residual = 1.045e-15  ->  PASS
+  H1_H2_via_check (Z1-mu 1) def_half_integer_modes: max residual = 0.000e+00  ->  PASS
+  H1_H2_via_check (Z1-mu 2) def_half_integer_modes (3): max residual = 0.000e+00  ->  PASS
+  H1_H2_via_check (Z1-mu 3) 整理: max residual = 0.000e+00  ->  PASS
+  H1_H2_via_check (H2 1) def_half_integer_modes の代入: max residual = 0.000e+00  ->  PASS
+  H1_H2_via_check (H2 2) 積を二重和へ分配: max residual = 1.054e-15  ->  PASS
+  H1_H2_via_check (H2 3) 指数法則 [theorem_exp_product n=1]: max residual = 2.903e-15  ->  PASS
+  H1_H2_via_check (H2 4) 有限和の順序交換: max residual = 3.280e-16  ->  PASS
+  H1_H2_via_check (H2 5) antiperiodic_exp_sum -> sum Z_jY_j: max residual = 2.033e-15  ->  PASS
+  H1_H2_via_check (H2 6) = H_2: max residual = 3.386e-15  ->  PASS
+  H1_H2_via_check (H1 1) def_half_integer_modes の代入: max residual = 0.000e+00  ->  PASS
+  H1_H2_via_check (H1 2) 積を二重和へ分配: max residual = 8.190e-16  ->  PASS
+  H1_H2_via_check (H1 3) 指数法則 [theorem_exp_product n=1]: max residual = 1.753e-15  ->  PASS
+  H1_H2_via_check (H1 4) 有限和の順序交換: max residual = 2.665e-16  ->  PASS
+  H1_H2_via_check (H1 5) antiperiodic_exp_sum の l=0, l=1 の 2 場合: max residual = 2.624e-15  ->  PASS
+  H1_H2_via_check (H1 6) = H_1^{(+)}: max residual = 2.938e-15  ->  PASS
+  段数（区別された等式の種類）: 92
+check_01: PASS
+
+$ sage check_02_015_steps.sage
+=== check_02: 015 章の各段の等式 ===
+  def_gamma1_gamma2 (1) gamma_2 の定義に theta -> -theta: max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (2) cos(-theta) = cos theta: max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (3) sin(-theta) = -sin theta: max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (4) A(theta) の (2,1) 成分 = -gamma_2(-theta): max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (5) A(theta) の (1,1)(2,2) 成分 = gamma_1(theta): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (1) conj(gamma_2) を定義式で書く: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (2) 積の共役 conj(zw)=conj z conj w: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (3) conj(i) = -i: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (4) conj(e^{i theta}) = e^{-i theta}  [theta 実数]: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (5) s_2* は実数: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (6) 和・差の共役: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (7) c_1 cos t, sin t, s_1 c_2 は実数: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (8) = -gamma_2(-theta): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (1式) gamma_2(-theta) = -conj(gamma_2(theta)): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (2式-a) gamma_2 gamma_2(-) = gamma_2 (-conj gamma_2): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (2式-b) = -|gamma_2|^2  [abs_basic_properties]: max residual = 5.704e-14  ->  PASS
+  relation_of_gamma_2 (4式) sqrt(-gamma_2 gamma_2(-)) = |gamma_2|: max residual = 1.776e-15  ->  PASS
+  relation_of_gamma_2 (5式) sqrt(gamma_2 gamma_2(-)) = i|gamma_2|: max residual = 1.158e-15  ->  PASS
+  eigenvector (det 1) det(A - lambda I) の 2x2 定義: max residual = 5.605e-14  ->  PASS
+  eigenvector (det 2) = lambda^2 - 2 g_1 lambda + (g_1^2 + ab): max residual = 1.705e-13  ->  PASS
+  eigenvector (det 3) 因数分解で det = 0: max residual = 1.465e-13  ->  PASS
+  eigenvector (v 1-1) (A v)_1 = g_1(-/+ r) + ab: max residual = 1.139e-13  ->  PASS
+  eigenvector (v 1-2) b = -conj(a): max residual = 0.000e+00  ->  PASS
+  eigenvector (v 1-3) a conj(a) = r^2: max residual = 5.704e-14  ->  PASS
+  eigenvector (v 1-4) = (g_1 +/- r)(-/+ r): max residual = 5.684e-14  ->  PASS
+  eigenvector (v 1-5) = lambda (v)_1: max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-1) (A v)_2 = (-b)(-/+ r) + g_1 b: max residual = 1.137e-13  ->  PASS
+  eigenvector (v 2-2) -b = conj(a) を 2 箇所へ同時適用: max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-3) 整理: max residual = 1.172e-13  ->  PASS
+  eigenvector (v 2-4) -/+r - g_1 = -(g_1 +/- r): max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-5) = lambda (v)_2: max residual = 0.000e+00  ->  PASS
+  eigenvector (固有ベクトル) A v = lambda v: max residual = 1.137e-13  ->  PASS
+  diagonalization (det 1) 2x2 行列式の定義: max residual = 5.594e-17  ->  PASS
+  diagonalization (det 2) (2 sqrt M)^2 = 4M: max residual = 1.388e-16  ->  PASS
+  diagonalization (det 3) = -r/(2Mb): max residual = 0.000e+00  ->  PASS
+  diagonalization (Step2 1) A P^ の列 = (A v_+, A v_-): max residual = 3.838e-16  ->  PASS
+  diagonalization (Step2 2) = P^ D^: max residual = 3.553e-15  ->  PASS
+  diagonalization (Step4) A = P^ D^ P^{-1}: max residual = 1.088e-14  ->  PASS
+  det_A (Step1 1) det の 2x2 定義: max residual = 4.276e-14  ->  PASS
+  det_A (Step1 2) = g_1^2 + gamma_2 gamma_2(-): max residual = 0.000e+00  ->  PASS
+  det_A (Step2 1) gamma_2 gamma_2(-) を積の形へ: max residual = 1.140e-13  ->  PASS
+  det_A (Step2 2) i*i = -1, e^{it}e^{-it} = 1: max residual = 5.765e-14  ->  PASS
+  det_A (Step2 3) (a_0-iv)(a_0+iv) = a_0^2+v^2: max residual = 5.685e-14  ->  PASS
+  det_A (Step2 4) a_0 = c_1 u - s_1 c_2: max residual = 0.000e+00  ->  PASS
+  det_A (Step2 5) u^2+v^2 = 1: max residual = 1.066e-14  ->  PASS
+  det_A (Step4 1) (iii) 2c_1s_1c_2 s_2*^2 u = 2c_1s_1c_2* s_2* u: max residual = 2.842e-14  ->  PASS
+  det_A (Step4 2) (iii) s_1^2 c_2^2 s_2*^2 = s_1^2 c_2*^2: max residual = 1.421e-14  ->  PASS
+  det_A (Step5 1) (i) s_1^2 - c_1^2 + 1 = 0: max residual = 1.066e-14  ->  PASS
+  det_A (Step5 2) (i) c_1^2 - s_1^2 = 1: max residual = 1.066e-14  ->  PASS
+  det_A (Step5 3) (ii) c_2*^2 - s_2*^2 = 1: max residual = 4.441e-16  ->  PASS
+  det_A (Step5 4) g_1^2 + gamma_2 gamma_2(-) = 1: max residual = 1.138e-13  ->  PASS
+  det_A (Step6 1) lambda_+ lambda_- = g_1^2 - r^2: max residual = 4.230e-14  ->  PASS
+  det_A (Step6 2) = 1: max residual = 1.090e-13  ->  PASS
+  det_A (最後) g_1^2 = 1 + r^2: max residual = 1.137e-13  ->  PASS
+  gamma1_gt_1 (Step1 1) gamma_1 の定義: max residual = 0.000e+00  ->  PASS
+  lambda_eq_exp (Step1 1) cosh gamma = g_1: max residual = 3.553e-15  ->  PASS
+  lambda_eq_exp (Step1 2) (sinh gamma)^2 = (cosh gamma)^2 - 1: max residual = 1.137e-13  ->  PASS
+  lambda_eq_exp (Step1 3) = g_1^2 - 1: max residual = 1.705e-13  ->  PASS
+  lambda_eq_exp (Step1 4) = r^2 (det_A_theta_tilde): max residual = 1.137e-13  ->  PASS
+  lambda_eq_exp (Step1 5) sinh gamma = r: max residual = 7.105e-15  ->  PASS
+  lambda_eq_exp (Step2 1) e^{+gamma} = cosh + sinh: max residual = 4.441e-16  ->  PASS
+  lambda_eq_exp (Step2 2) e^{+gamma} = g_1 + r: max residual = 1.066e-14  ->  PASS
+  lambda_eq_exp (Step2 3) = lambda_+: max residual = 1.066e-14  ->  PASS
+  lambda_eq_exp (Step2 4) e^{-gamma} = cosh - sinh: max residual = 2.550e-15  ->  PASS
+  lambda_eq_exp (Step2 5) e^{-gamma} = g_1 - r: max residual = 4.247e-15  ->  PASS
+  lambda_eq_exp (Step2 6) = lambda_-: max residual = 4.247e-15  ->  PASS
+  gamma_2_theta_tilde_nonzero: min |gamma_2(theta~_mu)| = 3.517e-01 -> 0 から離れている
+  gamma1_gt_1_theta_tilde:    min (gamma_1 - 1) = 6.004e-02 -> 狭義に正
+  def_gamma_theta_tilde_mu:   min gamma(theta~_mu) = 3.448e-01 -> 狭義に正
+  段数（区別された等式の種類）: 66
+check_02: PASS
+
+$ sage check_03_014_steps.sage
+=== check_03: 014 章の各段の等式 ===
+  def_V_plus (2-1) exp(X)exp(X) = exp(2X)  [theorem_exp_product]: max residual = 1.457e-13  ->  PASS
+  def_V_plus (2-2) = V_1^{(+)}  [def_V1_pm]: max residual = 1.457e-13  ->  PASS
+  def_V_plus (1) exp(X)^{-1} = exp(-X): max residual = 3.174e-15  ->  PASS
+  def_V_plus (1') V_2 V_2^{-1} = I: max residual = 1.841e-11  ->  PASS
+  def_V_plus (1'') V^{(+)} V^{(+)-1} = I: max residual = 1.889e-11  ->  PASS
+  def_V_plus (3-1) T_g(T_h(X)) = g(hXh^{-1})g^{-1}: max residual = 0.000e+00  ->  PASS
+  def_V_plus (3-2) = (gh)X(h^{-1}g^{-1})  [結合律]: max residual = 6.896e-12  ->  PASS
+  def_V_plus (3-3) (gh)(h^{-1}g^{-1}) = I  すなわち (gh)^{-1} = h^{-1}g^{-1}: max residual = 1.711e-11  ->  PASS
+  def_V_plus (3-3') (h^{-1}g^{-1})(gh) = I: max residual = 1.950e-11  ->  PASS
+  def_V_plus (3-4) T_{(V^{(+)})} = T_{V^{(+)}}: max residual = 8.195e-12  ->  PASS
+  nesting (h1.z) n 偶数: max residual = 4.120e-12  ->  PASS
+  nesting (h1.y) n 偶数: max residual = 3.638e-12  ->  PASS
+  nesting (h2.z) n 偶数: max residual = 6.734e-11  ->  PASS
+  nesting (h2.y) n 偶数: max residual = 9.312e-11  ->  PASS
+  係数変換 補題 1 (alpha = i/2, X = K_1 H_1^{(+)}, W = checkZ): max residual = 1.187e-14  ->  PASS
+  係数変換 補題 1 (alpha = i/2, W = checkY): max residual = 1.187e-14  ->  PASS
+  係数変換 補題 1 (alpha = i, X = K_2^* H_2, W = checkZ): max residual = 1.985e-12  ->  PASS
+  係数変換 補題 1 (alpha = i, W = checkY): max residual = 1.985e-12  ->  PASS
+  係数変換 補題 2 (n 偶数) i^n = (-1)^{n/2}: max residual = 4.899e-16  ->  PASS
+  係数変換 (h1.z) 最終形 (n 偶数): max residual = 1.609e-14  ->  PASS
+  係数変換 (h1.y) 最終形 (n 偶数): max residual = 1.421e-14  ->  PASS
+  係数変換 (h2.z) 最終形 (n 偶数): max residual = 6.734e-11  ->  PASS
+  係数変換 (h2.y) 最終形 (n 偶数): max residual = 9.312e-11  ->  PASS
+  nesting (h1.z) n 奇数: max residual = 2.072e-12  ->  PASS
+  nesting (h1.y) n 奇数: max residual = 2.090e-12  ->  PASS
+  nesting (h2.z) n 奇数: max residual = 1.025e-11  ->  PASS
+  nesting (h2.y) n 奇数: max residual = 1.406e-11  ->  PASS
+  係数変換 補題 2 (n 奇数) i^n = i(-1)^{(n-1)/2}: max residual = 4.286e-16  ->  PASS
+  係数変換 (i/2)^n (2K_1)^n = i^n K_1^n: max residual = 8.882e-16  ->  PASS
+  係数変換 (h1.z) 最終形 (n 奇数): max residual = 1.619e-14  ->  PASS
+  係数変換 (h1.y) 最終形 (n 奇数): max residual = 1.633e-14  ->  PASS
+  係数変換 (h2.z) 最終形 (n 奇数): max residual = 1.025e-11  ->  PASS
+  係数変換 (h2.y) 最終形 (n 奇数): max residual = 1.406e-11  ->  PASS
+  テイラー抽出 偶数側の和 = cosh K_1: max residual = 2.220e-16  ->  PASS
+  テイラー抽出 奇数側の和 = sinh K_1: max residual = 2.220e-16  ->  PASS
+  テイラー抽出 偶数側の和 = cosh 2K_2*: max residual = 8.882e-16  ->  PASS
+  テイラー抽出 奇数側の和 = sinh 2K_2*: max residual = 2.220e-16  ->  PASS
+  テイラー抽出 (h1.z) 偶奇に分けた形: max residual = 5.448e-15  ->  PASS
+  テイラー抽出 (h1.z) = cosh Z + i e^{-it} sinh Y: max residual = 5.736e-15  ->  PASS
+  テイラー抽出 (h1.y) = -i e^{it} sinh Z + cosh Y: max residual = 7.456e-15  ->  PASS
+  テイラー抽出 (h2.z) = cosh Z - i sinh Y: max residual = 1.887e-14  ->  PASS
+  テイラー抽出 (h2.y) = i sinh Z + cosh Y: max residual = 3.045e-14  ->  PASS
+  T_actions (V1 Z 1) T_g の定義 g W g^{-1}: max residual = 0.000e+00  ->  PASS
+  T_actions (V1 Z 2) = exp((i/2)K_1H_1)Z exp(-(i/2)K_1H_1): max residual = 0.000e+00  ->  PASS
+  T_actions (V1 Z 3) = 交換子の級数 [exp_X_Y_exp_-X]: max residual = 2.317e-14  ->  PASS
+  T_actions (V1 Z 4) = cosh Z + i e^{-it} sinh Y: max residual = 2.336e-14  ->  PASS
+  T_actions (V1 Y 4) = -i e^{it} sinh Z + cosh Y: max residual = 2.306e-14  ->  PASS
+  T_actions (V2 Z 1) 前因子 (2s_2)^{M/2} の相殺: max residual = 7.206e-12  ->  PASS
+  T_actions (V2 Z 4) = cosh Z - i sinh Y: max residual = 2.155e-11  ->  PASS
+  T_actions (V2 Y 4) = i sinh Z + cosh Y: max residual = 2.081e-11  ->  PASS
+  linearity_of_T (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 7.261e-15  ->  PASS
+  linearity_of_T (V2) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 6.408e-12  ->  PASS
+  linearity_of_T (V^{(+)}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 1.186e-11  ->  PASS
+  calc_of_TxT (B1 第 1 列): max residual = 2.336e-14  ->  PASS
+  calc_of_TxT (B1 第 2 列): max residual = 2.306e-14  ->  PASS
+  calc_of_TxT (B2 第 1 列): max residual = 2.155e-11  ->  PASS
+  calc_of_TxT (B2 第 2 列): max residual = 2.081e-11  ->  PASS
+  T_V_plus (z 1) T_{V1^{1/2}} の作用: max residual = 2.336e-14  ->  PASS
+  T_V_plus (z 2) T の線型性で T_{V2} を列ベクトルへ: max residual = 8.510e-12  ->  PASS
+  T_V_plus (z 3) 直積作用 -> (checkZ, checkY) B_2 col: max residual = 2.043e-11  ->  PASS
+  T_V_plus (z 4) T の線型性で T_{V1^{1/2}} を外へ: max residual = 2.178e-11  ->  PASS
+  T_V_plus (z 5) 直積作用 -> (checkZ, checkY) B_1 B_2 col: max residual = 2.178e-11  ->  PASS
+  T_V_plus (z 6) 合成 = T_{(V^{(+)})}(W): max residual = 9.027e-11  ->  PASS
+  T_V_plus (y 1) T_{V1^{1/2}} の作用: max residual = 2.306e-14  ->  PASS
+  T_V_plus (y 2) T の線型性で T_{V2} を列ベクトルへ: max residual = 7.031e-12  ->  PASS
+  T_V_plus (y 3) 直積作用 -> (checkZ, checkY) B_2 col: max residual = 2.143e-11  ->  PASS
+  T_V_plus (y 4) T の線型性で T_{V1^{1/2}} を外へ: max residual = 2.411e-11  ->  PASS
+  T_V_plus (y 5) 直積作用 -> (checkZ, checkY) B_1 B_2 col: max residual = 2.411e-11  ->  PASS
+  T_V_plus (y 6) 合成 = T_{(V^{(+)})}(W): max residual = 9.451e-11  ->  PASS
+  T_V_plus (まとめ Z) = (checkZ,checkY) B_1B_2B_1 の第 1 列: max residual = 7.946e-11  ->  PASS
+  T_V_plus (まとめ Y) = (checkZ,checkY) B_1B_2B_1 の第 2 列: max residual = 8.368e-11  ->  PASS
+  T_V_plus (最終 Z) = (checkZ,checkY) A(theta~) の第 1 列: max residual = 7.947e-11  ->  PASS
+  T_V_plus (最終 Y) = (checkZ,checkY) A(theta~) の第 2 列: max residual = 8.368e-11  ->  PASS
+  factorization 倍角 a^2+b^2 = c_1: max residual = 8.882e-16  ->  PASS
+  factorization 倍角 2ab = s_1: max residual = 3.331e-16  ->  PASS
+  factorization 倍角 a^2-b^2 = 1: max residual = 2.220e-16  ->  PASS
+  factorization (iii) c_2* = s_2* c_2: max residual = 2.220e-16  ->  PASS
+  factorization Step1 N_11: max residual = 9.155e-16  ->  PASS
+  factorization Step1 N_12: max residual = 9.155e-16  ->  PASS
+  factorization Step1 N_21: max residual = 9.155e-16  ->  PASS
+  factorization Step1 N_22: max residual = 9.155e-16  ->  PASS
+  factorization Step2 P_11 (1) mat_mult: max residual = 3.566e-15  ->  PASS
+  factorization Step2 P_11 (2) N の代入と -i*i = 1: max residual = 3.662e-15  ->  PASS
+  factorization Step2 P_11 (3) e^{it}e^{-it} = 1: max residual = 3.553e-15  ->  PASS
+  factorization Step2 P_11 (4) 同類項の整理: max residual = 3.553e-15  ->  PASS
+  factorization Step2 P_11 (5) 倍角と e^{it}+e^{-it} = 2cos t: max residual = 3.553e-15  ->  PASS
+  factorization Step2 P_11 (6) = c_1c_2* - s_1s_2* cos t: max residual = 0.000e+00  ->  PASS
+  factorization Step3 P_22 = P_11: max residual = 7.108e-15  ->  PASS
+  factorization Step4 P_12 (1) mat_mult: max residual = 3.662e-15  ->  PASS
+  factorization Step4 P_12 (2) N の代入と e^{it}e^{it} = e^{2it}: max residual = 7.119e-15  ->  PASS
+  factorization Step4 P_12 (3) 括弧でくくる: max residual = 3.560e-15  ->  PASS
+  factorization Step4 括弧 (1) e^{it} でくくる: max residual = 1.404e-15  ->  PASS
+  factorization Step4 括弧 (2) Euler の公式を 2 箇所へ同時適用: max residual = 9.930e-16  ->  PASS
+  factorization Step4 括弧 (3) 整理: max residual = 9.930e-16  ->  PASS
+  factorization Step4 括弧 (4) a^2+b^2 = c_1: max residual = 1.256e-15  ->  PASS
+  factorization Step4 括弧 (5) a^2-b^2 = 1: max residual = 2.618e-16  ->  PASS
+  factorization Step4 P_12 (4) = i e^{it} s_2*(c_1 cos t - i sin t - s_1c_2): max residual = 5.024e-15  ->  PASS
+  factorization Step5 P_21 (1) mat_mult: max residual = 3.560e-15  ->  PASS
+  factorization Step5 P_21 (2) = -i e^{-it}s_2*(c_1cos t + i sin t - s_1c_2): max residual = 6.405e-15  ->  PASS
+  factorization Step6 B_1 B_2 B_1 = A(theta): max residual = 1.352e-14  ->  PASS
+  段数（区別された等式の種類）: 100
+check_03: PASS
+
+$ sage check_04_016_steps.sage
+=== check_04: 016 章の各段の等式 ===
+  def_check_fermi (psi^dagger) = P^ の第 1 列: max residual = 0.000e+00  ->  PASS
+  def_check_fermi (psi) = P^ の第 2 列: max residual = 0.000e+00  ->  PASS
+  def_check_fermi 略記形 psi^dagger = c(-r checkZ + b checkY): max residual = 4.794e-16  ->  PASS
+  def_check_fermi 略記形 psi = c(+r checkZ + b checkY): max residual = 4.794e-16  ->  PASS
+  periodicity (1) gamma_1(theta~_{mu+kM}) = gamma_1(theta~_mu): max residual = 1.954e-14  ->  PASS
+  periodicity (1) gamma_2(+theta~_{mu+kM}) = gamma_2(+theta~_mu): max residual = 2.809e-14  ->  PASS
+  periodicity (1) gamma_2(-theta~_{mu+kM}) = gamma_2(-theta~_mu): max residual = 2.809e-14  ->  PASS
+  periodicity (1) gamma(theta~_{mu+kM}) = gamma(theta~_mu): max residual = 4.663e-15  ->  PASS
+  periodicity (2) psi^dagger_{mu+kM} = psi^dagger_mu: max residual = 1.975e-14  ->  PASS
+  periodicity (2) psi_{mu+kM} = psi_mu: max residual = 1.975e-14  ->  PASS
+  periodicity (3) gamma_2(theta~_{1-mu}) = gamma_2(-theta~_mu): max residual = 0.000e+00  ->  PASS
+  periodicity (3) gamma_2(-theta~_{1-mu}) = gamma_2(theta~_mu): max residual = 0.000e+00  ->  PASS
+  periodicity (3) gamma_1(theta~_{1-mu}) = gamma_1(theta~_mu): max residual = 0.000e+00  ->  PASS
+  periodicity (3) gamma(theta~_{1-mu}) = gamma(theta~_mu): max residual = 0.000e+00  ->  PASS
+  anticommutator Step2 (1) 双線型性で 4 項へ展開: max residual = 6.416e-16  ->  PASS
+  anticommutator Step2 (2) 中間 2 項は [checkZ,checkY]_+ = 0 で消える: max residual = 1.950e-15  ->  PASS
+  anticommutator Step2 (3) = c_mu c_nu (r_mu r_nu + b_mu b_nu) 2M delta I: max residual = 1.052e-15  ->  PASS
+  anticommutator Step2 (4) 第 1 式 = 0: max residual = 1.061e-15  ->  PASS
+  anticommutator Step3 第 3 式 = 0: max residual = 1.062e-15  ->  PASS
+  anticommutator Step4 (1) 第 2 式の 4 項展開: max residual = 1.891e-15  ->  PASS
+  anticommutator Step4 (2) 第 2 式 = delta^M_{(mu+nu,1)} I: max residual = 1.981e-15  ->  PASS
+  anticommutator Step1 a_nu = gamma_2(theta~_{1-mu}) = b_mu: max residual = 8.240e-15  ->  PASS
+  anticommutator Step1 b_nu = gamma_2(-theta~_{1-mu}) = a_mu: max residual = 8.240e-15  ->  PASS
+  anticommutator Step1 r_nu = |b_mu| = |-conj(a_mu)|: max residual = 7.105e-15  ->  PASS
+  anticommutator Step1 r_nu = |a_mu| = r_mu: max residual = 7.105e-15  ->  PASS
+  anticommutator Step1 b_mu b_nu = a_mu b_mu = -r^2: max residual = 8.422e-14  ->  PASS
+  anticommutator Step1 c_mu c_nu = 1/(4M b_mu b_nu): max residual = 1.111e-16  ->  PASS
+  anticommutator Step1 c_mu c_nu = -1/(4Mr^2): max residual = 1.555e-16  ->  PASS
+  commutation_V_plus (行ベクトル×行列の結合律) ((A,B)G)H = (A,B)(GH): max residual = 0.000e+00  ->  PASS
+  commutation_V_plus T_{(V^{(+)})}(psi^dagger) = e^{+gamma} psi^dagger: max residual = 3.620e-11  ->  PASS
+  commutation_V_plus T_{(V^{(+)})}(psi) = e^{-gamma} psi: max residual = 2.508e-12  ->  PASS
+  action_of_T_check_Vprime Step1 [psi^d_nu psi_{1-nu}, psi^d_mu] = delta psi^d_nu: max residual = 3.002e-15  ->  PASS
+  action_of_T_check_Vprime Step1' [psi^d_nu psi_{1-nu}, psi_mu] = -delta psi_{1-nu}: max residual = 3.007e-15  ->  PASS
+  action_of_T_check_Vprime Step2 [X^, psi^dagger_mu] = gamma psi^dagger_mu: max residual = 4.776e-15  ->  PASS
+  action_of_T_check_Vprime Step2 X^ psi^d = psi^d (X^ + gamma I): max residual = 4.678e-15  ->  PASS
+  action_of_T_check_Vprime Step2' [X^, psi_mu] = -gamma psi_mu: max residual = 6.024e-15  ->  PASS
+  action_of_T_check_Vprime Step3 X^n psi^d = psi^d (X^+gamma I)^n: max residual = 7.407e-13  ->  PASS
+  action_of_T_check_Vprime Step4 exp(X^) psi^d = psi^d exp(X^+gamma I): max residual = 1.953e-11  ->  PASS
+  action_of_T_check_Vprime Step5 T_{(V^')}(psi^d) = e^{+gamma} psi^d: max residual = 1.705e-11  ->  PASS
+  action_of_T_check_Vprime Steps5' T_{(V^')}(psi) = e^{-gamma} psi: max residual = 1.192e-12  ->  PASS
+  T_eq_on_check_Z_Y Step1 (checkZ,checkY) = (psi^d,psi) P^{-1} の第 1 列: max residual = 1.109e-15  ->  PASS
+  T_eq_on_check_Z_Y Step1 第 2 列: max residual = 1.223e-15  ->  PASS
+  T_eq_on_check_Z_Y Step2 psi^d 上で一致: max residual = 5.023e-11  ->  PASS
+  T_eq_on_check_Z_Y Step2 psi 上で一致: max residual = 2.520e-12  ->  PASS
+  T_eq_on_check_Z_Y Step3 checkZ 上で一致: max residual = 1.112e-10  ->  PASS
+  T_eq_on_check_Z_Y Step3 checkY 上で一致: max residual = 1.213e-10  ->  PASS
+  T_V_plus_eq Step2 recover_Z_Y_from_check_Z_Y で Z_m を復元: max residual = 1.045e-15  ->  PASS
+  T_V_plus_eq Step2 T(Z_m) が一致: max residual = 3.004e-11  ->  PASS
+  T_V_plus_eq Step2 T(Y_m) が一致: max residual = 3.053e-11  ->  PASS
+  T_V_plus_eq Step3 T(I) = I: max residual = 1.889e-11  ->  PASS
+  T_V_plus_eq Step3 乗法性 T(xy) = T(x)T(y): max residual = 6.924e-11  ->  PASS
+  T_V_plus_eq Step4 行列単位 e_{ij} 全体で一致（代数全体で一致）: max residual = 5.447e-09  ->  PASS
+  V_plus_eq_c Step1 V^' W = V^{(+)}: max residual = 7.888e-11  ->  PASS
+  V_plus_eq_c Step1 V^'(V^'^{-1} V^{(+)}) = (V^' V^'^{-1}) V^{(+)}  [結合律]: max residual = 1.565e-11  ->  PASS
+  V_plus_eq_c Step1 V^' V^'^{-1} = I: max residual = 6.853e-12  ->  PASS
+  V_plus_eq_c Step2 W はすべての元と可換（行列単位で検査）: max residual = 6.484e-12  ->  PASS
+  V_plus_eq_c Step3 W = cI （centralizer_is_scalar）: max residual = 5.806e-12  ->  PASS
+  V_plus_eq_c Step5 V^{(+)} = c V^': max residual = 9.767e-12  ->  PASS
+  V_plus_eq_c: W = (V^')^{-1} V^{(+)} のスカラー行列からの最大ずれ = 5.806e-12
+  段数（区別された等式の種類）: 58
+check_04: PASS
+
