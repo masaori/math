@@ -53,7 +53,10 @@ for dir in "${check_root}"/*/; do
     log="${dir}logs/${base}.log"
     total=$((total + 1))
     printf '[run] %s/%s ... ' "$name" "$base"
-    if sage "$script" >"$log" 2>&1; then
+    # check ディレクトリへ cd してから相対名で呼ぶ。SageMath が生成する `<name>.sage.py` の
+    # 冒頭コメントに渡したパスがそのまま埋め込まれるため、絶対パスで呼ぶと生成物が毎回
+    # 差分になってしまう（中身は同じなのに git が汚れる）。
+    if (cd "$dir" && sage "$base") >"$log" 2>&1; then
       printf 'PASS\n'
     else
       printf 'FAIL (see %s)\n' "${log#${project_root}/}"
