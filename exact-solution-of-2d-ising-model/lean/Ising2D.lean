@@ -5,6 +5,8 @@
 形式化。ファイルと人手証明の対応規約は `lean/README.md` を参照。
 -/
 import Ising2D.Basic
+import Ising2D.Abstract.MatrixUnits
+import Ising2D.Abstract.ScalarCentral
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
 import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
 import Ising2D.Part002.Theorem000_TensorBasis
