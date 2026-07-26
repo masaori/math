@@ -1910,7 +1910,7 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
         " なる ",
         math(String.raw`\mu \in \mathcal{M}`),
         " についてのみ、",
-        math(String.raw`\psi_\mu, \psi_\mu^\dagger \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\psi_\mu, \psi_\mu^\dagger \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を",
       ]),
       displayMath(
@@ -1988,6 +1988,7 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "現行ソースに再同期：ψ_μ の定義域を γ2(θμ)≠0 なる μ に限定し、γ2=0（臨界点の ψ_M）では ψ が存在しない旨の注、および a(θμ) の逆数・符号 ε_μ に関する注を反映。",
         "定義が意味をもつ条件（γ2≠0）とその帰結は定義の妥当性そのものなので statement へ格上げした。" +
           "符号 ε_μ による書き換えとホロノミック量子場との比較は notes/008_TV1_hatZ_hatY.ts へ移設。",
@@ -2092,7 +2093,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       ]),
       displayMath(
         String.raw`[\psi_\mu^\dagger, \psi_\nu^\dagger]_+ = 0, \quad
-[\psi_\mu^\dagger, \psi_\nu]_+ = \delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}, \quad
+[\psi_\mu^\dagger, \psi_\nu]_+ = \delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}, \quad
 [\psi_\mu, \psi_\nu]_+ = 0`,
       ),
       paragraph([
@@ -2254,9 +2255,9 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       ),
       paragraph(["である。また、", ref("anticommutator_of_hat_Z_and_hat_Y"), " より、"]),
       displayMath(
-        String.raw`[\hat{Z}_\mu^{(-)}, \hat{Z}_\nu^{(-)}]_+ = 2M\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}, \quad
+        String.raw`[\hat{Z}_\mu^{(-)}, \hat{Z}_\nu^{(-)}]_+ = 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}, \quad
 [\hat{Z}_\mu^{(-)}, \hat{Y}_\nu]_+ = 0, \quad
-[\hat{Y}_\mu, \hat{Y}_\nu]_+ = 2M\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}`,
+[\hat{Y}_\mu, \hat{Y}_\nu]_+ = 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
       ),
       paragraph(["である。"]),
       paragraph(["a) ", math(String.raw`[\psi_\mu^\dagger, \psi_\nu^\dagger]_+`), " について、反交換子の双線型性より"]),
@@ -2269,7 +2270,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
 &\quad + \gamma_2(-\theta_\mu)\,i\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}[\hat{Y}_\mu, \hat{Z}_\nu^{(-)}]_+ \\
 &\quad + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)[\hat{Y}_\mu, \hat{Y}_\nu]_+
 \Bigr) \\
-&= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}
+&= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
 \end{aligned}`,
       ),
       paragraph([
@@ -2313,7 +2314,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       paragraph(["b) ", math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+`), " について、双線型性より"]),
       displayMath(
         String.raw`[\psi_\mu^\dagger, \psi_\nu]_+
-= c_\mu c_\nu\bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}`,
+= c_\mu c_\nu\bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
       ),
       paragraph([
         "（",
@@ -2336,15 +2337,15 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       ]),
       displayMath(
         String.raw`[\psi_\mu^\dagger, \psi_\nu]_+
-= \frac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\cdot 2\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot 2M\cdot\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}
-= \delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}`,
+= \frac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\cdot 2\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot 2M\cdot\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+= \delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
       ),
       paragraph([
         math(String.raw`\delta^M_{\mu+\nu,0} = 0`),
         " のときは全体が ",
         math(String.raw`0`),
         "。以上から ",
-        math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+ = \delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}`),
+        math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+ = \delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "。",
       ]),
       paragraph([
@@ -2356,13 +2357,14 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
       ]),
       displayMath(
         String.raw`[\psi_\mu, \psi_\nu]_+
-= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{(\mathbb{C}^2)^{\otimes M}}`,
+= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
       ),
       paragraph(["となる。a) と同じ議論により ", math(String.raw`[\psi_\mu, \psi_\nu]_+ = 0`), "。"]),
     ],
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "現行ソースに再同期（定義域を γ2(θμ),γ2(θν)≠0 に限定）し、三つの反交換子の計算を全展開。",
         "原文（および本ブロックの旧版）は δ^M_{μ+ν,0} ≠ 0 のとき『θ_ν = -θ_μ』と書いて根号の中身を置き換えていたが、" +
           "μ+ν ≡ 0 (mod M) から従うのは θ_ν = -θ_μ + 2kπ（k ∈ Z）までであり、また根号の中身が等しいことだけからは " +
@@ -3237,7 +3239,7 @@ T_{(V')}(\psi_\mu)
         "）より ",
         math(String.raw`T_{(V')}(W) = V'W V'^{-1} = \exp(X)W\exp(-X)`),
         "（",
-        math(String.raw`W \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`W \in \mathrm{Mat}(2^M,\mathbb{C})`),
         "）である。",
       ]),
       paragraph(["Step 1: ", math(String.raw`\gamma_2(\theta_\nu) = 0 \Rightarrow \gamma(\theta_\nu) = 0`), "。"]),
@@ -3458,7 +3460,11 @@ T_{(V')}(\psi_\mu)
     ],
     conversion: {
       status: "converted",
-      notes: ["現行ソース（Phase-1 で規約撤去・場合分け簡約済み）を Step 1-4 まで忠実に翻訳。"],
+      notes: [
+        "現行ソース（Phase-1 で規約撤去・場合分け簡約済み）を Step 1-4 まで忠実に翻訳。",
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の" +
+          "単位行列 I_{Mat(2^M,C)} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+      ],
     },
   },
   {
@@ -3636,7 +3642,7 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
       displayMath(String.raw`T_{(V)} = T_{(V')}`),
       paragraph([
         "すなわち、任意の ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " に対して ",
         math(String.raw`T_{(V)}(x) = T_{(V')}(x)`),
         " である。",
@@ -3653,7 +3659,7 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
       paragraph([
         ref("def_T_V"),
         " より、任意の ",
-        math(String.raw`X \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について",
       ]),
       displayMath(
@@ -3811,13 +3817,13 @@ T_{(V)}(Y_m)
       paragraph(["Step 3: 一致する元の集合は、和・スカラー倍・積で閉じ、単位元を含む。"]),
       paragraph(["集合"]),
       displayMath(
-        String.raw`\mathcal{E} := \left\{\, x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M} \;:\; T_{(V)}(x) = T_{(V')}(x) \,\right\}`,
+        String.raw`\mathcal{E} := \left\{\, x \in \mathrm{Mat}(2^M,\mathbb{C}) \;:\; T_{(V)}(x) = T_{(V')}(x) \,\right\}`,
       ),
       paragraph([
         "を考える。",
         math(String.raw`\mathcal{E}`),
         " が ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の部分集合として、和・スカラー倍・積について閉じ、単位元を含むことを示す。",
       ]),
       paragraph([
@@ -3875,7 +3881,7 @@ T_{(V)}(x y)
         "以上より ",
         math(String.raw`\mathcal{E}`),
         " は単位元を含み、和・スカラー倍・積について閉じる ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の部分集合である。",
       ]),
       paragraph(["Step 4: 結論。"]),
@@ -3899,21 +3905,21 @@ T_{(V)}(x y)
         " である。",
         ref("Z_Y_generate_algebra"),
         " より ",
-        math(String.raw`\mathcal{A} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^M,\mathbb{C})`),
         " であるから、",
       ]),
       displayMath(
-        String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+        String.raw`\mathrm{Mat}(2^M,\mathbb{C})
 = \mathcal{A}
 \subseteq \mathcal{E}
-\subseteq \mathrm{Mat}(2,\mathbb{C})^{\otimes M}
+\subseteq \mathrm{Mat}(2^M,\mathbb{C})
 \quad (\because \text{Z\_Y\_generate\_algebra})`,
       ),
       paragraph([
         "すなわち ",
-        math(String.raw`\mathcal{E} = \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathcal{E} = \mathrm{Mat}(2^M,\mathbb{C})`),
         " である。これは、任意の ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について ",
         math(String.raw`T_{(V)}(x) = T_{(V')}(x)`),
         "、すなわち",
@@ -3924,6 +3930,7 @@ T_{(V)}(x y)
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "移行漏れだった証明を _old/typst の原本（038_claim_T_V_eq_T_Vprime.typ）から復旧。Step 1〜4 を圧縮せず全ステップ再現した。",
         "原文の statement は「任意の x に対して T_((V))(x) = T_((V'))(x)」であり、構造化側にあった「V x V^{-1} = V' x V'^{-1}」という別表記を原文どおりに戻した（V x V^{-1} = T_V(x) であることは Step 1 の T_((V)) = T_V を経由して初めて言えるため、statement 段階では原文の形が正しい）。",
         "原文の T_((V_2)) は、構造化側の def_T_V が用いる T_{V_2} の表記に統一した。",
@@ -3988,8 +3995,8 @@ V' W
    \quad (\because W = V'^{-1} V) \\
 &= (V' V'^{-1}) V
    \quad (\because \text{行列の積の結合法則}) \\
-&= I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\, V
-   \quad (\because V' V'^{-1} = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}\, V
+   \quad (\because V' V'^{-1} = I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
 &= V
    \quad (\because \text{単位元の性質})
 \end{aligned}`,
@@ -4001,7 +4008,7 @@ V' W
         "Step 2: ",
         math(String.raw`W`),
         " はすべての ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " と可換である。",
       ]),
       paragraph([
@@ -4013,7 +4020,7 @@ V' W
         " の Step 1 で示された ",
         math(String.raw`T_{(V)} = T_V`),
         " と合わせると、任意の ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について",
       ]),
       displayMath(
@@ -4095,11 +4102,11 @@ V'\left(W x W^{-1}\right)V'^{-1}
         String.raw`\begin{aligned}
 W x W^{-1}
 &= V'^{-1}\left(V'\left(W x W^{-1}\right)V'^{-1}\right)V'
-   \quad (\because V'^{-1}V' = V'V'^{-1} = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+   \quad (\because V'^{-1}V' = V'V'^{-1} = I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
 &= V'^{-1}\left(V' x V'^{-1}\right)V'
    \quad (\because V'(W x W^{-1})V'^{-1} = V' x V'^{-1}) \\
 &= x
-   \quad (\because V'^{-1}V' = V'V'^{-1} = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}})
+   \quad (\because V'^{-1}V' = V'V'^{-1} = I_{\mathrm{Mat}(2^M,\mathbb{C})})
 \end{aligned}`,
       ),
       paragraph([
@@ -4108,14 +4115,14 @@ W x W^{-1}
         " である。両辺に右から ",
         math(String.raw`W`),
         " を掛けると、任意の ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 W x
 &= (W x W^{-1}) W
-   \quad (\because W^{-1}W = I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}) \\
+   \quad (\because W^{-1}W = I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
 &= x W
    \quad (\because W x W^{-1} = x)
 \end{aligned}`,
@@ -4124,7 +4131,7 @@ W x
         "が成り立つ。したがって ",
         math(String.raw`W`),
         " はすべての ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " と可換である。",
       ]),
       paragraph(["Step 3: ", math(String.raw`W`), " はスカラーである。"]),
@@ -4132,7 +4139,7 @@ W x
         "Step 2 より ",
         math(String.raw`W`),
         " はすべての ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " と可換であるから、",
         ref("centralizer_is_scalar"),
         " より、ある ",
@@ -4140,7 +4147,7 @@ W x
         " が存在して",
       ]),
       displayMath(
-        String.raw`W = c \cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+        String.raw`W = c \cdot I_{\mathrm{Mat}(2^M,\mathbb{C})}
 \quad (\because \text{centralizer\_is\_scalar})`,
       ),
       paragraph(["が成り立つ。"]),
@@ -4151,11 +4158,11 @@ W x
         " は可逆である。仮に ",
         math(String.raw`c = 0`),
         " ならば ",
-        math(String.raw`W = 0\cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} = O`),
+        math(String.raw`W = 0\cdot I_{\mathrm{Mat}(2^M,\mathbb{C})} = O`),
         "（零行列）となるが、零行列は可逆でない（任意の ",
         math(String.raw`A`),
         " について ",
-        math(String.raw`O A = O \neq I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`O A = O \neq I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "）から、",
         math(String.raw`W`),
         " が可逆であることに矛盾する。よって ",
@@ -4169,7 +4176,7 @@ W x
         "Step 1 の ",
         math(String.raw`V = V' W`),
         " に Step 3 の ",
-        math(String.raw`W = c \cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`W = c \cdot I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         " を代入すると",
       ]),
       displayMath(
@@ -4177,9 +4184,9 @@ W x
 V
 &= V' W
    \quad (\because \text{Step 1}) \\
-&= V'\left(c \cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right)
+&= V'\left(c \cdot I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
    \quad (\because \text{Step 3}) \\
-&= c \cdot \left(V' I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}\right)
+&= c \cdot \left(V' I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
    \quad (\because \text{スカラー倍と行列積の可換性}) \\
 &= c \cdot V'
    \quad (\because \text{単位元の性質})
@@ -4198,6 +4205,7 @@ V
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "移行漏れだった証明を _old/typst の原本（039_claim_V_eq_Vprime.typ）から復旧。Step 1〜5 を圧縮せず全ステップ再現した。",
         "構造化側にあった旧 TODO『T の単射性（クリフォード群の性質）を用いる』は原本の証明方針と異なる（原本は centralizer_is_scalar を用い、クリフォード群には依存しない）。原本の方針に従って復旧し、その旨は原文 note として notes/008_TV1_hatZ_hatY.ts に収めた。",
         "原文 statement にあった V の定義（def_T_V で導入し T_V_eq_T_Vprime の Step 1 で T_((V)) = T_V を示した行列）は、主張の意味の確定に必要なため statement に復旧した。",

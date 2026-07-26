@@ -97,54 +97,35 @@ export default defineBlocks([
         " 列の複素行列であって、抽象的なテンソル積ではない。",
       ]),
       paragraph([
-        "（3）記号の同一視。本文の他の章では、同じ対象を次の記号でも書く。",
-      ]),
-      list([
-        [
-          math(String.raw`A_1 \otimes \cdots \otimes A_M`),
-          " は ",
-          math(String.raw`A_1 \boxtimes \cdots \boxtimes A_M`),
-          " のことである（数ベクトルについても同様）。",
-        ],
-        [
-          math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
-          " は ",
-          math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-          " のことである（",
-          math(String.raw`2^M`),
-          " 次の複素正方行列全体。",
-          ref("tensor_basis"),
-          " (1) のとおり、この集合はクロネッカー積 ",
-          math(String.raw`A_1\boxtimes\cdots\boxtimes A_M`),
-          " たちの ",
-          math(String.raw`\mathbb{C}`),
-          "-線型結合をすべて集めたものに一致する）。",
-        ],
-        [
-          math(String.raw`(\mathbb{C}^2)^{\otimes M}`),
-          " は ",
-          math(String.raw`\mathbb{C}^{2^M}`),
-          " のことである。",
-        ],
-        [
-          math(String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
-          " は ",
-          math(String.raw`2^M`),
-          " 次の単位行列 ",
-          math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
-          " のことである（",
-          ref("kronecker_product_rule"),
-          " (2) のとおり ",
-          math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
-          " に等しい）。",
-        ],
-      ]),
-      paragraph([
-        "すなわち ",
-        math(String.raw`\otimes`),
-        " は本定義のクロネッカー積の別記法であり、以下の章に現れる ",
-        math(String.raw`\otimes`),
-        " はすべてこの意味で読む。",
+        "（3）これらが住む空間。",
+        math(String.raw`A_1 \boxtimes \cdots \boxtimes A_M`),
+        " は ",
+        math(String.raw`2^M`),
+        " 次の複素正方行列全体 ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の元、",
+        math(String.raw`v_1 \boxtimes \cdots \boxtimes v_M`),
+        " は ",
+        math(String.raw`2^M`),
+        " 次元数ベクトル全体 ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の元である。",
+        ref("tensor_basis"),
+        " (1) のとおり、",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " はクロネッカー積 ",
+        math(String.raw`A_1\boxtimes\cdots\boxtimes A_M`),
+        " たちの ",
+        math(String.raw`\mathbb{C}`),
+        "-線型結合をすべて集めたものに一致する。",
+        math(String.raw`2^M`),
+        " 次の単位行列は ",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        " と書き、",
+        ref("kronecker_product_rule"),
+        " (2) のとおり ",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " に等しい。",
       ]),
     ],
     proof: [
@@ -267,10 +248,12 @@ export default defineBlocks([
     conversion: {
       status: "added",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（Typst）に対応ブロックは無い。原文および旧構造化テキストは ⊗ を抽象テンソル積の記号として" +
           "定義せずに使っていたため、README のゴール設定（M 個の 2×2 行列の積は具体的な 2^M × 2^M の" +
           "複素行列として専用記号で定義する）に従い、成分の式によるクロネッカー積 ⊠ を本文に置いた。" +
-          "既存章の ⊗ 記法はこの ⊠ の別記法として同一視する（記号の書き換えは順次行う）。",
+          "移行期には既存章の ⊗ をこの ⊠ の別記法として同一視する注記を置いていたが、" +
+          "本文全章の書き換えが完了したので同一視の注記は削除した（本文に ⊗ はもう現れない）。",
       ],
     },
   },
@@ -564,6 +547,66 @@ export default defineBlocks([
     },
   },
   {
+    id: "linear_space_general_000d_claim_kronecker_transpose",
+    kind: "claim",
+    sourcePath: "structured-latex/content/002_linear_space_general.ts",
+    sourceOrdinal: 1,
+    title: { text: "クロネッカー積の転置（因子ごとの転置になること）" },
+    labels: ["kronecker_transpose"],
+    statement: [
+      paragraph([
+        ref("def_kronecker"),
+        " の記号のもと、",
+        math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        math(String.raw`2^M`),
+        " 次の複素行列の転置 ",
+        math(String.raw`\left(B^\top\right)_{pq} := B_{qp}`),
+        "（",
+        math(String.raw`p,q\in\{1,\dots,2^M\}`),
+        "）に関して",
+      ]),
+      displayMath(
+        String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top
+= A_1^\top\boxtimes\cdots\boxtimes A_M^\top`,
+      ),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
+        " を任意に取り、両辺の ",
+        math(String.raw`(\nu(I),\nu(J))`),
+        " 成分を比べる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top\right)_{\nu(I),\nu(J)}
+&= \left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(J),\nu(I)}
+\quad (\because \text{転置の定義}) \\
+&= \prod_{k=1}^{M}(A_k)_{j_ki_k}
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \prod_{k=1}^{M}\left(A_k^\top\right)_{i_kj_k}
+\quad (\because 2 \text{ 次の行列の転置の定義}) \\
+&= \left(A_1^\top\boxtimes\cdots\boxtimes A_M^\top\right)_{\nu(I),\nu(J)}
+\quad (\because \boxtimes \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\nu`),
+        " は全単射だから、これで両辺のすべての成分が一致することが示された。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。009 章（V の固有値）の実対称性の議論が" +
+          "「テンソル積の転置は因子ごとの転置になる」を根拠なしに使っていたので、" +
+          "クロネッカー積の成分の定義から証明できる主張としてここに置いた。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     sourcePath: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
@@ -655,12 +698,15 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         ],
       ]),
       paragraph([
-        ref("def_kronecker"),
-        " の同一視により、(1)(2) は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        "(1)(2) は ",
+        math(String.raw`2^M`),
+        " 次の複素正方行列全体 ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の基底についての主張、(3) は ",
-        math(String.raw`(\mathbb{C}^2)^{\otimes M}`),
-        " の基底についての主張として読める。",
+        math(String.raw`2^M`),
+        " 次元数ベクトル空間 ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の基底についての主張である。",
       ]),
     ],
     proof: [
@@ -851,6 +897,7 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
     conversion: {
       status: "converted",
       notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文(Typst)のステートメントは「単一のテンソル積が基底である」と読め、" +
           "かつ V の次元とテンソル冪の階数に同じ記号 m を二重使用していた。" +
           "Lean 形式化(lean/Ising2D/Part002/Theorem000_TensorBasis.lean)で判明したため、" +
@@ -906,28 +953,28 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
     kind: "claim",
     sourcePath: "_old/typst/parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ",
     sourceOrdinal: 4,
-    title: { tex: String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} \text{ の中で全元と可換な元はスカラー}` },
+    title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の中で全元と可換な元はスカラー}` },
     labels: ["centralizer_is_scalar"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
         " とする。",
-        math(String.raw`W \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`W \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " が、すべての ",
-        math(String.raw`x \in \mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について ",
         math(String.raw`Wx = xW`),
         " を満たすならば、ある ",
         math(String.raw`c \in \mathbb{C}`),
         " が存在して ",
-        math(String.raw`W = c\cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`),
+        math(String.raw`W = c\cdot I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         " が成り立つ。",
       ]),
     ],
     proof: [
       paragraph([
         "Step 1: ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の行列単位。",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
         " の行列単位を",
@@ -970,15 +1017,15 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         "。多重添字 ",
         math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\{1,2\}^M`),
         " について ",
-        math(String.raw`E_{IJ}:=E_{i_1 j_1}\boxtimes E_{i_2 j_2}\boxtimes\cdots\boxtimes E_{i_M j_M}\in\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`E_{IJ}:=E_{i_1 j_1}\boxtimes E_{i_2 j_2}\boxtimes\cdots\boxtimes E_{i_M j_M}\in\mathrm{Mat}(2^M,\mathbb{C})`),
         " とおく（",
         ref("def_kronecker"),
-        " のクロネッカー積。以下、この章では ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M} = \mathrm{Mat}(2^M,\mathbb{C})`),
-        " である）。",
+        " のクロネッカー積。これは ",
+        math(String.raw`2^M`),
+        " 次の複素行列である）。",
         math(String.raw`\mathcal{E}:=\{E_{IJ}:I,J\in\{1,2\}^M\}`),
         " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})^{\otimes M}`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の基底である（",
         ref("tensor_basis"),
         " (1)）。その元数は ",
@@ -1022,7 +1069,7 @@ E_{IJ} E_{KL}
         "）で展開すると",
       ]),
       displayMath(
-        String.raw`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}
+        String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}
 = I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
 = \sum_{P\in\{1,2\}^M} E_{PP}
 \quad (\because \text{クロネッカー積の積の規則 (2)、} I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22} \text{、各因子についての線型性})`,
@@ -1129,11 +1176,19 @@ W
 &= \sum_{P\in\{1,2\}^M} w_{PP}E_{PP} \quad (\because \text{Step 3: 非対角係数は } 0) \\
 &= \sum_{P\in\{1,2\}^M} c\,E_{PP} \quad (\because \text{Step 3: 対角係数は共通の } c) \\
 &= c\sum_{P\in\{1,2\}^M} E_{PP} \quad (\because \text{和のスカラー倍}) \\
-&= c\cdot I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}} \quad (\because I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}=\sum_{P\in\{1,2\}^M} E_{PP})
+&= c\cdot I_{\mathrm{Mat}(2^M,\mathbb{C})} \quad (\because I_{\mathrm{Mat}(2^M,\mathbb{C})}=\sum_{P\in\{1,2\}^M} E_{PP})
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "抽象テンソル積の記法を廃した。Mat(2,C)^{⊗M}（抽象テンソル冪）を <def_kronecker> の" +
+          "クロネッカー積が住む具体的な空間 Mat(2^M,C) へ、I_{(Mat(2,C))^{⊗M}} を 2^M 次の" +
+          "単位行列 I_{Mat(2^M,C)} へ置き換えた（README のゴール設定 2 節に従う）。",
+      ],
+    },
   },
   {
     id: "linear_space_general_002b_definition_matrix_norm",
