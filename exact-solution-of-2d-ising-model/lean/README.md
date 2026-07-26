@@ -132,6 +132,9 @@ EOF
 | `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.Abstract.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
 | `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.Abstract.one_eq_sum_single`（任意の半環・任意の有限添字型） |
 | `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.Abstract.acomm_lincomb_clifford` / `Abstract.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
+| `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.ZY_linearIndependent_of_abstract`、`Part004/Claim001_ZYLinearlyIndependentAbstract.lean`） | `Ising2D.Abstract.linearIndependent_of_clifford_abstract`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`Abstract/CliffordIndependence.lean`） |
+| `exp_sum` | `Ising2D.expPhase_sum`（複素指数関数。抽象版からの導出は `Ising2D.expPhase_sum_of_abstract`、`Part004/Claim008_ExpSumAbstract.lean`） | `Ising2D.Abstract.sum_zpow_primitiveRoot`（任意の体と 1 の原始 `M` 乗根。`Abstract/RootOfUnitySum.lean`） |
+| `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY` / `acomm_hatZPlus_hatZMinus`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_hatZ_hatZ_same_of_abstract` / `acomm_hatY_hatY_of_abstract` / `acomm_hatZPlus_hatZMinus_of_abstract`、`Part007/Claim000_AnticommutatorHatZHatYAbstract.lean`） | `Ising2D.Abstract.acomm_fourier_clifford` / `acomm_fourier_clifford_flip` / `acomm_fourier_clifford_weights`（体上の任意の環、Clifford 関係と 1 の原始 `M` 乗根だけ。`Abstract/FourierClifford.lean`） |
 | `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim006_ExpConjugation.lean`） | `Ising2D.Abstract.exp_adCLM_apply` / `Abstract.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`Abstract/ExpConjugation.lean`） |
 | `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.Abstract.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
 | `<commutator_of_H_and_Z_Y>` | `Ising2D.lie_H1_hatZ_same` / `lie_H1_hatY` / `lie_H1_hatZ_opp` / `lie_H2_hatZMinus` / `lie_H2_hatY` / `lie_H2_hatZPlus`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim001_CommutatorHZY.lean`） | `Ising2D.Abstract.CliffordTriple.lie_sum_yz_z` ほか 6 本（台は任意の環、係数は任意の可換半環、族の添字型も任意。`Abstract/CommutatorClifford.lean`） |
@@ -167,6 +170,22 @@ EOF
 - 原文が「`V_2` のスカラー因子 `(2s_2)^{M/2}` は共役で打ち消し合う」と一行で済ませている箇所に
   効いているのは、**任意の ℂ-代数で成り立つ `(c g) a (c⁻¹ g⁻¹) = g a g⁻¹`** だけである
   （`Abstract.conj_smul_eq`）。ノルムも完備性も指数関数も要らない。
+- `Z_m, Y_m` の線型独立性に効いているのは、**Clifford 関係 `[e_a,e_b]₊ = 2δ_{ab}·1` と、
+  スカラーが台へ忠実に入ること（`s·1 = 0 ⇒ s = 0`）と、`2` が零因子でないこと**の 3 つだけである。
+  行列であること・テンソル冪であること・`Z, Y` の具体形（Jordan–Wigner 文字列）・
+  有限次元性・係数が体であることは効いていない（係数は任意の可換環でよい）。
+
+- `exp_sum`（指数関数の和とクロネッカーのデルタ）に効いているのは、**位相因子が
+  1 の原始 `M` 乗根であること**と、**係数の住む場所で割り算ができること**（等比数列の和）だけである。
+  指数関数・円周率・複素数であること・絶対値・偏角は効いていない。
+  さらに `M ≠ 0` も証明には不要である（`M = 0` なら両辺とも `0`）。
+
+- `hat(Z), hat(Y)` の 4 本の反交換関係に効いているのは、**`Z, Y` の Clifford 関係**と
+  **1 の原始 `M` 乗根の直交性**だけである。加えて `(±)` の重み（原文の `∓1`）については
+  **両側の重みの積 `u_j v_j` しか結論に現れない**ので、原文の「複号同順／複号逆」は
+  「積が全サイトで `1`」と「`j = 1` でだけ `-1`」の 2 通りに整理できる。
+  原文が課している `η^2 = 1` は、積が `1` になるための十分条件にすぎない。
+
 - 交換子と反交換子の恒等式には、行列であることも複素数であることも効いていない
   （分配法則と結合法則だけで足りる）。
 - スカラー倍の恒等行列が全行列と可換であることに効いているのは、スカラー作用と積の

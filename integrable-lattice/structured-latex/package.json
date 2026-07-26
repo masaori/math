@@ -1,0 +1,23 @@
+{
+  "name": "@integrable-lattice/structured-latex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "integrable-lattice の証明本体（構造化テキスト）。可算／非可算の分別と ℝ 脱出の明示を型で強制する。",
+  "scripts": {
+    "gen": "node tools/generate-index.ts",
+    "check:generated": "node tools/generate-index.ts --check",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate": "node tools/validate-content.ts",
+    "test:types": "node tools/negative-type-test.ts",
+    "test:runtime": "node tools/schema-runtime-test.ts",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run test:types && npm run test:runtime"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.10.2"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

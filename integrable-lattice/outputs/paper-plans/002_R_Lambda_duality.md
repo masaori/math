@@ -1,7 +1,18 @@
 # Paper plan 002: ℝ/Λ 双対 — 整数スペクトル曲線の二素点と、Λ 側の決定可能性
 
 トラック: **T1 Reframe**（`docs/themes.md`）。
-状態: **据え置き**（`outputs/paper-plans/README.md` の G1–G6 ＋最終ゲート。判定は末尾「## 昇格判断」）。
+状態: **昇格済** → 論文本体は `outputs/papers/001_R_Lambda_duality/`。判定は末尾「昇格判断」。
+
+## 昇格の記録
+
+- **承認日**: 2026-07-26
+- **承認者**: 依頼者（管理セッション経由）
+- **承認範囲**: 本企画を論文として執筆すること。`outputs/papers/001_R_Lambda_duality/` へ昇格。
+- **承認時の判定**: `outputs/paper-plans/README.md` の G1–G6 がすべて `達成`、最終ゲート（ユーザー承認）を本承認で充足。
+- **承認に伴う方針変更**: 本企画は「Lean 等の形式検証は含めない」としていたが、**依頼者の指示により変更**。
+  Lean による形式検証を論文の構成要素に含める（`integrable-lattice/lean/`）。
+  §6 の「Lean 成果物を含めない」宣言は**撤回**し、G3 の Lean 条項が適用されるようになった。
+- **本 plan はこのまま `paper-plans/` に残す**（企画の履歴を消さない。`README.md` 昇格手順 4）。
 起こし: cycle 12 step 1（`docs/tasks/auto-loop-state.md`）。cycle 1–11 の蓄積を統合。
 
 ---
@@ -49,53 +60,45 @@
 
 本稿のテーゼを担う中核命題は、次の **双対命題 D** である。ただし後述のとおり**一般性の範囲が未確定**であり、現時点では命題文として完成していない（G1 未達）。
 
-### 双対命題 D（目標形、未完成）
+### 双対命題 D（cycle 15 で確定。仮定・結論・一般性の範囲まで書き下せる）
 
-$P\in\mathbb{Z}[z^{\pm1},w^{\pm1}]$、$L$-周期点数
-$$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は除く規約})$$
-に対し、
+$d\ge1$、$P\in\mathbb{Z}[z_1^{\pm1},\dots,z_d^{\pm1}]\setminus\{0\}$ とする。$L\ge1$ に対し**簡約周期点数**を
+$$a^{\mathrm{red}}_L:=\prod_{\substack{z_i^{L}=1\\ P(z)\neq0}}P(z_1,\dots,z_d)\in\mathbb{Z}$$
+（$P$ の零点となる因子を除いた積。$P$ がトーラス上に零点をもたなければ通常の $a_L$ に一致）と定める。
+$\mathsf U(P)=\{z\in\mathbb{S}^d:P(z)=0\}$（複素単位トーラス上の零点集合）と置く。
 
-- **($\infty$ 素点)** $\dfrac{1}{L^2}\log|a_L|\longrightarrow \log m(P)$（Mahler 測度＝位相的エントロピー＝自由エネルギー密度）。住処 $\mathbb{R}$。
-- **($p$ 素点)** $\Phi_L=\log|a_L|\in\Lambda$ の $\ell_p$ 係数 $v_p(a_L)\in\mathbb{Z}_{\ge0}$ の増大が、$\mathbb{Z}$ 上の有限手続きで決定可能。
+**(∞ 素点)** $\dim\mathsf U(P)\le d-2$（$P$ が **atoral**）ならば
+$$\frac{1}{L^{d}}\log\bigl|a^{\mathrm{red}}_L\bigr|\ \longrightarrow\ \log m(P)\qquad(L\to\infty).$$
+一般性の 3 段は文献本文で確定: エントロピー $=\log m(P)$ は**無条件**（Lind–Schmidt–Ward, Invent. math. **101** (1990), Thm 3.1）／
+周期点の増大率 $=$ エントロピーは一般には**不成立**で expansive（$\mathsf U(P)=\varnothing$）で成立（同 Thm 7.1）／
+$\mathsf U(P)$ 有限で成立（Lind–Schmidt–Verbitskiy, arXiv:1108.4989, Thm 1.2）／$\dim\mathsf U(P)\le d-2$ で成立（同 Thm 1.3）。
 
-**($\infty$) 側の一般性は確定した**（cycle 13 step 1、`outputs/reports/cycle13_T1_padic_entropy_generality.md` §2）。文献本文で確認した3段:
-エントロピー＝Mahler 測度は**無条件**（Lind–Schmidt–Ward, Invent. math. 101 (1990), Thm 3.1）。
-周期点の増大率＝エントロピーは一般には**成立せず**、expansive（$\mathsf U(P)=\varnothing$）で成立（同 Thm 7.1）、
-$\mathsf U(P)$ 有限で成立（Lind–Schmidt–Verbitskiy, arXiv:1108.4989, Thm 1.2）、
-$\dim\mathsf U(P)\le d-2$（atoral）で成立（同 Thm 1.3）。本稿の 2 例（$5-(z+z^{-1})-(w+w^{-1})$ は $\mathsf U=\varnothing$、
-離散ラプラシアンは $\mathsf U=\{(1,1)\}$）はいずれも射程内。ただし LSV は「周期成分の個数 $\mathsf P_\Gamma$ と
-トーラス零点を除いた積 $a_L$ は $c_\Gamma(f)$ 因子だけずれる（漸近的には一致）」と明記しているので、
-命題化の際はこの差を書くこと。
+**(p 素点, 有限 $L$)** 任意の素数 $p$、任意の $L$ について $v_p(a^{\mathrm{red}}_L)\in\mathbb{Z}_{\ge0}$ は
+**$\mathbb{Z}$ 上の有限手続きで計算できる**（$d$ 重の終結式で厳密整数を得てから素因数分解）。$\mathbb{R}$ も $\mathbb{Q}_p$ も使わない。
+さらに $L=p^n$ の塔では**非自明性が完全に判定できる**（命題 V）: $v_p(a_{p^n})>0\iff p\mid P(1,\dots,1)$。
 
-**($p$) 側は、旧稿の同一視が誤りであることが判明した**（同 report §3、cycle 13 step 1 で訂正）。
-Deninger の $p$ 進エントロピー $\hbar_p$ と Besser–Deninger の $p$ 進 Mahler 測度 $m_p$ は
-**岩澤対数 $\log_p$（$\log_p p=0$）** で定義されるため、$|{\rm Fix}|$ の $p$ 冪部分を最初から捨てており、
-**$v_p$ の増大を測る量ではない**。さらに両者の定義域はほぼ排他的で、$\hbar_p,m_p$ が定義できる条件
-（$P$ が $p$ 進トーラス上に零点をもたない ⟺ $P=ct^\nu(1+pg)$, Deninger arXiv:math/0608539 Prop 2.4）の下では
-$v_p(a_L)=L^d\,v_p(c)$ と自明化する。一方 $\mu_p$ が非自明になるのは $P$ が $p$ 進トーラス上に零点をもつ場合で、
-そこは $m_p$ が定義されない領域である（Ueki arXiv:1702.03819 Remark 2.4 が両者の相違を明記）。
+**(p 素点, 塔の漸近)** $\Gamma\simeq\mathbb{Z}_p^d$、$f:=P(\sigma_1,\dots,\sigma_d)\in\mathbb{Z}_p[\Gamma]$
+（$\sigma_i$ は基底、Serre 同型 $\sigma_i\mapsto1+T_i$）とすると
+$$v_p\bigl(a^{\mathrm{red}}_{p^n}\bigr)=\sum_{\substack{\chi\in\widehat{\Gamma_n}\\ \chi(f)\neq0}}\mathrm{ord}_p(\chi(f)),$$
+したがって有理数 $\lambda_1,\mu_1,\dots,\lambda_{d-1},\mu_{d-1},\nu$ が存在して $n\gg0$ で
+$$v_p\bigl(a^{\mathrm{red}}_{p^n}\bigr)=\bigl(\lambda n+\mu p^n\bigr)p^{(d-1)n}
++\sum_{i=1}^{d-1}\bigl(\lambda_i n+\mu_i p^n\bigr)p^{(d-1-i)n}+\nu,$$
+$$\lambda=l_0(f),\qquad \mu=m_0(f)=v_p\bigl(\mathrm{content}\,P\bigr)\in\mathbb{Z}_{\ge0}.$$
+根拠は Monsky Thm 5.6 ＋ Cuoco–Monsky Thm 1.7（Kataoka arXiv:2606.03579 の Theorem 2.1 / Theorem 2.3 /
+Definition 2.2 として本文で確認）。$\mu=v_p(\mathrm{content}P)$ は補題 D（$z_i\mapsto1+T_i$ が $\mathbb{Z}$ 上の環同型ゆえ content 不変）による。
+グラフの場合 $\mathrm{ord}_p(\kappa_{X_n})$ は上式から $-dn+\mathrm{ord}_p(\kappa(X))-\mathrm{ord}_p(\#V_X)$ ずれる
+（`cycle15_T1_kataoka_and_general_P.md` $(3.3)$）。
 
-**($p$) 側の cycle 14 での前進**: 付値の増大を測る正しい量は $\log|\cdot|_p$ で定義される Ueki の $\mathrm M_p$ であり、
-**1 変数**では $\mu_p=-\log_p\mathrm M_p=$ 係数 content の $p$ 進付値という同一視が確立している
-（Ueki, Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7）。**2 変数・$\mathbb{Z}_p^2$ 塔**では単一の線形成長率では書けず
-$\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）となる（DuBose–Vallières, Algebraic Combinatorics 6 (2023), Thm A）。
-cycle 14 で次の 3 点が加わった。
+**明示された限界（命題の一部として述べる）**:
+- $\lambda=l_0(f)$ は不変量として確定するが、**計算可能性（$\mathbb{Z}$ 上の有限手続き）は未確立**。
+  $\bar f$ の $\mathbb{P}^1(\mathbb{F}_p)$ 有理線形因子の重複度の和は**上限しか与えない**（反例 $P=z+w^2-2w$, $p=3$）。
+  素イデアル $(\gamma-1)$ が $\mathbb{P}^1(\mathbb{Z}_p)$ で添字づけられるためである。
+- $\lambda_i,\mu_i,\nu$（$i\ge1$）は**有理数**で整数とは限らず、文献も明示公式を与えていない。
+  非退化な $d=2$ グラフ塔の $\mu_1$ は命題 W が与える。
+- $\chi(f)=0$ となる $\chi$ の個数が $n$ とともに増える $P$ については、$a^{\mathrm{red}}$ と $a$ の関係の整理が未了。
 
-1. **非自明性の判定は完全に決着した**（命題 V, `cycle14_T1_vp_growth_two_variable.md`）:
-   任意の $d$、任意の $P$ について $v_p(a_{p^n})>0\iff p\mid P(1,\dots,1)$。
-   実体は $a_{p^n}\equiv P(1,\dots,1)^{p^{dn}}\pmod p$ で、$\mathbb{Z}/p$ 上の初等的な議論のみ（$\mathbb{Q}_p$ 不使用）。
-2. **レジームの三分法が確定した**: $p\nmid P(1,1)$ は恒等的に $0$（$\Lambda$ 側自明）／$p\mid P(1,1)\ne0$ は非自明（完全な形は未証明）／
-   $P(1,1)=0$ はトーラス零点レジーム（本稿の離散ラプラシアン・全域木数がここ。命題 T がその一部の答え）。
-3. **グラフの場合（$P(1,1)=0$ 側）は、非退化条件の下で完全な閉形式が付いた**
-   （`cycle14_T3_two_variable_criterion.md` 定理 5）。例: $L\times L$ トーラスの $\ell=3$ 塔で
-   $\mathrm{ord}_3(\tau(3^n))=4\cdot3^n-2n-4$（$n=0,1,2$ で $0,6,28$ と厳密一致）。
-   $\ell=2$ は退化ケースで射程外。
-
-**($p$) 側に残る未確定点（G1 未達の理由）**:
-一般の $P\in\mathbb{Z}[z^{\pm},w^{\pm}]$（グラフのラプラシアンでないもの）について、$p\mid P(1,1)$ の場合の
-**増大の完全な形は未証明**である。また $\ell^{2n}$ 項の係数が $v_\ell(\mathrm{content})$ に一致することの
-**上から抑える向きは自前で証明できておらず**、Cuoco–Monsky / Kataoka（arXiv:2606.03579、本文未取得）に依拠する。
-**したがって命題 D を主定理として書き切れない（G1 未達）。**
+**ℝ 脱出の隔離**: $\mathbb{R}$ を要するのは (∞ 素点) の $L\to\infty$ **ただ一点**。(p 素点) の両主張は
+$\mathbb{Z}$・$\mathbb{Q}$ の中で閉じる。
 
 ### 現時点で厳密に確定している部分命題（すべて $\mathbb{R}$ 不使用・決定可能）
 
@@ -140,6 +143,21 @@ cycle 14 で次の 3 点が加わった。
   **新規性は主張しない**＝Kataoka arXiv:2606.03579 が同種の明示公式を与えている。）
   本稿の $L\times L$ トーラス（$P(1,1)=0$ のレジーム）は $\ell=3,7,\dots$（$-1$ が非平方な $\ell$）で射程内、
   $\ell=2$ は退化ケースで射程外。
+
+- **命題 V（$\Lambda$ 側が非自明になる条件, 証明済み）.** $P\in\mathbb{Z}[z_1^{\pm},\dots,z_d^{\pm}]$、$p$ 素数、$L=p^n$ とすると
+  $$a_{p^n}\equiv P(1,\dots,1)^{\,p^{dn}}\pmod p,\qquad\text{ゆえに}\quad v_p(a_{p^n})>0\iff p\mid P(1,\dots,1).$$
+  （証明: `outputs/reports/cycle14_T1_vp_growth_two_variable.md` §3。$\bmod p$ で $z^{p^n}-1=(z-1)^{p^n}$ となり
+  終結式表示が潰れる。$\mathbb{Q}_p$ も代数的整数論も使わない初等証明。検証 `sagemath/check/cycle14_T1_vp_two_var/`。
+  **新規性は主張しない**。）
+
+- **命題 W（非退化グラフ塔の閉形式, 証明済み）.** $X$ を有限連結多重グラフ、$\alpha:E\to\mathbb{Z}^2$ を voltage、
+  $\ell$ 素数とし、$f=\det L(1+T,1+S)$ の $\bmod\,\ell$ 還元の最低次斉次部分 $H$（次数 $k$）が
+  $\mathbb{P}^1(\mathbb{F}_\ell)$ 上に零点をもたない（非退化。係数の有限計算で判定可能）とする。$n\gg0$ で
+  $$\mathrm{ord}_\ell(\kappa_n)=\mu\,\ell^{2n}+\frac{k(\ell+1)}{\ell-1}\,\ell^{n}-2n+\nu,\qquad \mu=v_\ell(\mathrm{content}_{z,w}\det L).$$
+  （証明: `outputs/reports/cycle14_T3_two_variable_criterion.md` 定理 5。独立な第 2 経路
+  `cycle14_T3_Zl2_tower_criterion.md` が同じ境界に到達。$\mu$ の上界方向は cycle 15 で Cuoco–Monsky Thm 1.7 に帰着。
+  **新規性は主張しない**＝Kataoka arXiv:2606.03579 が同種の明示公式を与えている。）
+  $L\times L$ トーラスは $\ell=3,7,\dots$（$-1$ が非平方な $\ell$）で射程内、$\ell=2$ は退化ケースで射程外。
 
 ### 検証済みだが未証明の観察（証明ではないと明示する）
 
@@ -212,7 +230,11 @@ cycle 14 で次の 3 点が加わった。
 | 命題 B・C（$\pi(p,1)$ 精密公式、Wall 等式の反例） | `sagemath/check/cycle3_T3_period/` | `pi_p1_refined.out`, `pi_p1_closed_form.out`, `pi_p1_strict_demo.out`, `wall_large_scale.out`, `wall_nondegenerate.out`, `wall_search.out`, `wall_type_period.out` | あり（6 スクリプトを統合した `README.md`。＋スクリプト別 `*_README.md`） |
 | 六頂点 $\Phi_N\in\Lambda$、$v_2(Z_N)=N+2$ 等 | `sagemath/check/D_phi_lambda/`, `sagemath/check/D-U2_padic_law/` | `sixvertex_phi_lambda.out`, `vp_law.out`, `eigenvalue_link.out` | あり |
 
-**形式検証の水準について**: 本 plan は **Lean 成果物を含めない**（`lean/` は本プロジェクトに存在せず、導入も本企画の範囲外とする）。機械検証可能性は選別基準 (iii) の「SageMath で厳密計算でき、**原理的に** `decide`／witness に乗る」水準でのみ主張する。
+**形式検証の水準について（2026-07-26 に方針変更）**: 旧稿は「Lean 成果物を含めない」と宣言していたが、
+**依頼者の指示により撤回した**。本論文は Lean 4 + mathlib4 による形式検証を構成要素に含める（`integrable-lattice/lean/`）。
+形式化した命題と、形式化できなかった命題およびその理由は `integrable-lattice/lean/README.md` の
+「形式化の現状」表に記録する。「原理的に `decide`／witness に乗る」という水準の主張は、
+実際に形式化できた命題については**実証に置き換わる**。
 
 ---
 
@@ -237,9 +259,25 @@ cycle 14 で次の 3 点が加わった。
 - 決定可能性非対称（§4）も、既知の 2 理論の配置を述べたものであり、それ自体が定理ではない。
 - **残るリスク**: 「$\Lambda$ 側は $\mathbb{Q}_p$ を必要としない」という精密化（寄与 b）が、逆数学・構成的数学の文献に既出である可能性は**未調査**。ここは昇格前に調べる必要がある。
 
+### 寄与 (b)（$\mathbb{Q}_p$ 不使用の可算化）の既知性調査（cycle 15 で実施）
+
+- **調査手段**: WebSearch を 2 件（reverse mathematics + p-adic + RCA_0 + countable coding／
+  reverse mathematics or constructive + p-adic valuation + Iwasawa invariants + computability）。
+  **abstract レベルのみ。本文は取得していない。**
+- **結果**: 「$\mathbb{Q}_p$ を使わずに可算・有限手続きへ還元する」趣旨の先行研究は**見つけられなかった**。
+  隣接する既知結果として **Ax–Kochen / Ershov**（$\mathbb{Q}_p$ は切断つき付値体の言語で**決定可能**）を確認した。
+  したがって「$\mathbb{Q}_p$ を避ける」動機は $\mathbb{Q}_p$ の一階理論の決定不能性ではなく、
+  本プログラムの有限手続き・witness の立場に由来する。この区別は論文で明示する必要がある。
+- **判断**: **見つからなかったことを新規性の根拠にしない**。寄与 (b) は「既知数学の可算再框」として位置づけ、
+  **新規性は主張しない**。逆数学・構成的数学の本文調査は未実施なので、投稿前に専門家確認を要する事項として残す。
+
 ### 先行研究アンカーと、動かした軸（選別基準 (iv)）
 
-- アンカー: **Deninger の $p$ 進エントロピー ＝ Besser–Deninger の $p$ 進 Mahler 測度 ＝ 岩澤 $\mu_p$**（$\Lambda$ 側）、および **LSW のエントロピー＝Mahler 測度**（$\mathbb{R}$ 側）。
+- アンカー（cycle 13・15 で訂正済み）: **($\infty$ 側)** Lind–Schmidt–Ward のエントロピー＝Mahler 測度（Thm 3.1, 7.1）と
+  Lind–Schmidt–Verbitskiy の atoral 版（Thm 1.2, 1.3）。**($p$ 側)** Monsky Thm 5.6 ＋ Cuoco–Monsky Thm 1.7
+  （$\lambda=l_0$, $\mu=m_0$）、およびグラフへの適用としての Kataoka arXiv:2606.03579 Thm 1.1。
+  **注意**: 旧稿がアンカーに挙げていた「Deninger の $p$ 進エントロピー ＝ Besser–Deninger の $p$ 進 Mahler 測度 ＝ 岩澤 $\mu_p$」は
+  cycle 13 で**誤りと判明して撤回した**（$\hbar_p,m_p$ は岩澤対数で定義され付値を測らない）。アンカーではない。
 - 動かした軸: **1 本**。模型・境界・rank・可解性のいずれも動かしていない。動かしたのは**メタ軸＝「同じ対象を、どの集合の上でどの手続きで語るか」（可算化・決定可能性・形式検証可能性）**である。
 - **注意**: このメタ軸は seed の (iv) が列挙する軸（境界・rank・模型・複雑性・可解性）に含まれていない。したがって (iv) の「1 本」判定は文言どおりには適用できず、**メタ軸を軸として認めるかどうかが未決**である。昇格前に seed 側の軸リストを更新するか、本稿の位置づけを (iv) の枠外として明記するかを決める必要がある。
 
@@ -253,31 +291,40 @@ cycle 14 で次の 3 点が加わった。
 
 ## 8. 未確定・昇格前に必要な作業
 
-1. **命題 D の ($p$) 側の一般性の確定**（G1 の残るボトルネック）。cycle 14 で次まで進んだ: 非自明性の判定は完全（命題 V）／グラフの非退化塔は完全な閉形式（命題 W）／レジームの三分法が確定。**残るのは (a) 一般の $P$（グラフのラプラシアンでないもの）で $p\mid P(1,1)$ のときの増大の完全な形、(b) $\ell^{2n}$ 係数の上界方向（現状 Cuoco–Monsky / Kataoka arXiv:2606.03579 に依拠、本文未取得）**の 2 点。**($\infty$) 側の一般性は cycle 13 step 1 で確定済み**（LSW Thm 7.1 / LSV Thm 1.2, 1.3。ただし $\mathsf P_\Gamma$ と $a_L$ の $c_\Gamma$ 差を明示すること）。
+1. **命題 D の ($p$) 側の一般性の確定**: （**cycle 15 で決着**。Monsky Thm 5.6 ＋ Cuoco–Monsky Thm 1.7 を
+   Kataoka arXiv:2606.03579 の本文で確認し、一般の $P$ に適用できることを示した。
+   `outputs/reports/cycle15_T1_kataoka_and_general_P.md`。命題 D を §2 に書き下した。）
+   **残る個別の未解決点**（命題 D 内に限界として明示済み。命題の書き下しは妨げない）:
+   (i) $\lambda=l_0(f)$ の計算可能性、(ii) $\lambda_i,\mu_i,\nu$（$i\ge1$）の明示公式、
+   (iii) $\chi(f)=0$ となる $\chi$ が $n$ とともに増える $P$ の整理。
 2. **観察 T の決着**: （消化済み。cycle 13 step 3 で**証明した**。命題 T として §2 の確定部分命題へ移した。`outputs/reports/cycle13_T1_observation_T_settlement.md`。既出かどうかは本文未確認なので新規性は主張しない。）
 3. **非自明な $\mu_p>0$ の実例**: （消化済み。cycle 12 step 3 で判定式 $\mu_\ell=v_\ell(\mathrm{content}_z\det L(z))$ とともに $\mu_2=2,\mu_3=1,\mu_{23}=1$ 等の例を構成。`sagemath/check/cycle12_T3_nonzero_mu_p/`。判定式は cycle 13 step 2 で**証明した**（`outputs/reports/cycle13_T3_mu_content_criterion_proof.md`
 定理 1・2・3。$(★)$ と岩澤型漸近そのものも証明。新規性は主張しない＝McGown–Vallières III Thm 6.1 の言い換え）。
 ただし射程は $d=1$ の $\ell$-塔に限られ、本稿の $L\times L$ トーラス（$\mathbb{Z}_\ell^2$-塔）には**そのままでは適用できない**。)
-4. **寄与 (b) の既知性調査**: 「$\mathbb{Q}_p$ 不使用の可算化」が逆数学・構成的数学の文献に既出でないかを調べる。
+4. **寄与 (b) の既知性調査**: （cycle 15 で実施。§7 に調査手段・結果・隣接既知結果 (Ax–Kochen/Ershov) を記録。abstract レベルのみで本文未取得。新規性は主張しない。投稿前に専門家確認を要する事項として残す。）
 5. **選別基準 (iv) のメタ軸の扱い**: （消化済み。cycle 12 で `inputs/seeds/lambda-statement-program.md` の (iv) に対象軸5本＋メタ軸3本を明文化。本稿はメタ軸1本のみを動かし、対象軸は1本も動かしていない。）
 
 （消化済み）**`README.md` の欠落補完**: `sagemath/check/cycle6_T1_padic_mahler/`, `cycle3_T1_period_bound/`, `cycle3_T3_period/` の 3 ディレクトリに `README.md` を追加し、G3 の運用規約を満たした（G3 は `達成` へ）。
 
 ---
 
-## 昇格判断
+## 昇格判断（cycle 15 で再判定 → 2026-07-26 に承認取得）
 
 判断基準は `outputs/paper-plans/README.md` の G1–G6 ＋最終ゲート。判定語は `達成` / `未達` / `評価不能` / `非該当`。
 
 | ゲート | 判定 | 根拠 |
 |---|---|---|
-| G1 中核命題が厳密に書き下されている | **未達** | ($\infty$) 側は cycle 13 で文献本文により確定（LSW Thm 7.1 / LSV Thm 1.2・1.3）。($p$) 側は cycle 13 で誤った同一視を撤回し、cycle 14 で**非自明性の判定（命題 V）とグラフ非退化塔の閉形式（命題 W）を証明**したが、**(a) 一般の $P$ で $p\mid P(1,1)$ のときの増大の完全な形、(b) $\ell^{2n}$ 係数の上界方向（外部定理に依拠・本文未取得）**が残る（§2, §8-1）。命題 D を主定理として書き切れない。部分命題 A・B・C・N・L・T・V・W は厳密だが、テーゼ（双対）を単独で担わない。plan が挙げた必要計算は削除していない |
-| G2 帰属と $\mathbb{R}$ 脱出の明示 | **評価不能** | §3 に本企画の各量の帰属台帳、$\mathbb{R}$ 脱出の一点（$L\to\infty$ での $\frac1{L^2}\log|a_L|\to\log m(P)$）、$\overline{\mathbb{Q}}(\ell_p)$ 非線形部を含まないことをいずれも記載済み。ただし G1 未達（中核命題 D の一般性が未確定）のため、台帳が中核命題の扱う量を**網羅しているか**を確認できない。README の G1 前提ルールにより `達成` にはしない |
-| G3 検証計算が実行済みで再現可能 | **達成** | SageMath 側: §6 の 9 ディレクトリはすべて実行ログ（`.out`）をもち、**対象・手順・結論・限界を書いた `README.md` も 9 ディレクトリすべてに存在する**。欠落していた `sagemath/check/cycle6_T1_padic_mahler/`・`cycle3_T1_period_bound/` に `README.md` を新規作成し、`cycle3_T3_period/` にはスクリプト別 `*_README.md` を統合する `README.md` を追加した（いずれも実行ログに現れる値のみを根拠とし、数値一致を証明と呼ばず、0 件観察を仮説の支持根拠にしない旨を「限界」節に明記）。本プロジェクトの運用規約（`README.md` ＋ `.out`）を満たす。Lean 側: 本 plan は Lean 成果物を宣言せず、plan 本体から Lean 実装の計画を外している（§6）ため Lean 条項は適用しない |
-| G4 既知性リスクが調査済み | **評価不能** | `resolved_risk` / `novelty_risk` を根拠文献名つきで記載（§7）、先行研究アンカーを Deninger／Besser–Deninger／岩澤 $\mu_p$、LSW と特定、動かした軸を 1 本（メタ軸）と明示、候補の `paper_potential` を `low` へ是正して引用済み（記載欠落なし）。ただし G1 未達のため、その調査範囲が中核命題に対して十分かを確認できない。加えて寄与 (b) の既知性が未調査（§8-4）、(iv) のメタ軸の扱いが未決（§7）で、いずれも `達成` を阻む |
-| G5 トラックに応じた寄与の提示 | **達成** | トラックを **T1 Reframe** と明記。(1) 厳密化の対象となった既知結果を文献名で特定: Lind–Schmidt–Ward、arXiv:2407.19531 / Phys. Rev. E 110, 054134 (2024)、Besser–Deninger "p-adic Mahler measures"、Deninger "p-adic entropy and a p-adic Fuglede–Kadison determinant"、arXiv:1702.03819、Ferrero–Washington (1979)、arXiv:2006.14012、Lehmer (1933)、LTE・Pisano・Skolem–Mahler–Lech（§1 の表）。(2) 厳密化によって新たに機械検証可能になった命題の列挙: 命題 A（$\min(v_p(Z_N),k)$ の最終周期性、有限モノイド上で決定可能）、命題 B（$\pi(p,1)$ の lcm 公式、$\overline{\mathbb{F}_p}$ 上の有限計算）、命題 C（$\pi(p,k)\mid p^{k-1}\pi(p,1)$、および Wall 型等号の反例）、命題 N（$\mu_{\min}(p)$＝整数点の下方凸包）、命題 L（LTE 分岐、witness $=(\operatorname{ord}_p(c),v_p(c^d-1))$）（§2）。「可積分の新定理」とは呼ばず、再框であることを §1 冒頭・§1 末尾・§4 末尾で明示している |
-| G6 統計的・論理的健全性チェック | **評価不能** | 4 項目すべてに該当/非該当を記載（下表）。ただし G1 未達のため `達成` にはしない |
-| 最終ゲート（ユーザー承認） | 未取得 | 本 plan を論文として書くかのユーザー判断は未取得 |
+| G1 中核命題が厳密に書き下されている | **達成** | §2 の**双対命題 D** が仮定（$P\neq0$、(∞) 側は atoral $\dim\mathsf U(P)\le d-2$）・結論・成立する一般性の範囲まで確定した命題文として存在する。(∞) 側は cycle 13 で LSW Thm 3.1/7.1・LSV Thm 1.2/1.3 の 3 段を本文確認。($p$) 側は cycle 15 で Monsky Thm 5.6 ＋ Cuoco–Monsky Thm 1.7 を Kataoka arXiv:2606.03579 の本文（Thm 2.1 / Thm 2.3 / Def 2.2）で確認し一般の $P$ へ適用できることを示した。残る 3 つの未解決点は**命題 D の中に限界として明示**してあり、命題の書き下しを妨げない。§8 の 1–6 はすべて消化または明示的に据え置きで、削除していない |
+| G2 帰属と $\mathbb{R}$ 脱出の明示 | **達成** | §3 の台帳が命題 D に現れる全ての量を覆う（cycle 15 で $\mu=m_0$、$\lambda=l_0$、$\lambda_i,\mu_i,\nu\in\mathbb{Q}$、$a^{\mathrm{red}}_L$ を追加）。$\mathbb{R}$ 脱出は (∞) 側の $L\to\infty$ **一点**に隔離。$\overline{\mathbb{Q}}(\ell_p)$ 非線形部を含まないことも §3 に記載 |
+| G3 検証計算が実行済みで再現可能 | **達成** | §6 の全ディレクトリが `README.md` ＋ `.out` を備える。**Lean 条項は 2026-07-26 の方針変更により適用される**ようになった（§6）。Lean 側の充足状況は `integrable-lattice/lean/README.md` の「形式化の現状」表と `scripts/check-no-sorry.sh` の出力で確認する |
+| G4 既知性リスクが調査済み | **達成** | `resolved_risk`・`novelty_risk` を §7 に調査範囲・結果・**根拠文献名**つきで記載。本文確認した文献: LSW (1990)、LSV arXiv:1108.4989、Deninger arXiv:math/0608539、Ueki arXiv:1702.03819、McGown–Vallières arXiv:2107.07639、DuBose–Vallières Alg. Comb. 6 (2023)、Kataoka arXiv:2606.03579。寄与 (b) の既知性調査も cycle 15 で実施（§7）。動かした軸はメタ軸 **1 本**で対象軸は 0 本。対応候補の `paper_potential` は `low` で覆さない旨を明記。**すべての主張について新規性を主張していない** |
+| G5 トラックに応じた寄与の提示 | **達成** | T1 Reframe と明記。(1) 厳密化の対象となった既知結果を文献名で特定（§1 の表、§7）。(2) 新たに機械検証可能になった命題を列挙: 命題 A・B・C・N・L・T・V・W（§2）。「可積分の新定理」と呼ばず再框であることを明示 |
+| G6 統計的・論理的健全性チェック | **達成** | 4 項目すべてに該当/非該当と対処内容を記載（下表）。cycle 13–15 で実際に 3 種の誤り（誤った同一視、4 段フィットの数値的誤り、偽の同値）を検出・訂正しており運用が機能している |
+| 最終ゲート（ユーザー承認） | **取得（2026-07-26）** | 冒頭「昇格の記録」参照。承認に伴い Lean 方針も変更された |
+
+### 状態
+
+**昇格済**（G1–G6 すべて `達成`、最終ゲートを 2026-07-26 に取得）。論文本体は `outputs/papers/001_R_Lambda_duality/`。
 
 ### G6 の 4 項目
 
