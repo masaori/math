@@ -130,13 +130,13 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 | 本稿の主張 | 検証ディレクトリ | 実行ログ | `README.md` の有無 |
 |---|---|---|---|
 | 同一 $P$ の両素点（最小実証、$P=5-(z+1/z)-(w+1/w)$） | `sagemath/check/cycle5_T1_mahler/` | `spectral_curve_both_places.out` | あり |
-| 岩澤塔 $L=p^n$ での $v_p(a_{p^n})$（$\mu_p=0$ の例） | `sagemath/check/cycle6_T1_padic_mahler/` | `iwasawa_tower.out` | **なし**（要追加） |
+| 岩澤塔 $L=p^n$ での $v_p(a_{p^n})$（$\mu_p=0$ の例） | `sagemath/check/cycle6_T1_padic_mahler/` | `iwasawa_tower.out` | あり |
 | 命題 L（LTE、$p$ 奇・$p=2$ とも全例一致） | `sagemath/check/cycle7_T1_lte/` | `lte_structure.out`, `lte_p2_complete.out` | あり |
 | 離散ラプラシアン曲線の両素点（$\mathbb{R}$ 側 $\to 4G/\pi$） | `sagemath/check/cycle9_T1_spanning_tree/` | `spanning_tree_both_places.out` | あり |
 | 観察 T（奇 $L\le19$ で $v_2(\tau(L))=2(L-1)$）＋グラフ岩澤理論への接地 | `sagemath/check/cycle10_T1_vp_law/` | `tau_vp_law.out`, `verify_more.out` | あり（＋`iwasawa_graph_README.md`） |
 | 決定可能性非対称（Lehmer の $p$ 進版が存在しないことの整理） | `sagemath/check/cycle10_T3_lehmer/` | `lehmer.out` | あり（＋`padic_analog_README.md`） |
-| 命題 A の全例検証（周期上界） | `sagemath/check/cycle3_T1_period_bound/` | `period_bound.out` | **なし**（要追加） |
-| 命題 B・C（$\pi(p,1)$ 精密公式、Wall 等式の反例） | `sagemath/check/cycle3_T3_period/` | `pi_p1_refined.out`, `pi_p1_closed_form.out`, `pi_p1_strict_demo.out`, `wall_large_scale.out`, `wall_nondegenerate.out`, `wall_search.out` | **`README.md` は無い**（スクリプト別 `*_README.md` のみ） |
+| 命題 A の全例検証（周期上界） | `sagemath/check/cycle3_T1_period_bound/` | `period_bound.out` | あり |
+| 命題 B・C（$\pi(p,1)$ 精密公式、Wall 等式の反例） | `sagemath/check/cycle3_T3_period/` | `pi_p1_refined.out`, `pi_p1_closed_form.out`, `pi_p1_strict_demo.out`, `wall_large_scale.out`, `wall_nondegenerate.out`, `wall_search.out`, `wall_type_period.out` | あり（6 スクリプトを統合した `README.md`。＋スクリプト別 `*_README.md`） |
 | 六頂点 $\Phi_N\in\Lambda$、$v_2(Z_N)=N+2$ 等 | `sagemath/check/D_phi_lambda/`, `sagemath/check/D-U2_padic_law/` | `sixvertex_phi_lambda.out`, `vp_law.out`, `eigenvalue_link.out` | あり |
 
 **形式検証の水準について**: 本 plan は **Lean 成果物を含めない**（`lean/` は本プロジェクトに存在せず、導入も本企画の範囲外とする）。機械検証可能性は選別基準 (iii) の「SageMath で厳密計算でき、**原理的に** `decide`／witness に乗る」水準でのみ主張する。
@@ -185,7 +185,8 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 3. **非自明な $\mu_p>0$ の実例**: 現在の検証例はすべて $\mu_p=0$（$p$ 進自明）であり、$\Lambda$ 側の内容が薄い。$P\bmod p$ が $p$ 冪根上に零点をもつ $P$ を構成して $v_p(a_{p^n})$ の線形成長を実証する（cycle 12 step 3 として起票済み）。
 4. **寄与 (b) の既知性調査**: 「$\mathbb{Q}_p$ 不使用の可算化」が逆数学・構成的数学の文献に既出でないかを調べる。
 5. **選別基準 (iv) のメタ軸の扱い**を決める（§7 参照）。
-6. **`README.md` の欠落補完**: `sagemath/check/cycle6_T1_padic_mahler/`, `cycle3_T1_period_bound/`, `cycle3_T3_period/`（G3 の運用規約を満たすため）。
+
+（消化済み）**`README.md` の欠落補完**: `sagemath/check/cycle6_T1_padic_mahler/`, `cycle3_T1_period_bound/`, `cycle3_T3_period/` の 3 ディレクトリに `README.md` を追加し、G3 の運用規約を満たした（G3 は `達成` へ）。
 
 ---
 
@@ -197,7 +198,7 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 |---|---|---|
 | G1 中核命題が厳密に書き下されている | **未達** | 中核命題 D の**一般性の範囲が未確定**（$p$ 進エントロピーとの同定が成り立つ $P$ のクラスを文献の該当命題まで特定できていない。§2, §8-1）。部分命題 A・B・C・N・L は厳密だが、テーゼ（双対）を単独で担わない。観察 T は未証明（§2「検証済みだが未証明」）。plan が挙げた必要計算は削除していない |
 | G2 帰属と $\mathbb{R}$ 脱出の明示 | **評価不能** | §3 に本企画の各量の帰属台帳、$\mathbb{R}$ 脱出の一点（$L\to\infty$ での $\frac1{L^2}\log|a_L|\to\log m(P)$）、$\overline{\mathbb{Q}}(\ell_p)$ 非線形部を含まないことをいずれも記載済み。ただし G1 未達（中核命題 D の一般性が未確定）のため、台帳が中核命題の扱う量を**網羅しているか**を確認できない。README の G1 前提ルールにより `達成` にはしない |
-| G3 検証計算が実行済みで再現可能 | **未達** | SageMath 側: §6 の 9 ディレクトリはすべて実行ログ（`.out`）をもつが、**`sagemath/check/cycle6_T1_padic_mahler/` と `cycle3_T1_period_bound/` に `README.md` が存在せず**、`cycle3_T3_period/` は `README.md` という名の文書を持たない（スクリプト別 `*_README.md` のみ）。本プロジェクトの運用規約（`README.md` ＋ `.out`）を満たさないため未達。Lean 側: 本 plan は Lean 成果物を宣言せず、plan 本体から Lean 実装の計画を外している（§6）ため Lean 条項は適用しない |
+| G3 検証計算が実行済みで再現可能 | **達成** | SageMath 側: §6 の 9 ディレクトリはすべて実行ログ（`.out`）をもち、**対象・手順・結論・限界を書いた `README.md` も 9 ディレクトリすべてに存在する**。欠落していた `sagemath/check/cycle6_T1_padic_mahler/`・`cycle3_T1_period_bound/` に `README.md` を新規作成し、`cycle3_T3_period/` にはスクリプト別 `*_README.md` を統合する `README.md` を追加した（いずれも実行ログに現れる値のみを根拠とし、数値一致を証明と呼ばず、0 件観察を仮説の支持根拠にしない旨を「限界」節に明記）。本プロジェクトの運用規約（`README.md` ＋ `.out`）を満たす。Lean 側: 本 plan は Lean 成果物を宣言せず、plan 本体から Lean 実装の計画を外している（§6）ため Lean 条項は適用しない |
 | G4 既知性リスクが調査済み | **評価不能** | `resolved_risk` / `novelty_risk` を根拠文献名つきで記載（§7）、先行研究アンカーを Deninger／Besser–Deninger／岩澤 $\mu_p$、LSW と特定、動かした軸を 1 本（メタ軸）と明示、候補の `paper_potential` を `low` へ是正して引用済み（記載欠落なし）。ただし G1 未達のため、その調査範囲が中核命題に対して十分かを確認できない。加えて寄与 (b) の既知性が未調査（§8-4）、(iv) のメタ軸の扱いが未決（§7）で、いずれも `達成` を阻む |
 | G5 トラックに応じた寄与の提示 | **達成** | トラックを **T1 Reframe** と明記。(1) 厳密化の対象となった既知結果を文献名で特定: Lind–Schmidt–Ward、arXiv:2407.19531 / Phys. Rev. E 110, 054134 (2024)、Besser–Deninger "p-adic Mahler measures"、Deninger "p-adic entropy and a p-adic Fuglede–Kadison determinant"、arXiv:1702.03819、Ferrero–Washington (1979)、arXiv:2006.14012、Lehmer (1933)、LTE・Pisano・Skolem–Mahler–Lech（§1 の表）。(2) 厳密化によって新たに機械検証可能になった命題の列挙: 命題 A（$\min(v_p(Z_N),k)$ の最終周期性、有限モノイド上で決定可能）、命題 B（$\pi(p,1)$ の lcm 公式、$\overline{\mathbb{F}_p}$ 上の有限計算）、命題 C（$\pi(p,k)\mid p^{k-1}\pi(p,1)$、および Wall 型等号の反例）、命題 N（$\mu_{\min}(p)$＝整数点の下方凸包）、命題 L（LTE 分岐、witness $=(\operatorname{ord}_p(c),v_p(c^d-1))$）（§2）。「可積分の新定理」とは呼ばず、再框であることを §1 冒頭・§1 末尾・§4 末尾で明示している |
 | G6 統計的・論理的健全性チェック | **評価不能** | 4 項目すべてに該当/非該当を記載（下表）。ただし G1 未達のため `達成` にはしない |
@@ -214,5 +215,5 @@ $$a_L=\prod_{z^L=1,\;w^L=1}P(z,w)\in\mathbb{Z}\quad(\text{トーラス零点は�
 
 ### 状態
 
-**据え置き**（G1・G3 が `未達`、G2・G4・G6 が `評価不能`、最終ゲート未取得）。
-次に効くのは §8 の 1（命題 D の一般性確定）と 2（観察 T の決着）。G3 は §8-6 の `README.md` 補完で解消できる。
+**据え置き**（G1 が `未達`、G2・G4・G6 が `評価不能`、最終ゲート未取得）。
+G3 は 3 ディレクトリへの `README.md` 追加により `達成` となった。次に効くのは §8 の 1（命題 D の一般性確定）と 2（観察 T の決着）。
