@@ -1,0 +1,4 @@
+=== <cosh_sinh_basic_properties> (4) a,b>0: a^2=b^2 <=> a=b ===
+  a^2=b^2 となった pair: 20 組（すべて a=b のはず、pair 総数 400）
+checks: 401, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

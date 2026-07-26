@@ -1,0 +1,4 @@
+=== <sqrt_nonnegative_existence_uniqueness> 一意性（y_1,y_2>=0, y_1^2=y_2^2 => y_1=y_2） ===
+  走査した pair: 441 組
+checks: 23, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

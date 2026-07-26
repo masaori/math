@@ -1,0 +1,4 @@
+=== <angle_section_existence_uniqueness> 0<=theta-2n pi<2pi なる n の存在と一意性 ===
+  走査した theta: 158 個、うち theta-2n pi = 0 ちょうど（境界）: 35 個
+checks: 632, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS
