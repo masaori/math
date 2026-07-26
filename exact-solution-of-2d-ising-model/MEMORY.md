@@ -68,6 +68,56 @@
   `V2_not_in_clifford_group` で確定した（$V_2\sigma_1^zV_2^{-1}$ が Pauli 基底で 2 成分をもつ）。
   代わりに単射性は `injectivity_of_T_up_to_scalar` で直接証明済み。
 
+## 完了（2026-07-26）: フェルミオン ψ の定義・反交換関係・T_(V) の作用を Lean で形式化
+
+対象ブロック（`structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
+`TV1_hatZ_hatY_030_definition_fermi`（`def_fermi`）/ `TV1_hatZ_hatY_031_claim_V_psi_commutator`
+（`commutation_V_psi`）/ `TV1_hatZ_hatY_032_claim_anticommutator_psi`（`anticommutator_of_psi`）。
+新規ファイル `lean/Ising2D/Part008/Definition030_Fermi.lean`。
+
+### `A(θ)` の二重定義を解消した
+
+`Ising2D.Amat`（複素パラメータ版、`Definition016_TV.lean`）と `Ising2D.AMat`（`IsingConst` と実 θ 版、
+`Definition019_ThetaGamma.lean`）が同じ行列の二重定義で、名前も大文字小文字違いだけだった。
+**`AMat` に一本化し `Amat` を削除**した。`B_1, B_2` 側（`Complex.cosh` 等）との接続は、
+モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
+`Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけで済み、
+実パラメータ・実 θ への制限で証明が通らない箇所は無かった。
+
+### 発見した原文の穴: `anticommutator_of_psi` は平方根の分枝の一致を暗黙に仮定している
+
+原文は `M ∣ μ+ν` のとき `γ_2(θ_ν) = γ_2(-θ_μ)` から
+`√(γ_2(θ_ν)γ_2(-θ_ν)) = √(γ_2(θ_μ)γ_2(-θ_μ))` を使っているが、根号の中身が等しいことから
+従うのは `t_ν = ±t_μ` までで、**μ と ν で分枝が同じであることは自明でない**。
+
+自分で計算して確定した結果（Lean 側でも機械的に確認）:
+
+- `[ψ_μ^†, ψ_ν^†]₊` の係数は `c_μ c_ν(γ_2(-θ_μ)γ_2(-θ_ν) - t_μ t_ν)·2Mδ` で、
+  `M ∣ μ+ν` のとき `γ_2(-θ_μ)γ_2(-θ_ν) = t_μ^2` だから括弧は `t_μ(t_μ - t_ν)`。
+- `γ_2(θ_μ) ≠ 0` より `t_μ^2 = -|γ_2(θ_μ)|^2 ≠ 0`、すなわち `t_μ ≠ 0`。
+- したがって**同一分枝 `t_ν = t_μ` なら原文どおり `0`、逆分枝 `t_ν = -t_μ` なら `2t_μ^2 ≠ 0` で原文は偽**。
+- `[ψ_μ^†, ψ_ν]₊` も同様で、逆分枝だと `δ^M_{μ+ν,0} I` ではなく `0` になる。
+
+**結論: 同一分枝の選択は必要不可欠で、原文の穴である。** Lean 側では
+仮定 `hbr : (M : ℤ) ∣ (μ + ν) → tν = tμ` として明示した（`M ∤ μ+ν` なら分枝は結論に効かない）。
+原文（`structured-latex/content`）は書き換えていない。
+
+### 未証明の穴（sorry ではなく仮定として持った箇所）
+
+`T_(V)` が `(hat(Z)_μ^{(-)}, hat(Y)_μ)` に `A(θ_μ)` で作用すること（原文 `T_V_hatZ_hatY`）は、
+`parts 008` の 001〜005（ネストした交換子のテイラー係数抽出）が未形式化のため証明できない。
+`ActsBy T … (AMat K (thetaMu M μ))` を明示的な仮定として持ち、そこから先
+（`P_μ` の各列が固有ベクトル ⇒ `ψ_μ^†, ψ_μ` が `T` の固有ベクトル、固有値は `D_μ` の対角成分）は
+完全に証明した。`sorry` / `admit` は無い。
+
+### 追加した主な定理
+
+`psiDag` / `psi`（`P_μ` の第 0 列・第 1 列）、`psiDag_eq` / `psi_eq`（原文の「すなわち」の検算）、
+`acomm_lin2` / `acomm_hatZMinus_hatY_lin2`（双線型性）、
+`acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（反交換関係 3 式）、
+`Pmat_col_zero` / `Pmat_col_one` / `AMat_mulVec_Pmat_col_zero` / `AMat_mulVec_Pmat_col_one`、
+`TV_psiDag_of_action` / `TV_psi_of_action` / `TV_psiDag_psi_of_action`。
+
 ## 完了（2026-07-26）: 転送行列 V1/V2 の定義と共役作用 T_g / T_V を Lean で形式化
 
 新規ファイル 2 つ（`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
