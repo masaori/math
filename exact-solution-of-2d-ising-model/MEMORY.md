@@ -18,6 +18,59 @@
   codemod の裸ファイル名置換をパス区切りで限定、実行時検証テストの判定を厳密化。
 
 **784 箇所の相互参照がすべて `.ts` として型検査される状態になった。**
+## 完了（2026-07-26・追補）: `H_1, H_2` の hat 表示と 6 本の交換関係を Lean で形式化（**原文の誤り 2 件を検出**）
+
+### 成果物
+
+| ファイル | 内容 |
+| --- | --- |
+| `lean/Ising2D/Part004/Claim011_H1H2ViaHat.lean` | `<H1_H2_via_hatZ_hatY>` の具体版（`H_1^{(±)} = (1/M)∑_j e^{-i2πj/M} hat(Y)_j hat(Z)^{(±)}_{-j}`、`H_2 = (1/M)∑_j hat(Z)^{(-)}_{-j} hat(Y)_j`） |
+| `lean/Ising2D/Part008/Claim001_CommutatorHZY.lean` | `<commutator_of_H_and_Z_Y>` の具体版（6 本） |
+| `lean/Ising2D/Abstract/CommutatorClifford.lean` | 同ラベルの抽象版（`Ising2D.Abstract.CliffordTriple`） |
+
+`lake build` 成功、`scripts/check-no-sorry.sh` exit 0（新規定理はすべて targets へ追記済み）。
+
+### 抽象版で分かったこと
+
+6 本の交換関係に効いているのは `[a b, c] = a[b,c]₊ - [a,c]₊ b` と
+「反交換子が係数のスカラー倍の `1` になること」だけである。`hat(Z), hat(Y)` の具体形も、
+行列であることも、`D` の中身（`2M δ^M`、`-4 e^{-i2π(μ+ν)/M}`）も効いていない。
+`hat(Z)^{(±)}` と `hat(Z)^{(∓)}` の差は「`D_z` と `D_{z'}` という別のスカラー関数」に
+抽象化でき、原文が符号で書き分けている 6 本は
+「積の並びが `y z` か `z y` か」×「交換相手が `z` / `z'` / `y`」の 6 通りに対応する。
+
+### **原文の誤り 2 件（本文修正は別セッションの担当）**
+
+対象ブロック: `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
+`TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`（ラベル `commutator_of_H_and_Z_Y`）。
+
+1. **第 2 式 `[H_1^{(±)}, hat(Z)_μ^{(∓)}] = 2e^{-iθ_μ}hat(Y)_μ` は偽。**
+   正しくは `2e^{-iθ_μ}hat(Y)_μ - 4e^{-iθ_μ}Y_M`。
+   原文自身が最終段で余分な項 `-(4/M)e^{-iθ_μ}∑_{k=1}^M Y_k M δ^M_{(k,0)}` を持ちながら
+   それを `0` と置いている。`k ∈ {1,…,M}` で `δ^M_{(k,0)} = 1` になるのは `k = M` なので、
+   この項は `-4e^{-iθ_μ}Y_M` であって消えない（`Y_M^2 = I` より `Y_M ≠ 0`）。
+   当該ブロックの `conversion.notes` にも「原文の該当ステップの正当化は不完全」と記録済み。
+   Lean: 訂正版 `Ising2D.lie_H1_hatZ_opp`、偽であることの証明 `lie_H1_hatZ_opp_ne_orig`。
+2. **第 5 式 `[H_2, hat(Z)_μ^{(+)}] = -2hat(Y)_μ + (1/M)∑_j(-2e^{-i(2π/M)(-j+μ)}hat(Y)_j)` は偽。**
+   正しくは `-2hat(Y)_μ + 4e^{-iθ_μ}Y_1`。原文は `-[hat(Z)_μ^{(+)}, hat(Z)_{-j}^{(-)}]₊` の展開で
+   マイナス符号を第 1 項にしか分配しておらず、次の行で係数 `4` も `2` に化けている。
+   独立な検算（`hat(Z)^{(+)}_μ = hat(Z)^{(-)}_μ - 2e^{-iθ_μ}Z_1` と `[H_2, Z_1] = -2Y_1`）でも
+   訂正版と一致する。Lean: `Ising2D.lie_H2_hatZPlus` / `lie_H2_hatZPlus_ne_orig`。
+
+**波及範囲**: 後段（`nesting_of_commutator_of_H_and_Z` 以降）が使うのは (1)(3)(4)(6) の 4 本だけで
+（当該ブロックの proof が (A)(B)(C)(D) として明示している）、誤っている (2)(5) は使われていない。
+したがって結論には波及しない。**本文の修正は `docs/tasks/2026-07_original-text-gaps/` と同じく
+別セッションの担当**（このセッションは `structured-latex/content/` を編集していない）。
+
+### 次にやること
+
+`<H1_H2_via_hatZ_hatY>` と `<commutator_of_H_and_Z_Y>` が揃ったので、
+`Ising2D.matExp_conj_two_dim_z` / `..._y`（`Part008/Claim006_ExpConjugation.lean`）へ代入すれば
+`<extract_taylor_coefficient_of_Z_Y>` の 4 式が出る。そこまで行けば
+`TV1_hatZ_hatY_012_claim_TV1_TV2_actions` が証明でき、`Ising2D.TV_hatZ_hatY_of_action` の
+仮定 `hT1`, `hT2` を外して `T_V_hatZ_hatY` を無条件の定理にできる。
+
+---
 
 ## 完了（2026-07-26・追補3）: structured-latex の TypeScript 化（第1段：基盤・スキーマ・ツール）
 

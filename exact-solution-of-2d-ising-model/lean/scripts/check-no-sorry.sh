@@ -238,6 +238,49 @@ targets=(
   Ising2D.acomm_psi_relations_of_car
   Ising2D.acomm_psiDag_psiDag_of_opposite_branch
   Ising2D.acomm_psiDag_psi_of_opposite_branch
+  Ising2D.expPhase_congr
+  Ising2D.hatZ_congr
+  Ising2D.hatY_congr
+  Ising2D.nextSite_val
+  Ising2D.dvd_succ_sub_iff_eq_nextSite
+  Ising2D.firstSign_nextSite
+  Ising2D.H1_eq_hat_sum
+  Ising2D.H2_eq_hat_sum
+  Ising2D.H2_eq_hatZMinus_sum
+  Ising2D.Abstract.lie_smul_left
+  Ising2D.Abstract.lie_sum_smul_left
+  Ising2D.Abstract.lie_mul_of_acomm_smul_one
+  Ising2D.Abstract.lie_sum_smul_mul_of_acomm_smul_one
+  Ising2D.Abstract.CliffordTriple.lie_sum_yz_z
+  "Ising2D.Abstract.CliffordTriple.lie_sum_yz_z'"
+  Ising2D.Abstract.CliffordTriple.lie_sum_yz_y
+  Ising2D.Abstract.CliffordTriple.lie_sum_zy_z
+  "Ising2D.Abstract.CliffordTriple.lie_sum_zy_z'"
+  Ising2D.Abstract.CliffordTriple.lie_sum_zy_y
+  Ising2D.expPhase_ne_zero
+  Ising2D.deltaMod_neg
+  Ising2D.deltaMod_succ_eq
+  Ising2D.deltaMod_val_eq
+  Ising2D.sum_deltaMod_select
+  Ising2D.sum_hatY
+  Ising2D.sum_expPhase_neg_smul_hatY
+  Ising2D.hatCliffordTriple
+  Ising2D.lie_H1_hatZ_same
+  Ising2D.lie_H1_hatY
+  Ising2D.lie_H1_hatZ_opp
+  Ising2D.lie_H2_hatZMinus
+  Ising2D.lie_H2_hatY
+  Ising2D.lie_H2_hatZPlus
+  Ising2D.Y_ne_zero
+  Ising2D.lie_H1_hatZ_opp_ne_orig
+  Ising2D.lie_H2_hatZPlus_ne_orig
+  Ising2D.lie_H1Plus_hatZPlus
+  Ising2D.lie_H1Minus_hatZMinus
+  Ising2D.lie_H1Plus_hatY
+  Ising2D.lie_H1Minus_hatY
+  "Ising2D.lie_H2_hatZMinus'"
+  "Ising2D.lie_H2_hatY'"
+  "Ising2D.lie_H2_hatZPlus'"
   Ising2D.Abstract.sinhc
   Ising2D.Abstract.sinhc_zero
   Ising2D.Abstract.sinhc_of_ne_zero
