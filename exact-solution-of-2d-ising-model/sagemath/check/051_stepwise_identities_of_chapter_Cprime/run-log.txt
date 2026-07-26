@@ -1,4 +1,4 @@
-# 050_stepwise_identities_of_chapter_Cprime の実行ログ
+# 051_stepwise_identities_of_chapter_Cprime の実行ログ
 # sage: SageMath version 10.6, Release Date: 2025-03-31
 
 $ sage check_01_013_steps.sage

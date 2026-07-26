@@ -1,4 +1,4 @@
-# SageMath Check: 050_stepwise_identities_of_chapter_Cprime
+# SageMath Check: 051_stepwise_identities_of_chapter_Cprime
 
 ## 対象
 
@@ -88,7 +88,7 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
 ## 実行
 
 ```
-cd exact-solution-of-2d-ising-model/sagemath/check/050_stepwise_identities_of_chapter_Cprime
+cd exact-solution-of-2d-ising-model/sagemath/check/051_stepwise_identities_of_chapter_Cprime
 sage check_01_013_steps.sage
 sage check_02_015_steps.sage
 sage check_03_014_steps.sage
