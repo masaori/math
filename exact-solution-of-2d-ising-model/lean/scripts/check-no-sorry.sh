@@ -160,7 +160,8 @@ targets=(
   Ising2D.ActsBy.eigen
   Ising2D.B1mat
   Ising2D.B2mat
-  Ising2D.B1_mul_B2_mul_B1_eq_AMat
+  Ising2D.Amat
+  Ising2D.B1_mul_B2_mul_B1_eq_Amat
   Ising2D.TV_hatZ_hatY_of_action
   "Ising2D.TV_hatZ_hatY_of_action'"
   Ising2D.gamma2_neg
@@ -220,6 +221,9 @@ targets=(
   Ising2D.TV_psiDag_of_action
   Ising2D.TV_psi_of_action
   Ising2D.TV_psiDag_psi_of_action
+  Ising2D.Amat_eq_AMat
+  "Ising2D.B1_mul_B2_mul_B1_eq_AMat'"
+  Ising2D.TV_hatZ_hatY_of_action_AMat
 )
 
 {

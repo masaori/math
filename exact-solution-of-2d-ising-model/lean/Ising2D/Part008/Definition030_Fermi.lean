@@ -367,4 +367,57 @@ theorem TV_psiDag_psi_of_action {M : ℕ} (hM : M ≠ 0) (μ : ℤ) (t : ℂ)
   · simpa [Dmat_zero_zero] using TV_psiDag_of_action K hM μ t ht hg T hT
   · simpa [Dmat_one_one] using TV_psi_of_action K hM μ t ht hg T hT
 
+/-! ## `A(θ)` の 2 つの定義の橋渡し
+
+`Part008/Definition016_TV.lean` の `Amat`（5 個の複素パラメータと複素 `θ` で書いた `A(θ)`）と
+`Part008/Definition019_ThetaGamma.lean` の `AMat`（`IsingConst` と実 `θ` で書いた `A(θ)`）は
+**同じ行列の二重定義**であり、名前が大文字小文字違いだけで紛らわしい。
+
+一本化は既存ファイルのリファクタになるため、ここでは既存ファイルを変更せず
+**両者を結ぶ補題だけを置く**（一本化は引き継ぎ事項。`MEMORY.md` 参照）。
+原文の `c_1, s_1, c_2, c_2^*, s_2^*` はすべて実数、`θ = θ_μ = 2πμ/M` も実数なので、
+`Amat` の複素パラメータへ `IsingConst` の実数を coe すれば `AMat` に一致する。 -/
+
+/-- **`Amat` と `AMat` は同じ行列**（実パラメータ・実 `θ` へ制限したとき）。 -/
+theorem Amat_eq_AMat (θ : ℝ) :
+    Amat (K.c1 : ℂ) (K.s1 : ℂ) (K.c2 : ℂ) (K.c2star : ℂ) (K.s2star : ℂ) (θ : ℂ)
+      = AMat K θ := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Amat, AMat, Complex.ofReal_cos, Complex.ofReal_sin, Complex.exp_mul_I,
+      mul_comm (Complex.I : ℂ)] <;>
+    push_cast <;>
+    ring
+
+/-- `B_1(θ) B_2 B_1(θ) = A(θ)` を `AMat` の言葉で述べた版
+（既存の `B1_mul_B2_mul_B1_eq_Amat` と `Amat_eq_AMat` の合成）。 -/
+theorem B1_mul_B2_mul_B1_eq_AMat' (K1 K2star : ℂ) (θ : ℝ)
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    B1mat K1 (θ : ℂ) * B2mat K2star * B1mat K1 (θ : ℂ) = AMat K θ := by
+  rw [B1_mul_B2_mul_B1_eq_Amat K1 K2star (θ : ℂ)
+    (K.c1 : ℂ) (K.s1 : ℂ) (K.c2 : ℂ) (K.c2star : ℂ) (K.s2star : ℂ)
+    hc1 hs1 hc2star hs2star hdual]
+  exact Amat_eq_AMat K θ
+
+/-- **原文 `T_V_hatZ_hatY`（仮定つき・`AMat` 版）**。
+`Definition016_TV.lean` の `TV_hatZ_hatY_of_action` を `AMat` の言葉に移したもの。
+これにより `TV_psiDag_of_action` / `TV_psi_of_action` の仮定 `hT` に直接つながる。 -/
+theorem TV_hatZ_hatY_of_action_AMat {M : ℕ} (μ : ℤ) (K1 K2star : ℂ) (θ : ℝ)
+    (T1 T2 : TensorPow M →ₗ[ℂ] TensorPow M)
+    (hT1 : ActsBy T1 (hatZMinus M μ) (hatY M μ) (B1mat K1 (θ : ℂ)))
+    (hT2 : ActsBy T2 (hatZMinus M μ) (hatY M μ) (B2mat K2star))
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    ActsBy (T1 ∘ₗ T2 ∘ₗ T1) (hatZMinus M μ) (hatY M μ) (AMat K θ) := by
+  have h := (hT1.comp hT2).comp hT1
+  rw [← mul_assoc] at h
+  rwa [B1_mul_B2_mul_B1_eq_AMat' K K1 K2star θ hc1 hs1 hc2star hs2star hdual] at h
+
 end Ising2D

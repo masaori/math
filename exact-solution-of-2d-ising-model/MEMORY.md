@@ -158,14 +158,21 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 （`commutation_V_psi`）/ `TV1_hatZ_hatY_032_claim_anticommutator_psi`（`anticommutator_of_psi`）。
 新規ファイル `lean/Ising2D/Part008/Definition030_Fermi.lean`。
 
-### `A(θ)` の二重定義を解消した
+### 引き継ぎ: `A(θ)` の二重定義は未解消（橋渡し補題だけ置いた）
 
 `Ising2D.Amat`（複素パラメータ版、`Definition016_TV.lean`）と `Ising2D.AMat`（`IsingConst` と実 θ 版、
-`Definition019_ThetaGamma.lean`）が同じ行列の二重定義で、名前も大文字小文字違いだけだった。
-**`AMat` に一本化し `Amat` を削除**した。`B_1, B_2` 側（`Complex.cosh` 等）との接続は、
-モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
-`Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけで済み、
-実パラメータ・実 θ への制限で証明が通らない箇所は無かった。
+`Definition019_ThetaGamma.lean`）が**同じ行列の二重定義**で、名前も大文字小文字違いだけである。
+
+一本化は既存 Lean ファイルのリファクタになり、**既存ファイルを「具体版＋抽象版の2本立て」へ整える
+別トラックの作業と衝突する**ため、ここでは既存ファイルを変更していない。代わりに新規ファイル
+`Ising2D/Part008/Definition030_Fermi.lean` の末尾に橋渡しを置いた。
+
+- `Amat_eq_AMat`: 実パラメータ・実 θ へ coe すれば両者が一致する
+- `B1_mul_B2_mul_B1_eq_AMat'` / `TV_hatZ_hatY_of_action_AMat`: 既存の `Amat` 版を `AMat` 版へ移送
+
+**次にやること**: 既存ファイルのリファクタ時に `Amat` を削除し `AMat` へ一本化する
+（接続に必要なのは、モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
+`Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけであることを確認済み）。
 
 ### 発見した原文の穴: `anticommutator_of_psi` は平方根の分枝の一致を暗黙に仮定している
 

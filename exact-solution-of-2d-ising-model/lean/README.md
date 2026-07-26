@@ -207,15 +207,17 @@ EOF
 | `Ising2D.ActsBy.comp` | 合成則 `Q P`（原文の `B_1 B_2 B_1` の根拠） | `T_V_hatZ_hatY` の証明 |
 | `Ising2D.ActsBy.eigen` | **固有ベクトルの移送**（`B v = λ v ⇒ T(v_0 z + v_1 y) = λ(⋯)`） | 後段（`ψ` が `V` の固有ベクトル）への一般補題 |
 | `Ising2D.B1mat` / `B2mat` | `B_1(θ)`, `B_2` | `T_V_hatZ_hatY` の証明 |
-| `Ising2D.B1_mul_B2_mul_B1_eq_AMat` | `B_1(θ) B_2 B_1(θ) = A(θ)` | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
+| `Ising2D.B1_mul_B2_mul_B1_eq_Amat` | `B_1(θ) B_2 B_1(θ) = A(θ)` | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
 | `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**） | `T_V_hatZ_hatY` |
 
-> **`A(θ)` の一本化（解消済み）**: 以前は `A(θ)` が `Ising2D.Amat`（`Part008/Definition016_TV.lean`、
-> 5 個の複素パラメータ版）と `Ising2D.AMat`（`Part008/Definition019_ThetaGamma.lean`、`IsingConst` と
-> 実 `θ` の版）の二重定義になっていた。**`AMat` に一本化し `Amat` は削除した**。
-> `B_1, B_2` 側（`Complex.cosh` などで書かれている）との接続は、モデル定数について
-> `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、`Complex.ofReal_cos` / `Complex.ofReal_sin`
-> による三角関数の cast だけで済む。
+> **`A(θ)` の二重定義（未解消・引き継ぎ事項）**: `A(θ)` は `Ising2D.Amat`
+> （`Part008/Definition016_TV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
+> （`Part008/Definition019_ThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっている。
+> 一本化は既存ファイルのリファクタになるため、**既存ファイルは変更せず**、新規ファイル
+> `Part008/Definition030_Fermi.lean` の末尾に橋渡し（`Amat_eq_AMat`、`B1_mul_B2_mul_B1_eq_AMat'`、
+> `TV_hatZ_hatY_of_action_AMat`）を置くにとどめた。
+> 接続に要るのは、モデル定数について `(K.c1 : ℂ) = Complex.cosh (2K_1)` の形の仮定と、
+> `Complex.ofReal_cos` / `Complex.ofReal_sin` による三角関数の cast だけである。
 | `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
 | `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
 | `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
