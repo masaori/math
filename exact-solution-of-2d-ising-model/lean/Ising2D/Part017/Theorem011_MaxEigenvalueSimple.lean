@@ -148,9 +148,9 @@ theorem checkBigLambda_lt_max_of_gammaFn (F : CheckFermiSetup M) (P : IsingParam
 theorem eq_Qproj_univ_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hgpos : ∀ i, 0 < g i) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
-    (hVeq : VPlus M K1 s2 K2star = c • F.Vprime g)
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g)
     {x : Conf M → ℂ}
-    (hx : (VPlus M K1 s2 K2star).mulVec x
+    (hx : (VPlus M s2 K1 K2star).mulVec x
             = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • x) :
     x = (F.Qproj Finset.univ).mulVec x := by
   classical
@@ -161,7 +161,7 @@ theorem eq_Qproj_univ_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M �
     (fun r A v => Matrix.smul_mulVec r A v)
     (fun A r v => Matrix.mulVec_smul A r v)
     (fun q v => by rw [← Matrix.sum_mulVec])
-    (Q := F.Qproj) (V := VPlus M K1 s2 K2star)
+    (Q := F.Qproj) (V := VPlus M s2 K1 K2star)
     (lam := fun T => ((checkBigLambda F g s2 T : ℝ) : ℂ))
     (i₀ := Finset.univ) F.sum_Qproj
     (fun T => Qproj_mul_VPlus F g hK1 hK2 hs2 hVeq T) ?_ hx

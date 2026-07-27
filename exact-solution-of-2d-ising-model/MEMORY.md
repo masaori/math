@@ -39,6 +39,33 @@
 なお章 015 側にも `Ising2D.one_lt_gamma1R_thetaTilde` があり名前が衝突したため、
 章 017 側は `one_lt_gamma1R_thetaTilde_checkIndex` へ改名した（仮定が異なる別定理:
 章 015 版は双対関係 `hdual` を要求し全 `μ` で成立、章 017 版は `hdual` 不要で `μ ∈ 𝓜̌` に限る）。
+`V^{(+)}` は章 014 の `Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`）を再利用し、
+章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `Ising2D.VPlus_eq_Vmat` で明示した。
+
+## 完了（2026-07-27）: **章 014 の Lean 形式化**（偶セクターでの `T` の作用）
+
+`structured-latex/content/014_even_sector_T_action.ts`（10 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part014/` の 8 ファイル、抽象版 `lean/Ising2D/Abstract/TVActionSandwich.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: **章の結論 `Ising2D.TVPlus_checkZ_checkY`**
+（`(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`）。
+未形式化の主張は無い。残る仮定は 008 章と同じ 2 つ（`IsingConst` の 5 成分が双曲線関数であること、
+双対関係の帰結 `s_2^* c_2 = c_2^*`）で、いずれも数学的に必要な前提。
+
+抽象版で判明した本質: **008 章（整数運動量）と本章（半整数運動量）は同じ抽象版の別の特殊化**であり、
+違いは `ad X` が `span{z, y}` に及ぼす係数の位相因子だけ。`αβ = s^2` の検証に使うのは
+`e^{-iθ}e^{iθ} = 1` と `i^2 = -1` の 2 つだけで、`θ` が `2πμ/M` か `2π(μ-1/2)/M` かは効いていない。
+`Ising2D.TV_hatZ_hatY_via_sandwich` で 008 章の結論を本章の抽象版から導き直して確認した。
+新規の抽象版は `Abstract.actsBy_sandwich` 1 本だけ（原文が線型性と `calc_of_TxT` の 4 段往復で
+行っている合成は「線型写像の合成 ↔ 行列の積」の 1 点に集約され、ℂ 上の任意の加群で成り立つ）。
+
+人手証明の誤り・穴: **無し**（係数まで原文どおりに形式化できた）。むしろ 008 章で欠けていた
+双対関係の明示と `(V_1^{(±)})^{1/2}` の定義が、本章では補われている。
+
+記録: `lean/docs/ch014-formalization.md`（定理一覧・2 本立て対応表・本質・仮定）、
+`docs/tasks/2026-07_lean-ch009-013/015_ch014-formalization-findings.md`（本文への指摘。
+`μ ∈ 𝓜̌` の仮定が必要以上に強いこと、008 章の既知の 2 つの穴が本章では埋まっていること）。
 
 ## 完了（2026-07-27）: **章 015 の Lean 形式化**（半整数運動量における `A(θ~)` の対角化）
 

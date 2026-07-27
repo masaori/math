@@ -40,7 +40,7 @@ variable {M : ℕ}
 
 /-- **原文 `constant_c_value_even_sector` Step 1**: `tr(V^{(+)}) = (2s_2)^{M/2} τ`。 -/
 theorem trace_VPlus (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
-    (VPlus M K1 s2 K2star).trace
+    (VPlus M s2 K1 K2star).trace
       = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) * tauTrace M K1 (-1) K2star :=
   trace_Vmat K1 (-1) s2 K2star
 
@@ -54,16 +54,16 @@ theorem trace_VPlusInv (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
 /-- `V^{(+)} = c V̌'` から `(V^{(+)})^{-1} = c⁻¹ (V̌')^{-1}`（逆元の一意性）。 -/
 theorem VPlusInv_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ} (hs2 : 0 < s2) (hcne : c ≠ 0)
-    (hVeq : VPlus M K1 s2 K2star = c • F.Vprime g) :
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) :
     VPlusInv M K1 s2 K2star = c⁻¹ • F.Vprime (fun i => -(g i)) := by
   have hleft := VPlusInv_mul_VPlus (M := M) (K1 := K1) (K2star := K2star) hs2
-  have hright : VPlus M K1 s2 K2star * (c⁻¹ • F.Vprime (fun i => -(g i))) = 1 := by
+  have hright : VPlus M s2 K1 K2star * (c⁻¹ • F.Vprime (fun i => -(g i))) = 1 := by
     rw [hVeq, smul_mul_smul_comm, F.Vprime_mul_Vprime_neg, mul_inv_cancel₀ hcne, one_smul]
   calc VPlusInv M K1 s2 K2star
       = VPlusInv M K1 s2 K2star
-          * (VPlus M K1 s2 K2star * (c⁻¹ • F.Vprime (fun i => -(g i)))) := by
+          * (VPlus M s2 K1 K2star * (c⁻¹ • F.Vprime (fun i => -(g i)))) := by
         rw [hright, mul_one]
-    _ = (VPlusInv M K1 s2 K2star * VPlus M K1 s2 K2star)
+    _ = (VPlusInv M K1 s2 K2star * VPlus M s2 K1 K2star)
           * (c⁻¹ • F.Vprime (fun i => -(g i))) := by noncomm_ring
     _ = c⁻¹ • F.Vprime (fun i => -(g i)) := by rw [hleft, one_mul]
 
@@ -73,19 +73,19 @@ theorem VPlusInv_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
 theorem constant_c_value_even_sector (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
-    (hVeq : VPlus M K1 s2 K2star = c • F.Vprime g) :
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) :
     c = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) := by
   classical
   set a : ℝ := ((2 * s2) ^ ((M : ℝ) / 2) : ℝ) with ha
   have hapos : 0 < a := Real.rpow_pos_of_pos (by linarith) _
   obtain ⟨p, hppos, hP⟩ := F.trace_Vprime_pos g
-  have hVpos : 0 < (VPlus M K1 s2 K2star).trace := trace_VPlus_pos hK1 hK2 hs2
+  have hVpos : 0 < (VPlus M s2 K1 K2star).trace := trace_VPlus_pos hK1 hK2 hs2
   have hcne : c ≠ 0 := by
     intro h0
     rw [h0, zero_smul] at hVeq
     rw [hVeq, Matrix.trace_zero] at hVpos
     exact lt_irrefl 0 hVpos
-  have h1 : (VPlus M K1 s2 K2star).trace = c * ((p : ℝ) : ℂ) := by
+  have h1 : (VPlus M s2 K1 K2star).trace = c * ((p : ℝ) : ℂ) := by
     rw [hVeq, Matrix.trace_smul, smul_eq_mul, hP]
   have h2 : (VPlusInv M K1 s2 K2star).trace = c⁻¹ * ((p : ℝ) : ℂ) := by
     rw [VPlusInv_eq F g hs2 hcne hVeq, Matrix.trace_smul, smul_eq_mul, F.trace_Vprime_inv g, hP]

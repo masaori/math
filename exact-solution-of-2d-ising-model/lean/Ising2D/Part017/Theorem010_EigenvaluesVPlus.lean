@@ -38,8 +38,8 @@ noncomputable def checkBigLambda (F : CheckFermiSetup M) (g : CheckIdx M → ℝ
 theorem VPlus_mul_Qproj (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
-    (hVeq : VPlus M K1 s2 K2star = c • F.Vprime g) (T : Finset (CheckIdx M)) :
-    VPlus M K1 s2 K2star * F.Qproj T
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx M)) :
+    VPlus M s2 K1 K2star * F.Qproj T
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := by
   have hc := constant_c_value_even_sector F g hK1 hK2 hs2 hVeq
   rw [hVeq, hc, smul_mul_assoc, F.Vprime_mul_Qproj g T, smul_smul, checkBigLambda]
@@ -49,8 +49,8 @@ theorem VPlus_mul_Qproj (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
 theorem Qproj_mul_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
-    (hVeq : VPlus M K1 s2 K2star = c • F.Vprime g) (T : Finset (CheckIdx M)) :
-    F.Qproj T * VPlus M K1 s2 K2star
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx M)) :
+    F.Qproj T * VPlus M s2 K1 K2star
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := by
   have hc := constant_c_value_even_sector F g hK1 hK2 hs2 hVeq
   rw [hVeq, hc, mul_smul_comm, F.Qproj_mul_Vprime g T, smul_smul, checkBigLambda]
@@ -60,9 +60,9 @@ theorem Qproj_mul_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
 theorem VPlus_mulVec_of_mem_range (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
-    (hVeq : VPlus M K1 s2 K2star = c • F.Vprime g) (T : Finset (CheckIdx M))
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx M))
     (x : Conf M → ℂ) :
-    (VPlus M K1 s2 K2star).mulVec ((F.Qproj T).mulVec x)
+    (VPlus M s2 K1 K2star).mulVec ((F.Qproj T).mulVec x)
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • ((F.Qproj T).mulVec x) := by
   rw [Matrix.mulVec_mulVec, VPlus_mul_Qproj F g hK1 hK2 hs2 hVeq T, Matrix.smul_mulVec]
 
