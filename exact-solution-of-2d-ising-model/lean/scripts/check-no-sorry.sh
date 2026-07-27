@@ -750,6 +750,50 @@ targets=(
   Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
+  Ising2D.Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd
+  Ising2D.Abstract.mul_of_eq_neg_conj
+  Ising2D.Abstract.sq_absOf_eq_neg_mul
+  Ising2D.Abstract.sq_I_mul_absOf_eq_mul
+  Ising2D.Abstract.skew2_charPoly_factor
+  Ising2D.Abstract.skew2_mulVec
+  Ising2D.Abstract.eq_conj_of_mul_eq
+  Ising2D.Abstract.gamma_det_identity
+  Ising2D.Abstract.sinh_arcosh_of_sq
+  Ising2D.Abstract.exp_arcosh_of_sq
+  Ising2D.Abstract.exp_neg_arcosh_of_sq
+  Ising2D.AMat_thetaTilde_eq
+  Ising2D.thetaTilde_mul_M
+  Ising2D.gamma2_thetaTilde_ne_zero
+  Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero
+  Ising2D.gamma2_neg_thetaTilde_ne_zero
+  Ising2D.gamma2_thetaTilde_ne_zero_checkIndex
+  Ising2D.gamma2_neg_thetaTilde_eq
+  Ising2D.gamma2_mul_gamma2_neg_eq_neg_absSq
+  Ising2D.sq_absGamma2
+  Ising2D.sq_I_absGamma2
+  Ising2D.absGamma2_thetaTilde_pos
+  Ising2D.charPoly_factor_thetaTilde
+  Ising2D.AMat_mulVec_eigen_pos
+  Ising2D.AMat_mulVec_eigen_neg
+  Ising2D.lambdaPlusR_ne_lambdaMinusR
+  Ising2D.checkPmat_eq_Pmat
+  Ising2D.checkDmat_eq_Dmat
+  Ising2D.checkT_sq
+  Ising2D.det_checkPmat
+  Ising2D.det_checkPmat_ne_zero
+  Ising2D.AMat_mul_checkPmat
+  Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
+  Ising2D.det_AMat_thetaTilde_eq_one
+  Ising2D.det_AMat_thetaTilde_eq_one_of_abstract
+  Ising2D.gamma1R_sq_thetaTilde
+  Ising2D.lambda_mul_lambda_thetaTilde
+  Ising2D.one_lt_gamma1R_thetaTilde
+  Ising2D.cosh_gammaTilde
+  Ising2D.gammaTilde_pos
+  Ising2D.sinh_gammaTilde
+  Ising2D.lambdaPlusR_eq_exp
+  Ising2D.lambdaMinusR_eq_exp
+  Ising2D.lambda_separation
   Ising2D.Abstract.acomm_cre_ann_comp
   Ising2D.Abstract.two_pow_smul_tau_noncommProd
   Ising2D.Abstract.const_eq_of_trace_ratio
@@ -804,7 +848,7 @@ targets=(
   Ising2D.checkBigLambda_lt_max
   Ising2D.checkBigLambda_max_mul_min
   Ising2D.cos_thetaTilde_lt_one
-  Ising2D.one_lt_gamma1R_thetaTilde
+  Ising2D.one_lt_gamma1R_thetaTilde_checkIndex
   Ising2D.gammaFn_thetaTilde_pos
   Ising2D.sum_checkIdx
   Ising2D.tagPoint_half_eq_thetaTilde

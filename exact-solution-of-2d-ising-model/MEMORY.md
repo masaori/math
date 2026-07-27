@@ -1,5 +1,77 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 017 の Lean 形式化**（定数 `c` の決定と `V^{(+)}` の固有値）
+
+`structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part017/`、抽象版 `lean/Ising2D/Abstract/` の
+`PairedFermion.lean` / `ConstantC.lean` / `SimpleEigenvalue.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**11 主張すべて形式化済み。結論を覆す誤りは見つからなかった。**
+
+到達点: **最大固有値 `Λ̌_max = Λ^{(1/2)}_M` の単純性**（`Ising2D.checkBigLambda_univ_eq_LambdaM`,
+`checkBigLambda_lt_max_of_gammaFn`, `eq_Qproj_univ_mulVec_of_eigen`,
+`finrank_range_Qproj_univ`）と **`c = (2 sinh 2K_2)^{M/2}`**
+（`Ising2D.constant_c_value_even_sector`）。
+
+抽象版で判明した本質:
+- **章 009（整数運動量）と章 017（半整数運動量）は同じ抽象版の別の特殊化**で、違いは
+  対をなす添字を与える写像 `σ` だけ（009 は `σ(μ)=-μ`、017 は `σ(μ)=M+1-μ`）。
+  しかも効いているのは **`σ` の単射性だけ**（`Abstract.acomm_cre_ann_comp`）。
+- **`c` の決定に行列もトレースも指数関数も効いていない**。ℂ の 4 つの等式と正値性だけ
+  （`Abstract.const_eq_of_trace_ratio`）。章 009 の `constant_c_value` も同じ補題の特殊化。
+- **単純性 (3) に直和分解 (5) は不要**。`∑_ε Q̌_ε = 1` と左からの固有関係だけで足りる
+  （`Abstract.eq_proj_of_eigen`）。
+- 単純性を可能にしているのは `γ(θ~_μ) > 0`（狭義）1 点で、これは
+  `0 < θ~_μ < 2π` ⇒ `cos θ~_μ < 1` から**無条件に**出る（`Ising2D.gammaFn_thetaTilde_pos`）。
+  章 009 は `γ(θ_μ) ≥ 0` しか持てず単純性を言えない。
+- 半整数運動量では添字集合が `𝓜̌ = {1,…,M}` に確定するため、章 009 の `FermiSetup` が
+  仮定として受け取っていた添字集合（`I`, `hIlow`, `hIhigh`, `hgam`）が `CheckFermiSetup` から消え、
+  `tr(Q̌_ε) = 1`・`tr(V̌')` の前因子 `2^{M-m}` の消滅が従う。
+
+未形式化: 章 015 の `anticommutator_of_check_psi` と章 016 の `V_plus_eq_c_check_Vprime` は
+仮定として受け取っている（並行して形式化中のため）。「対角化可能」の
+`DirectSum.IsInternal` 形は章 009 と同じ理由で未形式化（固有値と重複度そのものは形式化済み）。
+
+記録: `lean/docs/ch017-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
+`docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md`（本文への指摘 3 件）。
+
+なお章 015 側にも `Ising2D.one_lt_gamma1R_thetaTilde` があり名前が衝突したため、
+章 017 側は `one_lt_gamma1R_thetaTilde_checkIndex` へ改名した（仮定が異なる別定理:
+章 015 版は双対関係 `hdual` を要求し全 `μ` で成立、章 017 版は `hdual` 不要で `μ ∈ 𝓜̌` に限る）。
+
+## 完了（2026-07-27）: **章 015 の Lean 形式化**（半整数運動量における `A(θ~)` の対角化）
+
+`structured-latex/content/015_A_theta_tilde_diagonalization.ts`（9 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part015/`、抽象版 `lean/Ising2D/Abstract/` の
+`OddModePhase.lean` / `NegConjPair.lean` / `TwoByTwoSkew.lean` / `GammaDetIdentity.lean` /
+`ArcoshExp.lean`。`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**9 主張すべて形式化済み。人手証明の誤り・穴は見つからなかった。**
+
+到達点（本章の最大の価値）: **`Ising2D.gamma2_thetaTilde_ne_zero`（`γ_2(θ~_μ) ≠ 0`）を無条件で証明**した。
+これにより整数運動量にあった臨界点の例外処理（`μ = ±M` の除外）が偶セクターでは不要になることが
+機械的に確定し、`γ_1(θ~_μ) > 1`（狭義）→ `γ(θ~_μ) > 0` → `λ_+ > 1 > λ_- > 0`（固有値は必ず分離）
+まで一本道で閉じた（`Ising2D.one_lt_gamma1R_thetaTilde` / `gammaTilde_pos` / `lambda_separation`）。
+
+`A(θ)` は `θ ∈ ℝ` の主張なので、固有ベクトル・対角化・行列式は
+008 章の既存定理（`AMat_mulVec_eigen` / `AMat_mul_Pmat` / `det_AMat_eq_one`）に
+`θ := θ~_μ` を代入するだけで得られ、再証明していない。
+
+抽象版で判明した本質:
+- 例外が消える理由は **`M θ~_μ = (2μ-1)π` が `π` の奇数倍**という 1 点に還元される
+  （整数運動量は `2μ·π` で偶数倍）。
+- `relation_of_gamma_2_theta_tilde` の (1)〜(5) に効いているのは `w = -conj z` の 1 本だけ。
+  人手証明の `arg^{[0,2π)}` 分岐つき複素平方根は、「2 乗が何か」だけを述べれば完全に消える。
+- 固有値・対角化に効いているのは「対角成分が等しい `!![g,a;-b,g]` の形」と
+  「`s^2 = -(ab)` の `s` が取れること」だけで、**係数は任意の可換環でよい**。
+- `det A = 1` は可換環の多項式恒等式（4 本の関係式だけ）。008 章と同じく双対関係
+  `c_2 s_2^* = c_2^*` が必須で、`hdual` として明示（数学的に必要な仮定であり形式化の穴ではない）。
+
+記録: `lean/docs/ch015-formalization.md`（定理一覧・2 本立て対応表・形式化の形が人手証明と異なる 2 点）。
+なお `gamma_2_theta_tilde_nonzero` は本文が `μ ∈ 𝓜̌` に限って述べているが、
+Lean の証明は `μ ∈ ℤ` 全体で通る（仮定が必要以上に強いだけで、誤りではない）。
+
 ## 完了（2026-07-27）: **章 019 の Lean 形式化**（最大固有値が偶セクターから来ることの確定）
 
 `structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）を Lean 4 で形式化した

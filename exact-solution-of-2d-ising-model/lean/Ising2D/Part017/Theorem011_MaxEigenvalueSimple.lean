@@ -54,7 +54,7 @@ theorem cos_thetaTilde_lt_one (hM : M ≠ 0) {μ : ℤ} (hμ : CheckIndex M μ) 
     linarith
 
 /-- **章 015 `gamma1_gt_1_theta_tilde`**: `γ_1(θ~_μ) > 1`（`μ ∈ 𝓜̌`）。 -/
-theorem one_lt_gamma1R_thetaTilde (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}
+theorem one_lt_gamma1R_thetaTilde_checkIndex (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}
     (hμ : CheckIndex M μ) : 1 < gamma1R P.const (thetaTilde M μ) := by
   have hcos := cos_thetaTilde_lt_one hM hμ
   have hsinh1 : 0 < Real.sinh (2 * P.K1) := by
@@ -76,7 +76,7 @@ theorem one_lt_gamma1R_thetaTilde (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}
 章 009 の `γ(θ_μ) ≥ 0` との違いがここにあり、単純性の根拠である。 -/
 theorem gammaFn_thetaTilde_pos (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}
     (hμ : CheckIndex M μ) : 0 < gammaFn P (thetaTilde M μ) :=
-  Real.arcosh_pos (one_lt_gamma1R_thetaTilde P hM hμ)
+  Real.arcosh_pos (one_lt_gamma1R_thetaTilde_checkIndex P hM hμ)
 
 end GammaPos
 
