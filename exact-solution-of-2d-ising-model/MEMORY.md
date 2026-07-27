@@ -1,5 +1,25 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 010 の Lean 形式化**（分配関数 → Pauli 表示 → 偶奇セクター分解）
+
+`structured-latex/content/010_transfer_matrix_bridge.ts` の主張をすべて Lean 4 で形式化した
+（`lean/Ising2D/Part010/` に具体版、`lean/Ising2D/Abstract/` に抽象版。`sorry` ゼロ）。
+あわせて **001 章の分配関数 `Z(J,J')` の定義と `Z = tr((V_1V_2)^{N_row})`** も新規に形式化した
+（Lean 側にこれまで分配関数そのものが無かった）。
+
+到達点: `Ising2D.partition_function_in_pauli_form` により、
+分配関数から Pauli 表示の転送行列のトレースまでが**無条件に**つながった。
+
+- 一覧・2 本立ての対応・抽象版で判明した本質は `lean/docs/ch010-formalization.md`
+  （`lean/README.md` への統合は未了）。
+- **条件つき**: `sector_replacement_of_V1` (1) と偶奇セクター分解の最終式は、
+  004 章 `V1_restriction_to_eigenspaces`（Lean 未形式化）を仮定 `RestrictsOnSector` として
+  受け取る形。次にこれを形式化すれば無条件になる。
+  詳細は `docs/tasks/2026-07_lean-ch009-013/001_*.md`。
+- 抽象版の新規ファイル: `Abstract/SiteDiagonal.lean`, `Abstract/ExpDiagonal.lean`,
+  `Abstract/Projector.lean`, `Abstract/TracePathSum.lean`
+  （最後のものは「`tr(A^{n+1})` は閉じた道の重みの総和」。mathlib に無いので自前で証明した）。
+
 ## 完了（2026-07-27）: **章 E — 臨界点で比熱が対数発散することを本文で証明**
 
 `structured-latex/content/020_critical_point.ts`（14 ブロック）で、018 章の
