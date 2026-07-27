@@ -149,6 +149,47 @@
 | `Ising2D.second_derivative_log_divergence` | **`\|G''(κ) - (1/2π)log(1/\|κ\|)\| ≤ 6/5`（`0 < \|κ\| ≤ 1/2`）** | **主張全体** |
 | `Ising2D.Gsecond_ge` | **`G''(κ) ≥ (1/2π)log(1/\|κ\|) - 6/5 → +∞`（`κ → 0`）** | 主張の帰結 |
 
+### 1.9 `Theorem012_SpecificHeatLogDivergence.lean`（ラベル `specific_heat_log_divergence`）
+
+**章 020 の到達点。** 章 012・018 の自由エネルギー（極限で与えられる）と本章の `G ∘ κ` を
+結ぶ橋渡しを含む。
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.gammaFn_isoParam_eq_gammaK` | **橋渡しの核**: 等方な場合 `γ_P(θ) = γ(θ, κ(K))`（`gammaFn (isoParam K hK) θ = gammaK θ (kappaK K)`）。`gammaFn_isoParam` を展開すると両辺は**定義的に等しい**（`rfl`） | Step 1 |
+| `Ising2D.integral_gammaFn_isoParam` | **橋渡し**: `(1/4π)∫_0^{2π} γ_P dθ = G(κ(K))` | Step 1 |
+| `Ising2D.fFun` | **`f(K) := (1/2)log(2 sinh 2K) + G(κ(K))`** | 主張の設定 |
+| `Ising2D.onsager_free_energy_isoParam` | **橋渡し（章 012 へ）**: `(1/M)log Λ^{(δ)}_M → f(K)` | Step 1 |
+| `Ising2D.onsager_exact_solution_isoParam` | **橋渡し（章 018 へ）**: Onsager の厳密解の自由エネルギーは等方な場合ちょうど `f(K)`。仮定は `onsager_exact_solution` と同じ 3 つ（`hc`, `hZ1`, `hZ2`）だけで、**追加の仮定は無い** | Step 1 |
+| `Ising2D.fFirst` / `Ising2D.fSecond` | `f'`, `f''` の式 | Step 2, 3 |
+| `Ising2D.hasDerivAt_logTerm` / `hasDerivAt_logTermDeriv` | `((1/2)log(2 sinh 2K))' = cosh 2K/sinh 2K`、`(cosh 2K/sinh 2K)' = -2/sinh²2K` | Step 2 |
+| `Ising2D.hasDerivAt_fFun` / `hasDerivAt_fFirst` | 合成関数の 1・2 階微分（`f'' = G''κ'² + G'κ''`） | Step 3 |
+| `Ising2D.eventually_hasDerivAt_fFun` / `hasDerivAt_deriv_fFun` / `deriv_deriv_fFun` | `K ≠ K_c` の近傍で `deriv f = fFirst` となることを経由して、**`deriv (deriv fFun) K = fSecond K`** | Step 3 |
+| `Ising2D.abs_logTerm_second_le` | **Step 2**: `\|((1/2)log(2 sinh 2K))''\| ≤ 3.74`（原文 `3.70`） | Step 2 |
+| `Ising2D.abs_Gfirst_mul_kappaSecond_le` | **Step 3**: `\|G'κ''\| ≤ 4.65`（原文 `4.60`） | Step 3 |
+| `Ising2D.abs_Gsecond_le` | `\|G''(κ)\| ≤ (1/2π)log(1/\|κ\|) + 6/5` | Step 4 の下準備 |
+| `Ising2D.abs_kappaDerivSq_sub_mul_Gsecond_le` | **Step 4**: `\|(κ'²-16)G''\| ≤ 15.75`（原文 `15.44`） | Step 4 |
+| `Ising2D.abs_sixteen_Gsecond_sub_le` | **Step 5**: `\|16G'' - (8/π)log(1/\|κ\|)\| ≤ 19.2` | Step 5 |
+| `Ising2D.abs_fSecond_sub_le` | **Step 6**: `\|f''(K) - (8/π)log(1/\|κ(K)\|)\| ≤ 45` | Step 6 |
+| `Ising2D.specific_heat_log_divergence` | **主張全体**: `K ∈ D`, `K ≠ K_c` で `f` は 2 回微分可能かつ **`\|d²f/dK² - (8/π)log(1/\|κ(K)\|)\| ≤ 45`** | **主張全体** |
+| `Ising2D.fSecond_ge` | 帰結: `d²f/dK² ≥ (8/π)log(1/\|κ\|) - 45` | 主張の帰結 |
+| `Ising2D.log_474_le` / `abs_log_kappa_sub_log_dist_le` | **Step 7**: `log 4.74 ≤ 1.5636`、`\|log(1/\|κ\|) - log(1/\|K-K_c\|)\| ≤ 1.5636` | Step 7 |
+| `Ising2D.specific_heat_log_divergence_dist` | **Step 7**: `\|d²f/dK² - (8/π)log(1/\|K-K_c\|)\| ≤ 49` | Step 7 |
+| `Ising2D.tendsto_log_inv_dist_atTop` | `K → K_c` で `log(1/\|K-K_c\|) → +∞` | Step 8 |
+| `Ising2D.specific_heat_ratio_tendsto` | **Step 8**: `lim_{K→K_c} (d²f/dK²)/log(1/\|K-K_c\|) = 8/π` | Step 8 |
+
+**`specific_heat_log_divergence` が仮定しているもの**: `K ∈ Dnbhd`（`= [K_c-1/10, K_c+1/10]`）
+と `K ≠ K_c` の 2 つだけで、これは原文の `0 < |K-K_c| ≤ 1/10` そのものである。
+**橋渡しに追加の仮定は要らなかった**——`gammaFn (isoParam K hK) θ` と `gammaK θ (kappaK K)` は
+`isotropic_A_equals_one`（`gammaFn_isoParam`）を展開すると定義的に等しく、
+章 012 の `onsager_free_energy_expression` の極限値の積分項がそのまま `Gfun (kappaK K)` になる。
+
+`d²f/dK²` は `deriv (deriv fFun)`（mathlib の `deriv` の 2 回適用）で表した。
+`deriv fFun` は `K_c` を除いた近傍でのみ `fFirst` に一致する（`κ(K) = 0` すなわち `K = K_c` では
+`G` の微分を与える `hasDerivAt_Gfun` が使えない）ので、
+`eventually_hasDerivAt_fFun` で「近傍で一致する」ことを示してから
+`HasDerivAt.congr_of_eventuallyEq` で 2 階微分へ渡している。
+
 ## 2. 具体版と抽象版の 2 本立ての対応
 
 | 抽象版（`lean/Ising2D/Abstract/`） | 対応する具体版 | 抽象版で判明した本質 |
@@ -174,7 +215,6 @@
 
 | 原文のブロック（ラベル） | 内容 | 形式化しなかった理由 |
 | --- | --- | --- |
-| `critical_012_theorem_specific_heat_log_divergence`（`specific_heat_log_divergence`） | **`\|d²f/dK² - (8/π)log(1/\|κ(K)\|)\| ≤ 45`** | **未形式化。** これは章 020 の到達点であり、原理的な障害があるわけではない。障害は依存関係にある: 本主張は `f(K) = log 2 + G(κ(K))` を **`K` について 2 回微分**する（合成関数の 2 階微分 `d²f/dK² = G''·κ'² + G'·κ''`）ため、章 012 の `onsager_free_energy_expression` が与える `f` と、本章の `Gsecond` / `kappaK` を**同一の対象として結びつける橋渡し補題**が要る。章 012 の形式化（`Part012/Theorem005_OnsagerFreeEnergy.lean`）は `f` を `M, N → ∞` の極限として与えており、それが `Gfun ∘ kappaK` と一致することはまだ形式化されていない。部品（`Gsecond_ge`, `abs_Gfirst_le`, `kappaDeriv_bounds`, `abs_kappaSecond_le`, `abs_kappaDerivSq_sub_le`）はすべて本章で揃っているので、残るのはこの接続だけである。 |
 | `critical_013_remark_physical_specific_heat`（`remark_physical_specific_heat`） | 物理的な比熱 `C = k_B K² d²f/dK²` との対応 | **形式化の対象外。** 数学的主張ではなく、無次元量と物理量の辞書（記号の読み替え）を述べる注記である。 |
 | `critical_000_remark_escape_to_real_analysis_chapter_E`（`remark_real_analysis_escape_chapter_E`） | (R3)〜(R6) の宣言 | **形式化の対象外（ただし全項目を mathlib へ対応づけ済み）。** これは「この章でどこまで実数解析へ脱出するか」を宣言するメタな注記であり、定理ではない。対応表は §0 に、(R5) の導出は `Abstract/DiffUnderIntegral.lean` にある。 |
 
@@ -195,6 +235,20 @@
 | `\|2πG'' - log(1/κ)\|` の上界 | （原文は途中で明示せず） | `6.9` |
 
 **結論の定数 `6/5` は原文のまま成立する**（`6.9/(2π) ≤ 1.10 ≤ 6/5`）。
+
+`specific_heat_log_divergence`（章の到達点）でも同様に各段の定数がわずかに悪くなる。
+
+| Step | 原文 | 本形式化 |
+| --- | --- | --- |
+| Step 2 `\|((1/2)log(2 sinh 2K))''\|` | `3.70` | `3.74` |
+| Step 3 `\|G'κ''\|` | `4.60` | `4.65` |
+| Step 4 `\|(κ'²-16)G''\|` | `15.44` | `15.75` |
+| Step 5 `\|16G'' - (8/π)log(1/\|κ\|)\|` | `19.2` | `19.2` |
+| 合計 | `42.94` | `43.34` |
+| Step 7 `log 4.74`（原文は `log 4.72 ≤ 1.5518`） | `1.5518` | `1.5636` |
+
+**結論の定数 `45` と `49` はいずれも原文のまま成立する**
+（`43.34 ≤ 45`、`45 + (8/π)·1.5636 ≤ 48.99 ≤ 49`）。
 
 また原文 (4) は `\|κ''\|` の上界に「`t ↦ 4cosh t/sinh²t` が `t > 0` で単調減少」を使うが、
 本形式化では `cosh 2K = √(1+sinh²2K)` に直して「`s ↦ 4√(1+s²)/s²` が `s > 0` で単調減少」という
