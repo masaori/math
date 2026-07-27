@@ -750,6 +750,68 @@ targets=(
   Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
+  Ising2D.Abstract.acomm_cre_ann_comp
+  Ising2D.Abstract.two_pow_smul_tau_noncommProd
+  Ising2D.Abstract.const_eq_of_trace_ratio
+  Ising2D.Abstract.sum_weight_lt_of_ne_univ
+  Ising2D.Abstract.sum_weight_le_univ
+  Ising2D.Abstract.sum_weight_empty_le
+  Ising2D.Abstract.eq_proj_of_eigen
+  Ising2D.Abstract.mul_exp_eq_of_mul_eq_smul
+  Ising2D.CheckIdx.card
+  Ising2D.conjIdx_involutive
+  Ising2D.CheckFermiSetup.acomm_cre_ann
+  Ising2D.CheckFermiSetup.cre_sq
+  Ising2D.CheckFermiSetup.ann_sq
+  Ising2D.CheckFermiSetup.ann_mul_cre
+  Ising2D.CheckFermiSetup.nOp_mul_self
+  Ising2D.CheckFermiSetup.commute_cre_nOp
+  Ising2D.CheckFermiSetup.commute_ann_nOp
+  Ising2D.CheckFermiSetup.commute_nOp_nOp
+  Ising2D.CheckFermiSetup.trace_nOpProd
+  Ising2D.CheckFermiSetup.trace_nOp
+  Ising2D.CheckFermiSetup.trace_nOpProd_univ
+  Ising2D.CheckFermiSetup.Qproj_mul_self
+  Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne
+  Ising2D.CheckFermiSetup.sum_Qproj
+  Ising2D.CheckFermiSetup.nOp_mul_Qproj
+  Ising2D.CheckFermiSetup.trace_Qproj
+  Ising2D.CheckFermiSetup.finrank_range_Qproj
+  Ising2D.CheckFermiSetup.sum_Qproj_mulVec
+  Ising2D.CheckFermiSetup.eq_zero_of_sum_eq_zero
+  Ising2D.CheckFermiSetup.Xop_mul_Qproj
+  Ising2D.CheckFermiSetup.Qproj_mul_Xop
+  Ising2D.CheckFermiSetup.Vprime_mul_Qproj
+  Ising2D.CheckFermiSetup.Qproj_mul_Vprime
+  Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
+  Ising2D.CheckFermiSetup.trace_Vprime
+  Ising2D.CheckFermiSetup.trace_Vprime_inv
+  Ising2D.CheckFermiSetup.trace_Vprime_pos
+  Ising2D.VPlus_posDef
+  Ising2D.VPlusInv_posDef
+  Ising2D.trace_VPlus_pos
+  Ising2D.trace_VPlusInv_pos
+  Ising2D.trace_VPlus
+  Ising2D.trace_VPlusInv
+  Ising2D.VPlusInv_eq
+  Ising2D.constant_c_value_even_sector
+  Ising2D.VPlus_mul_Qproj
+  Ising2D.Qproj_mul_VPlus
+  Ising2D.VPlus_mulVec_of_mem_range
+  Ising2D.checkBigLambda_pos
+  Ising2D.checkBigLambda_le_max
+  Ising2D.checkBigLambda_min_le
+  Ising2D.checkBigLambda_lt_max
+  Ising2D.checkBigLambda_max_mul_min
+  Ising2D.cos_thetaTilde_lt_one
+  Ising2D.one_lt_gamma1R_thetaTilde
+  Ising2D.gammaFn_thetaTilde_pos
+  Ising2D.sum_checkIdx
+  Ising2D.tagPoint_half_eq_thetaTilde
+  Ising2D.checkBigLambda_univ_eq_LambdaM
+  Ising2D.checkBigLambda_lt_max_of_gammaFn
+  Ising2D.eq_Qproj_univ_mulVec_of_eigen
+  Ising2D.finrank_range_Qproj_univ
 )
 
 {

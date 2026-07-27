@@ -110,3 +110,15 @@ import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
 import Ising2D.Part019.Claim002_AbsVectorEvenSector
 import Ising2D.Part019.Theorem003_CMinusLeCPlus
 import Ising2D.Part019.Theorem004_CEqualsCPlus
+import Ising2D.Abstract.PairedFermion
+import Ising2D.Abstract.ConstantC
+import Ising2D.Abstract.SimpleEigenvalue
+import Ising2D.Part017.Definition001_CheckNumberOperator
+import Ising2D.Part017.Claim004_TraceCheckNumberOperatorProduct
+import Ising2D.Part017.Claim005_CheckJointEigenspace
+import Ising2D.Part017.Claim006_EigenvaluesCheckVprime
+import Ising2D.Part017.Claim007_TraceCheckVprime
+import Ising2D.Part017.Claim008_VPlusPositiveDefinite
+import Ising2D.Part017.Claim009_ConstantCEvenSector
+import Ising2D.Part017.Theorem010_EigenvaluesVPlus
+import Ising2D.Part017.Theorem011_MaxEigenvalueSimple
