@@ -1,5 +1,41 @@
 # MEMORY
 
+## 完了（2026-07-27）: **paper-plan 002 を論文 001 として書き上げた（4 ゴールすべて達成）**
+
+依頼者の承認（2026-07-26）を受け、`outputs/papers/001_R_Lambda_duality/` へ昇格し論文を執筆した。
+**承認に伴い「Lean 形式検証は含めない」という方針は撤回**され、Lean を構成要素に含めた。
+
+- **(1) 昇格と執筆**: 昇格手順どおり実施し、承認日・範囲・方針変更を 002 冒頭の「昇格の記録」に残した。
+  本文は `structured-latex/content/001_intro.ts` 〜 `007_asymmetry_scope.ts` の 7 章。
+  **再框であることを本文冒頭と第 8 章で明示**し、**残る未解決点 3 つを中核命題 D の限界として明記**した。
+  新規性はどの主張についても主張していない。
+- **(2) 構造化テキストへの移行**: Ising 側の TypeScript 実装を土台に導入。**共有ライブラリには切り出さず複製**
+  （別セッション作業中の Ising 側を壊さないため。判断根拠は `docs/structured-latex-decision.md`）。
+  本プロジェクト固有として **`habitat` / `realEscape` / `verification` / `lean` を型と実行時で強制**。
+  可算な住処に `realEscape` を書くと型エラー、非可算で書かないと型エラー、可算宣言のブロックに ℝ/ℂ が
+  現れると実行時検証が落ちる。**執筆中この検査が実際に 2 件の不整合を検出した。**
+  Typst は `_old/typst/` へ退避済み（`main.typ` 17 行に定理環境 0 件、`parts/` は空）。
+- **(3) 検証との紐づけ**: `sagemath/tools/verify-check-linkage.ts` を新規作成。
+  `verification` の実在・規約適合、孤立した検証の検出、`lean` 定理名の実在を機械検証する。
+  **27 件中 20 件を論文の主張へ紐づけ**、残り 7 件は別企画（paper-plan 001）や T2 トラックの材料なので
+  無理に紐づけず理由を `outputs/papers/001_R_Lambda_duality/computations/README.md` に記録した。
+  **このツールが実際に、私が書いた仮の Lean 定理名 4 件が実物と食い違っていることを検出した**（修正済み）。
+- **(4) Lean 形式検証**: `integrable-lattice/lean/`（mathlib4 v4.32.1、Ising 側と同じ固定）。
+  **命題 A・L・V を完了、命題 C は部分的（代数的核まで）**、命題 B・N・T・W は未着手。
+  **自分でビルドと `check-no-sorry.sh` を実行して確認**: 8661 jobs ビルド成功、
+  全 22 定理が `[propext, Classical.choice, Quot.sound]` のみに依存（**sorryAx 依存 0**）。
+  未着手の理由は一次情報で特定済み: **mathlib に Newton 多角形も Kirchhoff の matrix-tree 定理も無い**
+  （私自身の grep でも `newtonPolygon` / `Kirchhoff` / `matrixTree` / `numSpanningTrees` すべて 0 ファイルを確認）。
+  Weierstrass 準備定理は**ある**ので、命題 W の障害は準備定理ではなく岩澤型漸近と matrix-tree の側である。
+
+### 事故と是正（2026-07-26）
+
+cycle 15 の commit `4e15577` で、編集スクリプトが `index()` による splice を使い、探索文字列が
+ヘッダの参照文にも一致したため **002 の §1〜§8 を消したまま commit・push していた**（294 行 → 51 行）。
+直前の正常版から復元し、出現回数を検査する置換で再適用した。再発防止策は
+`docs/tasks/auto-loop-state.md` の逸脱ログに記録。**編集後の成果物を確認せずコミットしたのが原因。**
+
+
 ## 完了（2026-07-27）: 構造化テキストに最終成果物の生成器（LaTeX/PDF）を足した
 
 **論文 001 が content から PDF として出るようになった（10 ページ）。** 本文は担当セッションの執筆物で、

@@ -27,7 +27,13 @@ export default defineBlocks([
     labels: ["paper_prop_A"],
     habitat: "Z",
     verification: ["sagemath/check/cycle3_T1_period_bound", "sagemath/check/D-U2_padic_law"],
-    lean: ["IntegrableLattice.PropA.eventually_periodic"],
+    lean: [
+      "IntegrableLattice.exists_eventually_periodic_pow",
+      "IntegrableLattice.exists_eventually_periodic_matrixPow",
+      "IntegrableLattice.exists_eventually_periodic_trace",
+      "IntegrableLattice.exists_eventually_periodic_truncVal",
+      "IntegrableLattice.exists_eventually_periodic_min_padicValInt",
+    ],
     statement: [
       paragraph([
         math(String.raw`T\in M_d(\mathbb{Z})`),
@@ -141,6 +147,14 @@ export default defineBlocks([
     labels: ["paper_prop_C"],
     habitat: "Z",
     verification: ["sagemath/check/cycle3_T3_period"],
+    // 形式化は**部分的**。代数的核（U ≡ I mod p ⇒ U^{p^{k-1}} = I）までを Lean で証明した。
+    // π(p,k) を最終周期の最小値として定義して結論する段は未整備（lean/README.md の表を参照）。
+    lean: [
+      "IntegrableLattice.dvd_one_add_pow_prime_sub_one",
+      "IntegrableLattice.dvd_pow_prime_pow_sub_one",
+      "IntegrableLattice.pow_prime_pow_eq_one_of_eq_one_add",
+      "IntegrableLattice.matrix_pow_prime_pow_eq_one",
+    ],
     statement: [
       paragraph([
         math(String.raw`\pi(p,k)\ \bigm|\ p^{k-1}\pi(p,1)`),
@@ -230,8 +244,11 @@ export default defineBlocks([
     habitat: "Z",
     verification: ["sagemath/check/cycle7_T1_lte"],
     lean: [
-      "IntegrableLattice.PropL.padicValNat_pow_sub_one_odd",
-      "IntegrableLattice.PropL.padicValNat_pow_sub_one_two",
+      "IntegrableLattice.padicValNat_pow_sub_one_of_dvd",
+      "IntegrableLattice.padicValNat_pow_sub_one_of_not_dvd_order",
+      "IntegrableLattice.padicValNat_pow_sub_one_odd",
+      "IntegrableLattice.padicValNat_two_pow_sub_one_odd_exp",
+      "IntegrableLattice.padicValNat_two_pow_sub_one_even_exp",
     ],
     statement: [
       paragraph([

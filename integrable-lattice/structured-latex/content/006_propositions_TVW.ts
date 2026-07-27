@@ -28,7 +28,14 @@ export default defineBlocks([
     labels: ["paper_prop_V", "paper_lemma_V0"],
     habitat: "Z",
     verification: ["sagemath/check/cycle14_T1_vp_two_var"],
-    lean: ["IntegrableLattice.PropV.resultant_congr", "IntegrableLattice.PropV.criterion"],
+    lean: [
+      "IntegrableLattice.X_pow_char_pow_sub_one",
+      "IntegrableLattice.resultant_X_pow_char_pow_sub_one",
+      "IntegrableLattice.aOne_cast_zmod",
+      "IntegrableLattice.dvd_aOne_iff",
+      "IntegrableLattice.aTwo_cast_zmod",
+      "IntegrableLattice.dvd_aTwo_iff",
+    ],
     statement: [
       paragraph([
         math(String.raw`P\in\mathbb{Z}[z_1^{\pm},\dots,z_d^{\pm}]`),
