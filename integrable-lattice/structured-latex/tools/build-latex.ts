@@ -298,7 +298,9 @@ function renderHeading(block: ConvertedBlock & { kind: "heading" }): string {
 function renderHabitat(block: TheoremLikeBlock): string {
   const habitat = HABITAT_LABELS[block.habitat];
   if (block.realEscape === undefined) {
-    return `\\par\\smallskip\\noindent{\\small［住処: ${habitat}（可算。$\\mathbb{R}$ を使わない）］}`;
+    // `none`（数量を扱わないブロック）に「可算」と付けると意味が通らない。
+    const qualifier = block.habitat === "none" ? "" : "（可算。$\\mathbb{R}$ を使わない）";
+    return `\\par\\smallskip\\noindent{\\small［住処: ${habitat}${qualifier}］}`;
   }
   return (
     `\\par\\smallskip\\noindent\\fbox{\\parbox{\\dimexpr\\linewidth-2\\fboxsep-2\\fboxrule}{%

@@ -24,7 +24,7 @@ export default defineBlocks([
     kind: "theorem",
     sourcePath: "outputs/paper-plans/002_R_Lambda_duality.md",
     sourceOrdinal: 2,
-    title: { tex: String.raw`\text{命題 V（} \Lambda \text{ 側が非自明になる条件）}` },
+    title: { tex: String.raw`\text{命題 V（}\Lambda\ \text{側が非自明になる条件）}` },
     labels: ["prop_V_nontriviality"],
     habitat: "Z",
     verification: ["sagemath/check/cycle14_T1_vp_two_var"],
@@ -204,14 +204,14 @@ export default defineBlocks([
     kind: "remark",
     sourcePath: "outputs/paper-plans/002_R_Lambda_duality.md",
     sourceOrdinal: 5,
-    title: { tex: String.raw`\mathbb{R} \text{ 脱出はどこか（隔離の宣言）}` },
+    title: { tex: String.raw`\mathbb{R}\ \text{脱出はどこか（隔離の宣言）}` },
     labels: ["remark_real_escape_isolation"],
     habitat: "mixed",
     realEscape:
       "本稿で実数を要するのは、周期点数の増大率が Mahler 測度へ収束するという " +
       "(∞ 素点) の主張、すなわち L → ∞ の極限ただ一点である。" +
       "この極限は非可算な ℝ の順序完備性と収束概念に依存しており、可算側へは移せない。" +
-      "有限 L の主張（命題 A・B・C・N・L・T・V・W）はいずれも ℤ・Λ・ℚ̄ の中で閉じ、実数を使わない。",
+      "有限 L の主張（命題 A・B・C・N・L・T）はいずれも ℤ・Λ・ℚ̄ の中で閉じ、実数を使わない。",
     verification: ["sagemath/check/cycle9_T1_spanning_tree"],
     statement: [
       paragraph([

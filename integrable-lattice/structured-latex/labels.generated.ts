@@ -20,8 +20,6 @@ export const ALL_LABELS = [
   "prop_V_nontriviality",
   "prop_W_graph_tower_closed_form",
   "remark_real_escape_isolation",
-  "scaffold_claim_placeholder",
-  "scaffold_def_placeholder",
 ] as const;
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

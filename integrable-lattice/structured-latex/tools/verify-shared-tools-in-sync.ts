@@ -95,7 +95,14 @@ let intentionalCount = 0;
 for (const { path: relative, why } of MUST_DIFFER) {
   const here = join(structuredLatexDir, relative);
   const there = join(originDir, relative);
-  if (!existsSync(here) || !existsSync(there)) continue;
+  if (!existsSync(here)) {
+    problems.push(`固有化しているはずの ${relative} がこちらに無い（${why}が失われている）`);
+    continue;
+  }
+  if (!existsSync(there)) {
+    problems.push(`複製元に ${relative} が無い（改名・削除された可能性）`);
+    continue;
+  }
   if (readFileSync(here, "utf8") === readFileSync(there, "utf8")) {
     problems.push(
       `${relative} が複製元と完全一致している（${why}はずが失われている可能性）`,

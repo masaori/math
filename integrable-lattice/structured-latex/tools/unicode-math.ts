@@ -43,12 +43,40 @@ const UNICODE_MATH: Record<string, string> = {
   "§": "\\S{}",
   "–": "--",
   "—": "---",
-  // 結合文字のマクロン（ℚ̄ のような合成）。単体では組めないので上線として扱う。
-  "̄": "",
 };
+
+/**
+ * 合成（基底文字 + 結合文字）で書かれる記号。**単字の置換より先に処理する。**
+ *
+ * `ℚ̄`（U+211A + U+0304）は ℚ とは別の住処（代数的閉包）を表す。結合マクロンを
+ * 単に捨てると **ℚ̄ が ℚ に化けて意味が変わる**（実測でそうなっていた）。
+ */
+const COMBINED_MATH: readonly (readonly [string, string])[] = [
+  ["ℚ\u0304", "$\\overline{\\mathbb{Q}}$"],
+  ["ℝ\u0304", "$\\overline{\\mathbb{R}}$"],
+  ["ℂ\u0304", "$\\overline{\\mathbb{C}}$"],
+  ["𝔽\u0304", "$\\overline{\\mathbb{F}}$"],
+];
 
 const PATTERN = new RegExp(`[${Object.keys(UNICODE_MATH).join("")}]`, "g");
 
+/**
+ * 対応表に無い結合文字。これが残ると PDF から無言で消えるので、**呼び出し側で落とす**ための検出。
+ * 結合文字（U+0300–U+036F）は単体では組めない。
+ */
+const UNHANDLED_COMBINING = /[\u0300-\u036f]/;
+
 export function unicodeMathToLatex(value: string): string {
-  return value.replace(PATTERN, (char) => UNICODE_MATH[char] ?? char);
+  let result = value;
+  for (const [from, to] of COMBINED_MATH) {
+    result = result.replaceAll(from, to);
+  }
+  result = result.replace(PATTERN, (char) => UNICODE_MATH[char] ?? char);
+  if (UNHANDLED_COMBINING.test(result)) {
+    throw new Error(
+      `地の文に対応表の無い結合文字がある（PDF から無言で消える）: ${result.slice(0, 60)}\n` +
+        "  → tools/unicode-math.ts の COMBINED_MATH に追加するか、本文の書き方を変えること",
+    );
+  }
+  return result;
 }
