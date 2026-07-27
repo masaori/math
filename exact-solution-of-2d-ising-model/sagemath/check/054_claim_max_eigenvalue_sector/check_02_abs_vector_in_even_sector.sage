@@ -1,0 +1,66 @@
+# =========================================================================
+# check_02: abs_vector_moves_to_even_sector
+#   本文 019 章の第 2・第 3 段。x ∈ F^{(-)} ∩ R^{2^M}、‖x‖ = 1 に対し
+#   u_k := |x_k| とおくと
+#     (1) εu = u、すなわち u ∈ F^{(+)}
+#     (2) ‖u‖ = ‖x‖ = 1
+#     (3) u^T W u ≥ |x^T W x| ≥ x^T W x        （W の成分がすべて正であることによる）
+#   を確かめる。x は F^{(-)} の正規直交基底の乱数一次結合として作る。
+#   あわせて W の成分がすべて正であること（W_has_positive_entries）も確かめる。
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_02: x ∈ F^{(-)} の絶対値ベクトル u = |x| は F^{(+)} に入る ===")
+
+ok_all = True
+set_random_seed(20260727)
+
+w_even = w_norm = 0
+n_ineq = 0
+n_pos = 0
+n_trial = 0
+worst_gap = None
+for M in SEC_M:
+    O = SpinOps(M)
+    d = O.d
+    E = eps_real(O)
+    Bm = sector_basis(M, -1)
+    for p in SEC_PARAMS:
+        K1 = RDF(p['K1']); K2 = RDF(p['K2'])
+        Wr = W_real(O, K1, K2)
+        # W_has_positive_entries: 成分がすべて正
+        if min(Wr.list()) <= 0:
+            n_pos += 1
+        for _ in range(8):
+            a = vector(RDF, [RDF(random() * 2 - 1) for _ in range(Bm.ncols())])
+            x = Bm * a
+            if x.norm() == 0:
+                continue
+            x = x / x.norm()
+            u = vector(RDF, [abs(x[k]) for k in range(d)])
+            n_trial += 1
+            # (1) εu = u
+            w_even = max(w_even, RDF((E * u - u).norm()))
+            # (2) ノルム保存
+            w_norm = max(w_norm, abs(RDF(u.norm()) - RDF(1)))
+            # (3) u^T W u ≥ |x^T W x| ≥ x^T W x
+            qu = RDF(u * (Wr * u)); qx = RDF(x * (Wr * x))
+            if not (qu >= abs(qx) - 1e-12 and abs(qx) >= qx - 1e-12):
+                n_ineq += 1
+            gap = qu - qx
+            if worst_gap is None or gap < worst_gap:
+                worst_gap = gap
+
+ok_all &= report("(1) εu = u（u ∈ F^{(+)}）", RDF(w_even), TOL)
+ok_all &= report("(2) ‖u‖ = ‖x‖ = 1", RDF(w_norm), TOL)
+print(f"  (3) u^T W u ≥ |x^T W x| ≥ x^T W x の違反件数: {n_ineq} / {n_trial}  ->  "
+      f"{'PASS' if n_ineq == 0 else 'FAIL'}")
+print(f"      最小の余裕 u^T W u − x^T W x = {float(worst_gap):.6g}（非負であること）")
+ok_all &= (n_ineq == 0)
+print(f"  (4) W の成分がすべて正（W_has_positive_entries）の違反件数: {n_pos}  ->  "
+      f"{'PASS' if n_pos == 0 else 'FAIL'}")
+ok_all &= (n_pos == 0)
+
+print("=== check_02: " + ("ALL PASS" if ok_all else "FAIL") + " ===")
