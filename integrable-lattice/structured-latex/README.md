@@ -9,10 +9,43 @@ Typst で新規に証明を書かない（リポジトリ直下 CLAUDE.md「証�
 （`labels.generated.ts` / `document.generated.ts`）が各プロジェクトの `content/` に強く
 結びついており、実質的に共有できるのはスキーマとツールだけだからである（複製の方が安全）。
 
+## 最終成果物の生成（LaTeX / PDF）
+
+`content/` だけを入力に LaTeX を組み、PDF まで作る（`tools/build-latex.ts`）。
+`notes/` は読まない（混入していないことは `tools/verify-no-notes-in-output.ts` が 3 重に検査する）。
+
+```sh
+npm run build:tex   # build/document.tex を生成
+npm run build:pdf   # 生成 → PDF ビルド → ノート混入の検査
+```
+
+PDF 化には tectonic が要る（未導入なら `brew install tectonic`）。日本語は xeCJK ＋ ヒラギノ。
+出力は `build/`（git 管理外）。**住処（`habitat`）と ℝ 脱出（`realEscape`）は PDF にも印字する**
+——「ℝ へ脱出した箇所を必ず明示する」という要求は、データに持つだけでは読者に伝わらないため。
+
+現在の実測: 5 ページ / ブロック 20 件 / 相互参照 9 件すべて解決 / 未解決参照 0 /
+組めない文字 0 / 版面外へ出た行 0。
+
+なお散文中の Unicode 数学記号（ℝ, Λ, ∞ など）は `tools/unicode-math.ts` が LaTeX へ写す。
+欧文フォントに無い字は PDF から**無言で消える**ため（実測で ℝ/ℤ/ℚ/μ が消えた）、
+生成器側で変換している。`content/` のデータは書き換えない。
+
+## この基盤は複製である（共有ライブラリではない）
+
+判断の根拠と、複製が腐らないようにする同期検査は
+[docs/structured-latex-decision.md](../docs/structured-latex-decision.md) に記録した。
+`npm run check` に含まれる `tools/verify-shared-tools-in-sync.ts` が、
+土台 4 ファイルが複製元とバイト一致していることと、固有化した 6 ファイルが
+複製元と一致して**いない**ことを検査する。
+
 ## いま置いてあるのは「足場」であって論文本体ではない
 
 `content/000_scaffold.ts` と `notes/000_scaffold.ts` は、**基盤が動くことを示すための最小の足場**
-であり、数学的な主張の正本ではない。論文本体は `content/001_*.ts` 以降として別途書く。
+であり、数学的な主張の正本ではない。論文本体の移設は `content/001_setup.ts` / `002_lambda_side_finite.ts` /
+`003_towers_and_graphs.ts` として着手済みである（企画書 `outputs/paper-plans/002_R_Lambda_duality.md`
+のうち、確定済みと明記された命題の**主張文**を転記した）。
+何を移し、何を数学的判断のために移していないかは
+[docs/paper-001-migration-status.md](../docs/paper-001-migration-status.md) に記録した。
 ただし `content/` が空になると `tools/generate-index.ts` が「ラベルを 1 件も抽出できない」で
 落ちるので、実ブロックを入れるまでは足場を残しておくこと。
 

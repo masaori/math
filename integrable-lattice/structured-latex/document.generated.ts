@@ -19,11 +19,17 @@ import type {
   NoteIdsOf,
 } from "./schema.ts";
 import blocks_000_scaffold from "./content/000_scaffold.ts";
+import blocks_001_setup from "./content/001_setup.ts";
+import blocks_002_lambda_side_finite from "./content/002_lambda_side_finite.ts";
+import blocks_003_towers_and_graphs from "./content/003_towers_and_graphs.ts";
 import notes_000_scaffold from "./notes/000_scaffold.ts";
 
 /** 文書順（ファイル名昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_000_scaffold,
+  ...typeof blocks_001_setup,
+  ...typeof blocks_002_lambda_side_finite,
+  ...typeof blocks_003_towers_and_graphs,
 ];
 
 /** 全ノート。 */
