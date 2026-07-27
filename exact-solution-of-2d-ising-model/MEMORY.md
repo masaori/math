@@ -1,5 +1,28 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 014 の Lean 形式化**（偶セクターでの `T` の作用）
+
+`structured-latex/content/014_even_sector_T_action.ts`（10 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part014/` の 8 ファイル、抽象版 `lean/Ising2D/Abstract/TVActionSandwich.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: **章の結論 `Ising2D.TVPlus_checkZ_checkY`**
+（`(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`）。
+未形式化の主張は無い。残る仮定は 008 章と同じ 2 つ（`IsingConst` の 5 成分が双曲線関数であること、
+双対関係の帰結 `s_2^* c_2 = c_2^*`）で、いずれも数学的に必要な前提。
+
+抽象版で判明した本質: **008 章（整数運動量）と本章（半整数運動量）は同じ抽象版の別の特殊化**であり、
+違いは `ad X` が `span{z, y}` に及ぼす係数の位相因子だけ。`αβ = s^2` の検証に使うのは
+`e^{-iθ}e^{iθ} = 1` と `i^2 = -1` の 2 つだけで、`θ` が `2πμ/M` か `2π(μ-1/2)/M` かは効いていない。
+`Ising2D.TV_hatZ_hatY_via_sandwich` で 008 章の結論を本章の抽象版から導き直して確認した。
+新規の抽象版は `Abstract.actsBy_sandwich` 1 本だけ（原文が線型性と `calc_of_TxT` の 4 段往復で
+行っている合成は「線型写像の合成 ↔ 行列の積」の 1 点に集約され、ℂ 上の任意の加群で成り立つ）。
+
+人手証明の誤り・穴: **無し**（係数まで原文どおりに形式化できた）。むしろ 008 章で欠けていた
+双対関係の明示と `(V_1^{(±)})^{1/2}` の定義が、本章では補われている。
+
+記録: `lean/docs/ch014-formalization.md`（定理一覧・2 本立て対応表・本質・仮定）。
+
 ## 完了（2026-07-27）: **章 019 の Lean 形式化**（最大固有値が偶セクターから来ることの確定）
 
 `structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）を Lean 4 で形式化した
