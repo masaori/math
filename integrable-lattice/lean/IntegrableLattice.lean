@@ -1,0 +1,15 @@
+/-
+`integrable-lattice` プロジェクトの Lean 4 + mathlib4 による形式検証。
+
+対応する人手証明は `integrable-lattice/outputs/paper-plans/002_R_Lambda_duality.md` §2
+「現時点で厳密に確定している部分命題」の命題 A, B, C, N, L, T, V, W である。
+どの命題がどこまで形式化されているか（および形式化できなかった理由）は
+`integrable-lattice/lean/README.md` の「形式化の現状」表を正本とする。
+
+**新規性は主張しない。** ここで形式化した命題はいずれも既知内容の再框であり、
+Lean 化もその一部である。
+-/
+import IntegrableLattice.PropL
+import IntegrableLattice.PropA
+import IntegrableLattice.PropV
+import IntegrableLattice.PropC

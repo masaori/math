@@ -438,6 +438,32 @@ targets=(
   Ising2D.trace_epsProj_sym_pow
   Ising2D.trace_epsProj_sym_pow_eq_plain
   Ising2D.partition_function_sector_decomposition
+  Ising2D.Abstract.continuous_arcosh_comp
+  Ising2D.Abstract.cosh_sub_le_cosh_mul_cosh_sub
+  Ising2D.Abstract.one_le_cosh_mul_cosh_sub
+  Ising2D.Abstract.abs_integral_sub_riemann_sum_le
+  Ising2D.Abstract.abs_integral_sub_riemann_sum_le_modulus
+  Ising2D.Abstract.tendsto_modulus_atTop
+  Ising2D.Abstract.tendsto_riemann_sum
+  Ising2D.Abstract.abs_log_div_sub_log_le_of_sandwich
+  Ising2D.Abstract.log_rpow_mul_exp
+  Ising2D.Abstract.tendsto_affine
+  Ising2D.gamma1_lower_bound_all_theta
+  Ising2D.gamma1R_ge_cosh_sub
+  Ising2D.one_le_gamma1R
+  Ising2D.gammaFn_nonneg
+  Ising2D.cosh_gammaFn
+  Ising2D.gamma_is_continuous
+  Ising2D.gammaFn_periodic
+  Ising2D.abs_log_Z_sub_log_c_le
+  Ising2D.limit_of_log_Z_in_N_row
+  Ising2D.riemann_sum_to_integral_error
+  Ising2D.riemann_sum_to_integral
+  Ising2D.riemann_sum_to_integral_indep_delta
+  Ising2D.log_LambdaM
+  Ising2D.inv_M_log_LambdaM
+  Ising2D.onsager_free_energy_expression
+  Ising2D.onsager_free_energy_expression_indep_delta
 )
 
 {

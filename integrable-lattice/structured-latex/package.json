@@ -11,7 +11,11 @@
     "validate": "node tools/validate-content.ts",
     "test:types": "node tools/negative-type-test.ts",
     "test:runtime": "node tools/schema-runtime-test.ts",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run test:types && npm run test:runtime"
+    "test:sync": "node tools/verify-shared-tools-in-sync.ts",
+    "build:tex": "node tools/build-latex.ts",
+    "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
+    "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:no-notes && npm run test:types && npm run test:runtime && npm run test:sync"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

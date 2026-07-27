@@ -63,3 +63,12 @@ import Ising2D.Part010.Claim009_EpsilonProjectors
 import Ising2D.Part010.Claim010_EpsilonCommutes
 import Ising2D.Part010.Claim011_SectorReplacement
 import Ising2D.Part010.Claim012_SectorDecomposition
+import Ising2D.Abstract.Arcosh
+import Ising2D.Abstract.CoshLowerBound
+import Ising2D.Abstract.RiemannSum
+import Ising2D.Abstract.LogSqueeze
+import Ising2D.Part012.Claim001_Gamma1LowerBound
+import Ising2D.Part012.Claim002_GammaContinuous
+import Ising2D.Part012.Claim003_LimitInNRow
+import Ising2D.Part012.Theorem004_RiemannSumToIntegral
+import Ising2D.Part012.Theorem005_OnsagerFreeEnergy

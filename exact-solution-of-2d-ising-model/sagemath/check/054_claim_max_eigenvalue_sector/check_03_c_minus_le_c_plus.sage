@@ -1,0 +1,52 @@
+# =========================================================================
+# check_03: c_minus_le_c_plus
+#   本文 019 章の主定理の前半。
+#     (1) c_−(M) ≤ c_+(M)
+#     (2) c_−(M) を達成する単位ベクトル x_− ∈ F^{(-)} ∩ R^{2^M} を取り、
+#         u := |x_−| に対して c_+(M) ≥ u^T W u ≥ c_−(M) が成り立つ
+#         （本文の証明の 2 段の不等式そのもの）
+#     (3) 対照として c_−(M) と c_+(M) の比を記録する
+# =========================================================================
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+print("=== check_03: c_−(M) ≤ c_+(M) ===")
+
+ok_all = True
+n_le = 0
+n_chain = 0
+rows = []
+for M in SEC_M:
+    O = SpinOps(M)
+    Bp = sector_basis(M, +1); Bm = sector_basis(M, -1)
+    for p in SEC_PARAMS:
+        K1 = RDF(p['K1']); K2 = RDF(p['K2'])
+        Wr = W_real(O, K1, K2)
+        cp = rayleigh_sup(Bp.transpose() * Wr * Bp)
+        cm, am = rayleigh_argmax(Bm.transpose() * Wr * Bm)
+        # (1)
+        if not (cm <= cp * (1 + 1e-9)):
+            n_le += 1
+        # (2) 本文の証明の 2 段の不等式
+        x = Bm * am
+        x = x / x.norm()
+        u = vector(RDF, [abs(x[k]) for k in range(O.d)])
+        qu = RDF(u * (Wr * u))
+        if not (cp >= qu * (1 - 1e-9) and qu >= cm * (1 - 1e-9)):
+            n_chain += 1
+        rows.append((M, param_label(p), RDF(cm), RDF(qu), RDF(cp)))
+
+print(f"  (1) c_−(M) ≤ c_+(M) の違反件数: {n_le} / {len(rows)}  ->  "
+      f"{'PASS' if n_le == 0 else 'FAIL'}")
+ok_all &= (n_le == 0)
+print(f"  (2) c_+(M) ≥ u^T W u ≥ c_−(M)（u = |x_−|）の違反件数: {n_chain} / {len(rows)}  ->  "
+      f"{'PASS' if n_chain == 0 else 'FAIL'}")
+ok_all &= (n_chain == 0)
+print("  (3) 各ケースの c_−(M), u^T W u, c_+(M) と比 c_−/c_+")
+for (M, lab, cm, qu, cp) in rows:
+    print(f"      M={M} {lab}:")
+    print(f"        c_−={float(cm):.10g}, u^T W u={float(qu):.10g}, c_+={float(cp):.10g}, "
+          f"c_−/c_+={float(cm/cp):.10g}")
+
+print("=== check_03: " + ("ALL PASS" if ok_all else "FAIL") + " ===")

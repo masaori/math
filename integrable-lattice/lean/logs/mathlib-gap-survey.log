@@ -1,0 +1,21 @@
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== 各キーワードにマッチしたファイル数（0 = mathlib に無い） ===
+newtonPolygon            files=0
+NewtonPolygon            files=0
+WeierstrassPreparation   files=0
+Weierstrass preparation  files=2
+matrixTree               files=0
+matrix-tree              files=0
+Kirchhoff                files=0
+numSpanningTrees         files=0
+Iwasawa mu               files=0
+Iwasawa invariant        files=0
+mu invariant             files=0
+resultant                files=3
+orderOf                  files=99
+/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16:# Weierstrass preparation theorem for power series over a complete local ring
+/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:19:Weierstrass preparation theorem.
+/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:65:- `PowerSeries.exists_isWeierstrassFactorization`: **Weierstrass preparation theorem**
+/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:72:  `PowerSeries.IsWeierstrassFactorization.unique`: `f` and `h` in Weierstrass preparation
+/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:643:## Weierstrass preparation theorem
