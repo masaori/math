@@ -23,6 +23,38 @@
 
 記録: `lean/docs/ch014-formalization.md`（定理一覧・2 本立て対応表・本質・仮定）。
 
+## 完了（2026-07-27）: **章 015 の Lean 形式化**（半整数運動量における `A(θ~)` の対角化）
+
+`structured-latex/content/015_A_theta_tilde_diagonalization.ts`（9 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part015/`、抽象版 `lean/Ising2D/Abstract/` の
+`OddModePhase.lean` / `NegConjPair.lean` / `TwoByTwoSkew.lean` / `GammaDetIdentity.lean` /
+`ArcoshExp.lean`。`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**9 主張すべて形式化済み。人手証明の誤り・穴は見つからなかった。**
+
+到達点（本章の最大の価値）: **`Ising2D.gamma2_thetaTilde_ne_zero`（`γ_2(θ~_μ) ≠ 0`）を無条件で証明**した。
+これにより整数運動量にあった臨界点の例外処理（`μ = ±M` の除外）が偶セクターでは不要になることが
+機械的に確定し、`γ_1(θ~_μ) > 1`（狭義）→ `γ(θ~_μ) > 0` → `λ_+ > 1 > λ_- > 0`（固有値は必ず分離）
+まで一本道で閉じた（`Ising2D.one_lt_gamma1R_thetaTilde` / `gammaTilde_pos` / `lambda_separation`）。
+
+`A(θ)` は `θ ∈ ℝ` の主張なので、固有ベクトル・対角化・行列式は
+008 章の既存定理（`AMat_mulVec_eigen` / `AMat_mul_Pmat` / `det_AMat_eq_one`）に
+`θ := θ~_μ` を代入するだけで得られ、再証明していない。
+
+抽象版で判明した本質:
+- 例外が消える理由は **`M θ~_μ = (2μ-1)π` が `π` の奇数倍**という 1 点に還元される
+  （整数運動量は `2μ·π` で偶数倍）。
+- `relation_of_gamma_2_theta_tilde` の (1)〜(5) に効いているのは `w = -conj z` の 1 本だけ。
+  人手証明の `arg^{[0,2π)}` 分岐つき複素平方根は、「2 乗が何か」だけを述べれば完全に消える。
+- 固有値・対角化に効いているのは「対角成分が等しい `!![g,a;-b,g]` の形」と
+  「`s^2 = -(ab)` の `s` が取れること」だけで、**係数は任意の可換環でよい**。
+- `det A = 1` は可換環の多項式恒等式（4 本の関係式だけ）。008 章と同じく双対関係
+  `c_2 s_2^* = c_2^*` が必須で、`hdual` として明示（数学的に必要な仮定であり形式化の穴ではない）。
+
+記録: `lean/docs/ch015-formalization.md`（定理一覧・2 本立て対応表・形式化の形が人手証明と異なる 2 点）。
+なお `gamma_2_theta_tilde_nonzero` は本文が `μ ∈ 𝓜̌` に限って述べているが、
+Lean の証明は `μ ∈ ℤ` 全体で通る（仮定が必要以上に強いだけで、誤りではない）。
+
 ## 完了（2026-07-27）: **章 019 の Lean 形式化**（最大固有値が偶セクターから来ることの確定）
 
 `structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）を Lean 4 で形式化した
