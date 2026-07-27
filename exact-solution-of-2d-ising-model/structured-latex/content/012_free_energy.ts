@@ -32,8 +32,10 @@ export default defineBlocks([
       paragraph([
         "**この章の ",
         ref("riemann_sum_to_integral"),
-        " が、本証明で唯一、実数解析（Riemann 積分）へ移行する箇所である。**",
-        "そこで外部から持ち込む事実は次の 2 つだけであり、他では使わない。",
+        " が、自由エネルギーの表式（",
+        ref("onsager_exact_solution"),
+        "）を得るまでに実数解析（Riemann 積分）へ移行する唯一の箇所である。**",
+        "そこで外部から持ち込む事実は次の 2 つだけであり、この表式を得るまでの他の箇所では使わない。",
       ]),
       list([
         [
@@ -76,6 +78,12 @@ export default defineBlocks([
         " という**点の個数が増えていく有限和**であり、その極限を閉じた式で書くには",
         "「等間隔の点での値の平均が積分に収束する」という実数解析の事実が要る。",
         "ここだけは有限の代数計算では代用できない。",
+      ]),
+      paragraph([
+        "**表式を得た後の章 E（臨界点と比熱の対数発散）では、得られた積分を微分するために",
+        "外部事実を追加で持ち込む。** 追加分は ",
+        ref("remark_real_analysis_escape_chapter_E"),
+        " に (R3)〜(R6) として列挙してあり、この章の (R1)(R2) とは独立に管理する。",
       ]),
     ],
     conversion: { status: "added" },
@@ -387,7 +395,7 @@ export default defineBlocks([
     labels: ["riemann_sum_to_integral"],
     statement: [
       paragraph([
-        "**本証明で実数解析（Riemann 積分）を使うのはこの主張だけである。**",
+        "**自由エネルギーの表式を得るまでに実数解析（Riemann 積分）を使うのはこの主張だけである。**",
         "用いる外部事実は ",
         ref("remark_real_analysis_escape_point"),
         " の (R1)(R2) に限る。",
