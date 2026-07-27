@@ -1,5 +1,104 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 020 の Lean 形式化**（臨界点と比熱の対数発散）
+
+`structured-latex/content/020_critical_point.ts` の 11 ブロックを Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part020/` の 8 ファイル、抽象版 `lean/Ising2D/Abstract/` の
+`HyperbolicBounds` / `MeanValueTwoSided` / `LogDivergentIntegral` / `DiffUnderIntegral`。
+合計 169 宣言、`sorry` ゼロ）。到達点は
+`Ising2D.second_derivative_log_divergence`（`|G''(κ) - (1/2π)log(1/|κ|)| ≤ 6/5`）。
+
+**この章は本プロジェクトで実数解析へ最も深く踏み込む章である。** 原文が新たに持ち込むと
+宣言している (R3)〜(R6) のうち、**(R5)（積分記号下の微分）だけが mathlib に
+「連続性だけを仮定した形」で存在しない**。優関数版から `Abstract/DiffUnderIntegral.lean` で導いた。
+
+抽象版で判明した本質:
+- 対数発散に **`sin` は効いていない**。分母 `w` について `c₀(aθ) ≤ w ≤ aθ` と
+  `aθ - w ≤ Cθ³` の 2 つの各点評価だけで発散の形が決まる。原文の定数
+  `B = π²/(12c₀(1+c₀))` は抽象版の一般形に `a=1/2, b=π, C=1/48` を入れたものと厳密に一致。
+- `κ(K)` の増分評価に**積分は効いておらず**、凸性＋導関数の両側評価（平均値の定理）で足りる。
+- `cosh/sinh/arsinh` の初等評価で mathlib に無いのは `sinh t ≤ t cosh t` の 1 本だけ。
+
+**原文が外から持ち込むと宣言している初等関数の数値評価（`cosh 0.2 ≤ 1.02007` 等）は
+一切使わず**、`cosh t ≤ (1-t²/2)⁻¹` と `π` の評価だけから導いた。途中の定数はわずかに
+悪くなるが（`κ'∈[3.52,4.74]`、`|κ''|≤9.3` 等）、**結論の `6/5` は原文のまま成立する**。
+
+**未形式化**: `specific_heat_log_divergence`（`critical_012`。原理的な障害ではなく、
+章 012 の `onsager_free_energy_expression` が与える `f` と本章の `Gfun ∘ kappaK` を結ぶ
+**橋渡し補題が未形式化**なのが理由。部品はすべて本章で揃っている）と
+`remark_physical_specific_heat`（物理量との辞書で数学的主張ではない）。
+
+**人手証明に数学的な誤りは見つからなかった。** 記録は
+`lean/docs/ch020-formalization.md` と
+`docs/tasks/2026-07_lean-ch009-013/016_ch020-formalization-findings.md`。
+
+## 完了（2026-07-27）: **章 017 の Lean 形式化**（定数 `c` の決定と `V^{(+)}` の固有値）
+
+`structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part017/`、抽象版 `lean/Ising2D/Abstract/` の
+`PairedFermion.lean` / `ConstantC.lean` / `SimpleEigenvalue.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**11 主張すべて形式化済み。結論を覆す誤りは見つからなかった。**
+
+到達点: **最大固有値 `Λ̌_max = Λ^{(1/2)}_M` の単純性**（`Ising2D.checkBigLambda_univ_eq_LambdaM`,
+`checkBigLambda_lt_max_of_gammaFn`, `eq_Qproj_univ_mulVec_of_eigen`,
+`finrank_range_Qproj_univ`）と **`c = (2 sinh 2K_2)^{M/2}`**
+（`Ising2D.constant_c_value_even_sector`）。
+
+抽象版で判明した本質:
+- **章 009（整数運動量）と章 017（半整数運動量）は同じ抽象版の別の特殊化**で、違いは
+  対をなす添字を与える写像 `σ` だけ（009 は `σ(μ)=-μ`、017 は `σ(μ)=M+1-μ`）。
+  しかも効いているのは **`σ` の単射性だけ**（`Abstract.acomm_cre_ann_comp`）。
+- **`c` の決定に行列もトレースも指数関数も効いていない**。ℂ の 4 つの等式と正値性だけ
+  （`Abstract.const_eq_of_trace_ratio`）。章 009 の `constant_c_value` も同じ補題の特殊化。
+- **単純性 (3) に直和分解 (5) は不要**。`∑_ε Q̌_ε = 1` と左からの固有関係だけで足りる
+  （`Abstract.eq_proj_of_eigen`）。
+- 単純性を可能にしているのは `γ(θ~_μ) > 0`（狭義）1 点で、これは
+  `0 < θ~_μ < 2π` ⇒ `cos θ~_μ < 1` から**無条件に**出る（`Ising2D.gammaFn_thetaTilde_pos`）。
+  章 009 は `γ(θ_μ) ≥ 0` しか持てず単純性を言えない。
+- 半整数運動量では添字集合が `𝓜̌ = {1,…,M}` に確定するため、章 009 の `FermiSetup` が
+  仮定として受け取っていた添字集合（`I`, `hIlow`, `hIhigh`, `hgam`）が `CheckFermiSetup` から消え、
+  `tr(Q̌_ε) = 1`・`tr(V̌')` の前因子 `2^{M-m}` の消滅が従う。
+
+未形式化: 章 015 の `anticommutator_of_check_psi` と章 016 の `V_plus_eq_c_check_Vprime` は
+仮定として受け取っている（並行して形式化中のため）。「対角化可能」の
+`DirectSum.IsInternal` 形は章 009 と同じ理由で未形式化（固有値と重複度そのものは形式化済み）。
+
+記録: `lean/docs/ch017-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
+`docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md`（本文への指摘 3 件）。
+
+なお章 015 側にも `Ising2D.one_lt_gamma1R_thetaTilde` があり名前が衝突したため、
+章 017 側は `one_lt_gamma1R_thetaTilde_checkIndex` へ改名した（仮定が異なる別定理:
+章 015 版は双対関係 `hdual` を要求し全 `μ` で成立、章 017 版は `hdual` 不要で `μ ∈ 𝓜̌` に限る）。
+`V^{(+)}` は章 014 の `Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`）を再利用し、
+章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `Ising2D.VPlus_eq_Vmat` で明示した。
+
+## 完了（2026-07-27）: **章 014 の Lean 形式化**（偶セクターでの `T` の作用）
+
+`structured-latex/content/014_even_sector_T_action.ts`（10 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part014/` の 8 ファイル、抽象版 `lean/Ising2D/Abstract/TVActionSandwich.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: **章の結論 `Ising2D.TVPlus_checkZ_checkY`**
+（`(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`）。
+未形式化の主張は無い。残る仮定は 008 章と同じ 2 つ（`IsingConst` の 5 成分が双曲線関数であること、
+双対関係の帰結 `s_2^* c_2 = c_2^*`）で、いずれも数学的に必要な前提。
+
+抽象版で判明した本質: **008 章（整数運動量）と本章（半整数運動量）は同じ抽象版の別の特殊化**であり、
+違いは `ad X` が `span{z, y}` に及ぼす係数の位相因子だけ。`αβ = s^2` の検証に使うのは
+`e^{-iθ}e^{iθ} = 1` と `i^2 = -1` の 2 つだけで、`θ` が `2πμ/M` か `2π(μ-1/2)/M` かは効いていない。
+`Ising2D.TV_hatZ_hatY_via_sandwich` で 008 章の結論を本章の抽象版から導き直して確認した。
+新規の抽象版は `Abstract.actsBy_sandwich` 1 本だけ（原文が線型性と `calc_of_TxT` の 4 段往復で
+行っている合成は「線型写像の合成 ↔ 行列の積」の 1 点に集約され、ℂ 上の任意の加群で成り立つ）。
+
+人手証明の誤り・穴: **無し**（係数まで原文どおりに形式化できた）。むしろ 008 章で欠けていた
+双対関係の明示と `(V_1^{(±)})^{1/2}` の定義が、本章では補われている。
+
+記録: `lean/docs/ch014-formalization.md`（定理一覧・2 本立て対応表・本質・仮定）、
+`docs/tasks/2026-07_lean-ch009-013/015_ch014-formalization-findings.md`（本文への指摘。
+`μ ∈ 𝓜̌` の仮定が必要以上に強いこと、008 章の既知の 2 つの穴が本章では埋まっていること）。
+
 ## 完了（2026-07-27）: **章 015 の Lean 形式化**（半整数運動量における `A(θ~)` の対角化）
 
 `structured-latex/content/015_A_theta_tilde_diagonalization.ts`（9 主張）を Lean 4 で形式化した

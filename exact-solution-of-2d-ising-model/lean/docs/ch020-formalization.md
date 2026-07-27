@@ -202,5 +202,5 @@
 
 ## 5. 人手証明に見つけた不備
 
-`docs/tasks/2026-07_lean-ch009-013/015_ch020-formalization-findings.md` に一次情報つきで記録した。
+`docs/tasks/2026-07_lean-ch009-013/016_ch020-formalization-findings.md` に一次情報つきで記録した。
 `structured-latex/` の本文は変更していない。
