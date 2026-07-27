@@ -750,6 +750,43 @@ targets=(
   Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
+  Ising2D.Abstract.lie_creAnn_cre
+  Ising2D.Abstract.lie_creAnn_ann
+  Ising2D.Abstract.lie_carHam_cre
+  Ising2D.Abstract.lie_carHam_ann
+  Ising2D.Abstract.exp_conj_of_ad_eigen
+  Ising2D.Abstract.exp_conj_of_lie_eigen
+  Ising2D.gamma1_add_int_mul_two_pi
+  Ising2D.thetaTilde_add_int_mul
+  Ising2D.gamma1_thetaTilde_conj
+  Ising2D.gamma2_thetaTilde_conj
+  Ising2D.gamma2_neg_thetaTilde_conj
+  Ising2D.checkR_sq
+  Ising2D.checkR_conj
+  Ising2D.checkPsiDag_eq
+  Ising2D.checkPsi_eq
+  Ising2D.checkPsi_car
+  Ising2D.acomm_checkPsiDag_checkPsiDag
+  Ising2D.acomm_checkPsiDag_checkPsi
+  Ising2D.acomm_checkPsi_checkPsi
+  Ising2D.AMat_mulVec_checkPsiDag_coeff
+  Ising2D.AMat_mulVec_checkPsi_coeff
+  Ising2D.TVPlus_checkPsiDag_of_action
+  Ising2D.TVPlus_checkPsi_of_action
+  Ising2D.TVPlus_checkPsiDag_psi_of_action
+  Ising2D.checkIdx_rev
+  Ising2D.isUnit_checkVprime
+  Ising2D.matExp_conj_eigen
+  Ising2D.lie_checkX_checkPsiDag
+  Ising2D.lie_checkX_checkPsi
+  Ising2D.TCheckVprime_checkPsiDag
+  Ising2D.TCheckVprime_checkPsi
+  Ising2D.eq_on_checkZY_of_eq_on_checkPsi
+  Ising2D.TVPlus_eq_TCheckVprime_on_checkZY
+  Ising2D.TConj_eq_of_eq_on_checkZY
+  Ising2D.TVPlus_eq_TCheckVprime
+  Ising2D.exists_smul_of_TConj_eq
+  Ising2D.VPlus_eq_smul_checkVprime
 )
 
 {
