@@ -3,7 +3,8 @@
 `exact-solution-of-2d-ising-model` の人手証明を Lean 4 で機械的に検証するためのプロジェクト。
 SageMath による数値検証（`sagemath/`）と併用する。
 
-**人手証明の正本は `structured-latex/content/*.mjs`（構造化TeX、140ブロック）**である。
+**人手証明の正本は `structured-latex/content/*.ts`（構造化TeX）**である
+（`.mjs` は全廃済み。ファイル形式は TypeScript に統一されている）。
 旧 Typst 一式は `_old/typst/` へ参照用に退避されており（更新されない）、
 本 README で `parts/…/*.typ` と書いているのは `_old/typst/parts/…` のことである。
 対応づけは**ラベル**（`labels` フィールド、例 `def_hatZ_hatY`）で辿る。
@@ -121,6 +122,10 @@ EOF
 - **抽象版は Lean の中だけに置く。** 人手証明の本文（`structured-latex/content/`）にも
   参照用ノート（`structured-latex/notes/`）にも持ち込まない。
 - 抽象版は `Ising2D/Abstract/` 以下、名前空間 `Ising2D.Abstract` に置く。
+
+**章 009〜020 の 2 本立ての対応表は、この README ではなく各章のドキュメント
+（`lean/docs/ch0NN-formalization.md`）が正本である**（下記「章 009〜020 の形式化」節を参照）。
+以下の表は章 008 までのものである。
 
 現在 2 本立てになっている主張:
 
@@ -422,6 +427,68 @@ EOF
 | `Ising2D.Y_ne_zero` | `Y_m ≠ 0`（`Y_m^2 = I` より） | 上 2 件の反証に使用 |
 | `Ising2D.lie_H1_hatZ_opp_ne_orig` / `lie_H2_hatZPlus_ne_orig` | **原文 (2), (5) が偽であることの証明** | 同上 |
 
+## 章 009〜020 の形式化（2026-07-27）— 章ごとの正本は `lean/docs/`
+
+**分配関数の定義から Onsager の厳密解までの経路が、Lean 側で通った。**
+結論は `Ising2D.onsager_exact_solution`（`Ising2D/Part018/`）である。
+
+章ごとの詳細——形式化した定理の一覧、具体版と抽象版の対応表、抽象版で判明した本質、
+形式化できなかった主張とその理由——は、**各章のドキュメントが正本**である。
+この README に転記せず、そちらを参照すること。
+
+| 章 | 内容 | Lean | ドキュメント |
+| --- | --- | --- | --- |
+| 009 | 転送行列 `V` の固有値（個数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`） | `Part009/` | [ch009](docs/ch009-formalization.md) |
+| 010 | 橋渡し（分配関数と Pauli 表示の同一視・偶奇セクター分解） | `Part010/` | [ch010](docs/ch010-formalization.md) |
+| 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち） | `Part011/` | [ch011](docs/ch011-formalization.md) |
+| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/` | [ch012](docs/ch012-formalization.md) |
+| 013 | 偶セクターの半整数運動量モード | `Part013/` | [ch013](docs/ch013-formalization.md) |
+| 014 | 偶セクターでの `T` の作用 | `Part014/` | [ch014](docs/ch014-formalization.md) |
+| 015 | `A(θ~)` の対角化 | `Part015/` | [ch015](docs/ch015-formalization.md) |
+| 016 | 偶セクターのフェルミオン（`V^{(+)} = c V̌'`） | `Part016/` | [ch016](docs/ch016-formalization.md) |
+| 017 | 偶セクターの固有値 | `Part017/` | [ch017](docs/ch017-formalization.md) |
+| 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `Part018/` | [ch018](docs/ch018-formalization.md) |
+| 019 | 最大固有値の所在（`c(M) = c_+(M)`、偶セクターへの確定） | `Part019/` | [ch019](docs/ch019-formalization.md) |
+| 020 | 臨界点での比熱の対数発散 | `Part020/` | [ch020](docs/ch020-formalization.md) |
+
+### 2 本立てが出した最大の答え
+
+**整数運動量版（章 004〜009）と半整数運動量版（章 013〜017）は、同じ抽象版の別の特殊化である。**
+
+- `e^{-iθ~}` は 1 の原始 `2M` 乗根 `ξ` であり、半整数運動量とはその**奇数周波数** `ξ^{j(2μ-1)}`、
+  整数運動量とは `ζ = ξ^2` の偶数周波数のことである。本文が「仕組みは 1 つの等式
+  `e^{-iMθ~} = -1` に集約される」と書く等式の正体は `ξ^M = -1` で、その証明は
+  「`(ξ^M)^2 = 1` かつ原始性から `≠ 1`、体だから `-1`」の 3 行である。
+  指数関数も円周率も効いていない（`Abstract/AntiperiodicFourier.lean`）。
+- 対の添字が `μ+ν ≡ 0` から `≡ 1` へずれる理由は `(2μ-1)+(2ν-1) = 2(μ+ν-1)` の `-1` の 1 点だけ。
+- 章 013・014・017 の大半は、章 004〜009 の抽象版をそのまま特殊化して得られた
+  （逆離散 Fourier 変換だけは新設が必要だったが、骨格は同一）。
+
+### 半整数運動量で消える例外処理
+
+**半整数運動量では `γ_2(θ~_μ) ≠ 0` が常に成り立つ**（`Ising2D.gamma2_thetaTilde_ne_zero`、章 015）。
+`sin θ~_μ = 0` となるのは `θ~_μ = π`（`M` 奇数）だけで、そのとき `-c_1 = s_1 c_2 > 0` で矛盾する。
+したがって整数運動量にあった臨界点の例外処理（`μ = M` の除外、`m = M-1`）は偶セクターでは不要である。
+さらに、章 008 で問題になった**平方根の分枝の一致**（原文の穴）も、半整数運動量では係数が
+非負実数 `|γ_2(θ~_μ)|` になるため**生じない**（`lean/docs/ch016-formalization.md`）。
+
+### 実数解析へ移行した箇所（README 2 節の要求）
+
+- 章 012 の `riemann_sum_to_integral` ただ 1 つで、外部から持ち込むのは Heine–Cantor と
+  連続関数の Riemann 可積分性の 2 つ（ただし `γ` の連続性を示すのに `cos` / `√` / `log` の
+  連続性も使っており、本文の「2 つだけ」という記述は不正確。`docs/tasks/` に記録済み）。
+- 章 020（臨界点）は別途 (R3)〜(R6) を持ち込む。うち mathlib に原文の形で無いのは
+  **(R5)（連続性だけを仮定した積分記号下の微分）だけ**である。
+
+### 形式化の過程で見つかった人手証明の問題
+
+**本文は一切編集していない**（本文の修正は別セッションの担当）。指摘は
+`docs/tasks/2026-07_lean-ch009-013/` に一次情報つきで記録した（13 件）。
+結論を覆す誤りは見つかっていない。内訳は、添字指定の誤り（章 011 の `trace_power_sandwich`
+Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `sup` が定義できること。
+章 019 が `𝓕^{(-)}` 側を埋めた）、記述の不正確さ（章 012 の「外部事実は 2 つだけ」）、
+過剰な仮定・冗長な手順（章 011・014・017・018・019・020）である。
+
 ## 形式化の過程で見つかった原文の問題
 
 | 箇所 | 問題 | 対応 |
@@ -445,6 +512,12 @@ EOF
 
 ## 今後の方針
 
+- **章 009〜020 は形式化済み（2026-07-27）**。本文の全 20 章のうち、機械証明が無い章は無くなった。
+  結論は `Ising2D.onsager_exact_solution`。残っている作業は各章のドキュメント
+  （`lean/docs/ch0NN-formalization.md`）の「形式化できなかった主張とその理由」節にまとまっている。
+  主なものは、(a) 同時固有空間分解の `DirectSum.IsInternal` 形と「対角化可能」の主張
+  （原文に無い `Submodule` 言語への翻訳が必要。後段が使う固有値と重複度は形式化済み）、
+  (b) `tr(εV^{(+)})` を配置基底で直接計算する枝（章 018。主鎖とは独立な組合せ論的計算）。
 - **次の形式化対象**（人手証明側で自己完結しており依存が浅い順）
   1. ~~`transfer_matrix_012_claim_H1_H2_via_hatZ_hatY`（`<H1_H2_via_hatZ_hatY>`）~~ **形式化済み**
      （`Ising2D/Part004/Claim011_H1H2ViaHat.lean`）
@@ -474,7 +547,19 @@ EOF
      現状は再帰形 `xString_succ_eq` まで。順序つき積（`List.prod` / `Finset.noncommProd`）の
      整備が要る
 - **mathlib に無いことが分かっているもの**
-  - `Real.arccosh`（自前定義が必要）
+  - ~~`Real.arccosh`（自前定義が必要）~~ **これは誤りだった（2026-07-27 に訂正）**。
+    現行 mathlib（v4.32.1）には `Real.arcosh`（`arccosh` ではない綴り）が同じ定義式で存在する。
+    章 012 の形式化で確認済み（`Ising2D/Abstract/Arcosh.lean`, `lean/docs/ch012-formalization.md`）。
+  - **等分割リーマン和から積分への収束**（`(1/M)∑ g(t_μ) → (1/(b-a))∫g`）。
+    これは本当に無い（章 012 で grep により確認）。自前に証明した
+    （`Ising2D/Abstract/RiemannSum.lean` の `tendsto_riemann_sum`）。
+    使う外部事実は Heine–Cantor と連続関数の可積分性だけで、いずれも mathlib にある。
+  - **連続性だけを仮定した積分記号下の微分**（章 020 が持ち込む (R5)）。
+    mathlib にあるのは可測性・優関数の仮定つきの形で、原文が宣言する形そのままは無い
+    （`lean/docs/ch020-formalization.md`）。
+  - **トレースが「閉じた道の総和」であること**（`tr(A^{n+1}) = ∑ ...`）。無いので自前に証明した
+    （`Ising2D/Abstract/*`、章 010）。
+  - `sinh t ≤ t cosh t`（章 020 で使う初等評価。他の初等評価はすべて mathlib にある）。
   - 一般の `Ad(exp X) = exp(ad X)`。ただし本プロジェクトは級数展開ルート
     （`parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003, 007`）を持つので回避可能。
     **回避済み**: `Ising2D/Abstract/ExpConjugation.lean` で、リー環を使わず

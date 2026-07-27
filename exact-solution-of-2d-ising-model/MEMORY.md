@@ -1,5 +1,545 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **本文の全 20 章に機械証明が付いた**（章 009〜020 を一気に形式化）
+
+このセッションの前は、Lean の形式化は**章 008 まで**しか無かった。**章 009〜020 の 12 章を
+並列で形式化し、すべて main へ入れた。機械証明が無い章は無くなった。**
+
+**Lean 側に立った結論**:
+
+- `Ising2D.onsager_exact_solution` — Onsager の厳密解（章 018）
+- `Ising2D.onsager_exact_solution_unconditional` — 章 014〜017 由来の仮定をすべて消した版
+- `Ising2D.specific_heat_log_divergence` — 臨界点での比熱の対数発散（章 020）。
+  **仮定は「臨界点の近傍にあること」と `K ≠ K_c` の 2 つだけで、これは人手証明の
+  `0 < |K−K_c| ≤ 1/10` そのもの。追加の前提はゼロ。**
+
+**検証（このセッションの最終状態）**: `lake build` 成功（2984 jobs）、
+`scripts/check-no-sorry.sh` exit 0、**1238 定理**がすべて mathlib 標準の 3 公理
+（`propext` / `Classical.choice` / `Quot.sound`）のみに依存。`sorry` / `admit` はゼロ。
+
+**章ごとの詳細は `lean/docs/ch0NN-formalization.md`（12 ファイル）が正本**。
+`lean/README.md` に索引と要約を統合した。
+
+### 2 本立てが出した最大の答え
+
+**整数運動量版（章 004〜009）と半整数運動量版（章 013〜017）は、同じ抽象版の別の特殊化である。**
+`e^{-iθ~}` は 1 の原始 `2M` 乗根 `ξ` の**奇数周波数**、整数運動量は `ζ = ξ^2` の偶数周波数。
+本文が「仕組みは 1 つの等式 `e^{-iMθ~} = -1` に集約される」と書く等式の正体は `ξ^M = -1` で、
+証明は「`(ξ^M)^2 = 1` かつ原始性から `≠ 1`、体だから `-1`」の 3 行。指数関数も円周率も効いていない。
+対の添字が `μ+ν ≡ 0` から `≡ 1` へずれる理由も `(2μ-1)+(2ν-1) = 2(μ+ν-1)` の `-1` の 1 点だけ。
+
+**半整数運動量では例外処理が消える**: `γ_2(θ~_μ) ≠ 0` が常に成り立つので、整数運動量にあった
+臨界点の例外処理（`μ = M` の除外、`m = M-1`）が不要。章 008 の**平方根の分枝の一致という原文の穴**も、
+半整数運動量では係数が非負実数 `|γ_2(θ~_μ)|` になるため**そもそも生じない**。
+
+### mathlib について確定したこと
+
+- **`lean/README.md` の「mathlib に `Real.arccosh` は無い」は誤りだった**。現行 mathlib（v4.32.1）に
+  `Real.arcosh`（綴りが違う）が同じ定義式で存在する。README を訂正済み。
+- **本当に無かったもの**: 等分割リーマン和から積分への収束（章 012 で自前証明）、
+  連続性だけを仮定した積分記号下の微分（章 020 の (R5)）、トレースが閉じた道の総和であること（章 010）、
+  `sinh t ≤ t cosh t`（章 020）。
+
+### 人手証明に見つけた問題（**本文は一切編集していない**。修正は別セッションの担当）
+
+`docs/tasks/2026-07_lean-ch009-013/` に 14 件を一次情報つきで記録した。
+**結論を覆す誤りは 1 件も見つかっていない。** 内訳:
+
+- **添字指定の誤り**: 章 011 `trace_power_sandwich` Step 2。本文の `(a,b) = (k-1,k+1)` を代入しても
+  目的の不等式にならない（正しくは `k` の偶奇で `((k-1)/2,(k+1)/2)` / `(k/2-1,k/2)`）。結論は正しい。
+- **根拠の欠落**: 章 011 の `c_±(M)` の `sup` が定義できること（セクター内に単位ベクトルが
+  存在することが本文に無い）。章 019 が `𝓕^{(-)}` 側を埋めた。
+- **記述の不正確さ**: 章 012 の「外部から持ち込む実数解析の事実は (R1)(R2) の 2 つだけ」。
+  `γ` の連続性が `cos` / `√` / `log` の連続性も使っている。
+- **過剰な仮定・冗長な手順**: 章 011・014・017・018・019・020 に計 10 件。
+
+### 検証ハーネスの実バグを 1 件修正
+
+`lean/scripts/check-no-sorry.sh` の一時ファイルが固定パスだったため、**複数 worktree で
+同時に実行すると互いに上書きし、別ブランチの定理一覧を検査して誤検出**していた（実際に踏んだ）。
+`mktemp` 化済み。**並列で Lean 作業をするならこの修正が入っていることを確認すること。**
+
+### 残作業（各章ドキュメントの「形式化できなかった主張」節が正本）
+
+1. 同時固有空間分解の `DirectSum.IsInternal` 形と「対角化可能」の主張（章 009・017）。
+   原文に無い `Submodule` 言語への翻訳が必要。後段が使う固有値と重複度は形式化済み。
+2. `tr(εV^{(+)}) > 0`（章 018 の `closing_004`–`006`、配置基底の 1 次元開鎖スピン和）。
+   `onsager_exact_solution_unconditional` が残す仮定 `htr` の正体。
+3. 章 011 (2)（`W P^{(+)} = V^{(+)} P^{(+)}`）→ 章 004 `V1_restriction_to_eigenspaces` の未形式化連鎖。
+   章 010 の `Claim011` も同じものを `hres` として仮定している。**ここを埋めると
+   `onsager_exact_solution_unconditional` の仮定がさらに減る。**
+
+---
+
+## 完了（2026-07-27）: **章 018 の仮定を章 014–017 の形式化で埋めた**（Onsager が無条件版へ）
+
+章 018 は着手時点で章 014–017 が Lean 未形式化だったため、それらの結果を
+`Ising2D.CheckFermi` / `Ising2D.VPlusData` の**仮定**として受け取っていた。
+014・015・016・017 がすべて main に入ったので、**実際にインスタンスを構成して
+仮定を定理に置き換えた**。章 018 以外の `.lean` と `structured-latex/` は編集していない。
+
+追加した 3 ファイル（`lean/Ising2D/Part018/`）:
+
+- `Claim011_CheckFermiFromPart016.lean` — `Ising2D.checkFermiOf`（`CheckFermi` のインスタンス）。
+  `hstar`（`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`）は章 016 に対応定理が無かったので
+  `Ising2D.checkPsiDag_conjTranspose` として**新規に証明**した（章 008 の
+  `gamma2_neg_eq_neg_conj` と章 018 の `checkZ_conjTranspose` だけを使う）。
+- `Claim012_VPlusDataFromPart017.lean` — `Ising2D.vPlusDataOf`（`VPlusData` のインスタンス）。
+  章 017 の `CheckFermiSetup`（添字型 `CheckIdx M`）と章 018 の `CheckFermi`（`Fin M`）の
+  ずれを `Ising2D.finCheckIdxEquiv` で噛み合わせ、`V^{(+)} = (2 sinh 2K_2)^{M/2} V̌'` を得た。
+- `Theorem013_OnsagerUnconditional.lean` — `Ising2D.onsager_exact_solution_unconditional`。
+
+**消せた仮定**: `ψ̌` の CAR、`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`、`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、
+`C = (2 sinh 2K_2)^{M/2} > 0`、`γ(θ̃_μ) > 0`、章 012 の記法との一致（`hC` / `hgam`）。
+つまり**章 014・015・016・017 由来の仮定はゼロになった。**
+
+**残った仮定**（`Ising2D.EvenSectorClosureInput` に束ねた。いずれも 014–017 由来ではない）:
+`M ≠ 0`、双対関係 `c_2 s_2^* = c_2^*`（原文の前提）、`EvenSectorBridge`
+（章 011 (2) `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` の実行列性。004/010 章が未形式化）、
+`tr(εV^{(+)}) > 0`（章 018 の `closing_004`–`006` が未形式化）、`W` の成分正値性と `ε` 可換性
+（章 010 依存）。`hZ1` / `hZ2` は章 011 の `partition_function_sandwich` で章 018 の仮定ではない。
+
+検証: `lake build` 成功、`./scripts/check-no-sorry.sh` exit 0（新規 28 宣言を targets へ追加）。
+記録: `lean/docs/ch018-formalization.md` 6 章、
+`docs/tasks/2026-07_lean-ch009-013/017_ch018-connecting-ch014-017.md`。
+
+## 完了（2026-07-27）: **章 020 の Lean 形式化**（臨界点と比熱の対数発散）
+
+`structured-latex/content/020_critical_point.ts` の 11 ブロックを Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part020/` の 8 ファイル、抽象版 `lean/Ising2D/Abstract/` の
+`HyperbolicBounds` / `MeanValueTwoSided` / `LogDivergentIntegral` / `DiffUnderIntegral`。
+合計 169 宣言、`sorry` ゼロ）。到達点は
+`Ising2D.second_derivative_log_divergence`（`|G''(κ) - (1/2π)log(1/|κ|)| ≤ 6/5`）。
+
+**この章は本プロジェクトで実数解析へ最も深く踏み込む章である。** 原文が新たに持ち込むと
+宣言している (R3)〜(R6) のうち、**(R5)（積分記号下の微分）だけが mathlib に
+「連続性だけを仮定した形」で存在しない**。優関数版から `Abstract/DiffUnderIntegral.lean` で導いた。
+
+抽象版で判明した本質:
+- 対数発散に **`sin` は効いていない**。分母 `w` について `c₀(aθ) ≤ w ≤ aθ` と
+  `aθ - w ≤ Cθ³` の 2 つの各点評価だけで発散の形が決まる。原文の定数
+  `B = π²/(12c₀(1+c₀))` は抽象版の一般形に `a=1/2, b=π, C=1/48` を入れたものと厳密に一致。
+- `κ(K)` の増分評価に**積分は効いておらず**、凸性＋導関数の両側評価（平均値の定理）で足りる。
+- `cosh/sinh/arsinh` の初等評価で mathlib に無いのは `sinh t ≤ t cosh t` の 1 本だけ。
+
+**原文が外から持ち込むと宣言している初等関数の数値評価（`cosh 0.2 ≤ 1.02007` 等）は
+一切使わず**、`cosh t ≤ (1-t²/2)⁻¹` と `π` の評価だけから導いた。途中の定数はわずかに
+悪くなるが（`κ'∈[3.52,4.74]`、`|κ''|≤9.3` 等）、**結論の `6/5` は原文のまま成立する**。
+
+**未形式化**: `remark_physical_specific_heat`（物理量との辞書で数学的主張ではない）のみ。
+
+## 完了（2026-07-27）: **章 020 の到達点 `specific_heat_log_divergence` の Lean 形式化**
+
+`lean/Ising2D/Part020/Theorem012_SpecificHeatLogDivergence.lean`（新規、`sorry` ゼロ）。
+
+**橋渡しには追加の仮定が要らなかった。** 章 012・018 の自由エネルギーの積分項
+`(1/4π)∫_0^{2π} γ_P(θ)dθ` は、等方な場合 `P = isoParam K` に `isotropic_A_equals_one`
+（`Ising2D.gammaFn_isoParam`）を展開すると `Ising2D.gammaK θ (kappaK K)` と**定義的に等しく**、
+そのまま `Ising2D.Gfun (kappaK K)` になる（`Ising2D.gammaFn_isoParam_eq_gammaK` は `rfl`）。
+これで `Ising2D.fFun K := (1/2)log(2 sinh 2K) + Gfun (kappaK K)` が
+Onsager の自由エネルギーそのものであることが言える
+（`Ising2D.onsager_exact_solution_isoParam`。仮定は `onsager_exact_solution` と同じ 3 つだけ）。
+
+到達点 `Ising2D.specific_heat_log_divergence` が仮定するのは **`K ∈ Dnbhd`（`= [K_c-1/10,
+K_c+1/10]`）と `K ≠ K_c` の 2 つだけ**で、原文の `0 < |K-K_c| ≤ 1/10` そのもの。
+`d²f/dK²` は `deriv (deriv fFun)`。`K_c` では `κ = 0` で `G` の微分が使えないため、
+`K ≠ K_c` の近傍で `deriv fFun = fFirst` を示してから 2 階微分へ渡している
+（`Ising2D.eventually_hasDerivAt_fFun` → `hasDerivAt_deriv_fFun`）。
+
+原文 Step 7（`|d²f/dK² - (8/π)log(1/|K-K_c|)| ≤ 49`）と Step 8
+（`lim_{K→K_c} (d²f/dK²)/log(1/|K-K_c|) = 8/π`）も形式化した
+（`specific_heat_log_divergence_dist` / `specific_heat_ratio_tendsto`）。
+ここでも外部の数値は持ち込まず、`log 4.74 ≤ 1.5636` を `log 2` と `log y ≤ y-1` から導いた。
+各段の定数は原文よりわずかに悪い（合計 `43.34`、原文 `42.94`）が、
+**結論の `45` と `49` は原文のまま成立する**。
+
+**人手証明に数学的な誤りは見つからなかった。** 記録は
+`lean/docs/ch020-formalization.md` と
+`docs/tasks/2026-07_lean-ch009-013/016_ch020-formalization-findings.md`。
+## 完了（2026-07-27）: **章 016 の Lean 形式化**（偶セクターのフェルミオンと `V^{(+)} = c V̌'`）
+
+`structured-latex/content/016_even_sector_fermions.ts`（9 主張）を Lean 4 で形式化した。
+新規: 具体版 `lean/Ising2D/Part016/`（9 ファイル）、抽象版
+`lean/Ising2D/Abstract/FermionLadder.lean`・`lean/Ising2D/Abstract/ExpEigenvector.lean`。
+定理一覧・2 本立ての対応・残る仮定は **`lean/docs/ch016-formalization.md`** に記載
+（`lean/README.md` への統合は未了）。`lake build` 成功、`scripts/check-no-sorry.sh` exit 0。
+
+要点:
+
+- **008 章の抽象版 CAR（`Ising2D.Abstract.car_of_coeffs`）は半整数運動量でもそのまま使えた。**
+  対の条件が `μ+ν ≡ 0` から `ν = M+1-μ` へ変わっても、抽象版の仮定
+  （反交換子がスカラー倍の `1`／係数のスカラー恒等式 2 本）は変わらない。
+- **章の結論 `V_plus_eq_c_check_Vprime` まで到達**（`Ising2D.VPlus_eq_smul_checkVprime`）。
+  `T_V_plus_eq_T_check_Vprime` / `V_plus_eq_c_check_Vprime` は `V^{(+)}` の定義に依存せず、
+  「`Ž, Y̌` 上で一致する共役は全体で一致」「共役が一致する可逆元はスカラー倍を除いて等しい」
+  として無条件に証明した。
+- **原文に穴は無かった。** 008 章で問題になった「平方根の分枝の一致」は、半整数運動量では
+  係数が `r_μ = |γ_2(θ̃_μ)|`（非負実数）なので生じない。原文 Step 1 の主張どおりであることを
+  機械的に確認し `docs/tasks/2026-07_lean-ch009-013/010_ch016_no_sqrt_branch_gap.md` に記録した。
+- **015 章由来の仮定はすべて解消済み。** 015 章がマージされたので
+  `Part016/Claim010_UnconditionalViaPart015.lean` で `γ_2(θ̃_μ) ≠ 0`・`λ_± = e^{±γ}`・
+  重み `γ(θ̃_μ)` とその共役不変性を代入し、無条件版
+  `Ising2D.VPlus_eq_smul_checkVprime'` まで到達した。
+  併せて、`ψ̌^†, ψ̌` の定義（原文が「すなわち」で与える明示式を採用）が
+  015 章の `P̌_μ` の列と一致することを `checkPsiDag_eq_checkPmat_col` /
+  `checkPsi_eq_checkPmat_col` で確認した。
+- **014 章由来の仮定 `hT` も解消済み**（014 章もマージされたため）。
+  `Ising2D.TVPlus_actsBy_checkZY` で埋め、完全な無条件版
+  `Ising2D.VPlus_eq_smul_checkVprime_of_dual` に到達した。
+- **残る仮定は双対関係 `c_2 s_2^* = c_2^*` の 1 つだけ**
+  （008 章以来 `det A(θ) = 1` に数学的に必要な前提で、穴ではない）。
+- 付随修正: `lean/scripts/check-no-sorry.sh` が固定パス `/tmp/ising2d_axiom_check.lean` を
+  使っていたため、**複数 worktree で同時実行すると互いに上書きし、別ブランチの定理一覧を
+  検査して誤検出していた**（実際に踏んだ）。`mktemp` へ変更済み。
+
+## 完了（2026-07-27）: **章 018 の Lean 形式化**（偶セクターの完結 = Onsager の厳密解）
+
+`structured-latex/content/018_even_sector_closing.ts`（12 ブロック）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part018/` 8 ファイル、抽象版 `lean/Ising2D/Abstract/ParityFermion.lean`）。
+**本プロジェクトの結論 `Ising2D.onsager_exact_solution` が Lean 側に立った。**
+
+主な定理（人手証明のラベル → Lean）:
+
+- `epsilon_anticommutes_with_check_Z_Y` → `epsilon_anticomm_checkZ` / `checkY` /
+  `epsilon_anticomm_of_isCheckMode` / `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`
+- `epsilon_eigenvalue_on_check_Q` → `CheckFermi.eta` / `eta_insert` / `eta_eq_eta_univ_mul` /
+  `epsilon_eq_parityProd`
+- `trace_of_epsilon_V_plus_via_check_eigenvalues` → `VPlusData.trace_epsilon_mul_V`
+- `check_number_operator_is_hermitian` → `checkZ_conjTranspose` / `CheckFermi.Qproj_conjTranspose`
+- `max_eigenvector_in_even_sector` → `VPlusData.mem_evenSector_of_mem_range_univ`
+- `c_plus_equals_Lambda_half_integer` → `EvenSectorBridge.c_plus_equals_lamMax`
+- **`onsager_exact_solution` → `Ising2D.onsager_exact_solution`**
+
+仮定として受け取ったもの（Lean 側に該当章が無いため。人手証明の穴ではない）:
+
+- 章 016 の `ψ̌` の CAR とエルミート性 → 構造 `Ising2D.CheckFermi`
+- 章 015・017 の `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` → 構造 `Ising2D.VPlusData`
+- 章 011・017 の `W P^{(+)} = V^{(+)} P^{(+)}` → 構造 `Ising2D.EvenSectorBridge`
+- `tr(εV^{(+)}) > 0`（`closing_006`。配置基底での直接計算 `closing_004`/`005` を要する独立の枝）
+
+**人手証明に誤りは見つからなかった。** 抽象版で判明したのは「符号の反転則 (2) に
+`im Q̌_ε` の 1 次元性は要らない（要るのは `η_ε` の存在 (1) だけ）」など、
+仮定が必要以上に強い箇所のみ。`structured-latex/` は編集していない。
+
+Onsager の最終定理は、人手証明の粗い挟み撃ち（Step 2・3）を使わず、章 019 の
+`c_equals_c_plus`（無条件）経由で `c(M) = c_+(M) = Λ^{(1/2)}_M` を直接出している（結論は同じ）。
+
+記録: `lean/docs/ch018-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
+`docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md`。
+検証: `lake build` 成功、`./scripts/check-no-sorry.sh` exit 0（106 定理を追加）。
+## 完了（2026-07-27）: **章 017 の Lean 形式化**（定数 `c` の決定と `V^{(+)}` の固有値）
+
+`structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part017/`、抽象版 `lean/Ising2D/Abstract/` の
+`PairedFermion.lean` / `ConstantC.lean` / `SimpleEigenvalue.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**11 主張すべて形式化済み。結論を覆す誤りは見つからなかった。**
+
+到達点: **最大固有値 `Λ̌_max = Λ^{(1/2)}_M` の単純性**（`Ising2D.checkBigLambda_univ_eq_LambdaM`,
+`checkBigLambda_lt_max_of_gammaFn`, `eq_Qproj_univ_mulVec_of_eigen`,
+`finrank_range_Qproj_univ`）と **`c = (2 sinh 2K_2)^{M/2}`**
+（`Ising2D.constant_c_value_even_sector`）。
+
+抽象版で判明した本質:
+- **章 009（整数運動量）と章 017（半整数運動量）は同じ抽象版の別の特殊化**で、違いは
+  対をなす添字を与える写像 `σ` だけ（009 は `σ(μ)=-μ`、017 は `σ(μ)=M+1-μ`）。
+  しかも効いているのは **`σ` の単射性だけ**（`Abstract.acomm_cre_ann_comp`）。
+- **`c` の決定に行列もトレースも指数関数も効いていない**。ℂ の 4 つの等式と正値性だけ
+  （`Abstract.const_eq_of_trace_ratio`）。章 009 の `constant_c_value` も同じ補題の特殊化。
+- **単純性 (3) に直和分解 (5) は不要**。`∑_ε Q̌_ε = 1` と左からの固有関係だけで足りる
+  （`Abstract.eq_proj_of_eigen`）。
+- 単純性を可能にしているのは `γ(θ~_μ) > 0`（狭義）1 点で、これは
+  `0 < θ~_μ < 2π` ⇒ `cos θ~_μ < 1` から**無条件に**出る（`Ising2D.gammaFn_thetaTilde_pos`）。
+  章 009 は `γ(θ_μ) ≥ 0` しか持てず単純性を言えない。
+- 半整数運動量では添字集合が `𝓜̌ = {1,…,M}` に確定するため、章 009 の `FermiSetup` が
+  仮定として受け取っていた添字集合（`I`, `hIlow`, `hIhigh`, `hgam`）が `CheckFermiSetup` から消え、
+  `tr(Q̌_ε) = 1`・`tr(V̌')` の前因子 `2^{M-m}` の消滅が従う。
+
+未形式化: 章 015 の `anticommutator_of_check_psi` と章 016 の `V_plus_eq_c_check_Vprime` は
+仮定として受け取っている（並行して形式化中のため）。「対角化可能」の
+`DirectSum.IsInternal` 形は章 009 と同じ理由で未形式化（固有値と重複度そのものは形式化済み）。
+
+記録: `lean/docs/ch017-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
+`docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md`（本文への指摘 3 件）。
+
+なお章 015 側にも `Ising2D.one_lt_gamma1R_thetaTilde` があり名前が衝突したため、
+章 017 側は `one_lt_gamma1R_thetaTilde_checkIndex` へ改名した（仮定が異なる別定理:
+章 015 版は双対関係 `hdual` を要求し全 `μ` で成立、章 017 版は `hdual` 不要で `μ ∈ 𝓜̌` に限る）。
+`V^{(+)}` は章 014 の `Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`）を再利用し、
+章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `Ising2D.VPlus_eq_Vmat` で明示した。
+
+## 完了（2026-07-27）: **章 014 の Lean 形式化**（偶セクターでの `T` の作用）
+
+`structured-latex/content/014_even_sector_T_action.ts`（10 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part014/` の 8 ファイル、抽象版 `lean/Ising2D/Abstract/TVActionSandwich.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: **章の結論 `Ising2D.TVPlus_checkZ_checkY`**
+（`(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`）。
+未形式化の主張は無い。残る仮定は 008 章と同じ 2 つ（`IsingConst` の 5 成分が双曲線関数であること、
+双対関係の帰結 `s_2^* c_2 = c_2^*`）で、いずれも数学的に必要な前提。
+
+抽象版で判明した本質: **008 章（整数運動量）と本章（半整数運動量）は同じ抽象版の別の特殊化**であり、
+違いは `ad X` が `span{z, y}` に及ぼす係数の位相因子だけ。`αβ = s^2` の検証に使うのは
+`e^{-iθ}e^{iθ} = 1` と `i^2 = -1` の 2 つだけで、`θ` が `2πμ/M` か `2π(μ-1/2)/M` かは効いていない。
+`Ising2D.TV_hatZ_hatY_via_sandwich` で 008 章の結論を本章の抽象版から導き直して確認した。
+新規の抽象版は `Abstract.actsBy_sandwich` 1 本だけ（原文が線型性と `calc_of_TxT` の 4 段往復で
+行っている合成は「線型写像の合成 ↔ 行列の積」の 1 点に集約され、ℂ 上の任意の加群で成り立つ）。
+
+人手証明の誤り・穴: **無し**（係数まで原文どおりに形式化できた）。むしろ 008 章で欠けていた
+双対関係の明示と `(V_1^{(±)})^{1/2}` の定義が、本章では補われている。
+
+記録: `lean/docs/ch014-formalization.md`（定理一覧・2 本立て対応表・本質・仮定）、
+`docs/tasks/2026-07_lean-ch009-013/015_ch014-formalization-findings.md`（本文への指摘。
+`μ ∈ 𝓜̌` の仮定が必要以上に強いこと、008 章の既知の 2 つの穴が本章では埋まっていること）。
+
+## 完了（2026-07-27）: **章 015 の Lean 形式化**（半整数運動量における `A(θ~)` の対角化）
+
+`structured-latex/content/015_A_theta_tilde_diagonalization.ts`（9 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part015/`、抽象版 `lean/Ising2D/Abstract/` の
+`OddModePhase.lean` / `NegConjPair.lean` / `TwoByTwoSkew.lean` / `GammaDetIdentity.lean` /
+`ArcoshExp.lean`。`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**9 主張すべて形式化済み。人手証明の誤り・穴は見つからなかった。**
+
+到達点（本章の最大の価値）: **`Ising2D.gamma2_thetaTilde_ne_zero`（`γ_2(θ~_μ) ≠ 0`）を無条件で証明**した。
+これにより整数運動量にあった臨界点の例外処理（`μ = ±M` の除外）が偶セクターでは不要になることが
+機械的に確定し、`γ_1(θ~_μ) > 1`（狭義）→ `γ(θ~_μ) > 0` → `λ_+ > 1 > λ_- > 0`（固有値は必ず分離）
+まで一本道で閉じた（`Ising2D.one_lt_gamma1R_thetaTilde` / `gammaTilde_pos` / `lambda_separation`）。
+
+`A(θ)` は `θ ∈ ℝ` の主張なので、固有ベクトル・対角化・行列式は
+008 章の既存定理（`AMat_mulVec_eigen` / `AMat_mul_Pmat` / `det_AMat_eq_one`）に
+`θ := θ~_μ` を代入するだけで得られ、再証明していない。
+
+抽象版で判明した本質:
+- 例外が消える理由は **`M θ~_μ = (2μ-1)π` が `π` の奇数倍**という 1 点に還元される
+  （整数運動量は `2μ·π` で偶数倍）。
+- `relation_of_gamma_2_theta_tilde` の (1)〜(5) に効いているのは `w = -conj z` の 1 本だけ。
+  人手証明の `arg^{[0,2π)}` 分岐つき複素平方根は、「2 乗が何か」だけを述べれば完全に消える。
+- 固有値・対角化に効いているのは「対角成分が等しい `!![g,a;-b,g]` の形」と
+  「`s^2 = -(ab)` の `s` が取れること」だけで、**係数は任意の可換環でよい**。
+- `det A = 1` は可換環の多項式恒等式（4 本の関係式だけ）。008 章と同じく双対関係
+  `c_2 s_2^* = c_2^*` が必須で、`hdual` として明示（数学的に必要な仮定であり形式化の穴ではない）。
+
+記録: `lean/docs/ch015-formalization.md`（定理一覧・2 本立て対応表・形式化の形が人手証明と異なる 2 点）。
+なお `gamma_2_theta_tilde_nonzero` は本文が `μ ∈ 𝓜̌` に限って述べているが、
+Lean の証明は `μ ∈ ℤ` 全体で通る（仮定が必要以上に強いだけで、誤りではない）。
+
+## 完了（2026-07-27）: **章 019 の Lean 形式化**（最大固有値が偶セクターから来ることの確定）
+
+`structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part019/`、抽象版 `lean/Ising2D/Abstract/PermSector.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: **`Ising2D.c_equals_c_plus`（`c(M) = c_+(M)`）を無条件で証明**した。
+経路は `Ising2D.c_minus_le_c_plus`（`c_-(M) ≤ c_+(M)`）＋章 011 の
+`sector_decomposition_of_rayleigh_sup`。ε を実行列 `Ising2D.epsilonR M`（符号反転の置換行列）
+として置き、複素の `Ising2D.epsilon M` と成分が一致することを `epsilon_eq_ofReal_epsilonR` で証明。
+Perron–Frobenius 系の補題・スペクトル定理は使わず、成分ごとの三角不等式だけで書いた。
+
+未形式化（仮定として受け取った）:
+- `c_+(M) = Λ^{(1/2)}_M`（章 018 の `c_plus_equals_Lambda_half_integer`。Lean 側に無い）
+  → `c_equals_c_plus` の Step 2・Step 3 は条件つきの定理にした。
+- `ε W = W ε`（複素 `V_1,V_2` と章 011 の実行列 `W` を結ぶ橋渡しが未形式化。章 011 と同じ扱い）。
+
+抽象版で判明した本質: 効いているのは「`ε` が対合 `π` の置換行列であること」
+「`W` の成分が**非負**であること」「`W` が実対称半正定値であること」の 3 つだけ。
+**本文 `epsilon_is_sign_flip_permutation` (2) の「`π` は不動点をもたない」は
+`c_- ≤ c_+` には効いていない**（効くのは `𝓡_- ≠ ∅` の部分だけ）。
+また本文が引く `W_{kl} > 0` の狭義正値性も不要（`0 ≤ W_{kl}` で足りる）。
+
+記録: `lean/docs/ch019-formalization.md`（定理一覧・2 本立て対応表）、
+`docs/tasks/2026-07_lean-ch009-013/013_ch019-formalization-findings.md`（本文への指摘）。
+なお本章の (4) は、章 011 の既知の穴（`002_ch011-sector-sup-nonempty-gap.md` の
+「`𝓕^{(±)}` に単位ベクトルがあることが本文に無い」）の `𝓕^{(-)}` 側を埋めている。
+
+## 完了（2026-07-27）: **章 009 の Lean 形式化**（V の固有値・定数 c の決定）
+
+`structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック）を Lean 4 で形式化した
+（`lean/Ising2D/Part009/` に具体版、`lean/Ising2D/Abstract/{NumberOperator,JointEigenspace}.lean`
+に抽象版。`sorry` ゼロ、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: `Ising2D.constant_c_value`（`c = (2 sinh 2K_2)^{M/2}`）と
+`Ising2D.Vmat_mul_Qproj`（`V Q_ε = Λ_ε Q_ε`）まで到達。
+
+- 一覧・2 本立ての対応・抽象版で判明した本質は `lean/docs/ch009-formalization.md`
+  （`lean/README.md` への統合は未了）。
+- **仮定として受け取ったもの**（いずれも他章の内容、または既知の原文の穴）:
+  008 章 `V_eq_Vprime`（`V = cV'`）、`γ(θ_μ) = arccosh(γ_1(θ_μ))`（mathlib に `Real.arccosh`
+  が無い。非負実数の族として受け取る）、`𝓘` の同定、`ψ` の平方根の分枝の整合。
+  すべて `Ising2D.FermiSetup` と `constant_c_value` の仮定に明示。
+- **原文の穴 3 件**を `docs/tasks/2026-07_lean-ch009-013/003_ch009_未定義記号と暗黙の仮定.md`
+  に記録（未定義記号 `𝓜` の使用 / 分枝の整合への未言及 / 逆元の一意性への未言及）。
+  いずれも結論を覆さない。
+- **形式化して分かった冗長**: `sign_flip_conjugation` の `M` の偶奇による場合分けと `G` への
+  書き換えは不要（`U Z_m U^{-1} = -Z_m`, `U Y_m U^{-1} = +Y_m` が `m` によらず成り立つ）。
+  `joint_eigenspace_decomposition` (4) の二項定理も不要。
+- 抽象版で判明した本質: 個数演算子の冪等性・可換性に効いているのは
+  **環・CAR・2-捩れの無さの 3 つだけ**。同時固有空間分解 (1)(2)(3) は
+  **可換な冪等元の族**だけで従い CAR すら要らない。トレースの計算に効いているのは
+  **「加法的かつ巡回的な汎関数」1 つだけ**（値域は任意の可換群でよい）。
+
+## 完了（2026-07-27）: **章 010 の Lean 形式化**（分配関数 → Pauli 表示 → 偶奇セクター分解）
+
+`structured-latex/content/010_transfer_matrix_bridge.ts` の主張をすべて Lean 4 で形式化した
+（`lean/Ising2D/Part010/` に具体版、`lean/Ising2D/Abstract/` に抽象版。`sorry` ゼロ）。
+あわせて **001 章の分配関数 `Z(J,J')` の定義と `Z = tr((V_1V_2)^{N_row})`** も新規に形式化した
+（Lean 側にこれまで分配関数そのものが無かった）。
+
+到達点: `Ising2D.partition_function_in_pauli_form` により、
+分配関数から Pauli 表示の転送行列のトレースまでが**無条件に**つながった。
+
+- 一覧・2 本立ての対応・抽象版で判明した本質は `lean/docs/ch010-formalization.md`
+  （`lean/README.md` への統合は未了）。
+- **条件つき**: `sector_replacement_of_V1` (1) と偶奇セクター分解の最終式は、
+  004 章 `V1_restriction_to_eigenspaces`（Lean 未形式化）を仮定 `RestrictsOnSector` として
+  受け取る形。次にこれを形式化すれば無条件になる。
+  詳細は `docs/tasks/2026-07_lean-ch009-013/001_*.md`。
+- 抽象版の新規ファイル: `Abstract/SiteDiagonal.lean`, `Abstract/ExpDiagonal.lean`,
+  `Abstract/Projector.lean`, `Abstract/TracePathSum.lean`
+  （最後のものは「`tr(A^{n+1})` は閉じた道の重みの総和」。mathlib に無いので自前で証明した）。
+
+## 完了（2026-07-27）: **章 E — 臨界点で比熱が対数発散することを本文で証明**
+
+`structured-latex/content/020_critical_point.ts`（14 ブロック）で、018 章の
+`onsager_exact_solution` を出発点に、等方な場合 `K_1 = K_2 = K` の比熱の対数発散を
+**定数を具体的に与えた両側評価**として証明した（`specific_heat_log_divergence`）。
+
+```
+| f''(K) − (8/π) log(1/|K − K_c|) | ≤ 49   (0 < |K − K_c| ≤ 1/10),  sinh 2K_c = 1
+lim_{K→K_c} f''(K) / log(1/|K−K_c|) = 8/π,   C = k_B K² f''(K)
+```
+
+鍵は 1 つの恒等式 `sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)`（`κ := 2K_1 − 2K_2^*`、
+`A := sinh 2K_1 sinh 2K_2^*`、`gamma_kappa_identity`）と、**等方なら `A = 1`**
+（`isotropic_A_equals_one`）という事実。臨界条件は `κ = 0` と同値
+（`critical_point_iff_kappa_zero`、008 章の `c_1 = s_1c_2` とも同値）。
+
+- 実数解析への追加の移行は `remark_real_analysis_escape_chapter_E` に (R3)〜(R6) として列挙
+  （積分の線型性・単調性 / 微分積分学の基本定理 / Leibniz / 置換積分）。
+  012 章の「本証明で唯一」という表現 2 箇所を「表式を得るまでに唯一」へ直し、章 E への案内を
+  1 段落追記した（**既存章への変更はこの 3 箇所だけ**）。
+- 数値検証は `sagemath/check/055_claim_critical_point/`（5 チェック全 PASS、`mpmath` dps=40）。
+  **本文の誤り 1 件（`cosh κ − 1` を `2 sinh²(κ/4)` と誤評価）をこの検証が検出した。**
+- **非等方な場合への一般化は未了**（等方を確実に閉じる方を優先）。詳細と残作業は
+  `docs/tasks/free-energy-roadmap/task-dependency-graph.md` の「章 E」節。
+
+## 完了（2026-07-27）: `c(M) = c_+(M)` を本文で確定させた（019 章、6 ブロック）
+
+`structured-latex/content/019_max_eigenvalue_sector.ts` で
+
+```
+c_−(M) ≤ c_+(M),   したがって   c(M) = c_+(M) = Λ^{(1/2)}_M
+```
+
+を本文の定理にした。**自由エネルギーの表式には不要**（018 章の粗い挟み撃ちで足りる）だが、
+「`W` の最大固有値は偶セクター `F^{(+)}` から来る」という描像を本文で確定させる。
+
+### 証明の要（1 行で言える）
+
+`x ∈ F^{(-)} ∩ R^{2^M}` は `εx = −x`。`ε` は**全スピン反転に対応する `0/1` の置換行列**で、
+その置換 `π` は不動点をもたない対合だから、成分では `x_{π(k)} = −x_k`。したがって
+`u_k := |x_k|` は `u_{π(k)} = |−x_k| = u_k`、すなわち **`εu = u` で偶セクターへ移る**。
+`W` の成分がすべて正（011 章 `W_has_positive_entries`）なので三角不等式から
+`u^T W u = Σ|x_k x_l W_{kl}| ≥ |Σ x_k x_l W_{kl}| = |x^T W x| ≥ x^T W x`。
+よって `c_+(M) ≥ u^T W u ≥ x^T W x`、上限を取って `c_+(M) ≥ c_−(M)`。
+
+Perron–Frobenius の「最大固有ベクトルは符号をそろえて取れる」の部分だけを**上限（sup）の言葉で**
+取り出した形になっている。対角化可能性・スペクトル定理・コンパクト性は使っていない（011 章と同じ方針）。
+
+### 懸念だった「上限の達成」は問題にならなかった
+
+過去の MEMORY は「上限の達成（コンパクト性）を初等的にどう扱うかを先に決める必要がある」と
+していたが、**不要だった**。`c(M) = max(c_+, c_−) = c_+` を出すのに上限の達成は要らず、
+達成が言いたければ `c_plus_equals_Lambda_half_integer` の証明が既に構成している
+実固有ベクトル `x_0 ∈ F^{(+)} ∩ R^{2^M}` をそのまま使えばよい。
+
+### 018 章は意図的に触っていない
+
+`onsager_exact_solution` の Step 3 は `c(M) ≤ 2Λ^{(1/2)}_M` の粗い評価のままにしてある。
+`onsager_exact_solution` は文書順で 019 章より**前**なので、そこで `c_equals_c_plus` を引くと
+参照の逆流（章の粒度では循環）になるため。係数 `2` は `(log 2)/M → 0` で消えるので表式に影響しない。
+この判断は 019 章の `sector_005_remark_sandwich_becomes_equality` に本文として書いてある。
+
+### `c_−(M)` の値には立ち入らない（一次情報で確認済み）
+
+`c_−(M) = Λ^{(0)}_M` は一般には成り立たない。高温側 `(K_1,K_2) = (0.05, 0.1)` では
+`M = 2,3,4,5` のすべてで `c_−(M)/Λ^{(0)}_M = 0.1101501691`。019 章が示すのは不等号だけで、
+それには `c_−(M)` の値は要らない。
+
+### 新設ラベル（019 章）
+
+`epsilon_is_sign_flip_permutation` / `abs_vector_moves_to_even_sector` /
+`c_minus_le_c_plus` / `c_equals_c_plus`
+
+### 数値検証
+
+`sagemath/check/054_claim_max_eigenvalue_sector/`（4 チェック、全 PASS、`M = 2,3,4,5`、
+臨界点・臨界点近傍・高温側を含む 6 組の `(K_1,K_2)`）。`c(M) = c_+(M) = Λ^{(1/2)}_M` の
+相対差 `≤ 2.0e-15`。24 ケースすべてで真の不等号 `c_−(M) < c_+(M)`（比 `0.110`〜`0.991`）。
+`&=` 19 ステップに対し `∵` 24 件。
+
+## 完了（2026-07-27）: 012 章「自由エネルギーと熱力学極限」を Lean で形式化した
+
+`lean/Ising2D/Part012/`（具体版 5 ファイル）と `lean/Ising2D/Abstract/`（抽象版 4 ファイル）を
+新規に追加し、012 章の 5 つの主張（`gamma1_lower_bound_all_theta`, `gamma_is_continuous`,
+`limit_of_log_Z_in_N_row`, `riemann_sum_to_integral`, `onsager_free_energy_expression`）を
+`sorry` ゼロで形式化した。`lake build` 成功、`scripts/check-no-sorry.sh` は exit 0。
+一覧表・2 本立ての対応・「抽象版で判明した本質」は **`lean/docs/ch012-formalization.md`**
+（`lean/README.md` への統合は未実施）。
+
+要点:
+
+- **★実数解析への移行点 `riemann_sum_to_integral` は mathlib に無いので自前で証明した。**
+  `Riemann sum` 系の定理は mathlib に存在しない（grep で確認）。人手証明が (R1)(R2) として
+  挙げた外部事実（Heine–Cantor・連続関数の可積分性/区間加法性/評価/定数の積分）は
+  すべて mathlib にあり、新たな公理は要らなかった。
+- **`Real.arcosh` は mathlib にある。** `lean/README.md` の「mathlib に無い（自前定義が必要）」は
+  現行 mathlib（`v4.32.1`）では誤り。綴りが `arccosh` ではなく `arcosh`。
+  定義も人手証明 Step 2 の明示式と同一で、`Real.cosh_arcosh` / `Real.continuousOn_arcosh` もある。
+- **抽象版で判明: `riemann_sum_to_integral` に `g` の周期性はまったく効いていない。**
+  区間も `[0,2π]` である必要がなく任意の `[a,b]` でよい。`δ ∈ [0,1)` の右端も閉じてよい
+  （`δ ∈ [0,1]`）。したがって「整数運動量と半整数運動量で極限が同じ」は
+  「代表点が小区間の中なら何でもよい」というより強い事実の特殊例である。
+- **抽象版で判明: `limit_of_log_Z_in_N_row` に Ising 模型の構造は何も効いていない。**
+  効くのは `c^N ≤ Z ≤ B c^N`（`c>0`, `B≥1`）と `log` の単調性・乗法から加法への変換だけ。
+  `B = 2^M` という具体形すら効いていない。
+- 011 章の入力（`partition_function_sandwich`, `def_rayleigh_sup`）は、別セッションが
+  並行して 011 章を形式化中のため **import せず仮定として受け取った**。
+
+**本文（`structured-latex/`）で見つかった点は
+`docs/tasks/2026-07_lean-ch009-013/012_ch012-formalization-findings.md` に記録した**
+（本文は編集していない）。要点は次の 3 つ:
+
+1. `remark_real_analysis_escape_point` の「外部から持ち込む事実は (R1)(R2) の 2 つだけ」は
+   不正確。`gamma_is_continuous` が `cos` / `√` / `log` の連続性という別の実数解析の事実を使う。
+2. `onsager_free_energy_expression` は `Λ` を**集合** `Θ^{(δ)}_M` 上の和で定義しているのに、
+   proof は断りなく添字つきの和 `Σ_{μ=1}^M` へ移っている（単射性の一行が無い。主張自体は正しい）。
+3. `riemann_sum_to_integral` の周期性の仮定と `δ < 1` は不要（上記）。
+## 完了（2026-07-27）: 章 011「最大固有値」の Lean 形式化（具体版＋抽象版の 2 本立て）
+
+`lean/Ising2D/Part011/`（具体版 7 ファイル）と `lean/Ising2D/Abstract/PsdCauchySchwarz.lean`
+`lean/Ising2D/Abstract/RayleighMoments.lean`（抽象版）を新設。`lake build` と
+`./scripts/check-no-sorry.sh` はいずれも exit 0（`sorry` ゼロ）。
+
+- 形式化した主張: `psd_cauchy_schwarz` / `def_rayleigh_sup` / `rayleigh_bounds_operator_norm` /
+  `trace_power_sandwich` / `Z_equals_trace_of_W` / `def_symmetrized_transfer_matrix` /
+  `W_is_real_symmetric_positive_definite` / `W_has_positive_entries` /
+  `partition_function_sandwich` / `sector_decomposition_of_rayleigh_sup` の (1)(3)。
+- **未形式化**: `sector_decomposition_of_rayleigh_sup` の (2)（`V^{(±)}` に依存し章 004/010 が必要）。
+- 章 009/010 への依存（`Z = tr((V₁V₂)^{N_row})`、`V₂` の正値性・正定値性など）は
+  import せず**仮定として受け取る**形にした。接続用の一般補題 `Ising2D.matExp_posDef`
+  （実対称行列の `exp` は正定値）は用意済み。
+- 一覧・2 本立ての対応表・「抽象版で判明した本質」は
+  [lean/docs/ch011-formalization.md](lean/docs/ch011-formalization.md)。
+- **人手証明に見つけた問題**（本文は未修正。修正は別セッション担当）:
+  - `docs/tasks/2026-07_lean-ch009-013/001_ch011-moment-log-convexity-index-error.md`
+    — Step 2 の対数凸性を導く `(a,b)` の指定が誤り（結論は正しい）。
+  - `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md`
+    — `c_±(M)` の `sup` が定義できること（`F^{(±)}` に単位ベクトルがあること）の根拠が本文に無い。
+
+
 ## 完了（2026-07-27）: **2 次元 Ising 模型の厳密解が本文で閉じた**（018 章、章 C′-16）
 
 `structured-latex/content/018_even_sector_closing.ts`（11 ブロック）で `c_+(M) = Λ^{(1/2)}_M` を
@@ -85,11 +625,9 @@ lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1
 
 1. **章 E（臨界点）** — 自由エネルギーの `K` 依存性の特異性（比熱の対数発散）。
    `critical_condition_c1_eq_s1_c2` が土台。README 5 節の「読み物」素材でもある。
-2. **`c(M) = c_+(M)` の本文化（任意・Onsager の表式には不要）** — `W` の成分の正値性から
-   Perron–Frobenius 型の議論を本文へ入れれば係数 2 が消える。上限の達成（コンパクト性）を
-   初等的にどう扱うかを先に決める必要がある。
+2. ~~**`c(M) = c_+(M)` の本文化**~~ — **完了（019 章。下記の節を参照）**。
 3. **Lean の 2 本立て整備**（README 8 節）と**クロネッカー積記法への統一**（別セッション進行中）。
-   013〜018 章の Lean 形式化は未着手。
+   013〜019 章の Lean 形式化は未着手。
 
 ## 完了（2026-07-27）: 章 C′（013〜017 章）の添字の量化範囲を `𝓜̌ = {1,…,M}` へ絞った
 
@@ -2447,3 +2985,50 @@ exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z
 照合のため `set_option backward.isDefEq.respectTransparency false` を使っている。
 `open scoped ... in by ...`（tactic への `in`）では instance が入らないので、
 **scoped instance を要する補題は独立した宣言として `open scoped ... in theorem` で書くこと。**
+
+---
+
+## 完了（2026-07-27）: 章 013「偶セクターの半整数運動量モード」の Lean 形式化
+
+`structured-latex/content/013_even_sector_modes.ts` の数学的主張 7 本をすべて Lean で形式化した
+（`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+新規ファイルは具体版が `lean/Ising2D/Part013/`、抽象版が
+`lean/Ising2D/Abstract/AntiperiodicFourier.lean`。詳細は
+[lean/docs/ch013-formalization.md](lean/docs/ch013-formalization.md)。
+
+### 抽象版で判明した本質（README 4 節の「何が本質的か」への答え）
+
+**整数運動量と半整数運動量は、同じ抽象版の別の特殊化である。**
+
+- `e^{-iθ~}` は 1 の原始 `2M` 乗根 `ξ` であり、**半整数運動量とはその奇数周波数
+  `ξ^{j(2μ-1)}` のこと**。整数運動量は `ζ = ξ^2`（原始 `M` 乗根）の偶数周波数。
+- 本文が「仕組みは 1 つの等式 `e^{-iMθ~_μ} = -1` に集約される」と書いている等式の正体は
+  **`ξ^M = -1`**。証明は「`(ξ^M)^2 = 1` かつ原始性から `ξ^M ≠ 1`、体だから `-1`」の 3 行で、
+  指数関数も円周率も複素数であることも効いていない。
+- 指数和 `antiperiodic_exp_sum` は、定数位相 `ξ^k` を括り出すだけで**整数運動量の `exp_sum` と
+  同じ直交性補題**（`Abstract.sum_zpow_primitiveRoot`）に帰着する。
+  本文の `(-1)^l` はその定数位相を `k = lM` で評価した `ξ^{lM} = (ξ^M)^l` にすぎない。
+- **対の添字が `μ+ν ≡ 0` から `μ+ν ≡ 1` へずれる理由は、
+  奇数 + 奇数 = `(2μ-1)+(2ν-1) = 2(μ+ν-1)` の `-1` のただ 1 点**。
+- 添字の周期性 (2) と交換関係 (A)〜(D) は、**既存の抽象版そのまま**
+  （`Abstract.transform_periodic` と `Abstract.CliffordTriple.lie_sum_*`）の特殊化で出る。
+- **「`(+)` セクターで 008 章が壊れる」の正体は `Dz ≠ Dz'`**（`hat(Z)^{(±)}` と `hat(Z)^{(∓)}` の
+  反交換子が違う）の 1 点。`check(Z)` は族が 1 つ（`z = z'`）なのでこの差が構造的に存在しない。
+- 逆変換だけは既存の `Abstract.inverse_dft_abstract`（`M` 乗根版）の特殊化にならないので
+  `Abstract.inverse_dft_antiperiodic` を新設した（証明の骨格は同一）。
+
+### 本文の誤り・穴
+
+**見つからなかった。** 数値検証（`sagemath/check/046_claim_even_sector_modes/`、`M = 2,3,4,5`）とも
+すべて整合する。`why_008_applies_only_to_minus_sector` の第 2 式は 008 章の原文 (5) の
+**訂正版**（008 章原文は符号・係数を誤っている）を採用しており、Lean と一致する。
+
+### 次に触る人へ
+
+- `lean/README.md` への統合（形式化済み命題の表・2 本立ての表への追記）は未実施。
+  素材は `lean/docs/ch013-formalization.md` にある。
+- 014 章以降（`periodicity_of_check_fermi`、`Ǎ(θ~)` の対角化、`ψ̌`、`V = cV'`、固有値）は未着手。
+  013 章で用意した `Ising2D.checkZ` / `checkY` / `checkPhase` / `CheckIndex` と
+  4 本の交換関係・3 本の反交換関係がその土台になる。
+- `deltaMod` を含む `if` を `dvd_neg` で書き換えるときは `rw` ではなく `simp only [dvd_neg]` を使う
+  （`Decidable` インスタンスに依存するため `rw` は motive not type correct で落ちる）。
