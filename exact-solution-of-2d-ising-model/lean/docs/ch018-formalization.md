@@ -9,10 +9,9 @@
 章 018 は**本プロジェクトの結論**（Onsager の自由エネルギー）に至る章であり、
 章 014–017（半整数運動量のフェルミオン `ψ̌_μ^†, ψ̌_μ`、個数演算子 `ň_μ`、
 同時固有射影 `Q̌_ε`、`V^{(+)}` の固有値 `Λ̌_ε`）の上に立つ。
-**それらは本リポジトリの Lean 側に存在しない**（`Ising2D/` に `Part016` / `Part017` が無く、
-`Part014`（章 014「偶セクターでの `T` の作用」）にも `ψ̌` / `ň` / `Q̌` は現れない。
-`grep -rn "checkPsi\|checkNum\|checkQ" --include=*.lean Ising2D/` は
-章 013 の `checkZ` / `checkY` 以外にヒットしない）。
+**本章の形式化に着手した時点で、それらは本リポジトリの Lean 側に存在しなかった**
+（`Ising2D/` に `Part016` / `Part017` が無く、`Part014`（章 014「偶セクターでの `T` の作用」）
+にも `ψ̌` / `ň` / `Q̌` は現れなかった）。
 
 そこで**章 014–017 から受け取る入力だけを束ねた構造**を置き、章 018 の主張は
 すべてそこからの帰結として証明した。
@@ -209,7 +208,7 @@
 | `closing_005_claim_open_chain_spin_sums`（1 次元開鎖のスピン和） | **未形式化** | 同上。原文自身が「この計算には `Ž, Y̌, ψ̌` も半整数運動量も現れない」と述べる独立の組合せ論的計算 |
 | `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記 2 ブロックに依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `def_check_fermi` / `anticommutator_of_check_psi`（章 016） | **`CheckFermi` の仮定** | Lean 側に `Part016` が無い |
-| `eigenvalues_of_V_plus`（章 017） | **`VPlusData` の仮定** | Lean 側に `Part017` が無い |
+| `eigenvalues_of_V_plus`（章 017） | **`VPlusData` の仮定** | 本章の形式化時点で Lean 側に `Part017` が無かった |
 | `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `sector_decomposition_of_rayleigh_sup` (2)） | **`EvenSectorBridge` の仮定** | 章 011 の Lean 形式化も (2) を形式化していない（`lean/docs/ch011-formalization.md`: 「`V^{(±)}`, `V_1^{(±)}` は章 004/010 の対象で、本タスクの担当範囲外の定義に依存する」）。章 019 も同じ扱い |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
@@ -244,3 +243,11 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 `scripts/check-no-sorry.sh` の `targets` 配列の末尾に本章の 106 個の定義・定理を追加してある。
 `sorry` / `admit` は 1 つも残っていない。
+
+## 6. 本章のあとに入った章 017 の形式化との関係（未接続）
+
+本章のコミット後、並行セッションが章 017（`Ising2D/Part017/`）を形式化して main に入れた。
+章 017 側も `def_check_fermi` / `anticommutator_of_check_psi` を独自に受け取る形をとっており、
+**本章の `Ising2D.VPlusData` を章 017 の `Ising2D.Part017` の定理から埋める作業は未着手である。**
+本タスクの担当範囲（章 018）外なので、既存の章 017 のファイルには手を触れていない。
+接続すれば `VPlusData` の仮定（`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` ほか）は定理に置き換わる。

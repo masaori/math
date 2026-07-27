@@ -35,6 +35,47 @@ Onsager の最終定理は、人手証明の粗い挟み撃ち（Step 2・3）�
 記録: `lean/docs/ch018-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
 `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md`。
 検証: `lake build` 成功、`./scripts/check-no-sorry.sh` exit 0（106 定理を追加）。
+## 完了（2026-07-27）: **章 017 の Lean 形式化**（定数 `c` の決定と `V^{(+)}` の固有値）
+
+`structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part017/`、抽象版 `lean/Ising2D/Abstract/` の
+`PairedFermion.lean` / `ConstantC.lean` / `SimpleEigenvalue.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+**11 主張すべて形式化済み。結論を覆す誤りは見つからなかった。**
+
+到達点: **最大固有値 `Λ̌_max = Λ^{(1/2)}_M` の単純性**（`Ising2D.checkBigLambda_univ_eq_LambdaM`,
+`checkBigLambda_lt_max_of_gammaFn`, `eq_Qproj_univ_mulVec_of_eigen`,
+`finrank_range_Qproj_univ`）と **`c = (2 sinh 2K_2)^{M/2}`**
+（`Ising2D.constant_c_value_even_sector`）。
+
+抽象版で判明した本質:
+- **章 009（整数運動量）と章 017（半整数運動量）は同じ抽象版の別の特殊化**で、違いは
+  対をなす添字を与える写像 `σ` だけ（009 は `σ(μ)=-μ`、017 は `σ(μ)=M+1-μ`）。
+  しかも効いているのは **`σ` の単射性だけ**（`Abstract.acomm_cre_ann_comp`）。
+- **`c` の決定に行列もトレースも指数関数も効いていない**。ℂ の 4 つの等式と正値性だけ
+  （`Abstract.const_eq_of_trace_ratio`）。章 009 の `constant_c_value` も同じ補題の特殊化。
+- **単純性 (3) に直和分解 (5) は不要**。`∑_ε Q̌_ε = 1` と左からの固有関係だけで足りる
+  （`Abstract.eq_proj_of_eigen`）。
+- 単純性を可能にしているのは `γ(θ~_μ) > 0`（狭義）1 点で、これは
+  `0 < θ~_μ < 2π` ⇒ `cos θ~_μ < 1` から**無条件に**出る（`Ising2D.gammaFn_thetaTilde_pos`）。
+  章 009 は `γ(θ_μ) ≥ 0` しか持てず単純性を言えない。
+- 半整数運動量では添字集合が `𝓜̌ = {1,…,M}` に確定するため、章 009 の `FermiSetup` が
+  仮定として受け取っていた添字集合（`I`, `hIlow`, `hIhigh`, `hgam`）が `CheckFermiSetup` から消え、
+  `tr(Q̌_ε) = 1`・`tr(V̌')` の前因子 `2^{M-m}` の消滅が従う。
+
+未形式化: 章 015 の `anticommutator_of_check_psi` と章 016 の `V_plus_eq_c_check_Vprime` は
+仮定として受け取っている（並行して形式化中のため）。「対角化可能」の
+`DirectSum.IsInternal` 形は章 009 と同じ理由で未形式化（固有値と重複度そのものは形式化済み）。
+
+記録: `lean/docs/ch017-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
+`docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md`（本文への指摘 3 件）。
+
+なお章 015 側にも `Ising2D.one_lt_gamma1R_thetaTilde` があり名前が衝突したため、
+章 017 側は `one_lt_gamma1R_thetaTilde_checkIndex` へ改名した（仮定が異なる別定理:
+章 015 版は双対関係 `hdual` を要求し全 `μ` で成立、章 017 版は `hdual` 不要で `μ ∈ 𝓜̌` に限る）。
+`V^{(+)}` は章 014 の `Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`）を再利用し、
+章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `Ising2D.VPlus_eq_Vmat` で明示した。
 
 ## 完了（2026-07-27）: **章 014 の Lean 形式化**（偶セクターでの `T` の作用）
 
