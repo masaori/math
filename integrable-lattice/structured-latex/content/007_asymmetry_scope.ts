@@ -1,0 +1,216 @@
+/**
+ * 論文本体 第 7 章（決定可能性の非対称）と第 8 章（スコープと限界・形式検証）。
+ *
+ * 第 8 章は本論文の主張の限界を集約する。再框であること、未解決点、
+ * 形式検証の到達点をここで正直に述べる。
+ */
+
+import { defineBlocks, list, math, paragraph, ref } from "../schema.ts";
+
+export default defineBlocks([
+  {
+    id: "paper_070_heading_asymmetry",
+    kind: "heading",
+    level: 1,
+    sourcePath: "structured-latex/content/007_asymmetry_scope.ts",
+    sourceOrdinal: 1,
+    title: { text: "決定可能性の非対称 — 難しい連続問題は ℝ 側にのみ現れる" },
+    labels: [],
+    conversion: { status: "added" },
+  },
+  {
+    id: "paper_071_remark_asymmetry",
+    kind: "remark",
+    sourcePath: "structured-latex/content/007_asymmetry_scope.ts",
+    sourceOrdinal: 2,
+    title: { text: "二素点の難易度は対称でない" },
+    labels: ["paper_remark_asymmetry"],
+    habitat: "mixed",
+    realEscape:
+      "本注記は ℝ 側の量（Mahler 測度）と Λ 側の量（岩澤 μ）を比較する。ℝ が現れるのは比較の左辺だけで、" +
+      "本論文の Λ 側の主張はこの比較に依存しない。",
+    verification: ["sagemath/check/cycle10_T3_lehmer"],
+    statement: [
+      paragraph([
+        ref("paper_prop_D"),
+        " の二素点は同じ ",
+        math(String.raw`P`),
+        " から出るが、**難易度は対称でない**。",
+      ]),
+      list([
+        [
+          "**",
+          math(String.raw`\mathbb{R}`),
+          " 側**: Mahler 測度 ＝ エントロピー ＝ 自由エネルギー密度は ",
+          math(String.raw`\mathbb{R}`),
+          " の元で連続。最小正値の問題は **Lehmer 問題**（1933 年以来未解決の連続ギャップ）になる。",
+          "一般の値は計算不能実数でもありうる。",
+        ],
+        [
+          "**",
+          math(String.raw`\Lambda`),
+          " 側**: 岩澤型不変量 ",
+          math(String.raw`\mu\in\mathbb{Z}_{\ge0}`),
+          " は離散。最小正値は ",
+          math(String.raw`1`),
+          " で自明であり、**Lehmer 型の問題は立たない**。",
+          "有限 ",
+          math(String.raw`L`),
+          " の ",
+          math(String.raw`v_p(a_L)`),
+          " は無条件に決定可能（",
+          ref("paper_claim_resultant"),
+          "）。",
+        ],
+      ]),
+      paragraph([
+        "**主張**: 難しい未解決の連続問題は ",
+        math(String.raw`\mathbb{R}`),
+        " 側にのみ現れ、",
+        math(String.raw`\Lambda`),
+        " 側は離散・決定可能である。これは既知の 2 つの理論（Lehmer/Mahler と 岩澤/Ferrero–Washington）が",
+        "双対のどちらの素点に乗るかの**地図**であって、新しい定理ではない。",
+      ]),
+      paragraph([
+        "**注意（スケールの偶然一致を接続と呼ばない）**: ",
+        math(String.raw`\mathbb{Z}^2`),
+        " トーラスの全域木エントロピー ",
+        math(String.raw`4G/\pi\approx1.166`),
+        " と Lehmer 数 ",
+        math(String.raw`\approx1.176`),
+        " は数値が近いが、**これはスケール違いの偶然であって接続ではない**。",
+        "本論文は両者を接続しない。",
+      ]),
+    ],
+    conversion: { status: "added" },
+  },
+  {
+    id: "paper_072_remark_qp_free",
+    kind: "remark",
+    sourcePath: "structured-latex/content/007_asymmetry_scope.ts",
+    sourceOrdinal: 3,
+    title: { text: "Q_p を避ける動機は決定不能性ではない" },
+    labels: ["paper_remark_qp_motivation"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        "本論文は ",
+        math(String.raw`\mathbb{Q}_p`),
+        "（非可算）を使わずに議論を組む。**この動機を誤解してはならない。**",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{Q}_p`),
+        " の一階理論は、正規化された切断つきの付値体の言語で**決定可能**である",
+        "（Ax–Kochen / Ershov）。したがって「",
+        math(String.raw`\mathbb{Q}_p`),
+        " を避ける」理由は ",
+        math(String.raw`\mathbb{Q}_p`),
+        " の理論が決定不能だからではない。",
+      ]),
+      paragraph([
+        "本論文の動機は、**有限手続きと witness の水準まで降ろす**ことにある。",
+        math(String.raw`\Lambda`),
+        " での等号は素因数分解の一致、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " での等号は根の分離であり、いずれも具体的な証拠を伴って判定できる。",
+        "この立場の既出性は逆数学・構成的数学の本文では**確認していない**（投稿前に専門家確認を要する）。",
+      ]),
+    ],
+    conversion: { status: "added" },
+  },
+  {
+    id: "paper_080_heading_scope",
+    kind: "heading",
+    level: 1,
+    sourcePath: "structured-latex/content/007_asymmetry_scope.ts",
+    sourceOrdinal: 4,
+    title: { text: "スコープと限界、形式検証" },
+    labels: [],
+    conversion: { status: "added" },
+  },
+  {
+    id: "paper_081_remark_scope",
+    kind: "remark",
+    sourcePath: "structured-latex/content/007_asymmetry_scope.ts",
+    sourceOrdinal: 5,
+    title: { text: "本論文が主張しないこと" },
+    labels: ["paper_remark_scope"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        ref("paper_positioning"),
+        " を再掲する。本論文は**再框であり、新しい定理を主張しない**。",
+        "以下は本論文が**主張しない**ことの明示である。",
+      ]),
+      list([
+        [
+          "**可解性について何も主張しない。** 熱力学極限の閉形式の有無は軸 4 の問題であり、",
+          "本論文が扱う軸 1・2 とは独立である（",
+          ref("paper_four_axes"),
+          "）。",
+        ],
+        [
+          "**新しい厳密解を与えない。** 第 3 章のアルキメデス側はすべて既知定理の引用である。",
+        ],
+        [
+          "**新しい数論を与えない。** 第 4 章の命題 A・B・C・N・L は既知の初等整数論であり、",
+          "第 5 章の命題 D の ",
+          math(String.raw`(p)`),
+          " 側は Monsky / Cuoco–Monsky の定理の適用である。",
+        ],
+        [
+          "**命題 T・V・W についても新規性を主張しない。** 証明は初等的で、",
+          "文献本文での既出は確認できていない（0 件は新規性の根拠にならない）。",
+        ],
+      ]),
+      paragraph([
+        "**残る未解決点は 3 つ**である（",
+        ref("paper_remark_D_limits"),
+        "）: ",
+        math(String.raw`\lambda=l_0(f)`),
+        " の計算可能性、低位項の係数の明示公式、退化点が増える ",
+        math(String.raw`P`),
+        " の整理。",
+        "いずれも命題 D の限界として明記してあり、論文の射程を狭める。",
+      ]),
+    ],
+    conversion: { status: "added" },
+  },
+  {
+    id: "paper_082_remark_formalization",
+    kind: "remark",
+    sourcePath: "structured-latex/content/007_asymmetry_scope.ts",
+    sourceOrdinal: 6,
+    title: { text: "形式検証の到達点" },
+    labels: ["paper_remark_formalization"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        "本論文は選別基準が要求する「原理的に ",
+        math(String.raw`\mathrm{decide}`),
+        " ／ witness に乗る」という水準に留めず、",
+        "**Lean 4 + mathlib4 で実際に形式化した**。形式化した命題については",
+        math(String.raw`\mathrm{sorry}`),
+        " ゼロを機械確認している。",
+      ]),
+      paragraph([
+        "**形式化の現状（完了・部分的・未着手と、その理由）は ",
+        math(String.raw`\texttt{integrable-lattice/lean/README.md}`),
+        " の表に記録する。** 形式化できなかった命題については、",
+        "mathlib に何が無いか、あるいはどの段で詰まったかを一次情報（試したコードとエラー出力）で",
+        "具体化してある。「難しそう」という理由は書かない。",
+      ]),
+      paragraph([
+        "数値検証（SageMath）との対応は各ブロックの ",
+        math(String.raw`\texttt{verification}`),
+        " フィールド、",
+        "Lean 定理との対応は ",
+        math(String.raw`\texttt{lean}`),
+        " フィールドで機械的に辿れる。対応が切れていないことは",
+        math(String.raw`\texttt{sagemath/tools/verify-check-linkage.ts}`),
+        " が検査する。",
+      ]),
+    ],
+    conversion: { status: "added" },
+  },
+]);
