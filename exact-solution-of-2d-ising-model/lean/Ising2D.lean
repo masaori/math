@@ -110,3 +110,12 @@ import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
 import Ising2D.Part019.Claim002_AbsVectorEvenSector
 import Ising2D.Part019.Theorem003_CMinusLeCPlus
 import Ising2D.Part019.Theorem004_CEqualsCPlus
+import Ising2D.Abstract.ParityFermion
+import Ising2D.Part018.Claim001_EpsilonAnticommutes
+import Ising2D.Part018.Setup
+import Ising2D.Part018.Claim002_EpsilonEigenvalueOnQ
+import Ising2D.Part018.Claim003_TraceEpsilonVPlus
+import Ising2D.Part018.Claim008_CheckQHermitian
+import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
+import Ising2D.Part018.Theorem009_CPlusEqualsLambda
+import Ising2D.Part018.Theorem010_OnsagerExactSolution
