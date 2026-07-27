@@ -1,5 +1,31 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 009 の Lean 形式化**（V の固有値・定数 c の決定）
+
+`structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック）を Lean 4 で形式化した
+（`lean/Ising2D/Part009/` に具体版、`lean/Ising2D/Abstract/{NumberOperator,JointEigenspace}.lean`
+に抽象版。`sorry` ゼロ、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: `Ising2D.constant_c_value`（`c = (2 sinh 2K_2)^{M/2}`）と
+`Ising2D.Vmat_mul_Qproj`（`V Q_ε = Λ_ε Q_ε`）まで到達。
+
+- 一覧・2 本立ての対応・抽象版で判明した本質は `lean/docs/ch009-formalization.md`
+  （`lean/README.md` への統合は未了）。
+- **仮定として受け取ったもの**（いずれも他章の内容、または既知の原文の穴）:
+  008 章 `V_eq_Vprime`（`V = cV'`）、`γ(θ_μ) = arccosh(γ_1(θ_μ))`（mathlib に `Real.arccosh`
+  が無い。非負実数の族として受け取る）、`𝓘` の同定、`ψ` の平方根の分枝の整合。
+  すべて `Ising2D.FermiSetup` と `constant_c_value` の仮定に明示。
+- **原文の穴 3 件**を `docs/tasks/2026-07_lean-ch009-013/003_ch009_未定義記号と暗黙の仮定.md`
+  に記録（未定義記号 `𝓜` の使用 / 分枝の整合への未言及 / 逆元の一意性への未言及）。
+  いずれも結論を覆さない。
+- **形式化して分かった冗長**: `sign_flip_conjugation` の `M` の偶奇による場合分けと `G` への
+  書き換えは不要（`U Z_m U^{-1} = -Z_m`, `U Y_m U^{-1} = +Y_m` が `m` によらず成り立つ）。
+  `joint_eigenspace_decomposition` (4) の二項定理も不要。
+- 抽象版で判明した本質: 個数演算子の冪等性・可換性に効いているのは
+  **環・CAR・2-捩れの無さの 3 つだけ**。同時固有空間分解 (1)(2)(3) は
+  **可換な冪等元の族**だけで従い CAR すら要らない。トレースの計算に効いているのは
+  **「加法的かつ巡回的な汎関数」1 つだけ**（値域は任意の可換群でよい）。
+
 ## 完了（2026-07-27）: **章 010 の Lean 形式化**（分配関数 → Pauli 表示 → 偶奇セクター分解）
 
 `structured-latex/content/010_transfer_matrix_bridge.ts` の主張をすべて Lean 4 で形式化した

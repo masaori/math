@@ -166,7 +166,7 @@
 
 ## 4. 人手証明に見つかった問題
 
-`exact-solution-of-2d-ising-model/docs/tasks/2026-07_lean-ch009-013/001_ch009_未定義記号と暗黙の仮定.md`
+`exact-solution-of-2d-ising-model/docs/tasks/2026-07_lean-ch009-013/003_ch009_未定義記号と暗黙の仮定.md`
 に一次情報つきで記録した。要約:
 
 1. `number_operator_idempotent` の証明中で、009 章では定義されていない記号 `\mathcal{M}` を使っている。
