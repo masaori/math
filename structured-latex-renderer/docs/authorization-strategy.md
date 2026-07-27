@@ -199,5 +199,3 @@ owner の範囲が **パス延長で自然に広がる**。これが「認可を
 4. **owner は entity の FK（`.ref()`）が張る relation graph から機械解決**する。多ホップ可。**一意に決まらなければエラー**（曖昧さを黙って埋めない）。
 5. policy は **API 契約として SSOT に宣言**。action 省略は deny-by-default、全 resource entity 明示必須。
 6. **同一 policy から BE `authorize`（権威）と FE `can`（表示）を生成**し、判定のズレをなくす。
-</content>
-</invoke>

@@ -123,4 +123,3 @@ export type OrderDetail = Order & {
 3. **`child`（referredBy）/ `parent`（referTo）** で relation を辿り、`include` で再帰ネスト。曖昧さは `via`、名前は `as`。
 4. generator が **relation graph と突合**して基数・FK・nullable・フィールド名を解決。**存在しない/曖昧/未知はエラー**（storage・policy と同じ方針）。
 5. **同一定義から BE eager-load と FE 応答型を生成**。N+1 と過剰フェッチと型ズレを設計段階で閉じる。
-</content>
