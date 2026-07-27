@@ -47,3 +47,12 @@ import Ising2D.Abstract.ExpConjugation
 import Ising2D.Part008.Claim006_ExpConjugation
 import Ising2D.Abstract.TVAction
 import Ising2D.Part008.Claim012_TVActions
+import Ising2D.Abstract.Arcosh
+import Ising2D.Abstract.CoshLowerBound
+import Ising2D.Abstract.RiemannSum
+import Ising2D.Abstract.LogSqueeze
+import Ising2D.Part012.Claim001_Gamma1LowerBound
+import Ising2D.Part012.Claim002_GammaContinuous
+import Ising2D.Part012.Claim003_LimitInNRow
+import Ising2D.Part012.Theorem004_RiemannSumToIntegral
+import Ising2D.Part012.Theorem005_OnsagerFreeEnergy
