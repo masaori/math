@@ -47,3 +47,12 @@ import Ising2D.Abstract.ExpConjugation
 import Ising2D.Part008.Claim006_ExpConjugation
 import Ising2D.Abstract.TVAction
 import Ising2D.Part008.Claim012_TVActions
+import Ising2D.Abstract.NumberOperator
+import Ising2D.Abstract.JointEigenspace
+import Ising2D.Part009.Definition001_Trace
+import Ising2D.Part009.Definition004_NumberOperator
+import Ising2D.Part009.Claim008_JointEigenspace
+import Ising2D.Part009.Claim009_EigenvaluesVprime
+import Ising2D.Part009.Claim013_PositiveDefinite
+import Ising2D.Part009.Claim016_SignFlip
+import Ising2D.Part009.Claim017_ConstantC
