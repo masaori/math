@@ -67,6 +67,41 @@
   使っていたため、**複数 worktree で同時実行すると互いに上書きし、別ブランチの定理一覧を
   検査して誤検出していた**（実際に踏んだ）。`mktemp` へ変更済み。
 
+## 完了（2026-07-27）: **章 018 の Lean 形式化**（偶セクターの完結 = Onsager の厳密解）
+
+`structured-latex/content/018_even_sector_closing.ts`（12 ブロック）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part018/` 8 ファイル、抽象版 `lean/Ising2D/Abstract/ParityFermion.lean`）。
+**本プロジェクトの結論 `Ising2D.onsager_exact_solution` が Lean 側に立った。**
+
+主な定理（人手証明のラベル → Lean）:
+
+- `epsilon_anticommutes_with_check_Z_Y` → `epsilon_anticomm_checkZ` / `checkY` /
+  `epsilon_anticomm_of_isCheckMode` / `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`
+- `epsilon_eigenvalue_on_check_Q` → `CheckFermi.eta` / `eta_insert` / `eta_eq_eta_univ_mul` /
+  `epsilon_eq_parityProd`
+- `trace_of_epsilon_V_plus_via_check_eigenvalues` → `VPlusData.trace_epsilon_mul_V`
+- `check_number_operator_is_hermitian` → `checkZ_conjTranspose` / `CheckFermi.Qproj_conjTranspose`
+- `max_eigenvector_in_even_sector` → `VPlusData.mem_evenSector_of_mem_range_univ`
+- `c_plus_equals_Lambda_half_integer` → `EvenSectorBridge.c_plus_equals_lamMax`
+- **`onsager_exact_solution` → `Ising2D.onsager_exact_solution`**
+
+仮定として受け取ったもの（Lean 側に該当章が無いため。人手証明の穴ではない）:
+
+- 章 016 の `ψ̌` の CAR とエルミート性 → 構造 `Ising2D.CheckFermi`
+- 章 015・017 の `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` → 構造 `Ising2D.VPlusData`
+- 章 011・017 の `W P^{(+)} = V^{(+)} P^{(+)}` → 構造 `Ising2D.EvenSectorBridge`
+- `tr(εV^{(+)}) > 0`（`closing_006`。配置基底での直接計算 `closing_004`/`005` を要する独立の枝）
+
+**人手証明に誤りは見つからなかった。** 抽象版で判明したのは「符号の反転則 (2) に
+`im Q̌_ε` の 1 次元性は要らない（要るのは `η_ε` の存在 (1) だけ）」など、
+仮定が必要以上に強い箇所のみ。`structured-latex/` は編集していない。
+
+Onsager の最終定理は、人手証明の粗い挟み撃ち（Step 2・3）を使わず、章 019 の
+`c_equals_c_plus`（無条件）経由で `c(M) = c_+(M) = Λ^{(1/2)}_M` を直接出している（結論は同じ）。
+
+記録: `lean/docs/ch018-formalization.md`（定理一覧・2 本立て対応表・未形式化の理由）、
+`docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md`。
+検証: `lake build` 成功、`./scripts/check-no-sorry.sh` exit 0（106 定理を追加）。
 ## 完了（2026-07-27）: **章 017 の Lean 形式化**（定数 `c` の決定と `V^{(+)}` の固有値）
 
 `structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張）を Lean 4 で形式化した

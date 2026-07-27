@@ -165,3 +165,12 @@ import Ising2D.Part020.Claim009_ClosedFormLogIntegral
 import Ising2D.Part020.Claim010_SineIntegralTwoSided
 import Ising2D.Part020.Theorem011_SecondDerivativeLogDivergence
 import Ising2D.Part016.Claim010_UnconditionalViaPart015
+import Ising2D.Abstract.ParityFermion
+import Ising2D.Part018.Claim001_EpsilonAnticommutes
+import Ising2D.Part018.Setup
+import Ising2D.Part018.Claim002_EpsilonEigenvalueOnQ
+import Ising2D.Part018.Claim003_TraceEpsilonVPlus
+import Ising2D.Part018.Claim008_CheckQHermitian
+import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
+import Ising2D.Part018.Theorem009_CPlusEqualsLambda
+import Ising2D.Part018.Theorem010_OnsagerExactSolution
