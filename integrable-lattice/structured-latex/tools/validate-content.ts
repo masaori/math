@@ -199,7 +199,9 @@ function checkHabitatConsistency(block: ConvertedBlock, file: string): void {
     return;
   }
   const offending = collectBlockStrings(block).filter((value) =>
-    /\\mathbb\{[RC]\}|\\mathbb R\b|\\mathbb C\b|\\R\b|\\C\b/.test(value),
+    // 地の文に直書きされた Unicode の ℝ / ℂ も見る。生成器はこれを LaTeX の
+    // \mathbb{R} へ写して PDF に印字するので、見逃すと可算宣言のまま実数が出力へ出る。
+    /\\mathbb\{[RC]\}|\\mathbb R\b|\\mathbb C\b|\\R\b|\\C\b|[ℝℂ]/.test(value),
   );
   const first = offending[0];
   if (first !== undefined) {

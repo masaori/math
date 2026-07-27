@@ -1,0 +1,89 @@
+# ---------------------------------------------------------
+# SageMath: 臨界条件の同値と kappa(K) の基本性質
+#   対象: structured-latex critical_point_iff_kappa_zero,
+#         isotropic_A_equals_one, kappa_of_K_basic
+#
+#   s1 s2 = 1  <=>  K1 = K2*  <=>  kappa = 0   （さらに 008 章の c1 = s1 c2 とも同値）
+#   等方では A = 1、kappa'(K) = 2 + 2/sinh 2K > 0、kappa(K_c) = 0
+#   |K - K_c| <= 1/10 での定数（0.7353 / 1.3048 / 3.53 / 4.72 / 9.19 / 87 / 24.7）
+# ---------------------------------------------------------
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '_prelude.sage'))
+
+all_ok = True
+
+print("=== critical_point_iff_kappa_zero: 3 条件（＋ c1 = s1 c2）の同値 ===")
+CASES = [(K1, K2) for (K1, K2) in ANISO_PAIRS] + [
+    (mp.mpf('0.5'), mp.mpf('0.5')), (mp.mpf('0.3'), mp.mpf('0.3')),
+    (KC - mp.mpf('0.001'), KC - mp.mpf('0.001')),
+]
+for (K1, K2) in CASES:
+    K1 = F(K1); K2 = F(K2); K2s = K_star(K2)
+    s1 = mp.sinh(2 * K1); s2 = mp.sinh(2 * K2)
+    c1 = mp.cosh(2 * K1); c2 = mp.cosh(2 * K2)
+    kap = kappa_of(K1, K2)
+    cond1 = abs(s1 * s2 - 1) <= TOL_ACOSH          # s1 s2 = 1
+    cond2 = abs(K1 - K2s) <= TOL_ACOSH             # K1 = K2*
+    cond3 = abs(kap) <= TOL_ACOSH                  # kappa = 0
+    cond4 = abs(c1 - s1 * c2) <= TOL_ACOSH         # 008 章 critical_condition_c1_eq_s1_c2
+    ok = (cond1 == cond2 == cond3 == cond4)
+    print(f"  K1={mp.nstr(K1,6)}, K2={mp.nstr(K2,6)}: s1s2-1={mp.nstr(s1*s2-1,3)}, "
+          f"K1-K2*={mp.nstr(K1-K2s,3)}, kappa={mp.nstr(kap,3)}, c1-s1c2={mp.nstr(c1-s1*c2,3)} | "
+          f"(1){int(cond1)} (2){int(cond2)} (3){int(cond3)} (c1=s1c2){int(cond4)}"
+          f"  -> {'PASS' if ok else 'FAIL'}")
+    all_ok = ok and all_ok
+
+print()
+print("=== isotropic_A_equals_one: 等方なら A = 1 ===")
+w = mp.mpf(0)
+for K in ISO_K_LIST:
+    w = max(w, abs(A_of(K, K) - 1))
+ok = w <= TOL
+print(f"  max |A - 1| = {mp.nstr(w,3)}  -> {'PASS' if ok else 'FAIL'}")
+all_ok = ok and all_ok
+
+print()
+print("=== kappa_of_K_basic (1)(2)(3): 導関数の式と kappa(K_c) = 0 ===")
+w1 = w3 = mp.mpf(0)
+h = mp.mpf('1e-12')
+for K in ISO_K_LIST:
+    w1 = max(w1, abs(mp.diff(lambda t: kappa_K(t), K) - kappa_prime(K)))
+    w3 = max(w3, abs(mp.diff(lambda t: kappa_K(t), K, 2) - kappa_second(K)))
+wc = abs(kappa_K(KC))
+mono = all(kappa_prime(K) > 0 for K in ISO_K_LIST)
+ok = (w1 <= TOL_NUM) and (w3 <= TOL_NUM) and (wc <= TOL_ACOSH) and mono
+print(f"  |d kappa/dK - (2+2/sinh2K)| = {mp.nstr(w1,3)}, "
+      f"|d^2 kappa/dK^2 - (-4cosh2K/sinh^2 2K)| = {mp.nstr(w3,3)}, "
+      f"|kappa(K_c)| = {mp.nstr(wc,3)}, kappa' > 0: {mono}  -> {'PASS' if ok else 'FAIL'}")
+all_ok = ok and all_ok
+
+print()
+print("=== kappa_of_K_basic (4)(5): |K - K_c| <= 1/10 での定数 ===")
+grid = [KC - mp.mpf(1) / 10 + mp.mpf(j) / 2000 for j in range(0, 401)]
+mn_s = min(mp.sinh(2 * K) for K in grid); mx_s = max(mp.sinh(2 * K) for K in grid)
+mn_kp = min(kappa_prime(K) for K in grid); mx_kp = max(kappa_prime(K) for K in grid)
+mx_kpp = max(abs(kappa_second(K)) for K in grid)
+mx_kp2p = max(abs(2 * kappa_prime(K) * kappa_second(K)) for K in grid)
+ratios = [abs(kappa_K(K)) / abs(K - KC) for K in grid if abs(K - KC) > mp.mpf('1e-20')]
+mn_r = min(ratios); mx_r = max(ratios)
+err24 = max(abs(kappa_prime(K) ** 2 - 16) / abs(kappa_K(K))
+            for K in grid if abs(kappa_K(K)) > mp.mpf('1e-20'))
+checks = [
+    ("sinh 2K >= 0.7353", mn_s, mn_s >= mp.mpf('0.7353')),
+    ("sinh 2K <= 1.3048", mx_s, mx_s <= mp.mpf('1.3048')),
+    ("kappa' >= 3.53", mn_kp, mn_kp >= mp.mpf('3.53')),
+    ("kappa' <= 4.72", mx_kp, mx_kp <= mp.mpf('4.72')),
+    ("|kappa''| <= 9.19", mx_kpp, mx_kpp <= mp.mpf('9.19')),
+    ("|(kappa'^2)'| <= 87", mx_kp2p, mx_kp2p <= mp.mpf(87)),
+    ("|kappa|/|K-K_c| >= 3.53", mn_r, mn_r >= mp.mpf('3.53')),
+    ("|kappa|/|K-K_c| <= 4.72", mx_r, mx_r <= mp.mpf('4.72')),
+    ("|kappa'^2-16| <= 24.7|kappa|", err24, err24 <= mp.mpf('24.7')),
+    ("|kappa| <= 0.472", mx_r / 10, mx_r / 10 <= mp.mpf('0.472')),
+]
+for (name, v, c) in checks:
+    print(f"  {name}: 実測 {mp.nstr(v, 8)}  -> {'PASS' if c else 'FAIL'}")
+    all_ok = c and all_ok
+
+print()
+print("RESULT: PASS" if all_ok else "RESULT: FAIL")
