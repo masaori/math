@@ -380,6 +380,64 @@ targets=(
   Ising2D.inverse_dft_of_abstract
   Ising2D.recover_Y_of_abstract
   Ising2D.recover_Z_of_abstract
+  Ising2D.configBasisIso
+  Ising2D.sgn_configBasisIso
+  Ising2D.Abstract.prod_entry_eq_zero_of_ne
+  Ising2D.siteProd_diagonal
+  Ising2D.sigmaZ_eq_diagonal
+  Ising2D.sigmaZ_mulVec_basisVec
+  Ising2D.sigmaZ_mulVec_basisVec_spin
+  Ising2D.Abstract.map_exp_of_continuous
+  Ising2D.exp_pi_apply
+  Ising2D.matrixExp_diagonal
+  Ising2D.matrixExp_diagonal_apply
+  Ising2D.V1pauli_eq_diagonal
+  Ising2D.V1pauli_eq_V1comp
+  Ising2D.V1_component_equals_pauli
+  Ising2D.exp_smul_pauliX
+  Ising2D.exp_smul_pauliX_eq_cosh_add_sinh
+  Ising2D.exp_neg_Kstar
+  Ising2D.exp_Kstar
+  Ising2D.sqrt_two_s2_mul_cosh_Kstar
+  Ising2D.sqrt_two_s2_mul_sinh_Kstar
+  Ising2D.two_by_two_transfer_identity
+  Ising2D.exp_smul_sum_sigmaX
+  Ising2D.V2_eq_V2pauli
+  Ising2D.V2comp_eq_siteProd_twoByTwo
+  Ising2D.V2pauli_eq_V2comp
+  Ising2D.V2_component_equals_pauli
+  Ising2D.Abstract.openW_snoc
+  Ising2D.Abstract.pow_succ_apply_eq_sum
+  Ising2D.Abstract.trace_pow_succ
+  Ising2D.partitionFunction_eq_conf
+  Ising2D.partitionFunctionC_eq_trace
+  Ising2D.partition_function_in_pauli_form
+  Ising2D.partition_function_in_pauli_form_V2
+  Ising2D.Abstract.invProj_sq
+  Ising2D.Abstract.invProj_mul_invProj_neg
+  Ising2D.Abstract.invProj_add_invProj_neg
+  Ising2D.Abstract.commute_invProj
+  Ising2D.Abstract.pow_mul_proj
+  Ising2D.Abstract.mul_pow_conj_left
+  Ising2D.epsProj_sq
+  Ising2D.epsProj_mul_epsProj_neg
+  Ising2D.epsProj_add_epsProj_neg
+  Ising2D.epsProj_mulVec_mem
+  Ising2D.epsProj_mulVec_eq_self
+  Ising2D.epsilon_commute_sigmaX
+  Ising2D.epsilon_anticomm_sigmaZ
+  Ising2D.epsilon_anticomm_sigmaY
+  Ising2D.epsilon_commute_V1pauli
+  Ising2D.epsilon_commute_V2pauli
+  Ising2D.epsilon_commute_V1
+  Ising2D.epsilon_commute_V1half
+  Ising2D.commute_epsProj_of_commute_epsilon
+  Ising2D.sector_replacement_of_V1
+  Ising2D.sector_replacement_pow
+  Ising2D.trace_eq_sector_sum
+  Ising2D.trace_epsProj_sym_pow
+  Ising2D.trace_epsProj_sym_pow_eq_plain
+  Ising2D.partition_function_sector_decomposition
 )
 
 {
