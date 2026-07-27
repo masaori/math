@@ -65,7 +65,7 @@ theorem rayleighSup_eq_LambdaM (P : IsingParam)
       = ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint (1 / 2) M μ)) :
     rayleighSup B.W = LambdaM P (1 / 2) M := by
   rw [c_equals_c_plus B.hWsymm B.hWpsd hpos hcomm, B.c_plus_equals_lamMax htr,
-    B.lamMax_eq_LambdaM P hC hgam]
+    lamMax_eq_LambdaM P hC hgam]
 
 end EvenSectorBridge
 

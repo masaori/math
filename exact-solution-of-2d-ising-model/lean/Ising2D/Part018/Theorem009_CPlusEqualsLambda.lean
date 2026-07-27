@@ -118,7 +118,7 @@ theorem sum_quad_Qproj (x : Conf M → ℝ) :
     rw [Complex.ofReal_sum]
     calc ∑ T : Finset (Fin M), ((∑ k, Complex.normSq ((F.Qproj T *ᵥ cvec x) k) : ℝ) : ℂ)
         = ∑ T : Finset (Fin M), cvec x ⬝ᵥ (F.Qproj T *ᵥ cvec x) :=
-          Finset.sum_congr rfl fun T _ => (B.quad_Qproj x T).symm
+          Finset.sum_congr rfl fun T _ => (quad_Qproj x T).symm
       _ = cvec x ⬝ᵥ ((∑ T : Finset (Fin M), F.Qproj T) *ᵥ cvec x) := by
           rw [Matrix.sum_mulVec, dotProduct_sum]
       _ = cvec x ⬝ᵥ cvec x := by rw [F.sum_Qproj, Matrix.one_mulVec]
@@ -135,7 +135,7 @@ theorem quad_Vr_eq_sum (x : Conf M → ℝ) :
           ((checkLambda D.C D.gam T : ℝ) : ℂ) • (F.Qproj T *ᵥ cvec x) := by
     conv_lhs => rw [show D.V = D.V * 1 from (mul_one _).symm, ← F.sum_Qproj]
     rw [Finset.mul_sum, Matrix.sum_mulVec]
-    exact Finset.sum_congr rfl fun T _ => by rw [D.hV T, Matrix.smul_mulVec_assoc]
+    exact Finset.sum_congr rfl fun T _ => by rw [D.hV T, Matrix.smul_mulVec]
   have hC : ((x ⬝ᵥ B.Vr *ᵥ x : ℝ) : ℂ)
       = ((∑ T : Finset (Fin M),
           checkLambda D.C D.gam T
@@ -144,7 +144,7 @@ theorem quad_Vr_eq_sum (x : Conf M → ℝ) :
       rw [B.hVr, cvec_mulVec, cvec_dotProduct]
     rw [h1, hV, dotProduct_sum, Complex.ofReal_sum]
     refine Finset.sum_congr rfl fun T _ => ?_
-    rw [dotProduct_smul, smul_eq_mul, B.quad_Qproj x T, Complex.ofReal_mul]
+    rw [dotProduct_smul, smul_eq_mul, quad_Qproj x T, Complex.ofReal_mul]
   exact_mod_cast hC
 
 /-- **人手証明 Step 1**: `x ∈ 𝓕^{(+)} ∩ ℝ^{2^M}`, `‖x‖ = 1` なら `x^T W x ≤ Λ̌_max`。 -/
@@ -162,7 +162,7 @@ theorem quad_le_lamMax {x : Conf M → ℝ} (hx : epsilonR M *ᵥ x = x) (hn : v
           mul_le_mul_of_nonneg_right (D.checkLambda_le_lamMax T) (hnn T)
     _ = D.lamMax * ∑ T : Finset (Fin M), (∑ k, Complex.normSq ((F.Qproj T *ᵥ cvec x) k)) := by
         rw [Finset.mul_sum]
-    _ = D.lamMax := by rw [B.sum_quad_Qproj x, hn, mul_one]
+    _ = D.lamMax := by rw [sum_quad_Qproj x, hn, mul_one]
 
 /-! ## Step 2: 実の最大固有ベクトルの存在 -/
 
@@ -190,16 +190,16 @@ theorem exists_real_max_eigenvector (htr : 0 < ((epsilon M * D.V).trace).re) :
     ∃ y : Conf M → ℝ, y ≠ 0 ∧ B.Vr *ᵥ y = D.lamMax • y ∧ epsilonR M *ᵥ y = y := by
   obtain ⟨q, hq0, hqfix, _⟩ := F.exists_Qproj_generator (Finset.univ : Finset (Fin M))
   -- `V^{(+)} q = Λ̌_max q`
-  have hVq : ∀ c : ℂ, D.V *ᵥ (c • q) = ((D.lamMax : ℝ) : ℂ) • (c • q) := by
-    intro c
-    rw [Matrix.mulVec_smul]
-    congr 1
+  have hVq0 : D.V *ᵥ q = ((D.lamMax : ℝ) : ℂ) • q :=
     calc D.V *ᵥ q = D.V *ᵥ (F.Qproj Finset.univ *ᵥ q) := by rw [hqfix]
       _ = (D.V * F.Qproj Finset.univ) *ᵥ q := by rw [Matrix.mulVec_mulVec]
       _ = (((checkLambda D.C D.gam (Finset.univ : Finset (Fin M)) : ℝ) : ℂ)
             • F.Qproj Finset.univ) *ᵥ q := by rw [D.hV]
       _ = ((D.lamMax : ℝ) : ℂ) • q := by
-          rw [Matrix.smul_mulVec_assoc, hqfix]; rfl
+          rw [Matrix.smul_mulVec, hqfix]; rfl
+  have hVq : ∀ c : ℂ, D.V *ᵥ (c • q) = ((D.lamMax : ℝ) : ℂ) • (c • q) := by
+    intro c
+    rw [Matrix.mulVec_smul, hVq0, smul_comm]
   -- `ε (c q) = c q`
   have hεq : ∀ c : ℂ, epsilon M *ᵥ (c • q) = c • q := by
     intro c

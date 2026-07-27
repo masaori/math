@@ -7,7 +7,7 @@
 - `epsilon_anticommutes_with_check_Z_Y` (4) → `Ising2D.Abstract.commute_parity_num` /
   `Abstract.commute_parity_projOn`
 - `epsilon_eigenvalue_on_check_Q` (2) → `Ising2D.Abstract.projOn_insert_mul_cre` /
-  `Abstract.cre_mul_projOn_ne_zero` / `Abstract.eta_flip`
+  `Abstract.cre_mul_projOn_ne_zero`
 - `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 →
   `Ising2D.Abstract.sum_powerset_signed_exp`
 
