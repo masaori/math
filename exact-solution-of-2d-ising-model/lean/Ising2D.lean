@@ -131,3 +131,4 @@ import Ising2D.Part015.Claim003_RelationGamma2Tilde
 import Ising2D.Part015.Claim004_EigenATildeDiag
 import Ising2D.Part015.Claim006_DetATilde
 import Ising2D.Part015.Definition008_GammaTildeMu
+import Ising2D.Part016.Claim010_UnconditionalViaPart015

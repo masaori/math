@@ -3,7 +3,7 @@
 ## 完了（2026-07-27）: **章 016 の Lean 形式化**（偶セクターのフェルミオンと `V^{(+)} = c V̌'`）
 
 `structured-latex/content/016_even_sector_fermions.ts`（9 主張）を Lean 4 で形式化した。
-新規: 具体版 `lean/Ising2D/Part016/`（8 ファイル）、抽象版
+新規: 具体版 `lean/Ising2D/Part016/`（9 ファイル）、抽象版
 `lean/Ising2D/Abstract/FermionLadder.lean`・`lean/Ising2D/Abstract/ExpEigenvector.lean`。
 定理一覧・2 本立ての対応・残る仮定は **`lean/docs/ch016-formalization.md`** に記載
 （`lean/README.md` への統合は未了）。`lake build` 成功、`scripts/check-no-sorry.sh` exit 0。
@@ -20,9 +20,18 @@
 - **原文に穴は無かった。** 008 章で問題になった「平方根の分枝の一致」は、半整数運動量では
   係数が `r_μ = |γ_2(θ̃_μ)|`（非負実数）なので生じない。原文 Step 1 の主張どおりであることを
   機械的に確認し `docs/tasks/2026-07_lean-ch009-013/010_ch016_no_sqrt_branch_gap.md` に記録した。
-- **残る仮定はすべて 014・015 章（並行形式化中）由来**: `γ_2(θ̃_μ) ≠ 0`、
-  `T_V_plus_check_Z_Y` の作用、`λ_± = e^{±γ}`、重み `γ(θ̃_μ)` とその共役不変性。
-  015 章の `P̌_μ` は使わず、原文が「すなわち」で与える明示式を `ψ̌^†, ψ̌` の定義に採った。
+- **015 章由来の仮定はすべて解消済み。** 015 章がマージされたので
+  `Part016/Claim010_UnconditionalViaPart015.lean` で `γ_2(θ̃_μ) ≠ 0`・`λ_± = e^{±γ}`・
+  重み `γ(θ̃_μ)` とその共役不変性を代入し、無条件版
+  `Ising2D.VPlus_eq_smul_checkVprime'` まで到達した。
+  併せて、`ψ̌^†, ψ̌` の定義（原文が「すなわち」で与える明示式を採用）が
+  015 章の `P̌_μ` の列と一致することを `checkPsiDag_eq_checkPmat_col` /
+  `checkPsi_eq_checkPmat_col` で確認した。
+- **残る仮定は 2 つだけ**: 014 章 `T_V_plus_check_Z_Y`（未形式化）の作用 `hT` と、
+  008 章以来の双対関係 `c_2 s_2^* = c_2^*`（数学的に必要な前提で、穴ではない）。
+- 付随修正: `lean/scripts/check-no-sorry.sh` が固定パス `/tmp/ising2d_axiom_check.lean` を
+  使っていたため、**複数 worktree で同時実行すると互いに上書きし、別ブランチの定理一覧を
+  検査して誤検出していた**（実際に踏んだ）。`mktemp` へ変更済み。
 
 ## 完了（2026-07-27）: **章 015 の Lean 形式化**（半整数運動量における `A(θ~)` の対角化）
 

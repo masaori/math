@@ -831,16 +831,35 @@ targets=(
   Ising2D.lambdaPlusR_eq_exp
   Ising2D.lambdaMinusR_eq_exp
   Ising2D.lambda_separation
+  Ising2D.checkR_eq_absGamma2
+  Ising2D.checkPsiDag_eq_checkPmat_col
+  Ising2D.checkPsi_eq_checkPmat_col
+  Ising2D.gamma1R_thetaTilde_conj
+  Ising2D.gammaTilde_conj
+  Ising2D.gammaTildeC_conj
+  Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex
+  Ising2D.gamma1_add_checkR_eq_exp
+  Ising2D.gamma1_sub_checkR_eq_exp
+  "Ising2D.checkPsi_car'"
+  Ising2D.TCheckVprime_checkPsi_pair
+  "Ising2D.TVPlus_eq_TCheckVprime'"
+  "Ising2D.VPlus_eq_smul_checkVprime'"
 )
+
+# 生成する一時ファイルは worktree ごとに別名にする。
+# 固定パス（/tmp/…）だと、複数の worktree で同時に走らせたとき互いに上書きし、
+# 別ブランチの target 一覧を検査してしまう（実際に誤検出が起きた）。
+axiom_check_file="$(mktemp -t ising2d_axiom_check.XXXXXX.lean)"
+trap 'rm -f "$axiom_check_file"' EXIT
 
 {
   echo "import Ising2D"
   for t in "${targets[@]}"; do
     echo "#print axioms $t"
   done
-} > /tmp/ising2d_axiom_check.lean
+} > "$axiom_check_file"
 
-out="$(lake env lean --stdin < /tmp/ising2d_axiom_check.lean)"
+out="$(lake env lean --stdin < "$axiom_check_file")"
 echo "$out"
 
 if echo "$out" | grep -q 'sorryAx'; then

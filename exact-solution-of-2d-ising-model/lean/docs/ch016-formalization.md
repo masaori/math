@@ -4,7 +4,8 @@
 
 新規ファイル:
 
-- 具体版 `lean/Ising2D/Part016/`（8 ファイル）
+- 具体版 `lean/Ising2D/Part016/`（9 ファイル。うち
+  `Claim010_UnconditionalViaPart015.lean` は 015 章の成果を入れて仮定を落とす後段）
 - 抽象版 `lean/Ising2D/Abstract/FermionLadder.lean`, `lean/Ising2D/Abstract/ExpEigenvector.lean`
 
 `lean/Ising2D.lean` と `lean/scripts/check-no-sorry.sh` へは末尾追記のみ。
@@ -58,6 +59,25 @@
 | `Ising2D.Abstract.cosh_add_sinh_eq_exp` | `cosh c + sinh c = e^c` | 補助 |
 | `Ising2D.Abstract.exp_conj_of_ad_eigen` / `exp_conj_of_lie_eigen` | `ad x` の固有ベクトルは `exp` 共役の固有ベクトル（**抽象版**） | 同 Step 3〜5 |
 
+### 1-2. 015 章の成果で仮定を落とした版（`Part016/Claim010_UnconditionalViaPart015.lean`）
+
+本章の形式化中に 015 章（`Ising2D/Part015/`）が `origin/main` に入ったため、
+そこで無条件に証明された `γ_2(θ̃_μ) ≠ 0`・`λ_{±,μ} = e^{±γ(θ̃_μ)}`・重み `γ(θ̃_μ)` を代入して、
+**015 章由来の仮定をすべて除去した版**を用意した。新しい主張は立てていない。
+
+| Lean の名前 | 内容 | 対応する人手証明のラベル |
+| --- | --- | --- |
+| `Ising2D.checkR_eq_absGamma2` | 本章の `r_μ` は 015 章の `\|γ_2(θ̃_μ)\|` そのもの（定義的に一致） | `def_check_fermi` の係数 |
+| `Ising2D.checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col` | 本章の `ψ̌^†, ψ̌` の定義が原文の行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` と一致する | `def_check_fermi`（015 章 `diagonalization_check_P_D` との突き合わせ） |
+| `Ising2D.gamma1R_thetaTilde_conj` | `γ_1` の共役添字不変性（実数版） | `periodicity_of_check_fermi` (3) |
+| `Ising2D.gammaTilde_conj` / `gammaTildeC_conj` | `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | 同 (3) の `γ` 版 |
+| `Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex` | 仮定 `hga` が無条件に成り立つこと | 015 章 `gamma_2_theta_tilde_nonzero` |
+| `Ising2D.gamma1_add_checkR_eq_exp` / `gamma1_sub_checkR_eq_exp` | 仮定 `hlamPlus` / `hlamMinus` が（双対関係の下で）無条件に成り立つこと | 015 章 `lambda_eq_exp_gamma_theta_tilde` |
+| `Ising2D.checkPsi_car'` | CAR 3 式（015 章由来の仮定なし） | `anticommutator_of_check_psi` |
+| `Ising2D.TCheckVprime_checkPsi_pair` | `T_{(V̌')}(ψ̌^†) = e^{+γ}ψ̌^†`, `T_{(V̌')}(ψ̌) = e^{-γ}ψ̌`（同上） | `action_of_T_check_Vprime_on_check_psi` |
+| `Ising2D.TVPlus_eq_TCheckVprime'` | `T_{V^{(+)}} = T_{V̌'}`（残る仮定は 014 章の `hT` と双対関係 `hdual` だけ） | `T_V_plus_eq_T_check_Vprime` |
+| `Ising2D.VPlus_eq_smul_checkVprime'` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論**。同上） | `V_plus_eq_c_check_Vprime` |
+
 ## 2. 2 本立ての対応表と「抽象版で判明した本質」
 
 | 人手証明のラベル | 具体版 | 抽象版 |
@@ -100,19 +120,23 @@
 
 ## 3. 形式化できなかった主張・残っている仮定
 
-**担当範囲の 9 主張はすべて形式化した**（`sorry` / `admit` ゼロ）。ただし次の仮定が残っている。
-いずれも**本セッションの担当範囲外（014 章・015 章）で、並行して形式化中**のものである。
+**担当範囲の 9 主張はすべて形式化した**（`sorry` / `admit` ゼロ。形式化を断念した主張は無い）。
+残る仮定は次の 2 つだけで、いずれも**本章の担当範囲外**である。
 
-| 仮定 | 出所 | 消える条件 |
+| 残る仮定 | 出所 | 消える条件 |
 | --- | --- | --- |
-| `hga : ∀ μ ∈ 𝓜̌, γ_2(θ̃_μ) ≠ 0` | 015 章 `gamma_2_theta_tilde_nonzero` | 015 章がこれを `K_1, K_2 ∈ ℝ_{>0}` から無条件に閉じれば消える |
-| `hT : ActsBy T (Ž_μ) (Y̌_μ) (A(θ̃_μ))` | 014 章 `T_V_plus_check_Z_Y` | 014 章の完成で消える |
-| `hlamPlus` / `hlamMinus : γ_1(θ̃_μ) ± r_μ = e^{±γ(θ̃_μ)}` | 015 章 `lambda_eq_exp_gamma_theta_tilde` | 015 章の完成で消える |
-| `g : ℤ → ℂ`（重み `γ(θ̃_μ)`）と `hgconj : γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | 015 章 `def_gamma_theta_tilde_mu` | 015 章が `γ` を定義すれば `g := fun μ => γ(θ̃_μ)` と置くだけ |
+| `hT : ∀ j, ActsBy T_{V^{(+)}} (Ž_μ) (Y̌_μ) (A(θ̃_μ))` | 014 章 `T_V_plus_check_Z_Y`（未形式化） | 014 章の形式化で消える |
+| `hdual : c_2 s_2^* = c_2^*`（双対関係） | 008 章以来、`det A = 1` に数学的に必要な仮定 | 消えない（形式化の穴ではなく、原文が前提している関係） |
 
-また、原文 `def_check_fermi` が `P̌_μ`（015 章 `diagonalization_check_P_D`）の列として
-`ψ̌^†, ψ̌` を定義しているのに対し、本形式化は原文が「すなわち」として与えている**明示式**を
-定義に採った。015 章が `P̌_μ` を用意したら、その列と本定義の一致を 1 本の補題で確認すればよい。
+当初あった 015 章由来の 4 仮定（`γ_2(θ̃_μ) ≠ 0`、`λ_± = e^{±γ}`、重み `γ(θ̃_μ)` とその共役不変性）は、
+015 章がマージされたことにより `Part016/Claim010_UnconditionalViaPart015.lean` ですべて解消した
+（上記 1-2 節）。
+
+原文 `def_check_fermi` が `P̌_μ`（015 章 `diagonalization_check_P_D`）の列として
+`ψ̌^†, ψ̌` を定義しているのに対し、本形式化は 015 章の完成を待たずに閉じるため、
+原文が「すなわち」として与えている**明示式**を定義に採った。
+この 2 通りの定義が一致することは `checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col`
+（015 章の `checkPmat` と直接突き合わせる）で確認済みである。
 同じ理由で、原文 `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 の `P̌_μ^{-1}` は
 `ψ̌^† ∓ ψ̌` の直接計算（`checkZ_eq_smul` / `checkY_eq_smul`）で置き換えた。
 `det P̌_μ ≠ 0` に相当するのは `checkP_ne_zero` / `checkQ_ne_zero` である。
