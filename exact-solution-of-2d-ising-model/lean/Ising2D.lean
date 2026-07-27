@@ -110,6 +110,15 @@ import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
 import Ising2D.Part019.Claim002_AbsVectorEvenSector
 import Ising2D.Part019.Theorem003_CMinusLeCPlus
 import Ising2D.Part019.Theorem004_CEqualsCPlus
+import Ising2D.Abstract.TVActionSandwich
+import Ising2D.Part014.Definition001_VPlus
+import Ising2D.Part014.Claim002_NestedCommutator
+import Ising2D.Part014.Claim003_CoefficientConversion
+import Ising2D.Part014.Claim004_ExtractTaylor
+import Ising2D.Part014.Definition007_B1B2
+import Ising2D.Part014.Claim005_TActionsOnCheck
+import Ising2D.Part014.Claim009_FactorizationATheta
+import Ising2D.Part014.Claim010_TVPlusAction
 import Ising2D.Abstract.OddModePhase
 import Ising2D.Abstract.NegConjPair
 import Ising2D.Abstract.TwoByTwoSkew

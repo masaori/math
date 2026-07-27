@@ -9,8 +9,9 @@
 章 018 は**本プロジェクトの結論**（Onsager の自由エネルギー）に至る章であり、
 章 014–017（半整数運動量のフェルミオン `ψ̌_μ^†, ψ̌_μ`、個数演算子 `ň_μ`、
 同時固有射影 `Q̌_ε`、`V^{(+)}` の固有値 `Λ̌_ε`）の上に立つ。
-**それらは本リポジトリの Lean 側に存在しない**（`Ising2D/` に `Part014` / `Part016` /
-`Part017` が無い。`grep -rn "checkPsi\|checkNum\|checkQ" --include=*.lean Ising2D/` は
+**それらは本リポジトリの Lean 側に存在しない**（`Ising2D/` に `Part016` / `Part017` が無く、
+`Part014`（章 014「偶セクターでの `T` の作用」）にも `ψ̌` / `ň` / `Q̌` は現れない。
+`grep -rn "checkPsi\|checkNum\|checkQ" --include=*.lean Ising2D/` は
 章 013 の `checkZ` / `checkY` 以外にヒットしない）。
 
 そこで**章 014–017 から受け取る入力だけを束ねた構造**を置き、章 018 の主張は
@@ -235,7 +236,7 @@ c(M) = c_+(M) = Λ̌_max = Λ^{(1/2)}_M
 
 ```
 $ cd exact-solution-of-2d-ising-model/lean
-$ lake build                    # Build completed successfully (2931 jobs).
+$ lake build                    # Build completed successfully
 $ ./scripts/check-no-sorry.sh   # exit 0
 OK: ソース中に sorry / admit は無い
 OK: 主要定理はいずれも sorryAx に依存していない
