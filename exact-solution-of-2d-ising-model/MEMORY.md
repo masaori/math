@@ -1,5 +1,28 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: 章 011「最大固有値」の Lean 形式化（具体版＋抽象版の 2 本立て）
+
+`lean/Ising2D/Part011/`（具体版 7 ファイル）と `lean/Ising2D/Abstract/PsdCauchySchwarz.lean`
+`lean/Ising2D/Abstract/RayleighMoments.lean`（抽象版）を新設。`lake build` と
+`./scripts/check-no-sorry.sh` はいずれも exit 0（`sorry` ゼロ）。
+
+- 形式化した主張: `psd_cauchy_schwarz` / `def_rayleigh_sup` / `rayleigh_bounds_operator_norm` /
+  `trace_power_sandwich` / `Z_equals_trace_of_W` / `def_symmetrized_transfer_matrix` /
+  `W_is_real_symmetric_positive_definite` / `W_has_positive_entries` /
+  `partition_function_sandwich` / `sector_decomposition_of_rayleigh_sup` の (1)(3)。
+- **未形式化**: `sector_decomposition_of_rayleigh_sup` の (2)（`V^{(±)}` に依存し章 004/010 が必要）。
+- 章 009/010 への依存（`Z = tr((V₁V₂)^{N_row})`、`V₂` の正値性・正定値性など）は
+  import せず**仮定として受け取る**形にした。接続用の一般補題 `Ising2D.matExp_posDef`
+  （実対称行列の `exp` は正定値）は用意済み。
+- 一覧・2 本立ての対応表・「抽象版で判明した本質」は
+  [lean/docs/ch011-formalization.md](lean/docs/ch011-formalization.md)。
+- **人手証明に見つけた問題**（本文は未修正。修正は別セッション担当）:
+  - `docs/tasks/2026-07_lean-ch009-013/001_ch011-moment-log-convexity-index-error.md`
+    — Step 2 の対数凸性を導く `(a,b)` の指定が誤り（結論は正しい）。
+  - `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md`
+    — `c_±(M)` の `sup` が定義できること（`F^{(±)}` に単位ベクトルがあること）の根拠が本文に無い。
+
+
 ## 完了（2026-07-27）: **2 次元 Ising 模型の厳密解が本文で閉じた**（018 章、章 C′-16）
 
 `structured-latex/content/018_even_sector_closing.ts`（11 ブロック）で `c_+(M) = Λ^{(1/2)}_M` を

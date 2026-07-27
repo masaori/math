@@ -47,3 +47,14 @@ import Ising2D.Abstract.ExpConjugation
 import Ising2D.Part008.Claim006_ExpConjugation
 import Ising2D.Abstract.TVAction
 import Ising2D.Part008.Claim012_TVActions
+import Ising2D.Abstract.PsdCauchySchwarz
+import Ising2D.Abstract.RayleighMoments
+import Ising2D.Part011.Basic
+import Ising2D.Part011.Claim005_PsdCauchySchwarz
+import Ising2D.Part011.TraceBound
+import Ising2D.Part011.Definition006_RayleighSup
+import Ising2D.Part011.Claim007_OperatorBound
+import Ising2D.Part011.Claim008_TracePowerSandwich
+import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
+import Ising2D.Part011.Claim009_PartitionFunctionSandwich
+import Ising2D.Part011.Claim010_SectorDecomposition
