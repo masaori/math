@@ -47,3 +47,16 @@ import Ising2D.Abstract.ExpConjugation
 import Ising2D.Part008.Claim006_ExpConjugation
 import Ising2D.Abstract.TVAction
 import Ising2D.Part008.Claim012_TVActions
+import Ising2D.Part013.Claim001_WhyMinusOnly
+import Ising2D.Part013.Claim002_AntiperiodicExpSum
+import Ising2D.Part013.Definition003_HalfIntegerModes
+import Ising2D.Part013.Definition003a_CheckIndexSet
+import Ising2D.Part013.Claim003b_ConjugateIndex
+import Ising2D.Part013.Claim005_AnticommutatorCheckZY
+import Ising2D.Part013.Claim007_H1H2ViaCheck
+import Ising2D.Part013.Claim004_CommutatorHCheckZY
+import Ising2D.Part013.Claim006_RecoverZY
+import Ising2D.Abstract.AntiperiodicFourier
+import Ising2D.Part013.Claim002_AntiperiodicExpSumAbstract
+import Ising2D.Part013.Claim005_AnticommutatorCheckZYAbstract
+import Ising2D.Part013.Claim006_RecoverZYAbstract

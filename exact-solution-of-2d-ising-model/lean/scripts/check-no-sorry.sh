@@ -380,6 +380,77 @@ targets=(
   Ising2D.inverse_dft_of_abstract
   Ising2D.recover_Y_of_abstract
   Ising2D.recover_Z_of_abstract
+  Ising2D.Abstract.pow_half_eq_neg_one
+  Ising2D.Abstract.sq_isPrimitiveRoot
+  Ising2D.Abstract.zpow_mul_natCast
+  Ising2D.Abstract.sum_zpow_primitiveRoot_zero_based
+  Ising2D.Abstract.sum_zpow_antiperiodic
+  Ising2D.Abstract.inverse_dft_antiperiodic
+  Ising2D.Abstract.acomm_antiperiodic_fourier_clifford
+  Ising2D.lie_H2_hatZMinus_eq
+  Ising2D.lie_H2_hatZPlus_eq
+  Ising2D.lie_H2_hatZPlus_ne_lie_H2_hatZMinus
+  Ising2D.lie_H2_hatZPlus_ne_hatZMinus
+  Ising2D.expPhase_zpow
+  Ising2D.expPhase_two_mul
+  Ising2D.expPhase_two_mul_half
+  Ising2D.checkPhase_eq_exp
+  Ising2D.checkPhase_M
+  Ising2D.checkPhase_period
+  Ising2D.expPhase_sum_zero_based
+  Ising2D.antiperiodic_exp_sum
+  Ising2D.sum_checkPhase
+  Ising2D.antiperiodic_exp_sum_dvd
+  Ising2D.antiperiodic_exp_sum_not_dvd
+  Ising2D.checkZ
+  Ising2D.checkY
+  Ising2D.checkPhase_antiperiodic
+  Ising2D.checkZ_period
+  Ising2D.checkY_period
+  Ising2D.checkPhase_congr
+  Ising2D.thetaTilde_one_sub
+  Ising2D.checkPhase_one_sub
+  Ising2D.thetaTilde_ne
+  Ising2D.thetaTilde_pos
+  Ising2D.thetaTilde_lt_two_pi
+  Ising2D.checkIndex_conj
+  Ising2D.conj_index_self_iff
+  Ising2D.thetaTilde_of_self_conj
+  Ising2D.dvd_add_sub_one_iff
+  Ising2D.deltaMod_add_one_eq
+  Ising2D.thetaTilde_conj
+  Ising2D.checkPhase_conj
+  Ising2D.checkZ_conj
+  Ising2D.checkY_conj
+  Ising2D.acomm_checkZ_checkZ
+  Ising2D.acomm_checkY_checkY
+  Ising2D.acomm_checkZ_checkY
+  Ising2D.acomm_checkZ_checkZ_of_mem
+  Ising2D.acomm_checkY_checkY_of_mem
+  Ising2D.expPhase_nextSite
+  Ising2D.H2_eq_check_sum
+  Ising2D.H1Plus_eq_check_sum
+  Ising2D.lie_H1Plus_checkZ
+  Ising2D.lie_H1Plus_checkY
+  Ising2D.lie_H2_checkZ
+  Ising2D.lie_H2_checkY
+  Ising2D.inverse_dft_check
+  Ising2D.recover_checkZ
+  Ising2D.recover_checkY
+  Ising2D.Z_eq_inverse_dft_check
+  Ising2D.Y_eq_inverse_dft_check
+  Ising2D.checkZ_checkY_generate_algebra
+  Ising2D.isPrimitiveRoot_expPhase_one
+  Ising2D.isPrimitiveRoot_expPhase_neg_one
+  Ising2D.antiperiodic_exp_sum_of_abstract
+  Ising2D.checkPhase_M_of_abstract
+  Ising2D.checkZ_period_of_abstract
+  Ising2D.checkY_period_of_abstract
+  Ising2D.acomm_checkZ_checkZ_of_abstract
+  Ising2D.acomm_checkY_checkY_of_abstract
+  Ising2D.inverse_dft_check_of_abstract
+  Ising2D.recover_checkZ_of_abstract
+  Ising2D.recover_checkY_of_abstract
 )
 
 {

@@ -2447,3 +2447,50 @@ exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z
 照合のため `set_option backward.isDefEq.respectTransparency false` を使っている。
 `open scoped ... in by ...`（tactic への `in`）では instance が入らないので、
 **scoped instance を要する補題は独立した宣言として `open scoped ... in theorem` で書くこと。**
+
+---
+
+## 完了（2026-07-27）: 章 013「偶セクターの半整数運動量モード」の Lean 形式化
+
+`structured-latex/content/013_even_sector_modes.ts` の数学的主張 7 本をすべて Lean で形式化した
+（`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+新規ファイルは具体版が `lean/Ising2D/Part013/`、抽象版が
+`lean/Ising2D/Abstract/AntiperiodicFourier.lean`。詳細は
+[lean/docs/ch013-formalization.md](lean/docs/ch013-formalization.md)。
+
+### 抽象版で判明した本質（README 4 節の「何が本質的か」への答え）
+
+**整数運動量と半整数運動量は、同じ抽象版の別の特殊化である。**
+
+- `e^{-iθ~}` は 1 の原始 `2M` 乗根 `ξ` であり、**半整数運動量とはその奇数周波数
+  `ξ^{j(2μ-1)}` のこと**。整数運動量は `ζ = ξ^2`（原始 `M` 乗根）の偶数周波数。
+- 本文が「仕組みは 1 つの等式 `e^{-iMθ~_μ} = -1` に集約される」と書いている等式の正体は
+  **`ξ^M = -1`**。証明は「`(ξ^M)^2 = 1` かつ原始性から `ξ^M ≠ 1`、体だから `-1`」の 3 行で、
+  指数関数も円周率も複素数であることも効いていない。
+- 指数和 `antiperiodic_exp_sum` は、定数位相 `ξ^k` を括り出すだけで**整数運動量の `exp_sum` と
+  同じ直交性補題**（`Abstract.sum_zpow_primitiveRoot`）に帰着する。
+  本文の `(-1)^l` はその定数位相を `k = lM` で評価した `ξ^{lM} = (ξ^M)^l` にすぎない。
+- **対の添字が `μ+ν ≡ 0` から `μ+ν ≡ 1` へずれる理由は、
+  奇数 + 奇数 = `(2μ-1)+(2ν-1) = 2(μ+ν-1)` の `-1` のただ 1 点**。
+- 添字の周期性 (2) と交換関係 (A)〜(D) は、**既存の抽象版そのまま**
+  （`Abstract.transform_periodic` と `Abstract.CliffordTriple.lie_sum_*`）の特殊化で出る。
+- **「`(+)` セクターで 008 章が壊れる」の正体は `Dz ≠ Dz'`**（`hat(Z)^{(±)}` と `hat(Z)^{(∓)}` の
+  反交換子が違う）の 1 点。`check(Z)` は族が 1 つ（`z = z'`）なのでこの差が構造的に存在しない。
+- 逆変換だけは既存の `Abstract.inverse_dft_abstract`（`M` 乗根版）の特殊化にならないので
+  `Abstract.inverse_dft_antiperiodic` を新設した（証明の骨格は同一）。
+
+### 本文の誤り・穴
+
+**見つからなかった。** 数値検証（`sagemath/check/046_claim_even_sector_modes/`、`M = 2,3,4,5`）とも
+すべて整合する。`why_008_applies_only_to_minus_sector` の第 2 式は 008 章の原文 (5) の
+**訂正版**（008 章原文は符号・係数を誤っている）を採用しており、Lean と一致する。
+
+### 次に触る人へ
+
+- `lean/README.md` への統合（形式化済み命題の表・2 本立ての表への追記）は未実施。
+  素材は `lean/docs/ch013-formalization.md` にある。
+- 014 章以降（`periodicity_of_check_fermi`、`Ǎ(θ~)` の対角化、`ψ̌`、`V = cV'`、固有値）は未着手。
+  013 章で用意した `Ising2D.checkZ` / `checkY` / `checkPhase` / `CheckIndex` と
+  4 本の交換関係・3 本の反交換関係がその土台になる。
+- `deltaMod` を含む `if` を `dvd_neg` で書き換えるときは `rw` ではなく `simp only [dvd_neg]` を使う
+  （`Decidable` インスタンスに依存するため `rw` は motive not type correct で落ちる）。
