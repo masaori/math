@@ -1,5 +1,41 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 016 の Lean 形式化**（偶セクターのフェルミオンと `V^{(+)} = c V̌'`）
+
+`structured-latex/content/016_even_sector_fermions.ts`（9 主張）を Lean 4 で形式化した。
+新規: 具体版 `lean/Ising2D/Part016/`（9 ファイル）、抽象版
+`lean/Ising2D/Abstract/FermionLadder.lean`・`lean/Ising2D/Abstract/ExpEigenvector.lean`。
+定理一覧・2 本立ての対応・残る仮定は **`lean/docs/ch016-formalization.md`** に記載
+（`lean/README.md` への統合は未了）。`lake build` 成功、`scripts/check-no-sorry.sh` exit 0。
+
+要点:
+
+- **008 章の抽象版 CAR（`Ising2D.Abstract.car_of_coeffs`）は半整数運動量でもそのまま使えた。**
+  対の条件が `μ+ν ≡ 0` から `ν = M+1-μ` へ変わっても、抽象版の仮定
+  （反交換子がスカラー倍の `1`／係数のスカラー恒等式 2 本）は変わらない。
+- **章の結論 `V_plus_eq_c_check_Vprime` まで到達**（`Ising2D.VPlus_eq_smul_checkVprime`）。
+  `T_V_plus_eq_T_check_Vprime` / `V_plus_eq_c_check_Vprime` は `V^{(+)}` の定義に依存せず、
+  「`Ž, Y̌` 上で一致する共役は全体で一致」「共役が一致する可逆元はスカラー倍を除いて等しい」
+  として無条件に証明した。
+- **原文に穴は無かった。** 008 章で問題になった「平方根の分枝の一致」は、半整数運動量では
+  係数が `r_μ = |γ_2(θ̃_μ)|`（非負実数）なので生じない。原文 Step 1 の主張どおりであることを
+  機械的に確認し `docs/tasks/2026-07_lean-ch009-013/010_ch016_no_sqrt_branch_gap.md` に記録した。
+- **015 章由来の仮定はすべて解消済み。** 015 章がマージされたので
+  `Part016/Claim010_UnconditionalViaPart015.lean` で `γ_2(θ̃_μ) ≠ 0`・`λ_± = e^{±γ}`・
+  重み `γ(θ̃_μ)` とその共役不変性を代入し、無条件版
+  `Ising2D.VPlus_eq_smul_checkVprime'` まで到達した。
+  併せて、`ψ̌^†, ψ̌` の定義（原文が「すなわち」で与える明示式を採用）が
+  015 章の `P̌_μ` の列と一致することを `checkPsiDag_eq_checkPmat_col` /
+  `checkPsi_eq_checkPmat_col` で確認した。
+- **014 章由来の仮定 `hT` も解消済み**（014 章もマージされたため）。
+  `Ising2D.TVPlus_actsBy_checkZY` で埋め、完全な無条件版
+  `Ising2D.VPlus_eq_smul_checkVprime_of_dual` に到達した。
+- **残る仮定は双対関係 `c_2 s_2^* = c_2^*` の 1 つだけ**
+  （008 章以来 `det A(θ) = 1` に数学的に必要な前提で、穴ではない）。
+- 付随修正: `lean/scripts/check-no-sorry.sh` が固定パス `/tmp/ising2d_axiom_check.lean` を
+  使っていたため、**複数 worktree で同時実行すると互いに上書きし、別ブランチの定理一覧を
+  検査して誤検出していた**（実際に踏んだ）。`mktemp` へ変更済み。
+
 ## 完了（2026-07-27）: **章 018 の Lean 形式化**（偶セクターの完結 = Onsager の厳密解）
 
 `structured-latex/content/018_even_sector_closing.ts`（12 ブロック）を Lean 4 で形式化した

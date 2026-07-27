@@ -750,6 +750,43 @@ targets=(
   Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
+  Ising2D.Abstract.lie_creAnn_cre
+  Ising2D.Abstract.lie_creAnn_ann
+  Ising2D.Abstract.lie_carHam_cre
+  Ising2D.Abstract.lie_carHam_ann
+  Ising2D.Abstract.exp_conj_of_ad_eigen
+  Ising2D.Abstract.exp_conj_of_lie_eigen
+  Ising2D.gamma1_add_int_mul_two_pi
+  Ising2D.thetaTilde_add_int_mul
+  Ising2D.gamma1_thetaTilde_conj
+  Ising2D.gamma2_thetaTilde_conj
+  Ising2D.gamma2_neg_thetaTilde_conj
+  Ising2D.checkR_sq
+  Ising2D.checkR_conj
+  Ising2D.checkPsiDag_eq
+  Ising2D.checkPsi_eq
+  Ising2D.checkPsi_car
+  Ising2D.acomm_checkPsiDag_checkPsiDag
+  Ising2D.acomm_checkPsiDag_checkPsi
+  Ising2D.acomm_checkPsi_checkPsi
+  Ising2D.AMat_mulVec_checkPsiDag_coeff
+  Ising2D.AMat_mulVec_checkPsi_coeff
+  Ising2D.TVPlus_checkPsiDag_of_action
+  Ising2D.TVPlus_checkPsi_of_action
+  Ising2D.TVPlus_checkPsiDag_psi_of_action
+  Ising2D.checkIdx_rev
+  Ising2D.isUnit_checkVprime
+  Ising2D.matExp_conj_eigen
+  Ising2D.lie_checkX_checkPsiDag
+  Ising2D.lie_checkX_checkPsi
+  Ising2D.TCheckVprime_checkPsiDag
+  Ising2D.TCheckVprime_checkPsi
+  Ising2D.eq_on_checkZY_of_eq_on_checkPsi
+  Ising2D.TVPlus_eq_TCheckVprime_on_checkZY
+  Ising2D.TConj_eq_of_eq_on_checkZY
+  Ising2D.TVPlus_eq_TCheckVprime
+  Ising2D.exists_smul_of_TConj_eq
+  Ising2D.VPlus_eq_smul_checkVprime
   Ising2D.VPlus
   Ising2D.isUnit_VPlus
   Ising2D.V1halfPlus_sq
@@ -832,6 +869,22 @@ targets=(
   Ising2D.lambdaPlusR_eq_exp
   Ising2D.lambdaMinusR_eq_exp
   Ising2D.lambda_separation
+  Ising2D.checkR_eq_absGamma2
+  Ising2D.checkPsiDag_eq_checkPmat_col
+  Ising2D.checkPsi_eq_checkPmat_col
+  Ising2D.gamma1R_thetaTilde_conj
+  Ising2D.gammaTilde_conj
+  Ising2D.gammaTildeC_conj
+  Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex
+  Ising2D.gamma1_add_checkR_eq_exp
+  Ising2D.gamma1_sub_checkR_eq_exp
+  "Ising2D.checkPsi_car'"
+  Ising2D.TCheckVprime_checkPsi_pair
+  "Ising2D.TVPlus_eq_TCheckVprime'"
+  "Ising2D.VPlus_eq_smul_checkVprime'"
+  Ising2D.sinh_two_K2_pos
+  Ising2D.TVPlus_actsBy_checkZY
+  Ising2D.VPlus_eq_smul_checkVprime_of_dual
   # --- 018 章（偶セクターの完結：Onsager の厳密解）---
   Ising2D.Abstract.anticomm_sum_smul
   Ising2D.Abstract.commute_parity_num
@@ -1004,14 +1057,20 @@ targets=(
   Ising2D.VPlus_eq_Vmat
 )
 
+# 生成する一時ファイルは worktree ごとに別名にする。
+# 固定パス（/tmp/…）だと、複数の worktree で同時に走らせたとき互いに上書きし、
+# 別ブランチの target 一覧を検査してしまう（実際に誤検出が起きた）。
+axiom_check_file="$(mktemp -t ising2d_axiom_check.XXXXXX.lean)"
+trap 'rm -f "$axiom_check_file"' EXIT
+
 {
   echo "import Ising2D"
   for t in "${targets[@]}"; do
     echo "#print axioms $t"
   done
-} > /tmp/ising2d_axiom_check.lean
+} > "$axiom_check_file"
 
-out="$(lake env lean --stdin < /tmp/ising2d_axiom_check.lean)"
+out="$(lake env lean --stdin < "$axiom_check_file")"
 echo "$out"
 
 if echo "$out" | grep -q 'sorryAx'; then
