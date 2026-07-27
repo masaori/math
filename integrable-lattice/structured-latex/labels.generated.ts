@@ -30,8 +30,6 @@ export const ALL_LABELS = [
   "paper_remark_qp_motivation",
   "paper_remark_scope",
   "paper_thm_archimedean",
-  "scaffold_claim_placeholder",
-  "scaffold_def_placeholder",
 ] as const;
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

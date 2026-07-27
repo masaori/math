@@ -19,11 +19,11 @@ import type { ConvertedBlock, Note } from "../schema.ts";
 // --- ref -------------------------------------------------------------------
 
 // 実在ラベルは通る。
-const okRef = ref("scaffold_def_placeholder");
+const okRef = ref("paper_def_curve");
 void okRef;
 
 // @ts-expect-error 存在しないラベルへの参照はコンパイル時に落ちる。
-void ref("scaffold_def_placeholder_typo");
+void ref("paper_def_curve_typo");
 
 // @ts-expect-error 空文字も当然ラベルではない。
 void ref("");
@@ -40,7 +40,7 @@ const okBlock: ConvertedBlock = {
   kind: "claim",
   sourcePath: "type-tests/label-typing.test-d.ts",
   sourceOrdinal: 1,
-  labels: ["scaffold_def_placeholder"],
+  labels: ["paper_def_curve"],
   habitat: "Lambda",
   statement: [paragraph(["ラベルは生成済みユニオンの値のみ。", math("x")])],
 };
@@ -201,7 +201,7 @@ void blockWithBadVerification;
 
 const okNote: Note = {
   id: "note_type_test_ok",
-  targets: ["scaffold_def_placeholder"],
+  targets: ["paper_def_curve"],
   body: [paragraph(["参照用ノート。"])],
 };
 void okNote;
@@ -209,7 +209,7 @@ void okNote;
 const noteWithUnknownTarget: Note = {
   id: "note_type_test_unknown",
   // @ts-expect-error 存在しないラベルには紐づけられない。
-  targets: ["scaffold_def_placeholder_typo"],
+  targets: ["paper_def_curve_typo"],
   body: [],
 };
 void noteWithUnknownTarget;
@@ -217,7 +217,7 @@ void noteWithUnknownTarget;
 void defineNotes([
   {
     id: "note_type_test_typo",
-    targets: ["scaffold_def_placeholder"],
+    targets: ["paper_def_curve"],
     // @ts-expect-error `body` の打ち間違い。
     bodyy: [paragraph(["本文のつもり"])],
     body: [],

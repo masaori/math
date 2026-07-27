@@ -1,5 +1,30 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 E — 臨界点で比熱が対数発散することを本文で証明**
+
+`structured-latex/content/020_critical_point.ts`（14 ブロック）で、018 章の
+`onsager_exact_solution` を出発点に、等方な場合 `K_1 = K_2 = K` の比熱の対数発散を
+**定数を具体的に与えた両側評価**として証明した（`specific_heat_log_divergence`）。
+
+```
+| f''(K) − (8/π) log(1/|K − K_c|) | ≤ 49   (0 < |K − K_c| ≤ 1/10),  sinh 2K_c = 1
+lim_{K→K_c} f''(K) / log(1/|K−K_c|) = 8/π,   C = k_B K² f''(K)
+```
+
+鍵は 1 つの恒等式 `sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)`（`κ := 2K_1 − 2K_2^*`、
+`A := sinh 2K_1 sinh 2K_2^*`、`gamma_kappa_identity`）と、**等方なら `A = 1`**
+（`isotropic_A_equals_one`）という事実。臨界条件は `κ = 0` と同値
+（`critical_point_iff_kappa_zero`、008 章の `c_1 = s_1c_2` とも同値）。
+
+- 実数解析への追加の移行は `remark_real_analysis_escape_chapter_E` に (R3)〜(R6) として列挙
+  （積分の線型性・単調性 / 微分積分学の基本定理 / Leibniz / 置換積分）。
+  012 章の「本証明で唯一」という表現 2 箇所を「表式を得るまでに唯一」へ直し、章 E への案内を
+  1 段落追記した（**既存章への変更はこの 3 箇所だけ**）。
+- 数値検証は `sagemath/check/055_claim_critical_point/`（5 チェック全 PASS、`mpmath` dps=40）。
+  **本文の誤り 1 件（`cosh κ − 1` を `2 sinh²(κ/4)` と誤評価）をこの検証が検出した。**
+- **非等方な場合への一般化は未了**（等方を確実に閉じる方を優先）。詳細と残作業は
+  `docs/tasks/free-energy-roadmap/task-dependency-graph.md` の「章 E」節。
+
 ## 完了（2026-07-27）: `c(M) = c_+(M)` を本文で確定させた（019 章、6 ブロック）
 
 `structured-latex/content/019_max_eigenvalue_sector.ts` で

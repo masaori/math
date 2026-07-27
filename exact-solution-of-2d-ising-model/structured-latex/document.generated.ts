@@ -43,6 +43,7 @@ import blocks_016_even_sector_fermions from "./content/016_even_sector_fermions.
 import blocks_017_even_sector_eigenvalues from "./content/017_even_sector_eigenvalues.ts";
 import blocks_018_even_sector_closing from "./content/018_even_sector_closing.ts";
 import blocks_019_max_eigenvalue_sector from "./content/019_max_eigenvalue_sector.ts";
+import blocks_020_critical_point from "./content/020_critical_point.ts";
 import notes_000_calculation_formulae from "./notes/000_calculation_formulae.ts";
 import notes_001_partition_function_2d_ising from "./notes/001_partition_function_2d_ising.ts";
 import notes_002_linear_space_general from "./notes/002_linear_space_general.ts";
@@ -79,6 +80,7 @@ export type AllBlocks = [
   ...typeof blocks_017_even_sector_eigenvalues,
   ...typeof blocks_018_even_sector_closing,
   ...typeof blocks_019_max_eigenvalue_sector,
+  ...typeof blocks_020_critical_point,
 ];
 
 /** 全ノート。 */
