@@ -1253,6 +1253,31 @@ targets=(
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_eq_LambdaM_of_input
   Ising2D.onsager_exact_solution_unconditional
+  # --- 020 章（比熱の対数発散：章の到達点）---
+  Ising2D.gammaFn_isoParam_eq_gammaK
+  Ising2D.integral_gammaFn_isoParam
+  Ising2D.onsager_free_energy_isoParam
+  Ising2D.onsager_exact_solution_isoParam
+  Ising2D.hasDerivAt_logTerm
+  Ising2D.hasDerivAt_logTermDeriv
+  Ising2D.hasDerivAt_fFun
+  Ising2D.hasDerivAt_fFirst
+  Ising2D.eventually_hasDerivAt_fFun
+  Ising2D.hasDerivAt_deriv_fFun
+  Ising2D.deriv_deriv_fFun
+  Ising2D.abs_logTerm_second_le
+  Ising2D.abs_Gfirst_mul_kappaSecond_le
+  Ising2D.abs_Gsecond_le
+  Ising2D.abs_kappaDerivSq_sub_mul_Gsecond_le
+  Ising2D.abs_sixteen_Gsecond_sub_le
+  Ising2D.abs_fSecond_sub_le
+  Ising2D.specific_heat_log_divergence
+  Ising2D.fSecond_ge
+  Ising2D.log_474_le
+  Ising2D.abs_log_kappa_sub_log_dist_le
+  Ising2D.specific_heat_log_divergence_dist
+  Ising2D.tendsto_log_inv_dist_atTop
+  Ising2D.specific_heat_ratio_tendsto
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。

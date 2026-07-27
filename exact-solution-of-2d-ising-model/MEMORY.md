@@ -55,10 +55,32 @@
 一切使わず**、`cosh t ≤ (1-t²/2)⁻¹` と `π` の評価だけから導いた。途中の定数はわずかに
 悪くなるが（`κ'∈[3.52,4.74]`、`|κ''|≤9.3` 等）、**結論の `6/5` は原文のまま成立する**。
 
-**未形式化**: `specific_heat_log_divergence`（`critical_012`。原理的な障害ではなく、
-章 012 の `onsager_free_energy_expression` が与える `f` と本章の `Gfun ∘ kappaK` を結ぶ
-**橋渡し補題が未形式化**なのが理由。部品はすべて本章で揃っている）と
-`remark_physical_specific_heat`（物理量との辞書で数学的主張ではない）。
+**未形式化**: `remark_physical_specific_heat`（物理量との辞書で数学的主張ではない）のみ。
+
+## 完了（2026-07-27）: **章 020 の到達点 `specific_heat_log_divergence` の Lean 形式化**
+
+`lean/Ising2D/Part020/Theorem012_SpecificHeatLogDivergence.lean`（新規、`sorry` ゼロ）。
+
+**橋渡しには追加の仮定が要らなかった。** 章 012・018 の自由エネルギーの積分項
+`(1/4π)∫_0^{2π} γ_P(θ)dθ` は、等方な場合 `P = isoParam K` に `isotropic_A_equals_one`
+（`Ising2D.gammaFn_isoParam`）を展開すると `Ising2D.gammaK θ (kappaK K)` と**定義的に等しく**、
+そのまま `Ising2D.Gfun (kappaK K)` になる（`Ising2D.gammaFn_isoParam_eq_gammaK` は `rfl`）。
+これで `Ising2D.fFun K := (1/2)log(2 sinh 2K) + Gfun (kappaK K)` が
+Onsager の自由エネルギーそのものであることが言える
+（`Ising2D.onsager_exact_solution_isoParam`。仮定は `onsager_exact_solution` と同じ 3 つだけ）。
+
+到達点 `Ising2D.specific_heat_log_divergence` が仮定するのは **`K ∈ Dnbhd`（`= [K_c-1/10,
+K_c+1/10]`）と `K ≠ K_c` の 2 つだけ**で、原文の `0 < |K-K_c| ≤ 1/10` そのもの。
+`d²f/dK²` は `deriv (deriv fFun)`。`K_c` では `κ = 0` で `G` の微分が使えないため、
+`K ≠ K_c` の近傍で `deriv fFun = fFirst` を示してから 2 階微分へ渡している
+（`Ising2D.eventually_hasDerivAt_fFun` → `hasDerivAt_deriv_fFun`）。
+
+原文 Step 7（`|d²f/dK² - (8/π)log(1/|K-K_c|)| ≤ 49`）と Step 8
+（`lim_{K→K_c} (d²f/dK²)/log(1/|K-K_c|) = 8/π`）も形式化した
+（`specific_heat_log_divergence_dist` / `specific_heat_ratio_tendsto`）。
+ここでも外部の数値は持ち込まず、`log 4.74 ≤ 1.5636` を `log 2` と `log y ≤ y-1` から導いた。
+各段の定数は原文よりわずかに悪い（合計 `43.34`、原文 `42.94`）が、
+**結論の `45` と `49` は原文のまま成立する**。
 
 **人手証明に数学的な誤りは見つからなかった。** 記録は
 `lean/docs/ch020-formalization.md` と
