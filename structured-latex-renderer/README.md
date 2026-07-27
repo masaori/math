@@ -48,3 +48,12 @@
 ## マイルストーン
 
 [docs/milestones.md](docs/milestones.md) を参照。
+
+## ドメインモデル
+
+[docs/domain-model.md](docs/domain-model.md) が本プロジェクトのドメインモデル（M1）。
+文書・セグメント・ブロック・参照・版・出力ターゲット・テーマの定義と、
+境界づけられた文脈・集約・不変条件を定める。個別の設計判断の根拠は
+[docs/design-notes/](docs/design-notes/) に分けてある。
+
+引き継ぎメモは [MEMORY.md](MEMORY.md)。
