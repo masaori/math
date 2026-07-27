@@ -27,7 +27,7 @@ import { join } from "node:path";
 import type { ConvertedBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
-import { unicodeMathToLatex } from "./unicode-math.ts";
+import { mathUnicodeToLatex, unicodeMathToLatex } from "./unicode-math.ts";
 
 const buildDir = join(structuredLatexDir, "build");
 const texPath = join(buildDir, "document.tex");
@@ -224,12 +224,20 @@ function renderDocument(inner: string): string {
 \\usepackage{amsthm}
 \\usepackage[margin=25mm]{geometry}
 \\usepackage{graphicx}
+% パス・識別子のような長い等幅文字列を、区切りで改行できるようにする（url パッケージの \\path）。
+\\usepackage{url}
+\\urlstyle{tt}
 \\usepackage{xeCJK}
 \\setCJKmainfont{Hiragino Mincho ProN}
 \\setCJKsansfont{Hiragino Sans}
 % 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム）は
 % 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
 \\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033}
+% 上の文字クラス指定は**本文モードにしか効かない**。この文書では ★ が数式の中にも現れるので
+% （本文の記号として (★_2) のように使われている）、数式用に和文フォントの箱を用意し、
+% 生成器が数式中の ★ をこれへ置き換える（tools/unicode-math.ts）。
+% 用意しないと PDF から無言で消える（実測: Missing character U+2605）。
+\\newcommand{\\jpstar}{\\mbox{\\CJKfontspec{Hiragino Sans}\\char"2605}}
 \\usepackage[hidelinks]{hyperref}
 \\usepackage[nameinlink]{cleveref}
 
@@ -368,7 +376,7 @@ function renderNode(node: Node, blockId: string): string {
       }
       return unicodeMathToLatex(escapeText(node.value));
     case "math":
-      return `$${node.tex}$`;
+      return renderInlineMath(node.tex);
     case "displayMath":
       return renderDisplayMath(node.tex);
     case "paragraph":
@@ -396,11 +404,29 @@ function renderNode(node: Node, blockId: string): string {
 }
 
 /**
+ * 行内数式。
+ *
+ * 中身が `\texttt{...}` だけのもの（ファイルパスや識別子の表記）は、数式の箱になると
+ * **どこでも改行できず版面から出る**（実測: パス 1 個で 93pt はみ出した）。
+ * この場合だけ `\path{...}` で組み、区切り文字で改行できるようにする。
+ */
+function renderInlineMath(rawTex: string): string {
+  const tex = mathUnicodeToLatex(rawTex);
+  const textOnly = tex.match(/^\\texttt\{([^{}]*)\}$/);
+  const inner = textOnly?.[1];
+  if (inner !== undefined) {
+    return `\\path{${inner}}`;
+  }
+  return `$${tex}$`;
+}
+
+/**
  * 別行立て数式。既定では幅を測って必要なら縮める `\fitdisplay` を通す。
  * ただし `\tag` は箱の中では使えない（amsmath: "\tag not allowed here"）ので、
  * その 1 件だけは素の `equation*` で組む。
  */
-function renderDisplayMath(tex: string): string {
+function renderDisplayMath(rawTex: string): string {
+  const tex = mathUnicodeToLatex(rawTex);
   if (tex.includes("\\tag")) {
     return `\\begin{equation*}\n${tex}\n\\end{equation*}`;
   }

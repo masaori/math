@@ -66,6 +66,24 @@ const PATTERN = new RegExp(`[${Object.keys(UNICODE_MATH).join("")}]`, "g");
  */
 const UNHANDLED_COMBINING = /[\u0300-\u036f]/;
 
+/**
+ * 数式（`math` / `displayMath` の tex）の中に現れる、欧文数式フォントに無い記号。
+ *
+ * 本文の記号として ★ が数式内で使われている（例: `(★_2)`）。`\newunicodechar` は
+ * 数式モードのこの位置では効かず、PDF から**無言で消える**（実測: Missing character U+2605）。
+ * プリアンブルで定義した `\jpstar`（和文フォントの箱）へ置き換える。
+ */
+const MATH_UNICODE: Record<string, string> = {
+  "★": "\\jpstar{}",
+};
+
+const MATH_PATTERN = new RegExp(`[${Object.keys(MATH_UNICODE).join("")}]`, "g");
+
+/** 数式文字列に対する変換。地の文用の `unicodeMathToLatex` とは別（数式の中身は translate しない）。 */
+export function mathUnicodeToLatex(tex: string): string {
+  return tex.replace(MATH_PATTERN, (char) => MATH_UNICODE[char] ?? char);
+}
+
 export function unicodeMathToLatex(value: string): string {
   let result = value;
   for (const [from, to] of COMBINED_MATH) {

@@ -23,12 +23,13 @@ PDF 化には tectonic が要る（未導入なら `brew install tectonic`）。
 出力は `build/`（git 管理外）。**住処（`habitat`）と ℝ 脱出（`realEscape`）は PDF にも印字する**
 ——「ℝ へ脱出した箇所を必ず明示する」という要求は、データに持つだけでは読者に伝わらないため。
 
-現在の実測: 5 ページ / ブロック 20 件 / 相互参照 9 件すべて解決 / 未解決参照 0 /
+現在の実測: 10 ページ / ブロック 30 件 / 相互参照 17 件すべて解決 / 未解決参照 0 /
 組めない文字 0 / 版面外へ出た行 0。
 
-なお散文中の Unicode 数学記号（ℝ, Λ, ∞ など）は `tools/unicode-math.ts` が LaTeX へ写す。
-欧文フォントに無い字は PDF から**無言で消える**ため（実測で ℝ/ℤ/ℚ/μ が消えた）、
-生成器側で変換している。`content/` のデータは書き換えない。
+なお散文中の Unicode 数学記号（ℝ, Λ, ∞, ℚ̄ など）と、数式中の ★ は `tools/unicode-math.ts` が
+LaTeX へ写す。欧文フォントに無い字は PDF から**無言で消える**ため（実測で ℝ/ℤ/ℚ/μ/★ が消え、
+ℚ̄ は ℚ に化けた）、生成器側で変換している。`content/` のデータは書き換えない。
+長いパスの `\texttt{...}` は `\path{...}` で組み、版面からはみ出さないようにしている。
 
 ## この基盤は複製である（共有ライブラリではない）
 
@@ -41,10 +42,8 @@ PDF 化には tectonic が要る（未導入なら `brew install tectonic`）。
 ## いま置いてあるのは「足場」であって論文本体ではない
 
 `content/000_scaffold.ts` と `notes/000_scaffold.ts` は、**基盤が動くことを示すための最小の足場**
-であり、数学的な主張の正本ではない。論文本体の移設は `content/001_setup.ts` / `002_lambda_side_finite.ts` /
-`003_towers_and_graphs.ts` として着手済みである（企画書 `outputs/paper-plans/002_R_Lambda_duality.md`
-のうち、確定済みと明記された命題の**主張文**を転記した）。
-何を移し、何を数学的判断のために移していないかは
+であり、数学的な主張の正本ではない。論文本体は `content/001_intro.ts` 〜 `007_asymmetry_scope.ts` に執筆済みである。
+生成器を適用した結果と、その過程で見つかった表示上の不具合は
 [docs/paper-001-migration-status.md](../docs/paper-001-migration-status.md) に記録した。
 ただし `content/` が空になると `tools/generate-index.ts` が「ラベルを 1 件も抽出できない」で
 落ちるので、実ブロックを入れるまでは足場を残しておくこと。

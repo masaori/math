@@ -18,21 +18,29 @@ import type {
   Note,
   NoteIdsOf,
 } from "./schema.ts";
-import blocks_001_setup from "./content/001_setup.ts";
-import blocks_002_lambda_side_finite from "./content/002_lambda_side_finite.ts";
-import blocks_003_towers_and_graphs from "./content/003_towers_and_graphs.ts";
-import notes_001_pending_judgment from "./notes/001_pending_judgment.ts";
+import blocks_001_intro from "./content/001_intro.ts";
+import blocks_002_setup from "./content/002_setup.ts";
+import blocks_003_archimedean from "./content/003_archimedean.ts";
+import blocks_004_lambda_finite from "./content/004_lambda_finite.ts";
+import blocks_005_duality from "./content/005_duality.ts";
+import blocks_006_propositions_TVW from "./content/006_propositions_TVW.ts";
+import blocks_007_asymmetry_scope from "./content/007_asymmetry_scope.ts";
+
 
 /** 文書順（ファイル名昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
-  ...typeof blocks_001_setup,
-  ...typeof blocks_002_lambda_side_finite,
-  ...typeof blocks_003_towers_and_graphs,
+  ...typeof blocks_001_intro,
+  ...typeof blocks_002_setup,
+  ...typeof blocks_003_archimedean,
+  ...typeof blocks_004_lambda_finite,
+  ...typeof blocks_005_duality,
+  ...typeof blocks_006_propositions_TVW,
+  ...typeof blocks_007_asymmetry_scope,
 ];
 
 /** 全ノート。 */
 export type AllNotes = [
-  ...typeof notes_001_pending_judgment,
+
 ];
 
 type AllBlockIds = BlockIdsOf<AllBlocks>;

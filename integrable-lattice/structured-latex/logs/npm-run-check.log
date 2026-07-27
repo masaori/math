@@ -1,10 +1,3 @@
-# integrable-lattice/structured-latex — npm run check の実行ログ
-
-実行日: 2026-07-26
-実行ディレクトリ: integrable-lattice/structured-latex
-node: v22.22.3 / pnpm: 10.33.2
-
-```
 
 > @integrable-lattice/structured-latex@0.1.0 check
 > npm run check:generated && npm run typecheck && npm run validate && npm run test:types && npm run test:runtime
@@ -13,7 +6,7 @@ node: v22.22.3 / pnpm: 10.33.2
 > @integrable-lattice/structured-latex@0.1.0 check:generated
 > node tools/generate-index.ts --check
 
-generated files are up to date (2 labels, 1 content + 1 notes files)
+generated files are up to date (26 labels, 8 content + 1 notes files)
 
 > @integrable-lattice/structured-latex@0.1.0 typecheck
 > tsc -p tsconfig.json --noEmit
@@ -22,31 +15,37 @@ generated files are up to date (2 labels, 1 content + 1 notes files)
 > @integrable-lattice/structured-latex@0.1.0 validate
 > node tools/validate-content.ts
 
-validated 3 blocks from 1 files (1 headings, 2 labels, 1 refs, all resolved)
+validated 33 blocks from 8 files (9 headings, 26 labels, 18 refs, all resolved)
 notes: 1件（内部参照用・出版物には載らない） from 1 files (1 targets, all resolved)
-linkage: SageMath 検証 1 件（全て実在）、Lean 定理 0 件
-ℝ/ℂ への脱出を宣言しているブロック: 1 件
+linkage: SageMath 検証 21 件（全て実在）、Lean 定理 5 件
+ℝ/ℂ への脱出を宣言しているブロック: 7 件
   - scaffold_002_claim_placeholder [mixed] 足場としての例示のみ。可算な対象（Λ の元）を扱いながら、指数評価のために一度だけ 実数の順序完備性を使う、という形の脱…
+  - paper_011_remark_positioning [mixed] 本ブロックは位置づけの宣言であり、ℝ は「Lehmer 問題が ℝ 側に固有である」という寄与 (d) の 記述の中で名…
+  - paper_012_definition_ladder [mixed] 本定義は梯子の最上段として ℝ/ℂ を含む。ℝ/ℂ は「決定不能な段」として名指すためだけに現れ、本論文の主張が ℝ を…
+  - paper_031_theorem_lsw [R] 本定理の結論そのものが ℝ の元（log m(P)）への収束である。本論文で ℝ を使うのはこの一点だけであり、第 4 …
+  - paper_032_remark_ising_known [R] 自由エネルギー密度そのものが ℝ の量である。本注記は既知結果の所在を示すだけで、本論文の主張はこれに依存しない。
+  - paper_051_theorem_duality [mixed] 本命題は (∞ 素点) の主張で L → ∞ の極限を取る。ℝ を使うのはこの一点だけであり、(p 素点) の 2 つの…
+  - paper_071_remark_asymmetry [mixed] 本注記は ℝ 側の量（Mahler 測度）と Λ 側の量（岩澤 μ）を比較する。ℝ が現れるのは比較の左辺だけで、本論文…
 
 > @integrable-lattice/structured-latex@0.1.0 test:types
 > node tools/negative-type-test.ts
 
 ✓ 本文中の ref が存在しないラベルを指す
-    type-tests/.tmp/case0_broken/fixture.ts(11,40): error TS2345: Argument of type '"scaffold_claim_placeholder__does_not_exist"' is not assignable to parameter of type '"scaffold_claim_placeholder" | "scaffold_def_placeholder"'.
+    type-tests/.tmp/case0_broken/fixture.ts(11,40): error TS2345: Argument of type '"paper_claim_resultant__does_not_exist"' is not assignable to parameter of type '"paper_claim_resultant" | "paper_def_aL" | "paper_def_curve" | "paper_def_ladder" | "paper_def_massieu" | "paper_four_axes" | "paper_lemma_V0" | "paper_positioning" | "paper_prop_A" | ... 16 more ... | "scaffold_def_placeholder"'.
 ✓ ノートの targets が存在しないラベルを指す
-    type-tests/.tmp/case1_broken/fixture.ts(8,15): error TS2322: Type '"scaffold_claim_placeholder__does_not_exist"' is not assignable to type '"scaffold_claim_placeholder" | "scaffold_def_placeholder"'.
+    type-tests/.tmp/case1_broken/fixture.ts(8,15): error TS2322: Type '"paper_claim_resultant__does_not_exist"' is not assignable to type '"paper_claim_resultant" | "paper_def_aL" | "paper_def_curve" | "paper_def_ladder" | "paper_def_massieu" | "paper_four_axes" | "paper_lemma_V0" | "paper_positioning" | "paper_prop_A" | ... 16 more ... | "scaffold_def_placeholder"'.
 ✓ ブロックが未登録のラベルを宣言する（生成物の再生成漏れ）
-    type-tests/.tmp/case2_broken/fixture.ts(9,14): error TS2322: Type '"scaffold_claim_placeholder__does_not_exist"' is not assignable to type '"scaffold_claim_placeholder" | "scaffold_def_placeholder"'.
+    type-tests/.tmp/case2_broken/fixture.ts(9,14): error TS2322: Type '"paper_claim_resultant__does_not_exist"' is not assignable to type '"paper_claim_resultant" | "paper_def_aL" | "paper_def_curve" | "paper_def_ladder" | "paper_def_massieu" | "paper_four_axes" | "paper_lemma_V0" | "paper_positioning" | "paper_prop_A" | ... 16 more ... | "scaffold_def_placeholder"'.
 ✓ 同一ファイル内でブロック id が重複する
     type-tests/.tmp/case3_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_dup_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: []; habitat: "Lambda"; statement: []; }, { id: "neg_dup_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: []; habitat: "Lambda"; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_dup_a"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 1; readonly labels: readonly []; readonly habitat: "Lambda"; readonly statement: readonly []; }, { ...; }] & readonly ConvertedBlock[] & { ...; }'.
 ✓ 同一ファイル内でラベルが重複する
-    type-tests/.tmp/case4_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_lbl_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: ["scaffold_claim_placeholder"]; habitat: "Lambda"; statement: []; }, { id: "neg_lbl_b"; kind: "claim"; ... 4 more ...; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_lbl_a"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 1; readonly labels: readonly ["scaffold_claim_placeholder"]; readonly habitat: "Lambda"; readonly statement: readonly []; }, { ...; }] & readonly ConvertedBlock[] & { ...; }'.
+    type-tests/.tmp/case4_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_lbl_a"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: ["paper_claim_resultant"]; habitat: "Lambda"; statement: []; }, { id: "neg_lbl_b"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 1; labels: [...]; habitat: "Lambda"; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_lbl_a"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 1; readonly labels: readonly ["paper_claim_resultant"]; readonly habitat: "Lambda"; readonly statement: readonly []; }, { ...; }] & readonly ConvertedBlock[] & { ...; }'.
 ✓ 同一ファイル内でノート id が重複する
-    type-tests/.tmp/case5_broken/fixture.ts(5,28): error TS2345: Argument of type '[{ id: "note_neg_dup_a"; targets: ["scaffold_claim_placeholder"]; body: []; }, { id: "note_neg_dup_a"; targets: ["scaffold_claim_placeholder"]; body: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "note_neg_dup_a"; readonly targets: readonly ["scaffold_claim_placeholder"]; readonly body: readonly []; }, { readonly id: "note_neg_dup_a"; readonly targets: readonly ["scaffold_claim_placeholder"]; readonly body: readonly []; }] & readonly Note[] & { ...; }'.
+    type-tests/.tmp/case5_broken/fixture.ts(5,28): error TS2345: Argument of type '[{ id: "note_neg_dup_a"; targets: ["paper_claim_resultant"]; body: []; }, { id: "note_neg_dup_a"; targets: ["paper_claim_resultant"]; body: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "note_neg_dup_a"; readonly targets: readonly ["paper_claim_resultant"]; readonly body: readonly []; }, { readonly id: "note_neg_dup_a"; readonly targets: readonly ["paper_claim_resultant"]; readonly body: readonly []; }] & readonly Note[] & { ...; }'.
 ✓ ファイルを跨いでブロック id が重複する
     type-tests/.tmp/case6_broken/fixture.ts(17,49): error TS2344: Type '"neg_cross_a"' does not satisfy the constraint 'never'.
 ✓ ファイルを跨いでラベルが重複する
-    type-tests/.tmp/case7_broken/fixture.ts(18,47): error TS2344: Type '"scaffold_claim_placeholder"' does not satisfy the constraint 'never'.
+    type-tests/.tmp/case7_broken/fixture.ts(18,47): error TS2344: Type '"paper_claim_resultant"' does not satisfy the constraint 'never'.
 ✓ ノート id がブロック id と衝突する
     type-tests/.tmp/case8_broken/fixture.ts(20,48): error TS2344: Type '"neg_collide_block"' does not satisfy the constraint 'never'.
 ✓ 見出しブロックが本文を持つ
@@ -66,7 +65,7 @@ linkage: SageMath 検証 1 件（全て実在）、Lean 定理 0 件
 ✓ sourceOrdinal が 0 以下
     type-tests/.tmp/case16_broken/fixture.ts(3,29): error TS2345: Argument of type '[{ id: "neg_ordinal_zero"; kind: "claim"; sourcePath: "type-tests/.tmp"; sourceOrdinal: 0; labels: []; habitat: "Lambda"; statement: []; }]' is not assignable to parameter of type 'readonly [{ readonly id: "neg_ordinal_zero"; readonly kind: "claim"; readonly sourcePath: "type-tests/.tmp"; readonly sourceOrdinal: 0; readonly labels: readonly []; readonly habitat: "Lambda"; readonly statement: readonly []; }] & readonly ConvertedBlock[] & { ...; }'.
 ✓ ノートの targets が空
-    type-tests/.tmp/case17_broken/fixture.ts(8,5): error TS2322: Type '[]' is not assignable to type 'readonly ["scaffold_claim_placeholder" | "scaffold_def_placeholder", ...("scaffold_claim_placeholder" | "scaffold_def_placeholder")[]]'.
+    type-tests/.tmp/case17_broken/fixture.ts(8,5): error TS2322: Type '[]' is not assignable to type 'readonly ["paper_claim_resultant" | "paper_def_aL" | "paper_def_curve" | "paper_def_ladder" | "paper_def_massieu" | "paper_four_axes" | "paper_lemma_V0" | "paper_positioning" | ... 17 more ... | "scaffold_def_placeholder", ...("paper_claim_resultant" | ... 24 more ... | "scaffold_def_placeholder")[]]'.
 ✓ 【固有】本文ブロックが habitat を宣言していない
     type-tests/.tmp/case18_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; sourcePath: string; sourceOrdinal: number; labels: never[]; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
 ✓ 【固有】habitat が未知の値（住処の綴り違い）
@@ -109,5 +108,3 @@ linkage: SageMath 検証 1 件（全て実在）、Lean 定理 0 件
 ✓ 【固有】lean の要素が文字列でなければ拒む
 
 実行時検証テスト 18 件すべて期待どおり
-exit=0
-```
