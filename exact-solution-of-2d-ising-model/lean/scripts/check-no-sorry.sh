@@ -642,6 +642,43 @@ targets=(
   Ising2D.bigLambda_le_max
   Ising2D.bigLambda_min_le
   Ising2D.bigLambda_max_mul_min
+  Ising2D.Abstract.permMat_mulVec
+  Ising2D.Abstract.permMat_mulVec_single
+  Ising2D.Abstract.permMat_isSymm
+  Ising2D.Abstract.permMat_mul_self
+  Ising2D.Abstract.permMat_mulVec_absVec
+  Ising2D.Abstract.vecNormSq_absVec
+  Ising2D.Abstract.abs_quad_le_quad_absVec
+  Ising2D.Abstract.quad_le_quad_absVec
+  Ising2D.Abstract.sectorSet_pos_nonempty
+  Ising2D.Abstract.sectorSet_neg_nonempty
+  Ising2D.Abstract.sectorRayleighSup_neg_le_pos
+  Ising2D.Abstract.rayleighSup_eq_sectorRayleighSup_pos
+  Ising2D.flipConf_involutive
+  Ising2D.flipConf_ne_self
+  Ising2D.epsilon_apply
+  Ising2D.epsilon_eq_ofReal_epsilonR
+  Ising2D.epsilon_mulVec_basisVec
+  Ising2D.epsilonR_entry_zero_or_one
+  Ising2D.epsilonR_row_sum
+  Ising2D.epsilonR_col_sum
+  Ising2D.epsilonR_mulVec_apply
+  Ising2D.epsilonR_mulVec_single
+  Ising2D.epsilonR_mulVec_oddUnit
+  Ising2D.vecNormSq_oddUnit
+  Ising2D.sectorSet_neg_nonempty_epsilonR
+  Ising2D.epsilonR_mulVec_absVec
+  Ising2D.vecNormSq_absVec_eq
+  Ising2D.quad_le_quad_absVec_epsilonR
+  Ising2D.exists_even_sector_unit_ge
+  Ising2D.quad_le_sectorRayleighSup_pos
+  Ising2D.c_minus_le_c_plus
+  Ising2D.c_minus_le_c_plus_symTransfer
+  Ising2D.c_equals_c_plus
+  Ising2D.c_equals_c_plus_symTransfer
+  Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
+  Ising2D.rayleighSup_attained_in_even_sector
+  Ising2D.rayleighSup_mem_rayleighSet
 )
 
 {

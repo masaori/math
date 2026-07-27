@@ -1,5 +1,33 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 019 の Lean 形式化**（最大固有値が偶セクターから来ることの確定）
+
+`structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）を Lean 4 で形式化した
+（具体版 `lean/Ising2D/Part019/`、抽象版 `lean/Ising2D/Abstract/PermSector.lean`。
+`sorry` ゼロ、`lake build` 成功、`scripts/check-no-sorry.sh` exit 0）。
+
+到達点: **`Ising2D.c_equals_c_plus`（`c(M) = c_+(M)`）を無条件で証明**した。
+経路は `Ising2D.c_minus_le_c_plus`（`c_-(M) ≤ c_+(M)`）＋章 011 の
+`sector_decomposition_of_rayleigh_sup`。ε を実行列 `Ising2D.epsilonR M`（符号反転の置換行列）
+として置き、複素の `Ising2D.epsilon M` と成分が一致することを `epsilon_eq_ofReal_epsilonR` で証明。
+Perron–Frobenius 系の補題・スペクトル定理は使わず、成分ごとの三角不等式だけで書いた。
+
+未形式化（仮定として受け取った）:
+- `c_+(M) = Λ^{(1/2)}_M`（章 018 の `c_plus_equals_Lambda_half_integer`。Lean 側に無い）
+  → `c_equals_c_plus` の Step 2・Step 3 は条件つきの定理にした。
+- `ε W = W ε`（複素 `V_1,V_2` と章 011 の実行列 `W` を結ぶ橋渡しが未形式化。章 011 と同じ扱い）。
+
+抽象版で判明した本質: 効いているのは「`ε` が対合 `π` の置換行列であること」
+「`W` の成分が**非負**であること」「`W` が実対称半正定値であること」の 3 つだけ。
+**本文 `epsilon_is_sign_flip_permutation` (2) の「`π` は不動点をもたない」は
+`c_- ≤ c_+` には効いていない**（効くのは `𝓡_- ≠ ∅` の部分だけ）。
+また本文が引く `W_{kl} > 0` の狭義正値性も不要（`0 ≤ W_{kl}` で足りる）。
+
+記録: `lean/docs/ch019-formalization.md`（定理一覧・2 本立て対応表）、
+`docs/tasks/2026-07_lean-ch009-013/013_ch019-formalization-findings.md`（本文への指摘）。
+なお本章の (4) は、章 011 の既知の穴（`002_ch011-sector-sup-nonempty-gap.md` の
+「`𝓕^{(±)}` に単位ベクトルがあることが本文に無い」）の `𝓕^{(-)}` 側を埋めている。
+
 ## 完了（2026-07-27）: **章 009 の Lean 形式化**（V の固有値・定数 c の決定）
 
 `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック）を Lean 4 で形式化した

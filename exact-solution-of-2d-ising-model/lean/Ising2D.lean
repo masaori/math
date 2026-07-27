@@ -92,3 +92,8 @@ import Ising2D.Part009.Claim009_EigenvaluesVprime
 import Ising2D.Part009.Claim013_PositiveDefinite
 import Ising2D.Part009.Claim016_SignFlip
 import Ising2D.Part009.Claim017_ConstantC
+import Ising2D.Abstract.PermSector
+import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
+import Ising2D.Part019.Claim002_AbsVectorEvenSector
+import Ising2D.Part019.Theorem003_CMinusLeCPlus
+import Ising2D.Part019.Theorem004_CEqualsCPlus
