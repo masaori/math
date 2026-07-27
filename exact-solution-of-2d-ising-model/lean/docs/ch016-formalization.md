@@ -78,6 +78,15 @@
 | `Ising2D.TVPlus_eq_TCheckVprime'` | `T_{V^{(+)}} = T_{V̌'}`（残る仮定は 014 章の `hT` と双対関係 `hdual` だけ） | `T_V_plus_eq_T_check_Vprime` |
 | `Ising2D.VPlus_eq_smul_checkVprime'` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論**。同上） | `V_plus_eq_c_check_Vprime` |
 
+さらに 014 章（`Ising2D/Part014/`）も `origin/main` に入ったため、最後に残っていた仮定
+`hT` も `Ising2D.TVPlus_checkZ_checkY` で埋めた。
+
+| Lean の名前 | 内容 | 対応する人手証明のラベル |
+| --- | --- | --- |
+| `Ising2D.sinh_two_K2_pos` | `s_2 = sinh 2K_2 > 0`（`K_2 > 0` から） | 補助 |
+| `Ising2D.TVPlus_actsBy_checkZY` | 仮定 `hT` が（双対関係の下で）無条件に成り立つこと | 014 章 `T_V_plus_check_Z_Y` |
+| `Ising2D.VPlus_eq_smul_checkVprime_of_dual` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論の完全な無条件版**。仮定は双対関係だけ） | `V_plus_eq_c_check_Vprime` |
+
 ## 2. 2 本立ての対応表と「抽象版で判明した本質」
 
 | 人手証明のラベル | 具体版 | 抽象版 |
@@ -121,16 +130,19 @@
 ## 3. 形式化できなかった主張・残っている仮定
 
 **担当範囲の 9 主張はすべて形式化した**（`sorry` / `admit` ゼロ。形式化を断念した主張は無い）。
-残る仮定は次の 2 つだけで、いずれも**本章の担当範囲外**である。
+**残る仮定は双対関係 `c_2 s_2^* = c_2^*` の 1 つだけ**である。これは 008 章以来
+`det A(θ) = 1` に数学的に必要な前提であり、形式化の穴ではなく原文が置いている関係である
+（消えない）。
 
-| 残る仮定 | 出所 | 消える条件 |
+当初あった仮定は、014 章・015 章がマージされたことにより
+`Part016/Claim010_UnconditionalViaPart015.lean` ですべて解消した（上記 1-2 節）。
+
+| 当初の仮定 | 出所 | 解消した定理 |
 | --- | --- | --- |
-| `hT : ∀ j, ActsBy T_{V^{(+)}} (Ž_μ) (Y̌_μ) (A(θ̃_μ))` | 014 章 `T_V_plus_check_Z_Y`（未形式化） | 014 章の形式化で消える |
-| `hdual : c_2 s_2^* = c_2^*`（双対関係） | 008 章以来、`det A = 1` に数学的に必要な仮定 | 消えない（形式化の穴ではなく、原文が前提している関係） |
-
-当初あった 015 章由来の 4 仮定（`γ_2(θ̃_μ) ≠ 0`、`λ_± = e^{±γ}`、重み `γ(θ̃_μ)` とその共役不変性）は、
-015 章がマージされたことにより `Part016/Claim010_UnconditionalViaPart015.lean` ですべて解消した
-（上記 1-2 節）。
+| `hga : ∀ μ ∈ 𝓜̌, γ_2(θ̃_μ) ≠ 0` | 015 章 `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero_of_checkIndex` |
+| `hlamPlus` / `hlamMinus : γ_1(θ̃_μ) ± r_μ = e^{±γ(θ̃_μ)}` | 015 章 `lambda_eq_exp_gamma_theta_tilde` | `gamma1_add_checkR_eq_exp` / `gamma1_sub_checkR_eq_exp` |
+| `g : ℤ → ℂ`（重み `γ(θ̃_μ)`）と `hgconj : γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | 015 章 `def_gamma_theta_tilde_mu` | `gammaTildeC` / `gammaTildeC_conj` |
+| `hT : ∀ j, ActsBy T_{V^{(+)}} (Ž_μ) (Y̌_μ) (A(θ̃_μ))` | 014 章 `T_V_plus_check_Z_Y` | `TVPlus_actsBy_checkZY` |
 
 原文 `def_check_fermi` が `P̌_μ`（015 章 `diagonalization_check_P_D`）の列として
 `ψ̌^†, ψ̌` を定義しているのに対し、本形式化は 015 章の完成を待たずに閉じるため、

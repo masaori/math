@@ -29,6 +29,7 @@
 -/
 import Ising2D.Part016.Claim009_VPlusEqCCheckVprime
 import Ising2D.Part015.Definition008_GammaTildeMu
+import Ising2D.Part014.Claim010_TVPlusAction
 
 namespace Ising2D
 
@@ -160,5 +161,45 @@ theorem VPlus_eq_smul_checkVprime' (hM : M ≠ 0)
       (uPlus : TensorPow M) = c • checkVprime P.const M (gammaTildeC P M) :=
   exists_smul_of_TConj_eq uPlus (checkVprimeUnits P.const M (gammaTildeC P M))
     (TVPlus_eq_TCheckVprime' P hM hdual uPlus hT)
+
+/-! ## 014 章の成果を入れて `hT` も落とす
+
+`Ising2D/Part014/` が `origin/main` に入ったので、本章に残っていた最後の仮定
+`hT`（`T_{V^{(+)}}` が `Ž_μ, Y̌_μ` に `A(θ̃_μ)` で作用する）も
+`Ising2D.TVPlus_checkZ_checkY` で埋まる。残るのは双対関係 `hdual` だけである。
+-/
+
+/-- `s_2 = sinh 2K_2 > 0`（`K_2 > 0` から）。 -/
+theorem sinh_two_K2_pos (P : IsingParam) : 0 < Real.sinh (2 * P.K2) :=
+  Real.sinh_pos_iff.2 (by linarith [P.K2_pos])
+
+/-- 014 章 `T_V_plus_check_Z_Y`: 本章の仮定 `hT` は（双対関係の下で）無条件に成り立つ。 -/
+theorem TVPlus_actsBy_checkZY (P : IsingParam) {M : ℕ} (hM : M ≠ 0)
+    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (μ : ℤ) :
+    ActsBy (TConj (VPlusUnits M (sinh_two_K2_pos P) (P.K1 : ℂ) (P.K2star : ℂ))).toLinearMap
+      (checkZ M μ) (checkY M μ) (AMat P.const (thetaTilde M μ)) := by
+  have hdualC : ((P.const.s2star : ℝ) : ℂ) * ((P.const.c2 : ℝ) : ℂ)
+      = ((P.const.c2star : ℝ) : ℂ) := by
+    rw [← Complex.ofReal_mul]
+    exact_mod_cast congrArg (fun r : ℝ => (r : ℂ)) (by rw [mul_comm]; exact hdual)
+  have h := TVPlus_checkZ_checkY (M := M) hM P.const μ (P.K1 : ℂ) (P.K2star : ℂ)
+    (sinh_two_K2_pos P)
+    (by simp [IsingParam.const, Complex.ofReal_cosh])
+    (by simp [IsingParam.const, Complex.ofReal_sinh])
+    (by simp [IsingParam.const, Complex.ofReal_cosh])
+    (by simp [IsingParam.const, Complex.ofReal_sinh])
+    hdualC
+  rwa [TVPlus_eq_TConj] at h
+
+/-- **本章の結論の完全な無条件版**（残る仮定は双対関係 `hdual` だけ）:
+`∃ c ≠ 0, V^{(+)} = c V̌'`。 -/
+theorem VPlus_eq_smul_checkVprime_of_dual (hM : M ≠ 0)
+    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) :
+    ∃ c : ℂ, c ≠ 0 ∧
+      VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)
+        = c • checkVprime P.const M (gammaTildeC P M) :=
+  VPlus_eq_smul_checkVprime' P hM hdual
+    (VPlusUnits M (sinh_two_K2_pos P) (P.K1 : ℂ) (P.K2star : ℂ))
+    (fun j => TVPlus_actsBy_checkZY P hM hdual (checkIdx M j))
 
 end Ising2D

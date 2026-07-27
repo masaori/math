@@ -787,6 +787,44 @@ targets=(
   Ising2D.TVPlus_eq_TCheckVprime
   Ising2D.exists_smul_of_TConj_eq
   Ising2D.VPlus_eq_smul_checkVprime
+  Ising2D.VPlus
+  Ising2D.isUnit_VPlus
+  Ising2D.V1halfPlus_sq
+  Ising2D.TVPlus_eq_TConj
+  Ising2D.nesting_H1Plus_checkZ_even
+  Ising2D.nesting_H1Plus_checkZ_odd
+  Ising2D.nesting_H1Plus_checkY_even
+  Ising2D.nesting_H1Plus_checkY_odd
+  Ising2D.nesting_H2_checkZ_even
+  Ising2D.nesting_H2_checkZ_odd
+  Ising2D.nesting_H2_checkY_even
+  Ising2D.nesting_H2_checkY_odd
+  Ising2D.conversion_H1Plus_checkZ_even
+  Ising2D.conversion_H1Plus_checkZ_odd
+  Ising2D.conversion_H1Plus_checkY_even
+  Ising2D.conversion_H1Plus_checkY_odd
+  Ising2D.conversion_H2_checkZ_even
+  Ising2D.conversion_H2_checkZ_odd
+  Ising2D.conversion_H2_checkY_even
+  Ising2D.conversion_H2_checkY_odd
+  Ising2D.extract_taylor_H1Plus_checkZ
+  Ising2D.extract_taylor_H1Plus_checkY
+  Ising2D.extract_taylor_H2_checkZ
+  Ising2D.extract_taylor_H2_checkY
+  Ising2D.TConj_V1halfPlus_checkZ
+  Ising2D.TConj_V1halfPlus_checkY
+  Ising2D.TConj_V2_checkZ
+  Ising2D.TConj_V2_checkY
+  Ising2D.linearity_of_T_on_check
+  Ising2D.actsBy_TConj_V1halfPlus
+  Ising2D.actsBy_TConj_V2_check
+  Ising2D.factorization_of_A_theta_general
+  Ising2D.factorization_of_A_thetaTilde
+  Ising2D.Abstract.actsBy_sandwich
+  Ising2D.Abstract.actsBy_TV_sandwich
+  Ising2D.TVPlus_checkZ_checkY
+  Ising2D.TVPlus_checkZ_checkY_components
+  Ising2D.TV_hatZ_hatY_via_sandwich
   Ising2D.Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd
   Ising2D.Abstract.mul_of_eq_neg_conj
   Ising2D.Abstract.sq_absOf_eq_neg_mul
@@ -844,6 +882,9 @@ targets=(
   Ising2D.TCheckVprime_checkPsi_pair
   "Ising2D.TVPlus_eq_TCheckVprime'"
   "Ising2D.VPlus_eq_smul_checkVprime'"
+  Ising2D.sinh_two_K2_pos
+  Ising2D.TVPlus_actsBy_checkZY
+  Ising2D.VPlus_eq_smul_checkVprime_of_dual
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。
