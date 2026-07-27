@@ -1,5 +1,37 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-27）: **章 018 の仮定を章 014–017 の形式化で埋めた**（Onsager が無条件版へ）
+
+章 018 は着手時点で章 014–017 が Lean 未形式化だったため、それらの結果を
+`Ising2D.CheckFermi` / `Ising2D.VPlusData` の**仮定**として受け取っていた。
+014・015・016・017 がすべて main に入ったので、**実際にインスタンスを構成して
+仮定を定理に置き換えた**。章 018 以外の `.lean` と `structured-latex/` は編集していない。
+
+追加した 3 ファイル（`lean/Ising2D/Part018/`）:
+
+- `Claim011_CheckFermiFromPart016.lean` — `Ising2D.checkFermiOf`（`CheckFermi` のインスタンス）。
+  `hstar`（`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`）は章 016 に対応定理が無かったので
+  `Ising2D.checkPsiDag_conjTranspose` として**新規に証明**した（章 008 の
+  `gamma2_neg_eq_neg_conj` と章 018 の `checkZ_conjTranspose` だけを使う）。
+- `Claim012_VPlusDataFromPart017.lean` — `Ising2D.vPlusDataOf`（`VPlusData` のインスタンス）。
+  章 017 の `CheckFermiSetup`（添字型 `CheckIdx M`）と章 018 の `CheckFermi`（`Fin M`）の
+  ずれを `Ising2D.finCheckIdxEquiv` で噛み合わせ、`V^{(+)} = (2 sinh 2K_2)^{M/2} V̌'` を得た。
+- `Theorem013_OnsagerUnconditional.lean` — `Ising2D.onsager_exact_solution_unconditional`。
+
+**消せた仮定**: `ψ̌` の CAR、`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`、`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、
+`C = (2 sinh 2K_2)^{M/2} > 0`、`γ(θ̃_μ) > 0`、章 012 の記法との一致（`hC` / `hgam`）。
+つまり**章 014・015・016・017 由来の仮定はゼロになった。**
+
+**残った仮定**（`Ising2D.EvenSectorClosureInput` に束ねた。いずれも 014–017 由来ではない）:
+`M ≠ 0`、双対関係 `c_2 s_2^* = c_2^*`（原文の前提）、`EvenSectorBridge`
+（章 011 (2) `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` の実行列性。004/010 章が未形式化）、
+`tr(εV^{(+)}) > 0`（章 018 の `closing_004`–`006` が未形式化）、`W` の成分正値性と `ε` 可換性
+（章 010 依存）。`hZ1` / `hZ2` は章 011 の `partition_function_sandwich` で章 018 の仮定ではない。
+
+検証: `lake build` 成功、`./scripts/check-no-sorry.sh` exit 0（新規 28 宣言を targets へ追加）。
+記録: `lean/docs/ch018-formalization.md` 6 章、
+`docs/tasks/2026-07_lean-ch009-013/017_ch018-connecting-ch014-017.md`。
+
 ## 完了（2026-07-27）: **章 020 の Lean 形式化**（臨界点と比熱の対数発散）
 
 `structured-latex/content/020_critical_point.ts` の 11 ブロックを Lean 4 で形式化した

@@ -244,7 +244,72 @@ OK: 主要定理はいずれも sorryAx に依存していない
 `scripts/check-no-sorry.sh` の `targets` 配列の末尾に本章の 106 個の定義・定理を追加してある。
 `sorry` / `admit` は 1 つも残っていない。
 
-## 6. 本章のあとに入った章 016・017 の形式化との関係（未接続）
+## 6. 本章のあとに入った章 014–017 の形式化との接続（**完了**）
+
+本章のコミット後、並行セッションが章 014・015・016・017 を形式化して main に入れた。
+**その結果を差し込んで、`Ising2D.CheckFermi` / `Ising2D.VPlusData` の仮定はすべて
+定理に置き換わった。** 章 018 以外の `.lean` ファイルは 1 つも編集していない（読むだけ）。
+
+### 6.1 追加したファイル
+
+| ファイル | 内容 |
+| --- | --- |
+| `Part018/Claim011_CheckFermiFromPart016.lean` | `Ising2D.checkFermiOf`（`CheckFermi` のインスタンス）と、その `hstar` を埋める橋渡し補題 `Ising2D.checkPsiDag_conjTranspose` |
+| `Part018/Claim012_VPlusDataFromPart017.lean` | `Ising2D.vPlusDataOf`（`VPlusData` のインスタンス）と、章 017 の `CheckFermiSetup`（添字型 `CheckIdx M`）と章 018 の `CheckFermi`（添字型 `Fin M`）を噛み合わせる `Ising2D.finCheckIdxEquiv` / `checkFermiSetupOf_Vprime` |
+| `Part018/Theorem013_OnsagerUnconditional.lean` | 残る仮定だけを束ねた `Ising2D.EvenSectorClosureInput` と、`Ising2D.onsager_exact_solution_unconditional` |
+
+### 6.2 消えた仮定（何で埋めたか）
+
+| もとの仮定 | 出典の章 | 埋めた定理 |
+| --- | --- | --- |
+| `CheckFermi.hcre` / `hann`（`ψ̌^†, ψ̌` が `Ž, Y̌` の 1 次結合） | 016 | `Ising2D.checkPsiDag` / `checkPsi` の定義そのもの（`Part016/Definition001_CheckFermi.lean`） |
+| `CheckFermi.acomm_cre_cre` / `acomm_ann_ann` / `acomm_cre_ann`（CAR） | 016 | `Ising2D.checkPsi_car'`（`Part016/Claim010_UnconditionalViaPart015.lean`。仮定は `M ≠ 0` だけ） |
+| `CheckFermi.hstar`（`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`） | 016 | **本セッションで新たに証明**した `Ising2D.checkPsiDag_conjTranspose`（章 018 の `checkZ_conjTranspose` / `checkY_conjTranspose` と章 008 の `gamma2_neg_eq_neg_conj` だけを使う） |
+| `VPlusData.hV`（`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`） | 016・017 | `Ising2D.VPlus_eq_smul_checkVprime_const`（016 の `VPlus_eq_smul_checkVprime_of_dual` ＋ 017 の `constant_c_value_even_sector`）と `Ising2D.checkVprime_mul_Qproj` |
+| `VPlusData.C`, `hC`（`C = (2 sinh 2K_2)^{M/2} > 0`） | 017 | 同上（`constant_c_value_even_sector` が `c` の値を確定させる） |
+| `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`Part017/Theorem011_MaxEigenvalueSimple.lean`。**無条件**） |
+| `rayleighSup_eq_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
+
+### 6.3 噛み合わせが必要だった箇所（一次情報）
+
+1. **添字型のずれ。** 章 017 の `CheckFermiSetup` は `CheckIdx M = {μ ∈ ℤ | 1 ≤ μ ≤ M}`、
+   章 018 の `CheckFermi` は `Fin M` で添字づけている。`Ising2D.finCheckIdxEquiv`
+   （`j ↦ j+1`、全単射性は `checkIdx_injective` と `CheckIdx.card` から）を置き、
+   `X̌` が両側で同じ行列であること（`checkFermiSetupOf_Xop`）を示した。
+   これにより章 017 の `constant_c_value_even_sector` を章 016 の `checkVprime` に適用できる。
+   なお `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` 自体は章 017 の `Q̌_ε` を経由せず、章 018 側の
+   `CheckFermi.nOp_mul_Qproj` から直接導いた（射影を添字型ごと移す必要が無くなる）。
+2. **`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` が章 016 に無かった。** 章 016 は CAR と `V^{(+)} = cV̌'` までで、
+   `ψ̌` の共役転置は扱っていない（`grep -rn "conjTranspose" Ising2D/Part016/` が空）。
+   係数側の等式 `conj(p_μ) = -p_{M+1-μ}`（`Ising2D.star_checkP`）を新たに証明して埋めた。
+
+### 6.4 残った仮定と、それが消せない理由（一次情報）
+
+`Ising2D.EvenSectorClosureInput`（`Theorem013_OnsagerUnconditional.lean`）に束ねてある。
+**いずれも章 014–017 由来ではない。**
+
+| 場 | 内容 | 消せない理由 |
+| --- | --- | --- |
+| `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
+| `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | **原文が置いている関係**であって形式化の穴ではない（`lean/docs/ch016-formalization.md` 3 章: 「残る仮定は双対関係の 1 つだけ」）。008 章以来 `det A(θ) = 1` に必要 |
+| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 章 011 の `sector_decomposition_of_rayleigh_sup` (2) が **Lean 未形式化**。004 章の `V1_restriction_to_eigenspaces` に依存し、そちらも未形式化（`Part010/Claim011_SectorReplacement.lean` が同じものを仮定 `hres` として置いている）。実行列性のほうは「実行列の `exp` が実行列である」ことを要し、本リポジトリの Lean 側にその補題が無い |
+| `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
+| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存。章 011 も同じ形で仮定として受け取っている（`lean/docs/ch011-formalization.md` 3 章） |
+
+`hZ1` / `hZ2` は章 011 `partition_function_sandwich` の内容であり、章 018 の仮定ではない。
+
+### 6.5 検証
+
+```
+$ cd exact-solution-of-2d-ising-model/lean
+$ export PATH="$HOME/.elan/bin:$PATH" && lake build   # Build completed successfully
+$ ./scripts/check-no-sorry.sh                          # exit 0
+```
+
+`scripts/check-no-sorry.sh` の `targets` 配列の末尾に、本接続で追加した 28 個の
+定義・定理（`Ising2D.checkFermiOf` … `Ising2D.onsager_exact_solution_unconditional`）を追加した。
+
+## 7. （旧記録）本章のあとに入った章 016・017 の形式化との関係
 
 本章のコミット後、並行セッションが章 016（`Ising2D/Part016/`）と章 017（`Ising2D/Part017/`）を
 形式化して main に入れた。**本章の `Ising2D.CheckFermi` / `Ising2D.VPlusData` を

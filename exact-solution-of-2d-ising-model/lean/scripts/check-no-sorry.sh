@@ -1225,6 +1225,34 @@ targets=(
   Ising2D.eq_Qproj_univ_mulVec_of_eigen
   Ising2D.finrank_range_Qproj_univ
   Ising2D.VPlus_eq_Vmat
+  Ising2D.star_checkQ
+  Ising2D.star_two_mul_sqrtM
+  Ising2D.star_checkP
+  Ising2D.checkPsiDag_conjTranspose
+  Ising2D.checkFermiOf
+  Ising2D.checkFermiOf_cre
+  Ising2D.checkFermiOf_ann
+  Ising2D.checkFermiOf_nOp
+  Ising2D.finCheckIdxEquiv
+  Ising2D.finCheckIdxEquiv_val
+  Ising2D.checkFermiSetupOf
+  Ising2D.checkFermiSetupOf_Xop
+  Ising2D.checkFermiSetupOf_Vprime
+  Ising2D.star_ofReal_self
+  Ising2D.VPlus_eq_smul_checkVprime_const
+  Ising2D.checkGam
+  Ising2D.checkGam_pos
+  Ising2D.checkGval
+  Ising2D.checkX_mul_Qproj
+  Ising2D.checkVprime_mul_Qproj
+  Ising2D.vPlusDataOf
+  Ising2D.vPlusDataOf_V
+  Ising2D.vPlusDataOf_C
+  Ising2D.vPlusDataOf_gam
+  Ising2D.sum_checkGam
+  Ising2D.EvenSectorClosureInput
+  Ising2D.rayleighSup_eq_LambdaM_of_input
+  Ising2D.onsager_exact_solution_unconditional
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。
