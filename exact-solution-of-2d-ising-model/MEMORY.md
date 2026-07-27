@@ -80,6 +80,45 @@ Perron–Frobenius の「最大固有ベクトルは符号をそろえて取れ�
 相対差 `≤ 2.0e-15`。24 ケースすべてで真の不等号 `c_−(M) < c_+(M)`（比 `0.110`〜`0.991`）。
 `&=` 19 ステップに対し `∵` 24 件。
 
+## 完了（2026-07-27）: 012 章「自由エネルギーと熱力学極限」を Lean で形式化した
+
+`lean/Ising2D/Part012/`（具体版 5 ファイル）と `lean/Ising2D/Abstract/`（抽象版 4 ファイル）を
+新規に追加し、012 章の 5 つの主張（`gamma1_lower_bound_all_theta`, `gamma_is_continuous`,
+`limit_of_log_Z_in_N_row`, `riemann_sum_to_integral`, `onsager_free_energy_expression`）を
+`sorry` ゼロで形式化した。`lake build` 成功、`scripts/check-no-sorry.sh` は exit 0。
+一覧表・2 本立ての対応・「抽象版で判明した本質」は **`lean/docs/ch012-formalization.md`**
+（`lean/README.md` への統合は未実施）。
+
+要点:
+
+- **★実数解析への移行点 `riemann_sum_to_integral` は mathlib に無いので自前で証明した。**
+  `Riemann sum` 系の定理は mathlib に存在しない（grep で確認）。人手証明が (R1)(R2) として
+  挙げた外部事実（Heine–Cantor・連続関数の可積分性/区間加法性/評価/定数の積分）は
+  すべて mathlib にあり、新たな公理は要らなかった。
+- **`Real.arcosh` は mathlib にある。** `lean/README.md` の「mathlib に無い（自前定義が必要）」は
+  現行 mathlib（`v4.32.1`）では誤り。綴りが `arccosh` ではなく `arcosh`。
+  定義も人手証明 Step 2 の明示式と同一で、`Real.cosh_arcosh` / `Real.continuousOn_arcosh` もある。
+- **抽象版で判明: `riemann_sum_to_integral` に `g` の周期性はまったく効いていない。**
+  区間も `[0,2π]` である必要がなく任意の `[a,b]` でよい。`δ ∈ [0,1)` の右端も閉じてよい
+  （`δ ∈ [0,1]`）。したがって「整数運動量と半整数運動量で極限が同じ」は
+  「代表点が小区間の中なら何でもよい」というより強い事実の特殊例である。
+- **抽象版で判明: `limit_of_log_Z_in_N_row` に Ising 模型の構造は何も効いていない。**
+  効くのは `c^N ≤ Z ≤ B c^N`（`c>0`, `B≥1`）と `log` の単調性・乗法から加法への変換だけ。
+  `B = 2^M` という具体形すら効いていない。
+- 011 章の入力（`partition_function_sandwich`, `def_rayleigh_sup`）は、別セッションが
+  並行して 011 章を形式化中のため **import せず仮定として受け取った**。
+
+**本文（`structured-latex/`）で見つかった点は
+`docs/tasks/2026-07_lean-ch009-013/012_ch012-formalization-findings.md` に記録した**
+（本文は編集していない）。要点は次の 3 つ:
+
+1. `remark_real_analysis_escape_point` の「外部から持ち込む事実は (R1)(R2) の 2 つだけ」は
+   不正確。`gamma_is_continuous` が `cos` / `√` / `log` の連続性という別の実数解析の事実を使う。
+2. `onsager_free_energy_expression` は `Λ` を**集合** `Θ^{(δ)}_M` 上の和で定義しているのに、
+   proof は断りなく添字つきの和 `Σ_{μ=1}^M` へ移っている（単射性の一行が無い。主張自体は正しい）。
+3. `riemann_sum_to_integral` の周期性の仮定と `δ < 1` は不要（上記）。
+
+
 ## 完了（2026-07-27）: **2 次元 Ising 模型の厳密解が本文で閉じた**（018 章、章 C′-16）
 
 `structured-latex/content/018_even_sector_closing.ts`（11 ブロック）で `c_+(M) = Λ^{(1/2)}_M` を
