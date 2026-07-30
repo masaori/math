@@ -1,27 +1,64 @@
-name: Build Typst document
-on: [push]
+name: Build PDF document
+
+# 2次元Ising模型の厳密解の PDF を作り、main では GitHub Pages へ公開する。
+# 入力は構造化テキスト（exact-solution-of-2d-ising-model/structured-latex/content/）だけ。
+# 旧 Typst 版（main.typ）からの移行に伴い、生成経路を structured-latex の
+# `npm run build:pdf`（tools/build-latex.ts → tectonic）へ差し替えた。
+on:
+  push:
+  pull_request:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # GitHub Pagesへのデプロイに必要な権限
-      pages: write
-      id-token: write
+      contents: write # gh-pages ブランチへの push に必要
+    env:
+      # ubuntu にヒラギノは無いので Noto CJK で組む（既定はローカル作業環境のヒラギノ）。
+      ISING_PDF_CJK_MAIN_FONT: Noto Serif CJK JP
+      ISING_PDF_CJK_SANS_FONT: Noto Sans CJK JP
+      TECTONIC_VERSION: 0.15.0
     steps:
       - uses: actions/checkout@v4
+
       - name: Install Japanese fonts
         run: |
           sudo apt-get update
           sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra
-      - uses: typst-community/setup-typst@v4
-      - name: Build main document
-        run: typst compile exact-solution-of-2d-ising-model/main.typ
-      - name: Create pages directory
-        run: mkdir -p pages
-      - name: Copy PDF to pages directory
-        run: cp exact-solution-of-2d-ising-model/main.pdf pages/
-      - name: Create index.html
+
+      - name: Install tectonic
         run: |
+          set -euo pipefail
+          asset="tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          url="https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/${asset}"
+          curl -fsSL "$url" -o /tmp/tectonic.tar.gz
+          sudo tar -xzf /tmp/tectonic.tar.gz -C /usr/local/bin tectonic
+          tectonic --version
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          # .ts を型ストリップで直接実行するため 22.18 以上が要る。
+          node-version: '22'
+
+      - name: Install Node dependencies
+        working-directory: exact-solution-of-2d-ising-model/structured-latex
+        run: pnpm install --frozen-lockfile
+
+      # 生成 → tectonic で PDF → ログ検査（未解決参照・ラベル重複・組めない文字・
+      # 版面外へ出た行）→ ノート非混入の検査。1 件でもあればここで落ちる。
+      - name: Build PDF
+        working-directory: exact-solution-of-2d-ising-model/structured-latex
+        run: npm run build:pdf
+
+      - name: Assemble pages directory
+        run: |
+          set -euo pipefail
+          mkdir -p pages
+          # 公開 URL を変えないため、ファイル名は従来どおり main.pdf にする。
+          cp exact-solution-of-2d-ising-model/structured-latex/build/document.pdf pages/main.pdf
           cat > pages/index.html << 'EOF'
           <!DOCTYPE html>
           <html lang="ja">
@@ -76,19 +113,22 @@ jobs:
                   <a href="main.pdf" class="pdf-link">📄 PDFを開く</a>
                   <div class="description">
                       <p>このドキュメントは2次元Ising模型の厳密解について記述しています。</p>
-                      <p>Typstで作成され、GitHub Actionsで自動的にPDF化されています。</p>
+                      <p>証明の正本である構造化テキストから LaTeX を生成し、GitHub Actions で自動的にPDF化されています。</p>
                   </div>
               </div>
           </body>
           </html>
           EOF
-      - name: Upload PDF artifacts
+
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: main-document
-          path: main.pdf
-      # GitHub Pagesへのデプロイ
+          path: pages/main.pdf
+
+      # 公開は main だけ。他ブランチ・PR ではビルド検査までで止める。
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
