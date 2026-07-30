@@ -1646,9 +1646,41 @@ G'(\theta)
         ref("gamma_kappa_identity"),
         " より ",
         math(String.raw`\gamma(\theta,-\kappa) = \gamma(\theta,\kappa)`),
-        " なので ",
+        " なので、被積分関数が一致することから ",
         math(String.raw`G(-\kappa) = G(\kappa)`),
-        "、したがって ",
+        "（すべての実数 ",
+        math(String.raw`\kappa`),
+        "）。ここから ",
+        math(String.raw`\kappa < 0`),
+        " の場合を ",
+        math(String.raw`\kappa > 0`),
+        " の場合に帰着できることを、合成関数の微分で明示しておく。",
+        math(String.raw`\kappa < 0`),
+        " のとき ",
+        math(String.raw`-\kappa > 0`),
+        " なので、後述の Step 1 により ",
+        math(String.raw`G`),
+        " は ",
+        math(String.raw`-\kappa`),
+        " で 2 回微分可能である。",
+        math(String.raw`G(\kappa) = G(-\kappa)`),
+        " の右辺は ",
+        math(String.raw`\kappa \mapsto -\kappa`),
+        " と ",
+        math(String.raw`G`),
+        " の合成なので、合成関数の微分より ",
+        math(String.raw`G`),
+        " は ",
+        math(String.raw`\kappa`),
+        " でも微分可能で ",
+        math(String.raw`G'(\kappa) = -G'(-\kappa)`),
+        "。この等式の右辺をもう一度 ",
+        math(String.raw`\kappa`),
+        " で微分すると、同じく合成関数の微分より ",
+        math(String.raw`-(-1)G''(-\kappa) = G''(-\kappa)`),
+        " なので ",
+        math(String.raw`G''(\kappa) = G''(-\kappa)`),
+        "。したがって ",
         math(String.raw`G''(-\kappa) = G''(\kappa)`),
         " かつ ",
         math(String.raw`|G'(-\kappa)| = |G'(\kappa)|`),
@@ -1741,8 +1773,9 @@ T := \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left|\frac{1}{\sqrt{S(1+S)}} - \frac{1}{\sqrt S}\right|
-&= \frac{1}{\sqrt S}\left(1 - \frac{1}{\sqrt{1+S}}\right) \\
+0 \ \leq\ \frac{1}{\sqrt S} - \frac{1}{\sqrt{S(1+S)}}
+&= \frac{1}{\sqrt S}\left(1 - \frac{1}{\sqrt{1+S}}\right)
+   \quad (\because 1+S \geq 1 \text{ より } \sqrt{1+S} \geq 1) \\
 &= \frac{1}{\sqrt S}\cdot\frac{\sqrt{1+S}-1}{\sqrt{1+S}} \\
 &= \frac{1}{\sqrt S}\cdot\frac{S}{\sqrt{1+S}\left(\sqrt{1+S}+1\right)}
    \quad (\because \sqrt{1+S}-1 = \tfrac{S}{\sqrt{1+S}+1}) \\
@@ -1756,9 +1789,14 @@ T := \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
 \end{aligned}`,
       ),
       paragraph([
-        "(R3) より ",
-        math(String.raw`\left|J - \displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S}\right| \leq \frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)`),
-        "。",
+        "この各点評価は **符号のついた片側の評価** である。(R3) の単調性を ",
+        math(String.raw`[0,\pi]`),
+        " 上で使うと",
+      ]),
+      displayMath(
+        String.raw`0 \ \leq\ \int_0^{\pi}\frac{d\theta}{\sqrt S} - J \ \leq\ \frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)`,
+      ),
+      paragraph([
         ref("sine_integral_two_sided"),
         " を ",
         math(String.raw`\delta = \sinh(\tfrac\kappa2)`),
@@ -1766,24 +1804,37 @@ T := \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
         math(String.raw`\displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S} = 2\log\frac{\pi}{\delta} + R_0`),
         "（",
         math(String.raw`0 \leq R_0 \leq \frac{2\delta^2}{\pi^2} + B`),
-        "）なので",
+        "）なので、",
+        math(String.raw`R := J - 2\log\frac{\pi}{\delta}`),
+        " とおくと ",
+        math(String.raw`R = R_0 - \left(\displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S} - J\right)`),
+        " であり、**上界は ",
+        math(String.raw`R_0`),
+        " だけから、下界は直前の評価だけから来る**（両者を足す必要はない）：",
       ]),
       displayMath(
         String.raw`J = 2\log\frac{\pi}{\delta} + R,
 \qquad
-|R| \ \leq\ \frac{2\delta^2}{\pi^2} + B + \frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)`,
+-\frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right) \ \leq\ R \ \leq\ \frac{2\delta^2}{\pi^2} + B`,
       ),
       paragraph([
+        "したがって ",
+        math(String.raw`|R| \leq \max\left\{\frac{2\delta^2}{\pi^2} + B,\ \frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)\right\}`),
+        " である。",
         math(String.raw`\kappa \leq \tfrac12`),
         " のとき ",
         math(String.raw`\cosh(\tfrac\kappa2) \leq \cosh\tfrac14 \leq 1.0315`),
         "、",
         math(String.raw`\delta \leq 0.2527`),
+        "、",
+        math(String.raw`9.8696 \leq \pi^2`),
+        "、",
+        math(String.raw`\pi \leq 3.1416`),
         " なので",
       ]),
       displayMath(
-        String.raw`|R| \ \leq\ \frac{2\cdot 0.2527^2}{9.8696} + 0.88 + \frac{\pi}{2}\cdot 1.0315
-\ \leq\ 0.0130 + 0.88 + 1.6206 \ \leq\ 2.514`,
+        String.raw`|R| \ \leq\ \max\left\{\frac{2\cdot 0.2527^2}{9.8696} + 0.88,\ \ \frac{3.1416}{2}\cdot 1.0315\right\}
+\ \leq\ \max\left\{0.0130 + 0.88,\ \ 1.6203\right\} \ \leq\ 1.621`,
       ),
       paragraph([
         "Step 5（",
@@ -1921,10 +1972,10 @@ T
 &\leq \left|\cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}\right|
  + \frac{\cosh\kappa}{2}|R| + |T|
    \quad (\because \text{三角不等式}) \\
-&\leq 2.201 + \frac{1.1277}{2}\cdot 2.514 + 3.614
+&\leq 2.201 + \frac{1.1277}{2}\cdot 1.621 + 3.614
    \quad (\because \text{Step 4, Step 5, Step 6}) \\
-&\leq 2.201 + 1.418 + 3.614 \\
-&= 7.233
+&\leq 2.201 + 0.915 + 3.614 \\
+&= 6.730
 \end{aligned}`,
       ),
       paragraph([
@@ -1933,7 +1984,7 @@ T
       ]),
       displayMath(
         String.raw`\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{\kappa}\right|
-\ \leq\ \frac{7.233}{6.2831} \ \leq\ 1.16 \ \leq\ \frac{6}{5}`,
+\ \leq\ \frac{6.730}{6.2831} \ \leq\ 1.08 \ \leq\ \frac{6}{5}`,
       ),
       paragraph([
         "最後に ",
@@ -1948,7 +1999,7 @@ T
     conversion: {
       status: "added",
       notes: [
-        "定数 6/5 は最適化していない（証明中の各段の評価をそのまま足した結果 1.16 以下）。数値では実際の |G'' - (1/2π)log(1/|κ|)| の上限は 0.13 程度である（sagemath/check/055_claim_critical_point/check_04）。",
+        "定数 6/5 は最適化していない（証明中の各段の評価をそのまま足した結果 1.08 以下）。数値では実際の |G'' - (1/2π)log(1/|κ|)| の上限は 0.13 程度である（sagemath/check/055_claim_critical_point/check_04）。",
       ],
     },
   },
