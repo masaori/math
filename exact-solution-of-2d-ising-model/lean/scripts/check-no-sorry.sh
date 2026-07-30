@@ -1278,6 +1278,29 @@ targets=(
   Ising2D.specific_heat_log_divergence_dist
   Ising2D.tendsto_log_inv_dist_atTop
   Ising2D.specific_heat_ratio_tendsto
+  Ising2D.Abstract.idem_of_ortho_of_sum_eq_one
+  Ising2D.Abstract.iSupIndep_range_proj
+  Ising2D.Abstract.iSup_range_proj_eq_top
+  Ising2D.Abstract.isInternal_range_proj
+  Ising2D.Abstract.eigen_of_mem_range_proj
+  Ising2D.Abstract.collectedBasis_eigen
+  Ising2D.Abstract.toMatrix_collectedBasis_eq_diagonal
+  Ising2D.Abstract.isInternal_range_matrix_proj
+  Ising2D.Abstract.exists_eigenBasis_of_matrix_proj
+  Ising2D.Abstract.exists_conj_diagonal_of_matrix_proj
+  Ising2D.FermiSetup.isInternal_range_Qproj
+  Ising2D.FermiSetup.iSup_range_Qproj_eq_top
+  Ising2D.FermiSetup.iSupIndep_range_Qproj
+  Ising2D.FermiSetup.exists_eigenBasis_Vprime
+  Ising2D.FermiSetup.exists_conj_diagonal_Vprime
+  Ising2D.FermiSetup.exists_conj_diagonal_Vmat
+  Ising2D.CheckFermiSetup.isInternal_range_Qproj
+  Ising2D.CheckFermiSetup.iSup_range_Qproj_eq_top
+  Ising2D.CheckFermiSetup.iSupIndep_range_Qproj
+  Ising2D.CheckFermiSetup.exists_eigenBasis_Vprime
+  Ising2D.CheckFermiSetup.exists_conj_diagonal_Vprime
+  Ising2D.exists_eigenBasis_VPlus
+  Ising2D.exists_conj_diagonal_VPlus
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。
