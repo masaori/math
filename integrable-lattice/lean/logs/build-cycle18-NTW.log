@@ -24,6 +24,5 @@ warning: IntegrableLattice/PropCPeriod.lean:160:35: Variable name `hk` is not ex
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-✔ [8666/8667] Built IntegrableLattice (17s)
 Build completed successfully (8667 jobs).
 BUILD_EXIT=0
