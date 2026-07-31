@@ -169,7 +169,7 @@ export default defineBlocks([
           "enough that it may well be folklore.",
         ],
         [
-          "**A weaker form of Proposition T is known.** Mednykh and Mednykh ",
+          "**A weaker form of Proposition T is known.** Kwon, Mednykh and Mednykh ",
           cite(["MednykhMednykh2019"], "Theorem 5.1"),
           " show, for the circulant foliation over a graph, that for odd ",
           math(String.raw`n`),

@@ -165,7 +165,7 @@ export default defineBlocks([
           math(String.raw`d=1`),
           " で既出**（Gauss–Dold 合同の帰結）、**命題 T は弱い形（",
           math(String.raw`v_2`),
-          " が偶数）が既出**（Mednykh–Mednykh）、**命題 W は形が ",
+          " が偶数）が既出**（Kwon–Mednykh–Mednykh）、**命題 W は形が ",
           math(String.raw`d=1`),
           " で既出**（Vallières Cor 5.7）。",
           "命題 W の ",

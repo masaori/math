@@ -198,7 +198,7 @@ export default defineBlocks([
           cite(["ByszewskiGraffWard2021"]),
           "; **a weak form of Proposition T — that** ",
           math(String.raw`v_2`),
-          " **is even — already appears** (Mednykh–Mednykh ",
+          " **is even — already appears** (Kwon–Mednykh–Mednykh ",
           cite(["MednykhMednykh2019"]),
           "); **the shape of Proposition W already appears for** ",
           math(String.raw`d=1`),

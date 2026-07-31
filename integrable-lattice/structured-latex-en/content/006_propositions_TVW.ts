@@ -305,7 +305,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Prior art**: **a weak form is already in the literature.** From Theorem 5.1 of Mednykh–Mednykh, ",
+        "**Prior art**: **a weak form is already in the literature.** From Theorem 5.1 of Kwon–Mednykh–Mednykh, ",
         "*Complexity of the circulant foliation over a graph*, arXiv:1902.05681 ",
         cite(["MednykhMednykh2019"], "Theorem 5.1"),
         ", whose §7.6 treats explicitly the discrete torus ",

@@ -288,8 +288,8 @@ export default defineBlocks([
         " の完備化への配線が要る）。",
       ]),
       paragraph([
-        "**既出性**: **弱い形は既出である。** Mednykh–Mednykh, *Complexity of the circulant foliation over a graph*, ",
-        "arXiv:1902.05681 の Theorem 5.1（§7.6 が本件の離散トーラス ",
+        "**既出性**: **弱い形は既出である。** Kwon–Mednykh–Mednykh, *Complexity of the circulant foliation over a graph*, ",
+        "J. Algebraic Combin. **53** (2021) 115–129（arXiv:1902.05681）の Theorem 5.1（§7.6 が本件の離散トーラス ",
         math(String.raw`C_L\times C_L`),
         " を明示的に扱う）から、奇 ",
         math(String.raw`L`),
