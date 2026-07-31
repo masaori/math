@@ -1,0 +1,41 @@
+# cycle 19 mathlib 欠落調査（3 段方式）  mathlib=520045ab14  files=    8264
+--- 概念: traceDual
+(1) 連結語の内容 grep 'traceDual':        3 files
+(2) 語幹の内容 grep -i 'trace dual':        0 files
+(3) 語幹のファイル名 -i 'traceDual':        0 files
+--- 概念: differentIdeal
+(1) 連結語の内容 grep 'differentIdeal':        4 files
+(2) 語幹の内容 grep -i 'different ideal':        3 files
+(3) 語幹のファイル名 -i 'different':       16 files
+.lake/packages/mathlib/Mathlib/Analysis/Calculus/DifferentialForm
+.lake/packages/mathlib/Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/MDifferentiable.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Different.lean
+--- 概念: SmithNormalForm
+(1) 連結語の内容 grep 'SmithNormalForm':        2 files
+(2) 語幹の内容 grep -i 'smith normal':        3 files
+(3) 語幹のファイル名 -i 'smith':        0 files
+--- 概念: Lucas number
+(1) 連結語の内容 grep 'Lucas number':        0 files
+(2) 語幹の内容 grep -i 'lucas number':        0 files
+(3) 語幹のファイル名 -i 'lucas':        4 files
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasPrimality.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasLehmer.lean
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean
+--- 概念: orderOf
+(1) 連結語の内容 grep 'orderOf':       67 files
+(2) 語幹の内容 grep -i 'order of':      130 files
+(3) 語幹のファイル名 -i 'orderOf':        3 files
+.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OrderOfVanishing.lean
+.lake/packages/mathlib/Mathlib/GroupTheory/OrderOfElement.lean
+.lake/packages/mathlib/Mathlib/RingTheory/OrderOfVanishing
+--- Euler の双対基底（トレース双対と微分の関係）
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean:22:- `conductor_mul_differentIdeal`:
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean:25:- `aeval_derivative_mem_differentIdeal`:
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean:100:theorem traceDual_span_of_basis [FiniteDimensional K L] [Algebra.IsSeparable K L]
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean:633:lemma conductor_mul_differentIdeal
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean:673:lemma aeval_derivative_mem_differentIdeal
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean:677:  rw [← conductor_mul_differentIdeal A K L x hx]
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean:70:    ← traceDual_span_of_basis A (1 : Submodule R₂ F₂) b₂
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean:193:    ← coe_restrictScalars A, traceDual_span_of_basis A (1 : Submodule R₂ F₂) b,
