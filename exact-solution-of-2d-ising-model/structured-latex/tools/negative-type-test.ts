@@ -1,11 +1,19 @@
 #!/usr/bin/env node
 /**
- * 「誤った入力を書くと型検査が落ちる」ことの実証テスト。
+ * 「誤った入力を書くと**型検査が実際に落ちる**」ことの実証テスト。
  *
  * `type-tests/label-typing.test-d.ts` は `@ts-expect-error` による回帰テストで、通常の
  * `tsc` に同乗して回る。こちらは**実際に tsc を落として、その診断メッセージを見せる**ためのテスト。
  * 「型検査は通っているが、実は何も検出していない」状態を否定する
  * （実際、集約モジュールを tsconfig の include に入れ忘れて検査が無効化されていた事故がある）。
+ *
+ * **入力言語そのものの検査は、システム側の `structured-latex/tools/negative-type-test.ts`
+ * が同じ形で持っている**（見出しに本文、level の範囲、タイトルの空、`proof` の打ち間違い、
+ * ファイル跨ぎの id・ラベル重複、ノートの targets ほか）。ここに残すのは、
+ * **このプロジェクトの生成物とメタデータ宣言でしか確かめられないもの**だけである:
+ *
+ *   1. `labels.generated.ts` に実在するラベルへの束縛（存在しないラベルは書けない）
+ *   2. プロジェクト固有メタデータ `conversion`（値域・フィールド名・見出しには書けないこと）
  *
  * 各ケースは対で回す:
  *   1. 正しい版を書いて tsc → **成功すること**（設定不備で常に落ちているだけではないことの対照）
@@ -25,9 +33,8 @@ const tmpDir = join(structuredLatexDir, "type-tests", ".tmp");
 const tsc = join(structuredLatexDir, "node_modules", ".bin", "tsc");
 
 const realLabel = ALL_LABELS[0];
-const otherLabel = ALL_LABELS[1];
-if (realLabel === undefined || otherLabel === undefined) {
-  throw new Error("labels.generated.ts が空（先に node tools/generate-index.ts を回す）");
+if (realLabel === undefined) {
+  throw new Error("labels.generated.ts が空（先に npm run gen を回す）");
 }
 const brokenLabel = `${realLabel}__does_not_exist`;
 
@@ -48,8 +55,6 @@ const block = (options: {
 }): string => `  {
     id: ${JSON.stringify(options.id)},
     kind: "claim",
-    sourcePath: "type-tests/.tmp",
-    sourceOrdinal: 1,
     labels: [${(options.labels ?? []).map((label) => JSON.stringify(label)).join(", ")}],
     statement: [${options.statement ?? ""}],${options.extra ?? ""}
   },`;
@@ -72,39 +77,9 @@ ${body}
 ]);
 `;
 
-/** 複数ファイルを跨いだ検査（document.generated.ts と同じ形の集約モジュール）。 */
-const aggregatorModule = (): string => `import type {
-  AssertNoDuplicate,
-  BlockIdsOf,
-  FindDuplicate,
-  LabelsOf,
-  NoteIdsOf,
-} from "../../../schema.ts";
-import blocksA from "./a.ts";
-import blocksB from "./b.ts";
-import notesC from "./c.ts";
-
-type AllBlocks = [...typeof blocksA, ...typeof blocksB];
-type AllNotes = [...typeof notesC];
-type AllBlockIds = BlockIdsOf<AllBlocks>;
-type AllNoteIds = NoteIdsOf<AllNotes>;
-
-export type _UniqueBlockIds = AssertNoDuplicate<FindDuplicate<AllBlockIds>>;
-export type _UniqueLabels = AssertNoDuplicate<FindDuplicate<LabelsOf<AllBlocks>>>;
-export type _UniqueNoteIds = AssertNoDuplicate<FindDuplicate<AllNoteIds>>;
-export type _NoIdCollision = AssertNoDuplicate<FindDuplicate<[...AllBlockIds, ...AllNoteIds]>>;
-`;
-
-/** 集約ケース用の、誤りを含まない相棒ファイル。 */
-const companionNote = (id: string): string => `  {
-    id: ${JSON.stringify(id)},
-    targets: [${JSON.stringify(realLabel)}],
-    body: [],
-  },`;
-
 const cases: Case[] = [
   {
-    name: "本文中の ref が存在しないラベルを指す",
+    name: "本文中の ref が、このプロジェクトに実在しないラベルを指す",
     expect: brokenLabel,
     files: (broken) => ({
       "fixture.ts": blocksModule(
@@ -116,7 +91,7 @@ const cases: Case[] = [
     }),
   },
   {
-    name: "ノートの targets が存在しないラベルを指す",
+    name: "ノートの targets が、このプロジェクトに実在しないラベルを指す",
     expect: brokenLabel,
     files: (broken) => ({
       "fixture.ts": noteModule(`  {
@@ -137,138 +112,8 @@ const cases: Case[] = [
     }),
   },
   {
-    name: "同一ファイル内でブロック id が重複する",
-    expect: "__ブロックidが重複している",
-    files: (broken) => ({
-      "fixture.ts": blocksModule(
-        `${block({ id: "neg_dup_a" })}\n${block({ id: broken ? "neg_dup_a" : "neg_dup_b" })}`,
-        "defineBlocks",
-      ),
-    }),
-  },
-  {
-    name: "同一ファイル内でラベルが重複する",
-    expect: "__ラベルが重複している",
-    files: (broken) => ({
-      "fixture.ts": blocksModule(
-        `${block({ id: "neg_lbl_a", labels: [realLabel] })}\n${block({
-          id: "neg_lbl_b",
-          labels: [broken ? realLabel : otherLabel],
-        })}`,
-        "defineBlocks",
-      ),
-    }),
-  },
-  {
-    name: "同一ファイル内でノート id が重複する",
-    expect: "__ノートidが重複している",
-    files: (broken) => ({
-      "fixture.ts": noteModule(`${companionNote("note_neg_dup_a")}
-  {
-    id: ${JSON.stringify(broken ? "note_neg_dup_a" : "note_neg_dup_b")},
-    targets: [${JSON.stringify(realLabel)}],
-    body: [],
-  },`),
-    }),
-  },
-  {
-    name: "ファイルを跨いでブロック id が重複する",
-    expect: "does not satisfy the constraint 'never'",
-    files: (broken) => ({
-      "a.ts": blocksModule(block({ id: "neg_cross_a" }), "defineBlocks"),
-      "b.ts": blocksModule(block({ id: broken ? "neg_cross_a" : "neg_cross_b" }), "defineBlocks"),
-      "c.ts": noteModule(companionNote("note_neg_cross")),
-      "fixture.ts": aggregatorModule(),
-    }),
-  },
-  {
-    name: "ファイルを跨いでラベルが重複する",
-    expect: "does not satisfy the constraint 'never'",
-    files: (broken) => ({
-      "a.ts": blocksModule(block({ id: "neg_lc_a", labels: [realLabel] }), "defineBlocks"),
-      "b.ts": blocksModule(
-        block({ id: "neg_lc_b", labels: [broken ? realLabel : otherLabel] }),
-        "defineBlocks",
-      ),
-      "c.ts": noteModule(companionNote("note_neg_lc")),
-      "fixture.ts": aggregatorModule(),
-    }),
-  },
-  {
-    name: "ノート id がブロック id と衝突する",
-    expect: "does not satisfy the constraint 'never'",
-    files: (broken) => ({
-      "a.ts": blocksModule(block({ id: "neg_collide_block" }), "defineBlocks"),
-      "b.ts": blocksModule(block({ id: "neg_collide_other" }), "defineBlocks"),
-      "c.ts": noteModule(companionNote(broken ? "neg_collide_block" : "note_neg_collide")),
-      "fixture.ts": aggregatorModule(),
-    }),
-  },
-  {
-    name: "見出しブロックが本文を持つ",
-    expect: "statement",
-    files: (broken) => ({
-      "fixture.ts": `import { defineBlocks, paragraph } from "../../../schema.ts";
-
-void paragraph;
-
-export default defineBlocks([
-  {
-    id: "neg_heading",
-    kind: "heading",
-    level: 2,
-    sourcePath: "type-tests/.tmp",
-    sourceOrdinal: 1,
-    title: { text: "見出し" },
-    labels: [],${broken ? '\n    statement: [paragraph(["本文"])],' : ""}
-  },
-]);
-`,
-    }),
-  },
-  {
-    name: "定理型ブロックが見出し専用の level を持つ",
-    expect: "not assignable to type 'HeadingLevel | undefined'",
-    files: (broken) => ({
-      "fixture.ts": blocksModule(
-        block({ id: "neg_level", extra: broken ? "\n    level: 2," : "" }),
-        "defineBlocks",
-      ),
-    }),
-  },
-  {
-    name: "見出しの level が 1〜6 の範囲外",
-    expect: "Type '7' is not assignable",
-    files: (broken) => ({
-      "fixture.ts": `import { defineBlocks } from "../../../schema.ts";
-
-export default defineBlocks([
-  {
-    id: "neg_level_range",
-    kind: "heading",
-    level: ${broken ? 7 : 2},
-    sourcePath: "type-tests/.tmp",
-    sourceOrdinal: 1,
-    title: { text: "見出し" },
-    labels: [],
-  },
-]);
-`,
-    }),
-  },
-  {
-    name: "タイトルが text も tex も持たない",
-    expect: "Type '{}' is not assignable",
-    files: (broken) => ({
-      "fixture.ts": blocksModule(
-        block({ id: "neg_title", extra: `\n    title: { ${broken ? "" : 'text: "題"'} },` }),
-        "defineBlocks",
-      ),
-    }),
-  },
-  {
     name: "conversion.status が想定外の値",
-    expect: "not assignable to type 'ConversionStatus'",
+    expect: "ConversionStatus",
     files: (broken) => ({
       "fixture.ts": blocksModule(
         block({
@@ -280,47 +125,47 @@ export default defineBlocks([
     }),
   },
   {
-    name: "フィールド名の打ち間違い（proof → proofs）",
-    expect: "proofs",
+    name: "conversion.notes に文字列を直接書く",
+    expect: "not assignable",
     files: (broken) => ({
       "fixture.ts": blocksModule(
         block({
-          id: "neg_typo",
-          extra: broken ? '\n    proofs: [paragraph(["証明のつもり"])],' : "",
+          id: "neg_conversion_notes",
+          extra: `\n    conversion: { status: "added", notes: ${broken ? '"一行だけのメモ"' : '["一行だけのメモ"]'} },`,
         }),
-        "defineBlocks, paragraph",
-      ),
-    }),
-  },
-  {
-    name: "sourceOrdinal が整数でない",
-    expect: "__sourceOrdinalが正の整数でない",
-    files: (broken) => ({
-      "fixture.ts": blocksModule(
-        block({ id: "neg_ordinal" }).replace("sourceOrdinal: 1,", `sourceOrdinal: ${broken ? "2.5" : "2"},`),
         "defineBlocks",
       ),
     }),
   },
   {
-    name: "sourceOrdinal が 0 以下",
-    expect: "__sourceOrdinalが正の整数でない",
+    name: "conversion の中のフィールド名の打ち間違い（notes → note）",
+    expect: "note",
     files: (broken) => ({
       "fixture.ts": blocksModule(
-        block({ id: "neg_ordinal_zero" }).replace("sourceOrdinal: 1,", `sourceOrdinal: ${broken ? "0" : "1"},`),
+        block({
+          id: "neg_conversion_typo",
+          extra: `\n    conversion: { status: "added", ${broken ? "note" : "notes"}: ["メモ"] },`,
+        }),
         "defineBlocks",
       ),
     }),
   },
   {
-    name: "ノートの targets が空",
-    expect: "Source has 0 element(s) but target requires 1",
+    name: "見出しにメタデータ（conversion）を書く",
+    expect: "conversion",
     files: (broken) => ({
-      "fixture.ts": noteModule(`  {
-    id: "note_neg_empty",
-    targets: [${broken ? "" : JSON.stringify(realLabel)}],
-    body: [],
-  },`),
+      "fixture.ts": `import { defineBlocks } from "../../../schema.ts";
+
+export default defineBlocks([
+  {
+    id: "neg_heading_meta",
+    kind: "heading",
+    level: 2,
+    title: { text: "見出し" },
+    labels: [],${broken ? '\n    conversion: { status: "added" },' : ""}
+  },
+]);
+`,
     }),
   },
 ];

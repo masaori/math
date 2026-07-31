@@ -5,17 +5,17 @@ export default defineBlocks([
     id: "heading_exp_conjugation_proof",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 7,
+    origin: { path: "_old/typst/main.typ", ordinal: 7 },
     title: { tex: String.raw`e^{X} Y e^{-X} = e^{\mathrm{ad}(X)}(Y) \text{ の証明}` },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "exp_conjugation_proof_003_definition_M_n_C_convergence",
     kind: "definition",
-    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/002_式変形アプローチの概要と行列空間の内積ノルム収束の定義.typ",
-    sourceOrdinal: 3,
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/002_式変形アプローチの概要と行列空間の内積ノルム収束の定義.typ",
+      ordinal: 3,
+    },
     title: { tex: String.raw`M(n;\mathbb{C}) \text{ の内積・ノルム・収束}` },
     labels: ["def_frobenius_inner_product"],
     statement: [
@@ -184,8 +184,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
     kind: "claim",
-    sourcePath: "structured-latex/content/005_exp_conjugation_proof.ts",
-    sourceOrdinal: 3,
+    origin: { path: "structured-latex/content/005_exp_conjugation_proof.ts", ordinal: 3 },
     title: { text: "Frobenius 内積の性質（Hermite 内積の公理と Cauchy--Schwarz の不等式）" },
     labels: ["frobenius_inner_product_axioms"],
     statement: [
@@ -533,8 +532,10 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_004_theorem_ad_binomial",
     kind: "theorem",
-    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003_theorem_ad展開の二項定理的公式_BrianHall_exercise14.typ",
-    sourceOrdinal: 4,
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003_theorem_ad展開の二項定理的公式_BrianHall_exercise14.typ",
+      ordinal: 4,
+    },
     title: { text: "ad 展開の二項定理的公式（Brian Hall exercise 14）" },
     labels: ["ad_binomial"],
     statement: [
@@ -776,8 +777,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
     kind: "definition",
-    sourcePath: "structured-latex/content/005_exp_conjugation_proof.ts",
-    sourceOrdinal: 7,
+    origin: { path: "structured-latex/content/005_exp_conjugation_proof.ts", ordinal: 7 },
     title: { tex: String.raw`\mathrm{ad}_X \text{ と } \mathrm{Ad}_g \text{ の定義（複素行列）}` },
     labels: ["def_ad_X_matrix"],
     statement: [
@@ -875,8 +875,7 @@ export default defineBlocks([
   {
     id: "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
     kind: "theorem",
-    sourcePath: "structured-latex/content/005_exp_conjugation_proof.ts",
-    sourceOrdinal: 9,
+    origin: { path: "structured-latex/content/005_exp_conjugation_proof.ts", ordinal: 9 },
     title: {
       tex: String.raw`\text{行列版: } e^{X} Y e^{-X} = e^{\mathrm{ad}_X}(Y)`,
     },
@@ -1349,8 +1348,10 @@ D_N := \{0,\dots,N\}^{2}\setminus T_N
   {
     id: "exp_conjugation_proof_008_theorem_exp_ad_series",
     kind: "theorem",
-    sourcePath: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
-    sourceOrdinal: 8,
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
+      ordinal: 8,
+    },
     title: { tex: String.raw`e^{\mathrm{ad}_X}(Y) \text{ の級数展開}` },
     labels: ["brianhall_exc14"],
     statement: [

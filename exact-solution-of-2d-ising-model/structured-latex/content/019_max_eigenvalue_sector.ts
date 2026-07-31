@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_max_eigenvalue_sector",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { tex: String.raw`\text{最大固有値はどちらのセクターから来るか：} c(M) = c_+(M)` },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "sector_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的" },
     labels: [],
     statement: [
@@ -112,8 +109,7 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
   {
     id: "sector_001_claim_epsilon_is_permutation",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: {
       tex: String.raw`\varepsilon \text{ は不動点をもたない対合の置換行列}`,
     },
@@ -323,8 +319,7 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
   {
     id: "sector_002_claim_abs_vector_moves_to_even_sector",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: {
       tex: String.raw`x \in \mathcal{F}^{(-)} \Longrightarrow u := \left(|x_k|\right)_k
 \in \mathcal{F}^{(+)}, \quad u^\top Wu \geq x^\top Wx`,
@@ -486,8 +481,7 @@ u^\top W u
   {
     id: "sector_003_theorem_c_minus_le_c_plus",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`c_-(M) \leq c_+(M)` },
     labels: ["c_minus_le_c_plus"],
     statement: [
@@ -653,8 +647,7 @@ x^\top W x
   {
     id: "sector_004_theorem_c_equals_c_plus",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`c(M) = c_+(M) = \Lambda^{(1/2)}_M` },
     labels: ["c_equals_c_plus"],
     statement: [
@@ -765,8 +758,7 @@ c(M)
   {
     id: "sector_005_remark_sandwich_becomes_equality",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { text: "Onsager の厳密解の証明で使った粗い評価との関係" },
     labels: [],
     statement: [

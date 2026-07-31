@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_eigenvalues_of_V",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { tex: String.raw`\text{定数 } c \text{ の決定と } V \text{ の固有値}` },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "eigenvalues_of_V_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的" },
     labels: [],
     statement: [
@@ -79,8 +76,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
   {
     id: "eigenvalues_of_V_001_definition_trace",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\text{トレース } \mathrm{tr}` },
     labels: ["def_trace"],
     statement: [
@@ -101,8 +97,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
   {
     id: "eigenvalues_of_V_002_claim_trace_properties",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { text: "トレースの基本性質" },
     labels: ["trace_basic_properties"],
     statement: [
@@ -182,8 +177,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
   {
     id: "eigenvalues_of_V_003_claim_trace_of_idempotent",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { text: "冪等行列のトレースは像の次元" },
     labels: ["trace_of_idempotent"],
     statement: [
@@ -292,8 +286,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
   {
     id: "eigenvalues_of_V_004_definition_number_operator",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`\text{フェルミオン数演算子 } n_\mu` },
     labels: ["def_number_operator"],
     statement: [
@@ -419,8 +412,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
   {
     id: "eigenvalues_of_V_005_claim_number_operator_idempotent",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`n_\mu^2 = n_\mu` },
     labels: ["number_operator_idempotent"],
     statement: [
@@ -548,8 +540,7 @@ n_\mu^2
   {
     id: "eigenvalues_of_V_006_claim_number_operators_commute",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`n_\mu n_\nu = n_\nu n_\mu` },
     labels: ["number_operators_commute"],
     statement: [
@@ -661,8 +652,7 @@ A\,n_\nu
   {
     id: "eigenvalues_of_V_007_claim_trace_of_number_operator_product",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`\mathrm{tr}\bigl(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\bigr) = 2^{M-k}` },
     labels: ["trace_of_number_operator_product"],
     statement: [
@@ -805,8 +795,7 @@ A\,n_\nu
   {
     id: "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { text: "数演算子の同時固有空間分解" },
     labels: ["joint_eigenspace_decomposition"],
     statement: [
@@ -1054,8 +1043,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= n_\mu + (I - n_\mu) = I
   {
     id: "eigenvalues_of_V_009_claim_eigenvalues_of_Vprime",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`V' \text{ の固有値}` },
     labels: ["eigenvalues_of_Vprime"],
     statement: [
@@ -1214,8 +1202,7 @@ X Q_\epsilon
   {
     id: "eigenvalues_of_V_010_claim_trace_of_Vprime",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`\mathrm{tr}(V') = \mathrm{tr}(V'^{-1}) > 0` },
     labels: ["trace_of_Vprime"],
     statement: [
@@ -1352,8 +1339,7 @@ X Q_\epsilon
   {
     id: "eigenvalues_of_V_011_definition_hermitian_positive_definite",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 13,
+    origin: { path: SRC, ordinal: 13 },
     title: { text: "共役転置・エルミート行列・正定値行列" },
     labels: ["def_hermitian_positive_definite"],
     statement: [
@@ -1413,8 +1399,7 @@ X Q_\epsilon
   {
     id: "eigenvalues_of_V_012_claim_star_is_norm_preserving",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 14,
+    origin: { path: SRC, ordinal: 14 },
     title: { tex: String.raw`\|A^*\| = \|A\| \text{ と極限の共役転置}` },
     labels: ["star_preserves_norm_and_limits"],
     statement: [
@@ -1472,8 +1457,7 @@ X Q_\epsilon
   {
     id: "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 15,
+    origin: { path: SRC, ordinal: 15 },
     title: { tex: String.raw`\text{エルミート行列の } \exp \text{ は正定値}` },
     labels: ["exp_hermitian_is_positive_definite"],
     statement: [
@@ -1613,8 +1597,7 @@ X Q_\epsilon
   {
     id: "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 16,
+    origin: { path: SRC, ordinal: 16 },
     title: { tex: String.raw`i K_1 H_1^{(\pm)} \text{ と } i K_2^* H_2 \text{ は実対称}` },
     labels: ["iH_is_real_symmetric"],
     statement: [
@@ -1845,8 +1828,7 @@ Y_M Z_1
   {
     id: "eigenvalues_of_V_015_claim_V_is_positive_definite",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 17,
+    origin: { path: SRC, ordinal: 17 },
     title: { tex: String.raw`V \text{ は正定値、とくに } \mathrm{tr}(V) > 0` },
     labels: ["V_is_positive_definite"],
     statement: [
@@ -1974,8 +1956,7 @@ Y_M Z_1
   {
     id: "eigenvalues_of_V_016_claim_sign_flip_conjugation",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 18,
+    origin: { path: SRC, ordinal: 18 },
     title: { tex: String.raw`\text{符号反転共役 } U` },
     labels: ["sign_flip_conjugation"],
     statement: [
@@ -2227,8 +2208,7 @@ U S_2 U^{-1} = iK_2^*\,U H_2 U^{-1} = -\,S_2`,
   {
     id: "eigenvalues_of_V_017_claim_constant_c_value",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 19,
+    origin: { path: SRC, ordinal: 19 },
     title: { tex: String.raw`c = (2\sinh 2K_2)^{M/2}` },
     labels: ["constant_c_value"],
     statement: [
@@ -2482,8 +2462,7 @@ V\left(c^{-1}V'^{-1}\right) = c\,c^{-1}\left(V'V'^{-1}\right) = I`,
   {
     id: "eigenvalues_of_V_018_claim_eigenvalues_of_V",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 20,
+    origin: { path: SRC, ordinal: 20 },
     title: { tex: String.raw`V \text{ の固有値}` },
     labels: ["eigenvalues_of_V"],
     statement: [

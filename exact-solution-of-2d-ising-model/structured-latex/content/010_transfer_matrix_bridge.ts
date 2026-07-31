@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_transfer_matrix_bridge",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { text: "分配関数の転送行列とパウリ行列表示の同一視" },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "bridge_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的と記号の対応" },
     labels: [],
     statement: [
@@ -156,8 +153,7 @@ export default defineBlocks([
   {
     id: "bridge_001_definition_config_basis",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { text: "スピン配置と標準基底の同一視" },
     labels: ["def_config_basis_iso"],
     statement: [
@@ -226,8 +222,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
   {
     id: "bridge_002_claim_sigma_z_diagonal_action",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\sigma_m^z \text{ の基底 } f_{\iota(\mu)} \text{ への作用}` },
     labels: ["sigma_z_diagonal_action"],
     statement: [
@@ -330,8 +325,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
   {
     id: "bridge_003_claim_exp_of_diagonal",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { text: "対角行列の指数関数" },
     labels: ["exp_of_diagonal_matrix"],
     statement: [
@@ -434,8 +428,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
   {
     id: "bridge_004_claim_V1_component_equals_pauli",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`V_1 \text{ の成分定義とパウリ表示の一致}` },
     labels: ["V1_component_equals_pauli"],
     statement: [
@@ -540,8 +533,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
   {
     id: "bridge_005_claim_two_by_two_transfer_identity",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`2\times 2 \text{ の転送行列の恒等式}` },
     labels: ["two_by_two_transfer_identity"],
     statement: [
@@ -727,8 +719,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
   {
     id: "bridge_006_claim_V2_component_equals_pauli",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`V_2 \text{ の成分定義とパウリ表示の一致}` },
     labels: ["V2_component_equals_pauli"],
     statement: [
@@ -926,8 +917,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
   {
     id: "bridge_007_claim_partition_function_in_pauli_form",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { text: "分配関数をパウリ行列表示の転送行列で書く" },
     labels: ["partition_function_in_pauli_form"],
     statement: [
@@ -1024,8 +1014,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
   {
     id: "bridge_008_definition_epsilon_projectors",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`\varepsilon \text{ の固有空間への射影子 } P^{(\pm)}` },
     labels: ["def_epsilon_projectors"],
     statement: [
@@ -1056,8 +1045,7 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
   {
     id: "bridge_009_claim_epsilon_projector_properties",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`P^{(\pm)} \text{ の性質}` },
     labels: ["epsilon_projector_properties"],
     statement: [
@@ -1178,8 +1166,7 @@ P^{(+)}P^{(-)}
   {
     id: "bridge_010_claim_epsilon_commutes",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } V_1, V_2, V_1^{(\pm)} \text{ と可換}` },
     labels: ["epsilon_commutes_with_transfer_matrices"],
     statement: [
@@ -1346,8 +1333,7 @@ P^{(+)}P^{(-)}
   {
     id: "bridge_011_claim_sector_replacement",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 13,
+    origin: { path: SRC, ordinal: 13 },
     title: { tex: String.raw`\text{セクター上での } V_1 \text{ の置き換え}` },
     labels: ["sector_replacement_of_V1"],
     statement: [
@@ -1455,8 +1441,7 @@ P^{(+)}P^{(-)}
   {
     id: "bridge_012_claim_partition_function_sector_decomposition",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 14,
+    origin: { path: SRC, ordinal: 14 },
     title: { text: "分配関数の偶奇セクター分解" },
     labels: ["partition_function_sector_decomposition"],
     statement: [

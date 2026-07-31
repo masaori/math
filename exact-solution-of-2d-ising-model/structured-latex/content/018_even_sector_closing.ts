@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_even_sector_closing",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { tex: String.raw`c_+(M) \text{ の決定と Onsager の自由エネルギー}` },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "closing_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的と、残っている 1 点" },
     labels: [],
     statement: [
@@ -183,8 +180,7 @@ export default defineBlocks([
   {
     id: "closing_001_claim_epsilon_anticommutes",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\varepsilon \text{ は } \check{Z}, \check{Y}, \check\psi \text{ と反可換}` },
     labels: ["epsilon_anticommutes_with_check_Z_Y"],
     statement: [
@@ -400,8 +396,7 @@ export default defineBlocks([
   {
     id: "closing_002_claim_epsilon_eigenvalue_on_check_Q",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\varepsilon\check{Q}_\epsilon = \eta_\epsilon\check{Q}_\epsilon
 \text{ と符号の反転則}` },
     labels: ["epsilon_eigenvalue_on_check_Q"],
@@ -739,8 +734,7 @@ export default defineBlocks([
   {
     id: "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
 \text{ を } \eta_{(1,\dots,1)} \text{ で表す}`,
@@ -915,8 +909,7 @@ export default defineBlocks([
   {
     id: "closing_004_claim_H1_plus_in_sigma_z_form",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: {
       tex: String.raw`i H_1^{(+)} = \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z
 + \varepsilon\,\sigma_M^z\sigma_1^z`,
@@ -1189,8 +1182,7 @@ G^2 = \left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2 = I\right)`,
   {
     id: "closing_005_claim_open_chain_spin_sums",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { text: "1 次元開鎖のスピン和" },
     labels: ["open_chain_spin_sums"],
     statement: [
@@ -1332,8 +1324,7 @@ G^2 = \left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2 = I\right)`,
   {
     id: "closing_006_theorem_trace_of_epsilon_V_plus",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
 = \left(2e^{-K_2}\cosh K_1\right)^{M} + \left(2e^{K_2}\sinh K_1\right)^{M} > 0`,
@@ -1660,8 +1651,7 @@ G^2 = \left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2 = I\right)`,
   {
     id: "closing_007_theorem_max_eigenvector_in_even_sector",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: {
       tex: String.raw`\varepsilon \text{ の固有値は } +1, \ 
 \mathrm{im}\,\check{Q}_{(1,\dots,1)} \subseteq \mathcal{F}^{(+)}`,
@@ -1787,8 +1777,7 @@ G^2 = \left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2 = I\right)`,
   {
     id: "closing_008_claim_check_Q_is_hermitian",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`\check{n}_\mu, \check{Q}_\epsilon \text{ はエルミート}` },
     labels: ["check_number_operator_is_hermitian"],
     statement: [
@@ -2074,8 +2063,7 @@ Z_j^*
   {
     id: "closing_009_theorem_c_plus_equals_Lambda_half",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`c_+(M) = \Lambda^{(1/2)}_M` },
     labels: ["c_plus_equals_Lambda_half_integer"],
     statement: [
@@ -2343,8 +2331,7 @@ x^\top W x
   {
     id: "closing_010_theorem_onsager_exact_solution",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { text: "2 次元 Ising 模型の厳密解（Onsager の自由エネルギー）" },
     labels: ["onsager_exact_solution"],
     statement: [

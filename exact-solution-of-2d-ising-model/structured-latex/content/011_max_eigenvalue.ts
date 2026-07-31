@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_max_eigenvalue",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { text: "転送行列の最大固有値と分配関数の挟み撃ち" },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "maxeig_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的" },
     labels: [],
     statement: [
@@ -63,8 +60,7 @@ export default defineBlocks([
   {
     id: "maxeig_001_definition_symmetrized_transfer_matrix",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\text{対称化転送行列 } W` },
     labels: ["def_symmetrized_transfer_matrix"],
     statement: [
@@ -102,8 +98,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_002_claim_Z_equals_trace_of_W",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`Z = \mathrm{tr}(W^{N_{\mathrm{row}}})` },
     labels: ["Z_equals_trace_of_W"],
     statement: [
@@ -162,8 +157,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_003_claim_W_is_positive_definite",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`W \text{ は実対称正定値}` },
     labels: ["W_is_real_symmetric_positive_definite"],
     statement: [
@@ -266,8 +260,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_004_claim_W_has_positive_entries",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`W \text{ の成分はすべて正}` },
     labels: ["W_has_positive_entries"],
     statement: [
@@ -335,8 +328,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_005_claim_psd_cauchy_schwarz",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { text: "半正定値双線型形式の Cauchy–Schwarz の不等式" },
     labels: ["psd_cauchy_schwarz"],
     statement: [
@@ -415,8 +407,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_006_definition_rayleigh_sup",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`c(M) := \sup_{\|x\|=1} x^\top W x` },
     labels: ["def_rayleigh_sup"],
     statement: [
@@ -477,8 +468,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_007_claim_operator_bound",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`\|Wx\| \leq c(M)\,\|x\|` },
     labels: ["rayleigh_bounds_operator_norm"],
     statement: [
@@ -558,8 +548,7 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
   {
     id: "maxeig_008_claim_trace_power_sandwich",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`c(M)^{n} \leq \mathrm{tr}(W^{n}) \leq 2^{M} c(M)^{n}` },
     labels: ["trace_power_sandwich"],
     statement: [
@@ -800,8 +789,7 @@ k = 2p+2 \ (\text{偶数、} p \in \mathbb{Z}_{\geq 0})
   {
     id: "maxeig_009_claim_partition_function_sandwich",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { text: "分配関数の挟み撃ち" },
     labels: ["partition_function_sandwich"],
     statement: [
@@ -833,8 +821,7 @@ k = 2p+2 \ (\text{偶数、} p \in \mathbb{Z}_{\geq 0})
   {
     id: "maxeig_010_claim_sector_decomposition_of_c",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)` },
     labels: ["sector_decomposition_of_rayleigh_sup"],
     statement: [

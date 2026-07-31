@@ -26,8 +26,10 @@ export default defineNotes([
     id: "note_exp_conjugation_lie_001_definition_Ad_ad_lie",
     targets: ["matrix_exp_conjugation"],
     title: { text: "リー群・リー環アプローチの概要と Ad, ad の定義（本文不採用）" },
-    sourcePath:
-      "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/000_リー群リー環アプローチの概要とAd_adの定義.typ",
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/000_リー群リー環アプローチの概要とAd_adの定義.typ",
+      ordinal: 1,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([
@@ -84,8 +86,10 @@ export default defineNotes([
     id: "note_exp_conjugation_lie_002_theorem_Ad_exp_lie",
     targets: ["matrix_exp_conjugation"],
     title: { tex: String.raw`\text{リー群上の } \mathrm{Ad}(\exp(X)) = \exp(\mathrm{ad}(X))\ \text{（本文不採用）}` },
-    sourcePath:
-      "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ",
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/001_theorem_リー群上のAd(exp(X))=exp(ad(X)).typ",
+      ordinal: 2,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([
@@ -155,8 +159,10 @@ export default defineNotes([
     id: "note_exp_conjugation_lie_003_definition_GL_n_C",
     targets: ["def_ad_X_matrix"],
     title: { tex: String.raw`\mathbf{GL}(n,\mathbb{C}) \text{ の定義}（\text{Brian Hall Definition 1.4}）\text{（本文不採用）}` },
-    sourcePath:
-      "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/004_definition_一般線型群GL(n,CC)とその群構造.typ",
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/004_definition_一般線型群GL(n,CC)とその群構造.typ",
+      ordinal: 3,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([
@@ -176,8 +182,10 @@ export default defineNotes([
     id: "note_exp_conjugation_lie_004_definition_matrix_lie_group",
     targets: ["def_ad_X_matrix"],
     title: { text: "Matrix Lie群（Brian Hall Definition 1.4）（本文不採用）" },
-    sourcePath:
-      "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/005_definition_Matrix_Lie群の定義.typ",
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/005_definition_Matrix_Lie群の定義.typ",
+      ordinal: 4,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([
@@ -213,8 +221,10 @@ export default defineNotes([
     id: "note_exp_conjugation_lie_005_definition_Ad_g_ad_X_matrix",
     targets: ["def_ad_X_matrix"],
     title: { text: "Ad_g と ad_X の定義（Brian Hall Definition 3.32）（本文不採用）" },
-    sourcePath:
-      "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/006_definition_Matrix_Lie群上のAd_gとad_Xの定義.typ",
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/006_definition_Matrix_Lie群上のAd_gとad_Xの定義.typ",
+      ordinal: 5,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([
@@ -246,8 +256,10 @@ export default defineNotes([
     id: "note_exp_conjugation_lie_006_theorem_matrix_lie_group_version",
     targets: ["matrix_exp_conjugation"],
     title: { tex: String.raw`\text{Matrix Lie群版: } e^X Y e^{-X} = \mathrm{Ad}_{e^X}(Y) = e^{\mathrm{ad}_X}(Y)\text{（本文不採用）}` },
-    sourcePath:
-      "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
+    origin: {
+      path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
+      ordinal: 6,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([

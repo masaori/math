@@ -4,8 +4,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_010_definition_real_imag_parts_of_cc",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/010_definition_CCの実部虚部.typ",
-    sourceOrdinal: 11,
+    origin: { path: "_old/typst/parts/000_計算公式/010_definition_CCの実部虚部.typ", ordinal: 11 },
     title: { tex: "\\mathbb{C}\\text{の実部/虚部}" },
     labels: [],
     statement: [
@@ -29,8 +28,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_011_definition_unit_circle",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/011_definition_単位円.typ",
-    sourceOrdinal: 12,
+    origin: { path: "_old/typst/parts/000_計算公式/011_definition_単位円.typ", ordinal: 12 },
     title: { text: "単位円" },
     labels: [],
     statement: [
@@ -44,8 +42,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_012_definition_arc_length",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/012_definition_円弧の定義.typ",
-    sourceOrdinal: 13,
+    origin: { path: "_old/typst/parts/000_計算公式/012_definition_円弧の定義.typ", ordinal: 13 },
     title: { text: "円弧の定義" },
     labels: [],
     statement: [
@@ -65,8 +62,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_013_definition_map_cc_to_c_unit",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/013_definition_CCからC_unitへの写像.typ",
-    sourceOrdinal: 14,
+    origin: { path: "_old/typst/parts/000_計算公式/013_definition_CCからC_unitへの写像.typ", ordinal: 14 },
     title: { tex: "\\mathbb{C}\\to C_{\\mathrm{unit}}" },
     labels: [],
     statement: [
@@ -94,8 +90,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_014_definition_inverse_trig_functions",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/014_definition_CCの逆三角関数の定義.typ",
-    sourceOrdinal: 15,
+    origin: { path: "_old/typst/parts/000_計算公式/014_definition_CCの逆三角関数の定義.typ", ordinal: 15 },
     title: { tex: "\\mathbb{C}\\text{の逆三角関数の定義}" },
     labels: [],
     statement: [
@@ -173,8 +168,7 @@ export default defineBlocks([
   {
     id: "calc_formulae_015_claim_cos_arctan_sin_arctan",
     kind: "claim",
-    sourcePath: "_old/typst/parts/000_計算公式/015_claim_cos_arctan_sin_arctan.typ",
-    sourceOrdinal: 16,
+    origin: { path: "_old/typst/parts/000_計算公式/015_claim_cos_arctan_sin_arctan.typ", ordinal: 16 },
     title: { tex: "\\cos(\\arctan(x)),\\ \\sin(\\arctan(x))" },
     labels: ["cos_arctan_sin_arctan"],
     statement: [
@@ -221,8 +215,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_016_definition_angle_equivalence_class",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/016_definition_角度表現の同値類.typ",
-    sourceOrdinal: 17,
+    origin: { path: "_old/typst/parts/000_計算公式/016_definition_角度表現の同値類.typ", ordinal: 17 },
     title: { text: "角度表現の同値類" },
     labels: ["angle_equivalence_class"],
     statement: [
@@ -249,8 +242,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_016b_claim_angle_section_existence_uniqueness",
     kind: "claim",
-    sourcePath: "structured-latex/content/000_calculation_formulae_10_19.ts",
-    sourceOrdinal: 17,
+    origin: { path: "structured-latex/content/000_calculation_formulae_10_19.ts", ordinal: 17 },
     title: { tex: String.raw`0\le\theta-2n\pi<2\pi \text{ なる } n\in\mathbb{Z} \text{ の存在と一意性}` },
     labels: ["angle_section_existence_uniqueness"],
     statement: [
@@ -377,8 +369,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_017_definition_section_of_angle_representation",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/017_definition_角度表現の切断.typ",
-    sourceOrdinal: 18,
+    origin: { path: "_old/typst/parts/000_計算公式/017_definition_角度表現の切断.typ", ordinal: 18 },
     title: { text: "角度表現の切断" },
     labels: ["section_of_angle_representation"],
     statement: [
@@ -403,8 +394,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_018_definition_angle_representation_of_rr",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/018_definition_RRの角度表現.typ",
-    sourceOrdinal: 19,
+    origin: { path: "_old/typst/parts/000_計算公式/018_definition_RRの角度表現.typ", ordinal: 19 },
     title: { tex: "\\mathbb{R}\\text{の角度表現}" },
     labels: ["angle_representation_of_rr"],
     statement: [
@@ -436,8 +426,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
   {
     id: "calc_formulae_019_definition_polar_equivalence_class",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/019_definition_極座標表現の同値類.typ",
-    sourceOrdinal: 20,
+    origin: { path: "_old/typst/parts/000_計算公式/019_definition_極座標表現の同値類.typ", ordinal: 20 },
     title: { text: "極座標表現の同値類" },
     labels: ["polar_equivalence_class"],
     statement: [

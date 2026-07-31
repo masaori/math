@@ -5,17 +5,14 @@ export default defineBlocks([
     id: "heading_linear_space_general",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 3,
+    origin: { path: "_old/typst/main.typ", ordinal: 3 },
     title: { text: "線型空間の一般論" },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "linear_space_general_000_definition_kronecker_product",
     kind: "definition",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）" },
     labels: ["def_kronecker"],
     statement: [
@@ -260,8 +257,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_000b_claim_kronecker_product_rule",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積の積の規則（各サイトごとの積になること）" },
     labels: ["kronecker_product_rule"],
     statement: [
@@ -455,8 +451,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_000c_claim_kronecker_multilinear",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積の各因子についての線型性" },
     labels: ["kronecker_multilinear"],
     statement: [
@@ -549,8 +544,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_000d_claim_kronecker_transpose",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積の転置（因子ごとの転置になること）" },
     labels: ["kronecker_transpose"],
     statement: [
@@ -609,8 +603,7 @@ export default defineBlocks([
   {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
-    sourceOrdinal: 1,
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 1 },
     title: { text: "クロネッカー積がつくる基底" },
     labels: ["tensor_basis"],
     statement: [
@@ -918,8 +911,7 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
   {
     id: "linear_space_general_002_claim_scalar_identity_commutes",
     kind: "claim",
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ",
-    sourceOrdinal: 2,
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ", ordinal: 2 },
     title: { tex: String.raw`c \cdot I \text{ は全行列と可換}` },
     labels: ["scalar_identity_commutes"],
     statement: [
@@ -951,8 +943,7 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
   {
     id: "linear_space_general_004_lemma_centralizer_is_scalar",
     kind: "claim",
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ",
-    sourceOrdinal: 4,
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ", ordinal: 4 },
     title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の中で全元と可換な元はスカラー}` },
     labels: ["centralizer_is_scalar"],
     statement: [
@@ -1193,8 +1184,7 @@ W
   {
     id: "linear_space_general_002b_definition_matrix_norm",
     kind: "definition",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 3,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 3 },
     title: { text: "数ベクトル・行列のノルムと収束" },
     labels: ["def_matrix_norm"],
     statement: [
@@ -1299,8 +1289,7 @@ W
   {
     id: "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 3,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 3 },
     title: { text: "ノルムの基本性質（非退化性・斉次性・三角不等式）" },
     labels: ["matrix_norm_triangle_inequality"],
     statement: [
@@ -1652,8 +1641,7 @@ W
   {
     id: "linear_space_general_003_claim_matrix_norm_submultiplicativity",
     kind: "claim",
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
-    sourceOrdinal: 3,
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ", ordinal: 3 },
     title: { text: "行列ノルムの劣乗法性" },
     labels: ["matrix_norm_submultiplicativity"],
     statement: [
@@ -1808,8 +1796,7 @@ W
   {
     id: "linear_space_general_003c_claim_matrix_norm_vector_bound",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 3,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 3 },
     title: { text: "行列ノルムによる数ベクトルの評価" },
     labels: ["matrix_norm_vector_bound"],
     statement: [
@@ -1891,8 +1878,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
   {
     id: "linear_space_general_003d_claim_matrix_completeness",
     kind: "claim",
-    sourcePath: "structured-latex/content/002_linear_space_general.ts",
-    sourceOrdinal: 3,
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 3 },
     title: { tex: String.raw`\mathrm{Mat}(n,K) \text{ の完備性と絶対収束判定}` },
     labels: ["matrix_completeness"],
     statement: [
@@ -2133,8 +2119,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
   {
     id: "linear_space_general_003b_claim_matrix_multiplication_continuity",
     kind: "claim",
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ",
-    sourceOrdinal: 3,
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ", ordinal: 3 },
     title: { text: "行列乗算の連続性" },
     labels: ["matrix_multiplication_continuity"],
     statement: [

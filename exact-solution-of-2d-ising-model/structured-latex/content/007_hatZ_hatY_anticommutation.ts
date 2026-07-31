@@ -5,17 +5,17 @@ export default defineBlocks([
     id: "heading_hatZ_hatY_anticommutation",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 9,
+    origin: { path: "_old/typst/main.typ", ordinal: 9 },
     title: { tex: String.raw`\hat{Z}\text{と}\hat{Y}\text{の反交換関係}` },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "hatZ_hatY_anticommutation_001_claim_anticommutation_relations",
     kind: "claim",
-    sourcePath: "_old/typst/parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ",
-    sourceOrdinal: 1,
+    origin: {
+      path: "_old/typst/parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ",
+      ordinal: 1,
+    },
     title: { tex: String.raw`\hat{Z}\text{と}\hat{Y}\text{の反交換関係}` },
     labels: ["anticommutator_of_hat_Z_and_hat_Y"],
     statement: [

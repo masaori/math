@@ -7,6 +7,8 @@ on:
     paths:
       - 'exact-solution-of-2d-ising-model/structured-latex/**'
       - 'exact-solution-of-2d-ising-model/sagemath/**'
+      # 入力言語の正本と生成器はシステム側にある（証明はこれを使う側）。
+      - 'structured-latex/**'
       - 'realtime-web-preview/tsconfig.base.json'
       - '.github/workflows/structured-latex-check.yml'
   pull_request:
@@ -26,6 +28,11 @@ jobs:
         with:
           # .ts を型ストリップで直接実行するため 22.18 以上が要る。
           node-version: '22'
+      # 入力言語の正本（structured-latex/ システム）の依存も要る。証明側から import しており、
+      # zod の解決はシステム側のディレクトリを起点に行われるため、ここを入れないと解決できない。
+      - name: Install system dependencies (structured-latex)
+        working-directory: structured-latex
+        run: pnpm install --frozen-lockfile
       - run: pnpm install --frozen-lockfile
       # 生成物の鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
       - run: npm run check
