@@ -39,6 +39,47 @@ notes:
 - `novelty_risk`: 既知定理から自明に出るリスク。
 - `paper_potential`: high / medium / low。
 
+## ManifestRecord（harvest 出力の共通スキーマ）
+
+各 source（arxiv/openalex/semantic_scholar/inspire）の harvest 出力 + merge 出力で共有するフィールド。source ごとに source-specific フィールドが追加される。
+
+共通フィールド:
+
+```yaml
+id:                    # canonical id: "arxiv:<id>" / "openalex:W..." / "s2:<id>" / "inspire:<id>"
+title:
+authors:               # list[str]
+year:                  # int | null
+source:                # "arxiv" | "openalex" | "semantic_scholar" | "inspire"
+arxiv_id:              # 抽出できれば（version suffix を剥がした形）
+doi:
+url:
+abstract:              # OpenAlex の場合は inverted index を復元
+matched_queries:       # list[str] — どの query にヒットしたか
+```
+
+merge 後の追加フィールド:
+
+```yaml
+canonical_key:         # "arxiv:<id>" / "doi:<doi>" / "title:<norm>"
+sources:               # list[str] — どの source に存在したか
+source_ids:            # dict[source -> id]
+```
+
+LLM 分類後の追加フィールド:
+
+```yaml
+model_hints:           # list[str] from inputs/seeds/models.md enum
+operation_hints:       # list[str] from inputs/seeds/operations.md enum
+status_hints:          # "open" | "solved" | "review" | "unknown"
+```
+
+filter 後の追加フィールド:
+
+```yaml
+filter_reason:         # "hints" | "arxiv_cat:..." | "concept:..." | "fos:..." | "title_kw"
+```
+
 ## OperationType
 
 ```yaml
