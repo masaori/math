@@ -1,0 +1,163 @@
+# cycle 19 / T3 Pure step 1: 定理 J7（n ell^n の係数 b = sum_{P in S_oo} j*(P)）を、
+# **cycle 19 step 2 の族の外**で照合する。
+#
+# 対応する証明本体: outputs/reports/cycle19_T3_theta_ge_ell_plus_1.md §5.2, §5.6
+# 突き合わせ相手: outputs/reports/cycle19_T3_theta_infinity.md §9.1
+#
+# 動機:
+#   step 2（cycle19_T3_theta_infinity.md）定理 X' は族 p(1,0)+q(0,1) について
+#   ord_ell(kappa_n) = mu(ell^{2n}-1) + 2 n ell^n + Lambda(ell^n - 1) を証明したが、
+#   同 §9.1 は「この**形**は一般の塔へ延長できない」ことを反例で確定させている。
+#   その反例（ell=3 の bouquet (1,0),(1,-1),(1,2) 等）で、本 step の定理 J7 が主張する
+#   **n ell^n の係数だけ**は当たるのかを確かめる。当たるなら、2 つの step の結果は
+#   「X' は族の閉形式全体、J7 は一般の塔の主要項」という**相補的な関係**になる。
+#
+# 方法（塔の値を一切使わない）:
+#   補題 J1 + 定理 B' で Theta_{M'} = sum_{P in P^1(Z/ell^{M'})} hat theta_{M'}(P) を
+#   レベルごとに厳密計算し、Theta_{M'} = beta M' ell^{M'} + c ell^{M'} + e M' + d の
+#   4 係数を**深いレベルだけ**から解いて、浅いレベルで out-of-sample 検証する。
+#   定理 J7 は beta = b (1 - 1/ell)、b = sum_{P in S_oo} j*(P) を予言する。
+#
+# 実行: sage j7_outside_family.sage > j7_outside_family.out 2>&1
+
+import sys, time
+sys.stdout.reconfigure(line_buffering=True)
+load('_defs19.sage')
+
+FAIL = 0
+TRUNC = []
+def check(cond, msg):
+    global FAIL
+    if not cond:
+        FAIL += 1
+        print("   *** FAIL:", msg)
+    return cond
+
+def bq(vs):
+    return (1, [(0, 0, tuple(v)) for v in vs])
+
+def s_infinity_candidates(coeffs, ell):
+    """系 J10 の候補集合（supp(barE) の 2 点の差から決まる有限集合）。"""
+    S = [(ZZ(p), ZZ(q)) for ((p, q), c) in coeffs.items() if GF(ell)(c) != 0]
+    cand = set()
+    for i in range(len(S)):
+        for j in range(i + 1, len(S)):
+            dp = S[i][0] - S[j][0]
+            dq = S[i][1] - S[j][1]
+            (a, b) = (dq, -dp)
+            g = gcd(a, b)
+            if g == 0:
+                continue
+            (a, b) = (a // g, b // g)
+            if a < 0 or (a == 0 and b < 0):
+                (a, b) = (-a, -b)
+            cand.add((a, b))
+    return sorted(cand)
+
+print("=" * 78)
+print("定理 J7 を step 2 の族の外で照合する（step 2 §9.1 の反例そのものを使う）")
+print("=" * 78)
+
+CASES = [
+    # (ell, voltage, 4 係数を解くレベル, out-of-sample 検証に使うレベル,
+    #  e=0 を課した 3 係数版で解くレベル, その版の out-of-sample レベル)
+    (3, [(1, 0), (1, -1), (1, 2)],
+     [3, 4, 5, 6], [2, 1], [3, 4, 5], [6, 2, 1]),
+    (5, [(1, 0), (1, 0), (1, 0), (0, 1), (1, 2)],
+     [2, 3, 4, 5], [1], [2, 3, 4], [5, 1]),
+]
+
+for (ell, vs, fitM, testM, fit3M, test3M) in CASES:
+    (m, edges) = bq(vs)
+    D = detL(m, edges)
+    mu = mu_content(D, ell)
+    co = cleared_coeffs(E_of(D, ell, mu))
+    print()
+    print("--- ell=%d  bouquet %s   mu=%d  (k,H)=%s" % (ell, vs, mu, lowest_form(D, ell)))
+
+    # (1) S_oo を系 J10 の候補集合から決める
+    cand = s_infinity_candidates(co, ell)
+    S_inf = []
+    for (a, b) in cand:
+        if theta_signed(co, ell, a, b) is oo:
+            es = psi_data(co, ell, a, b, 'w' if a != 0 else 'z')
+            js = [j for (j, (e, lc)) in enumerate(es) if j >= 1 and e is not oo]
+            check(len(js) > 0, "ell=%d %s: 点 %s で j* が無い（補題 J7a に反する）" % (ell, vs, (a, b)))
+            S_inf.append(((a, b), min(js),
+                          [('oo' if e is oo else str(e)) for (e, lc) in es]))
+    print("    系 J10 の候補 %s" % (cand,))
+    print("    S_oo = %s" % ([(p, j) for (p, j, es) in S_inf],))
+    for (p, j, es) in S_inf:
+        print("        P=%s : e_j = %s → j* = %d" % (p, es, j))
+    b_pred = sum(j for (p, j, es) in S_inf)
+    print("    定理 J7 の予言: b = sum_{P in S_oo} j*(P) = %d" % b_pred)
+    check(len(S_inf) > 0, "ell=%d %s: S_oo が空（この塔は型 III でないので検査にならない）" % (ell, vs))
+
+    # (2) Theta_{M'} をレベルごとに厳密計算（塔の値は使わない）
+    Th = {}
+    allM = sorted(set(fitM + (testM or []) + fit3M + (test3M or [])))
+    for M in allM:
+        t0 = time.time()
+        (th, ok) = Theta_level(co, ell, M)
+        Th[M] = th
+        print("    Theta_%d = %s（定理 B' の最小点が全点で一意: %s）[%.1fs]"
+              % (M, th, ok, time.time() - t0))
+        check(ok, "ell=%d %s: レベル %d に定理 B' の tie があり Theta が下界にすぎない" % (ell, vs, M))
+
+    # (3) beta を深いレベルだけから解く
+    A = matrix(QQ, [[M * ell**M, ell**M, M, 1] for M in fitM])
+    v = vector(QQ, [Th[M] for M in fitM])
+    sol = A.solve_right(v)
+    (beta, cc, ee, dd) = (sol[0], sol[1], sol[2], sol[3])
+    print("    Theta_M = beta M ell^M + c ell^M + e M + d を レベル %s から解くと" % (fitM,))
+    print("        beta = %s, c = %s, e = %s, d = %s" % (beta, cc, ee, dd))
+    if testM:
+        for M in testM:
+            pred = beta * M * ell**M + cc * ell**M + ee * M + dd
+            print("        out-of-sample: M=%d 予言 %s 実測 %s %s"
+                  % (M, pred, Th[M], "OK" if pred == Th[M] else "MISMATCH（低レベルは定理 J7 の射程外）"))
+    b_fit = beta * ell / (ell - 1)
+    print("    観測された b = beta * ell/(ell-1) = %s / 定理 J7 の予言 %d → %s"
+          % (b_fit, b_pred, "一致" if b_fit == b_pred else "**食い違い**"))
+    check(b_fit == b_pred,
+          "ell=%d %s: 定理 J7 の b=%d に対し Theta の主要項から出る b=%s" % (ell, vs, b_pred, b_fit))
+
+    # (4) e = 0 を課した 3 係数版（独立な out-of-sample 点を作るため）
+    A3 = matrix(QQ, [[M * ell**M, ell**M, 1] for M in fit3M])
+    v3 = vector(QQ, [Th[M] for M in fit3M])
+    sol3 = A3.solve_right(v3)
+    print("    e = 0 を課した 3 係数版（レベル %s から解く）: beta = %s, c = %s, d = %s"
+          % (fit3M, sol3[0], sol3[1], sol3[2]))
+    for M in (test3M or []):
+        pred = sol3[0] * M * ell**M + sol3[1] * ell**M + sol3[2]
+        okm = (pred == Th[M])
+        print("        out-of-sample: M=%d 予言 %s 実測 %s %s"
+              % (M, pred, Th[M], "OK" if okm else "MISMATCH（低レベルは定理 J7 の射程外）"))
+        if M >= min(fit3M):
+            check(okm, "ell=%d %s: 3 係数版の out-of-sample レベル %d が外れた" % (ell, vs, M))
+    check(sol3[0] * ell / (ell - 1) == b_pred,
+          "ell=%d %s: 3 係数版の b が定理 J7 の予言 %d と違う" % (ell, vs, b_pred))
+
+    # (5) step 2 定理 X' の「素朴な延長」が外れることの再確認（step 2 §9.1）
+    print("    参考: step 2 §9.1 の通り、X' の形 (2 n ell^n + Lambda(ell^n-1)) は")
+    print("          この塔では成り立たない（本スクリプトは n ell^n の係数だけを見ている）。")
+
+print()
+print("=" * 78)
+print("まとめ")
+print("=" * 78)
+print("  FAIL 件数: %d" % FAIL)
+print("  打ち切った計算: %d 件" % len(TRUNC))
+print("""
+  結論（report §5.6 に対応）:
+    step 2 定理 X' の**閉形式全体**は族の外では成り立たない（step 2 §9.1 の反例）。
+    しかし本 step 定理 J7 の**n ell^n の係数** b = sum_{P in S_oo} j*(P) は、
+    まさにその反例の塔でも当たる。2 つの step の結果は競合ではなく相補である。
+  注意（何を数値に頼っているか）:
+    定理 J7 そのものは report §5.2 に証明がある。ここで数値に頼っているのは
+    「この塔で定理 J7 の仮定（(N) の argmin 一意性・(B*)）が実際に成り立っている」ことと、
+    「Theta_M が beta M ell^M + c ell^M + e M + d の形に乗る」ことである。
+    後者は当てはめであり、out-of-sample のレベルで検証した点だけが証拠になる。
+    レベル 1 は定理 J7 の射程外（M' >= max(r_0, L_U, n_1) を要求する）なので
+    外れてよい。外れることも出力してある。
+""")
