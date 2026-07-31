@@ -208,8 +208,9 @@
   doi     = {10.1007/s40316-020-00152-4},
   eprint  = {2006.14012},
   archiveprefix = {arXiv},
-  note    = {**本文未読（arXiv abstract のみ）**。グラフの abelian $\ell$-tower における
-             岩澤型不変量の枠組みの出典として挙げる}
+  note    = {**本文確認済み（§5.5--5.6、Corollary 5.7）**。グラフの abelian $\ell$-tower における
+             岩澤型不変量の枠組みの出典。「非退化なら閉形式」という形は $d=1$ で既出であり、
+             その出典が Cor 5.7 である（cycle 17 step 4 で確認）}
 }
 
 @article{McGownVallieres2024,
@@ -327,13 +328,22 @@
              v_2(tau(L)) が偶数であることは既知＝命題 T の弱い形は既出。等号 2(L-1) は見つからなかった。}
 }
 
-@article{Vallieres2021,
-  author  = {Valli{\`e}res, Daniel},
-  title   = {On abelian $\ell$-towers of multigraphs},
-  journal = {arXiv preprint},
-  volume  = {arXiv:2006.14012},
-  year    = {2021},
-  note    = {本文確認済み（§5.5--5.6、Corollary 5.7）。「非退化なら閉形式」という形は d = 1 で既出。}
+% 注: ここにあった 2 つ目の @article{Vallieres2021} は上の同名エントリと重複していたため
+% cycle 18 step 4 で統合した（BibTeX は重複キーをエラーにする）。note の内容は上へ移してある。
+
+@article{TatenoUeki2025,
+  author  = {Tateno, Sohei and Ueki, Jun},
+  title   = {The {I}wasawa invariants of $\mathbb{Z}_p^{\,d}$-covers of links},
+  journal = {Journal of the London Mathematical Society},
+  year    = {2025},
+  eprint  = {2401.03258},
+  archiveprefix = {arXiv},
+  note    = {**本文確認済み（§2.1, §3.2）**。Theorem 2.3 が Monsky (ASPM 17, 1989) を
+             Theorem 3.13 と番号指定で引用し、当該定数を文字どおり mu_1 と呼んだうえで
+             「mu_1 in R が存在。d = 2 なら mu_1 in Q」とだけ述べている
+             （＝明示式が無いことの独立な二次確認）。Prop 3.9 は Monsky "On p-adic power series"
+             Thm 5.6 を岩澤和 = f(p^n, n), f in Q[U,V] の一意存在として引用している。
+             本論文の本文からは引用していない控えのエントリ。}
 }
 
 @article{Wan2017,
@@ -342,8 +352,10 @@
   journal = {arXiv preprint},
   volume  = {arXiv:1712.02906},
   year    = {2017},
-  note    = {§1 の Theorem 1.2 が Monsky (ASPM 17, 1989) の引用形。p^{(d-1)n} の係数に定数が入っており、
-             本論文の mu_1 に対応する位置。Monsky 原論文は未取得なので、この引用形しか知らない。}
+  note    = {§1 の Theorem 1.2 が Monsky (ASPM 17, 1989) Theorem 3.13 の引用形。**本文確認済み**。
+             cycle 18 step 4 で Monsky 原論文を取得して突合した結果、Wan の引用は原典に忠実であり、
+             定数 alpha (= 本論文の mu_1 の位置) に明示式が無いのは Wan が要約したためではなく
+             原典にそもそも無いためだと確認した。}
 }
 
 @incollection{Monsky1989,
@@ -355,9 +367,14 @@
   pages     = {309--330},
   year      = {1989},
   doi       = {10.2969/aspm/01710309},
-  note      = {【本文未取得】Project Euclid が購読制限。Wan arXiv:1712.02906 Thm 1.2 の引用形でしか
-               内容を知らない。本論文の mu_1 の明示式に対応する結果が含まれている可能性があり、
-               **投稿前に必ず本文を読むこと**。}
+  note      = {**本文確認済み（2026-07-31, cycle 18 step 4）**。Project Euclid の Open Access 版
+               （ebook/Download?urlId=10.2969/aspm/01710309）から全 22 ページを取得して読んだ。
+               読んだのは Introduction / Thm 1.19--1.21 / Thm 2.18 / Cor 2.19 / Thm 3.11--3.13 / References。
+               **結論: mu_1 に対応する定数 alpha* の明示式は無い**。Thm 3.13 は存在と、d = 2 のときの
+               有理性のみを主張する。Introduction に "There is no easy description of alpha* and in
+               particular we do not know if it is always rational" と原文にある。
+               明示的に同定されている係数は p^{dn} の m_0 と n p^{(d-1)n} の l_0 だけ（Thm 1.20）。
+               根拠 report: outputs/reports/cycle18\_T1\_monsky1989\_acquisition.md}
 }
 
 @article{AlonsoLombardiPerdry2008,
