@@ -1,0 +1,147 @@
+# cycle 13 / T3 Pure: 命題 7.1（μ_ℓ>0 の 𝔽_ℓ 判定）と 命題 8.1（p ≠ ℓ の下界）の機械検証。
+#
+# 証明本体: outputs/reports/cycle13_T3_mu_content_criterion_proof.md
+#   F 節 ← 命題 7.1:  μ_ℓ > 0 ⟺ det(L(z) mod ℓ) = 0 in 𝔽_ℓ[z,z^{-1}]
+#                              ⟺ L̄(z) が 𝔽_ℓ(z) 上で特異。より一般に μ_ℓ = max{k : D ≡ 0 mod ℓ^k}。
+#   G 節 ← 命題 8.1:  v_p(κ_n) = v_p(κ_0) − v_p(ℓ^n) + μ_p(ℓ^n − 1) + v_p(R_n)、
+#                     とくに p ≠ ℓ で v_p(κ_n) ≥ μ_p·ℓ^n + (v_p(κ_0) − μ_p)。
+#                     v_p(R_n) が n について有界かどうかは未解決（レポート §8.1 参照）。
+#                     G 節はその「増えてから止まる」実例（例 5, ℓ=2, p=5）を出す。
+#
+# 本ファイルは救済元ブランチ（worktree-nifty-drifting-engelbart）の verify_criterion.sage のうち
+# **F 節・G 節だけ**を残したものである。同ファイルの E 節（岩澤型漸近の照合）は
+# 既存の proof_steps.sage の Step 6 が同じ主張をより広い対象（明示 8 グラフ 22 塔＋乱択 63 塔）で
+# 検証済みなので重複させない。理由と対応は README.md に記載した。
+#
+# κ_n は導来グラフの Kirchhoff 行列式から直接計算する（(★) も (☆) も使わない）。
+# 計算は全て ℤ / ℤ[z,z^{-1}] / 𝔽_ℓ 上の厳密計算で、ℝ・ℂ を経由しない。
+
+import os, sys
+_HERE = os.path.dirname(os.path.abspath(sys.argv[0])) if (sys.argv and sys.argv[0]) else os.getcwd()
+_LIB = os.path.join(_HERE, "lib_voltage.sage")
+load(_LIB if os.path.exists(_LIB) else "lib_voltage.sage")
+
+NFAIL = 0
+
+def check(cond, msg):
+    global NFAIL
+    if not cond:
+        NFAIL += 1
+        print("    *** FAIL: " + msg)
+
+
+# 前段: cycle 12 T3 の例 1–6（cycle12_T3_nonzero_mu_p/README.md §2 と同じ辺リスト）。
+# F 節・G 節が自足するために必要なので残す。
+E1 = [(0,1,0),(0,1,1),(0,1,2),(0,0,1),(1,1,1)]
+E2 = [(0,1,0),(0,1,1),(0,1,1),(0,1,2),(0,0,1),(1,1,1)]
+E3 = [(0,1,0),(0,1,0),(0,1,1),(0,1,2),(0,0,1),(1,1,1),(1,1,1)]
+E4 = [(0,1,1),(0,1,1),(0,2,0),(0,2,1),(1,2,1),(1,2,1),(0,0,1),(2,2,1)]
+E5 = [(0,1,0),(0,1,0),(0,1,0),(0,1,1)] + [(0,0,1)]*3 + [(1,1,1)]*3
+E6 = [(0,1,0),(0,1,1),(1,1,1),(1,1,1)]
+
+
+def laplacian_mod_ell(m, edges, ell):
+    """L̄(z) = L(z) mod ℓ ∈ M_m(𝔽_ℓ[z,z^{-1}])。"""
+    Fq = GF(ell)
+    RF = LaurentPolynomialRing(Fq, 'w')
+    w = RF.gen()
+    Lbar = matrix(RF, m, m)
+    for (u, v, a) in edges:
+        if u == v:
+            Lbar[u, u] += 2 - w**a - w**(-a)
+        else:
+            Lbar[u, u] += 1
+            Lbar[v, v] += 1
+            Lbar[u, v] -= w**a
+            Lbar[v, u] -= w**(-a)
+    return Lbar
+
+
+print("=" * 78)
+print("F. 命題 7.1: μ_ℓ > 0 ⟺ det(L(z) mod ℓ) = 0（𝔽_ℓ(z) 上で L̄ が特異）")
+print("=" * 78)
+print("   ＋ 一般形 μ_ℓ = max{k : D(z) ≡ 0 mod ℓ^k} も同時に照合する。")
+print()
+
+CASES_F = [
+    ("例1", 2, E1), ("例2", 2, E2), ("例3", 2, E3), ("例4", 3, E4),
+    ("例5", 2, E5), ("例6", 2, E6),
+    ("bouquet {1,2}", 1, [(0,0,1),(0,0,2)]),
+    ("bouquet {1,1}", 1, [(0,0,1),(0,0,1)]),
+    ("4頂点", 4, [(0,1,0),(1,2,0),(2,3,0),(3,0,1),(0,2,1),(1,3,2)]),
+    ("負 voltage 2頂点", 2, [(0,1,-1),(0,1,2),(1,1,-3)]),
+]
+
+for (name, m, edges) in CASES_F:
+    D = detL(m, edges)
+    cont = content_z(D)
+    for ell in [2, 3, 5, 23]:
+        Lbar = laplacian_mod_ell(m, edges, ell)
+        sing = (det(Lbar) == 0)
+        mu = ZZ(cont).valuation(ell)
+        check(sing == (mu > 0), f"F の同値が {name} ℓ={ell} で破れた")
+        # μ_ℓ = max{k : D ≡ 0 mod ℓ^k}
+        k = 0
+        while all(ZZ(c) % ell**(k + 1) == 0 for c in D.coefficients()):
+            k += 1
+        check(k == mu, f"μ_ℓ = max{{k: D≡0 mod ℓ^k}} が {name} ℓ={ell} で破れた: {k} vs {mu}")
+        print(f"  {name:>16} ℓ={ell:>2}: μ_ℓ = {mu}, det(L mod ℓ) = 0 ? {sing}, "
+              f"同値 = {sing == (mu > 0)}, max{{k}} = {k}")
+
+print()
+print("=" * 78)
+print("G. 命題 8.1: p ≠ ℓ で v_p(κ_n) ≥ μ_p·ℓ^n + (v_p(κ_0) − μ_p)  （証明した下界）")
+print("=" * 78)
+print("   等式 v_p(κ_n) = v_p(κ_0) − v_p(ℓ^n) + μ_p(ℓ^n − 1) + v_p(R_n) も照合する")
+print("   （R_n = ∏_{ζ≠1} D_0(ζ)、D = content · D_0）。")
+print("   下界が等号にならない＝ v_p(R_n) > 0 になる実例を明示する。")
+print("   『v_p(R_n) が n について有界か』は本レポートでは未解決（レポート §8.1）。")
+print()
+
+for (name, m, edges, ell, nmax, plist) in [
+    ("例1", 2, E1, 2, 5, [3, 5, 7]),
+    ("例1", 2, E1, 3, 3, [2, 5]),
+    ("例4", 3, E4, 2, 4, [3, 5]),
+    ("例5", 2, E5, 2, 4, [3, 5]),
+    ("bouquet {1,2}", 1, [(0,0,1),(0,0,2)], 2, 5, [3, 5, 11]),
+]:
+    D = detL(m, edges)
+    cont = content_z(D)
+    D0 = D // cont                      # 原始的部分。ℤ[z,z^{-1}] の中で厳密に割り切れる。
+    check(content_z(D0) == 1, f"D_0 が原始的でない: {name}")
+    k0 = kappa_derived(m, edges, 1)
+    for p in plist:
+        mu_p = ZZ(cont).valuation(p)
+        v0 = ZZ(k0).valuation(p)
+        line = []
+        ok_lb = True
+        ok_eq = True
+        grew = False
+        prev_vR = None
+        for n in range(nmax + 1):
+            N = ell**n
+            kn = kappa_derived(m, edges, N)
+            v = ZZ(kn).valuation(p)
+            lb = mu_p * N + (v0 - mu_p)
+            if v < lb:
+                ok_lb = False
+            # 等式の照合: R_n = ∏_{ζ≠1} D_0(ζ) を終結式で厳密計算する。
+            Rn = prod_detL_nontrivial(D0, N)
+            vR = ZZ(Rn).valuation(p) if Rn != 0 else Infinity
+            rhs = v0 - ZZ(N).valuation(p) + mu_p * (N - 1) + vR
+            if rhs != v:
+                ok_eq = False
+            if prev_vR is not None and vR > prev_vR:
+                grew = True
+            prev_vR = vR
+            line.append(f"n={n}: v_p(κ_n)={v} (下界 {lb}, v_p(R_n)={vR})")
+        check(ok_lb, f"G の下界が {name} ℓ={ell} p={p} で破れた")
+        check(ok_eq, f"G の等式が {name} ℓ={ell} p={p} で破れた")
+        mark = "  ← v_p(R_n) が途中で増える実例" if grew else ""
+        print(f"  {name:>14} ℓ={ell} p={p:>2} (μ_p={mu_p}): " + ", ".join(line))
+        print(f"      下界成立={ok_lb}, 等式成立={ok_eq}{mark}")
+
+print()
+print("=" * 78)
+print(f"FAIL 数: {NFAIL}")
+print("=" * 78)

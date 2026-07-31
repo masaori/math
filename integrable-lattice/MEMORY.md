@@ -1,5 +1,26 @@
 # MEMORY
 
+## 完了（2026-07-31）: 救済PR #23 の残余 2 点を既存レポートへ追記（ファイルは救わない）
+
+`docs/salvage-audit-2026-07-31.md` の「PR #23」節の判定に従い、ブランチ
+`worktree-fuzzy-petting-bengio` からは**ファイルを 1 つも取り込まず**、有効だった 2 事実だけを
+既存レポートへ追記した（ブランチの証明経路 $m_L$/終結式/$\mathbb{F}_2[x]$・Lemma 1–6 は持ち込まない。
+`cycle14_T1_proposition_T_generalization.md` の定理 D との整合を壊さないため）。
+
+- **偶 $L$ の観察 T′**: `outputs/reports/cycle14_T3_Zl2_tower_criterion.md` §9.2 に式 $(9.1')$
+  $v_2(\tau(L))=(2s+4)L-(6s+1)$（$s=v_2(L)$）を追記。$(9.1)$（$L=2^n$ の 7 点）を特殊化として含む。
+  **証明ではなく数値観察**である旨を明記。ブランチの主張は鵜呑みにせず自分で再現し、
+  **$L=2,4,\dots,160$ の全偶数 80 例**（ブランチの $L\le128$/64 例より広い）で不一致 0 を確認した。
+  計算は `sagemath/check/cycle13_T1_tau_v2/tau_v2_verify.sage` の (6) に追加（終結式経路・厳密整数）。
+- **文献確認**: `outputs/reports/cycle13_T1_observation_T_settlement.md` に §5.1 を追加。
+  OEIS A212800 の raw text 全文（`#23 Feb 16 2025`）と arXiv:1711.00175 の ar5iv 本文を
+  **本セッションで自分で取得**し、「2 進付値も $\tau=L^2R^4$ 型分解も無い」「1 次元 circulant のみ、
+  $p$ は素点でなく偶奇で決まる自然数、$p$ 進付値の議論なし」を確認。
+  arXiv:1312.4389 は ar5iv 版が無く**本文未確認のまま**（虚偽の確認済み宣言をしない）。
+  ついでに同スクリプト (7) で $\tau(n)$ と A212800 $a(2..11)$ の厳密一致（10/10）を確認し、
+  本 report の $\tau$ が OEIS と同じ量（$L=2$ の多重辺規約も同じ）であることを固定した。
+- 検証: `node sagemath/tools/verify-check-linkage.ts` exit 0（孤立 7 件は追記前と同一で増減なし）。
+
 ## 完了（2026-07-27）: **paper-plan 002 を論文 001 として書き上げた（4 ゴールすべて達成）**
 
 依頼者の承認（2026-07-26）を受け、`outputs/papers/001_R_Lambda_duality/` へ昇格し論文を執筆した。
@@ -119,6 +140,20 @@ PDF 10 ページ・未解決参照 0・組めない文字 0・版面外へ出た
   **岩澤型漸近そのものを証明**し $\lambda=\lambda_{\mathrm W}-1\ge1$ も決定。$(★)$ は連結性の仮定なしの形へ強化。
   **射程の限界も特定**: $\ell\nmid N$ の段は content が支配しない（反例6件）、**$d\ge2$ の塔は対象外
   ＝$L\times L$ トーラスにはそのまま適用できない**。新規性は主張しない（McGown–Vallières III Thm 6.1 の言い換え）。
+  - **2026-07-31 追記（救済PR #25 の残余を統合）**: 同じ主張を独立に証明していた並行成果から、
+    main に無かった部分だけを**追記**した（既存節は 1 つも削っていない）。
+    (1) **命題 7.3**: $\mu_\ell>0\iff\det(L\bmod\ell)=0$ over $\mathbb{F}_\ell(z)$（$d=1$ の有限判定）。
+    (2) **命題 7.4**: bouquet で $\mathrm{content}_z(D)=\gcd_a m_a$ の**証明**（cycle 12 は 125 件の数値観察のみだった）。
+    (3) **命題 9.5**: $p\neq\ell$ での下界 $v_p(\kappa_n)\ge\mu_p\ell^n+(v_p(\kappa_0)-\mu_p)$。
+        **$v_p(R_n)$ の有界性は未解決**で、$0$ から正へ増えてから止まる実例が 2 件ある（例5 $\ell=2,p=5$ で $0,0,2,2,2$）。
+    (4) **§8.1/§8.2 で出典を特定**: [E] Corollary 5.6 の $P=\det M$ 代入で $Q(T)=\det L(1+T)$ と同定でき、
+        「Corollary 5.6 の $Q(T)$ の定義は未確認」という §10 の宣言が**解消**した。$(★)$ の出典は
+        Vallières 論文 式(7)、および Hammer–Mattman–Sands–Vallières Thm 2.11 / Cor 3.5。
+        **ただしこの本文取得は並行成果が行ったもので、本セッションでは PDF を再取得していない**（§8.1 に明記）。
+    (5) **§13** で使った体を棚卸しし、$\ell$ 進脱出が Weierstrass 準備定理の 1 点に隔離されることを整理。
+    検証は `sagemath/check/cycle13_T3_criterion_proof/` に `lib_voltage.sage` ＋
+    `verify_star.sage`（D 節）＋ `verify_criterion.sage`（F・G 節）を追加し、**自分で sage を実行して FAIL 0**。
+    救済元の A/B/C/E 節は `proof_steps.sage` の Step 2〜6 と重複するので持ち込まなかった（判断は同 README に記録）。
 - **T1 step3（証明）**: `outputs/reports/cycle13_T1_observation_T_settlement.md`。
   **観察 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を証明**し、002 の未証明観察から確定部分命題「命題 T」へ昇格。
   骨子: $\tau(L)=\prod_j(r_j^L-1)^2/r_j^L$ へ分解 → 2 の不分岐性 → Newton 多角形で $v(m_j)=1$ → LTE 段。

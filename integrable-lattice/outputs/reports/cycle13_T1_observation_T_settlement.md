@@ -209,15 +209,45 @@ $L=6$ は $e=1$（不分岐）だが $v_P(1-\zeta^{3})=1\neq0$ かつ $v_2(6)=1\
   - Mednykh–Mednykh 系列「The number of spanning trees in circulant graphs, its arithmetic properties and asymptotic」
     (arXiv:1711.00175): abstract に「$\tau(n)=p\,n\,a(n)^2$（$p$ は $n$ の偶奇に依存する定数）」という
     **偶奇に依存する算術的分解**の主張がある。対象は循環グラフ $C_n(s_1,\dots,s_k)$ で、abstract には
-    離散トーラス $C_n\times C_n$ の記載がない。**本文未確認。**
+    離散トーラス $C_n\times C_n$ の記載がない。~~**本文未確認。**~~
+    → **本文確認済み（下記「§5.1 本文まで確認した一次情報」）。**
   - Mednykh–Mednykh「A formula for the number of spanning trees in circulant graphs with non-fixed generators
     and discrete tori」(arXiv:1312.4389): abstract に「離散トーラスの全域木数の公式も導く」とあるが、
-    公式そのものと $p$ 進付値への言及は abstract には無い。**本文未確認。**
+    公式そのものと $p$ 進付値への言及は abstract には無い。**本文未確認**（ar5iv HTML 版が無く、
+    本セッションのツールでは機械可読な本文を取得できなかった）。
 - したがって「$v_2(\tau(L))=2(L-1)$（奇 $L$）が文献に既出かどうか」は**確認できていない**。
   検索で見つからなかったことを「新しい」の根拠にはしない（0 件は根拠にならない）。
 - 証明に使った道具は Kirchhoff の matrix-tree 定理、円分体での 2 の不分岐性、Hensel の補題、
   Newton 多角形、二項展開（LTE 型）のみで、**すべて標準的**である。この種の主張が folklore として
   既知である可能性は高いと考えるべきである。
+
+### 5.1 本文まで確認した一次情報（2026-07-31 追記）
+
+上記の「本文未確認」のうち、次の 2 件は**本文・全文を取得して確認した**。確認方法（取得 URL）も記録する。
+
+- **OEIS A212800**（"Number of spanning trees of the (n,n)-torus grid graph"）:
+  `https://oeis.org/search?q=id:A212800&fmt=text` から raw text 記録（版 `#23 Feb 16 2025`）の
+  全行（`%I` 〜 `%A`）を取得した。記載されているのは
+  (a) 項 $a(1),\dots,a(11)$、(b) `%C`「Main diagonal of array in A212796」、
+  (c) `%H` の Kreweras 1978（J. Combin. Theory B **24** (1978), p.210 Para.4）と MathWorld 2 件、
+  (d) `%F` の漸近式 $a(n)\sim\Gamma(1/4)^4e^{4Gn^2/\pi}/(16\pi^3)$（Vaclav Kotesovec, 2021-02-14）、
+  (e) `%t` の Mathematica コード（正弦積）、(f) `%Y` Cf. A212796, A340562。
+  **2 進付値への言及も、$\tau=L^2R^4$ 型（あるいは $n^2a(n)^4$ 型）の分解も、記載が一切無い。**
+  なお本 report の $\tau(L)$ が A212800 と同じ量であることは、`sagemath/check/cycle13_T1_tau_v2/`
+  の (7) で $a(2),\dots,a(11)$ との厳密整数一致（10/10）として確認した
+  （$L=2$ の多重辺規約 $a(2)=32$, $v_2=5$ も一致する。§1 の表の注はこの規約と同じ）。
+- **arXiv:1711.00175**（Mednykh–Mednykh）: `https://ar5iv.labs.arxiv.org/html/1711.00175` の
+  ar5iv 本文で確認した。対象は **1 次元の循環グラフのみ**（偶数次数 $C_n(s_1,\dots,s_k)$ と
+  奇数次数 $C_{2n}(s_1,\dots,s_k,n)$。「the vertex $i$ is adjacent to the vertices
+  $i\pm s_1,\dots,i\pm s_k \pmod n$」）で、**離散トーラス $C_n\times C_n$ は扱っていない**。
+  分解 $\tau(n)=p\,n\,a(n)^2$ の $p$ は abstract の言葉どおり
+  「a prescribed natural number depending on the parity of $n$」であり、**素点ではない**。
+  **$p$ 進付値・2 進付値の計算や議論は本文に無い**（漸近評価は Mahler 測度による）。
+  本 report の $\tau(L)=L^2R_L^4$ はこの 2 次元版に相当する形だが、同一の主張ではない。
+
+したがって「観察 T が既出か」は依然として**確定していない**（arXiv:1312.4389 と Kreweras 1978 の
+本文が未確認のまま残る）。上記は「この 2 本には無い」という否定的事実の確定であって、
+新規性の根拠にはしない。
 
 ---
 

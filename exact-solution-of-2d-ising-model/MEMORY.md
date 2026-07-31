@@ -30,6 +30,41 @@ main の既存 check と同じ主張を見ているだけの 6 ファイル、�
 **検証**: `structured-latex` の `npm run check` exit 0、`verify-check-linkage.ts` exit 0
 （113 check）、`run-all-checks.sh 129 130 132 133 135` は 10 本すべて PASS。
 
+## 完了（2026-07-31）: 救済PR #22 の残余を数値検証へ統合（`def_T_g` / `def_T_V` の検証を新設）
+
+`docs/salvage-audit-2026-07-31.md` の「PR #22」節に従い、放置ブランチ
+`origin/worktree-foamy-foraging-map` から**価値のある検証だけ**を取り出して統合した。
+
+- **新設 `sagemath/check/255_def_T_g/`** — `T_g : h ↦ g h g^{-1}` の合成則を、Pauli 基底での
+  4^M × 4^M 行列表示として 2 経路（基底の像の展開係数／vec 公式 `vec(AXB) = (A ⊗ B^T)vec(X)`）で
+  作って突き合わせる。作用素レベルだけだと結合律の言い換えにしかならないための措置。114 判定 PASS。
+- **新設 `sagemath/check/260_def_T_V/`** — 「3 段の共役の合成 = 行列 `V` による 1 回の共役」。720 判定 PASS。
+- `250_def_partition_function_2d_ising/check_02_symmetries_and_pbc.sage` — 全スピン反転不変性・
+  巡回シフト不変性に加え、**周期境界を外した自由境界版と値が一致しないことの否定コントロール**。91 判定 PASS。
+- `251_def_transfer_matrix/check_02_V2_as_kronecker_power.sage` — `V_2 = t^(⊠N)`（2×2 転送行列の
+  クロネッカー積）による独立構成。60 判定 PASS。
+
+**ディレクトリ番号の注意**: `def_T_g` は文書順では既存 `253_injectivity_of_T_up_to_scalar` の直前だが
+`250`〜`254` が埋まっているため `255`、`def_T_V` は `260` を使った（両者の相対順序は保持）。
+25x 帯の既存番号（`253` = injectivity、`254` = V2_not_in_clifford、`257` = def_pauli_group）は
+もともと文書順に沿っていない。
+
+**捨てたもの**: ブランチの `250_.../check_01_Z_closed_form_1d.sage`、`252_.../check_01〜03`（いずれも
+main の既存 check と同内容）、`.sage.py` 8 個（プリパーサ生成物）、ブランチ側の `252_.../_prelude.sage`
+（main と関数シグネチャが逆で非互換。main 側 `_prelude.sage` は一切変更していない）。
+
+## 完了（2026-07-31）: 救済PR #21 の唯一の残余（K₂* の二分法による独立求解）を統合
+
+- `sagemath/check/231_duality_c2_star_eq_s2_star_c2/check_02_K2star_by_bisection.sage` を追加。
+  閉じた式 K₂* = −(1/2)log(tanh K₂) を使わずに sinh(2K₂)sinh(2x) = 1 を二分法で解き、
+  閉じた式の値と一致することを確かめる（既存の 01 は閉じた式を前提にしているので、02 は独立経路）。
+- 救済元ブランチ `worktree-eventual-cuddling-deer` の残り 27 ファイル（`_prelude.sage` 15 個、
+  `.sage.py` 5 個、prelude だけで check の無い 11 ディレクトリ、main に被覆済みの check 5 本）は
+  意図的に捨てた。判定根拠は `docs/salvage-audit-2026-07-31.md` §2-3 と PR #21 のコメント。
+- 救済元の `_prelude.sage` には依存させず、必要な定義は check ファイル内に書いて
+  231 ディレクトリ既存の書き方（`_shared/operators.sage` を load するだけ）へ揃えた。
+- 判定 65 件・最大相対誤差 5.311e-16 で PASS（既定の許容誤差 1.0e-09 のまま）。
+
 ## 完了（2026-07-27）: **本文の全 20 章に機械証明が付いた**（章 009〜020 を一気に形式化）
 
 このセッションの前は、Lean の形式化は**章 008 まで**しか無かった。**章 009〜020 の 12 章を
