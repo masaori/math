@@ -1,0 +1,27 @@
+⚠ [8655/8663] Replayed IntegrableLattice.PropL
+warning: IntegrableLattice/PropL.lean:57:5: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8658/8663] Replayed IntegrableLattice.PropV
+warning: IntegrableLattice/PropV.lean:70:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:129:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:131:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8660/8663] Replayed IntegrableLattice.PropCPeriod
+warning: IntegrableLattice/PropCPeriod.lean:160:35: Variable name `hk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8662/8663] Built IntegrableLattice (48s)
+Build completed successfully (8663 jobs).
+BUILD_EXIT=0
+ld completed successfully (8663 jobs).
+BUILD_EXIT=0

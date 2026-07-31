@@ -76,6 +76,8 @@ lake build
 | `IntegrableLattice/PropL.lean` | 命題 L | `outputs/reports/cycle8_T1_lte_proposition.md` |
 | `IntegrableLattice/PropV.lean` | 命題 V（補題 V0 とその帰結、$d=1,2$） | `outputs/reports/cycle14_T1_vp_growth_two_variable.md` |
 | `IntegrableLattice/PropC.lean` | 命題 C の代数的核 | `outputs/reports/cycle3_T1_D-U2_rigorous.md` |
+| `IntegrableLattice/PropCPeriod.lean` | 命題 C の周期の整除 $\pi(p,k)\mid p^{k-1}\pi(p,1)$ | `outputs/reports/cycle3_T1_D-U2_rigorous.md` |
+| `IntegrableLattice/PropB.lean` | 命題 B の片方向（$\mathrm{lcm}\mid\pi(p,1)$ のみ） | `outputs/reports/cycle3_T1_D-U2_rigorous.md` |
 
 ## 形式化の現状
 
@@ -86,11 +88,52 @@ lake build
 | **A**（$v_p$ の最終周期性） | **完了**（(1)(2)(3)）／(4) は非該当 | `exists_eventually_periodic_pow`（有限モノイドの鳩の巣）、`exists_eventually_periodic_matrixPow`、`exists_eventually_periodic_trace`、`exists_eventually_periodic_truncVal`、`exists_eventually_periodic_min_padicValInt` | (4)「有限手続きで決定可能」は計算可能性の主張であって命題ではないので Lean の定理にしていない |
 | **L**（LTE, $P(z)=z-c$） | **完了**（4 分岐すべて） | `padicValNat_pow_sub_one_of_dvd`（$p\mid c$）、`padicValNat_pow_sub_one_of_not_dvd_order`（$d\nmid L$）、`padicValNat_pow_sub_one_odd`（$p$ 奇・$d\mid L$）、`padicValNat_two_pow_sub_one_odd_exp` / `..._even_exp`（$p=2$） | — |
 | **V**（$\Lambda$ 側の非自明性判定） | **完了**（$d=1$ と $d=2$） | `X_pow_char_pow_sub_one`（核 $z^{p^n}-1=(z-1)^{p^n}$）、`resultant_X_pow_char_pow_sub_one`、`aOne_cast_zmod` / `dvd_aOne_iff`（$d=1$）、`aTwo_cast_zmod` / `dvd_aTwo_iff`（$d=2$） | 人手証明どおり $a_L$ を終結式で定義したまま形式化できた（mathlib の `Polynomial.resultant` を使用）。$d\ge3$ は同じ補題の反復で出るが未記述 |
-| **C**（Pisano 型上界） | **部分的** | 代数的核を証明: `dvd_one_add_pow_prime_sub_one`（二項展開の 1 段）、`dvd_pow_prime_pow_sub_one`（反復）、`pow_prime_pow_eq_one_of_eq_one_add` / `matrix_pow_prime_pow_eq_one`（$U\equiv I \bmod p \Rightarrow U^{p^{k-1}}=I$） | **残り**: $\pi(p,k)$ を「最終周期の最小値」として定義し、$p\nmid\det T$ から純周期性（最終周期＝`orderOf`）を出して $\pi(p,k)\mid p^{k-1}\pi(p,1)$ を結論する段。最小周期の定義と純周期性の補題群が未整備で、核の証明とは独立の作業量がある |
-| **B**（$\pi(p,1)$ の精密公式） | **未着手** | — | $\overline{\mathbb{F}_p}$ 上での $\chi_T$ の相異固有値・代数的重複度 $m_\lambda$ の取り出しと、指標の一次独立性が要る。mathlib には固有値の重複度を $\overline{\mathbb{F}_p}$ 上で扱う直接の API が無く、`Polynomial.roots` と分解体を自前で組む必要がある。核（有限体の乗法的位数の lcm）だけを切り出しても人手証明の主張にならないので、部分形式化の価値が薄いと判断した |
-| **N**（線形成長率＝Newton 多角形） | **未着手** | — | **mathlib に $p$ 進 Newton 多角形が無い**。mathlib commit `520045ab14e2` に対する grep で `newtonPolygon` / `NewtonPolygon` のヒットが **0 件**（`logs/mathlib-gap-survey.log`）。整数点の下方凸包とその傾きが付値に対応するという定理を一から作る必要がある |
-| **T**（$v_2(\tau(L))=2(L-1)$） | **未着手** | — | **mathlib に Kirchhoff の matrix-tree 定理（全域木数）が無い**。同 grep で `Kirchhoff` / `matrixTree` / `matrix-tree` / `numSpanningTrees` がいずれも **0 件**。加えて人手証明（`cycle13_T1_observation_T_settlement.md` §3）は $\mathbb{Q}(\zeta_L)$ の素イデアル分解・Hensel の補題・Newton 多角形を使うので、上の N の欠落もそのまま効く |
-| **W**（非退化グラフ塔の閉形式） | **未着手** | — | 人手証明自身が外部定理に依拠している。`cycle14_T3_two_variable_criterion.md` §0 が「$a\le v_\ell(\mathrm{content})$（上界方向）は**自前では証明できなかった**、Cuoco–Monsky の $m_0$ 不変量の定理そのものである」と明記している。その Cuoco–Monsky／岩澤型漸近は mathlib に無い（同 grep で `Iwasawa invariant` / `mu invariant` が **0 件**）。matrix-tree 定理も要る（上記 T と同じ理由）。なお **Weierstrass 準備定理は mathlib にある**（`Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean`、完備局所環上の冪級数版）ので、W の障害は準備定理ではなく岩澤型漸近と matrix-tree の側である |
+| **C**（Pisano 型上界） | **完了**（整除方向）／等号は非該当 | 代数的核（`PropC.lean`）: `dvd_one_add_pow_prime_sub_one`、`dvd_pow_prime_pow_sub_one`、`pow_prime_pow_eq_one_of_eq_one_add` / `matrix_pow_prime_pow_eq_one`。**周期そのもの**（`PropCPeriod.lean`）: `matrix_pow_mul_prime_pow_eq_one`、`orderOf_dvd_mul_prime_pow`、`orderOf_reduction_dvd`（＝$\pi(p,k)\mid\pi(p,1)p^{k-1}$）、純周期性の正当化 `isUnit_pow_add_eq_iff` / `isUnit_map_of_not_dvd_det`（$p\nmid\det T$） | 等号（Wall 型 $\pi(p,k)=p^{k-1}\pi(p,1)$）は**人手証明のとおり一般には偽**（cycle 6 で六頂点 572 件中 4.5% の反例）なので形式化対象ではない。「最終周期の最小値」を `Nat.find` で定義する代わりに、可逆性から最終周期の条件が $A^t=1$ と同値であることを示して `orderOf` で述べた |
+| **B**（$\pi(p,1)$ の精密公式） | **部分的**（片方向のみ） | `PropB.lean`: `mulVec_pow_eq_pow_smul`、`eigenvalue_pow_eq_one_of_pow_eq_one`、`orderOf_eigenvalue_dvd_orderOf`、`lcm_orderOf_eigenvalues_dvd_orderOf`。すなわち $\operatorname{lcm}\{\operatorname{ord}(\lambda)\}\mid\pi(p,1)$（重複度の仮定 $p\nmid m_\lambda$ 不要、任意の体で成立） | **残り**: 逆向き $\pi(p,1)\mid\operatorname{lcm}$。$p\nmid m_\lambda$ が効くのはここだけで、$A$ の半単純性に帰着する。**これは mathlib の欠落ではない**（下記「訂正」参照）。必要な部品は揃っており、残るのは組み立て（行列→`Module.End`、$\overline{\mathbb{F}_p}$ への係数拡大、重複度→minpoly squarefree→半単純、固有空間分解）。この step では未実施 |
+| **N**（線形成長率＝Newton 多角形） | **未着手** | — | **mathlib に $p$ 進 Newton 多角形が無い**（3 段の grep で確認、下表）。整数点の下方凸包とその傾きが付値に対応するという定理を一から作る必要がある |
+| **T**（$v_2(\tau(L))=2(L-1)$） | **未着手** | — | **mathlib に Kirchhoff の matrix-tree 定理（全域木数）が無い**（3 段の grep で確認、下表）。加えて人手証明（`cycle13_T1_observation_T_settlement.md` §3）は $\mathbb{Q}(\zeta_L)$ の素イデアル分解・Hensel の補題・Newton 多角形を使うので、上の N の欠落もそのまま効く |
+| **W**（非退化グラフ塔の閉形式） | **未着手** | — | 人手証明自身が外部定理に依拠している。`cycle14_T3_two_variable_criterion.md` §0 が「$a\le v_\ell(\mathrm{content})$（上界方向）は**自前では証明できなかった**、Cuoco–Monsky の $m_0$ 不変量の定理そのものである」と明記している。その Cuoco–Monsky／岩澤型漸近は mathlib に無い（`iwasawa` の case-insensitive grep は 6 件当たるが、**中身を読むといずれも別物**: 5 件は群論の「Iwasawa 単純性判定法」（`Mathlib/GroupTheory/GroupAction/Iwasawa.lean`）、残り 1 件は `Mathlib/NumberTheory/Padics/Measure/Basic.lean` の docstring が岩澤代数に**言及している**だけで、$\mu,\lambda$ 不変量もその漸近も定義されていない）。matrix-tree 定理も要る（上記 T と同じ理由）。なお **Weierstrass 準備定理は mathlib にある**（`Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean`、完備局所環上の冪級数版。宣言名は `PowerSeries.IsWeierstrassDivisionAt` / `IsWeierstrassFactorizationAt` / `exists_isWeierstrassDivision` 等）ので、W の障害は準備定理ではなく岩澤型漸近と matrix-tree の側である |
+
+### mathlib 欠落調査の一次情報（2026-07-31 再実施、mathlib commit `520045ab14e2` / v4.32.1）
+
+`scripts/mathlib-gap-survey.sh` を実行した生ログが `logs/mathlib-gap-survey-cycle16.log`。走査対象は
+`Mathlib/**/*.lean` **8264 ファイル**。各概念について 3 段で引いている（理由は下の「訂正」を見よ）。
+
+| 概念 | (1) 連結語の内容 grep | (2) 語幹 (-i) の内容 grep | (3) 語幹 (-i) のファイル名 | 判定 |
+| --- | --- | --- | --- | --- |
+| $p$ 進 Newton 多角形 | `NewtonPolygon` 0 件 | `newton` 7 件 | 2 件 | **無い**。7 件は Newton–Raphson 法（`Dynamics/Newton.lean`、`Padics/Hensel.lean`、`RingTheory/Henselian.lean`）と Newton 恒等式（`MvPolynomial/Symmetric/NewtonIdentities.lean`）で、**Newton 多角形は 1 件も無い**（中身を確認） |
+| 下方凸包 | `lowerConvexHull` 0 件 | `convex hull` 多数 | 0 件 | 凸包そのものは `Analysis/Convex/` にあるが、**整数点の下方凸包＝付値多角形は無い** |
+| Kirchhoff の matrix-tree 定理 | `matrixTree` 0 件 | `kirchhoff` **0 件** | **0 件** | **無い** |
+| 全域木数 | `numSpanningTrees` 0 件 | `spanning tree` 3 件 | 0 件 | **数える定理は無い**。3 件は全域木の**存在**（`SimpleGraph/Acyclic.lean:457,464`）と arborescence で、個数の公式ではない |
+| 岩澤不変量の漸近 | `IwasawaInvariant` 0 件 | `iwasawa` 6 件 | 1 件 | **無い**（内訳は上の命題 W の欄） |
+| 固有値の代数的重複度 | `algebraicMultiplicity` 0 件 | `algebraic multiplicity` 1 件 | 0 件 | **ある**（下の「訂正」を見よ） |
+| Jordan 標準形 | `JordanNormalForm` 0 件 | `jordan normal` 0 件 | 0 件 | 無い（ただし命題 B には不要と判明） |
+| （対照）Weierstrass 準備 | `WeierstrassPreparation` 0 件 | `weierstrass` 42 件 | 5 件 | **ある**（下の「訂正」を見よ） |
+
+#### 訂正: 「連結語の内容 grep が 0 件」を「mathlib に無い」の根拠にしてはならない
+
+**2026-07-31 に、旧版の調査方法が実際に 2 件の誤りを生んでいたことが分かったので記録する。**
+旧 `mathlib-gap-survey.sh` はキャメルケース連結語をファイル**内容**にだけ grep していた。その結果:
+
+1. **`WeierstrassPreparation files=0`** と出たが、これは**偽陰性**だった。
+   `Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean` は**実在する**。
+   中身の宣言名が `IsWeierstrassDivisionAt` 等で、"WeierstrassPreparation" という連続文字列が
+   ファイル内に一度も現れないだけである。
+2. **命題 B の欄に「mathlib には固有値の重複度を $\overline{\mathbb{F}_p}$ 上で扱う直接の API が無い」と
+   書いてあったのは誤りだった。** 代数的重複度は `Polynomial.rootMultiplicity` で表現でき、
+   `Mathlib/LinearAlgebra/Eigenspace/Zero.lean:211`（`finrank_eigenspace_le`）が
+   `φ.charpoly.rootMultiplicity μ` をまさに「algebraic multiplicity」と呼んでいる。
+   さらに半単純性の判定は**両方向とも存在する**
+   （`Module.End.isSemisimple_of_squarefree_aeval_eq_zero` = `Semisimple.lean:221`、
+   `Module.End.IsSemisimple.minpoly_squarefree` = 同 246）し、代数閉体上の固有空間分解も
+   `Module.End.IsSemisimple.iSup_eigenspace_eq_top`（`Eigenspace/Semisimple.lean:79`）としてある。
+   **したがって命題 B の逆方向が未形式化なのは mathlib の欠落のせいではなく、
+   単に本 step で組み立てをやっていないからである。**
+
+現行スクリプトは (1) 連結語の内容 grep、(2) 語幹の case-insensitive 内容 grep、
+(3) 語幹の case-insensitive **ファイル名**検索の 3 つを必ず取り、
+**(2)(3) がともに 0 のときにだけ「無い」と書く**。0 でないときはヒットの中身を読んで判定する
+（上の表の「判定」欄はすべて中身を読んだ結果である）。
 
 ### 形式化にあたって人手証明から変えた点（すべて該当ファイルの冒頭にも記載）
 
@@ -113,4 +156,9 @@ lake build
 | `logs/cache-get.log` | `lake exe cache get` の実行ログ。末尾 `Completed successfully in 85412 ms!` / `EXIT=0` |
 | `logs/build.log` | `lake build` の実行ログ。末尾 `Build completed successfully (8661 jobs).` |
 | `logs/check-no-sorry.log` | `scripts/check-no-sorry.sh` の出力。`sorry`/`admit` なし、列挙した 31 個の定理はいずれも `sorryAx` に非依存（依存公理は `propext` / `Classical.choice` / `Quot.sound` のみ） |
-| `logs/mathlib-gap-survey.log` | 未形式化命題の理由づけに使った mathlib の grep 結果（mathlib commit つき） |
+| `logs/mathlib-gap-survey.log` | 未形式化命題の理由づけに使った mathlib の grep 結果（mathlib commit つき）。**方式に偽陰性があった旧版**。判断には下の cycle16 版を使うこと |
+| `logs/build-cycle16-final.log` | cycle 16 の `lake build`。末尾 `Build completed successfully (8662 jobs).` / `BUILD_EXIT=0`（`PropCPeriod` 追加時点） |
+| `logs/build-cycle16-propB.log` | `PropB` 追加後の `lake build`。末尾 `Build completed successfully (8663 jobs).` / `BUILD_EXIT=0` |
+| `logs/check-no-sorry-cycle16.log` | cycle 16 の `scripts/check-no-sorry.sh`。`sorry`/`admit` なし、列挙した **46 個**の定理はいずれも `sorryAx` に非依存 / `CHECK_EXIT=0` |
+| `logs/mathlib-gap-survey-cycle16.log` | **3 段方式に直した**欠落調査の生ログ（走査 8264 ファイル、mathlib `520045ab14e2`） |
+| `logs/cache-get-cycle16.log` | cycle 16 の `lake exe cache get`。末尾 `Completed successfully in 76454 ms!` / `CACHE_EXIT=0` |

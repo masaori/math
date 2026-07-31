@@ -73,6 +73,23 @@ targets=(
   IntegrableLattice.dvd_pow_prime_pow_sub_one
   IntegrableLattice.pow_prime_pow_eq_one_of_eq_one_add
   IntegrableLattice.matrix_pow_prime_pow_eq_one
+  # 命題 C の周期そのものの整除（PropCPeriod.lean）
+  IntegrableLattice.eq_natCast_mul_of_castHom_eq_zero
+  IntegrableLattice.matrix_eq_natCast_mul_of_map_castHom_eq_zero
+  IntegrableLattice.map_pow_castHom
+  IntegrableLattice.map_sub_castHom
+  IntegrableLattice.map_one_castHom
+  IntegrableLattice.matrix_pow_mul_prime_pow_eq_one
+  IntegrableLattice.orderOf_dvd_mul_prime_pow
+  IntegrableLattice.orderOf_reduction_dvd
+  IntegrableLattice.isUnit_pow_add_eq_iff
+  IntegrableLattice.isUnit_intCast_of_not_dvd
+  IntegrableLattice.isUnit_map_of_not_dvd_det
+  # 命題 B の片方向（PropB.lean）。等式ではなく lcm ∣ ord の側だけ
+  IntegrableLattice.mulVec_pow_eq_pow_smul
+  IntegrableLattice.eigenvalue_pow_eq_one_of_pow_eq_one
+  IntegrableLattice.orderOf_eigenvalue_dvd_orderOf
+  IntegrableLattice.lcm_orderOf_eigenvalues_dvd_orderOf
 )
 
 {

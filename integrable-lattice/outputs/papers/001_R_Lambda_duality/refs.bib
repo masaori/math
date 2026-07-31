@@ -1,14 +1,42 @@
-% 本論文で引用する文献。本文中には完全な書誌を書いてあるので、これは投稿形式用の控えである。
-% 本文で「本文確認済み」と書いたものだけをここに載せる（abstract のみのものは本文側で明示）。
+% 論文 001「R–Λ 双対」の参考文献。本文（structured-latex/content/*.ts）中には完全な書誌を
+% 地の文で書いてあるので、これは投稿形式へ落とすための控えである。
+%
+% 書誌データの出所（2026-07-31, cycle 16 step 4 で一次確認）:
+%   - arXiv API (https://export.arxiv.org/api/query) の journal_ref / doi フィールド
+%   - zbMATH Open API (https://api.zbmath.org/v1/document/_search)
+%   - Crossref API (https://api.crossref.org/works)
+%   - Kataoka arXiv:2606.03579v1 の PDF 本文（取得済み）の References
+% 推測で埋めた項目は無い。確認できなかった項目は空欄にせず、その旨をコメントで明記した。
+%
+% 【重要】書誌が確認できたことと、その論文の本文を読んだこととは別である。
+% 各エントリの note に「本文のどこまでを読んだか」を書いた。読んでいないものは読んでいないと書く。
+%
+% 【本文との対応（2026-07-31 時点で structured-latex/content/*.ts を grep して確認）】
+% 現在の本文が実際に言及している文献:
+%   LindSchmidtWard1990, LindSchmidtVerbitskiy2013, Viswanathan2024（本文では arXiv:2407.19531 として言及）,
+%   Kataoka2026, Monsky1981, CuocoMonsky1981, Lehmer1933, FerreroWashington1979,
+%   AxKochen1966, Ershov1965
+% 本文が言及していないが背景として控えてあるもの（bibtex は \cite されない限り出力しない）:
+%   Deninger2009, Ueki2020, Vallieres2021, McGownVallieres2024, DuBoseVallieres2023,
+%   MonskySomeInvariants1981
+% ※ この対応表は本文側の記述を変えれば古くなる。本文を触ったら引き直すこと。
+
+% ------------------------------------------------------------------
+% (∞) 側 — 実素点。Mahler 測度＝エントロピー。
+% ------------------------------------------------------------------
 
 @article{LindSchmidtWard1990,
-  author  = {Lind, Douglas and Schmidt, Klaus and Ward, Tom},
+  author  = {Lind, Douglas and Schmidt, Klaus and Ward, Thomas B.},
   title   = {Mahler measure and entropy for commuting automorphisms of compact groups},
-  journal = {Inventiones mathematicae},
+  journal = {Inventiones Mathematicae},
   volume  = {101},
+  number  = {3},
   pages   = {593--629},
   year    = {1990},
-  note    = {Theorem 3.1（エントロピー＝Mahler 測度、無条件）と Theorem 7.1（expansive で周期点の増大率＝エントロピー）を本文で確認}
+  doi     = {10.1007/BF01231517},
+  note    = {本文で Theorem 3.1（エントロピー＝Mahler 測度、無条件）と
+             Theorem 7.1（expansive のとき周期点の増大率＝エントロピー）を確認済み。
+             書誌は zbMATH Open で確認（巻 101(3), 593--629, 1990, DOI 10.1007/BF01231517）}
 }
 
 @article{LindSchmidtVerbitskiy2013,
@@ -16,42 +44,188 @@
   title   = {Homoclinic points, atoral polynomials, and periodic points of algebraic $\mathbb{Z}^d$-actions},
   journal = {Ergodic Theory and Dynamical Systems},
   volume  = {33},
+  number  = {4},
   pages   = {1060--1081},
   year    = {2013},
+  doi     = {10.1017/S014338571200017X},
   eprint  = {1108.4989},
-  note    = {Theorem 1.2（U(P) 有限）と Theorem 1.3（atoral）を本文で確認}
+  archiveprefix = {arXiv},
+  note    = {本文で Theorem 1.2（$U(P)$ が有限）と Theorem 1.3（atoral）を確認済み。
+             巻号・頁は arXiv の journal\_ref、DOI は Crossref で確認}
 }
+
+@article{Viswanathan2024,
+  author  = {Viswanathan, Gandhimohan M.},
+  title   = {Mahler measures, elliptic curves, and $L$-functions for the free energy of the Ising model},
+  journal = {Physical Review E},
+  volume  = {110},
+  number  = {5},
+  pages   = {054134},
+  year    = {2024},
+  doi     = {10.1103/PhysRevE.110.054134},
+  eprint  = {2407.19531},
+  archiveprefix = {arXiv},
+  note    = {本文では「特殊温度で自由エネルギーが楕円曲線の Hasse--Weil $L$ 関数で書ける」という
+             結果の存在に言及するのみで、**この論文の本文は未読**（arXiv abstract のみ確認）。
+             書誌（Phys. Rev. E 110(5), 054134, 2024）は Crossref で確認。
+             arXiv メタデータには journal\_ref が入っていないため Crossref を使った}
+}
+
+% ------------------------------------------------------------------
+% (p) 側 — Λ 素点。岩澤型漸近・p 進エントロピー。
+% ------------------------------------------------------------------
 
 @article{Kataoka2026,
   author  = {Kataoka, Takenori},
   title   = {An Iwasawa-type asymptotic formula for multiple $\mathbb{Z}_p$-coverings of graphs},
   year    = {2026},
   eprint  = {2606.03579},
-  note    = {Theorem 1.1 / Theorem 2.1（= Monsky Thm 5.6）/ Theorem 2.3（= Cuoco--Monsky Thm 1.7）/ Definition 2.2 / Proposition 2.6 を本文 pp.1--8 で確認。§4--§6 は未読}
+  archiveprefix = {arXiv},
+  note    = {Theorem 1.1 / Theorem 2.1（= Monsky Thm 5.6 の引用）/ Theorem 2.3（= Cuoco--Monsky Thm 1.7 の引用）/
+             Definition 2.2 / Proposition 2.6 を本文 pp.1--8 で確認。
+             **\S4--\S6（主定理の証明）も 2026-07-31（cycle 16 step 1）に全 28 ページ読了**。
+             本プロジェクトの用途（不分岐・一般の $P$・$d=2$）に追加の仮定は要求されないこと、
+             ただしグラフの $\kappa$ として実現できる $P$ には Definition 6.1 の制約があることを確認した。
+             併せて **Proposition 4.4** を原文で確認し、本論文の全域木数オフセットの式の誤り
+             （$-\mathrm{ord}_p(\#V_X)$ は不要。$\#V_X$ は相殺する）を検出・訂正した
+             （検証 sagemath/check/cycle16\_T1\_kappa\_offset/）。
+             未出版のプレプリント（arXiv API に journal\_ref / DOI が無く、2026-07-31 時点で**掲載誌は未確認**）}
 }
 
-@article{Deninger2009,
-  author = {Deninger, Christopher},
-  title  = {$p$-adic entropy and a $p$-adic Fuglede--Kadison determinant},
-  year   = {2009},
-  eprint = {math/0608539},
-  note   = {Theorem 1.1 と Proposition 2.4 を本文で確認。$\hbar_p$ が岩澤対数で定義されることの根拠}
+@article{Monsky1981,
+  author  = {Monsky, Paul},
+  title   = {On $p$-adic power series},
+  journal = {Mathematische Annalen},
+  volume  = {255},
+  number  = {2},
+  pages   = {217--227},
+  year    = {1981},
+  doi     = {10.1007/BF01450672},
+  note    = {本論文が「Monsky の定理（Theorem 5.6）」として引用するもの。
+             **原論文本文を取得して確認済み**（2026-07-31, cycle 16 step 1。GDZ の IIIF で
+             Math. Ann. 255 (1981) のページ画像を直読。根拠 report:
+             outputs/reports/cycle16\_T1\_monsky\_primary\_sources.md）。
+             p.226 に Theorem 5.6 が実在し、Kataoka Thm 2.1 の引用形と一致することを確認した。
+             読んだのは Def 3.1 / Thm 3.4 / Thm 5.5 / **Thm 5.6** / Remark 1,2 / References で、
+             **\S1・\S2・\S4 は未読**（Thm 5.6 の証明が依拠する Thm 3.4 / 4.6 / 5.5 の
+             中身は読んでいない。言明のみ確認）。
+             書誌は Kataoka の References [14] と zbMATH Open で一致確認
+             （Math. Ann. 255(2), 217--227, 1981, DOI 10.1007/BF01450672）。
+             【重要】同巻に隣接する Monsky, ``Some Invariants of $\mathbb{Z}_p^d$-Extensions'',
+             Math. Ann. 255, 229--233 とは**別の論文**である。本プロジェクトは cycle 15 まで
+             後者を Theorem 5.6 の出典と誤同定していた。後者には \S5 も Thm 5.6 も無いことを
+             全 5 ページ通読して確認済み（下の MonskySomeInvariants1981 を見よ）}
 }
 
-@article{Ueki2019,
-  author = {Ueki, Jun},
-  title  = {$p$-adic Mahler measure and $\mathbb{Z}$-covers of links},
-  year   = {2019},
-  eprint = {1702.03819},
-  note   = {Remark 2.4（Besser--Deninger の $m_p$ と自身の $\mathrm{M}_p$ は別物）、Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7 を本文で確認}
+@article{CuocoMonsky1981,
+  author  = {Cuoco, Albert A. and Monsky, Paul},
+  title   = {Class numbers in $\mathbb{Z}_p^d$-extensions},
+  journal = {Mathematische Annalen},
+  volume  = {255},
+  number  = {2},
+  pages   = {235--258},
+  year    = {1981},
+  doi     = {10.1007/BF01450674},
+  note    = {本論文が「Cuoco--Monsky の定理（Theorem 1.7）」として引用するもの。
+             **原論文本文を取得して確認済み**（2026-07-31, cycle 16 step 1。GDZ の IIIF。
+             根拠 report: outputs/reports/cycle16\_T1\_monsky\_primary\_sources.md）。
+             読んだのは Introduction（pp.235--236）と \S1 The Fundamental Estimate 全体
+             （pp.237--238 ＝ Def 1.1--1.3, Lemma 1.4--1.6, **Thm 1.7**, Remark）と \S2 冒頭で、
+             **\S3--\S7 は未読**（Thm 1.7 の証明で使う Lemma 1.4--1.6 の証明は読んでいない）。
+             Thm 1.7 は Kataoka Thm 2.3 の引用形と一致することを確認した。
+             また Thm 1.7 が**グラフに限定されない一般の $\mathbb{Z}_p^d$-拡大の主張**である
+             ことも原文で確認した。
+             巻号・頁・年は Kataoka の References [2] および取得したページ画像で確認。
+             DOI は Springer の記事ページの URL
+             （link.springer.com/article/10.1007/BF01450674）から取得
+             （ページ本体はアクセス制限のため未取得）}
 }
 
-@article{McGownVallieres2022,
-  author = {McGown, Kevin and Valli{\`e}res, Daniel},
-  title  = {On abelian $\ell$-towers of multigraphs III},
-  year   = {2022},
-  eprint = {2107.07639},
-  note   = {Theorem 6.1 を本文で確認}
+@article{MonskySomeInvariants1981,
+  author  = {Monsky, Paul},
+  title   = {Some Invariants of $\mathbb{Z}_p^d$-Extensions},
+  journal = {Mathematische Annalen},
+  volume  = {255},
+  pages   = {229--233},
+  year    = {1981},
+  note    = {**本文で引用していない。誤同定を防ぐためだけに置いてある控えである。**
+             本プロジェクトは cycle 15 まで、Monsky の Theorem 5.6 の出典をこの論文だと
+             誤って同定していた。2026-07-31（cycle 16 step 1）に GDZ の IIIF で
+             **全 5 ページを通読**し、この論文には \S1--\S4 と Theorem I--IV しか無く
+             **\S5 も Theorem 5.6 も存在しない**ことを確認した。
+             実際この論文自身の References [5] が ``Monsky, P.: On p-adic power series.
+             Math. Ann. 255, 217--227 (1981)'' を挙げており、両者は別論文である。
+             Theorem 5.6 の正しい出典は上の Monsky1981（On $p$-adic power series）。
+             号（issue number）と DOI は**未確認**（推測で埋めない）。
+             巻・頁・年は取得したページ画像で直接確認した}
+}
+
+@incollection{Deninger2009,
+  author    = {Deninger, Christopher},
+  title     = {$p$-adic entropy and a $p$-adic Fuglede--Kadison determinant},
+  booktitle = {Algebra, Arithmetic, and Geometry: In Honor of Yu. I. Manin, Vol. I},
+  series    = {Progress in Mathematics},
+  volume    = {269},
+  pages     = {423--442},
+  publisher = {Birkh{\"a}user},
+  year      = {2009},
+  doi       = {10.1007/978-0-8176-4745-2_10},
+  eprint    = {math/0608539},
+  archiveprefix = {arXiv},
+  note      = {本文で Theorem 1.1 と Proposition 2.4 を確認済み（$\hbar_p$ が岩澤対数で定義され、
+               付値を測らないことの根拠）。**雑誌論文ではなく論文集の一章**である
+               （zbMATH Open で確認。従前の控えは掲載先が未記入だった）}
+}
+
+@article{Ueki2020,
+  author  = {Ueki, Jun},
+  title   = {$p$-adic Mahler measure and $\mathbb{Z}$-covers of links},
+  journal = {Ergodic Theory and Dynamical Systems},
+  volume  = {40},
+  number  = {1},
+  pages   = {272--288},
+  year    = {2020},
+  doi     = {10.1017/etds.2018.35},
+  eprint  = {1702.03819},
+  archiveprefix = {arXiv},
+  note    = {本文で Remark 2.4（Besser--Deninger の $m_p$ と本論文の $\mathrm{M}_p$ は別物）、
+             Prop 2.7 / Thm 3.3 / Prop 3.6 / Prop 3.7 を確認済み。
+             掲載は 2020 年（arXiv の journal\_ref と zbMATH で確認。従前の控えの 2019 は誤り）}
+}
+
+% ------------------------------------------------------------------
+% グラフの岩澤理論（命題 W の周辺。本文では背景として引用）
+% ------------------------------------------------------------------
+
+@article{Vallieres2021,
+  author  = {Valli{\`e}res, Daniel},
+  title   = {On abelian $\ell$-towers of multigraphs},
+  journal = {Annales Math{\'e}matiques du Qu{\'e}bec},
+  volume  = {45},
+  number  = {2},
+  pages   = {433--452},
+  year    = {2021},
+  doi     = {10.1007/s40316-020-00152-4},
+  eprint  = {2006.14012},
+  archiveprefix = {arXiv},
+  note    = {**本文未読（arXiv abstract のみ）**。グラフの abelian $\ell$-tower における
+             岩澤型不変量の枠組みの出典として挙げる}
+}
+
+@article{McGownVallieres2024,
+  author  = {McGown, Kevin and Valli{\`e}res, Daniel},
+  title   = {On abelian $\ell$-towers of multigraphs III},
+  journal = {Annales Math{\'e}matiques du Qu{\'e}bec},
+  volume  = {48},
+  number  = {1},
+  pages   = {1--19},
+  year    = {2024},
+  doi     = {10.1007/s40316-022-00194-w},
+  eprint  = {2107.07639},
+  archiveprefix = {arXiv},
+  note    = {本文で Theorem 6.1 を確認済み。
+             掲載は Ann. Math. Qu{\'e}. 48(1), 1--19, 2024（zbMATH Open で確認。
+             従前の控えの「2022」は arXiv 投稿年であって掲載年ではない）}
 }
 
 @article{DuBoseVallieres2023,
@@ -59,8 +233,69 @@
   title   = {On $\mathbb{Z}_\ell^d$-towers of graphs},
   journal = {Algebraic Combinatorics},
   volume  = {6},
+  number  = {5},
   pages   = {1331--1346},
   year    = {2023},
   doi     = {10.5802/alco.304},
-  note    = {Theorem A を本文で確認}
+  note    = {本文で Theorem A を確認済み。巻号・頁・年は Kataoka arXiv:2606.03579 の
+             References [3] で確認（zbMATH Open の検索ではヒットしなかった）}
+}
+
+% ------------------------------------------------------------------
+% 決定可能性の非対称（第 7 章）で引用する古典
+% ------------------------------------------------------------------
+
+@article{Lehmer1933,
+  author  = {Lehmer, Derrick H.},
+  title   = {Factorization of certain cyclotomic functions},
+  journal = {Annals of Mathematics (2)},
+  volume  = {34},
+  number  = {3},
+  pages   = {461--479},
+  year    = {1933},
+  doi     = {10.2307/1968172},
+  note    = {Lehmer 問題（Mahler 測度の最小正値）の出典。**本文未読**であり、
+             本論文は「1933 年以来未解決である」という周知の事実を述べるだけで、
+             この論文の内容に依存した主張はしていない。書誌は zbMATH Open で確認}
+}
+
+@article{FerreroWashington1979,
+  author  = {Ferrero, Bruce and Washington, Lawrence C.},
+  title   = {The Iwasawa invariant $\mu_p$ vanishes for abelian number fields},
+  journal = {Annals of Mathematics (2)},
+  volume  = {109},
+  number  = {2},
+  pages   = {377--395},
+  year    = {1979},
+  doi     = {10.2307/1971116},
+  note    = {$\Lambda$ 側が generic に自明（$\mu_p=0$）であることの古典的根拠。
+             **本文未読**（定理の主張のみを周知の事実として引用している）。
+             書誌は zbMATH Open で確認}
+}
+
+@article{AxKochen1966,
+  author  = {Ax, James and Kochen, Simon},
+  title   = {Diophantine problems over local fields III: Decidable fields},
+  journal = {Annals of Mathematics (2)},
+  volume  = {83},
+  pages   = {437--456},
+  year    = {1966},
+  doi     = {10.2307/1970476},
+  note    = {$\mathbb{Q}_p$ の一階理論が決定可能であることの出典（本文
+             `paper_remark_qp_motivation` で言及）。**本文未読**。
+             第 I・II 部は Amer. J. Math. 87 (1965), 605--630 / 631--648（DOI 10.2307/2373065）で、
+             決定可能性そのものは第 III 部にある。書誌は zbMATH Open で確認}
+}
+
+@article{Ershov1965,
+  author  = {Ershov, Yuri L.},
+  title   = {On the elementary theory of maximal normed fields},
+  journal = {Algebra i Logika},
+  volume  = {4},
+  number  = {3},
+  pages   = {31--70},
+  year    = {1965},
+  note    = {Ax--Kochen と独立に同じ決定可能性を得た仕事。**本文未読**（ロシア語原論文は未取得）。
+             DOI は zbMATH Open に登録が無く**未確認**（推測で埋めていない）。
+             同年に Soviet Math. Dokl. 6, 1390--1393 の短報もある}
 }
