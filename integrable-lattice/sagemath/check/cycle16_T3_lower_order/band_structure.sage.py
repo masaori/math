@@ -262,8 +262,11 @@ def band_profile(m, edges, ell, Mmax, sample=None):
 
 print("  (D-1) ell = 2 のトーラス（退化。帯 = 対角 (1:1)、z_H = 1）")
 band_profile(TOR[_sage_const_0 ], TOR[_sage_const_1 ], _sage_const_2 , _sage_const_6 )
-print("     -> 帯では v*phi = 2^{M-1}*2 = 2^M と M とともに増大する（v が定数 2 に飽和するため）。")
-print("        これが n 2^n 項の出所である。")
+print("     -> 帯は M とともに層の個数が増える分布になる。最大値 2^M をとる層は")
+print("        v = 2 に飽和した点（v*phi = 2*2^{M-1} = 2^M）で、その個数は 2^M。")
+print("        飽和は v_2(4) = 2 に由来し、ell 奇では起きない（v_ell(4) = 0）。")
+print("        n 2^n 項は、この飽和と『層ごとの寄与が一定で層数が M に比例する』ことの合わせ技で出る")
+print("        （report 補題 5.5 の証明と注 5.8 を参照）。")
 
 print()
 print("  (D-2) ell = 1 mod 4 のトーラス（退化。H = -(T^2+S^2) が c^2=-1 で零、z_H = 2）")
