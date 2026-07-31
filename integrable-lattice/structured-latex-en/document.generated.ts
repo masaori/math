@@ -23,6 +23,8 @@ import blocks_001a_reader_guide from './content/001a_reader_guide.ts'
 import blocks_002_setup from './content/002_setup.ts'
 import blocks_003_archimedean from './content/003_archimedean.ts'
 import blocks_004_lambda_finite from './content/004_lambda_finite.ts'
+import blocks_006_propositions_TVW from './content/006_propositions_TVW.ts'
+import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
 import blocks_008_prior_art from './content/008_prior_art.ts'
 
 
@@ -33,6 +35,8 @@ export type AllBlocks = [
   ...typeof blocks_002_setup,
   ...typeof blocks_003_archimedean,
   ...typeof blocks_004_lambda_finite,
+  ...typeof blocks_006_propositions_TVW,
+  ...typeof blocks_007_asymmetry_scope,
   ...typeof blocks_008_prior_art,
 ]
 

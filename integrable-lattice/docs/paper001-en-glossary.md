@@ -140,6 +140,44 @@
 | 但し書き / caveat | **caveat** | 日本語版が `content/004_lambda_finite.ts` で既に "caveat" を使っている |
 | 限界 | **limitation** | `content/005_duality.ts`「命題 D に残る限界」＝ "the limitations that remain in Proposition D" |
 
+### 1.4 第 6〜8 章（命題 T・V・W／決定可能性の非対称／スコープと限界）で追記した語
+
+既出性の記述が集中する章なので、**主張の強さを変えない定型表現**をここで固定する。
+後続はこの言い回しを別の語で言い換えてはならない（強めても弱めてもならない）。
+
+| 日本語 | 英語 | 根拠・注意 |
+|---|---|---|
+| 調べた範囲では見つからなかった | **we could not find … in the literature we searched** | 「無い」ではなく「見つけられなかった」。**"there is no …" / "this is new" にしない**（`content/006`・`007` はこの区別を本文で明示している） |
+| 無いとは言わない | **we do not claim that it does not exist** | 上とセットで必ず添える。落とすと主張が強まる |
+| （原文・本文を）確認した | **we have checked … against the original text** / **we have read the text of …** | 現在完了（§2.2 の「済んだ作業」）。二次情報での確認と区別するための語なので落とさない |
+| 既出である / 既出性 | **already appears in the literature** / **prior art**（§1.3） | 「既出」は "already appears in the literature"。**"is well known" にしない**（§1.3 の「既知」と同じ理由） |
+| 本命題の差分 | **the only difference in the present proposition** | 差分が 1 点に限られる、という主張の形を保つ |
+| その強化として位置づく | **is to be read as a strengthening of** | 「上位互換」等に言い換えない |
+| 自認している | **acknowledges** | DuBose–Vallières が数値フィットであると自認している箇所（`content/006`） |
+| 明記している | **states explicitly** | Kataoka が「本論文では追わない」と明記している箇所（`content/006`） |
+| 形式化の範囲 | **scope of the formalisation** | 何を形式化し、何を形式化していないかの宣言。**未形式化の記述を落とさない** |
+| 形式化していない | **is not formalised** | 理由（mathlib に無い／配線が要る）を必ず添える |
+| 桁落ちする | **loses significance** | 浮動小数点で誤った結論が出るという注意（`content/006` の命題 T） |
+| 厳密整数計算 | **exact integer computation** | 上と対で使う |
+| voltage 割り当て | **voltage assignment** | refs.bib の Vallières／DuBose–Vallières の系列で使われる標準語 |
+| 多重グラフ | **multigraph** | refs.bib の Vallières の表題 "…of multigraphs" で確認 |
+| 単数（環の可逆元） | **unit** | 命題 T の証明。数の「単数」ではなく環の可逆元 |
+| 不分岐 | **unramified** | 標準語 |
+| 最低次斉次部分 | **lowest-degree homogeneous part** | 命題 W の ",H" の定義 |
+| 有理零点 | **rational zero** | ",\mathbb{P}^1(\mathbb{F}_\ell)" 上の零点 |
+| 地図（である、新しい定理ではない） | **a map** | 第 7 章の中心語。"framework" / "theory" に格上げしない（主張が強まる） |
+| 注意（〜を〜と呼ばない） | **a caution (we do not call … a connection)** | スケールの偶然一致を接続と呼ばないという注意（第 7 章）。落とさない |
+| 切断（付値体の言語） | **cross-section** | Ax–Kochen / Ershov の「正規化された切断つき」＝ "with a normalised cross-section" |
+| 急収束 Cauchy 列 | **rapidly converging Cauchy sequence** | 逆数学の実数符号化 |
+| 逆数学 / 構成的代数 | **reverse mathematics** / **constructive algebra** | 標準語 |
+| 確立した標準手法 | **an established, standard technique** | 「可算符号で扱う」移動が標準であることの記述。弱めない |
+| 残る未解決点 | **the open points that remain** | 第 8 章。「今後の課題」等に言い換えない |
+
+**内部パスの扱い**: 本文がリポジトリ内部のパス（`lean/README.md` 等）を指している箇所は、
+地の文なら "a table in the accompanying Lean development" のように言い換えてパス文字列を出さない。
+ただし**日本語版が `math` ノード（`\texttt{...}`）で書いている箇所は数式の一致検査に掛かるので、
+勝手に変えてはならない**（`paper_082_remark_formalization` が該当。呼び出し元の判断事項）。
+
 ---
 
 ## 2. 文体の方針
