@@ -121,6 +121,40 @@
 | 反例が破れる／等号が破れる | **equality fails** | 命題 C。「$X$ 例中 $Y$ 例で破れた」は "equality failed for $Y$ out of $X$ examples" |
 | lifting-the-exponent（LTE） | **lifting the exponent (LTE)** | 命題 L。標準語（略号は本文でも LTE のまま） |
 
+### 1.2d 第 4 章に後から増えた 2 ブロック（命題 C''・命題 W*）の英訳で確定させた語
+
+日本語版 `content/004_lambda_finite.ts` の `paper_045_theorem_trace_ladder`（命題 C″）と
+`paper_046_theorem_wstar_different`（命題 W*）を訳す際に決めた語である。
+根拠欄の約束は §0 と同じ（このセッションで確認した一次情報だけを書く）。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| （周期の）階段 | **ladder** | 命題 C″ の中心語（$t_{k+1}\mid p\,t_k$ で 1 段ずつ上がる比喩）。§1.1 の「決定可能性の梯子 = ladder of decidability」と同じ語を充てる。**staircase としない**（本論文はすでに段を数える比喩を ladder で通している）。「階段が 1 段止まる」＝ **the ladder stalls for one step** |
+| しきい値 | **threshold** | 命題 C″ の $w^*+1$ / $2w^*+1$。標準語 |
+| 最良である | **best possible** | 命題 C″「しきい値 $w^*+1$ は最良である」。**optimal としない**（本文は「これ以上下げられない」という否定形の主張であり、best possible がその形を保つ） |
+| 閉形式の不存在 | **the absence of a closed form** | 命題 C″ の表題。§1.2b の「閉形式 = closed form」の派生。**"no closed form is known" にしない**（本文は反例で不存在を示しており、既知性の話ではない） |
+| アフィン式 | **an affine expression** | 命題 C″「$e_k$ を $k$ のアフィン式 $k-c$ で書くことはできない」 |
+| Wieferich 型の量 | **a quantity of Wieferich type** | 命題 C″。§1.2c の「Wall 型」と同じ "of … type" の形に揃えた |
+| Wall 型等式 | **the identity of Wall type** | 既訳の `paper_043_theorem_bound` が「Wall 型の等号」を "equality (of Wall type)" と訳している。命題 C″ の $g_{m+1}=g_m+1$ は等式なので identity を使う |
+| トレース直交性 | **trace orthogonality** | 命題 C″ の証明。$\operatorname{Tr}(xB)\equiv0$ を指す本文の言い方 |
+| トレース双対 | **the trace dual** | 命題 W* の表題。$A^{\vee}=\rho'(\theta)^{-1}A$ を指す |
+| 微分（命題 W* の表題） | **the derivative** | 命題 W* の表題「トレース双対と微分」。構成に現れるのは導関数 $\chi'$・$\rho'$ なので derivative と訳した。**下の「差積」と必ず訳し分ける**（同じブロックの証明に「差積指数」が別語として出る） |
+| 差積（指数） | **the different (the different exponent)** | 命題 W* の証明「$d_{\mathfrak p}$ は差積指数」。Dedekind の different。**derivative と混ぜない** |
+| 分岐指数 | **ramification index** | 標準語。命題 W* の $e_{\mathfrak p}$ |
+| 従順分岐 | **tamely ramified** | 標準語。命題 W*「従順分岐なら $\lceil d_{\mathfrak p}/e_{\mathfrak p}\rceil\le1$」 |
+| $p$ 極大 | **$p$-maximal** | 命題 W* の仮定（$A$ が $p$ において極大位数であること） |
+| 重複度（$\chi=\prod f_i^{a_i}$ の $a_i$） | **multiplicity** | §1.2b の「多重度 = multiplicity」と同語。文脈が違うだけなので語を分けない |
+| 双対基底公式（Euler の） | **Euler's dual basis formula** | 命題 W* の証明。所有格の 's を付ける（§1.2 の Lehmer's problem と同じ扱い） |
+| 分離的 | **separable** | 標準語 |
+| 余核 | **cokernel** | 標準語。記号は本文どおり $\operatorname{coker}$ |
+
+**強調が数式をまたぐ箇所の扱い（命題 C″ の証明）**: 日本語版は
+「**要点は、2 個以上ある $B$ のうち 1 個を…**」と、`**` の中に数式ノードを含めて書いている。
+英語版の生成器はノードをまたぐ `**` を拒否する（§1.5）ので、
+**強調文を数式なしで言い切り、その直後に記号を対応づける文を置いた**
+（"…used as a power of the prime.**" のあとに "The factors in question are the copies of $B$, and the
+prime is $p$." を続ける）。数式ノードの多重集合は日本語版と一致させてある。
+
 **記号の書き方（実測に基づく制約。推測ではない）**: 命題 C′ / C″ の**プライムは ASCII の `'` で書く**
 （`Proposition C'` / `Proposition C''`）。**U+2032 `′` を地の文・タイトルへ書くと英語版の PDF から
 無言で消える**（2026-08-01 に `structured-latex-en` で実測。`build:pdf` の「組めない文字」検査が
