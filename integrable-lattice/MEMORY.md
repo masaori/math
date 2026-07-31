@@ -6,6 +6,18 @@ cycle 15 のユーザー判断点（002 の昇格）は承認済みで論文 001
 **論文 001 が自分で挙げた残務**（`outputs/papers/001_R_Lambda_duality/notes.md` の未完了作業・未解決リスク）を
 一次情報で閉じるサイクルとした。step 列は `docs/tasks/auto-loop-state.md`。
 
+- **step 1 done: 原論文本文を取得し、誤りを 2 件見つけて直した**（`outputs/reports/cycle16_T1_monsky_primary_sources.md`）。
+  GDZ の IIIF で Math. Ann. 255 (1981) のページ画像を直読して **Monsky / Cuoco–Monsky の原典を確認**
+  （DigiZeitschriften は 2025-12-31 に終了、EuDML は 403。GDZ が唯一の経路）。**Kataoka の引用は原典と完全一致**（9 項目、ずれ 0）。
+  - **(誤り 1) 本プロジェクトの文献同定が誤っていた**。Theorem 5.6 の出典は Monsky *On p-adic power series*
+    （Math. Ann. 255(2), 217–227）で、cycle 15 以来そう思い込んでいた *Some invariants of $\mathbb{Z}_p^d$-extensions*
+    （同巻 229–233）**ではない**（後者には §5 も Thm 5.6 も無いことを全文 5 ページで確認）。cycle 15 レポートに訂正を追記。
+  - **(誤り 2) 論文 001 本文の数式が誤っていた**。全域木数のオフセットの $-\mathrm{ord}_p(\#V_X)$ は不要で、
+    $\#V_X$ は相殺する（$\chi=1$ 成分が与えるのは $\kappa_X$ ではなく $\kappa_X\cdot\#V_X$）。
+    Kataoka Prop 4.4 原文・自前導出・厳密整数計算（$d=1,2$ の 39 例中 **22 例で現行式が不一致**）の 3 経路が一致して否定。
+  - 「Kataoka の PDF はテキスト変換で読めない」（cycle 15）も誤りで、`pdftotext -layout` で読める。
+  - **呼び出し元が GDZ の IIIF マニフェストを自分で取得し、Thm 5.6 のページが「On p-Adic Power Series」の
+    canvas 範囲に入ることを独立に確認した**（サブエージェントの主張を鵜呑みにしていない）。sage も再実行して一致確認。
 - **step 2 done: $\lambda=l_0(f)$ の計算可能性が解消した**（論文 001 の残る未解決点のうち最も重いもの）。
   `outputs/reports/cycle16_T1_lambda_l0_computability.md`、本文へ**命題 F**（`paper_prop_F`）として追加。
   **(F1)** $P$ が Laurent 多項式なら $l_0$ は $\mathbb{F}_p$ と $\mathbb{Z}^d$ 上の**有限手続きで計算できる**
