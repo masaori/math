@@ -237,7 +237,7 @@ function renderDocument(inner: string): string {
 \\setCJKsansfont{Hiragino Sans}
 % 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム）は
 % 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
-\\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033}
+\\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033, "21D2}
 % 上の文字クラス指定は**本文モードにしか効かない**。この文書では ★ が数式の中にも現れるので
 % （本文の記号として (★_2) のように使われている）、数式用に和文フォントの箱を用意し、
 % 生成器が数式中の ★ をこれへ置き換える（tools/unicode-math.ts）。

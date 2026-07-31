@@ -1,26 +1,21 @@
 {
-  // このシステムは何にも依存しない（domain-model が最下層である以上、
-  // コンパイラ設定を他プロジェクトから借りると依存方向が逆流する）。
+  // 型検査の水準は、このシステムが持つ tsconfig.base.json を継承する。
+  // base はシステムの**中**にあるので、これは外部への依存ではない
+  // （domain-model が最下層である以上、コンパイラ設定を他プロジェクトから借りると
+  //  依存方向が逆流する。だから base はここに置き、使う側が継承する）。
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2022",
+    // 実行環境ごとに異なる設定は base に置かず、ここで宣言する。
     "lib": ["ES2022"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "types": ["node"],
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     // Node 22.18+ の型ストリップで .ts をそのまま実行する。ビルド成果物は持たない。
-    "allowImportingTsExtensions": true,
+    // （`.ts` 拡張子つき import の許可は base 側にある。）
     "noEmit": true
   },
+  // live-preview はこのシステムの上に載るモジュールで、自分の tsconfig（と workspace）を持つ。
+  // ここから検査するとブラウザ向けの lib / bundler 解決まで抱え込むことになるため含めない。
   "include": ["domain-model", "codegen", "examples", "tools"],
-  "exclude": ["node_modules", "tools/.tmp"]
+  "exclude": ["node_modules", "tools/.tmp", "live-preview"]
 }

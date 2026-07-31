@@ -4,7 +4,7 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
-current_cycle: 18           # cycle 0-18 完了（cycle 18 は 2026-08-01 rank:cycle18 まで done）。cycle 19 は総括の「cycle 19 の焦点（案）」から起こす。
+current_cycle: 19           # cycle 0-18 完了。cycle 19 は 2026-08-01 に総括の「cycle 19 の焦点（案）」から起こした（step 列は下記）。
                             # 2026-06-24 ユーザーが3トラック(docs/themes.md)へ再スコープ。cycle 3 以降はトラック明記。
                             # cycle 16 は 002 の昇格承認後の「論文 001 の残務を閉じる」サイクル。
                             # cycle 17 は cycle 16 総括が挙げた4点（照合の穴・退化トーラス・Lean・既出性）を潰すサイクル。
@@ -236,6 +236,25 @@ cycle 14 step 1 の起動でシェル展開の事故があり、同じ課題が 
 **002 を `outputs/papers/` へ昇格させるか。** G1–G6 はすべて満たした。承認前の判断材料は 002 の
 「昇格判断」節に 4 点（新規性が無いこと／残る未解決点 3 つ／Lean 非対象／投稿前の専門家確認事項）明示してある。
 **cycle 16 の内容はこの判断に依存するため、step 列は承認後に起こす。**
+
+## cycle 19 step 列（2026-08-01 起こし。cycle 18 総括の「cycle 19 の焦点（案）」から起こした）
+
+**前提**: cycle 18 で 4 点はすべて潰れたが、退化塔の閉形式は $\theta(P)\le\ell$ の下でしか出ておらず、
+(a) $\theta\ge\ell+1$（第 2 $\ell$ 進桁が入る領域）、(b) $\theta=\infty$（方向上で $\bar E$ が恒等的に消える）
+の 2 つが未解決として残った（`cycle18_T3_general_degenerate_tower.md` §6.1・§6.2）。
+また (c) $\pi_{\mathrm{tr}}(p,k)$ の閉じた公式（指数列 $(e_k)$ を固有値データから決める式）と
+$w^*$ の代数的記述、および命題 C′ の Lean 化が未着手である（`cycle18_T3_trace_period_bound.md` §7.2）。
+cycle 19 はこの 3 点を step にする。
+
+**焦点 4 番目「論文 001 の投稿判断」は step にしない。** 投稿するか・どこへ出すか・さらに強化してから
+出すかは研究方針＝ユーザー固有の価値判断であり、自動ループでは決めない（下記「方針判断点」）。
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T3 Pure | degenerate_tower_theta_ge_ell_plus_1 | todo | | cycle 18 step 1 §6.1 が「予想ではなく次に試すべき具体的な手順」として置いた計算をやる。$\theta_M(a,b)$ を $a,b$ の $\ell$ 進展開の**桁ごと**に記述する式（Lucas を第 2 桁・第 3 桁へ延長）を作り、$\theta$ が $\ell^2$ に届かない範囲で閉じるかを確かめる。閉形式が出ないなら**何が妨げているかを反例つきで確定**させる。§4.4 の「$\theta\ge\ell+1$ は $M$ 依存の必要条件だが十分条件でない」を証明された判定条件へ格上げできるかも見る。数値だけで支持を積んで「示した」と書かない。 |
+| 2 | T3 Pure | degenerate_tower_theta_infinity | todo | | cycle 18 step 1 §4.5・§6.2 の第 3 の破れ方。方向上で $\bar E$ が恒等的に消える（$\theta=\infty$）場合に、$E$ を $\ell$ で割って取り直す段階的処理が機能するかを一次情報で確かめる。$\ell=5$、$4(1,0)+(0,1)$ の方向 $(1{:}1)$ が具体例。$\theta=\infty$ の点と有限の点が同じ方向に同居する構造を、付値の言葉で記述できるかを詰める。 |
+| 3 | T3 Pure | trace_period_closed_form_and_lean_prop_C | todo | | cycle 18 step 2 §7.2 の未解決。(i) $\pi_{\mathrm{tr}}(p,k)=p^{e_k}\pi(p,1;S)$ の指数列 $(e_k)$ を固有値データから決める式、(ii) 最大単因子の付値 $w^*$ を代数的不変量（Newton 多角形・分岐データ）で書けるか、(iii) 予想 A（$k\ge w^*+1$ で $\pi_{\mathrm{tr}}(p,k+1)\mid p\,\pi_{\mathrm{tr}}(p,k)$、隙間 $w^*+1\le k\le2w^*$）の証明、(iv) 命題 C′ の Lean 化（主張の検算が目的。cycle 17・18 で 2 サイクル連続で本文の誤りを検出した手法）。 |
+| 4 | — | rank:cycle19 | todo | | 総括。3 step の成果を突き合わせ、次サイクルの焦点を出す。 |
 
 ## cycle 18 総括（rank:cycle18, 2026-08-01）
 
