@@ -15,6 +15,8 @@ import Ising2D.Part002.Lemma003_CentralizerIsScalar
 import Ising2D.Representation
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
+import Ising2D.Abstract.GeneratedByBasis
+import Ising2D.Part004.Claim014_ZYGenerateAlgebraAbstract
 import Ising2D.Part006.Claim000_AnticommutatorZY
 import Ising2D.Abstract.SiteLocalAnticomm
 import Ising2D.Part006.Claim000_AnticommutatorZYAbstract
