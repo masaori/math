@@ -10,8 +10,12 @@
 
 ## 未完了作業
 
-1. **残る未解決点 3 つ**（本文 `paper_remark_D_limits` に明記済み）
-   - λ = l_0(f) の計算可能性（有限手続き）は未確立
+1. **残る未解決点**（本文 `paper_remark_D_limits` に明記済み）
+   - ~~λ = l_0(f) の計算可能性（有限手続き）は未確立~~
+     → **2026-07-31（cycle 16 step 2）に解消。** 本文へ命題 F（`paper_prop_F`）として入れた。
+     台が有限（＝ P が Laurent 多項式）なら l_0 は 𝔽_p と ℤ^d 上の有限手続きで計算できる（d 任意・
+     非退化性不要）。同時に境界も確定した: 一般の ℤ_p[[Γ]] の元では d ≥ 2 のとき決定不能（停止問題へ還元）。
+     根拠 `outputs/reports/cycle16_T1_lambda_l0_computability.md`、検証 `sagemath/check/cycle16_T1_lambda_l0/`。
    - 低位項の係数 λ_i, μ_i, ν（i ≥ 1）の明示公式が無い
    - 退化点が n とともに増える P の整理が未了
 2. **Lean 形式化の完了範囲**は `integrable-lattice/lean/README.md` の「形式化の現状」表に従う。
