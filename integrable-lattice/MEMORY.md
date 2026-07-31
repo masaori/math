@@ -19,6 +19,10 @@
 - **移行前後で証明の中身は 1 文字も変わっていない**: ブロック 32・ラベル 26・相互参照 27 で一致。
   content の差分は「`sourcePath`/`sourceOrdinal`/`conversion` の削除と `origin` の追加」だけである
   （`git diff <base> -- content/` を機械的にフィルタして確認済み）。
+- **自動ループへの申し送り**: 移行後にブロックを足すときは `sourcePath` / `sourceOrdinal` /
+  `conversion` を**書かない**（由来を残すなら `origin: { path, ordinal }`）。移行と並行して
+  main へ入った新規ブロックが旧フィールドで書かれ、型検査が落ちる事故が実際に起きた。
+  直し方は `node tools/codemod-origin.ts --apply`（冪等）→ `npm run gen`。
 - **システム側は 1 ファイルも変更していない。**
 - 既知の残件（本移行とは無関係の先行不具合）: `npm run build:pdf` は `ℓ` `⇒` が欧文フォントに無く落ちる（移行前の 419dd34 でも同一の失敗を実測）。
   `npm run check` は `.tex` 生成までしか回さないので通る。
