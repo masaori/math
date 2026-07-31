@@ -1,0 +1,501 @@
+# cycle 17 / T3 Pure: cycle 16 が残した「照合の穴」2 件を塞ぐ。
+#
+# 対応する証明本体: outputs/reports/cycle17_T3_delta_and_kappa_contributions.md
+# 前提となる証明本体: outputs/reports/cycle16_T3_lower_order_and_degeneracy.md（定理 N1/N2、系 N3、定義 3.1 の Delta）
+#                     outputs/reports/cycle14_T3_two_variable_criterion.md（命題 W = 定理 5、補題 8.2、補題 8.4）
+#
+# 記号は cycle16 report に従う（_defs.sage の冒頭コメントも参照）。
+#   D = det L、mu = v_ell(content D)、E = ell^{-mu} D、g = E(1+T,1+S)
+#   k = ord(g mod ell)、H = その最低次斉次部分、J_0 = min{J>=1 : phi(ell^J) > k}
+#   Delta = 定義 3.1 の補正項（レベル ell^{J_0-1} 以下の 1 の冪根での有限和 - k S_{m_0} - 2k m_0）
+#
+# cycle 16 の穴（RESULTS.md「検証できていないこと」1・2）:
+#   (A) Delta != 0 の例が 1 件も無い。Delta を計算できた 5 件はすべて ell=3, k=2, J_0=2 で Delta=0。
+#       → 定理 N2 の要である補正項が非自明に効く場面を一度も照合できていない。
+#   (B) v_ell(kappa(X)) > 0 の非退化例が 1 件も無い。3 寄与のうち 1 つが未照合。
+#
+# 本スクリプトが検証するもの:
+#   Step 1  (A) Delta != 0 の例を明示的に与え、塔の実測 ord_ell(kappa_n) と照合する。
+#           Delta は D の係数だけから決まる（塔の値を一切使わない）ので、これは
+#           フィットではなく out-of-sample 予言の照合である。
+#           同時に、定理 N1 の予言（Delta=0 とした式）が外れることを見る
+#           ＝ 定理 N2 が定理 N1 より真に強いことの実証。
+#   Step 2  命題 A（本サイクルで証明。report §2）の照合。
+#             ずれ指数 delta := min_{d<k}( eps_d (ell-1) + d ) - k   （eps_d = min_{p+q=d} v_ell(c_pq)）
+#           が delta > 0 なら Delta = 0 である、という判定条件を大量の例で照合し、
+#           あわせて「Delta != 0 は delta <= 0 の側でしか起きない」ことを観察する。
+#           系 A'（k <= ell なら Delta = 0）も同時に照合する。
+#   Step 3  Delta の内訳（点ごと）。低レベル点で v_ell(E) が Newton 多角形の下限
+#           min_d( eps_d + d/phi(ell^M) ) と一致するか、下限が一意に達成されるかを出す。
+#   Step 4  (B) v_ell(kappa(X)) > 0 かつ非退化の例で、塔の実測と N1/N2 を照合する。
+#           J_0 = 1（定理 N1 そのもの）と J_0 >= 2（定理 N2）の両方を用意し、
+#           さらに mu > 0 と Delta != 0 を同時に持つ例（3 寄与同時）も入れる。
+#   Step 5  探索の射程（どの ell・どの k・どの族・何件見たか）の集計。
+#
+# 実行: sage delta_examples.sage
+
+import os
+import sys
+import time
+import random
+from collections import Counter
+
+sys.stdout.reconfigure(line_buffering=True)
+HERE = os.path.dirname(os.path.abspath(sys.argv[0]))
+load(os.path.join(HERE, '..', 'cycle16_T3_lower_order', '_defs.sage'))
+
+print("=" * 78)
+print("cycle 17 / T3 Pure: Delta != 0 の例の構成と v_ell(kappa(X)) 寄与の照合")
+print("=" * 78)
+
+
+# --------------------------------------------------------------------------
+# 追加の道具（cycle16 の _defs.sage には無いもの）
+# --------------------------------------------------------------------------
+
+def eps_profile(D, ell, mu):
+    """g = E(1+T,1+S) の全次数 d ごとの eps_d = min_{p+q=d} v_ell(c_pq)。
+
+    単項式で正化してから展開する（clear_monomial 相当。単項式は (1,1) で単元なので
+    ord も各次数の係数の付値も変えない）。"""
+    Ev = E_of(D, ell, mu)
+    shifted = Rzw(Lzw(Ev) * zL**16 * wL**16)
+    f = f_series(shifted)
+    prof = {}
+    for (e, c) in f.dict().items():
+        if c == 0:
+            continue
+        d = e[0] + e[1]
+        v = ZZ(c).valuation(ell)
+        prof[d] = min(prof.get(d, oo), v)
+    return prof
+
+
+def defect_index(prof, k, ell):
+    """ずれ指数 delta = min_{d<k}( eps_d (ell-1) + d ) - k。
+       d < k の項が存在しなければ None（この場合も Delta = 0 が従う）。"""
+    cand = [prof[d] * (ell - 1) + d for d in prof if d < k]
+    if not cand:
+        return None
+    return min(cand) - k
+
+
+def coeff_vals(D, ell, mu):
+    """g = E(1+T,1+S) の (p,q) -> v_ell(c_pq)（c_pq != 0 のものだけ）。"""
+    Ev = E_of(D, ell, mu)
+    f = f_series(Rzw(Lzw(Ev) * zL**16 * wL**16))
+    return {e: ZZ(c).valuation(ell) for (e, c) in f.dict().items() if c != 0}
+
+
+def newton_bound_point(cv, vt, vs):
+    """点 (t,s) での下限 min_{(p,q)} ( v(c_pq) + p*v(t) + q*v(s) ) と達成個数。
+
+    v(t) は t=0 のとき +oo。その場合 p>=1 の項は寄与しない（p=0 の項だけが残る）ので、
+    p*v(t) は p=0 なら 0 と解釈する（0*oo=0）。軸上の点（zeta=1 または xi=1）を
+    正しく扱うために、全次数 d ではなく (p,q) 単位で下限を取る。"""
+    vals = {}
+    for ((p, q), e) in cv.items():
+        x = e
+        if p > 0:
+            if vt is oo:
+                continue
+            x += p * vt
+        if q > 0:
+            if vs is oo:
+                continue
+            x += q * vs
+        vals[(p, q)] = x
+    if not vals:
+        return oo, []
+    mn = min(vals.values())
+    return mn, [pq for pq in sorted(vals) if vals[pq] == mn]
+
+
+def show_inv(name, ell, m, edges):
+    inv = invariants(m, edges, ell)
+    if inv is None:
+        print("  %s: (H) 不成立 または D=0 → 対象外" % name)
+        return None, None, None
+    prof = eps_profile(inv['D'], ell, inv['mu'])
+    Dl = delta_correction(inv['D'], ell, inv['mu'], inv['k'], inv['J0'])
+    d0 = defect_index(prof, inv['k'], ell)
+    print("  %s" % name)
+    print("    ell=%d  m=%d  edges=%s" % (ell, m, edges))
+    print("    mu=%d  k=%d  z_H=%d(非退化=%s)  J_0=%d  kappa(X)=%d  v_ell(kappa(X))=%d"
+          % (inv['mu'], inv['k'], len(inv['zeros']), len(inv['zeros']) == 0,
+             inv['J0'], inv['kX'], inv['vkX']))
+    print("    H=%s   eps_d (d<=k)=%s   ずれ指数 delta=%s   Delta=%s"
+          % (inv['H'], {d: prof[d] for d in sorted(prof) if d <= inv['k']}, d0, Dl))
+    return inv, prof, Dl
+
+
+def check_tower(inv, ell, m, edges, Dl, nmax, tag, budget=None):
+    """塔の実測と N2 予言（Delta 込み）／N1 予言（Delta=0）を段ごとに照合する。
+       返り値: (実測 list, N2 が成立した最小の n, N2 の破れ件数(n >= J_0-1 の範囲))"""
+    t0 = time.time()
+    ords = tower_ords(m, edges, ell, nmax, tag=tag, budget=budget)
+    print("    ord_%d(kappa_n) n=0..%d = %s   (%.1fs)" % (ell, nmax, ords, time.time() - t0))
+    first_ok = None
+    bad = 0
+    checked = 0
+    for n in range(nmax + 1):
+        if n >= len(ords) or ords[n] is None or ords[n] == 'TO':
+            continue
+        p2 = predicted_ord(inv, ell, Dl, n)
+        p1 = predicted_ord(inv, ell, QQ(0), n)
+        ok2 = (p2 == ords[n]); ok1 = (p1 == ords[n])
+        if ok2 and first_ok is None:
+            first_ok = n
+        if n >= inv['J0'] - 1:
+            checked += 1
+            if not ok2:
+                bad += 1
+        print("      n=%d 実測=%-6s N2予言=%-8s %s   N1予言(Delta=0)=%-8s %s%s"
+              % (n, ords[n], p2, 'OK ' if ok2 else 'NG!', p1, 'OK ' if ok1 else 'NG ',
+                 '   [n >= J_0-1 の射程内]' if n >= inv['J0'] - 1 else ''))
+    print("      → N2 が成立した最小の n = %s（定理 N2 の主張は n_0 <= J_0-1 = %d）"
+          % (first_ok, inv['J0'] - 1))
+    print("      → n >= J_0-1 の範囲で照合 %d 段、N2 の破れ %d 件" % (checked, bad))
+    return ords, first_ok, bad
+
+
+# ==========================================================================
+# Step 1: (A) Delta != 0 の例と、塔での out-of-sample 照合
+# ==========================================================================
+
+print()
+print("#" * 78)
+print("# Step 1  穴 (A): 補正項 Delta が非自明に効く例（Delta != 0）")
+print("#" * 78)
+print("""
+cycle 16 では Delta を計算できた 5 件がすべて Delta=0 だったため、
+定理 N2 の補正項が効く場面を一度も照合できていなかった。
+以下の例はすべて **非退化** かつ **Delta != 0** である。
+Delta は D の係数（レベル ell^{J_0-1} 以下の 1 の冪根での付値）だけから決まり、
+塔の値 kappa_n を一切使わない。したがって下の照合は完全な out-of-sample である。
+""")
+
+# 例は Step 5 の乱択掃引（同じ seed で再現可能）から拾った代表例を決め打ちしてある。
+DELTA_EX = [
+    ('D1  ell=2 ブーケ 5 ループ (k=4)', 2, 1,
+     [(0, 0, (3, -1)), (0, 0, (0, 2)), (0, 0, (0, -3)), (0, 0, (1, 1)), (0, 0, (-2, 3))], 5),
+    ('D2  ell=2 ブーケ 6 ループ (k=6)', 2, 1,
+     [(0, 0, (-1, 2)), (0, 0, (-3, -2)), (0, 0, (0, -1)), (0, 0, (3, -2)),
+      (0, 0, (0, -3)), (0, 0, (-3, -2))], 5),
+    ('D3  ell=3 2 頂点 (k=4)', 3, 2,
+     [(0, 1, (3, 0)), (1, 0, (-3, 2)), (1, 1, (-1, -3)), (0, 1, (-1, 0)), (0, 1, (1, 3))], 3),
+    ('D4  ell=2 2 頂点 (k=4, v_2(kappa(X))=1)', 2, 2,
+     [(0, 1, (2, 1)), (0, 0, (-3, -3)), (1, 0, (-2, -3)), (1, 1, (3, -3)), (0, 0, (0, 1))], 5),
+    ('D5  ell=3 2 頂点 (k=4, v_3(kappa(X))=1)', 3, 2,
+     [(1, 0, (-3, 0)), (0, 1, (-3, 1)), (0, 0, (1, 0)), (0, 0, (0, 3)),
+      (1, 1, (1, -2)), (1, 1, (-1, -1)), (1, 0, (-3, 1))], 3),
+]
+
+step1 = dict(n=0, nonzero=0, bad=0, checked=0)
+for (name, ell, m, edges, nmax) in DELTA_EX:
+    print()
+    inv, prof, Dl = show_inv(name, ell, m, edges)
+    if inv is None:
+        continue
+    assert len(inv['zeros']) == 0, "非退化のはず"
+    step1['n'] += 1
+    if Dl != 0:
+        step1['nonzero'] += 1
+    ords, first_ok, bad = check_tower(inv, ell, m, edges, Dl, nmax, name)
+    step1['bad'] += bad
+    step1['checked'] += 1
+
+print()
+print("Step 1 まとめ: 対象 %d 件、うち Delta != 0 が %d 件、"
+      "n >= J_0-1 の範囲での N2 の破れ %d 件"
+      % (step1['n'], step1['nonzero'], step1['bad']))
+
+
+# ==========================================================================
+# Step 2: 命題 A（ずれ指数による Delta=0 の判定条件）の照合
+# ==========================================================================
+
+print()
+print("#" * 78)
+print("# Step 2  命題 A: ずれ指数 delta > 0 ならば Delta = 0")
+print("#" * 78)
+print("""
+命題 A（report §2 で証明）:
+  非退化とし、eps_d := min_{p+q=d} v_ell(c_pq)、
+    delta := min_{ d < k } ( eps_d (ell-1) + d ) - k        （d<k の項が無ければ delta := +oo）
+  と置く。delta > 0 ならば、**すべてのレベル M >= 1 のすべての点**で
+    v_ell(E(zeta,xi)) = k / phi(ell^M)
+  が成り立ち、したがって Delta = 0 で、定理 N1 の閉形式が J_0 に関係なく n >= 0 の全段で成立する。
+系 A'（同）: 非退化かつ k <= ell ならば Delta = 0。
+  （k < ell+1 <=> (ell-1) > k-2 で、eps_d >= 1・d >= k_min >= 2 から delta > 0 が出る。）
+
+以下はこの命題の照合である。delta > 0 の例で Delta != 0 が 1 件でも出れば命題 A は偽。
+""")
+
+def rand_graph(rng, nv_max=3, emax=7, box=3):
+    m = rng.randint(1, nv_max)
+    r = rng.randint(2, emax)
+    edges = []
+    for _ in range(r):
+        if m == 1:
+            u = v = 0
+        else:
+            u = rng.randrange(m); v = rng.randrange(m)
+        edges.append((u, v, (rng.randint(-box, box), rng.randint(-box, box))))
+    return m, edges
+
+SAMPLES = int(3000)
+census = {}
+violate_A = []
+violate_Ap = []
+for ell in [2, 3, 5, 7, 11]:
+    rng = random.Random(int(20260731) + int(ell))
+    t0 = time.time()
+    st = Counter()
+    joint = Counter()
+    for _ in range(SAMPLES):
+        m, edges = rand_graph(rng)
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        st['有効'] += 1
+        st['k=%d' % inv['k']] += 1
+        if len(inv['zeros']) != 0:
+            st['退化'] += 1
+            continue
+        st['非退化'] += 1
+        st['nd_k=%d' % inv['k']] += 1
+        prof = eps_profile(inv['D'], ell, inv['mu'])
+        d0 = defect_index(prof, inv['k'], ell)
+        Dl = delta_correction(inv['D'], ell, inv['mu'], inv['k'], inv['J0'])
+        if Dl is None:
+            st['Delta 計算不能(E=0 の点あり)'] += 1
+            continue
+        st['Delta 計算済'] += 1
+        if Dl != 0:
+            st['Delta != 0'] += 1
+        pos = (d0 is None or d0 > 0)
+        joint[(pos, Dl == 0)] += 1
+        if pos and Dl != 0:
+            violate_A.append((ell, m, edges, inv, d0, Dl))
+        if inv['k'] <= ell and Dl != 0:
+            violate_Ap.append((ell, m, edges, inv, d0, Dl))
+    census[ell] = (st, joint, time.time() - t0)
+    print("  ell=%2d  有効 %4d / 非退化 %4d / Delta 計算済 %4d / Delta != 0 %4d   (%.1fs)"
+          % (ell, st['有効'], st['非退化'], st['Delta 計算済'], st['Delta != 0'], census[ell][2]))
+    print("         k 分布(全体)   = %s"
+          % {int(kk[2:]): vv for (kk, vv) in sorted(st.items()) if kk.startswith('k=')})
+    print("         k 分布(非退化) = %s"
+          % {int(kk[5:]): vv for (kk, vv) in sorted(st.items()) if kk.startswith('nd_k=')})
+    print("         (delta>0, Delta=0) の同時分布 = %s"
+          % {("delta>0" if a else "delta<=0", "Delta=0" if b else "Delta!=0"): c
+             for ((a, b), c) in sorted(joint.items(), key=lambda x: (not x[0][0], not x[0][1]))})
+
+print()
+print("  命題 A の反例（delta > 0 なのに Delta != 0）: %d 件" % len(violate_A))
+print("  系 A' の反例（k <= ell なのに Delta != 0）  : %d 件" % len(violate_Ap))
+for v in violate_A[:5]:
+    print("    反例: %s" % (v,))
+for v in violate_Ap[:5]:
+    print("    反例: %s" % (v,))
+
+
+# ==========================================================================
+# Step 3: Delta の内訳（点ごとの Newton 多角形との比較）
+# ==========================================================================
+
+print()
+print("#" * 78)
+print("# Step 3  Delta の内訳: 低レベル点ごとの v_ell(E) と Newton 多角形の下限")
+print("#" * 78)
+print("""
+Delta != 0 の正体は「レベル M < J_0 の点で v_ell(E) が k/phi(ell^M) からずれる」ことである。
+各点について次の 3 つを並べる。
+  実測 v = v_ell(E(zeta,xi))
+  補題 8.4 の予言 k/phi(ell^M)
+  Newton 下限 NB = min_{(p,q)} ( v_ell(c_pq) + p v(t) + q v(s) ) と、下限を達成する (p,q) の個数
+    （t = zeta-1, s = xi-1。zeta=1 なら v(t)=+oo すなわち p>=1 の項は消える。
+      軸上の点を正しく扱うため、全次数 d ではなく (p,q) 単位で下限を取る。）
+下限を達成する (p,q) が 1 個なら非アルキメデス的評価は鋭く v = NB でなければならない。
+複数なら打ち消しが起こりうるので v >= NB しか言えない。
+最後に sum(v - k/phi) が定義 3.1 の Delta と一致することを確認する（定義の内部整合性の照合）。
+""")
+
+for (name, ell, m, edges, nmax) in DELTA_EX[:3]:
+    inv = invariants(m, edges, ell)
+    cv = coeff_vals(inv['D'], ell, inv['mu'])
+    Ev = E_of(inv['D'], ell, inv['mu'])
+    m0 = inv['J0'] - 1
+    print()
+    print("  %s   (J_0=%d, m_0=%d, k=%d)" % (name, inv['J0'], m0, inv['k']))
+    tally = Counter()
+    sharp_bad = 0
+    excess = QQ(0)
+    N = ell**m0
+    for a in range(N):
+        for b in range(N):
+            if a == 0 and b == 0:
+                continue
+            i = m0 - ZZ(a).valuation(ell) if a != 0 else 0
+            j = m0 - ZZ(b).valuation(ell) if b != 0 else 0
+            M = max(i, j)
+            vt = QQ(1) / euler_phi(ell**i) if i > 0 else oo
+            vs = QQ(1) / euler_phi(ell**j) if j > 0 else oo
+            alpha = QQ(1) / euler_phi(ell**M)
+            v = point_val(Ev, ell, m0, a, b)
+            pred = QQ(inv['k']) * alpha
+            nb, argmin = newton_bound_point(cv, vt, vs)
+            tally[(M, v, pred, nb, len(argmin))] += 1
+            excess += v - pred
+            if len(argmin) == 1 and v != nb:
+                sharp_bad += 1
+    print("    (M, 実測v, 予言k/phi, Newton下限NB, 下限を達成する(p,q)の個数) -> 点数")
+    for (key, cnt) in sorted(tally.items(), key=lambda x: (x[0][0], x[0][1])):
+        (M, v, pred, nb, nargs) = key
+        print("      M=%d  v=%-8s  k/phi=%-8s  NB=%-8s  #argmin=%d  -> %d 点  %s"
+              % (M, v, pred, nb, nargs, cnt, "" if v == pred else "<-- ずれ"))
+    print("    下限が一意なのに v != NB だった点: %d 件（0 なら非アルキメデス的評価が鋭い）"
+          % sharp_bad)
+    Dl = delta_correction(inv['D'], ell, inv['mu'], inv['k'], inv['J0'])
+    print("    sum(v - k/phi) = %s、定義 3.1 の Delta = %s  -> %s"
+          % (excess, Dl, "一致" if excess == Dl else "不一致!!"))
+
+
+# ==========================================================================
+# Step 4: (B) v_ell(kappa(X)) > 0 かつ非退化の例
+# ==========================================================================
+
+print()
+print("#" * 78)
+print("# Step 4  穴 (B): v_ell(kappa(X)) > 0 かつ非退化の塔")
+print("#" * 78)
+print("""
+cycle 16 では「2 頂点 ell 重平行辺で狙ったが構成した候補はすべて退化した」ため
+v_ell(kappa(X)) の寄与が 1 件も照合できていなかった。
+以下の例はすべて非退化かつ v_ell(kappa(X)) > 0 である。
+B1-B3 は J_0 = 1 すなわち **定理 N1 そのもの**（Delta=0、n>=0 の全段で成立するはず）、
+B4-B6 は J_0 >= 2（定理 N2）。B6 は mu > 0・v_2(kappa(X)) > 0・Delta != 0 の **3 寄与同時**。
+""")
+
+KAPPA_EX = [
+    ('B1  ell=7  2 頂点 7 重平行辺 (J_0=1)', 7, 2,
+     [(0, 1, (-2, 2)), (0, 1, (1, -1)), (0, 1, (-1, 2)), (0, 1, (0, -2)),
+      (0, 1, (-2, -2)), (0, 1, (2, 1)), (0, 1, (2, 0))], 2),
+    ('B2  ell=11 2 頂点 11 重平行辺 + ループ (J_0=1)', 11, 2,
+     [(0, 1, (0, 2)), (0, 1, (-1, 0)), (0, 1, (0, 0)), (0, 1, (0, 1)), (0, 1, (-1, -1)),
+      (0, 1, (1, -1)), (0, 1, (-2, -1)), (0, 1, (-1, -2)), (0, 1, (1, 1)), (0, 1, (2, 1)),
+      (0, 1, (1, 0)), (0, 0, (1, 0)), (0, 0, (-2, -2))], 1),
+    ('B3  ell=13 2 頂点 13 重平行辺 + ループ (J_0=1)', 13, 2,
+     [(0, 1, (2, 0)), (0, 1, (-1, 0)), (0, 1, (-1, -1)), (0, 1, (-2, 2)), (0, 1, (1, 1)),
+      (0, 1, (-1, 1)), (0, 1, (1, -1)), (0, 1, (-2, -2)), (0, 1, (2, 2)), (0, 1, (2, -2)),
+      (0, 1, (2, 0)), (0, 1, (-2, 1)), (0, 1, (-1, -1)), (0, 0, (2, 1))], 1),
+    ('B4  ell=5  2 頂点 5 重平行辺 (J_0=2)', 5, 2,
+     [(0, 1, (0, 0)), (0, 1, (-2, -2)), (0, 1, (-2, -2)), (0, 1, (-2, -1)), (0, 1, (1, 0))], 3),
+    ('B5  ell=3  2 頂点 3 重平行辺 + ループ (mu=1, J_0=2)', 3, 2,
+     [(0, 1, (0, 0)), (0, 1, (0, 0)), (0, 1, (0, 0)),
+      (0, 0, (-2, -2)), (0, 0, (-2, -1))], 3),
+    ('B6  ell=2  3 頂点 (mu=1, v_2(kappa(X))=3, Delta!=0 の 3 寄与同時)', 2, 3,
+     [(2, 1, (2, 0)), (2, 0, (0, -3)), (1, 2, (1, 2)), (2, 0, (-2, -2)),
+      (2, 1, (2, -1)), (1, 2, (3, 1))], 5),
+]
+
+step4 = dict(n=0, bad=0, vkx=0)
+for (name, ell, m, edges, nmax) in KAPPA_EX:
+    print()
+    inv, prof, Dl = show_inv(name, ell, m, edges)
+    if inv is None:
+        continue
+    step4['n'] += 1
+    if inv['vkX'] > 0:
+        step4['vkx'] += 1
+    ords, first_ok, bad = check_tower(inv, ell, m, edges, Dl, nmax, name)
+    step4['bad'] += bad
+
+print()
+print("Step 4 まとめ: 対象 %d 件、うち v_ell(kappa(X))>0 が %d 件、N2 の破れ %d 件"
+      % (step4['n'], step4['vkx'], step4['bad']))
+
+
+# ==========================================================================
+# Step 5: 探索の射程
+# ==========================================================================
+
+print()
+print("#" * 78)
+print("# Step 5  探索の射程（尽くしていない範囲を明示する）")
+print("#" * 78)
+print()
+print("乱択掃引（Step 2）: 各 ell につき %d 標本。" % SAMPLES)
+print("  グラフ族: 頂点数 m in {1,2,3}、辺数 r in {2..7}、voltage in [-3,3]^2、")
+print("            端点は一様乱択（m=1 ならブーケ）。seed は ell ごとに固定。")
+print("  素数: ell in {2,3,5,7,11}。ell >= 17 は掃引していない。")
+print("  網羅ではない。上の box / 辺数 / 頂点数を超える族は未探索である。")
+print()
+for ell in [2, 3, 5, 7, 11]:
+    (st, joint, dt) = census[ell]
+    ks = sorted(int(kk[2:]) for kk in st if kk.startswith('k='))
+    print("  ell=%2d: 有効 %4d、非退化 %4d、Delta!=0 %4d、観測された k = %s"
+          % (ell, st['有効'], st['非退化'], st['Delta != 0'], ks))
+
+
+# ==========================================================================
+# Step 6: 敵対的レビュー — 塔の値を独立な方法で計算し直す
+# ==========================================================================
+
+print()
+print("#" * 78)
+print("# Step 6  敵対的レビュー: 塔の値を Kirchhoff の行列木定理で独立に再計算する")
+print("#" * 78)
+print("""
+Step 1・4 の照合は tower_ords（2 段終結式）に完全に依存している。
+終結式の実装が間違っていれば、Delta の照合が「合った」ように見えても意味がない。
+そこで小さい n について、被覆グラフを実際に組んで Kirchhoff の行列木定理で
+kappa_n を直接数え、終結式の結果と一致するかを見る（実装の独立な第 2 経路）。
+また k_min = ord_ZZ(g) >= 2（report §2 の補題 A.1）も併せて確認する。
+""")
+
+step6_bad = 0
+step6_n = 0
+for (name, ell, m, edges, nmax) in DELTA_EX + KAPPA_EX:
+    inv = invariants(m, edges, ell)
+    prof = eps_profile(inv['D'], ell, inv['mu'])
+    kmin = min(prof.keys())
+    # 行列木定理が現実的な範囲: 被覆の頂点数 m*ell^(2n) を 2000 程度で抑える
+    nn = 0
+    while m * ell**(2 * (nn + 1)) <= 2000:
+        nn += 1
+    ords_res = tower_ords(m, edges, ell, nmax, tag=name)
+    ok = True
+    got = []
+    for n in range(nn + 1):
+        N = ell**n
+        if not connected_by_lattice(m, edges, N, N):
+            got.append(None); continue
+        kap = kappa_derived(m, edges, N, N)
+        # tower_ords は v_ell(kappa(X) * prod_{(zeta,xi)!=(1,1)} D) - 2n を返す。
+        # 被覆の全域木数の公式 kappa_n = ell^{-2n} kappa(X) prod D の ell^{-2n} を
+        # -2n が担っているので、tower_ords の値は v_ell(kappa_n) そのものである。
+        # したがって行列木側は valuation をそのまま取る（ここで -2n を引くと二重に引く）。
+        o = ZZ(kap).valuation(ell)
+        got.append(o)
+        step6_n += 1
+        if n < len(ords_res) and ords_res[n] not in (None, 'TO') and ords_res[n] != o:
+            ok = False; step6_bad += 1
+    print("  %-52s k_min=%d(>=2:%s)  行列木 n=0..%d: %s  終結式: %s  -> %s"
+          % (name.split()[0] + ' ' + name.split()[1], kmin, kmin >= 2, nn, got,
+             ords_res[:nn + 1], "一致" if ok else "不一致!!"))
+
+print()
+print("Step 6 まとめ: 独立に再計算した段 %d 件、終結式との不一致 %d 件" % (step6_n, step6_bad))
+
+print()
+print("時間上限で打ち切った計算の一覧（黙って範囲を狭めないため全件出す）:")
+if not SKIPS:
+    print("  なし")
+for s in SKIPS:
+    print("  %s" % (s,))
+
+print()
+print("=" * 78)
+print("終了 %s" % el())
+print("=" * 78)
