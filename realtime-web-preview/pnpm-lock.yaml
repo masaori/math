@@ -36,6 +36,9 @@ importers:
 
   domain-model:
     dependencies:
+      '@structured-latex/system':
+        specifier: link:../../structured-latex
+        version: link:../../structured-latex
       zod:
         specifier: ^3.23.8
         version: 3.25.76

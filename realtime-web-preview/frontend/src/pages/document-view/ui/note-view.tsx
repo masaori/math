@@ -16,8 +16,8 @@ const NoteBody = ({ note }: { note: Note }): ReactElement => (
     <div className="text-sm text-amber-950">
       <NodeList nodes={note.body} />
     </div>
-    {note.sourcePath !== undefined ? (
-      <p className="mt-1 text-[11px] text-amber-700">{note.sourcePath}</p>
+    {note.origin !== undefined ? (
+      <p className="mt-1 text-[11px] text-amber-700">{note.origin.path}</p>
     ) : null}
   </article>
 )
@@ -26,7 +26,7 @@ const NoteBody = ({ note }: { note: Note }): ReactElement => (
  * ブロックに紐づく参照用ノートを、本文と視覚的に区別して（破線・別色・折りたたみ）描画する。
  * 既定で折りたたみ、本文の読みを妨げないようにする。
  */
-export const AttachedNotes = ({ notes }: { notes: Note[] }): ReactElement | null => {
+export const AttachedNotes = ({ notes }: { notes: readonly Note[] }): ReactElement | null => {
   if (notes.length === 0) {
     return null
   }
@@ -48,7 +48,7 @@ export const AttachedNotes = ({ notes }: { notes: Note[] }): ReactElement | null
  * どのブロックにも紐づかなかったノート（targets 未解決）。
  * 黙って捨てると気付けないので、未解決 ref と同じ思想で明示的に警告表示する。
  */
-export const OrphanNotes = ({ notes }: { notes: Note[] }): ReactElement | null => {
+export const OrphanNotes = ({ notes }: { notes: readonly Note[] }): ReactElement | null => {
   if (notes.length === 0) {
     return null
   }

@@ -29,7 +29,11 @@ const statusForError = (error: LoadDocumentError): number => {
  * usecase の Result を api-contract 準拠のレスポンスにシリアライズするだけ（薄く保つ）。
  */
 export const makeGetDocumentHandler =
-  (blockSource: BlockSourceGateway, noteSource: NoteSourceGateway) =>
+  (
+    blockSource: BlockSourceGateway,
+    noteSource: NoteSourceGateway,
+    blockMetaKeys: readonly string[],
+  ) =>
   async (_request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     const result = await getDocument(blockSource, noteSource)
 
@@ -37,6 +41,8 @@ export const makeGetDocumentHandler =
       const body: DocumentResponseBody = {
         blocks: result.data.blocks,
         notes: result.data.notes,
+        // ブラウザ側も同じ実行時スキーマで検証するので、許可するメタデータのキーを一緒に運ぶ。
+        blockMetaKeys,
         generatedAt: new Date().toISOString(),
         sourceLabel: result.data.sourceLabel,
       }

@@ -28,7 +28,7 @@ export const BlockCard = ({
   notes,
 }: {
   block: TheoremLikeBlock
-  notes: Note[]
+  notes: readonly Note[]
 }): ReactElement => {
   const title = block.title ?? null
   const hasProof = block.proof !== undefined && block.proof.length > 0
@@ -67,7 +67,7 @@ export const BlockCard = ({
 
       <AttachedNotes notes={notes} />
 
-      <footer className="mt-2 text-[11px] text-slate-400">{block.sourcePath}</footer>
+      <footer className="mt-2 text-[11px] text-slate-400">{block.origin?.path}</footer>
     </section>
   )
 }

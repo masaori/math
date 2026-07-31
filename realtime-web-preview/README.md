@@ -17,13 +17,27 @@
 
 | パッケージ | 役割 |
 |---|---|
-| `domain-model/` | Block/Node の Zod schema と api-contract（SSOT） |
+| `domain-model/` | 入力言語（リポジトリ直下 `structured-latex/` が持つ正本）の再輸出、api-contract、ビューア固有のラベル解決／ノート配置 |
 | `backend/` | Fastify。Clean Architecture（gateway のみ）。API + SSE + 静的配信 |
 | `frontend/` | React + Vite + Tailwind + TanStack Query。FSD 単一ページ。KaTeX 描画 |
+
+## 入力言語の正本はここに無い
+
+ブロック・ノード・ノートの型と実行時検証は、リポジトリ直下の
+[`structured-latex/`](../structured-latex/)（システム）が 1 つだけ持つ。本ツールはその
+**利用者**であり、`domain-model/` に入力言語を再定義しない。依存は pnpm の
+`link:../../structured-latex` で繋いでいる（`domain-model/package.json`）。
+
+システムは Node 22.18+ の型ストリップ前提で `dist` を持たないため、**本ツールを使う前に
+`structured-latex/` 側でも一度 `pnpm install` しておく必要がある**（システムの `zod` を
+そこから解決するため）。
 
 ## セットアップと起動
 
 ```sh
+# 入力言語の正本（システム）の依存（初回のみ）
+(cd ../structured-latex && pnpm install)
+
 # 依存インストール（初回のみ。ビルドスクリプト承認込み）
 pnpm install
 
@@ -54,6 +68,14 @@ node backend/dist/entrypoint/server.js --source /path/to/content --notes /path/t
 | 参照用ノート dir | `RWP_NOTES_DIR` | `--notes` | structured-latex/notes（`--source` 指定時はその隣の `notes`） |
 | ポート | `RWP_PORT` | `--port` | 4321 |
 | バインド host | `RWP_HOST` | `--host` | 0.0.0.0 |
+| ブロックのメタデータキー | `RWP_BLOCK_META_KEYS` | `--block-meta-keys` | （空） |
+
+`RWP_BLOCK_META_KEYS` は、入力ソースのブロックが持つ**プロジェクト固有メタデータのキー名**を
+カンマ区切りで宣言する（例: integrable-lattice なら
+`RWP_BLOCK_META_KEYS=habitat,realEscape,verification,lean`）。
+システムの実行時スキーマは未宣言のキーを拒否する（`.strict()`）一方、本ビューアはドメイン非依存で
+キー名を内蔵できないため、設定として外から与える。宣言しないまま表示すると
+`Unrecognized key(s) in object` として validation エラー表示になる。
 
 入力ソースのファイル形式は **TypeScript（`.ts`）**。Node 22.18 以降の型ストリップで
 そのまま実行されるため、入力ソース側にビルド工程は要らない

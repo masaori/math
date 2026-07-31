@@ -8,6 +8,7 @@ import {
 import type { ReactElement } from 'react'
 import type { ConnectionStatus, DocumentViewPageDomainModel } from '../model/page-domain-model'
 import { BlockCard } from './block-card'
+import { FigureView } from './figure-view'
 import { HeadingView } from './heading-view'
 import { OrphanNotes } from './note-view'
 import { LabelIndexProvider } from './ref-resolver'
@@ -30,13 +31,12 @@ const ConnectionBadge = ({ status }: { status: ConnectionStatus }): ReactElement
   return <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${className}`}>{text}</span>
 }
 
-/** ブロック1件を kind に応じて（章見出し / 定理型ブロック）描画する。 */
-const BlockView = ({ block, notes }: { block: Block; notes: Note[] }): ReactElement =>
-  block.kind === 'heading' ? (
-    <HeadingView heading={block} />
-  ) : (
-    <BlockCard block={block} notes={notes} />
-  )
+/** ブロック1件を kind に応じて（章見出し / 図表 / 定理型ブロック）描画する。 */
+const BlockView = ({ block, notes }: { block: Block; notes: readonly Note[] }): ReactElement => {
+  if (block.kind === 'heading') return <HeadingView heading={block} />
+  if (block.kind === 'figure') return <FigureView block={block} notes={notes} />
+  return <BlockCard block={block} notes={notes} />
+}
 
 const ErrorPanel = ({ error }: { error: LoadDocumentError }): ReactElement => (
   <div className="rounded-md border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
@@ -57,7 +57,10 @@ const ErrorPanel = ({ error }: { error: LoadDocumentError }): ReactElement => (
 )
 
 /** 本文と参照用ノートを描画する（ノートは紐づけ先ブロックの中に折りたたんで置く）。 */
-const DocumentBody = ({ blocks, notes }: { blocks: Block[]; notes: Note[] }): ReactElement => {
+const DocumentBody = ({
+  blocks,
+  notes,
+}: { blocks: readonly Block[]; notes: readonly Note[] }): ReactElement => {
   const placement = placeNotes(blocks, notes)
   return (
     <LabelIndexProvider value={buildLabelIndex(blocks)}>

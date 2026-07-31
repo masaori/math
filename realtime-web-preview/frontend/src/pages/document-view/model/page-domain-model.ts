@@ -15,9 +15,9 @@ export type DocumentMeta = {
 }
 
 export type DocumentContent = {
-  blocks: Block[]
+  blocks: readonly Block[]
   /** 参照用ノート（文書本体ではない。最終成果物には載らない）。 */
-  notes: Note[]
+  notes: readonly Note[]
   meta: DocumentMeta
 }
 
