@@ -33,6 +33,15 @@ export default defineBlocks([
     labels: ["paper_prop_G_infty"],
     habitat: "Qbar",
     verification: ["sagemath/check/cycle19_T3_theta_infinity"],
+    lean: [
+      "IntegrableLattice.bouquet_cases_exclusive",
+      "IntegrableLattice.card_diag_three",
+      "IntegrableLattice.card_diag_two",
+      "IntegrableLattice.sum_level_A",
+      "IntegrableLattice.sum_level_B",
+      "IntegrableLattice.ordKappa_of_sigma",
+      "IntegrableLattice.theoremJ8_eq_XPrime",
+    ],
     statement: [
       paragraph([
         "In the setting of ",

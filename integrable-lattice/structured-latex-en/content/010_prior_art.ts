@@ -55,17 +55,17 @@ import { cite, defineBlocks, list, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "paper_100_heading_prior_art",
+    id: "paper_200_heading_prior_art",
     kind: "heading",
     level: 1,
-    origin: { path: "structured-latex-en/content/009_prior_art.ts", ordinal: 1 },
+    origin: { path: "structured-latex-en/content/010_prior_art.ts", ordinal: 1 },
     title: { text: "Relation to the literature — what is already known, and what we did not find" },
     labels: [],
   },
   {
-    id: "paper_101_remark_prior_art_overall",
+    id: "paper_201_remark_prior_art_overall",
     kind: "remark",
-    origin: { path: "structured-latex-en/content/009_prior_art.ts", ordinal: 2 },
+    origin: { path: "structured-latex-en/content/010_prior_art.ts", ordinal: 2 },
     title: { text: "The overall verdict: broadly known" },
     labels: ["paper_prior_art_overall"],
     habitat: "none",
@@ -85,9 +85,9 @@ export default defineBlocks([
     ],
   },
   {
-    id: "paper_102_remark_prior_art_countabilisation",
+    id: "paper_202_remark_prior_art_countabilisation",
     kind: "remark",
-    origin: { path: "structured-latex-en/content/009_prior_art.ts", ordinal: 3 },
+    origin: { path: "structured-latex-en/content/010_prior_art.ts", ordinal: 3 },
     title: { text: "Contribution (b), the countabilisation: the move itself is a standard device" },
     labels: ["paper_prior_art_countabilisation"],
     habitat: "none",
@@ -144,9 +144,9 @@ export default defineBlocks([
     ],
   },
   {
-    id: "paper_103_remark_prior_art_propositions",
+    id: "paper_203_remark_prior_art_propositions",
     kind: "remark",
-    origin: { path: "structured-latex-en/content/009_prior_art.ts", ordinal: 4 },
+    origin: { path: "structured-latex-en/content/010_prior_art.ts", ordinal: 4 },
     title: { text: "Propositions V, T and W against the literature" },
     labels: ["paper_prior_art_propositions"],
     habitat: "none",
@@ -265,9 +265,9 @@ export default defineBlocks([
     ],
   },
   {
-    id: "paper_104_remark_prior_art_limits",
+    id: "paper_204_remark_prior_art_limits",
     kind: "remark",
-    origin: { path: "structured-latex-en/content/009_prior_art.ts", ordinal: 5 },
+    origin: { path: "structured-latex-en/content/010_prior_art.ts", ordinal: 5 },
     title: { text: "The limits of this search, and why nothing is inferred from a count of zero" },
     labels: ["paper_prior_art_limits"],
     habitat: "none",

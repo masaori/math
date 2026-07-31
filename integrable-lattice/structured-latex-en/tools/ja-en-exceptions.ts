@@ -41,6 +41,23 @@ const INTERNAL_PATH_REMOVED =
   "これらのノードは数式ではなく `\\texttt{}` に入れたファイル名であり、" +
   "数学的な記号は 1 文字も変えていない。日本語版は正本なので変更していない。";
 
+/**
+ * `\text{}` の中身が**後置修飾の日本語**であるために、英訳すると語順が変わる場合。
+ *
+ * 例: `(=\ \bar{\tilde E}\ \text{の原始二項式部分の次数})` は「〜の次数」という後置修飾であり、
+ * `\text{}` の中身だけを英訳して同じ位置に置くと
+ * `(=\ \bar{\tilde E}\ \text{the degree of the primitive binomial part of})` となって
+ * 英語として読めない（かつ「b = \bar{\tilde E}」と読める偽の等式になる）。
+ * そこで `\text{}` の前後にある記号の**順序だけ**を英語の語順へ直した。
+ * **記号は 1 つも足していないし、1 つも消していない。数学は変えていない。**
+ */
+const JAPANESE_IN_TEXT_MACRO_REORDERED =
+  JAPANESE_IN_TEXT_MACRO +
+  " 加えて、`\\text{}` の中身が日本語の後置修飾（「〜の次数」「〜で相異なる」「〜なる δ 上」）" +
+  "である箇所は、中身だけを同じ位置で英訳すると英語として読めず、偽の等式に読める形になる。" +
+  "そこで `\\text{}` の前後にある記号の**順序だけ**を英語の語順へ直した。" +
+  "記号は 1 つも足しても消してもいない（数学は変えていない）。";
+
 export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {
   paper_012_definition_ladder: JAPANESE_IN_TEXT_MACRO,
   paper_042_theorem_pi_p1: JAPANESE_IN_TEXT_MACRO + " 加えて、" + INTERNAL_PATH_REMOVED,
@@ -50,4 +67,6 @@ export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {
   paper_053_theorem_lower_order: INTERNAL_PATH_REMOVED,
   paper_055_theorem_theta_infinity: JAPANESE_IN_TEXT_MACRO + " 加えて、" + INTERNAL_PATH_REMOVED,
   paper_082_remark_formalization: INTERNAL_PATH_REMOVED,
+  paper_101_theorem_s_infinity_decision: JAPANESE_IN_TEXT_MACRO_REORDERED,
+  paper_101_theorem_digit_branch: JAPANESE_IN_TEXT_MACRO_REORDERED,
 };

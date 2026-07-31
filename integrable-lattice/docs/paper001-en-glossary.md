@@ -508,3 +508,54 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 - realEscape・タイトルは**数式ノードを持てない**ので、`L → ∞` のような記号の羅列を避け、
   "the limit in which L tends to infinity" のように語で書く（記号だけがイタリックにならず、
   地の文の中で字体が割れるため）。
+
+---
+
+## 追記: 命題 K（`content/009_s_infinity_decision.ts`）と命題 R（`content/009_theta_recursion.ts`）の語
+
+日本語版に後から入った第 10 章（命題 K）・第 11 章（命題 R）の英訳作業中に確定させた語。
+**§1 の表と同じ拘束力を持つ**（後続がここにある語を別の語で訳してはならない）。
+根拠は §0 の約束どおり、**このセッションで実際に読んだ日本語版本文だけ**である。
+英語圏の教科書は取得できていない。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 判定手続き | **decision procedure** | §1.2 の既定どおり（"decidable" と対で使う標準語）。命題 K の (K3) は文字どおり有限の判定手続きである |
+| 判定条件の同一性 | **the two criteria agree** | (K2) の表題。命題 G′ の (iii) と命題 J の (iv) が同じ判定であるという主張なので、"equivalence of criteria" ではなく「一致する」を主語述語で書く |
+| 対応（(K1) の表題） | **the correspondence** | 原始ベクトルの類と $\mathbb{P}^1(\mathbb{Z}_\ell)$ の点の間の写像 $\iota$ を指す。**"identification" にしない**（本文は単射性と像を別々に主張しており、同一視と言い切ると主張が強まる） |
+| 非同伴 | **non-associate** | 標準語（UFD の素元が単数倍で移り合わないこと）。§1.2 の non-degenerate と同じくハイフンつきに統一する |
+| 素元 | **prime (element)** | 標準語。既約元ではなく素元である（本文は UFD と明示している） |
+| 増大イデアル（$(\chi^v-1)$） | **augmentation-type ideal** | (K5 の限界) の「増大イデアル」。群環の augmentation ideal そのものではなく、方向ごとの $(\chi^v-1)$ を指すので **-type** を付けた。**未確認**（この語が文献の標準形かは一次情報を取得できていない） |
+| 擬同型分解 | **pseudo-isomorphism decomposition** | 岩澤加群の構造定理の標準語 |
+| 格子周長 | **lattice perimeter** | (K7) の $\mathrm{per}$。「各辺の格子長の和」という定義を初出で必ず添える（造語に近いため） |
+| 格子多角形 | **lattice polygon** | 標準語。§1.2 の Newton polygon（1 変数）とも §1.5 追記の Newton polytope（2 変数）とも別語なので混ぜない |
+| 仮定の解消 | **the hypothesis is discharged** | (K5) の表題「仮定 (N) の解消」。**"removed" にしない**（本文は仮定が自動的に満たされることを示しており、消したのではない） |
+| 数値支持どまり | **numerical support only** | (K6 の限界)。§1.4 の「数値フィット = a fit」と同じ扱いで、**"evidence" と訳して強めない** |
+| 桁枝再帰 / 桁枝分解 | **the digit-branch recursion** / **the digit-branch decomposition** | 命題 R の中心語。$\ell$ 進展開の第 0 桁で枝分けする再帰。§1.5 追記の「桁定理 = the digit theorem」と同語根で揃えた |
+| 打ち消しは起きない | **no cancellation occurs** | 第 11 章の表題。§1.5 追記の「打ち消し = cancellation」の派生。**"cancellation is impossible" にしない**（本文が示すのはこの分解では構造的に起こらないことで、任意の分解での不可能性ではない） |
+| 構造的に起こらない | **cannot occur, for structural reasons** | 上と対で使う。理由が構造にあることを落とさない |
+| 有効（上界が有効である） | **effective** | (R3)。計算可能な明示上界を与えるという意味の標準語。**"efficient" と混ぜない** |
+| 終結式による付値 | **the valuation as a resultant** | (R4) の表題。付値が終結式ひとつの $\ell$ 進付値として書けるという主張。**"valuation by resultants" と複数形にしない** |
+| 完全分岐 | **totally ramified** | 標準語。§1.2d の「従順分岐 = tamely ramified」と対 |
+| 剰余次数 | **residue degree** | 標準語 |
+| 無仮定化 | **removing the hypotheses** | (R5) の表題。**"unconditional" と一語で言い換えない**（本文は「(J3) が置いていた仮定を外す」という具体的な操作を述べている） |
+| 最小点の tie | **the tie between minimising indices** | (R2 の限界)。日本語版が英語のまま "tie" を使っている。§1.5 追記の「最小点が一意 = the minimum is attained at a single index」と同じく、**点ではなく添字**であることを保つ |
+| 型 III の項（$n\ell^n$ 項） | **the type III term** | 見出し・タイトルで $n\ell^n$ を語で言う必要があるときの言い方（タイトルは数式ノードを持てない。§3.4）。本文では従来どおり数式ノード $n\ell^n$ を使う |
+
+### 記号 ℓ を地の文へ書けないこと（実測に基づく制約）
+
+**U+2113 `ℓ` は日本語版 `tools/unicode-math.ts` の対応表に無い。** 地の文へ書くと LaTeX へ写されず、
+英語版の PDF から無言で消える（`build:pdf` の「組めない文字」検査が落ちる）。
+既訳が「p 進」を "p-adic" と一般名として使っている（§1.5 追記の「p 進化 = the p-adic refinement」）ので、
+**地の文で素数を名指しする必要がない箇所は "p-adic" と書く**。素数が $\ell$ であることを言う必要がある
+箇所は、$\ell$ を数式ノードとして置き、その直後に地の文で "-adically" と続ける（命題 R (R3) がその形）。
+
+### `\text{}` の中の日本語が後置修飾である場合（命題 K・R で新たに生じた型）
+
+§3（判断事項）3 の方針は「`\text{}` の中身だけを英訳する」であった。命題 K・R には、
+**`\text{}` の中身が日本語の後置修飾**である箇所がある（`(=\ \bar{\tilde E}\ \text{の原始二項式部分の次数})`、
+`\text{の元が}…\text{で相異なる}`、`\text{max は}…\text{なる }\delta\text{ 上}`）。
+中身だけを同じ位置で英訳すると英語として読めず、1 つ目は **`b = \bar{\tilde E}` と読める偽の等式**になる。
+そこで **`\text{}` の前後にある記号の順序だけ**を英語の語順へ直した。
+**記号は 1 つも足していないし、1 つも消していない。** 対象ブロックは
+`structured-latex-en/tools/ja-en-exceptions.ts` へ、この事情を明記した理由つきで登録した。
