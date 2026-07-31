@@ -1,6 +1,20 @@
 # MEMORY
 
-## cycle 18 進行中（2026-07-31）
+## cycle 18 完了（rank:cycle18, 2026-08-01）
+
+**cycle 17 が挙げた 4 点はすべて潰れた。** 詳細は `docs/tasks/auto-loop-state.md`「cycle 18 総括」。
+
+- **一般の退化塔**（step 1）: 消滅深度 $\theta$ を定義し、**$\theta\le\ell$ なら方向の不変量**（$m=\ell+1$ で
+  初めて第 2 $\ell$ 進桁）を証明。その下で閉形式 $\Theta=\sum_P\theta(P)$。**$\ell=2,3$ が射程外なのは構造的必然**。
+- **$\pi_{\mathrm{tr}}(p,k)$ の上界**（step 2）: $\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$。
+  **直すのは指数ではなく基準レベル**。命題 C の破れは命題 B の帰結だと説明がついた。
+- **Lean 化**（step 3）: **本文の誤り 2 件**（命題 N の SML 例外は無限／命題 W の $\nu\in\mathbb{Q}$）。
+  **cycle 17 に続き形式化が「主張の検算」として効いた**。今回の事故型は「根拠 report から本文へ移す段で壊れる」。
+- **Monsky 1989**（step 4）: **Open Access で入手できた**（cycle 17 の「購読制限」は誤診断）。
+  $\alpha^*$ の明示式は無く、**命題 W は既出にならない**。**投稿前の宿題は 0 件**。
+- **次のユーザー判断点**: **論文 001 を投稿するか**（宿題は尽きた。「おおむね既出」であることは cycle 17 で確定済み）。
+
+## cycle 18 の各 step の詳細（2026-07-31 起こし）
 
 - **step 3 done: 命題 N・T・W を Lean に通して主張を検算した**（`outputs/reports/cycle18_ops_lean_props_NTW.md`）。
   cycle 17 と同じく**形式化は「主張の検算」として効いた**。
