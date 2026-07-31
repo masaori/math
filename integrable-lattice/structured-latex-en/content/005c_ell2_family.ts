@@ -307,7 +307,7 @@ export default defineBlocks([
         \begin{cases}
         2n\,2^{n}+4\cdot2^{n}-6n-1 & (\text{A}\alpha:\ \lambda_0=1)\\
         2n\,2^{n}+2\lambda_0\,2^{n}-2n-3\lambda_0+2 & (\text{A}\beta:\ \lambda_0\ge2)\\
-        2n\,2^{n}+\lambda_1\,(2^{n}-1) & (\text{B}:\ \lambda_1\ge2,\ \text{and } n=1 \text{ in every case})\\
+        2n\,2^{n}+\lambda_1\,(2^{n}-1) & (\text{B}:\ \lambda_1\ge2,\ \text{and } n=1 \text{ when B and }\lambda_1=1)\\
         2n\,2^{n}+2n-1+2w & (\text{B}:\ \lambda_1=1,\ n\ge2).
         \end{cases}`,
       ),

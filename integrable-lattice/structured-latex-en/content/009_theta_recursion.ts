@@ -95,7 +95,7 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`\overline{\Phi_{(a,b)}}(x)=\sum_{c=0}^{\ell-1}(1+x)^{c}\,g_c(x^{\ell}),
-        \qquad g_c(y)=\sum_{\gamma\in\mathcal{G}_c}\mu\,(1+y)^{\gamma}`,
+        \qquad g_c(y)=\sum_{\gamma\in\mathcal{G}_c}\mu_{c+\ell\gamma}\,(1+y)^{\gamma}`,
       ),
       paragraph(["holds, by ", math(String.raw`(1+x)^{\ell}=1+x^{\ell}`), "."]),
       paragraph([
