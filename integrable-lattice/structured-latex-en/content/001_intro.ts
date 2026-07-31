@@ -98,9 +98,9 @@ export default defineBlocks([
     statement: [
       paragraph(["We fix the hierarchy of sets used in this paper as follows."]),
       displayMath(
-        String.raw`\underbrace{\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\overline{\mathbb{Q}}}_{\text{無条件に決定可能}}
-\ \subset\ \underbrace{\overline{\mathbb{Q}}(\ell_p)\ \text{の非線形部}}_{\text{Schanuel 条件付き}}
-\ \subset\ \underbrace{\mathbb{R}/\mathbb{C}}_{\text{決定不能}}`,
+        String.raw`\underbrace{\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\overline{\mathbb{Q}}}_{\text{decidable unconditionally}}
+\ \subset\ \underbrace{\overline{\mathbb{Q}}(\ell_p)\ \text{non-linear part}}_{\text{decidable under Schanuel}}
+\ \subset\ \underbrace{\mathbb{R}/\mathbb{C}}_{\text{undecidable}}`,
       ),
       paragraph([
         "Here ",

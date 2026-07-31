@@ -14,4 +14,13 @@
  *
  * **この表は 0 件で始める。** 増やすときは、増やした本人が上の規約を満たすこと。
  */
-export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {};
+const JAPANESE_IN_TEXT_MACRO =
+  "数式中の `\\text{}` の中身は数式ではなく地の文であり、翻訳の対象である。" +
+  "英語版の生成器は和文フォントを読み込まないため、日本語のままだと PDF から無言で消える" +
+  "（実測: build-latex.ts の「組めない文字」検査がビルドを落とす）。" +
+  "そこで `\\text{}` の**中身だけ**を英訳し、その外側の数式記号は 1 文字も変えていない。" +
+  "したがってこの差は訳し落としでも数学の書き換えでもない。日本語版は正本なので変更していない。";
+
+export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {
+  paper_012_definition_ladder: JAPANESE_IN_TEXT_MACRO,
+};

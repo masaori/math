@@ -19,15 +19,19 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { Label } from './labels.generated.ts'
 import blocks_001_intro from './content/001_intro.ts'
+import blocks_001a_reader_guide from './content/001a_reader_guide.ts'
 import blocks_002_setup from './content/002_setup.ts'
 import blocks_003_archimedean from './content/003_archimedean.ts'
+import blocks_008_prior_art from './content/008_prior_art.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_001_intro,
+  ...typeof blocks_001a_reader_guide,
   ...typeof blocks_002_setup,
   ...typeof blocks_003_archimedean,
+  ...typeof blocks_008_prior_art,
 ]
 
 /** 全ノート。 */
