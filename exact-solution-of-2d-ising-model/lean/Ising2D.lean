@@ -8,6 +8,8 @@ import Ising2D.Basic
 import Ising2D.Abstract.MatrixUnits
 import Ising2D.Abstract.ScalarCentral
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
+import Ising2D.Abstract.Conjugation
+import Ising2D.Part000.Claim045_ConjugationIsRingHomAbstract
 import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
 import Ising2D.Part002.Theorem000_TensorBasis
 import Ising2D.Part002.Lemma001_ScalarIdentityCommutes

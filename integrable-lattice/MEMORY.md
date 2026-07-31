@@ -1,5 +1,34 @@
 # MEMORY
 
+## cycle 16 進行中（2026-07-31）＝ 論文 001 の残務を閉じるサイクル
+
+cycle 15 のユーザー判断点（002 の昇格）は承認済みで論文 001 は執筆済みなので、cycle 16 は新規探索ではなく
+**論文 001 が自分で挙げた残務**（`outputs/papers/001_R_Lambda_duality/notes.md` の未完了作業・未解決リスク）を
+一次情報で閉じるサイクルとした。step 列は `docs/tasks/auto-loop-state.md`。
+
+- **step 1 done: 原論文本文を取得し、誤りを 2 件見つけて直した**（`outputs/reports/cycle16_T1_monsky_primary_sources.md`）。
+  GDZ の IIIF で Math. Ann. 255 (1981) のページ画像を直読して **Monsky / Cuoco–Monsky の原典を確認**
+  （DigiZeitschriften は 2025-12-31 に終了、EuDML は 403。GDZ が唯一の経路）。**Kataoka の引用は原典と完全一致**（9 項目、ずれ 0）。
+  - **(誤り 1) 本プロジェクトの文献同定が誤っていた**。Theorem 5.6 の出典は Monsky *On p-adic power series*
+    （Math. Ann. 255(2), 217–227）で、cycle 15 以来そう思い込んでいた *Some invariants of $\mathbb{Z}_p^d$-extensions*
+    （同巻 229–233）**ではない**（後者には §5 も Thm 5.6 も無いことを全文 5 ページで確認）。cycle 15 レポートに訂正を追記。
+  - **(誤り 2) 論文 001 本文の数式が誤っていた**。全域木数のオフセットの $-\mathrm{ord}_p(\#V_X)$ は不要で、
+    $\#V_X$ は相殺する（$\chi=1$ 成分が与えるのは $\kappa_X$ ではなく $\kappa_X\cdot\#V_X$）。
+    Kataoka Prop 4.4 原文・自前導出・厳密整数計算（$d=1,2$ の 39 例中 **22 例で現行式が不一致**）の 3 経路が一致して否定。
+  - 「Kataoka の PDF はテキスト変換で読めない」（cycle 15）も誤りで、`pdftotext -layout` で読める。
+  - **呼び出し元が GDZ の IIIF マニフェストを自分で取得し、Thm 5.6 のページが「On p-Adic Power Series」の
+    canvas 範囲に入ることを独立に確認した**（サブエージェントの主張を鵜呑みにしていない）。sage も再実行して一致確認。
+- **step 2 done: $\lambda=l_0(f)$ の計算可能性が解消した**（論文 001 の残る未解決点のうち最も重いもの）。
+  `outputs/reports/cycle16_T1_lambda_l0_computability.md`、本文へ**命題 F**（`paper_prop_F`）として追加。
+  **(F1)** $P$ が Laurent 多項式なら $l_0$ は $\mathbb{F}_p$ と $\mathbb{Z}^d$ 上の**有限手続きで計算できる**
+  （$d$ 任意・非退化性不要・ℝ 脱出なし）。cycle 15 が有限化を諦めたのは素イデアルの添字集合
+  $\mathbb{P}^{d-1}(\mathbb{Z}_p)$ が非可算だからだったが、**Laurent 多項式を割りうるのは有理方向だけ**で、
+  候補は台の差の原始方向（有限個）に潰れる。**(F2)** 一方、一般の $\mathbb{Z}_p[[\Gamma]]$ の元では
+  $d\ge2$ のとき $m_0=0$ の約束の下でも判定は**決定不能**（停止問題へ還元）。
+  **境界は $d$ ではなく台の有限性にある**（本プロジェクトの対象はすべて決定可能側）。$\mu$ も同型の境界。
+  検証 `sagemath/check/cycle16_T1_lambda_l0/`（4 通りの独立実装）。**呼び出し元が sage を再実行し、
+  サブエージェントのログと完全一致することを確認**した。新規性は主張しない（対応する文献命題は未特定）。
+
 ## 完了（2026-07-31）: 救済PR #23 の残余 2 点を既存レポートへ追記（ファイルは救わない）
 
 `docs/salvage-audit-2026-07-31.md` の「PR #23」節の判定に従い、ブランチ
