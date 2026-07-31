@@ -268,8 +268,7 @@ export default defineBlocks([
   {
     id: "paper_043b_theorem_trace_bound",
     kind: "theorem",
-    sourcePath: "structured-latex/content/004_lambda_finite.ts",
-    sourceOrdinal: 5,
+    origin: { path: "structured-latex/content/004_lambda_finite.ts", ordinal: 5 },
     title: { text: "命題 C′（トレース列の周期の上界。命題 C のトレース列版）" },
     labels: ["paper_prop_C_trace"],
     habitat: "Z",
@@ -429,7 +428,6 @@ export default defineBlocks([
         "。",
       ]),
     ],
-    conversion: { status: "added" },
   },
   {
     id: "paper_044_theorem_newton",
