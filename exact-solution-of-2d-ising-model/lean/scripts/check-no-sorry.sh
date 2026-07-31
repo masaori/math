@@ -35,6 +35,16 @@ fi
 targets=(
   Ising2D.tensorPowBasis
   Ising2D.matTensorPowBasis
+  Ising2D.Abstract.piTensorBasis
+  Ising2D.Abstract.tensorPowBasisOfBasis
+  Ising2D.Abstract.basisOfLinearEquiv
+  Ising2D.Abstract.matrixUnitBasis
+  Ising2D.tensorPowBasis_eq_abstract
+  Ising2D.matTensorPowBasis_eq_abstract
+  Ising2D.matrixUnitBasis_eq_abstract
+  Ising2D.abstract_matrixUnitBasis_apply_eq_E
+  Ising2D.kroneckerTensorPowBasis
+  Ising2D.kroneckerTensorPowBasis_apply
   Ising2D.tensorPowAlgEquiv
   Ising2D.toFinPowAlgEquiv
   Ising2D.E_mul_E

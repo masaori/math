@@ -13,6 +13,8 @@ import Ising2D.Part002.Theorem000_TensorBasis
 import Ising2D.Part002.Lemma001_ScalarIdentityCommutes
 import Ising2D.Part002.Lemma003_CentralizerIsScalar
 import Ising2D.Representation
+import Ising2D.Abstract.TensorPowerBasis
+import Ising2D.Part002.Theorem000_TensorBasisAbstract
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
 import Ising2D.Part006.Claim000_AnticommutatorZY
