@@ -1,5 +1,31 @@
 # MEMORY
 
+## cycle 18 step 1 完了（2026-08-01）＝ 一般の退化塔（T3 Pure）
+
+**cycle 17 §6.1 が「特定できなかった」と書いた条件が確定した。**
+`outputs/reports/cycle18_T3_general_degenerate_tower.md` / `sagemath/check/cycle18_T3_general_degenerate/`。
+
+- **道具**: $\tilde E=\sum c_{pq}z^pw^q$ に対し $A_m(a,b)=\sum c_{pq}\binom{pa+qb}{m}\in\mathbb{Z}$。
+  cycle 17 がトーラスに限って使った「分子をそのまま $\pi$ 展開する」を**任意の voltage グラフへ一般化**した形。
+  **消滅深度** $\theta(a,b)=\min\{m:\ell\nmid A_m\}$ が中心の不変量で、
+  これは $\bar E$ を 1 径数部分群 $y\mapsto(y^a,y^b)$ に制限した $y=1$ での消滅位数に等しい。
+- **主結果（証明）**: 全方向で $\theta(P)\le\ell$ なら、退化していても全ての $n\ge0$ で
+  $\mathrm{ord}_\ell(\kappa_n)=\mu(\ell^{2n}-1)+\frac{\Theta}{\ell-1}(\ell^n-1)-2n+v_\ell(\kappa_X)$、$\Theta=\sum_P\theta(P)$。
+  **cycle 16 定理 N1 も cycle 17 定理 E も、この特別な場合**（$\theta\equiv k$ / $\Theta=2\ell+2+2z_H$）。
+- **障害の同定**: 条件が破れるのは $\theta\ge\ell+1$ のときだけ。$m\le\ell$ では $A_m\bmod\ell$ が
+  $(a,b)\bmod\ell$ だけで決まる（Lucas ＋ $A_1=0$）。**$m=\ell+1$ で初めて第 2 $\ell$ 進桁が入る。**
+  退化方向では $\theta\ge k+1$ なので、**$\ell=2,3$ の退化塔は構造的に射程外**（$\ell=2$ が反例なのは必然）。
+  **$M$ 依存は $\ell=2$ 固有ではなく、$\ell=3,5$ にも実例を構成した。**
+- **型 II（退化だが $n\ell^n$ 項なし）の判定条件が得られた。** cycle 16 は実例 0 件、cycle 17 はトーラス 1 族。
+  本サイクルの母集団 2081 個では $\ell\ge5$ の退化塔が**すべて**型 II と判定できた（593/637/1082 件）。
+- **自分の誤りを 1 件検出して訂正**: 当初「digit 安定性は $m=\ell$ で破れる」と書いたが、
+  その寄与は $A_1(u,v)=0$ で打ち消されるので破れは $m=\ell+1$。
+  **「破れの件数が正であること」を要求する検証を書いていたから見つかった**（0 件で満足しない検証設計が効いた）。
+- **数値支持どまりの項目は 1 件だけ**明示（$\ell=3$, bq $(1,0),(0,1),(1,1)$ は仮定を満たさないのに式が当たる）。
+- **残る未解決**: $\theta\ge\ell+1$ の退化塔の閉形式（次の一手は Lucas を第 2 桁へ延長して
+  $\theta_M$ を桁ごとに記述すること）／$\theta=\infty$ の場合／一般の $d$。
+- 本文（`structured-latex/content/005_duality.ts`）へ **(G6)** として反映済み。`npm run check` 通過。
+
 ## cycle 17 完了（2026-07-31）＝ cycle 16 総括の 4 点を潰すサイクル
 
 **掲げた 4 点はすべて潰れた**（3 点は肯定的に決着、1 点＝既出性は「おおむね既出」という決着）。
