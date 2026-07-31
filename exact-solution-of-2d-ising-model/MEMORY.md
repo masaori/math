@@ -23,6 +23,18 @@
 main の既存 check と同内容）、`.sage.py` 8 個（プリパーサ生成物）、ブランチ側の `252_.../_prelude.sage`
 （main と関数シグネチャが逆で非互換。main 側 `_prelude.sage` は一切変更していない）。
 
+## 完了（2026-07-31）: 救済PR #21 の唯一の残余（K₂* の二分法による独立求解）を統合
+
+- `sagemath/check/231_duality_c2_star_eq_s2_star_c2/check_02_K2star_by_bisection.sage` を追加。
+  閉じた式 K₂* = −(1/2)log(tanh K₂) を使わずに sinh(2K₂)sinh(2x) = 1 を二分法で解き、
+  閉じた式の値と一致することを確かめる（既存の 01 は閉じた式を前提にしているので、02 は独立経路）。
+- 救済元ブランチ `worktree-eventual-cuddling-deer` の残り 27 ファイル（`_prelude.sage` 15 個、
+  `.sage.py` 5 個、prelude だけで check の無い 11 ディレクトリ、main に被覆済みの check 5 本）は
+  意図的に捨てた。判定根拠は `docs/salvage-audit-2026-07-31.md` §2-3 と PR #21 のコメント。
+- 救済元の `_prelude.sage` には依存させず、必要な定義は check ファイル内に書いて
+  231 ディレクトリ既存の書き方（`_shared/operators.sage` を load するだけ）へ揃えた。
+- 判定 65 件・最大相対誤差 5.311e-16 で PASS（既定の許容誤差 1.0e-09 のまま）。
+
 ## 完了（2026-07-27）: **本文の全 20 章に機械証明が付いた**（章 009〜020 を一気に形式化）
 
 このセッションの前は、Lean の形式化は**章 008 まで**しか無かった。**章 009〜020 の 12 章を

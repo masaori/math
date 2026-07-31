@@ -144,3 +144,68 @@ for L in [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 25, 27, 33, 35]:
           % (L, v, 2 * (L - 1), str(v == 2 * (L - 1)), fac))
 print("  ⇒ 合成奇数(9,15,21,25,27,33,35)でも成立。証明は L の素数性を使っていない。")
 print("     L=19 も一致(matrix-tree 経路では未計算だった値)。")
+
+print()
+print("--- (6) 偶 L の観察 T': v_2(tau(L)) = (2s+4)L - (6s+1), s = v_2(L) ---")
+print("  (5) と同じ終結式経路で偶 L を L=2..160 の全偶数(80 例)について計算し、")
+print("  上式と照合する。s が同じなら L の奇部分に依らないことを見る。")
+print("  注: これは数値観察であって証明ではない(偶 L では (3)(4) の前提が壊れる)。")
+
+def tau_by_resultant(L):
+    """tau(L) を終結式 Res((x^L-1)/(x-1), D(x)) として厳密整数計算する((5) と同じ経路)。"""
+    Rq = R.quotient(x**L - 1)
+    xb = Rq.gen()
+    A = Rq(4) - xb - xb**(L - 1)
+    s_prev, s_cur = Rq(2), A
+    for _ in range(2, L + 1):
+        s_prev, s_cur = s_cur, A * s_cur - s_prev
+    D = (s_cur - Rq(2)).lift()
+    f = sum(x**i for i in range(L))
+    return ZZ(f.resultant(D))
+
+even_mismatch = []
+by_s = {}
+for L in range(2, 161, 2):
+    v = tau_by_resultant(L).valuation(2)
+    s = ZZ(L).valuation(2)
+    pred = (2 * s + 4) * L - (6 * s + 1)
+    if v != pred:
+        even_mismatch.append((L, v, pred))
+    by_s.setdefault(s, []).append(L)
+
+print("  検査した偶 L: 2..160 の全偶数 = %d 例" % len(range(2, 161, 2)))
+print("   L  s=v_2(L)  v_2(tau(L))  (2s+4)L-(6s+1)  一致")
+for L in [2, 4, 6, 8, 10, 12, 14, 16, 24, 32, 48, 64, 96, 128, 160]:
+    v = tau_by_resultant(L).valuation(2)
+    s = ZZ(L).valuation(2)
+    pred = (2 * s + 4) * L - (6 * s + 1)
+    print("  %3d     %d       %6d         %6d      %s" % (L, s, v, pred, str(v == pred)))
+print("  不一致の L: %s" % (even_mismatch if even_mismatch else "なし(80/80 一致)"))
+print("  s ごとの L の分布: %s" % {s: (min(v), max(v), len(v)) for s, v in sorted(by_s.items())})
+print("  ⇒ s=1 の族は L=2,6,10,...,158 の 40 例で同一の式に乗る。")
+print("     すなわち v_2(tau(L)) は L の奇部分に依らず s=v_2(L) だけで決まる(観察)。")
+print("  L=2^n(n=1..7) に特殊化すると (2n+4)2^n-(6n+1) = 2n*2^n+4*2^n-6n-1 となり、")
+print("  cycle14_T3_Zl2_tower_criterion.md 式 (9.1) と一致する:")
+for n in range(1, 8):
+    L = 2**n
+    print("    n=%d: v_2(tau(2^n)) = %4d, (9.1) = %4d"
+          % (n, tau_by_resultant(L).valuation(2), 2 * n * 2**n + 4 * 2**n - 6 * n - 1))
+
+print()
+print("--- (7) OEIS A212800 の登録値との突き合わせ(外部一次情報との独立照合) ---")
+print("  A212800 = (n,n)-torus grid graph の全域木数。raw text 記録の a(1..11) と比較する。")
+oeis = [1, 32, 11664, 42467328, 1562500000000, 587312954081280000,
+        2266101334892340404752384, 89927963805390785392395474173952,
+        36735015407753190053984060991247792275456,
+        154528563849617762057150663767149772800000000000000,
+        6695315138840257072470706538467584763944601124280722177130496]
+oeis_ok = True
+for n in range(2, 12):
+    t = tau_by_resultant(n)
+    ok = (t == oeis[n - 1])
+    oeis_ok = oeis_ok and ok
+    print("  n=%2d: 一致 %s (v_2 = %d)" % (n, str(ok), t.valuation(2)))
+print("  a(2..11) が全一致: %s" % oeis_ok)
+print("  ⇒ 本スクリプトの tau(L) は OEIS A212800 と同じ量である(規約も含めて一致)。")
+print("     A212800 の全文(2025-02-16 版, %I〜%A)には 2 進付値も tau=L^2 R^4 型分解も")
+print("     記載が無い(記載は Kreweras 1978 への参照と Kotesovec 2021 の漸近式のみ)。")
