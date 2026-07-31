@@ -6,9 +6,9 @@
 `TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`。
 旧 Typst は `_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ`）
 
-**抽象版**は `Ising2D/Abstract/CommutatorClifford.lean`（名前空間 `Ising2D.Abstract`、
-同じラベル `<commutator_of_H_and_Z_Y>`）。本ファイルの 6 本はすべて抽象版
-`Ising2D.Abstract.CliffordTriple.lie_sum_*` の系として導く。
+**必要十分版**は `Ising2D/NecSuf/CommutatorClifford.lean`（名前空間 `Ising2D.NecSuf`、
+同じラベル `<commutator_of_H_and_Z_Y>`）。本ファイルの 6 本はすべて必要十分版
+`Ising2D.NecSuf.CliffordTriple.lie_sum_*` の系として導く。
 
 ## 原文の主張（`μ ∈ ℳ`、`θ_μ := 2πμ/M`）
 
@@ -61,7 +61,7 @@ Lean では「`M` を法として合同なら `hat(Z)`, `hat(Y)`, 位相因子�
 -/
 import Ising2D.Part004.Claim011_H1H2ViaHat
 import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
-import Ising2D.Abstract.CommutatorClifford
+import Ising2D.NecSuf.CommutatorClifford
 
 namespace Ising2D
 
@@ -236,13 +236,13 @@ theorem sum_expPhase_neg_smul_hatY (hM : M ≠ 0) :
   · intro k _ hk
     rw [if_neg hk, mul_zero, zero_smul]
 
-/-! ## 抽象版への橋渡し: `hat(Z)^{(±)}, hat(Y)` は Clifford 型の 3 族をなす -/
+/-! ## 必要十分版への橋渡し: `hat(Z)^{(±)}, hat(Y)` は Clifford 型の 3 族をなす -/
 
-/-- `hat(Z)^{(η)}`, `hat(Z)^{(-η)}`, `hat(Y)` を抽象版
-`Ising2D.Abstract.CliffordTriple` の 3 族として与える
+/-- `hat(Z)^{(η)}`, `hat(Z)^{(-η)}`, `hat(Y)` を必要十分版
+`Ising2D.NecSuf.CliffordTriple` の 3 族として与える
 （反交換関係は `<anticommutator_of_hat_Z_and_hat_Y>` の 4 式）。 -/
 noncomputable def hatCliffordTriple (M : ℕ) (hM : M ≠ 0) (η : ℂ) (hη : η * η = 1) :
-    Abstract.CliffordTriple ℂ (TensorPow M) ℤ where
+    NecSuf.CliffordTriple ℂ (TensorPow M) ℤ where
   z := fun μ => hatZ M η μ
   z' := fun μ => hatZ M (-η) μ
   y := fun μ => hatY M μ
@@ -287,7 +287,7 @@ theorem lie_H1_hatZ_same (hM : M ≠ 0) {η : ℂ} (hη : η * η = 1) (μ : ℤ
       (fun j : Fin M => ((j : ℕ) : ℤ) + 1)
       (fun j : Fin M => -(((j : ℕ) : ℤ) + 1)) μ
   simp only [hatCliffordTriple_z, hatCliffordTriple_y, hatCliffordTriple_Dz] at key
-  rw [H1_eq_hat_sum hM, Abstract.lie_smul_left, key]
+  rw [H1_eq_hat_sum hM, NecSuf.lie_smul_left, key]
   have hterm : ∀ j : Fin M,
       (expPhase M (((j : ℕ) : ℤ) + 1) *
         (2 * (M : ℂ) * deltaMod M (-(((j : ℕ) : ℤ) + 1) + μ) 0)) • hatY M (((j : ℕ) : ℤ) + 1)
@@ -313,7 +313,7 @@ theorem lie_H1_hatY (hM : M ≠ 0) {η : ℂ} (hη : η * η = 1) (μ : ℤ) :
       (fun j : Fin M => ((j : ℕ) : ℤ) + 1)
       (fun j : Fin M => -(((j : ℕ) : ℤ) + 1)) μ
   simp only [hatCliffordTriple_z, hatCliffordTriple_y, hatCliffordTriple_Dy] at key
-  rw [H1_eq_hat_sum hM, Abstract.lie_smul_left, key]
+  rw [H1_eq_hat_sum hM, NecSuf.lie_smul_left, key]
   have hterm : ∀ j : Fin M,
       (expPhase M (((j : ℕ) : ℤ) + 1) *
         (2 * (M : ℂ) * deltaMod M ((((j : ℕ) : ℤ) + 1) + μ) 0)) •
@@ -345,7 +345,7 @@ theorem lie_H1_hatZ_opp (hM : M ≠ 0) {η : ℂ} (hη : η * η = 1) (μ : ℤ)
       (fun j : Fin M => -(((j : ℕ) : ℤ) + 1)) μ
   simp only [hatCliffordTriple_z, hatCliffordTriple_z', hatCliffordTriple_y,
     hatCliffordTriple_Dz'] at key
-  rw [H1_eq_hat_sum hM, Abstract.lie_smul_left, key]
+  rw [H1_eq_hat_sum hM, NecSuf.lie_smul_left, key]
   have hterm : ∀ j : Fin M,
       (expPhase M (((j : ℕ) : ℤ) + 1) *
         (2 * (M : ℂ) * deltaMod M (-(((j : ℕ) : ℤ) + 1) + μ) 0
@@ -383,7 +383,7 @@ theorem lie_H2_hatZMinus (hM : M ≠ 0) (μ : ℤ) :
       (fun j : Fin M => ((j : ℕ) : ℤ) + 1)
       (fun j : Fin M => -(((j : ℕ) : ℤ) + 1)) μ
   simp only [hatCliffordTriple_z, hatCliffordTriple_y, hatCliffordTriple_Dz] at key
-  rw [H2_eq_hat_sum hM, Abstract.lie_smul_left,
+  rw [H2_eq_hat_sum hM, NecSuf.lie_smul_left,
     Finset.sum_congr rfl fun j (_ : j ∈ Finset.univ) => (one_smul ℂ _).symm, key]
   have hterm : ∀ j : Fin M,
       ((1 : ℂ) * (2 * (M : ℂ) * deltaMod M (-(((j : ℕ) : ℤ) + 1) + μ) 0)) •
@@ -410,7 +410,7 @@ theorem lie_H2_hatY (hM : M ≠ 0) (μ : ℤ) :
       (fun j : Fin M => ((j : ℕ) : ℤ) + 1)
       (fun j : Fin M => -(((j : ℕ) : ℤ) + 1)) μ
   simp only [hatCliffordTriple_z, hatCliffordTriple_y, hatCliffordTriple_Dy] at key
-  rw [H2_eq_hat_sum hM, Abstract.lie_smul_left,
+  rw [H2_eq_hat_sum hM, NecSuf.lie_smul_left,
     Finset.sum_congr rfl fun j (_ : j ∈ Finset.univ) => (one_smul ℂ _).symm, key]
   have hterm : ∀ j : Fin M,
       ((1 : ℂ) * (2 * (M : ℂ) * deltaMod M ((((j : ℕ) : ℤ) + 1) + μ) 0)) •
@@ -442,7 +442,7 @@ theorem lie_H2_hatZPlus (hM : M ≠ 0) (μ : ℤ) :
       (fun j : Fin M => -(((j : ℕ) : ℤ) + 1)) μ
   simp only [hatCliffordTriple_z, hatCliffordTriple_z', hatCliffordTriple_y,
     hatCliffordTriple_Dz'] at key
-  rw [H2_eq_hat_sum hM, Abstract.lie_smul_left,
+  rw [H2_eq_hat_sum hM, NecSuf.lie_smul_left,
     Finset.sum_congr rfl fun j (_ : j ∈ Finset.univ) => (one_smul ℂ _).symm, key]
   have hterm : ∀ j : Fin M,
       ((1 : ℂ) * (2 * (M : ℂ) * deltaMod M (-(((j : ℕ) : ℤ) + 1) + μ) 0

@@ -5,15 +5,15 @@
 - `critical_011_theorem_second_derivative_log_divergence`
   （ラベル `second_derivative_log_divergence`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は
-- `Ising2D/Abstract/DiffUnderIntegral.lean`（積分記号下の微分 = 原文の (R5)）
-- `Ising2D/Abstract/LogDivergentIntegral.lean`（対数発散の本体）
-- `Ising2D/Abstract/HyperbolicBounds.lean`（数値評価）
+**具体版**（人手証明と同じ抽象度）。必要十分版は
+- `Ising2D/NecSuf/DiffUnderIntegral.lean`（積分記号下の微分 = 原文の (R5)）
+- `Ising2D/NecSuf/LogDivergentIntegral.lean`（対数発散の本体）
+- `Ising2D/NecSuf/HyperbolicBounds.lean`（数値評価）
 
 ## 原文との差
 
 原文は各段の数値評価に `cosh 0.2 ≤ 1.02007` のような外部の数値を使うが、本形式化では
-`Ising2D/Abstract/HyperbolicBounds.lean` の `cosh t ≤ (1-t²/2)⁻¹` だけを使う（`Claim006` 参照）。
+`Ising2D/NecSuf/HyperbolicBounds.lean` の `cosh t ≤ (1-t²/2)⁻¹` だけを使う（`Claim006` 参照）。
 そのため途中の定数は原文とわずかに異なるが、**結論の定数 `6/5` は原文のまま成立する**
 （本形式化の評価では `|2πG'' - log(1/κ)| ≤ 6.9`、`6.9/2π ≤ 1.10 ≤ 6/5`)。
 
@@ -23,7 +23,7 @@
 -/
 import Ising2D.Part020.Claim007_GammaDerivatives
 import Ising2D.Part020.Claim010_SineIntegralTwoSided
-import Ising2D.Abstract.DiffUnderIntegral
+import Ising2D.NecSuf.DiffUnderIntegral
 import Mathlib.Analysis.Complex.ExponentialBounds
 
 namespace Ising2D
@@ -47,7 +47,7 @@ theorem isOpen_ne_zero : IsOpen {x : ℝ | x ≠ 0} := isOpen_ne
 set_option maxHeartbeats 1000000 in
 /-- **人手証明 Step 1**（(R5) の 1 回目）: `G' = (1/4π)∫ ∂γ/∂κ`。 -/
 theorem hasDerivAt_Gfun {κ : ℝ} (hκ : κ ≠ 0) : HasDerivAt Gfun (Gfirst κ) κ := by
-  have h := Abstract.hasDerivAt_integral_of_continuousOn (g := gammaK) (g' := dgammaK)
+  have h := NecSuf.hasDerivAt_integral_of_continuousOn (g := gammaK) (g' := dgammaK)
     (a := 0) (b := 2 * Real.pi) (x₀ := κ) (s := {x : ℝ | x ≠ 0}) isOpen_ne_zero hκ
     (fun x _ => (continuous_gammaK_fixed x).continuousOn)
     (continuousOn_dgammaK.mono (Set.prod_mono_left (Set.subset_univ _)))
@@ -57,7 +57,7 @@ theorem hasDerivAt_Gfun {κ : ℝ} (hκ : κ ≠ 0) : HasDerivAt Gfun (Gfirst κ
 set_option maxHeartbeats 1000000 in
 /-- **人手証明 Step 1**（(R5) の 2 回目）: `G'' = (1/4π)∫ ∂²γ/∂κ²`。 -/
 theorem hasDerivAt_Gfirst {κ : ℝ} (hκ : κ ≠ 0) : HasDerivAt Gfirst (Gsecond κ) κ := by
-  have h := Abstract.hasDerivAt_integral_of_continuousOn (g := dgammaK) (g' := d2gammaK)
+  have h := NecSuf.hasDerivAt_integral_of_continuousOn (g := dgammaK) (g' := d2gammaK)
     (a := 0) (b := 2 * Real.pi) (x₀ := κ) (s := {x : ℝ | x ≠ 0}) isOpen_ne_zero hκ
     (fun x hx => (continuous_dgammaK_fixed hx).continuousOn)
     (continuousOn_d2gammaK.mono (Set.prod_mono_left (Set.subset_univ _)))
@@ -387,7 +387,7 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
   have hδpos : 0 < Real.sinh (κ / 2) := Real.sinh_pos_iff.2 (by linarith)
   have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := Real.one_le_cosh _
   have hcub : Real.cosh (κ / 2) ≤ 32/31 := by
-    have h := Abstract.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
+    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
     have hd : (31:ℝ)/32 ≤ 1 - (κ / 2) ^ 2 / 2 := by nlinarith
     have hinv : (1 - (κ / 2) ^ 2 / 2)⁻¹ ≤ (31/32 : ℝ)⁻¹ := by
       apply inv_anti₀ (by norm_num) hd
@@ -399,7 +399,7 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
   have hδlb : κ / 2 ≤ Real.sinh (κ / 2) := self_le_sinh_of_nonneg (by linarith)
   have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := Real.one_le_cosh _
   have hcoshκ : Real.cosh κ ≤ 8/7 := by
-    have h := Abstract.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
+    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
     have hd : (7:ℝ)/8 ≤ 1 - κ ^ 2 / 2 := by nlinarith
     have hinv : (1 - κ ^ 2 / 2)⁻¹ ≤ (7/8 : ℝ)⁻¹ := inv_anti₀ (by norm_num) hd
     calc Real.cosh κ ≤ (1 - κ ^ 2 / 2)⁻¹ := h
@@ -455,7 +455,7 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
     rw [inv_le_comm₀ this (by norm_num)]
     linarith
   have hklog : κ * Real.log (1 / κ) ≤ (Real.exp 1)⁻¹ := by
-    have := Abstract.mul_log_inv_le h0
+    have := NecSuf.mul_log_inv_le h0
     rwa [← one_div] at this
   have hsqlog : κ ^ 2 * Real.log (1 / κ) ≤ 0.18394 := by
     have h : κ * (κ * Real.log (1 / κ)) ≤ κ * (Real.exp 1)⁻¹ :=
@@ -514,7 +514,7 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
   have hδpos : 0 < Real.sinh (κ / 2) := Real.sinh_pos_iff.2 (by linarith)
   have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := Real.one_le_cosh _
   have hcub : Real.cosh (κ / 2) ≤ 32/31 := by
-    have h := Abstract.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
+    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
     have hd : (31:ℝ)/32 ≤ 1 - (κ / 2) ^ 2 / 2 := by nlinarith
     have hinv : (1 - (κ / 2) ^ 2 / 2)⁻¹ ≤ (31/32 : ℝ)⁻¹ := inv_anti₀ (by norm_num) hd
     calc Real.cosh (κ / 2) ≤ (1 - (κ / 2) ^ 2 / 2)⁻¹ := h
@@ -525,7 +525,7 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
     nlinarith [h, hcub, h0, h1]
   have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := Real.one_le_cosh _
   have hcoshκ : Real.cosh κ ≤ 8/7 := by
-    have h := Abstract.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
+    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
     have hd : (7:ℝ)/8 ≤ 1 - κ ^ 2 / 2 := by nlinarith
     have hinv : (1 - κ ^ 2 / 2)⁻¹ ≤ (7/8 : ℝ)⁻¹ := inv_anti₀ (by norm_num) hd
     calc Real.cosh κ ≤ (1 - κ ^ 2 / 2)⁻¹ := h

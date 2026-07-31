@@ -15,9 +15,9 @@ Step 3: `ι` が全単射なので `ι(μ) = ι(μ') ⟺ μ = μ'`）はそれ�
 `matrixExp_diagonal`（`Part010/Claim003_ExpDiagonal.lean`）、
 `configBasisIso_eq_iff`（`Part010/Definition001_ConfigBasisIso.lean`）に対応する。
 
-抽象版はこの主張には置いていない。理由は、この主張が
-「対角行列の指数関数」（抽象版は `Ising2D/Abstract/ExpDiagonal.lean`）と
-「因子が対角なら積も対角」（抽象版は `Ising2D/Abstract/SiteDiagonal.lean`）の
+必要十分版はこの主張には置いていない。理由は、この主張が
+「対角行列の指数関数」（必要十分版は `Ising2D/NecSuf/ExpDiagonal.lean`）と
+「因子が対角なら積も対角」（必要十分版は `Ising2D/NecSuf/SiteDiagonal.lean`）の
 2 つの合成にすぎず、本ファイル固有の内容は `V_1` の 2 つの定義の**突き合わせ**
 （＝具体的な対象についての主張）だからである。
 -/

@@ -17,21 +17,21 @@
 
 * **具体版**（このファイル）: 原文と 1 対 1 に対応する `Mat(2,ℂ)^{⊗M}` 上の主張
   （`centralizer_is_scalar`）と、その一般の複素行列環版（`matrix_centralizer_is_scalar`）。
-* **抽象版**: `Ising2D/Abstract/ScalarCentral.lean` の
-  `Ising2D.Abstract.centralizer_is_scalar_semiring`（係数は任意の半環）と
-  `Ising2D.Abstract.centralizer_is_scalar_commSemiring`（係数が可換な場合）。
-  **具体版はこの抽象版の特殊化として導出する**（下記）。
+* **必要十分版**: `Ising2D/NecSuf/ScalarCentral.lean` の
+  `Ising2D.NecSuf.centralizer_is_scalar_semiring`（係数は任意の半環）と
+  `Ising2D.NecSuf.centralizer_is_scalar_commSemiring`（係数が可換な場合）。
+  **具体版はこの必要十分版の特殊化として導出する**（下記）。
 
-抽象版が示しているのは、この主張に効いているのが**添字集合が有限で等号判定可能なこと**だけで、
+必要十分版が示しているのは、この主張に効いているのが**添字集合が有限で等号判定可能なこと**だけで、
 係数が ℂ であることも、体であることも、可換であることすら効いていないことである。
 係数が非可換なときはスカラー `c` が「係数環の中心に属する」という条件を伴い、
 ℂ は可換なのでその条件が消えて原文の形（`c ∈ ℂ` が任意）になる。
 
 なお、下の `centralizer_is_scalar_abstract` の「abstract」は**抽象テンソル冪表現
-`AbstractTensorPow M` の側で述べた**という意味であり、上記の意味での「抽象版」ではない。
+`AbstractTensorPow M` の側で述べた**という意味であり、上記の意味での「必要十分版」ではない。
 -/
 import Mathlib.Data.Matrix.Basis
-import Ising2D.Abstract.ScalarCentral
+import Ising2D.NecSuf.ScalarCentral
 import Ising2D.Representation
 
 namespace Ising2D
@@ -42,12 +42,12 @@ variable {n : Type*} [Fintype n] [DecidableEq n]
 
 /-- 一般の行列環版: `Matrix n n ℂ` の中で全元と可換な元はスカラー行列。
 
-抽象版 `Ising2D.Abstract.centralizer_is_scalar_commSemiring` を係数 `α := ℂ` へ
+必要十分版 `Ising2D.NecSuf.centralizer_is_scalar_commSemiring` を係数 `α := ℂ` へ
 特殊化したもの。 -/
 theorem matrix_centralizer_is_scalar (W : Matrix n n ℂ)
     (h : ∀ x : Matrix n n ℂ, W * x = x * W) :
     ∃ c : ℂ, W = c • (1 : Matrix n n ℂ) :=
-  Abstract.centralizer_is_scalar_commSemiring W h
+  NecSuf.centralizer_is_scalar_commSemiring W h
 
 end General
 

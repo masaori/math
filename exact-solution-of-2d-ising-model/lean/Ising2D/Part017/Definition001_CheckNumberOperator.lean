@@ -6,16 +6,16 @@
 - `check_number_operator_idempotent`（`evenEigen_002_claim_...`）
 - `check_number_operators_commute`（`evenEigen_003_claim_...`）
 
-**抽象版**は `Ising2D/Abstract/NumberOperator.lean`（章 009 と共通）と
-`Ising2D/Abstract/PairedFermion.lean`（対をなす添字の対合）。
-本ファイルの主定理は**すべて抽象版の特殊化として導出する**。
+**必要十分版**は `Ising2D/NecSuf/NumberOperator.lean`（章 009 と共通）と
+`Ising2D/NecSuf/PairedFermion.lean`（対をなす添字の対合）。
+本ファイルの主定理は**すべて必要十分版の特殊化として導出する**。
 
 ## 章 009 との関係（本章の要点）
 
 章 009 の `n_μ = ψ_μ^† ψ_{-μ}` と本章の `ň_μ = ψ̌_μ^† ψ̌_{M+1-μ}` は、
-**同じ抽象版（`Abstract.num`）の別の特殊化**である。違いは
+**同じ必要十分版（`NecSuf.num`）の別の特殊化**である。違いは
 「対をなす添字を与える単射 `σ`」だけで、章 009 では `σ(μ) = -μ`、
-本章では `σ(μ) = M+1-μ` である（`Ising2D/Abstract/PairedFermion.lean` 冒頭）。
+本章では `σ(μ) = M+1-μ` である（`Ising2D/NecSuf/PairedFermion.lean` 冒頭）。
 
 **決定的な違いは添字集合の同定にある。** 章 009 の `FermiSetup` は
 「`{1,…,M}` に含まれ、そこで `γ_2(θ_μ) ≠ 0` となる有限集合 `I`」を**仮定として**
@@ -39,7 +39,7 @@
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime
 import Ising2D.Part013.Definition003a_CheckIndexSet
-import Ising2D.Abstract.PairedFermion
+import Ising2D.NecSuf.PairedFermion
 
 namespace Ising2D
 
@@ -138,23 +138,23 @@ noncomputable def cre (i : CheckIdx M) : TensorPow M := F.psiDag i.1
 /-- `𝓜̌` へ制限した消滅演算子（付け替え前）。 -/
 noncomputable def annRaw (i : CheckIdx M) : TensorPow M := F.psi i.1
 
-/-- 共役添字で付け替えた消滅演算子 `ψ̌_{M+1-μ}`（抽象版 `Abstract.annPaired` の特殊化）。 -/
+/-- 共役添字で付け替えた消滅演算子 `ψ̌_{M+1-μ}`（必要十分版 `NecSuf.annPaired` の特殊化）。 -/
 noncomputable def ann (i : CheckIdx M) : TensorPow M :=
-  Abstract.annPaired F.annRaw (conjIdx M) i
+  NecSuf.annPaired F.annRaw (conjIdx M) i
 
 theorem ann_def (i : CheckIdx M) : F.ann i = F.psi ((M : ℤ) + 1 - i.1) := rfl
 
 /-- **原文 `def_check_number_operator` の形式化**: `ň_μ := ψ̌_μ^† ψ̌_{M+1-μ}`。 -/
-noncomputable def nOp (i : CheckIdx M) : TensorPow M := Abstract.num F.cre F.ann i
+noncomputable def nOp (i : CheckIdx M) : TensorPow M := NecSuf.num F.cre F.ann i
 
 theorem nOp_def (i : CheckIdx M) : F.nOp i = F.cre i * F.ann i := rfl
 
 /-- `ň_μ` を原文の記法のまま書いたもの。 -/
 theorem nOp_eq (i : CheckIdx M) : F.nOp i = F.psiDag i.1 * F.psi ((M : ℤ) + 1 - i.1) := rfl
 
-/-- `ň_μ` が抽象版 `Abstract.numPaired`（対合 `σ` で対をなす個数演算子）の特殊化であること。 -/
+/-- `ň_μ` が必要十分版 `NecSuf.numPaired`（対合 `σ` で対をなす個数演算子）の特殊化であること。 -/
 theorem nOp_eq_numPaired (i : CheckIdx M) :
-    F.nOp i = Abstract.numPaired F.cre F.annRaw (conjIdx M) i := rfl
+    F.nOp i = NecSuf.numPaired F.cre F.annRaw (conjIdx M) i := rfl
 
 /-! ## 正準反交換関係（原文 `anticommutator_of_check_psi` の `𝓜̌` への制限） -/
 
@@ -182,9 +182,9 @@ theorem acomm_cre_ann (i j : CheckIdx M) :
     by_cases hj : j.1 = (M : ℤ) + 1 - i.1
     · rw [if_pos hj, if_pos ((conjIdx_eq_iff i j).2 hj)]
     · rw [if_neg hj, if_neg (fun hc => hj ((conjIdx_eq_iff i j).1 hc))]
-  have h := Abstract.acomm_cre_ann_comp F.cre F.annRaw (conjIdx_injective M) hca i j
-  show F.cre i * Abstract.annPaired F.annRaw (conjIdx M) j
-      + Abstract.annPaired F.annRaw (conjIdx M) j * F.cre i = _
+  have h := NecSuf.acomm_cre_ann_comp F.cre F.annRaw (conjIdx_injective M) hca i j
+  show F.cre i * NecSuf.annPaired F.annRaw (conjIdx M) j
+      + NecSuf.annPaired F.annRaw (conjIdx M) j * F.cre i = _
   rw [h]
   by_cases hij : i = j
   · rw [if_pos hij, if_pos hij.symm]
@@ -197,44 +197,44 @@ theorem acomm_cre_ann_self (i : CheckIdx M) : F.cre i * F.ann i + F.ann i * F.cr
 
 /-- **原文 `check_number_operator_idempotent` (1)**: `(ψ̌_μ^†)^2 = 0`。 -/
 theorem cre_sq (i : CheckIdx M) : F.cre i * F.cre i = 0 :=
-  Abstract.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_cre_cre i i)
+  NecSuf.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_cre_cre i i)
 
 /-- **原文 `check_number_operator_idempotent` (1)**: `(ψ̌_{M+1-μ})^2 = 0`。 -/
 theorem ann_sq (i : CheckIdx M) : F.ann i * F.ann i = 0 :=
-  Abstract.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_ann_ann i i)
+  NecSuf.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_ann_ann i i)
 
 /-- **原文 `check_number_operator_idempotent` (2)**: `ψ̌_{M+1-μ} ψ̌_μ^† = I - ň_μ`。 -/
 theorem ann_mul_cre (i : CheckIdx M) : F.ann i * F.cre i = 1 - F.nOp i :=
-  Abstract.ann_mul_cre F.cre F.ann i (F.acomm_cre_ann_self i)
+  NecSuf.ann_mul_cre F.cre F.ann i (F.acomm_cre_ann_self i)
 
-/-- **原文 `check_number_operator_idempotent` (3)**: `ň_μ^2 = ň_μ`（抽象版の特殊化）。 -/
+/-- **原文 `check_number_operator_idempotent` (3)**: `ň_μ^2 = ň_μ`（必要十分版の特殊化）。 -/
 theorem nOp_mul_self (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
-  Abstract.num_mul_num F.cre F.ann i tensorPow_two_torsion_free
+  NecSuf.num_mul_num F.cre F.ann i tensorPow_two_torsion_free
     (F.acomm_cre_cre i i) (F.acomm_ann_ann i i) (F.acomm_cre_ann_self i)
 
 /-! ## 原文 `check_number_operators_commute` -/
 
-/-- **原文 `check_number_operators_commute` (1)** 前半（抽象版の特殊化）。 -/
+/-- **原文 `check_number_operators_commute` (1)** 前半（必要十分版の特殊化）。 -/
 theorem commute_cre_nOp {i j : CheckIdx M} (hij : i ≠ j) :
     F.cre i * F.nOp j = F.nOp j * F.cre i :=
-  Abstract.commute_cre_num F.cre F.ann (F.acomm_cre_cre i j)
+  NecSuf.commute_cre_num F.cre F.ann (F.acomm_cre_cre i j)
     (by have := F.acomm_cre_ann i j; rwa [if_neg hij] at this)
 
-/-- **原文 `check_number_operators_commute` (1)** 後半（抽象版の特殊化）。 -/
+/-- **原文 `check_number_operators_commute` (1)** 後半（必要十分版の特殊化）。 -/
 theorem commute_ann_nOp {i j : CheckIdx M} (hij : i ≠ j) :
     F.ann i * F.nOp j = F.nOp j * F.ann i :=
-  Abstract.commute_ann_num F.cre F.ann
+  NecSuf.commute_ann_num F.cre F.ann
     (by
       have := F.acomm_cre_ann j i
       rw [if_neg (Ne.symm hij)] at this
       linear_combination (norm := noncomm_ring) this)
     (F.acomm_ann_ann i j)
 
-/-- **原文 `check_number_operators_commute` (2)**: `ň_μ ň_ν = ň_ν ň_μ`（抽象版の特殊化）。 -/
+/-- **原文 `check_number_operators_commute` (2)**: `ň_μ ň_ν = ň_ν ň_μ`（必要十分版の特殊化）。 -/
 theorem commute_nOp_nOp (i j : CheckIdx M) : Commute (F.nOp i) (F.nOp j) := by
   by_cases hij : i = j
   · subst hij; exact Commute.refl _
-  · refine Abstract.commute_num_num F.cre F.ann (F.acomm_cre_cre i j) ?_ ?_ (F.acomm_ann_ann i j)
+  · refine NecSuf.commute_num_num F.cre F.ann (F.acomm_cre_cre i j) ?_ ?_ (F.acomm_ann_ann i j)
     · have := F.acomm_cre_ann i j; rwa [if_neg hij] at this
     · have := F.acomm_cre_ann j i
       rw [if_neg (Ne.symm hij)] at this

@@ -4,8 +4,8 @@
 正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
 （`sector_004_theorem_c_equals_c_plus`、ラベル **`c_equals_c_plus`**）
 
-抽象版は `Ising2D/Abstract/PermSector.lean`（同じラベル）の
-`Ising2D.Abstract.rayleighSup_eq_sectorRayleighSup_pos`。本ファイルの主定理はその**系**である。
+必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）の
+`Ising2D.NecSuf.rayleighSup_eq_sectorRayleighSup_pos`。本ファイルの主定理はその**系**である。
 
 ## 人手証明との対応
 
@@ -53,7 +53,7 @@ theorem c_equals_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hpos : ∀ k l, 0 < W k l)
     (hcomm : epsilonR M * W = W * epsilonR M) :
     rayleighSup W = sectorRayleighSup W (epsilonR M) 1 :=
-  Abstract.rayleighSup_eq_sectorRayleighSup_pos hW hpsd (fun k l => (hpos k l).le)
+  NecSuf.rayleighSup_eq_sectorRayleighSup_pos hW hpsd (fun k l => (hpos k l).le)
     flipConf_involutive hcomm
 
 /-- 章 011 の対称化転送行列 `W = V_1^{1/2} V_2 V_1^{1/2}` への特殊化。 -/

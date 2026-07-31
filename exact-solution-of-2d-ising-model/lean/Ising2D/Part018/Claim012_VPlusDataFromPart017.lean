@@ -153,7 +153,7 @@ theorem checkVprime_mul_Qproj (P : IsingParam) (hM : M ≠ 0) (T : Finset (Fin M
   have h : NormedSpace.exp (checkX P.const M (gammaTildeC P M)) * (checkFermiOf P hM).Qproj T
       = Complex.exp ((checkGval P M T : ℝ) : ℂ) • (checkFermiOf P hM).Qproj T :=
     open scoped Norms.Operator in
-      Abstract.exp_mul_eq_of_mul_eq_smul (checkX_mul_Qproj P hM T)
+      NecSuf.exp_mul_eq_of_mul_eq_smul (checkX_mul_Qproj P hM T)
   rw [checkVprime, matExp, h, Complex.ofReal_exp]
 
 /-! ## `VPlusData` のインスタンス -/

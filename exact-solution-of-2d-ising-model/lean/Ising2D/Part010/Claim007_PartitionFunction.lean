@@ -18,7 +18,7 @@
    記号の読み替えは 010 章冒頭のとおり（001 章の `N, M, J', J` が
    本ファイルの `M, N_row, K_1, K_2`）。
 2. `Z(J,J') = tr((V_1 V_2)^{N_row})`（**成分定義**の `V_1, V_2` について。001 章の主張）。
-   道の総和への展開は抽象版 `Ising2D/Abstract/TracePathSum.lean` にあり、
+   道の総和への展開は必要十分版 `Ising2D/NecSuf/TracePathSum.lean` にあり、
    ここではその系として得る。
 3. `Z(J,J') = tr((V_1 V_2)^{N_row})`（**パウリ表示**の `V_1, V_2` について。010 章の主張）。
    2 と `V1_component_equals_pauli` / `V2_component_equals_pauli` を合わせるだけである。
@@ -30,7 +30,7 @@
 -/
 import Ising2D.Part010.Claim004_V1Bridge
 import Ising2D.Part010.Claim006_V2Bridge
-import Ising2D.Abstract.TracePathSum
+import Ising2D.NecSuf.TracePathSum
 
 namespace Ising2D
 
@@ -79,8 +79,8 @@ theorem partitionFunction_eq_conf (Nrow : ℕ) (J J' : ℝ) :
 
 /-! ## 成分定義の転送行列でのトレース公式（001 章の主張） -/
 
-/-- `nextSite` は抽象版の巡回後者そのもの。 -/
-theorem nextSite_eq_cycSucc {n : ℕ} : (nextSite : Fin n → Fin n) = Abstract.cycSucc := rfl
+/-- `nextSite` は必要十分版の巡回後者そのもの。 -/
+theorem nextSite_eq_cycSucc {n : ℕ} : (nextSite : Fin n → Fin n) = NecSuf.cycSucc := rfl
 
 /-- `V_1 V_2` の成分（原文 001 章 Step 1）。 -/
 theorem V1comp_mul_V2comp_apply (K1 K2 : ℂ) (I J : Conf M) :
@@ -90,11 +90,11 @@ theorem V1comp_mul_V2comp_apply (K1 K2 : ℂ) (I J : Conf M) :
 
 /-- **原文 `partition_function_via_transfer_matrix`（001 章）の具体版。**
 
-抽象版 `Ising2D.Abstract.trace_pow_succ`（任意の可換半環上の行列で成り立つ）の系である。 -/
+必要十分版 `Ising2D.NecSuf.trace_pow_succ`（任意の可換半環上の行列で成り立つ）の系である。 -/
 theorem partitionFunctionC_eq_trace (K1 K2 : ℂ) (m : ℕ) :
     partitionFunctionC (m + 1) M K2 K1
       = ((V1comp M K1 * V2comp M K2) ^ (m + 1)).trace := by
-  rw [Abstract.trace_pow_succ, partitionFunctionC]
+  rw [NecSuf.trace_pow_succ, partitionFunctionC]
   refine Finset.sum_congr rfl fun s _ => ?_
   rw [Complex.exp_sum]
   refine Finset.prod_congr rfl fun i _ => ?_

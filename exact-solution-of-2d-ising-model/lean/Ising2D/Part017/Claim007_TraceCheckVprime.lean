@@ -4,8 +4,8 @@
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `trace_of_check_Vprime`（`evenEigen_007_claim_...`）。
 
-**抽象版は置かない。** 使っている一般論はトレースの線型性（既に
-`Ising2D/Abstract/NumberOperator.lean` の「加法的かつ巡回的な汎関数 `τ`」として
+**必要十分版は置かない。** 使っている一般論はトレースの線型性（既に
+`Ising2D/NecSuf/NumberOperator.lean` の「加法的かつ巡回的な汎関数 `τ`」として
 抽象化してある）と、実数の指数法則・`cosh` の偶関数性だけで、
 取り払える構造が残っていない。
 

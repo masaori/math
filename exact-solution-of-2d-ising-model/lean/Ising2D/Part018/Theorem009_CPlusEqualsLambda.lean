@@ -8,7 +8,7 @@
 **章 019 の `Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq` が仮定として受け取っていた
 「`c_+(M) = Λ`」を埋めるのが本ファイルである。**
 
-抽象版は置かない。理由は章 011 の `Definition006_RayleighSup.lean` と同じで、
+必要十分版は置かない。理由は章 011 の `Definition006_RayleighSup.lean` と同じで、
 `sSup` は ℝ の完備性そのものであり、ほどく余地がないこと。本ファイルで新しく現れる
 道具は「実行列・実ベクトルと複素行列・複素ベクトルの橋渡し」だけで、これは
 章 019 の `epsilon_eq_ofReal_epsilonR` と同じ性質のものである。

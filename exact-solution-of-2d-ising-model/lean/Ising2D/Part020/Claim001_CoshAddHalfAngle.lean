@@ -5,8 +5,8 @@
 - `critical_001_claim_cosh_addition_and_half_angle`（ラベル `cosh_addition_and_half_angle`）
 
 **具体版**（人手証明と同じ抽象度＝実数の `cosh, sinh, arsinh`）。
-抽象版は `Ising2D/Abstract/HyperbolicBounds.lean`
-（`Ising2D.Abstract.sinh_le_mul_cosh` ほか）。(5) の後半は抽象版の系として導出してある。
+必要十分版は `Ising2D/NecSuf/HyperbolicBounds.lean`
+（`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半は必要十分版の系として導出してある。
 
 ## mathlib の状況（調査結果）
 
@@ -15,9 +15,9 @@
 逆関数性 `Real.sinh_arsinh` / `Real.arsinh_sinh`、単調性 `Real.sinh_lt_sinh` /
 `Real.sinh_le_sinh`、微分 `Real.hasDerivAt_arsinh` がすべて揃っているので自前定義は不要。
 `t ≤ sinh t` も `Real.self_le_sinh_iff` にある。
-mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは抽象版で証明した。
+mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは必要十分版で証明した。
 -/
-import Ising2D.Abstract.HyperbolicBounds
+import Ising2D.NecSuf.HyperbolicBounds
 
 namespace Ising2D
 
@@ -90,9 +90,9 @@ theorem self_le_sinh_of_nonneg {t : ℝ} (ht : 0 ≤ t) : t ≤ Real.sinh t :=
   Real.self_le_sinh_iff.2 ht
 
 /-- 人手証明 (5) の後半: `sinh t ≤ t cosh t`（`t ≥ 0`）。
-**抽象版 `Ising2D.Abstract.sinh_le_mul_cosh` の系。** -/
+**必要十分版 `Ising2D.NecSuf.sinh_le_mul_cosh` の系。** -/
 theorem sinh_le_mul_cosh_of_nonneg {t : ℝ} (ht : 0 ≤ t) : Real.sinh t ≤ t * Real.cosh t :=
-  Abstract.sinh_le_mul_cosh ht
+  NecSuf.sinh_le_mul_cosh ht
 
 /-- 人手証明 (5) そのもの。 -/
 theorem cosh_addition_and_half_angle_five {t : ℝ} (ht : 0 ≤ t) :

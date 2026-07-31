@@ -5,9 +5,9 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_006_claim_recover_Z_Y`）
 
-**抽象版**は `Ising2D/Abstract/AntiperiodicFourier.lean` の
-`Ising2D.Abstract.inverse_dft_antiperiodic`（同じラベル）。
-抽象版からの導出は `Ising2D/Part013/Claim006_RecoverZYAbstract.lean`。
+**必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean` の
+`Ising2D.NecSuf.inverse_dft_antiperiodic`（同じラベル）。
+必要十分版からの導出は `Ising2D/Part013/Claim006_RecoverZYFromNecSuf.lean`。
 
 ## 原文の主張（`j ∈ {1,…,M}`）
 

@@ -4,10 +4,10 @@
 人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
 - `freeenergy_001_claim_gamma1_lower_bound_all_theta`（ラベル `gamma1_lower_bound_all_theta`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は `Ising2D/Abstract/CoshLowerBound.lean`
-（`Ising2D.Abstract.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub`）と
-`Ising2D/Abstract/Arcosh.lean`（`Ising2D.Abstract.continuous_arcosh_comp`）。
-具体版は抽象版の系として導出してある（`gamma1R_ge_cosh_sub` の証明を参照）。
+**具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/CoshLowerBound.lean`
+（`Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub`）と
+`Ising2D/NecSuf/Arcosh.lean`（`Ising2D.NecSuf.continuous_arcosh_comp`）。
+具体版は必要十分版の系として導出してある（`gamma1R_ge_cosh_sub` の証明を参照）。
 
 ## 形式化の方針
 
@@ -22,15 +22,15 @@
 * `arccosh` について: `lean/README.md` は「mathlib に無い」と記載しているが、
   本リポジトリが固定している mathlib（`v4.32.1`）には `Real.arcosh` が存在し、
   定義も人手証明 Step 2 の明示式 `log(x + √(x^2-1))` とまったく同じである。
-  自前定義はせず mathlib のものを使う（詳細は `Ising2D/Abstract/Arcosh.lean` 冒頭）。
+  自前定義はせず mathlib のものを使う（詳細は `Ising2D/NecSuf/Arcosh.lean` 冒頭）。
 
 ## 他章への依存について
 
 本ファイルは他章（011 章の `c(M)` や分配関数の挟み撃ち）に依存しない。
 -/
 import Ising2D.Part008.Definition019_ThetaGamma
-import Ising2D.Abstract.Arcosh
-import Ising2D.Abstract.CoshLowerBound
+import Ising2D.NecSuf.Arcosh
+import Ising2D.NecSuf.CoshLowerBound
 
 namespace Ising2D
 
@@ -69,7 +69,7 @@ theorem IsingParam.s2star_pos (P : IsingParam) : 0 < P.const.s2star := by
   simpa [IsingParam.const] using Real.sinh_pos_iff.2 this
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` の第 1 の不等式**（`∀θ ∈ ℝ`）:
-`γ_1(θ) ≥ cosh(2K_1 - 2K_2^*)`。抽象版 `Abstract.cosh_sub_le_cosh_mul_cosh_sub` の系。 -/
+`γ_1(θ) ≥ cosh(2K_1 - 2K_2^*)`。必要十分版 `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` の系。 -/
 theorem gamma1R_ge_cosh_sub (P : IsingParam) (θ : ℝ) :
     Real.cosh (2 * P.K1 - 2 * P.K2star) ≤ gamma1R P.const θ := by
   have hs : 0 ≤ Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star) := by
@@ -78,7 +78,7 @@ theorem gamma1R_ge_cosh_sub (P : IsingParam) (θ : ℝ) :
     simp only [IsingParam.const] at h1 h2
     positivity
   simpa [gamma1R, IsingParam.const] using
-    Abstract.cosh_sub_le_cosh_mul_cosh_sub (u := 2 * P.K1) (v := 2 * P.K2star)
+    NecSuf.cosh_sub_le_cosh_mul_cosh_sub (u := 2 * P.K1) (v := 2 * P.K2star)
       (x := Real.cos θ) (Real.cos_le_one θ) hs
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` の第 2 の不等式**: `γ_1(θ) ≥ 1`（`∀θ ∈ ℝ`）。 -/

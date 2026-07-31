@@ -14,14 +14,14 @@ Lean では添字型 `Conf M` がスピン配置そのものなので、
 （`sigmaZ_eq_diagonal`）、基底ベクトルへの作用（原文の式そのもの）を
 その系として得る（`sigmaZ_mulVec_basisVec`）。
 
-抽象版: `Ising2D/Abstract/SiteDiagonal.lean`（同じラベル `sigma_z_diagonal_action`）。
+必要十分版: `Ising2D/NecSuf/SiteDiagonal.lean`（同じラベル `sigma_z_diagonal_action`）。
 そこで確かめたとおり、効いているのは「サイトごとの積 `siteProd` の成分が因子の成分の積である」
 ことと「Pauli 行列 `σ^z` が対角行列であること」だけで、`σ^z` の具体的な成分も
 複素数であることも効いていない。
 -/
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.Part010.Definition001_ConfigBasisIso
-import Ising2D.Abstract.SiteDiagonal
+import Ising2D.NecSuf.SiteDiagonal
 
 namespace Ising2D
 
@@ -31,7 +31,7 @@ variable {M : ℕ}
 
 /-- 各因子が対角行列なら、クロネッカー積も対角行列で、対角成分は因子の対角成分の積。
 
-（抽象版 `Ising2D.Abstract.prod_diagonal_entry` の特殊化として証明する。） -/
+（必要十分版 `Ising2D.NecSuf.prod_diagonal_entry` の特殊化として証明する。） -/
 theorem siteProd_diagonal (d : Fin M → Fin 2 → ℂ) :
     siteProd M (fun i => Matrix.diagonal (d i)) =
       Matrix.diagonal (fun I : Conf M => ∏ i : Fin M, d i (I i)) := by
@@ -42,7 +42,7 @@ theorem siteProd_diagonal (d : Fin M → Fin 2 → ℂ) :
     rw [Matrix.diagonal_apply_eq]
     exact Finset.prod_congr rfl fun i _ => Matrix.diagonal_apply_eq _ _
   · rw [Matrix.diagonal_apply_ne _ h]
-    exact Abstract.prod_entry_eq_zero_of_ne
+    exact NecSuf.prod_entry_eq_zero_of_ne
       (fun i => (Matrix.diagonal (d i) : Matrix (Fin 2) (Fin 2) ℂ))
       (fun _ _ _ hab => Matrix.diagonal_apply_ne _ hab) s t h
 

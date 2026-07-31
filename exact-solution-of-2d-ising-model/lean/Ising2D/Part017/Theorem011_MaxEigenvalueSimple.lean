@@ -5,9 +5,9 @@
 `max_eigenvalue_of_V_plus_simple`（`evenEigen_011_theorem_...`）。
 あわせて章 015 の `def_gamma_theta_tilde_mu`（`γ(θ~_μ) > 0`）をここで証明する。
 
-**抽象版**は `Ising2D/Abstract/SimpleEigenvalue.lean`:
-- (2) の狭義最大性 → `Abstract.sum_weight_lt_of_ne_univ`
-- (3) の固有空間の同定 → `Abstract.eq_proj_of_eigen`
+**必要十分版**は `Ising2D/NecSuf/SimpleEigenvalue.lean`:
+- (2) の狭義最大性 → `NecSuf.sum_weight_lt_of_ne_univ`
+- (3) の固有空間の同定 → `NecSuf.eq_proj_of_eigen`
 
 ## `γ(θ~_μ) > 0`（半整数運動量に固有の点）
 
@@ -144,7 +144,7 @@ theorem checkBigLambda_lt_max_of_gammaFn (F : CheckFermiSetup M) (P : IsingParam
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (3) 前半**:
 固有値 `Λ̌_max` の固有ベクトルは `im Q̌_{(1,…,1)}` に入る。
 
-抽象版 `Abstract.eq_proj_of_eigen` の特殊化（作用は `Matrix.mulVec`）。 -/
+必要十分版 `NecSuf.eq_proj_of_eigen` の特殊化（作用は `Matrix.mulVec`）。 -/
 theorem eq_Qproj_univ_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hgpos : ∀ i, 0 < g i) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
@@ -154,7 +154,7 @@ theorem eq_Qproj_univ_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M �
             = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • x) :
     x = (F.Qproj Finset.univ).mulVec x := by
   classical
-  refine Abstract.eq_proj_of_eigen
+  refine NecSuf.eq_proj_of_eigen
     (act := fun (A : TensorPow M) (v : Conf M → ℂ) => A.mulVec v)
     (fun A B v => (Matrix.mulVec_mulVec v A B).symm)
     (fun v => Matrix.one_mulVec v)

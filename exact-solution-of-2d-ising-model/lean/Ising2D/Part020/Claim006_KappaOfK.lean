@@ -4,17 +4,17 @@
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
 - `critical_006_claim_kappa_of_K_basic`（ラベル `kappa_of_K_basic`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は
-`Ising2D/Abstract/MeanValueTwoSided.lean`（(5) の増分評価）と
-`Ising2D/Abstract/HyperbolicBounds.lean`（数値評価に使う `cosh` の上下界）。
+**具体版**（人手証明と同じ抽象度）。必要十分版は
+`Ising2D/NecSuf/MeanValueTwoSided.lean`（(5) の増分評価）と
+`Ising2D/NecSuf/HyperbolicBounds.lean`（数値評価に使う `cosh` の上下界）。
 
 ## 人手証明の数値評価との差（重要）
 
 原文 (4)(5) は `cosh 0.2 ≤ 1.02007` のような**具体的な数値評価を外から持ち込んでいる**
 （原文自身が `remark_real_analysis_escape_chapter_E` の末尾でそう宣言している）。
-本形式化では**外から数値を持ち込まず**、`Ising2D.Abstract.cosh_le_inv_one_sub_sq_div_two`
+本形式化では**外から数値を持ち込まず**、`Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two`
 （`cosh t ≤ (1-t²/2)⁻¹`、mathlib の `Real.cosh_le_exp_half_sq` から出る）と
-`Ising2D.Abstract.one_add_sq_div_two_le_cosh` だけで評価する。
+`Ising2D.NecSuf.one_add_sq_div_two_le_cosh` だけで評価する。
 そのぶん定数はわずかに悪くなる（原文の値 → 本形式化の値）:
 
 | 量 | 原文 | 本形式化 |
@@ -37,7 +37,7 @@
 （`sinh` の単調性しか要らず、微分が要らない）。
 -/
 import Ising2D.Part020.Definition002_KappaAndCritical
-import Ising2D.Abstract.MeanValueTwoSided
+import Ising2D.NecSuf.MeanValueTwoSided
 
 namespace Ising2D
 
@@ -56,10 +56,10 @@ theorem sqrt_two_bounds : (1.4142135 : ℝ) ≤ Real.sqrt 2 ∧ Real.sqrt 2 ≤ 
 
 theorem cosh_02_bounds : (1.02 : ℝ) ≤ Real.cosh 0.2 ∧ Real.cosh 0.2 ≤ 1.0204082 := by
   constructor
-  · have := Abstract.one_add_sq_div_two_le_cosh (0.2 : ℝ)
+  · have := NecSuf.one_add_sq_div_two_le_cosh (0.2 : ℝ)
     norm_num at this ⊢
     linarith
-  · have := Abstract.cosh_le_inv_one_sub_sq_div_two (t := (0.2 : ℝ)) (by norm_num)
+  · have := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := (0.2 : ℝ)) (by norm_num)
     norm_num at this ⊢
     linarith
 
@@ -271,7 +271,7 @@ theorem differentiableOn_kappaK : DifferentiableOn ℝ kappaK (interior Dnbhd) :
 `3.52|K-K_c| ≤ |κ(K)| ≤ 4.74|K-K_c| ≤ 0.474`。 -/
 theorem abs_kappaK_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
     (3.52 : ℝ) * |K - Kc| ≤ |kappaK K| ∧ |kappaK K| ≤ 4.74 * |K - Kc| ∧ |kappaK K| ≤ 0.474 := by
-  have hb := Abstract.abs_sub_bounds_of_deriv_bounds (D := Dnbhd) Dnbhd_convex
+  have hb := NecSuf.abs_sub_bounds_of_deriv_bounds (D := Dnbhd) Dnbhd_convex
     (f := kappaK) (clo := 3.52) (chi := 4.74) continuousOn_kappaK differentiableOn_kappaK
     (fun x hx => by
       rw [deriv_kappaK_on (mem_Dnbhd_of_mem_interior hx)]
@@ -327,7 +327,7 @@ theorem differentiableOn_kappaDerivSq : DifferentiableOn ℝ kappaDerivSq (inter
 /-- **人手証明 `kappa_of_K_basic` (5) の第 2 式**: `|κ'(K)² - 16| ≤ 25.1 |κ(K)|`。 -/
 theorem abs_kappaDerivSq_sub_le {K : ℝ} (hK : K ∈ Dnbhd) :
     |kappaDeriv K ^ 2 - 16| ≤ 25.1 * |kappaK K| := by
-  have hb := Abstract.abs_sub_le_of_abs_deriv_le (D := Dnbhd) Dnbhd_convex
+  have hb := NecSuf.abs_sub_le_of_abs_deriv_le (D := Dnbhd) Dnbhd_convex
     (f := kappaDerivSq) (C := 88.2) continuousOn_kappaDerivSq differentiableOn_kappaDerivSq
     (fun x hx => by
       rw [(hasDerivAt_kappaDerivSq (pos_of_mem_Dnbhd (mem_Dnbhd_of_mem_interior hx))).deriv]

@@ -6,9 +6,9 @@
 - `number_operator_idempotent`（`eigenvalues_of_V_005_claim_number_operator_idempotent`）
 - `number_operators_commute`（`eigenvalues_of_V_006_claim_number_operators_commute`）
 
-抽象版は `Ising2D/Abstract/NumberOperator.lean`。本ファイルの主定理は
-**すべて抽象版の特殊化として導出する**（`Ising2D.Abstract.num_mul_num` /
-`Abstract.commute_cre_num` / `Abstract.commute_ann_num` / `Abstract.commute_num_num`）。
+必要十分版は `Ising2D/NecSuf/NumberOperator.lean`。本ファイルの主定理は
+**すべて必要十分版の特殊化として導出する**（`Ising2D.NecSuf.num_mul_num` /
+`NecSuf.commute_cre_num` / `NecSuf.commute_ann_num` / `NecSuf.commute_num_num`）。
 
 ## 原文の設定を Lean へ移すにあたって
 
@@ -29,8 +29,8 @@
 （本章が `γ` について使うのは `γ(θ_μ) ≥ 0` だけである）。
 -/
 import Ising2D.Part008.Definition030_Fermi
-import Ising2D.Abstract.NumberOperator
-import Ising2D.Abstract.JointEigenspace
+import Ising2D.NecSuf.NumberOperator
+import Ising2D.NecSuf.JointEigenspace
 import Ising2D.Part009.Definition001_Trace
 
 namespace Ising2D
@@ -39,7 +39,7 @@ open Matrix
 
 /-! ## `Mat(2^M, ℂ)` に 2-捩れが無いこと -/
 
-/-- 抽象版が要求する唯一の非自明な仮定（`x + x = 0 → x = 0`）は
+/-- 必要十分版が要求する唯一の非自明な仮定（`x + x = 0 → x = 0`）は
 複素行列では成り立つ。原文 `number_operator_idempotent` (1) の「`2 ≠ 0` なので」。 -/
 theorem tensorPow_two_torsion_free {M : ℕ} (x : TensorPow M) (h : x + x = 0) : x = 0 := by
   ext i j
@@ -91,7 +91,7 @@ noncomputable def cre (i : F.Idx) : TensorPow M := psiDag K M i.1 (F.t i.1)
 noncomputable def ann (i : F.Idx) : TensorPow M := psi K M (-i.1) (F.t (-i.1))
 
 /-- **原文 `def_number_operator` の形式化**: `n_μ := ψ_μ^† ψ_{-μ}`。 -/
-noncomputable def nOp (i : F.Idx) : TensorPow M := Abstract.num F.cre F.ann i
+noncomputable def nOp (i : F.Idx) : TensorPow M := NecSuf.num F.cre F.ann i
 
 theorem nOp_def (i : F.Idx) : F.nOp i = F.cre i * F.ann i := rfl
 
@@ -147,10 +147,10 @@ theorem acomm_cre_ann (i j : F.Idx) :
 
 /-- **原文 `number_operator_idempotent` (1)**: `(ψ_μ^†)^2 = 0`, `(ψ_{-μ})^2 = 0`。 -/
 theorem cre_sq (i : F.Idx) : F.cre i * F.cre i = 0 :=
-  Abstract.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_cre_cre i i)
+  NecSuf.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_cre_cre i i)
 
 theorem ann_sq (i : F.Idx) : F.ann i * F.ann i = 0 :=
-  Abstract.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_ann_ann i i)
+  NecSuf.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_ann_ann i i)
 
 theorem acomm_cre_ann_self (i : F.Idx) :
     F.cre i * F.ann i + F.ann i * F.cre i = 1 := by
@@ -159,34 +159,34 @@ theorem acomm_cre_ann_self (i : F.Idx) :
 
 /-- **原文 `number_operator_idempotent` (2)**: `ψ_{-μ}ψ_μ^† = I - n_μ`。 -/
 theorem ann_mul_cre (i : F.Idx) : F.ann i * F.cre i = 1 - F.nOp i :=
-  Abstract.ann_mul_cre F.cre F.ann i (F.acomm_cre_ann_self i)
+  NecSuf.ann_mul_cre F.cre F.ann i (F.acomm_cre_ann_self i)
 
-/-- **原文 `number_operator_idempotent` (3)**: `n_μ^2 = n_μ`（抽象版の特殊化）。 -/
+/-- **原文 `number_operator_idempotent` (3)**: `n_μ^2 = n_μ`（必要十分版の特殊化）。 -/
 theorem nOp_mul_self (i : F.Idx) : F.nOp i * F.nOp i = F.nOp i :=
-  Abstract.num_mul_num F.cre F.ann i tensorPow_two_torsion_free
+  NecSuf.num_mul_num F.cre F.ann i tensorPow_two_torsion_free
     (F.acomm_cre_cre i i) (F.acomm_ann_ann i i) (F.acomm_cre_ann_self i)
 
-/-- **原文 `number_operators_commute` (1)** 前半（抽象版の特殊化）。 -/
+/-- **原文 `number_operators_commute` (1)** 前半（必要十分版の特殊化）。 -/
 theorem commute_cre_nOp {i j : F.Idx} (hij : i ≠ j) :
     F.cre i * F.nOp j = F.nOp j * F.cre i :=
-  Abstract.commute_cre_num F.cre F.ann (F.acomm_cre_cre i j)
+  NecSuf.commute_cre_num F.cre F.ann (F.acomm_cre_cre i j)
     (by have := F.acomm_cre_ann i j; rwa [if_neg hij] at this)
 
-/-- **原文 `number_operators_commute` (1)** 後半（抽象版の特殊化）。 -/
+/-- **原文 `number_operators_commute` (1)** 後半（必要十分版の特殊化）。 -/
 theorem commute_ann_nOp {i j : F.Idx} (hij : i ≠ j) :
     F.ann i * F.nOp j = F.nOp j * F.ann i :=
-  Abstract.commute_ann_num F.cre F.ann
+  NecSuf.commute_ann_num F.cre F.ann
     (by
       have := F.acomm_cre_ann j i
       rw [if_neg (Ne.symm hij)] at this
       linear_combination (norm := noncomm_ring) this)
     (F.acomm_ann_ann i j)
 
-/-- **原文 `number_operators_commute` (2)**: `n_μ n_ν = n_ν n_μ`（抽象版の特殊化）。 -/
+/-- **原文 `number_operators_commute` (2)**: `n_μ n_ν = n_ν n_μ`（必要十分版の特殊化）。 -/
 theorem commute_nOp_nOp (i j : F.Idx) : Commute (F.nOp i) (F.nOp j) := by
   by_cases hij : i = j
   · subst hij; exact Commute.refl _
-  · refine Abstract.commute_num_num F.cre F.ann (F.acomm_cre_cre i j) ?_ ?_ (F.acomm_ann_ann i j)
+  · refine NecSuf.commute_num_num F.cre F.ann (F.acomm_cre_cre i j) ?_ ?_ (F.acomm_ann_ann i j)
     · have := F.acomm_cre_ann i j; rwa [if_neg hij] at this
     · have := F.acomm_cre_ann j i
       rw [if_neg (Ne.symm hij)] at this

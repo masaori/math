@@ -17,7 +17,7 @@
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Data.Matrix.Basis
 import Mathlib.LinearAlgebra.Multilinear.Basic
-import Ising2D.Abstract.MatrixUnits
+import Ising2D.NecSuf.MatrixUnits
 import Ising2D.Part002.Theorem000_TensorBasis
 
 open scoped TensorProduct
@@ -140,18 +140,18 @@ theorem matrixUnitBasis_apply (IJ : Conf M × Conf M) :
 
 /-- 人手証明 003 Step 2 の積公式 `E_{IJ} E_{KL} = δ_{JK} E_{IL}`。
 
-抽象版は `Ising2D/Abstract/MatrixUnits.lean` の
-`Ising2D.Abstract.single_mul_single_eq_ite`（係数は任意の半環、添字は 4 つとも別の型でよい）。
+必要十分版は `Ising2D/NecSuf/MatrixUnits.lean` の
+`Ising2D.NecSuf.single_mul_single_eq_ite`（係数は任意の半環、添字は 4 つとも別の型でよい）。
 ここではその特殊化として、係数 `ℂ`・添字 `Conf M` の場合を人手証明の記法で述べる。 -/
 theorem E_mul_E (I J K L : Conf M) :
     E I J * E K L = if J = K then E I L else 0 :=
-  Abstract.single_mul_single_eq_ite I J K L
+  NecSuf.single_mul_single_eq_ite I J K L
 
 /-- 人手証明 003 Step 2 の単位元の展開 `I = Σ_P E_{PP}`。
 
-抽象版は `Ising2D.Abstract.one_eq_sum_single`（係数は任意の半環、添字は任意の有限型）。 -/
+必要十分版は `Ising2D.NecSuf.one_eq_sum_single`（係数は任意の半環、添字は任意の有限型）。 -/
 theorem one_eq_sum_E : (1 : TensorPow M) = ∑ P : Conf M, E P P :=
-  Abstract.one_eq_sum_single
+  NecSuf.one_eq_sum_single
 
 end MatrixUnits
 

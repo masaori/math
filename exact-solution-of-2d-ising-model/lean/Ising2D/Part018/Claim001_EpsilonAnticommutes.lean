@@ -4,9 +4,9 @@
 正本: `structured-latex/content/018_even_sector_closing.ts`
 （`closing_001_claim_epsilon_anticommutes`、ラベル **`epsilon_anticommutes_with_check_Z_Y`**）
 
-抽象版は `Ising2D/Abstract/ParityFermion.lean`（同じラベル）の
-`Ising2D.Abstract.anticomm_sum_smul` / `Abstract.commute_parity_num` /
-`Abstract.commute_parity_projOn`。本ファイルの (2)(3) はその**系**である。
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
+`Ising2D.NecSuf.anticomm_sum_smul` / `NecSuf.commute_parity_num` /
+`NecSuf.commute_parity_projOn`。本ファイルの (2)(3) はその**系**である。
 
 ## 人手証明との対応
 
@@ -21,7 +21,7 @@
 (3) だけは「`ψ̌` が `Ž, Y̌` の 1 次結合であること」（原文 `def_check_fermi`、章 016）を
 述語 `Ising2D.IsCheckMode` として受け取る形にしてある。
 -/
-import Ising2D.Abstract.ParityFermion
+import Ising2D.NecSuf.ParityFermion
 import Ising2D.Part010.Claim010_EpsilonCommutes
 import Ising2D.Part013.Definition003_HalfIntegerModes
 
@@ -33,18 +33,18 @@ variable {M : ℕ}
 
 /-- **人手証明 (2)**: `ε Ž_μ = -Ž_μ ε`。
 
-抽象版 `Ising2D.Abstract.anticomm_sum_smul` の特殊化として導く
+必要十分版 `Ising2D.NecSuf.anticomm_sum_smul` の特殊化として導く
 （`Ž_μ` は `Z_j` の ℂ 係数有限和である）。 -/
 theorem epsilon_anticomm_checkZ (M : ℕ) (μ : ℤ) :
     epsilon M * checkZ M μ = -(checkZ M μ * epsilon M) := by
   rw [checkZ]
-  exact Abstract.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Z j) Finset.univ _
+  exact NecSuf.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Z j) Finset.univ _
 
 /-- **人手証明 (2)**: `ε Y̌_μ = -Y̌_μ ε`。 -/
 theorem epsilon_anticomm_checkY (M : ℕ) (μ : ℤ) :
     epsilon M * checkY M μ = -(checkY M μ * epsilon M) := by
   rw [checkY]
-  exact Abstract.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Y j) Finset.univ _
+  exact NecSuf.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Y j) Finset.univ _
 
 /-- 原文 `def_check_fermi` の「`ψ̌_μ^†` は `Ž_μ, Y̌_μ` の ℂ 係数 1 次結合」。 -/
 def IsCheckMode (x : TensorPow M) : Prop :=

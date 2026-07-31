@@ -23,6 +23,15 @@ $$\pi(p,1)=\operatorname{lcm}\{\operatorname{ord}(\lambda)\ :\ \lambda\in\overli
 体は $\overline{\mathbb{F}_p}$ に限定せず任意の体で述べた。可算・非可算の区別には触れない
 純代数の主張であり、$\mathbb{R}$ へは脱出していない。
 
+## 2026-07-31（cycle 17 step 3）の追記: 以下の「逆方向」の記述は**前提が誤っていた**
+
+本ファイルは $\pi(p,1)$ を「$A=T\bmod p$ の**乗法的位数**（＝行列冪列 $(T^N\bmod p)_N$ の最終周期）」と
+読んで、逆向き $\operatorname{ord}(A)\mid\operatorname{lcm}$ を「半単純性に帰着する未実施の組み立て」と
+書いていた。**この読みでは命題 B は偽である**（半単純性の仮定が無いから、ではなく、
+人手証明が計算しているのが行列冪列の周期ではなく**トレース列 $(\operatorname{Tr}T^N\bmod p)_N$ の周期**
+だからである）。$4\times4$ の反例と、正しい読みでの**両方向**の形式化は
+`PropBTracePeriod.lean` にある。以下の記述はその訂正前のものとして残す。
+
 ## 形式化していない主張（**逆方向＝ $\pi(p,1)\mid\operatorname{lcm}$**）
 
 * **逆向きの整除 $\operatorname{ord}(A)\mid\operatorname{lcm}\{\operatorname{ord}(\lambda)\}$ は形式化していない。**

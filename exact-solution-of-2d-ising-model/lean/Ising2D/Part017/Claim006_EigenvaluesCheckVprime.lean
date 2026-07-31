@@ -5,14 +5,14 @@
 `eigenvalues_of_check_Vprime`（`evenEigen_006_claim_...`）、および
 `def_check_number_operator` (2) の `X̌`, `V̌'`。
 
-**抽象版**は `Ising2D/Abstract/JointEigenspace.lean` の
-`Abstract.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
-`Abstract.exp_mul_eq_of_mul_eq_smul`（原文 Step 3）、
-および `Ising2D/Abstract/SimpleEigenvalue.lean` の左右反転版
-（`Abstract.mul_exp_eq_of_mul_eq_smul`。原文が区別していない
+**必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean` の
+`NecSuf.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
+`NecSuf.exp_mul_eq_of_mul_eq_smul`（原文 Step 3）、
+および `Ising2D/NecSuf/SimpleEigenvalue.lean` の左右反転版
+（`NecSuf.mul_exp_eq_of_mul_eq_smul`。原文が区別していない
 `Q̌_ε V̌' = e^ǧ Q̌_ε` の形で、後段の単純性の証明が要求する）。
 
-**章 009 の `eigenvalues_of_Vprime` とまったく同じ抽象版の特殊化である。**
+**章 009 の `eigenvalues_of_Vprime` とまったく同じ必要十分版の特殊化である。**
 違いは重複度で、章 009 の `2^{M-m}` が `m = M` により `1` になる。
 
 ## `γ(θ~_μ)` の扱い
@@ -24,7 +24,7 @@
 （`Theorem011_MaxEigenvalueSimple.lean` で `gammaFn` との同定と狭義正値性を証明する）。
 -/
 import Ising2D.Part017.Claim005_CheckJointEigenspace
-import Ising2D.Abstract.SimpleEigenvalue
+import Ising2D.NecSuf.SimpleEigenvalue
 
 namespace Ising2D
 
@@ -94,7 +94,7 @@ theorem Vprime_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   have h : NormedSpace.exp (F.Xop g) * F.Qproj T
       = Complex.exp ((F.gval g T : ℝ) : ℂ) • F.Qproj T :=
     open scoped Norms.Operator in
-      Abstract.exp_mul_eq_of_mul_eq_smul (F.Xop_mul_Qproj g T)
+      NecSuf.exp_mul_eq_of_mul_eq_smul (F.Xop_mul_Qproj g T)
   rw [Vprime, matExp, h, Complex.ofReal_exp]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -104,7 +104,7 @@ theorem Qproj_mul_Vprime (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   have h : F.Qproj T * NormedSpace.exp (F.Xop g)
       = Complex.exp ((F.gval g T : ℝ) : ℂ) • F.Qproj T :=
     open scoped Norms.Operator in
-      Abstract.mul_exp_eq_of_mul_eq_smul (F.Qproj_mul_Xop g T)
+      NecSuf.mul_exp_eq_of_mul_eq_smul (F.Qproj_mul_Xop g T)
   rw [Vprime, matExp, h, Complex.ofReal_exp]
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 4**:

@@ -5,15 +5,15 @@
 （`structured-latex/content/014_even_sector_T_action.ts` の
 `evensectorT_002_claim_nesting_commutator`）
 
-**抽象版**は既存の `Ising2D/Abstract/ExpConjugation.lean` の
-`Ising2D.Abstract.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y`。
+**必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の
+`Ising2D.NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y`。
 本ファイルの 8 本（4 式 × 偶奇）はすべてその系として導く。
 
 ## ここで確かめたこと（章 014 の要点）
 
 008 章の `<nesting_of_commutator_of_H_and_Z>`（整数運動量）と本章の
 `<nesting_of_commutator_of_H_and_check_Z>`（半整数運動量）は、
-**同じ抽象版 `adCLM_pow_even` / `adCLM_pow_odd_*` の別の特殊化**である。
+**同じ必要十分版 `adCLM_pow_even` / `adCLM_pow_odd_*` の別の特殊化**である。
 違いは `ad X` が `span{z, y}` に及ぼす係数 `(α, β)` だけで、
 
 | | `z` | `y` | `α` | `β` | `s` |
@@ -59,30 +59,30 @@ private theorem two_I_pow_two_mul (c : ℂ) (k : ℕ) :
     linear_combination (4 * c ^ 2) * Complex.I_sq
   rw [pow_mul, hsq, mul_pow, pow_mul]
 
-/-! ## `adPow` の偶奇（抽象版の特殊化） -/
+/-! ## `adPow` の偶奇（必要十分版の特殊化） -/
 
 open scoped Matrix.Norms.Operator in
-/-- 抽象版 `Abstract.adCLM_pow_even` の特殊化（偶数回）。 -/
+/-- 必要十分版 `NecSuf.adCLM_pow_even` の特殊化（偶数回）。 -/
 private theorem adPow_two_dim_even {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
     adPow X (2 * k) z = (s ^ (2 * k)) • z ∧ adPow X (2 * k) y = (s ^ (2 * k)) • y := by
-  simpa only [adPow_eq_adCLM] using Abstract.adCLM_pow_even (x := X) (z := z) (y := y) hz hy hs k
+  simpa only [adPow_eq_adCLM] using NecSuf.adCLM_pow_even (x := X) (z := z) (y := y) hz hy hs k
 
 open scoped Matrix.Norms.Operator in
-/-- 抽象版 `Abstract.adCLM_pow_odd_z` の特殊化（奇数回・`z` 始点）。 -/
+/-- 必要十分版 `NecSuf.adCLM_pow_odd_z` の特殊化（奇数回・`z` 始点）。 -/
 private theorem adPow_two_dim_odd_z {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
     adPow X (2 * k + 1) z = (s ^ (2 * k) * α) • y := by
   simpa only [adPow_eq_adCLM] using
-    Abstract.adCLM_pow_odd_z (x := X) (z := z) (y := y) hz hy hs k
+    NecSuf.adCLM_pow_odd_z (x := X) (z := z) (y := y) hz hy hs k
 
 open scoped Matrix.Norms.Operator in
-/-- 抽象版 `Abstract.adCLM_pow_odd_y` の特殊化（奇数回・`y` 始点）。 -/
+/-- 必要十分版 `NecSuf.adCLM_pow_odd_y` の特殊化（奇数回・`y` 始点）。 -/
 private theorem adPow_two_dim_odd_y {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
     adPow X (2 * k + 1) y = (s ^ (2 * k) * β) • z := by
   simpa only [adPow_eq_adCLM] using
-    Abstract.adCLM_pow_odd_y (x := X) (z := z) (y := y) hz hy hs k
+    NecSuf.adCLM_pow_odd_y (x := X) (z := z) (y := y) hz hy hs k
 
 /-! ## `ad(K_1 H_1^{(+)})` が `span{check(Z)_μ, check(Y)_μ}` を保つこと -/
 

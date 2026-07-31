@@ -4,9 +4,9 @@
 人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
 - `freeenergy_003_claim_limit_in_N_row`（ラベル `limit_of_log_Z_in_N_row`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は `Ising2D/Abstract/LogSqueeze.lean` の
-`Ising2D.Abstract.abs_log_div_sub_log_le_of_sandwich`。
-具体版は抽象版の系として導出してある。
+**具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/LogSqueeze.lean` の
+`Ising2D.NecSuf.abs_log_div_sub_log_le_of_sandwich`。
+具体版は必要十分版の系として導出してある。
 
 ## 他章への依存（仮定として受け取っている部分）
 
@@ -27,7 +27,7 @@
 使っているのは有限個の実数の不等式、`log` の単調性と `log(ab) = log a + log b`、
 および実数列 `(log 2)/N → 0` だけである。積分も一様連続性も使わない。
 -/
-import Ising2D.Abstract.LogSqueeze
+import Ising2D.NecSuf.LogSqueeze
 import Mathlib.Analysis.SpecificLimits.Basic
 
 namespace Ising2D
@@ -48,7 +48,7 @@ theorem abs_log_Z_sub_log_c_le
     exact_mod_cast this
   have hNR : (0 : ℝ) < N := by exact_mod_cast hN
   have hB : (1 : ℝ) ≤ 2 ^ M := one_le_pow₀ (by norm_num)
-  have hkey := Abstract.abs_log_div_sub_log_le_of_sandwich (c := c) (B := (2 : ℝ) ^ M)
+  have hkey := NecSuf.abs_log_div_sub_log_le_of_sandwich (c := c) (B := (2 : ℝ) ^ M)
     (Z := Z N) hN hc hB (h1 N) (h2 N)
   have hlogB : Real.log ((2 : ℝ) ^ M) = (M : ℝ) * Real.log 2 := by
     rw [Real.log_pow]

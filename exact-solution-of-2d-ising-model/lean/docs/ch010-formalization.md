@@ -90,37 +90,37 @@
 | `Ising2D.trace_epsProj_sym_pow_eq_plain` | Step 2 と Step 3 の合成 | 同 Step 2, 3 |
 | `Ising2D.partition_function_sector_decomposition` | **`Z = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})`** | `partition_function_sector_decomposition` |
 
-抽象版（`Ising2D/Abstract/`）:
+必要十分版（`Ising2D/NecSuf/`）:
 
 | Lean の名前 | 内容 |
 | --- | --- |
-| `Ising2D.Abstract.prod_entry_eq_zero_of_ne` / `prod_entry_eq_ite` | 因子が全部「対角」なら積も対角 |
-| `Ising2D.Abstract.map_exp_of_continuous` | 連続な環準同型は `exp` と可換 |
-| `Ising2D.Abstract.invProj` / `invProj_sq` / `invProj_mul_invProj_neg` / `invProj_add_invProj_neg` / `commute_invProj` | 対合から作る射影子とその性質 |
-| `Ising2D.Abstract.pow_mul_proj` | 冪等元上での因子の置き換え |
-| `Ising2D.Abstract.mul_pow_conj_left` | `B (BVB)^n = (BBV)^n B` |
-| `Ising2D.Abstract.cycSucc` / `openW` / `openW_snoc` | 巡回後者と「開いた道」の重み |
-| `Ising2D.Abstract.pow_succ_apply_eq_sum` | `(A^{n+1})_{ij}` は道の重みの総和 |
-| `Ising2D.Abstract.trace_pow_succ` | `tr(A^{n+1})` は閉じた道の重みの総和 |
+| `Ising2D.NecSuf.prod_entry_eq_zero_of_ne` / `prod_entry_eq_ite` | 因子が全部「対角」なら積も対角 |
+| `Ising2D.NecSuf.map_exp_of_continuous` | 連続な環準同型は `exp` と可換 |
+| `Ising2D.NecSuf.invProj` / `invProj_sq` / `invProj_mul_invProj_neg` / `invProj_add_invProj_neg` / `commute_invProj` | 対合から作る射影子とその性質 |
+| `Ising2D.NecSuf.pow_mul_proj` | 冪等元上での因子の置き換え |
+| `Ising2D.NecSuf.mul_pow_conj_left` | `B (BVB)^n = (BBV)^n B` |
+| `Ising2D.NecSuf.cycSucc` / `openW` / `openW_snoc` | 巡回後者と「開いた道」の重み |
+| `Ising2D.NecSuf.pow_succ_apply_eq_sum` | `(A^{n+1})_{ij}` は道の重みの総和 |
+| `Ising2D.NecSuf.trace_pow_succ` | `tr(A^{n+1})` は閉じた道の重みの総和 |
 
 ---
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 | 抽象版で分かったこと |
+| 人手証明のラベル | 具体版 | 必要十分版 | 必要十分版で分かったこと |
 | --- | --- | --- | --- |
-| `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec`（`Mat(2^M,ℂ)`。抽象版からの導出は `siteProd_diagonal` の中） | `Ising2D.Abstract.prod_entry_eq_zero_of_ne`（`Abstract/SiteDiagonal.lean`） | 効いているのは「クロネッカー積の成分は因子の成分の積」と「各因子が対角」の 2 点だけ。**行列であることも、複素数であることも、サイトの次元が 2 であることも、加法すら効いていない**（零元をもつ可換モノイドで足りる）。零因子の非存在も不要 |
-| `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply`（抽象版からの導出は `exp_pi_apply`） | `Ising2D.Abstract.map_exp_of_continuous`（`Abstract/ExpDiagonal.lean`） | 原文の「冪 → 部分和 → 成分ごとの収束」の 3 段は、**「連続な環準同型は `exp` と可換」1 本**に集約される。対角行列であることも行列であることも本質ではない |
-| `epsilon_projector_properties` (1)(2)(3) | `Ising2D.epsProj_sq` / `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（**抽象版の系として導出済み**） | `Ising2D.Abstract.invProj_sq` ほか（`Abstract/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
-| `epsilon_commutes_with_transfer_matrices` Step 5 | `Ising2D.commute_epsProj_of_commute_epsilon`（**抽象版の系**） | `Ising2D.Abstract.commute_invProj` | 「`ε` と可換なら `P^{(±)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
-| `sector_replacement_of_V1` (2) | `Ising2D.sector_replacement_pow`（**抽象版の系**） | `Ising2D.Abstract.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
-| `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.Abstract.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合法則だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
-| `partition_function_via_transfer_matrix`（001 章 Step 2, 3） | `Ising2D.partitionFunctionC_eq_trace`（**抽象版の系**） | `Ising2D.Abstract.trace_pow_succ`（`Abstract/TracePathSum.lean`） | 「トレースは閉じた道の重みの総和」に効いているのは**有限添字集合と可換半環**だけ。Ising 模型であることも、成分が `exp` の形であることも、複素数であることも、可逆性・ノルム・位相も効いていない |
+| `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec`（`Mat(2^M,ℂ)`。必要十分版からの導出は `siteProd_diagonal` の中） | `Ising2D.NecSuf.prod_entry_eq_zero_of_ne`（`NecSuf/SiteDiagonal.lean`） | 効いているのは「クロネッカー積の成分は因子の成分の積」と「各因子が対角」の 2 点だけ。**行列であることも、複素数であることも、サイトの次元が 2 であることも、加法すら効いていない**（零元をもつ可換モノイドで足りる）。零因子の非存在も不要 |
+| `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply`（必要十分版からの導出は `exp_pi_apply`） | `Ising2D.NecSuf.map_exp_of_continuous`（`NecSuf/ExpDiagonal.lean`） | 原文の「冪 → 部分和 → 成分ごとの収束」の 3 段は、**「連続な環準同型は `exp` と可換」1 本**に集約される。対角行列であることも行列であることも本質ではない |
+| `epsilon_projector_properties` (1)(2)(3) | `Ising2D.epsProj_sq` / `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（**必要十分版の系として導出済み**） | `Ising2D.NecSuf.invProj_sq` ほか（`NecSuf/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
+| `epsilon_commutes_with_transfer_matrices` Step 5 | `Ising2D.commute_epsProj_of_commute_epsilon`（**必要十分版の系**） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(±)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
+| `sector_replacement_of_V1` (2) | `Ising2D.sector_replacement_pow`（**必要十分版の系**） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
+| `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合法則だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
+| `partition_function_via_transfer_matrix`（001 章 Step 2, 3） | `Ising2D.partitionFunctionC_eq_trace`（**必要十分版の系**） | `Ising2D.NecSuf.trace_pow_succ`（`NecSuf/TracePathSum.lean`） | 「トレースは閉じた道の重みの総和」に効いているのは**有限添字集合と可換半環**だけ。Ising 模型であることも、成分が `exp` の形であることも、複素数であることも、可逆性・ノルム・位相も効いていない |
 
-抽象版を置かなかった主張とその理由:
+必要十分版を置かなかった主張とその理由:
 
 * `V1_component_equals_pauli` / `V2_component_equals_pauli`
-  — 内容は上の抽象版（対角性・`exp` の準同型性）の**合成**であり、
+  — 内容は上の必要十分版（対角性・`exp` の準同型性）の**合成**であり、
     このファイル固有の内容は「2 つの定義の突き合わせ」という具体的な主張だから。
 * `two_by_two_transfer_identity`
   — `Real.tanh`, `Real.sinh` の具体的な恒等式そのもので、取り払える構造が無い。
@@ -155,7 +155,7 @@
   （`Matrix.trace_pow` / `Matrix.pow_apply` を `Mathlib/LinearAlgebra/Matrix/Trace.lean`,
   `Mathlib/Data/Matrix/Mul.lean` で検索したが、`Matrix.pow_apply_nonneg` と
   `SimpleGraph.adjMatrix_pow_apply_eq_card_walk` しか無い）。
-  そのため `Ising2D/Abstract/TracePathSum.lean` として自前で証明した
+  そのため `Ising2D/NecSuf/TracePathSum.lean` として自前で証明した
   （`Fin.consEquiv` / `Fin.snocEquiv` による添字の付け替えを使う）。
 
 ---

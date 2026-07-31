@@ -5,7 +5,7 @@
 （`closing_007_theorem_max_eigenvector_in_even_sector`、
 ラベル **`max_eigenvector_in_even_sector`**）
 
-抽象版は `Ising2D/Abstract/ParityFermion.lean`（同じラベル）。本ファイルの内容は
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）。本ファイルの内容は
 `Claim002`（符号の反転則）と `Claim003`（トレースの符号）の組み合わせであり、
 新しい抽象構造は現れない。
 

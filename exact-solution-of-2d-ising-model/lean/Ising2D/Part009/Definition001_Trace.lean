@@ -10,12 +10,12 @@
 （`Matrix.trace A = ∑ i, A i i`）と**定義そのものが一致する**ので、
 以降は `Matrix.trace` をそのまま使う（`trace_eq_sum_diag` で一致を明示する）。
 
-抽象版は置かない。理由: 原文 (1)(2)(3) は mathlib の
+必要十分版は置かない。理由: 原文 (1)(2)(3) は mathlib の
 `Matrix.trace_add` / `trace_smul` / `trace_mul_comm` / `trace_one` が
 既に任意の可換半環について述べており、これ以上取り払える構造が無い。
-(4) も (2) の系である。なお (2) の巡回性という**性質だけ**を仮定にした抽象版は
-`Ising2D/Abstract/NumberOperator.lean` の `tau_num_mul_add_self` と
-`Ising2D/Abstract/JointEigenspace.lean` の `two_pow_smul_tau_projOn` にある
+(4) も (2) の系である。なお (2) の巡回性という**性質だけ**を仮定にした必要十分版は
+`Ising2D/NecSuf/NumberOperator.lean` の `tau_num_mul_add_self` と
+`Ising2D/NecSuf/JointEigenspace.lean` の `two_pow_smul_tau_projOn` にある
 （そこでは `τ` の値域すら任意の可換群でよいことが分かる）。
 -/
 import Mathlib.LinearAlgebra.Matrix.Trace

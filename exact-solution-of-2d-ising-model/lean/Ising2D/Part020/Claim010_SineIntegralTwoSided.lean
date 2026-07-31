@@ -6,11 +6,11 @@
 
 **これが対数発散の源である。**
 
-**具体版**（人手証明と同じ抽象度）。抽象版は
-`Ising2D/Abstract/LogDivergentIntegral.lean`（`Ising2D.Abstract.inv_sqrt_diff_bound` /
-`integral_inv_sqrt_quad`）。抽象版が示すとおり、**`sin` であることは効いておらず**、
+**具体版**（人手証明と同じ抽象度）。必要十分版は
+`Ising2D/NecSuf/LogDivergentIntegral.lean`（`Ising2D.NecSuf.inv_sqrt_diff_bound` /
+`integral_inv_sqrt_quad`）。必要十分版が示すとおり、**`sin` であることは効いておらず**、
 `c_0 (θ/2) ≤ w(θ) ≤ θ/2` と `θ/2 - w(θ) ≤ θ³/48` という 2 つの各点評価だけが効いている。
-本ファイルの上界の定数 `B = π²/(12 c_0(1+c_0))` は抽象版の
+本ファイルの上界の定数 `B = π²/(12 c_0(1+c_0))` は必要十分版の
 `C b²/(c_0(1+c_0)a²)` に `a = 1/2, b = π, C = 1/48` を入れたものと厳密に一致する。
 -/
 import Ising2D.Part020.Claim008_ElementarySineBounds
@@ -70,7 +70,7 @@ theorem sine_integral_two_sided (hδ : 0 < δ) :
     (continuous_sineIntegrand hδ).intervalIntegrable _ _
   have hi1 : IntervalIntegrable f1 volume 0 Real.pi :=
     (continuous_quadIntegrand hδ).intervalIntegrable _ _
-  -- 各点評価（抽象版の系）
+  -- 各点評価（必要十分版の系）
   have hpt : ∀ θ ∈ Set.Icc (0:ℝ) Real.pi,
       0 ≤ f2 θ - f1 θ ∧ f2 θ - f1 θ ≤ θ / (6 * c0 * (1 + c0)) := by
     intro θ hθ
@@ -85,7 +85,7 @@ theorem sine_integral_two_sided (hδ : 0 < δ) :
     have hcube : (1/2 : ℝ) * θ - Real.sin (θ / 2) ≤ (1/48 : ℝ) * θ ^ 3 := by
       have := (elementary_sine_bounds_cube h0 hπ).2
       linarith
-    obtain ⟨hup, hlo⟩ := Abstract.inv_sqrt_diff_bound (δ := δ) (a := 1/2) (c₀ := c0)
+    obtain ⟨hup, hlo⟩ := NecSuf.inv_sqrt_diff_bound (δ := δ) (a := 1/2) (c₀ := c0)
       (C := 1/48) (θ := θ) (w := Real.sin (θ / 2)) hδ (by norm_num) hc0 h0 hlow hhigh hcube
     have heq : δ ^ 2 + ((1/2 : ℝ) * θ) ^ 2 = δ ^ 2 + θ ^ 2 / 4 := by ring
     rw [heq] at hup hlo

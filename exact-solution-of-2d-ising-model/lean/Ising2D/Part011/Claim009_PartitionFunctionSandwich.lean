@@ -10,8 +10,8 @@
 **章 010 への依存**: `Z(J,J') = tr((V₁V₂)^{N_row})`（ラベル `partition_function_in_pauli_form`）
 は章 010 の結果であり、本タスクの担当外なので **仮定 `hZ` として受け取る**。
 
-抽象版は置かない（この主張は `trace_power_sandwich` の言い換えであり、
-抽象的な内容は `Ising2D/Abstract/RayleighMoments.lean` に尽きている）。
+必要十分版は置かない（この主張は `trace_power_sandwich` の言い換えであり、
+抽象的な内容は `Ising2D/NecSuf/RayleighMoments.lean` に尽きている）。
 -/
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
 

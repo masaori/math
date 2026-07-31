@@ -5,11 +5,11 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_003_definition_half_integer_modes`）
 
-**抽象版**は `Ising2D/Abstract/AntiperiodicFourier.lean`。
-とくに (1) の反周期性は `Ising2D.Abstract.pow_half_eq_neg_one`（`ξ^M = -1`）、
-(2) の添字周期性は既存の `Ising2D.Abstract.transform_periodic`
-（`Abstract/DiscreteFourier.lean`、重み・周波数が任意）の特殊化である。
-抽象版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumAbstract.lean`。
+**必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`。
+とくに (1) の反周期性は `Ising2D.NecSuf.pow_half_eq_neg_one`（`ξ^M = -1`）、
+(2) の添字周期性は既存の `Ising2D.NecSuf.transform_periodic`
+（`NecSuf/DiscreteFourier.lean`、重み・周波数が任意）の特殊化である。
+必要十分版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean`。
 
 ## 原文の定義（`M ∈ ℤ_{≥2}`、`μ ∈ ℤ`）
 

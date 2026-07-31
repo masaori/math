@@ -60,3 +60,27 @@ $T\in M_d(\mathbb{Z})$、$Z_N=\operatorname{Tr}T^N$ とし、$\pi(p,k)$ を「$Z
 - `wall_search.out` の群1・群2 は検査総数を出力していないため、破れ件数から破れ率を読むことはできない。
 - $\pi(p,1)$ の 2 つの公式を区別する `pi_p1_strict_demo` の例は**六頂点模型ではなく人工的な構成行列**であり、可積分模型でこの区別が現れることを示したものではない。
 - 破れる素数に $p=3$ が多いという傾向は観察であって、特徴づけは得られていない。
+
+## 追記（cycle 17 step 3, 2026-07-31）: 記号 $\pi(p,k)$ の 2 つの読みは一致しない
+
+本ディレクトリは冒頭のとおり $\pi(p,k)$ を「**トレース列** $Z_N\bmod p^k$ の最終周期」と定義して測ってきた。
+一方、論文本文の**命題 A** は $\pi(p,k)$ を「**行列冪列** $T^N\bmod p^k$ の最終周期」と定義している
+（`outputs/paper-plans/002_R_Lambda_duality.md` §2、`structured-latex/content/004_lambda_finite.ts`）。
+**この 2 つは一般に一致しない。** スクリプト `period_reading_counterexample.py`（素の Python 3、依存なし）と
+ログ `period_reading_counterexample.out` に次を記録した。
+
+1. **最小反例**: $T=\left(\begin{smallmatrix}0&1\\1&1\end{smallmatrix}\right)^{\oplus2}$, $p=2$（$\det T=1$）。
+   行列冪列の周期 $3$、トレース列の周期 $1$。$\chi_T\equiv(x^2+x+1)^2$ で相異なる固有値の重複度は
+   ともに $2$ だから、命題 B の右辺は $\operatorname{lcm}(\emptyset)=1$ で**トレース列の周期に一致し、
+   行列冪列の周期には一致しない**。この反例は Lean でも形式化した
+   （`lean/IntegrableLattice/PropBTracePeriod.lean` の `orderOf_cexMat` と `trace_cexMat_pow`）。
+2. **頻度**: ランダム整数行列（$p\nmid\det$）2487 例中 563 例（22.6%）で 2 つの周期が異なる。例外的現象ではない。
+3. **逆向きの帰結**: 命題 C の上界 $\pi(p,k)\mid p^{k-1}\pi(p,1)$ は、**トレース列の読みでは偽**である
+   （1669 例中 56 例＝3.4% で破れる。例: $A=\left(\begin{smallmatrix}1&1&-1\\2&1&-2\\-2&-1&-1\end{smallmatrix}\right)$,
+   $p=2$ でトレース周期は $\bmod\,2$ が $1$、$\bmod\,4$ が $4$ で $4\nmid2\cdot1$）。
+   Pisano 型上界は行列冪列の周期についての主張である。
+
+**したがって命題 A・B・C は同じ記号 $\pi(p,1)$ を共有できない。** 命題 B だけがトレース列の周期についての
+主張であり、命題 C は行列冪列の周期についての主張である（命題 A の結論はどちらの読みでも正しい。
+トレース列の周期は行列冪列の周期を割るため）。本文の記号の分離は cycle 17 step 3 の報告
+`outputs/reports/cycle17_ops_lean_propB.md` を参照。

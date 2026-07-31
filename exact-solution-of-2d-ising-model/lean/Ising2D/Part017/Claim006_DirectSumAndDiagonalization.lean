@@ -6,9 +6,9 @@
 - `eigenvalues_of_check_Vprime`（`evenEigen_006_claim_...`）の「`V̌'` は対角化可能」
 - `eigenvalues_of_V_plus`（`evenEigen_010_theorem_...`）の「`V^{(+)}` は対角化可能」
 
-**抽象版**は `Ising2D/Abstract/JointEigenspaceDecomposition.lean`。
+**必要十分版**は `Ising2D/NecSuf/JointEigenspaceDecomposition.lean`。
 章 009（`Ising2D/Part009/Claim009_DirectSumAndDiagonalization.lean`）と
-**まったく同じ抽象版の特殊化**であり、違いは同時固有空間の次元
+**まったく同じ必要十分版の特殊化**であり、違いは同時固有空間の次元
 （章 009 の `2^{M-m}` が `m = M` により `1` になる）だけである。
 
 半整数運動量では `tr(Q̌_ε) = 1` なので、直和成分はすべて 1 次元であり、
@@ -16,7 +16,7 @@
 （`Claim005_CheckJointEigenspace.lean` の `trace_Qproj` 参照）。
 -/
 import Ising2D.Part017.Theorem010_EigenvaluesVPlus
-import Ising2D.Abstract.JointEigenspaceDecomposition
+import Ising2D.NecSuf.JointEigenspaceDecomposition
 
 namespace Ising2D
 
@@ -34,13 +34,13 @@ variable {M : ℕ} (F : CheckFermiSetup M)
 theorem isInternal_range_Qproj :
     DirectSum.IsInternal fun T : Finset (CheckIdx M) =>
       LinearMap.range (Matrix.toLinAlgEquiv' (F.Qproj T)) :=
-  Abstract.isInternal_range_matrix_proj
+  NecSuf.isInternal_range_matrix_proj
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj
 
 /-- 原文 (5) 前半（`im Q̌_ε` たちが全体を張る）を `Submodule` の言葉で述べた版。 -/
 theorem iSup_range_Qproj_eq_top :
     (⨆ T : Finset (CheckIdx M), LinearMap.range (Matrix.toLinAlgEquiv' (F.Qproj T))) = ⊤ :=
-  Abstract.iSup_range_proj_eq_top
+  NecSuf.iSup_range_proj_eq_top
     (p := fun T : Finset (CheckIdx M) => Matrix.toLinAlgEquiv' (F.Qproj T))
     (by rw [← map_sum, F.sum_Qproj, map_one])
 
@@ -48,7 +48,7 @@ theorem iSup_range_Qproj_eq_top :
 theorem iSupIndep_range_Qproj :
     iSupIndep fun T : Finset (CheckIdx M) =>
       LinearMap.range (Matrix.toLinAlgEquiv' (F.Qproj T)) :=
-  Abstract.iSupIndep_range_proj
+  NecSuf.iSupIndep_range_proj
     (p := fun T : Finset (CheckIdx M) => Matrix.toLinAlgEquiv' (F.Qproj T))
     (fun _ _ h => by rw [← map_mul, F.Qproj_mul_Qproj_of_ne h, map_zero])
     (by rw [← map_sum, F.sum_Qproj, map_one])
@@ -62,7 +62,7 @@ theorem exists_eigenBasis_Vprime (g : CheckIdx M → ℝ) :
       (∀ a, ∃ T : Finset (CheckIdx M), lam a = ((Real.exp (F.gval g T) : ℝ) : ℂ)) ∧
       (∀ a, (F.Vprime g).mulVec (b a) = lam a • b a) ∧
       LinearMap.toMatrix b b (Matrix.toLinAlgEquiv' (F.Vprime g)) = Matrix.diagonal lam :=
-  Abstract.exists_eigenBasis_of_matrix_proj
+  NecSuf.exists_eigenBasis_of_matrix_proj
     (A := F.Vprime g) (Q := F.Qproj) (c := fun T => ((Real.exp (F.gval g T) : ℝ) : ℂ))
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj (F.Vprime_mul_Qproj g)
 
@@ -70,7 +70,7 @@ theorem exists_eigenBasis_Vprime (g : CheckIdx M → ℝ) :
 theorem exists_conj_diagonal_Vprime (g : CheckIdx M → ℝ) :
     ∃ (P P' : TensorPow M) (lam : Conf M → ℂ),
       P * P' = 1 ∧ P' * P = 1 ∧ P' * F.Vprime g * P = Matrix.diagonal lam :=
-  Abstract.exists_conj_diagonal_of_matrix_proj
+  NecSuf.exists_conj_diagonal_of_matrix_proj
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj (F.Vprime_mul_Qproj g)
 
 end CheckFermiSetup
@@ -94,7 +94,7 @@ theorem exists_eigenBasis_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
       (∀ a, (VPlus M s2 K1 K2star).mulVec (b a) = lam a • b a) ∧
       LinearMap.toMatrix b b (Matrix.toLinAlgEquiv' (VPlus M s2 K1 K2star))
         = Matrix.diagonal lam :=
-  Abstract.exists_eigenBasis_of_matrix_proj
+  NecSuf.exists_eigenBasis_of_matrix_proj
     (A := VPlus M s2 K1 K2star) (Q := F.Qproj)
     (c := fun T => ((checkBigLambda F g s2 T : ℝ) : ℂ))
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj
@@ -108,7 +108,7 @@ theorem exists_conj_diagonal_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → �
     ∃ (P P' : TensorPow M) (lam : Conf M → ℂ),
       P * P' = 1 ∧ P' * P = 1 ∧
         P' * VPlus M s2 K1 K2star * P = Matrix.diagonal lam :=
-  Abstract.exists_conj_diagonal_of_matrix_proj
+  NecSuf.exists_conj_diagonal_of_matrix_proj
     (Q := F.Qproj) (c := fun T => ((checkBigLambda F g s2 T : ℝ) : ℂ))
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj
     (VPlus_mul_Qproj F g hK1 hK2 hs2 hVeq)

@@ -23,11 +23,11 @@
 （`hres`）。仮定の内容は原文の主張そのもの
 「`ε f = ±f` なる `f` については `V_1 f = V_1^{(±)} f`」である。
 (2) は (1) から純代数的に従い、そこは無条件に証明してある
-（抽象版 `Ising2D.Abstract.pow_mul_proj`）。
+（必要十分版 `Ising2D.NecSuf.pow_mul_proj`）。
 
-## 抽象版
+## 必要十分版
 
-`Ising2D/Abstract/Projector.lean`（同じラベル `sector_replacement_of_V1`）。
+`Ising2D/NecSuf/Projector.lean`（同じラベル `sector_replacement_of_V1`）。
 (2) に効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」
 「`V_1 P = V_1^{(±)} P`」の 3 点だけで、`P` が射影子の形をしていることすら
 使わないことを確認した。
@@ -55,12 +55,12 @@ theorem sector_replacement_of_V1 {K1 ηsign η : ℂ} (hη : η * η = 1)
   exact hres _ (epsProj_mulVec_mem hη _)
 
 /-- **原文 (2) `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`**
-（抽象版 `Ising2D.Abstract.pow_mul_proj` の系）。 -/
+（必要十分版 `Ising2D.NecSuf.pow_mul_proj` の系）。 -/
 theorem sector_replacement_pow {K1 ηsign η : ℂ} {s2 : ℝ} {K2star : ℂ} (hη : η * η = 1)
     (hres : RestrictsOnSector M K1 ηsign η) (n : ℕ) :
     (V1pauli M K1 * V2pauli M s2 K2star) ^ n * epsProj M η
       = (V1 M K1 ηsign * V2pauli M s2 K2star) ^ n * epsProj M η :=
-  Abstract.pow_mul_proj (epsProj_sq hη) (commute_V1pauli_epsProj K1 η)
+  NecSuf.pow_mul_proj (epsProj_sq hη) (commute_V1pauli_epsProj K1 η)
     (commute_V2pauli_epsProj s2 K2star η) (commute_V1_epsProj K1 ηsign η)
     (sector_replacement_of_V1 hη hres) n
 

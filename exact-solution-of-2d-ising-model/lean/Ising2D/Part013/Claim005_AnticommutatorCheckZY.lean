@@ -5,9 +5,9 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_005_claim_anticommutator_check_Z_Y`）
 
-**抽象版**は `Ising2D/Abstract/AntiperiodicFourier.lean` の
-`Ising2D.Abstract.acomm_antiperiodic_fourier_clifford`（同じラベル）。
-抽象版からの導出は `Ising2D/Part013/Claim005_AnticommutatorCheckZYAbstract.lean`。
+**必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean` の
+`Ising2D.NecSuf.acomm_antiperiodic_fourier_clifford`（同じラベル）。
+必要十分版からの導出は `Ising2D/Part013/Claim005_AnticommutatorCheckZYFromNecSuf.lean`。
 
 ## 原文の主張（`μ, ν ∈ 𝓜̌`）
 

@@ -20,11 +20,11 @@
 | --- | --- | --- |
 | (R3) 線型性・単調性 | `∫(λg+νh)=λ∫g+ν∫h`、各点 `g ≤ h` ⇒ `∫g ≤ ∫h` | `intervalIntegral.integral_add` / `integral_smul` / `integral_sub` / `integral_mono_on` |
 | (R4) 微分積分学の基本定理 | `F' = g` 連続 ⇒ `∫_a^b g = F(b)-F(a)` | `intervalIntegral.integral_eq_sub_of_hasDerivAt` |
-| (R5) 積分記号下の微分 | 有界閉長方形上で `g`, `∂g/∂x` 連続 ⇒ `(∫g)' = ∫∂g/∂x` | **そのままの形は無い。** 優関数版 `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le` から `Ising2D/Abstract/DiffUnderIntegral.lean` で導いた |
+| (R5) 積分記号下の微分 | 有界閉長方形上で `g`, `∂g/∂x` 連続 ⇒ `(∫g)' = ∫∂g/∂x` | **そのままの形は無い。** 優関数版 `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le` から `Ising2D/NecSuf/DiffUnderIntegral.lean` で導いた |
 | (R6) 置換積分（`θ ↦ 2π-θ`） | `∫_a^b g(d-t)dt = ∫_{d-b}^{d-a} g` | `intervalIntegral.integral_comp_sub_left` |
 
-**(R5) だけが mathlib に「連続性だけを仮定した形」で存在しない。** これが抽象版
-`Ising2D/Abstract/DiffUnderIntegral.lean` を立てた理由である
+**(R5) だけが mathlib に「連続性だけを仮定した形」で存在しない。** これが必要十分版
+`Ising2D/NecSuf/DiffUnderIntegral.lean` を立てた理由である
 （コンパクト集合上の連続関数は有界だから、優関数を定数として取れば導ける）。
 
 さらに原文は (4)(5) 等で `cosh 0.2 ≤ 1.02007` のような**初等関数の数値評価を外から持ち込む**と
@@ -190,38 +190,38 @@
 `eventually_hasDerivAt_fFun` で「近傍で一致する」ことを示してから
 `HasDerivAt.congr_of_eventuallyEq` で 2 階微分へ渡している。
 
-## 2. 具体版と抽象版の 2 本立ての対応
+## 2. 具体版と必要十分版の 2 本立ての対応
 
-| 抽象版（`lean/Ising2D/Abstract/`） | 対応する具体版 | 抽象版で判明した本質 |
+| 必要十分版（`lean/Ising2D/NecSuf/`） | 対応する具体版 | 必要十分版で判明した本質 |
 | --- | --- | --- |
 | `HyperbolicBounds.lean` | `Part020/Claim001_CoshAddHalfAngle.lean`, `Part020/Claim009_ClosedFormLogIntegral.lean` | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
 | `MeanValueTwoSided.lean` | `Part020/Claim006_KappaOfK.lean` (5) | 原文は (R4)（微分積分学の基本定理）＋(R3)（積分の単調性）で `3.53\|K-K_c\| ≤ \|κ\| ≤ 4.72\|K-K_c\|` を出すが、**積分は効いていない**。効いているのは (a) 定義域が凸 (b) 導関数が定数で両側から抑えられる (c) 下界が非負、の 3 点だけで、**平均値の定理で足りる**。`κ` が Ising 模型の量であることも `arcsinh` で書けることも効いていない。 |
-| `LogDivergentIntegral.lean` | `Part020/Claim009_ClosedFormLogIntegral.lean`, `Part020/Claim010_SineIntegralTwoSided.lean` | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は抽象版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、抽象版と同じ値）。 |
+| `LogDivergentIntegral.lean` | `Part020/Claim009_ClosedFormLogIntegral.lean`, `Part020/Claim010_SineIntegralTwoSided.lean` | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は必要十分版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、必要十分版と同じ値）。 |
 | `DiffUnderIntegral.lean` | `Part020/Theorem011_SecondDerivativeLogDivergence.lean` | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |
 
-### 抽象版を立てなかった主張とその理由
+### 必要十分版を立てなかった主張とその理由
 
 * **`Claim007_GammaDerivatives.lean`（`gamma_derivatives_in_kappa`）**:
   内容は「`κ ↦ 2 arcsinh√(sinh²(κ/2)+c)` の 1・2 階導関数を計算する」ことで、効いているのは
   合成関数の微分と `arcsinh' = 1/√(1+y²)` だけ。`θ` は「`κ` に依存しない非負定数 `c` を足す」
-  以上の役割を持たない。この観察を抽象版に切り出しても mathlib の `HasDerivAt` の合成規則を
+  以上の役割を持たない。この観察を必要十分版に切り出しても mathlib の `HasDerivAt` の合成規則を
   書き写すだけになるので、具体版のみとした。
 * **`Claim008_ElementarySineBounds.lean`（`elementary_sine_bounds`）**:
   原文は (R4)(R3) を 3 段重ねて `t - t³/6 ≤ sin t ≤ t` を導くが、**mathlib はこれをそのまま持つ**
   （`Real.sin_le`, `Real.sin_ge_sub_cube`）。本主張に固有なのは `t = θ/2` と置いて `θ ∈ [0,π]` に
-  制限することだけで、抽象版は mathlib の 2 補題そのものになる。
+  制限することだけで、必要十分版は mathlib の 2 補題そのものになる。
 
 ## 3. 形式化できなかった主張とその理由
 
 | 原文のブロック（ラベル） | 内容 | 形式化しなかった理由 |
 | --- | --- | --- |
 | `critical_013_remark_physical_specific_heat`（`remark_physical_specific_heat`） | 物理的な比熱 `C = k_B K² d²f/dK²` との対応 | **形式化の対象外。** 数学的主張ではなく、無次元量と物理量の辞書（記号の読み替え）を述べる注記である。 |
-| `critical_000_remark_escape_to_real_analysis_chapter_E`（`remark_real_analysis_escape_chapter_E`） | (R3)〜(R6) の宣言 | **形式化の対象外（ただし全項目を mathlib へ対応づけ済み）。** これは「この章でどこまで実数解析へ脱出するか」を宣言するメタな注記であり、定理ではない。対応表は §0 に、(R5) の導出は `Abstract/DiffUnderIntegral.lean` にある。 |
+| `critical_000_remark_escape_to_real_analysis_chapter_E`（`remark_real_analysis_escape_chapter_E`） | (R3)〜(R6) の宣言 | **形式化の対象外（ただし全項目を mathlib へ対応づけ済み）。** これは「この章でどこまで実数解析へ脱出するか」を宣言するメタな注記であり、定理ではない。対応表は §0 に、(R5) の導出は `NecSuf/DiffUnderIntegral.lean` にある。 |
 
 ## 4. 人手証明との定数の差（原文の数値評価を持ち込まなかったことによる）
 
 原文は `cosh 0.2 ≤ 1.02007` 等を「初等関数の数値評価」として外から持ち込むと宣言している。
-本形式化はこれを持ち込まず、`Ising2D.Abstract.cosh_le_inv_one_sub_sq_div_two`
+本形式化はこれを持ち込まず、`Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two`
 （`cosh t ≤ (1-t²/2)⁻¹`）と `one_add_sq_div_two_le_cosh` から導いた。そのぶん定数が悪くなる。
 
 | 量 | 原文 | 本形式化 |
