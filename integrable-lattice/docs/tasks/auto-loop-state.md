@@ -4,9 +4,10 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
-current_cycle: 3            # cycle 0-2 完了。2026-06-24 ユーザーが3トラック(docs/themes.md)へ再スコープ。cycle 3 以降はトラック明記。
+current_cycle: 16           # cycle 0-15 完了。2026-06-24 ユーザーが3トラック(docs/themes.md)へ再スコープ。cycle 3 以降はトラック明記。
+                            # cycle 16 は 002 の昇格承認後の「論文 001 の残務を閉じる」サイクル。
 # 3トラック: 1 Reframe(本流) / 2 Solve(未解決模型の実厳密解) / 3 Pure(基礎論・数論)。2本立て(1,2)主軸 + 3 随時。
-last_run: 2026-06-21
+last_run: 2026-07-31
 cron_armed: 2026-06-21       # session-only, 7日で失効
 restore_point: 918af09       # 旧 cycle 0(文献分類版)成果の復元点。削除コミット c7fe283。
 ```
@@ -232,6 +233,22 @@ cycle 14 step 1 の起動でシェル展開の事故があり、同じ課題が 
 **002 を `outputs/papers/` へ昇格させるか。** G1–G6 はすべて満たした。承認前の判断材料は 002 の
 「昇格判断」節に 4 点（新規性が無いこと／残る未解決点 3 つ／Lean 非対象／投稿前の専門家確認事項）明示してある。
 **cycle 16 の内容はこの判断に依存するため、step 列は承認後に起こす。**
+
+## cycle 16 step 列（2026-07-31 起こし。承認済みを前提に起こした）
+
+**前提**: cycle 15 のユーザー判断点（002 を昇格させるか）は **承認**され、
+`outputs/papers/001_R_Lambda_duality/` として執筆済み（承認に伴い「Lean 非対象」の方針は撤回、
+Lean を構成要素に含めた）。したがって cycle 16 は **新しい探索ではなく、論文 001 が自分で挙げた
+残務（`outputs/papers/001_R_Lambda_duality/notes.md` の「未完了作業」「未解決リスク」）を
+一次情報で閉じるサイクル**とする。step の選定根拠はすべて notes.md の該当項である。
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T1 Reframe | verify_monsky_cuoco_monsky_primary | todo | | notes.md 未解決リスク 3・4。Monsky Thm 5.6 と Cuoco–Monsky Thm 1.7 の**原論文本文**を取得し、Kataoka arXiv:2606.03579 が Theorem 2.1 / 2.3 として引用した仮定・結論が原典と一致するかを一次確認する。併せて Kataoka §4–§6（主定理の証明）を読む。取得できなければ「本文未確認」を維持し、何が取得できなかったかを具体的に記録する（虚偽の確認済み宣言をしない）。 |
+| 2 | T1 Reframe | computability_of_lambda_l0 | todo | | notes.md 未完了作業 1 の第 1 点＝論文 001 の中核命題 D の限界のうち最も重い。$\lambda=l_0(f)$ を**有限手続きで決定できるか**。本プロジェクトのテーゼ（Λ 側は決定可能）の核心なので、決定可能なら双対像が強まり、決定不能・未確立ならその境界を明示する。cycle 15 が挙げた反例 $P=z+w^2-2w$, $p=3$（$\mathbb{F}_p$ 上のレシピが上限しか与えない例）から出発する。 |
+| 3 | T3 Pure | lower_order_terms_and_degenerate_P | todo | | notes.md 未完了作業 1 の第 2・3 点。低位項の係数 $\lambda_i,\mu_i,\nu$（$i\ge1$）の明示公式が取れるか、および**退化点が $n$ とともに増える $P$** の整理。数値で当たってから証明を試み、取れない場合は取れない理由（どの段で機構が壊れるか）を特定する。 |
+| 4 | 運用 | refs_bib_and_lean_extension | todo | | notes.md 未完了作業 2・3。(a) `refs.bib` を本文の引用から整備する。(b) Lean 形式化の範囲を広げる（未着手の命題 B・N・T のうち mathlib で到達可能なものを形式化）。到達不能なものは **mathlib に何が無いかを自分の grep で一次確認**して `lean/README.md` に記録する。`lake build` と `check-no-sorry.sh` を**自分で実行**して sorryAx 依存 0 を確認する。 |
+| 5 | — | rank:cycle16 | todo | | 下記「cycle 16 総括」に書く。論文 001 の残務がどこまで閉じたか、閉じなかったものは何が障害かを整理し、cycle 17 の焦点を決める。 |
 
 ## cycle 15 step 列（2026-07-26 起こし）
 
