@@ -1,0 +1,26 @@
+{
+  // このシステムは何にも依存しない（domain-model が最下層である以上、
+  // コンパイラ設定を他プロジェクトから借りると依存方向が逆流する）。
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    // Node 22.18+ の型ストリップで .ts をそのまま実行する。ビルド成果物は持たない。
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": ["domain-model", "codegen", "examples", "tools"],
+  "exclude": ["node_modules", "tools/.tmp"]
+}

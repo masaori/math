@@ -1,0 +1,32 @@
+{
+  "name": "@structured-latex/system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "構造化テキストの入力言語・解決済み文書・配信契約の正本（ドメインモデル）と、その生成器。レンダラーはこの中のモジュールとして載る。",
+  "exports": {
+    "./domain-model": "./domain-model/index.ts"
+  },
+  "scripts": {
+    "gen:example": "node codegen/structured-text-index/cli.ts --project examples/minimal-document",
+    "check:generated": "node codegen/structured-text-index/cli.ts --project examples/minimal-document --check",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test \"domain-model/**/*.test.ts\" \"codegen/**/*.test.ts\"",
+    "test:types": "node tools/negative-type-test.ts",
+    "check:deps": "node tools/check-dependency-direction.ts",
+    "check": "npm run check:entities && npm run check:generated && npm run typecheck && npm run check:deps && npm run test && npm run test:types",
+    "gen:entities": "node codegen/entity-definitions/cli.ts",
+    "check:entities": "node codegen/entity-definitions/cli.ts --check"
+  },
+  "dependencies": {
+    "@masaori/zod-to-entity-definitions": "^1.2.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

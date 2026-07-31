@@ -1,0 +1,13 @@
+{
+  "User": "cloud-sql",
+  "Account": "cloud-sql",
+  "Operator": "cloud-sql",
+  "Requester": "projected",
+  "Document": "cloud-sql",
+  "DocumentInvitation": "cloud-sql",
+  "Revision": "cloud-sql",
+  "Segment": "cloud-sql",
+  "Theme": "cloud-sql",
+  "Artifact": "object-storage",
+  "Subscription": "in-memory"
+}

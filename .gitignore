@@ -7,3 +7,6 @@ exact-solution-of-2d-ising-model/main.pdf
 .lake/
 lean/.lake/
 *.olean
+
+# Node の依存（各パッケージ配下）
+node_modules/

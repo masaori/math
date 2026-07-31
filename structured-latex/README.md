@@ -1,0 +1,90 @@
+# structured-latex
+
+証明・論文の正本を**構造化テキスト**として 1 つだけ持ち、そこから用途の異なる成果物を生成するシステム。
+正本が 1 つなので、出力形式ごとに内容が食い違う事故が構造的に起きない。
+
+| 出力形式 | 用途 |
+| --- | --- |
+| 純粋な LaTeX | arXiv 等へ投稿できる形式 |
+| PDF | 印刷・配布 |
+| インタラクティブな Web サイト | Web 公開。閲覧者が操作できる |
+| 書籍形式 | 段組・コラムを差し挟みながら読み物として提供する |
+
+加えて次を満たす。
+
+- **デザイン・レイアウトは利用者側でカスタマイズできる。** 出力の見た目を変えるのに本体を書き換えなくてよい。
+- **インフラは Terraform で構築する。** インタラクティブサイトをホスティングできる状態にする。
+- **構造化テキストを部分的にアップロードして画面を更新できる。**
+  論文をリアルタイムに更新しながら、同じサイトを複数人が同時に見る使い方を想定する。
+
+## このシステムが持つもの
+
+**ドメインモデルが中心にあり、レンダラー（出力器）はその上に載るモジュールである。**
+入力言語（構造化テキストの語彙）の正本は、このシステムが 1 つだけ持つ。
+先行実装では同じ言語が 3 箇所で定義され、ラベル解決が 2 回書かれていた。それを 1 つにするのが存在理由。
+
+```
+structured-latex/
+├── domain-model/          # 何にも依存しない。3 つの層を持つ
+│   ├── structured-text/   #   L1 入力言語（ブロック・ノード・ラベル・ノート）
+│   ├── entities/          #   L2 文書の集約（SSOT。zod-to-entity-definitions で記述）
+│   ├── api-contract/      #   L2 配信と受け入れの契約
+│   ├── resolved/          #   L3 解決済み文書（採番・参照解決を終えた中間表現）
+│   └── _gen/              #   生成物（ER 定義・relation・storage 割り当て）
+├── codegen/               # 生成器。domain-model にだけ依存する
+│   ├── structured-text-index/  #   ラベルのユニオン型・文書集約モジュール
+│   ├── entity-definitions/     #   ER 定義
+│   └── config/                 #   storage 宣言
+├── examples/              # 利用例（生成器と型検査の実証対象）
+├── tools/                 # 負テスト・依存方向の検査
+└── docs/                  # 設計ドキュメント
+```
+
+依存方向は一方向で、逆流・循環は禁止（`npm run check:deps` が実際の import を読んで検査する）。
+
+## 使う側がやること
+
+```typescript
+// 1. 生成された Label（実在するラベルのユニオン型）を受け取り、
+// 2. プロジェクト固有メタデータを宣言し（不要なら省略）、
+// 3. ファクトリを具体化する
+const { defineBlocks, defineNotes, ref } = createStructuredTextSchema<Label, Meta>()
+```
+
+あとは `content/*.ts` にブロック列を書くだけで、次が**書いた瞬間に型で落ちる**。
+
+- 存在しないラベルへの参照（近い綴りの候補付き）
+- ブロック id・ラベル・ノート id の重複（ファイルを跨いでも）
+- 種別ごとに許されないフィールド（見出しに本文、定理型に `level` 等）
+- フィールド名の打ち間違い（`proof` → `proofs`。証明が黙って消える事故を塞ぐ）
+- プロジェクト固有メタデータの条件違反
+
+何が型で落ち、何が実行時検査に残るかは [docs/type-coverage.md](docs/type-coverage.md)（根拠つき）。
+
+## 検査
+
+```sh
+pnpm install   # 初回のみ（Node 22.18 以降が必要）
+npm run check  # ER 定義の鮮度 → 生成物の鮮度 → 型検査 → 依存方向 → 単体テスト → 負テスト
+```
+
+## 開発の思想
+
+`docs/` は [software-development-docs-template](https://github.com/masaori/software-development-docs-template)
+から複製したものであり、**開発はこれに厳密に従う**。
+
+- エントロピー（選択肢の多さ）の最小化を最優先する（`docs/programming-philosophy.md`）
+- 原理主義的な DDD。ドメインモデルを BE から FE の UI 構造まで一貫して貫く
+- 依存関係のコントロール（Clean Architecture / FSD）を厳密に運用する
+- 型安全を絶対条件とする（`docs/language-selection.md`）
+- インフラは Terraform による IaC（`docs/infrastructure.md`）
+
+## ドキュメント
+
+| ドキュメント | 内容 |
+| --- | --- |
+| [docs/domain-model.md](docs/domain-model.md) | ドメインモデルの正本。概念・集約・不変条件・確定した設計判断 |
+| [docs/type-coverage.md](docs/type-coverage.md) | 型で落とすもの／実行時に残すものの切り分けと根拠 |
+| [docs/milestones.md](docs/milestones.md) | マイルストーン |
+| [docs/design-notes/](docs/design-notes/) | 個別の設計判断の詳細な根拠 |
+| [MEMORY.md](MEMORY.md) | 引き継ぎメモ |

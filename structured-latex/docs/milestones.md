@@ -51,10 +51,16 @@ graph TD
 ## 現在地
 
 - M0: 完了（テンプレートの `docs/` 複製、本ファイル、README）
-- M1: **提案完了・依頼者の承認待ち**
-  - 成果物: [domain-model.md](./domain-model.md)、根拠は `design-notes/` の 3 本
-  - M1 の「満たされた状態」は「依頼者が承認した状態」なので、承認をもって完了とする
-  - 承認を要する論点は domain-model.md §13 に 5 件（A: 書籍のコラムの出どころ、
-    B: Web テーマの差し替え範囲、C: 公開サイトの公開範囲、D: 数式方言の縛り方、
-    E: 複数人同時更新を要件に含めるか）。うち **A と C は M2 の型に影響する**ので、
-    M2 着手前に判断が要る
+- M1: **完了**（依頼者が承認した）
+  - 成果物: [domain-model.md](./domain-model.md)、根拠は `design-notes/`
+  - 承認を要した 5 論点はすべて確定（A-3 / B-2 / C-2 / D-1 / E-1）。
+    採らなかった案とその帰結は [design-notes/settled-questions.md](./design-notes/settled-questions.md)
+  - 併せて、システムの名称を `structured-latex` に確定した（ドメインモデルが中心で、
+    レンダラーはその上のモジュール）。入力言語の正本はこのシステムが 1 つだけ持つ
+- M2: **完了**
+  - 入力言語（L1）・解決済み文書（L3）・配信契約の型、ラベル型と文書集約モジュールの生成器、
+    SSOT の entity 定義（`zod-to-entity-definitions`）と保存先宣言を実装
+  - 図表を語彙に追加（`figure` ブロックと `image` ノード）。判断の根拠は domain-model.md §7.5
+  - 型で落とすもの／実行時に残すものの切り分けを [type-coverage.md](./type-coverage.md) に記録
+  - `npm run check` が全項目通る（単体テスト 30 件、負テスト 16 ケース × 正誤）
+  - 将来要求（ゼミ形式の共同執筆、LaTeX 入力経路）を domain-model.md §16 に記録

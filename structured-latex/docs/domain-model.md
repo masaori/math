@@ -16,6 +16,33 @@
 個別の設計判断の詳細な根拠は `docs/design-notes/` に分けてある。
 本ドキュメントには結論と、モデルに効く部分だけを書く。
 
+## 0. このシステムが持つもの・持たないもの
+
+**このシステム（`structured-latex/`）が、構造化テキストという入力言語の正本を 1 つだけ持つ。**
+レンダラー（出力器）は、そのドメインモデルの上に載る**モジュール**であって、逆ではない。
+
+一次情報が示していたのは、同じ言語が 3 回定義されている状態である。
+
+| 場所 | 何を定義していたか |
+|---|---|
+| `exact-solution-of-2d-ising-model/structured-latex/schema.ts` | ブロック・ノード・ラベル・ノートの型と実行時検証 |
+| `integrable-lattice/structured-latex/schema.ts` | 上を複製し、住処・ℝ 脱出・検証紐づけを追加したもの |
+| `realtime-web-preview/domain-model/src/block.ts` | 同じ言語の 3 度目の定義（Zod） |
+
+加えて、ラベル → ブロックの解決が 2 回、独立に実装されている（F9）。
+**この重複を 1 つにすることが、このシステムの存在理由である。**
+
+したがって所有関係はこうなる。
+
+| 誰が持つか | 何を |
+|---|---|
+| このシステム | 入力言語の語彙（ブロック・ノードの種別）、検査、解決、生成器 |
+| 各プロジェクト | 文書の中身（`content/`）、プロジェクト固有メタデータの**宣言**、生成物 |
+| 組み込み開発者 | 体裁（テーマ・レイアウト・採番方針） |
+
+**語彙を増やせるのはこのシステムだけである**（§8.3）。プロジェクト側が増やせるのは
+意味のメタデータだけで、これは体裁の拡張（テーマ）とも別機構である（§8.5）。
+
 ---
 
 ## 1. 一次情報から既に確定している事実
@@ -201,229 +228,184 @@ erDiagram
 
 I1–I3 が**文書全体にかかる**ことが、§9 の更新単位の結論を規定する。
 
-### 5.3 構造化テキストの型（コア）
+### 5.3 ブロックとノードの判定基準
 
-先行 2 実装（`exact-...` と `integrable-lattice`）に共通する部分だけをコアとし、
-分岐した部分（`habitat` 等）は**メタデータの拡張スロット**として型パラメータで受ける。
-複製（F8）ではなくパラメータ化で解く。
+「ブロック」「ノード」を語感で分けない。先行実装で**ブロックだけが持ち、ノードが持たないもの**を
+並べると、境界は次の 5 点に集約される。
+
+| | ブロック | ノード |
+|---|---|---|
+| 文書順の中に位置を占めるか | **占める**（配列の並びが文書順の正本。F1） | 占めない（ブロックの内側） |
+| 同一性を持つか | **持つ**（`id`。アンカーになる） | 持たない（丸ごと入れ替わる値） |
+| 相互参照の**宛先**になれるか | **なれる**（`labels` を宣言する） | なれない |
+| 番号が振られるか | **振られる**（「定理 2.7」） | 振られない |
+| ノートの紐づけ先になるか | **なる**（`targets` が指すのはブロックのラベル） | ならない |
+
+すなわち **ブロック＝文書の中で名前を持ち、指され、数えられる最小の単位**、
+**ノード＝その内側の、同一性を持たない中身**である。
+
+新しい語彙を足すときは、この表に当てて配置を決める。判定は 1 問で済む:
+
+> **それは本文から「〜を見よ」と指され、番号を持つか。**
+> 持つならブロック、持たないならノード。
+
+適用例（図表）: キャプションと番号を持ち「図 3 参照」と指される図は**ブロック**。
+参照も番号も持たない挿絵は**ノード**でよい。実際に採用した結論は §7.5。
+
+### 5.3.1 構造化テキストの型（コア）
+
+**実装は `domain-model/structured-text/` にある。以下は要約であり、正本はコードである。**
+
+先行 2 実装に共通する部分をコアとし、分岐した部分（`habitat` 等）は
+**メタデータの拡張スロット**として型パラメータ `M` で受ける。複製（F8）ではなくパラメータ化で解く。
+`L` は「その文書に実在するラベル」のユニオン型（生成物）で具体化される。
 
 ```typescript
-// domain-model/src/structured-text/node.ts
-
-export type TextNode = { type: 'text'; value: string }
-export type MathNode = { type: 'math'; tex: string }
-export type DisplayMathNode = { type: 'displayMath'; tex: string }
-export type TodoNode = { type: 'todo'; value: string }
-
-/** 相互参照。`L` は「その文書に実在するラベル」のユニオン型（生成物）で具体化される。 */
-export type RefNode<L extends string = string> = {
-  type: 'ref'
-  target: L
-  /** 参照の表示テキストの上書き。省略時はテーマの採番規則が決める。 */
-  label?: string
-}
-
-export type Node<L extends string = string> =
-  | TextNode
-  | MathNode
-  | DisplayMathNode
-  | RefNode<L>
-  | TodoNode
-  | { type: 'paragraph'; children: readonly Node<L>[] }
-  | { type: 'list'; items: readonly (readonly Node<L>[])[] }
+// domain-model/structured-text/node.ts — 語彙は閉じている（増やせるのはこのシステムだけ）
+type TextNode        = { type: 'text'; value: string }
+type MathNode        = { type: 'math'; tex: string }        // LaTeX ∩ KaTeX の部分集合（§7.3）
+type DisplayMathNode = { type: 'displayMath'; tex: string }
+type TodoNode        = { type: 'todo'; value: string }       // 未完であるという事実（意味）
+type ImageNode       = { type: 'image'; assetKey: string; alt: string }
+type RefNode<L>      = { type: 'ref'; target: L; label?: string }
+type ParagraphNode<L>= { type: 'paragraph'; children: readonly Node<L>[] }
+type ListNode<L>     = { type: 'list'; items: readonly (readonly Node<L>[])[] }
 ```
 
 ```typescript
-// domain-model/src/structured-text/block.ts
+// domain-model/structured-text/block.ts
+type HeadingLevel    = 1 | 2 | 3 | 4 | 5 | 6
+type TheoremLikeKind = 'theorem' | 'definition' | 'claim' | 'remark' | 'note'
+type BlockKind       = TheoremLikeKind | 'heading' | 'figure'
 
-export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
-export type TheoremLikeKind = 'theorem' | 'definition' | 'claim' | 'remark' | 'note'
-export type BlockKind = TheoremLikeKind | 'heading'
+/** text か tex の少なくとも一方が必須（I4 を型で表す）。空の {} はコンパイル時に落ちる。 */
+type TitleContent = { text: string; tex?: string } | { text?: string; tex: string }
 
-/** タイトルは text か tex の少なくとも一方が必須（I4 を型で表す）。 */
-export type TitleContent = { text: string; tex?: string } | { text?: string; tex: string }
+/** 由来。先行実装の sourcePath / sourceOrdinal を一般化したもの。**任意**（下記の注記）。 */
+type Origin = { path: string; ordinal: number }
 
-/** 由来。先行実装の sourcePath / sourceOrdinal を一般化したもの（任意）。 */
-export type Origin = { path: string; ordinal: number }
-
-type BlockCommon<L extends string> = {
-  id: string
-  labels: readonly L[]
-  origin?: Origin
+type TheoremLikeBlock<L, M> = { id; labels: readonly L[]; origin?: Origin } & M & {
+  kind: TheoremLikeKind
+  title?: TitleContent | null
+  statement: readonly Node<L>[]
+  proof?: readonly Node<L>[]
+  level?: never; content?: never; caption?: never; notes?: never   // 他種別のフィールドは書けない
 }
 
-/**
- * 定理型ブロック。`M` がプロジェクト固有のメタデータ。
- * 既定は `unknown`（交差しても何も足さない）なので、拡張しないプロジェクトは意識しなくてよい。
- */
-export type TheoremLikeBlock<L extends string = string, M = unknown> = BlockCommon<L> &
-  M & {
-    kind: TheoremLikeKind
-    title?: TitleContent | null
-    statement: readonly Node<L>[]
-    proof?: readonly Node<L>[]
-    /** 見出し専用フィールド。定理型では書けない（コンパイル時に拒否）。 */
-    level?: never
-    /** 注記欄は持てない。参照用ノートは Note として分離する（I5 の入口を塞ぐ）。 */
-    notes?: never
-  }
-
-export type HeadingBlock<L extends string = string> = BlockCommon<L> & {
+type HeadingBlock<L> = { id; labels: readonly L[]; origin?: Origin } & {
   kind: 'heading'
   level: HeadingLevel
   title: TitleContent
-  /** 見出しは本文を持たない（コンパイル時に拒否）。 */
-  statement?: never
-  proof?: never
-  notes?: never
+  statement?: never; proof?: never; content?: never; caption?: never; notes?: never
 }
 
-export type Block<L extends string = string, M = unknown> =
-  | TheoremLikeBlock<L, M>
-  | HeadingBlock<L>
+type FigureBlock<L> = { id; labels: readonly L[]; origin?: Origin } & {
+  kind: 'figure'
+  content: readonly Node<L>[]        // 画像ノードのほか、数式や箇条で図式を書いてもよい
+  caption?: readonly Node<L>[]       // キャプションは**ノード列**（ノートではない。§7.5）
+  statement?: never; proof?: never; level?: never; notes?: never
+}
 
-/** 参照用ノート。文書本体ではない。targets は 1 件以上（空タプルはコンパイル時に落ちる）。 */
-export type Note<L extends string = string> = {
+type Note<L> = {
   id: string
-  targets: readonly [L, ...L[]]
+  targets: readonly [L, ...L[]]      // 1 件以上（空タプルはコンパイル時に落ちる）
   title?: TitleContent | null
   origin?: Origin
   body: readonly Node<L>[]
 }
 ```
 
-**メタデータの拡張が定理型ブロックにだけ効く**のは、`integrable-lattice/structured-latex/README.md` が
-「`habitat` は本文ブロックでは必須。**見出しには書けない**」と定めていることに合わせている。
+**メタデータの拡張が定理型ブロックにだけ効く**のは、`integrable-lattice` が
+「`habitat` は本文ブロックでは必須。見出しには書けない」と定めていることに合わせている。
+図表にも効かせていないのは、必要とする実例がまだ 1 件も無いためである
+（必要になれば `FigureBlock` にも `& M` を足せる。追加は加算で済む）。
+
+**由来（`origin`）を任意にしたのは M2 での変更である。** 先行 2 実装では必須だが、
+これは Typst 原本からの移行という一時的な事情に由来するものであって、入力言語の契約ではない
+（原本を持たない文書でも正本は成立する）。
 
 ### 5.4 プロジェクト固有拡張の受け口
 
 F8 が示すのは「スキーマそのものは共有できるが、生成物（ラベルのユニオン型・文書集約モジュール）は
-各プロジェクトの `content/` に結びつく」ということである。したがってレンダラーが提供するのは
+各プロジェクトの `content/` に結びつく」ということである。したがってこのシステムが提供するのは
 **スキーマのファクトリと生成器**であって、スキーマの実体ではない。
 
 ```typescript
-// domain-model/src/structured-text/schema-factory.ts
-
-export type StructuredTextConfig<MetaShape extends z.ZodRawShape> = {
-  /**
-   * 定理型ブロックへ追加するメタデータ。プロジェクトが宣言する。
-   * 例（integrable-lattice）: habitat / realEscape / verification / lean。
-   * ここで宣言されたキーだけが「未知フィールド」検査の許可キーに加わる。
-   */
-  blockMeta: MetaShape
-}
-
-export type StructuredTextSchema<L extends string, M> = {
-  /** 1 セグメント分のブロック列を定義する。文書順は配列の並びが正本（F1）。 */
-  defineBlocks: <const T extends readonly Block<L, M>[]>(blocks: T & NoDuplicates<T>) => T
-  defineNotes: <const T extends readonly Note<L>[]>(notes: T & NoDuplicates<T>) => T
-  blockSchema: z.ZodType<Block<L, M>>
-  noteSchema: z.ZodType<Note<L>>
-}
+// domain-model/structured-text/schema-factory.ts
+const { defineBlocks, defineNotes, ref } = createStructuredTextSchema<Label, Meta>()
 ```
 
 - **`defineBlocks` はセグメント 1 つを作る関数である。** 先行実装の「1 ファイル 1 配列」に一致する。
-- ラベルのユニオン型 `L` と、ファイル跨ぎの一意性を主張する集約モジュールは、
-  先行実装の `tools/generate-index.ts` と同じ方式でレンダラーが**生成する**
-  （`labels.generated.ts` / `document.generated.ts` に相当）。生成物はプロジェクト側に置く。
-- **意味の拡張（メタデータ）と体裁の拡張（テーマ）は別機構である。** 根拠は §8。
+- 引数を `T & readonly Block<L, M>[] & …` という**交差**にしてあるのは、`const` 型引数だけだと
+  余剰プロパティ検査（`proof` を `proofs` と打ち間違える等）が効かなくなるため（実測。§type-coverage）。
+- ラベルのユニオン型 `L` と、ファイル跨ぎの一意性を主張する集約モジュールは
+  `codegen/structured-text-index/` が**生成する**。生成物はプロジェクト側に置く。
+- **`defineBlocks` は実行時検証をしない（M2 での変更）。** 先行実装は定義時に throw していたが、
+  それだと検証の入口が「定義時」と「受け入れ時」の 2 つに割れる。実行時検証は
+  `createRuntimeSchema` の 1 か所に集約し、Result で返す（throw しない）。
 
 ### 5.5 解決済み文書（ResolvedDocument）
 
 F9 が二重実装していたものを 1 か所へ集約する。**出力形式に中立**であり、
-ここまでで採番・参照・ノート配置・文書順の確定がすべて終わる。
+ここまでで採番・参照解決・ノート配置・文書順の確定がすべて終わる。
+実装は `domain-model/resolved/`。
 
 ```typescript
-// domain-model/src/resolved/resolved-document.ts
+type BlockNumber = { path: readonly number[]; display: string }   // 例: { path:[2,7], display:'2.7' }
 
-/** ブロック番号（例: 節 2 の 7 番目 → { section: [2], display: '2.7' }）。 */
-export type BlockNumber = { path: readonly number[]; display: string }
-
-export type ResolvedRef = {
+type ResolvedRef = {
   type: 'ref'
   targetBlockId: string
   targetKind: BlockKind
-  /** テーマの採番方針で決まった表示文字列（例: '定理 2.7'）。 */
-  targetNumber: BlockNumber
+  targetNumber: BlockNumber | null    // 番号を振らない見出しを指すと null
+  targetTitle: TitleContent | null
   anchor: string
-  /** 正本側で表示テキストが上書きされていた場合のみ非 null。 */
   overrideText: string | null
 }
 
-export type ResolvedNode =
-  | TextNode
-  | MathNode
-  | DisplayMathNode
-  | TodoNode
-  | ResolvedRef
-  | { type: 'paragraph'; children: readonly ResolvedNode[] }
-  | { type: 'list'; items: readonly (readonly ResolvedNode[])[] }
-
-export type ResolvedHeading = {
-  kind: 'heading'
-  blockId: string
-  level: HeadingLevel
-  number: BlockNumber
-  title: TitleContent
-  anchor: string
-}
-
-export type ResolvedTheoremLike = {
-  kind: TheoremLikeKind
-  blockId: string
-  number: BlockNumber
-  title: TitleContent | null
-  statement: readonly ResolvedNode[]
-  proof: readonly ResolvedNode[] | null
-  anchor: string
-  /**
-   * プロジェクト固有メタデータ。テーマから**読めるが解釈されない**。
-   * 出力器はこれを体裁の判断に使わない（§8 の「意味と体裁を混ぜない」）。
-   */
-  meta: unknown
-}
-
-export type ResolvedBlock = ResolvedHeading | ResolvedTheoremLike
-
-export type ResolvedDocument = {
+type ResolvedDocument = {
   documentId: string
   revision: RevisionNumber
-  /** 文書順に並んだブロック（F1 の順序をここで確定させる）。 */
-  blocks: readonly ResolvedBlock[]
-  /** ブロック id → 配置されたノート。出版ターゲットでは常に空（I5）。 */
-  notesByBlockId: Readonly<Record<string, readonly ResolvedNote[]>>
-  /** 目次。Web の目次と LaTeX の \tableofcontents が同じものから出る。 */
-  outline: readonly { blockId: string; level: HeadingLevel; number: BlockNumber; anchor: string }[]
+  blocks: readonly ResolvedBlock[]                                  // 文書順（F1 をここで確定）
+  notesByBlockId: Readonly<Record<string, readonly ResolvedNote[]>>  // 出版では常に空（I5）
+  outline: readonly OutlineEntry[]                                   // 目次
 }
-```
 
-解決は純関数である。
-
-```typescript
-export type ResolveError =
-  | { code: 'unresolved_reference'; references: readonly { fromBlockId: string; target: string }[] }
-  | { code: 'duplicate_label'; labels: readonly string[] }
-  | { code: 'duplicate_block_id'; blockIds: readonly string[] }
-  | { code: 'orphan_note'; noteIds: readonly string[] }
-  | { code: 'empty_document' }
-
-export const resolve: (
-  revision: RevisionSnapshot,
-  numbering: NumberingPolicy,
-  audience: Audience,
+const resolve: <L, M>(
+  revision: RevisionSnapshot<L, M>,
+  options: { numbering: NumberingPolicy; audience: Audience; anchorPrefix?: string },
 ) => Result<ResolvedDocument, ResolveError>
 ```
 
-- **`audience`** が I5 を型で担う。`'publication'` なら `notesByBlockId` は空で固定され、
-  ノートは解決の入力から外れる。`'working'`（Web プレビュー等）ならノートを配置する。
-  先行実装が「生成器が `loadNoteFiles` を呼ばない」という**実装上の約束**で守っていたものを、
-  引数として明示する。
-- **`numbering`（採番方針）はテーマ側の宣言である。** 採番は体裁（何番と呼ぶか）であって意味ではないので、
-  テーマが決める。ただし**採番の結果は解決済み文書に固定される**ので、本文の参照と番号が食い違わない。
+契約:
+
+- **`audience` が I5 を型で担う。** `'publication'` なら `notesByBlockId` は空で固定され、
+  ノートは配置されない。`'working'`（Web プレビュー等）なら配置する。
+  ただし**ノートの id 一意性と targets の解決可能性は、どちらの audience でも検査する**
+  （迷子のノートを出版可否と無関係に許さない）。
+- **`numbering`（採番方針）はテーマ側の宣言である。** ただし採番結果は解決済み文書に固定されるので、
+  本文の参照と番号が食い違わない。見出しがまだ現れていない区間のブロックには前置を付けない
+  （「0.1」のような番号を作らない）。
+- **`anchorPrefix` は文書合成（論点 A-3）のためにある。** ブロック id は文書内でしか一意でないので、
+  「本体文書 + 解説文書」を合成するとアンカーが衝突しうる。合成する側が文書ごとに異なる前置を与える。
+- **文書順のキーはセグメントの `key` 昇順**（先行実装のファイル名昇順を一般化したもの）。
 
 ```typescript
-export type Audience = 'publication' | 'working'
+type ResolveError =
+  | { code: 'duplicate_segment_key'; keys: readonly string[] }
+  | { code: 'empty_document' }
+  | { code: 'duplicate_block_id'; blockIds: readonly string[] }
+  | { code: 'duplicate_label'; labels: readonly string[] }
+  | { code: 'duplicate_note_id'; noteIds: readonly string[] }
+  | { code: 'unresolved_reference'; references: readonly { fromBlockId: string; target: string }[] }
+  | { code: 'orphan_note'; noteIds: readonly string[] }
 ```
+
+**M1 の一覧から 3 種（`duplicate_segment_key` / `duplicate_note_id` / セグメントキー重複）を足した。**
+M1 の一覧は不変条件 I1 のうち「ノート id の一意性・ブロック id との非衝突」を取りこぼしていた。
+
+判定の順序は上記のとおり固定する（先に落ちたものだけを返す）。順序を決めておかないと、
+同じ入力に対して返る code が実装の都合で変わる。
 
 ### 5.6 出力ターゲット・テーマ・成果物
 
@@ -453,22 +435,19 @@ export const emit: <T extends RenderTarget>(
 | Requester（認可の主体） | しない（`projected`） | [authorization-strategy.md](./authorization-strategy.md) §2 の指示どおり |
 | Subscription | する（`in-memory`） | 自 domain の entity を CRUD / pub-sub するので repository。[architecture-backend.md](./architecture-backend.md) が「in-memory の read model でも repository」と明記している |
 
-`codegen/config/storage.ts` の初期宣言は次のとおりになる（全 entity を過不足なく明示するのが規約）。
+**実装は `domain-model/entities/`（`entity()` による SSOT の記述）と
+`codegen/config/storage.ts`（保存先の宣言）にある。** 生成物は `domain-model/_gen/`
+（entity 定義・relation・storage 割り当ての JSON）で、`codegen/entity-definitions/cli.ts` が作る。
+storage 宣言は SSOT と突合され、**未宣言・不明・重複はエラーで落ちる**（書き忘れを静かに通さない）。
 
-```typescript
-export type StorageBackend = 'cloud-sql' | 'object-storage' | 'in-memory' | 'projected'
+M2 で確定した entity は 11 個: `User` / `Account` / `Operator` / `Requester`（認可の主体、projected）/
+`Document` / `DocumentInvitation`（論点 C-2）/ `Revision` / `Segment` / `Theme` / `Artifact` / `Subscription`。
 
-export const storageAssignments: EntityStorage[] = [
-  { entity: 'User',         backend: 'cloud-sql' },
-  { entity: 'Document',     backend: 'cloud-sql' },
-  { entity: 'Revision',     backend: 'cloud-sql' },
-  { entity: 'Segment',      backend: 'cloud-sql' },      // ブロック列は JSON として持つ
-  { entity: 'Theme',        backend: 'cloud-sql' },
-  { entity: 'Artifact',     backend: 'object-storage' }, // PDF / tex / 静的 Web 成果物の実体
-  { entity: 'Subscription', backend: 'in-memory' },
-  { entity: 'Requester',    backend: 'projected' },
-]
-```
+**ブロック列は ER の列としては JSON 文字列にしてある。** ブロックは再帰構造（ノードがノードを含む）で、
+ER のプロパティ型（primitive / struct / 参照）では表現できないためである
+（実測: `z.array(z.unknown())` / `z.record(z.unknown())` はいずれも "Unsupported schema type" になる）。
+形の正本は `domain-model/structured-text/` の型と Zod スキーマであり、
+アップロードの境界で `createRuntimeSchema` により検証する。
 
 ---
 
@@ -604,16 +583,52 @@ export type PresentationHint =
   | { kind: 'collapsible'; medium: 'flowed'; body: readonly Node[] }
 ```
 
-### 7.5 既知の欠落: 図表
+### 7.5 図表（M2 で確定）
 
-**現時点のどのスキーマにも図表ノードが存在しない。**
-`exact-solution-of-2d-ising-model/structured-latex/schema.ts` の `NODE_TYPES` は
-`paragraph` / `math` / `displayMath` / `list` / `ref` / `text` / `todo` の 7 種だけであり、
-`tools/build-latex.ts` は `graphicx` を読み込んでいるが**それを使うノードが無い**。
+M1 の時点では、どのスキーマにも図表のノードが存在しなかった
+（`exact-solution-of-2d-ising-model/structured-latex/schema.ts` の語彙は 7 種で、
+`tools/build-latex.ts` は `graphicx` を読み込んでいるのに**それを使うノードが無い**）。
+M2 で、依頼者の判断を受けて次のとおり確定した。
 
-これは本 M1 で埋めない。埋めるべき対象（図をどう持つか、キャプションと採番、参照の対象になるか）が
-既存 2 プロジェクトの正本に 1 件も存在せず、一次情報から形を決められないためである。
-§7.4 の判定手順に乗せられる状態になった時点で追加する。**M2 への申し送りとする**（§14）。
+**結論: 語彙に 2 つだけ足す。図表は**ブロック**、画像は**ノード**。**
+
+```typescript
+type ImageNode  = { type: 'image'; assetKey: string; alt: string }
+type FigureBlock<L> = {
+  id; labels: readonly L[]
+  kind: 'figure'
+  content: readonly Node<L>[]     // 画像ノードを含む本体
+  caption?: readonly Node<L>[]    // キャプション（段落・数式・参照が書ける）
+}
+```
+
+根拠:
+
+1. **図表がブロックであること**は §5.3 の判定基準から出る。文書順に位置を占め、`id` を持ち、
+   `labels` を宣言して「図 3 参照」の宛先になり、番号が振られる。ノード（同一性を持たない中身）では
+   これを満たせない。一方、参照も番号も持たない挿絵はノード（`image`）で足りる。**両方を用意した**のは、
+   実例がどちらにも寄りうるためである。
+2. **キャプションはノード列であって、ノート（`Note`）ではない。** ノートは出版物に載らない補足（I5）で
+   あり、キャプションをそこへ置くと出版物から図の説明が消える。ノード列にすることで、
+   キャプションの中に数式や相互参照を書ける（既存の語彙をそのまま再利用する）。
+3. **画像の実体は正本に置かない。** LaTeX ではビルドディレクトリ相対パス、Web では配信 URL と
+   解決規則が違う。正本が持つのは資産の名前（`assetKey`）だけで、ターゲットごとの解決は
+   出力器へ渡す資産解決器が持つ。これを守らないと、正本が出力形式を知ることになり §7.1 が崩れる。
+4. **`alt` は必須。** §7.4 の判定 2（全ターゲットが劣化つきで表現できること）を満たすための最低条件で、
+   テキストしか出せない文脈へ落とせない要素を正本に入れないため。
+
+**「LaTeX を正本にしてレンダー時にパースする」案は採らない。** 技術的には可能で
+（`unified-latex` / LaTeXML / tex4ht などが実在する）、数式が既に LaTeX 文字列であることとも整合するが、
+(a) TeX はマクロ展開系なので「宣言した部分集合」しか扱えず、その部分集合の維持コストが正本側へ移る、
+(b) `\ref{}` が単なる文字列になり、**未解決参照・フィールドの打ち間違い・固有メタデータの型検査が
+すべて失われる**（先行実装が 945 件の相互参照を守っている仕組みそのもの）、
+(c) 図表に限っても `\includegraphics` のパス解決は結局ターゲットごとに要るので、
+図表という概念は消えず**宣言されずに文字列へ埋もれる**だけになる。
+LaTeX を書き味として使いたい要求は、正本の表現ではなく**入力経路**の側で満たす（§16）。
+
+**資産（画像ファイル）の受け入れと配信は M2 の範囲外である。** `assetKey` から実体への解決は
+M5（Web 生成）と M7（ホスティング）で決める。正本側の契約は上記で閉じており、後から
+資産の entity を足しても入力言語は変わらない。
 
 ---
 
@@ -956,123 +971,124 @@ export const Requester = entity({
 })
 ```
 
-policy の初期案（全 resource entity を明示するのが規約。action 省略は deny-by-default = admin のみ）:
+policy（全 resource entity を明示するのが規約。action 省略は deny-by-default = admin のみ）:
 
 ```typescript
 export const policies: ResourcePolicy[] = [
   { entity: 'User',     read: ['owner', 'admin'], create: ['public'], update: ['owner', 'admin'] },
   { entity: 'Account',  read: ['owner', 'admin'], create: ['authenticated'] },
-  { entity: 'Document', read: ['public'], create: ['authenticated'], update: ['owner'], delete: ['owner'] },
-  { entity: 'Revision', read: ['public'], create: ['owner'] },
-  { entity: 'Segment',  read: ['public'], create: ['owner'], update: ['owner'], delete: ['owner'] },
+  { entity: 'Operator', read: ['admin'] },
+  // 論点 C-2: 公開／限定を文書ごとに選ぶ。read は「公開設定 ∨ 所有者 ∨ 招待された閲覧者」。
+  { entity: 'Document', read: ['visibility:public', 'owner', 'invitee'], create: ['authenticated'], update: ['owner'], delete: ['owner'] },
+  { entity: 'DocumentInvitation', read: ['owner-of-document', 'invitee'], create: ['owner-of-document'], delete: ['owner-of-document'] },
+  { entity: 'Revision', read: ['via:Document'], create: ['owner'] },
+  { entity: 'Segment',  read: ['via:Document'], create: ['owner'], update: ['owner'], delete: ['owner'] },
   { entity: 'Theme',    read: ['owner', 'admin'], create: ['authenticated'], update: ['owner'], delete: ['owner'] },
-  { entity: 'Artifact', read: ['public'] },
-  { entity: 'Subscription', read: ['owner'], create: ['public'], delete: ['owner'] },
+  { entity: 'Artifact', read: ['via:Document'] },
+  { entity: 'Subscription', read: ['owner'], create: ['via:Document'], delete: ['owner'] },
 ]
 ```
 
 owner の解決は relation graph の FK パスで機械的に行う（同ドキュメント §4）。
-本モデルでは `Segment.revisionId → Revision.documentId → Document.userId → User` の多ホップになり、
+`Segment.revisionId → Revision.documentId → Document.ownerUserId → User` の多ホップになり、
 パスは一意なので resolver が解決できる。
 
-`read: ['public']` としているのは「公開サイトは誰でも読める」という前提を置いているためであり、
-これは依頼者の判断を要する（§13 の論点 C）。
+**ただし `DocumentInvitation` は owner subject への FK パスが 2 本ある**
+（`documentId → Document.ownerUserId → User` と `inviteeUserId → User`）。
+認可戦略 §4.2 は「パスが一意でない entity はエラーにする」と定めているので、
+この entity については**経路を明示する**（上の `owner-of-document` / `invitee`）。
+これは設計上の曖昧さを deny-by-default で隠さないための明示である。
+
+`read: ['visibility:public', …]` は論点 C-2 の確定（文書ごとに公開／限定を選べる）による。
+M1 が仮に置いていた「誰でも読める」は、未完成の原稿が全世界から読める状態を意味していた。
 
 ---
 
-## 13. 依頼者の承認が必要な残論点
+## 13. 依頼者の判断を要した論点（すべて確定済み）
 
-一次情報から一意に決まらず、依頼者の価値判断でしか決まらないものだけを挙げる。
+一次情報から一意に決まらず、依頼者の価値判断でしか決まらないものを挙げていた。
+**M2 着手時にすべて確定した。以下は確定内容と、確定によって何が決まったかである。**
+各論点の選択肢の比較（採らなかった案の帰結）は
+[design-notes/settled-questions.md](./design-notes/settled-questions.md) に退避してある。
 
-### 論点 A: 書籍形式のコラムの出どころ
+| 論点 | 確定 | モデルへの影響 |
+|---|---|---|
+| A: 書籍形式のコラムの出どころ | **A-3**: 書籍は「本体文書 + 解説文書」の 2 文書の合成として扱い、合成規則はレイアウトが持つ | I5 と §7.1 のどちらも壊れない。代わりに「文書の合成」がモデルに増える。M2 では `resolve` の `anchorPrefix` として現れる（合成時にアンカーが衝突しないため） |
+| B: Web テーマの差し替え範囲 | **B-2**: 閉じた役割ユニオンに限って型付きコンポーネントの差し替えを許す | 差し替え可能な箇所が型で列挙され、Props が解決済み文書の型で固定される。実装は M4 |
+| C: 公開サイトの公開範囲 | **C-2**: 文書ごとに公開／限定を選べ、限定時は招待された閲覧者のみ | `Document.visibility` と `DocumentInvitation` が entity に増え、read policy が OR になる（§12） |
+| D: 数式方言の縛り方 | **D-1**: LaTeX と KaTeX の共通部分集合を機械検査し、外れたら生成を落とす | コア型は変わらない（数式は今も LaTeX 文字列）。検査は生成段（M3）に置く |
+| E: 複数人の同時更新 | **E-1**: 書き手は単一。`baseRevision` による楽観ロックは型に残す | マージ規則を作らない。契約は §9.8 のまま。将来のゼミ形式への拡張は §16 |
+| 図表 | **語彙に `figure` ブロックと `image` ノードを足す** | §7.5 |
+| 正本の表現 | **宣言のまま（§7.1 を維持）。LaTeX は入力経路として受ける（将来）** | §7.5 の後半と §16 |
 
-書籍形式は「段組やコラムを差し挟んだ読み物」（`README.md`）である。そのコラムの中身をどこから持ってくるか。
-`notes/` を使うのは自明に見えるが、**I5（ノートは出版物に載らない）と正面から衝突する**。
-`exact-solution-of-2d-ising-model/structured-latex/README.md` はノートを
-「出版の解説パートで参照する**素材**」と定めており、そのまま載せるものとは書いていない。
+## 14. M2（入力契約の確定）の実装
 
-| 選択肢 | 帰結 |
+M2 で実装したものと、その置き場。**正本はコードであり、本ドキュメントは要約である。**
+
+| 実装 | 置き場 | 対応する節 |
+|---|---|---|
+| 入力言語（L1）の型 | `domain-model/structured-text/{node,block}.ts` | §5.3.1 |
+| メタデータ拡張のファクトリ | `domain-model/structured-text/schema-factory.ts` | §5.4 |
+| 一意性の型ユーティリティ | `domain-model/structured-text/uniqueness.ts` | I1 |
+| 実行時検証（Zod・Result） | `domain-model/structured-text/validate.ts` | I4・未知フィールド |
+| 解決済み文書（L3）と `resolve` | `domain-model/resolved/` | §5.5 |
+| 配信・受け入れの契約 | `domain-model/api-contract/live-site.ts` | §6, §9 |
+| SSOT の entity と保存先 | `domain-model/entities/`, `codegen/config/storage.ts` | §5.7 |
+| ラベル型・文書集約モジュールの生成器 | `codegen/structured-text-index/` | §5.4 |
+| ER 定義の生成器 | `codegen/entity-definitions/` | §5.7 |
+| 利用例（生成器と型検査の実証対象） | `examples/minimal-document/` | — |
+
+検査は `npm run check` で一括して回る（ER 定義の鮮度 → 生成物の鮮度 → 型検査 → 依存方向 →
+単体テスト → 負テスト）。**負テストは「誤った入力で型検査が実際に落ちること」を 16 ケース×(正/誤) で
+確かめる。** 型で落ちるもの・落とせないものの切り分けと根拠は
+[type-coverage.md](./type-coverage.md) に記録した。
+
+M2 の範囲外（次のマイルストーンで決めるもの）:
+
+- テーマの型（§8.4）と数式部分集合の検査（D-1）… M3 / M4
+- 資産（画像ファイル）の受け入れと配信 … M5 / M7
+- 文書合成の規則（A-3 の合成そのもの）… M8。M2 では `anchorPrefix` として受け口だけ用意した
+
+## 16. 将来要求（設計がこれを排除しないことを保証する）
+
+いま実装しないが、**契約を壊さずに満たせることを設計で保証しておく**もの。
+
+### 16.1 ゼミ形式の共同執筆（編集権の受け渡し）
+
+複数の著者が 1 本の論文を書き上げるが、**同時に編集できるのは常に 1 人**とし、編集権を受け渡す。
+
+現在の契約（E-1 の確定）は「基準版を宣言した、**キー単位の全置換**」であり、マージ規則を持たない。
+ここへ編集権を足すのは**加算だけ**で済む。
+
+| 増えるもの | 変わらないもの |
 |---|---|
-| A-1: コラムを新しいブロック種別として正本に追加し、対象出力を宣言する | 正本が出力形式を知ることになり、§7.1 が崩れる。§7.4 の判定 4（例外扱い）に該当し、追加のたびに全ターゲットの出力器が対応を迫られる |
-| A-2: `notes/` を書籍形式でだけ本文へ昇格させる | I5 が「PDF/LaTeX では載らないが書籍では載る」という条件付きになる。ノートの書き方の基準（「正しさに必要ならそれは注記ではない」）が揺らぎ、著者が判断できなくなる |
-| A-3（推奨）: 書籍を「本体文書 + 解説文書」の 2 文書の合成として扱い、合成規則をレイアウトが持つ | I5 も §7.1 も保たれる。解説文書はそれ自体が構造化テキストなので、同じ検査（I1–I3）を受けられる。代わりに「文書の合成」という概念がモデルに増える |
+| 文書の著者集合（多対多の関係） | アップロード入力の形（`UploadSegmentsInput`） |
+| 編集権（保持者は常に高々 1 人。期限を持つ） | 全置換という規則（マージ規則は依然として不要） |
+| アップロードのエラー 1 種（編集権を持っていない） | 楽観ロックの意味（`baseRevision`） |
 
-**推奨は A-3。** 根拠は、I5 と §7.1 という既に一次情報で確定している 2 つの原則を、いずれも壊さない唯一の案であること。
-ただし「解説を別文書として書く」ことが著者の書き方として受け入れられるかは依頼者の判断である。
+**マージが要らない理由**: 編集が編集権によって直列化されるので、衝突の解消が発生しない。
+すなわち **E-1 の「マージを作らない」という決定が、そのままゼミ形式の成立条件になっている**。
+楽観ロックは無駄にならず、「編集権を受け渡した後に、前の保持者が古い版を基準に投げてきた」場合の
+検出器として働く。
 
-### 論点 B: Web テーマにおけるコンポーネント差し替えの許容範囲
+**排除しないために、いま守る制約**:
 
-§8.4 で「役割ごとの型付きコンポーネント差し替え」に閉じるとしたが、その範囲をどこまで開くか。
+1. 所有者を「文書に 1 人だけ」と型で固定しない。`Document.ownerUserId` は所有（課金・削除の主体）で
+   あって執筆者集合ではない。著者集合は後から別 entity として足せる。
+2. アップロードのエラーを閉じた union として持ち、code の追加が破壊的変更にならないようにする
+   （FE は code から文言へ写す規約なので、追加時に未対応の code がコンパイル時に見つかる）。
+3. アップロードの受け入れを「認可 → 検証 → 版の確定」の順に保つ。編集権の判定は認可の段に入るだけで、
+   検証と確定には触れない。
 
-| 選択肢 | 帰結 |
-|---|---|
-| B-1: 宣言的設定のみ（コンポーネント差し替えを一切許さない） | エントロピー最小。ただし Web 固有の対話性（折りたたみ・ホバー展開）を利用者が足せず、要求のたびにレンダラー本体を直すことになる。「レンダラー本体を書き換えなくてよい」（`README.md`）に反しうる |
-| B-2（推奨）: §8.4 のとおり、閉じた役割ユニオンに限って型付きコンポーネントを許す | 差し替え可能な箇所が型で列挙され、Props が解決済み文書の型で固定される。テーマが正本に触れられないことは型で保証される |
-| B-3: 任意のレンダリング関数を許す | 表現力は最大だが、テーマが何をするか型で予測できない。エントロピー最小化と型安全絶対条件の両方に反する |
+### 16.2 LaTeX を入力経路として受ける
 
-**推奨は B-2。** 根拠は `README.md` の「レンダラー本体を書き換えなくてよい」を満たす最小の開き方であること。
+正本の表現は宣言のまま（§7.1）とし、**LaTeX は「入力の便宜」として受ける**。
+著者が LaTeX を貼ると、変換ツールがブロック／ノードへ落とす（執筆時の変換であって、
+レンダー時のパースではない）。既存 2 プロジェクトが Typst 原本から構造化テキストへ移行した経路と同じ形。
 
-### 論点 C: 公開サイトの公開範囲
-
-§12 の policy は「文書・版・成果物は誰でも読める」を仮に置いている。
-論文を書きかけのまま公開サイトへ載せる使い方（要件にある「リアルタイムに更新しながら複数人が見る」）では、
-**未完成の原稿が全世界から読める**ことになる。
-
-| 選択肢 | 帰結 |
-|---|---|
-| C-1: 完全公開 | 実装が最小。未完成原稿が公開される |
-| C-2（推奨）: 文書ごとに公開／限定を選べる。限定時は招待された閲覧者のみ | `Document` に可視性の属性が増え、`read` policy が `owner` と招待関係の OR になる。招待という relation が 1 つ増える |
-| C-3: 常に限定公開 | 「Web で公開できるサイト」（`README.md`）という要件を満たさなくなる |
-
-**推奨は C-2。** 根拠は、要件が「Web 公開」と「執筆中のリアルタイム共有」の両方を挙げていること
-（`README.md`）で、片方だけを選ぶと他方が満たせないため。
-
-### 論点 D: 数式方言の縛り方
-
-§7.3 で「LaTeX と KaTeX の共通部分集合に限る」とした。この縛りをどう運用するか。
-
-| 選択肢 | 帰結 |
-|---|---|
-| D-1（推奨）: 共通部分集合を機械検査し、外れたら**生成を落とす** | 「黙って消える」が起きない（`build-latex.ts` が「フォントに無い文字は無言で消える」ので 1 件でも許さない、としているのと同じ扱い）。著者は書ける記法が制限される |
-| D-2: LaTeX を正とし、Web 側は描画できないものを代替表示（画像化等）で劣化させる | 著者の自由度は上がる。Web の数式が部分的に画像になり、検索・選択・拡大の対象から外れる |
-
-**推奨は D-1。** 根拠は先行 3 実装がすべて「KaTeX 向けの LaTeX 文字列」で運用済みであり（F3）、
-実際に 945 件の相互参照を含む 173 ページの PDF がこの前提で生成できている
-（`exact-solution-of-2d-ising-model/structured-latex/README.md` の実測記録）ことから、
-共通部分集合が実用上足りていると確認できるためである。
-
-### 論点 E: 複数人が同時に「更新」することを要件に含めるか
-
-`README.md` の要件は「論文をリアルタイムに更新しながら、同じサイトを**複数人が同時に見る**」であり、
-複数人が同時に**書く**とは書かれていない。どちらを想定するかで必要なものが変わる。
-
-| 選択肢 | 帰結 |
-|---|---|
-| E-1（推奨）: 単一の書き手を前提とする。ただし `baseRevision` による楽観ロック（§9.8）は型に残す | lost update は検出でき、拒否して書き手に伝えられる。衝突の**マージ**は作らない。後から複数書き手を要件化しても、契約を壊さずに有効化できる |
-| E-2: 複数の書き手の同時更新を初期から支える | セグメント単位のマージ規則が要る。§9.8 で「キー単位の全置換」にしてマージ規則を持たないと決めたことと衝突し、選択肢が増える |
-
-**推奨は E-1。** 根拠は、要件に明示されているのが「複数人で見る」ことだけであり、
-書き手の同時性は一次情報にないこと。早すぎる作り込みを避ける
-（[programming-philosophy.md](./programming-philosophy.md)）。
-M6 の受け入れ基準に「複数人同時更新」を含めるかどうかだけ、依頼者の判断がいる。
-
----
-
-## 14. M2（入力契約の確定）への引き継ぎ
-
-本ドキュメントで確定したもののうち、M2 が型として実装するのは次の範囲である。
-
-- §5.3 の構造化テキストのコア型と、§5.4 のメタデータ拡張ファクトリ。
-- ラベルのユニオン型と文書集約モジュールの生成器（先行実装 `tools/generate-index.ts` の一般化）。
-- I1–I5 のうち型で落とせるものと、実行時検証に回すものの切り分け
-  （先行実装は `docs/type-coverage.md` にこの切り分けを根拠つきで記録している。同じ形式で残す）。
-- §5.5 の解決済み文書の型と `resolve` の契約。
-- **図表ノードの要否（§7.5）。** 現時点で先行 2 プロジェクトの正本に図表が 1 件も無く、
-  形を一次情報から決められない。M2 で「入れるか、入れずに済ませるか」を決める。
-
-§13 の論点 A・C は M2 の型に影響する（A は文書合成、C は `Document` の属性）。
-M2 着手前に依頼者の判断を得る。論点 B・D・E はそれぞれ M4 / M3 / M6 まで影響が出ないので、
-各マイルストーンの着手前でよい。
+- 変換できない記法はその場でエラーになる（黙って落とさない）。
+- 正本に入った後は、型と不変条件がすべて効く。
+- **レンダー時に LaTeX をパースしない。** 出力ごとに解釈が揺れる経路を作らないため。
 
 ## 15. 設計ノート
 

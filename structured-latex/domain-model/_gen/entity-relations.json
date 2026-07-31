@@ -1,0 +1,202 @@
+[
+  {
+    "entityName": "User",
+    "referTos": [],
+    "referredBys": [
+      {
+        "entityName": "Account",
+        "propertyName": "userId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Requester",
+        "propertyName": "userId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Document",
+        "propertyName": "ownerUserId",
+        "isUnique": false
+      },
+      {
+        "entityName": "DocumentInvitation",
+        "propertyName": "inviteeUserId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Theme",
+        "propertyName": "ownerUserId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "Account",
+    "referTos": [
+      {
+        "entityName": "User",
+        "propertyName": "userId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": [
+      {
+        "entityName": "Requester",
+        "propertyName": "accountId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "Operator",
+    "referTos": [],
+    "referredBys": [
+      {
+        "entityName": "Requester",
+        "propertyName": "operatorId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "Requester",
+    "referTos": [
+      {
+        "entityName": "User",
+        "propertyName": "userId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Account",
+        "propertyName": "accountId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Operator",
+        "propertyName": "operatorId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": []
+  },
+  {
+    "entityName": "Document",
+    "referTos": [
+      {
+        "entityName": "User",
+        "propertyName": "ownerUserId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": [
+      {
+        "entityName": "DocumentInvitation",
+        "propertyName": "documentId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Revision",
+        "propertyName": "documentId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Subscription",
+        "propertyName": "documentId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "DocumentInvitation",
+    "referTos": [
+      {
+        "entityName": "Document",
+        "propertyName": "documentId",
+        "isUnique": false
+      },
+      {
+        "entityName": "User",
+        "propertyName": "inviteeUserId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": []
+  },
+  {
+    "entityName": "Revision",
+    "referTos": [
+      {
+        "entityName": "Document",
+        "propertyName": "documentId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": [
+      {
+        "entityName": "Segment",
+        "propertyName": "revisionId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Artifact",
+        "propertyName": "revisionId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "Segment",
+    "referTos": [
+      {
+        "entityName": "Revision",
+        "propertyName": "revisionId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": []
+  },
+  {
+    "entityName": "Theme",
+    "referTos": [
+      {
+        "entityName": "User",
+        "propertyName": "ownerUserId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": [
+      {
+        "entityName": "Artifact",
+        "propertyName": "themeId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "Artifact",
+    "referTos": [
+      {
+        "entityName": "Revision",
+        "propertyName": "revisionId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Theme",
+        "propertyName": "themeId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": []
+  },
+  {
+    "entityName": "Subscription",
+    "referTos": [
+      {
+        "entityName": "Document",
+        "propertyName": "documentId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": []
+  }
+]

@@ -1,0 +1,393 @@
+[
+  {
+    "name": "User",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "displayName",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "著者・組み込み開発者。文書とテーマの所有者"
+  },
+  {
+    "name": "Account",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "userId",
+        "targetEntityDefinitionName": "User",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "externalId",
+        "isUnique": true,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "IdP で認証された利用者アカウント。externalId は IdP 側の識別子"
+  },
+  {
+    "name": "Operator",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "externalId",
+        "isUnique": true,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "運営。admin 判定の主体"
+  },
+  {
+    "name": "Requester",
+    "properties": [
+      {
+        "isReference": true,
+        "name": "userId",
+        "targetEntityDefinitionName": "User",
+        "isUnique": false,
+        "isNullable": true
+      },
+      {
+        "isReference": true,
+        "name": "accountId",
+        "targetEntityDefinitionName": "Account",
+        "isUnique": false,
+        "isNullable": true
+      },
+      {
+        "isReference": true,
+        "name": "operatorId",
+        "targetEntityDefinitionName": "Operator",
+        "isUnique": false,
+        "isNullable": true
+      }
+    ],
+    "description": "認可の実行主体（projected。永続化しない）"
+  },
+  {
+    "name": "Document",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "ownerUserId",
+        "targetEntityDefinitionName": "User",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "title",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "visibility",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": [
+          "public",
+          "invited"
+        ]
+      },
+      {
+        "isReference": false,
+        "propertyType": "number",
+        "name": "publishedRevisionNumber",
+        "isUnique": false,
+        "isNullable": true,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "論文・書籍 1 本。正本の単位であり、不変条件 I1-I3 の効力範囲"
+  },
+  {
+    "name": "DocumentInvitation",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "documentId",
+        "targetEntityDefinitionName": "Document",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": true,
+        "name": "inviteeUserId",
+        "targetEntityDefinitionName": "User",
+        "isUnique": false,
+        "isNullable": false
+      }
+    ],
+    "description": "限定公開の文書へ招待された閲覧者"
+  },
+  {
+    "name": "Revision",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "documentId",
+        "targetEntityDefinitionName": "Document",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "number",
+        "name": "number",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "Date",
+        "name": "publishedAt",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "文書全体の確定スナップショット。不変条件 I1-I3 を満たすことが確定している"
+  },
+  {
+    "name": "Segment",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "revisionId",
+        "targetEntityDefinitionName": "Revision",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "key",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "contentHash",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "blocksJson",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "notesJson",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "アップロードの単位。key が文書順のキー。内容は構造化テキストの JSON"
+  },
+  {
+    "name": "Theme",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "ownerUserId",
+        "targetEntityDefinitionName": "User",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "name",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "target",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": [
+          "latex",
+          "pdf",
+          "web",
+          "book"
+        ]
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "declarationJson",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "体裁の宣言。組み込み開発者が所有し、解決済み文書より後段でだけ効く"
+  },
+  {
+    "name": "Artifact",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "revisionId",
+        "targetEntityDefinitionName": "Revision",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": true,
+        "name": "themeId",
+        "targetEntityDefinitionName": "Theme",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "target",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": [
+          "latex",
+          "pdf",
+          "web",
+          "book"
+        ]
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "location",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "ある版・あるターゲット・あるテーマから生成された出力"
+  },
+  {
+    "name": "Subscription",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "documentId",
+        "targetEntityDefinitionName": "Document",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "number",
+        "name": "knownRevisionNumber",
+        "isUnique": false,
+        "isNullable": true,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "Date",
+        "name": "connectedAt",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "公開サイトの閲覧接続 1 本。版の公開通知を受け取る"
+  }
+]
