@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_even_sector_fermions",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { tex: String.raw`\text{半整数運動量のフェルミオンと } V^{(+)} = c\,\check{V}'` },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "evenfermi_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的と、008 章との違い" },
     labels: [],
     statement: [
@@ -142,8 +139,7 @@ export default defineBlocks([
   {
     id: "evenfermi_001_definition_check_fermi",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\check\psi_\mu, \check\psi_\mu^\dagger \text{（半整数運動量のフェルミオン）}` },
     labels: ["def_check_fermi"],
     statement: [
@@ -245,8 +241,7 @@ export default defineBlocks([
   {
     id: "evenfermi_002_claim_periodicity",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\gamma_1, \gamma_2 \text{ の周期性と共役添字 } M+1-\mu` },
     labels: ["periodicity_of_check_fermi"],
     statement: [
@@ -484,8 +479,7 @@ e^{i(t+2k\pi)}
   {
     id: "evenfermi_003_claim_anticommutator",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`\check\psi \text{ の反交換関係}` },
     labels: ["anticommutator_of_check_psi"],
     statement: [
@@ -802,8 +796,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
   {
     id: "evenfermi_004_claim_commutation_V_plus_psi",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`V^{(+)} \text{ と } \check\psi \text{ の交換関係}` },
     labels: ["commutation_V_plus_check_psi"],
     statement: [
@@ -956,8 +949,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
   {
     id: "evenfermi_005_definition_check_Vprime",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`\check{V}' \text{ の定義}` },
     labels: ["def_check_Vprime"],
     statement: [
@@ -1083,8 +1075,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
   {
     id: "evenfermi_006_claim_action_T_check_Vprime",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`T_{(\check{V}')} \text{ の } \check\psi \text{ への作用}` },
     labels: ["action_of_T_check_Vprime_on_check_psi"],
     statement: [
@@ -1443,8 +1434,7 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
   {
     id: "evenfermi_007_claim_T_eq_on_check_Z_Y",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: {
       tex: String.raw`T_{(V^{(+)})} \text{ と } T_{(\check{V}')} \text{ は } \check{Z}, \check{Y} \text{ 上で一致する}`,
     },
@@ -1580,8 +1570,7 @@ T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
   {
     id: "evenfermi_008_claim_T_eq",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`T_{(V^{(+)})} = T_{(\check{V}')}` },
     labels: ["T_V_plus_eq_T_check_Vprime"],
     statement: [
@@ -1748,8 +1737,7 @@ T_{(V^{(+)})}(xy)
   {
     id: "evenfermi_009_claim_V_plus_eq_c_Vprime",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`V^{(+)} = c\,\check{V}' \text{（定数倍を除いて一致）}` },
     labels: ["V_plus_eq_c_check_Vprime"],
     statement: [

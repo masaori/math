@@ -5,17 +5,14 @@ export default defineBlocks([
     id: "heading_exp_linear_map",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 4,
+    origin: { path: "_old/typst/main.typ", ordinal: 4 },
     title: { text: "線型写像のexp" },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "exp_linear_map_000a_claim_real_exp_series_converges",
     kind: "claim",
-    sourcePath: "structured-latex/content/003_exp_linear_map.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 1 },
     title: { text: "非負実数の指数級数の収束" },
     labels: ["real_exp_series_converges"],
     statement: [
@@ -173,8 +170,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_000b_claim_matrix_exp_series_converges",
     kind: "claim",
-    sourcePath: "structured-latex/content/003_exp_linear_map.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 1 },
     title: { text: "行列の exp 級数はノルム収束する" },
     labels: ["matrix_exp_series_converges"],
     statement: [
@@ -299,8 +295,10 @@ export default defineBlocks([
   {
     id: "exp_linear_map_001_theorem_exp_series_pointwise_converges",
     kind: "theorem",
-    sourcePath: "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
-    sourceOrdinal: 1,
+    origin: {
+      path: "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
+      ordinal: 1,
+    },
     title: { text: "exp 級数の各点収束（数ベクトルへの作用・成分・行列への線型写像）" },
     labels: ["exp_converges"],
     statement: [
@@ -791,8 +789,10 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
   {
     id: "exp_linear_map_002_definition_exp_of_endomorphism",
     kind: "definition",
-    sourcePath: "_old/typst/parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
-    sourceOrdinal: 2,
+    origin: {
+      path: "_old/typst/parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
+      ordinal: 2,
+    },
     title: { text: "exp の定義（行列の場合と、行列への線型写像の場合）" },
     labels: ["def_exp"],
     statement: [
@@ -880,8 +880,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
   {
     id: "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
     kind: "theorem",
-    sourcePath: "_old/typst/parts/003_線型写像のexp/002_theorem_可換行列のexpの積公式.typ",
-    sourceOrdinal: 3,
+    origin: { path: "_old/typst/parts/003_線型写像のexp/002_theorem_可換行列のexpの積公式.typ", ordinal: 3 },
     title: { text: "可換行列の exp 積公式" },
     labels: ["theorem_exp_product"],
     statement: [
@@ -1261,8 +1260,7 @@ S_NT_N
   {
     id: "exp_linear_map_004_theorem_exp_zero_is_identity",
     kind: "theorem",
-    sourcePath: "_old/typst/parts/003_線型写像のexp/003_theorem_零行列のexpはI.typ",
-    sourceOrdinal: 4,
+    origin: { path: "_old/typst/parts/003_線型写像のexp/003_theorem_零行列のexpはI.typ", ordinal: 4 },
     title: { tex: String.raw`\exp(O) = I` },
     labels: ["theorem_exp_zero"],
     statement: [

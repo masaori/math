@@ -19,7 +19,10 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007_definition_automorphism_groups",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "自己同型群・内部自己同型群・外部自己同型群" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/006_definition_自己同型群_内部自己同型群_外部自己同型群.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/006_definition_自己同型群_内部自己同型群_外部自己同型群.typ",
+      ordinal: 1,
+    },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -105,7 +108,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007a_definition_group_hom_ker_im",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "群準同型・核・像" },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 2 },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -262,7 +265,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007b_definition_center_of_group",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "群の中心" },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 3 },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -328,7 +331,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007c_claim_inn_normal_in_aut",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { tex: String.raw`\mathrm{Inn}(G) \trianglelefteq \mathrm{Aut}(G)` },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 4 },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -487,7 +490,7 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_007d_definition_exact_sequence",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "群の完全列" },
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 5 },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -562,7 +565,10 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_008_definition_exact_sequence_aut",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "自己同型群の完全列" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/007_definition_自己同型群の完全列.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/007_definition_自己同型群の完全列.typ",
+      ordinal: 6,
+    },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 高校生の読者が Ising 模型の本筋に入る前に、群・正規部分群・商群・完全列を通過させられるため。実際に必要だった 1 点（共役写像 ",
@@ -813,7 +819,10 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_009_definition_ring_multiplicative_group",
     targets: ["injectivity_of_T_up_to_scalar"],
     title: { text: "環の乗法群" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/008_definition_環の乗法群.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/008_definition_環の乗法群.typ",
+      ordinal: 7,
+    },
     body: [
       paragraph([
         "【ゴールに照らして本文には採用しなかった】理由: 一般の環についての定義であり、読者に環と群の定義を先に要求するため。本文で必要なのは ",

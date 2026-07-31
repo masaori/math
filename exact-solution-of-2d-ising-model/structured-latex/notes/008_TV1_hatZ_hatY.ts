@@ -7,7 +7,10 @@ export default defineNotes([
     id: "note_TV1_hatZ_hatY_001_expressions_used_in_proof",
     targets: ["commutator_of_H_and_Z_Y"],
     title: { text: "証明で用いる表式と反交換関係（原文の note）" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ",
+      ordinal: 1,
+    },
     body: [
       paragraph(["証明で用いる表式と反交換関係（原文 note）："]),
       displayMath(
@@ -28,7 +31,10 @@ H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
     id: "note_TV1_hatZ_hatY_002_concrete_examples",
     targets: ["nesting_of_commutator_of_H_and_Z"],
     title: { text: "原文 note の具体例（n = 0,1,2,3,4）" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/001_claim_交換子のネスト.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/001_claim_交換子のネスト.typ",
+      ordinal: 2,
+    },
     body: [
       paragraph([
         "原文 note の具体例（",
@@ -159,7 +165,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     id: "note_TV1_hatZ_hatY_005_taylor_expansion_of_sinh_cosh",
     targets: ["extract_taylor_coefficient_of_Z_Y"],
     title: { text: "sinh, cosh のテイラー展開（原文の note）" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/004_claim_テイラー係数の抽出.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/004_claim_テイラー係数の抽出.typ",
+      ordinal: 3,
+    },
     body: [
       paragraph(["sinh, cosh のテイラー展開（原文 note）："]),
       displayMath(
@@ -172,7 +181,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     id: "note_TV1_hatZ_hatY_026_reference_facts_on_arg",
     targets: ["arg_of_gamma2_quotient"],
     title: { text: "逆数と積の arg に関する参考事実（原文の note）" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/025_claim_gamma2の商のarg.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/025_claim_gamma2の商のarg.typ",
+      ordinal: 4,
+    },
     body: [
       paragraph(["（原文の note にある参考事実）"]),
       displayMath(
@@ -204,7 +216,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     id: "note_TV1_hatZ_hatY_030_epsilon_form_and_holonomic_comparison",
     targets: ["def_fermi"],
     title: { text: "符号 ε_μ を用いた書き換えと、ホロノミック量子場の定義との相違" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/029_definition_フェルミオン.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/029_definition_フェルミオン.typ",
+      ordinal: 5,
+    },
     body: [
       paragraph([
         ref("equation_of_a_theta_mu"),
@@ -238,7 +253,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     id: "note_TV1_hatZ_hatY_033_holonomic_comparison",
     targets: ["def_Vprime"],
     title: { text: "ホロノミック量子場の定義との相違（添字を反転させる理由）" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ",
+      ordinal: 6,
+    },
     body: [
       paragraph([
         "この定義はホロノミック量子場の定義とは異なる。ホロノミック量子場では ",
@@ -267,7 +285,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     id: "note_TV1_hatZ_hatY_039_proof_does_not_use_clifford_group",
     targets: ["V_eq_Vprime"],
     title: { text: "この証明はクリフォード群の性質に依存しない（原文の note）" },
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
+      ordinal: 7,
+    },
     body: [
       paragraph([
         "この証明はクリフォード群（",

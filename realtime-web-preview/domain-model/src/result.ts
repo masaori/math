@@ -2,14 +2,10 @@
  * Result 型（Discriminated Union）。
  * 想定内エラーは throw せずこの型で伝搬し、処理漏れをコンパイル時に検出させる。
  * （docs/_template/docs/error-handling-strategy.md）
+ *
+ * 定義はシステム（`structured-latex/domain-model/result.ts`）が持つものを再輸出する。
+ * システムの実行時スキーマが返す Result と本パッケージの Result が別物になると、
+ * 境界のたびに詰め替えが必要になるため。
  */
-export type Result<T, E> = { success: true; data: T } | { success: false; error: E }
 
-export const ok = <T>(data: T): Result<T, never> => ({ success: true, data })
-
-export const err = <E>(error: E): Result<never, E> => ({ success: false, error })
-
-/** Discriminated Union の網羅性をコンパイル時に保証する。 */
-export const assertNever = (value: never): never => {
-  throw new Error(`Unexpected value: ${JSON.stringify(value)}`)
-}
+export { assertNever, err, ok, type Result } from '@structured-latex/system/domain-model'

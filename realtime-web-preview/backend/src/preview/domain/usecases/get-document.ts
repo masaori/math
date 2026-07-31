@@ -4,8 +4,8 @@ import type { NoteSourceGateway } from '../interfaces/gateways/note-source-gatew
 
 /** 画面に渡す文書一式。`notes` は文書本体ではなく参照用（出版物には載らない）。 */
 export type DocumentWithNotes = {
-  blocks: Block[]
-  notes: Note[]
+  blocks: readonly Block[]
+  notes: readonly Note[]
   sourceLabel: string
 }
 

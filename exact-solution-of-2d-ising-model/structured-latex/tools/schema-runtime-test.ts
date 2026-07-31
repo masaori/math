@@ -1,188 +1,112 @@
 #!/usr/bin/env node
 /**
- * `schema.ts` の実行時検証が、型で守れない／型を回避された入力を確かに拒むかのテスト。
+ * 実行時検証が、**型を経由せずに入ってくる値**（動的に組み立てたデータ、外部から渡された値）を
+ * 確かに拒むかのテスト。
  *
- * 型（コンパイル時）と実行時検証は守備範囲が違う。ここで確認するのは
- * **型検査を通さずに値が入ってくる経路**（動的に組み立てたデータ、外部から渡された値、
- * 型を書けない `.mjs`）でも、同じ規則で弾けることである。
+ * 入力言語そのものの実行時検証（ノード種別、見出しに本文、`proof` の打ち間違い、
+ * ノートの targets が空 ほか）は**システム側の単体テスト**
+ * （`structured-latex/domain-model/structured-text/validate.test.ts`）が持つ。
+ * ここに残すのは、このプロジェクトが宣言したメタデータ `conversion` に関する検査だけである。
+ * ——すなわち「`schema.ts` の `blockMeta` 宣言が、実行時にも意図どおり効いているか」の検査。
+ *
+ * システムの実行時スキーマは **throw せず Result を返す**（docs/error-handling-strategy.md）。
+ * したがってここも「例外が飛ぶか」ではなく「`success: false` と、その指摘の中身」を見る。
  *
  * 使い方: node tools/schema-runtime-test.ts
  */
 
-import { defineBlocks, defineNotes, paragraph } from "../schema.ts";
+import { runtimeSchema } from "../schema.ts";
 
-type Case = { name: string; run: () => void; expect: RegExp };
+type Case = {
+  name: string;
+  value: unknown;
+  /** 指摘のいずれかに現れるべき語。 */
+  expect: RegExp;
+};
+
+/** 検査対象以外は正しい、最小の定理型ブロック。 */
+const base = {
+  id: "runtime_test",
+  kind: "claim",
+  labels: [],
+  statement: [],
+};
 
 const cases: Case[] = [
   {
-    name: "ブロックの未知フィールド（proof の打ち間違い）を拒む",
-    expect: /未知のフィールドがある: proofs（/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_typo",
-          kind: "claim",
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 1,
-          labels: [],
-          statement: [],
-          proofs: [paragraph(["証明のつもり"])],
-        } as never,
-      ]),
-  },
-  {
-    name: "本文ブロックの notes を拒む（注記は notes/ へ）",
-    expect: /notes は使えない/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_notes",
-          kind: "remark",
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 2,
-          labels: [],
-          statement: [],
-          notes: [paragraph(["注記"])],
-        } as never,
-      ]),
-  },
-  {
-    name: "見出しに本文があれば拒む",
-    expect: /statement is not allowed/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_heading",
-          kind: "heading",
-          level: 1,
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 3,
-          title: { text: "見出し" },
-          labels: [],
-          statement: [paragraph(["本文"])],
-        } as never,
-      ]),
-  },
-  {
-    name: "ノートの未知フィールドを拒む",
-    expect: /未知のフィールドがある: target（/,
-    run: () =>
-      defineNotes([
-        {
-          id: "note_runtime_test_typo",
-          target: ["def_kronecker"],
-          body: [],
-        } as never,
-      ]),
-  },
-  {
-    name: "定理型ブロックに level があれば拒む（見出しとの取り違え）",
-    expect: /level is not allowed/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_level",
-          kind: "claim",
-          level: 3,
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 5,
-          labels: [],
-          statement: [],
-        } as never,
-      ]),
-  },
-  {
-    name: "ノートの targets が空なら拒む",
-    expect: /at least one label/,
-    run: () => defineNotes([{ id: "note_runtime_test_empty", targets: [], body: [] } as never]),
-  },
-  {
     name: "conversion.status が想定外の値なら拒む",
-    expect: /conversion.status must be one of/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_status",
-          kind: "claim",
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 6,
-          labels: [],
-          statement: [],
-          conversion: { status: "convertd" },
-        } as never,
-      ]),
+    value: { ...base, conversion: { status: "convertd" } },
+    expect: /conversion\.status/,
   },
   {
-    name: "タイトルが text も tex も持たないなら拒む",
-    expect: /must have text or tex/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_title",
-          kind: "claim",
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 7,
-          title: {},
-          labels: [],
-          statement: [],
-        } as never,
-      ]),
+    name: "conversion.notes が文字列の配列でないなら拒む",
+    value: { ...base, conversion: { status: "added", notes: "一行だけのメモ" } },
+    expect: /conversion\.notes/,
   },
   {
-    name: "sourceOrdinal が整数でないなら拒む",
-    expect: /sourceOrdinal must be an integer/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_ordinal",
-          kind: "claim",
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 2.5,
-          labels: [],
-          statement: [],
-        } as never,
-      ]),
+    name: "conversion の中の未知フィールド（notes の打ち間違い）を拒む",
+    value: { ...base, conversion: { status: "added", note: ["メモ"] } },
+    expect: /conversion\.note\b|Unrecognized key/,
   },
   {
-    name: "ノードの type が不正なら拒む",
-    expect: /type is invalid/,
-    run: () =>
-      defineBlocks([
-        {
-          id: "runtime_test_node",
-          kind: "claim",
-          sourcePath: "tools/schema-runtime-test.ts",
-          sourceOrdinal: 4,
-          labels: [],
-          statement: [{ type: "pargaraph", children: [] } as never],
-        },
-      ]),
+    name: "宣言していないメタデータのキーを拒む（他プロジェクトの語彙の混入）",
+    value: { ...base, habitat: "countable" },
+    expect: /habitat|Unrecognized key/,
+  },
+  {
+    name: "見出しはメタデータを持てない（conversion は定理型だけ）",
+    value: {
+      id: "runtime_test_heading",
+      kind: "heading",
+      level: 2,
+      title: { text: "見出し" },
+      labels: [],
+      conversion: { status: "added" },
+    },
+    expect: /conversion|Unrecognized key/,
+  },
+  {
+    name: "由来（origin）の通し番号が正の整数でないなら拒む",
+    value: { ...base, origin: { path: "tools/schema-runtime-test.ts", ordinal: 2.5 } },
+    expect: /ordinal|integer|整数/,
   },
 ];
 
 let failed = 0;
 for (const testCase of cases) {
-  let message: string | null = null;
-  try {
-    testCase.run();
-  } catch (cause) {
-    message = cause instanceof Error ? cause.message : String(cause);
-  }
-  if (message === null) {
+  const result = runtimeSchema.validateBlock(testCase.value, "tools/schema-runtime-test.ts");
+  if (result.success) {
     failed += 1;
-    console.error(`✗ ${testCase.name}: 例外が投げられなかった`);
+    console.error(`✗ ${testCase.name}: 拒まれなかった`);
     continue;
   }
-  if (!testCase.expect.test(message)) {
+  const rendered = result.error.map((issue) => `${issue.path}: ${issue.message}`).join("\n");
+  if (!testCase.expect.test(rendered)) {
     failed += 1;
-    console.error(`✗ ${testCase.name}: 例外の内容が想定外\n    ${message}`);
+    console.error(`✗ ${testCase.name}: 指摘の内容が想定外\n    ${rendered.split("\n").join("\n    ")}`);
     continue;
   }
   console.log(`✓ ${testCase.name}`);
+}
+
+// 正しい値は通ること（対照。常に落ちているだけの状態を正常と誤認しないため）。
+const control = runtimeSchema.validateBlock(
+  { ...base, origin: { path: "tools/schema-runtime-test.ts", ordinal: 1 }, conversion: { status: "added", notes: ["メモ"] } },
+  "tools/schema-runtime-test.ts",
+);
+if (!control.success) {
+  failed += 1;
+  console.error(
+    `✗ 正しいブロックが拒まれた（テストの設定不備）:\n    ${control.error
+      .map((issue) => `${issue.path}: ${issue.message}`)
+      .join("\n    ")}`,
+  );
+} else {
+  console.log("✓ 正しいブロック（conversion 付き）は通る");
 }
 
 if (failed > 0) {
   console.error(`\n${failed} 件の実行時検証テストが期待どおりに動かなかった`);
   process.exit(1);
 }
-console.log(`\n実行時検証テスト ${cases.length} 件すべて期待どおり`);
+console.log(`\n実行時検証テスト ${cases.length + 1} 件すべて期待どおり`);

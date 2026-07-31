@@ -1,8 +1,8 @@
 // 自動生成ファイル — 直接編集しない。
-// 生成元: content/ の全ブロックの labels（tools/generate-index.ts）
-// 再生成: node tools/generate-index.ts
+// 生成元: content/ の全ブロックの labels
+// 再生成: node <system>/codegen/structured-text-index/cli.ts --project <このディレクトリ>
 //
-// このユニオン型が「実在するラベル」の全体であり、ref() / notes の targets は
+// このユニオン型が「実在するラベル」の全体であり、ref() / ノートの targets は
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
@@ -258,7 +258,7 @@ export const ALL_LABELS = [
   "two_by_two_transfer_identity",
   "why_008_applies_only_to_minus_sector",
   "ホロノミック量子場_p142下段_1",
-] as const;
+] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
-export type Label = (typeof ALL_LABELS)[number];
+export type Label = (typeof ALL_LABELS)[number]

@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_A_theta_tilde_diagonalization",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { tex: String.raw`\text{半整数運動量における } A(\tilde\theta) \text{ の対角化}` },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "Athetatilde_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的と、整数運動量との違い" },
     labels: [],
     statement: [
@@ -79,8 +76,7 @@ export default defineBlocks([
   {
     id: "Athetatilde_001_definition_gamma1_gamma2",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\gamma_1(\theta), \gamma_2(\theta)\ (\theta \in \mathbb{R})` },
     labels: ["def_gamma1_gamma2_of_theta"],
     statement: [
@@ -171,8 +167,7 @@ export default defineBlocks([
   {
     id: "Athetatilde_002_claim_gamma2_nonzero",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\gamma_2(\tilde\theta_\mu) \neq 0 \text{（例外なし）}` },
     labels: ["gamma_2_theta_tilde_nonzero"],
     statement: [
@@ -398,8 +393,7 @@ s_1c_2
   {
     id: "Athetatilde_003_claim_relation_of_gamma2",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: {
       tex: String.raw`\gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)} \text{ とその帰結}`,
     },
@@ -660,8 +654,7 @@ s_1c_2
   {
     id: "Athetatilde_004_claim_eigenvector",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`A(\tilde\theta_\mu) \text{ の固有値と固有ベクトル}` },
     labels: ["eigenvector_of_A_theta_tilde"],
     statement: [
@@ -884,8 +877,7 @@ s_1c_2
   {
     id: "Athetatilde_005_claim_diagonalization",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`A(\tilde\theta_\mu) \text{ の対角化 } (\check{P}_\mu,\, \check{D}_\mu)` },
     labels: ["diagonalization_check_P_D"],
     statement: [
@@ -1047,8 +1039,7 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
   {
     id: "Athetatilde_006_claim_det_A",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`\det A(\tilde\theta_\mu) = 1` },
     labels: ["det_A_theta_tilde"],
     statement: [
@@ -1304,8 +1295,7 @@ s_1^2c_2^2(s_2^*)^2
   {
     id: "Athetatilde_007_claim_gamma1_gt_1",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`\gamma_1(\tilde\theta_\mu) > 1` },
     labels: ["gamma1_gt_1_theta_tilde"],
     statement: [
@@ -1416,8 +1406,7 @@ s_1^2c_2^2(s_2^*)^2
   {
     id: "Athetatilde_008_definition_gamma_theta_tilde",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`\gamma(\tilde\theta_\mu) \text{ の定義}` },
     labels: ["def_gamma_theta_tilde_mu"],
     statement: [
@@ -1484,8 +1473,7 @@ s_1^2c_2^2(s_2^*)^2
   {
     id: "Athetatilde_009_claim_lambda_eq_exp_gamma",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\tilde\theta_\mu)}` },
     labels: ["lambda_eq_exp_gamma_theta_tilde"],
     statement: [

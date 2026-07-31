@@ -5,11 +5,15 @@
  * 型検査（`tsc -p tsconfig.json --noEmit`）と役割を分ける:
  *   - **コンパイル時**に落ちるもの（存在しないラベルへの ref / targets、id・ラベルの重複、
  *     kind ごとのフィールド、targets の空配列、habitat の必須性と realEscape の要否）は
- *     `schema.ts` の型と `document.generated.ts` が担当する。ここでの再検査は、
+ *     `schema.ts` の具体化した型と `document.generated.ts` が担当する。ここでの再検査は、
  *     型を経由せずに値が作られる経路（動的生成・`as` による回避）への保険である。
  *   - **型では表現できないもの**（未変換 Typst 記法の混入、生成物とファイル一覧の一致、
  *     `verification` が指すディレクトリの実在、可算 habitat のブロックに ℝ/ℂ が混入していないこと）は
  *     このスクリプトだけが検出できる。
+ *
+ * ブロック 1 件の形の検査は**システムの `createRuntimeSchema`** が行う（`schema.ts` で
+ * プロジェクト固有メタデータのキーを宣言して具体化してある）。これは throw せず Result を返すので、
+ * ここで受けて全件集めてから 1 度だけ落とす。
  *
  * 使い方: node structured-latex/tools/validate-content.ts
  */
@@ -18,8 +22,8 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 
 import { ALL_LABELS } from "../labels.generated.ts";
-import { defineNotes, HABITAT_VALUES, validateBlock } from "../schema.ts";
-import type { ConvertedBlock, Node } from "../schema.ts";
+import { HABITAT_VALUES, checkHabitation, runtimeSchema } from "../schema.ts";
+import type { ConvertedBlock, Node, TheoremLikeBlock } from "../schema.ts";
 import { loadContentFiles, loadNoteFiles, structuredLatexDir } from "./content-modules.ts";
 
 /** プロジェクトルート（`integrable-lattice/`）。`verification` のパスはここからの相対。 */
@@ -27,6 +31,7 @@ const projectRoot = join(structuredLatexDir, "..");
 
 type RefUse = { target: string; blockId: string; file: string };
 
+const problems: string[] = [];
 const ids = new Set<string>();
 const labels = new Map<string, string>();
 // ref 解決チェック用に、全ブロックの ref を一旦集約してから（ラベルは後続ファイルで
@@ -42,19 +47,19 @@ let leanLinkCount = 0;
 const contentFiles = await loadContentFiles();
 
 for (const { file, blocks } of contentFiles) {
+  // ブロック 1 件の形（未知フィールド・ノード種別・kind ごとのフィールド）はシステムが見る。
+  const parsed = runtimeSchema.validateBlocks(blocks, file);
+  if (!parsed.success) {
+    for (const issue of parsed.error) problems.push(`${issue.path}: ${issue.message}`);
+  }
   for (const block of blocks) {
-    validateBlock(block);
     blockCount += 1;
     if (block.kind === "heading") headingCount += 1;
-    if (ids.has(block.id)) {
-      throw new Error(`duplicate block id: ${block.id}`);
-    }
+    if (ids.has(block.id)) problems.push(`duplicate block id: ${block.id}`);
     ids.add(block.id);
     for (const label of block.labels) {
       const owner = labels.get(label);
-      if (owner !== undefined) {
-        throw new Error(`duplicate label ${label}: ${owner} and ${block.id}`);
-      }
+      if (owner !== undefined) problems.push(`duplicate label ${label}: ${owner} と ${block.id}`);
       labels.set(label, block.id);
     }
     scanForTypstMath(block, file);
@@ -65,7 +70,7 @@ for (const { file, blocks } of contentFiles) {
 }
 
 if (blockCount === 0) {
-  throw new Error("no blocks found — check that content files export defineBlocks([...])");
+  problems.push("no blocks found — check that content files export defineBlocks([...])");
 }
 
 // --- notes/ の検証 -----------------------------------------------------------
@@ -77,42 +82,36 @@ let noteCount = 0;
 const noteFiles = await loadNoteFiles();
 
 for (const { file, notes } of noteFiles) {
-  // schema 妥当性は defineNotes に通して確認する（notes ファイル自身と同じ検証）。
-  defineNotes(notes);
+  const parsed = runtimeSchema.validateNotes(notes, file);
+  if (!parsed.success) {
+    for (const issue of parsed.error) problems.push(`${issue.path}: ${issue.message}`);
+  }
   for (const note of notes) {
     noteCount += 1;
     if (noteIds.has(note.id) || ids.has(note.id)) {
-      throw new Error(`duplicate note id: ${note.id}`);
+      problems.push(`duplicate note id: ${note.id}`);
     }
     noteIds.add(note.id);
     for (const target of note.targets) {
       noteTargets.push({ target, noteId: note.id, file });
     }
     const noteTitle = note.title;
-    scanForTypstMathInNodes(note.body ?? [], `${file}:${note.id}`);
+    scanForTypstMathInNodes(note.body, `${file}:${note.id}`);
     if (noteTitle !== null && noteTitle !== undefined && noteTitle.tex !== undefined) {
       assertNoTypstToken([noteTitle.tex], `${file}:${note.id}.title`);
     }
-    walkRefs(note.body ?? [], note.id, file, refs);
+    walkRefs(note.body, note.id, file, refs);
   }
 }
 
 // ref 解決チェック: ref.target は必ず定義済みラベルでなければならない。
-const unresolved = refs.filter((r) => !labels.has(r.target));
-if (unresolved.length > 0) {
-  const detail = unresolved.map((r) => `  ${r.file}:${r.blockId} -> ref target "${r.target}"`);
-  throw new Error(
-    `unresolved ref target(s) — target must be a defined label:\n${detail.join("\n")}`,
-  );
+for (const use of refs.filter((r) => !labels.has(r.target))) {
+  problems.push(`unresolved ref target: ${use.file}:${use.blockId} -> "${use.target}"`);
 }
 
 // targets 解決チェック: ノートは必ず content 側の実在ラベルに紐づく。
-const unresolvedTargets = noteTargets.filter((t) => !labels.has(t.target));
-if (unresolvedTargets.length > 0) {
-  const detail = unresolvedTargets.map((t) => `  ${t.file}:${t.noteId} -> targets "${t.target}"`);
-  throw new Error(
-    `unresolved note target(s) — targets must be labels defined in content/:\n${detail.join("\n")}`,
-  );
+for (const target of noteTargets.filter((t) => !labels.has(t.target))) {
+  problems.push(`unresolved note target: ${target.file}:${target.noteId} -> "${target.target}"`);
 }
 
 // 生成済みラベル一覧（型の土台）と実状の一致。
@@ -120,11 +119,18 @@ const generated = new Set<string>(ALL_LABELS);
 const missingInGenerated = [...labels.keys()].filter((label) => !generated.has(label));
 const staleInGenerated = [...generated].filter((label) => !labels.has(label));
 if (missingInGenerated.length > 0 || staleInGenerated.length > 0) {
-  throw new Error(
-    "labels.generated.ts が content/ の実状と一致していない（node tools/generate-index.ts で再生成する）:\n" +
+  problems.push(
+    "labels.generated.ts が content/ の実状と一致していない" +
+      "（node ../../structured-latex/codegen/structured-text-index/cli.ts --project . で再生成する）:\n" +
       `  生成物に無い実在ラベル: ${missingInGenerated.join(", ") || "なし"}\n` +
       `  実在しない生成物のラベル: ${staleInGenerated.join(", ") || "なし"}`,
   );
+}
+
+if (problems.length > 0) {
+  console.error(`実行時検証で ${problems.length} 件の問題:`);
+  for (const problem of problems) console.error(`  - ${problem}`);
+  process.exit(1);
 }
 
 console.log(
@@ -144,8 +150,7 @@ for (const escape of escapes) {
 }
 
 function scanForTypstMath(block: ConvertedBlock, file: string): void {
-  const strings = collectBlockStrings(block);
-  assertNoTypstToken(strings, `${file}:${block.id}`);
+  assertNoTypstToken(collectBlockStrings(block), `${file}:${block.id}`);
 }
 
 function collectBlockStrings(block: ConvertedBlock): string[] {
@@ -153,8 +158,8 @@ function collectBlockStrings(block: ConvertedBlock): string[] {
   // 見出しブロックは本文を持たないため statement は undefined になりうる。
   collectStrings(block.statement ?? [], strings);
   collectStrings(block.proof ?? [], strings);
-  // タイトルの tex も KaTeX へ渡るので同じ規約で検査する。
-  const title = block.title;
+  // タイトルの tex も KaTeX へ渡るので同じ規約で検査する（図表はタイトルを持たない）。
+  const title = block.kind === "figure" ? undefined : block.title;
   if (title !== null && title !== undefined && title.tex !== undefined) {
     strings.push(title.tex);
   }
@@ -175,7 +180,7 @@ function assertNoTypstToken(strings: readonly string[], where: string): void {
   );
   const first = suspicious[0];
   if (first !== undefined) {
-    throw new Error(`${where} has suspicious unconverted Typst math token: ${first}`);
+    problems.push(`${where} has suspicious unconverted Typst math token: ${first}`);
   }
 }
 
@@ -192,10 +197,13 @@ function assertNoTypstToken(strings: readonly string[], where: string): void {
  * habitat を `"mixed"`（または `"R"` / `"C"`）にして realEscape を書くことである。
  */
 function checkHabitatConsistency(block: ConvertedBlock, file: string): void {
-  if (block.kind === "heading") return;
-  const habitat = block.habitat;
+  if (block.kind === "heading" || block.kind === "figure") return;
+  const theoremLike = block as TheoremLikeBlock;
+  // 住処と realEscape の対応（フィールド間の条件）は zod のキー単位の検査では見られない。
+  problems.push(...checkHabitation(theoremLike));
+  const habitat: string = theoremLike.habitat;
   if (HABITAT_VALUES.escaping.has(habitat)) {
-    escapes.push({ blockId: block.id, habitat, why: block.realEscape ?? "" });
+    escapes.push({ blockId: block.id, habitat, why: theoremLike.realEscape ?? "" });
     return;
   }
   const offending = collectBlockStrings(block).filter((value) =>
@@ -205,10 +213,10 @@ function checkHabitatConsistency(block: ConvertedBlock, file: string): void {
   );
   const first = offending[0];
   if (first !== undefined) {
-    throw new Error(
+    problems.push(
       `${file}:${block.id} は可算側の habitat "${habitat}" を宣言しているのに、` +
         `数式に非可算（ℝ/ℂ）が現れている: ${first}\n` +
-        "  → ℝ/ℂ を本当に使うなら habitat を \"mixed\"（または \"R\" / \"C\"）にして、" +
+        '      → ℝ/ℂ を本当に使うなら habitat を "mixed"（または "R" / "C"）にして、' +
         "realEscape にどこで・なぜ脱出したかを書くこと。" +
         "使っていないなら数式から ℝ/ℂ を取り除くこと。",
     );
@@ -221,18 +229,19 @@ function checkHabitatConsistency(block: ConvertedBlock, file: string): void {
  * 実在しないパスを黙って通すと、証明↔数値検証の対応が切れたまま「紐づいている」ように見える。
  */
 function checkLinkageTargets(block: ConvertedBlock, file: string): void {
-  if (block.kind === "heading") return;
-  for (const target of block.verification ?? []) {
+  if (block.kind === "heading" || block.kind === "figure") return;
+  const theoremLike = block as TheoremLikeBlock;
+  for (const target of theoremLike.verification ?? []) {
     verificationLinkCount += 1;
     const absolute = join(projectRoot, target);
     if (!existsSync(absolute)) {
-      throw new Error(
-        `${file}:${block.id}.verification が実在しないパスを指している: ${target}\n` +
-          `  （プロジェクトルート ${projectRoot} からの相対パスで書く）`,
+      problems.push(
+        `${file}:${block.id}.verification が実在しないパスを指している: ${target}` +
+          `（プロジェクトルート ${projectRoot} からの相対パスで書く）`,
       );
     }
   }
-  leanLinkCount += (block.lean ?? []).length;
+  leanLinkCount += (theoremLike.lean ?? []).length;
 }
 
 function summarize(value: string): string {

@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_critical_point",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { text: "臨界点と比熱の対数発散" },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "critical_000_remark_escape_to_real_analysis_chapter_E",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章で新たに持ち込む実数解析の事実（(R3)〜(R6)）" },
     labels: ["remark_real_analysis_escape_chapter_E"],
     statement: [
@@ -149,8 +146,7 @@ export default defineBlocks([
   {
     id: "critical_001_claim_cosh_addition_and_half_angle",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\cosh,\sinh \text{ の加法定理・半角公式と } \mathrm{arcsinh}` },
     labels: ["cosh_addition_and_half_angle"],
     statement: [
@@ -381,8 +377,7 @@ e^{-u}
   {
     id: "critical_002_definition_kappa_and_A",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\kappa := 2K_1 - 2K_2^* \text{ と } A := \sinh 2K_1\sinh 2K_2^*` },
     labels: ["def_kappa_and_A"],
     statement: [
@@ -419,8 +414,7 @@ A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`,
   {
     id: "critical_003_claim_gamma_kappa_identity",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`\sinh^2\!\left(\tfrac{\gamma(\theta)}{2}\right) = \sinh^2\!\left(\tfrac{\kappa}{2}\right) + A\sin^2\!\left(\tfrac{\theta}{2}\right)` },
     labels: ["gamma_kappa_identity"],
     statement: [
@@ -566,8 +560,7 @@ A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`,
   {
     id: "critical_004_claim_critical_point_iff_kappa_zero",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`\sinh 2K_1\sinh 2K_2 = 1 \iff K_1 = K_2^* \iff \kappa = 0` },
     labels: ["critical_point_iff_kappa_zero"],
     statement: [
@@ -634,8 +627,7 @@ s_1 s_2 = 1
   {
     id: "critical_005_claim_isotropic_setting",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`\text{等方な場合 } K_1 = K_2 = K \text{ では } A = 1` },
     labels: ["isotropic_A_equals_one"],
     statement: [
@@ -698,8 +690,7 @@ s_1 s_2 = 1
   {
     id: "critical_006_claim_kappa_of_K_basic",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`\kappa(K) \text{ の基本性質と臨界点 } K_c` },
     labels: ["kappa_of_K_basic"],
     statement: [
@@ -969,8 +960,7 @@ s_1 s_2 = 1
   {
     id: "critical_007_claim_gamma_derivatives_in_kappa",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`\frac{\partial\gamma}{\partial\kappa} = \frac{\sinh\kappa}{\sinh\gamma},\quad \left|\frac{\partial\gamma}{\partial\kappa}\right| \leq 1` },
     labels: ["gamma_derivatives_in_kappa"],
     statement: [
@@ -1176,8 +1166,7 @@ s_1 s_2 = 1
   {
     id: "critical_008_claim_elementary_sine_bounds",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`0 \leq \tfrac{\theta}{2} - \sin\tfrac{\theta}{2} \leq \tfrac{\theta^3}{48} \quad (0 \leq \theta \leq \pi)` },
     labels: ["elementary_sine_bounds"],
     statement: [
@@ -1279,8 +1268,7 @@ c_0\,\frac{\theta}{2} \ \leq\ \sin\frac{\theta}{2} \ &\leq\ \frac{\theta}{2}
   {
     id: "critical_009_claim_closed_form_log_integral",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} = 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)` },
     labels: ["closed_form_log_integral"],
     statement: [
@@ -1431,8 +1419,7 @@ G'(\theta)
   {
     id: "critical_010_claim_sine_integral_two_sided",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`2\log\frac{\pi}{\delta} \leq \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\sin^2(\theta/2)}} \leq 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2} + B` },
     labels: ["sine_integral_two_sided"],
     statement: [
@@ -1594,8 +1581,7 @@ G'(\theta)
   {
     id: "critical_011_theorem_second_derivative_log_divergence",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 13,
+    origin: { path: SRC, ordinal: 13 },
     title: { tex: String.raw`\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{|\kappa|}\right| \leq \frac{6}{5} \quad \left(0 < |\kappa| \leq \tfrac12\right)` },
     labels: ["second_derivative_log_divergence"],
     statement: [
@@ -2007,8 +1993,7 @@ T
   {
     id: "critical_012_theorem_specific_heat_log_divergence",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 14,
+    origin: { path: SRC, ordinal: 14 },
     title: { tex: String.raw`\left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|\kappa(K)|}\right| \leq 45` },
     labels: ["specific_heat_log_divergence"],
     statement: [
@@ -2269,8 +2254,7 @@ T
   {
     id: "critical_013_remark_physical_specific_heat",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 15,
+    origin: { path: SRC, ordinal: 15 },
     title: { tex: String.raw`\text{物理的な比熱 } C \text{ との対応：} C = k_B K^2 \frac{d^2 f}{dK^2}` },
     labels: ["remark_physical_specific_heat"],
     statement: [

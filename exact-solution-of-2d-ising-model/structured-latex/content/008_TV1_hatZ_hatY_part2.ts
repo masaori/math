@@ -7,8 +7,10 @@ export default defineBlocks([
   {
     id: "TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/020_claim_gamma1_gamma2の偏角.typ",
-    sourceOrdinal: 21,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/020_claim_gamma1_gamma2の偏角.typ",
+      ordinal: 21,
+    },
     title: { tex: String.raw`\arg(\gamma_1(\theta_\mu))` },
     labels: [],
     statement: [
@@ -249,8 +251,10 @@ s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t = 0)
   {
     id: "TV1_hatZ_hatY_022_claim_gamma2_theta_is_0",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/021_claim_gamma2_thetaが0になる条件.typ",
-    sourceOrdinal: 22,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/021_claim_gamma2_thetaが0になる条件.typ",
+      ordinal: 22,
+    },
     title: { tex: String.raw`\gamma_2(\theta_\mu) = 0 \text{ になる条件}` },
     labels: ["gamma_2_theta_is_0"],
     statement: [
@@ -631,8 +635,10 @@ s_2^* = \sinh 2K_2^* > 0`,
   {
     id: "TV1_hatZ_hatY_023_claim_relation_of_gamma2",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/022_claim_gamma2_thetaとgamma2_minus_thetaの関係.typ",
-    sourceOrdinal: 23,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/022_claim_gamma2_thetaとgamma2_minus_thetaの関係.typ",
+      ordinal: 23,
+    },
     title: { tex: String.raw`\gamma_2(\theta_\mu) \text{ と } \gamma_2(-\theta_\mu) \text{ の関係}` },
     labels: ["relation_of_gamma_2"],
     statement: [
@@ -660,8 +666,10 @@ s_2^* = \sinh 2K_2^* > 0`,
   {
     id: "TV1_hatZ_hatY_024_claim_arg_of_gamma2_mu",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/023_claim_gamma2_theta_muの積のarg.typ",
-    sourceOrdinal: 24,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/023_claim_gamma2_theta_muの積のarg.typ",
+      ordinal: 24,
+    },
     title: {
       tex: String.raw`\arg^{[0,2\pi)}(\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)) = \pi`,
     },
@@ -734,8 +742,10 @@ s_2^* = \sinh 2K_2^* > 0`,
   {
     id: "TV1_hatZ_hatY_025_claim_arg_gamma2_sum",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/024_claim_gamma2_theta_mu_gamma2_minus_theta_muのarg.typ",
-    sourceOrdinal: 25,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/024_claim_gamma2_theta_mu_gamma2_minus_theta_muのarg.typ",
+      ordinal: 25,
+    },
     title: {
       tex: String.raw`\arg^{[0,2\pi)}(\gamma_2(\theta_\mu)) + \arg^{[0,2\pi)}(\gamma_2(-\theta_\mu))`,
     },
@@ -784,8 +794,10 @@ s_2^* = \sinh 2K_2^* > 0`,
   {
     id: "TV1_hatZ_hatY_026_claim_arg_gamma2_quotient",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/025_claim_gamma2の商のarg.typ",
-    sourceOrdinal: 26,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/025_claim_gamma2の商のarg.typ",
+      ordinal: 26,
+    },
     title: {
       tex: String.raw`\arg^{[0,2\pi)}\!\bigl(\gamma_2(\theta_\mu)/\gamma_2(-\theta_\mu)\bigr)`,
     },
@@ -1082,8 +1094,10 @@ s_2^* = \sinh 2K_2^* > 0`,
   {
     id: "TV1_hatZ_hatY_027_claim_eigenvector_A_theta",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/026_claim_A_thetaの対角化_固有値と固有ベクトル.typ",
-    sourceOrdinal: 27,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/026_claim_A_thetaの対角化_固有値と固有ベクトル.typ",
+      ordinal: 27,
+    },
     title: { tex: String.raw`A(\theta_\mu) \text{ の固有値と固有ベクトル}` },
     labels: ["eigenvector_of_A_theta"],
     statement: [
@@ -1311,8 +1325,10 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
   {
     id: "TV1_hatZ_hatY_028_claim_P_mu_D_mu",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/027_claim_A_thetaの対角化_P_muとD_mu.typ",
-    sourceOrdinal: 28,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/027_claim_A_thetaの対角化_P_muとD_mu.typ",
+      ordinal: 28,
+    },
     title: { tex: String.raw`A(\theta_\mu) \text{ の対角化 } (P_\mu,\, D_\mu)` },
     labels: ["diagonalization_P_D"],
     statement: [
@@ -1511,8 +1527,10 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
   {
     id: "TV1_hatZ_hatY_029_claim_a_theta_mu",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/028_claim_a_theta_mu.typ",
-    sourceOrdinal: 29,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/028_claim_a_theta_mu.typ",
+      ordinal: 29,
+    },
     title: { tex: String.raw`a(\theta_\mu)` },
     labels: ["equation_of_a_theta_mu"],
     statement: [
@@ -1898,8 +1916,10 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
   {
     id: "TV1_hatZ_hatY_030_definition_fermi",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/029_definition_フェルミオン.typ",
-    sourceOrdinal: 30,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/029_definition_フェルミオン.typ",
+      ordinal: 30,
+    },
     title: { text: "フェルミオン" },
     labels: ["def_fermi"],
     statement: [
@@ -1998,8 +2018,10 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
   {
     id: "TV1_hatZ_hatY_031_claim_V_psi_commutator",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/030_claim_Vとpsiの交換関係.typ",
-    sourceOrdinal: 31,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/030_claim_Vとpsiの交換関係.typ",
+      ordinal: 31,
+    },
     title: { tex: String.raw`V \text{ と } \psi \text{ の交換関係 (B.13)}` },
     labels: ["commutation_V_psi"],
     statement: [
@@ -2073,8 +2095,10 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
   {
     id: "TV1_hatZ_hatY_032_claim_anticommutator_psi",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/031_claim_psiの反交換関係.typ",
-    sourceOrdinal: 32,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/031_claim_psiの反交換関係.typ",
+      ordinal: 32,
+    },
     title: { tex: String.raw`\psi \text{ の反交換関係}` },
     labels: ["anticommutator_of_psi"],
     statement: [
@@ -2381,8 +2405,10 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
   {
     id: "TV1_hatZ_hatY_035_claim_det_A_theta",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/034_claim_det_A_theta_mu.typ",
-    sourceOrdinal: 35,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/034_claim_det_A_theta_mu.typ",
+      ordinal: 35,
+    },
     title: { tex: String.raw`\det A(\theta_\mu) = 1` },
     labels: ["det_A_theta"],
     statement: [
@@ -2625,8 +2651,10 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
   {
     id: "TV1_hatZ_hatY_036_claim_gamma1_geq_1",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/035_claim_gamma1_geq_1.typ",
-    sourceOrdinal: 36,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/035_claim_gamma1_geq_1.typ",
+      ordinal: 36,
+    },
     title: { tex: String.raw`\gamma_1(\theta_\mu) \geq 1` },
     labels: ["gamma1_geq_1"],
     statement: [
@@ -2663,8 +2691,10 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
   {
     id: "TV1_hatZ_hatY_034a_definition_gamma_theta_mu",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
-    sourceOrdinal: 34,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
+      ordinal: 34,
+    },
     title: { tex: String.raw`\gamma(\theta_\mu) \text{ の定義}` },
     labels: ["def_gamma_theta_mu"],
     statement: [
@@ -2679,8 +2709,10 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
   {
     id: "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
-    sourceOrdinal: 34,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
+      ordinal: 34,
+    },
     title: { tex: String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}` },
     labels: ["lambda_eq_exp_gamma"],
     statement: [
@@ -2710,8 +2742,10 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
   {
     id: "TV1_hatZ_hatY_033_definition_Vprime",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ",
-    sourceOrdinal: 33,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ",
+      ordinal: 33,
+    },
     title: { tex: String.raw`V' \text{ の定義}` },
     labels: ["def_Vprime"],
     statement: [
@@ -2779,8 +2813,10 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
   {
     id: "TV1_hatZ_hatY_038_claim_action_T_Vprime_psi",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ",
-    sourceOrdinal: 38,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/037_claim_T_Vprimeのpsiへの作用.typ",
+      ordinal: 38,
+    },
     title: { tex: String.raw`T_{(V')} \text{ の } \psi \text{ への作用}` },
     labels: ["action_of_T_Vprime_on_psi"],
     statement: [
@@ -3127,8 +3163,10 @@ T_{(V')}(\psi_\mu)
   {
     id: "TV1_hatZ_hatY_045_claim_A_theta_is_identity",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/044_claim_gamma2_0のときA_thetaは単位行列.typ",
-    sourceOrdinal: 45,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/044_claim_gamma2_0のときA_thetaは単位行列.typ",
+      ordinal: 45,
+    },
     title: { tex: String.raw`\gamma_2(\theta_\mu) = 0 \text{ のとき } A(\theta_\mu) = I` },
     labels: ["A_theta_is_identity_when_gamma2_zero"],
     statement: [
@@ -3173,8 +3211,10 @@ T_{(V')}(\psi_\mu)
   {
     id: "TV1_hatZ_hatY_042_claim_T_Vprime_fixes_hatZ_hatY_gamma2_zero",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/041_claim_T_VprimeのhatZ_hatYへの作用_gamma2が0の場合.typ",
-    sourceOrdinal: 42,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/041_claim_T_VprimeのhatZ_hatYへの作用_gamma2が0の場合.typ",
+      ordinal: 42,
+    },
     title: { tex: String.raw`\gamma_2(\theta_\mu) = 0 \text{ のとき } T_{(V')} \text{ は } \hat{Z}_\mu^{(-)}, \hat{Y}_\mu \text{ を固定する}` },
     labels: ["T_Vprime_fixes_hatZ_hatY_when_gamma2_zero"],
     statement: [
@@ -3470,8 +3510,10 @@ T_{(V')}(\psi_\mu)
   {
     id: "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/042_claim_T_VとT_VprimeはhatZ_hatY上で一致.typ",
-    sourceOrdinal: 43,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/042_claim_T_VとT_VprimeはhatZ_hatY上で一致.typ",
+      ordinal: 43,
+    },
     title: { tex: String.raw`T_{(V)} \text{ と } T_{(V')} \text{ は } \hat{Z}^{(-)}, \hat{Y} \text{ 上で一致する}` },
     labels: ["T_V_eq_T_Vprime_on_hatZ_hatY"],
     statement: [
@@ -3634,8 +3676,10 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
   {
     id: "TV1_hatZ_hatY_039_claim_T_V_eq_T_Vprime",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ",
-    sourceOrdinal: 39,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/038_claim_T_V_eq_T_Vprime.typ",
+      ordinal: 39,
+    },
     title: { tex: String.raw`T_{(V)} = T_{(V')}` },
     labels: ["T_V_eq_T_Vprime"],
     statement: [
@@ -3940,8 +3984,10 @@ T_{(V)}(x y)
   {
     id: "TV1_hatZ_hatY_040_claim_V_eq_cVprime",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
-    sourceOrdinal: 40,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
+      ordinal: 40,
+    },
     title: { tex: String.raw`V = c V' \text{（定数倍を除いて一致）}` },
     labels: ["V_eq_Vprime"],
     statement: [
@@ -4215,8 +4261,10 @@ V
   {
     id: "TV1_hatZ_hatY_041_claim_gamma2_periodicity",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ",
-    sourceOrdinal: 41,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/040_claim_gamma2_thetaMの周期性.typ",
+      ordinal: 41,
+    },
     title: {
       tex: String.raw`\gamma_2(\theta_M) = \gamma_2(\theta_{-M}),\;
 \gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`,
@@ -4256,8 +4304,10 @@ V
   {
     id: "TV1_hatZ_hatY_044_claim_critical_condition",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/043_claim_臨界条件_c1_eq_s1c2.typ",
-    sourceOrdinal: 44,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/043_claim_臨界条件_c1_eq_s1c2.typ",
+      ordinal: 44,
+    },
     title: { tex: String.raw`c_1 = s_1 c_2 \text{ は臨界条件 } s_1 s_2 = 1 \text{ と同値}` },
     labels: ["critical_condition_c1_eq_s1_c2"],
     statement: [

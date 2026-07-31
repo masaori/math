@@ -7,7 +7,7 @@ export default defineNotes([
     id: "note_linear_space_general_001_reading_and_usage",
     targets: ["tensor_basis"],
     title: { text: "ステートメントの読み方と本論文での用途" },
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 1 },
     body: [
       paragraph([
         "基底であるのは族全体であって、個々のクロネッカー積 ",
@@ -51,7 +51,7 @@ export default defineNotes([
     id: "note_linear_space_general_002_abstract_tensor_product_view",
     targets: ["tensor_basis", "def_kronecker", "kronecker_product_rule", "kronecker_multilinear"],
     title: { text: "抽象テンソル積による見方（本文には採用しなかった）" },
-    sourcePath: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ",
+    origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 2 },
     body: [
       paragraph([
         "この見方は、ゴールに照らして本文には採用しなかった。理由は ",

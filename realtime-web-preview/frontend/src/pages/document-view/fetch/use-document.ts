@@ -2,8 +2,8 @@ import {
   type DocumentResponseBody,
   type LoadDocumentError,
   RELOAD_EVENT,
-  documentResponseSchema,
   errorResponseSchema,
+  parseDocumentResponse,
 } from '@rwp/domain-model'
 import { type UseQueryResult, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
@@ -54,15 +54,10 @@ const fetchDocument = async (): Promise<DocumentResponseBody> => {
     )
   }
 
-  const parsed = documentResponseSchema.safeParse(json)
+  // 入力言語（ブロック・ノート）の検証はシステムの実行時スキーマが行う（parseDocumentResponse）。
+  const parsed = parseDocumentResponse(json)
   if (!parsed.success) {
-    throw new DocumentFetchError({
-      code: 'validation_error',
-      issues: parsed.error.issues.map((issue) => ({
-        path: issue.path.join('.'),
-        message: issue.message,
-      })),
-    })
+    throw new DocumentFetchError(parsed.error)
   }
   return parsed.data
 }

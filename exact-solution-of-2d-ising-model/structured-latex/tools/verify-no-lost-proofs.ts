@@ -8,7 +8,7 @@
  *
  * 判定: 各ブロックについて
  *   - 構造化側の proof が **todo の印だけで中身が無い**
- *   - かつ `sourcePath` の Typst 原本に **完成した証明**（空でなく TODO も含まない）がある
+ *   - かつ `origin.path`（旧 `sourcePath`）の Typst 原本に **完成した証明**（空でなく TODO も含まない）がある
  * なら「移行漏れ」として報告し、exit 1 で落とす。
  *
  * 判定を上記まで絞る理由（実測に基づく）:
@@ -119,8 +119,8 @@ async function main(): Promise<void> {
     for (const block of blocks) {
       if (block.kind === "heading") continue;
       if (!proofIsEmptyExceptTodo(block)) continue;
-      const sourcePath = block.sourcePath;
-      if (!sourcePath) continue;
+      const sourcePath = block.origin?.path;
+      if (sourcePath === undefined) continue;
       const abs = join(projectRoot, sourcePath);
       if (!existsSync(abs)) {
         // 黙って飛ばすと、パスが古びた瞬間にこの検査が無言で無効化される。
@@ -136,7 +136,7 @@ async function main(): Promise<void> {
   }
 
   if (missingSource.length > 0) {
-    console.error("sourcePath が実在しないブロックがある（移行漏れ検査が無効化される）:");
+    console.error("origin.path が実在しないブロックがある（移行漏れ検査が無効化される）:");
     for (const entry of missingSource) {
       console.error(`  - ${entry.id}: ${entry.sourcePath}`);
     }

@@ -34,8 +34,10 @@ export default defineNotes([
     title: {
       text: "抽象的な有限次元ノルム線型空間での exp 級数の各点収束（本文不採用）",
     },
-    sourcePath:
-      "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
+    origin: {
+      path: "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
+      ordinal: 1,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([
@@ -174,8 +176,10 @@ export default defineNotes([
     id: "note_exp_linear_map_002_definition_exp_of_endomorphism_abstract",
     targets: ["def_exp"],
     title: { text: "有限次元線型空間の自己準同型としての exp の定義（本文不採用）" },
-    sourcePath:
-      "_old/typst/parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
+    origin: {
+      path: "_old/typst/parts/003_線型写像のexp/001_definition_有限次元線型空間の自己準同型のexpの定義.typ",
+      ordinal: 2,
+    },
     body: [
       NOT_ADOPTED,
       paragraph([

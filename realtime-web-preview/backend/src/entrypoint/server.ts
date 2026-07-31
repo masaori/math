@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs'
 import fastifyStatic from '@fastify/static'
+import { createPreviewRuntimeSchema } from '@rwp/domain-model'
 import Fastify from 'fastify'
 import { loadConfig } from '../config.js'
 import { FsSourceWatcherGateway } from '../preview/adapter/gateways/fs-source-watcher-gateway.js'
@@ -12,8 +13,10 @@ const config = loadConfig()
 const app = Fastify({ logger: true })
 
 // DI: adapter 実装を domain の interface に注入する。
-const blockSource = new MjsBlockSourceGateway(config.sourceDir, config.sourceLabel)
-const noteSource = new MjsNoteSourceGateway(config.notesDir)
+// 入力言語の実行時スキーマはシステム（structured-latex/）のものを、設定のメタデータキーで具体化する。
+const runtimeSchema = createPreviewRuntimeSchema()
+const blockSource = new MjsBlockSourceGateway(config.sourceDir, config.sourceLabel, runtimeSchema)
+const noteSource = new MjsNoteSourceGateway(config.notesDir, runtimeSchema)
 // 本体と参照用ノートのどちらの変更でもライブ更新する。
 const watcher = new FsSourceWatcherGateway([config.sourceDir, config.notesDir])
 

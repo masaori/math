@@ -7,7 +7,7 @@ export default defineNotes([
     id: "note_calc_formulae_018_real_scalar_multiple_is_not_scalar_action",
     targets: ["angle_representation_of_rr"],
     title: { text: "積 ·_real がスカラー積にならない反例" },
-    sourcePath: "_old/typst/parts/000_計算公式/018_definition_RRの角度表現.typ",
+    origin: { path: "_old/typst/parts/000_計算公式/018_definition_RRの角度表現.typ", ordinal: 1 },
     body: [
       paragraph([
         "この積 ",
@@ -49,7 +49,7 @@ export default defineNotes([
     id: "note_calculation_formulae_021_polar_equivalence_class_properties",
     targets: ["polar_equivalence_class"],
     title: { text: "極座標表現の同値類の性質（原文の remark）" },
-    sourcePath: "_old/typst/parts/000_計算公式/020_remark_極座標表現の同値類の性質.typ",
+    origin: { path: "_old/typst/parts/000_計算公式/020_remark_極座標表現の同値類の性質.typ", ordinal: 2 },
     body: [
       displayMath(String.raw`[(r,\theta)]_{\sim} = [(r,\theta + 2n\pi)]_{\sim}\quad \forall n \in \mathbb{Z}`),
       displayMath(
@@ -61,7 +61,7 @@ export default defineNotes([
     id: "note_calculation_formulae_029_supplementary_computation",
     targets: ["isomorphism_of_phi_cartesian"],
     title: { text: "原文 note の補足計算（x<0 のときの sin(arctan(y/x)) と符号の根拠、具体例）" },
-    sourcePath: "parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ",
+    origin: { path: "parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ", ordinal: 3 },
     body: [
       paragraph([
         "（原文の note の補足計算）",
@@ -109,7 +109,10 @@ export default defineNotes([
     id: "note_calculation_formulae_037_arg_calculation_tip",
     targets: ["arg_of_product_of_complex_numbers"],
     title: { text: "arg 計算のコツ（原文の note）" },
-    sourcePath: "_old/typst/parts/000_計算公式/036_note_arg計算のコツ_極座標表現を使った偏角の計算方法.typ",
+    origin: {
+      path: "_old/typst/parts/000_計算公式/036_note_arg計算のコツ_極座標表現を使った偏角の計算方法.typ",
+      ordinal: 4,
+    },
     body: [
       paragraph([math(String.raw`\arg`), " 計算のコツ："]),
       paragraph([
@@ -136,7 +139,7 @@ export default defineNotes([
     id: "note_calculation_formulae_042_negative_real_case",
     targets: ["square_of_sqrt"],
     title: { text: "負の実数の場合（原文の remark）" },
-    sourcePath: "_old/typst/parts/000_計算公式/041_claim_自乗のsqrtとremark_負の実数の場合.typ",
+    origin: { path: "_old/typst/parts/000_計算公式/041_claim_自乗のsqrtとremark_負の実数の場合.typ", ordinal: 5 },
     body: [
       paragraph([
         math(String.raw`z \in \mathbb{R}_{<0}`),
@@ -152,7 +155,7 @@ export default defineNotes([
     id: "note_calculation_formulae_043_condition_for_naive_identity",
     targets: ["inverse_of_sqrt_cc"],
     title: { text: "素朴な等式が成り立つ必要十分条件（原文の remark）" },
-    sourcePath: "_old/typst/parts/000_計算公式/042_claim_CCの逆数のsqrtとremark.typ",
+    origin: { path: "_old/typst/parts/000_計算公式/042_claim_CCの逆数のsqrtとremark.typ", ordinal: 6 },
     body: [
       paragraph([
         math(String.raw`z \in \mathbb{C}^\times`),
@@ -168,7 +171,7 @@ export default defineNotes([
     id: "note_calculation_formulae_044_condition_for_naive_identity",
     targets: ["sqrt_cc_of_inverse"],
     title: { text: "素朴な等式が成り立つ必要十分条件（原文の remark）" },
-    sourcePath: "_old/typst/parts/000_計算公式/043_claim_CCのsqrtの逆数とremark.typ",
+    origin: { path: "_old/typst/parts/000_計算公式/043_claim_CCのsqrtの逆数とremark.typ", ordinal: 7 },
     body: [
       paragraph([
         math(String.raw`z \in \mathbb{C}^\times`),

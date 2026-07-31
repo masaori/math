@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_even_sector_eigenvalues",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { tex: String.raw`\text{定数 } c \text{ の決定と } V^{(+)} \text{ の固有値}` },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "evenEigen_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的と、009 章との違い" },
     labels: [],
     statement: [
@@ -188,8 +185,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
   {
     id: "evenEigen_001_definition_check_number_operator",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\text{数演算子 } \check{n}_\mu` },
     labels: ["def_check_number_operator"],
     statement: [
@@ -323,8 +319,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
   {
     id: "evenEigen_002_claim_check_number_operator_idempotent",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\check{n}_\mu^2 = \check{n}_\mu` },
     labels: ["check_number_operator_idempotent"],
     statement: [
@@ -460,8 +455,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
   {
     id: "evenEigen_003_claim_check_number_operators_commute",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`\check{n}_\mu \check{n}_\nu = \check{n}_\nu \check{n}_\mu` },
     labels: ["check_number_operators_commute"],
     statement: [
@@ -602,8 +596,7 @@ A\,\check{n}_\nu
   {
     id: "evenEigen_004_claim_trace_of_check_number_operator_product",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right) = 2^{M-k}
 \quad \left(R_\mu^{(1)} = \check{n}_\mu,\ R_\mu^{(0)} = I - \check{n}_\mu\right)`,
@@ -822,8 +815,7 @@ A\,\check{n}_\nu
   {
     id: "evenEigen_005_claim_check_joint_eigenspace_decomposition",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { text: "数演算子の同時固有空間分解（各空間は 1 次元）" },
     labels: ["check_joint_eigenspace_decomposition"],
     statement: [
@@ -1134,8 +1126,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
   {
     id: "evenEigen_006_claim_eigenvalues_of_check_Vprime",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`\check{V}' \text{ の固有値}` },
     labels: ["eigenvalues_of_check_Vprime"],
     statement: [
@@ -1368,8 +1359,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
   {
     id: "evenEigen_007_claim_trace_of_check_Vprime",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(\check{V}'\right)
 = \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right) > 0`,
@@ -1512,8 +1502,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
   {
     id: "evenEigen_008_claim_V_plus_is_positive_definite",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: {
       tex: String.raw`V^{(+)} \text{ は正定値、とくに } \mathrm{tr}\!\left(V^{(+)}\right) > 0`,
     },
@@ -1676,8 +1665,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
   {
     id: "evenEigen_009_claim_constant_c_value_even_sector",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`c = (2\sinh 2K_2)^{M/2}` },
     labels: ["constant_c_value_even_sector"],
     statement: [
@@ -1903,8 +1891,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
   {
     id: "evenEigen_010_theorem_eigenvalues_of_V_plus",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`V^{(+)} \text{ の固有値}` },
     labels: ["eigenvalues_of_V_plus"],
     statement: [
@@ -2064,8 +2051,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
   {
     id: "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 13,
+    origin: { path: SRC, ordinal: 13 },
     title: {
       tex: String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_M \text{ であり単純固有値}`,
     },
