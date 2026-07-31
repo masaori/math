@@ -23,3 +23,6 @@ import IntegrableLattice.PropCTracePeriod
 import IntegrableLattice.DigitTheorem
 import IntegrableLattice.BouquetClosedForm
 import IntegrableLattice.TowerTypeCoefficients
+import IntegrableLattice.DigitBranchRecursion
+import IntegrableLattice.SInfinityDecision
+import IntegrableLattice.EllTwoClosedForm
