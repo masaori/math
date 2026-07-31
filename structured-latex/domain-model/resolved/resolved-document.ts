@@ -12,6 +12,7 @@ import type {
   TitleContent,
 } from '../structured-text/block.ts'
 import type {
+  CiteNode,
   DisplayMathNode,
   ImageNode,
   MathNode,
@@ -47,6 +48,8 @@ export type ResolvedNode =
   | DisplayMathNode
   | TodoNode
   | ImageNode
+  // 引用は文書内の解決対象を持たない（宛先は `.bib`）ので、L1 の形のまま素通しする。
+  | CiteNode
   | ResolvedRef
   | { type: 'paragraph'; children: readonly ResolvedNode[] }
   | { type: 'list'; items: readonly (readonly ResolvedNode[])[] }

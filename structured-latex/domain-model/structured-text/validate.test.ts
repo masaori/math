@@ -88,6 +88,38 @@ test('画像は alt が必須（テキストしか出せない文脈へ劣化で
   assert.equal(result.success, false)
 })
 
+test('引用ノードを受け入れる（note は任意）', () => {
+  const result = schema.validateBlock(
+    {
+      id: 'b1',
+      kind: 'claim',
+      labels: [],
+      statement: [
+        { type: 'cite', keys: ['Monsky1981'] },
+        { type: 'cite', keys: ['Monsky1981', 'CuocoMonsky1981'], note: 'Theorem 5.6' },
+      ],
+    },
+    'fixture',
+  )
+  assert.equal(result.success, true)
+})
+
+test('引用ノードの keys は 1 件以上（引用先の無い引用は意味を持たない）', () => {
+  const result = schema.validateBlock(
+    { id: 'b1', kind: 'claim', labels: [], statement: [{ type: 'cite', keys: [] }] },
+    'fixture',
+  )
+  assert.equal(result.success, false)
+})
+
+test('引用ノードの未知フィールドは拒否する（キー名の打ち間違いで引用が黙って消えるのを防ぐ）', () => {
+  const result = schema.validateBlock(
+    { id: 'b1', kind: 'claim', labels: [], statement: [{ type: 'cite', key: ['Monsky1981'] }] },
+    'fixture',
+  )
+  assert.equal(result.success, false)
+})
+
 test('ノートの targets は 1 件以上', () => {
   const result = schema.validateNote({ id: 'n1', targets: [], body: [] }, 'fixture')
   assert.equal(result.success, false)

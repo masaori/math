@@ -33,6 +33,18 @@ export type RefNode<L extends string = string> = {
   label?: string
 }
 
+/**
+ * 文献引用。**宛先は文書の外**（BibTeX データベースのキー）なので、`RefNode` とは別の種別である。
+ * `RefNode` の宛先は同じ文書に実在するラベルで、型で束縛できる。引用のキーは正本の外側にある
+ * `.bib` に属するので型では束縛できず、実在確認は出力器（`.bib` を読める立場）の仕事になる。
+ *
+ * `keys` は**空にできない**（引用先の無い引用は意味を持たない。実行時検証で拒否する）。
+ * 複数キーは 1 つの引用としてまとめて出す（LaTeX の `\cite{a,b}`）。
+ *
+ * `note` は箇所指定（"Theorem 3.1" など）。LaTeX の `\cite[note]{keys}` の省略可能引数に対応する。
+ */
+export type CiteNode = { type: 'cite'; keys: readonly string[]; note?: string }
+
 export type ParagraphNode<L extends string = string> = {
   type: 'paragraph'
   children: readonly Node<L>[]
@@ -50,6 +62,7 @@ export type Node<L extends string = string> =
   | TodoNode
   | ImageNode
   | RefNode<L>
+  | CiteNode
   | ParagraphNode<L>
   | ListNode<L>
 
@@ -61,6 +74,7 @@ export const NODE_TYPES = [
   'todo',
   'image',
   'ref',
+  'cite',
   'paragraph',
   'list',
 ] as const satisfies readonly Node['type'][]
@@ -90,6 +104,14 @@ export const image = (assetKey: string, alt: string): ImageNode => ({
   assetKey,
   alt,
 })
+
+/**
+ * 文献引用。`keys` は BibTeX のキー。**空配列は禁止**（実行時検証が拒否する。
+ * 型で空配列を禁じないのは、`readonly string[]` の非空性を素直に表す型が
+ * 可変長引数以外に無く、可変長にすると `note` を後置できなくなるため）。
+ */
+export const cite = (keys: readonly string[], note?: string): CiteNode =>
+  note === undefined ? { type: 'cite', keys } : { type: 'cite', keys, note }
 
 const normalize = <L extends string>(children: readonly InlineInput<L>[]): readonly Node<L>[] =>
   children.map((child) => (typeof child === 'string' ? text(child) : child))

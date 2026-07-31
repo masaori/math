@@ -402,6 +402,15 @@ function renderNode(node: Node, blockId: string): string {
       }
       return `\\cref{lab:${node.target}}`;
     }
+    case "cite":
+      // 本論文（日本語版）は書誌を地の文へ直に書いており、`cite` ノードは 1 件も使っていない
+      // （参考文献リストは outputs/papers/001_R_Lambda_duality/refs.bib に控えとして置いてある）。
+      // 語彙にはシステム側で `cite` が入ったので、黙って出力から消えることがないよう
+      // ここで明示的に落とす（英語版 structured-latex-en/ の生成器は BibTeX を出す）。
+      throw new Error(
+        `引用ノード（${node.keys.join(", ")}）の LaTeX 出力は日本語版では未実装: ${blockId}\n` +
+          "  この文書は書誌を地の文で書く方針。BibTeX を出すのは structured-latex-en/ の生成器である。",
+      );
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${unicodeMathToLatex(escapeText(node.value))}`;

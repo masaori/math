@@ -38,6 +38,15 @@ const nodeSchema: z.ZodType<unknown> = z.lazy(() =>
     z
       .object({ type: z.literal('ref'), target: z.string().min(1), label: z.string().optional() })
       .strict(),
+    // 引用キーの**実在**は `.bib` を読める出力器の仕事。ここで見るのは形だけで、
+    // 「引用先の無い引用」（空配列）だけは意味を持たないので拒否する。
+    z
+      .object({
+        type: z.literal('cite'),
+        keys: z.array(z.string().min(1)).min(1),
+        note: z.string().optional(),
+      })
+      .strict(),
     z.object({ type: z.literal('paragraph'), children: z.array(nodeSchema) }).strict(),
     z.object({ type: z.literal('list'), items: z.array(z.array(nodeSchema)) }).strict(),
   ]),

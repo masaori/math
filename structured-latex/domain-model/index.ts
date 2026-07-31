@@ -34,6 +34,7 @@ export {
 
 export {
   NODE_TYPES,
+  cite,
   displayMath,
   image,
   list,
@@ -41,6 +42,7 @@ export {
   paragraph,
   text,
   todo,
+  type CiteNode,
   type DisplayMathNode,
   type ImageNode,
   type InlineInput,

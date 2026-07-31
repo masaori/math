@@ -20,6 +20,7 @@ export {
   isHeadingBlock,
   type Block,
   type BlockKind,
+  type CiteNode,
   type DisplayMathNode,
   type FigureBlock,
   type FigureKind,

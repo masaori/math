@@ -67,6 +67,21 @@ const ImageView = ({ assetKey, alt }: { assetKey: string; alt: string }): ReactE
   </span>
 )
 
+/**
+ * 引用ノードを描画する。
+ * 宛先は文書の**外**（BibTeX のキー）で、本ビューアは `.bib` を読まない。
+ * 番号へ解決できないので、黙って消さずにキーそのものを角括弧で見せる（未解決であることが分かる形）。
+ */
+const CiteView = ({ keys, note }: { keys: readonly string[]; note?: string }): ReactElement => (
+  <span
+    className="text-slate-700"
+    title={`文献引用（BibTeX キー）: ${keys.join(', ')}${note === undefined ? '' : ` — ${note}`}`}
+  >
+    [{keys.join(', ')}
+    {note === undefined ? '' : `, ${note}`}]
+  </span>
+)
+
 /** Node 1件を描画する。 */
 export const NodeView = ({ node }: { node: Node }): ReactElement => {
   switch (node.type) {
@@ -96,6 +111,8 @@ export const NodeView = ({ node }: { node: Node }): ReactElement => {
       return <ImageView assetKey={node.assetKey} alt={node.alt} />
     case 'ref':
       return <RefLink target={node.target} label={node.label} />
+    case 'cite':
+      return <CiteView keys={node.keys} note={node.note} />
     case 'todo':
       return (
         <span className="mx-0.5 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-800">

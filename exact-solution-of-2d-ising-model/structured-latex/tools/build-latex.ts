@@ -371,6 +371,13 @@ function renderNode(node: Node, blockId: string): string {
       }
       return `\\cref{lab:${node.target}}`;
     }
+    case "cite":
+      // 引用ノードは入力言語の語彙にあるが、この文書は参考文献リストを持たない
+      // （証明は自足しており、外部文献に依存しない）。素通しすると引用が無音で消えるので落とす。
+      throw new Error(
+        `引用ノードは、この出力器がまだ対応していない: ${blockId} の ${node.keys.join(", ")}\n` +
+          "  この文書は .bib を持たない。対応するまで content/ に cite を置かないこと。",
+      );
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${escapeText(node.value)}`;
