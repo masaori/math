@@ -102,19 +102,36 @@ export const createRuntimeSchema = <
   MetaShape extends z.ZodRawShape = Record<string, never>,
 >(config?: {
   blockMeta?: MetaShape
+  /**
+   * 宣言されていないメタデータのキーをどう扱うか。既定は `reject`。
+   *
+   * `reject` … 未知のキーを拒否する。**語彙を所有する側（著者のプロジェクト）はこちら。**
+   *            `proof` を `proofs` と打ち間違えて中身が黙って捨てられる事故を塞ぐのが目的。
+   * `passthrough` … 未知のキーをそのまま通す。**語彙を所有しない側（汎用ビューア等、
+   *            どのプロジェクトの文書でも読む立場）はこちら。** キー名を知りようがないので
+   *            拒否しても打ち間違いの検出にはならず、正しい文書を読めなくするだけになる。
+   *            値は検査しない（意味を解釈するのは語彙を所有する側の検証ツール）。
+   *
+   * 既定を `reject` にしてあるのは、「検査が緩いほうが既定」にならないようにするため。
+   */
+  unknownBlockMeta?: 'reject' | 'passthrough'
 }): RuntimeSchema<L, M> => {
   const metaShape = config?.blockMeta ?? ({} as MetaShape)
 
-  const theoremLikeSchema = z
-    .object({
-      ...blockBaseShape,
-      ...metaShape,
-      kind: z.enum(THEOREM_LIKE_KINDS),
-      title: titleContentSchema.nullish(),
-      statement: z.array(nodeSchema),
-      proof: z.array(nodeSchema).optional(),
-    })
-    .strict()
+  const theoremLikeObject = z.object({
+    ...blockBaseShape,
+    ...metaShape,
+    kind: z.enum(THEOREM_LIKE_KINDS),
+    title: titleContentSchema.nullish(),
+    statement: z.array(nodeSchema),
+    proof: z.array(nodeSchema).optional(),
+  })
+  // 見出しと図表はメタデータを持てない設計なので、常に strict のままにする。
+  // 未知キーを通すのは「メタデータが載りうる定理型ブロック」だけである。
+  const theoremLikeSchema =
+    config?.unknownBlockMeta === 'passthrough'
+      ? theoremLikeObject.passthrough()
+      : theoremLikeObject.strict()
 
   const noteSchema = z
     .object({

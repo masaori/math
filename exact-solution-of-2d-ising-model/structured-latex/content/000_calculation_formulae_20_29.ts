@@ -7,8 +7,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_022_definition_operations_on_polar_representation",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/021_definition_極座標表現の演算.typ",
-    sourceOrdinal: 22,
+    origin: { path: "_old/typst/parts/000_計算公式/021_definition_極座標表現の演算.typ", ordinal: 22 },
     title: {
       text: "極座標表現の演算",
     },
@@ -35,8 +34,7 @@ export default defineBlocks([
   {
     id: "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
     kind: "claim",
-    sourcePath: "_old/typst/parts/000_計算公式/022_claim_極座標表現の乗法群.typ",
-    sourceOrdinal: 23,
+    origin: { path: "_old/typst/parts/000_計算公式/022_claim_極座標表現の乗法群.typ", ordinal: 23 },
     title: {
       text: "（極座標表現）の乗法群",
     },
@@ -389,8 +387,7 @@ b
   {
     id: "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
     kind: "claim",
-    sourcePath: "_old/typst/parts/000_計算公式/023_claim_CCの乗法群.typ",
-    sourceOrdinal: 24,
+    origin: { path: "_old/typst/parts/000_計算公式/023_claim_CCの乗法群.typ", ordinal: 24 },
     title: {
       tex: "\\mathbb{C}\\text{の乗法群}",
     },
@@ -646,8 +643,7 @@ b
   {
     id: "calculation_formulae_025_claim_complex_numbers_form_a_field",
     kind: "claim",
-    sourcePath: "_old/typst/parts/000_計算公式/024_claim_CCは体をなす.typ",
-    sourceOrdinal: 25,
+    origin: { path: "_old/typst/parts/000_計算公式/024_claim_CCは体をなす.typ", ordinal: 25 },
     title: {
       tex: "\\mathbb{C}\\text{は体}",
     },
@@ -843,8 +839,10 @@ b
   {
     id: "calculation_formulae_027_definition_phi_polar",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/026_definition_極座標表現のCCへの写像_phi_polar.typ",
-    sourceOrdinal: 27,
+    origin: {
+      path: "_old/typst/parts/000_計算公式/026_definition_極座標表現のCCへの写像_phi_polar.typ",
+      ordinal: 27,
+    },
     title: {
       tex: "\\text{極座標表現の}\\mathbb{C}\\text{への写像}",
     },
@@ -873,8 +871,10 @@ b
   {
     id: "calculation_formulae_028_definition_phi_cartesian",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/027_definition_CCの極座標表現への写像_phi_cartesian.typ",
-    sourceOrdinal: 28,
+    origin: {
+      path: "_old/typst/parts/000_計算公式/027_definition_CCの極座標表現への写像_phi_cartesian.typ",
+      ordinal: 28,
+    },
     title: {
       tex: "\\mathbb{C}\\text{の極座標表現への写像}",
     },
@@ -909,9 +909,10 @@ b
   {
     id: "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
     kind: "claim",
-    sourcePath:
-      "_old/typst/parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ",
-    sourceOrdinal: 29,
+    origin: {
+      path: "_old/typst/parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ",
+      ordinal: 29,
+    },
     title: {
       tex: "\\phi_{\\mathrm{cartesian}}\\text{の同型性}",
     },
@@ -1073,8 +1074,7 @@ b
   {
     id: "calculation_formulae_030_definition_first_and_second_projections",
     kind: "definition",
-    sourcePath: "_old/typst/parts/000_計算公式/029_definition_第1座標と第2座標_pr1_pr2.typ",
-    sourceOrdinal: 30,
+    origin: { path: "_old/typst/parts/000_計算公式/029_definition_第1座標と第2座標_pr1_pr2.typ", ordinal: 30 },
     title: {
       text: "第1座標, 第2座標",
     },

@@ -8,17 +8,17 @@ export default defineBlocks([
     id: "heading_TV1_hatZ_hatY",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 10,
+    origin: { path: "_old/typst/main.typ", ordinal: 10 },
     title: { tex: String.raw`T_{V_1}(\hat{Z})\text{と}\hat{Z},\hat{Y}\text{の関係}` },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ",
-    sourceOrdinal: 1,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ",
+      ordinal: 1,
+    },
     title: { tex: String.raw`H_1^{(\pm)}, H_2 \text{ と } \hat{Z}_\mu^{(\pm)}, \hat{Y}_\mu \text{ の交換関係}` },
     labels: ["commutator_of_H_and_Z_Y"],
     statement: [
@@ -363,8 +363,10 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
   {
     id: "TV1_hatZ_hatY_002_claim_nesting_commutator",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/001_claim_交換子のネスト.typ",
-    sourceOrdinal: 2,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/001_claim_交換子のネスト.typ",
+      ordinal: 2,
+    },
     title: null,
     labels: ["nesting_of_commutator_of_H_and_Z"],
     statement: [
@@ -816,8 +818,10 @@ F_{n+1}
   {
     id: "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/002_claim_cosh_sinhの展開係数への変換.typ",
-    sourceOrdinal: 3,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/002_claim_cosh_sinhの展開係数への変換.typ",
+      ordinal: 3,
+    },
     title: null,
     labels: ["cosh_sinh_coefficient_conversion"],
     statement: [
@@ -1133,8 +1137,10 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
   {
     id: "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/003_claim_sinh_coshのテイラー展開.typ",
-    sourceOrdinal: 4,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/003_claim_sinh_coshのテイラー展開.typ",
+      ordinal: 4,
+    },
     title: { tex: String.raw`\sinh, \cosh \text{ のテイラー展開}` },
     labels: [],
     statement: [
@@ -1148,8 +1154,10 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
   {
     id: "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/004_claim_テイラー係数の抽出.typ",
-    sourceOrdinal: 5,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/004_claim_テイラー係数の抽出.typ",
+      ordinal: 5,
+    },
     title: null,
     labels: ["extract_taylor_coefficient_of_Z_Y"],
     statement: [
@@ -1288,8 +1296,10 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
   {
     id: "TV1_hatZ_hatY_006_claim_exp_conjugation",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/005_claim_exp_X_Y_exp_minus_X.typ",
-    sourceOrdinal: 6,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/005_claim_exp_X_Y_exp_minus_X.typ",
+      ordinal: 6,
+    },
     title: null,
     labels: ["exp_X_Y_exp_-X"],
     statement: [
@@ -1421,8 +1431,10 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
   {
     id: "TV1_hatZ_hatY_009_definition_invertible_elements",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/008_definition_環の乗法群.typ",
-    sourceOrdinal: 9,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/008_definition_環の乗法群.typ",
+      ordinal: 9,
+    },
     title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の可逆元}` },
     labels: ["def_invertible_elements_of_R"],
     statement: [
@@ -1560,8 +1572,10 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
   {
     id: "TV1_hatZ_hatY_010_definition_clifford_group",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/009_definition_TODO_クリフォード群.typ",
-    sourceOrdinal: 10,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/009_definition_TODO_クリフォード群.typ",
+      ordinal: 10,
+    },
     title: { text: "パウリ群・クリフォード群" },
     labels: ["def_pauli_group", "def_clifford_group"],
     statement: [
@@ -1671,8 +1685,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
   {
     id: "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group",
     kind: "claim",
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
-    sourceOrdinal: 10,
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 10 },
     title: { tex: String.raw`V_2 \notin \mathcal{C}_M` },
     labels: ["V2_not_in_clifford_group"],
     statement: [
@@ -1912,8 +1925,10 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
   {
     id: "TV1_hatZ_hatY_011_definition_T_g",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/010_definition_T_g.typ",
-    sourceOrdinal: 11,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/010_definition_T_g.typ",
+      ordinal: 11,
+    },
     title: { tex: String.raw`T_g \text{ の定義}` },
     labels: ["def_T_g"],
     statement: [
@@ -1935,8 +1950,7 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
   {
     id: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
     kind: "claim",
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
-    sourceOrdinal: 11,
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 11 },
     title: { tex: String.raw`T \text{ の（定数倍を除いた）単射性}` },
     labels: ["injectivity_of_T_up_to_scalar", "center_of_multiplicative_group_is_scalar"],
     statement: [
@@ -2314,8 +2328,10 @@ g\left(u\,h\right)g'^{-1} = g\left(g^{-1}g'\right) h\, g'^{-1} = g' h g'^{-1}`,
   {
     id: "TV1_hatZ_hatY_012_claim_TV1_TV2_actions",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/011_claim_ホロノミック量子場_p142下段.typ",
-    sourceOrdinal: 12,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/011_claim_ホロノミック量子場_p142下段.typ",
+      ordinal: 12,
+    },
     title: { text: "ホロノミック量子場 p142 下段" },
     labels: ["ホロノミック量子場_p142下段_1"],
     statement: [
@@ -2474,8 +2490,10 @@ T_{V_2}(\hat{Y}_\mu)
   {
     id: "TV1_hatZ_hatY_013_definition_product_maps",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/012_definition_T_V1_T_V2の直積写像.typ",
-    sourceOrdinal: 13,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/012_definition_T_V1_T_V2の直積写像.typ",
+      ordinal: 13,
+    },
     title: null,
     labels: [],
     statement: [
@@ -2491,8 +2509,10 @@ T_{V_2}(\hat{Y}_\mu)
   {
     id: "TV1_hatZ_hatY_014_claim_product_action_computation",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/013_claim_T_V1_T_V2のhatZ_hatYへの直積作用の計算.typ",
-    sourceOrdinal: 14,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/013_claim_T_V1_T_V2のhatZ_hatYへの直積作用の計算.typ",
+      ordinal: 14,
+    },
     title: null,
     labels: ["calc_of_TxT_hatZxhatY"],
     statement: [
@@ -2572,8 +2592,10 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
   {
     id: "TV1_hatZ_hatY_015_claim_linearity_of_T",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/014_claim_T_Vの線型性.typ",
-    sourceOrdinal: 15,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/014_claim_T_Vの線型性.typ",
+      ordinal: 15,
+    },
     title: null,
     labels: ["linearity_of_T"],
     statement: [
@@ -2596,8 +2618,10 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
   {
     id: "TV1_hatZ_hatY_016_definition_T_V",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/015_definition_T_V.typ",
-    sourceOrdinal: 16,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/015_definition_T_V.typ",
+      ordinal: 16,
+    },
     title: { tex: String.raw`T_{(V)} \text{ の定義}` },
     labels: ["def_T_V"],
     statement: [
@@ -2619,8 +2643,7 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
   {
     id: "TV1_hatZ_hatY_016a_claim_duality_c2_star",
     kind: "claim",
-    sourcePath: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts",
-    sourceOrdinal: 17,
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 17 },
     title: { tex: String.raw`K_2 \text{ と } K_2^* \text{ の双対関係}` },
     labels: ["duality_c2_star_eq_s2_star_c2"],
     statement: [
@@ -2715,8 +2738,10 @@ c_2^* = \cosh 2K_2^*
   {
     id: "TV1_hatZ_hatY_017_definition_A_theta",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/016_definition_A_theta.typ",
-    sourceOrdinal: 17,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/016_definition_A_theta.typ",
+      ordinal: 17,
+    },
     title: { tex: String.raw`A(\theta) \text{ の定義}` },
     labels: ["def_A_theta"],
     statement: [
@@ -2736,8 +2761,10 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
   {
     id: "TV1_hatZ_hatY_018_claim_T_V_action",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/017_claim_T_VのhatZ_hatYへの作用.typ",
-    sourceOrdinal: 18,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/017_claim_T_VのhatZ_hatYへの作用.typ",
+      ordinal: 18,
+    },
     title: { tex: String.raw`T_{(V)} \text{ の } \hat{Z}, \hat{Y} \text{ への作用}` },
     labels: ["T_V_hatZ_hatY"],
     statement: [
@@ -3070,8 +3097,10 @@ P_{21}
   {
     id: "TV1_hatZ_hatY_037_claim_factorization_A_theta",
     kind: "claim",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/036_claim_A_thetaの行列分解.typ",
-    sourceOrdinal: 37,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/036_claim_A_thetaの行列分解.typ",
+      ordinal: 37,
+    },
     title: { tex: String.raw`A(\theta_\mu) \text{ の行列分解}` },
     labels: ["factorization_of_A_theta"],
     statement: [
@@ -3118,8 +3147,10 @@ B_2 := \begin{pmatrix}
   {
     id: "TV1_hatZ_hatY_019_definition_theta_mu",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/018_definition_theta_mu.typ",
-    sourceOrdinal: 19,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/018_definition_theta_mu.typ",
+      ordinal: 19,
+    },
     title: { tex: String.raw`\theta_\mu \text{ の定義}` },
     labels: ["def_theta_mu"],
     statement: [
@@ -3134,8 +3165,10 @@ B_2 := \begin{pmatrix}
   {
     id: "TV1_hatZ_hatY_020_definition_gamma1_gamma2",
     kind: "definition",
-    sourcePath: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/019_definition_A_thetaの対角化の準備.typ",
-    sourceOrdinal: 20,
+    origin: {
+      path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/019_definition_A_thetaの対角化の準備.typ",
+      ordinal: 20,
+    },
     title: { tex: String.raw`\gamma_1(\theta_\mu), \gamma_2(\theta_\mu) \text{ の定義}` },
     labels: [],
     statement: [

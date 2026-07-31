@@ -5,5 +5,5 @@ import type { LoadDocumentError, Note, Result } from '@rwp/domain-model'
  * ノートは文書本体ではないため、ソースが存在しない構成も正常系として扱う（空配列を返す）。
  */
 export interface NoteSourceGateway {
-  load(): Promise<Result<Note[], LoadDocumentError>>
+  load(): Promise<Result<readonly Note[], LoadDocumentError>>
 }

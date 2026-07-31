@@ -17,7 +17,7 @@
 | テンプレートの規定 | 本ツールの判断 | 根拠 |
 |---|---|---|
 | monorepo（domain-model/codegen/backend/frontend/infra/docs） | 既存 `math` monorepo 内の 1 アプリ `realtime-web-preview/`。内部を pnpm workspace 化し `domain-model/` `backend/` `frontend/` `docs/` のサブパッケージに分割 | monorepo 原則は踏襲。`codegen/` `infra/` `frontend/mobile` `frontend/_shared` は下記理由で不採用 |
-| SSOT（zod-to-entity-definitions で ER 定義 → repository/DB/CRUD/クライアントを生成） | `domain-model/` に **Block/Node の Zod schema** と **api-contract 型**を唯一の定義として置く。ER・DB・CRUD 生成はしない | 本ツールは**所有 entity を永続化しない**。入力は外部の read-only ソース。ER/DB/Repository/CRUD という生成ターゲットが存在しない。SSOT の**思想**（単一の正準スキーマ＋境界での実行時 validation）だけ採用し、**機構**（codegen）は対象が無いため持たない |
+| SSOT（zod-to-entity-definitions で ER 定義 → repository/DB/CRUD/クライアントを生成） | 入力言語（Block/Node/Note）の正本は**リポジトリ直下 `structured-latex/`（システム）**が持ち、`domain-model/` はそれを再輸出する。本パッケージが唯一の定義として持つのは **api-contract** だけ。ER・DB・CRUD 生成はしない | 本ツールは**所有 entity を永続化しない**。入力は外部の read-only ソース。ER/DB/Repository/CRUD という生成ターゲットが存在しない。SSOT の**思想**（単一の正準スキーマ＋境界での実行時 validation）だけ採用し、**機構**（codegen）は対象が無いため持たない |
 | `codegen/` generator パッケージ | 不採用 | 生成すべき CRUD/DB 成果物が無い。ターゲット不在の generator を作らない（[programming-philosophy](./_template/docs/programming-philosophy.md) のエントロピー最小化に反する） |
 | backend: Clean Architecture（domain/adapter/entrypoint、repository と gateway の2 interface） | **採用**。所有 entity が無いので **repository は持たない**。gateway を2つ持つ: ①構造化テキストソース読込 ②ソース変更監視。usecase: ドキュメント取得 / 変更購読。entrypoint: Fastify ハンドラ＋静的配信＋DI | 入力ソース（ファイルシステム＋`.ts` ソース形式）は **技術詳細としての外部 domain** → adapter に隔離（[architecture-backend](./_template/docs/architecture-backend.md)）。「永続化でない外部依存はすべて gateway」原則どおり |
 | frontend: FSD（app→pages→widgets→features→shared→frontend-shared） | **単一ページ** `pages/document-view/` を model/fetch/ui/index の4セグメントで実装。widgets/features は作らない | 「デフォルトは pages に実装、再利用が確認されるまで抽出しない」（[architecture-frontend](./_template/docs/architecture-frontend.md)）。表示対象は 1 ドキュメントのみ |
@@ -58,11 +58,12 @@ realtime-web-preview/
 │   ├── _template/            # submodule: software-development-docs-template
 │   ├── requirements.md
 │   └── architecture.md       # 本ファイル
-├── domain-model/             # @rwp/domain-model（SSOT。何にも依存しない）
+├── domain-model/             # @rwp/domain-model（システムの入力言語を再輸出する層）
 │   └── src/
-│       ├── block.ts          # Block / Node / Note の Zod schema + 型（入力ソース契約）
-│       ├── api-contract.ts   # DocumentResponse / error code / SSE event の型
-│       ├── result.ts         # Result<T, E>
+│       ├── structured-text.ts # システムの型・語彙の再輸出 + 実行時スキーマの具体化
+│       ├── note-placement.ts  # ビューア固有の寛容なラベル解決・ノート配置
+│       ├── api-contract.ts    # DocumentResponse / error code / SSE event（本パッケージの正本）
+│       ├── result.ts          # Result<T, E>（システムのものを再輸出）
 │       └── index.ts
 ├── backend/                  # @rwp/backend（domain-model に依存）
 │   └── src/
@@ -120,7 +121,9 @@ realtime-web-preview/
   - `subscribeToChanges(watcher, onChange)`: 変更購読を確立。
 - **adapter / gateways**（外部 domain＝FS と `.ts` ソース形式に依存してよい唯一の層）
   - `MjsBlockSourceGateway`: ソース dir 配下の `*.ts` をファイル名順に動的 import し、
-    default export を **Zod `safeParse`** で検証して結合。失敗は Result のエラーに変換（境界の try/catch）。
+    default export を**システムの実行時スキーマ**（`createRuntimeSchema`。検証規則の正本は
+    `structured-latex/domain-model/structured-text/validate.ts`）で検証して結合。
+    失敗は Result のエラーに変換（境界の try/catch）。
   - `FsSourceWatcherGateway`: `fs.watch`（再帰）でソース dir を監視。デバウンスして onChange。
 - **entrypoint**（薄く保つ: 認証無し→ DI → usecase → シリアライズ）
   - `GET /api/document`: `getDocument` の Result を api-contract 準拠の JSON に。
@@ -170,6 +173,47 @@ LoadDocumentError =
 API でも `blocks` と別フィールド `notes` で運び、FE では `placeNotes`（domain-model の純関数）で
 `targets`（ラベル）→ ブロック id に解決して、該当ブロック内に折りたたみ表示する。
 どのブロックにも解決できなかったノートは捨てずに警告表示する（未解決 ref と同じ思想）。
+
+## 8.5 入力言語の正本（システム）への依存
+
+ブロック・ノード・ノートの型と実行時検証は、リポジトリ直下の `structured-latex/`（システム）が
+1 つだけ持つ（[structured-latex/docs/domain-model.md](../../structured-latex/docs/domain-model.md) §0）。
+本ツールはその**利用者**であり、`domain-model/` にそれらを再定義しない。
+
+### 繋ぎ方
+
+- 依存は pnpm の `link:../../structured-latex`（`domain-model/package.json`）。
+  pnpm が張る symlink を Node が realpath で解決するため、システムの `.ts` は
+  **node_modules の外のパスとして読まれ、Node 22.18+ の型ストリップがそのまま効く**
+  （node_modules 内の `.ts` は型ストリップの対象外なので、この点が成立の条件）。
+- システムは `dist` を持たない（`tsconfig.json` が `noEmit` かつ `allowImportingTsExtensions`）。
+  その `.ts` を本ツールの `tsc` から読むため、`tsconfig.base.json` に
+  `allowImportingTsExtensions` と `rewriteRelativeImportExtensions` を置く。後者が無いと
+  前者は `noEmit` でしか使えず、`domain-model` / `backend` の emit ができない。
+- システム側の `zod` はシステム自身の `node_modules` から解決される。したがって
+  `structured-latex/` でも一度 `pnpm install` しておく必要がある。
+
+### システムの `resolve` を使わない理由
+
+システムには採番・参照解決・ノート配置を 1 か所で行う `resolve`
+（`structured-latex/domain-model/resolved/resolve.ts`）があるが、本ツールは使わない。
+`resolve` は未解決参照と迷子ノートを **`Result` のエラーとして返して解決済み文書を返さない**
+（同ファイル 274-275 行 `unresolved_reference` / `orphan_note`）。
+本ツールの要件 F-9 は「検証に失敗しても画面を落とさず、壊れている箇所を表示し続ける」であり、
+未解決 ref は赤字点線、迷子ノートは警告パネルとして**描画する**。両立しないため、
+`domain-model/src/note-placement.ts` にビューア固有の寛容な解決を持つ。
+`resolve` が返す採番も、本ツールは番号を表示しないため必要がない。
+
+### プロジェクト固有メタデータ
+
+本ツールは**入力言語の語彙を所有しない**（どのプロジェクトの文書でも読む立場）。
+プロジェクト固有メタデータのキー名（integrable-lattice の `habitat` 等）を内蔵できないので、
+システムの実行時スキーマを `unknownBlockMeta: 'passthrough'` で使う。
+未知のキーは**値を落とさずそのまま通る**（strip すると画面に出す前にメタデータが黙って消える）。
+キー名を拒否しても打ち間違いの検出にはならず、正しい文書を読めなくするだけなので、
+検査は語彙を所有する各プロジェクトの検証ツールに任せる。
+
+当初は許可キー名を設定で受け取っていたが、システム側にこのモードを足したことで設定ごと不要になった。
 
 ## 9. 本ツールで「適用対象なし」とした機構（明示）
 

@@ -15,6 +15,10 @@
  *   - `math` → `$...$`、`displayMath` → `\[...\]`（KaTeX 向けの LaTeX 文字列をそのまま渡す）
  *   - `list` → `itemize`、`todo` → 目立つ未完マーカー
  *
+ * **入力言語のうち、この出力器がまだ対応していない語彙**（図表ブロック `figure` と画像ノード
+ * `image`。いずれもこのプロジェクトの content には 1 件も無い）は、黙って落とさず**明示的に
+ * エラーにする**。網羅性の穴を無音にすると、後から図表を書いたときに出力から消えるため。
+ *
  * 使い方:
  *   node tools/build-latex.ts            .tex を生成する
  *   node tools/build-latex.ts --pdf      .tex を生成し tectonic で PDF まで作る
@@ -24,7 +28,7 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import type { ConvertedBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
 
@@ -93,6 +97,12 @@ for (const { blocks } of contentFiles) {
       headingCount += 1;
       body.push(renderHeading(block));
       continue;
+    }
+    if (block.kind === "figure") {
+      throw new Error(
+        `図表ブロックは、この出力器がまだ対応していない: ${block.id}\n` +
+          "  対応するまで content/ に figure を置かないこと（黙って出力から落とさないため）。",
+      );
     }
     body.push(renderTheoremLike(block));
   }
@@ -277,7 +287,7 @@ ${inner}
 `;
 }
 
-function renderHeading(block: ConvertedBlock & { kind: "heading" }): string {
+function renderHeading(block: HeadingBlock): string {
   const command = SECTION_COMMANDS[block.level - 1] ?? "paragraph";
   const title = renderTitle(block.title, block.id);
   const labels = block.labels.map((label) => `\\label{lab:${label}}`).join("");
@@ -364,6 +374,13 @@ function renderNode(node: Node, blockId: string): string {
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${escapeText(node.value)}`;
+    case "image":
+      // 画像ノードは入力言語の語彙にあるが、この出力器はまだ資産解決器を持たない。
+      // 素通しすると図が無音で消えるので、明示的に落とす。
+      throw new Error(
+        `画像ノードは、この出力器がまだ対応していない: ${blockId} の ${node.assetKey}\n` +
+          "  対応するまで content/ に image を置かないこと。",
+      );
   }
 }
 

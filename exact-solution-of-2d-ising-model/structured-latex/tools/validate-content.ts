@@ -4,22 +4,29 @@
  *
  * 型検査（`tsc -p tsconfig.json --noEmit`）と役割を分ける:
  *   - **コンパイル時**に落ちるもの（存在しないラベルへの ref / targets、id・ラベルの重複、
- *     kind ごとのフィールド、targets の空配列 ほか）は `schema.ts` の型と
- *     `document.generated.ts` が担当する。ここでの再検査は、型を経由せずに値が作られる経路
- *     （動的生成・`as` による回避）への保険である。
- *   - **型では表現できないもの**（未変換 Typst 記法の混入、生成物とファイル一覧の一致、
- *     sourcePath の実在）はこのスクリプトだけが検出できる。
- *     何が型で無理かとその根拠は docs/type-coverage.md に記録してある。
+ *     kind ごとのフィールド、targets の空配列 ほか）は、システム（リポジトリ直下
+ *     `structured-latex/`）が持つ入力言語の型と `document.generated.ts` が担当する。
+ *     ここでの再検査は、型を経由せずに値が作られる経路（動的生成・`as` による回避）への保険であり、
+ *     システムの `createRuntimeSchema`（**throw せず Result を返す**）を使う。
+ *   - **型では表現できないもの**（未変換 Typst 記法の混入、抽象テンソル積 `\otimes` の混入、
+ *     生成物とファイル一覧の一致）はこのスクリプトだけが検出できる。
+ *     何が型で無理かとその根拠はシステムの docs/type-coverage.md に記録してある。
  *
  * 使い方: node structured-latex/tools/validate-content.ts
  */
 
 import { ALL_LABELS } from "../labels.generated.ts";
-import { defineNotes, validateBlock } from "../schema.ts";
-import type { ConvertedBlock, Node } from "../schema.ts";
+import { runtimeSchema } from "../schema.ts";
+import type { ConvertedBlock, Node, ValidationIssue } from "../schema.ts";
 import { loadContentFiles, loadNoteFiles } from "./content-modules.ts";
 
 type RefUse = { target: string; blockId: string; file: string };
+
+/**
+ * 実行時検証の指摘は 1 件目で止めずに全件集める（受け取り側が一度で直せるように、という
+ * システム側の方針に合わせる）。集め終わってから、あれば 1 度だけ落とす。
+ */
+const schemaIssues: ValidationIssue[] = [];
 
 const ids = new Set<string>();
 const labels = new Map<string, string>();
@@ -33,7 +40,8 @@ const contentFiles = await loadContentFiles();
 
 for (const { file, blocks } of contentFiles) {
   for (const block of blocks) {
-    validateBlock(block);
+    const parsed = runtimeSchema.validateBlock(block, file);
+    if (!parsed.success) schemaIssues.push(...parsed.error);
     blockCount += 1;
     if (block.kind === "heading") headingCount += 1;
     if (ids.has(block.id)) {
@@ -66,8 +74,9 @@ let noteCount = 0;
 const noteFiles = await loadNoteFiles();
 
 for (const { file, notes } of noteFiles) {
-  // schema 妥当性は defineNotes に通して確認する（notes ファイル自身と同じ検証）。
-  defineNotes(notes);
+  // 形の妥当性はシステムの実行時スキーマで確認する（content 側と同じ関門を通す）。
+  const parsed = runtimeSchema.validateNotes(notes, file);
+  if (!parsed.success) schemaIssues.push(...parsed.error);
   for (const note of notes) {
     noteCount += 1;
     if (noteIds.has(note.id) || ids.has(note.id)) {
@@ -87,6 +96,12 @@ for (const { file, notes } of noteFiles) {
     }
     walkRefs(note.body ?? [], note.id, file, refs);
   }
+}
+
+// 形の検証（システムの実行時スキーマ）の指摘は、集め終わってから 1 度だけ落とす。
+if (schemaIssues.length > 0) {
+  const detail = schemaIssues.map((issue) => `  ${issue.path}: ${issue.message}`);
+  throw new Error(`入力言語の実行時検証に失敗した ${schemaIssues.length} 件:\n${detail.join("\n")}`);
 }
 
 // ref 解決チェック: ref.target は必ず定義済みラベルでなければならない
@@ -115,7 +130,7 @@ const missingInGenerated = [...labels.keys()].filter((label) => !generated.has(l
 const staleInGenerated = [...generated].filter((label) => !labels.has(label));
 if (missingInGenerated.length > 0 || staleInGenerated.length > 0) {
   throw new Error(
-    "labels.generated.ts が content/ の実状と一致していない（node tools/generate-index.ts で再生成する）:\n" +
+    "labels.generated.ts が content/ の実状と一致していない（npm run gen で再生成する）:\n" +
       `  生成物に無い実在ラベル: ${missingInGenerated.join(", ") || "なし"}\n` +
       `  実在しない生成物のラベル: ${staleInGenerated.join(", ") || "なし"}`,
   );
@@ -130,13 +145,21 @@ console.log(
     `(${noteTargets.length} targets, all resolved)`,
 );
 
+/**
+ * ブロックが持つノード列（種別ごとに置き場所が違う）。
+ * 種別を足したらここが型エラーになるので、走査から漏れたまま気づかない状態にならない。
+ */
+function bodyNodesOf(block: ConvertedBlock): readonly (readonly Node[])[] {
+  if (block.kind === "heading") return [];
+  if (block.kind === "figure") return [block.content, block.caption ?? []];
+  return [block.statement, block.proof ?? []];
+}
+
 function scanForTypstMath(block: ConvertedBlock, file: string): void {
   const strings: string[] = [];
-  // 見出しブロックは本文を持たないため statement は undefined になりうる。
-  collectStrings(block.statement ?? [], strings);
-  collectStrings(block.proof ?? [], strings);
-  // タイトルの tex も KaTeX へ渡るので同じ規約で検査する。
-  const title = block.title;
+  for (const nodes of bodyNodesOf(block)) collectStrings(nodes, strings);
+  // タイトルの tex も KaTeX へ渡るので同じ規約で検査する（図表はタイトルを持たない）。
+  const title = block.kind === "figure" ? null : block.title;
   if (title !== null && title !== undefined && title.tex !== undefined) {
     strings.push(title.tex);
   }
@@ -198,8 +221,7 @@ function collectStrings(nodes: readonly Node[], out: string[]): void {
 }
 
 function collectRefTargets(block: ConvertedBlock, file: string, out: RefUse[]): void {
-  walkRefs(block.statement ?? [], block.id, file, out);
-  walkRefs(block.proof ?? [], block.id, file, out);
+  for (const nodes of bodyNodesOf(block)) walkRefs(nodes, block.id, file, out);
 }
 
 function walkRefs(nodes: readonly Node[], blockId: string, file: string, out: RefUse[]): void {

@@ -5,17 +5,14 @@ export default defineBlocks([
     id: "heading_Z_Y_anticommutation",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 8,
+    origin: { path: "_old/typst/main.typ", ordinal: 8 },
     title: { tex: String.raw`Z\text{と}Y\text{の反交換関係}` },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
     kind: "claim",
-    sourcePath: "structured-latex/content/006_Z_Y_anticommutation.ts",
-    sourceOrdinal: 1,
+    origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 1 },
     title: { text: "Pauli 行列の積" },
     labels: ["pauli_matrix_products"],
     statement: [
@@ -128,8 +125,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
   {
     id: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     kind: "claim",
-    sourcePath: "structured-latex/content/006_Z_Y_anticommutation.ts",
-    sourceOrdinal: 2,
+    origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 2 },
     title: { text: "1 サイトだけ反可換ならクロネッカー積は反交換する" },
     labels: ["tensor_anticommutation_from_single_site"],
     statement: [
@@ -235,8 +231,10 @@ YX &= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M) \\
   {
     id: "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y",
     kind: "claim",
-    sourcePath: "_old/typst/parts/006_ZとYの反交換関係/000_claim_Z_muとZ_nuとY_muとY_nuの反交換関係.typ",
-    sourceOrdinal: 1,
+    origin: {
+      path: "_old/typst/parts/006_ZとYの反交換関係/000_claim_Z_muとZ_nuとY_muとY_nuの反交換関係.typ",
+      ordinal: 1,
+    },
     title: { tex: String.raw`Z\text{と}Y\text{の反交換関係}` },
     labels: ["anticommutator_of_Z_and_Y"],
     statement: [

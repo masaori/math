@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_free_energy",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { text: "自由エネルギーと熱力学極限" },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "freeenergy_000_remark_escape_to_real_analysis",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "実数解析へ移行するのはこの章のこの箇所だけである" },
     labels: ["remark_real_analysis_escape_point"],
     statement: [
@@ -116,8 +113,7 @@ export default defineBlocks([
   {
     id: "freeenergy_001_claim_gamma1_lower_bound_all_theta",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\gamma_1(\theta) \geq \cosh(2K_1 - 2K_2^*) \geq 1 \quad (\forall\theta\in\mathbb{R})` },
     labels: ["gamma1_lower_bound_all_theta"],
     statement: [
@@ -210,8 +206,7 @@ export default defineBlocks([
   {
     id: "freeenergy_002_claim_gamma_is_continuous",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\gamma \text{ は } \mathbb{R} \text{ 上で連続}` },
     labels: ["gamma_is_continuous"],
     statement: [
@@ -320,8 +315,7 @@ export default defineBlocks([
   {
     id: "freeenergy_003_claim_limit_in_N_row",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`N_{\mathrm{row}} \to \infty \text{ の極限}` },
     labels: ["limit_of_log_Z_in_N_row"],
     statement: [
@@ -425,8 +419,7 @@ export default defineBlocks([
   {
     id: "freeenergy_004_theorem_riemann_sum_to_integral",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { text: "等間隔点の平均は積分に収束する（★実数解析への移行点）" },
     labels: ["riemann_sum_to_integral"],
     statement: [
@@ -665,8 +658,7 @@ export default defineBlocks([
   {
     id: "freeenergy_005_theorem_onsager_expression",
     kind: "theorem",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { text: "Onsager の自由エネルギーの表式" },
     labels: ["onsager_free_energy_expression"],
     statement: [
@@ -826,8 +818,7 @@ export default defineBlocks([
   {
     id: "freeenergy_006_remark_remaining_input",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { text: "厳密解へ残っている入力：偶セクターの固有値" },
     labels: ["remark_remaining_input_even_sector"],
     statement: [

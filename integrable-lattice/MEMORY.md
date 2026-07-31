@@ -17,6 +17,51 @@
     岩澤型漸近。**在る**のは Newton 恒等式と Hensel で、**無いのは接続の配線**。
     「無い」と書きかけて**偽陰性を自分で作りかけた**（検索語 `newton identit` が `Newton's Identities` に当たらない）。
   - ビルド **8667 jobs 成功・85 定理が sorryAx 非依存**（cycle 17 は 63）。規約どおり作業ブランチのみ push。
+## 入力言語の正本をシステムへ一本化した（2026-07-31）
+
+**`integrable-lattice/structured-latex/schema.ts` に置いていた入力言語の定義（Ising 版からの複製）を削除し、
+リポジトリ直下 `structured-latex/`（システム）を使う側になった。** 同じ言語が複数箇所で定義される状態の解消。
+
+- `schema.ts` は、システムの `createStructuredTextSchema<Label, Meta>()` /
+  `createRuntimeSchema` を具体化して再エクスポートするだけの薄いモジュールになった。
+  **本プロジェクト固有の意味（`habitat` / `realEscape` / `verification` / `lean`）は `Meta` として宣言する。**
+  「可算側を宣言したら `realEscape` を書けない／非可算側なら必須」という**判別共用体の性質は保たれている**
+  （`npm run test:types` の 9 ケースが実際に tsc を落として確認する）。
+- 由来 `sourcePath` / `sourceOrdinal` は、システムの `origin: { path, ordinal }` へコードモッド
+  （`tools/codemod-origin.ts`。**冪等**）で機械的に移した。全ブロックで一定値だった
+  `conversion: { status: "added" }` は、システムの入力言語に置き場所が無く情報量も無いので同時に落とした。
+- 生成物はシステムの生成器（`npm run gen`）で作る。`tools/generate-index.ts` は削除。
+- **複製が前提だった `tools/verify-shared-tools-in-sync.ts` は削除した**（複製そのものが無くなったため）。
+  [docs/structured-latex-decision.md](docs/structured-latex-decision.md) は履歴として残す（冒頭に無効の断り書きを追記）。
+- **移行前後で証明の中身は 1 文字も変わっていない**: ブロック 32・ラベル 26・相互参照 27 で一致。
+  content の差分は「`sourcePath`/`sourceOrdinal`/`conversion` の削除と `origin` の追加」だけである
+  （`git diff <base> -- content/` を機械的にフィルタして確認済み）。
+- **自動ループへの申し送り**: 移行後にブロックを足すときは `sourcePath` / `sourceOrdinal` /
+  `conversion` を**書かない**（由来を残すなら `origin: { path, ordinal }`）。移行と並行して
+  main へ入った新規ブロックが旧フィールドで書かれ、型検査が落ちる事故が実際に起きた。
+  直し方は `node tools/codemod-origin.ts --apply`（冪等）→ `npm run gen`。
+- **システム側は 1 ファイルも変更していない。**
+- 既知の残件（本移行とは無関係の先行不具合）: `npm run build:pdf` は `ℓ` `⇒` が欧文フォントに無く落ちる（移行前の 419dd34 でも同一の失敗を実測）。
+  `npm run check` は `.tex` 生成までしか回さないので通る。
+## cycle 18 step 2 done（2026-07-31, T3 Pure）: トレース列の周期の上界を確定させた
+
+`outputs/reports/cycle18_T3_trace_period_bound.md` / `sagemath/check/cycle18_T3_trace_period/`。
+cycle 17 が「命題 C はトレース列の読みでは偽」で止めた穴を塞いだ。
+
+- **主結果（証明済み）**: $\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$。
+  $w^*$ は Gram 行列 $G=(\mathrm{Tr}\,T^{i+j})_{i,j<\deg\mathrm{rad}\chi}$ の**最大単因子**の $p$ 進付値。
+- **直すべきは指数ではなく基準レベルだった。** $\pi_{\mathrm{tr}}(p,k)\mid p^a\pi_{\mathrm{tr}}(p,1)$ は
+  $a$ をどう取っても偽（$F\oplus F$, $p=2$ で $t_1=1$, $t_2=3$）。**最初にこの形で立てて反証された**（報告 §8）。
+- **なぜ壊れていたかの説明**: $\det G=\mathrm{disc}(\rho)\prod_\lambda m_\lambda$ なので、
+  $w^*=0$ は「$\rho$ が $\bmod p$ 分離的 & 全ての $p\nmid m_\lambda$」＝**命題 B の条件そのもの**。
+  命題 C がトレース列で破れるのは偶然ではなく命題 B の帰結。
+- **$\mathbb{R}$ にも $\mathbb{Z}_p$ にも脱出しない**（$\mathbb{Z}$ 上の Cramer 則・Smith 標準形と
+  $\overline{\mathbb{Q}}$ の Vandermonde だけ）。$w^*$ は Smith 標準形で決定可能。
+- 本文へ**命題 C′（`paper_prop_C_trace`）**を追加し、命題 C の「上界は未確立」の文を差し替えた。
+- **数値支持どまり**（本文に入れていない）: $w^*+1\le k\le2w^*$ での階段 $t_{k+1}\mid p\,t_k$。
+  402 件 0 反例だが、この標本の検出力は破れ率 0.74% までであることを明記した。
+- **教訓（再確認）**: 証明を立てた直後に数値へかけたから、誤った主結果とGram 非退化性の仮定漏れが
+  即座に露見した。数値検証を後回しにしていたら cycle 17 と同型の事故を繰り返していた。
 
 ## cycle 17 完了（2026-07-31）＝ cycle 16 総括の 4 点を潰すサイクル
 
@@ -32,7 +77,10 @@
   **$\ell=2$ と合わせトーラスは全素数で解けた。** 型 II の実例も確定（退化なのに $n\ell^n$ 項が無い塔）。本文へ (G4)(G5)。
 - **step 3・step 4** は下記。
 - **残る未解決**: 一般の退化塔（障害は特定済み＝消え方の深さを $M$ に依らない不変量として取り出す条件、$\ell=2$ が反例）／
-  トレース列の周期の上界（新規）／一般の $d$ の低位項／**Monsky 1989 の本文未取得**（投稿前に必読）。
+  トレース列の周期の上界（新規）／一般の $d$ の低位項。
+  （**Monsky 1989 の本文未取得は cycle 18 step 4 で解消**。Project Euclid の Open Access 版を取得して読み、
+  $\mu_1$ に対応する定数 $\alpha^*$ の明示式は無い＝命題 W は既出にならない、と確定した。
+  `outputs/reports/cycle18_T1_monsky1989_acquisition.md`）
 - **運用**: サブエージェント 4 本すべてが規約遵守（cycle 16 の main 直 push は再発せず。指示文への明示が効いた）。
   **並列実行の副作用が 1 件**: step 1 が塞いだ穴を step 2 が報告中で「依然 0 件」と書いていた（互いの結果を知らない）。
   呼び出し元が本文と report で整合させた。**並列 step の報告は統合時に必ず突き合わせること。**
@@ -64,8 +112,9 @@
   - **命題 W は形が $d=1$ で既出**（Vallières Cor 5.7）。$d=2$ の低位項は Kataoka §4.3 が「追わない」と明記。
   - **寄与 (b)** は、可算符号化という移動自体が逆数学・構成的代数の**標準手法**だと判明。
     差分は**「等号を決定可能な水準まで降ろした」1 点**に絞られた。
-  - **投稿前の宿題が 1 件残った**: **Monsky, ASPM 17 (1989) が本文未取得**（購読制限）。
-    $\mu_1$ に対応する明示式が含まれている可能性があり、**投稿前に必ず読む**（notes.md に単独タスクとして記載）。
+  - ~~**投稿前の宿題が 1 件残った**: **Monsky, ASPM 17 (1989) が本文未取得**~~
+    → **cycle 18 step 4 で入手して閉じた**（Open Access。購読制限というのは誤診断だった）。
+    $\alpha^*$（＝$\mu_1$ の位置）に明示式は無く、存在と $d=2$ の有理性のみ。**命題 W は既出にならない。**
   - **「既出でないと確認した」とは書いていない**（0 件を根拠にしない。MathSciNet 未使用も明記）。
   - 呼び出し元が**引用元 PDF を自分で取得して Def 2.1 を確認**し、数値検証も再実行して一致を確認した。
 
@@ -210,9 +259,8 @@ cycle 15 の commit `4e15577` で、編集スクリプトが `index()` による
   (1) 数式中の ★ が欧文フォントに無く無言で消えていた（和文フォントの箱へ置換）。
   (2) 長いパスの `$\texttt{...}$` が改行できず版面から 93pt はみ出していた（`\path{}` で組む）。
   (3) ℚ̄ が結合マクロンを落として ℚ に化けていた（合成文字を先に処理し、未対応の結合文字はビルドを落とす）。
-- **複製が腐らない仕組み**: `tools/verify-shared-tools-in-sync.ts`（`npm run check` に組込み）。
-  土台 4 ファイル（426 行）が複製元とバイト一致し、固有化した 6 ファイルが一致して**いない**ことを検査する。
-  共有ライブラリにしなかった判断の根拠（実測差分つき）は [docs/structured-latex-decision.md](docs/structured-latex-decision.md)。
+- ~~**複製が腐らない仕組み**: `tools/verify-shared-tools-in-sync.ts`~~
+  → **解消済み（下記「入力言語の正本をシステムへ一本化した」を参照）。複製そのものが無くなったので削除した。**
 - **地の文の Unicode ℝ/ℂ が可算宣言の検査を素通りしていた**のを塞いだ（数式しか見ていなかった）。
 - **Typst**: `_old/typst/` に退避済みで追跡対象に `.typ` は 0 件。`main.typ`（17 行）に定理環境は 0 件、
   `parts/` は `.gitkeep` のみ。移行漏れは原理的に起こらないので `verify-no-lost-proofs.ts` は移植しない。

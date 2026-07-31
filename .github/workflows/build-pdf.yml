@@ -43,6 +43,12 @@ jobs:
           # .ts を型ストリップで直接実行するため 22.18 以上が要る。
           node-version: '22'
 
+      # 入力言語の正本（structured-latex/ システム）の依存も要る。証明側から import しており、
+      # zod の解決はシステム側のディレクトリを起点に行われるため、ここを入れないと解決できない。
+      - name: Install system dependencies (structured-latex)
+        working-directory: structured-latex
+        run: pnpm install --frozen-lockfile
+
       - name: Install Node dependencies
         working-directory: exact-solution-of-2d-ising-model/structured-latex
         run: pnpm install --frozen-lockfile

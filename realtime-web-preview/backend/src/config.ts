@@ -10,6 +10,12 @@ export type ServerConfig = {
   sourceLabel: string
   /** 参照用ノートの dir。存在しなくてもよい（その場合ノート無しで動く）。 */
   notesDir: string
+  /**
+   * 入力ソースのブロックが持つ、プロジェクト固有メタデータのキー名（例: `habitat`）。
+   * システムの実行時スキーマは `.strict()` で未宣言のキーを拒否するため、
+   * メタデータを使うプロジェクトを表示するときはここで宣言する
+   * （本ビューアはドメイン非依存なのでキー名を内蔵しない）。
+   */
   host: string
   port: number
   staticDir: string

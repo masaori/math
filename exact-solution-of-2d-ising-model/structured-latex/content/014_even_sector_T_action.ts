@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_even_sector_T_action",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { text: "偶セクターの転送行列の共役作用" },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "evensectorT_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的と、008 章との関係" },
     labels: [],
     statement: [
@@ -118,8 +115,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
   {
     id: "evensectorT_001_definition_V_plus",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`V^{(+)} \text{ と } T_{(V^{(+)})} \text{ の定義}` },
     labels: ["def_V_plus_and_T_V_plus"],
     statement: [
@@ -329,8 +325,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/
   {
     id: "evensectorT_002_claim_nesting_commutator",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ についての } n \text{ 重交換子}` },
     labels: ["nesting_of_commutator_of_H_and_check_Z"],
     statement: [
@@ -749,8 +744,7 @@ F_{n+1}
   {
     id: "evensectorT_003_claim_coefficient_conversion",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ についての } \cosh, \sinh \text{ の展開係数への変換}` },
     labels: ["cosh_sinh_coefficient_conversion_for_check"],
     statement: [
@@ -1075,8 +1069,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
   {
     id: "evensectorT_004_claim_extract_taylor",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ についてのテイラー係数の抽出}` },
     labels: ["extract_taylor_coefficient_of_check_Z_Y"],
     statement: [
@@ -1217,8 +1210,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
   {
     id: "evensectorT_005_claim_T_actions",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2} \text{ の } \check{Z}, \check{Y} \text{ への作用}` },
     labels: ["T_actions_on_check_Z_Y"],
     statement: [
@@ -1385,8 +1377,7 @@ T_{V_2}(\check{Y}_\mu)
   {
     id: "evensectorT_006_claim_linearity_of_T",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`T_g \text{ の } \mathbb{C} \text{ 線型性}` },
     labels: ["linearity_of_T_on_check_Z_Y"],
     statement: [
@@ -1458,8 +1449,7 @@ T_g(aX + bW)
   {
     id: "evensectorT_007_definition_B1_B2",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`B_1(\theta), B_2 \text{ の定義}` },
     labels: ["def_B1_theta_B2"],
     statement: [
@@ -1504,8 +1494,7 @@ B_2 := \begin{pmatrix}
   {
     id: "evensectorT_008_claim_product_action",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2} \text{ の } (\check{Z}, \check{Y}) \text{ への直積作用}` },
     labels: ["calc_of_TxT_check_Z_Y"],
     statement: [
@@ -1614,8 +1603,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
   {
     id: "evensectorT_009_claim_factorization_A_theta",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`A(\theta) = B_1(\theta) B_2 B_1(\theta) \text{（}\theta \in \mathbb{R}\text{ 一般）}` },
     labels: ["factorization_of_A_theta_general"],
     statement: [
@@ -1900,8 +1888,7 @@ P_{21}
   {
     id: "evensectorT_010_claim_T_V_plus_action",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 12,
+    origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`T_{(V^{(+)})} \text{ の } \check{Z}, \check{Y} \text{ への作用}` },
     labels: ["T_V_plus_check_Z_Y"],
     statement: [

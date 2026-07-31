@@ -7,18 +7,15 @@ export default defineBlocks([
     id: "heading_even_sector_modes",
     kind: "heading",
     level: 2,
-    sourcePath: SRC,
-    sourceOrdinal: 1,
+    origin: { path: SRC, ordinal: 1 },
     title: { text: "偶セクターの半整数運動量モード" },
     labels: [],
-    conversion: { status: "added" },
   },
 
   {
     id: "evensector_000_remark_overview",
     kind: "remark",
-    sourcePath: SRC,
-    sourceOrdinal: 2,
+    origin: { path: SRC, ordinal: 2 },
     title: { text: "この章の目的" },
     labels: [],
     statement: [
@@ -88,8 +85,7 @@ export default defineBlocks([
   {
     id: "evensector_001_claim_why_minus_only",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 3,
+    origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`008 \text{ 章の議論が } (-) \text{ セクター専用である理由}` },
     labels: ["why_008_applies_only_to_minus_sector"],
     statement: [
@@ -311,8 +307,7 @@ export default defineBlocks([
   {
     id: "evensector_002_claim_antiperiodic_exp_sum",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 4,
+    origin: { path: SRC, ordinal: 4 },
     title: { text: "半整数運動量の指数和" },
     labels: ["antiperiodic_exp_sum"],
     statement: [
@@ -446,8 +441,7 @@ e^{-i\frac{\pi k}{M}}
   {
     id: "evensector_003_definition_half_integer_modes",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 5,
+    origin: { path: SRC, ordinal: 5 },
     title: { tex: String.raw`\check{Z}_\mu, \check{Y}_\mu \text{（半整数運動量モード）}` },
     labels: ["def_half_integer_modes"],
     statement: [
@@ -589,8 +583,7 @@ e^{-ij\tilde\theta_{\mu+M}}
   {
     id: "evensector_003a_definition_check_index_set",
     kind: "definition",
-    sourcePath: SRC,
-    sourceOrdinal: 6,
+    origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`\check{\mathcal{M}} \text{（半整数運動量の添字集合）}` },
     labels: ["def_check_index_set"],
     statement: [
@@ -887,8 +880,7 @@ e^{-ij\tilde\theta_{\mu+M}}
   {
     id: "evensector_003b_claim_conjugate_index_of_check_Z_Y",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 7,
+    origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`\check{\mathcal{M}} \text{ の内側で共役添字を取る}` },
     labels: ["conjugate_index_of_check_Z_Y"],
     statement: [
@@ -1028,8 +1020,7 @@ e^{-ij\tilde\theta_{M+1-\mu}}
   {
     id: "evensector_004_claim_commutator_H_check_Z_Y",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 8,
+    origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`H_1^{(+)}, H_2 \text{ と } \check{Z}, \check{Y} \text{ の交換関係}` },
     labels: ["commutator_of_H_and_check_Z_Y"],
     statement: [
@@ -1489,8 +1480,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
   {
     id: "evensector_005_claim_anticommutator_check_Z_Y",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 9,
+    origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ の反交換関係}` },
     labels: ["anticommutator_of_check_Z_Y"],
     statement: [
@@ -1654,8 +1644,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
   {
     id: "evensector_006_claim_recover_Z_Y",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 10,
+    origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ から } Z_j, Y_j \text{ を復元する}` },
     labels: ["recover_Z_Y_from_check_Z_Y"],
     statement: [
@@ -1765,8 +1754,7 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
   {
     id: "evensector_007_claim_H1_H2_via_check_Z_Y",
     kind: "claim",
-    sourcePath: SRC,
-    sourceOrdinal: 11,
+    origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`H_1^{(+)}, H_2 \text{ を } \check{Z}, \check{Y} \text{ で表す}` },
     labels: ["H1_H2_via_check_Z_Y"],
     statement: [

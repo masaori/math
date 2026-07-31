@@ -5,7 +5,12 @@
  * **型が緩くなってエラーが出なくなったら型検査そのものが落ちる**。
  * すなわちこのファイルは「参照の誤りがコンパイル時に検出され続けること」の回帰テストである。
  *
- * ここで使う実在ラベルは content/ に存在するもの（labels.generated.ts のユニオン）。
+ * **入力言語そのものの検査（見出しに本文、level の範囲、タイトルの空、`proof` の打ち間違い、
+ * ノートの targets が空 ほか）はシステム側の `tools/negative-type-test.ts` が持つ。**
+ * ここに残すのは、このプロジェクトでしか確かめられない 2 つだけである:
+ *
+ *   1. `Label`（このプロジェクトの content から生成した実在ラベルのユニオン）への束縛
+ *   2. プロジェクト固有メタデータ `conversion`（Typst 原本からの移行の状態）
  */
 
 // 生成した集約モジュールを**型として引き込む**。tsconfig の include から
@@ -13,11 +18,11 @@
 // （include 漏れでファイル跨ぎの検査が無音で消えた事故があるため）。
 import type { _UniqueBlockIds } from "../document.generated.ts";
 import { defineBlocks, defineNotes, math, paragraph, ref } from "../schema.ts";
-
-export type _AggregatedDocumentIsChecked = _UniqueBlockIds;
 import type { ConvertedBlock, Note } from "../schema.ts";
 
-// --- ref -------------------------------------------------------------------
+export type _AggregatedDocumentIsChecked = _UniqueBlockIds;
+
+// --- ref: 実在ラベルへの束縛 --------------------------------------------------
 
 // 実在ラベルは通る。
 const okRef = ref("def_kronecker");
@@ -34,72 +39,28 @@ declare const someString: string;
 // @ts-expect-error string は Label へ代入できない。
 void ref(someString);
 
-// --- ブロックの labels -------------------------------------------------------
+// --- ブロックの labels: 生成物の再生成漏れを検出する --------------------------
 
 const okBlock: ConvertedBlock = {
   id: "type_test_block",
   kind: "claim",
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 1,
+  origin: { path: "type-tests/label-typing.test-d.ts", ordinal: 1 },
   labels: ["def_kronecker"],
   statement: [paragraph(["ラベルは生成済みユニオンの値のみ。", math("x")])],
+  conversion: { status: "added" },
 };
 void okBlock;
 
 const blockWithUnknownLabel: ConvertedBlock = {
   id: "type_test_block_unknown_label",
   kind: "claim",
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 2,
   // @ts-expect-error 生成済みユニオンに無いラベルは書けない（＝再生成漏れを検出する）。
   labels: ["not_a_real_label"],
   statement: [],
 };
 void blockWithUnknownLabel;
 
-// --- kind ごとに許されるフィールド ------------------------------------------
-
-// @ts-expect-error 見出しは本文（statement）を持たない。
-const headingWithBody: ConvertedBlock = {
-  id: "type_test_heading",
-  kind: "heading",
-  level: 2,
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 3,
-  title: { text: "見出し" },
-  labels: [],
-  statement: [paragraph(["本文"])],
-};
-void headingWithBody;
-
-const blockWithNotes: ConvertedBlock = {
-  id: "type_test_notes",
-  kind: "remark",
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 4,
-  labels: [],
-  statement: [],
-  // @ts-expect-error 本文ブロックは注記欄を持てない（注記は notes/ へ）。
-  notes: [paragraph(["注記"])],
-};
-void blockWithNotes;
-
-// フィールド名の打ち間違いは余剰プロパティ検査で落ちる。
-// （ここが素通りすると `proof` が捨てられ、証明が正本から黙って消える。）
-void defineBlocks([
-  {
-    id: "type_test_typo_field",
-    kind: "claim",
-    sourcePath: "type-tests/label-typing.test-d.ts",
-    sourceOrdinal: 5,
-    labels: [],
-    statement: [],
-    // @ts-expect-error `proof` の打ち間違い。
-    proofs: [paragraph(["証明のつもり"])],
-  },
-]);
-
-// --- ノートの targets --------------------------------------------------------
+// --- ノートの targets: 実在ラベルへの束縛 ------------------------------------
 
 const okNote: Note = {
   id: "note_type_test_ok",
@@ -116,87 +77,56 @@ const noteWithUnknownTarget: Note = {
 };
 void noteWithUnknownTarget;
 
-void defineNotes([
-  {
-    id: "note_type_test_typo",
-    targets: ["def_kronecker"],
-    // @ts-expect-error `body` の打ち間違い。
-    bodyy: [paragraph(["本文のつもり"])],
-    body: [],
-  },
-]);
+// --- プロジェクト固有メタデータ（conversion） --------------------------------
 
-const noteWithEmptyTargets: Note = {
-  id: "note_type_test_empty",
-  // @ts-expect-error ノートは必ず 1 件以上のラベルに紐づく（空配列は型で落ちる）。
-  targets: [],
-  body: [],
-};
-void noteWithEmptyTargets;
-
-// --- 一意性・値域 ------------------------------------------------------------
-
-// 同一ファイル内での id 重複は型で落ちる（ファイル跨ぎは document.generated.ts が見る）。
-// @ts-expect-error id が重複している。
 void defineBlocks([
   {
-    id: "type_test_dup",
+    id: "type_test_status",
     kind: "claim",
-    sourcePath: "type-tests/label-typing.test-d.ts",
-    sourceOrdinal: 6,
     labels: [],
     statement: [],
-  },
-  {
-    id: "type_test_dup",
-    kind: "claim",
-    sourcePath: "type-tests/label-typing.test-d.ts",
-    sourceOrdinal: 7,
-    labels: [],
-    statement: [],
+    // @ts-expect-error status は converted か added のみ。
+    conversion: { status: "convertd" },
   },
 ]);
 
-const headingWithBadLevel: ConvertedBlock = {
-  id: "type_test_level_range",
-  kind: "heading",
-  // @ts-expect-error level は 1〜6 のみ。
-  level: 7,
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 8,
-  title: { text: "見出し" },
-  labels: [],
-};
-void headingWithBadLevel;
+void defineBlocks([
+  {
+    id: "type_test_conversion_notes",
+    kind: "claim",
+    labels: [],
+    statement: [],
+    // @ts-expect-error conversion.notes は文字列の配列（文字列を直接は書けない）。
+    conversion: { status: "added", notes: "一行だけのメモ" },
+  },
+]);
 
-const blockWithEmptyTitle: ConvertedBlock = {
-  id: "type_test_empty_title",
-  kind: "claim",
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 9,
-  // @ts-expect-error タイトルは text か tex の少なくとも一方が必要。
-  title: {},
-  labels: [],
-  statement: [],
-};
-void blockWithEmptyTitle;
+void defineBlocks([
+  {
+    id: "type_test_conversion_unknown_key",
+    kind: "claim",
+    labels: [],
+    statement: [],
+    // @ts-expect-error conversion の中の打ち間違い（notes → note）。
+    conversion: { status: "added", note: ["メモ"] },
+  },
+]);
 
-const blockWithBadStatus: ConvertedBlock = {
-  id: "type_test_status",
-  kind: "claim",
-  sourcePath: "type-tests/label-typing.test-d.ts",
-  sourceOrdinal: 10,
-  labels: [],
-  statement: [],
-  // @ts-expect-error status は converted か added のみ。
-  conversion: { status: "convertd" },
-};
-void blockWithBadStatus;
+// 見出しはメタデータを受け取らない（システムの HeadingBlock は M を持たない）。
+// 移行時、見出しの conversion は origin.path から復元できることを確認したうえで落としてある。
+void defineBlocks([
+  {
+    id: "type_test_heading_meta",
+    kind: "heading",
+    level: 2,
+    title: { text: "見出し" },
+    labels: [],
+    // @ts-expect-error 見出しに conversion は書けない。
+    conversion: { status: "added" },
+  },
+]);
 
 // --- 定義ヘルパの受け口 ------------------------------------------------------
 
 void defineBlocks([okBlock]);
 void defineNotes([okNote]);
-
-// @ts-expect-error defineBlocks は配列以外を受け付けない。
-void defineBlocks(okBlock);

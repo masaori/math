@@ -5,27 +5,22 @@ export default defineBlocks([
     id: "heading_diagonalization_appendix_B",
     kind: "heading",
     level: 1,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 5,
+    origin: { path: "_old/typst/main.typ", ordinal: 5 },
     title: { text: "対角化の計算 (ホロノミック量子場 付録B)" },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "heading_transfer_matrix",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 6,
+    origin: { path: "_old/typst/main.typ", ordinal: 6 },
     title: { text: "転送行列" },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ",
-    sourceOrdinal: 1,
+    origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
     title: { text: "記号の定義" },
     labels: ["def_transfer_matrix_symbols"],
     statement: [
@@ -164,8 +159,7 @@ export default defineBlocks([
   {
     id: "transfer_matrix_002_claim_Z_Y_linearly_independent",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ",
-    sourceOrdinal: 2,
+    origin: { path: "_old/typst/parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ", ordinal: 2 },
     title: { tex: String.raw`Z_m, Y_m \text{ は線型独立}` },
     labels: ["Z_Y_linearly_independent"],
     statement: [
@@ -533,8 +527,7 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
   {
     id: "transfer_matrix_003_claim_V1_V2_in_Z_Y_epsilon",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ",
-    sourceOrdinal: 3,
+    origin: { path: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ", ordinal: 3 },
     title: { tex: String.raw`V_1, V_2 \text{ を } Z, Y, \varepsilon \text{ で表す}` },
     labels: ["V1_V2_in_Z_Y_epsilon"],
     statement: [
@@ -927,8 +920,10 @@ K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
   {
     id: "transfer_matrix_005_definition_end_isomorphism",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/004_definition_EndFとMat2Cテンソル積Mの同型.typ",
-    sourceOrdinal: 5,
+    origin: {
+      path: "_old/typst/parts/004_転送行列/004_definition_EndFとMat2Cテンソル積Mの同型.typ",
+      ordinal: 5,
+    },
     title: { tex: String.raw`\mathbf{end}: \mathrm{Mat}(2^M,\mathbb{C}) \to \mathrm{End}(\mathcal{F})` },
     labels: ["def_end_iso"],
     statement: [
@@ -1104,8 +1099,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
   {
     id: "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
     kind: "claim",
-    sourcePath: "structured-latex/content/004_transfer_matrix.ts",
-    sourceOrdinal: 5,
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
     title: { tex: String.raw`\mathbf{end} \text{ は単位的 } \mathbb{C}\text{-代数の同型}` },
     labels: ["end_is_algebra_isomorphism"],
     statement: [
@@ -1341,8 +1335,7 @@ E_{I,J}E_{K,L}
   {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ",
-    sourceOrdinal: 4,
+    origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
     title: { tex: String.raw`\varepsilon \text{ の固有空間}` },
     labels: ["def_eigenspaces_of_epsilon"],
     statement: [
@@ -1428,8 +1421,7 @@ E_{I,J}E_{K,L}
   {
     id: "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/005_claim_V1の固有空間への制限.typ",
-    sourceOrdinal: 6,
+    origin: { path: "_old/typst/parts/004_転送行列/005_claim_V1の固有空間への制限.typ", ordinal: 6 },
     title: { tex: String.raw`V_1 \text{ の固有空間への制限}` },
     labels: ["V1_restriction_to_eigenspaces"],
     statement: [
@@ -1839,8 +1831,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
   {
     id: "transfer_matrix_007_definition_V1_pm",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/006_definition_V1_plus_minusの定義.typ",
-    sourceOrdinal: 7,
+    origin: { path: "_old/typst/parts/004_転送行列/006_definition_V1_plus_minusの定義.typ", ordinal: 7 },
     title: { tex: String.raw`V_1^{(\pm)} \text{ の定義}` },
     labels: ["def_V1_pm"],
     statement: [
@@ -1876,8 +1867,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
   {
     id: "transfer_matrix_008_definition_delta_M",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ",
-    sourceOrdinal: 8,
+    origin: { path: "_old/typst/parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ", ordinal: 8 },
     title: { tex: String.raw`\delta^M_{(\mu,\nu)} \text{ の定義}` },
     labels: ["def_delta_M"],
     statement: [
@@ -1894,8 +1884,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
   {
     id: "transfer_matrix_009_claim_exp_sum",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ",
-    sourceOrdinal: 9,
+    origin: { path: "_old/typst/parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ", ordinal: 9 },
     title: null,
     labels: ["exp_sum"],
     statement: [
@@ -1938,8 +1927,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
   {
     id: "transfer_matrix_010_definition_hatZ_hatY",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ",
-    sourceOrdinal: 10,
+    origin: { path: "_old/typst/parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ", ordinal: 10 },
     title: { tex: String.raw`\hat{Z}, \hat{Y} \text{ の定義}` },
     labels: ["def_hatZ_hatY"],
     statement: [
@@ -1967,8 +1955,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
   {
     id: "transfer_matrix_011_definition_H1_H2",
     kind: "definition",
-    sourcePath: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ",
-    sourceOrdinal: 11,
+    origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: null,
     labels: [],
     statement: [
@@ -1989,8 +1976,7 @@ V_2 = (2s_2)^{M/2} \exp\!\left(i K_2^* H_2\right)`,
   {
     id: "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ",
-    sourceOrdinal: 12,
+    origin: { path: "_old/typst/parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ", ordinal: 12 },
     title: { tex: String.raw`H_1^{(\pm)}, H_2 \text{ を } \hat{Z}, \hat{Y} \text{ で表す}` },
     labels: ["H1_H2_via_hatZ_hatY"],
     statement: [
@@ -2109,8 +2095,7 @@ M(Y_{k_1}Z_{k_2})
   {
     id: "transfer_matrix_013_claim_hatZ_hatY_M_periodicity",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ",
-    sourceOrdinal: 13,
+    origin: { path: "_old/typst/parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ", ordinal: 13 },
     title: { tex: String.raw`\hat{Z}_M^{(-)} = \hat{Z}_{-M}^{(-)},\; \hat{Y}_M = \hat{Y}_{-M}` },
     labels: ["hatZ_hatY_M_periodicity"],
     statement: [
@@ -2149,8 +2134,7 @@ M(Y_{k_1}Z_{k_2})
   {
     id: "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ",
-    sourceOrdinal: 14,
+    origin: { path: "_old/typst/parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ", ordinal: 14 },
     title: { tex: String.raw`\hat{Z}, \hat{Y} \text{ から } Z, Y \text{ の復元}` },
     labels: ["recover_Z_Y_from_hatZ_hatY"],
     statement: [
@@ -2257,8 +2241,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
   {
     id: "transfer_matrix_015_claim_Z_Y_generate_algebra",
     kind: "claim",
-    sourcePath: "_old/typst/parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ",
-    sourceOrdinal: 15,
+    origin: { path: "_old/typst/parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ", ordinal: 15 },
     title: {
       text: "Z, Y から和・スカラー倍・積だけで 2^M 次の複素行列がすべて得られる",
     },

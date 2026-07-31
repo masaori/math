@@ -1,5 +1,50 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-31）: **入力言語の定義をシステムへ集約（`schema.ts` を薄い入口にした）**
+
+同じ入力言語（構造化テキストの語彙）が 3 箇所で定義されている状態
+（このプロジェクトの `structured-latex/schema.ts` / `integrable-lattice/structured-latex/schema.ts` /
+`realtime-web-preview/domain-model/src/block.ts`）のうち、**このプロジェクト分を解消した。**
+言語の正本はリポジトリ直下の `structured-latex/`（システム）に 1 つだけ置き、こちらは使う側になる。
+
+**やったこと**
+
+- `structured-latex/schema.ts` は 549 行 → 約 150 行。中身は
+  「生成された `Label` を受け取る」「`conversion` を宣言する」「システムのファクトリを具体化する」
+  「ノード構築子と型を再エクスポートする」だけ。**言語の定義は 1 行も持たない。**
+- ブロックの `sourcePath` / `sourceOrdinal` → システムの `origin: { path, ordinal }`（任意）へ移行。
+  **コードモッド `tools/codemod-source-to-origin.ts` で機械的に適用**（冪等。既定 dry-run、`--apply` で書き込み）。
+  ブロック 300 件・ノート 33 件を変換。ノートの `ordinal` はファイル内の位置を割り当てた
+  （システムの `Origin` は `ordinal` 必須。パスを捨てるより位置を与える方を採った）。
+- **見出し 22 件の `conversion` は落とした。** システムの `HeadingBlock` はメタデータ `M` を受け取らない。
+  落とす前に「`status` が `origin.path` から一意に決まる（不一致 0 件）」「`notes` を持たない（0 件）」を
+  実データで確認する検査をコードモッドに組み込んである（破れていたら変換を中止する）。
+- `tools/validate-content.ts` はシステムの `createRuntimeSchema`（**throw せず Result を返す**）へ移行。
+  このプロジェクト固有の検査（未変換 Typst 記法・抽象テンソル積 `\otimes` の混入）はそのまま残した。
+- 生成物（`labels.generated.ts` / `document.generated.ts`）はシステムの生成器で作る。
+  `tools/generate-index.ts` は削除し、`npm run gen` / `npm run check:generated` を差し替えた。
+- `tools/negative-type-test.ts` は 18 → 7 ケース、`tools/schema-runtime-test.ts` は 10 → 7 ケース。
+  **システム側の負テストと重複する分（入力言語そのものの検査）を削り、
+  このプロジェクトでしか確かめられないもの**（実在ラベルへの束縛・`conversion` の値域とフィールド名・
+  見出しにメタデータを書けないこと）だけを残した。
+- `tools/build-latex.ts` は動作を変えていない（型の import 元だけ追随）。
+  ただし語彙にあって未対応の `figure` ブロック・`image` ノードは、**黙って落とさず明示的にエラー**にした。
+
+**検証**: `npm run check` exit 0。移行前後で**ブロック 300 件 / 見出し 22 件 / ラベル 252 件 /
+相互参照 1853 件 / ノート 38 件 / targets 48 件**が一致し、
+`statement` / `proof` / `title` / `labels` / `level` / ノート `body` の JSON は**バイト単位で同一**
+（SHA-256 一致。証明の中身は 1 文字も動いていない）。
+
+**移行で失われた検査（型 → 実行時）**: `origin.ordinal` の正の整数性。移行前はテンプレートリテラル型で
+コンパイル時に落としていたが、システムの `Origin` は `ordinal: number` である。取り戻すには
+`defineBlocks` の引数型をプロジェクト側で書き直すことになり、移行の目的に反するので手放した。
+**型へ戻すならシステム側に置くのが正しい**（詳細は `docs/type-coverage.md` §2.4）。
+
+**未解決（このプロジェクトの範囲外）**: `realtime-web-preview` の Zod スキーマは全ブロックに
+`sourcePath` / `sourceOrdinal` を**必須**で要求している。移行後の content はこれを持たないので、
+**リアルタイムプレビューは現状このプロジェクトを読めない。** これは「言語の 3 度目の定義」そのもので、
+システムの入力言語へ寄せる作業が別途要る。
+
 ## 完了（2026-07-31）: **「抽象版」を「必要十分版」へ改名し、要件を README に厳密化。違反 2 件を修正**
 
 「抽象版」という呼び名が **「抽象的な概念を持ち込んで同じ主張を証明し直すこと」** と誤解される、

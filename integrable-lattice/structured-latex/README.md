@@ -3,11 +3,16 @@
 このディレクトリが **integrable-lattice の証明本体の正本**である。
 Typst で新規に証明を書かない（リポジトリ直下 CLAUDE.md「証明の記述形式（全プロジェクト共通）」）。
 
-実装の土台は `exact-solution-of-2d-ising-model/structured-latex/` を複製したものだが、
-**本プロジェクト固有の要件**（可算／非可算の分別、ℝ 脱出の明示、SageMath・Lean との紐づけ）を
-スキーマへ追加してある。共有ライブラリとして切り出していないのは、生成物
-（`labels.generated.ts` / `document.generated.ts`）が各プロジェクトの `content/` に強く
-結びついており、実質的に共有できるのはスキーマとツールだけだからである（複製の方が安全）。
+**入力言語（ブロック・ノード・ラベル・ノートの語彙）の定義はここには無い。**
+正本はリポジトリ直下の [`structured-latex/`](../../structured-latex/)（システム）が 1 つだけ持つ。
+本プロジェクトはそれを**具体化して使う側**であり、`schema.ts` がやるのは次の 3 つだけである。
+
+1. 生成された `Label`（`content/` に実在するラベルのユニオン型）を受け取る
+2. **本プロジェクト固有メタデータ**を宣言する（`habitat` / `realEscape` / `verification` / `lean`）
+3. `createStructuredTextSchema` / `createRuntimeSchema` を具体化して再エクスポートする
+
+以前はここに Ising 版から複製した入力言語の定義そのものが置かれていた
+（同じ言語が複数箇所で定義される状態）。それを解消したのが現在の形である。
 
 ## 最終成果物の生成（LaTeX / PDF）
 
@@ -31,22 +36,16 @@ LaTeX へ写す。欧文フォントに無い字は PDF から**無言で消え�
 ℚ̄ は ℚ に化けた）、生成器側で変換している。`content/` のデータは書き換えない。
 長いパスの `\texttt{...}` は `\path{...}` で組み、版面からはみ出さないようにしている。
 
-## この基盤は複製である（共有ライブラリではない）
+## この基盤は複製ではない（システムを使う側である）
 
-判断の根拠と、複製が腐らないようにする同期検査は
-[docs/structured-latex-decision.md](../docs/structured-latex-decision.md) に記録した。
-`npm run check` に含まれる `tools/verify-shared-tools-in-sync.ts` が、
-土台 4 ファイルが複製元とバイト一致していることと、固有化した 6 ファイルが
-複製元と一致して**いない**ことを検査する。
+かつてこのディレクトリは Ising 側の複製で、複製が腐らないよう同期検査
+（`tools/verify-shared-tools-in-sync.ts`）を置いていた。入力言語の正本をシステムへ一本化した
+時点で複製そのものが無くなったので、その検査は削除した。判断の経緯は
+[docs/structured-latex-decision.md](../docs/structured-latex-decision.md) に残っている（履歴として読む）。
 
-## いま置いてあるのは「足場」であって論文本体ではない
-
-`content/000_scaffold.ts` と `notes/000_scaffold.ts` は、**基盤が動くことを示すための最小の足場**
-であり、数学的な主張の正本ではない。論文本体は `content/001_intro.ts` 〜 `007_asymmetry_scope.ts` に執筆済みである。
+論文本体は `content/001_intro.ts` 〜 `007_asymmetry_scope.ts` に執筆済みである。
 生成器を適用した結果と、その過程で見つかった表示上の不具合は
 [docs/paper-001-migration-status.md](../docs/paper-001-migration-status.md) に記録した。
-ただし `content/` が空になると `tools/generate-index.ts` が「ラベルを 1 件も抽出できない」で
-落ちるので、実ブロックを入れるまでは足場を残しておくこと。
 
 ## 本プロジェクト固有: 可算／非可算の分別と ℝ 脱出の明示
 
@@ -67,7 +66,7 @@ README（`integrable-lattice/README.md`）とリポジトリ直下 CLAUDE.md の
 
 ## 型検査で何を捕まえるか
 
-`content/` に実在するラベルは `tools/generate-index.ts` が集めて `labels.generated.ts`
+`content/` に実在するラベルはシステムの生成器が集めて `labels.generated.ts`
 （ラベル文字列のユニオン型 `Label`）へ書き出し、同時に `document.generated.ts`
 （全ファイルを 1 本のタプル型へ連結する集約モジュール）を作る。`schema.ts` はこの型で参照を縛り、
 集約モジュールはファイルを跨いだ一意性を主張するので、次の誤りは
@@ -85,22 +84,22 @@ README（`integrable-lattice/README.md`）とリポジトリ直下 CLAUDE.md の
 | 定理型ブロックに `level`（見出し用フィールド）を書く | 型検査＋実行時 | `not assignable to type 'HeadingLevel｜undefined'` |
 | 見出しの `level` が 1〜6 の範囲外 | 型検査 | `Type '7' is not assignable` |
 | タイトルが `text` も `tex` も持たない | 型検査 | `Type '{}' is not assignable` |
-| `conversion.status` の綴り違い | 型検査 | `not assignable to type 'ConversionStatus'`（候補付き） |
 | ブロック id・ノート id・ラベルの重複（同一ファイル内／**ファイル跨ぎ**とも） | 型検査 | `__ブロックidが重複している` / `does not satisfy the constraint 'never'` |
 | ノート id とブロック id の衝突 | 型検査 | 同上 |
-| `sourceOrdinal` が正の整数でない | 型検査 | `__sourceOrdinalが正の整数でない` |
 | **本文ブロックが `habitat` を宣言していない** | 型検査 | `not assignable to type 'ConvertedBlock'` |
-| **`habitat` の綴り違い** | 型検査 | `not assignable to type 'CountableHabitat｜EscapingHabitat｜undefined'`（候補付き） |
-| **可算 `habitat` なのに `realEscape` を書く** | 型検査＋実行時 | `not assignable to type 'ConvertedBlock'` |
+| **`habitat` の綴り違い** | 型検査 | `not assignable to type 'CountableHabitat｜EscapingHabitat'`（候補付き） |
+| **可算 `habitat` なのに `realEscape` を書く** | 型検査＋実行時 | `Type 'string' is not assignable to type 'undefined'`（可算側は `realEscape?: never`） |
 | **非可算 `habitat`（`R`/`C`/`mixed`）なのに `realEscape` が無い** | 型検査＋実行時 | 同上 |
-| **見出しに `habitat` を書く** | 型検査＋実行時 | `not assignable to type 'CountableHabitat｜…｜undefined'` |
+| **見出しに `habitat` を書く** | 型検査＋実行時 | `Type 'string' is not assignable to type 'undefined'` |
 | **`verification` / `lean` が文字列の配列でない** | 型検査＋実行時 | `not assignable to type 'readonly string[]'` |
 
-上表の診断はすべて `node tools/negative-type-test.ts`（26 ケース）が**実際に tsc を落として**
-確認したものである。各ケースは対で回す（正しい版が通ること／壊した版が落ちて期待する診断が出ること）ので、
+上表のうち**太字の行（本プロジェクト固有メタデータの型強制）**は
+`node tools/negative-type-test.ts`（9 ケース）が**実際に tsc を落として**確認している。
+各ケースは対で回す（正しい版が通ること／壊した版が落ちて期待する診断が出ること）ので、
 「型検査は通っているが実は何も検出していない」状態と区別できる。
+**太字でない行（入力言語一般）はシステム側の負テストが持つ**ので、ここには複製していない。
 回帰テストは `type-tests/label-typing.test-d.ts`（`@ts-expect-error` の並び）と
-`tools/schema-runtime-test.ts`（型を回避した値を実行時検証が拒むこと。18 ケース）。
+`tools/schema-runtime-test.ts`（型を回避した値を具体化した実行時スキーマが拒むこと。13 ケース）。
 
 **型が守るのは参照側**である点に注意する。`Label` はブロックの `labels` から生成されるので、
 ラベル自体の綴り間違いは、再生成した時点で「実在するラベル」として正当化される。
@@ -119,12 +118,11 @@ README（`integrable-lattice/README.md`）とリポジトリ直下 CLAUDE.md の
    （または `"R"` / `"C"`）にして `realEscape` を書くことである。
 3. **`verification` が指す SageMath 検証ディレクトリの実在。** 型システムはファイルシステムを
    読めない。実在しないパスを黙って通すと、証明↔数値検証の対応が切れたまま「紐づいている」ように見える。
-4. **生成物とディレクトリの実状の一致**（`node tools/generate-index.ts --check`）。
+4. **生成物とディレクトリの実状の一致**（`npm run check:generated`）。
    ディレクトリに増えたファイルが生成物の列挙から漏れていることは型では検出できない。
 
-より詳しい根拠（なぜ型で書けないかの実測）は Ising 側の
-[docs/type-coverage.md](../../exact-solution-of-2d-ising-model/docs/type-coverage.md) を参照する。
-基盤の土台が同じなので、そこの議論はこのプロジェクトにもそのまま当てはまる
+より詳しい根拠（なぜ型で書けないかの実測）はシステムの
+[docs/type-coverage.md](../../structured-latex/docs/type-coverage.md) を参照する
 （`habitat` / `realEscape` の追加分は、上の表とこの節が本プロジェクト側の記録である）。
 
 ## `verify-no-lost-proofs.ts` を移植していない理由
@@ -138,22 +136,22 @@ TODO のままである」移行漏れを検出するツールである。本プ
   **定理・定義・主張・証明を 1 つも含まない。**
 - 旧 `parts/` は空ディレクトリだった（`.gitkeep` のみ）。
 
-将来 Typst 原本から移行する対象が生じたら、Ising 側の実装を複製して有効化すること
-（そのときは `sourcePath` の実在検査も一緒に入る）。
+将来 Typst 原本から移行する対象が生じたら、Ising 側の実装を参考に有効化すること
+（そのときは `origin.path` の実在検査も一緒に入る）。
 
 ## ソース形式は TypeScript に統一する
 
 `schema` / `content` / `notes` / `tools` はすべて `.ts` である。**`.mjs` は使わない**
-（書き方が 2 種類あると、片方が型検査の網から漏れる）。`content/` `notes/` に `.mjs` が現れたら
-`tools/content-modules.ts` がエラーで落とす。
+（書き方が 2 種類あると、片方が型検査の網から漏れる）。
 
 ## Model
 
-- 正本は TypeScript のオブジェクトデータ。`schema.ts` の型（コンパイル時）と
-  同ファイルの検証関数（実行時）の二重で守る。
+- 正本は TypeScript のオブジェクトデータ。システムの型（コンパイル時）と
+  システムの実行時スキーマ（`createRuntimeSchema`。Result を返す）の二重で守る。
 - 数式は KaTeX へ渡す LaTeX 文字列として持つ。
 - **配列の並びが文書順の正準表現**（`content/*.ts` をファイル名昇順に並べ、各ファイル内は配列順）。
-  `sourceOrdinal` は文書順ではなく、そのソースファイル内の通し番号である。
+  由来は `origin: { path, ordinal }`（任意）。`ordinal` は文書順ではなく、
+  そのソースファイル内の通し番号にすぎない。
 
 ### ブロックの種類
 
@@ -173,16 +171,17 @@ TODO のままである」移行漏れを検出するツールである。本プ
 
 ## ファイル
 
-- `schema.ts` — 型 + 実行時検証の正本（`defineBlocks` / `defineNotes` とノード生成ヘルパ）。
+- `schema.ts` — システムのファクトリを本プロジェクトのラベルと固有メタデータで具体化し、
+  再エクスポートするだけの薄いモジュール（`defineBlocks` / `defineNotes` / `ref` / `runtimeSchema`）。
 - `labels.generated.ts` — 自動生成。実在ラベルのユニオン型 `Label`（直接編集しない）。
 - `document.generated.ts` — 自動生成。全 content / notes を連結し、ファイル跨ぎの一意性を型で主張する。
-- `tools/generate-index.ts` — 生成物 2 種を作る（`--check` で鮮度検査のみ）。
-- `tools/content-modules.ts` — `content/` `notes/` の読み込み（ファイル名昇順＝文書順）。
+- `tools/content-modules.ts` — `content/` `notes/` の読み込み（システムの実装へ委譲）。
+- `tools/codemod-origin.ts` — 由来フィールドをシステムの `origin` へ移すコードモッド（冪等。適用済み）。
 - `tools/validate-content.ts` — 実行時検証（Typst 記法・可算/非可算の食い違い・`verification` の実在ほか）。
-- `tools/negative-type-test.ts` — 「誤った入力は tsc が拒否する」ことの実証テスト（26 ケース）。
-- `tools/schema-runtime-test.ts` — 実行時検証のテスト（18 ケース）。
+- `tools/negative-type-test.ts` — 固有メタデータの型強制の実証テスト（9 ケース）。
+- `tools/schema-runtime-test.ts` — 具体化した実行時スキーマのテスト（13 ケース）。
 - `type-tests/label-typing.test-d.ts` — `@ts-expect-error` による型の回帰テスト。
-- `content/` — 証明ブロック群（出版物の本体）。いまは足場のみ。
+- `content/` — 証明ブロック群（出版物の本体）。
 - `notes/` — 参照用ノート（ラベルで紐づく。最終成果物には載らない）。
 - `logs/` — 検証コマンドの実行ログ。
 
@@ -201,14 +200,13 @@ npm run check   # 生成物の鮮度 → 型検査 → 実行時検証 → 負�
 個別に回す場合（プロジェクトディレクトリから）:
 
 ```sh
-node structured-latex/tools/generate-index.ts    # 生成物（ラベル型・集約モジュール）を再生成
+npm run gen                                      # 生成物（ラベル型・集約モジュール）を再生成
 node structured-latex/tools/validate-content.ts  # 実行時検証
 ```
 
-ラベル・ブロックを増減したら `node tools/generate-index.ts` で生成物を作り直す
+ラベル・ブロックを増減したら `npm run gen` で生成物を作り直す
 （忘れると型検査が落ちるので、取りこぼしにはならない）。
 Node は 22.18 以降が必要（`.ts` を型ストリップで直接実行するため）。
 
-なお `tsconfig.json` の `include` に Ising 側のような `../sagemath/tools` は入れていない。
-本プロジェクトの `sagemath/` にはまだ `tools/` が無いためである
-（証明↔数値検証の対応検査を入れるときは、`verification` フィールドを情報源にできる）。
+証明↔数値検証の対応検査は `node sagemath/tools/verify-check-linkage.ts` が別に持つ
+（`verification` / `lean` フィールドを情報源にする）。

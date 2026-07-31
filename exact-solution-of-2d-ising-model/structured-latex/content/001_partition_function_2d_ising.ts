@@ -5,17 +5,14 @@ export default defineBlocks([
     id: "heading_partition_function_2d_ising",
     kind: "heading",
     level: 2,
-    sourcePath: "_old/typst/main.typ",
-    sourceOrdinal: 2,
+    origin: { path: "_old/typst/main.typ", ordinal: 2 },
     title: { text: "2次元ising模型の分配関数" },
     labels: [],
-    conversion: { status: "converted" },
   },
   {
     id: "partition_function_2d_ising_001_definition_lattice_size",
     kind: "definition",
-    sourcePath: "_old/typst/parts/001_2次元ising模型の分配関数/000_definition_格子サイズ.typ",
-    sourceOrdinal: 1,
+    origin: { path: "_old/typst/parts/001_2次元ising模型の分配関数/000_definition_格子サイズ.typ", ordinal: 1 },
     title: { text: "格子サイズ" },
     labels: [],
     statement: [
@@ -26,8 +23,10 @@ export default defineBlocks([
   {
     id: "partition_function_2d_ising_002_definition_partition_function",
     kind: "definition",
-    sourcePath: "_old/typst/parts/001_2次元ising模型の分配関数/001_definition_2次元ising模型の分配関数.typ",
-    sourceOrdinal: 2,
+    origin: {
+      path: "_old/typst/parts/001_2次元ising模型の分配関数/001_definition_2次元ising模型の分配関数.typ",
+      ordinal: 2,
+    },
     title: { text: "2次元ising模型の分配関数" },
     labels: ["def_partition_function_2d_ising"],
     statement: [
@@ -86,8 +85,7 @@ export default defineBlocks([
   {
     id: "partition_function_2d_ising_003_definition_transfer_matrix",
     kind: "definition",
-    sourcePath: "_old/typst/parts/001_2次元ising模型の分配関数/002_definition_転送行列.typ",
-    sourceOrdinal: 3,
+    origin: { path: "_old/typst/parts/001_2次元ising模型の分配関数/002_definition_転送行列.typ", ordinal: 3 },
     title: { text: "転送行列" },
     labels: ["def_transfer_matrix"],
     statement: [
@@ -173,8 +171,10 @@ export default defineBlocks([
   {
     id: "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
     kind: "claim",
-    sourcePath: "_old/typst/parts/001_2次元ising模型の分配関数/003_claim_転送行列による分配関数の表式.typ",
-    sourceOrdinal: 4,
+    origin: {
+      path: "_old/typst/parts/001_2次元ising模型の分配関数/003_claim_転送行列による分配関数の表式.typ",
+      ordinal: 4,
+    },
     title: { text: "転送行列による分配関数の表式" },
     labels: ["partition_function_via_transfer_matrix"],
     statement: [

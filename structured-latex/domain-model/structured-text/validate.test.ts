@@ -122,6 +122,31 @@ test('宣言したメタデータのキーだけが許可キーに加わる', ()
   )
 })
 
+test('語彙を所有しない読み手は、未知のメタデータを落とさずに通せる', () => {
+  const reader = createRuntimeSchema({ unknownBlockMeta: 'passthrough' })
+  const block = {
+    id: 'b1',
+    kind: 'claim',
+    labels: [],
+    statement: [],
+    habitat: 'countable',
+    lean: ['Foo.bar'],
+  }
+  const result = reader.validateBlock(block, 'fixture')
+  assert.equal(result.success, true)
+  // **通すだけでなく、値を保つこと**が要件。strip されるとメタデータが黙って消える。
+  assert.deepEqual(result.success ? result.data : null, block)
+
+  // 見出しと図表はメタデータを持てない設計なので、passthrough でも拒否したまま。
+  assert.equal(
+    reader.validateBlock(
+      { id: 'h1', kind: 'heading', level: 1, labels: [], title: { text: '章' }, habitat: 'x' },
+      'fixture',
+    ).success,
+    false,
+  )
+})
+
 test('エラーは 1 件目で止めずに全件返す', () => {
   const result = schema.validateBlocks(
     [
