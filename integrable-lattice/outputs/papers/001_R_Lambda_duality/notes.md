@@ -78,10 +78,17 @@
 
 ## 投稿前に必ずやること（単独タスクとして残す）
 
-- **Monsky, *Fine estimates for the growth of e_n in Z_p^d-extensions*, ASPM 17 (1989), 309–330 の本文を読む。**
-  Project Euclid が購読制限で取得できず**本文未確認**のまま。Wan arXiv:1712.02906 Thm 1.2 の引用形では
-  p^{(d−1)n} の係数に定数が入っており、**本論文の μ_1 の明示式に対応する結果が含まれている可能性がある**。
-  含まれていれば命題 W の位置づけ（μ_1 の明示式は文献に無い）を書き換える必要がある。
+- ~~**Monsky, *Fine estimates for the growth of e_n in Z_p^d-extensions*, ASPM 17 (1989), 309–330 の本文を読む。**~~
+  → **2026-07-31（cycle 18 step 4）に本文を取得して読み、閉じた。** Project Euclid の当該章は
+  **Open Access** であり、購読・課金・ログイン・メール依頼のいずれも不要だった
+  （cycle 17 が「購読制限」と書いたのは誤りで、実際に返ってきていたのは Incapsula のボット遮断ページだった）。
+  **結論: μ_1 に対応する定数 α\* の明示式は Monsky 1989 に無い。** Theorem 3.13 は存在と、d = 2 のときの
+  有理性しか主張しない。Monsky 自身が Introduction で「α\* には easy な記述が無く、常に有理数かどうかも
+  分からない」と書いている。明示的に同定されている係数は p^{dn} の m_0 と n·p^{(d−1)n} の ℓ_0 の 2 つだけ
+  （Theorem 1.20）。独立な二次確認として Tateno–Ueki（arXiv:2401.03258, JLMS 2025）Theorem 2.3 が
+  同じ定数を μ_1 と呼んで「μ_1 ∈ ℝ が存在、d = 2 なら μ_1 ∈ ℚ」とだけ引用している。
+  したがって**命題 W は既出にならず**、むしろ Monsky の「d = 2 なら有理数」に対して本論文が
+  ある族でその値を与えている、という関係になる。根拠 `outputs/reports/cycle18_T1_monsky1989_acquisition.md`。
 - ~~**Monsky / Cuoco–Monsky の原論文本文は未取得。**~~
   → **2026-07-31（cycle 16 step 1）に取得・確認して閉じた。** GDZ（Göttinger Digitalisierungszentrum）の
   IIIF で Math. Ann. 255 (1981) のページ画像を直読した（DigiZeitschriften は 2025-12-31 終了、EuDML は 403）。
