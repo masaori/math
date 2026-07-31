@@ -28,6 +28,7 @@ import blocks_006_propositions_TVW from './content/006_propositions_TVW.ts'
 import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
 import blocks_008_theta_padic from './content/008_theta_padic.ts'
 import blocks_009_s_infinity_decision from './content/009_s_infinity_decision.ts'
+import blocks_009_theta_recursion from './content/009_theta_recursion.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -42,6 +43,7 @@ export type AllBlocks = [
   ...typeof blocks_007_asymmetry_scope,
   ...typeof blocks_008_theta_padic,
   ...typeof blocks_009_s_infinity_decision,
+  ...typeof blocks_009_theta_recursion,
 ]
 
 /** 全ノート。 */
