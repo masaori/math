@@ -170,6 +170,15 @@ export default defineBlocks([
         \qquad(\text{the max is over those }\delta\text{ with }\delta_1a+\delta_2b\neq0),`,
       ),
       paragraph([
+        "(If there is no such ",
+        math(String.raw`\delta`),
+        " at all, then ",
+        math(String.raw`|\mathcal{G}|\le1`),
+        " and hence ",
+        math(String.raw`\theta(a,b)=0`),
+        ", so no maximum has to be taken.)",
+      ]),
+      paragraph([
         "In other words, ",
         math(String.raw`\theta`),
         " grows only when ",

@@ -66,6 +66,7 @@ export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {
   paper_052_theorem_l0_computable: INTERNAL_PATH_REMOVED,
   paper_053_theorem_lower_order: INTERNAL_PATH_REMOVED,
   paper_055_theorem_theta_infinity: JAPANESE_IN_TEXT_MACRO + " 加えて、" + INTERNAL_PATH_REMOVED,
+  paper_056_theorem_ell2_family: JAPANESE_IN_TEXT_MACRO,
   paper_082_remark_formalization: INTERNAL_PATH_REMOVED,
   paper_101_theorem_s_infinity_decision: JAPANESE_IN_TEXT_MACRO_REORDERED,
   paper_101_theorem_digit_branch: JAPANESE_IN_TEXT_MACRO_REORDERED,

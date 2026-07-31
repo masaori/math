@@ -143,6 +143,15 @@ export default defineBlocks([
         \qquad(\text{max は }\delta_1a+\delta_2b\neq0\text{ なる }\delta\text{ 上}),`,
       ),
       paragraph([
+        "が成り立つ（そのような ",
+        math(String.raw`\delta`),
+        " が 1 つも無ければ ",
+        math(String.raw`|\mathcal{G}|\le1`),
+        " なので ",
+        math(String.raw`\theta(a,b)=0`),
+        " であり、この場合は max を取る必要がない）。",
+      ]),
+      paragraph([
         "すなわち ",
         math(String.raw`\theta`),
         " は ",

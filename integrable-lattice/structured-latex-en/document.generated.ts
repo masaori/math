@@ -25,6 +25,7 @@ import blocks_003_archimedean from './content/003_archimedean.ts'
 import blocks_004_lambda_finite from './content/004_lambda_finite.ts'
 import blocks_005_duality from './content/005_duality.ts'
 import blocks_005b_theta_infinity from './content/005b_theta_infinity.ts'
+import blocks_005c_ell2_family from './content/005c_ell2_family.ts'
 import blocks_006_propositions_TVW from './content/006_propositions_TVW.ts'
 import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
 import blocks_008_theta_padic from './content/008_theta_padic.ts'
@@ -42,6 +43,7 @@ export type AllBlocks = [
   ...typeof blocks_004_lambda_finite,
   ...typeof blocks_005_duality,
   ...typeof blocks_005b_theta_infinity,
+  ...typeof blocks_005c_ell2_family,
   ...typeof blocks_006_propositions_TVW,
   ...typeof blocks_007_asymmetry_scope,
   ...typeof blocks_008_theta_padic,
