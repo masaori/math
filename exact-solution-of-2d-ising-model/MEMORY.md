@@ -1,5 +1,33 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-31）: **Lean の「具体版＋抽象版」2 本立てで抽象版が無かった 3 主張を解消**
+
+過去の MEMORY が「残り（抽象版が無い）」として挙げていた 3 主張——
+**Z,Y が全行列環を生成 / テンソル冪の基底 / 共役写像が環準同型**——に抽象版を追加し、
+具体版を抽象版の系として導出した（README 4 節の規約どおり、**既存の具体版ファイルは一切編集していない**）。
+これで当該リストは空になった。
+
+| 人手証明のラベル | 追加した抽象版 | 具体版の導出 | 抽象版で分かった「効いているもの」 |
+|---|---|---|---|
+| `<Z_Y_generate_algebra>` | `Abstract/GeneratedByBasis.lean` | `Part004/Claim014_ZYGenerateAlgebraAbstract.lean`（`Z_Y_generate_algebra_of_abstract`） | Step 3 は「部分多元環が基底を全部含めば全体」＋「有限添字の直積モノイドからの**モノイド準同型**」だけ（`Subalgebra` ですらなく部分モノイドで足りる）。Step 2 の Jordan–Wigner 帰納法に効くのは**漸化式と「局所元 = 文字列 × 生成元」という分解の形だけ**で、`P_m P_m = I`（対合性）も係数 `-√-1` の値も反交換関係も使わない。複素 2×2 が本質的なのは 1 サイトの基底分解と行列単位のテンソル分解の 2 箇所のみ |
+| `<tensor_basis>` | `Abstract/TensorPowerBasis.lean` | `Part002/Theorem000_TensorBasisAbstract.lean` | **因子が全部同じである必要が無い**（テンソル冪は特殊化）。係数は任意の可換半環でよく、体であること・有限次元であること・基底の添字集合が有限であることは効かない。**本文が実際に使う「`E_{IJ}` の族が基底」にはテンソル積が要らない**（「行列単位が基底」＋「基底は線型同型で移せる」の 2 つで足り、`matrixUnitBasis = Abstract.matrixUnitBasis ℂ (Conf M)` は `rfl`） |
+| `<conjugation_is_ring_homomorphism>` | `Abstract/Conjugation.lean` | `Part000/Claim045_ConjugationIsRingHomAbstract.lean` | (1) 乗法性・(2) 単位性・(3) 合成則に**環は要らずモノイドで足りる**。分配法則が要るのは加法性だけで、しかも加法性は**可逆性を一切使わない**。合成則は群準同型 `Mˣ →* MulAut M`（半環版 `Rˣ →* RingAut R`）の `map_mul` 1 本に集約。**乗法性は左逆元 `u*b=1` だけ、単位性は右逆元 `b*u=1` だけ**しか使っておらず、片側では足りないことを `Function.End ℕ` の反例で Lean 上で証明した（行列環では片側逆元が両側になるため、行列を離れて初めて見える分離） |
+
+**いずれも具体版が過剰な構造を要求している箇所は見つからなかった。**
+
+記録: `lean/docs/abstract-zy-generate.md` / `lean/docs/abstract-tensor-basis.md` /
+`lean/docs/abstract-conjugation.md`。
+
+**検証（統合後の最終状態で実行）**: `lake build` 成功（2994 jobs）、
+`bash lean/scripts/check-no-sorry.sh` exit 0（**1301 宣言**がすべて mathlib 標準の 3 公理
+`propext` / `Classical.choice` / `Quot.sound` のみに依存、`sorry`/`admit` ゼロ）、
+`(cd structured-latex && npm run check)` exit 0。
+なお `npm run check` は Node 22.18 以降が必要（このマシンの既定 `v22.8.0` では TypeScript を
+直接実行できず落ちる。`~/.nvm/versions/node/v22.22.3/bin` を PATH 前置して実行した）。
+
+**残作業**: README 8 節の「Lean の 2 本立てに整える」観点で、抽象版が無い主張は他にも残りうる。
+本セッションで解消したのは MEMORY に明示されていた上記 3 件である。
+
 ## 完了（2026-07-31）: 救済PR #24 の残余を数値検証へ統合（行列ノルム 12x/13x 帯）
 
 放棄ブランチ `worktree-indexed-singing-blum`（PR #24）から、main に無い検証だけを抜き出して統合した。
