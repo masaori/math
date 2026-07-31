@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "paper_positioning",
+  "paper_prop_G_infty",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

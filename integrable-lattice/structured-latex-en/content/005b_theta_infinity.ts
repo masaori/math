@@ -1,0 +1,261 @@
+/**
+ * 論文本体 第 5 章の続き（英語版）: 命題 G'（消滅深度が無限大になる方向と、その族の閉形式）。
+ *
+ * **正本は日本語版 `../../structured-latex/content/005b_theta_infinity.ts` である。**
+ * ブロック id・`labels`・`habitat`・`verification`・`kind`・`proof` の有無、および**数式**は
+ * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
+ *
+ * ## 統合時に戻す必要がある相互参照（重要）
+ *
+ * 日本語版はこのブロックで `ref("paper_prop_G")` を 3 回、`ref("paper_prop_W")` を 2 回使う。
+ * **英語版にはまだその 2 ラベルを持つブロック（`005_duality.ts` / `006_propositions_TVW.ts` の英訳）が
+ * 無いため、`ref()` を書くと型検査と `validate` が落ちる。** そこで暫定的に地の文の
+ * "Proposition G" / "Proposition W" に落としてある。該当箇所は下に `TODO(integration)` を付けた。
+ * 両ファイルの英訳が入ったら `ref()` へ戻すこと（`\cref` の採番が復活する）。
+ *
+ * ## 呼び出し元へ委ねた事項
+ *
+ * (1) 数式ノードに日本語が残っている箇所が 2 つある（`\text{は原始}` … と
+ *     `\sum_{\text{例外直線}}`）。**数式は変更してはならない**ので日本語のまま置いた。
+ *     英語版は和文フォントを読まないので `build:pdf` はここで落ちる。
+ *     `tools/ja-en-exceptions.ts` へ理由つきで登録したうえで英訳する必要がある。
+ * (2) 末尾の `\texttt{outputs/reports/...}` はリポジトリ内部パスだが数式ノードなので触っていない。
+ */
+
+import { defineBlocks, displayMath, math, paragraph } from "../schema.ts";
+
+export default defineBlocks([
+  {
+    id: "paper_055_theorem_theta_infinity",
+    kind: "theorem",
+    origin: { path: "structured-latex-en/content/005b_theta_infinity.ts", ordinal: 1 },
+    title: {
+      text:
+        "Proposition G' — directions of infinite vanishing depth, the stagewise treatment, " +
+        "and a type III family for every odd prime",
+    },
+    labels: ["paper_prop_G_infty"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/cycle19_T3_theta_infinity"],
+    statement: [
+      paragraph([
+        // TODO(integration): 日本語版はここが ref("paper_prop_G")。英訳が揃ったら戻す。
+        "In the setting of Proposition G, define the vanishing depth by ",
+        math(String.raw`\theta(a,b)=\mathrm{ord}_{x=0}\overline{\Phi_{(a,b)}}`),
+        ", where ",
+        math(String.raw`\Phi_{(a,b)}(x)=\tilde E((1+x)^a,(1+x)^b)\in\mathbb{Z}[x]`),
+        ". The closed form of ",
+        // TODO(integration): 日本語版はここが ref("paper_prop_G")。英訳が揃ったら戻す。
+        "Proposition G",
+        " assumes ",
+        math(String.raw`\theta(P)\le\ell`),
+        " in every direction, and the strongest way in which that assumption can fail is ",
+        math(String.raw`\theta=\infty`),
+        ", that is, the case in which ",
+        math(String.raw`\bar E`),
+        " vanishes identically on the one-parameter subgroup ",
+        math(String.raw`y\mapsto(y^a,y^b)`),
+        ".",
+      ]),
+      paragraph([
+        "**(G'1 The locus of infinite vanishing depth)** Let ",
+        math(String.raw`u=(a,b)\in\mathbb{Z}^2`),
+        " be a primitive vector, and write ",
+        math(String.raw`u^\perp=(b,-a)`),
+        " and ",
+        math(String.raw`\chi^{(p,q)}=z^pw^q`),
+        ". Then",
+      ]),
+      displayMath(
+        String.raw`\theta(u)=\infty\iff\bigl(\chi^{u^\perp}-1\bigr)\ \bigm|\ \bar{\tilde E}
+        \quad\text{in }\mathbb{F}_\ell[z^{\pm1},w^{\pm1}].`,
+      ),
+      paragraph([
+        "Moreover, by the Minkowski decomposition of Newton polytopes (",
+        math(String.raw`\mathrm{Newt}(fg)=\mathrm{Newt}(f)+\mathrm{Newt}(g)`),
+        "), the directions of such ",
+        math(String.raw`u^\perp`),
+        " are confined to the edge directions of ",
+        math(String.raw`\mathrm{Newt}(\bar{\tilde E})`),
+        ". Hence ",
+        math(String.raw`\{\theta=\infty\}`),
+        " is a **union of finitely many lines through the origin**, and the whole of it is determined ",
+        "by a finite computation from the coefficients of ",
+        math(String.raw`D`),
+        " (neither the values of the tower nor any cyclotomic field enter).",
+      ]),
+      paragraph([
+        "**(G'2 Pointwise valuations by the stagewise treatment)** Put ",
+        math(String.raw`\lambda(a,b):=v_\ell(\mathrm{content}\,\Phi_{(a,b)})`),
+        ", ",
+        math(String.raw`\Psi:=\ell^{-\lambda}\Phi_{(a,b)}=\sum_mB_mx^m`),
+        ", ",
+        math(String.raw`\theta^*:=\min\{m:\ell\nmid B_m\}`),
+        " and ",
+        math(String.raw`m_1:=\min\{m<\theta^*:B_m\neq0\}`),
+        ". Then ",
+        math(String.raw`\theta=\infty\iff\lambda\ge1`),
+        ", and **dividing out the content just once always yields** ",
+        math(String.raw`\theta^*<\infty`),
+        " (no iteration is required). If ",
+        math(String.raw`\theta^*-m_1<\varphi(\ell^M)`),
+        ", then",
+      ]),
+      displayMath(
+        String.raw`v_\ell\bigl(E(\zeta,\xi)\bigr)=\lambda+\frac{\theta^*}{\varphi(\ell^M)}
+        \qquad(\zeta=g^a,\ \xi=g^b,\ g\ \text{は原始}\ \ell^M\ \text{乗根}).`,
+      ),
+      paragraph([
+        "Here ",
+        math(String.raw`\lambda,\theta^*,m_1`),
+        " are functions **not of the point** ",
+        math(String.raw`(\zeta,\xi)`),
+        " **but of the integer vector** ",
+        math(String.raw`(a,b)`),
+        ", and a different representative of the same point can give different values. The identity ",
+        "above is therefore used in the form: apply it at a representative for which the hypothesis ",
+        "holds. Among the points of a direction ",
+        math(String.raw`P`),
+        " of exact level ",
+        math(String.raw`M`),
+        ", which number ",
+        math(String.raw`(\ell-1)\ell^{2M-2}`),
+        ", those that admit a representative lying on the line ",
+        math(String.raw`\mathbb{Z}u`),
+        " number exactly ",
+        math(String.raw`\varphi(\ell^M)`),
+        " (a proportion of ",
+        math(String.raw`\ell^{1-M}`),
+        "). This is the precise content of the statement that points with ",
+        math(String.raw`\theta=\infty`),
+        " and points of finite depth live side by side in one and the same direction.",
+      ]),
+      paragraph([
+        "Moreover, the contribution of the points on the line ",
+        math(String.raw`\mathbb{Z}u`),
+        " to ",
+        math(String.raw`\Sigma_n`),
+        " is ",
+        math(String.raw`\lambda(\ell^n-1)+n\theta^*`),
+        ", and this **produces no** ",
+        math(String.raw`n\ell^n`),
+        " **term**.",
+      ]),
+      paragraph([
+        "**(G'3 A type III family for every odd prime)** Let ",
+        math(String.raw`\ell`),
+        " be an odd prime, and let ",
+        math(String.raw`X`),
+        " be the bouquet on a single vertex carrying ",
+        math(String.raw`p`),
+        " loops of voltage ",
+        math(String.raw`(1,0)`),
+        " and ",
+        math(String.raw`q`),
+        " loops of voltage ",
+        math(String.raw`(0,1)`),
+        ". Put ",
+        math(String.raw`\mu=v_\ell(\gcd(p,q))`),
+        ", ",
+        math(String.raw`p'=p/\ell^\mu`),
+        " and ",
+        math(String.raw`q'=q/\ell^\mu`),
+        ". Then ",
+        math(String.raw`\theta=\infty`),
+        " occurs precisely when ",
+        math(String.raw`\ell\mid p'q'(p'+q')`),
+        ", and the exceptional lines are as follows: if ",
+        math(String.raw`\ell\mid p'+q'`),
+        ", there are two of them, ",
+        math(String.raw`\mathbb{Z}(1,1),\mathbb{Z}(1,-1)`),
+        " (each with ",
+        math(String.raw`\lambda=v_\ell(p'+q')`),
+        "); if ",
+        math(String.raw`\ell\mid p'`),
+        ", there is one, ",
+        math(String.raw`\mathbb{Z}(1,0)`),
+        " (with ",
+        math(String.raw`\lambda=v_\ell(p')`),
+        "); and if ",
+        math(String.raw`\ell\mid q'`),
+        ", there is one, ",
+        math(String.raw`\mathbb{Z}(0,1)`),
+        " (with ",
+        math(String.raw`\lambda=v_\ell(q')`),
+        "). Set ",
+        math(String.raw`\Lambda:=\sum_{\text{例外直線}}\lambda`),
+        ", the sum of ",
+        "the above exponents over the exceptional lines; this symbol is local to the present ",
+        "proposition and is unrelated to the logarithmic ordered group of the introduction. Then, ",
+        "whenever an exceptional line is present, **for all** ",
+        math(String.raw`n\ge0`),
+      ]),
+      displayMath(
+        String.raw`\mathrm{ord}_\ell(\kappa_n)=\mu\,(\ell^{2n}-1)+2\,n\,\ell^{n}+\Lambda\,(\ell^{n}-1).`,
+      ),
+      paragraph([
+        "That is, the five coefficients of ",
+        // TODO(integration): 日本語版はここが ref("paper_prop_W")。英訳が揃ったら戻す。
+        "Proposition W",
+        " are ",
+        math(String.raw`a=\mu,\ b=2,\ c=\Lambda,\ d=0,\ e=-\mu-\Lambda`),
+        ", with ",
+        math(String.raw`n_0=0`),
+        ". Since ",
+        math(String.raw`b=2\neq0`),
+        ", **this tower is of type III**, that is, it carries an ",
+        math(String.raw`n\ell^n`),
+        " **term, and for every odd prime** ",
+        math(String.raw`\ell`),
+        " **this is realised by infinitely many pairs** ",
+        math(String.raw`(p,q)`),
+        ". The ",
+        math(String.raw`n\ell^n`),
+        " term does not come from the points with ",
+        math(String.raw`\theta=\infty`),
+        " themselves — the contribution formula above shows that it cannot — but from the ",
+        "accumulation of the points in their ",
+        math(String.raw`\ell`),
+        "-adic neighbourhood at which ",
+        math(String.raw`\theta`),
+        " grows geometrically deep.",
+      ]),
+      paragraph([
+        "**This family is completely solved when** ",
+        math(String.raw`\ell`),
+        " **is odd**: if the tower is non-degenerate, by ",
+        // TODO(integration): 日本語版はここが ref("paper_prop_W")。英訳が揃ったら戻す。
+        "Proposition W",
+        "; if it is degenerate and has no exceptional line, then ",
+        math(String.raw`\theta(P)=4\le\ell`),
+        " in every degenerate direction, so that ",
+        // TODO(integration): 日本語版はここが ref("paper_prop_G")。英訳が揃ったら戻す。
+        "Proposition G",
+        " (G6) applies; and if it has an exceptional line, by the formula above. For ",
+        math(String.raw`\ell=3`),
+        " the intermediate case is empty.",
+      ]),
+      paragraph([
+        "**The limits of the scope (stated explicitly, so as not to overstate).** The formula ",
+        math(String.raw`\mu(\ell^{2n}-1)+k\,n\ell^n+\Lambda(\ell^n-1)+v_\ell(\kappa_X)`),
+        ", obtained by naively extending the shape of the closed form above to a general tower ",
+        "with exceptional lines, is **false**. A counterexample is ",
+        math(String.raw`\ell=3`),
+        " with voltages ",
+        math(String.raw`(1,0),(1,-1),(1,2)`),
+        ", where the measured values are ",
+        math(String.raw`0,10,50`),
+        " while the right-hand side gives ",
+        math(String.raw`0,8,44`),
+        ". For a general tower we have obtained no method for determining the contribution of the ",
+        "**neighbourhood** of an exceptional line. Moreover, for ",
+        math(String.raw`\ell=2`),
+        " the proof of (G'3) does not go through, since 2 is then not a unit. The details are in the ",
+        "supporting report ",
+        math(String.raw`\texttt{outputs/reports/cycle19\_T3\_theta\_infinity.md}`),
+        ". **We claim no novelty.**",
+      ]),
+    ],
+  },
+]);

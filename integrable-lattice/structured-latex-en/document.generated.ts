@@ -19,11 +19,13 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { Label } from './labels.generated.ts'
 import blocks_001_intro from './content/001_intro.ts'
+import blocks_005b_theta_infinity from './content/005b_theta_infinity.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_001_intro,
+  ...typeof blocks_005b_theta_infinity,
 ]
 
 /** 全ノート。 */
