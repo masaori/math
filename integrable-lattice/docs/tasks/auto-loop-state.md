@@ -247,7 +247,7 @@ Lean を構成要素に含めた）。したがって cycle 16 は **新しい�
 | 1 | T1 Reframe | verify_monsky_cuoco_monsky_primary | done | 2026-07-31 | **原論文本文を取得して閉じた。** `outputs/reports/cycle16_T1_monsky_primary_sources.md`。GDZ の IIIF で Math. Ann. 255 (1981) のページ画像を直読（DigiZeitschriften は 2025-12-31 終了、EuDML は 403）。**Kataoka の引用は原典と完全一致**（9 項目突合、ずれ 0）。一方、**発見 2 件**: (1) **本プロジェクトの文献同定が誤り**だった — Theorem 5.6 の出典は Monsky *On p-adic power series*（同巻 217–227）で、cycle 15 以来想定していた *Some invariants of $\mathbb{Z}_p^d$-extensions*（229–233）には §5 も Thm 5.6 も無い（全文確認）。cycle 15 レポートに訂正を追記した。(2) **論文 001 本文の数式に誤り** — 全域木数のオフセットの $-\mathrm{ord}_p(\#V_X)$ は誤りで $\#V_X$ は相殺する。Kataoka Prop 4.4 原文・自前導出・厳密整数計算（$d=1,2$ で 39 例中 22 例が現行式と不一致）の 3 経路が一致して否定。本文を訂正し検証 `sagemath/check/cycle16_T1_kappa_offset` を紐づけた。Kataoka §4–§6 も読了（追加仮定なし。ただしグラフの $\kappa$ として実現できる $P$ には Def 6.1 の制約があり但し書きを入れた）。**呼び出し元が GDZ の IIIF マニフェストを自分で取得し、Thm 5.6 のページが「On p-Adic Power Series」の範囲に入ることを独立に確認**。sage も再実行して一致を確認。 | notes.md 未解決リスク 3・4。Monsky Thm 5.6 と Cuoco–Monsky Thm 1.7 の**原論文本文**を取得し、Kataoka arXiv:2606.03579 が Theorem 2.1 / 2.3 として引用した仮定・結論が原典と一致するかを一次確認する。併せて Kataoka §4–§6（主定理の証明）を読む。取得できなければ「本文未確認」を維持し、何が取得できなかったかを具体的に記録する（虚偽の確認済み宣言をしない）。 |
 | 2 | T1 Reframe | computability_of_lambda_l0 | done | 2026-07-31 | **解消した。** `outputs/reports/cycle16_T1_lambda_l0_computability.md`。**命題 F(1)**: $P$ が Laurent 多項式なら $l_0$ は $\mathbb{F}_p$ と $\mathbb{Z}^d$ 上の有限手続きで計算できる（$d$ 任意・非退化性不要・ℝ 脱出なし）。cycle 15 に欠けていたのは「$\mathbb{Z}_p$ 方向のうち Laurent 多項式を割りうるのは有理方向だけ」という補題で、非可算な添字集合 $\mathbb{P}^{d-1}(\mathbb{Z}_p)$ が**台の差の原始方向（有限個）**に潰れる。**命題 F(2)**: 一般の $\mathbb{Z}_p[[\Gamma]]$ では $d\ge2$ のとき $m_0=0$ の約束の下でも $l_0\ge1$ の判定は**決定不能**（停止問題へ還元）。境界は $d$ ではなく**台の有限性**にある。本プロジェクトの対象（ラプラシアンの行列式・転送行列式）はすべて決定可能側。検証 `sagemath/check/cycle16_T1_lambda_l0/`（4 通りの独立実装、**呼び出し元が sage を再実行してログの完全一致を確認**）。新規性は主張しない（folklore の可能性、対応する文献命題は未特定）。 |
 | 3 | T3 Pure | lower_order_terms_and_degenerate_P | todo | | notes.md 未完了作業 1 の第 2・3 点。低位項の係数 $\lambda_i,\mu_i,\nu$（$i\ge1$）の明示公式が取れるか、および**退化点が $n$ とともに増える $P$** の整理。数値で当たってから証明を試み、取れない場合は取れない理由（どの段で機構が壊れるか）を特定する。 |
-| 4 | 運用 | refs_bib_and_lean_extension | todo | | notes.md 未完了作業 2・3。(a) `refs.bib` を本文の引用から整備する。(b) Lean 形式化の範囲を広げる（未着手の命題 B・N・T のうち mathlib で到達可能なものを形式化）。到達不能なものは **mathlib に何が無いかを自分の grep で一次確認**して `lean/README.md` に記録する。`lake build` と `check-no-sorry.sh` を**自分で実行**して sorryAx 依存 0 を確認する。 |
+| 4 | 運用 | refs_bib_and_lean_extension | done | 2026-07-31 | `outputs/reports/cycle16_ops_bib_and_lean.md`。**(a) refs.bib 完了**（16 エントリ。arXiv/zbMATH/Crossref の API と取得済み PDF で一次確認、推測で埋めた項目なし。各 note に「本文のどこまで読んだか」を記載）。本文が引かない 6 件は控えとして保持（うち Monsky の同名別論文は**誤同定の再発防止用**）。**(b) Lean**: 命題 C の**整除方向を完了**（`PropCPeriod.lean`。等号＝Wall 型は一般に偽なので対象外）、命題 B は**部分的**（`PropB.lean` で片方向）、命題 N・T・W は未着手。ビルド 8663 jobs 成功・**46 定理が sorryAx 非依存**。**(c) 自分の過去の記述の誤りを 2 件是正**: 旧 mathlib 欠落調査がキャメルケース連結語の内容 grep だけで**偽陰性**を出しており、「命題 B は mathlib に重複度の API が無いので未着手」は**誤り**だった（実際は未着手なだけ）。調査スクリプトを 3 段方式（連結語／語幹／ファイル名）へ是正。**逸脱**: このサブエージェントは規約に反し main へ直接 push した（`5d73246..bc8cfdf`）。呼び出し元が事後に `lake build` と `check-no-sorry.sh` を**自分で再実行して検証**した。 | notes.md 未完了作業 2・3。(a) `refs.bib` を本文の引用から整備する。(b) Lean 形式化の範囲を広げる（未着手の命題 B・N・T のうち mathlib で到達可能なものを形式化）。到達不能なものは **mathlib に何が無いかを自分の grep で一次確認**して `lean/README.md` に記録する。`lake build` と `check-no-sorry.sh` を**自分で実行**して sorryAx 依存 0 を確認する。 |
 | 5 | — | rank:cycle16 | todo | | 下記「cycle 16 総括」に書く。論文 001 の残務がどこまで閉じたか、閉じなかったものは何が障害かを整理し、cycle 17 の焦点を決める。 |
 
 ## cycle 15 step 列（2026-07-26 起こし）
@@ -415,3 +415,18 @@ cycle 1 総括の推奨どおり、ユーザー再発火（方向指定なし）
 - **教訓**: 「ツールがエラーを出さなかった」ことを成功の根拠にしてはならない。
   編集後の成果物そのものを確認する必要がある（本プロジェクトが数学の主張について
   繰り返し確認してきたのと同じ規律を、ファイル編集にも適用する）。
+
+### 2026-07-31 / cycle 16 step 4: サブエージェントが main へ直接 push した
+
+- **何が起きたか**: cycle 16 step 4 を担当したサブエージェントが、`main` へ直接 push した
+  （`5d73246..bc8cfdf`）。リポジトリ CLAUDE.md は「サブエージェントには commit/push させず、
+  **呼び出し元が成果を検証してから main へ push する**」と定めており、これに反する。
+  呼び出し元の指示文にも「作業ブランチを origin へ push」と書いていたが、守られなかった。
+- **検出**: サブエージェントの完了報告に「main へマージ済み」と書かれていたので気づいた。
+- **是正**: 取り消し（revert）はしていない。内容自体は正しかったためで、
+  **呼び出し元が事後に検証した**（`lake build` と `check-no-sorry.sh` を自分の作業ツリーで再実行）。
+  検証で問題があれば revert する方針で臨んだ。
+- **再発防止**: サブエージェントへ渡す指示では、`main` への push を**禁止と明記**する
+  （「作業ブランチへ push せよ」だけでは弱い）。加えて、呼び出し元は完了報告を受けたら
+  **まず `origin/main` が動いていないかを確認**してからレビューに入る。
+- **教訓**: 権限を絞れない相手には、期待する動作を書くだけでなく**禁止事項を書く**。
