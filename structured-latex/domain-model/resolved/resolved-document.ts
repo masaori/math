@@ -9,6 +9,7 @@
 import type {
   BlockKind,
   HeadingLevel,
+  Origin,
   TitleContent,
 } from '../structured-text/block.ts'
 import type {
@@ -42,6 +43,22 @@ export type ResolvedRef = {
   overrideText: string | null
 }
 
+/**
+ * 宛先のラベルが文書内に存在しなかった相互参照。
+ *
+ * **本文から消さずに残す**ための種別である。`resolveTolerantly` だけが作り、
+ * `resolve`（厳格）は 1 件でもあれば文書自体を返さないので、出版物の出力器はこれを受け取らない。
+ * 執筆中の画面は、これを「壊れている箇所」として明示的に描画する（live-preview の要件 F-9）。
+ */
+export type UnresolvedRef = {
+  type: 'unresolvedRef'
+  /** 解決できなかったラベル。 */
+  target: string
+  /** どのブロック（またはノート）の中にあったか。 */
+  fromBlockId: string
+  overrideText: string | null
+}
+
 export type ResolvedNode =
   | TextNode
   | MathNode
@@ -51,10 +68,24 @@ export type ResolvedNode =
   // 引用は文書内の解決対象を持たない（宛先は `.bib`）ので、L1 の形のまま素通しする。
   | CiteNode
   | ResolvedRef
+  | UnresolvedRef
   | { type: 'paragraph'; children: readonly ResolvedNode[] }
   | { type: 'list'; items: readonly (readonly ResolvedNode[])[] }
 
-export type ResolvedHeading = {
+/**
+ * 解決済みブロックが共通して持つ**由来の情報**。
+ *
+ * 体裁の判断には使わない（§8.5 の「意味と体裁を混ぜない」）。
+ * 正本のどこから来たかを画面や診断に出すためだけに運ぶ。
+ */
+type ResolvedProvenance = {
+  /** 正本で宣言されていたラベル（参照の宛先になれる名前）。 */
+  labels: readonly string[]
+  /** 正本での位置。宣言されていなければ null。 */
+  origin: Origin | null
+}
+
+export type ResolvedHeading = ResolvedProvenance & {
   kind: 'heading'
   blockId: string
   level: HeadingLevel
@@ -63,7 +94,7 @@ export type ResolvedHeading = {
   anchor: string
 }
 
-export type ResolvedTheoremLike = {
+export type ResolvedTheoremLike = ResolvedProvenance & {
   kind: Exclude<BlockKind, 'heading' | 'figure'>
   blockId: string
   number: BlockNumber
@@ -78,7 +109,7 @@ export type ResolvedTheoremLike = {
   meta: unknown
 }
 
-export type ResolvedFigure = {
+export type ResolvedFigure = ResolvedProvenance & {
   kind: 'figure'
   blockId: string
   number: BlockNumber
@@ -94,6 +125,13 @@ export type ResolvedNote = {
   title: TitleContent | null
   body: readonly ResolvedNode[]
   anchor: string
+  /**
+   * 正本で宣言されていた紐づけ先のラベル。**解決結果ではなく入力のまま**運ぶ。
+   * どのブロックにも解決しなかった（迷子の）ノートを画面に出すとき、
+   * 「どのラベルを指していたのか」が分からないと直しようがないため。
+   */
+  targets: readonly string[]
+  origin: Origin | null
 }
 
 export type OutlineEntry = {

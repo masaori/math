@@ -5,11 +5,22 @@
  * 文書全体にかかる不変条件（I1 一意性・I2 参照解決・I3 非空）を判定できるのもここだけで、
  * ブロック 1 件やセグメント 1 つでは判定できない（＝集約の境界が文書 1 つである根拠）。
  *
+ * **解決の実装はこのファイルの `resolveTolerantly` 1 つだけである。**
+ * 出力の種類ごとに 2 つの入口を用意するが、両方とも同じ実装を通る:
+ *
+ * | 入口 | 返すもの | 使う側 |
+ * | --- | --- | --- |
+ * | `resolve` | `Result<ResolvedDocument, ResolveError>`（壊れていれば解決済み文書を返さない） | 出版物の生成（未解決参照を含む LaTeX/PDF を出してはならない） |
+ * | `resolveTolerantly` | 解決済み文書 + 診断リスト（壊れていても文書を返す） | 執筆中のプレビュー（壊れた箇所を画面に描き続ける。live-preview の要件 F-9） |
+ *
+ * 以前は後者が無かったため、リアルタイムプレビュー側がラベル解決とノート配置を
+ * 独立に再実装していた（F9 の反復が別の形で残っていた）。それをここへ吸収した。
+ *
  * throw しない。エラーは Result で返す（docs/error-handling-strategy.md §1）。
  */
 
 import { err, ok, type Result } from '../result.ts'
-import type { Block, HeadingLevel, Note, TitleContent } from '../structured-text/block.ts'
+import type { Block, HeadingLevel, Note, Origin, TitleContent } from '../structured-text/block.ts'
 import type { Node } from '../structured-text/node.ts'
 import type { NumberingPolicy } from './numbering.ts'
 import type {
@@ -60,7 +71,37 @@ export type ResolveError =
   | { code: 'unresolved_reference'; references: readonly { fromBlockId: string; target: string }[] }
   | { code: 'orphan_note'; noteIds: readonly string[] }
 
+/**
+ * 解決中に見つかった不備を 1 件ずつ表したもの。
+ *
+ * `ResolveError` が「文書を出力してはならない理由」を集約 1 件で述べるのに対し、
+ * こちらは**捨てずに画面へ出すための素材**なので 1 件ずつ独立に持つ。
+ * `code` は `ResolveError` と同じ語彙にしてあり、両者を突き合わせられる。
+ */
+export type ResolveDiagnostic =
+  | { code: 'duplicate_segment_key'; key: SegmentKey }
+  | { code: 'empty_document' }
+  | { code: 'duplicate_block_id'; blockId: string }
+  | { code: 'duplicate_label'; label: string }
+  | { code: 'duplicate_note_id'; noteId: string }
+  | { code: 'unresolved_reference'; fromBlockId: string; target: string }
+  | { code: 'orphan_note'; noteId: string; targets: readonly string[] }
+
+/** 寛容な解決の結果。**壊れていても文書は必ず返す**。 */
+export type Resolution = {
+  document: ResolvedDocument
+  /**
+   * targets がどのブロックのラベルにも解決しなかったノート。
+   * `document.notesByBlockId` には現れない（置き場所が決まらないため）が、
+   * 黙って捨てると気付けないので、ここに集めて呼び出し側が表示できるようにする。
+   */
+  orphanNotes: readonly ResolvedNote[]
+  diagnostics: readonly ResolveDiagnostic[]
+}
+
 const titleOf = (title: TitleContent | null | undefined): TitleContent | null => title ?? null
+
+const originOf = (origin: Origin | undefined): Origin | null => origin ?? null
 
 /** セグメントは key の昇順が文書順（F1 の「ファイル名昇順」を一般化したもの）。 */
 const byKey = (a: SegmentSnapshot, b: SegmentSnapshot): number =>
@@ -76,16 +117,25 @@ const duplicatesOf = (values: readonly string[]): string[] => {
   return [...duplicated]
 }
 
-export const resolve = <L extends string, M>(
+/**
+ * 版のスナップショットを解決済み文書へ写す。**不備があっても解決を止めない。**
+ *
+ * 不備は `diagnostics` に集め、文書側では次のように「壊れたまま表現」する:
+ *   - 未解決参照 … `unresolvedRef` ノードとして残る（本文から消さない）
+ *   - 迷子ノート … `orphanNotes` に残る（配置先が決まらないだけで、中身は解決済み）
+ *   - id・ラベルの重複 … 後勝ちで解決し、重複した事実を診断に残す
+ *   - 空文書 … ブロック 0 件の文書を返す
+ */
+export const resolveTolerantly = <L extends string, M>(
   revision: RevisionSnapshot<L, M>,
   options: ResolveOptions,
-): Result<ResolvedDocument, ResolveError> => {
+): Resolution => {
   const anchorPrefix = options.anchorPrefix ?? ''
   const anchorOf = (id: string): string => `${anchorPrefix}${id}`
+  const diagnostics: ResolveDiagnostic[] = []
 
-  const duplicatedKeys = duplicatesOf(revision.segments.map((segment) => segment.key))
-  if (duplicatedKeys.length > 0) {
-    return err({ code: 'duplicate_segment_key', keys: duplicatedKeys })
+  for (const key of duplicatesOf(revision.segments.map((segment) => segment.key))) {
+    diagnostics.push({ code: 'duplicate_segment_key', key })
   }
 
   const ordered = [...revision.segments].sort(byKey)
@@ -99,16 +149,14 @@ export const resolve = <L extends string, M>(
     notes.push(...(segment.notes ?? []))
   }
 
-  if (blocks.length === 0) return err({ code: 'empty_document' })
+  if (blocks.length === 0) diagnostics.push({ code: 'empty_document' })
 
-  const duplicatedBlockIds = duplicatesOf(blocks.map((block) => block.id))
-  if (duplicatedBlockIds.length > 0) {
-    return err({ code: 'duplicate_block_id', blockIds: duplicatedBlockIds })
+  for (const blockId of duplicatesOf(blocks.map((block) => block.id))) {
+    diagnostics.push({ code: 'duplicate_block_id', blockId })
   }
 
-  const duplicatedLabels = duplicatesOf(blocks.flatMap((block) => [...block.labels]))
-  if (duplicatedLabels.length > 0) {
-    return err({ code: 'duplicate_label', labels: duplicatedLabels })
+  for (const label of duplicatesOf(blocks.flatMap((block) => [...block.labels]))) {
+    diagnostics.push({ code: 'duplicate_label', label })
   }
 
   // ノート id はブロック id とも衝突しない（衝突するとアンカーが一意に決まらない）。
@@ -116,8 +164,8 @@ export const resolve = <L extends string, M>(
     ...notes.map((note) => note.id),
     ...blocks.map((block) => block.id),
   ]).filter((id) => notes.some((note) => note.id === id))
-  if (duplicatedNoteIds.length > 0) {
-    return err({ code: 'duplicate_note_id', noteIds: duplicatedNoteIds })
+  for (const noteId of duplicatedNoteIds) {
+    diagnostics.push({ code: 'duplicate_note_id', noteId })
   }
 
   // --- 採番（1 パス目）------------------------------------------------------
@@ -171,8 +219,6 @@ export const resolve = <L extends string, M>(
     for (const label of block.labels) blockByLabel.set(label, block)
   }
 
-  const unresolved: { fromBlockId: string; target: string }[] = []
-
   const resolveNodes = (nodes: readonly Node<L>[], fromBlockId: string): ResolvedNode[] =>
     nodes.map((node): ResolvedNode => {
       switch (node.type) {
@@ -186,9 +232,19 @@ export const resolve = <L extends string, M>(
         case 'ref': {
           const target = blockByLabel.get(node.target)
           if (target === undefined) {
-            unresolved.push({ fromBlockId, target: node.target })
-            // 未解決は下でエラーになるので、ここで返す値は使われない。
-            return { type: 'text', value: '' }
+            diagnostics.push({
+              code: 'unresolved_reference',
+              fromBlockId,
+              target: node.target,
+            })
+            // 本文から消さずに「未解決である」という事実ごと残す。
+            // 出版ターゲットではこの後 `resolve` がエラーにするので出力へは出ない。
+            return {
+              type: 'unresolvedRef',
+              target: node.target,
+              fromBlockId,
+              overrideText: node.label ?? null,
+            }
           }
           return {
             type: 'ref',
@@ -207,6 +263,8 @@ export const resolve = <L extends string, M>(
 
   const resolvedBlocks: ResolvedBlock[] = blocks.map((block): ResolvedBlock => {
     const anchor = anchorOf(block.id)
+    const labels = [...block.labels]
+    const origin = originOf(block.origin)
     if (block.kind === 'heading') {
       return {
         kind: 'heading',
@@ -215,6 +273,8 @@ export const resolve = <L extends string, M>(
         number: numberByBlockId.get(block.id) ?? null,
         title: block.title,
         anchor,
+        labels,
+        origin,
       }
     }
     // 見出し以外は必ず番号を持つ（採番パスで全件入れている）。
@@ -227,6 +287,8 @@ export const resolve = <L extends string, M>(
         content: resolveNodes(block.content, block.id),
         caption: block.caption === undefined ? null : resolveNodes(block.caption, block.id),
         anchor,
+        labels,
+        origin,
       }
     }
     const { id: _id, labels: _labels, kind, title, statement, proof, origin: _origin, ...meta } = block
@@ -238,29 +300,46 @@ export const resolve = <L extends string, M>(
       statement: resolveNodes(statement, block.id),
       proof: proof === undefined ? null : resolveNodes(proof, block.id),
       anchor,
+      labels,
+      origin,
       meta,
     }
   })
 
   // --- ノートの配置 ---------------------------------------------------------
   const notesByBlockId: Record<string, ResolvedNote[]> = {}
-  const orphanNoteIds: string[] = []
+  const orphanNotes: ResolvedNote[] = []
   for (const note of notes) {
     const targetBlockIds = new Set<string>()
     for (const target of note.targets) {
       const block = blockByLabel.get(target)
       if (block !== undefined) targetBlockIds.add(block.id)
     }
-    if (targetBlockIds.size === 0) {
-      orphanNoteIds.push(note.id)
-      continue
-    }
     const resolvedNote: ResolvedNote = {
       noteId: note.id,
       title: titleOf(note.title),
       // 出版ターゲットでも本文の解決は走らせる（ノート内の未解決参照を見逃さないため）。
+      //
+      // ここは**先行実装から意図的に変えた 1 点**である。以前は迷子ノート（targets がどの
+      // ブロックにも解決しないノート）の本文を解決せずに読み飛ばしていたため、
+      // 「迷子でありかつ本文に未解決参照を含むノート」の未解決参照は検出されなかった。
+      // 今は迷子かどうかに関わらず本文を解決するので、その未解決参照も診断に出る。
+      // 副作用として `firstErrorOf` の優先順位により、そのようなノートがあるときに
+      // `resolve` が返すエラー種別が `orphan_note` から `unresolved_reference` へ変わる。
+      // 検出漏れが減る方向の変化であり、どちらにせよ出版は止まるので、こちらを採る。
       body: resolveNodes(note.body, note.id),
       anchor: anchorOf(note.id),
+      targets: [...note.targets],
+      origin: originOf(note.origin),
+    }
+    if (targetBlockIds.size === 0) {
+      diagnostics.push({
+        code: 'orphan_note',
+        noteId: note.id,
+        targets: [...note.targets],
+      })
+      orphanNotes.push(resolvedNote)
+      continue
     }
     // 出版ターゲットでは**配置しない**（`notesByBlockId` は空で固定される。I5）。
     if (options.audience === 'publication') continue
@@ -271,14 +350,64 @@ export const resolve = <L extends string, M>(
     }
   }
 
-  if (unresolved.length > 0) return err({ code: 'unresolved_reference', references: unresolved })
-  if (orphanNoteIds.length > 0) return err({ code: 'orphan_note', noteIds: orphanNoteIds })
+  return {
+    document: {
+      documentId: revision.documentId,
+      revision: revision.revision,
+      blocks: resolvedBlocks,
+      notesByBlockId,
+      outline,
+    },
+    orphanNotes,
+    diagnostics,
+  }
+}
 
-  return ok({
-    documentId: revision.documentId,
-    revision: revision.revision,
-    blocks: resolvedBlocks,
-    notesByBlockId,
-    outline,
-  })
+/**
+ * 診断リストを、出版を止める理由 1 件へ畳む。
+ *
+ * 判定の順序は「文書の形が壊れている → 中身の参照が壊れている」の順で、
+ * 先に見つかった種別だけを返す（種別ごとに集約するのは、修正するとき同種をまとめて直すため）。
+ */
+const firstErrorOf = (diagnostics: readonly ResolveDiagnostic[]): ResolveError | null => {
+  const keys = diagnostics.flatMap((d) => (d.code === 'duplicate_segment_key' ? [d.key] : []))
+  if (keys.length > 0) return { code: 'duplicate_segment_key', keys }
+
+  if (diagnostics.some((d) => d.code === 'empty_document')) return { code: 'empty_document' }
+
+  const blockIds = diagnostics.flatMap((d) => (d.code === 'duplicate_block_id' ? [d.blockId] : []))
+  if (blockIds.length > 0) return { code: 'duplicate_block_id', blockIds }
+
+  const labels = diagnostics.flatMap((d) => (d.code === 'duplicate_label' ? [d.label] : []))
+  if (labels.length > 0) return { code: 'duplicate_label', labels }
+
+  const duplicatedNoteIds = diagnostics.flatMap((d) =>
+    d.code === 'duplicate_note_id' ? [d.noteId] : [],
+  )
+  if (duplicatedNoteIds.length > 0) return { code: 'duplicate_note_id', noteIds: duplicatedNoteIds }
+
+  const references = diagnostics.flatMap((d) =>
+    d.code === 'unresolved_reference' ? [{ fromBlockId: d.fromBlockId, target: d.target }] : [],
+  )
+  if (references.length > 0) return { code: 'unresolved_reference', references }
+
+  const orphanNoteIds = diagnostics.flatMap((d) => (d.code === 'orphan_note' ? [d.noteId] : []))
+  if (orphanNoteIds.length > 0) return { code: 'orphan_note', noteIds: orphanNoteIds }
+
+  return null
+}
+
+/**
+ * 厳格な解決。不備が 1 件でもあれば**解決済み文書を返さない**。
+ *
+ * 出版物（LaTeX / PDF / 公開サイト）の生成はこちらを使う。壊れた文書を出力してはならないため。
+ * 執筆中の画面のように「壊れていても表示し続ける」側は `resolveTolerantly` を使う。
+ */
+export const resolve = <L extends string, M>(
+  revision: RevisionSnapshot<L, M>,
+  options: ResolveOptions,
+): Result<ResolvedDocument, ResolveError> => {
+  const resolution = resolveTolerantly(revision, options)
+  const error = firstErrorOf(resolution.diagnostics)
+  return error === null ? ok(resolution.document) : err(error)
 }

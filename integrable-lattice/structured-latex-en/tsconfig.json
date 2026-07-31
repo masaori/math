@@ -1,6 +1,7 @@
 {
   // 日本語版 ../structured-latex/tsconfig.json と同じ設定にする（strict の水準を二重管理しない）。
-  "extends": "../../realtime-web-preview/tsconfig.base.json",
+  // 継承元は入力言語の正本であるシステム（リポジトリ直下 structured-latex/）が持つ base である。
+  "extends": "../../structured-latex/tsconfig.base.json",
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",

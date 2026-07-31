@@ -1,7 +1,7 @@
 {
-  // コンパイラ設定は realtime-web-preview のワークスペース基準を正本として共有する
-  // （同じリポジトリ内で strict の水準を二重管理しないため）。
-  "extends": "../../realtime-web-preview/tsconfig.base.json",
+  // コンパイラ設定は、入力言語の正本であるシステム（リポジトリ直下 structured-latex/）が持つ
+  // tsconfig.base.json を共有する（同じリポジトリ内で strict の水準を二重管理しないため）。
+  "extends": "../../structured-latex/tsconfig.base.json",
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",

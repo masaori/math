@@ -15,7 +15,9 @@
   ラベル・ノートの定義、検査、解決（採番・参照解決）、生成器を 1 箇所で持つ。レンダラー（LaTeX / PDF /
   Web / 書籍の出力器）はこの中のモジュールとして載る。各数学プロジェクトはこれを使う側であり、
   **入力言語の定義を各プロジェクトへ複製しない**
-- `realtime-web-preview/` — 構造化テキストのレンダー結果を LAN 内でリアルタイム閲覧する汎用ビューア（ドメイン非依存）
+  - `structured-latex/live-preview/` — レンダー結果を LAN 内でリアルタイム閲覧するビューア
+    （React + KaTeX、ドメイン非依存）。**システムのモジュールとして中に入っている**。
+    採番・参照解決・ノート配置は自前で持たず、システムの `resolveTolerantly` を使う
 
 > 紛らわしいので注意: リポジトリ直下の `structured-latex/` は**システム**、
 > 各プロジェクト配下の `<project>/structured-latex/` は**その論文の中身**（`content/` 等）である。
@@ -59,8 +61,22 @@
 └── _old/                  # 旧コードの退避先（typst/ など。温存するものも置く）
 ```
 
-閲覧はリポジトリ直下の `realtime-web-preview/`（React + KaTeX）を `structured-latex/content` に
-向けて起動する。
+閲覧はリポジトリ直下の `structured-latex/live-preview/`（React + KaTeX）を、そのプロジェクトの
+`structured-latex/content` に向けて起動する。
+
+```sh
+(cd structured-latex && pnpm install)                       # 入力言語の正本（初回のみ）
+(cd <project-name>/structured-latex && pnpm install)         # 表示する入力ソース側（初回のみ）
+(cd structured-latex/live-preview && pnpm install && pnpm build)
+(cd structured-latex/live-preview && \
+  LIVE_PREVIEW_SOURCE_DIR=../../<project-name>/structured-latex/content pnpm start)
+```
+
+既定の入力ソースは `exact-solution-of-2d-ising-model/structured-latex/content`
+（`LIVE_PREVIEW_SOURCE_DIR` を省略するとこれになる）。参照用ノートは既定で入力ソースの隣の
+`notes/`（`LIVE_PREVIEW_NOTES_DIR` / `--notes` で上書き可）。起動後は `http://localhost:4321/`、同一 LAN の別端末からは
+`http://<Mac の LAN IP>:4321/` を開く。詳細は
+[structured-latex/live-preview/README.md](structured-latex/live-preview/README.md)。
 
 ### 命名規則
 

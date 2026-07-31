@@ -133,6 +133,29 @@ targets=(
   IntegrableLattice.exists_proj_zero_of_linear
   IntegrableLattice.quintic_cubic_nondegenerate
   IntegrableLattice.propW_nu_not_integer_of_ell_five_k_three
+  # 命題 C′ と cycle 19 の定理 A′（PropCTracePeriod.lean）
+  IntegrableLattice.TraceOrth
+  IntegrableLattice.tr_natCast_pow_mul
+  IntegrableLattice.traceOrth_pow_succ
+  IntegrableLattice.traceOrth_one_add_pow
+  IntegrableLattice.traceOrth_of_forall_pow
+  IntegrableLattice.IsTracePeriodAt
+  IntegrableLattice.isTracePeriodAt_mul_prime
+  IntegrableLattice.dvd_of_mulVec_dvd
+  IntegrableLattice.luc
+  IntegrableLattice.luc_add_two
+  IntegrableLattice.luc_add_three
+  IntegrableLattice.luc2
+  IntegrableLattice.luc2_periodic
+  IntegrableLattice.luc2_mod_three
+  IntegrableLattice.two_pow_mod_three
+  IntegrableLattice.lucas_period_one_level_one
+  IntegrableLattice.lucas_two_power_not_period
+  IntegrableLattice.orderOf_three_zmod_two
+  IntegrableLattice.orderOf_three_zmod_four
+  IntegrableLattice.orderOf_three_zmod_eight
+  IntegrableLattice.orderOf_three_zmod_sixteen
+  IntegrableLattice.trace_period_not_affine
 )
 
 {

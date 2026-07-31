@@ -34,7 +34,7 @@ M1「ドメインモデルの確定」の設計判断のうち、**「構造化�
 |---|---|---|---|
 | **(a) 文書順の正準表現との整合**<br>（先行実装は「ファイル名昇順 × ファイル内配列順」を文書順とする：`schema.ts` の `defineBlocks` 注、`tools/generate-index.ts:181`「文書順（ファイル名昇順 × 配列順）に連結した全ブロック」） | ブロック単体は所属ファイルも順序も持たない。挿入位置・所属を別メタで与えないと文書のどこに入るか表せない → 正準表現の外に順序情報が漏れる | ファイルが順序単位そのもの。ファイル名がファイル間順序、配列がファイル内順序を自己完結して表す。正準表現と一致 | 順序は完全保持。ただし「部分」アップロードではない |
 | **(b) ラベル一意性・相互参照の解決**（文書全体にかかる不変条件。`labels.generated.ts` が「実在ラベルのユニオン」を与え `ref` はこれしか指せない。`document.generated.ts`「ファイルを跨いだ一意性は両方を同時に見るこのモジュールでしかできない」） | 送ったブロックのラベルが他ファイルと衝突しないか・`ref` 先が実在するかは文書全体を見ないと不可。検査境界とアップロード境界がずれる | 同上（ファイル跨ぎ一意性はファイル単体では保てない）。ただしアップロード境界＝順序単位境界が一致し、合成→全体検査が素直 | 全体が一度に揃うので検査は自明。だが部分更新の要件を満たさない |
-| **(c) 削除・並べ替え・ファイル分割変更の表現** | 削除は可。並べ替え・分割は順序/所属メタが別途必要で表現が増える | ファイル集合への upsert / delete で自然に表現（追加=新 path、削除=path 削除、リネーム=順序変更、分割=1→2 ファイル）。現行 `realtime-web-preview/docs/architecture.md` §5 が既に「`*.ts` をファイル名順に動的 import」でファイルを読込・順序単位にしている | 毎回全差し替えなので何でも表せるが「部分」ではない |
+| **(c) 削除・並べ替え・ファイル分割変更の表現** | 削除は可。並べ替え・分割は順序/所属メタが別途必要で表現が増える | ファイル集合への upsert / delete で自然に表現（追加=新 path、削除=path 削除、リネーム=順序変更、分割=1→2 ファイル）。リアルタイムプレビューの `docs/architecture.md` §5 が既に「`*.ts` をファイル名順に動的 import」でファイルを読込・順序単位にしている（執筆当時は `realtime-web-preview/docs/`。現在は `structured-latex/live-preview/docs/`） | 毎回全差し替えなので何でも表せるが「部分」ではない |
 | **(d) 同時閲覧中の一貫性（中途半端を見せない）** | ブロック単位で反映すると、ラベル衝突・未解決参照が一時的に生じた壊れた文書を配信し得る | ファイル単位でも同じ危険はあるが、後述のとおり配信は常に「全体検査を通ったスナップショット」に限るため回避可能 | 全差し替え自体は一貫。ただし帯域と再送コストが大きく、複数閲覧者・部分更新の趣旨に反する |
 
 ## 2. 結論と根拠
@@ -55,7 +55,7 @@ M1「ドメインモデルの確定」の設計判断のうち、**「構造化�
    アップロード境界を順序単位（ファイル）に合わせるのが最も素直で、合成→全体検査→確定が
    一直線になる。
 3. **削除・並べ替え・分割を単純な代数で表せる（軸 c）**。ファイル集合への upsert / delete だけで
-   全操作を表現でき、現行 `realtime-web-preview` のファイル読込・順序モデルとも連続する。
+   全操作を表現でき、リアルタイムプレビュー（現 `structured-latex/live-preview/`）のファイル読込・順序モデルとも連続する。
 
 ## 3. DDD 語彙での位置づけ
 
@@ -77,8 +77,10 @@ M1「ドメインモデルの確定」の設計判断のうち、**「構造化�
 2. **ブロック id / ノート id の大域一意性**（同上）。
 3. **相互参照の解決可能性**：全 `ref.target` と `note.targets` が実在ラベルへ解決する
    （`labels.generated.ts` は実在ラベルのユニオン、`ref` はそれ以外を指せない。
-   ノート解決は `realtime-web-preview/domain-model/src/block.ts` の
-   `buildLabelIndex`/`placeNotes`：未解決は `orphans` として捨てず可視化）。
+   ノート解決は当時 `realtime-web-preview/domain-model/src/block.ts` の
+   `buildLabelIndex`/`placeNotes`：未解決は `orphans` として捨てず可視化。
+   その後この解決はシステムへ吸収され、現在は
+   `domain-model/resolved/resolve.ts` の `resolveTolerantly` が `orphanNotes` として返す）。
 4. **文書順の全順序が一意に定まる**（ファイル名昇順 × 配列順）。
 
 ### トランザクション境界
@@ -103,9 +105,10 @@ M1「ドメインモデルの確定」の設計判断のうち、**「構造化�
   永続化先（in-memory / Cloud SQL / Redis 等）の選択は `codegen/config/storage.ts` の storage 設定の
   別問題であり（`docs/architecture-overview.md` §storage 設定）、repository/gateway の判定を動かさない。
 
-> **`realtime-web-preview` との決定的な差**：あちらは入力ソース（FS 上の read-only な `.ts`）を
+> **リアルタイムプレビュー（執筆当時 `realtime-web-preview/`、現 `structured-latex/live-preview/`）
+> との決定的な差**：あちらは入力ソース（FS 上の read-only な `.ts`）を
 > **読むだけ**なので所有 entity が無く、`BlockSourceGateway`/`SourceWatcherGateway` という
-> **gateway** で扱った（`realtime-web-preview/docs/architecture.md` §5「所有 entity を持たず
+> **gateway** で扱った（同 `docs/architecture.md` §5「所有 entity を持たず
 > 永続化しないため repository は無く、外部依存は gateway のみ」）。本プロジェクトは
 > **アップロードを受理して保持・pub/sub する**ため、構造化テキストは外部ソースではなく
 > 自 domain の所有 entity になり、**repository** が正しい。
@@ -114,7 +117,7 @@ M1「ドメインモデルの確定」の設計判断のうち、**「構造化�
 
 ### 現行方式は一般化できるか
 
-`realtime-web-preview` の現行は **fs.watch → SSE `reload` → 全文書再フェッチ**:
+リアルタイムプレビュー（現 `structured-latex/live-preview/`）の現行は **fs.watch → SSE `reload` → 全文書再フェッチ**:
 
 - `backend/src/preview/adapter/gateways/fs-source-watcher-gateway.ts` が `fs.watch` で
   ローカル dir を監視、`entrypoint/handlers/events-handler.ts` が変更時に
@@ -169,14 +172,16 @@ export type DocumentChangedEvent = {
      （版が無いと自分がどの状態を見ているか判定できない）。
   2. revision は**文書全体（集約）に1つ**。ファイル単位ではなく、集約のトランザクション確定
      （§3）ごとに単調増加する。集約境界＝トランザクション境界＝版の付与単位が一致する。
-- GET 応答は `realtime-web-preview/domain-model/src/api-contract.ts` の `documentResponseSchema`
+- GET 応答は当時の `realtime-web-preview/domain-model/src/api-contract.ts` の `documentResponseSchema`
   （`blocks` / `notes` / `generatedAt` / `sourceLabel`）を踏襲し、これに `revision` を加える。
+  その契約はシステムへ吸収され、現在は `domain-model/api-contract/live-preview.ts` にある
+  （公開サイトの契約 `live-site.ts` とは別物として併存する）。
 
 ```typescript
 /** 文書全体（集約）確定ごとに単調増加・一意な版識別子。 */
 export type DocumentRevision = string
 
-/** GET /api/document の成功応答（realtime-web-preview の DocumentResponseBody に revision を追加）。 */
+/** GET /api/document の成功応答（当時の realtime-web-preview の DocumentResponseBody に revision を追加）。 */
 export type DocumentResponseBody = {
   blocks: ConvertedBlock[]
   notes: Note[]        // 参照用ノート（文書本体ではない）
