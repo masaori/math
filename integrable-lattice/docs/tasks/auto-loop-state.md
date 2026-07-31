@@ -4,7 +4,7 @@ daily cron が読み書きする状態ファイル。手順は `auto-loop-runboo
 
 ```yaml
 program: lambda-statement   # 再定義: Λ/ℚ̄ 決定可能・ℝ脱出隔離・形式検証可能
-current_cycle: 19           # cycle 0-19 完了（cycle 19 は 2026-08-01 rank:cycle19 まで done）。cycle 20 は「cycle 20 の焦点（案）」から起こす。
+current_cycle: 20           # cycle 0-19 完了。cycle 20 は 2026-08-01 に cycle 19 総括の「cycle 20 の焦点（案）」から起こした（step 列は下記）。
                             # 2026-06-24 ユーザーが3トラック(docs/themes.md)へ再スコープ。cycle 3 以降はトラック明記。
                             # cycle 16 は 002 の昇格承認後の「論文 001 の残務を閉じる」サイクル。
                             # cycle 17 は cycle 16 総括が挙げた4点（照合の穴・退化トーラス・Lean・既出性）を潰すサイクル。
@@ -255,6 +255,27 @@ cycle 19 はこの 3 点を step にする。
 | 2 | T3 Pure | degenerate_tower_theta_infinity | done | 2026-08-01 | `outputs/reports/cycle19_T3_theta_infinity.md` / `sagemath/check/cycle19_T3_theta_infinity/`（PASS 44950・FAIL 0・打ち切り 0 件）。**§6.2 が「考えられる」とだけ書いた段階的処理は機能し、しかも反復不要で 1 段で閉じる**（定理 S。割るのは $E$ ではなく 1 径数部分群へ制限した 1 変数多項式の内容）。**$\theta=\infty$ の軌跡の正体を確定**: $\theta(u)=\infty\iff(\chi^{u^\perp}-1)\mid\bar{\tilde E}$（命題 2）で、Newton 多面体の Minkowski 分解（Ostrowski）から**原点を通る有限本の直線**に限り、$D$ の係数からの有限計算で完全に決まる（命題 3）。cycle 18 が「$M$ 依存の具体的な姿」と呼んだ同居は「方向（mod $\ell$）と整数ベクトルの直線（$\mathbb{Z}$）のずれ」で、レベル $M$ の例外点の割合はちょうど $\ell^{1-M}$（系 5）。**主結果（定理 X′）**: 1 頂点 bouquet $p(1,0)+q(0,1)$ について $\ell$ 奇なら全レベル・全点の付値が閉形式で決まり $\mathrm{ord}_\ell(\kappa_n)=\mu(\ell^{2n}-1)+2n\ell^n+\Lambda(\ell^n-1)$。**これは任意の奇素数で型 III の実例を与える**（系 X″）。cycle 18 §5.1 の「型 III は小さい $\ell$ の現象」という読みは**母集団の人工物**（辺数 5 以下では $\ell\ge7$ で例外直線が作れない）であり、**肯定側の観察（全件型 II）にも 0 件の罠が働く**ことを示した。$n\ell^n$ 項は $\theta=\infty$ の点**からは出ず**、その $\ell$ 進近傍で $\theta$ が $1+\ell^r$ と深くなる点の集積から出ることも証明。自分の誤り 1 件（命題 8 を「$\theta=\infty\iff\ell\mid p+q$」と狭く立てた。Newton 多角形の候補を $\mathbb{F}_\ell$ でなく $\mathbb{Z}$ 上で取ったのが原因。436 件の FAIL で検出）を報告に明記。**数値支持どまりの主張は 0 件**（分類件数は宣言した母集団の全走査）。延長の失敗も反例で確定（§9.1、$\ell=3$ の $(1,0),(1,-1),(1,2)$ で実測 $0,10,50$ に対し延長式 $0,8,44$）。**呼び出し元の検証**: sage を再実行し時間表示を除いて出力が完全一致（PASS 44950 / FAIL 0）、さらに**主結果 (5.1) を完全に独立な経路**（$(\mathbb{Z}/\ell^n)^2$ Cayley グラフのラプラシアン余因子から全域木数を厳密計算）で $\ell=3,5,7,11$ の 12 例照合して全一致、`npm run check`・`validate-content.ts`・`verify-check-linkage.ts` も再実行。規約どおり作業ブランチのみ push。 （当初の指示: cycle 18 step 1 §4.5・§6.2 の第 3 の破れ方。方向上で $\bar E$ が恒等的に消える（$\theta=\infty$）場合に、$E$ を $\ell$ で割って取り直す段階的処理が機能するかを一次情報で確かめる。$\ell=5$、$4(1,0)+(0,1)$ の方向 $(1{:}1)$ が具体例。$\theta=\infty$ の点と有限の点が同じ方向に同居する構造を、付値の言葉で記述できるかを詰める。） |
 | 3 | T3 Pure | trace_period_closed_form_and_lean_prop_C | done | 2026-08-01 | `outputs/reports/cycle19_T3_trace_period_closed_form_and_lean.md` / `sagemath/check/cycle19_T3_trace_period/`（FAIL 0・未決定 0）/ `lean/IntegrableLattice/PropCTracePeriod.lean`。**4 点すべて決着。** (iii) **予想 A を証明した**（定理 A′）。cycle 18 が $k\ge2w^*+1$ でしか出せなかったのは評価が粗かっただけで、$B^i$ の $i$ 個の因子のうち**1 個をトレース直交性のために残す**と要求が $(i-1)(k-w^*)\ge1$ に落ち、しきい値が $w^*+1$ になる。**副産物として主定理が強化された**: $\pi_{\mathrm{tr}}(p,k)\mid p^{\max(k-w^*-1,0)}\pi_{\mathrm{tr}}(p,w^*+1)$（cycle 18 は $p^{k-1}$）。指数はこれ以上下がらない（5544 件中 3111 件で 1 段下げ版が破れる）。(i) **閉形式は存在しないことを反例つきで確定**。$e_k=\min\{m:g_m\ge k\}$ という完全な構造式は得たが、入力 $g_0$ が Wieferich 型の量で固有値データから決まらず（$c=2,p=1093$）、増分も 1 とは限らない（最小反例 $T=(3)$, $p=2$。$w^*=0$ なのに $t_k=1,2,2,4,8,16$ で $t_2=t_3$）。**「閉形式が無い」は「決定できない」ではない**ことも明記。(ii) **$w^*$ の代数的閉形式を得た**（定理 W）。Euler の双対基底公式から $\mathrm{coker}(G)\cong A/\eta A$、$\eta=(\chi'/(\chi/\rho))(\theta)$、$w^*=\min\{j:p^j\eta^{-1}\in A_{(p)}\}$、$\det G=\pm N(\eta)$。$p$ 極大なら差積・分岐指数で $w^*=\max_{\mathfrak p\mid p}\lceil v_\mathfrak p(\eta)/e_\mathfrak p\rceil$ と書け、「不分岐かつ $p\nmid$ 重複度 ⟺ $w^*=0$」「従順分岐は $w^*$ を 1 しか上げない」が読める。**Smith 標準形を計算せずに $w^*$ が決まる**。(iv) **Lean 化で本文の誤りは見つからなかった**（cycle 18 の命題 T と同じ「食い違いなし」型）が、**過剰仮定を 2 件検出**: 定理 A′ に $p$ の素数性は不要、「周期」の最小性も使っていない（最小性を仮定すると結論が述べられない）。mathlib に `traceDual`・`differentIdeal`・`aeval_derivative_mem_differentIdeal` が**実在する**ことを 3 段 grep で確認してから「無いのは配線と整数行列の単因子」と書いた。**数値支持どまりは 1 件のみ**（奇素数での Wall 型等式。3600 件で反例 0 だが検出力は破れ率 $\ge0.083\%$ まで、と明記）。**呼び出し元の検証**: sage を再実行して出力が完全一致（FAIL 0）、`lake build` を再実行して **8668 jobs 成功**、`check-no-sorry.sh` も再実行して通過、**中心的な反例 3 件を素の Python で独立計算**（$T=(3)$, $p=2$ の $t_k=1,2,2,4,8,16$／$p=1093$ が Wieferich で $\mathrm{ord}_2$ が mod $p$ と mod $p^2$ で一致／$F\oplus F$, $p=2$ の $\pi_{\mathrm{tr}}=1,3,6,12,24,48$）して全一致、`npm run check`・`validate-content.ts`・`verify-check-linkage.ts` も再実行。規約どおり作業ブランチのみ push。 （当初の指示: cycle 18 step 2 §7.2 の未解決。(i) $\pi_{\mathrm{tr}}(p,k)=p^{e_k}\pi(p,1;S)$ の指数列 $(e_k)$ を固有値データから決める式、(ii) 最大単因子の付値 $w^*$ を代数的不変量（Newton 多角形・分岐データ）で書けるか、(iii) 予想 A（$k\ge w^*+1$ で $\pi_{\mathrm{tr}}(p,k+1)\mid p\,\pi_{\mathrm{tr}}(p,k)$、隙間 $w^*+1\le k\le2w^*$）の証明、(iv) 命題 C′ の Lean 化（主張の検算が目的。cycle 17・18 で 2 サイクル連続で本文の誤りを検出した手法）。） |
 | 4 | — | rank:cycle19 | done | 2026-08-01 | 下記「cycle 19 総括」。**掲げた 3 点（4 点目はユーザー判断なので step にしない）はすべて潰れた。** 最大の成果は**退化塔の型 III の原因が特定されたこと**（$\theta=\infty$ の $\mathbb{Z}_\ell$ 点の $\ell$ 進近傍）と、**cycle 18 で「数値支持どまり」と明記した主張が 2 件とも定理へ格上げされたこと**。cycle 20 の焦点は 4 点。 |
+
+## cycle 20 step 列（2026-08-01 起こし。cycle 19 総括の「cycle 20 の焦点（案）」4 点をそのまま step にした）
+
+**前提**: cycle 19 で退化塔の分類は $\ell$ 奇についてほぼ閉じた（型 II は定理 J6、型 III は定理 J7・定理 X′）。
+残る穴は 3 つで、(a) 定理 J4 が $\theta$ を決めない唯一の場合＝**打ち消し**（$|J(r)|\ge2$）、
+(b) $S_\infty$ の候補集合は有限計算で尽きるが**各候補での判定手続き**が族についてしか完成していない、
+(c) **$\ell=2$** は $S_\infty$ の点が $\bmod\ 2$ で分離されず両 step の仮定が破れる。
+加えて (d) cycle 17・18・19 と 3 サイクル連続で形式化が主張の検算として効いているのに、
+**cycle 19 の新定理群はまだ Lean に通していない**。cycle 20 はこの 4 点を step にする。
+
+**運用上の申し送り（cycle 19 の失敗から）**: 長時間の数値掃引を**起動しただけでターンを閉じない**。
+掃引は前景で、宣言した壁時計上限つきで回し切る。打ち切ったら件数と中身を必ず書く。
+検証は PASS/FAIL だけでなく**内訳を吐かせる**（cycle 19 の最大の誤りはそこから見つかった）。
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T3 Pure | cancellation_recursion | todo | | cycle 19 step 1 §7.1。定理 J4 の Newton 評価は $\mathrm{argmin}$ が一意なら等号だが、$|J(r)|\ge2$（打ち消し）では $\theta$ を決めない。破れるのは $\sum_{j\in J(r)}\lambda_j\beta_v^j=0$ となる高々 $\max J(r)$ 個の $\beta_v$ に対してだけなので、**$\beta$ の次の桁が効く階層へ降りる再帰**を書けば閉じる可能性がある。奇素数でも起きる実例が §7.1 の表にある。閉じないなら**何が妨げているかを反例つきで確定**させる。 |
+| 2 | T3 Pure | s_infinity_decision_procedure | todo | | cycle 19 step 1 §7.2。$S_\infty$ の候補集合（$\mathrm{supp}(\bar{\tilde E})$ の差ベクトル）は有限計算で尽きることが証明済み（系 J10）だが、**各候補で $\theta=\infty$ かを判定する手続き**は 1 頂点 bouquet 族についてしか完成していない（step 2 命題 8）。一般の塔で判定手続きを**実装し、母集団で検証する**。step 2 の命題 2（$(\chi^{u^\perp}-1)\mid\bar{\tilde E}$）と step 1 の系 J10 を突き合わせて使うこと。 |
+| 3 | T3 Pure | ell_equals_2 | todo | | cycle 19 step 1 §7.3・step 2 §9.3。$\ell=2$ では $S_\infty$ の 2 点が $\bmod\ 2$ で分離されないため、定理 J7 の仮定 (N)・(B\*) も定理 X の場合分けも破れる（$\ell$ が奇であることを 3 箇所で使っている。step 2 注 5.2）。cycle 16 が $\ell=2$ トーラスを特別扱いした理由は説明がついたが、**$\ell=2$ 自体の閉形式は無い**。$\ell=2$ トーラスでは $n2^n$ の係数だけは当たる（cycle 19 step 1 §5.4）ので、そこから何が一般化できるかを詰める。**$\ell=2$ が構造的に射程外なのか、道具が足りないだけなのかを決着させる**のが成果。 |
+| 4 | 運用 | lean_cycle19_theorems | todo | | cycle 19 の新定理群を Lean に通して**主張を検算する**（目的は証明の正しさではなく主張の一意性）。対象は定理 J6（$\theta$ 有限 ⇒ 型 II）・定理 J7（$n\ell^n$ の係数 $b=\sum j^*$）・定理 X′（bouquet 族の閉形式）・定理 J2（桁定理）。cycle 17 は命題 B の誤り、cycle 18 は命題 N・W の誤り、cycle 19 は過剰仮定 2 件を検出しており、**3 サイクル連続で効いている**。`lake build` と `check-no-sorry.sh` を自分で実行し sorryAx 依存 0 を確認する。**mathlib に補題が「無い」と書く前に必ず検索で実在確認する**（cycle 16 で偽陰性の事故、cycle 18・19 でも書きかけた）。 |
+| 5 | — | rank:cycle20 | todo | | 総括。4 step の成果を突き合わせ、次サイクルの焦点を出す。 |
 
 ## cycle 19 総括（rank:cycle19, 2026-08-01）
 
