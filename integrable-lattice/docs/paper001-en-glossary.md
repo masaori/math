@@ -68,6 +68,66 @@
 | 決定可能 / 決定不能 | **decidable** / **undecidable** | refs.bib の Ax–Kochen の表題 "Diophantine problems over local fields III: Decidable fields" で確認 |
 | 決定手続き | **decision procedure** | 標準語。上の decidable と対で使う |
 
+### 1.2b 第 1〜3 章の英訳で新たに確定した語
+
+第 1 章（梯子・四軸）・第 2 章（設定）・第 3 章（アルキメデス素点側）を訳す過程で必要になり、
+上の表に無かった語である。根拠欄の約束は §0 と同じ（このセッションで確認した一次情報だけを書く）。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 分配関数 / 分配多項式 | **partition function** / **partition polynomial** | 統計力学の標準語。`content/002_setup.ts` の $Z_N(x)\in\mathbb{Z}[x]$ は多項式なので、後者は "partition polynomial" と訳し分ける |
+| 多重度 | **multiplicity** | 標準語。`content/002_setup.ts` の $\Omega_N(m)\in\mathbb{N}$（状態数の重み）に対応 |
+| 転送行列 | **transfer matrix** | 標準語 |
+| 分配関数零点 | **the zeros of the partition function** | 標準語（Lee–Yang 零点の一般形）。**"partition zeros" と縮めない** |
+| 位相的エントロピー | **topological entropy** | refs.bib の Lind–Schmidt–Ward の表題 "…entropy for commuting automorphisms of compact groups" が entropy の語を確認する。"topological" は `content/003_archimedean.ts` の本文が明示している修飾 |
+| expansive（な作用） | **expansive** | 日本語版が既に英語のまま使っている（`content/003_archimedean.ts`「expansive な作用」）。訳さない |
+| atoral | **atoral** | 同上。日本語版が英語のまま使っており、refs.bib の Lind–Schmidt–Verbitskiy の表題 "…, atoral polynomials, …" で確認した |
+| 複素単位トーラス | **the complex unit torus** | `content/003_archimedean.ts` の $\mathsf U(P)=\{z\in\mathbb{S}^d:P(z)=0\}$ の定義域。逐語訳 |
+| 周期成分の個数 | **the number of periodic components** | Lind–Schmidt–Verbitskiy の $\mathsf P_\Gamma$ を指す本文の説明。**「周期点数」(number of periodic points) と必ず言い分ける**（`content/003_archimedean.ts` は両者が因子 $c_\Gamma(f)$ だけずれることを本文で明示しており、訳で混ぜると規約の差の段落が意味を失う） |
+| 増大率 | **growth rate** | 標準語。`content/003_archimedean.ts`「周期点の増大率」＝ "the growth rate of the periodic points" |
+| 1 の冪根 | **root of unity** | 標準語 |
+| 単項式倍 | **multiplication by a monomial** | `content/002_setup.ts` の「単項式倍は $a_L$ を変えない」。**"monomial multiple" と名詞化しない**（本文は操作を述べている） |
+| Galois 不変な代数的整数 | **Galois-invariant algebraic integer** | 標準語。ハイフンつきの **Galois-invariant** に統一する |
+| 入れ子の終結式 | **nested resultant**（動詞は "nest the resultant"） | `content/002_setup.ts` の $\mathrm{Res}_z(\dots,\mathrm{Res}_w(\dots))$ の形をそのまま指す。逐語訳 |
+| モニック | **monic** | 標準語 |
+| 素因数分解 / 指数ベクトル | **prime factorisation** / **exponent vector** | 綴りは §2.5 の英綴り（-isation）に従う。$\Lambda$ の等号・順序の定義で対にして使う |
+| 有限手続きで決定できる | **is settled by a finite procedure** / **is determined by a finite procedure** | `content/001_intro.ts`・`002_setup.ts` の言い方。**"can be decided" は §1.2 の decidable と衝突しやすいので、量を求める場面では determine を使う** |
+| 熱力学極限 | **the thermodynamic limit** | 標準語 |
+| 閉形式 | **closed form** | 標準語。「閉形式をもつ」＝ "admits a closed form" |
+| 自由フェルミオン | **free fermions** | 標準語 |
+| Yang–Baxter | **the Yang–Baxter equation** | 標準語。日本語版は「Yang–Baxter」とだけ書くが、英語では equation を補わないと名詞句にならない |
+| #P 困難 | **#P-hard** | 標準語 |
+| 妥当性検査 | **sanity check** | `content/003_archimedean.ts`「枠組みの妥当性検査としてのみ使い」＝ "only as a sanity check on the framework"。**"validity check" にしない**（本文の含意は「枠組みが壊れていないことの確認」であって、正当性の証明ではない） |
+| 全域木エントロピー | **spanning-tree entropy** | §1.2 の「全域木数 = number of spanning trees」の派生。**ここでも complexity を使わない**（軸 3 と衝突するため） |
+| Catalan 定数 | **Catalan's constant** | 標準語。所有格の 's を付ける |
+| 自由エネルギー密度 | **the free energy density** | 標準語。`content/001_intro.ts` の既訳が既にこの形である |
+| 住処（英訳の言い回し） | **the habitat of $X$ is …** / **$X$ lives in …** | §1.1 の habitat の使い方。`content/002_setup.ts`「各量の住処は次のとおり」＝ "The habitats of the quantities involved are as follows" |
+
+### 1.2c 第 4 章（命題 A・B・C・C′・N・L）の英訳で確定させた語
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 切断（$p^k$ の $k$） | **truncation level** | `content/004_lambda_finite.ts` の用法（$\min(v_p(Z_N),k)$ の $k$）。「$p^k$ で打ち切る水準」であり、cut / truncation のうち水準を表す語を選んだ |
+| 基準レベル | **base level** | 同ファイル 命題 C′ の「基準レベルを 1 のままにした補正は不可能である」。上界 $\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$ の右辺で参照される水準 $w^*+1$ を指す。**level だけにしない**（truncation level と紛れる） |
+| 鳩の巣原理 | **the pigeonhole principle** | 標準語。命題 A の証明で使う |
+| 指標の一次独立性（Artin） | **Artin's linear independence of characters** | 標準語。命題 B の証明で使う |
+| 同伴行列 | **companion matrix** | 標準語。命題 C・C′ で使う |
+| 根基（$\rho=\prod_i f_i$） | **the radical** | 命題 C′ の定義そのもの。初出で定義式を添える |
+| Gram 行列 | **Gram matrix** | 標準語。命題 C′ の $G=(\operatorname{Tr}T^{i+j})$ |
+| 上界 | **upper bound** | 標準語。「上界が破れる」は **the bound fails**（"is broken" にしない） |
+| 例外集合 | **the exceptional set** | 命題 N。Skolem–Mahler–Lech 型の相殺で等号が崩れる $N$ の集合 |
+| 相殺 | **cancellation** | 命題 N。"cancellation of Skolem–Mahler–Lech type" |
+| 方法論上の注記 | **a methodological note** | 命題 C。0 件の観察を根拠にしてはならない、という教訓の見出し |
+| 反例が破れる／等号が破れる | **equality fails** | 命題 C。「$X$ 例中 $Y$ 例で破れた」は "equality failed for $Y$ out of $X$ examples" |
+| lifting-the-exponent（LTE） | **lifting the exponent (LTE)** | 命題 L。標準語（略号は本文でも LTE のまま） |
+
+**記号の書き方（実測に基づく制約。推測ではない）**: 命題 C′ / C″ の**プライムは ASCII の `'` で書く**
+（`Proposition C'` / `Proposition C''`）。**U+2032 `′` を地の文・タイトルへ書くと英語版の PDF から
+無言で消える**（2026-08-01 に `structured-latex-en` で実測。`build:pdf` の「組めない文字」検査が
+`′` を検出してビルドが落ちた。英語版は和文フォントを読み込まないため落とし先が無い）。
+数式ノードの中では `^{\prime}` を使えるが、**日本語版の数式は 1 文字も変えられない**ので、
+この制約は地の文とタイトルにのみ関わる。
+
 ### 1.3 訳し分けに注意する語
 
 | 日本語 | 英語 | 注意 |
@@ -140,6 +200,44 @@
 - 強調は **1 つのノードの中で開いて閉じる**。ノードをまたぐ `**` はビルドが落ちる（意図的な設計）。
 - 強調は日本語版と同じ箇所に置く（強調の有無は主張の強さに関わる）。
 
+### 1.4 フロントマターと「先行研究との関係」の節で使った語（2026-08-01 追記）
+
+`structured-latex-en/frontmatter.ts`（要旨）と `content/008_prior_art.ts`（先行研究の節）、
+`content/001a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
+**後続はここにある語を別の語で訳さないこと。**
+
+| 日本語 | 英語 | 根拠・注意 |
+|---|---|---|
+| 本論文 | **this paper** | 既定はこれ（既訳 `001_intro.ts` が "This paper is a reframing…" と書いており、そこに合わせる）。**"this survey" は、記事種別としてのサーベイそれ自体が主語のときだけ**使う（「この解説が何を概観するか」を述べる箇所と要旨）。両者を無差別に混ぜない |
+| （記事種別としての）解説・概観 | **survey** | Expositiones の記事種別 Survey Article の語。「何を概観として与えるか」＝ "what this survey gives an overview of" |
+| 概観する | **give an overview of** | "overview" は名詞で使う。"to survey" という動詞は使わない（記事種別の名詞 survey と紛れる） |
+| おおむね既出 | **broadly known** | `outputs/reports/cycle17_T1_prior_art_check.md` §0 の判定「おおむね既出」。**"mostly not new" のような否定形にしない**（判定を強めても弱めてもならない） |
+| 調べた範囲では見つからなかった | **we did not find** | **これ以上の意味にしてはならない。** "there is no…"、"this is new"、"to the best of our knowledge"（網羅を含意する）へ言い換えることを禁じる。本論文は 0 件を新規性の根拠にしない |
+| 先行研究との関係 | **relation to the literature** | 節の見出し。§1.3 の「既出性 ＝ prior art」と併用してよい（節見出しは前者、調査そのものは後者） |
+| 逆数学 | **reverse mathematics** | §1.3 の既出の用法どおり。標準語 |
+| 可算符号 | **countable code**（符号化する＝**to code**） | 逆数学の標準語。SEP の記述（実数を急収束 Cauchy 列で符号化する）に対応 |
+| 急収束 Cauchy 列 | **rapidly converging Cauchy sequence** | 同上 |
+| 完備可分距離空間 | **complete separable metric space** | 標準語 |
+| 構成的代数 | **constructive algebra** | Alonso García–Lombardi–Perdry の枠組みを指す |
+| Henselization | **Henselisation** | **-ise に統一する**（§2.5 の英綴り規則。原論文の表題は "Henselian local rings" なので、**表題を引用するときは原綴りのまま**にする） |
+| 数値フィット | **a fit**（「フィットであって証明ではない」＝ **a fit and not a proof**） | DuBose–Vallières が自認している性格。**"numerical evidence" と訳さない**（彼らの自認より弱くなる） |
+| 明示式 | **explicit formula** | Monsky の $\alpha^*$ に明示式が無いことの記述で使う |
+| 存在しか主張していない | **asserts only its existence** | Monsky 1989 Theorem 3.12 / 3.13 の "there is a real number …" の形に対応 |
+| 弱い形 | **a weaker form** | 命題 T の既出性（$v_2$ が偶数）の言い方 |
+| 強化 | **a strengthening** | 同上。命題 T は既出の弱い形の強化である |
+| 住処（ブロックの宣言としての） | **habitat** | §1.1 のとおり。**本文で言及するときイタリック等の強調を付けない**（生成器は `**太字**` しか解さず、`*斜体*` はアスタリスクがそのまま PDF に出る。実際に一度出した） |
+
+### 1.5 生成器の制約（訳語ではないが、書くときに必ず効く）
+
+- **強調は `**…**` だけである。`*…*`（斜体）は解釈されず、アスタリスクがそのまま PDF に出る。**
+- **`**…**` は 1 つのノードの中で開いて閉じること。** ノード（＝配列の 1 要素の文字列）をまたぐと
+  ビルドが落ちる。数式 `math(...)` を挟んで強調したくなったら、**強調の範囲を数式の手前で閉じる**
+  ように文を組み替える（例:「**命題 V は $d=1$ で既出**」→ "**Proposition V is known in the
+  one-variable case.** For $d=1$, …"）。
+- **引用は `cite(keys, note?)`。第 2 引数が locator である。**
+  `cite(["Key"], "Theorem 5.1")` と書く。`cite(["Key", "Theorem 5.1"])` は
+  「そんな BibTeX キーは無い」で生成が落ちる。
+
 ---
 
 ## 3. 後続が判断する必要がある点（訳語では決まらない）
@@ -147,8 +245,28 @@
 1. **「命題 A」の呼称**（§1.3）。生成器は Theorem 環境で組むので、本文で "Proposition A" と呼ぶと
    PDF 上は "Theorem 4.1 (Proposition A)" のような二重呼称になる。日本語版も同じ状態である。
    統一するなら生成器か本文のどちらかを変える必要があり、**内容の変更を伴うので独断で変えない**。
-2. **要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
-   現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
+2. ~~**要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
+   現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。~~
+   → **2026-08-01 に解消した。** 表題・要旨・キーワードを Survey Article 向けに書き直し、
+   MSC 2020 は zbMATH 配布の公式分類表 <https://zbmath.org/static/msc2020.pdf> と照合して確定した
+   （primary 11R06 / secondary 03B25, 03B30, 05C30, 11R23, 37B40, 37P35, 68V20, 82B20）。
+   **残る未確定は著者の所属と連絡先だけである**（リポジトリに一次情報が無いので空にしてある。
+   投稿前に著者本人が埋めること）。
+3. ~~**数式の中に日本語が入っているブロックがある**（第 1〜3 章の英訳で検出）。
+   `paper_012_definition_ladder`（決定可能性の梯子）の `displayMath` が
+   `\underbrace{...}_{\text{無条件に決定可能}}` 等を含み、英語版は和文フォントを読み込まないため
+   `npm run build:pdf` が「PDF に組めない文字がある」で落ちる。~~
+   → **2026-08-01 に統合担当が (a) の方針で解消した。** すなわち `\text{}` の**中身だけ**を英訳し、
+   `structured-latex-en/tools/ja-en-exceptions.ts` へ理由つきで登録した。
+   **日本語版は正本なので変更していない。** `\text{}` の外側の数式記号は 1 文字も変えていない。
+   同種の箇所が他章にもある（`004_lambda_finite.ts` に 2 件、`005b_theta_infinity.ts` に 2 件）。
+   **以後この型の箇所は同じ方針で処理する**（英訳 ＋ 例外表へ理由つき登録）。
+4. **本文が「第 N 章」と書き、`\cref` が "Section N" と出す二重の言い方**（2026-08-01 に気づいた）。
+   生成器は `level: 1` を `\section` に落とし、`\crefname{section}{Section}{Sections}` を出す。
+   一方で本文の地の文は「第 3 章」＝ "Chapter 3" と書いており、日本語版も同じ状態である。
+   どちらへ寄せるかは生成器か本文のどちらかを変える判断であり、**独断で変えていない**。
+   なお**章番号そのものは、序論より前に `level: 1` の見出しを足すと全部ずれる**ので、
+   英語版限定の節を足すときは末尾へ足すこと（`content/001a_reader_guide.ts` の冒頭コメントを見よ）。
 
 ---
 
