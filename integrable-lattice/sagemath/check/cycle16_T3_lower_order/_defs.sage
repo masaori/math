@@ -1,0 +1,435 @@
+# cycle 16 / T3: 共有定義（voltage グラフ、終結式による塔の全域木数、円分体での付値）。
+#
+# lower_order.sage と degenerate_odd.sage の両方がこのファイルを load する。
+# 定義をここに一本化してあるので、両スクリプトの計算は同一の実装を使う。
+#
+# 記号は outputs/reports/cycle16_T3_lower_order_and_degeneracy.md に従う。
+
+# cycle 16 / T3 Pure: 低位項の係数（とくに定数項 nu）の明示公式と、退化点の整理。
+#
+# 対応する証明本体: outputs/reports/cycle16_T3_lower_order_and_degeneracy.md
+# 前提となる証明本体: outputs/reports/cycle14_T3_two_variable_criterion.md（命題 W = 同定理 5）
+#
+# 記号は cycle14 report に従う。
+#   X: 有限連結 voltage 多重グラフ、alpha: E -> Z^2、ell: 素数
+#   L(z,w): voltage ラプラシアン、D = det L、mu = v_ell(content_{z,w} D)、E = ell^{-mu} D
+#   g = E(1+T,1+S)、k = ord(g mod ell)、H = (g mod ell) の最低次斉次部分（次数 k）
+#   kappa_n = X_{ell^n, ell^n} の全域木数
+#   J_0 = min{ J >= 1 : phi(ell^J) > k }
+#
+# 検証するのは以下の 7 個。いずれも「有限個の例での照合」であって証明ではない。
+#
+#   Step 1  nu の閉形式（J_0 = 1 のとき）。フィットするパラメータは 0 個。
+#             ord_ell(kappa_n) = mu (ell^{2n} - 1) + c (ell^n - 1) - 2n + v_ell(kappa(X)),
+#             c = k(ell+1)/(ell-1)
+#           を n = 0..n_max の全段で照合する。
+#   Step 2  nu の有限手続き（J_0 >= 2 のとき）。補正項 Delta を
+#           「レベル ell^{J_0-1} 以下の 1 の冪根での有限計算」だけから決め、塔の値を一切
+#           使わずに予言し、n = 0..n_max の全段で照合する。
+#   Step 3  Step 1/2 の公式を、mu > 0 / v_ell(kappa(X)) > 0 の例で確認する
+#           （3 つの寄与が独立に効いていることを見るための的を絞った探索）。
+#   Step 4  退化帯の計数公式。ell+1 個の「方向」に点がちょうど均等に分かれ、
+#             |Band_n| = z_H * (ell^{2n} - 1)/(ell + 1)
+#           （z_H = H の P^1(F_ell) 有理零点の個数）であることの確認と、
+#           「max(i,j) >= J_0 の点は、退化帯に入る <=> 補題 8.4 の予言から外れる」の確認。
+#   Step 5  ell = 2 のトーラス（本プロジェクトの主対象、命題 W の射程外）の完全解決。
+#           (a) 点ごとの付値 v_2(D(zeta,xi)) = min(2, ph(s) + ph(t))（M >= 2）
+#           (b) 同一レベルの寄与 Sigma_M = (M+1) 2^M - 4（M >= 2）
+#           (c) 閉形式 ord_2(kappa_n) = 2n 2^n + 4*2^n - 6n - 1（n >= 1）
+#   Step 6  型 I / II / III の分類（z_H と n ell^n 項の有無）。
+#           係数は最大 5 段でフィットし、それより小さい n で out-of-sample 検算する。
+#   Step 7  ell = 1 mod 4 のトーラス（ell = 5, 13）。退化だが n ell^n 項が出るかを見る。
+#
+# 実行: sage lower_order.sage
+
+import sys
+import time
+from itertools import product as iproduct
+
+sys.stdout.reconfigure(line_buffering=True)
+set_random_seed(20260731)
+
+Rzw = PolynomialRing(ZZ, ['z', 'w']); zg, wg = Rzw.gens()
+Lzw = LaurentPolynomialRing(ZZ, ['z', 'w']); zL, wL = Lzw.gens()
+Rz = PolynomialRing(ZZ, 'z'); zp = Rz.gen()
+RzW = PolynomialRing(Rz, 'w'); wP = RzW.gen()
+RTS = PolynomialRing(ZZ, ['T', 'S']); Tg, Sg = RTS.gens()
+
+T0 = time.time()
+def el():
+    return "[%7.1fs]" % (time.time() - T0)
+
+# ==========================================================================
+# 基本構成（cycle14 の two_var.sage と同一。底グラフ X: 頂点 0..m-1、
+# 辺は (u, v, (a,b)) の list、u == v はループ、(a,b) in Z^2 が voltage）
+# ==========================================================================
+
+def volt_laplacian(m, edges):
+    L = matrix(Lzw, m, m)
+    for (u, v, (a, b)) in edges:
+        mon = zL**a * wL**b
+        if u == v:
+            L[u, u] += 2 - mon - mon**(-1)
+        else:
+            L[u, u] += 1; L[v, v] += 1
+            L[u, v] -= mon; L[v, u] -= mon**(-1)
+    return L
+
+def detL(m, edges):
+    return volt_laplacian(m, edges).det()
+
+def derived_edges(m, edges, N, Np):
+    out = []
+    for (u, v, (a, b)) in edges:
+        for i in range(N):
+            for j in range(Np):
+                x = (i * Np + j) * m + u
+                y = (((i + a) % N) * Np + ((j + b) % Np)) * m + v
+                out.append((x, y))
+    return out
+
+def int_laplacian(nv, uedges):
+    Lap = matrix(ZZ, nv, nv)
+    for (x, y) in uedges:
+        if x == y:
+            continue
+        Lap[x, x] += 1; Lap[y, y] += 1
+        Lap[x, y] -= 1; Lap[y, x] -= 1
+    return Lap
+
+def kappa_derived(m, edges, N, Np):
+    nv = m * N * Np
+    Lap = int_laplacian(nv, derived_edges(m, edges, N, Np))
+    return Lap.delete_rows([0]).delete_columns([0]).det()
+
+def n_components(nv, uedges):
+    parent = list(range(nv))
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]; a = parent[a]
+        return a
+    for (x, y) in uedges:
+        rx, ry = find(x), find(y)
+        if rx != ry:
+            parent[rx] = ry
+    return len(set(find(a) for a in range(nv)))
+
+def base_connected(m, edges):
+    return n_components(m, [(u, v) for (u, v, _) in edges]) == 1
+
+def cycle_voltage_lattice(m, edges):
+    parent = list(range(m))
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]; x = parent[x]
+        return x
+    tree, nontree = [], []
+    for e in edges:
+        (u, v, a) = e
+        if u == v:
+            nontree.append(e); continue
+        ru, rv = find(u), find(v)
+        if ru != rv:
+            parent[ru] = rv; tree.append(e)
+        else:
+            nontree.append(e)
+    h = {0: vector(ZZ, [0, 0])}
+    adj = {}
+    for (u, v, a) in tree:
+        adj.setdefault(u, []).append((v, vector(ZZ, a)))
+        adj.setdefault(v, []).append((u, -vector(ZZ, a)))
+    stack = [0]
+    while stack:
+        x = stack.pop()
+        for (y, a) in adj.get(x, []):
+            if y not in h:
+                h[y] = h[x] + a; stack.append(y)
+    gens = []
+    for (u, v, a) in nontree:
+        gens.append(vector(ZZ, a) + h[u] - h[v])
+    return gens
+
+def connected_by_lattice(m, edges, N, Np):
+    if not base_connected(m, edges):
+        return False
+    gens = cycle_voltage_lattice(m, edges)
+    rows = [list(g) for g in gens] + [[N, 0], [0, Np]]
+    M = matrix(ZZ, rows)
+    if M.nrows() == 0:
+        return N == 1 and Np == 1
+    d = [x for x in M.elementary_divisors() if x != 0]
+    return len(d) == 2 and d[0] == 1 and d[1] == 1
+
+def content_of(F):
+    cs = [ZZ(c) for c in F.coefficients()]
+    if not cs:
+        return ZZ(0)
+    return gcd(cs)
+
+def clear_monomial(D):
+    if D == 0:
+        return (0, 0, Rzw(0))
+    ex = [e for e in D.dict().keys()]
+    r = min(e[0] for e in ex); s = min(e[1] for e in ex)
+    P = Rzw({(e[0] - r, e[1] - s): ZZ(c) for (e, c) in D.dict().items()})
+    return (r, s, P)
+
+def f_series(D):
+    (r, s, P) = clear_monomial(D)
+    return RTS(P.subs({zg: 1 + Tg, wg: 1 + Sg}))
+
+def mu_content(D, ell):
+    return ZZ(content_of(D)).valuation(ell)
+
+def lowest_form(D, ell):
+    """f = P(1+T,1+S) の mod ell 還元の最低次斉次部分 H とその次数 k。"""
+    f = f_series(D)
+    Fl = GF(ell)
+    fb = f.change_ring(Fl)
+    if fb == 0:
+        return (None, None)
+    k = min(e[0] + e[1] for (e, c) in fb.dict().items() if c != 0)
+    RTSl = PolynomialRing(Fl, ['T', 'S'])
+    H = RTSl({e: c for (e, c) in fb.dict().items() if e[0] + e[1] == k and c != 0})
+    return (k, H)
+
+def rational_zeros(H, ell):
+    """H の P^1(F_ell) 上の有理零点（'(0:1)' と '(1:c)' の list）。"""
+    Tl, Sl = H.parent().gens()
+    out = []
+    if H.subs({Tl: 0, Sl: 1}) == 0:
+        out.append('(0:1)')
+    for c in GF(ell):
+        if H.subs({Tl: 1, Sl: c}) == 0:
+            out.append('(1:%s)' % c)
+    return out
+
+def J0_of(ell, k):
+    J = 1
+    while euler_phi(ell**J) <= k:
+        J += 1
+    return J
+
+# --------------------------------------------------------------------------
+# prod_{(zeta,xi) != (1,1)} D(zeta,xi) の厳密計算（2 段終結式。cycle14 と同一）
+# --------------------------------------------------------------------------
+
+def prod_nontrivial_resultant(D, N, Np):
+    if N == 1 and Np == 1:
+        return ZZ(1)
+    (r, s, P) = clear_monomial(D)
+    if P == 0:
+        return ZZ(0)
+    if N == 1:
+        part1 = ZZ(1)
+    else:
+        A = Rz((wP**Np - 1).resultant(RzW(P)))
+        if A == 0:
+            return ZZ(0)
+        Q = Rz((zp**N - 1) // (zp - 1))
+        u1 = ZZ((-1)**(N + 1))**(r * Np)
+        u2 = ZZ((-1)**(Np + 1))**(s * (N - 1))
+        part1 = u1 * u2 * ZZ(Q.resultant(A))
+    if Np == 1:
+        part2 = ZZ(1)
+    else:
+        P1 = Rz(P.subs({zg: ZZ(1), wg: zp}))
+        if P1 == 0:
+            return ZZ(0)
+        Qp = Rz((zp**Np - 1) // (zp - 1))
+        part2 = ZZ((-1)**(Np + 1))**s * ZZ(Qp.resultant(P1))
+    return part1 * part2
+
+_TOWER_CACHE = {}
+
+# 1 段あたりの計算時間の上限（秒）。終結式の次数は ell^{2n} で増えるので、
+# 深い段は現実的な時間で終わらない。打ち切った段は 'TO' として記録し、
+# SKIPS に残して実行末尾で一覧を出す（黙って範囲を狭めないため）。
+STAGE_BUDGET = 420
+SKIPS = []
+
+def tower_ords(m, edges, ell, nmax, tag='', budget=None):
+    """ord_ell(kappa_n) の list（n = 0..nmax）。
+       塔が非連結な段は None、時間上限で打ち切った段は 'TO'。
+       budget を渡すとその段あたり秒数を使う（既定は STAGE_BUDGET）。"""
+    if budget is None:
+        budget = STAGE_BUDGET
+    key = (m, tuple(sorted((u, v, a, b) for (u, v, (a, b)) in edges)), ell, nmax)
+    if key in _TOWER_CACHE:
+        return _TOWER_CACHE[key]
+    D = detL(m, edges)
+    k0 = kappa_derived(m, edges, 1, 1)
+    out = []
+    for n in range(nmax + 1):
+        N = ell**n
+        if not connected_by_lattice(m, edges, N, N):
+            out.append(None); continue
+        try:
+            alarm(budget)
+            pr = prod_nontrivial_resultant(D, N, N)
+            cancel_alarm()
+        except AlarmInterrupt:
+            cancel_alarm()
+            SKIPS.append((tag, m, tuple((u, v, a, b) for (u, v, (a, b)) in edges),
+                          ell, n, budget))
+            out.append('TO')
+            # 以降の段はさらに重いので打ち切る
+            for _ in range(n + 1, nmax + 1):
+                out.append('TO')
+            break
+        if pr == 0:
+            out.append(None); continue
+        out.append(ZZ(ZZ(k0 * pr)).valuation(ell) - 2 * n)
+    _TOWER_CACHE[key] = out
+    return out
+
+
+def usable_prefix(ords):
+    """先頭から連続する「実際に計算できた段」だけを返す（None / 'TO' で打ち切り）。"""
+    out = []
+    for o in ords:
+        if o is None or o == 'TO':
+            break
+        out.append(o)
+    return out
+
+# --------------------------------------------------------------------------
+# 円分体での点ごとの付値 v_ell(D(zeta,xi))（v_ell(ell) = 1 に正規化）
+# --------------------------------------------------------------------------
+
+_CYC_CACHE = {}
+
+def cyc_data(ell, n):
+    """(K, zeta_{ell^n}, prime above ell, ramification index e)。"""
+    key = (ell, n)
+    if key in _CYC_CACHE:
+        return _CYC_CACHE[key]
+    K = CyclotomicField(ell**n)
+    P = K.prime_above(ell)
+    e = P.ramification_index()
+    _CYC_CACHE[key] = (K, K.gen(), P, e)
+    return _CYC_CACHE[key]
+
+def point_val(D, ell, n, a, b):
+    """v_ell(D(zeta^a, zeta^b))、zeta = 原始 ell^n 乗根。0 なら +Infinity。"""
+    (K, g, P, e) = cyc_data(ell, n)
+    val = D.subs({zL: g**ZZ(a), wL: g**ZZ(b)})
+    if val == 0:
+        return oo
+    return QQ(K(val).valuation(P)) / e
+
+# ==========================================================================
+# 例
+# ==========================================================================
+
+EX = []
+EX.append(('DV1 bouquet (1,0),(0,1)  = トーラス', 1,
+           [(0, 0, (1, 0)), (0, 0, (0, 1))]))
+EX.append(('DV2 bouquet (1,0)x2,(0,1)x2 (content 2)', 1,
+           [(0, 0, (1, 0))] * 2 + [(0, 0, (0, 1))] * 2))
+EX.append(('DV3 bouquet (1,5),(0,3),(1,2),(0,1)', 1,
+           [(0, 0, (1, 5)), (0, 0, (0, 3)), (0, 0, (1, 2)), (0, 0, (0, 1))]))
+EX.append(('DV5 bouquet (1,0),(2,3),(1,1)', 1,
+           [(0, 0, (1, 0)), (0, 0, (2, 3)), (0, 0, (1, 1))]))
+EX.append(('bouquet (1,0),(0,1),(1,1)', 1,
+           [(0, 0, (1, 0)), (0, 0, (0, 1)), (0, 0, (1, 1))]))
+EX.append(('bouquet (1,0),(0,1) を 3 重化 (content 3)', 1,
+           [(0, 0, (1, 0))] * 3 + [(0, 0, (0, 1))] * 3))
+EX.append(('bouquet (1,0),(0,1) を 5 重化 (content 5)', 1,
+           [(0, 0, (1, 0))] * 5 + [(0, 0, (0, 1))] * 5))
+EX.append(('2 頂点 平行 3 重辺 (0,0),(1,0),(0,1)', 2,
+           [(0, 1, (0, 0)), (0, 1, (1, 0)), (0, 1, (0, 1))]))
+EX.append(('2 頂点 + ループ (0,0),(1,0), ループ (0,1)', 2,
+           [(0, 1, (0, 0)), (0, 1, (1, 0)), (1, 1, (0, 1))]))
+EX.append(('3 頂点三角形 (1,0),(0,1),(0,0)', 3,
+           [(0, 1, (1, 0)), (1, 2, (0, 1)), (2, 0, (0, 0))]))
+EX.append(('bouquet (1,0),(0,1),(1,-1)', 1,
+           [(0, 0, (1, 0)), (0, 0, (0, 1)), (0, 0, (1, -1))]))
+EX.append(('bouquet (1,0),(0,1),(2,1)', 1,
+           [(0, 0, (1, 0)), (0, 0, (0, 1)), (0, 0, (2, 1))]))
+EX.append(('bouquet (1,0),(0,1),(1,2),(2,1)', 1,
+           [(0, 0, (1, 0)), (0, 0, (0, 1)), (0, 0, (1, 2)), (0, 0, (2, 1))]))
+EX.append(('2 頂点 平行 4 重辺 (0,0),(1,0),(0,1),(1,1)', 2,
+           [(0, 1, (0, 0)), (0, 1, (1, 0)), (0, 1, (0, 1)), (0, 1, (1, 1))]))
+EX.append(('2 頂点 平行 5 重辺 (0,0)x2,(1,0),(0,1),(1,1)', 2,
+           [(0, 1, (0, 0)), (0, 1, (0, 0)), (0, 1, (1, 0)),
+            (0, 1, (0, 1)), (0, 1, (1, 1))]))
+
+PRIMES = [2, 3, 5, 7, 11, 13]
+# 一括掃引での段数上限。終結式の次数は ell^{2n} なので、深い段は現実的な時間で終わらない。
+# 実測（SageMath 10.6, このマシン）: トーラスで N = ell^n = 125 が約 265 秒、
+# N = 169 は 17 分でも終わらなかった。辺数の多いグラフはさらに重い。
+# そこで ell = 13 の一括掃引は n <= 1 に留める。
+# ell = 13 の n = 2 は degenerate_odd.sage Step A（対象が 4 塔だけ）で
+# 段あたり予算 STEP_A_BUDGET を与えて別途試す。
+# ell = 2 の n = 7（N = 128）と ell = 3 の n = 5（N = 243）は、辺数の多いグラフでは
+# 1 段あたり 10 分を超えて全体が終わらなくなったので、それぞれ 6 / 4 に落とした。
+# 影響: Step 6 のフィットは 6 段以上を要求するので ell = 3 は対象外になる（ell = 2 は残る）。
+# ell = 2 トーラスの n = 1..6 は band_structure.sage Step C が独立に押さえている。
+NMAX = {2: 6, 3: 4, 5: 3, 7: 2, 11: 2, 13: 1}
+
+
+def invariants(m, edges, ell):
+    """(ok, mu, k, H, zeros, J0, v_kappaX) を返す。ok=False なら (H) が成り立たない等。"""
+    if not base_connected(m, edges):
+        return None
+    D = detL(m, edges)
+    if D == 0:
+        return None
+    # (H): 全ての n で X_{ell^n,ell^n} が連結（系 C2' の判定）
+    if not connected_by_lattice(m, edges, ell, ell):
+        return None
+    mu = mu_content(D, ell)
+    # k, H は **E = ell^{-mu} D** から作らなければならない。
+    # D から作ると mu > 0 のとき D = 0 mod ell なので lowest_form が None を返し、
+    # mu > 0 の例が丸ごと落ちてしまう（これで Step 3 が長らく 0 件だった）。
+    Escaled = Lzw(D / ZZ(ell)**mu) if mu > 0 else D
+    (k, H) = lowest_form(Escaled, ell)
+    if k is None:
+        return None
+    zeros = rational_zeros(H, ell)
+    J0 = J0_of(ell, k)
+    kX = kappa_derived(m, edges, 1, 1)
+    return dict(D=D, mu=mu, k=k, H=H, zeros=zeros, J0=J0,
+                vkX=ZZ(kX).valuation(ell), kX=kX)
+
+
+def E_of(D, ell, mu):
+    return Lzw(D / ZZ(ell)**mu)
+
+
+def delta_correction(D, ell, mu, k, J0, verbose=False):
+    """Delta = 「レベル ell^{J0-1} 以下の 1 の冪根での有限計算」による補正項。
+       Delta = sum_{(zeta,xi) != (1,1), max level <= J0-1} v_ell(E(zeta,xi))
+               - k * S_{J0-1} - 2 k (J0-1)
+       S_m = sum_{i,j=1}^{m} phi(ell^i) phi(ell^j) / phi(ell^{max(i,j)}).
+       J0 = 1 なら Delta = 0（和が空）。"""
+    if J0 == 1:
+        return QQ(0)
+    m0 = J0 - 1
+    Ev = E_of(D, ell, mu)
+    N = ell**m0
+    tot = QQ(0)
+    (K, g, P, e) = cyc_data(ell, m0)
+    for a in range(N):
+        for b in range(N):
+            if a == 0 and b == 0:
+                continue
+            v = point_val(Ev, ell, m0, a, b)
+            if v is oo:
+                return None       # 退化（系 Q' に反する）: 呼び出し側で除外済みのはず
+            tot += v
+    S = QQ(0)
+    for i in range(1, m0 + 1):
+        for j in range(1, m0 + 1):
+            S += QQ(euler_phi(ell**i) * euler_phi(ell**j)) / euler_phi(ell**max(i, j))
+    return tot - k * S - 2 * k * m0
+
+
+def predicted_ord(inv, ell, Delta, n):
+    """ord_ell(kappa_n) の予言値（フィットパラメータ 0 個）。"""
+    mu = inv['mu']; k = inv['k']
+    c = QQ(k * (ell + 1)) / (ell - 1)
+    return mu * (ell**(2 * n) - 1) + c * (ell**n - 1) - 2 * n + inv['vkX'] + Delta
+
+
