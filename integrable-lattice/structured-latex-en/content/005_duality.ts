@@ -637,9 +637,15 @@ export default defineBlocks([
         " — that section is a numerical fit from five levels, and the authors themselves state that it is ",
         "not a proof. For ",
         math(String.raw`\ell\ge5`),
-        " we have not been able to obtain the body of Monsky (ASPM 17, 1989) ",
+        " we have read the text of Monsky (ASPM 17, 1989) ",
         cite(["Monsky1989"]),
-        ", and therefore **we do not write that the result is absent from the literature**.",
+        " in the Open Access version: that paper asserts only the existence of the corresponding constant, ",
+        "together with its rationality when ",
+        math(String.raw`d=2`),
+        ", and gives no explicit formula (see the prior-art discussion in the proof of ",
+        ref("paper_prop_W"),
+        "). Even so, our search was not exhaustive, and therefore " +
+          "**we do not write that the result is absent from the literature**.",
       ]),
       paragraph([
         "**The status of (G6) (added 2026-08-01).** The condition that extracts the depth of vanishing of ",
