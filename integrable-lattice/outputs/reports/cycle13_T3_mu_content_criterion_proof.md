@@ -17,9 +17,13 @@
 | $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^n+\lambda n+\nu$（岩澤型漸近） | **既知理論に依拠せず、本レポートで証明した**（§6 定理 2）。cycle 12 README の「§5 証明していないこと」に挙がっていた項目が消える。仮定は「$X$ 連結、かつ $X_\ell$ が連結」のみ。$\chi(X)\neq0$ は**不要**（§6.6）。 |
 | $(☆)$ | **証明した**（§7 定理 3）。$\mu_\ell=v_\ell(\mathrm{content}_z\det L(z))$、および $\lambda=\lambda_{\mathrm W}-1$（$\lambda_{\mathrm W}$ は $\det L(1+T)$ の Weierstrass 次数）。 |
 | $(☆)$ の新規性 | **主張しない。既知の言い換えである。** §8 に理由を書く。McGown–Vallières III Theorem 6.1 が「$\mu=\min_j v_\ell(c_j)$」を述べており、$\mu$ は漸近式から一意に決まるので両者は同じ量である。本レポートの寄与は**本プロジェクトの記法で完全な証明を与えたこと**だけであって、新しい数学的結果ではない。 |
+| $\mu_\ell>0$ の判定 | **証明した**（§7.3 命題 7.3）。$\mu_\ell>0\iff\det(L\bmod\ell)=0$ over $\mathbb{F}_\ell(z)$。$d=1$ では有限体上の行列式 1 個で決まる。 |
+| bouquet の $\mu$ | **証明した**（§7.4 命題 7.4）。$m=1$ では $\mathrm{content}_z(D)=\gcd_a m_a$ なので、$\mu>0$ は $\ell$ 重多重グラフという自明例に限る。cycle 12 T3 が 125 件の全探索で数値観察していた事実の証明。 |
 | 適用範囲外 | $\ell\nmid N$ の段（$\mathbb{Z}/N$-被覆で $N$ が $\ell$ と素）は content で支配され**ない**。反例 witness を §9.4 に置く。 |
+| $p\neq\ell$ の付値 | **下界のみ証明した**（§9.5 命題 9.5）。$v_p(\kappa_n)\ge\mu_p\ell^n+(v_p(\kappa_0)-\mu_p)$。等号成立（$v_p(R_n)$ の有界性）は**未解決**で、$v_p(R_n)>0$ になる実例がある。 |
+| $(★)$ $(☆)$ の出典 | **特定した**（§8.1, §8.2）。$(☆)$ の $Q(T)$ は McGown–Vallières III Corollary 5.6 の $\det M$ 代入で $\det L(1+T)$ に一致する。$(★)$ は Vallières 論文 式(7)、および Hammer–Mattman–Sands–Vallières Thm 2.11 / Cor 3.5 から独立に導ける。 |
 
-**証明できなかったこと・未確認のこと**は §10 に分離して書いた。
+**証明できなかったこと・未確認のこと**は §10 に分離して書いた。使った体の棚卸しと「$\ell$ 進脱出が 1 点に隔離されている」ことの整理は §13 にある。
 
 ---
 
@@ -397,6 +401,40 @@ McGown–Vallières III Theorem 6.1（cycle13 step1 report §3.5）は $\chi(X)\
 
 **注 7.2（$\lambda$ について）.** cycle 12 README §6 は「$\lambda$ の一般則は今回の対象外」としていたが、定理 3 により $\lambda=\min\{j:v_\ell(c_j)=\mu\}-1$ として同じく決定可能である。README の観察「$\det L=-c\,z^{-1}(z-1)^2$ 型では $\lambda=1$」は、この型では $f(T)=-c\,T^2/(1+T)$ で $\lambda_{\mathrm W}=2$ となることから従う。また例 5（$\lambda=3$）は $\lambda_{\mathrm W}=4$ である（Step 6 の表）。**$\lambda\ge1$ が常に成り立つ**ことは §6.1 の $s\ge2$ から従う。
 
+### 7.3 $\mu_\ell>0$ の有限体判定（$d=1$ の有限手続き）
+
+> **命題 7.3.** *$D=\det L(z)\neq0$ とする。$\overline{L}(z):=L(z)\bmod\ell\in M_m\bigl(\mathbb{F}_\ell[z,z^{-1}]\bigr)$ と置くと*
+> $$\mu_\ell>0\iff \det\overline{L}(z)=0\ \text{in }\mathbb{F}_\ell[z,z^{-1}]\iff \overline{L}(z)\ \text{が}\ \mathbb{F}_\ell(z)\ \text{上で特異}.$$
+> *より一般に $\mu_\ell=\max\{k\ge0: D(z)\equiv0\bmod\ell^{k}\}$。*
+
+**証明.** $\det$ は係数環の準同型と可換なので、環準同型 $\mathbb{Z}\to\mathbb{Z}/\ell^{k}$ を係数に施すと $\det\bigl(L\bmod\ell^{k}\bigr)=D\bmod\ell^{k}$。よって
+
+$$D\equiv0\bmod\ell^{k}\iff \ell^{k}\mid\mathrm{content}_z(D)\iff v_\ell\bigl(\mathrm{content}_z(D)\bigr)\ge k .$$
+
+定理 3 $(7.1)$ より $\mu_\ell=v_\ell(\mathrm{content}_z D)$ だから、$\mu_\ell=\max\{k: D\equiv0\bmod\ell^k\}$ を得る。$k=1$ の場合が第 1 の同値である。$\mathbb{F}_\ell[z,z^{-1}]$ は整域（$\mathbb{F}_\ell[z]$ の局所化）なので、その分数体 $\mathbb{F}_\ell(z)$ 上で $\overline{L}$ が特異であることと $\det\overline{L}=0$ は同値。$\blacksquare$
+
+**注 7.3′.** $d=1$（$\mathbb{Z}$ 値 voltage、1 変数）では、これは**有限体上の 1 個の行列式が消えるか**という完全に決定可能な判定に落ちる。cycle 14 T3 の「最低次斉次部分 $H$」による判定は $d=2$（$\mathbb{Z}^2$ 値 voltage）についての別命題であり、混同しないこと。
+
+> **機械検証**: `verify_criterion.sage` F 節。10 グラフ × $\ell\in\{2,3,5,23\}$ の 40 件で、同値と一般形 $\mu_\ell=\max\{k\}$ の両方を照合、FAIL 0。
+
+### 7.4 bouquet では $\mu>0$ は自明例のみ
+
+cycle 12 T3（`cycle12_T3_nonzero_mu_p`）は 125 件の全探索で「bouquet では content がループ重複度の gcd に一致する」ことを**数値観察**として記録していた。これを証明する。
+
+> **命題 7.4.** *$m=1$（1 頂点、辺はすべてループ）とし、$a\ge1$ に対し $m_a:=\#\{\text{voltage }\pm a\text{ のループ}\}$ と置く（voltage $0$ のループは §1.4 より $L(z)$ に寄与しないので除く）。少なくとも 1 つの $m_a>0$ とすると*
+> $$\mathrm{content}_z(D)=\gcd_{a\ge1}m_a . \tag{7.2}$$
+> *したがって $\mu_\ell>0$ となるのは「すべての $a$ で $\ell\mid m_a$」、すなわち $X$ が（voltage $0$ のループを除いて）$\ell$ 重多重グラフであるときに限る。*
+
+**証明.** $m=1$ なので $D(z)=L_{11}(z)=\sum_{a\ge1}m_a\bigl(2-z^{a}-z^{-a}\bigr)$（voltage $a$ のループと voltage $-a$ のループは同じ寄与 $2-z^{a}-z^{-a}$ を与えるので $m_a$ にまとめてよい）。指数ごとに係数を読むと、$a\ge1$ について $z^{a}$ の係数は $-m_a$、$z^{-a}$ の係数も $-m_a$、定数項は $2\sum_a m_a$。よって
+
+$$\mathrm{content}_z(D)=\gcd\Bigl(\{m_a\}_{a\ge1},\ 2\sum_a m_a\Bigr)=\gcd_a m_a,$$
+
+最後の等号は $\gcd_a m_a$ が各 $m_a$ を割るので $2\sum_a m_a$ も割ることによる。$\blacksquare$
+
+**注 7.4（$m\ge2$ では非自明な相殺が起きる）.** $m\ge2$ では $D$ は真の行列式なので、$L$ の各成分の content が $1$ でも $\det$ の content が $\ell$ で割れることがある。cycle 12 の例 1（2 頂点、$u$–$v$ 間に voltage $0,1,2$ の平行 3 重辺、各頂点に voltage $1$ のループ 1 本）では、$a(z)=1+z+z^{2}$、$g(z)=5-z-z^{-1}$ と置くと $\det L=g^{2}-a(z)a(z^{-1})$ であり、$\bmod\,2$ では $g\equiv1+z+z^{-1}=z^{-1}a(z)$、$a(z^{-1})=z^{-2}a(z)$ より $g^{2}\equiv z^{-2}a(z)^{2}\equiv a(z)a(z^{-1})$、ゆえに $\det L\equiv0\pmod2$。命題 7.3 より $\mu_2\ge1$（実際 $\mathrm{content}=12$ なので $\mu_2=2$）。**つまり $\mu>0$ が自明例に限られるのは bouquet の場合だけである。**
+
+> **機械検証**: `verify_star.sage` D 節。15 個の bouquet（負 voltage・voltage $0$ 混在・$\ell$ 重の組み合わせを含む）で $(7.2)$ と「$\mu_\ell>0\iff$ 全 $m_a$ が $\ell$ で割れる」を照合、FAIL 0。
+
 ---
 
 ## 8. 新規性について（主張しない）
@@ -411,7 +449,50 @@ McGown–Vallières III Theorem 6.1（cycle13 step1 report §3.5）は $\chi(X)\
 
 **したがって本レポートの寄与は「本プロジェクトの記法・仮定で、外部文献の本文を参照せずに読める完全な証明を与えたこと」だけである。数学的な新規性は主張しない。**
 
-一方、cycle 12 README §5 が「文献に $\mu>0$ の明示例があるか未確認」と書いた点については、本レポートでも**変わらず未確認**である（本セッションで [E][G] の本文は取得していない）。
+一方、cycle 12 README §5 が「文献に $\mu>0$ の明示例があるか未確認」と書いた点については、本レポートでも**変わらず未確認**である。
+
+### 8.1 [E] Theorem 6.1 と Corollary 5.6 の本文（逐語）
+
+> **出所について（正直に）**: 以下の逐語引用と同定は、同じ主張を独立に証明していた並行成果（救済 PR #25、ブランチ `worktree-nifty-drifting-engelbart`）が **arXiv 版 PDF 本文を取得して**記録したものを、本レポートへ統合したものである。**本セッションでは PDF を再取得していない**ので、引用の字句の照合は再実行していない。
+
+McGown–Vallières, *On abelian $\ell$-towers of multigraphs III*（arXiv:2107.07639）本文より:
+
+> **Theorem 6.1.** Let $X$ be a connected multigraph satisfying $\chi(X)\neq0$ and let
+> $\alpha:S\longrightarrow\mathbb{Z}_\ell$ be a function for which all multigraphs
+> $X(\mathbb{Z}/\ell^n\mathbb{Z},S,\alpha_n)$ are connected. […] define the $\ell$-adic integers $c_j$ via
+> $Q(T)=P(Q_{b_1}(T),\dots)=c_1T+c_2T^2+\dots\in\mathbb{Z}_\ell[[T]]$ […] Let
+> $\mu=\min\{v_\ell(c_j)\mid j=1,2,\dots\}$, and $\lambda=\min\{j\mid j\in\mathbb{N}\text{ and }v_\ell(c_j)=\mu\}-1$.
+> If $\kappa_n$ denotes the number of spanning trees of $X(\mathbb{Z}/\ell^n\mathbb{Z},S,\alpha_n)$, then there exist
+> a nonnegative integer $n_0$ and a constant $\nu\in\mathbb{Z}$ […] such that
+> $\mathrm{ord}_\ell(\kappa_n)=\mu\ell^n+\lambda n+\nu$, when $n\ge n_0$.
+
+**岩澤冪級数 $Q(T)$ の同定.** 同論文 Corollary 5.6 により $P(X_1,\dots,X_t,Y_1,\dots,Y_t)=\det M$、$M=\bigl(d_{ij}-B_{ij}-C_{ij}+P_{ij}(X,Y)\bigr)$ であり、$X_y\mapsto\rho_{\ell^{k}}(b_y)=\zeta^{b_y}-1$、$Y_y\mapsto\zeta^{-b_y}-1$ の代入で $\det(D-A_{\psi_k})$ に一致する。$\mathbb{Z}$ 値 voltage の場合は $Q_b(T)=(1+T)^{b}-1$ なので
+
+$$Q(T)=\det L(1+T)=f(T).$$
+
+したがって [E] Theorem 6.1 の $\mu,\lambda$ は本レポートの $\mu(f),\lambda_{\mathrm W}-1$ に**そのまま一致する**。§8 の 2 番（一意性経由の同一視）は $Q(T)$ の定義を知らなくても成立する議論だったが、ここでは $Q(T)$ 自体が $\det L(1+T)$ であることまで確認できている。
+
+**証明経路の違い（新規性ではない）**: [E] は Artin–Ihara $L$ 函数の $u=1$ 特殊値と整数値多項式の $\ell$ 進補間を使う。本レポートは Kirchhoff の matrix-tree 定理と Weierstrass 準備定理だけを使う。仮定は本レポートの方が弱い（$\chi(X)\neq0$ を要しない、§6.6）が、[E] は $\alpha$ を $\mathbb{Z}_\ell$ 値まで許す点で本レポートより広い。**どちらも既知定理の別証明であり、新規性の主張ではない。**
+
+### 8.2 $(★)$ の出典
+
+$(★)$（本レポート定理 1）も既知である。同じく [E] §5 本文より:
+
+> Assuming $\chi(X)\neq0$, equation (7) in [17] shows that
+> $|G|\cdot\kappa_Y=\kappa_X\prod_{\Psi\neq\Psi_0}h_X(1,\Psi)$
+
+ここで [17] = Daniel Vallières, *On abelian $\ell$-towers of multigraphs*, Annales Mathématiques du Québec。同論文 (6) で $h_X(1,\psi)=\det(D-A_\psi)$ であり、巡回被覆 $G=\mathbb{Z}/N$ では $A_\psi$ は $\psi(\bar1)=\zeta$ に対する voltage 隣接行列で $D-A_\psi=L(\zeta)$。よってこれは $(★)$ そのものである。
+
+独立の経路として、Hammer–Mattman–Sands–Vallières, *The special value $u=1$ of Artin–Ihara $L$-functions* 本文より:
+
+> **Theorem 2.11.** […] $\mathrm{ord}_{u=1}(\zeta_X(u)^{-1})=r$ and
+> $\zeta_X^*(1)=(-1)^{r+1}\cdot2^r\cdot(r-1)\cdot\kappa_X$ […]
+>
+> **Corollary 3.5.** […] If $\chi\neq\chi_1$, then $L^*_{Y/X}(1,\chi)=(-2)^{r_X-1}\cdot\det(D-A_\chi)$.
+
+同論文 Theorem 3.1（$\zeta_Y(u)=\zeta_X(u)\prod_{\chi\neq\chi_1}L_{Y/X}(u,\chi)$）と合わせて $u=1$ の主要項を比較する。$r_Y=N(r_X-1)+1$ と $r_X+(r_X-1)(N-1)=N(r_X-1)+1$ が一致し、$2$ 冪も整合するので、$r_X\neq1$（$\iff\chi(X)\neq0$）のとき $N\kappa_Y=\kappa_X\prod_{\zeta\neq1}\det L(\zeta)$ が従う。
+
+**結論: $(★)$ は既知。** 本レポート定理 1 は仮定（連結性・$\chi(X)\neq0$）を外した形になっているが、これは証明経路（Kirchhoff の固有値版）の副産物であって新規性の主張ではない。
 
 ---
 
@@ -426,7 +507,7 @@ McGown–Vallières III Theorem 6.1（cycle13 step1 report §3.5）は $\chi(X)\
 | **ループ** | $L(z)$ の対角に $2-z^{\alpha}-z^{-\alpha}$ として最初から組み込み済み。$\alpha\equiv0\bmod N$ のとき $X_N$ でループになり寄与 $0$、$L(\zeta)$ 側も $\zeta^\alpha=1$ で $0$。整合。 | 補題 A の証明 case 3 |
 | **多重辺** | $L(z)$ の各成分が辺ごとの和になっているだけ。証明のどこでも単純性を使っていない。 | §1.4, 定理 K |
 | **$\chi(X)=0$** | 定理 2・3 の証明では使わない。実例（1 頂点 1 ループ）で成立を確認。 | §6.6 |
-| **$m=1$（bouquet）** | 特別扱い不要。$D(z)=\sum_a m_a(2-z^a-z^{-a})$。 | — |
+| **$m=1$（bouquet）** | 特別扱い不要。$D(z)=\sum_a m_a(2-z^a-z^{-a})$。この場合 $\mu>0$ は $\ell$ 重多重グラフという自明例に限る。 | 命題 7.4 |
 | **$\ell\nmid N$ の段** | **定理 3 の射程外。**下記 §9.4。 | — |
 
 ### 9.4 $\ell\nmid N$ との違い（重要な限界）
@@ -440,24 +521,55 @@ McGown–Vallières III Theorem 6.1（cycle13 step1 report §3.5）は $\chi(X)\
 
 したがって $(☆)$ は「**abelian $\ell$-tower $N=\ell^n$ の $\mu$**」についての主張であって、一般の $\mathbb{Z}/N$-被覆の $\ell$ 進付値についての主張ではない。$\ell\nmid N$ 方向（Washington–Sinnott 類似）は cycle 12 README が挙げる arXiv:2201.05186 の領域だが、**その本文は本プロジェクトで未取得なので内容は引用しない**。
 
+### 9.5 $\ell$-塔の中で別の素数 $p\neq\ell$ を見る場合（下界までは証明できる）
+
+§9.4 は「$\ell$ を固定して $N$ を $\ell$ と素にする」方向の限界だった。もう 1 つの方向、すなわち**$\ell$-塔 $N=\ell^n$ はそのままで、付値を取る素数を $p\neq\ell$ に変える**場合は、下界までは $(★)$ から直接出る。
+
+> **命題 9.5.** *定理 2 と同じ仮定（$X$ 有限連結多重グラフ、$X_\ell$ 連結）の下で、$p$ を任意の素数（$p=\ell$ でもよい）とする。$c:=\mathrm{content}_z(D)$、$\mu_p:=v_p(c)$ と置き、$D=c\,D_0$（$D_0\in\mathbb{Z}[z,z^{-1}]$ は原始的）と分解する。このとき $R_n:=\prod_{\zeta^{\ell^n}=1,\ \zeta\neq1}D_0(\zeta)$ は有理整数であり*
+> $$v_p(\kappa_n)=v_p(\kappa_0)-v_p(\ell^{n})+\mu_p\bigl(\ell^{n}-1\bigr)+v_p(R_n). \tag{9.2}$$
+> *とくに $p\neq\ell$ のとき $v_p(\ell^n)=0$ かつ $v_p(R_n)\ge0$ なので*
+> $$v_p(\kappa_n)\ \ge\ \mu_p\,\ell^{n}+\bigl(v_p(\kappa_0)-\mu_p\bigr). \tag{9.3}$$
+
+**証明.** 定理 1 $(4.1)$ より $\ell^{n}\kappa_n=\kappa_0\prod_{\zeta\neq1}D(\zeta)$。$D=cD_0$ で因子は $\ell^{n}-1$ 個あるから $\prod_{\zeta\neq1}D(\zeta)=c^{\,\ell^{n}-1}R_n$。$R_n$ は $\mathrm{Gal}(\mathbb{Q}(\zeta_{\ell^n})/\mathbb{Q})$ 不変な代数的整数なので $R_n\in\mathbb{Z}$（注 4.1 と同じ議論；終結式で厳密計算できる）。両辺の $v_p$ を取れば $(9.2)$ を得る。定理 2 の仮定より $X_{\ell^n}$ は連結なので $\prod_{\zeta\neq1}D(\zeta)\neq0$、ゆえに $R_n\neq0$ であり $R_n\in\mathbb{Z}$ から $v_p(R_n)\ge0$。$p\neq\ell$ で $v_p(\ell^n)=0$ を代入して $(9.3)$。$\blacksquare$
+
+**証明できなかったこと（切り分け）**: $p\neq\ell$ のとき **$v_p(R_n)$ が $n$ について有界かどうか**。有界であれば $v_p(\kappa_n)=\mu_p\ell^{n}+O(1)$ という「$\lambda=0$ の岩澤型」になるが、本レポートでは証明していない。これは数体側の Washington–Sinnott の定理（円分 $\mathbb{Z}_\ell$ 拡大で $p\neq\ell$ の類数の $p$ 部分が有界）のグラフ側類似であり、arXiv:2201.05186 が扱っていると思われるが、**本文を取得していないのでどの命題が対応するかは特定していない**（§10）。推測は書かない。
+
+なお $v_p(R_n)$ が**恒等的に $0$ ではない**ことは実例で確定している。例 5（`cycle12` の 2 頂点・$\mu_3=2$ の例）で $\ell=2$, $p=5$ を取ると
+
+$$v_5(\kappa_n)=0,\ 0,\ 2,\ 2,\ 2\qquad(n=0,1,2,3,4)$$
+
+となり、$n=2$ で $v_5(R_n)$ が $0$ から $2$ へ増えてからそこで止まる。bouquet $\{1,2\}$ で $\ell=2$, $p=3$ も同型の挙動（$0,0,2,2,2,2$）を示す。**「常に $0$」でも「単調に増え続ける」でもない**という、有界性問題の非自明さを示す一次データである。
+
+> **機械検証**: `verify_criterion.sage` G 節。5 グラフ × 複数の $p$ の計 11 組で、下界 $(9.3)$ と等式 $(9.2)$ の両方を照合、FAIL 0。$v_p(R_n)$ が途中で増える例が 2 件。
+
 ---
 
 ## 10. 証明できなかったこと・未確認のこと（正直に）
 
-1. **[E] McGown–Vallières III および [G] Vallières の本文を本セッションで取得していない。** §8 の記述は cycle 13 step 1 report が「本文確認済み」として引用した Theorem 6.1 の文言に依拠している。とくに **[E] Corollary 5.6 の岩澤冪級数 $Q(T)$ の定義そのものは確認していない**ので、「$Q(T)$ が $\det L(1+T)$ と単元倍を除いて一致する」とは主張しない。§8 の同値性の議論は、その代わりに §6.5 の一意性（漸近式の係数は塔から一意に決まる）だけに依拠しており、$Q(T)$ の定義を知らなくても成立する。
-2. **[E] が $\chi(X)\neq0$ をどこで使うのかは未確認**（§6.6）。本レポートの証明に不要であることは示したが、[E] の仮定が冗長だとは主張しない。
-3. **Besser–Deninger 1999 と Cuoco–Monsky 1981 の本文は依然未取得**（cycle 13 step 1 report §1 の表と同じ状態）。本レポートはこれらの内容を使っていない。
-4. **文献に $\mu>0$ のグラフの明示例があるかは未確認のまま。** cycle 12 README §5 の状態から変わっていない。したがって cycle 12 の例 1–6 の新規性も引き続き主張しない。
-5. **$\mu$ の上界は何も分かっていない。** cycle 12 の広域探索で得た「$\mu_2\le4$（非自明例）」等は探索範囲内の最大値にすぎず、定理 3 は $\mu$ が有界であることを何も言わない（$\mathrm{content}$ はいくらでも大きくできる可能性が残る）。
-6. **$\nu$ の閉形式は与えていない。** 定理 2 の証明は $\nu=v_\ell(\kappa(X))-\mu+\sum_t c_{\beta_t}-v_\ell(h(0))$ という表示を与えるが、$c_{\beta_t}$（補題 E の定数）は根 $\beta_t$ ごとの $\ell$ 進的なデータで、$\det L$ の係数から直接読む手続きは書いていない。
-7. **$n_0$ の明示的な上界を与えていない。** 補題 E の $n_\beta$ は「$e_j$ が $\frac1{\ell-1}$ を超えるまでの回数」で押さえられるが、根の付値の下界を $\det L$ の係数から出す評価は書いていない。数値的には Step 6 の 63 塔で $n_0\le3$ だったが、これは証拠であって上界の証明ではない。
-8. **$d\ge2$ の塔（$\mathbb{Z}_\ell^d$-塔）は扱っていない。** cycle 13 step 1 report §3.5 の [F] DuBose–Vallières Theorem A によれば $d\ge2$ では $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）となり、単一の $\mu$ では書けない。本レポートは $d=1$ のみ。本プロジェクトの $L\times L$ トーラス（$\mathbb{Z}_\ell^2$-塔）には**そのままでは適用できない**。
+1. **[E] Corollary 5.6 の岩澤冪級数 $Q(T)$ の同定は済んだ（未確認項目ではなくなった）。** 以前の版はここに「[E] Corollary 5.6 の $Q(T)$ の定義そのものは確認していない」と書いていたが、§8.1 に本文の逐語引用と、$P=\det M$ への代入による $Q(T)=\det L(1+T)$ の同定を追加したことで**解消した**。確認できた内容は次の 2 点である。(a) [E] Theorem 6.1 の主張の字句、(b) Corollary 5.6 の $P=\det M$ に $X_y\mapsto\zeta^{b_y}-1$, $Y_y\mapsto\zeta^{-b_y}-1$ を代入すると $\det(D-A_{\psi_k})$ になり、$\mathbb{Z}$ 値 voltage では $Q(T)=\det L(1+T)=f(T)$ であること。ただし**この本文取得は救済 PR #25 の並行成果が行ったもので、本セッションでは PDF を再取得していない**（§8.1 冒頭に明記）。なお §8 の同値性の議論自体は、依然として §6.5 の一意性だけに依拠しており、$Q(T)$ の定義を知らなくても成立する形になっている。
+2. **[G] Vallières（Annales Mathématiques du Québec）の本文は未取得。** §8.2 で引用した「equation (7)」は [E] §5 が引用した形での孫引きである。Hammer–Mattman–Sands–Vallières の Theorem 2.11 / Corollary 3.5 は本文から引いた（同じく PR #25 の取得による）。
+3. **[E] が $\chi(X)\neq0$ をどこで使うのかは未確認**（§6.6）。本レポートの証明に不要であることは示したが、[E] の仮定が冗長だとは主張しない。
+4. **Besser–Deninger 1999 と Cuoco–Monsky 1981 の本文は依然未取得**（cycle 13 step 1 report §1 の表と同じ状態）。本レポートはこれらの内容を使っていない。
+5. **文献に $\mu>0$ のグラフの明示例があるかは未確認のまま。** cycle 12 README §5 の状態から変わっていない。arXiv:2006.14012 / 2105.08661 / 2201.05186 の本文は未取得（2105.08661 は abstract のみ確認: bouquet 族の一般化）。したがって cycle 12 の例 1–6 の新規性も引き続き主張しない。なお Gonet の学位論文（*Jacobians of Finite and Infinite Voltage Covers of Graphs*, Univ. of Vermont, 2021）Theorem 27 が「底グラフが単純グラフのとき $\mu,\lambda$ の存在」を与えることは、[E] §8 の記述で**間接的に**確認しただけで、Gonet 本文は未取得。
+6. **$p\neq\ell$ での $v_p(R_n)$ の有界性は未解決**（§9.5）。下界 $(9.3)$ までは証明した。arXiv:2201.05186 の本文が未取得なので、そこで解決済みかどうかも特定できていない。
+7. **$\mu$ の上界は何も分かっていない。** cycle 12 の広域探索で得た「$\mu_2\le4$（非自明例）」等は探索範囲内の最大値にすぎず、定理 3 は $\mu$ が有界であることを何も言わない（$\mathrm{content}$ はいくらでも大きくできる可能性が残る）。
+8. **$\nu$ の閉形式は与えていない。** 定理 2 の証明は $\nu=v_\ell(\kappa(X))-\mu+\sum_t c_{\beta_t}-v_\ell(h(0))$ という表示を与えるが、$c_{\beta_t}$（補題 E の定数）は根 $\beta_t$ ごとの $\ell$ 進的なデータで、$\det L$ の係数から直接読む手続きは書いていない。
+9. **$n_0$ の明示的な上界を与えていない。** 補題 E の $n_\beta$ は「$e_j$ が $\frac1{\ell-1}$ を超えるまでの回数」で押さえられるが、根の付値の下界を $\det L$ の係数から出す評価は書いていない。数値的には Step 6 の 63 塔で $n_0\le3$ だったが、これは証拠であって上界の証明ではない。
+10. **$d\ge2$ の塔（$\mathbb{Z}_\ell^d$-塔）は扱っていない。** cycle 13 step 1 report §3.5 の [F] DuBose–Vallières Theorem A によれば $d\ge2$ では $\mathrm{ord}_\ell(\kappa_n)=P(\ell^n,n)$（総次数 $\le d$）となり、単一の $\mu$ では書けない。本レポートは $d=1$ のみ。本プロジェクトの $L\times L$ トーラス（$\mathbb{Z}_\ell^2$-塔）には**そのままでは適用できない**。
 
 ---
 
 ## 11. 数値検証
 
-`sagemath/check/cycle13_T3_criterion_proof/`（SageMath 10.6、`sage proof_steps.sage`）。
+`sagemath/check/cycle13_T3_criterion_proof/`（SageMath 10.6）。3 本のスクリプトから成る。
+
+| スクリプト | 対象 |
+|---|---|
+| `proof_steps.sage` | §3–§7 の骨格（補題 A・B・C・D、定理 1・2・3）。下表 Step 1–7 |
+| `verify_star.sage` | 命題 7.4（bouquet の content = ループ重複度の gcd）。`lib_voltage.sage` を使う |
+| `verify_criterion.sage` | 命題 7.3（$\mathbb{F}_\ell$ 判定）と 命題 9.5（$p\neq\ell$ の下界・等式）。同上 |
+
+### 11.1 `proof_steps.sage`（`sage proof_steps.sage`）
 
 | Step | 検証内容 | 対応する主張 | 結果 |
 |---|---|---|---|
@@ -471,7 +583,21 @@ McGown–Vallières III Theorem 6.1（cycle13 step1 report §3.5）は $\chi(X)\
 
 対象グラフは cycle 12 の例 1–6 に加え、$\chi=0$ の bouquet、$\det L\equiv0$ の退化例、$\ell$-塔が非連結になる退化例、乱択 40 件。
 
-**これらは有限個の例での照合であって証明ではない。**証明本体は §3–§7 である。数値検証の役割は、証明の書き間違い（符号・添字・場合分けの取りこぼし）を検出することに限られる。
+### 11.2 `verify_star.sage`（D 節）と `verify_criterion.sage`（F・G 節）
+
+| 節 | 検証内容 | 対応する主張 | 結果 |
+|---|---|---|---|
+| D | $m=1$ で $\mathrm{content}_z(D)=\gcd_a m_a$、および $\mu_\ell>0\iff$ 全 $m_a$ が $\ell$ で割れる | 命題 7.4 | bouquet 15 件、FAIL 0 |
+| F | $\mu_\ell>0\iff\det(L\bmod\ell)=0$ over $\mathbb{F}_\ell(z)$、および $\mu_\ell=\max\{k: D\equiv0\bmod\ell^{k}\}$ | 命題 7.3 | 10 グラフ × $\ell\in\{2,3,5,23\}$ = 40 件、FAIL 0 |
+| G | $v_p(\kappa_n)=v_p(\kappa_0)-v_p(\ell^n)+\mu_p(\ell^n-1)+v_p(R_n)$ と下界 $(9.3)$ | 命題 9.5 | 5 グラフ × 複数 $p$ の 11 組、FAIL 0。$v_p(R_n)>0$ の実例 2 件 |
+
+$R_n=\prod_{\zeta\neq1}D_0(\zeta)$ は終結式で**厳密な整数として**計算しており、数値評価（$\mathbb{R}$/$\mathbb{C}$ への脱出）を経由していない。$\kappa_n$ は導来グラフの Kirchhoff 行列式から直接計算しており、$(★)$ も $(☆)$ も使っていない（したがって G 節の等式照合は $(★)$ の独立な再確認にもなっている）。
+
+### 11.3 検証の性格（正直に）
+
+**これらは有限個の例での照合であって証明ではない。**証明本体は §3–§9 である。数値検証の役割は、証明の書き間違い（符号・添字・場合分けの取りこぼし）を検出することに限られる。
+
+とくに、$(★)$・補題 C・補題 D・命題 7.3・命題 7.4 は「各対象について有限手続きで完全に確認できる」形の主張なので、例ごとの照合は「そのステップが実際に主張どおりであること」の確認になる。一方、定理 2 の漸近式は有限個の $n$ でしか確認できない（$\ell=2$ で $n\le6$、$\ell=23$ で $n\le1$）。定理 2 が成り立つ根拠は §6 の証明であって、Step 6 の一致ではない。
 
 ---
 
@@ -480,4 +606,38 @@ McGown–Vallières III Theorem 6.1（cycle13 step1 report §3.5）は $\chi(X)\
 - **cycle 12 T3 README §5「証明していないこと」の 2 項目が両方とも解消した**: $(★)$ の完全な厳密証明（→ 定理 1）、$\mathrm{ord}_\ell(\kappa_n)$ の漸近形そのもの（→ 定理 2）。
 - **cycle 12 T3 README §6「$\lambda$ の一般則は今回の対象外」も解消した**（→ 注 7.2、$\lambda=\lambda_{\mathrm W}-1\ge1$）。
 - **cycle 13 step 1 report §7 の「同値性の証明は cycle 13 step 2 の課題」に応答した**: Ueki の $\mathrm{M}_p$（1 変数 Alexander 多項式、Gauss ノルム）と cycle 12 の $\mathrm{content}_z\det L(z)$ は**対象が異なる別の命題**であり、直接の同値ではない。共通なのは証明機構（Weierstrass 準備定理で $\mu$＝係数の付値の最小値）であって、グラフ側の対応する既知命題は [E] Theorem 6.1 の方である（§8）。
-- **cycle 13 step 1 report §3.5 の警告（$d\ge2$ では単一の $\mu$ で書けない）は本レポートでも有効**であり、本レポートの射程を $d=1$ に限定した（§10-8）。
+- **cycle 13 step 1 report §3.5 の警告（$d\ge2$ では単一の $\mu$ で書けない）は本レポートでも有効**であり、本レポートの射程を $d=1$ に限定した（§10-10）。
+
+---
+
+## 13. 本プロジェクトの選別軸（可算／非可算の分別）への位置づけ
+
+リポジトリ CLAUDE.md と `docs/tasks/auto-loop-runbook.md` は「可算（$\mathbb{N}/\mathbb{Q}/\Lambda/\overline{\mathbb{Q}}$）と非可算（$\mathbb{R}/\mathbb{C}$）を分別し、$\mathbb{R}$ へ脱出した箇所を必ず明示する」ことを要求している。本レポートについてその棚卸しをする。
+
+### 13.1 使った体・環の全リスト
+
+| 対象 | どこで | 可算性 |
+|---|---|---|
+| $\mathbb{Z}$, $\mathbb{Z}[z,z^{-1}]$, $\mathbb{Z}[T]$ | $L(z)$, $D(z)$, content, 終結式（§1, §4, §5） | 可算 |
+| $\mathbb{Q}(\zeta_N)$ | $\prod_{\zeta\neq1}D(\zeta)$ の値（§4） | 可算 |
+| $\overline{\mathbb{Q}}_\ell$ の有限次部分体 | $g$ の根 $\beta_t$、$v_\ell(\zeta-1)$（§6.2, §6.3） | 可算 |
+| $\mathbb{F}_\ell$, $\mathbb{F}_\ell(z)$ | $\mu_\ell>0$ の判定（命題 7.3） | 可算（有限体） |
+| $\Lambda=\mathbb{Z}_\ell[[T]]$, $\mathbb{C}_\ell$ | Weierstrass 準備定理（定理 W）、$(6.2)$ の値としての分解 | **非可算** |
+
+$\mathbb{R}$ は本レポートで一度も使っていない。$\mathbb{C}$ は補題 A・B（対角化と核の次元）で線形代数の係数体として現れるが、そこで使うのは「$N$ 乗根が全部あること」と有限次元線形代数だけで、完備性・連続性は使わない。実際 $\mathbb{Q}(\zeta_N)$ に取り替えても補題 A・B の証明はそのまま通る（機械検証は $\mathbb{Q}(\zeta_N)[x]$ 上の厳密等式として実施している。Step 1）。
+
+### 13.2 $\ell$ 進脱出は 1 点に隔離されている
+
+非可算な対象（$\Lambda=\mathbb{Z}_\ell[[T]]$ とその完備性）を本質的に使うのは、**定理 W（$\ell$ 進 Weierstrass 準備定理）ただ 1 箇所**である。この 1 点を除けば、証明は $\mathbb{Z}$・有限次代数体・有限体の中に収まる。
+
+さらに重要なのは、**$\mu$ と $\lambda$ の「値」は完備性なしに決まる**ことである。
+
+- 注 7.1 のとおり、$\mu=v_\ell(\mathrm{content}_z D)$、$\lambda=\min\{j:v_\ell(c_j)=\mu\}-1$ は $\det L(z)$ の**有限個の整数係数**だけから計算できる有限手続きである（$D(1+T)$ の展開係数を見るだけ）。
+- 命題 7.3 により、$\mu>0$ かどうかの判定は $\mathbb{F}_\ell(z)$ 上の**行列式 1 個が消えるか**に落ちる。
+- 仮定の検査（$X$ 連結、$X_\ell$ 連結）も補題 C により $\gcd(\ell,g_X)$ の計算 1 回で済む。
+
+完備性が要るのは「その $\mu,\lambda$ が $\kappa_n$ の $n\to\infty$ での漸近を支配する」という**主張の部分**だけであって、量の**定義と計算**の部分ではない。これは cycle 11 T3 の「$\Lambda$ 側には Lehmer 型の連続的難問はない」という整理と整合する。
+
+### 13.3 形式検証の道
+
+$(☆)$ の右辺は $\mathbb{Z}$ 上の有限計算なので、SageMath では `ZZ` / `LaurentPolynomialRing(ZZ, 'z')` / `GF(ell)` の範囲で完結し（`RR`・`CC` を使わない。§11 の 3 本のスクリプトはいずれもこの範囲内）、Lean でも `decide` 可能な形に落ちる見込みがある。一方、定理 2（漸近の支配）の形式化には $\mathbb{Z}_\ell[[T]]$ と Weierstrass 準備定理が要る。**形式化の難易度がこの 1 点で不連続に変わる**ことが、本レポートから読み取れる工学的な帰結である。

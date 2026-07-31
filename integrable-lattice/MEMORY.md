@@ -119,6 +119,20 @@ PDF 10 ページ・未解決参照 0・組めない文字 0・版面外へ出た
   **岩澤型漸近そのものを証明**し $\lambda=\lambda_{\mathrm W}-1\ge1$ も決定。$(★)$ は連結性の仮定なしの形へ強化。
   **射程の限界も特定**: $\ell\nmid N$ の段は content が支配しない（反例6件）、**$d\ge2$ の塔は対象外
   ＝$L\times L$ トーラスにはそのまま適用できない**。新規性は主張しない（McGown–Vallières III Thm 6.1 の言い換え）。
+  - **2026-07-31 追記（救済PR #25 の残余を統合）**: 同じ主張を独立に証明していた並行成果から、
+    main に無かった部分だけを**追記**した（既存節は 1 つも削っていない）。
+    (1) **命題 7.3**: $\mu_\ell>0\iff\det(L\bmod\ell)=0$ over $\mathbb{F}_\ell(z)$（$d=1$ の有限判定）。
+    (2) **命題 7.4**: bouquet で $\mathrm{content}_z(D)=\gcd_a m_a$ の**証明**（cycle 12 は 125 件の数値観察のみだった）。
+    (3) **命題 9.5**: $p\neq\ell$ での下界 $v_p(\kappa_n)\ge\mu_p\ell^n+(v_p(\kappa_0)-\mu_p)$。
+        **$v_p(R_n)$ の有界性は未解決**で、$0$ から正へ増えてから止まる実例が 2 件ある（例5 $\ell=2,p=5$ で $0,0,2,2,2$）。
+    (4) **§8.1/§8.2 で出典を特定**: [E] Corollary 5.6 の $P=\det M$ 代入で $Q(T)=\det L(1+T)$ と同定でき、
+        「Corollary 5.6 の $Q(T)$ の定義は未確認」という §10 の宣言が**解消**した。$(★)$ の出典は
+        Vallières 論文 式(7)、および Hammer–Mattman–Sands–Vallières Thm 2.11 / Cor 3.5。
+        **ただしこの本文取得は並行成果が行ったもので、本セッションでは PDF を再取得していない**（§8.1 に明記）。
+    (5) **§13** で使った体を棚卸しし、$\ell$ 進脱出が Weierstrass 準備定理の 1 点に隔離されることを整理。
+    検証は `sagemath/check/cycle13_T3_criterion_proof/` に `lib_voltage.sage` ＋
+    `verify_star.sage`（D 節）＋ `verify_criterion.sage`（F・G 節）を追加し、**自分で sage を実行して FAIL 0**。
+    救済元の A/B/C/E 節は `proof_steps.sage` の Step 2〜6 と重複するので持ち込まなかった（判断は同 README に記録）。
 - **T1 step3（証明）**: `outputs/reports/cycle13_T1_observation_T_settlement.md`。
   **観察 T（奇 $L$ で $v_2(\tau(L))=2(L-1)$）を証明**し、002 の未証明観察から確定部分命題「命題 T」へ昇格。
   骨子: $\tau(L)=\prod_j(r_j^L-1)^2/r_j^L$ へ分解 → 2 の不分岐性 → Newton 多角形で $v(m_j)=1$ → LTE 段。

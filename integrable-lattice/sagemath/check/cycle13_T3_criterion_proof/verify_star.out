@@ -1,0 +1,39 @@
+==============================================================================
+D. 命題 7.2: bouquet（m=1）では content_z(det L) = ループ重複度の gcd
+==============================================================================
+   ＝ μ_ℓ > 0 になるのは『全ての a で ℓ | m_a』の自明例のみ。
+
+  loops=[1]: det L = -z^-1 + 2 - z
+      m_a = {1: 1}, gcd_a m_a = 1, content_z = 1, 一致 = True
+  loops=[1, 1]: det L = -2*z^-1 + 4 - 2*z
+      m_a = {1: 2}, gcd_a m_a = 2, content_z = 2, 一致 = True
+  loops=[1, 2]: det L = -z^-2 - z^-1 + 4 - z - z^2
+      m_a = {1: 1, 2: 1}, gcd_a m_a = 1, content_z = 1, 一致 = True
+  loops=[1, 1, 2, 2]: det L = -2*z^-2 - 2*z^-1 + 8 - 2*z - 2*z^2
+      m_a = {1: 2, 2: 2}, gcd_a m_a = 2, content_z = 2, 一致 = True
+  loops=[2, 2, 2]: det L = -3*z^-2 + 6 - 3*z^2
+      m_a = {2: 3}, gcd_a m_a = 3, content_z = 3, 一致 = True
+  loops=[1, 2, 3]: det L = -z^-3 - z^-2 - z^-1 + 6 - z - z^2 - z^3
+      m_a = {1: 1, 2: 1, 3: 1}, gcd_a m_a = 1, content_z = 1, 一致 = True
+  loops=[3, 3, 3, 3]: det L = -4*z^-3 + 8 - 4*z^3
+      m_a = {3: 4}, gcd_a m_a = 4, content_z = 4, 一致 = True
+  loops=[1, 1, 1, 5, 5, 5]: det L = -3*z^-5 - 3*z^-1 + 12 - 3*z - 3*z^5
+      m_a = {1: 3, 5: 3}, gcd_a m_a = 3, content_z = 3, 一致 = True
+  loops=[0, 1, 1]: det L = -2*z^-1 + 4 - 2*z
+      m_a = {1: 2}, gcd_a m_a = 2, content_z = 2, 一致 = True
+  loops=[0, 0, 2, 2]: det L = -2*z^-2 + 4 - 2*z^2
+      m_a = {2: 2}, gcd_a m_a = 2, content_z = 2, 一致 = True
+  loops=[-1, 1]: det L = -2*z^-1 + 4 - 2*z
+      m_a = {1: 2}, gcd_a m_a = 2, content_z = 2, 一致 = True
+  loops=[1, -1, 2, -2]: det L = -2*z^-2 - 2*z^-1 + 8 - 2*z - 2*z^2
+      m_a = {1: 2, 2: 2}, gcd_a m_a = 2, content_z = 2, 一致 = True
+  loops=[2, 2, 4, 4, 4]: det L = -3*z^-4 - 2*z^-2 + 10 - 2*z^2 - 3*z^4
+      m_a = {2: 2, 4: 3}, gcd_a m_a = 1, content_z = 1, 一致 = True
+  loops=[1, 1, 1, 1, 3, 3, 3, 3]: det L = -4*z^-3 - 4*z^-1 + 16 - 4*z - 4*z^3
+      m_a = {1: 4, 3: 4}, gcd_a m_a = 4, content_z = 4, 一致 = True
+  loops=[1, 2, 2, 3, 3, 3]: det L = -3*z^-3 - 2*z^-2 - z^-1 + 12 - z - 2*z^2 - 3*z^3
+      m_a = {1: 1, 2: 2, 3: 3}, gcd_a m_a = 1, content_z = 1, 一致 = True
+
+==============================================================================
+FAIL 数: 0
+==============================================================================

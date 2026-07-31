@@ -1,0 +1,82 @@
+==============================================================================
+F. 命題 7.1: μ_ℓ > 0 ⟺ det(L(z) mod ℓ) = 0（𝔽_ℓ(z) 上で L̄ が特異）
+==============================================================================
+   ＋ 一般形 μ_ℓ = max{k : D(z) ≡ 0 mod ℓ^k} も同時に照合する。
+
+                例1 ℓ= 2: μ_ℓ = 2, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 2
+                例1 ℓ= 3: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 1
+                例1 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例1 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例2 ℓ= 2: μ_ℓ = 4, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 4
+                例2 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例2 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例2 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例3 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例3 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例3 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例3 ℓ=23: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 1
+                例4 ℓ= 2: μ_ℓ = 4, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 4
+                例4 ℓ= 3: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 1
+                例4 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例4 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例5 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例5 ℓ= 3: μ_ℓ = 2, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 2
+                例5 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例5 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例6 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例6 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+                例6 ℓ= 5: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 1
+                例6 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,2} ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,2} ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,2} ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,2} ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,1} ℓ= 2: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 1
+     bouquet {1,1} ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,1} ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     bouquet {1,1} ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+               4頂点 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+               4頂点 ℓ= 3: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+               4頂点 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+               4頂点 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     負 voltage 2頂点 ℓ= 2: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     負 voltage 2頂点 ℓ= 3: μ_ℓ = 1, det(L mod ℓ) = 0 ? True, 同値 = True, max{k} = 1
+     負 voltage 2頂点 ℓ= 5: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+     負 voltage 2頂点 ℓ=23: μ_ℓ = 0, det(L mod ℓ) = 0 ? False, 同値 = True, max{k} = 0
+
+==============================================================================
+G. 命題 8.1: p ≠ ℓ で v_p(κ_n) ≥ μ_p·ℓ^n + (v_p(κ_0) − μ_p)  （証明した下界）
+==============================================================================
+   等式 v_p(κ_n) = v_p(κ_0) − v_p(ℓ^n) + μ_p(ℓ^n − 1) + v_p(R_n) も照合する
+   （R_n = ∏_{ζ≠1} D_0(ζ)、D = content · D_0）。
+   下界が等号にならない＝ v_p(R_n) > 0 になる実例を明示する。
+   『v_p(R_n) が n について有界か』は本レポートでは未解決（レポート §8.1）。
+
+              例1 ℓ=2 p= 3 (μ_p=1): n=0: v_p(κ_n)=1 (下界 1, v_p(R_n)=0), n=1: v_p(κ_n)=2 (下界 2, v_p(R_n)=0), n=2: v_p(κ_n)=4 (下界 4, v_p(R_n)=0), n=3: v_p(κ_n)=8 (下界 8, v_p(R_n)=0), n=4: v_p(κ_n)=16 (下界 16, v_p(R_n)=0), n=5: v_p(κ_n)=32 (下界 32, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例1 ℓ=2 p= 5 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=3: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=4: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=5: v_p(κ_n)=0 (下界 0, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例1 ℓ=2 p= 7 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=3: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=4: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=5: v_p(κ_n)=0 (下界 0, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例1 ℓ=3 p= 2 (μ_p=2): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=4 (下界 4, v_p(R_n)=0), n=2: v_p(κ_n)=16 (下界 16, v_p(R_n)=0), n=3: v_p(κ_n)=52 (下界 52, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例1 ℓ=3 p= 5 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=3: v_p(κ_n)=0 (下界 0, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例4 ℓ=2 p= 3 (μ_p=1): n=0: v_p(κ_n)=1 (下界 1, v_p(R_n)=0), n=1: v_p(κ_n)=2 (下界 2, v_p(R_n)=0), n=2: v_p(κ_n)=4 (下界 4, v_p(R_n)=0), n=3: v_p(κ_n)=8 (下界 8, v_p(R_n)=0), n=4: v_p(κ_n)=16 (下界 16, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例4 ℓ=2 p= 5 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=3: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=4: v_p(κ_n)=0 (下界 0, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例5 ℓ=2 p= 3 (μ_p=2): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=2 (下界 2, v_p(R_n)=0), n=2: v_p(κ_n)=6 (下界 6, v_p(R_n)=0), n=3: v_p(κ_n)=14 (下界 14, v_p(R_n)=0), n=4: v_p(κ_n)=30 (下界 30, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+              例5 ℓ=2 p= 5 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=2 (下界 0, v_p(R_n)=2), n=3: v_p(κ_n)=2 (下界 0, v_p(R_n)=2), n=4: v_p(κ_n)=2 (下界 0, v_p(R_n)=2)
+      下界成立=True, 等式成立=True  ← v_p(R_n) が途中で増える実例
+   bouquet {1,2} ℓ=2 p= 3 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=2 (下界 0, v_p(R_n)=2), n=3: v_p(κ_n)=2 (下界 0, v_p(R_n)=2), n=4: v_p(κ_n)=2 (下界 0, v_p(R_n)=2), n=5: v_p(κ_n)=2 (下界 0, v_p(R_n)=2)
+      下界成立=True, 等式成立=True  ← v_p(R_n) が途中で増える実例
+   bouquet {1,2} ℓ=2 p= 5 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=3: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=4: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=5: v_p(κ_n)=0 (下界 0, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+   bouquet {1,2} ℓ=2 p=11 (μ_p=0): n=0: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=1: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=2: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=3: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=4: v_p(κ_n)=0 (下界 0, v_p(R_n)=0), n=5: v_p(κ_n)=0 (下界 0, v_p(R_n)=0)
+      下界成立=True, 等式成立=True
+
+==============================================================================
+FAIL 数: 0
+==============================================================================
