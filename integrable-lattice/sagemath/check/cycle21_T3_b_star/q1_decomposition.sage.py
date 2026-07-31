@@ -13,7 +13,7 @@ _sage_const_0 = Integer(0); _sage_const_1 = Integer(1); _sage_const_78 = Integer
 #   Step B  補題 Q2  bar G が原始二項式因子を持たないこと（＝ theta_G が至る所有限）と
 #                    theta_G の有界性（theta_G^max を実測。レベルを上げて安定を確認）
 #   Step C  ----     b = sum m_i（本 report）と b = sum_{P in S_infty} j^*（cycle 20 定理 W4）の一致
-#   Step D  補題 Q3  数え上げ恒等式 sum_P ell^{min(rho_i,M)} = M phi(ell^M) + ell^M
+#   Step D  補題 Q3  数え上げ恒等式 sum_P ell^{min(rho_i,M)} = (M-1) phi(ell^M) + 2 ell^M
 #   Step E  補題 Q0  アルキメデス粗上界 hat theta_M(P) <= phi(ell^M) log_ell C_0
 #
 # 壁時計の設計上限: 20 分（cycle 19-20 で 3 回起きた「掃引起動直後にセッションが終了」への対策）。
