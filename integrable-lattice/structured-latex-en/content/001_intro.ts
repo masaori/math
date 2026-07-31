@@ -34,7 +34,7 @@ export default defineBlocks([
       "This block is a statement of positioning. ℝ occurs here only as a name, inside the description of " +
       "contribution (d), namely that Lehmer's problem is specific to the ℝ side. No element of ℝ is " +
       "constructed and no argument is carried out over ℝ. The only place where this paper genuinely uses " +
-      "ℝ is the single limit L → ∞ in Chapter 3.",
+      "ℝ is the single limit in which L tends to infinity in Chapter 3.",
     statement: [
       paragraph([
         "This paper is a **reframing** of known mathematics. It claims no new theorem, no new exact ",
@@ -94,7 +94,7 @@ export default defineBlocks([
     realEscape:
       "This definition includes ℝ/ℂ as the topmost rung of the ladder. ℝ/ℂ occur here only in order to be " +
       "named as the undecidable rung; the only place where the assertions of this paper genuinely use ℝ is " +
-      "the archimedean limit (L → ∞) of Chapter 3, and nowhere else.",
+      "the archimedean limit of Chapter 3, in which L tends to infinity, and nowhere else.",
     statement: [
       paragraph(["We fix the hierarchy of sets used in this paper as follows."]),
       displayMath(

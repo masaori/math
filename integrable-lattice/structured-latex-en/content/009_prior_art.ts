@@ -30,11 +30,25 @@
  *
  * ## `ref()` を使っていない理由
  *
- * 本文からは命題 V・T・W・D を指したいが、**それらのラベルは他の担当が翻訳を終えるまで
- * 英語版に存在せず、存在しないラベルへの `ref()` は型検査で落ちる。**
- * したがって安全側に倒して地の文で "Proposition V" 等と書いてある。
- * **翻訳が全部揃ったら `ref("paper_prop_V")` 等へ置き換えてよい**（呼び出し元の判断）。
- * 唯一 `paper_positioning` だけは既に英語版に存在するので `ref()` で指している。
+ * 本文からは命題 V・T・W・D を指すが、**この章は「命題ごとに既出性を並べて比較する」ことが目的**で
+ * あり、読者が追うのは論文内部の採番ではなく命題の呼称（V・T・W）である。
+ * したがってここでは地の文の呼称のままにしてある（`\cref` の "Theorem 6.2" では、
+ * 3 件を並べたときにどれがどれか読者に分からなくなる）。`paper_positioning` だけは
+ * 「本論文は新規性を主張しない」という宣言そのものを指すので `ref()` で張ってある。
+ *
+ * ## 2026-08-01 の校閲で直したこと（数学レビューの指摘）
+ *
+ * - 【重要】命題 V の既出性の記述に、日本語版に対応物の無い数学的主張
+ *   （「$\mathbb{Z}_p$ 拡大では $p\nmid h_0$ から $p\nmid h_n$ が従う」）が、**出典も仮定も無しで**
+ *   足されていた。この形の古典的定理には分岐についての仮定が付くので、**削除した**。
+ *   削除後の記述は日本語版 `paper_061_theorem_V` の既出性記述と等価である。
+ * - 【中】命題 T が Kwon--Mednykh--Mednykh から従わない根拠を「証明の機構が違う」と
+ *   書いていた。**機構の違いは導出不可能性を含意しない**（本論文自身が命題 C で
+ *   「0 件の観察を根拠にしてはならない」と説いている以上、非論証を根拠に置いてはならない）。
+ *   根拠を「彼らの結論が厳密に弱い（偶奇しか決めない）」へ置き換えた。
+ * - 形式化が誤りを検出した回数を「2 回続けたラウンドで」と書いていたが、
+ *   本文の一次情報（命題 N・命題 W の記述）はどちらも cycle 18 なので、
+ *   ラウンドを跨いだとは書けない。「2 度」に直した。
  */
 
 import { cite, defineBlocks, list, math, paragraph, ref } from "../schema.ts";
@@ -152,13 +166,7 @@ export default defineBlocks([
           cite(["ByszewskiGraffWard2021"], "Definition 2.1"),
           "; iterating over ",
           math(String.raw`n=p^k`),
-          " yields the statement. On the number-theoretic side the corresponding fact — that ",
-          math(String.raw`p\nmid h_0`),
-          " implies ",
-          math(String.raw`p\nmid h_n`),
-          " throughout a ",
-          math(String.raw`\mathbb{Z}_p`),
-          "-extension — is classical. **The difference here is confined to one point**: the argument given ",
+          " yields the statement. **The difference here is confined to one point**: the argument given ",
           "below allows ",
           math(String.raw`a_L=0`),
           " and is unconditional for arbitrary ",
@@ -169,7 +177,7 @@ export default defineBlocks([
           "enough that it may well be folklore.",
         ],
         [
-          "**A weaker form of Proposition T is known.** Kwon, Mednykh and Mednykh ",
+          "**A weaker form of Proposition T is known.** Kwon–Mednykh–Mednykh ",
           cite(["MednykhMednykh2019"], "Theorem 5.1"),
           " show, for the circulant foliation over a graph, that for odd ",
           math(String.raw`n`),
@@ -181,12 +189,15 @@ export default defineBlocks([
           math(String.raw`\tau(L)=L^2a(L)^2`),
           " and hence that ",
           math(String.raw`v_2(\tau(L))`),
-          " **is even**. We read this in the original. Proposition T is a strengthening: it fixes the value ",
-          "at ",
+          " **is even**. We have read this in the original; the numbering is that of the arXiv version, ",
+          "arXiv:1902.05681. Proposition T is a strengthening: it fixes the value at ",
           math(String.raw`2(L-1)`),
-          ". **We did not find the equality itself in the literature.** The two proofs proceed by different ",
-          "mechanisms — unramifiedness, Hensel lifting and the Newton polygon here, versus squareness via ",
-          "an involution on Galois conjugates there — so Proposition T does not follow from theirs.",
+          ". **We did not find the equality itself in the literature.** Their conclusion is strictly ",
+          "weaker — it fixes the parity of ",
+          math(String.raw`v_2(\tau(L))`),
+          " but not its value — so Proposition T is not a consequence of it. The two proofs also proceed ",
+          "by different mechanisms: unramifiedness, Hensel lifting and the Newton polygon here, versus ",
+          "squareness via an involution on Galois conjugates there.",
         ],
         [
           "**The shape of Proposition W is known in the one-variable case.** For ",
@@ -282,6 +293,11 @@ export default defineBlocks([
           "**Several papers were located but not read in full** and are cited only from their reviews or ",
           "abstracts; these are marked as such where they occur.",
         ],
+        [
+          "**Where a theorem is quoted by number from a preprint, the number is the one carried by that preprint**, " +
+            "and we say so at the point of quotation. We have not checked, for those works that have " +
+            "since appeared in a journal, that the published version numbers the statement in the same way.",
+        ],
       ]),
       paragraph([
         "**We therefore do not treat a search returning nothing as evidence that nothing exists.** This is ",
@@ -293,7 +309,7 @@ export default defineBlocks([
       paragraph([
         "**A note on how these findings were arrived at.** Two of the corrections recorded in this chapter ",
         "were not produced by reading more carefully. One came from formalisation in Lean, which detected ",
-        "errors in the prose statements in two successive rounds — in both cases the underlying arguments ",
+        "errors in the prose statements on two occasions — in both cases the underlying arguments ",
         "were sound and the claim had been damaged in transcription. The other came from re-examining a ",
         "retrieval failure instead of accepting its first diagnosis: the paper recorded as inaccessible ",
         "behind a subscription turned out to be Open Access, and reading it changed what could be said ",

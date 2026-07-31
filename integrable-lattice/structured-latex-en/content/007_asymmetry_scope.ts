@@ -7,10 +7,15 @@
  * （`tools/verify-ja-en-correspondence.ts` が検査する）。訳語は
  * `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
- * 日本語版が `ref("paper_prop_D")` / `ref("paper_remark_D_limits")` / `ref("paper_prop_F")` で張っている
- * 相互参照は、参照先の第 5 章がまだ英訳されていない（＝英語版に当該ラベルが存在せず `ref` が型で落ちる）
- * ため、いまは地の文で参照先を名指ししてある。第 5 章の英訳が入った時点で `ref` へ戻すこと。
- * `ref("paper_claim_resultant")` / `ref("paper_four_axes")` は第 1〜3 章の英訳が入ったので復元済み。
+ * 相互参照は 2026-08-01 の校閲ですべて `ref()` へ復元した
+ * （`paper_prop_D` / `paper_remark_D_limits` / `paper_prop_F` / `paper_claim_resultant` /
+ * `paper_four_axes` / `paper_positioning` / `paper_prop_W`）。
+ *
+ * `paper_082_remark_formalization` にあったリポジトリ内部のパス
+ * （`\texttt{integrable-lattice/lean/README.md}`・`\texttt{verification}`・`\texttt{lean}`・
+ * `\texttt{sagemath/tools/verify-check-linkage.ts}`）は、投稿稿にふさわしくないので落とし、
+ * 同じ内容を投稿稿の言い方へ置き換えた。数式の多重集合が日本語版とずれるため、
+ * このブロックは `tools/ja-en-exceptions.ts` へ理由つきで登録してある。
  */
 
 import { cite, defineBlocks, list, math, paragraph, ref } from "../schema.ts";
@@ -40,7 +45,9 @@ export default defineBlocks([
     verification: ["sagemath/check/cycle10_T3_lehmer"],
     statement: [
       paragraph([
-        "The two places of Proposition D arise from one and the same ",
+        "The two places of ",
+        ref("paper_prop_D"),
+        " arise from one and the same ",
         math(String.raw`P`),
         ", but **they are not equally difficult**.",
       ]),
@@ -132,8 +139,7 @@ export default defineBlocks([
         "countable encoding is itself **an established, standard technique**. In reverse mathematics, real ",
         "numbers are encoded by rapidly converging Cauchy sequences and complete separable metric spaces ",
         "are treated as the generalisation of that encoding; in constructive algebra there is work that ",
-        "constructs the Henselization without passing through a completion (Alonso García–Lombardi–Perdry, ",
-        "MLQ **54** (2008) ",
+        "constructs the Henselisation without passing through a completion (Alonso García–Lombardi–Perdry ",
         cite(["AlonsoLombardiPerdry2008"]),
         "). The difference in this paper is therefore not that it makes things countable, but the single ",
         "point that it **brings equality down to a decidable level** — under the encodings of reverse ",
@@ -202,11 +208,11 @@ export default defineBlocks([
           cite(["MednykhMednykh2019"]),
           "); **the shape of Proposition W already appears for** ",
           math(String.raw`d=1`),
-          " (Vallières, Corollary 5.7 ",
+          " (Vallières ",
           cite(["Vallieres2021"], "Corollary 5.7"),
           "). As for ",
           math(String.raw`\mu_1`),
-          " in Proposition W, **we have read the text of Monsky (ASPM 17, 1989) in the Open Access version** ",
+          " in Proposition W, **we have read the text of Monsky in the Open Access version** ",
           cite(["Monsky1989"]),
           ". That paper asserts only the existence of the corresponding constant ",
           math(String.raw`\alpha^*`),
@@ -218,8 +224,9 @@ export default defineBlocks([
         ],
       ]),
       paragraph([
-        "**Two open points remain** (they are recorded in the remark on the limitations that remain in ",
-        "Proposition D): there is in general no explicit formula for the lower-order terms ",
+        "**Two open points remain** (they are recorded in ",
+        ref("paper_remark_D_limits"),
+        "): there is in general no explicit formula for the lower-order terms ",
         math(String.raw`\lambda_i,\mu_i,\nu`),
         " (",
         math(String.raw`i\ge1`),
@@ -227,9 +234,10 @@ export default defineBlocks([
         math(String.raw`\theta(P)\ge\ell+1`),
         ". (The computability of ",
         math(String.raw`\lambda=l_0(f)`),
-        ", which used to be listed here as well, has been settled by Proposition F — but only in the case ",
-        "of finite support.) Both remaining points are stated explicitly as limitations of Proposition D, ",
-        "and both narrow the reach of this paper.",
+        ", which used to be listed here as well, has been settled by ",
+        ref("paper_prop_F"),
+        " — but only in the case of finite support.) Both remaining points are stated explicitly as ",
+        "limitations of Proposition D, and both narrow the reach of this paper.",
       ]),
     ],
   },
@@ -251,21 +259,16 @@ export default defineBlocks([
         " has been checked mechanically.",
       ]),
       paragraph([
-        "**The current state of the formalisation — what is complete, what is partial, what has not been started, and the reason in each case — is recorded in a table in the accompanying Lean development,** ",
-        math(String.raw`\texttt{integrable-lattice/lean/README.md}`),
-        ". For the propositions we could not formalise, we make concrete, from primary evidence (the code ",
+        "**The current state of the formalisation — what is complete, what is partial, what has not been started, and the reason in each case — is recorded in a table in the accompanying Lean development.** ",
+        "For the propositions we could not formalise, we make concrete, from primary evidence (the code ",
         "we tried and the error output), what is missing in mathlib or at which step we got stuck. We never ",
-        "record 'it looks hard' as a reason.",
+        "record “it looks hard” as a reason.",
       ]),
       paragraph([
-        "The correspondence with the numerical verification (SageMath) can be traced mechanically through ",
-        "the ",
-        math(String.raw`\texttt{verification}`),
-        " field of each block, and the correspondence with the Lean theorems through the ",
-        math(String.raw`\texttt{lean}`),
-        " field. That these correspondences are unbroken is checked by ",
-        math(String.raw`\texttt{sagemath/tools/verify-check-linkage.ts}`),
-        ".",
+        "Each statement in this paper carries, alongside its habitat, a list of the numerical checks (in SageMath) ",
+        "and of the Lean theorems that correspond to it. These two correspondences are not prose promises: ",
+        "they are recorded in machine-readable form with the statement, and a checker verifies that every ",
+        "name listed still exists and that no check has been orphaned.",
       ]),
     ],
   },

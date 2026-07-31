@@ -25,6 +25,16 @@
  *
  * 日本語版の `ref("paper_prop_G")`（2 回）と `ref("paper_prop_G_infty")`（3 回）は、
  * 両ラベルとも英語版に実在するのでそのまま `ref()` で張ってある（地の文へ落としていない）。
+ *
+ * ## 日本語版に残っている宛先の無い参照（2026-08-01 の校閲で英語版だけ直した）
+ *
+ * (J4) の段落で、日本語版は「命題 G の **(G1″)** はこの L=1 の場合である」と書いている。
+ * **命題 G に (G1″) という項目は存在しない**（あるのは (G1)・(G1′)・(G2)〜(G6)）。
+ * L=1 で一致するのは **(G6)**（`Θ=Σ_{P∈P¹(F_ℓ)}θ(P)` を用いる閉形式。φ(ℓ)=ℓ-1 なので
+ * (J4) の `Θ_L/φ(ℓ^L)` が L=1 でちょうど (G6) の `Θ/(ℓ-1)` になる）である。
+ * 英語版は宛先の無い参照を投稿稿に残せないので **(G6)** へ直した。
+ * **日本語版は正本なのでこの担当は触っていない。同じ誤りが残っているので、直す必要がある**
+ * （呼び出し元への申し送り）。
  */
 
 import { defineBlocks, displayMath, list, math, paragraph, ref } from "../schema.ts";
@@ -108,7 +118,13 @@ export default defineBlocks([
         math(String.raw`\ell`),
         " is an odd prime, the criterion reads “failure ",
         math(String.raw`\iff k=2`),
-        "”, whereas for ",
+        "” (here ",
+        math(String.raw`k`),
+        " is, as in ",
+        ref("paper_prop_W"),
+        ", the degree of the lowest-degree homogeneous part of ",
+        math(String.raw`\bar E`),
+        "), whereas for ",
         math(String.raw`\ell=2`),
         " it reads “failure ",
         math(String.raw`\iff\bar A_2`),
@@ -195,7 +211,7 @@ export default defineBlocks([
       paragraph([
         "that is, **the tower is then of type II**: no term of the shape ",
         math(String.raw`n\ell^n`),
-        " occurs. Part (G1'') of ",
+        " occurs. Part (G6) of ",
         ref("paper_prop_G"),
         " is the case ",
         math(String.raw`L=1`),
@@ -314,9 +330,13 @@ export default defineBlocks([
         math(String.raw`\mathbb{P}^1(\mathbb{Q})`),
         ", and the candidates are exhausted by a finite computation from the coefficients of ",
         math(String.raw`D`),
-        ". **The finiteness assumed in (J4) is therefore not an assumption at all**: the finiteness of ",
+        ". **The second half of (J4) tacitly requires this set to be finite, because the coefficient it " +
+          "defines there is a sum over that set; the condition is therefore satisfied automatically and " +
+          "need not be assumed.** The set in question is ",
         math(String.raw`S_\infty`),
-        " is a theorem. This set of candidates coincides with the one obtained in ",
+        ", and the coefficient is ",
+        math(String.raw`b=\sum_{P\in S_\infty}j^*(P)`),
+        ". This set of candidates coincides with the one obtained in ",
         ref("paper_prop_G_infty"),
         " from the Minkowski decomposition of Newton polytopes, namely the directions occurring in ",
         math(String.raw`\mathrm{Newt}(\bar{\tilde E})-\mathrm{Newt}(\bar{\tilde E})`),

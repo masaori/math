@@ -6,12 +6,16 @@
  * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
- * 日本語版が `ref("paper_remark_D_limits")` で張っている相互参照は、参照先の第 5 章がまだ
- * 英訳されていない（＝英語版に当該ラベルが存在せず `ref` が型で落ちる）ため、いまは
- * 地の文で参照先を名指ししてある。第 5 章の英訳が入った時点で `ref` へ戻すこと。
+ * 日本語版が `ref("paper_remark_D_limits")` で張っている相互参照は、第 5 章の英訳が入った
+ * 2026-08-01 の校閲で `ref()` へ復元済みである（地の文に章番号を手書きすると、章を足したときに
+ * 無言で誤りになる）。
+ *
+ * 散文の書誌は投稿稿の形へ整理した（著者名 ＋ `cite`。巻・号・頁は参考文献表に任せる）。
+ * ただし**プレプリント版の番号で定理を引いている箇所は arXiv ID を残してある**
+ * （出版版で番号が一致する保証が無く、読者が照合できなくなるため）。
  */
 
-import { cite, defineBlocks, displayMath, math, paragraph } from "../schema.ts";
+import { cite, defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -143,8 +147,7 @@ export default defineBlocks([
         "periodic points is a Dold sequence, that is, an integer sequence satisfying the Gauss congruences, ",
         "and taking ",
         math(String.raw`n=p`),
-        " in Definition 2.1 of Byszewski–Graff–Ward, *Dold sequences, periodic points, and dynamics*, ",
-        "Bull. London Math. Soc. **53** (2021) ",
+        " in the definition of a Dold sequence given by Byszewski–Graff–Ward ",
         cite(["ByszewskiGraffWard2021"], "Definition 2.1"),
         " yields ",
         math(String.raw`a_p\equiv a_1\pmod p`),
@@ -305,10 +308,10 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Prior art**: **a weak form is already in the literature.** From Theorem 5.1 of Kwon–Mednykh–Mednykh, ",
-        "*Complexity of the circulant foliation over a graph*, arXiv:1902.05681 ",
+        "**Prior art**: **a weak form is already in the literature.** From Kwon–Mednykh–Mednykh ",
         cite(["MednykhMednykh2019"], "Theorem 5.1"),
-        ", whose §7.6 treats explicitly the discrete torus ",
+        " (we quote the numbering of the arXiv version, arXiv:1902.05681), whose §7.6 treats explicitly ",
+        "the discrete torus ",
         math(String.raw`C_L\times C_L`),
         " considered here, one obtains for odd ",
         math(String.raw`L`),
@@ -453,9 +456,9 @@ export default defineBlocks([
         math(String.raw`l_0(f)=0`),
         ", that is, ",
         math(String.raw`\lambda=0`),
-        ". **The converse is false** — see the counterexample in item (i) of the remark on the limitations ",
-        "that remain in Proposition D — so the two are not equivalent. Proposition W needs only the first ",
-        "direction.",
+        ". **The converse is false** — see the counterexample in item (i) of ",
+        ref("paper_remark_D_limits"),
+        " — so the two are not equivalent. Proposition W needs only the first direction.",
       ]),
       paragraph([
         "**An example**: for the ",
@@ -481,8 +484,7 @@ export default defineBlocks([
         " has a rational zero, so this case is **out of scope**.",
       ]),
       paragraph([
-        "**We claim no novelty.** The asymptotic shape is known from Theorem 1.1 of Kataoka, ",
-        "arXiv:2606.03579 ",
+        "**We claim no novelty.** The asymptotic shape is known from Kataoka ",
         cite(["Kataoka2026"], "Theorem 1.1"),
         ", and the explicit formula for ",
         math(String.raw`\mu`),
@@ -494,25 +496,25 @@ export default defineBlocks([
       ]),
       paragraph([
         "**The result of the prior-art check**: ",
-        "(i) the shape of the statement, namely 'non-degeneracy implies a closed form', **is already in the literature for** ",
+        "(i) the shape of the statement, namely “non-degeneracy implies a closed form”, **is already in the literature for** ",
         math(String.raw`d=1`),
-        " (Vallières, arXiv:2006.14012, Corollary 5.7 ",
+        " (Vallières ",
         cite(["Vallieres2021"], "Corollary 5.7"),
-        "). ",
+        "; we quote the numbering of the arXiv version, arXiv:2006.14012). ",
         "(ii) As for the lower-order terms for ",
         math(String.raw`d=2`),
-        ", Kataoka, arXiv:2606.03579, §4.3 ",
+        ", Kataoka ",
         cite(["Kataoka2026"], "§4.3"),
         " **states explicitly** that the identification of ",
         math(String.raw`\lambda_1,\mu_1,\nu`),
-        " is not pursued there, and §7 of DuBose–Vallières (Alg. Comb. 6 (2023), alco.304) ",
+        " is not pursued there, and DuBose–Vallières ",
         cite(["DuBoseVallieres2023"], "§7"),
-        " **acknowledges** that its own values come from a numerical fit and are not proved. ",
-        "(iii) We have **read the text** of Monsky, *Fine estimates for the growth of ",
+        " **acknowledge** that their own values come from a numerical fit and are not proved. ",
+        "(iii) We have **read the text** of Monsky, Fine estimates for the growth of ",
         math(String.raw`e_n`),
         " in ",
         math(String.raw`\mathbb{Z}_p^d`),
-        "-extensions*, ASPM **17** (1989), 309–330 ",
+        "-extensions ",
         cite(["Monsky1989"]),
         " (in the Open Access version on Project Euclid). Theorem 3.13 of that paper proves ",
         math(String.raw`e_n=(m_0p^n+\ell_0n+\alpha^*)p^{(d-1)n}+O(np^{(d-2)n})`),

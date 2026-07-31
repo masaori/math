@@ -25,15 +25,25 @@
  *     "Chapters 3 and 5 identify the sources", "Propositions A, B, C, N, L of Chapter 4",
  *     "organised in Chapter 7", "(Chapter 8)" と書いている。日本語版も「第 3 章」等）。
  *     章がずれると、これらが**全部** 1 つずつ誤りになる。
- *   - `content/001_intro.ts`〜`007_...` は他の担当が翻訳中であり、**この担当は編集してはならない**ので、
- *     ずれた章番号をこちらで直すことはできない。
  *
  * そこで**新しい `level: 1` 見出しを作らず**、ファイル名を `001_intro.ts` と `002_setup.ts` の間に
  * 挿さる `001a_...` にして、ブロックを**第 1 章（序論）の末尾**へ置いた。章番号は 1 つも動かない。
  * これは投稿先調査が「**序論で**書き足す必要がある」と書いていることとも一致する。
  * （`'_'` = 0x5F < `'a'` = 0x61 なので、`001_intro.ts` < `001a_reader_guide.ts` < `002_setup.ts`。）
  *
- * 章番号を動かさずに済むので、後ろに足す `008_prior_art.ts`（第 9 章）だけが新しい章になる。
+ * 章番号を動かさずに済むので、後ろに足す章（`008_theta_padic.ts` = 第 9 章、
+ * `009_prior_art.ts` = 第 10 章）だけが新しい章になる。
+ *
+ * ## 2026-08-01 の校閲で直したこと（数学レビューの指摘。いずれも正しさの問題である）
+ *
+ * - 【致命】`paper_014_remark_survey_scope` が「Λ 側の**すべての**命題に決定手続きがある」と
+ *   全称で書いていた。本論文自身が反例を持つ（命題 F (F2) は決定不能、命題 D の低位項に明示式が無い、
+ *   命題 W の ν は有理数であって整数ではない）。**限定列挙へ戻し、決定不能な 2 箇所を明示した。**
+ * - 【重要】`paper_015_remark_reading_guide` の前提知識の一覧が、本文が実際に使う道具と
+ *   合っていなかった。引用として使う結果（黒箱）と、1 命題だけで使う道具（差積・停止問題・
+ *   Newton 多面体）を分けて書き直した。
+ * - 【重要】「岩澤理論を引くのは第 3 章と第 5 章」は事実誤り（第 3 章は力学系、第 6 章が抜けていた）。
+ *   **第 5 章と第 6 章**へ直した。
  */
 
 import { cite, defineBlocks, list, math, paragraph, ref } from "../schema.ts";
@@ -49,7 +59,7 @@ export default defineBlocks([
     realEscape:
       "This block describes which literatures the survey places side by side, and ℝ appears in it only as " +
       "the name of one of the two sides. No element of ℝ is constructed and no argument is carried out " +
-      "over ℝ here. The only place where this paper genuinely uses ℝ is the single limit L → ∞ in Chapter 3.",
+      "over ℝ here. The only place where this paper genuinely uses ℝ is the single limit in which L tends to infinity in Chapter 3.",
     statement: [
       paragraph([
         "A survey is expected to give an overview of an area. It is worth saying at the outset what is ",
@@ -97,10 +107,16 @@ export default defineBlocks([
         "side the central quantity is a real number and the central open problem is a continuous gap, ",
         "while on the ",
         math(String.raw`\Lambda`),
-        " side every quantity we discuss is an integer or an element of ",
+        " side the quantities are discrete — integers, elements of ",
         math(String.raw`\Lambda`),
-        ", and each proposition is accompanied by a procedure that decides it in finitely many steps ",
-        "together with a witness. Chapter 7 states the asymmetry that results.",
+        ", rational numbers, or algebraic numbers — and a family of the statements about them comes with ",
+        "an explicit decision procedure and a witness (Propositions A, B, C, N, L of Chapter 4 and ",
+        "Propositions T, V, W of Chapter 6). **The countable side is not uniformly decidable**, and ",
+        "Chapter 5 marks the two places where it is not: the predicate of Proposition F (F2) is ",
+        "undecidable for ",
+        math(String.raw`d\ge2`),
+        ", and the lower-order coefficients of Proposition D admit no explicit formula. Chapter 7 states ",
+        "the asymmetry that results.",
       ]),
       paragraph([
         "The four items this paper supplies, listed in ",
@@ -124,10 +140,26 @@ export default defineBlocks([
       "a set, not uses of it; no element of ℝ is constructed here and no argument is carried out over ℝ.",
     statement: [
       paragraph([
-        "**What the reader is assumed to know.** Undergraduate algebra is enough: finite fields, the ",
-        "resultant of two polynomials, the Smith normal form of an integer matrix, and the Newton polygon ",
-        "of a polynomial over a valued field. Each of these is used concretely and is recalled where it ",
-        "is first needed.",
+        "**What the reader is assumed to know.** The backbone is undergraduate algebra: finite fields, ",
+        "the resultant of two polynomials, the Smith normal form of an integer matrix, the linear ",
+        "independence of characters, and the Newton polygon of a polynomial over a valued field. Each of ",
+        "these is used concretely and is recalled where it is first needed.",
+      ]),
+      paragraph([
+        "**What is quoted rather than proved.** Three bodies of results are used as black boxes, always ",
+        "with a reference and a proposition number: the topological entropy of an algebraic ",
+        math(String.raw`\mathbb{Z}^d`),
+        "-action (Chapter 3), the theorems of Monsky and of Cuoco–Monsky on Iwasawa modules over ",
+        math(String.raw`\mathbb{Z}_p[[\Gamma]]`),
+        " (Chapter 5), and the asymptotic formulae for towers of graphs (Chapters 5 and 6). A reader who ",
+        "takes these on trust can follow every argument that this paper carries out itself.",
+      ]),
+      paragraph([
+        "**Three isolated points go further, and each is confined to one statement.** Chapter 4 uses the ",
+        "different and the ramification data of a number field, in Proposition W* alone; Chapter 5 uses ",
+        "the halting problem, in part (F2) of Proposition F alone; and Chapter 5 uses Newton polytopes ",
+        "and their Minkowski decomposition, in Proposition G' alone. Nothing later depends on any of the ",
+        "three.",
       ]),
       paragraph([
         "**What the reader is not assumed to know.** Neither ",
@@ -138,7 +170,7 @@ export default defineBlocks([
         "-side statements of this paper do not use ",
         math(String.raw`\mathbb{Q}_p`),
         " at all, which is precisely contribution (b). Where results from Iwasawa theory are quoted — in ",
-        "Chapters 3 and 5 — they are quoted as known theorems, with reference and proposition number, and ",
+        "Chapters 5 and 6 — they are quoted as known theorems, with reference and proposition number, and ",
         "are not reproved.",
       ]),
       paragraph([

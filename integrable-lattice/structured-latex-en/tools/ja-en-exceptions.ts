@@ -21,9 +21,33 @@ const JAPANESE_IN_TEXT_MACRO =
   "そこで `\\text{}` の**中身だけ**を英訳し、その外側の数式記号は 1 文字も変えていない。" +
   "したがってこの差は訳し落としでも数学の書き換えでもない。日本語版は正本なので変更していない。";
 
+/**
+ * リポジトリ内部のパスを投稿稿から落としたことによる差。
+ *
+ * 日本語版は補助レポートや Lean の README を `\texttt{outputs/reports/...}` のような
+ * **math ノード**で書いている。これは**リポジトリ内部のパス**であり、
+ * Expositiones Mathematicae へ出す投稿稿の読者はそのファイルを開けない
+ * （リポジトリは投稿物ではない）。したがって英語版では、パス文字列を出さず
+ * "the supporting report for this proposition" のような言い方へ置き換えた。
+ *
+ * 落としたのは**参照先の名前だけ**であって、主張・限界・caveat は 1 つも落としていない。
+ * 数式として意味を持つ記号は 1 文字も変えていない（そもそもこれらは数式ではなく、
+ * `\texttt{}` に入れたファイル名である）。日本語版は正本なので変更していない。
+ */
+const INTERNAL_PATH_REMOVED =
+  "日本語版が `\\texttt{outputs/reports/...}` 等の math ノードで書いているリポジトリ内部のパスを、" +
+  "投稿稿から落とした。投稿先の読者はこのリポジトリを開けないため、内部パスは投稿稿では意味を持たない。" +
+  "落としたのは参照先の**名前**だけで、主張・限界・caveat は 1 つも落としていない。" +
+  "これらのノードは数式ではなく `\\texttt{}` に入れたファイル名であり、" +
+  "数学的な記号は 1 文字も変えていない。日本語版は正本なので変更していない。";
+
 export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {
   paper_012_definition_ladder: JAPANESE_IN_TEXT_MACRO,
-  paper_042_theorem_pi_p1: JAPANESE_IN_TEXT_MACRO,
+  paper_042_theorem_pi_p1: JAPANESE_IN_TEXT_MACRO + " 加えて、" + INTERNAL_PATH_REMOVED,
+  paper_043b_theorem_trace_bound: INTERNAL_PATH_REMOVED,
   paper_046_theorem_wstar_different: JAPANESE_IN_TEXT_MACRO,
-  paper_055_theorem_theta_infinity: JAPANESE_IN_TEXT_MACRO,
+  paper_052_theorem_l0_computable: INTERNAL_PATH_REMOVED,
+  paper_053_theorem_lower_order: INTERNAL_PATH_REMOVED,
+  paper_055_theorem_theta_infinity: JAPANESE_IN_TEXT_MACRO + " 加えて、" + INTERNAL_PATH_REMOVED,
+  paper_082_remark_formalization: INTERNAL_PATH_REMOVED,
 };

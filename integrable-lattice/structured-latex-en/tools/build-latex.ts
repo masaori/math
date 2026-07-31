@@ -224,8 +224,12 @@ if (leftover.length > 0) {
 }
 writeFileSync(
   join(buildDir, `${derivedBibName}.bib`),
-  `% 自動生成ファイル — 直接編集しない。\n` +
-    `% 正本: ${relative(buildDir, bibPath)}（note フィールドと %% コメントだけを落としてある）\n` +
+  // ヘッダも ASCII の英語にする。上の非 ASCII 検査はヘッダを付ける前に走るので、
+  // ここに日本語を書くと検査をすり抜けて導出物へ残る（投稿時にこの .bib を出版社へ渡す場合、
+  // 非 UTF-8 前提のツールチェーンで事故りうる）。
+  `% Generated file - do not edit.\n` +
+    `% Source: ${relative(buildDir, bibPath)} ` +
+    `(note fields and %-comments removed).\n` +
     derivedBib,
   "utf8",
 );

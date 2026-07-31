@@ -8,20 +8,17 @@
  *
  * ### この英訳で日本語版と形が変わっている点（内容は変えていない）
  *
- * 1. **他章のラベルへの `ref()` を、いまは地の文で書いてある。**
- *    日本語版はここで `paper_def_curve`（第 2 章）・`paper_thm_archimedean`（第 3 章）・
- *    `paper_claim_resultant`（第 2 章）・`paper_prop_V`・`paper_prop_W`（第 6 章）を `ref()` で指すが、
- *    英語版にはまだそれらの章が無く、`ref()` は**実在しないラベルを型で落とす**設計である。
- *    そこで暫定的に "the definition of the integer spectral curve (Chapter 2)" のような地の文にした。
- *    **第 2・3・6 章の英訳が入ったら、下の 5 箇所を `ref()` へ戻すこと**（該当箇所に `TODO(ref)` を付けた）。
- *    同じファイル内のラベル（`paper_prop_D` / `paper_prop_F` / `paper_prop_G`）は `ref()` で書いてある。
+ * 1. **他章のラベルへの `ref()` は、全章の英訳が揃った 2026-08-01 の校閲ですべて復元した。**
+ *    暫定的に地の文で書いてあった章番号（"the archimedean theorem of Chapter 3" 等）は、
+ *    章を足したり並べ替えたりしたときに無言で誤りになるため、`\cref` が追随する `ref()` へ戻した。
  * 2. **`**強調**` が数式ノードをまたぐ箇所は、数式の前後で強調を開いて閉じている。**
  *    生成器はノードをまたぐ `**` をビルドエラーにする（意図的な設計）。強調の範囲は変えていない。
- * 3. **散文の書誌はそのまま英語で残したうえで、`cite` ノードを足した。** 書誌情報は削っていない。
- *    日本語版が Markdown の `*斜体*` で書いていた表題は、生成器が単独の `*` を処理せず
- *    PDF に素のアスタリスクを出すため、記号を落として平文の表題にしてある（文字は変えていない）。
- * 4. **内部レポートのパスは `math` ノードなので、そのまま残してある**（数式の一致検査の対象であり、
- *    ここで書き換えると訳し落としの検出が効かなくなる）。投稿稿から落とす判断は呼び出し元に委ねる。
+ * 3. **散文の書誌は投稿稿の形へ整理した。** 著者名 ＋ `cite`（locator は `cite` の第 2 引数）に寄せ、
+ *    巻・号・頁・掲載年は参考文献表に任せている。プレプリントの arXiv ID は locator として残した。
+ * 4. **リポジトリ内部のレポートのパス（`\texttt{outputs/reports/...}` の math ノード）は落とした。**
+ *    投稿稿に内部パスを出すのは不適切なので、"the supporting report for this proposition" のような
+ *    言い方へ置き換えてある。数式の多重集合が日本語版とずれるので、対象ブロックは
+ *    `tools/ja-en-exceptions.ts` へ理由つきで登録した。
  */
 
 import { cite, defineBlocks, displayMath, list, math, paragraph, ref } from "../schema.ts";
@@ -43,7 +40,7 @@ export default defineBlocks([
     labels: ["paper_prop_D"],
     habitat: "mixed",
     realEscape:
-      "In its statement at the archimedean place this proposition takes the limit L → ∞. That single " +
+      "In its statement at the archimedean place this proposition takes the limit in which L tends to infinity. That single " +
       "point is the only use of ℝ here; the two statements at the p-adic places both stay inside ℤ and ℚ.",
     verification: [
       "sagemath/check/cycle5_T1_mahler",
@@ -53,8 +50,9 @@ export default defineBlocks([
     ],
     statement: [
       paragraph([
-        // TODO(ref): 第 2 章の英訳が入ったら ref("paper_def_curve") へ戻す。
-        "In the setting of the definition of the integer spectral curve (Chapter 2), let ",
+        "In the setting of ",
+        ref("paper_def_curve"),
+        ", let ",
         math(String.raw`P\neq0`),
         " and let ",
         math(String.raw`\mathsf U(P)`),
@@ -69,11 +67,11 @@ export default defineBlocks([
         String.raw`\frac{1}{L^{d}}\log\bigl|a^{\mathrm{red}}_L\bigr|\ \longrightarrow\ \log m(P)\qquad(L\to\infty).`,
       ),
       paragraph([
-        // TODO(ref): 第 3 章の英訳が入ったら ref("paper_thm_archimedean") へ戻す。
-        "The ground for this is the archimedean theorem of Chapter 3 (Lind–Schmidt–Ward, Theorems 3.1 ",
-        "and 7.1 ",
+        "The ground for this is ",
+        ref("paper_thm_archimedean"),
+        " (Lind–Schmidt–Ward ",
         cite(["LindSchmidtWard1990"], "Theorems 3.1 and 7.1"),
-        "; Lind–Schmidt–Verbitskiy, Theorems 1.2 and 1.3 ",
+        "; Lind–Schmidt–Verbitskiy ",
         cite(["LindSchmidtVerbitskiy2013"], "Theorems 1.2 and 1.3"),
         ").",
       ]),
@@ -86,11 +84,13 @@ export default defineBlocks([
         math(String.raw`v_p(a^{\mathrm{red}}_L)\in\mathbb{Z}_{\ge0}`),
         " can be computed by a finite procedure over ",
         math(String.raw`\mathbb{Z}`),
-        // TODO(ref): 第 2 章の英訳が入ったら ref("paper_claim_resultant") へ戻す。
-        " (the resultant claim of Chapter 2). Moreover, along the tower ",
+        " (",
+        ref("paper_claim_resultant"),
+        "). Moreover, along the tower ",
         math(String.raw`L=p^n`),
-        // TODO(ref): 第 6 章の英訳が入ったら ref("paper_prop_V") へ戻す。
-        " non-triviality can be decided completely (Proposition V of Chapter 6).",
+        " non-triviality can be decided completely (",
+        ref("paper_prop_V"),
+        ").",
       ]),
       paragraph([
         "**(p-adic places, asymptotics along the tower)** Let ",
@@ -133,25 +133,23 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        // TODO(ref): 第 3 章の英訳が入ったら ref("paper_thm_archimedean") へ戻す。
-        "**(Archimedean place)**: this is a citation of the archimedean theorem of Chapter 3. ",
-        "This paper does not prove it.",
+        "**(Archimedean place)**: this is a citation of ",
+        ref("paper_thm_archimedean"),
+        ". This paper does not prove it.",
       ]),
       paragraph([
         "**(p-adic places, asymptotics along the tower)**: this is **an application of Monsky's theorem " +
           "(Theorem 5.6) and of the Cuoco–Monsky theorem (Theorem 1.7)**. This paper does not prove them. " +
-          "The sources are P. Monsky, On p-adic power series, Math. Ann. **255**(2), 217–227 (1981), " +
-          "Theorem 5.6 ",
+          "The sources are Monsky, On p-adic power series ",
         cite(["Monsky1981"], "Theorem 5.6"),
-        ", and A. A. Cuoco and P. Monsky, Class numbers in ",
+        ", and Cuoco and Monsky, Class numbers in ",
         math(String.raw`Z_p^d`),
-        "-extensions, Math. Ann. **255**, 235–258 (1981), Theorem 1.7 ",
+        "-extensions ",
         cite(["CuocoMonsky1981"], "Theorem 1.7"),
         "; **we have checked the hypotheses and the conclusions in the body of both original papers** ",
-        "(we have also collated the citations given as Theorem 2.1 and Theorem 2.3 in Kataoka, ",
-        "arXiv:2606.03579 ",
+        "(we have also collated the citations given as Theorem 2.1 and Theorem 2.3 in Kataoka ",
         cite(["Kataoka2026"], "Theorems 2.1 and 2.3"),
-        ", against the originals and found that they agree).",
+        " against the originals and found that they agree).",
       ]),
       paragraph([
         "**The convention** ",
@@ -190,7 +188,7 @@ export default defineBlocks([
         math(String.raw`P=h+\iota(h)`),
         " with ",
         math(String.raw`h`),
-        " admissible in the sense of Kataoka, Definition 6.1 ",
+        " admissible in the sense of Kataoka ",
         cite(["Kataoka2026"], "Definition 6.1"),
         ". Every statement that mentions ",
         math(String.raw`\kappa`),
@@ -386,9 +384,7 @@ export default defineBlocks([
       paragraph([
         "The details are in the supporting report for ",
         ref("paper_prop_D"),
-        " (",
-        math(String.raw`\texttt{outputs/reports/cycle16\_T1\_lambda\_l0\_computability.md}`),
-        "). **We claim no novelty.** The argument that determines the prime divisors of a group ring by ",
+        ". **We claim no novelty.** The argument that determines the prime divisors of a group ring by ",
         "linear algebra is likely folklore; we have not been able to identify the corresponding statement ",
         "in the literature.",
       ]),
@@ -411,8 +407,9 @@ export default defineBlocks([
     ],
     statement: [
       paragraph([
-        // TODO(ref): 第 6 章の英訳が入ったら ref("paper_prop_W") へ戻す。
-        "In the setting of Proposition W of Chapter 6 — a ",
+        "In the setting of ",
+        ref("paper_prop_W"),
+        " — a ",
         math(String.raw`\mathbb{Z}_\ell^2`),
         "-tower of graphs, with ",
         math(String.raw`\kappa_n`),
@@ -605,9 +602,8 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "The proof is in §2–§5 of the supporting report ",
-        math(String.raw`\texttt{outputs/reports/cycle16\_T3\_lower\_order\_and\_degeneracy.md}`),
-        ". **We claim no novelty.** In particular, the value in (G3) agrees with the number reported by ",
+        "The proof is in §2–§5 of the supporting report for this proposition. ",
+        "**We claim no novelty.** In particular, the value in (G3) agrees with the number reported by ",
         "DuBose and Vallières ",
         cite(["DuBoseVallieres2023"]),
         "; the contribution of this paper is limited to deriving the closed form.",
@@ -632,12 +628,12 @@ export default defineBlocks([
       paragraph([
         "**Prior art for (G4).** The value for ",
         math(String.raw`\ell=3`),
-        " already appears in DuBose–Vallières (Algebraic Combinatorics 6 (2023)), §7, Example (4) ",
-        cite(["DuBoseVallieres2023"], "Section 7"),
+        " already appears in DuBose–Vallières ",
+        cite(["DuBoseVallieres2023"], "§7, Example (4)"),
         " — that section is a numerical fit from five levels, and the authors themselves state that it is ",
         "not a proof. For ",
         math(String.raw`\ell\ge5`),
-        " we have read the text of Monsky (ASPM 17, 1989) ",
+        " we have read the text of Monsky ",
         cite(["Monsky1989"]),
         " in the Open Access version: that paper asserts only the existence of the corresponding constant, ",
         "together with its rationality when ",
@@ -666,9 +662,7 @@ export default defineBlocks([
         math(String.raw`\ell`),
         "-adic digit enters only at ",
         math(String.raw`m=\ell+1`),
-        ". The supporting report is ",
-        math(String.raw`\texttt{outputs/reports/cycle18\_T3\_general\_degenerate\_tower.md}`),
-        ".",
+        ". The details are in the supporting report for this part.",
       ]),
       paragraph([
         "**What remains beyond reach.** The closed form for a degenerate tower having a direction with ",
@@ -712,7 +706,7 @@ export default defineBlocks([
           " **with** ",
           math(String.raw`i\ge1`),
           "**.** These are **rational numbers**, not necessarily integers. ",
-          "**The original sources say so themselves**: Monsky, On p-adic power series, p. 227, Remark 2 ",
+          "**The original sources say so themselves**: Monsky ",
           cite(["Monsky1981"], "p. 227, Remark 2"),
           " states explicitly that the coefficients other than ",
           math(String.raw`m_0`),
@@ -785,7 +779,7 @@ export default defineBlocks([
         math(String.raw`\kappa_{X_n}`),
         " of the graph is offset from the formula above by ",
         math(String.raw`-dn+\mathrm{ord}_p(\kappa_X)`),
-        " (in the unramified case; the source is Kataoka, Proposition 4.4 ",
+        " (in the unramified case; the source is Kataoka ",
         cite(["Kataoka2026"], "Proposition 4.4"),
         ", together with ",
         math(String.raw`\mathrm{ord}_p(\#\Gamma_n)=dn`),

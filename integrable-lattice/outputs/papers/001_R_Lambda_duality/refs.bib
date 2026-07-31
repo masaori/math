@@ -11,14 +11,20 @@
 % 【重要】書誌が確認できたことと、その論文の本文を読んだこととは別である。
 % 各エントリの note に「本文のどこまでを読んだか」を書いた。読んでいないものは読んでいないと書く。
 %
-% 【本文との対応（2026-07-31 時点で structured-latex/content/*.ts を grep して確認）】
-% 現在の本文が実際に言及している文献:
-%   LindSchmidtWard1990, LindSchmidtVerbitskiy2013, Viswanathan2024（本文では arXiv:2407.19531 として言及）,
-%   Kataoka2026, Monsky1981, CuocoMonsky1981, Lehmer1933, FerreroWashington1979,
-%   AxKochen1966, Ershov1965
-% 本文が言及していないが背景として控えてあるもの（bibtex は \cite されない限り出力しない）:
-%   Deninger2009, Ueki2020, Vallieres2021, McGownVallieres2024, DuBoseVallieres2023,
-%   MonskySomeInvariants1981
+% 【本文との対応（2026-08-01 に structured-latex-en/content/*.ts の cite ノードを列挙して引き直した）】
+% この .bib を読むのは**英語版の生成器だけ**である（日本語版は書誌を地の文で持ち、refs.bib を読まない）。
+% したがって「本文」とは英語版 structured-latex-en/content/*.ts を指す。
+%
+% 英語版本文が cite しているもの（＝ PDF の参考文献に出る 18 件）:
+%   AlonsoLombardiPerdry2008, AxKochen1966, ByszewskiGraffWard2021, CuocoMonsky1981,
+%   DuBoseVallieres2023, Ershov1965, FerreroWashington1979, Haskell1992, Kataoka2026,
+%   Lehmer1933, LindSchmidtVerbitskiy2013, LindSchmidtWard1990, MednykhMednykh2019,
+%   Monsky1981, Monsky1989, TatenoUeki2025, Vallieres2021, Viswanathan2024
+% 本文が cite していないが背景として控えてあるもの（bibtex は \cite されない限り出力しない）5 件:
+%   Deninger2009, McGownVallieres2024, MonskySomeInvariants1981, Ueki2020, Wan2017
+%   → いずれも引用漏れではない。Deninger2009 / Ueki2020 は本文が扱っていない主題（$p$ 進 Mahler 測度）、
+%      McGownVallieres2024 は本文が内容に依存していない、MonskySomeInvariants1981 は誤同定を防ぐ控え、
+%      Wan2017 は Monsky 1989 の二次引用源で同じ役割を TatenoUeki2025 が果たしている。
 % ※ この対応表は本文側の記述を変えれば古くなる。本文を触ったら引き直すこと。
 
 % ------------------------------------------------------------------
@@ -56,7 +62,7 @@
 
 @article{Viswanathan2024,
   author  = {Viswanathan, Gandhimohan M.},
-  title   = {Mahler measures, elliptic curves, and $L$-functions for the free energy of the {Ising} model},
+  title   = {Mahler measures, elliptic curves, and {$L$}-functions for the free energy of the {Ising} model},
   journal = {Physical Review E},
   volume  = {110},
   number  = {5},
@@ -78,6 +84,7 @@
 @article{Kataoka2026,
   author  = {Kataoka, Takenori},
   title   = {An {Iwasawa}-type asymptotic formula for multiple $\mathbb{Z}_p$-coverings of graphs},
+  journal = {Preprint, arXiv:2606.03579},
   year    = {2026},
   eprint  = {2606.03579},
   archiveprefix = {arXiv},
@@ -314,6 +321,7 @@
   number  = {5},
   pages   = {1263--1298},
   year    = {2021},
+  doi     = {10.1112/blms.12531},
   note    = {本文確認済み（White Rose の公開 PDF）。Definition 2.1 が Dold 数列（Gauss 合同）の定義で、
              n = p と取ると a_p ≡ a_1 (mod p)。命題 V の d = 1 はここから直ちに従う＝既出。}
 }
@@ -344,6 +352,7 @@
   title   = {The {I}wasawa invariants of $\mathbb{Z}_p^{\,d}$-covers of links},
   journal = {Journal of the London Mathematical Society},
   year    = {2025},
+  doi     = {10.1112/jlms.70183},
   eprint  = {2401.03258},
   archiveprefix = {arXiv},
   note    = {**本文確認済み（§2.1, §3.2）**。Theorem 2.3 が Monsky (ASPM 17, 1989) を
@@ -393,6 +402,7 @@
   number  = {3},
   pages   = {253--271},
   year    = {2008},
+  doi     = {10.1002/malq.200710057},
   note    = {Introduction を確認。完備化を経由せずに Henselization を構成的に作る。
              寄与 (b) の「可算化」部分が標準手法であることの根拠。}
 }

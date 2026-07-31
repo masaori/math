@@ -6,24 +6,19 @@
  * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
- * ## 統合時に戻す必要がある相互参照（重要）
+ * ## 相互参照・数式についての処置（2026-08-01 の校閲で完了）
  *
- * 日本語版はこのブロックで `ref("paper_prop_G")` を 3 回、`ref("paper_prop_W")` を 2 回使う。
- * **英語版にはまだその 2 ラベルを持つブロック（`005_duality.ts` / `006_propositions_TVW.ts` の英訳）が
- * 無いため、`ref()` を書くと型検査と `validate` が落ちる。** そこで暫定的に地の文の
- * "Proposition G" / "Proposition W" に落としてある。該当箇所は下に `TODO(integration)` を付けた。
- * 両ファイルの英訳が入ったら `ref()` へ戻すこと（`\cref` の採番が復活する）。
- *
- * ## 呼び出し元へ委ねた事項
- *
- * (1) 数式ノードに日本語が残っている箇所が 2 つある（`\text{は原始}` … と
- *     `\sum_{\text{例外直線}}`）。**数式は変更してはならない**ので日本語のまま置いた。
- *     英語版は和文フォントを読まないので `build:pdf` はここで落ちる。
- *     `tools/ja-en-exceptions.ts` へ理由つきで登録したうえで英訳する必要がある。
- * (2) 末尾の `\texttt{outputs/reports/...}` はリポジトリ内部パスだが数式ノードなので触っていない。
+ * - 日本語版がここで使う `ref("paper_prop_G")` 3 回・`ref("paper_prop_W")` 2 回は、
+ *   全章の英訳が揃ったので `ref()` へ戻した（地の文に章番号を手書きすると、章を足したときに
+ *   無言で誤りになる）。
+ * - 数式中の `\text{}` に日本語が残っていた 2 箇所（`\text{は原始}` … と `\sum_{\text{例外直線}}`）は
+ *   中身だけを英訳した。英語版は和文フォントを読み込まず、日本語のままでは PDF に組めない。
+ * - 末尾の `\texttt{outputs/reports/...}`（リポジトリ内部パス）は投稿稿にふさわしくないので落とした。
+ * - 上の 2 点で数式の多重集合が日本語版とずれるため、このブロックは
+ *   `tools/ja-en-exceptions.ts` へ理由つきで登録してある。
  */
 
-import { defineBlocks, displayMath, math, paragraph } from "../schema.ts";
+import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -40,14 +35,14 @@ export default defineBlocks([
     verification: ["sagemath/check/cycle19_T3_theta_infinity"],
     statement: [
       paragraph([
-        // TODO(integration): 日本語版はここが ref("paper_prop_G")。英訳が揃ったら戻す。
-        "In the setting of Proposition G, define the vanishing depth by ",
+        "In the setting of ",
+        ref("paper_prop_G"),
+        ", define the vanishing depth by ",
         math(String.raw`\theta(a,b)=\mathrm{ord}_{x=0}\overline{\Phi_{(a,b)}}`),
         ", where ",
         math(String.raw`\Phi_{(a,b)}(x)=\tilde E((1+x)^a,(1+x)^b)\in\mathbb{Z}[x]`),
         ". The closed form of ",
-        // TODO(integration): 日本語版はここが ref("paper_prop_G")。英訳が揃ったら戻す。
-        "Proposition G",
+        ref("paper_prop_G"),
         " assumes ",
         math(String.raw`\theta(P)\le\ell`),
         " in every direction, and the strongest way in which that assumption can fail is ",
@@ -196,8 +191,7 @@ export default defineBlocks([
       ),
       paragraph([
         "That is, the five coefficients of ",
-        // TODO(integration): 日本語版はここが ref("paper_prop_W")。英訳が揃ったら戻す。
-        "Proposition W",
+        ref("paper_prop_W"),
         " are ",
         math(String.raw`a=\mu,\ b=2,\ c=\Lambda,\ d=0,\ e=-\mu-\Lambda`),
         ", with ",
@@ -225,14 +219,12 @@ export default defineBlocks([
         "**This family is completely solved when** ",
         math(String.raw`\ell`),
         " **is odd**: if the tower is non-degenerate, by ",
-        // TODO(integration): 日本語版はここが ref("paper_prop_W")。英訳が揃ったら戻す。
-        "Proposition W",
+        ref("paper_prop_W"),
         "; if it is degenerate and has no exceptional line, then ",
         math(String.raw`\theta(P)=4\le\ell`),
-        " in every degenerate direction, so that ",
-        // TODO(integration): 日本語版はここが ref("paper_prop_G")。英訳が揃ったら戻す。
-        "Proposition G",
-        " (G6) applies; and if it has an exceptional line, by the formula above. For ",
+        " in every degenerate direction, so that part (G6) of ",
+        ref("paper_prop_G"),
+        " applies; and if it has an exceptional line, by the formula above. For ",
         math(String.raw`\ell=3`),
         " the intermediate case is empty.",
       ]),
@@ -252,9 +244,7 @@ export default defineBlocks([
         "**neighbourhood** of an exceptional line. Moreover, for ",
         math(String.raw`\ell=2`),
         " the proof of (G'3) does not go through, since 2 is then not a unit. The details are in the ",
-        "supporting report ",
-        math(String.raw`\texttt{outputs/reports/cycle19\_T3\_theta\_infinity.md}`),
-        ". **We claim no novelty.**",
+        "supporting report for this proposition. **We claim no novelty.**",
       ]),
     ],
   },
