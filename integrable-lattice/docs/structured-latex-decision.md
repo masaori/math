@@ -1,4 +1,12 @@
-# 構造化テキスト基盤: 共有ライブラリにせず複製した理由と、腐らせない仕組み
+# 【履歴】構造化テキスト基盤: 共有ライブラリにせず複製した理由と、腐らせない仕組み
+
+> **この文書は履歴である（2026-07-31 時点で無効）。**
+> ここに書かれた「複製する」という判断は、リポジトリ直下 `structured-latex/`（システム）が
+> **入力言語の正本を 1 つだけ持つ**構成に置き換わったことで解消された。現在の
+> `integrable-lattice/structured-latex/` は複製ではなく、システムを具体化して使う側である。
+> 複製の同期を見ていた `tools/verify-shared-tools-in-sync.ts` は、複製そのものが無くなったので削除した。
+> 現在の構成は [structured-latex/README.md](../structured-latex/README.md) を読むこと。
+> 以下は「なぜ一度は複製という判断をしたか」の記録として残す。
 
 `integrable-lattice/structured-latex/` は
 `exact-solution-of-2d-ising-model/structured-latex/` の実装を **複製**したものである。

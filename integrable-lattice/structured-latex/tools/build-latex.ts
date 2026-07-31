@@ -24,7 +24,7 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import type { ConvertedBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
 import { mathUnicodeToLatex, unicodeMathToLatex } from "./unicode-math.ts";
@@ -96,6 +96,11 @@ for (const { blocks } of contentFiles) {
       headingCount += 1;
       body.push(renderHeading(block));
       continue;
+    }
+    if (block.kind === "figure") {
+      // 図表はシステムの語彙には在るが、本論文はまだ 1 件も使っていない。
+      // 使い始めたときに「黙って出力から消える」ことがないよう、ここで明示的に落とす。
+      throw new Error(`図表ブロック（${block.id}）の LaTeX 出力は未実装`);
     }
     body.push(renderTheoremLike(block));
   }
@@ -288,7 +293,7 @@ ${inner}
 `;
 }
 
-function renderHeading(block: ConvertedBlock & { kind: "heading" }): string {
+function renderHeading(block: HeadingBlock): string {
   const command = SECTION_COMMANDS[block.level - 1] ?? "paragraph";
   const title = renderTitle(block.title, block.id);
   const labels = block.labels.map((label) => `\\label{lab:${label}}`).join("");
@@ -400,6 +405,10 @@ function renderNode(node: Node, blockId: string): string {
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${unicodeMathToLatex(escapeText(node.value))}`;
+    case "image":
+      // 図版はシステムの語彙には在るが、本論文はまだ 1 件も使っていない
+      // （資産の解決規則を決めていない）。黙って消さず、使い始めたら落ちるようにしておく。
+      throw new Error(`画像ノード（${node.assetKey}）の LaTeX 出力は未実装: ${blockId}`);
   }
 }
 

@@ -1,5 +1,28 @@
 # MEMORY
 
+## 入力言語の正本をシステムへ一本化した（2026-07-31）
+
+**`integrable-lattice/structured-latex/schema.ts` に置いていた入力言語の定義（Ising 版からの複製）を削除し、
+リポジトリ直下 `structured-latex/`（システム）を使う側になった。** 同じ言語が複数箇所で定義される状態の解消。
+
+- `schema.ts` は、システムの `createStructuredTextSchema<Label, Meta>()` /
+  `createRuntimeSchema` を具体化して再エクスポートするだけの薄いモジュールになった。
+  **本プロジェクト固有の意味（`habitat` / `realEscape` / `verification` / `lean`）は `Meta` として宣言する。**
+  「可算側を宣言したら `realEscape` を書けない／非可算側なら必須」という**判別共用体の性質は保たれている**
+  （`npm run test:types` の 9 ケースが実際に tsc を落として確認する）。
+- 由来 `sourcePath` / `sourceOrdinal` は、システムの `origin: { path, ordinal }` へコードモッド
+  （`tools/codemod-origin.ts`。**冪等**）で機械的に移した。全ブロックで一定値だった
+  `conversion: { status: "added" }` は、システムの入力言語に置き場所が無く情報量も無いので同時に落とした。
+- 生成物はシステムの生成器（`npm run gen`）で作る。`tools/generate-index.ts` は削除。
+- **複製が前提だった `tools/verify-shared-tools-in-sync.ts` は削除した**（複製そのものが無くなったため）。
+  [docs/structured-latex-decision.md](docs/structured-latex-decision.md) は履歴として残す（冒頭に無効の断り書きを追記）。
+- **移行前後で証明の中身は 1 文字も変わっていない**: ブロック 32・ラベル 26・相互参照 27 で一致。
+  content の差分は「`sourcePath`/`sourceOrdinal`/`conversion` の削除と `origin` の追加」だけである
+  （`git diff <base> -- content/` を機械的にフィルタして確認済み）。
+- **システム側は 1 ファイルも変更していない。**
+- 既知の残件（本移行とは無関係の先行不具合）: `npm run build:pdf` は `ℓ` `⇒` が欧文フォントに無く落ちる（移行前の 419dd34 でも同一の失敗を実測）。
+  `npm run check` は `.tex` 生成までしか回さないので通る。
+
 ## cycle 17 完了（2026-07-31）＝ cycle 16 総括の 4 点を潰すサイクル
 
 **掲げた 4 点はすべて潰れた**（3 点は肯定的に決着、1 点＝既出性は「おおむね既出」という決着）。
@@ -192,9 +215,8 @@ cycle 15 の commit `4e15577` で、編集スクリプトが `index()` による
   (1) 数式中の ★ が欧文フォントに無く無言で消えていた（和文フォントの箱へ置換）。
   (2) 長いパスの `$\texttt{...}$` が改行できず版面から 93pt はみ出していた（`\path{}` で組む）。
   (3) ℚ̄ が結合マクロンを落として ℚ に化けていた（合成文字を先に処理し、未対応の結合文字はビルドを落とす）。
-- **複製が腐らない仕組み**: `tools/verify-shared-tools-in-sync.ts`（`npm run check` に組込み）。
-  土台 4 ファイル（426 行）が複製元とバイト一致し、固有化した 6 ファイルが一致して**いない**ことを検査する。
-  共有ライブラリにしなかった判断の根拠（実測差分つき）は [docs/structured-latex-decision.md](docs/structured-latex-decision.md)。
+- ~~**複製が腐らない仕組み**: `tools/verify-shared-tools-in-sync.ts`~~
+  → **解消済み（下記「入力言語の正本をシステムへ一本化した」を参照）。複製そのものが無くなったので削除した。**
 - **地の文の Unicode ℝ/ℂ が可算宣言の検査を素通りしていた**のを塞いだ（数式しか見ていなかった）。
 - **Typst**: `_old/typst/` に退避済みで追跡対象に `.typ` は 0 件。`main.typ`（17 行）に定理環境は 0 件、
   `parts/` は `.gitkeep` のみ。移行漏れは原理的に起こらないので `verify-no-lost-proofs.ts` は移植しない。
