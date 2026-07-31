@@ -19,7 +19,7 @@ Typst 版一式をここへ退避した。
 - **証明本体**: `structured-latex/content/*.mjs`（142 ブロック）。
   文書順は「ファイル名昇順 → 各ファイル内の配列順」。旧 `main.typ` の `#include` 順と
   一致することを移行時に機械照合済み。
-- **閲覧**: リポジトリ直下の `realtime-web-preview`（React + KaTeX）。
+- **閲覧**: リポジトリ直下の `structured-latex/live-preview`（React + KaTeX）。
 - **機械的証明**: `lean/`（Lean 4 + mathlib4）。
 - **数値検証**: `sagemath/`。証明との対応は**ラベル**で張っており
   （`sagemath/tools/verify-check-linkage.mjs` が機械検証）、Typst の所在に依存しない。
