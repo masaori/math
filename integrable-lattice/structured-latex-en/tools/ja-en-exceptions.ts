@@ -24,4 +24,5 @@ const JAPANESE_IN_TEXT_MACRO =
 export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, string>> = {
   paper_012_definition_ladder: JAPANESE_IN_TEXT_MACRO,
   paper_042_theorem_pi_p1: JAPANESE_IN_TEXT_MACRO,
+  paper_055_theorem_theta_infinity: JAPANESE_IN_TEXT_MACRO,
 };
