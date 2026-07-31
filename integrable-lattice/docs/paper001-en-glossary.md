@@ -415,3 +415,46 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 記号は日本語版と同じでなければならない（数式は翻訳の対象ではない）ので、
 **英訳では地の文で「この記号はこの命題に限った局所的なもので、序章の対数順序群とは無関係である」と
 断ってある**。後続がこの命題の周辺を訳すときも、$\Lambda$ の二義性を読者に隠さないこと。
+
+---
+
+## 追記: 命題 J（`content/008_theta_padic.ts` — 第 9 章「消滅深度の p 進化」）の語
+
+日本語版に後から入った第 9 章（命題 J）の英訳作業中に確定させた語。**§1 の表と同じ拘束力を持つ**
+（後続がここにある語を別の語で訳してはならない）。根拠は §0 の約束どおり、
+**このセッションで実際に読んだ日本語版本文だけ**である。英語圏の教科書は取得できていない。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| （消滅深度の）p 進化 | **the p-adic refinement (of the vanishing depth)** | 章の表題。日本語版の中身は「θ を $\mathbb{P}^1(\mathbb{F}_\ell)$ の方向の関数から $\mathbb{P}^1(\mathbb{Z}_\ell)$ の点の関数へ延ばす」ことなので、"p-adic refinement" を採った。**"p-adicization" のような造語にしない** |
+| 桁定理 | **the digit theorem** | (J1) の呼称。主張は「$A_m\bmod\ell$ が $(a,b)\bmod\ell^L$ だけで決まる」＝ $\ell$ 進展開の有限個の桁だけで決まる、である。逐語訳 |
+| 桁安定性 | **the stability of the digits** | (J6) の証明が (J1) を指して使う語。上の digit theorem と同語根で揃えた |
+| ファイバー Newton 公式 | **the Newton formula along a fibre** | (J2) の呼称。「ファイバー」は $\mathbb{P}^1(\mathbb{Z}_\ell)\to\mathbb{P}^1(\mathbb{F}_\ell)$ の $P_0$ 上のファイバーである。**"fibre Newton formula" と名詞を積み重ねない**（読者が「ファイバー Newton 多角形」という既成語と誤読する） |
+| （型の）判別 | **the criterion distinguishing … from …** | (J4) の表題「型 II / 型 III の判別」。**"discriminant" にしない**（代数の判別式と紛れる） |
+| 閾値の鋭さ／閾値は鋭い | **the threshold is sharp** | (J1′) の表題。§1.2d の「しきい値 = threshold」の派生。**"optimal" にしない**（§1.2d の「最良である = best possible」と同じ理由で、否定形の主張を保つ） |
+| 破れ（閾値を超えた所での） | **failure** | (J1′)。「$m=\ell^L+1$ での破れ」＝ "the failure at $m=\ell^L+1$"。§1.2c の「上界が破れる = the bound fails」と同語 |
+| 極形式 | **the polar form** | (J1′) の $\bar B(x,y)$（2 次形式 $\bar A_2$ に対応する対称双線型形式）。標準語 |
+| レベル分解 | **decomposition by level** | (J3) の表題。$\Sigma_n$ をレベル $M$ ごとの和へ分けることを指す |
+| 一般の予言 | **the prediction in general** | (J3) の表題。§1.4（第 5 章）の「パラメータ 0 個の予言 = a prediction with zero free parameters」と同じ predict を使う |
+| 最小点が一意（である） | **the minimum is attained at a single index** | (J2)・(J3)・限界の 3 箇所に出る条件。**"the minimizer is unique" と縮めない**（本文が指しているのは添字 $j$／$m$ が一意であることであり、点ではない） |
+| 打ち消し（が起きる） | **cancellation (occurs)** | (J2)・(J4)・限界。§1.2c の「相殺 = cancellation」と**同じ語を充てる**（日本語版は「相殺」と「打ち消し」を書き分けているが、どちらも係数が消えることであり、英語で語を分ける根拠が本文に無い） |
+| 相互検証（になる） | **a mutual check** | (J5)。(J4) と命題 G′ が別経路で同じ値に達することを指す。**"cross-validation" にしない**（統計の語と紛れる） |
+| 基点 | **base point** | (J4) の「$e_j$ は $P$ 自身を基点として取る」 |
+| 引き戻し | **the pull-back** | 限界の最終項。$\hat{\mathbb{G}}_m$ の 1 径数部分群への引き戻し |
+| 形式群 | **the formal group** | 同上。標準語。$\hat{\mathbb{G}}_m$ は乗法形式群 |
+| 候補（を絞る） | **candidate** | (J6) と限界。「候補を有限個へ絞る」＝ "narrows the candidates down to finitely many" |
+| 至る所有限 | **finite everywhere** | (J4) の仮定。$\mathbb{P}^1(\mathbb{Z}_\ell)$ 上の各点で θ が有限であること |
+
+### 記号 $\Lambda$ の衝突（三度目。読者への注意）
+
+(J2) は $\Lambda(r):=\min_{j\ge0}(e_j+j\ell^r)$ と置く。これは
+**§1.1 の「対数順序群 $\Lambda$」とも、命題 G′ が例外直線の和として置く $\Lambda$ とも無関係な
+第 3 の量**である。数式は翻訳の対象ではないので記号は変えられない。したがって
+**英訳では地の文で「この記号はこの命題に限った局所的なもので、序章の対数順序群とも
+前命題の $\Lambda$ とも無関係である」と断ってある**（命題 G′ の英訳と同じ処置）。
+
+### プライムの書き方（§1.2d の実測ルールの適用）
+
+本章の地の文には (J1′) と (G1″) が出る。**U+2032 `′` / U+2033 `″` は英語版の PDF から無言で消え、
+`build:pdf` の「組めない文字」検査が落ちる**ので、**ASCII で `(J1')` / `(G1'')` と書く**。
+日本語版は U+2032 / U+2033 のままでよい（和文フォントを読むため）。

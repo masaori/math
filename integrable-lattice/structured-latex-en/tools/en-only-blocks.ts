@@ -37,31 +37,31 @@ export const EN_ONLY_BLOCKS: Readonly<Record<string, string>> = {
     "宣言されていること——それが本稿の整理軸そのものであること——を先に案内する。" +
     "日本語版はこの案内を持たない（読み進めれば分かる形になっている）。",
 
-  // --- 第 9 章: 先行研究との関係（content/008_prior_art.ts） ---
+  // --- 第 10 章: 先行研究との関係（content/009_prior_art.ts） ---
 
-  paper_090_heading_prior_art:
+  paper_100_heading_prior_art:
     "投稿稿の慣行として、先行研究との関係は 1 つの節にまとまっている必要がある。査読者が最初に見るのは" +
     "「何が既出で何が違うのか」であり、日本語版のようにその情報が各命題の proof の中へ散っていると、" +
     "正直に書いてあるのに読み取ってもらえない。その節の見出しである。",
 
-  paper_091_remark_prior_art_overall:
+  paper_101_remark_prior_art_overall:
     "先行研究との関係を 1 箇所へまとめるにあたっての総論。全体として本稿の内容は「おおむね既出」である" +
     "という判定（outputs/reports/cycle17_T1_prior_art_check.md §0）を、章の冒頭で先に述べる。" +
     "日本語版では既出性の判定が命題ごとに分散しているため、この総論に当たる記述が存在しない。",
 
-  paper_092_remark_prior_art_countabilisation:
+  paper_102_remark_prior_art_countabilisation:
     "寄与 (b)（可算化）の既出性を 1 箇所へまとめたもの。この寄与は誤読されやすく、" +
     "「Q_p を可算にした」と読まれると逆数学・構成的代数の標準手法の再発見にしか見えない。" +
     "差分が「等号を決定可能な水準まで降ろした」1 点であることを、既出の枠組みを名指ししたうえで" +
     "明示する必要がある。日本語版では対応する記述が第 7 章の注記の中に埋まっている。",
 
-  paper_093_remark_prior_art_propositions:
+  paper_103_remark_prior_art_propositions:
     "命題 V・T・W の既出性を 1 箇所へまとめたもの。日本語版ではこの 3 件がそれぞれの命題の proof 末尾に" +
     "書かれており、3 つの関係（V は d=1 で既出、T は弱い形が既出、W は形が d=1 で既出）を並べて比較できない。" +
     "投稿稿ではここが最も精査される箇所なので、cycle 18 で確定した Monsky 1989 の読み" +
     "（α* は存在と d=2 での有理性しか主張していない）まで含めて 1 箇所に置く。",
 
-  paper_094_remark_prior_art_limits:
+  paper_104_remark_prior_art_limits:
     "既出性調査の限界（MathSciNet 未使用、arXiv 検索は abstract 検索であって本文検索ではない）を" +
     "明示するブロック。先行研究の節を 1 箇所にまとめると、そこに並ぶ「見つからなかった」が" +
     "新規性の主張として読まれる危険が生じる。まとめた以上、限界を同じ場所に置かなければ" +

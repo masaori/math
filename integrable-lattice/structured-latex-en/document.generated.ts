@@ -27,7 +27,8 @@ import blocks_005_duality from './content/005_duality.ts'
 import blocks_005b_theta_infinity from './content/005b_theta_infinity.ts'
 import blocks_006_propositions_TVW from './content/006_propositions_TVW.ts'
 import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
-import blocks_008_prior_art from './content/008_prior_art.ts'
+import blocks_008_theta_padic from './content/008_theta_padic.ts'
+import blocks_009_prior_art from './content/009_prior_art.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -41,7 +42,8 @@ export type AllBlocks = [
   ...typeof blocks_005b_theta_infinity,
   ...typeof blocks_006_propositions_TVW,
   ...typeof blocks_007_asymmetry_scope,
-  ...typeof blocks_008_prior_art,
+  ...typeof blocks_008_theta_padic,
+  ...typeof blocks_009_prior_art,
 ]
 
 /** 全ノート。 */
