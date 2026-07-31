@@ -1,0 +1,4 @@
+=== def_matrix_norm: ノルムの値を 4 経路で突き合わせる ===
+試験行列: 33 個（乱数 + 退化行列 + Ising 作用素）
+checks: 110, max relative error: 2.614e-16, tol: 1.0e-09
+RESULT: PASS

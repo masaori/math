@@ -1,0 +1,100 @@
+# 255-01: T_g（def_T_g）の合成則 T_A ∘ T_B = T_{AB} と、線型写像としての性質
+#
+# def_T_g: T_g : Mat(2^M,C) → Mat(2^M,C), h ↦ g h g^{-1}（g ∈ (Mat(2^M,C))^×）。
+#
+# 独立な計算経路として、T_g を「4^M × 4^M の行列」として 2 通りに作る:
+#   (i) Pauli 基底 {σ^{a_1}⊗…⊗σ^{a_M}} の各元に T_g を作用させて成分を読む（定義そのもの）
+#   (ii) ベクトル化の公式 vec(g h g^{-1}) = (g ⊗ (g^{-1})^T) vec(h)（行列の積の成分計算から従う）
+# (i) と (ii) が一致すること、および (ii) の側で合成則が行列の積 (A⊗(A^{-1})^T)(B⊗(B^{-1})^T)
+# = (AB ⊗ ((AB)^{-1})^T) として成り立つことを見る。
+# 合成則を「T_A(T_B(h)) を直接計算して T_{AB}(h) と比べる」だけで済ませると
+# 結合律の言い換えにしかならないので、行列表示を経由する経路を併走させる。
+
+import os
+_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+load(os.path.join(_dir, '../../_shared/operators.sage'))
+
+import itertools
+import numpy as np
+
+rep = CheckReport("def_T_g: 合成則 T_A∘T_B = T_{AB} と線型性")
+
+rng = np.random.default_rng(int(253001))
+
+
+def pauli_basis(M):
+    """{σ^{a_1}⊗…⊗σ^{a_M} | (a_1,…,a_M) ∈ {0,x,y,z}^M}（4^M 個）。"""
+    out = []
+    for idx in itertools.product('0xyz', repeat=int(M)):
+        out.append((''.join(idx), kron_list([PAULI[a] for a in idx])))
+    return out
+
+
+def T_matrix_by_basis(g, M):
+    """(i) T_g の 4^M × 4^M 行列表示を、Pauli 基底の像の展開係数として読む。
+
+    Pauli 基底は tr(P_a P_b) = 2^M δ_{ab} を満たすので、係数は tr(P_a^† X)/2^M で取れる。
+    """
+    B = pauli_basis(M)
+    D = 2 ** int(M)
+    ginv = np.linalg.inv(g)
+    n = len(B)
+    Tm = np.zeros((n, n), dtype=complex)
+    for j, (_, Pj) in enumerate(B):
+        X = g @ Pj @ ginv
+        for i, (_, Pi) in enumerate(B):
+            Tm[i, j] = np.trace(Pi.conj().T @ X) / D
+    return Tm, B
+
+
+def T_matrix_by_vec(g, M):
+    """(ii) vec 表示 g ⊗ (g^{-1})^T を Pauli 基底へ変換した 4^M × 4^M 行列。"""
+    B = pauli_basis(M)
+    D = 2 ** int(M)
+    ginv = np.linalg.inv(g)
+    K = np.kron(g, ginv.T)                      # vec は行優先（vec(AXB) = (A⊗B^T)vec(X)）
+    # Pauli 基底を vec した行列（列が基底ベクトル）。基底変換 S^{-1} K S で係数表示にする。
+    S = np.column_stack([P.reshape(-1) for _, P in B])
+    return np.linalg.solve(S, K @ S)
+
+
+for M in [1, 2, 3]:
+    M = int(M)
+    D = int(2 ** M)
+    B = pauli_basis(M)
+    for trial in range(3):
+        A = rng.normal(size=(D, D)) + 1j * rng.normal(size=(D, D))
+        Bm = rng.normal(size=(D, D)) + 1j * rng.normal(size=(D, D))
+        # 可逆性（乱数行列は確率 1 で可逆だが、条件数が悪ければ引き直す）
+        while abs(np.linalg.det(A)) < 1e-6 or abs(np.linalg.det(Bm)) < 1e-6:
+            A = rng.normal(size=(D, D)) + 1j * rng.normal(size=(D, D))
+            Bm = rng.normal(size=(D, D)) + 1j * rng.normal(size=(D, D))
+
+        # 合成則（作用素レベル）
+        for _, P in B[:8]:
+            rep.close(T_conj(A, T_conj(Bm, P)), T_conj(A @ Bm, P),
+                      "M=%d trial=%d: T_A(T_B(P)) = T_{AB}(P)" % (M, trial))
+
+        # 行列表示の 2 経路が一致すること
+        TA_i, _ = T_matrix_by_basis(A, M)
+        TA_ii = T_matrix_by_vec(A, M)
+        rep.close(TA_i, TA_ii, "M=%d trial=%d: T_A の行列表示（基底像 vs vec 公式）" % (M, trial))
+
+        # 行列表示での合成則
+        TB_i, _ = T_matrix_by_basis(Bm, M)
+        TAB_i, _ = T_matrix_by_basis(A @ Bm, M)
+        rep.close(TA_i @ TB_i, TAB_i, "M=%d trial=%d: [T_A][T_B] = [T_{AB}]" % (M, trial))
+
+        # T_g(I) = I、T_{g^{-1}} = T_g^{-1}、T_g(hh') = T_g(h)T_g(h')、線型性
+        rep.close(T_conj(A, eye_M(M)), eye_M(M), "M=%d trial=%d: T_A(I) = I" % (M, trial))
+        rep.close(T_conj(np.linalg.inv(A), T_conj(A, B[3][1])), B[3][1],
+                  "M=%d trial=%d: T_{A^{-1}}∘T_A = id" % (M, trial))
+        h1, h2 = B[1][1], B[2][1]
+        rep.close(T_conj(A, h1 @ h2), T_conj(A, h1) @ T_conj(A, h2),
+                  "M=%d trial=%d: T_A(hh') = T_A(h)T_A(h')" % (M, trial))
+        a, b = complex(rng.normal(), rng.normal()), complex(rng.normal(), rng.normal())
+        rep.close(T_conj(A, a * h1 + b * h2), a * T_conj(A, h1) + b * T_conj(A, h2),
+                  "M=%d trial=%d: T_A の線型性" % (M, trial))
+    print("  M=%d : 合成則・行列表示の 2 経路一致・線型性を乱数 3 組で確認" % M)
+
+rep.finish()
