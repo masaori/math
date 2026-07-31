@@ -20,3 +20,6 @@ import IntegrableLattice.PropN
 import IntegrableLattice.PropT
 import IntegrableLattice.PropW
 import IntegrableLattice.PropCTracePeriod
+import IntegrableLattice.DigitTheorem
+import IntegrableLattice.BouquetClosedForm
+import IntegrableLattice.TowerTypeCoefficients

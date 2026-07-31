@@ -156,6 +156,58 @@ targets=(
   IntegrableLattice.orderOf_three_zmod_eight
   IntegrableLattice.orderOf_three_zmod_sixteen
   IntegrableLattice.trace_period_not_affine
+  # 定理 J2（桁定理）と命題 J2′（DigitTheorem.lean, cycle 19 step 1 §2）
+  IntegrableLattice.digit_mod_pow
+  IntegrableLattice.choose_cast_eq_prod
+  IntegrableLattice.choose_cast_of_lt
+  IntegrableLattice.choose_cast_pow
+  IntegrableLattice.choose_cast_pow_succ
+  IntegrableLattice.Abar
+  IntegrableLattice.Bbar
+  IntegrableLattice.Abar_one
+  IntegrableLattice.Abar_shift_lt
+  IntegrableLattice.Abar_shift
+  IntegrableLattice.Abar_mod
+  IntegrableLattice.Abar_congr
+  IntegrableLattice.Abar_shift_pow_succ
+  IntegrableLattice.Bbar_diag
+  IntegrableLattice.cexDigitS
+  IntegrableLattice.cexDigit_A1_ne_zero
+  IntegrableLattice.cexDigit_fails
+  IntegrableLattice.cexDigit_lt_holds
+  # 命題 8・定理 X′（BouquetClosedForm.lean, cycle 19 step 2 §5）
+  IntegrableLattice.bouquet_cases_exclusive
+  IntegrableLattice.diagCard
+  IntegrableLattice.oneZeroCard
+  IntegrableLattice.genericCard
+  IntegrableLattice.card_diag_three
+  IntegrableLattice.card_diag_five
+  IntegrableLattice.card_diag_seven
+  IntegrableLattice.card_one_zero_three
+  IntegrableLattice.card_one_zero_five
+  IntegrableLattice.card_one_zero_seven
+  IntegrableLattice.card_generic_three
+  IntegrableLattice.card_generic_five
+  IntegrableLattice.card_generic_seven
+  IntegrableLattice.card_diag_two
+  IntegrableLattice.card_generic_two
+  IntegrableLattice.levelA
+  IntegrableLattice.sum_level_A
+  IntegrableLattice.sum_pow_rev
+  IntegrableLattice.pow_split
+  IntegrableLattice.sum_level_B
+  IntegrableLattice.ordKappa_of_sigma
+  IntegrableLattice.theoremJ8_eq_XPrime
+  IntegrableLattice.cycle19_5_4_example_mismatch
+  # 定理 J6・J7・J8（TowerTypeCoefficients.lean, cycle 19 step 1 §5）
+  IntegrableLattice.sum_level_stab
+  IntegrableLattice.level_ratio_indep
+  IntegrableLattice.layer_sum
+  IntegrableLattice.sum_mul_pow
+  IntegrableLattice.J8_direction_sum
+  IntegrableLattice.sum_Theta_J8
+  IntegrableLattice.ordKappa_J8
+  IntegrableLattice.J6_no_n_pow_term
 )
 
 {

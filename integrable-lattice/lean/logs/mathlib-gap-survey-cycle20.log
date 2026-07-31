@@ -1,0 +1,149 @@
+=== mathlib gap survey (cycle 20) ===
+date-independent header; mathlib commit:
+520045ab14e26149ee970e2e617ca04b09bde5d6
+scanned files:     8264
+--- (1) exact content grep: Lucas
+.lake/packages/mathlib/Mathlib/Tactic/ApplyCongr.lean:4:Authors: Lucas Allen, Kim Morrison
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean:11:# Gauss-Lucas Theorem
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean:13:In this file we prove Gauss-Lucas Theorem:
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean:54:/-- *Gauss-Lucas Theorem*: if $P$ is a nonconstant polynomial with complex coefficients,
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean:91:/-- *Gauss-Lucas Theorem*: if $P$ is a nonconstant polynomial with complex coefficients,
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Trigonometric/Chebyshev/Basic.lean:89:/-- The `n`-th rescaled Chebyshev polynomial of the first kind (Vieta–Lucas polynomial) evaluates on
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Trigonometric/Chebyshev/Basic.lean:124:/-- The `n`-th rescaled Chebyshev polynomial of the first kind (Vieta–Lucas polynomial) evaluates on
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Trigonometric/Chebyshev/Basic.lean:158:/-- The `n`-th rescaled Chebyshev polynomial of the first kind (Vieta–Lucas polynomial) evaluates on
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Trigonometric/Chebyshev/Basic.lean:181:/-- The `n`-th rescaled Chebyshev polynomial of the first kind (Vieta–Lucas polynomial) evaluates on
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasPrimality.lean:12:# The Lucas test for primes
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasPrimality.lean:14:This file implements the Lucas test for primes (not to be confused with the Lucas-Lehmer test for
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasLehmer.lean:12:# The Lucas-Lehmer test for Mersenne primes
+--- (3) filename grep (-i): Lucas
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasPrimality.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LucasLehmer.lean
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean
+--- (1) exact content grep: choose_mod
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:38:modulo `p`. Also see `choose_modEq_choose_mod_mul_choose_div_nat` for the version with `MOD`. -/
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:39:theorem choose_modEq_choose_mod_mul_choose_div :
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:68:modulo `p`. Also see `choose_modEq_choose_mod_mul_choose_div` for the version with `ZMOD`. -/
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:69:theorem choose_modEq_choose_mod_mul_choose_div_nat :
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:72:  exact_mod_cast choose_modEq_choose_mod_mul_choose_div
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:76:theorem choose_modEq_choose_mul_prod_range_choose (a : ℕ) :
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:81:  | Nat.succ a => (choose_modEq_choose_mul_prod_range_choose a).trans <| by
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:84:    apply choose_modEq_choose_mod_mul_choose_div.trans
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:89:theorem choose_modEq_prod_range_choose {a : ℕ} (ha₁ : n < p ^ a) (ha₂ : k < p ^ a) :
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:91:  apply (choose_modEq_choose_mul_prod_range_choose a).trans
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:97:theorem choose_modEq_prod_range_choose_nat {a : ℕ} (ha₁ : n < p ^ a) (ha₂ : k < p ^ a) :
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Lucas.lean:100:  exact_mod_cast choose_modEq_prod_range_choose ha₁ ha₂
+--- (3) filename grep (-i): choose_mod
+--- (1) exact content grep: add_pow_char
+.lake/packages/mathlib/Mathlib/FieldTheory/Finite/GaloisField.lean:120:  · simp only [aeval_X_pow, aeval_X, map_sub, add_pow_char_pow, sub_eq_zero]
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Dickson.lean:224:    simp only [eval_X, eval_pow, Set.mem_setOf_eq, ZMod.cast_one', add_pow_char,
+.lake/packages/mathlib/Mathlib/Algebra/CharP/Lemmas.lean:143:lemma add_pow_char_of_commute (h : Commute x y) : (x + y) ^ p = x ^ p + y ^ p :=
+.lake/packages/mathlib/Mathlib/Algebra/CharP/Lemmas.lean:146:lemma add_pow_char_pow_of_commute (h : Commute x y) : (x + y) ^ p ^ n = x ^ p ^ n + y ^ p ^ n :=
+.lake/packages/mathlib/Mathlib/Algebra/CharP/Lemmas.lean:176:lemma add_pow_char : (x + y) ^ p = x ^ p + y ^ p := add_pow_expChar ..
+.lake/packages/mathlib/Mathlib/Algebra/CharP/Lemmas.lean:177:lemma add_pow_char_pow : (x + y) ^ p ^ n = x ^ p ^ n + y ^ p ^ n := add_pow_expChar_pow ..
+--- (3) filename grep (-i): add_pow_char
+--- (1) exact content grep: coeff_one_add_X_pow
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Binomial.lean:75:  rw [hright, Polynomial.coeff_coe, binomialSeries_coeff, Polynomial.coeff_one_add_X_pow]
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Coeff.lean:304:theorem coeff_one_add_X_pow (R : Type*) [Semiring R] (n k : ℕ) :
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Coeff.lean:310:  simp [Polynomial.coeff_one_add_X_pow]
+--- (3) filename grep (-i): coeff_one_add_X_pow
+--- (1) exact content grep: Kummer
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:45:* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:50:* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:611:/-- **Kummer's Theorem**
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:621:/-- **Kummer's Theorem**
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:631:/-- **Kummer's Theorem**
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:648:/-- **Kummer's Theorem**
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean:13:# Kummer-Dedekind theorem
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean:15:This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean:29:* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean:35:* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean:66:namespace KummerDedekind
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean:101:/-- The first half of the **Kummer-Dedekind Theorem**, stating that the prime
+--- (3) filename grep (-i): Kummer
+.lake/packages/mathlib/Mathlib/NumberTheory/KummerDedekind.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/KummerPolynomial.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/KummerExtension.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean
+--- (1) exact content grep: multiplicity_choose
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:47:  `Ico 1 b` where `b` is any bound greater than `log p n`. See `Nat.Prime.multiplicity_choose` for
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:619:    Prime.emultiplicity_choose hp.out hkn hnb
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:629:    Nat.le_add_left k n) ▸ Prime.emultiplicity_choose' hp.out hnb
+.lake/packages/mathlib/Mathlib/RingTheory/WittVector/Frobenius.lean:119:  rw [hp.out.emultiplicity_choose_prime_pow hj j.succ_ne_zero]
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:25:* `Nat.Prime.multiplicity_choose`: Kummer's Theorem. The multiplicity of `p` in `n.choose k` is the
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:190:theorem emultiplicity_choose' {p n k b : ℕ} (hp : p.Prime) (hnb : log p (n + k) < b) :
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:200:      (add_comm n k ▸ hnb)), multiplicity_choose_aux hp (le_add_left k n)]
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:209:theorem emultiplicity_choose {p n k b : ℕ} (hp : p.Prime) (hkn : k ≤ n) (hnb : log p n < b) :
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:212:  convert! @emultiplicity_choose' p (n - k) k b hp _
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:217:theorem emultiplicity_le_emultiplicity_choose_add {p : ℕ} (hp : p.Prime) :
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:229:theorem emultiplicity_choose_prime_pow_add_emultiplicity (hp : p.Prime) (hkn : k ≤ p ^ n)
+.lake/packages/mathlib/Mathlib/Data/Nat/Multiplicity.lean:238:      rw [emultiplicity_choose hp hkn (lt_succ_self _),
+--- (3) filename grep (-i): multiplicity_choose
+--- (1) exact content grep: Nat.digits
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:286:    f n ≤ ((Nat.digits m n).mapIdx fun i _ ↦ m * (f m) ^ i).sum := by
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:287:  set L := Nat.digits m n
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:290:  have hcoef {c : ℕ} (hc : c ∈ Nat.digits m n) : f c < m :=
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:291:    lt_of_le_of_lt (f.apply_nat_le_self c) (mod_cast Nat.digits_lt_base hm hc)
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:315:    set L := Nat.digits n₀ m
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:374:    f n ≤ ((Nat.digits m n).mapIdx fun i _ ↦ m * f m ^ i).sum := apply_le_sum_digits n hm
+.lake/packages/mathlib/Mathlib/NumberTheory/Ostrowski.lean:375:    _ = m * ((Nat.digits m n).mapIdx fun i _ ↦ f m ^ i).sum := list_mul_sum (m.digits n) (f m) m
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:593:  have hnil : p.digits n ≠ [] := Nat.digits_ne_nil_iff_ne_zero.mpr hn
+.lake/packages/mathlib/Mathlib/Data/Nat/Bits.lean:20:and `Nat.digits`.
+.lake/packages/mathlib/Mathlib/Data/Nat/BitIndices.lean:27:Relate the material in this file to `Nat.digits` and `Nat.bits`.
+.lake/packages/mathlib/Mathlib/Data/Nat/Digits/Lemmas.lean:259:theorem head!_digits {b n : ℕ} (h : b ≠ 1) : (Nat.digits b n).head! = n % b := by
+.lake/packages/mathlib/Mathlib/Data/Nat/Digits/Lemmas.lean:265:      exact (Nat.mod_eq_of_lt (Nat.digits_lt_base hb <| List.head!_mem_self <|
+--- (3) filename grep (-i): Nat.digits
+--- (1) exact content grep: sub_one_pow_totient
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean:171:theorem sub_one_pow_totient_lt_cyclotomic_eval {n : ℕ} {q : ℝ} (hn' : 2 ≤ n) (hq' : 1 < q) :
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean:217:theorem sub_one_pow_totient_le_cyclotomic_eval {q : ℝ} (hq' : 1 < q) :
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean:221:  | _ + 2 => (sub_one_pow_totient_lt_cyclotomic_eval le_add_self hq').le
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean:293:theorem sub_one_pow_totient_lt_natAbs_cyclotomic_eval {n : ℕ} {q : ℕ} (hn' : 1 < n) (hq : q ≠ 1) :
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean:300:  refine (sub_one_pow_totient_lt_cyclotomic_eval hn' (Nat.one_lt_cast.2 hq')).trans_le ?_
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean:308:    _ < ((cyclotomic n ℤ).eval ↑q).natAbs := sub_one_pow_totient_lt_natAbs_cyclotomic_eval hn' hq
+--- (3) filename grep (-i): sub_one_pow_totient
+
+=== 追加調査（形式冪級数・全域木数・円分体）===
+--- (1) exact content grep: PowerSeries.order
+.lake/packages/mathlib/Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean:118:  refine PowerSeries.order_eq_nat.mpr
+.lake/packages/mathlib/Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean:298:    rw [qExpansion_eq_qExpansion_discriminant_mul f h0, PowerSeries.order_mul,
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Substitution.lean:360:    φ.order ≤ PowerSeries.order (φ.subst f) := by
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Substitution.lean:365:    (hφ : φ.constantCoeff = 0) : f.order ≤ PowerSeries.order (φ.subst f) := by
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Expand.lean:119:  simp_rw [expand, order_eq_order, MvPowerSeries.order_expand p hp φ]
+--- (2) count:        9 files
+--- (3) filename grep (-i): PowerSeries.order
+--- (1) exact content grep: binomialSeries
+.lake/packages/mathlib/Mathlib/Analysis/Analytic/Binomial.lean:28:* `binomialSeries_radius_eq_one`: The radius of convergence of the binomial series is `1` when `a`
+.lake/packages/mathlib/Mathlib/Analysis/Analytic/Binomial.lean:30:* `binomialSeries_radius_eq_top_of_nat`: In case `a` is natural, the series converges everywhere,
+.lake/packages/mathlib/Mathlib/Analysis/Analytic/Binomial.lean:48:noncomputable def binomialSeries {𝕂 : Type u} [Field 𝕂] [CharZero 𝕂] (𝔸 : Type v)
+.lake/packages/mathlib/Mathlib/Analysis/Analytic/Binomial.lean:54:theorem binomialSeries_apply {𝕂 : Type u} [Field 𝕂] [CharZero 𝕂] (𝔸 : Type v)
+.lake/packages/mathlib/Mathlib/Analysis/Analytic/Binomial.lean:56:    binomialSeries 𝔸 a n v = Ring.choose a n • (List.ofFn v).prod := by
+--- (2) count:        3 files
+--- (3) filename grep (-i): binomialSeries
+--- (1) exact content grep: IsCyclotomicExtension
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean:196:  ⟨n, zmodChar n (IsCyclotomicExtension.zeta_pow n F' _),
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean:197:    zmodChar_primitive_of_primitive_root n (IsCyclotomicExtension.zeta_spec n F' _)⟩
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean:21:If `IsCyclotomicExtension {n} A B`, we define an element `zeta n A B : B` that is a primitive
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean:27:* `IsCyclotomicExtension.zeta n A B`: if `IsCyclotomicExtension {n} A B`, then `zeta n A B`
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean:30:  `IsCyclotomicExtension {n} K L`, then `IsPrimitiveRoot.powerBasis`
+--- (2) count:       15 files
+--- (3) filename grep (-i): IsCyclotomicExtension
+--- (1) exact content grep: spanning tree
+.lake/packages/mathlib/Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:32:- `endIsFree T` corresponds to the fact that, given a spanning tree `T` of a
+.lake/packages/mathlib/Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:144:/- In this section, we suppose we have a free groupoid with a spanning tree for its generating
+.lake/packages/mathlib/Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:146:is that we are 'pulling' the endpoints of all the edges of the quiver along the spanning tree to
+.lake/packages/mathlib/Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:192:/-- Turning an edge in the spanning tree into a loop gives the identity loop. -/
+.lake/packages/mathlib/Mathlib/Combinatorics/Quiver/Arborescence.lean:28:  spanning tree'. This proof avoids the use of Zorn's lemma.
+--- (2) count:        3 files
+--- (3) filename grep (-i): spanning tree
+--- (1) exact content grep: kirchhoff
+--- (2) count:        0 files
+--- (3) filename grep (-i): kirchhoff
+--- (1) exact content grep: hasseDeriv
+.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean:28:* Defines `hasseDeriv` of a Laurent series with coefficients in a module over a ring.
+.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean:118:def hasseDeriv (R : Type*) {V : Type*} [AddCommGroup V] [Semiring R] [Module R V] (k : ℕ) :
+.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean:134:theorem hasseDeriv_coeff (k : ℕ) (f : LaurentSeries V) (n : ℤ) :
+.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean:135:    (hasseDeriv R k f).coeff n = Ring.choose (n + k) k • f.coeff (n + k) :=
+.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean:139:theorem hasseDeriv_zero : hasseDeriv R 0 = LinearMap.id (M := LaurentSeries V) := by
+--- (2) count:        3 files
+--- (3) filename grep (-i): hasseDeriv
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/HasseDeriv.lean
