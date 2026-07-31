@@ -1,7 +1,7 @@
 /**
  * 論文本体 第 9 章: 消滅深度の p 進化（命題 J）。
  *
- * 命題 G (G1'') が「消滅深度 θ ≤ ℓ の範囲でだけ方向の不変量になる」と述べていた部分を、
+ * 命題 G (G6) が「消滅深度 θ ≤ ℓ の範囲でだけ方向の不変量になる」と述べていた部分を、
  * θ を P^1(Z_ℓ) 上の関数として扱い直すことで拡張する。根拠レポートは
  * outputs/reports/cycle19_T3_theta_ge_ell_plus_1.md。
  *
@@ -170,7 +170,7 @@ export default defineBlocks([
         math(String.raw`n\ell^n`),
         " 項は現れない（型 II）**。",
         ref("paper_prop_G"),
-        " の (G1″) はこの ",
+        " の (G6) はこの ",
         math(String.raw`L=1`),
         " の場合である。逆に ",
         math(String.raw`\theta(P_0)=\infty`),

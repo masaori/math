@@ -51,15 +51,20 @@ export default defineBlocks([
         ],
         [
           "**(iii)** ",
+          math(String.raw`d\ge2`),
+          " かつ ",
           math(String.raw`\mathsf U(P)`),
           " が**有限集合**なら成立する（Lind–Schmidt–Verbitskiy, arXiv:1108.4989, Theorem 1.2）。",
         ],
         [
           "**(iv)** より一般に ",
+          math(String.raw`d\ge2`),
+          " かつ ",
           math(String.raw`\dim\mathsf U(P)\le d-2`),
           "（",
           math(String.raw`P`),
           " が **atoral**）なら成立する（同 Theorem 1.3）。",
+          "**両定理とも原文がこの次元の仮定を明示している。**",
         ],
       ]),
       paragraph([
