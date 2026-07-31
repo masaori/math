@@ -5,9 +5,9 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_001_claim_why_minus_only`）
 
-**抽象版**は既存の `Ising2D/Abstract/CommutatorClifford.lean`
-（`Ising2D.Abstract.CliffordTriple.lie_sum_zy_z` / `lie_sum_zy_z'`）。
-2 本の交換子の差は、抽象版では**スカラー関数 `Dz` と `Dz'` の差**として現れる:
+**必要十分版**は既存の `Ising2D/NecSuf/CommutatorClifford.lean`
+（`Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z` / `lie_sum_zy_z'`）。
+2 本の交換子の差は、必要十分版では**スカラー関数 `Dz` と `Dz'` の差**として現れる:
 
   `Dz (μ,ν)  = 2M δ^M_{μ+ν,0}`（`hat(Z)^{(±)}` どうし）
   `Dz'(μ,ν)  = 2M δ^M_{μ+ν,0} - 4 e^{-i2π(μ+ν)/M}`（`hat(Z)^{(±)}` と `hat(Z)^{(∓)}`）

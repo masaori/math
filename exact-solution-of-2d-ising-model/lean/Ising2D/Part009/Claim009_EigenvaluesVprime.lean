@@ -5,9 +5,9 @@
 - `eigenvalues_of_Vprime`（`eigenvalues_of_V_009_claim_eigenvalues_of_Vprime`）
 - `trace_of_Vprime`（`eigenvalues_of_V_010_claim_trace_of_Vprime`）
 
-抽象版は `Ising2D/Abstract/JointEigenspace.lean` の
-`Abstract.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
-`Abstract.exp_mul_eq_of_mul_eq_smul`（原文 Step 3）。
+必要十分版は `Ising2D/NecSuf/JointEigenspace.lean` の
+`NecSuf.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
+`NecSuf.exp_mul_eq_of_mul_eq_smul`（原文 Step 3）。
 
 ## `γ(θ_μ)` の扱い
 
@@ -78,7 +78,7 @@ theorem Vprime_mul_Qproj (g : F.Idx → ℝ) (T : Finset F.Idx) :
   have h : NormedSpace.exp (F.Xop g) * F.Qproj T
       = Complex.exp ((F.gval g T : ℝ) : ℂ) • F.Qproj T :=
     open scoped Norms.Operator in
-      Abstract.exp_mul_eq_of_mul_eq_smul (F.Xop_mul_Qproj g T)
+      NecSuf.exp_mul_eq_of_mul_eq_smul (F.Xop_mul_Qproj g T)
   rw [Vprime, matExp, h, Complex.ofReal_exp]
 
 /-- **原文 `eigenvalues_of_Vprime` Step 4**: `im Q_ε` の元は固有値 `e^{g(ε)}` の固有ベクトル。 -/

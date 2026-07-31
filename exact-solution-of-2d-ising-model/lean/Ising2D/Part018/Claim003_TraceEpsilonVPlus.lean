@@ -5,8 +5,8 @@
 （`closing_003_claim_trace_epsilon_V_plus_via_eigenvalues`、
 ラベル **`trace_of_epsilon_V_plus_via_check_eigenvalues`**）
 
-抽象版は `Ising2D/Abstract/ParityFermion.lean`（同じラベル）の
-`Ising2D.Abstract.sum_powerset_signed_exp`。本ファイルの Step 2 はその**系**である。
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
+`Ising2D.NecSuf.sum_powerset_signed_exp`。本ファイルの Step 2 はその**系**である。
 
 ## 章 017 から受け取る入力
 
@@ -149,7 +149,7 @@ theorem trace_epsilon_mul_V :
   congr 1
   -- 実数の等式に落とす
   have hcard : (Finset.univ : Finset (Fin M)).card = M := by simp
-  have hkey := Abstract.sum_powerset_signed_exp (Finset.univ : Finset (Fin M)) D.gam
+  have hkey := NecSuf.sum_powerset_signed_exp (Finset.univ : Finset (Fin M)) D.gam
   rw [Finset.powerset_univ, hcard] at hkey
   unfold traceFactor checkLambda
   rw [← hkey, Finset.mul_sum]

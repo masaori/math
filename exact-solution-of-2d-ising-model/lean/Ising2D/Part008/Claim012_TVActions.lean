@@ -12,8 +12,8 @@
 * **`<T_V_hatZ_hatY>`**（`TV1_hatZ_hatY_018_claim_T_V_action`）
   — `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(2πμ/M)`
 
-**抽象版は `Ising2D/Abstract/TVAction.lean`**（名前空間 `Ising2D.Abstract`）。
-本ファイルの主要定理はそこからの特殊化として導出する。何が本質的かは抽象版の冒頭に書いた。
+**必要十分版は `Ising2D/NecSuf/TVAction.lean`**（名前空間 `Ising2D.NecSuf`）。
+本ファイルの主要定理はそこからの特殊化として導出する。何が本質的かは必要十分版の冒頭に書いた。
 
 ## このファイルで解消した「未証明の穴」
 
@@ -47,7 +47,7 @@
    `cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` と完全に一致する**
    （`B1mat_eq_twoDimConjMat`, `B2mat_eq_twoDimConjMat` が突き合わせそのもの。
    原文の誤りは見つからなかった）。
-4. `V_2` のスカラー因子 `(2s_2)^{M/2}` は共役で打ち消える（`Abstract.conj_smul_eq`）。
+4. `V_2` のスカラー因子 `(2s_2)^{M/2}` は共役で打ち消える（`NecSuf.conj_smul_eq`）。
    原文が「スカラーは共役で打ち消し合う」と書いている一行がこれである。
 5. 1〜4 を `ActsBy.comp` でつないで `B_1(θ_μ) B_2 B_1(θ_μ) = A(θ_μ)`
    （`B1_mul_B2_mul_B1_eq_AMat`）へ帰着させる。
@@ -68,7 +68,7 @@ Lean の記法では `hat(Z)^{(-)} = hatZ M 1 μ`、`H_1^{(-)} = H1 M 1`（引�
 **未形式化に由来する穴ではなく数学的に必要な仮定**なので、`hdual` として残す。
 同様に `c_1 = cosh 2K_1` 等の `IsingConst` の成分と `K_1, K_2^*` の関係も仮定として持つ。
 -/
-import Ising2D.Abstract.TVAction
+import Ising2D.NecSuf.TVAction
 import Ising2D.Part008.Claim001_CommutatorHZY
 import Ising2D.Part008.Claim006_ExpConjugation
 import Ising2D.Part008.Definition016_TV
@@ -76,7 +76,7 @@ import Ising2D.Part008.Definition030_Fermi
 
 namespace Ising2D
 
-open Ising2D.Abstract (sinhc twoDimConjMat)
+open Ising2D.NecSuf (sinhc twoDimConjMat)
 
 variable {M : ℕ}
 
@@ -98,18 +98,18 @@ theorem expPhase_neg_eq_exp_thetaMu (M : ℕ) (μ : ℤ) :
   push_cast
   ring
 
-/-! ## `B_1(θ)`, `B_2` が抽象版の作用行列であること -/
+/-! ## `B_1(θ)`, `B_2` が必要十分版の作用行列であること -/
 
 /-- **原文 `005` (h1.z)(h1.y) の係数の突き合わせ**:
-`α = i K_1 e^{-iθ}`, `β = -i K_1 e^{iθ}`, `s = K_1` のとき、抽象版の作用行列
+`α = i K_1 e^{-iθ}`, `β = -i K_1 e^{iθ}`, `s = K_1` のとき、必要十分版の作用行列
 `twoDimConjMat α β s` は原文の `B_1(θ)` に一致する。
 
-要点は `K_1 · sinhc(K_1) = sinh(K_1)`（`Abstract.mul_sinhc`）だけである。 -/
+要点は `K_1 · sinhc(K_1) = sinh(K_1)`（`NecSuf.mul_sinhc`）だけである。 -/
 theorem B1mat_eq_twoDimConjMat (K1 θ : ℂ) :
     B1mat K1 θ = twoDimConjMat
       (Complex.I * K1 * Complex.exp (-θ * Complex.I))
       (-Complex.I * K1 * Complex.exp (θ * Complex.I)) K1 := by
-  have h := Abstract.mul_sinhc K1
+  have h := NecSuf.mul_sinhc K1
   -- 非対角成分だけが `sinhc` を含む。`K_1 sinhc(K_1) = sinh(K_1)` で `sinh` へ直す。
   have e01 : -Complex.I * K1 * Complex.exp (θ * Complex.I) * sinhc K1
       = -Complex.I * Complex.exp (θ * Complex.I) * Complex.sinh K1 := by
@@ -120,11 +120,11 @@ theorem B1mat_eq_twoDimConjMat (K1 θ : ℂ) :
   simp only [B1mat, twoDimConjMat, e01, e10]
 
 /-- **原文 `005` (h2.z−)(h2.y) の係数の突き合わせ**:
-`α = -2i K_2^*`, `β = 2i K_2^*`, `s = 2K_2^*` のとき、抽象版の作用行列は原文の `B_2` に一致する。 -/
+`α = -2i K_2^*`, `β = 2i K_2^*`, `s = 2K_2^*` のとき、必要十分版の作用行列は原文の `B_2` に一致する。 -/
 theorem B2mat_eq_twoDimConjMat (K2star : ℂ) :
     B2mat K2star = twoDimConjMat
       (-(2 * Complex.I * K2star)) (2 * Complex.I * K2star) (2 * K2star) := by
-  have h := Abstract.mul_sinhc (2 * K2star)
+  have h := NecSuf.mul_sinhc (2 * K2star)
   have e01 : 2 * Complex.I * K2star * sinhc (2 * K2star)
       = Complex.I * Complex.sinh (2 * K2star) := by
     linear_combination Complex.I * h
@@ -133,9 +133,9 @@ theorem B2mat_eq_twoDimConjMat (K2star : ℂ) :
     linear_combination (-Complex.I) * h
   simp only [B2mat, twoDimConjMat, e01, e10]
 
-/-! ## exp 共役が `ActsBy` で作用すること（抽象版の特殊化） -/
+/-! ## exp 共役が `ActsBy` で作用すること（必要十分版の特殊化） -/
 
-/-- **抽象版 `Abstract.exp_conj_two_dim_actsBy` の具体版**: `ad X` が `span{z, y}` を保つとき、
+/-- **必要十分版 `NecSuf.exp_conj_two_dim_actsBy` の具体版**: `ad X` が `span{z, y}` を保つとき、
 共役 `T_{exp X}` は `(z, y)` に `twoDimConjMat α β s` で作用する。 -/
 theorem actsBy_TConj_matExpUnits {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) :
@@ -149,7 +149,7 @@ theorem actsBy_TConj_matExpUnits {X z y : TensorPow M} {α β s : ℂ}
     rfl
 
 /-- **原文「`(2s_2)^{M/2}` のスカラーは共役で打ち消し合う」の具体版**
-（抽象版は `Abstract.conj_smul_eq`）。 -/
+（必要十分版は `NecSuf.conj_smul_eq`）。 -/
 theorem actsBy_TConj_smulUnits {c : ℂ} (hc : c ≠ 0) {u : (TensorPow M)ˣ}
     {z y : TensorPow M} {B : Matrix (Fin 2) (Fin 2) ℂ}
     (h : ActsBy (TConj u).toLinearMap z y B) :
@@ -157,10 +157,10 @@ theorem actsBy_TConj_smulUnits {c : ℂ} (hc : c ≠ 0) {u : (TensorPow M)ˣ}
   obtain ⟨h1, h2⟩ := h
   constructor
   · show (c • (u : TensorPow M)) * z * (c⁻¹ • ((u⁻¹ : (TensorPow M)ˣ) : TensorPow M)) = _
-    rw [Abstract.conj_smul_eq hc]
+    rw [NecSuf.conj_smul_eq hc]
     exact h1
   · show (c • (u : TensorPow M)) * y * (c⁻¹ • ((u⁻¹ : (TensorPow M)ˣ) : TensorPow M)) = _
-    rw [Abstract.conj_smul_eq hc]
+    rw [NecSuf.conj_smul_eq hc]
     exact h2
 
 /-! ## `T_{(V_1^{(-)})^{1/2}}` の作用（原文 `012` の第 1・第 2 式） -/

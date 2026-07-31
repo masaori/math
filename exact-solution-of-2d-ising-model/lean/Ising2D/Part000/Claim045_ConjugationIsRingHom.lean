@@ -39,25 +39,37 @@ theorem T_apply (B : Rˣ) (A : R) : T B A = (B : R) * A * ((B⁻¹ : Rˣ) : R) :
 /-- `T_B` は mathlib の共役作用 `ConjAct Rˣ ↷ R` そのものである。 -/
 theorem T_eq_conjAct_smul (B : Rˣ) (A : R) : T B A = ConjAct.toConjAct B • A := rfl
 
+/-- **(1) 乗法的**: `T_B(A C) = T_B(A) T_B(C)`。
+
+原文どおり、結合法則と `B⁻¹ B = I` を挿し込む計算だけで示す
+（mathlib の群作用の一般論には委ねない。人手証明と 1 対 1 に対応させるため）。 -/
+theorem T_mul (B : Rˣ) (A C : R) : T B (A * C) = T B A * T B C := by
+  calc T B (A * C) = (B : R) * A * C * ((B⁻¹ : Rˣ) : R) := by
+        simp only [T, mul_assoc]
+    _ = (B : R) * A * (((B⁻¹ : Rˣ) : R) * (B : R)) * C * ((B⁻¹ : Rˣ) : R) := by
+        rw [B.inv_mul]; simp only [mul_one]
+    _ = T B A * T B C := by simp only [T, mul_assoc]
+
+/-- **(2) 単位的**: `T_B(1) = 1`。原文どおり `B I B⁻¹ = B B⁻¹ = I`。 -/
+theorem T_one (B : Rˣ) : T B (1 : R) = 1 := by
+  rw [T, mul_one, B.mul_inv]
+
+/-- 加法性（原文は明示していないが、「環準同型」であるために必要）。
+分配法則だけで従う。 -/
+theorem T_add (B : Rˣ) (A C : R) : T B (A + C) = T B A + T B C := by
+  simp only [T, mul_add, add_mul]
+
 /-- 共役写像を環準同型（実際には環自己同型）としてまとめたもの。
-乗法性・単位性・加法性は mathlib の `MulSemiringAction (ConjAct Rˣ) R` から得られる。 -/
-def TRingHom (B : Rˣ) : R →+* R :=
-  MulSemiringAction.toRingHom (ConjAct Rˣ) R (ConjAct.toConjAct B)
+中身の 3 性質は上の `T_mul` / `T_one` / `T_add`（いずれも原文の計算そのもの）で与える。 -/
+def TRingHom (B : Rˣ) : R →+* R where
+  toFun := T B
+  map_one' := T_one B
+  map_mul' := T_mul B
+  map_zero' := by simp [T]
+  map_add' := T_add B
 
 @[simp]
 theorem coe_TRingHom (B : Rˣ) : ⇑(TRingHom B) = T B := rfl
-
-/-- **(1) 乗法的**: `T_B(A C) = T_B(A) T_B(C)`。 -/
-theorem T_mul (B : Rˣ) (A C : R) : T B (A * C) = T B A * T B C :=
-  map_mul (TRingHom B) A C
-
-/-- **(2) 単位的**: `T_B(1) = 1`。 -/
-theorem T_one (B : Rˣ) : T B (1 : R) = 1 :=
-  map_one (TRingHom B)
-
-/-- 加法性（原文は明示していないが、「環準同型」であるために必要）。 -/
-theorem T_add (B : Rˣ) (A C : R) : T B (A + C) = T B A + T B C :=
-  map_add (TRingHom B) A C
 
 /-- **(3) 合成則**: `T_A ∘ T_B = T_{A B}`。 -/
 theorem T_comp (A B : Rˣ) : T A ∘ T B = T (A * B) := by

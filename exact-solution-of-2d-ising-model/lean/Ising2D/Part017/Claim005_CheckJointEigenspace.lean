@@ -4,8 +4,8 @@
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `check_joint_eigenspace_decomposition`（`evenEigen_005_claim_...`）。
 
-**抽象版**は `Ising2D/Abstract/JointEigenspace.lean`（章 009 と共通）。
-(1)(2)(3)(4) は**すべて抽象版の特殊化として導出する**。
+**必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean`（章 009 と共通）。
+(1)(2)(3)(4) は**すべて必要十分版の特殊化として導出する**。
 (5)（`ℂ^{2^M}` の直和分解）だけは台が行列環であることを本質的に使うので、ここにしか無い。
 
 ## 章 009 との違い（本章の要点）
@@ -15,7 +15,7 @@
 `𝓜̌ = {1,…,M}` すなわち `m = M` が**無条件に**確定するので、
 `tr(Q̌_ε) = 2^0 = 1` であり、同時固有空間は**すべて 1 次元**である。
 
-計算そのものは章 009 とまったく同じ（同じ抽象版の特殊化）で、
+計算そのものは章 009 とまったく同じ（同じ必要十分版の特殊化）で、
 違うのは `Fintype.card (CheckIdx M) = M` という 1 行だけである。
 -/
 import Ising2D.Part017.Claim004_TraceCheckNumberOperatorProduct
@@ -31,7 +31,7 @@ variable {M : ℕ} (F : CheckFermiSetup M)
 /-- **原文 `check_joint_eigenspace_decomposition` の `Q̌_ε`**:
 `Q̌_T = ∏_{μ∈𝓜̌} (μ ∈ T ? ň_μ : I - ň_μ)`。 -/
 noncomputable def Qproj (T : Finset (CheckIdx M)) : TensorPow M :=
-  Abstract.projOn F.nOp F.commute_nOp_nOp Finset.univ T
+  NecSuf.projOn F.nOp F.commute_nOp_nOp Finset.univ T
 
 /-- `ε : 𝓜̌ → Bool` の形（人手証明の記法に合わせた版）。 -/
 noncomputable def Qproj' (ε : CheckIdx M → Bool) : TensorPow M :=
@@ -39,7 +39,7 @@ noncomputable def Qproj' (ε : CheckIdx M → Bool) : TensorPow M :=
 
 /-- **原文 (1) 後半**: `Q̌_ε^2 = Q̌_ε`。 -/
 theorem Qproj_mul_self (T : Finset (CheckIdx M)) : F.Qproj T * F.Qproj T = F.Qproj T :=
-  Abstract.projOn_mul_self F.nOp_mul_self _ _
+  NecSuf.projOn_mul_self F.nOp_mul_self _ _
 
 /-- **原文 (1) 前半**: `ε ≠ ε'` なら `Q̌_ε Q̌_{ε'} = 0`。 -/
 theorem Qproj_mul_Qproj_of_ne {T T' : Finset (CheckIdx M)} (h : T ≠ T') :
@@ -48,17 +48,17 @@ theorem Qproj_mul_Qproj_of_ne {T T' : Finset (CheckIdx M)} (h : T ≠ T') :
     by_contra hc
     push_neg at hc
     exact h (Finset.ext fun ν => hc ν)
-  exact Abstract.projOn_mul_projOn_of_ne F.nOp_mul_self (Finset.mem_univ ν) hν
+  exact NecSuf.projOn_mul_projOn_of_ne F.nOp_mul_self (Finset.mem_univ ν) hν
 
 /-- **原文 (2)**: `∑_ε Q̌_ε = I`。 -/
 theorem sum_Qproj : ∑ T : Finset (CheckIdx M), F.Qproj T = 1 := by
-  have := Abstract.sum_projOn (n := F.nOp) (hn := F.commute_nOp_nOp) Finset.univ
+  have := NecSuf.sum_projOn (n := F.nOp) (hn := F.commute_nOp_nOp) Finset.univ
   rwa [Finset.powerset_univ] at this
 
 /-- **原文 (3)**: `ň_ν Q̌_ε = ε_ν Q̌_ε`。 -/
 theorem nOp_mul_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
     F.nOp ν * F.Qproj T = (if ν ∈ T then (1 : ℂ) else 0) • F.Qproj T := by
-  have h := Abstract.num_mul_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)
+  have h := NecSuf.num_mul_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)
     F.nOp_mul_self (T := T) (Finset.mem_univ ν)
   rw [Qproj, h]
   by_cases hT : ν ∈ T <;> simp [hT]
@@ -66,7 +66,7 @@ theorem nOp_mul_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
 /-- `ň_ν` は `Q̌_ε` と可換（原文 Step 0 の「因子はすべて可換」）。 -/
 theorem commute_nOp_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
     Commute (F.nOp ν) (F.Qproj T) :=
-  Abstract.commute_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)
+  NecSuf.commute_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)
     (fun i _ => F.commute_nOp_nOp ν i)
 
 /-! ## トレースと次元（原文 (4)） -/
@@ -76,7 +76,7 @@ theorem commute_nOp_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
 章 009 の同じ計算が `2^{M-m}` を与えるところで、`m = M` により `2^0 = 1` になる。 -/
 theorem trace_Qproj (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 := by
   have h : ((2 ^ M : ℕ) : ℂ) * (F.Qproj T).trace = ((2 ^ M : ℕ) : ℂ) := by
-    have h0 := Abstract.two_pow_smul_tau_projOn F.cre F.ann F.commute_nOp_nOp
+    have h0 := NecSuf.two_pow_smul_tau_projOn F.cre F.ann F.commute_nOp_nOp
       (Matrix.trace : TensorPow M → ℂ) (fun x y => Matrix.trace_add x y)
       (fun x y => Matrix.trace_mul_comm x y) F.acomm_cre_ann_self
       (fun i j hij => F.commute_cre_nOp hij) (fun i j hij => F.commute_ann_nOp hij)

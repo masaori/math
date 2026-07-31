@@ -4,10 +4,10 @@
 正本: `structured-latex/content/011_max_eigenvalue.ts`
 （`maxeig_007_claim_operator_bound`、ラベル **`rayleigh_bounds_operator_norm`**）
 
-抽象版: `Ising2D.Abstract.IsPsdPair.rayleigh_bounds_operator_norm`
-（`Ising2D/Abstract/RayleighMoments.lean`）
+必要十分版: `Ising2D.NecSuf.IsPsdPair.rayleigh_bounds_operator_norm`
+（`Ising2D/NecSuf/RayleighMoments.lean`）
 
-抽象版は平方根を取る前の形 `⟪Wx, Wx⟫ ≤ c²⟪x, x⟫` で、順序体上の対称半正定値形式と
+必要十分版は平方根を取る前の形 `⟪Wx, Wx⟫ ≤ c²⟪x, x⟫` で、順序体上の対称半正定値形式と
 それについて自己共役かつ半正定値な作用素だけから従う。本ファイルではそれを実行列へ
 特殊化し、人手証明と同じ「平方根を取った形」`‖Wx‖ ≤ c(M)‖x‖` を系として述べる。
 -/
@@ -33,29 +33,29 @@ theorem psd_of_pd {W : Matrix n n ℝ} (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 <
   · simp
   · exact (hpd x hx).le
 
-/-- `Ising2D.rayleighSup` を抽象版の仮定 `∀ u, ⟪u, W u⟫ ≤ c⟪u, u⟫` の形にしたもの。 -/
-theorem abstract_rayleigh_hyp {W : Matrix n n ℝ} (hW : W.IsSymm)
+/-- `Ising2D.rayleighSup` を必要十分版の仮定 `∀ u, ⟪u, W u⟫ ≤ c⟪u, u⟫` の形にしたもの。 -/
+theorem necSuf_rayleigh_hyp {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (u : n → ℝ) :
     matBilin (1 : Matrix n n ℝ) u (W.mulVecLin u)
       ≤ rayleighSup W * matBilin (1 : Matrix n n ℝ) u u := by
   simpa [vecNormSq] using quad_le_rayleighSup_mul hW hpsd u
 
-/-- **`‖Wx‖² ≤ c(M)²‖x‖²`**（抽象版の特殊化）。 -/
+/-- **`‖Wx‖² ≤ c(M)²‖x‖²`**（必要十分版の特殊化）。 -/
 theorem rayleigh_bounds_operator_normSq {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (x : n → ℝ) :
     vecNormSq (W *ᵥ x) ≤ rayleighSup W ^ 2 * vecNormSq x := by
   have hpair := isPsdPair_of_matrix hW hpsd
   have h := hpair.rayleigh_bounds_operator_norm (rayleighSup_nonneg hW hpsd)
-    (abstract_rayleigh_hyp hW hpsd) x
+    (necSuf_rayleigh_hyp hW hpsd) x
   simpa [vecNormSq] using h
 
-/-- **`‖W^k x‖² ≤ (c(M)²)^k ‖x‖²`**（抽象版の反復形の特殊化）。 -/
+/-- **`‖W^k x‖² ≤ (c(M)²)^k ‖x‖²`**（必要十分版の反復形の特殊化）。 -/
 theorem rayleigh_bounds_operator_normSq_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (k : ℕ) (x : n → ℝ) :
     vecNormSq (W ^ k *ᵥ x) ≤ (rayleighSup W ^ 2) ^ k * vecNormSq x := by
   have hpair := isPsdPair_of_matrix hW hpsd
   have h := hpair.rayleigh_bounds_operator_norm_pow (rayleighSup_nonneg hW hpsd)
-    (abstract_rayleigh_hyp hW hpsd) k x
+    (necSuf_rayleigh_hyp hW hpsd) k x
   rw [mulVecLin_pow_apply] at h
   simpa [vecNormSq] using h
 

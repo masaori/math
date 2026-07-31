@@ -104,24 +104,24 @@ EOF
   **冒頭コメントに原文の問題点と、形式化した修正版ステートメントを明記する**
   （例: `Ising2D/Part002/Theorem000_TensorBasis.lean`）。
 
-## 具体版と抽象版の 2 本立て
+## 具体版と必要十分版の 2 本立て
 
 `exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、**同じ主張について
-具体版と抽象版の 2 つを置く**。
+具体版と必要十分版の 2 つを置く**。
 
 | | 何を書くか | 何のためか |
 | --- | --- | --- |
 | 具体版 | 人手証明と同じ抽象度（複素行列）で、1 対 1 に対応する主張 | 人手証明の正当性を保証する |
-| 抽象版 | 不要な構造を取り払い、証明に必要な概念だけを残した主張 | 何が本質的かを示す。具体版が過剰な構造を要求していないかの検査 |
+| 必要十分版 | 不要な構造を取り払い、証明に必要な概念だけを残した主張 | 何が本質的かを示す。具体版が過剰な構造を要求していないかの検査 |
 
 規約:
 
 - 両版のファイル冒頭コメントに**同じ人手証明のラベル**を書き、相互に参照させる。
-- 抽象版から具体版が特殊化で得られる場合は、**具体版を抽象版の系として導出する**。
+- 必要十分版から具体版が特殊化で得られる場合は、**具体版を必要十分版の系として導出する**。
   ただし人手証明と 1 対 1 に対応する形の主張は必ず別に立てる。
-- **抽象版は Lean の中だけに置く。** 人手証明の本文（`structured-latex/content/`）にも
+- **必要十分版は Lean の中だけに置く。** 人手証明の本文（`structured-latex/content/`）にも
   参照用ノート（`structured-latex/notes/`）にも持ち込まない。
-- 抽象版は `Ising2D/Abstract/` 以下、名前空間 `Ising2D.Abstract` に置く。
+- 必要十分版は `Ising2D/NecSuf/` 以下、名前空間 `Ising2D.NecSuf` に置く。
 
 **章 009〜020 の 2 本立ての対応表は、この README ではなく各章のドキュメント
 （`lean/docs/ch0NN-formalization.md`）が正本である**（下記「章 009〜020 の形式化」節を参照）。
@@ -129,26 +129,26 @@ EOF
 
 現在 2 本立てになっている主張:
 
-| 人手証明のラベル | 具体版 | 抽象版 |
+| 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
 | `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`） | `Ising2D.commutator_via_anticommutators`（任意の環） |
-| `<scalar_identity_commutes>` | `Ising2D.scalar_identity_commutes_fin`（体 `K` 上の `Mat(n, K)`） | `Ising2D.Abstract.smul_one_commute` / `smul_one_sub_comm`（任意の `S`-代数） |
-| `<centralizer_is_scalar>` | `Ising2D.centralizer_is_scalar`（`Mat(2,ℂ)^{⊗M}`） | `Ising2D.Abstract.centralizer_is_scalar_semiring`（係数は任意の半環） |
-| `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.Abstract.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
-| `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.Abstract.one_eq_sum_single`（任意の半環・任意の有限添字型） |
-| `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.Abstract.acomm_lincomb_clifford` / `Abstract.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
-| `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.ZY_linearIndependent_of_abstract`、`Part004/Claim001_ZYLinearlyIndependentAbstract.lean`） | `Ising2D.Abstract.linearIndependent_of_clifford_abstract`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`Abstract/CliffordIndependence.lean`） |
-| `exp_sum` | `Ising2D.expPhase_sum`（複素指数関数。抽象版からの導出は `Ising2D.expPhase_sum_of_abstract`、`Part004/Claim008_ExpSumAbstract.lean`） | `Ising2D.Abstract.sum_zpow_primitiveRoot`（任意の体と 1 の原始 `M` 乗根。`Abstract/RootOfUnitySum.lean`） |
-| `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY` / `acomm_hatZPlus_hatZMinus`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.acomm_hatZ_hatZ_same_of_abstract` / `acomm_hatY_hatY_of_abstract` / `acomm_hatZPlus_hatZMinus_of_abstract`、`Part007/Claim000_AnticommutatorHatZHatYAbstract.lean`） | `Ising2D.Abstract.acomm_fourier_clifford` / `acomm_fourier_clifford_flip` / `acomm_fourier_clifford_weights`（体上の任意の環、Clifford 関係と 1 の原始 `M` 乗根だけ。`Abstract/FourierClifford.lean`） |
-| `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim006_ExpConjugation.lean`） | `Ising2D.Abstract.exp_adCLM_apply` / `Abstract.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`Abstract/ExpConjugation.lean`） |
-| `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.Abstract.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
-| `<commutator_of_H_and_Z_Y>` | `Ising2D.lie_H1_hatZ_same` / `lie_H1_hatY` / `lie_H1_hatZ_opp` / `lie_H2_hatZMinus` / `lie_H2_hatY` / `lie_H2_hatZPlus`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim001_CommutatorHZY.lean`） | `Ising2D.Abstract.CliffordTriple.lie_sum_yz_z` ほか 6 本（台は任意の環、係数は任意の可換半環、族の添字型も任意。`Abstract/CommutatorClifford.lean`） |
-| `<ホロノミック量子場_p142下段_1>` / `<T_V_hatZ_hatY>`（exp 共役の 2 次元部分空間への「行列としての」作用） | `Ising2D.actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` / `actsBy_TConj_V1half` / `actsBy_TConj_V2` / `TV_hatZ_hatY`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim012_TVActions.lean`） | `Ising2D.Abstract.twoDimConjMat` / `Abstract.exp_conj_two_dim_actsBy` / `Abstract.conj_smul_eq`（ℂ 上の完備ノルム環。スカラー相殺は任意の ℂ-代数。`Abstract/TVAction.lean`） |
-| `anticommutator_of_Z_and_Y` | `Ising2D.anticomm_Z_Z` / `anticomm_Z_Y` / `anticomm_Y_Y`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.anticomm_Z_Z_of_abstract` / `anticomm_Z_Y_of_abstract` / `anticomm_Y_Y_of_abstract`、`Part006/Claim000_AnticommutatorZYAbstract.lean`） | `Ising2D.Abstract.acomm_jwStr` / `Abstract.jwStr_sq` / `Abstract.acomm_of_single_site`（台は任意の環、サイトごとの積は「単位的・乗法的・多重線型」な写像なら何でもよい。`Abstract/SiteLocalAnticomm.lean`） |
-| `hatZ_hatY_M_periodicity` | `Ising2D.hatZ_periodic` / `hatY_periodic` / `hatZMinus_M_eq_neg_M` / `hatY_M_eq_neg_M`（複素指数関数。抽象版からの導出は `Ising2D.hatZ_periodic_of_abstract` ほか、`Part004/Claim012_HatPeriodicityAbstract.lean`） | `Ising2D.Abstract.transform_periodic` / `Abstract.zpow_mul_add_natCast`（任意の体、`ζ^M = 1` だけ。`Abstract/DiscreteFourier.lean`） |
-| `recover_Z_Y_from_hatZ_hatY` | `Ising2D.inverse_dft` / `recover_Y` / `recover_Z`（`Mat(2,ℂ)^{⊗M}`。抽象版からの導出は `Ising2D.inverse_dft_of_abstract` / `recover_Y_of_abstract` / `recover_Z_of_abstract`、`Part004/Claim013_RecoverZYAbstract.lean`） | `Ising2D.Abstract.inverse_dft_abstract`（任意の体の 1 の原始 `M` 乗根と、その体上の任意の加群。`Abstract/DiscreteFourier.lean`） |
+| `<scalar_identity_commutes>` | `Ising2D.scalar_identity_commutes_fin`（体 `K` 上の `Mat(n, K)`） | `Ising2D.NecSuf.smul_one_commute` / `smul_one_sub_comm`（任意の `S`-代数） |
+| `<centralizer_is_scalar>` | `Ising2D.centralizer_is_scalar`（`Mat(2,ℂ)^{⊗M}`） | `Ising2D.NecSuf.centralizer_is_scalar_semiring`（係数は任意の半環） |
+| `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.NecSuf.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
+| `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.NecSuf.one_eq_sum_single`（任意の半環・任意の有限添字型） |
+| `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.NecSuf.acomm_lincomb_clifford` / `NecSuf.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
+| `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.ZY_linearIndependent_of_necSuf`、`Part004/Claim001_ZYLinearlyIndependentFromNecSuf.lean`） | `Ising2D.NecSuf.linearIndependent_of_clifford_necSuf`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`NecSuf/CliffordIndependence.lean`） |
+| `exp_sum` | `Ising2D.expPhase_sum`（複素指数関数。必要十分版からの導出は `Ising2D.expPhase_sum_of_necSuf`、`Part004/Claim008_ExpSumFromNecSuf.lean`） | `Ising2D.NecSuf.sum_zpow_primitiveRoot`（任意の体と 1 の原始 `M` 乗根。`NecSuf/RootOfUnitySum.lean`） |
+| `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY` / `acomm_hatZPlus_hatZMinus`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.acomm_hatZ_hatZ_same_of_necSuf` / `acomm_hatY_hatY_of_necSuf` / `acomm_hatZPlus_hatZMinus_of_necSuf`、`Part007/Claim000_AnticommutatorHatZHatYFromNecSuf.lean`） | `Ising2D.NecSuf.acomm_fourier_clifford` / `acomm_fourier_clifford_flip` / `acomm_fourier_clifford_weights`（体上の任意の環、Clifford 関係と 1 の原始 `M` 乗根だけ。`NecSuf/FourierClifford.lean`） |
+| `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim006_ExpConjugation.lean`） | `Ising2D.NecSuf.exp_adCLM_apply` / `NecSuf.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`NecSuf/ExpConjugation.lean`） |
+| `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
+| `<commutator_of_H_and_Z_Y>` | `Ising2D.lie_H1_hatZ_same` / `lie_H1_hatY` / `lie_H1_hatZ_opp` / `lie_H2_hatZMinus` / `lie_H2_hatY` / `lie_H2_hatZPlus`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim001_CommutatorHZY.lean`） | `Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z` ほか 6 本（台は任意の環、係数は任意の可換半環、族の添字型も任意。`NecSuf/CommutatorClifford.lean`） |
+| `<ホロノミック量子場_p142下段_1>` / `<T_V_hatZ_hatY>`（exp 共役の 2 次元部分空間への「行列としての」作用） | `Ising2D.actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` / `actsBy_TConj_V1half` / `actsBy_TConj_V2` / `TV_hatZ_hatY`（`Mat(2,ℂ)^{⊗M}`、`Part008/Claim012_TVActions.lean`） | `Ising2D.NecSuf.twoDimConjMat` / `NecSuf.exp_conj_two_dim_actsBy` / `NecSuf.conj_smul_eq`（ℂ 上の完備ノルム環。スカラー相殺は任意の ℂ-代数。`NecSuf/TVAction.lean`） |
+| `anticommutator_of_Z_and_Y` | `Ising2D.anticomm_Z_Z` / `anticomm_Z_Y` / `anticomm_Y_Y`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.anticomm_Z_Z_of_necSuf` / `anticomm_Z_Y_of_necSuf` / `anticomm_Y_Y_of_necSuf`、`Part006/Claim000_AnticommutatorZYFromNecSuf.lean`） | `Ising2D.NecSuf.acomm_jwStr` / `NecSuf.jwStr_sq` / `NecSuf.acomm_of_single_site`（台は任意の環、サイトごとの積は「単位的・乗法的・多重線型」な写像なら何でもよい。`NecSuf/SiteLocalAnticomm.lean`） |
+| `hatZ_hatY_M_periodicity` | `Ising2D.hatZ_periodic` / `hatY_periodic` / `hatZMinus_M_eq_neg_M` / `hatY_M_eq_neg_M`（複素指数関数。必要十分版からの導出は `Ising2D.hatZ_periodic_of_necSuf` ほか、`Part004/Claim012_HatPeriodicityFromNecSuf.lean`） | `Ising2D.NecSuf.transform_periodic` / `NecSuf.zpow_mul_add_natCast`（任意の体、`ζ^M = 1` だけ。`NecSuf/DiscreteFourier.lean`） |
+| `recover_Z_Y_from_hatZ_hatY` | `Ising2D.inverse_dft` / `recover_Y` / `recover_Z`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.inverse_dft_of_necSuf` / `recover_Y_of_necSuf` / `recover_Z_of_necSuf`、`Part004/Claim013_RecoverZYFromNecSuf.lean`） | `Ising2D.NecSuf.inverse_dft_necSuf`（任意の体の 1 の原始 `M` 乗根と、その体上の任意の加群。`NecSuf/DiscreteFourier.lean`） |
 
-抽象版から得られた知見（本文には持ち込まないが、解説パートの素材になる）:
+必要十分版から得られた知見（本文には持ち込まないが、解説パートの素材になる）:
 
 - `ψ` の反交換関係に効いているのは `hat(Z)^{(-)}, hat(Y)` の 4 本の反交換関係と、
   係数についてのスカラー恒等式 2 本だけである。`hat(Z)`, `hat(Y)` の具体形も、複素行列であることも、
@@ -166,7 +166,7 @@ EOF
   `hat(Z), hat(Y)` の具体形（離散フーリエ変換）も、行列であることも、
   `D` の中身（`2M δ^M_{μ+ν,0}` や `-4 e^{-i2π(μ+ν)/M}`）も効いていない。
   `hat(Z)^{(±)}` と `hat(Z)^{(∓)}` の違いは `D_z` と `D_{z'}` という**別のスカラー関数**として
-  抽象化でき、原文が符号ごとに書き分けている 6 本は抽象版では
+  抽象化でき、原文が符号ごとに書き分けている 6 本は必要十分版では
   「積の並びが `y z` か `z y` か」×「交換相手が `z` か `z'` か `y` か」の 6 通りに対応する。
 
 - 原文が `<nesting_of_commutator_of_H_and_Z>`（`n` 重の入れ子交換子の偶奇による場合分け）と
@@ -177,7 +177,7 @@ EOF
   `Complex.hasSum_cosh` / `hasSum_sinhc` に、それぞれ 1 対 1 で対応する。
 - 原文が「`V_2` のスカラー因子 `(2s_2)^{M/2}` は共役で打ち消し合う」と一行で済ませている箇所に
   効いているのは、**任意の ℂ-代数で成り立つ `(c g) a (c⁻¹ g⁻¹) = g a g⁻¹`** だけである
-  （`Abstract.conj_smul_eq`）。ノルムも完備性も指数関数も要らない。
+  （`NecSuf.conj_smul_eq`）。ノルムも完備性も指数関数も要らない。
 - `Z_m, Y_m` の線型独立性に効いているのは、**Clifford 関係 `[e_a,e_b]₊ = 2δ_{ab}·1` と、
   スカラーが台へ忠実に入ること（`s·1 = 0 ⇒ s = 0`）と、`2` が零因子でないこと**の 3 つだけである。
   行列であること・テンソル冪であること・`Z, Y` の具体形（Jordan–Wigner 文字列）・
@@ -200,7 +200,7 @@ EOF
   成分が 2×2 であることも、複素数であることも、Pauli 行列の成分計算も効いていない
   （使うのは `A σ^x = -σ^x A` 型の関係式だけ）。
   Jordan–Wigner 文字列を書くのに要るのは「サイトの添字に線型順序があること」だけで、
-  文字列に使う元が `σ^x` である必要もない（`Abstract/SiteLocalAnticomm.lean`）。
+  文字列に使う元が `σ^x` である必要もない（`NecSuf/SiteLocalAnticomm.lean`）。
 
 - `hat(Z), hat(Y)` の `M` 周期性に効いているのは **`ζ^M = 1` の一点のみ**である。
   原始根であることすら要らず、`Z_j, Y_j` の代数的性質も、`hat(Z)^{(±)}` の重みも、
@@ -209,8 +209,8 @@ EOF
 - `hat(Z)^{(-)}, hat(Y)` からの復元（離散フーリエ逆変換）に効いているのは、
   **1 の原始 `M` 乗根の直交性**と、**変換される対象が係数体上の加群であること**だけである。
   行列であることも、積があることも、`Z, Y` の反交換関係も効いていない。
-  原文が `hat(Z)^{(+)}` で復元を述べていない理由も抽象版から一意に説明できる:
-  抽象版の仮定は「重みが一様」であり、`hat(Z)^{(+)}` は `j = 1` の重みだけが `-1` だからである。
+  原文が `hat(Z)^{(+)}` で復元を述べていない理由も必要十分版から一意に説明できる:
+  必要十分版の仮定は「重みが一様」であり、`hat(Z)^{(+)}` は `j = 1` の重みだけが `-1` だからである。
 
 - 交換子と反交換子の恒等式には、行列であることも複素数であることも効いていない
   （分配法則と結合法則だけで足りる）。
@@ -226,7 +226,7 @@ EOF
 
 | | 定義 | 実装 |
 | --- | --- | --- |
-| 抽象テンソル冪 | `⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ` | `Ising2D.AbstractTensorPow` |
+| 抽象テンソル冪 | `⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ` | `Ising2D.NecSufTensorPow` |
 | 行列表現（Kronecker） | `Matrix (Fin M → Fin 2) (Fin M → Fin 2) ℂ` | `Ising2D.TensorPow` |
 
 **両者が ℂ-代数として同型であることは `Ising2D.tensorPowAlgEquiv` で証明済み**
@@ -385,27 +385,27 @@ EOF
 | `Ising2D.AMat_mulVec_Pmat_col_zero` / `..._col_one` | `P_μ` の各列は `A(θ_μ)` の固有ベクトル（固有値は `D_μ` の対角成分） | `commutation_V_psi` |
 | `Ising2D.TV_psiDag_of_action` / `TV_psi_of_action` | `T(ψ_μ^†) = λ_{+,μ}ψ_μ^†`, `T(ψ_μ) = λ_{-,μ}ψ_μ`（**`T` の作用を仮定**） | `commutation_V_psi` |
 | `Ising2D.TV_psiDag_psi_of_action` | 上を `λ_{±,μ} = γ_1 ∓ i t` の明示形で述べた版 | 同上 |
-| `Ising2D.Abstract.acomm_lincomb` / `Abstract.acomm_lincomb_clifford` | 反交換関係を満たす 4 元の線型結合の反交換子 `= ((pp'+qq')D)·1`（**抽象版**、任意の ℂ-代数） | `anticommutator_of_psi` |
-| `Ising2D.Abstract.car_of_coeffs` | 抽象版 CAR（仮定は反交換関係＋係数のスカラー恒等式 2 本だけ） | 同上 |
-| `Ising2D.acomm_hatZMinus_hatY_lin2_of_abstract` | `acomm_hatZMinus_hatY_lin2` が抽象版の特殊化であることの確認 | 同上 |
-| `Ising2D.acomm_psi_relations_of_car` | `ψ` の反交換関係 3 式を**抽象版の系として**導出した版（具体版と同じ主張） | 同上 |
+| `Ising2D.NecSuf.acomm_lincomb` / `NecSuf.acomm_lincomb_clifford` | 反交換関係を満たす 4 元の線型結合の反交換子 `= ((pp'+qq')D)·1`（**必要十分版**、任意の ℂ-代数） | `anticommutator_of_psi` |
+| `Ising2D.NecSuf.car_of_coeffs` | 必要十分版 CAR（仮定は反交換関係＋係数のスカラー恒等式 2 本だけ） | 同上 |
+| `Ising2D.acomm_hatZMinus_hatY_lin2_of_necSuf` | `acomm_hatZMinus_hatY_lin2` が必要十分版の特殊化であることの確認 | 同上 |
+| `Ising2D.acomm_psi_relations_of_car` | `ψ` の反交換関係 3 式を**必要十分版の系として**導出した版（具体版と同じ主張） | 同上 |
 | `Ising2D.acomm_psiDag_psiDag_of_opposite_branch` | **逆分枝 `t_ν = -t_μ` では `[ψ_μ^†, ψ_ν^†]₊ = I`**（同一分枝の仮定が必要なことの証明） | 同上 |
 | `Ising2D.acomm_psiDag_psi_of_opposite_branch` | **逆分枝では `[ψ_μ^†, ψ_ν]₊ = 0`**（原文第 2 式が破れる） | 同上 |
-| `Ising2D.Abstract.sinhc` | `sinhc(s) = sinh(s)/s`（`s = 0` では `1`）と冪級数 `Σ s^{2k}/(2k+1)!` | 新規（0 割りを避けるため導入） |
-| `Ising2D.Abstract.lmulCLM` / `rmulCLM` / `adCLM` | 左乗法 `L_X`、右乗法 `R_X`、随伴作用 `ad X = L_X - R_X`（連続 ℂ-線型作用素） | `<def_ad_X_matrix>` |
-| `Ising2D.Abstract.commute_lmulCLM_rmulCLM` | **`L_X` と `R_Y` は可換**（級数展開ルートの核） | `<matrix_exp_conjugation>` の証明の骨格 |
-| `Ising2D.Abstract.exp_lmulCLM` / `exp_rmulCLM` | `exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}` | 同上 |
-| `Ising2D.Abstract.exp_adCLM_apply` | `exp(ad X)(A) = exp(X) A exp(-X)`（**抽象版**） | `<exp_X_Y_exp_-X>` |
-| `Ising2D.Abstract.hasSum_exp_conj` / `exp_conj_eq_tsum` | 級数 `Σ_n (1/n!) ad_X^n(A)` の収束と和 | 同上 |
-| `Ising2D.Abstract.exp_conj_two_dim_z` / `..._y` | `ad X` が `span{z,y}` を保つときの閉じた形 `cosh(s) z + α sinhc(s) y` | `<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠 |
+| `Ising2D.NecSuf.sinhc` | `sinhc(s) = sinh(s)/s`（`s = 0` では `1`）と冪級数 `Σ s^{2k}/(2k+1)!` | 新規（0 割りを避けるため導入） |
+| `Ising2D.NecSuf.lmulCLM` / `rmulCLM` / `adCLM` | 左乗法 `L_X`、右乗法 `R_X`、随伴作用 `ad X = L_X - R_X`（連続 ℂ-線型作用素） | `<def_ad_X_matrix>` |
+| `Ising2D.NecSuf.commute_lmulCLM_rmulCLM` | **`L_X` と `R_Y` は可換**（級数展開ルートの核） | `<matrix_exp_conjugation>` の証明の骨格 |
+| `Ising2D.NecSuf.exp_lmulCLM` / `exp_rmulCLM` | `exp(L_X) = L_{exp X}`, `exp(R_X) = R_{exp X}` | 同上 |
+| `Ising2D.NecSuf.exp_adCLM_apply` | `exp(ad X)(A) = exp(X) A exp(-X)`（**必要十分版**） | `<exp_X_Y_exp_-X>` |
+| `Ising2D.NecSuf.hasSum_exp_conj` / `exp_conj_eq_tsum` | 級数 `Σ_n (1/n!) ad_X^n(A)` の収束と和 | 同上 |
+| `Ising2D.NecSuf.exp_conj_two_dim_z` / `..._y` | `ad X` が `span{z,y}` を保つときの閉じた形 `cosh(s) z + α sinhc(s) y` | `<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠 |
 | `Ising2D.adPow` | `ad_X^n(A)`（`n` 重の入れ子交換子、人手証明の再帰そのまま） | `<ad_binomial>` の再帰定義 |
 | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum` | `exp(X) A exp(-X) = Σ_n (1/n!) ad_X^n(A)`（**具体版**、`Mat(2,ℂ)^{⊗M}`） | `<exp_X_Y_exp_-X>` |
 | `Ising2D.matExpUnits_conj_eq_tsum` | 上を単元 `matExpUnits X` の共役 `Ad_{exp X}` の形で述べた版 | 同 (3) |
 | `Ising2D.matExp_conj_two_dim_z` / `..._y` | 2 次元不変部分空間での閉じた形（具体版） | `<extract_taylor_coefficient_of_Z_Y>` |
-| `Ising2D.Abstract.conj_smul_eq` | `(c g) a (c⁻¹ g⁻¹) = g a g⁻¹`（スカラー因子は共役で打ち消える。**抽象版**、任意の ℂ-代数） | `<ホロノミック量子場_p142下段_1>` の「`(2s_2)^{M/2}` は共役で打ち消し合う」 |
-| `Ising2D.Abstract.twoDimConjMat` / `Abstract.exp_conj_two_dim_actsBy` | exp 共役の `span{z,y}` への作用行列 `!![cosh s, β sinhc s; α sinhc s, cosh s]`（**抽象版**） | `<ホロノミック量子場_p142下段_1>` |
+| `Ising2D.NecSuf.conj_smul_eq` | `(c g) a (c⁻¹ g⁻¹) = g a g⁻¹`（スカラー因子は共役で打ち消える。**必要十分版**、任意の ℂ-代数） | `<ホロノミック量子場_p142下段_1>` の「`(2s_2)^{M/2}` は共役で打ち消し合う」 |
+| `Ising2D.NecSuf.twoDimConjMat` / `NecSuf.exp_conj_two_dim_actsBy` | exp 共役の `span{z,y}` への作用行列 `!![cosh s, β sinhc s; α sinhc s, cosh s]`（**必要十分版**） | `<ホロノミック量子場_p142下段_1>` |
 | `Ising2D.expPhase_eq_exp_neg_thetaMu` / `expPhase_neg_eq_exp_thetaMu` | `exp(-i2πμ/M) = e^{-iθ_μ}`、`exp(i2πμ/M) = e^{iθ_μ}` | `def_theta_mu` との突き合わせ |
-| `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` | 原文の `B_1(θ)`, `B_2` が抽象版の作用行列に一致すること（`α = i K_1 e^{-iθ}`, `s = K_1` 等） | `<extract_taylor_coefficient_of_Z_Y>` の係数の検算（**原文の誤りは無し**） |
+| `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` | 原文の `B_1(θ)`, `B_2` が必要十分版の作用行列に一致すること（`α = i K_1 e^{-iθ}`, `s = K_1` 等） | `<extract_taylor_coefficient_of_Z_Y>` の係数の検算（**原文の誤りは無し**） |
 | `Ising2D.actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` | 上を `ActsBy` の形にした具体版と、スカラー倍した単元でも作用行列が変わらないこと | 同上 |
 | `Ising2D.ad_V1half_hatZMinus` / `ad_V1half_hatY` / `ad_V2_hatZMinus` / `ad_V2_hatY` | `ad((1/2)iK_1H_1^{(-)})` と `ad(iK_2^*H_2)` が `span{Ẑ_μ^{(-)}, Ŷ_μ}` を保つこと | `<commutator_of_H_and_Z_Y>` (1)(3)(4)(6) の帰結 |
 | `Ising2D.actsBy_TConj_V1half` / `actsBy_TConj_V2` | **`T_{(V_1^{(-)})^{1/2}}`, `T_{V_2}` の作用行列が `B_1(θ_μ)`, `B_2` であること（証明済み。以前は仮定）** | `<ホロノミック量子場_p142下段_1>` |
@@ -417,7 +417,7 @@ EOF
 | `Ising2D.H1_eq_hat_sum` / `H2_eq_hat_sum` | `H_1^{(±)} = (1/M)∑_j e^{-i2πj/M} hat(Y)_j hat(Z)^{(±)}_{-j}`、`H_2 = (1/M)∑_j hat(Z)^{(-)}_{-j} hat(Y)_j` | `<H1_H2_via_hatZ_hatY>` |
 | `Ising2D.sum_deltaMod_select` | `∑_{j=1}^M δ^M_{μ-j,0} F(j) = F(μ)`（`F` が `M` を法として合同不変なら） | `<commutator_of_H_and_Z_Y>` の 3 通りの場合分けの代用 |
 | `Ising2D.sum_hatY` / `sum_expPhase_neg_smul_hatY` | `∑_j hat(Y)_j = M Y_M`、`∑_j e^{i2πj/M} hat(Y)_j = M Y_1` | 同上（**原文が `0` と置いた項の正体**） |
-| `Ising2D.hatCliffordTriple` | `hat(Z)^{(η)}, hat(Z)^{(-η)}, hat(Y)` を抽象版の Clifford 3 族として与える橋渡し | 同上 |
+| `Ising2D.hatCliffordTriple` | `hat(Z)^{(η)}, hat(Z)^{(-η)}, hat(Y)` を必要十分版の Clifford 3 族として与える橋渡し | 同上 |
 | `Ising2D.lie_H1_hatZ_same` | `[H_1^{(±)}, hat(Z)_μ^{(±)}] = 2e^{-iθ_μ}hat(Y)_μ` | `<commutator_of_H_and_Z_Y>` (1) |
 | `Ising2D.lie_H1_hatY` | `[H_1^{(±)}, hat(Y)_μ] = -2e^{iθ_μ}hat(Z)_μ^{(±)}` | 同 (3) |
 | `Ising2D.lie_H2_hatZMinus` | `[H_2, hat(Z)_μ^{(-)}] = -2 hat(Y)_μ` | 同 (4) |
@@ -432,7 +432,7 @@ EOF
 **分配関数の定義から Onsager の厳密解までの経路が、Lean 側で通った。**
 結論は `Ising2D.onsager_exact_solution`（`Ising2D/Part018/`）である。
 
-章ごとの詳細——形式化した定理の一覧、具体版と抽象版の対応表、抽象版で判明した本質、
+章ごとの詳細——形式化した定理の一覧、具体版と必要十分版の対応表、必要十分版で判明した本質、
 形式化できなかった主張とその理由——は、**各章のドキュメントが正本**である。
 この README に転記せず、そちらを参照すること。
 
@@ -453,15 +453,15 @@ EOF
 
 ### 2 本立てが出した最大の答え
 
-**整数運動量版（章 004〜009）と半整数運動量版（章 013〜017）は、同じ抽象版の別の特殊化である。**
+**整数運動量版（章 004〜009）と半整数運動量版（章 013〜017）は、同じ必要十分版の別の特殊化である。**
 
 - `e^{-iθ~}` は 1 の原始 `2M` 乗根 `ξ` であり、半整数運動量とはその**奇数周波数** `ξ^{j(2μ-1)}`、
   整数運動量とは `ζ = ξ^2` の偶数周波数のことである。本文が「仕組みは 1 つの等式
   `e^{-iMθ~} = -1` に集約される」と書く等式の正体は `ξ^M = -1` で、その証明は
   「`(ξ^M)^2 = 1` かつ原始性から `≠ 1`、体だから `-1`」の 3 行である。
-  指数関数も円周率も効いていない（`Abstract/AntiperiodicFourier.lean`）。
+  指数関数も円周率も効いていない（`NecSuf/AntiperiodicFourier.lean`）。
 - 対の添字が `μ+ν ≡ 0` から `≡ 1` へずれる理由は `(2μ-1)+(2ν-1) = 2(μ+ν-1)` の `-1` の 1 点だけ。
-- 章 013・014・017 の大半は、章 004〜009 の抽象版をそのまま特殊化して得られた
+- 章 013・014・017 の大半は、章 004〜009 の必要十分版をそのまま特殊化して得られた
   （逆離散 Fourier 変換だけは新設が必要だったが、骨格は同一）。
 
 ### 半整数運動量で消える例外処理
@@ -525,13 +525,13 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
      テイラー係数抽出**）、およびそこから `T_V_hatZ_hatY` / `commutation_V_psi` を
      無条件の定理にすること~~ **完了（2026-07-26）**。
      `<exp_X_Y_exp_-X>` と `ad X` が 2 次元部分空間を保つ場合の閉じた形（cosh/sinhc）は
-     `Ising2D/Abstract/ExpConjugation.lean` と `Ising2D/Part008/Claim006_ExpConjugation.lean`、
+     `Ising2D/NecSuf/ExpConjugation.lean` と `Ising2D/Part008/Claim006_ExpConjugation.lean`、
      `<commutator_of_H_and_Z_Y>` は `Ising2D/Part008/Claim001_CommutatorHZY.lean`
-     （抽象版は `Ising2D/Abstract/CommutatorClifford.lean`）。
+     （必要十分版は `Ising2D/NecSuf/CommutatorClifford.lean`）。
      この 2 つを `matExp_conj_two_dim_z` / `..._y` に代入して
      `<extract_taylor_coefficient_of_Z_Y>` / `<ホロノミック量子場_p142下段_1>` の
-     `B_1(θ_μ)`, `B_2` を導き（`Ising2D/Part008/Claim012_TVActions.lean`、抽象版は
-     `Ising2D/Abstract/TVAction.lean`）、`Ising2D.TV_hatZ_hatY_of_action` の仮定
+     `B_1(θ_μ)`, `B_2` を導き（`Ising2D/Part008/Claim012_TVActions.lean`、必要十分版は
+     `Ising2D/NecSuf/TVAction.lean`）、`Ising2D.TV_hatZ_hatY_of_action` の仮定
      `hT1`, `hT2` と `Ising2D.TV_psiDag_of_action` / `TV_psi_of_action` の仮定 `hT` を
      除去した無条件版 `Ising2D.TV_hatZ_hatY` / `TV_psiDag` / `TV_psi` / `TV_psiDag_psi` を得た。
      **これにより「未形式化に由来する仮定」は本リポジトリから無くなった。**
@@ -549,24 +549,24 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
 - **mathlib に無いことが分かっているもの**
   - ~~`Real.arccosh`（自前定義が必要）~~ **これは誤りだった（2026-07-27 に訂正）**。
     現行 mathlib（v4.32.1）には `Real.arcosh`（`arccosh` ではない綴り）が同じ定義式で存在する。
-    章 012 の形式化で確認済み（`Ising2D/Abstract/Arcosh.lean`, `lean/docs/ch012-formalization.md`）。
+    章 012 の形式化で確認済み（`Ising2D/NecSuf/Arcosh.lean`, `lean/docs/ch012-formalization.md`）。
   - **等分割リーマン和から積分への収束**（`(1/M)∑ g(t_μ) → (1/(b-a))∫g`）。
     これは本当に無い（章 012 で grep により確認）。自前に証明した
-    （`Ising2D/Abstract/RiemannSum.lean` の `tendsto_riemann_sum`）。
+    （`Ising2D/NecSuf/RiemannSum.lean` の `tendsto_riemann_sum`）。
     使う外部事実は Heine–Cantor と連続関数の可積分性だけで、いずれも mathlib にある。
   - **連続性だけを仮定した積分記号下の微分**（章 020 が持ち込む (R5)）。
     mathlib にあるのは可測性・優関数の仮定つきの形で、原文が宣言する形そのままは無い
     （`lean/docs/ch020-formalization.md`）。
   - **トレースが「閉じた道の総和」であること**（`tr(A^{n+1}) = ∑ ...`）。無いので自前に証明した
-    （`Ising2D/Abstract/*`、章 010）。
+    （`Ising2D/NecSuf/*`、章 010）。
   - `sinh t ≤ t cosh t`（章 020 で使う初等評価。他の初等評価はすべて mathlib にある）。
   - 一般の `Ad(exp X) = exp(ad X)`。ただし本プロジェクトは級数展開ルート
     （`parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/003, 007`）を持つので回避可能。
-    **回避済み**: `Ising2D/Abstract/ExpConjugation.lean` で、リー環を使わず
+    **回避済み**: `Ising2D/NecSuf/ExpConjugation.lean` で、リー環を使わず
     「`L_X` と `R_X` が可換」＋「可換な作用素の指数法則 `NormedSpace.exp_add_of_commute`」
     だけから証明した。
   - `sinhc`（`sinh s / s` を `s = 0` へ延長したもの）。自前定義した
-    （`Ising2D.Abstract.sinhc`）。`Complex.hasSum_cosh` / `Complex.hasSum_sinh` は
+    （`Ising2D.NecSuf.sinhc`）。`Complex.hasSum_cosh` / `Complex.hasSum_sinh` は
     `Mathlib.Analysis.SpecialFunctions.Trigonometric.Series` にある。
 - **leanblueprint の導入検討**: 人手証明（Typst / 構造化TeX）と Lean の対応を機械的に追跡し、
   未形式化箇所を可視化する。導入の前提として、`docs/tasks/2026-07_toolchain-and-rigor` の

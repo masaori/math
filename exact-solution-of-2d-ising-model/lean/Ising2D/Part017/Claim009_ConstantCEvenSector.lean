@@ -4,7 +4,7 @@
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `constant_c_value_even_sector`（`evenEigen_009_claim_...`）。
 
-**抽象版**は `Ising2D/Abstract/ConstantC.lean` の `Abstract.const_eq_of_trace_ratio`
+**必要十分版**は `Ising2D/NecSuf/ConstantC.lean` の `NecSuf.const_eq_of_trace_ratio`
 （体 ℂ の中の 4 つの等式と 3 つの正値性だけ。行列もトレースも出てこない）。
 本ファイルの `constant_c_value_even_sector` は**その特殊化として導出する**。
 
@@ -17,7 +17,7 @@
 ## 章 009 との関係
 
 章 009 の `constant_c_value`（`Ising2D/Part009/Claim017_ConstantC.lean`）と
-本ファイルは、**同じ抽象版 `Abstract.const_eq_of_trace_ratio` の別の特殊化**である。
+本ファイルは、**同じ必要十分版 `NecSuf.const_eq_of_trace_ratio` の別の特殊化**である。
 違うのは
 - 符号 `η`（章 009 は一般の `η`、本章は `(+)` すなわち `η = -1`）、
 - `p = tr(V̌')` の値（章 009 は前因子 `2^{M-m}` つき、本章は前因子なし）
@@ -27,7 +27,7 @@
 `η` について複号同順の形で証明されているので、`η = -1` を代入するだけでよい。
 -/
 import Ising2D.Part017.Claim008_VPlusPositiveDefinite
-import Ising2D.Abstract.ConstantC
+import Ising2D.NecSuf.ConstantC
 
 namespace Ising2D
 
@@ -69,7 +69,7 @@ theorem VPlusInv_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
 
 /-- **原文 `constant_c_value_even_sector`**: `V^{(+)} = c V̌'` の `c` は `(2 sinh 2K_2)^{M/2}`。
 
-抽象版 `Abstract.const_eq_of_trace_ratio` の特殊化として導出する。 -/
+必要十分版 `NecSuf.const_eq_of_trace_ratio` の特殊化として導出する。 -/
 theorem constant_c_value_even_sector (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
@@ -89,7 +89,7 @@ theorem constant_c_value_even_sector (F : CheckFermiSetup M) (g : CheckIdx M →
     rw [hVeq, Matrix.trace_smul, smul_eq_mul, hP]
   have h2 : (VPlusInv M K1 s2 K2star).trace = c⁻¹ * ((p : ℝ) : ℂ) := by
     rw [VPlusInv_eq F g hs2 hcne hVeq, Matrix.trace_smul, smul_eq_mul, F.trace_Vprime_inv g, hP]
-  exact Abstract.const_eq_of_trace_ratio hapos hppos h1 h2
+  exact NecSuf.const_eq_of_trace_ratio hapos hppos h1 h2
     (trace_VPlus K1 s2 K2star) (trace_VPlusInv K1 s2 K2star) hVpos
 
 end ConstantCEven

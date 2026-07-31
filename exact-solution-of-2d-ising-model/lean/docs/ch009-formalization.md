@@ -3,7 +3,7 @@
 対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック）
 
 - 具体版: `Ising2D/Part009/`
-- 抽象版: `Ising2D/Abstract/NumberOperator.lean`, `Ising2D/Abstract/JointEigenspace.lean`
+- 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`
 
 `lake build` 成功・`scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
 
@@ -11,33 +11,33 @@
 
 ## 1. 形式化した定理の一覧
 
-### 抽象版（`Ising2D.Abstract`）
+### 必要十分版（`Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
-| `Abstract.num` | `n_i := c_i a_i` | `def_number_operator` |
-| `Abstract.sq_eq_zero_of_acomm_self` | `x + x = 0 → x = 0` の下で `x x = 0` | `number_operator_idempotent` (1) |
-| `Abstract.ann_mul_cre` | `a_i c_i = 1 - n_i` | 同 (2) |
-| `Abstract.num_mul_num` | `n_i^2 = n_i` | 同 (3) |
-| `Abstract.commute_mul_of_anticommute` | 反可換 2 元の積との可換性 | `number_operators_commute` Step 2 |
-| `Abstract.commute_cre_num` / `commute_ann_num` | `c_i`, `a_i` は `n_j` (`i≠j`) と可換 | `number_operators_commute` (1) |
-| `Abstract.commute_num_num` | `n_i n_j = n_j n_i` | 同 (2) |
-| `Abstract.commute_num_of_commute` | `c_i, a_i` が `P` と可換なら `n_i` も | 補助（原文は暗黙） |
-| `Abstract.tau_num_mul_add_self` | `τ(n_i P) + τ(n_i P) = τ(P)` | `trace_of_number_operator_product` の帰納段階 |
-| `Abstract.projFactor` / `projOn` | `R_μ^{(ε_μ)}` と `Q_ε = ∏ R` | `joint_eigenspace_decomposition` |
-| `Abstract.projOn_mul_self` | `Q_ε^2 = Q_ε` | 同 (1) 後半 |
-| `Abstract.projOn_mul_projOn_of_ne` | `ε≠ε' ⇒ Q_ε Q_{ε'} = 0` | 同 (1) 前半 |
-| `Abstract.sum_projOn` | `∑_ε Q_ε = 1` | 同 (2) |
-| `Abstract.num_mul_projOn` | `n_ν Q_ε = ε_ν Q_ε` | 同 (3) |
-| `Abstract.two_pow_smul_tau_projOn` | `2^{|s|} τ(Q_ε) = τ(1)` | 同 (4)、`trace_of_number_operator_product` |
-| `Abstract.pow_mul_eq_of_mul_eq_smul` | `X Q = gQ ⇒ X^k Q = g^k Q` | `eigenvalues_of_Vprime` Step 2 |
-| `Abstract.exp_mul_eq_of_mul_eq_smul` | `X Q = gQ ⇒ exp(X) Q = e^g Q` | 同 Step 3 |
-| `Abstract.isInternal_range_proj` | 直交する射影の族の像は**内部直和分解**を与える（`DirectSum.IsInternal`） | `joint_eigenspace_decomposition` (5) |
-| `Abstract.iSupIndep_range_proj` / `iSup_range_proj_eq_top` | 同 (5) の後半（独立性）・前半（全体を張ること） | 同 (5) |
-| `Abstract.idem_of_ortho_of_sum_eq_one` | **冪等性 (1) 後半は仮定に要らず、(1) 前半と (2) から従う** | 同 (1) |
-| `Abstract.eigen_of_mem_range_proj` / `collectedBasis_eigen` | `f Q_ε = c_ε Q_ε` なら `im Q_ε` の元は固有値 `c_ε` の固有ベクトル。各成分の基底を集めたものは固有ベクトルからなる基底 | `eigenvalues_of_Vprime` Step 4 |
-| `Abstract.toMatrix_collectedBasis_eq_diagonal` | その基底に関する表現行列は対角行列 | 同 Step 4 |
-| `Abstract.isInternal_range_matrix_proj` / `exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` | 上記の行列版（**対角化可能性**: `P P' = P' P = 1` かつ `P' A P = diagonal Λ`） | 同 Step 4 の結論 |
+| `NecSuf.num` | `n_i := c_i a_i` | `def_number_operator` |
+| `NecSuf.sq_eq_zero_of_acomm_self` | `x + x = 0 → x = 0` の下で `x x = 0` | `number_operator_idempotent` (1) |
+| `NecSuf.ann_mul_cre` | `a_i c_i = 1 - n_i` | 同 (2) |
+| `NecSuf.num_mul_num` | `n_i^2 = n_i` | 同 (3) |
+| `NecSuf.commute_mul_of_anticommute` | 反可換 2 元の積との可換性 | `number_operators_commute` Step 2 |
+| `NecSuf.commute_cre_num` / `commute_ann_num` | `c_i`, `a_i` は `n_j` (`i≠j`) と可換 | `number_operators_commute` (1) |
+| `NecSuf.commute_num_num` | `n_i n_j = n_j n_i` | 同 (2) |
+| `NecSuf.commute_num_of_commute` | `c_i, a_i` が `P` と可換なら `n_i` も | 補助（原文は暗黙） |
+| `NecSuf.tau_num_mul_add_self` | `τ(n_i P) + τ(n_i P) = τ(P)` | `trace_of_number_operator_product` の帰納段階 |
+| `NecSuf.projFactor` / `projOn` | `R_μ^{(ε_μ)}` と `Q_ε = ∏ R` | `joint_eigenspace_decomposition` |
+| `NecSuf.projOn_mul_self` | `Q_ε^2 = Q_ε` | 同 (1) 後半 |
+| `NecSuf.projOn_mul_projOn_of_ne` | `ε≠ε' ⇒ Q_ε Q_{ε'} = 0` | 同 (1) 前半 |
+| `NecSuf.sum_projOn` | `∑_ε Q_ε = 1` | 同 (2) |
+| `NecSuf.num_mul_projOn` | `n_ν Q_ε = ε_ν Q_ε` | 同 (3) |
+| `NecSuf.two_pow_smul_tau_projOn` | `2^{|s|} τ(Q_ε) = τ(1)` | 同 (4)、`trace_of_number_operator_product` |
+| `NecSuf.pow_mul_eq_of_mul_eq_smul` | `X Q = gQ ⇒ X^k Q = g^k Q` | `eigenvalues_of_Vprime` Step 2 |
+| `NecSuf.exp_mul_eq_of_mul_eq_smul` | `X Q = gQ ⇒ exp(X) Q = e^g Q` | 同 Step 3 |
+| `NecSuf.isInternal_range_proj` | 直交する射影の族の像は**内部直和分解**を与える（`DirectSum.IsInternal`） | `joint_eigenspace_decomposition` (5) |
+| `NecSuf.iSupIndep_range_proj` / `iSup_range_proj_eq_top` | 同 (5) の後半（独立性）・前半（全体を張ること） | 同 (5) |
+| `NecSuf.idem_of_ortho_of_sum_eq_one` | **冪等性 (1) 後半は仮定に要らず、(1) 前半と (2) から従う** | 同 (1) |
+| `NecSuf.eigen_of_mem_range_proj` / `collectedBasis_eigen` | `f Q_ε = c_ε Q_ε` なら `im Q_ε` の元は固有値 `c_ε` の固有ベクトル。各成分の基底を集めたものは固有ベクトルからなる基底 | `eigenvalues_of_Vprime` Step 4 |
+| `NecSuf.toMatrix_collectedBasis_eq_diagonal` | その基底に関する表現行列は対角行列 | 同 Step 4 |
+| `NecSuf.isInternal_range_matrix_proj` / `exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` | 上記の行列版（**対角化可能性**: `P P' = P' P = 1` かつ `P' A P = diagonal Λ`） | 同 Step 4 の結論 |
 
 ### 具体版（`Ising2D`, `Ising2D.FermiSetup`）
 
@@ -103,29 +103,29 @@
 
 ---
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 |
+| 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `def_number_operator` | `Ising2D.FermiSetup.nOp`（`Mat(2^M,ℂ)`） | `Ising2D.Abstract.num`（任意の環、任意の添字型） |
-| `number_operator_idempotent` | `FermiSetup.cre_sq` / `ann_sq` / `ann_mul_cre` / `nOp_mul_self` | `Abstract.sq_eq_zero_of_acomm_self` / `ann_mul_cre` / `num_mul_num` |
-| `number_operators_commute` | `FermiSetup.commute_cre_nOp` / `commute_ann_nOp` / `commute_nOp_nOp` | `Abstract.commute_cre_num` / `commute_ann_num` / `commute_num_num` |
-| `trace_of_number_operator_product` | `FermiSetup.two_pow_mul_trace_Qproj`（`Matrix.trace`） | `Abstract.tau_num_mul_add_self` / `two_pow_smul_tau_projOn`（加法的かつ巡回的な汎関数） |
-| `joint_eigenspace_decomposition` (1)(2)(3)(4) | `FermiSetup.Qproj_*` / `sum_Qproj` / `nOp_mul_Qproj` / `trace_Qproj` | `Abstract.projOn_*` / `sum_projOn` / `num_mul_projOn` / `two_pow_smul_tau_projOn` |
-| `eigenvalues_of_Vprime` Step 2/3 | `FermiSetup.Vprime_mul_Qproj` | `Abstract.pow_mul_eq_of_mul_eq_smul` / `exp_mul_eq_of_mul_eq_smul` |
-| `joint_eigenspace_decomposition` (5) | `FermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj`（既存の `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` が人手証明の書き方に 1 対 1 で対応する版） | `Abstract.isInternal_range_proj` / `isInternal_range_matrix_proj`（任意の環上の加群、有限個の直交射影だけ） |
-| `eigenvalues_of_Vprime` / `eigenvalues_of_V`（対角化可能） | `FermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime` / `exists_conj_diagonal_Vmat` | `Abstract.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（任意の体上の有限次元、固有関係 `f Q_ε = c_ε Q_ε` だけ） |
+| `def_number_operator` | `Ising2D.FermiSetup.nOp`（`Mat(2^M,ℂ)`） | `Ising2D.NecSuf.num`（任意の環、任意の添字型） |
+| `number_operator_idempotent` | `FermiSetup.cre_sq` / `ann_sq` / `ann_mul_cre` / `nOp_mul_self` | `NecSuf.sq_eq_zero_of_acomm_self` / `ann_mul_cre` / `num_mul_num` |
+| `number_operators_commute` | `FermiSetup.commute_cre_nOp` / `commute_ann_nOp` / `commute_nOp_nOp` | `NecSuf.commute_cre_num` / `commute_ann_num` / `commute_num_num` |
+| `trace_of_number_operator_product` | `FermiSetup.two_pow_mul_trace_Qproj`（`Matrix.trace`） | `NecSuf.tau_num_mul_add_self` / `two_pow_smul_tau_projOn`（加法的かつ巡回的な汎関数） |
+| `joint_eigenspace_decomposition` (1)(2)(3)(4) | `FermiSetup.Qproj_*` / `sum_Qproj` / `nOp_mul_Qproj` / `trace_Qproj` | `NecSuf.projOn_*` / `sum_projOn` / `num_mul_projOn` / `two_pow_smul_tau_projOn` |
+| `eigenvalues_of_Vprime` Step 2/3 | `FermiSetup.Vprime_mul_Qproj` | `NecSuf.pow_mul_eq_of_mul_eq_smul` / `exp_mul_eq_of_mul_eq_smul` |
+| `joint_eigenspace_decomposition` (5) | `FermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj`（既存の `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` が人手証明の書き方に 1 対 1 で対応する版） | `NecSuf.isInternal_range_proj` / `isInternal_range_matrix_proj`（任意の環上の加群、有限個の直交射影だけ） |
+| `eigenvalues_of_Vprime` / `eigenvalues_of_V`（対角化可能） | `FermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime` / `exists_conj_diagonal_Vmat` | `NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（任意の体上の有限次元、固有関係 `f Q_ε = c_ε Q_ε` だけ） |
 
-具体版はいずれも**抽象版を特殊化して導出している**（`Definition004_NumberOperator.lean` /
+具体版はいずれも**必要十分版を特殊化して導出している**（`Definition004_NumberOperator.lean` /
 `Claim008_JointEigenspace.lean` / `Claim009_EigenvaluesVprime.lean` を参照）。
 そのうえで、人手証明と 1 対 1 に対応する形の主張を具体版として別に立ててある。
 
-### 抽象版で判明した本質
+### 必要十分版で判明した本質
 
 - **直和分解 (5) に効いているのは「有限個の直交射影の和が恒等」だけ**である。行列であること・
   有限次元性・複素数であること・個数演算子であること・CAR はどれも効いていない。
   さらに **`Q_ε^2 = Q_ε`（原文 (1) 後半）は独立な仮定ではなく、(1) 前半と (2) から従う**
-  （`Abstract.idem_of_ortho_of_sum_eq_one`）。原文が 2 つに分けて述べている性質の一方は冗長である。
+  （`NecSuf.idem_of_ortho_of_sum_eq_one`）。原文が 2 つに分けて述べている性質の一方は冗長である。
 - **対角化可能性に追加で効いているのは、係数が体であること（各成分に基底が取れる）と
   固有関係 `f Q_ε = c_ε Q_ε` だけ**である。`V'` が指数関数であることも、固有値が正の実数であることも
   効いていない。
@@ -158,17 +158,17 @@
   Lean では `Finset.noncommProd`（可換性の証明を引数に取る積）としてそのまま書ける。
   非可換環に `Finset.prod` が無いことへの回避であり、数学的な内容は増えていない。
 
-### 抽象版を置かなかった主張とその理由
+### 必要十分版を置かなかった主張とその理由
 
 - `def_trace` / `trace_basic_properties`: mathlib の `Matrix.trace_add` / `trace_smul` /
   `trace_mul_comm` / `trace_one` が既に任意の可換半環について述べており、
-  これ以上取り払える構造が無い。巡回性という**性質だけ**を仮定にした抽象版は
+  これ以上取り払える構造が無い。巡回性という**性質だけ**を仮定にした必要十分版は
   上記の `τ` として存在する。
 - `iH_is_real_symmetric` / `V_is_positive_definite` / `sign_flip_conjugation` /
   `constant_c_value` / `eigenvalues_of_V`: いずれも**この模型の具体的な対象**
   （`Z_m, Y_m, H_1^{(±)}, H_2, V_1, V_2, U`）についての主張であり、
   取り払える一般構造が無い。使っている一般論（トレースの線型性・巡回性、
-  共役が環準同型であること、`exp` の性質）はすべて既存の抽象版で押さえてある。
+  共役が環準同型であること、`exp` の性質）はすべて既存の必要十分版で押さえてある。
 
 ---
 
@@ -176,8 +176,8 @@
 
 | 原文の主張 | 状況 | 理由 |
 | --- | --- | --- |
-| `joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.isInternal_range_Qproj`（`Part009/Claim009_DirectSumAndDiagonalization.lean`）。抽象版 `Ising2D.Abstract.isInternal_range_matrix_proj`（`Abstract/JointEigenspaceDecomposition.lean`）の特殊化。人手証明 Step 5 の 2 つの事実（`x = ∑_ε Q_ε x` / 直和性）は従来どおり `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` にあり、`Submodule` の言葉での対応物が `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` である |
-| `eigenvalues_of_Vprime` / `eigenvalues_of_V` の「`V'`（`V`）は対角化可能」 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.exists_eigenBasis_Vprime`（固有ベクトルからなる基底 `b` と `LinearMap.toMatrix b b V' = diagonal Λ`）、`exists_conj_diagonal_Vprime`（`P' V' P = diagonal Λ`, `P P' = P' P = 1`）、`exists_conj_diagonal_Vmat`（`V = cV'` を仮定した `V` 版）。いずれも抽象版 `Ising2D.Abstract.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` の特殊化 |
+| `joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.isInternal_range_Qproj`（`Part009/Claim009_DirectSumAndDiagonalization.lean`）。必要十分版 `Ising2D.NecSuf.isInternal_range_matrix_proj`（`NecSuf/JointEigenspaceDecomposition.lean`）の特殊化。人手証明 Step 5 の 2 つの事実（`x = ∑_ε Q_ε x` / 直和性）は従来どおり `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` にあり、`Submodule` の言葉での対応物が `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` である |
+| `eigenvalues_of_Vprime` / `eigenvalues_of_V` の「`V'`（`V`）は対角化可能」 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.exists_eigenBasis_Vprime`（固有ベクトルからなる基底 `b` と `LinearMap.toMatrix b b V' = diagonal Λ`）、`exists_conj_diagonal_Vprime`（`P' V' P = diagonal Λ`, `P P' = P' P = 1`）、`exists_conj_diagonal_Vmat`（`V = cV'` を仮定した `V` 版）。いずれも必要十分版 `Ising2D.NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` の特殊化 |
 | `γ(θ_μ) = arccosh(γ_1(θ_μ))` であること | **仮定として受け取った** | mathlib に `Real.arccosh` が無い（`lean/README.md`「mathlib に無いことが分かっているもの」に既出）。本章が `γ` について使うのは `γ(θ_μ) ≥ 0` だけなので、非負実数の族 `g : 𝓘 → ℝ` として受け取っている |
 | `V_eq_Vprime`（008 章、「ある `c ∈ ℂ^×` が存在して `V = cV'`」） | **仮定として受け取った** | 008 章の内容で本リポジトリでは未形式化。`constant_c_value` の仮定 `hVeq : Vmat = c • Vprime` として明示 |
 | `gamma_2_theta_is_0` による `𝓘` の同定（`𝓘 = {1,…,M}` または `{1,…,M-1}`） | **仮定として受け取った** | 008 章の内容（`Ising2D.gamma2_eq_zero_iff` として形式化済み）。009 章では「`{1,…,M}` に含まれ、そこで `γ_2(θ_μ) ≠ 0` となる有限集合 `I`」として `FermiSetup` の仮定に置いた |

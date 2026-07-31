@@ -5,9 +5,9 @@
 （`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
 `Athetatilde_006_claim_det_A`, `Athetatilde_007_claim_gamma1_gt_1`）
 
-**抽象版**: `Ising2D/Abstract/GammaDetIdentity.lean`（`Ising2D.Abstract.gamma_det_identity`。
+**必要十分版**: `Ising2D/NecSuf/GammaDetIdentity.lean`（`Ising2D.NecSuf.gamma_det_identity`。
 `det A = 1` は可換環の多項式恒等式である）と
-`Ising2D/Abstract/ArcoshExp.lean`（`Ising2D.Abstract.one_lt_of_sq_gt_one`）。
+`Ising2D/NecSuf/ArcoshExp.lean`（`Ising2D.NecSuf.one_lt_of_sq_gt_one`）。
 
 ## 形式化の方針
 
@@ -27,8 +27,8 @@
   Step 3（`t > 0 ∧ t^2 > 1 ⟹ t > 1`）である。
 -/
 import Ising2D.Part015.Claim004_EigenATildeDiag
-import Ising2D.Abstract.GammaDetIdentity
-import Ising2D.Abstract.ArcoshExp
+import Ising2D.NecSuf.GammaDetIdentity
+import Ising2D.NecSuf.ArcoshExp
 
 namespace Ising2D
 
@@ -48,9 +48,9 @@ theorem det_AMat_thetaTilde_eq_one (hdual : P.const.c2 * P.const.s2star = P.cons
     (M : ℕ) (μ : ℤ) : (AMat P.const (thetaTilde M μ)).det = 1 :=
   det_AMat_eq_one P.const (thetaTilde M μ) P.c1_sq_sub_s1_sq P.c2star_sq_sub_s2star_sq hdual
 
-/-- **抽象版からの導出**（同じ主張の別証明）: `det A(θ~_μ) = 1` は
-`Abstract.gamma_det_identity`（任意の可換環の多項式恒等式）を ℂ に特殊化したものである。 -/
-theorem det_AMat_thetaTilde_eq_one_of_abstract
+/-- **必要十分版からの導出**（同じ主張の別証明）: `det A(θ~_μ) = 1` は
+`NecSuf.gamma_det_identity`（任意の可換環の多項式恒等式）を ℂ に特殊化したものである。 -/
+theorem det_AMat_thetaTilde_eq_one_of_necSuf
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
     (AMat P.const (thetaTilde M μ)).det = 1 := by
   set θ := thetaTilde M μ with hθ
@@ -68,7 +68,7 @@ theorem det_AMat_thetaTilde_eq_one_of_abstract
   rw [det_AMat, gamma2_mul_gamma2_neg, gamma1]
   simp only [Complex.ofReal_sub, Complex.ofReal_mul]
   linear_combination
-    Abstract.gamma_det_identity (P.const.c1 : ℂ) (P.const.s1 : ℂ) (P.const.c2 : ℂ)
+    NecSuf.gamma_det_identity (P.const.c1 : ℂ) (P.const.s1 : ℂ) (P.const.c2 : ℂ)
       (P.const.c2star : ℂ) (P.const.s2star : ℂ) (Real.cos θ : ℂ) (Real.sin θ : ℂ)
       HPy H1 H2 H3
 
@@ -116,7 +116,7 @@ theorem one_lt_gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
 008 章（整数運動量）では `γ_1(θ_μ) ≥ 1` しか言えず、臨界点の `θ_μ = 0` で等号が起こる。 -/
 theorem one_lt_gamma1R_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     {M : ℕ} (hM : M ≠ 0) (μ : ℤ) : 1 < gamma1R P.const (thetaTilde M μ) :=
-  Abstract.one_lt_of_sq_gt_one
+  NecSuf.one_lt_of_sq_gt_one
     (lt_of_lt_of_le one_pos (one_le_gamma1R P (thetaTilde M μ)))
     (one_lt_gamma1R_sq_thetaTilde P hdual hM μ)
 

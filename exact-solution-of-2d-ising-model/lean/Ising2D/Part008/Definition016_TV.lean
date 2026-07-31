@@ -50,7 +50,7 @@
 を参照すること。証明は `<commutator_of_H_and_Z_Y>` の (1)(3)(4)(6)
 （`Part008/Claim001_CommutatorHZY.lean`）と、`ad X` が 2 次元部分空間を保つ場合の
 閉じた形（`Part008/Claim006_ExpConjugation.lean` の `matExp_conj_two_dim_z` / `..._y`）
-だけから通る。抽象版は `Ising2D/Abstract/TVAction.lean`。
+だけから通る。必要十分版は `Ising2D/NecSuf/TVAction.lean`。
 
 本ファイルの仮定つき版は、原文の証明の構造（`B_1`, `B_2` の作用 → 合成則 → `B_1B_2B_1 = A`）を
 そのまま写したものとして残してある。仮定から先（合成則による `B_1 B_2 B_1` の計算、

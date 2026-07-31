@@ -43,7 +43,7 @@
 | `Ising2D.AMat_mul_checkPmat` | `A P̌ = P̌ Ď` | 同 Step 2 |
 | **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** |
 | `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
-| `Ising2D.det_AMat_thetaTilde_eq_one_of_abstract` | 同上を抽象版の系として導出した版 | 同上 |
+| `Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式 |
 | `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2` | 同 最終式 |
 | `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1` | 同 第 3 式 |
@@ -60,28 +60,28 @@
 補助として `Ising2D.IsingParam.c1_pos` / `c2_pos` / `c1_sq_sub_s1_sq` / `c2star_sq_sub_s2star_sq`
 （`c_1 = cosh 2K_1 > 0` 等）を置いた。
 
-### 抽象版（`lean/Ising2D/Abstract/`）
+### 必要十分版（`lean/Ising2D/NecSuf/`）
 
 | ファイル | Lean の名前 | 内容 |
 | --- | --- | --- |
-| `OddModePhase.lean` | `Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `N·θ = mπ`（`m` 奇数）かつ `sin θ = 0` なら `cos θ = -1` |
-| `NegConjPair.lean` | `Abstract.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | `w = -conj z` だけから出る 4 つの帰結 |
-| `TwoByTwoSkew.lean` | `Abstract.skew2_charPoly` / `skew2_charPoly_factor` / `skew2_mulVec` / `skew2_mul_col` / `skew2_det_col` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**） |
-| `GammaDetIdentity.lean` | `Abstract.gamma_det_identity` | `det A = 1` の中身は**可換環の多項式恒等式** |
-| `ArcoshExp.lean` | `Abstract.one_lt_of_sq_gt_one` / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
+| `OddModePhase.lean` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `N·θ = mπ`（`m` 奇数）かつ `sin θ = 0` なら `cos θ = -1` |
+| `NegConjPair.lean` | `NecSuf.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | `w = -conj z` だけから出る 4 つの帰結 |
+| `TwoByTwoSkew.lean` | `NecSuf.skew2_charPoly` / `skew2_charPoly_factor` / `skew2_mulVec` / `skew2_mul_col` / `skew2_det_col` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**） |
+| `GammaDetIdentity.lean` | `NecSuf.gamma_det_identity` | `det A = 1` の中身は**可換環の多項式恒等式** |
+| `ArcoshExp.lean` | `NecSuf.one_lt_of_sq_gt_one` / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 | 抽象版から具体版の導出 |
+| 人手証明のラベル | 具体版 | 必要十分版 | 必要十分版から具体版の導出 |
 | --- | --- | --- | --- |
-| `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（抽象版へ `N := M`, `m := 2μ-1` を代入） |
-| `relation_of_gamma_2_theta_tilde` | `gamma2_mul_gamma2_neg_eq_neg_absSq`, `sq_absGamma2`, `sq_I_absGamma2` | `Abstract.mul_of_eq_neg_conj`, `sq_absOf_eq_neg_mul`, `sq_I_mul_absOf_eq_mul` | 具体版はいずれも抽象版に `gamma2_neg_eq_neg_conj` を渡しただけ |
-| `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `AMat_mulVec_eigen_pos/neg`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `Abstract.skew2_mulVec`, `Abstract.skew2_charPoly_factor`, `Abstract.eq_conj_of_mul_eq` | 対角化は `eq_conj_of_mul_eq` の系として導出 |
-| `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `Abstract.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_abstract`（同じ主張を抽象版の系として再証明） |
-| `gamma1_gt_1_theta_tilde` | `one_lt_gamma1R_thetaTilde` | `Abstract.one_lt_of_sq_gt_one` | 具体版は抽象版の系 |
-| `def_gamma_theta_tilde_mu`, `lambda_eq_exp_gamma_theta_tilde` | `gammaTilde_pos`, `sinh_gammaTilde`, `lambdaPlusR_eq_exp`, `lambdaMinusR_eq_exp` | `Abstract.arcosh_pos_of_one_lt`, `sinh_arcosh_of_sq`, `exp_arcosh_of_sq`, `exp_neg_arcosh_of_sq` | 具体版はいずれも抽象版の系 |
+| `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（必要十分版へ `N := M`, `m := 2μ-1` を代入） |
+| `relation_of_gamma_2_theta_tilde` | `gamma2_mul_gamma2_neg_eq_neg_absSq`, `sq_absGamma2`, `sq_I_absGamma2` | `NecSuf.mul_of_eq_neg_conj`, `sq_absOf_eq_neg_mul`, `sq_I_mul_absOf_eq_mul` | 具体版はいずれも必要十分版に `gamma2_neg_eq_neg_conj` を渡しただけ |
+| `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `AMat_mulVec_eigen_pos/neg`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_mulVec`, `NecSuf.skew2_charPoly_factor`, `NecSuf.eq_conj_of_mul_eq` | 対角化は `eq_conj_of_mul_eq` の系として導出 |
+| `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `NecSuf.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_necSuf`（同じ主張を必要十分版の系として再証明） |
+| `gamma1_gt_1_theta_tilde` | `one_lt_gamma1R_thetaTilde` | `NecSuf.one_lt_of_sq_gt_one` | 具体版は必要十分版の系 |
+| `def_gamma_theta_tilde_mu`, `lambda_eq_exp_gamma_theta_tilde` | `gammaTilde_pos`, `sinh_gammaTilde`, `lambdaPlusR_eq_exp`, `lambdaMinusR_eq_exp` | `NecSuf.arcosh_pos_of_one_lt`, `sinh_arcosh_of_sq`, `exp_arcosh_of_sq`, `exp_neg_arcosh_of_sq` | 具体版はいずれも必要十分版の系 |
 
-抽象版から得られた知見（本文には持ち込まない）:
+必要十分版から得られた知見（本文には持ち込まない）:
 
 - **半整数運動量で例外が消える理由は 1 行に還元される。**
   `γ_2(θ~_μ) ≠ 0` に効いているのは「`M θ~_μ = (2μ-1)π` が `π` の**奇数**倍であること」と
@@ -97,7 +97,7 @@
 - **`A(θ~_μ)` の固有値・固有ベクトル・対角化に効いているのは
   「行列が `!![g,a;-b,g]` の形（対角成分が等しい）」と「`s^2 = -(ab)` を満たす `s` が取れる」の 2 つだけ**で、
   係数は**任意の可換環**でよい。複素数であることも `γ_1` が実数であることも効いていない。
-  人手証明が `√(-γ_2γ_2(-θ~))` として導入する量は、抽象版では「2 乗が `-(ab)` の元」に退化し、
+  人手証明が `√(-γ_2γ_2(-θ~))` として導入する量は、必要十分版では「2 乗が `-(ab)` の元」に退化し、
   分岐の選択は `s ↦ -s`（＝ `P` の 2 列と `D` の 2 成分の同時入れ替え）にすぎない。
 - **`det A = 1` は可換環の多項式恒等式である。** 効いているのは
   `u^2+v^2 = 1`, `c_1^2-s_1^2 = 1`, `(c_2^*)^2-(s_2^*)^2 = 1`, `c_2s_2^* = c_2^*` の 4 本だけで、

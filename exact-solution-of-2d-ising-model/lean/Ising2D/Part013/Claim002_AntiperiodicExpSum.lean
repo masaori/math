@@ -5,9 +5,9 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_002_claim_antiperiodic_exp_sum`）
 
-**抽象版**は `Ising2D/Abstract/AntiperiodicFourier.lean`（名前空間 `Ising2D.Abstract`、
-同じラベル `antiperiodic_exp_sum`）の `Ising2D.Abstract.sum_zpow_antiperiodic`。
-抽象版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumAbstract.lean`。
+**必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`（名前空間 `Ising2D.NecSuf`、
+同じラベル `antiperiodic_exp_sum`）の `Ising2D.NecSuf.sum_zpow_antiperiodic`。
+必要十分版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean`。
 
 ## 原文の主張（`M ∈ ℤ_{≥2}`、`μ ∈ ℤ`）
 
@@ -23,7 +23,7 @@
 
   これを `Ising2D.checkPhase M j μ` と名づける。**`e^{-iθ~}` は 1 の `2M` 乗根であり、
   半整数運動量とはその奇数周波数のことである**、というのがこの書き方の中身である
-  （抽象版の冒頭コメント参照）。
+  （必要十分版の冒頭コメント参照）。
 * 実数の `θ~_μ` は `Ising2D.thetaTilde` として定義し、
   `checkPhase_eq_exp` で `checkPhase` と一致することを示す（原文の記号との橋渡し）。
 * 和の添字は `Fin M`（`0,…,M-1`）で、原文の `μ` は `(μ : ℕ) + 1`。

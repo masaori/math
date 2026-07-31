@@ -5,11 +5,11 @@
 （`structured-latex/content/014_even_sector_T_action.ts` の
 `evensectorT_001_definition_V_plus`）
 
-**抽象版**は `Ising2D/Abstract/TVActionSandwich.lean`（`Ising2D.Abstract.expUnits` /
+**必要十分版**は `Ising2D/NecSuf/TVActionSandwich.lean`（`Ising2D.NecSuf.expUnits` /
 `smulUnitsAlg` / `TV_sandwich_actsBy`）。本ファイルの内容のうち
 「`exp` は単元」「スカラー倍は単元性を保つ」「3 つの共役の合成は積による共役」は
 いずれも**環と代数の構造だけ**で成り立ち、行列であることもテンソル冪であることも
-効いていない（抽象版の冒頭コメント参照）。
+効いていない（必要十分版の冒頭コメント参照）。
 
 ## 原文の定義
 

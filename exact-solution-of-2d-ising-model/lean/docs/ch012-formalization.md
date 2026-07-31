@@ -1,7 +1,7 @@
 # 章 012「自由エネルギーと熱力学極限」の形式化
 
 人手証明の正本: `structured-latex/content/012_free_energy.ts`（7 ブロック）
-Lean: `Ising2D/Part012/`（具体版）、`Ising2D/Abstract/`（抽象版）
+Lean: `Ising2D/Part012/`（具体版）、`Ising2D/NecSuf/`（必要十分版）
 
 **この文書は `lean/README.md` へ統合されるまでの暫定の置き場である**（統合は呼び出し元が行う）。
 形式化の過程で見つかった原文の問題は
@@ -45,43 +45,43 @@ Lean: `Ising2D/Part012/`（具体版）、`Ising2D/Abstract/`（抽象版）
 | `Ising2D.onsager_free_energy_expression` | **`(1/M)log Λ^{(δ)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π}γ`** | `onsager_free_energy_expression` |
 | `Ising2D.onsager_free_energy_expression_indep_delta` | 右辺が `δ` に依らないこと | 同 statement の「右辺は `δ` に依らない」 |
 
-### 抽象版（`Ising2D.Abstract`）
+### 必要十分版（`Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | ファイル |
 | --- | --- | --- |
-| `Ising2D.Abstract.continuous_arcosh_comp` | 値が `1` 以上の連続関数と `arcosh` の合成は連続（**定義域は任意の位相空間**） | `Abstract/Arcosh.lean` |
-| `Ising2D.Abstract.cosh_sub_le_cosh_mul_cosh_sub` | `x ≤ 1`, `sinh u sinh v ≥ 0` ⇒ `cosh(u-v) ≤ cosh u cosh v - sinh u sinh v · x` | `Abstract/CoshLowerBound.lean` |
-| `Ising2D.Abstract.one_le_cosh_mul_cosh_sub` | 上の下界がさらに `1` 以上 | 同上 |
-| `Ising2D.Abstract.node` / `tag` | 等分点と代表点（任意の `[a,b]`、任意のずらし `δ`） | `Abstract/RiemannSum.lean` |
-| `Ising2D.Abstract.abs_integral_sub_riemann_sum_le` | 誤差評価（`ε` を仮定で受け取る形。**周期性不要・`δ ∈ [0,1]`・任意の `[a,b]`**） | 同上 |
-| `Ising2D.Abstract.modulus` | 連続度 `ω(h)`（`sSup` で定義） | 同上 |
-| `Ising2D.Abstract.bddAbove_modulusSet` / `le_modulus` / `modulus_nonneg` / `modulus_le` | `ω` が well-defined であることと基本性質 | 同上 |
-| `Ising2D.Abstract.abs_integral_sub_riemann_sum_le_modulus` | 誤差評価（`ε = ω`） | 同上 |
-| `Ising2D.Abstract.tendsto_modulus_atTop` | `ω((b-a)/M) → 0`（(R1) Heine–Cantor） | 同上 |
-| `Ising2D.Abstract.tendsto_riemann_sum` | **等分割リーマン和 → 積分の平均値**（抽象版） | 同上 |
-| `Ising2D.Abstract.abs_log_div_sub_log_le_of_sandwich` | `c^N ≤ Z ≤ B c^N` ⇒ `\|log Z/N - log c\| ≤ log B/N` | `Abstract/LogSqueeze.lean` |
-| `Ising2D.Abstract.log_rpow_mul_exp` | `log(A^r e^S) = r log A + S`（`A > 0`） | 同上 |
-| `Ising2D.Abstract.tendsto_affine` | 収束列のアフィン変換は収束する | 同上 |
+| `Ising2D.NecSuf.continuous_arcosh_comp` | 値が `1` 以上の連続関数と `arcosh` の合成は連続（**定義域は任意の位相空間**） | `NecSuf/Arcosh.lean` |
+| `Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub` | `x ≤ 1`, `sinh u sinh v ≥ 0` ⇒ `cosh(u-v) ≤ cosh u cosh v - sinh u sinh v · x` | `NecSuf/CoshLowerBound.lean` |
+| `Ising2D.NecSuf.one_le_cosh_mul_cosh_sub` | 上の下界がさらに `1` 以上 | 同上 |
+| `Ising2D.NecSuf.node` / `tag` | 等分点と代表点（任意の `[a,b]`、任意のずらし `δ`） | `NecSuf/RiemannSum.lean` |
+| `Ising2D.NecSuf.abs_integral_sub_riemann_sum_le` | 誤差評価（`ε` を仮定で受け取る形。**周期性不要・`δ ∈ [0,1]`・任意の `[a,b]`**） | 同上 |
+| `Ising2D.NecSuf.modulus` | 連続度 `ω(h)`（`sSup` で定義） | 同上 |
+| `Ising2D.NecSuf.bddAbove_modulusSet` / `le_modulus` / `modulus_nonneg` / `modulus_le` | `ω` が well-defined であることと基本性質 | 同上 |
+| `Ising2D.NecSuf.abs_integral_sub_riemann_sum_le_modulus` | 誤差評価（`ε = ω`） | 同上 |
+| `Ising2D.NecSuf.tendsto_modulus_atTop` | `ω((b-a)/M) → 0`（(R1) Heine–Cantor） | 同上 |
+| `Ising2D.NecSuf.tendsto_riemann_sum` | **等分割リーマン和 → 積分の平均値**（必要十分版） | 同上 |
+| `Ising2D.NecSuf.abs_log_div_sub_log_le_of_sandwich` | `c^N ≤ Z ≤ B c^N` ⇒ `\|log Z/N - log c\| ≤ log B/N` | `NecSuf/LogSqueeze.lean` |
+| `Ising2D.NecSuf.log_rpow_mul_exp` | `log(A^r e^S) = r log A + S`（`A > 0`） | 同上 |
+| `Ising2D.NecSuf.tendsto_affine` | 収束列のアフィン変換は収束する | 同上 |
 
 ---
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 | 具体版を抽象版の系として導出しているか |
+| 人手証明のラベル | 具体版 | 必要十分版 | 具体版を必要十分版の系として導出しているか |
 | --- | --- | --- | --- |
-| `gamma1_lower_bound_all_theta` | `Ising2D.gamma1R_ge_cosh_sub` / `one_le_gamma1R` | `Abstract.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub` | **している**（`gamma1R_ge_cosh_sub` の証明が抽象版の特殊化） |
-| `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `Abstract.continuous_arcosh_comp` | **している**（1 行の特殊化） |
-| `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `Abstract.abs_log_div_sub_log_le_of_sandwich` | **している**（`B = 2^M` を代入して `M` で割る） |
-| `riemann_sum_to_integral` | `Ising2D.riemann_sum_to_integral_error` / `riemann_sum_to_integral` | `Abstract.abs_integral_sub_riemann_sum_le_modulus` / `Abstract.tendsto_riemann_sum` | **している**（`a = 0`, `b = 2π` の特殊化と添字の付け替え） |
-| `onsager_free_energy_expression` | `Ising2D.log_LambdaM` / `inv_M_log_LambdaM` / `onsager_free_energy_expression` | `Abstract.log_rpow_mul_exp` / `Abstract.tendsto_affine`（＋上の `tendsto_riemann_sum`） | **している** |
+| `gamma1_lower_bound_all_theta` | `Ising2D.gamma1R_ge_cosh_sub` / `one_le_gamma1R` | `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub` | **している**（`gamma1R_ge_cosh_sub` の証明が必要十分版の特殊化） |
+| `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `NecSuf.continuous_arcosh_comp` | **している**（1 行の特殊化） |
+| `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `NecSuf.abs_log_div_sub_log_le_of_sandwich` | **している**（`B = 2^M` を代入して `M` で割る） |
+| `riemann_sum_to_integral` | `Ising2D.riemann_sum_to_integral_error` / `riemann_sum_to_integral` | `NecSuf.abs_integral_sub_riemann_sum_le_modulus` / `NecSuf.tendsto_riemann_sum` | **している**（`a = 0`, `b = 2π` の特殊化と添字の付け替え） |
+| `onsager_free_energy_expression` | `Ising2D.log_LambdaM` / `inv_M_log_LambdaM` / `onsager_free_energy_expression` | `NecSuf.log_rpow_mul_exp` / `NecSuf.tendsto_affine`（＋上の `tendsto_riemann_sum`） | **している** |
 
-### 抽象版で判明した本質（本文には持ち込まないが、解説パートの素材になる）
+### 必要十分版で判明した本質（本文には持ち込まないが、解説パートの素材になる）
 
 - **`riemann_sum_to_integral` に `g` の周期性はまったく効いていない。**
   人手証明は `g` に「連続かつ周期 `2π`」を仮定し、最後の括弧で
   「`δ = 0` のとき代表点が区間の端点 `2π` になるのを許すために周期性を使う」と述べているが、
   代表点は閉区間 `I_μ` に属していればよいので `g(2π) = g(0)` を比べる必要はどこにもない。
-  抽象版は周期性の仮定なしで通っており、証明中に `g(b) = g(a)` は現れない。
+  必要十分版は周期性の仮定なしで通っており、証明中に `g(b) = g(a)` は現れない。
 - **区間が `[0,2π]` であることも効いていない。** 任意の有界閉区間 `[a,b]`（`a ≤ b`）でよい。
   `2π` は「小区間の幅 `(b-a)/M`」と「平均を取る割り算」にしか現れない。
 - **`δ ∈ [0,1)` の右端が開である必要もない。** `δ ∈ [0,1]` で成り立ち、
@@ -95,7 +95,7 @@ Lean: `Ising2D/Part012/`（具体版）、`Ising2D/Abstract/`（抽象版）
   効いているのは挟み撃ちの形 `c^N ≤ Z ≤ B c^N`（`c > 0`, `B ≥ 1`）と、
   `log` の単調性・`log(xy) = log x + log y`・`log(x^N) = N log x` だけである。
   `B = 2^M` という具体形も、行列も転送行列も跡も固有値も出てこない。
-  人手証明が得ている `\|log Z/(MN) - log c/M\| ≤ log 2/N` は、抽象版の
+  人手証明が得ている `\|log Z/(MN) - log c/M\| ≤ log 2/N` は、必要十分版の
   `\|log Z/N - log c\| ≤ log B/N` の両辺を `M` で割って `log 2^M = M log 2` が
   約分された結果にすぎない（`M` で割るのは線型な後処理）。
 - **`γ_1` の下界に `cos` であることは効いていない。** 効いているのは
@@ -132,7 +132,7 @@ Lean: `Ising2D/Part012/`（具体版）、`Ising2D/Abstract/`（抽象版）
 - **等分割リーマン和 → 積分の収束は mathlib に無い。**
   `Riemann sum` / `riemann_sum` / `RiemannSum` を `Mathlib/` 全体に grep して該当なし。
   `Mathlib/Analysis/SumIntegralComparisons.lean` は単調関数の和と積分の比較で目的が異なる。
-  したがって `Abstract/RiemannSum.lean` で自前に証明した。
+  したがって `NecSuf/RiemannSum.lean` で自前に証明した。
 - **`Real.arcosh` は mathlib にある**（`Mathlib/Analysis/SpecialFunctions/Arcosh.lean`）。
   `lean/README.md` の「mathlib に無いことが分かっているもの: `Real.arccosh`（自前定義が必要）」は
   現行の mathlib（`v4.32.1`）では**誤り**である。綴りが `arccosh` ではなく `arcosh` であることに注意。

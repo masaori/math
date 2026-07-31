@@ -5,7 +5,7 @@
 （`structured-latex/content/014_even_sector_T_action.ts` の
 `evensectorT_007_definition_B1_B2`）
 
-**抽象版**は `Ising2D/Abstract/TVAction.lean` の `Ising2D.Abstract.twoDimConjMat`
+**必要十分版**は `Ising2D/NecSuf/TVAction.lean` の `Ising2D.NecSuf.twoDimConjMat`
 （`!![cosh s, β sinhc s; α sinhc s, cosh s]`）。原文の `B_1(θ), B_2` が
 その特殊化であることは `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat`
 （`Part008/Claim012_TVActions.lean`）で既に証明されている。

@@ -5,8 +5,8 @@
 （`closing_008_claim_check_Q_is_hermitian`、
 ラベル **`check_number_operator_is_hermitian`**）
 
-抽象版は `Ising2D/Abstract/ParityFermion.lean`（同じラベル）の
-`Ising2D.Abstract.star_projOn`。(4) 後半はその**系**である
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
+`Ising2D.NecSuf.star_projOn`。(4) 後半はその**系**である
 （`Ising2D.CheckFermi.Qproj_conjTranspose`、`Part018/Setup.lean`）。
 
 ## 人手証明との対応

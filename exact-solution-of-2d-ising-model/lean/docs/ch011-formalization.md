@@ -59,36 +59,36 @@
 `mulVec_dotProduct_selfadjoint`, `single_dotProduct_mulVec_single`,
 `vecNormSq` 系, `mulVecLin_pow`, `isPsdPair_of_matrix`, `isPdPair_of_matrix`。
 
-### 1.2 抽象版（`lean/Ising2D/Abstract/`）
+### 1.2 必要十分版（`lean/Ising2D/NecSuf/`）
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.Abstract.psd_cauchy_schwarz` | 順序体上の加群の対称半正定値双線型形式に対する Cauchy–Schwarz | `psd_cauchy_schwarz` |
-| `Ising2D.Abstract.bilin_quadratic_expand` | `q(t) = B(y+tx, y+tx)` の展開 | 同上の証明の 1 行目 |
-| `Ising2D.Abstract.IsPsdPair` / `IsPdPair` | 「対称半正定値形式 `ip` と、それについて自己共役かつ（半）正定値な作用素 `W`」の組 | `W_is_real_symmetric_positive_definite` の使われ方の抽象化 |
-| `Abstract.IsPsdPair.cs_ip` / `cs_W` | `P = I` 版・`P = W` 版の Cauchy–Schwarz | `psd_cauchy_schwarz` の 2 通りの使い方 |
-| `Abstract.IsPsdPair.rayleigh_bounds_operator_norm` | `⟪Wx,Wx⟫ ≤ c²⟪x,x⟫` | `rayleigh_bounds_operator_norm` |
-| `Abstract.IsPsdPair.rayleigh_bounds_operator_norm_pow` | `⟪W^k x, W^k x⟫ ≤ (c²)^k⟪x,x⟫` | 同上（帰納法） |
-| `Abstract.IsPsdPair.moment_split` | `⟪W^p x, W^q x⟫ = ⟪x, W^{p+q}x⟫` | Step 2 の書き換え |
-| `Abstract.IsPsdPair.moment_nonneg` / `moment_le_pow` | `0 ≤ m_k`、`m_k ≤ c^k⟪x,x⟫` | Step 1 の偶奇の場合分け |
-| `Abstract.IsPsdPair.moment_log_convex` | `m_{k+1}² ≤ m_k m_{k+2}` | Step 2 |
-| `Abstract.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero` | `m_k > 0`、`W` の核は `{0}` | Step 2 冒頭・`W` の可逆性 |
-| `Abstract.IsPdPair.moment_ratio_le` / `moment_pow_le` | 比の単調性と `(xᵀWx)^n ≤ m_n` | Step 3 前半 |
+| `Ising2D.NecSuf.psd_cauchy_schwarz` | 順序体上の加群の対称半正定値双線型形式に対する Cauchy–Schwarz | `psd_cauchy_schwarz` |
+| `Ising2D.NecSuf.bilin_quadratic_expand` | `q(t) = B(y+tx, y+tx)` の展開 | 同上の証明の 1 行目 |
+| `Ising2D.NecSuf.IsPsdPair` / `IsPdPair` | 「対称半正定値形式 `ip` と、それについて自己共役かつ（半）正定値な作用素 `W`」の組 | `W_is_real_symmetric_positive_definite` の使われ方の抽象化 |
+| `NecSuf.IsPsdPair.cs_ip` / `cs_W` | `P = I` 版・`P = W` 版の Cauchy–Schwarz | `psd_cauchy_schwarz` の 2 通りの使い方 |
+| `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm` | `⟪Wx,Wx⟫ ≤ c²⟪x,x⟫` | `rayleigh_bounds_operator_norm` |
+| `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm_pow` | `⟪W^k x, W^k x⟫ ≤ (c²)^k⟪x,x⟫` | 同上（帰納法） |
+| `NecSuf.IsPsdPair.moment_split` | `⟪W^p x, W^q x⟫ = ⟪x, W^{p+q}x⟫` | Step 2 の書き換え |
+| `NecSuf.IsPsdPair.moment_nonneg` / `moment_le_pow` | `0 ≤ m_k`、`m_k ≤ c^k⟪x,x⟫` | Step 1 の偶奇の場合分け |
+| `NecSuf.IsPsdPair.moment_log_convex` | `m_{k+1}² ≤ m_k m_{k+2}` | Step 2 |
+| `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero` | `m_k > 0`、`W` の核は `{0}` | Step 2 冒頭・`W` の可逆性 |
+| `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le` | 比の単調性と `(xᵀWx)^n ≤ m_n` | Step 3 前半 |
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 | 具体版は抽象版の系か |
+| 人手証明のラベル | 具体版 | 必要十分版 | 具体版は必要十分版の系か |
 | --- | --- | --- | --- |
-| `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.Abstract.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
-| `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(Sq)(_pow)` | `Abstract.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`isPsdPair_of_matrix` 経由） |
-| `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `Abstract.IsPsdPair.moment_le_pow` / `moment_log_convex` / `Abstract.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
+| `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
+| `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(Sq)(_pow)` | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`isPsdPair_of_matrix` 経由） |
+| `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
 | `Z_equals_trace_of_W` | `Ising2D.trace_symTransfer_pow` | なし（下記） | — |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.symTransfer_isSymm` / `symTransfer_posDef` | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.symTransfer_entry_pos` | なし（下記） | — |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
 | `sector_decomposition_of_rayleigh_sup` | `Ising2D.sector_decomposition_of_rayleigh_sup` | なし（下記） | — |
 
-### 抽象版で判明した本質
+### 必要十分版で判明した本質
 
 - **`psd_cauchy_schwarz` に効いているのは 3 つだけ**である:
   係数が**順序体**であること（`t = -(yᵀPx)/(xᵀPx)` を代入する割り算）、形式が**双線型**であること、
@@ -96,7 +96,7 @@
   行列であること・実数であること・有限次元であること・完備性・連続性・平方根は効いていない。
 
 - **`rayleigh_bounds_operator_norm` の `‖Wx‖ ≤ c‖x‖` に平方根は効いていない。**
-  抽象版は `⟪Wx,Wx⟫ ≤ c²⟪x,x⟫` という平方根を取る前の形で、順序体の上で成り立つ。
+  必要十分版は `⟪Wx,Wx⟫ ≤ c²⟪x,x⟫` という平方根を取る前の形で、順序体の上で成り立つ。
   平方根は「ノルム」という言い方をするためだけのもので、証明の内容ではない。
   効いているのは Cauchy–Schwarz（上記 3 条件）と、`W` が形式について自己共役かつ半正定値であることだけ。
   有限次元性・行列であること・実数であること・**スペクトル定理**はいずれも効いていない。
@@ -116,12 +116,12 @@
   （`V₂` も任意の行列でよい）。正定値性は「合同変換 `B*AB` が正定値性を保つ」ことに尽き、
   Lean 側は `B` が対称かつ**可逆**であることしか使っていない（`B` が `exp` であることは不要）。
   成分の正値性は「正の対角行列で挟むと成分の正値性が保たれる」だけである。
-  いずれも既に最小の仮定で述べてあるため、別ファイルの抽象版は置いていない。
+  いずれも既に最小の仮定で述べてあるため、別ファイルの必要十分版は置いていない。
 
 - **セクター分解に効いているのは「対称な対合 `ε`（`ε² = 1`）で `W` と可換なもの」だけ**である。
   `ε` が `σ^x` の積であることも、`W` が転送行列であることも効いていない。
   Lean 側の `Ising2D.sector_decomposition_of_rayleigh_sup` はすでにその一般性で述べてあるので、
-  別途の抽象版は置いていない。
+  別途の必要十分版は置いていない。
 
 ## 3. 他章に仮定として置いた事実
 

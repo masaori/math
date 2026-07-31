@@ -5,8 +5,8 @@
 （`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
 `Athetatilde_002_claim_gamma2_nonzero`）
 
-**抽象版**: `Ising2D/Abstract/OddModePhase.lean`
-（`Ising2D.Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd`）。
+**必要十分版**: `Ising2D/NecSuf/OddModePhase.lean`
+（`Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd`）。
 具体版はその系として導出する（`gamma2_thetaTilde_ne_zero` の証明を参照）。
 
 ## この章の最大の価値
@@ -17,7 +17,7 @@
 別扱いしていた。**半整数運動量ではこの例外が起こらない。**
 
 理由は 1 行に集約できる: `sin θ~_μ = 0` は `M θ~_μ = (2μ-1)π` が `π` の**奇数**倍であることから
-`cos θ~_μ = -1` を強制し（抽象版）、そのとき Step 1 の連立条件の第 2 式
+`cos θ~_μ = -1` を強制し（必要十分版）、そのとき Step 1 の連立条件の第 2 式
 `c_1 cos θ~_μ = s_1c_2` は `-c_1 = s_1c_2` となるが、`K_1, K_2 > 0` の下で
 左辺は負・右辺は正で矛盾する。
 
@@ -34,7 +34,7 @@
   （`gamma2_thetaTilde_ne_zero_checkIndex`）。
 -/
 import Ising2D.Part015.Definition001_GammaTilde
-import Ising2D.Abstract.OddModePhase
+import Ising2D.NecSuf.OddModePhase
 
 namespace Ising2D
 
@@ -49,10 +49,10 @@ theorem IsingParam.c2_pos : 0 < P.const.c2 := by
   simpa [IsingParam.const] using Real.cosh_pos (2 * P.K2)
 
 /-- **人手証明 `gamma_2_theta_tilde_nonzero` の Step 2 + Step 3**:
-`sin θ~_μ = 0` なら `cos θ~_μ = -1`。抽象版 `Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd` の系。 -/
+`sin θ~_μ = 0` なら `cos θ~_μ = -1`。必要十分版 `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` の系。 -/
 theorem cos_thetaTilde_eq_neg_one_of_sin_eq_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ)
     (hsin : Real.sin (thetaTilde M μ) = 0) : Real.cos (thetaTilde M μ) = -1 :=
-  Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd (N := (M : ℤ)) (m := 2 * μ - 1)
+  NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd (N := (M : ℤ)) (m := 2 * μ - 1)
     (odd_two_mul_sub_one μ) (by exact_mod_cast thetaTilde_mul_M M hM μ) hsin
 
 /-- **人手証明 `gamma_2_theta_tilde_nonzero`**: `γ_2(θ~_μ) ≠ 0`（`μ ∈ ℤ` 全体で成り立つ）。 -/

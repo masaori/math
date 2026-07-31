@@ -14,7 +14,7 @@
 * `Ising2D.vecNormSq` / `Ising2D.vecNorm` — `‖x‖²` と `‖x‖`
   （`n → ℝ` に mathlib が入れている既定のノルムは sup ノルムなので、
   ユークリッドノルムは自前で定義する）
-* 抽象版（`Ising2D/Abstract/RayleighMoments.lean`）の
+* 必要十分版（`Ising2D/NecSuf/RayleighMoments.lean`）の
   `IsPsdPair` / `IsPdPair` を実対称（半）正定値行列から作る橋渡し
 
 ## 他章への依存について
@@ -25,7 +25,7 @@
 `W = V_1^{1/2} V_2 V_1^{1/2}` という具体形は
 `Ising2D/Part011/Definition001_SymmetrizedTransferMatrix.lean` で扱う。
 -/
-import Ising2D.Abstract.RayleighMoments
+import Ising2D.NecSuf.RayleighMoments
 import Mathlib.LinearAlgebra.Matrix.Symmetric
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.LinearAlgebra.Matrix.Trace
@@ -140,12 +140,12 @@ theorem mulVecLin_pow_apply (A : Matrix n n ℝ) (k : ℕ) (x : n → ℝ) :
   rw [← mulVecLin_pow]
   rfl
 
-/-! ## 抽象版への橋渡し -/
+/-! ## 必要十分版への橋渡し -/
 
-/-- 実対称半正定値行列から抽象版の `IsPsdPair` を作る。 -/
+/-- 実対称半正定値行列から必要十分版の `IsPsdPair` を作る。 -/
 theorem isPsdPair_of_matrix {A : Matrix n n ℝ} (hA : A.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ A *ᵥ x) :
-    Abstract.IsPsdPair (matBilin (1 : Matrix n n ℝ)) A.mulVecLin where
+    NecSuf.IsPsdPair (matBilin (1 : Matrix n n ℝ)) A.mulVecLin where
   ip_symm := by intro u v; simp [dotProduct_comm]
   ip_psd := by
     intro u
@@ -159,10 +159,10 @@ theorem isPsdPair_of_matrix {A : Matrix n n ℝ} (hA : A.IsSymm)
     intro u
     simpa using hpsd u
 
-/-- 実対称正定値行列から抽象版の `IsPdPair` を作る。 -/
+/-- 実対称正定値行列から必要十分版の `IsPdPair` を作る。 -/
 theorem isPdPair_of_matrix {A : Matrix n n ℝ} (hA : A.IsSymm)
     (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ A *ᵥ x) :
-    Abstract.IsPdPair (matBilin (1 : Matrix n n ℝ)) A.mulVecLin where
+    NecSuf.IsPdPair (matBilin (1 : Matrix n n ℝ)) A.mulVecLin where
   toIsPsdPair := isPsdPair_of_matrix hA (by
     intro x
     rcases eq_or_ne x 0 with rfl | hx

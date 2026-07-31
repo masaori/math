@@ -5,9 +5,9 @@
 （`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
 `Athetatilde_003_claim_relation_of_gamma2`）
 
-**抽象版**: `Ising2D/Abstract/NegConjPair.lean`
-（`Ising2D.Abstract.mul_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul`）。
-具体版は抽象版の系として導出する。
+**必要十分版**: `Ising2D/NecSuf/NegConjPair.lean`
+（`Ising2D.NecSuf.mul_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul`）。
+具体版は必要十分版の系として導出する。
 
 ## 形式化の方針
 
@@ -27,7 +27,7 @@
   この方針では対応物が不要になる。積が負の実数であることは (2) で述べている。
 -/
 import Ising2D.Part015.Claim002_Gamma2TildeNonzero
-import Ising2D.Abstract.NegConjPair
+import Ising2D.NecSuf.NegConjPair
 
 namespace Ising2D
 
@@ -48,25 +48,25 @@ theorem gamma2_neg_thetaTilde_eq (M : ℕ) (μ : ℤ) :
     gamma2 K (-thetaTilde M μ) = -(starRingEnd ℂ) (gamma2 K (thetaTilde M μ)) :=
   gamma2_neg_eq_neg_conj K (thetaTilde M μ)
 
-/-- **人手証明 (2)**: `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2`。抽象版 `Abstract.mul_of_eq_neg_conj` の系。 -/
+/-- **人手証明 (2)**: `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2`。必要十分版 `NecSuf.mul_of_eq_neg_conj` の系。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_absSq :
     gamma2 K θ * gamma2 K (-θ) = -((absGamma2 K θ ^ 2 : ℝ) : ℂ) := by
   rw [absGamma2_sq]
-  exact Abstract.mul_of_eq_neg_conj (gamma2_neg_eq_neg_conj K θ)
+  exact NecSuf.mul_of_eq_neg_conj (gamma2_neg_eq_neg_conj K θ)
 
 /-- **人手証明 (4)**: `(|γ_2(θ)|)^2 = -γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。 -/
 theorem sq_absGamma2 :
     ((absGamma2 K θ : ℝ) : ℂ) ^ 2 = -(gamma2 K θ * gamma2 K (-θ)) :=
-  Abstract.sq_absOf_eq_neg_mul (gamma2_neg_eq_neg_conj K θ)
+  NecSuf.sq_absOf_eq_neg_mul (gamma2_neg_eq_neg_conj K θ)
 
 /-- **人手証明 (5)**: `(i|γ_2(θ)|)^2 = γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。 -/
 theorem sq_I_absGamma2 :
     (Complex.I * ((absGamma2 K θ : ℝ) : ℂ)) ^ 2 = gamma2 K θ * gamma2 K (-θ) :=
-  Abstract.sq_I_mul_absOf_eq_mul (gamma2_neg_eq_neg_conj K θ)
+  NecSuf.sq_I_mul_absOf_eq_mul (gamma2_neg_eq_neg_conj K θ)
 
 /-- **人手証明 (2) の狭義部分**: `γ_2(θ~_μ) ≠ 0` より `|γ_2(θ~_μ)| > 0`。 -/
 theorem absGamma2_thetaTilde_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     0 < absGamma2 P.const (thetaTilde M μ) :=
-  Abstract.absOf_pos (gamma2_thetaTilde_ne_zero P hM μ)
+  NecSuf.absOf_pos (gamma2_thetaTilde_ne_zero P hM μ)
 
 end Ising2D

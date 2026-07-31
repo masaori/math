@@ -4,7 +4,7 @@
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
 - `critical_007_claim_gamma_derivatives_in_kappa`（ラベル `gamma_derivatives_in_kappa`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は不要（後述）。
+**具体版**（人手証明と同じ抽象度）。必要十分版は不要（後述）。
 
 ## 形式化の方針
 
@@ -19,15 +19,15 @@
 これは 0 割りを避けるためではなく、`sinh γ = 2√(S(1+S))` を経由すると
 微分の連鎖律が `S` について閉じるからである。
 
-## 抽象版を立てなかった理由
+## 必要十分版を立てなかった理由
 
 本主張の内容は「`κ ↦ 2 arcsinh(√(sinh²(κ/2)+c))` の 1 階・2 階導関数を計算する」ことであり、
 効いているのは合成関数の微分と `arcsinh' = 1/√(1+y²)` だけである。
 `sin²(θ/2)` は `κ` について定数としてしか効いておらず、実際 `θ` は
 **「`κ` に依存しない非負定数 `c` を足す」以上の役割を持たない**。
-この観察自体を抽象版として切り出しても mathlib の `HasDerivAt` の合成規則を
-書き写すだけになるので、対数発散の本体（`Ising2D/Abstract/LogDivergentIntegral.lean`）と
-Leibniz 則（`Ising2D/Abstract/DiffUnderIntegral.lean`）を抽象版として分離し、
+この観察自体を必要十分版として切り出しても mathlib の `HasDerivAt` の合成規則を
+書き写すだけになるので、対数発散の本体（`Ising2D/NecSuf/LogDivergentIntegral.lean`）と
+Leibniz 則（`Ising2D/NecSuf/DiffUnderIntegral.lean`）を必要十分版として分離し、
 ここは具体版のみとした。
 -/
 import Ising2D.Part020.Claim001_CoshAddHalfAngle

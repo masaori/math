@@ -1,5 +1,37 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-31）: **「抽象版」を「必要十分版」へ改名し、要件を README に厳密化。違反 2 件を修正**
+
+「抽象版」という呼び名が **「抽象的な概念を持ち込んで同じ主張を証明し直すこと」** と誤解される、
+という指摘を受けて点検した。**実際に事故が起きていた。**
+
+- **違反 1（同セッションで私が書いたもの）**: `<tensor_basis>` の「抽象版」が
+  mathlib の `Basis.piTensorProduct` / `Matrix.stdBasis` / `Basis.map` への**別名定義だけ**で、
+  証明が 1 行も無かった。→ **人手証明と同じ成分比較の論法**
+  （`A = Σ A_{IJ} E_{IJ}` と「係数は成分そのもの」）で書き直した。
+  その結果、**本文が `<tensor_basis>` を引いている根拠は必要以上に強い**ことが分かった
+  （テンソル積は 1 度も現れず、任意の可換環・任意の有限添字型で成り立つ）。
+- **違反 2（既存の具体版）**: `<conjugation_is_ring_homomorphism>` の**具体版**が、
+  人手証明の結合律の計算ではなく mathlib の群作用（`ConjAct` / `MulSemiringAction`）から
+  乗法性を出していた（「具体版は人手証明と 1 対 1」に反する）。→ 原文どおりの計算へ直した。
+- **違反ではなかったもの**: `<Z_Y_generate_algebra>` と `<conjugation_is_ring_homomorphism>` の
+  必要十分版は、具体版と同じ手順のまま仮定だけを削った形で、意図どおりだった。
+  既存の必要十分版 40 ファイルを走査した結果、ファイル全体が既製定理の言い直しなのは
+  `NecSuf/ExpDiagonal.lean`（`NormedSpace.map_exp` への丸投げ）**1 件だけ**で、
+  ファイル冒頭に「要件を満たしていない・書き直しが残作業」と明記した。
+
+**呼称と配置（正本は README 4 節）**: 名前空間 `Ising2D.NecSuf`、ディレクトリ `lean/Ising2D/NecSuf/`、
+導出ファイルは `*FromNecSuf.lean`、記録は `lean/docs/necsuf-*.md`。
+`AbstractTensorPow`（抽象テンソル冪という別概念）は改名していない。
+
+**README 4 節に「必要十分版の要件」を明文化した**（満たさないものは必要十分版と認めない）:
+①証明手順が具体版と同じ ②仮定は具体版が実際に使う性質だけ
+③**既製定理への丸投げ・別名定義を禁止**（一致確認は自前証明を書いたうえで補題 1 本）
+④具体版を系として導出 ⑤Lean の中だけに置く ⑥①〜③は具体版にも対称に適用。
+
+**検証**: `lake build` 成功（2994 jobs）、`check-no-sorry.sh` exit 0（**1302 宣言**が標準 3 公理のみ）、
+`structured-latex` の `npm run check` exit 0。
+
 ## 完了（2026-07-31）: **Lean の「具体版＋抽象版」2 本立てで抽象版が無かった 3 主張を解消**
 
 過去の MEMORY が「残り（抽象版が無い）」として挙げていた 3 主張——
@@ -15,8 +47,8 @@
 
 **いずれも具体版が過剰な構造を要求している箇所は見つからなかった。**
 
-記録: `lean/docs/abstract-zy-generate.md` / `lean/docs/abstract-tensor-basis.md` /
-`lean/docs/abstract-conjugation.md`。
+記録: `lean/docs/necsuf-zy-generate.md` / `lean/docs/necsuf-tensor-basis.md` /
+`lean/docs/necsuf-conjugation.md`。
 
 **検証（統合後の最終状態で実行）**: `lake build` 成功（2994 jobs）、
 `bash lean/scripts/check-no-sorry.sh` exit 0（**1301 宣言**がすべて mathlib 標準の 3 公理

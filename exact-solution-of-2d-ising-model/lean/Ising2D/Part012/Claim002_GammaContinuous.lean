@@ -4,8 +4,8 @@
 人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
 - `freeenergy_002_claim_gamma_is_continuous`（ラベル `gamma_is_continuous`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は `Ising2D/Abstract/Arcosh.lean` の
-`Ising2D.Abstract.continuous_arcosh_comp`（定義域は任意の位相空間でよい）。
+**具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/Arcosh.lean` の
+`Ising2D.NecSuf.continuous_arcosh_comp`（定義域は任意の位相空間でよい）。
 本ファイルの `gamma_is_continuous` はその特殊化として導出してある。
 
 人手証明の Step 1（`γ_1` の連続性と周期性）・Step 2（`arccosh` の連続性）・
@@ -29,9 +29,9 @@ theorem gamma1R_periodic (K : IsingConst) (θ : ℝ) :
   simp [gamma1R, Real.cos_add_two_pi]
 
 /-- **人手証明 `gamma_is_continuous` の前半**: `γ` は `ℝ` 上連続。
-抽象版 `Abstract.continuous_arccosh_comp` の特殊化。 -/
+必要十分版 `NecSuf.continuous_arccosh_comp` の特殊化。 -/
 theorem gamma_is_continuous (P : IsingParam) : Continuous (gammaFn P) :=
-  Abstract.continuous_arcosh_comp (continuous_gamma1R P.const) (one_le_gamma1R P)
+  NecSuf.continuous_arcosh_comp (continuous_gamma1R P.const) (one_le_gamma1R P)
 
 /-- **人手証明 `gamma_is_continuous` の後半**: `γ(θ + 2π) = γ(θ)`。 -/
 theorem gammaFn_periodic (P : IsingParam) (θ : ℝ) :

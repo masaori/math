@@ -9,9 +9,9 @@
 - `eigenvalues_of_V`（`eigenvalues_of_V_011_claim_eigenvalues_of_V`）の
   「`V` は対角化可能」
 
-**抽象版**は `Ising2D/Abstract/JointEigenspaceDecomposition.lean`。
-本ファイルの主張はすべて抽象版の特殊化として導出する
-（章 017 の `Ising2D/Part017/Claim006_DirectSumAndDiagonalization.lean` も同じ抽象版の特殊化）。
+**必要十分版**は `Ising2D/NecSuf/JointEigenspaceDecomposition.lean`。
+本ファイルの主張はすべて必要十分版の特殊化として導出する
+（章 017 の `Ising2D/Part017/Claim006_DirectSumAndDiagonalization.lean` も同じ必要十分版の特殊化）。
 
 ## 既存の (5) との関係
 
@@ -23,7 +23,7 @@
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime
 import Ising2D.Part009.Claim013_PositiveDefinite
-import Ising2D.Abstract.JointEigenspaceDecomposition
+import Ising2D.NecSuf.JointEigenspaceDecomposition
 
 namespace Ising2D
 
@@ -40,18 +40,18 @@ variable {M : ℕ} {K : IsingConst} (F : FermiSetup M K)
 `ℂ^{2^M} = ⊕_ε im Q_ε`（`Submodule` の族としての内部直和）。
 
 `Q_ε` は行列なので、`im Q_ε` は線型写像 `x ↦ Q_ε x` の像として述べる。
-抽象版 `Abstract.isInternal_range_matrix_proj` の特殊化。 -/
+必要十分版 `NecSuf.isInternal_range_matrix_proj` の特殊化。 -/
 theorem isInternal_range_Qproj :
     DirectSum.IsInternal fun T : Finset F.Idx =>
       LinearMap.range (Matrix.toLinAlgEquiv' (F.Qproj T)) :=
-  Abstract.isInternal_range_matrix_proj
+  NecSuf.isInternal_range_matrix_proj
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj
 
 /-- 原文 (5) 前半（`im Q_ε` たちが全体を張る）を `Submodule` の言葉で述べた版。
 既存の `sum_Qproj_mulVec` と同じ内容である。 -/
 theorem iSup_range_Qproj_eq_top :
     (⨆ T : Finset F.Idx, LinearMap.range (Matrix.toLinAlgEquiv' (F.Qproj T))) = ⊤ :=
-  Abstract.iSup_range_proj_eq_top
+  NecSuf.iSup_range_proj_eq_top
     (p := fun T : Finset F.Idx => Matrix.toLinAlgEquiv' (F.Qproj T))
     (by rw [← map_sum, F.sum_Qproj, map_one])
 
@@ -59,7 +59,7 @@ theorem iSup_range_Qproj_eq_top :
 既存の `eq_zero_of_sum_eq_zero` と同じ内容である。 -/
 theorem iSupIndep_range_Qproj :
     iSupIndep fun T : Finset F.Idx => LinearMap.range (Matrix.toLinAlgEquiv' (F.Qproj T)) :=
-  Abstract.iSupIndep_range_proj
+  NecSuf.iSupIndep_range_proj
     (p := fun T : Finset F.Idx => Matrix.toLinAlgEquiv' (F.Qproj T))
     (fun T T' h => by rw [← map_mul, F.Qproj_mul_Qproj_of_ne h, map_zero])
     (by rw [← map_sum, F.sum_Qproj, map_one])
@@ -74,7 +74,7 @@ theorem exists_eigenBasis_Vprime (g : F.Idx → ℝ) :
       (∀ a, ∃ T : Finset F.Idx, lam a = ((Real.exp (F.gval g T) : ℝ) : ℂ)) ∧
       (∀ a, (F.Vprime g).mulVec (b a) = lam a • b a) ∧
       LinearMap.toMatrix b b (Matrix.toLinAlgEquiv' (F.Vprime g)) = Matrix.diagonal lam :=
-  Abstract.exists_eigenBasis_of_matrix_proj
+  NecSuf.exists_eigenBasis_of_matrix_proj
     (A := F.Vprime g) (Q := F.Qproj) (c := fun T => ((Real.exp (F.gval g T) : ℝ) : ℂ))
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj (F.Vprime_mul_Qproj g)
 
@@ -83,7 +83,7 @@ theorem exists_eigenBasis_Vprime (g : F.Idx → ℝ) :
 theorem exists_conj_diagonal_Vprime (g : F.Idx → ℝ) :
     ∃ (P P' : TensorPow M) (lam : Conf M → ℂ),
       P * P' = 1 ∧ P' * P = 1 ∧ P' * F.Vprime g * P = Matrix.diagonal lam :=
-  Abstract.exists_conj_diagonal_of_matrix_proj
+  NecSuf.exists_conj_diagonal_of_matrix_proj
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj (F.Vprime_mul_Qproj g)
 
 /-! ## `V` の対角化可能性（原文 `eigenvalues_of_V`） -/
@@ -97,7 +97,7 @@ theorem exists_conj_diagonal_Vmat (g : F.Idx → ℝ) {K1 η : ℂ} {s2 : ℝ} {
     (hVeq : Vmat M K1 η s2 K2star = c • F.Vprime g) :
     ∃ (P P' : TensorPow M) (lam : Conf M → ℂ),
       P * P' = 1 ∧ P' * P = 1 ∧ P' * Vmat M K1 η s2 K2star * P = Matrix.diagonal lam := by
-  refine Abstract.exists_conj_diagonal_of_matrix_proj
+  refine NecSuf.exists_conj_diagonal_of_matrix_proj
     (Q := F.Qproj) (c := fun T => c * ((Real.exp (F.gval g T) : ℝ) : ℂ))
     (fun _ _ h => F.Qproj_mul_Qproj_of_ne h) F.sum_Qproj fun T => ?_
   rw [hVeq, smul_mul_assoc, F.Vprime_mul_Qproj g T, smul_smul]

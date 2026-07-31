@@ -5,13 +5,13 @@
 （`structured-latex/content/016_even_sector_fermions.ts` の
 `evenfermi_003_claim_anticommutator`）
 
-**抽象版**は 008 章のものがそのまま使える: `Ising2D/Abstract/Fermion.lean` の
-`Ising2D.Abstract.car_of_coeffs`（人手証明のラベルは `anticommutator_of_psi`）。
+**必要十分版**は 008 章のものがそのまま使える: `Ising2D/NecSuf/Fermion.lean` の
+`Ising2D.NecSuf.car_of_coeffs`（人手証明のラベルは `anticommutator_of_psi`）。
 本ファイルの 3 式は**すべてその特殊化として導出している**（`checkPsi_car`）。
 
-## 008 章の抽象版がそのまま使えることの確認（本セッションの主目的の 1 つ）
+## 008 章の必要十分版がそのまま使えることの確認（本セッションの主目的の 1 つ）
 
-`Abstract.car_of_coeffs` が要求するのは次だけである。
+`NecSuf.car_of_coeffs` が要求するのは次だけである。
 
 1. 台となる 4 元 `z, y, z', y'` の反交換関係 4 本
    （`[z,z']₊ = D·1`, `[z,y']₊ = 0`, `[y,z']₊ = 0`, `[y,y']₊ = D·1`）
@@ -21,8 +21,8 @@
 半整数運動量では 1 が `Ising2D.acomm_checkZ_checkZ_of_mem` /
 `acomm_checkZ_checkY` / `acomm_checkY_checkZ` / `acomm_checkY_checkY_of_mem`（013 章）で、
 `D = 2M δ_{ν,M+1-μ}` である。整数運動量の `D = 2M δ^M_{μ+ν,0}` と**形が違うだけ**で、
-抽象版の仮定の形（「反交換子がスカラー倍の `1`」）は変わらない。
-したがって**抽象版はそのまま流用でき、書き換えは一切要らなかった**。
+必要十分版の仮定の形（「反交換子がスカラー倍の `1`」）は変わらない。
+したがって**必要十分版はそのまま流用でき、書き換えは一切要らなかった**。
 
 ## 008 章との差（原文 Step 1 の指摘の機械的裏づけ）
 
@@ -45,7 +45,7 @@
 015 章がこれを無条件に閉じれば消える（`K_1, K_2 ∈ ℝ_{>0}` から従う）。
 -/
 import Ising2D.Part016.Definition001_CheckFermi
-import Ising2D.Abstract.Fermion
+import Ising2D.NecSuf.Fermion
 import Ising2D.Part013.Claim005_AnticommutatorCheckZY
 
 namespace Ising2D
@@ -88,8 +88,8 @@ theorem checkP_mul_checkP_conj (K : IsingConst) (hM : M ≠ 0) {μ : ℤ}
 
 /-! ## CAR（原文 `anticommutator_of_check_psi`） -/
 
-/-- **原文 `anticommutator_of_check_psi` の 3 式**（008 章の抽象版
-`Ising2D.Abstract.car_of_coeffs` の特殊化として導出した形）。 -/
+/-- **原文 `anticommutator_of_check_psi` の 3 式**（008 章の必要十分版
+`Ising2D.NecSuf.car_of_coeffs` の特殊化として導出した形）。 -/
 theorem checkPsi_car (K : IsingConst) (hM : M ≠ 0) {μ ν : ℤ}
     (hμ : CheckIndex M μ) (hν : CheckIndex M ν)
     (hga : gamma2 K (thetaTilde M μ) ≠ 0) :
@@ -112,7 +112,7 @@ theorem checkPsi_car (K : IsingConst) (hM : M ≠ 0) {μ ν : ℤ}
       field_simp
       norm_num
     · rw [hδ, if_neg h]; ring
-  exact Abstract.car_of_coeffs (checkP K M μ) (checkQ M) (checkP K M ν) (checkQ M)
+  exact NecSuf.car_of_coeffs (checkP K M μ) (checkQ M) (checkP K M ν) (checkQ M)
     (2 * (M : ℂ) * δ) δ (checkZ M μ) (checkY M μ) (checkZ M ν) (checkY M ν)
     (acomm_checkZ_checkZ_of_mem hM hμ hν) (acomm_checkZ_checkY μ ν)
     (acomm_checkY_checkZ μ ν) (acomm_checkY_checkY_of_mem hM hμ hν) hzero hone

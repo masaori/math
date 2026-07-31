@@ -4,8 +4,8 @@
 正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
 （`sector_003_theorem_c_minus_le_c_plus`、ラベル **`c_minus_le_c_plus`**）
 
-抽象版は `Ising2D/Abstract/PermSector.lean`（同じラベル）の
-`Ising2D.Abstract.sectorRayleighSup_neg_le_pos`。本ファイルの主定理はその**系**である。
+必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）の
+`Ising2D.NecSuf.sectorRayleighSup_neg_le_pos`。本ファイルの主定理はその**系**である。
 
 ## 人手証明との対応
 
@@ -15,7 +15,7 @@
 | Step 2（各点での比較 `xᵀWx ≤ uᵀWu ≤ c_+(M)`） | `quad_le_sectorRayleighSup_pos` |
 | Step 3（上限を取る） | `c_minus_le_c_plus` |
 
-## 抽象版で分かったこと
+## 必要十分版で分かったこと
 
 人手証明 `epsilon_is_sign_flip_permutation` (2) の「`π` は不動点をもたない」（`M ≥ 2` の仮定）は、
 **不等式 `c_-(M) ≤ c_+(M)` そのものには効いていない**。本ファイルの `c_minus_le_c_plus` は
@@ -75,14 +75,14 @@ theorem quad_le_sectorRayleighSup_pos {W : Matrix (Conf M) (Conf M) ℝ} (hW : W
 theorem c_minus_le_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hpos : ∀ k l, 0 < W k l) :
     sectorRayleighSup W (epsilonR M) (-1 : ℝ) ≤ sectorRayleighSup W (epsilonR M) 1 :=
-  Abstract.sectorRayleighSup_neg_le_pos hW hpsd (fun k l => (hpos k l).le)
+  NecSuf.sectorRayleighSup_neg_le_pos hW hpsd (fun k l => (hpos k l).le)
     flipConf_involutive
 
-/-- 上の非負版（抽象版で分かった、本当に効いている仮定）。 -/
+/-- 上の非負版（必要十分版で分かった、本当に効いている仮定）。 -/
 theorem c_minus_le_c_plus_of_nonneg {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hnn : ∀ k l, 0 ≤ W k l) :
     sectorRayleighSup W (epsilonR M) (-1 : ℝ) ≤ sectorRayleighSup W (epsilonR M) 1 :=
-  Abstract.sectorRayleighSup_neg_le_pos hW hpsd hnn flipConf_involutive
+  NecSuf.sectorRayleighSup_neg_le_pos hW hpsd hnn flipConf_involutive
 
 /-! ## 章 011 の `W = V_1^{1/2} V_2 V_1^{1/2}` への特殊化 -/
 

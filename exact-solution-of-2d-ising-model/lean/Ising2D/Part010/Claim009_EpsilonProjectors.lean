@@ -6,17 +6,17 @@
 * `bridge_008_definition_epsilon_projectors`（ラベル **`def_epsilon_projectors`**）
 * `bridge_009_claim_epsilon_projector_properties`（ラベル **`epsilon_projector_properties`**）
 
-抽象版は `Ising2D/Abstract/Projector.lean`（同じラベル）。
+必要十分版は `Ising2D/NecSuf/Projector.lean`（同じラベル）。
 そこで確かめたとおり、(1)(2)(3) に効いているのは
 **`ε` が対合であること（`ε² = I`）と `2` が可逆であること**だけである。
-本ファイルの (2)(3) は抽象版 `Ising2D.Abstract.invProj_sq` /
+本ファイルの (2)(3) は必要十分版 `Ising2D.NecSuf.invProj_sq` /
 `invProj_mul_invProj_neg` / `invProj_add_invProj_neg` の**系として**導いてある。
 
 (4)（`im P^{(±)} = 𝓕^{(±)}`）だけは「行列がベクトルに作用する」という具体的な文脈が要るので、
 ベクトルの言葉で直接述べる（`epsProj_mulVec_mem` と `epsProj_mulVec_eq_self`）。
 -/
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
-import Ising2D.Abstract.Projector
+import Ising2D.NecSuf.Projector
 
 namespace Ising2D
 
@@ -48,10 +48,10 @@ theorem invOf_two_tensorPow : ⅟(2 : TensorPow M) = (1 / 2 : ℂ) • (1 : Tens
 noncomputable def epsProj (M : ℕ) (η : ℂ) : TensorPow M :=
   (1 / 2 : ℂ) • (1 + η • epsilon M)
 
-/-- 抽象版の射影子との一致（`e = η ε`）。 -/
+/-- 必要十分版の射影子との一致（`e = η ε`）。 -/
 theorem epsProj_eq_invProj (η : ℂ) :
-    epsProj M η = Abstract.invProj (η • epsilon M) := by
-  rw [epsProj, Abstract.invProj, invOf_two_tensorPow, smul_mul_assoc, one_mul]
+    epsProj M η = NecSuf.invProj (η • epsilon M) := by
+  rw [epsProj, NecSuf.invProj, invOf_two_tensorPow, smul_mul_assoc, one_mul]
 
 /-- **原文 (1) `ε² = I`**（既存の `Ising2D.epsilon_mul_self` の言い換え）。 -/
 theorem epsilon_sq : epsilon M * epsilon M = 1 := epsilon_mul_self
@@ -61,27 +61,27 @@ theorem eta_smul_epsilon_sq {η : ℂ} (hη : η * η = 1) :
     (η • epsilon M) * (η • epsilon M) = 1 := by
   rw [smul_mul_smul_comm, epsilon_sq, hη, one_smul]
 
-/-- **原文 (2) の前半 `(P^{(±)})^2 = P^{(±)}`**（抽象版の系）。 -/
+/-- **原文 (2) の前半 `(P^{(±)})^2 = P^{(±)}`**（必要十分版の系）。 -/
 theorem epsProj_sq {η : ℂ} (hη : η * η = 1) :
     epsProj M η * epsProj M η = epsProj M η := by
   rw [epsProj_eq_invProj]
-  exact Abstract.invProj_sq (eta_smul_epsilon_sq hη)
+  exact NecSuf.invProj_sq (eta_smul_epsilon_sq hη)
 
-/-- **原文 (2) の後半 `P^{(+)}P^{(-)} = 0`**（抽象版の系）。 -/
+/-- **原文 (2) の後半 `P^{(+)}P^{(-)} = 0`**（必要十分版の系）。 -/
 theorem epsProj_mul_epsProj_neg {η : ℂ} (hη : η * η = 1) :
     epsProj M η * epsProj M (-η) = 0 := by
-  have h : epsProj M (-η) = Abstract.invProj (-(η • epsilon M)) := by
+  have h : epsProj M (-η) = NecSuf.invProj (-(η • epsilon M)) := by
     rw [epsProj_eq_invProj, neg_smul]
   rw [epsProj_eq_invProj, h]
-  exact Abstract.invProj_mul_invProj_neg (eta_smul_epsilon_sq hη)
+  exact NecSuf.invProj_mul_invProj_neg (eta_smul_epsilon_sq hη)
 
-/-- **原文 (3) `P^{(+)} + P^{(-)} = I`**（抽象版の系）。 -/
+/-- **原文 (3) `P^{(+)} + P^{(-)} = I`**（必要十分版の系）。 -/
 theorem epsProj_add_epsProj_neg (η : ℂ) :
     epsProj M η + epsProj M (-η) = 1 := by
-  have h : epsProj M (-η) = Abstract.invProj (-(η • epsilon M)) := by
+  have h : epsProj M (-η) = NecSuf.invProj (-(η • epsilon M)) := by
     rw [epsProj_eq_invProj, neg_smul]
   rw [epsProj_eq_invProj, h]
-  exact Abstract.invProj_add_invProj_neg _
+  exact NecSuf.invProj_add_invProj_neg _
 
 /-! ## (4) 像は `ε` の固有空間 -/
 

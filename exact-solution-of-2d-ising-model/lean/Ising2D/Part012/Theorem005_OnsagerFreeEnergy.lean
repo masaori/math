@@ -4,10 +4,10 @@
 人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
 - `freeenergy_005_theorem_onsager_expression`（ラベル `onsager_free_energy_expression`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は
-`Ising2D/Abstract/LogSqueeze.lean`（`Ising2D.Abstract.log_rpow_mul_exp` /
-`Ising2D.Abstract.tendsto_affine`）と `Ising2D/Abstract/RiemannSum.lean`
-（`Ising2D.Abstract.tendsto_riemann_sum`）。
+**具体版**（人手証明と同じ抽象度）。必要十分版は
+`Ising2D/NecSuf/LogSqueeze.lean`（`Ising2D.NecSuf.log_rpow_mul_exp` /
+`Ising2D.NecSuf.tendsto_affine`）と `Ising2D/NecSuf/RiemannSum.lean`
+（`Ising2D.NecSuf.tendsto_riemann_sum`）。
 
   `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{θ ∈ Θ^{(δ)}_M} γ(θ))`
   `(1/M) log Λ^{(δ)}_M → (1/2) log(2 sinh 2K_2) + (1/4π) ∫_0^{2π} γ(θ) dθ`
@@ -20,7 +20,7 @@
 -/
 import Ising2D.Part012.Claim002_GammaContinuous
 import Ising2D.Part012.Theorem004_RiemannSumToIntegral
-import Ising2D.Abstract.LogSqueeze
+import Ising2D.NecSuf.LogSqueeze
 
 namespace Ising2D
 
@@ -50,7 +50,7 @@ theorem log_LambdaM (P : IsingParam) (δ : ℝ) (M : ℕ) :
     Real.log (LambdaM P δ M)
       = (M : ℝ) / 2 * Real.log (2 * Real.sinh (2 * P.K2))
         + 1 / 2 * ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint δ M μ) :=
-  Abstract.log_rpow_mul_exp (two_sinh_pos P) _ _
+  NecSuf.log_rpow_mul_exp (two_sinh_pos P) _ _
 
 /-- 人手証明 proof の第 2 式（`M > 0` で割った形）:
 `(1/M) log Λ^{(δ)}_M = (1/2) log(2 sinh 2K_2) + (1/2)·(1/M)Σ γ(θ)`。 -/
@@ -74,8 +74,8 @@ theorem onsager_free_energy_expression (P : IsingParam) {δ : ℝ} (hδ0 : 0 ≤
   have hpi : (0 : ℝ) < Real.pi := Real.pi_pos
   -- 第 2 項は riemann_sum_to_integral（実数解析への移行点）から
   have hsum := riemann_sum_to_integral (gamma_is_continuous P) hδ0 hδ1
-  -- 収束列のアフィン変換（抽象版 tendsto_affine）
-  have haff := Abstract.tendsto_affine
+  -- 収束列のアフィン変換（必要十分版 tendsto_affine）
+  have haff := NecSuf.tendsto_affine
     (1 / 2 * Real.log (2 * Real.sinh (2 * P.K2))) (1 / 2) hsum
   have hval : 1 / 2 * Real.log (2 * Real.sinh (2 * P.K2))
       + 1 / 2 * (1 / (2 * Real.pi) * ∫ θ in (0:ℝ)..(2 * Real.pi), gammaFn P θ)
