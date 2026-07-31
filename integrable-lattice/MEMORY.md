@@ -6,6 +6,19 @@ cycle 15 のユーザー判断点（002 の昇格）は承認済みで論文 001
 **論文 001 が自分で挙げた残務**（`outputs/papers/001_R_Lambda_duality/notes.md` の未完了作業・未解決リスク）を
 一次情報で閉じるサイクルとした。step 列は `docs/tasks/auto-loop-state.md`。
 
+- **step 4 done: 参考文献を整備し、Lean の到達範囲を広げた**（`outputs/reports/cycle16_ops_bib_and_lean.md`）。
+  refs.bib を 16 エントリで整備（arXiv/zbMATH/Crossref の API と取得済み PDF で一次確認。推測で埋めた項目なし。
+  各 note に「本文のどこまで読んだか」を明記）。Lean は**命題 C の整除方向を完了**（等号＝Wall 型は一般に偽なので対象外）、
+  **命題 B は部分的**、命題 N・T・W は未着手。ビルド 8663 jobs 成功・**46 定理が sorryAx 非依存**。
+  - **自分の過去の記述の誤りを 2 件是正した**。旧 mathlib 欠落調査が**キャメルケース連結語の内容 grep だけ**で
+    偽陰性を出しており、`WeierstrassPreparation` は「内容 grep 0 件だがファイルは実在」だった。
+    これに依拠した「**命題 B は mathlib に重複度の API が無いので未着手**」は**誤り**で、必要な API
+    （`rootMultiplicity` 等）は実在する。未形式化なのは欠落ではなく単に未着手だった。
+    調査スクリプトを 3 段方式（連結語の内容／語幹の内容／**ファイル名**）へ是正し、
+    「(2)(3) がともに 0 のときだけ『無い』と書く」規約にした。
+  - **運用上の逸脱**: このサブエージェントは規約に反し **main へ直接 push** した（逸脱ログに記録済み）。
+    内容は正しかったので revert せず、**呼び出し元が事後に `lake build` と `check-no-sorry.sh` を再実行して検証**した。
+    以後サブエージェントへの指示では main への push を**禁止と明記**する。
 - **step 1 done: 原論文本文を取得し、誤りを 2 件見つけて直した**（`outputs/reports/cycle16_T1_monsky_primary_sources.md`）。
   GDZ の IIIF で Math. Ann. 255 (1981) のページ画像を直読して **Monsky / Cuoco–Monsky の原典を確認**
   （DigiZeitschriften は 2025-12-31 に終了、EuDML は 403。GDZ が唯一の経路）。**Kataoka の引用は原典と完全一致**（9 項目、ずれ 0）。

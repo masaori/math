@@ -1,0 +1,51 @@
+✔ [8655/8662] Built IntegrableLattice.TruncVal (102s)
+⚠ [8656/8662] Built IntegrableLattice.PropL (119s)
+warning: IntegrableLattice/PropL.lean:57:5: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8657/8662] Built IntegrableLattice.PropV (125s)
+warning: IntegrableLattice/PropV.lean:70:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:129:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:131:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+✔ [8658/8662] Built IntegrableLattice.PropC (127s)
+✔ [8659/8662] Built IntegrableLattice.PropA (99s)
+✖ [8660/8662] Building IntegrableLattice.PropCPeriod (106s)
+trace: .> LEAN_PATH=/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/Cli/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/batteries/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/Qq/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/aesop/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/importGraph/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/plausible/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/mathlib/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/lib/lean /Users/masaori/.elan/toolchains/leanprover--lean4---v4.32.1/bin/lean /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/IntegrableLattice/PropCPeriod.lean -o /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/lib/lean/IntegrableLattice/PropCPeriod.olean -i /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/lib/lean/IntegrableLattice/PropCPeriod.ilean -c /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/ir/IntegrableLattice/PropCPeriod.c --setup /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/ir/IntegrableLattice/PropCPeriod.setup.json --json
+error: IntegrableLattice/PropCPeriod.lean:90:17: Invalid argument name `n` for function `DFunLike.coe`
+
+Hint: Perhaps you meant one of the following parameter names:
+  • `α`: n̵α̲
+  • `β`: n̵β̲
+  • `f`: n̵f̲
+  • `a`: n̵a̲
+error: IntegrableLattice/PropCPeriod.lean:88:33: unsolved goals
+p k : ℕ
+hp : Fact (Nat.Prime p)
+d : ℕ
+hk : k ≠ 0
+A : Matrix (Fin d) (Fin d) (ZMod (p ^ k))
+m : ℕ
+hm : A.map ⇑(ZMod.castHom ⋯ (ZMod p)) ^ m = 1
+φ : ?m.75 := sorry
+⊢ A ^ (m * p ^ (k - 1)) = 1
+error: IntegrableLattice/PropCPeriod.lean:143:32: Application type mismatch: The argument
+  Int.natCast_dvd_natCast.mpr h
+has type
+  ↑p ∣ ↑x.natAbs
+but is expected to have type
+  ↑(↑p).natAbs ∣ x
+in the application
+  Int.natAbs_dvd.mp (Int.natCast_dvd_natCast.mpr h)
+error: Lean exited with code 1
+Some required targets logged failures:
+- IntegrableLattice.PropCPeriod
+error: build failed
+BUILD_EXIT=1

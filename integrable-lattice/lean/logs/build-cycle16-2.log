@@ -1,0 +1,29 @@
+⚠ [8655/8662] Replayed IntegrableLattice.PropL
+warning: IntegrableLattice/PropL.lean:57:5: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8658/8662] Replayed IntegrableLattice.PropV
+warning: IntegrableLattice/PropV.lean:70:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:129:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:131:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+✖ [8660/8662] Building IntegrableLattice.PropCPeriod (88s)
+trace: .> LEAN_PATH=/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/Cli/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/batteries/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/Qq/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/aesop/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/importGraph/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/plausible/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/packages/mathlib/.lake/build/lib/lean:/Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/lib/lean /Users/masaori/.elan/toolchains/leanprover--lean4---v4.32.1/bin/lean /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/IntegrableLattice/PropCPeriod.lean -o /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/lib/lean/IntegrableLattice/PropCPeriod.olean -i /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/lib/lean/IntegrableLattice/PropCPeriod.ilean -c /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/ir/IntegrableLattice/PropCPeriod.c --setup /Users/masaori/git/masaori/math/.claude/worktrees/ethereal-mixing-quasar/integrable-lattice/lean/.lake/build/ir/IntegrableLattice/PropCPeriod.setup.json --json
+error: IntegrableLattice/PropCPeriod.lean:120:15: `ring_nf` made no progress on the goal
+warning: IntegrableLattice/PropCPeriod.lean:160:35: Variable name `hk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+error: Lean exited with code 1
+Some required targets logged failures:
+- IntegrableLattice.PropCPeriod
+error: build failed
+BUILD_EXIT=1
