@@ -65,6 +65,7 @@
 | `Abstract.sum_weight_le_univ` / `sum_weight_empty_le` | 重みが非負のときの最大・最小（非狭義） | `eigenvalues_of_V_plus` (2) |
 | `Abstract.eq_proj_of_eigen` | 単位の分解 `∑ Q_ε = 1` と `Q_ε V = Λ_ε Q_ε` と `Λ_ε ≠ Λ_{ε_0}` だけから固有空間を同定 | `max_eigenvalue_of_V_plus_simple` (3) |
 | `Abstract.mul_pow_eq_of_mul_eq_smul` / `mul_exp_eq_of_mul_eq_smul` | `Q X = gQ ⇒ Q exp(X) = e^g Q`（章 009 の左右反転版） | `eigenvalues_of_check_Vprime` Step 2/3 |
+| `Abstract.isInternal_range_proj` / `isInternal_range_matrix_proj` / `exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` | 内部直和分解と対角化可能性（**章 009 と共通の抽象版**。`Abstract/JointEigenspaceDecomposition.lean`） | `check_joint_eigenspace_decomposition` (5)、`eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus`（対角化可能） |
 
 ### 具体版（`Ising2D`, `Ising2D.CheckFermiSetup`）
 
@@ -113,6 +114,10 @@
 | `checkBigLambda_lt_max` / `checkBigLambda_lt_max_of_gammaFn` | **`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_max`（狭義）** | 同 (2) |
 | `eq_Qproj_univ_mulVec_of_eigen` | **固有値 `Λ̌_max` の固有ベクトルは `im Q̌_{(1,…,1)}` に入る** | 同 (3) 前半 |
 | `finrank_range_Qproj_univ` | **その空間の次元は `1`（単純固有値）** | 同 (3) 後半 |
+| `CheckFermiSetup.isInternal_range_Qproj` | **`ℂ^{2^M} = ⊕_ε im Q̌_ε`（内部直和。各成分は 1 次元）** | `check_joint_eigenspace_decomposition` (5) |
+| `CheckFermiSetup.iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | 同 (5) を `Submodule` の言葉で分けて述べた版 | 同 (5) |
+| `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime` | **`V̌'` は対角化可能** | `eigenvalues_of_check_Vprime` |
+| `exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | **`V^{(+)}` は対角化可能（固有値は `Λ̌_ε`）** | `eigenvalues_of_V_plus` |
 
 ---
 
@@ -129,10 +134,17 @@
 | `constant_c_value_even_sector` | `Ising2D.constant_c_value_even_sector` | `Abstract.const_eq_of_trace_ratio` |
 | `eigenvalues_of_V_plus` (2) | `checkBigLambda_le_max` / `checkBigLambda_min_le` | `Abstract.sum_weight_le_univ` / `sum_weight_empty_le` |
 | `max_eigenvalue_of_V_plus_simple` (2)(3) | `checkBigLambda_lt_max` / `eq_Qproj_univ_mulVec_of_eigen` | `Abstract.sum_weight_lt_of_ne_univ` / `Abstract.eq_proj_of_eigen` |
+| `check_joint_eigenspace_decomposition` (5) | `CheckFermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | `Abstract.isInternal_range_proj`（**章 009 と同一**） |
+| `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus`（対角化可能） | `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | `Abstract.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（**章 009 と同一**） |
 
 具体版はいずれも**抽象版を特殊化して導出している**。
 
 ### 抽象版で判明した本質
+
+- **直和分解と対角化可能性は、章 009 と文字どおり同じ抽象版 1 本で足りる。**
+  章 009 と章 017 の違い（同時固有空間の次元が `2^{M-m}` か `1` か、和の範囲が `𝓘` か `𝓜̌` か）は
+  抽象版の仮定にまったく現れない。効いているのは「有限個の直交射影の和が恒等」と
+  「固有関係 `f Q̌_ε = Λ̌_ε Q̌_ε`」だけである。
 
 - **整数運動量版と半整数運動量版は、同じ抽象版の別の特殊化である。**
   違いは「対をなす添字を与える写像 `σ`」だけで、章 009 は `σ(μ) = -μ`、
@@ -173,8 +185,8 @@
 | --- | --- | --- |
 | `anticommutator_of_check_psi`（章 015）と `V_plus_eq_c_check_Vprime`（章 016） | **仮定として受け取った** | 章 014・015・016 は並行して形式化中。前者は `CheckFermiSetup` の場 `hcc` / `haa` / `hca` として、後者は `constant_c_value_even_sector` などの仮定 `hVeq : VPlus … = c • F.Vprime g` として明示した |
 | `γ(θ~_μ)` と `g : CheckIdx M → ℝ` の同定 | **仮定として受け取った（ただし本章内で埋められる）** | 章 009 と同じく `g` を実数の族として受け取っている。`g i = gammaFn P (thetaTilde M i.1)` を仮定すると `Λ̌_max = Λ^{(1/2)}_M` と狭義最大性が出る（`checkBigLambda_univ_eq_LambdaM`, `checkBigLambda_lt_max_of_gammaFn`）。`γ(θ~_μ) > 0` そのものは**無条件に証明済み**（`gammaFn_thetaTilde_pos`） |
-| `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus` の「対角化可能」 | **未形式化** | 章 009 と同じ理由。「固有ベクトルからなる基底が取れる」を書くには (5) の `Submodule` 版（`DirectSum.IsInternal`）が要る。固有値と重複度そのもの（`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` と `dim im Q̌_ε = 1`、総和 `2^M`）は形式化済みで、後段が使うのはそちらである |
-| `check_joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **部分的** | 人手証明が実際に証明している 2 つ（`x = ∑_ε Q̌_ε x` と直和性）は `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` として形式化済み。`Submodule` 言語への翻訳は原文に無い作業 |
+| `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus` の「対角化可能」 | **形式化した（2026-07-30）** | `Ising2D.CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`Ising2D.exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus`（`Part017/Claim006_DirectSumAndDiagonalization.lean`）。章 009 とまったく同じ抽象版 `Ising2D.Abstract.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` の特殊化である |
+| `check_joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.CheckFermiSetup.isInternal_range_Qproj`（`Part017/Claim006_DirectSumAndDiagonalization.lean`）。`Submodule` の言葉での前半・後半は `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj`。抽象版は章 009 と共通（`Abstract/JointEigenspaceDecomposition.lean`） |
 
 ---
 
