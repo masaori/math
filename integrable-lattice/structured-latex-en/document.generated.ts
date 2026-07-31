@@ -19,11 +19,13 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { Label } from './labels.generated.ts'
 import blocks_001_intro from './content/001_intro.ts'
+import blocks_004_lambda_finite from './content/004_lambda_finite.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_001_intro,
+  ...typeof blocks_004_lambda_finite,
 ]
 
 /** 全ノート。 */

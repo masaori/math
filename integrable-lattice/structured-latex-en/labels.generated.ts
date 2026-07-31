@@ -7,6 +7,12 @@
 
 export const ALL_LABELS = [
   "paper_positioning",
+  "paper_prop_A",
+  "paper_prop_B",
+  "paper_prop_C",
+  "paper_prop_C_trace",
+  "paper_prop_L",
+  "paper_prop_N",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

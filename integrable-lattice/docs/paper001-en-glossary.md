@@ -68,6 +68,31 @@
 | 決定可能 / 決定不能 | **decidable** / **undecidable** | refs.bib の Ax–Kochen の表題 "Diophantine problems over local fields III: Decidable fields" で確認 |
 | 決定手続き | **decision procedure** | 標準語。上の decidable と対で使う |
 
+### 1.2b 第 4 章（命題 A・B・C・C′・N・L）の英訳で確定させた語
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 切断（$p^k$ の $k$） | **truncation level** | `content/004_lambda_finite.ts` の用法（$\min(v_p(Z_N),k)$ の $k$）。「$p^k$ で打ち切る水準」であり、cut / truncation のうち水準を表す語を選んだ |
+| 基準レベル | **base level** | 同ファイル 命題 C′ の「基準レベルを 1 のままにした補正は不可能である」。上界 $\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$ の右辺で参照される水準 $w^*+1$ を指す。**level だけにしない**（truncation level と紛れる） |
+| 鳩の巣原理 | **the pigeonhole principle** | 標準語。命題 A の証明で使う |
+| 指標の一次独立性（Artin） | **Artin's linear independence of characters** | 標準語。命題 B の証明で使う |
+| 同伴行列 | **companion matrix** | 標準語。命題 C・C′ で使う |
+| 根基（$\rho=\prod_i f_i$） | **the radical** | 命題 C′ の定義そのもの。初出で定義式を添える |
+| Gram 行列 | **Gram matrix** | 標準語。命題 C′ の $G=(\operatorname{Tr}T^{i+j})$ |
+| 上界 | **upper bound** | 標準語。「上界が破れる」は **the bound fails**（"is broken" にしない） |
+| 例外集合 | **the exceptional set** | 命題 N。Skolem–Mahler–Lech 型の相殺で等号が崩れる $N$ の集合 |
+| 相殺 | **cancellation** | 命題 N。"cancellation of Skolem–Mahler–Lech type" |
+| 方法論上の注記 | **a methodological note** | 命題 C。0 件の観察を根拠にしてはならない、という教訓の見出し |
+| 反例が破れる／等号が破れる | **equality fails** | 命題 C。「$X$ 例中 $Y$ 例で破れた」は "equality failed for $Y$ out of $X$ examples" |
+| lifting-the-exponent（LTE） | **lifting the exponent (LTE)** | 命題 L。標準語（略号は本文でも LTE のまま） |
+
+**記号の書き方（実測に基づく制約。推測ではない）**: 命題 C′ / C″ の**プライムは ASCII の `'` で書く**
+（`Proposition C'` / `Proposition C''`）。**U+2032 `′` を地の文・タイトルへ書くと英語版の PDF から
+無言で消える**（2026-08-01 に `structured-latex-en` で実測。`build:pdf` の「組めない文字」検査が
+`′` を検出してビルドが落ちた。英語版は和文フォントを読み込まないため落とし先が無い）。
+数式ノードの中では `^{\prime}` を使えるが、**日本語版の数式は 1 文字も変えられない**ので、
+この制約は地の文とタイトルにのみ関わる。
+
 ### 1.3 訳し分けに注意する語
 
 | 日本語 | 英語 | 注意 |
@@ -149,3 +174,13 @@
    統一するなら生成器か本文のどちらかを変える必要があり、**内容の変更を伴うので独断で変えない**。
 2. **要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
    現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
+3. **命題 B（`paper_042_theorem_pi_p1`）の別行立て数式に日本語が入っている。**
+   日本語版の tex がそのまま `\text{は }\chi_T\bmod p\text{ の相異なる根}` を含むため、
+   英語版でも同じ文字列を持っている（数式は 1 文字も変えない規約のため訳者は触っていない）。
+   **この 1 箇所のせいで英語版の `npm run build:pdf` が落ちる**（英語版は和文フォントを
+   読み込まないので「組めない文字」検査が `は・の・相・異・な・る・根` を検出する）。
+   直すには数式を英語へ変え（例: `\text{ is a distinct root of }\chi_T\bmod p`）、
+   その差を `structured-latex-en/tools/ja-en-exceptions.ts` へ理由つきで登録する必要がある。
+   **数式の改変と共有ファイルの編集はどちらも訳者の権限を超えるので、統合側が判断する。**
+   実測: この 1 箇所を英語へ差し替えた状態では PDF が 6 ページで通り、
+   組めない文字 0 件・未解決参照 0 件・版面外の行 0 件だった。
