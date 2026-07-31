@@ -17,7 +17,17 @@
      非退化性不要）。同時に境界も確定した: 一般の ℤ_p[[Γ]] の元では d ≥ 2 のとき決定不能（停止問題へ還元）。
      根拠 `outputs/reports/cycle16_T1_lambda_l0_computability.md`、検証 `sagemath/check/cycle16_T1_lambda_l0/`。
    - 低位項の係数 λ_i, μ_i, ν（i ≥ 1）の明示公式が無い
+     → **2026-07-31（cycle 16 step 3）に非退化 d = 2 塔では解消**（本文 `paper_prop_G` (G1)）。
+     全係数が D の係数からの有限計算で決まる（塔の値 κ_n を使わない）。
+     **未照合の穴**: 補正項 Δ が非自明に効く例は 1 件も見つかっていない（照合できたのは Δ = 0 の場合のみ）。
+     v_ℓ(κ_X) > 0 の例も 0 件。一般の d は未解決のまま。
    - 退化点が n とともに増える P の整理が未了
+     → **2026-07-31（cycle 16 step 3）に「個数」は解決**（本文 `paper_prop_G` (G2)）。
+     退化点は ℙ¹(𝔽_ℓ) の z_H 個の方向に属する点全体で、個数は z_H(ℓ^{2n}−1)/(ℓ+1)、
+     割合 z_H/(ℓ+1) は n に依らず一定。**残る未解決は「個数」ではなく「退化方向の上での付値のずれ」**。
+     主対象の ℓ = 2 トーラス塔は完全に解けた（(G3)。値は DuBose–Vallières 既出なので新規性は主張しない）。
+     ℓ ≡ 1 (mod 4) のトーラス塔は未確定。
+     根拠 `outputs/reports/cycle16_T3_lower_order_and_degeneracy.md`、検証 `sagemath/check/cycle16_T3_lower_order/`。
 2. **Lean 形式化の完了範囲**は `integrable-lattice/lean/README.md` の「形式化の現状」表に従う。
    形式化できなかった命題については、mathlib に何が無いかを一次情報で記録すること。
    - **2026-07-31（cycle 16 step 4）の更新**: 命題 C は**整除方向が完了**（`PropCPeriod.lean`。
