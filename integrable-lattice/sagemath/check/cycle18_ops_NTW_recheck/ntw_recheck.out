@@ -1,0 +1,24 @@
+== 命題 T: v2(tau(L)) vs 2(L-1) ==
+2 even v2= 5 2(L-1)= 2 
+3 odd v2= 4 2(L-1)= 4 match
+4 even v2= 19 2(L-1)= 6 
+5 odd v2= 8 2(L-1)= 8 match
+6 even v2= 29 2(L-1)= 10 
+7 odd v2= 12 2(L-1)= 12 match
+8 even v2= 61 2(L-1)= 14 
+9 odd v2= 16 2(L-1)= 16 match
+10 even v2= 53 2(L-1)= 18 
+11 odd v2= 20 2(L-1)= 20 match
+12 even v2= 83 2(L-1)= 22 
+13 odd v2= 24 2(L-1)= 24 match
+14 even v2= 77 2(L-1)= 26 
+15 odd v2= 28 2(L-1)= 28 match
+
+== 命題 W 適用例: ord_3(tau(3^n)) = 4*3^n-2n-4 ==
+n= 0 L= 1 ord_3= 0 formula= 0
+n= 1 L= 3 ord_3= 6 formula= 6
+n= 2 L= 9 ord_3= 28 formula= 28
+
+== 命題 N: exceptional set of Skolem-Mahler-Lech type ==
+T=[[0,1],[1,0]] Tr(T^N), N=1..10: [0, 2, 0, 2, 0, 2, 0, 2, 0, 2]
+T=[[0,1],[2,0]] Tr(T^N), N=1..10: [0, 4, 0, 8, 0, 16, 0, 32, 0, 64]

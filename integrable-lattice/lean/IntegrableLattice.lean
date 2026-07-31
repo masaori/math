@@ -16,3 +16,6 @@ import IntegrableLattice.PropC
 import IntegrableLattice.PropCPeriod
 import IntegrableLattice.PropB
 import IntegrableLattice.PropBTracePeriod
+import IntegrableLattice.PropN
+import IntegrableLattice.PropT
+import IntegrableLattice.PropW

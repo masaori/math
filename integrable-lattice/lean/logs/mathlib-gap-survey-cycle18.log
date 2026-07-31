@@ -1,0 +1,208 @@
+=== 日付 ===
+2026-07-31T15:12:38Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== mathlib tag / toolchain ===
+v4.32.1
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+--- 命題N p進Newton多角形
+  (1) 内容 grep  "NewtonPolygon"        files=0
+  (2) 内容 grep  "newton" (-i)  files=7
+  (3) ファイル名 "newton" (-i)  files=2
+      内容ヒット（先頭 10 件）:
+        Mathlib/Dynamics/Newton.lean
+        Mathlib/NumberTheory/Padics/Hensel.lean
+        Mathlib/RingTheory/Henselian.lean
+        Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean
+        Mathlib/LinearAlgebra/JordanChevalley.lean
+        Mathlib/Data/Nat/NthRoot/Defs.lean
+        Mathlib/Algebra/Group/ForwardDiff.lean
+      ファイル名ヒット:
+        Mathlib/Dynamics/Newton.lean
+        Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean
+
+--- 命題N 下方凸包
+  (1) 内容 grep  "lowerConvexHull"        files=0
+  (2) 内容 grep  "convex hull" (-i)  files=22
+  (3) ファイル名 "convex hull" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/Analysis/Complex/Polynomial/GaussLucas.lean
+        Mathlib/Analysis/Convex/Birkhoff.lean
+        Mathlib/Analysis/Convex/Caratheodory.lean
+        Mathlib/Analysis/Convex/TotallyBounded.lean
+        Mathlib/Analysis/Convex/Radon.lean
+        Mathlib/Analysis/Convex/Combination.lean
+        Mathlib/Analysis/Convex/Topology.lean
+        Mathlib/Analysis/Convex/Independent.lean
+        Mathlib/Analysis/Convex/Join.lean
+        Mathlib/Analysis/Convex/Visible.lean
+
+--- 命題T/W matrix-tree定理
+  (1) 内容 grep  "matrixTree"        files=0
+  (2) 内容 grep  "kirchhoff" (-i)  files=0
+  (3) ファイル名 "kirchhoff" (-i)  files=0
+
+--- 命題T/W 全域木数
+  (1) 内容 grep  "numSpanningTrees"        files=0
+  (2) 内容 grep  "spanning tree" (-i)  files=3
+  (3) ファイル名 "spanning tree" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean
+        Mathlib/Combinatorics/Quiver/Arborescence.lean
+        Mathlib/Combinatorics/SimpleGraph/Acyclic.lean
+
+--- 命題W 岩澤不変量
+  (1) 内容 grep  "IwasawaInvariant"        files=0
+  (2) 内容 grep  "iwasawa" (-i)  files=6
+  (3) ファイル名 "iwasawa" (-i)  files=1
+      内容ヒット（先頭 10 件）:
+        Mathlib/NumberTheory/Padics/Measure/Basic.lean
+        Mathlib/GroupTheory/GroupAction/Iwasawa.lean
+        Mathlib/GroupTheory/SpecificGroups/Alternating/Simple.lean
+        Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean
+        Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean
+        Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Basic.lean
+      ファイル名ヒット:
+        Mathlib/GroupTheory/GroupAction/Iwasawa.lean
+
+--- 命題N Skolem-Mahler-Lech
+  (1) 内容 grep  "SkolemMahlerLech"        files=0
+  (2) 内容 grep  "mahler" (-i)  files=5
+  (3) ファイル名 "mahler" (-i)  files=3
+      内容ヒット（先頭 10 件）:
+        Mathlib/Analysis/Polynomial/Norm.lean
+        Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+        Mathlib/NumberTheory/Padics/MahlerBasis.lean
+        Mathlib/NumberTheory/Padics/AddChar.lean
+        Mathlib/NumberTheory/MahlerMeasure.lean
+      ファイル名ヒット:
+        Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+        Mathlib/NumberTheory/Padics/MahlerBasis.lean
+        Mathlib/NumberTheory/MahlerMeasure.lean
+
+--- 命題N Strassmann
+  (1) 内容 grep  "Strassmann"        files=0
+  (2) 内容 grep  "strassmann" (-i)  files=0
+  (3) ファイル名 "strassmann" (-i)  files=0
+
+--- 命題N Newton 恒等式（行列トレース版があるか）
+  (1) 内容 grep  "MvPolynomial.psum"        files=2
+  (2) 内容 grep  "newton identit" (-i)  files=0
+  (3) ファイル名 "newton identit" (-i)  files=0
+
+--- 命題N companion 行列
+  (1) 内容 grep  "Matrix.companion"        files=0
+  (2) 内容 grep  "companion matrix" (-i)  files=0
+  (3) ファイル名 "companion matrix" (-i)  files=0
+
+--- 命題B 固有値の代数的重複度
+  (1) 内容 grep  "algebraicMultiplicity"        files=0
+  (2) 内容 grep  "algebraic multiplicity" (-i)  files=1
+  (3) ファイル名 "algebraic multiplicity" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/LinearAlgebra/Eigenspace/Zero.lean
+
+--- 命題B Jordan標準形
+  (1) 内容 grep  "JordanNormalForm"        files=0
+  (2) 内容 grep  "jordan normal" (-i)  files=0
+  (3) ファイル名 "jordan normal" (-i)  files=0
+
+--- 命題B 有理標準形
+  (1) 内容 grep  "rationalCanonicalForm"        files=0
+  (2) 内容 grep  "rational canonical" (-i)  files=0
+  (3) ファイル名 "rational canonical" (-i)  files=0
+
+--- 命題B 行列の乗法的位数
+  (1) 内容 grep  "Matrix.orderOf"        files=0
+
+--- 対照(在ることが既知) Weierstrass準備
+  (1) 内容 grep  "WeierstrassPreparation"        files=0
+  (2) 内容 grep  "weierstrass" (-i)  files=42
+  (3) ファイル名 "weierstrass" (-i)  files=5
+      内容ヒット（先頭 10 件）:
+        Mathlib/Order/OrderIsoNat.lean
+        Mathlib/Topology/ContinuousMap/Weierstrass.lean
+        Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean
+        Mathlib/Topology/ContinuousMap/Algebra.lean
+        Mathlib/Topology/MetricSpace/Sequences.lean
+        Mathlib/Topology/Sequences.lean
+        Mathlib/Topology/Compactness/CountablyCompact.lean
+        Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean
+        Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unital.lean
+        Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean
+      ファイル名ヒット:
+        Mathlib/Topology/ContinuousMap/Weierstrass.lean
+        Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean
+        Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean
+        Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean
+        Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean
+
+--- 対照(使用中) 終結式
+  (1) 内容 grep  "Polynomial.resultant"        files=2
+  (2) 内容 grep  "resultant" (-i)  files=3
+  (3) ファイル名 "resultant" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+        Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+
+--- 対照(使用中) 乗法的位数
+  (1) 内容 grep  "orderOf"        files=67
+
+--- 対照(使用中) 特性多項式
+  (1) 内容 grep  "Matrix.charpoly"        files=11
+  (2) 内容 grep  "charpoly" (-i)  files=38
+  (3) ファイル名 "charpoly" (-i)  files=1
+      内容ヒット（先頭 10 件）:
+        Mathlib/Analysis/InnerProductSpace/Trace.lean
+        Mathlib/Analysis/InnerProductSpace/Spectrum.lean
+        Mathlib/Analysis/Fourier/BoundedContinuousFunctionChar.lean
+        Mathlib/Analysis/Matrix/HermitianFunctionalCalculus.lean
+        Mathlib/Analysis/Matrix/Spectrum.lean
+        Mathlib/NumberTheory/Real/GoldenRatio.lean
+        Mathlib/FieldTheory/Minpoly/Finite.lean
+        Mathlib/RingTheory/Invariant/Galois.lean
+        Mathlib/RingTheory/Invariant/Basic.lean
+        Mathlib/RingTheory/Trace/Basic.lean
+      ファイル名ヒット:
+        Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean
+        Mathlib/LinearAlgebra/Charpoly/Basic.lean
+        Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean
+        Mathlib/LinearAlgebra/Charpoly/BaseChange.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/Univ.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+
+--- 対照(使用中) 一般固有空間
+  (1) 内容 grep  "genEigenspace"        files=12
+  (2) 内容 grep  "eigenspace" (-i)  files=39
+  (3) ファイル名 "eigenspace" (-i)  files=1
+      内容ヒット（先頭 10 件）:
+        Mathlib/Tactic/Linter/DirectoryDependency.lean
+        Mathlib/Analysis/InnerProductSpace/Rayleigh.lean
+        Mathlib/Analysis/InnerProductSpace/SingularValues.lean
+        Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean
+        Mathlib/Analysis/InnerProductSpace/Trace.lean
+        Mathlib/Analysis/InnerProductSpace/Spectrum.lean
+        Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean
+        Mathlib/Analysis/Normed/Operator/Compact/FredholmAlternative.lean
+        Mathlib/Analysis/Matrix/Spectrum.lean
+        Mathlib/FieldTheory/KummerExtension.lean
+      ファイル名ヒット:
+        Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean
+        Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean
+        Mathlib/LinearAlgebra/Eigenspace/ContinuousLinearMap.lean
+        Mathlib/LinearAlgebra/Eigenspace/Matrix.lean
+        Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean
+        Mathlib/LinearAlgebra/Eigenspace/Pi.lean
+        Mathlib/LinearAlgebra/Eigenspace/Basic.lean
+        Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean
+        Mathlib/LinearAlgebra/Eigenspace/Zero.lean
+        Mathlib/LinearAlgebra/Eigenspace/Minpoly.lean
+SURVEY_EXIT=0

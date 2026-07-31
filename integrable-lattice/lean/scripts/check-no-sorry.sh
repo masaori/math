@@ -108,6 +108,31 @@ targets=(
   IntegrableLattice.orderOf_cexMat
   IntegrableLattice.trace_cexMat_pow
   IntegrableLattice.cexMat_period_ne
+  # 命題 N（PropN.lean）: Cayley–Hamilton 由来の下界と、例外集合が無限になる反例
+  IntegrableLattice.trace_pow_add_eq_neg_sum
+  IntegrableLattice.trace_pow_dvd_of_charpoly_coeff_dvd
+  IntegrableLattice.le_padicValInt_trace_pow
+  IntegrableLattice.cexN
+  IntegrableLattice.cexN_sq
+  IntegrableLattice.cexN_pow_add_two
+  IntegrableLattice.trace_cexN_pow_add_two
+  IntegrableLattice.trace_cexN_pow_even
+  IntegrableLattice.trace_cexN_pow_odd
+  IntegrableLattice.cexN_exceptional_unbounded
+  # 命題 T（PropT.lean）: 段 2 の代数核・奇数性の 2 箇所・段 4 の組合せ核・段 5 の総和
+  IntegrableLattice.prod_sub_pow_eq
+  IntegrableLattice.prod_A_sub_zeta_eq
+  IntegrableLattice.not_dvd_two_mul_of_odd
+  IntegrableLattice.padicValNat_two_eq_zero_of_odd
+  IntegrableLattice.newton_two_root_valuations
+  IntegrableLattice.v2_tau_eq_of_root_valuations
+  # 命題 W（PropW.lean）: 非退化性の判定と、閉形式の ν の帰属
+  IntegrableLattice.NoProjZero
+  IntegrableLattice.torus_nondegenerate_three
+  IntegrableLattice.torus_degenerate_two
+  IntegrableLattice.exists_proj_zero_of_linear
+  IntegrableLattice.quintic_cubic_nondegenerate
+  IntegrableLattice.propW_nu_not_integer_of_ell_five_k_three
 )
 
 {
