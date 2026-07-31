@@ -6,7 +6,15 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "paper_claim_resultant",
+  "paper_def_aL",
+  "paper_def_curve",
+  "paper_def_ladder",
+  "paper_def_massieu",
+  "paper_four_axes",
   "paper_positioning",
+  "paper_remark_ising_known",
+  "paper_thm_archimedean",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

@@ -68,6 +68,41 @@
 | 決定可能 / 決定不能 | **decidable** / **undecidable** | refs.bib の Ax–Kochen の表題 "Diophantine problems over local fields III: Decidable fields" で確認 |
 | 決定手続き | **decision procedure** | 標準語。上の decidable と対で使う |
 
+### 1.2b 第 1〜3 章の英訳で新たに確定した語
+
+第 1 章（梯子・四軸）・第 2 章（設定）・第 3 章（アルキメデス素点側）を訳す過程で必要になり、
+上の表に無かった語である。根拠欄の約束は §0 と同じ（このセッションで確認した一次情報だけを書く）。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 分配関数 / 分配多項式 | **partition function** / **partition polynomial** | 統計力学の標準語。`content/002_setup.ts` の $Z_N(x)\in\mathbb{Z}[x]$ は多項式なので、後者は "partition polynomial" と訳し分ける |
+| 多重度 | **multiplicity** | 標準語。`content/002_setup.ts` の $\Omega_N(m)\in\mathbb{N}$（状態数の重み）に対応 |
+| 転送行列 | **transfer matrix** | 標準語 |
+| 分配関数零点 | **the zeros of the partition function** | 標準語（Lee–Yang 零点の一般形）。**"partition zeros" と縮めない** |
+| 位相的エントロピー | **topological entropy** | refs.bib の Lind–Schmidt–Ward の表題 "…entropy for commuting automorphisms of compact groups" が entropy の語を確認する。"topological" は `content/003_archimedean.ts` の本文が明示している修飾 |
+| expansive（な作用） | **expansive** | 日本語版が既に英語のまま使っている（`content/003_archimedean.ts`「expansive な作用」）。訳さない |
+| atoral | **atoral** | 同上。日本語版が英語のまま使っており、refs.bib の Lind–Schmidt–Verbitskiy の表題 "…, atoral polynomials, …" で確認した |
+| 複素単位トーラス | **the complex unit torus** | `content/003_archimedean.ts` の $\mathsf U(P)=\{z\in\mathbb{S}^d:P(z)=0\}$ の定義域。逐語訳 |
+| 周期成分の個数 | **the number of periodic components** | Lind–Schmidt–Verbitskiy の $\mathsf P_\Gamma$ を指す本文の説明。**「周期点数」(number of periodic points) と必ず言い分ける**（`content/003_archimedean.ts` は両者が因子 $c_\Gamma(f)$ だけずれることを本文で明示しており、訳で混ぜると規約の差の段落が意味を失う） |
+| 増大率 | **growth rate** | 標準語。`content/003_archimedean.ts`「周期点の増大率」＝ "the growth rate of the periodic points" |
+| 1 の冪根 | **root of unity** | 標準語 |
+| 単項式倍 | **multiplication by a monomial** | `content/002_setup.ts` の「単項式倍は $a_L$ を変えない」。**"monomial multiple" と名詞化しない**（本文は操作を述べている） |
+| Galois 不変な代数的整数 | **Galois-invariant algebraic integer** | 標準語。ハイフンつきの **Galois-invariant** に統一する |
+| 入れ子の終結式 | **nested resultant**（動詞は "nest the resultant"） | `content/002_setup.ts` の $\mathrm{Res}_z(\dots,\mathrm{Res}_w(\dots))$ の形をそのまま指す。逐語訳 |
+| モニック | **monic** | 標準語 |
+| 素因数分解 / 指数ベクトル | **prime factorisation** / **exponent vector** | 綴りは §2.5 の英綴り（-isation）に従う。$\Lambda$ の等号・順序の定義で対にして使う |
+| 有限手続きで決定できる | **is settled by a finite procedure** / **is determined by a finite procedure** | `content/001_intro.ts`・`002_setup.ts` の言い方。**"can be decided" は §1.2 の decidable と衝突しやすいので、量を求める場面では determine を使う** |
+| 熱力学極限 | **the thermodynamic limit** | 標準語 |
+| 閉形式 | **closed form** | 標準語。「閉形式をもつ」＝ "admits a closed form" |
+| 自由フェルミオン | **free fermions** | 標準語 |
+| Yang–Baxter | **the Yang–Baxter equation** | 標準語。日本語版は「Yang–Baxter」とだけ書くが、英語では equation を補わないと名詞句にならない |
+| #P 困難 | **#P-hard** | 標準語 |
+| 妥当性検査 | **sanity check** | `content/003_archimedean.ts`「枠組みの妥当性検査としてのみ使い」＝ "only as a sanity check on the framework"。**"validity check" にしない**（本文の含意は「枠組みが壊れていないことの確認」であって、正当性の証明ではない） |
+| 全域木エントロピー | **spanning-tree entropy** | §1.2 の「全域木数 = number of spanning trees」の派生。**ここでも complexity を使わない**（軸 3 と衝突するため） |
+| Catalan 定数 | **Catalan's constant** | 標準語。所有格の 's を付ける |
+| 自由エネルギー密度 | **the free energy density** | 標準語。`content/001_intro.ts` の既訳が既にこの形である |
+| 住処（英訳の言い回し） | **the habitat of $X$ is …** / **$X$ lives in …** | §1.1 の habitat の使い方。`content/002_setup.ts`「各量の住処は次のとおり」＝ "The habitats of the quantities involved are as follows" |
+
 ### 1.3 訳し分けに注意する語
 
 | 日本語 | 英語 | 注意 |
@@ -149,3 +184,14 @@
    統一するなら生成器か本文のどちらかを変える必要があり、**内容の変更を伴うので独断で変えない**。
 2. **要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
    現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
+3. **数式の中に日本語が入っているブロックが 1 つある**（第 1〜3 章の英訳で検出）。
+   `paper_012_definition_ladder`（決定可能性の梯子）の `displayMath` が
+   `\underbrace{...}_{\text{無条件に決定可能}}`、`\text{の非線形部}`、`\text{Schanuel 条件付き}`、
+   `\text{決定不能}` を含む。英語版は和文フォントを読み込まないため、**このままでは
+   `npm run build:pdf` が「PDF に組めない文字がある」で落ちる**（実測）。
+   これは訳語の問題ではなく、**数式を書き換えるか対応検証の例外表へ登録するかという構成の判断**なので、
+   翻訳担当は独断で直していない。選択肢は 2 つ:
+   (a) `\text{}` の中身を英訳し、`structured-latex-en/tools/ja-en-exceptions.ts` へ
+   `paper_012_definition_ladder` を理由つきで登録する（数式の多重集合が 1 件だけずれるため）。
+   (b) 日本語版側で `\text{}` を記号・番号へ書き換える（**日本語版は正本なので独断で変更しない**）。
+   なお `\text{}` の中身を英訳すれば PDF が通ることは実測で確認済み（4 ページ、組めない文字 0 件）。
