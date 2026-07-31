@@ -319,6 +319,14 @@ export const resolveTolerantly = <L extends string, M>(
       noteId: note.id,
       title: titleOf(note.title),
       // 出版ターゲットでも本文の解決は走らせる（ノート内の未解決参照を見逃さないため）。
+      //
+      // ここは**先行実装から意図的に変えた 1 点**である。以前は迷子ノート（targets がどの
+      // ブロックにも解決しないノート）の本文を解決せずに読み飛ばしていたため、
+      // 「迷子でありかつ本文に未解決参照を含むノート」の未解決参照は検出されなかった。
+      // 今は迷子かどうかに関わらず本文を解決するので、その未解決参照も診断に出る。
+      // 副作用として `firstErrorOf` の優先順位により、そのようなノートがあるときに
+      // `resolve` が返すエラー種別が `orphan_note` から `unresolved_reference` へ変わる。
+      // 検出漏れが減る方向の変化であり、どちらにせよ出版は止まるので、こちらを採る。
       body: resolveNodes(note.body, note.id),
       anchor: anchorOf(note.id),
       targets: [...note.targets],

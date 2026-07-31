@@ -19,3 +19,4 @@ import IntegrableLattice.PropBTracePeriod
 import IntegrableLattice.PropN
 import IntegrableLattice.PropT
 import IntegrableLattice.PropW
+import IntegrableLattice.PropCTracePeriod

@@ -20,7 +20,7 @@ M1（ドメインモデルの確定）の設計判断のうち、「デザイン
 |---|---|---|---|
 | **著者** | 構造化テキスト（`content/*.ts`・`notes/*.ts`）とラベルを書き、正本の**意味**を所有する | Ising `structured-latex/README.md`（`content/` が証明の正本、ラベルが相互参照のキー） | **意味**（ブロック・ノード・ラベル・参照・意味的メタデータ）。体裁は書かない |
 | **組み込み開発者** | レンダラーをプロジェクトに組み込み、テーマ/レイアウトを与えて各形式を生成する | `README.md` 19–21 行、`docs/milestones.md` M4（「レンダラー本体を書き換えずに、利用者側の定義だけで出力の体裁を変えられる」） | **体裁**（後述の判定基準を満たす操作のみ） |
-| **閲覧者** | 生成された Web サイトを見る | realtime-web-preview `docs/requirements.md` §3.1（別 PC/スマホからの**閲覧 read-only**）、§3.2（ブラウザ側からの編集は out of scope）、§7（認証なし・read-only で許容） | **何も開かない**。閲覧は read-only が要件 |
+| **閲覧者** | 生成された Web サイトを見る | リアルタイムプレビューの `docs/requirements.md` §3.1（別 PC/スマホからの**閲覧 read-only**）、§3.2（ブラウザ側からの編集は out of scope）、§7（認証なし・read-only で許容）。執筆当時は `realtime-web-preview/docs/`、現在は `structured-latex/live-preview/docs/` | **何も開かない**。閲覧は read-only が要件 |
 
 したがって本ドキュメントで「デザインのカスタマイズを開く相手」＝**組み込み開発者**である。
 著者へ開くのは意味だけ（体裁を書かせない）、閲覧者へは何も開かない。この 3 者の混同を避けることが、
@@ -105,7 +105,8 @@ X がこのいずれかを破るなら、それは**意味の操作**であっ�
 // ここに現れる Block / Node / Label / LabelIndex は入力契約（domain-model）が定義する。
 // テーマはこの値を読むだけで、変更しない（判定基準 (a)）。
 type ResolvedDocument = {
-  blocks: readonly Block[]        // 配列順が文書順（realtime-web-preview block.ts と同契約）
+  blocks: readonly Block[]        // 配列順が文書順（当時の realtime-web-preview block.ts と同契約。
+                                  // 現在の正本は domain-model/structured-text/）
   notes: readonly Note[]          // 本文ではない。ターゲットが本文へ混ぜない（判定基準 (b)）
   labelIndex: LabelIndex          // ラベル → block.id（buildLabelIndex）。ref はこれで解決
 }
@@ -180,7 +181,7 @@ integrable `structured-latex/README.md` 10 行「実質的に共有できるの�
 
 両者は独立だが接続する。意味側で新しい kind / Node type を足すと、§3.3 のテーマの
 `Record<BlockKind, …>` / `Record<Node['type'], …>` が**キー不足で型エラーになり**、新しい意味に
-対する体裁の定義を強制する。これは realtime-web-preview の Zod スキーマ（block.ts）を入力契約の
+対する体裁の定義を強制する。これは当時の realtime-web-preview の Zod スキーマ（block.ts）を入力契約の
 SSOT とし、そこから体裁の網羅性を型で導く関係と同型である。「別機構・型で連結」が、
 意味と体裁を混ぜずに整合を保つ最小構成になる。
 
