@@ -82,6 +82,7 @@ lake build
 | `IntegrableLattice/PropN.lean` | 命題 N の下界方向（Cayley–Hamilton だけで出る形）と、例外集合が無限になる反例 | `outputs/reports/cycle3_T1_D-U2_rigorous.md` の**「命題 B」節**（＝本文の命題 N。本文の命題 B とは別物）、`outputs/reports/cycle18_ops_lean_props_NTW.md` |
 | `IntegrableLattice/PropT.lean` | 命題 T の代数的な段・奇数性が効く 2 箇所・Newton 多角形の組合せ核・総和の段 | `outputs/reports/cycle13_T1_observation_T_settlement.md`、`outputs/reports/cycle18_ops_lean_props_NTW.md` |
 | `IntegrableLattice/PropW.lean` | 命題 W の非退化性判定（`Decidable`）と、閉形式の $\nu$ が一般に整数でないこと | `outputs/reports/cycle14_T3_two_variable_criterion.md`、`outputs/reports/cycle18_ops_lean_props_NTW.md` |
+| `IntegrableLattice/PropCTracePeriod.lean` | 命題 C′（トレース列の周期の上界）の使われ方の検算と、命題 C″（cycle 19 の定理 A′・改良した上界・閉形式の不存在） | `outputs/reports/cycle18_T3_trace_period_bound.md`、`outputs/reports/cycle19_T3_trace_period_closed_form_and_lean.md` |
 
 ## 形式化の現状
 
@@ -97,6 +98,7 @@ lake build
 | **N**（線形成長率＝Newton 多角形） | **部分的**（下界方向のみ）／本文を**訂正**した | `PropN.lean`: `trace_pow_add_eq_neg_sum`（Cayley–Hamilton 由来の線形漸化式）、`trace_pow_dvd_of_charpoly_coeff_dvd`（係数条件 $p^{m(d-i)}\mid c_i$ から $p^{mN}\mid p^{md}Z_N$。**固有値も Newton 多角形も $\mathbb{Q}_p$ も使わない**）、`le_padicValInt_trace_pow`（付値版）。反例: `trace_cexN_pow_odd` / `cexN_exceptional_unbounded` | **訂正**: 本文の「Skolem–Mahler–Lech 型の例外は**有限個の $N$**」は誤りで、例外集合は算術級数の有限和＝一般に**無限**（$T=(0\,1;2\,0)$, $p=2$ で全奇数 $N$ が例外）。根拠 report は「算術級数の有限和」と正しく書いていた。**未形式化**: 上界方向（SML / Strassmann が mathlib に無い）、鋭い下界（オフセット無し。Newton 恒等式の行列トレースへの接続が要る。恒等式自体は mathlib にある）、Newton 多角形と固有値の接続（$\overline{\mathbb{Q}_p}$ の付値が要る） |
 | **T**（$v_2(\tau(L))=2(L-1)$） | **部分的**（代数的な段と算術の段）／本文に食い違いなし | `PropT.lean`: `prod_sub_pow_eq`、`prod_A_sub_zeta_eq`（人手証明 (3.1)）、`not_dvd_two_mul_of_odd` / `padicValNat_two_eq_zero_of_odd`（奇数性が効く 2 箇所）、`newton_two_root_valuations`（段 4 の組合せ核）、`v2_tau_eq_of_root_valuations`（段 5 の総和。外部依存を仮定として型に出した形） | **未形式化**: 段 1（matrix-tree。mathlib に全域木数の公式が**無い**）と段 3（2 の不分岐性と Hensel 持ち上げ。Hensel 自体は mathlib に**在る**が $\mathbb{Q}(\zeta_L)$ の完備化への配線が無い）。本文の数値（奇 $L$ の $2(L-1)$、偶 $L$ の $5,19,29,61,53,83,77$）は素の Python で独立に再計算して全一致 |
 | **W**（非退化グラフ塔の閉形式） | **部分的**（判定条件のみ）／本文へ**帰属を追記**した | `PropW.lean`: `NoProjZero`（非退化性の定義と `Decidable` インスタンス）、`torus_nondegenerate_three` / `torus_degenerate_two`（本文の適用例 2 つを `decide` で検算）、`exists_proj_zero_of_linear`（非退化なら $k\ge2$）、`quintic_cubic_nondegenerate`、`propW_nu_not_integer_of_ell_five_k_three` | **追記**: 本文は $\nu$ の帰属を書いていなかったが、$\frac{k(\ell+1)}{\ell-1}$ は一般に非整数（$\ell=5,k=3$ で $9/2$。この $(\ell,k)$ は非退化性と両立する）なので $\nu\in\mathbb{Q}$ であって一般に $\mathbb{Z}$ ではない。**未形式化**: 閉形式本体。上界方向が Cuoco–Monsky に依拠し、岩澤型漸近は mathlib に無い（cycle 16・18 の grep で一致）。matrix-tree も要る |
+| **C′・C″**（トレース列の周期） | **部分的**（核と反例）／本文に食い違いなし | `PropCTracePeriod.lean`: `TraceOrth` / `IsTracePeriodAt`（周期の内容）、`traceOrth_of_forall_pow`（生成元の冪だけから全 $x$ へ）、`dvd_of_mulVec_dvd`（定理 6 の Smith 標準形の段を $HG=p^wI$ の形で）、`traceOrth_one_add_pow`（**定理 A′ の心臓部**）、`isTracePeriodAt_mul_prime`（$t_{k+1}\mid p\,t_k$）、反例 `lucas_two_power_not_period`（命題 12）・`trace_period_not_affine`（閉形式の不存在） | **食い違いは無かった**が、**過剰仮定を 2 件検出**: (1) 定理 A′ の証明に $p$ の素数性は要らない（効くのは $\binom{p}{1}=p$ だけ）、(2)「周期」の最小性も使っていない（最小性を仮定すると結論が述べられない）。**未形式化**: 定理 W（$w^*$ の代数的閉形式）。mathlib には `traceDual` / `differentIdeal` / `aeval_derivative_mem_differentIdeal` / `conductor_mul_differentIdeal` が**在る**（`logs/mathlib-gap-survey-cycle19.log`）。無いのは (a) 重み付きトレース形式の Gram 行列への配線と (b) **整数行列の単因子**（`Basis.SmithNormalForm` は部分加群の基底の形でしか無い）である |
 
 ### mathlib 欠落調査の一次情報（2026-07-31 再実施、mathlib commit `520045ab14e2` / v4.32.1）
 
@@ -173,3 +175,7 @@ lake build
 | `logs/check-no-sorry-cycle18.log` | cycle 18 step 3 の `scripts/check-no-sorry.sh`。列挙した **85 個**の定理はいずれも `sorryAx` 非依存 / `CHECK_EXIT=0` |
 | `logs/cache-get-cycle18.log` | cycle 18 の `lake exe cache get` / `CACHE_EXIT=0` |
 | `logs/mathlib-gap-survey-cycle18.log` | cycle 18 の欠落調査。SML・Strassmann・companion 行列・Newton 恒等式を検索語に追加した版 |
+| `logs/build-cycle19-propC.log` | cycle 19 step 3 の `lake build`。末尾 `Build completed successfully (8668 jobs).` / `BUILD_EXIT=0` |
+| `logs/check-no-sorry-cycle19.log` | cycle 19 step 3 の `scripts/check-no-sorry.sh`。列挙した **107 個**の定理はいずれも `sorryAx` 非依存 / `CHECK_EXIT=0` |
+| `logs/cache-get-cycle19.log` | cycle 19 の `lake exe cache get` / `CACHE_EXIT=0` |
+| `logs/mathlib-gap-survey-cycle19.log` | cycle 19 の欠落調査（3 段方式）。`traceDual` / `differentIdeal` / Smith 標準形 / Lucas 数を検索語にした版。**`traceDual` と `differentIdeal` は実在する**ことを確認した記録 |
