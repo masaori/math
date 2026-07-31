@@ -605,18 +605,34 @@ A\,\check{n}_\nu
     sourcePath: SRC,
     sourceOrdinal: 6,
     title: {
-      tex: String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}\cdots\check{n}_{\mu_k}\right) = 2^{M-k}`,
+      tex: String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right) = 2^{M-k}
+\quad \left(R_\mu^{(1)} = \check{n}_\mu,\ R_\mu^{(0)} = I - \check{n}_\mu\right)`,
     },
     labels: ["trace_of_check_number_operator_product"],
     statement: [
       paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " と ",
+        math(String.raw`e \in \{0,1\}`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`R_\mu^{(1)} := \check{n}_\mu, \qquad R_\mu^{(0)} := I - \check{n}_\mu
+\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と書く（",
+        ref("def_check_number_operator"),
+        "）。このとき、",
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
-        " と、相異なる ",
+        "、相異なる ",
         math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
+        "、および ",
+        math(String.raw`e_1,\dots,e_k \in \{0,1\}`),
         " について、",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}\check{n}_{\mu_2}\cdots\check{n}_{\mu_k}\right)
+        String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}R_{\mu_2}^{(e_2)}\cdots R_{\mu_k}^{(e_k)}\right)
 = 2^{M-k}`,
       ),
       paragraph([
@@ -627,12 +643,31 @@ A\,\check{n}_\nu
         " と読み、",
         math(String.raw`\mathrm{tr}(I) = 2^M`),
         " である。）とくに ",
+        math(String.raw`e_1 = \cdots = e_k = 1`),
+        " と取れば ",
+        math(String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}\cdots\check{n}_{\mu_k}\right) = 2^{M-k}`),
+        " であり、",
         math(String.raw`\mathrm{tr}(\check{n}_\mu) = 2^{M-1}`),
         "、",
         math(String.raw`k = M`),
         " のとき ",
         math(String.raw`\mathrm{tr}(\check{n}_1\cdots\check{n}_M) = 1`),
         "。",
+      ]),
+      paragraph([
+        "**因子として ",
+        math(String.raw`\check{n}_\mu`),
+        " と ",
+        math(String.raw`I - \check{n}_\mu`),
+        " の混在を許しているのが要点である。** これにより ",
+        ref("check_joint_eigenspace_decomposition"),
+        " の ",
+        math(String.raw`\mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 1`),
+        " が、",
+        math(String.raw`\prod_{\mu \notin T}\left(I - \check{n}_\mu\right)`),
+        " を部分集合の和へ展開して二項定理で足し上げる、という手順を経ずに直接得られる（",
+        math(String.raw`k = M`),
+        " の場合）。",
       ]),
     ],
     proof: [
@@ -664,11 +699,17 @@ A\,\check{n}_\nu
         math(String.raw`k \geq 1`),
         " とし、相異なる ",
         math(String.raw`k-1`),
-        " 個の添字については主張が成り立つと仮定する。相異なる ",
+        " 個の添字（と任意の ",
+        math(String.raw`e`),
+        " の選び方）については主張が成り立つと仮定する。相異なる ",
         math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
+        " と ",
+        math(String.raw`e_1,\dots,e_k \in \{0,1\}`),
         " を取り、",
       ]),
-      displayMath(String.raw`P := \check{n}_{\mu_2}\check{n}_{\mu_3}\cdots\check{n}_{\mu_k}`),
+      displayMath(
+        String.raw`P := R_{\mu_2}^{(e_2)}R_{\mu_3}^{(e_3)}\cdots R_{\mu_k}^{(e_k)}`,
+      ),
       paragraph([
         "とおく。",
         math(String.raw`\mu_1 \neq \mu_j`),
@@ -682,13 +723,26 @@ A\,\check{n}_\nu
         math(String.raw`\check\psi_{M+1-\mu_1}`),
         " はどの ",
         math(String.raw`\check{n}_{\mu_j}`),
-        " とも可換であり、したがって積 ",
+        " とも可換であり、",
+        math(String.raw`I`),
+        " は任意の行列と可換だから（",
+        ref("scalar_identity_commutes"),
+        "）、",
+        math(String.raw`R_{\mu_j}^{(e_j)} \in \left\{\check{n}_{\mu_j},\, I - \check{n}_{\mu_j}\right\}`),
+        " とも可換である。したがって積 ",
         math(String.raw`P`),
-        " とも可換である。同じく (2) より ",
+        " とも可換である。同じく (2) と ",
+        ref("scalar_identity_commutes"),
+        " より ",
         math(String.raw`\check{n}_{\mu_1}`),
         " と ",
         math(String.raw`P`),
         " は可換である。",
+      ]),
+      paragraph([
+        "まず ",
+        math(String.raw`2\,\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \mathrm{tr}(P)`),
+        " を示す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -711,25 +765,56 @@ A\,\check{n}_\nu
       paragraph([
         "移項して ",
         math(String.raw`2\,\mathrm{tr}(\check{n}_{\mu_1}P) = \mathrm{tr}(P)`),
-        "。帰納法の仮定から ",
-        math(String.raw`\mathrm{tr}(P) = 2^{M-(k-1)}`),
-        " なので",
+        "、すなわち ",
+        math(String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \tfrac12\mathrm{tr}(P)`),
+        "。これから ",
+        math(String.raw`e_1`),
+        " が ",
+        math(String.raw`1`),
+        " でも ",
+        math(String.raw`0`),
+        " でも同じ値になる：",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}\cdots\check{n}_{\mu_k}\right)
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(R_{\mu_1}^{(1)}P\right)
+&= \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \tfrac12\,\mathrm{tr}(P), \\
+\mathrm{tr}\!\left(R_{\mu_1}^{(0)}P\right)
+&= \mathrm{tr}\!\left(\left(I - \check{n}_{\mu_1}\right)P\right)
+ = \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
+   \quad (\because \text{トレースの線型性}) \\
+&= \mathrm{tr}(P) - \tfrac12\,\mathrm{tr}(P) = \tfrac12\,\mathrm{tr}(P)
+\end{aligned}`,
+      ),
+      paragraph([
+        "（第 2 式で ",
+        math(String.raw`(I - \check{n}_{\mu_1})P = P - \check{n}_{\mu_1}P`),
+        " は分配法則である。）帰納法の仮定から ",
+        math(String.raw`\mathrm{tr}(P) = 2^{M-(k-1)}`),
+        " なので、いずれの場合も",
+      ]),
+      displayMath(
+        String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right)
 = \frac{1}{2}\,\mathrm{tr}(P) = \frac{1}{2}\cdot 2^{M-k+1} = 2^{M-k}`,
       ),
       paragraph([
         "（",
         ref("check_number_operators_commute"),
-        " (2) より積の順序に依らないので、一般の相異なる添字列についても同じ結論を得る。）",
+        " (2) と ",
+        ref("scalar_identity_commutes"),
+        " より ",
+        math(String.raw`R_\mu^{(e)}`),
+        " たちは互いに可換で積の順序に依らないので、どの因子を ",
+        math(String.raw`\mu_1`),
+        " の位置に置いてもよく、一般の相異なる添字列についても同じ結論を得る。）",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "009 章の trace_of_number_operator_product の半整数運動量版。添字集合が I ではなく {1,…,M} 全部になるので、k は M まで走れて tr(ň_1⋯ň_M) = 2^0 = 1 になる（009 章では臨界点で |I| = M−1 までしか走れなかった）。",
-        "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（{1,…,M} の全部分集合について、残差 ≤ 7.1e-15）。",
+        "009 章と違い、因子として ň_μ と I − ň_μ の混在を許す形で述べてある。どちらの因子でも tr(R_μ P) = tr(P)/2 が成り立つので帰納法は 1 段で済み、check_joint_eigenspace_decomposition の tr(Q̌_ε) = 1 を、∏(I − ň) の部分集合展開と二項定理を経ずに k = M の場合として直接得られる（docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md の指摘 1 に対応。Lean 側の Ising2D.Abstract.two_pow_smul_tau_projOn が同じ構造である）。",
+        "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（ň のみの積について {1,…,M} の全部分集合、残差 ≤ 7.1e-15）。因子が混在する場合は check_02 の tr(Q̌_ε) = 1（k = M、残差 ≤ 1.1e-15）が該当する。",
       ],
     },
   },
@@ -767,6 +852,7 @@ A\,\check{n}_\nu
         ],
         [
           math(String.raw`\text{(3)}\quad \check{n}_\nu \check{Q}_\epsilon
+= \check{Q}_\epsilon \check{n}_\nu
 = \epsilon_\nu \check{Q}_\epsilon \quad (\nu \in \check{\mathcal{M}})`),
         ],
         [
@@ -804,6 +890,8 @@ A\,\check{n}_\nu
     proof: [
       paragraph([
         "以下、",
+        ref("trace_of_check_number_operator_product"),
+        " と同じ記号を使う：",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " と ",
         math(String.raw`e \in \{0,1\}`),
@@ -811,7 +899,7 @@ A\,\check{n}_\nu
         math(String.raw`R_\mu^{(1)} := \check{n}_\mu`),
         "、",
         math(String.raw`R_\mu^{(0)} := I - \check{n}_\mu`),
-        " と書く。",
+        "。",
         math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}`),
         " である。",
       ]),
@@ -926,50 +1014,58 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         "。",
       ]),
       paragraph([
+        "**左右どちらから掛けても同じである。** 実際 ",
+        math(String.raw`\check{n}_\nu`),
+        " は ",
+        math(String.raw`\check{Q}_\epsilon`),
+        " のどの因子 ",
+        math(String.raw`R_\mu^{(\epsilon_\mu)}`),
+        " とも可換である（",
+        math(String.raw`\mu \neq \nu`),
+        " なら Step 0 の可換性、",
+        math(String.raw`\mu = \nu`),
+        " なら ",
+        math(String.raw`\check{n}_\nu`),
+        " と ",
+        math(String.raw`\check{n}_\nu`),
+        " または ",
+        math(String.raw`I - \check{n}_\nu`),
+        " の可換性で、後者は ",
+        ref("scalar_identity_commutes"),
+        " による）から、",
+        math(String.raw`\check{Q}_\epsilon \check{n}_\nu = \check{n}_\nu \check{Q}_\epsilon
+= \epsilon_\nu \check{Q}_\epsilon`),
+        " を得る。",
+      ]),
+      paragraph([
         "Step 4（(4) の証明）。",
-        math(String.raw`T := \{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\}`),
-        " とおくと ",
-        math(String.raw`\check{Q}_\epsilon = \left(\prod_{\mu \in T} \check{n}_\mu\right)
-\prod_{\mu \notin T}\left(I - \check{n}_\mu\right)`),
-        "。第 2 の積を分配法則で展開すると",
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}`),
+        " は、相異なる ",
+        math(String.raw`M`),
+        " 個の添字 ",
+        math(String.raw`1,\dots,M \in \check{\mathcal{M}}`),
+        " についての ",
+        math(String.raw`R_\mu^{(e)}`),
+        " の積そのものなので、",
+        ref("trace_of_check_number_operator_product"),
+        " を ",
+        math(String.raw`k = M`),
+        "、",
+        math(String.raw`(\mu_1,\dots,\mu_M) = (1,\dots,M)`),
+        "、",
+        math(String.raw`(e_1,\dots,e_M) = (\epsilon_1,\dots,\epsilon_M)`),
+        " として適用でき、",
       ]),
       displayMath(
-        String.raw`\prod_{\mu \in \check{\mathcal{M}}\setminus T}\left(I - \check{n}_\mu\right)
-= \sum_{S \subseteq \check{\mathcal{M}}\setminus T} (-1)^{|S|}
-  \prod_{\mu \in S} \check{n}_\mu`,
+        String.raw`\mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 2^{M-M} = 1`,
       ),
       paragraph([
-        "であるから、トレースの線型性（",
-        ref("trace_basic_properties"),
-        " (1)）と ",
-        ref("trace_of_check_number_operator_product"),
-        "（",
-        math(String.raw`T`),
-        " と ",
-        math(String.raw`S`),
-        " は交わらないので ",
-        math(String.raw`T \cup S`),
-        " の元は相異なる ",
-        math(String.raw`|T| + |S|`),
-        " 個）より",
+        "を得る（",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+        " の元をすべて使い切っているので指数が ",
+        math(String.raw`0`),
+        " になる。ここが 009 章と分かれる点である）。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-&= \sum_{S \subseteq \check{\mathcal{M}}\setminus T} (-1)^{|S|}\,
-   \mathrm{tr}\!\left(\prod_{\mu \in T \cup S} \check{n}_\mu\right)
-   \quad (\because \text{直前の展開と trace\_basic\_properties (1)}) \\
-&= \sum_{S \subseteq \check{\mathcal{M}}\setminus T} (-1)^{|S|}\, 2^{M - |T| - |S|}
-   \quad (\because \text{trace\_of\_check\_number\_operator\_product}) \\
-&= 2^{M-|T|}\sum_{j=0}^{M-|T|}\binom{M-|T|}{j}(-1)^{j}\,2^{-j}
-   \quad \left(\because \left|\check{\mathcal{M}}\setminus T\right| = M - |T|
-   \text{ で、大きさ } j \text{ の部分集合は } \tbinom{M-|T|}{j} \text{ 個}\right) \\
-&= 2^{M-|T|}\left(1 - \tfrac{1}{2}\right)^{M-|T|}
-   \quad (\because \text{二項定理}) \\
-&= 2^{M-|T|}\cdot 2^{-(M-|T|)} = 1
-   \quad \left(\because \left(\tfrac12\right)^{M-|T|} = 2^{-(M-|T|)}\right)
-\end{aligned}`,
-      ),
       paragraph([
         math(String.raw`\check{Q}_\epsilon`),
         " は Step 1 より冪等なので、",
@@ -1053,7 +1149,8 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       ),
       paragraph(["とおく（", ref("def_gamma_theta_tilde_mu"), "）。このとき"]),
       displayMath(
-        String.raw`\check{V}'\,\check{Q}_\epsilon = e^{\check{g}(\epsilon)}\,\check{Q}_\epsilon`,
+        String.raw`\check{V}'\,\check{Q}_\epsilon = \check{Q}_\epsilon\,\check{V}'
+= e^{\check{g}(\epsilon)}\,\check{Q}_\epsilon`,
       ),
       paragraph([
         "が成り立つ。すなわち ",
@@ -1127,6 +1224,19 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
 \end{aligned}`,
       ),
       paragraph([
+        "同じ計算を ",
+        ref("check_joint_eigenspace_decomposition"),
+        " (3) の右から掛ける形 ",
+        math(String.raw`\check{Q}_\epsilon\check{n}_\mu = \epsilon_\mu\check{Q}_\epsilon`),
+        " に対して行えば ",
+        math(String.raw`\check{Q}_\epsilon\check{X} = \check{g}(\epsilon)\check{Q}_\epsilon`),
+        " も得られる。とくに ",
+        math(String.raw`\check{X}\check{Q}_\epsilon = \check{Q}_\epsilon\check{X}`),
+        "（両者が同じ ",
+        math(String.raw`\check{g}(\epsilon)\check{Q}_\epsilon`),
+        " に等しい）である。",
+      ]),
+      paragraph([
         "Step 2（",
         math(String.raw`\check{X}^k\check{Q}_\epsilon = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
         "）。",
@@ -1175,6 +1285,26 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         " に収束する。極限の一意性より ",
         math(String.raw`\check{V}'\check{Q}_\epsilon = e^{\check{g}(\epsilon)}\check{Q}_\epsilon`),
         "。",
+      ]),
+      paragraph([
+        "Step 3'（右から掛ける形）。Step 1 の ",
+        math(String.raw`\check{Q}_\epsilon\check{X} = \check{g}(\epsilon)\check{Q}_\epsilon`),
+        " から、Step 2 と同じ帰納法で ",
+        math(String.raw`\check{Q}_\epsilon\check{X}^k = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
+        " であり、Step 3 と同じ極限操作（",
+        ref("matrix_multiplication_continuity"),
+        "）で",
+      ]),
+      displayMath(
+        String.raw`\check{Q}_\epsilon\check{V}' = e^{\check{g}(\epsilon)}\check{Q}_\epsilon
+= \check{V}'\check{Q}_\epsilon`,
+      ),
+      paragraph([
+        "を得る。**この左からの形（",
+        math(String.raw`\check{Q}_\epsilon`),
+        " を固有方程式の両辺に左から掛ける使い方）が ",
+        ref("max_eigenvalue_of_V_plus_simple"),
+        " (3) で必要になる。**",
       ]),
       paragraph([
         "Step 4（固有値の言い換え）。",
@@ -1228,6 +1358,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       status: "added",
       notes: [
         "009 章の eigenvalues_of_Vprime の半整数運動量版。重複度 2^{M-m} が m = M により 1 になる。",
+        "V̌' Q̌_ε = Q̌_ε V̌' = e^{ǧ(ε)} Q̌_ε の「左から掛ける形」（Step 3'）を明示してある。max_eigenvalue_of_V_plus_simple (3) がこの形を使うため（Lean 側は Ising2D.CheckFermiSetup.Qproj_mul_Vprime / Ising2D.Qproj_mul_VPlus）。根拠は X̌ と Q̌_ε の可換性で、これは check_joint_eigenspace_decomposition (3) の両側版から従う。",
         "「固有値がすべて相異なるわけではない」ことは一次情報で確認した（sagemath/check/050_claim_even_sector_eigenvalues/check_03。M=2..5・6 組の (K1,K2) で、相異なる ε が同じ固有値を与える隣接ペアが 144 件現れる）。本文でも相異なるとは主張していない。",
         "数値検証: 同 check_03（X̌Q̌_ε = ǧ(ε)Q̌_ε、V̌'Q̌_ε = e^{ǧ(ε)}Q̌_ε、Sage の固有値集合との一致。残差 ≤ 8.0e-12）。",
       ],
@@ -1536,7 +1667,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
     conversion: {
       status: "added",
       notes: [
-        "009 章の V_is_positive_definite の (+) セクター版。009 章の主張は V_eq_Vprime の V（why_008_applies_only_to_minus_sector で確定したとおり実質 (−) 専用）に結びついているので、V^{(+)} について改めて述べた。証明で使う iH_is_real_symmetric と exp_hermitian_is_positive_definite はどちらも複号によらない形で述べられているので、内容は 009 章の Step 1〜5 と同一である。",
+        "009 章の V_is_positive_definite の (+) セクター版。009 章の主張は V_eq_Vprime の V（why_008_applies_only_to_minus_sector で確定したとおり実質 (−) 専用）に結びついているので、V^{(+)} について改めて述べた。証明で使う iH_is_real_symmetric と exp_hermitian_is_positive_definite はどちらも複号によらない形で述べられているので、内容は 009 章の Step 1〜5 と同一である。(V^{(+)})^{-1} の正定値性についても同一である: 009 章の V_is_positive_definite は statement で「V は可逆で正定値、V^{-1} も正定値である」と述べ、その Step 4 で −(1/2)S_1^{(±)} と −S_2 のエルミート性から Step 2〜3 を再適用して示している（本章の Step 4 と同じ手順）。ただし Lean 側には 009 章の V^{-1}（Ising2D.VmatInv）に対応する正定値性の定理が無く、章 017 で新たに Ising2D.VPlusInv_posDef として証明した。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05（S_1^{(+)}, S_2 の実対称性の残差 0.0、V^{(+)} のエルミート性の残差 ≤ 2.0e-12、固有値の全体最小 3.2e-4 > 0、M=2,3,4,5・6 組の (K_1,K_2)）。",
       ],
     },
@@ -1790,8 +1921,9 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       list([
         [
           math(String.raw`\text{(1)}\quad V^{(+)}\check{Q}_\epsilon
+= \check{Q}_\epsilon V^{(+)}
 = \check\Lambda_\epsilon \check{Q}_\epsilon`),
-          "。とくに ",
+          "（左右どちらから掛けても同じ）。とくに ",
           math(String.raw`V^{(+)}`),
           " は対角化可能で、その固有値は重複度を込めて ",
           math(String.raw`\left\{\check\Lambda_\epsilon\right\}_{\epsilon}`),
@@ -1840,6 +1972,19 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
 = (2s_2)^{M/2}e^{\check{g}(\epsilon)}\check{Q}_\epsilon
 = \check\Lambda_\epsilon\check{Q}_\epsilon`,
       ),
+      paragraph([
+        "同じ式変形を ",
+        ref("eigenvalues_of_check_Vprime"),
+        " の Step 3' の ",
+        math(String.raw`\check{Q}_\epsilon\check{V}' = e^{\check{g}(\epsilon)}\check{Q}_\epsilon`),
+        " に対して行い（スカラー ",
+        math(String.raw`(2s_2)^{M/2}`),
+        " は ",
+        ref("scalar_identity_commutes"),
+        " により左右どちらへも出せる）、",
+        math(String.raw`\check{Q}_\epsilon V^{(+)} = \check\Lambda_\epsilon\check{Q}_\epsilon`),
+        " も得る。",
+      ]),
       paragraph([
         "対角化可能性・重複度・総個数は ",
         ref("eigenvalues_of_check_Vprime"),
@@ -2117,35 +2262,45 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
         " が ",
         math(String.raw`V^{(+)}x = \check\Lambda_{\max}x`),
         " を満たすとする。",
-        ref("check_joint_eigenspace_decomposition"),
-        " (2) より ",
-        math(String.raw`x = \sum_\epsilon \check{Q}_\epsilon x`),
-        " であり、",
+        math(String.raw`\epsilon' \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " を任意に取り、この固有方程式の両辺に**左から ",
+        math(String.raw`\check{Q}_{\epsilon'}`),
+        " を掛ける**。",
         ref("eigenvalues_of_V_plus"),
-        " (1) より",
+        " (1) の左から掛ける形 ",
+        math(String.raw`\check{Q}_{\epsilon'}V^{(+)} = \check\Lambda_{\epsilon'}\check{Q}_{\epsilon'}`),
+        " を使うと",
       ]),
       displayMath(
-        String.raw`0 = V^{(+)}x - \check\Lambda_{\max}x
-= \sum_{\epsilon}\left(\check\Lambda_\epsilon - \check\Lambda_{\max}\right)
-\check{Q}_\epsilon x`,
+        String.raw`\begin{aligned}
+\check\Lambda_{\epsilon'}\left(\check{Q}_{\epsilon'}x\right)
+&= \left(\check{Q}_{\epsilon'}V^{(+)}\right)x
+   \quad (\because \text{eigenvalues\_of\_V\_plus (1)}) \\
+&= \check{Q}_{\epsilon'}\left(V^{(+)}x\right)
+   \quad (\because \text{行列の積の結合法則}) \\
+&= \check\Lambda_{\max}\left(\check{Q}_{\epsilon'}x\right)
+   \quad (\because V^{(+)}x = \check\Lambda_{\max}x)
+\end{aligned}`,
       ),
       paragraph([
-        "である。各項 ",
-        math(String.raw`\left(\check\Lambda_\epsilon - \check\Lambda_{\max}\right)\check{Q}_\epsilon x`),
-        " は ",
-        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
-        " に属し、",
-        ref("check_joint_eigenspace_decomposition"),
-        " (5) より和は直和だから、各項が ",
-        math(String.raw`0`),
-        " でなければならない。",
-        "(2) より ",
-        math(String.raw`\epsilon \neq (1,\dots,1)`),
+        "すなわち ",
+        math(String.raw`\left(\check\Lambda_{\epsilon'} - \check\Lambda_{\max}\right)
+\check{Q}_{\epsilon'}x = 0`),
+        "。(2) より ",
+        math(String.raw`\epsilon' \neq (1,\dots,1)`),
         " のとき ",
-        math(String.raw`\check\Lambda_\epsilon - \check\Lambda_{\max} \neq 0`),
-        " なので ",
-        math(String.raw`\check{Q}_\epsilon x = 0`),
-        "。したがって",
+        math(String.raw`\check\Lambda_{\epsilon'} - \check\Lambda_{\max} \neq 0`),
+        " であり、これは ",
+        math(String.raw`0`),
+        " でない複素数なので割ることができて ",
+        math(String.raw`\check{Q}_{\epsilon'}x = 0`),
+        "。したがって ",
+        ref("check_joint_eigenspace_decomposition"),
+        " (2) の ",
+        math(String.raw`x = \sum_\epsilon \check{Q}_\epsilon x`),
+        " において ",
+        math(String.raw`\epsilon \neq (1,\dots,1)`),
+        " の項がすべて消え、",
       ]),
       displayMath(
         String.raw`x = \sum_{\epsilon}\check{Q}_\epsilon x
@@ -2174,6 +2329,7 @@ R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
       notes: [
         "この主張が docs/tasks/free-energy-roadmap/task-dependency-graph.md の章 C′ の出口である。Λ̌_max = Λ^{(1/2)}_M により remark_remaining_input_even_sector の「残っている入力」が埋まり、sector_decomposition_of_rayleigh_sup の c_+(M) を Λ^{(1/2)}_M と結びつける準備が整う（その接続そのものは次の作業）。",
         "単純性は「最大固有値だけ」の性質である。固有値全体が相異なるわけではない（eigenvalues_of_check_Vprime の statement 末尾）。",
+        "(3) の証明は固有方程式の両辺に左から Q̌_{ε'} を掛けるだけで済み、check_joint_eigenspace_decomposition (5) の直和性は使わない（以前は使っていた。docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md の指摘 2・2' に対応。Lean 側は Ising2D.Abstract.eq_proj_of_eigen）。使うのは (2) の Σ_ε Q̌_ε = I と eigenvalues_of_V_plus (1) の左から掛ける形、および dim = 1 のための (4) だけである。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（Λ̌_max = Λ^{(1/2)}_M の相対差 0.0、γ(θ~_μ) の全体最小 5.4e-1 > 0、最大固有値と 2 番目の固有値の相対差の最小 4.17e-1。対照として整数運動量の Λ^{(0)}_M とは一致しない）。",
       ],
     },
