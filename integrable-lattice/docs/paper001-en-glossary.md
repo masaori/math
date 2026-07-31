@@ -177,6 +177,27 @@
 地の文なら "a table in the accompanying Lean development" のように言い換えてパス文字列を出さない。
 ただし**日本語版が `math` ノード（`\texttt{...}`）で書いている箇所は数式の一致検査に掛かるので、
 勝手に変えてはならない**（`paper_082_remark_formalization` が該当。呼び出し元の判断事項）。
+### 1.4 第 5 章（命題 D・F・G と限界）で確定させた語
+
+`content/005_duality.ts` の英訳で新たに訳語を決めた語。根拠は原則として
+**日本語版本文の用法**（このセッションで確認できた一次情報）である。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 規約（$\mathrm{ord}\,0=0$ など） | **convention** | 標準語。Cuoco–Monsky p.237 の「通常とは異なる規約」を指す語であり、rule でも agreement でもない |
+| 但し書き（命題 D の証明中） | **caveat** | §1.3 の既定に従った（`content/004` が既に "caveat" を使っている） |
+| 補正（項）$\Delta$ | **correction (term)** | `content/005_duality.ts` (G1) の用法（定数項に付く有限和）。adjustment としない |
+| ずれ指数 $\delta$ | **discrepancy exponent** | 本プロジェクトの造語。(G1′) の定義（$\min(\cdot)-k$）は「ずれ」の量なので discrepancy を採る。**同じ「ずれ」でも (ii) の「付値のずれ」は discrepancy of the valuation** と訳し、両者で語を揃えた |
+| 退化点 / 退化方向 | **degenerate point** / **degenerate direction** | §1.2 の non-degenerate / degenerate の派生 |
+| 帯（$\mathrm{Band}_n$） | **band** | 記号 `\mathrm{Band}` がそのまま英語である |
+| 単項式正規化 | **monomial normalisation** | (G6) の $\tilde E$ の作り方の説明。英綴り（§2.5） |
+| 型 II（の判定条件） | **type II** (criterion for type II) | 本文の分類名。そのまま |
+| 素朴なレシピ | **naive recipe** | (F1) の用法。**「上限しか与えない」ことの主語**なので、method でも approach でもなく recipe を保つ |
+| 停止問題（に還元される） | **the halting problem** (reduces to) | 標準語。(F2) の決定不能性の根拠 |
+| 照合（する／済み） | **collation** / **collate** | (G) の証明の「照合の状況」。verification は `verification` フィールド（SageMath 検証）と衝突するので使わない |
+| パラメータ 0 個の予言 | **a prediction with zero free parameters** | (G) の証明の言い回し。「自由パラメータが 0 個」の意なので free を補った |
+| 残る限界 / 残る（未解決） | **what remains beyond reach** / **remains open** | §1.3 の limitation と対。「依然として未解決」は **still unresolved** |
+| 既出性（(G4) の） | **prior art** | §1.3 の既定に従った |
 
 ---
 
@@ -305,3 +326,22 @@
    どちらへ寄せるかは生成器か本文のどちらかを変える判断であり、**独断で変えていない**。
    なお**章番号そのものは、序論より前に `level: 1` の見出しを足すと全部ずれる**ので、
    英語版限定の節を足すときは末尾へ足すこと（`content/001a_reader_guide.ts` の冒頭コメントを見よ）。
+2. **要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
+   現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
+3. **他章のラベルへの `ref()`**（第 5 章の英訳で暫定的に地の文にしてある）。
+   `ref()` は英語版 `content/` に実在しないラベルを型で落とすため、まだ英訳されていない章の
+   ラベル（`paper_def_curve` / `paper_thm_archimedean` / `paper_claim_resultant` /
+   `paper_prop_V` / `paper_prop_W`）は指せない。`content/005_duality.ts` では
+   "the resultant claim of Chapter 2" のような地の文で書き、該当箇所に `TODO(ref)` を付けた。
+   **第 2・3・6 章の英訳が入ったら `ref()` へ戻すこと。** 戻し忘れると、章番号を手書きした
+   参照が残り、組版で番号が動いたときに黙って壊れる。
+4. **内部レポートのパス**（`\texttt{outputs/reports/...}`）。第 5 章の 3 箇所にある。
+   これらは `math` ノードなので、対応検証（数式の多重集合一致）の対象であり、英訳側で
+   勝手に書き換えられない。投稿稿にリポジトリ内部のパスを出すのは不適切なので、
+   **日本語版と英語版の両方を同時に直すか、`ja-en-exceptions.ts` に理由つきで登録するかを
+   呼び出し元が決める必要がある。** 加えて、生成器はこれを `\path{...}` へ落とすため、
+   本文が `\_` とエスケープしている分がそのまま PDF に**バックスラッシュ付きで出ている**
+   （実測: `cycle16\_T1\_lambda\_l0\_computability.md`）。
+5. **`(G1′)` の PRIME 記号**。英語版は和文フォントを読み込まないので U+2032 が PDF から
+   無言で消える（生成器の「組めない文字」検査が落ちる）。第 5 章では ASCII の `'` で組んだ。
+   日本語版は U+2032 のままである。
