@@ -132,7 +132,7 @@ export const frontmatter: Frontmatter = {
       "countabilisation of known results, and the sources are identified by name of reference and number ",
       "of proposition; where the literature already contains a proposition, we say so, including the cases ",
       "in which only a weaker form is known. Part of the material has been formalised in Lean 4 with ",
-      "mathlib4, where 85 declarations have been checked mechanically to be free of ",
+      "mathlib4, where 107 declarations have been checked mechanically to be free of ",
       math(String.raw`\mathrm{sorry}`),
       ", and the formalisation twice detected errors in the prose version. The material is drawn from ",
       "number theory, mathematical logic, dynamical systems, statistical mechanics and formal ",
