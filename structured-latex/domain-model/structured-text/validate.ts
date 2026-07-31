@@ -61,13 +61,12 @@ const headingSchema = z
   .object({
     ...blockBaseShape,
     kind: z.literal('heading'),
-    level: z.union(
-      HEADING_LEVELS.map((level) => z.literal(level)) as unknown as [
-        z.ZodLiteral<1>,
-        z.ZodLiteral<2>,
-        ...z.ZodLiteral<number>[],
-      ],
-    ),
+    // 型側は 1..6 のリテラル union。実行時は範囲で見る（同じ集合を 2 通りに書かない）。
+    level: z
+      .number()
+      .int()
+      .min(Math.min(...HEADING_LEVELS))
+      .max(Math.max(...HEADING_LEVELS)),
     title: titleContentSchema,
   })
   .strict()
