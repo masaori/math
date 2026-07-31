@@ -4,7 +4,7 @@ import { test } from 'node:test'
 import { paragraph, text } from '../structured-text/node.ts'
 import type { Block, Note } from '../structured-text/block.ts'
 import { DEFAULT_NUMBERING_POLICY } from './numbering.ts'
-import { resolve, type RevisionSnapshot } from './resolve.ts'
+import { resolve, resolveTolerantly, type RevisionSnapshot } from './resolve.ts'
 
 const heading = (id: string, level: 1 | 2, label: string): Block => ({
   id,
@@ -159,6 +159,47 @@ test('ノートの targets が解決できなければ publication でもエラ�
     options,
   )
   assert.deepEqual(result, { success: false, error: { code: 'orphan_note', noteIds: ['n1'] } })
+})
+
+test('迷子かつ未解決参照を含むノートは unresolved_reference になる（迷子でも本文を解決するため）', () => {
+  // 先行実装は迷子ノートの本文を解決せず読み飛ばしていたため、この未解決参照を見逃していた。
+  // 今は迷子でも本文を解決するので診断が 2 件出て、`firstErrorOf` の優先順位により
+  // 厳格な解決が返す種別は orphan_note ではなく unresolved_reference になる。
+  const note: Note = {
+    id: 'n1',
+    targets: ['c:missing'],
+    body: [paragraph([{ type: 'ref', target: 'c:also-missing' }])],
+  }
+  const revision = snapshot([{ key: '001', blocks: [claim('c1', ['c:1'])], notes: [note] }])
+
+  assert.deepEqual(resolve(revision, options), {
+    success: false,
+    error: {
+      code: 'unresolved_reference',
+      references: [{ fromBlockId: 'n1', target: 'c:also-missing' }],
+    },
+  })
+
+  // 寛容な解決は両方の不備を捨てずに返す（画面には迷子ノートも未解決参照も出す）。
+  const tolerant = resolveTolerantly(revision, options)
+  assert.deepEqual(tolerant.diagnostics, [
+    { code: 'unresolved_reference', fromBlockId: 'n1', target: 'c:also-missing' },
+    { code: 'orphan_note', noteId: 'n1', targets: ['c:missing'] },
+  ])
+  assert.deepEqual(tolerant.orphanNotes.map((n) => n.noteId), ['n1'])
+  assert.deepEqual(tolerant.orphanNotes[0]?.body, [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          type: 'unresolvedRef',
+          target: 'c:also-missing',
+          fromBlockId: 'n1',
+          overrideText: null,
+        },
+      ],
+    },
+  ])
 })
 
 test('文書全体にかかる不変条件の違反を、それぞれの code で返す', () => {
