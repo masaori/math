@@ -87,6 +87,19 @@ targets=(
   Ising2D.siteProd_mem
   Ising2D.E_eq_siteProd
   Ising2D.Z_Y_generate_algebra
+  Ising2D.Abstract.eq_top_of_span_eq_top
+  Ising2D.Abstract.eq_top_of_basis_mem
+  Ising2D.Abstract.map_mem_of_span_eq_top
+  Ising2D.Abstract.map_mem_of_mulSingle_mem
+  Ising2D.Abstract.map_mem_subalgebra_of_mulSingle_mem
+  Ising2D.Abstract.string_mem
+  Ising2D.Abstract.local_mem
+  Ising2D.xString_mem_adjoin_of_abstract
+  Ising2D.sigma_mem_adjoin_of_abstract
+  Ising2D.span_pauli_eq_top
+  Ising2D.siteOp_mem_adjoin_of_abstract
+  Ising2D.siteProd_mem_of_abstract
+  Ising2D.Z_Y_generate_algebra_of_abstract
   Ising2D.acomm_ZY
   Ising2D.linearIndependent_of_clifford
   Ising2D.ZY_linearIndependent
