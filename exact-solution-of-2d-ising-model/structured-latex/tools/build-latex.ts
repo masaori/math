@@ -28,6 +28,15 @@ import type { ConvertedBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "..
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
 
+/**
+ * 和文フォント。既定は macOS のヒラギノ（手元の作業環境）。
+ * Linux（GitHub Actions の ubuntu-latest）にはヒラギノが無く、指定したフォントが
+ * 見つからないと xeCJK/fontspec がエラーで止まるため、環境変数で差し替えられるようにする。
+ * CI では fonts-noto-cjk の "Noto Serif CJK JP" / "Noto Sans CJK JP" を渡す。
+ */
+const cjkMainFont = process.env.ISING_PDF_CJK_MAIN_FONT ?? "Hiragino Mincho ProN";
+const cjkSansFont = process.env.ISING_PDF_CJK_SANS_FONT ?? "Hiragino Sans";
+
 const buildDir = join(structuredLatexDir, "build");
 const texPath = join(buildDir, "document.tex");
 const pdfPath = join(buildDir, "document.pdf");
@@ -213,8 +222,8 @@ function renderDocument(inner: string): string {
 \\usepackage[margin=25mm]{geometry}
 \\usepackage{graphicx}
 \\usepackage{xeCJK}
-\\setCJKmainfont{Hiragino Mincho ProN}
-\\setCJKsansfont{Hiragino Sans}
+\\setCJKmainfont{${cjkMainFont}}
+\\setCJKsansfont{${cjkSansFont}}
 % 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム）は
 % 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
 \\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033}
