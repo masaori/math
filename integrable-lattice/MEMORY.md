@@ -1,5 +1,29 @@
 # MEMORY
 
+## 投稿先調査 完了（2026-08-01）— `outputs/reports/paper001_submission_venue_survey.md`
+
+**「論文 001 を投稿するか」という判断点は、「英訳するか／新規性の宣言を維持するか」の 2 判断へ具体化された。**
+各誌の公式サイトを実際に取得して確認した（取得できなかったものは report §5 に明記。推測で埋めていない）。
+
+- **雑誌『数学』は構造的に不可**（公式 PDF `sugaku-kitei.pdf` で確定）。原稿は**原則 依頼稿**で、
+  公募の「寄稿」欄は**組版 3 ページ以内**かつ**日本数学会会員限定**。14 ページの論文 001 は入らない。
+  Sugaku Expositions は『数学』論説の英訳版で**直接投稿する誌ではない**。
+- **推奨 1 位は Expositiones Mathematicae の Survey Article**。**ページ数上限なし**で、
+  かつ Main Research Article 側に「significant new results が必要」と明記して両者を分けている。
+  **「新結果を主張しない」宣言と両立する唯一の主要誌**。英語必須。
+- 2 位 L'Enseignement Mathématique（S2O・著者負担ゼロ）、3 位 EMS Surveys（14 ページは想定より小さい）、
+  4 位 Jahresbericht der DMV。**上位 4 誌すべて英語必須 → 英訳が全候補の前提条件**。
+- **別ルート B（新規部分を研究論文に切り出す）**: cycle 18 の一般退化塔・命題 W の $d=2$ 係数を主役にするなら、
+  **Annales math. du Québec**（Vallières I・III の掲載誌）／**Algebraic Combinatorics**（DuBose–Vallières の掲載誌）／
+  **Research in Number Theory**。適合の根拠は「引用文献が実際にその誌に載っている」という事実。
+  Springer 系は購読モデルなら著者負担ゼロ、OA は £2190–2590 相当。
+- **別ルート C（Lean 形式化を主題に）**: CPP（本文 12 ページ以内・軽量 double-blind・formalization case study 歓迎）、
+  ITP（LIPIcs OA。**2026 年版は開催済みなので次は 2027 年版**）、Journal of Automated Reasoning。
+- **arXiv は無条件ではない**: モデレーションの却下事由に「独創性の欠如」が挙がっている。
+  「新しい定理を主張しない」と書いたままでは却下されうる。math.NT primary + math.LO/math.DS クロスリストが素直。
+- 付随: `structured-latex/tools/build-latex.ts` に `⇒`(U+21D2) の文字クラス指定を追加した。
+  **追加前は PDF ビルドが「組めない文字」で失敗していた**（本文は書き換えていない）。実測 **14 ページ**。
+
 ## cycle 18 完了（rank:cycle18, 2026-08-01）
 
 **cycle 17 が挙げた 4 点はすべて潰れた。** 詳細は `docs/tasks/auto-loop-state.md`「cycle 18 総括」。
