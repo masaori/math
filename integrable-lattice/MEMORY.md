@@ -1,5 +1,26 @@
 # MEMORY
 
+## 完了（2026-07-31）: 救済PR #23 の残余 2 点を既存レポートへ追記（ファイルは救わない）
+
+`docs/salvage-audit-2026-07-31.md` の「PR #23」節の判定に従い、ブランチ
+`worktree-fuzzy-petting-bengio` からは**ファイルを 1 つも取り込まず**、有効だった 2 事実だけを
+既存レポートへ追記した（ブランチの証明経路 $m_L$/終結式/$\mathbb{F}_2[x]$・Lemma 1–6 は持ち込まない。
+`cycle14_T1_proposition_T_generalization.md` の定理 D との整合を壊さないため）。
+
+- **偶 $L$ の観察 T′**: `outputs/reports/cycle14_T3_Zl2_tower_criterion.md` §9.2 に式 $(9.1')$
+  $v_2(\tau(L))=(2s+4)L-(6s+1)$（$s=v_2(L)$）を追記。$(9.1)$（$L=2^n$ の 7 点）を特殊化として含む。
+  **証明ではなく数値観察**である旨を明記。ブランチの主張は鵜呑みにせず自分で再現し、
+  **$L=2,4,\dots,160$ の全偶数 80 例**（ブランチの $L\le128$/64 例より広い）で不一致 0 を確認した。
+  計算は `sagemath/check/cycle13_T1_tau_v2/tau_v2_verify.sage` の (6) に追加（終結式経路・厳密整数）。
+- **文献確認**: `outputs/reports/cycle13_T1_observation_T_settlement.md` に §5.1 を追加。
+  OEIS A212800 の raw text 全文（`#23 Feb 16 2025`）と arXiv:1711.00175 の ar5iv 本文を
+  **本セッションで自分で取得**し、「2 進付値も $\tau=L^2R^4$ 型分解も無い」「1 次元 circulant のみ、
+  $p$ は素点でなく偶奇で決まる自然数、$p$ 進付値の議論なし」を確認。
+  arXiv:1312.4389 は ar5iv 版が無く**本文未確認のまま**（虚偽の確認済み宣言をしない）。
+  ついでに同スクリプト (7) で $\tau(n)$ と A212800 $a(2..11)$ の厳密一致（10/10）を確認し、
+  本 report の $\tau$ が OEIS と同じ量（$L=2$ の多重辺規約も同じ）であることを固定した。
+- 検証: `node sagemath/tools/verify-check-linkage.ts` exit 0（孤立 7 件は追記前と同一で増減なし）。
+
 ## 完了（2026-07-27）: **paper-plan 002 を論文 001 として書き上げた（4 ゴールすべて達成）**
 
 依頼者の承認（2026-07-26）を受け、`outputs/papers/001_R_Lambda_duality/` へ昇格し論文を執筆した。
