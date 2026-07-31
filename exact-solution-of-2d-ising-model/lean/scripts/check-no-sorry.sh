@@ -59,6 +59,22 @@ targets=(
   Ising2D.Conjugation.matrix_conj_mul
   Ising2D.Conjugation.matrix_conj_one
   Ising2D.Conjugation.matrix_conj_comp
+  Ising2D.Abstract.sandwich_sandwich
+  Ising2D.Abstract.sandwich_mul_of_left_inv
+  Ising2D.Abstract.sandwich_one_of_right_inv
+  Ising2D.Abstract.sandwich_add
+  Ising2D.Abstract.conj_mul
+  Ising2D.Abstract.conj_one
+  Ising2D.Abstract.conj_conj
+  Ising2D.Abstract.conjAut
+  Ising2D.Abstract.conjRingHom
+  Ising2D.Abstract.conjRingAut
+  Ising2D.matrix_conj_mul_of_abstract
+  Ising2D.matrix_conj_one_of_abstract
+  Ising2D.matrix_conj_comp_of_abstract
+  Ising2D.matrix_conj_add_of_abstract
+  Ising2D.matrixConjRingHom
+  Ising2D.matrixConjRingHom_comp
   Ising2D.commutator_via_anticommutators
   Ising2D.lie_mul_eq_acomm_sub_acomm
   Ising2D.matrix_commutator_via_anticommutators
