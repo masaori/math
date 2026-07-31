@@ -2,7 +2,7 @@ import type { Block, LoadDocumentError, Result } from '@rwp/domain-model'
 
 /** 入力ソースから読み込んだドキュメント。 */
 export type LoadedDocument = {
-  blocks: Block[]
+  blocks: readonly Block[]
   /** 入力ソースの表示名（例: ソース dir の相対パス）。 */
   sourceLabel: string
 }

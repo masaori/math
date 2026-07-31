@@ -10,6 +10,13 @@ export type ServerConfig = {
   sourceLabel: string
   /** 参照用ノートの dir。存在しなくてもよい（その場合ノート無しで動く）。 */
   notesDir: string
+  /**
+   * 入力ソースのブロックが持つ、プロジェクト固有メタデータのキー名（例: `habitat`）。
+   * システムの実行時スキーマは `.strict()` で未宣言のキーを拒否するため、
+   * メタデータを使うプロジェクトを表示するときはここで宣言する
+   * （本ビューアはドメイン非依存なのでキー名を内蔵しない）。
+   */
+  blockMetaKeys: readonly string[]
   host: string
   port: number
   staticDir: string
@@ -67,5 +74,11 @@ export const loadConfig = (): ServerConfig => {
       : path.join(path.dirname(sourceDir), 'notes'))
   const notesDir = path.resolve(notesDirRaw)
 
-  return { sourceDir, sourceLabel, notesDir, host, port, staticDir: STATIC_DIR }
+  const blockMetaKeysRaw = readArg('block-meta-keys') ?? process.env.RWP_BLOCK_META_KEYS ?? ''
+  const blockMetaKeys = blockMetaKeysRaw
+    .split(',')
+    .map((key) => key.trim())
+    .filter((key) => key !== '')
+
+  return { sourceDir, sourceLabel, notesDir, blockMetaKeys, host, port, staticDir: STATIC_DIR }
 }

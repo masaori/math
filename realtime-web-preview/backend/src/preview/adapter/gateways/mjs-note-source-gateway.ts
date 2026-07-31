@@ -3,25 +3,28 @@ import {
   type LoadDocumentError,
   type Note,
   type Result,
+  type RuntimeSchema,
   type ValidationIssue,
   err,
-  notesSchema,
   ok,
 } from '@rwp/domain-model'
 import type { NoteSourceGateway } from '../../domain/interfaces/gateways/note-source-gateway.js'
 import { loadMjsDefaultExports } from './mjs-module-loader.js'
 
 /**
- * `.mjs` 形式の参照用ノートソースを読む adapter。
+ * `.ts` 形式の参照用ノートソースを読む adapter。
  * ノートは任意なので、dir が無い / 空の場合は「ノート 0 件」の成功として扱う
  * （本文が読めていれば画面は成立するため、ここで document 全体を落とさない）。
  */
 export class MjsNoteSourceGateway implements NoteSourceGateway {
   private importVersion = 0
 
-  constructor(private readonly notesDir: string) {}
+  constructor(
+    private readonly notesDir: string,
+    private readonly schema: RuntimeSchema<string, unknown>,
+  ) {}
 
-  async load(): Promise<Result<Note[], LoadDocumentError>> {
+  async load(): Promise<Result<readonly Note[], LoadDocumentError>> {
     if (!existsSync(this.notesDir)) {
       return ok([])
     }
@@ -43,11 +46,9 @@ export class MjsNoteSourceGateway implements NoteSourceGateway {
     const issues: ValidationIssue[] = []
 
     for (const { fileName, defaultExport } of outcome.modules) {
-      const parsed = notesSchema.safeParse(defaultExport)
+      const parsed = this.schema.validateNotes(defaultExport, fileName)
       if (!parsed.success) {
-        for (const issue of parsed.error.issues) {
-          issues.push({ path: `${fileName}:${issue.path.join('.')}`, message: issue.message })
-        }
+        issues.push(...parsed.error)
         continue
       }
       notes.push(...parsed.data)

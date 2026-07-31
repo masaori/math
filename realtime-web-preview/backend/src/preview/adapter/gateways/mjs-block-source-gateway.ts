@@ -3,8 +3,8 @@ import {
   type Block,
   type LoadDocumentError,
   type Result,
+  type RuntimeSchema,
   type ValidationIssue,
-  blocksSchema,
   err,
   ok,
 } from '@rwp/domain-model'
@@ -15,9 +15,10 @@ import type {
 import { loadMjsDefaultExports } from './mjs-module-loader.js'
 
 /**
- * `.mjs` 形式の構造化テキストソースを読む adapter。
+ * `.ts` 形式の構造化テキストソースを読む adapter。
  * 外部 domain（ファイルシステム + ESM ソース形式）への依存を、この層に隔離する。
- * 各ファイルの default export を Zod safeParse で検証し（境界の try/catch）、Result に変換する。
+ * 各ファイルの default export を**システムの実行時スキーマ**で検証し、Result に変換する
+ * （入力言語の検証規則は `structured-latex/domain-model/structured-text/validate.ts` が持つ）。
  */
 export class MjsBlockSourceGateway implements BlockSourceGateway {
   private importVersion = 0
@@ -25,6 +26,7 @@ export class MjsBlockSourceGateway implements BlockSourceGateway {
   constructor(
     private readonly sourceDir: string,
     private readonly sourceLabel: string,
+    private readonly schema: RuntimeSchema<string, unknown>,
   ) {}
 
   async load(): Promise<Result<LoadedDocument, LoadDocumentError>> {
@@ -53,11 +55,9 @@ export class MjsBlockSourceGateway implements BlockSourceGateway {
     const issues: ValidationIssue[] = []
 
     for (const { fileName, defaultExport } of outcome.modules) {
-      const parsed = blocksSchema.safeParse(defaultExport)
+      const parsed = this.schema.validateBlocks(defaultExport, fileName)
       if (!parsed.success) {
-        for (const issue of parsed.error.issues) {
-          issues.push({ path: `${fileName}:${issue.path.join('.')}`, message: issue.message })
-        }
+        issues.push(...parsed.error)
         continue
       }
       blocks.push(...parsed.data)

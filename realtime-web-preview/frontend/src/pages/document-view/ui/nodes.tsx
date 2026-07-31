@@ -54,6 +54,19 @@ export const TitleView = ({ title }: { title: TitleContent }): ReactElement | nu
   return null
 }
 
+/**
+ * 画像ノードを描画する。
+ * 正本が持つのは資産の**名前**（assetKey）だけで、実体の所在は出力ターゲットごとの資産解決器が決める
+ * （structured-latex/docs/domain-model.md §7.1）。本ビューアは資産解決器を持たないため、
+ * 黙って消さずに「どの資産が置かれる場所か」を alt とともに明示する。
+ */
+const ImageView = ({ assetKey, alt }: { assetKey: string; alt: string }): ReactElement => (
+  <span className="my-2 block rounded border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600">
+    <span className="font-mono text-xs text-slate-400">image: {assetKey}</span>
+    <span className="block">{alt}</span>
+  </span>
+)
+
 /** Node 1件を描画する。 */
 export const NodeView = ({ node }: { node: Node }): ReactElement => {
   switch (node.type) {
@@ -79,6 +92,8 @@ export const NodeView = ({ node }: { node: Node }): ReactElement => {
           ))}
         </ul>
       )
+    case 'image':
+      return <ImageView assetKey={node.assetKey} alt={node.alt} />
     case 'ref':
       return <RefLink target={node.target} label={node.label} />
     case 'todo':
@@ -93,7 +108,7 @@ export const NodeView = ({ node }: { node: Node }): ReactElement => {
 }
 
 /** Node 配列を順に描画する。 */
-export const NodeList = ({ nodes }: { nodes: Node[] }): ReactElement => (
+export const NodeList = ({ nodes }: { nodes: readonly Node[] }): ReactElement => (
   <>
     {nodes.map((node, index) => (
       <NodeView key={index} node={node} />
