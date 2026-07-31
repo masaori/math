@@ -4,8 +4,8 @@
 正本: `structured-latex/content/018_even_sector_closing.ts`
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
-抽象版は `Ising2D/Abstract/ParityFermion.lean`（同じラベル）の
-`Ising2D.Abstract.projOn_insert_mul_cre` / `Abstract.cre_mul_projOn_ne_zero`。
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
+`Ising2D.NecSuf.projOn_insert_mul_cre` / `NecSuf.cre_mul_projOn_ne_zero`。
 **符号の反転則 (2) はその 2 つの系である。**
 
 ## 人手証明との対応
@@ -17,10 +17,10 @@
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
 | (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd` |
 
-## 1 次元性が効いている場所（抽象版で判明したこと）
+## 1 次元性が効いている場所（必要十分版で判明したこと）
 
 人手証明は (1)(2) の両方で「`im Q̌_ε` は 1 次元」を使うが、**1 次元性が本当に要るのは
-(1)（`η_ε` の存在）だけ**である。(2) の Step 1・Step 2 は抽象版
+(1)（`η_ε` の存在）だけ**である。(2) の Step 1・Step 2 は必要十分版
 （環の計算だけ）で閉じており、1 次元性を使わない。
 -/
 import Ising2D.Part018.Setup
@@ -57,7 +57,7 @@ namespace CheckFermi
 variable (F : CheckFermi M)
 
 theorem Qproj_eq (T : Finset (Fin M)) :
-    F.Qproj T = Abstract.projOn (Abstract.num F.cre F.ann) F.commute_nOp_nOp Finset.univ T := rfl
+    F.Qproj T = NecSuf.projOn (NecSuf.num F.cre F.ann) F.commute_nOp_nOp Finset.univ T := rfl
 
 /-- `w ∈ im Q̌_ε` なら `Q̌_ε w = w`（冪等性）。 -/
 theorem Qproj_mulVec_of_mem_range {T : Finset (Fin M)} {w : Conf M → ℂ}
@@ -148,18 +148,18 @@ theorem eta_unique {T : Finset (Fin M)} {η : ℂ} (h : epsilon M * F.Qproj T = 
 
 /-- **原文 (2)**: `μ ∉ T` なら `η_{T∪{μ}} = -η_T`。
 
-Step 1（`ψ̌_μ^† q ≠ 0`）と Step 2（`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`）は抽象版
-`Abstract.cre_mul_projOn_ne_zero` / `Abstract.projOn_insert_mul_cre` の系である。 -/
+Step 1（`ψ̌_μ^† q ≠ 0`）と Step 2（`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`）は必要十分版
+`NecSuf.cre_mul_projOn_ne_zero` / `NecSuf.projOn_insert_mul_cre` の系である。 -/
 theorem eta_insert {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
     F.eta (insert μ T) = -F.eta T := by
   set x : TensorPow M := F.cre μ * F.Qproj T with hx
   -- Step 1: `x ≠ 0`
   have hx0 : x ≠ 0 :=
-    Abstract.cre_mul_projOn_ne_zero F.cre F.ann F.commute_nOp_nOp F.nOp_mul_self
+    NecSuf.cre_mul_projOn_ne_zero F.cre F.ann F.commute_nOp_nOp F.nOp_mul_self
       F.acomm_cre_ann_self (Finset.mem_univ μ) hμ (F.Qproj_ne_zero T)
   -- Step 2: `Q̌_{T∪{μ}} x = x`
   have hstep2 : F.Qproj (insert μ T) * x = x :=
-    Abstract.projOn_insert_mul_cre F.cre F.ann F.commute_nOp_nOp F.nOp_mul_self
+    NecSuf.projOn_insert_mul_cre F.cre F.ann F.commute_nOp_nOp F.nOp_mul_self
       (fun i j hij => F.commute_cre_nOp hij) F.cre_sq F.acomm_cre_ann_self
       (Finset.mem_univ μ) hμ
   -- Step 3: `ε x = -η_T x`
@@ -241,7 +241,7 @@ theorem parityFactor_mul_Qproj (i : Fin M) (T : Finset (Fin M)) :
 
 theorem parityProd_mul_Qproj (T : Finset (Fin M)) :
     F.parityProd * F.Qproj T = (-1 : ℂ) ^ T.card • F.Qproj T := by
-  have key := Abstract.noncommProd_mul_of_mul_eq_smul (𝕜 := ℂ) F.parityFactor
+  have key := NecSuf.noncommProd_mul_of_mul_eq_smul (𝕜 := ℂ) F.parityFactor
     F.commute_parityFactor (F.Qproj T)
     (fun i => if i ∈ T then (-1 : ℂ) else 1) (fun i => F.parityFactor_mul_Qproj i T) Finset.univ
   rw [parityProd, key]

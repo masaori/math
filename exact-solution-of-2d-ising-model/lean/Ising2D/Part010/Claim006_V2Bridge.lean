@@ -24,7 +24,7 @@
   級数の分割・極限の交換を経由しないぶん Lean では短い。
 * Step 5（結論）→ `V2pauli_eq_V2comp` および `V2_component_equals_pauli`。
 
-抽象版は置いていない（内容は `Abstract/SiteDiagonal.lean` と `Abstract/ExpDiagonal.lean` の
+必要十分版は置いていない（内容は `NecSuf/SiteDiagonal.lean` と `NecSuf/ExpDiagonal.lean` の
 合成であり、本ファイル固有の内容は 2 つの `V_2` の定義の突き合わせである）。
 -/
 import Ising2D.Part010.Claim005_TwoByTwoTransfer

@@ -4,10 +4,10 @@
 正本: `structured-latex/content/011_max_eigenvalue.ts`
 （`maxeig_008_claim_trace_power_sandwich`、ラベル **`trace_power_sandwich`**）
 
-抽象版: `Ising2D.Abstract.IsPsdPair.moment_le_pow`（Step 1）、
-`Ising2D.Abstract.IsPsdPair.moment_log_convex`（Step 2）、
-`Ising2D.Abstract.IsPdPair.moment_pow_le`（Step 3 前半）
-（いずれも `Ising2D/Abstract/RayleighMoments.lean`）
+必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（Step 1）、
+`Ising2D.NecSuf.IsPsdPair.moment_log_convex`（Step 2）、
+`Ising2D.NecSuf.IsPdPair.moment_pow_le`（Step 3 前半）
+（いずれも `Ising2D/NecSuf/RayleighMoments.lean`）
 
 **この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。**
 上からの評価は `rayleigh_bounds_operator_norm` から、下からの評価は
@@ -48,7 +48,7 @@ theorem trace_pow_le {W : Matrix n n ℝ} (hW : W.IsSymm)
   have hdiag : ∀ i : n, (W ^ N) i i ≤ rayleighSup W ^ N := by
     intro i
     have h := hpair.moment_le_pow (rayleighSup_nonneg hW hpsd)
-      (abstract_rayleigh_hyp hW hpsd) (Pi.single i 1) N
+      (necSuf_rayleigh_hyp hW hpsd) (Pi.single i 1) N
     rw [matBilin_one_mulVecLin_pow, single_dotProduct_mulVec_single] at h
     have he : matBilin (1 : Matrix n n ℝ) (Pi.single i 1) (Pi.single i 1) = 1 := by
       simpa [vecNormSq] using vecNormSq_single (n := n) i

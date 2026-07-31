@@ -140,50 +140,50 @@
 | `Ising2D.onsager_limit_in_M` | `M → ∞` の極限が Onsager の表式になる | Step 4（章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | **`Ising2D.onsager_exact_solution`** | **`lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`** | **定理本体** |
 
-### 1.2 抽象版（`lean/Ising2D/Abstract/ParityFermion.lean`、名前空間 `Ising2D.Abstract`）
+### 1.2 必要十分版（`lean/Ising2D/NecSuf/ParityFermion.lean`、名前空間 `Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | 台に要求する構造 | 人手証明のラベル |
 | --- | --- | --- | --- |
-| `Abstract.anticomm_sum_smul` | `e` が各 `x_i` と反交換 ⇒ `x_i` の任意の有限 `𝕜` 線型結合とも反交換 | `Ring A` + `Algebra 𝕜 A` | `epsilon_anticommutes_with_check_Z_Y` (2)(3) |
-| **`Abstract.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換** | **`Ring A` だけ** | 同 (4) 前半 |
-| **`Abstract.commute_parity_projOn`** | **`e` は `Q_ε` とも可換** | **`Ring A` だけ** | 同 (4) 後半 |
-| `Abstract.num_mul_cre` | `n_i c_i = c_i` | `Ring A` | `epsilon_eigenvalue_on_check_Q` Step 2 冒頭 |
-| **`Abstract.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 |
-| **`Abstract.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 |
-| `Abstract.noncommProd_mul_of_mul_eq_smul` | 各因子が `Q` にスカラー倍として働くなら積も働く | `Ring A` + `Algebra 𝕜 A` | 同 (4) |
-| `Abstract.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
-| `Abstract.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
-| **`Abstract.sum_powerset_signed_exp`** | **`∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`** | **ℝ の `exp`/`sinh` だけ** | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
+| `NecSuf.anticomm_sum_smul` | `e` が各 `x_i` と反交換 ⇒ `x_i` の任意の有限 `𝕜` 線型結合とも反交換 | `Ring A` + `Algebra 𝕜 A` | `epsilon_anticommutes_with_check_Z_Y` (2)(3) |
+| **`NecSuf.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換** | **`Ring A` だけ** | 同 (4) 前半 |
+| **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換** | **`Ring A` だけ** | 同 (4) 後半 |
+| `NecSuf.num_mul_cre` | `n_i c_i = c_i` | `Ring A` | `epsilon_eigenvalue_on_check_Q` Step 2 冒頭 |
+| **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 |
+| **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 |
+| `NecSuf.noncommProd_mul_of_mul_eq_smul` | 各因子が `Q` にスカラー倍として働くなら積も働く | `Ring A` + `Algebra 𝕜 A` | 同 (4) |
+| `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
+| `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
+| **`NecSuf.sum_powerset_signed_exp`** | **`∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`** | **ℝ の `exp`/`sinh` だけ** | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 | 具体版は抽象版の系か |
+| 人手証明のラベル | 具体版 | 必要十分版 | 具体版は必要十分版の系か |
 | --- | --- | --- | --- |
-| `epsilon_anticommutes_with_check_Z_Y` (2)(3) | `Ising2D.epsilon_anticomm_checkZ` / `checkY` / `epsilon_anticomm_of_isCheckMode` | `Abstract.anticomm_sum_smul` | **すべて系** |
-| 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj` | `Abstract.commute_parity_num` / `commute_parity_projOn` | **すべて系** |
-| `epsilon_eigenvalue_on_check_Q` (1) | `CheckFermi.exists_eta` / `eta` / `eta_unique` | `Abstract.smul_left_cancel_of_ne_zero`（一意性のみ） | **存在の部分は系にならない**（1 次元性が要る。下記参照） |
-| 同 (2) | `CheckFermi.eta_insert` | `Abstract.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` | **系** |
-| 同 (4) | `CheckFermi.epsilon_eq_parityProd` | `Abstract.noncommProd_mul_of_mul_eq_smul` | **系** |
-| `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `Abstract.sum_powerset_signed_exp` | **系** |
-| `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `Abstract.star_projOn` | **系** |
+| `epsilon_anticommutes_with_check_Z_Y` (2)(3) | `Ising2D.epsilon_anticomm_checkZ` / `checkY` / `epsilon_anticomm_of_isCheckMode` | `NecSuf.anticomm_sum_smul` | **すべて系** |
+| 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj` | `NecSuf.commute_parity_num` / `commute_parity_projOn` | **すべて系** |
+| `epsilon_eigenvalue_on_check_Q` (1) | `CheckFermi.exists_eta` / `eta` / `eta_unique` | `NecSuf.smul_left_cancel_of_ne_zero`（一意性のみ） | **存在の部分は系にならない**（1 次元性が要る。下記参照） |
+| 同 (2) | `CheckFermi.eta_insert` | `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` | **系** |
+| 同 (4) | `CheckFermi.epsilon_eq_parityProd` | `NecSuf.noncommProd_mul_of_mul_eq_smul` | **系** |
+| `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |
+| `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `Claim002`（反転則）と `Claim003`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `Definition006_RayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
-| `onsager_exact_solution` | `Ising2D.onsager_exact_solution` | **置かない** | 既存の抽象版（`Abstract/LogSqueeze.lean`, `Abstract/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 018・019 の結果に接続するだけ |
+| `onsager_exact_solution` | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 018・019 の結果に接続するだけ |
 
-### 抽象版で判明した本質（本文には持ち込まない）
+### 必要十分版で判明した本質（本文には持ち込まない）
 
 - **`ε` が `ň_μ`・`Q̌_ε` と可換であること（人手証明 (4)）に効いているのは、
   `ε` が生成・消滅演算子の両方と反交換することと `(−1)² = 1` だけである。**
   `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
   行列であることも、複素数であることも、テンソル冪であることも効いていない。
-  台は**任意の環**でよい（`Abstract.commute_parity_num` / `commute_parity_projOn`）。
+  台は**任意の環**でよい（`NecSuf.commute_parity_num` / `commute_parity_projOn`）。
 
 - **符号の反転則（人手証明 (2)）に `im Q̌_ε` の 1 次元性は要らない。**
   人手証明は (1)(2) の両方で 1 次元性を引くが、必要な材料は次の 3 つだけである。
   1. `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T` — `n_μ c_μ = c_μ` と「`n_ν`（`ν ≠ μ`）が `c_μ` と可換」から、
-     環の計算だけで出る（`Abstract.projOn_insert_mul_cre`）。
+     環の計算だけで出る（`NecSuf.projOn_insert_mul_cre`）。
   2. `c_μ Q_T ≠ 0` — `a_μ c_μ = 1 − n_μ` と `n_μ Q_T = 0`（`μ ∉ T`）から出る
-     （`Abstract.cre_mul_projOn_ne_zero`）。**ここが 1 次元性を使わない要点である。**
+     （`NecSuf.cre_mul_projOn_ne_zero`）。**ここが 1 次元性を使わない要点である。**
   3. `ε(c_μ Q_T) = −η_T (c_μ Q_T)` — 反交換関係だけ。
 
   すなわち**1 次元性が本当に要るのは `η_ε` の「存在」だけ**であり、反転則そのものは
@@ -194,7 +194,7 @@
   有限集合の冪集合にわたる和の積への変形（`Finset.prod_add`）と
   `sinh x = (e^x − e^{−x})/2` だけである。** `γ` が `arccosh` で書けることも、
   `V^{(+)}` が転送行列であることも、`Λ̌_ε` が固有値であることも、半整数運動量であることも
-  効いていない（`Abstract.sum_powerset_signed_exp` は `g : ι → ℝ` を任意にとる）。
+  効いていない（`NecSuf.sum_powerset_signed_exp` は `g : ι → ℝ` を任意にとる）。
 
 - **`γ(θ̃_μ) > 0`（半整数運動量に固有の性質）が効くのは 1 箇所だけである。**
   `∏_μ 2 sinh(γ_μ/2) ≠ 0`（したがって `tr(εV^{(+)})` の符号が `η_{(1,…,1)}` で決まる）と、

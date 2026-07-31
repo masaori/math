@@ -5,11 +5,11 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_004_claim_commutator_H_check_Z_Y`）
 
-**抽象版**は既存の `Ising2D/Abstract/CommutatorClifford.lean`
-（`Ising2D.Abstract.CliffordTriple.lie_sum_yz_z` ほか）。
+**必要十分版**は既存の `Ising2D/NecSuf/CommutatorClifford.lean`
+（`Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z` ほか）。
 本ファイルの 4 本 (A)〜(D) はすべてその系として導く。
 すなわち**整数運動量の 6 本（`Part008/Claim001_CommutatorHZY.lean`）と
-半整数運動量の 4 本は、同じ抽象版の別の特殊化である**。
+半整数運動量の 4 本は、同じ必要十分版の別の特殊化である**。
 違いは `CliffordTriple` に渡す反交換子の値 `D` だけで、
 整数運動量では `2M δ^M_{μ+ν,0}`、半整数運動量では `2M δ^M_{μ+ν,1}` である。
 
@@ -25,7 +25,7 @@
 
 **とくに (C) が `hat(Z)^{(+)}` では壊れていた**（`why_008_applies_only_to_minus_sector`:
 `[H_2, hat(Z)^{(+)}_μ] = -2 hat(Y)_μ + 4 e^{-iθ_μ} Y_1`）のに対し、
-`check(Z)` では余分な項が出ない。抽象版の言葉では
+`check(Z)` では余分な項が出ない。必要十分版の言葉では
 「`hat(Z)^{(±)}` は `Dz ≠ Dz'` の 3 族だったが、`check(Z)` は 1 つの族で `Dz = Dz'` である」
 ということであり、その根拠は `check` の係数に例外項が無いこと
 （境界の符号を位相の反周期性が担っていること）である。
@@ -88,15 +88,15 @@ theorem congr_checkPhase_smul_checkZ_conj (hM : M ≠ 0) :
         = checkPhase M 1 b • checkZ M ((M : ℤ) + 1 - b) :=
   fun a b h => by rw [checkPhase_congr hM 1 h, congr_checkZ_conj hM a b h]
 
-/-! ## 抽象版への橋渡し: `check(Z), check(Y)` は Clifford 型の 3 族をなす -/
+/-! ## 必要十分版への橋渡し: `check(Z), check(Y)` は Clifford 型の 3 族をなす -/
 
-/-- `check(Z)`, `check(Y)` を抽象版 `Ising2D.Abstract.CliffordTriple` の 3 族として与える。
+/-- `check(Z)`, `check(Y)` を必要十分版 `Ising2D.NecSuf.CliffordTriple` の 3 族として与える。
 
 整数運動量版 `Ising2D.hatCliffordTriple` と違い、**`z` と `z'` が同じ族**である
 （`hat(Z)^{(±)}` のような符号違いの相棒が存在しない）。
 これが (C) の余分な項が出ない理由そのものである。 -/
 noncomputable def checkCliffordTriple (M : ℕ) (hM : M ≠ 0) :
-    Abstract.CliffordTriple ℂ (TensorPow M) ℤ where
+    NecSuf.CliffordTriple ℂ (TensorPow M) ℤ where
   z := fun μ => checkZ M μ
   z' := fun μ => checkZ M μ
   y := fun μ => checkY M μ
@@ -132,7 +132,7 @@ theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
       (fun i : Fin M => ((i : ℕ) : ℤ) + 1)
       (fun i : Fin M => (M : ℤ) + 1 - (((i : ℕ) : ℤ) + 1)) ν
   simp only [checkCliffordTriple_z, checkCliffordTriple_y, checkCliffordTriple_Dz] at key
-  rw [H1Plus_eq_check_sum hM, Abstract.lie_smul_left, key]
+  rw [H1Plus_eq_check_sum hM, NecSuf.lie_smul_left, key]
   have hterm : ∀ i : Fin M,
       (checkPhase M 1 (((i : ℕ) : ℤ) + 1) *
         (2 * (M : ℂ) *
@@ -161,7 +161,7 @@ theorem lie_H1Plus_checkY (hM : M ≠ 0) (ν : ℤ) :
       (fun i : Fin M => ((i : ℕ) : ℤ) + 1)
       (fun i : Fin M => (M : ℤ) + 1 - (((i : ℕ) : ℤ) + 1)) ν
   simp only [checkCliffordTriple_z, checkCliffordTriple_y, checkCliffordTriple_Dy] at key
-  rw [H1Plus_eq_check_sum hM, Abstract.lie_smul_left, key]
+  rw [H1Plus_eq_check_sum hM, NecSuf.lie_smul_left, key]
   have hterm : ∀ i : Fin M,
       (checkPhase M 1 (((i : ℕ) : ℤ) + 1) *
         (2 * (M : ℂ) * deltaMod M ((((i : ℕ) : ℤ) + 1) + ν) 1)) •
@@ -200,7 +200,7 @@ theorem lie_H2_checkZ (hM : M ≠ 0) (ν : ℤ) :
       (fun i : Fin M => ((i : ℕ) : ℤ) + 1)
       (fun i : Fin M => (M : ℤ) + 1 - (((i : ℕ) : ℤ) + 1)) ν
   simp only [checkCliffordTriple_z, checkCliffordTriple_y, checkCliffordTriple_Dz] at key
-  rw [H2_eq_check_sum hM, Abstract.lie_smul_left,
+  rw [H2_eq_check_sum hM, NecSuf.lie_smul_left,
     Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) => (one_smul ℂ _).symm, key]
   have hterm : ∀ i : Fin M,
       ((1 : ℂ) *
@@ -228,7 +228,7 @@ theorem lie_H2_checkY (hM : M ≠ 0) (ν : ℤ) :
       (fun i : Fin M => ((i : ℕ) : ℤ) + 1)
       (fun i : Fin M => (M : ℤ) + 1 - (((i : ℕ) : ℤ) + 1)) ν
   simp only [checkCliffordTriple_z, checkCliffordTriple_y, checkCliffordTriple_Dy] at key
-  rw [H2_eq_check_sum hM, Abstract.lie_smul_left,
+  rw [H2_eq_check_sum hM, NecSuf.lie_smul_left,
     Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) => (one_smul ℂ _).symm, key]
   have hterm : ∀ i : Fin M,
       ((1 : ℂ) * (2 * (M : ℂ) * deltaMod M ((((i : ℕ) : ℤ) + 1) + ν) 1)) •

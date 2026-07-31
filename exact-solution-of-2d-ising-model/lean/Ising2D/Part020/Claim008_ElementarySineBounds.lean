@@ -4,7 +4,7 @@
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
 - `critical_008_claim_elementary_sine_bounds`（ラベル `elementary_sine_bounds`）
 
-**具体版**（人手証明と同じ抽象度）。抽象版は不要（後述）。
+**具体版**（人手証明と同じ抽象度）。必要十分版は不要（後述）。
 
 ## mathlib の状況（調査結果）
 
@@ -16,7 +16,7 @@
   （`Mathlib/Analysis/SpecialFunctions/Trigonometric/Bounds.lean`）
 
 したがって本主張に固有の内容は「`t = θ/2` と置いて `θ ∈ [0,π]` に制限する」ことだけであり、
-抽象版を別に立てる意味がない（抽象版は mathlib の 2 つの補題そのものである）。
+必要十分版を別に立てる意味がない（必要十分版は mathlib の 2 つの補題そのものである）。
 `π` の数値評価は `Real.pi_gt_d6` / `Real.pi_lt_d6`。
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds

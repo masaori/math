@@ -29,7 +29,7 @@
 その式をそのまま置いており、`exp_neg_Kstar : e^{-K_2^*} = √(tanh K_2)` が
 双対関係を使う唯一の場所である。
 
-抽象版は置いていない（`Real.tanh`, `Real.sinh` の具体的な恒等式そのものであり、
+必要十分版は置いていない（`Real.tanh`, `Real.sinh` の具体的な恒等式そのものであり、
 取り払える構造が無い）。
 -/
 import Ising2D.Part010.Claim003_ExpDiagonal

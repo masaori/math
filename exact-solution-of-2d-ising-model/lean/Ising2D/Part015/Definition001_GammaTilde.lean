@@ -5,7 +5,7 @@
 （`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
 `Athetatilde_001_definition_gamma1_gamma2`）
 
-**抽象版は無い。** この主張は「`A(θ)` の 4 成分が `γ_1, γ_2` で書ける」という
+**必要十分版は無い。** この主張は「`A(θ)` の 4 成分が `γ_1, γ_2` で書ける」という
 定義の言い換えであり、取り払える構造が残っていない（`γ_2(-θ)` の明示形を
 `cos(-θ) = cos θ`, `sin(-θ) = -sin θ` で計算するだけ）。
 

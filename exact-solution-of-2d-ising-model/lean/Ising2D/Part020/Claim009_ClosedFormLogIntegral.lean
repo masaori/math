@@ -5,13 +5,13 @@
 - `critical_009_claim_closed_form_log_integral`（ラベル `closed_form_log_integral`）
 
 **具体版**（人手証明と同じ抽象度＝`a = 1/2`, `b = π` に固定した形）。
-抽象版は `Ising2D/Abstract/LogDivergentIntegral.lean`
-（`Ising2D.Abstract.integral_inv_sqrt_quad` / `integral_inv_pow_three_half_le`）と
-`Ising2D/Abstract/HyperbolicBounds.lean`
-（`Ising2D.Abstract.log_two_mul_le_arsinh` / `arsinh_le_log_two_mul_add`）。
-**本ファイルの主張はすべて抽象版の特殊化として導出してある。**
+必要十分版は `Ising2D/NecSuf/LogDivergentIntegral.lean`
+（`Ising2D.NecSuf.integral_inv_sqrt_quad` / `integral_inv_pow_three_half_le`）と
+`Ising2D/NecSuf/HyperbolicBounds.lean`
+（`Ising2D.NecSuf.log_two_mul_le_arsinh` / `arsinh_le_log_two_mul_add`）。
+**本ファイルの主張はすべて必要十分版の特殊化として導出してある。**
 -/
-import Ising2D.Abstract.LogDivergentIntegral
+import Ising2D.NecSuf.LogDivergentIntegral
 import Ising2D.Part020.Claim001_CoshAddHalfAngle
 
 namespace Ising2D
@@ -20,11 +20,11 @@ open Real MeasureTheory
 
 /-- **人手証明 `closed_form_log_integral` (1)**:
 `∫_0^π dθ/√(δ² + θ²/4) = 2 arcsinh(π/(2δ))`。
-抽象版 `Abstract.integral_inv_sqrt_quad` の `a = 1/2`, `b = π` への特殊化。 -/
+必要十分版 `NecSuf.integral_inv_sqrt_quad` の `a = 1/2`, `b = π` への特殊化。 -/
 theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹)
       = 2 * Real.arsinh (Real.pi / (2 * δ)) := by
-  have h := Abstract.integral_inv_sqrt_quad (δ := δ) (a := 1/2) (b := Real.pi) hδ (by norm_num)
+  have h := NecSuf.integral_inv_sqrt_quad (δ := δ) (a := 1/2) (b := Real.pi) hδ (by norm_num)
   have hcongr : ∀ θ : ℝ, δ ^ 2 + ((1/2 : ℝ) * θ) ^ 2 = δ ^ 2 + θ ^ 2 / 4 := by
     intro θ; ring
   simp only [hcongr] at h
@@ -34,10 +34,10 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
   field_simp
 
 /-- **人手証明 `closed_form_log_integral` (2) 前半**: `log(2y) ≤ arcsinh y ≤ log(2y) + 1/(4y²)`。
-抽象版そのもの。 -/
+必要十分版そのもの。 -/
 theorem arsinh_log_bounds {y : ℝ} (hy : 0 < y) :
     Real.log (2 * y) ≤ Real.arsinh y ∧ Real.arsinh y ≤ Real.log (2 * y) + 1 / (4 * y ^ 2) :=
-  ⟨Abstract.log_two_mul_le_arsinh hy, Abstract.arsinh_le_log_two_mul_add hy⟩
+  ⟨NecSuf.log_two_mul_le_arsinh hy, NecSuf.arsinh_le_log_two_mul_add hy⟩
 
 /-- **人手証明 `closed_form_log_integral` (2) 後半**:
 `2 log(π/δ) ≤ ∫_0^π dθ/√(δ²+θ²/4) ≤ 2 log(π/δ) + 2δ²/π²`。 -/
@@ -61,12 +61,12 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
 
 /-- **人手証明 `closed_form_log_integral` (3)**:
 `∫_0^π dθ/(δ² + a²θ²/4)^{3/2} ≤ 2/(a δ²)`。
-抽象版 `Abstract.integral_inv_pow_three_half_le` の `A = a/2`, `b = π` への特殊化。 -/
+必要十分版 `NecSuf.integral_inv_pow_three_half_le` の `A = a/2`, `b = π` への特殊化。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
     (∫ θ in (0:ℝ)..Real.pi,
         ((δ ^ 2 + a ^ 2 * θ ^ 2 / 4) * Real.sqrt (δ ^ 2 + a ^ 2 * θ ^ 2 / 4))⁻¹)
       ≤ 2 / (a * δ ^ 2) := by
-  have h := Abstract.integral_inv_pow_three_half_le (δ := δ) (a := a / 2) (b := Real.pi)
+  have h := NecSuf.integral_inv_pow_three_half_le (δ := δ) (a := a / 2) (b := Real.pi)
     hδ (by positivity) Real.pi_pos
   have hcongr : ∀ θ : ℝ, δ ^ 2 + ((a / 2 : ℝ) * θ) ^ 2 = δ ^ 2 + a ^ 2 * θ ^ 2 / 4 := by
     intro θ; ring

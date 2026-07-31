@@ -4,9 +4,9 @@
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `trace_of_check_number_operator_product`（`evenEigen_004_claim_...`）。
 
-**抽象版**は `Ising2D/Abstract/PairedFermion.lean` の
-`Abstract.two_pow_smul_tau_noncommProd`（さらにその中身は
-`Ising2D/Abstract/JointEigenspace.lean` の `Abstract.two_pow_smul_tau_projOn`）。
+**必要十分版**は `Ising2D/NecSuf/PairedFermion.lean` の
+`NecSuf.two_pow_smul_tau_noncommProd`（さらにその中身は
+`Ising2D/NecSuf/JointEigenspace.lean` の `NecSuf.two_pow_smul_tau_projOn`）。
 本ファイルはその特殊化である。
 
 ## 章 009 との違い
@@ -20,7 +20,7 @@
 
 人手証明は「`check_number_operators_commute` (2) より積の順序に依らない」と書いている。
 Lean では非可換環に `Finset.prod` が無いので、可換性の証明を引数に取る
-`Finset.noncommProd` を使う（章 009 の `Abstract.projOn` と同じ扱い）。
+`Finset.noncommProd` を使う（章 009 の `NecSuf.projOn` と同じ扱い）。
 -/
 import Ising2D.Part017.Definition001_CheckNumberOperator
 
@@ -34,7 +34,7 @@ variable {M : ℕ} (F : CheckFermiSetup M)
 
 /-- 相異なる添字の集合 `S` にわたる `ň_μ` の積（人手証明の `ň_{μ_1}⋯ň_{μ_k}`）。 -/
 noncomputable def nOpProd (S : Finset (CheckIdx M)) : TensorPow M :=
-  S.noncommProd (Abstract.num F.cre F.ann) fun i _ j _ _ => F.commute_nOp_nOp i j
+  S.noncommProd (NecSuf.num F.cre F.ann) fun i _ j _ _ => F.commute_nOp_nOp i j
 
 theorem nOpProd_eq (S : Finset (CheckIdx M)) :
     F.nOpProd S = S.noncommProd F.nOp fun i _ j _ _ => F.commute_nOp_nOp i j := rfl
@@ -47,7 +47,7 @@ theorem nOpProd_empty : F.nOpProd ∅ = 1 := Finset.noncommProd_empty _ _
 theorem trace_nOpProd (S : Finset (CheckIdx M)) :
     (F.nOpProd S).trace = ((2 ^ (M - S.card) : ℕ) : ℂ) := by
   have h : ((2 ^ S.card : ℕ) : ℂ) * (F.nOpProd S).trace = ((2 ^ M : ℕ) : ℂ) := by
-    have h0 := Abstract.two_pow_smul_tau_noncommProd F.cre F.ann F.commute_nOp_nOp
+    have h0 := NecSuf.two_pow_smul_tau_noncommProd F.cre F.ann F.commute_nOp_nOp
       (Matrix.trace : TensorPow M → ℂ) (fun x y => Matrix.trace_add x y)
       (fun x y => Matrix.trace_mul_comm x y) F.acomm_cre_ann_self
       (fun i j hij => F.commute_cre_nOp hij) (fun i j hij => F.commute_ann_nOp hij) S

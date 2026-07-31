@@ -120,7 +120,7 @@ end Matrix
 
 /-! ## 原文と 1 対 1 に対応する具体版（複素行列）
 
-`exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、上の抽象版
+`exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、上の必要十分版
 （任意の環 `R`）とは別に、**人手証明 `<commutator_via_anticommutators>` と 1 対 1 に
 対応する形**をここで立てる。原文は
 
@@ -130,9 +130,9 @@ end Matrix
 
 であり、`Mat(n, ℂ)` は `Matrix (Fin n) (Fin n) ℂ` である。
 交換子・反交換子も、原文と同じく**複素行列に対する演算として**定義し直す
-（抽象版の `acomm` は任意の環の上の演算なので、記法としては原文と一致しない）。
+（必要十分版の `acomm` は任意の環の上の演算なので、記法としては原文と一致しない）。
 
-仮定 `1 ≤ n` は**証明では使わない**。抽象版から分かるとおりこの恒等式は分配法則と
+仮定 `1 ≤ n` は**証明では使わない**。必要十分版から分かるとおりこの恒等式は分配法則と
 結合法則だけで従うので、`n = 0`（自明な零環）でも成り立つ。原文との対応を明示するために
 引数としては残してある。 -/
 section ConcreteMatrix
@@ -151,14 +151,14 @@ theorem matComm_def (x y : Matrix (Fin n) (Fin n) ℂ) : matComm x y = x * y - y
 @[simp]
 theorem matAcomm_def (x y : Matrix (Fin n) (Fin n) ℂ) : matAcomm x y = x * y + y * x := rfl
 
-/-- 複素行列に対する交換子・反交換子が、抽象版の対応物と一致すること
-（具体版を抽象版の特殊化として導くための橋渡し）。 -/
+/-- 複素行列に対する交換子・反交換子が、必要十分版の対応物と一致すること
+（具体版を必要十分版の特殊化として導くための橋渡し）。 -/
 theorem matAcomm_eq_acomm (x y : Matrix (Fin n) (Fin n) ℂ) : matAcomm x y = acomm x y := rfl
 
 /-- **`<commutator_via_anticommutators>` の具体版（原文と 1 対 1 に対応する形）**:
 `n ∈ ℤ_{≥1}`、`a, b, c ∈ Mat(n, ℂ)` について `[a b, c] = a [b, c]₊ - [a, c]₊ b`。
 
-証明は抽象版 `commutator_via_anticommutators` を `R := Matrix (Fin n) (Fin n) ℂ` へ
+証明は必要十分版 `commutator_via_anticommutators` を `R := Matrix (Fin n) (Fin n) ℂ` へ
 特殊化するだけである。 -/
 theorem matComm_mul_eq_matAcomm_sub_matAcomm (_hn : 1 ≤ n)
     (a b c : Matrix (Fin n) (Fin n) ℂ) :

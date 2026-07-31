@@ -222,7 +222,7 @@ theorem abs_kappaDerivSq_sub_mul_Gsecond_le {K : ℝ} (hK : K ∈ Dnbhd) (hκ : 
     rw [inv_le_comm₀ hp (by norm_num)]
     linarith
   have hkL : |kappaK K| * L ≤ 0.36788 := by
-    have h := Abstract.mul_log_inv_le hkpos
+    have h := NecSuf.mul_log_inv_le hkpos
     rw [hLdef, one_div]
     linarith [h, hexp]
   have hinv2pi : 1 / (2 * Real.pi) ≤ 0.1592 := by

@@ -11,10 +11,10 @@
   `H_1^{(±)} = (1/M) ∑_{j=1}^{M} hat(Y)_j hat(Z)^{(±)}_{-j} exp(-√-1 · 2πj/M)`
   `H_2       = (1/M) ∑_{j=1}^{M} hat(Z)^{(-)}_{-j} hat(Y)_j`
 
-抽象版はこの主張には無い（この等式は `hat(Z), hat(Y)` の**具体形**＝離散フーリエ変換に
+必要十分版はこの主張には無い（この等式は `hat(Z), hat(Y)` の**具体形**＝離散フーリエ変換に
 本質的に依存するので、抽象化する余地がない）。本ファイルの結果を使う交換関係の側は
 具体版 `Ising2D/Part008/Claim001_CommutatorHZY.lean` と
-抽象版 `Ising2D/Abstract/CommutatorClifford.lean` の 2 本立てになっている。
+必要十分版 `Ising2D/NecSuf/CommutatorClifford.lean` の 2 本立てになっている。
 
 ## 形式化の方針
 

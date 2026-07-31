@@ -7,8 +7,8 @@
 `structured-latex/content/005_exp_conjugation_proof.mjs` の
 `<matrix_exp_conjugation>`、`ad_X^n` の定義は `<ad_binomial>` / `<def_ad_X_matrix>`）。
 
-**抽象版は `Ising2D/Abstract/ExpConjugation.lean`**（名前空間 `Ising2D.Abstract`）。
-本ファイルの各定理はそこからの特殊化として導出する。何が本質的かは抽象版の冒頭に書いた。
+**必要十分版は `Ising2D/NecSuf/ExpConjugation.lean`**（名前空間 `Ising2D.NecSuf`）。
+本ファイルの各定理はそこからの特殊化として導出する。何が本質的かは必要十分版の冒頭に書いた。
 
 人手証明との対応:
 
@@ -28,7 +28,7 @@
   `exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z`
 
 （`Ising2D.matExp_conj_two_dim_z` / `..._y`）。ここで
-`sinhc(s) = sinh(s)/s`（`s = 0` では `1`、`Ising2D.Abstract.sinhc`）である。
+`sinhc(s) = sinh(s)/s`（`s = 0` では `1`、`Ising2D.NecSuf.sinhc`）である。
 `sinh(s)/s` と書くと `s = 0` で 0 割りになるので、**`s = 0` の場合も含めて成り立つ形**に
 するために `sinhc` を別に定義してある。
 
@@ -47,7 +47,7 @@
 委ねられている。Lean 側では `Ising2D.matExpUnits`（`Part004/Definition010_H1H2V1V2.lean`）が
 `exp X` を単元として与えており、その逆元が定義から `exp (-X)` なので、この点に穴は無い。
 -/
-import Ising2D.Abstract.ExpConjugation
+import Ising2D.NecSuf.ExpConjugation
 import Ising2D.Part004.Definition010_H1H2V1V2
 
 namespace Ising2D
@@ -74,22 +74,22 @@ noncomputable def adPow (X : TensorPow M) : ℕ → TensorPow M → TensorPow M
     adPow X (n + 1) A = X * adPow X n A - adPow X n A * X := rfl
 
 open scoped Matrix.Norms.Operator in
-/-- `adPow` は抽象版の `adCLM` の冪と一致する（特殊化のための橋渡し）。 -/
+/-- `adPow` は必要十分版の `adCLM` の冪と一致する（特殊化のための橋渡し）。 -/
 theorem adPow_eq_adCLM (X : TensorPow M) :
-    ∀ (n : ℕ) (A : TensorPow M), adPow X n A = (Abstract.adCLM X ^ n) A
+    ∀ (n : ℕ) (A : TensorPow M), adPow X n A = (NecSuf.adCLM X ^ n) A
   | 0, A => by simp
   | n + 1, A => by
       rw [adPow_succ, adPow_eq_adCLM X n, pow_succ,
-        ← ((Commute.refl (Abstract.adCLM X)).pow_right n).eq]
+        ← ((Commute.refl (NecSuf.adCLM X)).pow_right n).eq]
       rfl
 
 open scoped Matrix.Norms.Operator in
-/-- 抽象版の特殊化そのもの（`Mat(2,ℂ)^{⊗M}` に `l^∞` 作用素ノルムを入れた文脈で述べた版）。
+/-- 必要十分版の特殊化そのもの（`Mat(2,ℂ)^{⊗M}` に `l^∞` 作用素ノルムを入れた文脈で述べた版）。
 公開する `Ising2D.hasSum_matExp_conj` はこれをノルム非依存の形へ移したものである。 -/
 private theorem hasSum_matExp_conj_aux (X A : TensorPow M) :
     HasSum (fun n : ℕ => ((n ! : ℂ))⁻¹ • adPow X n A)
       (NormedSpace.exp X * A * NormedSpace.exp (-X)) := by
-  simpa only [adPow_eq_adCLM] using Abstract.hasSum_exp_conj X A
+  simpa only [adPow_eq_adCLM] using NecSuf.hasSum_exp_conj X A
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **具体版の本体**（人手証明 `<exp_X_Y_exp_-X>`）:
@@ -118,37 +118,37 @@ theorem matExpUnits_conj_eq_tsum (X A : TensorPow M) :
 /-! ## 2 次元不変部分空間での閉じた形 -/
 
 open scoped Matrix.Norms.Operator in
-/-- 抽象版の特殊化（`l^∞` 作用素ノルムを入れた文脈での版）。 -/
+/-- 必要十分版の特殊化（`l^∞` 作用素ノルムを入れた文脈での版）。 -/
 private theorem matExp_conj_two_dim_z_aux {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) :
     NormedSpace.exp X * z * NormedSpace.exp (-X)
-      = Complex.cosh s • z + (α * Abstract.sinhc s) • y :=
-  Abstract.exp_conj_two_dim_z (y := y) hz hy hs
+      = Complex.cosh s • z + (α * NecSuf.sinhc s) • y :=
+  NecSuf.exp_conj_two_dim_z (y := y) hz hy hs
 
 open scoped Matrix.Norms.Operator in
 /-- 同上（`y` 始点）。 -/
 private theorem matExp_conj_two_dim_y_aux {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) :
     NormedSpace.exp X * y * NormedSpace.exp (-X)
-      = Complex.cosh s • y + (β * Abstract.sinhc s) • z :=
-  Abstract.exp_conj_two_dim_y (z := z) hz hy hs
+      = Complex.cosh s • y + (β * NecSuf.sinhc s) • z :=
+  NecSuf.exp_conj_two_dim_y (z := z) hz hy hs
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **系**（後段 `<T_V_hatZ_hatY>` で使う）: `[X, z] = α y`, `[X, y] = β z` かつ `s^2 = αβ` のとき
 
 `exp(X) z exp(-X) = cosh(s) z + α sinhc(s) y`。
 
-`s = 0` の場合も含めて成り立つ（`Ising2D.Abstract.sinhc` は `s = 0` で `1`）。 -/
+`s = 0` の場合も含めて成り立つ（`Ising2D.NecSuf.sinhc` は `s = 0` で `1`）。 -/
 theorem matExp_conj_two_dim_z {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) :
-    matExp X * z * matExp (-X) = Complex.cosh s • z + (α * Abstract.sinhc s) • y :=
+    matExp X * z * matExp (-X) = Complex.cosh s • z + (α * NecSuf.sinhc s) • y :=
   matExp_conj_two_dim_z_aux hz hy hs
 
 set_option backward.isDefEq.respectTransparency false in
 /-- 同上（`y` 始点）: `exp(X) y exp(-X) = cosh(s) y + β sinhc(s) z`。 -/
 theorem matExp_conj_two_dim_y {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) :
-    matExp X * y * matExp (-X) = Complex.cosh s • y + (β * Abstract.sinhc s) • z :=
+    matExp X * y * matExp (-X) = Complex.cosh s • y + (β * NecSuf.sinhc s) • z :=
   matExp_conj_two_dim_y_aux hz hy hs
 
 end Ising2D

@@ -14,11 +14,11 @@
 `γ(θ_μ) = arccosh(γ_1(θ_μ))` も（mathlib に `Real.arccosh` が無いため）
 非負実数の族 `g` として受け取る（`Claim009_EigenvaluesVprime.lean` 冒頭参照）。
 
-抽象版は置かない。理由: この主張は
+必要十分版は置かない。理由: この主張は
 「`tr(V)/tr(V^{-1}) = c^2`」＋「符号反転共役で `tr` が不変」＋「`V` が正定値」という
 **この模型の具体的な対象についての主張**であり、取り払える構造が無い
 （使っている一般論はトレースの線型性・巡回性だけで、それは既に
-`Ising2D/Abstract/NumberOperator.lean` 側で「加法的かつ巡回的な汎関数」として
+`Ising2D/NecSuf/NumberOperator.lean` 側で「加法的かつ巡回的な汎関数」として
 抽象化してある）。
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime

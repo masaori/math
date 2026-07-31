@@ -4,9 +4,9 @@
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `eigenvalues_of_V_plus`（`evenEigen_010_theorem_...`）。
 
-**抽象版**は `Ising2D/Abstract/SimpleEigenvalue.lean` の
-`Abstract.sum_weight_le_univ` / `Abstract.sum_weight_empty_le`（大小比較の核）と、
-`Ising2D/Abstract/JointEigenspace.lean`（固有関係そのもの）。
+**必要十分版**は `Ising2D/NecSuf/SimpleEigenvalue.lean` の
+`NecSuf.sum_weight_le_univ` / `NecSuf.sum_weight_empty_le`（大小比較の核）と、
+`Ising2D/NecSuf/JointEigenspace.lean`（固有関係そのもの）。
 
 ## 章 009 との違い
 
@@ -17,7 +17,7 @@
 なる。狭義性は `Theorem011_MaxEigenvalueSimple.lean` の単純性の根拠である。
 -/
 import Ising2D.Part017.Claim009_ConstantCEvenSector
-import Ising2D.Abstract.SimpleEigenvalue
+import Ising2D.NecSuf.SimpleEigenvalue
 
 namespace Ising2D
 
@@ -73,13 +73,13 @@ theorem checkBigLambda_pos (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) {s2 
   exact mul_pos (Real.rpow_pos_of_pos (by linarith) _) (Real.exp_pos _)
 
 /-- **原文 `eigenvalues_of_V_plus` (2)**: 最大固有値は全ての `ε_μ = 1` のとき
-（抽象版 `Abstract.sum_weight_le_univ` の特殊化）。 -/
+（必要十分版 `NecSuf.sum_weight_le_univ` の特殊化）。 -/
 theorem checkBigLambda_le_max (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hg : ∀ i, 0 ≤ g i) {s2 : ℝ} (hs2 : 0 < s2) (T : Finset (CheckIdx M)) :
     checkBigLambda F g s2 T ≤ checkBigLambda F g s2 Finset.univ := by
   rw [checkBigLambda, checkBigLambda]
   refine mul_le_mul_of_nonneg_left ?_ (le_of_lt (Real.rpow_pos_of_pos (by linarith) _))
-  exact Real.exp_le_exp.2 (Abstract.sum_weight_le_univ g hg T)
+  exact Real.exp_le_exp.2 (NecSuf.sum_weight_le_univ g hg T)
 
 /-- **原文 `eigenvalues_of_V_plus` (2)**: 最小固有値は全ての `ε_μ = 0` のとき。 -/
 theorem checkBigLambda_min_le (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
@@ -87,19 +87,19 @@ theorem checkBigLambda_min_le (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     checkBigLambda F g s2 (∅ : Finset (CheckIdx M)) ≤ checkBigLambda F g s2 T := by
   rw [checkBigLambda, checkBigLambda]
   refine mul_le_mul_of_nonneg_left ?_ (le_of_lt (Real.rpow_pos_of_pos (by linarith) _))
-  exact Real.exp_le_exp.2 (Abstract.sum_weight_empty_le g hg T)
+  exact Real.exp_le_exp.2 (NecSuf.sum_weight_empty_le g hg T)
 
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (2)**: `γ(θ~_μ) > 0` なら大小比較は狭義。
 
 章 009 では `γ(θ_μ) ≥ 0` しか無いのでこの形は言えない
-（抽象版 `Abstract.sum_weight_lt_of_ne_univ` の特殊化）。 -/
+（必要十分版 `NecSuf.sum_weight_lt_of_ne_univ` の特殊化）。 -/
 theorem checkBigLambda_lt_max (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hg : ∀ i, 0 < g i) {s2 : ℝ} (hs2 : 0 < s2) {T : Finset (CheckIdx M)}
     (hT : T ≠ Finset.univ) :
     checkBigLambda F g s2 T < checkBigLambda F g s2 Finset.univ := by
   rw [checkBigLambda, checkBigLambda]
   refine mul_lt_mul_of_pos_left ?_ (Real.rpow_pos_of_pos (by linarith) _)
-  exact Real.exp_lt_exp.2 (Abstract.sum_weight_lt_of_ne_univ g hg hT)
+  exact Real.exp_lt_exp.2 (NecSuf.sum_weight_lt_of_ne_univ g hg hT)
 
 /-- **原文 `eigenvalues_of_V_plus` の最後**: `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2`。 -/
 theorem checkBigLambda_max_mul_min (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)

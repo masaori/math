@@ -35,14 +35,16 @@ fi
 targets=(
   Ising2D.tensorPowBasis
   Ising2D.matTensorPowBasis
-  Ising2D.Abstract.piTensorBasis
-  Ising2D.Abstract.tensorPowBasisOfBasis
-  Ising2D.Abstract.basisOfLinearEquiv
-  Ising2D.Abstract.matrixUnitBasis
-  Ising2D.tensorPowBasis_eq_abstract
-  Ising2D.matTensorPowBasis_eq_abstract
-  Ising2D.matrixUnitBasis_eq_abstract
-  Ising2D.abstract_matrixUnitBasis_apply_eq_E
+  Ising2D.NecSuf.matrix_eq_sum_smul_single
+  Ising2D.NecSuf.sum_smul_single_apply
+  Ising2D.NecSuf.linearIndependent_single
+  Ising2D.NecSuf.matrixUnitBasis
+  Ising2D.NecSuf.coe_matrixUnitBasis_eq_stdBasis
+  Ising2D.NecSuf.basisOfLinearEquiv
+  Ising2D.EBasis
+  Ising2D.EBasis_apply
+  Ising2D.coe_EBasis_eq_matrixUnitBasis
+  Ising2D.matrix_eq_sum_E
   Ising2D.kroneckerTensorPowBasis
   Ising2D.kroneckerTensorPowBasis_apply
   Ising2D.tensorPowAlgEquiv
@@ -51,12 +53,12 @@ targets=(
   Ising2D.one_eq_sum_E
   Ising2D.scalar_identity_commutes
   Ising2D.scalar_identity_commutes_fin
-  Ising2D.Abstract.smul_one_commute
-  Ising2D.Abstract.smul_one_sub_comm
-  Ising2D.Abstract.centralizer_is_scalar_semiring
-  Ising2D.Abstract.centralizer_is_scalar_commSemiring
-  Ising2D.Abstract.single_mul_single_eq_ite
-  Ising2D.Abstract.one_eq_sum_single
+  Ising2D.NecSuf.smul_one_commute
+  Ising2D.NecSuf.smul_one_sub_comm
+  Ising2D.NecSuf.centralizer_is_scalar_semiring
+  Ising2D.NecSuf.centralizer_is_scalar_commSemiring
+  Ising2D.NecSuf.single_mul_single_eq_ite
+  Ising2D.NecSuf.one_eq_sum_single
   Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm
   Ising2D.centralizer_is_scalar
   Ising2D.centralizer_is_scalar_abstract
@@ -69,23 +71,23 @@ targets=(
   Ising2D.Conjugation.matrix_conj_mul
   Ising2D.Conjugation.matrix_conj_one
   Ising2D.Conjugation.matrix_conj_comp
-  Ising2D.Abstract.Conj.sandwich_comp
-  Ising2D.Abstract.Conj.sandwich_mul
-  Ising2D.Abstract.Conj.sandwich_one
-  Ising2D.Abstract.Conj.sandwich_add
-  Ising2D.Abstract.Conj.conjMonoidHom
-  Ising2D.Abstract.Conj.conjMulAut
-  Ising2D.Abstract.Conj.conjMulAutHom
-  Ising2D.Abstract.Conj.conjMonoidHom_comp
-  Ising2D.Abstract.Conj.conjRingHom
-  Ising2D.Abstract.Conj.conjRingAutHom
-  Ising2D.Abstract.Conj.sandwich_mul_needs_left_inv
-  Ising2D.Abstract.Conj.sandwich_one_needs_right_inv
+  Ising2D.NecSuf.Conj.sandwich_comp
+  Ising2D.NecSuf.Conj.sandwich_mul
+  Ising2D.NecSuf.Conj.sandwich_one
+  Ising2D.NecSuf.Conj.sandwich_add
+  Ising2D.NecSuf.Conj.conjMonoidHom
+  Ising2D.NecSuf.Conj.conjMulAut
+  Ising2D.NecSuf.Conj.conjMulAutHom
+  Ising2D.NecSuf.Conj.conjMonoidHom_comp
+  Ising2D.NecSuf.Conj.conjRingHom
+  Ising2D.NecSuf.Conj.conjRingAutHom
+  Ising2D.NecSuf.Conj.sandwich_mul_needs_left_inv
+  Ising2D.NecSuf.Conj.sandwich_one_needs_right_inv
   Ising2D.Conjugation.T_eq_conjMonoidHom
-  Ising2D.Conjugation.matrix_conj_mul_of_abstract
-  Ising2D.Conjugation.matrix_conj_one_of_abstract
-  Ising2D.Conjugation.matrix_conj_comp_of_abstract
-  Ising2D.Conjugation.matrix_conj_add_of_abstract
+  Ising2D.Conjugation.matrix_conj_mul_of_necSuf
+  Ising2D.Conjugation.matrix_conj_one_of_necSuf
+  Ising2D.Conjugation.matrix_conj_comp_of_necSuf
+  Ising2D.Conjugation.matrix_conj_add_of_necSuf
   Ising2D.Conjugation.matrixConjRingAutHom
   Ising2D.Conjugation.matrixConjRingAutHom_nonsingInvUnit
   Ising2D.commutator_via_anticommutators
@@ -116,19 +118,19 @@ targets=(
   Ising2D.siteProd_mem
   Ising2D.E_eq_siteProd
   Ising2D.Z_Y_generate_algebra
-  Ising2D.Abstract.eq_top_of_span_eq_top
-  Ising2D.Abstract.eq_top_of_basis_mem
-  Ising2D.Abstract.map_mem_of_span_eq_top
-  Ising2D.Abstract.map_mem_of_mulSingle_mem
-  Ising2D.Abstract.map_mem_subalgebra_of_mulSingle_mem
-  Ising2D.Abstract.string_mem
-  Ising2D.Abstract.local_mem
-  Ising2D.xString_mem_adjoin_of_abstract
-  Ising2D.sigma_mem_adjoin_of_abstract
+  Ising2D.NecSuf.eq_top_of_span_eq_top
+  Ising2D.NecSuf.eq_top_of_basis_mem
+  Ising2D.NecSuf.map_mem_of_span_eq_top
+  Ising2D.NecSuf.map_mem_of_mulSingle_mem
+  Ising2D.NecSuf.map_mem_subalgebra_of_mulSingle_mem
+  Ising2D.NecSuf.string_mem
+  Ising2D.NecSuf.local_mem
+  Ising2D.xString_mem_adjoin_of_necSuf
+  Ising2D.sigma_mem_adjoin_of_necSuf
   Ising2D.span_pauli_eq_top
-  Ising2D.siteOp_mem_adjoin_of_abstract
-  Ising2D.siteProd_mem_of_abstract
-  Ising2D.Z_Y_generate_algebra_of_abstract
+  Ising2D.siteOp_mem_adjoin_of_necSuf
+  Ising2D.siteProd_mem_of_necSuf
+  Ising2D.Z_Y_generate_algebra_of_necSuf
   Ising2D.acomm_ZY
   Ising2D.linearIndependent_of_clifford
   Ising2D.ZY_linearIndependent
@@ -271,10 +273,10 @@ targets=(
   Ising2D.TV_psiDag_of_action
   Ising2D.TV_psi_of_action
   Ising2D.TV_psiDag_psi_of_action
-  Ising2D.Abstract.acomm_lincomb
-  Ising2D.Abstract.acomm_lincomb_clifford
-  Ising2D.Abstract.car_of_coeffs
-  Ising2D.acomm_hatZMinus_hatY_lin2_of_abstract
+  Ising2D.NecSuf.acomm_lincomb
+  Ising2D.NecSuf.acomm_lincomb_clifford
+  Ising2D.NecSuf.car_of_coeffs
+  Ising2D.acomm_hatZMinus_hatY_lin2_of_necSuf
   Ising2D.psi_eq_neg_coeff
   Ising2D.psi_coeff_identities
   Ising2D.acomm_psi_relations_of_car
@@ -289,16 +291,16 @@ targets=(
   Ising2D.H1_eq_hat_sum
   Ising2D.H2_eq_hat_sum
   Ising2D.H2_eq_hatZMinus_sum
-  Ising2D.Abstract.lie_smul_left
-  Ising2D.Abstract.lie_sum_smul_left
-  Ising2D.Abstract.lie_mul_of_acomm_smul_one
-  Ising2D.Abstract.lie_sum_smul_mul_of_acomm_smul_one
-  Ising2D.Abstract.CliffordTriple.lie_sum_yz_z
-  "Ising2D.Abstract.CliffordTriple.lie_sum_yz_z'"
-  Ising2D.Abstract.CliffordTriple.lie_sum_yz_y
-  Ising2D.Abstract.CliffordTriple.lie_sum_zy_z
-  "Ising2D.Abstract.CliffordTriple.lie_sum_zy_z'"
-  Ising2D.Abstract.CliffordTriple.lie_sum_zy_y
+  Ising2D.NecSuf.lie_smul_left
+  Ising2D.NecSuf.lie_sum_smul_left
+  Ising2D.NecSuf.lie_mul_of_acomm_smul_one
+  Ising2D.NecSuf.lie_sum_smul_mul_of_acomm_smul_one
+  Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z
+  "Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z'"
+  Ising2D.NecSuf.CliffordTriple.lie_sum_yz_y
+  Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z
+  "Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z'"
+  Ising2D.NecSuf.CliffordTriple.lie_sum_zy_y
   Ising2D.expPhase_ne_zero
   Ising2D.deltaMod_neg
   Ising2D.deltaMod_succ_eq
@@ -323,32 +325,32 @@ targets=(
   "Ising2D.lie_H2_hatZMinus'"
   "Ising2D.lie_H2_hatY'"
   "Ising2D.lie_H2_hatZPlus'"
-  Ising2D.Abstract.sinhc
-  Ising2D.Abstract.sinhc_zero
-  Ising2D.Abstract.sinhc_of_ne_zero
-  Ising2D.Abstract.mul_sinhc
-  Ising2D.Abstract.hasSum_sinhc
-  Ising2D.Abstract.lmulCLM
-  Ising2D.Abstract.rmulCLM
-  Ising2D.Abstract.adCLM
-  Ising2D.Abstract.lmulCLM_apply
-  Ising2D.Abstract.rmulCLM_apply
-  Ising2D.Abstract.adCLM_apply
-  Ising2D.Abstract.commute_lmulCLM_rmulCLM
-  Ising2D.Abstract.lmulCLM_pow
-  Ising2D.Abstract.rmulCLM_pow
-  Ising2D.Abstract.exp_lmulCLM
-  Ising2D.Abstract.exp_rmulCLM
-  Ising2D.Abstract.exp_adCLM_apply
-  Ising2D.Abstract.hasSum_exp_conj
-  Ising2D.Abstract.exp_conj_eq_tsum
-  Ising2D.Abstract.adCLM_sq_z
-  Ising2D.Abstract.adCLM_sq_y
-  Ising2D.Abstract.adCLM_pow_even
-  Ising2D.Abstract.adCLM_pow_odd_z
-  Ising2D.Abstract.adCLM_pow_odd_y
-  Ising2D.Abstract.exp_conj_two_dim_z
-  Ising2D.Abstract.exp_conj_two_dim_y
+  Ising2D.NecSuf.sinhc
+  Ising2D.NecSuf.sinhc_zero
+  Ising2D.NecSuf.sinhc_of_ne_zero
+  Ising2D.NecSuf.mul_sinhc
+  Ising2D.NecSuf.hasSum_sinhc
+  Ising2D.NecSuf.lmulCLM
+  Ising2D.NecSuf.rmulCLM
+  Ising2D.NecSuf.adCLM
+  Ising2D.NecSuf.lmulCLM_apply
+  Ising2D.NecSuf.rmulCLM_apply
+  Ising2D.NecSuf.adCLM_apply
+  Ising2D.NecSuf.commute_lmulCLM_rmulCLM
+  Ising2D.NecSuf.lmulCLM_pow
+  Ising2D.NecSuf.rmulCLM_pow
+  Ising2D.NecSuf.exp_lmulCLM
+  Ising2D.NecSuf.exp_rmulCLM
+  Ising2D.NecSuf.exp_adCLM_apply
+  Ising2D.NecSuf.hasSum_exp_conj
+  Ising2D.NecSuf.exp_conj_eq_tsum
+  Ising2D.NecSuf.adCLM_sq_z
+  Ising2D.NecSuf.adCLM_sq_y
+  Ising2D.NecSuf.adCLM_pow_even
+  Ising2D.NecSuf.adCLM_pow_odd_z
+  Ising2D.NecSuf.adCLM_pow_odd_y
+  Ising2D.NecSuf.exp_conj_two_dim_z
+  Ising2D.NecSuf.exp_conj_two_dim_y
   Ising2D.adPow
   Ising2D.adPow_zero
   Ising2D.adPow_succ
@@ -358,9 +360,9 @@ targets=(
   Ising2D.matExpUnits_conj_eq_tsum
   Ising2D.matExp_conj_two_dim_z
   Ising2D.matExp_conj_two_dim_y
-  Ising2D.Abstract.conj_smul_eq
-  Ising2D.Abstract.twoDimConjMat
-  Ising2D.Abstract.exp_conj_two_dim_actsBy
+  Ising2D.NecSuf.conj_smul_eq
+  Ising2D.NecSuf.twoDimConjMat
+  Ising2D.NecSuf.exp_conj_two_dim_actsBy
   Ising2D.expPhase_eq_exp_neg_thetaMu
   Ising2D.expPhase_neg_eq_exp_thetaMu
   Ising2D.B1mat_eq_twoDimConjMat
@@ -377,59 +379,59 @@ targets=(
   Ising2D.TV_psiDag
   Ising2D.TV_psi
   Ising2D.TV_psiDag_psi
-  Ising2D.Abstract.acomm_sum_smul_clifford_left
-  Ising2D.Abstract.linearIndependent_of_clifford_abstract
+  Ising2D.NecSuf.acomm_sum_smul_clifford_left
+  Ising2D.NecSuf.linearIndependent_of_clifford_necSuf
   Ising2D.smul_one_faithful_tensorPow
-  Ising2D.ZY_linearIndependent_of_abstract
-  Ising2D.Abstract.sum_zpow_primitiveRoot
+  Ising2D.ZY_linearIndependent_of_necSuf
+  Ising2D.NecSuf.sum_zpow_primitiveRoot
   Ising2D.zetaM
   Ising2D.isPrimitiveRoot_zetaM
   Ising2D.zetaM_ne_zero
   Ising2D.expPhase_eq_zetaM_zpow
   Ising2D.expPhase_eq_zetaM_zpow_neg
-  Ising2D.expPhase_sum_of_abstract
-  Ising2D.Abstract.acomm_sum_smul_clifford_abstract
-  Ising2D.Abstract.acomm_fourier_clifford_weights
-  Ising2D.Abstract.acomm_fourier_clifford
-  Ising2D.Abstract.acomm_fourier_clifford_flip
+  Ising2D.expPhase_sum_of_necSuf
+  Ising2D.NecSuf.acomm_sum_smul_clifford_necSuf
+  Ising2D.NecSuf.acomm_fourier_clifford_weights
+  Ising2D.NecSuf.acomm_fourier_clifford
+  Ising2D.NecSuf.acomm_fourier_clifford_flip
   Ising2D.hatZ_eq_weighted_zetaM
   Ising2D.hatY_eq_weighted_zetaM
   Ising2D.deltaMod_eq_ite_neg
-  Ising2D.acomm_hatZ_hatZ_same_of_abstract
-  Ising2D.acomm_hatY_hatY_of_abstract
-  Ising2D.acomm_hatZPlus_hatZMinus_of_abstract
-  Ising2D.Abstract.acomm_of_single_site
-  Ising2D.Abstract.sq_eq_one_of_site_sq_eq_one
-  Ising2D.Abstract.jwStr
-  Ising2D.Abstract.acomm_jwStr
-  Ising2D.Abstract.jwStr_sq
+  Ising2D.acomm_hatZ_hatZ_same_of_necSuf
+  Ising2D.acomm_hatY_hatY_of_necSuf
+  Ising2D.acomm_hatZPlus_hatZMinus_of_necSuf
+  Ising2D.NecSuf.acomm_of_single_site
+  Ising2D.NecSuf.sq_eq_one_of_site_sq_eq_one
+  Ising2D.NecSuf.jwStr
+  Ising2D.NecSuf.acomm_jwStr
+  Ising2D.NecSuf.jwStr_sq
   Ising2D.siteProd_isSiteProd
   Ising2D.jwFamily_eq_jwStr
-  Ising2D.jw_anticomm_of_abstract
-  Ising2D.jw_sq_of_abstract
-  Ising2D.anticomm_Z_Z_of_abstract
-  Ising2D.anticomm_Z_Y_of_abstract
-  Ising2D.anticomm_Y_Y_of_abstract
-  Ising2D.Abstract.fin_dvd_sub_iff_eq
-  Ising2D.Abstract.zpow_mul_add_natCast
-  Ising2D.Abstract.transform_periodic
-  Ising2D.Abstract.inverse_dft_abstract
+  Ising2D.jw_anticomm_of_necSuf
+  Ising2D.jw_sq_of_necSuf
+  Ising2D.anticomm_Z_Z_of_necSuf
+  Ising2D.anticomm_Z_Y_of_necSuf
+  Ising2D.anticomm_Y_Y_of_necSuf
+  Ising2D.NecSuf.fin_dvd_sub_iff_eq
+  Ising2D.NecSuf.zpow_mul_add_natCast
+  Ising2D.NecSuf.transform_periodic
+  Ising2D.NecSuf.inverse_dft_necSuf
   Ising2D.expPhase_eq_zetaM_zpow_freq
-  Ising2D.hatZ_periodic_of_abstract
-  Ising2D.hatY_periodic_of_abstract
-  Ising2D.hatZMinus_M_eq_neg_M_of_abstract
-  Ising2D.hatY_M_eq_neg_M_of_abstract
-  Ising2D.inverse_dft_of_abstract
-  Ising2D.recover_Y_of_abstract
-  Ising2D.recover_Z_of_abstract
+  Ising2D.hatZ_periodic_of_necSuf
+  Ising2D.hatY_periodic_of_necSuf
+  Ising2D.hatZMinus_M_eq_neg_M_of_necSuf
+  Ising2D.hatY_M_eq_neg_M_of_necSuf
+  Ising2D.inverse_dft_of_necSuf
+  Ising2D.recover_Y_of_necSuf
+  Ising2D.recover_Z_of_necSuf
   Ising2D.configBasisIso
   Ising2D.sgn_configBasisIso
-  Ising2D.Abstract.prod_entry_eq_zero_of_ne
+  Ising2D.NecSuf.prod_entry_eq_zero_of_ne
   Ising2D.siteProd_diagonal
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
   Ising2D.sigmaZ_mulVec_basisVec_spin
-  Ising2D.Abstract.map_exp_of_continuous
+  Ising2D.NecSuf.map_exp_of_continuous
   Ising2D.exp_pi_apply
   Ising2D.matrixExp_diagonal
   Ising2D.matrixExp_diagonal_apply
@@ -448,19 +450,19 @@ targets=(
   Ising2D.V2comp_eq_siteProd_twoByTwo
   Ising2D.V2pauli_eq_V2comp
   Ising2D.V2_component_equals_pauli
-  Ising2D.Abstract.openW_snoc
-  Ising2D.Abstract.pow_succ_apply_eq_sum
-  Ising2D.Abstract.trace_pow_succ
+  Ising2D.NecSuf.openW_snoc
+  Ising2D.NecSuf.pow_succ_apply_eq_sum
+  Ising2D.NecSuf.trace_pow_succ
   Ising2D.partitionFunction_eq_conf
   Ising2D.partitionFunctionC_eq_trace
   Ising2D.partition_function_in_pauli_form
   Ising2D.partition_function_in_pauli_form_V2
-  Ising2D.Abstract.invProj_sq
-  Ising2D.Abstract.invProj_mul_invProj_neg
-  Ising2D.Abstract.invProj_add_invProj_neg
-  Ising2D.Abstract.commute_invProj
-  Ising2D.Abstract.pow_mul_proj
-  Ising2D.Abstract.mul_pow_conj_left
+  Ising2D.NecSuf.invProj_sq
+  Ising2D.NecSuf.invProj_mul_invProj_neg
+  Ising2D.NecSuf.invProj_add_invProj_neg
+  Ising2D.NecSuf.commute_invProj
+  Ising2D.NecSuf.pow_mul_proj
+  Ising2D.NecSuf.mul_pow_conj_left
   Ising2D.epsProj_sq
   Ising2D.epsProj_mul_epsProj_neg
   Ising2D.epsProj_add_epsProj_neg
@@ -480,16 +482,16 @@ targets=(
   Ising2D.trace_epsProj_sym_pow
   Ising2D.trace_epsProj_sym_pow_eq_plain
   Ising2D.partition_function_sector_decomposition
-  Ising2D.Abstract.continuous_arcosh_comp
-  Ising2D.Abstract.cosh_sub_le_cosh_mul_cosh_sub
-  Ising2D.Abstract.one_le_cosh_mul_cosh_sub
-  Ising2D.Abstract.abs_integral_sub_riemann_sum_le
-  Ising2D.Abstract.abs_integral_sub_riemann_sum_le_modulus
-  Ising2D.Abstract.tendsto_modulus_atTop
-  Ising2D.Abstract.tendsto_riemann_sum
-  Ising2D.Abstract.abs_log_div_sub_log_le_of_sandwich
-  Ising2D.Abstract.log_rpow_mul_exp
-  Ising2D.Abstract.tendsto_affine
+  Ising2D.NecSuf.continuous_arcosh_comp
+  Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub
+  Ising2D.NecSuf.one_le_cosh_mul_cosh_sub
+  Ising2D.NecSuf.abs_integral_sub_riemann_sum_le
+  Ising2D.NecSuf.abs_integral_sub_riemann_sum_le_modulus
+  Ising2D.NecSuf.tendsto_modulus_atTop
+  Ising2D.NecSuf.tendsto_riemann_sum
+  Ising2D.NecSuf.abs_log_div_sub_log_le_of_sandwich
+  Ising2D.NecSuf.log_rpow_mul_exp
+  Ising2D.NecSuf.tendsto_affine
   Ising2D.gamma1_lower_bound_all_theta
   Ising2D.gamma1R_ge_cosh_sub
   Ising2D.one_le_gamma1R
@@ -506,21 +508,21 @@ targets=(
   Ising2D.inv_M_log_LambdaM
   Ising2D.onsager_free_energy_expression
   Ising2D.onsager_free_energy_expression_indep_delta
-  Ising2D.Abstract.bilin_quadratic_expand
-  Ising2D.Abstract.psd_cauchy_schwarz
-  Ising2D.Abstract.IsPsdPair.cs_ip
-  Ising2D.Abstract.IsPsdPair.cs_W
-  Ising2D.Abstract.IsPsdPair.rayleigh_bounds_operator_norm
-  Ising2D.Abstract.IsPsdPair.rayleigh_bounds_operator_norm_pow
-  Ising2D.Abstract.IsPsdPair.moment_split
-  Ising2D.Abstract.IsPsdPair.moment_nonneg
-  Ising2D.Abstract.IsPsdPair.moment_le_pow
-  Ising2D.Abstract.IsPsdPair.moment_log_convex
-  Ising2D.Abstract.IsPdPair.W_ker
-  Ising2D.Abstract.IsPdPair.pow_ne_zero_of_ne_zero
-  Ising2D.Abstract.IsPdPair.moment_pos
-  Ising2D.Abstract.IsPdPair.moment_ratio_le
-  Ising2D.Abstract.IsPdPair.moment_pow_le
+  Ising2D.NecSuf.bilin_quadratic_expand
+  Ising2D.NecSuf.psd_cauchy_schwarz
+  Ising2D.NecSuf.IsPsdPair.cs_ip
+  Ising2D.NecSuf.IsPsdPair.cs_W
+  Ising2D.NecSuf.IsPsdPair.rayleigh_bounds_operator_norm
+  Ising2D.NecSuf.IsPsdPair.rayleigh_bounds_operator_norm_pow
+  Ising2D.NecSuf.IsPsdPair.moment_split
+  Ising2D.NecSuf.IsPsdPair.moment_nonneg
+  Ising2D.NecSuf.IsPsdPair.moment_le_pow
+  Ising2D.NecSuf.IsPsdPair.moment_log_convex
+  Ising2D.NecSuf.IsPdPair.W_ker
+  Ising2D.NecSuf.IsPdPair.pow_ne_zero_of_ne_zero
+  Ising2D.NecSuf.IsPdPair.moment_pos
+  Ising2D.NecSuf.IsPdPair.moment_ratio_le
+  Ising2D.NecSuf.IsPdPair.moment_pow_le
   Ising2D.matBilin
   Ising2D.matBilin_apply
   Ising2D.matBilin_one_apply
@@ -556,7 +558,7 @@ targets=(
   Ising2D.rayleighSup_pos
   Ising2D.matBilin_one_mulVecLin_pow
   Ising2D.psd_of_pd
-  Ising2D.abstract_rayleigh_hyp
+  Ising2D.necSuf_rayleigh_hyp
   Ising2D.rayleigh_bounds_operator_normSq
   Ising2D.rayleigh_bounds_operator_normSq_pow
   Ising2D.rayleigh_bounds_operator_norm
@@ -600,19 +602,19 @@ targets=(
   Ising2D.projMinus_mulVec_eigen
   Ising2D.sector_decomposition_of_rayleigh_sup
   # --- 009 章（転送行列 V の固有値）---
-  Ising2D.Abstract.num_mul_num
-  Ising2D.Abstract.ann_mul_cre
-  Ising2D.Abstract.commute_cre_num
-  Ising2D.Abstract.commute_ann_num
-  Ising2D.Abstract.commute_num_num
-  Ising2D.Abstract.tau_num_mul_add_self
-  Ising2D.Abstract.projOn_mul_self
-  Ising2D.Abstract.projOn_mul_projOn_of_ne
-  Ising2D.Abstract.sum_projOn
-  Ising2D.Abstract.num_mul_projOn
-  Ising2D.Abstract.two_pow_smul_tau_projOn
-  Ising2D.Abstract.pow_mul_eq_of_mul_eq_smul
-  Ising2D.Abstract.exp_mul_eq_of_mul_eq_smul
+  Ising2D.NecSuf.num_mul_num
+  Ising2D.NecSuf.ann_mul_cre
+  Ising2D.NecSuf.commute_cre_num
+  Ising2D.NecSuf.commute_ann_num
+  Ising2D.NecSuf.commute_num_num
+  Ising2D.NecSuf.tau_num_mul_add_self
+  Ising2D.NecSuf.projOn_mul_self
+  Ising2D.NecSuf.projOn_mul_projOn_of_ne
+  Ising2D.NecSuf.sum_projOn
+  Ising2D.NecSuf.num_mul_projOn
+  Ising2D.NecSuf.two_pow_smul_tau_projOn
+  Ising2D.NecSuf.pow_mul_eq_of_mul_eq_smul
+  Ising2D.NecSuf.exp_mul_eq_of_mul_eq_smul
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
   Ising2D.trace_cyclic
@@ -684,13 +686,13 @@ targets=(
   Ising2D.bigLambda_le_max
   Ising2D.bigLambda_min_le
   Ising2D.bigLambda_max_mul_min
-  Ising2D.Abstract.pow_half_eq_neg_one
-  Ising2D.Abstract.sq_isPrimitiveRoot
-  Ising2D.Abstract.zpow_mul_natCast
-  Ising2D.Abstract.sum_zpow_primitiveRoot_zero_based
-  Ising2D.Abstract.sum_zpow_antiperiodic
-  Ising2D.Abstract.inverse_dft_antiperiodic
-  Ising2D.Abstract.acomm_antiperiodic_fourier_clifford
+  Ising2D.NecSuf.pow_half_eq_neg_one
+  Ising2D.NecSuf.sq_isPrimitiveRoot
+  Ising2D.NecSuf.zpow_mul_natCast
+  Ising2D.NecSuf.sum_zpow_primitiveRoot_zero_based
+  Ising2D.NecSuf.sum_zpow_antiperiodic
+  Ising2D.NecSuf.inverse_dft_antiperiodic
+  Ising2D.NecSuf.acomm_antiperiodic_fourier_clifford
   Ising2D.lie_H2_hatZMinus_eq
   Ising2D.lie_H2_hatZPlus_eq
   Ising2D.lie_H2_hatZPlus_ne_lie_H2_hatZMinus
@@ -746,27 +748,27 @@ targets=(
   Ising2D.checkZ_checkY_generate_algebra
   Ising2D.isPrimitiveRoot_expPhase_one
   Ising2D.isPrimitiveRoot_expPhase_neg_one
-  Ising2D.antiperiodic_exp_sum_of_abstract
-  Ising2D.checkPhase_M_of_abstract
-  Ising2D.checkZ_period_of_abstract
-  Ising2D.checkY_period_of_abstract
-  Ising2D.acomm_checkZ_checkZ_of_abstract
-  Ising2D.acomm_checkY_checkY_of_abstract
-  Ising2D.inverse_dft_check_of_abstract
-  Ising2D.recover_checkZ_of_abstract
-  Ising2D.recover_checkY_of_abstract
-  Ising2D.Abstract.permMat_mulVec
-  Ising2D.Abstract.permMat_mulVec_single
-  Ising2D.Abstract.permMat_isSymm
-  Ising2D.Abstract.permMat_mul_self
-  Ising2D.Abstract.permMat_mulVec_absVec
-  Ising2D.Abstract.vecNormSq_absVec
-  Ising2D.Abstract.abs_quad_le_quad_absVec
-  Ising2D.Abstract.quad_le_quad_absVec
-  Ising2D.Abstract.sectorSet_pos_nonempty
-  Ising2D.Abstract.sectorSet_neg_nonempty
-  Ising2D.Abstract.sectorRayleighSup_neg_le_pos
-  Ising2D.Abstract.rayleighSup_eq_sectorRayleighSup_pos
+  Ising2D.antiperiodic_exp_sum_of_necSuf
+  Ising2D.checkPhase_M_of_necSuf
+  Ising2D.checkZ_period_of_necSuf
+  Ising2D.checkY_period_of_necSuf
+  Ising2D.acomm_checkZ_checkZ_of_necSuf
+  Ising2D.acomm_checkY_checkY_of_necSuf
+  Ising2D.inverse_dft_check_of_necSuf
+  Ising2D.recover_checkZ_of_necSuf
+  Ising2D.recover_checkY_of_necSuf
+  Ising2D.NecSuf.permMat_mulVec
+  Ising2D.NecSuf.permMat_mulVec_single
+  Ising2D.NecSuf.permMat_isSymm
+  Ising2D.NecSuf.permMat_mul_self
+  Ising2D.NecSuf.permMat_mulVec_absVec
+  Ising2D.NecSuf.vecNormSq_absVec
+  Ising2D.NecSuf.abs_quad_le_quad_absVec
+  Ising2D.NecSuf.quad_le_quad_absVec
+  Ising2D.NecSuf.sectorSet_pos_nonempty
+  Ising2D.NecSuf.sectorSet_neg_nonempty
+  Ising2D.NecSuf.sectorRayleighSup_neg_le_pos
+  Ising2D.NecSuf.rayleighSup_eq_sectorRayleighSup_pos
   Ising2D.flipConf_involutive
   Ising2D.flipConf_ne_self
   Ising2D.epsilon_apply
@@ -792,12 +794,12 @@ targets=(
   Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
-  Ising2D.Abstract.lie_creAnn_cre
-  Ising2D.Abstract.lie_creAnn_ann
-  Ising2D.Abstract.lie_carHam_cre
-  Ising2D.Abstract.lie_carHam_ann
-  Ising2D.Abstract.exp_conj_of_ad_eigen
-  Ising2D.Abstract.exp_conj_of_lie_eigen
+  Ising2D.NecSuf.lie_creAnn_cre
+  Ising2D.NecSuf.lie_creAnn_ann
+  Ising2D.NecSuf.lie_carHam_cre
+  Ising2D.NecSuf.lie_carHam_ann
+  Ising2D.NecSuf.exp_conj_of_ad_eigen
+  Ising2D.NecSuf.exp_conj_of_lie_eigen
   Ising2D.gamma1_add_int_mul_two_pi
   Ising2D.thetaTilde_add_int_mul
   Ising2D.gamma1_thetaTilde_conj
@@ -862,22 +864,22 @@ targets=(
   Ising2D.actsBy_TConj_V2_check
   Ising2D.factorization_of_A_theta_general
   Ising2D.factorization_of_A_thetaTilde
-  Ising2D.Abstract.actsBy_sandwich
-  Ising2D.Abstract.actsBy_TV_sandwich
+  Ising2D.NecSuf.actsBy_sandwich
+  Ising2D.NecSuf.actsBy_TV_sandwich
   Ising2D.TVPlus_checkZ_checkY
   Ising2D.TVPlus_checkZ_checkY_components
   Ising2D.TV_hatZ_hatY_via_sandwich
-  Ising2D.Abstract.cos_eq_neg_one_of_sin_eq_zero_of_odd
-  Ising2D.Abstract.mul_of_eq_neg_conj
-  Ising2D.Abstract.sq_absOf_eq_neg_mul
-  Ising2D.Abstract.sq_I_mul_absOf_eq_mul
-  Ising2D.Abstract.skew2_charPoly_factor
-  Ising2D.Abstract.skew2_mulVec
-  Ising2D.Abstract.eq_conj_of_mul_eq
-  Ising2D.Abstract.gamma_det_identity
-  Ising2D.Abstract.sinh_arcosh_of_sq
-  Ising2D.Abstract.exp_arcosh_of_sq
-  Ising2D.Abstract.exp_neg_arcosh_of_sq
+  Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd
+  Ising2D.NecSuf.mul_of_eq_neg_conj
+  Ising2D.NecSuf.sq_absOf_eq_neg_mul
+  Ising2D.NecSuf.sq_I_mul_absOf_eq_mul
+  Ising2D.NecSuf.skew2_charPoly_factor
+  Ising2D.NecSuf.skew2_mulVec
+  Ising2D.NecSuf.eq_conj_of_mul_eq
+  Ising2D.NecSuf.gamma_det_identity
+  Ising2D.NecSuf.sinh_arcosh_of_sq
+  Ising2D.NecSuf.exp_arcosh_of_sq
+  Ising2D.NecSuf.exp_neg_arcosh_of_sq
   Ising2D.AMat_thetaTilde_eq
   Ising2D.thetaTilde_mul_M
   Ising2D.gamma2_thetaTilde_ne_zero
@@ -901,7 +903,7 @@ targets=(
   Ising2D.AMat_mul_checkPmat
   Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
   Ising2D.det_AMat_thetaTilde_eq_one
-  Ising2D.det_AMat_thetaTilde_eq_one_of_abstract
+  Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf
   Ising2D.gamma1R_sq_thetaTilde
   Ising2D.lambda_mul_lambda_thetaTilde
   Ising2D.one_lt_gamma1R_thetaTilde
@@ -912,25 +914,25 @@ targets=(
   Ising2D.lambdaMinusR_eq_exp
   Ising2D.lambda_separation
   # --- 020 章（臨界点での比熱の対数発散）---
-  Ising2D.Abstract.sinh_le_mul_cosh
-  Ising2D.Abstract.exp_le_inv_one_sub
-  Ising2D.Abstract.cosh_le_inv_one_sub_sq_div_two
-  Ising2D.Abstract.one_add_sq_div_two_le_cosh
-  Ising2D.Abstract.log_one_add_le
-  Ising2D.Abstract.log_le_div_exp_one
-  Ising2D.Abstract.mul_log_inv_le
-  Ising2D.Abstract.log_two_mul_le_arsinh
-  Ising2D.Abstract.arsinh_le_log_two_mul_add
-  Ising2D.Abstract.abs_sub_bounds_of_deriv_bounds
-  Ising2D.Abstract.abs_sub_le_of_abs_deriv_le
-  Ising2D.Abstract.sqrt_quad_pos
-  Ising2D.Abstract.le_sqrt_quad
-  Ising2D.Abstract.hasDerivAt_quad
-  Ising2D.Abstract.integral_inv_sqrt_quad
-  Ising2D.Abstract.integral_inv_pow_three_half
-  Ising2D.Abstract.integral_inv_pow_three_half_le
-  Ising2D.Abstract.inv_sqrt_diff_bound
-  Ising2D.Abstract.hasDerivAt_integral_of_continuousOn
+  Ising2D.NecSuf.sinh_le_mul_cosh
+  Ising2D.NecSuf.exp_le_inv_one_sub
+  Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two
+  Ising2D.NecSuf.one_add_sq_div_two_le_cosh
+  Ising2D.NecSuf.log_one_add_le
+  Ising2D.NecSuf.log_le_div_exp_one
+  Ising2D.NecSuf.mul_log_inv_le
+  Ising2D.NecSuf.log_two_mul_le_arsinh
+  Ising2D.NecSuf.arsinh_le_log_two_mul_add
+  Ising2D.NecSuf.abs_sub_bounds_of_deriv_bounds
+  Ising2D.NecSuf.abs_sub_le_of_abs_deriv_le
+  Ising2D.NecSuf.sqrt_quad_pos
+  Ising2D.NecSuf.le_sqrt_quad
+  Ising2D.NecSuf.hasDerivAt_quad
+  Ising2D.NecSuf.integral_inv_sqrt_quad
+  Ising2D.NecSuf.integral_inv_pow_three_half
+  Ising2D.NecSuf.integral_inv_pow_three_half_le
+  Ising2D.NecSuf.inv_sqrt_diff_bound
+  Ising2D.NecSuf.hasDerivAt_integral_of_continuousOn
   Ising2D.cosh_add_formula
   Ising2D.cosh_sub_formula
   Ising2D.sinh_add_formula
@@ -1098,16 +1100,16 @@ targets=(
   Ising2D.TVPlus_actsBy_checkZY
   Ising2D.VPlus_eq_smul_checkVprime_of_dual
   # --- 018 章（偶セクターの完結：Onsager の厳密解）---
-  Ising2D.Abstract.anticomm_sum_smul
-  Ising2D.Abstract.commute_parity_num
-  Ising2D.Abstract.commute_parity_projOn
-  Ising2D.Abstract.num_mul_cre
-  Ising2D.Abstract.projOn_insert_mul_cre
-  Ising2D.Abstract.cre_mul_projOn_ne_zero
-  Ising2D.Abstract.noncommProd_mul_of_mul_eq_smul
-  Ising2D.Abstract.star_projOn
-  Ising2D.Abstract.smul_left_cancel_of_ne_zero
-  Ising2D.Abstract.sum_powerset_signed_exp
+  Ising2D.NecSuf.anticomm_sum_smul
+  Ising2D.NecSuf.commute_parity_num
+  Ising2D.NecSuf.commute_parity_projOn
+  Ising2D.NecSuf.num_mul_cre
+  Ising2D.NecSuf.projOn_insert_mul_cre
+  Ising2D.NecSuf.cre_mul_projOn_ne_zero
+  Ising2D.NecSuf.noncommProd_mul_of_mul_eq_smul
+  Ising2D.NecSuf.star_projOn
+  Ising2D.NecSuf.smul_left_cancel_of_ne_zero
+  Ising2D.NecSuf.sum_powerset_signed_exp
   Ising2D.CheckFermi
   Ising2D.CheckFermi.nOp
   Ising2D.CheckFermi.nOp_def
@@ -1204,14 +1206,14 @@ targets=(
   Ising2D.onsager_limit_in_N_row
   Ising2D.onsager_limit_in_M
   Ising2D.onsager_exact_solution
-  Ising2D.Abstract.acomm_cre_ann_comp
-  Ising2D.Abstract.two_pow_smul_tau_noncommProd
-  Ising2D.Abstract.const_eq_of_trace_ratio
-  Ising2D.Abstract.sum_weight_lt_of_ne_univ
-  Ising2D.Abstract.sum_weight_le_univ
-  Ising2D.Abstract.sum_weight_empty_le
-  Ising2D.Abstract.eq_proj_of_eigen
-  Ising2D.Abstract.mul_exp_eq_of_mul_eq_smul
+  Ising2D.NecSuf.acomm_cre_ann_comp
+  Ising2D.NecSuf.two_pow_smul_tau_noncommProd
+  Ising2D.NecSuf.const_eq_of_trace_ratio
+  Ising2D.NecSuf.sum_weight_lt_of_ne_univ
+  Ising2D.NecSuf.sum_weight_le_univ
+  Ising2D.NecSuf.sum_weight_empty_le
+  Ising2D.NecSuf.eq_proj_of_eigen
+  Ising2D.NecSuf.mul_exp_eq_of_mul_eq_smul
   Ising2D.CheckIdx.card
   Ising2D.conjIdx_involutive
   Ising2D.CheckFermiSetup.acomm_cre_ann
@@ -1320,16 +1322,16 @@ targets=(
   Ising2D.specific_heat_log_divergence_dist
   Ising2D.tendsto_log_inv_dist_atTop
   Ising2D.specific_heat_ratio_tendsto
-  Ising2D.Abstract.idem_of_ortho_of_sum_eq_one
-  Ising2D.Abstract.iSupIndep_range_proj
-  Ising2D.Abstract.iSup_range_proj_eq_top
-  Ising2D.Abstract.isInternal_range_proj
-  Ising2D.Abstract.eigen_of_mem_range_proj
-  Ising2D.Abstract.collectedBasis_eigen
-  Ising2D.Abstract.toMatrix_collectedBasis_eq_diagonal
-  Ising2D.Abstract.isInternal_range_matrix_proj
-  Ising2D.Abstract.exists_eigenBasis_of_matrix_proj
-  Ising2D.Abstract.exists_conj_diagonal_of_matrix_proj
+  Ising2D.NecSuf.idem_of_ortho_of_sum_eq_one
+  Ising2D.NecSuf.iSupIndep_range_proj
+  Ising2D.NecSuf.iSup_range_proj_eq_top
+  Ising2D.NecSuf.isInternal_range_proj
+  Ising2D.NecSuf.eigen_of_mem_range_proj
+  Ising2D.NecSuf.collectedBasis_eigen
+  Ising2D.NecSuf.toMatrix_collectedBasis_eq_diagonal
+  Ising2D.NecSuf.isInternal_range_matrix_proj
+  Ising2D.NecSuf.exists_eigenBasis_of_matrix_proj
+  Ising2D.NecSuf.exists_conj_diagonal_of_matrix_proj
   Ising2D.FermiSetup.isInternal_range_Qproj
   Ising2D.FermiSetup.iSup_range_Qproj_eq_top
   Ising2D.FermiSetup.iSupIndep_range_Qproj

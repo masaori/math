@@ -17,9 +17,9 @@
 * Step 4（`V_1^{(±)}` と `(V_1^{(±)})^{1/2}`）→ `epsilon_commute_H1` から
   `epsilon_commute_V1` / `epsilon_commute_V1half`。
 * Step 5（`P^{(±)}`）→ `epsProj_commute_of_commute_epsilon`
-  （抽象版 `Ising2D.Abstract.commute_invProj` の系）。
+  （必要十分版 `Ising2D.NecSuf.commute_invProj` の系）。
 
-抽象版は Step 5 の部分だけ（`Ising2D/Abstract/Projector.lean`）。Step 1〜4 は
+必要十分版は Step 5 の部分だけ（`Ising2D/NecSuf/Projector.lean`）。Step 1〜4 は
 `ε` と Pauli 行列の具体的な反交換関係の計算であり、取り払える構造が無い。
 -/
 import Ising2D.Part010.Claim009_EpsilonProjectors
@@ -162,11 +162,11 @@ theorem epsilon_commute_V1half (K1 η : ℂ) : Commute (epsilon M) (V1half M K1 
 /-! ## Step 5: 射影子との可換性 -/
 
 /-- **原文 Step 5**: `ε` と可換な行列は `P^{(±)}` とも可換
-（抽象版 `Ising2D.Abstract.commute_invProj` の系）。 -/
+（必要十分版 `Ising2D.NecSuf.commute_invProj` の系）。 -/
 theorem commute_epsProj_of_commute_epsilon {a : TensorPow M} (η : ℂ)
     (h : Commute a (epsilon M)) : Commute a (epsProj M η) := by
   rw [epsProj_eq_invProj]
-  exact Abstract.commute_invProj (h.smul_right η)
+  exact NecSuf.commute_invProj (h.smul_right η)
 
 theorem commute_V1pauli_epsProj (K1 η : ℂ) : Commute (V1pauli M K1) (epsProj M η) :=
   commute_epsProj_of_commute_epsilon η (epsilon_commute_V1pauli K1).symm

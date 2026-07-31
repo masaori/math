@@ -6,7 +6,7 @@
 
 - 具体版 `lean/Ising2D/Part016/`（9 ファイル。うち
   `Claim010_UnconditionalViaPart015.lean` は 015 章の成果を入れて仮定を落とす後段）
-- 抽象版 `lean/Ising2D/Abstract/FermionLadder.lean`, `lean/Ising2D/Abstract/ExpEigenvector.lean`
+- 必要十分版 `lean/Ising2D/NecSuf/FermionLadder.lean`, `lean/Ising2D/NecSuf/ExpEigenvector.lean`
 
 `lean/Ising2D.lean` と `lean/scripts/check-no-sorry.sh` へは末尾追記のみ。
 既存の `.lean` ファイルは 1 つも編集していない。
@@ -28,7 +28,7 @@
 | `Ising2D.checkPsiDag_eq` / `checkPsi_eq` | 原文の「すなわち」の明示式との一致 | 同（検算） |
 | `Ising2D.checkP_mul_checkP_conj` | `p_μ p_{M+1-μ} = -1/(4M)` | `anticommutator_of_check_psi` Step 1 |
 | `Ising2D.checkQ_mul_checkQ` | `q^2 = 1/(4M)` | 同 |
-| `Ising2D.checkPsi_car` | CAR 3 式（抽象版の系として導出） | **`anticommutator_of_check_psi`** |
+| `Ising2D.checkPsi_car` | CAR 3 式（必要十分版の系として導出） | **`anticommutator_of_check_psi`** |
 | `Ising2D.acomm_checkPsiDag_checkPsiDag` | `[ψ̌_μ^†, ψ̌_ν^†]₊ = 0` | 同 第 1 式 |
 | `Ising2D.acomm_checkPsiDag_checkPsi` | `[ψ̌_μ^†, ψ̌_ν]₊ = δ_{ν,M+1-μ} I` | 同 第 2 式 |
 | `Ising2D.acomm_checkPsi_checkPsi` | `[ψ̌_μ, ψ̌_ν]₊ = 0` | 同 第 3 式 |
@@ -39,7 +39,7 @@
 | `Ising2D.checkIdx` / `checkIndex_checkIdx` / `checkIdx_rev` / `checkIdx_eq_rev_iff` | `𝓜̌ = {1,…,M}` を `Fin M` で走らせる。対の添字は `Fin.rev`（対合） | `def_check_Vprime` (1) |
 | `Ising2D.checkX` / `Ising2D.checkVprime` | `X̌`, `V̌' = exp(X̌)` | **`def_check_Vprime`** |
 | `Ising2D.checkVprimeUnits` / `isUnit_checkVprime` | `V̌'` の可逆性と `(V̌')^{-1} = exp(-X̌)` | 同 (2) |
-| `Ising2D.checkX_eq_carHam` | `X̌` は抽象版 `Abstract.carHam` そのもの | 橋渡し |
+| `Ising2D.checkX_eq_carHam` | `X̌` は必要十分版 `NecSuf.carHam` そのもの | 橋渡し |
 | `Ising2D.matExp_conj_eigen` | `[X,a] = c a ⟹ exp(X) a exp(-X) = e^c a` | `action_of_T_check_Vprime_on_check_psi` Step 3〜5 |
 | `Ising2D.lie_checkX_checkPsiDag` | `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†` | 同 Step 2 |
 | `Ising2D.lie_checkX_checkPsi` | `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ` | 同 Step 2' |
@@ -54,10 +54,10 @@
 | `Ising2D.commute_of_TConj_eq` | `W := v^{-1}u` はすべての元と可換 | `V_plus_eq_c_check_Vprime` Step 1・2 |
 | `Ising2D.exists_smul_of_TConj_eq` | 共役が一致する 2 つの可逆元は `0` でないスカラー倍を除いて等しい | **`V_plus_eq_c_check_Vprime`** |
 | `Ising2D.VPlus_eq_smul_checkVprime` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論**） | 同 |
-| `Ising2D.Abstract.lie_creAnn_cre` / `lie_creAnn_ann` | `[d a, c] = δ d`, `[d a, b] = -(δ a)`（**抽象版**） | `action_of_T_check_Vprime_on_check_psi` Step 1, 1' |
-| `Ising2D.Abstract.carHam` / `lie_carHam_cre` / `lie_carHam_ann` | `[Σ g_ν (d_ν e_{σν} - κ), d_μ] = g_μ d_μ` ほか（**抽象版**） | 同 Step 2, 2' |
-| `Ising2D.Abstract.cosh_add_sinh_eq_exp` | `cosh c + sinh c = e^c` | 補助 |
-| `Ising2D.Abstract.exp_conj_of_ad_eigen` / `exp_conj_of_lie_eigen` | `ad x` の固有ベクトルは `exp` 共役の固有ベクトル（**抽象版**） | 同 Step 3〜5 |
+| `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` | `[d a, c] = δ d`, `[d a, b] = -(δ a)`（**必要十分版**） | `action_of_T_check_Vprime_on_check_psi` Step 1, 1' |
+| `Ising2D.NecSuf.carHam` / `lie_carHam_cre` / `lie_carHam_ann` | `[Σ g_ν (d_ν e_{σν} - κ), d_μ] = g_μ d_μ` ほか（**必要十分版**） | 同 Step 2, 2' |
+| `Ising2D.NecSuf.cosh_add_sinh_eq_exp` | `cosh c + sinh c = e^c` | 補助 |
+| `Ising2D.NecSuf.exp_conj_of_ad_eigen` / `exp_conj_of_lie_eigen` | `ad x` の固有ベクトルは `exp` 共役の固有ベクトル（**必要十分版**） | 同 Step 3〜5 |
 
 ### 1-2. 015 章の成果で仮定を落とした版（`Part016/Claim010_UnconditionalViaPart015.lean`）
 
@@ -87,18 +87,18 @@
 | `Ising2D.TVPlus_actsBy_checkZY` | 仮定 `hT` が（双対関係の下で）無条件に成り立つこと | 014 章 `T_V_plus_check_Z_Y` |
 | `Ising2D.VPlus_eq_smul_checkVprime_of_dual` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論の完全な無条件版**。仮定は双対関係だけ） | `V_plus_eq_c_check_Vprime` |
 
-## 2. 2 本立ての対応表と「抽象版で判明した本質」
+## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-| 人手証明のラベル | 具体版 | 抽象版 |
+| 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`Part016/Claim003_AnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.Abstract.car_of_coeffs` がそのまま使える**（`Abstract/Fermion.lean`。新規作成不要だった） |
-| `action_of_T_check_Vprime_on_check_psi` Step 1〜2' | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.Abstract.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`Abstract/FermionLadder.lean`、新規） |
-| `action_of_T_check_Vprime_on_check_psi` Step 3〜5 | `Ising2D.matExp_conj_eigen` | `Ising2D.Abstract.exp_conj_of_ad_eigen`（`Abstract/ExpEigenvector.lean`、新規） |
+| `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`Part016/Claim003_AnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.NecSuf.car_of_coeffs` がそのまま使える**（`NecSuf/Fermion.lean`。新規作成不要だった） |
+| `action_of_T_check_Vprime_on_check_psi` Step 1〜2' | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
+| `action_of_T_check_Vprime_on_check_psi` Step 3〜5 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
 
-抽象版から得られた知見（本文には持ち込まない）:
+必要十分版から得られた知見（本文には持ち込まない）:
 
-- **008 章の抽象版 CAR（`Abstract.car_of_coeffs`）は半整数運動量でも一字一句そのまま使えた。**
-  抽象版が要求するのは「反交換子がスカラー倍の `1` になること」と「係数についてのスカラー恒等式 2 本」
+- **008 章の必要十分版 CAR（`NecSuf.car_of_coeffs`）は半整数運動量でも一字一句そのまま使えた。**
+  必要十分版が要求するのは「反交換子がスカラー倍の `1` になること」と「係数についてのスカラー恒等式 2 本」
   だけで、対の条件が `μ+ν ≡ 0 (mod M)` から `ν = M+1-μ` へ変わっても、
   そこは `D` と `δ` の中身が変わるだけである。整数運動量／半整数運動量の違いは
   **CAR の代数的な内容には一切効いていない**。
@@ -106,11 +106,11 @@
 - **`X̌` の梯子作用（原文 Step 1〜2'）に効いているのは、恒等式 `[a b, c] = a [b,c]₊ - [a,c]₊ b` と、
   反交換子の値がクロネッカーのデルタになることだけ**である。`ψ̌` の具体形も、
   複素行列であることも、`M`・`γ_2`・`θ̃` も効いていない。減じる `½ I` は
-  「中心の元」でありさえすればよく、`½` である必要すらない（抽象版の `κ` は任意）。
+  「中心の元」でありさえすればよく、`½` である必要すらない（必要十分版の `κ` は任意）。
   係数環は任意の可換環、台は任意の環でよい。
 
 - **原文が「008 章と違って場合分けが一つも要らない」と述べている改善は、
-  抽象版では仮定 `hed` / `hde`（反交換子がクロネッカーのデルタ）の形にそのまま吸収される。**
+  必要十分版では仮定 `hed` / `hde`（反交換子がクロネッカーのデルタ）の形にそのまま吸収される。**
   つまりこの改善は**添字集合の取り方だけの問題であって、代数的な内容ではない**。
   008 章の `μ ∈ ℳ = {-M,…,-1,1,…,M}` では `ν = -μ` が `ℳ` の対合にならない場面があったのに対し、
   半整数運動量では `μ ↦ M+1-μ` が `𝓜̌` 上の対合（Lean では `Fin.rev`）になる。
@@ -118,7 +118,7 @@
 
 - **原文 Step 3（帰納法）・Step 4（部分和の極限）・Step 5（`exp` の積公式）の 3 段は、
   008 章ですでに形式化した「`ad X` が 2 次元部分空間を保つ場合の閉じた形」
-  （`Abstract.exp_conj_two_dim_z`）の 1 次元への退化にすぎない**（`z = y = a` と置くだけ。
+  （`NecSuf.exp_conj_two_dim_z`）の 1 次元への退化にすぎない**（`z = y = a` と置くだけ。
   `cosh c + c·sinhc c = cosh c + sinh c = e^c`）。新しい解析は 1 つも要らなかった。
   台は ℂ 上の完備ノルム環であればよく、行列であることも有限次元性も効いていない。
 
@@ -154,8 +154,8 @@
 `det P̌_μ ≠ 0` に相当するのは `checkP_ne_zero` / `checkQ_ne_zero` である。
 
 **実数解析（極限・積分・連続性）を新たに使った箇所は無い。**
-`exp` の収束は 008 章の `Abstract/ExpConjugation.lean`（mathlib の
-`NormedSpace.exp` と `Complex.hasSum_cosh` / `Abstract.hasSum_sinhc`）に閉じている。
+`exp` の収束は 008 章の `NecSuf/ExpConjugation.lean`（mathlib の
+`NormedSpace.exp` と `Complex.hasSum_cosh` / `NecSuf.hasSum_sinhc`）に閉じている。
 
 ## 4. 人手証明に見つけた誤り・穴
 

@@ -5,8 +5,8 @@
 - `joint_eigenspace_decomposition`（`eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`）
 - `trace_of_number_operator_product`（`eigenvalues_of_V_007_claim_trace_of_number_operator_product`）
 
-抽象版は `Ising2D/Abstract/JointEigenspace.lean`。(1)(2)(3)(4) は
-**すべて抽象版の特殊化として導出する**。(5)（`ℂ^{2^M}` の直和分解）だけは
+必要十分版は `Ising2D/NecSuf/JointEigenspace.lean`。(1)(2)(3)(4) は
+**すべて必要十分版の特殊化として導出する**。(5)（`ℂ^{2^M}` の直和分解）だけは
 台が行列環であることを本質的に使うので、ここにしか無い。
 
 ## 添字づけ
@@ -28,7 +28,7 @@ variable {M : ℕ} {K : IsingConst} (F : FermiSetup M K)
 /-- **原文 `joint_eigenspace_decomposition` の `Q_ε`**:
 `Q_T = ∏_{μ∈𝓘} (μ ∈ T ? n_μ : I - n_μ)`。 -/
 noncomputable def Qproj (T : Finset F.Idx) : TensorPow M :=
-  Abstract.projOn F.nOp F.commute_nOp_nOp Finset.univ T
+  NecSuf.projOn F.nOp F.commute_nOp_nOp Finset.univ T
 
 /-- `ε : 𝓘 → Bool` の形（人手証明の記法に合わせた版）。 -/
 noncomputable def Qproj' (ε : F.Idx → Bool) : TensorPow M :=
@@ -39,7 +39,7 @@ theorem Qproj'_eq (ε : F.Idx → Bool) :
 
 /-- **原文 (1) 後半**: `Q_ε^2 = Q_ε`。 -/
 theorem Qproj_mul_self (T : Finset F.Idx) : F.Qproj T * F.Qproj T = F.Qproj T :=
-  Abstract.projOn_mul_self F.nOp_mul_self _ _
+  NecSuf.projOn_mul_self F.nOp_mul_self _ _
 
 /-- **原文 (1) 前半**: `ε ≠ ε'` なら `Q_ε Q_{ε'} = 0`。 -/
 theorem Qproj_mul_Qproj_of_ne {T T' : Finset F.Idx} (h : T ≠ T') :
@@ -48,32 +48,32 @@ theorem Qproj_mul_Qproj_of_ne {T T' : Finset F.Idx} (h : T ≠ T') :
     by_contra hc
     push_neg at hc
     exact h (Finset.ext fun ν => hc ν)
-  exact Abstract.projOn_mul_projOn_of_ne F.nOp_mul_self (Finset.mem_univ ν) hν
+  exact NecSuf.projOn_mul_projOn_of_ne F.nOp_mul_self (Finset.mem_univ ν) hν
 
 /-- **原文 (2)**: `∑_ε Q_ε = I`。 -/
 theorem sum_Qproj : ∑ T : Finset F.Idx, F.Qproj T = 1 := by
-  have := Abstract.sum_projOn (n := F.nOp) (hn := F.commute_nOp_nOp) Finset.univ
+  have := NecSuf.sum_projOn (n := F.nOp) (hn := F.commute_nOp_nOp) Finset.univ
   rwa [Finset.powerset_univ] at this
 
 /-- **原文 (3)**: `n_ν Q_ε = ε_ν Q_ε`。 -/
 theorem nOp_mul_Qproj (ν : F.Idx) (T : Finset F.Idx) :
     F.nOp ν * F.Qproj T = (if ν ∈ T then (1 : ℂ) else 0) • F.Qproj T := by
-  have h := Abstract.num_mul_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)
+  have h := NecSuf.num_mul_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)
     F.nOp_mul_self (T := T) (Finset.mem_univ ν)
   rw [Qproj, h]
   by_cases hT : ν ∈ T <;> simp [hT]
 
 /-! ## トレース（原文 (4)、および `trace_of_number_operator_product`） -/
 
-/-- **原文 `trace_of_number_operator_product` の内容**（抽象版として述べたもの）:
+/-- **原文 `trace_of_number_operator_product` の内容**（必要十分版として述べたもの）:
 `2^{|𝓘|} tr(Q_ε) = tr(I) = 2^M`。
 
 人手証明は `Q_ε` を二項展開して `tr(n_{μ_1}⋯n_{μ_k}) = 2^{M-k}` と二項定理を使うが、
-抽象版（`Abstract.two_pow_smul_tau_projOn`）で分かる通り、効いているのは
+必要十分版（`NecSuf.two_pow_smul_tau_projOn`）で分かる通り、効いているのは
 「どちらの因子でも `2 tr(R_j X) = tr(X)`」の 1 段だけで二項定理は要らない。 -/
 theorem two_pow_mul_trace_Qproj (T : Finset F.Idx) :
     ((2 ^ F.I.card : ℕ) : ℂ) * (F.Qproj T).trace = ((2 ^ M : ℕ) : ℂ) := by
-  have h := Abstract.two_pow_smul_tau_projOn F.cre F.ann F.commute_nOp_nOp
+  have h := NecSuf.two_pow_smul_tau_projOn F.cre F.ann F.commute_nOp_nOp
     (Matrix.trace : TensorPow M → ℂ) (fun x y => Matrix.trace_add x y)
     (fun x y => Matrix.trace_mul_comm x y) F.acomm_cre_ann_self
     (fun i j hij => F.commute_cre_nOp hij) (fun i j hij => F.commute_ann_nOp hij)

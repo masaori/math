@@ -5,8 +5,8 @@
 （`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
 `Athetatilde_004_claim_eigenvector`, `Athetatilde_005_claim_diagonalization`）
 
-**抽象版**: `Ising2D/Abstract/TwoByTwoSkew.lean`
-（`Ising2D.Abstract.skew2_mulVec` / `skew2_charPoly_factor` / `eq_conj_of_mul_eq`）。
+**必要十分版**: `Ising2D/NecSuf/TwoByTwoSkew.lean`
+（`Ising2D.NecSuf.skew2_mulVec` / `skew2_charPoly_factor` / `eq_conj_of_mul_eq`）。
 
 ## 形式化の方針
 
@@ -27,7 +27,7 @@
   Lean 側では `Pmat` の可逆性（`det P̌ ≠ 0`）にそれが効く。
 -/
 import Ising2D.Part015.Claim003_RelationGamma2Tilde
-import Ising2D.Abstract.TwoByTwoSkew
+import Ising2D.NecSuf.TwoByTwoSkew
 
 namespace Ising2D
 
@@ -180,7 +180,7 @@ theorem AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
     (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     AMat P.const (thetaTilde M μ)
       = checkPmat P.const M μ * checkDmat P.const M μ * (checkPmat P.const M μ)⁻¹ :=
-  Abstract.eq_conj_of_mul_eq (AMat_mul_checkPmat P hM μ)
+  NecSuf.eq_conj_of_mul_eq (AMat_mul_checkPmat P hM μ)
     (isUnit_iff_ne_zero.2 (det_checkPmat_ne_zero P hM μ))
 
 end Ising2D

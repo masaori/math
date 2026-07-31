@@ -5,8 +5,8 @@
 （`structured-latex/content/014_even_sector_T_action.ts` の
 `evensectorT_003_claim_coefficient_conversion`）
 
-**抽象版**は既存の `Ising2D/Abstract/ExpConjugation.lean` の
-`Ising2D.Abstract.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y`
+**必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の
+`Ising2D.NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y`
 （`Part014/Claim002_NestedCommutator.lean` と同じもの）。
 
 ## 原文との対応
@@ -19,7 +19,7 @@
 
 について `ad X'` が `span{check(Z)_μ, check(Y)_μ}` を保つことを直接示し
 （係数は `(α, β)` が `(i K_1 e^{-iθ~}, -i K_1 e^{iθ~})` と `(-2i K_2^*, 2i K_2^*)`、
-したがって `s` は `K_1` と `2K_2^*`）、同じ抽象版へ渡す。
+したがって `s` は `K_1` と `2K_2^*`）、同じ必要十分版へ渡す。
 **原文の補題 1・補題 2 は、この `(α, β, s)` の付け替えに吸収される。**
 とくに `s` が純虚数 `2iK_1` から実の `K_1` へ変わることが、原文の
 `(-1)^{n/2}(2K_1)^n → K_1^n` という符号の消滅の正体である。
@@ -90,21 +90,21 @@ open scoped Matrix.Norms.Operator in
 private theorem adPow_even_aux {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
     adPow X (2 * k) z = (s ^ (2 * k)) • z ∧ adPow X (2 * k) y = (s ^ (2 * k)) • y := by
-  simpa only [adPow_eq_adCLM] using Abstract.adCLM_pow_even (x := X) (z := z) (y := y) hz hy hs k
+  simpa only [adPow_eq_adCLM] using NecSuf.adCLM_pow_even (x := X) (z := z) (y := y) hz hy hs k
 
 open scoped Matrix.Norms.Operator in
 private theorem adPow_odd_z_aux {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
     adPow X (2 * k + 1) z = (s ^ (2 * k) * α) • y := by
   simpa only [adPow_eq_adCLM] using
-    Abstract.adCLM_pow_odd_z (x := X) (z := z) (y := y) hz hy hs k
+    NecSuf.adCLM_pow_odd_z (x := X) (z := z) (y := y) hz hy hs k
 
 open scoped Matrix.Norms.Operator in
 private theorem adPow_odd_y_aux {X z y : TensorPow M} {α β s : ℂ}
     (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
     adPow X (2 * k + 1) y = (s ^ (2 * k) * β) • z := by
   simpa only [adPow_eq_adCLM] using
-    Abstract.adCLM_pow_odd_y (x := X) (z := z) (y := y) hz hy hs k
+    NecSuf.adCLM_pow_odd_y (x := X) (z := z) (y := y) hz hy hs k
 
 /-- **原文 (h1.z) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Z)_μ`（符号が消える）。 -/
 theorem conversion_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :

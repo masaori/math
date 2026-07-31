@@ -6,8 +6,8 @@
 
 **本プロジェクトの結論である。**
 
-抽象版は置かない。本定理は既存の抽象版（`Abstract/LogSqueeze.lean` の
-`abs_log_div_sub_log_le_of_sandwich`、`Abstract/RiemannSum.lean` の
+必要十分版は置かない。本定理は既存の必要十分版（`NecSuf/LogSqueeze.lean` の
+`abs_log_div_sub_log_le_of_sandwich`、`NecSuf/RiemannSum.lean` の
 `tendsto_riemann_sum`）を章 012 が既に系として使っており、本ファイルはそれらの
 具体版（`Ising2D.limit_of_log_Z_in_N_row` / `Ising2D.onsager_free_energy_expression`）を
 章 018・019 の結果と接続するだけだからである。

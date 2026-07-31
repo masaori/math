@@ -4,8 +4,8 @@
 正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
 （`sector_001_claim_epsilon_is_permutation`、ラベル **`epsilon_is_sign_flip_permutation`**）
 
-抽象版は `Ising2D/Abstract/PermSector.lean`（同じラベル）。
-本ファイルの (1)(3)(4) は抽象版 `Ising2D.Abstract.permMat_*` の**系として**導いてある。
+必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）。
+本ファイルの (1)(3)(4) は必要十分版 `Ising2D.NecSuf.permMat_*` の**系として**導いてある。
 
 ## 人手証明との対応
 
@@ -27,7 +27,7 @@
 **両者の成分が一致すること**（`epsilon_eq_ofReal_epsilonR`）を証明して橋渡しする。
 `ε` の成分が `0` と `1` しかない（人手証明 (1)）ので、この橋渡しは値の落ちない同一視である。
 -/
-import Ising2D.Abstract.PermSector
+import Ising2D.NecSuf.PermSector
 import Ising2D.Part010.Claim010_EpsilonCommutes
 import Ising2D.Part010.Definition001_ConfigBasisIso
 
@@ -83,7 +83,7 @@ theorem sgn_flipConf (s : Conf M) (m : Fin M) : sgn (flipConf s m) = -sgn (s m) 
 
 /-- **実行列版の `ε`**: 符号反転 `π` の置換行列。 -/
 noncomputable def epsilonR (M : ℕ) : Matrix (Conf M) (Conf M) ℝ :=
-  Abstract.permMat (flipConf (M := M))
+  NecSuf.permMat (flipConf (M := M))
 
 theorem epsilonR_apply (l k : Conf M) :
     epsilonR M l k = if k = flipConf l then 1 else 0 := rfl
@@ -91,11 +91,11 @@ theorem epsilonR_apply (l k : Conf M) :
 /-- **人手証明 (1) の「成分はすべて `0` か `1`」。** -/
 theorem epsilonR_entry_zero_or_one (l k : Conf M) :
     epsilonR M l k = 0 ∨ epsilonR M l k = 1 :=
-  Abstract.permMat_entry_zero_or_one _ l k
+  NecSuf.permMat_entry_zero_or_one _ l k
 
 /-- **人手証明 (1) の「各行にちょうど 1 個の `1`」。** -/
 theorem epsilonR_row_sum (l : Conf M) : ∑ k, epsilonR M l k = 1 :=
-  Abstract.permMat_row_sum _ l
+  NecSuf.permMat_row_sum _ l
 
 /-- **人手証明 (1) の「各列にちょうど 1 個の `1`」。** -/
 theorem epsilonR_col_sum (k : Conf M) : ∑ l, epsilonR M l k = 1 := by
@@ -107,20 +107,20 @@ theorem epsilonR_col_sum (k : Conf M) : ∑ l, epsilonR M l k = 1 := by
     · rw [if_neg hlk, if_neg (fun hc => hlk (by rw [hc, flipConf_involutive]))]
   simp [h]
 
-theorem epsilonR_isSymm : (epsilonR M).IsSymm := Abstract.permMat_isSymm flipConf_involutive
+theorem epsilonR_isSymm : (epsilonR M).IsSymm := NecSuf.permMat_isSymm flipConf_involutive
 
 theorem epsilonR_mul_self : epsilonR M * epsilonR M = 1 :=
-  Abstract.permMat_mul_self flipConf_involutive
+  NecSuf.permMat_mul_self flipConf_involutive
 
 /-- **人手証明 (3) `(εx)_k = x_{π(k)}`。** -/
 theorem epsilonR_mulVec_apply (x : Conf M → ℝ) (k : Conf M) :
     (epsilonR M *ᵥ x) k = x (flipConf k) :=
-  Abstract.permMat_mulVec _ x k
+  NecSuf.permMat_mulVec _ x k
 
 /-- **人手証明 (1) `ε e_k = e_{π(k)}` の実行列版。** -/
 theorem epsilonR_mulVec_single (k : Conf M) :
     epsilonR M *ᵥ (Pi.single k (1 : ℝ)) = Pi.single (flipConf k) 1 :=
-  Abstract.permMat_mulVec_single _ flipConf_involutive k
+  NecSuf.permMat_mulVec_single _ flipConf_involutive k
 
 /-! ## 複素行列 `ε` との一致 -/
 
@@ -208,12 +208,12 @@ theorem vecNormSq_oddUnit (hM : 0 < M) : vecNormSq (oddUnit M) = 1 := by
 したがって人手証明 `c_minus_le_c_plus` Step 1 の `𝓡_- ≠ ∅` が言える。 -/
 theorem sectorSet_neg_nonempty_epsilonR (hM : 0 < M) (W : Matrix (Conf M) (Conf M) ℝ) :
     (sectorSet W (epsilonR M) (-1 : ℝ)).Nonempty :=
-  Abstract.sectorSet_neg_nonempty W flipConf_involutive
+  NecSuf.sectorSet_neg_nonempty W flipConf_involutive
     (flipConf_ne_self hM (refConf M))
 
 /-- 人手証明 `c_minus_le_c_plus` Step 1 の `𝓡_+ ≠ ∅`。 -/
 theorem sectorSet_pos_nonempty_epsilonR (W : Matrix (Conf M) (Conf M) ℝ) :
     (sectorSet W (epsilonR M) (1 : ℝ)).Nonempty :=
-  Abstract.sectorSet_pos_nonempty W flipConf_involutive
+  NecSuf.sectorSet_pos_nonempty W flipConf_involutive
 
 end Ising2D

@@ -18,7 +18,7 @@
 * Step 2（各セクターで `V_1 → V_1^{(±)}`）→ `sector_replacement_pow`
   （`Part010/Claim011_SectorReplacement.lean`）。
 * Step 3（対称形 `(B V_2 B)^n` の解消）→ `trace_epsProj_sym_pow`。
-  代数的な核は抽象版 `Ising2D.Abstract.mul_pow_conj_left`
+  代数的な核は必要十分版 `Ising2D.NecSuf.mul_pow_conj_left`
   （`B (B V B)^n = (B B V)^n B`、結合法則のみ）。トレース側で使うのは
   巡回性 `Matrix.trace_mul_comm` と `P^{(±)}` が `B` と可換であることだけ。
 * Step 4（結論）→ `partition_function_sector_decomposition`。
@@ -61,7 +61,7 @@ theorem trace_epsProj_sym_pow {K1 ηsign η : ℂ} {s2 : ℝ} {K2star : ℂ} (n 
     (commute_V1half_epsProj K1 ηsign η).symm.eq
   have key : B * (B * V2pauli M s2 K2star * B) ^ n
       = (V1 M K1 ηsign * V2pauli M s2 K2star) ^ n * B := by
-    rw [Abstract.mul_pow_conj_left, hB, V1half_sq]
+    rw [NecSuf.mul_pow_conj_left, hB, V1half_sq]
   calc (epsProj M η * (Vsym M K1 ηsign s2 K2star) ^ n).trace
       = (Bi * (B * (epsProj M η * (B * V2pauli M s2 K2star * B) ^ n))).trace := by
         rw [← mul_assoc, hBiB, one_mul, Vsym]

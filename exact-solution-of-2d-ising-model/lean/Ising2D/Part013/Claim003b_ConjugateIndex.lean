@@ -5,10 +5,10 @@
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_003b_claim_conjugate_index_of_check_Z_Y`）
 
-**抽象版は無い。** (1)(3) は `θ~` の定義と添字の周期性（既存の抽象版
-`Ising2D.Abstract.transform_periodic` の特殊化）から出る書き換えで、
+**必要十分版は無い。** (1)(3) は `θ~` の定義と添字の周期性（既存の必要十分版
+`Ising2D.NecSuf.transform_periodic` の特殊化）から出る書き換えで、
 新たに取り払える構造が無い。(2) は「`2M` 乗根の周期 `ξ^{2M} = 1`」だけで、
-これは `Abstract.sum_zpow_antiperiodic` で既に使っている性質そのものである。
+これは `NecSuf.sum_zpow_antiperiodic` で既に使っている性質そのものである。
 
 ## 原文の主張（`μ ∈ 𝓜̌`）
 

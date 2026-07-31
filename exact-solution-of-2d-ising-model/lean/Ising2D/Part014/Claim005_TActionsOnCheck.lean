@@ -9,14 +9,14 @@
 
 （いずれも `structured-latex/content/014_even_sector_T_action.ts`）
 
-**抽象版**は既存の `Ising2D/Abstract/TVAction.lean`
-（`Ising2D.Abstract.twoDimConjMat`, `exp_conj_two_dim_actsBy`, `conj_smul_eq`）。
+**必要十分版**は既存の `Ising2D/NecSuf/TVAction.lean`
+（`Ising2D.NecSuf.twoDimConjMat`, `exp_conj_two_dim_actsBy`, `conj_smul_eq`）。
 
 ## 008 章との関係（本章の要点）
 
 008 章の同じ主張（`<ホロノミック量子場_p142下段_1>`、`Part008/Claim012_TVActions.lean` の
 `actsBy_TConj_V1half` / `actsBy_TConj_V2`）と本ファイルの主張は、
-**同じ抽象版 `Abstract.exp_conj_two_dim_actsBy` の別の特殊化**である。
+**同じ必要十分版 `NecSuf.exp_conj_two_dim_actsBy` の別の特殊化**である。
 渡す `(α, β, s)` は
 
 | | `α` | `β` | `s` | 作用行列 |
@@ -30,7 +30,7 @@
 これが原文の「008 章の各証明は `θ_μ` に固有の性質を使っていない」の Lean での裏づけである。
 
 `V_2` の前因子 `(2s_2)^{M/2}` が共役で打ち消えることも、008 章と同じ
-`Abstract.conj_smul_eq`（任意の ℂ-代数）で処理する。
+`NecSuf.conj_smul_eq`（任意の ℂ-代数）で処理する。
 -/
 import Ising2D.Part008.Claim012_TVActions
 import Ising2D.Part014.Claim004_ExtractTaylor
