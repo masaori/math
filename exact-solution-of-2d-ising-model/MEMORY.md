@@ -1,5 +1,35 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-31）: 救済PR #24 の残余を数値検証へ統合（行列ノルム 12x/13x 帯）
+
+放棄ブランチ `worktree-indexed-singing-blum`（PR #24）から、main に無い検証だけを抜き出して統合した。
+ブランチの採番は main より 1 つずれていた（`131_` = main の `130_` 等）ので、
+ディレクトリ構成をそのまま持ち込まず check ファイル単位で main の現行番号へ移してある。
+
+- **新規 `sagemath/check/129_def_matrix_norm/`** — `def_matrix_norm` を対象ラベルに宣言する check は
+  main に無かった。ノルム値を 4 経路（定義の二重ループ / numpy / √tr(A*A) / 特異値）で突き合わせ、
+  「ノルム収束 ⟺ 成分収束」（d_N ≤ ‖·‖ ≤ n·d_N）も検査する。
+- **`130_matrix_norm_triangle_inequality/check_02_limit_uniqueness.sage`** —
+  同 overview.md が「(4) 極限の一意性は数値では直接確認できないため含めていない」と
+  **明示的に穴を認めていた箇所を埋めた**。証明の骨格 ‖A−A'‖ ≤ ‖A_N−A‖+‖A_N−A'‖ を検査する。
+- **`132_.../check_02_proof_path_W.sage`** — 本文の証明が使う行列 W（第 1 列が w、他が 0）を
+  実際に構成して ‖AW‖ = ‖Aw‖・‖W‖ = ‖w‖ を確認（証明ステップの書き写しミス検出）。
+- **`133_.../check_02_cauchy_completeness.sage`** — 既存は絶対収束側のみだったので完備性側を追加。
+- **`135_.../check_02_step2_bound.sage`** — 証明 Step 2 の上界 C = E_{m₀−1}(a) + 2a^{m₀}/m₀! の
+  構成そのものを直接検査。
+
+**捨てたもの**: 全ディレクトリに同一内容でコピーされていた `_prelude.sage` 17 個
+（main の 12x/13x は prelude を持たない書き方なので、必要な補助は各 check 内に書いた）、
+prelude だけで check の無い 10 ディレクトリ（`137_`〜`146_`）、
+main の既存 check と同じ主張を見ているだけの 6 ファイル、プリパーサ生成物 `.sage.py` 2 個。
+
+**注意**: 救済元の check は**一度も実行された形跡がなく（ログが無い）、閾値が実際には通らなかった**。
+`130_` の「‖A_N−A'‖ → ‖δ‖」を許容誤差 1e-9 の `close` で見ていた点（有限 N では ‖C‖/N の残差が残る）と、
+`133_` の「N₀=80 で sup < 1e-6」（r=0.9 では実測 1.2e-2）を、成り立つ評価へ直してから統合した。
+
+**検証**: `structured-latex` の `npm run check` exit 0、`verify-check-linkage.ts` exit 0
+（113 check）、`run-all-checks.sh 129 130 132 133 135` は 10 本すべて PASS。
+
 ## 完了（2026-07-27）: **本文の全 20 章に機械証明が付いた**（章 009〜020 を一気に形式化）
 
 このセッションの前は、Lean の形式化は**章 008 まで**しか無かった。**章 009〜020 の 12 章を
