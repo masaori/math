@@ -59,6 +59,25 @@ targets=(
   Ising2D.Conjugation.matrix_conj_mul
   Ising2D.Conjugation.matrix_conj_one
   Ising2D.Conjugation.matrix_conj_comp
+  Ising2D.Abstract.Conj.sandwich_comp
+  Ising2D.Abstract.Conj.sandwich_mul
+  Ising2D.Abstract.Conj.sandwich_one
+  Ising2D.Abstract.Conj.sandwich_add
+  Ising2D.Abstract.Conj.conjMonoidHom
+  Ising2D.Abstract.Conj.conjMulAut
+  Ising2D.Abstract.Conj.conjMulAutHom
+  Ising2D.Abstract.Conj.conjMonoidHom_comp
+  Ising2D.Abstract.Conj.conjRingHom
+  Ising2D.Abstract.Conj.conjRingAutHom
+  Ising2D.Abstract.Conj.sandwich_mul_needs_left_inv
+  Ising2D.Abstract.Conj.sandwich_one_needs_right_inv
+  Ising2D.Conjugation.T_eq_conjMonoidHom
+  Ising2D.Conjugation.matrix_conj_mul_of_abstract
+  Ising2D.Conjugation.matrix_conj_one_of_abstract
+  Ising2D.Conjugation.matrix_conj_comp_of_abstract
+  Ising2D.Conjugation.matrix_conj_add_of_abstract
+  Ising2D.Conjugation.matrixConjRingAutHom
+  Ising2D.Conjugation.matrixConjRingAutHom_nonsingInvUnit
   Ising2D.commutator_via_anticommutators
   Ising2D.lie_mul_eq_acomm_sub_acomm
   Ising2D.matrix_commutator_via_anticommutators
