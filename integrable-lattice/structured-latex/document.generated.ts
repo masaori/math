@@ -25,6 +25,7 @@ import blocks_004_lambda_finite from './content/004_lambda_finite.ts'
 import blocks_005_duality from './content/005_duality.ts'
 import blocks_006_propositions_TVW from './content/006_propositions_TVW.ts'
 import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
+import blocks_008_theta_padic from './content/008_theta_padic.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -36,6 +37,7 @@ export type AllBlocks = [
   ...typeof blocks_005_duality,
   ...typeof blocks_006_propositions_TVW,
   ...typeof blocks_007_asymmetry_scope,
+  ...typeof blocks_008_theta_padic,
 ]
 
 /** 全ノート。 */
