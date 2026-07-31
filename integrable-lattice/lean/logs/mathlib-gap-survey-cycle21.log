@@ -1,0 +1,120 @@
+=== cycle21 mathlib survey (520045ab14) files=    8264
+--- grep: coeff_one_add_X_pow
+Mathlib/RingTheory/PowerSeries/Binomial.lean:75:  rw [hright, Polynomial.coeff_coe, binomialSeries_coeff, Polynomial.coeff_one_add_X_pow]
+Mathlib/Algebra/Polynomial/Coeff.lean:304:theorem coeff_one_add_X_pow (R : Type*) [Semiring R] (n k : ℕ) :
+Mathlib/Algebra/Polynomial/Coeff.lean:310:  simp [Polynomial.coeff_one_add_X_pow]
+--- grep: mapDomainRingHom
+Mathlib/Algebra/Category/Ring/Adjunctions.lean:93:  map f := Under.homMk (CommRingCat.ofHom <| MonoidAlgebra.mapDomainRingHom R f.hom)
+Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean:1115:def mapDomainRingHom [MulSemiringAction α β] [MulSemiringAction α₂ β]
+Mathlib/Algebra/SkewMonoidAlgebra/Lift.lean:99:  __ := mapDomainRingHom hf
+Mathlib/Algebra/SkewMonoidAlgebra/Lift.lean:100:  commutes' := by simp [mapDomainRingHom]
+Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:285:def mapDomainRingHom (f : M →* N) : R[M] →+* R[N] where
+Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:295:lemma mapDomainRingHom_id : mapDomainRingHom R (.id M) = .id R[M] := by ext <;> simp
+--- grep: coeff_expand
+Mathlib/FieldTheory/SeparablyGenerated.lean:241:    Polynomial.coeff_expand hp.pos, if_neg hi, eq_mul_inv_iff_mul_eq₀
+Mathlib/FieldTheory/PrimitiveElement.lean:266:      simp only [f, coeff_sub, coeff_X_pow_mul, s.coeff_expand_mul' hn, coeff_natDegree,
+Mathlib/FieldTheory/PrimitiveElement.lean:267:        coeff_expand hn r, hndvd, ite_false, sub_zero]
+Mathlib/RingTheory/Trace/Basic.lean:312:      rw [nextCoeff, if_neg, ← hg₂, coeff_expand (by positivity),
+Mathlib/RingTheory/PowerSeries/Expand.lean:87:theorem coeff_expand_mul (m : ℕ) :
+Mathlib/RingTheory/PowerSeries/Expand.lean:89:  rw [coeff, coeff, expand, ← smul_eq_mul, ← Finsupp.smul_single, MvPowerSeries.coeff_expand_smul]
+--- grep: add_pow_char_pow
+Mathlib/FieldTheory/Finite/GaloisField.lean:120:  · simp only [aeval_X_pow, aeval_X, map_sub, add_pow_char_pow, sub_eq_zero]
+Mathlib/Algebra/CharP/Lemmas.lean:146:lemma add_pow_char_pow_of_commute (h : Commute x y) : (x + y) ^ p ^ n = x ^ p ^ n + y ^ p ^ n :=
+Mathlib/Algebra/CharP/Lemmas.lean:177:lemma add_pow_char_pow : (x + y) ^ p ^ n = x ^ p ^ n + y ^ p ^ n := add_pow_expChar_pow ..
+--- grep: geom_sum_mul
+Mathlib/Topology/Algebra/InfiniteSum/Ring.lean:282:  simpa [← Finset.sum_mul, geom_sum_mul_neg] using tendsto_const_nhds.sub h.tendsto_atTop_zero
+Mathlib/Analysis/Complex/AbelLimit.lean:133:  simp_rw [← sum_sub_distrib, ← mul_one_sub, ← geom_sum_mul_neg, ← mul_assoc, ← sum_mul,
+Mathlib/Analysis/SpecialFunctions/Trigonometric/Chebyshev/ChebyshevGauss.lean:58:  convert! geom_sum_mul (exp (k / n * π * I)) n using 1
+Mathlib/NumberTheory/Bernoulli.lean:347:    rw [← exp_pow_sum, geom_sum_mul, h_r, ← bernoulliPowerSeries_mul_exp_sub_one,
+Mathlib/NumberTheory/JacobiSum/Basic.lean:254:  refine hk ▸ ⟨(Finset.range k).sum (μ ^ ·), ?_, (geom_sum_mul μ k).symm⟩
+Mathlib/RingTheory/IntegralDomain.lean:223:    rw [← mul_left_inj' hx1, zero_mul, geom_sum_mul]
+--- grep: theorem resultant
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:144:@[simp] theorem resultant_zero_left_deg : resultant f g 0 m = f.coeff 0 ^ m := by
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:148:theorem resultant_C_zero_left : resultant (C r) g 0 m = r ^ m := by simp
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:167:@[simp] theorem resultant_zero_right_deg : resultant f g m 0 = g.coeff 0 ^ m := by
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:171:theorem resultant_C_zero_right (r : R) : resultant f (C r) m 0 = r ^ m := by simp
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:174:theorem resultant_zero_right : resultant f 0 m n = 0 ^ m * f.coeff 0 ^ n := by
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:181:theorem resultant_zero_left : resultant 0 g m n = 0 ^ n * g.coeff 0 ^ m := by
+--- grep: resultant_eq
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:352:lemma resultant_eq_zero_of_lt_lt (hf : f.natDegree < m) (hg : g.natDegree < n) :
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:406:lemma resultant_eq_prod_roots_sub
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:478:nonrec lemma resultant_eq_prod_eval [IsDomain R]
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:515:  have := resultant_eq_prod_roots_sub (f.map (algebraMap R L))
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:565:    simp [resultant_eq_prod_eval, natDegree_mul_le, hff]
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:594:    rw [resultant_eq_prod_eval _ _ _ le_rfl hf]
+--- grep: IsCyclotomicExtension
+Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean:196:  ⟨n, zmodChar n (IsCyclotomicExtension.zeta_pow n F' _),
+Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean:197:    zmodChar_primitive_of_primitive_root n (IsCyclotomicExtension.zeta_spec n F' _)⟩
+Mathlib/NumberTheory/LegendreSymbol/Complex.lean:32:  exact (IsCyclotomicExtension.algEquiv {(ch.n : ℕ)} ℂ (CyclotomicField ch.n ℂ) ℂ).toMonoidHom
+Mathlib/NumberTheory/LegendreSymbol/Complex.lean:38:  exact (IsCyclotomicExtension.algEquiv {(nn : ℕ)} ℂ (CyclotomicField nn ℂ) ℂ).injective
+Mathlib/NumberTheory/Cyclotomic/Basic.lean:17:`IsCyclotomicExtension S A B` expressing the fact that `B` is obtained from `A` by adding `n`-th
+Mathlib/NumberTheory/Cyclotomic/Basic.lean:22:* `IsCyclotomicExtension S A B` : means that `B` is obtained from `A` by adding `n`-th primitive
+--- grep: Finset.sum_fiberwise
+Mathlib/Analysis/Convex/StdSimplex.lean:314:    exact Finset.sum_fiberwise Finset.univ f s
+Mathlib/Probability/ProbabilityMassFunction/Constructions.lean:221:      (by simpa [Finset.sum_fiberwise_eq_sum_filter univ univ g f]) := by
+Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean:447:    rw [Fintype.card, Finset.card_eq_sum_ones, ← Finset.sum_fiberwise _ (fun φ => mkComplex φ)]
+Mathlib/RingTheory/Kaehler/Basic.lean:811:    rw [← Finsupp.sum_single x, Finsupp.sum, ← Finset.sum_fiberwise_of_maps_to
+Mathlib/RingTheory/Extension/Generators.lean:678:    rw [← Finset.sum_fiberwise_of_maps_to (fun i ↦ Finset.mem_image_of_mem Prod.fst)]
+Mathlib/InformationTheory/Coding/KraftMcMillan.lean:133:      (Finset.sum_fiberwise_of_maps_to hlen_maps _).symm
+--- grep: max'_mem
+Mathlib/Order/CountableDenseLinearOrder.lean:51:        (exists_between (lo_lt_hi _ (Finset.max'_mem _ nlo) _ (Finset.min'_mem _ nhi))) fun m hm ↦
+Mathlib/Order/ConditionallyCompleteLattice/Finset.lean:36:  exact s.max'_mem _
+Mathlib/Order/ConditionallyCompleteLattice/Finset.lean:104:  exact max'_mem (image f s) _
+Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean:213:  have ⟨i₀, hi1⟩ : ∃ a, ψ a = Kmax := by simpa using Finset.max'_mem (Finset.univ.image ψ)
+Mathlib/GroupTheory/SpecificGroups/Cyclic.lean:337:  let ⟨g, _, hg⟩ := Finset.mem_image.mp (Finset.max'_mem _ _)
+Mathlib/RingTheory/GradedAlgebra/Radical.lean:83:      have mem_max₁ : max₁ ∈ set₁ := max'_mem set₁ (nonempty x rid₁)
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:165:@[to_additive (dont_translate := R) mapDomain_mul]
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:166:lemma mapDomain_mul (f : F) (x y : R[M]) : mapDomain f (x * y) = mapDomain f x * mapDomain f y := by
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:179:  map_mul' := mapDomain_mul f
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:285:def mapDomainRingHom (f : M →* N) : R[M] →+* R[N] where
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:290:  map_mul' := mapDomain_mul f
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:295:lemma mapDomainRingHom_id : mapDomainRingHom R (.id M) = .id R[M] := by ext <;> simp
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:298:lemma mapDomainRingHom_comp (f : N →* O) (g : M →* N) :
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:299:    mapDomainRingHom R (f.comp g) = (mapDomainRingHom R f).comp (mapDomainRingHom R g) := by
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:351:lemma mapRingHom_comp_mapDomainRingHom (f : R →+* S) (g : M →* N) :
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:352:    (mapRingHom N f).comp (mapDomainRingHom R g) =
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:353:      (mapDomainRingHom S g).comp (mapRingHom M f) := by aesop
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:356:alias mapRangeRingHom_comp_mapDomainRingHom := mapRingHom_comp_mapDomainRingHom
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:363:  .ofRingHom (MonoidAlgebra.mapDomainRingHom R e) (MonoidAlgebra.mapDomainRingHom R e.symm)
+.lake/packages/mathlib/Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:378:    (mapDomainRingEquiv R e).toRingHom = mapDomainRingHom R e := rfl
+
+=== cycle21 3段方式の欠落調査（mathlib 520045ab14、走査     8264 ファイル）
+--- 概念: Kirchhoff matrix-tree
+(1) 連結語の内容 grep: matrixTree ->        0 ファイル
+(2) 語幹(-i) の内容 grep: kirchhoff ->        0 ファイル
+(3) 語幹(-i) のファイル名: kirchhoff ->        0 件
+--- 概念: 全域木の個数
+(1) 連結語の内容 grep: numSpanningTrees ->        0 ファイル
+(2) 語幹(-i) の内容 grep: spanning tree ->        3 ファイル
+(3) 語幹(-i) のファイル名: spanning tree ->        0 件
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:32:- `endIsFree T` corresponds to the fact that, given a spanning tree `T` of a
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:144:/- In this section, we suppose we have a free groupoid with a spanning tree for its generating
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:146:is that we are 'pulling' the endpoints of all the edges of the quiver along the spanning tree to
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:192:/-- Turning an edge in the spanning tree into a loop gives the identity loop. -/
+Mathlib/Combinatorics/Quiver/Arborescence.lean:28:  spanning tree'. This proof avoids the use of Zorn's lemma.
+--- 概念: Newton 多面体(多角形)
+(1) 連結語の内容 grep: newtonPolytope ->        0 ファイル
+(2) 語幹(-i) の内容 grep: newton polygon ->        0 ファイル
+(3) 語幹(-i) のファイル名: newton polygon ->        0 件
+--- 概念: 格子多角形の周長
+(1) 連結語の内容 grep: latticePerimeter ->        0 ファイル
+(2) 語幹(-i) の内容 grep: lattice polygon ->        0 ファイル
+(3) 語幹(-i) のファイル名: lattice polygon ->        0 件
+--- 在ることを確認したもの
+PowerSeries Binomial: Mathlib/RingTheory/PowerSeries/Binomial.lean
+IsCyclotomicExtension: Mathlib/NumberTheory/Cyclotomic/Basic.lean
+Polynomial.resultant: Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+AddMonoidAlgebra.mapDomain_mul(to_additive): Mathlib/Algebra/MonoidAlgebra/MapDomain.lean:165-166
+Polynomial.expand/coeff_expand: 3 件
+--- 補足: 語幹 'newton' の再走査（上の (3) はフレーズを使ってしまい無意味だったので取り直す）
+(2') 'newton' 内容 grep(-i):        7 ファイル
+Mathlib/Dynamics/Newton.lean
+Mathlib/NumberTheory/Padics/Hensel.lean
+Mathlib/RingTheory/Henselian.lean
+Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean
+Mathlib/LinearAlgebra/JordanChevalley.lean
+Mathlib/Data/Nat/NthRoot/Defs.lean
+Mathlib/Algebra/Group/ForwardDiff.lean
+(3') ファイル名 'newton':        2 件
+Mathlib/Dynamics/Newton.lean
+Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean

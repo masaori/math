@@ -208,6 +208,49 @@ targets=(
   IntegrableLattice.sum_Theta_J8
   IntegrableLattice.ordKappa_J8
   IntegrableLattice.J6_no_n_pow_term
+  # 定理 L1・系 L2（DigitBranchRecursion.lean, cycle 20 step 1）
+  IntegrableLattice.sigma_eq_of_max
+  IntegrableLattice.exists_sigma_ne_zero
+  IntegrableLattice.exists_sigma_ne_zero_lt
+  IntegrableLattice.one_add_X_pow_split
+  IntegrableLattice.branch_decomposition
+  IntegrableLattice.coeff_branch_single
+  IntegrableLattice.coeff_branch_sum
+  IntegrableLattice.coeff_branch_lt
+  IntegrableLattice.exists_coeff_ne_zero_of_branches
+  IntegrableLattice.L1_bound
+  IntegrableLattice.geom_sum_one_add_X_pow_char
+  # 定理 W3・補題 W2・系 W6（SInfinityDecision.lean, cycle 20 step 2）
+  IntegrableLattice.SInfinity.bucketVanish_iff
+  IntegrableLattice.SInfinity.psi_chi_perp_sub_one
+  IntegrableLattice.SInfinity.psi_eq_zero_of_dvd
+  IntegrableLattice.SInfinity.psi_coeff
+  IntegrableLattice.SInfinity.torus_diag
+  IntegrableLattice.SInfinity.torus_anti
+  IntegrableLattice.SInfinity.torus_not_e1
+  IntegrableLattice.SInfinity.torus_Sinf_candidates
+  IntegrableLattice.SInfinity.fam3_e1
+  IntegrableLattice.SInfinity.fam3_not_diag
+  IntegrableLattice.SInfinity.fam3_Sinf_singleton
+  # 定理 Y′・系 Y″（EllTwoClosedForm.lean, cycle 20 step 3）
+  IntegrableLattice.EllTwo.Aalpha_seq
+  IntegrableLattice.EllTwo.Abeta_seq
+  IntegrableLattice.EllTwo.Bsat_seq
+  IntegrableLattice.EllTwo.B_seq
+  IntegrableLattice.EllTwo.four_cases_distinct_at_three
+  IntegrableLattice.EllTwo.caseA_or_caseB
+  IntegrableLattice.EllTwo.not_caseA_and_caseB
+  IntegrableLattice.EllTwo.lam0_ge_one
+  IntegrableLattice.EllTwo.w_ge_one_of_lam1_one
+  IntegrableLattice.EllTwo.Bsat_one_eq_B_one_add
+  IntegrableLattice.EllTwo.Bsat_ne_B_at_one
+  IntegrableLattice.EllTwo.Aalpha_one_eq_B_one
+  IntegrableLattice.EllTwo.Abeta_one_eq_B_one
+  IntegrableLattice.EllTwo.B_eq_Xprime
+  IntegrableLattice.EllTwo.Aalpha_eq_Xprime_at_one_two
+  IntegrableLattice.EllTwo.Aalpha_ne_Xprime_at_three
+  IntegrableLattice.EllTwo.Abeta_ne_Xprime_at_two
+  IntegrableLattice.EllTwo.Bsat_ne_Xprime_at_two
 )
 
 {
