@@ -1,0 +1,19 @@
+cycle 21 / T3 Pure: Lambda_k は bar tilde E だけでは決まらない（Step H）
+
+--- H1: 同じ (j^*, lambda, theta^*, e_{j^*}) をもつ塔で Lambda_1 が違うこと ---
+  ell=2 torus (1,0),(0,1)                  ell=2 j*=1 lam=1 th*=2 e_{j*}=2  ->  (Lambda_1,theta#_1)=(2,0)
+  ell=2 TV3 (0,0),(1,0),(0,1)              ell=2 j*=1 lam=1 th*=2 e_{j*}=2  ->  (Lambda_1,theta#_1)=(3,0)
+  ell=3 bouquet (1,0),(0,1),(1,1),(1,-1)   ell=3 j*=2 lam=1 th*=2 e_{j*}=2  ->  (Lambda_1,theta#_1)=(2,0)
+  => (j^*,lambda,theta^*,e_{j^*}) が同一で Lambda_1 が異なる組が実在する。OK
+
+--- H2: tilde E を ell*(単項式) でずらすと bar tilde E は不変だが Lambda_1 が変わる ---
+  基準 (ell=2 torus, u=(1, -1)): (Lambda_1,theta#_1,m#_1) = (2, 0, +Infinity)
+  摂動 2*z*w                  bar 不変 / S_inf 不変 / (Lambda_1,theta#_1,m#_1)=(1, 0, +Infinity)  <- Lambda_1 が変わった
+  摂動 2*z^2*w                bar 不変 / S_inf 不変 / (Lambda_1,theta#_1,m#_1)=(1, 0, +Infinity)  <- Lambda_1 が変わった
+  摂動 2*z*w^2                bar 不変 / S_inf 不変 / (Lambda_1,theta#_1,m#_1)=(1, 0, +Infinity)  <- Lambda_1 が変わった
+  摂動 2*z^2*w - 2*z*w        bar 不変 / S_inf 不変 / (Lambda_1,theta#_1,m#_1)=(1, 1, 0)  <- Lambda_1 が変わった
+  => bar tilde E を固定したまま Lambda_1 を変える摂動が 4 件。Lambda_1 は bar tilde E の関数ではない。OK
+
+FAIL 件数: 0
+打ち切り件数: 0
+総所要 1.0s
