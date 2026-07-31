@@ -8,6 +8,8 @@ import Ising2D.Basic
 import Ising2D.Abstract.MatrixUnits
 import Ising2D.Abstract.ScalarCentral
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
+import Ising2D.Abstract.Conjugation
+import Ising2D.Part000.Claim045_ConjugationIsRingHomAbstract
 import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
 import Ising2D.Part002.Theorem000_TensorBasis
 import Ising2D.Part002.Lemma001_ScalarIdentityCommutes
@@ -17,6 +19,8 @@ import Ising2D.Abstract.TensorPowerBasis
 import Ising2D.Part002.Theorem000_TensorBasisAbstract
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
+import Ising2D.Abstract.GeneratedByBasis
+import Ising2D.Part004.Claim014_ZYGenerateAlgebraAbstract
 import Ising2D.Part006.Claim000_AnticommutatorZY
 import Ising2D.Abstract.SiteLocalAnticomm
 import Ising2D.Part006.Claim000_AnticommutatorZYAbstract

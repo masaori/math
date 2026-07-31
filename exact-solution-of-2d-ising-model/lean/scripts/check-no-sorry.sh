@@ -69,6 +69,25 @@ targets=(
   Ising2D.Conjugation.matrix_conj_mul
   Ising2D.Conjugation.matrix_conj_one
   Ising2D.Conjugation.matrix_conj_comp
+  Ising2D.Abstract.Conj.sandwich_comp
+  Ising2D.Abstract.Conj.sandwich_mul
+  Ising2D.Abstract.Conj.sandwich_one
+  Ising2D.Abstract.Conj.sandwich_add
+  Ising2D.Abstract.Conj.conjMonoidHom
+  Ising2D.Abstract.Conj.conjMulAut
+  Ising2D.Abstract.Conj.conjMulAutHom
+  Ising2D.Abstract.Conj.conjMonoidHom_comp
+  Ising2D.Abstract.Conj.conjRingHom
+  Ising2D.Abstract.Conj.conjRingAutHom
+  Ising2D.Abstract.Conj.sandwich_mul_needs_left_inv
+  Ising2D.Abstract.Conj.sandwich_one_needs_right_inv
+  Ising2D.Conjugation.T_eq_conjMonoidHom
+  Ising2D.Conjugation.matrix_conj_mul_of_abstract
+  Ising2D.Conjugation.matrix_conj_one_of_abstract
+  Ising2D.Conjugation.matrix_conj_comp_of_abstract
+  Ising2D.Conjugation.matrix_conj_add_of_abstract
+  Ising2D.Conjugation.matrixConjRingAutHom
+  Ising2D.Conjugation.matrixConjRingAutHom_nonsingInvUnit
   Ising2D.commutator_via_anticommutators
   Ising2D.lie_mul_eq_acomm_sub_acomm
   Ising2D.matrix_commutator_via_anticommutators
@@ -97,6 +116,19 @@ targets=(
   Ising2D.siteProd_mem
   Ising2D.E_eq_siteProd
   Ising2D.Z_Y_generate_algebra
+  Ising2D.Abstract.eq_top_of_span_eq_top
+  Ising2D.Abstract.eq_top_of_basis_mem
+  Ising2D.Abstract.map_mem_of_span_eq_top
+  Ising2D.Abstract.map_mem_of_mulSingle_mem
+  Ising2D.Abstract.map_mem_subalgebra_of_mulSingle_mem
+  Ising2D.Abstract.string_mem
+  Ising2D.Abstract.local_mem
+  Ising2D.xString_mem_adjoin_of_abstract
+  Ising2D.sigma_mem_adjoin_of_abstract
+  Ising2D.span_pauli_eq_top
+  Ising2D.siteOp_mem_adjoin_of_abstract
+  Ising2D.siteProd_mem_of_abstract
+  Ising2D.Z_Y_generate_algebra_of_abstract
   Ising2D.acomm_ZY
   Ising2D.linearIndependent_of_clifford
   Ising2D.ZY_linearIndependent

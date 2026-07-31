@@ -286,3 +286,20 @@ Monsky / Cuoco–Monsky / Kataoka の定理の適用である**。本プロジ�
 | (3) | $(3.2)$ の形への同定（$n\ge1$ の 5 段で 5 係数） | 同定された $m_0$ が content 由来の値と一致（3 例） |
 
 **これらは Kataoka Theorem 2.1 / 2.3 の帰結の確認であって、定理の証明ではない。**
+
+---
+
+## 訂正（2026-07-31, cycle 16 step 1 による）
+
+本レポートには**文献同定の誤り**がある。以後は下記を正とすること。
+
+1. **Kataoka `[14]`（Theorem 2.1 の出典 ＝ Monsky Theorem 5.6）の同定が誤り。**
+   正しくは P. Monsky, *On p-adic power series*, Math. Ann. **255**(2), 217–227 (1981)。
+   本レポートが想定していた *Some invariants of $\mathbb{Z}_p^d$-extensions*（同巻 229–233）には
+   **§5 も Theorem 5.6 も存在しない**（全 5 ページ全文を読んで確認）。
+2. **「Kataoka の PDF はテキスト変換で読めない」は誤り。** `pdftotext -layout` で可読テキストが出る。
+   以後この手順を使うこと（ページ画像の直読は原論文側でのみ必要）。
+
+いずれも `outputs/reports/cycle16_T1_monsky_primary_sources.md` で原典を取得して確定した。
+本レポートの数学的結論（(a) Monsky Thm 5.6 がグラフ限定でないこと、(b) $\mu=m_0$ の等号）は
+**原典で確認され、変更はない**。
