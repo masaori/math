@@ -1,5 +1,28 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 完了（2026-07-31）: 救済PR #22 の残余を数値検証へ統合（`def_T_g` / `def_T_V` の検証を新設）
+
+`docs/salvage-audit-2026-07-31.md` の「PR #22」節に従い、放置ブランチ
+`origin/worktree-foamy-foraging-map` から**価値のある検証だけ**を取り出して統合した。
+
+- **新設 `sagemath/check/255_def_T_g/`** — `T_g : h ↦ g h g^{-1}` の合成則を、Pauli 基底での
+  4^M × 4^M 行列表示として 2 経路（基底の像の展開係数／vec 公式 `vec(AXB) = (A ⊗ B^T)vec(X)`）で
+  作って突き合わせる。作用素レベルだけだと結合律の言い換えにしかならないための措置。114 判定 PASS。
+- **新設 `sagemath/check/260_def_T_V/`** — 「3 段の共役の合成 = 行列 `V` による 1 回の共役」。720 判定 PASS。
+- `250_def_partition_function_2d_ising/check_02_symmetries_and_pbc.sage` — 全スピン反転不変性・
+  巡回シフト不変性に加え、**周期境界を外した自由境界版と値が一致しないことの否定コントロール**。91 判定 PASS。
+- `251_def_transfer_matrix/check_02_V2_as_kronecker_power.sage` — `V_2 = t^(⊠N)`（2×2 転送行列の
+  クロネッカー積）による独立構成。60 判定 PASS。
+
+**ディレクトリ番号の注意**: `def_T_g` は文書順では既存 `253_injectivity_of_T_up_to_scalar` の直前だが
+`250`〜`254` が埋まっているため `255`、`def_T_V` は `260` を使った（両者の相対順序は保持）。
+25x 帯の既存番号（`253` = injectivity、`254` = V2_not_in_clifford、`257` = def_pauli_group）は
+もともと文書順に沿っていない。
+
+**捨てたもの**: ブランチの `250_.../check_01_Z_closed_form_1d.sage`、`252_.../check_01〜03`（いずれも
+main の既存 check と同内容）、`.sage.py` 8 個（プリパーサ生成物）、ブランチ側の `252_.../_prelude.sage`
+（main と関数シグネチャが逆で非互換。main 側 `_prelude.sage` は一切変更していない）。
+
 ## 完了（2026-07-27）: **本文の全 20 章に機械証明が付いた**（章 009〜020 を一気に形式化）
 
 このセッションの前は、Lean の形式化は**章 008 まで**しか無かった。**章 009〜020 の 12 章を
