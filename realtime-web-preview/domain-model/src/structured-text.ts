@@ -10,7 +10,6 @@
 
 import { createRuntimeSchema } from '@structured-latex/system/domain-model'
 import type { RuntimeSchema } from '@structured-latex/system/domain-model'
-import { z } from 'zod'
 
 // --- L1（入力言語）の型と語彙: すべてシステムの再輸出 --------------------------
 export {
@@ -49,18 +48,13 @@ export {
 /**
  * 本ビューア用に L1 の実行時スキーマを具体化する。
  *
- * `blockMetaKeys` は、その文書のブロックが持つ**プロジェクト固有メタデータのキー名**
- * （integrable-lattice の `habitat` / `realEscape` など。同 §5.4）。
- * システムの実行時スキーマは `.strict()` であり、宣言していないキーを拒否する。
- * 本ビューアは**ドメイン非依存**でキー名を知りえないため、キー名は外から与える
- * （サーバは設定から、ブラウザはレスポンスの `blockMetaKeys` から受け取る）。
+ * **このビューアは入力言語の語彙を所有しない**（どのプロジェクトの文書でも読む立場）。
+ * プロジェクト固有メタデータのキー名（integrable-lattice の `habitat` など）は知りようがないので、
+ * 未知のキーを拒否しても打ち間違いの検出にはならず、正しい文書を読めなくするだけになる。
+ * そのためシステムの `unknownBlockMeta: 'passthrough'` を使い、**値を落とさずそのまま通す**
+ * （strip すると画面に出す前にメタデータが黙って消える）。
  *
- * 値の中身は検査しない（`z.unknown()`）。メタデータの意味を解釈するのは各プロジェクトの
- * 検証ツールであって、体裁を持たない汎用ビューアではない。
+ * 意味を解釈する検証は、語彙を所有する各プロジェクトの検証ツールが行う。
  */
-export const createPreviewRuntimeSchema = (
-  blockMetaKeys: readonly string[] = [],
-): RuntimeSchema<string, unknown> =>
-  createRuntimeSchema<string, unknown, Record<string, z.ZodTypeAny>>({
-    blockMeta: Object.fromEntries(blockMetaKeys.map((key) => [key, z.unknown()])),
-  })
+export const createPreviewRuntimeSchema = (): RuntimeSchema<string, unknown> =>
+  createRuntimeSchema<string, unknown>({ unknownBlockMeta: 'passthrough' })

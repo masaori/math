@@ -38,12 +38,6 @@ const documentEnvelopeSchema = z.object({
    * 本体（blocks）と別フィールドで運び、FE 側でも本文と区別して描画する。
    */
   notes: z.array(z.unknown()).default([]),
-  /**
-   * この文書のブロックが持つプロジェクト固有メタデータのキー名（例: `habitat`）。
-   * システムの実行時スキーマは `.strict()` で、宣言していないキーを拒否する。
-   * ビューアはドメイン非依存でキー名を知りえないため、サーバが設定から宣言して運ぶ。
-   */
-  blockMetaKeys: z.array(z.string()).default([]),
   /** サーバが応答を生成した時刻（ISO 8601）。 */
   generatedAt: z.string(),
   /** 入力ソースの表示名（例: ソース dir の相対パス）。 */
@@ -54,7 +48,6 @@ const documentEnvelopeSchema = z.object({
 export type DocumentResponseBody = {
   blocks: readonly Block[]
   notes: readonly Note[]
-  blockMetaKeys: readonly string[]
   generatedAt: string
   sourceLabel: string
 }
@@ -70,8 +63,8 @@ const issuesOfZodError = (error: z.ZodError): ValidationIssue[] =>
  * GET /api/document のレスポンスを検証する境界。throw せず Result で返す。
  *
  * 外枠 → 入力言語（システムの実行時スキーマ）の 2 段で検証する。
- * `blockMetaKeys` が外枠側に載っており、それを読むまで入力言語側のスキーマを具体化できないので、
- * 1 つの Zod schema では書けない。よって schema ではなく関数として提供する。
+ * 入力言語側の検証は Zod schema ではなく Result を返す関数なので、1 つの schema では書けない。
+ * よって schema ではなく関数として提供する。
  */
 export const parseDocumentResponse = (
   value: unknown,
@@ -81,7 +74,7 @@ export const parseDocumentResponse = (
     return err({ code: 'validation_error', issues: issuesOfZodError(envelope.error) })
   }
 
-  const schema = createPreviewRuntimeSchema(envelope.data.blockMetaKeys)
+  const schema = createPreviewRuntimeSchema()
   const blocks = schema.validateBlocks(envelope.data.blocks, 'blocks')
   if (!blocks.success) {
     return err({ code: 'validation_error', issues: blocks.error })
@@ -94,7 +87,6 @@ export const parseDocumentResponse = (
   return ok({
     blocks: blocks.data,
     notes: notes.data,
-    blockMetaKeys: envelope.data.blockMetaKeys,
     generatedAt: envelope.data.generatedAt,
     sourceLabel: envelope.data.sourceLabel,
   })

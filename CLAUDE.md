@@ -39,12 +39,14 @@
 <project-name>/
 ├── MEMORY.md              # プロジェクト固有の引き継ぎメモ（次回やること・未解決問題・完了済み）
 ├── structured-latex/      # 証明本体の正本（構造化テキスト）
-│   ├── schema.ts          # ブロック/ノート/ノードの型と検証（型の正本）
+│   ├── schema.ts          # リポジトリ直下 structured-latex/（システム）の入口。
+│   │                      # **入力言語の定義はここに複製しない**。生成された Label を受け取り、
+│   │                      # プロジェクト固有メタデータを宣言し、ファクトリを具体化するだけ
 │   ├── labels.generated.ts # 自動生成: 実在ラベルのユニオン型（参照はこの型しか指せない）
 │   ├── document.generated.ts # 自動生成: 全ファイルを連結し id/ラベルの一意性を型で主張
 │   ├── content/*.ts       # 証明ブロック群（配列の並びが文書順の正本。**最終成果物はここだけから生成**）
 │   ├── notes/*.ts         # 参照用ノート（文書本体ではない。targets にラベルで紐づける）
-│   └── tools/             # validate-content.ts / generate-index.ts 等（すべて TypeScript）
+│   └── tools/             # validate-content.ts / build-latex.ts 等（すべて TypeScript）
 ├── sagemath/              # SageMath による数値検証コード
 │   ├── _shared/defs.sage  # 共通定義
 │   ├── check/<NNN>_<対象>/# overview.md に「対象ラベル」を宣言する
@@ -83,8 +85,9 @@
     **id・ラベル・ノート id の重複（ファイル跨ぎも）**、見出しへの本文混入、本文ブロックの `notes`、
     見出し `level` の範囲、タイトルの空、`conversion.status` の綴り、フィールド名の打ち間違い
   - 何が型で落ち、何が型では無理か（根拠つき）は
-    [docs/type-coverage.md](exact-solution-of-2d-ising-model/docs/type-coverage.md)
-  - ラベル・ブロックを増減したら `node structured-latex/tools/generate-index.ts` で
+    [structured-latex/docs/type-coverage.md](structured-latex/docs/type-coverage.md)（システム側が正本）
+  - ラベル・ブロックを増減したら `npm run gen`（実体はリポジトリ直下のシステムの生成器
+    `node ../../structured-latex/codegen/structured-text-index/cli.ts --project .`）で
     生成物を作り直す（忘れると型検査が落ちる）
   - **ソース形式は TypeScript に統一する**（`.mjs` は使わない。混在させない）
 - `node structured-latex/tools/validate-content.ts` — スキーマ・ラベル重複・**未解決参照**・

@@ -68,14 +68,10 @@ node backend/dist/entrypoint/server.js --source /path/to/content --notes /path/t
 | 参照用ノート dir | `RWP_NOTES_DIR` | `--notes` | structured-latex/notes（`--source` 指定時はその隣の `notes`） |
 | ポート | `RWP_PORT` | `--port` | 4321 |
 | バインド host | `RWP_HOST` | `--host` | 0.0.0.0 |
-| ブロックのメタデータキー | `RWP_BLOCK_META_KEYS` | `--block-meta-keys` | （空） |
 
-`RWP_BLOCK_META_KEYS` は、入力ソースのブロックが持つ**プロジェクト固有メタデータのキー名**を
-カンマ区切りで宣言する（例: integrable-lattice なら
-`RWP_BLOCK_META_KEYS=habitat,realEscape,verification,lean`）。
-システムの実行時スキーマは未宣言のキーを拒否する（`.strict()`）一方、本ビューアはドメイン非依存で
-キー名を内蔵できないため、設定として外から与える。宣言しないまま表示すると
-`Unrecognized key(s) in object` として validation エラー表示になる。
+プロジェクト固有メタデータ（integrable-lattice の `habitat` 等）の設定は要らない。
+本ビューアは入力言語の語彙を所有しないので、システムの実行時スキーマを
+「未知のメタデータキーはそのまま通す」モードで使う（値は落とさない）。
 
 入力ソースのファイル形式は **TypeScript（`.ts`）**。Node 22.18 以降の型ストリップで
 そのまま実行されるため、入力ソース側にビルド工程は要らない

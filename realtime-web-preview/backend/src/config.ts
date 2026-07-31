@@ -16,7 +16,6 @@ export type ServerConfig = {
    * メタデータを使うプロジェクトを表示するときはここで宣言する
    * （本ビューアはドメイン非依存なのでキー名を内蔵しない）。
    */
-  blockMetaKeys: readonly string[]
   host: string
   port: number
   staticDir: string
@@ -74,11 +73,5 @@ export const loadConfig = (): ServerConfig => {
       : path.join(path.dirname(sourceDir), 'notes'))
   const notesDir = path.resolve(notesDirRaw)
 
-  const blockMetaKeysRaw = readArg('block-meta-keys') ?? process.env.RWP_BLOCK_META_KEYS ?? ''
-  const blockMetaKeys = blockMetaKeysRaw
-    .split(',')
-    .map((key) => key.trim())
-    .filter((key) => key !== '')
-
-  return { sourceDir, sourceLabel, notesDir, blockMetaKeys, host, port, staticDir: STATIC_DIR }
+  return { sourceDir, sourceLabel, notesDir, host, port, staticDir: STATIC_DIR }
 }

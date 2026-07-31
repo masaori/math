@@ -14,13 +14,13 @@ const app = Fastify({ logger: true })
 
 // DI: adapter 実装を domain の interface に注入する。
 // 入力言語の実行時スキーマはシステム（structured-latex/）のものを、設定のメタデータキーで具体化する。
-const runtimeSchema = createPreviewRuntimeSchema(config.blockMetaKeys)
+const runtimeSchema = createPreviewRuntimeSchema()
 const blockSource = new MjsBlockSourceGateway(config.sourceDir, config.sourceLabel, runtimeSchema)
 const noteSource = new MjsNoteSourceGateway(config.notesDir, runtimeSchema)
 // 本体と参照用ノートのどちらの変更でもライブ更新する。
 const watcher = new FsSourceWatcherGateway([config.sourceDir, config.notesDir])
 
-app.get('/api/document', makeGetDocumentHandler(blockSource, noteSource, config.blockMetaKeys))
+app.get('/api/document', makeGetDocumentHandler(blockSource, noteSource))
 app.get('/api/events', makeEventsHandler(watcher))
 
 // frontend ビルド成果物を同一ポートで静的配信する（未ビルドでも API は動く）。
