@@ -24,6 +24,7 @@ export const ALL_LABELS = [
   "paper_prop_G",
   "paper_prop_G_infty",
   "paper_prop_J",
+  "paper_prop_K",
   "paper_prop_L",
   "paper_prop_N",
   "paper_prop_T",

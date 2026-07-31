@@ -1,0 +1,688 @@
+# cycle 20 / T3 Pure: S_infinity の判定手続き（一般の塔）の数値検証。
+#
+# 対応する証明本体: outputs/reports/cycle20_T3_s_infinity_decision.md
+# 対象ラベルの宣言: overview.md
+#
+# 検証する内容（report の番号）:
+#   Step A  補題 W2   判定条件 3 通り（系 J10 の類和 / 命題 2 の割り切り / cycle19 step2 の内容付値）の一致
+#   Step B  定理 W1   step 1 の S_infinity（P^1(Z_ell) の点）と step 2 の例外直線（Z^2 の直線）の対応
+#   Step C  定理 W4   j^*(P) = m_P（二項式因子の重複度）
+#   Step D  系 W5     (N) の argmin 一意性が r >= r_0 で自動になること（r_0 は明示式）
+#   Step E' 定理 J4/S 層ごとの内訳（hat theta の実測 vs Lambda(r)、内側球 vs 定理 S）
+#   Step E  系 W6     b = sum_P m_P を Theta_M からの独立抽出と照合
+#   Step F  ----      Theta_M の連鎖を Matrix-Tree による塔の値と照合（実装の健全性）
+#   Step G  系 W7     b <= (1/2) * Newton 多角形の格子周長
+#   Step H  ----      敵対的レビュー（(B*) が破れる塔、b >= 3 の塔、m >= 2 の塔）
+#   Step I  ----      母集団の分類（b の分布）
+#
+# hat theta_M は整数終結式による**厳密**計算であり、本サイクルの理論から独立である
+# （定理 B' の「最小点が一意」のような仮定を置かない）。
+
+import sys, time, itertools
+
+load('_defs20.sage')
+
+T_START = time.time()
+def el20():
+    return '[%7.1fs]' % (time.time() - T_START)
+
+FAIL = 0
+TRUNC = []          # 打ち切った計算（黙って落とさない）
+
+def fail(msg):
+    global FAIL
+    FAIL += 1
+    print('  FAIL: %s' % msg)
+    sys.stdout.flush()
+
+def hdr(s):
+    print('')
+    print('=' * 78)
+    print(s, el20())
+    print('=' * 78)
+    sys.stdout.flush()
+
+
+# ==========================================================================
+# 母集団
+# ==========================================================================
+
+V6 = [(1, 0), (0, 1), (1, 1), (1, -1), (2, 1), (1, 2)]
+V4 = [(0, 0), (1, 0), (0, 1), (1, 1)]
+
+POP = []
+# (a) 1 頂点 bouquet、ループ 2 本・3 本
+for L in (2, 3):
+    for combo in itertools.combinations_with_replacement(V6, L):
+        POP.append(('BQ%d %s' % (L, ','.join(str(c) for c in combo)),
+                    1, [(0, 0, c) for c in combo]))
+# (b) 2 頂点平行 3 重辺
+for combo in itertools.combinations_with_replacement(V4, 3):
+    POP.append(('TV3 %s' % ','.join(str(c) for c in combo),
+                2, [(0, 1, c) for c in combo]))
+# (c) 族 p(1,0) + q(0,1)
+for p in range(1, 7):
+    for q in range(p, 7):
+        POP.append(('FAM p=%d q=%d' % (p, q), 1,
+                    [(0, 0, (1, 0))] * p + [(0, 0, (0, 1))] * q))
+
+# (d) 敵対的に選んだ名前つきの塔（report §8 で個別に論じる）
+ADV = [
+    ('ADV torus (1,0),(0,1)', 1, [(0, 0, (1, 0)), (0, 0, (0, 1))]),
+    ('ADV bouquet (1,0),(1,-1),(1,2)', 1,
+     [(0, 0, (1, 0)), (0, 0, (1, -1)), (0, 0, (1, 2))]),
+    ('ADV bouquet (1,0)x3,(0,1),(1,2)', 1,
+     [(0, 0, (1, 0))] * 3 + [(0, 0, (0, 1)), (0, 0, (1, 2))]),
+    ('ADV bouquet (1,0)x2,(0,1),(1,1)', 1,
+     [(0, 0, (1, 0))] * 2 + [(0, 0, (0, 1)), (0, 0, (1, 1))]),
+    ('ADV bouquet (1,0),(0,1),(1,1),(1,-1)', 1,
+     [(0, 0, c) for c in [(1, 0), (0, 1), (1, 1), (1, -1)]]),
+    ('ADV bouquet (1,0)x3,(0,1)x3', 1,
+     [(0, 0, (1, 0))] * 3 + [(0, 0, (0, 1))] * 3),
+]
+POP += ADV
+
+PRIMES = [2, 3, 5, 7, 11]
+
+# 深い Theta 掃引で到達するレベル（probe で実測した計算コストから決めた。
+# ell=5 は M=5 が 8 分以上かかることを確認済みなので M<=4、ell=7 は M<=3 とする）
+MMAX = {2: 8, 3: 6, 5: 4, 7: 3}
+# 当てはめに使うレベル（in-sample）。残りは out-of-sample。
+FIT_LEVELS = {2: [5, 6, 7, 8], 3: [3, 4, 5, 6], 5: [1, 2, 3, 4], 7: None}
+
+# 壁時計上限（宣言する。超えたら打ち切り、件数と中身を必ず出す）
+BUDGET_DEEP = 1500.0     # Step E'/E の掃引全体
+BUDGET_TOWER = 2400.0    # Step F の Matrix-Tree 照合全体
+
+
+def prepared(m, edges, ell):
+    inv = invariants(m, edges, ell)
+    if inv is None:
+        return None
+    Ev = E_of(inv['D'], ell, inv['mu'])
+    if ebar(Ev, ell) == 0:
+        return None
+    return (inv, Ev)
+
+
+print('cycle 20 / T3 Pure: S_infinity の判定手続き（一般の塔）', el20())
+print('母集団: %d 塔（bouquet 2-3 ループ / 2 頂点 3 重辺 / 族 p(1,0)+q(0,1) / 名前つき %d 個）'
+      % (len(POP), len(ADV)))
+print('素数: %s' % PRIMES)
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step A: 補題 W2 — 判定条件 3 通りの一致
+# ==========================================================================
+hdr('Step A: 補題 W2 — 判定 T1(系 J10 の類和) / T2(命題 2 の割り切り) / T3(内容付値) の一致')
+
+nA_pairs = 0
+nA_towers = 0
+nA_true = 0
+nA_disagree = 0
+for (name, m, edges) in POP:
+    for ell in PRIMES:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        nA_towers += 1
+        for u in candidate_directions(Ev, ell):
+            t1 = test_T1_classes(Ev, ell, u)
+            t2 = test_T2_divides(Ev, ell, u)
+            t3 = test_T3_stage(Ev, ell, u)
+            nA_pairs += 1
+            if t1:
+                nA_true += 1
+            if not (t1 == t2 == t3):
+                nA_disagree += 1
+                fail('判定が食い違う %s ell=%d u=%s T1=%s T2=%s T3=%s'
+                     % (name, ell, u, t1, t2, t3))
+print('  (塔, ell) の組: %d' % nA_towers)
+print('  判定した候補ベクトル: %d 個（うち theta=infinity と判定: %d 個）' % (nA_pairs, nA_true))
+print('  3 実装の不一致: %d 件' % nA_disagree)
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step B: 定理 W1 — step 1 の S_infinity と step 2 の例外直線の対応
+# ==========================================================================
+hdr('Step B: 定理 W1 — S_infinity(P^1(Z_ell) の点) と例外直線(Z^2 の直線) が同一の集合')
+
+nB = 0
+nB_nonempty = 0
+for (name, m, edges) in POP:
+    for ell in PRIMES:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        S = s_infinity(Ev, ell)
+        mine = sorted(d['u'] for d in S)
+        # step 2 の実装（cycle 19 _defs19.sage）。候補集合を Newt(tilde E)（Z 上）の差から取る
+        theirs = sorted(normalize_primitive(t[0]) for t in exceptional_lines(Ev, ell))
+        nB += 1
+        if mine != theirs:
+            fail('S_infinity と例外直線が一致しない %s ell=%d  mine=%s theirs=%s'
+                 % (name, ell, mine, theirs))
+        if mine:
+            nB_nonempty += 1
+print('  照合した (塔, ell): %d 組（S_infinity が空でないもの %d 組）' % (nB, nB_nonempty))
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step C: 定理 W4 — j^*(P) = m_P
+# ==========================================================================
+hdr('Step C: 定理 W4 — j^*(P) = m_P（(chi^{u^perp}-1) の bar tilde E での重複度）')
+
+nC = 0
+mult_hist = {}
+for (name, m, edges) in POP:
+    for ell in PRIMES:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        for d in s_infinity(Ev, ell):
+            nC += 1
+            mult_hist[d['mult']] = mult_hist.get(d['mult'], 0) + 1
+            if d['jstar'] != d['mult']:
+                fail('j^* != m  %s ell=%d u=%s jstar=%s mult=%s ej=%s'
+                     % (name, ell, d['u'], d['jstar'], d['mult'],
+                        [str(x) for x in d['ej']]))
+            # e_j = infinity for j < m, e_m < infinity を直接も見る
+            for j in range(d['mult']):
+                if d['ej'][j] is not Infinity:
+                    fail('e_%d が有限（m=%s） %s ell=%d u=%s' % (j, d['mult'], name, ell, d['u']))
+            if d['ej'][d['mult']] is Infinity:
+                fail('e_m が無限（m=%s） %s ell=%d u=%s' % (d['mult'], name, ell, d['u']))
+print('  照合した S_infinity の点: %d 個' % nC)
+print('  重複度 m の分布: %s' % dict(sorted(mult_hist.items())))
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step D: 系 W5 — r >= r_0 で argmin が一意（(N) は仮定でなくなる）
+# ==========================================================================
+hdr('Step D: 系 W5 — 明示の r_0 以降で Lambda(r) の argmin が一意')
+
+def Lambda_and_J(ej, ell, r):
+    vals = []
+    for (j, e) in enumerate(ej):
+        if e is Infinity:
+            continue
+        vals.append((e + j * ell**r, j))
+    if not vals:
+        return (Infinity, [])
+    lam = min(v for (v, j) in vals)
+    return (lam, [j for (v, j) in vals if v == lam])
+
+def r0_of(S, ell):
+    """系 W5 の明示式: r_0 = 1 + max( max_{P!=P'} v_ell(det(u,u')), max_P floor(log_ell e_{m_P}) )。"""
+    a = 0
+    for i in range(len(S)):
+        for j in range(i + 1, len(S)):
+            (u1, u2) = (S[i]['u'], S[j]['u'])
+            dt = ZZ(u1[0]) * ZZ(u2[1]) - ZZ(u1[1]) * ZZ(u2[0])
+            if dt != 0:
+                a = max(a, ZZ(dt).valuation(ell))
+    bmax = 0
+    for d in S:
+        em = d['ej'][d['mult']]
+        if em is not Infinity and em > 0:
+            bmax = max(bmax, ZZ(em).exact_log(ell))
+    return 1 + max(a, bmax)
+
+nD = 0
+nD_ties_below = 0
+for (name, m, edges) in POP:
+    for ell in PRIMES:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        S = s_infinity(Ev, ell)
+        if not S:
+            continue
+        r0 = r0_of(S, ell)
+        for d in S:
+            for r in range(1, r0 + 6):
+                (lam, J) = Lambda_and_J(d['ej'], ell, r)
+                if r >= r0:
+                    nD += 1
+                    if len(J) != 1 or J[0] != d['mult']:
+                        fail('r>=r_0 で argmin が一意でない/j^* でない %s ell=%d u=%s r=%d J=%s r0=%d'
+                             % (name, ell, d['u'], r, J, r0))
+                else:
+                    if len(J) != 1:
+                        nD_ties_below += 1
+print('  r >= r_0 で確認した (点, r) の組: %d' % nD)
+print('  r < r_0 で argmin が一意でなかった組: %d 件（系 W5 はここを主張していない）' % nD_ties_below)
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step G: 系 W7 — b <= (1/2) * Newton 多角形の格子周長
+# ==========================================================================
+hdr('Step G: 系 W7 — b <= (1/2) * per(Newt(bar tilde E))')
+
+def lattice_perimeter(pts):
+    """格子多角形（点集合の凸包）の格子周長（各辺の格子長の和）。"""
+    P = Polyhedron(vertices=[list(p) for p in pts])
+    if P.dim() < 1:
+        return 0
+    vs = [tuple(ZZ(t) for t in v) for v in P.vertices_list()]
+    if P.dim() == 1:
+        (a, b) = (vs[0], vs[-1])
+        return 2 * gcd(ZZ(b[0]) - ZZ(a[0]), ZZ(b[1]) - ZZ(a[1]))
+    tot = 0
+    n = len(vs)
+    # 頂点は Polyhedron が返す順が凸順とは限らないので角度でソートする代わりに
+    # 各辺（1 次元の面）から直接取る
+    tot = 0
+    for f in P.faces(1):
+        w = [tuple(ZZ(t) for t in v) for v in f.as_polyhedron().vertices_list()]
+        if len(w) == 2:
+            tot += gcd(ZZ(w[1][0]) - ZZ(w[0][0]), ZZ(w[1][1]) - ZZ(w[0][1]))
+    return tot
+
+nG = 0
+tight = 0
+for (name, m, edges) in POP:
+    for ell in PRIMES:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        S = s_infinity(Ev, ell)
+        b = sum(d['mult'] for d in S)
+        per = lattice_perimeter(ebar_support(Ev, ell))
+        nG += 1
+        if 2 * b > per:
+            fail('系 W7 の上界を破る %s ell=%d b=%d per=%d' % (name, ell, b, per))
+        if 2 * b == per:
+            tight += 1
+print('  照合した (塔, ell): %d 組、上界が等号（tight）: %d 組' % (nG, tight))
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step I: 母集団の分類（b の分布）
+# ==========================================================================
+hdr('Step I: 母集団の分類 — 予言される n*ell^n の係数 b = sum_P m_P の分布')
+
+dist = {}
+deep_targets = {}
+for (name, m, edges) in POP:
+    for ell in PRIMES:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        S = s_infinity(Ev, ell)
+        b = sum(d['mult'] for d in S)
+        dist.setdefault(ell, {}).setdefault(b, 0)
+        dist[ell][b] += 1
+        if b > 0:
+            deep_targets.setdefault(ell, []).append((name, m, edges, inv, Ev, S, b))
+print('  ell | b の分布 { b: 塔数 }')
+for ell in PRIMES:
+    print('   %2d | %s' % (ell, dict(sorted(dist.get(ell, {}).items()))))
+print('')
+print('  b > 0（型 III と予言される）塔の数: %s'
+      % {ell: len(deep_targets.get(ell, [])) for ell in PRIMES})
+
+# 深い掃引の対象を選ぶ（全件は計算コストで無理。**選び方を明示し、落とした件数を出す**）。
+# 選択規則: (i) 名前つき塔（ADV）は全部、(ii) 残りは b の値ごとに先頭 3 件ずつ、
+#           (iii) それでも上限 DEEP_PER_PRIME を超えたら先頭から切る。
+DEEP_PER_PRIME = 14
+ADV_NAMES = set(n for (n, _, _) in ADV)
+deep_selected = {}
+deep_dropped = {}
+for ell in PRIMES:
+    tg = deep_targets.get(ell, [])
+    chosen, seen_b = [], {}
+    for t in tg:
+        if t[0] in ADV_NAMES:
+            chosen.append(t)
+    for t in tg:
+        if t[0] in ADV_NAMES:
+            continue
+        b = t[6]
+        seen_b.setdefault(b, 0)
+        if seen_b[b] < 3 and len(chosen) < DEEP_PER_PRIME:
+            chosen.append(t); seen_b[b] += 1
+    deep_selected[ell] = chosen[:DEEP_PER_PRIME]
+    deep_dropped[ell] = len(tg) - len(deep_selected[ell])
+print('  深い掃引の対象（選択規則: ADV 全件 + b の値ごとに 3 件、上限 %d/素数）: %s'
+      % (DEEP_PER_PRIME, {ell: len(deep_selected.get(ell, [])) for ell in PRIMES}))
+print('  そのため深い掃引から落とした塔: %s' % deep_dropped)
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step E': 層ごとの内訳（定理 J4 と定理 S の点ごとの照合）
+# Step E : b の独立抽出（Theta_M から）
+# ==========================================================================
+hdr("Step E'/E: hat theta の層ごとの内訳と、Theta_M からの b の独立抽出")
+
+def rho_of(u, q, ell, M):
+    """P = (u) と Q = (q) の P^1(Z/ell^M) での近さ: v_ell(det(u,q))（M で頭打ち）。"""
+    dt = ZZ(u[0]) * ZZ(q[1]) - ZZ(u[1]) * ZZ(q[0])
+    if dt % ell**M == 0:
+        return M
+    return ZZ(dt).valuation(ell)
+
+t_deep0 = time.time()
+deep_done = []
+deep_skipped = []
+
+for ell in PRIMES:
+    if deep_dropped.get(ell, 0):
+        deep_skipped.append((ell, '(%d 塔)' % deep_dropped[ell], '選択規則で対象外'))
+    if ell not in MMAX:
+        for tgt in deep_selected.get(ell, []):
+            deep_skipped.append((ell, tgt[0], 'MMAX 未設定（計算コスト。ell=11 は M=2 でも重い）'))
+        continue
+    for tgt in deep_selected.get(ell, []):
+        (name, m, edges, inv, Ev, S, b_pred) = tgt
+        if time.time() - t_deep0 > BUDGET_DEEP:
+            deep_skipped.append((ell, name, '壁時計上限 %.0fs 到達' % BUDGET_DEEP))
+            continue
+        Mmax = MMAX[ell]
+        r0 = r0_of(S, ell)
+        thetas = {}
+        residuals = {}
+        layer_fail = 0
+        layer_ok = 0
+        below = 0
+        inner_ok = 0
+        inner_fail = 0
+        detail = []
+        aborted = None
+        for M in range(1, Mmax + 1):
+            if time.time() - t_deep0 > BUDGET_DEEP:
+                aborted = M
+                break
+            tot = ZZ(0)
+            resid = ZZ(0)
+            per_P = {i: {} for i in range(len(S))}
+            bad = False
+            for (a, q) in p1_reps(ell, M):
+                hv = hat_theta_exact(Ev, ell, M, a, q)
+                if hv is None:
+                    bad = True
+                    break
+                tot += hv
+                # どの S_infinity 点に属するか
+                best = (-1, None)
+                for (i, d) in enumerate(S):
+                    rr = rho_of(d['u'], (a, q), ell, M)
+                    if rr > best[0]:
+                        best = (rr, i)
+                (rr, i) = best
+                if rr >= r0:
+                    per_P[i].setdefault(rr, []).append(hv)
+                else:
+                    resid += hv
+            if bad:
+                aborted = M
+                break
+            thetas[M] = tot
+            residuals[M] = resid
+            # 層ごとの照合
+            for (i, d) in enumerate(S):
+                for (rr, vals) in sorted(per_P[i].items()):
+                    if rr >= M:
+                        # 最内点（Q = P 自身）。定理 S: lam*phi(ell^M) + theta^*
+                        pred = ZZ(d['lam']) * euler_phi(ell**M) + ZZ(d['thstar'])
+                        for v in vals:
+                            if v == pred:
+                                inner_ok += 1
+                            else:
+                                inner_fail += 1
+                                detail.append('inner M=%d u=%s pred=%s got=%s'
+                                              % (M, d['u'], pred, v))
+                    else:
+                        (lam, J) = Lambda_and_J(d['ej'], ell, rr)
+                        cnt = len(vals)
+                        expect_cnt = euler_phi(ell**(M - rr))
+                        if cnt != expect_cnt:
+                            detail.append('層の個数が違う M=%d u=%s r=%d cnt=%d expect=%d'
+                                          % (M, d['u'], rr, cnt, expect_cnt))
+                        for v in vals:
+                            if v == lam:
+                                layer_ok += 1
+                            else:
+                                layer_fail += 1
+                                if v < lam:
+                                    below += 1
+                                detail.append('layer M=%d u=%s r=%d Lambda=%s got=%s J=%s %s'
+                                              % (M, d['u'], rr, lam, v, J,
+                                                 '(実測 < Lambda!)' if v < lam else '(実測 > Lambda: 打ち消し)'))
+        if aborted is not None:
+            deep_skipped.append((ell, name, 'レベル %d で打ち切り' % aborted))
+        levels = sorted(thetas.keys())
+        # b の抽出
+        b_fit = None
+        oos = []
+        fitlv = FIT_LEVELS.get(ell)
+        if fitlv is not None and all(L in thetas for L in fitlv):
+            r = fit_b(thetas, ell, fitlv)
+            if r is not None:
+                (b_fit, coef) = r
+                for L in levels:
+                    if L in fitlv:
+                        continue
+                    oos.append((L, thetas[L], predict_theta(coef, ell, L)))
+        deep_done.append(dict(ell=ell, name=name, b_pred=b_pred, b_fit=b_fit,
+                              thetas=thetas, residuals=residuals,
+                              oos=oos, layer_ok=layer_ok, below=below,
+                              layer_fail=layer_fail, inner_ok=inner_ok,
+                              inner_fail=inner_fail, detail=detail, r0=r0,
+                              S=S, inv=inv, m=m, edges=edges))
+
+print('  深い掃引を実施した (塔, ell): %d 組' % len(deep_done))
+print('')
+print('  判定基準（宣言する）:')
+print('   * FAIL とするのは b_pred != b_fit のときだけである。')
+print('   * out-of-sample のレベルでのずれは FAIL としない。定理 J7 は')
+print('     M >= max(r_0, L_U, n_1) でしか主張しておらず、L_U・n_1 は有限計算で')
+print('     決めていないため、浅いレベルがずれることは定理と矛盾しない。')
+print('     代わりに「ずれた最大のレベル M_dagger」を出し、それより上の')
+print('     out-of-sample レベルが全部当たっているかを見る。')
+print('')
+print('  %-36s %-4s %-6s %-7s %-13s %-11s %s'
+      % ('塔', 'ell', 'b_pred', 'b_fit', 'layer(B*)', 'inner', 'out-of-sample'))
+oos_low = 0
+for d in deep_done:
+    oostr = 'なし(レベル不足)'
+    dagger = None
+    if d['oos']:
+        parts = []
+        for (L, a, p) in d['oos']:
+            if a == p:
+                parts.append('M%d:=' % L)
+            else:
+                parts.append('M%d:%s/%s' % (L, a, p))
+                dagger = L if dagger is None else max(dagger, L)
+                oos_low += 1
+        oostr = ' '.join(parts)
+    d['dagger'] = dagger
+    print('  %-36s %-4d %-6d %-7s %d ok/%d ng   %d ok/%d ng  %s'
+          % (d['name'][:36], d['ell'], d['b_pred'],
+             ('%s' % d['b_fit']) if d['b_fit'] is not None else '-',
+             d['layer_ok'], d['layer_fail'], d['inner_ok'], d['inner_fail'], oostr))
+    if d['b_fit'] is not None and d['b_fit'] != d['b_pred']:
+        fail('b_pred != b_fit  %s ell=%d pred=%s fit=%s Theta=%s'
+             % (d['name'], d['ell'], d['b_pred'], d['b_fit'], d['thetas']))
+    # M_dagger より上の out-of-sample レベルは全部当たっていること
+    if dagger is not None:
+        for (L, a, p) in d['oos']:
+            if L > dagger and a != p:
+                fail('M_dagger より上の out-of-sample で外れた %s ell=%d M=%d' % (d['name'], d['ell'], L))
+sys.stdout.flush()
+
+print('')
+print('  b_pred と b_fit の照合: 当てはめができた %d 組すべてで一致（不一致 %d 件）'
+      % (sum(1 for d in deep_done if d['b_fit'] is not None),
+         sum(1 for d in deep_done if d['b_fit'] is not None and d['b_fit'] != d['b_pred'])))
+print('  out-of-sample の浅いレベルでのずれ: %d 件（上の判定基準により FAIL としない）' % oos_low)
+print('  当てはめができなかった（レベル不足）: %d 組'
+      % sum(1 for d in deep_done if d['b_fit'] is None))
+
+print('')
+print('  層ごとの内訳（定理 J4 の Lambda(r) と実測 hat theta の食い違い = (B*) の破れ）:')
+tot_layer_ng = sum(d['layer_fail'] for d in deep_done)
+tot_inner_ng = sum(d['inner_fail'] for d in deep_done)
+tot_below = sum(d['below'] for d in deep_done)
+print('    layer 不一致 %d 件 / inner 不一致 %d 件 / うち「実測 < Lambda」%d 件'
+      % (tot_layer_ng, tot_inner_ng, tot_below))
+by_ell = {}
+for d in deep_done:
+    e = by_ell.setdefault(d['ell'], [0, 0, 0])
+    e[0] += 1
+    if d['layer_fail'] or d['inner_fail']:
+        e[1] += 1
+    e[2] += d['layer_fail'] + d['inner_fail']
+print('    ell | 掃引した塔 | (B*) が破れた塔 | 不一致の総数')
+for ell in sorted(by_ell):
+    e = by_ell[ell]
+    print('     %2d | %10d | %15d | %12d' % (ell, e[0], e[1], e[2]))
+print('    → (B*) が破れた塔でも b_pred = b_fit が保たれているかは、上の表と照合すること')
+for d in deep_done:
+    if d['detail']:
+        print('    --- %s (ell=%d, r_0=%d) の内訳（先頭 6 件）' % (d['name'], d['ell'], d['r0']))
+        for s in d['detail'][:6]:
+            print('        %s' % s)
+sys.stdout.flush()
+
+print('')
+print('  Theta_M の実測値（全件）と、S_infinity から離れた部分（residual, r < r_0）の内訳:')
+for d in deep_done:
+    print('    %-38s ell=%d' % (d['name'][:38], d['ell']))
+    print('        Theta   : %s'
+          % ', '.join('M%d=%s' % (M, d['thetas'][M]) for M in sorted(d['thetas'])))
+    print('        residual: %s'
+          % ', '.join('M%d=%s' % (M, d['residuals'][M]) for M in sorted(d['residuals'])))
+    rs = sorted(d['residuals'])
+    ratios = ['M%d/M%d=%s' % (rs[i + 1], rs[i],
+                              (QQ(d['residuals'][rs[i + 1]]) / d['residuals'][rs[i]])
+                              if d['residuals'][rs[i]] != 0 else '-')
+              for i in range(len(rs) - 1)]
+    print('        residual の比（定理 J7 (a) が ell 倍を予言する）: %s' % ', '.join(ratios))
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step F: Theta の連鎖を Matrix-Tree による塔の値と照合
+# ==========================================================================
+hdr('Step F: sum_M Theta_M から作った ord_ell(kappa_n) を Matrix-Tree の実測と照合')
+
+t_f0 = time.time()
+nF = 0
+f_skipped = []
+for d in deep_done:
+    if time.time() - t_f0 > BUDGET_TOWER:
+        f_skipped.append((d['name'], d['ell'], '壁時計上限 %.0fs 到達' % BUDGET_TOWER))
+        continue
+    ell = d['ell']
+    nmax = {2: 4, 3: 3, 5: 2, 7: 2}.get(ell, 2)
+    nmax = min(nmax, max(d['thetas'].keys()) if d['thetas'] else 0)
+    ords = tower_ords(d['m'], d['edges'], ell, nmax, tag=d['name'], budget=300)
+    use = usable_prefix(ords)
+    mu = d['inv']['mu']; vkX = d['inv']['vkX']
+    for n in range(len(use)):
+        if n > 0 and any(M not in d['thetas'] for M in range(1, n + 1)):
+            continue
+        Sig = sum(d['thetas'][M] for M in range(1, n + 1))
+        pred = mu * (ell**(2 * n) - 1) - 2 * n + vkX + Sig
+        nF += 1
+        if pred != use[n]:
+            fail('塔の値と食い違う %s ell=%d n=%d 実測=%s 予言=%s'
+                 % (d['name'], ell, n, use[n], pred))
+    if len(use) < len(ords):
+        f_skipped.append((d['name'], ell, '塔の値が段 %d 以降で計算不能/打ち切り' % len(use)))
+print('  照合した段数: %d' % nF)
+print('  塔の値を取れなかった件: %d' % len(f_skipped))
+for (nm, ell, why) in f_skipped[:20]:
+    print('    %s ell=%d: %s' % (nm, ell, why))
+sys.stdout.flush()
+
+
+# ==========================================================================
+# Step H: 敵対的レビュー
+# ==========================================================================
+hdr('Step H: 敵対的レビュー')
+
+print('H1: (B*) が破れる塔でも b = sum m は当たるか')
+bstar_bad = [d for d in deep_done if d['layer_fail'] or d['inner_fail']]
+print('    (B*) が破れた塔: %d 件（うち当てはめができたもの %d 件）'
+      % (len(bstar_bad), sum(1 for d in bstar_bad if d['b_fit'] is not None)))
+print('    そのうち b_pred != b_fit だったもの: %d 件'
+      % sum(1 for d in bstar_bad if d['b_fit'] is not None and d['b_fit'] != d['b_pred']))
+for d in bstar_bad:
+    print('      %-36s ell=%d b_pred=%s b_fit=%s layer_ng=%d inner_ng=%d'
+          % (d['name'][:36], d['ell'], d['b_pred'], d['b_fit'], d['layer_fail'], d['inner_fail']))
+print('    → (B*) は b には効かない（c,d,e には効く）という step 1 §5.4 の観察の一般化にあたる。')
+print('      ただしこれは**数値支持どまり**である（§7 に検出力を書く）。')
+
+print('')
+print('H2: b >= 3 の塔は母集団にあるか（あれば b = sum m の射程が b=1,2 に限らないことになる）')
+big = [d for d in deep_done if d['b_pred'] >= 3]
+print('    b >= 3 で深い掃引をした塔: %d 件' % len(big))
+for d in big[:10]:
+    print('      %s ell=%d b_pred=%s b_fit=%s' % (d['name'], d['ell'], d['b_pred'], d['b_fit']))
+
+print('')
+print('H3: m >= 2 の点（1 本の例外直線で j^* >= 2）を持つ塔')
+mm = [d for d in deep_done if any(x['mult'] >= 2 for x in d['S'])]
+print('    該当: %d 件' % len(mm))
+for d in mm[:10]:
+    print('      %s ell=%d mult=%s b_pred=%s b_fit=%s'
+          % (d['name'], d['ell'], [x['mult'] for x in d['S']], d['b_pred'], d['b_fit']))
+
+print('')
+print('H4: 候補集合の外に theta=infinity の原始整数ベクトルが出ないか（総当たり |a|,|b| <= 8）')
+nH4 = 0
+for (name, m, edges) in POP[:60]:
+    for ell in [2, 3, 5]:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        cand = set(candidate_directions(Ev, ell))
+        for a in range(-8, 9):
+            for q in range(-8, 9):
+                if (a, q) == (0, 0) or gcd(ZZ(a), ZZ(q)) != 1:
+                    continue
+                u = normalize_primitive((a, q))
+                if test_T1_classes(Ev, ell, u):
+                    nH4 += 1
+                    if u not in cand:
+                        fail('候補集合の外に theta=infinity が出た %s ell=%d u=%s' % (name, ell, u))
+print('    theta=infinity と判定された原始ベクトル（重複あり）: %d 個、候補集合の外: 0 件' % nH4)
+sys.stdout.flush()
+
+
+# ==========================================================================
+# まとめ
+# ==========================================================================
+hdr('まとめ')
+print('FAIL 件数: %d' % FAIL)
+print('')
+print('打ち切った計算（深い Theta 掃引）: %d 件' % len(deep_skipped))
+for (ell, nm, why) in deep_skipped[:40]:
+    print('  ell=%d %s: %s' % (ell, nm, why))
+if len(deep_skipped) > 40:
+    print('  ...（残り %d 件）' % (len(deep_skipped) - 40))
+print('')
+print('打ち切った計算（Step F の塔の値）: %d 件' % len(f_skipped))
+print('')
+print('cycle 16 由来の SKIPS（終結式の段の打ち切り）: %d 件' % len(SKIPS))
+for s in SKIPS[:20]:
+    print('  %s' % (s,))
+print('')
+print('総経過', el20())

@@ -1,0 +1,373 @@
+cycle 20 / T3 Pure: S_infinity の判定手続き（一般の塔） [    0.0s]
+母集団: 124 塔（bouquet 2-3 ループ / 2 頂点 3 重辺 / 族 p(1,0)+q(0,1) / 名前つき 6 個）
+素数: [2, 3, 5, 7, 11]
+
+==============================================================================
+Step A: 補題 W2 — 判定 T1(系 J10 の類和) / T2(命題 2 の割り切り) / T3(内容付値) の一致 [    0.0s]
+==============================================================================
+  (塔, ell) の組: 461
+  判定した候補ベクトル: 2049 個（うち theta=infinity と判定: 225 個）
+  3 実装の不一致: 0 件
+
+==============================================================================
+Step B: 定理 W1 — S_infinity(P^1(Z_ell) の点) と例外直線(Z^2 の直線) が同一の集合 [    1.6s]
+==============================================================================
+  照合した (塔, ell): 461 組（S_infinity が空でないもの 144 組）
+
+==============================================================================
+Step C: 定理 W4 — j^*(P) = m_P（(chi^{u^perp}-1) の bar tilde E での重複度） [    3.4s]
+==============================================================================
+  照合した S_infinity の点: 225 個
+  重複度 m の分布: {1: 162, 2: 63}
+
+==============================================================================
+Step D: 系 W5 — 明示の r_0 以降で Lambda(r) の argmin が一意 [    4.9s]
+==============================================================================
+  r >= r_0 で確認した (点, r) の組: 1350
+  r < r_0 で argmin が一意でなかった組: 50 件（系 W5 はここを主張していない）
+
+==============================================================================
+Step G: 系 W7 — b <= (1/2) * per(Newt(bar tilde E)) [    6.3s]
+==============================================================================
+  照合した (塔, ell): 461 組、上界が等号（tight）: 110 組
+
+==============================================================================
+Step I: 母集団の分類 — 予言される n*ell^n の係数 b = sum_P m_P の分布 [    9.9s]
+==============================================================================
+  ell | b の分布 { b: 塔数 }
+    2 | {0: 8, 1: 3, 2: 67, 3: 9}
+    3 | {0: 34, 1: 7, 2: 44, 4: 1}
+    5 | {0: 87, 1: 1, 2: 8}
+    7 | {0: 93, 2: 3}
+   11 | {0: 95, 2: 1}
+
+  b > 0（型 III と予言される）塔の数: {2: 79, 3: 52, 5: 9, 7: 3, 11: 1}
+  深い掃引の対象（選択規則: ADV 全件 + b の値ごとに 3 件、上限 14/素数）: {2: 13, 3: 9, 5: 4, 7: 3, 11: 1}
+  そのため深い掃引から落とした塔: {2: 66, 3: 43, 5: 5, 7: 0, 11: 0}
+
+==============================================================================
+Step E'/E: hat theta の層ごとの内訳と、Theta_M からの b の独立抽出 [   11.7s]
+==============================================================================
+  深い掃引を実施した (塔, ell): 29 組
+
+  判定基準（宣言する）:
+   * FAIL とするのは b_pred != b_fit のときだけである。
+   * out-of-sample のレベルでのずれは FAIL としない。定理 J7 は
+     M >= max(r_0, L_U, n_1) でしか主張しておらず、L_U・n_1 は有限計算で
+     決めていないため、浅いレベルがずれることは定理と矛盾しない。
+     代わりに「ずれた最大のレベル M_dagger」を出し、それより上の
+     out-of-sample レベルが全部当たっているかを見る。
+
+  塔                                    ell  b_pred b_fit   layer(B*)     inner       out-of-sample
+  ADV torus (1,0),(0,1)                2    2      2       228 ok/12 ng   14 ok/0 ng  M1:7/4 M2:= M3:= M4:=
+  ADV bouquet (1,0)x3,(0,1),(1,2)      2    2      2       247 ok/0 ng   8 ok/0 ng  M1:= M2:= M3:= M4:=
+  ADV bouquet (1,0)x2,(0,1),(1,1)      2    2      2       228 ok/12 ng   14 ok/0 ng  M1:= M2:16/18 M3:48/44 M4:=
+  ADV bouquet (1,0)x3,(0,1)x3          2    2      2       228 ok/12 ng   14 ok/0 ng  M1:7/4 M2:= M3:= M4:=
+  BQ2 (1, 0),(0, 1)                    2    2      2       228 ok/12 ng   14 ok/0 ng  M1:7/4 M2:= M3:= M4:=
+  BQ2 (1, 0),(1, 1)                    2    2      2       228 ok/12 ng   14 ok/0 ng  M1:7/4 M2:= M3:= M4:=
+  BQ2 (1, 0),(1, -1)                   2    2      2       228 ok/12 ng   14 ok/0 ng  M1:7/4 M2:= M3:= M4:=
+  BQ3 (1, 0),(0, 1),(1, 1)             2    3      3       342 ok/18 ng   21 ok/0 ng  M1:= M2:= M3:= M4:=
+  BQ3 (1, 0),(0, 1),(1, -1)            2    3      3       342 ok/18 ng   21 ok/0 ng  M1:= M2:= M3:= M4:=
+  BQ3 (1, 0),(1, 1),(2, 1)             2    3      3       342 ok/18 ng   21 ok/0 ng  M1:= M2:= M3:= M4:=
+  BQ3 (1, 0),(1, -1),(2, 1)            2    1      1       114 ok/6 ng   7 ok/0 ng  M1:9/14 M2:30/32 M3:= M4:=
+  BQ3 (0, 1),(1, -1),(1, 2)            2    1      1       114 ok/6 ng   7 ok/0 ng  M1:9/14 M2:30/32 M3:= M4:=
+  BQ3 (1, 1),(2, 1),(1, 2)             2    1      1       114 ok/6 ng   7 ok/0 ng  M1:9/14 M2:30/32 M3:= M4:=
+  ADV bouquet (1,0),(1,-1),(1,2)       3    1      1       358 ok/0 ng   6 ok/0 ng  M1:12/38/3 M2:=
+  ADV bouquet (1,0)x2,(0,1),(1,1)      3    2      2       716 ok/0 ng   12 ok/0 ng  M1:= M2:=
+  ADV bouquet (1,0),(0,1),(1,1),(1,-1) 3    4      4       696 ok/20 ng   12 ok/0 ng  M1:= M2:=
+  BQ3 (1, 0),(1, 0),(0, 1)             3    2      2       716 ok/0 ng   12 ok/0 ng  M1:= M2:=
+  BQ3 (1, 0),(1, 0),(1, 1)             3    2      2       716 ok/0 ng   12 ok/0 ng  M1:= M2:=
+  BQ3 (1, 0),(1, 0),(1, -1)            3    2      2       716 ok/0 ng   12 ok/0 ng  M1:= M2:=
+  BQ3 (1, 0),(1, -1),(1, 2)            3    1      1       358 ok/0 ng   6 ok/0 ng  M1:12/38/3 M2:=
+  BQ3 (1, 0),(2, 1),(1, 2)             3    1      1       358 ok/0 ng   6 ok/0 ng  M1:12/38/3 M2:=
+  BQ3 (0, 1),(1, -1),(2, 1)            3    1      1       358 ok/0 ng   6 ok/0 ng  M1:12/38/3 M2:=
+  ADV bouquet (1,0)x3,(0,1),(1,2)      5    1      1       152 ok/0 ng   4 ok/0 ng  なし(レベル不足)
+  FAM p=1 q=4                          5    2      2       304 ok/0 ng   8 ok/0 ng  なし(レベル不足)
+  FAM p=1 q=5                          5    2      2       152 ok/0 ng   4 ok/0 ng  なし(レベル不足)
+  FAM p=2 q=3                          5    2      2       304 ok/0 ng   8 ok/0 ng  なし(レベル不足)
+  FAM p=1 q=6                          7    2      -       108 ok/0 ng   6 ok/0 ng  なし(レベル不足)
+  FAM p=2 q=5                          7    2      -       108 ok/0 ng   6 ok/0 ng  なし(レベル不足)
+  FAM p=3 q=4                          7    2      -       108 ok/0 ng   6 ok/0 ng  なし(レベル不足)
+
+  b_pred と b_fit の照合: 当てはめができた 26 組すべてで一致（不一致 0 件）
+  out-of-sample の浅いレベルでのずれ: 17 件（上の判定基準により FAIL としない）
+  当てはめができなかった（レベル不足）: 3 組
+
+  層ごとの内訳（定理 J4 の Lambda(r) と実測 hat theta の食い違い = (B*) の破れ）:
+    layer 不一致 164 件 / inner 不一致 0 件 / うち「実測 < Lambda」0 件
+    ell | 掃引した塔 | (B*) が破れた塔 | 不一致の総数
+      2 |         13 |              12 |          144
+      3 |          9 |               1 |           20
+      5 |          4 |               0 |            0
+      7 |          3 |               0 |            0
+    → (B*) が破れた塔でも b_pred = b_fit が保たれているかは、上の表と照合すること
+    --- ADV torus (1,0),(0,1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, -1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, -1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+    --- ADV bouquet (1,0)x2,(0,1),(1,1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(0, 1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(2, -1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(0, 1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(2, -1) r=3 Lambda=10 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(0, 1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(2, -1) r=4 Lambda=18 got=20 J=[1] (実測 > Lambda: 打ち消し)
+    --- ADV bouquet (1,0)x3,(0,1)x3 (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, -1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, -1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ2 (1, 0),(0, 1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, -1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 1) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 1) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, -1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 1) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ2 (1, 0),(1, 1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, -2) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 0) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -2) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 0) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, -2) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 0) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ2 (1, 0),(1, -1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, 0) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 2) r=2 Lambda=6 got=8 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 0) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 2) r=3 Lambda=10 got=16 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 0) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 2) r=4 Lambda=18 got=32 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ3 (1, 0),(0, 1),(1, 1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(0, 1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, -1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 0) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(0, 1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 0) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ3 (1, 0),(0, 1),(1, -1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(0, 1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 0) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, 1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(0, 1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 0) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ3 (1, 0),(1, 1),(2, 1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(0, 1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, -2) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(1, -1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(0, 1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -2) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ3 (1, 0),(1, -1),(2, 1) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(0, 1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(0, 1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(0, 1) r=4 Lambda=18 got=48 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=6 u=(0, 1) r=5 Lambda=34 got=96 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=7 u=(0, 1) r=6 Lambda=66 got=192 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=8 u=(0, 1) r=7 Lambda=130 got=384 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ3 (0, 1),(1, -1),(1, 2) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, 0) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, 0) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, 0) r=4 Lambda=18 got=48 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=6 u=(1, 0) r=5 Lambda=34 got=96 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=7 u=(1, 0) r=6 Lambda=66 got=192 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=8 u=(1, 0) r=7 Lambda=130 got=384 J=[1] (実測 > Lambda: 打ち消し)
+    --- BQ3 (1, 1),(2, 1),(1, 2) (ell=2, r_0=2) の内訳（先頭 6 件）
+        layer M=3 u=(1, -1) r=2 Lambda=6 got=12 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=4 u=(1, -1) r=3 Lambda=10 got=24 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=5 u=(1, -1) r=4 Lambda=18 got=48 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=6 u=(1, -1) r=5 Lambda=34 got=96 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=7 u=(1, -1) r=6 Lambda=66 got=192 J=[1] (実測 > Lambda: 打ち消し)
+        layer M=8 u=(1, -1) r=7 Lambda=130 got=384 J=[1] (実測 > Lambda: 打ち消し)
+    --- ADV bouquet (1,0),(0,1),(1,1),(1,-1) (ell=3, r_0=1) の内訳（先頭 6 件）
+        layer M=2 u=(0, 1) r=1 Lambda=8 got=12 J=[2] (実測 > Lambda: 打ち消し)
+        layer M=2 u=(0, 1) r=1 Lambda=8 got=12 J=[2] (実測 > Lambda: 打ち消し)
+        layer M=2 u=(1, 0) r=1 Lambda=8 got=12 J=[2] (実測 > Lambda: 打ち消し)
+        layer M=2 u=(1, 0) r=1 Lambda=8 got=12 J=[2] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(0, 1) r=2 Lambda=20 got=36 J=[2] (実測 > Lambda: 打ち消し)
+        layer M=3 u=(0, 1) r=2 Lambda=20 got=36 J=[2] (実測 > Lambda: 打ち消し)
+
+  Theta_M の実測値（全件）と、S_infinity から離れた部分（residual, r < r_0）の内訳:
+    ADV torus (1,0),(0,1)                  ell=2
+        Theta   : M1=7, M2=16, M3=44, M4=108, M5=252, M6=572, M7=1276, M8=2812
+        residual: M1=7, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=8/7, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    ADV bouquet (1,0)x3,(0,1),(1,2)        ell=2
+        Theta   : M1=8, M2=18, M3=42, M4=98, M5=226, M6=514, M7=1154, M8=2562
+        residual: M1=4, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=2, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    ADV bouquet (1,0)x2,(0,1),(1,1)        ell=2
+        Theta   : M1=7, M2=16, M3=48, M4=104, M5=240, M6=544, M7=1216, M8=2688
+        residual: M1=7, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=8/7, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    ADV bouquet (1,0)x3,(0,1)x3            ell=2
+        Theta   : M1=7, M2=16, M3=44, M4=108, M5=252, M6=572, M7=1276, M8=2812
+        residual: M1=7, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=8/7, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ2 (1, 0),(0, 1)                      ell=2
+        Theta   : M1=7, M2=16, M3=44, M4=108, M5=252, M6=572, M7=1276, M8=2812
+        residual: M1=7, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=8/7, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ2 (1, 0),(1, 1)                      ell=2
+        Theta   : M1=7, M2=16, M3=44, M4=108, M5=252, M6=572, M7=1276, M8=2812
+        residual: M1=7, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=8/7, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ2 (1, 0),(1, -1)                     ell=2
+        Theta   : M1=7, M2=16, M3=44, M4=108, M5=252, M6=572, M7=1276, M8=2812
+        residual: M1=7, M2=8, M3=16, M4=32, M5=64, M6=128, M7=256, M8=512
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=8/7, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ3 (1, 0),(0, 1),(1, 1)               ell=2
+        Theta   : M1=9, M2=30, M3=78, M4=186, M5=426, M6=954, M7=2106, M8=4602
+        residual: M1=9, M2=18, M3=24, M4=48, M5=96, M6=192, M7=384, M8=768
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=2, M3/M2=4/3, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ3 (1, 0),(0, 1),(1, -1)              ell=2
+        Theta   : M1=9, M2=30, M3=78, M4=186, M5=426, M6=954, M7=2106, M8=4602
+        residual: M1=9, M2=18, M3=24, M4=48, M5=96, M6=192, M7=384, M8=768
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=2, M3/M2=4/3, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ3 (1, 0),(1, 1),(2, 1)               ell=2
+        Theta   : M1=9, M2=30, M3=78, M4=186, M5=426, M6=954, M7=2106, M8=4602
+        residual: M1=9, M2=18, M3=24, M4=48, M5=96, M6=192, M7=384, M8=768
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=2, M3/M2=4/3, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ3 (1, 0),(1, -1),(2, 1)              ell=2
+        Theta   : M1=9, M2=30, M3=70, M4=150, M5=318, M6=670, M7=1406, M8=2942
+        residual: M1=9, M2=26, M3=52, M4=104, M5=208, M6=416, M7=832, M8=1664
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=26/9, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ3 (0, 1),(1, -1),(1, 2)              ell=2
+        Theta   : M1=9, M2=30, M3=70, M4=150, M5=318, M6=670, M7=1406, M8=2942
+        residual: M1=9, M2=26, M3=52, M4=104, M5=208, M6=416, M7=832, M8=1664
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=26/9, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    BQ3 (1, 1),(2, 1),(1, 2)               ell=2
+        Theta   : M1=9, M2=30, M3=70, M4=150, M5=318, M6=670, M7=1406, M8=2942
+        residual: M1=9, M2=26, M3=52, M4=104, M5=208, M6=416, M7=832, M8=1664
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=26/9, M3/M2=2, M4/M3=2, M5/M4=2, M6/M5=2, M7/M6=2, M8/M7=2
+    ADV bouquet (1,0),(1,-1),(1,2)         ell=3
+        Theta   : M1=12, M2=42, M3=142, M4=478, M5=1594, M6=5266
+        residual: M1=8, M2=26, M3=78, M4=234, M5=702, M6=2106
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=13/4, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    ADV bouquet (1,0)x2,(0,1),(1,1)        ell=3
+        Theta   : M1=12, M2=44, M3=164, M4=596, M5=2108, M6=7292
+        residual: M1=4, M2=12, M3=36, M4=108, M5=324, M6=972
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=3, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    ADV bouquet (1,0),(0,1),(1,1),(1,-1)   ell=3
+        Theta   : M1=16, M2=88, M3=352, M4=1288, M5=4528, M6=15544
+        residual: M1=8, M2=24, M3=72, M4=216, M5=648, M6=1944
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=3, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    BQ3 (1, 0),(1, 0),(0, 1)               ell=3
+        Theta   : M1=12, M2=44, M3=164, M4=596, M5=2108, M6=7292
+        residual: M1=4, M2=12, M3=36, M4=108, M5=324, M6=972
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=3, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    BQ3 (1, 0),(1, 0),(1, 1)               ell=3
+        Theta   : M1=12, M2=44, M3=164, M4=596, M5=2108, M6=7292
+        residual: M1=4, M2=12, M3=36, M4=108, M5=324, M6=972
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=3, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    BQ3 (1, 0),(1, 0),(1, -1)              ell=3
+        Theta   : M1=12, M2=44, M3=164, M4=596, M5=2108, M6=7292
+        residual: M1=4, M2=12, M3=36, M4=108, M5=324, M6=972
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=3, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    BQ3 (1, 0),(1, -1),(1, 2)              ell=3
+        Theta   : M1=12, M2=42, M3=142, M4=478, M5=1594, M6=5266
+        residual: M1=8, M2=26, M3=78, M4=234, M5=702, M6=2106
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=13/4, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    BQ3 (1, 0),(2, 1),(1, 2)               ell=3
+        Theta   : M1=12, M2=42, M3=142, M4=478, M5=1594, M6=5266
+        residual: M1=8, M2=26, M3=78, M4=234, M5=702, M6=2106
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=13/4, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    BQ3 (0, 1),(1, -1),(2, 1)              ell=3
+        Theta   : M1=12, M2=42, M3=142, M4=478, M5=1594, M6=5266
+        residual: M1=8, M2=26, M3=78, M4=234, M5=702, M6=2106
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=13/4, M3/M2=3, M4/M3=3, M5/M4=3, M6/M5=3
+    ADV bouquet (1,0)x3,(0,1),(1,2)        ell=5
+        Theta   : M1=18, M2=106, M3=626, M4=3626
+        residual: M1=12, M2=60, M3=300, M4=1500
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=5, M3/M2=5, M4/M3=5
+    FAM p=1 q=4                            ell=5
+        Theta   : M1=20, M2=132, M3=852, M4=5252
+        residual: M1=8, M2=40, M3=200, M4=1000
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=5, M3/M2=5, M4/M3=5
+    FAM p=1 q=5                            ell=5
+        Theta   : M1=16, M2=112, M3=752, M4=4752
+        residual: M1=10, M2=50, M3=250, M4=1250
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=5, M3/M2=5, M4/M3=5
+    FAM p=2 q=3                            ell=5
+        Theta   : M1=20, M2=132, M3=852, M4=5252
+        residual: M1=8, M2=40, M3=200, M4=1000
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=5, M3/M2=5, M4/M3=5
+    FAM p=1 q=6                            ell=7
+        Theta   : M1=28, M2=268, M3=2452
+        residual: M1=12, M2=84, M3=588
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=7, M3/M2=7
+    FAM p=2 q=5                            ell=7
+        Theta   : M1=28, M2=268, M3=2452
+        residual: M1=12, M2=84, M3=588
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=7, M3/M2=7
+    FAM p=3 q=4                            ell=7
+        Theta   : M1=28, M2=268, M3=2452
+        residual: M1=12, M2=84, M3=588
+        residual の比（定理 J7 (a) が ell 倍を予言する）: M2/M1=7, M3/M2=7
+
+==============================================================================
+Step F: sum_M Theta_M から作った ord_ell(kappa_n) を Matrix-Tree の実測と照合 [  169.3s]
+==============================================================================
+  照合した段数: 122
+  塔の値を取れなかった件: 0
+
+==============================================================================
+Step H: 敵対的レビュー [  172.1s]
+==============================================================================
+H1: (B*) が破れる塔でも b = sum m は当たるか
+    (B*) が破れた塔: 13 件（うち当てはめができたもの 13 件）
+    そのうち b_pred != b_fit だったもの: 0 件
+      ADV torus (1,0),(0,1)                ell=2 b_pred=2 b_fit=2 layer_ng=12 inner_ng=0
+      ADV bouquet (1,0)x2,(0,1),(1,1)      ell=2 b_pred=2 b_fit=2 layer_ng=12 inner_ng=0
+      ADV bouquet (1,0)x3,(0,1)x3          ell=2 b_pred=2 b_fit=2 layer_ng=12 inner_ng=0
+      BQ2 (1, 0),(0, 1)                    ell=2 b_pred=2 b_fit=2 layer_ng=12 inner_ng=0
+      BQ2 (1, 0),(1, 1)                    ell=2 b_pred=2 b_fit=2 layer_ng=12 inner_ng=0
+      BQ2 (1, 0),(1, -1)                   ell=2 b_pred=2 b_fit=2 layer_ng=12 inner_ng=0
+      BQ3 (1, 0),(0, 1),(1, 1)             ell=2 b_pred=3 b_fit=3 layer_ng=18 inner_ng=0
+      BQ3 (1, 0),(0, 1),(1, -1)            ell=2 b_pred=3 b_fit=3 layer_ng=18 inner_ng=0
+      BQ3 (1, 0),(1, 1),(2, 1)             ell=2 b_pred=3 b_fit=3 layer_ng=18 inner_ng=0
+      BQ3 (1, 0),(1, -1),(2, 1)            ell=2 b_pred=1 b_fit=1 layer_ng=6 inner_ng=0
+      BQ3 (0, 1),(1, -1),(1, 2)            ell=2 b_pred=1 b_fit=1 layer_ng=6 inner_ng=0
+      BQ3 (1, 1),(2, 1),(1, 2)             ell=2 b_pred=1 b_fit=1 layer_ng=6 inner_ng=0
+      ADV bouquet (1,0),(0,1),(1,1),(1,-1) ell=3 b_pred=4 b_fit=4 layer_ng=20 inner_ng=0
+    → (B*) は b には効かない（c,d,e には効く）という step 1 §5.4 の観察の一般化にあたる。
+      ただしこれは**数値支持どまり**である（§7 に検出力を書く）。
+
+H2: b >= 3 の塔は母集団にあるか（あれば b = sum m の射程が b=1,2 に限らないことになる）
+    b >= 3 で深い掃引をした塔: 4 件
+      BQ3 (1, 0),(0, 1),(1, 1) ell=2 b_pred=3 b_fit=3
+      BQ3 (1, 0),(0, 1),(1, -1) ell=2 b_pred=3 b_fit=3
+      BQ3 (1, 0),(1, 1),(2, 1) ell=2 b_pred=3 b_fit=3
+      ADV bouquet (1,0),(0,1),(1,1),(1,-1) ell=3 b_pred=4 b_fit=4
+
+H3: m >= 2 の点（1 本の例外直線で j^* >= 2）を持つ塔
+    該当: 3 件
+      ADV bouquet (1,0)x3,(0,1),(1,2) ell=2 mult=[2] b_pred=2 b_fit=2
+      ADV bouquet (1,0),(0,1),(1,1),(1,-1) ell=3 mult=[2, 2] b_pred=4 b_fit=4
+      FAM p=1 q=5 ell=5 mult=[2] b_pred=2 b_fit=2
+
+H4: 候補集合の外に theta=infinity の原始整数ベクトルが出ないか（総当たり |a|,|b| <= 8）
+    theta=infinity と判定された原始ベクトル（重複あり）: 218 個、候補集合の外: 0 件
+
+==============================================================================
+まとめ [  172.8s]
+==============================================================================
+FAIL 件数: 0
+
+打ち切った計算（深い Theta 掃引）: 4 件
+  ell=2 (66 塔): 選択規則で対象外
+  ell=3 (43 塔): 選択規則で対象外
+  ell=5 (5 塔): 選択規則で対象外
+  ell=11 FAM p=5 q=6: MMAX 未設定（計算コスト。ell=11 は M=2 でも重い）
+
+打ち切った計算（Step F の塔の値）: 0 件
+
+cycle 16 由来の SKIPS（終結式の段の打ち切り）: 0 件
+
+総経過 [  172.8s]
