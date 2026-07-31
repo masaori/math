@@ -1,0 +1,562 @@
+# cycle 18 / T3 Pure: 一般の退化塔（トーラス以外）の閉形式と、その障害の同定。
+#
+# 対応する証明本体: outputs/reports/cycle18_T3_general_degenerate_tower.md
+# 直前の一次情報:
+#   outputs/reports/cycle17_T3_degenerate_torus_odd_ell.md（§6.1 が本サイクルの出発点）
+#   outputs/reports/cycle16_T3_lower_order_and_degeneracy.md（定理 N1・N2、定理 D1・D2）
+#   outputs/reports/cycle14_T3_two_variable_criterion.md（式 (1.1)、補題 8.4）
+#
+# 記号（report §1 と同じ）:
+#   D = det L、mu = v_ell(content D)、E = ell^{-mu} D、g = E(1+T,1+S)
+#   k = ord(g mod ell)、H = (g mod ell) の最低次斉次部分（次数 k）
+#   tilde E = 単項式で正規化した E（指数 p,q >= 0）、c_{pq} はその係数
+#   A_m(a,b) = sum c_{pq} binomial(p a + q b, m)  in ZZ
+#   theta(a,b) = min{ m : ell does not divide A_m(a,b) }（消滅深度）
+#     ※ 本文 paper_prop_G の (G1') で使われている「ずれ指数 delta」とは**別の量**なので
+#        記号を theta にしてある（記号の混同で命題 B が偽になった cycle 17 の事故を踏まえる）。
+#   Theta_tot = sum_{P in P^1(F_ell)} theta(P)
+#
+# 本サイクルで証明した主張（report §3–§5）:
+#   補題 A1  A_m(a,b) = sum c_{pq} binomial(p a + q b, m) in ZZ（有限和・整数・割り算なし）
+#   補題 A2  A_0 = A_1 = 0（整数として）、m < k で ell | A_m、A_k = H(a,b) mod ell
+#   補題 A3  m <= ell なら A_m mod ell は (a,b) mod ell だけの関数
+#            （m <= ell-1 は Lucas、m = ell は A_1 = 0 から）。m = ell+1 で初めて破れうる。
+#   補題 A3p ell が奇素数なら theta は偶数（E(z,w) = E(1/z,1/w)）
+#   補題 A4  theta(c a, c b) = theta(a, b)（ell not| c）
+#   定理 B   theta(a,b) - 2 < phi(ell^M) なら v_ell(E(zeta,xi)) = theta(a,b)/phi(ell^M)
+#   系 B'    theta(P) <= ell なら全ての M で v_ell(E) = theta(P)/phi(ell^{M'})
+#   定理 C   全方向で theta(P) <= ell なら、全ての n >= 0 で
+#              ord_ell(kappa_n) = mu(ell^{2n}-1) + Theta_tot/(ell-1)(ell^n-1) - 2n + v_ell(kappa_X)
+#   系 D     非退化なら theta = k、Theta_tot = k(ell+1)（cycle 16 定理 N1 を含む）
+#   系 E     z_H >= 1 かつ条件成立なら型 II（退化だが n ell^n 項なし）
+#   命題 F   条件が退化塔で成立しうるのは ell >= 5 のときだけ（ell = 2,3 は構造的に射程外）
+#
+# 本スクリプトが確認するもの（いずれも有限個の例での照合であり、証明の代用ではない）:
+#   Step A  補題 A1・A2 を F_ell^2 の**全列挙**で照合。
+#   Step B  補題 A3（digit 安定性、m <= ell）・補題 A3p（theta の偶奇）・補題 A4（scale 不変性）を
+#           全列挙で照合し、m = ell+1 で digit 安定性が**実際に破れる**ことを件数つきで示す。
+#   Step C  系 B' を、レベル M の点の Galois 軌道の**全列挙**で照合。
+#   Step D  定理 C を、2 段終結式による塔の値の**独立な厳密計算**と照合
+#           （予言はフィットパラメータ 0 個なので全段が out-of-sample）。
+#   Step E  障害の同定。(E1) 母集団全体での theta の定義可能性の分布、
+#           (E2) theta >= ell+1 の塔で M 依存が実際に起きる例（ell = 2 だけでなく ell = 3, 5 でも）、
+#           (E3) theta >= ell+1 でも M 依存が起きない例（必要条件であって十分条件でない）。
+#   Step F  敵対的レビュー。
+#
+# 実行: sage general_degenerate.sage
+
+import sys, time
+from itertools import combinations_with_replacement as cwr
+sys.stdout.reconfigure(line_buffering=True)
+
+load('_defs18.sage')
+
+FAIL = 0
+def check(cond, msg):
+    global FAIL
+    if not cond:
+        FAIL += 1
+        print("   *** FAIL:", msg)
+    return cond
+
+def dir_of(ell, M, a, b):
+    """(a,b) mod ell^M の方向 P in P^1(F_ell)（cycle 16 定義 4.1）。"""
+    va = ZZ(a).valuation(ell) if a % ell**M != 0 else M
+    vb = ZZ(b).valuation(ell) if b % ell**M != 0 else M
+    r = min(va, vb)
+    a1 = (ZZ(a) // ell**r) % ell
+    b1 = (ZZ(b) // ell**r) % ell
+    if a1 % ell == 0:
+        return '(0:1)'
+    return '(1:%d)' % ((b1 * ZZ(GF(ell)(a1)**(-1))) % ell)
+
+def level_of(ell, M, a, b):
+    r = min(ZZ(a).valuation(ell) if a % ell**M != 0 else M,
+            ZZ(b).valuation(ell) if b % ell**M != 0 else M)
+    return M - r
+
+def prof_of(inv, ell, mmax=None):
+    return delta_profile(inv['D'], ell, inv['mu'], mmax)
+
+# ==========================================================================
+# 例
+# ==========================================================================
+# EX18 は Step A–D で使う固定リスト。
+# theta が定義できる（<= ell）退化塔は Step E1 の全走査で多数見つかる（件数はログ）。
+# 下は非トーラスを優先してそこから取った代表である。
+
+EX18 = [
+    # (name, m, edges, primes)
+    ('torus bq (1,0),(0,1)', 1, [(0,0,(1,0)),(0,0,(0,1))], [3,5,7,13]),
+    ('bq (1,0),(0,1),(1,1)', 1, [(0,0,(1,0)),(0,0,(0,1)),(0,0,(1,1))], [5,7,11,13]),
+    ('bq (1,0),(0,1),(1,-1)', 1, [(0,0,(1,0)),(0,0,(0,1)),(0,0,(1,-1))], [5,7,11]),
+    ('bq (1,0),(0,1),(3,1)', 1, [(0,0,(1,0)),(0,0,(0,1)),(0,0,(3,1))], [5,7,11]),
+    ('bq (1,0),(0,1),(0,2)', 1, [(0,0,(1,0)),(0,0,(0,1)),(0,0,(0,2))], [5,7]),
+    ('bq (1,0),(0,1),(2,3)', 1, [(0,0,(1,0)),(0,0,(0,1)),(0,0,(2,3))], [5,7]),
+    ('bq (1,0),(0,1),(2,1),(1,2)', 1,
+     [(0,0,(1,0)),(0,0,(0,1)),(0,0,(2,1)),(0,0,(1,2))], [5,7]),
+    ('bq (1,0),(0,1),(1,1),(1,2),(1,3)', 1,
+     [(0,0,(1,0)),(0,0,(0,1)),(0,0,(1,1)),(0,0,(1,2)),(0,0,(1,3))], [5,7]),
+    ('bq (2,1),(1,2)', 1, [(0,0,(2,1)),(0,0,(1,2))], [5,7,11]),
+    ('2v (0,0),(1,0),(0,1)', 2, [(0,1,(0,0)),(0,1,(1,0)),(0,1,(0,1))], [5,7,11]),
+    ('2v (0,0),(1,0),(0,1),(1,1)', 2,
+     [(0,1,(0,0)),(0,1,(1,0)),(0,1,(0,1)),(0,1,(1,1))], [5,7]),
+    ('2v+loop (0,0),(1,0) / loop (0,1)', 2,
+     [(0,1,(0,0)),(0,1,(1,0)),(1,1,(0,1))], [5,7,11]),
+    ('triangle (1,0),(0,1),(0,0)', 3,
+     [(0,1,(1,0)),(1,2,(0,1)),(2,0,(0,0))], [5,7,11]),
+    ('torus x5 (content 5, mu=1)', 1, [(0,0,(1,0))]*5 + [(0,0,(0,1))]*5, [5]),
+    ('2v 5 重辺 3x(0,0),(1,0),(0,1) (kappa_X=5, v_5=1)', 2,
+     [(0,1,(0,0))]*3 + [(0,1,(1,0)),(0,1,(0,1))], [5]),
+    ('2v 7 重辺 5x(0,0),(1,0),(0,1) (kappa_X=7, v_7=1)', 2,
+     [(0,1,(0,0))]*5 + [(0,1,(1,0)),(0,1,(0,1))], [7]),
+]
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step A: 補題 A1・A2（A_m の恒等式と最低次の同定）を全列挙で照合", el())
+print("=" * 78)
+print("""
+  A1: A_m(a,b) = sum_{(p,q)} c_{pq} binomial(p a + q b, m) が、
+      tilde E((1+pi)^a,(1+pi)^b) を ZZ[pi] で直接展開した pi^m 係数と一致すること。
+  A2: A_0 = A_1 = 0（整数として。mod ell ではない）、m < k で ell | A_m、A_k = H(a,b) mod ell。
+      A2 は (a,b) in F_ell^2 の全点で確認する（標本抽出ではない）。
+""")
+
+Rpi_ZZ = PolynomialRing(ZZ, 'pi'); pi_ZZ = Rpi_ZZ.gen()
+
+def A_series_bruteforce(coeffs, a, b, mmax):
+    tot = Rpi_ZZ(0)
+    for ((p, q), c) in coeffs.items():
+        tot += c * (1 + pi_ZZ)**(ZZ(p) * ZZ(a) + ZZ(q) * ZZ(b))
+    return [tot[m] for m in range(mmax + 1)]
+
+nA1 = nA2 = 0
+for (name, m, edges, primes) in EX18:
+    for ell in primes:
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        coeffs = cleared_coeffs(E_of(inv['D'], ell, inv['mu']))
+        k = inv['k']; H = inv['H']; Tl, Sl = H.parent().gens()
+        mmax = k + 2
+        for a in range(0, 4):
+            for b in range(0, 4):
+                check(A_vector_at(coeffs, a, b, mmax)
+                      == A_series_bruteforce(coeffs, a, b, mmax),
+                      "A1 %s ell=%d (a,b)=(%d,%d)" % (name, ell, a, b))
+                nA1 += 1
+        for a in range(ell):
+            for b in range(ell):
+                Av = A_vector_at(coeffs, a, b, max(k, 1))
+                check(Av[0] == 0, "A2 A_0=0 %s ell=%d" % (name, ell))
+                check(Av[1] == 0, "A2 A_1=0 %s ell=%d (a,b)=(%d,%d)" % (name, ell, a, b))
+                for mm in range(k):
+                    check(Av[mm] % ell == 0,
+                          "A2 ell|A_%d %s ell=%d (a,b)=(%d,%d)" % (mm, name, ell, a, b))
+                check(GF(ell)(Av[k]) == H.subs({Tl: GF(ell)(a), Sl: GF(ell)(b)}),
+                      "A2 A_k=H %s ell=%d (a,b)=(%d,%d)" % (name, ell, a, b))
+                nA2 += 1
+print("  A1 照合 %d 件、A2 照合 %d 件、ここまでの FAIL = %d %s" % (nA1, nA2, FAIL, el()))
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step B: 補題 A3（digit 安定性）と補題 A4（scale 不変性）", el())
+print("=" * 78)
+print("""
+  A3: m <= ell なら A_m(a + ell u, b + ell v) = A_m(a,b) mod ell。
+      m <= ell-1 は Lucas から無条件、m = ell は A_1 = 0（補題 A2）から従う。
+      m = ell+1 で**初めて破れうる**。破れの件数を明示的に数える（0 件で終わらせない）。
+  A3p: ell が奇素数なら theta は偶数（E(z,w) = E(1/z,1/w) の反転対称性）。
+  A4: theta(c a, c b) = theta(a,b)（ell not| c）。
+  全列挙の対象は ell <= 5（(a,b,u,v) の 4 重ループ）。ell = 7 は u,v in {0,1} に絞る。
+""")
+nB_ok = nB_scale = 0
+BREAKS = {}
+for (name, m, edges, primes) in EX18:
+    for ell in primes:
+        if ell > 7:
+            continue
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        coeffs = cleared_coeffs(E_of(inv['D'], ell, inv['mu']))
+        urange = range(ell) if ell <= 5 else range(2)
+        nbrk = 0
+        for a in range(ell):
+            for b in range(ell):
+                for u in urange:
+                    for v in urange:
+                        a2 = a + ell * u; b2 = b + ell * v
+                        for mm in range(ell + 1):        # m <= ell
+                            check(A_m_at(coeffs, a, b, mm) % ell
+                                  == A_m_at(coeffs, a2, b2, mm) % ell,
+                                  "A3 %s ell=%d m=%d (%d,%d)->(%d,%d)"
+                                  % (name, ell, mm, a, b, a2, b2))
+                            nB_ok += 1
+                        if (A_m_at(coeffs, a, b, ell + 1) % ell
+                                != A_m_at(coeffs, a2, b2, ell + 1) % ell):
+                            nbrk += 1
+        BREAKS.setdefault(ell, []).append((name, nbrk))
+        # A3p: theta の偶奇（深く取って調べる）
+        if ell % 2 == 1:
+            for a in range(ell):
+                for b in range(ell):
+                    if a == 0 and b == 0:
+                        continue
+                    t = delta_at(coeffs, ell, a, b, 30)
+                    check(t is None or t % 2 == 0,
+                          "A3p theta が奇数: %s ell=%d (a,b)=(%d,%d) theta=%s"
+                          % (name, ell, a, b, t))
+        for a in range(ell):
+            for b in range(ell):
+                if a % ell == 0 and b % ell == 0:
+                    continue
+                t0 = delta_at(coeffs, ell, a, b, ell)
+                for c in range(1, ell):
+                    check(t0 == delta_at(coeffs, ell, (c*a) % ell, (c*b) % ell, ell),
+                          "A4 %s ell=%d (a,b)=(%d,%d) c=%d" % (name, ell, a, b, c))
+                    nB_scale += 1
+print("  A3 照合 %d 件（m <= ell、破れ 0 が期待値）、A4 照合 %d 件" % (nB_ok, nB_scale))
+tot_break = 0
+for ell in sorted(BREAKS):
+    s = sum(n for (_, n) in BREAKS[ell]); tot_break += s
+    pos = [nm for (nm, n) in BREAKS[ell] if n > 0]
+    print("  ell=%-2d m = ell+1 での破れ 合計 %5d 件（破れた例 %d/%d 件）: %s"
+          % (ell, s, len(pos), len(BREAKS[ell]), pos[:3]))
+check(tot_break > 0, "m = ell+1 での digit 安定性の破れが 1 件も観測されなかった")
+print("  ここまでの FAIL = %d %s" % (FAIL, el()))
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step C: 系 B'（点ごとの付値 v_ell(E) = theta(P)/phi(ell^{M'})）", el())
+print("=" * 78)
+print("""
+  theta(P) <= ell が全方向で成り立つ塔について、レベル M の点を Galois 軌道ごとに
+  **全列挙**し、実測 v_ell(E)*phi(ell^M) と予言を照合する。
+  Galois 共役は付値を保つので軌道の代表 1 点で足りる（標本抽出ではない）。
+""")
+CSPEC = [(3, 2), (3, 3), (5, 1), (5, 2), (7, 1), (11, 1), (13, 1)]
+nC = 0
+for (name, m, edges, primes) in EX18:
+    for (ell, M) in CSPEC:
+        if ell not in primes:
+            continue
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        prof = prof_of(inv, ell)
+        if any(v is None for v in prof.values()):
+            continue
+        seen = set(); cnt = 0
+        for a in range(ell**M):
+            for b in range(ell**M):
+                if a == 0 and b == 0:
+                    continue
+                orb = min(((c*a) % ell**M, (c*b) % ell**M)
+                          for c in range(1, ell**M) if c % ell != 0)
+                if orb in seen:
+                    continue
+                seen.add(orb)
+                meas = delta_measured(inv['D'], ell, inv['mu'], M, a, b)
+                P = dir_of(ell, M, a, b); Mp = level_of(ell, M, a, b)
+                pred = QQ(prof[P]) * euler_phi(ell**M) / euler_phi(ell**Mp)
+                check(meas == pred,
+                      "C %s ell=%d M=%d (a,b)=(%d,%d) dir=%s meas=%s pred=%s"
+                      % (name, ell, M, a, b, P, meas, pred))
+                cnt += 1; nC += 1
+        print("  %-40s ell=%-3d M=%d 軌道 %4d 件  prof=%s"
+              % (name[:40], ell, M, cnt, prof))
+print("  Step C 照合軌道数 = %d、ここまでの FAIL = %d %s" % (nC, FAIL, el()))
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step D: 定理 C（閉形式）と塔の値の独立な厳密計算との照合", el())
+print("=" * 78)
+print("""
+  予言 ord_ell(kappa_n) = mu(ell^{2n}-1) + Theta_tot/(ell-1)(ell^n-1) - 2n + v_ell(kappa_X)
+  は D の係数だけから決まる。**フィットパラメータは 0 個**であり、照合は全段が out-of-sample。
+  塔の値は 2 段終結式で独立に厳密計算する。
+""")
+NMAX18 = {3: 3, 5: 2, 7: 2, 11: 1, 13: 1}
+nD = 0
+for (name, m, edges, primes) in EX18:
+    for ell in primes:
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        prof = prof_of(inv, ell)
+        Ttot = delta_sum(prof)
+        if Ttot is None:
+            print("  %-40s ell=%-3d theta 不定（定理 C の射程外）prof=%s"
+                  % (name[:40], ell, prof))
+            continue
+        ords = tower_ords(m, edges, ell, NMAX18.get(ell, 1), tag='StepD')
+        use = usable_prefix(ords)
+        preds = [predicted_ord_general(inv, ell, Ttot, n) for n in range(len(use))]
+        ok = all(QQ(use[n]) == preds[n] for n in range(len(use)))
+        zh = len(inv['zeros'])
+        print("  %-40s ell=%-3d k=%d z_H=%d mu=%d vkX=%d Theta=%2d %-8s n<=%d 実測=%s 予言=%s %s"
+              % (name[:40], ell, inv['k'], zh, inv['mu'], inv['vkX'], Ttot,
+                 '退化' if zh else '非退化', len(use)-1, use, preds,
+                 'OK' if ok else 'MISMATCH'))
+        check(ok, "D %s ell=%d" % (name, ell))
+        nD += len(use)
+print("  Step D 照合段数 = %d、ここまでの FAIL = %d %s" % (nD, FAIL, el()))
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step E: 障害の同定", el())
+print("=" * 78)
+
+def gen_pop():
+    out = []
+    V = [(1,0),(0,1),(1,1),(1,-1),(2,1),(1,2),(2,3),(0,2),(2,0),(3,1),(1,3)]
+    for r in [2, 3]:
+        for combo in cwr(range(len(V)), r):
+            out.append(('bq ' + ' '.join(str(V[i]) for i in combo), 1,
+                        [(0, 0, V[i]) for i in combo]))
+    for r in [3, 4]:
+        for combo in cwr(range(len(V) + 1), r):
+            edges = [(0, 1, ((0, 0) if i == len(V) else V[i])) for i in combo]
+            out.append(('2v ' + ' '.join(('(0,0)' if i == len(V) else str(V[i]))
+                                         for i in combo), 2, edges))
+    return out
+
+POP = gen_pop()
+print()
+print("--- E1: 母集団全体での theta の定義可能性（theta <= ell か否か）---")
+print("""
+  母集団 %d 個（bouquet 2-3 ループ / 2 頂点 3-4 重辺、voltage 11 種）を全走査する。
+  「0 件」を結論の根拠にしないため、母集団の大きさと内訳を必ず出す。
+""" % len(POP))
+E2_UNDEF = {}
+for ell in [2, 3, 5, 7, 11]:
+    n_tot = n_undef = n_deg = n_deg_def = 0
+    undef = []
+    for (name, m, edges) in POP:
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        n_tot += 1
+        prof = prof_of(inv, ell)
+        und = any(v is None for v in prof.values())
+        if len(inv['zeros']) >= 1:
+            n_deg += 1
+            if not und:
+                n_deg_def += 1
+        if und:
+            n_undef += 1
+            undef.append((name, m, edges, inv, prof))
+    E2_UNDEF[ell] = undef
+    print("  ell=%-2d 対象 %4d 塔: theta 不定 %4d 件 / 退化塔 %4d 件 "
+          "（うち theta 全方向定義可能 = 定理 C 適用可 %4d 件）"
+          % (ell, n_tot, n_undef, n_deg, n_deg_def))
+
+print()
+print("--- E2: theta >= ell+1 の塔で、M 依存が実際に起きる例 ---")
+print("""
+  theta >= ell+1 は「方向だけでは決まらない」ことの必要条件にすぎないので、
+  実際に同一方向内で値が割れるかを実測で確かめる。
+  ell = 2 だけでなく **奇素数 ell = 3, 5 でも起きる**ことを示す。
+""")
+E2_CASES = [
+    ('torus bq (1,0),(0,1)', 1, [(0,0,(1,0)),(0,0,(0,1))], 2, [1,2,3,4]),
+    ('bq 2x(1,0),1x(0,1)', 1, [(0,0,(1,0))]*2 + [(0,0,(0,1))], 3, [1,2]),
+    ('bq 4x(1,0),1x(0,1)', 1, [(0,0,(1,0))]*4 + [(0,0,(0,1))], 5, [1,2]),
+    ('bq 2x(1,0),3x(0,1)', 1, [(0,0,(1,0))]*2 + [(0,0,(0,1))]*3, 5, [1,2]),
+]
+for (name, m, edges, ell, Ms) in E2_CASES:
+    inv = invariants(m, edges, ell)
+    prof = prof_of(inv, ell)
+    prof_deep = prof_of(inv, ell, 24)
+    print("  %-26s ell=%d k=%d H=%s z_H=%d mu=%d"
+          % (name, ell, inv['k'], inv['H'], len(inv['zeros']), inv['mu']))
+    print("      theta(mmax=ell)  =%s" % prof)
+    print("      theta(mmax=24)   =%s   （None は「mod ell で恒等的に消える方向」）" % prof_deep)
+    splits = 0
+    prev = None
+    for M in Ms:
+        vals = {}
+        for a in range(ell**M):
+            for b in range(ell**M):
+                if a == 0 and b == 0:
+                    continue
+                if level_of(ell, M, a, b) != M:
+                    continue
+                vals.setdefault(dir_of(ell, M, a, b), set()).add(
+                    delta_measured(inv['D'], ell, inv['mu'], M, a, b))
+        vv = {p: sorted(s, key=lambda x: (x is None, x)) for (p, s) in vals.items()}
+        print("      M=%d 実測 theta: %s" % (M, vv))
+        if any(len(s) > 1 for s in vv.values()):
+            splits += 1
+        if prev is not None and prev != vv:
+            splits += 1
+        prev = vv
+    check(splits > 0, "E2 %s ell=%d で M 依存が観測されなかった" % (name, ell))
+
+print()
+print("--- E3: theta >= ell+1 でも M 依存が起きない例（必要条件だが十分条件ではない）---")
+E3_CASES = [
+    ('bq (1,0),(0,1),(1,1)', 1, [(0,0,(1,0)),(0,0,(0,1)),(0,0,(1,1))], 3, [1,2,3]),
+]
+for (name, m, edges, ell, Ms) in E3_CASES:
+    inv = invariants(m, edges, ell)
+    prof_deep = prof_of(inv, ell, 24)
+    print("  %-26s ell=%d k=%d z_H=%d theta(mmax=24)=%s"
+          % (name, ell, inv['k'], len(inv['zeros']), prof_deep))
+    for M in Ms:
+        vals = {}
+        for a in range(ell**M):
+            for b in range(ell**M):
+                if a == 0 and b == 0:
+                    continue
+                if level_of(ell, M, a, b) != M:
+                    continue
+                vals.setdefault(dir_of(ell, M, a, b), set()).add(
+                    delta_measured(inv['D'], ell, inv['mu'], M, a, b))
+        print("      M=%d 実測 theta: %s"
+              % (M, {p: sorted(s, key=lambda x: (x is None, x)) for (p, s) in vals.items()}))
+    Ttot = delta_sum(prof_deep)
+    ords = tower_ords(m, edges, ell, 3, tag='StepE3')
+    use = usable_prefix(ords)
+    preds = [predicted_ord_general(inv, ell, Ttot, n) for n in range(len(use))]
+    print("      Theta_tot(mmax=24)=%s  塔の実測=%s  定理 C の式=%s  → %s"
+          % (Ttot, use, preds,
+             '一致（ただし定理 C の仮定は満たされていない＝数値支持どまり）'
+             if all(QQ(use[n]) == preds[n] for n in range(len(use))) else '不一致'))
+
+print()
+print("--- E4: theta = infinity（方向上で E mod ell が恒等的に消える）点の実在 ---")
+print("""
+  theta = infinity は「その点で v_ell(E) >= 1」を意味するが、方向全体の性質ではない。
+  同じ方向の中に theta = infinity の点と有限の点が同居することを、点ごとに示す。
+""")
+inv_inf = invariants(1, [(0,0,(1,0))]*4 + [(0,0,(0,1))], 5)
+co_inf = cleared_coeffs(E_of(inv_inf['D'], 5, inv_inf['mu']))
+print("  ell=5, bq 4x(1,0),1x(0,1): H(mod 5)=%s, Z_H=%s"
+      % (inv_inf['H'], inv_inf['zeros']))
+for (a, b) in [(1,1),(1,6),(6,1),(2,2),(1,11),(2,7)]:
+    print("    (a,b)=%-7s dir=%s theta(mmax=40)=%-5s  実測 M=1: %-3s  M=2: %-3s"
+          % (str((a,b)), dir_of(5, 2, a, b), delta_at(co_inf, 5, a, b, 40),
+             delta_measured(inv_inf['D'], 5, inv_inf['mu'], 1, a, b),
+             delta_measured(inv_inf['D'], 5, inv_inf['mu'], 2, a, b)))
+check(delta_at(co_inf, 5, 1, 1, 40) is None and delta_at(co_inf, 5, 1, 6, 40) == 6,
+      "E4 theta=infinity の点と有限の点の同居が再現しなかった")
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step F: 敵対的レビュー", el())
+print("=" * 78)
+
+print()
+print("--- F1: 非退化なら theta = k、Theta_tot = k(ell+1)（cycle 16 定理 N1 と一致）---")
+nF1 = 0
+for (name, m, edges, primes) in EX18:
+    for ell in primes:
+        inv = invariants(m, edges, ell)
+        if inv is None or len(inv['zeros']) > 0:
+            continue
+        prof = prof_of(inv, ell)
+        if any(v is None for v in prof.values()):
+            continue
+        check(all(v == inv['k'] for v in prof.values()),
+              "F1 非退化なのに theta != k: %s ell=%d prof=%s" % (name, ell, prof))
+        check(delta_sum(prof) == inv['k'] * (ell + 1),
+              "F1 Theta_tot != k(ell+1): %s ell=%d" % (name, ell))
+        nF1 += 1
+print("  非退化例 %d 件で確認。FAIL = %d" % (nF1, FAIL))
+
+print()
+print("--- F2: theta(P) > k <=> H(P) = 0（退化の判定と一致するか）---")
+nF2 = 0
+for (name, m, edges, primes) in EX18:
+    for ell in primes:
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        prof = prof_of(inv, ell)
+        for (P, t) in prof.items():
+            isz = (P in inv['zeros'])
+            if t is None:
+                check(isz, "F2 theta 不定なのに H(P) != 0: %s ell=%d P=%s" % (name, ell, P))
+            else:
+                check((t > inv['k']) == isz,
+                      "F2 %s ell=%d P=%s theta=%s k=%d zeros=%s"
+                      % (name, ell, P, t, inv['k'], inv['zeros']))
+            nF2 += 1
+print("  方向 %d 件で確認。FAIL = %d" % (nF2, FAIL))
+
+print()
+print("--- F3: 命題 F（ell = 2,3 の退化塔は構造的に定理 C の射程外）---")
+print("""
+  退化方向では theta >= k+1 >= 3（補題 A2）。定理 C は theta <= ell を要求し、奇 ell では theta が偶数なので
+  ell-1 >= 4、すなわち ell >= 5 が必要（ell = 2 は theta >= 3 > 2 = ell）。E1 の実測（ell=2,3 で「退化かつ定理 C 適用可」が
+  0 件）はこの帰結であって、探索範囲が狭いせいではない。
+""")
+for ell in [2, 3]:
+    cnt = 0
+    for (name, m, edges) in POP:
+        inv = invariants(m, edges, ell)
+        if inv is None or len(inv['zeros']) == 0:
+            continue
+        prof = prof_of(inv, ell)
+        if not any(v is None for v in prof.values()):
+            cnt += 1
+    check(cnt == 0, "F3 ell=%d で退化かつ定理 C 適用可の塔が %d 件（命題 F に反する）" % (ell, cnt))
+    print("  ell=%d: 退化かつ定理 C 適用可の塔 = %d 件（命題 F の予言は 0 件）" % (ell, cnt))
+
+print()
+print("--- F4: 系 E（型 II の実例）の件数 ---")
+print("""
+  cycle 16 §7 は型 II（退化だが n ell^n 項なし）の実例が 1 件も無いと記していた。
+  cycle 17 はトーラス 1 族を出した。系 E で判定できる塔の件数を母集団から数える。
+""")
+for ell in [3, 5, 7, 11]:
+    cnt = 0; exs = []
+    for (name, m, edges) in POP:
+        inv = invariants(m, edges, ell)
+        if inv is None or len(inv['zeros']) == 0:
+            continue
+        prof = prof_of(inv, ell)
+        if any(v is None for v in prof.values()):
+            continue
+        cnt += 1
+        if len(exs) < 3:
+            exs.append((name, inv['k'], len(inv['zeros']), delta_sum(prof)))
+    print("  ell=%-2d 系 E で型 II と判定できる塔 %4d 件。例（name,k,z_H,Theta）: %s"
+          % (ell, cnt, exs))
+
+print()
+print("--- F5: 予言がフィットでないことの明示 ---")
+print("""
+  Theta_tot は D の係数から F_ell 上の有限計算だけで決まり、塔の値も点ごとの付値も使わない。
+""")
+for (name, m, edges, primes) in EX18[:8]:
+    for ell in primes:
+        inv = invariants(m, edges, ell)
+        if inv is None:
+            continue
+        T = delta_sum(prof_of(inv, ell))
+        if T is None:
+            continue
+        print("  %-40s ell=%-3d k=%d z_H=%d Theta_tot=%2d  ell^n の係数=%s"
+              % (name[:40], ell, inv['k'], len(inv['zeros']), T, QQ(T)/(ell-1)))
+
+print()
+print("=" * 78)
+print("総 FAIL = %d %s" % (FAIL, el()))
+print("=" * 78)
+if SKIPS:
+    print()
+    print("時間上限で打ち切った計算の一覧（全件）:")
+    for s in SKIPS:
+        print("   ", s)
+else:
+    print("時間上限で打ち切った計算: 0 件")
