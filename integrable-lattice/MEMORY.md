@@ -22,6 +22,25 @@
 - **システム側は 1 ファイルも変更していない。**
 - 既知の残件（本移行とは無関係の先行不具合）: `npm run build:pdf` は `ℓ` `⇒` が欧文フォントに無く落ちる（移行前の 419dd34 でも同一の失敗を実測）。
   `npm run check` は `.tex` 生成までしか回さないので通る。
+## cycle 18 step 2 done（2026-07-31, T3 Pure）: トレース列の周期の上界を確定させた
+
+`outputs/reports/cycle18_T3_trace_period_bound.md` / `sagemath/check/cycle18_T3_trace_period/`。
+cycle 17 が「命題 C はトレース列の読みでは偽」で止めた穴を塞いだ。
+
+- **主結果（証明済み）**: $\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$。
+  $w^*$ は Gram 行列 $G=(\mathrm{Tr}\,T^{i+j})_{i,j<\deg\mathrm{rad}\chi}$ の**最大単因子**の $p$ 進付値。
+- **直すべきは指数ではなく基準レベルだった。** $\pi_{\mathrm{tr}}(p,k)\mid p^a\pi_{\mathrm{tr}}(p,1)$ は
+  $a$ をどう取っても偽（$F\oplus F$, $p=2$ で $t_1=1$, $t_2=3$）。**最初にこの形で立てて反証された**（報告 §8）。
+- **なぜ壊れていたかの説明**: $\det G=\mathrm{disc}(\rho)\prod_\lambda m_\lambda$ なので、
+  $w^*=0$ は「$\rho$ が $\bmod p$ 分離的 & 全ての $p\nmid m_\lambda$」＝**命題 B の条件そのもの**。
+  命題 C がトレース列で破れるのは偶然ではなく命題 B の帰結。
+- **$\mathbb{R}$ にも $\mathbb{Z}_p$ にも脱出しない**（$\mathbb{Z}$ 上の Cramer 則・Smith 標準形と
+  $\overline{\mathbb{Q}}$ の Vandermonde だけ）。$w^*$ は Smith 標準形で決定可能。
+- 本文へ**命題 C′（`paper_prop_C_trace`）**を追加し、命題 C の「上界は未確立」の文を差し替えた。
+- **数値支持どまり**（本文に入れていない）: $w^*+1\le k\le2w^*$ での階段 $t_{k+1}\mid p\,t_k$。
+  402 件 0 反例だが、この標本の検出力は破れ率 0.74% までであることを明記した。
+- **教訓（再確認）**: 証明を立てた直後に数値へかけたから、誤った主結果とGram 非退化性の仮定漏れが
+  即座に露見した。数値検証を後回しにしていたら cycle 17 と同型の事故を繰り返していた。
 
 ## cycle 17 完了（2026-07-31）＝ cycle 16 総括の 4 点を潰すサイクル
 
