@@ -90,6 +90,24 @@ targets=(
   IntegrableLattice.eigenvalue_pow_eq_one_of_pow_eq_one
   IntegrableLattice.orderOf_eigenvalue_dvd_orderOf
   IntegrableLattice.lcm_orderOf_eigenvalues_dvd_orderOf
+  # 命題 B（訂正後）の等式本体と反例（PropBTracePeriod.lean）
+  IntegrableLattice.expSum
+  IntegrableLattice.eq_zero_of_expSum_pow_eq_zero
+  IntegrableLattice.expSum_eventually_periodic_iff
+  IntegrableLattice.expSum_eventually_periodic_iff_lcm_dvd
+  IntegrableLattice.isLeast_period_expSum
+  IntegrableLattice.trace_pow_eventually_periodic_iff_lcm_dvd
+  IntegrableLattice.trace_pow_restrict_maxGenEigenspace
+  IntegrableLattice.trace_pow_eq_sum_maxGenEigenspace
+  IntegrableLattice.finrank_maxGenEigenspace_eq_rootMultiplicity
+  IntegrableLattice.trace_pow_eventually_periodic_iff
+  IntegrableLattice.natCast_ne_zero_iff_not_dvd
+  IntegrableLattice.cexMat
+  IntegrableLattice.cexMat_pow_three
+  IntegrableLattice.cexMat_ne_one
+  IntegrableLattice.orderOf_cexMat
+  IntegrableLattice.trace_cexMat_pow
+  IntegrableLattice.cexMat_period_ne
 )
 
 {
