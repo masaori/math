@@ -28,7 +28,8 @@ main の既存 check と同じ主張を見ているだけの 6 ファイル、�
 `133_` の「N₀=80 で sup < 1e-6」（r=0.9 では実測 1.2e-2）を、成り立つ評価へ直してから統合した。
 
 **検証**: `structured-latex` の `npm run check` exit 0、`verify-check-linkage.ts` exit 0
-（113 check）、`run-all-checks.sh 129 130 132 133 135` は 10 本すべて PASS。
+（救済 3 件をすべて統合した最終状態で 115 check）、
+`run-all-checks.sh 129 130 132 133 135` は 10 本すべて PASS。
 
 ## 完了（2026-07-31）: 救済PR #22 の残余を数値検証へ統合（`def_T_g` / `def_T_V` の検証を新設）
 
