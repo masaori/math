@@ -7,6 +7,12 @@
 
 export const ALL_LABELS = [
   "paper_positioning",
+  "paper_prior_art_countabilisation",
+  "paper_prior_art_limits",
+  "paper_prior_art_overall",
+  "paper_prior_art_propositions",
+  "paper_reading_guide",
+  "paper_survey_scope",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

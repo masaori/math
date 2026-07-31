@@ -140,6 +140,44 @@
 - 強調は **1 つのノードの中で開いて閉じる**。ノードをまたぐ `**` はビルドが落ちる（意図的な設計）。
 - 強調は日本語版と同じ箇所に置く（強調の有無は主張の強さに関わる）。
 
+### 1.4 フロントマターと「先行研究との関係」の節で使った語（2026-08-01 追記）
+
+`structured-latex-en/frontmatter.ts`（要旨）と `content/008_prior_art.ts`（先行研究の節）、
+`content/001a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
+**後続はここにある語を別の語で訳さないこと。**
+
+| 日本語 | 英語 | 根拠・注意 |
+|---|---|---|
+| 本論文 | **this paper** | 既定はこれ（既訳 `001_intro.ts` が "This paper is a reframing…" と書いており、そこに合わせる）。**"this survey" は、記事種別としてのサーベイそれ自体が主語のときだけ**使う（「この解説が何を概観するか」を述べる箇所と要旨）。両者を無差別に混ぜない |
+| （記事種別としての）解説・概観 | **survey** | Expositiones の記事種別 Survey Article の語。「何を概観として与えるか」＝ "what this survey gives an overview of" |
+| 概観する | **give an overview of** | "overview" は名詞で使う。"to survey" という動詞は使わない（記事種別の名詞 survey と紛れる） |
+| おおむね既出 | **broadly known** | `outputs/reports/cycle17_T1_prior_art_check.md` §0 の判定「おおむね既出」。**"mostly not new" のような否定形にしない**（判定を強めても弱めてもならない） |
+| 調べた範囲では見つからなかった | **we did not find** | **これ以上の意味にしてはならない。** "there is no…"、"this is new"、"to the best of our knowledge"（網羅を含意する）へ言い換えることを禁じる。本論文は 0 件を新規性の根拠にしない |
+| 先行研究との関係 | **relation to the literature** | 節の見出し。§1.3 の「既出性 ＝ prior art」と併用してよい（節見出しは前者、調査そのものは後者） |
+| 逆数学 | **reverse mathematics** | §1.3 の既出の用法どおり。標準語 |
+| 可算符号 | **countable code**（符号化する＝**to code**） | 逆数学の標準語。SEP の記述（実数を急収束 Cauchy 列で符号化する）に対応 |
+| 急収束 Cauchy 列 | **rapidly converging Cauchy sequence** | 同上 |
+| 完備可分距離空間 | **complete separable metric space** | 標準語 |
+| 構成的代数 | **constructive algebra** | Alonso García–Lombardi–Perdry の枠組みを指す |
+| Henselization | **Henselisation** | **-ise に統一する**（§2.5 の英綴り規則。原論文の表題は "Henselian local rings" なので、**表題を引用するときは原綴りのまま**にする） |
+| 数値フィット | **a fit**（「フィットであって証明ではない」＝ **a fit and not a proof**） | DuBose–Vallières が自認している性格。**"numerical evidence" と訳さない**（彼らの自認より弱くなる） |
+| 明示式 | **explicit formula** | Monsky の $\alpha^*$ に明示式が無いことの記述で使う |
+| 存在しか主張していない | **asserts only its existence** | Monsky 1989 Theorem 3.12 / 3.13 の "there is a real number …" の形に対応 |
+| 弱い形 | **a weaker form** | 命題 T の既出性（$v_2$ が偶数）の言い方 |
+| 強化 | **a strengthening** | 同上。命題 T は既出の弱い形の強化である |
+| 住処（ブロックの宣言としての） | **habitat** | §1.1 のとおり。**本文で言及するときイタリック等の強調を付けない**（生成器は `**太字**` しか解さず、`*斜体*` はアスタリスクがそのまま PDF に出る。実際に一度出した） |
+
+### 1.5 生成器の制約（訳語ではないが、書くときに必ず効く）
+
+- **強調は `**…**` だけである。`*…*`（斜体）は解釈されず、アスタリスクがそのまま PDF に出る。**
+- **`**…**` は 1 つのノードの中で開いて閉じること。** ノード（＝配列の 1 要素の文字列）をまたぐと
+  ビルドが落ちる。数式 `math(...)` を挟んで強調したくなったら、**強調の範囲を数式の手前で閉じる**
+  ように文を組み替える（例:「**命題 V は $d=1$ で既出**」→ "**Proposition V is known in the
+  one-variable case.** For $d=1$, …"）。
+- **引用は `cite(keys, note?)`。第 2 引数が locator である。**
+  `cite(["Key"], "Theorem 5.1")` と書く。`cite(["Key", "Theorem 5.1"])` は
+  「そんな BibTeX キーは無い」で生成が落ちる。
+
 ---
 
 ## 3. 後続が判断する必要がある点（訳語では決まらない）
@@ -147,5 +185,16 @@
 1. **「命題 A」の呼称**（§1.3）。生成器は Theorem 環境で組むので、本文で "Proposition A" と呼ぶと
    PDF 上は "Theorem 4.1 (Proposition A)" のような二重呼称になる。日本語版も同じ状態である。
    統一するなら生成器か本文のどちらかを変える必要があり、**内容の変更を伴うので独断で変えない**。
-2. **要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
-   現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
+2. ~~**要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
+   現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。~~
+   → **2026-08-01 に解消した。** 表題・要旨・キーワードを Survey Article 向けに書き直し、
+   MSC 2020 は zbMATH 配布の公式分類表 <https://zbmath.org/static/msc2020.pdf> と照合して確定した
+   （primary 11R06 / secondary 03B25, 03B30, 05C30, 11R23, 37B40, 37P35, 68V20, 82B20）。
+   **残る未確定は著者の所属と連絡先だけである**（リポジトリに一次情報が無いので空にしてある。
+   投稿前に著者本人が埋めること）。
+3. **本文が「第 N 章」と書き、`\cref` が "Section N" と出す二重の言い方**（2026-08-01 に気づいた）。
+   生成器は `level: 1` を `\section` に落とし、`\crefname{section}{Section}{Sections}` を出す。
+   一方で本文の地の文は「第 3 章」＝ "Chapter 3" と書いており、日本語版も同じ状態である。
+   どちらへ寄せるかは生成器か本文のどちらかを変える判断であり、**独断で変えていない**。
+   なお**章番号そのものは、序論より前に `level: 1` の見出しを足すと全部ずれる**ので、
+   英語版限定の節を足すときは末尾へ足すこと（`content/001a_reader_guide.ts` の冒頭コメントを見よ）。
