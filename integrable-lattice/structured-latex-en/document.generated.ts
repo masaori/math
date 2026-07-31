@@ -21,6 +21,8 @@ import type { Label } from './labels.generated.ts'
 import blocks_001_intro from './content/001_intro.ts'
 import blocks_002_setup from './content/002_setup.ts'
 import blocks_003_archimedean from './content/003_archimedean.ts'
+import blocks_006_propositions_TVW from './content/006_propositions_TVW.ts'
+import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -28,6 +30,8 @@ export type AllBlocks = [
   ...typeof blocks_001_intro,
   ...typeof blocks_002_setup,
   ...typeof blocks_003_archimedean,
+  ...typeof blocks_006_propositions_TVW,
+  ...typeof blocks_007_asymmetry_scope,
 ]
 
 /** 全ノート。 */

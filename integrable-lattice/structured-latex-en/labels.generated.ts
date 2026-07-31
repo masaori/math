@@ -12,8 +12,16 @@ export const ALL_LABELS = [
   "paper_def_ladder",
   "paper_def_massieu",
   "paper_four_axes",
+  "paper_lemma_V0",
   "paper_positioning",
+  "paper_prop_T",
+  "paper_prop_V",
+  "paper_prop_W",
+  "paper_remark_asymmetry",
+  "paper_remark_formalization",
   "paper_remark_ising_known",
+  "paper_remark_qp_motivation",
+  "paper_remark_scope",
   "paper_thm_archimedean",
 ] as const
 
