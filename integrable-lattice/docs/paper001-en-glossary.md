@@ -103,6 +103,31 @@
 | 自由エネルギー密度 | **the free energy density** | 標準語。`content/001_intro.ts` の既訳が既にこの形である |
 | 住処（英訳の言い回し） | **the habitat of $X$ is …** / **$X$ lives in …** | §1.1 の habitat の使い方。`content/002_setup.ts`「各量の住処は次のとおり」＝ "The habitats of the quantities involved are as follows" |
 
+### 1.2c 第 4 章（命題 A・B・C・C′・N・L）の英訳で確定させた語
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 切断（$p^k$ の $k$） | **truncation level** | `content/004_lambda_finite.ts` の用法（$\min(v_p(Z_N),k)$ の $k$）。「$p^k$ で打ち切る水準」であり、cut / truncation のうち水準を表す語を選んだ |
+| 基準レベル | **base level** | 同ファイル 命題 C′ の「基準レベルを 1 のままにした補正は不可能である」。上界 $\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$ の右辺で参照される水準 $w^*+1$ を指す。**level だけにしない**（truncation level と紛れる） |
+| 鳩の巣原理 | **the pigeonhole principle** | 標準語。命題 A の証明で使う |
+| 指標の一次独立性（Artin） | **Artin's linear independence of characters** | 標準語。命題 B の証明で使う |
+| 同伴行列 | **companion matrix** | 標準語。命題 C・C′ で使う |
+| 根基（$\rho=\prod_i f_i$） | **the radical** | 命題 C′ の定義そのもの。初出で定義式を添える |
+| Gram 行列 | **Gram matrix** | 標準語。命題 C′ の $G=(\operatorname{Tr}T^{i+j})$ |
+| 上界 | **upper bound** | 標準語。「上界が破れる」は **the bound fails**（"is broken" にしない） |
+| 例外集合 | **the exceptional set** | 命題 N。Skolem–Mahler–Lech 型の相殺で等号が崩れる $N$ の集合 |
+| 相殺 | **cancellation** | 命題 N。"cancellation of Skolem–Mahler–Lech type" |
+| 方法論上の注記 | **a methodological note** | 命題 C。0 件の観察を根拠にしてはならない、という教訓の見出し |
+| 反例が破れる／等号が破れる | **equality fails** | 命題 C。「$X$ 例中 $Y$ 例で破れた」は "equality failed for $Y$ out of $X$ examples" |
+| lifting-the-exponent（LTE） | **lifting the exponent (LTE)** | 命題 L。標準語（略号は本文でも LTE のまま） |
+
+**記号の書き方（実測に基づく制約。推測ではない）**: 命題 C′ / C″ の**プライムは ASCII の `'` で書く**
+（`Proposition C'` / `Proposition C''`）。**U+2032 `′` を地の文・タイトルへ書くと英語版の PDF から
+無言で消える**（2026-08-01 に `structured-latex-en` で実測。`build:pdf` の「組めない文字」検査が
+`′` を検出してビルドが落ちた。英語版は和文フォントを読み込まないため落とし先が無い）。
+数式ノードの中では `^{\prime}` を使えるが、**日本語版の数式は 1 文字も変えられない**ので、
+この制約は地の文とタイトルにのみ関わる。
+
 ### 1.3 訳し分けに注意する語
 
 | 日本語 | 英語 | 注意 |
