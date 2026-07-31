@@ -15,9 +15,12 @@
 #           予言はフィットパラメータ 0 個なので全段 out-of-sample。
 #   Step E  定理 J6 / 系 J5: theta が有限で判定条件が通るとき、型 II の閉形式。
 #           とくに cycle 18 §4.4 の例（ell=3, (1,0),(0,1),(1,1)）を格上げする。
-#   Step F  定理 J7: theta = oo の方向があると n ell^n 項が出る。閉形式を 2 例で照合。
-#           および ell=2 トーラスが定理 J7 の仮定 j* <= ell-2 を破る**反例**であること。
+#   Step F  定理 J7: theta = oo の Z_ell 点があると n ell^n 項が出る。閉形式を 4 例で照合。
+#           および ell=2 トーラスでは定理 J7 の仮定（(N), (B*)）が破れており、
+#           b が当たるのは照合であって証明ではないこと。
 #   Step G  敵対的レビュー。
+#   Step H  補題 J9 / 系 J10（S_oo は有限で、すべて有理点で、D の係数から決まる）と、
+#           **cycle 19 step 2（cycle19_T3_theta_infinity.md 定理 X'）との突き合わせ**。
 #
 # 実行: sage theta_padic.sage > theta_padic.out 2>&1
 
@@ -521,6 +524,191 @@ print("         整数代表 (1, ell-1) では theta が有限であることも
 
 print("  G5: 「Step A の破れ件数が 0 でないことを要求したか」")
 print("      -> 要求した（cycle 18 注 2.2 の教訓）。0 件なら FAIL する。")
+
+# ==========================================================================
+print()
+print("=" * 78)
+print("Step H: 補題 J9 / 系 J10（S_oo の有限性）と step 2 との突き合わせ", el())
+print("=" * 78)
+print("""
+  本 step の §7.2 は「S_oo が有限かは決めていない」と書いていたが、
+  cycle 19 step 2（cycle19_T3_theta_infinity.md 命題 3）は Newton 多面体の
+  Minkowski 分解から「**Z^2 の**例外直線は有限本」を証明していた。
+  両者の差は「Z_ell の点（無理な方向）にも theta = oo がありうるか」だけである。
+  補題 J9（指数の一次独立性）でこの差は埋まり、S_oo は有限かつ全て有理点になる:
+
+      補題 J9: gamma_1..gamma_k in Z_ell が相異なれば (1+x)^{gamma_i} は F_ell 上一次独立。
+      系 J10: theta(1:c) = oo (c in Z_ell) ならば、supp(barE) の相異なる 2 点 (p,q),(p',q')
+              で p + qc = p' + q'c となるものがある。すなわち c = -(p-p')/(q-q') は**有理数**。
+              よって S_oo は supp の差ベクトルから決まる有限集合の部分集合であり、
+              その候補集合は step 2 命題 3 の候補（Newt(barE) - Newt(barE) の方向）と一致する。
+
+  これで定理 J7 の仮定 (F)（S_oo が有限）は**仮定ではなく定理**になる。
+""")
+
+def s_infinity_candidates(coeffs, ell):
+    """系 J10 の候補集合: supp(barE) の 2 点の差 (dp,dq) に対する P = (dq : -dp)。
+       step 2 命題 3 の「v = u^perp が Newt(barE) - Newt(barE) の元」と同じ集合である。"""
+    S = [(ZZ(p), ZZ(q)) for ((p, q), c) in coeffs.items() if GF(ell)(c) != 0]
+    cand = set()
+    for i in range(len(S)):
+        for j in range(i + 1, len(S)):
+            dp = S[i][0] - S[j][0]
+            dq = S[i][1] - S[j][1]
+            (a, b) = (dq, -dp)
+            g = gcd(a, b)
+            if g == 0:
+                continue
+            (a, b) = (a // g, b // g)
+            if a < 0 or (a == 0 and b < 0):
+                (a, b) = (-a, -b)
+            cand.add((a, b))
+    return sorted(cand)
+
+print("  H1/H2: 母集団 %d 個 x ell in {2,3,5,7} x 原始整数ベクトル |a|,|b| <= %d を全走査し、"
+      % (len(POP), 5))
+print("         (H1) 指数 p a + q b が全て相異なるなら theta < oo、")
+print("         (H2) theta = oo なら系 J10 の候補集合に入る、の 2 つを検査する。")
+BH = 5
+h1_n = h1_nodup = h2_inf = h2_out = h2_cand = 0
+for ell in [2, 3, 5, 7]:
+    for (name, m, edges) in POP:
+        D = detL(m, edges)
+        if D == 0:
+            continue
+        mu = mu_content(D, ell)
+        coeffs = cleared_coeffs(E_of(D, ell, mu))
+        S = [(ZZ(p), ZZ(q)) for ((p, q), c) in coeffs.items() if GF(ell)(c) != 0]
+        if not S:
+            continue
+        cand = set(s_infinity_candidates(coeffs, ell))
+        h2_cand += len(cand)
+        for a in range(0, BH + 1):
+            for b in range(-BH, BH + 1):
+                if gcd(a, b) != 1:
+                    continue
+                exps = [p * a + q * b for (p, q) in S]
+                th = theta_signed(coeffs, ell, a, b)
+                h1_n += 1
+                if len(set(exps)) == len(exps):
+                    h1_nodup += 1
+                    check(th is not oo,
+                          "H1 ell=%d %s (%d,%d): 指数が全て相異なるのに theta = oo" % (ell, name, a, b))
+                if th is oo:
+                    h2_inf += 1
+                    (aa, bb) = (a, b) if (a > 0 or (a == 0 and b > 0)) else (-a, -b)
+                    if (aa, bb) not in cand:
+                        h2_out += 1
+                        check(False, "H2 ell=%d %s: theta=oo の点 (%d,%d) が候補集合の外"
+                              % (ell, name, a, b))
+print("      走査した (塔, ell, 原始ベクトル) の組: %d" % h1_n)
+print("      H1: 指数が全て相異なるもの %d 件、そのすべてで theta < oo" % h1_nodup)
+print("      H2: theta = oo の原始整数点 %d 件、候補集合の外にあったもの %d 件（候補の総数 %d）"
+      % (h2_inf, h2_out, h2_cand))
+check(h1_nodup > 0, "H1: 指数が全て相異なる例が 0 件（検査が空回りしている）")
+check(h2_inf > 0, "H2: theta = oo の点が 0 件（検査が空回りしている）")
+
+print()
+print("  H3: step 2 定理 X'（族 p(1,0)+q(0,1) の閉形式）と本 step の定理 J7・J8 の突き合わせ")
+print("""      step 2 命題 8: theta = oo <=> ell | p'q'(p'+q')、Lambda = 2 v_ell(p'+q') / v_ell(p') / v_ell(q')
+      step 2 定理 X': ord_ell(kappa_n) = mu(ell^{2n}-1) + 2 n ell^n + Lambda (ell^n - 1)
+      本 step 定理 J7: n ell^n の係数 b = sum_{P in S_oo} j*(P)
+      → 両者が整合するには **どの場合でも b = 2** でなければならない。これを確かめる。
+      （本 step 定理 J8 は p = ell-1, q = 1 の場合で、Lambda = 2、X' と同じ式になる。）""")
+H3_CASES = []
+for ell in [3, 5, 7]:
+    for p in range(1, 2 * ell + 1):
+        for q in range(1, 2 * ell + 1):
+            g = gcd(p, q)
+            mu_pq = ZZ(g).valuation(ell)
+            (pp, qq) = (p // ell**mu_pq, q // ell**mu_pq)
+            if (pp * qq * (pp + qq)) % ell != 0:
+                continue
+            H3_CASES.append((ell, p, q, mu_pq, pp, qq))
+print("      対象（ell in {3,5,7}, 1 <= p,q <= 2 ell、例外直線をもつもの）: %d 組" % len(H3_CASES))
+NMAX_H3 = {3: 2, 5: 1, 7: 1}
+h3_ok = 0
+h3_lines = 0
+for (ell, p, q, mu_pq, pp, qq) in H3_CASES:
+    (m, edges) = bq([(1, 0)] * p + [(0, 1)] * q)
+    D = detL(m, edges)
+    mu = mu_content(D, ell)
+    check(mu == mu_pq, "H3 ell=%d (%d,%d): mu が gcd から出る値と違う" % (ell, p, q))
+    coeffs = cleared_coeffs(E_of(D, ell, mu))
+    # step 2 命題 8 の例外直線と Lambda
+    if (pp + qq) % ell == 0:
+        lines = [(1, 1), (1, -1)]
+        Lam = 2 * ZZ(pp + qq).valuation(ell)
+    elif pp % ell == 0:
+        lines = [(1, 0)]
+        Lam = ZZ(pp).valuation(ell)
+    else:
+        lines = [(0, 1)]
+        Lam = ZZ(qq).valuation(ell)
+    # 本 step の道具で S_oo と b = sum j* を独立に出す
+    b_sum = 0
+    for (a0, b0) in lines:
+        th = theta_signed(coeffs, ell, a0, b0)
+        check(th is oo, "H3 ell=%d (%d,%d): 直線 %s で theta が oo でない" % (ell, p, q, (a0, b0)))
+        es = psi_data(coeffs, ell, a0, b0, 'w' if a0 != 0 else 'z')
+        cand = [j for (j, (e, lc)) in enumerate(es) if j >= 1 and e is not oo]
+        check(len(cand) > 0, "H3 ell=%d (%d,%d): 直線 %s で j* が存在しない（補題 J7a に反する）"
+              % (ell, p, q, (a0, b0)))
+        b_sum += min(cand)
+        h3_lines += 1
+    # 候補集合が例外直線を含むこと（系 J10 と step 2 命題 3 の一致）
+    cs = set(s_infinity_candidates(coeffs, ell))
+    for (a0, b0) in lines:
+        (aa, bb) = (a0, b0) if (a0 > 0 or (a0 == 0 and b0 > 0)) else (-a0, -b0)
+        check((aa, bb) in cs, "H3 ell=%d (%d,%d): 例外直線 %s が系 J10 の候補集合に無い"
+              % (ell, p, q, (a0, b0)))
+    check(b_sum == 2, "H3 ell=%d (%d,%d): b = sum j* = %d（step 2 定理 X' の b = 2 と食い違う）"
+          % (ell, p, q, b_sum))
+    # 閉形式そのものを塔の値と照合（フィットパラメータ 0 個）
+    for n in range(NMAX_H3[ell] + 1):
+        N = ell**n
+        actual = ZZ(kappa_derived(m, edges, N, N)).valuation(ell)
+        pred = mu * (ell**(2 * n) - 1) + 2 * n * ell**n + Lam * (ell**n - 1)
+        check(actual == pred, "H3 ell=%d (%d,%d) n=%d: 実測 %d != 定理 X' の予言 %d"
+              % (ell, p, q, n, actual, pred))
+    h3_ok += 1
+print("      照合した組 %d / 例外直線 %d 本、すべてで b = sum_{P in S_oo} j* = 2、"
+      % (h3_ok, h3_lines))
+print("      かつ塔の値が step 2 定理 X' の閉形式と一致（到達段数 n <= %s）" % NMAX_H3)
+print("      → **定理 J8 は定理 X' の (p,q) = (ell-1, 1) の場合であり、食い違いは無い。**")
+print("      → 定理 J7 の b = sum j* と定理 X' の b = 2 は、この族で完全に整合する。")
+print("         とくに場合 [B]（ell | p'）では例外直線が 1 本しかないが、そこで j* = 2 になる。")
+
+print()
+print("  H4: 「n ell^n の出所」の食い違いの検算")
+print("""      step 2 命題 7 は「例外直線上の点そのものの寄与は lambda(ell^n - 1) + n theta*
+      であり n ell^n 項を作らない」と述べる。本 step 定理 J7 の証明 (b) も、
+      M' ell^{M'} 項を出すのは P を含む最内球ではなく **その外側の層（beta != 0）**
+      だとしている。両者は同じことを言っており、食い違いは無い。
+      定理 J7 の b = sum_{P in S_oo} j*(P) は「S_oo の点ごとに 1 つずつ、
+      **その近傍から**寄与が出る」という数え方である。以下で数値的に分離する。""")
+for (ell, pv, qv) in [(3, 2, 1), (5, 4, 1), (3, 3, 1)]:
+    (m, edges) = bq([(1, 0)] * pv + [(0, 1)] * qv)
+    D = detL(m, edges)
+    mu = mu_content(D, ell)
+    coeffs = cleared_coeffs(E_of(D, ell, mu))
+    for M in range(1, 3):
+        tot_line = ZZ(0)
+        tot_rest = ZZ(0)
+        for (a, b) in P1_reps(ell, M):
+            (v, uniq, arg) = hat_theta_predicted(coeffs, ell, M, a, b)
+            if v is None:
+                continue
+            on_line = theta_signed(coeffs, ell, a, b) is oo or \
+                any((a * b0 - b * a0) % ell**M == 0
+                    for (a0, b0) in ([(1, 1), (1, -1)] if (pv + qv) % ell == 0
+                                     else ([(1, 0)] if pv % ell == 0 else [(0, 1)])))
+            if on_line:
+                tot_line += v
+            else:
+                tot_rest += v
+        print("      ell=%d (p,q)=(%d,%d) M=%d : 例外直線上の和 %s / それ以外の和 %s"
+              % (ell, pv, qv, M, tot_line, tot_rest))
 
 # ==========================================================================
 print()
