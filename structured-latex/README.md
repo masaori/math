@@ -22,6 +22,8 @@
 **ドメインモデルが中心にあり、レンダラー（出力器）はその上に載るモジュールである。**
 入力言語（構造化テキストの語彙）の正本は、このシステムが 1 つだけ持つ。
 先行実装では同じ言語が 3 箇所で定義され、ラベル解決が 2 回書かれていた。それを 1 つにするのが存在理由。
+**解決（採番・参照解決・ノート配置）の実装は `domain-model/resolved/resolve.ts` 1 つだけ**で、
+出版物向けの厳格な `resolve` も、プレビュー向けの寛容な `resolveTolerantly` も同じ実装を通る。
 
 ```
 structured-latex/
@@ -29,18 +31,24 @@ structured-latex/
 │   ├── structured-text/   #   L1 入力言語（ブロック・ノード・ラベル・ノート）
 │   ├── entities/          #   L2 文書の集約（SSOT。zod-to-entity-definitions で記述）
 │   ├── api-contract/      #   L2 配信と受け入れの契約
+│   │                      #     live-site.ts（公開サイト）/ live-preview.ts（プレビュー配信）
 │   ├── resolved/          #   L3 解決済み文書（採番・参照解決を終えた中間表現）
 │   └── _gen/              #   生成物（ER 定義・relation・storage 割り当て）
 ├── codegen/               # 生成器。domain-model にだけ依存する
 │   ├── structured-text-index/  #   ラベルのユニオン型・文書集約モジュール
 │   ├── entity-definitions/     #   ER 定義
 │   └── config/                 #   storage 宣言
+├── live-preview/          # レンダラー（出力器）のモジュール。LAN 内リアルタイム閲覧ビューア
+│   ├── backend/           #   Fastify。API + SSE + 静的配信（pnpm workspace）
+│   └── frontend/          #   React + Vite + KaTeX
 ├── examples/              # 利用例（生成器と型検査の実証対象）
 ├── tools/                 # 負テスト・依存方向の検査
+├── tsconfig.base.json     # 共有コンパイラ設定（システム自身・live-preview・各プロジェクトが継承）
 └── docs/                  # 設計ドキュメント
 ```
 
 依存方向は一方向で、逆流・循環は禁止（`npm run check:deps` が実際の import を読んで検査する）。
+`live-preview/` は domain-model を使う側であり、入力言語も解決も自前では持たない。
 
 ## 使う側がやること
 
@@ -87,4 +95,7 @@ npm run check  # ER 定義の鮮度 → 生成物の鮮度 → 型検査 → 依
 | [docs/type-coverage.md](docs/type-coverage.md) | 型で落とすもの／実行時に残すものの切り分けと根拠 |
 | [docs/milestones.md](docs/milestones.md) | マイルストーン |
 | [docs/design-notes/](docs/design-notes/) | 個別の設計判断の詳細な根拠 |
+| [live-preview/README.md](live-preview/README.md) | リアルタイムプレビューのセットアップ・起動・入力ソース差し替え |
+| [live-preview/docs/requirements.md](live-preview/docs/requirements.md) | 同 要件定義 |
+| [live-preview/docs/architecture.md](live-preview/docs/architecture.md) | 同 アーキテクチャ（システム側原則の適用と逸脱根拠） |
 | [MEMORY.md](MEMORY.md) | 引き継ぎメモ |

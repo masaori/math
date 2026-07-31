@@ -1,0 +1,165 @@
+import {
+  type LoadDocumentError,
+  type ResolveDiagnostic,
+  type ResolvedBlock,
+  type ResolvedNote,
+  assertNever,
+} from '@structured-latex/system/domain-model'
+import type { ReactElement } from 'react'
+import type {
+  ConnectionStatus,
+  DocumentContent,
+  DocumentViewPageDomainModel,
+} from '../model/page-domain-model'
+import { BlockCard } from './block-card'
+import { FigureView } from './figure-view'
+import { HeadingView } from './heading-view'
+import { OrphanNotes } from './note-view'
+
+const errorMessages: Record<LoadDocumentError['code'], string> = {
+  source_not_found: '入力ソースが見つかりません。サーバ起動時のソース dir 設定を確認してください。',
+  source_empty: '表示できるブロックがありません。',
+  validation_error: '構造化テキストの検証に失敗しました。下記の該当箇所を修正してください。',
+  source_read_error: 'ソースの読み込み中にエラーが発生しました。',
+}
+
+const connectionLabels: Record<ConnectionStatus, { text: string; className: string }> = {
+  connecting: { text: '接続中…', className: 'bg-slate-100 text-slate-500' },
+  live: { text: '● ライブ', className: 'bg-emerald-100 text-emerald-700' },
+  disconnected: { text: '切断', className: 'bg-rose-100 text-rose-700' },
+}
+
+const ConnectionBadge = ({ status }: { status: ConnectionStatus }): ReactElement => {
+  const { text, className } = connectionLabels[status]
+  return <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${className}`}>{text}</span>
+}
+
+/** ブロック1件を kind に応じて（章見出し / 図表 / 定理型ブロック）描画する。 */
+const BlockView = ({
+  block,
+  notes,
+}: { block: ResolvedBlock; notes: readonly ResolvedNote[] }): ReactElement => {
+  if (block.kind === 'heading') return <HeadingView heading={block} />
+  if (block.kind === 'figure') return <FigureView block={block} notes={notes} />
+  return <BlockCard block={block} notes={notes} />
+}
+
+const ErrorPanel = ({ error }: { error: LoadDocumentError }): ReactElement => (
+  <div className="rounded-md border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
+    <p className="font-semibold">{errorMessages[error.code]}</p>
+    {error.code === 'validation_error' ? (
+      <ul className="mt-2 list-disc space-y-1 pl-5">
+        {error.issues.map((issue, index) => (
+          <li key={`${issue.path}-${index}`}>
+            <code className="font-mono text-xs">{issue.path}</code>: {issue.message}
+          </li>
+        ))}
+      </ul>
+    ) : null}
+    {error.code === 'source_read_error' ? (
+      <pre className="mt-2 overflow-x-auto rounded bg-rose-100 p-2 text-xs">{error.message}</pre>
+    ) : null}
+  </div>
+)
+
+/** 解決で見つかった不備 1 件を、直せる文言にする（`code` の網羅は型が強制する）。 */
+const describeDiagnostic = (diagnostic: ResolveDiagnostic): string => {
+  switch (diagnostic.code) {
+    case 'unresolved_reference':
+      return `未解決の参照: ${diagnostic.fromBlockId} が指す "${diagnostic.target}" というラベルが存在しません`
+    case 'orphan_note':
+      return `紐づけ先の無いノート: ${diagnostic.noteId}（targets: ${diagnostic.targets.join(', ')}）`
+    case 'duplicate_block_id':
+      return `ブロック id の重複: ${diagnostic.blockId}`
+    case 'duplicate_label':
+      return `ラベルの重複: ${diagnostic.label}（参照が後勝ちで解決されます）`
+    case 'duplicate_note_id':
+      return `ノート id の重複: ${diagnostic.noteId}`
+    case 'duplicate_segment_key':
+      return `文書順キーの重複: ${diagnostic.key}`
+    case 'empty_document':
+      return '文書にブロックが 1 件もありません'
+    default:
+      return assertNever(diagnostic)
+  }
+}
+
+/**
+ * 解決の診断をまとめて出すパネル。
+ * 未解決参照は本文中でも赤字点線で出るが、本文が長いと見落とすので一覧でも出す。
+ * **診断があっても本文は表示し続ける**（F-9）。
+ */
+const DiagnosticsPanel = ({
+  diagnostics,
+}: { diagnostics: readonly ResolveDiagnostic[] }): ReactElement | null => {
+  if (diagnostics.length === 0) {
+    return null
+  }
+  return (
+    <details className="mb-4 rounded-md border border-amber-300 bg-amber-50 p-3">
+      <summary className="cursor-pointer text-sm font-semibold text-amber-900">
+        解決時の不備 {diagnostics.length} 件（表示は続けています）
+      </summary>
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-xs text-amber-900">
+        {diagnostics.map((diagnostic, index) => (
+          <li key={`${diagnostic.code}-${index}`}>{describeDiagnostic(diagnostic)}</li>
+        ))}
+      </ul>
+    </details>
+  )
+}
+
+/** 本文と参照用ノートを描画する（ノートは紐づけ先ブロックの中に折りたたんで置く）。 */
+const DocumentBody = ({ content }: { content: DocumentContent }): ReactElement => (
+  <>
+    <DiagnosticsPanel diagnostics={content.diagnostics} />
+    <div className="space-y-4">
+      {content.document.blocks.map((block, index) => (
+        <BlockView
+          key={`${block.blockId}-${index}`}
+          block={block}
+          notes={content.document.notesByBlockId[block.blockId] ?? []}
+        />
+      ))}
+    </div>
+    <OrphanNotes notes={content.orphanNotes} />
+  </>
+)
+
+/** PageDomainModel を Props で受け取り描画する（外界を一切知らない）。 */
+export const DocumentView = ({
+  document,
+  connection,
+  onManualReloadClick,
+}: DocumentViewPageDomainModel): ReactElement => (
+  <div className="mx-auto max-w-3xl p-4 sm:p-6">
+    <header className="sticky top-0 z-10 -mx-4 mb-4 flex items-center justify-between border-b border-slate-200 bg-white/90 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
+      <h1 className="text-lg font-bold text-slate-800">structured-latex live preview</h1>
+      <div className="flex items-center gap-3">
+        <ConnectionBadge status={connection} />
+        <button
+          type="button"
+          onClick={onManualReloadClick}
+          className="rounded border border-slate-300 px-2 py-1 text-xs text-slate-600 hover:bg-slate-50"
+        >
+          再読込
+        </button>
+      </div>
+    </header>
+
+    {document.status === 'loading' ? <p className="text-slate-500">読み込み中…</p> : null}
+
+    {document.status === 'error' ? <ErrorPanel error={document.error} /> : null}
+
+    {document.status === 'ready' ? (
+      <>
+        <p className="mb-4 text-xs text-slate-400">
+          {document.value.meta.sourceLabel} · {document.value.document.blocks.length} blocks ·{' '}
+          {document.value.meta.noteCount} notes（参照用・最終成果物には載りません） ·{' '}
+          {document.value.meta.generatedAt}
+        </p>
+        <DocumentBody content={document.value} />
+      </>
+    ) : null}
+  </div>
+)

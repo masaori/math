@@ -94,7 +94,7 @@ graph TD
 - **実態はほぼ完了**: content 13ファイル/123ブロックで parts 129中 **121をカバー済み**(`validate-content.mjs` PASS 確認)。「部分移行」ではなく残8ファイル+品質整合の詰め。
 - **残8ファイル(staleness)**: 045,046(000章)/002-003/004-013,014/008-041,042,043。全て 2026-06以降の新規追加分で content が未追随なだけ(表現力の問題ではない)。
 - **品質ギャップ**: `partially_simplified` 25ブロックは proof を要点圧縮した劣化変換 → CLAUDE.md 厳密性要件から再変換対象。TODO保持27箇所。
-- **レンダラは既存**: `realtime-web-preview/`(React+**KaTeX**, HTMLプレビュー/PDFではない, source=structured-latex/content)。MEMORY の「ビューア未実装」は古い。数式は Typst構文でなく **KaTeX向けLaTeX文字列**で保持(手翻訳、自動コンバータは無い)。
+- **レンダラは既存**: React+**KaTeX** の HTML プレビュー(PDF ではない, source=structured-latex/content)。MEMORY の「ビューア未実装」は古い。**所在**: 監査当時はリポジトリ直下の独立アプリ `realtime-web-preview/` だったが、2026-08-01 に structured-latex システムのモジュール `structured-latex/live-preview/` へ吸収され、旧ディレクトリは削除された(以降この文書中の `realtime-web-preview/...` は当時のパス)。数式は Typst構文でなく **KaTeX向けLaTeX文字列**で保持(手翻訳、自動コンバータは無い)。
 - **相互参照の不整合(要対処)**: content は ref target に**ラベル**を入れる規約だが、レンダラは**block.id**でアンカー化 → ラベル参照37件がブラウザ上デッドリンク。`validate-content.mjs` は ref解決を検査しない(未解決ref 2件検出)。
 - **schema の構造的ギャップ**: heading/section, figure/可換図式(005/000 の fletcher), table/grid の node が無い。文書順・章題は main.typ の #include 順にしか無く、ファイル名順と不一致。
   → heading と文書順は T3/T4b で解消済(後述)。figure/可換図式・table/grid は未解消。
@@ -158,7 +158,8 @@ graph TD
 
 - **schema に `heading` ブロックを追加**(`structured-latex/schema.{mjs,d.ts}`)。`kind: "heading"` +
   `level`(1 が最上位, Typst `=` が 1 / `==` が 2) + 必須 `title`、本文(statement/proof/notes)は不許可。
-  レンダラ側の契約(`realtime-web-preview/domain-model/src/block.ts`)も `kind` による
+  レンダラ側の契約(当時 `realtime-web-preview/domain-model/src/block.ts`。現在は廃止され、
+  システムの `structured-latex/domain-model/structured-text/` に一本化)も `kind` による
   discriminated union へ更新し、`heading-view.tsx` で描画。タイトルの `tex` は KaTeX で描画するよう修正
   (従来は LaTeX ソースがそのまま文字列表示されていた)。
 - **文書順の正準表現 = ブロック配列の並び**(content/*.mjs をファイル名昇順 → 各ファイル内は配列順)。
@@ -179,7 +180,7 @@ graph TD
 
 ## Phase 2 残り
 
-- **T5**(realtime-web-preview で全142ブロックの KaTeX 描画疎通・可換図式代替): KaTeX 側の機械検証
+- **T5**(リアルタイム Web プレビュー〔現 `structured-latex/live-preview/`〕で全142ブロックの KaTeX 描画疎通・可換図式代替): KaTeX 側の機械検証
   (全1647式 0エラー)と API 疎通は済。ブラウザ実表示の目視確認と可換図式(005/000 の fletcher)代替は未。
 - **T6**(sagemath連携 claim↔check の維持確認): 未。
 - **T7**(Typst 廃止): ⏸ T3/T5/T6 完了・描画疎通後に別途確認。

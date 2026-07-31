@@ -20,18 +20,24 @@ LaTeX にできて Web にできないこと（採番・改ページ）と、そ
 ## 0. 前提と一次情報
 
 正本のモデルは新規に発明しない。先行 2 実装の入力契約を一般化する（`structured-latex-renderer/README.md`
-「関連する既存実装」、`docs/milestones.md` M2）。一次情報は次のとおり。
+「関連する既存実装」、`docs/milestones.md` M2）。一次情報は次のとおり
+（**執筆当時の場所**を残す。リアルタイムプレビューはその後システム内へ吸収され、
+`realtime-web-preview/` は現存しない。現在地を各項に併記する）。
 
 - 正本のスキーマ（意味ノードの閉じた集合）:
   `exact-solution-of-2d-ising-model/structured-latex/schema.ts`、
   `integrable-lattice/structured-latex/schema.ts`、
-  `realtime-web-preview/domain-model/src/block.ts`。
+  当時の `realtime-web-preview/domain-model/src/block.ts`
+  → 廃止。現在は `structured-latex/domain-model/structured-text/` に一本化。
 - LaTeX / PDF レンダラの実装（体裁がどこで決まるか）:
-  `exact-solution-of-2d-ising-model/structured-latex/tools/build-latex.ts`。
+  `exact-solution-of-2d-ising-model/structured-latex/tools/build-latex.ts`（現在も同じ場所）。
 - Web レンダラの実装:
-  `realtime-web-preview/frontend/src/pages/document-view/ui/nodes.tsx`、`.../ref-resolver.ts`、
-  ノート配置 `realtime-web-preview/domain-model/src/block.ts` の `placeNotes`。
-- Web 要件: `realtime-web-preview/docs/requirements.md`。
+  当時の `realtime-web-preview/frontend/src/pages/document-view/ui/nodes.tsx`、`.../ref-resolver.ts`、
+  ノート配置 `realtime-web-preview/domain-model/src/block.ts` の `placeNotes`
+  → 描画は `structured-latex/live-preview/frontend/src/pages/document-view/ui/nodes.tsx` へ移設。
+  参照解決とノート配置は**ビューアから消え**、`structured-latex/domain-model/resolved/resolve.ts` に一本化。
+- Web 要件: 当時の `realtime-web-preview/docs/requirements.md`
+  → 現在は `structured-latex/live-preview/docs/requirements.md`。
 
 **媒体は 2 種類に分かれる**。この軸が能力差の大半を説明する。
 

@@ -86,8 +86,11 @@ export { DEFAULT_NUMBERING_POLICY, type CounterKey, type NumberingPolicy } from 
 
 export {
   resolve,
+  resolveTolerantly,
+  type ResolveDiagnostic,
   type ResolveError,
   type ResolveOptions,
+  type Resolution,
   type RevisionSnapshot,
   type SegmentKey,
   type SegmentSnapshot,
@@ -106,9 +109,12 @@ export type {
   ResolvedRef,
   ResolvedTheoremLike,
   RevisionNumber,
+  UnresolvedRef,
 } from './resolved/resolved-document.ts'
 
 // --- L2: 配信と受け入れの契約 ------------------------------------------------
+// 公開サイト（アップロードして版を配信する）と、ローカルのライブプレビュー（FS を読むだけ）は
+// 別の契約である。統合しない理由は api-contract/live-preview.ts の冒頭に表で書いてある。
 export type {
   DocumentManifest,
   GetFragmentError,
@@ -117,3 +123,16 @@ export type {
   UploadSegmentsError,
   UploadSegmentsInput,
 } from './api-contract/live-site.ts'
+
+export {
+  PREVIEW_RELOAD_EVENT,
+  createLivePreviewRuntimeSchema,
+  errorResponseSchema,
+  loadDocumentErrorSchema,
+  parseDocumentResponse,
+  validationIssueSchema,
+  type DocumentResponseBody,
+  type ErrorResponseBody,
+  type LoadDocumentError,
+  type LoadDocumentErrorCode,
+} from './api-contract/live-preview.ts'

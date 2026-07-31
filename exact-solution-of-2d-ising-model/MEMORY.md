@@ -1,10 +1,39 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+> **旧パスの読み替え（2026-08-01 追記）**: 以下の作業ログには、リポジトリ直下にあった独立アプリ
+> `realtime-web-preview/`（ビューア）への言及が多数ある。**当時の記録なので消していない**が、
+> 現在そのディレクトリは存在しない。リアルタイムプレビューは structured-latex システムの
+> モジュール `structured-latex/live-preview/` へ吸収された。ビューア固有の言語定義・解決
+> （`realtime-web-preview/domain-model/src/`）は廃止され、システムの
+> `structured-latex/domain-model/`（入力言語・`resolveTolerantly`・配信契約）に一本化されている。
+> 起動手順はリポジトリ直下 CLAUDE.md と `structured-latex/live-preview/README.md` を見る。
+
+## 完了（2026-08-01）: **リアルタイム Web プレビューをシステムへ吸収し、旧実装を撤去**
+
+このプロジェクト単体の作業ではないが、本プロジェクトの構造化テキストが**既定の入力ソース**なので記録する。
+
+- リポジトリ直下の独立アプリ `realtime-web-preview/` を、structured-latex システムのモジュール
+  `structured-latex/live-preview/`（`backend/` + `frontend/` の 2 パッケージ）へ移設し、
+  旧ディレクトリを submodule ごと削除した。
+- ビューアが自前で持っていた入力言語の定義（「言語の 3 度目の定義」）と解決（ラベル解決・ノート配置）を
+  廃止し、システムの `domain-model/` へ一本化した。解決の実装は
+  `structured-latex/domain-model/resolved/resolve.ts` 1 つだけになり、出版物向けの厳格な `resolve` と
+  プレビュー向けの寛容な `resolveTolerantly` が同じ実装を通る。
+- 配信契約は `structured-latex/domain-model/api-contract/live-preview.ts` へ。
+  共有コンパイラ設定は `structured-latex/tsconfig.base.json`（本プロジェクトの
+  `structured-latex/tsconfig.json` もこれを継承する）。
+- **本プロジェクトへの影響**: 上記「入力言語の定義をシステムへ集約」の末尾にあった未解決
+  （プレビューが `sourcePath` / `sourceOrdinal` 必須のためこのプロジェクトを読めない）は**解消**。
+  移行後の content を 300 ブロック・38 ノートで読めることを疎通で確認済み。
+- 起動: リポジトリ直下 CLAUDE.md の手順、または `structured-latex/live-preview/README.md`。
+  入力ソース既定は `exact-solution-of-2d-ising-model/structured-latex/content`（と同 `notes`）。
+
 ## 完了（2026-07-31）: **入力言語の定義をシステムへ集約（`schema.ts` を薄い入口にした）**
 
 同じ入力言語（構造化テキストの語彙）が 3 箇所で定義されている状態
 （このプロジェクトの `structured-latex/schema.ts` / `integrable-lattice/structured-latex/schema.ts` /
-`realtime-web-preview/domain-model/src/block.ts`）のうち、**このプロジェクト分を解消した。**
+`realtime-web-preview/domain-model/src/block.ts`。3 つ目は当時のパスで、現在は廃止。
+プレビュー自体は `structured-latex/live-preview/` へ移った）のうち、**このプロジェクト分を解消した。**
 言語の正本はリポジトリ直下の `structured-latex/`（システム）に 1 つだけ置き、こちらは使う側になる。
 
 **やったこと**
@@ -40,10 +69,14 @@
 `defineBlocks` の引数型をプロジェクト側で書き直すことになり、移行の目的に反するので手放した。
 **型へ戻すならシステム側に置くのが正しい**（詳細は `docs/type-coverage.md` §2.4）。
 
-**未解決（このプロジェクトの範囲外）**: `realtime-web-preview` の Zod スキーマは全ブロックに
-`sourcePath` / `sourceOrdinal` を**必須**で要求している。移行後の content はこれを持たないので、
-**リアルタイムプレビューは現状このプロジェクトを読めない。** これは「言語の 3 度目の定義」そのもので、
-システムの入力言語へ寄せる作業が別途要る。
+**当時の未解決 → 解消済み（2026-08-01）**: 記載当時、`realtime-web-preview`（当時のトップレベルアプリ）の
+Zod スキーマは全ブロックに `sourcePath` / `sourceOrdinal` を**必須**で要求しており、移行後の content を
+読めなかった。その後、プレビューをシステムのモジュール `structured-latex/live-preview/` へ吸収し、
+ビューア固有の言語定義（「言語の 3 度目の定義」）を廃止したことで**解消した**。
+現在のプレビューはシステムの入力言語をそのまま使い、`origin` は任意である
+（`structured-latex/domain-model/structured-text/block.ts`）。移行後の本プロジェクトの content を
+300 ブロック・38 ノートで読めることを疎通で確認済み
+（`structured-latex/live-preview/docs/requirements.md` §11）。
 
 ## 完了（2026-07-31）: **「抽象版」を「必要十分版」へ改名し、要件を README に厳密化。違反 2 件を修正**
 
@@ -2959,11 +2992,16 @@ Lean の `(j : ℕ) = 0` の項である。`hat` の添字 `μ` は `ℤ` のま
 
 ## 次回やること（優先度順）
 
-### 0. 構造化テキストのリアルタイム Web プレビュー（未着手・別ツール）
+### 0. 構造化テキストのリアルタイム Web プレビュー（記載当時は未着手・別ツール）
 
 汎用ツールとしてリポジトリ直下 `realtime-web-preview/` に切り出した。要件は
 `realtime-web-preview/docs/requirements.md`。本プロジェクトの `structured-latex/` は
 その入力ソースのリファレンス実装という位置づけ。ビューア等は未実装、技術スタック未決定。
+
+> **その後（2026-08-01）**: 実装され稼働している。さらに structured-latex システムの
+> モジュール `structured-latex/live-preview/` へ吸収され、`realtime-web-preview/` は削除された。
+> 要件の現在地は `structured-latex/live-preview/docs/requirements.md`。
+> 本プロジェクトの `structured-latex/content` が既定の入力ソースである点は変わっていない。
 
 ### 1. 038 `T_V = T_{V'}` の proof（完了 2026-06-21）
 
