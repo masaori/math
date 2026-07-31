@@ -1,0 +1,164 @@
+# cycle 21 / T3 Pure: 仮定 (B*) を落とす — 検証その 3（レベルごとの総和と明示定数）。
+#
+# 対応する証明本体: outputs/reports/cycle21_T3_drop_assumption_B_star.md
+#
+# 検証する内容:
+#   Step J  定理 Q1  |Theta_M - b M phi(ell^M)| <= C ell^M を **証明で出した明示定数 C** で確かめる
+#                     C = b(3 + |Bad_M|) + theta_G^max (ell+1)/ell + |Bad_M| log_ell C_0
+#   Step K  ----     Theta_M の連鎖から作った ord_ell(kappa_n) を Matrix-Tree の塔の値と照合
+#                     （実装の健全性。cycle 20 Step F と同じ役割）
+#   Step L  ----     (B*) が破れる塔で、cycle 20 が「数値支持どまり」としていた b の一致を、
+#                     当てはめではなく **定理 Q1 の明示誤差項** で押さえられることを示す
+#   Step M  ----     母集団の外（多重度が大きい塔）で b >= 4 の例を作り、同じ確認をする
+#
+# 壁時計の設計上限: 20 分。超えたら打ち切り、件数と中身を必ず出す。
+
+import sys, time, itertools
+
+load('_defs21.sage')
+
+T_START = time.time()
+def el21():
+    return '[%7.1fs]' % (time.time() - T_START)
+
+FAIL = 0
+
+def fail(msg):
+    global FAIL
+    FAIL += 1
+    print('  FAIL: %s' % msg)
+    sys.stdout.flush()
+
+def hdr(s):
+    print('')
+    print('=' * 78)
+    print(s, el21())
+    print('=' * 78)
+    sys.stdout.flush()
+
+BUDGET = 900.0
+MMAX = {2: 7, 3: 5, 5: 3}
+
+# 母集団の外に置く、二項式因子の多重度が大きい塔（b >= 3 を狙う）
+EXTRA = [
+    ('EXT bouquet (1,0)x2,(0,1)x2', 1,
+     [(0, 0, (1, 0))] * 2 + [(0, 0, (0, 1))] * 2),
+    ('EXT bouquet (1,1)x2,(1,-1)x2', 1,
+     [(0, 0, (1, 1))] * 2 + [(0, 0, (1, -1))] * 2),
+    ('EXT bouquet (1,0),(0,1),(1,1),(1,-1),(2,1)', 1,
+     [(0, 0, c) for c in [(1, 0), (0, 1), (1, 1), (1, -1), (2, 1)]]),
+]
+
+SEL = list(ADV) + EXTRA
+
+print('cycle 21 / T3 Pure: 仮定 (B*) を落とす — 検証その 3（総和と明示定数）', el21())
+print('掃引する塔: %d（ADV %d ＋ 母集団外 %d）' % (len(SEL), len(ADV), len(EXTRA)))
+sys.stdout.flush()
+
+
+# ==========================================================================
+hdr('Step J/L/M: |Theta_M - b M phi(ell^M)| <= C ell^M（C は証明の明示定数）')
+
+print('%-40s %3s %2s %3s %8s %10s %8s %8s'
+      % ('tower', 'ell', 'M', 'b', 'Theta_M', 'err', 'err/l^M', 'C(proof)'))
+sys.stdout.flush()
+
+nJ = 0
+rows = []
+truncated = []
+for (name, m, edges) in SEL:
+    for ell in [2, 3, 5]:
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        try:
+            dec = decompose(Ev, ell)
+            (tgmax, Lused, stable) = theta_G_max(dec['G'], ell, Lmax=3)
+        except RuntimeError as e:
+            fail('%s ell=%d: %s' % (name, ell, e))
+            continue
+        b = dec['b']
+        C0 = dec['C0']
+        parts = dec['parts']
+        logC0 = RR(log(RR(C0)) / log(RR(ell)))
+        for M in range(1, MMAX[ell] + 1):
+            if time.time() - T_START > BUDGET:
+                truncated.append((name, ell, M))
+                continue
+            phiM = euler_phi(ell**M)
+            tot = ZZ(0)
+            nbad = 0
+            ok = True
+            for (a, bb) in p1_reps(ell, M):
+                v = hat_theta_exact(Ev, ell, M, a, bb)
+                if v is None:
+                    ok = False
+                    break
+                tot += v
+                beta = beta_of_point(parts, ell, M, a, bb)
+                if (beta is Infinity) or (beta + tgmax >= phiM):
+                    nbad += 1
+            if not ok:
+                truncated.append((name, ell, M, 'H-violation'))
+                continue
+            err = abs(RR(tot) - RR(b) * RR(M) * RR(phiM))
+            Cproof = (RR(b) * (3 + nbad)
+                      + RR(tgmax) * RR(ell + 1) / RR(ell)
+                      + RR(nbad) * logC0)
+            nJ += 1
+            if err > Cproof * RR(ell**M) + 1e-9:
+                fail('explicit bound broken: %s ell=%d M=%d err=%s C=%s'
+                     % (name, ell, M, err, Cproof))
+            rows.append((name, ell, M, b, tot, err / RR(ell**M), Cproof))
+            print('%-40s %3d %2d %3s %8s %10.1f %8.3f %8.2f'
+                  % (name[:40], ell, M, b, tot, err, err / RR(ell**M), Cproof))
+            sys.stdout.flush()
+print('  照合した (塔, ell, M) の組: %d' % nJ)
+
+
+# ==========================================================================
+hdr('Step K: Theta_M の連鎖から作った ord_ell(kappa_n) を Matrix-Tree の塔の値と照合')
+
+nK = 0
+nK_trunc = 0
+for (name, m, edges) in SEL:
+    for ell in [2, 3]:
+        if time.time() - T_START > BUDGET + 400.0:
+            nK_trunc += 1
+            continue
+        pr = prepared(m, edges, ell)
+        if pr is None:
+            continue
+        (inv, Ev) = pr
+        nmax = 3 if ell == 2 else 2
+        ords = tower_ords(m, edges, ell, nmax, tag=name, budget=120.0)
+        if ords is None:
+            nK_trunc += 1
+            continue
+        pref = usable_prefix(ords)
+        Sig = ZZ(0)
+        okall = True
+        for n in range(1, len(pref)):
+            Th = Theta_level(Ev, ell, n)
+            if Th is None:
+                okall = False
+                break
+            Sig += Th
+            want = (inv['mu'] * (ell**(2 * n) - 1) - 2 * n + ZZ(inv['vkX']) + Sig)
+            nK += 1
+            if ZZ(pref[n]) != ZZ(want):
+                fail('tower mismatch: %s ell=%d n=%d got %s want %s'
+                     % (name, ell, n, pref[n], want))
+        if not okall:
+            nK_trunc += 1
+print('  照合した段: %d、取れなかった塔: %d' % (nK, nK_trunc))
+
+
+hdr('総括')
+print('FAIL: %d 件' % FAIL)
+if truncated:
+    print('打ち切り: %d 件 %s' % (len(truncated), truncated[:8]))
+else:
+    print('打ち切り: 0 件（Step K で取れなかった塔 %d を除く）' % nK_trunc)
+print('総経過 %s' % el21())
