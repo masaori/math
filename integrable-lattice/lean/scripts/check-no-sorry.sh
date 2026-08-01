@@ -325,6 +325,36 @@ targets=(
   IntegrableLattice.CoeffsDE.D5_d_shift
   IntegrableLattice.CoeffsDE.D6_truncation
   IntegrableLattice.CoeffsDE.D6_boundary_sharp
+
+  # cycle 24 step 5: cycle 24 step 1 の訂正の検算（Cycle24Corrections.lean）
+  IntegrableLattice.Cycle24.D2_level_iff
+  IntegrableLattice.Cycle24.D2_level_zero_iff
+  IntegrableLattice.Cycle24.D2_all_iff_no_transient
+  IntegrableLattice.Cycle24.D2_no_transient_imp_Tdef_zero
+  IntegrableLattice.Cycle24.D3_conv_p_eq_one
+  IntegrableLattice.Cycle24.D3_conv_p_ne_one
+  IntegrableLattice.Cycle24.D5_conv_t_eq_q
+  IntegrableLattice.Cycle24.D3_conv_c_p_eq_one
+  IntegrableLattice.Cycle24.D3_old_conv_c_broken
+  IntegrableLattice.Cycle24.G4_cond2_corrected_at_61
+  IntegrableLattice.Cycle24.G4_cond2_empty_layer_ok
+  IntegrableLattice.Cycle24.G4_note42_d_side_totient
+  IntegrableLattice.Cycle24.G4_note42_c_side
+  IntegrableLattice.Cycle24.Q5_c1_strict_of_logb
+  IntegrableLattice.Cycle24.Q5_c1_exists_nat
+  IntegrableLattice.Cycle24.Q5_c1_nat_least
+  IntegrableLattice.Cycle24.Q1_C_corrected
+  IntegrableLattice.Cycle24.G4_cond_all_at_61
+  IntegrableLattice.Cycle24.Q5_logb_junk_at_b_zero
+  IntegrableLattice.Cycle24.Q5_c1_zero_b
+  IntegrableLattice.Cycle24.G2_cond32_sum_form_top
+  IntegrableLattice.Cycle24.G2_cond32_sum_form_finite
+  # cycle 24 step 5: まだ通していなかった定理群
+  IntegrableLattice.Cycle24.corollary_G6
+  IntegrableLattice.Cycle24.corollary_G6_c_as_Theta
+  IntegrableLattice.Cycle24.Q7_char2_factorization
+  IntegrableLattice.Cycle24.Q7_char2_binomial_form
+  IntegrableLattice.Cycle24.Q7_b_eq_two
 )
 
 {

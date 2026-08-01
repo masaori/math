@@ -1,0 +1,160 @@
+=== 日付 ===
+2026-08-01T04:41:49Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== mathlib tag / toolchain ===
+v4.32.1
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+--- 系Q7 2変数Laurent環（r=2 の既約性に要る）
+  (1) 内容 grep  "LaurentPolynomial"        files=7
+  (2) 内容 grep  "laurent" (-i)  files=19
+  (3) ファイル名 "laurent" (-i)  files=3
+      内容ヒット（先頭 10 件）:
+        Mathlib/Order/Rel/GaloisConnection.lean
+        Mathlib/Analysis/Complex/ValueDistribution/Cartan.lean
+        Mathlib/Analysis/Meromorphic/FactorizedRational.lean
+        Mathlib/FieldTheory/Laurent.lean
+        Mathlib/FieldTheory/RatFunc/Defs.lean
+        Mathlib/CategoryTheory/Sites/Descent/IsStack.lean
+        Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean
+        Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean
+        Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean
+        Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean
+      ファイル名ヒット:
+        Mathlib/FieldTheory/Laurent.lean
+        Mathlib/RingTheory/LaurentSeries.lean
+        Mathlib/Algebra/Polynomial/Laurent.lean
+
+--- 系Q7 多変数Laurent環
+  (1) 内容 grep  "MvLaurent"        files=0
+  (2) 内容 grep  "mv laurent" (-i)  files=0
+  (3) ファイル名 "mv laurent" (-i)  files=0
+
+--- 系Q7 一意分解環
+  (1) 内容 grep  "UniqueFactorizationMonoid"        files=66
+  (2) 内容 grep  "unique factorization" (-i)  files=26
+  (3) ファイル名 "unique factorization" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean
+        Mathlib/CategoryTheory/Limits/IsLimit.lean
+        Mathlib/GroupTheory/MonoidLocalization/UniqueFactorization.lean
+        Mathlib/RingTheory/Radical/Basic.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Finite.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/GCDMonoid.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Multiplicative.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Nat.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Multiplicity.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Moebius.lean
+
+--- 補題Q5 実対数 logb（本 step で使用）
+  (1) 内容 grep  "Real.logb"        files=1
+  (2) 内容 grep  "logb" (-i)  files=12
+  (3) ファイル名 "logb" (-i)  files=1
+      内容ヒット（先頭 10 件）:
+        Mathlib/Analysis/SpecialFunctions/Gamma/Beta.lean
+        Mathlib/Analysis/SpecialFunctions/MulExpNegMulSqIntegral.lean
+        Mathlib/Analysis/SpecialFunctions/Complex/Arctan.lean
+        Mathlib/Analysis/SpecialFunctions/Log/Summable.lean
+        Mathlib/Analysis/SpecialFunctions/Log/Base.lean
+        Mathlib/Probability/Distributions/Poisson/PoissonLimitThm.lean
+        Mathlib/NumberTheory/LSeries/Nonvanishing.lean
+        Mathlib/NumberTheory/Chebyshev.lean
+        Mathlib/NumberTheory/Ostrowski.lean
+        Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean
+      ファイル名ヒット:
+        Mathlib/Analysis/SpecialFunctions/Complex/LogBounds.lean
+
+--- 補題Q5 rpow と logb の逆関係（本 step で使用）
+  (1) 内容 grep  "rpow_logb"        files=3
+  (2) 内容 grep  "rpow_logb" (-i)  files=3
+  (3) ファイル名 "rpow_logb" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/Analysis/SpecialFunctions/Log/Base.lean
+        Mathlib/NumberTheory/Ostrowski.lean
+        Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean
+
+--- 補題Q5 決定可能述語の最小元 Nat.find（本 step で使用）
+  (1) 内容 grep  "Nat.find"        files=94
+  (2) 内容 grep  "nat.find" (-i)  files=94
+  (3) ファイル名 "nat.find" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean
+        Mathlib/Order/WellFoundedSet.lean
+        Mathlib/Order/Disjointed.lean
+        Mathlib/Order/SuccPred/LinearLocallyFinite.lean
+        Mathlib/Order/SuccPred/Tree.lean
+        Mathlib/Order/Nat.lean
+        Mathlib/Order/LiminfLimsup.lean
+        Mathlib/Order/Lattice/Nat.lean
+        Mathlib/Order/OrderIsoNat.lean
+        Mathlib/Order/Filter/AtTopBot/Finite.lean
+
+--- 定理D3/D5 拡張自然数 ENat（本 step で使用）
+  (1) 内容 grep  "ENat"        files=144
+  (2) 内容 grep  "enat" (-i)  files=225
+  (3) ファイル名 "enat" (-i)  files=6
+      内容ヒット（先頭 10 件）:
+        Mathlib/Tactic/ClickSuggestions/Unfold.lean
+        Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean
+        Mathlib/Tactic/ENatToNat.lean
+        Mathlib/Tactic/Linter/DeprecatedSyntaxLinter.lean
+        Mathlib/Tactic/NormNum/NatFib.lean
+        Mathlib/Tactic/NormNum/Pow.lean
+        Mathlib/Tactic/NormNum/GCD.lean
+        Mathlib/Tactic/NormNum/Core.lean
+        Mathlib/Tactic/NormNum/NatSqrt.lean
+        Mathlib/Tactic/NormNum/LegendreSymbol.lean
+      ファイル名ヒット:
+        Mathlib/Tactic/ENatToNat.lean
+        Mathlib/Topology/Instances/ENat.lean
+        Mathlib/Topology/Instances/ENNReal/ENatENNReal.lean
+        Mathlib/Combinatorics/Matroid/Rank/ENat.lean
+        Mathlib/SetTheory/Cardinal/ENat.lean
+        Mathlib/Data/Real/ENatENNReal.lean
+        Mathlib/Data/ENat/Pow.lean
+        Mathlib/Data/ENat/Basic.lean
+        Mathlib/Data/ENat/Defs.lean
+        Mathlib/Data/ENat/BigOperators.lean
+
+--- 定理D3/D5 p進付値
+  (1) 内容 grep  "padicValNat"        files=14
+  (2) 内容 grep  "padicval" (-i)  files=17
+  (3) ファイル名 "padicval" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/NumberTheory/Harmonic/Int.lean
+        Mathlib/NumberTheory/Padics/PadicNorm.lean
+        Mathlib/NumberTheory/Padics/MahlerBasis.lean
+        Mathlib/NumberTheory/Padics/WithVal.lean
+        Mathlib/NumberTheory/Padics/PadicNumbers.lean
+        Mathlib/NumberTheory/Padics/PadicVal/Basic.lean
+        Mathlib/NumberTheory/Padics/PadicVal/Defs.lean
+        Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean
+        Mathlib/NumberTheory/SumTwoSquares.lean
+        Mathlib/NumberTheory/Bernoulli.lean
+
+--- 系G6 totient（対照。使用中）
+  (1) 内容 grep  "Nat.totient"        files=17
+  (2) 内容 grep  "totient" (-i)  files=27
+  (3) ファイル名 "totient" (-i)  files=2
+      内容ヒット（先頭 10 件）:
+        Mathlib/Topology/Instances/AddCircle/Defs.lean
+        Mathlib/NumberTheory/LSeries/PrimesInAP.lean
+        Mathlib/NumberTheory/ArithmeticFunction/Carmichael.lean
+        Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean
+        Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+        Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+        Mathlib/NumberTheory/PrimeCounting.lean
+        Mathlib/NumberTheory/PowModTotient.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/PID.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean
+      ファイル名ヒット:
+        Mathlib/NumberTheory/PowModTotient.lean
+        Mathlib/Data/Nat/Totient.lean
+
+--- （再確認）Newton多面体
+  (1) 内容 grep  "NewtonPolytope"        files=0
+  (2) 内容 grep  "newton polytope" (-i)  files=0
+  (3) ファイル名 "newton polytope" (-i)  files=0
