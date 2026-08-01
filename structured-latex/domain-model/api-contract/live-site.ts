@@ -9,6 +9,11 @@
 
 import type { RevisionNumber } from '../resolved/resolved-document.ts'
 import type { SegmentKey } from '../resolved/resolve.ts'
+import type { LocalizationValidationError } from '../resolved/localized-revision.ts'
+import type { MissingTranslationError } from '../resolved/localized-revision.ts'
+import { err, ok, type Result } from '../result.ts'
+import { localeRuntimeSchema } from '../structured-text/locale.ts'
+import type { Locale } from '../structured-text/locale.ts'
 import type { ValidationIssue } from '../structured-text/validate.ts'
 import type { Block, Note } from '../structured-text/block.ts'
 
@@ -20,6 +25,20 @@ export type DocumentManifest = {
   publishedAt: string
   /** 文書順に並ぶ。`contentHash` が変わったセグメントだけ取り直せばよい。 */
   segments: readonly { key: SegmentKey; contentHash: string }[]
+}
+
+/**
+ * locale を明示して取得する公開文書の manifest。
+ *
+ * 既存 `DocumentManifest` は単一ロケール配信との互換のため残す。複数ロケールを配信する
+ * 側はこの型を使い、閲覧者が暗黙の原文フォールバックを行わないよう選択 locale と翻訳元を返す。
+ */
+export type LocalizedDocumentManifest = DocumentManifest & {
+  sourceLocale: Locale
+  locale: Locale
+  translatedFrom: Locale | null
+  translatedFromRevision: RevisionNumber | null
+  availableLocales: readonly Locale[]
 }
 
 /** SSE で push するイベント。**差分は含めない**（サーバが持つ状態を増やさないため）。 */
@@ -56,6 +75,20 @@ export type UploadSegmentsInput = {
   deletes: readonly SegmentKey[]
 }
 
+/**
+ * ローカライズ済みセグメントの受け入れ契約。
+ *
+ * 既存の単一ロケール upload を壊さない別入口にする。受け取り側は同じ document / revision
+ * の原文とこの locale を `validateLocalizedRevisionSnapshot` / `resolveLocalized` へ渡し、
+ * ロケール値・翻訳元・構造一致を確定してから版を公開する。
+ */
+export type UploadLocalizedSegmentsInput = UploadSegmentsInput & {
+  sourceLocale: Locale
+  locale: Locale
+  translatedFrom: Locale | null
+  translatedFromRevision: RevisionNumber | null
+}
+
 /** operation ごとに code を網羅する（docs/error-handling-strategy.md §3）。 */
 export type UploadSegmentsError =
   | { code: 'document_not_found' }
@@ -72,11 +105,56 @@ export type UploadSegmentsError =
   | { code: 'unknown_segment_key'; keys: readonly SegmentKey[] }
   | { code: 'internal_error' }
 
+/**
+ * ローカライズ入口固有の受け入れ失敗。通常の upload error に加えて返し得る。
+ *
+ * `LocalizationValidationError` をそのまま含めることで、外部 JSON の locale 形式エラーと、
+ * source locale 不在・重複・翻訳元の循環／不明・文書／版同一性不整合・構造ドリフトを
+ * 受け入れ契約から漏らさない。
+ */
+export type UploadLocalizedSegmentsError =
+  | UploadSegmentsError
+  | LocalizationValidationError
+
 export type GetManifestError =
   | { code: 'document_not_found' }
   | { code: 'forbidden' }
   | { code: 'not_published' }
   | { code: 'internal_error' }
+
+/** 公開サイトで locale を選んで manifest を取得する要求。 */
+export type GetLocalizedManifestInput = { documentId: string; locale: Locale }
+
+/** locale 指定 manifest 要求の HTTP 境界検査。throw せず Result を返す。 */
+export const parseGetLocalizedManifestInput = (
+  value: unknown,
+): Result<GetLocalizedManifestInput, LocalizationValidationError> => {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+    return err({
+      code: 'localization_validation_error',
+      issues: [{ path: '', message: '要求はオブジェクトでなければならない' }],
+    })
+  }
+  const input = value as { documentId?: unknown; locale?: unknown }
+  const issues: ValidationIssue[] = []
+  if (typeof input.documentId !== 'string' || input.documentId.length === 0) {
+    issues.push({ path: 'documentId', message: 'documentId は空でない文字列でなければならない' })
+  }
+  const locale = localeRuntimeSchema.safeParse(input.locale)
+  if (!locale.success) {
+    issues.push(...locale.error.issues.map((issue) => ({ path: 'locale', message: issue.message })))
+  }
+  if (issues.length > 0 || !locale.success) {
+    return err({ code: 'localization_validation_error', issues })
+  }
+  return ok({ documentId: input.documentId as string, locale: locale.data })
+}
+
+/** locale 指定 manifest の失敗。暗黙の原文フォールバックは含めない。 */
+export type GetLocalizedManifestError =
+  | GetManifestError
+  | MissingTranslationError
+  | LocalizationValidationError
 
 export type GetFragmentError =
   | { code: 'document_not_found' }

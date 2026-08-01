@@ -76,6 +76,79 @@ pnpm install   # 初回のみ（Node 22.18 以降が必要）
 npm run check  # ER 定義の鮮度 → 生成物の鮮度 → 型検査 → 依存方向 → 単体テスト → 負テスト
 ```
 
+## ローカライズ
+
+ローカライズは出力器の都合ではなく、文書集約の第一級概念である。**1 本の文書は言語中立な
+構造を 1 つだけ持ち、原文ロケールをその構造の正本とする。** 翻訳は別文書・別ラベル集合ではなく、
+同じセグメント・ブロック・参照関係に対するロケール別の表層である。
+
+- 共有するもの: 文書 ID、セグメント順、ブロック／ノート ID、ラベル、ブロック種別、採番入力、
+  数式ノードの LaTeX、参照先、引用キー、画像資産キー、プロジェクト固有の意味メタデータ。
+- ロケールごとに変えられるもの: 文書・ブロック・ノートの題名、地の文、TODO の文言、参照表示、
+  引用箇所、画像の代替文。
+- 原文ロケールと利用可能ロケール、各翻訳の翻訳元は明示する。利用可能とは構造検査まで通って
+  解決できるロケールを指し、予定中・欠落中の翻訳は含めない。
+
+`resolveLocalized` は選択ロケールを解決済み文書へ運ぶとともに、原文と翻訳の構造を照合する。
+ロケールタグ不正・非正準表記、原文不在、翻訳元の循環・不整合、要求ロケールの欠落、セグメント／ブロック／
+ラベル／共有ノードの構造ドリフトは Result のエラーとして検出する。翻訳本文がまだ無いことを
+黙って原文へフォールバックさせない。
+
+既存の `content/` と `notes/` を持つプロジェクトは、無変更で原文ロケール `ja` だけを持つ
+文書として扱える。したがって Ising と可解格子の日本語本文を移し替える必要はない。英語版を
+追加するときだけ、同じラベル型を使うロケール別のスナップショットを `LocalizedRevisionSnapshot`
+へ束ねる。翻訳本文の作成はこのシステム変更の範囲外である。
+
+```typescript
+const localized = {
+  documentId: 'example',
+  sourceLocale: 'ja',
+  localizations: [
+    {
+      locale: 'ja',
+      translatedFrom: null,
+      translatedFromRevision: null,
+      revision: { documentId: 'example', revision: 1, segments: japaneseSegments },
+    },
+    {
+      locale: 'en',
+      translatedFrom: 'ja',
+      translatedFromRevision: 1,
+      revision: { documentId: 'example', revision: 1, segments: englishSegments },
+    },
+  ],
+} as const
+
+const result = resolveLocalized(localized, 'en', {
+  numbering: DEFAULT_NUMBERING_POLICY,
+  audience: 'publication',
+})
+```
+
+翻訳側では文字列だけを変え、数式・参照先・画像資産・ブロック対応を変えない。入力が TypeScript
+を経由しない場合にも、同じ規則を実行時スキーマとローカライゼーション検査が確認する。
+
+生成器にも翻訳ソースを明示できる。設定が無い既存プロジェクトは暗黙に原文 `ja` だけとなる。
+
+```typescript
+// locales.config.ts
+export default {
+  sourceLocale: 'ja',
+  translations: [
+    {
+      locale: 'en',
+      translatedFrom: 'ja',
+      contentDir: 'locales/en/content',
+      notesDir: 'locales/en/notes',
+    },
+  ],
+}
+```
+
+`npm run gen` / `--check` は原文のラベル型だけを生成し、設定された全翻訳を原文構造と
+照合する。翻訳側も同じ生成済み `Label` を使うため、翻訳が未登録ラベルを宣言したり、
+存在しないラベルを参照したりすれば型検査で止まる。
+
 ## 開発の思想
 
 `docs/` は [software-development-docs-template](https://github.com/masaori/software-development-docs-template)
@@ -93,6 +166,7 @@ npm run check  # ER 定義の鮮度 → 生成物の鮮度 → 型検査 → 依
 | --- | --- |
 | [docs/domain-model.md](docs/domain-model.md) | ドメインモデルの正本。概念・集約・不変条件・確定した設計判断 |
 | [docs/type-coverage.md](docs/type-coverage.md) | 型で落とすもの／実行時に残すものの切り分けと根拠 |
+| [docs/domain-model.md](docs/domain-model.md#532-ローカライズ) | 原文・翻訳・構造 SSOT・不変条件 |
 | [docs/milestones.md](docs/milestones.md) | マイルストーン |
 | [docs/design-notes/](docs/design-notes/) | 個別の設計判断の詳細な根拠 |
 | [live-preview/README.md](live-preview/README.md) | リアルタイムプレビューのセットアップ・起動・入力ソース差し替え |

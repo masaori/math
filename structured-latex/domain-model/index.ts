@@ -33,6 +33,13 @@ export {
 } from './structured-text/block.ts'
 
 export {
+  BCP_47_LOCALE_PATTERN,
+  canonicalLocaleOf,
+  localeRuntimeSchema,
+  type Locale,
+} from './structured-text/locale.ts'
+
+export {
   NODE_TYPES,
   cite,
   displayMath,
@@ -96,6 +103,26 @@ export {
   type SegmentSnapshot,
 } from './resolved/resolve.ts'
 
+export {
+  availableLocalesOf,
+  asSingleLocaleRevision,
+  validateLocalizedRevision,
+  validateLocalizedRevisionSnapshot,
+  type LocalizedRevision,
+  type LocalizedRevisionSnapshot,
+  type LocalizationIssue,
+  type LocalizationValidationError,
+  type MissingTranslationError,
+} from './resolved/localized-revision.ts'
+
+export {
+  resolveLocalized,
+  resolveLocalizedTolerantly,
+  type LocalizedResolution,
+  type LocalizedResolveError,
+  type LocalizedResolvedDocument,
+} from './resolved/resolve-localized.ts'
+
 export type {
   Audience,
   BlockNumber,
@@ -118,21 +145,38 @@ export type {
 export type {
   DocumentManifest,
   GetFragmentError,
+  GetLocalizedManifestError,
+  GetLocalizedManifestInput,
   GetManifestError,
+  LocalizedDocumentManifest,
   LiveEvent,
+  UploadLocalizedSegmentsError,
+  UploadLocalizedSegmentsInput,
   UploadSegmentsError,
   UploadSegmentsInput,
+} from './api-contract/live-site.ts'
+
+export {
+  parseGetLocalizedManifestInput,
 } from './api-contract/live-site.ts'
 
 export {
   PREVIEW_RELOAD_EVENT,
   createLivePreviewRuntimeSchema,
   errorResponseSchema,
+  localizedErrorResponseSchema,
+  localizedLoadDocumentErrorSchema,
   loadDocumentErrorSchema,
   parseDocumentResponse,
+  parseLoadLocalizedDocumentInput,
+  parseLocalizedDocumentResponse,
   validationIssueSchema,
   type DocumentResponseBody,
   type ErrorResponseBody,
+  type LoadLocalizedDocumentError,
+  type LoadLocalizedDocumentInput,
   type LoadDocumentError,
   type LoadDocumentErrorCode,
+  type LocalizedDocumentResponseBody,
+  type LocalizedErrorResponseBody,
 } from './api-contract/live-preview.ts'

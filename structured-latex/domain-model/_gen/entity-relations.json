@@ -95,7 +95,7 @@
         "isUnique": false
       },
       {
-        "entityName": "Revision",
+        "entityName": "DocumentLocale",
         "propertyName": "documentId",
         "isUnique": false
       },
@@ -123,7 +123,7 @@
     "referredBys": []
   },
   {
-    "entityName": "Revision",
+    "entityName": "DocumentLocale",
     "referTos": [
       {
         "entityName": "Document",
@@ -133,8 +133,35 @@
     ],
     "referredBys": [
       {
+        "entityName": "Revision",
+        "propertyName": "documentLocaleId",
+        "isUnique": false
+      }
+    ]
+  },
+  {
+    "entityName": "Revision",
+    "referTos": [
+      {
+        "entityName": "DocumentLocale",
+        "propertyName": "documentLocaleId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": [
+      {
         "entityName": "Segment",
         "propertyName": "revisionId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Translation",
+        "propertyName": "sourceRevisionId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Translation",
+        "propertyName": "translatedRevisionId",
         "isUnique": false
       },
       {
@@ -150,6 +177,22 @@
       {
         "entityName": "Revision",
         "propertyName": "revisionId",
+        "isUnique": false
+      }
+    ],
+    "referredBys": []
+  },
+  {
+    "entityName": "Translation",
+    "referTos": [
+      {
+        "entityName": "Revision",
+        "propertyName": "sourceRevisionId",
+        "isUnique": false
+      },
+      {
+        "entityName": "Revision",
+        "propertyName": "translatedRevisionId",
         "isUnique": false
       }
     ],

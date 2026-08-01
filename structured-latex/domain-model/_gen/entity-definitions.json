@@ -111,7 +111,7 @@
       {
         "isReference": false,
         "propertyType": "string",
-        "name": "title",
+        "name": "sourceLocale",
         "isUnique": false,
         "isNullable": false,
         "isArray": false,
@@ -128,18 +128,9 @@
           "public",
           "invited"
         ]
-      },
-      {
-        "isReference": false,
-        "propertyType": "number",
-        "name": "publishedRevisionNumber",
-        "isUnique": false,
-        "isNullable": true,
-        "isArray": false,
-        "acceptableValues": null
       }
     ],
-    "description": "論文・書籍 1 本。正本の単位であり、不変条件 I1-I3 の効力範囲"
+    "description": "論文・書籍 1 本。原文ロケールと翻訳対応の単位であり、不変条件 I1-I3 の効力範囲"
   },
   {
     "name": "DocumentInvitation",
@@ -167,7 +158,7 @@
     "description": "限定公開の文書へ招待された閲覧者"
   },
   {
-    "name": "Revision",
+    "name": "DocumentLocale",
     "properties": [
       {
         "isReference": false,
@@ -178,6 +169,60 @@
         "isReference": true,
         "name": "documentId",
         "targetEntityDefinitionName": "Document",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "locale",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "translatedFromLocale",
+        "isUnique": false,
+        "isNullable": true,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "string",
+        "name": "title",
+        "isUnique": false,
+        "isNullable": false,
+        "isArray": false,
+        "acceptableValues": null
+      },
+      {
+        "isReference": false,
+        "propertyType": "number",
+        "name": "publishedRevisionNumber",
+        "isUnique": false,
+        "isNullable": true,
+        "isArray": false,
+        "acceptableValues": null
+      }
+    ],
+    "description": "文書のロケール別表層。題名・公開版番号・翻訳元ロケールを持つ"
+  },
+  {
+    "name": "Revision",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "documentLocaleId",
+        "targetEntityDefinitionName": "DocumentLocale",
         "isUnique": false,
         "isNullable": false
       },
@@ -200,7 +245,7 @@
         "acceptableValues": null
       }
     ],
-    "description": "文書全体の確定スナップショット。不変条件 I1-I3 を満たすことが確定している"
+    "description": "文書ロケールの確定スナップショット。不変条件 I1-I3 と原文構造との一致を満たす"
   },
   {
     "name": "Segment",
@@ -255,6 +300,31 @@
       }
     ],
     "description": "アップロードの単位。key が文書順のキー。内容は構造化テキストの JSON"
+  },
+  {
+    "name": "Translation",
+    "properties": [
+      {
+        "isReference": false,
+        "propertyType": "PrimaryKey",
+        "name": "id"
+      },
+      {
+        "isReference": true,
+        "name": "sourceRevisionId",
+        "targetEntityDefinitionName": "Revision",
+        "isUnique": false,
+        "isNullable": false
+      },
+      {
+        "isReference": true,
+        "name": "translatedRevisionId",
+        "targetEntityDefinitionName": "Revision",
+        "isUnique": false,
+        "isNullable": false
+      }
+    ],
+    "description": "原文または翻訳版から翻訳版への版対応。構造一致は受け入れ時に検証する"
   },
   {
     "name": "Theme",

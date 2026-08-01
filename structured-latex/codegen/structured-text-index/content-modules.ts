@@ -37,7 +37,11 @@ export const notesDirOf = (projectDir: string): string => join(projectDir, 'note
 
 /** `content/` の全ファイルを文書順で読む。default export が配列でなければ落とす。 */
 export const loadContentFiles = async (projectDir: string): Promise<LoadedBlockFile[]> => {
-  const dir = contentDirOf(projectDir)
+  return loadBlockFiles(contentDirOf(projectDir))
+}
+
+/** 任意の content ディレクトリを文書順で読む（翻訳ロケール用）。 */
+export const loadBlockFiles = async (dir: string): Promise<LoadedBlockFile[]> => {
   const loaded: LoadedBlockFile[] = []
   for (const file of listSourceFiles(dir)) {
     const blocks = await loadDefaultExport(dir, file)
@@ -51,7 +55,11 @@ export const loadContentFiles = async (projectDir: string): Promise<LoadedBlockF
 
 /** `notes/` の全ファイルを読む。ディレクトリが無ければ 0 件。 */
 export const loadNoteFiles = async (projectDir: string): Promise<LoadedNoteFile[]> => {
-  const dir = notesDirOf(projectDir)
+  return loadNotesFiles(notesDirOf(projectDir))
+}
+
+/** 任意の notes ディレクトリを読む（翻訳ロケール用）。 */
+export const loadNotesFiles = async (dir: string): Promise<LoadedNoteFile[]> => {
   const loaded: LoadedNoteFile[] = []
   for (const file of listSourceFiles(dir)) {
     const notes = await loadDefaultExport(dir, file)

@@ -22,7 +22,9 @@ export const storageAssignments: readonly EntityStorage[] = [
   { entity: 'Requester', backend: 'projected' },
   { entity: 'Document', backend: 'cloud-sql' },
   { entity: 'DocumentInvitation', backend: 'cloud-sql' },
+  { entity: 'DocumentLocale', backend: 'cloud-sql' },
   { entity: 'Revision', backend: 'cloud-sql' },
+  { entity: 'Translation', backend: 'cloud-sql' },
   // ブロック列は JSON 列として持つ（形の正本は structured-text の Zod スキーマ）。
   { entity: 'Segment', backend: 'cloud-sql' },
   { entity: 'Theme', backend: 'cloud-sql' },

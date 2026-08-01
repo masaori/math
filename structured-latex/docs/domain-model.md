@@ -204,8 +204,10 @@ flowchart TB
 
 | 概念 | 種別 | 同一性 | 備考 |
 |---|---|---|---|
-| Document | entity（集約ルート） | `documentId` | 論文 1 本 |
-| Revision | entity | `(documentId, number)` | 確定後は不変。番号は 1 始まりの単調増加 |
+| Document | entity（集約ルート） | `documentId` | 論文 1 本。原文ロケールを持つが、題名は持たない |
+| DocumentLocale | entity | `(documentId, locale)` | 題名・公開版・翻訳元ロケールを持つ表層 |
+| Revision | entity | `(documentLocaleId, number)` | ロケールごとの確定スナップショット。番号は 1 始まりの単調増加 |
+| Translation | entity | `(sourceRevisionId, translatedRevisionId)` | 原文／翻訳版の対応。同一文書・構造一致は受け入れ時に検査 |
 | Segment | entity | `(revisionId, key)` | `key` が文書順のキー（F1 のファイル名に相当） |
 | Block | entity | `id`（文書全体で一意） | **独立したライフサイクルを持たない**（§9） |
 | Note | entity | `id`（ブロック id とも衝突しない） | 文書本体ではない |
@@ -218,7 +220,9 @@ flowchart TB
 
 ```mermaid
 erDiagram
-  Document ||--o{ Revision : "版を持つ"
+  Document ||--o{ DocumentLocale : "ロケール別表層を持つ"
+  DocumentLocale ||--o{ Revision : "版を持つ"
+  Revision ||--o{ Translation : "翻訳元または翻訳先になる"
   Revision ||--o{ Segment : "セグメントを持つ"
   Segment ||--o{ Block : "ブロック列を持つ"
   Segment ||--o{ Note : "ノート列を持つ"
@@ -343,6 +347,63 @@ type Note<L> = {
 これは Typst 原本からの移行という一時的な事情に由来するものであって、入力言語の契約ではない
 （原本を持たない文書でも正本は成立する）。
 
+### 5.3.2 ローカライズ
+
+**ローカライズは文書の表層を分けるためのドメイン概念であり、出力器のオプションではない。**
+文書 ID・原文ロケール・ロケール別版の対応は集約内で管理する。原文ロケールの構造を唯一の
+SSOT とし、翻訳は同一文書に属する別の表層である。翻訳を別文書として複製すると、ラベルと
+参照の同一性が分裂し、原文と訳文の対応を検査できなくなるため採らない。
+
+```typescript
+type LocalizedRevision<L, M> = {
+  locale: Locale
+  /** 原文は null、翻訳は直近の翻訳元ロケール。 */
+  translatedFrom: Locale | null
+  /** 翻訳元 locale の対応する版番号。原文は null。 */
+  translatedFromRevision: RevisionNumber | null
+  revision: RevisionSnapshot<L, M>
+}
+
+type LocalizedRevisionSnapshot<L, M> = {
+  documentId: string
+  sourceLocale: Locale
+  localizations: readonly LocalizedRevision<L, M>[]
+}
+```
+
+ロケールは BCP 47 形式かつ**正準表記**（例: `ja`、`en-US`）であることを実行時に検査する。
+BCP 47 は大小文字を区別しないため、`JA` や `en-us` を別ロケールとして保持せず拒否する。型だけでは
+外部 JSON の文字列の正当性を保証できない。
+`availableLocales` は宣言予定の言語ではなく、原文との対応・構造検査・通常の文書解決をすべて
+通過して実際に選択可能なロケールだけから導出する。
+
+| 区分 | 内容 |
+|---|---|
+| 言語中立 | 文書 ID、セグメント key と順序、ブロック／ノート ID、ラベル、ブロック種別・見出し level、参照先、数式ノードの `tex`、引用キー、画像資産 key、ノート targets、意味メタデータ |
+| ロケール固有 | 文書・ブロック・ノートの題名、`text` / `todo` の文言、参照表示上書き、引用箇所、画像代替文 |
+
+題名の `TitleContent` は表層としてロケール固有にする。`tex` には人間語の組版も含められ、
+文字列だけから「数式部分」を分離する規則を正しく定義できないためである。数式として共有する
+ことを要求する値は、語彙上その意味が明示された `math` / `displayMath` ノードの `tex` に限る。
+
+原文と翻訳では、非テキストノードの位置・ネスト・値を比較する。純粋な地の文だけからなる
+段落・箇条は自然な語順変更を許すが、数式・参照・引用・画像を含む箇所は、同じブロック内の
+同じ構造位置で一致しなければならない。これにより、翻訳による文章の書き換えを許しながら、
+数式・参照・画像の取り違えを構造ドリフトとして検出する。
+
+追加する不変条件は次のとおりである。
+
+| # | 不変条件 | 検査場所 |
+|---|---|---|
+| I6 | 原文ロケールはちょうど 1 件存在し、`translatedFrom = translatedFromRevision = null` である。翻訳元の連鎖は原文へ到達し循環しない | ローカライゼーション検査 |
+| I7 | ロケールは文書内で一意で、要求ロケールは利用可能ロケールに存在する | ローカライゼーション検査／API 境界 |
+| I8 | 翻訳は原文と同じセグメント・ブロック・ラベル・共有ノード構造を持つ | ローカライゼーション検査 |
+| I9 | 解決済み文書は選択ロケール・原文ロケール・利用可能ロケール・翻訳元と対応する翻訳元版番号を明示する | `ResolvedDocument` と API 契約 |
+
+既存の単一ロケール `RevisionSnapshot` は互換のため維持する。`asSingleLocaleRevision(snapshot,
+'ja')` がこれを原文ロケールだけを持つ `LocalizedRevisionSnapshot` へ適応するため、既存の
+日本語 `content/` / `notes/` は変更しない。
+
 ### 5.4 プロジェクト固有拡張の受け口
 
 F8 が示すのは「スキーマそのものは共有できるが、生成物（ラベルのユニオン型・文書集約モジュール）は
@@ -448,7 +509,7 @@ export const emit: <T extends RenderTarget>(
 
 | 概念 | ER entity か | 根拠 |
 |---|---|---|
-| User / Document / Revision / Segment / Theme / Artifact | する | 同一性とライフサイクルを持ち、CRUD の対象になる |
+| User / Document / DocumentLocale / Revision / Translation / Segment / Theme / Artifact | する | 同一性とライフサイクルを持ち、CRUD の対象になる。`DocumentLocale` が題名・公開版を、`Translation` が版対応を持つ |
 | Block / Node / Note | **しない** | ブロック単体を更新する API は存在しない（§9 の結論）。Node は再帰構造で同一性を持たない。これらは Segment が持つ**値**として Zod スキーマで SSOT に置く（当時の `realtime-web-preview/domain-model/src/block.ts` と同型。現在の実体は `domain-model/structured-text/`） |
 | ResolvedDocument / LabelIndex | しない（`projected`） | 版と採番方針から導出される投影。永続化しない |
 | Requester（認可の主体） | しない（`projected`） | [authorization-strategy.md](./authorization-strategy.md) §2 の指示どおり |
@@ -459,8 +520,10 @@ export const emit: <T extends RenderTarget>(
 （entity 定義・relation・storage 割り当ての JSON）で、`codegen/entity-definitions/cli.ts` が作る。
 storage 宣言は SSOT と突合され、**未宣言・不明・重複はエラーで落ちる**（書き忘れを静かに通さない）。
 
-M2 で確定した entity は 11 個: `User` / `Account` / `Operator` / `Requester`（認可の主体、projected）/
-`Document` / `DocumentInvitation`（論点 C-2）/ `Revision` / `Segment` / `Theme` / `Artifact` / `Subscription`。
+ローカライズ導入後の entity は 13 個: `User` / `Account` / `Operator` / `Requester`（認可の主体、projected）/
+`Document` / `DocumentInvitation`（論点 C-2）/ `DocumentLocale` / `Revision` / `Translation` / `Segment` /
+`Theme` / `Artifact` / `Subscription`。`Document.title` は言語中立ではないため廃止し、ロケール別の
+`DocumentLocale.title` へ移した。
 
 **ブロック列は ER の列としては JSON 文字列にしてある。** ブロックは再帰構造（ノードがノードを含む）で、
 ER のプロパティ型（primitive / struct / 参照）では表現できないためである
@@ -494,6 +557,13 @@ ER のプロパティ型（primitive / struct / 参照）では表現できな�
 export interface DocumentGateway {
   /** 現在公開中の版のマニフェスト（版番号 + セグメントの並びと内容ハッシュ）。 */
   getManifest(documentId: string): Promise<Result<DocumentManifest, GetManifestError>>
+  /**
+   * 指定 locale の公開 manifest。利用不能な翻訳は `missing_translation` として返し、
+   * 原文へ暗黙にフォールバックしない。
+   */
+  getLocalizedManifest(
+    input: GetLocalizedManifestInput,
+  ): Promise<Result<LocalizedDocumentManifest, GetLocalizedManifestError>>
   /** ある版のあるセグメントの、Web ターゲット成果物断片。 */
   getFragment(
     documentId: string,
@@ -924,6 +994,13 @@ export type UploadSegmentsError =
   | { code: 'internal_error' }
 ```
 
+複数ロケールを扱う入口は既存の単一ロケール契約を変更せず、`UploadLocalizedSegmentsInput` と
+`LocalizedDocumentManifest` を別に持つ。前者は `sourceLocale` / `locale` / `translatedFrom` /
+`translatedFromRevision` を、
+後者はそれに `availableLocales` を加える。受け入れ側は locale ごとのセグメントをまとめて
+ローカライゼーション検査へ渡す。構造ドリフト・翻訳元不整合・不正ロケールを通常のアップロード
+エラーへ曖昧に混ぜず、ローカライズ入口のエラーとして返す。
+
 `upserts` を**キー単位の全置換**にするのは、部分マージ規則を持たないためである
 （持つと「同じ結果を作る書き方」が複数生まれ、エントロピーが増える）。
 
@@ -1000,8 +1077,11 @@ export const policies: ResourcePolicy[] = [
   // 論点 C-2: 公開／限定を文書ごとに選ぶ。read は「公開設定 ∨ 所有者 ∨ 招待された閲覧者」。
   { entity: 'Document', read: ['visibility:public', 'owner', 'invitee'], create: ['authenticated'], update: ['owner'], delete: ['owner'] },
   { entity: 'DocumentInvitation', read: ['owner-of-document', 'invitee'], create: ['owner-of-document'], delete: ['owner-of-document'] },
-  { entity: 'Revision', read: ['via:Document'], create: ['owner'] },
-  { entity: 'Segment',  read: ['via:Document'], create: ['owner'], update: ['owner'], delete: ['owner'] },
+  { entity: 'DocumentLocale', read: ['via:Document'], create: ['owner-of-document'], update: ['owner-of-document'], delete: ['owner-of-document'] },
+  { entity: 'Revision', read: ['via:DocumentLocale'], create: ['owner-of-document'] },
+  // Translation は source / translated revision の 2 経路を持つため、原文側を明示する。
+  { entity: 'Translation', read: ['via:sourceRevision'], create: ['owner-of-source-document'], delete: ['owner-of-source-document'] },
+  { entity: 'Segment',  read: ['via:DocumentLocale'], create: ['owner-of-document'], update: ['owner-of-document'], delete: ['owner-of-document'] },
   { entity: 'Theme',    read: ['owner', 'admin'], create: ['authenticated'], update: ['owner'], delete: ['owner'] },
   { entity: 'Artifact', read: ['via:Document'] },
   { entity: 'Subscription', read: ['owner'], create: ['via:Document'], delete: ['owner'] },
@@ -1009,7 +1089,8 @@ export const policies: ResourcePolicy[] = [
 ```
 
 owner の解決は relation graph の FK パスで機械的に行う（同ドキュメント §4）。
-`Segment.revisionId → Revision.documentId → Document.ownerUserId → User` の多ホップになり、
+`Segment.revisionId → Revision.documentLocaleId → DocumentLocale.documentId → Document.ownerUserId → User`
+の多ホップになり、
 パスは一意なので resolver が解決できる。
 
 **ただし `DocumentInvitation` は owner subject への FK パスが 2 本ある**
@@ -1017,6 +1098,11 @@ owner の解決は relation graph の FK パスで機械的に行う（同ドキ
 認可戦略 §4.2 は「パスが一意でない entity はエラーにする」と定めているので、
 この entity については**経路を明示する**（上の `owner-of-document` / `invitee`）。
 これは設計上の曖昧さを deny-by-default で隠さないための明示である。
+
+`Translation` も source / translated の Revision をともに参照するため owner subject への FK パスが
+2 本ある。翻訳先を差し替えて別文書へ紐づける権限を作らないため、policy は**原文側の経路**を
+`via:sourceRevision` として明示する。これにより `DocumentLocale` と `Translation` を CRUD entity に
+加えたことと「全 resource entity を policy に明示する」規約が一致する。
 
 `read: ['visibility:public', …]` は論点 C-2 の確定（文書ごとに公開／限定を選べる）による。
 M1 が仮に置いていた「誰でも読める」は、未完成の原稿が全世界から読める状態を意味していた。

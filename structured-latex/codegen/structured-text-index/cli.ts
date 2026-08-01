@@ -16,10 +16,21 @@ import { fileURLToPath } from 'node:url'
 import {
   contentDirOf,
   listSourceFiles,
+  loadBlockFiles,
   loadContentFiles,
+  loadNoteFiles,
+  loadNotesFiles,
   notesDirOf,
 } from './content-modules.ts'
+import { directoryFromProject, loadProjectLocalizationConfig } from './locales.ts'
 import { renderDocument, renderLabels } from './render.ts'
+import {
+  DEFAULT_NUMBERING_POLICY,
+  createRuntimeSchema,
+  resolveLocalized,
+  validateLocalizedRevisionSnapshot,
+} from '../../domain-model/index.ts'
+import type { LocalizedRevision, Note } from '../../domain-model/index.ts'
 
 const systemDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 
@@ -84,6 +95,76 @@ const labels = [...seen.keys()].sort()
 if (labels.length === 0) {
   console.error('content/ からラベルを 1 件も抽出できなかった（読み込み経路が壊れている可能性が高い）')
   process.exit(1)
+}
+
+/**
+ * 翻訳が設定されていれば、原文を基準に全ロケールを実値で検証する。
+ * ラベル生成は原文だけを読む（翻訳側へ同じ label を再宣言させると global unique を壊す）一方、
+ * ロケール別の構造・翻訳元・欠落はここで必ず拒否する。
+ */
+const localizationConfig = await loadProjectLocalizationConfig(projectDir)
+const sourceSegments = (await loadContentFiles(projectDir)).map(({ file, blocks }) => ({
+  key: file,
+  blocks,
+  notes: [] as readonly Note[],
+}))
+const sourceNotes = await loadNoteFiles(projectDir)
+for (const segment of sourceSegments) {
+  segment.notes = sourceNotes.find((notes) => notes.file === segment.key)?.notes ?? []
+}
+const localizations: LocalizedRevision[] = [
+  {
+    locale: localizationConfig.sourceLocale,
+    translatedFrom: null,
+    translatedFromRevision: null,
+    revision: { documentId: '__codegen__', revision: 1, segments: sourceSegments },
+  },
+]
+for (const translation of localizationConfig.translations) {
+  const content = await loadBlockFiles(directoryFromProject(projectDir, translation.contentDir))
+  const notes = translation.notesDir === undefined
+    ? []
+    : await loadNotesFiles(directoryFromProject(projectDir, translation.notesDir))
+  localizations.push({
+    locale: translation.locale,
+    translatedFrom: translation.translatedFrom,
+    translatedFromRevision: 1,
+    revision: {
+      documentId: '__codegen__',
+      revision: 1,
+      segments: content.map(({ file, blocks }) => ({
+        key: file,
+        blocks,
+        notes: notes.find((note) => note.file === file)?.notes ?? [],
+      })),
+    },
+  })
+}
+const localizedSnapshot = validateLocalizedRevisionSnapshot(
+  {
+    documentId: '__codegen__',
+    sourceLocale: localizationConfig.sourceLocale,
+    localizations,
+  },
+  // generator はプロジェクト固有メタデータのキーを知らない。汎用プレビューと同様、
+  // 既知の語彙は検査しつつ、定理型に載る未知の意味メタデータは落とさない。
+  createRuntimeSchema({ unknownBlockMeta: 'passthrough' }),
+  'localization',
+)
+if (!localizedSnapshot.success) {
+  console.error(`ローカライズ入力検証に失敗:\n${JSON.stringify(localizedSnapshot.error, null, 2)}`)
+  process.exit(1)
+}
+for (const locale of localizedSnapshot.data.localizations) {
+  const localized = resolveLocalized(
+    localizedSnapshot.data,
+    locale.locale,
+    { numbering: DEFAULT_NUMBERING_POLICY, audience: 'publication' },
+  )
+  if (!localized.success) {
+    console.error(`ローカライズ検証に失敗 (${locale.locale}):\n${JSON.stringify(localized.error, null, 2)}`)
+    process.exit(1)
+  }
 }
 
 /** 生成物から domain-model を指す import 指定子（POSIX 区切りで、必ず相対にする）。 */

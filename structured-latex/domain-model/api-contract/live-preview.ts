@@ -19,8 +19,15 @@ import { z } from 'zod'
 
 import { err, ok, type Result } from '../result.ts'
 import type { Block, Note } from '../structured-text/block.ts'
+import { localeRuntimeSchema, type Locale } from '../structured-text/locale.ts'
 import { createRuntimeSchema } from '../structured-text/validate.ts'
 import type { RuntimeSchema, ValidationIssue } from '../structured-text/validate.ts'
+import {
+  availableLocalesOf,
+  type LocalizedRevisionSnapshot,
+  type LocalizationValidationError,
+  validateLocalizedRevisionSnapshot,
+} from '../resolved/localized-revision.ts'
 
 /**
  * ライブプレビューが入力ソースを読むときの実行時スキーマ。
@@ -84,9 +91,63 @@ export type DocumentResponseBody = {
   sourceLabel: string
 }
 
+/**
+ * ローカライズされた文書を取得するために、クライアントが明示する locale。
+ *
+ * 従来の `GET /api/document` は日本語単一ロケールを含む既存ソースをそのまま運ぶ
+ * 互換入口として残す。locale を必要とするクライアントだけが、この別入口（たとえば
+ * `GET /api/localized-document?locale=en`）を使う。
+ */
+export type LoadLocalizedDocumentInput = { locale: Locale }
+
+/** locale 指定の取得要求を受け入れる境界。クエリ文字列等の unknown をそのまま使わない。 */
+export const parseLoadLocalizedDocumentInput = (
+  value: unknown,
+): Result<LoadLocalizedDocumentInput, LoadDocumentError> => {
+  const parsed = z.object({ locale: localeRuntimeSchema }).strict().safeParse(value)
+  return parsed.success
+    ? ok(parsed.data)
+    : err({ code: 'validation_error', issues: issuesOfZodError(parsed.error) })
+}
+
+export type LocalizedDocumentResponseBody = {
+  /** この応答でクライアントが読む locale。 */
+  locale: Locale
+  /** 同じ document / revision の、利用可能な全ロケール。 */
+  localizedRevision: LocalizedRevisionSnapshot
+  generatedAt: string
+  sourceLabel: string
+}
+
+export type LoadLocalizedDocumentError =
+  | LoadDocumentError
+  | LocalizationValidationError
+  | { code: 'response_locale_not_available'; locale: Locale; availableLocales: readonly Locale[] }
+
 /** エラーレスポンスの body。 */
 export const errorResponseSchema = z.object({ error: loadDocumentErrorSchema })
 export type ErrorResponseBody = z.infer<typeof errorResponseSchema>
+
+/** locale 集約の検査から返るエラーを HTTP 応答でも失わないための形。 */
+const localizationErrorSchema = z.union([
+  z.object({ code: z.literal('localization_validation_error'), issues: z.array(validationIssueSchema) }),
+  // issue の詳細な判別共用体は domain-model/resolved が正本。HTTP は Result をそのまま包む。
+  z.object({ code: z.literal('invalid_localization'), issues: z.array(z.object({ code: z.string() }).passthrough()) }),
+])
+
+export const localizedLoadDocumentErrorSchema = z.union([
+  loadDocumentErrorSchema,
+  localizationErrorSchema,
+  z.object({
+    code: z.literal('response_locale_not_available'),
+    locale: localeRuntimeSchema,
+    availableLocales: z.array(localeRuntimeSchema),
+  }),
+])
+
+/** locale 指定 endpoint のエラー応答。従来 endpoint の schema を狭めない別契約。 */
+export const localizedErrorResponseSchema = z.object({ error: localizedLoadDocumentErrorSchema })
+export type LocalizedErrorResponseBody = z.infer<typeof localizedErrorResponseSchema>
 
 const issuesOfZodError = (error: z.ZodError): ValidationIssue[] =>
   error.issues.map((issue) => ({ path: issue.path.join('.'), message: issue.message }))
@@ -119,6 +180,52 @@ export const parseDocumentResponse = (
   return ok({
     blocks: blocks.data,
     notes: notes.data,
+    generatedAt: envelope.data.generatedAt,
+    sourceLabel: envelope.data.sourceLabel,
+  })
+}
+
+const localizedDocumentEnvelopeSchema = z
+  .object({
+    locale: localeRuntimeSchema,
+    localizedRevision: z.unknown(),
+    generatedAt: z.string(),
+    sourceLabel: z.string(),
+  })
+  .strict()
+
+/**
+ * locale 指定のライブプレビュー応答を検証する境界。
+ *
+ * 既存の `parseDocumentResponse` と意図的に統合しない。旧応答には `blocks` / `notes`
+ * しか無く、locale / revision を後から推測すると、単一ロケール文書の互換性と
+ * 「原文ロケールを明示する」不変条件のどちらも弱くなるためである。
+ */
+export const parseLocalizedDocumentResponse = (
+  value: unknown,
+): Result<LocalizedDocumentResponseBody, LoadLocalizedDocumentError> => {
+  const envelope = localizedDocumentEnvelopeSchema.safeParse(value)
+  if (!envelope.success) {
+    return err({ code: 'validation_error', issues: issuesOfZodError(envelope.error) })
+  }
+
+  const localized = validateLocalizedRevisionSnapshot(
+    envelope.data.localizedRevision,
+    createLivePreviewRuntimeSchema(),
+    'localizedRevision',
+  )
+  if (!localized.success) return err(localized.error)
+  const availableLocales = availableLocalesOf(localized.data)
+  if (!availableLocales.includes(envelope.data.locale)) {
+    return err({
+      code: 'response_locale_not_available',
+      locale: envelope.data.locale,
+      availableLocales,
+    })
+  }
+  return ok({
+    locale: envelope.data.locale,
+    localizedRevision: localized.data,
     generatedAt: envelope.data.generatedAt,
     sourceLabel: envelope.data.sourceLabel,
   })

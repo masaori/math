@@ -12,13 +12,15 @@ export {
   DOCUMENT_VISIBILITIES,
   Document,
   DocumentInvitation,
+  DocumentLocale,
   Revision,
   Segment,
+  Translation,
 } from './document.ts'
 export { Artifact, RENDER_TARGETS, Subscription, Theme } from './output.ts'
 
 import { Account, Operator, Requester, User } from './actors.ts'
-import { Document, DocumentInvitation, Revision, Segment } from './document.ts'
+import { Document, DocumentInvitation, DocumentLocale, Revision, Segment, Translation } from './document.ts'
 import { Artifact, Subscription, Theme } from './output.ts'
 
 /** 生成器の入力。**全 entity を過不足なく列挙する**（漏れは storage 解決でエラーになる）。 */
@@ -29,8 +31,10 @@ export const allEntities = [
   Requester,
   Document,
   DocumentInvitation,
+  DocumentLocale,
   Revision,
   Segment,
+  Translation,
   Theme,
   Artifact,
   Subscription,

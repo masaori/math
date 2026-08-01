@@ -20,6 +20,7 @@ import type {
   TextNode,
   TodoNode,
 } from '../structured-text/node.ts'
+import type { Locale } from '../structured-text/locale.ts'
 
 /** 版番号。1 始まりの単調増加（順序比較で収束を判定するため文字列にしない）。 */
 export type RevisionNumber = number
@@ -145,6 +146,19 @@ export type OutlineEntry = {
 export type ResolvedDocument = {
   documentId: string
   revision: RevisionNumber
+  /**
+   * `resolveLocalized` が選択したローカライズ文脈。
+   *
+   * 既存の単一 `RevisionSnapshot` を解決する `resolve` / `resolveTolerantly` はこれらを
+   * 持たないままでよい。optional にすることで、既存の日本語単一ロケール文書と出力を
+   * 壊さずに移行できる。ローカライズ入口の返り値は required な
+   * `LocalizedResolvedDocument` として具体化される。
+   */
+  sourceLocale?: Locale
+  locale?: Locale
+  translatedFrom?: Locale | null
+  translatedFromRevision?: RevisionNumber | null
+  availableLocales?: readonly Locale[]
   /** 文書順に並んだブロック（F1 の順序をここで確定させる）。 */
   blocks: readonly ResolvedBlock[]
   /** ブロック id → 配置されたノート。出版ターゲットでは常に空（I5）。 */
