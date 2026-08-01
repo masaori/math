@@ -32,8 +32,30 @@
   （直接 push、または PR 作成・マージ）。
 - 対象は docs に限らず、証明・コード・検証・設定などすべての作業。
 - push 前に該当プロジェクトの `MEMORY.md` を更新する。
-- push したら、**反映先（main）と反映に用いたコミット範囲または PR を明示して報告**する。
 - サブエージェントには commit/push させない。**呼び出し元が成果を検証してから push する。**
+
+## 完了とは remote default branch に入っていること（厳守）
+
+**作業の完了は「成果コミットが remote default branch（`origin/main`）の祖先に含まれること」で
+のみ定義する。** 過去に、ブランチへ push しただけ・PR を作っただけ・サブエージェントが自分の
+ブランチへ commit しただけで「完了しました」と報告し、成果が `origin/main` に入らないまま
+失われた事故が繰り返し起きている。
+
+- **以下はいずれも完了ではなく、この状態で完了報告を出すことを禁止する。**
+  feature / `worktree-*` / `goal-*` ブランチへの push だけ、PR 作成だけ（未マージ・マージ未確認）、
+  サブエージェントのブランチ commit / push だけ、ローカル `main` への commit だけ。
+- **完了報告の直前に必ず fetch し、ancestry で包含を確認する。** 確認できるまで完了とみなさない。
+
+  ```sh
+  git fetch origin
+  git merge-base --is-ancestor <成果コミット> origin/main && echo INCLUDED
+  ```
+
+  remote default branch 名は `git remote show origin` の `HEAD branch` で確認する
+  （決め打ちしない）。成果が複数コミットなら全てについて確認する。
+- 確認できない場合は完了報告を出さず、未反映の成果を特定して反映まで進める。
+  進められない場合は**未完了であることを明示**して、何が `origin/main` に入っていないかを報告する。
+- 詳細な運用は [CLAUDE.md](CLAUDE.md) の「作業完了時の main への push と報告」を正本とする。
 
 ## push 前に必ず通す検証
 
