@@ -10,6 +10,7 @@ import { existsSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
+import type { LocalizationAllowance } from '../../domain-model/resolved/localized-revision.ts'
 import type { Locale } from '../../domain-model/structured-text/locale.ts'
 
 export type TranslationSource = {
@@ -19,6 +20,13 @@ export type TranslationSource = {
   contentDir: string
   /** 省略時は翻訳ノート無し。 */
   notesDir?: string
+  /**
+   * 原文と一致しない差のうち、このプロジェクトが**理由つきで**認めるもの。
+   *
+   * 省略時は一切の差を認めない（既定は I8 の厳格な構造一致）。宣言しても、
+   * 宣言した規則で説明できない差が 1 件でも残れば違反になる。
+   */
+  allowance?: LocalizationAllowance
 }
 
 export type ProjectLocalizationConfig = {
@@ -60,6 +68,7 @@ const parseConfig = (value: unknown): ProjectLocalizationConfig => {
       const translatedFrom = entry.translatedFrom
       const contentDir = entry.contentDir
       const notesDir = entry.notesDir
+      const allowance = entry.allowance
       if (typeof locale !== 'string' || locale.length === 0) {
         invalid(`translations[${index}].locale は空でない文字列でなければならない`)
       }
@@ -72,11 +81,28 @@ const parseConfig = (value: unknown): ProjectLocalizationConfig => {
       if (notesDir !== undefined && !isRelativeDirectory(notesDir)) {
         invalid(`translations[${index}].notesDir は project root 配下の相対パスでなければならない`)
       }
+      if (allowance !== undefined) {
+        if (typeof allowance !== 'object' || allowance === null || Array.isArray(allowance)) {
+          invalid(`translations[${index}].allowance はオブジェクトでなければならない`)
+        }
+        const declared = allowance as { localeSpecificMetaKeys?: unknown; explain?: unknown }
+        if (
+          declared.localeSpecificMetaKeys !== undefined &&
+          (!Array.isArray(declared.localeSpecificMetaKeys) ||
+            declared.localeSpecificMetaKeys.some((key) => typeof key !== 'string' || key === ''))
+        ) {
+          invalid(`translations[${index}].allowance.localeSpecificMetaKeys は空でない文字列の配列`)
+        }
+        if (declared.explain !== undefined && typeof declared.explain !== 'function') {
+          invalid(`translations[${index}].allowance.explain は関数でなければならない`)
+        }
+      }
       return {
         locale: locale as string,
         translatedFrom: translatedFrom as string,
         contentDir: contentDir as string,
         ...(notesDir === undefined ? {} : { notesDir: notesDir as string }),
+        ...(allowance === undefined ? {} : { allowance: allowance as LocalizationAllowance }),
       }
     }),
   }

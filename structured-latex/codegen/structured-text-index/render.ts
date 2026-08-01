@@ -14,10 +14,16 @@
 const identifierFor = (prefix: string, fileName: string): string =>
   `${prefix}_${fileName.replace(/\.ts$/, '').replace(/[^A-Za-z0-9_]/g, '_')}`
 
-export const renderLabels = (sortedLabels: readonly string[]): string => {
+export const renderLabels = (
+  sortedLabels: readonly string[],
+  sortedTranslationOnlyLabels: readonly string[] = [],
+): string => {
   const body = sortedLabels.map((label) => `  ${JSON.stringify(label)},`).join('\n')
+  const translationOnlyBody = sortedTranslationOnlyLabels
+    .map((label) => `  ${JSON.stringify(label)},`)
+    .join('\n')
   return `// 自動生成ファイル — 直接編集しない。
-// 生成元: content/ の全ブロックの labels
+// 生成元: content/ の全ブロックの labels（と、翻訳ロケールにしか無いブロックの labels）
 // 再生成: node <system>/codegen/structured-text-index/cli.ts --project <このディレクトリ>
 //
 // このユニオン型が「実在するラベル」の全体であり、ref() / ノートの targets は
@@ -29,14 +35,38 @@ ${body}
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
 export type Label = (typeof ALL_LABELS)[number]
+
+/**
+ * 翻訳ロケールにしか無いブロックのラベル（locales.config.ts が理由つきで認めたもの）。
+ * **原文はこれを指せない**。原文から指せば、原文の解決で未解決参照になる。
+ */
+export const TRANSLATION_ONLY_LABELS = [
+${translationOnlyBody}
+] as const
+
+export type TranslationOnlyLabel = (typeof TRANSLATION_ONLY_LABELS)[number]
+
+/** 翻訳ロケールの content が使うラベル。原文のラベルに翻訳限定のものを足しただけ。 */
+export type AnyLocaleLabel = Label | TranslationOnlyLabel
 `
 }
+
+/** 翻訳ロケール 1 件ぶんの入力（生成物へ型検査の対象として取り込む）。 */
+export type TranslationRender = {
+  locale: string
+  /** プロジェクト root からの相対ディレクトリ（POSIX 区切り）。 */
+  contentDir: string
+  files: readonly string[]
+}
+
+const localeSuffix = (locale: string): string => locale.replace(/[^A-Za-z0-9_]/g, '_')
 
 export const renderDocument = (options: {
   /** このファイルから見た domain-model の import 指定子（例: `../../domain-model/index.ts`）。 */
   domainModelSpecifier: string
   contentFiles: readonly string[]
   noteFiles: readonly string[]
+  translations?: readonly TranslationRender[]
 }): string => {
   const contentImports = options.contentFiles
     .map((file) => `import ${identifierFor('blocks', file)} from './content/${file}'`)
@@ -50,6 +80,57 @@ export const renderDocument = (options: {
   const noteSpread = options.noteFiles
     .map((file) => `  ...typeof ${identifierFor('notes', file)},`)
     .join('\n')
+
+  const translations = options.translations ?? []
+  const translationImports = translations
+    .flatMap((translation) =>
+      translation.files.map(
+        (file) =>
+          `import ${identifierFor(`blocks_${localeSuffix(translation.locale)}`, file)} ` +
+          `from './${translation.contentDir}/${file}'`,
+      ),
+    )
+    .join('\n')
+  const translationSections = translations
+    .map((translation) => {
+      const suffix = localeSuffix(translation.locale)
+      const spread = translation.files
+        .map((file) => `  ...typeof ${identifierFor(`blocks_${suffix}`, file)},`)
+        .join('\n')
+      return `
+/** 翻訳ロケール ${translation.locale} の全ブロック（文書順）。 */
+export type AllBlocks_${suffix} = ${spread === '' ? '[]' : `[\n${spread}\n]`}
+
+export type _TranslationBlocksAreBlocks_${suffix} = Assert<
+  AllBlocks_${suffix} extends readonly Block<AnyLocaleLabel>[] ? true : never
+>
+export type _TranslationIsNotEmpty_${suffix} = Assert<AllBlocks_${suffix} extends readonly [] ? never : true>
+export type _UniqueTranslationBlockIds_${suffix} = AssertNoDuplicate<
+  FindDuplicate<BlockIdsOf<AllBlocks_${suffix}>>
+>
+export type _UniqueTranslationLabels_${suffix} = AssertNoDuplicate<
+  FindDuplicate<LabelsOf<AllBlocks_${suffix}>>
+>`
+    })
+    .join('\n')
+  const translationLabelUnion = translations
+    .map((translation) => `LabelsOf<AllBlocks_${localeSuffix(translation.locale)}>[number]`)
+    .join(' | ')
+  const translationLabelChecks =
+    translations.length === 0
+      ? ''
+      : `
+/** 翻訳ロケールが実際に持つラベルの全体。 */
+type AllTranslationLabels = ${translationLabelUnion}
+
+/** 生成した TranslationOnlyLabel と、翻訳ロケールの実状が一致すること（両方向）。 */
+export type _NoStaleTranslationOnlyLabel = AssertNoDuplicate<
+  Exclude<TranslationOnlyLabel, AllTranslationLabels>
+>
+export type _NoMissingTranslationOnlyLabel = AssertNoDuplicate<
+  Exclude<AllTranslationLabels, AnyLocaleLabel>
+>
+`
 
   return `// 自動生成ファイル — 直接編集しない。
 // 生成元: content/ notes/ のファイル一覧
@@ -70,9 +151,10 @@ import type {
   Note,
   NoteIdsOf,
 } from '${options.domainModelSpecifier}'
-import type { Label } from './labels.generated.ts'
+import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 ${contentImports}
 ${noteImports}
+${translationImports}
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = ${contentSpread === '' ? '[]' : `[\n${contentSpread}\n]`}
@@ -106,5 +188,11 @@ export type _NoIdCollision = AssertNoDuplicate<FindDuplicate<[...AllBlockIds, ..
 /** labels.generated.ts と content の実状が一致すること（両方向）。 */
 export type _NoStaleGeneratedLabel = AssertNoDuplicate<Exclude<Label, AllLabels[number]>>
 export type _NoMissingGeneratedLabel = AssertNoDuplicate<Exclude<AllLabels[number], Label>>
-`
+
+/** 翻訳ロケール用のラベル型は原文のラベルを必ず含む。 */
+export type _AnyLocaleLabelIncludesLabel = Assert<Label extends AnyLocaleLabel ? true : never>
+
+/** 翻訳限定のラベルは原文のラベルと交わらない（交わればどちらの版のものか決まらない）。 */
+export type _TranslationOnlyLabelIsDisjoint = AssertNoDuplicate<Extract<TranslationOnlyLabel, Label>>
+${translationSections}${translationLabelChecks}`
 }

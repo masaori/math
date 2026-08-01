@@ -18,6 +18,8 @@
     "document.generated.ts",
     "content",
     "notes",
+    "locales.config.ts",
+    "locales",
     "tools",
     "type-tests"
   ],

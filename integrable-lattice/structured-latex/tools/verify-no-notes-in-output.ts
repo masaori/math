@@ -12,7 +12,14 @@
  *   3. **本文**: 各ノートの本文から取った特徴的な文字列が、生成物に現れないこと
  *      （id を書き換えただけで中身が混入する経路を塞ぐ）。
  *
- * 使い方: node tools/verify-no-notes-in-output.ts
+ * **全ロケールに同じ検査を掛ける**（cycle 24 step 2）。それ以前は英語版が
+ * `structured-latex-en/tools/verify-no-notes-in-output.ts` としてこの検査ごと複製されており、
+ * 「複製した理由: 対象の生成器が英語版固有だから」と自分で書いていた。生成器を 1 本にした
+ * いま、その理由は消えた。
+ *
+ * 使い方:
+ *   node tools/verify-no-notes-in-output.ts               原文の生成物を検査する
+ *   node tools/verify-no-notes-in-output.ts --locale en   英語版の生成物を検査する
  */
 
 import { existsSync, readFileSync } from "node:fs";
@@ -20,11 +27,14 @@ import { join } from "node:path";
 
 import type { Node } from "../schema.ts";
 import { escapeText } from "./latex-escape.ts";
-import { loadNoteFiles, structuredLatexDir } from "./content-modules.ts";
+import { loadNoteFiles, localeFromArgv, structuredLatexDir } from "./content-modules.ts";
+import { editionFor } from "./editions.ts";
 
-const texPath = join(structuredLatexDir, "build", "document.tex");
+const locale = localeFromArgv();
+const edition = editionFor(locale);
+const texPath = join(structuredLatexDir, "build", edition.buildSubdir, "document.tex");
 if (!existsSync(texPath)) {
-  throw new Error(`生成物が無い: ${texPath}\n  先に npm run build:tex を実行する`);
+  throw new Error(`生成物が無い: ${texPath}\n  先に build-latex.ts（--locale ${locale}）を実行する`);
 }
 const tex = readFileSync(texPath, "utf8");
 
@@ -76,8 +86,8 @@ if (leakedIds.length > 0 || leakedTexts.length > 0) {
 }
 
 console.log(
-  `no notes in output: ノート ${noteCount} 件（本文サンプル ${checkedSamples} 件）は ` +
-    "いずれも build/document.tex に現れない",
+  `no notes in output (${locale}): ノート ${noteCount} 件（本文サンプル ${checkedSamples} 件）は ` +
+    `いずれも ${texPath} に現れない`,
 );
 if (notesWithoutSample.length > 0) {
   // 本文がほぼ数式のノートは、地の文サンプルを取れない。id 検査だけが効いている状態なので明示する。

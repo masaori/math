@@ -2,11 +2,15 @@
 
 ## ユーザー方針（2026-08-01・現行。解除されるまで厳守）
 
-**英語版（`integrable-lattice/structured-latex-en/`）への変更を全面停止している。** 英訳・英語稿への書き換えを行わず、
-**英語版に関する変更を main へ反映しない。`structured-latex` にローカライズ概念を実装する別ゴールが main に入るまで翻訳を再開しない。**
+英語版への変更を全面停止していた条件——「`structured-latex` にローカライズ概念を実装する別ゴールが
+main に入るまで翻訳を再開しない」——は**満たされた**（main の `530dfcb`）。これを受けて
+cycle 24 step 2 で**英語版をそのローカライズモデルへ移し、旧来の日英二重管理を撤去した**。
 
-- **副作用として、論文本文（`structured-latex/content/`）への反映も止まっている。** 現在の仕組みでは
-  日本語正本を変更すると英語版への反映と日英対応検証が必須で、**本文反映は翻訳と不可分**だからである。
+- 英語版は独立プロジェクト `structured-latex-en/` ではなく、
+  **`structured-latex/locales/en/`（`locales.config.ts` が宣言する翻訳ロケール `en`）**である。
+  ラベル型・スキーマ・生成器・検査はすべて日本語版と共有する。
+- 撤去したものと移管先の対応表・失われた検出とその再表現は
+  `outputs/reports/cycle24_ops_localize_english_edition.md`。
 - 未反映の作業は失っていない。cycle 23 step 1 の成果は worktree `cached-discovering-moore` のブランチに
   **WIP コミット `12d15bd`** として保全してある（**push していない**）。再開時はここから。
 
@@ -103,14 +107,17 @@
 **論文 001 を英訳し、Expositiones Mathematicae の Survey Article として投稿できる稿に書き直した。
 投稿・外部連絡は一切していない。**
 
-- **正本は日本語版 `structured-latex/` のまま。** 英語版は `structured-latex-en/` として並置した
-  （同じ入力言語システムを使う独立プロジェクト。`--project` で生成器を回す）。
-- **可逆性は機械検証している**（`structured-latex-en/tools/verify-ja-en-correspondence.ts`）。
+- **正本は日本語版 `structured-latex/content/` のまま。** 英語版は当初 `structured-latex-en/` として
+  並置したが、**cycle 24 step 2 で `structured-latex/locales/en/` へ移した**（翻訳ロケール）。
+- **可逆性は機械検証している**（当時は `structured-latex-en/tools/verify-ja-en-correspondence.ts`、
+  現在は `structured-latex/tools/verify-localization.ts` ＋ システムの構造照合）。
   日本語版の全ブロック id・ラベル・kind・habitat・realEscape の有無・proof の有無・
   verification・lean・**数式の多重集合**が英語版と一致することを検査し、**違反 0 件**。
   - 英語版限定ブロック（Survey 向けの概観 2 件と先行研究の節 5 件）は
-    `tools/en-only-blocks.ts` に**理由つき**で登録したものだけ許す。
-  - 数式差は `tools/ja-en-exceptions.ts` に**理由つき**で 8 件。理由は 2 種類だけである:
+    `locales/en/translation-only-blocks.ts`（当時 `tools/en-only-blocks.ts`）に**理由つき**で
+    登録したものだけ許す。
+  - 数式差は `locales/en/structure-exceptions.ts`（当時 `tools/ja-en-exceptions.ts`）に
+    **理由つき**で 8 件。理由は 2 種類だけである:
     (a) 数式中の `\text{}` の日本語を英訳した（英語版は和文フォントを読まないので
     そのままでは PDF に組めない）、(b) リポジトリ内部パスを投稿稿から落とした。
 - **実測**: 日本語版 21 ページ / 英語版 31 ページ。どちらも未解決参照 0・組めない文字 0・版面外 0。
@@ -120,7 +127,7 @@
   解説の明快さと細部の正確さ）。**Guide for Authors は ScienceDirect が 403 で取得できていない。**
 - **MSC 2020 は zbMATH 配布の公式分類表と項目名まで照合した**（primary 11R06 /
   secondary 03B25, 03B30, 05C30, 11R23, 37B40, 37P35, 68V20, 82B20）。
-- **投稿前に著者本人がやること: 所属と連絡先を `structured-latex-en/frontmatter.ts` に埋める。**
+- **投稿前に著者本人がやること: 所属と連絡先を `structured-latex/locales/en/frontmatter.ts` に埋める。**
   リポジトリに一次情報が無いので空にしてある（型では検出できない）。
 
 ### この作業で見つかった日本語正本の誤り 8 件（すべて修正済み）
@@ -170,7 +177,9 @@
 - 投稿するか否か、どこへ出すかは**ユーザーの価値判断**。
 - 本文の「第 N 章」と `\cref` の "Section N" が二重の言い方になっている（日本語版も同じ状態）。
   統一は生成器か本文のどちらかを変える判断なので手を付けていない。
-- **英語版は日本語正本の cycle 20 完了時点（本コミット）に対応する。** 対応は `structured-latex-en/tools/verify-ja-en-correspondence.ts` が違反 0 件で機械保証している。 main は自動ループで進み続けるので、
+- **英語版は日本語正本の cycle 20 完了時点（本コミット）に対応する。** 対応は当時
+  `structured-latex-en/tools/verify-ja-en-correspondence.ts`、現在は
+  `structured-latex/tools/verify-localization.ts` が違反 0 件で機械保証している。 main は自動ループで進み続けるので、
   日本語版に章が増えたら英語版へ英訳を足し、対応検証を緑に戻すこと。
 ## cycle 20 完了（rank:cycle20, 2026-08-01）
 

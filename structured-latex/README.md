@@ -145,9 +145,54 @@ export default {
 }
 ```
 
-`npm run gen` / `--check` は原文のラベル型だけを生成し、設定された全翻訳を原文構造と
+`npm run gen` / `--check` は原文のラベル型を生成し、設定された全翻訳を原文構造と
 照合する。翻訳側も同じ生成済み `Label` を使うため、翻訳が未登録ラベルを宣言したり、
-存在しないラベルを参照したりすれば型検査で止まる。
+存在しないラベルを参照したりすれば型検査で止まる。翻訳にしか無いブロック（下記）の
+ラベルだけは `TranslationOnlyLabel` として別に生成し、`AnyLocaleLabel = Label |
+TranslationOnlyLabel` を翻訳側の受け口にする。**原文はこの型を使わない**
+（原文が翻訳限定ラベルを指せば、原文の解決で未解決参照になる）。
+
+### 意図した差の宣言（allowance）
+
+既定は「翻訳は原文と同じ構造を持つ」であり、差はすべて違反である。しかし実在の投稿稿は
+**意図した差**を持ちうる（原文に無い節を足す、リポジトリ内部のパス表記を落とす、
+数式中の `\text{}` の中身を訳す、引用ノードを足す、など）。これを「検査を緩める」ことで
+通すと、意図しない訳し落としまで一緒に通る。
+
+そこで差は 1 件ずつ `LocalizationAllowance` へ渡し、**説明できなかったものだけ**を違反にする。
+
+```typescript
+// locales.config.ts
+export default {
+  sourceLocale: 'ja',
+  translations: [
+    {
+      locale: 'en',
+      translatedFrom: 'ja',
+      contentDir: 'locales/en/content',
+      allowance: {
+        // 値は翻訳してよいが、**宣言の有無は一致していなければならない**メタデータ。
+        localeSpecificMetaKeys: ['realEscape'],
+        // 差 1 件ごとに呼ばれる。説明するなら空でない理由を必ず返す。
+        explain: (divergence) => ({ explained: true, reason: '…なぜ訳し落としではないか…' }),
+      },
+    },
+  ],
+}
+```
+
+`explain` が受け取る差は 4 種類（`TranslationDivergence`）。
+
+| 種類 | いつ上がるか |
+| --- | --- |
+| `translation_only_segment` | 翻訳にしか無いファイル。**認めても中のブロックは 1 件ずつ理由を要求する** |
+| `translation_only_block` | 翻訳にしか無いブロック |
+| `node_structure` | 数式・参照・引用・画像の骨格（値と位置と入れ子）が原文と違う |
+| `block_meta` | 意味メタデータが原文と違う（`localeSpecificMetaKeys` を除く） |
+
+原文にあるものが翻訳から消えた場合（`missing_translated_segment` /
+`missing_translated_block`）は allowance へ渡さない。**喪失は宣言で正当化できない。**
+「説明した」と答えたのに理由が空なら `empty_divergence_reason` として違反にする。
 
 ## 開発の思想
 

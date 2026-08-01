@@ -1,6 +1,6 @@
 # 論文 001 英訳の用語集・文体方針（訳語の正本）
 
-対象: `integrable-lattice/structured-latex-en/`（英語版）
+対象: `integrable-lattice/structured-latex/locales/en/`（英語版。cycle 24 step 2 で `structured-latex-en/` から移した）
 正本の日本語: `integrable-lattice/structured-latex/content/*.ts`（全 7 ファイル・33 ブロック）
 作成日: 2026-08-01
 
@@ -157,7 +157,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 
 **記号の書き方（実測に基づく制約。推測ではない）**: 命題 C′ / C″ の**プライムは ASCII の `'` で書く**
 （`Proposition C'` / `Proposition C''`）。**U+2032 `′` を地の文・タイトルへ書くと英語版の PDF から
-無言で消える**（2026-08-01 に `structured-latex-en` で実測。`build:pdf` の「組めない文字」検査が
+無言で消える**（2026-08-01 に英語版で実測。`build:pdf` の「組めない文字」検査が
 `′` を検出してビルドが落ちた。英語版は和文フォントを読み込まないため落とし先が無い）。
 数式ノードの中では `^{\prime}` を使えるが、**日本語版の数式は 1 文字も変えられない**ので、
 この制約は地の文とタイトルにのみ関わる。
@@ -295,7 +295,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 
 ### 1.4 フロントマターと「先行研究との関係」の節で使った語（2026-08-01 追記）
 
-`structured-latex-en/frontmatter.ts`（要旨）と `content/008_prior_art.ts`（先行研究の節）、
+`structured-latex/locales/en/frontmatter.ts`（要旨）と `content/008_prior_art.ts`（先行研究の節）、
 `content/001a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
 **後続はここにある語を別の語で訳さないこと。**
 
@@ -338,7 +338,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 1. **「命題 A」の呼称**（§1.3）。生成器は Theorem 環境で組むので、本文で "Proposition A" と呼ぶと
    PDF 上は "Theorem 4.1 (Proposition A)" のような二重呼称になる。日本語版も同じ状態である。
    統一するなら生成器か本文のどちらかを変える必要があり、**内容の変更を伴うので独断で変えない**。
-2. ~~**要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
+2. ~~**要旨・表題・キーワード・MSC 2020**（`structured-latex/locales/en/frontmatter.ts`）。
    現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。~~
    → **2026-08-01 に解消した。** 表題・要旨・キーワードを Survey Article 向けに書き直し、
    MSC 2020 は zbMATH 配布の公式分類表 <https://zbmath.org/static/msc2020.pdf> と照合して確定した
@@ -350,7 +350,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
    `\underbrace{...}_{\text{無条件に決定可能}}` 等を含み、英語版は和文フォントを読み込まないため
    `npm run build:pdf` が「PDF に組めない文字がある」で落ちる。~~
    → **2026-08-01 に統合担当が (a) の方針で解消した。** すなわち `\text{}` の**中身だけ**を英訳し、
-   `structured-latex-en/tools/ja-en-exceptions.ts` へ理由つきで登録した。
+   `structured-latex/locales/en/structure-exceptions.ts` へ理由つきで登録した。
    **日本語版は正本なので変更していない。** `\text{}` の外側の数式記号は 1 文字も変えていない。
    同種の箇所が他章にもある（`004_lambda_finite.ts` に 2 件、`005b_theta_infinity.ts` に 2 件）。
    **以後この型の箇所は同じ方針で処理する**（英訳 ＋ 例外表へ理由つき登録）。
@@ -360,7 +360,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
    どちらへ寄せるかは生成器か本文のどちらかを変える判断であり、**独断で変えていない**。
    なお**章番号そのものは、序論より前に `level: 1` の見出しを足すと全部ずれる**ので、
    英語版限定の節を足すときは末尾へ足すこと（`content/001a_reader_guide.ts` の冒頭コメントを見よ）。
-2. **要旨・表題・キーワード・MSC 2020**（`structured-latex-en/frontmatter.ts`）。
+2. **要旨・表題・キーワード・MSC 2020**（`structured-latex/locales/en/frontmatter.ts`）。
    現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
 3. **他章のラベルへの `ref()`**（第 5 章の英訳で暫定的に地の文にしてある）。
    `ref()` は英語版 `content/` に実在しないラベルを型で落とすため、まだ英訳されていない章の
@@ -498,7 +498,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 **投稿稿の読者がそのファイルを開けない**ので落とし、"the supporting report for this proposition" /
 "a table in the accompanying Lean development" のような言い方へ置き換えた。
 
-数式の多重集合が日本語版とずれるので、対象ブロックは `structured-latex-en/tools/ja-en-exceptions.ts`
+数式の多重集合が日本語版とずれるので、対象ブロックは `structured-latex/locales/en/structure-exceptions.ts`
 へ理由つきで登録する。**落としてよいのは参照先の「名前」だけであり、主張・限界・caveat は落とさない。**
 
 ### 3.4 数学英語の言い回し（校閲で直した型）
@@ -558,7 +558,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 中身だけを同じ位置で英訳すると英語として読めず、1 つ目は **`b = \bar{\tilde E}` と読める偽の等式**になる。
 そこで **`\text{}` の前後にある記号の順序だけ**を英語の語順へ直した。
 **記号は 1 つも足していないし、1 つも消していない。** 対象ブロックは
-`structured-latex-en/tools/ja-en-exceptions.ts` へ、この事情を明記した理由つきで登録した。
+`structured-latex/locales/en/structure-exceptions.ts` へ、この事情を明記した理由つきで登録した。
 
 ## 追記: 命題 G″（`content/005c_ell2_family.ts` — 第 6 章「ℓ = 2 の bouquet 族」）の語
 

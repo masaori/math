@@ -44,6 +44,9 @@
    ℝ への脱出は不可欠な箇所（指数評価・連続極限・微分・積分）に限る。
    一次情報は `docs/discussion/対数順序群上の統計力学/`。
 2. **証明は構造化 LaTeX（`structured-latex/`）の形式で残す。新規に Typst で書かない。**
+   英語版（Expositiones 投稿稿）は別プロジェクトではなく、同じディレクトリの**翻訳ロケール**
+   `structured-latex/locales/en/` である（`structured-latex/locales.config.ts` が宣言する）。
+   日英の対応はシステムの構造照合が機械検証する（`npm run verify:localization`）。
    流儀は `exact-solution-of-2d-ising-model/structured-latex/` を正本として確認する
    （ブロックの配列が文書順の正準表現／相互参照はラベル／参照用ノートは本体と分離）。
    既存の Typst の証明は順次移行し、**移行完了後に Typst を廃止**する（`_old/typst/` へ温存退避）。

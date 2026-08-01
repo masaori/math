@@ -10,6 +10,7 @@ import { err, ok, type Result } from '../result.ts'
 import { localeRuntimeSchema, type Locale } from '../structured-text/locale.ts'
 import {
   availableLocalesOf,
+  type LocalizationAllowances,
   type LocalizedRevisionSnapshot,
   type LocalizationValidationError,
   type MissingTranslationError,
@@ -97,10 +98,11 @@ export const resolveLocalized = <L extends string, M>(
   localized: LocalizedRevisionSnapshot<L, M>,
   locale: Locale,
   options: ResolveOptions,
+  allowances: LocalizationAllowances = {},
 ): Result<LocalizedResolvedDocument, LocalizedResolveError> => {
   const requestedLocale = validateRequestedLocale(locale)
   if (!requestedLocale.success) return err(requestedLocale.error)
-  const validated = validateLocalizedRevision(localized)
+  const validated = validateLocalizedRevision(localized, allowances)
   if (!validated.success) return err(validated.error)
   const selected = selectRevision(localized, requestedLocale.data)
   if (!selected.success) return err(selected.error)
@@ -129,10 +131,11 @@ export const resolveLocalizedTolerantly = <L extends string, M>(
   localized: LocalizedRevisionSnapshot<L, M>,
   locale: Locale,
   options: ResolveOptions,
+  allowances: LocalizationAllowances = {},
 ): Result<LocalizedResolution, LocalizationValidationError | MissingTranslationError> => {
   const requestedLocale = validateRequestedLocale(locale)
   if (!requestedLocale.success) return err(requestedLocale.error)
-  const validated = validateLocalizedRevision(localized)
+  const validated = validateLocalizedRevision(localized, allowances)
   if (!validated.success) return err(validated.error)
   const selected = selectRevision(localized, requestedLocale.data)
   if (!selected.success) return err(selected.error)

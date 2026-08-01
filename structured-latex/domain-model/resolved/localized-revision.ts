@@ -79,6 +79,29 @@ export type LocalizationIssue =
       actualRevision: number | null
     }
   | { code: 'structural_drift'; locale: Locale; path: string; expected: string; actual: string }
+  /** 原文にあるセグメント／ブロックが翻訳に無い（内容の喪失）。 */
+  | { code: 'missing_translated_segment'; locale: Locale; segmentKey: string }
+  | { code: 'missing_translated_block'; locale: Locale; segmentKey: string; blockId: string }
+  /** 翻訳にしか無いセグメント／ブロックで、allowance が理由を与えていないもの。 */
+  | { code: 'unexplained_translation_only_segment'; locale: Locale; segmentKey: string }
+  | {
+      code: 'unexplained_translation_only_block'
+      locale: Locale
+      segmentKey: string
+      blockId: string
+    }
+  /** 同じ locale の中でセグメント key / ブロック id が重複している（対応が一意に決まらない）。 */
+  | { code: 'duplicate_translation_key'; locale: Locale; path: string; key: string }
+  /** 対応の取れるセグメント／ブロックの相対順が原文と違う。 */
+  | {
+      code: 'translation_order_mismatch'
+      locale: Locale
+      path: string
+      expected: readonly string[]
+      actual: readonly string[]
+    }
+  /** allowance が「説明した」と答えたが、理由が空だった。理由の無い免除は認めない。 */
+  | { code: 'empty_divergence_reason'; locale: Locale; where: string }
 
 export type LocalizationValidationError =
   | { code: 'localization_validation_error'; issues: readonly ValidationIssue[] }
@@ -90,6 +113,54 @@ export type MissingTranslationError = {
   locale: Locale
   availableLocales: readonly Locale[]
 }
+
+/**
+ * 翻訳側に現れた、原文と一致しない箇所。
+ *
+ * 既定ではすべて違反である（I8: 翻訳は原文と同じ構造を持つ）。ただし現実の投稿稿は、
+ * 原文に無いブロックを足す・リポジトリ内部の名前を落とす・数式中の `\text{}` の中身を訳す、
+ * といった**意図した差**を持ちうる。それらを「検査を緩める」ことで通すと、意図しない
+ * 訳し落としまで一緒に通ってしまう。そこで差を 1 件ずつ allowance へ渡し、
+ * **説明できなかったものだけ**を違反として残す。
+ */
+export type TranslationDivergence =
+  | { kind: 'translation_only_segment'; locale: Locale; segmentKey: string }
+  | { kind: 'translation_only_block'; locale: Locale; segmentKey: string; blockId: string }
+  | {
+      kind: 'node_structure'
+      locale: Locale
+      segmentKey: string
+      /** ブロック id（ノートの比較ではノート id）。 */
+      blockId: string
+      /** `statement` / `proof` / `content` / `caption` / `body` のいずれか。 */
+      field: string
+      source: readonly StructuralNode[]
+      translation: readonly StructuralNode[]
+    }
+  | {
+      kind: 'block_meta'
+      locale: Locale
+      segmentKey: string
+      blockId: string
+      source: Readonly<Record<string, unknown>>
+      translation: Readonly<Record<string, unknown>>
+    }
+
+/** allowance の答え。説明したと答えるなら、**空でない理由**を必ず添える。 */
+export type DivergenceVerdict = { explained: false } | { explained: true; reason: string }
+
+export type LocalizationAllowance = {
+  /**
+   * 翻訳ごとに値が変わってよい意味メタデータのキー（散文で書かれたメタデータなど）。
+   * **値は比較しないが、有無は必ず一致していなければならない**（片方だけ宣言が消えるのは喪失）。
+   */
+  localeSpecificMetaKeys?: readonly string[]
+  /** 上記以外の差の説明。省略時は「何も説明しない」＝すべて違反。 */
+  explain?: (divergence: TranslationDivergence) => DivergenceVerdict
+}
+
+/** locale ごとの allowance。宣言の無い locale は一切の差を許さない。 */
+export type LocalizationAllowances = Readonly<Record<string, LocalizationAllowance>>
 
 export const availableLocalesOf = <L extends string, M>(
   localized: LocalizedRevisionSnapshot<L, M>,
@@ -147,7 +218,7 @@ const deeplyEqual = (left: unknown, right: unknown): boolean => {
   )
 }
 
-type StructuralNode =
+export type StructuralNode =
   | { type: 'math'; tex: string }
   | { type: 'displayMath'; tex: string }
   | { type: 'image'; assetKey: string }
@@ -163,7 +234,7 @@ type StructuralNode =
  * 文分割を変えられる。そのため骨格から取り除く。一方、数式・参照・引用・画像を含む
  * paragraph / list はそれらの親子関係自体が意味を持つので、コンテナを残して比較する。
  */
-const structuralNodesOf = <L extends string>(nodes: readonly Node<L>[]): StructuralNode[] => {
+export const structuralNodesOf = <L extends string>(nodes: readonly Node<L>[]): StructuralNode[] => {
   const structural: StructuralNode[] = []
   for (const node of nodes) {
     switch (node.type) {
@@ -200,8 +271,8 @@ const structuralNodesOf = <L extends string>(nodes: readonly Node<L>[]): Structu
   return structural
 }
 
-const theoremMetaOf = <L extends string, M>(block: Block<L, M>): unknown => {
-  if (block.kind === 'heading' || block.kind === 'figure') return null
+const theoremMetaOf = <L extends string, M>(block: Block<L, M>): Record<string, unknown> => {
+  if (block.kind === 'heading' || block.kind === 'figure') return {}
   const {
     id: _id,
     labels: _labels,
@@ -212,7 +283,18 @@ const theoremMetaOf = <L extends string, M>(block: Block<L, M>): unknown => {
     origin: _origin,
     ...meta
   } = block
-  return meta
+  return meta as Record<string, unknown>
+}
+
+/**
+ * 比較の文脈。issue 収集先と、その locale に宣言された allowance を一緒に運ぶ。
+ * 引数の列を増やさないためだけの入れ物であり、判断はしない。
+ */
+type CompareContext = {
+  locale: Locale
+  issues: LocalizationIssue[]
+  allowance: LocalizationAllowance | undefined
+  segmentKey: string
 }
 
 const addDrift = (
@@ -231,31 +313,60 @@ const addDrift = (
   })
 }
 
+/**
+ * 差を allowance へ 1 件渡し、説明されたかどうかを返す。
+ *
+ * 「説明した」と答えたのに理由が空なら、それは説明ではないので違反として残す
+ * （理由の無い免除は、検査に穴を開けたことが後から読めなくなる）。
+ */
+const explainedByAllowance = (
+  context: CompareContext,
+  divergence: TranslationDivergence,
+  where: string,
+): boolean => {
+  const verdict = context.allowance?.explain?.(divergence)
+  if (verdict === undefined || !verdict.explained) return false
+  if (verdict.reason.trim() === '') {
+    context.issues.push({ code: 'empty_divergence_reason', locale: context.locale, where })
+    return false
+  }
+  return true
+}
+
 const compareNodes = <L extends string>(
   source: readonly Node<L>[],
   translation: readonly Node<L>[],
-  locale: Locale,
+  context: CompareContext,
+  blockId: string,
+  field: string,
   path: string,
-  issues: LocalizationIssue[],
 ): void => {
   const sourceStructure = structuralNodesOf(source)
   const translationStructure = structuralNodesOf(translation)
-  if (!deeplyEqual(sourceStructure, translationStructure)) {
-    addDrift(issues, locale, path, sourceStructure, translationStructure)
+  if (deeplyEqual(sourceStructure, translationStructure)) return
+  const divergence: TranslationDivergence = {
+    kind: 'node_structure',
+    locale: context.locale,
+    segmentKey: context.segmentKey,
+    blockId,
+    field,
+    source: sourceStructure,
+    translation: translationStructure,
   }
+  if (explainedByAllowance(context, divergence, path)) return
+  addDrift(context.issues, context.locale, path, sourceStructure, translationStructure)
 }
 
 const compareNotes = <L extends string>(
   source: readonly Note<L>[] | undefined,
   translation: readonly Note<L>[] | undefined,
-  locale: Locale,
+  context: CompareContext,
   path: string,
-  issues: LocalizationIssue[],
 ): void => {
   const sourceNotes = source ?? []
   const translationNotes = translation ?? []
   if (sourceNotes.length !== translationNotes.length) {
-    addDrift(issues, locale, `${path}.length`, sourceNotes, translationNotes)
+    addDrift(context.issues, context.locale, `${path}.length`, sourceNotes, translationNotes)
     return
   }
   sourceNotes.forEach((sourceNote, noteIndex) => {
@@ -263,97 +374,269 @@ const compareNotes = <L extends string>(
     if (translatedNote === undefined) return
     const notePath = `${path}[${noteIndex}]`
     if (sourceNote.id !== translatedNote.id) {
-      addDrift(issues, locale, `${notePath}.id`, sourceNote.id, translatedNote.id)
+      addDrift(context.issues, context.locale, `${notePath}.id`, sourceNote.id, translatedNote.id)
     }
     if (!sameStringArray(sourceNote.targets, translatedNote.targets)) {
-      addDrift(issues, locale, `${notePath}.targets`, sourceNote.targets, translatedNote.targets)
+      addDrift(
+        context.issues,
+        context.locale,
+        `${notePath}.targets`,
+        sourceNote.targets,
+        translatedNote.targets,
+      )
     }
     // title は完全にロケール固有。body は本文と同じノード境界で比較する。
-    compareNodes(sourceNote.body, translatedNote.body, locale, `${notePath}.body`, issues)
+    compareNodes(sourceNote.body, translatedNote.body, context, sourceNote.id, 'body', `${notePath}.body`)
   })
+}
+
+/**
+ * 意味メタデータの比較。
+ *
+ * `localeSpecificMetaKeys` に挙げたキーだけは**値ではなく有無**を比べる（散文で書かれた
+ * メタデータは翻訳の対象だが、宣言そのものが片方から消えるのは喪失である）。
+ * 残りのキーは完全一致を求め、食い違えば allowance へ回す。
+ */
+const compareMeta = <L extends string, M>(
+  sourceBlock: Block<L, M>,
+  translatedBlock: Block<L, M>,
+  context: CompareContext,
+  blockPath: string,
+): void => {
+  const sourceMeta = theoremMetaOf(sourceBlock)
+  const translationMeta = theoremMetaOf(translatedBlock)
+  const localeSpecific = new Set(context.allowance?.localeSpecificMetaKeys ?? [])
+  for (const key of localeSpecific) {
+    const inSource = sourceMeta[key] !== undefined
+    const inTranslation = translationMeta[key] !== undefined
+    if (inSource !== inTranslation) {
+      addDrift(
+        context.issues,
+        context.locale,
+        `${blockPath}.meta.${key}`,
+        inSource ? 'declared' : 'absent',
+        inTranslation ? 'declared' : 'absent',
+      )
+    }
+  }
+  const strip = (meta: Record<string, unknown>): Record<string, unknown> =>
+    Object.fromEntries(Object.entries(meta).filter(([key]) => !localeSpecific.has(key)))
+  const comparableSource = strip(sourceMeta)
+  const comparableTranslation = strip(translationMeta)
+  if (deeplyEqual(comparableSource, comparableTranslation)) return
+  const divergence: TranslationDivergence = {
+    kind: 'block_meta',
+    locale: context.locale,
+    segmentKey: context.segmentKey,
+    blockId: sourceBlock.id,
+    source: comparableSource,
+    translation: comparableTranslation,
+  }
+  if (explainedByAllowance(context, divergence, `${blockPath}.meta`)) return
+  addDrift(context.issues, context.locale, `${blockPath}.meta`, comparableSource, comparableTranslation)
+}
+
+const comparePairedBlock = <L extends string, M>(
+  sourceBlock: Block<L, M>,
+  translatedBlock: Block<L, M>,
+  context: CompareContext,
+  blockPath: string,
+): void => {
+  if (sourceBlock.kind !== translatedBlock.kind) {
+    addDrift(context.issues, context.locale, `${blockPath}.kind`, sourceBlock.kind, translatedBlock.kind)
+    return
+  }
+  if (!sameStringArray(sourceBlock.labels, translatedBlock.labels)) {
+    addDrift(context.issues, context.locale, `${blockPath}.labels`, sourceBlock.labels, translatedBlock.labels)
+  }
+  if (sourceBlock.kind === 'heading' && translatedBlock.kind === 'heading') {
+    if (sourceBlock.level !== translatedBlock.level) {
+      addDrift(context.issues, context.locale, `${blockPath}.level`, sourceBlock.level, translatedBlock.level)
+    }
+    // TitleContent（text / tex のいずれも）はロケール固有。形の検証は各 locale の
+    // RuntimeSchema が済ませるので、ここでは比較しない。
+    return
+  }
+  if (sourceBlock.kind === 'figure' && translatedBlock.kind === 'figure') {
+    compareNodes(
+      sourceBlock.content,
+      translatedBlock.content,
+      context,
+      sourceBlock.id,
+      'content',
+      `${blockPath}.content`,
+    )
+    compareNodes(
+      sourceBlock.caption ?? [],
+      translatedBlock.caption ?? [],
+      context,
+      sourceBlock.id,
+      'caption',
+      `${blockPath}.caption`,
+    )
+    return
+  }
+  if (
+    sourceBlock.kind !== 'heading' &&
+    sourceBlock.kind !== 'figure' &&
+    translatedBlock.kind !== 'heading' &&
+    translatedBlock.kind !== 'figure'
+  ) {
+    compareMeta(sourceBlock, translatedBlock, context, blockPath)
+    compareNodes(
+      sourceBlock.statement,
+      translatedBlock.statement,
+      context,
+      sourceBlock.id,
+      'statement',
+      `${blockPath}.statement`,
+    )
+    compareNodes(
+      sourceBlock.proof ?? [],
+      translatedBlock.proof ?? [],
+      context,
+      sourceBlock.id,
+      'proof',
+      `${blockPath}.proof`,
+    )
+  }
+}
+
+/**
+ * key で引ける索引を作る。同じ key が 2 度現れたら対応が一意に決まらないので違反にする
+ * （後勝ちで黙って上書きすると、余った側が「翻訳限定」として現れず検査が無音になる）。
+ */
+const indexByKey = <T>(
+  values: readonly T[],
+  keyOf: (value: T) => string,
+  locale: Locale,
+  path: string,
+  issues: LocalizationIssue[],
+): Map<string, T> => {
+  const index = new Map<string, T>()
+  for (const value of values) {
+    const key = keyOf(value)
+    if (index.has(key)) {
+      issues.push({ code: 'duplicate_translation_key', locale, path, key })
+      continue
+    }
+    index.set(key, value)
+  }
+  return index
+}
+
+/** 原文と翻訳の双方に在るものの相対順が一致していること。 */
+const compareOrder = (
+  sourceKeys: readonly string[],
+  translationKeys: readonly string[],
+  locale: Locale,
+  path: string,
+  issues: LocalizationIssue[],
+): void => {
+  const shared = new Set(translationKeys)
+  const expected = sourceKeys.filter((key) => shared.has(key))
+  const sourceSet = new Set(sourceKeys)
+  const actual = translationKeys.filter((key) => sourceSet.has(key))
+  if (!sameStringArray(expected, actual)) {
+    issues.push({ code: 'translation_order_mismatch', locale, path, expected, actual })
+  }
 }
 
 const compareBlocks = <L extends string, M>(
   source: readonly Block<L, M>[],
   translation: readonly Block<L, M>[],
-  locale: Locale,
+  context: CompareContext,
   path: string,
-  issues: LocalizationIssue[],
 ): void => {
-  if (source.length !== translation.length) {
-    addDrift(issues, locale, `${path}.length`, source, translation)
-    return
-  }
+  const translationIndex = indexByKey(
+    translation,
+    (block) => block.id,
+    context.locale,
+    path,
+    context.issues,
+  )
   source.forEach((sourceBlock, blockIndex) => {
-    const translatedBlock = translation[blockIndex]
-    if (translatedBlock === undefined) return
-    const blockPath = `${path}[${blockIndex}]`
-    if (sourceBlock.id !== translatedBlock.id) {
-      addDrift(issues, locale, `${blockPath}.id`, sourceBlock.id, translatedBlock.id)
+    const translatedBlock = translationIndex.get(sourceBlock.id)
+    if (translatedBlock === undefined) {
+      context.issues.push({
+        code: 'missing_translated_block',
+        locale: context.locale,
+        segmentKey: context.segmentKey,
+        blockId: sourceBlock.id,
+      })
       return
     }
-    if (sourceBlock.kind !== translatedBlock.kind) {
-      addDrift(issues, locale, `${blockPath}.kind`, sourceBlock.kind, translatedBlock.kind)
-      return
-    }
-    if (!sameStringArray(sourceBlock.labels, translatedBlock.labels)) {
-      addDrift(issues, locale, `${blockPath}.labels`, sourceBlock.labels, translatedBlock.labels)
-    }
-    if (sourceBlock.kind === 'heading' && translatedBlock.kind === 'heading') {
-      if (sourceBlock.level !== translatedBlock.level) {
-        addDrift(issues, locale, `${blockPath}.level`, sourceBlock.level, translatedBlock.level)
-      }
-      // TitleContent（text / tex のいずれも）はロケール固有。形の検証は各 locale の
-      // RuntimeSchema が済ませるので、ここでは比較しない。
-      return
-    }
-    if (sourceBlock.kind === 'figure' && translatedBlock.kind === 'figure') {
-      compareNodes(sourceBlock.content, translatedBlock.content, locale, `${blockPath}.content`, issues)
-      compareNodes(sourceBlock.caption ?? [], translatedBlock.caption ?? [], locale, `${blockPath}.caption`, issues)
-      return
-    }
-    if (
-      sourceBlock.kind !== 'heading' &&
-      sourceBlock.kind !== 'figure' &&
-      translatedBlock.kind !== 'heading' &&
-      translatedBlock.kind !== 'figure'
-    ) {
-      if (!deeplyEqual(theoremMetaOf(sourceBlock), theoremMetaOf(translatedBlock))) {
-        addDrift(
-          issues,
-          locale,
-          `${blockPath}.meta`,
-          theoremMetaOf(sourceBlock),
-          theoremMetaOf(translatedBlock),
-        )
-      }
-      compareNodes(sourceBlock.statement, translatedBlock.statement, locale, `${blockPath}.statement`, issues)
-      compareNodes(sourceBlock.proof ?? [], translatedBlock.proof ?? [], locale, `${blockPath}.proof`, issues)
-    }
+    comparePairedBlock(sourceBlock, translatedBlock, context, `${path}[${blockIndex}]`)
   })
+  const sourceIds = new Set(source.map((block) => block.id))
+  for (const block of translation) {
+    if (sourceIds.has(block.id)) continue
+    const divergence: TranslationDivergence = {
+      kind: 'translation_only_block',
+      locale: context.locale,
+      segmentKey: context.segmentKey,
+      blockId: block.id,
+    }
+    if (explainedByAllowance(context, divergence, `${path}:${block.id}`)) continue
+    context.issues.push({
+      code: 'unexplained_translation_only_block',
+      locale: context.locale,
+      segmentKey: context.segmentKey,
+      blockId: block.id,
+    })
+  }
+  compareOrder(
+    source.map((block) => block.id),
+    translation.map((block) => block.id),
+    context.locale,
+    path,
+    context.issues,
+  )
 }
 
 const compareSegments = <L extends string, M>(
   source: readonly SegmentSnapshot<L, M>[],
   translation: readonly SegmentSnapshot<L, M>[],
   locale: Locale,
+  allowance: LocalizationAllowance | undefined,
   issues: LocalizationIssue[],
 ): void => {
-  if (source.length !== translation.length) {
-    addDrift(issues, locale, 'segments.length', source, translation)
-    return
-  }
+  const translationIndex = indexByKey(translation, (segment) => segment.key, locale, 'segments', issues)
   source.forEach((sourceSegment, segmentIndex) => {
-    const translatedSegment = translation[segmentIndex]
-    if (translatedSegment === undefined) return
-    const segmentPath = `segments[${segmentIndex}]`
-    if (sourceSegment.key !== translatedSegment.key) {
-      addDrift(issues, locale, `${segmentPath}.key`, sourceSegment.key, translatedSegment.key)
+    const translatedSegment = translationIndex.get(sourceSegment.key)
+    if (translatedSegment === undefined) {
+      issues.push({ code: 'missing_translated_segment', locale, segmentKey: sourceSegment.key })
       return
     }
-    compareBlocks(sourceSegment.blocks, translatedSegment.blocks, locale, `${segmentPath}.blocks`, issues)
-    compareNotes(sourceSegment.notes, translatedSegment.notes, locale, `${segmentPath}.notes`, issues)
+    const segmentPath = `segments[${segmentIndex}]`
+    const context: CompareContext = { locale, issues, allowance, segmentKey: sourceSegment.key }
+    compareBlocks(sourceSegment.blocks, translatedSegment.blocks, context, `${segmentPath}.blocks`)
+    compareNotes(sourceSegment.notes, translatedSegment.notes, context, `${segmentPath}.notes`)
   })
+  const sourceKeys = new Set(source.map((segment) => segment.key))
+  for (const segment of translation) {
+    if (sourceKeys.has(segment.key)) continue
+    const context: CompareContext = { locale, issues, allowance, segmentKey: segment.key }
+    const divergence: TranslationDivergence = {
+      kind: 'translation_only_segment',
+      locale,
+      segmentKey: segment.key,
+    }
+    if (!explainedByAllowance(context, divergence, `segments:${segment.key}`)) {
+      issues.push({ code: 'unexplained_translation_only_segment', locale, segmentKey: segment.key })
+      continue
+    }
+    // セグメントごと認めた場合でも、**中のブロックは 1 件ずつ**理由を要求する。
+    // でないと、認めたファイルへ後からブロックを足すだけで無審査に通ってしまう。
+    compareBlocks([], segment.blocks, context, `segments:${segment.key}.blocks`)
+  }
+  compareOrder(
+    source.map((segment) => segment.key),
+    translation.map((segment) => segment.key),
+    locale,
+    'segments',
+    issues,
+  )
 }
 
 /**
@@ -364,6 +647,7 @@ const compareSegments = <L extends string, M>(
  */
 export const validateLocalizedRevision = <L extends string, M>(
   localized: LocalizedRevisionSnapshot<L, M>,
+  allowances: LocalizationAllowances = {},
 ): Result<LocalizedRevisionSnapshot<L, M>, LocalizationValidationError> => {
   // TypeScript 上の Locale は著者側のリテラルを保つため string のままである。`as` や
   // 動的生成で境界を迂回した値もあるので、型付き入口でも locale 値域は再確認する。
@@ -510,7 +794,13 @@ export const validateLocalizedRevision = <L extends string, M>(
   if (source !== undefined) {
     for (const translation of localized.localizations) {
       if (translation.locale === localized.sourceLocale) continue
-      compareSegments(source.revision.segments, translation.revision.segments, translation.locale, issues)
+      compareSegments(
+        source.revision.segments,
+        translation.revision.segments,
+        translation.locale,
+        allowances[translation.locale],
+        issues,
+      )
     }
   }
   return issues.length === 0 ? ok(localized) : err({ code: 'invalid_localization', issues })
@@ -566,6 +856,7 @@ export const validateLocalizedRevisionSnapshot = <L extends string = string, M =
   value: unknown,
   runtimeSchema: RuntimeSchema<L, M> = createRuntimeSchema<L, M>(),
   where = 'localizedRevision',
+  allowances: LocalizationAllowances = {},
 ): Result<LocalizedRevisionSnapshot<L, M>, LocalizationValidationError> => {
   const envelope = localizedRevisionEnvelopeSchema.safeParse(value)
   if (!envelope.success) {
@@ -609,9 +900,12 @@ export const validateLocalizedRevisionSnapshot = <L extends string = string, M =
   if (validationIssues.length > 0) {
     return err({ code: 'localization_validation_error', issues: validationIssues })
   }
-  return validateLocalizedRevision({
-    documentId: envelope.data.documentId,
-    sourceLocale: envelope.data.sourceLocale,
-    localizations,
-  })
+  return validateLocalizedRevision(
+    {
+      documentId: envelope.data.documentId,
+      sourceLocale: envelope.data.sourceLocale,
+      localizations,
+    },
+    allowances,
+  )
 }

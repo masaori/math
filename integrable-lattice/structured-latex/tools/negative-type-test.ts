@@ -69,7 +69,49 @@ ${body}
 ]);
 `;
 
+const translatedBlocksModule = (body: string): string =>
+  `import { defineTranslatedBlocks, paragraph, refInTranslation as ref } from "../../../schema.ts";
+
+export default defineTranslatedBlocks([
+${body}
+]);
+`;
+
 const cases: Case[] = [
+  // --- 翻訳ロケールの束縛（cycle 24 step 2 で足した受け口）-----------------------
+  {
+    // 翻訳側は翻訳限定ラベルも指せる。それでも「実在しないラベル」は落ちなければならない
+    // （広げた受け口が素通しになっていないことの実証）。
+    name: "【翻訳】翻訳側の ref が存在しないラベルを指す",
+    expect: brokenLabel,
+    files: (broken) => ({
+      "fixture.ts": translatedBlocksModule(
+        block({
+          id: "neg_translated_ref",
+          statement: `paragraph([ref(${JSON.stringify(broken ? brokenLabel : realLabel)})])`,
+        }),
+      ),
+    }),
+  },
+  {
+    // 翻訳側でも住処の宣言は必須（原文と同じ制約が掛かっていることの実証）。
+    name: "【翻訳】翻訳側の本文ブロックが habitat を宣言していない",
+    expect: "habitat",
+    files: (broken) => ({
+      "fixture.ts": translatedBlocksModule(
+        broken
+          ? `  {
+    id: "neg_translated_habitat",
+    kind: "claim",
+    origin: { path: "type-tests/.tmp", ordinal: 1 },
+    labels: [],
+    statement: [],
+  },`
+          : block({ id: "neg_translated_habitat" }),
+      ),
+    }),
+  },
+
   // --- 具体化が効いていること（システムのファクトリが本当にラベルで束縛されているか）-----
   {
     name: "具体化: 本文中の ref が存在しないラベルを指す",

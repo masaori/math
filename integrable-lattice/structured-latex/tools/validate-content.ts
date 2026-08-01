@@ -15,16 +15,39 @@
  * プロジェクト固有メタデータのキーを宣言して具体化してある）。これは throw せず Result を返すので、
  * ここで受けて全件集めてから 1 度だけ落とす。
  *
- * 使い方: node structured-latex/tools/validate-content.ts
+ * **全ロケールに同じ検査を掛ける**（cycle 24 step 2）。それ以前は英語版が
+ * `structured-latex-en/tools/validate-content.ts` として複製しており、
+ * 未変換 Typst 記法の検査だけが**英語版から落ちていた**。ここでは落とさない
+ * （英語版に Typst 由来のテキストが無いなら、検査が通るだけで害は無い）。
+ * ノートは原文だけが持つ（翻訳ノートは locales.config.ts が宣言していない）。
+ *
+ * 使い方:
+ *   node structured-latex/tools/validate-content.ts               原文を検査する
+ *   node structured-latex/tools/validate-content.ts --locale en   英語版を検査する
  */
 
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 
-import { ALL_LABELS } from "../labels.generated.ts";
-import { HABITAT_VALUES, checkHabitation, runtimeSchema } from "../schema.ts";
-import type { ConvertedBlock, Node, TheoremLikeBlock } from "../schema.ts";
-import { loadContentFiles, loadNoteFiles, structuredLatexDir } from "./content-modules.ts";
+import { ALL_LABELS, TRANSLATION_ONLY_LABELS } from "../labels.generated.ts";
+import { HABITAT_VALUES, checkHabitation, runtimeSchema, translatedRuntimeSchema } from "../schema.ts";
+import type { TranslatedBlock, TranslatedNode } from "../schema.ts";
+import {
+  loadContentFilesForLocale,
+  loadNoteFiles,
+  localeFromArgv,
+  sourceLocale,
+  structuredLatexDir,
+} from "./content-modules.ts";
+
+// 検査の本体は原文と翻訳で同じ。型の上ではラベルの値域だけが違うので、広いほうで受ける。
+type ConvertedBlock = TranslatedBlock;
+type Node = TranslatedNode;
+type TheoremLikeBlock = Exclude<TranslatedBlock, { kind: "heading" } | { kind: "figure" }>;
+
+const locale = localeFromArgv();
+const isSourceLocale = locale === sourceLocale;
+const blockSchema = isSourceLocale ? runtimeSchema : translatedRuntimeSchema;
 
 /** プロジェクトルート（`integrable-lattice/`）。`verification` のパスはここからの相対。 */
 const projectRoot = join(structuredLatexDir, "..");
@@ -44,11 +67,11 @@ const escapes: { blockId: string; habitat: string; why: string }[] = [];
 let verificationLinkCount = 0;
 let leanLinkCount = 0;
 
-const contentFiles = await loadContentFiles();
+const contentFiles = await loadContentFilesForLocale(locale);
 
 for (const { file, blocks } of contentFiles) {
   // ブロック 1 件の形（未知フィールド・ノード種別・kind ごとのフィールド）はシステムが見る。
-  const parsed = runtimeSchema.validateBlocks(blocks, file);
+  const parsed = blockSchema.validateBlocks(blocks, file);
   if (!parsed.success) {
     for (const issue of parsed.error) problems.push(`${issue.path}: ${issue.message}`);
   }
@@ -79,10 +102,11 @@ if (blockCount === 0) {
 const noteIds = new Set<string>();
 const noteTargets: { target: string; noteId: string; file: string }[] = [];
 let noteCount = 0;
-const noteFiles = await loadNoteFiles();
+// ノートは原文だけが持つ（翻訳ノートは locales.config.ts が宣言していない）。
+const noteFiles = isSourceLocale ? await loadNoteFiles() : [];
 
 for (const { file, notes } of noteFiles) {
-  const parsed = runtimeSchema.validateNotes(notes, file);
+  const parsed = blockSchema.validateNotes(notes, file);
   if (!parsed.success) {
     for (const issue of parsed.error) problems.push(`${issue.path}: ${issue.message}`);
   }
@@ -115,7 +139,10 @@ for (const target of noteTargets.filter((t) => !labels.has(t.target))) {
 }
 
 // 生成済みラベル一覧（型の土台）と実状の一致。
-const generated = new Set<string>(ALL_LABELS);
+// 翻訳ロケールは、原文のラベルに翻訳限定ラベルを足したものが実状と一致する。
+const generated = new Set<string>(
+  isSourceLocale ? ALL_LABELS : [...ALL_LABELS, ...TRANSLATION_ONLY_LABELS],
+);
 const missingInGenerated = [...labels.keys()].filter((label) => !generated.has(label));
 const staleInGenerated = [...generated].filter((label) => !labels.has(label));
 if (missingInGenerated.length > 0 || staleInGenerated.length > 0) {
@@ -134,7 +161,7 @@ if (problems.length > 0) {
 }
 
 console.log(
-  `validated ${blockCount} blocks from ${contentFiles.length} files ` +
+  `validated (${locale}) ${blockCount} blocks from ${contentFiles.length} files ` +
     `(${headingCount} headings, ${labels.size} labels, ${refs.length} refs, all resolved)`,
 );
 console.log(

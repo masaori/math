@@ -14,11 +14,16 @@ import { fileURLToPath } from "node:url";
 import {
   contentDirOf,
   listSourceFiles as listSourceFilesOf,
+  loadBlockFiles as loadBlockFilesOf,
   loadContentFiles as loadContentFilesOf,
   loadNoteFiles as loadNoteFilesOf,
   notesDirOf,
 } from "../../../structured-latex/codegen/structured-text-index/content-modules.ts";
-import type { ConvertedBlock, Note } from "../schema.ts";
+import {
+  directoryFromProject,
+  loadProjectLocalizationConfig,
+} from "../../../structured-latex/codegen/structured-text-index/locales.ts";
+import type { ConvertedBlock, Note, TranslatedBlock } from "../schema.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -43,4 +48,57 @@ export const loadContentFiles = async (): Promise<LoadedBlockFile[]> => {
 export const loadNoteFiles = async (): Promise<LoadedNoteFile[]> => {
   const loaded = await loadNoteFilesOf(structuredLatexDir);
   return loaded.map(({ file, notes }) => ({ file, notes: notes as readonly Note[] }));
+};
+
+// --- ロケール（locales.config.ts が宣言する翻訳）------------------------------
+//
+// 翻訳ロケールの入力ディレクトリは `locales.config.ts` だけが決める。ツールはここを通して
+// 読む（ディレクトリ名をツール側へ書き写さない。写せば設定と実状が黙ってずれる）。
+
+export type LoadedTranslatedFile = { file: string; blocks: readonly TranslatedBlock[] };
+
+export const localizationConfig = await loadProjectLocalizationConfig(structuredLatexDir);
+
+/** 原文ロケール（`content/` が属するロケール）。 */
+export const sourceLocale = localizationConfig.sourceLocale;
+
+export const knownLocales: readonly string[] = [
+  localizationConfig.sourceLocale,
+  ...localizationConfig.translations.map((translation) => translation.locale),
+];
+
+const translationOf = (locale: string) => {
+  const translation = localizationConfig.translations.find((entry) => entry.locale === locale);
+  if (translation === undefined) {
+    throw new Error(
+      `locales.config.ts が宣言していないロケール: ${locale}（宣言済み: ${knownLocales.join(", ")}）`,
+    );
+  }
+  return translation;
+};
+
+/** そのロケールの content ディレクトリ（原文なら `content/`）。 */
+export const contentDirForLocale = (locale: string): string =>
+  locale === localizationConfig.sourceLocale
+    ? contentDir
+    : directoryFromProject(structuredLatexDir, translationOf(locale).contentDir);
+
+/** そのロケールの content を文書順で読む。 */
+export const loadContentFilesForLocale = async (locale: string): Promise<LoadedTranslatedFile[]> => {
+  const loaded = await loadBlockFilesOf(contentDirForLocale(locale));
+  return loaded.map(({ file, blocks }) => ({ file, blocks: blocks as readonly TranslatedBlock[] }));
+};
+
+/**
+ * コマンドラインの `--locale <l>`。省略時は原文ロケール。
+ * 宣言されていないロケールは受け付けない（打ち間違いを黙って原文にしない）。
+ */
+export const localeFromArgv = (argv: readonly string[] = process.argv): string => {
+  const index = argv.indexOf("--locale");
+  if (index < 0) return localizationConfig.sourceLocale;
+  const locale = argv[index + 1];
+  if (locale === undefined || !knownLocales.includes(locale)) {
+    throw new Error(`--locale の値が不正: ${String(locale)}（宣言済み: ${knownLocales.join(", ")}）`);
+  }
+  return locale;
 };

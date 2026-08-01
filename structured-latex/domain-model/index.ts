@@ -106,13 +106,19 @@ export {
 export {
   availableLocalesOf,
   asSingleLocaleRevision,
+  structuralNodesOf,
   validateLocalizedRevision,
   validateLocalizedRevisionSnapshot,
+  type DivergenceVerdict,
+  type LocalizationAllowance,
+  type LocalizationAllowances,
   type LocalizedRevision,
   type LocalizedRevisionSnapshot,
   type LocalizationIssue,
   type LocalizationValidationError,
   type MissingTranslationError,
+  type StructuralNode,
+  type TranslationDivergence,
 } from './resolved/localized-revision.ts'
 
 export {

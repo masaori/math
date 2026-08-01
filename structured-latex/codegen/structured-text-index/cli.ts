@@ -23,14 +23,19 @@ import {
   notesDirOf,
 } from './content-modules.ts'
 import { directoryFromProject, loadProjectLocalizationConfig } from './locales.ts'
-import { renderDocument, renderLabels } from './render.ts'
+import { renderDocument, renderLabels, type TranslationRender } from './render.ts'
 import {
   DEFAULT_NUMBERING_POLICY,
   createRuntimeSchema,
   resolveLocalized,
   validateLocalizedRevisionSnapshot,
 } from '../../domain-model/index.ts'
-import type { LocalizedRevision, Note } from '../../domain-model/index.ts'
+import type {
+  LocalizationAllowance,
+  LocalizationAllowances,
+  LocalizedRevision,
+  Note,
+} from '../../domain-model/index.ts'
 
 const systemDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 
@@ -120,11 +125,29 @@ const localizations: LocalizedRevision[] = [
     revision: { documentId: '__codegen__', revision: 1, segments: sourceSegments },
   },
 ]
+const allowances: Record<string, LocalizationAllowance> = {}
+const translationRenders: TranslationRender[] = []
+/** 翻訳ロケールにしか無いブロックのラベル（生成物のユニオン型に足す）。 */
+const translationOnlyLabels = new Set<string>()
+const sourceBlockIds = new Set(sourceSegments.flatMap((segment) => segment.blocks.map((b) => b.id)))
 for (const translation of localizationConfig.translations) {
-  const content = await loadBlockFiles(directoryFromProject(projectDir, translation.contentDir))
+  const contentDir = directoryFromProject(projectDir, translation.contentDir)
+  const content = await loadBlockFiles(contentDir)
   const notes = translation.notesDir === undefined
     ? []
     : await loadNotesFiles(directoryFromProject(projectDir, translation.notesDir))
+  if (translation.allowance !== undefined) allowances[translation.locale] = translation.allowance
+  translationRenders.push({
+    locale: translation.locale,
+    contentDir: translation.contentDir,
+    files: listSourceFiles(contentDir),
+  })
+  for (const { blocks } of content) {
+    for (const block of blocks) {
+      if (sourceBlockIds.has(block.id)) continue
+      for (const label of block.labels) translationOnlyLabels.add(label)
+    }
+  }
   localizations.push({
     locale: translation.locale,
     translatedFrom: translation.translatedFrom,
@@ -140,6 +163,15 @@ for (const translation of localizationConfig.translations) {
     },
   })
 }
+
+// 翻訳限定ラベルが原文のラベルと衝突すると、どちらの版のブロックを指すか決まらない。
+const collidingLabels = [...translationOnlyLabels].filter((label) => seen.has(label)).sort()
+if (collidingLabels.length > 0) {
+  console.error(`翻訳限定ブロックのラベルが原文のラベルと衝突している:\n  ${collidingLabels.join('\n  ')}`)
+  process.exit(1)
+}
+
+const localizationAllowances: LocalizationAllowances = allowances
 const localizedSnapshot = validateLocalizedRevisionSnapshot(
   {
     documentId: '__codegen__',
@@ -150,6 +182,7 @@ const localizedSnapshot = validateLocalizedRevisionSnapshot(
   // 既知の語彙は検査しつつ、定理型に載る未知の意味メタデータは落とさない。
   createRuntimeSchema({ unknownBlockMeta: 'passthrough' }),
   'localization',
+  localizationAllowances,
 )
 if (!localizedSnapshot.success) {
   console.error(`ローカライズ入力検証に失敗:\n${JSON.stringify(localizedSnapshot.error, null, 2)}`)
@@ -160,6 +193,7 @@ for (const locale of localizedSnapshot.data.localizations) {
     localizedSnapshot.data,
     locale.locale,
     { numbering: DEFAULT_NUMBERING_POLICY, audience: 'publication' },
+    localizationAllowances,
   )
   if (!localized.success) {
     console.error(`ローカライズ検証に失敗 (${locale.locale}):\n${JSON.stringify(localized.error, null, 2)}`)
@@ -173,12 +207,30 @@ const domainModelSpecifier = (() => {
   return raw.startsWith('.') ? raw : `./${raw}`
 })()
 
+const sortedTranslationOnlyLabels = [...translationOnlyLabels].sort()
 const outputs = [
-  { path: labelsPath, rendered: renderLabels(labels), what: `${labels.length} labels` },
+  {
+    path: labelsPath,
+    rendered: renderLabels(labels, sortedTranslationOnlyLabels),
+    what:
+      `${labels.length} labels` +
+      (sortedTranslationOnlyLabels.length === 0
+        ? ''
+        : ` + ${sortedTranslationOnlyLabels.length} translation-only labels`),
+  },
   {
     path: documentPath,
-    rendered: renderDocument({ domainModelSpecifier, contentFiles, noteFiles }),
-    what: `${contentFiles.length} content + ${noteFiles.length} notes files`,
+    rendered: renderDocument({
+      domainModelSpecifier,
+      contentFiles,
+      noteFiles,
+      translations: translationRenders,
+    }),
+    what:
+      `${contentFiles.length} content + ${noteFiles.length} notes files` +
+      (translationRenders.length === 0
+        ? ''
+        : ` + ${translationRenders.reduce((n, t) => n + t.files.length, 0)} translated files`),
   },
 ]
 

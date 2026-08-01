@@ -17,7 +17,7 @@ import type {
   Note,
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
-import type { Label } from './labels.generated.ts'
+import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_001_intro from './content/001_intro.ts'
 import blocks_002_setup from './content/002_setup.ts'
 import blocks_003_archimedean from './content/003_archimedean.ts'
@@ -31,6 +31,20 @@ import blocks_008_theta_padic from './content/008_theta_padic.ts'
 import blocks_009_s_infinity_decision from './content/009_s_infinity_decision.ts'
 import blocks_009_theta_recursion from './content/009_theta_recursion.ts'
 
+import blocks_en_001_intro from './locales/en/content/001_intro.ts'
+import blocks_en_001a_reader_guide from './locales/en/content/001a_reader_guide.ts'
+import blocks_en_002_setup from './locales/en/content/002_setup.ts'
+import blocks_en_003_archimedean from './locales/en/content/003_archimedean.ts'
+import blocks_en_004_lambda_finite from './locales/en/content/004_lambda_finite.ts'
+import blocks_en_005_duality from './locales/en/content/005_duality.ts'
+import blocks_en_005b_theta_infinity from './locales/en/content/005b_theta_infinity.ts'
+import blocks_en_005c_ell2_family from './locales/en/content/005c_ell2_family.ts'
+import blocks_en_006_propositions_TVW from './locales/en/content/006_propositions_TVW.ts'
+import blocks_en_007_asymmetry_scope from './locales/en/content/007_asymmetry_scope.ts'
+import blocks_en_008_theta_padic from './locales/en/content/008_theta_padic.ts'
+import blocks_en_009_s_infinity_decision from './locales/en/content/009_s_infinity_decision.ts'
+import blocks_en_009_theta_recursion from './locales/en/content/009_theta_recursion.ts'
+import blocks_en_010_prior_art from './locales/en/content/010_prior_art.ts'
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
@@ -77,3 +91,48 @@ export type _NoIdCollision = AssertNoDuplicate<FindDuplicate<[...AllBlockIds, ..
 /** labels.generated.ts と content の実状が一致すること（両方向）。 */
 export type _NoStaleGeneratedLabel = AssertNoDuplicate<Exclude<Label, AllLabels[number]>>
 export type _NoMissingGeneratedLabel = AssertNoDuplicate<Exclude<AllLabels[number], Label>>
+
+/** 翻訳ロケール用のラベル型は原文のラベルを必ず含む。 */
+export type _AnyLocaleLabelIncludesLabel = Assert<Label extends AnyLocaleLabel ? true : never>
+
+/** 翻訳限定のラベルは原文のラベルと交わらない（交わればどちらの版のものか決まらない）。 */
+export type _TranslationOnlyLabelIsDisjoint = AssertNoDuplicate<Extract<TranslationOnlyLabel, Label>>
+
+/** 翻訳ロケール en の全ブロック（文書順）。 */
+export type AllBlocks_en = [
+  ...typeof blocks_en_001_intro,
+  ...typeof blocks_en_001a_reader_guide,
+  ...typeof blocks_en_002_setup,
+  ...typeof blocks_en_003_archimedean,
+  ...typeof blocks_en_004_lambda_finite,
+  ...typeof blocks_en_005_duality,
+  ...typeof blocks_en_005b_theta_infinity,
+  ...typeof blocks_en_005c_ell2_family,
+  ...typeof blocks_en_006_propositions_TVW,
+  ...typeof blocks_en_007_asymmetry_scope,
+  ...typeof blocks_en_008_theta_padic,
+  ...typeof blocks_en_009_s_infinity_decision,
+  ...typeof blocks_en_009_theta_recursion,
+  ...typeof blocks_en_010_prior_art,
+]
+
+export type _TranslationBlocksAreBlocks_en = Assert<
+  AllBlocks_en extends readonly Block<AnyLocaleLabel>[] ? true : never
+>
+export type _TranslationIsNotEmpty_en = Assert<AllBlocks_en extends readonly [] ? never : true>
+export type _UniqueTranslationBlockIds_en = AssertNoDuplicate<
+  FindDuplicate<BlockIdsOf<AllBlocks_en>>
+>
+export type _UniqueTranslationLabels_en = AssertNoDuplicate<
+  FindDuplicate<LabelsOf<AllBlocks_en>>
+>
+/** 翻訳ロケールが実際に持つラベルの全体。 */
+type AllTranslationLabels = LabelsOf<AllBlocks_en>[number]
+
+/** 生成した TranslationOnlyLabel と、翻訳ロケールの実状が一致すること（両方向）。 */
+export type _NoStaleTranslationOnlyLabel = AssertNoDuplicate<
+  Exclude<TranslationOnlyLabel, AllTranslationLabels>
+>
+export type _NoMissingTranslationOnlyLabel = AssertNoDuplicate<
+  Exclude<AllTranslationLabels, AnyLocaleLabel>
+>

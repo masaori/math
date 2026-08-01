@@ -42,13 +42,14 @@ import {
   type TheoremLikeBlock as SystemTheoremLikeBlock,
 } from "../../structured-latex/domain-model/index.ts";
 
-import type { Label } from "./labels.generated.ts";
+import type { AnyLocaleLabel, Label } from "./labels.generated.ts";
 
-export type { Label, Origin };
+export type { AnyLocaleLabel, Label, Origin };
 
 // システムが持つ語彙をそのまま通す（同じものを 2 経路で import できる状態を作らないため、
 // 利用側はこのモジュールだけを見ればよい）。
 export {
+  cite,
   displayMath,
   image,
   list,
@@ -168,7 +169,33 @@ export type ConvertedBlock = TheoremLikeBlock | HeadingBlock | FigureBlock<Label
 export type Node = SystemNode<Label>;
 export type Note = SystemNote<Label>;
 
+// --- 翻訳ロケール（locales.config.ts が宣言するもの）------------------------
+//
+// 翻訳は原文と**同じラベル型**を使う。ただし翻訳限定ブロック（`locales/<l>/
+// translation-only-blocks.ts` に理由つきで登録したもの）だけは原文に対応物が無いので、
+// そのラベルは生成器が `TranslationOnlyLabel` として別に出す。翻訳側はその和である
+// `AnyLocaleLabel` を使う。**原文はこの型を使わない**（原文が翻訳限定ラベルを指せば、
+// 原文の解決で未解決参照になる）。
+
+export type TranslatedTheoremLikeBlock = SystemTheoremLikeBlock<AnyLocaleLabel, ProjectMeta>;
+
+export type TranslatedHeadingBlock = SystemHeadingBlock<AnyLocaleLabel> & {
+  habitat?: never;
+  realEscape?: never;
+  verification?: never;
+  lean?: never;
+};
+
+export type TranslatedBlock =
+  | TranslatedTheoremLikeBlock
+  | TranslatedHeadingBlock
+  | FigureBlock<AnyLocaleLabel>;
+
+export type TranslatedNode = SystemNode<AnyLocaleLabel>;
+export type TranslatedNote = SystemNote<AnyLocaleLabel>;
+
 const schema = createStructuredTextSchema<Label, ProjectMeta>();
+const translatedSchema = createStructuredTextSchema<AnyLocaleLabel, ProjectMeta>();
 
 /**
  * 1 ファイル分のブロック列を定義する。**配列の並びが文書順の正準表現**。
@@ -185,6 +212,16 @@ export const defineNotes = schema.defineNotes;
 
 /** 相互参照。実在しないラベルはコンパイル時に落ちる。 */
 export const ref = schema.ref;
+
+/** 翻訳ロケールの 1 ファイル分。受け口だけが `AnyLocaleLabel` に広がる。 */
+export const defineTranslatedBlocks = <const T extends readonly TranslatedBlock[]>(
+  blocks: T & readonly TranslatedBlock[] & NoDuplicateBlockId<T> & NoDuplicateLabel<T>,
+): T => blocks;
+
+export const defineTranslatedNotes = translatedSchema.defineNotes;
+
+/** 翻訳ロケールからの相互参照。翻訳限定ブロックのラベルも指せる。 */
+export const refInTranslation = translatedSchema.ref;
 
 // --- 実行時検証 --------------------------------------------------------------
 
@@ -203,23 +240,29 @@ export const HABITAT_VALUES = {
  * 見出し・図表のスキーマにはこの `blockMeta` が織り込まれないので、
  * 「見出しに habitat を書く」は実行時にも未知フィールドとして拒否される。
  */
-export const runtimeSchema = createRuntimeSchema<
-  Label,
+type BlockMetaSchema = {
+  habitat: z.ZodTypeAny;
+  realEscape: z.ZodTypeAny;
+  verification: z.ZodTypeAny;
+  lean: z.ZodTypeAny;
+};
+
+/** 固有メタデータのキーの宣言。原文用と翻訳用で**同じもの**を使う（2 か所に書かない）。 */
+const blockMeta: BlockMetaSchema = {
+  habitat: z.enum(ALL_HABITATS),
+  realEscape: z.string().min(1).optional(),
+  verification: z.array(z.string().min(1)).optional(),
+  lean: z.array(z.string().min(1)).optional(),
+};
+
+export const runtimeSchema = createRuntimeSchema<Label, ProjectMeta, BlockMetaSchema>({ blockMeta });
+
+/** 翻訳ロケールの実行時スキーマ。違いはラベルの値域だけ。 */
+export const translatedRuntimeSchema = createRuntimeSchema<
+  AnyLocaleLabel,
   ProjectMeta,
-  {
-    habitat: z.ZodTypeAny;
-    realEscape: z.ZodTypeAny;
-    verification: z.ZodTypeAny;
-    lean: z.ZodTypeAny;
-  }
->({
-  blockMeta: {
-    habitat: z.enum(ALL_HABITATS),
-    realEscape: z.string().min(1).optional(),
-    verification: z.array(z.string().min(1)).optional(),
-    lean: z.array(z.string().min(1)).optional(),
-  },
-});
+  BlockMetaSchema
+>({ blockMeta });
 
 const isKnownHabitat = (value: string): boolean =>
   HABITAT_VALUES.countable.has(value) || HABITAT_VALUES.escaping.has(value);

@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 /**
- * 最終成果物（論文）の生成器。**入力は `content/` だけ**。
+ * 最終成果物（論文）の生成器。**入力は選んだロケールの content だけ**。
  *
  * README 7 節「証明の正本は content/。ここだけから最終成果物を生成する」を実装する。
  * `notes/` は文書本体ではないので、このファイルは `loadNoteFiles` を**呼ばない**
  * （混入していないことは `tools/verify-no-notes-in-output.ts` が機械的に検査する）。
+ *
+ * **生成器は 1 本である**（cycle 24 step 2）。それ以前は英語版が
+ * `structured-latex-en/tools/build-latex.ts` として生成器ごと複製されており、
+ * 検査が片方にしか入っていない状態が実際に生じていた。言語で変わるもの
+ * （見出し語・プリアンブル・書誌の有無・強調の書式）は `tools/editions.ts` に集約し、
+ * **検査はここで全版に同じものを掛ける**。
  *
  * 変換規則:
  *   - 文書順 = content のファイル名昇順 × 各ファイルの配列順（＝正準表現をそのまま使う）
@@ -14,34 +20,38 @@
  *   - ブロックの `labels` → `\label{lab:<ラベル>}`、`ref()` → `\cref{lab:<ラベル>}`
  *   - `math` → `$...$`、`displayMath` → `\[...\]`（KaTeX 向けの LaTeX 文字列をそのまま渡す）
  *   - `list` → `itemize`、`todo` → 目立つ未完マーカー
+ *   - `cite` → `\cite[note]{keys}`（書誌を持つ版だけ。持たない版に来たら落とす）
  *
  * 使い方:
- *   node tools/build-latex.ts            .tex を生成する
- *   node tools/build-latex.ts --pdf      .tex を生成し tectonic で PDF まで作る
+ *   node tools/build-latex.ts                     原文の .tex を生成する
+ *   node tools/build-latex.ts --locale en         英語版の .tex を生成する
+ *   node tools/build-latex.ts --pdf               .tex を生成し tectonic で PDF まで作る
  */
 
 import { spawnSync } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join, relative } from "node:path";
 
-import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
-import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import type { TranslatedBlock, TranslatedNode } from "../schema.ts";
+import {
+  loadContentFilesForLocale,
+  localeFromArgv,
+  structuredLatexDir,
+} from "./content-modules.ts";
+import { bibKeysOf, editionFor, readBib, stripNoteFields } from "./editions.ts";
 import { escapeText } from "./latex-escape.ts";
-import { mathUnicodeToLatex, unicodeMathToLatex } from "./unicode-math.ts";
+import { unicodeMathToLatex } from "./unicode-math.ts";
 
-const buildDir = join(structuredLatexDir, "build");
+type HeadingBlock = Extract<TranslatedBlock, { kind: "heading" }>;
+type TheoremLikeBlock = Exclude<TranslatedBlock, { kind: "heading" } | { kind: "figure" }>;
+type Node = TranslatedNode;
+
+const locale = localeFromArgv();
+const edition = editionFor(locale);
+const buildDir = join(structuredLatexDir, "build", edition.buildSubdir);
 const texPath = join(buildDir, "document.tex");
 const pdfPath = join(buildDir, "document.pdf");
 const withPdf = process.argv.includes("--pdf");
-
-/** amsthm の環境名と見出し語。定理型 kind と 1 対 1 に対応させる。 */
-const THEOREM_ENVIRONMENTS: Record<TheoremLikeKind, { env: string; heading: string }> = {
-  definition: { env: "definition", heading: "定義" },
-  claim: { env: "claim", heading: "主張" },
-  theorem: { env: "theorem", heading: "定理" },
-  remark: { env: "remark", heading: "注意" },
-  note: { env: "structurednote", heading: "ノート" },
-};
 
 /**
  * 見出しの深さ → LaTeX の節コマンド。
@@ -57,21 +67,26 @@ const SECTION_COMMANDS = [
   "subparagraph",
 ] as const;
 
+// --- 書誌（持つ版だけ）--------------------------------------------------------
+//
+// **書誌の正本は 1 つだけである**（`integrable-lattice/outputs/papers/001_R_Lambda_duality/refs.bib`）。
+// リポジトリへ複製は作らない。ここで作るのは、その 1 つの正本から**ビルド時に導出する**
+// gitignore 済みの中間物だけである。
+//
+// なぜ素通しでなく導出が要るか（実測に基づく）:
+//   正本の各エントリは `note` フィールドに日本語の来歴メモを持っている。これはプロジェクト内部の
+//   記録であって、投稿稿に出してよいものではない。加えて `plain.bst` は `note` を印字するので、
+//   欧文フォントに無い和字が**無言で消えた状態**の参考文献リストが出来る（実測: Missing character
+//   が 200 件超）。したがって `note` を落としてから BibTeX へ渡す。**落とすのは note だけ。**
+const bibPath =
+  edition.citations === null ? null : join(structuredLatexDir, ...edition.citations.bibPath);
+if (bibPath !== null && !existsSync(bibPath)) {
+  throw new Error(`参考文献データベースが無い: ${bibPath}`);
+}
+const bibSource = bibPath === null ? "" : readBib(bibPath);
+const bibKeys = bibKeysOf(bibSource);
 
-/** `habitat` の値 → 本文に出す表記。 */
-const HABITAT_LABELS: Record<string, string> = {
-  N: "$\\mathbb{N}$",
-  Z: "$\\mathbb{Z}$",
-  Q: "$\\mathbb{Q}$",
-  Lambda: "$\\Lambda$",
-  Qbar: "$\\overline{\\mathbb{Q}}$",
-  none: "数量を扱わない",
-  R: "$\\mathbb{R}$",
-  C: "$\\mathbb{C}$",
-  mixed: "可算と非可算の混在",
-};
-
-const contentFiles = await loadContentFiles();
+const contentFiles = await loadContentFilesForLocale(locale);
 
 // ラベル → ブロック id。相互参照の解決に使う（型でも保証済みだが、生成時にも確かめる）。
 const labelOwner = new Map<string, string>();
@@ -82,7 +97,9 @@ for (const { blocks } of contentFiles) {
 }
 
 const usedRefs: { target: string; blockId: string }[] = [];
+const usedCites: { key: string; blockId: string }[] = [];
 const suspiciousTexts: { blockId: string; sample: string }[] = [];
+const unmatchedBold: { blockId: string; sample: string }[] = [];
 const body: string[] = [];
 let blockCount = 0;
 let headingCount = 0;
@@ -113,8 +130,68 @@ if (unresolved.length > 0) {
   throw new Error(`未解決の相互参照がある（生成を中止）:\n${detail}`);
 }
 
+// 引用キーの実在検査（.bib に無いキーは PDF で [?] になる。生成前に落とす）。
+const unknownCites = usedCites.filter((use) => !bibKeys.has(use.key));
+if (unknownCites.length > 0 && bibPath !== null) {
+  const detail = unknownCites.map((use) => `  ${use.blockId} -> "${use.key}"`).join("\n");
+  throw new Error(
+    `${relative(structuredLatexDir, bibPath)} に無い引用キーがある（生成を中止）:\n${detail}`,
+  );
+}
+
+// 対応の取れない `**` は PDF に素のアスタリスクとして出る（投稿稿では明白な瑕疵）。
+if (unmatchedBold.length > 0) {
+  const detail = unmatchedBold.map((item) => `  ${item.blockId}: ${item.sample}`).join("\n");
+  throw new Error(
+    `対応の取れない ** が地の文にある（PDF にアスタリスクがそのまま出る）:\n${detail}\n` +
+      "  強調は 1 つのノードの中で閉じること（ノードをまたぐ ** は組めない）。",
+  );
+}
+
 mkdirSync(buildDir, { recursive: true });
-writeFileSync(texPath, renderDocument(body.join("\n\n")), "utf8");
+
+let bibSpecifier = "";
+if (edition.citations !== null && bibPath !== null) {
+  bibSpecifier = edition.citations.derivedName;
+  const stripped = stripNoteFields(bibSource);
+  // 正本の `%` 行はプロジェクト内部の日本語コメントである（BibTeX はエントリ外を無視するので
+  // 出力には影響しないが、導出物に残しても意味が無いので落とす）。
+  const derivedBib = stripped.text
+    .split("\n")
+    .filter((line) => !/^\s*%/.test(line))
+    .join("\n");
+  // 落とし残しがあると和字が無言で消えるので、残った非 ASCII は 1 件でも通さない。
+  const leftover = [...new Set([...derivedBib].filter((char) => char.charCodeAt(0) > 0x7f))];
+  if (leftover.length > 0) {
+    throw new Error(
+      `note を落とした後の書誌に非 ASCII 文字が残っている（欧文フォントで無言で消える）: ${leftover.join(" ")}\n` +
+        `  対処: ${relative(structuredLatexDir, bibPath)} の該当箇所を LaTeX の記法へ直すこと。`,
+    );
+  }
+  writeFileSync(
+    join(buildDir, `${edition.citations.derivedName}.bib`),
+    // ヘッダも ASCII の英語にする。上の非 ASCII 検査はヘッダを付ける前に走るので、
+    // ここに日本語を書くと検査をすり抜けて導出物へ残る。
+    `% Generated file - do not edit.\n` +
+      `% Source: ${relative(buildDir, bibPath)} ` +
+      `(note fields and %-comments removed).\n` +
+      derivedBib,
+    "utf8",
+  );
+}
+
+writeFileSync(
+  texPath,
+  edition.renderDocument({
+    inner: body.join("\n\n"),
+    renderProse,
+    escape: escapeText,
+    renderNodes: renderNodes as (nodes: readonly never[], blockId: string) => string,
+    hasNoCitations: usedCites.length === 0,
+    bibSpecifier,
+  }),
+  "utf8",
+);
 
 // 地の文に「数式のつもりの記法」が混じっていると、そのまま素の文字として組まれる
 // （例: text ノードの "2^M" は上付きにならない）。content 側の判断材料として警告する。
@@ -128,10 +205,23 @@ if (suspiciousTexts.length > 0) {
   }
 }
 
+if (edition.citations !== null && usedCites.length === 0) {
+  // 引用が 1 件も無いと BibTeX は参考文献リストを作らない（"I found no \citation commands"）。
+  // 過渡的な状態なので `\nocite{*}` で .bib 全件を出し、BibTeX 経路が実際に通ることを
+  // 毎回のビルドで確かめられるようにしてある。引用が入れば自動的に通常の挙動へ戻る。
+  console.warn(
+    `警告: cite ノードが 1 件も無い。過渡措置として \\nocite{*} で ${bibKeys.size} 件すべてを出力する` +
+      "（本文が引用を持てば自動的に引用分だけになる）。",
+  );
+}
+
 console.log(
   `generated ${texPath}\n` +
     `  ブロック ${blockCount} 件（見出し ${headingCount}、証明 ${proofCount}、TODO ${todoCount}）` +
-    ` / ラベル ${labelOwner.size} 件 / 相互参照 ${usedRefs.length} 件（すべて解決）`,
+    ` / ラベル ${labelOwner.size} 件 / 相互参照 ${usedRefs.length} 件（すべて解決）` +
+    (edition.citations === null
+      ? ""
+      : ` / 引用 ${usedCites.length} 件（.bib のキー ${bibKeys.size} 件、すべて実在）`),
 );
 
 if (!withPdf) {
@@ -140,7 +230,9 @@ if (!withPdf) {
 }
 
 // --- PDF ビルド --------------------------------------------------------------
-const result = spawnSync("tectonic", ["-X", "compile", "--keep-logs", texPath], {
+const tectonicArgs = ["-X", "compile", "--keep-logs"];
+if (edition.citations !== null) tectonicArgs.push("--keep-intermediates");
+const result = spawnSync("tectonic", [...tectonicArgs, texPath], {
   cwd: buildDir,
   encoding: "utf8",
   maxBuffer: 64 * 1024 * 1024,
@@ -174,22 +266,57 @@ if (undefinedRefs.length > 0) {
   throw new Error(`PDF に未解決参照が残っている: ${[...new Set(undefinedRefs)].join(", ")}`);
 }
 
-// 2. ラベルの重複（参照先が一意に決まらなくなる）。
+// 2. 未定義の引用と、書誌が実際に組まれたこと（書誌を持つ版だけ）。
+//    生成前のキー実在検査を通っても、BibTeX の実行が失敗すれば参考文献が丸ごと落ちる。
+let bibitemCount = 0;
+if (edition.citations !== null) {
+  const undefinedCites = [
+    ...logText.matchAll(/Citation `([^']+)' on page [^ ]+ undefined/g),
+  ].map((m) => m[1]);
+  if (undefinedCites.length > 0) {
+    throw new Error(`PDF に未定義の引用がある: ${[...new Set(undefinedCites)].join(", ")}`);
+  }
+  const blgPath = join(buildDir, "document.blg");
+  if (existsSync(blgPath)) {
+    const blg = readFileSync(blgPath, "utf8");
+    const bibErrors = blg
+      .split("\n")
+      .filter((line) =>
+        /^Warning--I didn't find a database entry|^I couldn't open|error message/.test(line),
+      );
+    if (bibErrors.length > 0) {
+      throw new Error(`BibTeX が書誌を解決できなかった:\n${bibErrors.slice(0, 20).join("\n")}`);
+    }
+  }
+  const bblPath = join(buildDir, "document.bbl");
+  const bblText = existsSync(bblPath) ? readFileSync(bblPath, "utf8") : "";
+  bibitemCount = [...bblText.matchAll(/\\bibitem/g)].length;
+  if (bibitemCount === 0) {
+    throw new Error(
+      `参考文献が組まれなかった（${bblPath} に \\bibitem が無い）。\n` +
+        "  BibTeX が走っていないか、.bib を解決できていない。",
+    );
+  }
+}
+
+// 3. ラベルの重複（参照先が一意に決まらなくなる）。
 if (/There were multiply-defined labels/.test(logText)) {
   const duplicated = [...logText.matchAll(/Label `([^']+)' multiply defined/g)].map((m) => m[1]);
   throw new Error(`PDF にラベルの重複がある: ${[...new Set(duplicated)].join(", ")}`);
 }
 
-// 3. フォントに無い文字は**無言で消える**ので、1 件でも許さない。
-const missingChars = [...new Set([...logText.matchAll(/Missing character: There is no (.) /g)].map((m) => m[1]))];
+// 4. フォントに無い文字は**無言で消える**ので、1 件でも許さない。
+const missingChars = [
+  ...new Set([...logText.matchAll(/Missing character: There is no (.) /g)].map((m) => m[1])),
+];
 if (missingChars.length > 0) {
   throw new Error(
     `PDF に組めない文字がある（出力から無言で消える）: ${missingChars.join(" ")}\n` +
-      "  対処: プリアンブルの xeCJKDeclareCharClass にコードポイントを追加する",
+      "  対処: tools/unicode-math.ts の対応表か、tools/editions.ts のプリアンブルへ追加する。",
   );
 }
 
-// 4. 版面をはみ出した行。右余白（geometry の margin）を超えると紙の外へ出て内容が読めなくなる。
+// 5. 版面をはみ出した行。右余白（geometry の margin）を超えると紙の外へ出て内容が読めなくなる。
 const RIGHT_MARGIN_PT = 71; // 25mm ≒ 71pt
 const overfull = [...logText.matchAll(/Overfull \\hbox \(([0-9.]+)pt too wide\)/g)]
   .map((m) => Number(m[1]))
@@ -213,85 +340,11 @@ if (pageCount === undefined) {
 const overfullAll = [...logText.matchAll(/Overfull \\hbox \(([0-9.]+)pt too wide\)/g)].length;
 console.log(
   `built ${pdfPath}: ${pageCount} ページ、未解決参照 0 件、組めない文字 0 件、` +
-    `版面外へ出た行 0 件（軽微な overfull ${overfullAll} 件は余白内）`,
+    `版面外へ出た行 0 件（軽微な overfull ${overfullAll} 件は余白内）` +
+    (edition.citations === null ? "" : `、参考文献 ${bibitemCount} 件`),
 );
 
 // --- レンダリング ------------------------------------------------------------
-
-function renderDocument(inner: string): string {
-  return `% 自動生成ファイル — 直接編集しない。
-% 生成元: structured-latex/content/（tools/build-latex.ts）
-% 再生成: cd structured-latex && npm run build:pdf
-\\documentclass[11pt,a4paper]{article}
-
-\\usepackage{amsmath}
-\\usepackage{amssymb}
-\\usepackage{amsthm}
-\\usepackage[margin=25mm]{geometry}
-\\usepackage{graphicx}
-% パス・識別子のような長い等幅文字列を、区切りで改行できるようにする（url パッケージの \\path）。
-\\usepackage{url}
-\\urlstyle{tt}
-\\usepackage{xeCJK}
-\\setCJKmainfont{Hiragino Mincho ProN}
-\\setCJKsansfont{Hiragino Sans}
-% 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム）は
-% 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
-\\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033, "21D2}
-% 上の文字クラス指定は**本文モードにしか効かない**。この文書では ★ が数式の中にも現れるので
-% （本文の記号として (★_2) のように使われている）、数式用に和文フォントの箱を用意し、
-% 生成器が数式中の ★ をこれへ置き換える（tools/unicode-math.ts）。
-% 用意しないと PDF から無言で消える（実測: Missing character U+2605）。
-\\newcommand{\\jpstar}{\\mbox{\\CJKfontspec{Hiragino Sans}\\char"2605}}
-\\usepackage[hidelinks]{hyperref}
-\\usepackage[nameinlink]{cleveref}
-
-% 見出し語を日本語にする。
-\\renewcommand{\\contentsname}{目次}
-\\renewcommand{\\partname}{部}
-\\renewcommand{\\proofname}{証明}
-
-% 版面より広い別行立て数式を、はみ出す分だけ自動で縮める。
-% 縮めないと紙の外へ出て**内容が読めなくなる**（実測で 22 箇所）。
-\\newsavebox{\\displaymathbox}
-\\newlength{\\displaymathwidth}
-\\newcommand{\\fitdisplay}[1]{%
-  \\sbox{\\displaymathbox}{\\ensuremath{\\displaystyle #1}}%
-  \\setlength{\\displaymathwidth}{\\wd\\displaymathbox}%
-  \\ifdim\\displaymathwidth>\\linewidth
-    \\begin{equation*}\\resizebox{\\linewidth}{!}{\\usebox{\\displaymathbox}}\\end{equation*}%
-  \\else
-    \\begin{equation*}#1\\end{equation*}%
-  \\fi
-}
-
-\\theoremstyle{definition}
-\\newtheorem{definition}{定義}[section]
-\\newtheorem{claim}[definition]{主張}
-\\newtheorem{theorem}[definition]{定理}
-\\newtheorem{remark}[definition]{注意}
-\\newtheorem{structurednote}[definition]{ノート}
-
-\\crefname{definition}{定義}{定義}
-\\crefname{claim}{主張}{主張}
-\\crefname{theorem}{定理}{定理}
-\\crefname{remark}{注意}{注意}
-\\crefname{structurednote}{ノート}{ノート}
-\\crefname{section}{節}{節}
-
-\\title{$\\mathbb{R}/\\Lambda$ 双対 — 整数スペクトル曲線の二素点と $\\Lambda$ 側の決定可能性}
-\\date{}
-
-\\begin{document}
-\\maketitle
-\\tableofcontents
-\\clearpage
-
-${inner}
-
-\\end{document}
-`;
-}
 
 function renderHeading(block: HeadingBlock): string {
   const command = SECTION_COMMANDS[block.level - 1] ?? "paragraph";
@@ -305,26 +358,26 @@ function renderHeading(block: HeadingBlock): string {
  *
  * 本プロジェクトの中核要求は「可算と非可算を分別し、**ℝ へ脱出した箇所を必ず明示する**」
  * （リポジトリ直下 CLAUDE.md / integrable-lattice README）。データとして持っているだけでは
- * 読者に伝わらないので、**最終成果物にも印字する**。可算側は住処だけを小さく添え、
- * 非可算側は脱出の理由を枠付きで目立たせる。
+ * 読者に伝わらないので、**最終成果物にも印字する**（投稿稿でも落とさない）。可算側は住処だけを
+ * 小さく添え、非可算側は脱出の理由を枠付きで目立たせる。
  */
 function renderHabitat(block: TheoremLikeBlock): string {
-  const habitat = HABITAT_LABELS[block.habitat];
+  const habitat = edition.habitatLabels[block.habitat];
   if (block.realEscape === undefined) {
     // `none`（数量を扱わないブロック）に「可算」と付けると意味が通らない。
-    const qualifier = block.habitat === "none" ? "" : "（可算。$\\mathbb{R}$ を使わない）";
-    return `\\par\\smallskip\\noindent{\\small［住処: ${habitat}${qualifier}］}`;
+    const qualifier = block.habitat === "none" ? "" : edition.countableQualifier;
+    const [open, close] = edition.habitatBrackets;
+    return `\\par\\smallskip\\noindent{\\small${open}${edition.habitatLead}${habitat}${qualifier}${close}}`;
   }
   return (
     `\\par\\smallskip\\noindent\\fbox{\\parbox{\\dimexpr\\linewidth-2\\fboxsep-2\\fboxrule}{%
 ` +
-    `\\small\\textbf{$\\mathbb{R}$ 脱出}（住処: ${habitat}）: ${unicodeMathToLatex(escapeText(block.realEscape))}}}`
+    `${edition.escapeHeading(habitat ?? block.habitat)}${renderProse(block.realEscape, block.id)}}}`
   );
 }
 
-
 function renderTheoremLike(block: TheoremLikeBlock): string {
-  const { env } = THEOREM_ENVIRONMENTS[block.kind];
+  const { env } = edition.theorem[block.kind];
   // `]` を含むタイトル（例: `\arg^{[0,2\pi)}`）で引数が途中で切れないよう波括弧で包む。
   const title =
     block.title === null || block.title === undefined
@@ -355,7 +408,29 @@ function renderTitle(
   // 地の文と同じく、数式記法らしき文字は素の文字として組まれてしまう
   // （実測: タイトルの "2^M" が上付きにならない）。
   if (/[\^_`]/.test(text)) suspiciousTexts.push({ blockId, sample: text.slice(0, 60) });
-  return unicodeMathToLatex(escapeText(text));
+  return renderProse(text, blockId);
+}
+
+/**
+ * 地の文 1 つ分。エスケープ → Unicode 数学記号の変換 → 強調の順で写す。
+ * 順序を入れ替えてはならない（エスケープ前に `\textbf` を入れると `\` が潰れる）。
+ */
+function renderProse(value: string, blockId: string): string {
+  return applyBold(unicodeMathToLatex(escapeText(value)), blockId);
+}
+
+/**
+ * 本文は強調を `**...**` と書く。LaTeX は `*` を素の文字として組むので、変換しない版では
+ * アスタリスクがそのまま出る。変換する版（投稿稿）では `\textbf{...}` へ写し、
+ * 対応の取れない `**` を無言で通さず、呼び出し側でビルドを落とす。
+ */
+function applyBold(value: string, blockId: string): string {
+  if (!edition.bold) return value;
+  const converted = value.replace(/\*\*(.+?)\*\*/gs, (_match, inner: string) => `\\textbf{${inner}}`);
+  if (converted.includes("**")) {
+    unmatchedBold.push({ blockId, sample: converted.slice(0, 60) });
+  }
+  return converted;
 }
 
 function renderNodes(nodes: readonly Node[], blockId: string): string {
@@ -379,7 +454,7 @@ function renderNode(node: Node, blockId: string): string {
       if (/[\^_`]/.test(node.value)) {
         suspiciousTexts.push({ blockId, sample: node.value.slice(0, 60) });
       }
-      return unicodeMathToLatex(escapeText(node.value));
+      return renderProse(node.value, blockId);
     case "math":
       return renderInlineMath(node.tex);
     case "displayMath":
@@ -395,30 +470,38 @@ function renderNode(node: Node, blockId: string): string {
     }
     case "ref": {
       usedRefs.push({ target: node.target, blockId });
-      // `label` は参照の表示テキストを上書きする任意フィールド（現在 content では未使用）。
-      // 指定があれば、その文字列をリンクにする。
+      // `label` は参照の表示テキストを上書きする任意フィールド。
       if (node.label !== undefined) {
         return `\\hyperref[lab:${node.target}]{${escapeText(node.label)}}`;
       }
       return `\\cref{lab:${node.target}}`;
     }
-    case "cite":
-      // 本論文（日本語版）は書誌を地の文へ直に書いており、`cite` ノードは 1 件も使っていない
-      // （参考文献リストは outputs/papers/001_R_Lambda_duality/refs.bib に控えとして置いてある）。
-      // 語彙にはシステム側で `cite` が入ったので、黙って出力から消えることがないよう
-      // ここで明示的に落とす（英語版 structured-latex-en/ の生成器は BibTeX を出す）。
-      throw new Error(
-        `引用ノード（${node.keys.join(", ")}）の LaTeX 出力は日本語版では未実装: ${blockId}\n` +
-          "  この文書は書誌を地の文で書く方針。BibTeX を出すのは structured-latex-en/ の生成器である。",
-      );
+    case "cite": {
+      if (edition.citations === null) {
+        // 書誌を持たない版（日本語版）は書誌を地の文へ直に書く方針である。
+        // 語彙には `cite` が在るので、黙って出力から消えることがないよう明示的に落とす。
+        throw new Error(
+          `引用ノード（${node.keys.join(", ")}）は ${locale} 版では出力できない: ${blockId}\n` +
+            "  この版は書誌を地の文で書く方針。BibTeX を出す版は tools/editions.ts が宣言する。",
+        );
+      }
+      for (const key of node.keys) usedCites.push({ key, blockId });
+      const note = node.note === undefined ? "" : `[${renderProse(node.note, blockId)}]`;
+      return `\\cite${note}{${node.keys.join(",")}}`;
+    }
     case "todo":
       todoCount += 1;
-      return `\\par\\noindent\\textbf{[TODO]}\\ ${unicodeMathToLatex(escapeText(node.value))}`;
+      return `\\par\\noindent\\textbf{[TODO]}\\ ${renderProse(node.value, blockId)}`;
     case "image":
       // 図版はシステムの語彙には在るが、本論文はまだ 1 件も使っていない
       // （資産の解決規則を決めていない）。黙って消さず、使い始めたら落ちるようにしておく。
       throw new Error(`画像ノード（${node.assetKey}）の LaTeX 出力は未実装: ${blockId}`);
   }
+}
+
+/** 数式中の記号を、この版のプリアンブルが定義するマクロへ写す。 */
+function mathUnicodeToLatex(tex: string): string {
+  return tex.replaceAll("★", edition.starMacro);
 }
 
 /**

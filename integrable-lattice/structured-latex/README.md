@@ -14,15 +14,42 @@ Typst で新規に証明を書かない（リポジトリ直下 CLAUDE.md「証�
 以前はここに Ising 版から複製した入力言語の定義そのものが置かれていた
 （同じ言語が複数箇所で定義される状態）。それを解消したのが現在の形である。
 
+## 英語版はここにある（別プロジェクトではない）
+
+論文 001 の英語版は `locales/en/` にある。**`locales.config.ts` が宣言する翻訳ロケール**であり、
+ラベル型・スキーマ・生成器・検査はすべて日本語版と共有する。
+
+cycle 24 step 2 までは `integrable-lattice/structured-latex-en/` という独立プロジェクトが
+`schema.ts` / `labels.generated.ts` / `document.generated.ts` / `package.json` / `tsconfig.json` /
+生成器 / 検査ツールを複製していた。複製された検査は片方にだけ入る（実際に、未定義引用の検査は
+英語版にしか無く、未変換 Typst 記法の検査は日本語版にしか無かった）。その二重管理を撤去した。
+撤去したものと移管先の対応表は
+[outputs/reports/cycle24_ops_localize_english_edition.md](../outputs/reports/cycle24_ops_localize_english_edition.md)。
+
+原文と食い違ってよい箇所は `locales/en/allowance.ts` が**理由つきで**宣言し、宣言していない差は
+システムの構造照合が違反にする。詳細は [locales/en/README.md](locales/en/README.md)。
+
+```sh
+npm run verify:localization   # 原文と全ロケールの構造照合 ＋ 免除の登録が腐っていないかの監査
+npm run test:localization     # 壊した版を作り、上の検査が実際に落ちることの実証
+npm run build:pdf:en          # 英語版の PDF（build/en/）
+```
+
 ## 最終成果物の生成（LaTeX / PDF）
 
 `content/` だけを入力に LaTeX を組み、PDF まで作る（`tools/build-latex.ts`）。
 `notes/` は読まない（混入していないことは `tools/verify-no-notes-in-output.ts` が 3 重に検査する）。
 
 ```sh
-npm run build:tex   # build/document.tex を生成
-npm run build:pdf   # 生成 → PDF ビルド → ノート混入の検査
+npm run build:tex      # build/document.tex を生成
+npm run build:pdf      # 生成 → PDF ビルド → ノート混入の検査
+npm run build:tex:en   # 英語版（build/en/document.tex）
+npm run build:pdf:en   # 英語版の PDF → ノート混入の検査
 ```
+
+**生成器は 1 本である**（`tools/build-latex.ts`。`--locale` で版を選ぶ）。版で変わるもの
+——見出し語・プリアンブル・書誌の有無・強調の書式——は `tools/editions.ts` が持ち、
+**検査は全版に同じものが掛かる**。
 
 PDF 化には tectonic が要る（未導入なら `brew install tectonic`）。日本語は xeCJK ＋ ヒラギノ。
 出力は `build/`（git 管理外）。**住処（`habitat`）と ℝ 脱出（`realEscape`）は PDF にも印字する**
@@ -94,7 +121,8 @@ README（`integrable-lattice/README.md`）とリポジトリ直下 CLAUDE.md の
 | **`verification` / `lean` が文字列の配列でない** | 型検査＋実行時 | `not assignable to type 'readonly string[]'` |
 
 上表のうち**太字の行（本プロジェクト固有メタデータの型強制）**は
-`node tools/negative-type-test.ts`（9 ケース）が**実際に tsc を落として**確認している。
+`node tools/negative-type-test.ts`（11 ケース。うち 2 件は翻訳ロケールの受け口）が
+**実際に tsc を落として**確認している。
 各ケースは対で回す（正しい版が通ること／壊した版が落ちて期待する診断が出ること）ので、
 「型検査は通っているが実は何も検出していない」状態と区別できる。
 **太字でない行（入力言語一般）はシステム側の負テストが持つ**ので、ここには複製していない。
@@ -173,12 +201,19 @@ TODO のままである」移行漏れを検出するツールである。本プ
 
 - `schema.ts` — システムのファクトリを本プロジェクトのラベルと固有メタデータで具体化し、
   再エクスポートするだけの薄いモジュール（`defineBlocks` / `defineNotes` / `ref` / `runtimeSchema`）。
-- `labels.generated.ts` — 自動生成。実在ラベルのユニオン型 `Label`（直接編集しない）。
+- `labels.generated.ts` — 自動生成。実在ラベルのユニオン型 `Label` と、翻訳限定ラベルの
+  `TranslationOnlyLabel` / `AnyLocaleLabel`（直接編集しない）。
 - `document.generated.ts` — 自動生成。全 content / notes を連結し、ファイル跨ぎの一意性を型で主張する。
-- `tools/content-modules.ts` — `content/` `notes/` の読み込み（システムの実装へ委譲）。
+- `locales.config.ts` — ロケールの宣言（原文 `ja` と翻訳 `en`）。翻訳の入力ディレクトリと allowance。
+- `locales/en/` — 英語版（本文・フロントマター・allowance の宣言）。→ [README](locales/en/README.md)
+- `tools/content-modules.ts` — `content/` `notes/` と各ロケールの content の読み込み（システムの実装へ委譲）。
+- `tools/editions.ts` — 版ごとの組版設定（言語で変わるものだけ）。
+- `tools/localization.ts` — ロケール集約の組み立て（比較はシステムが持つ）。
+- `tools/verify-localization.ts` — 原文と翻訳の構造照合 ＋ 免除の登録の監査。
+- `tools/verify-localization-detection-test.ts` — 上の検査が実際に落ちることの実証（壊した版で確認）。
 - `tools/codemod-origin.ts` — 由来フィールドをシステムの `origin` へ移すコードモッド（冪等。適用済み）。
 - `tools/validate-content.ts` — 実行時検証（Typst 記法・可算/非可算の食い違い・`verification` の実在ほか）。
-- `tools/negative-type-test.ts` — 固有メタデータの型強制の実証テスト（9 ケース）。
+- `tools/negative-type-test.ts` — 固有メタデータと翻訳ロケール束縛の型強制の実証テスト（11 ケース）。
 - `tools/schema-runtime-test.ts` — 具体化した実行時スキーマのテスト（13 ケース）。
 - `type-tests/label-typing.test-d.ts` — `@ts-expect-error` による型の回帰テスト。
 - `content/` — 証明ブロック群（出版物の本体）。
@@ -194,7 +229,8 @@ cd integrable-lattice/structured-latex && pnpm install
 ```
 
 ```sh
-npm run check   # 生成物の鮮度 → 型検査 → 実行時検証 → 負テスト → 実行時検証テスト
+npm run check   # 生成物の鮮度 → 型検査 → 実行時検証（日英）→ PDF 前段（日英）→ ロケール対応照合
+                # → 負テスト → 実行時検証テスト → 対応検証の検出テスト → 転記検査
 ```
 
 個別に回す場合（プロジェクトディレクトリから）:
