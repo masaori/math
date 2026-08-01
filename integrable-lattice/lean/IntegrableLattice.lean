@@ -28,3 +28,4 @@ import IntegrableLattice.SInfinityDecision
 import IntegrableLattice.EllTwoClosedForm
 import IntegrableLattice.DropAssumptionBStar
 import IntegrableLattice.GeneralTowerClosedForm
+import IntegrableLattice.CoefficientsDE

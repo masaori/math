@@ -288,6 +288,43 @@ targets=(
   IntegrableLattice.GeneralTower.theorem_G4_b
   IntegrableLattice.GeneralTower.theorem_G4_c
   IntegrableLattice.GeneralTower.G4_K_dependence
+  # 定理 D1–D6・命題 D1a（CoefficientsDE.lean, cycle 23 step 4）
+  IntegrableLattice.CoeffsDE.D1_d_formula
+  IntegrableLattice.CoeffsDE.D1_c_bracket
+  IntegrableLattice.CoeffsDE.D1_c_alpha_term
+  IntegrableLattice.CoeffsDE.D1_d_integer
+  IntegrableLattice.CoeffsDE.D1_d_empty
+  IntegrableLattice.CoeffsDE.totient_step
+  IntegrableLattice.CoeffsDE.D1a_d_invariant
+  IntegrableLattice.CoeffsDE.D1a_c_invariant
+  IntegrableLattice.CoeffsDE.D1a_Lambda_step
+  IntegrableLattice.CoeffsDE.Tdef_Mstar_indep
+  IntegrableLattice.CoeffsDE.D2_residual
+  IntegrableLattice.CoeffsDE.D2_equiv_forward_false
+  IntegrableLattice.CoeffsDE.D2_equiv_corrected
+  IntegrableLattice.CoeffsDE.expand_at_one_plus_x
+  IntegrableLattice.CoeffsDE.D3_stage_poly
+  IntegrableLattice.CoeffsDE.D3_d_formula
+  IntegrableLattice.CoeffsDE.D3_bracket
+  IntegrableLattice.CoeffsDE.D3_c_formula
+  IntegrableLattice.CoeffsDE.D3_theta_case_split
+  IntegrableLattice.CoeffsDE.D3_values
+  IntegrableLattice.CoeffsDE.D3_e_values
+  IntegrableLattice.CoeffsDE.D3_ell2_torus_values
+  IntegrableLattice.CoeffsDE.D3_p_eq_one_convention
+  IntegrableLattice.CoeffsDE.V2_mul_odd
+  IntegrableLattice.CoeffsDE.D4_congruence
+  IntegrableLattice.CoeffsDE.D4_valuations
+  IntegrableLattice.CoeffsDE.D4_Lambda_sum_shift
+  IntegrableLattice.CoeffsDE.D4_c_shift
+  IntegrableLattice.CoeffsDE.D4_d_invariant
+  IntegrableLattice.CoeffsDE.D5_stage_poly
+  IntegrableLattice.CoeffsDE.D5_val_facts
+  IntegrableLattice.CoeffsDE.D5_V2
+  IntegrableLattice.CoeffsDE.D5_theta_flip
+  IntegrableLattice.CoeffsDE.D5_d_shift
+  IntegrableLattice.CoeffsDE.D6_truncation
+  IntegrableLattice.CoeffsDE.D6_boundary_sharp
 )
 
 {
