@@ -37,7 +37,7 @@
  * （呼び出し元への申し送り）。
  */
 
-import { defineBlocks, displayMath, list, math, paragraph, ref } from "../schema.ts";
+import { cite, defineBlocks, displayMath, list, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -430,7 +430,14 @@ export default defineBlocks([
           "subgroup, of the formal group ",
           math(String.raw`\hat{\mathbb{G}}_m`),
           ", and it is quite likely a standard tool in Iwasawa theory. ",
-          "We have not been able to identify the corresponding statement in the literature.",
+          "We have not been able to identify the corresponding statement in the literature. ",
+          "**The formula for the coefficient in (J4) is, however, not new.** The coefficient in question is ",
+          math(String.raw`b`),
+          ", and its source is Cuoco–Monsky ",
+          cite(["CuocoMonsky1981"], "Theorem 1.7 and Definition 1.2"),
+          ". The attribution is spelled out among the limitations of ",
+          ref("paper_prop_K"),
+          ".",
         ],
       ]),
     ],
