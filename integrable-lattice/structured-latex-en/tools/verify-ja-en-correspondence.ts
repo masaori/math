@@ -16,7 +16,11 @@
  *   6. 対応するブロックの `proof` の有無・`verification`・`lean` が一致する。
  *   7. 対応するブロックの数式（`math` / `displayMath` の `tex`）の**多重集合**が一致する。
  *      数式は翻訳の対象ではないので、ずれていれば訳し落としか無断の書き換えである。
- *      正当な差は `ja-en-exceptions.ts` に**理由つきで**登録したものだけ許す。
+ *      正当な差は `ja-en-exceptions.ts` に**理由と、許す差の種類つきで**登録したものだけ許す。
+ *      **免除の単位はブロックではなく差分 1 つである。** ブロック単位の免除は cycle 21 で
+ *      実際に検査の穴になり、英語版のインライン数式 11 個の脱落を隠した
+ *      （`outputs/reports/cycle21_ops_reflect_to_paper.md` §6.1）。登録済みのブロックでも、
+ *      宣言した規則で説明できない差が 1 つでも残れば違反として報告する。
  *   8. 英語版にしか無いブロックは、`en-only-blocks.ts` に**理由つきで**登録したものだけ許す。
  *
  * なぜ `npm run check` に入れず `npm run check:full` に分けてあるか:
@@ -34,6 +38,7 @@ import type { ConvertedBlock as JaBlock } from "../../structured-latex/schema.ts
 import type { ConvertedBlock as EnBlock, Node } from "../schema.ts";
 import { loadContentFiles as loadEnContentFiles } from "./content-modules.ts";
 import { EN_ONLY_BLOCKS } from "./en-only-blocks.ts";
+import { explainDifferences } from "./ja-en-diff-rules.ts";
 import { MATH_DIFFERENCE_EXCEPTIONS } from "./ja-en-exceptions.ts";
 
 /** 比較に使う、言語に依らないブロックの見え方。 */
@@ -105,6 +110,7 @@ for (const [id, facet] of en) {
 
 // --- 2〜7. 対応するブロック同士の比較 -----------------------------------------
 let compared = 0;
+let explainedByRule = 0;
 for (const id of jaOrder) {
   const a = ja.get(id);
   const b = en.get(id);
@@ -151,9 +157,11 @@ for (const id of jaOrder) {
   }
 
   // --- 7. 数式の多重集合 ---
-  const formulaDiff = diffMultisets(a.formulas, b.formulas);
+  // **免除はブロック単位ではなく差分 1 つ単位である**（cycle 21 でブロック単位の免除が
+  // 数式ノード 11 個の脱落を隠した。tools/ja-en-exceptions.ts の冒頭を参照）。
+  const { jaOnly, enOnly } = onlyIn(a.formulas, b.formulas);
   const exception = MATH_DIFFERENCE_EXCEPTIONS[id];
-  if (formulaDiff === undefined) {
+  if (jaOnly.length === 0 && enOnly.length === 0) {
     if (exception !== undefined) {
       violations.push({
         category: "不要な例外登録",
@@ -161,12 +169,32 @@ for (const id of jaOrder) {
       });
     }
   } else if (exception === undefined) {
-    violations.push({ category: "数式の不一致（訳し落とし・無断の改変）", detail: `${id}: ${formulaDiff}` });
-  } else if (exception.trim() === "") {
+    violations.push({
+      category: "数式の不一致（訳し落とし・無断の改変）",
+      detail: `${id}: ${describeDiff(jaOnly, enOnly)}`,
+    });
+  } else if (exception.reason.trim() === "") {
     violations.push({
       category: "数式差の例外の理由が空",
       detail: `${id}: tools/ja-en-exceptions.ts の理由が空文字である。理由の無い例外は認めない。`,
     });
+  } else {
+    const result = explainDifferences(jaOnly, enOnly, exception.allow);
+    explainedByRule += result.explained.length;
+    if (result.unexplainedJaOnly.length > 0 || result.unexplainedEnOnly.length > 0) {
+      violations.push({
+        category: "例外の規則で説明できない数式差（登録があっても免除されない）",
+        detail:
+          `${id}: 許した規則 [${exception.allow.join(", ")}] では説明できない差が残った。\n` +
+          describeDiff(result.unexplainedJaOnly, result.unexplainedEnOnly),
+      });
+    }
+    for (const rule of result.unusedRules) {
+      violations.push({
+        category: "使われていない例外規則（登録が古い）",
+        detail: `${id}: 規則 ${rule} は 1 度も使われなかった。tools/ja-en-exceptions.ts から消すこと。`,
+      });
+    }
   }
 }
 
@@ -192,7 +220,8 @@ console.log(`  英語版に欠落しているブロック: ${missing.length} 件
 console.log(`  英語版に欠落しているラベル: ${missingLabels.length} 件`);
 console.log(`  英語版限定ブロック: ${[...en.keys()].filter((id) => !ja.has(id)).length} 件`);
 console.log(
-  `  例外表: 数式差 ${Object.keys(MATH_DIFFERENCE_EXCEPTIONS).length} 件 / ` +
+  `  例外表: 数式差 ${Object.keys(MATH_DIFFERENCE_EXCEPTIONS).length} ブロック` +
+    `（規則で説明した差分 ${explainedByRule} 件。**免除はブロック単位ではなく差分 1 つ単位**） / ` +
     `英語版限定 ${Object.keys(EN_ONLY_BLOCKS).length} 件`,
 );
 
@@ -275,8 +304,8 @@ function diffSets(a: readonly string[], b: readonly string[]): string | undefine
   );
 }
 
-/** 多重集合として違うなら差分の説明を返す。同じなら undefined。 */
-function diffMultisets(a: readonly string[], b: readonly string[]): string | undefined {
+/** 多重集合の差を「日本語版にしか無い側」「英語版にしか無い側」へ分けて返す。 */
+function onlyIn(a: readonly string[], b: readonly string[]): { jaOnly: string[]; enOnly: string[] } {
   const count = (values: readonly string[]): Map<string, number> => {
     const map = new Map<string, number>();
     for (const value of values) map.set(value, (map.get(value) ?? 0) + 1);
@@ -284,13 +313,19 @@ function diffMultisets(a: readonly string[], b: readonly string[]): string | und
   };
   const countA = count(a);
   const countB = count(b);
-  const keys = new Set([...countA.keys(), ...countB.keys()]);
-  const lines: string[] = [];
-  for (const key of [...keys].sort()) {
-    const na = countA.get(key) ?? 0;
-    const nb = countB.get(key) ?? 0;
-    if (na !== nb) lines.push(`    日本語版 ${na} 回 / 英語版 ${nb} 回: ${key}`);
+  const jaOnly: string[] = [];
+  const enOnly: string[] = [];
+  for (const key of new Set([...countA.keys(), ...countB.keys()])) {
+    const diff = (countA.get(key) ?? 0) - (countB.get(key) ?? 0);
+    for (let i = 0; i < diff; i += 1) jaOnly.push(key);
+    for (let i = 0; i < -diff; i += 1) enOnly.push(key);
   }
-  if (lines.length === 0) return undefined;
-  return `数式 ${lines.length} 種で出現回数が違う\n${lines.join("\n")}`;
+  return { jaOnly: jaOnly.sort(), enOnly: enOnly.sort() };
+}
+
+function describeDiff(jaOnly: readonly string[], enOnly: readonly string[]): string {
+  const lines: string[] = [];
+  for (const tex of jaOnly) lines.push(`    日本語版にしか無い: ${tex}`);
+  for (const tex of enOnly) lines.push(`    英語版にしか無い:   ${tex}`);
+  return lines.join("\n");
 }

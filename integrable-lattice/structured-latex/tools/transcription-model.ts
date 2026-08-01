@@ -1,0 +1,470 @@
+/**
+ * 転記検査の**中身**（`verify-transcription.ts` は入出力だけを持つ）。
+ *
+ * ここを分けてあるのは、**検出できることを実証するテスト**
+ * （`verify-transcription-detection-test.ts`）が、本文ファイルを一切書き換えずに
+ * 「事故が起きていた頃の本文」を人工的に作って同じ検査へ通せるようにするためである。
+ * 本文（`content/`）は別 step の担当なので触らない。
+ */
+
+import { readFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import type { ConvertedBlock, Node } from "../schema.ts";
+import { atomsOf, proseTerms, tokenize, type Token } from "./tex-atoms.ts";
+
+const here = dirname(fileURLToPath(import.meta.url));
+/** integrable-lattice/ の絶対パス。report のパスはここからの相対で書く。 */
+export const projectRoot = join(here, "..", "..");
+
+// --- 本文ブロックの見え方 -------------------------------------------------------
+
+/** 照合に使うブロックの見え方。 */
+export type BlockView = {
+  id: string;
+  file: string;
+  kind: string;
+  title: string;
+  /** 地の文（`text` ノードとタイトル）。ノード 1 つが 1 要素。 */
+  proseParts: string[];
+  /** 地の文を連結したもの。 */
+  prose: string;
+  /** 数式（`math` / `displayMath`）の tex。並びは文書順。 */
+  formulas: string[];
+};
+
+export function viewOf(block: ConvertedBlock, file: string): BlockView {
+  const prose: string[] = [];
+  const formulas: string[] = [];
+  const title = block.kind === "figure" ? "" : (block.title?.text ?? "");
+  if (title !== "") prose.push(title);
+  if (block.kind !== "figure" && block.title?.tex !== undefined) formulas.push(block.title.tex);
+  const theoremLike = block as { statement?: readonly Node[]; proof?: readonly Node[] };
+  walk(theoremLike.statement ?? [], prose, formulas);
+  walk(theoremLike.proof ?? [], prose, formulas);
+  return {
+    id: block.id,
+    file,
+    kind: block.kind,
+    title,
+    proseParts: prose,
+    prose: prose.join(" "),
+    formulas,
+  };
+}
+
+function walk(nodes: readonly Node[], prose: string[], formulas: string[]): void {
+  for (const node of nodes) {
+    if (node.type === "text" || node.type === "todo") prose.push(node.value);
+    else if (node.type === "math" || node.type === "displayMath") formulas.push(node.tex);
+    else if (node.type === "paragraph") walk(node.children, prose, formulas);
+    else if (node.type === "list") node.items.forEach((item) => walk(item, prose, formulas));
+  }
+}
+
+// --- 検査 A: 根拠 report からの取りこぼし ---------------------------------------
+
+/** 根拠 report の中の、そのブロックが転記したはずの範囲。 */
+export type Passage = {
+  /** `integrable-lattice/` からの相対パス。 */
+  report: string;
+  /** 範囲の開始行に含まれる文字列（最初に一致した行から）。 */
+  from: string;
+  /** 範囲の終了行に含まれる文字列（`from` より後で最初に一致した行まで）。 */
+  to: string;
+  /** その範囲が本文のどの項に対応するか（人が読むためのもの。検査には使わない）。 */
+  covers: string;
+  /**
+   * 範囲のうち**引用（`>` で始まる行）だけ**を見る。
+   *
+   * この report 群は定理・補題・系の**主張**を markdown の引用として書き、証明と注はその外に書く。
+   * 主張だけを見たいとき（仮定は主張の側に書いてある）はこれを立てる。立てないと、
+   * 証明の途中式や「step 2 §9.1 との関係」のような report 内部の履歴まで照合対象になり、
+   * 免除の登録ばかりが増えて検査が読めなくなる（実測: 命題 K で未確認 38 件）。
+   */
+  quotedOnly?: boolean;
+};
+
+export type SourceLink = {
+  block: string;
+  passages: readonly Passage[];
+  /**
+   * **その項目 1 つだけ**を免除する。ブロックを丸ごと免除する形にはしない
+   * （ブロック単位の免除は cycle 21 で実際に検査の穴になった）。
+   */
+  acknowledged: readonly { item: string; reason: string }[];
+};
+
+export type CoverageFinding = {
+  block: string;
+  kind: "atom" | "term";
+  item: string;
+  /** その項目が現れる report の行（人が確認するため）。 */
+  where: string;
+};
+
+export type CoverageResult = {
+  block: string;
+  passageLines: number;
+  /** そのうち条件・例外・仮定を述べていると判定した文の数。 */
+  conditionSentences: number;
+  checkedAtoms: number;
+  checkedTerms: number;
+  acknowledgedUsed: number;
+  acknowledgedUnused: string[];
+  findings: CoverageFinding[];
+};
+
+/** report の該当範囲を切り出す。範囲が見つからなければ例外（登録が腐ったまま緑になるのを防ぐ）。 */
+export async function readPassage(passage: Passage): Promise<{ lines: string[] }> {
+  const path = join(projectRoot, passage.report);
+  const all = (await readFile(path, "utf8")).split("\n");
+  const start = all.findIndex((line) => line.includes(passage.from));
+  if (start < 0) throw new Error(`${passage.report}: 開始の目印が無い: ${passage.from}`);
+  const rel = all.slice(start).findIndex((line) => line.includes(passage.to));
+  if (rel < 0) throw new Error(`${passage.report}: 終了の目印が無い: ${passage.to}`);
+  return { lines: all.slice(start, start + rel + 1) };
+}
+
+/** 1 行を「数式の中」と「地の文」へ分ける（`$...$` と `$$...$$`）。 */
+export function splitMath(line: string): { math: string[]; prose: string } {
+  const math: string[] = [];
+  const prose: string[] = [];
+  let i = 0;
+  while (i < line.length) {
+    if (line[i] === "$") {
+      const delim = line.startsWith("$$", i) ? "$$" : "$";
+      const end = line.indexOf(delim, i + delim.length);
+      if (end < 0) { prose.push(line.slice(i)); break; }
+      math.push(line.slice(i + delim.length, end));
+      i = end + delim.length;
+      continue;
+    }
+    const next = line.indexOf("$", i);
+    prose.push(line.slice(i, next < 0 ? undefined : next));
+    if (next < 0) break;
+    i = next;
+  }
+  return { math, prose: prose.join("") };
+}
+
+/**
+ * **条件・例外・仮定を述べている文**の目印。
+ *
+ * 検査 A が探しているのは「report にあった**条件**が本文で落ちる」型の事故なので、
+ * report の全文ではなくこの目印を含む文だけを見る。過去 3 件はいずれもここに入る:
+ *   - cycle 18 の「**ただし** $S(N)$ が高位で消える **Skolem–Mahler–Lech 例外**（算術級数の有限和）」
+ *   - cycle 20 の「最後の等号は cycle 18 補題 A2 (1)（$A_1\equiv0$ …）**から従う**」
+ * 目印を増やすと拾う文が増え、免除の登録が増える。減らすと見落としが増える。
+ * **どちらへ倒すかは「見落としを許さない」側**へ倒してある（免除は書けばよい）。
+ */
+const CONDITION_MARKERS = [
+  "ただし", "例外", "仮定", "条件", "限る", "限り", "を除", "除く", "必要", "十分",
+  "なければ", "でなければ", "ないと", "反例", "偽", "暗黙", "から従う", "使う", "要する",
+  "とき", "ならば", "成り立たない", "注意", "一般に", "ときに限", "無限", "有限",
+];
+
+/** 条件・例外・仮定を述べている文だけを残す。 */
+export function conditionSentences(lines: readonly string[]): string[] {
+  // 1 つの文が改行で 2 行に分かれていることがある（実際 cycle 20 の $A_1\equiv0$ は
+  // 「から従う」と別の行にあった）。空行と表の行を区切りとして、地続きの行を連結してから文へ切る。
+  const paragraphs: string[] = [];
+  let current: string[] = [];
+  const flush = (): void => { if (current.length > 0) paragraphs.push(current.join("")); current = []; };
+  for (const line of lines) {
+    if (line.trim() === "" || line.trimStart().startsWith("|")) { flush(); if (line.trimStart().startsWith("|")) paragraphs.push(line); continue; }
+    current.push(line.trim());
+  }
+  flush();
+  const sentences = paragraphs
+    .flatMap((line) => line.split(/(?<=。)/))
+    .map((s) => s.trim())
+    .filter((s) => s !== "");
+  return sentences.filter((s) => CONDITION_MARKERS.some((marker) => s.includes(marker)));
+}
+
+/**
+ * 検査 A 本体。
+ *
+ * report の該当範囲のうち**条件・例外・仮定を述べている文**に現れる
+ * 飾りつきの数式アトムと専門語が、本文ブロックに 1 つも現れないなら
+ * 「落ちた疑い」として挙げる。免除は項目単位でしか書けない。
+ */
+export function checkCoverage(
+  link: SourceLink,
+  view: BlockView,
+  passageLines: readonly { passage: Passage; lines: string[] }[],
+): CoverageResult {
+  const blockAtoms = new Set<string>();
+  for (const tex of view.formulas) for (const atom of atomsOf(tex)) blockAtoms.add(atom);
+  const blockText = view.prose + " " + view.formulas.join(" ");
+
+  const acknowledged = new Map(link.acknowledged.map((a) => [a.item, a.reason]));
+  const used = new Set<string>();
+  const findings: CoverageFinding[] = [];
+
+  const atomWhere = new Map<string, string>();
+  const termWhere = new Map<string, string>();
+  const atoms = new Set<string>();
+  const terms = new Set<string>();
+  let lineCount = 0;
+  let sentenceCount = 0;
+  for (const { passage, lines } of passageLines) {
+    const scoped = passage.quotedOnly === true
+      ? lines.filter((line) => line.trimStart().startsWith(">"))
+      : lines;
+    lineCount += scoped.length;
+    const picked = conditionSentences(scoped);
+    sentenceCount += picked.length;
+    for (const line of picked) {
+      const { math, prose } = splitMath(line);
+      for (const tex of math) {
+        for (const atom of atomsOf(tex)) {
+          if (!isDistinctiveAtom(atom)) continue;
+          atoms.add(atom);
+          if (!atomWhere.has(atom)) atomWhere.set(atom, line.trim());
+        }
+      }
+      for (const term of proseTerms(prose)) {
+        terms.add(term);
+        if (!termWhere.has(term)) termWhere.set(term, line.trim());
+      }
+    }
+  }
+
+  for (const atom of [...atoms].sort()) {
+    if (blockAtoms.has(atom)) continue;
+    if (acknowledged.has(atom)) { used.add(atom); continue; }
+    findings.push({ block: link.block, kind: "atom", item: atom, where: atomWhere.get(atom) ?? "" });
+  }
+  for (const term of [...terms].sort()) {
+    if (blockText.includes(term)) continue;
+    if (acknowledged.has(term)) { used.add(term); continue; }
+    findings.push({ block: link.block, kind: "term", item: term, where: termWhere.get(term) ?? "" });
+  }
+
+  return {
+    block: link.block,
+    passageLines: lineCount,
+    conditionSentences: sentenceCount,
+    checkedAtoms: atoms.size,
+    checkedTerms: terms.size,
+    acknowledgedUsed: used.size,
+    acknowledgedUnused: [...acknowledged.keys()].filter((item) => !used.has(item)).sort(),
+    findings,
+  };
+}
+
+/**
+ * 照合に使うアトムかどうか。
+ *
+ * 裸の 1 文字（`x` / `N`）と数字は、どの文脈にも現れるので「落ちた」の証拠にならない。
+ * **飾りのついた記号**（`A_1`, `\mu_\gamma`, `\bar A_{\ell^L}`）と**マクロ**（`\theta`, `\binom`）だけを見る。
+ */
+export function isDistinctiveAtom(atom: string): boolean {
+  if (/^[0-9]/.test(atom)) return false;
+  const base = /^\\?[a-zA-Z]*/.exec(atom)?.[0] ?? "";
+  if (base === "" || OPERATOR_MACROS.has(base)) return false;
+  if (atom.startsWith("\\")) return true;
+  return atom.includes("_") || atom.includes("^");
+}
+
+/**
+ * 関係・演算・組版のマクロ。**記号ではなく記号の間の書き方**なので、
+ * report と本文で書き方が違っても内容は落ちていない。
+ */
+const OPERATOR_MACROS = new Set([
+  "\\le", "\\ge", "\\lt", "\\gt", "\\neq", "\\ne", "\\equiv", "\\sim", "\\simeq", "\\cong",
+  "\\in", "\\notin", "\\subset", "\\subseteq", "\\supset", "\\supseteq", "\\cup", "\\cap",
+  "\\setminus", "\\times", "\\cdot", "\\pm", "\\mp", "\\mid", "\\nmid", "\\to", "\\mapsto",
+  "\\rightarrow", "\\Rightarrow", "\\leftarrow", "\\Leftarrow", "\\iff", "\\implies",
+  "\\forall", "\\exists", "\\emptyset", "\\infty", "\\dots", "\\cdots", "\\ldots", "\\vdots",
+  "\\sum", "\\prod", "\\int", "\\min", "\\max", "\\inf", "\\sup", "\\lim", "\\bmod", "\\pmod",
+  "\\blacksquare", "\\square", "\\displaystyle", "\\text", "\\textbf", "\\textit", "\\mbox",
+  "\\frac", "\\binom", "\\sqrt", "\\bigl", "\\bigr", "\\Bigl", "\\Bigr", "\\left", "\\right",
+  "\\lfloor", "\\rfloor", "\\lceil", "\\rceil", "\\langle", "\\rangle", "\\colon", "\\ast",
+  "\\Longrightarrow", "\\Longleftarrow", "\\longrightarrow", "\\boxed", "\\deg", "\\det",
+  "\\dim", "\\gcd", "\\operatorname", "\\mathrm", "\\mathbb", "\\mathcal", "\\mathfrak",
+]);
+
+// --- 検査 B: 添字族の裸使用 -----------------------------------------------------
+
+export type BareFamilyFinding = {
+  block: string;
+  symbol: string;
+  boundVariable: string;
+  /** 束縛子（`\sum_{...}`）の文字列。 */
+  binder: string;
+  /** その記号が添字つきで使われている例（同じブロック内）。 */
+  indexedExample: string;
+  formula: string;
+};
+
+/**
+ * **添字族の裸使用**を検出する。
+ *
+ * 動機（cycle 21 の事故そのもの）: 本文は
+ * `g_c(y)=\sum_{\gamma\in\mathcal{G}_c}\mu\,(1+y)^{\gamma}` と書いていたが、
+ * 正しくは `\mu_{c+\ell\gamma}` である。同じブロックが 2 つ前の displayMath で
+ * `\mu_\gamma=\sum_{pa+qb=\gamma}\bar c_{pq}` と**族として定義している**のに、
+ * その族を $\gamma$ で束縛された和の中で**添字なしで**使っていた。
+ *
+ * 規則: 記号 $S$ が同じブロック内で「束縛変数 $v$ を含む添字つき」で現れているとき、
+ * $v$ を束縛する `\sum` / `\prod` などの**被和の中に裸の $S$** があれば違反とする。
+ *
+ * この規則が**当たらない**もの: $S$ が同じブロックで別の意味に使われていても、
+ * その裸の使用が $v$ の束縛の中に無ければ挙げない（例: 岩澤 $\mu$ 不変量は
+ * $\gamma$ の和の外にあるので挙がらない）。逆に、族の定義がブロック内に無い場合
+ * （別ブロックで定義された族を使っている場合）は検出できない。
+ */
+export function checkBareFamilyUse(view: BlockView): BareFamilyFinding[] {
+  const indexedUse = new Map<string, Map<string, string>>(); // symbol -> variable -> example
+  for (const tex of view.formulas) {
+    for (const atom of atomsOf(tex)) {
+      const cut = atom.indexOf("_");
+      if (cut < 0) continue;
+      const base = atom.slice(0, cut);
+      if (base === "" || !/^\\?[a-zA-Z]+$/.test(base)) continue;
+      const script = atom.slice(cut);
+      for (const variable of variablesIn(script)) {
+        const perSymbol = indexedUse.get(base) ?? new Map<string, string>();
+        if (!perSymbol.has(variable)) perSymbol.set(variable, atom);
+        indexedUse.set(base, perSymbol);
+      }
+    }
+  }
+
+  const findings: BareFamilyFinding[] = [];
+  for (const tex of view.formulas) {
+    for (const { binder, boundVariables, body } of binderScopes(tex)) {
+      const bareBases = new Set(
+        atomsOf(body).filter((a) => !a.includes("_") && !a.includes("^")),
+      );
+      for (const variable of boundVariables) {
+        for (const base of bareBases) {
+          const example = indexedUse.get(base)?.get(variable);
+          if (example === undefined) continue;
+          findings.push({
+            block: view.id,
+            symbol: base,
+            boundVariable: variable,
+            binder,
+            indexedExample: example,
+            formula: tex.replaceAll(/\s+/g, " ").trim(),
+          });
+        }
+      }
+    }
+  }
+  return findings;
+}
+
+/** 添字の文字列に現れる変数（マクロと 1 文字英字）。 */
+function variablesIn(script: string): string[] {
+  return tokenize(script)
+    .filter((t) => t.kind === "macro" || t.kind === "letter")
+    .map((t) => t.text);
+}
+
+/**
+ * 束縛子の添字から**束縛変数**を取り出す。
+ *
+ * `\gamma\in\mathcal{G}_c` なら $\gamma$、`c=0` なら $c$。
+ * 走る対象は `\in` / `=` の**左辺**にあるので、右辺（走る範囲）は見ない。
+ * 肩（`^`）に乗っている記号も外す——`\prod_{z_i^L=1}` の $L$ は走る変数ではなく
+ * 固定された段数であり、これを束縛変数と読むと無関係な記号を巻き込む（実測で偽陽性 1 件が出た）。
+ */
+export function boundVariablesOf(script: string): string[] {
+  const cut = script.search(/\\in|=/);
+  const lhs = cut < 0 ? script : script.slice(0, cut);
+  const tokens = tokenize(lhs);
+  const out: string[] = [];
+  for (let i = 0; i < tokens.length; i += 1) {
+    const t = tokens[i]!;
+    if (t.kind !== "macro" && t.kind !== "letter") continue;
+    if (i > 0 && isUnderSuperscript(tokens, i)) continue;
+    out.push(t.text);
+  }
+  return out;
+}
+
+/** その字句が `^` の直後（もしくは `^{...}` の中）にあるか。 */
+function isUnderSuperscript(tokens: readonly Token[], index: number): boolean {
+  let depth = 0;
+  for (let i = index - 1; i >= 0; i -= 1) {
+    const t = tokens[i]!;
+    if (t.text === "}") depth += 1;
+    else if (t.text === "{") { if (depth === 0) { return tokens[i - 1]?.text === "^"; } depth -= 1; }
+    else if (depth === 0 && t.text === "^") return i === index - 1;
+    else if (depth === 0 && (t.kind === "macro" || t.kind === "letter" || t.kind === "digits")) return false;
+  }
+  return false;
+}
+
+const BINDER_MACROS = ["\\sum", "\\prod", "\\bigcup", "\\bigcap", "\\bigoplus", "\\coprod"];
+
+/**
+ * `\sum_{...}` 等の束縛子と、その被和とみなす範囲を返す。
+ *
+ * 構文解析はしないので、被和は「束縛子の直後から、同じ深さの `,` / `\qquad` / `\\` /
+ * 行末までのいずれか早い方」とする粗い近似である。**範囲を狭く取る**ので、
+ * 見落とし（偽陰性）は起きるが、無関係な部分を巻き込む偽陽性は起きにくい。
+ */
+export function binderScopes(
+  tex: string,
+): { binder: string; boundVariables: string[]; body: string }[] {
+  const out: { binder: string; boundVariables: string[]; body: string }[] = [];
+  for (const macro of BINDER_MACROS) {
+    let index = tex.indexOf(macro);
+    while (index >= 0) {
+      let i = index + macro.length;
+      const scripts: string[] = [];
+      while (tex[i] === "_" || tex[i] === "^") {
+        const [group, next] = readRawGroup(tex, i + 1);
+        if (group === undefined) break;
+        if (tex[i] === "_") scripts.push(group);
+        i = next;
+      }
+      if (scripts.length > 0) {
+        out.push({
+          binder: macro + "_{" + scripts.join("") + "}",
+          boundVariables: [...new Set(scripts.flatMap((s) => boundVariablesOf(s)))],
+          body: bodyAfter(tex, i),
+        });
+      }
+      index = tex.indexOf(macro, index + macro.length);
+    }
+  }
+  return out;
+}
+
+function readRawGroup(tex: string, start: number): [string | undefined, number] {
+  if (tex[start] !== "{") {
+    const m = /^\\[a-zA-Z]+|^./.exec(tex.slice(start));
+    if (m === null) return [undefined, start];
+    return [m[0], start + m[0].length];
+  }
+  let depth = 0;
+  for (let i = start; i < tex.length; i += 1) {
+    if (tex[i] === "{") depth += 1;
+    else if (tex[i] === "}") { depth -= 1; if (depth === 0) return [tex.slice(start + 1, i), i + 1]; }
+  }
+  return [undefined, start];
+}
+
+function bodyAfter(tex: string, start: number): string {
+  let depth = 0;
+  for (let i = start; i < tex.length; i += 1) {
+    const c = tex[i]!;
+    if (c === "{") depth += 1;
+    else if (c === "}") depth -= 1;
+    else if (depth === 0) {
+      if (c === "," || c === "\n") return tex.slice(start, i);
+      if (tex.startsWith("\\qquad", i) || tex.startsWith("\\\\", i) || tex.startsWith("\\quad", i)) {
+        return tex.slice(start, i);
+      }
+    }
+  }
+  return tex.slice(start);
+}
