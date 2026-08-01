@@ -8,6 +8,24 @@
 > `structured-latex/domain-model/`（入力言語・`resolveTolerantly`・配信契約）に一本化されている。
 > 起動手順はリポジトリ直下 CLAUDE.md と `structured-latex/live-preview/README.md` を見る。
 
+## 完了（2026-08-01）: **未検証だった定義 `def_hatZ_hatY` の数値検証を追加**
+
+main 未統合成果の全ブランチ・全 PR トリアージ（記録は
+[docs/salvage-audit-2026-08-01.md](../docs/salvage-audit-2026-08-01.md)）の結果、
+このプロジェクトで **main へ入れる価値が残っていたのは 1 件だけ**だった。
+
+- 追加: `sagemath/check/201_def_hatZ_hatY/check_01_two_forms_of_definition.sage` と `overview.md`。
+- **なぜ穴だったか**: 本文 `structured-latex/content/004_transfer_matrix.ts` のブロック
+  `transfer_matrix_010_definition_hatZ_hatY` は hatZ^{(±)}_μ を 2 通りの式（cases 記法と、
+  j=1 の項を和の外へ出した形）で書いて等号で結んでいる。この等号は定義の well-defined 性に直結するが、
+  対象ラベル `def_hatZ_hatY` を宣言する check が 1 件も無かった。
+  `191_hatZ_hatY_M_periodicity` は周期性と (+)/(−) の差を見ており、この等号は見ていない。
+- 実行結果（自分で SageMath を回して取得）: `checks: 116, max relative error: 3.708e-17, tol: 1.0e-09, PASS`。
+- 救済元は `salvage/uncovered-sage-checks`（PR #70）。同ブランチの他のファイル
+  （`146_def_matrix_norm/`・`255_def_T_g/`・`260_def_T_V/`・`check_02_plus_minus_differ_only_at_j1`）は
+  main 側に同等以上のものが既にあり、不要と判定した（根拠は上記の記録）。
+- **未実施**: `lake build`（今回の差分に Lean ファイルが 1 件も含まれないため）。
+
 ## 完了（2026-08-01）: **リアルタイム Web プレビューをシステムへ吸収し、旧実装を撤去**
 
 このプロジェクト単体の作業ではないが、本プロジェクトの構造化テキストが**既定の入力ソース**なので記録する。
