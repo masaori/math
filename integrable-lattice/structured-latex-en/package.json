@@ -15,8 +15,9 @@
     "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
     "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
     "verify:correspondence": "node tools/verify-ja-en-correspondence.ts",
+    "test:correspondence": "node tools/verify-ja-en-detection-test.ts",
     "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:no-notes && npm run test:types && npm run test:runtime",
-    "check:full": "npm run check && npm run verify:correspondence"
+    "check:full": "npm run check && npm run test:correspondence && npm run verify:correspondence"
   },
   "dependencies": {
     "zod": "3.25.76"
