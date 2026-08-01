@@ -355,6 +355,43 @@ targets=(
   IntegrableLattice.Cycle24.Q7_char2_factorization
   IntegrableLattice.Cycle24.Q7_char2_binomial_form
   IntegrableLattice.Cycle24.Q7_b_eq_two
+  # cycle 25 step 3: 訂正後の補題 Q5 の c_1（Cycle25Corrections.lean）
+  IntegrableLattice.Cycle25.C1Set
+  IntegrableLattice.Cycle25.Q5_c1_isLeast
+  IntegrableLattice.Cycle25.Q5_c1_unique
+  IntegrableLattice.Cycle25.Q5_c1_zero_of_b_zero
+  IntegrableLattice.Cycle25.c1_isLeast_of
+  IntegrableLattice.Cycle25.Q5_c1_table_check
+  IntegrableLattice.Cycle25.Q5_old_logb_value_at_b_zero
+  IntegrableLattice.Cycle25.Q5_old_junk_not_least
+  IntegrableLattice.Cycle25.Q5_b_zero_iff_r_zero
+  IntegrableLattice.Cycle25.Q5_BM_empty_of_b_zero
+  IntegrableLattice.Cycle25.Q5_rho_max_of_isLeast
+  IntegrableLattice.Cycle25.Q5_rho_max_at_top_layer
+  IntegrableLattice.Cycle25.Q5_case_split
+  IntegrableLattice.Cycle25.Q5_c1_new_le_old
+  IntegrableLattice.Cycle25.Q1_C_mono_in_c1
+  IntegrableLattice.Cycle25.Q1_C_at_b_zero
+  IntegrableLattice.Cycle25.Q1_b_zero_matches_layer_count
+  # cycle 25 step 3: 定理 G2 (3.2) の規約
+  IntegrableLattice.Cycle25.G2_minEmpty_iff_ell_ge_four
+  IntegrableLattice.Cycle25.G2_minEmpty_breaks_at_ell_three
+  IntegrableLattice.Cycle25.G2_minEmpty_ok_at_ell_five_seven
+  IntegrableLattice.Cycle25.G2_top_reading_ok_at_ell_three
+  # cycle 25 step 3: 本文（命題 M・U）と根拠 report の照合
+  IntegrableLattice.Cycle25.U1_c_from_M3_M4
+  IntegrableLattice.Cycle25.U1_d_from_M3_M4
+  IntegrableLattice.Cycle25.U2_bracket_eq_Tdef
+  IntegrableLattice.Cycle25.U4_c_at_ell_two
+  IntegrableLattice.Cycle25.U4_d_at_ell_two
+  IntegrableLattice.Cycle25.U4_p_one_values
+  IntegrableLattice.Cycle25.U4_p_three_values
+  IntegrableLattice.Cycle25.U4_c_same_d_differs
+  IntegrableLattice.Cycle25.M2_lambda_eq_ceil_logb
+  IntegrableLattice.Cycle25.U6_trunc_determines_stage_data
+  # cycle 25 step 3: まだ通していなかったもの
+  IntegrableLattice.Cycle25.sum_of_uniform_fibers
+  IntegrableLattice.Cycle25.Agen_level_indep
 )
 
 {
