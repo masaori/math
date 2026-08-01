@@ -583,3 +583,29 @@ cycle 21 step 4 で日本語正本へ命題 G″ を足した際に確定した�
 したがって**地の文の `ℓ` は禁止されない**。ただし上の節が推奨する書き方
 （素数を名指しする必要がない箇所は "p-adic"、名指しが要る箇所は数式ノードの $\ell$）は
 読みやすさの指針として有効なので、そのまま維持する。
+
+## 追記: 命題 M・命題 U（`content/010_general_closed_form.ts` — 第 11 章「一般の塔の閉形式と係数の情報階層」）の語
+
+cycle 23 step 1 で日本語正本へ命題 M・命題 U を足した際に確定した語。**§1 の表と同じ拘束力を持つ**。
+
+| 日本語 | 英語 | 根拠 |
+|---|---|---|
+| 捻り段データ | **twisted stage data**（$(\Lambda_k,\theta^\sharp_k)$） | 本プロジェクトの造語。「段データ」は既に §1 系列で **stage data**（$\lambda,\theta^*,m_1$）と訳しており、その $\ell^k$ 乗根による捻り版なので "twisted" を前置した。**"twist data" にしない**（捻られているのは段データの方であって、捻り自体がデータなのではない） |
+| 捻る | **twist** | 同上。指標（1 の冪根）による twist は岩澤理論・表現論の標準語 |
+| 飽和深度 | **saturation depth**（$K(P_0)$） | 上の「飽和 = saturation」の派生。$k>K$ で飽和が起きない、という深さの上界 |
+| 飽和層 / 非飽和層 | **saturated layer / unsaturated layer** | 同上の派生。深さ $k$ の集合を **layer** と訳す（下記） |
+| 深さ $k$ の層 | **the layer of depth $k$** | 「層」は幾何の sheaf ではなく同心球面の意なので **layer**（**"sheaf" にしない**。**"stratum" にもしない**——本文は層別（stratification）を「射程の限界」の節で別に使うため、そちらへ stratification を充てる） |
+| 過渡欠損 | **transient defect**（$T_{\mathrm{def}}$） | 本プロジェクトの造語。低レベル（過渡 = transient）で漸近形から余分に出た総量。逐語訳。初出で定義式を必ず添える |
+| 過渡 | **transient** | 同上。「漸近が始まる前の段」の意 |
+| 情報階層（第 1〜3 層） | **information hierarchy**（**the first / second / third layer**） | 「どの追加情報が要るか」の階層。**ここでは "ladder" を使わない**（ladder は決定可能性の梯子に予約済み） |
+| 付値側 / 位置側 | **the valuation side / the position side** | $\Lambda_k$（付値）と $\theta^\sharp_k$（最小を達成する添字の位置）の対。逐語訳 |
+| 大域平均 | **the global average**（$A_{\mathrm{gen}}$） | 一般領域 $U$ 上の $\theta$ の平均。逐語訳 |
+| 一般領域 | **the generic region**（$U$） | $S_\infty$ のまわりの球を除いた残り。**"general region" にしない**（generic = 例外を除いた側、という含意を採る） |
+| 切り捨て付きの付値列 | **the truncated valuation sequence** | (U6) の $\bigl(\min(v_\ell(A_m),N)\bigr)_m$。逐語訳 |
+| ラプラシアン行列式型 | **Laplacian determinant type**（$\det L$ 型） | 射程の限定を述べる語。$D=\det L(z,w)$ の形の対象に限る、の意 |
+| スペクトル多項式 | **the spectral polynomial**（$D$） | §1 の「整数スペクトル曲線 = integer spectral curve」の派生。強調文の中で $D$ を数式ノードとして書けない箇所で使う |
+
+**この章では `ja-en-exceptions.ts` への新規登録を行っていない。** 日本語正本の数式に日本語を
+1 つも入れておらず（`\text{すなわち}` の類は displayMath を分割して地の文へ出した）、
+強調（`**`）もノードをまたがないように書いてあるため、英訳で構造を組み替える必要が無かった。
+**例外表への登録は検査に穴を開ける操作なので、書く側で避けられるならそちらを選ぶ。**

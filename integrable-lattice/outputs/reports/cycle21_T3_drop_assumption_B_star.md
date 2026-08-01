@@ -27,7 +27,7 @@
 
 | 主張 | 状態 |
 |---|---|
-| **定理 Q1（無条件の $n\ell^n$ 係数）**: 仮定 (H) だけの下で $$\bigl|\Theta_M-b\,M\,\varphi(\ell^M)\bigr|\le C\,\ell^M,\qquad b=\sum_i m_i$$ が**明示定数 $C$ つき**で成り立ち、したがって $\mathrm{ord}_\ell(\kappa_n)=\mu(\ell^{2n}-1)+b\,n\ell^n+O(\ell^n)$。**仮定 (F)・(N)・(B\*) はいずれも不要** | **証明した**（§6）。**これが本 step の答えである: (B\*) は落ちる** |
+| **定理 Q1（無条件の $n\ell^n$ 係数）**: 仮定 (H) だけの下で $$\bigl|\Theta_M-b\,M\,\varphi(\ell^M)\bigr|\le C\,\ell^M,\qquad b=\sum_i m_i$$ が**$M$ に依らない明示定数 $C=b(3+r\ell^{c_1})+\theta_G^{\max}\frac{\ell+1}{\ell}+r\ell^{c_1}\log_\ell C_0$ つき**で成り立ち、したがって $\mathrm{ord}_\ell(\kappa_n)=\mu(\ell^{2n}-1)+b\,n\ell^n+O(\ell^n)$。**仮定 (F)・(N)・(B\*) はいずれも不要** | **証明した**（§6）。**これが本 step の答えである: (B\*) は落ちる** |
 | **補題 Q1′（整数のままの分解）**: $\tilde E=B\,G+\ell H$（$B=\prod_i(\chi^{v_i}-1)^{m_i}$、$G,H\in\mathbb{Z}[z^{\pm},w^{\pm}]$、$\bar G$ は原始二項式因子を持たない） | **証明した**（§3.1）。$\bmod\ \ell$ の因数分解を**整数へ持ち上げる**のが本 step の唯一の新しい着想である |
 | **補題 Q2（$G$ 側は一様に浅い）**: $\theta_G$ は $\mathbb{P}^1(\mathbb{Z}_\ell)$ 上で至る所有限、したがって有界。さらに $\varphi(\ell^M)>\theta_G^{\max}$ なら**全点で** $v_{\mathfrak l}(G(\omega_P))=\theta_G(P)$ | **証明した**（§3.2）。ここに (B\*) 型の仮定は要らない（$\varphi(\ell^M)$ が勝手に大きくなるから） |
 | **定理 Q4（点ごとの等号）**: $\beta_P+\theta_G^{\max}<\varphi(\ell^M)$ なる点では $$\hat\theta_M(P)=\beta_P+\theta_G(P),\qquad \beta_P=\sum_i m_i\,\ell^{\rho_i(P)}$$ が**等号で**成り立つ | **証明した**（§4）。実測 **17781 点で不一致 0 件** |
@@ -42,6 +42,17 @@
 
 **「証明した」と書いたものは、すべて有限個の例に依らない証明が本文にある。
 数値支持どまりのものは §9 に隔離し、標本サイズから何が言えるかを明記した。**
+
+### 訂正履歴（後のサイクルが検出した問題。隠さず残す）
+
+| 日付 | 箇所 | 訂正 | 検出したのは |
+|---|---|---|---|
+| 2026-08-01（cycle 23 step 1） | 定理 Q1 $(6.1)$ | 「明示定数 $C$」の中に $\lvert\mathcal{B}_M\rvert$（レベル $M$ ごとの実測値）が入っており、**$M$ に依存していた**。補題 Q5 の上界 $r\ell^{c_1}$ を代入し、$M$ 非依存な形に直した | cycle 22 step 4 |
+| 2026-08-01（cycle 23 step 1） | 定理 Q1 の証明 | $\mathcal{B}_M$ 上でも $\tilde E(\omega_P)\neq0$（＝補題 Q0 が使える）ことを明示した。(H) から従うので誤りではないが、依存が読めなかった | 同上 |
+| 2026-08-01（cycle 23 step 1） | 補題 Q5 の証明 | $c_1$ の定義の $+1$ が**狭義**不等式 $2b<(\ell-1)\ell^{c_1}$ を作るために要ることを、非狭義では偽になる反例つきで書き足した | 同上 |
+
+**いずれも定理 Q1 の結論 $(6.2)$ と §8 の照合結果を変えない**（上界を緩める・依存を明示する・
+根拠を書き足す方向の訂正である）。
 
 検証は 3 本のスクリプトに分割し、**いずれも壁時計 20 秒以内で完走した**（設計上限 20 分の内側。
 cycle 19・20 で 3 回起きた「掃引起動直後にセッションが終了」への対策）。**FAIL 0 件・打ち切り 0 件。**
@@ -252,6 +263,17 @@ $\mathcal{B}_M:=\{P\in\mathbb{P}^1(\mathbb{Z}/\ell^M):\beta_P+\theta_G^{\max}\ge
 $\rho_{\max}:=\max_i\rho_i(P)$ とすると $\beta_P\le b\,\ell^{\rho_{\max}}$ なので
 $\ell^{\rho_{\max}}\ge\varphi(\ell^M)/(2b)=\ell^{M-1}(\ell-1)/(2b)$、すなわち
 $\rho_{\max}\ge M-1-\log_\ell\bigl(2b/(\ell-1)\bigr)\ge M-c_1$。
+
+> **$c_1$ の定義の $+1$ が何をしているか（cycle 23 step 1 で書き足した。初稿は理由を書いていなかった）.**
+> 最後の $\ge M-c_1$ に効いているのは**狭義**不等式 $2b<(\ell-1)\ell^{c_1}$ である。
+> 非狭義 $2b\le(\ell-1)\ell^{c_1}$ では含意が偽になる。反例:
+> $\ell=2$, $b=1$, $c_1=1$, $M=3$, $\rho_{\max}=1$ のとき
+> $2b\,\ell^{\rho_{\max}}=4=(\ell-1)\ell^{M-1}$ で前提は満たされるが、
+> $M-c_1=2>1=\rho_{\max}$ で結論が破れる。このとき $2b=2=(\ell-1)\ell^{c_1}$ と**等号**である。
+> $\bigl\lceil\log_\ell\frac{2b}{\ell-1}\bigr\rceil$ だけでは $\frac{2b}{\ell-1}$ が $\ell$ の冪ちょうどのときに
+> この等号が起きるので、**$c_1$ の定義の $+1$ はそれを避けるために入っている。**
+> **この根拠が書かれていないことは cycle 22 step 4（`cycle22_ops_lean_cycle21_theorems.md` §3.1、
+> Lean の `lemma_Q5_rho_max` / `lemma_Q5_needs_strict`）が指摘した。**
 したがって $\mathcal{B}_M\subseteq\bigcup_{i=1}^r\{P:\rho_i(P)\ge M-c_1\}$。
 $\rho\ge1$ に対し $\{P:\rho_i(P)\ge\rho\}$ は $\mathbb{P}^1(\mathbb{Z}/\ell^M)\to\mathbb{P}^1(\mathbb{Z}/\ell^{\rho})$ の
 1 点のファイバーで、大きさは $\ell^{M-\rho}$。$\rho=M-c_1$ とすれば $\ell^{c_1}$。$\blacksquare$
@@ -284,8 +306,9 @@ $$\sum_P\ell^{\rho_v(P)}=\ell^M\cdot1+(M-1)\varphi(\ell^M)+1\cdot\ell^M
 
 > **定理 Q1.** *仮定 (H) の下、$\varphi(\ell^M)\ge2\theta_G^{\max}$ かつ $M>c_1$ なる全ての $M$ で*
 > $$\Bigl|\,\Theta_M-b\,M\,\varphi(\ell^M)\,\Bigr|\ \le\ C\,\ell^M,\qquad
-> C:=b\bigl(3+|\mathcal{B}_M|\bigr)+\theta_G^{\max}\frac{\ell+1}{\ell}+|\mathcal{B}_M|\log_\ell C_0 \tag{6.1}$$
-> *（$|\mathcal{B}_M|$ は補題 Q5 より $M$ に依らず押さえられる）。したがって*
+> C:=b\bigl(3+r\,\ell^{c_1}\bigr)+\theta_G^{\max}\frac{\ell+1}{\ell}+r\,\ell^{c_1}\log_\ell C_0 \tag{6.1}$$
+> *（$r$ は $\bar{\tilde E}$ の相異なる原始二項式因子の本数、$c_1$ は補題 Q5 $(5.2)$。
+> **$C$ は $M$ に依らない。**）したがって*
 > $$\mathrm{ord}_\ell(\kappa_n)=\mu\bigl(\ell^{2n}-1\bigr)+b\,n\,\ell^{n}+O\bigl(\ell^{n}\bigr),
 > \qquad b=\sum_{i=1}^rm_i=\sum_{P\in S_\infty}j^*(P). \tag{6.2}$$
 > ***仮定 (F)・(N)・(B\*) はいずれも使っていない。***
@@ -304,7 +327,24 @@ $$\Bigl|\sum_{P\notin\mathcal{B}_M}\beta_P-b\,M\,\varphi(\ell^M)\Bigr|
 残り 2 つは
 $0\le\sum_{P\notin\mathcal{B}_M}\theta_G(P)\le\theta_G^{\max}(\ell+1)\ell^{M-1}$、
 補題 Q0 より $0\le\sum_{\mathcal{B}_M}\hat\theta_M(P)\le|\mathcal{B}_M|\varphi(\ell^M)\log_\ell C_0
-\le|\mathcal{B}_M|\ell^M\log_\ell C_0$。三角不等式で $(6.1)$。
+\le|\mathcal{B}_M|\ell^M\log_\ell C_0$。
+ここで補題 Q0 は $\tilde E(\omega_P)\neq0$ を仮定しているので、それを確認しておく:
+**$\mathcal{B}_M$ の点でも仮定 (H) より $\tilde E(\omega_P)\neq0$ である**（(H) は各段の
+$X_{\ell^n,\ell^n}$ が連結、すなわち $\kappa_n\neq0$ を意味し、cycle 14 $(6.1)$ の $\Sigma_n$ が有限
+＝すべての $P$ で $\hat\theta_M(P)<\infty$ と同値である）。
+最後に $|\mathcal{B}_M|\le r\ell^{c_1}$（補題 Q5）を代入し、三角不等式で $(6.1)$。
+
+> **訂正・補足（cycle 23 step 1、2026-08-01）— 2 点。**
+> **(i)** 初稿の $(6.1)$ は $C:=b(3+|\mathcal{B}_M|)+\theta_G^{\max}\frac{\ell+1}{\ell}+|\mathcal{B}_M|\log_\ell C_0$
+> と書き、§0 の結論表は「**明示定数 $C$ つき**」と銘打っていた。しかし $|\mathcal{B}_M|$ は
+> **レベル $M$ ごとの実際の悪い点の個数**であって $M$ に依存する量であり、これでは明示定数ではない。
+> 補題 Q5 の上界 $r\ell^{c_1}$ を代入した形に直した（上の $(6.1)$）。
+> **(ii)** 初稿は補題 Q0 の仮定 $\tilde E(\omega_P)\neq0$ が $\mathcal{B}_M$ 上で成り立つことを
+> 確認していなかった（(H) から従うので誤りではないが、依存が読めなかった）。上に明示した。
+> **どちらも cycle 22 step 4（`cycle22_ops_lean_cycle21_theorems.md` §2・§4、
+> Lean の `theorem_Q1_error` / `theorem_Q1_error_explicit`）が指摘した。**
+> **定理 Q1 の結論（$(6.2)$）と §8 の照合結果は変わらない**（$C$ を $M$ 非依存な上界へ緩めただけで、
+> $(6.1)$ は初稿の $C$ でも新しい $C$ でも成り立つ）。
 
 $(6.2)$: 補題 J1（無仮定）より $\Sigma_n=\sum_{M\le n}\Theta_M$。$(6.1)$ を $M_1\le M\le n$ で足し、
 $M<M_1$ は有限個なので定数に吸収する。

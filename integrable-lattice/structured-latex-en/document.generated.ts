@@ -31,6 +31,7 @@ import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
 import blocks_008_theta_padic from './content/008_theta_padic.ts'
 import blocks_009_s_infinity_decision from './content/009_s_infinity_decision.ts'
 import blocks_009_theta_recursion from './content/009_theta_recursion.ts'
+import blocks_010_general_closed_form from './content/010_general_closed_form.ts'
 import blocks_010_prior_art from './content/010_prior_art.ts'
 
 
@@ -49,6 +50,7 @@ export type AllBlocks = [
   ...typeof blocks_008_theta_padic,
   ...typeof blocks_009_s_infinity_decision,
   ...typeof blocks_009_theta_recursion,
+  ...typeof blocks_010_general_closed_form,
   ...typeof blocks_010_prior_art,
 ]
 

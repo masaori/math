@@ -142,6 +142,103 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
     ],
   },
   {
+    block: "paper_111_theorem_general_closed_form",
+    passages: [
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **定理 G2.**",
+        to: "> 3. *$\\varphi(\\ell^k)\\Lambda_k\\in\\mathbb{Z}_{\\ge1}$",
+        covers: "命題 M (M1)（捻り段データと、深さ k の層での hat theta の値）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **定理 G3.**",
+        to: "> *とくに $K=0\\iff j^{*}\\le\\ell-2$",
+        covers: "命題 M (M2)（飽和深度の明示上界）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **定理 G4（一般の塔の閉形式）.**",
+        to: "> $$b=\\sum_{P_0\\in S_\\infty}j^{*}(P_0),\\qquad d=\\gamma-2 . \\tag{5.5}$$",
+        covers: "命題 M (M3)(M4)（Θ_M の閉形式と 5 係数）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "### 5.3 $M^*$ の明示形",
+        to: "いずれも $D$ の係数からの有限計算である。",
+        covers:
+          "命題 M (M5)（M* の 5 条件）。**条件 2 は cycle 23 step 1 で訂正済み**" +
+          "（M ≥ r♯ + max K + 1 → M ≥ r♯ + max K）で、本文は訂正後を書いている",
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **系 G6.**",
+        to: "\\mathcal{S}_0(M^*\\!-\\!1)+\\frac{\\ell}{\\ell-1}\\Bigr).$$",
+        covers: "命題 M (M6)（S_∞ が空のときの 5 係数）",
+        quotedOnly: true,
+      },
+    ],
+    acknowledged: [],
+  },
+  {
+    block: "paper_112_theorem_coefficient_layers",
+    passages: [
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D1.**",
+        to: "> 4. *$S_\\infty=\\emptyset$ なら $d=-2$",
+        covers: "命題 U (U1)（付値側は c へ、位置側は d へ。d は整数）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **命題 D1a.**",
+        to: "> $(2.2)$・$(2.3)$ の $K$ を $K'$ に置き換える。このとき $c,d$ の値は変わらない。*",
+        covers: "命題 U (U1a)（飽和深度を大きめに取ってもよい）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D2.**",
+        to: "> *とくに $T_\\mathrm{def}=0$ であることと、閉形式 $(1.1)$ が $n\\ge0$ から成り立つこととは同値である。*",
+        covers: "命題 U (U2)（過渡欠損による e の分解）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D3.**",
+        to: "> よって $c,d,e$ のいずれも $\\bar{\\tilde E}$ の関数ではない。*",
+        covers: "命題 U (U4)（mod ℓ の切れ目。実在の 2 グラフによる反例）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D4.**",
+        to: "> *とくに、**$\\tilde E\\bmod\\ell^{N}$ から $c$ を読む式は、どんな固定した $N$ に対しても存在しない**。*",
+        covers: "命題 U (U5) の前半（c について、どんな固定精度でも足りない）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D5.**",
+        to: "> どんな固定した $N$ に対しても存在しない**。しかもこの障害は付値側 $\\Lambda$（$c$）の障害の系ではない。*",
+        covers: "命題 U (U5) の後半（d について。位置側の障害は付値側の系ではない）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D6.**",
+        to: "> $(\\Lambda_k,\\theta^\\sharp_k)_{k\\le K}$ を、したがって $c$ と $d$ を決める。*",
+        covers: "命題 U (U6)（精度が足りる条件）",
+        quotedOnly: true,
+      },
+    ],
+    acknowledged: [],
+  },
+  {
     block: "paper_056_theorem_ell2_family",
     passages: [
       {
