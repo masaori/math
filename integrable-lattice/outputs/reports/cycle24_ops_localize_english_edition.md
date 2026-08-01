@@ -153,6 +153,12 @@ sep(a,b) := min{ t ≥ 0 : ... }
 
 ## 6. 検証（すべて実行し、出力を貼る）
 
+### 6.0 前提: 検証は step 1 / 3 / 5 を取り込んだ後に取り直した
+
+作業の途中でレートリミットにより中断したため、**再開時に `origin/main`（step 1・3・5 が入った
+`b5b942b`）の上へ載せ直してから、下記をすべて実行し直した。** 以下の出力はすべてその実測である
+（中断前に取った出力ではない）。step 3 が作り替えた転記検査系のファイルは step 2 側では一切変更していない。
+
 ### 6.1 システム側 `(cd structured-latex && npm run check)` — 終了コード 0
 
 ```
@@ -205,8 +211,15 @@ no notes in output (en): ノート 0 件（本文サンプル 0 件）は build/
 違反 0 件。
 
 > node tools/verify-transcription-detection-test.ts
-3 / 3 件で検出を実証した。
+12 / 12 件で検出を実証した（転記事故 3 件 + 免除の腐り 9 件）。
 ```
+
+**step 3（転記検査）を壊していないことの確認**: `verify-transcription.ts` /
+`verify-transcription-detection-test.ts` / `source-links.ts` / `transcription-model.ts` /
+`transcription-fixtures.ts` は、`git diff --name-only origin/main..HEAD -- .../tools/` に
+**1 件も現れない**（main 側のまま。step 2 は触っていない）。上の 2 本は step 3 のマージ後に
+実際に再実行して緑であることを確認した。検出テストの件数が 3 → 12 に増えているのは
+step 3 が免除の腐り 9 件を足したためで、step 2 の影響ではない。
 
 ### 6.3 `node integrable-lattice/structured-latex/tools/validate-content.ts` — 終了コード 0
 
@@ -219,7 +232,11 @@ OK: 参照されている対応はすべて生きている（実在・規約適�
 注意: 本ツールは対応の生死だけを見る。数学的な正しさは見ない。
 ```
 
-（従来どおり、論文の主張と結びついていない検証ディレクトリ 2 件の注意が出る。step 2 の変更とは無関係。）
+（従来どおり、論文の主張と結びついていない孤立した検証ディレクトリ **10 件**の注意が出る:
+`C-U3_bethe_qqbar` / `apply_higher_spin_qqbar` / `cycle11_T2` / `cycle12_T2_onsager_qqbar` /
+`cycle21_T3_b_star` / `cycle21_T3_general_closed_form` / `cycle22_T3_coefficients_d_e` /
+`cycle3_T2_chiral_potts` / `cycle6_T2_superintegrable` / `cycle7_T2_dispersion`。
+いずれも step 2 の変更とは無関係で、移行の前後で件数は変わっていない。）
 
 ### 6.5 生成物の鮮度（`--check`）
 
@@ -227,7 +244,10 @@ OK: 参照されている対応はすべて生きている（実在・規約適�
 
 ### 6.6 本文に差分が無いこと（`git diff -M`）
 
-- **日本語本文**: `git diff --cached -M --stat -- integrable-lattice/structured-latex/content/` → **出力なし（差分 0）**。
+（コミット後は `origin/main..HEAD` で取り直した。）
+
+- **日本語本文**: `git diff -M --stat origin/main..HEAD -- integrable-lattice/structured-latex/content/`
+  → **出力なし（差分 0）**。
 - **英語本文**: 14 ファイルすべてが rename として検出され、変更行は 128 行。その内訳を
   `grep -vE "origin: \{ path|^[-+]import \{"` で絞ると **0 行**。すなわち変更は
   **`origin.path` の付け替えと import 行の付け替えだけ**で、散文・数式は 1 文字も変えていない。
@@ -260,6 +280,18 @@ OK: 参照されている対応はすべて生きている（実在・規約適�
 4. **作業ディレクトリの取り違えを何度も起こした。**
    `cd` がシェル呼び出しをまたいで残ることを忘れ、相対パスのコマンドが
    `No such file or directory` で落ちた。毎回リポジトリ root からの絶対パスで始めるべきだった。
+
+5. **中断前に書いた検証結果を、`origin/main` 取り込み後も正しいものとして残していた（2 件が実際に誤り）。**
+   レートリミットで中断する前に §6 を書き上げていたが、その出力は step 1・3・5 を取り込む**前**の
+   ツリーで取ったものだった。再開時に全部取り直したところ、次の 2 か所が実測と食い違っていた。
+   - `verify-transcription-detection-test.ts` を「3 / 3 件」と書いていたが、実測は
+     **「12 / 12 件（転記事故 3 件 + 免除の腐り 9 件）」**（step 3 が免除の腐り 9 件を足したため）。
+   - `verify-check-linkage.ts` の孤立した検証ディレクトリを「2 件」と書いていたが、実測は **10 件**。
+     移行の前後で変わっていない数であり、step 2 とは無関係だが、**件数の記述そのものが誤っていた。**
+
+   どちらも「検証は通っている」という結論は変えないが、**report に貼った出力が実際の出力ではなかった**
+   という点で誤りである。**教訓**: 検証出力は、最終的に提出するツリーで取り直す。
+   ブランチを載せ替えたら、前に取った出力は一次情報ではなくなる。
 
 ## 8. 申し送り
 
