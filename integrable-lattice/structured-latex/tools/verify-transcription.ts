@@ -10,6 +10,11 @@
  *     **専門語**が、対応する本文ブロックにも現れること。免除は項目 1 つ単位でしか書けない。
  *     → cycle 18（「算術級数」が本文に無い）と cycle 20（$A_1$ が本文に無い）を捕まえる。
  *
+ *   検査 A′（免除の健全性）: 検査 A の免除 1 件ごとに、**根拠が生きているか**を見る。
+ *     免除は「report のこの文について、本文はこう書いているから落としてよい」という判定なので、
+ *     **その report の文が書き換わったら／本文のその記述が消えたら、判定はやり直しになる**。
+ *     根拠が動いた免除は違反として赤にする。→ cycle 23 の限界（免除 91 件が機械検証されていない）への答え。
+ *
  *   検査 B（台帳なし・全ブロック）: **添字族の裸使用**。同じブロックが
  *     「束縛変数 $v$ を含む添字つき」で使っている記号 $S$ を、$v$ を束縛する和の中で
  *     添字なしに書いていたら違反。→ cycle 21（$\mu_{c+\ell\gamma}$ が $\mu$ になっていた）を捕まえる。
@@ -29,18 +34,21 @@ import { SOURCE_LINKS } from "./source-links.ts";
 import {
   checkBareFamilyUse,
   checkCoverage,
+  checkExemptionGrounds,
   readPassage,
   viewOf,
   type BareFamilyFinding,
   type CoverageResult,
+  type GroundsFinding,
 } from "./transcription-model.ts";
 
 const files = await loadContentFiles();
 const views = files.flatMap(({ file, blocks }) => blocks.map((block) => viewOf(block, file)));
 const byId = new Map(views.map((view) => [view.id, view]));
 
-// --- 検査 A -------------------------------------------------------------------
+// --- 検査 A / A′ ---------------------------------------------------------------
 const coverage: CoverageResult[] = [];
+const groundsFindings: GroundsFinding[] = [];
 for (const link of SOURCE_LINKS) {
   const view = byId.get(link.block);
   if (view === undefined) {
@@ -50,6 +58,7 @@ for (const link of SOURCE_LINKS) {
   const passages = [];
   for (const passage of link.passages) passages.push({ passage, lines: (await readPassage(passage)).lines });
   coverage.push(checkCoverage(link, view, passages));
+  groundsFindings.push(...(await checkExemptionGrounds(link, view, passages, byId)));
 }
 
 // --- 検査 B -------------------------------------------------------------------
@@ -98,6 +107,44 @@ if (noCheck.length > 0) {
   );
 }
 
+// --- 検査 A′ の報告（免除の健全性） ---------------------------------------------
+// 免除は検査 A の強さを直接左右する（免除が多いほど検査は弱い）。件数だけでなく
+// **腐っていないこと**を毎回出す。cycle 23 の「照合力 0 のブロック 5 件」と同じ思想。
+console.log("\n[検査 A′] 免除の根拠が生きているか — 内訳");
+const allGrounds = SOURCE_LINKS.flatMap((link) => link.acknowledged.map((a) => a.grounds));
+const byType = new Map<string, number>();
+for (const g of allGrounds) byType.set(g.type, (byType.get(g.type) ?? 0) + 1);
+const TYPE_LABEL: Record<string, string> = {
+  notation: "記法の選択",
+  weaker: "本文のほうが弱い主張",
+  division: "ブロック間の分担",
+  positioning: "report の位置づけの言葉",
+  example: "例示の省略",
+  paraphrase: "言い換え",
+  reportStale: "report のほうが古い",
+  bodyDefect: "本文の不備（記録済み）",
+};
+console.log(
+  `  免除 ${allGrounds.length} 件 / 型別: ` +
+    [...byType].map(([t, n]) => `${TYPE_LABEL[t] ?? t} ${n}`).join("・"),
+);
+const unverifiable = byType.get("positioning") ?? 0;
+console.log(
+  `  根拠未指定 0 件（型で強制。根拠なしの免除は書けない）/ ` +
+    `**失効した免除 ${groundsFindings.length} 件** / ` +
+    `**型として機械検証できないもの ${unverifiable} 件**（${TYPE_LABEL["positioning"]}）`,
+);
+if (unverifiable > 0) {
+  console.log(
+    "    ↑ この型は「report が書き換わったら落ちる」ことしか検査できない。" +
+      "「これは主張ではない」という判定そのものは機械で確かめられない。限界として記録すること。",
+  );
+}
+for (const finding of groundsFindings) {
+  console.log(`      - ${finding.block} / ${finding.item}: [${finding.kind}]`);
+  console.log(`        ${finding.detail}`);
+}
+
 console.log("\n[検査 B] 添字族の裸使用 — 内訳");
 console.log(`  走査した数式: ${views.reduce((n, v) => n + v.formulas.length, 0)} 件 / 検出 ${bare.length} 件`);
 for (const finding of bare) {
@@ -107,7 +154,9 @@ for (const finding of bare) {
 }
 
 const violations =
-  coverage.reduce((n, r) => n + r.findings.length + r.acknowledgedUnused.length, 0) + bare.length;
+  coverage.reduce((n, r) => n + r.findings.length + r.acknowledgedUnused.length, 0) +
+  groundsFindings.length +
+  bare.length;
 if (violations === 0) {
   console.log("\n違反 0 件。");
   process.exit(0);
