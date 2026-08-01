@@ -251,6 +251,43 @@ targets=(
   IntegrableLattice.EllTwo.Aalpha_ne_Xprime_at_three
   IntegrableLattice.EllTwo.Abeta_ne_Xprime_at_two
   IntegrableLattice.EllTwo.Bsat_ne_Xprime_at_two
+  # 定理 Q1（DropAssumptionBStar.lean, cycle 21 step 1）
+  IntegrableLattice.DropBStar.unique_min_of_val_seq
+  IntegrableLattice.DropBStar.min_eq_theta
+  IntegrableLattice.DropBStar.BG_dominates
+  IntegrableLattice.DropBStar.totient_pow_mul_pow
+  IntegrableLattice.DropBStar.sum_totient_pow
+  IntegrableLattice.DropBStar.layer_card_sum
+  IntegrableLattice.DropBStar.lemma_Q3
+  IntegrableLattice.DropBStar.lemma_Q3_old_formula_false
+  IntegrableLattice.DropBStar.lemma_Q3_diff
+  IntegrableLattice.DropBStar.lemma_Q5_rho_max
+  IntegrableLattice.DropBStar.lemma_Q5_needs_strict
+  IntegrableLattice.DropBStar.lemma_Q5_card
+  IntegrableLattice.DropBStar.theorem_Q1_error
+  IntegrableLattice.DropBStar.theorem_Q1_error_explicit
+  # 定理 G4（GeneralTowerClosedForm.lean, cycle 21 step 2）
+  IntegrableLattice.GeneralTower.S0_closed
+  IntegrableLattice.GeneralTower.S1_closed
+  IntegrableLattice.GeneralTower.S0_decomp
+  IntegrableLattice.GeneralTower.S1_decomp
+  IntegrableLattice.GeneralTower.theorem_G1
+  IntegrableLattice.GeneralTower.theorem_G1_remark_2_2
+  IntegrableLattice.GeneralTower.theorem_G1_e_indep
+  IntegrableLattice.GeneralTower.twisted_unique_min
+  IntegrableLattice.GeneralTower.twisted_unique_min_k_zero
+  IntegrableLattice.GeneralTower.K_wellDefined
+  IntegrableLattice.GeneralTower.K_zero_iff
+  IntegrableLattice.GeneralTower.K_ge_one_of_ell_two
+  IntegrableLattice.GeneralTower.K_ge_one_of_jstar_large
+  IntegrableLattice.GeneralTower.K_example_ell_three
+  IntegrableLattice.GeneralTower.G3_positivity
+  IntegrableLattice.GeneralTower.G3_two_levels
+  IntegrableLattice.GeneralTower.sum_totient_Ico
+  IntegrableLattice.GeneralTower.layer_b_boundary
+  IntegrableLattice.GeneralTower.theorem_G4_b
+  IntegrableLattice.GeneralTower.theorem_G4_c
+  IntegrableLattice.GeneralTower.G4_K_dependence
 )
 
 {

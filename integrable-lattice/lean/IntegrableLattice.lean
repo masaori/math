@@ -26,3 +26,5 @@ import IntegrableLattice.TowerTypeCoefficients
 import IntegrableLattice.DigitBranchRecursion
 import IntegrableLattice.SInfinityDecision
 import IntegrableLattice.EllTwoClosedForm
+import IntegrableLattice.DropAssumptionBStar
+import IntegrableLattice.GeneralTowerClosedForm

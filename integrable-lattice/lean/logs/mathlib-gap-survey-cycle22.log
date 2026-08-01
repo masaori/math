@@ -1,0 +1,233 @@
+=== 日付 ===
+2026-08-01T01:36:03Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== mathlib tag / toolchain ===
+v4.32.1
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+--- Q1補題Q4a 円分体の分岐と付値
+  (1) 内容 grep  "IsCyclotomicExtension"        files=15
+  (2) 内容 grep  "cyclotomic" (-i)  files=31
+  (3) ファイル名 "cyclotomic" (-i)  files=2
+      内容ヒット（先頭 10 件）:
+        Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+        Mathlib/NumberTheory/LegendreSymbol/Complex.lean
+        Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+        Mathlib/NumberTheory/Cyclotomic/Basic.lean
+        Mathlib/NumberTheory/Cyclotomic/Gal.lean
+        Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean
+        Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+        Mathlib/NumberTheory/PrimesCongruentOne.lean
+        Mathlib/NumberTheory/JacobiSum/Basic.lean
+        Mathlib/NumberTheory/GaussSum.lean
+      ファイル名ヒット:
+        Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+        Mathlib/NumberTheory/Cyclotomic/Basic.lean
+        Mathlib/NumberTheory/Cyclotomic/Gal.lean
+        Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean
+        Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/PID.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Embeddings.lean
+
+--- Q1補題Q4a zeta-1 の素元性
+  (1) 内容 grep  "zeta_sub_one_prime"        files=3
+  (2) 内容 grep  "sub_one_prime" (-i)  files=5
+  (3) ファイル名 "sub_one_prime" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/NumberTheory/Fermat.lean
+        Mathlib/NumberTheory/FLT/Three.lean
+        Mathlib/NumberTheory/LucasLehmer.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean
+
+--- Q1補題Q1' 2変数Laurent環のUFD性
+  (1) 内容 grep  "LaurentPolynomial"        files=7
+  (2) 内容 grep  "laurent" (-i)  files=19
+  (3) ファイル名 "laurent" (-i)  files=3
+      内容ヒット（先頭 10 件）:
+        Mathlib/Order/Rel/GaloisConnection.lean
+        Mathlib/Analysis/Complex/ValueDistribution/Cartan.lean
+        Mathlib/Analysis/Meromorphic/FactorizedRational.lean
+        Mathlib/FieldTheory/Laurent.lean
+        Mathlib/FieldTheory/RatFunc/Defs.lean
+        Mathlib/CategoryTheory/Sites/Descent/IsStack.lean
+        Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean
+        Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean
+        Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean
+        Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean
+      ファイル名ヒット:
+        Mathlib/FieldTheory/Laurent.lean
+        Mathlib/RingTheory/LaurentSeries.lean
+        Mathlib/Algebra/Polynomial/Laurent.lean
+
+--- Q1補題Q1' 一意分解環
+  (1) 内容 grep  "UniqueFactorizationMonoid"        files=66
+  (2) 内容 grep  "unique factorization" (-i)  files=26
+  (3) ファイル名 "unique factorization" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean
+        Mathlib/CategoryTheory/Limits/IsLimit.lean
+        Mathlib/GroupTheory/MonoidLocalization/UniqueFactorization.lean
+        Mathlib/RingTheory/Radical/Basic.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Finite.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/GCDMonoid.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Multiplicative.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Nat.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Multiplicity.lean
+        Mathlib/RingTheory/UniqueFactorizationDomain/Moebius.lean
+
+--- Q1補題Q0 体のノルム（アルキメデス評価）
+  (1) 内容 grep  "Algebra.norm"        files=52
+  (2) 内容 grep  "algebra.norm" (-i)  files=55
+  (3) ファイル名 "algebra.norm" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/Analysis/CStarAlgebra/Unitary/Span.lean
+        Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean
+        Mathlib/Analysis/CStarAlgebra/PositiveLinearMap.lean
+        Mathlib/Analysis/CStarAlgebra/Module/Constructions.lean
+        Mathlib/Analysis/CStarAlgebra/Module/Defs.lean
+        Mathlib/Analysis/CStarAlgebra/SpecialFunctions/PosPart.lean
+        Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean
+        Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean
+        Mathlib/Analysis/Complex/UpperHalfPlane/Manifold.lean
+        Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart/Isometric.lean
+
+--- G4 5.1 射影直線のレベル構造 P^1(Z/l^M)
+  (1) 内容 grep  "Projectivization"        files=15
+  (2) 内容 grep  "projective space" (-i)  files=11
+  (3) ファイル名 "projective space" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/Topology/ExtremallyDisconnected.lean
+        Mathlib/NumberTheory/Height/Projectivization.lean
+        Mathlib/NumberTheory/Height/Basic.lean
+        Mathlib/NumberTheory/Height/MvPolynomial.lean
+        Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean
+        Mathlib/LinearAlgebra/Projectivization/Independence.lean
+        Mathlib/LinearAlgebra/Projectivization/Basic.lean
+        Mathlib/LinearAlgebra/Projectivization/Subspace.lean
+        Mathlib/LinearAlgebra/Projectivization/Cardinality.lean
+        Mathlib/LinearAlgebra/Projectivization/Constructions.lean
+
+--- G2の1 円分体のGalois群と付値の不変性
+  (1) 内容 grep  "autEquivPow"        files=2
+  (2) 内容 grep  "galois" (-i)  files=232
+  (3) ファイル名 "galois" (-i)  files=11
+      内容ヒット（先頭 10 件）:
+        Mathlib/Tactic/Translate/ToDual.lean
+        Mathlib/Order/Bounds/Lattice.lean
+        Mathlib/Order/Sublattice.lean
+        Mathlib/Order/Heyting/Regular.lean
+        Mathlib/Order/Heyting/Basic.lean
+        Mathlib/Order/Hom/Order.lean
+        Mathlib/Order/CompleteBooleanAlgebra.lean
+        Mathlib/Order/Atoms.lean
+        Mathlib/Order/SuccPred/Basic.lean
+        Mathlib/Order/UpperLower/Closure.lean
+      ファイル名ヒット:
+        Mathlib/Order/Rel/GaloisConnection.lean
+        Mathlib/Order/GaloisConnection/Basic.lean
+        Mathlib/Order/GaloisConnection/Defs.lean
+        Mathlib/NumberTheory/RamificationInertia/Galois.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+        Mathlib/FieldTheory/AbsoluteGaloisGroup.lean
+        Mathlib/FieldTheory/Finite/GaloisField.lean
+        Mathlib/FieldTheory/PolynomialGaloisGroup.lean
+        Mathlib/FieldTheory/Galois/Abelian.lean
+        Mathlib/FieldTheory/Galois/Basic.lean
+
+--- G2の3 完全分岐と剰余体
+  (1) 内容 grep  "IsTotallyRamified"        files=0
+  (2) 内容 grep  "totally ramified" (-i)  files=0
+  (3) ファイル名 "totally ramified" (-i)  files=0
+
+--- （再確認）matrix-tree定理
+  (1) 内容 grep  "matrixTree"        files=0
+  (2) 内容 grep  "kirchhoff" (-i)  files=0
+  (3) ファイル名 "kirchhoff" (-i)  files=0
+
+--- （再確認）全域木数
+  (1) 内容 grep  "numSpanningTrees"        files=0
+  (2) 内容 grep  "spanning tree" (-i)  files=3
+  (3) ファイル名 "spanning tree" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean
+        Mathlib/Combinatorics/Quiver/Arborescence.lean
+        Mathlib/Combinatorics/SimpleGraph/Acyclic.lean
+
+--- （再確認）Newton多面体
+  (1) 内容 grep  "NewtonPolytope"        files=0
+  (2) 内容 grep  "newton polytope" (-i)  files=0
+  (3) ファイル名 "newton polytope" (-i)  files=0
+
+--- 対照(使用中) 終結式
+  (1) 内容 grep  "Polynomial.resultant"        files=2
+  (2) 内容 grep  "resultant" (-i)  files=3
+  (3) ファイル名 "resultant" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+        Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+        Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+
+--- 対照(使用中) totient
+  (1) 内容 grep  "Nat.totient"        files=17
+  (2) 内容 grep  "totient" (-i)  files=27
+  (3) ファイル名 "totient" (-i)  files=2
+      内容ヒット（先頭 10 件）:
+        Mathlib/Topology/Instances/AddCircle/Defs.lean
+        Mathlib/NumberTheory/LSeries/PrimesInAP.lean
+        Mathlib/NumberTheory/ArithmeticFunction/Carmichael.lean
+        Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean
+        Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+        Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+        Mathlib/NumberTheory/PrimeCounting.lean
+        Mathlib/NumberTheory/PowModTotient.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/PID.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean
+      ファイル名ヒット:
+        Mathlib/NumberTheory/PowModTotient.lean
+        Mathlib/Data/Nat/Totient.lean
+
+--- 対照(使用中) 素数冪のtotient
+  (1) 内容 grep  "totient_prime_pow"        files=9
+  (2) 内容 grep  "totient_prime_pow" (-i)  files=9
+  (3) ファイル名 "totient_prime_pow" (-i)  files=0
+      内容ヒット（先頭 10 件）:
+        Mathlib/NumberTheory/ArithmeticFunction/Carmichael.lean
+        Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+        Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean
+        Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean
+        Mathlib/GroupTheory/Transfer.lean
+        Mathlib/RingTheory/ZMod/UnitsCyclic.lean
+        Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean
+        Mathlib/Data/Nat/Totient.lean
+
+=== 追加の targeted 確認（cycle 22。上の 3 段方式で語の選び方が悪かったものを取り直す）===
+
+--- 完全分岐: 検索語 "IsTotallyRamified" / "totally ramified" は 0/0/0 だったが、
+    これは語の選び方が悪いだけで、概念は mathlib に在る。分岐指数・慣性次数で表現されている:
+      ramificationIdx    files=16
+      inertiaDeg         files=15
+      IsRamified         files=3
+    → 「mathlib に無い」と書いてはならない。**配線**である。
+
+--- Laurent 環: 1 変数は在る。2 変数（$\mathbb{F}_\ell[z^{\pm},w^{\pm}]$）の直接の型は無い:
+      Mathlib/FieldTheory/Laurent.lean
+      Mathlib/RingTheory/LaurentSeries.lean
+      Mathlib/Algebra/Polynomial/Laurent.lean
+      Polynomial.laurent     files=0
+      MvPolynomial.Laurent   files=0
+    → 2 変数 Laurent は MvPolynomial の局所化として作れる。**配線**であって数学的な欠落ではない。
+
+--- 全域木数の 3 件の内容（数える定理ではないことの確認。cycle 21 と同じ結論）:
+      Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean
+      Mathlib/Combinatorics/SimpleGraph/Acyclic.lean
+      Mathlib/Combinatorics/Quiver/Arborescence.lean
+    → NielsenSchreier / Arborescence / Acyclic はいずれも全域木の**存在**であって個数の公式ではない。
+      kirchhoff は 3 段すべて 0 件。**Matrix–Tree 定理は mathlib に無い**（cycle 21 と一致）。
