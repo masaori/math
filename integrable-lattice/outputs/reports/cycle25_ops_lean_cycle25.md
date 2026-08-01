@@ -370,7 +370,7 @@ worktree には `.lake` が無い状態から始めたので `lake exe cache get
 ```
 $ git diff --stat origin/main...HEAD
 ```
-（§8 に最終出力を貼る。`lean/` 配下と `outputs/reports/cycle25_ops_lean_cycle25.md` のみ。）
+（§8 に実際の出力を貼る。`lean/` 配下と `outputs/reports/cycle25_ops_lean_cycle25.md` のみ。）
 
 ---
 
@@ -421,17 +421,20 @@ $ git diff --stat origin/main...HEAD
 
 ```
 $ git diff --stat origin/main...HEAD
- .../lean/IntegrableLattice.lean                    |   1 +
+ integrable-lattice/lean/IntegrableLattice.lean     |   1 +
  .../lean/IntegrableLattice/Cycle25Corrections.lean | 595 +++++++++++++++++++++
- .../lean/README.md                                 |  13 +
- .../lean/logs/build-cycle25.log                    | ...
- .../lean/logs/cache-get-cycle25.log                | ...
- .../lean/logs/check-no-sorry-cycle25.log           | ...
- .../lean/scripts/check-no-sorry.sh                 |  37 +
- .../reports/cycle25_ops_lean_cycle25.md            | ...
+ integrable-lattice/lean/README.md                  |  10 +
+ integrable-lattice/lean/logs/build-cycle25.log     | 179 +++++++
+ integrable-lattice/lean/logs/cache-get-cycle25.log |  48 ++
+ .../lean/logs/check-no-sorry-cycle25.log           | 336 ++++++++++++
+ integrable-lattice/lean/scripts/check-no-sorry.sh  |  37 ++
+ .../outputs/reports/cycle25_ops_lean_cycle25.md    | 456 ++++++++++++++++
+ 8 files changed, 1662 insertions(+)
 ```
 
-（実際の出力は最終報告に貼る。）
+（作業中に `origin/main` が cycle 25 step 2 の成果で前進したので、コミット後に取り込み直して
+上を取り直した。取り込みでコンフリクトは無く、step 2 が触ったのは `structured-latex/tools/` 配下で
+本 step の担当範囲と重ならない。）
 **すべて `integrable-lattice/lean/` 配下と `integrable-lattice/outputs/reports/` の自分の report である。**
 本文（`structured-latex/content/`・`structured-latex/locales/en/content/`）、`structured-latex/tools/`、
 既存の根拠 report、`MEMORY.md`、`docs/tasks/auto-loop-state.md` に差分は無い。

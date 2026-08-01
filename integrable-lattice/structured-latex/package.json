@@ -16,6 +16,9 @@
     "test:runtime": "node tools/schema-runtime-test.ts",
     "verify:transcription": "node tools/verify-transcription.ts",
     "test:transcription": "node tools/verify-transcription-detection-test.ts",
+    "verify:proofs": "node tools/verify-proof-completeness.ts",
+    "verify:refs": "node tools/verify-reference-rot.ts",
+    "test:guards": "node tools/verify-guards-detection-test.ts",
     "codemod:origin": "node tools/codemod-origin.ts",
     "build:tex": "node tools/build-latex.ts",
     "build:tex:en": "node tools/build-latex.ts --locale en",
@@ -23,7 +26,7 @@
     "build:pdf:en": "node tools/build-latex.ts --locale en --pdf && node tools/verify-no-notes-in-output.ts --locale en",
     "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
     "verify:no-notes:en": "node tools/build-latex.ts --locale en && node tools/verify-no-notes-in-output.ts --locale en",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run validate:en && npm run verify:no-notes && npm run verify:no-notes:en && npm run verify:localization && npm run test:types && npm run test:runtime && npm run test:localization && npm run verify:transcription && npm run test:transcription"
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run validate:en && npm run verify:no-notes && npm run verify:no-notes:en && npm run verify:localization && npm run test:types && npm run test:runtime && npm run test:localization && npm run verify:transcription && npm run test:transcription && npm run verify:proofs && npm run verify:refs && npm run test:guards"
   },
   "dependencies": {
     "zod": "3.25.76"
