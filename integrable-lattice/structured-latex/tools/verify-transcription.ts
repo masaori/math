@@ -81,6 +81,23 @@ for (const result of coverage) {
   }
 }
 
+// 台帳に載っていても、range の中に条件文が 1 文も無ければ照合は 0 件で走る。
+// それは「緑」ではなく「何も見ていない」なので、件数を必ず出す（黙って落とさない）。
+const noCheck = coverage.filter((r) => r.checkedAtoms + r.checkedTerms === 0);
+console.log(
+  `\n  照合の内訳: 照合したアトム ${coverage.reduce((n, r) => n + r.checkedAtoms, 0)} 件・` +
+    `語 ${coverage.reduce((n, r) => n + r.checkedTerms, 0)} 件 / ` +
+    `免除 ${coverage.reduce((n, r) => n + r.acknowledgedUsed, 0)} 件 / ` +
+    `**照合対象が 0 件だったブロック ${noCheck.length} 件**` +
+    (noCheck.length === 0 ? "" : `（${noCheck.map((r) => r.block).join(", ")}）`),
+);
+if (noCheck.length > 0) {
+  console.log(
+    "    ↑ これらは台帳の目印が生きていることしか検査していない（range に条件文が無い）。" +
+      "限界として記録すること。",
+  );
+}
+
 console.log("\n[検査 B] 添字族の裸使用 — 内訳");
 console.log(`  走査した数式: ${views.reduce((n, v) => n + v.formulas.length, 0)} 件 / 検出 ${bare.length} 件`);
 for (const finding of bare) {
