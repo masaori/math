@@ -157,14 +157,16 @@ $v_\ell(\alpha)=\dfrac{v_\ell\bigl(N_{\mathbb{Q}(\eta)/\mathbb{Q}}(\alpha)\bigr)
 > $$\Lambda_k:=\min_m v_\ell\bigl(A^{[k]}_m\bigr),\quad
 > \theta^\sharp_k:=\min\{m:v_\ell(A^{[k]}_m)=\Lambda_k\},\quad
 > m^\sharp_k:=\min\{m<\theta^\sharp_k: A^{[k]}_m\neq0\}$$
-> （そのような $m$ が無ければ $m^\sharp_k=\infty$）。$k=0$ ではこれは cycle 19 step 2 の
+> （そのような $m$ が無ければ $m^\sharp_k=\infty$。**この $\infty$ を含む演算の規約は $(3.2)$ の直後に置いた**
+> ——2026-08-01 cycle 25 step 1 追記）。$k=0$ ではこれは cycle 19 step 2 の
 > `stage_data`（$\lambda,\theta^*,m_1$）そのものである。
 
 > **定理 G2.** *$P_0\in S_\infty$、$k\ge0$ とする。*
 > 1. *$\Lambda_k,\theta^\sharp_k,m^\sharp_k$ は $t\in(\mathbb{Z}/\ell^k)^\times$ の取り方に依らない（したがって層の全点で共通）。*
 > 2. *$M\ge2k$ かつ*
 >    $$\varphi(\ell^{M})>\bigl(\theta^\sharp_k-m^\sharp_k\bigr)\,\varphi(\ell^{k}) \tag{3.2}$$
->    *ならば、深さ $k$ の層の全点 $P$ で*
+>    *（**規約: $m^\sharp_k=\infty$ のときは差 $\theta^\sharp_k-m^\sharp_k$ を $-\infty$ と読む。
+>    したがって $(3.2)$ は自動的に成り立つ**）ならば、深さ $k$ の層の全点 $P$ で*
 >    $$\hat\theta_M(P)=\varphi(\ell^{M})\,\Lambda_k+\theta^\sharp_k. \tag{3.3}$$
 > 3. *$\varphi(\ell^k)\Lambda_k\in\mathbb{Z}_{\ge1}$。とくに $(3.3)$ の右辺は整数である。*
 
@@ -195,6 +197,37 @@ $\ge1$ は次で見る: $\mathcal{O}_k$ の極大イデアルは $(\eta-1)$（$k
 $P_0\in S_\infty$ は $\overline{\Phi_u}\equiv0$、すなわち全ての $m$ で $\bar A_m(u)=0$ を意味する（補題 W2）ので
 $v_\ell(A^{[k]}_m)\ge\frac1{\varphi(\ell^k)}$、よって $\varphi(\ell^k)\Lambda_k\ge1$。$\blacksquare$
 
+> **【訂正 2026-08-01（cycle 25 step 1）— $(3.2)$ に $\infty$ の引き算の規約を書き足した】**
+>
+> **何が足りていなかったか**: 定義 G2a は $m^\sharp_k$ を「そのような $m$ が無ければ $\infty$」と定めながら、
+> $(3.2)$ を差 $\theta^\sharp_k-m^\sharp_k$ の形で書いており、**$\theta^\sharp_k-\infty$ の読み方が本文に無かった。**
+> 検出は cycle 24 step 5 の Lean 検算 `cycle24_ops_lean_cycle23_corrections.md` §2.2。
+> **これは cycle 23 が定理 D3・D5 について挙げ、cycle 24 step 1 が訂正したのと同じ型の穴**
+> （無限大を含む量の演算の規約が書かれていない）が、同じ report の中に残っていたものである。
+>
+> **なぜ書き落とせないか（規約が無いと何が壊れるか）**: $m^\sharp_k$ は**空集合上の $\min$** なので、
+> 「$\min\emptyset=0$」という広く使われるもう一つの規約で読む読者がいる。その読み方では
+> $(3.2)$ は $\varphi(\ell^M)>\theta^\sharp_k\varphi(\ell^k)$ という**真に強い条件**に化ける。
+> **これは §6.1（定理 J8 との照合）を実際に壊す。** §6.1 は $k=0$ で
+> $\Phi_u=-\ell x^{2}$、すなわち $A_0=A_1=0$、$\Lambda_0=1$、$\theta^\sharp_0=2$、$m^\sharp_0=\infty$ の場合であり、
+> そこでは $M^{*}=1$ を使っている。$\min\emptyset=0$ の読みでは $(3.2)$ は
+> $\varphi(\ell^{1})=\ell-1>(\,2-0\,)\varphi(\ell^{0})=2$、すなわち $\ell\ge4$ を要求し、
+> **§6.1 が機械照合している $\ell=3$ で条件が満たされなくなる**（§5.3 の条件 4 が破れ、$M^{*}=1$ が正当化できない）。
+> 正しい読み（差を $-\infty$ とし $(3.2)$ を自動成立とする）では、$\ell=3$ でも $M\ge2k=0$ だけで条件が満たされる。
+> **すなわち規約の明記は、cycle 24 step 1 が条件 2 について塞いだ内部の食い違いと同じ場所で、同じ役割を果たす。**
+>
+> **両方の読みが一致すること（Lean で確認済み）**: 証明が実際に使っているのは
+> $m<\theta^\sharp_k$ かつ $A_m\ne0$ なる $m$ での評価であり、そこに現れる形は**和の形**
+> $$\frac{\varphi(\ell^{M})}{\varphi(\ell^{k})}+m^\sharp_k>\theta^\sharp_k$$
+> である（上の証明の第 3 の箇条書き）。この形なら $m^\sharp_k=\infty$ でも規約が要らず、
+> 左辺が $\infty$ で条件は自動的に真になる。有限のときは差の形と同値である。
+> cycle 24 step 5 が `G2_cond32_sum_form_top`（$m^\sharp_k=\infty$ で成立）と
+> `G2_cond32_sum_form_finite`（有限のとき差の形と同値）として両方を型に出しており、
+> **本節の規約（差を $-\infty$ と読む）と和の形の読みは一致する。**
+> したがって $(3.2)$ を差の形のまま残し、規約を添える形で訂正した
+> （cycle 24 step 4 は本文側で同じ選択をしている。`cycle24_ops_reflect_g4_and_d_series.md` §3.2、本文 (M1)・(M5)）。
+> **$\min\emptyset=0$ の読みだけが、上のとおり結論を壊す。**
+
 **注 3.1（$k=0$ との一致）.** $k=0$ では $\eta=1$、$\mathcal{O}_0=\mathbb{Z}$、$(3.3)$ は
 $\hat\theta_M(P_0)=\varphi(\ell^M)\lambda+\theta^*$ となり、cycle 19 step 2 の定理 S（および命題 7 の
 「例外直線 1 本の寄与 $\lambda(\ell^n-1)+n\theta^*$」）と一致する。
@@ -216,7 +249,9 @@ $R'(P_0)$ をそのような最小の $r$ とする。$r\ge R'$ の層（＝深�
 $$\theta(P)=e_{j^*}+j^{*}\ell^{\,M-k}. \tag{4.1}$$
 
 > **定理 G3.** $K(P_0):=\max\bigl\{k\ge0:\ j^{*}\ell\ \ge\ (\ell-1)\ell^{k}\bigr\}$ *と置く（$j^*\ge1$ より $K\ge0$ は常に定義される）。
-> このとき、$k>K$ なる深さ $k$ の層では、$M\ge\max\bigl(R'+k,\ k+\lceil\log_\ell(e_{j^*}+1)\rceil\bigr)$ で*
+> さらに $\lambda(P_0)$ を $\ell^{\lambda}\ge e_{j^*}+1$ を満たす最小の自然数とする（$\ell$ の冪を順に比べれば決まるので、
+> 実対数を経由しない。値は $\lceil\log_\ell(e_{j^*}+1)\rceil$ に等しい）。
+> このとき、$k>K$ なる深さ $k$ の層では、$M\ge\max\bigl(R'+k,\ k+\lambda\bigr)$ で*
 > $$\hat\theta_M(P)=\theta(P)=e_{j^*}+j^{*}\ell^{\,M-k},\qquad
 > \text{すなわち}\quad \Lambda_k=\frac{j^{*}}{\varphi(\ell^{k})},\ \ \theta^\sharp_k=e_{j^*}. \tag{4.2}$$
 > *とくに $K=0\iff j^{*}\le\ell-2$ であり、$\ell=2$ では $j^*\ge1=\ell-1$ なので**必ず $K\ge1$** である。*
@@ -230,7 +265,9 @@ $\theta-m_1<\varphi(\ell^M)$（$m_1$ は $\Phi_P$ の最低次。cycle 18 補題
 $$\varphi(\ell^M)-\theta+m_1\ \ge\ (\ell-1)\ell^{M-1}-j^{*}\ell^{M-k}-e_{j^*}+2
 =\ell^{M-k}\bigl[(\ell-1)\ell^{k-1}-j^{*}\bigr]-e_{j^*}+2\ \ge\ \ell^{M-k}-e_{j^*}+2$$
 
-なので、$\ell^{M-k}>e_{j^*}$ すなわち $M\ge k+\lceil\log_\ell(e_{j^*}+1)\rceil$ で正になる。
+なので、$\ell^{M-k}>e_{j^*}$、すなわち（$\ell^{M-k}$ と $e_{j^*}$ はいずれも整数なので）$\ell^{M-k}\ge e_{j^*}+1$、
+すなわち $M\ge k+\lambda$ で正になる（$\lambda$ の定義から。**$\ell$ の冪の比較だけで、実対数を使わない**
+——2026-08-01 cycle 25 step 1 に書き換え）。
 よって $\hat\theta_M=\theta$。これと定理 G2 の $(3.3)$（同じ $M$ で両方が成り立つ $M$ を取れば）を比べて
 $\varphi(\ell^M)\Lambda_k+\theta^\sharp_k=e_{j^*}+j^*\ell^{M-k}$ が 2 つ以上の $M$ で成り立つから、
 $\ell^M$ の係数を比べて $\Lambda_k=\dfrac{j^{*}\ell^{-k}}{1-\ell^{-1}}=\dfrac{j^{*}}{\varphi(\ell^{k})}\cdot\dfrac{\varphi(\ell^k)\ell^{1-k}}{\ell-1}$。
@@ -348,6 +385,7 @@ $(2.1)$ が成り立つ十分条件として、次をすべて満たす最小の
    空であること自体は障害ではない）。
 3. $\varphi(\ell^{M})>\theta^{\max}_U-2$（(a)）。
 4. 各 $P_0$、各 $k\le K$ で $M\ge2k$ かつ $\varphi(\ell^{M})>(\theta^\sharp_k-m^\sharp_k)\varphi(\ell^{k})$（定理 G2 $(3.2)$）。
+   $m^\sharp_k=\infty$ の層では $(3.2)$ の規約によりこの不等式は自動的に満たされるので、条件 4 は $M\ge2k$ だけになる。
 5. 各 $P_0$ で $e_{j^*}+j^{*}\ell^{\,M-K-1}-2<\varphi(\ell^{M})$（定理 G3、$k=K+1$ の最外層）。
 
 いずれも $D$ の係数からの有限計算である。
@@ -361,6 +399,16 @@ $(2.1)$ が成り立つ十分条件として、次をすべて満たす最小の
 > 初稿の条件 2 を自分で破っていた**（内部の食い違い）。**正しいのは §6.1 の側**で、直すべきはここである。
 > 検出は cycle 22 step 4 の Lean 検算 `cycle22_ops_lean_cycle21_theorems.md` §1
 > （`GeneralTower.sum_totient_Ico` / `layer_b_boundary`）。
+
+> **【訂正 2026-08-01（cycle 25 step 1）— 条件 4 に $(3.2)$ の規約を書き足した】**
+> 初稿の条件 4 は定理 G2 $(3.2)$ をそのまま引いていたが、$m^\sharp_k=\infty$ の層で
+> $\theta^\sharp_k-m^\sharp_k$ をどう読むかが書かれていなかったため、
+> **その層について条件 4 が満たされるのかどうかを判定できなかった**（§3.2 の訂正を参照）。
+> $(3.2)$ の規約（差を $-\infty$ と読み、条件は自動成立）を明記したうえで、
+> 条件 4 の文にその帰結（そのような層では $M\ge2k$ だけが要求される）を 1 文足した。
+> **§6.1 がまさにこの場合であり、規約を $\min\emptyset=0$ で読むと §6.1 の $\ell=3$ が落ちる**
+> （§3.2 の訂正で計算した）。検出は cycle 24 step 5 の Lean 検算
+> `cycle24_ops_lean_cycle23_corrections.md` §2.2（`G2_cond32_sum_form_top` / `G2_cond32_sum_form_finite`）。
 
 ### 5.4 系 G5（仮定 (B\*) が落ちる）
 
@@ -393,6 +441,16 @@ $c$ 以降には効く」と切り分けた。定理 G2 はまさにその**最�
 $\ell^{L}A_{\mathrm{gen}}=\sum_{P\in\mathbb{P}^1(\mathbb{Z}/\ell^L)}\theta(P)=\Theta_L$（$M^*\le L$ を満たすように $L$ を取れば
 $\hat\theta_L=\theta$）で、$\frac{\ell}{\ell-1}\ell^{-L}=\frac{1}{\varphi(\ell^L)}$。$(2.3)$ に $\alpha=\gamma=0$ を入れる。$\blacksquare$
 
+> **【追記 2026-08-01（cycle 25 step 1）— 本系は $b=0$ の場合であり、補題 Q5 の $c_1$ の縮退はここで実在する】**
+> 本系の主張の中に $b=0$ がある。これは `cycle21_T3_drop_assumption_B_star.md` の補題 Q5 の定数
+> $c_1$ が**初稿の定義（実対数）では定義されない**場合そのものである（$\log_\ell 0$）。
+> すなわち $b=0$ は仮想の場合ではなく、**同じサイクルの別の主結果が扱っている実在の場合**である。
+> 検出は cycle 24 step 5 の Lean 検算（`cycle24_ops_lean_cycle23_corrections.md` §2.1）。
+> cycle 25 step 1 が $c_1$ を「$2b<(\ell-1)\ell^{c}$ を満たす最小の自然数」へ直したので、
+> **$b=0$ では $c_1=0$・$r=0$ となり、補題 Q5 は $\mathcal{B}_M=\emptyset$、定理 Q1 は
+> $|\Theta_M|\le\theta_G^{\max}(\ell+1)\ell^{M-1}$ を与える**（同 report §5.2・§6 の訂正）。
+> 本系はその誤差項の中身まで開いて $c=\frac{\ell}{\ell-1}A_{\mathrm{gen}}$ を出しているので、両者は整合する。
+
 **cycle 19 定理 J6 との差**: $c$ の値は同じである。新しいのは
 (i) 前提「$\theta$ が有界」がコンパクト性ではなく系 L3′ の**有効な上界**で保証されること、
 (ii) 定理 J6 が「レベル $<n_1$ からの定数 $\nu$」としか書かなかった **$e$ が明示されたこと**である。
@@ -417,6 +475,13 @@ c=\frac{2\ell}{\ell-1}-\frac{2}{\ell-1}=2,\quad d=2-2=0,$$
 
 $M^*=1$ なので $(2.3)$ の角括弧は $0$ で $e=\frac{\ell}{(\ell-1)^2}\cdot\frac{2(\ell-1)}{\ell}-\frac{\ell}{\ell-1}\cdot2=\frac{2-2\ell}{\ell-1}=-2$。
 **5 係数すべて一致する。** 機械照合は検証 Step A1（$\ell=3,5,7$）。
+
+> **【追記 2026-08-01（cycle 25 step 1）】** この塔は $k=0$ で $\Phi_u=-\ell x^{2}$、すなわち
+> $A_0=A_1=0$ なので **$m^\sharp_0=\infty$ の場合**である。$M^{*}=1$ が §5.3 の条件 4 を満たすのは、
+> $(3.2)$ の規約（§3.2 の訂正。差を $-\infty$ と読み条件は自動成立）による。
+> **規約を $\min\emptyset=0$ で読むと、ここで照合している $\ell=3$ が落ちる**（§3.2 の訂正で計算した）。
+> 条件 1〜5 すべてを $M^{*}=1$ が満たすことは cycle 24 step 5 が型に出して確認している
+> （`cycle24_ops_lean_cycle23_corrections.md` §1.3、`G4_cond_all_at_61`）。
 
 ### 6.2 定理 X′ の族（$\ell$ 奇、$p(1,0)+q(0,1)$、例外直線あり）
 
