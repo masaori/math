@@ -163,16 +163,6 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         },
       },
       {
-        item: "e_{m}",
-        reason:
-          "report の $e_m$ は本文の $e_{m_u}$ と同じ量である（report も同じ節で $m=m_P$ と置いている）。本文は基点 $P$ に対応する $u$ を明示する記法を採っている。",
-        grounds: {
-          type: "notation",
-          reportQuote: "\\max_i\\bigl\\lfloor\\log_\\ell e_{m}(P_i)\\bigr\\rfloor",
-          bodyQuote: "e_{m_u}",
-        },
-      },
-      {
         item: "\\kappa_{n}",
         reason:
           "系 W6 が係数を取り出している展開 $\mathrm{ord}_\ell(\kappa_n)$ は本文では 命題 J (J4) が持つ。命題 K (K6) はその展開の $n\ell^n$ 係数 $b$ だけを述べる分担であり、本文は (K6) の冒頭で 命題 J を参照している。",
@@ -181,16 +171,6 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           reportQuote: "$\\mathrm{ord}_\\ell(\\kappa_n)$ の $n\\ell^n$ 項の係数は",
           holder: "paper_091_theorem_theta_padic",
           holderItem: "\\mathrm{ord}_\\ell(\\kappa_n)",
-        },
-      },
-      {
-        item: "\\psi_{u}",
-        reason:
-          "**本文はこれを持たない。** report は $e_{m_u}=\mathrm{ord}_{x=0}\bar\psi_u(G)$ という $e_{m_u}$ の明示式を与えるが、本文 (K4) の主張は $j^*(P)=m_u$ であって $e_{m_u}$ の値は使わない。(K5) は $e_{m_u}$ を $r_0$ の式に含むが、そこで要るのは $e_{m_u}<\infty$（(K4) が述べている）だけである。したがって主張は成り立つ。ただし $e_{m_u}$ を実際に計算する式が本文に無いことは事実なので、本文側の判断（書き足すか、report 参照に留めるか）は本文を担当する step へ回す。",
-        grounds: {
-          type: "weaker",
-          reportQuote: "さらに $e_{m_u}=\\mathrm{ord}_{x=0}\\bar\\psi_u(G)$",
-          bodyQuote: "j^*(P)=m_u",
         },
       },
       {

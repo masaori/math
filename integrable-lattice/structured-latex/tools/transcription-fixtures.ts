@@ -57,9 +57,14 @@ export const FIXTURES: readonly Fixture[] = [
     provenance:
       "コミット ac98013 が足した。根拠 report は outputs/reports/cycle19_T3_theta_ge_ell_plus_1.md の " +
       "定理 J2 の証明で、最後の等号が cycle 18 補題 A2 (1)（$A_1\\equiv0$）から従うと書いてある。" +
-      "この仮定を落とすと $m=\\ell^L$ ちょうどの段は偽になる（本文に反例が入っている）。",
+      "この仮定を落とすと $m=\\ell^L$ ちょうどの段は偽になる（本文に反例が入っている）。" +
+      "**cycle 25 step 4a で本文へ証明が入り、$A_1$ は statement だけでなく proof にも現れるようになった。** " +
+      "事故を再現するには**ブロック全体から**この仮定を落とす必要があるので、" +
+      "差分の対象を `A_1\\equiv0` ちょうどから `A_1` を含む数式すべてへ広げた" +
+      "（`A_1\\equiv0` だけを落とすと proof 側の $A_1=0$・$\\overline{A_1(u,v)}=0$ が残り、" +
+      "検査は「本文にある」と正しく判定して赤にならない）。",
     block: "paper_091_theorem_theta_padic",
-    ops: [{ op: "dropFormula", find: "A_1\\equiv0" }],
+    ops: [{ op: "dropFormula", find: "A_1" }],
     expect: { check: "A", contains: "A_{1}" },
   },
   {
