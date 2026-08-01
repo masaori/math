@@ -1,9 +1,9 @@
 /**
  * 論文本体 第 10 章（英語版）: θ = ∞ の点集合 S_∞ の判定手続きと、n ℓ^n の係数の閉じた式（命題 K）。
  *
- * **正本は日本語版 `../../structured-latex/content/009_s_infinity_decision.ts` である。**
+ * **正本は日本語版 `../../../content/009_s_infinity_decision.ts` である。**
  * ブロック id・`labels`・`habitat`・`verification`・`kind`・`proof` の有無、および**数式**は
- * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * 日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
  * ## 訳出で構造を変えた箇所（内容は変えていない）

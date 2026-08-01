@@ -2,9 +2,9 @@
  * Chapter 7 (the asymmetry of decidability) and Chapter 8 (scope, limitations, formal verification),
  * English version.
  *
- * **正本は日本語版 `../../structured-latex/content/007_asymmetry_scope.ts` である。**
+ * **正本は日本語版 `../../../content/007_asymmetry_scope.ts` である。**
  * ブロック id・`labels`・`habitat`・`realEscape` の有無・**数式**は日本語版と完全に同じ文字列を使う
- * （`tools/verify-ja-en-correspondence.ts` が検査する）。訳語は
+ * （`tools/verify-localization.ts` の構造照合が検査する）。訳語は
  * `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
  * 相互参照は 2026-08-01 の校閲ですべて `ref()` へ復元した

@@ -2,10 +2,10 @@
  * Chapter 4: the finite, elementary, decidable propositions on the Λ side
  * (Propositions A, B, C, C′, N, L) — English version.
  *
- * **正本は日本語版 `../../structured-latex/content/004_lambda_finite.ts` である。**
+ * **正本は日本語版 `../../../content/004_lambda_finite.ts` である。**
  * このファイルはその英訳であり、ブロック id・ラベル・`habitat`・`verification` / `lean`・
  * `proof` の有無・**数式**は日本語版と完全に同じにする
- * （`tools/verify-ja-en-correspondence.ts` がこれを検査する）。
+ * （`tools/verify-localization.ts` の構造照合がこれを検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
  * **日本語版 9 ブロックすべての英訳が揃っている。**

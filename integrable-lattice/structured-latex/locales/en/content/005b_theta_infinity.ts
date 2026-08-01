@@ -1,9 +1,9 @@
 /**
  * 論文本体 第 5 章の続き（英語版）: 命題 G'（消滅深度が無限大になる方向と、その族の閉形式）。
  *
- * **正本は日本語版 `../../structured-latex/content/005b_theta_infinity.ts` である。**
+ * **正本は日本語版 `../../../content/005b_theta_infinity.ts` である。**
  * ブロック id・`labels`・`habitat`・`verification`・`kind`・`proof` の有無、および**数式**は
- * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * 日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
  * ## 相互参照・数式についての処置（2026-08-01 の校閲で完了）

@@ -4,7 +4,7 @@
  * ## なぜ英語版だけに要るのか
  *
  * 日本語版では既出性の記述が**各命題の proof の中に散らばっている**
- * （`../../structured-latex/content/006_propositions_TVW.ts` の命題 V・T・W の証明末尾、
+ * （`../../../content/006_propositions_TVW.ts` の命題 V・T・W の証明末尾、
  * `007_asymmetry_scope.ts` の `paper_remark_qp_motivation` と `paper_remark_scope`、
  * `005_duality.ts` の命題 G の適用例）。読み進めれば全部書いてあるが、**1 箇所にまとまっていない。**
  * 投稿稿で査読者が最初に見るのは「この論文は何が既出で何が違うのか」であり、

@@ -1,9 +1,9 @@
 /**
  * Chapter 2: Setting (English version).
  *
- * **正本は日本語版 `../../structured-latex/content/002_setup.ts` である。**
+ * **正本は日本語版 `../../../content/002_setup.ts` である。**
  * このファイルはその英訳であり、ブロック id・ラベル・`habitat`・`verification` / `lean`・
- * **数式**は日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * **数式**は日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  */
 

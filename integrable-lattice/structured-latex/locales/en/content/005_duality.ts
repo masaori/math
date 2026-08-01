@@ -1,9 +1,9 @@
 /**
  * Chapter 5: the core proposition D (the duality of the two places) — English version.
  *
- * **正本は日本語版 `../../structured-latex/content/005_duality.ts` である。**
+ * **正本は日本語版 `../../../content/005_duality.ts` である。**
  * ブロック id・ラベル・`habitat`・`verification` / `lean`・`kind`・`proof` の有無・**数式**は
- * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * 日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
  * 訳語は `../../docs/paper001-en-glossary.md` を正本とする。
  *
  * ### この英訳で日本語版と形が変わっている点（内容は変えていない）

@@ -1,9 +1,9 @@
 /**
  * Chapter 3: The archimedean place (known) (English version).
  *
- * **正本は日本語版 `../../structured-latex/content/003_archimedean.ts` である。**
+ * **正本は日本語版 `../../../content/003_archimedean.ts` である。**
  * このファイルはその英訳であり、ブロック id・ラベル・`habitat`・`verification` / `lean`・
- * **数式**は日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * **数式**は日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
  * 英語版だけの差（`cite` は数式ではないので、日英の数式多重集合の一致は壊れない）:

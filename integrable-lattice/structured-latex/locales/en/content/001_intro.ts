@@ -1,13 +1,13 @@
 /**
  * Chapter 1: Introduction (English version).
  *
- * **正本は日本語版 `../../structured-latex/content/001_intro.ts` である。**
+ * **正本は日本語版 `../../../content/001_intro.ts` である。**
  * このファイルはその英訳であり、ブロック id・ラベル・`habitat`・`verification` / `lean` は
- * **日本語版と完全に同じ文字列**を使う（`tools/verify-ja-en-correspondence.ts` がこれを検査する）。
+ * **日本語版と完全に同じ文字列**を使う（`tools/verify-localization.ts` の構造照合がこれを検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
- * **現状は 2 ブロックだけである。** 残り 31 ブロックは後続の翻訳担当が足す
- * （足すまで `npm run verify:correspondence` は欠落として失敗する。それが正しい状態である）。
+ * **英訳は全ブロック揃っている**（cycle 24 step 2 時点。欠落があれば
+ * `npm run verify:localization` が構造照合で落とす）。
  */
 
 import { defineTranslatedBlocks as defineBlocks, displayMath, list, math, paragraph, refInTranslation as ref } from "../../../schema.ts";

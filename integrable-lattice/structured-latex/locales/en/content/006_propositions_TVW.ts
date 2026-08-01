@@ -1,9 +1,9 @@
 /**
  * Chapter 6: Propositions T, V, W (English version).
  *
- * **正本は日本語版 `../../structured-latex/content/006_propositions_TVW.ts` である。**
+ * **正本は日本語版 `../../../content/006_propositions_TVW.ts` である。**
  * ブロック id・`labels`・`habitat`・`verification` / `lean`・`proof` の有無・**数式**は
- * 日本語版と完全に同じ文字列を使う（`tools/verify-ja-en-correspondence.ts` が検査する）。
+ * 日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
  * 訳語は `integrable-lattice/docs/paper001-en-glossary.md` を正本とする。
  *
  * 日本語版が `ref("paper_remark_D_limits")` で張っている相互参照は、第 5 章の英訳が入った
