@@ -1,0 +1,77 @@
+=== mathlib gap survey (cycle 23 step 4) ===
+mathlib rev: 520045ab14e26149ee970e2e617ca04b09bde5d6  toolchain: leanprover/lean4:v4.32.1
+
+--- (1) 語幹 grep: matrixTree ---
+       0
+--- (1) 語幹 grep: kirchhoff ---
+       0
+--- (1) 語幹 grep: numSpanningTrees ---
+       0
+--- (1) 語幹 grep: NewtonPolytope ---
+       0
+--- (1) 語幹 grep: voltageGraph ---
+       0
+--- (1) 語幹 grep: MvPolynomial.Laurent ---
+       0
+
+--- (2) 内容 grep ---
+matrix tree          :        0
+spanning tree        :        7
+Kirchhoff            :        0
+newton polygon       :        0
+voltage              :        0
+
+--- (3) ファイル名検索 ---
+Tree         :        6
+Newton       :        2
+Laurent      :        3
+Cyclotomic   :        2
+
+=== 実在確認（使ったもの・使えるもの） ===
+Nat.totient_prime_pow                      :        8
+Finset.add_sum_erase                       :       16
+padicValNat.zero                           :        7
+padicValNat.eq_zero_of_not_dvd             :        7
+IsCyclotomicExtension                      :      442
+zeta_sub_one_prime                         :       30
+padicValNat.add                            :        1
+padicValRat.add_eq_min                     :        1
+min_padicValNat                            :        0
+Polynomial.Laurent                         :        3
+
+=== (追加) 0 でないヒットの中身を読む ===
+--- spanning tree の中身 ---
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:32:- `endIsFree T` corresponds to the fact that, given a spanning tree `T` of a
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:144:/- In this section, we suppose we have a free groupoid with a spanning tree for its g
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:146:is that we are 'pulling' the endpoints of all the edges of the quiver along the spann
+Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean:192:/-- Turning an edge in the spanning tree into a loop gives the identity loop. -/
+Mathlib/Combinatorics/Quiver/Arborescence.lean:28:  spanning tree'. This proof avoids the use of Zorn's lemma.
+Mathlib/Combinatorics/SimpleGraph/Acyclic.lean:457:/-- Every acyclic subgraph of a connected graph can be extended to a spanning tree. -/
+Mathlib/Combinatorics/SimpleGraph/Acyclic.lean:464:/-- Every connected graph has a spanning tree. -/
+
+--- Newton ファイル名 ---
+Mathlib/Dynamics/Newton.lean
+Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean
+
+--- padicValNat.add / padicValRat.add_eq_min ---
+Mathlib/NumberTheory/Harmonic/Int.lean:40:    rw [padicValRat.add_eq_min (harmonic_succ n ▸ (harmonic_pos n.succ_ne_zero).ne')
+Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:473:lemma padicValNat_add_le_self {a : ℕ} [hp : Fact p.Prime] (ha : p < a) :
+
+--- 超距離的な等号（v(a+b)=v(a) when v(a)<v(b)）を探す ---
+Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:319:lemma add_eq_min {q r : ℚ} (hqr : q + r ≠ 0) (hq : q ≠ 0) (hr : r ≠ 0)
+Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:329:lemma add_eq_of_lt {q r : ℚ} (hqr : q + r ≠ 0)
+Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:332:  rw [add_eq_min hqr hq hr (ne_of_lt hval), min_eq_left (le_of_lt hval)]
+Mathlib/RingTheory/Valuation/Basic.lean:304:theorem map_add_eq_of_lt_right (h : v x < v y) : v (x + y) = v y :=
+Mathlib/RingTheory/Valuation/Basic.lean:307:theorem map_add_eq_of_lt_left (h : v y < v x) : v (x + y) = v x := by
+Mathlib/RingTheory/Valuation/Basic.lean:308:  rw [add_comm]; exact map_add_eq_of_lt_right _ h
+Mathlib/RingTheory/Valuation/Basic.lean:311:  rw [sub_eq_add_neg, map_add_eq_of_lt_right, map_neg]
+Mathlib/RingTheory/Valuation/Basic.lean:320:  exact map_add_eq_of_lt_left _ (map_sum_lt _ h0 hf)
+Mathlib/RingTheory/Valuation/Basic.lean:323:  rw [sub_eq_add_neg, map_add_eq_of_lt_left]
+Mathlib/RingTheory/Valuation/Basic.lean:347:  simpa only [v.map_one] using v.map_add_eq_of_lt_left h
+Mathlib/RingTheory/Valuation/Basic.lean:352:  simpa only [v.map_one, v.map_neg] using v.map_add_eq_of_lt_left h
+Mathlib/RingTheory/Valuation/Basic.lean:928:          apply map_add_eq_of_lt_left
+Mathlib/RingTheory/Valuation/Basic.lean:940:          apply map_add_eq_of_lt_left
+Mathlib/RingTheory/Valuation/Basic.lean:1240:theorem map_add_eq_of_lt_left {x y : R} (h : v x < v y) :
+Mathlib/RingTheory/Valuation/Basic.lean:1244:theorem map_add_eq_of_lt_right {x y : R} (hx : v y < v x) :
+Mathlib/RingTheory/Valuation/Basic.lean:1245:    v (x + y) = v y := add_comm y x ▸ map_add_eq_of_lt_left v hx
+Mathlib/RingTheory/Valuation/Basic.lean:1250:  apply map_add_eq_of_lt_left
