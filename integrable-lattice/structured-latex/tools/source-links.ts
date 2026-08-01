@@ -1527,4 +1527,109 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
     ],
     acknowledged: [],
   },
+  {
+    // cycle 24 step 4 で本文へ入れた第 11 章の 2 ブロック。
+    // range は「定理の主張だけ」に絞る（cycle 22・23 が繰り返し記録したとおり、
+    // 証明や report 内部の履歴まで入れると免除ばかりが増えて照合力が落ちる）。
+    block: "paper_111_theorem_general_closed_form",
+    passages: [
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **定理 G2.** *$P_0\\in S_\\infty$、$k\\ge0$ とする。*",
+        to: "> 3. *$\\varphi(\\ell^k)\\Lambda_k\\in\\mathbb{Z}_{\\ge1}$。とくに $(3.3)$ の右辺は整数である。*",
+        covers: "命題 M (M1)（捻り段データ。層の全点で共通・$(3.2)$ の下での $\\hat\\theta_M$ の値・整数性）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **定理 G3.** $K(P_0):=\\max\\bigl\\{k\\ge0",
+        to: "> *とくに $K=0\\iff j^{*}\\le\\ell-2$ であり",
+        covers: "命題 M (M2)（飽和深度の明示上界と、非飽和層での $\\hat\\theta_M=\\theta$）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **定理 G4（一般の塔の閉形式）.** *(H) を仮定する。",
+        to: "> $$b=\\sum_{P_0\\in S_\\infty}j^{*}(P_0),\\qquad d=\\gamma-2 . \\tag{5.5}$$",
+        covers: "命題 M (M3)(M4)（$\\alpha,\\beta,\\gamma$ の閉形式と 5 係数）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "$(2.1)$ が成り立つ十分条件として、次をすべて満たす最小の $M$ を $M^*$ と取ればよい。",
+        to: "いずれも $D$ の係数からの有限計算である。",
+        covers: "命題 M (M5)（$M^*$ の明示形。条件 2 は cycle 24 step 1 の訂正後＝$+1$ 無し）",
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **系 G5.** *定理 J7 の結論 $b=\\sum_{P\\in S_\\infty}j^{*}(P)$ は",
+        to: "> **系 G5.** *定理 J7 の結論 $b=\\sum_{P\\in S_\\infty}j^{*}(P)$ は",
+        covers: "命題 M (M4) の「$b=\\sum j^*$ が最小点の一意性の仮定なしに従う」",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_general_closed_form.md",
+        from: "> **系 G6.** *$S_\\infty=\\emptyset$（定理 W3 で判定できる）なら",
+        to: "> $$e=v_\\ell(\\kappa(X))-\\mu+\\sum_{M=1}^{M^*-1}\\Theta_M-A_{\\mathrm{gen}}\\Bigl(\\mathcal{S}_0(M^*\\!-\\!1)+\\frac{\\ell}{\\ell-1}\\Bigr).$$",
+        covers: "命題 M (M6)（$S_\\infty=\\emptyset$ の場合の 5 係数）",
+        quotedOnly: true,
+      },
+    ],
+    acknowledged: [],
+  },
+  {
+    block: "paper_112_theorem_coefficient_layers",
+    passages: [
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D1.** *(H) を仮定する。cycle 21 定理 G4 の $(a,b,c,d,e)$ について*",
+        to: "> 4. *$S_\\infty=\\emptyset$ なら $d=-2$（cycle 21 系 G6 と整合）。*",
+        covers: "命題 U (U1)（$d$ と $c$ の式、付値側と位置側の分業、$d\\in\\mathbb{Z}$）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **命題 D1a.** *$K'\\ge K(P_0)$ を任意に取り",
+        to: "> $(2.2)$・$(2.3)$ の $K$ を $K'$ に置き換える。このとき $c,d$ の値は変わらない。*",
+        covers: "命題 U (U1a)（飽和深度を大きめに取ってもよい）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定義 D2a（過渡欠損）.** $\\Theta^\\mathrm{as}_M:=\\alpha M\\ell^{M}+\\beta\\ell^{M}+\\gamma$ と置き、",
+        to: "> 成り立つこと（＝過渡が一切無いこと）と同値であり、これは $T_\\mathrm{def}=0$ より**真に強い**。*",
+        covers: "命題 U (U2)（過渡欠損の定義と $e$ の分解。cycle 24 step 1 の訂正後＝3 分岐）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D3.** *$\\ell=2$、$p$ を奇数とし、$X_p$ を 1 頂点 bouquet でループ voltage が",
+        to: "> よって $c,d,e$ のいずれも $\\bar{\\tilde E}$ の関数ではない。*",
+        covers: "命題 U (U4)（剰余体だけでは第 2 層は決まらない。$\\min$ の規約は訂正後の形）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D4.** *$\\ell=2$、$t\\ge0$ に対し $X_t$ を 1 頂点 bouquet でループ voltage が",
+        to: "> *とくに、**$\\tilde E\\bmod\\ell^{N}$ から $c$ を読む式は、どんな固定した $N$ に対しても存在しない**。*",
+        covers: "命題 U (U5) の $c$ の側",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D5.** *$\\ell=2$、$p,q,t\\ge1$ に対し $Y_{p,q,t}$ を 1 頂点 bouquet でループ voltage が",
+        to: "> *すなわち、**位置側 $\\theta^\\sharp$（したがって $d$）についても、$\\tilde E\\bmod\\ell^{N}$ から読む式は",
+        covers: "命題 U (U5) の $d$ の側（$\\min$ の規約は訂正後の形）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
+        from: "> **定理 D6.** *$N\\in\\mathbb{Z}_{\\ge1}$ が*",
+        to: "> $(\\Lambda_k,\\theta^\\sharp_k)_{k\\le K}$ を、したがって $c$ と $d$ を決める。*",
+        covers: "命題 U (U6)（精度が足りる条件）",
+        quotedOnly: true,
+      },
+    ],
+    acknowledged: [],
+  },
 ];

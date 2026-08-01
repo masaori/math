@@ -30,6 +30,7 @@ import blocks_007_asymmetry_scope from './content/007_asymmetry_scope.ts'
 import blocks_008_theta_padic from './content/008_theta_padic.ts'
 import blocks_009_s_infinity_decision from './content/009_s_infinity_decision.ts'
 import blocks_009_theta_recursion from './content/009_theta_recursion.ts'
+import blocks_010_general_closed_form from './content/010_general_closed_form.ts'
 
 import blocks_en_001_intro from './locales/en/content/001_intro.ts'
 import blocks_en_001a_reader_guide from './locales/en/content/001a_reader_guide.ts'
@@ -44,6 +45,7 @@ import blocks_en_007_asymmetry_scope from './locales/en/content/007_asymmetry_sc
 import blocks_en_008_theta_padic from './locales/en/content/008_theta_padic.ts'
 import blocks_en_009_s_infinity_decision from './locales/en/content/009_s_infinity_decision.ts'
 import blocks_en_009_theta_recursion from './locales/en/content/009_theta_recursion.ts'
+import blocks_en_010_general_closed_form from './locales/en/content/010_general_closed_form.ts'
 import blocks_en_010_prior_art from './locales/en/content/010_prior_art.ts'
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -60,6 +62,7 @@ export type AllBlocks = [
   ...typeof blocks_008_theta_padic,
   ...typeof blocks_009_s_infinity_decision,
   ...typeof blocks_009_theta_recursion,
+  ...typeof blocks_010_general_closed_form,
 ]
 
 /** 全ノート。 */
@@ -113,6 +116,7 @@ export type AllBlocks_en = [
   ...typeof blocks_en_008_theta_padic,
   ...typeof blocks_en_009_s_infinity_decision,
   ...typeof blocks_en_009_theta_recursion,
+  ...typeof blocks_en_010_general_closed_form,
   ...typeof blocks_en_010_prior_art,
 ]
 
