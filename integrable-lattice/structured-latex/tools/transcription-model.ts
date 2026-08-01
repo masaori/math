@@ -15,8 +15,15 @@ import type { ConvertedBlock, Node } from "../schema.ts";
 import { atomsOf, proseTerms, tokenize, type Token } from "./tex-atoms.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
-/** integrable-lattice/ の絶対パス。report のパスはここからの相対で書く。 */
-export const projectRoot = join(here, "..", "..");
+/**
+ * integrable-lattice/ の絶対パス。report のパスはここからの相対で書く。
+ *
+ * `TRANSCRIPTION_PROJECT_ROOT` で差し替えられる。用途は 1 つだけ——
+ * **root を過去の版（`git archive` で取り出した snapshot）へ向けて、
+ * 「report が実際に改訂されたとき、この検査が何件を赤にするか」を測ること**である
+ * （cycle 24 step 3 の report §6 の実測）。本文（`content/`）はこの変数の影響を受けない。
+ */
+export const projectRoot = process.env["TRANSCRIPTION_PROJECT_ROOT"] ?? join(here, "..", "..");
 
 // --- 本文ブロックの見え方 -------------------------------------------------------
 
@@ -86,6 +93,84 @@ export type Passage = {
   quotedOnly?: boolean;
 };
 
+// --- 免除の根拠（cycle 24 step 3） -----------------------------------------------
+
+/**
+ * **免除の根拠。**
+ *
+ * cycle 23 で台帳の被覆は 97% になったが、**免除が 91 件**あり、検査の強さは免除の妥当性に
+ * 完全に依存していた。免除は自然文の `reason` しか持たず、**根拠 report が書き換わっても
+ * 本文が書き換わっても、免除は黙って生き残る**（cycle 23 総括の「正直な限界」）。
+ *
+ * そこで免除に**機械検証できる根拠**を持たせる。共通して次の 2 つを必ず検査する。
+ *
+ *   1. `reportQuote` が、その免除が属する passage の**条件文のちょうど 1 文**に現れること。
+ *      → 根拠 report が書き換わったら落ちる。
+ *   2. その文から**実際にその item が出る**こと（アトム／語の抽出をやり直して確かめる）。
+ *      → 引用と項目の対応が壊れたら落ちる（別の文を貼っていたら落ちる）。
+ *
+ * さらに**型ごとに、腐り方が違うので別の検査を足す**（下の各型の doc を見よ）。
+ * 型は cycle 23 report §4 が判定に使った 8 分類をそのまま持ち込んでいる。
+ *
+ * **機械検証できない型がある**ことを先に書く: `positioning`（report が自分の作業を
+ * 位置づける言葉であって主張ではない、という判定）は、**「主張ではない」ことを機械で
+ * 確かめる手段が無い**。この型は 1 と 2 しか検査しない。黙って緑にしないため、
+ * `verify-transcription.ts` が**毎回その件数を出す**。
+ */
+export type ExemptionGrounds =
+  /**
+   * **記法の選択**: report と本文が同じ量を別の書き方で書いている。
+   * 腐り方: 本文が採っている書き方（`bodyQuote`）が消えたら、免除の前提が崩れる。
+   */
+  | { type: "notation"; reportQuote: string; bodyQuote: string }
+  /**
+   * **本文のほうが弱い主張しかしていない**（強い方を主張していないので落としてよい）。
+   * 腐り方: 本文の弱い側の記述（`bodyQuote`）が消えたら、何を主張しているのか分からなくなる。
+   * **検証できないこと**: 「弱い」という含意関係そのものは機械で確かめられない（型の限界）。
+   */
+  | { type: "weaker"; reportQuote: string; bodyQuote: string }
+  /**
+   * **ブロック間の分担**: 同じ論文の別ブロックがその項目を持っている。
+   * 腐り方: **分担先のブロックが消える／その項目を失う**と、論文全体からその内容が落ちる。
+   * これは他の型と違い「別の場所にあること」を実際に確かめられる（`holder` / `holderItem`）。
+   */
+  | { type: "division"; reportQuote: string; holder: string; holderItem: string }
+  /**
+   * **report が自分の作業を位置づける言葉**（主張ではない）。
+   * 腐り方: report が書き換わればその言葉自体が消える（検査 1・2 で捕まる）。
+   * **検証できないこと**: 「これは主張ではない」という判定そのもの。**機械検証できない型**。
+   */
+  | { type: "positioning"; reportQuote: string }
+  /**
+   * **例示・具体化の省略**（主張は保たれている）。
+   * 腐り方: 主張を担っている本文の記述（`bodyQuote`）が消えたら、例だけでなく主張ごと落ちる。
+   */
+  | { type: "example"; reportQuote: string; bodyQuote: string }
+  /**
+   * **同じ主張の言い換え**。
+   * 腐り方: 言い換え先の本文の記述（`bodyQuote`）が消えたら、言い換えではなく脱落になる。
+   */
+  | { type: "paraphrase"; reportQuote: string; bodyQuote: string }
+  /**
+   * **report のほうが古い**（後のサイクルが解消済み）。
+   * 腐り方: 解消した側の記録（`supersededBy`）が消える／その report が書き換わると、
+   * 「古い」という判定の根拠が無くなる。**両方の report を pin する**。
+   */
+  | { type: "reportStale"; reportQuote: string; supersededBy: { report: string; marker: string } }
+  /**
+   * **本文の不備**（免除で黙らせているのではなく、直すべきものとして記録済み）。
+   * 腐り方: 記録（`recordedIn`）が消えたら、ただの黙殺になる。
+   * なお本文が直れば item が本文に現れ、既存の「免除が余っている」検査が赤にする。
+   */
+  | { type: "bodyDefect"; reportQuote: string; recordedIn: { report: string; marker: string } };
+
+export type Acknowledged = {
+  item: string;
+  reason: string;
+  /** **必須**。根拠を書かない免除は作れない（型で強制する）。 */
+  grounds: ExemptionGrounds;
+};
+
 export type SourceLink = {
   block: string;
   passages: readonly Passage[];
@@ -93,7 +178,7 @@ export type SourceLink = {
    * **その項目 1 つだけ**を免除する。ブロックを丸ごと免除する形にはしない
    * （ブロック単位の免除は cycle 21 で実際に検査の穴になった）。
    */
-  acknowledged: readonly { item: string; reason: string }[];
+  acknowledged: readonly Acknowledged[];
 };
 
 export type CoverageFinding = {
@@ -218,15 +303,12 @@ export function checkCoverage(
     const picked = conditionSentences(scoped);
     sentenceCount += picked.length;
     for (const line of picked) {
-      const { math, prose } = splitMath(line);
-      for (const tex of math) {
-        for (const atom of atomsOf(tex)) {
-          if (!isDistinctiveAtom(atom)) continue;
-          atoms.add(atom);
-          if (!atomWhere.has(atom)) atomWhere.set(atom, line.trim());
-        }
+      const found = itemsOfSentence(line);
+      for (const atom of found.atoms) {
+        atoms.add(atom);
+        if (!atomWhere.has(atom)) atomWhere.set(atom, line.trim());
       }
-      for (const term of proseTerms(prose)) {
+      for (const term of found.terms) {
         terms.add(term);
         if (!termWhere.has(term)) termWhere.set(term, line.trim());
       }
@@ -254,6 +336,20 @@ export function checkCoverage(
     acknowledgedUnused: [...acknowledged.keys()].filter((item) => !used.has(item)).sort(),
     findings,
   };
+}
+
+/**
+ * 1 つの文から、照合対象になる**飾りつきの数式アトム**と**専門語**を取り出す。
+ *
+ * `checkCoverage` と、免除の根拠検査（`checkExemptionGrounds`）が**同じ手続き**を使う。
+ * 別々に書くと、免除の根拠として指した文から実際にはその項目が出ない、という
+ * 食い違いが起きうる（＝根拠が根拠になっていない状態が緑で通る）。
+ */
+export function itemsOfSentence(sentence: string): { atoms: Set<string>; terms: Set<string> } {
+  const { math, prose } = splitMath(sentence);
+  const atoms = new Set<string>();
+  for (const tex of math) for (const atom of atomsOf(tex)) if (isDistinctiveAtom(atom)) atoms.add(atom);
+  return { atoms, terms: new Set(proseTerms(prose)) };
 }
 
 /**
@@ -287,6 +383,130 @@ const OPERATOR_MACROS = new Set([
   "\\Longrightarrow", "\\Longleftarrow", "\\longrightarrow", "\\boxed", "\\deg", "\\det",
   "\\dim", "\\gcd", "\\operatorname", "\\mathrm", "\\mathbb", "\\mathcal", "\\mathfrak",
 ]);
+
+// --- 検査 A′: 免除の根拠が生きているか（cycle 24 step 3） -------------------------
+
+export type GroundsFinding = {
+  block: string;
+  item: string;
+  /** 何が壊れているか（人が読む短い名前）。 */
+  kind:
+    | "根拠の引用が report に無い"
+    | "根拠の引用が report の複数の文に当たる"
+    | "根拠の文からその項目が出ない"
+    | "根拠として指した本文の記述が本文に無い"
+    | "分担先のブロックが本文に無い"
+    | "分担先のブロックがその項目を持っていない"
+    | "参照先の記録が見つからない"
+    | "根拠の指定が短すぎて何も pin していない";
+  detail: string;
+};
+
+/** 根拠の文字列がこれより短いと、何を pin しているのか特定できない。 */
+const MIN_REPORT_QUOTE = 12;
+const MIN_BODY_QUOTE = 4;
+const MIN_MARKER = 10;
+
+/**
+ * **免除の根拠が生きているかを検査する（検査 A′）。**
+ *
+ * cycle 23 の限界（「免除そのものを機械検証する手段は無い」）に対する答え。
+ * 免除は次のいずれかが起きたら**黙って生き残ってはならない**:
+ *   - 根拠 report が書き換わった／その文がその項目を生まなくなった（共通検査）
+ *   - 免除が「本文はこう書いている」と言っている記述が本文から消えた（`bodyQuote` 系）
+ *   - 「別のブロックが持っている」と言っている分担先が、それを失った（`division`）
+ *   - 「後のサイクルが解消済み」「本文の不備として記録済み」の参照先が消えた
+ *
+ * 挙がったものは**違反**（`verify-transcription.ts` が exit 1 にする）。
+ */
+export async function checkExemptionGrounds(
+  link: SourceLink,
+  view: BlockView,
+  passageLines: readonly { passage: Passage; lines: string[] }[],
+  blocks: ReadonlyMap<string, BlockView>,
+): Promise<GroundsFinding[]> {
+  const sentences: string[] = [];
+  for (const { passage, lines } of passageLines) {
+    const scoped = passage.quotedOnly === true
+      ? lines.filter((line) => line.trimStart().startsWith(">"))
+      : lines;
+    sentences.push(...conditionSentences(scoped));
+  }
+  const blockText = view.prose + " " + view.formulas.join(" ");
+  const out: GroundsFinding[] = [];
+  const add = (item: string, kind: GroundsFinding["kind"], detail: string): void => {
+    out.push({ block: link.block, item, kind, detail });
+  };
+
+  for (const { item, grounds } of link.acknowledged) {
+    // --- 共通 1: 引用が条件文のちょうど 1 文に当たること ---
+    // 短い引用は原則として禁じる（何を pin しているのか特定できないため）。
+    // ただし**文そのものが短い**ことはある（report の「無条件決定可能。」等）。
+    // その場合は**文全体と一致する引用**だけを許す。これは pin として完全である。
+    const exact = sentences.filter((s) => s === grounds.reportQuote);
+    if (grounds.reportQuote.length < MIN_REPORT_QUOTE && exact.length === 0) {
+      add(item, "根拠の指定が短すぎて何も pin していない", `reportQuote が ${grounds.reportQuote.length} 文字（${MIN_REPORT_QUOTE} 文字以上にするか、条件文 1 文と完全一致させること）: "${grounds.reportQuote}"`);
+      continue;
+    }
+    const hits = exact.length > 0 ? exact : sentences.filter((s) => s.includes(grounds.reportQuote));
+    if (hits.length === 0) {
+      add(item, "根拠の引用が report に無い", `report が書き換わった可能性がある。免除を判定し直すこと: "${grounds.reportQuote}"`);
+      continue;
+    }
+    if (hits.length > 1) {
+      add(item, "根拠の引用が report の複数の文に当たる", `${hits.length} 文に当たる。どの文が根拠かを一意に特定できる引用にすること: "${grounds.reportQuote}"`);
+      continue;
+    }
+    // --- 共通 2: その文から実際にその項目が出ること ---
+    const produced = itemsOfSentence(hits[0]!);
+    if (!produced.atoms.has(item) && !produced.terms.has(item)) {
+      add(item, "根拠の文からその項目が出ない", `指した文はこの項目を生まない（別の文を指しているか、report がその語を落とした）: "${truncateForMessage(hits[0]!)}"`);
+      continue;
+    }
+    // --- 型ごとの検査 ---
+    if (grounds.type === "positioning") continue; // 検証できるのはここまで（型の限界。件数を毎回出す）
+    if (grounds.type === "notation" || grounds.type === "weaker" || grounds.type === "example" || grounds.type === "paraphrase") {
+      if (grounds.bodyQuote.length < MIN_BODY_QUOTE) {
+        add(item, "根拠の指定が短すぎて何も pin していない", `bodyQuote が ${grounds.bodyQuote.length} 文字: "${grounds.bodyQuote}"`);
+      } else if (!blockText.includes(grounds.bodyQuote)) {
+        add(item, "根拠として指した本文の記述が本文に無い", `本文が書き換わった可能性がある。免除を判定し直すこと: "${grounds.bodyQuote}"`);
+      }
+      continue;
+    }
+    if (grounds.type === "division") {
+      const holder = blocks.get(grounds.holder);
+      if (holder === undefined) {
+        add(item, "分担先のブロックが本文に無い", `${grounds.holder} が存在しない`);
+        continue;
+      }
+      const holderText = holder.prose + " " + holder.formulas.join(" ");
+      if (!holderText.includes(grounds.holderItem)) {
+        add(item, "分担先のブロックがその項目を持っていない", `${grounds.holder} に "${grounds.holderItem}" が無い。分担先が落としたなら、論文全体からその内容が落ちている`);
+      }
+      continue;
+    }
+    const ref = grounds.type === "reportStale" ? grounds.supersededBy : grounds.recordedIn;
+    if (ref.marker.length < MIN_MARKER) {
+      add(item, "根拠の指定が短すぎて何も pin していない", `marker が ${ref.marker.length} 文字: "${ref.marker}"`);
+      continue;
+    }
+    let text: string;
+    try {
+      text = await readFile(join(projectRoot, ref.report), "utf8");
+    } catch {
+      add(item, "参照先の記録が見つからない", `${ref.report} が読めない`);
+      continue;
+    }
+    if (!text.includes(ref.marker)) {
+      add(item, "参照先の記録が見つからない", `${ref.report} に "${ref.marker}" が無い`);
+    }
+  }
+  return out;
+}
+
+function truncateForMessage(s: string): string {
+  return s.length <= 100 ? s : s.slice(0, 100) + " …";
+}
 
 // --- 検査 B: 添字族の裸使用 -----------------------------------------------------
 
