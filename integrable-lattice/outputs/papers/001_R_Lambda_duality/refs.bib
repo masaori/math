@@ -15,15 +15,16 @@
 % この .bib を読むのは**英語版の生成器だけ**である（日本語版は書誌を地の文で持ち、refs.bib を読まない）。
 % したがって「本文」とは英語版 structured-latex-en/content/*.ts を指す。
 %
-% 英語版本文が cite しているもの（＝ PDF の参考文献に出る 18 件）:
-%   AlonsoLombardiPerdry2008, AxKochen1966, ByszewskiGraffWard2021, CuocoMonsky1981,
+% 英語版本文が cite しているもの（＝ PDF の参考文献に出る 20 件。2026-08-01 cycle 22 step 1 で
+% Cuoco1980 と MonskySomeInvariants1981 の 2 件が「控え」から「本文が cite するもの」へ移った）:
+%   AlonsoLombardiPerdry2008, AxKochen1966, ByszewskiGraffWard2021, Cuoco1980, CuocoMonsky1981,
 %   DuBoseVallieres2023, Ershov1965, FerreroWashington1979, Haskell1992, Kataoka2026,
 %   Lehmer1933, LindSchmidtVerbitskiy2013, LindSchmidtWard1990, MednykhMednykh2019,
-%   Monsky1981, Monsky1989, TatenoUeki2025, Vallieres2021, Viswanathan2024
-% 本文が cite していないが背景として控えてあるもの（bibtex は \cite されない限り出力しない）5 件:
-%   Deninger2009, McGownVallieres2024, MonskySomeInvariants1981, Ueki2020, Wan2017
+%   Monsky1981, Monsky1989, MonskySomeInvariants1981, TatenoUeki2025, Vallieres2021, Viswanathan2024
+% 本文が cite していないが背景として控えてあるもの（bibtex は \cite されない限り出力しない）4 件:
+%   Deninger2009, McGownVallieres2024, Ueki2020, Wan2017
 %   → いずれも引用漏れではない。Deninger2009 / Ueki2020 は本文が扱っていない主題（$p$ 進 Mahler 測度）、
-%      McGownVallieres2024 は本文が内容に依存していない、MonskySomeInvariants1981 は誤同定を防ぐ控え、
+%      McGownVallieres2024 は本文が内容に依存していない、
 %      Wan2017 は Monsky 1989 の二次引用源で同じ役割を TatenoUeki2025 が果たしている。
 % ※ この対応表は本文側の記述を変えれば古くなる。本文を触ったら引き直すこと。
 
@@ -136,9 +137,12 @@
   note    = {本論文が「Cuoco--Monsky の定理（Theorem 1.7）」として引用するもの。
              **原論文本文を取得して確認済み**（2026-07-31, cycle 16 step 1。GDZ の IIIF。
              根拠 report: outputs/reports/cycle16\_T1\_monsky\_primary\_sources.md）。
-             読んだのは Introduction（pp.235--236）と \S1 The Fundamental Estimate 全体
-             （pp.237--238 ＝ Def 1.1--1.3, Lemma 1.4--1.6, **Thm 1.7**, Remark）と \S2 冒頭で、
-             **\S3--\S7 は未読**（Thm 1.7 の証明で使う Lemma 1.4--1.6 の証明は読んでいない）。
+             cycle 16 step 1 で読んだのは Introduction（pp.235--236）と \S1 The Fundamental Estimate
+             全体（pp.237--238 ＝ Def 1.1--1.3, Lemma 1.4--1.6, **Thm 1.7**, Remark）と \S2 冒頭。
+             **2026-08-01（cycle 22 step 1）に pp.235--258 の全ページを取得して通読した**
+             （\S2--\S7 と References を含む。根拠 report:
+             outputs/reports/cycle22\_T3\_cuoco\_monsky\_attribution.md）。
+             $l_0$ を係数から決める手続きも $j^*$ の点ごとの同定も、全 7 節のどこにも無い。
              Thm 1.7 は Kataoka Thm 2.3 の引用形と一致することを確認した。
              また Thm 1.7 が**グラフに限定されない一般の $\mathbb{Z}_p^d$-拡大の主張**である
              ことも原文で確認した。
@@ -148,6 +152,28 @@
              （ページ本体はアクセス制限のため未取得）}
 }
 
+@article{Cuoco1980,
+  author  = {Cuoco, Albert A.},
+  title   = {The growth of {I}wasawa invariants in a family},
+  journal = {Compositio Mathematica},
+  volume  = {41},
+  number  = {3},
+  pages   = {415--437},
+  year    = {1980},
+  url     = {http://www.numdam.org/item?id=CM_1980__41_3_415_0},
+  note    = {Cuoco--Monsky が p.248 で $m_0$・$l_0$ の詳細について指す先の 1 つ。
+             **本文（PDF）を NUMDAM から取得済み**（2026-08-01, cycle 22 step 1）。
+             読んだのは Introduction と Theorem 1.1 の周辺で、\S2 以降は未読。
+             同論文が「精密な記述を与える」と述べているのは $m_0$ であって $l_0$ ではない
+             （$l_0$ の記法は Cuoco の学位論文と Monsky *Some invariants* で導入されたと
+             Cuoco--Monsky p.248 が書いている）。
+             表題は論文自身の扉が ``The growth of Iwasawa invariants in a family'' で、
+             Cuoco--Monsky と Monsky の References が書く ``Iwasawa's invariants'' とは
+             綴りが異なる。**論文自身の綴りを採った。**
+             DOI は付与されていない（NUMDAM は URL のみ）。巻・号・頁・年は取得した PDF の
+             扉ページで直接確認した}
+}
+
 @article{MonskySomeInvariants1981,
   author  = {Monsky, Paul},
   title   = {Some Invariants of $\mathbb{Z}_p^d$-{E}xtensions},
@@ -155,7 +181,10 @@
   volume  = {255},
   pages   = {229--233},
   year    = {1981},
-  note    = {**本文で引用していない。誤同定を防ぐためだけに置いてある控えである。**
+  note    = {**2026-08-01（cycle 22 step 1）から本文が引用している**（命題 K の帰属。
+             同論文 Lemma 2.3 が (K2) の同値と同じ内容であることを原文で確認した。
+             $\lambda(G_a)$ が $(0,1)$ の近傍で非有界 $\iff X_1 \mid \bar G$、$d=2$、p.231）。
+             それ以前は誤同定を防ぐためだけに置いてある控えだった。
              本プロジェクトは cycle 15 まで、Monsky の Theorem 5.6 の出典をこの論文だと
              誤って同定していた。2026-07-31（cycle 16 step 1）に GDZ の IIIF で
              **全 5 ページを通読**し、この論文には \S1--\S4 と Theorem I--IV しか無く
