@@ -15,7 +15,7 @@
  *   中身だけを英訳した。英語版は和文フォントを読み込まず、日本語のままでは PDF に組めない。
  * - 末尾の `\texttt{outputs/reports/...}`（リポジトリ内部パス）は投稿稿にふさわしくないので落とした。
  * - 上の 2 点で数式の多重集合が日本語版とずれるため、このブロックは
- *   `tools/ja-en-exceptions.ts` へ理由つきで登録してある。
+ *   `locales/en/structure-exceptions.ts` へ理由つきで登録してある。
  */
 
 import { defineTranslatedBlocks as defineBlocks, displayMath, math, paragraph, refInTranslation as ref } from "../../../schema.ts";

@@ -15,7 +15,7 @@
  * （`\texttt{integrable-lattice/lean/README.md}`・`\texttt{verification}`・`\texttt{lean}`・
  * `\texttt{sagemath/tools/verify-check-linkage.ts}`）は、投稿稿にふさわしくないので落とし、
  * 同じ内容を投稿稿の言い方へ置き換えた。数式の多重集合が日本語版とずれるため、
- * このブロックは `tools/ja-en-exceptions.ts` へ理由つきで登録してある。
+ * このブロックは `locales/en/structure-exceptions.ts` へ理由つきで登録してある。
  */
 
 import { cite, defineTranslatedBlocks as defineBlocks, list, math, paragraph, refInTranslation as ref } from "../../../schema.ts";

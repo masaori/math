@@ -3,7 +3,7 @@
  *
  * ## なぜこのブロック群が要るのか
  *
- * 投稿先調査 `../../outputs/reports/paper001_submission_venue_survey.md` §3.1 が、
+ * 投稿先調査 `../../../../outputs/reports/paper001_submission_venue_survey.md` §3.1 が、
  * Expositiones Mathematicae の Survey Article へ出すうえでの**唯一の構造的な弱点**として
  * 次を挙げている（同誌公式サイトの記事種別定義を一次情報として）:
  *
@@ -32,7 +32,7 @@
  * （`'_'` = 0x5F < `'a'` = 0x61 なので、`001_intro.ts` < `001a_reader_guide.ts` < `002_setup.ts`。）
  *
  * 章番号を動かさずに済むので、後ろに足す章（`008_theta_padic.ts` = 第 9 章、
- * `009_prior_art.ts` = 第 10 章）だけが新しい章になる。
+ * `010_prior_art.ts` = 第 10 章）だけが新しい章になる。
  *
  * ## 2026-08-01 の校閲で直したこと（数学レビューの指摘。いずれも正しさの問題である）
  *

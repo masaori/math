@@ -19,13 +19,13 @@
  *   本文検索ではない）を最後の節で明示する。**0 件を新規性の根拠にしない**という本論文自身の
  *   方針（命題 C の注記）と整合させる。
  * - **cycle 18 の判定が最新である。** cycle 17 の「Monsky 1989 は未取得」は
- *   `../../outputs/reports/cycle18_T1_monsky1989_acquisition.md` で解消済みであり、
+ *   `../../../../outputs/reports/cycle18_T1_monsky1989_acquisition.md` で解消済みであり、
  *   ここには**入手して読んだ結果**を書く。
  *
  * 一次情報:
- *   `../../outputs/reports/cycle17_T1_prior_art_check.md` §0 の結論サマリと §7 の敵対的レビュー
- *   `../../outputs/reports/cycle18_T1_monsky1989_acquisition.md` §0・§2・§3
- *   `../../docs/tasks/auto-loop-state.md` の「cycle 18 総括」
+ *   `../../../../outputs/reports/cycle17_T1_prior_art_check.md` §0 の結論サマリと §7 の敵対的レビュー
+ *   `../../../../outputs/reports/cycle18_T1_monsky1989_acquisition.md` §0・§2・§3
+ *   `../../../../docs/tasks/auto-loop-state.md` の「cycle 18 総括」
  *   日本語版本文の既出性の記述（上記）
  *
  * ## `ref()` を使っていない理由

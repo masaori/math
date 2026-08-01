@@ -4,7 +4,7 @@
  * **正本は日本語版 `../../../content/005_duality.ts` である。**
  * ブロック id・ラベル・`habitat`・`verification` / `lean`・`kind`・`proof` の有無・**数式**は
  * 日本語版と完全に同じ文字列を使う（`tools/verify-localization.ts` の構造照合が検査する）。
- * 訳語は `../../docs/paper001-en-glossary.md` を正本とする。
+ * 訳語は `../../../../docs/paper001-en-glossary.md` を正本とする。
  *
  * ### この英訳で日本語版と形が変わっている点（内容は変えていない）
  *
@@ -18,7 +18,7 @@
  * 4. **リポジトリ内部のレポートのパス（`\texttt{outputs/reports/...}` の math ノード）は落とした。**
  *    投稿稿に内部パスを出すのは不適切なので、"the supporting report for this proposition" のような
  *    言い方へ置き換えてある。数式の多重集合が日本語版とずれるので、対象ブロックは
- *    `tools/ja-en-exceptions.ts` へ理由つきで登録した。
+ *    `locales/en/structure-exceptions.ts` へ理由つきで登録した。
  */
 
 import { cite, defineTranslatedBlocks as defineBlocks, displayMath, list, math, paragraph, refInTranslation as ref } from "../../../schema.ts";

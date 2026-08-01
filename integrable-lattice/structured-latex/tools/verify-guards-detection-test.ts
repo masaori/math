@@ -111,8 +111,33 @@ const withProof = views.filter((view) => view.hasProof);
 }
 
 // --- C-3: 宣言（既知の未了）を腐らせると赤くなる -------------------------------------
-const baseDebt = PROOF_DEBTS.find((d) => d.block === "paper_111_theorem_general_closed_form");
-if (baseDebt === undefined) throw new Error("基準にする宣言が見つからない");
+//
+// **基準の宣言は本番の表（PROOF_DEBTS）から取らない。** cycle 25 step 4b で本文の未了が
+// 0 件になり、表が空になったためである（表から取っていたときは、表が空になった瞬間に
+// この検出テストが「基準にする宣言が見つからない」で落ちた）。
+// 代わりに、cycle 25 step 4b の直前まで実際に登録されていた宣言をそのまま固定値で持つ。
+// 引用も原本の目印も当時のままの実在する文字列なので、**検査の強さは変わらない**
+// （腐らせ方 9 通りと、それぞれが出すべき違反の種類は 1 つも減らしていない）。
+// 「そのブロックがいまも証明を持っていないこと」という条件だけは本番の本文と食い違うので、
+// この節に限り `debtViews`（当該ブロックを証明なしに差し替えた写し）を基準の写像として使う。
+const baseDebt: ProofDebt = {
+  block: "paper_111_theorem_general_closed_form",
+  reason: "検出テストの基準（cycle 25 step 4b の直前まで実在した宣言をそのまま使う）。",
+  grounds: {
+    recordedIn: {
+      report: "outputs/reports/cycle24_ops_reflect_g4_and_d_series.md",
+      quote: "**本章は証明を持たない**（`proof` フィールドが空で、主張と限界だけを述べている）",
+    },
+    origin: {
+      report: "outputs/reports/cycle21_T3_general_closed_form.md",
+      proofMarker: "### 5.2 定理 G4",
+    },
+  },
+};
+const baseView = byId.get(baseDebt.block);
+if (baseView === undefined) throw new Error("基準にするブロックが本文に無い");
+const debtViews = new Map(byId);
+debtViews.set(baseDebt.block, { ...baseView, hasProof: false, emptyReason: "proof が空配列" });
 
 type DebtRot = { name: string; debt: ProofDebt; views?: Map<string, ProofView>; expect: string };
 const debtRots: DebtRot[] = [
@@ -188,7 +213,7 @@ const debtRots: DebtRot[] = [
     name: "証明が本文へ入ったのに宣言が残る",
     debt: baseDebt,
     views: new Map(
-      [...byId].map(([id, view]) =>
+      [...debtViews].map(([id, view]) =>
         id === baseDebt.block ? [id, { ...view, hasProof: true, emptyReason: undefined }] : [id, view],
       ),
     ),
@@ -201,9 +226,9 @@ const debtRots: DebtRot[] = [
   },
 ];
 
-const debtBaseline = await checkProofDebts(PROOF_DEBTS, byId);
+const debtBaseline = await checkProofDebts([baseDebt], debtViews);
 for (const rot of debtRots) {
-  const found = await checkProofDebts([rot.debt], rot.views ?? byId);
+  const found = await checkProofDebts([rot.debt], rot.views ?? debtViews);
   const hit = found.find((f) => f.kind === rot.expect);
   const quietBefore = !debtBaseline.some((f) => f.block === rot.debt.block);
   report(

@@ -25,83 +25,10 @@ const outOfScope = (ownedBy: string): ReferenceAllowance["grounds"] => ({
 export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   // --- 本文（ロケール）: cycle 24 step 2 の腐りのうち、手作業の訂正が届かなかった残り ---
   {
-    file: "structured-latex/locales/en/content/005_duality.ts",
-    reference: "../../docs/paper001-en-glossary.md",
-    reason:
-      "相対パスの深さが誤り（正しくは ../../../../docs/…）。cycle 24 step 2 の訂正が 12 ファイル中この 1 行だけ取り残した。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/005_duality.ts",
-    reference: "tools/ja-en-exceptions.ts",
-    reason: "撤去済みのツールを現在形で指している（現在は locales/en/structure-exceptions.ts）。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/005b_theta_infinity.ts",
-    reference: "tools/ja-en-exceptions.ts",
-    reason: "同上。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/007_asymmetry_scope.ts",
-    reference: "tools/ja-en-exceptions.ts",
-    reason: "同上。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/005c_ell2_family.ts",
-    reference: "ja-en-exceptions.ts",
-    reason: "同上（裸のファイル名）。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/009_s_infinity_decision.ts",
-    reference: "ja-en-exceptions.ts",
-    reason: "同上。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/009_theta_recursion.ts",
-    reference: "ja-en-exceptions.ts",
-    reason: "同上。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/001a_reader_guide.ts",
-    reference: "../../outputs/reports/paper001_submission_venue_survey.md",
-    reason: "相対パスの深さが誤り（正しくは ../../../../outputs/…）。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
     file: "structured-latex/locales/en/content/001a_reader_guide.ts",
     reference: "content/000_reader_guide.ts",
     reason: "「当初の指示はここへ置くことだった。そうしていない」という否定の文脈で名を挙げている。",
     grounds: { type: "illustration", marker: "当初の指示はこの内容を" },
-  },
-  {
-    file: "structured-latex/locales/en/content/001a_reader_guide.ts",
-    reference: "009_prior_art.ts",
-    reason: "実ファイルは 010_prior_art.ts（章番号の付け替えで書き換え漏れ）。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/010_prior_art.ts",
-    reference: "../../outputs/reports/cycle18_T1_monsky1989_acquisition.md",
-    reason: "相対パスの深さが誤り。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/010_prior_art.ts",
-    reference: "../../outputs/reports/cycle17_T1_prior_art_check.md",
-    reason: "相対パスの深さが誤り。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
-  },
-  {
-    file: "structured-latex/locales/en/content/010_prior_art.ts",
-    reference: "../../docs/tasks/auto-loop-state.md",
-    reason: "相対パスの深さが誤り。",
-    grounds: outOfScope("本文は cycle 25 step 4 の担当"),
   },
 
   // --- ロケールの設定・宣言ファイル（本 step の担当範囲外）---------------------------

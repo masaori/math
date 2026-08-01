@@ -29,6 +29,7 @@ export const ALL_LABELS = [
   "paper_prop_L",
   "paper_prop_M",
   "paper_prop_N",
+  "paper_prop_Q",
   "paper_prop_R",
   "paper_prop_T",
   "paper_prop_U",

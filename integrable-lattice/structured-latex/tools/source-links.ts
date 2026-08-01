@@ -1509,6 +1509,65 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
     acknowledged: [],
   },
   {
+    // cycle 25 step 4b で本文へ入れた Q 系のブロック。
+    // range は定理・補題の**主張だけ**に絞る（他の登録と同じ方針）。
+    // **補題 Q5 の $c_1$ は cycle 25 step 1 の訂正後の定義**（「$2b<(\ell-1)\ell^c$ を満たす最小の自然数」）
+    // であり、初稿の実対数による定義は本文に一切現れない。
+    block: "paper_106_theorem_drop_assumption",
+    passages: [
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **補題 Q1′.** *$(1.2)$ の記号で $B:=\\prod_{i=1}^r\\bigl(\\chi^{v_i}-1\\bigr)^{m_i}\\in\\mathbb{Z}[z^{\\pm1},w^{\\pm1}]$",
+        to: "> *であり、$\\bar G$ は原始二項式因子 $\\chi^v-1$ をひとつも持たない。*",
+        covers: "命題 Q (Q1)（整数のままの分解 $\\tilde E=BG+\\ell H$）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **補題 Q2.** *(1) $\\theta_G(P)<\\infty$ が全ての $P\\in\\mathbb{P}^1(\\mathbb{Z}_\\ell)$ で成り立つ。",
+        to: "> $$v_{\\mathfrak{l}}\\bigl(G(\\omega_P)\\bigr)=\\theta_G(P)\\ \\ (<\\infty). \\tag{3.2}$$",
+        covers: "命題 Q (Q2)（$G$ 側が至る所有限・有界で、深いレベルでは全点で等号）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **定理 Q4.** *$\\varphi(\\ell^M)>\\theta_G^{\\max}$ とする。点 $P$ が*",
+        to: "> *が**等号で**成り立つ。*",
+        covers: "命題 Q (Q3)（良い点での点ごとの等号 $\\hat\\theta_M(P)=\\beta_P+\\theta_G(P)$）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **補題 Q0.** *$\\tilde E(\\omega_P)\\neq0$ ならば*",
+        to: "> $$\\hat\\theta_M(P)\\ \\le\\ \\varphi(\\ell^M)\\,\\log_\\ell C_0,\\qquad C_0:=\\sum_{(p,q)}|c_{pq}|. \\tag{5.1}$$",
+        covers: "命題 Q (Q4)（粗上界。**本文でも report でもここが唯一の ℝ 脱出**）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **補題 Q5.** *$\\varphi(\\ell^M)\\ge2\\theta_G^{\\max}$ かつ $M>c_1$ とすると*",
+        to: "> *とくに $|\\mathcal{B}_M|$ は $M$ に依らない。*",
+        covers: "命題 Q (Q5)（悪い点の個数。$c_1$ は cycle 25 step 1 の訂正後の定義）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **補題 Q3.** *原始整数ベクトル $v$ と $M\\ge1$ について*",
+        to: "> $$\\sum_{P\\in\\mathbb{P}^1(\\mathbb{Z}/\\ell^M)}\\ell^{\\rho_v(P)}=(M-1)\\,\\varphi(\\ell^M)+2\\,\\ell^M. \\tag{5.3}$$",
+        covers: "命題 Q (Q6)（数え上げ恒等式）",
+        quotedOnly: true,
+      },
+      {
+        report: "outputs/reports/cycle21_T3_drop_assumption_B_star.md",
+        from: "> **定理 Q1.** *仮定 (H) の下、$\\varphi(\\ell^M)\\ge2\\theta_G^{\\max}$ かつ $M>c_1$ なる全ての $M$ で*",
+        to: "> ***仮定 (F)・(N)・(B\\*) はいずれも使っていない。***",
+        covers: "命題 Q (Q7)（無条件の $n\\ell^n$ 係数と明示定数 $C$）",
+        quotedOnly: true,
+      },
+    ],
+    acknowledged: [],
+  },
+  {
     // cycle 24 step 4 で本文へ入れた第 11 章の 2 ブロック。
     // range は「定理の主張だけ」に絞る（cycle 22・23 が繰り返し記録したとおり、
     // 証明や report 内部の履歴まで入れると免除ばかりが増えて照合力が落ちる）。

@@ -295,34 +295,7 @@ export async function checkProofDebts(
 // **黙って緑にしない。** 件数は毎回出力する（cycle 23 の「照合力 0 のブロック 5 件」、
 // cycle 24 の「機械検証できない免除 14 件」と同じ思想）。
 
-export const PROOF_DEBTS: readonly ProofDebt[] = [
-  {
-    block: "paper_111_theorem_general_closed_form",
-    reason:
-      "命題 M。cycle 24 step 4 が主張と限界だけを入れ、同 report §9 が「証明を運ぶ step を立てること」と申し送っている。cycle 25 step 4 の担当。",
-    grounds: {
-      recordedIn: {
-        report: "outputs/reports/cycle24_ops_reflect_g4_and_d_series.md",
-        quote: "**本章は証明を持たない**（`proof` フィールドが空で、主張と限界だけを述べている）",
-      },
-      origin: {
-        report: "outputs/reports/cycle21_T3_general_closed_form.md",
-        proofMarker: "### 5.2 定理 G4",
-      },
-    },
-  },
-  {
-    block: "paper_112_theorem_coefficient_layers",
-    reason: "命題 U。命題 M と同じ章で、同じ申し送りの対象である。cycle 25 step 4 の担当。",
-    grounds: {
-      recordedIn: {
-        report: "outputs/reports/cycle25_ops_guard_missing_proof_and_rotten_refs.md",
-        quote: "`paper_112_theorem_coefficient_layers`（命題 U）は証明を持たない",
-      },
-      origin: {
-        report: "outputs/reports/cycle22_T3_coefficients_d_e.md",
-        proofMarker: "### 2.2 定理 D1",
-      },
-    },
-  },
-];
+// cycle 25 step 4a が命題 G′・G″・J・K・R の 5 件、step 4b が命題 M・U の 2 件へ
+// それぞれ原本の証明を運んだので、**宣言は 0 件になった**。
+// 以後、証明を持たない `theorem` / `claim` が現れたら、宣言を足さない限り検査 C が赤になる。
+export const PROOF_DEBTS: readonly ProofDebt[] = [];
