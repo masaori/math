@@ -130,8 +130,19 @@ W4 は「$j^*(P)=m_u$（$\chi^{u^\perp}-1$ の重複度）」という**点ご�
   「$\ge p^j$ で非有界」としか言われていない。
 - CM §2–§7 は加群論（円分埋め込み・$\Lambda_d$ 加群・structures・Theorem I の証明・Theorem II・
   Greenberg 予想）であり、$l_0$ の**計算**には戻ってこない。$l_0$ が本文に現れるのは §1 と、
-  §5 末尾（p.248）の「The invariants $m_0(L/k)$ and $l_0(L/k)$ were originally introduced in [1, 5].
+  §5 末尾（**p.252**）の「The invariants $m_0(L/k)$ and $l_0(L/k)$ were originally introduced in [1, 5].
   For further information about them … see [2,5].」という**参照指示だけ**である。
+  **「詳細（further information）」の参照先は [2]（Cuoco 1980）と [5]（Monsky 1981）であって、
+  学位論文 [1] ではない。** [1] が挙がるのは「originally introduced」の側だけである。
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 初稿はこの文の位置を「§5 末尾（**p.248**）」としていたが、
+> **p.248 は第 5 章の冒頭であり、当該文は p.252（Theorem I の証明の直後）にある。ページ番号の誤記である**
+> （引用内容そのものは正しい）。検出は cycle 23 step 3 `cycle23_T3_cuoco_thesis_acquisition.md` §3.4・§0
+> （p.248 と p.252 の原画像を直読して確認している）。
+> 同 report は併せて、この一文の読み方を **「$m_0$ は [1]（学位論文）、$l_0$ は [5]（Monsky 1981）が
+> 最初に導入した」**（2 つの不変量と 2 つの文献がこの順で対応する）と確定した。根拠は Monsky 1981 p.229 の
+> 「Cuoco, [2], introduced an invariant $m_0$」「To tackle this we introduce an invariant $l_0(L/k)$」と、
+> 同 p.233 の References が全 5 件で学位論文を含まないことである。
 
 その参照先も辿った:
 
@@ -299,10 +310,22 @@ cycle 21 step 4 で英語版のインライン数式 11 個が落ちたのはま
 
 ## 10. 残ったこと（次に何が妨げているか）
 
-1. **Cuoco の学位論文（Brandeis, 1979）が未取得。** CM p.248 が $l_0$ の出所として挙げる 2 件のうち
-   1 件である。ProQuest 等の学位論文データベースが要り、無料公開されているかは未確認。
+1. **Cuoco の学位論文（Brandeis, 1979）が未取得。** CM **p.252**（初稿は p.248 と誤記していた）が
+   $m_0$・$l_0$ の "originally introduced" 先として挙げる 2 件のうち 1 件である。
+   ProQuest 等の学位論文データベースが要り、無料公開されているかは未確認。
    **これを読まない限り、(K3)・(K4) について「文献に無い」と言い切ることはできない。**
    本文にもその旨を書いた。
+
+   > **【訂正 2026-08-01（cycle 24 step 1）】** この残件は **cycle 23 step 3 で決着した**
+   > （`cycle23_T3_cuoco_thesis_acquisition.md`）。**学位論文は依然として未取得だが、読む必要が無くなった。**
+   > Monsky 1981 p.229 が「Cuoco, **[2]**（＝Cuoco 1980, Compositio Math.）, introduced an invariant $m_0$」
+   > 「**To tackle this we introduce an invariant $l_0(L/k)$**」と書き、同 p.233 の References が
+   > **全 5 件で学位論文を含まない**。すなわち **$l_0$ は Monsky が 1981 年に導入した不変量**であり、
+   > **(K3) も定理 W4 も $l_0$ の局所構造の主張だから 1979 年の学位論文にはありえない。**
+   > したがって本項の「CM p.252 が $l_0$ の出所として挙げる 2 件」という読みも正確ではない——
+   > 2 つの不変量と 2 つの文献は **$m_0\leftrightarrow[1]$、$l_0\leftrightarrow[5]$** の順で対応する。
+   > 残る論理的な穴（学位論文が $l_0$ 相当の量を別名で・定理として述べずに含んでいた可能性）は
+   > 同 report §3.3 に明示されている。
 2. **CM Theorem 1.7 の証明（Lemma 1.4/1.5/1.6 と、それが依拠する Monsky *On p-adic power series*
    の Theorem 2.1–2.9）は読んでいない。** したがって cycle 21 step 1 の §3–§6 の初等証明が
    CM の証明と同じものかは**依然として判定していない**（cycle 21 §11 の未確認事項がそのまま残る）。

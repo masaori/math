@@ -251,6 +251,24 @@ $(\Lambda_k,\theta^\sharp_k)$ が偶然 $(4.2)$ の値になっても、§5 の�
 （その層の寄与が非飽和層の寄与と一致するから）。**$K$ は「捻り段データを実際に計算すべき $k$ の有限範囲」を
 与えるためのものであり、それだけで十分である。**
 
+**理由（$K\to K+1$ の増分が打ち消し合うこと）.** $(5.3)$$(5.4)$ は $K$ に直接依存する項を含むので、
+$K$ を取り替えても値が変わらないことは確認を要する。$K'=K+1$ の場合を見れば十分である（あとは帰納法）。
+深さ $K+1$ の層は定理 G3 より非飽和なので $(4.2)$ より $\Lambda_{K+1}=j^{*}/\varphi(\ell^{K+1})$、
+$\theta^\sharp_{K+1}=e_{j^*}$。したがって
+
+- $(5.4)$: $\sum_k\varphi(\ell^k)\theta^\sharp_k$ が $\varphi(\ell^{K+1})e_{j^*}$ 増え、$-e_{j^*}\ell^{K}$ が
+  $-e_{j^*}\ell^{K+1}$ になる。差は
+  $e_{j^*}\bigl(\varphi(\ell^{K+1})-\ell^{K+1}+\ell^{K}\bigr)=e_{j^*}\bigl((\ell^{K+1}-\ell^{K})-\ell^{K+1}+\ell^{K}\bigr)=0$。
+- $(5.3)$: $\frac{\ell-1}{\ell}\sum_k\varphi(\ell^k)\Lambda_k$ が
+  $\frac{\ell-1}{\ell}\varphi(\ell^{K+1})\cdot\frac{j^{*}}{\varphi(\ell^{K+1})}=\frac{(\ell-1)j^{*}}{\ell}$ 増え、
+  $-\frac{(\ell-1)j^{*}(K+r^\sharp)}{\ell}$ が $-\frac{(\ell-1)j^{*}(K+1+r^\sharp)}{\ell}$ になる。差は $0$。
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 注 4.2 の**主張は正しい**が、初稿はこの打ち消しの計算を
+> 書いていなかったため、読み手が注 4.2 の真偽を本文から検証できなかった。上の「理由」を書き足した。
+> 検出は cycle 22 step 4 の Lean 検算 `cycle22_ops_lean_cycle21_theorems.md` §3.2（`G4_K_dependence`）。
+> 同じ計算は cycle 22 の `cycle22_T3_coefficients_d_e.md` §2.3（命題 D1a）が $(2.2)$$(2.3)$ の形で
+> 独立に書いている。
+
 ---
 
 ## 5. 定理 G4（一般の塔の閉形式）— 主結果
@@ -326,12 +344,23 @@ $b=\frac{\ell}{\ell-1}\alpha=\sum j^{*}$。$\blacksquare$
 $(2.1)$ が成り立つ十分条件として、次をすべて満たす最小の $M$ を $M^*$ と取ればよい。
 
 1. $M\ge L$（$A_{\mathrm{gen}}$ が経由するレベル）。
-2. $M\ge r^\sharp+\max_{P_0}K(P_0)+1$（(b) の層が空でない）。
+2. $M\ge r^\sharp+\max_{P_0}K(P_0)$（(b) の閉形式が成り立つ境界。層が**空でも**閉形式は $0$ を返すので、
+   空であること自体は障害ではない）。
 3. $\varphi(\ell^{M})>\theta^{\max}_U-2$（(a)）。
 4. 各 $P_0$、各 $k\le K$ で $M\ge2k$ かつ $\varphi(\ell^{M})>(\theta^\sharp_k-m^\sharp_k)\varphi(\ell^{k})$（定理 G2 $(3.2)$）。
 5. 各 $P_0$ で $e_{j^*}+j^{*}\ell^{\,M-K-1}-2<\varphi(\ell^{M})$（定理 G3、$k=K+1$ の最外層）。
 
 いずれも $D$ の係数からの有限計算である。
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 条件 2 は初稿では
+> 「$M\ge r^\sharp+\max_{P_0}K(P_0)+1$（(b) の層が空でない）」だった。**この $+1$ は 1 つ強すぎる。**
+> §5.2 (b) が使う等式 $\sum_{r=r^\sharp}^{M-K-1}\varphi(\ell^{M-r})=\sum_{s=K+1}^{M-r^\sharp}\varphi(\ell^{s})
+> =\ell^{M-r^\sharp}-\ell^{K}$ が成り立つ条件は $K\le M-r^\sharp$、すなわち $M\ge r^\sharp+K$ であり、
+> $M=r^\sharp+K$（層が空）でも両辺 $0$ で成り立つ。
+> **しかも初稿は §6.1（定理 J8 との照合）で $r^\sharp=1,K=0$ の下に $M^*=1$ を使っており、
+> 初稿の条件 2 を自分で破っていた**（内部の食い違い）。**正しいのは §6.1 の側**で、直すべきはここである。
+> 検出は cycle 22 step 4 の Lean 検算 `cycle22_ops_lean_cycle21_theorems.md` §1
+> （`GeneralTower.sum_totient_Ico` / `layer_b_boundary`）。
 
 ### 5.4 系 G5（仮定 (B\*) が落ちる）
 

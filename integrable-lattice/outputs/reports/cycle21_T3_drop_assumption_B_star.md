@@ -252,6 +252,14 @@ $\mathcal{B}_M:=\{P\in\mathbb{P}^1(\mathbb{Z}/\ell^M):\beta_P+\theta_G^{\max}\ge
 $\rho_{\max}:=\max_i\rho_i(P)$ とすると $\beta_P\le b\,\ell^{\rho_{\max}}$ なので
 $\ell^{\rho_{\max}}\ge\varphi(\ell^M)/(2b)=\ell^{M-1}(\ell-1)/(2b)$、すなわち
 $\rho_{\max}\ge M-1-\log_\ell\bigl(2b/(\ell-1)\bigr)\ge M-c_1$。
+
+**ここで効いているのは狭義不等式 $2b<(\ell-1)\ell^{c_1}$ であり、$c_1$ の定義の $+1$ はそのために入っている。**
+実際、$\rho_{\max}$ は整数なので $\rho_{\max}\ge M-c_1$ を出すには
+$\ell^{M-1}(\ell-1)/(2b)>\ell^{M-c_1-1}$、すなわち $(\ell-1)\ell^{c_1}>2b$ が要る。
+$c_1\ge1+\log_\ell\frac{2b}{\ell-1}$ より $(\ell-1)\ell^{c_1}\ge2b\ell>2b$ なのでこれは満たされるが、
+$\lceil\log_\ell\frac{2b}{\ell-1}\rceil$（$+1$ 無し）では $\frac{2b}{\ell-1}$ が $\ell$ の冪ちょうどのときに
+**等号 $2b=(\ell-1)\ell^{c_1}$ が起き、結論が破れる**。反例: $\ell=2$, $b=1$, $c_1=1$, $M=3$, $\rho_{\max}=1$。
+$2b\ell^{\rho_{\max}}=4=(\ell-1)\ell^{M-1}$ で前提を満たすが $M-c_1=2>1=\rho_{\max}$ である。
 したがって $\mathcal{B}_M\subseteq\bigcup_{i=1}^r\{P:\rho_i(P)\ge M-c_1\}$。
 $\rho\ge1$ に対し $\{P:\rho_i(P)\ge\rho\}$ は $\mathbb{P}^1(\mathbb{Z}/\ell^M)\to\mathbb{P}^1(\mathbb{Z}/\ell^{\rho})$ の
 1 点のファイバーで、大きさは $\ell^{M-\rho}$。$\rho=M-c_1$ とすれば $\ell^{c_1}$。$\blacksquare$
@@ -259,6 +267,12 @@ $\rho\ge1$ に対し $\{P:\rho_i(P)\ge\rho\}$ は $\mathbb{P}^1(\mathbb{Z}/\ell^
 **これが (B\*) の破れを飲み込む機構である。** (B\*) が破れるのは $B$ 側の付値 $\beta_P$ が
 $\ell H$ 側の $\varphi(\ell^M)$ と拮抗する点、すなわち $S_\infty$ の点の**最内側の球**である。
 $(5.2)$ はそこが $M$ に依らず有限個だと言っている。
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 初稿は $c_1$ の定義に $+1$ を入れておきながら、
+> **その $+1$ が何のために要るのか（狭義不等式 $2b<(\ell-1)\ell^{c_1}$ を確保するため）を書いていなかった。**
+> 主張は正しく、根拠が不足していたので上の段落を書き足した。
+> 検出は cycle 22 step 4 の Lean 検算 `cycle22_ops_lean_cycle21_theorems.md` §3.1
+> （`lemma_Q5_rho_max` / `lemma_Q5_needs_strict`。反例もそこで型に出されている）。
 
 ### 5.3 補題 Q3（数え上げ）
 
@@ -284,8 +298,8 @@ $$\sum_P\ell^{\rho_v(P)}=\ell^M\cdot1+(M-1)\varphi(\ell^M)+1\cdot\ell^M
 
 > **定理 Q1.** *仮定 (H) の下、$\varphi(\ell^M)\ge2\theta_G^{\max}$ かつ $M>c_1$ なる全ての $M$ で*
 > $$\Bigl|\,\Theta_M-b\,M\,\varphi(\ell^M)\,\Bigr|\ \le\ C\,\ell^M,\qquad
-> C:=b\bigl(3+|\mathcal{B}_M|\bigr)+\theta_G^{\max}\frac{\ell+1}{\ell}+|\mathcal{B}_M|\log_\ell C_0 \tag{6.1}$$
-> *（$|\mathcal{B}_M|$ は補題 Q5 より $M$ に依らず押さえられる）。したがって*
+> C:=b\bigl(3+r\,\ell^{c_1}\bigr)+\theta_G^{\max}\frac{\ell+1}{\ell}+r\,\ell^{c_1}\log_\ell C_0 \tag{6.1}$$
+> *（$c_1$ は補題 Q5 $(5.2)$ の定数。**$C$ は $M$ に依らない**）。したがって*
 > $$\mathrm{ord}_\ell(\kappa_n)=\mu\bigl(\ell^{2n}-1\bigr)+b\,n\,\ell^{n}+O\bigl(\ell^{n}\bigr),
 > \qquad b=\sum_{i=1}^rm_i=\sum_{P\in S_\infty}j^*(P). \tag{6.2}$$
 > ***仮定 (F)・(N)・(B\*) はいずれも使っていない。***
@@ -304,7 +318,13 @@ $$\Bigl|\sum_{P\notin\mathcal{B}_M}\beta_P-b\,M\,\varphi(\ell^M)\Bigr|
 残り 2 つは
 $0\le\sum_{P\notin\mathcal{B}_M}\theta_G(P)\le\theta_G^{\max}(\ell+1)\ell^{M-1}$、
 補題 Q0 より $0\le\sum_{\mathcal{B}_M}\hat\theta_M(P)\le|\mathcal{B}_M|\varphi(\ell^M)\log_\ell C_0
-\le|\mathcal{B}_M|\ell^M\log_\ell C_0$。三角不等式で $(6.1)$。
+\le|\mathcal{B}_M|\ell^M\log_\ell C_0$。
+ここで補題 Q0 を使うには $\mathcal{B}_M$ の各点で $\tilde E(\omega_P)\ne0$（＝ $\hat\theta_M(P)<\infty$）が要るが、
+**これは仮定 (H) から従う**：(H) は $X_{\ell^n,\ell^n}$ の連結性、すなわち $\kappa_n\ne0$ を意味し、
+cycle 14 $(6.1)$ の $\Sigma_n$ が有限であることと同値だから、$\mathcal{B}_M$ の点でも $\tilde E(\omega_P)\ne0$ である。
+三角不等式で $(6.1)$ を得る。定理の仮定 $\varphi(\ell^M)\ge2\theta_G^{\max}$ かつ $M>c_1$ の下で
+補題 Q5 が $|\mathcal{B}_M|\le r\ell^{c_1}$ を与えるので、$|\mathcal{B}_M|$ をこの上界で置き換えてよく
+（$\log_\ell C_0\ge0$ に注意。$C_0=\sum|c_{pq}|\ge1$）、**$C$ は $M$ に依らない定数になる**。
 
 $(6.2)$: 補題 J1（無仮定）より $\Sigma_n=\sum_{M\le n}\Theta_M$。$(6.1)$ を $M_1\le M\le n$ で足し、
 $M<M_1$ は有限個なので定数に吸収する。
@@ -312,6 +332,17 @@ $\sum_{M=1}^nM\varphi(\ell^M)=\sum_{M=1}^nM(\ell^M-\ell^{M-1})$ の $n\ell^n$ �
 $\frac{\ell}{\ell-1}\cdot\frac{\ell-1}{\ell}=1$、$\sum_{M\le n}\ell^M=O(\ell^n)$。
 よって $\Sigma_n=b\,n\ell^n+O(\ell^n)$。$(1.1)$ に代入し、$-2n+v_\ell(\kappa(X))=O(\ell^n)$ を
 誤差へ入れて $(6.2)$。$\blacksquare$
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 2 点を直した。いずれも検出は cycle 22 step 4 の Lean 検算
+> `cycle22_ops_lean_cycle21_theorems.md`（§2 と §4）。
+> 1. **$(6.1)$ の $C$ が「明示定数」になっていなかった。** 初稿の
+>    $C:=b(3+|\mathcal{B}_M|)+\theta_G^{\max}\frac{\ell+1}{\ell}+|\mathcal{B}_M|\log_\ell C_0$ は
+>    **レベル $M$ ごとの実際の悪い点の個数 $|\mathcal{B}_M|$ を含み、$M$ に依存する**。
+>    直後の括弧書き「補題 Q5 より $M$ に依らず押さえられる」は補いにすぎず、定数として書くなら
+>    補題 Q5 の上界 $r\ell^{c_1}$ を代入しなければならない。代入した形へ直した
+>    （Lean では `theorem_Q1_error`（$|\mathcal{B}_M|$ のまま）と `theorem_Q1_error_explicit`（代入後）に分けてある）。
+> 2. **補題 Q0 の適用に要る $\tilde E(\omega_P)\ne0$ が証明に書かれていなかった。**
+>    誤りではなく（(H) から従う）、依存が読めないという不備である。上の証明に一文として明示した。
 
 > **系 Q6.** *定理 J7・系 W6 の結論（$n\ell^n$ の係数が $b=\sum_{P\in S_\infty}j^*(P)$）は
 > **仮定なしに**成り立つ。とくに cycle 20 §7.2 (a) が「予想であって定理ではない」と明記していた

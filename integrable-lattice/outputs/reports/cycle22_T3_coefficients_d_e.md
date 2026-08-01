@@ -193,7 +193,16 @@ $$e=v_\ell(\kappa(X))-\mu
 > $$e=v_\ell(\kappa(X))-a-c+T_\mathrm{def},
 > \qquad\text{すなわち}\qquad
 > c+e=v_\ell(\kappa(X))-a+T_\mathrm{def}. \tag{3.2}$$
-> *とくに $T_\mathrm{def}=0$ であることと、閉形式 $(1.1)$ が $n\ge0$ から成り立つこととは同値である。*
+> *とくに $T_\mathrm{def}=0$ であることは、閉形式 $(1.1)$ が **$n=0$ で**成り立つことと同値である。
+> $(1.1)$ が**全ての $n\ge0$ で**成り立つことは、$\Theta_M=\Theta^\mathrm{as}_M$ が全ての $M\ge1$ で
+> 成り立つこと（＝過渡が一切無いこと）と同値であり、これは $T_\mathrm{def}=0$ より**真に強い**。*
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 初稿の最後の一文は
+> 「$T_\mathrm{def}=0$ であることと、閉形式 $(1.1)$ が $n\ge0$ から成り立つこととは同値である」だった。
+> **この $\Rightarrow$ 方向は偽である。** $T_\mathrm{def}$ は過渡欠損の**総和**なので、$0$ でも
+> **部分和**が $0$ とは限らず、初稿の証明は総和から部分和へ飛んでいた。
+> 検出は cycle 23 step 4 の Lean 検算 `cycle23_ops_lean_cycle22_theorems.md` §1
+> （`D2_residual` / `D2_equiv_forward_false` / `D2_equiv_corrected`）。上の主張と下の証明はその訂正後の形である。
 
 **証明.** $M^*$ 非依存性は $(3.1)$ の定義から直ちに従う（$M\ge M^*$ の項が $0$ だから、
 $M^*$ 以上のどこで打ち切っても和は同じ）。
@@ -207,14 +216,34 @@ $$\sum_{M=1}^{M^*-1}\Theta_M-\alpha\mathcal{S}_1(M^*\!-\!1)-\beta\mathcal{S}_0(M
 また cycle 21 $(2.2)$ より $\frac{\ell}{(\ell-1)^2}\alpha-\frac{\ell}{\ell-1}\beta=-c$、
 $\mu=a$。以上を代入すると $(3.2)$。
 
-最後の主張: $T_\mathrm{def}=0$ は $\sum_{M<M^*}(\Theta_M-\Theta^\mathrm{as}_M)=0$ を意味する。
-cycle 14 $(6.1)$ は $\mathrm{ord}_\ell(\kappa_n)$ を $\Sigma_n=\sum_{M\le n}\Theta_M$ で書くので、
-$\Sigma_n$ が全ての $n\ge0$ で漸近形と一致することと同値である。$\blacksquare$
+最後の主張: $\delta_M:=\Theta_M-\Theta^\mathrm{as}_M$、$S(n):=\sum_{M=1}^{n}\delta_M$（$S(0)=0$）と置く。
+cycle 14 $(6.1)$ は $\mathrm{ord}_\ell(\kappa_n)$ を $\Sigma_n=\sum_{M\le n}\Theta_M$ で書くから、
+$\Theta^\mathrm{as}$ に cycle 21 定理 G1 を適用すると、レベル $n$ での
+
+$$\text{（cycle 14 }(6.1)\text{ の左辺）}-\text{（}(1.1)\text{ の 5 係数形。}e\text{ は }(3.2)\text{）}=S(n)-T_\mathrm{def}
+\qquad(n\ge0)$$
+
+を得る。したがって:
+
+- **レベル $n$ で $(1.1)$ が成り立つ $\iff S(n)=T_\mathrm{def}$。**
+- $n=0$ では $S(0)=0$ なので、**$(1.1)$ が $n=0$ で成り立つ $\iff T_\mathrm{def}=0$。**
+- **全ての $n\ge0$ で成り立つ $\iff S$ が定数 $T_\mathrm{def}$ $\iff \delta_M=0$（全 $M\ge1$）**
+  （このとき $T_\mathrm{def}=0$ も従う）。
+
+逆向き（$T_\mathrm{def}=0\Rightarrow$ 全 $n\ge0$）は言えない。**総和が $0$ でも部分和 $S(n)$ が $0$ とは
+限らない**からである。実際、$\Theta^\mathrm{as}\equiv0$（$\alpha=\beta=\gamma=0$）、$\Theta_1=1$、$\Theta_2=-1$、
+$\Theta_M=0\ (M\ge3)$ と取ると $M^*=3$ で $T_\mathrm{def}=0$ だが $S(1)=1$ で、$n=1$ では $(1.1)$ が $1$ だけずれる。
+**ただしこれは $\Theta$ を任意に取った反例であり、実在の塔で $\delta_M$ の符号が混ざる例は確認していない**
+（cycle 23 step 4 report §1.3 と同じ限定）。$\blacksquare$
 
 **注 3.1（$T_\mathrm{def}$ は「早い段での余分」）.** $T_\mathrm{def}$ は、低レベルで実際の $\Theta_M$ が
 漸近形からどれだけ余分に（または不足して）出たかの総量である。検証 Step L では
 $T_\mathrm{def}=0$ の塔が 108、$\ne0$ の塔が 83、値の範囲は $-7$ から $6$、
 $-2/3$・$-4/3$ のような非整数も出る。
+**訂正後の定理 D2 によれば、この 108 本では $(1.1)$ が $n=0$ で成り立つ**（$n\ge1$ でも成り立つことは
+意味しない。それには $\delta_M=0$ が全 $M$ で要る）。**この帰結は Step L では確認していない**
+（Step E は $n\ge n_0$ の照合であり、$n<n_0$ でずれた 48 件を理論の射程外として除いている）。
+2026-08-01 追記（cycle 24 step 1）。
 
 **注 3.2（$c$ と $e$ は分離できない）.** $(3.2)$ は $c+e$ が「$v_\ell(\kappa(X))-a+T_\mathrm{def}$」という
 **$A_\mathrm{gen}$ も捻り段データも含まない量**に等しいと言っている。
@@ -262,6 +291,9 @@ $\det L$ にならない。bouquet では定数項が他の係数の和に等し
 >    $$\Lambda_0=v_2(p+1),\quad\theta^\sharp_0=2,\qquad
 >      \Lambda_1=\min\bigl(2,\,v_2(p-1)\bigr),\quad
 >      \theta^\sharp_1=\begin{cases}0&(p\equiv1\bmod4)\\ 2&(p\equiv3\bmod4).\end{cases}$$
+>    *ここで $\Lambda_1$ の $\min$ は **$A_m\ne0$ となる $m$ についてのみ**取る（$v_2(0)=+\infty$ の規約。
+>    cycle 21 定理 G2 の $\Lambda_k$ の定義がこの規約である）。**とくに $p=1$ では $A_2=1-p=0$ なので
+>    $\Lambda_1=v_2(A_0)=2$、$\theta^\sharp_1=0$ である。***
 > 3. *したがって、$\mathcal{L}=v_2(p+1)+\min(2,v_2(p-1))$ と置いて*
 >    $$d=2\theta^\sharp_1-6=\begin{cases}-6&(p\equiv1\bmod4)\\ -2&(p\equiv3\bmod4),\end{cases}
 >      \qquad c=2\mathcal{L}-2 .$$
@@ -287,6 +319,15 @@ cycle 21 §6.3 が計算した値であり、$\bar{\tilde E}$ だけで決まる
   よって $\Lambda_1=\min\bigl(v_2(4),v_2(1-p)\bigr)=\min(2,v_2(p-1))$ であり、
   最小を最初に達成する添字は、$v_2(p-1)\ge2$ なら $m=0$、$v_2(p-1)=1$ なら $m=2$。
   $p$ は奇数なので $v_2(p-1)\ge1$、$v_2(p-1)\ge2\iff p\equiv1\bmod4$。
+  **$p=1$ では $A_2=0$ なので、上の規約（$v_2(0)=+\infty$）により $\Lambda_1=v_2(4)=2$、$\theta^\sharp_1=0$
+  であり、$p\equiv1\bmod4$ の場合に含まれる。**
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 初稿は $\Lambda_1=\min(2,v_2(p-1))$ とだけ書いており、
+> $\min$ を $A_m\ne0$ の $m$ に限る規約（$v_2(0)=+\infty$）を明記していなかった。
+> **主役の片方である $p=1$（$\ell=2$ トーラス）で $A_2=0$ になるため、標準の規約 $v_2(0)=0$
+> （mathlib の `padicValNat` を含む）で読むと $\Lambda_1=0$、$\mathcal{L}=1$、$c=0\ne4$ となって結論が壊れる。**
+> 検出は cycle 23 step 4 の Lean 検算 `cycle23_ops_lean_cycle22_theorems.md` §2（`D3_p_eq_one_convention`）。
+> **主張が偽だったのではなく、一意に読めなかった**ので、規約の明記で訂正した（同じ訂正を定理 D5 §6.2 にも入れた）。
 
 $P_0=(1{:}-1)$ は $w\mapsto w^{-1}$ の対称性で同じ値になる（$D$ は $w\mapsto w^{-1}$ で不変）。
 
@@ -414,7 +455,9 @@ $d$ についての障害を含まない。$d$ は別に要る。
 > $$A_0=A_1=4(p+t),\qquad A_2=t-q,$$
 > $$\Lambda_1=\min\bigl(v_2(4(p+t)),\,v_2(t-q)\bigr),\qquad
 >   \theta^\sharp_1=\begin{cases}0&\bigl(v_2(4(p+t))\le v_2(t-q)\bigr)\\ 2&(\text{その他})\end{cases}$$
-> *で与えられる。とくに $t=1$、$p=2^{N+1}-1$、$q=1+2^{N+2}$ と $p'=p+2^{N}$ を取ると、
+> *で与えられる。ここでも $\min$ は **$A_m\ne0$ となる $m$ についてのみ**取る（$v_2(0)=+\infty$ の規約。
+> 定理 D3 の 2 と同じ）。**$t=q$ では $A_2=0$ なので $\Lambda_1=v_2(4(p+t))$、$\theta^\sharp_1=0$ である。**
+> とくに $t=1$、$p=2^{N+1}-1$、$q=1+2^{N+2}$ と $p'=p+2^{N}$ を取ると、
 > 任意の $N\ge1$ で*
 > $$\tilde E_{Y_{p,q,t}}\equiv\tilde E_{Y_{p',q,t}}\pmod{2^{N}},\qquad
 > \Lambda_1\ \text{は不変}\ (=N+2),\qquad \theta^\sharp_1:\ 2\longrightarrow 0,$$
@@ -436,6 +479,13 @@ $$A_0=(t-q)+(4p+2q+2t)+(t-q)=4p+4t,\quad
 A_1=2(t-q)+(4p+2q+2t)=4p+4t,\quad A_2=t-q.$$
 
 $\Lambda_1$ は $\min$ の定義、$\theta^\sharp_1$ は最小を最初に達成する添字（$A_0$ か $A_2$）である。
+**$t=q$ のときは $A_2=0$ なので、規約（$v_2(0)=+\infty$）により $\min$ は $A_0,A_1$ だけで取る。**
+以下の具体化では $t=1$, $q=1+2^{N+2}$ で $t\ne q$ なので、この境界には触れない。
+
+> **【訂正 2026-08-01（cycle 24 step 1）】** 初稿は $p,q,t\ge1$ 一般について $\Lambda_1=\min(\cdot,\cdot)$ と
+> 書きながら、$t=q$（$A_2=0$）での $\min$ の規約を書いていなかった。定理 D3 の 2 と同じ穴である。
+> 検出は cycle 23 step 4 の Lean 検算 `cycle23_ops_lean_cycle22_theorems.md` §2。
+> **具体化の側（$t=1$, $q=1+2^{N+2}$）は $t\ne q$ なので結論は初稿のまま無事である。**
 
 具体化: $t=1$、$p=2^{N+1}-1$ より $p+t=2^{N+1}$、$v_2(4(p+t))=N+3$。
 $q=1+2^{N+2}$ より $t-q=-2^{N+2}$、$v_2=N+2$。よって $\Lambda_1=N+2$、
