@@ -334,6 +334,60 @@ cycle 19 はこの 3 点を step にする。
 | 4 | 運用 | lean_cycle21_theorems | done | 2026-08-01 | `outputs/reports/cycle22_ops_lean_cycle21_theorems.md` / `lean/`。**7 サイクル連続で根拠 report の問題を検出した。** 最大の成果は **定理 G4 の内部の食い違い**: §5.3 の $M^*$ 条件 2 が 1 つ強すぎ、**同じ report の §6.1（定理 J8 との照合）が自分でその条件を破っている**。Lean で層の総和公式の成立条件を型に出したところ**正しいのは §6.1 の側**で、直すべきは §5.3。ほかに **「明示定数」が明示定数でない 1 件**（定理 Q1 の $C$ が $\lvert\mathcal B_M\rvert$ 経由で $M$ 依存）、**根拠が書かれていない 2 件**（補題 Q5 に効くのは**狭義**不等式／定理 G4 注 4.2 の打ち消しの理由）、**暗黙の仮定 1 件**（補題 Q0 の非零性）、**検証範囲の逸脱 1 件**（§6.3 の $n=1$ からの一致は定理の保証範囲外。一致自体は事実）。食い違い無しの側では定理 G1 の **5 係数すべて**が恒等式として通り、定理 Q1 の $b$ と定理 G4 の $b$ が**別経路で同じ値になること**も型で確認。**負荷平均の読み方を訂正**——着手時 `uptime` は 582 だが `top` の CPU idle は 42.8% で、負荷平均は 9400 スレッドに引きずられ空き容量を表していない。**cycle 21 の「負荷平均 432 で完走を確認できなかった」は指標の読み違いだった可能性が高い。以後この判断には `top` の idle を使う。** **自分の誤りを 3 件記録**（うち 1 件は「mathlib に在ると確認せず書く」で**前サイクルが記録した誤りの再発**）。**呼び出し元の検証**: **`lake build` を自分の作業ツリーで独立に実行し `Build completed successfully (8676 jobs)`、`check-no-sorry.sh` で 231 個（依存公理を出力する 228 ＋ 公理なし 3）すべて sorryAx 非依存を再現**——**cycle 21 で確認できていなかった 8674 jobs／196 定理は、これで独立に裏が取れた**。`check-no-sorry.sh` の差分が**対象定理の追加だけ**（検査を緩めていない）ことも確認。なお worktree に mathlib が無く初回取得が途中で壊れたため `.lake/packages/mathlib` を消して取り直した（gitignore された依存の復旧）。その際 `lake update` が `lake-manifest.json` の `name` を旧プロジェクト名 `Ising2D` から `IntegrableLattice` へ直した（**依存の revision は変わっていない**）ので、そのまま取り込んだ。 |
 | 5 | — | rank:cycle22 | done | 2026-08-01 | 下記「cycle 22 総括」。**掲げた 4 点はすべて潰れたが、うち 1 点は前提そのものが誤っていた**（$d,e$ は既に決まっていた）。cycle 23 の焦点は 4 点。 |
 
+## cycle 26 step 列（2026-08-02 起こし。cycle 25 総括の「cycle 26 の焦点（案）」6 点をそのまま step にした）
+
+**着手時に前提を一次情報で実測した（cycle 25 の教訓 (a)「step 列の前提が一次情報と食い違う事故が
+2 サイクル連続」への対処）。実測の結果、6 点すべてが一次情報と一致した。** 実測値:
+
+- 焦点 1（Lean で証明そのものを検算）: 本文は `theorem`/`claim` **24 件すべてが証明を持つ**
+  （`verify:proofs`。証明なし 0・宣言 0）。`lean/IntegrableLattice/` は **23 モジュール**。
+  **worktree に mathlib（gitignore）が無い**ので復旧が要る（cycle 25 の教訓 (d) と同じ状況）。
+- 焦点 2（腐った参照 17 件）: `verify:refs` が **実在しない参照 41 件・免除 40 件**、うち
+  型 `outOfScope`＝**本当に腐っている 17 件**。内訳を実測: `locales/en/` 5 件・`README.md` 1 件・
+  `docs/architecture.md` 4 件・`docs/schemas.md` 1 件・`docs/paper001-en-glossary.md` 3 件・
+  `docs/tasks/auto-loop-runbook.md` 3 件。**本文（`content/`）には 1 件も無い。**
+- 焦点 3（持ち越し 2 件）: `cycle22_T3_coefficients_d_e.md` 注 3.1 に
+  「**この帰結は Step L では確認していない**」が実在（$T_\mathrm{def}=0$ の 108 本で $(1.1)$ が $n=0$ から
+  成り立つか）。`cycle21_T3_general_closed_form.md` §6.3 に「**$n=1$ から完全に一致する**」が実在
+  （cycle 22 step 4 が「定理の保証範囲外」と指摘した箇所）。
+- 焦点 4（転記検査の弱点）: `verify:transcription` が **照合対象が 0 件だったブロック 5 件**
+  （`paper_023_definition_massieu`, `paper_045_theorem_lte`, `paper_054_remark_limits`,
+  `paper_072_remark_qp_free`, `paper_082_remark_formalization`）と
+  **機械検証できない免除 14 件（型「report の位置づけの言葉」）** を出力。件数が一致。
+- 焦点 5（再発する誤りを検査にする）: `package.json` の `check` は **15 段**。
+  英語ロケールの数式ノードをまたぐ強調も `field_simp` 後の不要な `ring` も、**落とす段が無い**。
+- 焦点 6（命題 G′ の仮定）: `content/005b_theta_infinity.ts` の **statement（125–135 行）に
+  $\theta^*-m_1<\ell-1$ が無く、proof（529 行）にだけある**。「この仮定なしには次の等式は
+  述べられない」と proof 自身が書いている。
+
+**担当を分ける（衝突回避）。step は上から順に 1 つずつ実行し、各 step で 点検 → 状態更新 → main push を回す**:
+- `outputs/reports/` と `sagemath/` を触ってよいのは **step 1 だけ**。
+- `docs/`・`README.md`・`locales/en/` の非 content を触ってよいのは **step 2 だけ**
+  （併せて `tools/reference-rot-allowances.ts` から免除を消すのも step 2）。
+- `structured-latex/tools/` の**検査道具本体**と `package.json` の検査段を触ってよいのは
+  **step 3・step 4 だけ**（step 3 が新検査、step 4 が転記検査。触るファイルは重ならない）。
+- **本文**（`structured-latex/content/` と `structured-latex/locales/en/content/`）を触ってよいのは
+  **step 5 だけ**。
+- `lean/` を触ってよいのは **step 6 だけ**（本文が確定した step 5 の後に起こす）。
+
+**申し送り（cycle 25 総括より。読むだけでなく設計に反映する）**:
+- **「記録を読む」では再発が止まらないことが 3 サイクルで確定している**（英語ロケールの強調・
+  `field_simp` 後の `ring`）。step 3 はこれを**検査**にするのが仕事であって、注意書きを増やす仕事ではない。
+- **「プロセスが止まっている」はプロセス表と生成物の増加を見てから言う。** 生存確認と進捗確認を分ける。
+  `pkill`/`killall` を使わない。稼働中のビルドを強制解除しない。
+- **パイプの後ろで `$?` を取らない**（`${PIPESTATUS[0]}`）。「エラーが出なかったこと」を成功の根拠にしない。
+- 1 本のスクリプトの壁時計上限は 20 分以内。負荷判断は `uptime` でなく `top` の CPU idle。
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | T3 Pure | close_carryover_verifications | done | 2026-08-02 | `outputs/reports/cycle26_T3_carryover_verifications.md` / `sagemath/check/cycle26_T3_carryover_verifications/`（FAIL 0・打ち切り 0・419.0 秒）。**3 サイクル持ち越しの 2 件を両方とも閉じた。** **持ち越し (i)（cycle22 注 3.1）**: $T_\mathrm{def}=0$ の 108 本で $(1.1)$ が $n=0$ で成り立つことを確認（191 組で同値の破れ 0 件）。**実際にはもっと強く、108 本すべてで $\delta_M$ が全て $0$ ＝ 全ての $n\ge0$ で成り立っていた**（「総和だけ $0$」の塔は 0 本）。さらに**定理 D2 のレベルごとの判定を Matrix–Tree の塔の値と 860 件突き合わせ、食い違い 0**。内訳が重要で、**判定「一致しない」かつ実測も不一致が 139 件（16%）**あり、**判定が空振りでないことが数で出た**。従来の照合（cycle 22 Step E）は $n\ge n_0$ に限っていたので、**$n=0$ と $n<n_0$ はこれが初めての突き合わせ**である。**定理 D2 の証明の但し書き「実在の塔で $\delta_M$ の符号が混ざる例は確認していない」も半分解消**——**混ざる塔は 47 本実在した**（例: $\ell=2$ `BQ3 (1,0),(1,0),(0,1)` で $\delta=(-1,2,0)$）。**ただし $T_\mathrm{def}=0$ のものは 0 本**＝証明が構成した反例の配置（総和 $0$・部分和 $\ne0$）はこの母集団では実現していない。**持ち越し (ii)（cycle21 §6.3）**: $\ell=2$ トーラスは $T_\mathrm{def}=3\ne0$・$\delta=(3,0,0)$ で、**$(1.1)$ の成立開始レベルはちょうど $n=1$**（機械が実測から決める形にした）。**「$n=1$ から完全に一致する」は正しく、しかも定理 D2 がその開始レベルをちょうど言い当てている。** cycle 22 step 4 の「定理の保証範囲外」という指摘は**当時は妥当**で、**説明を与えたのが cycle 22 定理 D2、それを実測したのが本 step**である。以後この記述は保証範囲外ではない。**$\mathbb{R}$ へは一度も脱出しない**（整数行列式・有理数・$\ell$ 進付値のみ。浮動小数点 0 箇所）。**自分の誤りを 3 件記録**（最重は **$(1.1)$ の $a$ を $1$ と書いたこと**——§6.3 の $\alpha=1$ との取り違え。印字された閉形式に $2^{2n}$ の項が無いので $a=0$ である。初回実行が FAIL 2 件で終わり、**どちらも私の期待が誤りで理論が正しかった**。是正は検証を緩めず期待を原典へ合わせる方向で行った。**2 件とも「確かめる前に期待を書いた」型で、cycle 25 step 2 が最重の誤りに挙げた形の 1 サイクルでの再発**である）。**限界を明示**: 母集団の外は見ていない／レベルは $\ell=2$ で $n\le4$・$\ell=3$ で $n\le3$／これは証明ではない。本 step は本文を触らないので、検証ディレクトリは `verify-check-linkage.ts` に孤立として出る（**参照を張るのは step 5 の担当**）。 |
+| 2 | 運用 | fix_rotten_refs_outside_content | todo | | 焦点 2。本文外の「本当に腐っている」17 件を直し、免除を消す。 |
+| 3 | 運用 | guard_recurring_mistakes | todo | | 焦点 5。3 サイクル連続の再発 2 型を `npm run check` の早い段で落とす。 |
+| 4 | 運用 | strengthen_transcription_checks | todo | | 焦点 4。照合対象 0 件 5 件・機械検証できない免除 14 件を減らす。 |
+| 5 | 運用 | state_g_prime_assumption | todo | | 焦点 6。命題 G′ (G′2) の主張へ $\theta^*-m_1<\ell-1$ を入れる（日英）。 |
+| 6 | 運用 | lean_cycle26_proofs | todo | | 焦点 1。Lean 11 サイクル目。対象は**主張ではなく証明そのもの**。 |
+| 7 | — | rank:cycle26 | todo | | 総括・MEMORY・cycle 27 の焦点。 |
+
 ## cycle 25 step 列（2026-08-01 起こし。cycle 24 総括の「cycle 25 の焦点（案）」4 点をそのまま step にした）
 
 **前提**: cycle 24 で 4 点すべてが潰れ、命題 M・U が本文に入った。残る負債は
