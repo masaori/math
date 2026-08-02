@@ -116,6 +116,7 @@ cellular-automata-statistical-mechanics/
 ├── MEMORY.md              # 引き継ぎメモ
 ├── docs/
 │   ├── 2値セルオートマトンの定義と呼び名.md   # 用語・定義の正本
+│   ├── 舞台のカタログ_有限構造とその極限.md   # 舞台を有限から集め、極限の向きで整理
 │   ├── survey/            # 既存研究の調査と、矢印を逆に読み直した台帳
 │   └── ideas/             # アイディアの種（命題になる前の仮説）
 └── sagemath/check/        # 検算
