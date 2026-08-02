@@ -7,6 +7,7 @@
 
 | ディレクトリ | 対象 | 出典 |
 |---|---|---|
+| `lambda_thermodynamics/` | 種「Λ値熱力学の構成」: 加法的保存量 → $\Omega\in\mathbb{N}$ → $S,\beta\in\Lambda$ → 第〇法則 | [ideas 一覧](../../docs/ideas/アイディアの種_一覧.md) 種「Λ値熱力学の構成」 |
 | `phi_support/` | 種「Φ_N の台と代数的複雑度」: $\Phi_N$ の台。初等 CA 256 個 × $L$ × $N$ | [ideas/01](../../docs/ideas/種_Φ_Nの台と代数的複雑度.md) 「最初の検算（`sagemath/check/phi_support/` に置く）」節 |
 | `ledrappier_padic/` | 種「線形CAとMahler測度」: Ledrappier three-dot の三素点突き合わせ | [ideas/02](../../docs/ideas/種_線形CAとMahler測度.md) 「最初の検算（`sagemath/check/ledrappier_padic/`）」節 |
 | `lambda_invariants/` | 種「Λ値不変量の三つの顔」: $\log\operatorname{ind}$ / $h$ / $M$ の比較表 | [ideas/03](../../docs/ideas/種_Λ値不変量の三つの顔.md) 「最初の検算」節 |
