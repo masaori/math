@@ -15,6 +15,36 @@ cycle 24 step 2 で**英語版をそのローカライズモデルへ移し、�
   **cycle 24 step 4 が訂正後の内容とローカライズモデルの上で書き直して本文へ入れたので、役目を終えた。**
   そのまま使ってはならない（訂正前の主張とローカライズ移行前の構造が入っている）。
 
+## 完了（2026-08-02）: スキルを現行規約へ揃え、Typst 前提と番号管理を全廃した
+
+リポジトリ共通スキル（`.claude/skills/` と `.codex/skills/` の math-prover / project-manager /
+sagemath-checker / task-manager / task-rules）と、このプロジェクトの 7 スキル
+（`integrable-lattice/skills/integrable-lattice-*`）を改訂した。
+
+- **Typst 前提を全廃**した。証明の記述・タスクの完了条件・SageMath 検証の入力は
+  すべて構造化テキスト（`structured-latex/`）に統一し、`typst compile` を完了条件にしない。
+  math-prover の書式例（`$...$`・`#ref`・`cases(...)`）を `displayMath(String.raw...)` と
+  `ref("<label>")` へ全面的に書き換えた。`integrable-lattice-generate` には
+  「候補を命題へ昇格させるときは structured-latex に書く。Typst で書かない」ガードレールを追加した。
+- **着手前に読むもの**を全スキルの先頭に表で置いた。作業当初は `docs/context/` を指していたが、
+  作業中に main で `docs/context/` が削除されたので、**現存する正本へ振り替えた**:
+  CLAUDE.md / AGENTS.md（規約・命名・検証・完了の定義）、各プロジェクトの README、
+  `docs/discussion/対数順序群上の統計力学/`、`docs/discussion/可算性の効用/`、
+  `docs/research/R-Lambda-duality/`、`docs/research/場の量子論の数学的定式化/`。
+- **「文書・定理を番号や記号で管理しない」規約に合わせた**。スキル内の見出し番号・
+  脱出の型の記号・層の番号・`check/<NNN>_<対象>`・タスクの連番ファイル名を全て名前ベースへ改めた。
+  ℝ 脱出の型は単独で意味の通る言い回し（見かけだけの ℝ 脱出／実対数による ℝ 脱出／
+  指数評価による ℝ 脱出／極限・積分による ℝ 脱出／完備性・可分性を要する構造）にした。
+  タスクの実行順序は `task-dependency-graph.md` が正本であることを明記した。
+- 証明本体と数値検証の紐づけは**ラベル**（`overview.md` の `**対象ラベル**:` 行）であることを
+  sagemath-checker に明記し、`verify-check-linkage.ts` が機械検証する旨を書いた。
+
+### 残っている不整合（次にやるなら）
+
+- `integrable-lattice-gap-map` のセルキーが `direction(A–F)` という記号分類を使っている。
+  正本は `inputs/seeds/lambda-statement-program.md` で、既存の出力データもこの記号を持つため
+  今回は触っていない。番号・記号の規約に合わせるなら、seed とデータの改名を伴う別作業になる。
+
 ## cycle 25 完了（rank:cycle25, 2026-08-01）— 論文本体から証明の欠落が消え、ℝ 脱出が 1 箇所になった
 
 **掲げた 4 点はすべて潰れた。しかも検査を作った結果 step 列の前提の誤りが露見したので、
