@@ -50,6 +50,9 @@ mats += [
     ("ランク 1 4x4", np.outer(np.array([1.0,2.0,-1.0,0.5], dtype=complex),
                               np.array([0.3,-1.0,2.0,1.0j], dtype=complex).conj())),
     ("非対角化可能 2x2", np.array([[1.0,1.0],[0.0,1.0]], dtype=complex)),
+    # 重根をもつ 3x3 Jordan 塊。特異値経路 (d) は固有値ではなく特異値を使うので、
+    # 固有値が重根で退化していても他の 3 経路と一致しなければならない。
+    ("重根 3x3 Jordan", np.array([[2.0,1.0,0.0],[0.0,2.0,1.0],[0.0,0.0,2.0]], dtype=complex)),
 ]
 for M in [2,3]:
     mats.append(("hatZ^(-)_1 (M=%d)" % M, hatZ_op(1, M, '-')))
@@ -57,7 +60,11 @@ for M in [2,3]:
     mats.append(("H_1^(-) (M=%d)" % M, H1_op(M, '-')))
     mats.append(("H_2 (M=%d)" % M, H2_op(M)))
     for p in OP_TEST_PARAMS:
+        tag = "M=%d,K1=%g,K2=%g" % (M, p['K1'], p['K2'])
         mats.append(("V_1 [M=%d,K1=%g]" % (M, p['K1']), V1_op(float(p['K1']), M)))
+        # 指数関数の収束を論じるときに実際にノルムを取る対象そのもの（指数の肩の行列）。
+        mats.append(("i K_1 H_1^(-) [%s]" % tag, 1j*float(p['K1'])*H1_op(M, '-')))
+        mats.append(("i K_2^* H_2 [%s]" % tag, 1j*float(K_star(p['K2']))*H2_op(M)))
 print("試験行列: %d 個（乱数 + 退化行列 + Ising 作用素）" % len(mats))
 
 for name, A in mats:
