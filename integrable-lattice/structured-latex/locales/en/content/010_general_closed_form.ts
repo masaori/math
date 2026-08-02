@@ -1280,7 +1280,10 @@ export default defineBlocks([
     },
     labels: ["paper_prop_U"],
     habitat: "Qbar",
-    verification: ["sagemath/check/cycle22_T3_coefficients_d_e"],
+    verification: [
+      "sagemath/check/cycle22_T3_coefficients_d_e",
+      "sagemath/check/cycle26_T3_carryover_verifications",
+    ],
     statement: [
       paragraph([
         "We keep the setting and the notation of ",

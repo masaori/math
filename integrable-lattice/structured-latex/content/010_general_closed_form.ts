@@ -1254,7 +1254,10 @@ export default defineBlocks([
     title: { text: "命題 U — 係数の情報階層（どの追加情報が要るか）と、有限精度では決まらないこと" },
     labels: ["paper_prop_U"],
     habitat: "Qbar",
-    verification: ["sagemath/check/cycle22_T3_coefficients_d_e"],
+    verification: [
+      "sagemath/check/cycle22_T3_coefficients_d_e",
+      "sagemath/check/cycle26_T3_carryover_verifications",
+    ],
     statement: [
       paragraph([
         ref("paper_prop_M"),
