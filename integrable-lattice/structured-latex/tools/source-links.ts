@@ -251,19 +251,21 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         item: "予言",
         reason:
-          "report のこの文は数値検証の枠組み（H4 が 3 分解を数値で出す）についての注であり、定理の主張ではない。本文は同じ数値検証を `verification` のラベルで指している。",
+          "report のこの文が言う「予言に使うのは $\\mu$ と $\\Lambda$ だけ」という内容を、本文は (G′1) で「$D$ の係数からの有限計算で決まる（塔の値も円分体も使わない）」と別の言い方で述べている。同じ内容の言い換えである。",
         grounds: {
-          type: "positioning",
+          type: "paraphrase",
           reportQuote: "予言に使うのは $\\mu$ と $\\Lambda$ だけ",
+          bodyQuote: "の係数からの有限計算で決まる（塔の値も円分体も使わない）",
         },
       },
       {
         item: "数値",
         reason:
-          "同上。",
+          "report の Step H4 が 3 分解を数値で出していることは、その分解が実在することの例示である。主張そのもの（分解が $D$ の係数からの有限計算で決まること）は本文が持っている。",
         grounds: {
-          type: "positioning",
+          type: "example",
           reportQuote: "H4 は上の 3 分解を数値で出している",
+          bodyQuote: "の係数からの有限計算で決まる（塔の値も円分体も使わない）",
         },
       },
     ],
@@ -501,19 +503,21 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         item: "有限側",
         reason:
-          "seed が軸 3 を「有限側の本体軸」と位置づける言葉。本文は軸 3 と軸 4 が独立であることを述べており、位置づけの言葉は使っていない。",
+          "seed は軸 3 を「有限側の本体軸」と序列づけるが、本文はその序列を主張していない（軸 3 が何かを述べるだけ）。本文のほうが弱い。",
         grounds: {
-          type: "positioning",
+          type: "weaker",
           reportQuote: "**有限側の本体軸**。",
+          bodyQuote: "**軸 3（複雑性）**: 有限サイズで多項式時間か #P 困難か。",
         },
       },
       {
         item: "本体軸",
         reason:
-          "同上。",
+          "同上（序列づけの語。本文は序列を主張しない）。",
         grounds: {
-          type: "positioning",
+          type: "weaker",
           reportQuote: "**有限側の本体軸**。",
+          bodyQuote: "**軸 3（複雑性）**: 有限サイズで多項式時間か #P 困難か。",
         },
       },
       {
@@ -544,7 +548,37 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         covers: "$\\Phi_N=\\log Z_N\\in\\Lambda$ と、その $\\ell_p$ 係数が $v_p(Z_N)$ であること",
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "\\ell_{p}",
+        reason:
+          "台帳の `covers` は $\\ell_p$ 係数という記号で書いているが、本文は同じ内容を「素因数分解の指数ベクトルがそのまま $\\Lambda$ の元を与える」と語で書いている。記法の選択である。",
+        grounds: {
+          type: "notation",
+          reportQuote: "$\\Phi_N=\\log Z_N\\in\\Lambda$ と、その $\\ell_p$ 係数が $v_p(Z_N)$ であること",
+          bodyQuote: " の素因数分解の指数ベクトルがそのまま ",
+        },
+      },
+      {
+        item: "v_{p}",
+        reason:
+          "同上（$v_p$ という記号を本文は使わず、素因数分解の指数ベクトルという語で書いている）。",
+        grounds: {
+          type: "notation",
+          reportQuote: "$\\Phi_N=\\log Z_N\\in\\Lambda$ と、その $\\ell_p$ 係数が $v_p(Z_N)$ であること",
+          bodyQuote: " の素因数分解の指数ベクトルがそのまま ",
+        },
+      },
+      {
+        item: "係数",
+        reason:
+          "同上（「$\\ell_p$ 係数」という言い方を本文は取らず「指数ベクトル」と書いている）。",
+        grounds: {
+          type: "notation",
+          reportQuote: "$\\Phi_N=\\log Z_N\\in\\Lambda$ と、その $\\ell_p$ 係数が $v_p(Z_N)$ であること",
+          bodyQuote: " の素因数分解の指数ベクトルがそのまま ",
+        },
+      },
+],
   },
   {
     block: "paper_021_definition_curve",
@@ -864,7 +898,27 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           bodyQuote: "無作為標本 2487 例中 563 例",
         },
       },
-    ],
+          {
+        item: "等式",
+        reason:
+          "台帳が「訂正後の等式」と呼ぶものを、本文は訂正の断り（**【訂正】この主張は …**）とともに等式そのものとして書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "訂正後の等式そのもの（トレース列の読み）",
+          bodyQuote: "**【訂正】この主張は ",
+        },
+      },
+      {
+        item: "訂正後",
+        reason:
+          "同上（どの版の主張かを台帳が断る言葉。本文も訂正であることを明示して書いている）。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "訂正後の等式そのもの（トレース列の読み）",
+          bodyQuote: "**【訂正】この主張は ",
+        },
+      },
+],
   },
   {
     block: "paper_043_theorem_bound",
@@ -898,7 +952,17 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           reportQuote: "## 4. 副産物: 命題 C はトレース列の読みでは偽",
         },
       },
-    ],
+          {
+        item: "例・",
+        reason:
+          "「472 例中 10 例・572 例中 26 例」を語として切り出したときの断片。本文は同じ実測を数値ごと書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "Wall 型等号が一般には成立しないこと（472 例中 10 例・572 例中 26 例）と、0 件を根拠にしない教訓",
+          bodyQuote: "472 例中 10 例（約 2.1%）で等号が破れ",
+        },
+      },
+],
   },
   {
     block: "paper_045_theorem_lte",
@@ -910,7 +974,17 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         covers: "命題 L の 4 分岐（$p$ 奇の $d\\mid L$ / $d\\nmid L$、$p=2$ の $L$ 奇 / 偶）",
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "分岐",
+        reason:
+          "台帳が範囲を「4 分岐」と要約する言葉。本文は 4 つの場合を箇条書きで書き下しており、「分岐」という語は使っていない。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "命題 L の 4 分岐（$p$ 奇の $d\\mid L$ / $d\\nmid L$、$p=2$ の $L$ 奇 / 偶）",
+          bodyQuote: " 奇のとき**: ",
+        },
+      },
+],
   },
   {
     block: "paper_045_theorem_trace_ladder",
@@ -973,7 +1047,17 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           bodyQuote: "t_k=1,2,2,4,8,16",
         },
       },
-    ],
+          {
+        item: "最良性",
+        reason:
+          "台帳が範囲を「指数の最良性」と要約する言葉。本文は「は最良である」と直接書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "指数 $k-w^*-1$ の最良性",
+          bodyQuote: " は最良である（",
+        },
+      },
+],
   },
   {
     block: "paper_051_theorem_duality",
@@ -1006,10 +1090,11 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         item: "整合",
         reason:
-          "「本論文の定義はこの規約と整合しており」は report が本文を評価する言葉である。本文は規約そのもの（Cuoco–Monsky が p.237 で明示した $\\mathrm{ord}\\,0=0$ という通常とは異なる規約）を書いている。",
+          "report が「整合しており」と言う関係を、本文は「はこの規約そのものである」と、より直接に述べている。同じ内容の言い換えである。",
         grounds: {
-          type: "positioning",
+          type: "paraphrase",
           reportQuote: "という定義はこの規約と整合しており",
+          bodyQuote: "（退化因子を落とす流儀）はこの規約そのものである。",
         },
       },
     ],
@@ -1273,7 +1358,37 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         covers: "限界 (ii)（$\\theta\\ge\\ell+1$ の退化塔には閉形式が無いこと）",
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "原論文",
+        reason:
+          "台帳の要約が出典を「原論文」と呼ぶ言葉。本文は「**原典もそう述べている**」と書いて出典を特定している。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "限界 (i)（$m_0$ と $l_0$ 以外の係数は原論文が mysterious と明記している）",
+          bodyQuote: "**原典もそう述べている**",
+        },
+      },
+      {
+        item: "明記",
+        reason:
+          "同上（「明記している」という台帳側の言い方。本文は「明言している」と書いている）。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "限界 (i)（$m_0$ と $l_0$ 以外の係数は原論文が mysterious と明記している）",
+          bodyQuote: "と明言している（本論文はこれを原文で確認した）",
+        },
+      },
+      {
+        item: "明示式",
+        reason:
+          "台帳の要約が「明示式が無く」と言う内容を、本文は「）の明示公式が無い。**」と書いている（式と公式の語の違い）。",
+        grounds: {
+          type: "notation",
+          reportQuote: "限界 (i)（低位項の係数に明示式が無く、$d=2$ で有理数であることしか示されていないこと）",
+          bodyQuote: "）の明示公式が無い。**",
+        },
+      },
+],
   },
   {
     block: "paper_061_theorem_V",
@@ -1382,10 +1497,11 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         item: "完全",
         reason:
-          "report の「$(7.2)$ の係数は … と完全に決まる」という評価語。本文は 4 係数を式として書き下しており、$\\nu$ については $\\mathbb{Q}$ であって一般に $\\mathbb{Z}$ でないことまで述べている。",
+          "report の「完全に決まる」という評価語に当たる内容を、本文は「$D$ の係数からの**有限計算で判定できる**」と述べたうえで 4 係数を式として書き下している。同じ内容の言い換えである。",
         grounds: {
-          type: "positioning",
+          type: "paraphrase",
           reportQuote: "$d=-2$ と完全に決まる",
+          bodyQuote: " の係数からの**有限計算で判定できる**。",
         },
       },
     ],
@@ -1450,7 +1566,27 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           "$\\mathbb{Q}_p$ の一階理論が決定可能であること（Ax–Kochen / Ershov）、可算符号化は標準手法であること、差分が「等号を決定可能な水準まで降ろしたこと」の 1 点であること、および 0 件の記録",
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "可算符号化",
+        reason:
+          "台帳の要約が「可算符号化」と 1 語で書く内容を、本文は「**非可算対象を可算符号で扱う**」という移動として書いている。",
+        grounds: {
+          type: "notation",
+          reportQuote: "の一階理論が決定可能であること（Ax–Kochen / Ershov）、可算符号化は標準手法であること",
+          bodyQuote: "非可算対象を可算符号で扱う",
+        },
+      },
+      {
+        item: "記録",
+        reason:
+          "台帳の要約が「0 件の記録」と呼ぶものを、本文は「**既出性の調査結果**」として書いている（記録という語は使わない）。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "の一階理論が決定可能であること（Ax–Kochen / Ershov）、可算符号化は標準手法であること",
+          bodyQuote: "**既出性の調査結果**",
+        },
+      },
+],
   },
   {
     block: "paper_081_remark_scope",
@@ -1488,7 +1624,17 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           },
         },
       },
-    ],
+          {
+        item: "既出性判定",
+        reason:
+          "台帳が範囲を「既出性判定」と要約する言葉。本文は判定の結果そのもの（「**既出性の調査結果**」以下）を書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "命題 T の既出性判定（弱い形が既出）",
+          bodyQuote: "が偶数）が既出**（Kwon–Mednykh–Mednykh）",
+        },
+      },
+],
   },
   {
     block: "paper_082_remark_formalization",
@@ -1506,7 +1652,37 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         covers: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "判定語",
+        reason:
+          "台帳が report の表の構造を「判定語」と呼ぶ言葉。本文は判定語そのもの（完了・部分的・未着手）を挙げている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
+          bodyQuote: "**形式化の現状（完了・部分的・未着手と、その理由）は ",
+        },
+      },
+      {
+        item: "現状表",
+        reason:
+          "同上（表を指す台帳側の呼び名。本文は「形式化の現状（…）は … の表に記録する」と書いている）。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
+          bodyQuote: " の表に記録する。**",
+        },
+      },
+      {
+        item: "明記",
+        reason:
+          "同上（「一次情報で明記する」という台帳側の言い方。本文は「一次情報（試したコードとエラー出力）で具体化してある」と書いている）。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
+          bodyQuote: "具体化してある。",
+        },
+      },
+],
   },
   {
     // cycle 25 step 4b で本文へ入れた Q 系のブロック。
@@ -1565,7 +1741,37 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         quotedOnly: true,
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "所有限・有界",
+        reason:
+          "「至る所有限・有界」を語として切り出したときの断片。本文は「よって至る所有限である。有界性は」と書いている。",
+        grounds: {
+          type: "notation",
+          reportQuote: "命題 Q (Q2)（$G$ 側が至る所有限・有界で、深いレベルでは全点で等号）",
+          bodyQuote: "よって至る所有限である。有界性は ",
+        },
+      },
+      {
+        item: "訂正後",
+        reason:
+          "台帳がどの版の $c_1$ かを断る言葉。本文は訂正後の定義（$\\mathbb{Z}_{\\ge0}$ 上の最小元）そのものを書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "命題 Q (Q5)（悪い点の個数。$c_1$ は cycle 25 step 1 の訂正後の定義）",
+          bodyQuote: "c_1:=\\min\\bigl\\{\\,c\\in\\mathbb{Z}_{\\ge0}",
+        },
+      },
+      {
+        item: "恒等式",
+        reason:
+          "台帳が (Q6) を「数え上げ恒等式」と要約する言葉。本文は等式そのものを書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "命題 Q (Q6)（数え上げ恒等式）",
+          bodyQuote: "**(Q1 整数のままの分解)** ",
+        },
+      },
+],
   },
   {
     // cycle 24 step 4 で本文へ入れた第 11 章の 2 ブロック。
@@ -1670,6 +1876,16 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         quotedOnly: true,
       },
     ],
-    acknowledged: [],
+    acknowledged: [      {
+        item: "訂正後",
+        reason:
+          "台帳がどの版の規約かを断る言葉。本文は訂正後の規約そのものを「**規約（書き落とせない）**」として書いている。",
+        grounds: {
+          type: "paraphrase",
+          reportQuote: "命題 U (U5) の $d$ の側（$\\min$ の規約は訂正後の形）",
+          bodyQuote: " は (M1) の規約どおり ",
+        },
+      },
+],
   },
 ];
