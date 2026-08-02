@@ -12,7 +12,7 @@ $$
 P(z,w)=\det\big(wI-T(z)\big)\in\mathbb{Z}[z^{\pm1},w]\quad(\text{スペクトル曲線}).
 $$
 
-- **アルキメデス側**: $-\beta f=m(P)$（Mahler 測度）＝自由エネルギー密度。型「実現の脱出」+「極限・積分」の脱出。
+- **アルキメデス側**: $-\beta f=m(P)$（Mahler 測度）＝自由エネルギー密度。実対数と極限による $\mathbb{R}$ 脱出の脱出。
 - **$\Lambda$ 側**: 岩澤塔 $L=p^n$ での $v_p(a_{p^n})$ の線形成長率 ＝ $p$ 進 Mahler 測度
   ＝ Deninger の $p$ 進エントロピー ＝ 岩澤 $\mu_p$ 不変量。
   （`docs/research/R-Lambda-duality/README.md` §4.1–4.2）
@@ -46,7 +46,7 @@ CA 側は係数が $\mathbb{F}_p$、格子模型側は係数が $\mathbb{Z}$ と
 
 | 素点 | 量 | 帰属 | CA 側の意味 |
 |---|---|---|---|
-| $\infty$ | $m(P)$ | $\mathbb{R}$（「実現の脱出」・「極限・積分」） | $\mathbb{Z}^2$ 作用（時間＋空間）のエントロピー |
+| $\infty$ | $m(P)$ | $\mathbb{R}$（実対数と極限） | $\mathbb{Z}^2$ 作用（時間＋空間）のエントロピー |
 | $p$ | $p$ 進 Mahler 測度・$\mu_p$ | $\Lambda$ | ？ |
 | — | 線形 CA の位相的エントロピー（時間方向のみ） | **$\rho(\Lambda)$** | D'Amico–Manzini–Margara の閉じた公式 |
 
@@ -82,7 +82,7 @@ Ledrappier の three-dot 系 $P=1+x+y$ over $\mathbb{F}_2$（Rule 90 の時空�
 ```text
 (a) アルキメデス側
     m(1+x+y) を数値評価（既知: 1+x+y の 2 変数 Mahler 測度 = L'(χ_{-3},-1) 型の特殊値）
-    → ℝ 脱出（型「実現の脱出」+「極限・積分」）。値が既知の特殊値になることを確認。
+    → ℝ 脱出（実対数と極限による $\mathbb{R}$ 脱出）。値が既知の特殊値になることを確認。
 
 (b) Λ 側（p 進）
     整数持ち上げ P̃ = 1 + x + y ∈ ℤ[x^±,y^±] に対し
@@ -92,7 +92,7 @@ Ledrappier の three-dot 系 $P=1+x+y$ over $\mathbb{F}_2$（Rule 90 の時空�
 
 (c) CA 側（時間方向）
     F_2 上の Rule 90 について
-      - 有限環 ℤ/L 上の Z_N = 2^{d_N}（種「Φ_N の台と代数的複雑度」の命題 1）
+      - 有限環 ℤ/L 上の Z_N = 2^{d_N}（種「Φ_N の台と代数的複雑度」の命題「線形 CA では台が 1 点に潰れる」）
       - D'Amico-Manzini-Margara の公式による位相的エントロピー h
     を計算し、h が log(整数) の形になることを確認。
 

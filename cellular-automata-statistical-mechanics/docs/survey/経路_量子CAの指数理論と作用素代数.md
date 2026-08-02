@@ -40,7 +40,7 @@ $$
 \log:\ q\mapsto\sum_p v_p(q)\,\ell_p .
 $$
 
-これは `docs/context/対数順序群Λ_定義と最小限の道具.md` の $\Lambda$ の定義そのものである。したがって
+これは `docs/discussion/対数順序群上の統計力学/00_記号と定義.md` の $\Lambda$ の定義そのものである。したがって
 
 > **QCA の GNVW 指数の対数は $\Lambda$ の元であり、合成に関して加法的である。**
 > すなわち $\log\operatorname{ind}:\{\text{1D QCA}\}\to\Lambda$ は群準同型。
@@ -48,7 +48,7 @@ $$
 この量は**完全に決定可能**（有限次元の代数の次元の比＝有理数）で、
 $\mathbb{R}$ 脱出をまったく含まない。「情報の流れ」という物理的に意味のある量が
 $\Lambda$ 値の完全不変量になっている——これは
-`docs/context/基本方針_可算コアとℝ脱出.md` の中心テーゼの、物理側からの独立な支持例である（→ 種「Λ値不変量の三つの顔」）。
+`docs/discussion/可算性の効用/00_可算で完結することの工学的効用.md` の中心テーゼの、物理側からの独立な支持例である（→ 種「Λ値不変量の三つの顔」）。
 
 **文献での扱い**: 指数が有理数であることは強調されるが、
 「$\mathbb{Q}_{>0}\cong\Lambda$ で素因数分解の構造を持つ」という見方は見当たらない。
@@ -114,7 +114,7 @@ Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular aut
 
 **帰属**: $\sqrt2\notin\mathbb{Q}$ だが $\sqrt2\in\overline{\mathbb{Q}}$。
 つまり指数群が $\mathbb{Q}_{>0}\cong\Lambda$ から $\overline{\mathbb{Q}}_{>0}$ へ拡大する。
-**これは `docs/context/対数順序群Λ_定義と最小限の道具.md` の梯子 $\Lambda\prec\overline{\mathbb{Q}}$ の物理的実現である**：
+**これは `docs/discussion/可算性の効用/00_可算で完結することの工学的効用.md` の決定可能性の梯子 $\Lambda\prec\overline{\mathbb{Q}}$ の物理的実現である**：
 
 | QCA の舞台 | 指数群 | 帰属 |
 |---|---|---|
@@ -138,7 +138,7 @@ Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular aut
   すなわち**有限の組合せデータ**。
 
 **帰属**: 完全に組合せ的・可算。$\mathcal{O}_n$ は $C^*$ 代数（非可算）だが、
-自己同型の分類に使われるのは有限の置換データである（「見かけの脱出」型に近い：見かけの非可算性）。
+自己同型の分類に使われるのは有限の置換データである（見かけだけの $\mathbb{R}$ 脱出に近い：見かけの非可算性）。
 
 ## その他の関連（QCA の周辺）
 

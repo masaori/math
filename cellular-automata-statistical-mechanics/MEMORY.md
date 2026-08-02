@@ -1,29 +1,25 @@
 # MEMORY.md — cellular-automata-statistical-mechanics
 
-> 着手前に [`docs/context/`](../docs/context/) を全て読むこと（厳守）。
-> 次に [README.md](README.md)（このプロジェクトのゴール設定）。
+> 着手前に [README.md](README.md)（このプロジェクトのゴール設定）を読むこと。
+> 可算コア／$\mathbb{R}$ 脱出の一次情報は
+> [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
+> [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。
 - **既存研究の網羅調査**（[docs/survey/](docs/survey/)）:
-  CA と統計力学／場の量子論を結ぶ **7 つの独立した経路**（A–G）として整理。
+  CA と統計力学／場の量子論を結ぶ **互いにほとんど交流のない独立した経路**として整理。
   対応辞書（20 行）と、可算性から見た地形の表を作成。文献表は既読／未読を区別して記載。
-- **アイディアの種 10 個**（[docs/ideas/](docs/ideas/)）: 種「Λ値不変量の三つの顔」–種「PCAはΛ上カノニカルの住処」。
+- **アイディアの種 10 個**（[docs/ideas/](docs/ideas/)）: （一覧は docs/ideas/ を参照）。
   上位 3 つ（種「Φ_N の台と代数的複雑度」・種「線形CAとMahler測度」・種「Λ値不変量の三つの顔」）は個別ファイルで深掘り。
-- リポジトリ全体の哲学を [`docs/context/`](../docs/context/) に新設し、
-  CLAUDE.md / AGENTS.md に「着手前に全て読む」を厳守事項として追加（このセッションで実施）。
-- **証明の記述スタイルの正本**を [`docs/context/証明の記述スタイルと四層の検証.md`](../docs/context/証明の記述スタイルと四層の検証.md)
-  に昇格（1ステップ1定理・各行に適用定理を明示・四層の検証）。
-  Ising README と math-prover skill からはポインタを張り、正本を一つにした。
-  → **本プロジェクトでも、種を命題へ昇格させた時点でこのスタイルを適用する**（同 §6）。
 
 ## 次にやること（優先順）
 
 1. **種「Φ_N の台と代数的複雑度」の検算** — `sagemath/check/phi_support/` を作る。
    初等 CA 256 個 × $L=3..14$ × $N=1..24$ で $Z_N=\#\{x:F^N(x)=x\}$ を計算し、
    $\Phi_N=\log Z_N\in\Lambda$ の台を表にする。
-   確認: 加法的規則で台 $\subseteq\{2\}$（命題 1）、可逆規則で $M=0$（命題 2）、
+   確認: 加法的規則で台 $\subseteq\{2\}$（命題「線形 CA では台が 1 点に潰れる」）、可逆規則で $M=0$（命題「可逆 CA では傾きが消える」）、
    台が有界な非加法的規則の有無（仮説 種「Φ_N の台と代数的複雑度」の反例探索）。
    → [docs/ideas/種_Φ_Nの台と代数的複雑度.md](docs/ideas/種_Φ_Nの台と代数的複雑度.md) 「最初の検算（`sagemath/check/phi_support/` に置く）」節
 2. **一次文献の精読（重複潰し）** — [docs/survey/文献表.md](docs/survey/文献表.md) の
@@ -31,7 +27,7 @@
    - D'Amico–Manzini–Margara（線形 CA のエントロピー公式の**正確な形**。種「線形CAとMahler測度」の鍵）
    - GNVW（指数の定義と値域、エントロピー輸送との関係。種「Λ値不変量の三つの顔」の最大の重複リスク）
    - Rujàn 1987（「転送行列と確率的CA」の経路 で既に何が対応づけられているか）
-3. **種「二つの壁は独立」を `docs/context/ℝ脱出の台帳と判定手順.md` に反映** — 「計算不能性の壁」の欄を脱出台帳に追加する。
+3. **種「二つの壁は独立」を `docs/discussion/対数順序群上の統計力学/README.md` に反映** — 「計算不能性の壁」の欄を脱出台帳に追加する。
    これは検算不要（既知結果の整理）で、リポジトリの中心テーゼの精密化になる。**早く反映すべき。**
 4. **種「線形CAとMahler測度」の検算** — `sagemath/check/ledrappier_padic/`。
    Ledrappier three-dot（$1+x+y$ over $\mathbb{F}_2$）で
