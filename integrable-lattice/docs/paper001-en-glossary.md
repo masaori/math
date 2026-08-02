@@ -295,8 +295,9 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 
 ### 1.4 フロントマターと「先行研究との関係」の節で使った語（2026-08-01 追記）
 
-`structured-latex/locales/en/frontmatter.ts`（要旨）と `content/008_prior_art.ts`（先行研究の節）、
-`content/001a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
+`structured-latex/locales/en/frontmatter.ts`（要旨）と
+`structured-latex/locales/en/content/010_prior_art.ts`（先行研究の節）、
+`structured-latex/locales/en/content/001a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
 **後続はここにある語を別の語で訳さないこと。**
 
 | 日本語 | 英語 | 根拠・注意 |
@@ -359,7 +360,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
    一方で本文の地の文は「第 3 章」＝ "Chapter 3" と書いており、日本語版も同じ状態である。
    どちらへ寄せるかは生成器か本文のどちらかを変える判断であり、**独断で変えていない**。
    なお**章番号そのものは、序論より前に `level: 1` の見出しを足すと全部ずれる**ので、
-   英語版限定の節を足すときは末尾へ足すこと（`content/001a_reader_guide.ts` の冒頭コメントを見よ）。
+   英語版限定の節を足すときは末尾へ足すこと（`structured-latex/locales/en/content/001a_reader_guide.ts` の冒頭コメントを見よ）。
 2. **要旨・表題・キーワード・MSC 2020**（`structured-latex/locales/en/frontmatter.ts`）。
    現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
 3. **他章のラベルへの `ref()`**（第 5 章の英訳で暫定的に地の文にしてある）。
@@ -372,7 +373,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 4. **内部レポートのパス**（`\texttt{outputs/reports/...}`）。第 5 章の 3 箇所にある。
    これらは `math` ノードなので、対応検証（数式の多重集合一致）の対象であり、英訳側で
    勝手に書き換えられない。投稿稿にリポジトリ内部のパスを出すのは不適切なので、
-   **日本語版と英語版の両方を同時に直すか、`ja-en-exceptions.ts` に理由つきで登録するかを
+   **日本語版と英語版の両方を同時に直すか、`structured-latex/locales/en/structure-exceptions.ts` に理由つきで登録するかを
    呼び出し元が決める必要がある。** 加えて、生成器はこれを `\path{...}` へ落とすため、
    本文が `\_` とエスケープしている分がそのまま PDF に**バックスラッシュ付きで出ている**
    （実測: `cycle16\_T1\_lambda\_l0\_computability.md`）。

@@ -4,7 +4,7 @@
  * 本文（`content/`）とは別モジュールにしてある。理由は 2 つ。
  *   1. 要旨・キーワード・MSC は**文書順を持つ本文ブロックではない**（`content/` の配列は文書順の
  *      正準表現であり、そこへ本文でないものを混ぜると順序の意味が壊れる）。
- *   2. 日英対応検証（`tools/verify-ja-en-correspondence.ts`）は content 同士を突き合わせる。
+ *   2. 日英対応検証（`tools/verify-localization.ts`）は content 同士を突き合わせる。
  *      日本語版に対応物が無いフロントマターを content へ入れると、対応検証が常に
  *      「英語版だけにあるブロック」を報告することになる。
  *
@@ -14,12 +14,12 @@
  * 【この版で暫定値を差し替えた。何を一次情報で確認し、何を確認できなかったか】
  *
  * - `title` … 日本語版の表題「ℝ/Λ 双対 — 整数スペクトル曲線の二素点と Λ 側の決定可能性」
- *   （`../structured-latex/content/001_intro.ts` の `paper_010_heading_intro`）を、
+ *   （`../../content/001_intro.ts` の `paper_010_heading_intro`）を、
  *   内容以上のことを約束しない範囲で英語の表題にした。**新しい定理を約束する語を入れていない。**
  *
  * - `abstract` … Expositiones Mathematicae の Survey Article の読者像
  *   （「研究を始めた学生や、その話題の専門家でない数学者」。出典は
- *   `../outputs/reports/paper001_submission_venue_survey.md` §3.1）に向けて書き直した。
+ *   `../../../outputs/reports/paper001_submission_venue_survey.md` §3.1）に向けて書き直した。
  *   本論文が新しい定理を主張しないことは維持しつつ、**何を新しく与えるか**（辞書・可算化の精密化・
  *   決定手続きと witness・非対称の地図）を先に述べる。これは
  *   同 §3.9 が指摘した「arXiv のモデレーションは独創性の欠如を却下事由に挙げている」への対応でもある。

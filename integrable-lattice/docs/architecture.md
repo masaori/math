@@ -25,13 +25,15 @@ seed → harvest → extract → classify → gap_map → generate → verify �
 手で管理する出発点。
 
 - `models.md`: six-vertex, eight-vertex, RSOS, ABF, dimer, loop, Potts など。
-- `operations.md`: Yang-Baxter, star-triangle, fusion, T-system, Pfaffian など。
-- `axes.md`: 境界条件、rank、表現、非一様化、楕円化、root of unity、有限サイズ版など。
-- `canonical-papers.md`: seed になる代表論文。
+- 操作型（Yang-Baxter, star-triangle, fusion, T-system, Pfaffian など）、
+  一般化軸（境界条件、rank、表現、非一様化、楕円化、root of unity、有限サイズ版など）、
+  代表論文: **当初それぞれ別ファイルに置く設計だったが、cycle 0 の再定義以降は作っていない。**
+  現存する seed は `models.md` と `lambda-statement-program.md` の 2 つだけである。
 
-### `inputs/queries/`
+### 検索式（未作成）
 
-検索式を管理する。
+**当初 `inputs/queries/` に置く設計だったが、cycle 0 の再定義以降は作っていない。**
+置くとしたら次のものである。
 
 - arXiv query
 - OpenAlex query
@@ -48,7 +50,7 @@ seed → harvest → extract → classify → gap_map → generate → verify �
 - PDF text
 - extracted equations
 
-大きいデータは git 管理しない。再現に必要な取得条件を `inputs/queries/` に置く。
+大きいデータは git 管理しない。再現に必要な取得条件は、上記の検索式と同じく未作成である。
 
 ### `inputs/labels/`
 

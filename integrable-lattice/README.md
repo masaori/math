@@ -75,7 +75,7 @@ integrable-lattice/
 ### 入力
 
 - `inputs/seeds/`: 模型、操作型、一般化軸、代表文献などの seed。
-- `inputs/queries/`: arXiv / OpenAlex / Semantic Scholar などに投げる検索クエリ。
+- 検索クエリ（arXiv / OpenAlex / Semantic Scholar などに投げるもの）: **当初 `inputs/queries/` に置く設計だったが、cycle 0 の再定義（Λ-statement プログラム）以降は作っていない。**
 - `inputs/corpus/`: 取得した論文メタデータ、abstract、LaTeX source、PDF text。大きいデータは原則 git 管理しない。
 - `inputs/labels/`: 人手で確認した分類、既解決判定、誤検出メモ。
 
