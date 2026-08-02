@@ -1,9 +1,9 @@
-# 01. 経路 A — 転送行列と確率的 CA（平衡統計力学への埋め込み）
+# 経路: 転送行列と確率的 CA（平衡統計力学への埋め込み）
 
 **一言**: CA の時間発展方程式は、1 次元高い格子模型の転送行列そのものである。
 この対応により、平衡統計力学の全道具（双対変換、無秩序解、相転移の理論）が CA に使える。
 
-## 1. 基本対応（Rujàn 1987）
+## 基本対応（Rujàn 1987）
 
 Rujàn, "Cellular automata and statistical mechanical models", *J. Stat. Phys.* **49** (1987) 139–222
 がこの経路の正典。要点：
@@ -14,7 +14,7 @@ Rujàn, "Cellular automata and statistical mechanical models", *J. Stat. Phys.* 
 - 得られる厳密結果: 双対変換、厳密写像、"disorder solution"（無秩序解）、"linear solution"。
 - 逆向きの応用として、**望みの性質を持つ CA を統計物理から設計する**という視点を提示している。
 
-### 1.1 具体的な構成
+### 具体的な構成
 
 1 次元 CA、状態 $\sigma_i(t)\in\{0,1\}$、局所規則 $f$。時空図の重み
 
@@ -34,9 +34,9 @@ $Z_N=\#\{\text{周期 }N\text{ の点}\}$、固有値はすべて 1 の冪根。
 
 **帰属**（`docs/context/` の台帳）: $T\in M_d(\mathbb{Z})$、$Z_N\in\mathbb{N}$、$\Phi_N=\log Z_N\in\Lambda$。
 $\mathbb{R}$ 脱出はゼロ。これは `docs/research/R-Lambda-duality/` の定理 P がそのまま適用できる
-最小の設定である（→ 種 S6）。
+最小の設定である（→ 種「Φ_N の台と代数的複雑度」）。
 
-## 2. 確率的 CA と Gibbs 状態（Lebowitz–Maes–Speer 1990）
+## 確率的 CA と Gibbs 状態（Lebowitz–Maes–Speer 1990）
 
 Lebowitz, Maes, Speer, "Statistical mechanics of probabilistic cellular automata",
 *J. Stat. Phys.* **59** (1990) 117–170。
@@ -59,18 +59,18 @@ $$
 関連: Goldstein–Kuik–Lebowitz–Maes, "From PCA's to equilibrium systems and back",
 *Comm. Math. Phys.* **125** (1989) 71。逆向き（平衡系から PCA へ）の構成。
 
-### 2.1 可算性の観点
+### 可算性の観点
 
 PCA の遷移確率を $\mathbb{Q}\cap[0,1]$ に取ると、有限系のすべての量が $\mathbb{Q}$ に留まる。
 `docs/discussion/対数順序群上の統計力学/00_記号と定義.md` §7 の
 「カノニカル分布＝熱浴の状態数比 $\in\mathbb{Q}$、$\exp$ は導出物」という定式化と**そのまま整合する**。
-すなわち **PCA は $\Lambda$ 上のカノニカル形式の自然な住処**である（→ 種 S10）。
+すなわち **PCA は $\Lambda$ 上のカノニカル形式の自然な住処**である（→ 種「PCAはΛ上カノニカルの住処」）。
 
-一方、Gibbs 対応の側で現れる $e^{-\beta H}$ は型 E2 の脱出。
+一方、Gibbs 対応の側で現れる $e^{-\beta H}$ は型「指数評価」の脱出。
 「PCA ↔ Gibbs」の対応において、PCA 側は $\mathbb{Q}$ で閉じ、Gibbs 側は $\mathbb{R}$ に出る——
 **この非対称性は文献では意識されていない**。
 
-## 3. Domany–Kinzel と有向浸透（相転移・普遍類）
+## Domany–Kinzel と有向浸透（相転移・普遍類）
 
 Domany–Kinzel (1984) の確率的 CA は $(1{+}1)$ 次元の有向浸透（DP）を実現する標準模型。
 
@@ -80,10 +80,10 @@ Domany–Kinzel (1984) の確率的 CA は $(1{+}1)$ 次元の有向浸透（DP�
 - **DP 普遍類は Reggeon 場の理論（非ユニタリな QFT）と同じ**というのが古典的な対応
   （Cardy–Sugar 1980）。これは「CA → 場の理論」の最も古い明示的な橋の一つ。
 
-**帰属**: 臨界指数はスケーリング極限（型 E3）で定義され、可算側の代替は現時点で未知
-（`docs/context/03` の課題 3.10）。
+**帰属**: 臨界指数はスケーリング極限（型「極限・積分」）で定義され、可算側の代替は現時点で未知
+（`docs/context/物理数学を可算側で特徴づける課題表.md` の「臨界指数」の項）。
 
-## 4. 全射 CA・可逆 CA の統計力学
+## 全射 CA・可逆 CA の統計力学
 
 - **全射 CA は一様測度を保存する**（Hedlund）。したがって全射 CA の時空測度は
   最大エントロピー測度であり、「無限温度の平衡系」に対応する。
@@ -96,19 +96,19 @@ Domany–Kinzel (1984) の確率的 CA は $(1{+}1)$ 次元の有向浸透（DP�
   dynamical systems", *Physica D* **49** (1991) 295。**加法的保存量の存在の必要十分条件**が
   有限手続きで書ける（→ 帰属は可算、決定可能）。
 
-### 4.1 可算性の観点
+### 可算性の観点
 
 保存量は「局所関数の有限和が時間発展で不変」という**線型条件**であり、
 有限次元 $\mathbb{Q}$-線形代数で決定できる。保存量全体は $\mathbb{Z}$-加群（格子）をなす。
 **これは CA 側で完全に可算・決定可能な構造**であり、
 可積分系の保存量（無限個、超越的な生成関数）と対照的である。
 
-## 5. この経路の空白
+## この経路の空白
 
 1. **PCA 側（$\mathbb{Q}$）と Gibbs 側（$\mathbb{R}$）の非対称性が整理されていない。**
    どの Gibbs 的結論が $\mathbb{Q}$ 側だけで言えるか。
 2. **$\{0,1\}$ 重みの転送行列に特化した数論的構造の研究がない。**
    $T\in M_d(\{0,1\})$ に対する $Z_N=\operatorname{Tr}T^N$ の $p$ 進構造は、
-   `R-Lambda-duality` の枠組みでそのまま扱えるのに、CA の文献では扱われていない（種 S6）。
+   `R-Lambda-duality` の枠組みでそのまま扱えるのに、CA の文献では扱われていない（種「Φ_N の台と代数的複雑度」）。
 3. **可逆 CA の「エネルギー」（加法的保存量）が $\mathbb{Z}$ 値であることの帰結**が、
-   $\Lambda$ 上の統計力学（$\beta\in\Lambda$、第〇法則）と接続されていない（種 S10）。
+   $\Lambda$ 上の統計力学（$\beta\in\Lambda$、第〇法則）と接続されていない（種「PCAはΛ上カノニカルの住処」）。

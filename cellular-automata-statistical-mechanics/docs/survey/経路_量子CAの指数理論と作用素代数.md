@@ -1,9 +1,9 @@
-# 04. 経路 D — 量子 CA の指数理論と作用素代数
+# 経路: 量子 CA の指数理論と作用素代数
 
 **一言**: この経路には、本プロジェクトが探している対応の**最も完成度の高い実例**がある。
 すなわち **「CA 規則 → $\Lambda$ に値をとる完全不変量」**（GNVW 指数）である。
 
-## 1. 設定
+## 設定
 
 量子 CA（QCA）とは、準局所代数 $\mathcal{A}=\bigotimes_{x\in\mathbb{Z}^D}M_d(\mathbb{C})$ の
 **局所性を保つ $*$-自己同型** $\alpha$ のこと（$\alpha$ は台を有限距離しか広げない）。
@@ -12,7 +12,7 @@
 - 有限深さ量子回路（finite-depth circuit）は QCA だが、逆は成り立たない。
   最も簡単な非自明例は**シフト**。
 
-## 2. GNVW 指数（1 次元・完全分類）
+## GNVW 指数（1 次元・完全分類）
 
 Gross–Nesme–Vogts–Werner, "Index theory of one dimensional quantum walks and cellular automata",
 *Comm. Math. Phys.* **310** (2012) 419。
@@ -33,14 +33,14 @@ $$
 - 直観的な意味：**量子情報が右向きに正味どれだけ「汲み上げられる」か**。
   シフトなら $\operatorname{ind}=d$（局所次元）。
 
-### 2.1 これが $\Lambda$ そのものであること（本プロジェクトの着眼）
+### これが $\Lambda$ そのものであること（本プロジェクトの着眼）
 
 $$
 \big(\mathbb{Q}_{>0},\times\big)\ \xrightarrow[\ \cong\ ]{\ \log\ }\ \big(\Lambda,+\big),\qquad
 \log:\ q\mapsto\sum_p v_p(q)\,\ell_p .
 $$
 
-これは `docs/context/01` の $\Lambda$ の定義そのものである。したがって
+これは `docs/context/対数順序群Λ_定義と最小限の道具.md` の $\Lambda$ の定義そのものである。したがって
 
 > **QCA の GNVW 指数の対数は $\Lambda$ の元であり、合成に関して加法的である。**
 > すなわち $\log\operatorname{ind}:\{\text{1D QCA}\}\to\Lambda$ は群準同型。
@@ -48,14 +48,14 @@ $$
 この量は**完全に決定可能**（有限次元の代数の次元の比＝有理数）で、
 $\mathbb{R}$ 脱出をまったく含まない。「情報の流れ」という物理的に意味のある量が
 $\Lambda$ 値の完全不変量になっている——これは
-`docs/context/00` の中心テーゼの、物理側からの独立な支持例である（→ 種 S1）。
+`docs/context/基本方針_可算コアとℝ脱出.md` の中心テーゼの、物理側からの独立な支持例である（→ 種「Λ値不変量の三つの顔」）。
 
 **文献での扱い**: 指数が有理数であることは強調されるが、
 「$\mathbb{Q}_{>0}\cong\Lambda$ で素因数分解の構造を持つ」という見方は見当たらない。
 局所次元 $d$ の素因数だけが指数に現れる（$\operatorname{ind}\in\langle p: p\mid d\rangle$）ので、
 **$\Lambda$ の台が有限で、模型の局所次元で決まる**。この構造は使われていない。
 
-## 3. 高次元と Clifford QCA
+## 高次元と Clifford QCA
 
 Haah, "Clifford quantum cellular automata: Trivial group in 2D and Witt group in 3D",
 *J. Math. Phys.* **62** (2021) 092202 (arXiv:1907.02075)。
@@ -76,7 +76,7 @@ $D$ 次元格子、各セルが素数 $p$ 次元 qudit、Pauli 行列を Pauli �
 **完全に可算・有限体上の代数**であり、$\mathbb{R}$ は一切現れない。
 Witt 群は有限群（$p$ に依存）。
 
-### 3.1 中心電荷との接続（ここで $\mathbb{R}$ が現れる）
+### 中心電荷との接続（ここで $\mathbb{R}$ が現れる）
 
 Shirley–Chen–Dua–Ellison–Tantivasadakarn–Williamson,
 "Three-dimensional quantum cellular automata from chiral semion surface topological order and beyond",
@@ -99,9 +99,9 @@ $$
 $$
 
 **$\Lambda$ → 有限群 → $\mathbb{R}$ という梯子が、そのまま物理的階層になっている。**
-どこで $\mathbb{R}$ が本当に必要になるかを、この系列は明示的に示している（→ 種 S1）。
+どこで $\mathbb{R}$ が本当に必要になるかを、この系列は明示的に示している（→ 種「Λ値不変量の三つの顔」）。
 
-## 4. 融合圏スピン鎖上の指数（$\Lambda\to\overline{\mathbb{Q}}$ の拡大）
+## 融合圏スピン鎖上の指数（$\Lambda\to\overline{\mathbb{Q}}$ の拡大）
 
 Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular automata on fusion spin chains",
 *Ann. Henri Poincaré* (2024), arXiv:2309.10961。
@@ -114,7 +114,7 @@ Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular aut
 
 **帰属**: $\sqrt2\notin\mathbb{Q}$ だが $\sqrt2\in\overline{\mathbb{Q}}$。
 つまり指数群が $\mathbb{Q}_{>0}\cong\Lambda$ から $\overline{\mathbb{Q}}_{>0}$ へ拡大する。
-**これは `docs/context/01` の梯子 $\Lambda\prec\overline{\mathbb{Q}}$ の物理的実現である**：
+**これは `docs/context/対数順序群Λ_定義と最小限の道具.md` の梯子 $\Lambda\prec\overline{\mathbb{Q}}$ の物理的実現である**：
 
 | QCA の舞台 | 指数群 | 帰属 |
 |---|---|---|
@@ -124,9 +124,9 @@ Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular aut
 
 **どの段階でも決して非可算にならない**（最下段の CFT を除く）ことに注意。
 「非可逆対称性を入れると $\Lambda$ から $\overline{\mathbb{Q}}$ へ上がる」という
-明確な階段が見えている（→ 種 S1）。
+明確な階段が見えている（→ 種「Λ値不変量の三つの顔」）。
 
-## 5. 可逆 CA と Cuntz 代数
+## 可逆 CA と Cuntz 代数
 
 古典可逆 CA 全体は両側 full shift の自己同型群 $\operatorname{Aut}(\sigma_n)$（$n=$ 状態数）をなす。
 作用素代数側では：
@@ -138,9 +138,9 @@ Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular aut
   すなわち**有限の組合せデータ**。
 
 **帰属**: 完全に組合せ的・可算。$\mathcal{O}_n$ は $C^*$ 代数（非可算）だが、
-自己同型の分類に使われるのは有限の置換データである（型 E0 に近い：見かけの非可算性）。
+自己同型の分類に使われるのは有限の置換データである（「見かけの脱出」型に近い：見かけの非可算性）。
 
-## 6. その他の関連（QCA の周辺）
+## その他の関連（QCA の周辺）
 
 - Freedman–Hastings, "Classification of quantum cellular automata", *CMP* (2020) — 高次元の枠組み。
 - Farrelly, "A review of quantum cellular automata", *Quantum* **4** (2020) 368 — 総説。
@@ -149,11 +149,11 @@ Jones–Naaijkens–Penneys–Wallick ほか, "An index for quantum cellular aut
 - Clifford QCA と TQFT・可逆部分代数（*PRX Quantum*, 2025）— 全空間次元での実現と
   **代数的 $L$ 理論に整合する次元周期性**。
 
-## 7. この経路の空白
+## この経路の空白
 
 1. **GNVW 指数を $\Lambda$ 値の量として扱った研究がない。** 素因数分解の構造
-   （どの素数が台に乗るか、$v_p(\operatorname{ind})$ が何を意味するか）は未探索（→ 種 S1）。
+   （どの素数が台に乗るか、$v_p(\operatorname{ind})$ が何を意味するか）は未探索（→ 種「Λ値不変量の三つの顔」）。
 2. **古典可逆 CA に限ったときの指数の意味が整理されていない。**
    置換行列に対する指数は何か。決定論的 CA の「情報流」と加法的保存量の関係は。
-3. **Clifford QCA の Laurent 多項式（$\mathbb{F}_p$ 上）と、経路 F の線形 CA の Laurent 多項式は
-   同じ環である。** 両者を繋いだ議論は見当たらない（→ 種 S2 と S1 の接続）。
+3. **Clifford QCA の Laurent 多項式（$\mathbb{F}_p$ 上）と、「代数力学」の経路の線形 CA の Laurent 多項式は
+   同じ環である。** 両者を繋いだ議論は見当たらない（→ 種「線形CAとMahler測度」と 種「Λ値不変量の三つの顔」の接続）。
