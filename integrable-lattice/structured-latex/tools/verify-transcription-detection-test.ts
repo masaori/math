@@ -28,6 +28,7 @@ import {
   checkBareFamilyUse,
   checkCoverage,
   checkExemptionGrounds,
+  POSITIONING_MARKERS,
   readPassage,
   viewOf,
   type BlockView,
@@ -93,8 +94,77 @@ for (const rot of EXEMPTION_ROTS) {
   }
 }
 
-const total = FIXTURES.length + EXEMPTION_ROTS.length;
-console.log(`\n${total - failures} / ${total} 件で検出を実証した（転記事故 ${FIXTURES.length} 件 + 免除の腐り ${EXEMPTION_ROTS.length} 件）。`);
+// =============================================================================
+// cycle 26 step 4 で足した 2 つの強化が効いていることの実証
+// =============================================================================
+console.log("\n[cycle 26 step 4] 照合対象 0 件の解消と positioning の目印");
+
+let cycle26Checks = 0;
+const report26 = (name: string, ok: boolean, detail: string): void => {
+  cycle26Checks += 1;
+  if (!ok) failures += 1;
+  console.log(`  ${ok ? "検出" : "**失敗**"}: ${name}`);
+  console.log(`      ${detail}`);
+};
+
+// (1) `covers` フォールバック — 条件文が 0 文の passage で照合対象が 0 件にならないこと。
+{
+  const zeroCoverageBlocks = [
+    "paper_023_definition_massieu",
+    "paper_045_theorem_lte",
+    "paper_054_remark_limits",
+    "paper_072_remark_qp_free",
+    "paper_082_remark_formalization",
+  ];
+  let checkedAll = 0;
+  let fallbacksAll = 0;
+  for (const block of zeroCoverageBlocks) {
+    const link = SOURCE_LINKS.find((l) => l.block === block);
+    const view = views.get(block);
+    if (link === undefined || view === undefined) continue;
+    const passages = [];
+    for (const passage of link.passages) {
+      passages.push({ passage, lines: (await readPassage(passage)).lines });
+    }
+    const result = checkCoverage(link, view, passages);
+    checkedAll += result.checkedAtoms + result.checkedTerms;
+    fallbacksAll += result.coversFallbacks;
+  }
+  report26(
+    "cycle 23 以来「照合対象 0 件」だった 5 ブロックが、いま何かを照合している",
+    checkedAll > 0 && fallbacksAll > 0,
+    `照合対象 ${checkedAll} 件 / \`covers\` へ回した passage ${fallbacksAll} 件（どちらも 0 なら強化が効いていない）`,
+  );
+}
+
+// (2) positioning の目印 — 目印を持たない引用は赤くなること。
+{
+  const withoutMarker = "$d=-2$ と完全に決まる";
+  const withMarker = "本サイクルの主結果である";
+  report26(
+    "自己言及の語彙を含まない引用は positioning として通らない",
+    !POSITIONING_MARKERS.some((m) => withoutMarker.includes(m)),
+    `"${withoutMarker}" は目印を 1 つも含まない`,
+  );
+  report26(
+    "自己言及の語彙を含む引用は通る（偽陽性でない）",
+    POSITIONING_MARKERS.some((m) => withMarker.includes(m)),
+    `"${withMarker}" は目印「本サイクル」を含む`,
+  );
+  const remaining = SOURCE_LINKS.flatMap((l) => l.acknowledged)
+    .filter((a) => a.grounds.type === "positioning");
+  report26(
+    "現存する positioning の免除はすべて目印を持つ",
+    remaining.every((a) => POSITIONING_MARKERS.some((m) => a.grounds.reportQuote.includes(m))),
+    `positioning ${remaining.length} 件がすべて目印を含む`,
+  );
+}
+
+const total = FIXTURES.length + EXEMPTION_ROTS.length + cycle26Checks;
+console.log(
+  `\n${total - failures} / ${total} 件で検出を実証した` +
+    `（転記事故 ${FIXTURES.length} 件 + 免除の腐り ${EXEMPTION_ROTS.length} 件 + cycle 26 の強化 ${cycle26Checks} 件）。`,
+);
 if (failures > 0) process.exit(1);
 
 function reportRot(rot: ExemptionRot, ok: boolean, detail: string): void {

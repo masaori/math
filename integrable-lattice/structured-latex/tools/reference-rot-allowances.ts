@@ -4,23 +4,15 @@
  * 型と、型ごとに何を機械検証するかは reference-rot-model.ts の `ReferenceGrounds` の doc にある。
  * ここは表だけを持つ。**根拠なしの免除は型で書けない。**
  *
- * **`outOfScope` は「黙らせるための型」ではない。** 本当に腐っていて、直すのが
- * cycle 25 step 2 の担当範囲外（本文・ロケール本文・docs・runbook）であるものを、
+ * **`outOfScope` の登録は現在 0 件である**（cycle 26 step 2 が 17 件すべてを直した）。
+ * 同型は「黙らせるための型」ではなく、本当に腐っていて直すのが当該 step の担当範囲外であるものを
  * **直すべきものとして記録**する型である。直れば「宣言が余っている」で赤になるので、
- * 直したのに宣言が残る状態は作れない。件数は毎回出力する。
+ * 直したのに宣言が残る状態は作れない——**実際、cycle 25 が記録した 17 件は
+ * cycle 26 step 2 が直した時点で登録を消さねばならなくなった。設計どおりに働いた。**
+ * 件数は毎回出力する。
  */
 
 import type { ReferenceAllowance } from "./reference-rot-model.ts";
-
-/** `outOfScope` の記録先（本 step の report）。 */
-const REPORT = "outputs/reports/cycle25_ops_guard_missing_proof_and_rotten_refs.md";
-const RECORDED = { report: REPORT, marker: "## 5. 実在しない参照の実測と、その内訳" };
-
-const outOfScope = (ownedBy: string): ReferenceAllowance["grounds"] => ({
-  type: "outOfScope",
-  ownedBy,
-  recordedIn: RECORDED,
-});
 
 export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   // --- 本文（ロケール）: cycle 24 step 2 の腐りのうち、手作業の訂正が届かなかった残り ---
@@ -63,41 +55,10 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "historical", marker: "以前はこの役割を自前の" },
   },
   {
-    file: "structured-latex/locales/en/allowance.ts",
-    reference: "locales/en/math-exceptions.ts",
-    reason:
-      "監査のエラーメッセージが実在しないファイル名を指している（実ファイルは locales/en/structure-exceptions.ts）。読んだ人が探して見つからない。",
-    grounds: outOfScope("locales/en/ は本 step の担当範囲外"),
-  },
-  {
     file: "structured-latex/locales/en/diff-rules.ts",
     reference: "ja-en-exceptions.ts",
     reason: "「は当初『ブロック id → 理由の文字列』だった」＝過去の状態の記述。",
     grounds: { type: "historical", marker: "は当初「ブロック id → 理由の文字列」だった" },
-  },
-  {
-    file: "structured-latex/locales/en/diff-rules.ts",
-    reference: "verify-ja-en-detection-test.ts",
-    reason: "改名済みのテストを現在形で指している（現在は tools/verify-localization-detection-test.ts）。",
-    grounds: outOfScope("locales/en/ は本 step の担当範囲外"),
-  },
-  {
-    file: "structured-latex/locales/en/frontmatter.ts",
-    reference: "tools/verify-ja-en-correspondence.ts",
-    reason: "撤去済みの比較器を現在形で指している（現在は tools/verify-localization.ts）。",
-    grounds: outOfScope("locales/en/ は本 step の担当範囲外"),
-  },
-  {
-    file: "structured-latex/locales/en/frontmatter.ts",
-    reference: "../structured-latex/content/001_intro.ts",
-    reason: "旧 structured-latex-en/ 時代の相対パスが残っている。",
-    grounds: outOfScope("locales/en/ は本 step の担当範囲外"),
-  },
-  {
-    file: "structured-latex/locales/en/frontmatter.ts",
-    reference: "../outputs/reports/paper001_submission_venue_survey.md",
-    reason: "旧 structured-latex-en/ 時代の相対パスが残っている。",
-    grounds: outOfScope("locales/en/ は本 step の担当範囲外"),
   },
   {
     file: "structured-latex/locales/en/structure-exceptions.ts",
@@ -187,66 +148,27 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "illustration", marker: "訂正後の記述では挙がらない（偽陽性でない）" },
   },
 
-  // --- docs / README（本 step の担当範囲外）-----------------------------------------
+  // --- docs / README: 「当初こう置く設計だったが作っていない」という過去の記述 -------------
+  //
+  // cycle 26 step 2 が、これらを**現在形の参照から過去形の記述へ書き換えた**。
+  // 参照そのものは文中に残る（何を作らなかったかを書くため）ので、`historical` で説明する。
   {
     file: "README.md",
     reference: "inputs/queries/",
-    reason: "構成として掲げているが未作成のディレクトリ。",
-    grounds: outOfScope("README は本 step の担当範囲外"),
+    reason: "「当初 …に置く設計だったが、cycle 0 の再定義以降は作っていない」＝過去の設計の記述。",
+    grounds: { type: "historical", marker: "に置く設計だったが、cycle 0 の再定義" },
   },
   {
     file: "docs/architecture.md",
     reference: "inputs/queries/",
     reason: "同上。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/architecture.md",
-    reference: "operations.md",
-    reason: "inputs/seeds/ に置く予定として挙げているが未作成。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/architecture.md",
-    reference: "axes.md",
-    reason: "同上。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/architecture.md",
-    reference: "canonical-papers.md",
-    reason: "同上。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/schemas.md",
-    reference: "inputs/seeds/operations.md",
-    reason: "同上（スキーマの列挙元として名指ししているが未作成）。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
+    grounds: { type: "historical", marker: "に置く設計だったが、cycle 0 の再定義以降は作っていない" },
   },
   {
     file: "docs/paper-001-migration-status.md",
     reference: "tools/verify-no-lost-proofs.ts",
     reason: "「Ising 側にある …」＝別プロジェクトのファイル。",
     grounds: { type: "otherProject", project: "exact-solution-of-2d-ising-model" },
-  },
-  {
-    file: "docs/paper001-en-glossary.md",
-    reference: "content/008_prior_art.ts",
-    reason: "実ファイルは locales/en/content/010_prior_art.ts（移設と章番号の付け替えで腐った）。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/paper001-en-glossary.md",
-    reference: "content/001a_reader_guide.ts",
-    reason: "実ファイルは locales/en/content/001a_reader_guide.ts。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/paper001-en-glossary.md",
-    reference: "ja-en-exceptions.ts",
-    reason: "撤去済みのツールを現在形で指している。",
-    grounds: outOfScope("docs は本 step の担当範囲外"),
   },
   {
     file: "docs/structured-latex-decision.md",
@@ -259,24 +181,5 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     reference: "tools/generate-index.ts",
     reason: "同上（当時の複製表の行）。",
     grounds: { type: "historical", marker: "「なぜ一度は複製という判断をしたか」の記録として残す" },
-  },
-  {
-    file: "docs/tasks/auto-loop-runbook.md",
-    reference: "schema.mjs",
-    reason:
-      "実ファイルは schema.ts。runbook 自身が「ソース形式は TypeScript に統一する（.mjs は使わない）」と書いているのに、参照だけ .mjs のまま残っている。",
-    grounds: outOfScope("runbook は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/tasks/auto-loop-runbook.md",
-    reference: "tools/validate-content.mjs",
-    reason: "同上（実ファイルは tools/validate-content.ts）。",
-    grounds: outOfScope("runbook は本 step の担当範囲外"),
-  },
-  {
-    file: "docs/tasks/auto-loop-runbook.md",
-    reference: "verify-no-lost-proofs.mjs",
-    reason: "同上（Ising 側の実ファイルは verify-no-lost-proofs.ts）。",
-    grounds: outOfScope("runbook は本 step の担当範囲外"),
   },
 ];

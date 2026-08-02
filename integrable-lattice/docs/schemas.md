@@ -70,7 +70,7 @@ LLM 分類後の追加フィールド:
 
 ```yaml
 model_hints:           # list[str] from inputs/seeds/models.md enum
-operation_hints:       # list[str] from inputs/seeds/operations.md enum
+operation_hints:       # list[str]（操作型の enum。専用の seed ファイルは未作成）
 status_hints:          # "open" | "solved" | "review" | "unknown"
 ```
 

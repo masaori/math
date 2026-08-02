@@ -1,0 +1,192 @@
+✔ [8655/8679] Built IntegrableLattice.BouquetClosedForm (22s)
+✔ [8656/8679] Built IntegrableLattice.DigitTheorem (22s)
+⚠ [8657/8679] Built IntegrableLattice.PropN (22s)
+warning: IntegrableLattice/PropN.lean:84:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+✔ [8658/8679] Built IntegrableLattice.PropT (25s)
+✔ [8659/8679] Built IntegrableLattice.PropW (26s)
+✔ [8660/8679] Built IntegrableLattice.TowerTypeCoefficients (5.4s)
+✔ [8661/8679] Built IntegrableLattice.TruncVal (49s)
+⚠ [8662/8679] Built IntegrableLattice.PropL (30s)
+warning: IntegrableLattice/PropL.lean:57:5: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8663/8679] Built IntegrableLattice.PropB (52s)
+✔ [8664/8679] Built IntegrableLattice.EllTwoClosedForm (51s)
+⚠ [8665/8679] Built IntegrableLattice.PropV (52s)
+warning: IntegrableLattice/PropV.lean:70:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:129:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: IntegrableLattice/PropV.lean:131:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+✔ [8666/8679] Built IntegrableLattice.PropC (52s)
+⚠ [8667/8679] Built IntegrableLattice.SInfinityDecision (52s)
+warning: IntegrableLattice/SInfinityDecision.lean:169:50: This simp argument is unused:
+  h
+
+Hint: Omit it from the simp argument list.
+  simp [Finsupp.single_apply, pairAddHom, pair,̵ ̵h̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8668/8679] Built IntegrableLattice.PropCTracePeriod (53s)
+warning: IntegrableLattice/PropCTracePeriod.lean:138:23: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [8669/8679] Built IntegrableLattice.DigitBranchRecursion (53s)
+⚠ [8670/8679] Built IntegrableLattice.GeneralTowerClosedForm (53s)
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:208:36: Variable name `hL` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:227:2: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:244:5: Variable name `hWθ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:278:33: Variable name `hℓ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:292:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:284:43: Variable name `hj` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:313:43: Variable name `hℓ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:325:42: Variable name `hℓ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/GeneralTowerClosedForm.lean:408:34: Variable name `hℓ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8671/8679] Built IntegrableLattice.PropBTracePeriod (54s)
+⚠ [8672/8679] Built IntegrableLattice.DropAssumptionBStar (54s)
+warning: IntegrableLattice/DropAssumptionBStar.lean:148:62: Variable name `hρ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/DropAssumptionBStar.lean:200:49: Variable name `hM` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/DropAssumptionBStar.lean:238:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: IntegrableLattice/DropAssumptionBStar.lean:268:31: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵m̵u̵l̵_̵c̵o̵m̵m̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: IntegrableLattice/DropAssumptionBStar.lean:284:20: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/DropAssumptionBStar.lean:304:29: Variable name `hB0` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8673/8679] Built IntegrableLattice.PropA (9.8s)
+⚠ [8674/8679] Built IntegrableLattice.PropCPeriod (8.1s)
+warning: IntegrableLattice/PropCPeriod.lean:160:35: Variable name `hk` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8675/8679] Built IntegrableLattice.CoefficientsDE (8.5s)
+⚠ [8676/8679] Built IntegrableLattice.Cycle24Corrections (9.5s)
+warning: IntegrableLattice/Cycle24Corrections.lean:326:40: Variable name `hℓ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/Cycle24Corrections.lean:376:33: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/Cycle24Corrections.lean:376:46: Variable name `hθ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8677/8679] Built IntegrableLattice.Cycle25Corrections (6.6s)
+warning: IntegrableLattice/Cycle25Corrections.lean:122:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: IntegrableLattice/Cycle25Corrections.lean:151:45: Variable name `hℓ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: IntegrableLattice/Cycle25Corrections.lean:479:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: IntegrableLattice/Cycle25Corrections.lean:486:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: IntegrableLattice/Cycle25Corrections.lean:510:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: IntegrableLattice/Cycle25Corrections.lean:518:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+✔ [8678/8679] Built IntegrableLattice (7.9s)
+Build completed successfully (8679 jobs).
+EXIT=0

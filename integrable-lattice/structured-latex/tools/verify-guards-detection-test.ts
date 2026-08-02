@@ -372,7 +372,25 @@ const pick = (predicate: (a: ReferenceAllowance) => boolean): ReferenceAllowance
 const historical = pick((a) => a.grounds.type === "historical");
 const generated = pick((a) => a.grounds.type === "generated");
 const other = pick((a) => a.grounds.type === "otherProject");
-const scoped = pick((a) => a.grounds.type === "outOfScope");
+// `outOfScope` の登録は cycle 26 step 2 が 17 件すべて直したので **0 件になった**。
+// 生きた表から拾うと、表が空になった瞬間にこのテストが例外で落ちる
+// （cycle 25 step 4b が `PROOF_DEBTS` で踏んだのと同じ形）。
+// **腐らせ方は 1 つも減らさないまま、基準を固定値へ移す。**
+const scoped: ReferenceAllowance = {
+  // 参照そのものは実在の腐り（`historical` と同じ (file, reference)）を借りる。
+  // そうしないと「宣言が余っている」が先に出て、見たい腐り方に届かない。
+  file: historical.file,
+  reference: historical.reference,
+  reason: "（テスト用の固定値。cycle 26 step 2 が直すまで実在した登録の形）",
+  grounds: {
+    type: "outOfScope",
+    ownedBy: "runbook は本 step の担当範囲外",
+    recordedIn: {
+      report: "outputs/reports/cycle25_ops_guard_missing_proof_and_rotten_refs.md",
+      marker: "## 5. 実在しない参照の実測と、その内訳",
+    },
+  },
+};
 
 const allowanceRots: { name: string; allowance: ReferenceAllowance; expect: string }[] = [
   {

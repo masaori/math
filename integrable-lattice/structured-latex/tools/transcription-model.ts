@@ -80,7 +80,20 @@ export type Passage = {
   from: string;
   /** 範囲の終了行に含まれる文字列（`from` より後で最初に一致した行まで）。 */
   to: string;
-  /** その範囲が本文のどの項に対応するか（人が読むためのもの。検査には使わない）。 */
+  /**
+   * その範囲が本文のどの項に対応するか。
+   *
+   * **cycle 26 step 4 まで「人が読むためのもの。検査には使わない」だった。**
+   * いまは**条件文が 1 文も取れなかった passage に限り、ここを照合対象へ回す**。
+   *
+   * 理由: cycle 23 以来「照合対象が 0 件だったブロック」が 5 件あり
+   * （`paper_023_definition_massieu` / `paper_045_theorem_lte` / `paper_054_remark_limits` /
+   * `paper_072_remark_qp_free` / `paper_082_remark_formalization`）、
+   * **台帳の目印が生きていることしか検査していなかった**。件数は毎回出していたが減らせていない、
+   * というのが cycle 25 総括の指摘である。
+   * `covers` は台帳の書き手が「この範囲は本文のこれに当たる」と宣言した文なので、
+   * **そこに現れる数式アトムと専門語は本文にあるはずである**。それを検査する。
+   */
   covers: string;
   /**
    * 範囲のうち**引用（`>` で始まる行）だけ**を見る。
@@ -138,7 +151,14 @@ export type ExemptionGrounds =
   /**
    * **report が自分の作業を位置づける言葉**（主張ではない）。
    * 腐り方: report が書き換わればその言葉自体が消える（検査 1・2 で捕まる）。
-   * **検証できないこと**: 「これは主張ではない」という判定そのもの。**機械検証できない型**。
+   *
+   * **cycle 26 step 4 で機械検証を 1 つ足した**: 引用は
+   * `POSITIONING_MARKERS`（下の閉じた語彙）のいずれかを**必ず含まねばならない**。
+   * これにより「任意の数学的な文を positioning と名乗って黙らせる」ことができなくなる。
+   * 語彙は「report が自分の作業について語るときの言い回し」だけで構成する。
+   *
+   * **なお検証できないこと**（型の限界は残る）: 目印を含む文が
+   * 「本当に主張ではない」かどうかそのもの。件数は毎回出す。
    */
   | { type: "positioning"; reportQuote: string }
   /**
@@ -194,6 +214,12 @@ export type CoverageResult = {
   passageLines: number;
   /** そのうち条件・例外・仮定を述べていると判定した文の数。 */
   conditionSentences: number;
+  /**
+   * 条件文が 1 文も取れず、台帳の `covers` を照合対象へ回した passage の数（cycle 26 step 4）。
+   * **0 にするのが目標ではない**。`covers` へ回っていること自体は正常な運用であり、
+   * 黙って何も照合しない状態を無くすための仕組みである。件数は毎回出す。
+   */
+  coversFallbacks: number;
   checkedAtoms: number;
   checkedTerms: number;
   acknowledgedUsed: number;
@@ -250,6 +276,36 @@ const CONDITION_MARKERS = [
   "とき", "ならば", "成り立たない", "注意", "一般に", "ときに限", "無限", "有限",
 ];
 
+/**
+ * **`positioning` の目印**（cycle 26 step 4）。
+ *
+ * `positioning` は「report が自分の作業を位置づける言葉であって主張ではない」という免除だが、
+ * cycle 25 までは**引用が何であっても通った**（型の限界として件数を出すだけだった）。
+ * ここに閉じた語彙を置き、**引用がこのどれかを含むことを必須にする**。
+ * これで「ただの数学の文を positioning と名乗って黙らせる」ことができなくなる。
+ *
+ * 語彙は **report が自分（この作業・この文書）について語るときの言い回し**だけで構成する。
+ * 数学の内容を指す語は入れない（入れると目印の意味が無くなる）。
+ * 増やすときは、その語が自己言及であることを説明できる場合に限る。
+ */
+export const POSITIONING_MARKERS = [
+  "本サイクル",
+  "本 step",
+  "本ステップ",
+  "本レビュー",
+  "本検証",
+  "本論文",
+  "本節",
+  "副産物",
+  "訂正",
+  "以下では",
+  "ここでは",
+  "未確認",
+  "新規性は主張しない",
+  "記録として",
+  "位置づけ",
+] as const;
+
 /** 条件・例外・仮定を述べている文だけを残す。 */
 export function conditionSentences(lines: readonly string[]): string[] {
   // 1 つの文が改行で 2 行に分かれていることがある（実際 cycle 20 の $A_1\equiv0$ は
@@ -295,13 +351,19 @@ export function checkCoverage(
   const terms = new Set<string>();
   let lineCount = 0;
   let sentenceCount = 0;
+  let coversFallbacks = 0;
   for (const { passage, lines } of passageLines) {
     const scoped = passage.quotedOnly === true
       ? lines.filter((line) => line.trimStart().startsWith(">"))
       : lines;
     lineCount += scoped.length;
-    const picked = conditionSentences(scoped);
-    sentenceCount += picked.length;
+    const fromReport = conditionSentences(scoped);
+    sentenceCount += fromReport.length;
+    // **条件文が 1 文も取れなかった passage は、台帳の `covers` を照合対象へ回す**
+    // （cycle 26 step 4。それまでは何も照合せず、目印が生きていることしか見ていなかった）。
+    const usedCovers = fromReport.length === 0;
+    if (usedCovers) coversFallbacks += 1;
+    const picked = usedCovers ? [passage.covers] : fromReport;
     for (const line of picked) {
       const found = itemsOfSentence(line);
       for (const atom of found.atoms) {
@@ -330,6 +392,7 @@ export function checkCoverage(
     block: link.block,
     passageLines: lineCount,
     conditionSentences: sentenceCount,
+    coversFallbacks,
     checkedAtoms: atoms.size,
     checkedTerms: terms.size,
     acknowledgedUsed: used.size,
@@ -398,6 +461,7 @@ export type GroundsFinding = {
     | "分担先のブロックが本文に無い"
     | "分担先のブロックがその項目を持っていない"
     | "参照先の記録が見つからない"
+    | "positioning の目印が引用に無い"
     | "根拠の指定が短すぎて何も pin していない";
   detail: string;
 };
@@ -430,7 +494,11 @@ export async function checkExemptionGrounds(
     const scoped = passage.quotedOnly === true
       ? lines.filter((line) => line.trimStart().startsWith(">"))
       : lines;
-    sentences.push(...conditionSentences(scoped));
+    const fromReport = conditionSentences(scoped);
+    // checkCoverage と**同じ**フォールバックを掛ける（cycle 26 step 4）。
+    // ここを揃えないと、`covers` から出た項目に免除を書いても
+    // 「根拠の引用が report に無い」で落ちて、免除が書けなくなる。
+    sentences.push(...(fromReport.length === 0 ? [passage.covers] : fromReport));
   }
   const blockText = view.prose + " " + view.formulas.join(" ");
   const out: GroundsFinding[] = [];
@@ -464,7 +532,20 @@ export async function checkExemptionGrounds(
       continue;
     }
     // --- 型ごとの検査 ---
-    if (grounds.type === "positioning") continue; // 検証できるのはここまで（型の限界。件数を毎回出す）
+    if (grounds.type === "positioning") {
+      // cycle 26 step 4: 「主張ではない」ことは機械で確かめられないが、
+      // **report が自分の作業について語っている文であること**の目印は確かめられる。
+      // 目印が無ければ、その文はただの数学の文であって positioning ではない。
+      if (!POSITIONING_MARKERS.some((marker) => grounds.reportQuote.includes(marker))) {
+        add(
+          item,
+          "positioning の目印が引用に無い",
+          `引用が report の自己言及の語彙（${POSITIONING_MARKERS.join(" / ")}）を 1 つも含まない。` +
+            `ただの数学の文を positioning と名乗って黙らせることはできない: "${grounds.reportQuote}"`,
+        );
+      }
+      continue; // 検証できるのはここまで（型の限界。件数を毎回出す）
+    }
     if (grounds.type === "notation" || grounds.type === "weaker" || grounds.type === "example" || grounds.type === "paraphrase") {
       if (grounds.bodyQuote.length < MIN_BODY_QUOTE) {
         add(item, "根拠の指定が短すぎて何も pin していない", `bodyQuote が ${grounds.bodyQuote.length} 文字: "${grounds.bodyQuote}"`);
