@@ -1,6 +1,6 @@
 # 03 代数的 QFT（Haag–Kastler）
 
-代数的 QFT は、Wightman 流の「非有界作用素値超関数の族」（→ 02 章）を捨て、**時空の開領域 $\mathcal{O}$ に有界作用素の $C^*$ 代数 $\mathfrak{A}(\mathcal{O})$ を対応させる関手（ネット）**を基本対象に据える。場そのものは理論の同一性に関与せず、代数のネットとその上の状態だけが物理的内容を担う、という立場である。この枠組みでは超選択則が Doplicher–Haag–Roberts のテンソル圏として、粒子統計が統計次元として、真空の局所構造が von Neumann 環の型（ほぼ常に hyperfinite type III$_1$ factor）として現れる。可算・非可算の分別は **［ℝ 脱出］** の印で追跡する。とくに「型 III$_1$ 因子は最小射影をもたないが、有限次元代数の可算増大列の弱閉包（hyperfiniteness）である」という二重性が、本リポジトリの関心から見た本章の核心である。
+代数的 QFT は、Wightman 流の「非有界作用素値超関数の族」（→ [02 Wightman 公理系と再構成定理](02_Wightman公理系と再構成定理.md)）を捨て、**時空の開領域 $\mathcal{O}$ に有界作用素の $C^*$ 代数 $\mathfrak{A}(\mathcal{O})$ を対応させる関手（ネット）**を基本対象に据える。場そのものは理論の同一性に関与せず、代数のネットとその上の状態だけが物理的内容を担う、という立場である。この枠組みでは超選択則が Doplicher–Haag–Roberts のテンソル圏として、粒子統計が統計次元として、真空の局所構造が von Neumann 環の型（ほぼ常に hyperfinite type III$_1$ factor）として現れる。可算・非可算の分別は **［ℝ 脱出］** の印で追跡する（記法・ラベルの規約は [00 問いの設定と記法](00_問いの設定と記法.md)）。とくに「型 III$_1$ 因子は最小射影をもたないが、有限次元代数の可算増大列の弱閉包（hyperfiniteness）である」という二重性が、本リポジトリの関心から見た本章の核心である。
 
 ---
 
@@ -18,7 +18,7 @@
 
 **［ℝ 脱出］** ノルムの値域が $\mathbb{R}_{\ge0}$ であること、完備性を要求すること、この 2 点で $C^*$ 代数は定義の段階で非可算集合に依拠する。有限次元 $C^*$ 代数（$\bigoplus_k M_{n_k}(\mathbb{C})$）は $\mathbb{C}$ 上の有限次元代数だが、無限次元の場合、ノルム完備化は不可欠である。$C^*$ 恒等式は代数構造からノルムを一意に決める（$C^*$ 代数のノルムは代数構造の関数であって追加データではない）という強い性質をもつ点は注意に値する。
 
-**Gelfand–Naimark 定理（確立した定理、1943）**：任意の $C^*$ 代数は、ある Hilbert 空間 $\mathcal{H}$ 上の有界作用素環 $B(\mathcal{H})$ の閉 $*$-部分代数に等長 $*$-同型。可換な場合は $\mathfrak{A}\cong C_0(X)$（$X$ は局所コンパクト Hausdorff）。
+**Gelfand–Naimark 定理**（**［定理］** Gelfand–Naimark 1943）：任意の $C^*$ 代数は、ある Hilbert 空間 $\mathcal{H}$ 上の有界作用素環 $B(\mathcal{H})$ の閉 $*$-部分代数に等長 $*$-同型。可換な場合は $\mathfrak{A}\cong C_0(X)$（$X$ は局所コンパクト Hausdorff）。
 
 ### 1.2 状態と GNS 構成
 
@@ -30,7 +30,7 @@
 2. $\mathcal{H}_\omega:=\overline{\mathfrak{A}/\mathcal{N}_\omega}$（**［ℝ 脱出］** 完備化）、
 3. $\pi_\omega(a)[b]:=[ab]$（$*$-表現）、$\Omega_\omega:=[\mathbf{1}]$（巡回ベクトル）、$\omega(a)=\langle\Omega_\omega,\pi_\omega(a)\Omega_\omega\rangle$。
 
-$\omega$ が純粋状態 $\iff$ $\pi_\omega$ が既約。02 章の Wightman 再構成定理は、Borchers 代数上の状態に対する GNS 構成そのものであった。
+$\omega$ が純粋状態 $\iff$ $\pi_\omega$ が既約。[02](02_Wightman公理系と再構成定理.md) §5 の Wightman 再構成定理は、Borchers 代数上の状態に対する GNS 構成そのものであった。
 
 ### 1.3 von Neumann 環と可換子定理
 
@@ -38,7 +38,7 @@ $\mathcal{M}\subseteq B(\mathcal{H})$ に対し **可換子** $\mathcal{M}':=\{b
 
 **定義**：単位元を含む $*$-部分代数 $\mathcal{M}\subseteq B(\mathcal{H})$ が **von Neumann 環**とは $\mathcal{M}=\mathcal{M}''$。
 
-**二重可換子定理（von Neumann 1930；確立した定理）**：単位的 $*$-部分代数 $\mathcal{M}\subseteq B(\mathcal{H})$ について
+**二重可換子定理**（**［定理］** von Neumann 1930）：単位的 $*$-部分代数 $\mathcal{M}\subseteq B(\mathcal{H})$ について
 $$
 \mathcal{M}=\mathcal{M}''\iff \mathcal{M}\text{ が弱作用素位相で閉}\iff\mathcal{M}\text{ が強作用素位相で閉}.
 $$
@@ -158,26 +158,26 @@ $$
 - **直和・部分対象**：$\mathfrak{A}$ の局所環が型 III（§4）で無限の等長系をもつことから存在（この点で型 III 性が圏構造の存在に効く）。
 - **統計作用素（対称性／組紐）**：$\rho,\sigma$ を空間的に離れた領域に局在させ交換して得るユニタリ $\varepsilon(\rho,\sigma)\in\operatorname{Hom}(\rho\sigma,\sigma\rho)$。
 
-**次元による分岐（確立した定理）**：
+**次元による分岐（**［定理］**）**：
 - **時空次元 $d\ge3$**：二重錐の因果補 $\mathcal{O}'$ が**連結**なので、$\varepsilon$ の作り方が局在領域の取り方によらず、$\varepsilon(\rho,\sigma)\varepsilon(\sigma,\rho)=\mathbf{1}$（**対称テンソル圏**）。統計次元 $d(\rho)$ は**正整数または $\infty$**（Bose/Fermi 統計とパラ統計）。
 - **時空次元 $d=2$（および $S^1$ 上の chiral 理論）**：$\mathcal{O}'$ が非連結（左右の 2 成分）なので、$\varepsilon$ は左右で異なり **組紐（braiding）** にしかならない。統計次元は非整数値を取りうる：Longo の指数定理により
 $$
 d(\rho)^2=\bigl[\mathcal{M}(\mathcal{O}):\rho\bigl(\mathcal{M}(\mathcal{O})\bigr)\bigr]\qquad(\text{Jones 指数}),
 $$
-Jones の指数定理から $d(\rho)\in\{1\}\cup\bigl\{2\cos(\pi/n)\mid n\in\mathbb{Z}_{\ge3}\bigr\}\cup[2,\infty]$。これが「エニオン統計」（物理側の慣用表現）の数学的内容であり、組紐テンソル圏・モジュラーテンソル圏を通じて共形場理論・頂点作用素代数（→ 07 章）へ接続する。
+Jones の指数定理から $d(\rho)\in\{1\}\cup\bigl\{2\cos(\pi/n)\mid n\in\mathbb{Z}_{\ge3}\bigr\}\cup[2,\infty]$。これが「エニオン統計」（物理側の慣用表現）の数学的内容であり、組紐テンソル圏・モジュラーテンソル圏を通じて共形場理論・頂点作用素代数（→ [07 共形場理論と頂点作用素代数](07_共形場理論と頂点作用素代数.md)）へ接続する。
 
 **［ℝ 脱出］** Jones 指数は $[1,\infty]\subseteq\mathbb{R}\cup\{\infty\}$ に値をとる実数量だが、その**値域が離散的な部分（$[1,4)$ の範囲）をもつ**ことが Jones の定理の内容である。すなわち「連続パラメータに見えるものが可算集合に落ちる」現象で、本リポジトリの関心（どこまで可算で閉じるか）から見て重要な例である。
 
 ### 3.4 Doplicher–Roberts 再構成定理
 
-> **定理（Doplicher–Roberts 1989, 1990；確立した定理）**
+> **［定理］（Doplicher–Roberts 1989, 1990）**
 > $d\ge3$ の Haag–Kastler ネット $\mathfrak{A}$（Haag 双対性・真空の一意性・Bose/Fermi 統計を仮定）に対し、**コンパクト群** $G$ と場のネット $\mathfrak{F}$（$G$ が作用、graded locality を満たす）が同型を除いて一意に存在して
 > $$\mathfrak{A}(\mathcal{O})=\mathfrak{F}(\mathcal{O})^G,\qquad \mathrm{DHR}(\mathfrak{A})\ \simeq\ \mathrm{Rep}_{\mathrm{fin}}(G)$$
 > （テンソル圏としての同値）。さらに $\mathcal{H}_0$ 上のすべての DHR セクターの直和が $\mathfrak{F}$ の真空表現を与える。
 
 **抽象版（DR 双対性）**：単位対象の自己準同型が $\mathbb{C}$ で、共役をもち、置換対称性が「正常な統計」をもつ対称テンソル $C^*$ 圏は、あるコンパクト群 $G$ の有限次元ユニタリ表現の圏 $\mathrm{Rep}_{\mathrm{fin}}(G)$ に同値であり、$G$ は同型を除き一意。これは Tannaka–Krein 双対性の非可換版（前もって forgetful functor を与えない形）である。
 
-**意味**：**内部対称性の群 $G$ とその表現論は、観測可能量のネットから完全に復元される。** 「ゲージ群」は理論の入力ではなく、ネットの局所構造の帰結である。02 章の再構成定理（超関数 → Hilbert 空間・場）に対応する、代数的 QFT 側の再構成定理といえる。
+**意味**：**内部対称性の群 $G$ とその表現論は、観測可能量のネットから完全に復元される。** 「ゲージ群」は理論の入力ではなく、ネットの局所構造の帰結である。[02](02_Wightman公理系と再構成定理.md) §5 の再構成定理（超関数 → Hilbert 空間・場）に対応する、代数的 QFT 側の再構成定理といえる。
 
 **［ℝ 脱出］** $G$ はコンパクト位相群で一般に非可算（例：$SU(N)$）。しかしその表現圏は可算個の既約対象しかもたない（コンパクト群の既約ユニタリ表現の同型類は可算とは限らないが、$G$ が可分コンパクトなら可算）。DHR 圏の側は「可算個の対象 ＋ 有限次元の射空間」という組合せ的データで、群の非可算性はそこから再構成される。
 
@@ -187,7 +187,7 @@ Jones の指数定理から $d(\rho)\in\{1\}\cup\bigl\{2\cos(\pi/n)\mid n\in\mat
 
 ### 4.1 主定理
 
-> **定理（Araki 1964；Longo 1979；Fredenhagen 1985；Buchholz–D'Antoni–Fredenhagen 1987）**
+> **［定理］（［部分的］：仮定つき）（Araki 1964；Longo 1979；Fredenhagen 1985；Buchholz–D'Antoni–Fredenhagen 1987）**
 > 真空表現における二重錐の局所 von Neumann 環 $\mathcal{M}(\mathcal{O})=\pi_0(\mathfrak{A}(\mathcal{O}))''$ は、自由場をはじめとする既知のほぼすべての模型において、**一意な hyperfinite 型 III$_1$ 因子**（Araki–Woods–Connes–Haagerup の因子 $R_\infty$）に $*$-同型である。Buchholz–D'Antoni–Fredenhagen は、適切なスケーリング（短距離での漸近的スケール不変性）の仮定のもとでこれが一般的に成り立つことを示した。
 
 対照的に、**大域代数** $\mathcal{M}(M)=B(\mathcal{H}_0)$ は型 I である。すなわち「型 I は大域、型 III は局所」という分離がある。
@@ -215,7 +215,7 @@ $$
 
 ### 4.3 Reeh–Schlieder と真空
 
-02 章 §6.1 の Reeh–Schlieder 定理は、代数的定式化では次の形になる：任意の $\mathcal{O}\in\mathcal{K}$ に対し $\Omega_0$ は $\mathcal{M}(\mathcal{O})$ について**巡回的**（$\overline{\mathcal{M}(\mathcal{O})\Omega_0}=\mathcal{H}_0$）かつ**分離的**（$a\in\mathcal{M}(\mathcal{O})$, $a\Omega_0=0\Rightarrow a=0$；局所性と $\mathcal{O}'$ に対する巡回性から従う）。
+[02](02_Wightman公理系と再構成定理.md) §6.1 の Reeh–Schlieder 定理は、代数的定式化では次の形になる：任意の $\mathcal{O}\in\mathcal{K}$ に対し $\Omega_0$ は $\mathcal{M}(\mathcal{O})$ について**巡回的**（$\overline{\mathcal{M}(\mathcal{O})\Omega_0}=\mathcal{H}_0$）かつ**分離的**（$a\in\mathcal{M}(\mathcal{O})$, $a\Omega_0=0\Rightarrow a=0$；局所性と $\mathcal{O}'$ に対する巡回性から従う）。
 
 **これが決定的である**：巡回的かつ分離的なベクトルの存在は Tomita–Takesaki 理論の適用条件そのものであり、したがって **AQFT ではすべての局所領域についてモジュラー理論が使える**。
 
@@ -225,7 +225,7 @@ $\mathcal{M}\subseteq B(\mathcal{H})$ を von Neumann 環、$\Omega\in\mathcal{H
 
 1. 反線形作用素 $S_0\colon\mathcal{M}\Omega\to\mathcal{M}\Omega$, $S_0(a\Omega):=a^*\Omega$ を定める（分離性より well-defined、巡回性より稠密定義）。
 2. $S_0$ は可閉。閉包 $S=\overline{S_0}$ の**極分解** $S=J\Delta^{1/2}$。ここで $\Delta=S^*S$ は正の自己共役作用素（**モジュラー作用素**、一般に非有界）、$J$ は反ユニタリ対合（**モジュラー共役**）。
-3. **Tomita–Takesaki 定理（確立した定理、Tomita 1967, Takesaki 1970）**：
+3. **Tomita–Takesaki 定理**（**［定理］** Tomita 1967, Takesaki 1970）：
 $$
 J\mathcal{M}J=\mathcal{M}',\qquad \Delta^{it}\mathcal{M}\Delta^{-it}=\mathcal{M}\quad(t\in\mathbb{R}).
 $$
@@ -238,7 +238,7 @@ $$
 
 **楔領域** $W_R:=\{x\in\mathbb{R}^d\mid x^1>|x^0|\}$、$\mathcal{M}(W_R)$ を対応する von Neumann 環とする。
 
-> **定理（Bisognano–Wichmann 1975, 1976；確立した定理）**
+> **［定理］（Bisognano–Wichmann 1975, 1976）**
 > Wightman 場から構成されたネットにおいて、$(\mathcal{M}(W_R),\Omega_0)$ のモジュラー対象は
 > $$\Delta_{W_R}^{it}=U\bigl(\Lambda_{W_R}(-2\pi t)\bigr),\qquad J_{W_R}=\Theta\,U\bigl(R_1(\pi)\bigr)$$
 > で与えられる。ここで $\Lambda_{W_R}(s)$ は $W_R$ を保つ 1 径数 boost 群、$R_1(\pi)$ は $x^1$ 軸まわりの $\pi$ 回転、$\Theta$ は PCT 作用素。
@@ -269,7 +269,33 @@ $$
 
 ---
 
-## 5. 型 III の出現がなぜ本質か（可算性の観点から）
+## 5. 到達点と限界
+
+### 5.1 厳密な例が存在するもの（**［定理］** としての構成）
+
+1. **自由場**：スカラー（Weyl 代数／CCR）、Dirac（CAR）。Araki (1963, 1964)、Segal。局所環は型 III$_1$。すべての Haag–Kastler 公理（Haag 双対性を含む）を満たす。
+2. **一般化自由場・Wick 多項式のネット**。
+3. **共形ネット**（$S^1$ 上のカイラル共形場理論）：$\mathrm{Diff}(S^1)$ 共変な von Neumann 環のネット。Virasoro ネット、loop 群ネット（Wassermann 1998、Toledano-Laredo 1999）、格子ネット、余次元有限の部分ネット（Longo–Xu）など多数。**中心電荷 $c<1$ の共形ネットの完全分類**（Kawahigashi–Longo 2004）は、$A$-$D$-$E$ 型のモジュラー不変量による分類として完結している。→ [07](07_共形場理論と頂点作用素代数.md) §6。
+4. **1+1 次元可積分模型**（Lechner 2008 ほか）：因子化 $S$ 行列（2 体 $S$ 行列 $S_2$ が Yang–Baxter と交叉対称性を満たす）から、まず**楔代数**を polarization-free generator により構成し、**モジュラー核性**（modular nuclearity）を検証して二重錐代数
+$$
+\mathcal{M}(\mathcal{O})=\mathcal{M}(W_1)\cap\mathcal{M}(W_2)
+$$
+が非自明（$\Omega_0$ について巡回的）であることを証明する。これにより、**相互作用する（$S\ne\mathbf{1}$）相対論的 QFT が Haag–Kastler 公理を完全に満たす形で構成された**（1+1 次元、質量つき、Buchholz–Lechner–Summers らによる拡張あり）。可積分格子模型の Yang–Baxter 構造が QFT の存在証明に直接使われる例であり、本リポジトリの [`integrable-lattice/`](../../../integrable-lattice/README.md) プロジェクトと接続する点である（→ [10](10_可算性から見た場の量子論.md)）。
+5. **摂動的代数的 QFT**（Brunetti–Fredenhagen、Hollands–Wald）：曲がった時空を含む一般の場合に、形式的べき級数のレベルで局所共変な代数を構成。**収束は示されておらず、$\hbar$ や結合定数についての形式級数にとどまる。**
+
+### 5.2 限界・未解決
+
+1. **4 次元の相互作用模型は未構成**（**［未解決］**）：$d=4$ で自由でない Haag–Kastler ネットは一つも構成されていない。[02](02_Wightman公理系と再構成定理.md) §9 と同じ壁である。
+2. **Haag 双対性の破れ**：ソリトンセクター、位相的欠陥のある理論、$d=2$ では二重錐に対して破れうる。破れの度合いは Roberts の「双対性の破れの指数」で測られる。
+3. **DHR 解析の適用範囲**：長距離の電荷（Gauss 則をもつゲージ電荷、電磁場の電荷）は DHR 条件を満たさない。massive な場合の拡張として Buchholz–Fredenhagen (1982) の**錐状局在**（spacelike cone localization）があり、$d\ge4$ で置換統計が回復する。massless の場合（赤外問題、infraparticle）は一般論が未確立（**［未解決］**）。
+4. **モジュラー共変性の公理化**：Bisognano–Wichmann が純代数的公理から従うか（§4.5）。一般には **［未解決］**。
+5. **局所環の型の一般証明**：「二重錐の局所環は必ず hyperfinite III$_1$」は、スケーリングや核性の仮定なしには証明されていない（**［部分的］**：限定的な定理であり、無条件の定理ではない）。
+6. **エントロピー**：型 III$_1$ ゆえ局所エントロピーは発散する。相対エントロピー・相対モジュラー理論による定式化（Araki、Longo、Casini–Huerta）が代替を与えるが、「領域の絡み合いエントロピー」の直接的な数学的定義は存在しない。
+7. **本ノートで文献確認を要する点**：(i) 局所環の型 III$_1$ 性についての Fredenhagen (1985) と Buchholz–D'Antoni–Fredenhagen (1987) の仮定の正確な形。(ii) DHR 圏における統計次元の値域と Jones 指数の対応（Longo の指数定理の適用条件）。(iii) 低次元での組紐圏がモジュラーになるための条件（完全有理性、Kawahigashi–Longo–Müger）。
+
+---
+
+## 6. 型 III の出現がなぜ本質か（可算性の観点から）
 
 本リポジトリの関心（どこまで可算で閉じ、どこで $\mathbb{R}$ へ出るか）に沿って整理する。
 
@@ -288,37 +314,11 @@ $$
 
 > 代数の「骨格」は可算（有限次元代数の可算列とその埋め込み）であり、型 III$_1$ という性質は**弱閉包を取る操作（＝ ℝ 脱出）から生じる**。
 
-有限次元代数の列だけを見ていても型は見えない。型は極限操作の副産物である。この構図は、02 章の「Wightman 関数は可算個の Hermite 係数だが、条件の意味づけは $\mathbb{R}$」という構図と同型である。
+有限次元代数の列だけを見ていても型は見えない。型は極限操作の副産物である。この構図は、[02](02_Wightman公理系と再構成定理.md) §4.3 の「Wightman 関数は可算個の Hermite 係数だが、条件の意味づけは $\mathbb{R}$」という構図と同型である。
 
 **(c) 核性条件（nuclearity）は「近似的有限次元性」の定量化。** Buchholz–Wichmann の核性条件は、写像 $\Theta_{\beta,\mathcal{O}}\colon\mathfrak{A}(\mathcal{O})\to\mathcal{H}_0$, $a\mapsto e^{-\beta H}a\Omega_0$ が核型作用素であり、その核ノルムがエネルギーと体積について適切な増大度をもつことを要求する。これは「有限エネルギー・有限体積の自由度の個数が実質的に有限である」ことの表現で、分裂性・熱力学的性質・粒子解釈を導く。**格子模型・可算模型との接点はここにある。**
 
-**(d) 格子模型との比較**：量子スピン鎖（$\bigotimes_{n\in\mathbb{Z}}M_2(\mathbb{C})$ の準局所代数）では、有限領域の代数は**有限次元**（型 I$_{2^N}$）であり、型 III は現れない。型 III は連続時空の「任意に小さいスケールにも自由度がある」ことの帰結である。したがって、**QFT を格子で近似する（＝可算化する）と型 III 性は消え、連続極限で復活する**。どこで型が変わるかを追跡することが、本リポジトリの「可算／非可算の分別」の QFT 版にあたる。
-
----
-
-## 6. 到達点と限界
-
-### 6.1 厳密な例が存在するもの（確立した構成）
-
-1. **自由場**：スカラー（Weyl 代数／CCR）、Dirac（CAR）。Araki (1963, 1964)、Segal。局所環は型 III$_1$。すべての Haag–Kastler 公理（Haag 双対性を含む）を満たす。
-2. **一般化自由場・Wick 多項式のネット**。
-3. **共形ネット**（$S^1$ 上のカイラル共形場理論）：$\mathrm{Diff}(S^1)$ 共変な von Neumann 環のネット。Virasoro ネット、loop 群ネット（Wassermann 1998、Toledano-Laredo 1999）、格子ネット、余次元有限の部分ネット（Longo–Xu）など多数。**中心電荷 $c<1$ の共形ネットの完全分類**（Kawahigashi–Longo 2004）は、$A$-$D$-$E$ 型のモジュラー不変量による分類として完結している。→ 07 章。
-4. **1+1 次元可積分模型**（Lechner 2008 ほか）：因子化 $S$ 行列（2 体 $S$ 行列 $S_2$ が Yang–Baxter と交叉対称性を満たす）から、まず**楔代数**を polarization-free generator により構成し、**モジュラー核性**（modular nuclearity）を検証して二重錐代数
-$$
-\mathcal{M}(\mathcal{O})=\mathcal{M}(W_1)\cap\mathcal{M}(W_2)
-$$
-が非自明（$\Omega_0$ について巡回的）であることを証明する。これにより、**相互作用する（$S\ne\mathbf{1}$）相対論的 QFT が Haag–Kastler 公理を完全に満たす形で構成された**（1+1 次元、質量つき、Buchholz–Lechner–Summers らによる拡張あり）。可積分格子模型の Yang–Baxter 構造が QFT の存在証明に直接使われる例であり、本リポジトリの `integrable-lattice/` プロジェクトと接続する点である。
-5. **摂動的代数的 QFT**（Brunetti–Fredenhagen、Hollands–Wald）：曲がった時空を含む一般の場合に、形式的べき級数のレベルで局所共変な代数を構成。**収束は示されておらず、$\hbar$ や結合定数についての形式級数にとどまる。**
-
-### 6.2 限界・未解決
-
-1. **4 次元の相互作用模型は未構成（未解決）**：$d=4$ で自由でない Haag–Kastler ネットは一つも構成されていない。02 章 §9 と同じ壁である。
-2. **Haag 双対性の破れ**：ソリトンセクター、位相的欠陥のある理論、$d=2$ では二重錐に対して破れうる。破れの度合いは Roberts の「双対性の破れの指数」で測られる。
-3. **DHR 解析の適用範囲**：長距離の電荷（Gauss 則をもつゲージ電荷、電磁場の電荷）は DHR 条件を満たさない。massive な場合の拡張として Buchholz–Fredenhagen (1982) の**錐状局在**（spacelike cone localization）があり、$d\ge4$ で置換統計が回復する。massless の場合（赤外問題、infraparticle）は一般論が未確立（**未解決**）。
-4. **モジュラー共変性の公理化**：Bisognano–Wichmann が純代数的公理から従うか（§4.5）。一般には未解決。
-5. **局所環の型の一般証明**：「二重錐の局所環は必ず hyperfinite III$_1$」は、スケーリングや核性の仮定なしには証明されていない（**限定的な定理であり、無条件の定理ではない**）。
-6. **エントロピー**：型 III$_1$ ゆえ局所エントロピーは発散する。相対エントロピー・相対モジュラー理論による定式化（Araki、Longo、Casini–Huerta）が代替を与えるが、「領域の絡み合いエントロピー」の直接的な数学的定義は存在しない。
-7. **本ノートで文献確認を要する点**：(i) 局所環の型 III$_1$ 性についての Fredenhagen (1985) と Buchholz–D'Antoni–Fredenhagen (1987) の仮定の正確な形。(ii) DHR 圏における統計次元の値域と Jones 指数の対応（Longo の指数定理の適用条件）。(iii) 低次元での組紐圏がモジュラーになるための条件（完全有理性、Kawahigashi–Longo–Müger）。
+**(d) 格子模型との比較**：量子スピン鎖（$\bigotimes_{n\in\mathbb{Z}}M_2(\mathbb{C})$ の準局所代数）では、有限領域の代数は**有限次元**（型 I$_{2^N}$）であり、型 III は現れない。型 III は連続時空の「任意に小さいスケールにも自由度がある」ことの帰結である。したがって、**QFT を格子で近似する（＝可算化する）と型 III 性は消え、連続極限で復活する**。どこで型が変わるかを追跡することが、本リポジトリの「可算／非可算の分別」の QFT 版にあたる（→ [10 可算性から見た場の量子論](10_可算性から見た場の量子論.md)）。
 
 ---
 
