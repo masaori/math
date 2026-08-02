@@ -1,0 +1,8 @@
+⚠ [2997/2997] Built IntegrableLattice.Cycle26ProofSteps (2.7s)
+warning: IntegrableLattice/Cycle26ProofSteps.lean:75:6: Variable name `M` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully (2997 jobs).
+EXIT=0

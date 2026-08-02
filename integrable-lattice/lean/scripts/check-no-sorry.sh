@@ -392,6 +392,16 @@ targets=(
   # cycle 25 step 3: まだ通していなかったもの
   IntegrableLattice.Cycle25.sum_of_uniform_fibers
   IntegrableLattice.Cycle25.Agen_level_indep
+  # --- cycle 26 step 6: 命題 G′ の**証明そのもの**の検算（Cycle26ProofSteps.lean）---
+  IntegrableLattice.phi_pow_ge
+  IntegrableLattice.line_hypothesis_suffices
+  IntegrableLattice.sum_phi_pow_prime
+  IntegrableLattice.line_contribution
+  IntegrableLattice.level_ratio
+  IntegrableLattice.g3_coefficients_match
+  IntegrableLattice.gprime3_hypothesis_holds
+  IntegrableLattice.junk_reading_excludes_ell_three
+  IntegrableLattice.junk_reading_keeps_five_and_seven
 )
 
 {
