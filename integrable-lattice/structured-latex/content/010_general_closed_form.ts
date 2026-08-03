@@ -45,6 +45,10 @@ export default defineBlocks([
       "sagemath/check/cycle21_T3_general_closed_form",
       "sagemath/check/cycle21_T3_b_star",
     ],
+    lean: [
+      "IntegrableLattice.K_set_nonempty",
+      "IntegrableLattice.K_set_bounded",
+    ],
     statement: [
       paragraph([
         ref("paper_prop_K"),
@@ -1277,6 +1281,13 @@ export default defineBlocks([
     verification: [
       "sagemath/check/cycle22_T3_coefficients_d_e",
       "sagemath/check/cycle26_T3_carryover_verifications",
+    ],
+    lean: [
+      "IntegrableLattice.u_ell2_four_dvd_iff",
+      "IntegrableLattice.u_ell2_two_dvd",
+      "IntegrableLattice.u_ell2_junk_reading_differs",
+      "IntegrableLattice.u4_ell2_five_coefficients",
+      "IntegrableLattice.u1_d_empty_case",
     ],
     statement: [
       paragraph([

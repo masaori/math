@@ -29,6 +29,9 @@ export default defineBlocks([
     labels: ["paper_prop_R"],
     habitat: "Qbar",
     verification: ["sagemath/check/cycle20_T3_cancellation"],
+    lean: [
+      "IntegrableLattice.sigma_ne_zero_of_lambda_ne_zero",
+    ],
     statement: [
       paragraph([
         ref("paper_prop_J"),

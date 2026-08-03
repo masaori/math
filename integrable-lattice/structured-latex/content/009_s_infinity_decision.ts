@@ -28,6 +28,13 @@ export default defineBlocks([
     labels: ["paper_prop_K"],
     habitat: "Qbar",
     verification: ["sagemath/check/cycle20_T3_s_infinity"],
+    lean: [
+      "IntegrableLattice.k5_argmin_unique_above",
+      "IntegrableLattice.r0_add_one_comm",
+      "IntegrableLattice.r0_empty_case",
+      "IntegrableLattice.lambda_u_at_zero",
+      "IntegrableLattice.lambda_u_eq_succ_log",
+    ],
     statement: [
       paragraph([
         ref("paper_prop_J"),

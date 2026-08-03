@@ -36,6 +36,12 @@ export default defineBlocks([
     labels: ["paper_prop_G_ell2"],
     habitat: "Qbar",
     verification: ["sagemath/check/cycle20_T3_ell2"],
+    lean: [
+      "IntegrableLattice.gpp1_both_even",
+      "IntegrableLattice.gpp1_not_both_four",
+      "IntegrableLattice.gpp1_lambda_ne",
+      "IntegrableLattice.gpp1_st_not_both_ge",
+    ],
     statement: [
       paragraph([
         "Let ",

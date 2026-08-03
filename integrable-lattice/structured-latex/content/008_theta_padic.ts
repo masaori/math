@@ -42,6 +42,7 @@ export default defineBlocks([
       "IntegrableLattice.sum_mul_pow",
       "IntegrableLattice.sum_Theta_J8",
       "IntegrableLattice.ordKappa_J8",
+      "IntegrableLattice.j1_freshman_dream",
     ],
     statement: [
       paragraph([

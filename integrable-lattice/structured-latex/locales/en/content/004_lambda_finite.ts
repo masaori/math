@@ -701,6 +701,9 @@ export default defineBlocks([
       "IntegrableLattice.dvd_of_mulVec_dvd",
       "IntegrableLattice.lucas_two_power_not_period",
       "IntegrableLattice.trace_period_not_affine",
+      "IntegrableLattice.w_lifting_step",
+      "IntegrableLattice.w_lifting_pow",
+      "IntegrableLattice.w_lifting_pow_specializes",
     ],
     statement: [
       paragraph([
