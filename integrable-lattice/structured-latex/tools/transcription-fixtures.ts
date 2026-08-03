@@ -190,8 +190,13 @@ export const EXEMPTION_ROTS: readonly ExemptionRot[] = [
     provenance:
       "「(H) を仮定し、塔が**非退化**」のような定型句は report の中で何度も出る（定理 N1 と定理 N2）。" +
       "複数に当たる引用は「その文が動いたら落ちる」という pin になっていないので、根拠として認めない。",
+    // cycle 27 step 1 まではこの再現データは同じブロックの免除「仮定」を使っていた。
+    // その免除は、本文へ (G6) の $\min\emptyset$ の規約を入れた際に「仮定」の語が本文へ現れて失効し、
+    // 台帳から消えた（**免除が余れば赤くなる**という設計どおりの動き）。
+    // 再現データが生きた台帳を引いているので、同じブロックの現存する免除へ付け替える。
+    // 差分の種類（引用が report の複数の文に当たる）は変えていない。
     block: "paper_053_theorem_lower_order",
-    item: "仮定",
+    item: "同値",
     mutate: { kind: "quotePointsElsewhere", reportQuote: "(H) を仮定し、塔が**非退化**" },
     expect: "根拠の引用が report の複数の文に当たる",
   },

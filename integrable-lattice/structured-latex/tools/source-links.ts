@@ -1037,16 +1037,6 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           bodyQuote: "を固有値データから決める式が要るが、これは Wieferich 型の量であり",
         },
       },
-      {
-        item: "最小",
-        reason:
-          "「最小の反例」の「最小」。本文は同じ反例（$T=(3)$、$p=2$、$t_k=1,2,2,4,8,16$）を挙げている。",
-        grounds: {
-          type: "example",
-          reportQuote: "最小の反例:",
-          bodyQuote: "t_k=1,2,2,4,8,16",
-        },
-      },
           {
         item: "最良性",
         reason:
@@ -1311,17 +1301,6 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           type: "paraphrase",
           reportQuote: "すべての点 $(\\zeta,\\xi)\\neq(1,1)$",
           bodyQuote: "v_\\ell(E)=k/\\varphi(\\ell^M)",
-        },
-      },
-      {
-        item: "仮定",
-        reason:
-          "「(H) を仮定し」の (H) は cycle 14 以来の共通設定（有限連結多重グラフの $\\mathbb{Z}_\\ell^2$ 塔）であり、本文はこのブロックの冒頭で命題 W の設定を参照している。",
-        grounds: {
-          type: "division",
-          reportQuote: "(H) を仮定し、塔が**非退化**かつ $J_0=1$",
-          holder: "paper_063_theorem_W",
-          holderItem: "**非退化**",
         },
       },
       {
