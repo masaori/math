@@ -34,9 +34,9 @@ import blocks_009c_drop_assumption_b_star from './content/009c_drop_assumption_b
 import blocks_010_general_closed_form from './content/010_general_closed_form.ts'
 
 import blocks_en_001_intro from './locales/en/content/001_intro.ts'
-import blocks_en_001a_reader_guide from './locales/en/content/001a_reader_guide.ts'
 import blocks_en_002_setup from './locales/en/content/002_setup.ts'
 import blocks_en_003_archimedean from './locales/en/content/003_archimedean.ts'
+import blocks_en_003a_reader_guide from './locales/en/content/003a_reader_guide.ts'
 import blocks_en_004_lambda_finite from './locales/en/content/004_lambda_finite.ts'
 import blocks_en_005_duality from './locales/en/content/005_duality.ts'
 import blocks_en_005b_theta_infinity from './locales/en/content/005b_theta_infinity.ts'
@@ -107,9 +107,9 @@ export type _TranslationOnlyLabelIsDisjoint = AssertNoDuplicate<Extract<Translat
 /** 翻訳ロケール en の全ブロック（文書順）。 */
 export type AllBlocks_en = [
   ...typeof blocks_en_001_intro,
-  ...typeof blocks_en_001a_reader_guide,
   ...typeof blocks_en_002_setup,
   ...typeof blocks_en_003_archimedean,
+  ...typeof blocks_en_003a_reader_guide,
   ...typeof blocks_en_004_lambda_finite,
   ...typeof blocks_en_005_duality,
   ...typeof blocks_en_005b_theta_infinity,

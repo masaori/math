@@ -13,7 +13,7 @@ export default defineBlocks([
     kind: "heading",
     level: 1,
     origin: { path: "structured-latex/content/002_setup.ts", ordinal: 1 },
-    title: { text: "設定 — 整数スペクトル曲線と周期点数" },
+    title: { text: "設定" },
     labels: [],
   },
   {

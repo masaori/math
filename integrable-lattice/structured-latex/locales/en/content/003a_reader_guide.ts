@@ -29,7 +29,9 @@
  * そこで**新しい `level: 1` 見出しを作らず**、ファイル名を `001_intro.ts` と `002_setup.ts` の間に
  * 挿さる `001a_...` にして、ブロックを**第 1 章（序論）の末尾**へ置いた。章番号は 1 つも動かない。
  * これは投稿先調査が「**序論で**書き足す必要がある」と書いていることとも一致する。
- * （`'_'` = 0x5F < `'a'` = 0x61 なので、`001_intro.ts` < `001a_reader_guide.ts` < `002_setup.ts`。）
+ * （`'_'` = 0x5F < `'a'` = 0x61 なので、`003_archimedean.ts` < `003a_reader_guide.ts` < `004_lambda_finite.ts`。）
+ * cycle 27 でこの位置へ移した。第 1 章末尾に置くと、案内が第 2–3 章で定義する語
+ * （整数スペクトル曲線・周期点数・Mahler 測度）を定義より前に使うことになるためである。
  *
  * 章番号を動かさずに済むので、後ろに足す章（`008_theta_padic.ts` = 第 9 章、
  * `010_prior_art.ts` = 第 10 章）だけが新しい章になる。
@@ -52,7 +54,7 @@ export default defineBlocks([
   {
     id: "paper_014_remark_survey_scope",
     kind: "remark",
-    origin: { path: "structured-latex/locales/en/content/001a_reader_guide.ts", ordinal: 1 },
+    origin: { path: "structured-latex/locales/en/content/003a_reader_guide.ts", ordinal: 1 },
     title: { text: "What this survey surveys" },
     labels: ["paper_survey_scope"],
     habitat: "mixed",
@@ -130,7 +132,7 @@ export default defineBlocks([
   {
     id: "paper_015_remark_reading_guide",
     kind: "remark",
-    origin: { path: "structured-latex/locales/en/content/001a_reader_guide.ts", ordinal: 2 },
+    origin: { path: "structured-latex/locales/en/content/003a_reader_guide.ts", ordinal: 2 },
     title: { text: "How to read this survey, and what is not assumed" },
     labels: ["paper_reading_guide"],
     habitat: "mixed",
@@ -198,10 +200,10 @@ export default defineBlocks([
         " side. Chapter 5 is the dictionary itself, which is the centre of the paper. Chapter 6 gives ",
         "three propositions with explicit decision procedures. Chapter 7 draws the asymmetry, Chapter 8 ",
         "states what the paper does not claim and what the formalisation in Lean does and does not cover, ",
-        "Chapter 9 refines the vanishing depth of Chapter 5 over the ",
+        "Chapter 9 refines the depth notion introduced in Chapter 5 over the ",
         math(String.raw`\ell`),
         "-adic points, Chapters 10 and 11 close two gaps that the refinement leaves open — a decision ",
-        "procedure for the points of infinite vanishing depth, and a recursion which shows that the ",
+        "procedure for the points where that depth is infinite, and a recursion which shows that the ",
         "cancellation feared there cannot occur — ",
         "and Chapter 12 sets the propositions against the literature. A reader who wants only the dictionary ",
         "can read Chapters 2, 5 and 7.",

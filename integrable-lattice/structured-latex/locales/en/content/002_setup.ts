@@ -15,7 +15,7 @@ export default defineBlocks([
     kind: "heading",
     level: 1,
     origin: { path: "structured-latex/locales/en/content/002_setup.ts", ordinal: 1 },
-    title: { text: "Setting — integer spectral curves and the number of periodic points" },
+    title: { text: "Setting" },
     labels: [],
   },
   {

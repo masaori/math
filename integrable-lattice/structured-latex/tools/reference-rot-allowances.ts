@@ -17,7 +17,7 @@ import type { ReferenceAllowance } from "./reference-rot-model.ts";
 export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   // --- 本文（ロケール）: cycle 24 step 2 の腐りのうち、手作業の訂正が届かなかった残り ---
   {
-    file: "structured-latex/locales/en/content/001a_reader_guide.ts",
+    file: "structured-latex/locales/en/content/003a_reader_guide.ts",
     reference: "content/000_reader_guide.ts",
     reason: "「当初の指示はここへ置くことだった。そうしていない」という否定の文脈で名を挙げている。",
     grounds: { type: "illustration", marker: "当初の指示はこの内容を" },

@@ -18,9 +18,7 @@ export default defineBlocks([
     kind: "heading",
     level: 1,
     origin: { path: "structured-latex/locales/en/content/001_intro.ts", ordinal: 1 },
-    title: {
-      text: "Introduction — the two places of an integer spectral curve, and decidability on the Λ side",
-    },
+    title: { text: "Introduction" },
     labels: [],
   },
   {
@@ -31,8 +29,8 @@ export default defineBlocks([
     labels: ["paper_positioning"],
     habitat: "mixed",
     realEscape:
-      "This block is a statement of positioning. ℝ occurs here only as a name, inside the description of " +
-      "contribution (d), namely that Lehmer's problem is specific to the ℝ side. No element of ℝ is " +
+      "This block is a statement of positioning. The real side occurs here only as a turn of phrase, in " +
+      "contributions (a) and (d). No element of ℝ is " +
       "constructed and no argument is carried out over ℝ. The only place where this paper genuinely uses " +
       "ℝ is the single limit in which L tends to infinity in Chapter 3.",
     statement: [
@@ -41,38 +39,36 @@ export default defineBlocks([
         "solution, and no new deep number theory. All of the mathematical content is known, and Chapters 3 ",
         "and 5 identify the sources by name of reference and number of proposition.",
       ]),
-      paragraph(["What this paper does provide is exactly the following four items."]),
+      paragraph([
+        "What this paper does provide is exactly the following four items. The terms and symbols are ",
+        "introduced in order in Chapters 1 to 3.",
+      ]),
       list([
         [
-          "(a) A dictionary between the two places: for one and the same integer spectral curve ",
+          "(a) A dictionary between the two places: for one and the same polynomial with integer ",
+          "coefficients ",
           math(String.raw`P`),
-          ", we place side by side the quantity at the archimedean place (the free energy density, that is, ",
-          "the Mahler measure) and the quantities at each ",
+          ", we place side by side the quantity determined on the real side and the quantities determined ",
+          "on the valuation side at each prime ",
           math(String.raw`p`),
-          "-adic place (the prime factorisation structure of the finite-size Massieu free entropy), and give ",
-          "an explicit dictionary relating them to the quantities of statistical mechanics.",
+          ", and give an explicit dictionary relating them to the quantities of statistical mechanics.",
         ],
         [
-          "(b) A sharpening of the countabilisation: the precise statement that the ",
-          math(String.raw`\Lambda`),
-          " side does not require ",
+          "(b) A sharpening of the countabilisation: the precise statement that the valuation side does ",
+          "not require the uncountable field ",
           math(String.raw`\mathbb{Q}_p`),
-          " (which is uncountable).",
+          ".",
         ],
         [
-          "(c) A determination of a family of decidable propositions: we pin down the finite, elementary, ",
-          "decidable face of the ",
-          math(String.raw`\Lambda`),
-          " side as propositions that come with an explicit decision procedure and a witness ",
+          "(c) A determination of a family of propositions that can be settled: we pin down the finite, ",
+          "elementary face of the valuation side as propositions that come with a procedure terminating ",
+          "in finitely many steps and with explicit evidence for the answer ",
           "(Propositions A, B, C, N, L of Chapter 4, and Propositions T, V, W of Chapter 6).",
         ],
         [
-          "(d) A map of the asymmetry of decidability: the observation, organised in Chapter 7, that ",
-          "Lehmer's problem is specific to the ",
-          math(String.raw`\mathbb{R}`),
-          " side, and that no corresponding open continuous gap exists on the ",
-          math(String.raw`\Lambda`),
-          " side.",
+          "(d) A map of the asymmetry in difficulty: the observation, organised in Chapter 7, that an open ",
+          "problem specific to the real side exists (Lehmer's problem), while no corresponding continuous ",
+          "gap exists on the valuation side.",
         ],
       ]),
       paragraph([
