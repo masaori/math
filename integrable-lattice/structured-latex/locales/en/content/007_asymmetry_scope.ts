@@ -259,6 +259,12 @@ export default defineBlocks([
         " has been checked mechanically.",
       ]),
       paragraph([
+        "The coverage is not complete. Of the 24 assertions of this paper, 5 have their content ",
+        "formalised, 14 are formalised in part, and 5 have not been started. Complete formalisation ",
+        "is the goal we work towards, and the table below records which assertions remain and, for ",
+        "each of them, what is left (or why it has not been started).",
+      ]),
+      paragraph([
         "The current state of the formalisation — what is complete, what is partial, what has not been started, and the reason in each case — is recorded in a table in the accompanying Lean development. ",
         "For the propositions we could not formalise, we make concrete, from primary evidence (the code ",
         "we tried and the error output), what is missing in mathlib or at which step we got stuck. We never ",

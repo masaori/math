@@ -39,6 +39,11 @@ export default defineBlocks([
       "結論の値 b にも b の決定手続きにも入らない。(Q7) の定数 C に残る log_ℓ C_0 はこの 1 箇所に由来し、" +
       "誤差項の係数にしか現れない。ほかの (Q1)(Q2)(Q3)(Q5)(Q6)(Q8) は ℤ・F_ℓ・ℚ(ζ_{ℓ^M}) の中で閉じる。",
     verification: ["sagemath/check/cycle21_T3_b_star"],
+    lean: [
+      "IntegrableLattice.unique_min_of_val_seq",
+      "IntegrableLattice.BG_dominates",
+      "IntegrableLattice.sum_totient_pow",
+    ],
     statement: [
       paragraph([
         ref("paper_prop_K"),

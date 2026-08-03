@@ -74,6 +74,11 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
       "sagemath/check/cycle14_T1_vp_two_var",
       "sagemath/check/cycle15_T1_monsky_shape",
     ],
+    lean: [
+      "IntegrableLattice.resultant_X_pow_char_pow_sub_one",
+      "IntegrableLattice.aOne_cast_zmod",
+      "IntegrableLattice.aTwo_cast_zmod",
+    ],
     statement: [
       paragraph([
         ref("paper_def_aL"),

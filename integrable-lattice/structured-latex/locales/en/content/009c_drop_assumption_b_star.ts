@@ -53,6 +53,11 @@ export default defineBlocks([
       "of (Q7) comes from this single place and occurs only as a coefficient of the error term. " +
       "The remaining parts (Q1)(Q2)(Q3)(Q5)(Q6)(Q8) stay inside ℤ, F_ℓ and ℚ(ζ_{ℓ^M}).",
     verification: ["sagemath/check/cycle21_T3_b_star"],
+    lean: [
+      "IntegrableLattice.unique_min_of_val_seq",
+      "IntegrableLattice.BG_dominates",
+      "IntegrableLattice.sum_totient_pow",
+    ],
     statement: [
       paragraph([
         "We keep the setting of ",

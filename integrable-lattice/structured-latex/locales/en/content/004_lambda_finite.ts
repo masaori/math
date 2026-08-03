@@ -300,6 +300,11 @@ export default defineBlocks([
     labels: ["paper_prop_C_trace"],
     habitat: "Z",
     verification: ["sagemath/check/cycle18_T3_trace_period"],
+    lean: [
+      "IntegrableLattice.traceOrth_one_add_pow",
+      "IntegrableLattice.isTracePeriodAt_mul_prime",
+      "IntegrableLattice.dvd_of_mulVec_dvd",
+    ],
     statement: [
       paragraph([
         "Let ",

@@ -165,6 +165,21 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "historical", marker: "に置く設計だったが、cycle 0 の再定義以降は作っていない" },
   },
   {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/Analysis/Polynomial/MahlerMeasure.lean",
+    reason:
+      "mathlib のファイル。形式化できない理由を一次情報で示すために、実測で見つけたファイル名を挙げている" +
+      "（このファイルは 1 変数 ℂ[X] の Mahler 測度で、多変数を扱っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/NumberTheory/MahlerMeasure.lean",
+    reason:
+      "同上（こちらは 1 変数 ℤ[X]）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
     file: "docs/paper-001-migration-status.md",
     reference: "tools/verify-no-lost-proofs.ts",
     reason: "「Ising 側にある …」＝別プロジェクトのファイル。",
