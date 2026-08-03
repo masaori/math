@@ -135,8 +135,9 @@ export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, MathDifferenceE
     allow: ["translation-reflowed"],
   },
   paper_042_theorem_pi_p1: {
-    reason: JAPANESE_IN_TEXT_MACRO_REORDERED + " 加えて、" + INTERNAL_PATH_REMOVED + " 加えて、" + REFLOWED,
-    allow: ["text-body-translated-reordered", "repo-internal-texttt-removed", "translation-reflowed"],
+    // cycle 27: 日本語版からもリポジトリ内部のパスを落としたので、その規則は要らなくなった。
+    reason: JAPANESE_IN_TEXT_MACRO_REORDERED + " 加えて、" + REFLOWED,
+    allow: ["text-body-translated-reordered", "translation-reflowed"],
   },
   paper_043_theorem_bound: {
     reason: REFLOWED,
@@ -163,20 +164,20 @@ export const MATH_DIFFERENCE_EXCEPTIONS: Readonly<Record<string, MathDifferenceE
     allow: ["citation-added", "translation-reflowed"],
   },
   paper_052_theorem_l0_computable: {
-    reason: INTERNAL_PATH_REMOVED + " 加えて、" + REFLOWED,
-    allow: ["repo-internal-texttt-removed", "translation-reflowed"],
+    reason: REFLOWED,
+    allow: ["translation-reflowed"],
   },
   paper_053_theorem_lower_order: {
-    reason: INTERNAL_PATH_REMOVED + " 加えて、" + CITATIONS_ADDED + " 加えて、" + REFLOWED,
-    allow: ["repo-internal-texttt-removed", "citation-added", "translation-reflowed"],
+    reason: CITATIONS_ADDED + " 加えて、" + REFLOWED,
+    allow: ["citation-added", "translation-reflowed"],
   },
   paper_054_remark_limits: {
     reason: CITATIONS_ADDED + " 加えて、" + REFLOWED,
     allow: ["citation-added", "translation-reflowed"],
   },
   paper_055_theorem_theta_infinity: {
-    reason: JAPANESE_IN_TEXT_MACRO + " 加えて、" + INTERNAL_PATH_REMOVED + " 加えて、" + REFLOWED,
-    allow: ["text-body-translated", "repo-internal-texttt-removed", "translation-reflowed"],
+    reason: JAPANESE_IN_TEXT_MACRO + " 加えて、" + REFLOWED,
+    allow: ["text-body-translated", "translation-reflowed"],
   },
   paper_056_theorem_ell2_family: {
     reason: JAPANESE_IN_TEXT_MACRO_REORDERED + " 加えて、" + REFLOWED,

@@ -128,7 +128,7 @@ export const frontmatter: Frontmatter = {
       " side.",
     ]),
     paragraph([
-      "**None of these four is a new theorem.** Each is a rearrangement, a restatement or a ",
+      "None of these four is a new theorem. Each is a rearrangement, a restatement or a ",
       "countabilisation of known results, and the sources are identified by name of reference and number ",
       "of proposition; where the literature already contains a proposition, we say so, including the cases ",
       "in which only a weaker form is known. Part of the material has been formalised in Lean 4 with ",

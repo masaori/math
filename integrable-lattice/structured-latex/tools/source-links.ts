@@ -50,7 +50,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "が高位で消える **Skolem–Mahler–Lech 例外**（算術級数の有限和）でスパイクしうる",
-          bodyQuote: "例外集合は算術級数の有限和であり、**一般に無限集合である**",
+          bodyQuote: "例外集合は算術級数の有限和であり、一般に無限集合である",
         },
       },
       {
@@ -60,7 +60,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "example",
           reportQuote: "ただし $S(N)$ が高位で消える",
-          bodyQuote: "**すべての奇数",
+          bodyQuote: "すべての奇数",
         },
       },
     ],
@@ -447,7 +447,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "notation",
           reportQuote: "**帰属/存在**: 有限・離散なら",
-          bodyQuote: "**軸 1（帰属）**",
+          bodyQuote: "軸 1（帰属）",
         },
       },
       {
@@ -507,7 +507,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "**有限側の本体軸**。",
-          bodyQuote: "**軸 3（複雑性）**: 有限サイズで多項式時間か #P 困難か。",
+          bodyQuote: "軸 3（複雑性）: 有限サイズで多項式時間か #P 困難か。",
         },
       },
       {
@@ -517,7 +517,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "**有限側の本体軸**。",
-          bodyQuote: "**軸 3（複雑性）**: 有限サイズで多項式時間か #P 困難か。",
+          bodyQuote: "軸 3（複雑性）: 有限サイズで多項式時間か #P 困難か。",
         },
       },
       {
@@ -527,7 +527,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "は 1 を（有限・離散のとき）保証するだけ",
-          bodyQuote: "**軸 1・2 は軸 4 を何も含意しない。**",
+          bodyQuote: "軸 1・2 は軸 4 を何も含意しない。",
         },
       },
     ],
@@ -641,7 +641,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "**$f$ に零点条件は課されていない。",
-          bodyQuote: "**仮定は無い**",
+          bodyQuote: "仮定は無い",
         },
       },
       {
@@ -795,7 +795,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "$N_0(p,k),\\pi(p,k)$ および各周期内の値は",
-          bodyQuote: "**最終周期的**",
+          bodyQuote: "最終周期的",
         },
       },
       {
@@ -805,7 +805,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "有限モノイドの元の冪は前周期＋周期に入る",
-          bodyQuote: "**最終周期的**",
+          bodyQuote: "最終周期的",
         },
       },
       {
@@ -815,7 +815,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "および各周期内の値は、$T$ から",
-          bodyQuote: "**最終周期的**",
+          bodyQuote: "最終周期的",
         },
       },
       {
@@ -905,7 +905,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "訂正後の等式そのもの（トレース列の読み）",
-          bodyQuote: "**【訂正】この主張は ",
+          bodyQuote: "【訂正】この主張は ",
         },
       },
       {
@@ -915,7 +915,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "訂正後の等式そのもの（トレース列の読み）",
-          bodyQuote: "**【訂正】この主張は ",
+          bodyQuote: "【訂正】この主張は ",
         },
       },
 ],
@@ -981,7 +981,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "命題 L の 4 分岐（$p$ 奇の $d\\mid L$ / $d\\nmid L$、$p=2$ の $L$ 奇 / 偶）",
-          bodyQuote: " 奇のとき**: ",
+          bodyQuote: " 奇のとき: ",
         },
       },
 ],
@@ -1188,7 +1188,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "は**決定不能**（停止問題と同値の困難さをもつ）",
-          bodyQuote: "**決定不能**である（停止問題に還元される）",
+          bodyQuote: "決定不能である（停止問題に還元される）",
         },
       },
       {
@@ -1198,7 +1198,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "は**決定不能**（停止問題と同値の困難さをもつ）",
-          bodyQuote: "**決定不能**である（停止問題に還元される）",
+          bodyQuote: "決定不能である（停止問題に還元される）",
         },
       },
     ],
@@ -1348,7 +1348,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "限界 (i)（$m_0$ と $l_0$ 以外の係数は原論文が mysterious と明記している）",
-          bodyQuote: "**原典もそう述べている**",
+          bodyQuote: "原典もそう述べている",
         },
       },
       {
@@ -1368,7 +1368,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "notation",
           reportQuote: "限界 (i)（低位項の係数に明示式が無く、$d=2$ で有理数であることしか示されていないこと）",
-          bodyQuote: "）の明示公式が無い。**",
+          bodyQuote: "）の明示公式が無い。",
         },
       },
 ],
@@ -1484,7 +1484,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "$d=-2$ と完全に決まる",
-          bodyQuote: " の係数からの**有限計算で判定できる**。",
+          bodyQuote: " の係数からの有限計算で判定できる。",
         },
       },
     ],
@@ -1580,7 +1580,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "の一階理論が決定可能であること（Ax–Kochen / Ershov）、可算符号化は標準手法であること",
-          bodyQuote: "**既出性の調査結果**",
+          bodyQuote: "既出性の調査結果",
         },
       },
 ],
@@ -1628,7 +1628,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "命題 T の既出性判定（弱い形が既出）",
-          bodyQuote: "が偶数）が既出**（Kwon–Mednykh–Mednykh）",
+          bodyQuote: "が偶数）が既出（Kwon–Mednykh–Mednykh）",
         },
       },
 ],
@@ -1656,7 +1656,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
-          bodyQuote: "**形式化の現状（完了・部分的・未着手と、その理由）は ",
+          bodyQuote: "形式化の現状（完了・部分的・未着手と、その理由）は ",
         },
       },
       {
@@ -1666,7 +1666,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
-          bodyQuote: " の表に記録する。**",
+          bodyQuote: " の表に記録する。",
         },
       },
       {
@@ -1765,7 +1765,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "命題 Q (Q6)（数え上げ恒等式）",
-          bodyQuote: "**(Q1 整数のままの分解)** ",
+          bodyQuote: "(Q1 整数のままの分解) ",
         },
       },
 ],

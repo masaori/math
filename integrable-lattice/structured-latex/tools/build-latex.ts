@@ -139,12 +139,13 @@ if (unknownCites.length > 0 && bibPath !== null) {
   );
 }
 
-// 対応の取れない `**` は PDF に素のアスタリスクとして出る（投稿稿では明白な瑕疵）。
+// 強調指定は本文で使わない。書かれていれば PDF に素のアスタリスクとして出るので生成を落とす。
 if (unmatchedBold.length > 0) {
   const detail = unmatchedBold.map((item) => `  ${item.blockId}: ${item.sample}`).join("\n");
   throw new Error(
-    `対応の取れない ** が地の文にある（PDF にアスタリスクがそのまま出る）:\n${detail}\n` +
-      "  強調は 1 つのノードの中で閉じること（ノードをまたぐ ** は組めない）。",
+    `強調指定 ** が地の文にある（PDF にアスタリスクがそのまま出る）:\n${detail}\n` +
+      "  本文では強調（太字）を使わない。** を消し、強調で持たせていた意味は\n" +
+      "  文の構成か語の選択で担わせること（装飾に意味を持たせない）。",
   );
 }
 
@@ -420,17 +421,21 @@ function renderProse(value: string, blockId: string): string {
 }
 
 /**
- * 本文は強調を `**...**` と書く。LaTeX は `*` を素の文字として組むので、変換しない版では
- * アスタリスクがそのまま出る。変換する版（投稿稿）では `\textbf{...}` へ写し、
- * 対応の取れない `**` を無言で通さず、呼び出し側でビルドを落とす。
+ * **本文では強調（太字）を使わない**（2026-08-03 ユーザーの価値判断）。
+ *
+ * かつては変換する版（投稿稿）だけが `**...**` を `\textbf{...}` へ写し、変換しない版
+ * （日本語版）はアスタリスクを素のまま印字していた。その非対称が 3 サイクル連続の事故を生み、
+ * さらに日本語の正本 PDF 全体（50 頁・623 対）にアスタリスクを出していた。
+ * いまは**どの版でも強調指定を受け付けない**。
+ *
+ * 早い段で止めるのは検査 E（`verify-emphasis.ts`。`validate` の直後）だが、
+ * **生成器も自分で落とす**——検査を迂回して生成だけ走らせても、アスタリスクは出力されない。
  */
 function applyBold(value: string, blockId: string): string {
-  if (!edition.bold) return value;
-  const converted = value.replace(/\*\*(.+?)\*\*/gs, (_match, inner: string) => `\\textbf{${inner}}`);
-  if (converted.includes("**")) {
-    unmatchedBold.push({ blockId, sample: converted.slice(0, 60) });
+  if (value.includes("**")) {
+    unmatchedBold.push({ blockId, sample: value.slice(0, 60) });
   }
-  return converted;
+  return value;
 }
 
 function renderNodes(nodes: readonly Node[], blockId: string): string {

@@ -82,7 +82,7 @@ export default defineBlocks([
         ").",
       ]),
       paragraph([
-        "**(R1 The digit-branch decomposition)** For ",
+        "(R1 The digit-branch decomposition) For ",
         math(String.raw`c\in\{0,\dots,\ell-1\}`),
         ", collect those elements of ",
         math(String.raw`\mathcal{G}`),
@@ -102,7 +102,7 @@ export default defineBlocks([
       ),
       paragraph(["holds, by ", math(String.raw`(1+x)^{\ell}=1+x^{\ell}`), "."]),
       paragraph([
-        "**(R2 No cancellation occurs)** Put ",
+        "(R2 No cancellation occurs) Put ",
         math(String.raw`d:=\min_c\mathrm{ord}_y\,g_c`),
         " and ",
         math(String.raw`C:=\{c:\mathrm{ord}_y\,g_c=d\}`),
@@ -117,7 +117,7 @@ export default defineBlocks([
         s^{*}=\min\Bigl\{s\ge0:\ \sigma_s:=\sum_{c\in C}\lambda_c\binom{c}{s}\neq0\Bigr\},`,
       ),
       paragraph([
-        "and **the index occurring on the right always exists, and it is at most one less than the prime.** ",
+        "and the index occurring on the right always exists, and it is at most one less than the prime. ",
         "The index in question is ",
         math(String.raw`s^{*}`),
         ", and the bound is ",
@@ -135,16 +135,16 @@ export default defineBlocks([
         " forces ",
         math(String.raw`(\sigma_s)_{0\le s\le\ell-1}\neq0`),
         ". ",
-        "**Consequently the cancellation that prevented part (J2) from determining the vanishing depth — " +
+        "Consequently the cancellation that prevented part (J2) from determining the vanishing depth — " +
           "the case in which the minimum is not attained at a single index — cannot occur in this " +
-          "decomposition, for structural reasons.** The part in question is (J2) of ",
+          "decomposition, for structural reasons. The part in question is (J2) of ",
         ref("paper_prop_J"),
         ", and the quantity it left undetermined is ",
         math(String.raw`\theta`),
         ".",
       ]),
       paragraph([
-        "**(R3 Finiteness and an effective upper bound)** Put",
+        "(R3 Finiteness and an effective upper bound) Put",
       ]),
       displayMath(
         String.raw`\mathrm{sep}(a,b):=\min\{t\ge0:\ \text{the elements of}\ \mathcal{G}\ \text{are pairwise distinct}\ \bmod\ \ell^{t}\}`,
@@ -195,10 +195,10 @@ export default defineBlocks([
         ", and that growth is bounded by the reciprocal of the distance to the candidate point. This is ",
         "stronger than the statement of part (J1) of ",
         ref("paper_prop_J"),
-        ", that the depth is locally constant wherever it is finite, and it is **effective**.",
+        ", that the depth is locally constant wherever it is finite, and it is effective.",
       ]),
       paragraph([
-        "**(R4 The valuation as a resultant)** Put ",
+        "(R4 The valuation as a resultant) Put ",
         math(String.raw`\Psi_M(x):=\Phi_{\ell^{M}}(1+x)\in\mathbb{Z}[x]`),
         " (the minimal polynomial of ",
         math(String.raw`\pi=\zeta_{\ell^{M}}-1`),
@@ -224,8 +224,8 @@ export default defineBlocks([
         "), together with the fact that the resultant equals the norm ",
         math(String.raw`N_{\mathbb{Q}(\zeta_{\ell^{M}})/\mathbb{Q}}\bigl(\Phi_{(a,b)}(\pi)\bigr)`),
         ". ",
-        "**The right-hand side is the valuation of a single integer, and it does not use the uniqueness " +
-          "hypothesis that part (J3) imposed on the minimising index.** The valuation is the ",
+        "The right-hand side is the valuation of a single integer, and it does not use the uniqueness " +
+          "hypothesis that part (J3) imposed on the minimising index. The valuation is the ",
         math(String.raw`\ell`),
         "-adic one, the part in question is (J3) of ",
         ref("paper_prop_J"),
@@ -234,7 +234,7 @@ export default defineBlocks([
         " is attained at a single index.",
       ]),
       paragraph([
-        "**(R5 Removing the hypotheses from the predictive algorithm)** Part (J3) of ",
+        "(R5 Removing the hypotheses from the predictive algorithm) Part (J3) of ",
         ref("paper_prop_J"),
         " decomposes by level as ",
         math(String.raw`\Sigma_n=\sum_{M=1}^{n}\Theta_M`),
@@ -250,12 +250,12 @@ export default defineBlocks([
         v_\ell\bigl(\mathrm{Res}_x(\Psi_M,\Phi_P)\bigr)`,
       ),
       paragraph([
-        "which holds **with no hypotheses at all**. The right-hand side is settled by integer computation from the ",
+        "which holds with no hypotheses at all. The right-hand side is settled by integer computation from the ",
         "coefficients of ",
         math(String.raw`D`),
         " alone (neither the values of the tower nor any computation in a cyclotomic field enters).",
       ]),
-      paragraph(["**Limitations (stated as part of the assertion)**"]),
+      paragraph(["Limitations"]),
       list([
         [
           "What (R2) kills is the cancellation in part (J2) of ",
@@ -272,11 +272,11 @@ export default defineBlocks([
           ", and the latter obstruction is the cause. Removing it is the role of (R4).",
         ],
         [
-          "(R5) **determines** ",
+          "(R5) determines ",
           math(String.raw`\mathrm{ord}_\ell(\kappa_n)`),
           " for each ",
           math(String.raw`n`),
-          ", but it is **not a closed form** in ",
+          ", but it is not a closed form in ",
           math(String.raw`n`),
           " (the number of terms at level ",
           math(String.raw`M`),
@@ -290,7 +290,7 @@ export default defineBlocks([
         ],
         ["The present proposition is confined to ", math(String.raw`d=2`), "."],
         [
-          "**We claim no novelty.** In the Iwasawa algebra ",
+          "We claim no novelty. In the Iwasawa algebra ",
           math(String.raw`\mathbb{F}_\ell[[\mathbb{Z}_\ell]]\cong\mathbb{F}_\ell[[x]]`),
           ", parts (R1) and (R2) amount to a procedure that computes the ",
           math(String.raw`\lambda`),
@@ -314,7 +314,7 @@ export default defineBlocks([
         "; the field of real numbers is never entered.",
       ]),
       paragraph([
-        "**Proof of (R1).** Write ",
+        "Proof of (R1). Write ",
         math(String.raw`\gamma=c+\ell\gamma'`),
         " for those ",
         math(String.raw`\gamma`),
@@ -385,7 +385,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**This is a restatement of the following direct sum decomposition.** The ring ",
+        "This is a restatement of the following direct sum decomposition. The ring ",
         math(String.raw`\mathbb{F}_\ell[[x]]`),
         " is free of rank ",
         math(String.raw`\ell`),
@@ -411,7 +411,7 @@ export default defineBlocks([
         "cancellation can occur.",
       ]),
       paragraph([
-        "**Now the identity itself.** We argue by induction on ",
+        "Now the identity itself. We argue by induction on ",
         math(String.raw`\mathrm{sep}(a,b)=:t`),
         ". For ",
         math(String.raw`t=0`),
@@ -478,13 +478,13 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Proof of (R3).** The last step of the induction above yields ",
+        "Proof of (R3). The last step of the induction above yields ",
         math(String.raw`\theta(a,b)=\ell d+s^{*}\le\ell(\ell^{t-1}-1)+(\ell-1)=\ell^{t}-1`),
         ", so ",
         math(String.raw`\mathcal{G}\neq\emptyset`),
         " implies ",
         math(String.raw`\theta(a,b)\le\ell^{\mathrm{sep}(a,b)}-1<\infty`),
-        ". **This bound is attained**: for ",
+        ". This bound is attained: for ",
         math(String.raw`\mathcal{G}=\{0,1,\dots,\ell^{t}-1\}`),
         " with all coefficients equal to ",
         math(String.raw`1`),
@@ -517,7 +517,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Which hypotheses (R3) actually uses (stated explicitly).** All that the argument above borrows ",
+        "Which hypotheses (R3) actually uses (stated explicitly). All that the argument above borrows ",
         "from part (J1) of ",
         ref("paper_prop_J"),
         " is the statement that ",
@@ -537,7 +537,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Proof of (R4).** Put ",
+        "Proof of (R4). Put ",
         math(String.raw`K=\mathbb{Q}(\zeta_{\ell^{M}})`),
         " and ",
         math(String.raw`\varphi=\varphi(\ell^{M})=[K:\mathbb{Q}]`),
@@ -587,7 +587,7 @@ export default defineBlocks([
         "the norm is taken directly, the identity holds whether or not a minimiser is attained twice.",
       ]),
       paragraph([
-        "**Proof of (R5).** One only has to combine the level decomposition of part (J3) of ",
+        "Proof of (R5). One only has to combine the level decomposition of part (J3) of ",
         ref("paper_prop_J"),
         ", which holds with no hypothesis, with (R4). Substituting ",
         math(String.raw`\Sigma_n=\sum_{M=1}^{n}\Theta_M`),

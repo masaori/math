@@ -60,7 +60,7 @@ export default defineBlocks([
         math(String.raw`k\ge1`),
         ", the quantity ",
         math(String.raw`\min\bigl(v_p(Z_N),k\bigr)`),
-        " is **eventually periodic** in ",
+        " is eventually periodic in ",
         math(String.raw`N`),
         ", and its period divides the eventual period ",
         math(String.raw`\pi(p,k)`),
@@ -71,20 +71,20 @@ export default defineBlocks([
       paragraph([
         "The quantity ",
         math(String.raw`\pi(p,k)`),
-        " is **decidable** inside the finite monoid ",
+        " is decidable inside the finite monoid ",
         math(String.raw`M_d(\mathbb{Z}/p^k)`),
         ": one generates the elements of the sequence in turn and looks for the first repetition.",
       ]),
       paragraph([
-        "**A caution on notation (the two periods must not be confused)**: ",
+        "A caution on notation (the two periods must not be confused): ",
         math(String.raw`\pi(p,k)`),
-        " is the period of the **matrix power sequence**, and it is a different quantity from ",
+        " is the period of the matrix power sequence, and it is a different quantity from ",
         math(String.raw`\pi_{\mathrm{tr}}(p,k)`),
-        ", the period of the **trace sequence**, which appears in ",
+        ", the period of the trace sequence, which appears in ",
         ref("paper_prop_B"),
         ". The divisibility ",
         math(String.raw`\pi_{\mathrm{tr}}(p,k)\mid\pi(p,k)`),
-        " holds, but **the converse does not hold**: there are actual examples in which the ratio is not ",
+        " holds, but the converse does not hold: there are actual examples in which the ratio is not ",
         math(String.raw`1`),
         ".",
       ]),
@@ -106,7 +106,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Note**: the only tool used is the pigeonhole principle on a finite set; neither ",
+        "Note: the only tool used is the pigeonhole principle on a finite set; neither ",
         math(String.raw`\mathbb{Q}_p`),
         " nor any analysis is used. The statement is a restatement of the known ",
         math(String.raw`p`),
@@ -134,7 +134,7 @@ export default defineBlocks([
       paragraph([
         "Let ",
         math(String.raw`\pi_{\mathrm{tr}}(p,1)`),
-        " denote the eventual period of the **trace sequence** ",
+        " denote the eventual period of the trace sequence ",
         math(String.raw`Z_N=\mathrm{Tr}\,T^N\bmod p`),
         ". Then",
       ]),
@@ -149,14 +149,14 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**[Correction]** This statement is **not** a statement about the quantity ",
+        "[Correction] This statement is not a statement about the quantity ",
         math(String.raw`\pi(p,1)`),
         " of ",
         ref("paper_prop_A"),
-        ", that is, about the eventual period of the **matrix power sequence** ",
+        ", that is, about the eventual period of the matrix power sequence ",
         math(String.raw`T^N\bmod p^k`),
         ". An earlier version of this paper wrote the two quantities with the same symbol, and ",
-        "**under that reading the statement was false**. Counterexample: for ",
+        "under that reading the statement was false. Counterexample: for ",
         math(String.raw`T=\begin{pmatrix}0&1\\1&1\end{pmatrix}^{\oplus2}`),
         " and ",
         math(String.raw`p=2`),
@@ -172,14 +172,14 @@ export default defineBlocks([
         math(String.raw`2`),
         " and the set is empty. The matrix ",
         math(String.raw`T`),
-        " of this counterexample is semisimple, so **assuming semisimplicity does not rescue the " +
-          "statement**. In a random sample of 2487 examples, the two periods disagreed in 563 cases " +
+        " of this counterexample is semisimple, so assuming semisimplicity does not rescue the " +
+          "statement. In a random sample of 2487 examples, the two periods disagreed in 563 cases " +
           "(22.6%).",
       ]),
     ],
     proof: [
       paragraph([
-        "**We prove both directions.** The generalised eigenspace decomposition gives ",
+        "We prove both directions. The generalised eigenspace decomposition gives ",
         math(String.raw`Z_N=\sum_\lambda m_\lambda\lambda^N`),
         " over ",
         math(String.raw`\overline{\mathbb{F}_p}`),
@@ -200,7 +200,7 @@ export default defineBlocks([
         math(String.raw`t`),
         " is an eventual period of ",
         math(String.raw`Z_N`),
-        " **if and only if** ",
+        " if and only if ",
         math(String.raw`\operatorname{ord}(\lambda)\mid t`),
         " holds for every ",
         math(String.raw`\lambda`),
@@ -215,7 +215,7 @@ export default defineBlocks([
         " and contribute nothing.",
       ]),
       paragraph([
-        "**This proposition has been formalised in Lean** (over an algebraically closed field, in ",
+        "This proposition has been formalised in Lean (over an algebraically closed field, in ",
         "complete form and with no auxiliary hypothesis); the details are in the supporting report for ",
         "that formalisation.",
       ]),
@@ -241,17 +241,17 @@ export default defineBlocks([
       paragraph([
         "The divisibility ",
         math(String.raw`\pi(p,k)\ \bigm|\ p^{k-1}\pi(p,1)`),
-        " holds (an upper bound of Pisano type; **known**). Here ",
+        " holds (an upper bound of Pisano type; known). Here ",
         math(String.raw`\pi`),
         " is, as in ",
         ref("paper_prop_A"),
-        ", the eventual period of the **matrix power sequence** ",
+        ", the eventual period of the matrix power sequence ",
         math(String.raw`T^N\bmod p^k`),
         ".",
       ]),
       paragraph([
-        "**Read with the trace sequence in place of the matrix power sequence, this upper bound " +
-          "becomes false.** If the period ",
+        "Read with the trace sequence in place of the matrix power sequence, this upper bound " +
+          "becomes false. If the period ",
         math(String.raw`\pi_{\mathrm{tr}}`),
         " of the trace sequence of ",
         ref("paper_prop_B"),
@@ -265,7 +265,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**Equality (of Wall type) does not hold in general.** In the verification carried out for this ",
+        "Equality (of Wall type) does not hold in general. In the verification carried out for this ",
         "paper, equality failed for 10 out of 472 non-degenerate companion matrices (about 2.1%), and for ",
         "26 out of 572 transfer matrices of the six-vertex model (about 4.5%).",
       ]),
@@ -279,11 +279,11 @@ export default defineBlocks([
         "-th power (known). That equality fails is shown by the counterexamples recorded above.",
       ]),
       paragraph([
-        "**A methodological note (a lesson this paper states explicitly)**: at the outset of this work, a ",
+        "A methodological lesson: at the outset of this work, a ",
         "search over 43 examples produced no counterexample, and from that observation we formed the ",
         "hypothesis that integrability protects equality of Wall type. But an absence of counterexamples ",
         "is no support for a hypothesis. When the sample was enlarged by an order of magnitude, to 572 ",
-        "examples, counterexamples appeared at a rate of 4.5%, and **the hypothesis was refuted**. An ",
+        "examples, counterexamples appeared at a rate of 4.5%, and the hypothesis was refuted. An ",
         "observation of zero cases must not be used as evidence.",
       ]),
     ],
@@ -342,7 +342,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**No correction is possible that keeps the base level fixed at one.** The divisibility ",
+        "No correction is possible that keeps the base level fixed at one. The divisibility ",
         math(String.raw`\pi_{\mathrm{tr}}(p,k)\mid p^{a}\pi_{\mathrm{tr}}(p,1)`),
         ", whose base level is ",
         math(String.raw`1`),
@@ -361,7 +361,7 @@ export default defineBlocks([
         ". What has to be corrected is not the exponent but the base level.",
       ]),
       paragraph([
-        "**Decidability**: ",
+        "Decidability: ",
         math(String.raw`w^*`),
         " is determined by a finite procedure from the Smith normal form of the integer matrix ",
         math(String.raw`G`),
@@ -377,7 +377,7 @@ export default defineBlocks([
         "-adic integers.",
       ]),
       paragraph([
-        "**This upper bound is not the best possible.** The exponent ",
+        "This upper bound is not the best possible. The exponent ",
         math(String.raw`p^{k-1}`),
         " can be lowered to ",
         math(String.raw`p^{\,k-w^*-1}`),
@@ -501,25 +501,25 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\mu_{\min}(p)=\min_i v_p(\lambda_i)`),
       paragraph([
-        "and this quantity is determined as the **minimal slope** of the ",
+        "and this quantity is determined as the minimal slope of the ",
         math(String.raw`p`),
         "-adic Newton polygon of the characteristic polynomial ",
         math(String.raw`\chi_T`),
         ".",
       ]),
       paragraph([
-        "**Convention on the orientation of the Newton polygon**: in this paper, for ",
+        "Convention on the orientation of the Newton polygon: in this paper, for ",
         math(String.raw`\chi_T=\sum_i c_ix^i`),
         " we take the lower convex hull of the point set ",
         math(String.raw`\{(d-i,\,v_p(c_i))\}`),
         ", with the orientation in which the slopes are the valuations of the roots themselves; the ",
-        "**minimal slope** for this orientation is ",
+        "minimal slope for this orientation is ",
         math(String.raw`\min_i v_p(\lambda_i)`),
         ". Under the opposite convention the sign is reversed, so the phrase minimal slope must never be ",
         "used without stating the convention.",
       ]),
       paragraph([
-        "**Lower bound, in a form that holds for each single index**: ",
+        "Lower bound, in a form that holds for each single index: ",
         math(String.raw`v_p(Z_N)\ge\mu_{\min}(p)\,N`),
         " for every ",
         math(String.raw`N`),
@@ -535,7 +535,7 @@ export default defineBlocks([
       paragraph([
         "This derivation never constructs ",
         math(String.raw`\mathbb{Q}_p`),
-        ", and **it uses neither the eigenvalues nor the Newton polygon**; it has been formalised with ",
+        ", and it uses neither the eigenvalues nor the Newton polygon; it has been formalised with ",
         "Lean 4 and mathlib4 in Chapter 8. The constant offset ",
         math(String.raw`md`),
         " does not depend on ",
@@ -543,13 +543,13 @@ export default defineBlocks([
         ", so the inequality is enough as a lower bound for the linear growth rate.",
       ]),
       paragraph([
-        "**Decidability**: the Newton polygon is the lower convex hull of a set of points whose ",
+        "Decidability: the Newton polygon is the lower convex hull of a set of points whose ",
         "coordinates are the ",
         math(String.raw`p`),
         "-adic valuations of the coefficients, hence integers, and it is obtained by a finite ",
-        "combinatorial computation. **Neither the individual eigenvalues nor the field** ",
+        "combinatorial computation. Neither the individual eigenvalues nor the field ",
         math(String.raw`\mathbb{Q}_p`),
-        " **has to be constructed.**",
+        " has to be constructed.",
       ]),
     ],
     proof: [
@@ -557,14 +557,10 @@ export default defineBlocks([
         "In ",
         math(String.raw`Z_N=\sum_i\lambda_i^N`),
         " the eigenvalue of least valuation is dominant, which gives the statement (the known Newton ",
-        "polygon argument). **However, cancellation of Skolem–Mahler–Lech type creates exceptions.** " +
+        "polygon argument). However, cancellation of Skolem–Mahler–Lech type creates exceptions. " +
           "The exceptional set is a finite union of arithmetic progressions and is therefore " +
-          "**infinite in general**. This is an error in the text of an earlier version, discovered " +
-          "during the Lean formalisation of cycle 18: that version wrote that there are finitely many " +
-          "exceptional ",
-        math(String.raw`N`),
-        ", which misread the phrase finite union of arithmetic progressions in the supporting report. ",
-        "**Counterexample**: for ",
+          "infinite in general; it is not a finite set. This point has been checked by formalisation. ",
+        "Counterexample: for ",
         math(String.raw`T=\begin{pmatrix}0&1\\2&0\end{pmatrix}`),
         " and ",
         math(String.raw`p=2`),
@@ -574,7 +570,7 @@ export default defineBlocks([
         math(String.raw`\mu_{\min}=1/2`),
         ", and yet ",
         math(String.raw`Z_N=0`),
-        " for **every odd index** ",
+        " for every odd index ",
         math(String.raw`N`),
         " (this was formalised in Chapter 8). For ",
         math(String.raw`N=2k`),
@@ -584,7 +580,7 @@ export default defineBlocks([
         math(String.raw`1/2`),
         ". Equality is therefore correct only as a statement about those ",
         math(String.raw`N`),
-        " that lie **outside the exceptional set**. In the verification carried out for this paper, ",
+        " that lie outside the exceptional set. In the verification carried out for this paper, ",
         "period detection failed in one instance as well, namely the six-vertex model with weights ",
         math(String.raw`(1,1,1)`),
         ", ",
@@ -624,11 +620,11 @@ export default defineBlocks([
       ]),
       list([
         [
-          "**For an odd prime** ",
+          "For an odd prime ",
           math(String.raw`p`),
-          " **with** ",
+          " with ",
           math(String.raw`p\nmid c`),
-          " **, putting** ",
+          " , putting ",
           math(String.raw`d=\operatorname{ord}_p(c)`),
           ": if ",
           math(String.raw`d\mid L`),
@@ -641,11 +637,11 @@ export default defineBlocks([
           ".",
         ],
         [
-          "**For** ",
+          "For ",
           math(String.raw`p=2`),
-          " **with** ",
+          " with ",
           math(String.raw`c`),
-          " **odd**: if ",
+          " odd: if ",
           math(String.raw`L`),
           " is odd then ",
           math(String.raw`v_2(c^L-1)=v_2(c-1)`),
@@ -659,7 +655,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "This is the standard lemma of lifting the exponent (LTE) (**known**). For odd ",
+        "This is the standard lemma of lifting the exponent (LTE) (known). For odd ",
         math(String.raw`p`),
         " it follows from ",
         math(String.raw`c^d\equiv1`),
@@ -670,7 +666,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**This proposition has been formalised with Lean 4 and mathlib4** (Chapter 8). On the ",
+        "This proposition has been formalised with Lean 4 and mathlib4 (Chapter 8). On the ",
         "archimedean side one has ",
         math(String.raw`\lim_L\frac1L\log|a_L|=\log c=m(z-c)`),
         ", so this is the smallest example in which both places can be written down explicitly for one ",
@@ -722,7 +718,7 @@ export default defineBlocks([
       list([
         [
           paragraph([
-            "**(The ladder)** If ",
+            "(The ladder) If ",
             math(String.raw`k\ge w^*+1`),
             " then ",
             math(String.raw`t_{k+1}\mid p\,t_k`),
@@ -735,7 +731,7 @@ export default defineBlocks([
         ],
         [
           paragraph([
-            "**(An improved upper bound)** For every ",
+            "(An improved upper bound) For every ",
             math(String.raw`k\ge1`),
             " one has ",
             math(String.raw`t_k\mid p^{\max(k-w^*-1,\,0)}\,t_{w^*+1}`),
@@ -750,7 +746,7 @@ export default defineBlocks([
         ],
         [
           paragraph([
-            "**(Structure)** Put ",
+            "(Structure) Put ",
             math(String.raw`\tau=\pi(p,1;S)`),
             " and ",
             math(String.raw`g_m=\min_{0\le N<r}v_p\bigl(\operatorname{Tr}(S^N(S^{p^m\tau}-I))\bigr)`),
@@ -760,7 +756,7 @@ export default defineBlocks([
             math(String.raw`t_k=p^{e_k}\tau`),
             " with ",
             math(String.raw`e_k=\min\{m\ge0: g_m\ge k\}`),
-            ". **The set defining this minimum is nonempty**: by the definition of ",
+            ". The set defining this minimum is nonempty: by the definition of ",
             math(String.raw`\tau`),
             " we have ",
             math(String.raw`S^{\tau}\equiv I\ (\mathrm{mod}\ p)`),
@@ -787,7 +783,7 @@ export default defineBlocks([
         ],
         [
           paragraph([
-            "**(No closed form exists)** The exponent ",
+            "(No closed form exists) The exponent ",
             math(String.raw`e_k`),
             " cannot be written as an affine expression ",
             math(String.raw`k-c`),
@@ -815,7 +811,7 @@ export default defineBlocks([
         " from the eigenvalue data. But this is a quantity of Wieferich type, and the identity ",
         math(String.raw`g_{m+1}=g_m+1`),
         " (the trace-sequence counterpart of the identity of Wall type) does not hold in general ",
-        "either. **Decidability is not lost**: both ",
+        "either. Decidability is not lost: both ",
         math(String.raw`g_m`),
         " and ",
         math(String.raw`t_k`),
@@ -870,8 +866,8 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**The point is that, of the two or more factors present, one is kept back to serve the trace " +
-          "orthogonality, and only the remaining ones are used as a power of the prime.** The factors in " +
+        "The point is that, of the two or more factors present, one is kept back to serve the trace " +
+          "orthogonality, and only the remaining ones are used as a power of the prime. The factors in " +
           "question are the copies of ",
         math(String.raw`B`),
         ", and the prime is ",
@@ -906,7 +902,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**This proposition has been formalised with Lean 4 and mathlib4** (Chapter 8). The formalisation ",
+        "This proposition has been formalised with Lean 4 and mathlib4 (Chapter 8). The formalisation ",
         "does not use the primality of ",
         math(String.raw`p`),
         "; all that is used is the identity ",
@@ -972,7 +968,7 @@ export default defineBlocks([
         math(String.raw`d_{\mathfrak p}`),
         " is the different exponent, and ",
         math(String.raw`e_{\mathfrak p}`),
-        " is the ramification index. **The rounding up in this formula is not a rounding up of a real number.** Both ",
+        " is the ramification index. The rounding up in this formula is not a rounding up of a real number. Both ",
         math(String.raw`v_{\mathfrak p}(\eta)`),
         " and ",
         math(String.raw`e_{\mathfrak p}`),

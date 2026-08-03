@@ -27,7 +27,7 @@ export default defineBlocks([
     id: "paper_011_remark_positioning",
     kind: "remark",
     origin: { path: "structured-latex/locales/en/content/001_intro.ts", ordinal: 2 },
-    title: { text: "What this paper is (stated up front)" },
+    title: { text: "What this paper is" },
     labels: ["paper_positioning"],
     habitat: "mixed",
     realEscape:
@@ -37,14 +37,14 @@ export default defineBlocks([
       "ℝ is the single limit in which L tends to infinity in Chapter 3.",
     statement: [
       paragraph([
-        "This paper is a **reframing** of known mathematics. It claims no new theorem, no new exact ",
+        "This paper is a reframing of known mathematics. It claims no new theorem, no new exact ",
         "solution, and no new deep number theory. All of the mathematical content is known, and Chapters 3 ",
         "and 5 identify the sources by name of reference and number of proposition.",
       ]),
       paragraph(["What this paper does provide is exactly the following four items."]),
       list([
         [
-          "**(a) A dictionary between the two places**: for one and the same integer spectral curve ",
+          "(a) A dictionary between the two places: for one and the same integer spectral curve ",
           math(String.raw`P`),
           ", we place side by side the quantity at the archimedean place (the free energy density, that is, ",
           "the Mahler measure) and the quantities at each ",
@@ -53,21 +53,21 @@ export default defineBlocks([
           "an explicit dictionary relating them to the quantities of statistical mechanics.",
         ],
         [
-          "**(b) A sharpening of the countabilisation**: the precise statement that the ",
+          "(b) A sharpening of the countabilisation: the precise statement that the ",
           math(String.raw`\Lambda`),
-          " side does **not** require ",
+          " side does not require ",
           math(String.raw`\mathbb{Q}_p`),
           " (which is uncountable).",
         ],
         [
-          "**(c) A determination of a family of decidable propositions**: we pin down the finite, elementary, ",
+          "(c) A determination of a family of decidable propositions: we pin down the finite, elementary, ",
           "decidable face of the ",
           math(String.raw`\Lambda`),
           " side as propositions that come with an explicit decision procedure and a witness ",
           "(Propositions A, B, C, N, L of Chapter 4, and Propositions T, V, W of Chapter 6).",
         ],
         [
-          "**(d) A map of the asymmetry of decidability**: the observation, organised in Chapter 7, that ",
+          "(d) A map of the asymmetry of decidability: the observation, organised in Chapter 7, that ",
           "Lehmer's problem is specific to the ",
           math(String.raw`\mathbb{R}`),
           " side, and that no corresponding open continuous gap exists on the ",
@@ -105,7 +105,7 @@ export default defineBlocks([
       paragraph([
         "Here ",
         math(String.raw`\Lambda=\bigoplus_{p}\mathbb{Z}\,\ell_p`),
-        " is the free abelian group indexed by the primes (**the logarithmic ordered group**), and ",
+        " is the free abelian group indexed by the primes (the logarithmic ordered group), and ",
         math(String.raw`\ell_p`),
         " is a formal symbol. For a positive rational number ",
         math(String.raw`q=\prod_p p^{e_p}`),
@@ -116,7 +116,7 @@ export default defineBlocks([
       paragraph([
         "In ",
         math(String.raw`\Lambda`),
-        ", **equality is agreement of prime factorisations**, and **the order is integer comparison of exponent vectors**; ",
+        ", equality is agreement of prime factorisations, and the order is integer comparison of exponent vectors; ",
         "both are settled by a finite procedure. Equality and order in ",
         math(String.raw`\overline{\mathbb{Q}}`),
         " are settled by minimal polynomials and separation of roots. Neither passes through ",
@@ -149,24 +149,24 @@ export default defineBlocks([
       ]),
       list([
         [
-          "**Axis 1 (membership)**: which set the quantity under study lives in. A finite, discrete quantity ",
+          "Axis 1 (membership): which set the quantity under study lives in. A finite, discrete quantity ",
           "lives on the countable side.",
         ],
         [
-          "**Axis 2 (computability)**: a finite, discrete quantity is always computable (enumeration ",
+          "Axis 2 (computability): a finite, discrete quantity is always computable (enumeration ",
           "terminates). This axis is trivial in that it does not distinguish one model from another.",
         ],
         [
-          "**Axis 3 (complexity)**: whether the finite-size quantity is polynomial-time or #P-hard.",
+          "Axis 3 (complexity): whether the finite-size quantity is polynomial-time or #P-hard.",
         ],
         [
-          "**Axis 4 (solvability)**: whether the thermodynamic limit admits a closed form. This is ",
+          "Axis 4 (solvability): whether the thermodynamic limit admits a closed form. This is ",
           "independent of Axis 3, and comes from other structures such as duality, the Yang–Baxter ",
           "equation, or free fermions.",
         ],
       ]),
       paragraph([
-        "**Axes 1 and 2 imply nothing whatsoever about Axis 4.** That a finite-size quantity lives on the ",
+        "Axes 1 and 2 imply nothing whatsoever about Axis 4. That a finite-size quantity lives on the ",
         "countable side and is decidable shows nothing at all about whether the limit has a closed form. ",
         "This paper is a paper about Axis 1 (and part of Axis 2); it claims nothing about solvability.",
       ]),
