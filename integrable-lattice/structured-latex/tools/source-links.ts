@@ -1004,7 +1004,9 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         report: "outputs/reports/cycle19_T3_trace_period_closed_form_and_lean.md",
         from: "**指数はこれ以上下げられない**",
-        to: "**指数はこれ以上下げられない**",
+        // cycle 27 step 4: 範囲を実例の行まで広げた。covers が挙げる $w^*$ は
+        // 反例（$T=F\\oplus F$, $p=2$, $w^*=1$）の行に在り、1 行だけでは report 側に錨が無かった。
+        to: "ちょうどである。",
         covers: "指数 $k-w^*-1$ の最良性",
       },
       {
@@ -1321,7 +1323,9 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         report: "outputs/reports/cycle16_T1_monsky_primary_sources.md",
         from: "and an explicit interpretation of $l_0$ is given. The other coefficients remain mysterious.",
-        to: "and an explicit interpretation of $l_0$ is given. The other coefficients remain mysterious.",
+        // cycle 27 step 4: covers が挙げる $m_0$ は Definition 1.1 で定義されている。
+        // 1 行だけの範囲では report 側に錨が無かったので、その定義まで広げた。
+        to: "**Definition 1.1.**",
         covers: "限界 (i)（$m_0$ と $l_0$ 以外の係数は原論文が mysterious と明記している）",
       },
       {
@@ -1492,7 +1496,8 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         report: "sagemath/check/cycle10_T3_lehmer/padic_analog_README.md",
         from: "## 結論: Λ 側に Lehmer 型問題は存在しない（決定可能側）",
         to: "誇張しない。",
-        covers: "二素点の難易度が対称でないこと（ℝ 側の Lehmer 問題 ↔ Λ 側の離散な $\\mu$）と、新しい定理ではないこと",
+        // cycle 27 step 4: report が書いているのは $\\mu_p$（岩澤不変量）なので、記号をそちらへ揃えた。
+        covers: "二素点の難易度が対称でないこと（ℝ 側の Lehmer 問題 ↔ Λ 側の離散な $\\mu_p$）と、新しい定理ではないこと",
       },
       {
         report: "sagemath/check/cycle10_T3_lehmer/README.md",
@@ -1502,6 +1507,19 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       },
     ],
     acknowledged: [
+      {
+        item: "\\mu_{p}",
+        reason:
+          "report は岩澤不変量を $\\mu_p$（素点 $p$ を添字に明示）と書き、本文は同じ量を「岩澤型不変量 $\\mu\\in\\mathbb{Z}_{\\ge0}$」と添字なしで書いている。本注記は特定の $p$ を固定せず「$\\Lambda$ 側の不変量は離散である」という性質だけを述べるので、添字を落とした表記を採っている。量も主張も同じで、記法の選択の差である。",
+        grounds: {
+          type: "notation",
+          // この passage は条件文が 1 文も取れないので、免除の引用は台帳の covers に対して照合される。
+          // その covers 自身が report に錨を打たれている（cycle 27 step 4 の検査）ので、
+          // 免除 → covers → report と鎖がつながる。
+          reportQuote: "Λ 側の離散な $\\mu_p$",
+          bodyQuote: "\\mu\\in\\mathbb{Z}_{\\ge0}",
+        },
+      },
       {
         item: "測度・エントロピー",
         reason:
