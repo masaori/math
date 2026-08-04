@@ -46,10 +46,33 @@ cycle 33 総括は「全域木の同定へ入ると、**グラフの連結性と
 2 つを合わせると、辺の本数が $|V|-1$ で連結なら**根でない葉が必ずある**
 （`exists_leaf_ne_root`）。閉路も道も長さも使わない。
 
+## 葉の行に沿った展開（cycle 36 step 2 で書いた）
+
+逆向きの帰納法は 2 つの部品からなる——**葉の行に沿った展開**と、
+**葉を除いた小さいグラフへの帰納**である。段 5 に前者を書いた。
+
+まず一般の行列の補題として、行に $0$ でない成分が 1 つしかなければ
+行列式が符号つきでその小行列式に落ちること（`det_eq_of_row_single_entry`）を書き、
+次にグラフの側から、葉の行がその形をしていること
+（`incMatrixSigned_eq_zero_of_degOn_one`）と、その 1 つの成分が $\pm1$ であること
+（`incMatrixSigned_leaf_eq_one_or_neg_one`）を与える。
+合わせたものが `det_submatrix_eq_of_leaf` で、**帰納法の 1 歩ぶんである。**
+
+**ここでも見立てが外れた（4 サイクル連続）。** 葉の行が単項であることに連結性は要らない——
+効くのは次数が $1$ 以下であることだけで、他の辺が接していれば次数が $2$ 以上になる、
+という数え上げ 1 つで出る（`two_le_degOn_of_two_incidences`）。
+自己ループが除かれるのも同じ数え上げからで、始点と終点が同時に $v$ なら次数は $2$ になる。
+
 ## 形式化しなかったもの
 
-* **逆向きの帰納法そのもの**（葉の行に沿った行列式の展開と、葉を除いた小さいグラフへの帰納）。
-  入口（葉の存在）は段 4 に入ったが、展開と帰納は書いていない。
+* **葉を除いた小さいグラフへの帰納**。段 5 の展開は「行と列を 1 つずつ落とした小行列式」までで、
+  それが**葉と葉に接する辺を取り除いたグラフの小行列式**であることを言っていない。
+  **書けなかった理由は技術的な壁ではなく、いまの定式化の形である**——
+  本 file は頂点の型 $V$ を固定し、`Fintype.card V` で数え上げている
+  （握手補題も葉の存在もそう書いてある）。葉を取り除くと頂点の型が変わるので、
+  そのままでは帰納法の仮定を当てられない。当てるには**頂点の部分集合を引数に持つ形へ
+  書き直す**（`Fintype.card V` を頂点集合の `card` にする）必要があり、
+  それは段 1 から段 4 までの書き直しになる。本サイクルでは行っていない。
 * **指標分解**（塔の各レベルへ分ける段）。これは別の段である。
 -/
 import Mathlib
@@ -331,6 +354,127 @@ theorem exists_leaf_ne_root (s t : E → V) (S : Finset E) (r : V)
   omega
 
 end Leaf
+
+/-! ## 段 5: 葉の行に沿った行列式の展開（cycle 36 step 2）
+
+逆向きの帰納法は 2 つの部品からなる。
+
+1. **葉の行に沿った展開** — 葉の行には $0$ でない成分が 1 つしかないので、
+   行列式は符号つきでその小行列式に落ちる。
+2. **葉を除いた小さいグラフへの帰納** — 落ちた小行列式が、葉と葉に接する辺を取り除いた
+   グラフの小行列式であることを言う。
+
+本段は 1 を書く。まず一般の行列の補題として書き、次にグラフの側から
+「葉の行は $0$ でない成分を 1 つしか持たず、その値は $\pm1$ である」を与える。 -/
+
+section LeafExpansion
+
+/-- **行に $0$ でない成分が 1 つしかないときの展開**。一般の行列の補題で、グラフは出てこない。
+mathlib の `Matrix.det_succ_row` の和が 1 項に潰れるだけである。 -/
+theorem det_eq_of_row_single_entry {n : ℕ} (M : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ)
+    (i0 j0 : Fin (n + 1)) (hzero : ∀ j, j ≠ j0 → M i0 j = 0) :
+    M.det = (-1) ^ ((i0 : ℕ) + (j0 : ℕ)) * M i0 j0 *
+      (M.submatrix i0.succAbove j0.succAbove).det := by
+  classical
+  rw [Matrix.det_succ_row M i0]
+  refine Finset.sum_eq_single j0 ?_ ?_
+  · intro j _ hj
+    rw [hzero j hj]
+    ring
+  · intro h
+    exact absurd (Finset.mem_univ j0) h
+
+omit [Fintype V] [Fintype E] [DecidableEq E] in
+/-- 頂点 `v` に接する辺が `S` の中に 2 本あれば、次数は $2$ 以上である。 -/
+theorem two_le_degOn_of_two_incidences (s t : E → V) (S : Finset E) {v : V} {e e' : E}
+    (heS : e ∈ S) (he'S : e' ∈ S) (hne : e ≠ e')
+    (hinc : s e = v ∨ t e = v) (hinc' : s e' = v ∨ t e' = v) :
+    2 ≤ degOn s t S v := by
+  classical
+  have hs : ∀ {a : E}, a ∈ S → s a = v → a ∈ S.filter (fun x => s x = v) :=
+    fun ha hsa => Finset.mem_filter.mpr ⟨ha, hsa⟩
+  have ht : ∀ {a : E}, a ∈ S → t a = v → a ∈ S.filter (fun x => t x = v) :=
+    fun ha hta => Finset.mem_filter.mpr ⟨ha, hta⟩
+  rcases hinc with h1 | h1 <;> rcases hinc' with h2 | h2
+  · -- どちらも始点側: 始点側の filter に 2 元ある。
+    have := Finset.one_lt_card.mpr ⟨e, hs heS h1, e', hs he'S h2, hne⟩
+    simp only [degOn]; omega
+  · -- 始点側と終点側に 1 つずつ。
+    have h3 := Finset.card_pos.mpr ⟨e, hs heS h1⟩
+    have h4 := Finset.card_pos.mpr ⟨e', ht he'S h2⟩
+    simp only [degOn]; omega
+  · have h3 := Finset.card_pos.mpr ⟨e, ht heS h1⟩
+    have h4 := Finset.card_pos.mpr ⟨e', hs he'S h2⟩
+    simp only [degOn]; omega
+  · have := Finset.one_lt_card.mpr ⟨e, ht heS h1, e', ht he'S h2, hne⟩
+    simp only [degOn]; omega
+
+omit [Fintype V] [Fintype E] [DecidableEq E] in
+/-- **葉の行は、接する 1 本の辺のところ以外はすべて $0$ である。**
+次数が $1$ なので、他の辺は `v` に接することができない。 -/
+theorem incMatrixSigned_eq_zero_of_degOn_one (s t : E → V) (S : Finset E) {v : V}
+    (hdeg : degOn s t S v ≤ 1) {e e' : E} (heS : e ∈ S) (he'S : e' ∈ S)
+    (hinc : s e = v ∨ t e = v) (hne : e' ≠ e) :
+    incMatrixSigned s t v e' = 0 := by
+  classical
+  by_contra hnz
+  -- 成分が $0$ でないなら `v` は `e'` に接している。
+  have hinc' : s e' = v ∨ t e' = v := by
+    by_contra hc
+    push_neg at hc
+    simp [incMatrixSigned, Ne.symm hc.1, Ne.symm hc.2] at hnz
+  have := two_le_degOn_of_two_incidences s t S heS he'S (Ne.symm hne) hinc hinc'
+  omega
+
+omit [Fintype V] [Fintype E] [DecidableEq E] in
+/-- **葉の行の、接する辺のところの成分は $\pm1$ である。**
+自己ループでなければ、$v$ は始点か終点のどちらか一方だけである。 -/
+theorem incMatrixSigned_leaf_eq_one_or_neg_one (s t : E → V) (S : Finset E) {v : V}
+    (hdeg : degOn s t S v ≤ 1) {e : E} (heS : e ∈ S) (hinc : s e = v ∨ t e = v) :
+    incMatrixSigned s t v e = 1 ∨ incMatrixSigned s t v e = -1 := by
+  classical
+  -- 自己ループなら次数が 2 になるので、始点と終点が同時に `v` になることはない。
+  have hnot : ¬ (s e = v ∧ t e = v) := by
+    rintro ⟨hse, hte⟩
+    have h3 : 0 < (S.filter (fun x => s x = v)).card :=
+      Finset.card_pos.mpr ⟨e, Finset.mem_filter.mpr ⟨heS, hse⟩⟩
+    have h4 : 0 < (S.filter (fun x => t x = v)).card :=
+      Finset.card_pos.mpr ⟨e, Finset.mem_filter.mpr ⟨heS, hte⟩⟩
+    simp only [degOn] at hdeg
+    omega
+  rcases hinc with h | h
+  · right
+    have hte : v ≠ t e := fun hc => hnot ⟨h, hc.symm⟩
+    simp [incMatrixSigned, hte, h]
+  · left
+    have hse : v ≠ s e := fun hc => hnot ⟨hc.symm, h⟩
+    simp [incMatrixSigned, hse, h]
+
+omit [Fintype V] [Fintype E] [DecidableEq E] in
+/-- **葉の行に沿った展開（グラフの言葉で）**。
+行の並べ方 `r` の `i0` 番目が葉 `v`、列の並べ方 `c` の `j0` 番目がその葉に接する辺 `e` なら、
+小行列式は符号つきで、その行と列を落とした小行列式に等しい。
+
+**これが逆向きの帰納法の 1 歩ぶんである。** 残っているのは、落ちた小行列式が
+「葉と葉に接する辺を取り除いたグラフの小行列式」だと言う段である（下記「形式化しなかったもの」）。 -/
+theorem det_submatrix_eq_of_leaf {n : ℕ} (s t : E → V) (S : Finset E) {v : V}
+    (hdeg : degOn s t S v ≤ 1) {e : E} (heS : e ∈ S) (hinc : s e = v ∨ t e = v)
+    (r : Fin (n + 1) → V) (c : Fin (n + 1) → E) (hc : ∀ j, c j ∈ S)
+    (hcinj : Function.Injective c) (i0 j0 : Fin (n + 1)) (hr : r i0 = v) (hcj : c j0 = e) :
+    ((incMatrixSigned s t).submatrix r c).det
+      = (-1) ^ ((i0 : ℕ) + (j0 : ℕ)) * incMatrixSigned s t v e *
+        (((incMatrixSigned s t).submatrix r c).submatrix
+          i0.succAbove j0.succAbove).det := by
+  classical
+  have hrow : ∀ j, j ≠ j0 → ((incMatrixSigned s t).submatrix r c) i0 j = 0 := by
+    intro j hj
+    simp only [Matrix.submatrix_apply, hr]
+    exact incMatrixSigned_eq_zero_of_degOn_one s t S hdeg heS (hc j) hinc
+      (by rw [← hcj]; exact fun hcontra => hj (hcinj hcontra))
+  rw [det_eq_of_row_single_entry _ i0 j0 hrow]
+  simp [Matrix.submatrix_apply, hr, hcj]
+
+end LeafExpansion
 
 end SpanningConnectivity
 end IntegrableLattice

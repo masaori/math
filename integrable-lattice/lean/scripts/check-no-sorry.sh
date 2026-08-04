@@ -664,6 +664,12 @@ targets=(
   IntegrableLattice.SpanningConnectivity.exists_degOn_le_one
   IntegrableLattice.SpanningConnectivity.one_le_degOn_of_reach
   IntegrableLattice.SpanningConnectivity.exists_leaf_ne_root
+  # 葉の行に沿った行列式の展開（cycle 36 step 2）
+  IntegrableLattice.SpanningConnectivity.det_eq_of_row_single_entry
+  IntegrableLattice.SpanningConnectivity.two_le_degOn_of_two_incidences
+  IntegrableLattice.SpanningConnectivity.incMatrixSigned_eq_zero_of_degOn_one
+  IntegrableLattice.SpanningConnectivity.incMatrixSigned_leaf_eq_one_or_neg_one
+  IntegrableLattice.SpanningConnectivity.det_submatrix_eq_of_leaf
 
   # cycle 34 step 2: 全域木の同定の半分（連結でなければ小行列式は 0）。
   # 逆向き（連結なら ±1）は書いていない。
