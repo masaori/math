@@ -3,6 +3,12 @@
 各検算は `<対象名>/` に置き、`overview.md` に**対象ラベル**（どの種・どの命題を検証するか）を宣言する。
 規約はリポジトリ共通（[CLAUDE.md](../../../CLAUDE.md) のプロジェクトテンプレート）。
 
+## 実施済みの検算
+
+| ディレクトリ | 対象 | 結果 |
+|---|---|---|
+| [`clifford_matrix_tower/`](clifford_matrix_tower/) | $\mathrm{Cl}_{2n}(\mathbb{C})\cong M_{2^n}(\mathbb{C})$（Jordan–Wigner 生成元、$n=1,2,3$） | **合致**。$\mathbb{R}$ 脱出なし |
+
 ## 予定されている検算（未着手）
 
 | ディレクトリ | 対象 | 出典 |

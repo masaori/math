@@ -149,6 +149,29 @@
 - **半群では逆極限側が「記法」として使われている**（Reiterman: 擬多様体＝profinite 等式で定義）。
   有限の世界を語るために逆極限側の元を言語として持ち出す用法。
 
+### 具体例を三つ入れた（同日追記）
+
+抽象論だけでは噛み合わないので、手で追える例を文書の先頭に置いた。
+
+- **行列環の塔 → Clifford 代数**。$\mathrm{Cl}_{2n}(\mathbb{C})\cong M_{2^n}(\mathbb{C})$ で、
+  生成元を 2 個増やす操作＝$M_2$ をもう一つテンソルする操作。
+  $M_2\subset M_4\subset M_8\subset\cdots$ の**順極限が無限 Clifford 代数（可算次元）**、
+  **$C^*$ 完備化が UHF $M_{2^\infty}$＝CAR 代数（非可算）**。同じ塔のどこで止めるかで濃度が決まる。
+  Steinitz 数 $2^\infty$、次元群 $K_0=\mathbb{Z}[1/2]$。
+  $M_3$ の塔なら $\mathbb{Z}[1/3]$、全部混ぜれば $\mathbb{Q}$。
+  **完全不変量が $\mathbb{Q}$ の部分群として出る**＝$\Lambda$ と同種の対象。
+  → 検算 [`sagemath/check/clifford_matrix_tower/`](sagemath/check/clifford_matrix_tower/)（$n=1,2,3$ で確認、$\mathbb{R}$ 脱出なし）
+- **繋ぎ方を変えると順序に代数的数が出る**。包含の重複度を $\binom{1\ 1}{1\ 0}$ にすると
+  $K_0\cong\mathbb{Z}^2$ のままだが正錐が $a+b\varphi>0$（$\varphi$＝黄金比）で決まる。
+  **$\mathbb{R}$ に埋まって見えるだけで、必要なのは $\overline{\mathbb{Q}}$ まで**（符号判定は決定可能）。
+  SFT の次元群一般に同じことが起きる（正錐＝Perron 固有ベクトル、成分は代数的数）。
+  **Lind の Perron 数定理はこの事実の別の顔。**
+- **有限体の塔**。$\mathbb{F}_2\subset\mathbb{F}_4\subset\mathbb{F}_{16}\subset\cdots$、
+  $\varinjlim\mathbb{F}_{2^{n!}}=\overline{\mathbb{F}_2}$（**可算な代数閉体**）、Galois 側は $\hat{\mathbb{Z}}$（非可算）。
+
+**無限 Clifford 代数と $\overline{\mathbb{F}_2}$ という無関係な代数系が、同じ Steinitz 数の枠で分類される。**
+これが「機構は代数系の種類に依存しない」ことの最も具体的な現れ。
+
 ## 次にやること（優先順）
 
 1. **舞台のカタログを埋める（最優先）** — 定式化は決着したので、有限構造の族ごとに
