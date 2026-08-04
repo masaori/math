@@ -626,27 +626,43 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     // cycle 38 step 2 で新設。巡回群による指標分解の芯を書いた。
+    // cycle 39 step 2 で残していた 3 つを `CharacterDecompositionTwoVariable.lean` へ書いたので、
+    // この節の残りは「一般の $\Gamma$」と「基礎グラフの型」の 2 つになった。
     file: "CharacterDecomposition.lean",
     declarationsAtReview: 19,
     heading: "形式化しなかったもの",
     items: [
       {
-        leanFragment: "（2 変数）の場合",
+        leanFragment: "一般の有限アーベル群",
         kind: "未形式化",
-        ledgerFragment: "の場合",
-        crossFilePhrase: "2 変数の指標分解",
+        ledgerFragment: "一般の有限アーベル群",
+        crossFilePhrase: "一般の有限アーベル群による指標分解",
       },
       {
-        leanFragment: "そのラプラシアンがブロック巡回であること",
+        leanFragment: "基礎グラフを型として持っていない",
         kind: "未形式化",
-        ledgerFragment: "そのラプラシアンがブロック巡回であること",
-        crossFilePhrase: "導来グラフのラプラシアンがブロック巡回",
+        ledgerFragment: "基礎グラフを型として持っていない",
+        crossFilePhrase: "voltage グラフの基礎グラフの型",
+      },
+    ],
+  },
+  {
+    // cycle 39 step 2 で新設。2 変数へ重ね、導来グラフのラプラシアンへ当て、評価値と結んだ。
+    file: "CharacterDecompositionTwoVariable.lean",
+    declarationsAtReview: 18,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "一般の有限アーベル群",
+        kind: "未形式化",
+        ledgerFragment: "一般の有限アーベル群",
+        crossFilePhrase: "一般の有限アーベル群による指標分解",
       },
       {
-        leanFragment: "での評価値であること",
+        leanFragment: "基礎グラフを型として持っていない",
         kind: "未形式化",
-        ledgerFragment: "での評価値であること",
-        crossFilePhrase: "voltage ラプラシアンの評価値であること",
+        ledgerFragment: "基礎グラフを型として持っていない",
+        crossFilePhrase: "voltage グラフの基礎グラフの型",
       },
     ],
   },

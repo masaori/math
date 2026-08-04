@@ -699,6 +699,26 @@ targets=(
   IntegrableLattice.NewtonPolytope.midpoint_of_two_decompositions
   IntegrableLattice.NewtonPolytope.emb_injective
   IntegrableLattice.NewtonPolytope.newt_mul
+  # 指標分解を 2 変数へ重ね導来グラフへ当てる（CharacterDecompositionTwoVariable.lean・cycle 39 step 2）
+  IntegrableLattice.CharacterDecompositionTwoVariable.blockCirculant₂
+  IntegrableLattice.CharacterDecompositionTwoVariable.hat₂
+  IntegrableLattice.CharacterDecompositionTwoVariable.regroup
+  IntegrableLattice.CharacterDecompositionTwoVariable.outerKernel
+  IntegrableLattice.CharacterDecompositionTwoVariable.innerKernel
+  IntegrableLattice.CharacterDecompositionTwoVariable.blockCirculant₂_eq_submatrix
+  IntegrableLattice.CharacterDecompositionTwoVariable.hat_outerKernel_eq_blockCirculant
+  IntegrableLattice.CharacterDecompositionTwoVariable.hat_innerKernel_eq_hat₂
+  IntegrableLattice.CharacterDecompositionTwoVariable.det_blockCirculant₂
+  IntegrableLattice.CharacterDecompositionTwoVariable.voltageDegree
+  IntegrableLattice.CharacterDecompositionTwoVariable.derivedKernel
+  IntegrableLattice.CharacterDecompositionTwoVariable.derivedLaplacian
+  IntegrableLattice.CharacterDecompositionTwoVariable.derivedLaplacian_eq_blockCirculant
+  IntegrableLattice.CharacterDecompositionTwoVariable.charHom
+  IntegrableLattice.CharacterDecompositionTwoVariable.evalChar
+  IntegrableLattice.CharacterDecompositionTwoVariable.evalChar_single
+  IntegrableLattice.CharacterDecompositionTwoVariable.voltageMatrix
+  IntegrableLattice.CharacterDecompositionTwoVariable.hat_eq_evalChar
+  IntegrableLattice.CharacterDecompositionTwoVariable.det_hat_eq_evalChar_det
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）
