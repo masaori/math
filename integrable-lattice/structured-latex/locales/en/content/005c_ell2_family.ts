@@ -37,6 +37,7 @@ export default defineBlocks([
     habitat: "Qbar",
     verification: ["sagemath/check/cycle20_T3_ell2"],
     lean: [
+      "IntegrableLattice.EllTwo.ordKappaAalpha",
       "IntegrableLattice.gpp1_both_even",
       "IntegrableLattice.gpp1_not_both_four",
       "IntegrableLattice.gpp1_lambda_ne",

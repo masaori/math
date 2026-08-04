@@ -50,6 +50,7 @@ export default defineBlocks([
     habitat: "Qbar",
     verification: ["sagemath/check/cycle20_T3_s_infinity"],
     lean: [
+      "IntegrableLattice.SInfinity.BucketVanish",
       "IntegrableLattice.k5_argmin_unique_above",
       "IntegrableLattice.r0_add_one_comm",
       "IntegrableLattice.r0_empty_case",

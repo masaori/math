@@ -274,7 +274,9 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 G″ は閉形式の形・場合分けの排反と網羅・$n=1$ の但し書き、および cycle 27 が形式化した " +
-      "(G″1) の付値の議論まで。4 通りの閉形式の導出そのものは未形式化。",
+      "(G″1) の付値の議論まで。4 通りの閉形式の導出そのものは未形式化。" +
+      "**cycle 34 step 3 の照合で、`EllTwoClosedForm.lean` が挙げている matrix-tree 定理も足す**" +
+      "（$\\kappa_n$ の独立計算に要る。外部定理の台帳を見よ）。",
   },
   { block: "paper_061_theorem_V", state: "完了", note: "命題 V は $d=1$ と $d=2$。" },
   {
@@ -308,6 +310,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     remaining:
       "命題 J は (J1)(J1′) の桁定理が完了、(J4) の総和と係数の取り出しが部分的。" +
       "(J2)(J3)(J5)(J6) の各主張と、cycle 27 で形式化した (J1) の代数的な芯の外側が残る。" +
+      "**cycle 34 step 3 の照合で、`Cycle24Corrections.lean` が挙げている 系 Q7 の $r=2$ そのもの（2 変数 Laurent 環の一意分解性が要る配線）を、この欄が書いていなかったので足す。**" +
       "**cycle 33 step 2 の照合で、この欄が `lean/` の記述より少なく書いていたことが分かったので足す**——" +
       "`DigitTheorem.lean` は 命題 J2′ の同値（$\\ell$ 奇なら 破れる $\\iff k=2$ 等）を残りに挙げており、" +
       "`TowerTypeCoefficients.lean` は (a) 定理 J7 の主張そのもの" +
@@ -320,7 +323,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 K は (K2)(K3)(K6) と、cycle 27 が形式化した (K5) の一意性・$r_0$ の書き換えまで。" +
-      "(K1) の対応と (K4) の重複度の主張は未形式化。",
+      "(K1) の対応と (K4) の重複度の主張は未形式化。" +
+      "**cycle 34 step 3 の照合で、`SInfinityDecision.lean` が挙げている 3 件を足す**——補題 W2 の (iv)、定理 W4 の主張そのもの、系 W7。",
   },
   {
     block: "paper_101_theorem_digit_branch",
@@ -345,7 +349,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（mathlib に `IsCyclotomicExtension.autEquivPow` が在る。2026-08-05 実測、" +
       "`lean/logs/mathlib-gap-survey-cycle34-cyclotomic-galois.log`）。" +
       "整数環へ制限する段を含めて書いていない。" +
-      "$\\Psi_M$ がモニックであることと分解することも仮定として受け取っている（同じく配線）。",
+      "$\\Psi_M$ がモニックであることと分解することも仮定として受け取っている（同じく配線）。" +
+      "**cycle 34 step 3 の照合で、`DigitBranchRecursion.lean` が挙げている 2 件も足す**——$\\mathbb{Z}_\\ell$ 指数の $(1+x)^\\gamma$（`PowerSeries` も二項冪級数も mathlib に在るので配線）と、$\\mathrm{sep}$ についての帰納法そのもの（測度を $\\mathbb{Z}_\\ell$ 上の有限台の関数として定義し直す配線）。",
   },
   {
     block: "paper_106_theorem_drop_assumption",
@@ -380,7 +385,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 M は (M1) の規約・(M2) の $\\lambda$・(M3) の $L$ 非依存性・(M5)(M6)、および " +
-      "cycle 27 が形式化した $K(P_0)$ の存在と有界性まで。閉形式の導出そのものは未形式化。",
+      "cycle 27 が形式化した $K(P_0)$ の存在と有界性まで。閉形式の導出そのものは未形式化。" +
+      "**cycle 34 step 3 の照合で、`Cycle25Corrections.lean` が挙げている 3 件を足す**——定理 G2 の 1（Galois 不変性。配線）、系 Q7 の $r=2$（2 変数 Laurent 環の一意分解性）、および voltage グラフのラプラシアン行列式そのもの（matrix-tree 定理。外部定理の台帳を見よ）。",
   },
   {
     block: "paper_112_theorem_coefficient_layers",

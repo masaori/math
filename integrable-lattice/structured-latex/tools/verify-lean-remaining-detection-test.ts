@@ -151,18 +151,82 @@ const cases: Case[] = [
       }).violations,
   },
   {
-    name: "本文の主張へ紐づかない場合は違反にせず件数で出す",
-    shouldFail: false,
-    run: () => {
-      const result = auditLeanRemaining({
+    name: "本文の主張へ紐づかないうえ externalEntry の宣言も無ければ違反にする（cycle 34 step 3）",
+    shouldFail: true,
+    run: () =>
+      auditLeanRemaining({
         entry: threeItemEntry(),
         section: sectionThree,
         linked: [],
+      }).violations,
+  },
+  {
+    name: "紐づかなくても externalEntry の欄が同じことを書いていれば通る（cycle 34 step 3）",
+    shouldFail: false,
+    run: () => {
+      const result = auditLeanRemaining({
+        entry: { ...threeItemEntry(), externalEntry: "外部定理 X" },
+        section: sectionThree,
+        linked: [],
+        externalText: ledgerAllThree,
       });
       return result.violations.length === 0 && result.unlinked === 3
         ? []
         : ["紐づかない場合の扱いが設計と違う"];
     },
+  },
+  {
+    name: "externalEntry の欄が lean/ より少なく書いていれば違反にする（cycle 34 step 3）",
+    shouldFail: true,
+    run: () =>
+      auditLeanRemaining({
+        entry: { ...threeItemEntry(), externalEntry: "外部定理 X" },
+        section: sectionThree,
+        linked: [],
+        externalText: ledgerOnlyOne,
+      }).violations,
+  },
+  {
+    name: "「参照だけ」の指し先が実在しなければ違反にする（cycle 34 step 3）",
+    shouldFail: true,
+    run: () =>
+      auditLeanRemaining({
+        entry: {
+          file: "F.lean",
+          heading: "形式化しなかったもの",
+          items: [
+            {
+              leanFragment: "甲",
+              kind: "参照だけ",
+              referent: { kind: "lean ファイル", target: "NoSuchFile.lean" },
+            },
+          ],
+        },
+        section: { heading: "形式化しなかったもの", bullets: ["甲 は別ファイル"] },
+        linked: [],
+        referentExists: () => false,
+      }).violations,
+  },
+  {
+    name: "「参照だけ」の指し先が実在すれば通る（cycle 34 step 3）",
+    shouldFail: false,
+    run: () =>
+      auditLeanRemaining({
+        entry: {
+          file: "F.lean",
+          heading: "形式化しなかったもの",
+          items: [
+            {
+              leanFragment: "甲",
+              kind: "参照だけ",
+              referent: { kind: "lean ファイル", target: "RealFile.lean" },
+            },
+          ],
+        },
+        section: { heading: "形式化しなかったもの", bullets: ["甲 は別ファイル"] },
+        linked: [],
+        referentExists: () => true,
+      }).violations,
   },
 ];
 

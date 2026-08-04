@@ -17,12 +17,15 @@ import {
   auditLeanRemaining,
   parseRemainingSection,
   type LeanRemainingFile,
+  type LeanRemainingReferent,
 } from "./lean-remaining-model.ts";
 import { FORMALIZATION_COVERAGE } from "./formalization-coverage.ts";
+import { EXTERNAL_THEOREM_COVERAGE } from "./external-theorem-coverage.ts";
 import { loadContentFiles } from "./content-modules.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const leanDir = join(here, "..", "..", "lean", "IntegrableLattice");
+const logDir = join(here, "..", "..", "lean", "logs");
 
 const violations: string[] = [];
 
@@ -90,6 +93,34 @@ function blocksFor(file: string): string[] {
   return out;
 }
 
+// --- 外部定理の台帳（紐づかないファイルの照合先） -------------------------------
+const externalText = new Map<string, string>();
+for (const entry of EXTERNAL_THEOREM_COVERAGE) {
+  const e = entry as unknown as Record<string, string>;
+  externalText.set(
+    e.name!,
+    [e.remaining, e.note, e.presence, e.wiring, e.isolation, e.notAGround, e.absence]
+      .filter((x) => typeof x === "string")
+      .join(" "),
+  );
+}
+for (const entry of LEAN_REMAINING_LEDGER) {
+  if (entry.externalEntry === undefined) continue;
+  if (externalText.has(entry.externalEntry)) continue;
+  violations.push(
+    `[externalEntry が実在しない] ${entry.file} — 外部定理の台帳に「${entry.externalEntry}」が無い`,
+  );
+}
+
+// --- 「参照だけ」の指し先を解決する ---------------------------------------------
+const logFiles = readdirSync(logDir);
+const logBodies = logFiles.map((name) => readFileSync(join(logDir, name), "utf8"));
+function referentExists(referent: LeanRemainingReferent): boolean {
+  if (referent.kind === "lean ファイル") return leanFiles.includes(referent.target);
+  if (referent.kind === "ログ") return logFiles.includes(referent.target);
+  return logBodies.some((body) => body.includes(referent.target));
+}
+
 // --- 2〜5. 件数・実在・台帳への反映 ---------------------------------------------
 const counts = { 未形式化: 0, 形式化済み: 0, 参照だけ: 0 };
 let unlinked = 0;
@@ -101,7 +132,14 @@ for (const entry of LEAN_REMAINING_LEDGER) {
     text: ledgerText.get(block) ?? "",
     state: String(ledgerState.get(block) ?? ""),
   }));
-  const result = auditLeanRemaining({ entry, section, linked });
+  const result = auditLeanRemaining({
+    entry,
+    section,
+    linked,
+    externalText:
+      entry.externalEntry === undefined ? null : (externalText.get(entry.externalEntry) ?? null),
+    referentExists,
+  });
   violations.push(...result.violations);
   counts.未形式化 += result.counts.未形式化;
   counts.形式化済み += result.counts.形式化済み;
@@ -119,10 +157,14 @@ console.log(
   `  分類: 未形式化 ${counts.未形式化} 件 / 形式化済み ${counts.形式化済み} 件 / ` +
     `参照だけ ${counts.参照だけ} 件`,
 );
-console.log(`  本文の主張へ紐づかないファイルの未形式化項目 ${unlinked} 件（台帳と照合できない）`);
 console.log(
-  "  **分類そのものは人の判断である。**「参照だけ」と書けば台帳への反映を要求されないので、" +
-    "そこは逃げ道になりうる。逃げ道を狭めるため内訳を毎回数で出す。",
+  `  本文の主張へ紐づかないファイルの未形式化項目 ${unlinked} 件` +
+    `（cycle 34 step 3 以降は、外部定理の台帳のエントリと突き合わせている）`,
+);
+console.log(
+  "  **分類そのものは人の判断である。** ただし cycle 34 step 3 で 2 つの逃げ道を塞いだ——" +
+    "(1) 本文へ紐づかないファイルは `externalEntry` の宣言を要求し、無ければ違反にする。" +
+    "(2) 「参照だけ」は実在を確かめられる指し先（lean ファイル / ログ / mathlib）を型で要求する。",
 );
 console.log(
   "  限界: `ledgerFragment` が台帳に在ることは確かめられるが、それが同じ事柄を指しているかは" +

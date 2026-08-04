@@ -28,6 +28,7 @@ export default defineBlocks([
     habitat: "Qbar",
     verification: ["sagemath/check/cycle19_T3_theta_ge_ell"],
     lean: [
+      "IntegrableLattice.Cycle24.D2_level_iff",
       "IntegrableLattice.choose_cast_of_lt",
       "IntegrableLattice.choose_cast_pow",
       "IntegrableLattice.choose_cast_pow_succ",

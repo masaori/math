@@ -46,6 +46,7 @@ export default defineBlocks([
       "sagemath/check/cycle21_T3_b_star",
     ],
     lean: [
+      "IntegrableLattice.Cycle25.Q5_c1_isLeast",
       "IntegrableLattice.K_set_nonempty",
       "IntegrableLattice.K_set_bounded",
     ],

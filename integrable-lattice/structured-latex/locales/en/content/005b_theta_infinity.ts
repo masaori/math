@@ -34,6 +34,7 @@ export default defineBlocks([
     habitat: "Qbar",
     verification: ["sagemath/check/cycle19_T3_theta_infinity"],
     lean: [
+      "IntegrableLattice.GeneralTower.S0_closed",
       "IntegrableLattice.bouquet_cases_exclusive",
       "IntegrableLattice.card_diag_three",
       "IntegrableLattice.card_diag_two",

@@ -44,6 +44,21 @@
 
 export type LeanRemainingKind = "未形式化" | "形式化済み" | "参照だけ";
 
+/**
+ * **「参照だけ」の指し先**（cycle 34 step 3 で追加）。
+ *
+ * cycle 33 は「`参照だけ` と書けば台帳への反映を要求されない」ことを逃げ道として記録していた。
+ * 塞ぎ方は、**`参照だけ` にも実在を確かめられる指し先を要求する**ことである。
+ * 何も指していない「参照だけ」は書けなくなる。
+ */
+export type LeanRemainingReferent =
+  /** 同じ `lean/IntegrableLattice/` の別ファイル（実在を確かめる）。 */
+  | { readonly kind: "lean ファイル"; readonly target: string }
+  /** `lean/logs/` の走査ログ（実在を確かめる）。 */
+  | { readonly kind: "ログ"; readonly target: string }
+  /** mathlib に在るもの。走査ログのどれかにその語が現れることを確かめる。 */
+  | { readonly kind: "mathlib"; readonly target: string };
+
 export type LeanRemainingItem =
   | {
       /** その箇条書きに実在すべき文字列（実在を機械が確かめる）。 */
@@ -52,7 +67,13 @@ export type LeanRemainingItem =
       /** 検査 F の台帳の当該エントリに実在すべき文字列。**未形式化では型で必須**。 */
       readonly ledgerFragment: string;
     }
-  | { readonly leanFragment: string; readonly kind: "形式化済み" | "参照だけ" };
+  | { readonly leanFragment: string; readonly kind: "形式化済み" }
+  | {
+      readonly leanFragment: string;
+      readonly kind: "参照だけ";
+      /** **型で必須**。何も指さない「参照だけ」を書けなくする。 */
+      readonly referent: LeanRemainingReferent;
+    };
 
 export type LeanRemainingFile = {
   /** `lean/IntegrableLattice/` からの相対ファイル名。 */
@@ -62,6 +83,18 @@ export type LeanRemainingFile = {
    * 見出しを書き換えて検査から逃げる道が塞がる。
    */
   readonly heading: string;
+  /**
+   * **本文の主張へ紐づかないファイルの受け皿**（cycle 34 step 3 で追加）。
+   *
+   * cycle 33 の照合は、本文の `lean` 紐づけからファイル→主張の対応を導いていたので、
+   * どの主張にも紐づかないファイル（matrix-tree の部品など）の未形式化項目を
+   * **突き合わせずに件数だけ出していた**。そこが穴だった。
+   *
+   * そういうファイルは、代わりに**外部定理の台帳のどのエントリに属するか**を宣言する。
+   * 宣言があれば `ledgerFragment` はそのエントリの本文と突き合わせる。
+   * **紐づけも宣言も無ければ違反**にする（黙って照合対象の外に置けなくなる）。
+   */
+  readonly externalEntry?: string;
   /** 箇条書きと同じ順序で並べる。件数の一致を機械が見る。 */
   readonly items: readonly LeanRemainingItem[];
 };
@@ -93,7 +126,11 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       { leanFragment: "系 Q7 の $r=2$ そのもの", kind: "未形式化", ledgerFragment: "系 Q7" },
-      { leanFragment: "欠落調査は", kind: "参照だけ" },
+      {
+        leanFragment: "欠落調査は",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle24.log" },
+      },
     ],
   },
   {
@@ -109,8 +146,16 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     file: "CyclotomicValuationQ4a.lean",
     heading: "形式化しなかったもの",
     items: [
-      { leanFragment: "が素元であること自体は mathlib", kind: "参照だけ" },
-      { leanFragment: "は `PropQLaurentLift.lean`", kind: "参照だけ" },
+      {
+        leanFragment: "が素元であること自体は mathlib",
+        kind: "参照だけ",
+        referent: { kind: "mathlib", target: "zeta_sub_one_prime" },
+      },
+      {
+        leanFragment: "は `PropQLaurentLift.lean`",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "PropQLaurentLift.lean" },
+      },
     ],
   },
   {
@@ -164,6 +209,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   {
     file: "KirchhoffCounting.lean",
     heading: "形式化しなかったもの",
+    externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
       {
         leanFragment: "でないことと「全域木であること」の同値",
@@ -176,6 +222,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   {
     file: "SpanningConnectivity.lean",
     heading: "形式化しなかったもの",
+    externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
       {
         leanFragment: "連結なら小行列式が $\\pm1$",
@@ -199,15 +246,27 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         kind: "未形式化",
         ledgerFragment: "モニック",
       },
-      { leanFragment: "のレベル分解と 命題 W の積の公式", kind: "参照だけ" },
+      {
+        leanFragment: "のレベル分解と 命題 W の積の公式",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "PropW.lean" },
+      },
     ],
   },
   {
     file: "PropQLaurentLift.lean",
     heading: "形式化しなかったもの",
     items: [
-      { leanFragment: "の分解 $(1.2)$ そのもの", kind: "参照だけ" },
-      { leanFragment: "が一意分解環であること", kind: "参照だけ" },
+      {
+        leanFragment: "の分解 $(1.2)$ そのもの",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "SInfinityDecision.lean" },
+      },
+      {
+        leanFragment: "が一意分解環であること",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle22.log" },
+      },
     ],
   },
   {
@@ -250,6 +309,10 @@ export type LeanRemainingAuditInput = {
   readonly section: { heading: string; bullets: string[] };
   /** そのファイルに対応する台帳エントリ（本文の紐づけ経由で導いたもの）。 */
   readonly linked: readonly { block: string; text: string; state: string }[];
+  /** `externalEntry` が指す外部定理の台帳エントリの本文（無ければ `null`）。 */
+  readonly externalText?: string | null;
+  /** 参照先の実在（`参照だけ` の指し先を解決した結果）。呼び出し側が IO で作る。 */
+  readonly referentExists?: (referent: LeanRemainingReferent) => boolean;
 };
 
 /**
@@ -261,7 +324,7 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
   counts: Record<LeanRemainingKind, number>;
   unlinked: number;
 } {
-  const { entry, section, linked } = input;
+  const { entry, section, linked, externalText = null, referentExists } = input;
   const violations: string[] = [];
   const counts: Record<LeanRemainingKind, number> = { 未形式化: 0, 形式化済み: 0, 参照だけ: 0 };
   let unlinked = 0;
@@ -285,9 +348,33 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
         `[宣言が Lean 側に実在しない] ${entry.file} #${index + 1} — 「${item.leanFragment}」が箇条書きに無い`,
       );
     }
+    if (item.kind === "参照だけ") {
+      // cycle 34 step 3: 「参照だけ」にも指し先の実在を要求する（逃げ道を塞ぐ）。
+      if (referentExists && !referentExists(item.referent)) {
+        violations.push(
+          `[参照だけの指し先が実在しない] ${entry.file} #${index + 1} — ` +
+            `${item.referent.kind}「${item.referent.target}」が見つからない`,
+        );
+      }
+      return;
+    }
     if (item.kind !== "未形式化") return;
     if (linked.length === 0) {
+      // cycle 34 step 3: 紐づかないファイルは、外部定理の台帳のエントリと突き合わせる。
+      if (externalText === null) {
+        violations.push(
+          `[照合先が無い] ${entry.file} #${index + 1} — ` +
+            `本文の主張へ紐づかないのに externalEntry の宣言も無い（照合の外に置けない）`,
+        );
+        return;
+      }
       unlinked += 1;
+      if (!externalText.includes(item.ledgerFragment)) {
+        violations.push(
+          `[外部定理の台帳が lean/ より少なく書いている] ${entry.file} #${index + 1} — ` +
+            `「${item.ledgerFragment}」が ${entry.externalEntry} の欄に無い`,
+        );
+      }
       return;
     }
     if (!linked.some((l) => l.text.includes(item.ledgerFragment))) {

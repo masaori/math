@@ -30,6 +30,7 @@ export default defineBlocks([
     habitat: "Qbar",
     verification: ["sagemath/check/cycle20_T3_cancellation"],
     lean: [
+      "IntegrableLattice.sigma_eq_of_max",
       "IntegrableLattice.sigma_ne_zero_of_lambda_ne_zero",
       "IntegrableLattice.PropRResultantValuation.associated_resultant_psi",
       "IntegrableLattice.PropRResultantValuation.padicValInt_eq_of_associated_pow",
