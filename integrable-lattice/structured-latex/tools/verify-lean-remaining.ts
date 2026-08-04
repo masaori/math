@@ -8,7 +8,7 @@
  * 宣言を二重に持つと片方だけが腐るので、導けるものは導く。
  */
 
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -18,6 +18,8 @@ import {
   auditDeclarationCount,
   auditCrossFilePhrase,
   parseRemainingSection,
+  REMAINING_SECTION_HEADINGS,
+  GAP_HEADING_HINTS,
   type LeanRemainingFile,
   type LeanRemainingReferent,
 } from "./lean-remaining-model.ts";
@@ -196,6 +198,8 @@ const logBodies = logFiles.map((name) => readFileSync(join(logDir, name), "utf8"
 function referentExists(referent: LeanRemainingReferent): boolean {
   if (referent.kind === "lean ファイル") return leanFiles.includes(referent.target);
   if (referent.kind === "ログ") return logFiles.includes(referent.target);
+  // 規約（cycle 38 step 4）: `lean/` 直下に置いた規約の文書。実在を確かめる。
+  if (referent.kind === "規約") return existsSync(join(here, "..", "..", "lean", referent.target));
   return logBodies.some((body) => body.includes(referent.target));
 }
 
@@ -286,6 +290,46 @@ console.log(
     "  限界: **語の選び方が検査の強さの上限である**（違う言い方で書けば素通りする）。" +
     "語が広すぎれば偽陽性が出る。" +
     "また分かるのは「同じ語について書いている」ことまでで、「形式化した」ことは分からない。",
+);
+
+// --- 見出しの棚卸し（cycle 38 step 4）------------------------------------------
+// cycle 37 総括は「照合の外に居るファイルが 1 つある」と書いていたが、実測は 9 本だった。
+// 認めていた見出しが 2 通りしかなく、それ以外の言い方が節を持たないものとして
+// 素通りしていたためである。認める語は広げたが、**それは網羅ではない**——
+// まったく新しい言い方をすればやはり素通りする。
+// そこで、**形式化していない事柄を書いていそうな見出しなのに、認める語のどれでも
+// 始まっていないもの**を全数で数え、あれば違反にする。次の言い方が現れた瞬間に人へ見せる。
+let headingsScanned = 0;
+const unrecognizedHeadings: string[] = [];
+for (const file of leanFiles) {
+  const text = readFileSync(join(leanDir, file), "utf8");
+  for (const m of text.matchAll(/^## (.+)$/gm)) {
+    const heading = m[1]!;
+    headingsScanned += 1;
+    if (REMAINING_SECTION_HEADINGS.some((h) => heading.startsWith(h))) continue;
+    if (!GAP_HEADING_HINTS.some((hint) => heading.includes(hint))) continue;
+    unrecognizedHeadings.push(`${file}: 「${heading}」`);
+  }
+}
+for (const h of unrecognizedHeadings) {
+  violations.push(
+    `[認めていない言い方の見出し] ${h} — 形式化していない事柄を書いているように読めるのに、` +
+      "残り一覧として認める語のどれでも始まっていない（`REMAINING_SECTION_HEADINGS` へ足すか、見出しを揃えること）",
+  );
+}
+console.log(
+  `  見出しの棚卸し（cycle 38 step 4 で追加）: 走査した見出し ${headingsScanned} 件 / ` +
+    `認める語 ${REMAINING_SECTION_HEADINGS.length} 通り / 認めていない言い方 ${unrecognizedHeadings.length} 件`,
+);
+console.log(
+  "  **cycle 37 総括は「照合の外に居るファイルは 1 つ」と書いていたが、cycle 38 の実測は 9 本だった。**" +
+    "見出しの言い方が 2 通りしか認められておらず、それ以外の言い方が" +
+    "**節を持たないものとして素通りしていた**（台帳にも登録されない）。" +
+    "認める語を実測に合わせて広げ、現れた 9 本を全部登録した。\n" +
+    "  限界: **これは網羅ではない。** 塞げるのは「いま実在する言い方」までで、" +
+    "まったく新しい言い方をすればやはり素通りする。" +
+    "上の棚卸しは、その外側が現れた瞬間に人へ見せるためのものであって、" +
+    "**言い方を思いつく側を止めるものではない。**",
 );
 
 if (violations.length > 0) {

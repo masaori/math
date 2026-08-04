@@ -54,6 +54,12 @@ export type LeanRemainingKind = "未形式化" | "形式化済み" | "参照だ�
 export type LeanRemainingReferent =
   /** 同じ `lean/IntegrableLattice/` の別ファイル（実在を確かめる）。 */
   | { readonly kind: "lean ファイル"; readonly target: string }
+  /**
+   * **`lean/` に置いた規約の文書**（cycle 38 step 4 で追加。実在を確かめる）。
+   * 「これは命題ではないので Lean の定理にしていない」という**対象外の判断**を指すための種別である。
+   * 自由文の逃げ道にしないため、判断が記録されている実在のファイルを指すことを型で要求する。
+   */
+  | { readonly kind: "規約"; readonly target: string }
   /** `lean/logs/` の走査ログ（実在を確かめる）。 */
   | { readonly kind: "ログ"; readonly target: string }
   /** mathlib に在るもの。走査ログのどれかにその語が現れることを確かめる。 */
@@ -382,6 +388,223 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 38 step 4 の「見出しの棚卸し」が見つけた 10 本目。
+    // **こちらの手作業の走査は 9 本しか数えておらず、この 1 本を落としていた。そう書く。**
+    file: "PropBTracePeriod.lean",
+    declarationsAtReview: 17,
+    heading: "形式化していない段（正直に明記する）",
+    items: [
+      {
+        leanFragment: "への係数拡大",
+        kind: "参照だけ",
+        referent: { kind: "規約", target: "README.md" },
+      },
+      {
+        leanFragment: "ことは**手計算**",
+        kind: "参照だけ",
+        referent: { kind: "規約", target: "README.md" },
+      },
+    ],
+  },
+  // --- cycle 38 step 4: 見出しの言い方で照合から外れていた 9 本を登録する ---
+  {
+    file: "DualityPAdicFiniteL.lean",
+    declarationsAtReview: 25,
+    heading: "形式化していないもの（正直に書く）",
+    items: [
+      {
+        // 本文の「有限手続きで計算できる」は命題ではないので Lean の定理にしていない
+        // （命題 A (4) と同じ扱い。判断は lean/README.md の表に記録してある）。
+        leanFragment: "計算可能性の言明そのもの",
+        kind: "参照だけ",
+        referent: { kind: "規約", target: "README.md" },
+      },
+      {
+        leanFragment: "本文の $a^{\\mathrm{red}}_L$ は $d$ 変数の主張である",
+        kind: "未形式化",
+        ledgerFragment: "$d\\ge2$",
+        crossFilePhrase: "簡約周期点数の $d\\ge2$ の場合",
+      },
+      {
+        leanFragment: "の塔の非自明性の判定",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "PropV.lean" },
+      },
+    ],
+  },
+  {
+    file: "MultigraphLaplacian.lean",
+    declarationsAtReview: 7,
+    heading: "何が入っていないか（matrix-tree 定理までに残る段）",
+    externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
+    items: [
+      {
+        leanFragment: "Cauchy–Binet の公式",
+        kind: "形式化済み",
+        witness: "det_mul_eq_sum_over_subsets",
+      },
+      {
+        leanFragment: "符号付き接続行列の小行列式が $0$ か $\\pm1$ であること",
+        kind: "形式化済み",
+        witness: "det_submatrix_eq_one_or_neg_one",
+      },
+      {
+        leanFragment: "から出る Kirchhoff の定理",
+        kind: "形式化済み",
+        witness: "det_mul_transpose_eq_card_spanning",
+      },
+      {
+        leanFragment: "導来グラフのラプラシアンを指標で分解し",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "CharacterDecomposition.lean" },
+      },
+    ],
+  },
+  {
+    file: "PeriodicPointResultant.lean",
+    declarationsAtReview: 19,
+    heading: "形式化していないもの（正直に書く）",
+    items: [
+      {
+        leanFragment: "が 1 の冪根の組で零点をもたなければ",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "DualityPAdicFiniteL.lean" },
+      },
+      {
+        // 同上。手続きの主張は命題ではない。
+        leanFragment: "という決定可能性の主張",
+        kind: "参照だけ",
+        referent: { kind: "規約", target: "README.md" },
+      },
+    ],
+  },
+  {
+    file: "PropB.lean",
+    declarationsAtReview: 4,
+    heading: "形式化していない主張（**逆方向＝ $\\pi(p,1)\\mid\\operatorname{lcm}$**）",
+    items: [
+      {
+        // 命題 B そのものは `PropBTracePeriod.lean` が両方向を持つ（本文の紐づけもそちら）。
+        // 本ファイルの記述は、その前段の部分的な形式化についてのものである。
+        leanFragment: "は形式化していない",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "PropBTracePeriod.lean" },
+      },
+      {
+        leanFragment: "障害は mathlib の欠落ではない",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle24.log" },
+      },
+      {
+        leanFragment: "組み立ての作業量",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle24.log" },
+      },
+      {
+        leanFragment: "等式は未形式化",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "PropBTracePeriod.lean" },
+      },
+    ],
+  },
+  {
+    file: "PropCPeriod.lean",
+    declarationsAtReview: 14,
+    heading: "形式化していない主張",
+    items: [
+      {
+        // 台帳は 命題 C について「等号は人手証明のとおり一般に偽なので形式化対象ではない」と
+        // 判断している。対象外の判断なので規約を指す。
+        leanFragment: "は形式化していない",
+        kind: "参照だけ",
+        referent: { kind: "規約", target: "README.md" },
+      },
+      {
+        // 最小周期そのものは `TracePeriodAssembly.lean` が `IsLeast` で持っている。
+        leanFragment: "という概念自体を",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "TracePeriodAssembly.lean" },
+      },
+    ],
+  },
+  {
+    file: "PropCTracePeriod.lean",
+    declarationsAtReview: 22,
+    heading: "形式化していない主張（理由つき）",
+    items: [
+      {
+        leanFragment: "は形式化していない",
+        kind: "形式化済み",
+        witness: "isLeast_isPLevel",
+      },
+      {
+        leanFragment: "そのものの最小性・純周期性",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "PropCPeriod.lean" },
+      },
+    ],
+  },
+  {
+    file: "TracePeriodAssembly.lean",
+    declarationsAtReview: 24,
+    heading: "形式化していないもの（正直に書く）",
+    items: [
+      {
+        leanFragment: "は cycle 37 step 3 で埋めた",
+        kind: "形式化済み",
+        witness: "dvd_of_mulVec_dvd_of_isPLevel",
+      },
+      {
+        leanFragment: "命題 C′ の $\\det G=\\operatorname{disc}",
+        kind: "未形式化",
+        ledgerFragment: "の重複度の積の形",
+        crossFilePhrase: "$\\det G$ の重複度の積の形",
+      },
+      {
+        leanFragment: "の最良性と",
+        kind: "未形式化",
+        ledgerFragment: "のしきい値 $w^*+1$ の最良性",
+        crossFilePhrase: "しきい値 $w^*+1$ の最良性（反例の族）",
+      },
+    ],
+  },
+  {
+    file: "WStarElementaryDivisors.lean",
+    declarationsAtReview: 19,
+    heading: "何が入って、何が入っていないか（命題 W\\* の 3 段のうち第 2 段）",
+    items: [
+      { leanFragment: "の定義そのもの（`wStarOfCoeffs`）", kind: "形式化済み",
+        witness: "isLeast_isPLevel" },
+      { leanFragment: "（`det_weightedGram`）", kind: "形式化済み", witness: "det_weightedGram" },
+      { leanFragment: "を行列の等式にしたもの", kind: "形式化済み",
+        witness: "eulerMatrix_mul_weightedGram" },
+      { leanFragment: "可逆な取り替えで像に対する $p$ 進の条件が変わらないこと", kind: "形式化済み",
+        witness: "isPLevel_range_comp" },
+      {
+        leanFragment: "の整数への降下",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "WStarIntegralDescent.lean" },
+      },
+      {
+        leanFragment: "が可約な場合",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "EulerDualBasisCommRing.lean" },
+      },
+    ],
+  },
+  {
+    file: "WStarIntegralDescent.lean",
+    declarationsAtReview: 11,
+    heading: "何が入っていないか（命題 W\\* が完了でない理由）",
+    items: [
+      {
+        leanFragment: "その可換環版は cycle 36 step 1 で書いた",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "EulerDualBasisCommRing.lean" },
+      },
+    ],
+  },
+  {
     // cycle 38 step 3 で新設。命題 C″ (3) の構造の主張を書いた。
     file: "TracePeriodStructure.lean",
     declarationsAtReview: 1,
@@ -569,16 +792,56 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
 ];
 
 /** 節の見出しと箇条書きを取り出す。箇条書きは行頭 `* ` で始まる塊とする。 */
+/**
+ * **残り一覧の節と認める見出しの語**（cycle 38 step 4 で全数へ広げた）。
+ *
+ * cycle 37 総括は「照合の外に居るファイルが 1 つある」と書いていたが、
+ * **cycle 38 の着手時の実測では 9 本あった。** 認めていた見出しが
+ * 「形式化しなかったもの…」と「形式化した残りの段…」の 2 通りだけで、
+ * それ以外の言い方で形式化していない事柄を書いているファイルが、
+ * 節を持たないものとして素通りしていたためである。
+ *
+ * **見出しの言い方で検査から外れる道を塞ぐには、認める語を実態に合わせて広げ、
+ * 広げた結果として現れたファイルを全部台帳へ登録するしかない。**
+ * ここに語を足すたびに、その語を使っているファイルが登録を要求される
+ * （登録しなければ「台帳に無いファイル」で赤くなる）。
+ *
+ * **限界**: これは網羅ではない。**まったく新しい言い方をすれば、やはり素通りする。**
+ * 塞げるのは「いま実在する言い方」までであり、`verify-lean-remaining.ts` の
+ * 「見出しの棚卸し」がその外側を人へ見せる役をもつ。
+ */
+export const REMAINING_SECTION_HEADINGS = [
+  "形式化しなかったもの",
+  "形式化した残りの段",
+  "形式化していないもの",
+  "形式化していない主張",
+  "何が入っていないか",
+  "何が入って、何が入っていないか",
+  "形式化していない段",
+] as const;
+
+/**
+ * **見出しが残り一覧を宣言しているかの判定に使う語**（`verify-lean-remaining.ts` の棚卸し）。
+ * これに当たるのに `REMAINING_SECTION_HEADINGS` のどれでも始まらない見出しは、
+ * **新しい言い方で書かれた残り一覧の疑いがある**ので人へ見せる。
+ */
+export const GAP_HEADING_HINTS = [
+  "形式化していない",
+  "形式化しなかった",
+  "入っていない",
+  "残る段",
+  "未形式化",
+] as const;
+
 export function parseRemainingSection(
   source: string,
 ): { heading: string; bullets: string[] } | null {
-  const match =
-    /^## (形式化しなかったもの[^\n]*|形式化した残りの段[^\n]*)$([\s\S]*?)(?=^-\/$|^## )/m.exec(
-      source,
-    );
+  const alternatives = REMAINING_SECTION_HEADINGS.map((h) => `${h}[^\\n]*`).join("|");
+  const match = new RegExp(`^## (${alternatives})$([\\s\\S]*?)(?=^-\\/$|^## )`, "m").exec(source);
   if (!match) return null;
   const body = match[2]!;
-  const bullets = [...body.matchAll(/^\* ([\s\S]+?)(?=^\* |\s*$)/gm)].map((m) =>
+  // 箇条書きの記号は `*` `-` と番号付き（`1.`）を認める（実測で 3 通りとも使われている）。
+  const bullets = [...body.matchAll(/^(?:[*-] |\d+\. )([\s\S]+?)(?=^(?:[*-] |\d+\. )|\s*$)/gm)].map((m) =>
     m[1]!.replace(/\s+/g, " ").trim(),
   );
   return { heading: match[1]!, bullets };

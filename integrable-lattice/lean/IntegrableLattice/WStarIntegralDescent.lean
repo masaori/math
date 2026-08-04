@@ -54,7 +54,9 @@ mathlib のトレース双対（`Module.Basis.traceDual`）も双対基底（`Li
 体の上にしか無い（2026-08-04 実測。`lean/logs/mathlib-gap-survey-cycle30-euler.log`）。
 これは配線の欠落ではなく素材の欠落であり、可換環の上の Euler の双対基底公式
 $\operatorname{Tr}_{A/R}(c_i\theta^j)=\delta_{ij}$ を自前で書くことになる。
-本ファイルはそれを書いていない。
+
+* **その可換環版は cycle 36 step 1 で書いた**（`EulerDualBasisCommRing.lean`）。
+  **本ファイルはそれを書いていない**ので、可約な場合を使うときはそちらを見ること。
 
 ## 形式化して分かったこと
 

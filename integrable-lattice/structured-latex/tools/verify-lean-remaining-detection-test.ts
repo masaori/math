@@ -11,6 +11,8 @@ import {
   auditDeclarationCount,
   auditCrossFilePhrase,
   parseRemainingSection,
+  REMAINING_SECTION_HEADINGS,
+  GAP_HEADING_HINTS,
   type LeanRemainingFile,
 } from "./lean-remaining-model.ts";
 
@@ -349,4 +351,31 @@ if (failed > 0) {
   }
 }
 
-console.log(`${cases.length + 5} / ${cases.length + 5} 件で検出を実証した。`);
+// --- 見出しの棚卸し（cycle 38 step 4）-------------------------------------------
+// 「認める語のどれでも始まらないが、形式化していない事柄を書いていそうな見出し」を
+// 実際に挙げること、および認める語で始まる見出しは挙げないことを実証する。
+{
+  const isUnrecognized = (heading: string) =>
+    !REMAINING_SECTION_HEADINGS.some((h) => heading.startsWith(h)) &&
+    GAP_HEADING_HINTS.some((hint) => heading.includes(hint));
+  // cycle 38 の実測で現に外れていた言い方（登録前の状態を再現する）。
+  const escaped = isUnrecognized("まだ形式化していない事柄（新しい言い方）");
+  // 認める語で始まるものは挙げない（偽陽性でない側）。
+  const recognized = isUnrecognized("形式化しなかったもの（mathlib の欠落か配線か）");
+  // 形式化と無関係な見出しも挙げない。
+  const unrelated = isUnrecognized("目的");
+  console.log("");
+  console.log("「見出しの棚卸し」の検出テスト");
+  console.log("  検出: 認める語のどれでも始まらない新しい言い方");
+  console.log(`      ${escaped ? "挙げた" : "挙がらなかった（NG）"}`);
+  console.log("  検出: 認める語で始まる見出しは挙げない（偽陽性でない側）");
+  console.log(`      ${recognized ? "挙げた（NG）" : "挙がらなかった"}`);
+  console.log("  検出: 形式化と無関係な見出しは挙げない（偽陽性でない側）");
+  console.log(`      ${unrelated ? "挙げた（NG）" : "挙がらなかった"}`);
+  if (!escaped || recognized || unrelated) {
+    console.log("NG: 見出しの棚卸しが期待どおりに動いていない");
+    process.exit(1);
+  }
+}
+
+console.log(`${cases.length + 8} / ${cases.length + 8} 件で検出を実証した。`);
