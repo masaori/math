@@ -95,19 +95,22 @@ lake build
 | `IntegrableLattice/Cycle25Corrections.lean` | cycle 25 step 1 の訂正の検算（**訂正後**の補題 Q5 の $c_1$、定理 Q1 の $b=0$、定理 G2 $(3.2)$ の規約）と、**本文へ入った命題 M・命題 U の照合**、$A_\mathrm{gen}$ のレベル非依存性 | `outputs/reports/cycle25_ops_fix_q5_c1_and_g2_cond32.md`、`outputs/reports/cycle25_ops_lean_cycle25.md`、本文 `structured-latex/content/010_general_closed_form.ts` |
 | `IntegrableLattice/TracePeriodAssembly.lean` | 命題 C′ の上界そのものの組み立てと、命題 C″ の (2)(4) | `outputs/reports/cycle29_ops_formalization_triage.md` |
 | `IntegrableLattice/PeriodicPointResultant.lean` | 本文の claim「周期点数は入れ子の終結式で厳密に計算できる」の内容（$d=1$ と $d=2$） | `outputs/reports/cycle29_ops_formalization_triage.md` |
+| `IntegrableLattice/DualityPAdicFiniteL.lean` | 双対命題 D の ($p$ 素点, 有限 $L$) の段（$d=1$）。簡約周期点数の定義そのものと、それが終結式ひとつで書ける $0$ でない整数であること | `outputs/reports/cycle29_ops_duality_p_side.md` |
 
 ## 形式化の現状
 
 **目標は論文の主張を全数形式化することである**（2026-08-03 ユーザー方針）。
 一部の形式化で足れりとしない。
 
-**現在の被覆（2026-08-04 実測）: 主張 24 件のうち 完了 5・部分的 16・未着手 3。全数まで残り 19 件。**
+**現在の被覆（2026-08-04 実測）: 主張 24 件のうち 完了 5・部分的 17・未着手 2。全数まで残り 19 件。**
 cycle 28 step 1 で命題 W* と命題 F が未着手から部分的へ移った。
 cycle 29 step 1 は部分的 16 件を「素材が無い」と「配線をしていないだけ」へ仕分けし、
 配線側から 3 件（周期点数の終結式表示・命題 C′・命題 C″）を実際に書いた。
+cycle 29 step 2 は双対命題 D の $p$ 素点側を切り出し、未着手 → 部分的 へ動かした
+（未着手 3 → 2・部分的 16 → 17）。
 **それでも残り 19 件は変わっていない**——残りは「完了でないもの」の数であり、
-動かした 3 件はいずれも同じ命題の別の段（整数行列の単因子、または一般の $d$ の型）が残って
-まだ完了ではないからである。仕分けの表は
+動かした 4 件はいずれも同じ命題の別の段（整数行列の単因子、一般の $d$ の型、
+または多変数の Mahler 測度）が残ってまだ完了ではないからである。仕分けの表は
 `outputs/reports/cycle29_ops_formalization_triage.md`。
 この件数は `npm run check` の検査 F（`structured-latex/tools/verify-formalization-coverage.ts`）が
 **毎回出す**ので、放置されれば見える。ブロック単位の台帳は
@@ -138,6 +141,7 @@ cycle 29 step 1 は部分的 16 件を「素材が無い」と「配線をして
 | **U**（本文の命題 U。係数の情報階層） | **部分的**（(U1) の $c$・$d$ が (M3)+(M4) から出ること、(U2) の $T_\mathrm{def}$ と (M4) の角括弧の一致、(U4) の数値、(U6) の切り捨て付値列）／**本文と根拠 report の食い違いは検出されなかった** | `Cycle25Corrections.lean`: `U1_c_from_M3_M4` / `U1_d_from_M3_M4` / `U2_bracket_eq_Tdef` / `U4_c_at_ell_two` / `U4_d_at_ell_two` / `U4_p_one_values` / `U4_p_three_values` / `U4_c_same_d_differs` / `U6_trunc_determines_stage_data` | **未形式化**: (U4)(U5) の塔から $\tilde E$ を作る段（Matrix–Tree）、(U6) の「$\tilde E\bmod\ell^{N}$ が切り捨て付値列を決める」側（$\mathcal{O}_k$ 係数の線形性の**配線**）。**射程の限定**: `U6_trunc_determines_stage_data` は付値が**整数値**（$k=0$）の場合であり、$\Lambda_k=j^{*}/\varphi(\ell^{k})$ が非整数になる一般の $k$ は含まない |
 | **W\***（$w^*$ の代数的閉形式） | **部分的**（微分の段と付値の段。3 段のうち 2 段）／本文に食い違いなし。**過剰仮定を 1 件検出** | `PropWStarDifferent.lean`: `derivative_prod_pow`（$\chi=\prod_i f_i^{a_i}$ のとき $\chi'=h\cdot\sum_i a_i f_i'(\rho/f_i)$。「$\chi'/h\in\mathbb{Z}[x]$」を割り算ではなく積の形で述べたので商体へ出ない）、`ceilDivNat` / `ceilDivNat_le_iff`（切り上げ除算の特徴づけ）、`isLeast_wStar`（$\min\{j:\forall\mathfrak p,\ j\,e_\mathfrak p\ge v_\mathfrak p\}=\max_\mathfrak p\lceil v_\mathfrak p/e_\mathfrak p\rceil$）、`wStar_eq_zero_of_unramified` / `wStar_le_of_tame`（本文の 2 つの但し書き） | **過剰仮定**: 微分の段に $f_i$ の既約性も相異性も要らない（効くのは $a_i\ge1$ だけで、任意の可換環の任意の族で成り立つ）。既約性が要るのは $\rho=\mathrm{rad}(\chi)$ と名乗る段と $\rho$ の分離性である。**本文の「この切り上げは実数の切り上げではない」は型でそのまま出た**（$\mathbb{N}$ の除算ひとつ。$\mathbb{R}$ も $\mathbb{Q}$ も現れない）。**未形式化**: 双対の段（$A^\vee=\rho'(\theta)^{-1}A$ から $\operatorname{coker}(G)\cong A/\eta A$ へ）。理由は下の C′・C″ の欄と同じで、`traceDual` / `differentIdeal` は**在る**が Gram 行列の最大単因子への配線と整数行列の Smith 標準形が無い |
 | **F**（有限台なら $\lambda$ が計算できる） | **部分的**（(F1) の心臓部）／本文に食い違いなし。**過剰仮定を 1 件検出** | `PropFFiniteSupport.lean`: `exists_ne_of_fibers_sum_eq_zero`（**すべてのファイバーの係数和が消えるなら分類写像は台の上で単射でない**＝人手証明の「各 $c_e\ne0$ なので、割るにはどのファイバーも 2 点以上でなければならない」）、`vecGcd` / `prim` / `isUnit_vecGcd_prim`（原始化と、方向が単元倍を除いて一意なこと）、`directions` / `mem_directions_of_fibers_sum_eq_zero`（**割りうる方向は有限集合 $V(E)=\{\mathrm{prim}(e-e'):e\ne e'\in E\}$ に入る**＝非可算な $\mathbb{P}^{d-1}(\mathbb{Z}_p)$ を走らなくてよいことの中身） | **過剰仮定**: この段に体であることも標数 $p$ であることも要らない（係数は任意の可換群でよい）。**未形式化**: (1) $(\gamma_v-1)\mid\bar f$ と係数和の消滅の**同値そのもの**。$d$ 変数の完備群環 $\mathbb{F}_p[[\Gamma]]$ とその素イデアルの記述が要るが、mathlib には岩澤代数の一般論が `PowerSeries` の断片としてしか無い（**配線ではなく素材から要る**）。(2) (F2 境界) の停止問題への帰着。`Nat.Partrec` / `Turing` は**在る**が、「係数を計算する手続きで与えられた $f$」という入力の与え方を型にする設計をこちらが持っていない（**mathlib の欠落ではなくこちらの未設計**） |
+| **双対命題 D**（同一の整数曲線の二素点） | **部分的**（$p$ 素点・有限の $L$ の段を $d=1$ で）／本文に食い違いなし | `DualityPAdicFiniteL.lean`: 簡約周期点数 $a^{\mathrm{red}}_L=\prod_{\zeta^L=1,\ P(\zeta)\neq0}P(\zeta)$ の**定義そのもの**（Lean のどこにも無かった。既存の `PropV.lean` と `PeriodicPointResultant.lean` は簡約しない $a_L$ だけを扱う）、$a^{\mathrm{red}}_L\neq0$、$a^{\mathrm{red}}_L=\mathrm{Res}(h,P)$（$h$ は $X^L-1$ の monic な因子）、$h=(X^L-1)/\gcd(X^L-1,P)\in\mathbb{Z}[X]$（Gauss）、$h$ の根がちょうど本文の「良い根」であること | **切り出せたのは 3 段のうち 1 段だけ**である。**アルキメデス側**（自由エネルギー密度＝Mahler 測度）は命題 LSW と同じ理由で素材が無い（多変数の Mahler 測度が無い）。**塔の漸近**は Monsky / Cuoco–Monsky の適用で、3 段の走査で `Monsky` / `CuocoMonsky` / `semialgebraic` / $\mathbb{Z}_p^d$ 拡大が**すべて 0 件**（`logs/mathlib-gap-survey-cycle29-duality.log`）。$d\ge2$ は素材ではなく反復多項式環の型（周期点数の終結式表示と同じ壁）。**本文は後 2 段を証明せず外部定理を引用している** |
 | **Q1 の $c_1$**（訂正後） | **完了**（新定義の存在・一意性・$b=0$・新旧の大小・中間段） | `Cycle25Corrections.lean`: `Q5_c1_isLeast` / `Q5_c1_unique` / `Q5_c1_zero_of_b_zero` / `Q5_c1_table_check` / `Q5_old_junk_not_least` / `Q5_rho_max_of_isLeast` / `Q5_case_split` / `Q5_c1_new_le_old` / `Q1_C_at_b_zero` / `Q1_b_zero_matches_layer_count` | 補題 Q5 の**結論**（$\mathcal{B}_M$ の被覆による個数評価）は cycle 22 の `lemma_Q5_card` が既に型に出している。$\theta_G^{\max}$ の有効上界は未形式化（実測に依存） |
 
 ### mathlib 欠落調査の一次情報（2026-07-31 再実施、mathlib commit `520045ab14e2` / v4.32.1）
