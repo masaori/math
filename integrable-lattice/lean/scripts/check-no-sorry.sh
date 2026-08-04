@@ -719,6 +719,22 @@ targets=(
   IntegrableLattice.CharacterDecompositionTwoVariable.voltageMatrix
   IntegrableLattice.CharacterDecompositionTwoVariable.hat_eq_evalChar
   IntegrableLattice.CharacterDecompositionTwoVariable.det_hat_eq_evalChar_det
+  # 命題 W* の rad(χ) と μ の構成（WStarRadicalMultiplicity.lean・cycle 39 step 3）
+  IntegrableLattice.WStarRadical.rad
+  IntegrableLattice.WStarRadical.chi
+  IntegrableLattice.WStarRadical.lower
+  IntegrableLattice.WStarRadical.multWeight
+  IntegrableLattice.WStarRadical.prod_dvd_of_pairwise_isRelPrime
+  IntegrableLattice.WStarRadical.isRelPrime_of_prime
+  IntegrableLattice.WStarRadical.squarefree_rad
+  IntegrableLattice.WStarRadical.rad_monic
+  IntegrableLattice.WStarRadical.chi_eq_lower_mul_rad
+  IntegrableLattice.WStarRadical.derivative_chi_eq_lower_mul_multWeight
+  IntegrableLattice.WStarRadical.not_dvd_natCast
+  IntegrableLattice.WStarRadical.not_dvd_derivative
+  IntegrableLattice.WStarRadical.not_dvd_multWeight
+  IntegrableLattice.WStarRadical.multWeight_mem_nonZeroDivisors
+  IntegrableLattice.WStarRadical.det_weightedGram_ne_zero_of_factorization
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）

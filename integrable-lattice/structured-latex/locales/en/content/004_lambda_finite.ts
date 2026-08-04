@@ -977,6 +977,12 @@ export default defineBlocks([
       "IntegrableLattice.WStarSquarefree.dvd_of_dvd_derivative_mul",
       "IntegrableLattice.WStarSquarefree.derivative_mem_nonZeroDivisors",
       "IntegrableLattice.WStarSquarefree.det_weightedGram_ne_zero_of_squarefree",
+      "IntegrableLattice.WStarRadical.squarefree_rad",
+      "IntegrableLattice.WStarRadical.rad_monic",
+      "IntegrableLattice.WStarRadical.chi_eq_lower_mul_rad",
+      "IntegrableLattice.WStarRadical.derivative_chi_eq_lower_mul_multWeight",
+      "IntegrableLattice.WStarRadical.multWeight_mem_nonZeroDivisors",
+      "IntegrableLattice.WStarRadical.det_weightedGram_ne_zero_of_factorization",
     ],
     statement: [
       paragraph([

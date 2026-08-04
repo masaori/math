@@ -667,6 +667,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 39 step 3 で新設。rad(χ) と μ の構成を書いた。
+    file: "WStarRadicalMultiplicity.lean",
+    declarationsAtReview: 15,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "から族",
+        kind: "未形式化",
+        ledgerFragment: "から族を取り出す段",
+        crossFilePhrase: "$\\chi$ から相異なる既約因子の族を取り出す段",
+      },
+    ],
+  },
+  {
     // cycle 38 step 1 で新設。無平方性から $\det G\neq0$ を出す段を書いた。
     file: "WStarSquarefreeNonzero.lean",
     declarationsAtReview: 4,
