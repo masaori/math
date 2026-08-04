@@ -192,6 +192,12 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_051_theorem_duality",
     state: "部分的",
     remaining:
+      "**cycle 35 step 4 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——" +
+      "本文は (∞ 素点)・(p 素点, 有限 L)・(p 素点, 塔の漸近) の 3 部に分かれているが、" +
+      "この欄は (∞ 素点) という部の名前に 1 度も触れず「アルキメデス側」とだけ書いていた。" +
+      "**(∞ 素点) は未形式化である**（下記 (1)）。" +
+      "cycle 34 step 5 の検査がこれを見落としていたのは、部の記号を英数字の形でしか拾っていなかったためで、" +
+      "この主張のように素点の名前で部を切っているものが素通りしていた。" +
       "cycle 29 で $p$ 素点側の切り出しを実際にやり、**(p 素点, 有限 L) の段**を $d=1$ で形式化した" +
       "（DualityPAdicFiniteL.lean）。入ったのは、本文の簡約周期点数 " +
       "$a^{\\mathrm{red}}_L=\\prod_{\\zeta^L=1,\\ P(\\zeta)\\neq0}P(\\zeta)$ の定義そのもの" +
@@ -405,7 +411,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     remaining:
       "命題 U は (U1) の $c$・$d$ が (M3)+(M4) から出ること、(U2)(U4)(U6)、および " +
       "cycle 27 が形式化した $\\ell=2$ の 5 係数の突き合わせまで。(U1) の式そのものの導出と " +
-      "(U3)(U5) は未形式化。",
+      "(U3)(U5) は未形式化。" +
+      "**cycle 35 step 4 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——" +
+      "(U1a)（飽和深度を大きめに取ってもよいこと）は、この欄が 1 度も触れていなかった。未形式化である。" +
+      "cycle 34 step 5 の検査がこれを見落としていたのは、部の記号を `[A-Z][0-9]+` の形でしか" +
+      "拾っていなかったためで、`U1a` のように後ろに小文字が付く形が素通りしていた。",
   },
 ];
 
@@ -489,7 +499,23 @@ export const COVERAGE_NUMBER_SITES: readonly CoverageNumberSite[] = [
  * - 部の見出しを持たない主張は対象外なので、そこは人の読みのままである。
  */
 export function partLabelsInStatement(statementText: string): string[] {
-  return [...new Set([...statementText.matchAll(/\(([A-Z]′?″?[0-9]+[′″]?)\s/g)].map((m) => m[1]!))];
+  // 形 1（cycle 34 step 5）: 地の文の途中に現れる `(R1 …` のような英数字の部の記号。
+  const inline = [...statementText.matchAll(/\(([A-Z]′?″?[0-9]+[′″]?)\s/g)].map((m) => m[1]!);
+  // 形 2（cycle 35 step 4）: 段落の先頭に置かれた括弧つきの見出し。
+  // **形 1 だけでは、英数字の記号を使わない部が素通りしていた**——実測すると
+  // 双対命題 D が「(∞ 素点)」「(p 素点, 有限 L)」「(p 素点, 塔の漸近)」で部を切っており、
+  // 部を持つ主張 11 件のうちこの 1 件だけが検査の外にいた。
+  // 目印は原理からではなく実測から決めた（本文の全 theorem / claim を走査し、
+  // 段落の先頭にある括弧つきの見出し 11 件がすべて実際に部の見出しであることを確かめた）。
+  const leading = [...statementText.matchAll(/(?:^|\n)\s*\(([^)\n]{1,28})\)?/g)].map((m) => {
+    const inner = m[1]!.trim();
+    // 英数字の記号で始まるものは、その記号だけを部の名前とする（形 1 と同じ粒度に揃える）。
+    const head = inner.split(/\s/)[0]!;
+    // 末尾に小文字が付く枝番（`U1a`）も記号として扱う。
+    // **cycle 34 step 5 の形はここを見ておらず、`U1a` が素通りしていた。**
+    return /^[A-Z]′?″?[0-9]+[a-z]?[′″]?$/.test(head) ? head : inner;
+  });
+  return [...new Set([...inline, ...leading])];
 }
 
 /** 判定。IO を持たないので検出テストからそのまま呼べる。 */

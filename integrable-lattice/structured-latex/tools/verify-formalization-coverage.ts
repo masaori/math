@@ -419,6 +419,53 @@ if (process.argv.includes("--self-test")) {
         }).violations,
     },
     {
+      name: "素点の名前で部を切っている主張も見る（cycle 35 step 4 が現に見つけた形）",
+      shouldFail: true,
+      run: () =>
+        auditPartCoverage({
+          entries: [
+            {
+              block: "fixture",
+              state: "部分的",
+              text: "アルキメデス側は未形式化。(p 素点, 有限 L) は入った。",
+              statementText:
+                "(∞ 素点) …\n(p 素点, 有限 L) …\n(p 素点, 塔の漸近) …",
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "素点の名前を書けば通る（偽陽性でない）",
+      shouldFail: false,
+      run: () =>
+        auditPartCoverage({
+          entries: [
+            {
+              block: "fixture",
+              state: "部分的",
+              text: "(∞ 素点) は未形式化。(p 素点, 有限 L) は入った。(p 素点, 塔の漸近) も未形式化。",
+              statementText:
+                "(∞ 素点) …\n(p 素点, 有限 L) …\n(p 素点, 塔の漸近) …",
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "枝番つきの部（U1a）も見る（cycle 35 step 4 が現に見つけた形）",
+      shouldFail: true,
+      run: () =>
+        auditPartCoverage({
+          entries: [
+            {
+              block: "fixture",
+              state: "部分的",
+              text: "(U1)(U2) は入った。",
+              statementText: "(U1 付値側と位置側の分業) …\n(U1a 飽和深度を大きめに取ってもよい) …",
+            },
+          ],
+        }).violations,
+    },
+    {
       name: "完了と未着手は対象外（部ごとに書く欄ではない）",
       shouldFail: false,
       run: () =>
@@ -513,7 +560,8 @@ for (const { blocks } of await loadContentFiles()) {
       id: block.id,
       title: block.title?.text ?? "",
       leanNames: block.lean ?? [],
-      statementText: plainTextOfNodes(block.statement),
+      // 段落の境界を残す（段落の先頭にある部の見出しを拾うため。cycle 35 step 4）。
+      statementText: (block.statement ?? []).map(plainTextOfNodes).join("\n"),
     });
   }
 }
@@ -818,7 +866,12 @@ for (const entry of unformalised) {
     );
     console.log(
       "    限界: 部の記号が欄に在ることは確かめられるが、そこに書いてある状態が正しいかは確かめられない。" +
-        "部の見出しを持たない主張は対象外なので、そこは人の読みのままである。",
+        "**cycle 35 step 4 で、部の見出しの拾い方を実測から広げた**——" +
+        "段落の先頭にある括弧つきの見出しも部として扱い、枝番つきの記号（`U1a`）も拾う。" +
+        "広げた結果、素点の名前で部を切っている 双対命題 D と、枝番つきの 命題 U の " +
+        "合わせて 2 件の書き落としが出た（2 件とも台帳へ写した）。" +
+        "それでもなお、部の見出しをまったく持たない主張は対象外である" +
+        "（実測では 部分的 14 件のうち 6 件がこれに当たり、6 件とも本文に部の構造が無い）。",
     );
   }
 
