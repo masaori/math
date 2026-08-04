@@ -44,3 +44,4 @@ import IntegrableLattice.WStarIntegralDescent
 import IntegrableLattice.MultigraphLaplacian
 import IntegrableLattice.CauchyBinet
 import IntegrableLattice.CrudeArchimedeanBound
+import IntegrableLattice.IncidenceUnimodular

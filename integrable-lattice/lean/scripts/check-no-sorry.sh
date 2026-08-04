@@ -565,6 +565,13 @@ targets=(
   IntegrableLattice.crudeBound_le_mul_logb_of_pow_le
   IntegrableLattice.crudeBound_padicValInt_le_of_prod_countable
   IntegrableLattice.crudeBound_padicValInt_le_mul_logb
+
+  # cycle 32 step 3: 符号付き接続行列の全単模性（IncidenceUnimodular.lean）。
+  # matrix-tree の第 3 段のうち「小行列式が 0 か ±1」の側。
+  IntegrableLattice.IsIncidenceColumn
+  IntegrableLattice.IsIncidenceColumn.comp_injective
+  IntegrableLattice.det_eq_zero_or_one_or_neg_one_of_incidenceColumns
+  IntegrableLattice.isIncidenceColumn_incMatrixSigned
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

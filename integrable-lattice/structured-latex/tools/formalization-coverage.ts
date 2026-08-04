@@ -244,6 +244,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "$L=D\,D^{\mathsf T}$ を書いた。MultigraphLaplacian.lean。" +
       "**cycle 32 step 1 で Cauchy–Binet が完了したので、残るのは小行列式の $\pm1$ 性・" +
       "Kirchhoff・指標分解の 3 段である**（cycle 31 総括は 2 段と書いていたが実測は 3 段）。" +
+      "**小行列式の段は cycle 32 step 3 で半分入った**（全単模性。`IncidenceUnimodular.lean`）。" +
       "`outputs/reports/cycle30_ops_matrix_tree_decision.md` に段取りがある。" +
       "**この主張は matrix-tree だけでは完了しない**——Cuoco–Monsky の岩澤型漸近も要る）。" +
       "不在の根拠は 2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`" +
@@ -276,7 +277,9 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`matrixTree` / `kirchhoff` / `CauchyBinet` が" +
       "いずれも 3 段とも 0 件。cycle 30 step 2 で自前で書くと判断し入口を書いた。" +
       "MultigraphLaplacian.lean。**cycle 32 step 1 で Cauchy–Binet は完了し、" +
-      "残るのは小行列式の $\pm1$ 性・Kirchhoff・指標分解の 3 段である**）と、" +
+      "残るのは小行列式の $\pm1$ 性・Kirchhoff・指標分解の 3 段である。" +
+      "うち小行列式の段は cycle 32 step 3 で半分入った**＝全単模性。" +
+      "残るのは「$\pm1$ になるのが全域木のときに限る」という組合せの側）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。",
   },
   {

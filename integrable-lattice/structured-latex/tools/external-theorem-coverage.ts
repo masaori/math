@@ -121,11 +121,22 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "（`lean/logs/mathlib-gap-survey-cycle31-external.log`。cycle 30 の matrixtree ログと同じ結果）。" +
       "全域木そのものは語幹 `spanning tree` で当たるが、個数を数える定理は無い。",
     state: "部分的",
-    leanNames: ["incMatrixSigned", "lapMatrixOfInc", "lapMatrix_row_sum"],
+    leanNames: [
+      "incMatrixSigned",
+      "lapMatrixOfInc",
+      "lapMatrix_row_sum",
+      "det_eq_zero_or_one_or_neg_one_of_incidenceColumns",
+      "isIncidenceColumn_incMatrixSigned",
+    ],
     remaining:
       "cycle 30 step 2 で入口（多重グラフの符号付き接続行列と $L=D\\,D^{\\mathsf T}$）だけ書いた。" +
       "**cycle 32 step 1 で Cauchy–Binet が完了したので、残りは 3 段である**" +
       "（小行列式の $\\pm1$ 性・Kirchhoff 本体・指標分解）。" +
+      "**そのうち小行列式の段は cycle 32 step 3 で半分入った**（`IncidenceUnimodular.lean`）——" +
+      "「どんな正方小行列でも行列式は $0,1,-1$ のいずれか」（全単模性）を証明した。" +
+      "Cauchy–Binet と合わせると $\\det L_0=\\sum_S\\det(D_S)^2$ の各項が $0$ か $1$ になるので、" +
+      "**Kirchhoff の右辺が「ある性質をもつ辺集合の個数」であることはこれで確定する。**" +
+      "残るのはその性質が「全域木であること」だと同定する組合せの側で、そこは書いていない。" +
       "cycle 31 総括は「Cauchy–Binet が入っても 2 段残る」と書いていたが、" +
       "同じ文が挙げている項目は 3 つで、3 が正しい（cycle 32 着手時の実測で訂正した）。" +
       "段取りは `outputs/reports/cycle30_ops_matrix_tree_decision.md`。",
