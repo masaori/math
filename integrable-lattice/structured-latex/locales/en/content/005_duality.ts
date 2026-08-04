@@ -48,6 +48,14 @@ export default defineBlocks([
       "sagemath/check/cycle15_T1_monsky_shape",
       "sagemath/check/cycle6_T1_padic_mahler",
     ],
+    lean: [
+      "IntegrableLattice.aRedOne_ne_zero",
+      "IntegrableLattice.resultant_redFactor_eq_aRedOne",
+      "IntegrableLattice.aRedOne_eq_resultant_of_no_root",
+      "IntegrableLattice.exists_int_redFactorQ",
+      "IntegrableLattice.map_redFactorQ_eq_redFactor",
+      "IntegrableLattice.exists_int_aRedOne",
+    ],
     statement: [
       paragraph([
         "In the setting of ",

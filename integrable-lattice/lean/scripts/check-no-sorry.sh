@@ -475,6 +475,26 @@ targets=(
   IntegrableLattice.resultant_X_pow_sub_one_eq_prod_eval
   IntegrableLattice.eval_innerRes
   IntegrableLattice.outerRes_eq_prod_prod_eval
+  # cycle 29 step 2: 双対命題 D の p 素点側・有限 L の段（DualityPAdicFiniteL.lean）
+  IntegrableLattice.mem_goodRoots
+  IntegrableLattice.aRedOne_ne_zero
+  IntegrableLattice.redFactor_monic
+  IntegrableLattice.redFactor_splits
+  IntegrableLattice.roots_redFactor
+  IntegrableLattice.redFactor_dvd
+  IntegrableLattice.resultant_redFactor_eq_aRedOne
+  IntegrableLattice.aRedOne_eq_resultant_of_no_root
+  IntegrableLattice.monic_X_pow_sub_one
+  IntegrableLattice.gcdQ_ne_zero
+  IntegrableLattice.gcdMonicQ_monic
+  IntegrableLattice.gcdMonicQ_dvd
+  IntegrableLattice.X_pow_sub_one_eq_gcdMonicQ_mul
+  IntegrableLattice.redFactorQ_monic
+  IntegrableLattice.redFactorQ_dvd
+  IntegrableLattice.exists_int_redFactorQ
+  IntegrableLattice.isRoot_gcdMonicQ_map_iff
+  IntegrableLattice.map_redFactorQ_eq_redFactor
+  IntegrableLattice.exists_int_aRedOne
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

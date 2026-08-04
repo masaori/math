@@ -38,3 +38,4 @@ import IntegrableLattice.PropFFiniteSupport
 import IntegrableLattice.ExtremumNonempty
 import IntegrableLattice.TracePeriodAssembly
 import IntegrableLattice.PeriodicPointResultant
+import IntegrableLattice.DualityPAdicFiniteL

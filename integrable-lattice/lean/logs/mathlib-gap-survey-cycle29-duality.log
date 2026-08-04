@@ -1,0 +1,251 @@
+=== 日付 ===
+2026-08-04T05:45:25Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 塔の漸近(無いはず) Monsky の p 進冪級数の定理 ===
+--- (1) 連結語の内容 grep: 'Monsky'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'monsky'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'monsky'
+files=0
+
+=== 塔の漸近(無いはず) Cuoco-Monsky の類数漸近 ===
+--- (1) 連結語の内容 grep: 'CuocoMonsky'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cuoco'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cuoco'
+files=0
+
+=== 塔の漸近(無いはず) 岩澤不変量 lambda mu nu の漸近 ===
+--- (1) 連結語の内容 grep: 'IwasawaInvariant'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'iwasawa'
+files=6
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/Measure/Basic.lean
+.lake/packages/mathlib/Mathlib/GroupTheory/GroupAction/Iwasawa.lean
+.lake/packages/mathlib/Mathlib/GroupTheory/SpecificGroups/Alternating/Simple.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'iwasawa'
+files=1
+.lake/packages/mathlib/Mathlib/GroupTheory/GroupAction/Iwasawa.lean
+
+=== 塔の漸近(無いはず) Z_p^d 拡大 ===
+--- (1) 連結語の内容 grep: 'ZpExtension'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'multiple zp extension'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'multiple zp extension'
+files=0
+
+=== 塔の漸近(無いはず) d 変数の完備群環 ===
+--- (1) 連結語の内容 grep: 'MvPowerSeries.completion'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'iwasawa algebra'
+files=1
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/Measure/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'iwasawa algebra'
+files=0
+
+=== 塔の漸近(無いはず) 指標群の半代数的部分集合 ===
+--- (1) 連結語の内容 grep: 'semialgebraic'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'semialgebraic'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'semialgebraic'
+files=0
+
+=== 塔の漸近(無いはず) 多変数 Weierstrass 準備定理 ===
+--- (1) 連結語の内容 grep: 'MvPowerSeries.weierstrass'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'weierstrass preparation'
+files=2
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean
+.lake/packages/mathlib/Mathlib/Geometry/Manifold/Complex.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'weierstrass preparation'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean
+
+=== 塔の漸近(無いはず) 代数閉包 Qbar_p 上の付値 ord_p ===
+--- (1) 連結語の内容 grep: 'Padic.algebraicClosure'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'algebraic closure of p-adic'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'algebraic closure of p-adic'
+files=0
+
+=== アルキメデス側(無いはず) 多変数 Mahler 測度 ===
+--- (1) 連結語の内容 grep: 'MvPolynomial.mahlerMeasure'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'mahler measure'
+files=3
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/Norm.lean
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'mahler measure'
+files=2
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+
+=== 有限 L(在るはず) 終結式 ===
+--- (1) 連結語の内容 grep: 'Polynomial.resultant'
+files=2
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'resultant'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'resultant'
+files=0
+
+=== 有限 L(在るはず) 根での積による終結式 ===
+--- (1) 連結語の内容 grep: 'resultant_eq_prod_eval'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'resultant'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'resultant'
+files=0
+
+=== 有限 L(在るはず) 体上の gcd の基底変換 ===
+--- (1) 連結語の内容 grep: 'Polynomial.gcd_map'
+files=1
+.lake/packages/mathlib/Mathlib/FieldTheory/PrimitiveElement.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'gcd_map'
+files=3
+.lake/packages/mathlib/Mathlib/FieldTheory/PrimitiveElement.lean
+.lake/packages/mathlib/Mathlib/Algebra/GCDMonoid/Multiset.lean
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/FieldDivision.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'gcd_map'
+files=0
+
+=== 有限 L(在るはず) gcd の根は共通根 ===
+--- (1) 連結語の内容 grep: 'isRoot_gcd_iff_isRoot_left_right'
+files=1
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/FieldDivision.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'root_gcd'
+files=3
+.lake/packages/mathlib/Mathlib/FieldTheory/PrimitiveElement.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/FieldDivision.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'root_gcd'
+files=0
+
+=== 有限 L(在るはず) monic な因子の Gauss 降下 ===
+--- (1) 連結語の内容 grep: 'eq_map_mul_C_of_dvd'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'gauss lemma'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'gauss lemma'
+files=2
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/GaussLemma.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+
+=== 有限 L(在るはず) X^n-C の分離性 ===
+--- (1) 連結語の内容 grep: 'separable_X_pow_sub_C'
+files=6
+.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/KummerExtension.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/Minpoly.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'separable'
+files=191
+.lake/packages/mathlib/Mathlib/Topology/Maps/Basic.lean
+.lake/packages/mathlib/Mathlib/Topology/CompactOpen.lean
+.lake/packages/mathlib/Mathlib/Topology/Order/LowerUpperTopology.lean
+.lake/packages/mathlib/Mathlib/Topology/Order/WithTop.lean
+.lake/packages/mathlib/Mathlib/Topology/Order/DenselyOrdered.lean
+.lake/packages/mathlib/Mathlib/Topology/Order/ScottTopology.lean
+.lake/packages/mathlib/Mathlib/Topology/Order/Basic.lean
+.lake/packages/mathlib/Mathlib/Topology/Order/OrderClosed.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'separable'
+files=7
+.lake/packages/mathlib/Mathlib/Topology/Inseparable.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/SeparableDegree.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/SeparableClosure.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RingHom/PurelyInseparable.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/SeparableDegree.lean
+.lake/packages/mathlib/Mathlib/MeasureTheory/Measure/SeparableMeasure.lean
+
+=== 有限 L(在るはず) 整数の p 進付値 ===
+--- (1) 連結語の内容 grep: 'padicValInt'
+files=3
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicNorm.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicNumbers.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'padicval'
+files=17
+.lake/packages/mathlib/Mathlib/NumberTheory/Harmonic/Int.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicNorm.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/MahlerBasis.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/WithVal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicNumbers.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Defs.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'padicval'
+files=0
+
+=== 名指しの実在確認（本 step が実際に使った宣言） ===
+--- Polynomial.resultant_eq_prod_eval
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:478:nonrec lemma resultant_eq_prod_eval [IsDomain R]
+--- Polynomial.resultant_map_map
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:140:lemma resultant_map_map (φ : R →+* S) :
+--- Polynomial.roots_multiset_prod_X_sub_C
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Roots.lean:307:theorem roots_multiset_prod_X_sub_C (s : Multiset R) : (s.map fun a => X - C a).prod.roots = s := by
+--- Polynomial.prod_multiset_X_sub_C_dvd
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Roots.lean:800:theorem prod_multiset_X_sub_C_dvd (p : R[X]) : (p.roots.map fun a => X - C a).prod ∣ p := by
+--- Polynomial.monic_multiset_prod_of_monic
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Monic.lean:275:theorem monic_multiset_prod_of_monic (t : Multiset ι) (f : ι → R[X]) (ht : ∀ i ∈ t, Monic (f i)) :
+--- Polynomial.monic_mul_leadingCoeff_inv
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Degree/Lemmas.lean:467:theorem monic_mul_leadingCoeff_inv {p : K[X]} (h : p ≠ 0) : Monic (p * C (leadingCoeff p)⁻¹) := by
+--- Polynomial.Splits.of_dvd
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Splits.lean:479:theorem Splits.of_dvd (hg : Splits g) (hg₀ : g ≠ 0) (hfg : f ∣ g) : Splits f := by
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/EnoughRootsOfUnity.lean:42:lemma of_dvd (M : Type*) [CommMonoid M] {m n : ℕ} [NeZero n] (hmn : m ∣ n)
+.lake/packages/mathlib/Mathlib/Data/Nat/ModEq.lean:128:lemma of_dvd (d : m ∣ n) (h : a ≡ b [MOD n]) : a ≡ b [MOD m] :=
+--- Polynomial.Splits.eq_prod_roots_of_monic
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Splits.lean:310:theorem Splits.eq_prod_roots_of_monic (hf : Splits f) (hm : f.Monic) :
+--- Polynomial.gcd_map
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/FieldDivision.lean:458:theorem gcd_map [Field k] [DecidableEq R] [DecidableEq k] (f : R →+* k) :
+--- Polynomial.isRoot_gcd_iff_isRoot_left_right
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/FieldDivision.lean:490:theorem isRoot_gcd_iff_isRoot_left_right [DecidableEq R] {f g : R[X]} {α : R} :
+--- Polynomial.separable_X_pow_sub_C
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean:420:theorem separable_X_pow_sub_C {n : ℕ} (a : F) (hn : (n : F) ≠ 0) (ha : a ≠ 0) :
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean:425:theorem separable_X_pow_sub_C' (p n : ℕ) (a : F) [CharP F p] (hn : ¬p ∣ n) (ha : a ≠ 0) :
+--- Polynomial.nodup_roots
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean:295:theorem nodup_roots {p : R[X]} (hsep : Separable p) : p.roots.Nodup := by
+--- Polynomial.modByMonic_add_div
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:260:theorem modByMonic_add_div (p q : R[X]) : p %ₘ q + q * (p /ₘ q) = p :=
+--- Polynomial.Monic.of_mul_monic_left
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Monic.lean:107:theorem Monic.of_mul_monic_left (hp : p.Monic) (hpq : (p * q).Monic) : q.Monic := by
+--- Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean:197:theorem Monic.dvd_of_fraction_map_dvd_fraction_map [IsIntegrallyClosed R] {p q : R[X]}
+--- IsIntegrallyClosed.eq_map_mul_C_of_dvd
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean:80:theorem IsIntegrallyClosed.eq_map_mul_C_of_dvd [IsIntegrallyClosed R] {f : R[X]} (hf : f.Monic)
+--- Multiset.prod_dvd_prod_of_le
+.lake/packages/mathlib/Mathlib/Algebra/BigOperators/Group/Multiset/Basic.lean:126:theorem prod_dvd_prod_of_le (h : s ≤ t) : s.prod ∣ t.prod := by
+--- Multiset.nodup_of_le
+.lake/packages/mathlib/Mathlib/Data/Multiset/Defs.lean:364:theorem nodup_of_le {s t : Multiset α} (h : s ≤ t) : Nodup t → Nodup s :=
+--- Multiset.Nodup.ext
+.lake/packages/mathlib/Mathlib/Data/Multiset/Defs.lean:358:theorem Nodup.ext {s t : Multiset α} : Nodup s → Nodup t → (s = t ↔ ∀ a, a ∈ s ↔ a ∈ t) :=
+.lake/packages/mathlib/Mathlib/Order/Sublattice.lean:86:lemma ext : (∀ a, a ∈ L ↔ a ∈ M) → L = M := SetLike.ext
+.lake/packages/mathlib/Mathlib/Order/Preorder/Chain.lean:352:theorem ext : (s : Set α) = t → s = t :=
+
+SURVEY_EXIT=0

@@ -139,11 +139,29 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_051_theorem_duality",
-    state: "未着手",
-    reason:
-      "双対命題 D は本論文の中心だが、アルキメデス側の主張（自由エネルギー密度＝Mahler 測度）を含むので、" +
-      "命題 LSW と同じ理由（mathlib の Mahler 測度が 1 変数だけで、多変数が無い）で片側が形式化できない。" +
-      "$p$ 素点側だけを切り出して形式化する形にできるかは未検討。",
+    state: "部分的",
+    remaining:
+      "cycle 29 で $p$ 素点側の切り出しを実際にやり、**(p 素点, 有限 L) の段**を $d=1$ で形式化した" +
+      "（DualityPAdicFiniteL.lean）。入ったのは、本文の簡約周期点数 " +
+      "$a^{\\mathrm{red}}_L=\\prod_{\\zeta^L=1,\\ P(\\zeta)\\neq0}P(\\zeta)$ の定義そのもの" +
+      "（Lean のどこにも無かった。既存の PropV.lean と PeriodicPointResultant.lean は簡約しない $a_L$ だけを扱う）と、" +
+      "$a^{\\mathrm{red}}_L\\neq0$、$a^{\\mathrm{red}}_L=\\mathrm{Res}(h,P)$（$h$ は $X^L-1$ の monic な因子）、" +
+      "$h=(X^L-1)/\\gcd(X^L-1,P)$ が $\\mathbb{Z}[X]$ に属すること（Gauss）、" +
+      "その $h$ の根がちょうど本文の「良い根」であること、" +
+      "したがって $a^{\\mathrm{red}}_L$ が $\\mathbb{Z}$ 係数の終結式ひとつで書ける $0$ でない整数であること" +
+      "（＝本文の $v_p(a^{\\mathrm{red}}_L)\\in\\mathbb{Z}_{\\ge0}$ が意味をもつことの中身）である。" +
+      "$L=p^n$ の塔の非自明性の判定は PropV.lean が $d=1,2$ で既に持っている。" +
+      "残るのは 3 つ。(1) **アルキメデス側**（自由エネルギー密度＝Mahler 測度）。" +
+      "命題 LSW と同じ理由で素材が無い——mathlib の Mahler 測度は 1 変数だけで多変数が無い" +
+      "（`MvPolynomial.mahlerMeasure` の連結語 grep 0 件。語幹 `mahler measure` の 3 件は" +
+      "いずれも 1 変数。lean/logs/mathlib-gap-survey-cycle29-duality.log）。" +
+      "しかも本論文はこの段を証明せず外部定理を引用している。" +
+      "(2) **(p 素点, 塔の漸近)**。Monsky の定理と Cuoco–Monsky の定理の適用であり、本論文は証明しない。" +
+      "素材も無い——`Monsky` / `CuocoMonsky` / `semialgebraic` / $\\mathbb{Z}_p^d$ 拡大は 3 段すべて 0 件、" +
+      "岩澤代数は mathlib の p 進測度の章の散文に 1 行触れられているだけ（1 変数の測度）、" +
+      "Weierstrass 準備定理は 1 変数版だけ（同じログ、mathlib 8264 ファイル走査）。" +
+      "(3) 有限 $L$ の段の $d\\ge2$。素材の欠落ではなく、" +
+      "反復多項式環の型（周期点数の終結式表示の残りと同じ）である。",
   },
   {
     block: "paper_052_theorem_l0_computable",
