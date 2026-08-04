@@ -526,6 +526,15 @@ targets=(
   IntegrableLattice.trace_coeff_minpolyDiv_mul
   IntegrableLattice.eulerMatrix_mul_weightedGram
   IntegrableLattice.det_eulerMatrix_sq
+
+  # cycle 30 step 1: 命題 W* の整数への降下（WStarIntegralDescent.lean）
+  IntegrableLattice.eulerHankel_apply_of_lt
+  IntegrableLattice.eulerHankel_apply_antidiag
+  IntegrableLattice.isUnit_det_eulerHankel
+  IntegrableLattice.coeff_minpolyDiv_eq_sum
+  IntegrableLattice.eulerMatrix_eq_eulerHankel
+  IntegrableLattice.range_mulLeft_eq_span
+  IntegrableLattice.isLeast_isPLevel_range_of_euler
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

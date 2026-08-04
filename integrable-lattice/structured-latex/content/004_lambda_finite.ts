@@ -900,6 +900,10 @@ export default defineBlocks([
       "IntegrableLattice.trace_coeff_minpolyDiv_mul",
       "IntegrableLattice.eulerMatrix_mul_weightedGram",
       "IntegrableLattice.det_eulerMatrix_sq",
+      "IntegrableLattice.isUnit_det_eulerHankel",
+      "IntegrableLattice.coeff_minpolyDiv_eq_sum",
+      "IntegrableLattice.eulerMatrix_eq_eulerHankel",
+      "IntegrableLattice.isLeast_isPLevel_range_of_euler",
     ],
     statement: [
       paragraph([

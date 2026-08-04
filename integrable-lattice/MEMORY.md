@@ -7,6 +7,15 @@
 - 現在の被覆（2026-08-04 実測。cycle 29 step 3b 時点の検査 F の実出力）:
   主張 **24 件**のうち **完了 6・部分的 16・未着手 2**。
   **全数形式化まで残り 18 件。**
+- **cycle 30 step 1 で命題 W\* の整数への降下が入ったが、件数は 18 件のまま動いていない**
+  （`lean/IntegrableLattice/WStarIntegralDescent.lean`、
+  `outputs/reports/cycle30_ops_wstar_integral_descent.md`）。同じ命題に $\rho$ 可約の段が残るためである。
+  **ここでも台帳が予定していた道は通らなかった**——Euler の係数行列 $C$ の成分は
+  「整数である」より強く $\rho$ の係数そのもの（$C_{ij}=\rho_{i+j+1}$）で、
+  台帳が経由する予定だった `coeff_minpolyDiv_mem_adjoin` は 1 度も使っていない。
+  残る 1 段（可約な $\rho$）は素材の欠落で、可換環の上のトレース双対が mathlib に無いことを
+  **その場のログで残した**（`lean/logs/mathlib-gap-survey-cycle30-euler.log`。
+  語の不在だけでなく、実在する `Module.Basis.traceDual` が体を要求していることを宣言行で直読した）。
 - **cycle 29 step 3b で、cycle 28 以来はじめて件数が減った（19 → 18）。**
   減らしたのは周期点数の終結式表示（`paper_022_claim_resultant`）で、
   一般の $d$ を形式化して完了させた（`lean/IntegrableLattice/PeriodicPointResultant.lean` の

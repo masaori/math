@@ -180,15 +180,6 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
-    file: "structured-latex/tools/formalization-coverage.ts",
-    reference: "Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean",
-    reason:
-      "mathlib のファイル。命題 W* の残り（体の上の等式を整数へ降ろす段）について、" +
-      "そこで要る補題 coeff_minpolyDiv_mem_adjoin が既に mathlib に在ることを行番号つきで挙げている" +
-      "（cycle 29 step 3b の実測）。",
-    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
-  },
-  {
     file: "docs/paper-001-migration-status.md",
     reference: "tools/verify-no-lost-proofs.ts",
     reason: "「Ising 側にある …」＝別プロジェクトのファイル。",

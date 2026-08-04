@@ -1,0 +1,181 @@
+=== 日付 ===
+2026-08-04T09:34:30Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 可約の段(無いはず) 可換環の上のトレース双対 ===
+--- (1) 連結語の内容 grep: 'Basis.traceDualRing'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'traceDual'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'traceDual'
+files=0
+
+=== 可約の段(無いはず) 可換環の上の双対基底 ===
+--- (1) 連結語の内容 grep: 'BilinForm.dualBasisRing'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'dualBasis'
+files=19
+.lake/packages/mathlib/Mathlib/NumberTheory/ClassNumber/Finite.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Different.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/BilinearForm/Properties.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'dualBasis'
+files=0
+
+=== 可約の段(無いはず) Euler の双対基底公式 ===
+--- (1) 連結語の内容 grep: 'eulerDualBasis'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'euler dual basis'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'euler dual basis'
+files=0
+
+=== 可約の段(無いはず) Frobenius 代数 ===
+--- (1) 連結語の内容 grep: 'FrobeniusAlgebra'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'frobenius algebra'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'frobenius algebra'
+files=0
+
+=== 可約の段(無いはず) 体の積へのトレースの分解 ===
+--- (1) 連結語の内容 grep: 'trace_pi'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'trace_prod'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Defs.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Trace.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'trace_prod'
+files=0
+
+=== 降下の段(在るはず) minpolyDiv の係数の漸化式 ===
+--- (1) 連結語の内容 grep: 'coeff_minpolyDiv'
+files=2
+.lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'minpolydiv'
+files=3
+.lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'minpolydiv'
+files=1
+.lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean
+
+=== 降下の段(在るはず) 行の並べ替えと行列式 ===
+--- (1) 連結語の内容 grep: 'det_permute'
+files=5
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Units/Regulator.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Vandermonde.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Permutation.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'det_permute'
+files=5
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Units/Regulator.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Vandermonde.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Permutation.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'det_permute'
+files=0
+
+=== 降下の段(在るはず) 上三角行列の行列式 ===
+--- (1) 連結語の内容 grep: 'det_of_upperTriangular'
+files=5
+.lake/packages/mathlib/Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/DegreeLT.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Block.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'blocktriangular'
+files=6
+.lake/packages/mathlib/Mathlib/Topology/Instances/Matrix.lean
+.lake/packages/mathlib/Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean
+.lake/packages/mathlib/Mathlib/Analysis/Normed/Algebra/MatrixExponential.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Norm/Transitivity.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Block.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'blocktriangular'
+files=0
+
+=== 降下の段(在るはず) 可逆行列の定める線形同型 ===
+--- (1) 連結語の内容 grep: 'Matrix.toLinearEquiv'
+files=3
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ToLin.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/InvariantBasisNumber.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'tolinearequiv'
+files=187
+.lake/packages/mathlib/Mathlib/Topology/ContinuousMap/Compact.lean
+.lake/packages/mathlib/Mathlib/Topology/VectorBundle/Basic.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/Complement.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/TransferInstance.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/Star.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/Spaces/ContinuousLinearMap.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/ClosedSubmodule.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/FiniteDimension.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'tolinearequiv'
+files=1
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean
+
+=== 降下の段(在るはず) 適合基底（Smith 標準形） ===
+--- (1) 連結語の内容 grep: 'Ideal.smithNormalForm'
+files=1
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'smith'
+files=9
+.lake/packages/mathlib/Mathlib/CategoryTheory/WithTerminal/Basic.lean
+.lake/packages/mathlib/Mathlib/Combinatorics/Hypergraph/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/PID.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'smith'
+files=0
+
+=== 実在するトレース双対 / 双対基底が体を要求していることの直接確認 ===
+--- Module.Basis.traceDual の宣言（RingTheory/Trace/Basic.lean）
+547-variable [FiniteDimensional K L] [Algebra.IsSeparable K L] [Finite ι] [DecidableEq ι]
+553:noncomputable def Module.Basis.traceDual :
+--- LinearMap.BilinForm.dualBasis の宣言
+
+=== 名指しの実在確認（本 step が実際に使った宣言） ===
+OK   Polynomial.coeff_minpolyDiv :: .lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean:40:lemma coeff_minpolyDiv (i) : coeff (minpolyDiv R x) i =
+OK   Polynomial.natDegree_minpolyDiv_lt :: .lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean:123:lemma natDegree_minpolyDiv_lt [Nontrivial S] :
+OK   Polynomial.coeff_eq_zero_of_natDegree_lt :: .lake/packages/mathlib/Mathlib/Algebra/Polynomial/Degree/Operations.lean:85:theorem coeff_eq_zero_of_natDegree_lt {p : R[X]} {n : ℕ} (h : p.natDegree < n) :
+OK   Matrix.det_permute' :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:218:theorem det_permute' (σ : Perm n) (M : Matrix n n R) :
+OK   Matrix.det_of_upperTriangular :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Block.lean:324:theorem det_of_upperTriangular [LinearOrder m] (h : M.BlockTriangular id) :
+OK   Matrix.BlockTriangular :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Block.lean:61:def BlockTriangular (M : Matrix m m R) (b : m → α) : Prop :=
+OK   Matrix.toLinearEquiv :: .lake/packages/mathlib/Mathlib/RingTheory/Flat/Basic.lean:436:noncomputable def toBaseChange.toLinearEquiv : A ⊗[R] ↥p ≃ₗ[A] baseChange A p :=
+OK   Matrix.toLin_mul :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ToLin.lean:772:theorem Matrix.toLin_mul [Finite l] [DecidableEq m] (A : Matrix l m R) (B : Matrix m n R) :
+OK   Matrix.toLin_toMatrix :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ToLin.lean:609:theorem Matrix.toLin_toMatrix (f : M₁ →ₗ[R] M₂) :
+OK   Ideal.smithCoeffs :: .lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:719:noncomputable def Ideal.smithCoeffs (b : Basis ι R S) (I : Ideal S) (hI : I ≠ ⊥) : ι → R :=
+OK   Ideal.span_singleton_eq_bot :: .lake/packages/mathlib/Mathlib/RingTheory/Ideal/Span.lean:110:theorem span_singleton_eq_bot {x} : span ({x} : Set α) = ⊥ ↔ x = 0 := by simp
+OK   Ideal.mem_span_singleton' :: .lake/packages/mathlib/Mathlib/RingTheory/Ideal/Span.lean:94:theorem mem_span_singleton' {x y : α} : x ∈ span ({y} : Set α) ↔ ∃ a, a * y = x :=
+OK   LinearMap.mulLeft_apply :: .lake/packages/mathlib/Mathlib/Analysis/CStarAlgebra/Unitary/Maps.lean:32:@[simp] lemma mulLeft_apply (u : unitary A) (x : A) :
+OK   isUnit_iff_exists_inv :: .lake/packages/mathlib/Mathlib/Algebra/Group/Units/Defs.lean:438:theorem isUnit_iff_exists_inv [Monoid M] [IsDedekindFiniteMonoid M] {a : M} :
+OK   Fin.revPerm :: .lake/packages/mathlib/Mathlib/Data/Fin/Rev.lean:35:def revPerm : Equiv.Perm (Fin n) :=
+OUT  Fin.val_rev （Mathlib/*.lean に宣言行が無い。core / Batteries、または to_additive の生成物）
+OUT  Fin.sum_univ_eq_sum_range （Mathlib/*.lean に宣言行が無い。core / Batteries、または to_additive の生成物）
+OUT  Finset.sum_range_succ' （Mathlib/*.lean に宣言行が無い。core / Batteries、または to_additive の生成物）
+OK   Module.Basis.repr_sum_self :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Basis/Defs.lean:267:theorem Basis.repr_sum_self [Fintype ι] (b : Basis ι R M) (c : ι → R) :
+OK   PowerBasis.natDegree_minpoly :: .lake/packages/mathlib/Mathlib/RingTheory/PowerBasis.lean:221:theorem natDegree_minpoly [Nontrivial A] (pb : PowerBasis A S) :
+OK   PowerBasis.isIntegral_gen :: .lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean:141:theorem AdjoinSimple.isIntegral_gen : IsIntegral F (AdjoinSimple.gen F α) ↔ IsIntegral F α := by
+OK   minpoly.natDegree_pos :: .lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/Basic.lean:192:theorem natDegree_pos [Nontrivial B] (hx : IsIntegral A x) : 0 < natDegree (minpoly A x) := by
+OK   Algebra.smul_def :: .lake/packages/mathlib/Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean:650:protected theorem smul_def (f : M₁ →L[R₁] M₁) (a : M₁) : f • a = f a :=

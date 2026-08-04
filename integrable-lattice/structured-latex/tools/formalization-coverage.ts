@@ -157,19 +157,26 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（eulerMatrix_mul_weightedGram / det_eulerMatrix_sq。" +
       "心臓部は $\\operatorname{Tr}(c_i w)=[\\theta^i](\\rho'(\\theta)w)$＝trace_coeff_minpolyDiv_mul）、" +
       "(d) 可逆な取り替えで像に対する $p$ 進の条件が変わらないこと（isPLevel_range_comp）。" +
-      "残るのは 2 つで、どちらも mathlib の欠落ではなくこちらの未記述である。" +
-      "(1) **$C$ と $G$ の整数への降下**——$C\\,G=M_\\eta$ と $(\\det C)^2=1$ は体 $K=\\mathbb{Q}$ の上の" +
-      "等式であり、人手証明が使う「$C\\in GL_r(\\mathbb{Z})$ だから余核が同型」を言うには、" +
-      "$C$ の成分が整数であること" +
-      "（cycle 29 step 3b の実測: この帰納法は mathlib に既にある。" +
-      "`coeff_minpolyDiv_mem_adjoin : coeff (minpolyDiv R x) i ∈ R[x]`＝" +
-      "`Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean` 84 行。" +
-      "$R=\\mathbb{Z}$ に取れば $C$ の成分が $\\mathbb{Z}[\\theta]$ に属することがそのまま出る。" +
-      "**ただし書いて通したものではない**——残るのは、その所属を冪基底の座標が整数であることへ" +
-      "翻訳する配線である)と、" +
-      "行列の像と $\\eta A$ を基底で同一視する配線が要る。" +
-      "(2) **$\\rho$ が可約な場合**——(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\\rho$ が" +
-      "既約な場合しか覆っていない。mathlib のトレース双対（`Module.Basis.traceDual`）は体の上にしか無い。",
+      "cycle 30 step 1 で **(1) 整数への降下が入った**（WStarIntegralDescent.lean）。" +
+      "cycle 29 が予定していた道（`coeff_minpolyDiv_mem_adjoin` で所属を言い、座標へ翻訳する）ではなく、" +
+      "**$C$ の成分が $\\rho$ の係数そのもの $C_{ij}=\\rho_{i+j+1}$ である**ことを等式で書いた" +
+      "（coeff_minpolyDiv_eq_sum / eulerMatrix_eq_eulerHankel）。" +
+      "したがって $C$ は反対角線が $\\rho_r=1$ の Hankel 行列で、$\\det C=\\pm1$ が三角行列の行列式ひとつで出る" +
+      "（isUnit_det_eulerHankel。可換環の上で成立し、体も分離性も既約性も使わない）。" +
+      "「行列の像と $\\eta A$ を基底で同一視する配線」も入った" +
+      "（range_mulLeft_eq_span / isLeast_isPLevel_range_of_euler）。" +
+      "これで人手証明の「$\\operatorname{coker}(G)\\cong A/\\eta A$ だから $G$ の単因子は $A/\\eta A$ の不変量」が" +
+      "$C\\,G=M_\\eta$ を仮定として与えたときに Lean で通る。" +
+      "**残っているのは 1 つ、$\\rho$ が可約な場合の $C\\,G=M_\\eta$ そのものである。** " +
+      "(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\\rho$ が既約な場合しか覆っていない。" +
+      "$\\rho$ が可約なとき $A\\otimes\\mathbb{Q}$ は体でなく体の積である。" +
+      "**これは配線の欠落ではなく素材の欠落である**（2026-08-04 実測、" +
+      "`lean/logs/mathlib-gap-survey-cycle30-euler.log`。mathlib 8264 ファイル走査で" +
+      "可換環の上のトレース双対・双対基底・Euler の双対基底公式・Frobenius 代数はいずれも連結語 0 件、" +
+      "実在する `Module.Basis.traceDual` は宣言が `[Field K] [Field L] [FiniteDimensional K L] " +
+      "[Algebra.IsSeparable K L]` を要求していることを宣言行で直接確認した）。" +
+      "埋めるには可換環の上の Euler の双対基底公式 " +
+      "$\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$ を自前で書くことになる。書いていない。",
   },
   {
     block: "paper_051_theorem_duality",
