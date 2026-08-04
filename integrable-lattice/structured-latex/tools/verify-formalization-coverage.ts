@@ -21,7 +21,7 @@
  * （`npm run test:formalization`）。検出できることと検出しなかったことは別なので、両方を持つ。
  */
 
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import type { TranslatedNode } from "../schema.ts";
@@ -32,6 +32,7 @@ import {
   type CoverageState,
   FORMALIZATION_COVERAGE,
 } from "./formalization-coverage.ts";
+import { STALENESS_POLICY, auditLedgerAbsence, type LedgerText } from "./ledger-absence-model.ts";
 
 /** 地の文だけを連結する（数式・参照は本文の数値の照合に効かないので落とす）。 */
 const flattenProse = (nodes: readonly TranslatedNode[]): string => {
@@ -349,12 +350,18 @@ if (process.argv.includes("--self-test")) {
       for (const violation of violations) console.log(`      出た違反: ${violation}`);
     }
   }
+  const { LEDGER_ABSENCE_CASES, runLedgerAbsenceCases } = await import(
+    "./verify-ledger-absence-detection-test.ts"
+  );
+  failed += runLedgerAbsenceCases();
+
+  const total = cases.length + LEDGER_ABSENCE_CASES.length;
   console.log("");
   if (failed > 0) {
     console.log(`NG: ${failed} 件が期待どおりでない。`);
     process.exit(1);
   }
-  console.log(`OK: ${cases.length} 件すべて期待どおり。`);
+  console.log(`OK: ${total} 件すべて期待どおり。`);
   process.exit(0);
 }
 
@@ -487,6 +494,62 @@ for (const entry of unformalised) {
         `数式ノードに現れた被覆の数 ${site.mathHits} 件`,
     );
   }
+}
+
+// --- 台帳が「無い」と書いた箇所に、実在確認の根拠が付いているか ---
+//
+// cycle 29 総括の記録（壁の名前を一次情報より先に書く誤りが 4 サイクル連続）に対する検査。
+// 何を不在の主張とみなし、何を根拠と認め、なぜその粒度なのかは ledger-absence-model.ts の doc が正本。
+{
+  const projectDir = join(structuredLatexDir, "..");
+  const entries: LedgerText[] = FORMALIZATION_COVERAGE.map((entry) => ({
+    block: entry.block,
+    text: entry.state === "完了" ? (entry.note ?? "") : entry.state === "部分的" ? entry.remaining : entry.reason,
+  }));
+
+  const readMathlibCommitOfLog = (path: string): string | undefined => {
+    const source = readFileSync(join(projectDir, path), "utf8");
+    return /=== mathlib commit ===\s*\n\s*([0-9a-f]{7,40})/.exec(source)?.[1];
+  };
+  const currentMathlibCommit = (() => {
+    const manifest = join(projectDir, "lean", "lake-manifest.json");
+    if (!existsSync(manifest)) return undefined;
+    for (const pkg of JSON.parse(readFileSync(manifest, "utf8")).packages ?? []) {
+      if (pkg?.name === "mathlib" && typeof pkg?.rev === "string") return pkg.rev as string;
+    }
+    return undefined;
+  })();
+
+  const audit = auditLedgerAbsence({
+    entries,
+    logExists: (path) => existsSync(join(projectDir, path)),
+    logCommit: readMathlibCommitOfLog,
+    currentMathlibCommit,
+  });
+  violations.push(...audit.violations);
+
+  const withClaims = audit.entries.filter((entry) => entry.claims.length > 0);
+  const claimCount = withClaims.reduce((sum, entry) => sum + entry.claims.length, 0);
+  const retracted = audit.entries.reduce((sum, entry) => sum + entry.retracted, 0);
+  const unbacked = withClaims.filter((entry) => !entry.hasEvidence);
+  const staleLogs = audit.logs.filter((log) => log.stale);
+
+  console.log("");
+  console.log(
+    `  台帳の「無い」の根拠: 不在の主張 ${claimCount} 件 / ${withClaims.length} エントリ` +
+      `（撤回された引用として除いたもの ${retracted} 件）`,
+  );
+  console.log(
+    `    根拠を持たないエントリ ${unbacked.length} 件 / ` +
+      `根拠に挙がった実在確認ログ ${audit.logs.length} 本` +
+      `（うち現在の mathlib と違うコミットのもの ${staleLogs.length} 本）`,
+  );
+  console.log(`    現在の mathlib（lean/lake-manifest.json）: ${currentMathlibCommit ?? "読めない"}`);
+  for (const log of audit.logs) {
+    const mark = !log.exists ? "実在しない" : log.stale ? "古い" : "現在と同じ";
+    console.log(`      ${log.path}: ${log.recordedCommit ?? "コミットの記録なし"}（${mark}）`);
+  }
+  console.log(`    ${STALENESS_POLICY}`);
 }
 
 if (violations.length > 0) {

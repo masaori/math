@@ -100,8 +100,12 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "その途中で、人手証明が暗黙に使っていた「最小周期は任意の周期を割る」を独立に証明した。" +
       "cycle 29 step 3 で $w^*$ の定義そのものが入った（WStarElementaryDivisors.lean）。" +
       "**step 1 の仕分けが「素材が無い」と判定したのは誤りだった。** " +
-      "整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は確かに mathlib に無いが（`Ideal.smithCoeffs` に" +
-      "整除を述べた補題は 0 件）、$w^*$ を取り出すのに鎖は要らない——" +
+      "整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は確かに mathlib に無いが" +
+      "（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29.log` の「整数行列の Smith 標準形」の段。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、連結語 `Matrix.smithNormalForm` 0 件・" +
+      "語幹 `smith normal` 3 件。ただし **`Ideal.smithCoeffs` の整除補題そのものを名指しで走った走査は" +
+      "残っていない**——鎖が無いことのこの一点だけは、上のログではなく cycle 29 step 1 の読みに依っている）、" +
+      "$w^*$ を取り出すのに鎖は要らない——" +
       "適合基底（`Ideal.smithNormalForm` が返す形）の係数の $p$ 進付値の最大値として書け、" +
       "それが $\\min\\{j:\\ p^jA\\subseteq\\eta A\\ (p\\ \\text{の外で})\\}$ に等しいことを証明した" +
       "（isLeast_isPLevel / isLeast_isPLevel_ideal）。$w^*=0$ の判定も入った" +
@@ -119,7 +123,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_044_theorem_newton",
     state: "部分的",
     remaining:
-      "命題 N は下界方向のみ。上界方向は Skolem–Mahler–Lech / Strassmann が mathlib に無く、" +
+      "命題 N は下界方向のみ。上界方向は Skolem–Mahler–Lech / Strassmann が mathlib に無く" +
+      "（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29.log`。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`SkolemMahlerLech` 連結語 0 件・" +
+      "語幹 `skolem` は 30 件当たるがログが挙げている先はモデル理論の Skolem 関数" +
+      "（ログの一覧は先頭 8 件までなので、30 件すべてを見たわけではない）、" +
+      "`Strassmann` は 3 段とも 0 件、" +
+      "`NewtonPolytope` / 語幹 `newton polytope` も 3 段とも 0 件）、" +
       "鋭い下界は Newton 恒等式の行列トレースへの接続が要り、Newton 多角形と固有値の接続は " +
       "$\\overline{\\mathbb{Q}_p}$ の付値が要る。",
   },
@@ -216,7 +226,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "という包含である（非可算な $\\mathbb{P}^{d-1}(\\mathbb{Z}_p)$ を走らなくてよいことの中身）。" +
       "残るのは 2 つ。(1) $(\\gamma_v-1)\\mid\\bar f$ と係数和の消滅の同値そのもの。" +
       "これは $d$ 変数の完備群環 $\\mathbb{F}_p[[\\Gamma]]$ とその素イデアルの記述が要るが、" +
-      "mathlib には岩澤代数の一般論が `PowerSeries` の断片としてしか無い（配線ではなく素材から要る）。" +
+      "mathlib には岩澤代数の一般論が `PowerSeries` の断片としてしか無い（配線ではなく素材から要る。" +
+      "2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29-duality.log` の「d 変数の完備群環」の段。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、連結語 `MvPowerSeries.completion` 0 件・" +
+      "語幹 `iwasawa algebra` は p 進測度の章の 1 ファイルだけ）。" +
       "(2) (F2 境界) の停止問題への帰着。mathlib に `Nat.Partrec` / `Turing` は在るが、" +
       "「係数を計算する手続きで与えられた $f$」という入力の与え方を型にする設計をこちらが持っていない" +
       "（mathlib の欠落ではなく、こちらの未設計である）。",
@@ -231,8 +244,12 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "$L=D\,D^{\mathsf T}$ を書いた。MultigraphLaplacian.lean。" +
       "残るのは Cauchy–Binet・小行列式の $\pm1$ 性・Kirchhoff・指標分解の 4 段で、" +
       "`outputs/reports/cycle30_ops_matrix_tree_decision.md` に段取りがある。" +
-      "**この主張は matrix-tree だけでは完了しない**——Cuoco–Monsky の岩澤型漸近も要る）" +
-      "（`kirchhoff` 0 件・`matrixTree` 0 件・全域木を数える定理 0 件。lean/README.md の欠落調査）。",
+      "**この主張は matrix-tree だけでは完了しない**——Cuoco–Monsky の岩澤型漸近も要る）。" +
+      "不在の根拠は 2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`" +
+      "（mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`matrixTree` / 語幹 `matrix tree` / " +
+      "`kirchhoff` / `CauchyBinet` はいずれも 3 段とも 0 件。" +
+      "全域木そのものは語幹 `spanning tree` で 3 ファイルに現れるが、" +
+      "個数を数える定理の連結語 `numSpanningTrees` は 0 件）。",
   },
   {
     block: "paper_055_theorem_theta_infinity",
@@ -254,7 +271,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 T は代数的な段と算術の段まで。matrix-tree の段（mathlib に無い。" +
-      "cycle 30 step 2 で自前で書くと判断し入口を書いた。MultigraphLaplacian.lean）と、" +
+      "2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`matrixTree` / `kirchhoff` / `CauchyBinet` が" +
+      "いずれも 3 段とも 0 件。cycle 30 step 2 で自前で書くと判断し入口を書いた。" +
+      "MultigraphLaplacian.lean）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。",
   },
   {
@@ -262,7 +282,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 W は非退化性の判定（`Decidable`）と $\\nu$ の帰属まで。閉形式本体は " +
-      "Cuoco–Monsky の岩澤型漸近に依り、それが mathlib に無い（`iwasawa` の調査で該当なし）。",
+      "Cuoco–Monsky の岩澤型漸近に依り、それが mathlib に無い" +
+      "（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29-duality.log`。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`Monsky` / `CuocoMonsky` はいずれも 3 段とも 0 件。" +
+      "語幹 `iwasawa` は 6 ファイルに当たるが、名前に iwasawa を持つファイルは群論の岩澤分解の 1 本だけで、" +
+      "岩澤不変量の漸近ではない）。",
   },
   {
     block: "paper_091_theorem_theta_padic",
