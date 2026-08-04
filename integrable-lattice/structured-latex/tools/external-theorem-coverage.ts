@@ -255,7 +255,10 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "2026-08-04 実測。`newtonPolytope` / 語幹 `newton polytope` が 3 段とも 0 件。" +
       "mathlib の `Newton` はニュートン法（`Mathlib/Dynamics/Newton.lean`）であって多面体ではない（宣言行で直読）。",
     state: "未着手",
-    remaining: "未着手。可算側（有限個の格子点の Minkowski 和）で閉じるので機械にかかる形である。",
+    remaining:
+      "未着手。可算側（有限個の格子点の Minkowski 和）で閉じるので機械にかかる形である。" +
+      "**cycle 38 step 5 の走査で、素材どころか主張の芯が mathlib に在ることが分かった**" +
+      "（2026-08-05 実測、`lean/logs/mathlib-gap-survey-cycle38-materials.log`。`convexHull_add`＝凸包が Minkowski 和と可換であること。Newton 多面体の加法性の中身はこれである）。**したがって「書けない」のではなく「書いていない」だけである。**「書けない理由」の台帳（`impossibility-records.ts`）に `素材あり` として登録し、毎サイクル印字させている。",
   },
   {
     name: "Skolem–Mahler–Lech の定理（線形回帰数列の零点集合）",

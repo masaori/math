@@ -1,0 +1,32 @@
+# mathlib 素材走査（cycle 38 step 5）
+# 目的: 「書けない理由」の台帳の『素材あり』の主張を、名前だけでなく実在で裏づける。
+# 実行日: 2026-08-05
+# mathlib: 520045ab14
+# 走査対象ファイル数: 8264
+
+## 段 1: 多変数 Mahler 測度の素材（1 変数版が在るか）
+### 連結語 mahlerMeasure
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:26:- `Polynomial.mahlerMeasure p`: the (exponential) Mahler measure of a polynomial `p`, which is equal
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:33:- `Polynomial.mahlerMeasure_mul`: the Mahler measure of the product of two polynomials is the
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:35:- `mahlerMeasure_eq_leadingCoeff_mul_prod_roots`: the Mahler measure of a polynomial is the absolute
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:38:- `mahlerMeasure_le_sqrt_sum_sq_norm_coeff`: **Landau's inequality** — the Mahler measure is
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:40:- `norm_coeff_le_choose_mul_mahlerMeasure_of_one_le_mahlerMeasure`: **Mignotte's coefficient
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:81:noncomputable def mahlerMeasure : ℝ := if p ≠ 0 then exp (p.logMahlerMeasure) else 0
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:84:theorem mahlerMeasure_def_of_ne_zero (hp : p ≠ 0) : p.mahlerMeasure =
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean:86:  simp [mahlerMeasure, hp, logMahlerMeasure_def, circleAverage_def]
+### MvPolynomial を使った Mahler 測度（多変数版があるか）
+
+## 段 2: Newton 多面体の素材（凸包・Minkowski 和が在るか）
+### 連結語 convexHull
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Topology.lean:313:theorem convexHull_subset_closedConvexHull {s : Set E} :
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Combination.lean:306:theorem convexHull_range_eq_exists_affineCombination (v : ι → E) : convexHull R (range v) =
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Combination.lean:342:theorem convexHull_eq (s : Set E) : convexHull R s =
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Combination.lean:429:theorem convexHull_eq_union_convexHull_finite_subsets (s : Set E) :
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Combination.lean:466:theorem convexHull_prod (s : Set E) (t : Set F) :
+### Minkowski 和（Set の加法）
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Combination.lean:473:theorem convexHull_add (s t : Set E) : convexHull R (s + t) = convexHull R s + convexHull R t := by
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Hull.lean:165:theorem convexHull_add_subset {s t : Set E} :
+.lake/packages/mathlib/Mathlib/Analysis/Convex/Basic.lean:82:    fun h _ hx _ hy _ _ ha hb hab => (h ha hb hab) (Set.add_mem_add ⟨_, hx, rfl⟩ ⟨_, hy, rfl⟩)
+.lake/packages/mathlib/Mathlib/Analysis/Normed/Operator/Compact/Basic.lean:247:    mem_of_superset (inter_mem hAf hBg) fun _ ⟨hxA, hxB⟩ => Set.add_mem_add hxA hxB⟩
+.lake/packages/mathlib/Mathlib/RingTheory/MvPolynomial/Basic.lean:126:    simp +contextual [Set.add_mem_add]
+### 連結語 newtonPolytope（無いことの再確認）
