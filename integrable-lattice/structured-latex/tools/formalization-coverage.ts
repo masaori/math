@@ -316,24 +316,31 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_106_theorem_drop_assumption",
-    state: "部分的",
-    remaining:
-      "命題 Q は組合せ・数え上げ・最小点の一意性・誤差の組み立て、および " +
-      "cycle 32 step 2 が形式化した補題 Q0（アルキメデス粗上界）まで" +
-      "（`CrudeArchimedeanBound.lean`。**本プロジェクトで複素絶対値を使う唯一の箇所**）。" +
-      "**この欄は cycle 31 まで残りを 1 件と書いていたが、実測すると 3 件だった**——" +
-      "`DropAssumptionBStar.lean` の冒頭が「形式化しなかったもの」として " +
-      "補題 Q0・補題 Q4a・補題 Q1′ の 3 件を挙げており、台帳が写していたのは 1 件だけだった" +
-      "（cycle 32 step 2 の着手時に Lean 側の記述と突き合わせて見つけた）。" +
-      "残るのは 2 件で、**どちらも mathlib の欠落ではなく配線である**。" +
-      "(1) 補題 Q4a（$v_{\\mathfrak l}(B(\\omega_P))=\\beta_P$）は円分体 " +
-      "$\\mathbb{Q}(\\zeta_{\\ell^M})$ の $\\ell$ の上の素点で $v(\\zeta_{\\ell^j}-1)$ を計算する段で、" +
-      "`IsCyclotomicExtension`・`zeta_sub_one_prime`・`ramificationIdx`・`inertiaDeg` は" +
-      "いずれも mathlib に在る（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle22.log`）。" +
-      "(2) 補題 Q1′（$\\tilde E=BG+\\ell H$ の存在と $\\bar G$ が二項式因子を持たないこと）は " +
-      "2 変数 Laurent 環の一意分解で、**2 変数 Laurent 環の型は mathlib に無い**が " +
-      "`MvPolynomial` の局所化として作れ `UniqueFactorizationMonoid` も在るので、" +
-      "数学的な欠落ではなく型を用意していないだけである（同じログ）。",
+    state: "完了",
+    note:
+      "cycle 33 step 1 で残り 2 件（補題 Q4a・補題 Q1′）を書いたので、命題 Q は完了である。" +
+      "内訳は 組合せ・数え上げ・最小点の一意性・誤差の組み立て（`DropAssumptionBStar.lean`）、" +
+      "補題 Q0（アルキメデス粗上界。`CrudeArchimedeanBound.lean`。" +
+      "**本プロジェクトで複素絶対値を使う唯一の箇所**）、" +
+      "補題 Q4a（`CyclotomicValuationQ4a.lean`）、補題 Q1′（`PropQLaurentLift.lean`）。" +
+      "**完了と呼ぶ射程を明示する**——" +
+      "(1) 補題 Q4a は付値 $v_{\\mathfrak l}$ ではなく **$\\pi=\\zeta-1$ の冪との同伴**で書いた。" +
+      "$v_{\\mathfrak l}(\\pi)=1$ なので内容は同じだが、**証明が使うのは $\\pi$ の素元性と整域性だけ**で、" +
+      "Dedekind 性も類数も一意分解性も使わない（$\\mathcal{O}_K$ は一般には一意分解環でないので " +
+      "$a^N\\sim b^N\\Rightarrow a\\sim b$ は使えない。`dvd_prime_pow` で迂回した）。" +
+      "(2) `Prime (ζ - 1)` は仮定として受け取り、それが円分体の整数環で成り立つことを " +
+      "mathlib の `zeta_sub_one_prime` で名指ししてある（`prime_zeta_sub_one_ofInteger`）。" +
+      "(3) 補題 Q1′ の 2 変数 Laurent 環は `AddMonoidAlgebra ℤ (ℤ × ℤ)`（群環 $\\mathbb{Z}[\\mathbb{Z}^2]$）" +
+      "で置いた。**新しい型は作っていない。** " +
+      "(4) $\\bar{\\tilde E}$ の分解 $(1.2)$ そのもの（cycle 20 の定理 W1・W4）は補題 Q1′ の主張ではないので、" +
+      "仮定として型に出してある。**形式化して分かったのは、補題 Q1′ の証明が " +
+      "$\\mathbb{F}_\\ell[z^{\\pm},w^{\\pm}]$ の一意分解性を 1 度も使わないこと**である——" +
+      "使うのは「単元倍は割り切りを変えない」だけで、一意分解性は $(1.2)$ を作る側の要求である。" +
+      "**mathlib の見立ては 1 件外れていた**: cycle 22 のログは補題 Q4a に " +
+      "`ramificationIdx`・`inertiaDeg` が要ると読んでいたが、実際には使わずに済んだ。" +
+      "代わりに要ったのは `(ζ-1)^{φ(ℓ^j)} ∼ ℓ` の**素数冪版**で、" +
+      "mathlib にあるのは素数版（`associated_zeta_sub_one_pow_prime`）だけだったので自分で書いた" +
+      "（`associated_sub_one_pow_totient`）。",
   },
   {
     block: "paper_111_theorem_general_closed_form",

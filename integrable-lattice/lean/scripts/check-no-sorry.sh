@@ -572,6 +572,25 @@ targets=(
   IntegrableLattice.IsIncidenceColumn.comp_injective
   IntegrableLattice.det_eq_zero_or_one_or_neg_one_of_incidenceColumns
   IntegrableLattice.isIncidenceColumn_incMatrixSigned
+
+  # cycle 33 step 1: 補題 Q4a（円分体の付値。CyclotomicValuationQ4a.lean）。
+  # 付値ではなく π = ζ-1 の冪との同伴で書いてある（v(π)=1 なので内容は同じ）。
+  IntegrableLattice.PropQCyclotomicValuation.pow_eq_pow_of_associated_pow
+  IntegrableLattice.PropQCyclotomicValuation.associated_sub_one_of_isPrimitiveRoot
+  IntegrableLattice.PropQCyclotomicValuation.associated_sub_one_pow_totient
+  IntegrableLattice.PropQCyclotomicValuation.associated_sub_one_pow_of_dvd
+  IntegrableLattice.PropQCyclotomicValuation.isPrimitiveRoot_pow_of_valuation
+  IntegrableLattice.PropQCyclotomicValuation.sub_one_eq_zero_of_pow_dvd
+  IntegrableLattice.PropQCyclotomicValuation.associated_prod_sub_one
+  IntegrableLattice.PropQCyclotomicValuation.prod_sub_one_eq_zero
+  IntegrableLattice.PropQCyclotomicValuation.prime_zeta_sub_one_ofInteger
+
+  # cycle 33 step 1: 補題 Q1′（2 変数 Laurent 環での持ち上げ。PropQLaurentLift.lean）。
+  IntegrableLattice.PropQLaurentLift.exists_smul_of_forall_dvd
+  IntegrableLattice.PropQLaurentLift.exists_lift_of_reduction_eq
+  IntegrableLattice.PropQLaurentLift.not_dvd_unit_mul
+  IntegrableLattice.PropQLaurentLift.isUnit_chi
+  "IntegrableLattice.PropQLaurentLift.lemma_Q1'"
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

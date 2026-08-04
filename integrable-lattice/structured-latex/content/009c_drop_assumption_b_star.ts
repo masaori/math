@@ -45,6 +45,14 @@ export default defineBlocks([
       "IntegrableLattice.sum_totient_pow",
       "IntegrableLattice.crudeBound_padicValInt_le_of_prod_countable",
       "IntegrableLattice.crudeBound_padicValInt_le_mul_logb",
+      "IntegrableLattice.PropQCyclotomicValuation.associated_sub_one_pow_totient",
+      "IntegrableLattice.PropQCyclotomicValuation.associated_sub_one_pow_of_dvd",
+      "IntegrableLattice.PropQCyclotomicValuation.isPrimitiveRoot_pow_of_valuation",
+      "IntegrableLattice.PropQCyclotomicValuation.associated_prod_sub_one",
+      "IntegrableLattice.PropQCyclotomicValuation.prod_sub_one_eq_zero",
+      "IntegrableLattice.PropQLaurentLift.exists_lift_of_reduction_eq",
+      "IntegrableLattice.PropQLaurentLift.not_dvd_unit_mul",
+      "IntegrableLattice.PropQLaurentLift.lemma_Q1'",
     ],
     statement: [
       paragraph([

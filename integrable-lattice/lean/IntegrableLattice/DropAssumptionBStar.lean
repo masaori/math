@@ -57,30 +57,33 @@
    型に出すと `theorem_Q1_error` の仮定 `hhat`（$\mathcal{B}_M$ 上の和が有限の上界を持つ）が
    これを要求していることから読める。**証明本文に一言要る。**
 
-## 形式化しなかったもの（mathlib の欠落か配線か）
+## 形式化した残りの段（cycle 33 step 1 で 2 件とも書いた）
 
-`lean/logs/mathlib-gap-survey-cycle22.log` を参照。
+cycle 32 までこの節は「形式化しなかったもの」として 3 件を挙げていた。
+**3 件とも形式化したので、命題 Q は完了である。**
 
-* **補題 Q4a**（$v_{\mathfrak l}(B(\omega_P))=\beta_P$）: 円分体 $\mathbb{Q}(\zeta_{\ell^M})$ の
-  $\ell$ の上の素点の付値で $v(\zeta_{\ell^j}-1)$ を計算する段。
-  `IsCyclotomicExtension`（15 ファイル）・`zeta_sub_one_prime`（3 ファイル）・
-  分岐指数 `ramificationIdx`（16 ファイル）・慣性次数 `inertiaDeg`（15 ファイル）は
-  mathlib に**在る**（`logs/mathlib-gap-survey-cycle22.log` で確認）ので、欠落ではなく**配線**である。
-* **補題 Q1′**（$\tilde E=BG+\ell H$ の存在と $\bar G$ が二項式因子を持たないこと）:
-  $\mathbb{F}_\ell[z^{\pm},w^{\pm}]$ が UFD であることの Laurent 版。
-  **1 変数** Laurent 多項式は `Mathlib/Algebra/Polynomial/Laurent.lean` に**在る**が、
-  **2 変数 Laurent 環の型は無い**（`Polynomial.laurent` / `MvPolynomial.Laurent` はともに 0 件）。
-  ただし `MvPolynomial` の局所化として作れ、`UniqueFactorizationMonoid`（66 ファイル）も在るので、
-  数学的な欠落ではなく**配線**である。
-* **補題 Q0**（アルキメデス粗上界）: **cycle 32 step 2 で形式化した**
-  （`CrudeArchimedeanBound.lean`）。$\mathbb{R}/\mathbb{C}$ へ脱出する唯一の箇所である。
-  形式化して分かったのは、**脱出しているのは複素絶対値の評価だけで、実対数は脱出の原因ではない**
-  こと——結論は $\ell^{v_\ell(N)}\le C_0^{\varphi}$ という $\mathbb{N}$ の不等式で書け、
+* **補題 Q0**（アルキメデス粗上界）: cycle 32 step 2（`CrudeArchimedeanBound.lean`）。
+  $\mathbb{R}/\mathbb{C}$ へ脱出する唯一の箇所である。形式化して分かったのは、
+  **脱出しているのは複素絶対値の評価だけで、実対数は脱出の原因ではない**こと——
+  結論は $\ell^{v_\ell(N)}\le C_0^{\varphi}$ という $\mathbb{N}$ の不等式で書け、
   本文の $\log_\ell$ の形はその書き換えである。両方を別々の定理として置いてある。
+* **補題 Q4a**（$v_{\mathfrak l}(B(\omega_P))=\beta_P$）: cycle 33 step 1
+  （`CyclotomicValuationQ4a.lean`）。**付値ではなく $\pi=\zeta-1$ の冪との同伴で書いた**
+  （$v_{\mathfrak l}(\pi)=1$ なので内容は同じ）。
+  **cycle 22 のログの見立ては 1 件外れていた**——`ramificationIdx`・`inertiaDeg` が要ると
+  読んでいたが、実際には使わずに済んだ。代わりに要ったのは
+  $(\zeta-1)^{\varphi(\ell^j)}\sim\ell$ の**素数冪版**で、mathlib にあるのは素数版だけなので
+  自分で書いた（`associated_sub_one_pow_totient`）。
+* **補題 Q1′**（$\tilde E=BG+\ell H$ の存在と $\bar G$ が二項式因子を持たないこと）:
+  cycle 33 step 1（`PropQLaurentLift.lean`）。2 変数 Laurent 環は
+  `AddMonoidAlgebra ℤ (ℤ × ℤ)`（群環 $\mathbb{Z}[\mathbb{Z}^2]$）で置いた。**新しい型は作っていない。**
+  **形式化して分かったのは、補題 Q1′ の証明が一意分解性を 1 度も使わないこと**である——
+  使うのは「単元倍は割り切りを変えない」だけで、一意分解性は $(1.2)$ を作る側の要求である。
 
-**この冒頭の一覧と検査 F の台帳がずれていた**（cycle 32 step 2 の実測）。
-台帳は残りを「(Q4) の粗上界」1 件とだけ書いていたが、ここは 3 件を挙げている。
-台帳を実測へ直した。**Lean 側の記述のほうが詳しく、台帳がそれを写しきっていなかった。**
+**完了と呼ぶ射程**: $\bar{\tilde E}$ の分解 $(1.2)$ そのもの（cycle 20 の定理 W1・W4）は
+補題 Q1′ の主張ではないので仮定として型に出してある。
+また補題 Q0 は $\hat\theta_M(P)=v_\ell(N)$ そのもの（定理 L4）を仮定として与えている。
+
 -/
 import Mathlib
 

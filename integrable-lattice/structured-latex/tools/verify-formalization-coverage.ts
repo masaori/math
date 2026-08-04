@@ -393,12 +393,38 @@ if (process.argv.includes("--self-test")) {
 const leanDir = join(structuredLatexDir, "..", "lean", "IntegrableLattice");
 
 const declaredInLean = new Set<string>();
+// 印字する件数は「宣言の個数」なので、照合用の集合（裸の名前も入れる）とは別に持つ。
+const declaredFullyQualified = new Set<string>();
 for (const file of readdirSync(leanDir).filter((name) => name.endsWith(".lean"))) {
   const source = readFileSync(join(leanDir, file), "utf8");
-  for (const match of source.matchAll(
-    /^(?:private\s+|protected\s+|noncomputable\s+)*(?:theorem|lemma|def|abbrev|instance)\s+([A-Za-z_][A-Za-z0-9_'!?]*)/gm,
-  )) {
-    declaredInLean.add(match[1]!);
+  // 名前空間を追いながら走る。**入れ子の名前空間の中の宣言も完全修飾名で拾うため**である
+  // （cycle 32 は入れ子を使うと照合が通らないことを接頭辞で回避したが、
+  //  「照合の側を名前空間に対応させるほうが本筋である」と限界に書いていた。ここで直した）。
+  const namespaceStack: string[] = [];
+  for (const line of source.split("\n")) {
+    const open = /^\s*namespace\s+([A-Za-z_][A-Za-z0-9_'.!?]*)/.exec(line);
+    if (open) {
+      namespaceStack.push(open[1]!);
+      continue;
+    }
+    const close = /^\s*end\s+([A-Za-z_][A-Za-z0-9_'.!?]*)\s*$/.exec(line);
+    if (close && namespaceStack[namespaceStack.length - 1] === close[1]) {
+      namespaceStack.pop();
+      continue;
+    }
+    const decl =
+      /^(?:private\s+|protected\s+|noncomputable\s+)*(?:theorem|lemma|def|abbrev|instance)\s+([A-Za-z_][A-Za-z0-9_'!?]*)/.exec(
+        line,
+      );
+    if (!decl) continue;
+    const bare = decl[1]!;
+    // 完全修飾名と裸の名前の両方を登録する（既存の紐づけは裸の名前で書かれている）。
+    declaredInLean.add(bare);
+    const qualified = [...namespaceStack, bare].join(".");
+    declaredFullyQualified.add(qualified);
+    if (namespaceStack.length > 0) {
+      declaredInLean.add(qualified);
+    }
   }
 }
 
@@ -440,8 +466,9 @@ for (const claim of claims) {
     );
   }
   for (const name of claim.leanNames) {
+    // 完全修飾名でも、`IntegrableLattice.` を落とした形でも、裸の名前でも当たるようにする。
     const short = name.replace(/^IntegrableLattice\./, "");
-    if (declaredInLean.has(short)) continue;
+    if (declaredInLean.has(name) || declaredInLean.has(short)) continue;
     violations.push(`[Lean に実在しない定理名] ${claim.id} — ${name}`);
   }
 }
@@ -461,7 +488,7 @@ console.log("形式化の被覆の検査（検査 F）");
 console.log("  目標: 論文の主張を全数 Lean 形式化する（2026-08-03 ユーザー方針）。");
 console.log(
   `  本文の主張（theorem / claim）${claims.length} 件 / 台帳 ${FORMALIZATION_COVERAGE.length} 件 /` +
-    ` lean/ の宣言 ${declaredInLean.size} 件`,
+    ` lean/ の宣言 ${declaredFullyQualified.size} 件`,
 );
 console.log(
   `  状態: 完了 ${counts.完了} 件 / 部分的 ${counts.部分的} 件 / 未着手 ${counts.未着手} 件`,
