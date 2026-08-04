@@ -454,16 +454,42 @@ targets=(
   IntegrableLattice.isLeast_eventualPeriod
   IntegrableLattice.isOfFinOrder_of_isUnit_of_finite
   IntegrableLattice.isLeast_eventualPeriod_reduction
+  # cycle 29 step 1: 命題 C′ の上界の組み立てと命題 C″ の (2)(4)（TracePeriodAssembly.lean）
+  IntegrableLattice.isPeriodMod_zero
+  IntegrableLattice.IsPeriodMod.add
+  IntegrableLattice.IsPeriodMod.nsmul
+  IntegrableLattice.IsPeriodMod.sub_right
+  IntegrableLattice.dvd_of_isLeast_isPeriodMod
+  IntegrableLattice.isTracePeriodAt_iff_isPeriodMod
+  IntegrableLattice.isTracePeriodAt_of_le
+  IntegrableLattice.isTracePeriodAt_iterate
+  IntegrableLattice.dvd_of_isLeast_tracePeriod
+  IntegrableLattice.tracePeriod_dvd_of_le
+  IntegrableLattice.tracePeriod_dvd_pow_mul
+  IntegrableLattice.tracePeriod_propC_bound
+  IntegrableLattice.tThree_five
+  IntegrableLattice.tThree_six
+  IntegrableLattice.tThree_values
+  IntegrableLattice.no_affine_trace_period_exponent
+  # cycle 29 step 1: 周期点数の終結式表示（PeriodicPointResultant.lean）
+  IntegrableLattice.resultant_X_pow_sub_one_eq_prod_eval
+  IntegrableLattice.eval_innerRes
+  IntegrableLattice.outerRes_eq_prod_prod_eval
 )
+
+# 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと
+# 中身を奪い合う（cycle 28 に実際に /tmp のファイル名衝突が起きた）。
+axiom_check_file="$(mktemp -t integrable_lattice_axiom_check).lean"
+trap 'rm -f "$axiom_check_file"' EXIT
 
 {
   echo "import IntegrableLattice"
   for t in "${targets[@]}"; do
     echo "#print axioms $t"
   done
-} > /tmp/integrable_lattice_axiom_check.lean
+} > "$axiom_check_file"
 
-out="$(lake env lean --stdin < /tmp/integrable_lattice_axiom_check.lean)"
+out="$(lake env lean --stdin < "$axiom_check_file")"
 echo "$out"
 
 if echo "$out" | grep -q 'sorryAx'; then

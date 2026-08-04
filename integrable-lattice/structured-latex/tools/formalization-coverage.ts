@@ -51,8 +51,14 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_022_claim_resultant",
     state: "部分的",
     remaining:
-      "終結式で周期点数が出ることは d = 1 と d = 2 で形式化されている（PropV.lean）。" +
-      "一般の d は同じ補題の反復で出るが未記述。",
+      "cycle 29 で「1 の冪根の上の積＝終結式」という claim の内容そのものを d = 1 と d = 2 で" +
+      "形式化した（PeriodicPointResultant.lean）。d = 2 は d = 1 の補題を 2 回使う形で書いてあり、" +
+      "「終結式を d 回入れ子にすればよい」の中身がそこに出ている。" +
+      "残るのは一般の d である。素材の欠落は無い（`Polynomial.resultant_eq_prod_eval` は mathlib に在る）が、" +
+      "反復多項式環 $R[z_1]\\cdots[z_d]$ を $d$ について再帰で作る型" +
+      "（型とその環構造を同時に決める）をこちらが持っていない。" +
+      "なお PropV.lean は $a_L$ を終結式そのものとして定義したうえで " +
+      "$a_{p^n}\\equiv P(1,\\dots,1)^{p^{dn}}\\pmod p$ を d = 1, 2 で証明している。",
   },
   {
     block: "paper_031_theorem_lsw",
@@ -85,7 +91,16 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   {
     block: "paper_043b_theorem_trace_bound",
     state: "部分的",
-    remaining: "命題 C′ は核（定理 A′ の心臓部）と反例まで。上界の主張そのものの組み立ては未形式化。",
+    remaining:
+      "cycle 29 で上界の主張そのものを組み立てた（TracePeriodAssembly.lean の tracePeriod_propC_bound）。" +
+      "$\\pi_{\\mathrm{tr}}(p,k)\\mid p^{k-1}\\pi_{\\mathrm{tr}}(p,w^*+1)$ を、" +
+      "$k>w^*+1$ では梯子の反復から、$k\\le w^*+1$ では単調性から出す形で書いてある。" +
+      "その途中で、人手証明が暗黙に使っていた「最小周期は任意の周期を割る」を独立に証明した。" +
+      "残るのは $w^*$ の側である——Gram 行列 $G$ の最大単因子という定義そのものと、" +
+      "$\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$、および " +
+      "$w^*=0$ の同値。いずれも整数行列の単因子（Smith 標準形）が要り、mathlib に無い" +
+      "（`Module.Basis.SmithNormalForm` は部分加群の基底の形であって行列の単因子ではない。" +
+      "cycle 29 の欠落調査で再確認）。上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
   },
   {
     block: "paper_044_theorem_newton",
@@ -100,8 +115,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_045_theorem_trace_ladder",
     state: "部分的",
     remaining:
-      "命題 C″ は核と反例、および cycle 27 で加えた $g_m\\ge m+1$ の持ち上げまで。" +
-      "閉形式が存在しないことの主張そのものは未形式化。",
+      "命題 C″ は核と反例、cycle 27 で加えた $g_m\\ge m+1$ の持ち上げ、および cycle 29 で加えた " +
+      "(2) 改良した上界（tracePeriod_dvd_pow_mul）と (4) 閉形式が存在しないことの主張そのもの" +
+      "（no_affine_trace_period_exponent。本文の $t_k=1,2,2,4,8,16$ も tThree_values で出した）まで。" +
+      "残るのは (1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\\min\\{m:g_m\\ge k\\}$ の同値で、" +
+      "どちらも $w^*$ の定義に整数行列の単因子が要る（命題 C′ と同じ壁）。",
   },
   {
     block: "paper_046_theorem_wstar_different",

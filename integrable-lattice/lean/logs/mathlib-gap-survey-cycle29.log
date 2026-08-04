@@ -1,0 +1,289 @@
+=== 日付 ===
+2026-08-04T04:46:18Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 素材(無いはず) matrix-tree 定理 ===
+--- (1) 連結語の内容 grep: 'matrixTree'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'kirchhoff'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'kirchhoff'
+files=0
+
+=== 素材(無いはず) 全域木数の公式 ===
+--- (1) 連結語の内容 grep: 'numSpanningTrees'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'spanning tree'
+files=3
+.lake/packages/mathlib/Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean
+.lake/packages/mathlib/Mathlib/Combinatorics/Quiver/Arborescence.lean
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Acyclic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'spanning tree'
+files=0
+
+=== 素材(無いはず) 多変数 Mahler 測度 ===
+--- (1) 連結語の内容 grep: 'MvPolynomial.mahlerMeasure'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'mahler'
+files=5
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/Norm.lean
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/MahlerBasis.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/AddChar.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'mahler'
+files=3
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/MahlerBasis.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+
+=== 素材(無いはず) Skolem-Mahler-Lech ===
+--- (1) 連結語の内容 grep: 'SkolemMahlerLech'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'skolem'
+files=30
+.lake/packages/mathlib/Mathlib/Tactic/Push.lean
+.lake/packages/mathlib/Mathlib/Tactic/Choose.lean
+.lake/packages/mathlib/Mathlib/Order/CompleteBooleanAlgebra.lean
+.lake/packages/mathlib/Mathlib/Order/Atoms.lean
+.lake/packages/mathlib/Mathlib/Order/Filter/Bases/Basic.lean
+.lake/packages/mathlib/Mathlib/Order/Filter/Basic.lean
+.lake/packages/mathlib/Mathlib/ModelTheory/Skolem.lean
+.lake/packages/mathlib/Mathlib/ModelTheory/Satisfiability.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'skolem'
+files=1
+.lake/packages/mathlib/Mathlib/ModelTheory/Skolem.lean
+
+=== 素材(無いはず) Strassmann ===
+--- (1) 連結語の内容 grep: 'Strassmann'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'strassmann'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'strassmann'
+files=0
+
+=== 素材(無いはず) Newton 多面体 ===
+--- (1) 連結語の内容 grep: 'NewtonPolytope'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'newton polytope'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'newton polytope'
+files=0
+
+=== 素材(無いはず) 岩澤不変量の漸近 ===
+--- (1) 連結語の内容 grep: 'IwasawaInvariant'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'iwasawa'
+files=6
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/Measure/Basic.lean
+.lake/packages/mathlib/Mathlib/GroupTheory/GroupAction/Iwasawa.lean
+.lake/packages/mathlib/Mathlib/GroupTheory/SpecificGroups/Alternating/Simple.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'iwasawa'
+files=1
+.lake/packages/mathlib/Mathlib/GroupTheory/GroupAction/Iwasawa.lean
+
+=== 素材(無いはず) 整数行列の Smith 標準形 ===
+--- (1) 連結語の内容 grep: 'Matrix.smithNormalForm'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'smith normal'
+files=3
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'smith normal'
+files=0
+
+=== 素材(在るはず) 終結式 ===
+--- (1) 連結語の内容 grep: 'Polynomial.resultant'
+files=2
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'resultant'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'resultant'
+files=0
+
+=== 素材(在るはず) 円分拡大 ===
+--- (1) 連結語の内容 grep: 'IsCyclotomicExtension'
+files=15
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/Complex.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/FLT/Three.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/CMField.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'cyclotomic'
+files=31
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/Complex.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/PrimesCongruentOne.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'cyclotomic'
+files=2
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/CyclotomicUnits.lean
+
+=== 素材(在るはず) Hensel の補題 ===
+--- (1) 連結語の内容 grep: 'hensel'
+files=2
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/Hensel.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'henselian'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'henselian'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+
+=== 素材(在るはず) トレース双対 ===
+--- (1) 連結語の内容 grep: 'traceDual'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'trace dual'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'trace dual'
+files=0
+
+=== 素材(在るはず) different イデアル ===
+--- (1) 連結語の内容 grep: 'differentIdeal'
+files=4
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'different ideal'
+files=3
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'different ideal'
+files=0
+
+=== 素材(在るはず) 冪級数の位数 ===
+--- (1) 連結語の内容 grep: 'PowerSeries.order'
+files=9
+.lake/packages/mathlib/Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Exp.lean
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Substitution.lean
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Expand.lean
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Order.lean
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Log.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean
+.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Order.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'power series order'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'power series order'
+files=0
+
+=== 素材(在るはず) 部分再帰関数 ===
+--- (1) 連結語の内容 grep: 'Nat.Partrec'
+files=8
+.lake/packages/mathlib/Mathlib/Computability/Partrec.lean
+.lake/packages/mathlib/Mathlib/Computability/Ackermann.lean
+.lake/packages/mathlib/Mathlib/Computability/RE.lean
+.lake/packages/mathlib/Mathlib/Computability/Halting.lean
+.lake/packages/mathlib/Mathlib/Computability/RecursiveIn.lean
+.lake/packages/mathlib/Mathlib/Computability/PartrecCode.lean
+.lake/packages/mathlib/Mathlib/Computability/TuringMachine/Config.lean
+.lake/packages/mathlib/Mathlib/Computability/PartrecBasis.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'partrec'
+files=11
+.lake/packages/mathlib/Mathlib/Computability/Partrec.lean
+.lake/packages/mathlib/Mathlib/Computability/Ackermann.lean
+.lake/packages/mathlib/Mathlib/Computability/RE.lean
+.lake/packages/mathlib/Mathlib/Computability/TuringDegree.lean
+.lake/packages/mathlib/Mathlib/Computability/Halting.lean
+.lake/packages/mathlib/Mathlib/Computability/TMToPartrec.lean
+.lake/packages/mathlib/Mathlib/Computability/RecursiveIn.lean
+.lake/packages/mathlib/Mathlib/Computability/PartrecCode.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'partrec'
+files=5
+.lake/packages/mathlib/Mathlib/Computability/Partrec.lean
+.lake/packages/mathlib/Mathlib/Computability/TMToPartrec.lean
+.lake/packages/mathlib/Mathlib/Computability/PartrecCode.lean
+.lake/packages/mathlib/Mathlib/Computability/TuringMachine/ToPartrec.lean
+.lake/packages/mathlib/Mathlib/Computability/PartrecBasis.lean
+
+=== 素材(在るはず) 分岐指数 ===
+--- (1) 連結語の内容 grep: 'ramificationIdx'
+files=16
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Galois.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Unramified.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Valuation.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Ramification.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/ExistsRamified.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'ramification'
+files=26
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Galois.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Unramified.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Valuation.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Inertia.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Ramification.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/ClassNumber.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'ramification'
+files=5
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Ramification.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Completion/Ramification.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RamificationInertia/Ramification.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Valuation/RamificationGroup.lean
+
+=== 名指しの実在確認（宣言名を直接引く） ===
+--- Polynomial.resultant （末尾語 'resultant' を含むファイル数）: 2
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:134:def resultant (f g : R[X]) (m : ℕ := f.natDegree) (n : ℕ := g.natDegree) : R :=
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:140:lemma resultant_map_map (φ : R →+* S) :
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:144:@[simp] theorem resultant_zero_left_deg : resultant f g 0 m = f.coeff 0 ^ m := by
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:148:theorem resultant_C_zero_left : resultant (C r) g 0 m = r ^ m := by simp
+--- Polynomial.resultant_map_map （末尾語 'resultant_map_map' を含むファイル数）: 2
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:140:lemma resultant_map_map (φ : R →+* S) :
+--- Polynomial.resultant_X_sub_C_pow_left （末尾語 'resultant_X_sub_C_pow_left' を含むファイル数）: 1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean:671:lemma resultant_X_sub_C_pow_left (r : R) (g : R[X]) (m n : ℕ) (hn : g.natDegree ≤ n) :
+--- orderOf_eq_prime （末尾語 'orderOf_eq_prime' を含むファイル数）: 12
+.lake/packages/mathlib/Mathlib/GroupTheory/OrderOfElement.lean:531:theorem orderOf_eq_prime_iff : orderOf x = p ↔ x ^ p = 1 ∧ x ≠ 1 := by
+.lake/packages/mathlib/Mathlib/GroupTheory/OrderOfElement.lean:536:theorem orderOf_eq_prime (hg : x ^ p = 1) (hg1 : x ≠ 1) : orderOf x = p :=
+.lake/packages/mathlib/Mathlib/GroupTheory/OrderOfElement.lean:540:theorem orderOf_eq_prime_pow (hnot : ¬x ^ p ^ n = 1) (hfin : x ^ p ^ (n + 1) = 1) :
+--- Nat.sub_one （末尾語 'sub_one' を含むファイル数）: 309
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:580:theorem sub_one_mul_padicValNat_factorial [hp : Fact p.Prime] (n : ℕ) :
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:589:theorem sub_one_mul_padicValNat_factorial_lt_of_ne_zero [hp : Fact p.Prime] {n : ℕ} (hn : n ≠ 0) :
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:635:theorem sub_one_mul_padicValNat_choose_eq_sub_sum_digits' {k n : ℕ} [hp : Fact p.Prime] :
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:652:theorem sub_one_mul_padicValNat_choose_eq_sub_sum_digits {k n : ℕ} [hp : Fact p.Prime]
+--- geom_sum_mul （末尾語 'geom_sum_mul' を含むファイル数）: 17
+.lake/packages/mathlib/Mathlib/Algebra/Ring/GeomSum.lean:109:lemma geom_sum_mul_add (x : R) (n : ℕ) : (∑ i ∈ range n, (x + 1) ^ i) * x + 1 = (x + 1) ^ n := by
+.lake/packages/mathlib/Mathlib/Algebra/Ring/GeomSum.lean:161:lemma geom_sum_mul_of_one_le (hx : 1 ≤ x) (n : ℕ) :
+.lake/packages/mathlib/Mathlib/Algebra/Ring/GeomSum.lean:164:lemma geom_sum_mul_of_le_one (hx : x ≤ 1) (n : ℕ) :
+.lake/packages/mathlib/Mathlib/Algebra/Ring/GeomSum.lean:232:lemma geom_sum_mul (x : R) (n : ℕ) : (∑ i ∈ range n, x ^ i) * (x - 1) = x ^ n - 1 := by
+--- CharP.charP （末尾語 'charP' を含むファイル数）: 42
+.lake/packages/mathlib/Mathlib/ModelTheory/Algebra/Field/CharP.lean:64:theorem charP_iff_model_fieldOfChar [Field K] [CompatibleRing K] :
+.lake/packages/mathlib/Mathlib/ModelTheory/Algebra/Field/CharP.lean:87:theorem charP_of_model_fieldOfChar [Field K] [CompatibleRing K]
+.lake/packages/mathlib/Mathlib/Analysis/Fourier/BoundedContinuousFunctionChar.lean:139:def charPoly (he : Continuous e) (hL : Continuous fun p : V × W ↦ L p.1 p.2) :
+.lake/packages/mathlib/Mathlib/GroupTheory/OrderOfElement.lean:1435:lemma charP_of_ne_zero (hn : card R = p) (hR : ∀ i < p, (i : R) = 0 → i = 0) : CharP R p where
+--- Polynomial.instCharP （末尾語 'instCharP' を含むファイル数）: 4
+.lake/packages/mathlib/Mathlib/FieldTheory/SplittingField/Construction.lean:263:instance instCharP (p : ℕ) [CharP K p] : CharP (SplittingField f) p :=
+.lake/packages/mathlib/Mathlib/FieldTheory/PerfectClosure.lean:377:instance instCharP : CharP (PerfectClosure K p) p := by
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Basic.lean:42:instance instCharP (p : ℕ) [h : CharP R p] : CharP R[X] p :=
+
+SURVEY_EXIT=0

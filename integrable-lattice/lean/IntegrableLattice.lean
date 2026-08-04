@@ -36,3 +36,5 @@ import IntegrableLattice.Cycle27ProofSteps
 import IntegrableLattice.PropWStarDifferent
 import IntegrableLattice.PropFFiniteSupport
 import IntegrableLattice.ExtremumNonempty
+import IntegrableLattice.TracePeriodAssembly
+import IntegrableLattice.PeriodicPointResultant

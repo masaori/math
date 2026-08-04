@@ -304,6 +304,9 @@ export default defineBlocks([
       "IntegrableLattice.traceOrth_one_add_pow",
       "IntegrableLattice.isTracePeriodAt_mul_prime",
       "IntegrableLattice.dvd_of_mulVec_dvd",
+      "IntegrableLattice.dvd_of_isLeast_isPeriodMod",
+      "IntegrableLattice.tracePeriod_dvd_of_le",
+      "IntegrableLattice.tracePeriod_propC_bound",
     ],
     statement: [
       paragraph([
@@ -705,6 +708,10 @@ export default defineBlocks([
       "IntegrableLattice.w_lifting_step",
       "IntegrableLattice.w_lifting_pow",
       "IntegrableLattice.w_lifting_pow_specializes",
+      "IntegrableLattice.isTracePeriodAt_iterate",
+      "IntegrableLattice.tracePeriod_dvd_pow_mul",
+      "IntegrableLattice.tThree_values",
+      "IntegrableLattice.no_affine_trace_period_exponent",
     ],
     statement: [
       paragraph([
