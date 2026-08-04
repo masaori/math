@@ -262,6 +262,18 @@ export const SCOPE_CLAIMS: readonly ScopeClaim[] = [
     why: "上と同じ。$\\mathbb{Z}[X]$ 側のファイルも 1 変数しか扱わない。",
   },
   {
+    entry: "paper_052_theorem_l0_computable / $d$ 変数の完備群環（岩澤代数）",
+    kind: "在るが概念を使っていない",
+    file: "Mathlib/NumberTheory/Padics/Measure/Basic.lean",
+    absentToken: "MvPowerSeries",
+    why:
+      "本論文が要るのは $d$ 変数の完備群環 $\\mathbb{F}_p[[\\Gamma]]$ とその素イデアルの記述である。" +
+      "mathlib で `iwasawa algebra` の語に当たるのは $p$ 進測度の章のこのファイルだけで、" +
+      "**多変数の形式冪級数を 1 度も使っていない**（1 変数の測度である）。" +
+      "**cycle 33 step 4 で登録した**——この主張は cycle 32 の時点で「射程の主張」に数えられていたのに" +
+      "登録されておらず、人の読みのままだった（登録の網羅性が測れないことの実例である）。",
+  },
+  {
     entry: "paper_043b_theorem_trace_bound / 単因子の整除の鎖",
     kind: "在るが関係が無い",
     presentToken: "smithCoeffs",
