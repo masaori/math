@@ -12,6 +12,7 @@ import { DEFINITION_ORDER_TERMS } from "./definition-order-terms.ts";
 import { type OrderedBlock, violationsIn } from "./definition-order-model.ts";
 import { knownLocales, loadContentFilesForLocale } from "./content-modules.ts";
 import { reportSymbolSweep } from "./definition-order-symbol-sweep.ts";
+import { reportVocabularySweep } from "./definition-order-vocabulary-sweep.ts";
 
 const flatten = (nodes: readonly TranslatedNode[]): string => {
   let out = "";
@@ -100,12 +101,14 @@ if (failed > 0) {
   console.log(
     "  限界: 追跡するのは台帳に載せた語だけで、本論文が定義しない標準的な語彙" +
       "（素点・Newton 多角形・Lehmer 問題等）は対象外。台帳の網羅性がこの検査の強さの上限である。" +
-      "**その上限が妥当かは台帳と独立な拾い方でしか測れないので、記号の走査を続けて回す。**",
+      "**その上限が妥当かは台帳と独立な拾い方でしか測れないので、記号と散文の走査を続けて回す。**",
   );
 }
 
 // 台帳を使わない別の拾い方。台帳の漏れを毎回数えるためにここで続けて回す。
+// 記号は数式ノードを、散文は地の文を見る。二つは見ている場所が重なっていない。
 failed += await reportSymbolSweep();
+failed += await reportVocabularySweep();
 
 if (failed > 0) {
   console.log("");
