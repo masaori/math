@@ -315,8 +315,22 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_106_theorem_drop_assumption",
     state: "部分的",
     remaining:
-      "命題 Q は組合せ・数え上げ・最小点の一意性・誤差の組み立てまで。" +
-      "(Q4) の粗上界は複素絶対値を使う段があり、その形式化が残る。",
+      "命題 Q は組合せ・数え上げ・最小点の一意性・誤差の組み立て、および " +
+      "cycle 32 step 2 が形式化した補題 Q0（アルキメデス粗上界）まで" +
+      "（`CrudeArchimedeanBound.lean`。**本プロジェクトで複素絶対値を使う唯一の箇所**）。" +
+      "**この欄は cycle 31 まで残りを 1 件と書いていたが、実測すると 3 件だった**——" +
+      "`DropAssumptionBStar.lean` の冒頭が「形式化しなかったもの」として " +
+      "補題 Q0・補題 Q4a・補題 Q1′ の 3 件を挙げており、台帳が写していたのは 1 件だけだった" +
+      "（cycle 32 step 2 の着手時に Lean 側の記述と突き合わせて見つけた）。" +
+      "残るのは 2 件で、**どちらも mathlib の欠落ではなく配線である**。" +
+      "(1) 補題 Q4a（$v_{\\mathfrak l}(B(\\omega_P))=\\beta_P$）は円分体 " +
+      "$\\mathbb{Q}(\\zeta_{\\ell^M})$ の $\\ell$ の上の素点で $v(\\zeta_{\\ell^j}-1)$ を計算する段で、" +
+      "`IsCyclotomicExtension`・`zeta_sub_one_prime`・`ramificationIdx`・`inertiaDeg` は" +
+      "いずれも mathlib に在る（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle22.log`）。" +
+      "(2) 補題 Q1′（$\\tilde E=BG+\\ell H$ の存在と $\\bar G$ が二項式因子を持たないこと）は " +
+      "2 変数 Laurent 環の一意分解で、**2 変数 Laurent 環の型は mathlib に無い**が " +
+      "`MvPolynomial` の局所化として作れ `UniqueFactorizationMonoid` も在るので、" +
+      "数学的な欠落ではなく型を用意していないだけである（同じログ）。",
   },
   {
     block: "paper_111_theorem_general_closed_form",

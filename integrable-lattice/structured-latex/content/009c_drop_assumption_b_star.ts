@@ -43,6 +43,8 @@ export default defineBlocks([
       "IntegrableLattice.unique_min_of_val_seq",
       "IntegrableLattice.BG_dominates",
       "IntegrableLattice.sum_totient_pow",
+      "IntegrableLattice.crudeBound_padicValInt_le_of_prod_countable",
+      "IntegrableLattice.crudeBound_padicValInt_le_mul_logb",
     ],
     statement: [
       paragraph([

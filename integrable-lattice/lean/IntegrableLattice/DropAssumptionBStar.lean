@@ -72,8 +72,15 @@
   **2 変数 Laurent 環の型は無い**（`Polynomial.laurent` / `MvPolynomial.Laurent` はともに 0 件）。
   ただし `MvPolynomial` の局所化として作れ、`UniqueFactorizationMonoid`（66 ファイル）も在るので、
   数学的な欠落ではなく**配線**である。
-* **補題 Q0**（アルキメデス粗上界）: $\mathbb{R}$ へ脱出する唯一の箇所。
-  `Algebra.norm` と複素絶対値の評価。**配線**（mathlib には両方在る）。
+* **補題 Q0**（アルキメデス粗上界）: **cycle 32 step 2 で形式化した**
+  （`CrudeArchimedeanBound.lean`）。$\mathbb{R}/\mathbb{C}$ へ脱出する唯一の箇所である。
+  形式化して分かったのは、**脱出しているのは複素絶対値の評価だけで、実対数は脱出の原因ではない**
+  こと——結論は $\ell^{v_\ell(N)}\le C_0^{\varphi}$ という $\mathbb{N}$ の不等式で書け、
+  本文の $\log_\ell$ の形はその書き換えである。両方を別々の定理として置いてある。
+
+**この冒頭の一覧と検査 F の台帳がずれていた**（cycle 32 step 2 の実測）。
+台帳は残りを「(Q4) の粗上界」1 件とだけ書いていたが、ここは 3 件を挙げている。
+台帳を実測へ直した。**Lean 側の記述のほうが詳しく、台帳がそれを写しきっていなかった。**
 -/
 import Mathlib
 

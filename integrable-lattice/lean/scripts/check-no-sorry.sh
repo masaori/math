@@ -554,6 +554,17 @@ targets=(
   IntegrableLattice.orderEmbOfFin_comp_injOn
   IntegrableLattice.exists_orderEmbOfFin_comp
   IntegrableLattice.det_mul_eq_sum_over_subsets
+
+  # cycle 32 step 2: 補題 Q0（アルキメデス粗上界。CrudeArchimedeanBound.lean）。
+  # 命題 Q の残り 1 段。**本プロジェクトで ℂ の絶対値を使う唯一の箇所**である。
+  IntegrableLattice.crudeBound_pow_padicValInt_le_natAbs
+  IntegrableLattice.crudeBound_norm_sum_le_of_norm_eq_one
+  IntegrableLattice.crudeBound_norm_prod_le_pow_card
+  IntegrableLattice.crudeBound_natAbs_le_pow_of_norm_le
+  IntegrableLattice.crudeBound_pow_padicValInt_le_pow
+  IntegrableLattice.crudeBound_le_mul_logb_of_pow_le
+  IntegrableLattice.crudeBound_padicValInt_le_of_prod_countable
+  IntegrableLattice.crudeBound_padicValInt_le_mul_logb
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと
