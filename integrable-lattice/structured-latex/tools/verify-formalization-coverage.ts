@@ -32,6 +32,8 @@ import {
   type CoverageState,
   FORMALIZATION_COVERAGE,
   auditPartCoverage,
+  auditPartlessRemaining,
+  partLabelsInStatement,
 } from "./formalization-coverage.ts";
 import { STALENESS_POLICY, auditLedgerAbsence, type LedgerText } from "./ledger-absence-model.ts";
 import {
@@ -488,7 +490,93 @@ if (process.argv.includes("--self-test")) {
     console.log(`  ${ok ? "OK" : "NG"} [部の覆い] ${partCase.name}`);
   }
 
-  const total = cases.length + LEDGER_ABSENCE_CASES.length + partCases.length;
+  // cycle 36 step 5: 部を持たない `部分的` の欄の検出テスト。
+  const partlessCases: { name: string; shouldFail: boolean; run: () => string[] }[] = [
+    {
+      name: "部を持たない 部分的 の欄が残りの一覧を持たない",
+      shouldFail: true,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [
+            { block: "b", state: "部分的", text: "まだ途中である。", hasParts: false },
+          ],
+        }).violations,
+    },
+    {
+      name: "一覧の項目が散文に無い（片方だけ書き換えた形）",
+      shouldFail: true,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              text: "残るのは 1 つ。降下の段である。",
+              hasParts: false,
+              remainingItems: ["消えた項目"],
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "書き足したのに要約の数を直していない（cycle 35・36 に現に起きた形）",
+      shouldFail: true,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              text: "残っているのは 1 つ。降下の段と、判別式の段である。",
+              hasParts: false,
+              remainingItems: ["降下の段", "判別式の段"],
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "いまの件数を述べる要約があれば、過去の要約を引用していても通る",
+      shouldFail: false,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              text:
+                "かつては「残りは 1 つ」と書いていた。残っているのは 2 つ。降下の段と、判別式の段である。",
+              hasParts: false,
+              remainingItems: ["降下の段", "判別式の段"],
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "部を持つ主張は対象外（偽陽性でない側）",
+      shouldFail: false,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [{ block: "b", state: "部分的", text: "(R1) は入った。", hasParts: true }],
+        }).violations,
+    },
+    {
+      name: "完了・未着手は対象外（偽陽性でない側）",
+      shouldFail: false,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [{ block: "b", state: "完了", text: "全部書いた。", hasParts: false }],
+        }).violations,
+    },
+  ];
+  for (const partlessCase of partlessCases) {
+    const violations = partlessCase.run();
+    const ok = violations.length > 0 === partlessCase.shouldFail;
+    if (!ok) failed += 1;
+    console.log(`  ${ok ? "OK" : "NG"} [部を持たない欄] ${partlessCase.name}`);
+  }
+
+  const total =
+    cases.length + LEDGER_ABSENCE_CASES.length + partCases.length + partlessCases.length;
   console.log("");
   if (failed > 0) {
     console.log(`NG: ${failed} 件が期待どおりでない。`);
@@ -853,6 +941,42 @@ for (const entry of unformalised) {
         ];
       }),
     });
+    // cycle 36 step 5: 部の見出しを持たない `部分的` の主張は、欄の側に構造を持たせる。
+    const partlessAudit = auditPartlessRemaining({
+      entries: claims.flatMap((claim) => {
+        const entry = byBlock.get(claim.id);
+        if (entry === undefined) return [];
+        const e = entry as unknown as Record<string, unknown>;
+        return [
+          {
+            block: claim.id,
+            state: entry.state,
+            text: [e.remaining, e.reason, e.note]
+              .filter((x): x is string => typeof x === "string")
+              .join(" "),
+            hasParts: partLabelsInStatement(claim.statementText).length > 0,
+            remainingItems: e.remainingItems as readonly string[] | undefined,
+          },
+        ];
+      }),
+    });
+    violations.push(...partlessAudit.violations);
+    console.log(
+      `    部の見出しを持たない 部分的 の主張（cycle 36 step 5 で追加）: ` +
+        `${partlessAudit.checked} 件 / 残りの項目 ${partlessAudit.items} 件 / ` +
+        `数で要約している欄 ${partlessAudit.summarised} 件 / 違反 ${partlessAudit.violations.length} 件`,
+    );
+    console.log(
+      "    **本文に部の構造が無い主張には部の覆いを当てられないので、欄の側に構造を持たせた。** " +
+        "残っている項目を配列で宣言させ、各項目が散文にそのまま在ることと、" +
+        "散文が数で要約しているならその数が項目数と一致することを見る。" +
+        "**後者が、cycle 35・36 で 4 件見つかった「書き足したのに要約を直していない」事故への手当てである。**",
+    );
+    console.log(
+      "    限界: **一覧が実態を尽くしているかは確かめられない**（項目を 1 つ書けば通る）。" +
+        "項目の文言が正しいかも確かめられない（散文に在ることだけを見る）。",
+    );
+
     violations.push(...partAudit.violations);
     console.log(
       `    台帳が本文の部を覆っているか（cycle 34 step 5 で追加）: ` +

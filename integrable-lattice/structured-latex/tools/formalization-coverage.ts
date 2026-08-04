@@ -39,7 +39,33 @@ export type CoverageState = "完了" | "部分的" | "未着手";
 
 export type CoverageEntry =
   | { readonly block: string; readonly state: "完了"; readonly note?: string }
-  | { readonly block: string; readonly state: "部分的"; readonly remaining: string }
+  | {
+      readonly block: string;
+      readonly state: "部分的";
+      readonly remaining: string;
+      /**
+       * **残っている項目の構造化された一覧**（cycle 36 step 5 で追加）。
+       *
+       * ## なぜこれが要るか（部の見出しを持たない主張への手当て）
+       *
+       * cycle 34 step 5 で「`部分的` の欄は本文の部を 1 つ残らず扱っていること」を機械が見るようにした。
+       * ところが**本文に部の構造が無い主張には当てられない**——実測で `部分的` 14 件のうち
+       * **6 件**（命題 C′・命題 N・命題 C″・命題 W\*・命題 T・命題 W）が これに当たる。
+       *
+       * **部が無いなら、欄の側に構造を持たせればよい。** 残っている項目を配列で宣言させ、
+       * 各項目の文字列が散文にそのまま在ることを機械が見る。これで
+       * **その主張に残りがいくつあるかが機械から見える**ようになる。
+       *
+       * ## これが効くもう 1 つの理由（step 3 が塞げなかった側）
+       *
+       * cycle 36 step 3 は「散文の中の列挙には構造が無いので数えられない」ことを理由に、
+       * **欄の中の要約（「残るのは 2 つ」）を機械で見ることを諦めていた。**
+       * この配列があると数えられるので、**要約の数と実際の項目数の食い違いを機械が見られる。**
+       * これは cycle 35・36 で 4 件見つかった事故のうち、
+       * (1) 命題 R の「残りは 1 つ」・(3) 命題 W\* の「残りは 1 件」と同じ形である。
+       */
+      readonly remainingItems?: readonly string[];
+    }
   | { readonly block: string; readonly state: "未着手"; readonly reason: string };
 
 /**
@@ -114,10 +140,14 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "残るのは 2 つ。(1) 本文が $w^*$ を Gram 行列 $G$ の側で定義していること——" +
       "$G$ の単因子が $A/\\eta A$ の不変量に等しいという同一視は、" +
       "体の上では行列の等式 $C\\,G=M_\\eta$ と $(\\det C)^2=1$ として入ったが" +
-      "（命題 W\\* の欄を見よ）、その整数への降下を書いていない。" +
+      "（命題 W\\* の欄を見よ）。**cycle 36 step 5 でこの欄を構造化したときに、ここが古いことが分かった**——整数への降下そのものは cycle 30 step 1 で入っており（`WStarIntegralDescent.lean`）、cycle 36 step 1 は可約な場合の降下も書いた（`WStarReducibleDescent.lean`）。**残っているのはその降下を命題 C′ のトレース列の周期の主張へ結ぶ段である**（命題 C″ と同じ壁）。" +
       "(2) $\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$ の" +
       "重複度の積の形（ノルムの形 $\\det G=\\pm N(\\eta)$ は入った）。" +
       "上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
+    remainingItems: [
+      "本文が $w^*$ を Gram 行列 $G$ の側で定義していること",
+      "の重複度の積の形",
+    ],
   },
   {
     block: "paper_044_theorem_newton",
@@ -132,6 +162,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`NewtonPolytope` / 語幹 `newton polytope` も 3 段とも 0 件）、" +
       "鋭い下界は Newton 恒等式の行列トレースへの接続が要り、Newton 多角形と固有値の接続は " +
       "$\\overline{\\mathbb{Q}_p}$ の付値が要る。",
+    remainingItems: [
+      "上界方向は Skolem–Mahler–Lech / Strassmann が mathlib に無く",
+      "鋭い下界は Newton 恒等式の行列トレースへの接続が要り",
+      "Newton 多角形と固有値の接続は ",
+    ],
   },
   { block: "paper_045_theorem_lte", state: "完了", note: "命題 L の 4 分岐すべて。" },
   {
@@ -146,6 +181,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**「整数行列の単因子が mathlib に無いから書けない」という step 1 の判定は覆った**——" +
       "適合基底の係数の $p$ 進付値の最大値として書ける）。" +
       "残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。",
+    remainingItems: [
+      "のしきい値 $w^*+1$ の最良性",
+      "の同値",
+    ],
   },
   {
     block: "paper_046_theorem_wstar_different",
@@ -177,7 +216,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（range_mulLeft_eq_span / isLeast_isPLevel_range_of_euler）。" +
       "これで人手証明の「$\\operatorname{coker}(G)\\cong A/\\eta A$ だから $G$ の単因子は $A/\\eta A$ の不変量」が" +
       "$C\\,G=M_\\eta$ を仮定として与えたときに Lean で通る。" +
-      "**残っているのは 1 つ、$\\rho$ が可約な場合の $C\\,G=M_\\eta$ そのものである。** " +
+      "**cycle 30 から cycle 35 まで、この欄はここに「残りは可約な $\\rho$ での $C\\,G=M_\\eta$ そのもの 1 件だけである」と書いていた（その判断は cycle 36 step 1 の実測で覆った。下記）。** " +
       "(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\\rho$ が既約な場合しか覆っていない。" +
       "$\\rho$ が可約なとき $A\\otimes\\mathbb{Q}$ は体でなく体の積である。" +
       "**これは配線の欠落ではなく素材の欠落である**（2026-08-04 実測、" +
@@ -193,7 +232,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`isUnit_det_eulerHankel` と繋いで $\\det C=\\pm1$ も出る）。" +
       "**それでもこの主張は完了しない。cycle 36 step 1 の実測で、残りが 1 件ではなかったことが分かった。** " +
       "台帳は cycle 30 から「残っているのは 1 つ、可約な $\\rho$ での $C\\,G=M_\\eta$ そのもの」と書き続けていたが、" +
-      "その 1 件を埋めても下流が塞がったままだった。**実測で見つかった残りは 3 件である。** " +
+      "その 1 件を埋めても下流が塞がったままだった。**実測で見つかった穴は 3 件で、うち 1 件は本 step で埋めた。残っているのは 2 つである。** " +
       "(1) **降下そのものが整域を要求していた**——`WStarIntegralDescent.isLeast_isPLevel_range_of_euler` は " +
       "`[IsDomain S]` を仮定しており、$\\rho$ が可約なとき $A=\\mathbb{Z}[x]/(\\rho)$ は整域でないので当たらない。" +
       "**cycle 36 step 1 でこれは埋めた**（`WStarReducibleDescent.lean` の " +
@@ -206,6 +245,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(3) **$\\eta=(\\chi\'/h)(\\theta)$ が零因子でないこと**と、$A=\\mathbb{Z}[x]/(\\rho)$ が " +
       "`IsPowerBasisOf` / `IsReductionOf` を満たすことの当てはめ。どちらも仮定として受け取っている。" +
       "**未形式化である。**",
+    remainingItems: [
+      "が可約な場合に無い",
+      "が零因子でないこと",
+    ],
   },
   {
     block: "paper_051_theorem_duality",
@@ -319,6 +362,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "うち小行列式の段は cycle 32 step 3 で半分入った**＝全単模性。" +
       "残るのは「$\pm1$ になるのが全域木のときに限る」という組合せの側）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。",
+    remainingItems: [
+      "matrix-tree の段",
+      "2 の不分岐性・Hensel 持ち上げの段",
+    ],
   },
   {
     block: "paper_063_theorem_W",
@@ -330,6 +377,9 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`Monsky` / `CuocoMonsky` はいずれも 3 段とも 0 件。" +
       "語幹 `iwasawa` は 6 ファイルに当たるが、名前に iwasawa を持つファイルは群論の岩澤分解の 1 本だけで、" +
       "岩澤不変量の漸近ではない）。",
+    remainingItems: [
+      "閉形式本体は Cuoco–Monsky の岩澤型漸近に依り",
+    ],
   },
   {
     block: "paper_091_theorem_theta_padic",
@@ -564,4 +614,78 @@ export function auditPartCoverage(input: {
     }
   }
   return { violations, checked, parts };
+}
+
+/**
+ * **部の見出しを持たない `部分的` の主張への手当て**（cycle 36 step 5）。
+ *
+ * 部が無い主張には `auditPartCoverage` を当てられない（実測 6 件）。
+ * そこで**欄の側に構造を持たせ**、次の 3 つを見る。
+ *
+ * 1. 部を持たない `部分的` の欄は、残っている項目の一覧（`remainingItems`）を持つこと。
+ * 2. 各項目の文字列が散文にそのまま在ること（片方だけ書き換えたら赤くなる）。
+ * 3. 散文が「残るのは N つ」のように**数で要約している**なら、
+ *    その N が項目数と一致すること（**書き足して数が変われば赤くなる**）。
+ *
+ * 3 が cycle 35・36 で 4 件見つかった事故（書き足したのに要約を直していない）の、
+ * 散文の中の列挙にあたる側への手当てである。
+ *
+ * ## 機械が確かめられないこと（正直に書く）
+ *
+ * - **一覧が実態を尽くしているかは確かめられない。** 項目を 1 つ書けば通る。
+ *   （書き落としを見つけるのは、これまでどおり着手時の実測である。）
+ * - **項目の文言が正しいかも確かめられない**（散文に在ることだけを見る）。
+ */
+export function auditPartlessRemaining(input: {
+  readonly entries: readonly {
+    readonly block: string;
+    readonly state: CoverageState;
+    readonly text: string;
+    readonly hasParts: boolean;
+    readonly remainingItems?: readonly string[];
+  }[];
+}): { violations: string[]; checked: number; items: number; summarised: number } {
+  const violations: string[] = [];
+  let checked = 0;
+  let items = 0;
+  let summarised = 0;
+  for (const entry of input.entries) {
+    if (entry.state !== "部分的" || entry.hasParts) continue;
+    checked += 1;
+    const list = entry.remainingItems ?? [];
+    if (list.length === 0) {
+      violations.push(
+        `[部を持たない 部分的 の欄が残りの一覧を持たない] ${entry.block} — ` +
+          "本文に部の構造が無いので部の覆いを当てられない。remainingItems に残っている項目を挙げること",
+      );
+      continue;
+    }
+    items += list.length;
+    for (const item of list) {
+      if (!entry.text.includes(item)) {
+        violations.push(
+          `[残りの一覧が散文と食い違う] ${entry.block} — 「${item}」が欄の散文に無い`,
+        );
+      }
+    }
+    // 数で要約しているなら、その数が一覧の件数と一致すること。
+    // **過去の要約を引用している文があるので、どれか 1 つが一致すればよい**とする——
+    // 「かつて 1 件と書いていた」という記録まで違反にすると、経緯を残せなくなる。
+    // 書き足して件数が変われば、一致する要約が 1 つも無くなるので赤くなる。
+    const matches = [
+      ...entry.text.matchAll(/残(?:るの|り|っているの)は\s*([0-9]+)\s*(?:つ|件|段)/g),
+    ];
+    if (matches.length > 0) {
+      summarised += 1;
+      const agrees = matches.some((m) => Number(m[1]) === list.length);
+      if (!agrees) {
+        violations.push(
+          `[要約の数が一覧の件数と合わない] ${entry.block} — ` +
+            `散文の要約は ${matches.map((m) => m[0]).join(" / ")} だが一覧は ${list.length} 件。` +
+            "欄を書き足したなら、いまの件数を述べる要約も同じコミットで書くこと",
+        );
+      }
+    }
+  }
+  return { violations, checked, items, summarised };
 }
