@@ -17,6 +17,13 @@ import {
   traceSymbols,
   usedBeforeDefinition,
 } from "./definition-order-symbol-model.ts";
+import {
+  type VocabularyBlock,
+  coveredByLedger as coveredByTermLedger,
+  japaneseTermBefore,
+  traceVocabulary,
+  usedBeforeNaming,
+} from "./definition-order-vocabulary-model.ts";
 
 let failures = 0;
 let checks = 0;
@@ -215,6 +222,102 @@ report(
     "波括弧の有無は同じものとして覆う",
     coveredByLedger("\\kappa_{n}", ["\\kappa_n"]),
     "台帳は \\kappa_n、走査は \\kappa_{n} と書く",
+  );
+}
+
+// --- 検査 O の三つ目（散文の語の初出の全数走査）---------------------------------
+//
+// 再現データは**本文にいま在る形**である。cycle 30 の走査で挙がった 2 件
+// （日本語の「全域木数」と「付値」）はどちらも順序の問題ではないと読んで免除したが、
+// **検出そのものは効いている**ことをここで示す。あわせて、走査を作るときに
+// 実データで潰した偽陽性（平仮名で終わる断片を語として拾ってしまう形）も固定する。
+
+{
+  const vocab = (
+    index: number,
+    id: string,
+    kind: string,
+    title: string,
+    ...nodes: { kind: "text" | "math"; value: string }[]
+  ): VocabularyBlock => ({ index, id, kind, title, nodes });
+
+  const text = (value: string) => ({ kind: "text" as const, value });
+  const math = (value: string) => ({ kind: "math" as const, value });
+
+  // 双対命題 D が「グラフの全域木数」を使い、その名づけは 2 つ後の定義ブロックにある。
+  const beforeSpanningTree = [
+    vocab(0, "prop_duality", "theorem", "双対命題 D", text("その "), math("P"), text(" がグラフの全域木数 "), math(String.raw`\kappa`), text(" として実現できるとは限らない。")),
+    vocab(1, "prop_l0", "theorem", "命題 F", text("ここは関係しない。")),
+    vocab(2, "def_graph_tower", "definition", "voltage グラフ", text(" 段目の全域木数を "), math(String.raw`\kappa_n:=\kappa(X_{n,n})`), text(" と書く。")),
+  ];
+  report(
+    "名づけより前に使われている散文の語が挙がる（本文にいま在る「全域木数」）",
+    usedBeforeNaming(traceVocabulary(beforeSpanningTree, "ja")).some((t) => t.term === "全域木数"),
+    `挙がった語 ${JSON.stringify(traceVocabulary(beforeSpanningTree, "ja").map((t) => t.term))}`,
+  );
+
+  // 語を使わない書き方へ直せば挙がらない。
+  const afterSpanningTree = [
+    vocab(0, "prop_duality", "theorem", "双対命題 D", text("その "), math("P"), text(" がグラフから来るとは限らない。")),
+    vocab(1, "prop_l0", "theorem", "命題 F", text("ここは関係しない。")),
+    vocab(2, "def_graph_tower", "definition", "voltage グラフ", text(" 段目の全域木数を "), math(String.raw`\kappa_n:=\kappa(X_{n,n})`), text(" と書く。")),
+  ];
+  report(
+    "初出の側で語を使わない書き方へ直すと挙がらない（偽陽性でない）",
+    usedBeforeNaming(traceVocabulary(afterSpanningTree, "ja")).length === 0,
+    `挙がった件数 ${usedBeforeNaming(traceVocabulary(afterSpanningTree, "ja")).length}（期待 0）`,
+  );
+
+  // 名づけの言い回し（「と呼ぶ」）と、同じ文に鉤括弧で並ぶ語。
+  const called = [
+    vocab(0, "prop_q", "theorem", "命題 Q", text("この条件を満たす点を「良い点」、満たさない点を「悪い点」と呼ぶ。")),
+  ];
+  const calledTerms = traceVocabulary(called, "ja").map((t) => t.term);
+  report(
+    "「と呼ぶ」で並ぶ 2 語を両方拾う",
+    calledTerms.includes("良い点") && calledTerms.includes("悪い点"),
+    `拾った語 ${JSON.stringify(calledTerms)}`,
+  );
+
+  // 実データで潰した偽陽性。平仮名で終わる断片は語ではない。
+  for (const fragment of ["したがって", "を取る", "と書き", "に対し", "このとき"]) {
+    report(
+      `平仮名で終わる断片を語として拾わない（${fragment}）`,
+      japaneseTermBefore(`である。${fragment}`) === undefined,
+      `切り出し結果 ${JSON.stringify(japaneseTermBefore(`である。${fragment}`))}`,
+    );
+  }
+  report(
+    "平仮名で始まる語は落とさない（ずれ指数）",
+    japaneseTermBefore("(G1′ 補正が消える十分条件) ずれ指数 ") === "ずれ指数",
+    `切り出し結果 ${JSON.stringify(japaneseTermBefore("(G1′ 補正が消える十分条件) ずれ指数 "))}`,
+  );
+  report(
+    "助詞の直後で切る（「n 段目の全域木数を」→「全域木数」）",
+    japaneseTermBefore(" 段目の全域木数を ") === "全域木数",
+    `切り出し結果 ${JSON.stringify(japaneseTermBefore(" 段目の全域木数を "))}`,
+  );
+
+  // 台帳との突き合わせは包含で見る（記号のときと違う理由はモデルの doc に書いた）。
+  report(
+    "台帳の字面より長い語も覆われているとみなす",
+    coveredByTermLedger("Massieu 自由エントロピーの Λ 帰属", ["Massieu 自由エントロピー"]),
+    "定義ブロックの題は台帳の字面より長くなる",
+  );
+  report(
+    "無関係な語は覆われない",
+    !coveredByTermLedger("全域木数", ["voltage", "bouquet", "消滅深度"]),
+    "台帳が覆っていない語を覆っていると数えない",
+  );
+
+  // 英語は言い回しの直後を取る（語順が違うので日本語の規則が移らない）。
+  const englishNamed = [
+    vocab(0, "prop_g", "theorem", "Proposition G", text("Define the vanishing depth of a direction "), math("P"), text(" by "), math(String.raw`\theta(P):=\min\{m\}`), text(".")),
+  ];
+  report(
+    "英語は名づけの言い回しの直後から語を取る",
+    traceVocabulary(englishNamed, "en").some((t) => t.term === "vanishing depth"),
+    `拾った語 ${JSON.stringify(traceVocabulary(englishNamed, "en").map((t) => t.term))}`,
   );
 }
 
