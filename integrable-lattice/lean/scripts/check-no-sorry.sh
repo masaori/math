@@ -637,6 +637,9 @@ targets=(
   IntegrableLattice.PropRZellExponent.exists_sepAt
   IntegrableLattice.PropRZellExponent.exists_coeff_ne_zero_lt_pow_sep
   IntegrableLattice.PropRZellExponent.coeff_branchSum_padic_eq
+  # 可換環の上の Euler の双対基底公式（EulerDualBasisCommRing.lean・cycle 35 step 2）
+  IntegrableLattice.EulerDualBasis.psi_pow
+  IntegrableLattice.EulerDualBasis.psi_eulerC_mul_pow
 
   # cycle 34 step 2: 全域木の同定の半分（連結でなければ小行列式は 0）。
   # 逆向き（連結なら ±1）は書いていない。

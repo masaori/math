@@ -207,6 +207,29 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    file: "EulerDualBasisCommRing.lean",
+    heading: "形式化しなかったもの",
+    externalEntry:
+      "可換環の上の Euler の双対基底公式（トレース双対 $\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$）",
+    items: [
+      {
+        leanFragment: "段 2（$\\sum_i c_i\\theta^i=\\rho'(\\theta)$）",
+        kind: "未形式化",
+        ledgerFragment: "二重和の入れ替え",
+      },
+      {
+        leanFragment: "段 3・段 4・段 5",
+        kind: "未形式化",
+        ledgerFragment: "残りは 4 段",
+      },
+      {
+        leanFragment: "したがって本文の $C\\,G=M_\\eta$",
+        kind: "未形式化",
+        ledgerFragment: "可換環版が組める",
+      },
+    ],
+  },
+  {
     file: "KirchhoffCounting.lean",
     heading: "形式化しなかったもの",
     externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
