@@ -620,7 +620,7 @@ export default defineBlocks([
       ),
       paragraph([
         "(the polynomial ",
-        math(String.raw`f_z`),
+        math(String.raw`z+z^{-1}-2`),
         " is invariant under ",
         math(String.raw`z\mapsto z^{-1}`),
         ", so ",
