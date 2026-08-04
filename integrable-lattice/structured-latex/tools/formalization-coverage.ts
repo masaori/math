@@ -372,7 +372,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`kirchhoff` / `CauchyBinet` はいずれも 3 段とも 0 件。" +
       "全域木そのものは語幹 `spanning tree` で 3 ファイルに現れるが、" +
       "個数を数える定理の連結語 `numSpanningTrees` は 0 件）。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **それでもこの主張は完了しない。そう書く**——書いたのは「ブロック巡回ならブロック対角化できる」ところまでで、(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合、(b) 導来グラフの構成と、そのラプラシアンがブロック巡回であることの当てはめ、(c) $\\widehat L(j)$ が voltage ラプラシアンの $z=\\zeta^{j}$ での評価値であること、の 3 つが残る。",
   },
   {
     block: "paper_055_theorem_theta_infinity",
@@ -390,7 +390,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`GeneralTowerClosedForm.lean` はさらに 定理 G2 の 1（Galois 不変性。配線）・定理 G2 の 3（配線）・" +
       "$A_{\\mathrm{gen}}$ の $L$ 非依存性・Matrix–Tree 定理を挙げている。" +
       "**cycle 34 step 5 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——(G′1) と (G′2) は、この欄が 1 度も触れていなかった。どちらも未形式化である。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **それでもこの主張は完了しない。そう書く**——書いたのは「ブロック巡回ならブロック対角化できる」ところまでで、(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合、(b) 導来グラフの構成と、そのラプラシアンがブロック巡回であることの当てはめ、(c) $\\widehat L(j)$ が voltage ラプラシアンの $z=\\zeta^{j}$ での評価値であること、の 3 つが残る。",
   },
   {
     block: "paper_056_theorem_ell2_family",
@@ -401,7 +401,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**cycle 34 step 3 の照合で、`EllTwoClosedForm.lean` が挙げている matrix-tree 定理も足す**" +
       "（$\\kappa_n$ の独立計算に要る。外部定理の台帳を見よ）。" +
       "**cycle 34 step 5 の照合で足す**——本文の (G″2)(G″3)(G″4)(G″5) は、この欄が 1 度も触れていなかった。いずれも未形式化である（形式化してあるのは (G″1) の付値の議論だけである）。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **それでもこの主張は完了しない。そう書く**——書いたのは「ブロック巡回ならブロック対角化できる」ところまでで、(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合、(b) 導来グラフの構成と、そのラプラシアンがブロック巡回であることの当てはめ、(c) $\\widehat L(j)$ が voltage ラプラシアンの $z=\\zeta^{j}$ での評価値であること、の 3 つが残る。",
   },
   { block: "paper_061_theorem_V", state: "完了", note: "命題 V は $d=1$ と $d=2$。" },
   {
@@ -418,7 +418,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "残るのは「$\pm1$ になるのが全域木のときに限る」という組合せの側）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。" +
       "**残りは 2 つである。**" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **それでもこの主張は完了しない。そう書く**——書いたのは「ブロック巡回ならブロック対角化できる」ところまでで、(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合、(b) 導来グラフの構成と、そのラプラシアンがブロック巡回であることの当てはめ、(c) $\\widehat L(j)$ が voltage ラプラシアンの $z=\\zeta^{j}$ での評価値であること、の 3 つが残る。",
     remainingItems: [
       "matrix-tree の段",
       "2 の不分岐性・Hensel 持ち上げの段",
@@ -531,7 +531,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "cycle 27 が形式化した $K(P_0)$ の存在と有界性まで。閉形式の導出そのものは未形式化。" +
       "**cycle 34 step 3 の照合で、`Cycle25Corrections.lean` が挙げている 3 件を足す**——定理 G2 の 1（Galois 不変性。配線）、系 Q7 の $r=2$（2 変数 Laurent 環の一意分解性）、および voltage グラフのラプラシアン行列式そのもの（matrix-tree 定理。外部定理の台帳を見よ）。" +
       "**cycle 34 step 5 の照合で足す**——本文の (M4) は、この欄が 1 度も触れていなかった。未形式化である。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **それでもこの主張は完了しない。そう書く**——書いたのは「ブロック巡回ならブロック対角化できる」ところまでで、(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合、(b) 導来グラフの構成と、そのラプラシアンがブロック巡回であることの当てはめ、(c) $\\widehat L(j)$ が voltage ラプラシアンの $z=\\zeta^{j}$ での評価値であること、の 3 つが残る。",
   },
   {
     block: "paper_112_theorem_coefficient_layers",

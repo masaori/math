@@ -672,6 +672,26 @@ targets=(
   IntegrableLattice.WStarSquarefree.dvd_of_dvd_derivative_mul
   IntegrableLattice.WStarSquarefree.derivative_mem_nonZeroDivisors
   IntegrableLattice.WStarSquarefree.det_weightedGram_ne_zero_of_squarefree
+  # 巡回群による指標分解（CharacterDecomposition.lean・cycle 38 step 2）
+  IntegrableLattice.CharacterDecomposition.geom_sum_eq_zero_of_pow_eq_one
+  IntegrableLattice.CharacterDecomposition.sum_zmod_eq_sum_range
+  IntegrableLattice.CharacterDecomposition.sum_pow_mul
+  IntegrableLattice.CharacterDecomposition.zetaInv
+  IntegrableLattice.CharacterDecomposition.zeta_mul_zetaInv
+  IntegrableLattice.CharacterDecomposition.fourier
+  IntegrableLattice.CharacterDecomposition.fourierInv
+  IntegrableLattice.CharacterDecomposition.pow_mod
+  IntegrableLattice.CharacterDecomposition.pow_val_add
+  IntegrableLattice.CharacterDecomposition.blockCirculant
+  IntegrableLattice.CharacterDecomposition.hat
+  IntegrableLattice.CharacterDecomposition.blockCirculant_mul_fourier
+  IntegrableLattice.CharacterDecomposition.fourierInv_mul_blockCirculant_mul_fourier
+  IntegrableLattice.CharacterDecomposition.dvd_iff_eq
+  IntegrableLattice.CharacterDecomposition.fourierInv_mul_mul_fourier
+  IntegrableLattice.CharacterDecomposition.one_eq_blockCirculant
+  IntegrableLattice.CharacterDecomposition.hat_one
+  IntegrableLattice.CharacterDecomposition.det_fourierInv_mul_det_fourier
+  IntegrableLattice.CharacterDecomposition.det_blockCirculant
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）
   IntegrableLattice.TracePeriodWStar.mulVec_injective_of_det_ne_zero
   IntegrableLattice.TracePeriodWStar.mul_left_cancel_of_det_ne_zero

@@ -169,6 +169,11 @@ export default defineBlocks([
       "IntegrableLattice.padicValNat_two_eq_zero_of_odd",
       "IntegrableLattice.newton_two_root_valuations",
       "IntegrableLattice.v2_tau_eq_of_root_valuations",
+      "IntegrableLattice.CharacterDecomposition.det_blockCirculant",
+      "IntegrableLattice.CharacterDecomposition.fourierInv_mul_mul_fourier",
+      "IntegrableLattice.CharacterDecomposition.sum_pow_mul",
+      "IntegrableLattice.CharacterDecomposition.hat",
+      "IntegrableLattice.CharacterDecomposition.blockCirculant",
     ],
     statement: [
       paragraph([

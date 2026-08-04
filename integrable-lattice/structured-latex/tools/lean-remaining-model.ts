@@ -382,6 +382,32 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 38 step 2 で新設。巡回群による指標分解の芯を書いた。
+    file: "CharacterDecomposition.lean",
+    declarationsAtReview: 19,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "（2 変数）の場合",
+        kind: "未形式化",
+        ledgerFragment: "の場合",
+        crossFilePhrase: "2 変数の指標分解",
+      },
+      {
+        leanFragment: "そのラプラシアンがブロック巡回であること",
+        kind: "未形式化",
+        ledgerFragment: "そのラプラシアンがブロック巡回であること",
+        crossFilePhrase: "導来グラフのラプラシアンがブロック巡回",
+      },
+      {
+        leanFragment: "での評価値であること",
+        kind: "未形式化",
+        ledgerFragment: "での評価値であること",
+        crossFilePhrase: "voltage ラプラシアンの評価値であること",
+      },
+    ],
+  },
+  {
     // cycle 38 step 1 で新設。無平方性から $\det G\neq0$ を出す段を書いた。
     file: "WStarSquarefreeNonzero.lean",
     declarationsAtReview: 4,
@@ -431,8 +457,9 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         kind: "形式化済み",
         witness: "det_submatrix_ne_zero_iff_reach",
       },
-      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解",
-        crossFilePhrase: "指標分解", },
+      // cycle 38 step 2 で `CharacterDecomposition.lean` に芯を書いたので、指し先を持つ形へ移す。
+      { leanFragment: "指標分解", kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "CharacterDecomposition.lean" }, },
     ],
   },
   {
@@ -446,8 +473,9 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         kind: "形式化済み",
         witness: "det_submatrix_eq_one_or_neg_one",
       },
-      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解",
-        crossFilePhrase: "指標分解", },
+      // cycle 38 step 2 で `CharacterDecomposition.lean` に芯を書いたので、指し先を持つ形へ移す。
+      { leanFragment: "指標分解", kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "CharacterDecomposition.lean" }, },
     ],
   },
   {
