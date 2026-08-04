@@ -548,6 +548,12 @@ targets=(
   IntegrableLattice.det_submatrix_eq_zero_of_not_injective
   IntegrableLattice.det_mul_eq_sum_over_injective
   IntegrableLattice.det_mul_eq_zero_of_card_lt
+
+  # cycle 32 step 1: Cauchy-Binet の最後の 1 段（CauchyBinet.lean）。
+  # 単射な写像を「順序を保つ埋め込み」と「置換」に分け、和を部分集合で書く。
+  IntegrableLattice.orderEmbOfFin_comp_injOn
+  IntegrableLattice.exists_orderEmbOfFin_comp
+  IntegrableLattice.det_mul_eq_sum_over_subsets
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

@@ -30,6 +30,8 @@ export type ExternalKindName =
   | "R 脱出として隔離する"
   | "対象外";
 
+export type ExternalOwnState = "完了" | "部分的" | "未着手";
+
 /** 検査に要る最小限だけを取り出した形（台帳の全フィールドは要らない）。 */
 export type ExternalLedgerRow = {
   readonly name: string;
@@ -37,14 +39,18 @@ export type ExternalLedgerRow = {
   readonly citedIn: readonly string[];
   /** `自分で証明する` のときだけ意味がある。 */
   readonly leanNames?: readonly string[];
+  /** `自分で証明する` のときだけ意味がある。 */
+  readonly state?: ExternalOwnState;
 };
 
 export type ExternalAudit = {
   readonly violations: readonly string[];
   /** 種別ごとの件数。 */
   readonly counts: Readonly<Record<ExternalKindName, number>>;
-  /** `自分で証明する` のうち、Lean の定理名を 1 つ以上持つもの（＝着手済み）の件数。 */
+  /** `自分で証明する` のうち、着手しているもの（`完了` または `部分的`）の件数。 */
   readonly startedOwnProofs: number;
+  /** `自分で証明する` のうち `完了` の件数。**残りの件数はここから決まる。** */
+  readonly doneOwnProofs: number;
 };
 
 export const auditExternalTheorems = (input: {
@@ -62,6 +68,7 @@ export const auditExternalTheorems = (input: {
     対象外: 0,
   };
   let startedOwnProofs = 0;
+  let doneOwnProofs = 0;
 
   for (const entry of input.entries) {
     counts[entry.kind] += 1;
@@ -81,7 +88,25 @@ export const auditExternalTheorems = (input: {
 
     if (entry.kind !== "自分で証明する") continue;
     const names = entry.leanNames ?? [];
-    if (names.length > 0) startedOwnProofs += 1;
+    const state = entry.state;
+    if (state === "完了") doneOwnProofs += 1;
+    if (state === "完了" || state === "部分的") startedOwnProofs += 1;
+
+    // 状態と Lean の定理名が食い違う道を塞ぐ（検査 F が本文側の主張に課しているのと同じ形）。
+    // これが無いと、定理名を 1 つも持たないまま「完了」と書けてしまう。
+    if ((state === "完了" || state === "部分的") && names.length === 0) {
+      violations.push(
+        `[${state}なのに Lean の定理名が無い（外部定理）] ${entry.name} — ` +
+          `${state}と言う以上、読者が辿れる先が要る`,
+      );
+    }
+    if (state === "未着手" && names.length > 0) {
+      violations.push(
+        `[未着手なのに Lean の定理名がある（外部定理）] ${entry.name} — ` +
+          `${names.join(" / ")}（着手しているなら状態を直すこと）`,
+      );
+    }
+
     for (const name of names) {
       const short = name.replace(/^IntegrableLattice\./, "");
       if (input.leanDeclExists(short)) continue;
@@ -89,5 +114,5 @@ export const auditExternalTheorems = (input: {
     }
   }
 
-  return { violations, counts, startedOwnProofs };
+  return { violations, counts, startedOwnProofs, doneOwnProofs };
 };

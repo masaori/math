@@ -50,13 +50,35 @@ type Common = {
   readonly citedIn: readonly string[];
 };
 
+/** `自分で証明する` に共通の欄。 */
+type OwnProof = Common & {
+  readonly kind: "自分で証明する";
+  /** mathlib に無いことの実測（走査の段と件数）。 */
+  readonly absence: string;
+};
+
 export type ExternalEntry =
-  | (Common & {
-      readonly kind: "自分で証明する";
-      /** mathlib に無いことの実測（走査の段と件数）。 */
-      readonly absence: string;
-      /** 既に書き始めているなら Lean の定理名。実在を機械が確かめる。 */
-      readonly leanNames?: readonly string[];
+  | (OwnProof & {
+      /**
+       * **完了。** cycle 32 step 1 で入れた。
+       * これが無いと、外部定理は何段書いても「残り」の件数が一生動かなかった
+       * （台帳に完了を書く場所が無かった。cycle 31 は 3 段書いて件数 0 減である）。
+       */
+      readonly state: "完了";
+      /** 完了と言う以上、読者が辿れる先が要る。型で必須にしてある。 */
+      readonly leanNames: readonly string[];
+      /** どこまでを完了と呼んでいるか（射程）。完了の誇張を防ぐために書かせる。 */
+      readonly note: string;
+    })
+  | (OwnProof & {
+      readonly state: "部分的";
+      /** 書き始めた以上、読者が辿れる先が要る。型で必須にしてある。 */
+      readonly leanNames: readonly string[];
+      /** 何が残っているか。 */
+      readonly remaining: string;
+    })
+  | (OwnProof & {
+      readonly state: "未着手";
       /** 何が残っているか。 */
       readonly remaining: string;
     })
@@ -98,10 +120,14 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "`matrixTree` / 語幹 `matrix tree` / `kirchhoff` がいずれも 3 段とも 0 件" +
       "（`lean/logs/mathlib-gap-survey-cycle31-external.log`。cycle 30 の matrixtree ログと同じ結果）。" +
       "全域木そのものは語幹 `spanning tree` で当たるが、個数を数える定理は無い。",
+    state: "部分的",
     leanNames: ["incMatrixSigned", "lapMatrixOfInc", "lapMatrix_row_sum"],
     remaining:
       "cycle 30 step 2 で入口（多重グラフの符号付き接続行列と $L=D\\,D^{\\mathsf T}$）だけ書いた。" +
-      "残るのは Cauchy–Binet・小行列式の $\\pm1$ 性・Kirchhoff 本体・指標分解の 4 段。" +
+      "**cycle 32 step 1 で Cauchy–Binet が完了したので、残りは 3 段である**" +
+      "（小行列式の $\\pm1$ 性・Kirchhoff 本体・指標分解）。" +
+      "cycle 31 総括は「Cauchy–Binet が入っても 2 段残る」と書いていたが、" +
+      "同じ文が挙げている項目は 3 つで、3 が正しい（cycle 32 着手時の実測で訂正した）。" +
       "段取りは `outputs/reports/cycle30_ops_matrix_tree_decision.md`。",
   },
   {
@@ -114,22 +140,27 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。mathlib 520045ab14 の 8264 ファイルを 3 段で引き、" +
       "`CauchyBinet` / 語幹 `cauchy binet` が 3 段とも 0 件。",
+    state: "完了",
     leanNames: [
       "det_mul_eq_sum_over_maps",
       "det_submatrix_eq_zero_of_not_injective",
       "det_mul_eq_sum_over_injective",
       "det_mul_eq_zero_of_card_lt",
+      "orderEmbOfFin_comp_injOn",
+      "exists_orderEmbOfFin_comp",
+      "det_mul_eq_sum_over_subsets",
     ],
-    remaining:
-      "cycle 31 step 3 で 3 段書いた（`CauchyBinet.lean`）。" +
-      "行の多重線型性による展開 $(A B).\\det=\\sum_{f:m\\to n}\\det(A_{\\cdot f})\\prod_i B_{f(i)i}$、" +
-      "単射でない $f$ の寄与が消えること、したがって和が単射な $f$ だけを走ること、" +
-      "および系として $\\#n<\\#m$ なら行列式が $0$ になること。" +
-      "**残るのは最後の 1 段、単射な $f$ を像で束ねて $n$ の $m$ 元部分集合についての和にする段である。**" +
-      "$f=e\\circ\\sigma$（$e$ は順序を保つ埋め込み、$\\sigma$ は $m$ の置換）と一意に分解し、" +
-      "$\\sigma$ についての和が $\\det(B_{e\\cdot})$ になる、という筋は立っているが**書いて通していない**。" +
-      "詰まりどころは mathlib に「単射 $\\leftrightarrow$（順序埋め込み, 置換）」の同値が無く、" +
-      "自前で組むことになる点である（`Finset.orderEmbOfFin` は在る）。",
+    note:
+      "cycle 31 step 3 が 3 段、cycle 32 step 1 が最後の 1 段を書いた（`CauchyBinet.lean`）。" +
+      "完成形 $\\det(AB)=\\sum_{s}\\det(A_{\\cdot s})\\det(B_{s\\cdot})$（$s$ は列の $k$ 元部分集合）まで通っている" +
+      "（`det_mul_eq_sum_over_subsets`）。" +
+      "最後の段の中身は、mathlib に無かった「単射 $\\leftrightarrow$（順序埋め込み, 置換）」の同値であり、" +
+      "一意性（`orderEmbOfFin_comp_injOn`）と存在（`exists_orderEmbOfFin_comp`）に分けて自前で書いた。" +
+      "材料の `Finset.orderEmbOfFin` と `Finset.range_orderEmbOfFin` は mathlib に在る。" +
+      "**完了と呼ぶ射程**: 一般の可換環の上で成立し、体も整域も要らない。" +
+      "第 4 段だけは行の添字を $\\mathrm{Fin}\\,k$ に取り、列の型に線形順序を仮定する" +
+      "（部分集合から代表を選ぶためであって、主張の内容が順序を要求しているのではない）。" +
+      "**matrix-tree 本体はこれとは別で、まだ 3 段残っている**（Kirchhoff の欄を見よ）。",
   },
   {
     name: "可換環の上の Euler の双対基底公式（トレース双対 $\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$）",
@@ -142,6 +173,7 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "`[Field K] [Field L] [FiniteDimensional K L] [Algebra.IsSeparable K L]` を要求していることを" +
       "宣言行で直読した（cycle 30 の euler ログと同じ結果）。$\\rho$ が可約なとき " +
       "$A\\otimes\\mathbb{Q}$ は体でなく体の積なので、この形では届かない。",
+    state: "部分的",
     leanNames: ["eulerMatrix_mul_weightedGram", "det_eulerMatrix_sq"],
     remaining:
       "既約な $\\rho$ の場合は入っている（`WStarElementaryDivisors.lean`。ただし `PowerBasis K L` を使うので $L$ は体）。" +
@@ -156,6 +188,7 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。`newtonPolytope` / 語幹 `newton polytope` が 3 段とも 0 件。" +
       "mathlib の `Newton` はニュートン法（`Mathlib/Dynamics/Newton.lean`）であって多面体ではない（宣言行で直読）。",
+    state: "未着手",
     remaining: "未着手。可算側（有限個の格子点の Minkowski 和）で閉じるので機械にかかる形である。",
   },
   {
@@ -166,6 +199,7 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。`SkolemMahlerLech` / 語幹 `skolem mahler` が 3 段とも 0 件。" +
       "（語幹 `skolem` 単独では 30 件当たるが、当たっているのはモデル理論の Skolem 函数である。cycle 29 のログと同じ。）",
+    state: "未着手",
     remaining:
       "未着手。**本文がこれを引いているのは上界方向の例外を述べるためであり、主張を成り立たせる向きに使っている。**" +
       "したがって対象外にはできない。",
@@ -178,6 +212,7 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。`Monsky` / 語幹 `monsky` が 3 段とも 0 件。" +
       "岩澤代数の一般論も mathlib には `PowerSeries` の断片としてしか無い（cycle 29 の duality ログ）。",
+    state: "未着手",
     remaining:
       "未着手。主張は $\\mathrm{ord}_\\ell$ の漸近（整数値の増大則）であり可算側の内容を担うので、" +
       "$\\mathbb{R}$ 脱出として隔離する側には置けない。",
@@ -199,6 +234,7 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。`CuocoMonsky` / 語幹 `cuoco` が 3 段とも 0 件。" +
       "語幹 `iwasawa` は当たるが、名前に iwasawa を持つファイルは群論の岩澤分解 1 本だけで、岩澤不変量の漸近ではない（cycle 29 のログ）。",
+    state: "未着手",
     remaining:
       "未着手。**本論文が最も広く借りている外部定理である**（6 ブロックが引く）。" +
       "$\\mu,\\lambda$ の定義（Definitions 1.1, 1.2）は可算側の組合せ量として書けるので、そこから測る。",

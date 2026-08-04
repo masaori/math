@@ -96,14 +96,23 @@ type CoverageCounts = {
   readonly done: number;
   readonly partial: number;
   readonly untouched: number;
+  /** 外部定理のうち「自分で証明する」の件数と、そのうち完了した件数。 */
+  readonly externalOwn: number;
+  readonly externalOwnDone: number;
 };
 
-/** 台帳から数える 4 つの数。名前は本文の言い回しに合わせる。 */
+/**
+ * 台帳から数える 6 つの数。名前は本文の言い回しに合わせる。
+ * 後ろの 2 つは cycle 32 step 1 で足した——外部定理の件数は本文が述べているのに
+ * 台帳と突き合わせていなかった（本文だけが古くなる道が空いていた）。
+ */
 const COUNT_FIELDS = [
   { key: "total", name: "全数" },
   { key: "done", name: "完了" },
   { key: "partial", name: "部分的" },
   { key: "untouched", name: "未着手" },
+  { key: "externalOwn", name: "外部定理（自分で証明する）" },
+  { key: "externalOwnDone", name: "外部定理（完了）" },
 ] as const satisfies readonly { key: keyof CoverageCounts; name: string }[];
 
 /** 照合の対象になるブロックの中身。地の文と数式を分けて渡す（分けて検査するため）。 */
@@ -226,15 +235,19 @@ const auditCoverageNumberSites = (input: {
 // --- 検出テスト（`--self-test`）------------------------------------------------
 //
 // 空振りの 3 つの道を合成データで通し、**3 つとも赤くなること**を確かめる。
-// あわせて、**現に本文が取っている形**（4 つの数を地の文で述べ、数式に数を置かない）が
+// あわせて、**現に本文が取っている形**（6 つの数を地の文で述べ、数式に数を置かない）が
 // 違反にならないことも確かめる。検出できるだけの検査は誤検出で使えなくなるからである。
 
 if (process.argv.includes("--self-test")) {
-  const counts: CoverageCounts = { total: 24, done: 5, partial: 16, untouched: 3 };
+  const counts: CoverageCounts = {
+    total: 24, done: 5, partial: 16, untouched: 3, externalOwn: 7, externalOwnDone: 1,
+  };
   const proseOf = (c: CoverageCounts) =>
     `本論文の主張 ${c.total} 件のうち、内容が形式化されているのは ${c.done} 件、` +
-    `一部が形式化されているのは ${c.partial} 件、未着手が ${c.untouched} 件である。`;
-  /** 本文が現に取っている形（4 つの数を地の文で述べる）。 */
+    `一部が形式化されているのは ${c.partial} 件、未着手が ${c.untouched} 件である。` +
+    `自分で証明することにした外部定理は ${c.externalOwn} 件であり、` +
+    `そのうち証明を書き終えたのは ${c.externalOwnDone} 件である。`;
+  /** 本文が現に取っている形（6 つの数を地の文で述べる）。 */
   const healthySite: CoverageNumberSite = {
     locale: "ja",
     label: "fixture",
@@ -467,6 +480,10 @@ for (const entry of unformalised) {
     done: FORMALIZATION_COVERAGE.filter((entry) => entry.state === "完了").length,
     partial: FORMALIZATION_COVERAGE.filter((entry) => entry.state === "部分的").length,
     untouched: FORMALIZATION_COVERAGE.filter((entry) => entry.state === "未着手").length,
+    externalOwn: EXTERNAL_THEOREM_COVERAGE.filter((entry) => entry.kind === "自分で証明する").length,
+    externalOwnDone: EXTERNAL_THEOREM_COVERAGE.filter(
+      (entry) => entry.kind === "自分で証明する" && entry.state === "完了",
+    ).length,
   };
   const textByLabelPerLocale = new Map<string, Map<string, SiteText>>();
   for (const locale of knownLocales) {
@@ -635,14 +652,16 @@ for (const entry of unformalised) {
   });
   violations.push(...audit.violations);
 
-  // 自分で証明すると決めた外部定理は、まだ 1 件も完了していない。
-  // したがって全数までの残りは「本文の未完了 ＋ 自分で証明する外部定理の全件」である。
-  const ownRemaining = audit.counts["自分で証明する"];
+  // 全数までの残りは「本文の未完了 ＋ 自分で証明する外部定理のうち完了していないもの」である。
+  // cycle 31 まではここが全件だった（台帳に完了を書く場所が無かったため、
+  // 何段書いても件数が動かなかった）。cycle 32 step 1 で状態を持たせて動くようにした。
+  const ownRemaining = audit.counts["自分で証明する"] - audit.doneOwnProofs;
 
   console.log("");
   console.log(`  外部定理の振り分け（基準: docs/external-theorem-criterion.md）: 全 ${EXTERNAL_THEOREM_COVERAGE.length} 件`);
   console.log(
-    `    自分で証明する ${audit.counts["自分で証明する"]} 件（うち着手済み ${audit.startedOwnProofs} 件） / ` +
+    `    自分で証明する ${audit.counts["自分で証明する"]} 件` +
+      `（うち完了 ${audit.doneOwnProofs} 件・着手済み ${audit.startedOwnProofs} 件） / ` +
       `mathlib から引く ${audit.counts["mathlib から引く"]} 件 / ` +
       `R 脱出として隔離する ${audit.counts["R 脱出として隔離する"]} 件 / ` +
       `対象外 ${audit.counts["対象外"]} 件`,
@@ -654,10 +673,12 @@ for (const entry of unformalised) {
   console.log("");
   for (const entry of byKind["自分で証明する"]) {
     if (entry.kind !== "自分で証明する") continue;
-    console.log(`    [自分で証明する] ${entry.name}`);
+    console.log(`    [自分で証明する / ${entry.state}] ${entry.name}`);
     console.log(`      出典: ${entry.source}`);
     console.log(`      mathlib に無い根拠: ${entry.absence}`);
-    console.log(`      残り: ${entry.remaining}`);
+    console.log(
+      entry.state === "完了" ? `      完了と呼ぶ射程: ${entry.note}` : `      残り: ${entry.remaining}`,
+    );
   }
   for (const entry of byKind["R 脱出として隔離する"]) {
     if (entry.kind !== "R 脱出として隔離する") continue;

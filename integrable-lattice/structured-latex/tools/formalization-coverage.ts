@@ -242,7 +242,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "いずれも塔の全域木数の漸近に依る。matrix-tree 定理が mathlib に無い" +
       "（cycle 30 step 2 で自前で書くと判断し、入口＝多重グラフの符号付き接続行列と " +
       "$L=D\,D^{\mathsf T}$ を書いた。MultigraphLaplacian.lean。" +
-      "残るのは Cauchy–Binet・小行列式の $\pm1$ 性・Kirchhoff・指標分解の 4 段で、" +
+      "**cycle 32 step 1 で Cauchy–Binet が完了したので、残るのは小行列式の $\pm1$ 性・" +
+      "Kirchhoff・指標分解の 3 段である**（cycle 31 総括は 2 段と書いていたが実測は 3 段）。" +
       "`outputs/reports/cycle30_ops_matrix_tree_decision.md` に段取りがある。" +
       "**この主張は matrix-tree だけでは完了しない**——Cuoco–Monsky の岩澤型漸近も要る）。" +
       "不在の根拠は 2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`" +
@@ -274,7 +275,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`。" +
       "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`matrixTree` / `kirchhoff` / `CauchyBinet` が" +
       "いずれも 3 段とも 0 件。cycle 30 step 2 で自前で書くと判断し入口を書いた。" +
-      "MultigraphLaplacian.lean）と、" +
+      "MultigraphLaplacian.lean。**cycle 32 step 1 で Cauchy–Binet は完了し、" +
+      "残るのは小行列式の $\pm1$ 性・Kirchhoff・指標分解の 3 段である**）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。",
   },
   {
@@ -355,6 +357,10 @@ export type CoverageNumberSite = {
     readonly done: number;
     readonly partial: number;
     readonly untouched: number;
+    /** 外部定理のうち「自分で証明する」に振り分けた件数。 */
+    readonly externalOwn: number;
+    /** そのうち完了した件数。**cycle 32 step 1 で追加した。** */
+    readonly externalOwnDone: number;
   }) => readonly string[];
 };
 
@@ -362,17 +368,21 @@ export const COVERAGE_NUMBER_SITES: readonly CoverageNumberSite[] = [
   {
     locale: "ja",
     label: "paper_remark_formalization",
-    phrases: ({ total, done, partial, untouched }) => [
+    phrases: ({ total, done, partial, untouched, externalOwn, externalOwnDone }) => [
       `本論文の主張 ${total} 件のうち、内容が形式化されているのは ${done} 件、`,
       `一部が形式化されているのは ${partial} 件、未着手が ${untouched} 件である。`,
+      `自分で証明することにした外部定理は ${externalOwn} 件であり、`,
+      `そのうち証明を書き終えたのは ${externalOwnDone} 件である。`,
     ],
   },
   {
     locale: "en",
     label: "paper_remark_formalization",
-    phrases: ({ total, done, partial, untouched }) => [
+    phrases: ({ total, done, partial, untouched, externalOwn, externalOwnDone }) => [
       `Of the ${total} assertions of this paper, ${done} have their content `,
       `formalised, ${partial} are formalised in part, and ${untouched} have not been started.`,
+      `we have undertaken to prove ${externalOwn} of the external theorems ourselves; `,
+      `the number of those proofs that are complete is ${externalOwnDone}.`,
     ],
   },
 ];

@@ -23,6 +23,7 @@ const 健全な行: ExternalLedgerRow = {
   name: "Kirchhoff の matrix-tree 定理",
   kind: "自分で証明する",
   citedIn: ["paper_062_theorem_T"],
+  state: "部分的",
   leanNames: ["lapMatrixOfInc"],
 };
 
@@ -67,6 +68,31 @@ const cases: readonly {
     name: "自分で証明する以外の種別は Lean の定理名を要求されない",
     entries: [{ name: "Cramer の規則", kind: "mathlib から引く", citedIn: ["paper_062_theorem_T"] }],
   },
+  // ここから下は cycle 32 step 1 で足した（状態と Lean の定理名が食い違う道を塞ぐため）。
+  // これが無いと、定理名を 1 つも持たないまま「完了」と書いて件数だけ減らせてしまう。
+  {
+    name: "完了と書いてあるのに Lean の定理名が無い",
+    entries: [{ ...健全な行, state: "完了", leanNames: [] }],
+    expect: "[完了なのに Lean の定理名が無い（外部定理）]",
+  },
+  {
+    name: "部分的と書いてあるのに Lean の定理名が無い",
+    entries: [{ ...健全な行, state: "部分的", leanNames: [] }],
+    expect: "[部分的なのに Lean の定理名が無い（外部定理）]",
+  },
+  {
+    name: "未着手と書いてあるのに Lean の定理名がある",
+    entries: [{ ...健全な行, state: "未着手" }],
+    expect: "[未着手なのに Lean の定理名がある（外部定理）]",
+  },
+  {
+    name: "未着手で定理名を持たない形は通る",
+    entries: [{ ...健全な行, state: "未着手", leanNames: [] }],
+  },
+  {
+    name: "完了で実在する定理名を持つ形は通る",
+    entries: [{ ...健全な行, state: "完了", leanNames: ["lapMatrixOfInc", "det_eulerMatrix_sq"] }],
+  },
 ];
 
 let failed = 0;
@@ -88,25 +114,35 @@ for (const testCase of cases) {
 
 // 件数の集計そのものも実証する（残りの件数がここから出るため）。
 {
-  const { counts, startedOwnProofs } = run([
+  const { counts, startedOwnProofs, doneOwnProofs } = run([
     健全な行,
     { name: "a", kind: "mathlib から引く", citedIn: ["paper_062_theorem_T"] },
     { name: "b", kind: "R 脱出として隔離する", citedIn: ["paper_031_theorem_lsw"] },
     { name: "c", kind: "対象外", citedIn: ["paper_031_theorem_lsw"] },
-    { name: "d", kind: "自分で証明する", citedIn: ["paper_062_theorem_T"] },
+    { name: "d", kind: "自分で証明する", citedIn: ["paper_062_theorem_T"], state: "未着手" },
+    {
+      name: "e",
+      kind: "自分で証明する",
+      citedIn: ["paper_062_theorem_T"],
+      state: "完了",
+      leanNames: ["det_eulerMatrix_sq"],
+    },
   ]);
   const ok =
-    counts["自分で証明する"] === 2 &&
+    counts["自分で証明する"] === 3 &&
     counts["mathlib から引く"] === 1 &&
     counts["R 脱出として隔離する"] === 1 &&
     counts.対象外 === 1 &&
-    startedOwnProofs === 1;
+    startedOwnProofs === 2 &&
+    doneOwnProofs === 1;
   if (!ok) {
     failed += 1;
-    console.log(`NG  種別ごとの件数と着手済みの数え方`);
-    console.log(`    実際: ${JSON.stringify(counts)} / 着手済み ${startedOwnProofs}`);
+    console.log(`NG  種別ごとの件数と、着手済み・完了の数え方`);
+    console.log(
+      `    実際: ${JSON.stringify(counts)} / 着手済み ${startedOwnProofs} / 完了 ${doneOwnProofs}`,
+    );
   } else {
-    console.log(`OK  種別ごとの件数と着手済みの数え方`);
+    console.log(`OK  種別ごとの件数と、着手済み・完了の数え方`);
   }
 }
 
