@@ -164,7 +164,7 @@ export default defineBlocks([
         "(K5 仮定 (N) の解消) ",
         math(String.raw`\ell^{r}>e_{m_u}`),
         " ならば ",
-        math(String.raw`\Lambda(r)`),
+        math(String.raw`\mathcal{E}(r)`),
         " の最小点は ",
         math(String.raw`j=m_u`),
         " ただ 1 つである。また相異なる ",

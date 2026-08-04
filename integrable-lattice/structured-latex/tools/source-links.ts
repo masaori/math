@@ -113,6 +113,17 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
     ],
     acknowledged: [
       {
+        item: "\\Lambda",
+        reason:
+          "$\\Lambda(r):=\\min_{j\\ge0}(e_j+j\\ell^{r})$ を $\\mathcal{E}(r)$ へ改名した。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "\\Lambda(r)=e_m+m\\,\\ell^{r}",
+          bodyQuote: "\\mathcal{E}(r)",
+        },
+      },
+      {
         item: "P_{1}",
         reason:
           "report は $S_\infty=\{P_1,\dots,P_r\}$ と番号を振り、本文は $r_0$ の式を「相異なる $P,P'$」の$\max$ として書いている。同じ有限集合の上の同じ最大値であり、番号付けは記法の選択である。",
@@ -206,7 +217,18 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         quotedOnly: true,
       },
     ],
-    acknowledged: [],
+    acknowledged: [
+      {
+        item: "\\Lambda",
+        reason:
+          "例外直線の $\\lambda$ の和を $\\lambda_{\\mathrm{exc}}$ へ改名した。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "\\Lambda(\\ell^n-1)",
+          bodyQuote: "\\lambda_{\\mathrm{exc}}",
+        },
+      },],
   },
   {
     block: "paper_055_theorem_theta_infinity",
@@ -220,6 +242,17 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       },
     ],
     acknowledged: [
+      {
+        item: "\\Lambda",
+        reason:
+          "例外直線の $\\lambda$ の和を $\\lambda_{\\mathrm{exc}}$ へ改名した。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "予言に使うのは $\\mu$ と $\\Lambda$ だけ",
+          bodyQuote: "\\lambda_{\\mathrm{exc}}",
+        },
+      },
       {
         item: "主結果",
         reason:
@@ -1819,7 +1852,18 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         quotedOnly: true,
       },
     ],
-    acknowledged: [],
+    acknowledged: [
+      {
+        item: "\\Lambda_{k}",
+        reason:
+          "$\\Lambda_k:=\\min_m v_\\ell(A^{[k]}_m)$ を $\\mathcal{V}_k$ へ改名した。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "\\varphi(\\ell^{M})\\,\\Lambda_k+\\theta^\\sharp_",
+          bodyQuote: "\\mathcal{V}_k",
+        },
+      },],
   },
   {
     block: "paper_112_theorem_coefficient_layers",
@@ -1874,7 +1918,40 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         quotedOnly: true,
       },
     ],
-    acknowledged: [      {
+    acknowledged: [
+      {
+        item: "\\Lambda_{0}",
+        reason:
+          "$\\Lambda_k$ を $\\mathcal{V}_k$ へ改名した（$k=0$）。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "$\\Lambda_0=1$, $\\theta^\\sharp_0=2$",
+          bodyQuote: "\\mathcal{V}_0",
+        },
+      },
+      {
+        item: "\\Lambda_{1}",
+        reason:
+          "$\\Lambda_k$ を $\\mathcal{V}_k$ へ改名した（$k=1$）。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "$\\Lambda_1=2+v_2(t+1)$",
+          bodyQuote: "\\mathcal{V}_1",
+        },
+      },
+      {
+        item: "\\Lambda_{k}",
+        reason:
+          "$\\Lambda_k$ を $\\mathcal{V}_k$ へ改名した。" +
+          "cycle 31 step 2 で記号を改名した。記号 $\\Lambda$ は対数順序群にのみ使うというユーザー判断（2026-08-04）により、別の量に同じ字面を使っていた 3 箇所を改名した。report は当時の記号のまま残す（過去の記録を書き換えないため）。落ちているのは記法の選択であって、量そのものは同じである。",
+        grounds: {
+          type: "notation",
+          reportQuote: "$(\\Lambda_k,\\theta^\\sharp_k)_{k\\le K}$ を",
+          bodyQuote: "\\mathcal{V}_k",
+        },
+      },      {
         item: "訂正後",
         reason:
           "台帳がどの版の規約かを断る言葉。本文は訂正後の規約そのものを「**規約（書き落とせない）**」として書いている。",

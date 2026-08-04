@@ -4,6 +4,13 @@
 
 **一部の形式化で足れりとしない。論文の全主張の形式化を目標に据える。**
 
+- **2026-08-04 ユーザー判断: 記号 Λ は対数順序群にのみ使う。** cycle 31 step 2 で、別の量に使っていた
+  3 種類を日英とも改名した（例外直線の λ の和 → $\lambda_{\mathrm{exc}}$ ／
+  $\min_{j\ge0}(e_j+j\ell^r)$ → $\mathcal{E}(r)$ ／ $\min_m v_\ell(A^{[k]}_m)$ → $\mathcal{V}_k$）。
+  **再発は検査 Λ が止める**（`structured-latex/tools/verify-lambda-symbol.ts`）——
+  飾りを付けた形・`\Lambda:=` で定義し直す形・台帳に無いブロックが使い始める形の 3 つで落ちる。
+  **この 3 つは現に起きた 3 件から逆算した規則であって原理から出たものではない。**
+  台帳にあるブロックの中で裸の Λ を別の量に使うことは止められない（本文を読む判断であるため）。
 - **2026-08-04 ユーザー判断: 対象に本論文が引用しているだけの外部定理も含める。引用で済ませない。**
   線引きの正本は `docs/external-theorem-criterion.md`（cycle 31 step 1 で新設）、
   振り分けの台帳は `structured-latex/tools/external-theorem-coverage.ts`（検査 F が毎回印字）。

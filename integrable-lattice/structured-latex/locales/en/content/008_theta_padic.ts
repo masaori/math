@@ -16,7 +16,7 @@
  *
  * ## 記号 Λ の三度目の衝突（読者への注意として本文に足した）
  *
- * (J2) は `\Lambda(r):=\min_j(e_j+j\ell^r)` と置く。これは序章の対数順序群 Λ とも、
+ * (J2) は `\mathcal{E}(r):=\min_j(e_j+j\ell^r)` と置く。これは序章の対数順序群 Λ とも、
  * 命題 G′ が例外直線の和として置く Λ とも**無関係な別の量**である。数式は変更できないので、
  * 英語版では地の文で「この記号はこの式に限った局所的なものである」と断った
  * （命題 G′ の英訳が同じ処置をしている）。
@@ -201,7 +201,7 @@ export default defineBlocks([
         ",",
       ]),
       displayMath(
-        String.raw`\theta(1,c+\ell\beta)\ \ge\ \Lambda(r):=\min_{j\ge0}\bigl(e_j+j\,\ell^{r}\bigr),`,
+        String.raw`\theta(1,c+\ell\beta)\ \ge\ \mathcal{E}(r):=\min_{j\ge0}\bigl(e_j+j\,\ell^{r}\bigr),`,
       ),
       paragraph([
         "and equality holds as soon as the minimum is attained at a single index. (The symbol Λ in this ",
@@ -425,7 +425,7 @@ export default defineBlocks([
           " with ",
           math(String.raw`r=1`),
           ", where ",
-          math(String.raw`\Lambda(1)=4`),
+          math(String.raw`\mathcal{E}(1)=4`),
           " while the true value is ",
           math(String.raw`\theta=6`),
           ".",
@@ -686,9 +686,9 @@ export default defineBlocks([
         ", so ",
         math(String.raw`\mathrm{ord}_x(\psi_ju^j)=e_j+j\ell^{r}`),
         ". Hence ",
-        math(String.raw`\theta(1,c+\ell\beta)\ge\Lambda(r)`),
+        math(String.raw`\theta(1,c+\ell\beta)\ge\mathcal{E}(r)`),
         ", and the coefficient of ",
-        math(String.raw`x^{\Lambda(r)}`),
+        math(String.raw`x^{\mathcal{E}(r)}`),
         " equals ",
         math(String.raw`\sum_{j\in J(r)}\lambda_j\beta_v^{\,j}`),
         ", where ",
@@ -867,7 +867,7 @@ export default defineBlocks([
         " are pairwise disjoint and, taking each ",
         math(String.raw`P`),
         " as base point, the minimiser of ",
-        math(String.raw`\Lambda(r)`),
+        math(String.raw`\mathcal{E}(r)`),
         " is unique for all ",
         math(String.raw`r\ge r_0`),
         "; and (B) at all sufficiently deep levels the minimiser in (J3) is unique. These two are exactly the " +
@@ -916,7 +916,7 @@ export default defineBlocks([
         " of them. Choose ",
         math(String.raw`R'\ge r_0`),
         " so that ",
-        math(String.raw`\Lambda(r)=e_{j^*}+j^*\ell^{r}`),
+        math(String.raw`\mathcal{E}(r)=e_{j^*}+j^*\ell^{r}`),
         " for ",
         math(String.raw`r\ge R'`),
         " (the terms with ",
@@ -984,7 +984,7 @@ export default defineBlocks([
         " and ",
         math(String.raw`v_\ell(p'+q')=1`),
         ", so ",
-        math(String.raw`\Lambda=2`),
+        math(String.raw`\lambda_{\mathrm{exc}}=2`),
         " and the closed form of that proposition gives the asserted formula. What follows is an " +
         "independent route to the same formula through the other tool ",
         math(String.raw`b=\sum j^*`),
@@ -1072,7 +1072,7 @@ export default defineBlocks([
         ", so ",
         math(String.raw`j^*=1`),
         " and ",
-        math(String.raw`\Lambda(r)=\min(1+\ell^{r},2\ell^{r})=1+\ell^{r}`),
+        math(String.raw`\mathcal{E}(r)=\min(1+\ell^{r},2\ell^{r})=1+\ell^{r}`),
         " has a unique minimiser. From ",
         math(String.raw`E(z,w)=E(z,w^{-1})`),
         " the same values are obtained at ",

@@ -192,7 +192,7 @@ export default defineBlocks([
         "(K5 The hypothesis (N) is discharged) If ",
         math(String.raw`\ell^{r}>e_{m_u}`),
         ", then the minimum of ",
-        math(String.raw`\Lambda(r)`),
+        math(String.raw`\mathcal{E}(r)`),
         " is attained at the single index ",
         math(String.raw`j=m_u`),
         ". Moreover two distinct points ",

@@ -460,7 +460,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     block: "paper_111_theorem_general_closed_form",
     op: "min",
     form: "set-builder",
-    fingerprint: "\\bigl\\{m:v_\\ell(A^{[k]}_m)=\\Lambda_k\\bigr\\},\\qquad m^\\sharp_",
+    fingerprint: "\\bigl\\{m:v_\\ell(A^{[k]}_m)=\\mathcal{V}_k\\bigr\\},\\qquad m^\\sh",
     count: 1,
     ground: { type: "nonempty-argued-here", marker: "v_\\ell(0)=+\\infty" },
     note:
@@ -485,7 +485,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     block: "paper_112_theorem_coefficient_layers",
     op: "max",
     form: "indexed",
-    fingerprint: "{0\\le k\\le K(P_0)}\\Lambda_k(P_0)",
+    fingerprint: "{0\\le k\\le K(P_0)}\\mathcal{V}_k(P_0)",
     count: 1,
     ground: finiteIndex("添字族は 0 ≤ k ≤ K(P_0) で、K ≥ 0 なので少なくとも k = 0 を含む。",
       "IntegrableLattice.Icc_zero_nonempty",),
@@ -494,7 +494,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     block: "paper_112_theorem_coefficient_layers",
     op: "max",
     form: "indexed",
-    fingerprint: "{P_0\\in S_\\infty}\\ \\max_{0\\le k\\le K(P_0)}\\Lambda_k(P_0)",
+    fingerprint: "{P_0\\in S_\\infty}\\ \\max_{0\\le k\\le K(P_0)}\\mathcal{V}_k(P_0)",
     count: 1,
     ground: { type: "empty-convention-stated", marker: "\\max\\emptyset:=0" },
     note:
