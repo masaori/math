@@ -237,19 +237,40 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
       "可換環の上の Euler の双対基底公式（トレース双対 $\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$）",
     items: [
       {
-        leanFragment: "段 2（$\\sum_i c_i\\theta^i=\\rho'(\\theta)$）",
-        kind: "未形式化",
-        ledgerFragment: "二重和の入れ替え",
+        leanFragment: "段 2 から段 6 までは cycle 36 step 1 で書いた",
+        kind: "形式化済み",
+        witness: "sum_eulerC_mul_pow",
       },
       {
-        leanFragment: "段 3・段 4・段 5",
+        leanFragment: "を満たすことの当てはめ",
         kind: "未形式化",
-        ledgerFragment: "残りは 4 段",
+        ledgerFragment: "IsPowerBasisOf",
       },
       {
-        leanFragment: "したがって本文の $C\\,G=M_\\eta$",
+        leanFragment: "段 6 を書いても完了しない",
         kind: "未形式化",
-        ledgerFragment: "可換環版が組める",
+        ledgerFragment: "可約な場合に無い",
+      },
+    ],
+  },
+  {
+    file: "WStarReducibleDescent.lean",
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "が実際に零因子でないこと",
+        kind: "未形式化",
+        ledgerFragment: "零因子でないこと",
+      },
+      {
+        leanFragment: "の可約な場合",
+        kind: "未形式化",
+        ledgerFragment: "可約な場合に無い",
+      },
+      {
+        leanFragment: "の値を存在の形で述べる",
+        kind: "未形式化",
+        ledgerFragment: "整域でないので当たらない",
       },
     ],
   },

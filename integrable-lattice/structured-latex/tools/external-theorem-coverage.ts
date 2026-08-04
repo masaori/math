@@ -201,9 +201,18 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "`[Field K] [Field L] [FiniteDimensional K L] [Algebra.IsSeparable K L]` を要求していることを" +
       "宣言行で直読した（cycle 30 の euler ログと同じ結果）。$\\rho$ が可約なとき " +
       "$A\\otimes\\mathbb{Q}$ は体でなく体の積なので、この形では届かない。",
-    state: "部分的",
-    leanNames: ["eulerMatrix_mul_weightedGram", "det_eulerMatrix_sq", "psi_eulerC_mul_pow"],
-    remaining:
+    state: "完了",
+    leanNames: [
+      "eulerMatrix_mul_weightedGram",
+      "det_eulerMatrix_sq",
+      "psi_eulerC_mul_pow",
+      "sum_eulerC_mul_pow",
+      "trace_eq_sum_coord",
+      "trace_eq_psi_derivative_mul",
+      "trace_eulerC_mul",
+      "eulerMatrix_apply",
+    ],
+    note:
       "既約な $\\rho$ の場合は入っている（`WStarElementaryDivisors.lean`。ただし `PowerBasis K L` を使うので $L$ は体）。" +
       "**cycle 35 step 2 で、可約な場合の心臓部を書いた**（`EulerDualBasisCommRing.lean` の `psi_eulerC_mul_pow`）——" +
       "$\\psi$ を「$\\theta^{m}$ の係数を取る」線形写像とすると、$\\psi(c_i\\theta^j)=\\delta_{ij}$ が" +
@@ -213,15 +222,19 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "**cycle 30 以降「素材が無い」と書き続けていた箇所の中身はこれである**——" +
       "体の上の証明が分離性を要求していたのは $\\rho\'(\\theta)$ で割ってから双対基底を作っていたからで、" +
       "割らずに $\\psi$ の対で書けば仮定が落ちる。" +
-      "**ただしトレースの形までは届いていないので、この外部定理はまだ完了ではない。** 残りは 4 段。" +
-      "(2) $\\sum_i c_i\\theta^i=\\rho\'(\\theta)$（$c_i$ の明示形を経由した二重和の入れ替え。筋は立っているが書いていない）、" +
-      "(3) $\\mathrm{Tr}(z)=\\sum_j[\\theta^j](z\\theta^j)$（`Algebra.trace_eq_matrix_trace` と " +
-      "`leftMulMatrix` の成分の定義だけで出る配線）、" +
-      "(4) $\\mathrm{Tr}(z)=\\psi(\\rho\'(\\theta)z)$（段 1 と段 2 の組み合わせ。Newton の恒等式も冪和も要らない）、" +
-      "(5) $\\mathrm{Tr}(c_i w)=[\\theta^i](\\rho\'(\\theta)w)$（段 4 に段 1 をもう一度当てるだけ）。" +
-      "そこまで行って初めて本文の $C\\,G=M_\\eta$ の可換環版が組める。" +
+      "**cycle 36 step 1 で残りの 4 段をすべて書き、この外部定理は完了した。** " +
+      "(2) $\\sum_i c_i\\theta^i=\\rho\'(\\theta)$（`sum_eulerC_mul_pow`。$c_i$ の明示形 `eulerC_eq_sum` を経由し、" +
+      "二重和を $k=i+t$ で入れ替えると各 $k$ の重複度がちょうど $k+1$ になって $\\rho\'$ の係数が出る）、" +
+      "(3) $\\mathrm{Tr}(z)=\\sum_j[\\theta^j](z\\theta^j)$（`trace_eq_sum_coord`。配線）、" +
+      "(4) $\\mathrm{Tr}(z)=\\psi(\\rho\'(\\theta)z)$（`trace_eq_psi_derivative_mul`）、" +
+      "(5) $\\mathrm{Tr}(c_i w)=[\\theta^i](\\rho\'(\\theta)w)$（`trace_eulerC_mul`）。" +
+      "**併せて本文の $C\\,G=M_\\eta$ の可換環版も書いた**（`eulerMatrix_mul_weightedGram`）。" +
       "**cycle 34 までの見通し（$\\operatorname{Tr}(\\theta^m)$ の Newton 型の関係へ帰着する道）は要らなかった**——" +
-      "段 1 と段 2 から段 4 が直接出るので、冪和の関係を経由しない。",
+      "段 1 と段 2 から段 4 が直接出るので、冪和の関係を経由しない。" +
+      "**完了と呼ぶ射程**: 可換環 $R$ 上の代数 $A$ が $1,\\theta,\\dots,\\theta^m$ を基底にもち、" +
+      "モニックな $\\rho$ について $\\theta^{m+1}$ が低次へ落ちること（`IsPowerBasisOf` / `IsReductionOf`）だけを仮定する。" +
+      "体も整域も分離性も既約性も使わない。**ただしこの外部定理が完了しても 命題 W\\* は完了しない**——" +
+      "cycle 36 step 1 の実測で、命題 W\\* にはこれとは別の残りがあることが分かった（命題 W\\* の欄を見よ）。",
   },
   {
     name: "Newton 多面体の加法性（Ostrowski の定理）",

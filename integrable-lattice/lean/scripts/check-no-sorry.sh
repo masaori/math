@@ -640,6 +640,25 @@ targets=(
   # 可換環の上の Euler の双対基底公式（EulerDualBasisCommRing.lean・cycle 35 step 2）
   IntegrableLattice.EulerDualBasis.psi_pow
   IntegrableLattice.EulerDualBasis.psi_eulerC_mul_pow
+  # トレースの形までの残り 4 段と、本文の C G = M_η の可換環版（cycle 36 step 1）
+  IntegrableLattice.EulerDualBasis.eulerC_eq_sum
+  IntegrableLattice.EulerDualBasis.sum_eulerC_mul_pow
+  IntegrableLattice.EulerDualBasis.psi_sum
+  IntegrableLattice.EulerDualBasis.coord_sum
+  IntegrableLattice.EulerDualBasis.psi_smul
+  IntegrableLattice.EulerDualBasis.coord_smul
+  IntegrableLattice.EulerDualBasis.coord_pow
+  IntegrableLattice.EulerDualBasis.trace_eq_sum_coord
+  IntegrableLattice.EulerDualBasis.coord_eq_psi_eulerC
+  IntegrableLattice.EulerDualBasis.trace_eq_psi_derivative_mul
+  IntegrableLattice.EulerDualBasis.trace_eulerC_mul
+  IntegrableLattice.EulerDualBasis.eulerMatrix_apply
+  IntegrableLattice.EulerDualBasis.eulerMatrix_mul_weightedGram
+  # 可約な場合の降下（WStarReducibleDescent.lean・cycle 36 step 1）
+  IntegrableLattice.WStarReducible.injective_mulLeft
+  IntegrableLattice.WStarReducible.finrank_span_eq
+  IntegrableLattice.WStarReducible.exists_isLeast_isPLevel_span
+  IntegrableLattice.WStarReducible.exists_isLeast_isPLevel_range_of_euler
   # matrix-tree の逆向きの入口（SpanningConnectivity.lean・cycle 35 step 3）
   IntegrableLattice.SpanningConnectivity.sum_degOn
   IntegrableLattice.SpanningConnectivity.exists_degOn_le_one

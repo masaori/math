@@ -26,6 +26,7 @@ import IntegrableLattice.TowerTypeCoefficients
 import IntegrableLattice.DigitBranchRecursion
 import IntegrableLattice.DigitBranchZellExponent
 import IntegrableLattice.EulerDualBasisCommRing
+import IntegrableLattice.WStarReducibleDescent
 import IntegrableLattice.SInfinityDecision
 import IntegrableLattice.EllTwoClosedForm
 import IntegrableLattice.DropAssumptionBStar

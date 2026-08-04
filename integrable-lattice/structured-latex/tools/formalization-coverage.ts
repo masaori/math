@@ -186,7 +186,26 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "実在する `Module.Basis.traceDual` は宣言が `[Field K] [Field L] [FiniteDimensional K L] " +
       "[Algebra.IsSeparable K L]` を要求していることを宣言行で直接確認した）。" +
       "埋めるには可換環の上の Euler の双対基底公式 " +
-      "$\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$ を自前で書くことになる。書いていない。",
+      "$\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$ を自前で書くことになる。" +
+      "**cycle 36 step 1 でそれを書き、外部定理の側は完了した**（`EulerDualBasisCommRing.lean` の " +
+      "段 2–5 と、本文の $C\\,G=M_\\eta$ の可換環版 `eulerMatrix_mul_weightedGram`。" +
+      "$C$ が $\\rho$ の係数の Hankel 行列であること `eulerMatrix_apply` も可換環の上で書いたので、" +
+      "`isUnit_det_eulerHankel` と繋いで $\\det C=\\pm1$ も出る）。" +
+      "**それでもこの主張は完了しない。cycle 36 step 1 の実測で、残りが 1 件ではなかったことが分かった。** " +
+      "台帳は cycle 30 から「残っているのは 1 つ、可約な $\\rho$ での $C\\,G=M_\\eta$ そのもの」と書き続けていたが、" +
+      "その 1 件を埋めても下流が塞がったままだった。**実測で見つかった残りは 3 件である。** " +
+      "(1) **降下そのものが整域を要求していた**——`WStarIntegralDescent.isLeast_isPLevel_range_of_euler` は " +
+      "`[IsDomain S]` を仮定しており、$\\rho$ が可約なとき $A=\\mathbb{Z}[x]/(\\rho)$ は整域でないので当たらない。" +
+      "**cycle 36 step 1 でこれは埋めた**（`WStarReducibleDescent.lean` の " +
+      "`exists_isLeast_isPLevel_range_of_euler`。整域は本質でなく $\\eta$ が零因子でないことへ落ちる。" +
+      "適合基底は `Submodule.exists_smith_normal_form_of_rank_eq` で作れて、PID を要求されるのは係数環 " +
+      "$\\mathbb{Z}$ の側だけである）。" +
+      "(2) **$\\det G=\\pm N_{A/\\mathbb{Q}}(\\eta)$ が可約な場合に無い**——`det_weightedGram` は " +
+      "`PowerBasis K L`（$L$ は体）で書かれており、本文の 2 つめの等式は既約な場合しか覆っていない" +
+      "（2026-08-05 実測、宣言行で直読）。**未形式化である。**" +
+      "(3) **$\\eta=(\\chi\'/h)(\\theta)$ が零因子でないこと**と、$A=\\mathbb{Z}[x]/(\\rho)$ が " +
+      "`IsPowerBasisOf` / `IsReductionOf` を満たすことの当てはめ。どちらも仮定として受け取っている。" +
+      "**未形式化である。**",
   },
   {
     block: "paper_051_theorem_duality",

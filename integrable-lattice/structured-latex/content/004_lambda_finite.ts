@@ -904,6 +904,11 @@ export default defineBlocks([
       "IntegrableLattice.coeff_minpolyDiv_eq_sum",
       "IntegrableLattice.eulerMatrix_eq_eulerHankel",
       "IntegrableLattice.isLeast_isPLevel_range_of_euler",
+      "IntegrableLattice.EulerDualBasis.sum_eulerC_mul_pow",
+      "IntegrableLattice.EulerDualBasis.trace_eulerC_mul",
+      "IntegrableLattice.EulerDualBasis.eulerMatrix_apply",
+      "IntegrableLattice.WStarReducible.exists_isLeast_isPLevel_span",
+      "IntegrableLattice.WStarReducible.exists_isLeast_isPLevel_range_of_euler",
     ],
     statement: [
       paragraph([
