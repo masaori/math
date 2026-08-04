@@ -495,6 +495,22 @@ targets=(
   IntegrableLattice.isRoot_gcdMonicQ_map_iff
   IntegrableLattice.map_redFactorQ_eq_redFactor
   IntegrableLattice.exists_int_aRedOne
+
+  # cycle 29 step 3: w* を適合基底（Smith 標準形）で書く（WStarElementaryDivisors.lean）
+  IntegrableLattice.isPLevel_mono
+  IntegrableLattice.exists_dvd_mul_pow_iff
+  IntegrableLattice.mem_iff_dvd_repr
+  IntegrableLattice.isLeast_isPLevel
+  IntegrableLattice.wStarOfCoeffs_eq_zero_iff
+  IntegrableLattice.isLeast_isPLevel_ideal
+  IntegrableLattice.exists_isPLevel_ideal
+  IntegrableLattice.isPLevel_range_comp
+  IntegrableLattice.weightedGram_eq
+  IntegrableLattice.det_weightedGram
+  IntegrableLattice.det_weightedGram_ne_zero
+  IntegrableLattice.trace_coeff_minpolyDiv_mul
+  IntegrableLattice.eulerMatrix_mul_weightedGram
+  IntegrableLattice.det_eulerMatrix_sq
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

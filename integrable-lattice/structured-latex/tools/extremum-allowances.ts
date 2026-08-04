@@ -87,7 +87,9 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     count: 1,
     ground: finiteIndex(
       "η ≠ 0 なので η^{-1} は分数体の元であり、局所化 A_(p) は離散付値環の有限個の積である。" +
-        "j を十分大きく取れば p^j η^{-1} ∈ A_(p) となるので、この集合は空でない。",
+        "j を十分大きく取れば p^j η^{-1} ∈ A_(p) となるので、この集合は空でない。" +
+        "cycle 29 step 3 で Lean で裏を取った（適合基底の係数の p 進付値の最大値が実際に条件を満たす）。",
+      "IntegrableLattice.exists_isPLevel_ideal",
     ),
   },
   {
@@ -96,7 +98,11 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "set-builder",
     fingerprint: "\\{j:p^jA\\subseteq\\eta A\\ \\TEXTBODY{@}\\}=\\min\\{j:p^j\\eta^{-1}",
     count: 1,
-    ground: finiteIndex("同じ集合を包含の言葉で書いたもの。空でない理由も同じ（η ≠ 0）。"),
+    ground: finiteIndex(
+      "同じ集合を包含の言葉で書いたもの。空でない理由も同じ（η ≠ 0）。" +
+        "cycle 29 step 3 で Lean で裏を取った。",
+      "IntegrableLattice.exists_isPLevel_ideal",
+    ),
   },
   {
     block: "paper_046_theorem_wstar_different",
@@ -104,7 +110,10 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "set-builder",
     fingerprint: "\\{j:p^j\\eta^{-1}\\in A_{(p)}\\}",
     count: 1,
-    ground: finiteIndex("上の 2 件と同じ集合。空でない理由も同じ（η ≠ 0）。"),
+    ground: finiteIndex(
+      "上の 2 件と同じ集合。空でない理由も同じ（η ≠ 0）。cycle 29 step 3 で Lean で裏を取った。",
+      "IntegrableLattice.exists_isPLevel_ideal",
+    ),
   },
 
   // --- 命題 G（低位項・退化点・消滅深度） ------------------------------------

@@ -96,6 +96,7 @@ lake build
 | `IntegrableLattice/TracePeriodAssembly.lean` | 命題 C′ の上界そのものの組み立てと、命題 C″ の (2)(4) | `outputs/reports/cycle29_ops_formalization_triage.md` |
 | `IntegrableLattice/PeriodicPointResultant.lean` | 本文の claim「周期点数は入れ子の終結式で厳密に計算できる」の内容（$d=1$ と $d=2$） | `outputs/reports/cycle29_ops_formalization_triage.md` |
 | `IntegrableLattice/DualityPAdicFiniteL.lean` | 双対命題 D の ($p$ 素点, 有限 $L$) の段（$d=1$）。簡約周期点数の定義そのものと、それが終結式ひとつで書ける $0$ でない整数であること | `outputs/reports/cycle29_ops_duality_p_side.md` |
+| `IntegrableLattice/WStarElementaryDivisors.lean` | $w^*$ を適合基底（Smith 標準形）の係数で定義し、最小元であることを証明した段。本文の $\det G=\pm N_{A/\mathbb{Q}}(\eta)$ と、Euler の双対基底公式の行列版 $C\,G=M_\eta$・$(\det C)^2=1$ | `outputs/reports/cycle29_ops_wstar_elementary_divisors.md` |
 
 ## 形式化の現状
 
@@ -108,6 +109,11 @@ cycle 29 step 1 は部分的 16 件を「素材が無い」と「配線をして
 配線側から 3 件（周期点数の終結式表示・命題 C′・命題 C″）を実際に書いた。
 cycle 29 step 2 は双対命題 D の $p$ 素点側を切り出し、未着手 → 部分的 へ動かした
 （未着手 3 → 2・部分的 16 → 17）。
+cycle 29 step 3 は **step 1 の「整数行列の単因子（Smith 標準形）が mathlib に無いので書けない」
+という判定を覆した**——整除の鎖は確かに無いが $w^*$ に鎖は要らず、
+適合基底（`Ideal.smithNormalForm` が返す形）の係数の $p$ 進付値の最大値として書ける。
+$w^*$ の定義と最小性、$\det G=\pm N_{A/\mathbb{Q}}(\eta)$、Euler の双対基底公式の行列版が入った。
+それでも命題 W\* は完了へ届いていない（体の上の等式を整数へ降ろす段と、$\rho$ が可約な場合が残る）。
 **それでも残り 19 件は変わっていない**——残りは「完了でないもの」の数であり、
 動かした 4 件はいずれも同じ命題の別の段（整数行列の単因子、一般の $d$ の型、
 または多変数の Mahler 測度）が残ってまだ完了ではないからである。仕分けの表は

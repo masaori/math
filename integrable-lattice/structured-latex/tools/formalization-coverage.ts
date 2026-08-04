@@ -96,11 +96,22 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "$\\pi_{\\mathrm{tr}}(p,k)\\mid p^{k-1}\\pi_{\\mathrm{tr}}(p,w^*+1)$ を、" +
       "$k>w^*+1$ では梯子の反復から、$k\\le w^*+1$ では単調性から出す形で書いてある。" +
       "その途中で、人手証明が暗黙に使っていた「最小周期は任意の周期を割る」を独立に証明した。" +
-      "残るのは $w^*$ の側である——Gram 行列 $G$ の最大単因子という定義そのものと、" +
-      "$\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$、および " +
-      "$w^*=0$ の同値。いずれも整数行列の単因子（Smith 標準形）が要り、mathlib に無い" +
-      "（`Module.Basis.SmithNormalForm` は部分加群の基底の形であって行列の単因子ではない。" +
-      "cycle 29 の欠落調査で再確認）。上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
+      "cycle 29 step 3 で $w^*$ の定義そのものが入った（WStarElementaryDivisors.lean）。" +
+      "**step 1 の仕分けが「素材が無い」と判定したのは誤りだった。** " +
+      "整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は確かに mathlib に無いが（`Ideal.smithCoeffs` に" +
+      "整除を述べた補題は 0 件）、$w^*$ を取り出すのに鎖は要らない——" +
+      "適合基底（`Ideal.smithNormalForm` が返す形）の係数の $p$ 進付値の最大値として書け、" +
+      "それが $\\min\\{j:\\ p^jA\\subseteq\\eta A\\ (p\\ \\text{の外で})\\}$ に等しいことを証明した" +
+      "（isLeast_isPLevel / isLeast_isPLevel_ideal）。$w^*=0$ の判定も入った" +
+      "（wStarOfCoeffs_eq_zero_iff。ただし本文の「$\\rho\\bmod p$ が分離的かつ $p\\nmid m_\\lambda$」" +
+      "への翻訳は入っていない）。" +
+      "残るのは 2 つ。(1) 本文が $w^*$ を Gram 行列 $G$ の側で定義していること——" +
+      "$G$ の単因子が $A/\\eta A$ の不変量に等しいという同一視は、" +
+      "体の上では行列の等式 $C\\,G=M_\\eta$ と $(\\det C)^2=1$ として入ったが" +
+      "（命題 W\\* の欄を見よ）、その整数への降下を書いていない。" +
+      "(2) $\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$ の" +
+      "重複度の積の形（ノルムの形 $\\det G=\\pm N(\\eta)$ は入った）。" +
+      "上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
   },
   {
     block: "paper_044_theorem_newton",
@@ -118,8 +129,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "命題 C″ は核と反例、cycle 27 で加えた $g_m\\ge m+1$ の持ち上げ、および cycle 29 で加えた " +
       "(2) 改良した上界（tracePeriod_dvd_pow_mul）と (4) 閉形式が存在しないことの主張そのもの" +
       "（no_affine_trace_period_exponent。本文の $t_k=1,2,2,4,8,16$ も tThree_values で出した）まで。" +
-      "残るのは (1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\\min\\{m:g_m\\ge k\\}$ の同値で、" +
-      "どちらも $w^*$ の定義に整数行列の単因子が要る（命題 C′ と同じ壁）。",
+      "残るのは (1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\\min\\{m:g_m\\ge k\\}$ の同値。" +
+      "cycle 29 step 3 で $w^*$ の定義そのものは入った（WStarElementaryDivisors.lean。" +
+      "**「整数行列の単因子が mathlib に無いから書けない」という step 1 の判定は覆った**——" +
+      "適合基底の係数の $p$ 進付値の最大値として書ける）。" +
+      "残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。",
   },
   {
     block: "paper_046_theorem_wstar_different",
@@ -129,13 +143,25 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "微分の段（$\\chi'=h\\cdot\\sum_i a_i f_i'(\\rho/f_i)$）と、" +
       "付値の段（$\\min\\{j:\\forall\\mathfrak p,\\ j\\,e_\\mathfrak p\\ge v_\\mathfrak p\\}" +
       "=\\max_\\mathfrak p\\lceil v_\\mathfrak p/e_\\mathfrak p\\rceil$、および従順分岐・不分岐の系）である。" +
-      "残るのは双対の段——$A^\\vee=\\rho'(\\theta)^{-1}A$（Euler の双対基底公式）から " +
-      "$\\operatorname{coker}(G)\\cong A/\\eta A$ を経て「$G$ の単因子＝$A/\\eta A$ の不変量」へ至る部分である。" +
-      "mathlib に `traceDual` / `differentIdeal` / `aeval_derivative_mem_differentIdeal` は在るが" +
-      "（`PropCTracePeriod.lean` が cycle 19 に実在を確認済み）、" +
-      "それらを重み付きトレース形式の Gram 行列の最大単因子へ結ぶ配線が無く、" +
-      "整数行列の Smith 標準形も無い（`Basis.SmithNormalForm` は部分加群の基底の形であって" +
-      "行列の単因子の形ではない）。",
+      "cycle 29 step 3 で双対の段の大半が入った（WStarElementaryDivisors.lean）。" +
+      "**step 1 の仕分けが「素材が無い（整数行列の Smith 標準形が無い）」と判定したのは誤りだった。** " +
+      "整除の鎖は確かに無いが $w^*$ に鎖は要らず、適合基底の係数の $p$ 進付値の最大値で書ける。" +
+      "入ったのは (a) $w^*=\\min\\{j:\\ p^j\\eta^{-1}\\in A_{(p)}\\}$ の右辺が意味をもち" +
+      "最小元が適合基底の係数で書けること（isLeast_isPLevel_ideal / exists_isPLevel_ideal）、" +
+      "(b) **本文の $\\det G=\\pm N_{A/\\mathbb{Q}}(\\eta)$**（det_weightedGram。" +
+      "重み付き Gram 行列がトレース形式の Gram 行列と $\\mu$ 倍の行列の積に分解することと、" +
+      "判別式が $\\rho'(\\theta)$ のノルムに等しいことから）、" +
+      "(c) **Euler の双対基底公式を行列の等式にしたもの** $C\\,G=M_\\eta$ と $(\\det C)^2=1$" +
+      "（eulerMatrix_mul_weightedGram / det_eulerMatrix_sq。" +
+      "心臓部は $\\operatorname{Tr}(c_i w)=[\\theta^i](\\rho'(\\theta)w)$＝trace_coeff_minpolyDiv_mul）、" +
+      "(d) 可逆な取り替えで像に対する $p$ 進の条件が変わらないこと（isPLevel_range_comp）。" +
+      "残るのは 2 つで、どちらも mathlib の欠落ではなくこちらの未記述である。" +
+      "(1) **$C$ と $G$ の整数への降下**——$C\\,G=M_\\eta$ と $(\\det C)^2=1$ は体 $K=\\mathbb{Q}$ の上の" +
+      "等式であり、人手証明が使う「$C\\in GL_r(\\mathbb{Z})$ だから余核が同型」を言うには、" +
+      "$C$ の成分が整数であること（`coeff_minpolyDiv` の漸化式からの帰納法）と、" +
+      "行列の像と $\\eta A$ を基底で同一視する配線が要る。" +
+      "(2) **$\\rho$ が可約な場合**——(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\\rho$ が" +
+      "既約な場合しか覆っていない。mathlib のトレース双対（`Module.Basis.traceDual`）は体の上にしか無い。",
   },
   {
     block: "paper_051_theorem_duality",

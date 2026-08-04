@@ -307,6 +307,8 @@ export default defineBlocks([
       "IntegrableLattice.dvd_of_isLeast_isPeriodMod",
       "IntegrableLattice.tracePeriod_dvd_of_le",
       "IntegrableLattice.tracePeriod_propC_bound",
+      "IntegrableLattice.isLeast_isPLevel",
+      "IntegrableLattice.wStarOfCoeffs_eq_zero_iff",
     ],
     statement: [
       paragraph([
@@ -712,6 +714,8 @@ export default defineBlocks([
       "IntegrableLattice.tracePeriod_dvd_pow_mul",
       "IntegrableLattice.tThree_values",
       "IntegrableLattice.no_affine_trace_period_exponent",
+      "IntegrableLattice.isLeast_isPLevel",
+      "IntegrableLattice.wStarOfCoeffs_eq_zero_iff",
     ],
     statement: [
       paragraph([
@@ -942,6 +946,15 @@ export default defineBlocks([
       "IntegrableLattice.isLeast_wStar",
       "IntegrableLattice.wStar_eq_zero_of_unramified",
       "IntegrableLattice.wStar_le_of_tame",
+      "IntegrableLattice.wStarOfCoeffs_eq_zero_iff",
+      "IntegrableLattice.isLeast_isPLevel",
+      "IntegrableLattice.isLeast_isPLevel_ideal",
+      "IntegrableLattice.exists_isPLevel_ideal",
+      "IntegrableLattice.det_weightedGram",
+      "IntegrableLattice.det_weightedGram_ne_zero",
+      "IntegrableLattice.trace_coeff_minpolyDiv_mul",
+      "IntegrableLattice.eulerMatrix_mul_weightedGram",
+      "IntegrableLattice.det_eulerMatrix_sq",
     ],
     statement: [
       paragraph([
