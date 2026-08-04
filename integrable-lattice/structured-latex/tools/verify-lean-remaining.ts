@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import {
   LEAN_REMAINING_LEDGER,
   auditLeanRemaining,
+  auditDeclarationCount,
   parseRemainingSection,
   type LeanRemainingFile,
   type LeanRemainingReferent,
@@ -48,6 +49,29 @@ for (const file of parsed.keys()) {
 for (const entry of LEAN_REMAINING_LEDGER) {
   if (parsed.has(entry.file)) continue;
   violations.push(`[宣言が余っている] ${entry.file} — 残り一覧の節が実在しない（改名・削除で浮いた）`);
+}
+
+// --- 宣言の数の再確認（cycle 36 step 4。`未形式化` の側の穴への手当て） -------------
+// 残り一覧が古くなるのは、そのファイルに宣言が増減したときだけである。
+// 数が食い違ったら、残り一覧を読み直して未形式化かを確かめてから数を直すことを要求する。
+const declCount = new Map<string, number>();
+for (const file of leanFiles) {
+  declCount.set(
+    file,
+    [
+      ...readFileSync(join(leanDir, file), "utf8").matchAll(
+        /^(?:private\s+|protected\s+|noncomputable\s+)*(?:theorem|lemma|def|abbrev|instance)\s+([A-Za-z_][A-Za-z0-9_'!?]*)/gm,
+      ),
+    ].length,
+  );
+}
+let reviewChecked = 0;
+for (const entry of LEAN_REMAINING_LEDGER) {
+  const actual = declCount.get(entry.file);
+  if (actual === undefined) continue;
+  reviewChecked += 1;
+  const v = auditDeclarationCount(entry, actual);
+  if (v !== null) violations.push(v);
 }
 
 // --- 対応表を導く（本文の lean 紐づけ × ファイルの宣言） -------------------------
@@ -180,9 +204,18 @@ console.log(
     "**これが 2 サイクル持ち越していた「台帳と `lean/` の両方が同じだけ古い」穴の、塞げる側である**" +
     "（形式化済みと書いた当の定理を消せば赤くなる。入れた時点で、名前の取り違えが 2 件見つかった）。\n" +
     "  限界: `ledgerFragment` が台帳に在ることは確かめられるが、それが同じ事柄を指しているかは確かめられない（検査の強さの上限は台帳の書き手が選んだ語の妥当性である）。" +
-    "\n  限界（塞げていない側）: **`未形式化` と書いた項目については、両方が同じだけ古い穴は残る**——" +
-    "「まだ書いていない」ことを witness で示すことはできず、実際には書けているのに両方が古いままなら静かに通る。" +
-    "塞ぐには『その項目を証明した宣言が無いこと』を機械が言える必要があり、そこは人の読みのままである。",
+    "\n  限界（cycle 35 時点で塞げていなかった側）: **`未形式化` と書いた項目については、" +
+    "「まだ書いていない」ことを witness で示すことができない**（実在しない宣言は名指せない）。",
+);
+console.log(
+  `  **cycle 36 step 4 で、その側に別の道から手当てをした**（宣言の数の再確認 ${reviewChecked} 件）——` +
+    "「書いていないこと」を機械に言わせるのは諦め、**危険が生じた瞬間に人へ読み直しを強制する**形にした。" +
+    "残り一覧が古くなるのはそのファイルに宣言が増減したときだけなので、" +
+    "**宣言の数を台帳に持ち、実際の数と食い違ったら違反にする。**" +
+    "書き足した人は、残り一覧を読み直して、まだ未形式化かを確かめてからこの数を直すことになる。\n" +
+    "  限界: **数を直すときに本当に読み直したかは確かめられない**（数だけ合わせて通せる）。" +
+    "強制できるのは読み直す機会が必ず訪れることだけである。" +
+    "また**別ファイルに書いた場合は宣言が増えないので捕まらない**（そこは人の読みのままである）。",
 );
 
 if (violations.length > 0) {

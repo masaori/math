@@ -107,6 +107,32 @@ export type LeanRemainingFile = {
    * **紐づけも宣言も無ければ違反**にする（黙って照合対象の外に置けなくなる）。
    */
   readonly externalEntry?: string;
+  /**
+   * **そのファイルを最後に読み直したときの宣言の数**（cycle 36 step 4 で追加）。
+   *
+   * ## なぜこれが要るか（3 サイクル持ち越していた穴の、残っていた側）
+   *
+   * cycle 35 step 5 で `形式化済み` の項目には証拠（実在する宣言の名前）を要求するようにした。
+   * 残っていたのは `未形式化` の側である——**「まだ書いていない」ことを実在する宣言では示せない**
+   * ので、実際には書けているのに台帳と `lean/` の両方が古いままなら静かに通る。
+   *
+   * **塞ぎ方を変えた。** 「書いていないこと」を機械に言わせるのは諦め、
+   * **危険が生じた瞬間に人へ読み直しを強制する**形にする。
+   * 残り一覧が古くなるのは、そのファイルに宣言が増えた（または消えた）ときだけである。
+   * そこで**宣言の数を台帳に持ち、実際の数と食い違ったら違反にする。**
+   * 書き足した人は、残り一覧を読み直して、まだ未形式化かを確かめてからこの数を直すことになる。
+   *
+   * これは cycle 35・36 で 4 件見つかった「書き足したのに要約を直していない」事故と同じ形への、
+   * 検査の側からの手当てである。
+   *
+   * ## 限界（正直に書く）
+   *
+   * - **数を直すときに本当に読み直したかは確かめられない。** 数だけ合わせて通すことはできる。
+   *   強制できるのは「読み直す機会が必ず訪れること」だけである。
+   * - **ファイルに宣言を足さずに項目が形式化される場合は捕まらない**
+   *   （別ファイルに書いた場合。そこは人の読みのままである）。
+   */
+  readonly declarationsAtReview: number;
   /** 箇条書きと同じ順序で並べる。件数の一致を機械が見る。 */
   readonly items: readonly LeanRemainingItem[];
 };
@@ -118,6 +144,7 @@ export type LeanRemainingFile = {
 export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   {
     file: "BouquetClosedForm.lean",
+    declarationsAtReview: 23,
     heading: "形式化しなかったもの",
     items: [
       {
@@ -130,11 +157,13 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "CoefficientsDE.lean",
+    declarationsAtReview: 39,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
     items: [],
   },
   {
     file: "Cycle24Corrections.lean",
+    declarationsAtReview: 29,
     heading: "形式化しなかったもの",
     items: [
       { leanFragment: "系 Q7 の $r=2$ そのもの", kind: "未形式化", ledgerFragment: "系 Q7" },
@@ -147,6 +176,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "Cycle25Corrections.lean",
+    declarationsAtReview: 33,
     heading: "形式化しなかったもの",
     items: [
       { leanFragment: "定理 G2 の 1", kind: "未形式化", ledgerFragment: "定理 G2 の 1" },
@@ -156,6 +186,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "CyclotomicValuationQ4a.lean",
+    declarationsAtReview: 9,
     heading: "形式化しなかったもの",
     items: [
       {
@@ -172,6 +203,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "DigitBranchRecursion.lean",
+    declarationsAtReview: 11,
     heading: "形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）",
     items: [
       { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み", witness: "coeff_zellPow_eq" },
@@ -184,6 +216,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "DigitBranchZellExponent.lean",
+    declarationsAtReview: 18,
     heading: "形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）",
     items: [
       { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み", witness: "zellPow" },
@@ -196,11 +229,13 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "DigitTheorem.lean",
+    declarationsAtReview: 18,
     heading: "形式化しなかったもの",
     items: [{ leanFragment: "命題 J2′ の", kind: "未形式化", ledgerFragment: "命題 J2′" }],
   },
   {
     file: "DropAssumptionBStar.lean",
+    declarationsAtReview: 14,
     heading: "形式化した残りの段（cycle 33 step 1 で 2 件とも書いた）",
     items: [
       { leanFragment: "補題 Q0", kind: "形式化済み", witness: "crudeBound_le_mul_logb_of_pow_le" },
@@ -214,6 +249,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "EllTwoClosedForm.lean",
+    declarationsAtReview: 23,
     heading: "形式化しなかったもの（理由）",
     items: [
       { leanFragment: "の**導出**", kind: "未形式化", ledgerFragment: "導出" },
@@ -222,6 +258,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "GeneralTowerClosedForm.lean",
+    declarationsAtReview: 24,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
     items: [
       { leanFragment: "定理 G2 の 1", kind: "未形式化", ledgerFragment: "定理 G2 の 1" },
@@ -232,6 +269,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "EulerDualBasisCommRing.lean",
+    declarationsAtReview: 23,
     heading: "形式化しなかったもの",
     externalEntry:
       "可換環の上の Euler の双対基底公式（トレース双対 $\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$）",
@@ -255,6 +293,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "WStarReducibleDescent.lean",
+    declarationsAtReview: 4,
     heading: "形式化しなかったもの",
     items: [
       {
@@ -276,6 +315,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "KirchhoffCounting.lean",
+    declarationsAtReview: 3,
     heading: "形式化しなかったもの",
     externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
@@ -289,6 +329,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "SpanningConnectivity.lean",
+    declarationsAtReview: 21,
     heading: "形式化しなかったもの",
     externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
@@ -302,6 +343,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "ResultantValuationR4.lean",
+    declarationsAtReview: 22,
     heading: "形式化した残りの段（cycle 35 step 1 で書いた）",
     items: [
       {
@@ -328,6 +370,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "PropQLaurentLift.lean",
+    declarationsAtReview: 7,
     heading: "形式化しなかったもの",
     items: [
       {
@@ -344,6 +387,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "SInfinityDecision.lean",
+    declarationsAtReview: 23,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
     items: [
       { leanFragment: "補題 W2 の (iv)", kind: "未形式化", ledgerFragment: "補題 W2" },
@@ -353,6 +397,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "TowerTypeCoefficients.lean",
+    declarationsAtReview: 8,
     heading: "形式化しなかったもの（なぜ足りないのか）",
     items: [
       { leanFragment: "定理 J7 の主張そのもの", kind: "未形式化", ledgerFragment: "定理 J7" },
@@ -476,4 +521,22 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
     }
   });
   return { violations, counts, unlinked };
+}
+
+/**
+ * **宣言の数の再確認**（cycle 36 step 4）。IO を持たないので検出テストからそのまま呼べる。
+ *
+ * 台帳が持っている数と実際の数が違えば、そのファイルに書き足し（または削除）があったのに
+ * 残り一覧を読み直していない、ということである。
+ */
+export function auditDeclarationCount(
+  entry: LeanRemainingFile,
+  actual: number,
+): string | null {
+  if (actual === entry.declarationsAtReview) return null;
+  return (
+    `[宣言が増減したのに残り一覧を読み直していない] ${entry.file} — ` +
+    `台帳は ${entry.declarationsAtReview} 件と書いているが実際は ${actual} 件。` +
+    `残り一覧を読み直し、まだ未形式化かを確かめてから declarationsAtReview を直すこと`
+  );
 }

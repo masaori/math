@@ -8,6 +8,7 @@
 
 import {
   auditLeanRemaining,
+  auditDeclarationCount,
   parseRemainingSection,
   type LeanRemainingFile,
 } from "./lean-remaining-model.ts";
@@ -39,6 +40,7 @@ const ledgerAllThree =
 
 const threeItemEntry = (): LeanRemainingFile => ({
   file: "Fixture.lean",
+          declarationsAtReview: 0,
   heading: "形式化しなかったもの（mathlib の欠落か配線か）",
   items: [
     { leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0" },
@@ -55,6 +57,7 @@ const cases: Case[] = [
       auditLeanRemaining({
         entry: {
           file: "Fixture.lean",
+          declarationsAtReview: 0,
           heading: "形式化しなかったもの（mathlib の欠落か配線か）",
           items: [
             { leanFragment: "補題 Q0", kind: "形式化済み", witness: "lemma_Q0" },
@@ -74,6 +77,7 @@ const cases: Case[] = [
       auditLeanRemaining({
         entry: {
           file: "Fixture.lean",
+          declarationsAtReview: 0,
           heading: "形式化しなかったもの（mathlib の欠落か配線か）",
           items: [
             { leanFragment: "補題 Q0", kind: "形式化済み", witness: "lemma_Q0" },
@@ -106,6 +110,7 @@ const cases: Case[] = [
       auditLeanRemaining({
         entry: {
           file: "Fixture.lean",
+          declarationsAtReview: 0,
           heading: "形式化しなかったもの（mathlib の欠落か配線か）",
           items: [{ leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0" }],
         },
@@ -177,6 +182,7 @@ const cases: Case[] = [
       auditLeanRemaining({
         entry: {
           file: "Fixture.lean",
+          declarationsAtReview: 0,
           heading: "形式化しなかったもの（mathlib の欠落か配線か）",
           items: [
             { leanFragment: "補題 Q0", kind: "形式化済み", witness: "lemma_Q0" },
@@ -231,6 +237,7 @@ const cases: Case[] = [
       auditLeanRemaining({
         entry: {
           file: "F.lean",
+          declarationsAtReview: 0,
           heading: "形式化しなかったもの",
           items: [
             {
@@ -252,6 +259,7 @@ const cases: Case[] = [
       auditLeanRemaining({
         entry: {
           file: "F.lean",
+          declarationsAtReview: 0,
           heading: "形式化しなかったもの",
           items: [
             {
@@ -288,4 +296,27 @@ if (failed > 0) {
   console.error(`検出テスト ${failed} 件が期待どおりでない。`);
   process.exit(1);
 }
-console.log(`${cases.length} / ${cases.length} 件で検出を実証した。`);
+// --- 宣言の数の再確認（cycle 36 step 4） ---------------------------------------
+{
+  const entry: LeanRemainingFile = {
+    file: "Fixture.lean",
+    heading: "形式化しなかったもの",
+    declarationsAtReview: 3,
+    items: [],
+  };
+  const grew = auditDeclarationCount(entry, 5);
+  const same = auditDeclarationCount(entry, 3);
+  const shrank = auditDeclarationCount(entry, 1);
+  console.log("  検出: 宣言が増えたのに残り一覧を読み直していない");
+  console.log(`      ${grew === null ? "挙がらなかった（NG）" : "挙げた"}`);
+  console.log("  検出: 宣言の数が変わっていなければ挙がらない（偽陽性でない側）");
+  console.log(`      ${same === null ? "挙がらなかった" : "挙げた（NG）"}`);
+  console.log("  検出: 宣言が減った場合も挙がる（削除で残り一覧が浮く側）");
+  console.log(`      ${shrank === null ? "挙がらなかった（NG）" : "挙げた"}`);
+  if (grew === null || same !== null || shrank === null) {
+    console.log("NG: 宣言の数の再確認が期待どおりに動いていない");
+    process.exit(1);
+  }
+}
+
+console.log(`${cases.length + 3} / ${cases.length + 3} 件で検出を実証した。`);
