@@ -49,6 +49,44 @@ const threeItemEntry = (): LeanRemainingFile => ({
 
 const cases: Case[] = [
   {
+    name: "形式化済みの証拠が消えたら赤くなる（cycle 35 step 5。両方が同じだけ古い穴の塞げる側）",
+    shouldFail: true,
+    run: () =>
+      auditLeanRemaining({
+        entry: {
+          file: "Fixture.lean",
+          heading: "形式化しなかったもの（mathlib の欠落か配線か）",
+          items: [
+            { leanFragment: "補題 Q0", kind: "形式化済み", witness: "lemma_Q0" },
+            { leanFragment: "補題 Q4a", kind: "形式化済み", witness: "lemma_Q4a" },
+            { leanFragment: "補題 Q1′", kind: "形式化済み", witness: "lemma_Q1_gone" },
+          ],
+        },
+        section: sectionThree,
+        linked: [{ block: "b", text: ledgerAllThree, state: "部分的" }],
+        declarationExists: (name) => name === "lemma_Q0" || name === "lemma_Q4a",
+      }).violations,
+  },
+  {
+    name: "形式化済みの証拠が実在すれば通る（偽陽性でない）",
+    shouldFail: false,
+    run: () =>
+      auditLeanRemaining({
+        entry: {
+          file: "Fixture.lean",
+          heading: "形式化しなかったもの（mathlib の欠落か配線か）",
+          items: [
+            { leanFragment: "補題 Q0", kind: "形式化済み", witness: "lemma_Q0" },
+            { leanFragment: "補題 Q4a", kind: "形式化済み", witness: "lemma_Q4a" },
+            { leanFragment: "補題 Q1′", kind: "形式化済み", witness: "lemma_Q1" },
+          ],
+        },
+        section: sectionThree,
+        linked: [{ block: "b", text: ledgerAllThree, state: "部分的" }],
+        declarationExists: () => true,
+      }).violations,
+  },
+  {
     name: "節と箇条書きを取り出せる（3 件）",
     shouldFail: false,
     run: () => (sectionThree.bullets.length === 3 ? [] : ["箇条書きの数が 3 でない"]),
@@ -141,9 +179,9 @@ const cases: Case[] = [
           file: "Fixture.lean",
           heading: "形式化しなかったもの（mathlib の欠落か配線か）",
           items: [
-            { leanFragment: "補題 Q0", kind: "形式化済み" },
-            { leanFragment: "補題 Q4a", kind: "形式化済み" },
-            { leanFragment: "補題 Q1′", kind: "形式化済み" },
+            { leanFragment: "補題 Q0", kind: "形式化済み", witness: "lemma_Q0" },
+            { leanFragment: "補題 Q4a", kind: "形式化済み", witness: "lemma_Q4a" },
+            { leanFragment: "補題 Q1′", kind: "形式化済み", witness: "lemma_Q1" },
           ],
         },
         section: sectionThree,

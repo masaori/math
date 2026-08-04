@@ -121,6 +121,13 @@ function referentExists(referent: LeanRemainingReferent): boolean {
   return logBodies.some((body) => body.includes(referent.target));
 }
 
+// --- 「形式化済み」の証拠（実在する宣言）を解決する（cycle 35 step 5）-------------
+const allDeclarations = new Set<string>();
+for (const names of declaredIn.values()) for (const name of names) allDeclarations.add(name);
+function declarationExists(name: string): boolean {
+  return allDeclarations.has(name.replace(/^.*\./, ""));
+}
+
 // --- 2〜5. 件数・実在・台帳への反映 ---------------------------------------------
 const counts = { 未形式化: 0, 形式化済み: 0, 参照だけ: 0 };
 let unlinked = 0;
@@ -133,6 +140,7 @@ for (const entry of LEAN_REMAINING_LEDGER) {
     state: String(ledgerState.get(block) ?? ""),
   }));
   const result = auditLeanRemaining({
+    declarationExists,
     entry,
     section,
     linked,
@@ -167,8 +175,14 @@ console.log(
     "(2) 「参照だけ」は実在を確かめられる指し先（lean ファイル / ログ / mathlib）を型で要求する。",
 );
 console.log(
-  "  限界: `ledgerFragment` が台帳に在ることは確かめられるが、それが同じ事柄を指しているかは" +
-    "確かめられない（検査の強さの上限は台帳の書き手が選んだ語の妥当性である）。",
+  "  **cycle 35 step 5 で「形式化済み」にも証拠を要求するようにした**——" +
+    "その項目を形式化した定理の名前を型で必須にし、`lean/` に実在することを確かめる。" +
+    "**これが 2 サイクル持ち越していた「台帳と `lean/` の両方が同じだけ古い」穴の、塞げる側である**" +
+    "（形式化済みと書いた当の定理を消せば赤くなる。入れた時点で、名前の取り違えが 2 件見つかった）。\n" +
+    "  限界: `ledgerFragment` が台帳に在ることは確かめられるが、それが同じ事柄を指しているかは確かめられない（検査の強さの上限は台帳の書き手が選んだ語の妥当性である）。" +
+    "\n  限界（塞げていない側）: **`未形式化` と書いた項目については、両方が同じだけ古い穴は残る**——" +
+    "「まだ書いていない」ことを witness で示すことはできず、実際には書けているのに両方が古いままなら静かに通る。" +
+    "塞ぐには『その項目を証明した宣言が無いこと』を機械が言える必要があり、そこは人の読みのままである。",
 );
 
 if (violations.length > 0) {

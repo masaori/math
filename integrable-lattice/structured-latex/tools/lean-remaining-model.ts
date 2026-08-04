@@ -67,7 +67,19 @@ export type LeanRemainingItem =
       /** 検査 F の台帳の当該エントリに実在すべき文字列。**未形式化では型で必須**。 */
       readonly ledgerFragment: string;
     }
-  | { readonly leanFragment: string; readonly kind: "形式化済み" }
+  | {
+      readonly leanFragment: string;
+      readonly kind: "形式化済み";
+      /**
+       * **型で必須**（cycle 35 step 5）。その項目を形式化した定理の名前。
+       * `lean/` に実在することを機械が確かめる。
+       *
+       * **これが無いと、台帳と `lean/` の両方が同じだけ古い場合に静かに通る**——
+       * 「形式化済み」と書いた当の定理を消しても、どちらの側も文章のままなので誰も気づかない。
+       * 実在する宣言を第三の情報源として要求することで、その一致が偶然でなくなる。
+       */
+      readonly witness: string;
+    }
   | {
       readonly leanFragment: string;
       readonly kind: "参照だけ";
@@ -162,16 +174,24 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     file: "DigitBranchRecursion.lean",
     heading: "形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）",
     items: [
-      { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み" },
-      { leanFragment: "についての帰納法そのもの", kind: "形式化済み" },
+      { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み", witness: "coeff_zellPow_eq" },
+      {
+        leanFragment: "についての帰納法そのもの",
+        kind: "形式化済み",
+        witness: "exists_coeff_ne_zero_of_sepAt",
+      },
     ],
   },
   {
     file: "DigitBranchZellExponent.lean",
     heading: "形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）",
     items: [
-      { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み" },
-      { leanFragment: "についての帰納法", kind: "形式化済み" },
+      { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み", witness: "zellPow" },
+      {
+        leanFragment: "についての帰納法",
+        kind: "形式化済み",
+        witness: "exists_coeff_ne_zero_lt_pow_sep",
+      },
     ],
   },
   {
@@ -183,9 +203,13 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     file: "DropAssumptionBStar.lean",
     heading: "形式化した残りの段（cycle 33 step 1 で 2 件とも書いた）",
     items: [
-      { leanFragment: "補題 Q0", kind: "形式化済み" },
-      { leanFragment: "補題 Q4a", kind: "形式化済み" },
-      { leanFragment: "補題 Q1′", kind: "形式化済み" },
+      { leanFragment: "補題 Q0", kind: "形式化済み", witness: "crudeBound_le_mul_logb_of_pow_le" },
+      {
+        leanFragment: "補題 Q4a",
+        kind: "形式化済み",
+        witness: "associated_sub_one_pow_totient",
+      },
+      { leanFragment: "補題 Q1′", kind: "形式化済み", witness: "lemma_Q1'" },
     ],
   },
   {
@@ -259,9 +283,21 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     file: "ResultantValuationR4.lean",
     heading: "形式化した残りの段（cycle 35 step 1 で書いた）",
     items: [
-      { leanFragment: "へ $\\pi$ を送る環準同型があること", kind: "形式化済み" },
-      { leanFragment: "がモニックであることと分解すること", kind: "形式化済み" },
-      { leanFragment: "整数の割り切りが反映されること", kind: "形式化済み" },
+      {
+        leanFragment: "へ $\\pi$ を送る環準同型があること",
+        kind: "形式化済み",
+        witness: "exists_ringHom_sub_one",
+      },
+      {
+        leanFragment: "がモニックであることと分解すること",
+        kind: "形式化済み",
+        witness: "splits_psi",
+      },
+      {
+        leanFragment: "整数の割り切りが反映されること",
+        kind: "形式化済み",
+        witness: "int_dvd_of_algebraMap_dvd",
+      },
       {
         leanFragment: "のレベル分解と 命題 W の積の公式",
         kind: "参照だけ",
@@ -329,6 +365,8 @@ export type LeanRemainingAuditInput = {
   readonly externalText?: string | null;
   /** 参照先の実在（`参照だけ` の指し先を解決した結果）。呼び出し側が IO で作る。 */
   readonly referentExists?: (referent: LeanRemainingReferent) => boolean;
+  /** 宣言名が `lean/` に実在するか（`形式化済み` の証拠を確かめる。cycle 35 step 5）。 */
+  readonly declarationExists?: (name: string) => boolean;
 };
 
 /**
@@ -340,7 +378,7 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
   counts: Record<LeanRemainingKind, number>;
   unlinked: number;
 } {
-  const { entry, section, linked, externalText = null, referentExists } = input;
+  const { entry, section, linked, externalText = null, referentExists, declarationExists } = input;
   const violations: string[] = [];
   const counts: Record<LeanRemainingKind, number> = { 未形式化: 0, 形式化済み: 0, 参照だけ: 0 };
   let unlinked = 0;
@@ -370,6 +408,17 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
         violations.push(
           `[参照だけの指し先が実在しない] ${entry.file} #${index + 1} — ` +
             `${item.referent.kind}「${item.referent.target}」が見つからない`,
+        );
+      }
+      return;
+    }
+    if (item.kind === "形式化済み") {
+      // cycle 35 step 5: 「形式化済み」にも証拠（実在する宣言）を要求する。
+      // **これが 2 サイクル持ち越していた「両方が同じだけ古い」穴の、塞げる側である。**
+      if (declarationExists && !declarationExists(item.witness)) {
+        violations.push(
+          `[形式化済みの証拠が実在しない] ${entry.file} #${index + 1} — ` +
+            `宣言「${item.witness}」が lean/ に無い（消えたか改名された）`,
         );
       }
       return;
