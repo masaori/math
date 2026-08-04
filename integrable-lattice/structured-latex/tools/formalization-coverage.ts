@@ -258,7 +258,16 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 G′ は (G′3) の閉形式と、cycle 26 が形式化した証明の主要 6 ステップまで。" +
-      "Newton 多面体・$\\pi$ 進評価・例外直線の決定は未形式化。",
+      "Newton 多面体・$\\pi$ 進評価・例外直線の決定は未形式化。" +
+      "**cycle 33 step 2 の照合で、この欄が `lean/` の記述より少なく書いていたことが分かったので足す**——" +
+      "`BouquetClosedForm.lean` は残りとして (a) $\\kappa_n$ の独立計算（matrix-tree 定理。" +
+      "$\\ell^{2n}\\times\\ell^{2n}$ 行列式で、mathlib に全域木数の公式が無い。**配線ではなく素材の欠落**。" +
+      "2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`。mathlib `520045ab14` の " +
+      "8264 ファイルを 3 段で引き、`matrixTree` / 語幹 `matrix tree` / `kirchhoff` がいずれも 3 段とも 0 件）と " +
+      "(b) 定理 X の付値計算そのもの（$v_\\ell(h^N-1)=\\ell^{\\nu(N)}/\\varphi_m$。" +
+      "$\\mathbb{Q}(\\zeta_{\\ell^m})$ の $\\ell$ の上の素点への**配線**。円分体も分岐も mathlib に在る）を挙げている。" +
+      "`GeneralTowerClosedForm.lean` はさらに 定理 G2 の 1（Galois 不変性。配線）・定理 G2 の 3（配線）・" +
+      "$A_{\\mathrm{gen}}$ の $L$ 非依存性・Matrix–Tree 定理を挙げている。",
   },
   {
     block: "paper_056_theorem_ell2_family",
@@ -298,7 +307,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 J は (J1)(J1′) の桁定理が完了、(J4) の総和と係数の取り出しが部分的。" +
-      "(J2)(J3)(J5)(J6) の各主張と、cycle 27 で形式化した (J1) の代数的な芯の外側が残る。",
+      "(J2)(J3)(J5)(J6) の各主張と、cycle 27 で形式化した (J1) の代数的な芯の外側が残る。" +
+      "**cycle 33 step 2 の照合で、この欄が `lean/` の記述より少なく書いていたことが分かったので足す**——" +
+      "`DigitTheorem.lean` は 命題 J2′ の同値（$\\ell$ 奇なら 破れる $\\iff k=2$ 等）を残りに挙げており、" +
+      "`TowerTypeCoefficients.lean` は (a) 定理 J7 の主張そのもの" +
+      "（$b=\\sum_{P\\in S_\\infty}j^*(P)$。形式冪級数・Hasse 微分・$\\mathbb{Z}_\\ell$ 冪の**配線**が要る。" +
+      "`PowerSeries` も二項冪級数も mathlib に在る）と " +
+      "(b) $\\Theta_{M'}$ から $M'\\ell^{M'}$ の係数を読み取る段の一般形（$O$ 記法を型にしていない）を挙げている。",
   },
   {
     block: "paper_101_theorem_s_infinity_decision",
