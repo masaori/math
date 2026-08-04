@@ -42,3 +42,4 @@ import IntegrableLattice.DualityPAdicFiniteL
 import IntegrableLattice.WStarElementaryDivisors
 import IntegrableLattice.WStarIntegralDescent
 import IntegrableLattice.MultigraphLaplacian
+import IntegrableLattice.CauchyBinet

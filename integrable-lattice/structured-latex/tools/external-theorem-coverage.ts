@@ -114,7 +114,22 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。mathlib 520045ab14 の 8264 ファイルを 3 段で引き、" +
       "`CauchyBinet` / 語幹 `cauchy binet` が 3 段とも 0 件。",
-    remaining: "未着手。matrix-tree の段取りの 2 段目にあたる。",
+    leanNames: [
+      "det_mul_eq_sum_over_maps",
+      "det_submatrix_eq_zero_of_not_injective",
+      "det_mul_eq_sum_over_injective",
+      "det_mul_eq_zero_of_card_lt",
+    ],
+    remaining:
+      "cycle 31 step 3 で 3 段書いた（`CauchyBinet.lean`）。" +
+      "行の多重線型性による展開 $(A B).\\det=\\sum_{f:m\\to n}\\det(A_{\\cdot f})\\prod_i B_{f(i)i}$、" +
+      "単射でない $f$ の寄与が消えること、したがって和が単射な $f$ だけを走ること、" +
+      "および系として $\\#n<\\#m$ なら行列式が $0$ になること。" +
+      "**残るのは最後の 1 段、単射な $f$ を像で束ねて $n$ の $m$ 元部分集合についての和にする段である。**" +
+      "$f=e\\circ\\sigma$（$e$ は順序を保つ埋め込み、$\\sigma$ は $m$ の置換）と一意に分解し、" +
+      "$\\sigma$ についての和が $\\det(B_{e\\cdot})$ になる、という筋は立っているが**書いて通していない**。" +
+      "詰まりどころは mathlib に「単射 $\\leftrightarrow$（順序埋め込み, 置換）」の同値が無く、" +
+      "自前で組むことになる点である（`Finset.orderEmbOfFin` は在る）。",
   },
   {
     name: "可換環の上の Euler の双対基底公式（トレース双対 $\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$）",

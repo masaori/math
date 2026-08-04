@@ -542,6 +542,12 @@ targets=(
   IntegrableLattice.lapMatrix_diag
   IntegrableLattice.lapMatrix_offDiag
   IntegrableLattice.lapMatrix_row_sum
+
+  # cycle 31 step 3: Cauchy-Binet の公式（CauchyBinet.lean）。matrix-tree の 2 段目。
+  IntegrableLattice.det_mul_eq_sum_over_maps
+  IntegrableLattice.det_submatrix_eq_zero_of_not_injective
+  IntegrableLattice.det_mul_eq_sum_over_injective
+  IntegrableLattice.det_mul_eq_zero_of_card_lt
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと
