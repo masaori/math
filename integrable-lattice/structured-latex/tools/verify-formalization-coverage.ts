@@ -44,6 +44,7 @@ import {
   parseSurveyLog,
   type SurveyLog,
 } from "./absence-evidence-support.ts";
+import { SCOPE_CLAIMS, auditScopeClaims } from "./scope-claim-support.ts";
 
 /** 地の文だけを連結する（数式・参照は本文の数値の照合に効かないので落とす）。 */
 const flattenProse = (nodes: readonly TranslatedNode[]): string => {
@@ -628,6 +629,63 @@ for (const entry of unformalised) {
     "    限界: その検索語がその数学的主張にとって正しい語かは判定できない" +
       "（`matrixTree` が 0 件であることは確かめられるが、matrix-tree 定理を探すのに" +
       "その語を引くのが妥当かは人の判断である）。この検査の強さの上限は、台帳の書き手が選んだ語の妥当性である。",
+  );
+
+  // --- 「射程の主張」を機械で支える（cycle 32 step 4）---
+  //
+  // 上の内訳で「語の件数では支えられない」と出た型を、mathlib の原文を読んで確かめる。
+  // mathlib がこの作業ツリーに無い場合は違反にせず、確かめられなかった件数を出す
+  // （npm run check は mathlib 不在でも通る前提で運用している）。
+  const mathlibRoot = join(structuredLatexDir, "..", "lean", ".lake", "packages", "mathlib");
+  const mathlibPresent = existsSync(join(mathlibRoot, "Mathlib"));
+  const readMathlibFile = (path: string): string | undefined => {
+    const full = join(mathlibRoot, path);
+    if (!existsSync(full)) return undefined;
+    return readFileSync(full, "utf8");
+  };
+  const grepMathlib = mathlibPresent
+    ? (token: string): readonly string[] => {
+        const hits: string[] = [];
+        const walk = (dir: string) => {
+          for (const item of readdirSync(dir, { withFileTypes: true })) {
+            const full = join(dir, item.name);
+            if (item.isDirectory()) {
+              walk(full);
+              continue;
+            }
+            if (!item.name.endsWith(".lean")) continue;
+            const source = readFileSync(full, "utf8");
+            if (!source.includes(token)) continue;
+            for (const line of source.split("\n")) if (line.includes(token)) hits.push(line);
+          }
+        };
+        walk(join(mathlibRoot, "Mathlib"));
+        return hits;
+      }
+    : undefined;
+
+  const scope = auditScopeClaims({ claims: SCOPE_CLAIMS, readMathlibFile, grepMathlib });
+  violations.push(...scope.violations);
+
+  console.log("");
+  console.log(
+    `  「射程の主張」の裏取り（cycle 32 step 4 で追加）: 登録 ${SCOPE_CLAIMS.length} 件 / ` +
+      `裏が取れた ${scope.counts.裏が取れた} 件 / 反証された ${scope.counts.反証された} 件 / ` +
+      `確かめられない ${scope.counts.確かめられない} 件` +
+      `（mathlib はこの作業ツリーに ${mathlibPresent ? "在る" : "無い"}）`,
+  );
+  for (const verdict of scope.verdicts) {
+    console.log(`      [${verdict.status}] ${verdict.claim.entry} — ${verdict.detail}`);
+  }
+  console.log(
+    "    「在るが射程が足りない」を、確かめられる 3 つの形へ落としてある" +
+      "（宣言が仮定を要求する／在るが概念を使っていない／在るが関係が無い）。" +
+      "**3 つとも現に台帳にある主張から逆算したものであって、原理から出たものではない。**",
+  );
+  console.log(
+    "    限界: その射程の主張が当の数学的主張にとって正しい射程かは判定できない" +
+      "（`MvPolynomial` が 0 件であることは確かめられるが、本論文が要るのが多変数版かは人の判断である）。" +
+      "登録されていない射程の主張は、これまでどおり人の読みのままである（登録の網羅性は測れない）。",
   );
 }
 
