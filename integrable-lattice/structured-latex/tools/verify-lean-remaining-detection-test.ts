@@ -9,6 +9,7 @@
 import {
   auditLeanRemaining,
   auditDeclarationCount,
+  auditCrossFilePhrase,
   parseRemainingSection,
   type LeanRemainingFile,
 } from "./lean-remaining-model.ts";
@@ -43,9 +44,9 @@ const threeItemEntry = (): LeanRemainingFile => ({
           declarationsAtReview: 0,
   heading: "形式化しなかったもの（mathlib の欠落か配線か）",
   items: [
-    { leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0" },
-    { leanFragment: "補題 Q4a", kind: "未形式化", ledgerFragment: "補題 Q4a" },
-    { leanFragment: "補題 Q1′", kind: "未形式化", ledgerFragment: "補題 Q1′" },
+    { leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0", crossFilePhrase: "補題 Q0" },
+    { leanFragment: "補題 Q4a", kind: "未形式化", ledgerFragment: "補題 Q4a", crossFilePhrase: "補題 Q4a" },
+    { leanFragment: "補題 Q1′", kind: "未形式化", ledgerFragment: "補題 Q1′", crossFilePhrase: "補題 Q1′" },
   ],
 });
 
@@ -112,7 +113,7 @@ const cases: Case[] = [
           file: "Fixture.lean",
           declarationsAtReview: 0,
           heading: "形式化しなかったもの（mathlib の欠落か配線か）",
-          items: [{ leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0" }],
+          items: [{ leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0", crossFilePhrase: "補題 Q0" }],
         },
         section: sectionThree,
         linked: [{ block: "b", text: ledgerOnlyOne, state: "部分的" }],
@@ -156,9 +157,9 @@ const cases: Case[] = [
         entry: {
           ...threeItemEntry(),
           items: [
-            { leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0" },
-            { leanFragment: "補題 Q9z", kind: "未形式化", ledgerFragment: "補題 Q4a" },
-            { leanFragment: "補題 Q1′", kind: "未形式化", ledgerFragment: "補題 Q1′" },
+            { leanFragment: "補題 Q0", kind: "未形式化", ledgerFragment: "補題 Q0", crossFilePhrase: "補題 Q0" },
+            { leanFragment: "補題 Q9z", kind: "未形式化", ledgerFragment: "補題 Q4a", crossFilePhrase: "補題 Q4a" },
+            { leanFragment: "補題 Q1′", kind: "未形式化", ledgerFragment: "補題 Q1′", crossFilePhrase: "補題 Q1′" },
           ],
         },
         section: sectionThree,
@@ -319,4 +320,33 @@ if (failed > 0) {
   }
 }
 
-console.log(`${cases.length + 3} / ${cases.length + 3} 件で検出を実証した。`);
+// --- 別のファイルが同じ事柄を書いている（cycle 37 step 4） ------------------------
+// 再現データは **cycle 37 に現に起きた形**——`EulerDualBasisCommRing.lean` が
+// 未形式化と書いていた「当てはめ」が `WStarPowerBasisInstance.lean` という別のファイルに書かれ、
+// 元のファイルの宣言は 1 つも増えなかったので cycle 36 step 4 の鈴が鳴らなかった、という形である。
+{
+  const wrote = auditCrossFilePhrase(
+    "EulerDualBasisCommRing.lean",
+    "を満たすことの当てはめ",
+    "WStarPowerBasisInstance.lean",
+    false,
+  );
+  const agreed = auditCrossFilePhrase(
+    "KirchhoffCounting.lean",
+    "指標分解",
+    "SpanningConnectivity.lean",
+    true,
+  );
+  console.log("");
+  console.log("「別のファイルが同じ事柄を書いている」の検出テスト");
+  console.log("  検出: cycle 37 に現に起きた形（別ファイルに書かれ、元のファイルの宣言は増えない）");
+  console.log(`      ${wrote === null ? "挙がらなかった（NG）" : "挙げた"}`);
+  console.log("  検出: 両方が未形式化で一致していれば挙がらない（唯一の逃げ道。偽陽性でない側）");
+  console.log(`      ${agreed === null ? "挙がらなかった" : "挙げた（NG）"}`);
+  if (wrote === null || agreed !== null) {
+    console.log("NG: 別ファイルの走査が期待どおりに動いていない");
+    process.exit(1);
+  }
+}
+
+console.log(`${cases.length + 5} / ${cases.length + 5} 件で検出を実証した。`);

@@ -66,6 +66,39 @@ export type LeanRemainingItem =
       readonly kind: "未形式化";
       /** 検査 F の台帳の当該エントリに実在すべき文字列。**未形式化では型で必須**。 */
       readonly ledgerFragment: string;
+      /**
+       * **別のファイルがその事柄を書いていないかを見るための語**（cycle 37 step 4 で追加）。
+       *
+       * ## なぜこれが要るか（cycle 36 step 4 が残した穴）
+       *
+       * cycle 36 step 4 は「残り一覧が古くなるのは、そのファイルに宣言が増減したときだけである」
+       * という観察に基づいて、宣言の数を台帳に持たせた。
+       * **その観察は誤りである。cycle 37 が同じサイクルの中で 2 回反例を作った**——
+       * `EulerDualBasisCommRing.lean` が未形式化と書いていた「当てはめ」は
+       * `WStarPowerBasisInstance.lean` という**別のファイル**に書かれ、
+       * `TracePeriodAssembly.lean` が仮定として出していた段は
+       * `TracePeriodWStarLift.lean` に書かれた。
+       * **どちらも元のファイルの宣言は 1 つも増えないので、鈴は鳴らなかった。**
+       *
+       * ## 塞ぎ方
+       *
+       * 項目ごとに語を宣言し、**他のファイルの本文（そのファイル自身の残り一覧を除く）に
+       * その語が現れたら違反にする。** 別のファイルがその事柄について書いているなら、
+       * 書いた側が形式化したのかもしれないので、状態を確かめさせる。
+       *
+       * **逃げ道は 1 つだけ用意してある**——現れた側のファイルも同じ語を
+       * `未形式化` として宣言しているなら、2 つが「まだ書いていない」で一致しているので通す。
+       * この逃げ道は、実際に形式化したファイルを黙らせるためには使えない
+       * （形式化したなら `未形式化` とは書けない）。
+       *
+       * ## 限界（正直に書く）
+       *
+       * - **語の選び方が検査の強さの上限である。** 別のファイルが違う言い方で書けば素通りする。
+       * - **語が広すぎると偽陽性が出る。** 関係ない文脈で同じ語が使われれば赤くなる。
+       * - 「同じ語について書いている」ことは分かるが、「形式化した」ことは分からない
+       *   （読み直しを強制するだけである。cycle 36 step 4 の鈴と同じ性質）。
+       */
+      readonly crossFilePhrase: string;
     }
   | {
       readonly leanFragment: string;
@@ -151,8 +184,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "の独立計算（Matrix-Tree 定理）",
         kind: "未形式化",
         ledgerFragment: "matrix-tree",
+        crossFilePhrase: "$\\kappa_n$ の独立計算",
       },
-      { leanFragment: "定理 X の付値計算そのもの", kind: "未形式化", ledgerFragment: "付値" },
+      { leanFragment: "定理 X の付値計算そのもの", kind: "未形式化", ledgerFragment: "付値",
+        crossFilePhrase: "定理 X の付値計算", },
     ],
   },
   {
@@ -166,7 +201,8 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 29,
     heading: "形式化しなかったもの",
     items: [
-      { leanFragment: "系 Q7 の $r=2$ そのもの", kind: "未形式化", ledgerFragment: "系 Q7" },
+      { leanFragment: "系 Q7 の $r=2$ そのもの", kind: "未形式化", ledgerFragment: "系 Q7",
+        crossFilePhrase: "系 Q7 の $r=2$", },
       {
         leanFragment: "欠落調査は",
         kind: "参照だけ",
@@ -179,9 +215,12 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 33,
     heading: "形式化しなかったもの",
     items: [
-      { leanFragment: "定理 G2 の 1", kind: "未形式化", ledgerFragment: "定理 G2 の 1" },
-      { leanFragment: "系 Q7 の $r=2$", kind: "未形式化", ledgerFragment: "系 Q7" },
-      { leanFragment: "そのもの（voltage グラフのラプラシアン行列式）", kind: "未形式化", ledgerFragment: "matrix-tree" },
+      { leanFragment: "定理 G2 の 1", kind: "未形式化", ledgerFragment: "定理 G2 の 1",
+        crossFilePhrase: "定理 G2 の 1（Galois 不変性）", },
+      { leanFragment: "系 Q7 の $r=2$", kind: "未形式化", ledgerFragment: "系 Q7",
+        crossFilePhrase: "系 Q7 の $r=2$", },
+      { leanFragment: "そのもの（voltage グラフのラプラシアン行列式）", kind: "未形式化", ledgerFragment: "matrix-tree",
+        crossFilePhrase: "voltage グラフのラプラシアン行列式", },
     ],
   },
   {
@@ -231,7 +270,8 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     file: "DigitTheorem.lean",
     declarationsAtReview: 18,
     heading: "形式化しなかったもの",
-    items: [{ leanFragment: "命題 J2′ の", kind: "未形式化", ledgerFragment: "命題 J2′" }],
+    items: [{ leanFragment: "命題 J2′ の", kind: "未形式化", ledgerFragment: "命題 J2′",
+        crossFilePhrase: "命題 J2′ の同値", }],
   },
   {
     file: "DropAssumptionBStar.lean",
@@ -252,8 +292,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 23,
     heading: "形式化しなかったもの（理由）",
     items: [
-      { leanFragment: "の**導出**", kind: "未形式化", ledgerFragment: "導出" },
-      { leanFragment: "matrix-tree 定理が要り", kind: "未形式化", ledgerFragment: "matrix-tree" },
+      { leanFragment: "の**導出**", kind: "未形式化", ledgerFragment: "導出",
+        crossFilePhrase: "4 通りの閉形式の導出", },
+      { leanFragment: "matrix-tree 定理が要り", kind: "未形式化", ledgerFragment: "matrix-tree",
+        crossFilePhrase: "$\\kappa_n$ の独立計算", },
     ],
   },
   {
@@ -261,10 +303,14 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 24,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
     items: [
-      { leanFragment: "定理 G2 の 1", kind: "未形式化", ledgerFragment: "定理 G2 の 1" },
-      { leanFragment: "定理 G2 の 3", kind: "未形式化", ledgerFragment: "定理 G2 の 3" },
-      { leanFragment: "非依存性", kind: "未形式化", ledgerFragment: "非依存性" },
-      { leanFragment: "Matrix–Tree 定理", kind: "未形式化", ledgerFragment: "matrix-tree" },
+      { leanFragment: "定理 G2 の 1", kind: "未形式化", ledgerFragment: "定理 G2 の 1",
+        crossFilePhrase: "定理 G2 の 1（Galois 不変性）", },
+      { leanFragment: "定理 G2 の 3", kind: "未形式化", ledgerFragment: "定理 G2 の 3",
+        crossFilePhrase: "定理 G2 の 3", },
+      { leanFragment: "非依存性", kind: "未形式化", ledgerFragment: "非依存性",
+        crossFilePhrase: "$A_{\\mathrm{gen}}$ の $L$ 非依存性", },
+      { leanFragment: "Matrix–Tree 定理", kind: "未形式化", ledgerFragment: "matrix-tree",
+        crossFilePhrase: "voltage グラフのラプラシアン行列式", },
     ],
   },
   {
@@ -293,6 +339,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "命題 W\\* は依然 部分的である。残っているのは 1 つで",
         kind: "未形式化",
         ledgerFragment: "無平方であることから",
+        crossFilePhrase: "無平方であることから $\\det G\\neq0$",
       },
     ],
   },
@@ -305,6 +352,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "が実際に零因子でないこと",
         kind: "未形式化",
         ledgerFragment: "無平方であることから",
+        crossFilePhrase: "無平方であることから $\\det G\\neq0$",
       },
       {
         leanFragment: "の可約な場合",
@@ -315,6 +363,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "の値を存在の形で述べる",
         kind: "未形式化",
         ledgerFragment: "整域でないので当たらない",
+        crossFilePhrase: "正準な代表を可約な場合に選ぶ",
       },
     ],
   },
@@ -327,6 +376,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "を直接導く段",
         kind: "未形式化",
         ledgerFragment: "無平方であることから",
+        crossFilePhrase: "無平方であることから $\\det G\\neq0$",
       },
     ],
   },
@@ -339,11 +389,13 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "の言う「$G$ の最大単因子」であること",
         kind: "未形式化",
         ledgerFragment: "単因子",
+        crossFilePhrase: "整除の鎖との一致",
       },
       {
         leanFragment: "の重複度の積の形",
         kind: "未形式化",
         ledgerFragment: "の重複度の積の形",
+        crossFilePhrase: "重複度の積の形",
       },
     ],
   },
@@ -358,7 +410,8 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         kind: "形式化済み",
         witness: "det_submatrix_ne_zero_iff_reach",
       },
-      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
+      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解",
+        crossFilePhrase: "指標分解", },
     ],
   },
   {
@@ -372,7 +425,8 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         kind: "形式化済み",
         witness: "det_submatrix_eq_one_or_neg_one",
       },
-      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
+      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解",
+        crossFilePhrase: "指標分解", },
     ],
   },
   {
@@ -424,9 +478,12 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 23,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
     items: [
-      { leanFragment: "補題 W2 の (iv)", kind: "未形式化", ledgerFragment: "補題 W2" },
-      { leanFragment: "定理 W4 の", kind: "未形式化", ledgerFragment: "定理 W4" },
-      { leanFragment: "系 W7", kind: "未形式化", ledgerFragment: "系 W7" },
+      { leanFragment: "補題 W2 の (iv)", kind: "未形式化", ledgerFragment: "補題 W2",
+        crossFilePhrase: "補題 W2 の (iv)", },
+      { leanFragment: "定理 W4 の", kind: "未形式化", ledgerFragment: "定理 W4",
+        crossFilePhrase: "定理 W4 の主張そのもの", },
+      { leanFragment: "系 W7", kind: "未形式化", ledgerFragment: "系 W7",
+        crossFilePhrase: "系 W7", },
     ],
   },
   {
@@ -434,8 +491,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 8,
     heading: "形式化しなかったもの（なぜ足りないのか）",
     items: [
-      { leanFragment: "定理 J7 の主張そのもの", kind: "未形式化", ledgerFragment: "定理 J7" },
-      { leanFragment: "の係数を「読み取る」段の一般形", kind: "未形式化", ledgerFragment: "読み取る" },
+      { leanFragment: "定理 J7 の主張そのもの", kind: "未形式化", ledgerFragment: "定理 J7",
+        crossFilePhrase: "定理 J7 の主張そのもの", },
+      { leanFragment: "の係数を「読み取る」段の一般形", kind: "未形式化", ledgerFragment: "読み取る",
+        crossFilePhrase: "$O$ 記法を型にしていない", },
     ],
   },
 ];
@@ -563,6 +622,26 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
  * 台帳が持っている数と実際の数が違えば、そのファイルに書き足し（または削除）があったのに
  * 残り一覧を読み直していない、ということである。
  */
+/**
+ * **別のファイルが同じ事柄を書いていないか**（cycle 37 step 4）。
+ *
+ * `未形式化` の項目の語が、他のファイルの本文（そのファイル自身の残り一覧を除く）に現れたら違反。
+ * ただし現れた側も同じ語を `未形式化` として宣言しているなら、2 つが一致しているので通す。
+ */
+export function auditCrossFilePhrase(
+  owner: string,
+  phrase: string,
+  otherFile: string,
+  otherDeclaresUnformalized: boolean,
+): string | null {
+  if (otherDeclaresUnformalized) return null;
+  return (
+    `[別のファイルが同じ事柄を書いている] ${owner} の「${phrase}」— ` +
+    `${otherFile} が同じ語について書いている。` +
+    `そちらで形式化したのなら、この項目の状態を直すこと（未形式化のままなら語を絞ること）`
+  );
+}
+
 export function auditDeclarationCount(
   entry: LeanRemainingFile,
   actual: number,

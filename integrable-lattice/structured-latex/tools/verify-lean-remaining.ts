@@ -16,6 +16,7 @@ import {
   LEAN_REMAINING_LEDGER,
   auditLeanRemaining,
   auditDeclarationCount,
+  auditCrossFilePhrase,
   parseRemainingSection,
   type LeanRemainingFile,
   type LeanRemainingReferent,
@@ -72,6 +73,59 @@ for (const entry of LEAN_REMAINING_LEDGER) {
   reviewChecked += 1;
   const v = auditDeclarationCount(entry, actual);
   if (v !== null) violations.push(v);
+}
+
+// --- 別のファイルが同じ事柄を書いていないか（cycle 37 step 4） ---------------------
+// cycle 36 step 4 の鈴は「そのファイルの宣言が増減したときだけ鳴る」ので、
+// 別のファイルに書かれた場合に鳴らなかった（cycle 37 が同じサイクル内で 2 回それをやった）。
+// 項目ごとに語を宣言させ、他のファイルの本文（そのファイル自身の残り一覧を除く）に
+// その語が現れたら読み直しを強制する。現れた側も同じ語を `未形式化` と宣言していれば通す。
+const bodyWithoutRemaining = new Map<string, string>();
+for (const file of leanFiles) {
+  const text = readFileSync(join(leanDir, file), "utf8");
+  const section = parsed.get(file);
+  if (!section) {
+    bodyWithoutRemaining.set(file, text);
+    continue;
+  }
+  // 残り一覧の節（見出しから次の `##` か doc コメントの終わりまで）を落とす。
+  const headingIndex = text.indexOf(`## ${section.heading}`);
+  if (headingIndex < 0) {
+    bodyWithoutRemaining.set(file, text);
+    continue;
+  }
+  const rest = text.slice(headingIndex);
+  const endRelative = rest.slice(3).search(/\n## |\n-\/|\n\/-!/);
+  const end = endRelative < 0 ? text.length : headingIndex + 3 + endRelative;
+  bodyWithoutRemaining.set(file, text.slice(0, headingIndex) + text.slice(end));
+}
+const unformalizedPhrases = new Map<string, Set<string>>();
+for (const entry of LEAN_REMAINING_LEDGER) {
+  const set = new Set<string>();
+  for (const item of entry.items) {
+    if (item.kind === "未形式化") set.add(item.crossFilePhrase);
+  }
+  unformalizedPhrases.set(entry.file, set);
+}
+let crossChecked = 0;
+let crossAgreed = 0;
+for (const entry of LEAN_REMAINING_LEDGER) {
+  for (const item of entry.items) {
+    if (item.kind !== "未形式化") continue;
+    crossChecked += 1;
+    for (const other of leanFiles) {
+      if (other === entry.file) continue;
+      const body = bodyWithoutRemaining.get(other);
+      if (body === undefined || !body.includes(item.crossFilePhrase)) continue;
+      const agrees = unformalizedPhrases.get(other)?.has(item.crossFilePhrase) ?? false;
+      if (agrees) {
+        crossAgreed += 1;
+        continue;
+      }
+      const v = auditCrossFilePhrase(entry.file, item.crossFilePhrase, other, agrees);
+      if (v !== null) violations.push(v);
+    }
+  }
 }
 
 // --- 対応表を導く（本文の lean 紐づけ × ファイルの宣言） -------------------------
@@ -216,6 +270,22 @@ console.log(
     "  限界: **数を直すときに本当に読み直したかは確かめられない**（数だけ合わせて通せる）。" +
     "強制できるのは読み直す機会が必ず訪れることだけである。" +
     "また**別ファイルに書いた場合は宣言が増えないので捕まらない**（そこは人の読みのままである）。",
+);
+console.log(
+  `  **cycle 37 step 4 で、その「別ファイルに書いた場合」を塞いだ**` +
+    `（項目ごとの語の走査 ${crossChecked} 件 / 両方が未形式化で一致した組 ${crossAgreed} 件）——` +
+    "**cycle 36 step 4 の観察（残り一覧が古くなるのは宣言が増減したときだけ）は誤りだった。" +
+    "cycle 37 が同じサイクルの中で 2 回反例を作った**" +
+    "（`EulerDualBasisCommRing.lean` の「当てはめ」が `WStarPowerBasisInstance.lean` へ、" +
+    "`TracePeriodAssembly.lean` の `hlift` の段が `TracePeriodWStarLift.lean` へ書かれ、" +
+    "どちらも元のファイルの宣言は 1 つも増えなかった）。\n" +
+    "  塞ぎ方は、項目ごとに語を宣言させ、**他のファイルの本文（そのファイル自身の残り一覧を除く）に" +
+    "その語が現れたら読み直しを強制する**ことである。" +
+    "**逃げ道は 1 つだけで、現れた側も同じ語を `未形式化` と宣言している場合に限り通す**" +
+    "（形式化した側を黙らせるためには使えない）。\n" +
+    "  限界: **語の選び方が検査の強さの上限である**（違う言い方で書けば素通りする）。" +
+    "語が広すぎれば偽陽性が出る。" +
+    "また分かるのは「同じ語について書いている」ことまでで、「形式化した」ことは分からない。",
 );
 
 if (violations.length > 0) {
