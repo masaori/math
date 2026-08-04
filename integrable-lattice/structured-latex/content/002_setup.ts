@@ -13,7 +13,7 @@ export default defineBlocks([
     kind: "heading",
     level: 1,
     origin: { path: "structured-latex/content/002_setup.ts", ordinal: 1 },
-    title: { text: "設定 — 整数スペクトル曲線と周期点数" },
+    title: { text: "設定" },
     labels: [],
   },
   {
@@ -28,11 +28,11 @@ export default defineBlocks([
         math(String.raw`d\ge1`),
         " を整数、",
         math(String.raw`P\in\mathbb{Z}[z_1^{\pm1},\dots,z_d^{\pm1}]\setminus\{0\}`),
-        " を整数係数の Laurent 多項式（**整数スペクトル曲線**）とする。",
+        " を整数係数の Laurent 多項式（整数スペクトル曲線）とする。",
       ]),
       paragraph([
         math(String.raw`L\ge1`),
-        " に対し**周期点数**と**簡約周期点数**を",
+        " に対し周期点数と簡約周期点数を",
       ]),
       displayMath(
         String.raw`a_L:=\prod_{z_1^{L}=\dots=z_d^{L}=1}P(z_1,\dots,z_d),
@@ -74,6 +74,11 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
       "sagemath/check/cycle14_T1_vp_two_var",
       "sagemath/check/cycle15_T1_monsky_shape",
     ],
+    lean: [
+      "IntegrableLattice.resultant_X_pow_char_pow_sub_one",
+      "IntegrableLattice.aOne_cast_zmod",
+      "IntegrableLattice.aTwo_cast_zmod",
+    ],
     statement: [
       paragraph([
         ref("paper_def_aL"),
@@ -110,7 +115,7 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
         " について適用すればよい。",
       ]),
       paragraph([
-        "**この表示は整数係数の有限計算である。**",
+        "この表示は整数係数の有限計算である。",
         "ℝ",
         " も ",
         math(String.raw`\mathbb{Q}_p`),
@@ -138,7 +143,7 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
         math(String.raw`\Omega_N(m)\in\mathbb{N}`),
         " は多重度）とする。有理点 ",
         math(String.raw`q\in\mathbb{Q}_{>0}`),
-        " での**Massieu 自由エントロピー**を",
+        " でのMassieu 自由エントロピーを",
       ]),
       displayMath(String.raw`\Phi_N:=\log Z_N(q)\in\Lambda`),
       paragraph([

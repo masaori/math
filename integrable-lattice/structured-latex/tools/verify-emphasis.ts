@@ -1,10 +1,10 @@
 /**
- * **検査 E（ノードをまたぐ強調）**。全ロケールの地の文について、
- * 強調 `**…**` が同じノードの中で閉じていることを確かめる。
+ * **検査 E（本文に強調指定を書かない）**。全ロケールの地の文に `**` が 1 つも無いことを確かめる。
  *
- * 何をなぜ見るかは `emphasis-model.ts` の doc を正本とする。要点だけ:
- * **生成器 `applyBold` は日本語版で何もしないので、同じ書き方が日本語で通り英語で落ちる。**
- * その非対称が 3 サイクル連続の再発を生んだ。ここでは判定をロケールに依存させない。
+ * 方針と理由は `emphasis-model.ts` の doc を正本とする。要点だけ:
+ * **本文では強調（太字）を使わない**（2026-08-03 ユーザーの価値判断）。
+ * 意味は文の構成と語の選択で担わせ、装飾に持たせない。
+ * 3 サイクルにわたり強調は事故の種であり、記録では止まらないことが実証されているので検査にする。
  */
 
 import { relative } from "node:path";
@@ -16,7 +16,6 @@ import {
   loadContentFilesForLocale,
   structuredLatexDir,
 } from "./content-modules.ts";
-import { editionFor } from "./editions.ts";
 import { type ProseSite, violationsIn } from "./emphasis-model.ts";
 
 const collect = (
@@ -75,41 +74,21 @@ for (const locale of knownLocales) {
   perLocale.push({ locale, blocks, sites: sites.length - before });
 }
 
-// 落とすのは強調を変換するロケールだけ（生成器が実際に落とす条件と同じにする）。
-// 変換しないロケールの分は「そのまま訳すと落ちる形」の在庫として件数だけ出す。
-const converting = knownLocales.filter((locale) => editionFor(locale).bold);
-const notConverting = knownLocales.filter((locale) => !editionFor(locale).bold);
-
-const violations = violationsIn(sites.filter((site) => converting.includes(site.locale)));
-const inventory = violationsIn(sites.filter((site) => notConverting.includes(site.locale)));
-
 console.log("");
-console.log("ノードをまたぐ強調の検査（検査 E）");
+console.log("本文に強調指定を書かない検査（検査 E）");
 console.log(
   `  走査: ロケール ${perLocale.length} 件 / ${perLocale
     .map((entry) => `${entry.locale}: ブロック ${entry.blocks}・地の文 ${entry.sites}`)
     .join(" / ")}`,
 );
 console.log(`  地の文 合計 ${sites.length} 件`);
-console.log(
-  `  違反として落とすロケール: ${converting.join(", ")}（editions.ts が bold: true と宣言する版）`,
-);
-console.log(
-  `  落とさないロケール: ${notConverting.join(", ")}（bold: false。生成器が強調を変換しないので、` +
-    "ノードをまたぐ強調がそのまま通る)",
-);
-console.log("");
-console.log(
-  `  **原文側の在庫: ${inventory.length} 件**（${notConverting.join(", ")} でノードをまたいでいる地の文）`,
-);
-console.log(
-  "    ↑ この件数は違反ではない。**そのまま訳すと変換する版で落ちる形**の在庫である。" +
-    "「原文では通っている」を理由に訳し写すと、必ずこの在庫から違反が生まれる。",
-);
+console.log("  方針: 本文では強調（太字）を使わない。地の文に `**` を書かない（ロケールに依らず違反）。");
+
+const violations = violationsIn(sites);
 
 if (violations.length > 0) {
   console.log("");
-  console.log(`  **閉じていない強調 ${violations.length} 件**`);
+  console.log(`  強調指定が書かれている地の文 ${violations.length} 件`);
   for (const violation of violations) {
     console.log(
       `    [${violation.site.locale}] ${violation.site.blockId} (${violation.site.field}, ** が ${violation.markerCount} 個)`,
@@ -118,8 +97,8 @@ if (violations.length > 0) {
     console.log(`      ${violation.sample}`);
   }
   console.log("");
-  console.log("  直し方: 強調を 1 つのノードの中で閉じる。数式をまたいで強調したいときは、");
-  console.log("  数式の前後それぞれの地の文で開いて閉じる（`**…**` を 2 つに分ける）。");
+  console.log("  直し方: `**` を消す。強調で持たせていた意味は、文の構成か語の選択で担わせる");
+  console.log("  （装飾に意味を持たせない）。");
   console.log("");
   console.log(`違反 ${violations.length} 件。`);
   process.exit(1);
@@ -127,12 +106,8 @@ if (violations.length > 0) {
 
 console.log("");
 console.log(
-  "  限界: 見るのは地の文ノードの中の `**` の対応だけ。強調の内容が適切かは見ない。" +
-    "`applyBold` が触る地の文（text / todo / cite.note）以外は対象外。",
-);
-console.log(
-  "  別件（本検査の担当外・未修正）: 変換しない版は `**` を素のアスタリスクとして印字する。" +
-    "詳細と実測は emphasis-model.ts の doc 末尾。",
+  "  限界: 見るのは `**` だけ。強調を外したときに意味が落ちていないかは機械で確かめられない" +
+    "（人が読んで書き換える）。参照用ノートは最終成果物に載らないので対象外。",
 );
 console.log("");
 console.log("違反 0 件。");

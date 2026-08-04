@@ -297,7 +297,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
 
 `structured-latex/locales/en/frontmatter.ts`（要旨）と
 `structured-latex/locales/en/content/010_prior_art.ts`（先行研究の節）、
-`structured-latex/locales/en/content/001a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
+`structured-latex/locales/en/content/003a_reader_guide.ts`（Survey としての枠づけ）を書いた際に確定させた語。
 **後続はここにある語を別の語で訳さないこと。**
 
 | 日本語 | 英語 | 根拠・注意 |
@@ -360,7 +360,7 @@ prime is $p$." を続ける）。数式ノードの多重集合は日本語版�
    一方で本文の地の文は「第 3 章」＝ "Chapter 3" と書いており、日本語版も同じ状態である。
    どちらへ寄せるかは生成器か本文のどちらかを変える判断であり、**独断で変えていない**。
    なお**章番号そのものは、序論より前に `level: 1` の見出しを足すと全部ずれる**ので、
-   英語版限定の節を足すときは末尾へ足すこと（`structured-latex/locales/en/content/001a_reader_guide.ts` の冒頭コメントを見よ）。
+   英語版限定の節を足すときは末尾へ足すこと（`structured-latex/locales/en/content/003a_reader_guide.ts` の冒頭コメントを見よ）。
 2. **要旨・表題・キーワード・MSC 2020**（`structured-latex/locales/en/frontmatter.ts`）。
    現在の値はすべて暫定であり、MSC の番号は一次情報と照合していない。
 3. **他章のラベルへの `ref()`**（第 5 章の英訳で暫定的に地の文にしてある）。

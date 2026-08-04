@@ -402,6 +402,28 @@ targets=(
   IntegrableLattice.gprime3_hypothesis_holds
   IntegrableLattice.junk_reading_excludes_ell_three
   IntegrableLattice.junk_reading_keeps_five_and_seven
+  # cycle 27 step 2（未検算だった 6 命題の証明ステップ + step 1 が本文へ入れた議論）
+  IntegrableLattice.gpp1_both_even
+  IntegrableLattice.gpp1_not_both_four
+  IntegrableLattice.gpp1_lambda_ne
+  IntegrableLattice.gpp1_st_not_both_ge
+  IntegrableLattice.sigma_ne_zero_of_lambda_ne_zero
+  IntegrableLattice.k5_argmin_unique_above
+  IntegrableLattice.r0_add_one_comm
+  IntegrableLattice.r0_empty_case
+  IntegrableLattice.lambda_u_at_zero
+  IntegrableLattice.lambda_u_eq_succ_log
+  IntegrableLattice.K_set_nonempty
+  IntegrableLattice.K_set_bounded
+  IntegrableLattice.u_ell2_four_dvd_iff
+  IntegrableLattice.u_ell2_two_dvd
+  IntegrableLattice.u_ell2_junk_reading_differs
+  IntegrableLattice.u4_ell2_five_coefficients
+  IntegrableLattice.u1_d_empty_case
+  IntegrableLattice.j1_freshman_dream
+  IntegrableLattice.w_lifting_step
+  IntegrableLattice.w_lifting_pow
+  IntegrableLattice.w_lifting_pow_specializes
 )
 
 {

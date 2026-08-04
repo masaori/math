@@ -18,7 +18,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { structuredLatexDir } from "./content-modules.ts";
-import { type ProseSite, unclosedEmphasis, violationsIn } from "./emphasis-model.ts";
+import { hasEmphasisMarkup, type ProseSite, violationsIn } from "./emphasis-model.ts";
 import { LEAN_TACTIC_ALLOWANCES } from "./lean-tactic-allowances.ts";
 import { keyOf, scanFile, type TacticPairAllowance } from "./lean-tactic-model.ts";
 
@@ -40,49 +40,45 @@ const site = (value: string): ProseSite => ({
 });
 
 // =============================================================================
-// 検査 E — ノードをまたぐ強調
+// 検査 E — 本文に強調指定を書かない
 // =============================================================================
 console.log("");
-console.log("検査 E（ノードをまたぐ強調）の検出テスト");
-console.log("  再現データ: cycle 24 step 4 / 25 step 4a / 25 step 4b が実際に書いた形。");
-console.log("  形は同じ——強調を数式ノードの手前で開き、数式のあとの地の文で閉じる。");
+console.log("検査 E（本文に強調指定を書かない）の検出テスト");
+console.log("  方針: 本文では強調（太字）を使わない（2026-08-03 ユーザーの価値判断）。");
+console.log("  再現データ: cycle 24 step 4 / 25 step 4a / 25 step 4b が実際に書いた形と、");
+console.log("  cycle 26 まで「正しい書き方」として通っていた形（1 ノードで閉じた強調）。");
 
-// 実際に書かれた形。paragraph の children は
-//   text("**the coefficient "), math("c"), text(" is determined**")
-// のように並ぶので、地の文ノード単位では `**` が 1 個ずつになる。
+// cycle 26 までは (1)(2) だけが違反で (3) は正しい書き方だった。
+// 強調そのものを使わないと決めたので、**3 つとも違反になる**。
 const CROSSING_OPEN = "**the coefficient ";
 const CROSSING_CLOSE = " is determined by the twisted stage data**";
 const CLOSED_IN_ONE_NODE = "**the coefficient is determined by the twisted stage data**";
 
-report(
-  "強調を開いたまま数式ノードへ渡す地の文（開き側）",
-  violationsIn([site(CROSSING_OPEN)]).length === 1,
-  `"${CROSSING_OPEN}" → 違反 ${violationsIn([site(CROSSING_OPEN)]).length} 件（期待 1）`,
-);
-report(
-  "数式ノードのあとで閉じる地の文（閉じ側）",
-  violationsIn([site(CROSSING_CLOSE)]).length === 1,
-  `"${CROSSING_CLOSE}" → 違反 ${violationsIn([site(CROSSING_CLOSE)]).length} 件（期待 1）`,
-);
-report(
-  "1 ノードの中で閉じている強調では挙がらない（偽陽性でない）",
-  violationsIn([site(CLOSED_IN_ONE_NODE)]).length === 0,
-  `"${CLOSED_IN_ONE_NODE}" → 違反 0 件`,
-);
+for (const [name, value] of [
+  ["強調を開いたまま数式ノードへ渡す地の文（開き側）", CROSSING_OPEN],
+  ["数式ノードのあとで閉じる地の文（閉じ側）", CROSSING_CLOSE],
+  ["1 ノードの中で閉じている強調（cycle 26 までは正しい書き方だった）", CLOSED_IN_ONE_NODE],
+] as const) {
+  report(
+    name,
+    violationsIn([site(value)]).length === 1,
+    `${JSON.stringify(value)} → 違反 ${violationsIn([site(value)]).length} 件（期待 1）`,
+  );
+}
 
-// 生成器 applyBold と同じ消し方をしているかの、境界の確認。
-const BOUNDARY: { value: string; unclosed: boolean; why: string }[] = [
-  { value: "強調なし", unclosed: false, why: "`**` が 0 個" },
-  { value: "**閉じている**", unclosed: false, why: "対応が取れている" },
-  { value: "**a**b**", unclosed: true, why: "3 個。1 組取ると 1 個残る" },
-  { value: "**a** **b**", unclosed: false, why: "4 個。2 組とも取れる" },
-  { value: "**", unclosed: true, why: "1 個だけ" },
-  { value: "**改行を\nまたぐ強調**", unclosed: false, why: "`s` フラグがあるので改行をまたいでも取れる" },
+// 境界: `**` が 1 つでもあれば違反、無ければ違反でない。対応の取れ方は問わない。
+const BOUNDARY: { value: string; flagged: boolean; why: string }[] = [
+  { value: "強調なし", flagged: false, why: "`**` が 0 個" },
+  { value: "**閉じている**", flagged: true, why: "対応が取れていても強調は書かない" },
+  { value: "**a**b**", flagged: true, why: "3 個" },
+  { value: "**a** **b**", flagged: true, why: "4 個" },
+  { value: "**", flagged: true, why: "1 個だけでも書かれている" },
+  { value: "アスタリスク 1 個 * は強調ではない", flagged: false, why: "`*` 単独は本文の語彙に無い" },
 ];
 for (const entry of BOUNDARY) {
   report(
-    `境界: ${JSON.stringify(entry.value)} は${entry.unclosed ? "挙がる" : "挙がらない"}`,
-    unclosedEmphasis(entry.value) === entry.unclosed,
+    `境界: ${JSON.stringify(entry.value)} は${entry.flagged ? "挙がる" : "挙がらない"}`,
+    hasEmphasisMarkup(entry.value) === entry.flagged,
     entry.why,
   );
 }

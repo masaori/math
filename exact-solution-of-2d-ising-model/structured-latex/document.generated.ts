@@ -17,7 +17,7 @@ import type {
   Note,
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
-import type { Label } from './labels.generated.ts'
+import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_000_calculation_formulae_00_09 from './content/000_calculation_formulae_00_09.ts'
 import blocks_000_calculation_formulae_10_19 from './content/000_calculation_formulae_10_19.ts'
 import blocks_000_calculation_formulae_20_29 from './content/000_calculation_formulae_20_29.ts'
@@ -52,6 +52,7 @@ import notes_005_exp_conjugation_lie_route from './notes/005_exp_conjugation_lie
 import notes_008_TV1_hatZ_hatY from './notes/008_TV1_hatZ_hatY.ts'
 import notes_008_group_theory_general from './notes/008_group_theory_general.ts'
 import notes_009_clifford_algebra from './notes/009_clifford_algebra.ts'
+
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
@@ -121,3 +122,9 @@ export type _NoIdCollision = AssertNoDuplicate<FindDuplicate<[...AllBlockIds, ..
 /** labels.generated.ts と content の実状が一致すること（両方向）。 */
 export type _NoStaleGeneratedLabel = AssertNoDuplicate<Exclude<Label, AllLabels[number]>>
 export type _NoMissingGeneratedLabel = AssertNoDuplicate<Exclude<AllLabels[number], Label>>
+
+/** 翻訳ロケール用のラベル型は原文のラベルを必ず含む。 */
+export type _AnyLocaleLabelIncludesLabel = Assert<Label extends AnyLocaleLabel ? true : never>
+
+/** 翻訳限定のラベルは原文のラベルと交わらない（交わればどちらの版のものか決まらない）。 */
+export type _TranslationOnlyLabelIsDisjoint = AssertNoDuplicate<Extract<TranslationOnlyLabel, Label>>

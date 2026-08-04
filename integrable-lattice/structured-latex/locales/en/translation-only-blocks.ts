@@ -22,7 +22,7 @@
  * 下の表で 1 件ずつ理由を要求される（認めたファイルへ後から無審査で足せないようにするため）。
  */
 export const TRANSLATION_ONLY_SEGMENTS: Readonly<Record<string, string>> = {
-  "001a_reader_guide.ts":
+  "003a_reader_guide.ts":
     "Expositiones Mathematicae の Survey Article としての枠づけと読者案内を置くファイル。" +
     "投稿を前提にしない日本語版は対応するファイルを持たない。中身の理由は下の各ブロックの登録を見よ。",
   "010_prior_art.ts":
@@ -31,7 +31,7 @@ export const TRANSLATION_ONLY_SEGMENTS: Readonly<Record<string, string>> = {
 };
 
 export const TRANSLATION_ONLY_BLOCKS: Readonly<Record<string, string>> = {
-  // --- 第 1 章末尾: Survey Article としての枠づけ（locales/en/content/001a_reader_guide.ts） ---
+  // --- 第 3 章の後: Survey Article としての枠づけと読者案内（locales/en/content/003a_reader_guide.ts） ---
 
   paper_014_remark_survey_scope:
     "投稿先調査（outputs/reports/paper001_submission_venue_survey.md §3.1）が、Expositiones の " +

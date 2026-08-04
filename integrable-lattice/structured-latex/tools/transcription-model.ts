@@ -203,9 +203,17 @@ export type SourceLink = {
 
 export type CoverageFinding = {
   block: string;
-  kind: "atom" | "term";
+  /**
+   * `atom` / `term` は「report にあるのに本文に無い」（転記の取りこぼし）。
+   *
+   * `covers-unanchored` は「台帳の `covers` に書いてあるのに **report に無い**」
+   * （cycle 27 step 4）。`covers` は台帳の書き手が書いた文なので、
+   * 本文とだけ突き合わせると「本文に在る語を `covers` へ書けば通る」状態が残る。
+   * **report 側にも錨を打つ**ことで、`covers` は両端で固定された橋渡しになる。
+   */
+  kind: "atom" | "term" | "covers-unanchored";
   item: string;
-  /** その項目が現れる report の行（人が確認するため）。 */
+  /** その項目が現れる report の行（人が確認するため）。`covers-unanchored` では `covers` 自身。 */
   where: string;
 };
 
@@ -364,6 +372,32 @@ export function checkCoverage(
     const usedCovers = fromReport.length === 0;
     if (usedCovers) coversFallbacks += 1;
     const picked = usedCovers ? [passage.covers] : fromReport;
+    // **`covers` は両端で固定する**（cycle 27 step 4）。
+    //
+    // cycle 26 step 4 が `covers` を照合対象へ回したことで「何も照合しない passage」は
+    // 0 件になったが、`covers` は**台帳の書き手が書いた文**なので、
+    // 本文とだけ突き合わせると「本文に在る語を `covers` へ書けば通る」状態が残る。
+    // すなわち report 側が固定されていない。**report 側にも錨を打つ**——
+    // `covers` から出た項目は、その passage の report 本文にも現れていなければならない。
+    // これで `covers` は「report と本文を橋渡しする宣言」になり、
+    // どちらか片方が動けば落ちる。
+    // 錨を打つのは**数式アトムだけ**である。`covers` は台帳の書き手が書いた**要約文**なので、
+    // 地の文の語（「構造」「限界」「計数」）は report を言い換えたものであるのが正常であり、
+    // 逐語一致を要求すると要約を書けなくする。**数式の記号は別**で、
+    // report に無い記号が `covers` に現れるのは、書き手が対応先を取り違えたか
+    // report が書き換わったかのどちらかである。
+    if (usedCovers) {
+      const reportAtoms = itemsOfSentence(scoped.join(" ")).atoms;
+      for (const atom of itemsOfSentence(passage.covers).atoms) {
+        if (reportAtoms.has(atom)) continue;
+        findings.push({
+          block: link.block,
+          kind: "covers-unanchored",
+          item: atom,
+          where: passage.covers.trim(),
+        });
+      }
+    }
     for (const line of picked) {
       const found = itemsOfSentence(line);
       for (const atom of found.atoms) {
@@ -462,6 +496,7 @@ export type GroundsFinding = {
     | "分担先のブロックがその項目を持っていない"
     | "参照先の記録が見つからない"
     | "positioning の目印が引用に無い"
+    | "positioning で数式を免除しようとしている"
     | "根拠の指定が短すぎて何も pin していない";
   detail: string;
 };
@@ -542,6 +577,21 @@ export async function checkExemptionGrounds(
           "positioning の目印が引用に無い",
           `引用が report の自己言及の語彙（${POSITIONING_MARKERS.join(" / ")}）を 1 つも含まない。` +
             `ただの数学の文を positioning と名乗って黙らせることはできない: "${grounds.reportQuote}"`,
+        );
+      }
+      // cycle 27 step 4: **positioning で数式アトムを免除させない。**
+      //
+      // 目印の検査（上）は「引用が自己言及の文であること」しか見ないので、
+      // 自己言及の文に含まれる**数式**を positioning と名乗って黙らせる余地が残っていた。
+      // 「report が自分の作業を位置づける言葉」は定義上**地の文の語**であって、
+      // 数式の記号がその役を負うことはない。型として排除する。
+      if (produced.atoms.has(item)) {
+        add(
+          item,
+          "positioning で数式を免除しようとしている",
+          "positioning は「report が自分の作業を位置づける言葉」に対する免除であり、" +
+            "数式の記号はその役を負わない。数式の差は notation / weaker / paraphrase など、" +
+            "本文の側も pin する型で説明すること。",
         );
       }
       continue; // 検証できるのはここまで（型の限界。件数を毎回出す）

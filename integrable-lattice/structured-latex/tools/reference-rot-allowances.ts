@@ -17,7 +17,7 @@ import type { ReferenceAllowance } from "./reference-rot-model.ts";
 export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   // --- 本文（ロケール）: cycle 24 step 2 の腐りのうち、手作業の訂正が届かなかった残り ---
   {
-    file: "structured-latex/locales/en/content/001a_reader_guide.ts",
+    file: "structured-latex/locales/en/content/003a_reader_guide.ts",
     reference: "content/000_reader_guide.ts",
     reason: "「当初の指示はここへ置くことだった。そうしていない」という否定の文脈で名を挙げている。",
     grounds: { type: "illustration", marker: "当初の指示はこの内容を" },
@@ -163,6 +163,21 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     reference: "inputs/queries/",
     reason: "同上。",
     grounds: { type: "historical", marker: "に置く設計だったが、cycle 0 の再定義以降は作っていない" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/Analysis/Polynomial/MahlerMeasure.lean",
+    reason:
+      "mathlib のファイル。形式化できない理由を一次情報で示すために、実測で見つけたファイル名を挙げている" +
+      "（このファイルは 1 変数 ℂ[X] の Mahler 測度で、多変数を扱っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/NumberTheory/MahlerMeasure.lean",
+    reason:
+      "同上（こちらは 1 変数 ℤ[X]）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
     file: "docs/paper-001-migration-status.md",

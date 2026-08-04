@@ -50,8 +50,6 @@ export type Edition = {
   habitatBrackets: readonly [string, string];
   /** 数式中の ★ の落とし先マクロ（版によって使えるフォントが違う）。 */
   starMacro: string;
-  /** 地の文の `**強調**` を `\textbf{}` へ写すか。 */
-  bold: boolean;
   /** `cite` ノードを出力できるか。できない版に渡されたら生成器が落とす。 */
   citations: null | {
     /** 書誌の正本（`structured-latex/` からの相対）。 */
@@ -93,7 +91,6 @@ const japanese: Edition = {
   habitatBrackets: ["［", "］"],
   escapeHeading: (habitat) => `\\small\\textbf{$\\mathbb{R}$ 脱出}（住処: ${habitat}）: `,
   starMacro: "\\jpstar{}",
-  bold: false,
   citations: null,
   renderDocument: ({ inner }) => `% 自動生成ファイル — 直接編集しない。
 % 生成元: structured-latex/content/（tools/build-latex.ts）
@@ -199,7 +196,6 @@ const english: Edition = {
   habitatBrackets: ["[", "]"],
   escapeHeading: (habitat) => `\\small\\textbf{Escape to $\\mathbb{R}$} (habitat: ${habitat}): `,
   starMacro: "\\starmark{}",
-  bold: true,
   citations: {
     bibPath: ["..", "outputs", "papers", "001_R_Lambda_duality", "refs.bib"],
     derivedName: "refs.generated",

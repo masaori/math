@@ -15,7 +15,7 @@ export default defineBlocks([
     kind: "heading",
     level: 1,
     origin: { path: "structured-latex/locales/en/content/002_setup.ts", ordinal: 1 },
-    title: { text: "Setting — integer spectral curves and the number of periodic points" },
+    title: { text: "Setting" },
     labels: [],
   },
   {
@@ -31,12 +31,12 @@ export default defineBlocks([
         math(String.raw`d\ge1`),
         " be an integer, and let ",
         math(String.raw`P\in\mathbb{Z}[z_1^{\pm1},\dots,z_d^{\pm1}]\setminus\{0\}`),
-        " be a Laurent polynomial with integer coefficients (an **integer spectral curve**).",
+        " be a Laurent polynomial with integer coefficients (an integer spectral curve).",
       ]),
       paragraph([
         "For ",
         math(String.raw`L\ge1`),
-        " we define the **number of periodic points** and the **reduced number of periodic points** by",
+        " we define the number of periodic points and the reduced number of periodic points by",
       ]),
       displayMath(
         String.raw`a_L:=\prod_{z_1^{L}=\dots=z_d^{L}=1}P(z_1,\dots,z_d),
@@ -78,6 +78,11 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
       "sagemath/check/cycle14_T1_vp_two_var",
       "sagemath/check/cycle15_T1_monsky_shape",
     ],
+    lean: [
+      "IntegrableLattice.resultant_X_pow_char_pow_sub_one",
+      "IntegrableLattice.aOne_cast_zmod",
+      "IntegrableLattice.aTwo_cast_zmod",
+    ],
     statement: [
       paragraph([
         "The quantity ",
@@ -116,7 +121,7 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
         " on the outside.",
       ]),
       paragraph([
-        "**This expression is a finite computation with integer coefficients.** It uses neither ",
+        "This expression is a finite computation with integer coefficients. It uses neither ",
         "ℝ",
         " nor ",
         math(String.raw`\mathbb{Q}_p`),
@@ -145,7 +150,7 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
         math(String.raw`\Omega_N(m)\in\mathbb{N}`),
         " is the multiplicity. At a rational point ",
         math(String.raw`q\in\mathbb{Q}_{>0}`),
-        " we define the **Massieu free entropy** by",
+        " we define the Massieu free entropy by",
       ]),
       displayMath(String.raw`\Phi_N:=\log Z_N(q)\in\Lambda`),
       paragraph([

@@ -29,7 +29,9 @@
  * そこで**新しい `level: 1` 見出しを作らず**、ファイル名を `001_intro.ts` と `002_setup.ts` の間に
  * 挿さる `001a_...` にして、ブロックを**第 1 章（序論）の末尾**へ置いた。章番号は 1 つも動かない。
  * これは投稿先調査が「**序論で**書き足す必要がある」と書いていることとも一致する。
- * （`'_'` = 0x5F < `'a'` = 0x61 なので、`001_intro.ts` < `001a_reader_guide.ts` < `002_setup.ts`。）
+ * （`'_'` = 0x5F < `'a'` = 0x61 なので、`003_archimedean.ts` < `003a_reader_guide.ts` < `004_lambda_finite.ts`。）
+ * cycle 27 でこの位置へ移した。第 1 章末尾に置くと、案内が第 2–3 章で定義する語
+ * （整数スペクトル曲線・周期点数・Mahler 測度）を定義より前に使うことになるためである。
  *
  * 章番号を動かさずに済むので、後ろに足す章（`008_theta_padic.ts` = 第 9 章、
  * `010_prior_art.ts` = 第 10 章）だけが新しい章になる。
@@ -52,7 +54,7 @@ export default defineBlocks([
   {
     id: "paper_014_remark_survey_scope",
     kind: "remark",
-    origin: { path: "structured-latex/locales/en/content/001a_reader_guide.ts", ordinal: 1 },
+    origin: { path: "structured-latex/locales/en/content/003a_reader_guide.ts", ordinal: 1 },
     title: { text: "What this survey surveys" },
     labels: ["paper_survey_scope"],
     habitat: "mixed",
@@ -73,7 +75,7 @@ export default defineBlocks([
       ]),
       list([
         [
-          "**At the archimedean place**, ",
+          "At the archimedean place, ",
           math(String.raw`P`),
           " produces its Mahler measure. This is the entropy of the associated algebraic ",
           math(String.raw`\mathbb{Z}^d`),
@@ -86,7 +88,7 @@ export default defineBlocks([
           ", open since 1933.",
         ],
         [
-          "**At the non-archimedean places**, at each prime ",
+          "At the non-archimedean places, at each prime ",
           math(String.raw`p`),
           ", the same ",
           math(String.raw`P`),
@@ -102,7 +104,7 @@ export default defineBlocks([
         ],
       ]),
       paragraph([
-        "**What this survey gives an overview of is these two literatures laid side by side along one axis: decidability.**",
+        "What this survey gives an overview of is these two literatures laid side by side along one axis: decidability.",
         " The axis is not decoration. It separates them cleanly: on the archimedean ",
         "side the central quantity is a real number and the central open problem is a continuous gap, ",
         "while on the ",
@@ -111,7 +113,7 @@ export default defineBlocks([
         math(String.raw`\Lambda`),
         ", rational numbers, or algebraic numbers — and a family of the statements about them comes with ",
         "an explicit decision procedure and a witness (Propositions A, B, C, N, L of Chapter 4 and ",
-        "Propositions T, V, W of Chapter 6). **The countable side is not uniformly decidable**, and ",
+        "Propositions T, V, W of Chapter 6). The countable side is not uniformly decidable, and ",
         "Chapter 5 marks the two places where it is not: the predicate of Proposition F (F2) is ",
         "undecidable for ",
         math(String.raw`d\ge2`),
@@ -122,7 +124,7 @@ export default defineBlocks([
         "The four items this paper supplies, listed in ",
         ref("paper_positioning"),
         ", are what the two sides look like once they are put in this single frame. ",
-        "**They are a rearrangement of known mathematics, not new theorems.** Chapter 12 says, ",
+        "They are a rearrangement of known mathematics, not new theorems. Chapter 12 says, ",
         "proposition by proposition, what is already in the literature and what was not found there.",
       ]),
     ],
@@ -130,7 +132,7 @@ export default defineBlocks([
   {
     id: "paper_015_remark_reading_guide",
     kind: "remark",
-    origin: { path: "structured-latex/locales/en/content/001a_reader_guide.ts", ordinal: 2 },
+    origin: { path: "structured-latex/locales/en/content/003a_reader_guide.ts", ordinal: 2 },
     title: { text: "How to read this survey, and what is not assumed" },
     labels: ["paper_reading_guide"],
     habitat: "mixed",
@@ -140,13 +142,13 @@ export default defineBlocks([
       "a set, not uses of it; no element of ℝ is constructed here and no argument is carried out over ℝ.",
     statement: [
       paragraph([
-        "**What the reader is assumed to know.** The backbone is undergraduate algebra: finite fields, ",
+        "What the reader is assumed to know. The backbone is undergraduate algebra: finite fields, ",
         "the resultant of two polynomials, the Smith normal form of an integer matrix, the linear ",
         "independence of characters, and the Newton polygon of a polynomial over a valued field. Each of ",
         "these is used concretely and is recalled where it is first needed.",
       ]),
       paragraph([
-        "**What is quoted rather than proved.** Three bodies of results are used as black boxes, always ",
+        "What is quoted rather than proved. Three bodies of results are used as black boxes, always ",
         "with a reference and a proposition number: the topological entropy of an algebraic ",
         math(String.raw`\mathbb{Z}^d`),
         "-action (Chapter 3), the theorems of Monsky and of Cuoco–Monsky on Iwasawa modules over ",
@@ -155,14 +157,14 @@ export default defineBlocks([
         "takes these on trust can follow every argument that this paper carries out itself.",
       ]),
       paragraph([
-        "**Three isolated points go further, and each is confined to one statement.** Chapter 4 uses the ",
+        "Three isolated points go further, and each is confined to one statement. Chapter 4 uses the ",
         "different and the ramification data of a number field, in Proposition W* alone; Chapter 5 uses ",
         "the halting problem, in part (F2) of Proposition F alone; and Chapter 5 uses Newton polytopes ",
         "and their Minkowski decomposition, in Proposition G' alone. Nothing later depends on any of the ",
         "three.",
       ]),
       paragraph([
-        "**What the reader is not assumed to know.** Neither ",
+        "What the reader is not assumed to know. Neither ",
         math(String.raw`p`),
         "-adic analysis nor Iwasawa theory is a prerequisite. This is not a courtesy to the reader but a ",
         "property of the argument: the ",
@@ -174,7 +176,7 @@ export default defineBlocks([
         "are not reproved.",
       ]),
       paragraph([
-        "**Where the real numbers are used.** Exactly one chapter uses ",
+        "Where the real numbers are used. Exactly one chapter uses ",
         math(String.raw`\mathbb{R}`),
         ": Chapter 3, and there it is the single limit ",
         math(String.raw`L\to\infty`),
@@ -182,7 +184,7 @@ export default defineBlocks([
         "style; separating the two is the organising principle of the paper.",
       ]),
       paragraph([
-        "**The two labels attached to every proposition.** Each statement below carries a declared ",
+        "The two labels attached to every proposition. Each statement below carries a declared ",
         "habitat — the set its quantities live in, one of ",
         math(String.raw`\mathbb{N},\mathbb{Z},\mathbb{Q},\Lambda,\overline{\mathbb{Q}},\mathbb{R},\mathbb{C}`),
         " — and, whenever that habitat is uncountable, an explicit escape to ",
@@ -191,17 +193,17 @@ export default defineBlocks([
         "down the length of the paper already gives the map that the paper is about.",
       ]),
       paragraph([
-        "**The route through the chapters.** Chapter 2 fixes the integer spectral curve and the counting ",
+        "The route through the chapters. Chapter 2 fixes the integer spectral curve and the counting ",
         "quantities. Chapter 3 is the archimedean side and is entirely quotation of known results. ",
         "Chapter 4 develops the finite, decidable face of the ",
         math(String.raw`\Lambda`),
         " side. Chapter 5 is the dictionary itself, which is the centre of the paper. Chapter 6 gives ",
         "three propositions with explicit decision procedures. Chapter 7 draws the asymmetry, Chapter 8 ",
         "states what the paper does not claim and what the formalisation in Lean does and does not cover, ",
-        "Chapter 9 refines the vanishing depth of Chapter 5 over the ",
+        "Chapter 9 refines the depth notion introduced in Chapter 5 over the ",
         math(String.raw`\ell`),
         "-adic points, Chapters 10 and 11 close two gaps that the refinement leaves open — a decision ",
-        "procedure for the points of infinite vanishing depth, and a recursion which shows that the ",
+        "procedure for the points where that depth is infinite, and a recursion which shows that the ",
         "cancellation feared there cannot occur — ",
         "and Chapter 12 sets the propositions against the literature. A reader who wants only the dictionary ",
         "can read Chapters 2, 5 and 7.",

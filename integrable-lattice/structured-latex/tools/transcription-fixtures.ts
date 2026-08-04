@@ -43,12 +43,14 @@ export const FIXTURES: readonly Fixture[] = [
     ops: [
       {
         op: "replaceProse",
-        find: "**ただし Skolem–Mahler–Lech 型の相殺により例外が生じる。**",
-        replace: "**ただし Skolem–Mahler–Lech 型の相殺により、有限個の ",
+        find: "ただし Skolem–Mahler–Lech 型の相殺により例外が生じる。",
+        replace: "ただし Skolem–Mahler–Lech 型の相殺により、有限個の ",
       },
+      // cycle 27: 本文から作業ツリー固有の記述（サイクル番号つきの経緯）を落としたので、
+      // 再現データもその 2 行を指さない形へ更新した。狙い（「算術級数の有限和」を本文から
+      // 消すと転記検査が赤くなること）は変えていない。
       { op: "dropProse", find: "例外集合は算術級数の有限和であり" },
-      { op: "dropProse", find: "を取り違えたものである）。" },
-      { op: "dropProse", find: "（cycle 18 の Lean 形式化で発見した本文の誤り" },
+      { op: "dropProse", find: "（有限集合ではない。この点は形式化で確かめてある）。" },
     ],
     expect: { check: "A", contains: "算術級数" },
   },
@@ -58,8 +60,8 @@ export const FIXTURES: readonly Fixture[] = [
       "コミット ac98013 が足した。根拠 report は outputs/reports/cycle19_T3_theta_ge_ell_plus_1.md の " +
       "定理 J2 の証明で、最後の等号が cycle 18 補題 A2 (1)（$A_1\\equiv0$）から従うと書いてある。" +
       "この仮定を落とすと $m=\\ell^L$ ちょうどの段は偽になる（本文に反例が入っている）。" +
-      "**cycle 25 step 4a で本文へ証明が入り、$A_1$ は statement だけでなく proof にも現れるようになった。** " +
-      "事故を再現するには**ブロック全体から**この仮定を落とす必要があるので、" +
+      "cycle 25 step 4a で本文へ証明が入り、$A_1$ は statement だけでなく proof にも現れるようになった。 " +
+      "事故を再現するにはブロック全体からこの仮定を落とす必要があるので、" +
       "差分の対象を `A_1\\equiv0` ちょうどから `A_1` を含む数式すべてへ広げた" +
       "（`A_1\\equiv0` だけを落とすと proof 側の $A_1=0$・$\\overline{A_1(u,v)}=0$ が残り、" +
       "検査は「本文にある」と正しく判定して赤にならない）。",
@@ -150,7 +152,7 @@ export const EXEMPTION_ROTS: readonly ExemptionRot[] = [
     name: "「別のブロックが持っている」と言っている分担先が、それを失った",
     provenance:
       "分担（division）は、論文全体で見れば内容が残っていることを根拠に落としている。" +
-      "分担先が落とせば、論文全体からその内容が消える。**どのブロックも自分の担当だけを見ているので、誰も気付かない。**",
+      "分担先が落とせば、論文全体からその内容が消える。どのブロックも自分の担当だけを見ているので、誰も気付かない。",
     block: "paper_013_remark_four_axes",
     item: "\\Omega",
     mutate: { kind: "holderLostItem" },
@@ -169,7 +171,7 @@ export const EXEMPTION_ROTS: readonly ExemptionRot[] = [
   {
     name: "「report のほうが古い」の、解消した側の記録が消えた",
     provenance:
-      "reportStale は 2 本の report の**前後関係**に寄りかかっている。解消した側が動けば判定は無効になる。",
+      "reportStale は 2 本の report の前後関係に寄りかかっている。解消した側が動けば判定は無効になる。",
     block: "paper_081_remark_scope",
     item: "未確認",
     mutate: { kind: "refRecordGone" },
@@ -188,10 +190,16 @@ export const EXEMPTION_ROTS: readonly ExemptionRot[] = [
   {
     name: "引用が report の複数の文に当たる（どの文が根拠か特定できない）",
     provenance:
-      "「(H) を仮定し、塔が**非退化**」のような定型句は report の中で何度も出る（定理 N1 と定理 N2）。" +
+      "「(H) を仮定し、塔が非退化」のような定型句は report の中で何度も出る（定理 N1 と定理 N2）。" +
       "複数に当たる引用は「その文が動いたら落ちる」という pin になっていないので、根拠として認めない。",
+    // cycle 27 step 1 まではこの再現データは同じブロックの免除「仮定」を使っていた。
+    // その免除は、本文へ (G6) の $\min\emptyset$ の規約を入れた際に「仮定」の語が本文へ現れて失効し、
+    // 台帳から消えた（**免除が余れば赤くなる**という設計どおりの動き）。
+    // 再現データが生きた台帳を引いているので、同じブロックの現存する免除へ付け替える。
+    // 差分の種類（引用が report の複数の文に当たる）は変えていない。
     block: "paper_053_theorem_lower_order",
-    item: "仮定",
+    item: "同値",
+    // report は本文と違い強調記法を今も使うので、この引用は report の字面どおり（`**非退化**`）にする。
     mutate: { kind: "quotePointsElsewhere", reportQuote: "(H) を仮定し、塔が**非退化**" },
     expect: "根拠の引用が report の複数の文に当たる",
   },

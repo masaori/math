@@ -160,10 +160,69 @@ const report26 = (name: string, ok: boolean, detail: string): void => {
   );
 }
 
-const total = FIXTURES.length + EXEMPTION_ROTS.length + cycle26Checks;
+// =============================================================================
+// cycle 27 step 4 で足した 2 つの強化が効いていることの実証
+// =============================================================================
+console.log("\n[cycle 27 step 4] `covers` を report 側にも錨で固定する / positioning で数式を免除させない");
+
+let cycle27Checks = 0;
+const report27 = (name: string, ok: boolean, detail: string): void => {
+  cycle27Checks += 1;
+  if (!ok) failures += 1;
+  console.log(`  ${ok ? "検出" : "**失敗**"}: ${name}`);
+  console.log(`      ${detail}`);
+};
+
+// (1) `covers` の錨 — report に無い記号を `covers` へ書くと赤くなること。
+{
+  const link = SOURCE_LINKS.find((l) => l.block === "paper_054_remark_limits");
+  const view = views.get("paper_054_remark_limits");
+  if (link === undefined || view === undefined) throw new Error("再現データのブロックが無い");
+  const passages = [];
+  for (const passage of link.passages) {
+    passages.push({ passage, lines: (await readPassage(passage)).lines });
+  }
+  // 錨が打たれている現状では静かであること（偽陽性でない）。
+  const clean = checkCoverage(link, view, passages).findings
+    .filter((f) => f.kind === "covers-unanchored");
+  report27(
+    "錨が打たれている `covers` は静か（偽陽性でない）",
+    clean.length === 0,
+    `covers-unanchored ${clean.length} 件（期待 0）`,
+  );
+  // report に無い記号を `covers` へ足すと赤くなること。
+  const tampered = passages.map(({ passage, lines }) => ({
+    passage: { ...passage, covers: passage.covers + " と $\\zeta_{\\mathrm{fake}}$" },
+    lines,
+  }));
+  const dirty = checkCoverage(link, view, tampered).findings
+    .filter((f) => f.kind === "covers-unanchored");
+  report27(
+    "report に無い記号を `covers` へ書くと赤くなる",
+    dirty.length > 0,
+    `covers-unanchored ${dirty.length} 件（期待 1 件以上）。台帳の書き手が対応先を取り違えても止まる`,
+  );
+}
+
+// (2) positioning で数式を免除させない。
+{
+  const positioningItems = SOURCE_LINKS.flatMap((l) =>
+    l.acknowledged.filter((a) => a.grounds.type === "positioning").map((a) => a.item),
+  );
+  // 現存する positioning の免除の対象は、いずれも地の文の語であること。
+  const anyMath = positioningItems.filter((item) => /\\|\^|_\{|\$/.test(item));
+  report27(
+    "現存する positioning の免除は数式を 1 つも対象にしていない",
+    anyMath.length === 0,
+    `positioning ${positioningItems.length} 件のうち数式を対象にするもの ${anyMath.length} 件（期待 0）`,
+  );
+}
+
+const total = FIXTURES.length + EXEMPTION_ROTS.length + cycle26Checks + cycle27Checks;
 console.log(
   `\n${total - failures} / ${total} 件で検出を実証した` +
-    `（転記事故 ${FIXTURES.length} 件 + 免除の腐り ${EXEMPTION_ROTS.length} 件 + cycle 26 の強化 ${cycle26Checks} 件）。`,
+    `（転記事故 ${FIXTURES.length} 件 + 免除の腐り ${EXEMPTION_ROTS.length} 件 + cycle 26 の強化 ${cycle26Checks} 件` +
+    ` + cycle 27 の強化 ${cycle27Checks} 件）。`,
 );
 if (failures > 0) process.exit(1);
 

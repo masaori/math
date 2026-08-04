@@ -50,7 +50,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "が高位で消える **Skolem–Mahler–Lech 例外**（算術級数の有限和）でスパイクしうる",
-          bodyQuote: "例外集合は算術級数の有限和であり、**一般に無限集合である**",
+          bodyQuote: "例外集合は算術級数の有限和であり、一般に無限集合である",
         },
       },
       {
@@ -60,7 +60,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "example",
           reportQuote: "ただし $S(N)$ が高位で消える",
-          bodyQuote: "**すべての奇数",
+          bodyQuote: "すべての奇数",
         },
       },
     ],
@@ -447,7 +447,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "notation",
           reportQuote: "**帰属/存在**: 有限・離散なら",
-          bodyQuote: "**軸 1（帰属）**",
+          bodyQuote: "軸 1（帰属）",
         },
       },
       {
@@ -507,7 +507,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "**有限側の本体軸**。",
-          bodyQuote: "**軸 3（複雑性）**: 有限サイズで多項式時間か #P 困難か。",
+          bodyQuote: "軸 3（複雑性）: 有限サイズで多項式時間か #P 困難か。",
         },
       },
       {
@@ -517,7 +517,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "**有限側の本体軸**。",
-          bodyQuote: "**軸 3（複雑性）**: 有限サイズで多項式時間か #P 困難か。",
+          bodyQuote: "軸 3（複雑性）: 有限サイズで多項式時間か #P 困難か。",
         },
       },
       {
@@ -527,7 +527,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "は 1 を（有限・離散のとき）保証するだけ",
-          bodyQuote: "**軸 1・2 は軸 4 を何も含意しない。**",
+          bodyQuote: "軸 1・2 は軸 4 を何も含意しない。",
         },
       },
     ],
@@ -641,7 +641,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "**$f$ に零点条件は課されていない。",
-          bodyQuote: "**仮定は無い**",
+          bodyQuote: "仮定は無い",
         },
       },
       {
@@ -795,7 +795,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "$N_0(p,k),\\pi(p,k)$ および各周期内の値は",
-          bodyQuote: "**最終周期的**",
+          bodyQuote: "最終周期的",
         },
       },
       {
@@ -805,7 +805,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "有限モノイドの元の冪は前周期＋周期に入る",
-          bodyQuote: "**最終周期的**",
+          bodyQuote: "最終周期的",
         },
       },
       {
@@ -815,7 +815,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "および各周期内の値は、$T$ から",
-          bodyQuote: "**最終周期的**",
+          bodyQuote: "最終周期的",
         },
       },
       {
@@ -905,7 +905,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "訂正後の等式そのもの（トレース列の読み）",
-          bodyQuote: "**【訂正】この主張は ",
+          bodyQuote: "【訂正】この主張は ",
         },
       },
       {
@@ -915,7 +915,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "訂正後の等式そのもの（トレース列の読み）",
-          bodyQuote: "**【訂正】この主張は ",
+          bodyQuote: "【訂正】この主張は ",
         },
       },
 ],
@@ -981,7 +981,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "命題 L の 4 分岐（$p$ 奇の $d\\mid L$ / $d\\nmid L$、$p=2$ の $L$ 奇 / 偶）",
-          bodyQuote: " 奇のとき**: ",
+          bodyQuote: " 奇のとき: ",
         },
       },
 ],
@@ -1004,7 +1004,9 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         report: "outputs/reports/cycle19_T3_trace_period_closed_form_and_lean.md",
         from: "**指数はこれ以上下げられない**",
-        to: "**指数はこれ以上下げられない**",
+        // cycle 27 step 4: 範囲を実例の行まで広げた。covers が挙げる $w^*$ は
+        // 反例（$T=F\\oplus F$, $p=2$, $w^*=1$）の行に在り、1 行だけでは report 側に錨が無かった。
+        to: "ちょうどである。",
         covers: "指数 $k-w^*-1$ の最良性",
       },
       {
@@ -1035,16 +1037,6 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
           type: "example",
           reportQuote: "$r=1$（$T=(c)$）のとき$g_0=v_p(c^{\\tau}-1)$",
           bodyQuote: "を固有値データから決める式が要るが、これは Wieferich 型の量であり",
-        },
-      },
-      {
-        item: "最小",
-        reason:
-          "「最小の反例」の「最小」。本文は同じ反例（$T=(3)$、$p=2$、$t_k=1,2,2,4,8,16$）を挙げている。",
-        grounds: {
-          type: "example",
-          reportQuote: "最小の反例:",
-          bodyQuote: "t_k=1,2,2,4,8,16",
         },
       },
           {
@@ -1196,7 +1188,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "は**決定不能**（停止問題と同値の困難さをもつ）",
-          bodyQuote: "**決定不能**である（停止問題に還元される）",
+          bodyQuote: "決定不能である（停止問題に還元される）",
         },
       },
       {
@@ -1206,7 +1198,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "weaker",
           reportQuote: "は**決定不能**（停止問題と同値の困難さをもつ）",
-          bodyQuote: "**決定不能**である（停止問題に還元される）",
+          bodyQuote: "決定不能である（停止問題に還元される）",
         },
       },
     ],
@@ -1314,17 +1306,6 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         },
       },
       {
-        item: "仮定",
-        reason:
-          "「(H) を仮定し」の (H) は cycle 14 以来の共通設定（有限連結多重グラフの $\\mathbb{Z}_\\ell^2$ 塔）であり、本文はこのブロックの冒頭で命題 W の設定を参照している。",
-        grounds: {
-          type: "division",
-          reportQuote: "(H) を仮定し、塔が**非退化**かつ $J_0=1$",
-          holder: "paper_063_theorem_W",
-          holderItem: "**非退化**",
-        },
-      },
-      {
         item: "同値",
         reason:
           "cycle 18 定理 C の但し書き「補題 A3p より、$\\ell$ が奇なら『$\\theta(P)\\le\\ell-1$』と同値」。本文 (G6) は $\\theta(P)\\le\\ell$ の側だけを条件として書いており、奇 $\\ell$ での同値な言い換えを主張していない（弱い方だけを書いている）。",
@@ -1342,7 +1323,9 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       {
         report: "outputs/reports/cycle16_T1_monsky_primary_sources.md",
         from: "and an explicit interpretation of $l_0$ is given. The other coefficients remain mysterious.",
-        to: "and an explicit interpretation of $l_0$ is given. The other coefficients remain mysterious.",
+        // cycle 27 step 4: covers が挙げる $m_0$ は Definition 1.1 で定義されている。
+        // 1 行だけの範囲では report 側に錨が無かったので、その定義まで広げた。
+        to: "**Definition 1.1.**",
         covers: "限界 (i)（$m_0$ と $l_0$ 以外の係数は原論文が mysterious と明記している）",
       },
       {
@@ -1365,7 +1348,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "限界 (i)（$m_0$ と $l_0$ 以外の係数は原論文が mysterious と明記している）",
-          bodyQuote: "**原典もそう述べている**",
+          bodyQuote: "原典もそう述べている",
         },
       },
       {
@@ -1385,7 +1368,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "notation",
           reportQuote: "限界 (i)（低位項の係数に明示式が無く、$d=2$ で有理数であることしか示されていないこと）",
-          bodyQuote: "）の明示公式が無い。**",
+          bodyQuote: "）の明示公式が無い。",
         },
       },
 ],
@@ -1501,7 +1484,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "$d=-2$ と完全に決まる",
-          bodyQuote: " の係数からの**有限計算で判定できる**。",
+          bodyQuote: " の係数からの有限計算で判定できる。",
         },
       },
     ],
@@ -1513,7 +1496,8 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         report: "sagemath/check/cycle10_T3_lehmer/padic_analog_README.md",
         from: "## 結論: Λ 側に Lehmer 型問題は存在しない（決定可能側）",
         to: "誇張しない。",
-        covers: "二素点の難易度が対称でないこと（ℝ 側の Lehmer 問題 ↔ Λ 側の離散な $\\mu$）と、新しい定理ではないこと",
+        // cycle 27 step 4: report が書いているのは $\\mu_p$（岩澤不変量）なので、記号をそちらへ揃えた。
+        covers: "二素点の難易度が対称でないこと（ℝ 側の Lehmer 問題 ↔ Λ 側の離散な $\\mu_p$）と、新しい定理ではないこと",
       },
       {
         report: "sagemath/check/cycle10_T3_lehmer/README.md",
@@ -1523,6 +1507,19 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
       },
     ],
     acknowledged: [
+      {
+        item: "\\mu_{p}",
+        reason:
+          "report は岩澤不変量を $\\mu_p$（素点 $p$ を添字に明示）と書き、本文は同じ量を「岩澤型不変量 $\\mu\\in\\mathbb{Z}_{\\ge0}$」と添字なしで書いている。本注記は特定の $p$ を固定せず「$\\Lambda$ 側の不変量は離散である」という性質だけを述べるので、添字を落とした表記を採っている。量も主張も同じで、記法の選択の差である。",
+        grounds: {
+          type: "notation",
+          // この passage は条件文が 1 文も取れないので、免除の引用は台帳の covers に対して照合される。
+          // その covers 自身が report に錨を打たれている（cycle 27 step 4 の検査）ので、
+          // 免除 → covers → report と鎖がつながる。
+          reportQuote: "Λ 側の離散な $\\mu_p$",
+          bodyQuote: "\\mu\\in\\mathbb{Z}_{\\ge0}",
+        },
+      },
       {
         item: "測度・エントロピー",
         reason:
@@ -1583,7 +1580,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "の一階理論が決定可能であること（Ax–Kochen / Ershov）、可算符号化は標準手法であること",
-          bodyQuote: "**既出性の調査結果**",
+          bodyQuote: "既出性の調査結果",
         },
       },
 ],
@@ -1631,7 +1628,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "命題 T の既出性判定（弱い形が既出）",
-          bodyQuote: "が偶数）が既出**（Kwon–Mednykh–Mednykh）",
+          bodyQuote: "が偶数）が既出（Kwon–Mednykh–Mednykh）",
         },
       },
 ],
@@ -1659,7 +1656,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
-          bodyQuote: "**形式化の現状（完了・部分的・未着手と、その理由）は ",
+          bodyQuote: "形式化の現状（完了・部分的・未着手と、その理由）は ",
         },
       },
       {
@@ -1669,7 +1666,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "形式化の現状表の判定語（完了 / 部分的 / 未着手。未着手はなぜかを一次情報で明記する）",
-          bodyQuote: " の表に記録する。**",
+          bodyQuote: " の表に記録する。",
         },
       },
       {
@@ -1768,7 +1765,7 @@ export const SOURCE_LINKS: readonly SourceLink[] = [
         grounds: {
           type: "paraphrase",
           reportQuote: "命題 Q (Q6)（数え上げ恒等式）",
-          bodyQuote: "**(Q1 整数のままの分解)** ",
+          bodyQuote: "(Q1 整数のままの分解) ",
         },
       },
 ],

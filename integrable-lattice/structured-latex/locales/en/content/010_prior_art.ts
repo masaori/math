@@ -77,7 +77,7 @@ export default defineBlocks([
         "distributed over the proofs, so that a reader can see the whole of it at once.",
       ]),
       paragraph([
-        "**The overall verdict is that the content of this paper is broadly known.** Below, each ",
+        "The overall verdict is that the content of this paper is broadly known. Below, each ",
         "contribution and each of the three propositions of Chapter 6 is set against what the literature ",
         "already contains. In every case we state what is known, and we state the difference — where there ",
         "is one — without claiming that the difference is new.",
@@ -93,7 +93,7 @@ export default defineBlocks([
     habitat: "none",
     statement: [
       paragraph([
-        "**Contribution (b) must not be read as the idea of replacing an uncountable object by a countable code. That idea is standard and long established.**",
+        "Contribution (b) must not be read as the idea of replacing an uncountable object by a countable code. That idea is standard and long established.",
       ]),
       list([
         [
@@ -116,15 +116,15 @@ export default defineBlocks([
         ],
       ]),
       paragraph([
-        "**The difference this paper offers is therefore one single point, and it is not countability.** ",
+        "The difference this paper offers is therefore one single point, and it is not countability. ",
         "In the reverse-mathematics coding, equality of real numbers and of ",
         math(String.raw`p`),
-        "-adic numbers does **not** become decidable. On the ",
+        "-adic numbers does not become decidable. On the ",
         math(String.raw`\Lambda`),
         " side used here, equality is agreement of prime factorisations, and in ",
         math(String.raw`\overline{\mathbb{Q}}`),
         " it is separation of roots; both are decided by a finite procedure. The move that matters is thus ",
-        "**not that the objects were made countable, but that equality was brought down to a decidable level.**",
+        "not that the objects were made countable, but that equality was brought down to a decidable level.",
       ]),
       paragraph([
         "We did not find literature treating ",
@@ -133,7 +133,7 @@ export default defineBlocks([
         "none exists; see the final block of this chapter.",
       ]),
       paragraph([
-        "It should also be recorded that the motivation here is **not** undecidability of ",
+        "It should also be recorded that the motivation here is not undecidability of ",
         math(String.raw`\mathbb{Q}_p`),
         ". The first-order theory of ",
         math(String.raw`\mathbb{Q}_p`),
@@ -157,7 +157,7 @@ export default defineBlocks([
       ]),
       list([
         [
-          "**Proposition V is known in the one-variable case.** For ",
+          "Proposition V is known in the one-variable case. For ",
           math(String.raw`d=1`),
           ", the sequence counting periodic points is a Dold sequence, and the Gauss congruence built ",
           "into the definition of such a sequence gives ",
@@ -166,7 +166,7 @@ export default defineBlocks([
           cite(["ByszewskiGraffWard2021"], "Definition 2.1"),
           "; iterating over ",
           math(String.raw`n=p^k`),
-          " yields the statement. **The difference here is confined to one point**: the argument given ",
+          " yields the statement. The difference here is confined to one point: the argument given ",
           "below allows ",
           math(String.raw`a_L=0`),
           " and is unconditional for arbitrary ",
@@ -177,7 +177,7 @@ export default defineBlocks([
           "enough that it may well be folklore.",
         ],
         [
-          "**A weaker form of Proposition T is known.** Kwon–Mednykh–Mednykh ",
+          "A weaker form of Proposition T is known. Kwon–Mednykh–Mednykh ",
           cite(["MednykhMednykh2019"], "Theorem 5.1"),
           " show, for the circulant foliation over a graph, that for odd ",
           math(String.raw`n`),
@@ -189,10 +189,10 @@ export default defineBlocks([
           math(String.raw`\tau(L)=L^2a(L)^2`),
           " and hence that ",
           math(String.raw`v_2(\tau(L))`),
-          " **is even**. We have read this in the original; the numbering is that of the arXiv version, ",
+          " is even. We have read this in the original; the numbering is that of the arXiv version, ",
           "arXiv:1902.05681. Proposition T is a strengthening: it fixes the value at ",
           math(String.raw`2(L-1)`),
-          ". **We did not find the equality itself in the literature.** Their conclusion is strictly ",
+          ". We did not find the equality itself in the literature. Their conclusion is strictly ",
           "weaker — it fixes the parity of ",
           math(String.raw`v_2(\tau(L))`),
           " but not its value — so Proposition T is not a consequence of it. The two proofs also proceed ",
@@ -200,7 +200,7 @@ export default defineBlocks([
           "squareness via an involution on Galois conjugates there.",
         ],
         [
-          "**The shape of Proposition W is known in the one-variable case.** For ",
+          "The shape of Proposition W is known in the one-variable case. For ",
           math(String.raw`d=1`),
           ", Vallières ",
           cite(["Vallieres2021"], "Corollary 5.7"),
@@ -212,7 +212,7 @@ export default defineBlocks([
         ],
       ]),
       paragraph([
-        "**The explicit low-order coefficient of Proposition W.** Three facts fix the position of ",
+        "The explicit low-order coefficient of Proposition W. Three facts fix the position of ",
         math(String.raw`\mu_1`),
         ", all checked in the originals. ",
         "First, Kataoka ",
@@ -227,14 +227,14 @@ export default defineBlocks([
         "Greenberg coefficients — that is, it is a fit and not a proof. ",
         "Third, and this is the one that had to be settled before submission, Monsky ",
         cite(["Monsky1989"]),
-        " **was obtained and read** (the Project Euclid copy is Open Access; an earlier check had ",
+        " was obtained and read (the Project Euclid copy is Open Access; an earlier check had ",
         "misdiagnosed a bot-blocking page as a subscription wall). Its Theorem 3.13 gives ",
         math(String.raw`e_n=(m_0p^n+\ell_0n+\alpha^*)p^{(d-1)n}+O(np^{(d-2)n})`),
         ", but asserts about ",
         math(String.raw`\alpha^*`),
         " — the constant occupying the position of our ",
         math(String.raw`\mu_1`),
-        " — only its **existence, together with its rationality in the case** ",
+        " — only its existence, together with its rationality in the case ",
         math(String.raw`d=2`),
         ". Monsky writes in the introduction that there is no easy description of ",
         math(String.raw`\alpha^*`),
@@ -250,14 +250,14 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "**The resulting position is therefore modest and should be stated as such.** Against Monsky's ",
+        "The resulting position is therefore modest and should be stated as such. Against Monsky's ",
         "general theorem, which guarantees that the constant is a rational number when ",
         math(String.raw`d=2`),
         ", this paper exhibits, for one family, the value of that rational number. It is also worth ",
         "keeping the two objects apart: Monsky's statement concerns ",
         math(String.raw`p`),
         "-adic valuations of class numbers of number fields, whereas Proposition W concerns numbers of ",
-        "spanning trees of graph towers, and **Monsky's theorem must not be quoted as a statement on the graph side.**",
+        "spanning trees of graph towers, and Monsky's theorem must not be quoted as a statement on the graph side.",
         " The general asymptotic on the graph side is Kataoka's ",
         cite(["Kataoka2026"], "Theorem 1.1"),
         ".",
@@ -273,41 +273,41 @@ export default defineBlocks([
     habitat: "none",
     statement: [
       paragraph([
-        "**Every statement above of the form “we did not find” means exactly that, and nothing stronger.** ",
+        "Every statement above of the form “we did not find” means exactly that, and nothing stronger. ",
         "The search had definite limits, and they are recorded here so that the reader can weigh the ",
         "negative findings correctly.",
       ]),
       list([
         [
-          "**MathSciNet was not used** (no subscription was available), and neither was Google Scholar. ",
+          "MathSciNet was not used (no subscription was available), and neither was Google Scholar. ",
           "The searches ran against the arXiv API, the zbMATH Open API, the OEIS, and directly retrieved ",
           "full texts.",
         ],
         [
-          "**The arXiv search is a search of abstracts, not of full texts.** A paper that contains the ",
+          "The arXiv search is a search of abstracts, not of full texts. A paper that contains the ",
           "relevant statement in its body without announcing it in its abstract would not have been found. ",
           "The zbMATH searches were crossings of subject classifications with keywords, and classification ",
           "is applied unevenly.",
         ],
         [
-          "**Several papers were located but not read in full** and are cited only from their reviews or ",
+          "Several papers were located but not read in full and are cited only from their reviews or ",
           "abstracts; these are marked as such where they occur.",
         ],
         [
-          "**Where a theorem is quoted by number from a preprint, the number is the one carried by that preprint**, " +
+          "Where a theorem is quoted by number from a preprint, the number is the one carried by that preprint, " +
             "and we say so at the point of quotation. We have not checked, for those works that have " +
             "since appeared in a journal, that the published version numbers the statement in the same way.",
         ],
       ]),
       paragraph([
-        "**We therefore do not treat a search returning nothing as evidence that nothing exists.** This is ",
+        "We therefore do not treat a search returning nothing as evidence that nothing exists. This is ",
         "not a general precaution but a rule this project has had to learn: a count of zero over a partial ",
         "corpus is compatible with a substantial rate of occurrence in the whole, and this paper elsewhere ",
         "warns against exactly this inference. Applying the warning to our own prior-art check is the ",
         "least that consistency requires.",
       ]),
       paragraph([
-        "**A note on how these findings were arrived at.** Two of the corrections recorded in this chapter ",
+        "A note on how these findings were arrived at. Two of the corrections recorded in this chapter ",
         "were not produced by reading more carefully. One came from formalisation in Lean, which detected ",
         "errors in the prose statements on two occasions — in both cases the underlying arguments ",
         "were sound and the claim had been damaged in transcription. The other came from re-examining a ",
