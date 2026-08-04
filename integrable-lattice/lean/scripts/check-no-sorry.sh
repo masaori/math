@@ -535,6 +535,13 @@ targets=(
   IntegrableLattice.eulerMatrix_eq_eulerHankel
   IntegrableLattice.range_mulLeft_eq_span
   IntegrableLattice.isLeast_isPLevel_range_of_euler
+
+  # cycle 30 step 2: matrix-tree 定理の入口（MultigraphLaplacian.lean）
+  IntegrableLattice.lapMatrixOfInc_apply
+  IntegrableLattice.incMatrixSigned_loop
+  IntegrableLattice.lapMatrix_diag
+  IntegrableLattice.lapMatrix_offDiag
+  IntegrableLattice.lapMatrix_row_sum
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

@@ -227,6 +227,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     reason:
       "命題 G の 4 部（低位項・退化点の計数・トーラス塔・消滅深度による一般の退化塔）は、" +
       "いずれも塔の全域木数の漸近に依る。matrix-tree 定理が mathlib に無い" +
+      "（cycle 30 step 2 で自前で書くと判断し、入口＝多重グラフの符号付き接続行列と " +
+      "$L=D\,D^{\mathsf T}$ を書いた。MultigraphLaplacian.lean。" +
+      "残るのは Cauchy–Binet・小行列式の $\pm1$ 性・Kirchhoff・指標分解の 4 段で、" +
+      "`outputs/reports/cycle30_ops_matrix_tree_decision.md` に段取りがある。" +
+      "**この主張は matrix-tree だけでは完了しない**——Cuoco–Monsky の岩澤型漸近も要る）" +
       "（`kirchhoff` 0 件・`matrixTree` 0 件・全域木を数える定理 0 件。lean/README.md の欠落調査）。",
   },
   {
@@ -248,7 +253,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_062_theorem_T",
     state: "部分的",
     remaining:
-      "命題 T は代数的な段と算術の段まで。matrix-tree の段（mathlib に無い）と、" +
+      "命題 T は代数的な段と算術の段まで。matrix-tree の段（mathlib に無い。" +
+      "cycle 30 step 2 で自前で書くと判断し入口を書いた。MultigraphLaplacian.lean）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。",
   },
   {

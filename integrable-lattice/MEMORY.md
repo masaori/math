@@ -7,6 +7,14 @@
 - 現在の被覆（2026-08-04 実測。cycle 29 step 3b 時点の検査 F の実出力）:
   主張 **24 件**のうち **完了 6・部分的 16・未着手 2**。
   **全数形式化まで残り 18 件。**
+- **cycle 30 step 2 で matrix-tree 定理（全域木を数える定理）を自前で書くと判断した**
+  （`outputs/reports/cycle30_ops_matrix_tree_decision.md`）。**まず本当に要るかを確かめてから決めた**——
+  本文は $\kappa_n$ を全域木の個数そのものとして定義しているので、単因子のときのような迂回路は無い。
+  mathlib には定理も Cauchy–Binet も無い（3 段の走査で 0 件。
+  `lean/logs/mathlib-gap-survey-cycle30-matrixtree.log`）。
+  入口（多重グラフの符号付き接続行列と $L=D\,D^{\mathsf T}$）だけ書いた
+  （`lean/IntegrableLattice/MultigraphLaplacian.lean`）。
+  **matrix-tree を書いてもそれだけで完了に届く主張は無い**（命題 T も命題 G も別の段が残る）。
 - **cycle 30 step 1 で命題 W\* の整数への降下が入ったが、件数は 18 件のまま動いていない**
   （`lean/IntegrableLattice/WStarIntegralDescent.lean`、
   `outputs/reports/cycle30_ops_wstar_integral_descent.md`）。同じ命題に $\rho$ 可約の段が残るためである。

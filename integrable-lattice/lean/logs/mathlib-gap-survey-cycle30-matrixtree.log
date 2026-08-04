@@ -1,0 +1,151 @@
+=== 日付 ===
+2026-08-04T09:55:54Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== (a) 全域木を数える定理 ===
+--- (1) 連結語の内容 grep: 'matrixTree'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'matrix tree'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'matrix tree'
+files=0
+
+=== (a) Kirchhoff の定理 ===
+--- (1) 連結語の内容 grep: 'kirchhoff'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'kirchhoff'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'kirchhoff'
+files=0
+
+=== (a) 全域木の個数 ===
+--- (1) 連結語の内容 grep: 'numSpanningTrees'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'spanning tree'
+files=3
+.lake/packages/mathlib/Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean
+.lake/packages/mathlib/Mathlib/Combinatorics/Quiver/Arborescence.lean
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Acyclic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'spanning tree'
+files=0
+
+=== (b) Cauchy-Binet の公式 ===
+--- (1) 連結語の内容 grep: 'CauchyBinet'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cauchy binet'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cauchy binet'
+files=0
+
+=== (b) 非正方行列の積の行列式 ===
+--- (1) 連結語の内容 grep: 'det_mul_of_card_lt'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'det_mul'
+files=28
+.lake/packages/mathlib/Mathlib/Analysis/InnerProductSpace/NormDet.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/CMField.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/FractionalIdeal/Norm.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Discriminant.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'det_mul'
+files=0
+
+=== (c) グラフのラプラシアン ===
+--- (1) 連結語の内容 grep: 'lapMatrix'
+files=1
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/LapMatrix.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'lapmatrix'
+files=1
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/LapMatrix.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'lapmatrix'
+files=1
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/LapMatrix.lean
+
+=== (c) 接続行列 ===
+--- (1) 連結語の内容 grep: 'incMatrix'
+files=1
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'incmatrix'
+files=1
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'incmatrix'
+files=1
+.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean
+
+=== (c) 余因子・余因子行列 ===
+--- (1) 連結語の内容 grep: 'adjugate'
+files=13
+.lake/packages/mathlib/Mathlib/Topology/Instances/Matrix.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Group/Matrix.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Invertible.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ZPow.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'adjugate'
+files=15
+.lake/packages/mathlib/Mathlib/Topology/Instances/Matrix.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Group/Matrix.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/HadamardMatrix.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'adjugate'
+files=1
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Adjugate.lean
+
+=== 既存のラプラシアンの守備範囲（何が在って何が無いかを宣言で読む） ===
+52:theorem isHermitian_adjMatrix [NonAssocSemiring R] [StarRing R] : (G.adjMatrix R).IsHermitian :=
+55:theorem degree_eq_sum_if_adj {R : Type*} [AddCommMonoidWithOne R] (i : V) :
+63:def degMatrix [AddMonoidWithOne R] : Matrix V V R := Matrix.diagonal (G.degree ·)
+67:def lapMatrix [AddGroupWithOne R] : Matrix V V R := G.degMatrix R - G.adjMatrix R
+69:theorem isSymm_degMatrix [AddMonoidWithOne R] : (G.degMatrix R).IsSymm :=
+72:theorem isHermitian_degMatrix [NonAssocSemiring R] [StarRing R] : (G.degMatrix R).IsHermitian :=
+75:theorem isSymm_lapMatrix [AddGroupWithOne R] : (G.lapMatrix R).IsSymm :=
+78:theorem isHermitian_lapMatrix [NonAssocRing R] [StarRing R] : (G.lapMatrix R).IsHermitian :=
+83:theorem degMatrix_mulVec_apply [NonAssocSemiring R] (v : V) (vec : V → R) :
+87:theorem lapMatrix_mulVec_apply [NonAssocRing R] (v : V) (vec : V → R) :
+91:theorem lapMatrix_mulVec_const_eq_zero [NonAssocRing R] :
+97:theorem dotProduct_mulVec_degMatrix [CommSemiring R] (x : V → R) :
+106:theorem lapMatrix_toLinearMap₂' [Field R] [CharZero R] (x : V → R) :
+121:theorem posSemidef_lapMatrix [Field R] [LinearOrder R] [IsStrictOrderedRing R] [StarRing R]
+128:theorem lapMatrix_toLinearMap₂'_apply'_eq_zero_iff_forall_adj
+134:theorem lapMatrix_mulVec_eq_zero_iff_forall_adj {x : V → ℝ} :
+139:theorem lapMatrix_toLinearMap₂'_apply'_eq_zero_iff_forall_reachable (x : V → ℝ) :
+149:theorem lapMatrix_mulVec_eq_zero_iff_forall_reachable {x : V → ℝ} :
+155:theorem det_lapMatrix_eq_zero [h : Nonempty V] : (G.lapMatrix ℝ).det = 0 := by
+167:lemma mem_ker_toLin'_lapMatrix_of_connectedComponent {G : SimpleGraph V} [DecidableRel G.Adj]
+178:def lapMatrix_ker_basis_aux (c : G.ConnectedComponent) :
+183:lemma linearIndependent_lapMatrix_ker_basis_aux :
+199:lemma top_le_span_range_lapMatrix_ker_basis_aux :
+215:noncomputable def lapMatrix_ker_basis :=
+221:theorem card_connectedComponent_eq_finrank_ker_toLin'_lapMatrix :
+--- 接続行列は符号付きか（単純グラフの incMatrix の定義を読む）
+58:def incMatrix [Zero R] [One R] [DecidableEq α] [DecidableRel G.Adj] : Matrix α (Sym2 α) R :=
+59-  .of fun a e =>
+60-    if e ∈ G.incidenceSet a then 1 else 0
+61-
+62-variable {R}
+
+=== 名指しの実在確認（本 step が実際に使った宣言） ===
+OK   Matrix.transpose_apply :: .lake/packages/mathlib/Mathlib/Tactic/Eqns.lean:23:theorem transpose_apply {m n} (A : m → n → ℕ) (i j) :
+OK   Matrix.mul_apply :: .lake/packages/mathlib/Mathlib/Topology/LocallyConstant/Algebra.lean:58:theorem mul_apply [Mul Y] (f g : LocallyConstant X Y) (x : X) : (f * g) x = f x * g x :=
+OK   Matrix.adjugate :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Adjugate.lean:188:def adjugate (A : Matrix n n α) : Matrix n n α :=
+OK   Matrix.det_fin_zero :: .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:794:theorem det_fin_zero {A : Matrix (Fin 0) (Fin 0) R} : det A = 1 :=
+OK   Finset.card_filter :: .lake/packages/mathlib/Mathlib/Algebra/BigOperators/Group/Finset/Piecewise.lean:277:lemma card_filter (p) [DecidablePred p] (s : Finset ι) :
+OK   Finset.sum_comm :: .lake/packages/mathlib/Mathlib/Probability/Kernel/Defs.lean:328:theorem sum_comm [Countable ι] (κ : ι → ι → Kernel α β) :
+OK   SimpleGraph.lapMatrix :: .lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/LapMatrix.lean:67:def lapMatrix [AddGroupWithOne R] : Matrix V V R := G.degMatrix R - G.adjMatrix R
+OK   SimpleGraph.incMatrix :: .lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean:58:def incMatrix [Zero R] [One R] [DecidableEq α] [DecidableRel G.Adj] : Matrix α (Sym2 α) R :=
+OK   SimpleGraph.IsAcyclic :: .lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Acyclic.lean:56:def IsAcyclic : Prop := ∀ ⦃v : V⦄ (c : G.Walk v v), ¬c.IsCycle
+OK   SimpleGraph.IsTree :: .lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Acyclic.lean:60:structure IsTree : Prop extends
