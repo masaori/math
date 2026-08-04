@@ -297,6 +297,18 @@ export const SCOPE_CLAIMS: readonly ScopeClaim[] = [
       "**同じ事柄について片方だけ登録されていた**ことになる）。",
   },
   {
+    entry: "Newton 多面体の加法性（Ostrowski の定理） / 頂点を取り出す道",
+    kind: "宣言が仮定を要求する",
+    file: "Mathlib/Analysis/Convex/KreinMilman.lean",
+    declaration: "closure_convexHull_extremePoints",
+    requires: ["[Module ℝ E]", "[TopologicalSpace E]", "[T2Space E]"],
+    why:
+      "凸包を頂点の凸包へ落とす標準の道は Krein–Milman である。mathlib に在るが、" +
+      "節の `variable` 行が $\\mathbb{R}$ 上の加群であることと位相を要求する（2026-08-05 実測）。" +
+      "**本論文が要るのは有限個の格子点の凸包なので、これを使うと主張は可算側にあるのに証明が $\\mathbb{R}$ へ出る。** " +
+      "cycle 39 step 1 はこれを使わず、「頂点でない点は中点として書ける」という組合せの事実で代えた。",
+  },
+  {
     entry: "paper_062_theorem_T / 円分体の完備化への Hensel の配線",
     kind: "在るが関係が無い",
     presentToken: "Henselian",

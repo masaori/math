@@ -58,3 +58,4 @@ import IntegrableLattice.PropQLaurentLift
 import IntegrableLattice.KirchhoffCounting
 import IntegrableLattice.ResultantValuationR4
 import IntegrableLattice.SpanningConnectivity
+import IntegrableLattice.NewtonPolytopeAdditivity

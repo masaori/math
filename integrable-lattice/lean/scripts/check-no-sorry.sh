@@ -692,6 +692,13 @@ targets=(
   IntegrableLattice.CharacterDecomposition.hat_one
   IntegrableLattice.CharacterDecomposition.det_fourierInv_mul_det_fourier
   IntegrableLattice.CharacterDecomposition.det_blockCirculant
+  # Newton 多面体の加法性＝Ostrowski の定理（NewtonPolytopeAdditivity.lean・cycle 39 step 1）
+  IntegrableLattice.NewtonPolytope.mem_convexHull_erase_of_midpoint
+  IntegrableLattice.NewtonPolytope.convexHull_eq_of_midpoint
+  IntegrableLattice.NewtonPolytope.mem_support_of_unique_add
+  IntegrableLattice.NewtonPolytope.midpoint_of_two_decompositions
+  IntegrableLattice.NewtonPolytope.emb_injective
+  IntegrableLattice.NewtonPolytope.newt_mul
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）

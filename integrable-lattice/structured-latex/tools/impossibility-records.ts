@@ -32,9 +32,21 @@
  * **cycle 38 step 1 はその 1 行を読んで着手し、実際に書けた。**
  * つまりこの形は既に 1 度、着手前の判断材料として働いている。
  *
+ * ## cycle 39 step 1 で 1 件が消えた。ただし予告は当たり方が違った
+ *
+ * この形が最初に挙げた候補（Newton 多面体の加法性）を cycle 39 step 1 が書いたので、
+ * 記録から外した。**予告した「素材」は現に使えた**——`convexHull_add` はそのまま入った。
+ * **しかしそれで済んだのは主張の片側だけである。そう書く。**
+ * `convexHull_add` が与えるのは右辺の書き換えであって、証明の量の大半は逆向きの包含にあり、
+ * そこは走査が挙げた素材とは関係のない組合せの議論だった。
+ * **したがってこの形が予告できるのは「着手してよい」ことまでで、「どれだけ書けば済むか」ではない。**
+ * cycle 38 総括はこの記録を「素材どころか主張の芯が在る」と書いたが、
+ * 実際に書いてみると芯と呼べるのは半分だった。**着手前の見立てが実測より強く出た例である。**
+ *
  * ## 限界（正直に書く）
  *
  * - **「素材を探した」と書いたかどうかしか見られない。** 探し方が十分だったかは人の判断である。
+ * - **素材が在ることは「書ける」を予告するが、「書く量」は予告しない**（cycle 39 step 1 の実測）。
  * - **素材が無いと書いた記録が正しいかは、依然として着手するまで分からない。**
  *   塞げるのは「探さずに書けないと書く」道までである。
  * - 覆った回数 5 は**試された回数と同じ**なので、「推論はいつも誤り」ではなく
@@ -91,18 +103,6 @@ export const IMPOSSIBILITY_RECORDS: readonly ImpossibilityRecord[] = [
     // 1 変数版は在り（`Polynomial.mahlerMeasure`）、多変数版だけが無い。
     // 2026-08-05 に走査し直して確かめた（同じログの段 1）。
     inference: { kind: "素材あり", materials: ["mahlerMeasure", "mahlerMeasure_mul"] },
-  },
-  {
-    step: "Newton 多面体の加法性（Ostrowski の定理）",
-    entry: "Newton 多面体の加法性（Ostrowski の定理）",
-    measurement: {
-      absent: "newtonPolytope / 語幹 `newton polytope`",
-      log: "mathlib-gap-survey-cycle38-materials.log",
-    },
-    // **素材は在るどころか、主張の芯そのものが在る**——`convexHull_add` は
-    // 凸包が Minkowski 和と可換であることで、Newton 多面体の加法性の中身はこれである。
-    // 2026-08-05 に走査して確かめた（同じログの段 2）。
-    inference: { kind: "素材あり", materials: ["convexHull", "convexHull_add"] },
   },
   {
     step: "Skolem–Mahler–Lech の定理（線形回帰数列の零点集合）",

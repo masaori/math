@@ -254,11 +254,38 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     absence:
       "2026-08-04 実測。`newtonPolytope` / 語幹 `newton polytope` が 3 段とも 0 件。" +
       "mathlib の `Newton` はニュートン法（`Mathlib/Dynamics/Newton.lean`）であって多面体ではない（宣言行で直読）。",
-    state: "未着手",
-    remaining:
-      "未着手。可算側（有限個の格子点の Minkowski 和）で閉じるので機械にかかる形である。" +
-      "**cycle 38 step 5 の走査で、素材どころか主張の芯が mathlib に在ることが分かった**" +
-      "（2026-08-05 実測、`lean/logs/mathlib-gap-survey-cycle38-materials.log`。`convexHull_add`＝凸包が Minkowski 和と可換であること。Newton 多面体の加法性の中身はこれである）。**したがって「書けない」のではなく「書いていない」だけである。**「書けない理由」の台帳（`impossibility-records.ts`）に `素材あり` として登録し、毎サイクル印字させている。",
+    state: "完了",
+    leanNames: [
+      "mem_convexHull_erase_of_midpoint",
+      "convexHull_eq_of_midpoint",
+      "mem_support_of_unique_add",
+      "midpoint_of_two_decompositions",
+      "emb_injective",
+      "newt_mul",
+    ],
+    note:
+      "**cycle 39 step 1 で書いた**（`NewtonPolytopeAdditivity.lean`）。" +
+      "**cycle 38 step 5 が入れた検査 I の予告どおり、書けない理由は無かった**——" +
+      "同じ走査が名指ししていた `convexHull_add`（凸包が Minkowski 和と可換であること）はそのまま使えた。" +
+      "ただし**それだけでは足りず、書く量の大半は別のところにあった。そう書く。** " +
+      "`convexHull_add` が与えるのは右辺の書き換え（$\mathrm{Newt}(f)+\mathrm{Newt}(g)=\mathrm{conv}(A+B)$、$A,B$ は台）だけで、" +
+      "本体は $\mathrm{conv}(A+B)=\mathrm{conv}(\mathrm{supp}(fg))$ のほうである。" +
+      "**完了と呼ぶ射程**: 2 変数 Laurent 多項式（`AddMonoidAlgebra R (ℤ × ℤ)`）について、" +
+      "係数環 $R$ が整域であれば成り立つ形で書いた（`newt_mul`）。$f$ や $g$ が $0$ の場合も込みで、仮定は要らない（両辺とも空集合）。" +
+      "**$\mathbb{R}$ へは 1 度も出ない**——指数は $\mathbb{Z}\times\mathbb{Z}$ に住み、凸包は $\mathbb{Q}\times\mathbb{Q}$ の中で $\mathbb{Q}$ 係数で取る。" +
+      "凸包に要るのは順序体であることだけで、完備性も位相も使わない。**この点は設計の結果であって偶然ではない**——" +
+      "頂点を取り出す標準の道（超平面による分離、Krein–Milman）は mathlib では $\mathbb{R}$ の位相を要求するので、" +
+      "使えば主張は可算側にあるのに証明が $\mathbb{R}$ へ出る。そこで**分離定理を使わない道を取った。** " +
+      "芯は 2 つである。(1) **分解が一意な指数は積の台に入る**（`mem_support_of_unique_add`。" +
+      "積の係数の二重和にその 1 項しか残らず、整域なので $0$ でない。**この file が整域を使うのはここだけである**）。" +
+      "(2) **分解が一意でない指数は、台の和の相異なる 2 点の中点である**（`midpoint_of_two_decompositions`。" +
+      "$p=a+b=a'+b'$ なら $q=a+b'$ と $r=a'+b$ が $q+r=p+p$ を満たす。$q\neq r$ は $\mathbb{Z}\times\mathbb{Z}$ に捻れが無いことから出る）。" +
+      "**この 2 つで、頂点を超平面で取り出す代わりに「頂点でない点は中点として書ける」という組合せの事実だけで済む。** " +
+      "仕上げは、凸包を与える部分集合のうち**要素数が最小のもの**を取り、その各点が中点では書けないことを言う段である" +
+      "（`convexHull_eq_of_midpoint`。使うのは台が有限であることだけで、位相も分離定理も使わない）。" +
+      "**限界**: 本文が下流で使っている「Minkowski 和の辺方向は各因子の辺方向の合併」（命題 G′ の有限性の段）と" +
+      "「格子周長が Minkowski 和について加法的」（命題 K の (K7)）は、この外部定理の内容ではなく本文の主張の側の残りである。" +
+      "どちらも未形式化であり、そう書く（命題 G′・命題 K の欄を見よ）。",
   },
   {
     name: "Skolem–Mahler–Lech の定理（線形回帰数列の零点集合）",
