@@ -601,7 +601,7 @@ export default defineBlocks([
       ),
       paragraph([
         "（",
-        math(String.raw`f_z`),
+        math(String.raw`z+z^{-1}-2`),
         " は ",
         math(String.raw`z\mapsto z^{-1}`),
         " で不変なので ",

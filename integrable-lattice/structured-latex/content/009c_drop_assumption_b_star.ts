@@ -331,8 +331,8 @@ export default defineBlocks([
         " の (M6)（",
         math(String.raw`S_\infty=\emptyset`),
         "）がまさにこの場合であり、そこでは誤差項の中身まで開いて ",
-        math(String.raw`c=\frac{\ell}{\ell-1}A_{\mathrm{gen}}`),
-        " が出る。両者は整合する。",
+        math(String.raw`c`),
+        " の値まで定まる（その値は (M6) が与える）。両者は整合する。",
       ]),
       paragraph([
         "本命題に現れる量の、可算と非可算の分別は次のとおりである。",

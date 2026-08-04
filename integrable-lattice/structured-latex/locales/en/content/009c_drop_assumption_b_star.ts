@@ -345,9 +345,9 @@ export default defineBlocks([
         ref("paper_prop_M"),
         " — the case ",
         math(String.raw`S_\infty=\emptyset`),
-        " — is exactly this one, and there the error term is opened up to give ",
-        math(String.raw`c=\frac{\ell}{\ell-1}A_{\mathrm{gen}}`),
-        ". The two are consistent.",
+        " — is exactly this one, and there the error term is opened up to determine ",
+        math(String.raw`c`),
+        " as well (the value is the one given in (M6)). The two are consistent.",
       ]),
       paragraph([
         "The quantities appearing in this proposition separate into countable and uncountable ones as follows.",

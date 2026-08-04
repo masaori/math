@@ -11,6 +11,7 @@ import type { TranslatedNode } from "../schema.ts";
 import { DEFINITION_ORDER_TERMS } from "./definition-order-terms.ts";
 import { type OrderedBlock, violationsIn } from "./definition-order-model.ts";
 import { knownLocales, loadContentFilesForLocale } from "./content-modules.ts";
+import { reportSymbolSweep } from "./definition-order-symbol-sweep.ts";
 
 const flatten = (nodes: readonly TranslatedNode[]): string => {
   let out = "";
@@ -94,15 +95,23 @@ if (failed > 0) {
   console.log("  直し方: 定義を前へ移すか、章の構成を組み替えるか、初出の時点で定義を与える。");
   console.log("  「後で定義する」と断って先に使う形は認めない。");
   console.log("  その語を使わずに書ける箇所なら、使わない言い方へ書き直すのでもよい。");
+} else {
   console.log("");
-  console.log(`違反 ${failed} 件。`);
+  console.log(
+    "  限界: 追跡するのは台帳に載せた語だけで、本論文が定義しない標準的な語彙" +
+      "（素点・Newton 多角形・Lehmer 問題等）は対象外。台帳の網羅性がこの検査の強さの上限である。" +
+      "**その上限が妥当かは台帳と独立な拾い方でしか測れないので、記号の走査を続けて回す。**",
+  );
+}
+
+// 台帳を使わない別の拾い方。台帳の漏れを毎回数えるためにここで続けて回す。
+failed += await reportSymbolSweep();
+
+if (failed > 0) {
+  console.log("");
+  console.log(`要処理 ${failed} 件。`);
   process.exit(1);
 }
 
-console.log("");
-console.log(
-  "  限界: 追跡するのは台帳に載せた語だけで、本論文が定義しない標準的な語彙" +
-    "（素点・Newton 多角形・Lehmer 問題等）は対象外。**台帳の網羅性がこの検査の強さの上限**である。",
-);
 console.log("");
 console.log("違反 0 件。");

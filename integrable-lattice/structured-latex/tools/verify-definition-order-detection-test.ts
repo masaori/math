@@ -10,6 +10,13 @@
  */
 
 import { type OrderedBlock, type TermDeclaration, violationsIn } from "./definition-order-model.ts";
+import {
+  type SweptBlock,
+  coveredByLedger,
+  definedAtomsIn,
+  traceSymbols,
+  usedBeforeDefinition,
+} from "./definition-order-symbol-model.ts";
 
 let failures = 0;
 let checks = 0;
@@ -136,6 +143,78 @@ report(
     "台帳が指す依存語が台帳に無ければ挙がる",
     violationsIn(dangling, AFTER).some((v) => v.kind === "台帳が指す依存語が台帳に無い"),
     "依存関係の書き間違いが赤くなる",
+  );
+}
+
+// --- 検査 O の後半（記号の初出の全数走査）-------------------------------------
+//
+// 再現データは**本サイクルで実際に見つかった 2 件**である。
+// どちらも本文を直したので、直す前の並びをここへ写して検出を実証する。
+
+{
+  const swept = (index: number, id: string, ...texts: string[]): SweptBlock => ({
+    index,
+    id,
+    kind: "theorem",
+    texts,
+  });
+
+  // 1 件目: 命題 G′ が f_z を使い、その定義 f_z:=z+z^{-1}-2 は次の章にあった。
+  const beforeFz = [
+    swept(0, "prop_g_infty", String.raw`\psi_{(1,-1)}(\tilde E)`, String.raw`f_z`),
+    swept(1, "prop_g_ell2", String.raw`f_z:=z+z^{-1}-2`),
+  ];
+  report(
+    "定義が次の章にある記号を、初出の側で使っていると挙がる（本サイクルの f_z）",
+    usedBeforeDefinition(traceSymbols(beforeFz)).some((trace) => trace.atom === "f_{z}"),
+    "f_z の初出が、その `:=` の定義より前にある並びで挙がる",
+  );
+  const afterFz = [
+    swept(0, "prop_g_infty", String.raw`\psi_{(1,-1)}(\tilde E)`, String.raw`z+z^{-1}-2`),
+    swept(1, "prop_g_ell2", String.raw`f_z:=z+z^{-1}-2`),
+  ];
+  report(
+    "記号を使わない書き方へ直すと挙がらない（偽陽性でない）",
+    usedBeforeDefinition(traceSymbols(afterFz)).length === 0,
+    `挙がった件数 ${usedBeforeDefinition(traceSymbols(afterFz)).length}（期待 0）`,
+  );
+
+  // 2 件目: 前の章が、後の命題で定義される平均 A_gen を式の中で使っていた。
+  const beforeAgen = [
+    swept(0, "drop_assumption", String.raw`c=\frac{\ell}{\ell-1}A_{\mathrm{gen}}`),
+    swept(1, "general_closed_form", String.raw`A_{\mathrm{gen}}:=\frac{1}{\ell^{L}}\sum_P\theta(P)`),
+  ];
+  report(
+    "後の章で定義される記号を前の章が式で使っていると挙がる（本サイクルの A_gen）",
+    usedBeforeDefinition(traceSymbols(beforeAgen)).some(
+      (trace) => trace.atom === "A_{\\mathrm{gen}}",
+    ),
+    "飾りを持つ記号なので、局所変数の使い回しとして外れることもない",
+  );
+
+  // 定義の左辺の読み取り: 引数を伴う形と、1 つの式に定義が 2 つ並ぶ形。
+  report(
+    "左辺が引数を伴っても定義される記号を取り違えない",
+    definedAtomsIn(String.raw`\Phi_L(\beta):=\log Z_L(\beta)`).includes("\\Phi_{L}"),
+    `読み取り結果 ${JSON.stringify(definedAtomsIn(String.raw`\Phi_L(\beta):=\log Z_L(\beta)`))}`,
+  );
+  const two = definedAtomsIn(String.raw`a_L:=\prod P,\qquad a^{\mathrm{red}}_L:=\prod' P`);
+  report(
+    "1 つの式に定義が 2 つ並んでいれば両方を読む",
+    two.length === 2 && two.includes("a_{L}"),
+    `読み取り結果 ${JSON.stringify(two)}`,
+  );
+
+  // 台帳との突き合わせ: 部分文字列で見ると、覆えていないものを覆っていると数えてしまう。
+  report(
+    "台帳の a^{red}_L は裸の a を覆わない（部分一致で数えない）",
+    !coveredByLedger("a", ["a^{\\mathrm{red}}_L"]),
+    "この誤りを実際に一度犯し、覆う件数が 19 件へ膨らんだ",
+  );
+  report(
+    "波括弧の有無は同じものとして覆う",
+    coveredByLedger("\\kappa_{n}", ["\\kappa_n"]),
+    "台帳は \\kappa_n、走査は \\kappa_{n} と書く",
   );
 }
 
