@@ -28,6 +28,7 @@ import IntegrableLattice.DigitBranchZellExponent
 import IntegrableLattice.EulerDualBasisCommRing
 import IntegrableLattice.WStarReducibleDescent
 import IntegrableLattice.WStarPowerBasisInstance
+import IntegrableLattice.TracePeriodWStarLift
 import IntegrableLattice.SInfinityDecision
 import IntegrableLattice.EllTwoClosedForm
 import IntegrableLattice.DropAssumptionBStar

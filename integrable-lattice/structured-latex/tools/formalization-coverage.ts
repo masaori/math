@@ -140,12 +140,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "残るのは 2 つ。(1) 本文が $w^*$ を Gram 行列 $G$ の側で定義していること——" +
       "$G$ の単因子が $A/\\eta A$ の不変量に等しいという同一視は、" +
       "体の上では行列の等式 $C\\,G=M_\\eta$ と $(\\det C)^2=1$ として入ったが" +
-      "（命題 W\\* の欄を見よ）。**cycle 36 step 5 でこの欄を構造化したときに、ここが古いことが分かった**——整数への降下そのものは cycle 30 step 1 で入っており（`WStarIntegralDescent.lean`）、cycle 36 step 1 は可約な場合の降下も書いた（`WStarReducibleDescent.lean`）。**残っているのはその降下を命題 C′ のトレース列の周期の主張へ結ぶ段である**（命題 C″ と同じ壁）。" +
+      "（命題 W\\* の欄を見よ）。**cycle 36 step 5 でこの欄を構造化したときに、ここが古いことが分かった**——整数への降下そのものは cycle 30 step 1 で入っており（`WStarIntegralDescent.lean`）、cycle 36 step 1 は可約な場合の降下も書いた（`WStarReducibleDescent.lean`）。**残っているのはその降下を命題 C′ のトレース列の周期の主張へ結ぶ段である**（命題 C″ と同じ壁）。**cycle 37 step 3 でその段を書いた**（`TracePeriodWStarLift.lean` の `dvd_of_mulVec_dvd_of_isPLevel`）——本文の「$Gb\\equiv0\\ (p^k)$ から $b\\equiv0\\ (p^{k-w^*})$」がそれである。**cycle 19 から「整数行列の Smith 標準形が mathlib に無い」を理由に仮定として型に出したままだった段だが、行列の単因子は要らなかった**——$G$ の像について `IsPLevel`（$p$ の外での包含の最小レベル）だけを使えばよく、それは `isLeast_isPLevel` が部分加群の適合基底から与えている。`IsPLevel` を単位ベクトルへ当てると各 $i$ で $G y_i=m_i p^{w}e_i$ が出るので、$m=\\prod_i m_i$ で係数を揃えると行列の等式 $G\\,Y=(m\\,p^{w})I$ になり（`exists_mul_eq_smul_one_of_isPLevel`）、$\\det G\\neq0$ なら左右を入れ替えられる。**したがってこの主張の残りは 1 つである。**" +
       "(2) $\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$ の" +
       "重複度の積の形（ノルムの形 $\\det G=\\pm N(\\eta)$ は入った）。" +
       "上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
     remainingItems: [
-      "本文が $w^*$ を Gram 行列 $G$ の側で定義していること",
       "の重複度の積の形",
     ],
   },
@@ -180,7 +179,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "cycle 29 step 3 で $w^*$ の定義そのものは入った（WStarElementaryDivisors.lean。" +
       "**「整数行列の単因子が mathlib に無いから書けない」という step 1 の判定は覆った**——" +
       "適合基底の係数の $p$ 進付値の最大値として書ける）。" +
-      "残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。",
+      "残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。**cycle 37 step 3 でその段を書いた**（`TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel`。詳しくは 命題 C′ の欄を見よ）。**したがってこの主張の残りは 2 つである**——(1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\\min\\{m:g_m\\ge k\\}$ の同値。",
     remainingItems: [
       "のしきい値 $w^*+1$ の最良性",
       "の同値",

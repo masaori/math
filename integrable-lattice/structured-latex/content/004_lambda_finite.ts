@@ -279,6 +279,8 @@ export default defineBlocks([
       "IntegrableLattice.tracePeriod_propC_bound",
       "IntegrableLattice.isLeast_isPLevel",
       "IntegrableLattice.wStarOfCoeffs_eq_zero_iff",
+      "IntegrableLattice.TracePeriodWStar.exists_mul_eq_smul_one_of_isPLevel",
+      "IntegrableLattice.TracePeriodWStar.dvd_of_mulVec_dvd_of_isPLevel",
     ],
     statement: [
       paragraph([

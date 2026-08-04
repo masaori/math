@@ -667,6 +667,13 @@ targets=(
   IntegrableLattice.WStarPowerBasis.isPowerBasisOf_adjoinRoot
   IntegrableLattice.WStarPowerBasis.isReductionOf_adjoinRoot
   IntegrableLattice.WStarPowerBasis.mem_nonZeroDivisors_of_det_weightedGram_ne_zero
+  # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）
+  IntegrableLattice.TracePeriodWStar.mulVec_injective_of_det_ne_zero
+  IntegrableLattice.TracePeriodWStar.mul_left_cancel_of_det_ne_zero
+  IntegrableLattice.TracePeriodWStar.mul_comm_of_det_ne_zero
+  IntegrableLattice.TracePeriodWStar.exists_mul_eq_smul_one_of_isPLevel
+  IntegrableLattice.TracePeriodWStar.dvd_of_mulVec_dvd_unit
+  IntegrableLattice.TracePeriodWStar.dvd_of_mulVec_dvd_of_isPLevel
   # 可約な場合の降下（WStarReducibleDescent.lean・cycle 36 step 1）
   IntegrableLattice.WStarReducible.injective_mulLeft
   IntegrableLattice.WStarReducible.finrank_span_eq

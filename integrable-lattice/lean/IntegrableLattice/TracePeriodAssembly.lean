@@ -32,10 +32,13 @@ cycle 28 までに `PropCTracePeriod.lean` が形式化していたのは、命�
 
 ## 形式化していないもの（正直に書く）
 
-- **定理 6（$p^{w^*}G^{-1}$ が $p$ 進整数成分をもつ）は仮定 `hlift` として型に出しただけである。**
-  これを証明するには整数行列の Smith 標準形が要り、mathlib には行列の単因子の形が無い
-  （`Basis.SmithNormalForm` は部分加群の基底の形である。cycle 19 の欠落調査）。
-  線形代数の芯だけは `PropCTracePeriod.dvd_of_mulVec_dvd` が既に持っている。
+- **定理 6（$p^{w^*}G^{-1}$ が $p$ 進整数成分をもつ）は cycle 37 step 3 で埋めた。**
+  cycle 19 から「整数行列の Smith 標準形が mathlib に無い」を理由に仮定 `hlift` として
+  型に出したままだったが、**行列の単因子は要らなかった**——
+  $G$ の像について `IsPLevel`（$p$ の外での包含の最小レベル）だけを使えばよく、
+  それは `WStarElementaryDivisors.isLeast_isPLevel` が部分加群の適合基底から与えている。
+  繋いだ形は `TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel` である。
+  本 file の `hlift` は依然その形のままなので、当てるときに上の定理を使う。
 - 命題 C′ の $\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ と、
   $w^*=0$ が「$\rho\bmod p$ が分離的かつ $p\nmid m_\lambda$」と同値であること。
 - 命題 C″ (1) のしきい値 $w^*+1$ の最良性と、(3) の $e_k=\min\{m:g_m\ge k\}$ の同値。

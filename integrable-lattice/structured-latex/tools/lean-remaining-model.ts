@@ -331,6 +331,23 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    file: "TracePeriodWStarLift.lean",
+    declarationsAtReview: 6,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "の言う「$G$ の最大単因子」であること",
+        kind: "未形式化",
+        ledgerFragment: "単因子",
+      },
+      {
+        leanFragment: "の重複度の積の形",
+        kind: "未形式化",
+        ledgerFragment: "の重複度の積の形",
+      },
+    ],
+  },
+  {
     file: "KirchhoffCounting.lean",
     declarationsAtReview: 4,
     heading: "形式化しなかったもの",
