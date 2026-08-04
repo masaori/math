@@ -33,9 +33,23 @@ cycle 33 総括は「全域木の同定へ入ると、**グラフの連結性と
 成分 $C$ の外へ出る辺が無いので、$C$ の行を足すと各辺の寄与が $+1$ と $-1$ で打ち消し合う。
 行が一次従属なので行列式は $0$ になる。
 
+## 逆向きへの入口（cycle 35 step 3 で書いた）
+
+逆向き（連結なら小行列式が $\pm1$）は葉に沿った展開の帰納法になる。
+その**入口にあたる葉の存在**を段 4 に書いた。
+
+**書いてみると、葉の存在に連結性はほとんど要らない。** 効くのは握手補題
+（次数の総和は辺の本数の 2 倍）ひとつで、辺の本数が頂点数より少なければ
+次数 $\le1$ の頂点が必ずある（`exists_degOn_le_one`）。
+連結性が要るのは「次数が $0$ でない」を言うところだけで、そこも
+到達可能性の鎖の最後の 1 歩を取り出すだけである（`one_le_degOn_of_reach`）。
+2 つを合わせると、辺の本数が $|V|-1$ で連結なら**根でない葉が必ずある**
+（`exists_leaf_ne_root`）。閉路も道も長さも使わない。
+
 ## 形式化しなかったもの
 
-* **逆向き（連結なら小行列式が $\pm1$）**。葉に沿った展開の帰納法になる。書いていない。
+* **逆向きの帰納法そのもの**（葉の行に沿った行列式の展開と、葉を除いた小さいグラフへの帰納）。
+  入口（葉の存在）は段 4 に入ったが、展開と帰納は書いていない。
 * **指標分解**（塔の各レベルへ分ける段）。これは別の段である。
 -/
 import Mathlib
@@ -199,6 +213,124 @@ theorem det_submatrix_eq_zero_of_not_reach (s t : E → V) (S : Finset E) (r0 w 
     simp only [Matrix.vecMul, dotProduct, Matrix.submatrix_apply, Pi.zero_apply]
     rw [hfull]
     exact hdsum (c j) (hc j)
+
+/-! ## 段 4: 逆向きへの入口 — 葉の存在（cycle 35 step 3）
+
+逆向き（連結なら小行列式が $\pm1$）は葉に沿った展開の帰納法になる。
+その入口にあたる「葉が存在すること」を、**握手補題ひとつ**で出す。 -/
+
+section Leaf
+
+/-- 辺集合 `S` における頂点 `v` の次数。両端を別々に数えるので、自己ループは 2 と数える。 -/
+def degOn (s t : E → V) (S : Finset E) (v : V) : ℕ :=
+  (S.filter (fun e => s e = v)).card + (S.filter (fun e => t e = v)).card
+
+omit [Fintype E] [DecidableEq E] in
+/-- **握手補題**。次数の総和は辺の本数の 2 倍である。
+各辺が始点で 1 回・終点で 1 回数えられることしか使わない。 -/
+theorem sum_degOn (s t : E → V) (S : Finset E) :
+    ∑ v, degOn s t S v = 2 * S.card := by
+  classical
+  have hs : S.card = ∑ v : V, (S.filter (fun e => s e = v)).card :=
+    Finset.card_eq_sum_card_fiberwise fun e _ => Finset.mem_univ (s e)
+  have ht : S.card = ∑ v : V, (S.filter (fun e => t e = v)).card :=
+    Finset.card_eq_sum_card_fiberwise fun e _ => Finset.mem_univ (t e)
+  simp only [degOn, Finset.sum_add_distrib]
+  omega
+
+omit [Fintype E] [DecidableEq E] in
+/-- **葉の存在（数え上げだけで出る）**。辺の本数が頂点数より少なければ、
+次数が $1$ 以下の頂点が必ずある。**連結性も閉路も使わない。** -/
+theorem exists_degOn_le_one (s t : E → V) (S : Finset E) (h : S.card < Fintype.card V) :
+    ∃ v : V, degOn s t S v ≤ 1 := by
+  classical
+  by_contra hcon
+  push_neg at hcon
+  have h1 : 2 * Fintype.card V ≤ ∑ v, degOn s t S v := by
+    calc 2 * Fintype.card V = ∑ _v : V, 2 := by
+          rw [Finset.sum_const, Finset.card_univ, smul_eq_mul, mul_comm]
+      _ ≤ ∑ v, degOn s t S v := Finset.sum_le_sum fun v _ => hcon v
+  rw [sum_degOn] at h1
+  omega
+
+omit [Fintype V] [Fintype E] [DecidableEq E] in
+/-- 到達可能性の鎖の最後の 1 歩が、$v$ に接する辺を与える。
+したがって根から到達できる根以外の頂点は次数が $1$ 以上である。 -/
+theorem one_le_degOn_of_reach (s t : E → V) (S : Finset E) {r v : V}
+    (hreach : ReachOn s t S r v) (hv : v ≠ r) : 1 ≤ degOn s t S v := by
+  classical
+  rcases Relation.ReflTransGen.cases_tail hreach with h | ⟨b, _, hadj⟩
+  · exact absurd h hv
+  · obtain ⟨e, heS, hcase⟩ := hadj
+    rcases hcase with ⟨_, hte⟩ | ⟨hse, _⟩
+    · have : e ∈ S.filter (fun e => t e = v) := Finset.mem_filter.mpr ⟨heS, hte⟩
+      have := Finset.card_pos.mpr ⟨e, this⟩
+      simp only [degOn]
+      omega
+    · have : e ∈ S.filter (fun e => s e = v) := Finset.mem_filter.mpr ⟨heS, hse⟩
+      have := Finset.card_pos.mpr ⟨e, this⟩
+      simp only [degOn]
+      omega
+
+omit [Fintype E] [DecidableEq E] in
+/-- **逆向きの帰納法の入口**。辺の本数が $|V|-1$ で、根から全頂点へ到達できるなら、
+**根でない頂点の中に次数がちょうど $1$ のもの（葉）がある。**
+
+数え上げは次のとおり。根以外がすべて次数 $2$ 以上だとすると、
+次数の総和は $2(|V|-1)$ 以上に根の次数（$1$ 以上）を足したものになり $2|V|-1$ 以上。
+ところが握手補題から総和は $2(|V|-1)=2|V|-2$ である。 -/
+theorem exists_leaf_ne_root (s t : E → V) (S : Finset E) (r : V)
+    (hcard : S.card + 1 = Fintype.card V) (hreach : ∀ v : V, ReachOn s t S r v)
+    (hV : 2 ≤ Fintype.card V) :
+    ∃ v : V, v ≠ r ∧ degOn s t S v = 1 := by
+  classical
+  by_contra hcon
+  push_neg at hcon
+  -- 根以外はすべて次数 2 以上（次数 1 以下は連結性から次数 1 になるので排除される）。
+  have hge : ∀ v : V, v ≠ r → 2 ≤ degOn s t S v := by
+    intro v hv
+    have h1 : 1 ≤ degOn s t S v := one_le_degOn_of_reach s t S (hreach v) hv
+    have h2 : degOn s t S v ≠ 1 := hcon v hv
+    omega
+  -- 根の次数も 1 以上（頂点が 2 つ以上あるので根と異なる頂点が取れる）。
+  obtain ⟨w, hw⟩ : ∃ w : V, w ≠ r := by
+    by_contra hall
+    push_neg at hall
+    have : Fintype.card V ≤ 1 := Fintype.card_le_one_iff.mpr fun a b => by
+      rw [hall a, hall b]
+    omega
+  have hr : 1 ≤ degOn s t S r := by
+    have h1 : 1 ≤ degOn s t S w := one_le_degOn_of_reach s t S (hreach w) hw
+    -- `w` に接する辺は `r` 側にも端点をもつとは限らないので、根の次数は別に押さえる。
+    -- 根から `w` へ到達できるので、根から出る最初の 1 歩がある。
+    rcases Relation.ReflTransGen.cases_head (hreach w) with h | ⟨b, hadj, _⟩
+    · exact absurd h.symm hw
+    · obtain ⟨e, heS, hcase⟩ := hadj
+      rcases hcase with ⟨hse, _⟩ | ⟨_, hte⟩
+      · have hmem : e ∈ S.filter (fun e => s e = r) := Finset.mem_filter.mpr ⟨heS, hse⟩
+        have := Finset.card_pos.mpr ⟨e, hmem⟩
+        simp only [degOn]; omega
+      · have hmem : e ∈ S.filter (fun e => t e = r) := Finset.mem_filter.mpr ⟨heS, hte⟩
+        have := Finset.card_pos.mpr ⟨e, hmem⟩
+        simp only [degOn]; omega
+  -- 総和を下から押さえると握手補題と矛盾する。
+  have hsum : 2 * (Fintype.card V - 1) + 1 ≤ ∑ v, degOn s t S v := by
+    have hsplit : ∑ v, degOn s t S v
+        = degOn s t S r + ∑ v ∈ Finset.univ.erase r, degOn s t S v := by
+      rw [← Finset.add_sum_erase _ _ (Finset.mem_univ r)]
+    have hcard' : (Finset.univ.erase r).card = Fintype.card V - 1 := by
+      rw [Finset.card_erase_of_mem (Finset.mem_univ r), Finset.card_univ]
+    have hlow : 2 * (Fintype.card V - 1) ≤ ∑ v ∈ Finset.univ.erase r, degOn s t S v := by
+      calc 2 * (Fintype.card V - 1)
+          = ∑ _v ∈ Finset.univ.erase r, 2 := by
+            rw [Finset.sum_const, hcard', smul_eq_mul, mul_comm]
+        _ ≤ ∑ v ∈ Finset.univ.erase r, degOn s t S v :=
+            Finset.sum_le_sum fun v hv => hge v (Finset.ne_of_mem_erase hv)
+    omega
+  rw [sum_degOn] at hsum
+  omega
+
+end Leaf
 
 end SpanningConnectivity
 end IntegrableLattice

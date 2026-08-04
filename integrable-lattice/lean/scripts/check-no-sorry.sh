@@ -640,6 +640,11 @@ targets=(
   # 可換環の上の Euler の双対基底公式（EulerDualBasisCommRing.lean・cycle 35 step 2）
   IntegrableLattice.EulerDualBasis.psi_pow
   IntegrableLattice.EulerDualBasis.psi_eulerC_mul_pow
+  # matrix-tree の逆向きの入口（SpanningConnectivity.lean・cycle 35 step 3）
+  IntegrableLattice.SpanningConnectivity.sum_degOn
+  IntegrableLattice.SpanningConnectivity.exists_degOn_le_one
+  IntegrableLattice.SpanningConnectivity.one_le_degOn_of_reach
+  IntegrableLattice.SpanningConnectivity.exists_leaf_ne_root
 
   # cycle 34 step 2: 全域木の同定の半分（連結でなければ小行列式は 0）。
   # 逆向き（連結なら ±1）は書いていない。

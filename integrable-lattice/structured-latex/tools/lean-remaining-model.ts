@@ -248,9 +248,9 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
       {
-        leanFragment: "連結なら小行列式が $\\pm1$",
+        leanFragment: "逆向きの帰納法そのもの",
         kind: "未形式化",
-        ledgerFragment: "連結なら小行列式が",
+        ledgerFragment: "残っているのは帰納法そのもの",
       },
       { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
     ],
