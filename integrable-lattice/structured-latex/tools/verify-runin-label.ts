@@ -16,9 +16,9 @@ import {
 } from "./content-modules.ts";
 import {
   END_OF_BLOCK,
-  EXCLUDED_NEXT_TYPES,
   isRunInLabel,
   MAX_LENGTH,
+  RESTRICTED_NEXT_TYPES,
   type RunInLabelSite,
 } from "./runin-label-model.ts";
 
@@ -77,11 +77,21 @@ for (const locale of knownLocales) {
         nodes.forEach((node, index) => {
           if (node.type !== "paragraph") return;
           paragraphs += 1;
+          const children: readonly TranslatedNode[] = node.children;
+          const afterDisplay = nodes[index + 2];
           sites.push({
             ...base,
             where,
             text: flatten([node]),
             nextType: nodes[index + 1]?.type ?? END_OF_BLOCK,
+            containsMath: children.some((child) => child.type === "math"),
+            containsReference: children.some(
+              (child) => child.type === "ref" || child.type === "cite",
+            ),
+            textAfterDisplay:
+              afterDisplay !== undefined && afterDisplay.type === "paragraph"
+                ? flatten([afterDisplay]).trim()
+                : undefined,
           });
         });
       }
@@ -97,7 +107,8 @@ console.log(
 );
 console.log(
   `  判定: ${MAX_LENGTH} 文字以下で、文末が句点・コロン等でない段落` +
-    `（直後が${EXCLUDED_NEXT_TYPES.map(nextElementName).join("・")}のものは除く）`,
+    `（直後が${RESTRICTED_NEXT_TYPES.map(nextElementName).join("・")}のものは、` +
+    `さらに体言だけの断片の形であることも要る）`,
 );
 
 // どの形をいくつ見ているかを毎回出す。判定の対象が黙って痩せたことに気づけるようにするため
@@ -106,20 +117,21 @@ const countsByNextType = new Map<string, number>();
 for (const site of sites) {
   countsByNextType.set(site.nextType, (countsByNextType.get(site.nextType) ?? 0) + 1);
 }
-const watched = [...countsByNextType].filter(([type]) => !EXCLUDED_NEXT_TYPES.includes(type));
-const excluded = [...countsByNextType].filter(([type]) => EXCLUDED_NEXT_TYPES.includes(type));
+const watched = [...countsByNextType].filter(([type]) => !RESTRICTED_NEXT_TYPES.includes(type));
+const restricted = [...countsByNextType].filter(([type]) => RESTRICTED_NEXT_TYPES.includes(type));
 const total = (entries: readonly (readonly [string, number])[]) =>
   entries.reduce((sum, [, count]) => sum + count, 0);
 console.log(
-  `  対象: ${total(watched)} 段落（${watched
+  `  長さと文末で見る: ${total(watched)} 段落（${watched
     .sort((a, b) => b[1] - a[1])
     .map(([type, count]) => `${positionName(type)} ${count}`)
     .join(" / ")}）`,
 );
 console.log(
-  `  対象外: ${total(excluded)} 段落（${excluded
+  `  体言だけの断片の形に限って見る: ${total(restricted)} 段落（${restricted
     .map(([type, count]) => `${positionName(type)} ${count}`)
-    .join(" / ")}）。形だけでは数式へ続く言い回しと切り分けられないため除いている。`,
+    .join(" / ")}）。数式へ続く言い回しが長さと文末の判定を満たすため、` +
+    `数式・相互参照・句点を含まず体言で終わる断片だけを見る。`,
 );
 console.log(
   "  経緯: cycle 27 で強調指定を落としたとき、強調が唯一の区切りだった見出し代わりの断片が" +
@@ -148,7 +160,8 @@ console.log("");
 console.log(
   "  限界: 見ているのは長さと文末の字だけで、「文になっているか」を判定してはいない。" +
     "捕まえるのは「見出しの代わりに置かれた短い断片」という形だけである。" +
-    "別行立て数式の直前と、箇条書きの項目の中は見ない。",
+    "別行立て数式の直前では体言だけの断片しか拾えず、助詞で終わる見出しは拾えない。" +
+    "箇条書きの項目の中は見ない。",
 );
 console.log("");
 console.log("違反 0 件。");
