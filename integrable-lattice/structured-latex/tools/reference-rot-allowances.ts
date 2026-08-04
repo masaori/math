@@ -180,6 +180,38 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/RingTheory/Trace/Basic.lean",
+    reason:
+      "mathlib のファイル。可換環の上のトレース双対が無いことの根拠として、実在する " +
+      "`Module.Basis.traceDual` の宣言行（553 行）が体を要求していることを直読した先である。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/Dynamics/Newton.lean",
+    reason:
+      "mathlib のファイル。`Newton` の語で当たるのがニュートン法であって Newton 多面体ではないことを" +
+      "示すために挙げている（同名で別物を拾わないための根拠）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean",
+    reason:
+      "mathlib のファイル。Newton の公式が**在る**ことの根拠として実測で見つけた先であり、" +
+      "この 1 件があるので自分で証明する側ではなく mathlib から引く側へ振り分けた。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+    reason:
+      "mathlib のファイル。Smith 標準形が在ることの根拠として宣言行を直読した先である" +
+      "（`Submodule.smithNormalForm` ほか。整除の鎖はここにも無い）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
     file: "docs/paper-001-migration-status.md",
     reference: "tools/verify-no-lost-proofs.ts",
     reason: "「Ising 側にある …」＝別プロジェクトのファイル。",

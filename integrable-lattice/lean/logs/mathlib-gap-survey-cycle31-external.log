@@ -1,0 +1,272 @@
+=== 日付 ===
+2026-08-04T11:19:09Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== Newton の公式（冪和と基本対称式） ===
+--- (1) 連結語の内容 grep: 'NewtonIdentities'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'newton identities'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'newton identities'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean
+
+=== Artin の指標の一次独立性 ===
+--- (1) 連結語の内容 grep: 'linearIndependent_monoidHom'
+files=4
+.lake/packages/mathlib/Mathlib/FieldTheory/Fixed.lean
+.lake/packages/mathlib/Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'linear independent.*monoidHom'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'linear independent.*monoidHom'
+files=0
+
+=== Cayley-Hamilton の定理 ===
+--- (1) 連結語の内容 grep: 'aeval_self_charpoly'
+files=6
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Eigenspace/Zero.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'cayley hamilton'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cayley hamilton'
+files=0
+
+=== Hensel の補題 ===
+--- (1) 連結語の内容 grep: 'IsHensel'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'henselian'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'henselian'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+
+=== Gauss の補題（原始多項式の積） ===
+--- (1) 連結語の内容 grep: 'IsPrimitive.mul'
+files=2
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Content.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'isPrimitive'
+files=54
+.lake/packages/mathlib/Mathlib/Analysis/Fourier/ZMod.lean
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Complex/CircleAddChar.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LSeries/DirichletContinuation.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LSeries/ZMod.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/Complex.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'isPrimitive'
+files=0
+
+=== Vandermonde 行列式 ===
+--- (1) 連結語の内容 grep: 'det_vandermonde'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Discriminant.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Vandermonde.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'vandermonde'
+files=7
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Discriminant.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Binomial.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Lagrange.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Vandermonde.lean
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Vandermonde.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'vandermonde'
+files=2
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Vandermonde.lean
+.lake/packages/mathlib/Mathlib/Data/Nat/Choose/Vandermonde.lean
+
+=== Cramer の規則 ===
+--- (1) 連結語の内容 grep: 'Matrix.cramer'
+files=1
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Adjugate.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'cramer'
+files=7
+.lake/packages/mathlib/Mathlib/Topology/Instances/Matrix.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Discriminant.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/AffineSpace/Matrix.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'cramer'
+files=0
+
+=== 整数行列の Smith 標準形 ===
+--- (1) 連結語の内容 grep: 'smithNormalForm'
+files=5
+.lake/packages/mathlib/Mathlib/LinearAlgebra/PID.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'smith normal'
+files=3
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'smith normal'
+files=0
+
+=== Newton 多面体とその加法性（Ostrowski） ===
+--- (1) 連結語の内容 grep: 'newtonPolytope'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'newton polytope'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'newton polytope'
+files=0
+
+=== Skolem-Mahler-Lech の定理 ===
+--- (1) 連結語の内容 grep: 'SkolemMahlerLech'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'skolem mahler'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'skolem mahler'
+files=0
+
+=== Weierstrass 準備定理 ===
+--- (1) 連結語の内容 grep: 'WeierstrassPreparation'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'weierstrass preparation'
+files=2
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean
+.lake/packages/mathlib/Mathlib/Geometry/Manifold/Complex.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'weierstrass preparation'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean
+
+=== Kirchhoff の matrix-tree 定理 ===
+--- (1) 連結語の内容 grep: 'matrixTree'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'matrix tree'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'matrix tree'
+files=0
+
+=== Cauchy-Binet の公式 ===
+--- (1) 連結語の内容 grep: 'CauchyBinet'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cauchy binet'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cauchy binet'
+files=0
+
+=== 可換環の上のトレース双対基底（Euler の公式） ===
+--- (1) 連結語の内容 grep: 'traceDual'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/Different.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'trace dual'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'trace dual'
+files=0
+
+=== 多変数の Mahler 測度 ===
+--- (1) 連結語の内容 grep: 'MvPolynomial.mahlerMeasure'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'mahler measure'
+files=3
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/Norm.lean
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'mahler measure'
+files=2
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+
+=== Monsky の p 進冪級数の定理 ===
+--- (1) 連結語の内容 grep: 'Monsky'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'monsky'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'monsky'
+files=0
+
+=== Cuoco-Monsky の類数の漸近 ===
+--- (1) 連結語の内容 grep: 'CuocoMonsky'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cuoco'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cuoco'
+files=0
+
+=== Dold 列と Gauss 合同 ===
+--- (1) 連結語の内容 grep: 'gaussCongruence'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'dold'
+files=21
+.lake/packages/mathlib/Mathlib/AlgebraicTopology/MooreComplex.lean
+.lake/packages/mathlib/Mathlib/AlgebraicTopology/DoldKan/Normalized.lean
+.lake/packages/mathlib/Mathlib/AlgebraicTopology/DoldKan/Decomposition.lean
+.lake/packages/mathlib/Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean
+.lake/packages/mathlib/Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean
+.lake/packages/mathlib/Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'dold'
+files=0
+
+=== Lind-Schmidt-Ward のエントロピー＝Mahler 測度 ===
+--- (1) 連結語の内容 grep: 'topologicalEntropy.*mahler'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'lind schmidt'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'lind schmidt'
+files=0
+
+=== 守備範囲を宣言行で直読する（在るが射程が足りないもの） ===
+--- Mahler 測度は 1 変数か（MvPolynomial を使っているか）
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean : MvPolynomial の出現 0 件
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean : MvPolynomial の出現 0 件
+--- トレース双対は体を要求するか（Module.Basis.traceDual の宣言行）
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:553:noncomputable def Module.Basis.traceDual :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:557:theorem Module.Basis.traceDual_def :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:561:theorem Module.Basis.traceDual_repr_apply (x : L) (i : ι) :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:566:theorem Module.Basis.trace_traceDual_mul (i j : ι) :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:571:theorem Module.Basis.trace_mul_traceDual (i j : ι) :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:576:theorem Module.Basis.traceDual_traceDual :
+--- Smith 標準形はどこまで在るか（整除の鎖があるか）
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean:163:lemma toAddSubgroup_index_ne_zero_iff {N : Submodule ℤ M} (snf : Basis.SmithNormalForm N ι n) :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:30:theorem associated_norm_prod_smith [Fintype ι] (b : Basis ι R S) {f : S} (hf : f ≠ 0) :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:487:theorem Submodule.exists_smith_normal_form_of_le [Finite ι] (b : Basis ι R M) (N O : Submodule R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:514:noncomputable def Submodule.smithNormalFormOfLE [Finite ι] (b : Basis ι R M) (N O : Submodule R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:533:noncomputable def Submodule.smithNormalForm [Finite ι] (b : Basis ι R M) (N : Submodule R M) :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:555:noncomputable def Submodule.smithNormalFormOfRankEq [Fintype ι] (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:576:theorem Submodule.exists_smith_normal_form_of_rank_eq (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:599:noncomputable def Submodule.smithNormalFormTopBasis (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:612:noncomputable def Submodule.smithNormalFormBotBasis (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:625:noncomputable def Submodule.smithNormalFormCoeffs (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:630:theorem Submodule.smithNormalFormBotBasis_def (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:637:theorem Submodule.smithNormalFormCoeffs_ne_zero (b : Basis ι R M)
+--- Newton の公式の守備範囲（宣言行）
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:44:def newtonMap (x : S) : S :=
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:47:theorem newtonMap_apply :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:53:theorem newtonMap_apply_of_isUnit (h : IsUnit <| aeval x (derivative P)) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:57:theorem newtonMap_apply_of_not_isUnit (h : ¬ (IsUnit <| aeval x (derivative P))) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:61:theorem isNilpotent_iterate_newtonMap_sub_of_isNilpotent (h : IsNilpotent <| aeval x P) (n : ℕ) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:71:theorem isFixedPt_newtonMap_of_aeval_eq_zero (h : aeval x P = 0) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:75:theorem isFixedPt_newtonMap_of_isUnit_iff (h : IsUnit <| aeval x (derivative P)) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:81:theorem aeval_pow_two_pow_dvd_aeval_iterate_newtonMap
+--- Weierstrass 準備定理は何変数か（宣言行）
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:186:lemma weierstrassP_bound (r : ℝ) (hr : 0 < r) (s : ℂ) (hs : ‖s‖ < r) (l : ℂ) (h : 2 * r ≤ ‖l‖) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:219:def weierstrassPExcept (l₀ : ℂ) (z : ℂ) : ℂ :=
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:225:lemma hasSumLocallyUniformly_weierstrassPExcept (l₀ : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:237:lemma hasSum_weierstrassPExcept (l₀ : ℂ) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:243:lemma differentiableOn_weierstrassPExcept (l₀ : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:251:lemma weierstrassPExcept_neg (l₀ : ℂ) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:268:def weierstrassP (z : ℂ) : ℂ := ∑' l : L.lattice, (1 / (z - l) ^ 2 - 1 / l ^ 2)
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:272:lemma weierstrassPExcept_add (l₀ : L.lattice) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:281:lemma weierstrassPExcept_def (l₀ : L.lattice) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:286:lemma weierstrassPExcept_of_notMem (l₀ : ℂ) (hl : l₀ ∉ L.lattice) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:293:lemma hasSumLocallyUniformly_weierstrassP :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:299:lemma hasSum_weierstrassP (z : ℂ) :

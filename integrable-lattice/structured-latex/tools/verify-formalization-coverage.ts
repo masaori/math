@@ -33,6 +33,12 @@ import {
   FORMALIZATION_COVERAGE,
 } from "./formalization-coverage.ts";
 import { STALENESS_POLICY, auditLedgerAbsence, type LedgerText } from "./ledger-absence-model.ts";
+import {
+  EXTERNAL_THEOREM_COVERAGE,
+  type ExternalEntry,
+  type ExternalKind,
+} from "./external-theorem-coverage.ts";
+import { auditExternalTheorems } from "./external-theorem-model.ts";
 
 /** 地の文だけを連結する（数式・参照は本文の数値の照合に効かないので落とす）。 */
 const flattenProse = (nodes: readonly TranslatedNode[]): string => {
@@ -379,8 +385,11 @@ for (const file of readdirSync(leanDir).filter((name) => name.endsWith(".lean"))
 
 type Claim = { id: string; title: string; leanNames: readonly string[] };
 const claims: Claim[] = [];
+/** 外部定理の台帳が「どのブロックが引いているか」を指すので、主張以外（注記・定義）の id も要る。 */
+const allBlockIds = new Set<string>();
 for (const { blocks } of await loadContentFiles()) {
   for (const block of blocks) {
+    allBlockIds.add(block.id);
     if (block.kind !== "theorem" && block.kind !== "claim") continue;
     claims.push({
       id: block.id,
@@ -550,6 +559,64 @@ for (const entry of unformalised) {
     console.log(`      ${log.path}: ${log.recordedCommit ?? "コミットの記録なし"}（${mark}）`);
   }
   console.log(`    ${STALENESS_POLICY}`);
+}
+
+// --- 外部定理の振り分け（2026-08-04 ユーザー判断。基準は docs/external-theorem-criterion.md） ---
+//
+// 全数形式化の対象に、本論文が証明せず引用している外部定理も含める。
+// ここが確かめるのは、振り分けが腐っていないことと、種別ごとに要求した根拠が書かれていることだけ。
+// 振り分けそのもの（ある引用が「証明の根拠」か「位置づけ」か）は人の読みである。
+{
+  const byKind: Record<ExternalKind, ExternalEntry[]> = {
+    "自分で証明する": [],
+    "mathlib から引く": [],
+    "R 脱出として隔離する": [],
+    対象外: [],
+  };
+  for (const entry of EXTERNAL_THEOREM_COVERAGE) byKind[entry.kind].push(entry);
+
+  const audit = auditExternalTheorems({
+    entries: EXTERNAL_THEOREM_COVERAGE,
+    blockExists: (id) => allBlockIds.has(id),
+    leanDeclExists: (name) => declaredInLean.has(name),
+  });
+  violations.push(...audit.violations);
+
+  // 自分で証明すると決めた外部定理は、まだ 1 件も完了していない。
+  // したがって全数までの残りは「本文の未完了 ＋ 自分で証明する外部定理の全件」である。
+  const ownRemaining = audit.counts["自分で証明する"];
+
+  console.log("");
+  console.log(`  外部定理の振り分け（基準: docs/external-theorem-criterion.md）: 全 ${EXTERNAL_THEOREM_COVERAGE.length} 件`);
+  console.log(
+    `    自分で証明する ${audit.counts["自分で証明する"]} 件（うち着手済み ${audit.startedOwnProofs} 件） / ` +
+      `mathlib から引く ${audit.counts["mathlib から引く"]} 件 / ` +
+      `R 脱出として隔離する ${audit.counts["R 脱出として隔離する"]} 件 / ` +
+      `対象外 ${audit.counts["対象外"]} 件`,
+  );
+  console.log(
+    `  **全数形式化まで残り ${unformalised.length + ownRemaining} 件**` +
+      `（本文の主張 ${unformalised.length} 件 ＋ 自分で証明する外部定理 ${ownRemaining} 件）`,
+  );
+  console.log("");
+  for (const entry of byKind["自分で証明する"]) {
+    if (entry.kind !== "自分で証明する") continue;
+    console.log(`    [自分で証明する] ${entry.name}`);
+    console.log(`      出典: ${entry.source}`);
+    console.log(`      mathlib に無い根拠: ${entry.absence}`);
+    console.log(`      残り: ${entry.remaining}`);
+  }
+  for (const entry of byKind["R 脱出として隔離する"]) {
+    if (entry.kind !== "R 脱出として隔離する") continue;
+    console.log(`    [R 脱出として隔離する] ${entry.name}`);
+    console.log(`      隔離の根拠: ${entry.isolation}`);
+  }
+  console.log(
+    "  限界（外部定理）: 種別の振り分けは人の読みである。機械が見るのは、" +
+      "引いている箇所が実在すること・種別ごとに要求した根拠が書かれていること・" +
+      "宣言した定理名が lean/ に実在することだけで、" +
+      "「その引用が本当に証明の根拠でないか」「隔離が本当にできているか」は見ていない。",
+  );
 }
 
 if (violations.length > 0) {

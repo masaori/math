@@ -265,6 +265,17 @@ export default defineBlocks([
         "each of them, what is left (or why it has not been started).",
       ]),
       paragraph([
+        "The goal does not range over the assertions this paper makes on its own account alone. ",
+        "External theorems that this paper cites without proving are also within the scope of what ",
+        "we undertake to prove. To keep that scope from growing without bound, we draw the line by ",
+        "three tests: whether the theorem is cited as a ground of one of our proofs, whether its ",
+        "content lies on the countable side, and whether it is already available in mathlib. ",
+        "Applying that line leaves 7 external theorems that we have undertaken to prove, none of ",
+        "which is complete. Two further external theorems, whose substance is analysis on the real ",
+        "side, we do not prove: we isolate them as points of escape, and in each case we record the ",
+        "grounds on which the countable-side assertions do not depend on them.",
+      ]),
+      paragraph([
         "The current state of the formalisation — what is complete, what is partial, what has not been started, and the reason in each case — is recorded in a table in the accompanying Lean development. ",
         "For the propositions we could not formalise, we make concrete, from primary evidence (the code ",
         "we tried and the error output), what is missing in mathlib or at which step we got stuck. We never ",
