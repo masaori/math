@@ -274,6 +274,40 @@ export const SCOPE_CLAIMS: readonly ScopeClaim[] = [
       "登録されておらず、人の読みのままだった（登録の網羅性が測れないことの実例である）。",
   },
   {
+    entry: "paper_051_theorem_duality / 多変数の Mahler 測度（双対命題 D の側）",
+    kind: "在るが概念を使っていない",
+    file: "Mathlib/Analysis/Polynomial/MahlerMeasure.lean",
+    absentToken: "MvPolynomial",
+    why:
+      "双対命題 D のアルキメデス側は 2 変数のスペクトル曲線の Mahler 測度を要する。" +
+      "命題 LSW と同じ不足だが、**エントリが別なので登録も別に要る**。" +
+      "**cycle 34 step 4 で登録した**——台帳の地の文は「mathlib の Mahler 測度は 1 変数だけで" +
+      "多変数が無い」と書いていたのに、射程の主張として登録されていなかった。" +
+      "**これは「射程の主張」と分類される手前で取りこぼしていた実例である。**",
+  },
+  {
+    entry: "Monsky の p 進冪級数の定理 / 岩澤代数の一般論",
+    kind: "在るが概念を使っていない",
+    file: "Mathlib/NumberTheory/Padics/Measure/Basic.lean",
+    absentToken: "MvPowerSeries",
+    why:
+      "本論文が要るのは岩澤代数の一般論である。台帳は「mathlib には `PowerSeries` の" +
+      "断片としてしか無い」と地の文で書いていたが、登録が無かった。" +
+      "**cycle 34 step 4 で登録した**（同じ不足を 命題 F の側では登録済みだったので、" +
+      "**同じ事柄について片方だけ登録されていた**ことになる）。",
+  },
+  {
+    entry: "paper_062_theorem_T / 円分体の完備化への Hensel の配線",
+    kind: "在るが関係が無い",
+    presentToken: "Henselian",
+    unrelatedToken: "cyclotomic",
+    why:
+      "命題 T の 2 の不分岐性は Hensel の持ち上げを円分体の完備化で使う。" +
+      "台帳は「Hensel は mathlib に在るが円分体の完備化への配線が無い」と地の文で書いていたが、" +
+      "登録が無かった。**cycle 34 step 4 で登録した**。" +
+      "2026-08-05 実測で、`Henselian` と `cyclotomic` が同じ行に現れる箇所は 0 件である。",
+  },
+  {
     entry: "paper_043b_theorem_trace_bound / 単因子の整除の鎖",
     kind: "在るが関係が無い",
     presentToken: "smithCoeffs",
@@ -285,3 +319,90 @@ export const SCOPE_CLAIMS: readonly ScopeClaim[] = [
       "ここで機械の側へ移した。",
   },
 ];
+
+/* ------------------------------------------------------------------------- *
+ * 分類の手前の取りこぼしを拾う（cycle 34 step 4）
+ * ------------------------------------------------------------------------- */
+
+/**
+ * **登録の網羅性を、台帳の地の文の側から測る。**
+ *
+ * cycle 33 step 4 は「射程の主張」と分類済みなのに未登録だったものを 1 件拾えたが、
+ * 総括はこう書いていた——**分類の手前で取りこぼしているものは、依然として人の読みのままである。**
+ * ここがその穴を狭める仕組みである。
+ *
+ * 考え方は単純で、**分類を待たずに台帳の文そのものを読む**。
+ * 「mathlib に在るが足りない」と地の文で言っているのに登録が無ければ、
+ * それは分類の手前で取りこぼしている射程の主張である。
+ *
+ * ## 目印は実測から決めた（原理から出したものではない）
+ *
+ * 下の語は、**現に台帳にある射程の主張の文から拾った**（検査 Λ の 3 規則・
+ * 射程の 3 形と同じ立て方である）。文の単位で見て、
+ * **`mathlib` の語と目印の両方を含む文**だけを射程の主張の候補とする。
+ * 語だけで拾うと「Cauchy–Binet と全単模性だけから出る」のような無関係な文まで当たる
+ * （実測で 16 件当たり、そのうち射程の主張は 4 件だった。だから文の単位にした）。
+ *
+ * ## 何を違反にするか
+ *
+ * 候補に挙がったエントリが `SCOPE_CLAIMS` に登録されていなければ違反にする。
+ * **登録するか、なぜ射程の主張でないのかを免除として書くか、のどちらかを要求する。**
+ * 免除は件数を毎回印字するので、黙って増やせない。
+ *
+ * ## 機械が確かめられないこと（正直に書く）
+ *
+ * - **目印に当たらない書き方をすれば、この検査は素通りする。** 網羅性は測れないままである。
+ *   狭めたのであって塞いだのではない。
+ * - 目印に当たったからといって射程の主張とは限らない（免除の口があるのはそのためである）。
+ */
+export const SCOPE_CLAIM_MARKERS: readonly string[] = [
+  "しか無い",
+  "しかない",
+  "在るが",
+  "あるが",
+  "断片",
+  "届かない",
+  "体の上にしか",
+  "1 変数",
+  "要求する",
+];
+
+/** 目印に当たるが射程の主張ではないもの。**理由を書く**（黙って除外できない）。 */
+export const SCOPE_CLAIM_EXEMPTIONS: readonly { readonly entry: string; readonly why: string }[] =
+  [];
+
+/** 目印に当たる文を取り出す。`mathlib` の語と目印の両方を含む文だけを返す。 */
+export function scopeClaimSentences(text: string): string[] {
+  return text
+    .split(/。/)
+    .filter((s) => s.includes("mathlib") && SCOPE_CLAIM_MARKERS.some((m) => s.includes(m)));
+}
+
+/** 候補の判定。IO を持たないので検出テストからそのまま呼べる。 */
+export function auditScopeClaimCoverage(input: {
+  readonly entries: readonly { readonly name: string; readonly text: string }[];
+  readonly registered: readonly string[];
+  readonly exemptions: readonly { readonly entry: string; readonly why: string }[];
+}): { violations: string[]; candidates: number; exempted: number } {
+  const violations: string[] = [];
+  let candidates = 0;
+  let exempted = 0;
+  for (const entry of input.entries) {
+    const sentences = scopeClaimSentences(entry.text);
+    if (sentences.length === 0) continue;
+    candidates += 1;
+    const isRegistered = input.registered.some(
+      (r) => entry.name.startsWith(r) || r.startsWith(entry.name),
+    );
+    if (isRegistered) continue;
+    if (input.exemptions.some((e) => e.entry === entry.name)) {
+      exempted += 1;
+      continue;
+    }
+    violations.push(
+      `[射程の主張が未登録] ${entry.name} — ` +
+        `台帳が「${sentences[0]!.trim().slice(0, 60)}」と書いているのに登録が無い`,
+    );
+  }
+  return { violations, candidates, exempted };
+}

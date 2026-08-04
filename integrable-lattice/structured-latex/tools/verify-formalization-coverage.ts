@@ -44,7 +44,12 @@ import {
   parseSurveyLog,
   type SurveyLog,
 } from "./absence-evidence-support.ts";
-import { SCOPE_CLAIMS, auditScopeClaims } from "./scope-claim-support.ts";
+import {
+  SCOPE_CLAIMS,
+  SCOPE_CLAIM_EXEMPTIONS,
+  auditScopeClaimCoverage,
+  auditScopeClaims,
+} from "./scope-claim-support.ts";
 
 /** 地の文だけを連結する（数式・参照は本文の数値の照合に効かないので落とす）。 */
 const flattenProse = (nodes: readonly TranslatedNode[]): string => {
@@ -711,8 +716,45 @@ for (const entry of unformalised) {
   );
   console.log(
     "    限界: その射程の主張が当の数学的主張にとって正しい射程かは判定できない" +
-      "（`MvPolynomial` が 0 件であることは確かめられるが、本論文が要るのが多変数版かは人の判断である）。" +
-      "登録されていない射程の主張は、これまでどおり人の読みのままである（登録の網羅性は測れない）。",
+      "（`MvPolynomial` が 0 件であることは確かめられるが、本論文が要るのが多変数版かは人の判断である）。",
+  );
+
+  // cycle 34 step 4: 分類の手前の取りこぼしを、台帳の地の文の側から拾う。
+  const scopeEntries: { name: string; text: string }[] = [];
+  for (const entry of FORMALIZATION_COVERAGE) {
+    const e = entry as unknown as Record<string, string>;
+    scopeEntries.push({
+      name: entry.block,
+      text: [e.remaining, e.reason, e.note].filter((x) => typeof x === "string").join(" "),
+    });
+  }
+  for (const entry of EXTERNAL_THEOREM_COVERAGE) {
+    const e = entry as unknown as Record<string, string>;
+    scopeEntries.push({
+      name: entry.name,
+      text: [e.remaining, e.note, e.presence, e.wiring, e.isolation, e.notAGround, e.absence]
+        .filter((x) => typeof x === "string")
+        .join(" "),
+    });
+  }
+  const coverage = auditScopeClaimCoverage({
+    entries: scopeEntries,
+    registered: SCOPE_CLAIMS.map((claim) => claim.entry.split(" / ")[0]!),
+    exemptions: SCOPE_CLAIM_EXEMPTIONS,
+  });
+  violations.push(...coverage.violations);
+  console.log(
+    `    登録の網羅性（cycle 34 step 4 で追加）: 台帳の地の文が射程の主張を書いているエントリ ` +
+      `${coverage.candidates} 件 / 未登録で違反にしたもの ${coverage.violations.length} 件 / ` +
+      `射程の主張ではないとして免除したもの ${coverage.exempted} 件`,
+  );
+  console.log(
+    "    **分類を待たずに台帳の文そのものを読む。**「mathlib に在るが足りない」と地の文で言っている" +
+      "エントリに登録が無ければ違反にする（cycle 33 までは、分類の手前の取りこぼしは人の読みのままだった）。",
+  );
+  console.log(
+    "    限界: **目印に当たらない書き方をすれば素通りする。網羅性は測れないままである**" +
+      "（狭めたのであって塞いだのではない）。目印は原理からではなく、現に台帳にある射程の主張の文から拾った。",
   );
 }
 

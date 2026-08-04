@@ -10,7 +10,7 @@
  * 実行: `npm run test:scope-claim`
  */
 
-import { auditScopeClaims, type ScopeClaim } from "./scope-claim-support.ts";
+import { auditScopeClaimCoverage, auditScopeClaims, type ScopeClaim } from "./scope-claim-support.ts";
 
 /** 現に mathlib が取っている形（仮定は宣言行ではなく `variable` 行にある）。 */
 const traceDualSource = [
@@ -137,4 +137,61 @@ if (failed > 0) {
   console.log(`NG: ${failed} 件が期待どおりでない。`);
   process.exit(1);
 }
-console.log(`OK: ${cases.length} 件すべて期待どおり。`);
+
+// --- cycle 34 step 4: 分類の手前の取りこぼしを拾う規則の検出テスト ---
+const coverageCases: readonly { readonly name: string; readonly shouldFail: boolean; readonly run: () => string[] }[] = [
+  {
+    name: "地の文が射程の主張を書いているのに未登録なら違反にする",
+    shouldFail: true,
+    run: () =>
+      auditScopeClaimCoverage({
+        entries: [{ name: "甲", text: "mathlib には `PowerSeries` の断片としてしか無い。" }],
+        registered: [],
+        exemptions: [],
+      }).violations,
+  },
+  {
+    name: "登録されていれば通る",
+    shouldFail: false,
+    run: () =>
+      auditScopeClaimCoverage({
+        entries: [{ name: "甲", text: "mathlib には `PowerSeries` の断片としてしか無い。" }],
+        registered: ["甲"],
+        exemptions: [],
+      }).violations,
+  },
+  {
+    name: "免除を書けば通る（件数は出る）",
+    shouldFail: false,
+    run: () =>
+      auditScopeClaimCoverage({
+        entries: [{ name: "甲", text: "mathlib には `PowerSeries` の断片としてしか無い。" }],
+        registered: [],
+        exemptions: [{ entry: "甲", why: "射程の主張ではない" }],
+      }).violations,
+  },
+  {
+    name: "mathlib の語を含まない文は候補にしない（無関係な「だけ」で当たらない）",
+    shouldFail: false,
+    run: () =>
+      auditScopeClaimCoverage({
+        entries: [{ name: "甲", text: "Cauchy–Binet と全単模性だけから出る。在るがままに書いた。" }],
+        registered: [],
+        exemptions: [],
+      }).violations,
+  },
+];
+
+let coverageFailed = 0;
+for (const testCase of coverageCases) {
+  const violations = testCase.run();
+  const ok = violations.length > 0 === testCase.shouldFail;
+  if (!ok) coverageFailed += 1;
+  console.log(`${ok ? "OK" : "NG"}  [登録の網羅性] ${testCase.name}`);
+}
+if (coverageFailed > 0) {
+  console.log(`NG: 登録の網羅性の検出テスト ${coverageFailed} 件が期待どおりでない。`);
+  process.exit(1);
+}
+
+console.log(`OK: ${cases.length + coverageCases.length} 件すべて期待どおり。`);
