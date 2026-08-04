@@ -450,6 +450,10 @@ targets=(
   IntegrableLattice.mv_support_nonempty_of_ne_zero
   IntegrableLattice.exists_pow_gt
   IntegrableLattice.exists_root_of_one_le_natDegree
+  # cycle 28 step 5: 救済 PR #69 から移植した「最終周期の最小値＝orderOf」の段
+  IntegrableLattice.isLeast_eventualPeriod
+  IntegrableLattice.isOfFinOrder_of_isUnit_of_finite
+  IntegrableLattice.isLeast_eventualPeriod_reduction
 )
 
 {

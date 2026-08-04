@@ -181,4 +181,56 @@ theorem isUnit_map_of_not_dvd_det {d : ℕ} (hk : k ≠ 0) (T : Matrix (Fin d) (
   rw [hd]
   exact isUnit_intCast_of_not_dvd hk hdet
 
+/-! ## 最終周期の最小値が `orderOf` であること（救済 PR #69 からの移植）
+
+`isUnit_pow_add_eq_iff` は「$A^{N+t}=A^N\iff A^t=1$」までを述べる。
+人手証明が $\pi(p,k)$ を**最終周期の最小値**として導入している以上、
+その最小値が `orderOf` に一致することまで述べないと、本ファイルの $\pi(p,k)$（`orderOf`）が
+人手証明の $\pi(p,k)$ と同じものだとは言えていない。**その段がここまで欠けていた。**
+
+この段は救済ブランチ `worktree-piped-brewing-kahan`（PR #69）にだけ存在していた。
+分岐点が古く、そのままマージすると 772 ファイル・11 万行超の削除になるため、
+**主張だけを現在の main の上へ書き直した**。向こうの実装は
+「$p\nmid\det T$ なら $T\bmod p^k$ は可逆」の補題を**未証明のまま残していた**が、
+その補題は main 側に `isUnit_map_of_not_dvd_det` として**証明済みで既に在る**ので、
+本ファイルではそれを使う。したがって未証明の穴は 1 つも持ち込んでいない。 -/
+
+/-- 単元 `A` の「最終周期の最小値」は `orderOf A` である。
+
+人手証明の $\pi(p,k)$（$T^N\bmod p^k$ の最終周期の最小値）と、本ファイルが計算に使う
+`orderOf` を同一視する補題。可逆性が効くのは「最終周期が 0 から数えた純周期でもある」ところである。 -/
+theorem isLeast_eventualPeriod {M : Type*} [Monoid M] {A : M} (hA : IsUnit A)
+    (hfin : IsOfFinOrder A) :
+    IsLeast {t : ℕ | 0 < t ∧ ∃ N₀, ∀ N, N₀ ≤ N → A ^ (N + t) = A ^ N} (orderOf A) := by
+  constructor
+  · refine ⟨hfin.orderOf_pos, 0, fun N _ => ?_⟩
+    rw [pow_add, pow_orderOf_eq_one, mul_one]
+  · rintro t ⟨htpos, N₀, ht⟩
+    exact Nat.le_of_dvd htpos
+      (orderOf_dvd_of_pow_eq_one ((isUnit_pow_add_eq_iff hA N₀ t).mp (ht N₀ le_rfl)))
+
+/-- 有限モノイドの単元は有限位数である。
+
+行列環は簡約モノイドではないので `isOfFinOrder_of_finite` を直接は使えない。
+単元の成す群へ移してから `orderOf_units` で戻す（この 1 行のためだけの補題）。 -/
+theorem isOfFinOrder_of_isUnit_of_finite {M : Type*} [Monoid M] [Finite M] {A : M}
+    (hA : IsUnit A) : IsOfFinOrder A := by
+  have h : IsOfFinOrder hA.unit := isOfFinOrder_of_finite _
+  rw [← orderOf_pos_iff] at h ⊢
+  rwa [← orderOf_units, IsUnit.unit_spec] at h
+
+/-- 整数行列版。`p ∤ det T` の下で、`T^N mod p^k` の最終周期の最小値は
+`orderOf (T mod p^k)` である。すなわち `orderOf_reduction_dvd` の左辺は
+人手証明の $\pi(p,k)$ そのものである。 -/
+theorem isLeast_eventualPeriod_reduction {d : ℕ} (hk : k ≠ 0) (T : Matrix (Fin d) (Fin d) ℤ)
+    (hdet : ¬ (p : ℤ) ∣ T.det) :
+    IsLeast
+      {t : ℕ | 0 < t ∧ ∃ N₀, ∀ N, N₀ ≤ N →
+        (T.map (fun a : ℤ => (a : ZMod (p ^ k)))) ^ (N + t)
+          = (T.map (fun a : ℤ => (a : ZMod (p ^ k)))) ^ N}
+      (orderOf (T.map (fun a : ℤ => (a : ZMod (p ^ k))))) := by
+  haveI : NeZero (p ^ k) := ⟨pow_ne_zero k hp.out.pos.ne'⟩
+  have hu := isUnit_map_of_not_dvd_det hk T hdet
+  exact isLeast_eventualPeriod hu (isOfFinOrder_of_isUnit_of_finite hu)
+
 end IntegrableLattice
