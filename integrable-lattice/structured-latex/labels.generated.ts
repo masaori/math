@@ -9,6 +9,7 @@ export const ALL_LABELS = [
   "paper_claim_resultant",
   "paper_def_aL",
   "paper_def_curve",
+  "paper_def_graph_tower",
   "paper_def_ladder",
   "paper_def_massieu",
   "paper_four_axes",
