@@ -332,28 +332,28 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "KirchhoffCounting.lean",
-    declarationsAtReview: 3,
+    declarationsAtReview: 4,
     heading: "形式化しなかったもの",
     externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
       {
-        leanFragment: "でないことと「全域木であること」の同値",
-        kind: "未形式化",
-        ledgerFragment: "全域木",
+        leanFragment: "でないことと「全域木であること」の同値は cycle 37 step 2 で入った",
+        kind: "形式化済み",
+        witness: "det_submatrix_ne_zero_iff_reach",
       },
       { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
     ],
   },
   {
     file: "SpanningConnectivity.lean",
-    declarationsAtReview: 21,
+    declarationsAtReview: 30,
     heading: "形式化しなかったもの",
     externalEntry: "Kirchhoff の matrix-tree 定理（グラフの全域木を数える定理）",
     items: [
       {
-        leanFragment: "葉を除いた小さいグラフへの帰納",
-        kind: "未形式化",
-        ledgerFragment: "帰納法の後半（葉を除いた小さいグラフへの帰納）",
+        leanFragment: "葉を除いた小さいグラフへの帰納は cycle 37 step 2 で書いた",
+        kind: "形式化済み",
+        witness: "det_submatrix_eq_one_or_neg_one",
       },
       { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
     ],

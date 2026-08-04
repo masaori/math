@@ -33,14 +33,19 @@ report にこう書いていた——
 
 ## 形式化しなかったもの
 
-* **小行列式が $0$ でないことと「全域木であること」の同値**。これが残りの本体で、
-  グラフの連結性と閉路を型に用意することになる。この file では書いていない。
-* **指標分解**（塔の各レベルへ分ける段）。これも別である。
+* **小行列式が $0$ でないことと「全域木であること」の同値は cycle 37 step 2 で入った**
+  （`SpanningConnectivity.det_submatrix_ne_zero_iff_reach`）。
+  段 4 でそれを当て、この file の数え上げを全域木の個数として書き直した。
+  **閉路の型は要らなかった**——辺の本数を $|V|-1$ に固定すると「連結」と同値になる。
+* **指標分解**（塔の各レベルへ分ける段）は書いていない。
+  **ただしこれは Kirchhoff の定理の内容ではない**（本文は 2 つを並べて引いている）ので、
+  本文の主張の側の残りである。
 -/
 import Mathlib
 import IntegrableLattice.CauchyBinet
 import IntegrableLattice.IncidenceUnimodular
 import IntegrableLattice.MultigraphLaplacian
+import IntegrableLattice.SpanningConnectivity
 
 namespace IntegrableLattice
 namespace KirchhoffCounting
@@ -134,6 +139,50 @@ theorem det_mul_transpose_eq_card
   simp only [hterm]
   rw [Finset.sum_ite, Finset.sum_const, Finset.sum_const]
   simp [hD]
+
+/-! ## 段 4: 数えているものを全域木として同定する（cycle 37 step 2）
+
+段 3 は「小行列式が $0$ でない辺集合の個数」までしか言っていなかった。
+`SpanningConnectivity` の逆向きが入ったので、その条件を
+**辺集合が根から全体を連結にすること**へ置き換えられる。
+辺の本数が $|V|-1$ に固定されているので、これはちょうど全域木であることである。
+
+**これが Kirchhoff の matrix-tree 定理の本体である。** -/
+
+open scoped Classical in
+/-- **Kirchhoff の matrix-tree 定理（本体）**。
+根の行を落としたラプラシアンの行列式は、**全域木の個数**に等しい。
+
+条件の側は「根から全頂点へ届く辺集合」で書いてある。
+辺の本数が $|V|-1$ に固定されているので、これは全域木であることと同じである
+（本数を固定すると「連結」と「閉路を持たない」は同値になるので、閉路を型に持つ必要が無い。
+この観察は cycle 34 step 2 のもの）。 -/
+theorem det_mul_transpose_eq_card_spanning (s t : E → V) (r0 : V) {k : ℕ}
+    (r : Fin k → V) (hr : Function.Injective r) (hr0 : ∀ i, r i ≠ r0)
+    (hrsurj : ∀ v : V, v ≠ r0 → ∃ i, r i = v) (hk : k + 1 = Fintype.card V) :
+    ((incMatrixSigned s t).submatrix r id *
+        ((incMatrixSigned s t).submatrix r id)ᵀ).det =
+      ((Finset.univ : Finset {S : Finset E // S.card = k}).filter
+          fun S : {S : Finset E // S.card = k} =>
+            ∀ u : V, SpanningConnectivity.ReachOn s t S.1 r0 u).card := by
+  classical
+  have hset :
+      ((Finset.univ : Finset {S : Finset E // S.card = k}).filter
+          fun S : {S : Finset E // S.card = k} =>
+            ((incMatrixSigned s t).submatrix r (S.1.orderEmbOfFin S.2)).det ≠ 0)
+        = ((Finset.univ : Finset {S : Finset E // S.card = k}).filter
+            fun S : {S : Finset E // S.card = k} =>
+              ∀ u : V, SpanningConnectivity.ReachOn s t S.1 r0 u) := by
+    refine Finset.filter_congr fun S _ => ?_
+    have hcard : S.1.card + 1 = Fintype.card V := by rw [S.2]; exact hk
+    have hcinj : Function.Injective (S.1.orderEmbOfFin S.2) :=
+      (S.1.orderEmbOfFin S.2).injective
+    have hcmem : ∀ j, (S.1.orderEmbOfFin S.2) j ∈ S.1 := fun j =>
+      Finset.orderEmbOfFin_mem S.1 S.2 j
+    simpa using
+      SpanningConnectivity.det_submatrix_ne_zero_iff_reach s t S.1 r0 hcard r hr hr0 hrsurj
+        (S.1.orderEmbOfFin S.2) hcinj hcmem
+  rw [det_mul_transpose_eq_card s t r hr, hset]
 
 end KirchhoffCounting
 end IntegrableLattice

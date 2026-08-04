@@ -683,6 +683,17 @@ targets=(
   IntegrableLattice.SpanningConnectivity.incMatrixSigned_eq_zero_of_degOn_one
   IntegrableLattice.SpanningConnectivity.incMatrixSigned_leaf_eq_one_or_neg_one
   IntegrableLattice.SpanningConnectivity.det_submatrix_eq_of_leaf
+  # 頂点の部分集合を引数に持つ形と、逆向きの帰納法の後半（cycle 37 step 2）
+  IntegrableLattice.SpanningConnectivity.sum_degOn_on
+  IntegrableLattice.SpanningConnectivity.exists_degOn_le_one_on
+  IntegrableLattice.SpanningConnectivity.exists_leaf_ne_root_on
+  IntegrableLattice.SpanningConnectivity.exists_unique_incident_of_degOn_one
+  IntegrableLattice.SpanningConnectivity.reachOn_erase_of_leaf
+  IntegrableLattice.SpanningConnectivity.det_submatrix_eq_one_or_neg_one
+  IntegrableLattice.SpanningConnectivity.det_submatrix_eq_one_or_neg_one_of_reach
+  IntegrableLattice.SpanningConnectivity.det_submatrix_ne_zero_iff_reach
+  # Kirchhoff の matrix-tree 定理の本体（cycle 37 step 2）
+  IntegrableLattice.KirchhoffCounting.det_mul_transpose_eq_card_spanning
 
   # cycle 34 step 2: 全域木の同定の半分（連結でなければ小行列式は 0）。
   # 逆向き（連結なら ±1）は書いていない。

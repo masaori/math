@@ -272,7 +272,7 @@ export default defineBlocks([
         "content lies on the countable side, and whether it is already available in mathlib. ",
         "Applying that line, ",
         "we have undertaken to prove 7 of the external theorems ourselves; ",
-        "the number of those proofs that are complete is 2. ",
+        "the number of those proofs that are complete is 3. ",
         "Two further external theorems, whose substance is analysis on the real ",
         "side, we do not prove: we isolate them as points of escape, and in each case we record the ",
         "grounds on which the countable-side assertions do not depend on them.",

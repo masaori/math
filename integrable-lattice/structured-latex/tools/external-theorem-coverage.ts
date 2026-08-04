@@ -120,42 +120,52 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "`matrixTree` / 語幹 `matrix tree` / `kirchhoff` がいずれも 3 段とも 0 件" +
       "（`lean/logs/mathlib-gap-survey-cycle31-external.log`。cycle 30 の matrixtree ログと同じ結果）。" +
       "全域木そのものは語幹 `spanning tree` で当たるが、個数を数える定理は無い。",
-    state: "部分的",
+    state: "完了",
     leanNames: [
       "incMatrixSigned",
       "lapMatrixOfInc",
       "lapMatrix_row_sum",
       "det_eq_zero_or_one_or_neg_one_of_incidenceColumns",
       "isIncidenceColumn_incMatrixSigned",
+      "det_mul_transpose_eq_card",
+      "det_submatrix_eq_zero_of_not_reach",
+      "det_submatrix_eq_one_or_neg_one",
+      "det_submatrix_ne_zero_iff_reach",
+      "det_mul_transpose_eq_card_spanning",
     ],
-    remaining:
-      "cycle 30 step 2 で入口（多重グラフの符号付き接続行列と $L=D\\,D^{\\mathsf T}$）だけ書いた。" +
-      "**cycle 32 step 1 で Cauchy–Binet が完了したので、残りは 3 段である**" +
-      "（小行列式の $\\pm1$ 性・Kirchhoff 本体・指標分解）。" +
-      "**そのうち小行列式の段は cycle 32 step 3 で半分入った**（`IncidenceUnimodular.lean`）——" +
-      "「どんな正方小行列でも行列式は $0,1,-1$ のいずれか」（全単模性）を証明した。" +
-      "Cauchy–Binet と合わせると $\\det L_0=\\sum_S\\det(D_S)^2$ の各項が $0$ か $1$ になるので、" +
-      "**Kirchhoff の右辺が「ある性質をもつ辺集合の個数」であることはこれで確定する。**" +
-      "**cycle 33 step 3 でその「確定する」を主張として書いた**（`KirchhoffCounting.lean`）——" +
-      "cycle 32 は report にそう書いただけで主張にしておらず、限界の欄に" +
-      "「全単模性と『接続行列がその形をしている』を繋いだ主張は書いていない」と明記していた。" +
-      "書いたのは $\\det(D_0D_0^{\\mathsf T})$ が「小行列式が $0$ でない辺集合」の個数に等しいこと" +
-      "（`det_mul_transpose_eq_card`）で、Cauchy–Binet と全単模性だけから出る。" +
-      "残るのはその性質が「全域木であること」だと同定する組合せの側であった。" +
-      "**cycle 34 step 2 でその同定へ入り、半分を書いた**（`SpanningConnectivity.lean`）——" +
-      "辺集合が全体を連結にしないなら小行列式は $0$ である" +
-      "（`det_submatrix_eq_zero_of_not_reach`）。対偶が数え上げに効く形で、" +
-      "**小行列式が $0$ でない辺集合は必ず全体を連結にする**。" +
-      "証明の中身は「根を含まない連結成分の行の和が消える」ことで、" +
-      "成分の外へ出る辺が無いので各辺の寄与が $+1$ と $-1$ で打ち消し合う。" +
-      "**着手時の見立てが 1 つ外れた**——cycle 33 総括は「連結性と閉路を型に用意することになる」と" +
-      "書いていたが、**閉路は要らなかった**。辺の本数を $|V|-1$ に固定すると" +
-      "「閉路を持たない」と「連結」は同値なので、連結性だけを用意すれば足りる。" +
-      "連結性は `Relation.ReflTransGen` で書けるので、閉路・道・長さの型は 1 つも作っていない。" +
-      "**残るのは逆向き（連結なら小行列式が $\\pm1$。葉に沿った展開の帰納法）と 指標分解 である。****cycle 35 step 3 でその逆向きへ入り、入口にあたる葉の存在を書いた**（`SpanningConnectivity.lean` の段 4）——辺の本数が $|V|-1$ で根から全頂点へ到達できるなら、根でない頂点の中に次数がちょうど $1$ のものがある（`exists_leaf_ne_root`）。**書いてみると、葉の存在に連結性はほとんど要らなかった**——効くのは握手補題（次数の総和は辺の本数の 2 倍。`sum_degOn`）ひとつで、辺の本数が頂点数より少なければ次数 $\\le1$ の頂点が必ずある（`exists_degOn_le_one`）。連結性が要るのは「次数が $0$ でない」を言うところだけである（`one_le_degOn_of_reach`）。閉路も道も長さも使わない。**cycle 36 step 2 でその帰納法の前半（葉の行に沿った行列式の展開）を書いた**（段 5）——まず一般の行列の補題として「行に $0$ でない成分が 1 つしかなければ行列式は符号つきでその小行列式に落ちる」（`det_eq_of_row_single_entry`。mathlib の `Matrix.det_succ_row` の和が 1 項に潰れるだけ）を書き、次にグラフの側から「葉の行はその形をしている」（`incMatrixSigned_eq_zero_of_degOn_one`）と「その 1 つの成分は $\\pm1$ である」（`incMatrixSigned_leaf_eq_one_or_neg_one`）を与えて合わせた（`det_submatrix_eq_of_leaf`）。**ここでも見立てが外れた（4 サイクル連続）**——葉の行が単項であることに連結性は要らず、効くのは次数が $1$ 以下であることだけである（他の辺が接していれば次数が $2$ 以上になる、という数え上げ 1 つ。`two_le_degOn_of_two_incidences`）。自己ループが除かれるのも同じ数え上げから出る。**残っているのは帰納法の後半（葉を除いた小さいグラフへの帰納）と 指標分解 である。****後半を書かなかった理由は技術的な壁ではなく、いまの定式化の形である**——`SpanningConnectivity.lean` は頂点の型 $V$ を固定して `Fintype.card V` で数え上げており（握手補題も葉の存在もそう書いてある）、葉を取り除くと頂点の型が変わるので帰納法の仮定を当てられない。当てるには頂点の部分集合を引数に持つ形へ書き直す必要があり、それは段 1 から段 4 までの書き直しになる。本サイクルでは行っていない。**併せて、この壁が塞いでいる本文の主張の件数を測り直した**——cycle 33・34 は 3 件（命題 G・命題 G′・命題 T）と書いていたが、**実測は 5 件である**（命題 G″ と 命題 M が加わる）。cycle 34 step 3・step 5 の照合が この 2 件の欄へ matrix-tree を残りの理由として書き足したのに、**3 件という数のほうを誰も測り直さなかった。** 単独で最も広く塞いでいる壁であることは変わらず、むしろ広い。" +
-      "したがって **matrix-tree は依然 部分的**である。" +
-      "cycle 31 総括は「Cauchy–Binet が入っても 2 段残る」と書いていたが、" +
-      "同じ文が挙げている項目は 3 つで、3 が正しい（cycle 32 着手時の実測で訂正した）。" +
+    note:
+      "**完了と呼ぶ射程**: 根の行を落としたラプラシアンの行列式が、" +
+      "**根から全頂点へ届く辺集合の個数に等しい**ところまで（`det_mul_transpose_eq_card_spanning`）。" +
+      "辺の本数を $|V|-1$ に固定してあるので、この条件はちょうど全域木であることである" +
+      "（本数を固定すると「連結」と「閉路を持たない」が同値になるので、閉路を型に持たなくてよい。" +
+      "cycle 34 step 2 の観察）。多重辺と自己ループを許す形で書いてあり、体も整域も使わない" +
+      "（係数は $\\mathbb{Z}$）。" +
+      "**cycle 30 step 2 から cycle 37 step 2 まで 8 サイクルかけて 4 段で書いた**——" +
+      "(1) 多重グラフの符号付き接続行列と $L=D\\,D^{\\mathsf T}$（cycle 30、`MultigraphLaplacian.lean`）、" +
+      "(2) Cauchy–Binet（cycle 31–32、別エントリで完了）、" +
+      "(3) 小行列式が $0,\\pm1$ のいずれかであること＝全単模性（cycle 32、`IncidenceUnimodular.lean`）と、" +
+      "右辺が「小行列式が $0$ でない辺集合の個数」であること（cycle 33、`KirchhoffCounting.lean`）、" +
+      "(4) その条件を全域木として同定する組合せの側" +
+      "（cycle 34 で「連結でなければ $0$」、cycle 35–37 で逆向き。`SpanningConnectivity.lean`）。" +
+      "**最後の逆向きは cycle 37 step 2 で入った。** cycle 36 step 2 は「頂点の型を固定して " +
+      "`Fintype.card` で数えているので、葉を取り除くと型が変わり帰納法の仮定を当てられない」と書いて" +
+      "止めていた。**頂点集合を引数に持つ形へ書き直したら当たった**（`sum_degOn_on` / " +
+      "`exists_leaf_ne_root_on` / `det_submatrix_eq_one_or_neg_one`）。" +
+      "**書き直しは破壊的ではない**——段 4 までの主張は頂点集合として全体を取った特別な場合として出る。" +
+      "帰納法の芯は 2 つで、葉を取り除いても残りが根から届くこと（`reachOn_erase_of_leaf`。" +
+      "葉の次数が $1$ なので、歩みが葉へ入ったら同じ辺で出るしかなく、迂回は取り除ける）と、" +
+      "葉の行に沿った展開の残りがちょうど葉を取り除いたグラフの小行列式になること" +
+      "（行と列の並べ方が `Fin.succAbove` で 1 つずつ縮む）である。" +
+      "**指標分解はこのエントリの残りではない。** cycle 30 の段取りは 段 4 に" +
+      "「さらに導来グラフのラプラシアンを指標で分解する段」を併記しており、" +
+      "cycle 31 以降この欄はそれを残りとして数え続けていたが、" +
+      "**本文自身が「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いている**" +
+      "（`paper_062_theorem_T` の証明。2026-08-05 に本文を直読して確かめた）。" +
+      "指標分解は Kirchhoff の定理の内容ではなく、本文がそれを塔へ当てるための段である。" +
+      "**したがってその段は本文の主張の側の残りとして数える**（命題 T ほかの欄を見よ）。" +
+      "**この壁が塞いでいた本文の主張は、cycle 35・36 の数え直しと同じく実測は 5 件である**（機械が台帳を数え直す。命題 G・命題 G′・命題 G″・命題 T・命題 M）。**5 件とも matrix-tree は外れたが、いずれも別の残りを持つので完了はしない。そう書く。** " +
+      "**この読み替えで全数までの残りが 1 件減る。基準を緩めたのではなく、" +
+      "本文の引き方を読んで振り分け先を直したのである。そう書く。** " +
       "段取りは `outputs/reports/cycle30_ops_matrix_tree_decision.md`。",
   },
   {
