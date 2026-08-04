@@ -692,6 +692,8 @@ targets=(
   IntegrableLattice.CharacterDecomposition.hat_one
   IntegrableLattice.CharacterDecomposition.det_fourierInv_mul_det_fourier
   IntegrableLattice.CharacterDecomposition.det_blockCirculant
+  # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
+  IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）
   IntegrableLattice.TracePeriodWStar.mulVec_injective_of_det_ne_zero
   IntegrableLattice.TracePeriodWStar.mul_left_cancel_of_det_ne_zero

@@ -30,6 +30,7 @@ import IntegrableLattice.WStarReducibleDescent
 import IntegrableLattice.WStarPowerBasisInstance
 import IntegrableLattice.WStarSquarefreeNonzero
 import IntegrableLattice.CharacterDecomposition
+import IntegrableLattice.TracePeriodStructure
 import IntegrableLattice.TracePeriodWStarLift
 import IntegrableLattice.SInfinityDecision
 import IntegrableLattice.EllTwoClosedForm

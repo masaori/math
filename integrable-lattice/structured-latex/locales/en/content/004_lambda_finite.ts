@@ -716,6 +716,7 @@ export default defineBlocks([
       "IntegrableLattice.tracePeriod_dvd_pow_mul",
       "IntegrableLattice.tThree_values",
       "IntegrableLattice.no_affine_trace_period_exponent",
+      "IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul",
       "IntegrableLattice.isLeast_isPLevel",
       "IntegrableLattice.wStarOfCoeffs_eq_zero_iff",
     ],

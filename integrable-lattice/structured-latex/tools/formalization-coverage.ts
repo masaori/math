@@ -180,10 +180,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "cycle 29 step 3 で $w^*$ の定義そのものは入った（WStarElementaryDivisors.lean。" +
       "**「整数行列の単因子が mathlib に無いから書けない」という step 1 の判定は覆った**——" +
       "適合基底の係数の $p$ 進付値の最大値として書ける）。" +
-      "残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。**cycle 37 step 3 でその段を書いた**（`TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel`。詳しくは 命題 C′ の欄を見よ）。**したがってこの主張の残りは 2 つである**——(1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\\min\\{m:g_m\\ge k\\}$ の同値。",
+      "残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。**cycle 37 step 3 でその段を書いた**（`TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel`。詳しくは 命題 C′ の欄を見よ）。**したがってこの主張の残りは 2 つである**——(1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\\min\\{m:g_m\\ge k\\}$ の同値。" +
+      "**cycle 38 step 3 で (3) を書いた**（`TracePeriodStructure.tracePeriod_eq_pow_mul`）。芯は本文が 1 文で書いているとおりで、**$p^m\\tau$ がレベル $k$ の周期であることと $g_m\\ge k$ は同じ文である**——$g_m$ は $\\min_N v_p(\\operatorname{Tr}(S^N(S^{p^m\\tau}-I)))$ なので、$g_m\\ge k$ は「すべての $N$ で $p^k$ が割る」であり、それが `IsTracePeriodAt` の定義そのものである。書く必要があったのは、そこから**最小周期 $t_k$ が $p^{e}\\tau$ に一致する**ことで、$t_k\\mid p^{e}\\tau$（最小性）と $\\tau\\mid t_k$（レベル $1$ の最小周期が割る）から $t_k=p^{m}\\tau$（$m\\le e$）と書け、それが周期なので $g_m\\ge k$、$e$ の最小性で $e\\le m$ となる。**ここで初めて $p$ の素数性を使う。そう書く**——$u\\mid p^{e}$ から $u=p^{m}$ を出す段が要求する（`Nat.dvd_prime_pow`）。`PropCTracePeriod.lean` と本文は「階段の証明は素数性を使っていない」と書いており、それは正しい。素数性を要求しているのは階段ではなく**最小周期の形を決める段**である。**残りは 1 つになった**——(1) のしきい値 $w^*+1$ の最良性（$k\\le w^*$ で階段が偽であること）。**これは反例の族を作る主張であり、本文も反例を明示していない。そう書く。** また $g_m$ を付値の最小として構成する段は書いておらず、$g$ は同値を与える族として受け取っている。",
     remainingItems: [
       "のしきい値 $w^*+1$ の最良性",
-      "の同値",
     ],
   },
   {

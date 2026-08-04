@@ -382,6 +382,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 38 step 3 で新設。命題 C″ (3) の構造の主張を書いた。
+    file: "TracePeriodStructure.lean",
+    declarationsAtReview: 1,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "の最良性",
+        kind: "未形式化",
+        ledgerFragment: "のしきい値 $w^*+1$ の最良性",
+        crossFilePhrase: "しきい値 $w^*+1$ の最良性（反例の族）",
+      },
+      {
+        leanFragment: "として構成する段",
+        kind: "未形式化",
+        ledgerFragment: "付値の最小として構成する段は書いておらず",
+        crossFilePhrase: "$g_m$ を付値の最小として構成する段",
+      },
+    ],
+  },
+  {
     // cycle 38 step 2 で新設。巡回群による指標分解の芯を書いた。
     file: "CharacterDecomposition.lean",
     declarationsAtReview: 19,
