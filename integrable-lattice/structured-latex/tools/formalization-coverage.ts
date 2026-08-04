@@ -160,7 +160,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "残るのは 2 つで、どちらも mathlib の欠落ではなくこちらの未記述である。" +
       "(1) **$C$ と $G$ の整数への降下**——$C\\,G=M_\\eta$ と $(\\det C)^2=1$ は体 $K=\\mathbb{Q}$ の上の" +
       "等式であり、人手証明が使う「$C\\in GL_r(\\mathbb{Z})$ だから余核が同型」を言うには、" +
-      "$C$ の成分が整数であること（`coeff_minpolyDiv` の漸化式からの帰納法）と、" +
+      "$C$ の成分が整数であること" +
+      "（cycle 29 step 3b の実測: この帰納法は mathlib に既にある。" +
+      "`coeff_minpolyDiv_mem_adjoin : coeff (minpolyDiv R x) i ∈ R[x]`＝" +
+      "`Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean` 84 行。" +
+      "$R=\\mathbb{Z}$ に取れば $C$ の成分が $\\mathbb{Z}[\\theta]$ に属することがそのまま出る。" +
+      "**ただし書いて通したものではない**——残るのは、その所属を冪基底の座標が整数であることへ" +
+      "翻訳する配線である)と、" +
       "行列の像と $\\eta A$ を基底で同一視する配線が要る。" +
       "(2) **$\\rho$ が可約な場合**——(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\\rho$ が" +
       "既約な場合しか覆っていない。mathlib のトレース双対（`Module.Basis.traceDual`）は体の上にしか無い。",
