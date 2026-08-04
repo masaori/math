@@ -97,10 +97,14 @@ theorem eulerHankel_apply_antidiag {ρ : R[X]} {r : ℕ} (hmon : ρ.Monic) (hdeg
   have : ρ.coeff r = 1 := by rw [← hdeg]; exact hmon
   simpa [eulerHankel, h] using this
 
-/-- **$\det C=\pm1$。** 列を逆順に並べ替えると上三角行列になり、対角成分がすべて $1$ になる。
-体も分離性も既約性も使わない。 -/
-theorem isUnit_det_eulerHankel {ρ : R[X]} {r : ℕ} (hmon : ρ.Monic) (hdeg : ρ.natDegree = r) :
-    IsUnit (eulerHankel ρ r).det := by
+/-- 列を逆順に並べ替えると上三角行列になり、対角成分がすべて $1$ になる。
+すなわち**列の反転の置換の符号と $\det C$ の積は $1$ である**。
+体も分離性も既約性も使わない。
+
+`isUnit_det_eulerHankel`（単元であること）と `det_eulerHankel_sq`（$2$ 乗が $1$、
+すなわち $\det C=\pm1$）は、どちらもこの等式から出る。 -/
+theorem sign_mul_det_eulerHankel {ρ : R[X]} {r : ℕ} (hmon : ρ.Monic) (hdeg : ρ.natDegree = r) :
+    ((Equiv.Perm.sign (Fin.revPerm : Equiv.Perm (Fin r)) : ℤ) : R) * (eulerHankel ρ r).det = 1 := by
   classical
   set H := eulerHankel ρ r with hH
   -- 列を `Fin.rev` で並べ替えた行列。
@@ -129,9 +133,31 @@ theorem isUnit_det_eulerHankel {ρ : R[X]} {r : ℕ} (hmon : ρ.Monic) (hdeg : �
     simp [hdiag]
   have hperm : N.det = Equiv.Perm.sign (Fin.revPerm : Equiv.Perm (Fin r)) * H.det :=
     Matrix.det_permute' _ _
-  -- `sign * det H = 1` なので `det H` は単元。
-  have hkey := hperm.symm.trans hdetN
-  exact isUnit_iff_exists_inv.2 ⟨_, by rw [mul_comm]; exact hkey⟩
+  exact hperm.symm.trans hdetN
+
+/-- **$\det C$ は単元である。** -/
+theorem isUnit_det_eulerHankel {ρ : R[X]} {r : ℕ} (hmon : ρ.Monic) (hdeg : ρ.natDegree = r) :
+    IsUnit (eulerHankel ρ r).det :=
+  isUnit_iff_exists_inv.2 ⟨_, by rw [mul_comm]; exact sign_mul_det_eulerHankel hmon hdeg⟩
+
+/-- 置換の符号を $R$ へ写したものの $2$ 乗は $1$。 -/
+theorem sign_cast_sq (σ : Equiv.Perm (Fin r)) :
+    (((Equiv.Perm.sign σ : ℤ) : R)) ^ 2 = 1 := by
+  rcases Int.units_eq_one_or (Equiv.Perm.sign σ) with h | h <;> rw [h] <;> norm_num
+
+/-- **$\det C=\pm1$**（$2$ 乗が $1$ という形で述べる）。
+本文が $\det C=\pm1$ と書いているものの中身であり、体も分離性も既約性も使わない。 -/
+theorem det_eulerHankel_sq {ρ : R[X]} {r : ℕ} (hmon : ρ.Monic) (hdeg : ρ.natDegree = r) :
+    (eulerHankel ρ r).det ^ 2 = 1 := by
+  set s : R := ((Equiv.Perm.sign (Fin.revPerm : Equiv.Perm (Fin r)) : ℤ) : R) with hs
+  have hkey : s * (eulerHankel ρ r).det = 1 := sign_mul_det_eulerHankel hmon hdeg
+  have hssq : s ^ 2 = 1 := sign_cast_sq _
+  -- 両辺に `s` を掛けると `det = s` が出る。
+  have hdet : (eulerHankel ρ r).det = s := by
+    have h := congrArg (fun x => s * x) hkey
+    simp only [← mul_assoc, mul_one] at h
+    rwa [← sq, hssq, one_mul] at h
+  rw [hdet, hssq]
 
 end EulerHankel
 

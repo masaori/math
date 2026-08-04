@@ -244,10 +244,36 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（2026-08-05 実測、宣言行で直読）。**未形式化である。**" +
       "(3) **$\\eta=(\\chi\'/h)(\\theta)$ が零因子でないこと**と、$A=\\mathbb{Z}[x]/(\\rho)$ が " +
       "`IsPowerBasisOf` / `IsReductionOf` を満たすことの当てはめ。どちらも仮定として受け取っている。" +
-      "**未形式化である。**",
+      "**cycle 37 step 1 で、この 2 件のうち 1 件を完全に埋め、もう 1 件を半分だけ埋めた。残るのは 1 つである。** " +
+      "(2) は埋まった——**判別式を経由しなければ体は要らない**。段 6 の $C\\,G=M_\\eta$ の両辺の行列式を取り、" +
+      "$\\det C=\\pm1$（$C$ が $\\rho$ の係数の Hankel 行列であることから出る。`det_eulerHankel_sq` を " +
+      "`sign_mul_det_eulerHankel` から $2$ 乗の形で取り出した）を使うと、$\\det M_\\eta$ はノルムの定義そのものなので " +
+      "$\\det G=\\pm N_{A/R}(\\eta)$ が可換環の上で出る（`EulerDualBasis.det_weightedGram`）。" +
+      "体も整域も分離性も既約性も使わない。**体の上の証明が体を要求していたのは判別式を経由していたからで、" +
+      "経由しなければ落ちる**——これは cycle 35 で段 1 について分かったことと同じ形である。" +
+      "(3) の後半（冪基底の仮定の当てはめ）も埋まった（`WStarPowerBasisInstance.lean` の " +
+      "`isPowerBasisOf_adjoinRoot` / `isReductionOf_adjoinRoot`。$A=R[x]/(\\rho)$ について、" +
+      "中身は $\\rho(\\theta)=0$ とモニック多項式の展開だけである）。" +
+      "**残っているのは (3) の前半、$\\eta$ が零因子でないことだけである。** " +
+      "**ただしそれも半分は埋まった**——$\\eta$ が零因子でないことは $N(\\eta)\\neq0$ と同値であり" +
+      "（`EulerDualBasis.norm_ne_zero_iff_mem_nonZeroDivisors`。$A$ は整域でなくてよい。" +
+      "mathlib の `Algebra.norm_ne_zero_iff` は $A$ が整域であることを要求するので、そのままでは使えない）、" +
+      "段 7 と合わせると $\\det G\\neq0$ から出る" +
+      "（`WStarPowerBasis.mem_nonZeroDivisors_of_det_weightedGram_ne_zero`）。" +
+      "**したがって `WStarReducibleDescent` が置いた「$\\eta$ は零因子でない」は余計な仮定ではなく、" +
+      "本文が主張している $\\det G\\neq0$ と同じ事柄である。** " +
+      "**残るのは、$\\rho=\\mathrm{rad}(\\chi)$ が無平方であることから $\\det G\\neq0$ を出す段である。" +
+      "これは未形式化であり、そう書く。** " +
+      "止めた理由は素材である（2026-08-05 実測）——この段は $\\rho$ の無平方性を " +
+      "$\\mathbb{Z}[x]$ から $\\mathbb{Q}[x]$ へ移す Gauss 型の移送を要するが、" +
+      "mathlib にその形の補題は無い（2026-08-05 実測、" +
+      "`lean/logs/mathlib-gap-survey-cycle37-squarefree.log`。mathlib `520045ab14` の 8264 ファイルを " +
+      "3 段で引き、`squarefree_map` / `Squarefree.isFractionRing` / `Monic.squarefree_map_iff` が " +
+      "いずれも 3 段とも 0 件。`GaussLemma.lean` と `Content.lean` に `Squarefree` は 1 行も現れない）。" +
+      "素材そのもの（`Monic.dvd_iff_fraction_map_dvd_fraction_map` と " +
+      "`IsIntegrallyClosed.eq_map_mul_C_of_dvd`）は在るので、自前で書ける見込みはある。",
     remainingItems: [
-      "が可約な場合に無い",
-      "が零因子でないこと",
+      "が無平方であることから $\\det G\\neq0$ を出す段",
     ],
   },
   {

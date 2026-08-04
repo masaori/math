@@ -1,0 +1,104 @@
+=== 日付 ===
+2026-08-04T20:07:10Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 移送(無いはず) 無平方性を map で移す補題 ===
+--- (1) 連結語の内容 grep: 'squarefree_map'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'squarefree_map'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'squarefree_map'
+files=0
+
+=== 移送(無いはず) 無平方性と分数体 ===
+--- (1) 連結語の内容 grep: 'Squarefree.isFractionRing'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'squarefree_iff_squarefree'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'squarefree_iff_squarefree'
+files=0
+
+=== 移送(無いはず) 無平方性とモニック除法 ===
+--- (1) 連結語の内容 grep: 'Monic.squarefree_map_iff'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'monic.squarefree'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'monic.squarefree'
+files=0
+
+=== 自前で書く素材(在るはず) モニックな除数の移送 ===
+--- (1) 連結語の内容 grep: 'Monic.dvd_iff_fraction_map_dvd_fraction_map'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'dvd_iff_fraction_map'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'dvd_iff_fraction_map'
+files=0
+
+=== 自前で書く素材(在るはず) 整閉性による係数の引き戻し ===
+--- (1) 連結語の内容 grep: 'IsIntegrallyClosed.eq_map_mul_C_of_dvd'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'eq_map_mul_C_of_dvd'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'eq_map_mul_C_of_dvd'
+files=0
+
+=== 自前で書く素材(在るはず) 分離性と無平方性の同値 ===
+--- (1) 連結語の内容 grep: 'separable_iff_squarefree'
+files=4
+.lake/packages/mathlib/Mathlib/FieldTheory/Perfect.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/JordanChevalley.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Semisimple.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'separable_iff_squarefree'
+files=4
+.lake/packages/mathlib/Mathlib/FieldTheory/Perfect.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/JordanChevalley.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Semisimple.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'separable_iff_squarefree'
+files=0
+
+=== 自前で書く素材(在るはず) 分離性の map による保存 ===
+--- (1) 連結語の内容 grep: 'Separable.map'
+files=4
+.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/Tower.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Discriminant.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'separable.map'
+files=10
+.lake/packages/mathlib/Mathlib/Analysis/Complex/Polynomial/Basic.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/Tower.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/SeparableDegree.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/KummerExtension.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Galois/Basic.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Fixed.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'separable.map'
+files=0
+
+=== Gauss の章と content の章に Squarefree が現れないことの直接確認 ===
+--- .lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean
+Squarefree の出現行数: 0
+0
+--- .lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Content.lean
+Squarefree の出現行数: 0
+0
+
+=== 本 step で使った宣言の実在確認 ===
+Matrix.exists_mulVec_eq_zero_iff: files=4
+Algebra.leftMulMatrix_mulVec_repr: files=1
+Algebra.norm_eq_matrix_det: files=8
+AdjoinRoot.powerBasis': files=6
+Monic.as_sum: files=1
+Submodule.exists_smith_normal_form_of_rank_eq: files=1

@@ -654,6 +654,19 @@ targets=(
   IntegrableLattice.EulerDualBasis.trace_eulerC_mul
   IntegrableLattice.EulerDualBasis.eulerMatrix_apply
   IntegrableLattice.EulerDualBasis.eulerMatrix_mul_weightedGram
+  # 段 7: 可約な場合の det G = ±N(η) と、零因子でないことの言い換え（cycle 37 step 1）
+  IntegrableLattice.EulerDualBasis.eulerMatrix_eq_eulerHankel
+  IntegrableLattice.EulerDualBasis.det_eulerMatrix_sq
+  IntegrableLattice.EulerDualBasis.det_weightedGram
+  IntegrableLattice.EulerDualBasis.norm_ne_zero_iff_mem_nonZeroDivisors
+  # det C = ±1 を 2 乗の形で述べたもの（cycle 37 step 1）
+  IntegrableLattice.sign_mul_det_eulerHankel
+  IntegrableLattice.sign_cast_sq
+  IntegrableLattice.det_eulerHankel_sq
+  # 冪基底の仮定の当てはめ（WStarPowerBasisInstance.lean・cycle 37 step 1）
+  IntegrableLattice.WStarPowerBasis.isPowerBasisOf_adjoinRoot
+  IntegrableLattice.WStarPowerBasis.isReductionOf_adjoinRoot
+  IntegrableLattice.WStarPowerBasis.mem_nonZeroDivisors_of_det_weightedGram_ne_zero
   # 可約な場合の降下（WStarReducibleDescent.lean・cycle 36 step 1）
   IntegrableLattice.WStarReducible.injective_mulLeft
   IntegrableLattice.WStarReducible.finrank_span_eq

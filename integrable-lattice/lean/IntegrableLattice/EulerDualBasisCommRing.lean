@@ -61,14 +61,20 @@ $\det C=\pm1$ が出る。**$\rho$ が可約な場合に残っていた穴はこ
   二重和の入れ替えは $c_i$ の明示形（`eulerC_eq_sum`）を経由し、$k=i+t$ で入れ替えると
   各 $k$ の重複度がちょうど $k+1$ になる。
   **この外部定理（可換環の上の Euler の双対基底公式）に残りは無い。**
-* **$A=\mathbb{Z}[x]/(\rho)$ が `IsPowerBasisOf` と `IsReductionOf` を満たすことの当てはめ**は
-  書いていない。本 file はどちらも仮定として受け取る。これは外部定理の側ではなく
-  命題 W\* の側の残りである（検査 F の 命題 W\* の欄を見よ）。
-* **命題 W\* は依然 部分的である。** 段 6 を書いても完了しない——
-  cycle 36 step 1 の実測で、降下の側が整域を要求していたこと（`WStarReducibleDescent.lean` で埋めた）と、
-  $\det G=\pm N_{A/\mathbb{Q}}(\eta)$ が可約な場合に無いこと（未形式化）が分かった。
+* **段 7（$\det G=\pm N_{A/R}(\eta)$ の可換環版）は cycle 37 step 1 で書いた**（`det_weightedGram`）。
+  体の上の証明が体を要求していたのは判別式を経由していたからで、経由しなければ落ちる。
+* **$A=R[x]/(\rho)$ が `IsPowerBasisOf` と `IsReductionOf` を満たすことの当てはめも
+  cycle 37 step 1 で書いた**（`WStarPowerBasisInstance.lean`）。本 file 自身はどちらも
+  仮定として受け取るままである。
+* **命題 W\* は依然 部分的である。残っているのは 1 つで、
+  $\rho$ が無平方であることから $\det G\neq0$ を出す段である。**
+  $\eta$ が零因子でないことは $N(\eta)\neq0$ と同値なので
+  （`norm_ne_zero_iff_mem_nonZeroDivisors`）、$\det G\neq0$ さえ出れば降下の仮定はそろう。
+  止めた理由は素材である——無平方性を $\mathbb{Z}[x]$ から $\mathbb{Q}[x]$ へ移す Gauss 型の補題が
+  mathlib に無い（2026-08-05 実測、`logs/mathlib-gap-survey-cycle37-squarefree.log`）。
 -/
 import Mathlib
+import IntegrableLattice.WStarIntegralDescent
 
 namespace IntegrableLattice
 namespace EulerDualBasis
@@ -476,6 +482,95 @@ theorem eulerMatrix_mul_weightedGram (hb : IsPowerBasisOf b θ) (hred : IsReduct
         trace_eulerC_mul b hb hred hmonic hdeg i _
     _ = b.repr (aeval θ (derivative ρ) * μ * b k) i := by
         rw [coord, mul_assoc]
+
+/-! ## 段 7: 本文の $\det G=\pm N_{A/R}(\eta)$（可換環版）— cycle 37 step 1
+
+体の上の `WStarElementaryDivisors.det_weightedGram` は、判別式とノルムを経由するため
+`PowerBasis K L`（$L$ は体）を要求し、$\rho$ が可約な場合を覆っていない。
+**判別式を経由しなければ体は要らない**——段 6 の $C\,G=M_\eta$ の両辺の行列式を取り、
+$\det C=\pm1$（$C$ が $\rho$ の係数の Hankel 行列であることから出る）を使えばよい。
+$\det M_\eta$ はノルムの定義そのものである。 -/
+
+theorem eulerMatrix_eq_eulerHankel (hb : IsPowerBasisOf b θ) (hmonic : ρ.Monic)
+    (hdeg : ρ.natDegree = m + 1) :
+    eulerMatrix b ρ θ = eulerHankel ρ (m + 1) := by
+  ext i j
+  rw [eulerMatrix_apply b hb hmonic hdeg]
+  rfl
+
+/-- $(\det C)^2=1$、すなわち $\det C=\pm1$（可換環版）。 -/
+theorem det_eulerMatrix_sq (hb : IsPowerBasisOf b θ) (hmonic : ρ.Monic)
+    (hdeg : ρ.natDegree = m + 1) :
+    (eulerMatrix b ρ θ).det ^ 2 = 1 := by
+  rw [eulerMatrix_eq_eulerHankel b hb hmonic hdeg]
+  exact det_eulerHankel_sq hmonic hdeg
+
+/-- **本文の $\det G=\pm N_{A/R}(\eta)$（可換環版）**。$\eta=\rho'(\theta)\mu$。
+
+符号は $\det C$ そのもの（$\det C=\pm1$ は `det_eulerMatrix_sq`）である。
+$\rho$ が可約でも重根を持ってもよく、体も整域も分離性も使わない。 -/
+theorem det_weightedGram (hb : IsPowerBasisOf b θ) (hred : IsReductionOf ρ θ m)
+    (hmonic : ρ.Monic) (hdeg : ρ.natDegree = m + 1) (μ : A) :
+    (weightedGram (R := R) (m := m) θ μ).det
+      = (eulerMatrix b ρ θ).det * Algebra.norm R (aeval θ (derivative ρ) * μ) := by
+  classical
+  have hCG := congrArg Matrix.det (eulerMatrix_mul_weightedGram b hb hred hmonic hdeg μ)
+  rw [Matrix.det_mul, ← Algebra.norm_eq_matrix_det b] at hCG
+  -- 両辺に `det C` を掛け、`(det C)^2 = 1` で落とす。
+  have h := congrArg (fun x => (eulerMatrix b ρ θ).det * x) hCG
+  simp only [← mul_assoc] at h
+  rw [← sq, det_eulerMatrix_sq b hb hmonic hdeg, one_mul] at h
+  exact h
+
+/-- **$\det G\neq0$ と $\eta$ が零因子でないことは同値である**（$R$ が整域、$A$ が $R$ 上自由で有限のとき）。
+
+本文は $\det G=\pm N(\eta)\neq0$ と書いており、`WStarReducibleDescent.lean` の降下は
+$\eta$ が零因子でないことを仮定として受け取っていた。**この 2 つが同じ事柄であることを書く。**
+すなわち、本文が主張している $\det G\neq0$ から降下の仮定が出る。
+
+$A$ は整域でなくてよい（mathlib の `Algebra.norm_ne_zero_iff` は $A$ が整域であることを要求するので
+そのままでは使えない）。 -/
+theorem norm_ne_zero_iff_mem_nonZeroDivisors {R A : Type*} [CommRing R] [IsDomain R] [CommRing A]
+    [Algebra R A] {ι : Type*} [Fintype ι] [DecidableEq ι] (b : Basis ι R A) (η : A) :
+    Algebra.norm R η ≠ 0 ↔ η ∈ nonZeroDivisors A := by
+  classical
+  rw [Algebra.norm_eq_matrix_det b, Ne, ← Matrix.exists_mulVec_eq_zero_iff]
+  -- 行列 $M_\eta$ を座標で見ると、$\eta$ 倍そのものである。
+  have hkey : ∀ z : A, ∀ i, (Algebra.leftMulMatrix b η).mulVec (b.repr z) i = b.repr (η * z) i :=
+    fun z i => congrFun (Algebra.leftMulMatrix_mulVec_repr b η z) i
+  constructor
+  · -- 行列が単射なら $\eta$ 倍も単射。
+    intro hno
+    have hmul : ∀ z : A, η * z = 0 → z = 0 := by
+      intro z hz
+      by_contra hzne
+      refine hno ⟨b.repr z, ?_, ?_⟩
+      · intro hzero
+        exact hzne (b.repr.injective (by ext i; simpa using congrFun hzero i))
+      · funext i
+        rw [hkey z i, hz]
+        simp
+    exact mem_nonZeroDivisors_iff.mpr
+      ⟨hmul, fun z hz => hmul z (by rw [mul_comm]; exact hz)⟩
+  · -- $\eta$ 倍が単射なら行列も単射。
+    rintro hη ⟨v, hv, hmulv⟩
+    set z : A := b.equivFun.symm v with hzdef
+    have hrepr : ∀ i, b.repr z i = v i := by
+      intro i
+      have h := b.equivFun.apply_symm_apply v
+      rw [Basis.equivFun_apply] at h
+      exact congrFun h i
+    have hreprf : (⇑(b.repr z)) = v := funext hrepr
+    have hz : η * z = 0 := by
+      refine b.ext_elem fun i => ?_
+      rw [← hkey z i, hreprf, congrFun hmulv i]
+      simp
+    have hzero : z = 0 := (mem_nonZeroDivisors_iff.mp hη).1 z hz
+    refine hv ?_
+    funext i
+    have hz0 : b.repr z i = 0 := by rw [hzero, map_zero, Finsupp.zero_apply]
+    rw [← hrepr i, hz0]
+    rfl
 
 end Matrices
 

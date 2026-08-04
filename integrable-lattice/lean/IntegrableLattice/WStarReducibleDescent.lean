@@ -38,8 +38,13 @@ $\eta$ が零因子でないことは主張の側が要求している事柄で�
 
 * **$\eta=(\chi'/h)(\theta)$ が実際に零因子でないこと。** 本ファイルはそれを仮定として受け取る。
   $\rho$ が無平方であることから従うはずだが、その段は書いていない。
+  **cycle 37 step 1 で、この仮定が本文の $\det G\neq0$ と同じ事柄であることは書いた**
+  （`EulerDualBasisCommRing.norm_ne_zero_iff_mem_nonZeroDivisors` と
+  `WStarPowerBasisInstance.mem_nonZeroDivisors_of_det_weightedGram_ne_zero`）。
+  したがってこの仮定は余計ではない。残るのは無平方性から $\det G\neq0$ を出す段である。
 * **$\det G=\pm N_{A/\mathbb{Q}}(\eta)$ の可約な場合**。`det_weightedGram` は `PowerBasis K L`
-  （$L$ は体）で書かれており、本文の 2 つめの等式は既約な場合しか覆っていない。書いていない。
+  （$L$ は体）で書かれており、本文の 2 つめの等式は既約な場合しか覆っていなかった。
+  **cycle 37 step 1 で可換環版を書いた**（`EulerDualBasis.det_weightedGram`）。
 * 本ファイルは $w^*$ の値を存在の形で述べる（適合基底の係数 $a$ が在って、その付値の最大値が最小元）。
   `Ideal.smithCoeffs` のような正準な代表を可約な場合に選ぶことはしていない
   （整域でないと mathlib の正準な取り方が無いため）。

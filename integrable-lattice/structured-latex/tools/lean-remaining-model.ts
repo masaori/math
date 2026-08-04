@@ -269,7 +269,7 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "EulerDualBasisCommRing.lean",
-    declarationsAtReview: 23,
+    declarationsAtReview: 27,
     heading: "形式化しなかったもの",
     externalEntry:
       "可換環の上の Euler の双対基底公式（トレース双対 $\\operatorname{Tr}_{A/R}(c_i\\theta^j)=\\delta_{ij}$）",
@@ -280,14 +280,19 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         witness: "sum_eulerC_mul_pow",
       },
       {
-        leanFragment: "を満たすことの当てはめ",
-        kind: "未形式化",
-        ledgerFragment: "IsPowerBasisOf",
+        leanFragment: "段 7（$\\det G=\\pm N_{A/R}(\\eta)$ の可換環版）は cycle 37 step 1 で書いた",
+        kind: "形式化済み",
+        witness: "det_weightedGram",
       },
       {
-        leanFragment: "段 6 を書いても完了しない",
+        leanFragment: "を満たすことの当てはめも",
+        kind: "形式化済み",
+        witness: "isPowerBasisOf_adjoinRoot",
+      },
+      {
+        leanFragment: "命題 W\\* は依然 部分的である。残っているのは 1 つで",
         kind: "未形式化",
-        ledgerFragment: "可約な場合に無い",
+        ledgerFragment: "無平方であることから",
       },
     ],
   },
@@ -299,17 +304,29 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
       {
         leanFragment: "が実際に零因子でないこと",
         kind: "未形式化",
-        ledgerFragment: "零因子でないこと",
+        ledgerFragment: "無平方であることから",
       },
       {
         leanFragment: "の可約な場合",
-        kind: "未形式化",
-        ledgerFragment: "可約な場合に無い",
+        kind: "形式化済み",
+        witness: "det_weightedGram",
       },
       {
         leanFragment: "の値を存在の形で述べる",
         kind: "未形式化",
         ledgerFragment: "整域でないので当たらない",
+      },
+    ],
+  },
+  {
+    file: "WStarPowerBasisInstance.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "を直接導く段",
+        kind: "未形式化",
+        ledgerFragment: "無平方であることから",
       },
     ],
   },

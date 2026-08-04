@@ -964,6 +964,12 @@ export default defineBlocks([
       "IntegrableLattice.EulerDualBasis.eulerMatrix_apply",
       "IntegrableLattice.WStarReducible.exists_isLeast_isPLevel_span",
       "IntegrableLattice.WStarReducible.exists_isLeast_isPLevel_range_of_euler",
+      "IntegrableLattice.det_eulerHankel_sq",
+      "IntegrableLattice.EulerDualBasis.det_weightedGram",
+      "IntegrableLattice.EulerDualBasis.norm_ne_zero_iff_mem_nonZeroDivisors",
+      "IntegrableLattice.WStarPowerBasis.isPowerBasisOf_adjoinRoot",
+      "IntegrableLattice.WStarPowerBasis.isReductionOf_adjoinRoot",
+      "IntegrableLattice.WStarPowerBasis.mem_nonZeroDivisors_of_det_weightedGram_ne_zero",
     ],
     statement: [
       paragraph([
