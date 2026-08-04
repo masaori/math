@@ -11,8 +11,35 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
-import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
-import { type CoverageState, FORMALIZATION_COVERAGE } from "./formalization-coverage.ts";
+import type { TranslatedNode } from "../schema.ts";
+import { knownLocales, loadContentFiles, loadContentFilesForLocale, structuredLatexDir } from "./content-modules.ts";
+import {
+  COVERAGE_NUMBER_SITES,
+  type CoverageState,
+  FORMALIZATION_COVERAGE,
+} from "./formalization-coverage.ts";
+
+/** 地の文だけを連結する（数式・参照は本文の数値の照合に効かないので落とす）。 */
+const flattenProse = (nodes: readonly TranslatedNode[]): string => {
+  let out = "";
+  for (const node of nodes) {
+    switch (node.type) {
+      case "text":
+      case "todo":
+        out += node.value;
+        break;
+      case "paragraph":
+        out += flattenProse(node.children);
+        break;
+      case "list":
+        for (const item of node.items) out += flattenProse(item);
+        break;
+      default:
+        break;
+    }
+  }
+  return out;
+};
 
 const leanDir = join(structuredLatexDir, "..", "lean", "IntegrableLattice");
 
@@ -93,6 +120,51 @@ for (const entry of unformalised) {
   const detail = entry.state === "部分的" ? entry.remaining : entry.reason;
   console.log(`    [${entry.state}] ${entry.block}`);
   console.log(`      残り／理由: ${detail}`);
+}
+
+// --- 本文が書いている被覆の数値が、台帳から数えた実測値と一致するか ---
+{
+  const counts = {
+    total: FORMALIZATION_COVERAGE.length,
+    done: FORMALIZATION_COVERAGE.filter((entry) => entry.state === "完了").length,
+    partial: FORMALIZATION_COVERAGE.filter((entry) => entry.state === "部分的").length,
+    untouched: FORMALIZATION_COVERAGE.filter((entry) => entry.state === "未着手").length,
+  };
+  const textByLabelPerLocale = new Map<string, Map<string, string>>();
+  for (const locale of knownLocales) {
+    const byLabel = new Map<string, string>();
+    for (const { blocks } of await loadContentFilesForLocale(locale)) {
+      for (const block of blocks) {
+        if (block.kind === "heading" || block.kind === "figure") continue;
+        const text = flattenProse(block.statement) +
+          (block.proof === undefined ? "" : flattenProse(block.proof));
+        for (const label of block.labels ?? []) byLabel.set(label, text);
+      }
+    }
+    textByLabelPerLocale.set(locale, byLabel);
+  }
+  let checkedPhrases = 0;
+  for (const site of COVERAGE_NUMBER_SITES) {
+    const text = textByLabelPerLocale.get(site.locale)?.get(site.label);
+    if (text === undefined) {
+      violations.push(`[数値の在り処が本文に無い] ${site.locale} / ${site.label}`);
+      continue;
+    }
+    for (const phrase of site.phrases(counts)) {
+      checkedPhrases += 1;
+      if (!text.includes(phrase)) {
+        violations.push(
+          `[本文の被覆の数値が台帳と合わない] ${site.locale} / ${site.label} — ` +
+            `本文に「${phrase}」が無い（台帳の実測: 全 ${counts.total}・完了 ${counts.done}・` +
+            `部分的 ${counts.partial}・未着手 ${counts.untouched}）`,
+        );
+      }
+    }
+  }
+  console.log(
+    `  本文が書いている被覆の数値: ${COVERAGE_NUMBER_SITES.length} 箇所 / ` +
+      `${checkedPhrases} 文を台帳の実測値と突き合わせた`,
+  );
 }
 
 if (violations.length > 0) {

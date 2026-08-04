@@ -223,3 +223,47 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(U3)(U5) は未形式化。",
   },
 ];
+
+/**
+ * **本文が書いている被覆の数値の在り処**。
+ *
+ * 本文（形式検証の到達点）は「主張 24 件のうち 完了 5・部分的 16・未着手 3」と数で述べている。
+ * **形式化が進めばこの数は古くなるが、古くなったことは本文を読まないと分からない。**
+ * cycle 27 は「本文に書いた数と台帳の数が一致することは検査していない」を限界として記録し、
+ * cycle 28 step 6 でここを塞いだ。
+ *
+ * 各ロケールについて、**台帳から数えた実測値を入れた文字列が本文に実在すること**を確かめる。
+ * 本文を言い換えたときも赤くなる（そのときは、ここの組み立て方を本文に合わせて直す）。
+ * 数だけ直して検査を通す道は無い——**数の出どころが台帳だからである。**
+ */
+export type CoverageNumberSite = {
+  readonly locale: string;
+  /** 数値を書いているブロックのラベル。 */
+  readonly label: string;
+  /** 実測値から、本文に実在すべき文字列を組み立てる。 */
+  readonly phrases: (counts: {
+    readonly total: number;
+    readonly done: number;
+    readonly partial: number;
+    readonly untouched: number;
+  }) => readonly string[];
+};
+
+export const COVERAGE_NUMBER_SITES: readonly CoverageNumberSite[] = [
+  {
+    locale: "ja",
+    label: "paper_remark_formalization",
+    phrases: ({ total, done, partial, untouched }) => [
+      `本論文の主張 ${total} 件のうち、内容が形式化されているのは ${done} 件、`,
+      `一部が形式化されているのは ${partial} 件、未着手が ${untouched} 件である。`,
+    ],
+  },
+  {
+    locale: "en",
+    label: "paper_remark_formalization",
+    phrases: ({ total, done, partial, untouched }) => [
+      `Of the ${total} assertions of this paper, ${done} have their content `,
+      `formalised, ${partial} are formalised in part, and ${untouched} have not been started.`,
+    ],
+  },
+];
