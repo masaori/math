@@ -1,0 +1,751 @@
+
+> @integrable-lattice/structured-latex@0.1.0 check
+> npm run check:generated && npm run typecheck && npm run validate && npm run validate:en && npm run verify:emphasis && npm run verify:runin-label && npm run test:runin-label && npm run verify:extremum && npm run test:extremum && npm run verify:authoring-leak && npm run test:authoring-leak && npm run verify:definition-order && npm run test:definition-order && npm run verify:formalization && npm run test:formalization && npm run verify:lean-tactics && npm run test:recurrence && npm run verify:no-notes && npm run verify:no-notes:en && npm run verify:localization && npm run test:types && npm run test:runtime && npm run test:localization && npm run verify:transcription && npm run test:transcription && npm run verify:proofs && npm run verify:refs && npm run test:guards
+
+
+> @integrable-lattice/structured-latex@0.1.0 check:generated
+> node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check
+
+generated files are up to date (38 labels + 6 translation-only labels, 14 content + 0 notes files + 16 translated files)
+
+> @integrable-lattice/structured-latex@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @integrable-lattice/structured-latex@0.1.0 validate
+> node tools/validate-content.ts
+
+validated (ja) 49 blocks from 14 files (13 headings, 38 labels, 180 refs, all resolved)
+notes: 0件（内部参照用・出版物には載らない） from 0 files (0 targets, all resolved)
+linkage: SageMath 検証 47 件（全て実在）、Lean 定理 140 件
+ℝ/ℂ への脱出を宣言しているブロック: 7 件
+  - paper_011_remark_positioning [mixed] 本ブロックは位置づけの宣言であり、実数の側という言い方が寄与 (a) と (d) に現れるだけである。ℝ の元を構成した…
+  - paper_012_definition_ladder [mixed] 本定義は梯子の最上段として ℝ/ℂ を含む。ℝ/ℂ は「決定不能な段」として名指すためだけに現れ、本論文の主張が ℝ を…
+  - paper_031_theorem_lsw [R] 本定理の結論そのものが ℝ の元（log m(P)）への収束である。本論文で ℝ を使うのはこの一点だけであり、第 4 …
+  - paper_032_remark_ising_known [R] 自由エネルギー密度そのものが ℝ の量である。本注記は既知結果の所在を示すだけで、本論文の主張はこれに依存しない。
+  - paper_051_theorem_duality [mixed] 本命題は (∞ 素点) の主張で L → ∞ の極限を取る。ℝ を使うのはこの一点だけであり、(p 素点) の 2 つの…
+  - paper_071_remark_asymmetry [mixed] 本注記は ℝ 側の量（Mahler 測度）と Λ 側の量（岩澤 μ）を比較する。ℝ が現れるのは比較の左辺だけで、本論文…
+  - paper_106_theorem_drop_assumption [mixed] (Q4)（粗上界 hat theta_M(P) ≤ φ(ℓ^M) log_ℓ C_0）の証明だけが、複素絶対値（アルキメ…
+
+> @integrable-lattice/structured-latex@0.1.0 validate:en
+> node tools/validate-content.ts --locale en
+
+validated (en) 56 blocks from 16 files (14 headings, 44 labels, 182 refs, all resolved)
+notes: 0件（内部参照用・出版物には載らない） from 0 files (0 targets, all resolved)
+linkage: SageMath 検証 47 件（全て実在）、Lean 定理 140 件
+ℝ/ℂ への脱出を宣言しているブロック: 9 件
+  - paper_011_remark_positioning [mixed] This block is a statement of positioning. The real side occu…
+  - paper_012_definition_ladder [mixed] This definition includes ℝ/ℂ as the topmost rung of the ladd…
+  - paper_031_theorem_lsw [R] The conclusion of this theorem is itself a convergence to an…
+  - paper_032_remark_ising_known [R] The free energy density is itself a quantity of ℝ. This rema…
+  - paper_014_remark_survey_scope [mixed] This block describes which literatures the survey places sid…
+  - paper_015_remark_reading_guide [mixed] This block names ℝ twice: once to say that Chapter 3 is the …
+  - paper_051_theorem_duality [mixed] In its statement at the archimedean place this proposition t…
+  - paper_071_remark_asymmetry [mixed] This remark compares a quantity on the ℝ side (the Mahler me…
+  - paper_106_theorem_drop_assumption [mixed] Only the proof of (Q4) — the crude bound hat theta_M(P) ≤ φ(…
+
+> @integrable-lattice/structured-latex@0.1.0 verify:emphasis
+> node tools/verify-emphasis.ts
+
+
+本文に強調指定を書かない検査（検査 E）
+  走査: ロケール 2 件 / ja: ブロック 49・地の文 4747 / en: ブロック 56・地の文 5157
+  地の文 合計 9904 件
+  方針: 本文では強調（太字）を使わない。地の文に `**` を書かない（ロケールに依らず違反）。
+
+  限界: 見るのは `**` だけ。強調を外したときに意味が落ちていないかは機械で確かめられない（人が読んで書き換える）。参照用ノートは最終成果物に載らないので対象外。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:runin-label
+> node tools/verify-runin-label.ts
+
+
+見出し代わりの断片の検査（検査 L）
+  走査: ja: 段落 473 / en: 段落 497
+  判定: 46 文字以下で、文末が句点・コロン等でない段落（直後が別行立て数式のものは除く）
+  対象: 713 段落（段落の直前 551 / ブロックの末尾 108 / 箇条書きの直前 54）
+  対象外: 257 段落（別行立て数式の直前 257）。形だけでは数式へ続く言い回しと切り分けられないため除いている。
+  経緯: cycle 27 で強調指定を落としたとき、強調が唯一の区切りだった見出し代わりの断片が区切りを失った（cycle 28 step 3 で日英 8 件ずつ直した）。
+
+  限界: 見ているのは長さと文末の字だけで、「文になっているか」を判定してはいない。捕まえるのは「見出しの代わりに置かれた短い断片」という形だけである。別行立て数式の直前と、箇条書きの項目の中は見ない。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:runin-label
+> node tools/verify-runin-label-detection-test.ts
+
+
+見出し代わりの断片の検査の検出テスト
+  再現データ: cycle 28 step 3 が実際に直した 8 件と、その同型・置き場所違い
+  検出: 14 / 14 件
+  誤検出なし: 17 / 17 件
+
+31 / 31 件すべて期待どおり（検出 14 件・素通り 17 件）。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:extremum
+> node tools/verify-extremum.ts
+
+
+空集合になりうる最小・最大の検査（検査 M）
+  走査: ロケール 2 件 / ja: ブロック 36・出現 145 / en: ブロック 42・出現 145
+  形の内訳（ja）: set-builder 16 / indexed 28 / tuple 31 / decoration 50 / bare-mention 12 / about-convention 8
+  **判断が要る出現: 44 件**（集合の上・添字族の上に取っているもの） / 指紋 42 件 / 台帳 42 件
+
+  根拠の内訳:
+    構成から空でない: 17 件
+    空でないことを本文が論じている: 8 件
+    空でないことを別のブロックが論じている: 1 件
+    空になりうるので読み方を書いた: 16 件
+    ↑ このうち「構成から空でない」17 件はtex の文字列からは判定できない。「この添字族は空でない」は数学の判断だからである。残り 3 種類は目印の実在を毎回確かめている（本文からその一文が消えれば赤くなる）。
+    そのうち **16 件は Lean の定理で裏を取ってある**（残り 1 件は人の判断のまま）。定理名が `lean/` に実在することは毎回確かめる。
+    裏が取れていないもの:
+      paper_046_theorem_wstar_different — {\mathfrak p\mid p}\Bigl\lceil \frac{v_{\mat
+
+  限界: 見るのは `math` / `displayMath` の tex だけで、地の文に日本語で書かれた「最小」は対象外。`\operatorname{min}` のような別綴りも拾わない（本文に 0 件であることを実測している）。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:extremum
+> node tools/verify-extremum-detection-test.ts
+
+
+検査 M（空集合になりうる最小・最大）の検出テスト
+  再現データ: 本文で実際に 4 回落ちていた形そのもの。
+  検出: 命題 G′ の m_1（cycle 26 step 6 が Lean で検出。min∅=0 と読むと ℓ=3 だけが落ちた）
+      判断が要る出現 1 件（形: set-builder）
+  検出: 命題 G の (G1′) の δ（原本の「δ:=+∞」が本文へ運ばれていなかった）
+      判断が要る出現 1 件（形: indexed）
+  検出: 命題 G の (G6) の θ（min∅=0 と読むと仮定が偽から真へ反転した）
+      判断が要る出現 1 件（形: set-builder）
+  検出: 命題 K の r_0（S_∞ = ∅ すなわち型 II で空集合上の max になっていた）
+      判断が要る出現 2 件（形: indexed, indexed）
+  検出: 偽陽性でない: 記号の名前の一部（上付き）
+      "\theta_G^{\max}\ge\varphi(\ell^{M})" → 判断が要る出現 0 件（期待 0）
+  検出: 偽陽性でない: 記号の名前の一部（下付き）
+      "\rho_{\max}:=M" → 判断が要る出現 0 件（期待 0）
+  検出: 偽陽性でない: 記号の名前の一部（前置きの下付き）
+      "\mu_{\min}(p)" → 判断が要る出現 0 件（期待 0）
+  検出: 偽陽性でない: 2 引数の最小（空にならない）
+      "\min\bigl(2,\,v_2(p-1)\bigr)" → 判断が要る出現 0 件（期待 0）
+  検出: 偽陽性でない: 規約そのものを書いている行
+      "\min\emptyset=0" → 判断が要る出現 0 件（期待 0）
+  検出: 偽陽性でない: 地の文で演算子に言及しているだけ
+      "\min" → 判断が要る出現 0 件（期待 0）
+  検出: 同じ数式の中の 2 つ目以降の出現も拾う（\max が入れ子になっている行）
+      入れ子の max → 2 件（期待 2）
+
+  台帳の照合（本番と同じ突き合わせを、壊した台帳に対して回す）
+  検出: 新しく書いた最小・最大が台帳に無い（登録するまで赤くなる）
+      台帳から 1 件外して実測はそのままにすると「未登録」で挙がる
+  検出: 同じ形の出現が増えたのに登録の個数が据え置き
+      実測を 1 件増やすと「個数違い」で挙がる
+  検出: 本文から出現が消えたのに宣言が残っている
+      実測から 1 件外すと「宣言の余り」で挙がる（直したのに宣言が残る状態を作れない）
+  検出: 根拠の目印（規約の一文）が本文から消えた
+      本文を空にすると「目印の消失」で挙がる（例: 「\delta:=+\infty」）
+  検出: 目印がそろっていれば静か（偽陽性でない）
+      台帳と実測が一致し目印もそろっていれば違反 0 件
+
+16 / 16 件で検出を実証した。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:authoring-leak
+> node tools/verify-authoring-leak.ts
+
+
+執筆指示の混入の検査（検査 W）
+  走査: ロケール 2 件 / ja: ブロック 49・地の文と題 4747 / en: ブロック 56・地の文と題 5157
+  地の文と題 合計 9904 件 / 台帳（読者への情報と判定したもの）0 件
+  見るもの: 作業ツリー固有の語（cycle 番号・step 番号・TODO 等）と、
+  書き手への指示の括弧（「（…明示する）」「（…述べる）」等）。**見出しと題も対象**。
+
+  限界: 落とせるのは閉じた語彙に当たる形だけで、「読者にとって意味があるか」は機械で判定できない。語彙に無い言い回しの執筆指示は素通りする。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:authoring-leak
+> node tools/verify-authoring-leak-detection-test.ts
+
+
+検査 W（執筆指示の混入）の検出テスト
+  再現データ: ユーザーが PDF を読んで指摘した形と、走査で見つかった同型の形。
+  検出: 題に書き手への指示が入っている（ユーザーが指摘した当の形）
+      "本論文の位置づけ（最初に明示する）" → 1 件（期待 1 件以上） / 型: 書き手への指示の括弧
+  検出: 題に書き手への指示が入っている（同型・命題 D の限界）
+      "命題 D に残る限界（命題の一部として明示する）" → 1 件（期待 1 件以上） / 型: 書き手への指示の括弧
+  検出: 本文の見出し語に書き手への指示（本文全体に 7 箇所あった）
+      "限界（主張の一部として述べる）" → 1 件（期待 1 件以上） / 型: 書き手への指示の括弧
+  検出: 本文の見出し語に書き手への指示（可算と非可算の分別）
+      "可算と非可算の分別（本命題の主張の一部として明示する）" → 1 件（期待 1 件以上） / 型: 書き手への指示の括弧
+  検出: 作業ツリーのサイクル番号が本文に漏れている
+      "cycle 18 の Lean 形式化で発見した本文の誤り" → 1 件（期待 1 件以上） / 型: 作業ツリー固有の語
+  検出: 読者が開けないリポジトリ内部の資料を指している
+      "詳細は根拠レポート outputs/reports/... にある" → 1 件（期待 1 件以上） / 型: 作業ツリー固有の語
+  検出: 英語版の同型（書き手への指示の括弧）
+      "What this paper is (stated up front)" → 1 件（期待 1 件以上） / 型: 書き手への指示の括弧
+  検出: 偽陽性でない: 読者への情報である括弧（条件を添えている）
+      "消滅深度を θ で定める（θ(P) ≤ ℓ なら方向だけで定まる）。" → 0 件（期待 0）
+  検出: 偽陽性でない: 読者への情報である括弧（規約を書いている）
+      "そのような m が 1 つも無ければ θ := ∞ と読む（規約）。" → 0 件（期待 0）
+  検出: 偽陽性でない: 数学の文で「述べる」が動詞として出る
+      "本命題は 2 つの主張を述べているが、どちらも既知である。" → 0 件（期待 0）
+  検出: 偽陽性でない: 「限界」という語そのものは執筆指示ではない
+      "限界: この判定は ℓ ∤ N の段では使えない。" → 0 件（期待 0）
+  検出: 偽陽性でない: 循環群の位数のような普通の数字
+      "位数 18 の巡回群を取る。" → 0 件（期待 0）
+  検出: 見出し・題も対象である（本文より先に読まれるため）
+      題に書かれた執筆指示が挙がる
+
+13 / 13 件で検出を実証した。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:definition-order
+> node tools/verify-definition-order.ts
+
+
+定義の登場順序の検査（検査 O）
+  ja: ブロック 49 件 / 追跡する語 21 件 / 違反 0 件
+  en: ブロック 56 件 / 追跡する語 20 件 / 違反 0 件
+
+  限界: 追跡するのは台帳に載せた語だけで、本論文が定義しない標準的な語彙（素点・Newton 多角形・Lehmer 問題等）は対象外。台帳の網羅性がこの検査の強さの上限である。**その上限が妥当かは台帳と独立な拾い方でしか測れないので、記号の走査を続けて回す。**
+
+記号の初出の全数走査（検査 O の後半。台帳を使わない別の拾い方）
+  ja: ブロック 49 件 / 走査した記号 789 件 / うち `:=` の左辺に立つ記号 88 件
+    初出が定義より前: 40 件（裸の 1 記号 37 件は局所変数の使い回しなので外す / 飾りを持つ記号 3 件）
+    飾りを持つ 3 件: 理由つきで免除 3 件 / 残り 0 件 = 台帳が覆う 0 件 ＋ 覆わない 0 件
+  en: ブロック 56 件 / 走査した記号 787 件 / うち `:=` の左辺に立つ記号 88 件
+    初出が定義より前: 40 件（裸の 1 記号 37 件は局所変数の使い回しなので外す / 飾りを持つ記号 3 件）
+    飾りを持つ 3 件: 理由つきで免除 3 件 / 残り 0 件 = 台帳が覆う 0 件 ＋ 覆わない 0 件
+
+  限界: 見るのは数式ノードの記号だけで、散文の語の初出は見ない（そちらは台帳の担当）。定義の位置は `:=` の左辺で決めるので、`=` や散文だけで導入される記号には定義の位置が付かない。裸の 1 記号は局所変数として使い回されるため、初めから外している。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:definition-order
+> node tools/verify-definition-order-detection-test.ts
+
+
+定義の登場順序の検査（検査 O）の検出テスト
+  再現データ: ユーザーが指摘した当の形（第 1 章の見出しが Λ を定義前に使っていた）。
+  検出: 見出しが定義前の語を使っている（ユーザーが指摘した当の形）
+      違反 2 件（うち見出し 1 件。期待 1 件以上）
+  検出: 本文が定義前の語を使っている
+      Λ と整数スペクトル曲線がどちらも定義より前に現れる並びで挙がる
+  検出: 直したあとの並びでは挙がらない（偽陽性でない）
+      違反 0 件（期待 0）
+  検出: 依存する語より前に定義されている並びが挙がる
+      Massieu 自由エントロピーの定義が、依存する周期点数の定義より前にある並びで挙がる
+  検出: 順序が正しければ挙がらない（偽陽性でない）
+      違反 0 件（期待 0）
+  検出: 同じブロックがまとめて定義する場合は挙がらない（偽陽性でない）
+      違反 0 件（期待 0）
+  検出: 台帳が指す定義ブロックが本文に無ければ挙がる
+      改名・削除で定義ブロックが消えたら赤くなる
+  検出: 台帳が指す依存語が台帳に無ければ挙がる
+      依存関係の書き間違いが赤くなる
+  検出: 定義が次の章にある記号を、初出の側で使っていると挙がる（本サイクルの f_z）
+      f_z の初出が、その `:=` の定義より前にある並びで挙がる
+  検出: 記号を使わない書き方へ直すと挙がらない（偽陽性でない）
+      挙がった件数 0（期待 0）
+  検出: 後の章で定義される記号を前の章が式で使っていると挙がる（本サイクルの A_gen）
+      飾りを持つ記号なので、局所変数の使い回しとして外れることもない
+  検出: 左辺が引数を伴っても定義される記号を取り違えない
+      読み取り結果 ["\\Phi_{L}"]
+  検出: 1 つの式に定義が 2 つ並んでいれば両方を読む
+      読み取り結果 ["a_{L}","a^{\\mathrm{red}}_{L}"]
+  検出: 台帳の a^{red}_L は裸の a を覆わない（部分一致で数えない）
+      この誤りを実際に一度犯し、覆う件数が 19 件へ膨らんだ
+  検出: 波括弧の有無は同じものとして覆う
+      台帳は \kappa_n、走査は \kappa_{n} と書く
+
+15 / 15 件で検出を実証した。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:formalization
+> node tools/verify-formalization-coverage.ts
+
+
+形式化の被覆の検査（検査 F）
+  目標: 論文の主張を全数 Lean 形式化する（2026-08-03 ユーザー方針）。
+  本文の主張（theorem / claim）24 件 / 台帳 24 件 / lean/ の宣言 493 件
+  状態: 完了 6 件 / 部分的 16 件 / 未着手 2 件
+  **全数形式化まで残り 18 件**（完了でないもの）
+
+    [未着手] paper_031_theorem_lsw
+      残り／理由: エントロピー＝Mahler 測度（Lind–Schmidt–Ward）は本論文の外の既知定理であり、本論文は引用しかしていない。**mathlib の欠落は「Mahler 測度が無い」ではなく「多変数の Mahler 測度が無い」である**（2026-08-03 実測。lean/README.md と同じ 3 段の引き方、mathlib `520045ab14` の 8264 ファイル: 連結語 `MahlerMeasure` 3 件・語幹 `mahler` の内容 5 件・ファイル名 3 件。`Mathlib/Analysis/Polynomial/MahlerMeasure.lean` は 1 変数 `ℂ[X]`、`Mathlib/NumberTheory/MahlerMeasure.lean` は 1 変数 `ℤ[X]` で、**どちらも `MvPolynomial` を 1 度も使っていない**）。本論文が要るのは 2 変数のスペクトル曲線の Mahler 測度なので、そこから要る。
+    [部分的] paper_043b_theorem_trace_bound
+      残り／理由: cycle 29 で上界の主張そのものを組み立てた（TracePeriodAssembly.lean の tracePeriod_propC_bound）。$\pi_{\mathrm{tr}}(p,k)\mid p^{k-1}\pi_{\mathrm{tr}}(p,w^*+1)$ を、$k>w^*+1$ では梯子の反復から、$k\le w^*+1$ では単調性から出す形で書いてある。その途中で、人手証明が暗黙に使っていた「最小周期は任意の周期を割る」を独立に証明した。cycle 29 step 3 で $w^*$ の定義そのものが入った（WStarElementaryDivisors.lean）。**step 1 の仕分けが「素材が無い」と判定したのは誤りだった。** 整除の鎖 $a_1\mid a_2\mid\cdots$ は確かに mathlib に無いが（`Ideal.smithCoeffs` に整除を述べた補題は 0 件）、$w^*$ を取り出すのに鎖は要らない——適合基底（`Ideal.smithNormalForm` が返す形）の係数の $p$ 進付値の最大値として書け、それが $\min\{j:\ p^jA\subseteq\eta A\ (p\ \text{の外で})\}$ に等しいことを証明した（isLeast_isPLevel / isLeast_isPLevel_ideal）。$w^*=0$ の判定も入った（wStarOfCoeffs_eq_zero_iff。ただし本文の「$\rho\bmod p$ が分離的かつ $p\nmid m_\lambda$」への翻訳は入っていない）。残るのは 2 つ。(1) 本文が $w^*$ を Gram 行列 $G$ の側で定義していること——$G$ の単因子が $A/\eta A$ の不変量に等しいという同一視は、体の上では行列の等式 $C\,G=M_\eta$ と $(\det C)^2=1$ として入ったが（命題 W\* の欄を見よ）、その整数への降下を書いていない。(2) $\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ の重複度の積の形（ノルムの形 $\det G=\pm N(\eta)$ は入った）。上界の証明で $w^*$ が果たす役割は仮定として型に出してある。
+    [部分的] paper_044_theorem_newton
+      残り／理由: 命題 N は下界方向のみ。上界方向は Skolem–Mahler–Lech / Strassmann が mathlib に無く、鋭い下界は Newton 恒等式の行列トレースへの接続が要り、Newton 多角形と固有値の接続は $\overline{\mathbb{Q}_p}$ の付値が要る。
+    [部分的] paper_045_theorem_trace_ladder
+      残り／理由: 命題 C″ は核と反例、cycle 27 で加えた $g_m\ge m+1$ の持ち上げ、および cycle 29 で加えた (2) 改良した上界（tracePeriod_dvd_pow_mul）と (4) 閉形式が存在しないことの主張そのもの（no_affine_trace_period_exponent。本文の $t_k=1,2,2,4,8,16$ も tThree_values で出した）まで。残るのは (1) のしきい値 $w^*+1$ の最良性と (3) の $e_k=\min\{m:g_m\ge k\}$ の同値。cycle 29 step 3 で $w^*$ の定義そのものは入った（WStarElementaryDivisors.lean。**「整数行列の単因子が mathlib に無いから書けない」という step 1 の判定は覆った**——適合基底の係数の $p$ 進付値の最大値として書ける）。残っているのは、その $w^*$ をトレース列の周期の主張へ結ぶ段である（命題 C′ と同じ壁）。
+    [部分的] paper_046_theorem_wstar_different
+      残り／理由: cycle 28 で 3 段のうち 2 段を形式化した（PropWStarDifferent.lean）。微分の段（$\chi'=h\cdot\sum_i a_i f_i'(\rho/f_i)$）と、付値の段（$\min\{j:\forall\mathfrak p,\ j\,e_\mathfrak p\ge v_\mathfrak p\}=\max_\mathfrak p\lceil v_\mathfrak p/e_\mathfrak p\rceil$、および従順分岐・不分岐の系）である。cycle 29 step 3 で双対の段の大半が入った（WStarElementaryDivisors.lean）。**step 1 の仕分けが「素材が無い（整数行列の Smith 標準形が無い）」と判定したのは誤りだった。** 整除の鎖は確かに無いが $w^*$ に鎖は要らず、適合基底の係数の $p$ 進付値の最大値で書ける。入ったのは (a) $w^*=\min\{j:\ p^j\eta^{-1}\in A_{(p)}\}$ の右辺が意味をもち最小元が適合基底の係数で書けること（isLeast_isPLevel_ideal / exists_isPLevel_ideal）、(b) **本文の $\det G=\pm N_{A/\mathbb{Q}}(\eta)$**（det_weightedGram。重み付き Gram 行列がトレース形式の Gram 行列と $\mu$ 倍の行列の積に分解することと、判別式が $\rho'(\theta)$ のノルムに等しいことから）、(c) **Euler の双対基底公式を行列の等式にしたもの** $C\,G=M_\eta$ と $(\det C)^2=1$（eulerMatrix_mul_weightedGram / det_eulerMatrix_sq。心臓部は $\operatorname{Tr}(c_i w)=[\theta^i](\rho'(\theta)w)$＝trace_coeff_minpolyDiv_mul）、(d) 可逆な取り替えで像に対する $p$ 進の条件が変わらないこと（isPLevel_range_comp）。残るのは 2 つで、どちらも mathlib の欠落ではなくこちらの未記述である。(1) **$C$ と $G$ の整数への降下**——$C\,G=M_\eta$ と $(\det C)^2=1$ は体 $K=\mathbb{Q}$ の上の等式であり、人手証明が使う「$C\in GL_r(\mathbb{Z})$ だから余核が同型」を言うには、$C$ の成分が整数であること（cycle 29 step 3b の実測: この帰納法は mathlib に既にある。`coeff_minpolyDiv_mem_adjoin : coeff (minpolyDiv R x) i ∈ R[x]`＝`Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean` 84 行。$R=\mathbb{Z}$ に取れば $C$ の成分が $\mathbb{Z}[\theta]$ に属することがそのまま出る。**ただし書いて通したものではない**——残るのは、その所属を冪基底の座標が整数であることへ翻訳する配線である)と、行列の像と $\eta A$ を基底で同一視する配線が要る。(2) **$\rho$ が可約な場合**——(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\rho$ が既約な場合しか覆っていない。mathlib のトレース双対（`Module.Basis.traceDual`）は体の上にしか無い。
+    [部分的] paper_051_theorem_duality
+      残り／理由: cycle 29 で $p$ 素点側の切り出しを実際にやり、**(p 素点, 有限 L) の段**を $d=1$ で形式化した（DualityPAdicFiniteL.lean）。入ったのは、本文の簡約周期点数 $a^{\mathrm{red}}_L=\prod_{\zeta^L=1,\ P(\zeta)\neq0}P(\zeta)$ の定義そのもの（Lean のどこにも無かった。既存の PropV.lean と PeriodicPointResultant.lean は簡約しない $a_L$ だけを扱う）と、$a^{\mathrm{red}}_L\neq0$、$a^{\mathrm{red}}_L=\mathrm{Res}(h,P)$（$h$ は $X^L-1$ の monic な因子）、$h=(X^L-1)/\gcd(X^L-1,P)$ が $\mathbb{Z}[X]$ に属すること（Gauss）、その $h$ の根がちょうど本文の「良い根」であること、したがって $a^{\mathrm{red}}_L$ が $\mathbb{Z}$ 係数の終結式ひとつで書ける $0$ でない整数であること（＝本文の $v_p(a^{\mathrm{red}}_L)\in\mathbb{Z}_{\ge0}$ が意味をもつことの中身）である。$L=p^n$ の塔の非自明性の判定は PropV.lean が $d=1,2$ で既に持っている。残るのは 3 つ。(1) **アルキメデス側**（自由エネルギー密度＝Mahler 測度）。命題 LSW と同じ理由で素材が無い——mathlib の Mahler 測度は 1 変数だけで多変数が無い（`MvPolynomial.mahlerMeasure` の連結語 grep 0 件。語幹 `mahler measure` の 3 件はいずれも 1 変数。lean/logs/mathlib-gap-survey-cycle29-duality.log）。しかも本論文はこの段を証明せず外部定理を引用している。(2) **(p 素点, 塔の漸近)**。Monsky の定理と Cuoco–Monsky の定理の適用であり、本論文は証明しない。素材も無い——`Monsky` / `CuocoMonsky` / `semialgebraic` / $\mathbb{Z}_p^d$ 拡大は 3 段すべて 0 件、岩澤代数は mathlib の p 進測度の章の散文に 1 行触れられているだけ（1 変数の測度）、Weierstrass 準備定理は 1 変数版だけ（同じログ、mathlib 8264 ファイル走査）。(3) 有限 $L$ の段の $d\ge2$。cycle 29 step 2 はここを「反復多項式環の型」と書いたが、その壁は step 3b で消えた（周期点数の終結式表示は一般の $d$ で書けた）。残っているのは別のことで、簡約周期点数は $P$ が消える組だけを除く量であり、その除去は変数ごとに剥がす形にならない。書き方は未着手で、書けるかどうかも確かめていない。
+    [部分的] paper_052_theorem_l0_computable
+      残り／理由: cycle 28 で (F1) の心臓部を形式化した（PropFFiniteSupport.lean）。すなわち「すべてのファイバーの係数和が消えるなら分類写像は台の上で単射でない」という数え上げの一点と、そこから出る「割りうる方向は有限集合 $V(E)=\{\mathrm{prim}(e-e'):e\ne e'\in E\}$ に入る」という包含である（非可算な $\mathbb{P}^{d-1}(\mathbb{Z}_p)$ を走らなくてよいことの中身）。残るのは 2 つ。(1) $(\gamma_v-1)\mid\bar f$ と係数和の消滅の同値そのもの。これは $d$ 変数の完備群環 $\mathbb{F}_p[[\Gamma]]$ とその素イデアルの記述が要るが、mathlib には岩澤代数の一般論が `PowerSeries` の断片としてしか無い（配線ではなく素材から要る）。(2) (F2 境界) の停止問題への帰着。mathlib に `Nat.Partrec` / `Turing` は在るが、「係数を計算する手続きで与えられた $f$」という入力の与え方を型にする設計をこちらが持っていない（mathlib の欠落ではなく、こちらの未設計である）。
+    [未着手] paper_053_theorem_lower_order
+      残り／理由: 命題 G の 4 部（低位項・退化点の計数・トーラス塔・消滅深度による一般の退化塔）は、いずれも塔の全域木数の漸近に依る。matrix-tree 定理が mathlib に無い（`kirchhoff` 0 件・`matrixTree` 0 件・全域木を数える定理 0 件。lean/README.md の欠落調査）。
+    [部分的] paper_055_theorem_theta_infinity
+      残り／理由: 命題 G′ は (G′3) の閉形式と、cycle 26 が形式化した証明の主要 6 ステップまで。Newton 多面体・$\pi$ 進評価・例外直線の決定は未形式化。
+    [部分的] paper_056_theorem_ell2_family
+      残り／理由: 命題 G″ は閉形式の形・場合分けの排反と網羅・$n=1$ の但し書き、および cycle 27 が形式化した (G″1) の付値の議論まで。4 通りの閉形式の導出そのものは未形式化。
+    [部分的] paper_062_theorem_T
+      残り／理由: 命題 T は代数的な段と算術の段まで。matrix-tree の段（mathlib に無い）と、2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。
+    [部分的] paper_063_theorem_W
+      残り／理由: 命題 W は非退化性の判定（`Decidable`）と $\nu$ の帰属まで。閉形式本体は Cuoco–Monsky の岩澤型漸近に依り、それが mathlib に無い（`iwasawa` の調査で該当なし）。
+    [部分的] paper_091_theorem_theta_padic
+      残り／理由: 命題 J は (J1)(J1′) の桁定理が完了、(J4) の総和と係数の取り出しが部分的。(J2)(J3)(J5)(J6) の各主張と、cycle 27 で形式化した (J1) の代数的な芯の外側が残る。
+    [部分的] paper_101_theorem_s_infinity_decision
+      残り／理由: 命題 K は (K2)(K3)(K6) と、cycle 27 が形式化した (K5) の一意性・$r_0$ の書き換えまで。(K1) の対応と (K4) の重複度の主張は未形式化。
+    [部分的] paper_101_theorem_digit_branch
+      残り／理由: 命題 R は (R1)(R2)(R3) の核まで（cycle 27 が (R2) の打ち消しの不在を別経路で形式化した）。終結式による付値の主張そのものは未形式化。
+    [部分的] paper_106_theorem_drop_assumption
+      残り／理由: 命題 Q は組合せ・数え上げ・最小点の一意性・誤差の組み立てまで。(Q4) の粗上界は複素絶対値を使う段があり、その形式化が残る。
+    [部分的] paper_111_theorem_general_closed_form
+      残り／理由: 命題 M は (M1) の規約・(M2) の $\lambda$・(M3) の $L$ 非依存性・(M5)(M6)、および cycle 27 が形式化した $K(P_0)$ の存在と有界性まで。閉形式の導出そのものは未形式化。
+    [部分的] paper_112_theorem_coefficient_layers
+      残り／理由: 命題 U は (U1) の $c$・$d$ が (M3)+(M4) から出ること、(U2)(U4)(U6)、および cycle 27 が形式化した $\ell=2$ の 5 係数の突き合わせまで。(U1) の式そのものの導出と (U3)(U5) は未形式化。
+  本文が書いている被覆の数値: 2 箇所 / 4 文を台帳の実測値と突き合わせた
+    期待: ロケール 2 件（ja / en）それぞれ 1 箇所以上、各箇所 1 文以上（根拠: 形式検証の到達点の段が日英とも被覆を数で述べている）。下回れば違反にする（0 件でも静かに緑になる道を塞ぐ）
+    ja / paper_remark_formalization: 2 文 / 台帳の数を 1 ずつ動かして照合が動いた数 4 / 4（全数・完了・部分的・未着手）/ 数式ノードに現れた被覆の数 0 件
+    en / paper_remark_formalization: 2 文 / 台帳の数を 1 ずつ動かして照合が動いた数 4 / 4（全数・完了・部分的・未着手）/ 数式ノードに現れた被覆の数 0 件
+
+  限界: 「完了」が本当に完了かは機械で確かめられない（人の判断）。この検査が保証するのは、判断が書かれていることと、書かれた判断が腐っていないことだけである。
+  限界（本文の数値の照合）: 塞いだのは本文と台帳がずれる道だけである。台帳の状態そのものが実態とずれている場合（形式化が進んだのに台帳を直していない等）は、本文と台帳が一致したまま両方が古くなるので、この検査は緑のままである。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:formalization
+> node tools/verify-formalization-coverage.ts --self-test
+
+
+形式化の被覆の検査の検出テスト（本文の被覆の数値の照合が空振りする道）
+  OK（検出）: 照合する箇所がロケールごとに 1 箇所も無い
+  OK（検出）: 箇所は在るが照合する文が 0 文
+  OK（検出）: 照合する文字列が台帳の数に依っていない（数を動かしても同じ文字列）
+  OK（検出）: 4 つのうち 1 つだけ照合から落ちている（未着手を述べていない）
+  OK（検出）: 本文が数を数式ノードで書いている
+  OK（検出）: 照合すべき文が本文から消えている
+  OK（誤検出なし）: 現に本文が取っている形は通る
+  OK（誤検出なし）: 桁の境界を見る（16 は 160 に当たらない）
+
+OK: 8 件すべて期待どおり。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:lean-tactics
+> node tools/verify-lean-tactics.ts
+
+
+`field_simp` の直後の `ring` の検査（検査 T）
+  走査: 32 ファイル（lean/IntegrableLattice/）
+  field_simp の次行が ring である対: 10 件 / 宣言 10 件
+  **未宣言の対 0 件** / **余っている宣言 0 件**
+
+  限界: この検査は `ring` が必要かどうかを自分で確かめない（確かめるのは `lake build`）。保証するのは「新しい対が黙って入らないこと」だけ。同じ行に `;` で並ぶ形・`<;>`・`ring_nf` は対象外（実測 0 件）。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:recurrence
+> node tools/verify-recurrence-detection-test.ts
+
+
+検査 E（本文に強調指定を書かない）の検出テスト
+  方針: 本文では強調（太字）を使わない（2026-08-03 ユーザーの価値判断）。
+  再現データ: cycle 24 step 4 / 25 step 4a / 25 step 4b が実際に書いた形と、
+  cycle 26 まで「正しい書き方」として通っていた形（1 ノードで閉じた強調）。
+  検出: 強調を開いたまま数式ノードへ渡す地の文（開き側）
+      "**the coefficient " → 違反 1 件（期待 1）
+  検出: 数式ノードのあとで閉じる地の文（閉じ側）
+      " is determined by the twisted stage data**" → 違反 1 件（期待 1）
+  検出: 1 ノードの中で閉じている強調（cycle 26 までは正しい書き方だった）
+      "**the coefficient is determined by the twisted stage data**" → 違反 1 件（期待 1）
+  検出: 境界: "強調なし" は挙がらない
+      `**` が 0 個
+  検出: 境界: "**閉じている**" は挙がる
+      対応が取れていても強調は書かない
+  検出: 境界: "**a**b**" は挙がる
+      3 個
+  検出: 境界: "**a** **b**" は挙がる
+      4 個
+  検出: 境界: "**" は挙がる
+      1 個だけでも書かれている
+  検出: 境界: "アスタリスク 1 個 * は強調ではない" は挙がらない
+      `*` 単独は本文の語彙に無い
+
+検査 T（`field_simp` の直後の `ring`）の検出テスト
+  再現データ: cycle 25 step 3 が実際に書いた形（`Q1_b_zero_matches_layer_count` 等）。
+  検出: 新しく書かれた `field_simp` + `ring` の対を拾う
+      対 1 件 / 宣言名 Q1_b_zero_matches_layer_count
+  検出: 拾った対は台帳に無いので未宣言になる（＝赤くなる）
+      既存の台帳 10 件のどれとも一致しない
+  検出: `field_simp` のあとが `ring` でなければ挙がらない（偽陽性でない）
+      `field_simp` → `trivial` は対象外
+  検出: `field_simp` と `ring` の間に別のタクティクがあれば挙がらない
+      直後だけを見る（限界として model の doc に明記してある）
+  検出: 同じ宣言の中の 2 つ目の対を別物として数える
+      対 2 件 / 2 つ目の index = 1
+  検出: 対がもう無い宣言は「余っている宣言」で挙がる
+      IntegrableLattice/GeneralTowerClosedForm.lean::S0_closed#7 は実在の対 10 件のどれとも一致しない
+  検出: 現在の台帳は 1 件も余っていない（偽陽性でない）
+      宣言 10 件がすべて実在の対に当たる
+
+16 / 16 件で検出を実証した（検査 E 9 件 + 検査 T 7 件）。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:no-notes
+> node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts
+
+警告: 地の文に数式記法らしき文字がある 8 件（そのままの文字として組まれる。math ノードにするか記法を直すこと）:
+  paper_041_theorem_periodicity: 命題 A（v_p の最終周期性）
+  paper_042_theorem_pi_p1: 命題 B（トレース列の周期 π_tr(p,1) の精密公式）
+  paper_052b_definition_graph_tower: voltage グラフ、ℤ_ℓ^2 塔、全域木数、voltage ラプラシアン
+  paper_072_remark_qp_free: Q_p を避ける動機は決定不能性ではない
+  paper_100_heading_s_infinity_decision: θ = ∞ の判定手続きと、n ℓ^n の係数 = 二項式因子の重複度
+  paper_101_theorem_s_infinity_decision: 命題 K — S_∞ の判定手続きと、n ℓ^n の係数の閉じた式
+  paper_105_heading_drop_assumption: 最小点の一意性の仮定を落とす — n ℓ^n の係数の無条件決定
+  paper_106_theorem_drop_assumption: 命題 Q — 最小点の一意性の仮定なしに n ℓ^n の係数が決まること（明示誤差つき）
+generated /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.tex
+  ブロック 49 件（見出し 13、証明 24、TODO 0） / ラベル 38 件 / 相互参照 180 件（すべて解決）
+  PDF まで作るには --pdf を付ける
+no notes in output (ja): ノート 0 件（本文サンプル 0 件）は いずれも /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.tex に現れない
+
+> @integrable-lattice/structured-latex@0.1.0 verify:no-notes:en
+> node tools/build-latex.ts --locale en && node tools/verify-no-notes-in-output.ts --locale en
+
+警告: 地の文に数式記法らしき文字がある 2 件（そのままの文字として組まれる。math ノードにするか記法を直すこと）:
+  paper_052b_definition_graph_tower: Voltage graphs, ℤ_ℓ^2 towers, spanning-tree numbers, and the
+  paper_101_theorem_s_infinity_decision:  is locally constant wherever it is finite, so ``unbounded o
+generated /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.tex
+  ブロック 56 件（見出し 14、証明 24、TODO 0） / ラベル 44 件 / 相互参照 182 件（すべて解決） / 引用 63 件（.bib のキー 24 件、すべて実在）
+  PDF まで作るには --pdf を付ける
+no notes in output (en): ノート 0 件（本文サンプル 0 件）は いずれも /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.tex に現れない
+
+> @integrable-lattice/structured-latex@0.1.0 verify:localization
+> node tools/verify-localization.ts
+
+ロケール対応検証（システムの構造照合）
+  ja: 49 ブロック / 14 ファイル
+  en: 56 ブロック / 16 ファイル
+  理由つきで認めた差: 翻訳限定ファイル 2 件 / 翻訳限定ブロック 7 件 / 骨格の規則 45 件（**免除の単位は差分 1 つ**）
+
+違反 0 件: 翻訳は原文の内容を 1 件も失っていない。
+
+> @integrable-lattice/structured-latex@0.1.0 test:types
+> node tools/negative-type-test.ts
+
+✓ 【翻訳】翻訳側の ref が存在しないラベルを指す
+    type-tests/.tmp/case0_broken/fixture.ts(10,32): error TS2345: Argument of type '"paper_claim_resultant__does_not_exist"' is not assignable to parameter of type 'AnyLocaleLabel'.
+✓ 【翻訳】翻訳側の本文ブロックが habitat を宣言していない
+    type-tests/.tmp/case1_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; origin: { path: string; ordinal: number; }; labels: never[]; statement: never[]; }' is not assignable to type 'TranslatedBlock'.
+✓ 具体化: 本文中の ref が存在しないラベルを指す
+    type-tests/.tmp/case2_broken/fixture.ts(10,40): error TS2345: Argument of type '"paper_claim_resultant__does_not_exist"' is not assignable to parameter of type '"paper_claim_resultant" | "paper_def_aL" | "paper_def_curve" | "paper_def_graph_tower" | "paper_def_ladder" | "paper_def_massieu" | "paper_four_axes" | "paper_lemma_V0" | ... 29 more ... | "paper_wstar_different"'.
+✓ 【固有】本文ブロックが habitat を宣言していない
+    type-tests/.tmp/case3_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; origin: { path: string; ordinal: number; }; labels: never[]; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】habitat が未知の値（住処の綴り違い）
+    type-tests/.tmp/case4_broken/fixture.ts(9,5): error TS2820: Type '"Lamda"' is not assignable to type 'CountableHabitat | EscapingHabitat'. Did you mean '"Lambda"'?
+✓ 【固有】可算な habitat（Z）なのに realEscape を書いている
+    type-tests/.tmp/case5_broken/fixture.ts(11,5): error TS2322: Type 'string' is not assignable to type 'undefined'.
+✓ 【固有】非可算な habitat（R）なのに realEscape が無い
+    type-tests/.tmp/case6_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; origin: { path: string; ordinal: number; }; labels: never[]; habitat: "R"; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】mixed なのに realEscape が無い
+    type-tests/.tmp/case7_broken/fixture.ts(4,3): error TS2322: Type '{ id: string; kind: "claim"; origin: { path: string; ordinal: number; }; labels: never[]; habitat: "mixed"; statement: never[]; }' is not assignable to type 'ConvertedBlock'.
+✓ 【固有】見出しブロックが habitat を持つ
+    type-tests/.tmp/case8_broken/fixture.ts(11,5): error TS2322: Type 'string' is not assignable to type 'undefined'.
+✓ 【固有】verification が文字列の配列でない
+    type-tests/.tmp/case9_broken/fixture.ts(11,5): error TS2322: Type 'string' is not assignable to type 'readonly string[]'.
+✓ 【固有】lean が文字列の配列でない
+    type-tests/.tmp/case10_broken/fixture.ts(11,5): error TS2322: Type 'string' is not assignable to type 'readonly string[]'.
+
+すべての負テストが期待どおり: 誤った入力は tsc が拒否する（11 件）
+
+> @integrable-lattice/structured-latex@0.1.0 test:runtime
+> node tools/schema-runtime-test.ts
+
+✓ 【固有】habitat / realEscape / verification / lean は許可キーとして通る
+✓ 【固有】habitat の綴り違い（Lamda）を拒む
+✓ 【固有】宣言していないキー（移行前の sourcePath）を拒む
+✓ 【固有】固有メタデータの綴り違い（realEscapes）を拒む
+✓ 【固有】見出しに habitat があれば拒む（見出しは量を扱わない）
+✓ 【固有】verification が配列でなければ拒む
+✓ 【固有】lean の要素が文字列でなければ拒む
+✓ ノートの未知フィールドを拒む（具体化しても .strict() が効いていること）
+✓ 【固有】本文ブロックに habitat が無ければ拒む
+✓ 【固有】可算な habitat に realEscape があれば拒む
+✓ 【固有】非可算な habitat に realEscape が無ければ拒む
+✓ 【固有】realEscape が空文字なら拒む（脱出箇所を具体的に書かせる）
+✓ 【固有】可算な habitat で realEscape が無ければ通る（対照）
+
+実行時検証テスト 13 件すべて期待どおり
+
+> @integrable-lattice/structured-latex@0.1.0 test:localization
+> node tools/verify-localization-detection-test.ts
+
+ロケール対応検証の検出テスト（免除の穴が塞がったことの実証）
+  例外表に登録されているブロック: 27 件
+
+  paper_012_definition_ladder: 英語版の数式 9 個を 1 つずつ落として検査 → 9 個で違反
+  paper_022_claim_resultant: 英語版の数式 14 個を 1 つずつ落として検査 → 14 個で違反
+  paper_031_theorem_lsw: 英語版の数式 18 個を 1 つずつ落として検査 → 18 個で違反
+  paper_032_remark_ising_known: 英語版の数式 5 個を 1 つずつ落として検査 → 5 個で違反
+  paper_041_theorem_periodicity: 英語版の数式 23 個を 1 つずつ落として検査 → 23 個で違反
+  paper_042_theorem_pi_p1: 英語版の数式 30 個を 1 つずつ落として検査 → 30 個で違反
+  paper_043_theorem_bound: 英語版の数式 8 個を 1 つずつ落として検査 → 8 個で違反
+  paper_043b_theorem_trace_bound: 英語版の数式 62 個を 1 つずつ落として検査 → 62 個で違反
+  paper_044_theorem_newton: 英語版の数式 33 個を 1 つずつ落として検査 → 33 個で違反
+  paper_045_theorem_trace_ladder: 英語版の数式 75 個を 1 つずつ落として検査 → 75 個で違反
+  paper_046_theorem_wstar_different: 英語版の数式 55 個を 1 つずつ落として検査 → 55 個で違反
+  paper_051_theorem_duality: 英語版の数式 44 個を 1 つずつ落として検査 → 44 個で違反
+  paper_052_theorem_l0_computable: 英語版の数式 63 個を 1 つずつ落として検査 → 63 個で違反
+  paper_053_theorem_lower_order: 英語版の数式 119 個を 1 つずつ落として検査 → 119 個で違反
+  paper_054_remark_limits: 英語版の数式 33 個を 1 つずつ落として検査 → 33 個で違反
+  paper_055_theorem_theta_infinity: 英語版の数式 377 個を 1 つずつ落として検査 → 377 個で違反
+  paper_056_theorem_ell2_family: 英語版の数式 418 個を 1 つずつ落として検査 → 418 個で違反
+  paper_061_theorem_V: 英語版の数式 41 個を 1 つずつ落として検査 → 41 個で違反
+  paper_062_theorem_T: 英語版の数式 47 個を 1 つずつ落として検査 → 47 個で違反
+  paper_063_theorem_W: 英語版の数式 59 個を 1 つずつ落として検査 → 59 個で違反
+  paper_071_remark_asymmetry: 英語版の数式 13 個を 1 つずつ落として検査 → 13 個で違反
+  paper_072_remark_qp_free: 英語版の数式 8 個を 1 つずつ落として検査 → 8 個で違反
+  paper_081_remark_scope: 英語版の数式 11 個を 1 つずつ落として検査 → 11 個で違反
+  paper_082_remark_formalization: 英語版の数式 2 個を 1 つずつ落として検査 → 2 個で違反
+  paper_091_theorem_theta_padic: 英語版の数式 452 個を 1 つずつ落として検査 → 452 個で違反
+  paper_101_theorem_digit_branch: 英語版の数式 195 個を 1 つずつ落として検査 → 195 個で違反
+  paper_101_theorem_s_infinity_decision: 英語版の数式 285 個を 1 つずつ落として検査 → 285 個で違反
+
+  cycle 21 step 4 が実際に落とした数式と同じ形の再現:
+      paper_042_theorem_pi_p1: 2 個（0, 2）を落とす → 違反
+      paper_043b_theorem_trace_bound: 1 個（0）を落とす → 違反
+      paper_053_theorem_lower_order: 13 個（\ell, \ell=2, 0）を落とす → 違反
+      paper_054_remark_limits: 1 個（\ell）を落とす → 違反
+      paper_055_theorem_theta_infinity: 23 個（\ell, \ell=2, 2, 0）を落とす → 違反
+      paper_056_theorem_ell2_family: 50 個（\ell=2, \ell, 2, 0, n\ge2, n=1, \le3）を落とす → 違反
+      paper_062_theorem_T: 1 個（0）を落とす → 違反
+      paper_063_theorem_W: 2 個（0, \ell=2）を落とす → 違反
+      paper_091_theorem_theta_padic: 27 個（0, \ell, \ell=2, 2）を落とす → 違反
+      paper_101_theorem_digit_branch: 11 個（\ell, \ell=2, 0）を落とす → 違反
+      paper_101_theorem_s_infinity_decision: 9 個（\ell, \ell=2, 0）を落とす → 違反
+
+  載せ替えで新たに検査対象になった壊し方:
+      参照先（ref.target）を別のラベルへ差し替える → 違反
+      住処（habitat）を書き換える → 違反
+      ℝ 脱出の宣言（realEscape）を落とす → 違反
+      SageMath 検証の紐づけ（verification）を落とす → 違反
+      理由の無い翻訳限定ブロックを足す → 違反
+      原文のブロックを英語版から落とす → 違反
+
+  結果: 壊し方 2505/2505 件で違反、cycle 21 型の脱落 11/11 ブロックで違反。
+  登録済みのブロックでも、骨格ノードの脱落は 1 つ残らず違反になる。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:transcription
+> node tools/verify-transcription.ts
+
+転記検査
+  本文: 49 ブロック（うち定理型 36）/ 14 ファイル
+  検査 A の台帳: 34 ブロック分（定理型の 94%。残り 2 ブロックは検査 A の対象外）
+
+[検査 A] 根拠 report からの取りこぼし — 内訳
+  paper_044_theorem_newton: report 1 行（条件文 1 文） / アトム 0 件・語 5 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_091_theorem_theta_padic: report 14 行（条件文 1 文） / アトム 3 件・語 3 件を照合 / 免除 0 件 / **未確認 0 件**
+  paper_101_theorem_digit_branch: report 30 行（条件文 1 文） / アトム 2 件・語 0 件を照合 / 免除 1 件 / **未確認 0 件**
+  paper_101_theorem_s_infinity_decision: report 23 行（条件文 4 文） / アトム 27 件・語 13 件を照合 / 免除 8 件 / **未確認 0 件**
+  paper_056_theorem_ell2_family: report 26 行（条件文 1 文） / アトム 6 件・語 1 件を照合 / 免除 0 件 / **未確認 0 件**
+  paper_055_theorem_theta_infinity: report 9 行（条件文 2 文） / アトム 3 件・語 8 件を照合 / 免除 5 件 / **未確認 0 件**
+  paper_046_theorem_wstar_different: report 35 行（条件文 1 文） / アトム 1 件・語 3 件を照合 / 免除 1 件 / **未確認 0 件**
+  paper_043b_theorem_trace_bound: report 3 行（条件文 1 文） / アトム 5 件・語 2 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_012_definition_ladder: report 10 行（条件文 4 文） / アトム 5 件・語 3 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_013_remark_four_axes: report 8 行（条件文 6 文） / アトム 3 件・語 17 件を照合 / 免除 13 件 / **未確認 0 件**
+  paper_023_definition_massieu: report 20 行（条件文 0 文） / アトム 9 件・語 4 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_021_definition_curve: report 12 行（条件文 1 文） / アトム 0 件・語 2 件を照合 / 免除 1 件 / **未確認 0 件**
+  paper_022_claim_resultant: report 12 行（条件文 1 文） / アトム 0 件・語 4 件を照合 / 免除 0 件 / **未確認 0 件**
+  paper_031_theorem_lsw: report 33 行（条件文 7 文） / アトム 5 件・語 16 件を照合 / 免除 8 件 / **未確認 0 件**
+  paper_032_remark_ising_known: report 1 行（条件文 1 文） / アトム 0 件・語 7 件を照合 / 免除 5 件 / **未確認 0 件**
+  paper_041_theorem_periodicity: report 10 行（条件文 4 文） / アトム 5 件・語 10 件を照合 / 免除 6 件 / **未確認 0 件**
+  paper_042_theorem_pi_p1: report 20 行（条件文 3 文） / アトム 2 件・語 7 件を照合 / 免除 5 件 / **未確認 0 件**
+  paper_043_theorem_bound: report 17 行（条件文 2 文） / アトム 2 件・語 10 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_045_theorem_lte: report 9 行（条件文 0 文） / アトム 0 件・語 1 件を照合 / 免除 1 件 / **未確認 0 件**
+  paper_045_theorem_trace_ladder: report 28 行（条件文 7 文） / アトム 13 件・語 12 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_051_theorem_duality: report 19 行（条件文 2 文） / アトム 4 件・語 8 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_052_theorem_l0_computable: report 9 行（条件文 4 文） / アトム 13 件・語 23 件を照合 / 免除 9 件 / **未確認 0 件**
+  paper_053_theorem_lower_order: report 40 行（条件文 11 文） / アトム 17 件・語 12 件を照合 / 免除 5 件 / **未確認 0 件**
+  paper_054_remark_limits: report 18 行（条件文 0 文） / アトム 4 件・語 9 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_061_theorem_V: report 6 行（条件文 2 文） / アトム 2 件・語 5 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_062_theorem_T: report 15 行（条件文 2 文） / アトム 2 件・語 1 件を照合 / 免除 1 件 / **未確認 0 件**
+  paper_063_theorem_W: report 4 行（条件文 2 文） / アトム 9 件・語 6 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_071_remark_asymmetry: report 24 行（条件文 1 文） / アトム 1 件・語 7 件を照合 / 免除 4 件 / **未確認 0 件**
+  paper_072_remark_qp_free: report 9 行（条件文 0 文） / アトム 0 件・語 8 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_081_remark_scope: report 28 行（条件文 1 文） / アトム 0 件・語 4 件を照合 / 免除 2 件 / **未確認 0 件**
+  paper_082_remark_formalization: report 4 行（条件文 0 文） / アトム 0 件・語 10 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_106_theorem_drop_assumption: report 29 行（条件文 4 文） / アトム 23 件・語 11 件を照合 / 免除 3 件 / **未確認 0 件**
+  paper_111_theorem_general_closed_form: report 42 行（条件文 10 文） / アトム 17 件・語 14 件を照合 / 免除 0 件 / **未確認 0 件**
+  paper_112_theorem_coefficient_layers: report 75 行（条件文 7 文） / アトム 18 件・語 8 件を照合 / 免除 1 件 / **未確認 0 件**
+
+  照合の内訳: 照合したアトム 201 件・語 254 件 / 免除 109 件 / **照合対象が 0 件だったブロック 0 件**
+  うち **台帳の `covers` へ回した passage 28 件**（条件文が 1 文も取れなかったもの。cycle 26 step 4 でこの仕組みを入れるまで、これらは何も照合していなかった）
+
+[検査 A′] 免除の根拠が生きているか — 内訳
+  免除 109 件 / 型別: 言い換え 41・例示の省略 5・記法の選択 23・ブロック間の分担 10・本文のほうが弱い主張 20・report の位置づけの言葉 8・本文の不備（記録済み） 1・report のほうが古い 1
+  根拠未指定 0 件（型で強制。根拠なしの免除は書けない）/ **失効した免除 0 件** / **型として機械検証できないもの 8 件**（report の位置づけの言葉）
+    ↑ この型は「report が書き換わったら落ちる」ことしか検査できない。「これは主張ではない」という判定そのものは機械で確かめられない。限界として記録すること。
+
+[検査 B] 添字族の裸使用 — 内訳
+  走査した数式: 4009 件 / 検出 0 件
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:transcription
+> node tools/verify-transcription-detection-test.ts
+
+転記検査の検出テスト
+  再現データ: 3 件
+
+  検出: cycle18: 命題 N の例外集合が「有限個の N」になっていた
+      対象ブロック: paper_044_theorem_newton
+      検査 A が「算術級数」を挙げた
+  検出: cycle20: 桁定理（命題 J (J1)）が使う $A_1\equiv0$ が本文に無かった
+      対象ブロック: paper_091_theorem_theta_padic
+      検査 A が「A_{1}」を挙げた
+  検出: cycle21: 命題 R (R1) の係数が添字なしの $\mu$ になっていた
+      対象ブロック: paper_101_theorem_digit_branch
+      検査 B が「\mu」を挙げた
+
+免除の腐りの再現データ: 9 件（検査 A′）
+
+  検出: 根拠 report の文が書き換わった（cycle 24 step 1 が実際に 8 件の訂正を入れた）
+      対象: paper_044_theorem_newton / スパイク
+      検査 A′ が「根拠の引用が report に無い」で挙げた（スパイク）
+  検出: 引用は当たるが、その文はその項目を生まない（引用と項目の対応が壊れた）
+      対象: paper_041_theorem_periodicity / 前周期
+      検査 A′ が「根拠の文からその項目が出ない」で挙げた（前周期）
+  検出: 免除が「本文はこう書いている」と言っている記述が、本文から消えた
+      対象: paper_063_theorem_W / \dfrac
+      検査 A′ が「根拠として指した本文の記述が本文に無い」で挙げた（\dfrac）
+  検出: 「別のブロックが持っている」と言っている分担先が、それを失った
+      対象: paper_013_remark_four_axes / \Omega
+      検査 A′ が「分担先のブロックがその項目を持っていない」で挙げた（\Omega）
+  検出: 「本文が直すべきものとして記録済み」の記録が消えた
+      対象: paper_032_remark_ising_known / 本文未読
+      検査 A′ が「参照先の記録が見つからない」で挙げた（本文未読）
+  検出: 「report のほうが古い」の、解消した側の記録が消えた
+      対象: paper_081_remark_scope / 未確認
+      検査 A′ が「参照先の記録が見つからない」で挙げた（未確認）
+  検出: 分担先のブロックそのものが本文から消えた
+      対象: paper_021_definition_curve / 有限計算
+      検査 A′ が「分担先のブロックが本文に無い」で挙げた（有限計算）
+  検出: 引用が report の複数の文に当たる（どの文が根拠か特定できない）
+      対象: paper_053_theorem_lower_order / 同値
+      検査 A′ が「根拠の引用が report の複数の文に当たる」で挙げた（同値）
+  検出: 根拠が短すぎて何も pin していない（移行で実際に 1 件出た）
+      対象: paper_052_theorem_l0_computable / 同値
+      検査 A′ が「根拠の指定が短すぎて何も pin していない」で挙げた（同値）
+
+[cycle 26 step 4] 照合対象 0 件の解消と positioning の目印
+  検出: cycle 23 以来「照合対象 0 件」だった 5 ブロックが、いま何かを照合している
+      照合対象 45 件 / `covers` へ回した passage 9 件（どちらも 0 なら強化が効いていない）
+  検出: 自己言及の語彙を含まない引用は positioning として通らない
+      "$d=-2$ と完全に決まる" は目印を 1 つも含まない
+  検出: 自己言及の語彙を含む引用は通る（偽陽性でない）
+      "本サイクルの主結果である" は目印「本サイクル」を含む
+  検出: 現存する positioning の免除はすべて目印を持つ
+      positioning 8 件がすべて目印を含む
+
+[cycle 27 step 4] `covers` を report 側にも錨で固定する / positioning で数式を免除させない
+  検出: 錨が打たれている `covers` は静か（偽陽性でない）
+      covers-unanchored 0 件（期待 0）
+  検出: report に無い記号を `covers` へ書くと赤くなる
+      covers-unanchored 3 件（期待 1 件以上）。台帳の書き手が対応先を取り違えても止まる
+  検出: 現存する positioning の免除は数式を 1 つも対象にしていない
+      positioning 8 件のうち数式を対象にするもの 0 件（期待 0）
+
+19 / 19 件で検出を実証した（転記事故 3 件 + 免除の腐り 9 件 + cycle 26 の強化 4 件 + cycle 27 の強化 3 件）。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:proofs
+> node tools/verify-proof-completeness.ts
+
+証明の欠落の検査（検査 C）
+  本文: 49 ブロック / 14 ファイル。証明を持つべき種別（theorem / claim）は 24 件
+  証明あり 24 件 / **証明なし 0 件**（うち宣言済みの既知の未了 0 件・**未宣言 0 件**）
+
+[既知の未了] 宣言の内訳（黙って緑にしない）
+  宣言 0 件 / **根拠が失効した宣言 0 件**（根拠未指定 0 件。型で強制するので根拠なしの宣言は書けない）
+
+  限界: この検査は「証明が空でないこと」しか見ない。証明の中身の正しさ・十分さは見ない（そちらは転記検査と Lean 化の領分）。種別の付け方そのものも見ない（remark に実質的な主張を書けば対象外になる）。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 verify:refs
+> node tools/verify-reference-rot.ts
+
+腐ったツール参照の検査（検査 R）
+  走査: 96 ファイル / 参照 478 件（structured-latex/content, structured-latex/locales, structured-latex/tools, structured-latex/schema.ts, structured-latex/locales.config.ts, docs, README.md）
+  走査から外した場所（黙って外さない）:
+    - outputs/reports/: 作業時点の記録。当時実在したものを指す記述は腐りではない
+    - MEMORY.md: 追記専用の履歴（「当時 …、現在は …」が実測 20 件）
+    - docs/tasks/auto-loop-state.md: 追記専用の履歴（同上）
+    - _old/: 温存退避。外を指す参照が古いのは当然
+    - sagemath/ · lean/ · inputs/ · pipeline/: 本 step の担当外。腐りの実例も無い
+
+  **実在しない参照 27 件**（実在しないパス 20・実在しないファイル名 5・実在しない npm script 2）
+  免除 28 件 / 型別: 例示・否定の文脈 6・過去の状態として書かれている 14・生成物 4・別プロジェクトのファイル 4
+  **失効した免除 0 件** / **登録が古い（1 件も当たらない）免除 0 件** / **説明のつかない腐り 0 件**
+
+  限界: 実在するかしか見ない。実在するが別のものを指している参照、拡張子を書かない言及、glob（`*` を含む記述）は検出しない。
+
+違反 0 件。
+
+> @integrable-lattice/structured-latex@0.1.0 test:guards
+> node tools/verify-guards-detection-test.ts
+
+検査 C（証明の欠落）の検出テスト
+
+  検出: 証明を持つブロックから証明を落とす
+      24 / 24 ブロックで違反になった（壊す前の未宣言の違反は 0 件）
+  検出: proof を空配列にする
+      「proof が空配列」と判定された（期待: 「proof が空配列」）
+  検出: proof を TODO ノードだけにする
+      「proof が TODO ノードを含む」と判定された（期待: 「proof が TODO ノードを含む」）
+  検出: proof を空白だけの段落にする
+      「proof に中身が無い」と判定された（期待: 「proof に中身が無い」）
+  検出: 未了を記録した report の一文を書き換える
+      「未了の記録が見つからない」で挙げた
+  検出: 引用は report に実在するが、未了を述べていない文へ貼り替える
+      「記録が未了を述べていない」で挙げた
+  検出: 引用を短くして pin にならなくする
+      「宣言の指定が短すぎて何も pin していない」で挙げた
+  検出: 原本の在処を、転記検査の台帳が挙げていない report にする
+      「原本の在処が転記検査の台帳と食い違う」で挙げた
+  検出: 原本の目印を、report に無いものへ書き換える（原本が改稿された場合）
+      「原本の目印が見つからない」で挙げた
+  検出: 原本の目印は実在するが、その先に証明が無い箇所を指す（原本から証明が消えた場合）
+      「原本にその証明が無い」で挙げた
+  検出: 宣言が指すブロックが本文から消える
+      「宣言が指すブロックが本文に無い」で挙げた
+  検出: 証明が本文へ入ったのに宣言が残る
+      「宣言が余っている（証明が入った）」で挙げた
+  検出: 宣言が、証明を要さない種別のブロックを指す
+      「宣言が指すブロックは証明を要さない種別」で挙げた
+
+検査 R（腐ったツール参照）の検出テスト
+  再現データ: cycle 24 step 2 の腐り（`git show 6756584` が訂正した 12 ファイル分の原文）
+
+  検出: cycle 24 step 2 の腐りの再現データ（12 ファイル分＋比較器＋npm script）
+      14 / 14 件を検出した
+  検出: 訂正後の記述では挙がらない（偽陽性でない）
+      3 / 3 件が静か
+  検出: 正当な書き方 9 通りで偽陽性を出さない
+      9 / 9 件が静か
+
+  検出: 「過去の状態として書かれている」の目印が、そのファイルから消える
+      「根拠の目印が同じファイルに無い」で挙げた
+  検出: 「過去の状態として書かれている」の目印が短すぎる
+      「根拠の指定が短すぎて何も pin していない」で挙げた
+  検出: 生成物を作るスクリプトが改名される
+      「生成物を作るスクリプトが無い」で挙げた
+  検出: 別プロジェクトのファイルが向こうで消える
+      「別プロジェクトにもそのファイルが無い」で挙げた
+  検出: 「本当に腐っている」の記録が消える
+      「記録が見つからない」で挙げた
+  検出: 免除が指す参照が、そのファイルからもう消えている
+      「宣言が余っている（その参照がもう書かれていない）」で挙げた
+  検出: 免除が指す参照が実在するようになった
+      「宣言が余っている（その参照が解決するようになった）」で挙げた
+  検出: 免除が指すファイルそのものが消える
+      「宣言が指すファイルが読めない」で挙げた
+
+24 / 24 件で検出を実証した（検査 C 13 件 + 検査 R 11 件）。

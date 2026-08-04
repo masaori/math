@@ -1,0 +1,11 @@
+
+> @integrable-lattice/structured-latex@0.1.0 build:pdf:en
+> node tools/build-latex.ts --locale en --pdf && node tools/verify-no-notes-in-output.ts --locale en
+
+警告: 地の文に数式記法らしき文字がある 2 件（そのままの文字として組まれる。math ノードにするか記法を直すこと）:
+  paper_052b_definition_graph_tower: Voltage graphs, ℤ_ℓ^2 towers, spanning-tree numbers, and the
+  paper_101_theorem_s_infinity_decision:  is locally constant wherever it is finite, so ``unbounded o
+generated /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.tex
+  ブロック 56 件（見出し 14、証明 24、TODO 0） / ラベル 44 件 / 相互参照 182 件（すべて解決） / 引用 63 件（.bib のキー 24 件、すべて実在）
+built /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.pdf: 64 ページ、未解決参照 0 件、組めない文字 0 件、版面外へ出た行 0 件（軽微な overfull 2 件は余白内）、参考文献 20 件
+no notes in output (en): ノート 0 件（本文サンプル 0 件）は いずれも /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.tex に現れない

@@ -49,14 +49,16 @@ export type CoverageEntry =
 export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   {
     block: "paper_022_claim_resultant",
-    state: "部分的",
-    remaining:
-      "cycle 29 で「1 の冪根の上の積＝終結式」という claim の内容そのものを d = 1 と d = 2 で" +
-      "形式化した（PeriodicPointResultant.lean）。d = 2 は d = 1 の補題を 2 回使う形で書いてあり、" +
-      "「終結式を d 回入れ子にすればよい」の中身がそこに出ている。" +
-      "残るのは一般の d である。素材の欠落は無い（`Polynomial.resultant_eq_prod_eval` は mathlib に在る）が、" +
-      "反復多項式環 $R[z_1]\\cdots[z_d]$ を $d$ について再帰で作る型" +
-      "（型とその環構造を同時に決める）をこちらが持っていない。" +
+    state: "完了",
+    note:
+      "claim の内容（1 の冪根の組の上の積＝入れ子の終結式）を、本文が明示する d = 2 だけでなく" +
+      "**一般の d** について形式化した（PeriodicPointResultant.lean の `nestedRes_eq_tupleProd`）。" +
+      "cycle 29 step 1 が壁とした「反復多項式環 $R[z_1]\\cdots[z_d]$ を再帰で作る型」は要らなかった——" +
+      "変数を 1 つだけ外へ出す `MvPolynomial.finSuccEquiv` を d 段回せばよい。" +
+      "仮定（$z^L-1$ が $K$ 上で分解する）が空でないことも確かめてある" +
+      "（$\\mathbb{Q}$・L = 2・d = 3 で積が $2^3=8$ 項を走る: `nestedRes_rat_two_three`）。" +
+      "定義そのもの（$a_L$ が Galois 不変で整数であること、単項式倍で不変であること）は" +
+      "この claim ではなく直前の definition ブロックの内容なので対象外。" +
       "なお PropV.lean は $a_L$ を終結式そのものとして定義したうえで " +
       "$a_{p^n}\\equiv P(1,\\dots,1)^{p^{dn}}\\pmod p$ を d = 1, 2 で証明している。",
   },
@@ -158,7 +160,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "残るのは 2 つで、どちらも mathlib の欠落ではなくこちらの未記述である。" +
       "(1) **$C$ と $G$ の整数への降下**——$C\\,G=M_\\eta$ と $(\\det C)^2=1$ は体 $K=\\mathbb{Q}$ の上の" +
       "等式であり、人手証明が使う「$C\\in GL_r(\\mathbb{Z})$ だから余核が同型」を言うには、" +
-      "$C$ の成分が整数であること（`coeff_minpolyDiv` の漸化式からの帰納法）と、" +
+      "$C$ の成分が整数であること" +
+      "（cycle 29 step 3b の実測: この帰納法は mathlib に既にある。" +
+      "`coeff_minpolyDiv_mem_adjoin : coeff (minpolyDiv R x) i ∈ R[x]`＝" +
+      "`Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean` 84 行。" +
+      "$R=\\mathbb{Z}$ に取れば $C$ の成分が $\\mathbb{Z}[\\theta]$ に属することがそのまま出る。" +
+      "**ただし書いて通したものではない**——残るのは、その所属を冪基底の座標が整数であることへ" +
+      "翻訳する配線である)と、" +
       "行列の像と $\\eta A$ を基底で同一視する配線が要る。" +
       "(2) **$\\rho$ が可約な場合**——(b)(c) は `PowerBasis K L`（$L$ は体）を使っており $\\rho$ が" +
       "既約な場合しか覆っていない。mathlib のトレース双対（`Module.Basis.traceDual`）は体の上にしか無い。",
@@ -186,8 +194,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "素材も無い——`Monsky` / `CuocoMonsky` / `semialgebraic` / $\\mathbb{Z}_p^d$ 拡大は 3 段すべて 0 件、" +
       "岩澤代数は mathlib の p 進測度の章の散文に 1 行触れられているだけ（1 変数の測度）、" +
       "Weierstrass 準備定理は 1 変数版だけ（同じログ、mathlib 8264 ファイル走査）。" +
-      "(3) 有限 $L$ の段の $d\\ge2$。素材の欠落ではなく、" +
-      "反復多項式環の型（周期点数の終結式表示の残りと同じ）である。",
+      "(3) 有限 $L$ の段の $d\\ge2$。cycle 29 step 2 はここを「反復多項式環の型」と書いたが、" +
+      "その壁は step 3b で消えた（周期点数の終結式表示は一般の $d$ で書けた）。" +
+      "残っているのは別のことで、簡約周期点数は $P$ が消える組だけを除く量であり、" +
+      "その除去は変数ごとに剥がす形にならない。書き方は未着手で、書けるかどうかも確かめていない。",
   },
   {
     block: "paper_052_theorem_l0_computable",

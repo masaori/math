@@ -1,0 +1,17 @@
+
+> @integrable-lattice/structured-latex@0.1.0 build:pdf
+> node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts
+
+警告: 地の文に数式記法らしき文字がある 8 件（そのままの文字として組まれる。math ノードにするか記法を直すこと）:
+  paper_041_theorem_periodicity: 命題 A（v_p の最終周期性）
+  paper_042_theorem_pi_p1: 命題 B（トレース列の周期 π_tr(p,1) の精密公式）
+  paper_052b_definition_graph_tower: voltage グラフ、ℤ_ℓ^2 塔、全域木数、voltage ラプラシアン
+  paper_072_remark_qp_free: Q_p を避ける動機は決定不能性ではない
+  paper_100_heading_s_infinity_decision: θ = ∞ の判定手続きと、n ℓ^n の係数 = 二項式因子の重複度
+  paper_101_theorem_s_infinity_decision: 命題 K — S_∞ の判定手続きと、n ℓ^n の係数の閉じた式
+  paper_105_heading_drop_assumption: 最小点の一意性の仮定を落とす — n ℓ^n の係数の無条件決定
+  paper_106_theorem_drop_assumption: 命題 Q — 最小点の一意性の仮定なしに n ℓ^n の係数が決まること（明示誤差つき）
+generated /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.tex
+  ブロック 49 件（見出し 13、証明 24、TODO 0） / ラベル 38 件 / 相互参照 180 件（すべて解決）
+built /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.pdf: 50 ページ、未解決参照 0 件、組めない文字 0 件、版面外へ出た行 0 件（軽微な overfull 2 件は余白内）
+no notes in output (ja): ノート 0 件（本文サンプル 0 件）は いずれも /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.tex に現れない

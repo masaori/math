@@ -259,8 +259,8 @@ export default defineBlocks([
         " has been checked mechanically.",
       ]),
       paragraph([
-        "The coverage is not complete. Of the 24 assertions of this paper, 5 have their content ",
-        "formalised, 17 are formalised in part, and 2 have not been started. Complete formalisation ",
+        "The coverage is not complete. Of the 24 assertions of this paper, 6 have their content ",
+        "formalised, 16 are formalised in part, and 2 have not been started. Complete formalisation ",
         "is the goal we work towards, and the table below records which assertions remain and, for ",
         "each of them, what is left (or why it has not been started).",
       ]),
