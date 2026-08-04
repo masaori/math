@@ -228,6 +228,11 @@ export default defineBlocks([
     labels: ["paper_prop_F"],
     habitat: "Z",
     verification: ["sagemath/check/cycle16_T1_lambda_l0"],
+    lean: [
+      "IntegrableLattice.exists_ne_of_fibers_sum_eq_zero",
+      "IntegrableLattice.isUnit_vecGcd_prim",
+      "IntegrableLattice.mem_directions_of_fibers_sum_eq_zero",
+    ],
     statement: [
       paragraph([
         "(F1 Computability) Let ",

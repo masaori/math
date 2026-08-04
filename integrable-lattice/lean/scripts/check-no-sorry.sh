@@ -424,6 +424,22 @@ targets=(
   IntegrableLattice.w_lifting_step
   IntegrableLattice.w_lifting_pow
   IntegrableLattice.w_lifting_pow_specializes
+  # cycle 28 step 1: 命題 W* の微分の段と付値の段（PropWStarDifferent.lean）
+  IntegrableLattice.derivative_prod_pow
+  IntegrableLattice.ceilDivNat
+  IntegrableLattice.ceilDivNat_le_iff
+  IntegrableLattice.isLeast_wStar
+  IntegrableLattice.wStar_eq_zero_of_unramified
+  IntegrableLattice.wStar_le_of_tame
+  # cycle 28 step 1: 命題 F の「非可算な添字集合が有限に落ちる」段（PropFFiniteSupport.lean）
+  IntegrableLattice.exists_ne_of_fibers_sum_eq_zero
+  IntegrableLattice.vecGcd
+  IntegrableLattice.prim
+  IntegrableLattice.vecGcd_dvd
+  IntegrableLattice.eq_vecGcd_mul_prim
+  IntegrableLattice.isUnit_vecGcd_prim
+  IntegrableLattice.directions
+  IntegrableLattice.mem_directions_of_fibers_sum_eq_zero
 )
 
 {

@@ -105,11 +105,19 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_046_theorem_wstar_different",
-    state: "未着手",
-    reason:
-      "命題 W*（$w^*$ の代数的閉形式）は、単因子と異なる差積（different）を経由する。" +
-      "mathlib に Dedekind 環の different はあるが、トレース双対と微分を経由する本文の経路へ" +
-      "配線されておらず、どの段で詰まるかをまだ一次情報で特定していない。まず調査から要る。",
+    state: "部分的",
+    remaining:
+      "cycle 28 で 3 段のうち 2 段を形式化した（PropWStarDifferent.lean）。" +
+      "微分の段（$\\chi'=h\\cdot\\sum_i a_i f_i'(\\rho/f_i)$）と、" +
+      "付値の段（$\\min\\{j:\\forall\\mathfrak p,\\ j\\,e_\\mathfrak p\\ge v_\\mathfrak p\\}" +
+      "=\\max_\\mathfrak p\\lceil v_\\mathfrak p/e_\\mathfrak p\\rceil$、および従順分岐・不分岐の系）である。" +
+      "残るのは双対の段——$A^\\vee=\\rho'(\\theta)^{-1}A$（Euler の双対基底公式）から " +
+      "$\\operatorname{coker}(G)\\cong A/\\eta A$ を経て「$G$ の単因子＝$A/\\eta A$ の不変量」へ至る部分である。" +
+      "mathlib に `traceDual` / `differentIdeal` / `aeval_derivative_mem_differentIdeal` は在るが" +
+      "（`PropCTracePeriod.lean` が cycle 19 に実在を確認済み）、" +
+      "それらを重み付きトレース形式の Gram 行列の最大単因子へ結ぶ配線が無く、" +
+      "整数行列の Smith 標準形も無い（`Basis.SmithNormalForm` は部分加群の基底の形であって" +
+      "行列の単因子の形ではない）。",
   },
   {
     block: "paper_051_theorem_duality",
@@ -121,10 +129,18 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_052_theorem_l0_computable",
-    state: "未着手",
-    reason:
-      "命題 F（有限台なら $\\lambda$ が有限手続きで計算できる）は群環の素因子分解を線形代数で決める議論であり、" +
-      "手続きの停止性を型に出す形をまだ設計していない。mathlib の欠落ではなく、こちらの未着手である。",
+    state: "部分的",
+    remaining:
+      "cycle 28 で (F1) の心臓部を形式化した（PropFFiniteSupport.lean）。" +
+      "すなわち「すべてのファイバーの係数和が消えるなら分類写像は台の上で単射でない」という数え上げの一点と、" +
+      "そこから出る「割りうる方向は有限集合 $V(E)=\\{\\mathrm{prim}(e-e'):e\\ne e'\\in E\\}$ に入る」" +
+      "という包含である（非可算な $\\mathbb{P}^{d-1}(\\mathbb{Z}_p)$ を走らなくてよいことの中身）。" +
+      "残るのは 2 つ。(1) $(\\gamma_v-1)\\mid\\bar f$ と係数和の消滅の同値そのもの。" +
+      "これは $d$ 変数の完備群環 $\\mathbb{F}_p[[\\Gamma]]$ とその素イデアルの記述が要るが、" +
+      "mathlib には岩澤代数の一般論が `PowerSeries` の断片としてしか無い（配線ではなく素材から要る）。" +
+      "(2) (F2 境界) の停止問題への帰着。mathlib に `Nat.Partrec` / `Turing` は在るが、" +
+      "「係数を計算する手続きで与えられた $f$」という入力の与え方を型にする設計をこちらが持っていない" +
+      "（mathlib の欠落ではなく、こちらの未設計である）。",
   },
   {
     block: "paper_053_theorem_lower_order",

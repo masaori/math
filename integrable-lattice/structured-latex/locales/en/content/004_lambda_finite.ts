@@ -929,6 +929,13 @@ export default defineBlocks([
     labels: ["paper_wstar_different"],
     habitat: "Z",
     verification: ["sagemath/check/cycle19_T3_trace_period"],
+    lean: [
+      "IntegrableLattice.derivative_prod_pow",
+      "IntegrableLattice.ceilDivNat_le_iff",
+      "IntegrableLattice.isLeast_wStar",
+      "IntegrableLattice.wStar_eq_zero_of_unramified",
+      "IntegrableLattice.wStar_le_of_tame",
+    ],
     statement: [
       paragraph([
         "Let ",
