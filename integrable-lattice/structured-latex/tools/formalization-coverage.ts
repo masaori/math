@@ -267,7 +267,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(b) 定理 X の付値計算そのもの（$v_\\ell(h^N-1)=\\ell^{\\nu(N)}/\\varphi_m$。" +
       "$\\mathbb{Q}(\\zeta_{\\ell^m})$ の $\\ell$ の上の素点への**配線**。円分体も分岐も mathlib に在る）を挙げている。" +
       "`GeneralTowerClosedForm.lean` はさらに 定理 G2 の 1（Galois 不変性。配線）・定理 G2 の 3（配線）・" +
-      "$A_{\\mathrm{gen}}$ の $L$ 非依存性・Matrix–Tree 定理を挙げている。",
+      "$A_{\\mathrm{gen}}$ の $L$ 非依存性・Matrix–Tree 定理を挙げている。" +
+      "**cycle 34 step 5 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——(G′1) と (G′2) は、この欄が 1 度も触れていなかった。どちらも未形式化である。",
   },
   {
     block: "paper_056_theorem_ell2_family",
@@ -276,7 +277,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "命題 G″ は閉形式の形・場合分けの排反と網羅・$n=1$ の但し書き、および cycle 27 が形式化した " +
       "(G″1) の付値の議論まで。4 通りの閉形式の導出そのものは未形式化。" +
       "**cycle 34 step 3 の照合で、`EllTwoClosedForm.lean` が挙げている matrix-tree 定理も足す**" +
-      "（$\\kappa_n$ の独立計算に要る。外部定理の台帳を見よ）。",
+      "（$\\kappa_n$ の独立計算に要る。外部定理の台帳を見よ）。" +
+      "**cycle 34 step 5 の照合で足す**——本文の (G″2)(G″3)(G″4)(G″5) は、この欄が 1 度も触れていなかった。いずれも未形式化である（形式化してあるのは (G″1) の付値の議論だけである）。",
   },
   { block: "paper_061_theorem_V", state: "完了", note: "命題 V は $d=1$ と $d=2$。" },
   {
@@ -324,7 +326,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     remaining:
       "命題 K は (K2)(K3)(K6) と、cycle 27 が形式化した (K5) の一意性・$r_0$ の書き換えまで。" +
       "(K1) の対応と (K4) の重複度の主張は未形式化。" +
-      "**cycle 34 step 3 の照合で、`SInfinityDecision.lean` が挙げている 3 件を足す**——補題 W2 の (iv)、定理 W4 の主張そのもの、系 W7。",
+      "**cycle 34 step 3 の照合で、`SInfinityDecision.lean` が挙げている 3 件を足す**——補題 W2 の (iv)、定理 W4 の主張そのもの、系 W7。" +
+      "**cycle 34 step 5 の照合で足す**——本文の (K7) は、この欄が 1 度も触れていなかった。未形式化である。",
   },
   {
     block: "paper_101_theorem_digit_branch",
@@ -386,7 +389,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     remaining:
       "命題 M は (M1) の規約・(M2) の $\\lambda$・(M3) の $L$ 非依存性・(M5)(M6)、および " +
       "cycle 27 が形式化した $K(P_0)$ の存在と有界性まで。閉形式の導出そのものは未形式化。" +
-      "**cycle 34 step 3 の照合で、`Cycle25Corrections.lean` が挙げている 3 件を足す**——定理 G2 の 1（Galois 不変性。配線）、系 Q7 の $r=2$（2 変数 Laurent 環の一意分解性）、および voltage グラフのラプラシアン行列式そのもの（matrix-tree 定理。外部定理の台帳を見よ）。",
+      "**cycle 34 step 3 の照合で、`Cycle25Corrections.lean` が挙げている 3 件を足す**——定理 G2 の 1（Galois 不変性。配線）、系 Q7 の $r=2$（2 変数 Laurent 環の一意分解性）、および voltage グラフのラプラシアン行列式そのもの（matrix-tree 定理。外部定理の台帳を見よ）。" +
+      "**cycle 34 step 5 の照合で足す**——本文の (M4) は、この欄が 1 度も触れていなかった。未形式化である。",
   },
   {
     block: "paper_112_theorem_coefficient_layers",
@@ -449,3 +453,63 @@ export const COVERAGE_NUMBER_SITES: readonly CoverageNumberSite[] = [
     ],
   },
 ];
+
+/* ------------------------------------------------------------------------- *
+ * 台帳が本文の部を全部覆っているか（cycle 34 step 5）
+ * ------------------------------------------------------------------------- */
+
+/**
+ * **`部分的` の欄が、その主張の部を 1 つ残らず扱っているかを見る。**
+ *
+ * cycle 34 の着手時の実測で、**命題 R の欄が (R4) しか書いておらず (R5) を落としていた**
+ * ことが分かった。本文の命題 R は (R1)–(R5) の 5 部からなる。
+ * 同じ形の書き落としは他にもありうるので、機械が見る。
+ *
+ * ## 規則
+ *
+ * 本文の `statement` に `(R1 …` のような**部の見出し**が現れるとき、
+ * **`部分的` の欄はその部の記号を 1 つ残らず含んでいなければならない。**
+ * `部分的` は「一部だけ形式化した」という意味なので、
+ * **どの部がどちら側なのかを書かない限り、その主張は情報を持たない。**
+ *
+ * `完了` と `未着手` は対象外である——前者は部ごとに書く必要が無く、
+ * 後者は「なぜ手が付いていないか」を書く欄であって部の一覧ではないからである。
+ *
+ * ## 機械が確かめられないこと（正直に書く）
+ *
+ * - **部の記号が欄に在ることは確かめられるが、そこに書いてある状態が正しいかは確かめられない。**
+ *   （検査 F の他の部分と同じ限界である。）
+ * - 部の見出しを持たない主張は対象外なので、そこは人の読みのままである。
+ */
+export function partLabelsInStatement(statementText: string): string[] {
+  return [...new Set([...statementText.matchAll(/\(([A-Z]′?″?[0-9]+[′″]?)\s/g)].map((m) => m[1]!))];
+}
+
+/** 判定。IO を持たないので検出テストからそのまま呼べる。 */
+export function auditPartCoverage(input: {
+  readonly entries: readonly {
+    readonly block: string;
+    readonly state: CoverageState;
+    readonly text: string;
+    readonly statementText: string;
+  }[];
+}): { violations: string[]; checked: number; parts: number } {
+  const violations: string[] = [];
+  let checked = 0;
+  let parts = 0;
+  for (const entry of input.entries) {
+    if (entry.state !== "部分的") continue;
+    const labels = partLabelsInStatement(entry.statementText);
+    if (labels.length === 0) continue;
+    checked += 1;
+    parts += labels.length;
+    const missing = labels.filter((label) => !entry.text.includes(label));
+    if (missing.length > 0) {
+      violations.push(
+        `[台帳が本文の部を覆っていない] ${entry.block} — ` +
+          `${missing.join("・")} に 1 度も触れていない（cycle 34 の実測はこの形で (R5) の落ちを見つけた）`,
+      );
+    }
+  }
+  return { violations, checked, parts };
+}

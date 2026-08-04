@@ -31,6 +31,7 @@ import {
   type CoverageNumberSite,
   type CoverageState,
   FORMALIZATION_COVERAGE,
+  auditPartCoverage,
 } from "./formalization-coverage.ts";
 import { STALENESS_POLICY, auditLedgerAbsence, type LedgerText } from "./ledger-absence-model.ts";
 import {
@@ -385,7 +386,62 @@ if (process.argv.includes("--self-test")) {
   );
   failed += runLedgerAbsenceCases();
 
-  const total = cases.length + LEDGER_ABSENCE_CASES.length;
+  // cycle 34 step 5: 部の覆いの検出テスト（現に起きた形＝命題 R の (R5) 落ちを再現する）。
+  const partCases: { name: string; shouldFail: boolean; run: () => string[] }[] = [
+    {
+      name: "部分的なのに部の 1 つに触れていない（cycle 34 が実際に見つけた形）",
+      shouldFail: true,
+      run: () =>
+        auditPartCoverage({
+          entries: [
+            {
+              block: "fixture",
+              state: "部分的",
+              text: "(R1)(R2)(R3) の核まで。(R4) は未形式化。",
+              statementText: "(R1 桁枝分解) …(R4 終結式による付値) …(R5 予言アルゴリズム) …",
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "部を全部書いていれば通る",
+      shouldFail: false,
+      run: () =>
+        auditPartCoverage({
+          entries: [
+            {
+              block: "fixture",
+              state: "部分的",
+              text: "(R1)(R2)(R3) の核まで。(R4)(R5) は未形式化。",
+              statementText: "(R1 桁枝分解) …(R4 終結式による付値) …(R5 予言アルゴリズム) …",
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "完了と未着手は対象外（部ごとに書く欄ではない）",
+      shouldFail: false,
+      run: () =>
+        auditPartCoverage({
+          entries: [
+            {
+              block: "fixture",
+              state: "完了",
+              text: "全部書いた。",
+              statementText: "(R1 桁枝分解) …(R5 予言アルゴリズム) …",
+            },
+          ],
+        }).violations,
+    },
+  ];
+  for (const partCase of partCases) {
+    const violations = partCase.run();
+    const ok = violations.length > 0 === partCase.shouldFail;
+    if (!ok) failed += 1;
+    console.log(`  ${ok ? "OK" : "NG"} [部の覆い] ${partCase.name}`);
+  }
+
+  const total = cases.length + LEDGER_ABSENCE_CASES.length + partCases.length;
   console.log("");
   if (failed > 0) {
     console.log(`NG: ${failed} 件が期待どおりでない。`);
@@ -433,7 +489,19 @@ for (const file of readdirSync(leanDir).filter((name) => name.endsWith(".lean"))
   }
 }
 
-type Claim = { id: string; title: string; leanNames: readonly string[] };
+type Claim = { id: string; title: string; leanNames: readonly string[]; statementText: string };
+
+/** ノードの木から地の文を集める（部の見出しを拾うためだけに使う）。 */
+function plainTextOfNodes(node: unknown): string {
+  if (node == null) return "";
+  if (typeof node === "string") return node;
+  if (Array.isArray(node)) return node.map(plainTextOfNodes).join("");
+  if (typeof node === "object") {
+    const n = node as Record<string, unknown>;
+    return plainTextOfNodes(n.value) + plainTextOfNodes(n.children) + plainTextOfNodes(n.text);
+  }
+  return "";
+}
 const claims: Claim[] = [];
 /** 外部定理の台帳が「どのブロックが引いているか」を指すので、主張以外（注記・定義）の id も要る。 */
 const allBlockIds = new Set<string>();
@@ -445,6 +513,7 @@ for (const { blocks } of await loadContentFiles()) {
       id: block.id,
       title: block.title?.text ?? "",
       leanNames: block.lean ?? [],
+      statementText: plainTextOfNodes(block.statement),
     });
   }
 }
@@ -718,6 +787,40 @@ for (const entry of unformalised) {
     "    限界: その射程の主張が当の数学的主張にとって正しい射程かは判定できない" +
       "（`MvPolynomial` が 0 件であることは確かめられるが、本論文が要るのが多変数版かは人の判断である）。",
   );
+
+  // cycle 34 step 5: `部分的` の欄が本文の部を全部覆っているか。
+  {
+    const partAudit = auditPartCoverage({
+      entries: claims.flatMap((claim) => {
+        const entry = byBlock.get(claim.id);
+        if (entry === undefined) return [];
+        const e = entry as unknown as Record<string, string>;
+        return [
+          {
+            block: claim.id,
+            state: entry.state,
+            text: [e.remaining, e.reason, e.note].filter((x) => typeof x === "string").join(" "),
+            statementText: claim.statementText,
+          },
+        ];
+      }),
+    });
+    violations.push(...partAudit.violations);
+    console.log(
+      `    台帳が本文の部を覆っているか（cycle 34 step 5 で追加）: ` +
+        `部の見出しを持つ 部分的 の主張 ${partAudit.checked} 件 / 部 ${partAudit.parts} 件 / ` +
+        `覆っていないもの ${partAudit.violations.length} 件`,
+    );
+    console.log(
+      "    **`部分的` はどの部がどちら側かを書かない限り情報を持たない。** " +
+        "cycle 34 の着手時の実測は、命題 R の欄が (R4) しか書かず (R5) を落としていたのを見つけた。" +
+        "同じ形を機械が見る（この検査を入れたとき、他に 4 件の書き落としが出た）。",
+    );
+    console.log(
+      "    限界: 部の記号が欄に在ることは確かめられるが、そこに書いてある状態が正しいかは確かめられない。" +
+        "部の見出しを持たない主張は対象外なので、そこは人の読みのままである。",
+    );
+  }
 
   // cycle 34 step 4: 分類の手前の取りこぼしを、台帳の地の文の側から拾う。
   const scopeEntries: { name: string; text: string }[] = [];
