@@ -1,6 +1,6 @@
 /**
- * **検査 L（見出し代わりの断片）**。箇条書きの直前に、文になっていない短い段落が
- * 置かれていないことを確かめる。
+ * 検査 L（見出し代わりの断片）。文になっていない短い段落が、次の要素を導く見出しの
+ * 代わりに置かれていないことを確かめる。
  *
  * 何をなぜ見るかは `runin-label-model.ts` の doc を正本とする。
  */
@@ -14,7 +14,13 @@ import {
   loadContentFilesForLocale,
   structuredLatexDir,
 } from "./content-modules.ts";
-import { isRunInLabel, MAX_LENGTH, type RunInLabelSite } from "./runin-label-model.ts";
+import {
+  END_OF_BLOCK,
+  EXCLUDED_NEXT_TYPES,
+  isRunInLabel,
+  MAX_LENGTH,
+  type RunInLabelSite,
+} from "./runin-label-model.ts";
 
 /** 段落を平たくする。数式は 1 文字として数える（長さの判定に効かせるため）。 */
 const flatten = (nodes: readonly TranslatedNode[]): string => {
@@ -39,6 +45,19 @@ const flatten = (nodes: readonly TranslatedNode[]): string => {
   return out;
 };
 
+/** 直後の要素の日本語名。件数を出すときに、種別名だけを並べても読めないため添える。 */
+const nextElementName = (nextType: string): string =>
+  ({
+    paragraph: "段落",
+    list: "箇条書き",
+    displayMath: "別行立て数式",
+    [END_OF_BLOCK]: "何も無い（ブロックの末尾）",
+  })[nextType] ?? nextType;
+
+/** 段落から見た位置の名前。「直後が段落」ではなく「段落の直前」と読ませる。 */
+const positionName = (nextType: string): string =>
+  nextType === END_OF_BLOCK ? "ブロックの末尾" : `${nextElementName(nextType)}の直前`;
+
 const sites: RunInLabelSite[] = [];
 const perLocale: { locale: string; paragraphs: number }[] = [];
 
@@ -62,7 +81,7 @@ for (const locale of knownLocales) {
             ...base,
             where,
             text: flatten([node]),
-            nextType: nodes[index + 1]?.type ?? "(末尾)",
+            nextType: nodes[index + 1]?.type ?? END_OF_BLOCK,
           });
         });
       }
@@ -77,7 +96,30 @@ console.log(
   `  走査: ${perLocale.map((entry) => `${entry.locale}: 段落 ${entry.paragraphs}`).join(" / ")}`,
 );
 console.log(
-  `  判定: 箇条書きの直前にあり、${MAX_LENGTH} 文字以下で、文末が句点・コロン等でない段落`,
+  `  判定: ${MAX_LENGTH} 文字以下で、文末が句点・コロン等でない段落` +
+    `（直後が${EXCLUDED_NEXT_TYPES.map(nextElementName).join("・")}のものは除く）`,
+);
+
+// どの形をいくつ見ているかを毎回出す。判定の対象が黙って痩せたことに気づけるようにするため
+// （cycle 29 step 5 で、箇条書きの直前だけを見る形から広げた）。
+const countsByNextType = new Map<string, number>();
+for (const site of sites) {
+  countsByNextType.set(site.nextType, (countsByNextType.get(site.nextType) ?? 0) + 1);
+}
+const watched = [...countsByNextType].filter(([type]) => !EXCLUDED_NEXT_TYPES.includes(type));
+const excluded = [...countsByNextType].filter(([type]) => EXCLUDED_NEXT_TYPES.includes(type));
+const total = (entries: readonly (readonly [string, number])[]) =>
+  entries.reduce((sum, [, count]) => sum + count, 0);
+console.log(
+  `  対象: ${total(watched)} 段落（${watched
+    .sort((a, b) => b[1] - a[1])
+    .map(([type, count]) => `${positionName(type)} ${count}`)
+    .join(" / ")}）`,
+);
+console.log(
+  `  対象外: ${total(excluded)} 段落（${excluded
+    .map(([type, count]) => `${positionName(type)} ${count}`)
+    .join(" / ")}）。形だけでは数式へ続く言い回しと切り分けられないため除いている。`,
 );
 console.log(
   "  経緯: cycle 27 で強調指定を落としたとき、強調が唯一の区切りだった見出し代わりの断片が" +
@@ -89,7 +131,10 @@ const violations = sites.filter(isRunInLabel);
 if (violations.length > 0) {
   console.log("");
   for (const site of violations) {
-    console.log(`  [${site.locale}] ${site.blockId} (${site.where}): 「${site.text}」`);
+    console.log(
+      `  [${site.locale}] ${site.blockId} (${site.where}, ${positionName(site.nextType)}): ` +
+        `「${site.text}」`,
+    );
   }
   console.log("");
   console.log("  直し方: 述語のある文にする（「〜は次のとおりである。」等）。");
@@ -102,7 +147,8 @@ if (violations.length > 0) {
 console.log("");
 console.log(
   "  限界: 見ているのは長さと文末の字だけで、「文になっているか」を判定してはいない。" +
-    "捕まえるのは「見出しの代わりに置かれた短い断片」という形だけである。",
+    "捕まえるのは「見出しの代わりに置かれた短い断片」という形だけである。" +
+    "別行立て数式の直前と、箇条書きの項目の中は見ない。",
 );
 console.log("");
 console.log("違反 0 件。");
