@@ -160,7 +160,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`Strassmann` は 3 段とも 0 件、" +
       "`NewtonPolytope` / 語幹 `newton polytope` も 3 段とも 0 件）、" +
       "鋭い下界は Newton 恒等式の行列トレースへの接続が要り、Newton 多角形と固有値の接続は " +
-      "$\\overline{\\mathbb{Q}_p}$ の付値が要る。",
+      "$\\overline{\\mathbb{Q}_p}$ の付値が要る。" +
+      "**残りは 3 つである。**",
     remainingItems: [
       "上界方向は Skolem–Mahler–Lech / Strassmann が mathlib に無く",
       "鋭い下界は Newton 恒等式の行列トレースへの接続が要り",
@@ -390,6 +391,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "うち小行列式の段は cycle 32 step 3 で半分入った**＝全単模性。" +
       "残るのは「$\pm1$ になるのが全域木のときに限る」という組合せの側）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。" +
+      "**残りは 2 つである。**" +
       "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。",
     remainingItems: [
       "matrix-tree の段",
@@ -405,7 +407,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29-duality.log`。" +
       "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、`Monsky` / `CuocoMonsky` はいずれも 3 段とも 0 件。" +
       "語幹 `iwasawa` は 6 ファイルに当たるが、名前に iwasawa を持つファイルは群論の岩澤分解の 1 本だけで、" +
-      "岩澤不変量の漸近ではない）。",
+      "岩澤不変量の漸近ではない）。" +
+      "**残りは 1 つである。**",
     remainingItems: [
       "閉形式本体は Cuoco–Monsky の岩澤型漸近に依り",
     ],
@@ -654,8 +657,11 @@ export function auditPartCoverage(input: {
  *
  * 1. 部を持たない `部分的` の欄は、残っている項目の一覧（`remainingItems`）を持つこと。
  * 2. 各項目の文字列が散文にそのまま在ること（片方だけ書き換えたら赤くなる）。
- * 3. 散文が「残るのは N つ」のように**数で要約している**なら、
- *    その N が項目数と一致すること（**書き足して数が変われば赤くなる**）。
+ * 3. 散文が「残るのは N つ」のように**数で要約している**こと。そしてその N が項目数と一致すること
+ *    （**書き足して数が変われば赤くなる**）。
+ *    **cycle 37 step 5 で「要約していること」そのものを要求に変えた**——
+ *    cycle 36 の形では、要約が無い欄で 3 が空振りしていた（実測 6 件中 4 件）。
+ *    **空振りする検査は、緑であることが何も意味しない。**
  *
  * 3 が cycle 35・36 で 4 件見つかった事故（書き足したのに要約を直していない）の、
  * 散文の中の列挙にあたる側への手当てである。
@@ -705,7 +711,18 @@ export function auditPartlessRemaining(input: {
     const matches = [
       ...entry.text.matchAll(/残(?:るの|り|っているの)は\s*([0-9]+)\s*(?:つ|件|段)/g),
     ];
-    if (matches.length > 0) {
+    if (matches.length === 0) {
+      // **cycle 37 step 4 の測定で分かったこと**——要約が無い欄では 3 が空振りする。
+      // 実測では 6 件のうち 4 件（cycle 36 時点）がそれだった。
+      // **空振りする検査は、緑であることが何も意味しない。** そこで要約そのものを要求する。
+      violations.push(
+        `[いまの件数を述べる要約が無い] ${entry.block} — ` +
+          "部を持たない 部分的 の欄は、いまの残りの件数を散文でも述べること" +
+          "（述べていないと、書き足したときに数が古くなる事故を機械が見られない）",
+      );
+      continue;
+    }
+    {
       summarised += 1;
       const agrees = matches.some((m) => Number(m[1]) === list.length);
       if (!agrees) {

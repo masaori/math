@@ -552,6 +552,38 @@ if (process.argv.includes("--self-test")) {
         }).violations,
     },
     {
+      name: "いまの件数を述べる要約が無い欄は赤くなる（cycle 37 step 5。空振りしていた側）",
+      shouldFail: true,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              text: "降下の段と、判別式の段が残っている。",
+              hasParts: false,
+              remainingItems: ["降下の段", "判別式の段"],
+            },
+          ],
+        }).violations,
+    },
+    {
+      name: "過去の要約しか無い欄も赤くなる（いまの件数を述べていないので）",
+      shouldFail: true,
+      run: () =>
+        auditPartlessRemaining({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              text: "かつては「残りは 1 つ」と書いていた。降下の段と、判別式の段が残っている。",
+              hasParts: false,
+              remainingItems: ["降下の段", "判別式の段"],
+            },
+          ],
+        }).violations,
+    },
+    {
       name: "部を持つ主張は対象外（偽陽性でない側）",
       shouldFail: false,
       run: () =>
@@ -969,7 +1001,10 @@ for (const entry of unformalised) {
     console.log(
       "    **本文に部の構造が無い主張には部の覆いを当てられないので、欄の側に構造を持たせた。** " +
         "残っている項目を配列で宣言させ、各項目が散文にそのまま在ることと、" +
-        "散文が数で要約しているならその数が項目数と一致することを見る。" +
+        "**cycle 37 step 5 で「数で要約していること」そのものを要求に変えた**——" +
+        "cycle 36 の形では、要約が無い欄で数の照合が空振りしていた（実測 6 件中 4 件）。" +
+        "**空振りする検査は、緑であることが何も意味しない。** " +
+        "散文が数で要約していることと、その数が項目数と一致することを見る。" +
         "**後者が、cycle 35・36 で 4 件見つかった「書き足したのに要約を直していない」事故への手当てである。**",
     );
     console.log(
