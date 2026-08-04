@@ -49,3 +49,4 @@ import IntegrableLattice.CyclotomicValuationQ4a
 import IntegrableLattice.PropQLaurentLift
 import IntegrableLattice.KirchhoffCounting
 import IntegrableLattice.ResultantValuationR4
+import IntegrableLattice.SpanningConnectivity

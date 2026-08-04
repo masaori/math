@@ -617,6 +617,17 @@ targets=(
   IntegrableLattice.PropRResultantValuation.associated_int_of_associated_map
   IntegrableLattice.PropRResultantValuation.padicValInt_eq_of_associated_pow
   IntegrableLattice.PropRResultantValuation.ordEll_kappa_of_level_decomposition
+
+  # cycle 34 step 2: 全域木の同定の半分（連結でなければ小行列式は 0）。
+  # 逆向き（連結なら ±1）は書いていない。
+  IntegrableLattice.SpanningConnectivity.adjOn_symm
+  IntegrableLattice.SpanningConnectivity.reachOn_symm
+  IntegrableLattice.SpanningConnectivity.mem_component_iff
+  IntegrableLattice.SpanningConnectivity.mem_component_of_edge
+  "IntegrableLattice.SpanningConnectivity.mem_component_of_edge'"
+  IntegrableLattice.SpanningConnectivity.sum_incMatrixSigned_component
+  IntegrableLattice.SpanningConnectivity.exists_ne_zero_vecMul_of_not_reach
+  IntegrableLattice.SpanningConnectivity.det_submatrix_eq_zero_of_not_reach
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

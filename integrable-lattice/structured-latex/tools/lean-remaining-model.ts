@@ -174,6 +174,18 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    file: "SpanningConnectivity.lean",
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "連結なら小行列式が $\\pm1$",
+        kind: "未形式化",
+        ledgerFragment: "連結なら小行列式が",
+      },
+      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
+    ],
+  },
+  {
     file: "ResultantValuationR4.lean",
     heading: "形式化しなかったもの",
     items: [
