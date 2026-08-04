@@ -39,6 +39,11 @@ import {
   type ExternalKind,
 } from "./external-theorem-coverage.ts";
 import { auditExternalTheorems } from "./external-theorem-model.ts";
+import {
+  auditAbsenceEvidenceSupport,
+  parseSurveyLog,
+  type SurveyLog,
+} from "./absence-evidence-support.ts";
 
 /** 地の文だけを連結する（数式・参照は本文の数値の照合に効かないので落とす）。 */
 const flattenProse = (nodes: readonly TranslatedNode[]): string => {
@@ -559,6 +564,54 @@ for (const entry of unformalised) {
     console.log(`      ${log.path}: ${log.recordedCommit ?? "コミットの記録なし"}（${mark}）`);
   }
   console.log(`    ${STALENESS_POLICY}`);
+
+  // --- その根拠が主張を実際に支えているか（cycle 31 step 4） ---
+  //
+  // cycle 30 step 3 が明記した限界への手当て。ログのパスが書いてあることだけでなく、
+  // そのログの中の数字が不在を示していることまで見る。設計は absence-evidence-support.ts の doc。
+  const surveyLogs: SurveyLog[] = [];
+  for (const path of new Set(audit.entries.flatMap((entry) => entry.logPaths))) {
+    const full = join(projectDir, path);
+    if (!existsSync(full)) continue;
+    surveyLogs.push(parseSurveyLog(path, readFileSync(full, "utf8")));
+  }
+
+  const support = auditAbsenceEvidenceSupport({
+    entries: withClaims.map((entry) => ({
+      block: entry.block,
+      text: entries.find((row) => row.block === entry.block)?.text ?? "",
+      logPaths: entry.logPaths,
+    })),
+    logs: surveyLogs,
+  });
+  violations.push(...support.violations);
+
+  console.log("");
+  console.log(
+    `  その根拠は主張を支えているか: 数字が支えている ${support.counts.数字が支えている} 件 / ` +
+      `宣言の直読が支えている ${support.counts.宣言の直読が支えている} 件 / ` +
+      `数字は不在を示していない（射程の主張）${support.counts["数字は不在を示していない（射程の主張）"]} 件 / ` +
+      `ログを引いていない（本文の実測値だけ）${support.counts["ログを引いていない（本文の実測値だけ）"]} 件` +
+      `（読んだ実在確認ログ ${surveyLogs.length} 本 / 概念 ${surveyLogs.reduce((sum, log) => sum + log.concepts.length, 0)} 件）`,
+  );
+  for (const entry of support.entries) {
+    if (entry.kind !== "数字が支えている") continue;
+    console.log(`      ${entry.block}: ${entry.supportingConcept}`);
+  }
+  for (const entry of support.entries) {
+    if (entry.kind === "数字が支えている" || entry.kind === "宣言の直読が支えている") continue;
+    console.log(`      ${entry.block}: ${entry.kind}`);
+  }
+  console.log(
+    "    後ろ 2 つは嘘とは限らない。「無い」ではなく「在るが射程が足りない」型の主張は" +
+      "語の件数では支えられないためである。**そこを違反にすると、正直に射程を書いているエントリほど" +
+      "赤くなる逆向きの規律になる**ので、違反にせず内訳を数で出す。",
+  );
+  console.log(
+    "    限界: その検索語がその数学的主張にとって正しい語かは判定できない" +
+      "（`matrixTree` が 0 件であることは確かめられるが、matrix-tree 定理を探すのに" +
+      "その語を引くのが妥当かは人の判断である）。この検査の強さの上限は、台帳の書き手が選んだ語の妥当性である。",
+  );
 }
 
 // --- 外部定理の振り分け（2026-08-04 ユーザー判断。基準は docs/external-theorem-criterion.md） ---

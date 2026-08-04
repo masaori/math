@@ -74,7 +74,7 @@ linter が挙げ、どちらも実際に不要だったので `omit` で落と�
 
 `lake build` **8691 jobs** exit 0（警告 0 件）、
 `check-no-sorry.sh` の列挙 461 → **465 件**すべて sorryAx 非依存、
-`npm run check`（32 段）exit 0、
+`npm run check`（31 段）exit 0、
 検査 F の実出力で 外部定理 27 件・**自分で証明する 7 件のうち着手済み 3 件**・
 **全数まで残り 25 件**（動いていない）。
 

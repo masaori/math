@@ -85,7 +85,7 @@ matrix-tree を自分で証明すると決めた以上その内部段として�
 - 判定の純粋関数 `structured-latex/tools/external-theorem-model.ts`。
   検査 F（`verify-formalization-coverage.ts`）がこれを呼び、毎回印字する。
 - 検出テスト `structured-latex/tools/verify-external-theorem-detection-test.ts`（**8 件**）。
-  `npm run check` は 29 → **30 段**。
+  `npm run check` は 28 → **29 段**。
 - 機械が確かめるのは 3 つだけである。
   引いている箇所が空でないこと／引いている箇所が本文に実在すること／
   自分で証明する側が宣言した Lean の定理名が `lean/` に実在すること。
