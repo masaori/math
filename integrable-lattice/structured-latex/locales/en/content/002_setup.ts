@@ -85,6 +85,12 @@ a^{\mathrm{red}}_L:=\prod_{\substack{z_1^{L}=\dots=z_d^{L}=1\\ P(z)\neq0}}P(z_1,
       "IntegrableLattice.resultant_X_pow_sub_one_eq_prod_eval",
       "IntegrableLattice.eval_innerRes",
       "IntegrableLattice.outerRes_eq_prod_prod_eval",
+      "IntegrableLattice.nestedRes",
+      "IntegrableLattice.rootTuples",
+      "IntegrableLattice.peelRes_eq_prod_eval",
+      "IntegrableLattice.nestedRes_eq_tupleProd",
+      "IntegrableLattice.card_rootTuples",
+      "IntegrableLattice.nestedRes_rat_two_three",
     ],
     statement: [
       paragraph([

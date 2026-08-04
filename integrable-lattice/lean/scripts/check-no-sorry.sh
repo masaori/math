@@ -475,6 +475,21 @@ targets=(
   IntegrableLattice.resultant_X_pow_sub_one_eq_prod_eval
   IntegrableLattice.eval_innerRes
   IntegrableLattice.outerRes_eq_prod_prod_eval
+  # cycle 29 step 3b: 周期点数の終結式表示の一般の d（PeriodicPointResultant.lean §3）
+  IntegrableLattice.unityRoots
+  IntegrableLattice.peelRes
+  IntegrableLattice.nestedRes
+  IntegrableLattice.rootTuples
+  IntegrableLattice.tupleProdHom
+  IntegrableLattice.eval_cons_eq_eval_eval
+  IntegrableLattice.tupleProdHom_succ
+  IntegrableLattice.peelRes_eq_prod_eval
+  IntegrableLattice.nestedRes_eq_tupleProd
+  IntegrableLattice.nestedRes_two_eq_tupleProd
+  IntegrableLattice.card_rootTuples
+  IntegrableLattice.splits_X_sq_sub_one_rat
+  IntegrableLattice.card_unityRoots_two_rat
+  IntegrableLattice.nestedRes_rat_two_three
   # cycle 29 step 2: 双対命題 D の p 素点側・有限 L の段（DualityPAdicFiniteL.lean）
   IntegrableLattice.mem_goodRoots
   IntegrableLattice.aRedOne_ne_zero
