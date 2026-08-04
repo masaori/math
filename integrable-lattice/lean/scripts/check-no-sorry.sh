@@ -598,6 +598,25 @@ targets=(
   IntegrableLattice.KirchhoffCounting.det_submatrix_incMatrixSigned_eq_zero_or_one_or_neg_one
   IntegrableLattice.KirchhoffCounting.sq_det_submatrix_eq_zero_or_one
   IntegrableLattice.KirchhoffCounting.det_mul_transpose_eq_card
+
+  # cycle 34 step 1: 命題 R の (R4)（終結式による付値）と (R5)（組み立て）。
+  # 残るのは「各根へ π を送る環準同型があること」の供給（Galois の側の配線）。
+  IntegrableLattice.PropRResultantValuation.associated_prod_pow
+  IntegrableLattice.PropRResultantValuation.associated_prod_pow_ell
+  IntegrableLattice.PropRResultantValuation.associated_map_pow
+  IntegrableLattice.PropRResultantValuation.associated_pow_of_algEquiv
+  IntegrableLattice.PropRResultantValuation.resultant_monic_eq_prod_eval
+  IntegrableLattice.PropRResultantValuation.associated_resultant_pow_of_conj
+  IntegrableLattice.PropRResultantValuation.eval_map_comm
+  IntegrableLattice.PropRResultantValuation.associated_eval_of_hom
+  IntegrableLattice.PropRResultantValuation.psi_eq_prod
+  IntegrableLattice.PropRResultantValuation.roots_psi
+  IntegrableLattice.PropRResultantValuation.card_roots_psi
+  IntegrableLattice.PropRResultantValuation.associated_root_psi
+  IntegrableLattice.PropRResultantValuation.associated_resultant_psi
+  IntegrableLattice.PropRResultantValuation.associated_int_of_associated_map
+  IntegrableLattice.PropRResultantValuation.padicValInt_eq_of_associated_pow
+  IntegrableLattice.PropRResultantValuation.ordEll_kappa_of_level_decomposition
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

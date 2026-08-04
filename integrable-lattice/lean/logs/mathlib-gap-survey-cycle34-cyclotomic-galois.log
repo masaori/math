@@ -1,0 +1,153 @@
+=== 日付 ===
+2026-08-04T16:07:17Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 円分拡大の Galois 群（原始根の取り替え） ===
+--- (1) 連結語の内容 grep: 'autEquivPow'
+files=2
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'autEquivPow'
+files=2
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'autEquivPow'
+files=0
+
+=== 原始根から自己同型を作る段 ===
+--- (1) 連結語の内容 grep: 'autToPow'
+files=5
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/CyclotomicUnits.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'autToPow'
+files=5
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/CyclotomicUnits.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'autToPow'
+files=0
+
+=== 整数環へ環準同型を制限する段 ===
+--- (1) 連結語の内容 grep: 'RingOfIntegers.mapRingHom'
+files=1
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'mapRingHom'
+files=61
+.lake/packages/mathlib/Mathlib/Topology/LocallyConstant/Algebra.lean
+.lake/packages/mathlib/Mathlib/Topology/MetricSpace/Completion.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/UniformRing.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean
+.lake/packages/mathlib/Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'mapRingHom'
+files=0
+
+=== 終結式が根での値の積であること ===
+--- (1) 連結語の内容 grep: 'resultant_eq_prod_eval'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'resultant'
+files=3
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Disc.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'resultant'
+files=0
+
+=== ノルムが共役の積であること ===
+--- (1) 連結語の内容 grep: 'norm_eq_prod_automorphisms'
+files=6
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Norm.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Finite/GaloisField.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Finite/Trace.lean
+.lake/packages/mathlib/Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Norm/Transitivity.lean
+.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'norm_eq_prod'
+files=11
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Norm.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/House.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Finite/GaloisField.lean
+.lake/packages/mathlib/Mathlib/FieldTheory/Finite/Trace.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'norm_eq_prod'
+files=0
+
+=== 円分多項式が原始根の積に分解すること ===
+--- (1) 連結語の内容 grep: 'cyclotomic_eq_prod_X_sub_primitiveRoots'
+files=5
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'primitiveRoots'
+files=18
+.lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Gal.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'primitiveRoots'
+files=2
+.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean
+.lake/packages/mathlib/Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean
+
+=== 守備範囲を宣言行で直読する（在るが射程が足りないもの） ===
+--- Mahler 測度は 1 変数か（MvPolynomial を使っているか）
+.lake/packages/mathlib/Mathlib/Analysis/Polynomial/MahlerMeasure.lean : MvPolynomial の出現 0 件
+.lake/packages/mathlib/Mathlib/NumberTheory/MahlerMeasure.lean : MvPolynomial の出現 0 件
+--- トレース双対は体を要求するか（Module.Basis.traceDual の宣言行）
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:553:noncomputable def Module.Basis.traceDual :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:557:theorem Module.Basis.traceDual_def :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:561:theorem Module.Basis.traceDual_repr_apply (x : L) (i : ι) :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:566:theorem Module.Basis.trace_traceDual_mul (i j : ι) :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:571:theorem Module.Basis.trace_mul_traceDual (i j : ι) :
+.lake/packages/mathlib/Mathlib/RingTheory/Trace/Basic.lean:576:theorem Module.Basis.traceDual_traceDual :
+--- Smith 標準形はどこまで在るか（整除の鎖があるか）
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean:163:lemma toAddSubgroup_index_ne_zero_iff {N : Submodule ℤ M} (snf : Basis.SmithNormalForm N ι n) :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:30:theorem associated_norm_prod_smith [Fintype ι] (b : Basis ι R S) {f : S} (hf : f ≠ 0) :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:487:theorem Submodule.exists_smith_normal_form_of_le [Finite ι] (b : Basis ι R M) (N O : Submodule R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:514:noncomputable def Submodule.smithNormalFormOfLE [Finite ι] (b : Basis ι R M) (N O : Submodule R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:533:noncomputable def Submodule.smithNormalForm [Finite ι] (b : Basis ι R M) (N : Submodule R M) :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:555:noncomputable def Submodule.smithNormalFormOfRankEq [Fintype ι] (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:576:theorem Submodule.exists_smith_normal_form_of_rank_eq (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:599:noncomputable def Submodule.smithNormalFormTopBasis (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:612:noncomputable def Submodule.smithNormalFormBotBasis (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:625:noncomputable def Submodule.smithNormalFormCoeffs (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:630:theorem Submodule.smithNormalFormBotBasis_def (b : Basis ι R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:637:theorem Submodule.smithNormalFormCoeffs_ne_zero (b : Basis ι R M)
+--- Newton の公式の守備範囲（宣言行）
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:44:def newtonMap (x : S) : S :=
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:47:theorem newtonMap_apply :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:53:theorem newtonMap_apply_of_isUnit (h : IsUnit <| aeval x (derivative P)) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:57:theorem newtonMap_apply_of_not_isUnit (h : ¬ (IsUnit <| aeval x (derivative P))) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:61:theorem isNilpotent_iterate_newtonMap_sub_of_isNilpotent (h : IsNilpotent <| aeval x P) (n : ℕ) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:71:theorem isFixedPt_newtonMap_of_aeval_eq_zero (h : aeval x P = 0) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:75:theorem isFixedPt_newtonMap_of_isUnit_iff (h : IsUnit <| aeval x (derivative P)) :
+.lake/packages/mathlib/Mathlib/Dynamics/Newton.lean:81:theorem aeval_pow_two_pow_dvd_aeval_iterate_newtonMap
+--- Weierstrass 準備定理は何変数か（宣言行）
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:186:lemma weierstrassP_bound (r : ℝ) (hr : 0 < r) (s : ℂ) (hs : ‖s‖ < r) (l : ℂ) (h : 2 * r ≤ ‖l‖) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:219:def weierstrassPExcept (l₀ : ℂ) (z : ℂ) : ℂ :=
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:225:lemma hasSumLocallyUniformly_weierstrassPExcept (l₀ : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:237:lemma hasSum_weierstrassPExcept (l₀ : ℂ) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:243:lemma differentiableOn_weierstrassPExcept (l₀ : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:251:lemma weierstrassPExcept_neg (l₀ : ℂ) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:268:def weierstrassP (z : ℂ) : ℂ := ∑' l : L.lattice, (1 / (z - l) ^ 2 - 1 / l ^ 2)
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:272:lemma weierstrassPExcept_add (l₀ : L.lattice) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:281:lemma weierstrassPExcept_def (l₀ : L.lattice) (z : ℂ) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:286:lemma weierstrassPExcept_of_notMem (l₀ : ℂ) (hl : l₀ ∉ L.lattice) :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:293:lemma hasSumLocallyUniformly_weierstrassP :
+.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:299:lemma hasSum_weierstrassP (z : ℂ) :

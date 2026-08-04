@@ -31,6 +31,9 @@ export default defineBlocks([
     verification: ["sagemath/check/cycle20_T3_cancellation"],
     lean: [
       "IntegrableLattice.sigma_ne_zero_of_lambda_ne_zero",
+      "IntegrableLattice.PropRResultantValuation.associated_resultant_psi",
+      "IntegrableLattice.PropRResultantValuation.padicValInt_eq_of_associated_pow",
+      "IntegrableLattice.PropRResultantValuation.ordEll_kappa_of_level_decomposition",
     ],
     statement: [
       paragraph([

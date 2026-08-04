@@ -174,6 +174,23 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    file: "ResultantValuationR4.lean",
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "へ $\\pi$ を送る環準同型があること",
+        kind: "未形式化",
+        ledgerFragment: "環準同型",
+      },
+      {
+        leanFragment: "がモニックであることと分解すること",
+        kind: "未形式化",
+        ledgerFragment: "モニック",
+      },
+      { leanFragment: "のレベル分解と 命題 W の積の公式", kind: "参照だけ" },
+    ],
+  },
+  {
     file: "PropQLaurentLift.lean",
     heading: "形式化しなかったもの",
     items: [

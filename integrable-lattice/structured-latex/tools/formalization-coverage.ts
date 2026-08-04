@@ -327,7 +327,25 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     state: "部分的",
     remaining:
       "命題 R は (R1)(R2)(R3) の核まで（cycle 27 が (R2) の打ち消しの不在を別経路で形式化した）。" +
-      "終結式による付値の主張そのものは未形式化。",
+      "**cycle 34 着手時の実測で、この欄が本文より少なく書いていたことが分かったので直す**——" +
+      "本文の命題 R は (R1)–(R5) の 5 部からなり、cycle 33 までの記載は (R4) しか挙げていなかったが " +
+      "(R5) も未形式化である。" +
+      "cycle 34 step 1 で (R4) の本体と (R5) の組み立てを形式化した（`ResultantValuationR4.lean`）。" +
+      "入ったのは、終結式が根での値の積であること（モニックの場合）、" +
+      "$\\Psi_M=\\Phi_{\\ell^{M+1}}(1+x)$ の根がちょうど $\\xi-1$（$\\xi$ は原始根）でその個数が " +
+      "$\\varphi(\\ell^{M+1})$ であること、各根が $\\pi=\\zeta-1$ と同伴であること、" +
+      "$\\pi^t$ と同伴な元を $\\varphi(\\ell^{M+1})$ 個掛けると $\\ell^t$ と同伴になること" +
+      "（人手証明の「$\\ell$ が完全分岐し剰余次数が $1$」にあたる）、" +
+      "そこから $\\mathrm{Res}(\\Psi_M,F)\\sim\\ell^{t}$ が出ること、" +
+      "および整数の $\\ell$ 進付値への翻訳（$padicValInt$）である。" +
+      "**形式化して分かったこと**: 人手証明は $\\mathrm{Res}=N_{K/\\mathbb{Q}}(F(\\pi))$ を経由するが、" +
+      "ノルムは要らない（効くのは根での値の積であることと共役どうしが同伴であることだけ）。" +
+      "**残っているのは 1 つ、各根へ $\\pi$ を送る環準同型があることの供給である**。" +
+      "これは $K/\\mathbb{Q}$ が Galois であることの側から来る配線で、素材の欠落ではない" +
+      "（mathlib に `IsCyclotomicExtension.autEquivPow` が在る。2026-08-05 実測、" +
+      "`lean/logs/mathlib-gap-survey-cycle34-cyclotomic-galois.log`）。" +
+      "整数環へ制限する段を含めて書いていない。" +
+      "$\\Psi_M$ がモニックであることと分解することも仮定として受け取っている（同じく配線）。",
   },
   {
     block: "paper_106_theorem_drop_assumption",
