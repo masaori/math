@@ -397,7 +397,7 @@ export default defineBlocks([
         ".",
       ]),
       paragraph([
-        "Limitations",
+        "The limitations that remain in this proposition are the following.",
       ]),
       list([
         [

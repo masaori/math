@@ -414,7 +414,7 @@ export default defineBlocks([
         ", and it is the latter that (J4) requires.",
       ]),
       paragraph([
-        "Limitations",
+        "The limitations that remain in this proposition are the following.",
       ]),
       list([
         [

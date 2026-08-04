@@ -388,7 +388,7 @@ export default defineBlocks([
         " 上の有限計算だけである。",
       ]),
       paragraph([
-        "限界",
+        "本命題に残る限界は次のとおりである。",
       ]),
       list([
         [

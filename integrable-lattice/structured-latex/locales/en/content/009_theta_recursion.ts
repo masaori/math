@@ -255,7 +255,7 @@ export default defineBlocks([
         math(String.raw`D`),
         " alone (neither the values of the tower nor any computation in a cyclotomic field enters).",
       ]),
-      paragraph(["Limitations"]),
+      paragraph(["The limitations that remain in this proposition are the following."]),
       list([
         [
           "What (R2) kills is the cancellation in part (J2) of ",

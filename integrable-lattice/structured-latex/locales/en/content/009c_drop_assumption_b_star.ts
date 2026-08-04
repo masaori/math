@@ -350,7 +350,7 @@ export default defineBlocks([
         ". The two are consistent.",
       ]),
       paragraph([
-        "Countable versus uncountable",
+        "The quantities appearing in this proposition separate into countable and uncountable ones as follows.",
       ]),
       list([
         [
@@ -411,7 +411,7 @@ export default defineBlocks([
         ],
       ]),
       paragraph([
-        "Limitations",
+        "The limitations that remain in this proposition are the following.",
       ]),
       list([
         [

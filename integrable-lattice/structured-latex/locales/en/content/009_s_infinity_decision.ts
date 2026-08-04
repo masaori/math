@@ -308,7 +308,7 @@ export default defineBlocks([
         math(String.raw`\bar{\tilde E}`),
         " factors completely into binomials.",
       ]),
-      paragraph(["Limitations"]),
+      paragraph(["The limitations that remain in this proposition are the following."]),
       list([
         [
           "(K6) inherits the hypothesis that remains in part (J4) of ",

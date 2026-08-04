@@ -510,7 +510,7 @@ export default defineBlocks([
         " alone. Hence this proposition never escapes to the real field.",
       ]),
       paragraph([
-        "Limitations",
+        "The limitations that remain in this proposition are the following.",
       ]),
       list([
         [
@@ -1901,7 +1901,7 @@ export default defineBlocks([
         "The required precision is finite and computable for each tower, but it is not bounded above as the tower varies (that is exactly (U5)).",
       ]),
       paragraph([
-        "Limitations",
+        "The limitations that remain in this proposition are the following.",
       ]),
       list([
         [

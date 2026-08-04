@@ -275,7 +275,7 @@ export default defineBlocks([
         " が二項式に完全分解するときちょうどである。",
       ]),
       paragraph([
-        "限界",
+        "本命題に残る限界は次のとおりである。",
       ]),
       list([
         [

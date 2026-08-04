@@ -335,7 +335,7 @@ export default defineBlocks([
         " が出る。両者は整合する。",
       ]),
       paragraph([
-        "可算と非可算の分別",
+        "本命題に現れる量の、可算と非可算の分別は次のとおりである。",
       ]),
       list([
         [
@@ -391,7 +391,7 @@ export default defineBlocks([
         ],
       ]),
       paragraph([
-        "限界",
+        "本命題に残る限界は次のとおりである。",
       ]),
       list([
         [
