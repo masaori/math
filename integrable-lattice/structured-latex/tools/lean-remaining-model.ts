@@ -162,6 +162,18 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    file: "KirchhoffCounting.lean",
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "でないことと「全域木であること」の同値",
+        kind: "未形式化",
+        ledgerFragment: "全域木",
+      },
+      { leanFragment: "指標分解", kind: "未形式化", ledgerFragment: "指標分解" },
+    ],
+  },
+  {
     file: "PropQLaurentLift.lean",
     heading: "形式化しなかったもの",
     items: [

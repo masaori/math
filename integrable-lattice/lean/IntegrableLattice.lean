@@ -47,3 +47,4 @@ import IntegrableLattice.CrudeArchimedeanBound
 import IntegrableLattice.IncidenceUnimodular
 import IntegrableLattice.CyclotomicValuationQ4a
 import IntegrableLattice.PropQLaurentLift
+import IntegrableLattice.KirchhoffCounting

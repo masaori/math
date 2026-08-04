@@ -591,6 +591,13 @@ targets=(
   IntegrableLattice.PropQLaurentLift.not_dvd_unit_mul
   IntegrableLattice.PropQLaurentLift.isUnit_chi
   "IntegrableLattice.PropQLaurentLift.lemma_Q1'"
+
+  # cycle 33 step 3: Kirchhoff の右辺が数え上げであること（KirchhoffCounting.lean）。
+  # 全単模性（cycle 32）と Cauchy-Binet（cycle 31-32）を繋いだ段。
+  # 「その数え上げが全域木の個数である」という同定は、まだ書いていない。
+  IntegrableLattice.KirchhoffCounting.det_submatrix_incMatrixSigned_eq_zero_or_one_or_neg_one
+  IntegrableLattice.KirchhoffCounting.sq_det_submatrix_eq_zero_or_one
+  IntegrableLattice.KirchhoffCounting.det_mul_transpose_eq_card
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

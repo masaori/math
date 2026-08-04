@@ -136,7 +136,13 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "「どんな正方小行列でも行列式は $0,1,-1$ のいずれか」（全単模性）を証明した。" +
       "Cauchy–Binet と合わせると $\\det L_0=\\sum_S\\det(D_S)^2$ の各項が $0$ か $1$ になるので、" +
       "**Kirchhoff の右辺が「ある性質をもつ辺集合の個数」であることはこれで確定する。**" +
-      "残るのはその性質が「全域木であること」だと同定する組合せの側で、そこは書いていない。" +
+      "**cycle 33 step 3 でその「確定する」を主張として書いた**（`KirchhoffCounting.lean`）——" +
+      "cycle 32 は report にそう書いただけで主張にしておらず、限界の欄に" +
+      "「全単模性と『接続行列がその形をしている』を繋いだ主張は書いていない」と明記していた。" +
+      "書いたのは $\\det(D_0D_0^{\\mathsf T})$ が「小行列式が $0$ でない辺集合」の個数に等しいこと" +
+      "（`det_mul_transpose_eq_card`）で、Cauchy–Binet と全単模性だけから出る。" +
+      "残るのはその性質が「全域木であること」だと同定する組合せの側で、そこは書いていない" +
+      "（グラフの連結性と閉路を型に用意することになる）。したがって **matrix-tree は依然 部分的**である。" +
       "cycle 31 総括は「Cauchy–Binet が入っても 2 段残る」と書いていたが、" +
       "同じ文が挙げている項目は 3 つで、3 が正しい（cycle 32 着手時の実測で訂正した）。" +
       "段取りは `outputs/reports/cycle30_ops_matrix_tree_decision.md`。",
