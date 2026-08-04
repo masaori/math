@@ -50,16 +50,20 @@
    枝の添字 $c$ が $\ell$ 未満であることは（$c$ が枝の番号である以上自動的に満たされるが）
    $(2.1)$ の成立には不要である。型に出すとそれが読める。
 
-## 形式化しなかったもの（mathlib の欠落か配線か）
+## 形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）
 
-`lean/logs/mathlib-gap-survey-cycle21.log` を参照。
+cycle 34 まで本ファイルが「形式化しなかったもの」として挙げていた 2 件は、
+`DigitBranchZellExponent.lean` で書いた。
 
-* **$\mathbb{Z}_\ell$ 指数の $(1+x)^\gamma$**（補題 J0 で $\mathbb{F}_\ell[[x]]$ に定義されるもの）:
-  本ファイルは指数を $\mathbb{N}$ に取った多項式版で形式化している。
-  `PowerSeries` も二項冪級数（`Mathlib/RingTheory/PowerSeries/Binomial.lean`）も **mathlib に在る**ので、
-  欠落ではなく**配線**（$\mathbb{Z}_\ell$ 上の二項係数と Lucas を繋いでいない）である。
-* **$\mathrm{sep}$ についての帰納法そのもの**: 測度 $\nu$ を $\mathbb{Z}_\ell$ 上の有限台の
-  関数として定義し直す必要がある。これも配線であり、`L1_bound` で帰納段の算術だけを検算した。
+* **$\mathbb{Z}_\ell$ 指数の $(1+x)^\gamma$** — `zellPow` / `coeff_zellPow_eq`。
+  書いてみると、$\mathbb{Z}_\ell$ の指数に意味を与えているのは二項冪級数でも Lucas でもなく、
+  $(1+x)^{\ell^t}=1+x^{\ell^t}$ という 1 本の等式だった
+  （指数が $\ell^t$ を法として等しければ次数 $<\ell^t$ の係数は一致する）。
+* **$\mathrm{sep}$ についての帰納法そのもの** — `exists_coeff_ne_zero_of_sepAt`。
+  測度を $\mathbb{Z}_\ell$ 上の関数として定義し直す必要は無く、
+  「指数が $\bmod\ \ell^t$ で相異なる」という有限の条件だけで帰納法が回る。
+  本ファイルの `L1_bound` が帰納段の算術を、`exists_coeff_ne_zero_of_branches` が
+  打ち消しの不在を供給している。
 -/
 import Mathlib
 

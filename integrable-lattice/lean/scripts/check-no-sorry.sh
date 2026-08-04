@@ -617,6 +617,26 @@ targets=(
   IntegrableLattice.PropRResultantValuation.associated_int_of_associated_map
   IntegrableLattice.PropRResultantValuation.padicValInt_eq_of_associated_pow
   IntegrableLattice.PropRResultantValuation.ordEll_kappa_of_level_decomposition
+  # 命題 R の (R4) の配線（ResultantValuationR4.lean・cycle 35 step 1）
+  IntegrableLattice.PropRResultantValuation.monic_psi
+  IntegrableLattice.PropRResultantValuation.splits_psi
+  IntegrableLattice.PropRResultantValuation.exists_ringHom_of_powerBasis
+  IntegrableLattice.PropRResultantValuation.exists_ringHom_sub_one
+  IntegrableLattice.PropRResultantValuation.int_dvd_of_algebraMap_dvd
+  IntegrableLattice.PropRResultantValuation.associated_resultant_psi_of_powerBasis
+  # 命題 R の (R1)(R3) の残り（DigitBranchZellExponent.lean・cycle 35 step 1）
+  IntegrableLattice.PropRZellExponent.one_add_X_pow_ell_pow
+  IntegrableLattice.PropRZellExponent.X_pow_dvd_one_add_X_pow_mul_sub_one
+  IntegrableLattice.PropRZellExponent.coeff_one_add_X_pow_congr
+  IntegrableLattice.PropRZellExponent.coeff_zellPow_eq
+  IntegrableLattice.PropRZellExponent.branchIndex_injOn
+  IntegrableLattice.PropRZellExponent.branchSum_decomposition
+  IntegrableLattice.PropRZellExponent.mod_pow_succ_of_mod_pow
+  IntegrableLattice.PropRZellExponent.sepAt_branchIndex
+  IntegrableLattice.PropRZellExponent.exists_coeff_ne_zero_of_sepAt
+  IntegrableLattice.PropRZellExponent.exists_sepAt
+  IntegrableLattice.PropRZellExponent.exists_coeff_ne_zero_lt_pow_sep
+  IntegrableLattice.PropRZellExponent.coeff_branchSum_padic_eq
 
   # cycle 34 step 2: 全域木の同定の半分（連結でなければ小行列式は 0）。
   # 逆向き（連結なら ±1）は書いていない。

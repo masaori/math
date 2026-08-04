@@ -42,17 +42,24 @@ Dedekind 環の理論も分岐指数・慣性次数の一般論も使わない�
 「共役どうしが同伴である」ことだけで、ノルムはその積に付けた名前にすぎない。
 ノルムを経由しないので、$K/\mathbb{Q}$ が Galois であることも（$\sigma$ を数え上げる形では）使わない。
 
-## 形式化しなかったもの
+## 形式化した残りの段（cycle 35 step 1 で書いた）
 
-* **各根 $\alpha$ へ $\pi$ を送る環準同型があること**（`associated_resultant_psi` の `hconj`）。
-  これが本 file に残る唯一の外部入力で、$K/\mathbb{Q}$ が Galois であることの側から来る。
-  mathlib には円分拡大の Galois 群の記述（`IsCyclotomicExtension.autEquivPow`）が在るので
-  **素材の欠落ではなく配線**だが、整数環へ制限する段を含めて本 file は書いていない。
-* $\Psi_M$ がモニックであることと分解することも仮定として受け取っている
-  （`hΨ`・`hsplit`。どちらも円分多項式の標準的な性質で、配線である）。
+* **各根 $\alpha$ へ $\pi$ を送る環準同型があること** — `exists_ringHom_sub_one`（段 8）。
+  cycle 34 はこれを「$K/\mathbb{Q}$ が Galois であることの側から来る配線」と読み、
+  素材として `IsCyclotomicExtension.autEquivPow` を挙げていたが、
+  **書いてみると Galois 群の記述は要らなかった**。効くのは冪基底の普遍性だけで、
+  $\zeta$ の最小多項式の根ひとつごとに $\zeta\mapsto\xi$ の環準同型が 1 つ決まる
+  （`exists_ringHom_of_powerBasis`）。円分拡大であることも整数環の理論も使わない。
+* **$\Psi_M$ がモニックであることと分解すること** — `monic_psi` / `splits_psi`（段 7）。
+  分解そのものは段 4c の `psi_eq_prod` が既に与えていた。
+* **整数の割り切りが反映されること** — `int_dvd_of_algebraMap_dvd`（段 9）。
+  段 5 が `hrefl` として受け取っていたもので、$\mathbb{Z}$ が直和因子であることだけを使う。
+
 * (R5) の入力である 命題 J の (J3) のレベル分解と 命題 W の積の公式は、
   それぞれ仮定として受け取る（本論文がそこで証明しているものであり、
   (R5) 自身の内容は「合わせるだけ」である）。
+
+3 つを供給した形が `associated_resultant_psi_of_powerBasis`（段 10）である。
 -/
 import Mathlib
 import IntegrableLattice.CyclotomicValuationQ4a
@@ -314,6 +321,116 @@ theorem ordEll_kappa_of_level_decomposition {n : ℕ} {ordKappa vKappa mu : ℤ}
     (hprod : ordKappa = vKappa - 2 * n + mu + Sigma) :
     ordKappa = vKappa - 2 * n + mu + ∑ M ∈ Finset.Icc 1 n, ∑ P ∈ pts M, res M P := by
   rw [hprod, hlevel, Finset.sum_congr rfl hR4]
+
+/-! ## 段 7: $\Psi_M$ がモニックであることと分解すること（cycle 35 step 1）
+
+段 4 が仮定として受け取っていた `hΨ`・`hsplit` を供給する。
+どちらも円分多項式の標準的な性質から出る配線である。 -/
+
+/-- $\Psi_M=\Phi_{\ell^{M+1}}(1+x)$ はモニックである。 -/
+theorem monic_psi {R : Type*} [CommRing R] (n : ℕ) :
+    ((cyclotomic n R).comp (X + 1)).Monic := by
+  simpa using (cyclotomic.monic n R).comp_X_add_C 1
+
+/-- $\Psi_M$ は 1 次式の積へ分解する。段 4c の `psi_eq_prod` がその分解そのものを与えている。 -/
+theorem splits_psi {R : Type*} [CommRing R] [IsDomain R] {ℓ M : ℕ} [Fact ℓ.Prime]
+    {ζ : R} (hζ : IsPrimitiveRoot ζ (ℓ ^ (M + 1))) :
+    ((cyclotomic (ℓ ^ (M + 1)) R).comp (X + 1)).Splits := by
+  rw [psi_eq_prod hζ]
+  refine Splits.multisetProd ?_
+  intro f hf
+  obtain ⟨a, _, rfl⟩ := Multiset.mem_map.mp hf
+  exact Splits.X_sub_C a
+
+/-! ## 段 8: 各根へ $\pi$ を送る環準同型の供給（cycle 35 step 1）
+
+段 4b が唯一の外部入力として残していた `hconj` を供給する。
+
+**使うのは Galois 群の記述ではない。** 効くのは冪基底の普遍性だけである——
+$R$ が $\zeta$ を生成元とする $\mathbb{Z}$ 上の冪基底をもてば、
+$\zeta$ の最小多項式の根 $\xi$ ひとつごとに $\zeta\mapsto\xi$ の環準同型が 1 つ決まる。
+台帳は `IsCyclotomicExtension.autEquivPow`（Galois 群と $(\mathbb{Z}/n)^\times$ の同型）を
+素材として挙げていたが、要るのはその同型ではなく、**その同型を作るときに使われている普遍性の側**である。
+したがって円分拡大であることも、$K/\mathbb{Q}$ が Galois であることも、整数環の理論も使わない。 -/
+
+/-- **冪基底の普遍性**。$\mathbb{Z}$ 上の冪基底の生成元の最小多項式の根 $\xi$ へ
+生成元を送る環準同型が存在する。 -/
+theorem exists_ringHom_of_powerBasis {R : Type*} [CommRing R] (pb : PowerBasis ℤ R)
+    {ξ : R} (hξ : aeval ξ (minpoly ℤ pb.gen) = 0) :
+    ∃ σ : R →+* R, σ pb.gen = ξ :=
+  ⟨(pb.lift ξ hξ).toRingHom, pb.lift_gen ξ hξ⟩
+
+/-- **`hconj` の供給**。$R$ が $\zeta$ を生成元とする $\mathbb{Z}$ 上の冪基底をもち、
+$\zeta$ の最小多項式が $\Phi_{\ell^{M+1}}$ であれば、
+$\Psi_M$ の各根 $\alpha$ について $\pi=\zeta-1$ を $\alpha$ へ送る環準同型がある。 -/
+theorem exists_ringHom_sub_one {R : Type*} [CommRing R] [IsDomain R] {ℓ M : ℕ} [Fact ℓ.Prime]
+    {ζ : R} (hζ : IsPrimitiveRoot ζ (ℓ ^ (M + 1)))
+    (pb : PowerBasis ℤ R) (hgen : pb.gen = ζ)
+    (hmin : minpoly ℤ ζ = cyclotomic (ℓ ^ (M + 1)) ℤ)
+    {α : R} (hα : α ∈ ((cyclotomic (ℓ ^ (M + 1)) R).comp (X + 1)).roots) :
+    ∃ σ : R →+* R, σ (ζ - 1) = α := by
+  rw [roots_psi hζ] at hα
+  obtain ⟨ξ, hξ, rfl⟩ := Multiset.mem_map.mp hα
+  have hξprim : IsPrimitiveRoot ξ (ℓ ^ (M + 1)) :=
+    isPrimitiveRoot_of_mem_primitiveRoots hξ
+  have hpos : 0 < ℓ ^ (M + 1) := pow_pos (Fact.out (p := ℓ.Prime)).pos _
+  have hroot : aeval ξ (minpoly ℤ pb.gen) = 0 := by
+    rw [hgen, hmin]
+    have hr := hξprim.isRoot_cyclotomic hpos
+    simpa [aeval_def, eval₂_eq_eval_map, map_cyclotomic, IsRoot.def] using hr
+  obtain ⟨σ, hσ⟩ := exists_ringHom_of_powerBasis pb hroot
+  refine ⟨σ, ?_⟩
+  rw [map_sub, map_one, ← hgen, hσ]
+
+/-! ## 段 9: 整数の割り切りが反映されること（cycle 35 step 1）
+
+段 5 の `associated_int_of_associated_map` が仮定として受け取っていた `hrefl` を供給する。
+$\mathbb{Z}$ 上の冪基底があれば、$\mathbb{Z}$ は $R$ の直和因子なので、
+$\mathbb{Z}$ の元どうしの割り切りはそのまま $\mathbb{Z}$ へ降りる。 -/
+
+/-- $\mathbb{Z}$ 上の冪基底をもつ環では、$\mathbb{Z}$ の元どうしの割り切りが反映される。
+$\varphi a\cdot r$ の座標が $a\cdot(r\ \text{の座標})$ であることだけを使う。 -/
+theorem int_dvd_of_algebraMap_dvd {R : Type*} [CommRing R] [Nontrivial R] (pb : PowerBasis ℤ R)
+    (a b : ℤ) (h : (algebraMap ℤ R) a ∣ (algebraMap ℤ R) b) : a ∣ b := by
+  classical
+  set i0 : Fin pb.dim := ⟨0, pb.dim_pos⟩ with hi0
+  -- 冪基底の第 0 元は $\zeta^0=1$ なので、$\mathbb{Z}$ の元の第 0 座標はその元自身である。
+  have hbasis0 : pb.basis i0 = 1 := by
+    rw [pb.basis_eq_pow]
+    simp [hi0]
+  have hrepr : ∀ c : ℤ, pb.basis.repr ((algebraMap ℤ R) c) i0 = c := by
+    intro c
+    rw [Algebra.algebraMap_eq_smul_one, ← hbasis0, map_smul, pb.basis.repr_self]
+    simp
+  obtain ⟨r, hr⟩ := h
+  refine ⟨pb.basis.repr r i0, ?_⟩
+  have hcoord := hrepr b
+  rw [hr, Algebra.algebraMap_eq_smul_one, smul_mul_assoc, one_mul, map_smul] at hcoord
+  simpa using hcoord.symm
+
+/-! ## 段 10: (R4) を仮定なしで組み上げる（cycle 35 step 1）
+
+段 7・8 が段 4d の 3 つの仮定（モニック・分解・共役）をすべて供給したので、
+残る入力は本文が (R4) の前提として置いているもの（$F(\pi)\sim\pi^t$）だけになる。 -/
+
+/-- **(R4)（配線を済ませた形）**。$R$ が $\zeta$ を生成元とする $\mathbb{Z}$ 上の冪基底をもち
+$\zeta$ の最小多項式が $\Phi_{\ell^{M+1}}$ であれば、
+$F\in\mathbb{Z}[x]$ について $F(\pi)\sim\pi^{t}$ から $\mathrm{Res}(\Psi_M,F)\sim\ell^{t}$ が出る。
+
+段 4d の `associated_resultant_psi` との違いは、`hΨ`・`hsplit`・`hconj` を仮定に置いていないことである。 -/
+theorem associated_resultant_psi_of_powerBasis {R : Type*} [CommRing R] [IsDomain R]
+    {ℓ M : ℕ} [Fact ℓ.Prime] {ζ : R} (hζ : IsPrimitiveRoot ζ (ℓ ^ (M + 1)))
+    (pb : PowerBasis ℤ R) (hgen : pb.gen = ζ)
+    (hmin : minpoly ℤ ζ = cyclotomic (ℓ ^ (M + 1)) ℤ)
+    (F : ℤ[X]) (n : ℕ) {t : ℕ}
+    (hF : (F.map (Int.castRingHom R)).natDegree ≤ n)
+    (hval : Associated ((F.map (Int.castRingHom R)).eval (ζ - 1)) ((ζ - 1) ^ t)) :
+    Associated
+      (((cyclotomic (ℓ ^ (M + 1)) R).comp (X + 1)).resultant (F.map (Int.castRingHom R))
+        ((cyclotomic (ℓ ^ (M + 1)) R).comp (X + 1)).natDegree n)
+      ((ℓ : R) ^ t) :=
+  associated_resultant_psi hζ F n hF (monic_psi _) (splits_psi hζ) hval
+    (fun _ hα => exists_ringHom_sub_one hζ pb hgen hmin hα)
 
 end PropRResultantValuation
 end IntegrableLattice

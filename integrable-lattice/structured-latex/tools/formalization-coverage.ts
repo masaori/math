@@ -331,29 +331,36 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_101_theorem_digit_branch",
-    state: "部分的",
-    remaining:
-      "命題 R は (R1)(R2)(R3) の核まで（cycle 27 が (R2) の打ち消しの不在を別経路で形式化した）。" +
-      "**cycle 34 着手時の実測で、この欄が本文より少なく書いていたことが分かったので直す**——" +
-      "本文の命題 R は (R1)–(R5) の 5 部からなり、cycle 33 までの記載は (R4) しか挙げていなかったが " +
-      "(R5) も未形式化である。" +
-      "cycle 34 step 1 で (R4) の本体と (R5) の組み立てを形式化した（`ResultantValuationR4.lean`）。" +
-      "入ったのは、終結式が根での値の積であること（モニックの場合）、" +
-      "$\\Psi_M=\\Phi_{\\ell^{M+1}}(1+x)$ の根がちょうど $\\xi-1$（$\\xi$ は原始根）でその個数が " +
-      "$\\varphi(\\ell^{M+1})$ であること、各根が $\\pi=\\zeta-1$ と同伴であること、" +
-      "$\\pi^t$ と同伴な元を $\\varphi(\\ell^{M+1})$ 個掛けると $\\ell^t$ と同伴になること" +
-      "（人手証明の「$\\ell$ が完全分岐し剰余次数が $1$」にあたる）、" +
-      "そこから $\\mathrm{Res}(\\Psi_M,F)\\sim\\ell^{t}$ が出ること、" +
-      "および整数の $\\ell$ 進付値への翻訳（$padicValInt$）である。" +
-      "**形式化して分かったこと**: 人手証明は $\\mathrm{Res}=N_{K/\\mathbb{Q}}(F(\\pi))$ を経由するが、" +
-      "ノルムは要らない（効くのは根での値の積であることと共役どうしが同伴であることだけ）。" +
-      "**残っているのは 1 つ、各根へ $\\pi$ を送る環準同型があることの供給である**。" +
-      "これは $K/\\mathbb{Q}$ が Galois であることの側から来る配線で、素材の欠落ではない" +
-      "（mathlib に `IsCyclotomicExtension.autEquivPow` が在る。2026-08-05 実測、" +
-      "`lean/logs/mathlib-gap-survey-cycle34-cyclotomic-galois.log`）。" +
-      "整数環へ制限する段を含めて書いていない。" +
-      "$\\Psi_M$ がモニックであることと分解することも仮定として受け取っている（同じく配線）。" +
-      "**cycle 34 step 3 の照合で、`DigitBranchRecursion.lean` が挙げている 2 件も足す**——$\\mathbb{Z}_\\ell$ 指数の $(1+x)^\\gamma$（`PowerSeries` も二項冪級数も mathlib に在るので配線）と、$\\mathrm{sep}$ についての帰納法そのもの（測度を $\\mathbb{Z}_\\ell$ 上の有限台の関数として定義し直す配線）。",
+    state: "完了",
+    note:
+      "cycle 35 step 1 で残り 4 件を全部書いたので、命題 R は完了である。" +
+      "**cycle 34 総括はここを「残りは 1 つだけ」と書いていたが、それは誤りだった**——" +
+      "cycle 34 step 1 が書いた「残っているのは 1 つ」という文は、" +
+      "同じサイクルの step 3 が同じ欄へ 2 件書き足した時点で古くなっており、" +
+      "書き足した側がその文を直さなかった。cycle 35 の着手時の実測で 4 件と分かり、4 件とも書いた。" +
+      "内訳は次のとおり。" +
+      "(1) **$\\Psi_M$ の各根へ $\\pi$ を送る環準同型の供給**" +
+      "（`ResultantValuationR4.lean` の `exists_ringHom_sub_one`）。" +
+      "**Galois 群の記述は要らなかった**——効くのは冪基底の普遍性だけで、" +
+      "$\\zeta$ の最小多項式の根ひとつごとに $\\zeta\\mapsto\\xi$ の環準同型が 1 つ決まる。" +
+      "台帳が素材として挙げていた `IsCyclotomicExtension.autEquivPow` は使っていない" +
+      "（その同型を作るときに使われている普遍性の側だけを使う）。" +
+      "円分拡大であることも $K/\\mathbb{Q}$ が Galois であることも整数環の理論も使わない。" +
+      "(2) **$\\Psi_M$ がモニックであることと分解すること**" +
+      "（`monic_psi` / `splits_psi`。段 4c の `psi_eq_prod` が分解そのものを与えていた）。" +
+      "併せて段 5 が仮定として受け取っていた「整数の割り切りが反映されること」も供給した" +
+      "（`int_dvd_of_algebraMap_dvd`。$\\mathbb{Z}$ が直和因子であることだけを使う）。" +
+      "(3)(4) **$\\mathbb{Z}_\\ell$ 指数の $(1+x)^\\gamma$** と **$\\mathrm{sep}$ についての帰納法**" +
+      "（`DigitBranchZellExponent.lean`。cycle 34 step 3 の照合が `DigitBranchRecursion.lean` から写した 2 件）。" +
+      "**書いてみると 2 件は同じ 1 本の補題に載っていた**——" +
+      "$\\mathbb{Z}_\\ell$ の指数に意味を与えているのは $\\ell$ 進の位相でも完備性でも二項冪級数でもなく、" +
+      "$(1+x)^{\\ell^t}=1+x^{\\ell^t}$ という 1 本の等式である" +
+      "（指数が $\\ell^t$ を法として等しければ次数 $<\\ell^t$ の係数は一致する）。" +
+      "そして $\\mathrm{sep}$ はまさに「代表元へ取り替えてよい深さ」なので、" +
+      "$\\mathbb{Z}_\\ell$ 指数の族は $\\mathrm{sep}$ の深さまでは $\\mathbb{N}$ 指数の族と同じ多項式を与える。" +
+      "台帳が別々の 2 件として挙げていたのは、その繋がりを見ていなかったためである。" +
+      "$\\mathrm{sep}$ そのものも取ってあるので (R3) は仮定を置かない形で言えている" +
+      "（`exists_sepAt` / `sep` / `exists_coeff_ne_zero_lt_pow_sep`）。",
   },
   {
     block: "paper_106_theorem_drop_assumption",

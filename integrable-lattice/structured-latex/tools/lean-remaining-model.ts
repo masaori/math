@@ -160,18 +160,18 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "DigitBranchRecursion.lean",
-    heading: "形式化しなかったもの（mathlib の欠落か配線か）",
+    heading: "形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）",
     items: [
-      {
-        leanFragment: "指数の $(1+x)^\\gamma$",
-        kind: "未形式化",
-        ledgerFragment: "指数の $(1+x)^\\gamma$",
-      },
-      {
-        leanFragment: "についての帰納法そのもの",
-        kind: "未形式化",
-        ledgerFragment: "の帰納法",
-      },
+      { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み" },
+      { leanFragment: "についての帰納法そのもの", kind: "形式化済み" },
+    ],
+  },
+  {
+    file: "DigitBranchZellExponent.lean",
+    heading: "形式化した残りの段（cycle 35 step 1 で 2 件とも書いた）",
+    items: [
+      { leanFragment: "指数の $(1+x)^\\gamma$", kind: "形式化済み" },
+      { leanFragment: "についての帰納法", kind: "形式化済み" },
     ],
   },
   {
@@ -234,18 +234,11 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     file: "ResultantValuationR4.lean",
-    heading: "形式化しなかったもの",
+    heading: "形式化した残りの段（cycle 35 step 1 で書いた）",
     items: [
-      {
-        leanFragment: "へ $\\pi$ を送る環準同型があること",
-        kind: "未形式化",
-        ledgerFragment: "環準同型",
-      },
-      {
-        leanFragment: "がモニックであることと分解すること",
-        kind: "未形式化",
-        ledgerFragment: "モニック",
-      },
+      { leanFragment: "へ $\\pi$ を送る環準同型があること", kind: "形式化済み" },
+      { leanFragment: "がモニックであることと分解すること", kind: "形式化済み" },
+      { leanFragment: "整数の割り切りが反映されること", kind: "形式化済み" },
       {
         leanFragment: "のレベル分解と 命題 W の積の公式",
         kind: "参照だけ",

@@ -24,6 +24,7 @@ import IntegrableLattice.DigitTheorem
 import IntegrableLattice.BouquetClosedForm
 import IntegrableLattice.TowerTypeCoefficients
 import IntegrableLattice.DigitBranchRecursion
+import IntegrableLattice.DigitBranchZellExponent
 import IntegrableLattice.SInfinityDecision
 import IntegrableLattice.EllTwoClosedForm
 import IntegrableLattice.DropAssumptionBStar

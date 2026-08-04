@@ -55,6 +55,12 @@ export default defineBlocks([
       "IntegrableLattice.PropRResultantValuation.associated_resultant_psi",
       "IntegrableLattice.PropRResultantValuation.padicValInt_eq_of_associated_pow",
       "IntegrableLattice.PropRResultantValuation.ordEll_kappa_of_level_decomposition",
+      "IntegrableLattice.PropRResultantValuation.associated_resultant_psi_of_powerBasis",
+      "IntegrableLattice.PropRResultantValuation.exists_ringHom_sub_one",
+      "IntegrableLattice.PropRZellExponent.coeff_one_add_X_pow_congr",
+      "IntegrableLattice.PropRZellExponent.coeff_zellPow_eq",
+      "IntegrableLattice.PropRZellExponent.exists_coeff_ne_zero_of_sepAt",
+      "IntegrableLattice.PropRZellExponent.exists_coeff_ne_zero_lt_pow_sep",
     ],
     statement: [
       paragraph([
