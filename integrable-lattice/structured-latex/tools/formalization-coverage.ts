@@ -271,9 +271,35 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "3 段で引き、`squarefree_map` / `Squarefree.isFractionRing` / `Monic.squarefree_map_iff` が " +
       "いずれも 3 段とも 0 件。`GaussLemma.lean` と `Content.lean` に `Squarefree` は 1 行も現れない）。" +
       "素材そのもの（`Monic.dvd_iff_fraction_map_dvd_fraction_map` と " +
-      "`IsIntegrallyClosed.eq_map_mul_C_of_dvd`）は在るので、自前で書ける見込みはある。",
+      "`IsIntegrallyClosed.eq_map_mul_C_of_dvd`）は在るので、自前で書ける見込みはある。" +
+      "**cycle 38 step 1 でその段を書いた**（`WStarSquarefreeNonzero.lean`）。" +
+      "**cycle 37 の実測（Gauss 型の移送が mathlib に無い）は正しく、" +
+      "誤っていたのは「だから書けない」という推論のほうである**——" +
+      "同じログが名指しした素材から、移送そのものは自前で 1 本書ける" +
+      "（`Monic.squarefree_map`。$g^2\\mid f_K$ の $g$ をモニックに正規化し、" +
+      "`IsIntegrallyClosed.eq_map_mul_C_of_dvd` で $R[x]$ の元の像に直してから、" +
+      "`Monic.dvd_of_fraction_map_dvd_fraction_map` で $R[x]$ の中の $h'^2\\mid f$ に落とす）。" +
+      "そこから $\\rho_K$ が分離的（$K$ は標数 $0$ なので完全体）$\\Rightarrow$ " +
+      "$\\rho_K$ と $\\rho_K'$ が互いに素 $\\Rightarrow$ $\\rho\\mid\\rho'g$ ならば $\\rho\\mid g$ " +
+      "（`dvd_of_dvd_derivative_mul`）$\\Rightarrow$ $A=R[x]/(\\rho)$ で $\\rho'(\\theta)$ が零因子でない" +
+      "（`derivative_mem_nonZeroDivisors`）$\\Rightarrow$ 段 7 と繋いで $\\det G\\neq0$" +
+      "（`det_weightedGram_ne_zero_of_squarefree`）と進む。" +
+      "**$R[x]$ へ戻す段に原始性（したがって `IsGCDMonoid`）は要らなかった**——" +
+      "$\\rho$ がモニックなので余りつき除算が $R[x]$ の中でできて、余りの像が $0$ なら余りも $0$ である。" +
+      "**それでもこの主張は完了しない。書いてみて、残りが 1 件ではなかったことが分かった。** " +
+      "本 step が書いたのは「$\\rho$ が無平方かつ $\\mu$ が零因子でないならば $\\det G\\neq0$」という" +
+      "**含意**であって、その 2 つの仮定は受け取っている。**本文はどちらも構成で与えている**ので、" +
+      "構成そのものを書かないと主張の形にならない。**残りは 2 つである。** " +
+      "(i) $\\rho=\\mathrm{rad}(\\chi)$（$\\chi$ の相異なる既約因子の積）の構成と、それが無平方であること。" +
+      "(ii) $\\mu$（$\\chi=\\prod_i f_i^{a_i}$ の重複度 $a_i$ を成分ごとにとる元。" +
+      "本文の $\\chi'/h=\\sum_i a_i f_i'\\,\\rho/f_i$ がその実体）の構成と、それが零因子でないこと。" +
+      "**この 2 つは cycle 37 までの残り一覧に 1 度も現れていない。** " +
+      "現れなかったのは、台帳が「$\\det G\\neq0$ を出す段」を含意として読んでいて、" +
+      "その両端が構成であることを数えていなかったためである。" +
+      "**cycle 35・36 で 2 度起きた「入ってみたら残りは 1 件ではなかった」の 3 度目である。そう書く。**",
     remainingItems: [
-      "が無平方であることから $\\det G\\neq0$ を出す段",
+      "の構成と、それが無平方であること",
+      "の構成と、それが零因子でないこと",
     ],
   },
   {

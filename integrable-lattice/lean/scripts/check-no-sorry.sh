@@ -667,6 +667,11 @@ targets=(
   IntegrableLattice.WStarPowerBasis.isPowerBasisOf_adjoinRoot
   IntegrableLattice.WStarPowerBasis.isReductionOf_adjoinRoot
   IntegrableLattice.WStarPowerBasis.mem_nonZeroDivisors_of_det_weightedGram_ne_zero
+  # 無平方性から det G≠0 を出す段（WStarSquarefreeNonzero.lean・cycle 38 step 1）
+  IntegrableLattice.WStarSquarefree.squarefree_map_of_monic
+  IntegrableLattice.WStarSquarefree.dvd_of_dvd_derivative_mul
+  IntegrableLattice.WStarSquarefree.derivative_mem_nonZeroDivisors
+  IntegrableLattice.WStarSquarefree.det_weightedGram_ne_zero_of_squarefree
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）
   IntegrableLattice.TracePeriodWStar.mulVec_injective_of_det_ne_zero
   IntegrableLattice.TracePeriodWStar.mul_left_cancel_of_det_ne_zero

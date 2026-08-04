@@ -972,6 +972,10 @@ export default defineBlocks([
       "IntegrableLattice.WStarPowerBasis.isPowerBasisOf_adjoinRoot",
       "IntegrableLattice.WStarPowerBasis.isReductionOf_adjoinRoot",
       "IntegrableLattice.WStarPowerBasis.mem_nonZeroDivisors_of_det_weightedGram_ne_zero",
+      "IntegrableLattice.WStarSquarefree.squarefree_map_of_monic",
+      "IntegrableLattice.WStarSquarefree.dvd_of_dvd_derivative_mul",
+      "IntegrableLattice.WStarSquarefree.derivative_mem_nonZeroDivisors",
+      "IntegrableLattice.WStarSquarefree.det_weightedGram_ne_zero_of_squarefree",
     ],
     statement: [
       paragraph([

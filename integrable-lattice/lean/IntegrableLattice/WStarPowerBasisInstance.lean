@@ -28,9 +28,10 @@ cycle 36 step 1 はこの当てはめを「残り」として挙げていた。�
 ## 形式化しなかったもの
 
 * **$\rho$ が無平方であることから $\eta=(\chi'/h)(\theta)$ が零因子でないことを直接導く段**は
-  書いていない。本ファイルが繋いだのは「$\det G\neq0$ ならば零因子でない」という向きであり、
-  本文が $\det G\neq0$ を主張している以上これで足りるが、
-  無平方性から $\det G\neq0$ を出す段そのものは別である（本文の判別式の段）。
+  本ファイルには書いていない。本ファイルが繋いだのは「$\det G\neq0$ ならば零因子でない」
+  という向きである。逆向き——**無平方であることから $\det G\neq0$ を出す段**は
+  cycle 38 step 1 で `WStarSquarefreeNonzero.lean` に書いた
+  （`WStarSquarefree.det_weightedGram_ne_zero_of_squarefree`）。
 -/
 import Mathlib
 import IntegrableLattice.EulerDualBasisCommRing

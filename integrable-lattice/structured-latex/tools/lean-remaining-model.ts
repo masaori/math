@@ -373,10 +373,31 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 38 step 1 で `WStarSquarefreeNonzero.lean` に書いた。
+        // 本ファイルには無いままなので、指し先を明示して「参照だけ」へ移す。
         leanFragment: "を直接導く段",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "WStarSquarefreeNonzero.lean" },
+      },
+    ],
+  },
+  {
+    // cycle 38 step 1 で新設。無平方性から $\det G\neq0$ を出す段を書いた。
+    file: "WStarSquarefreeNonzero.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "重複度 $a_i$ をとる元）が零因子でないこと",
         kind: "未形式化",
-        ledgerFragment: "無平方であることから",
-        crossFilePhrase: "無平方であることから $\\det G\\neq0$",
+        ledgerFragment: "の構成と、それが零因子でないこと",
+        crossFilePhrase: "重複度 $a_i$ を成分ごとにとる元の構成",
+      },
+      {
+        leanFragment: "が無平方であること自体",
+        kind: "未形式化",
+        ledgerFragment: "の構成と、それが無平方であること",
+        crossFilePhrase: "$\\mathrm{rad}(\\chi)$ の構成",
       },
     ],
   },
