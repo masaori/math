@@ -35,3 +35,4 @@ import IntegrableLattice.Cycle26ProofSteps
 import IntegrableLattice.Cycle27ProofSteps
 import IntegrableLattice.PropWStarDifferent
 import IntegrableLattice.PropFFiniteSupport
+import IntegrableLattice.ExtremumNonempty

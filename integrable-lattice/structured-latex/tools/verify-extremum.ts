@@ -8,7 +8,8 @@
  * 同型の事故が 4 回起きており、うち 2 回は 1 つの素数だけが落ちるので目視で見つからなかった。
  */
 
-import { relative } from "node:path";
+import { readFileSync, readdirSync } from "node:fs";
+import { join, relative } from "node:path";
 
 import type { TranslatedNode } from "../schema.ts";
 import {
@@ -18,6 +19,19 @@ import {
   structuredLatexDir,
 } from "./content-modules.ts";
 import { EXTREMUM_ALLOWANCES } from "./extremum-allowances.ts";
+
+/** `lean/` に実在する宣言名。台帳が指す定理が消えていないことを毎回確かめるために読む。 */
+const declaredInLean = new Set<string>();
+{
+  const leanDir = join(structuredLatexDir, "..", "lean", "IntegrableLattice");
+  for (const file of readdirSync(leanDir).filter((name) => name.endsWith(".lean"))) {
+    for (const match of readFileSync(join(leanDir, file), "utf8").matchAll(
+      /^(?:private\s+|protected\s+|noncomputable\s+)*(?:theorem|lemma|def|abbrev|instance)\s+([A-Za-z_][A-Za-z0-9_'!?]*)/gm,
+    )) {
+      declaredInLean.add(match[1]!);
+    }
+  }
+}
 import { classifyTex, type ExtremumForm, type ExtremumSite, keyOf, needsJudgement } from "./extremum-model.ts";
 
 /** ブロックの中身（地の文と数式）を 1 本の文字列にする。目印の実在を見るのに使う。 */
@@ -214,11 +228,43 @@ console.log("  根拠の内訳:");
 for (const [type, label] of Object.entries(GROUND_LABEL)) {
   console.log(`    ${label}: ${byGround.get(type) ?? 0} 件`);
 }
+const byConstruction = EXTREMUM_ALLOWANCES.filter(
+  (allowance) => allowance.ground.type === "nonempty-by-construction",
+);
+const backed = byConstruction.filter(
+  (allowance) =>
+    allowance.ground.type === "nonempty-by-construction" && allowance.ground.leanTheorem !== undefined,
+);
+for (const allowance of backed) {
+  const ground = allowance.ground;
+  if (ground.type !== "nonempty-by-construction" || ground.leanTheorem === undefined) continue;
+  const short = ground.leanTheorem.split(".").at(-1)!;
+  if (!declaredInLean.has(short)) {
+    violations.push({
+      kind: "根拠が指す Lean の定理が lean/ に無い",
+      detail: `${allowance.block} — ${ground.leanTheorem}`,
+    });
+  }
+}
+
 console.log(
-  `    ↑ このうち「${GROUND_LABEL["nonempty-by-construction"]}」${byGround.get("nonempty-by-construction") ?? 0} 件は` +
-    "**型として機械検証できない**。「この添字族は空でない」は数学の判断であって tex の文字列からは出ない。" +
+  `    ↑ このうち「${GROUND_LABEL["nonempty-by-construction"]}」${byConstruction.length} 件は` +
+    "tex の文字列からは判定できない。「この添字族は空でない」は数学の判断だからである。" +
     "残り 3 種類は目印の実在を毎回確かめている（本文からその一文が消えれば赤くなる）。",
 );
+console.log(
+  `    そのうち **${backed.length} 件は Lean の定理で裏を取ってある**` +
+    `（残り ${byConstruction.length - backed.length} 件は人の判断のまま）。` +
+    "定理名が `lean/` に実在することは毎回確かめる。",
+);
+if (byConstruction.length > backed.length) {
+  console.log("    裏が取れていないもの:");
+  for (const allowance of byConstruction) {
+    const ground = allowance.ground;
+    if (ground.type !== "nonempty-by-construction" || ground.leanTheorem !== undefined) continue;
+    console.log(`      ${allowance.block} — ${allowance.fingerprint.slice(0, 44)}`);
+  }
+}
 
 if (violations.length > 0) {
   console.log("");

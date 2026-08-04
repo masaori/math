@@ -440,6 +440,16 @@ targets=(
   IntegrableLattice.isUnit_vecGcd_prim
   IntegrableLattice.directions
   IntegrableLattice.mem_directions_of_fibers_sum_eq_zero
+  # cycle 28 step 4: 検査 M の「構成から空でない」の裏取り（ExtremumNonempty.lean）
+  IntegrableLattice.range_nonempty_of_one_le
+  IntegrableLattice.digit_range_nonempty
+  IntegrableLattice.Icc_zero_nonempty
+  IntegrableLattice.nat_index_nonempty
+  IntegrableLattice.fin_nonempty_of_one_le
+  IntegrableLattice.support_nonempty_of_ne_zero
+  IntegrableLattice.mv_support_nonempty_of_ne_zero
+  IntegrableLattice.exists_pow_gt
+  IntegrableLattice.exists_root_of_one_le_natDegree
 )
 
 {

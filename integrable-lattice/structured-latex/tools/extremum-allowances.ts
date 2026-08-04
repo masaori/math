@@ -19,9 +19,10 @@
 import type { ExtremumAllowance } from "./extremum-model.ts";
 
 /** 有限個の元を並べた添字集合が空でない、という形の根拠を短く書くための下地。 */
-const finiteIndex = (why: string): ExtremumAllowance["ground"] => ({
+const finiteIndex = (why: string, leanTheorem?: string): ExtremumAllowance["ground"] => ({
   type: "nonempty-by-construction",
   why,
+  ...(leanTheorem === undefined ? {} : { leanTheorem }),
 });
 
 export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
@@ -35,6 +36,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "添字 i は T ∈ M_d(ℤ) の固有値（特性多項式 χ_T の根、重複込みで d 個）を走る。" +
         "d ≥ 1 なので添字族は空でない。",
+      "IntegrableLattice.exists_root_of_one_le_natDegree",
     ),
   },
 
@@ -48,6 +50,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "N は 0 ≤ N < r を走る。r は S の満たすモニック漸化式の階数で r ≥ 1 なので、" +
         "添字族は少なくとも N = 0 を含む。",
+      "IntegrableLattice.range_nonempty_of_one_le",
     ),
   },
   {
@@ -130,6 +133,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "g ≠ 0 なので、ある次数 d の同次部分が 0 でなく、その ε_d は有限である。" +
         "したがって k_min を定める集合は空でない。",
+      "IntegrableLattice.mv_support_nonempty_of_ne_zero",
     ),
   },
   {
@@ -179,6 +183,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "添字 i は相異なる γ_1, …, γ_k ∈ ℤ_ℓ を走る。この一次独立性の議論は k ≥ 1 の場合に" +
         "行われるので添字族は空でない。",
+      "IntegrableLattice.fin_nonempty_of_one_le",
     ),
   },
   {
@@ -190,6 +195,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "m は A_m の添字（0 以上の整数）を走り、少なくとも m = 0 を含む。" +
         "値が +∞ になりうること（A_m = 0）と添字族が空であることは別である。",
+      "IntegrableLattice.nat_index_nonempty",
     ),
   },
   {
@@ -198,7 +204,8 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "indexed",
     fingerprint: "{j\\ge0}\\bigl(e_j+j\\,\\ell^{r}\\bigr),",
     count: 1,
-    ground: finiteIndex("添字族は {j ≥ 0} であり、少なくとも j = 0 を含むので空でない。"),
+    ground: finiteIndex("添字族は {j ≥ 0} であり、少なくとも j = 0 を含むので空でない。",
+      "IntegrableLattice.nat_index_nonempty",),
   },
   {
     block: "paper_091_theorem_theta_padic",
@@ -251,7 +258,8 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "indexed",
     fingerprint: "c\\mathrm{ord}_y\\,g_c",
     count: 1,
-    ground: finiteIndex("添字 c は {0, 1, …, ℓ−1} を走るので空でない（ℓ ≥ 2）。"),
+    ground: finiteIndex("添字 c は {0, 1, …, ℓ−1} を走るので空でない（ℓ ≥ 2）。",
+      "IntegrableLattice.digit_range_nonempty",),
   },
   {
     block: "paper_101_theorem_digit_branch",
@@ -259,7 +267,8 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "indexed",
     fingerprint: "m(\\varphi(\\ell^{M})v_\\ell(A_m)+m)",
     count: 1,
-    ground: finiteIndex("命題 J の同じ量。添字 m は 0 以上の整数を走るので空でない。"),
+    ground: finiteIndex("命題 J の同じ量。添字 m は 0 以上の整数を走るので空でない。",
+      "IntegrableLattice.nat_index_nonempty",),
   },
   {
     block: "paper_101_theorem_digit_branch",
@@ -353,6 +362,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "ℓ ≥ 2 なので (ℓ−1)ℓ^c は c について非有界であり、2b を超える c が存在する。" +
         "したがってこの集合は空でない。",
+      "IntegrableLattice.exists_pow_gt",
     ),
   },
 
@@ -402,7 +412,8 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "indexed",
     fingerprint: "j\\bigl(e_j+j\\ell^{r}\\bigr)",
     count: 1,
-    ground: finiteIndex("命題 J の Λ(r) と同じ量。添字族は {j ≥ 0} で空でない。"),
+    ground: finiteIndex("命題 J の Λ(r) と同じ量。添字族は {j ≥ 0} で空でない。",
+      "IntegrableLattice.nat_index_nonempty",),
   },
   {
     block: "paper_111_theorem_general_closed_form",
@@ -413,6 +424,7 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     ground: finiteIndex(
       "α = Σ α_m x^m は 0 でない多項式なので添字 m の族は空でない" +
         "（非アルキメデス的付値の標準的な評価を書いた行）。",
+      "IntegrableLattice.support_nonempty_of_ne_zero",
     ),
   },
   {
@@ -432,7 +444,8 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "indexed",
     fingerprint: "m\\bigl(\\varphi(\\ell^{M})v_\\ell(A_m)+m\\bigr)",
     count: 1,
-    ground: finiteIndex("命題 J の同じ量。添字 m は 0 以上の整数を走るので空でない。"),
+    ground: finiteIndex("命題 J の同じ量。添字 m は 0 以上の整数を走るので空でない。",
+      "IntegrableLattice.nat_index_nonempty",),
   },
   {
     block: "paper_111_theorem_general_closed_form",
@@ -465,7 +478,8 @@ export const EXTREMUM_ALLOWANCES: readonly ExtremumAllowance[] = [
     form: "indexed",
     fingerprint: "{0\\le k\\le K(P_0)}\\Lambda_k(P_0)",
     count: 1,
-    ground: finiteIndex("添字族は 0 ≤ k ≤ K(P_0) で、K ≥ 0 なので少なくとも k = 0 を含む。"),
+    ground: finiteIndex("添字族は 0 ≤ k ≤ K(P_0) で、K ≥ 0 なので少なくとも k = 0 を含む。",
+      "IntegrableLattice.Icc_zero_nonempty",),
   },
   {
     block: "paper_112_theorem_coefficient_layers",

@@ -88,9 +88,17 @@ export type ExtremumSite = {
  */
 export type ExtremumGround =
   | {
-      /** 構成から空にならない。**機械で確かめられない型**。 */
+      /**
+       * 構成から空にならない。**判断そのものは tex の文字列からは出ない型**。
+       *
+       * `leanTheorem` を書けば、その判断を Lean の定理として述べたことになる
+       * （検査は定理が `lean/` に実在することを確かめ、裏を取れた件数を印字する）。
+       * 書かなければ、その件は人の判断のまま残る。
+       */
       readonly type: "nonempty-by-construction";
       readonly why: string;
+      /** 空でないことを述べた Lean の定理名。`IntegrableLattice.…` の完全名。 */
+      readonly leanTheorem?: string;
     }
   | {
       /** 空でないことを、このブロック自身が論じている。 */
