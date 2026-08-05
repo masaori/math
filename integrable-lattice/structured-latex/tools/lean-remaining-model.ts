@@ -701,6 +701,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 41 step 3 で新設。岩澤分解を組み立て、λ が g から決まることを書いた。
+    file: "IwasawaDecomposition.lean",
+    declarationsAtReview: 5,
+    externalEntry: "Monsky の p 進冪級数の定理",
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "Monsky の Theorem 5.6 の主張そのものは書いていない",
+        kind: "未形式化",
+        ledgerFragment: "残っているのは $\\mathrm{ord}$ の漸近そのものである",
+        crossFilePhrase: "$\\mathrm{ord}$ の漸近を数える段",
+      },
+      {
+        leanFragment: "$\\mathbb{Z}_p^d$（$d\\ge2$）は扱っていない",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle40-external-engines.log" },
+      },
+    ],
+  },
+  {
     // cycle 40 step 3 で新設。命題 C″ (1) のしきい値の最良性の反例を書いた。
     file: "TracePeriodThresholdSharp.lean",
     declarationsAtReview: 22,

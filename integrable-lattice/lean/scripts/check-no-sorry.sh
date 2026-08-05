@@ -778,6 +778,12 @@ targets=(
   IntegrableLattice.IwasawaMu.weierstrass_over_padicInt
   IntegrableLattice.IwasawaMu.dvd_coeff_of_pow_dvd
   IntegrableLattice.IwasawaMu.exists_greatest_pow_dvd
+  # Monsky の定理の第 2 段（岩澤分解と λ の同定。IwasawaDecomposition.lean・cycle 41 step 3）
+  IntegrableLattice.IwasawaDecomposition.cast_eq_C
+  IntegrableLattice.IwasawaDecomposition.dvd_of_forall_coeff_dvd
+  IntegrableLattice.IwasawaDecomposition.map_residue_eq_zero_iff
+  IntegrableLattice.IwasawaDecomposition.exists_iwasawa_factorization
+  IntegrableLattice.IwasawaDecomposition.degree_eq_order_map
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）

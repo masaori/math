@@ -319,6 +319,10 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "weierstrass_over_padicInt",
       "dvd_coeff_of_pow_dvd",
       "exists_greatest_pow_dvd",
+      "dvd_of_forall_coeff_dvd",
+      "map_residue_eq_zero_iff",
+      "exists_iwasawa_factorization",
+      "degree_eq_order_map",
     ],
     remaining:
       "**cycle 40 step 4 で第 1 段を書いた**（`IwasawaMuInvariant.lean`）。" +
@@ -331,7 +335,18 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "実在する宣言として残した（`weierstrass_over_padicInt`）。" +
       "**残っているのは Theorem 5.6 の主張そのもの**（$\\mathrm{ord}_\\ell$ の漸近）である。" +
       "$\\mathrm{ord}_\\ell$ の漸近は整数値の増大則であり可算側の内容を担うので、" +
-      "$\\mathbb{R}$ 脱出として隔離する側には置けない。",
+      "$\\mathbb{R}$ 脱出として隔離する側には置けない。" +
+      "**cycle 41 step 3 で第 2 段を書いた**（`IwasawaDecomposition.lean`）。" +
+      "**第 1 段の 2 つはまだ繋がっていなかった。そう書く**——Weierstrass 準備定理は" +
+      "「$\\bmod\\ p$ 還元が $0$ でない」ことを仮定として要求するので、$p$ で割り切れる $g$ には当たらない。" +
+      "$\\mu$ を括り出した残り $g_1$ が $p$ で割れないことを $\\mu$ の最大性から出し" +
+      "（割り切りの取り消しに $\\mathbb{Z}_p[[X]]$ が整域であることを使う）、" +
+      "還元が $0$ であることと $p$ で割れることが同じである（`map_residue_eq_zero_iff`）" +
+      "ことを経由して準備定理へ渡した。**これで岩澤分解 $g=p^{\\mu}fh$ が出る**（`exists_iwasawa_factorization`）。" +
+      "併せて **$\\lambda=\\deg f$ が分解の取り方に依らず $g$ から決まること**を書いた" +
+      "（`degree_eq_order_map`。$g_1$ の $\\bmod\\ p$ 還元の位数に等しい）。" +
+      "**それでもこの外部定理は完了しない。残っているのは $\\mathrm{ord}$ の漸近そのものである。そう書く**——" +
+      "$1$ の冪根での評価と、その積の付値を数える段が要る。本 step はその手前までである。",
   },
   {
     name: "Cuoco–Monsky の類数の漸近（$\\mathbb{Z}_p^d$ 拡大の岩澤型漸近）",
