@@ -806,6 +806,10 @@ targets=(
   IntegrableLattice.IwasawaEvaluation.evalHom_X
   IntegrableLattice.IwasawaEvaluation.evalHom_C
   IntegrableLattice.IwasawaEvaluation.emultiplicity_evalHom_iwasawa
+  # トレース冪の線形漸化式＝「同じ特性多項式なら同じトレース冪」の可算側（TracePowerRecurrence.lean・cycle 43 step 5）
+  IntegrableLattice.TracePowerRecurrence.sum_coeff_smul_trace_pow
+  IntegrableLattice.TracePowerRecurrence.trace_pow_add_natDegree
+  IntegrableLattice.TracePowerRecurrence.trace_pow_eq_of_charpoly_eq_of_initial
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

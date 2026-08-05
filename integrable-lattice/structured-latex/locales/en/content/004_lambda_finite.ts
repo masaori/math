@@ -1034,6 +1034,9 @@ export default defineBlocks([
       "IntegrableLattice.WStarTracePowerBridge.trace_pow_eq_trace_leftMulMatrix_pow",
       "IntegrableLattice.WStarTracePowerBridge.trace_mul_pow_eq_trace_leftMulMatrix",
       "IntegrableLattice.WStarTracePowerBridge.weightedGram_apply_eq_matrix_trace",
+      "IntegrableLattice.TracePowerRecurrence.sum_coeff_smul_trace_pow",
+      "IntegrableLattice.TracePowerRecurrence.trace_pow_add_natDegree",
+      "IntegrableLattice.TracePowerRecurrence.trace_pow_eq_of_charpoly_eq_of_initial",
     ],
     statement: [
       paragraph([

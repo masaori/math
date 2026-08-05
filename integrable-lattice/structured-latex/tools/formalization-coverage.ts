@@ -489,9 +489,22 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（`trace_mul_pow_eq_trace_leftMulMatrix` / `weightedGram_apply_eq_matrix_trace`。" +
       "$z\\mapsto M_z$ が $R$ 代数の準同型なので積とも冪とも交換する。$\\mathbb{R}$ へも " +
       "$\\overline{\\mathbb{Q}}$ へも出ない）。**したがって残りは、本文が「Newton の公式より」と引いている " +
-      "「同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること」そのものになった。** **成分ごとの分解は cycle 42 step 1 が測った中国剰余の壁と同じものである。**",
+      "「同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること」そのものになった。** **成分ごとの分解は cycle 42 step 1 が測った中国剰余の壁と同じものである。**" +
+      "**cycle 43 step 5 で 2 つの道を測り、可算側で閉じる分を書いた**（`TracePowerRecurrence.lean`）。" +
+      "**cycle 42 総括が挙げた 2 つの道のうち、$\\overline{\\mathbb{Q}}$ へ出ない側（逆特性多項式の対数微分）は素材が足りない。そう書く**——" +
+      "逆特性多項式そのものは在るが（`Matrix.charpolyRev`。定数項が $1$ であることも 1 次の係数がトレースであることも在る）、" +
+      "対数微分の段を出すには行列式の微分（Jacobi の公式）が要り、**mathlib に Jacobi の公式は無い**" +
+      "（2026-08-05 実測。`Jacobi` で当たるのは Legendre 記号と Jacobi 記号だけである）。" +
+      "**そこで Cayley–Hamilton の道で書けるところまでを書いた**——トレース冪が特性多項式の与える線形漸化式に従うこと" +
+      "（`sum_coeff_smul_trace_pow`。芯は 2 行で、$\\chi(M)=0$ に $M^{k}$ を掛けてトレースを取るだけである）、" +
+      "モニックなので最高次を分離した形（`trace_pow_add_natDegree`）、" +
+      "したがって同じ特性多項式をもち最初の $r$ 個が一致すれば全部一致すること（`trace_pow_eq_of_charpoly_eq_of_initial`）である。" +
+      "**$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない**——係数環は任意の可換環で、根も分解体も出てこない。" +
+      "**それでもこの項目は閉じない。残ったのは初期値の側である。そう書く**——" +
+      "$k<r$ での $\\operatorname{Tr}(M^{k})$ が特性多項式だけで決まることが Newton の公式そのものであり、" +
+      "閉じるには Jacobi の公式か、分解体で根を取り出す道（$\\overline{\\mathbb{Q}}$ へ出る）のどちらかが要る。",
     remainingItems: [
-      "同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること",
+      "残ったのは初期値の側である",
       "$w^*$ の等式を組み立てる段",
       "$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）",
     ],

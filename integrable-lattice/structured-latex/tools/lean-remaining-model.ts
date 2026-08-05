@@ -898,6 +898,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 43 step 5 で新設。トレース冪の線形漸化式（Cayley–Hamilton の道）。
+    file: "TracePowerRecurrence.lean",
+    declarationsAtReview: 3,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "初期値の側",
+        kind: "未形式化",
+        ledgerFragment: "残ったのは初期値の側である",
+        crossFilePhrase: "初期値の側（$k<r$ での",
+      },
+    ],
+  },
+  {
     // cycle 43 step 3 で新設。命題 T の段 3 が要求する舞台（Hensel 的な局所環）を構成した。
     file: "HenselianStage.lean",
     declarationsAtReview: 5,
