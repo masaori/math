@@ -306,11 +306,31 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     citedIn: ["paper_051_theorem_duality"],
     kind: "自分で証明する",
     absence:
-      "2026-08-04 実測。`Monsky` / 語幹 `monsky` が 3 段とも 0 件。" +
-      "岩澤代数の一般論も mathlib には `PowerSeries` の断片としてしか無い（cycle 29 の duality ログ）。",
-    state: "未着手",
+      "2026-08-04 実測。`Monsky` / 語幹 `monsky` が 3 段とも 0 件（定理そのものは無い）。" +
+      "**ただし 2026-08-05（cycle 40 step 4）に engine の側から引き直すと、証明に使う道具は在った**" +
+      "（`lean/logs/mathlib-gap-survey-cycle40-external-engines.log`）——" +
+      "完備局所環の上の Weierstrass 準備定理（`PowerSeries.exists_isWeierstrassFactorization`。" +
+      "出典として Washington の *Introduction to Cyclotomic Fields* を挙げている）と " +
+      "distinguished 多項式（`Polynomial.IsDistinguishedAt`）である。" +
+      "**cycle 29・31 の走査が 0 件だったのは、探した語が定理の名前だったからである。**" +
+      "定理の名前で引くと、その定理を証明する道具が在っても見えない。",
+    state: "部分的",
+    leanNames: [
+      "weierstrass_over_padicInt",
+      "dvd_coeff_of_pow_dvd",
+      "exists_greatest_pow_dvd",
+    ],
     remaining:
-      "未着手。主張は $\\mathrm{ord}_\\ell$ の漸近（整数値の増大則）であり可算側の内容を担うので、" +
+      "**cycle 40 step 4 で第 1 段を書いた**（`IwasawaMuInvariant.lean`）。" +
+      "Monsky の定理も Cuoco–Monsky の $\\mu,\\lambda$ も出発点は同じ岩澤分解 " +
+      "$g=p^{\\mu}fh$（$f$ は distinguished 多項式、$h$ は単元）であり、" +
+      "**Weierstrass 準備定理が与えるのは $fh$ の部分だけで、$p^{\\mu}$ を括り出す段は与えない。** " +
+      "その段（$\\mu$ 不変量の存在）を書いた（`exists_greatest_pow_dvd`。" +
+      "有界性の中身は「$p^k$ は各係数を割るので、$k$ は $0$ でない係数の $p$ 進付値を超えられない」だけである）。" +
+      "併せて **Weierstrass 準備定理が $\\mathbb{Z}_p[[X]]$ へインスタンスの補い無しに当たること**を" +
+      "実在する宣言として残した（`weierstrass_over_padicInt`）。" +
+      "**残っているのは Theorem 5.6 の主張そのもの**（$\\mathrm{ord}_\\ell$ の漸近）である。" +
+      "$\\mathrm{ord}_\\ell$ の漸近は整数値の増大則であり可算側の内容を担うので、" +
       "$\\mathbb{R}$ 脱出として隔離する側には置けない。",
   },
   {

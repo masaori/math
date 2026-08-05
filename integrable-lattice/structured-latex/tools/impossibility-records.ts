@@ -108,28 +108,48 @@ export const IMPOSSIBILITY_RECORDS: readonly ImpossibilityRecord[] = [
     step: "Skolem–Mahler–Lech の定理（線形回帰数列の零点集合）",
     entry: "Skolem–Mahler–Lech の定理（線形回帰数列の零点集合）",
     measurement: {
-      absent: "SkolemMahlerLech / 語幹 `skolem mahler`",
-      log: "mathlib-gap-survey-cycle31-external.log",
+      absent: "SkolemMahlerLech / 語幹 `skolem mahler`、および Strassmann の定理",
+      log: "mathlib-gap-survey-cycle40-external-engines.log",
     },
-    inference: { kind: "素材も無い", searchedLog: "mathlib-gap-survey-cycle31-external.log" },
+    // cycle 40 step 4 で engine の側から引き直した。線形回帰そのものは在る
+    // （mathlib の `LinearRecurrence` の章）が、零点集合を扱う道具（Strassmann の定理、
+    // p 進解析関数の零点の有限性）は 0 件である。**3 件のうち最も遠い。**
+    inference: {
+      kind: "素材も無い",
+      searchedLog: "mathlib-gap-survey-cycle40-external-engines.log",
+    },
   },
   {
     step: "Monsky の p 進冪級数の定理",
     entry: "Monsky の p 進冪級数の定理",
     measurement: {
-      absent: "Monsky / 語幹 `monsky`、および岩澤代数の一般論",
-      log: "mathlib-gap-survey-cycle31-external.log",
+      absent: "Monsky / 語幹 `monsky`（定理そのもの）",
+      log: "mathlib-gap-survey-cycle40-external-engines.log",
     },
-    inference: { kind: "素材も無い", searchedLog: "mathlib-gap-survey-cycle31-external.log" },
+    // cycle 40 step 4 で「素材も無い」から「素材あり」へ改めた。
+    // cycle 31 の走査は**定理の名前**で引いていたので、証明に使う engine が在っても 0 件になっていた。
+    // engine の名前で引き直すと、完備局所環の上の Weierstrass 準備定理と distinguished 多項式が在り、
+    // しかも ℤ_p へインスタンスの補い無しでそのまま当たる（実際に当てて確かめた）。
+    inference: {
+      kind: "素材あり",
+      materials: ["exists_isWeierstrassFactorization", "IsDistinguishedAt"],
+    },
   },
   {
     step: "Cuoco–Monsky の類数の漸近",
     entry: "Cuoco–Monsky の類数の漸近（$\\mathbb{Z}_p^d$ 拡大の岩澤型漸近）",
     measurement: {
-      absent: "CuocoMonsky / 語幹 `cuoco`、岩澤不変量の漸近",
-      log: "mathlib-gap-survey-cycle31-external.log",
+      absent: "CuocoMonsky / 語幹 `cuoco`、岩澤不変量の漸近、および多変数の完備群環",
+      log: "mathlib-gap-survey-cycle40-external-engines.log",
     },
-    inference: { kind: "素材も無い", searchedLog: "mathlib-gap-survey-cycle31-external.log" },
+    // cycle 40 step 4 の走査で、$d=1$ の engine（Weierstrass 準備定理）は在ることが分かった。
+    // ただし本論文が要るのは $\mathbb{Z}_p^d$（$d\ge2$）で、多変数の完備群環は依然として無い。
+    // **したがってこの件は「素材も無い」のままである。そう書く**——$d=1$ で書けることは、
+    // $d\ge2$ で書けることを意味しない。
+    inference: {
+      kind: "素材も無い",
+      searchedLog: "mathlib-gap-survey-cycle40-external-engines.log",
+    },
   },
 ];
 

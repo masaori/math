@@ -681,6 +681,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 40 step 4 で新設。岩澤分解の μ の段（Monsky と Cuoco–Monsky の第 1 段）を書いた。
+    file: "IwasawaMuInvariant.lean",
+    declarationsAtReview: 3,
+    externalEntry: "Monsky の p 進冪級数の定理",
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "Monsky の Theorem 5.6 そのものは書いていない",
+        kind: "未形式化",
+        ledgerFragment: "残っているのは Theorem 5.6 の主張そのもの",
+        crossFilePhrase: "Monsky の Theorem 5.6 の主張そのもの",
+      },
+      {
+        leanFragment: "$\\mathbb{Z}_p^d$（$d\\ge2$）の場合は扱っていない",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle40-external-engines.log" },
+      },
+    ],
+  },
+  {
     // cycle 40 step 3 で新設。命題 C″ (1) のしきい値の最良性の反例を書いた。
     file: "TracePeriodThresholdSharp.lean",
     declarationsAtReview: 22,

@@ -761,6 +761,10 @@ targets=(
   IntegrableLattice.TracePeriodThresholdSharp.gram_eq
   IntegrableLattice.TracePeriodThresholdSharp.gram_smith
   IntegrableLattice.TracePeriodThresholdSharp.ladder_fails_at_two
+  # 岩澤分解の μ の段（IwasawaMuInvariant.lean・cycle 40 step 4）
+  IntegrableLattice.IwasawaMu.weierstrass_over_padicInt
+  IntegrableLattice.IwasawaMu.dvd_coeff_of_pow_dvd
+  IntegrableLattice.IwasawaMu.exists_greatest_pow_dvd
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）

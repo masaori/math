@@ -1,0 +1,38 @@
+# cycle 40 step 4: 外部定理の残り 3 件を「中に入って」測った走査ログ
+
+日付: 2026-08-05 / mathlib: 520045ab14 / 走査したファイル数: 8264
+
+## 測り方（cycle 31 の走査との違い）
+
+cycle 31 の走査は**定理の名前**（`Monsky` / `cuoco` / `SkolemMahlerLech`）で引いていた。
+定理の名前で引くと、その定理を証明する道具が在っても 0 件になる。
+本走査は**証明に使う engine の名前**で引いた。
+
+## 段 1: engine の連結語
+- `WeierstrassPreparation`: 0 ファイル
+- `IsWeierstrassFactorization`: 1 ファイル
+- `IsDistinguishedAt`: 2 ファイル
+- `LinearRecurrence`: 4 ファイル
+- `Strassmann`: 0 ファイル
+
+## 段 2: engine を含むファイル名
+Mathlib/Algebra/LinearRecurrence.lean
+Mathlib/Topology/ContinuousMap/Weierstrass.lean
+Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean
+Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean
+Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean
+Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean
+Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean
+
+## 段 3: 実際に当ててみた（一次情報）
+
+`PowerSeries.exists_isWeierstrassFactorization` を $\mathbb{Z}_p[[X]]$ へ当てる短い Lean ファイルを書いて
+`lake env lean` に通した。**インスタンスの補いは 1 つも要らずに通った。**
+結果は `lean/IntegrableLattice/IwasawaMuInvariant.lean` の `weierstrass_over_padicInt` に残してある。
+
+## 判定
+
+- **Monsky の p 進冪級数の定理**: engine（Weierstrass 準備定理・distinguished 多項式）は在る。**素材あり。**
+- **Cuoco–Monsky の類数の漸近**: $d=1$ の engine は同じものが在るが、$d\ge2$ の多変数完備群環は無い（段 1 の `MvPowerSeries` の完備化は 0 件）。**部分的に素材あり。**
+- **Skolem–Mahler–Lech**: 線形回帰そのもの（`Mathlib/Algebra/LinearRecurrence.lean`）は在るが、
+  零点集合を扱う道具（Strassmann の定理、p 進解析関数の零点の有限性）は 0 件。**素材も無い。**
