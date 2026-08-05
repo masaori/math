@@ -773,6 +773,10 @@ targets=(
   IntegrableLattice.WStarTracePowerBridge.trace_pow_eq_trace_leftMulMatrix_pow
   IntegrableLattice.WStarTracePowerBridge.trace_mul_pow_eq_trace_leftMulMatrix
   IntegrableLattice.WStarTracePowerBridge.weightedGram_apply_eq_matrix_trace
+  # 命題 U の (U6) の残り半分（TruncatedValuationStability.lean・cycle 42 step 4）
+  IntegrableLattice.TruncatedValuation.le_emultiplicity_of_pow_dvd
+  IntegrableLattice.TruncatedValuation.min_emultiplicity_add_eq
+  IntegrableLattice.TruncatedValuation.min_emultiplicity_add_eq_seq
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

@@ -1315,6 +1315,9 @@ export default defineBlocks([
       "IntegrableLattice.u_ell2_junk_reading_differs",
       "IntegrableLattice.u4_ell2_five_coefficients",
       "IntegrableLattice.u1_d_empty_case",
+      "IntegrableLattice.TruncatedValuation.le_emultiplicity_of_pow_dvd",
+      "IntegrableLattice.TruncatedValuation.min_emultiplicity_add_eq",
+      "IntegrableLattice.TruncatedValuation.min_emultiplicity_add_eq_seq",
     ],
     statement: [
       paragraph([

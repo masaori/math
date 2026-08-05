@@ -789,7 +789,15 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "拾っていなかったためで、`U1a` のように後ろに小文字が付く形が素通りしていた。" +
       "**cycle 41 step 2 で (U2)(U4)(U6) の 証拠なし を解いた。3 件とも 残り である。そう書く**——" +
       "(U2) は帳簿上の恒等式だけ、(U4) は $\\ell=2$ の具体値だけ、" +
-      "(U6) は切り捨て付値列から段データを出す側だけで、いずれも部を閉じていない。",
+      "(U6) は切り捨て付値列から段データを出す側だけで、いずれも部を閉じていない。" +
+      "**cycle 42 step 4 で、その 6 件の「広げる先が本文のどこまでか」を測り、(U6) を広げた。**"
+      + "測った結果、(U6) の残る側はさらに 2 つに割れる——"
+      + "(a) 切り捨て付値の安定性（$A'=A+\\ell^{N}\\beta$ なら $\\min(v_\\ell(A'),N)=\\min(v_\\ell(A),N)$）と、"
+      + "(b) $\\Phi^{[k]}$ が $\\mathcal{O}_k$ 係数の線形式であることの配線である。"
+      + "**書いたのは (a) である**（`TruncatedValuationStability.lean` の `min_emultiplicity_add_eq`。"
+      + "場合分けは 2 つだけで、$v(A)<N$ なら和の付値は $v(A)$ に等しく、$v(A)\\ge N$ なら和も $N$ 以上である）。"
+      + "**(b) は残る。そう書く**——これは mathlib の欠落ではなく、本論文の $\\Phi^{[k]}$ の定義を "
+      + "Lean へ持ち込む配線である。**したがって (U6) はまだ 残り である。件数は動いていない。**",
     partStates: [
       { part: "U1", state: "残り", why: "$c$・$d$ が (M3)+(M4) から出ることは書いたが、式そのものの導出が未形式化" },
       { part: "U1a", state: "残り", why: "飽和深度を大きめに取ってもよいこと。未形式化" },
@@ -797,7 +805,7 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       { part: "U3", state: "残り", why: "未形式化" },
       { part: "U4", state: "残り", why: "cycle 41 step 2 で中を見て決めた。在るのは $\ell=2$ の具体値（`U4_c_at_ell_two` / `U4_d_at_ell_two` / `U4_p_one_values`）だけで、(U4) の主張そのものは未形式化である" },
       { part: "U5", state: "残り", why: "未形式化" },
-      { part: "U6", state: "残り", why: "cycle 41 step 2 で中を見て決めた。`U6_trunc_determines_stage_data` は「切り捨て付値列 $\Rightarrow$ 段データ」の側だけで、`Cycle25Corrections.lean` 自身が、$\tilde E\bmod\ell^{N}$ が切り捨て付値列を決める側は形式化していないと書いている。半分である" },
+      { part: "U6", state: "残り", why: "cycle 41 step 2 で中を見て決めた。`U6_trunc_determines_stage_data` は「切り捨て付値列 $\Rightarrow$ 段データ」の側だけで、`Cycle25Corrections.lean` 自身が、$\tilde E\bmod\ell^{N}$ が切り捨て付値列を決める側は形式化していないと書いている。半分である。cycle 42 step 4 で残る側を測り、切り捨て付値の安定性（`TruncatedValuation.min_emultiplicity_add_eq`）を書いた。残っているのは $\Phi^{[k]}$ の線形性の配線だけである" },
     ],
   },
 ];

@@ -782,6 +782,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 42 step 4 で新設。命題 U の (U6) の残る側のうち、切り捨て付値の安定性を書いた。
+    file: "TruncatedValuationStability.lean",
+    declarationsAtReview: 3,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "$\\Phi^{[k]}$ が $\\mathcal{O}_k$ 係数の線形式であることの配線",
+        kind: "未形式化",
+        ledgerFragment: "$\\Phi^{[k]}$ が $\\mathcal{O}_k$ 係数の線形式であることの配線",
+        crossFilePhrase: "$\\Phi^{[k]}$ が $\\mathcal{O}_k$ 係数の線形式であることの配線",
+      },
+    ],
+  },
+  {
     // cycle 42 step 3 で新設。代数側のトレースを行列のトレースへ移す橋を架けた。
     file: "WStarTracePowerBridge.lean",
     declarationsAtReview: 3,
