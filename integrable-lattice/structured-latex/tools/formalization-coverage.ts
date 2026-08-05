@@ -65,8 +65,58 @@ export type CoverageEntry =
        * (1) 命題 R の「残りは 1 つ」・(3) 命題 W\* の「残りは 1 件」と同じ形である。
        */
       readonly remainingItems?: readonly string[];
+      /**
+       * **部ごとの済み・残り**（cycle 40 step 2 で追加）。
+       *
+       * ## なぜこれが要るか
+       *
+       * cycle 39 step 5 が入れた残り段数の検査は、完了でない 16 件のうち **6 件しか数えられなかった。**
+       * 数えられなかった 10 件のうち **8 件**は、本文が部（(K1)(K2)… のような小見出し）で
+       * 切られている `部分的` の欄である。cycle 34 step 5 の検査は
+       * **台帳がその部の記号に触れていること**しか見ていないので、
+       * **どの部が済んでいてどの部が残っているかは台帳が持っていなかった。**
+       *
+       * ここに部ごとの状態を持たせると、**残っている部の数がそのまま残り段数になる。**
+       *
+       * ## 機械が確かめること
+       *
+       * 1. 宣言した部の名前の集合が、本文から読み取った部の集合と**過不足なく一致する**こと。
+       *    （書き落とせば赤くなり、本文に無い部を書いても赤くなる。）
+       * 2. `済み` と書いた部は、**その根拠として実在する Lean の定理を名指す**こと。
+       *    根拠を書けないものを済みにする道を塞ぐ。
+       *
+       * ## 限界（正直に書く）
+       *
+       * - **`残り` と書いた部が本当に残っているかは確かめられない**（実在しない宣言は名指せない）。
+       *   塞げるのは「済み」と言う側だけである。
+       * - **名指した定理がその部を本当に閉じているかも確かめられない**（実在だけを見る）。
+       *   これは検査 E の `構成で与える` と同じ性質の限界である。
+       * - 部の切り方は本文が決めているので、**欄どうしで段数を比べることはできない**
+       *   （検査 D の限界と同じ）。
+       */
+      readonly partStates?: readonly PartState[];
     }
   | { readonly block: string; readonly state: "未着手"; readonly reason: string };
+
+/** 部ごとの状態（cycle 40 step 2）。 */
+export type PartState =
+  | {
+      readonly part: string;
+      readonly state: "済み";
+      /** その部を閉じた Lean の定理。`lean/` に実在することを機械が確かめる。 */
+      readonly witness: string;
+    }
+  | { readonly part: string; readonly state: "残り"; readonly why: string }
+  /**
+   * **台帳の散文は済みと書いているが、その部を閉じる宣言を名指せない**（cycle 40 step 2 の実測で出た形）。
+   *
+   * 部ごとに状態を書かせてみると、**散文が「形式化した」と書いている部の一部について、
+   * 実際にどの宣言がそれを閉じたのかを名指せない**ことが分かった。
+   * 名指せないものを `済み` と書くと、この検査は「済みの根拠がある」という保証を失う。
+   * かといって `残り` と書くと、済んでいるかもしれないものを残りとして数えることになる。
+   * **どちらでもない状態を用意して、段数の勘定では残り側へ入れる**（下界であることを崩さないため）。
+   */
+  | { readonly part: string; readonly state: "証拠なし"; readonly why: string };
 
 /**
  * 初期値は cycle 27 の実測。状態は `lean/README.md` の命題ごとの表を正本として写し、
@@ -372,6 +422,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "その壁は step 3b で消えた（周期点数の終結式表示は一般の $d$ で書けた）。" +
       "残っているのは別のことで、簡約周期点数は $P$ が消える組だけを除く量であり、" +
       "その除去は変数ごとに剥がす形にならない。書き方は未着手で、書けるかどうかも確かめていない。",
+    partStates: [
+      { part: "∞ 素点", state: "残り", why: "多変数の Mahler 測度が mathlib に無く、本論文もこの段は外部定理を引いている" },
+      { part: "p 素点, 有限 L", state: "残り", why: "$d=1$ は書いたが $d\\ge2$ が残る（簡約は変数ごとに剥がせない）" },
+      { part: "p 素点, 塔の漸近", state: "残り", why: "Monsky と Cuoco–Monsky の適用であり、その 2 件がまだ無い" },
+    ],
   },
   {
     block: "paper_052_theorem_l0_computable",
@@ -390,6 +445,10 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(2) (F2 境界) の停止問題への帰着。mathlib に `Nat.Partrec` / `Turing` は在るが、" +
       "「係数を計算する手続きで与えられた $f$」という入力の与え方を型にする設計をこちらが持っていない" +
       "（mathlib の欠落ではなく、こちらの未設計である）。",
+    partStates: [
+      { part: "F1", state: "残り", why: "心臓部（係数和が消えれば方向は有限集合に入る）は書いたが、同値そのものには $d$ 変数の完備群環が要る" },
+      { part: "F2", state: "残り", why: "停止問題への帰着。入力の与え方を型にする設計をこちらが持っていない" },
+    ],
   },
   {
     block: "paper_053_theorem_lower_order",
@@ -428,6 +487,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "$A_{\\mathrm{gen}}$ の $L$ 非依存性・Matrix–Tree 定理を挙げている。" +
       "**cycle 34 step 5 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——(G′1) と (G′2) は、この欄が 1 度も触れていなかった。どちらも未形式化である。" +
       "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。",
+    partStates: [
+      { part: "G′1", state: "残り", why: "消滅深度が無限大になる軌跡。Newton 多面体の辺方向へ落とす段が未形式化" },
+      { part: "G′2", state: "残り", why: "段階的処理による点ごとの付値。未形式化" },
+      { part: "G′3", state: "残り", why: "閉形式と場合分けは書いたが、例外直線の決定そのものが未形式化" },
+    ],
   },
   {
     block: "paper_056_theorem_ell2_family",
@@ -439,6 +503,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（$\\kappa_n$ の独立計算に要る。外部定理の台帳を見よ）。" +
       "**cycle 34 step 5 の照合で足す**——本文の (G″2)(G″3)(G″4)(G″5) は、この欄が 1 度も触れていなかった。いずれも未形式化である（形式化してあるのは (G″1) の付値の議論だけである）。" +
       "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。",
+    partStates: [
+      { part: "G″1", state: "済み", witness: "EllTwo.ordKappaAalpha" },
+      { part: "G″2", state: "残り", why: "閉形式の導出そのものが未形式化" },
+      { part: "G″3", state: "残り", why: "閉形式の導出そのものが未形式化" },
+      { part: "G″4", state: "残り", why: "閉形式の導出そのものが未形式化" },
+      { part: "G″5", state: "残り", why: "閉形式の導出そのものが未形式化" },
+    ],
   },
   { block: "paper_061_theorem_V", state: "完了", note: "命題 V は $d=1$ と $d=2$。" },
   {
@@ -488,6 +559,15 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（$b=\\sum_{P\\in S_\\infty}j^*(P)$。形式冪級数・Hasse 微分・$\\mathbb{Z}_\\ell$ 冪の**配線**が要る。" +
       "`PowerSeries` も二項冪級数も mathlib に在る）と " +
       "(b) $\\Theta_{M'}$ から $M'\\ell^{M'}$ の係数を読み取る段の一般形（$O$ 記法を型にしていない）を挙げている。",
+    partStates: [
+      { part: "J1", state: "済み", witness: "j1_freshman_dream" },
+      { part: "J1′", state: "済み", witness: "cexDigit_fails" },
+      { part: "J2", state: "残り", why: "未形式化" },
+      { part: "J3", state: "残り", why: "未形式化" },
+      { part: "J4", state: "残り", why: "総和と係数の取り出しは部分的で、$O$ 記法を型にしていない" },
+      { part: "J5", state: "残り", why: "未形式化" },
+      { part: "J6", state: "残り", why: "未形式化" },
+    ],
   },
   {
     block: "paper_101_theorem_s_infinity_decision",
@@ -497,6 +577,15 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(K1) の対応と (K4) の重複度の主張は未形式化。" +
       "**cycle 34 step 3 の照合で、`SInfinityDecision.lean` が挙げている 3 件を足す**——補題 W2 の (iv)、定理 W4 の主張そのもの、系 W7。" +
       "**cycle 34 step 5 の照合で足す**——本文の (K7) は、この欄が 1 度も触れていなかった。未形式化である。",
+    partStates: [
+      { part: "K1", state: "残り", why: "対応の主張は未形式化" },
+      { part: "K2", state: "残り", why: "(iii) ⇒ (iv) は書いたが逆向きが未形式化（`SInfinityDecision.lean` の残り一覧がそう書いている）" },
+      { part: "K3", state: "残り", why: "判定が有限に落ちることは書いたが、手続き全体の主張は未形式化" },
+      { part: "K4", state: "残り", why: "重複度の主張は未形式化" },
+      { part: "K5", state: "済み", witness: "k5_argmin_unique_above" },
+      { part: "K6", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない。内容は Cuoco–Monsky の係数そのものであり、その外部定理は未着手である" },
+      { part: "K7", state: "残り", why: "格子周長による上界。Newton 多面体の加法性は完了したが、この不等式そのものは未形式化" },
+    ],
   },
   {
     block: "paper_101_theorem_digit_branch",
@@ -568,6 +657,14 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**cycle 34 step 3 の照合で、`Cycle25Corrections.lean` が挙げている 3 件を足す**——定理 G2 の 1（Galois 不変性。配線）、系 Q7 の $r=2$（2 変数 Laurent 環の一意分解性）、および voltage グラフのラプラシアン行列式そのもの（matrix-tree 定理。外部定理の台帳を見よ）。" +
       "**cycle 34 step 5 の照合で足す**——本文の (M4) は、この欄が 1 度も触れていなかった。未形式化である。" +
       "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。",
+    partStates: [
+      { part: "M1", state: "証拠なし", why: "散文は規約を形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "M2", state: "済み", witness: "lambda_u_eq_succ_log" },
+      { part: "M3", state: "済み", witness: "Agen_level_indep" },
+      { part: "M4", state: "残り", why: "未形式化（cycle 34 step 5 の照合で書き落としが見つかった部である）" },
+      { part: "M5", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "M6", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+    ],
   },
   {
     block: "paper_112_theorem_coefficient_layers",
@@ -580,6 +677,15 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(U1a)（飽和深度を大きめに取ってもよいこと）は、この欄が 1 度も触れていなかった。未形式化である。" +
       "cycle 34 step 5 の検査がこれを見落としていたのは、部の記号を `[A-Z][0-9]+` の形でしか" +
       "拾っていなかったためで、`U1a` のように後ろに小文字が付く形が素通りしていた。",
+    partStates: [
+      { part: "U1", state: "残り", why: "$c$・$d$ が (M3)+(M4) から出ることは書いたが、式そのものの導出が未形式化" },
+      { part: "U1a", state: "残り", why: "飽和深度を大きめに取ってもよいこと。未形式化" },
+      { part: "U2", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "U3", state: "残り", why: "未形式化" },
+      { part: "U4", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "U5", state: "残り", why: "未形式化" },
+      { part: "U6", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+    ],
   },
 ];
 
@@ -734,6 +840,75 @@ export function auditPartCoverage(input: {
  *   （書き落としを見つけるのは、これまでどおり着手時の実測である。）
  * - **項目の文言が正しいかも確かめられない**（散文に在ることだけを見る）。
  */
+/**
+ * **部ごとの状態の判定**（cycle 40 step 2。IO を持たないので検出テストからそのまま呼べる）。
+ *
+ * 見るのは 2 つ。
+ *
+ * 1. 宣言した部の集合が、本文から読み取った部の集合と**過不足なく一致する**こと。
+ * 2. `済み` と書いた部が、**実在する Lean の宣言を名指している**こと。
+ *
+ * `残り` と `証拠なし` は、実在しない宣言を名指せないので機械では支えられない。
+ * **塞げるのは「済み」と言う側だけである。そう書く。**
+ */
+export function auditPartStates(input: {
+  readonly entries: readonly {
+    readonly block: string;
+    readonly state: CoverageState;
+    readonly statementText: string;
+    readonly partStates?: readonly { part: string; state: string; witness?: string }[];
+  }[];
+  /** `lean/` に実在する宣言の名前（短縮形・完全修飾形のどちらでも当たるようにして渡す）。 */
+  readonly declared: ReadonlySet<string>;
+}): { violations: string[]; entries: number; parts: number; done: number; unwitnessed: number } {
+  const violations: string[] = [];
+  let entries = 0;
+  let parts = 0;
+  let done = 0;
+  let unwitnessed = 0;
+  for (const entry of input.entries) {
+    if (entry.partStates === undefined) continue;
+    entries += 1;
+    const labels = new Set(partLabelsInStatement(entry.statementText));
+    const declaredParts = new Set(entry.partStates.map((p) => p.part));
+    for (const label of labels) {
+      if (!declaredParts.has(label)) {
+        violations.push(
+          `[部の状態が宣言されていない] ${entry.block} — ${label} の済み・残りが台帳に無い`,
+        );
+      }
+    }
+    for (const part of declaredParts) {
+      if (!labels.has(part)) {
+        violations.push(
+          `[本文に無い部を宣言している] ${entry.block} — ${part} は本文の部ではない（改名で浮いた）`,
+        );
+      }
+    }
+    for (const state of entry.partStates) {
+      parts += 1;
+      if (state.state === "済み") {
+        done += 1;
+        const witness = state.witness ?? "";
+        const short = witness.replace(/^IntegrableLattice\./, "");
+        const bare = witness.split(".").pop() ?? witness;
+        if (
+          !input.declared.has(witness) &&
+          !input.declared.has(short) &&
+          !input.declared.has(bare)
+        ) {
+          violations.push(
+            `[済みの証拠が lean/ に無い] ${entry.block} — ${state.part} が名指す ${witness} が実在しない`,
+          );
+        }
+      } else if (state.state === "証拠なし") {
+        unwitnessed += 1;
+      }
+    }
+  }
+  return { violations, entries, parts, done, unwitnessed };
+}
+
 export function auditPartlessRemaining(input: {
   readonly entries: readonly {
     readonly block: string;

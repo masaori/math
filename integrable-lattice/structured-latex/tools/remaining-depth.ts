@@ -57,36 +57,4 @@ export const UNCOUNTABLE_REASONS: readonly UncountableReason[] = [
     block: "paper_053_theorem_lower_order",
     why: "未着手。段の切り方そのものが無い",
   },
-  {
-    block: "paper_051_theorem_duality",
-    why: "本文が素点で部を切っている（(∞ 素点)・(p 素点, 有限 L)・(p 素点, 塔の漸近)）。部ごとの済み・残りを台帳が持っていないので数えられない",
-  },
-  {
-    block: "paper_052_theorem_l0_computable",
-    why: "本文が (F1)(F2 境界) で部を切っている。部ごとの済み・残りを台帳が持っていない",
-  },
-  {
-    block: "paper_055_theorem_theta_infinity",
-    why: "本文が (G′1)(G′2)… で部を切っている。部ごとの済み・残りを台帳が持っていない",
-  },
-  {
-    block: "paper_056_theorem_ell2_family",
-    why: "本文が部で切られている。部ごとの済み・残りを台帳が持っていない",
-  },
-  {
-    block: "paper_091_theorem_theta_padic",
-    why: "本文が (J1)(J1′)(J2)…(J6) で部を切っている。部ごとの済み・残りを台帳が持っていない",
-  },
-  {
-    block: "paper_101_theorem_s_infinity_decision",
-    why: "本文が (K1)…(K7) で部を切っている。部ごとの済み・残りを台帳が持っていない",
-  },
-  {
-    block: "paper_111_theorem_general_closed_form",
-    why: "本文が部で切られている。部ごとの済み・残りを台帳が持っていない",
-  },
-  {
-    block: "paper_112_theorem_coefficient_layers",
-    why: "本文が部で切られている。部ごとの済み・残りを台帳が持っていない",
-  },
 ];

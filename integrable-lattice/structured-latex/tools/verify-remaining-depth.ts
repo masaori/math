@@ -21,9 +21,17 @@ const incomplete = FORMALIZATION_COVERAGE.filter((e) => e.state !== "完了");
 const countable: { block: string; depth: number }[] = [];
 const uncountable: string[] = [];
 
+/** cycle 40 step 2: 部ごとの状態を持つ欄は、残っている部の数が段数になる。 */
+const byParts: { block: string; depth: number; done: number; unwitnessed: number }[] = [];
 for (const entry of incomplete) {
   if (entry.state === "部分的" && entry.remainingItems !== undefined) {
     countable.push({ block: entry.block, depth: entry.remainingItems.length });
+  } else if (entry.state === "部分的" && entry.partStates !== undefined) {
+    const done = entry.partStates.filter((p) => p.state === "済み").length;
+    const unwitnessed = entry.partStates.filter((p) => p.state === "証拠なし").length;
+    const depth = entry.partStates.length - done;
+    countable.push({ block: entry.block, depth });
+    byParts.push({ block: entry.block, depth, done, unwitnessed });
   } else {
     uncountable.push(entry.block);
   }
@@ -67,6 +75,23 @@ console.log(
 if (countable.length > 0) {
   console.log("  数えられる欄:");
   for (const c of countable) console.log(`    - ${c.block}: 残り ${c.depth} 段`);
+}
+if (byParts.length > 0) {
+  console.log(
+    `  部ごとの状態から数えた欄（cycle 40 step 2 で追加）: ${byParts.length} 件 / ` +
+      `部 ${byParts.reduce((s, b) => s + b.depth + b.done, 0)} 件（済み ` +
+      `${byParts.reduce((s, b) => s + b.done, 0)} / **証拠なし ` +
+      `${byParts.reduce((s, b) => s + b.unwitnessed, 0)}** / 残り ` +
+      `${byParts.reduce((s, b) => s + b.depth - b.unwitnessed, 0)}）`,
+  );
+  console.log(
+    "  **cycle 39 の段階では、この 8 件は「本文が部で切られているが、どの部が済んでいるかを台帳が持っていない」" +
+      "という理由で数から外れていた。** 部ごとの状態を持たせたので数に入る。" +
+      "**測ってみて出た形が 1 つある**——散文が「形式化した」と書いている部のうち、" +
+      "**その部を閉じた宣言を名指せないものがある。** `済み` と書けば根拠の保証を失い、" +
+      "`残り` と書けば済んでいるかもしれないものを残りとして数えることになるので、" +
+      "**`証拠なし` という別の状態にして、段数の勘定では残り側へ入れた**（この数が下界であることを崩さないため）。",
+  );
 }
 if (uncountable.length > 0) {
   console.log("  数えられない欄（理由つきで宣言させている）:");

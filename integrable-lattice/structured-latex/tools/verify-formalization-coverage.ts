@@ -32,6 +32,7 @@ import {
   type CoverageState,
   FORMALIZATION_COVERAGE,
   auditPartCoverage,
+  auditPartStates,
   auditPartlessRemaining,
   partLabelsInStatement,
 } from "./formalization-coverage.ts";
@@ -488,6 +489,102 @@ if (process.argv.includes("--self-test")) {
     const ok = violations.length > 0 === partCase.shouldFail;
     if (!ok) failed += 1;
     console.log(`  ${ok ? "OK" : "NG"} [部の覆い] ${partCase.name}`);
+  }
+
+  // cycle 40 step 2: 部ごとの済み・残りの検出テスト。
+  const stateCases: { name: string; shouldFail: boolean; run: () => string[] }[] = [
+    {
+      name: "本文の部の 1 つについて済み・残りを書いていない",
+      shouldFail: true,
+      run: () =>
+        auditPartStates({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              statementText: "(K1 対応) …(K2 判定条件の同一性) …",
+              partStates: [{ part: "K1", state: "残り" }],
+            },
+          ],
+          declared: new Set<string>(),
+        }).violations,
+    },
+    {
+      name: "本文に無い部を宣言している（改名で浮いた形）",
+      shouldFail: true,
+      run: () =>
+        auditPartStates({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              statementText: "(K1 対応) …",
+              partStates: [
+                { part: "K1", state: "残り" },
+                { part: "K9", state: "残り" },
+              ],
+            },
+          ],
+          declared: new Set<string>(),
+        }).violations,
+    },
+    {
+      name: "済みと書いた部が、実在しない宣言を名指している",
+      shouldFail: true,
+      run: () =>
+        auditPartStates({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              statementText: "(K1 対応) …",
+              partStates: [{ part: "K1", state: "済み", witness: "nonexistent_theorem" }],
+            },
+          ],
+          declared: new Set<string>(["other_theorem"]),
+        }).violations,
+    },
+    {
+      name: "部が過不足なく揃い、済みが実在する宣言を名指していれば通る",
+      shouldFail: false,
+      run: () =>
+        auditPartStates({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              statementText: "(K1 対応) …(K2 判定条件の同一性) …",
+              partStates: [
+                { part: "K1", state: "済み", witness: "real_theorem" },
+                { part: "K2", state: "残り" },
+              ],
+            },
+          ],
+          declared: new Set<string>(["real_theorem"]),
+        }).violations,
+    },
+    {
+      name: "証拠なしは宣言を名指さなくても通る（残り側へ数えるための状態である）",
+      shouldFail: false,
+      run: () =>
+        auditPartStates({
+          entries: [
+            {
+              block: "b",
+              state: "部分的",
+              statementText: "(K1 対応) …",
+              partStates: [{ part: "K1", state: "証拠なし" }],
+            },
+          ],
+          declared: new Set<string>(),
+        }).violations,
+    },
+  ];
+  for (const stateCase of stateCases) {
+    const violations = stateCase.run();
+    const ok = violations.length > 0 === stateCase.shouldFail;
+    if (!ok) failed += 1;
+    console.log(`  ${ok ? "OK" : "NG"} [部ごとの状態] ${stateCase.name}`);
   }
 
   // cycle 36 step 5: 部を持たない `部分的` の欄の検出テスト。
@@ -1010,6 +1107,37 @@ for (const entry of unformalised) {
     console.log(
       "    限界: **一覧が実態を尽くしているかは確かめられない**（項目を 1 つ書けば通る）。" +
         "項目の文言が正しいかも確かめられない（散文に在ることだけを見る）。",
+    );
+
+    // cycle 40 step 2: 部ごとの済み・残りを見る（段数を数えられるようにするための台帳）。
+    const stateAudit = auditPartStates({
+      entries: FORMALIZATION_COVERAGE.map((entry) => ({
+        block: entry.block,
+        state: entry.state,
+        statementText: claims.find((c) => c.id === entry.block)?.statementText ?? "",
+        partStates: (entry as { partStates?: readonly { part: string; state: string; witness?: string }[] })
+          .partStates,
+      })),
+      declared: new Set([...declaredInLean, ...declaredFullyQualified]),
+    });
+    violations.push(...stateAudit.violations);
+    console.log(
+      `    部ごとの済み・残り（cycle 40 step 2 で追加）: 宣言した欄 ${stateAudit.entries} 件 / ` +
+        `部 ${stateAudit.parts} 件（済み ${stateAudit.done} / 証拠なし ${stateAudit.unwitnessed}） / ` +
+        `違反 ${stateAudit.violations.length} 件`,
+    );
+    console.log(
+      "    **cycle 34 step 5 の覆いは、部の記号に触れていることしか見ていない。** " +
+        "どの部が済んでいてどの部が残っているかを台帳が持っていなかったので、" +
+        "**この 8 件は残り段数の勘定から外れていた**（cycle 39 step 5 の実測）。" +
+        "部ごとに状態を持たせ、**宣言した部の集合が本文の部と過不足なく一致すること**と、" +
+        "**`済み` が実在する Lean の宣言を名指していること**を見る。",
+    );
+    console.log(
+      "    限界: **支えられるのは「済み」と言う側だけである**（実在しない宣言は名指せないので、" +
+        "`残り` が本当に残っているかは確かめられない）。名指した宣言がその部を本当に閉じているかも見ていない" +
+        "（検査 E の `構成で与える` と同じ性質）。**測ってみて `証拠なし` が出たこと自体が実測の結果である**——" +
+        "散文が形式化したと書いている部のうち、閉じた宣言を名指せないものがある。",
     );
 
     violations.push(...partAudit.violations);
