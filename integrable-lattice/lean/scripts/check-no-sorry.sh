@@ -787,6 +787,13 @@ targets=(
   IntegrableLattice.ProductAlgebraNorm.norm_pi_fin
   IntegrableLattice.ProductAlgebraNorm.norm_pi_fin_of_scalar
   IntegrableLattice.ProductAlgebraNorm.quotientInfAlgEquivPiQuotient
+  # 命題 C′ の det G を可約な rho でも重複度の積で書く段（PropCCrtWiring.lean・cycle 43 step 2）
+  IntegrableLattice.PropCCrtWiring.pairwise_isCoprime_of_irreducible
+  IntegrableLattice.PropCCrtWiring.iInf_span_eq_span_prod
+  IntegrableLattice.PropCCrtWiring.pairwise_isCoprime_span
+  IntegrableLattice.PropCCrtWiring.quotientProdAlgEquiv
+  IntegrableLattice.PropCCrtWiring.finrank_quotient_span
+  IntegrableLattice.PropCCrtWiring.norm_eq_prod_pow_natDegree
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

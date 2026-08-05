@@ -557,8 +557,8 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
       {
         leanFragment: "命題 C′ の $\\det G=\\operatorname{disc}",
         kind: "未形式化",
-        ledgerFragment: "の重複度の積の形",
-        crossFilePhrase: "$\\det G$ の重複度の積の形",
+        ledgerFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
+        crossFilePhrase: "成分への射影で $\\mu$ の像が $a_i$ であることの同定",
       },
       {
         leanFragment: "の最良性と",
@@ -877,6 +877,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 43 step 2 で新設。step 1 の素材を本文の $\mathbb{Q}[x]/(\rho)$ へ当てた。
+    file: "PropCCrtWiring.lean",
+    declarationsAtReview: 6,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "成分への射影で $\\mu$ の像が $a_i$ であること",
+        kind: "未形式化",
+        ledgerFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
+        crossFilePhrase: "成分への射影で $\\mu$ の像が $a_i$",
+      },
+    ],
+  },
+  {
     // cycle 43 step 1 で新設。直積代数のノルムの分解（中国剰余の代数側）を書いた。
     file: "ProductAlgebraNorm.lean",
     declarationsAtReview: 6,
@@ -884,9 +898,8 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     items: [
       {
         leanFragment: "互いに素なイデアルの族として与える段",
-        kind: "未形式化",
-        ledgerFragment: "互いに素なイデアルの族へ当てる配線である",
-        crossFilePhrase: "互いに素なイデアルの族",
+        kind: "形式化済み",
+        witness: "IntegrableLattice.PropCCrtWiring.pairwise_isCoprime_of_irreducible",
       },
     ],
   },
@@ -922,10 +935,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         crossFilePhrase: "整除の鎖との一致",
       },
       {
-        leanFragment: "の重複度の積の形",
+        leanFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定",
         kind: "未形式化",
-        ledgerFragment: "の重複度の積の形",
-        crossFilePhrase: "重複度の積の形",
+        ledgerFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
+        crossFilePhrase: "命題 C′ に残るもう 1 つである",
       },
     ],
   },

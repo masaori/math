@@ -43,8 +43,11 @@ $\det G\neq0$ なら左右は入れ替えられる（`mul_comm_of_det_ne_zero`�
   整除の鎖を経由していない。本文が $w^*=v_p(e_r)$ と書いているのは鎖の言葉なので、
   **鎖の言葉との一致は書いていない**（`WStarElementaryDivisors` が
   「最大単因子を経由していない」と書いているのと同じ限界である）。
-* $\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ の重複度の積の形。
+* 成分への射影で $\mu$ の像が $a_i$ であることの同定
+  （$\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ の残り）。
   これは 命題 C′ に残るもう 1 つである。
+  **ノルムを重複度の積へ分ける側は cycle 43 step 2 で入った**
+  （`PropCCrtWiring.norm_eq_prod_pow_natDegree`）。
 -/
 import Mathlib
 import IntegrableLattice.PropCTracePeriod

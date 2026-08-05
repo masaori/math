@@ -39,7 +39,9 @@ cycle 28 までに `PropCTracePeriod.lean` が形式化していたのは、命�
   それは `WStarElementaryDivisors.isLeast_isPLevel` が部分加群の適合基底から与えている。
   繋いだ形は `TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel` である。
   本 file の `hlift` は依然その形のままなので、当てるときに上の定理を使う。
-- 命題 C′ の $\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ と、
+- 命題 C′ の $\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ のうち、
+  **成分への射影で $\mu$ の像が $a_i$ であることの同定**（cycle 43 step 2 の実測。
+  ノルムを重複度の積へ分ける側は `PropCCrtWiring.norm_eq_prod_pow_natDegree` で入った）と、
   $w^*=0$ が「$\rho\bmod p$ が分離的かつ $p\nmid m_\lambda$」と同値であること。
 - 命題 C″ (1) のしきい値 $w^*+1$ の最良性と、(3) の $e_k=\min\{m:g_m\ge k\}$ の同値。
 

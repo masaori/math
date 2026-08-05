@@ -319,6 +319,9 @@ export default defineBlocks([
       "IntegrableLattice.ProductAlgebraNorm.norm_pi_fin",
       "IntegrableLattice.ProductAlgebraNorm.norm_pi_fin_of_scalar",
       "IntegrableLattice.ProductAlgebraNorm.quotientInfAlgEquivPiQuotient",
+      "IntegrableLattice.PropCCrtWiring.quotientProdAlgEquiv",
+      "IntegrableLattice.PropCCrtWiring.finrank_quotient_span",
+      "IntegrableLattice.PropCCrtWiring.norm_eq_prod_pow_natDegree",
     ],
     statement: [
       paragraph([
