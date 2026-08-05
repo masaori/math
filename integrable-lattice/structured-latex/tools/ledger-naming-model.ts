@@ -234,6 +234,19 @@ export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
     why: "cycle 46 step 1 で配線した（`WStarGaussDescent.squarefree_map`。素材は cycle 38 step 1 の `squarefree_map_of_monic` に在った）",
   },
   {
+    // cycle 47 step 2: 命題 W の数え直しの経緯を書いた 2 文。事柄の名指しではない。
+    block: "paper_063_theorem_W",
+    sentence: "そう書く**——cycle 45 が塞いだのは台帳の散文が名指ししながら数に入れていない場合で、検査 J がそれを見る。",
+    kind: "対象外",
+    why: "この文は事柄を名指ししているのではなく、今回の数え落としが検査 J の見ている経路とは別であるという検出の話を書いている（指している事柄は残り項目そのもの）",
+  },
+  {
+    block: "paper_063_theorem_W",
+    sentence: "今回は**台帳の散文が本文の証明の構成そのものに触れていない**場合であり、散文を読むだけでは検出できない（検査 J は緑のままである）。",
+    kind: "対象外",
+    why: "同上。検出の経路についての記述であって、未形式化の事柄を新たに名指ししているのではない",
+  },
+  {
     // cycle 46 step 1: 検査 J を 完了 の欄へも当てたときに出てきた 1 件。
     block: "paper_106_theorem_drop_assumption",
     sentence: "** (4) $\\bar{\\tilde E}$ の分解 $(1.2)$ そのもの（cycle 20 の定理 W1・W4）は補題 Q1′ の主張ではないので、仮定として型に出してある。",
