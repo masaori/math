@@ -7,8 +7,12 @@ import { FORMALIZATION_COVERAGE } from "./formalization-coverage.ts";
 import { NAMING_DISPOSITIONS, auditNamingCoverage } from "./ledger-naming-model.ts";
 
 const entries = FORMALIZATION_COVERAGE.flatMap((e) => {
+  // **完了の欄の散文も読む**（cycle 46 step 1）。
+  // cycle 45 の形は 部分的 と 未着手 しか読んでいなかったので、
+  // **欄が完了になった瞬間に、その散文が名指ししている事柄が検査の外へ出ていた。**
+  // 完了の欄には残り項目が無いので、名指しの文はすべて処分の宣言を要求されることになる。
   const prose =
-    e.state === "部分的" ? e.remaining : e.state === "未着手" ? e.reason : undefined;
+    e.state === "部分的" ? e.remaining : e.state === "未着手" ? e.reason : e.note;
   if (prose === undefined) return [];
   const remainingItems = e.state === "部分的" ? e.remainingItems : undefined;
   const openParts =

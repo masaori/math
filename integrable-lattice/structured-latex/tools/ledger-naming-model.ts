@@ -230,8 +230,15 @@ export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
   {
     block: "paper_046_theorem_wstar_different",
     sentence: "また段 1 が使う $\\mathbb{Q}[x]$ 側の無平方性（$\\mathbb{Z}[x]$ 側からの降下＝Gauss）は仮定として受け取っている。",
-    kind: "残り",
-    why: "残り項目「$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）」がこの事柄そのものである",
+    kind: "済み",
+    why: "cycle 46 step 1 で配線した（`WStarGaussDescent.squarefree_map`。素材は cycle 38 step 1 の `squarefree_map_of_monic` に在った）",
+  },
+  {
+    // cycle 46 step 1: 検査 J を 完了 の欄へも当てたときに出てきた 1 件。
+    block: "paper_106_theorem_drop_assumption",
+    sentence: "** (4) $\\bar{\\tilde E}$ の分解 $(1.2)$ そのもの（cycle 20 の定理 W1・W4）は補題 Q1′ の主張ではないので、仮定として型に出してある。",
+    kind: "対象外",
+    why: "この欄では数えない。分解 $(1.2)$ の中身は 2 つに分かれ、定理 W4 は 命題 K の欄が残り項目「定理 W4 の主張そのもの」として数えており、定理 W1（1 変数の $\\ell$ 進 Weierstrass 準備定理）は mathlib に在る（`PowerSeries.exists_isWeierstrassFactorization`。外部定理の台帳が Monsky の欄で名指ししている）。二重に数えないため",
   },
   {
     block: "paper_052_theorem_l0_computable",

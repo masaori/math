@@ -342,10 +342,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         witness: "isPowerBasisOf_adjoinRoot",
       },
       {
+        // cycle 38 step 1 で $\det G\neq0$ を、cycle 46 step 1 で Gauss 降下の配線を書いた。
         leanFragment: "命題 W\\* は依然 部分的である。残っているのは 1 つで",
-        kind: "未形式化",
-        ledgerFragment: "無平方であることから",
-        crossFilePhrase: "無平方であることから $\\det G\\neq0$",
+        kind: "形式化済み",
+        witness: "det_weightedGram_mu_of_integral",
       },
     ],
   },
@@ -355,10 +355,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 39 step 3 で $\eta$ が零因子でないことが無平方性から出た。
         leanFragment: "が実際に零因子でないこと",
-        kind: "未形式化",
-        ledgerFragment: "無平方であることから",
-        crossFilePhrase: "無平方であることから $\\det G\\neq0$",
+        kind: "形式化済み",
+        witness: "det_weightedGram_ne_zero_of_factorization",
       },
       {
         leanFragment: "の可約な場合",
@@ -366,10 +366,11 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         witness: "det_weightedGram",
       },
       {
+        // cycle 46 step 1: 本文が述べているのは最小元の形であり、それは書いてある。
+        // 正準な代表を選ぶことは本文の主張の内容ではない。
         leanFragment: "の値を存在の形で述べる",
-        kind: "未形式化",
-        ledgerFragment: "整域でないので当たらない",
-        crossFilePhrase: "正準な代表を可約な場合に選ぶ",
+        kind: "形式化済み",
+        witness: "isLeast_isPLevel",
       },
     ],
   },
@@ -748,16 +749,16 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     items: [
       {
         // cycle 41 step 1 で $\mu$ の構成のほうは書いたので、残っているのは $G$ の同定である。
+        // cycle 46 step 1 で $G$ の同定を書いた（WStarGramAssembly.lean）。
         leanFragment: "残っているのは $G$ の同定のほうである",
-        kind: "未形式化",
-        ledgerFragment: "本文の整数行列 $G$ と重み $\\mu$ の Gram 行列の同定",
-        crossFilePhrase: "整数行列 $G$ と代数側の Gram 行列の同定",
+        kind: "形式化済み",
+        witness: "trace_pow_eq_trace_mu_all",
       },
       {
+        // cycle 46 step 1 で組み立てた（WStarGramAssembly.lean）。
         leanFragment: "$w^*$ の等式を組み立てる段",
-        kind: "未形式化",
-        ledgerFragment: "$w^*$ の等式を組み立てる段",
-        crossFilePhrase: "$w^*$ の等式を $\\chi_T$ について 1 本にまとめる段",
+        kind: "形式化済み",
+        witness: "trace_pow_eq_trace_mu",
       },
     ],
   },
@@ -768,16 +769,16 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 46 step 1 で書いた。
         leanFragment: "$\\chi$ の根の $N$ 乗和",
-        kind: "未形式化",
-        ledgerFragment: "冪和 $\\operatorname{Tr}T^N$ の初期値",
-        crossFilePhrase: "整数行列 $G$ と代数側の Gram 行列の同定",
+        kind: "形式化済み",
+        witness: "trace_pow_eq_trace_mu_all",
       },
       {
+        // cycle 46 step 1 で配線した（WStarGaussDescent.lean）。
         leanFragment: "その降下（Gauss）は仮定として受け取っている",
-        kind: "未形式化",
-        ledgerFragment: "側からの降下＝Gauss）は仮定として受け取っている",
-        crossFilePhrase: "無平方性の $\\mathbb{Q}[x]$ への降下",
+        kind: "形式化済み",
+        witness: "squarefree_map",
       },
     ],
   },
@@ -858,16 +859,16 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 45 step 4 で書いた（NewtonInitialValues.lean）。
         leanFragment: "同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること",
-        kind: "未形式化",
-        ledgerFragment: "同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること",
-        crossFilePhrase: "整数行列 $G$ と代数側の Gram 行列の同定",
+        kind: "形式化済み",
+        witness: "trace_pow_eq_of_charpoly_eq",
       },
       {
+        // cycle 46 step 1 で書いた（WStarGramAssembly.trace_mu_pow_eq_sum）。
         leanFragment: "成分ごとの分解",
-        kind: "未形式化",
-        ledgerFragment: "成分ごとの分解は cycle 42 step 1 が測った中国剰余の壁と同じものである",
-        crossFilePhrase: "成分ごとの分解（$\\operatorname{Tr}_A(\\mu\\theta^N)",
+        kind: "形式化済み",
+        witness: "trace_mu_pow_eq_sum",
       },
     ],
   },
@@ -918,10 +919,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 45 step 4 で初期値が落ちた（NewtonInitialValues.lean）。
         leanFragment: "初期値の側",
-        kind: "未形式化",
-        ledgerFragment: "残ったのは初期値の側である",
-        crossFilePhrase: "初期値の側（$k<r$ での",
+        kind: "形式化済み",
+        witness: "trace_pow_eq_of_charpoly_eq",
       },
     ],
   },
@@ -932,10 +933,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 45 step 4 で書いた（NewtonInitialValues.neg_derivative_charpolyRev_expand）。
         leanFragment: "対数微分から冪和を取り出す段",
-        kind: "未形式化",
-        ledgerFragment: "係数を取り出して初期値",
-        crossFilePhrase: "余因子行列を形式冪級数の形へ開く",
+        kind: "形式化済み",
+        witness: "neg_derivative_charpolyRev_expand",
       },
     ],
   },
@@ -999,6 +1000,34 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 46 step 1 で新設。$\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）を配線した。
+    file: "WStarGaussDescent.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        // 根基の構成と無平方性は cycle 39 step 3 で書いてある。
+        leanFragment: "が $\\mathbb{Z}[x]$ の側で無平方であること自体",
+        kind: "形式化済み",
+        witness: "squarefree_rad",
+      },
+    ],
+  },
+  {
+    // cycle 46 step 1 で新設。本文の $G$ と代数の Gram 行列の同定を書いた。
+    file: "WStarGramAssembly.lean",
+    declarationsAtReview: 19,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        // 本文の転送行列の構成そのものは 命題 C′ の側の事柄である。
+        leanFragment: "が本文の転送行列であること",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "TracePeriodStructure.lean" },
+      },
+    ],
+  },
+  {
     // cycle 43 step 1 で新設。直積代数のノルムの分解（中国剰余の代数側）を書いた。
     file: "ProductAlgebraNorm.lean",
     declarationsAtReview: 6,
@@ -1018,16 +1047,16 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 39 step 3 で構成と零因子でないことを書いた。
         leanFragment: "重複度 $a_i$ をとる元）が零因子でないこと",
-        kind: "未形式化",
-        ledgerFragment: "の構成と、それが零因子でないこと",
-        crossFilePhrase: "重複度 $a_i$ を成分ごとにとる元の構成",
+        kind: "形式化済み",
+        witness: "multWeight_mem_nonZeroDivisors",
       },
       {
+        // cycle 39 step 3 で根基の構成と無平方性を書いた。
         leanFragment: "が無平方であること自体",
-        kind: "未形式化",
-        ledgerFragment: "の構成と、それが無平方であること",
-        crossFilePhrase: "$\\mathrm{rad}(\\chi)$ の構成",
+        kind: "形式化済み",
+        witness: "squarefree_rad",
       },
     ],
   },
