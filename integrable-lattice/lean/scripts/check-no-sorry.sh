@@ -977,6 +977,10 @@ targets=(
   IntegrableLattice.PropJ2PrimePolarization.Bbar_eq_Abar_two_polarization
   IntegrableLattice.PropJ2PrimePolarization.Bbar_eq_zero_iff
   IntegrableLattice.PropJ2PrimePolarization.fails_iff_Abar_two_ne_zero
+  # 系 W7 の素材（格子周長）の第 1 段（LatticeSegmentLength.lean・cycle 47 step 4）
+  IntegrableLattice.LatticeSegmentLength.latticeLength_eq_zero_iff
+  IntegrableLattice.LatticeSegmentLength.latticeLength_of_smul
+  IntegrableLattice.LatticeSegmentLength.latticeLength_add_of_parallel
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

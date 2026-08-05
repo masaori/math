@@ -1028,6 +1028,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 47 step 4 で新設。格子周長の第 1 段（線分の格子長とその加法性）を書いた。
+    file: "LatticeSegmentLength.lean",
+    declarationsAtReview: 5,
+    heading: "形式化しなかったもの（実測つき）",
+    items: [
+      {
+        leanFragment: "**格子周長そのもの**（凸格子多角形の辺への分解と、その総和）",
+        kind: "未形式化",
+        ledgerFragment: "系 W7",
+        crossFilePhrase: "系 W7",
+      },
+      {
+        leanFragment: "の不等式そのもの**（$b\\le\\frac12\\operatorname{per}$）",
+        kind: "未形式化",
+        ledgerFragment: "系 W7",
+        crossFilePhrase: "$b\\le\\frac12\\operatorname{per}$",
+      },
+    ],
+  },
+  {
     // cycle 47 step 3 で新設。命題 J2′ の同値のうち代数だけで閉じる側を書いた。
     file: "PropJ2PrimePolarization.lean",
     declarationsAtReview: 4,

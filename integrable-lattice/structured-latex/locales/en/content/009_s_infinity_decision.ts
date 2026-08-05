@@ -51,6 +51,9 @@ export default defineBlocks([
     verification: ["sagemath/check/cycle20_T3_s_infinity"],
     lean: [
       "IntegrableLattice.SInfinity.BucketVanish",
+      "IntegrableLattice.LatticeSegmentLength.latticeLength_eq_zero_iff",
+      "IntegrableLattice.LatticeSegmentLength.latticeLength_of_smul",
+      "IntegrableLattice.LatticeSegmentLength.latticeLength_add_of_parallel",
       "IntegrableLattice.k5_argmin_unique_above",
       "IntegrableLattice.r0_add_one_comm",
       "IntegrableLattice.r0_empty_case",
