@@ -1012,6 +1012,14 @@ export default defineBlocks([
       "IntegrableLattice.WStarFactorExtraction.not_dvd_of_ne_of_monic_prime",
       "IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight",
       "IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight_charpoly",
+      "IntegrableLattice.WStarMuGram.isUnit_aeval_derivative",
+      "IntegrableLattice.WStarMuGram.derivative_mul_mu",
+      "IntegrableLattice.WStarMuGram.aeval_multWeight_eq_on_component",
+      "IntegrableLattice.WStarMuGram.weightedGram_apply_eq_psi",
+      "IntegrableLattice.WStarMuGram.det_weightedGram_mu",
+      "IntegrableLattice.WStarMuGram.det_weightedGram_mu_of_squarefree",
+      "IntegrableLattice.WStarMuGram.psi_eta_recurrence",
+      "IntegrableLattice.WStarMuGram.trace_pow_recurrence",
     ],
     statement: [
       paragraph([

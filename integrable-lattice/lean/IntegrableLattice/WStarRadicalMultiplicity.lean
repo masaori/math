@@ -86,7 +86,11 @@ noncomputable def chi (f : ι → R[X]) (a : ι → ℕ) : R[X] := ∏ i, (f i) 
 /-- 本文の $h=\chi/\rho=\prod_i f_i^{a_i-1}$。 -/
 noncomputable def lower (f : ι → R[X]) (a : ι → ℕ) : R[X] := ∏ i, (f i) ^ (a i - 1)
 
-/-- 本文の $\chi'/h=\sum_i a_i\,f_i'\,(\rho/f_i)$。これが $\mu$ の実体である。 -/
+/-- 本文の $\chi'/h=\sum_i a_i\,f_i'\,(\rho/f_i)$。
+
+**名前に反して、これは本文の $\mu$ ではない。** その $\theta$ での値が本文の $\eta$ である
+（本文の $\mu$ は $\eta=\mu\,\rho'(\theta)$ で結ばれる別の元で、`WStarMuGram.mu` に書いた）。
+cycle 39 がこの 2 つを取り違え、cycle 40 step 1 の実測で分かった。名前は cycle 40 のまま残してある。 -/
 noncomputable def multWeight (f : ι → R[X]) (a : ι → ℕ) : R[X] :=
   ∑ i, C ((a i : R)) * derivative (f i) * ∏ j ∈ univ.erase i, f j
 

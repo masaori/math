@@ -400,10 +400,32 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "(i) 本文の $\\mu$ の構成と $G$ の同定" +
       "（成分ごとに $a_i$ をとる元は $A_\\mathbb{Q}$ に住み、本文の $G$ はその重みの Gram 行列である）。" +
       "(ii) $w^*$ の等式を組み立てる段（$\\chi=\\chi_T$ について 1 本にまとめる）" +
-      "（部品は揃っているが、`exists_isLeast_isPLevel_range_of_euler` へ当てる形にはなっていない）。",
+      "（部品は揃っているが、`exists_isLeast_isPLevel_range_of_euler` へ当てる形にはなっていない）。" +
+      "**cycle 41 step 1 で (i) の前半（$\\mu$ の構成）を書いた**（`WStarMuGram.lean`）。" +
+      "$\\rho$ が無平方なら $\\rho'(\\theta)$ は $A_\\mathbb{Q}$ の単元なので、$\\eta$ をそれで割れば $\\mu$ が作れる" +
+      "（`mu` / `derivative_mul_mu`）。本文が「成分 $K_i$ 上で $a_i\\rho'(\\theta_i)$ に等しい」と書いている段も、" +
+      "$f_i$ を法にとった多項式の合同として書いた（`aeval_multWeight_eq_on_component`）。" +
+      "**その $\\mu$ を入れると、本文の statement の 2 本目の等式 $\\det G=\\pm N(\\eta)$ が" +
+      "$\\rho$ と $\\eta$ だけから出る**（`det_weightedGram_mu_of_squarefree`）。" +
+      "**それでもこの項目は閉じない。残っているのは (i) の後半である。そう書く**——" +
+      "**本文の $G$ は整数行列 $(\\operatorname{Tr}T^{i+j})$ であり**（定義は 命題 C′ の statement）、" +
+      "Lean 側の `EulerDualBasis.weightedGram` は代数のトレースで書いた行列なので、" +
+      "2 つが同じ行列であることは $\\operatorname{Tr}T^N=\\operatorname{Tr}_{A_\\mathbb{Q}/\\mathbb{Q}}(\\mu\\theta^N)$" +
+      "（$\\chi$ の根の $N$ 乗和）に他ならない。**cycle 41 step 1 はそこへ 1 段寄せた**——" +
+      "両辺が $\\chi$ の与える同じ線形漸化式に従うことを書いたので" +
+      "（`psi_eta_recurrence` / `trace_pow_recurrence`）、残るのは初期値 $N=0,\\dots,\\deg\\chi-1$ の一致だけである。" +
+      "**その一致は $\\chi$ の係数から冪和を出す関係（Newton の関係）そのものであり、mathlib にその形は無い。** " +
+      "したがって残っている 1 件は" +
+      "「本文の整数行列 $G$ と重み $\\mu$ の Gram 行列の同定（冪和 $\\operatorname{Tr}T^N$ の初期値）」である。" +
+      "また段 1 が使う $\\mathbb{Q}[x]$ 側の無平方性（$\\mathbb{Z}[x]$ 側からの降下＝Gauss）は仮定として受け取っている。" +
+      "**書いてみて外側に段が 1 つ現れたので、いま残りは 3 件である。そう書く**——" +
+      "3 件目が「$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）」である。" +
+      "本文は $\\rho$ の無平方性を $\\mathbb{Z}[x]$ の側で言っており、$\\mu$ の構成が要るのは $\\mathbb{Q}[x]$ の側である。" +
+      "cycle 40 step 1 に続いて、**書いた段の外側に段が現れたのは 7 サイクル目である。**",
     remainingItems: [
-      "本文の $\\mu$ の構成と $G$ の同定",
+      "本文の整数行列 $G$ と重み $\\mu$ の Gram 行列の同定（冪和 $\\operatorname{Tr}T^N$ の初期値）",
       "$w^*$ の等式を組み立てる段",
+      "$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）",
     ],
   },
   {

@@ -727,16 +727,37 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
-        leanFragment: "本文の $\\mu$ の構成と $G$ の同定",
+        // cycle 41 step 1 で $\mu$ の構成のほうは書いたので、残っているのは $G$ の同定である。
+        leanFragment: "残っているのは $G$ の同定のほうである",
         kind: "未形式化",
-        ledgerFragment: "本文の $\\mu$ の構成と $G$ の同定",
-        crossFilePhrase: "成分ごとに重複度をとる元の構成",
+        ledgerFragment: "本文の整数行列 $G$ と重み $\\mu$ の Gram 行列の同定",
+        crossFilePhrase: "整数行列 $G$ と代数側の Gram 行列の同定",
       },
       {
         leanFragment: "$w^*$ の等式を組み立てる段",
         kind: "未形式化",
         ledgerFragment: "$w^*$ の等式を組み立てる段",
         crossFilePhrase: "$w^*$ の等式を $\\chi_T$ について 1 本にまとめる段",
+      },
+    ],
+  },
+  {
+    // cycle 41 step 1 で新設。本文の $\mu$ を構成し、$\det G=\pm N(\eta)$ を出した。
+    file: "WStarMuGram.lean",
+    declarationsAtReview: 12,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "$\\chi$ の根の $N$ 乗和",
+        kind: "未形式化",
+        ledgerFragment: "冪和 $\\operatorname{Tr}T^N$ の初期値",
+        crossFilePhrase: "整数行列 $G$ と代数側の Gram 行列の同定",
+      },
+      {
+        leanFragment: "その降下（Gauss）は仮定として受け取っている",
+        kind: "未形式化",
+        ledgerFragment: "側からの降下＝Gauss）は仮定として受け取っている",
+        crossFilePhrase: "無平方性の $\\mathbb{Q}[x]$ への降下",
       },
     ],
   },

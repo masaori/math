@@ -746,6 +746,19 @@ targets=(
   IntegrableLattice.WStarFactorExtraction.exists_monic_prime_factorization
   IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight
   IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight_charpoly
+  # 命題 W* の μ の構成と G の同定（WStarMuGram.lean・cycle 41 step 1）
+  IntegrableLattice.WStarMuGram.isUnit_aeval_derivative
+  IntegrableLattice.WStarMuGram.mu
+  IntegrableLattice.WStarMuGram.derivative_mul_mu
+  IntegrableLattice.WStarMuGram.derivative_rad
+  IntegrableLattice.WStarMuGram.multWeight_sub_smul_derivative_rad_dvd
+  IntegrableLattice.WStarMuGram.aeval_multWeight_eq_on_component
+  IntegrableLattice.WStarMuGram.weightedGram_apply
+  IntegrableLattice.WStarMuGram.weightedGram_apply_eq_psi
+  IntegrableLattice.WStarMuGram.det_weightedGram_mu
+  IntegrableLattice.WStarMuGram.det_weightedGram_mu_of_squarefree
+  IntegrableLattice.WStarMuGram.psi_eta_recurrence
+  IntegrableLattice.WStarMuGram.trace_pow_recurrence
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a
