@@ -229,6 +229,22 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+    reason:
+      "mathlib のファイル。cycle 44 step 4 の実測で、distinguished 多項式が**在る**こと" +
+      "（`Polynomial.IsDistinguishedAt`）と、その値の付値を述べる宣言が無いことの根拠として" +
+      "宣言行を直読した先である。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean",
+    reason:
+      "mathlib のファイル。同上。このファイルに `Valuation` が 1 度も現れないことを直読で確かめた。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
     file: "structured-latex/tools/formalization-coverage.ts",
     reference: "Mathlib/RingTheory/RootsOfUnity/Lemmas.lean",
     reason:

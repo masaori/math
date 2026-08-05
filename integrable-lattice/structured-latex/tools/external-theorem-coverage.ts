@@ -357,7 +357,24 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "書いたのは 4 つで、イデアルに属する元が評価点として使えること（`hasEval_of_mem`。**本文の $\\zeta-1$ がこの形である**）、評価写像そのもの（`evalHom`）、$X$ と定数の行き先（`evalHom_X` / `evalHom_C`）、" +
       "そして cycle 42 step 5 の付値の足し算にこの評価を実際に渡した形（`emultiplicity_evalHom_iwasawa`。**仮定として受け取っていた環準同型が構成したもので埋まる**）である。" +
       "**それでもこの外部定理は完了しない。残っているのは 2 つである。そう書く**——$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側（Theorem 5.6 に残る最後の中身）と、" +
-      "$1$ の $p^n$ 乗根 $\\zeta$ について $\\zeta-1$ が極大イデアルに属することの数論側の同定である。",
+      "$1$ の $p^n$ 乗根 $\\zeta$ について $\\zeta-1$ が極大イデアルに属することの数論側の同定である。" +
+      "**cycle 44 step 4 で後者を書いた**（`IwasawaRootOfUnity.lean`）。" +
+      "**中身は Frobenius ひとつである**——剰余体の標数が $p$ なら " +
+      "$(\\bar\\zeta-1)^{p^n}=\\bar\\zeta^{p^n}-1=0$ であり、体には冪零元が無いので $\\bar\\zeta=1$、" +
+      "すなわち $\\zeta-1$ は極大イデアルに入る（`sub_one_mem_maximalIdeal_of_pow_eq_one`）。" +
+      "これで cycle 43 step 4 の評価写像に評価点が実際に渡る" +
+      "（`hasEval_sub_one_of_pow_eq_one`。**本文が $\\varphi_\\zeta$ と書いている評価はこれである**）。" +
+      "**同じサイクルの step 2 と対になっている。そう書く**——あちらは位数が剰余標数と素な根が" +
+      "剰余体でも位数を保つこと、こちらは位数が剰余標数の冪である根が剰余体で $1$ に潰れることで、" +
+      "**「剰余体へ落としたときに根がどうなるか」の互いに補い合う 2 つの場合である。** " +
+      "**それでもこの外部定理は完了しない。残っているのは 1 つである。そう書く**——" +
+      "$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側である。" +
+      "**2026-08-05 実測でその段の材料を測った**（mathlib `520045ab14` の 8264 ファイル）——" +
+      "`Polynomial.IsDistinguishedAt` は 2 ファイルに在るが" +
+      "（`Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean` と " +
+      "`Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean`）、後者に `Valuation` は 1 度も現れず、" +
+      "**Newton 多角形（`NewtonPolygon`）は 1 ファイルも無い。** " +
+      "**したがってここは配線ではなく素材の側である。**",
   },
   {
     name: "Cuoco–Monsky の類数の漸近（$\\mathbb{Z}_p^d$ 拡大の岩澤型漸近）",

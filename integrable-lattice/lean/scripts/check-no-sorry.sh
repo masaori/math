@@ -815,6 +815,9 @@ targets=(
   IntegrableLattice.JacobiFormula.derivative_det
   IntegrableLattice.JacobiFormula.det_updateRow_eq_sum_adjugate
   IntegrableLattice.JacobiFormula.derivative_det_eq_trace_adjugate
+  # Monsky の残りのうち zeta-1 が極大イデアルに属すること（IwasawaRootOfUnity.lean・cycle 44 step 4）
+  IntegrableLattice.IwasawaRootOfUnity.sub_one_mem_maximalIdeal_of_pow_eq_one
+  IntegrableLattice.IwasawaRootOfUnity.hasEval_sub_one_of_pow_eq_one
   # 命題 T の舞台の構成＝完備な局所環が Hensel 的であること（HenselianStage.lean・cycle 43 step 3）
   IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing
   IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete

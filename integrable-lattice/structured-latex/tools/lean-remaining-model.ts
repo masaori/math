@@ -796,9 +796,23 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
       },
       {
         leanFragment: "$\\zeta-1$ が極大イデアルに属することの数論側の同定",
+        kind: "形式化済み",
+        witness: "IntegrableLattice.IwasawaRootOfUnity.sub_one_mem_maximalIdeal_of_pow_eq_one",
+      },
+    ],
+  },
+  {
+    // cycle 44 step 4 で新設。zeta-1 が極大イデアルに属することを書いた。
+    file: "IwasawaRootOfUnity.lean",
+    externalEntry: "Monsky の p 進冪級数の定理",
+    declarationsAtReview: 2,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "$\\sum_{\\zeta}v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側",
         kind: "未形式化",
-        ledgerFragment: "が極大イデアルに属することの数論側の同定である",
-        crossFilePhrase: "極大イデアルに属することの数論側の同定",
+        ledgerFragment: "$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側である",
+        crossFilePhrase: "Theorem 5.6 に残る最後の中身",
       },
     ],
   },
