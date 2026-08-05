@@ -212,6 +212,79 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
+    file: "docs/実数へ出たときLeanで何が起きるか.md",
+    reference: "Init/Prelude.lean",
+    reason:
+      "Lean 4 のコア（mathlib ではなくツールチェイン側にあるので、別プロジェクトの探索では当たらない）。" +
+      "実数の宣言が依存する公理の出所として挙げている（cycle 46 step 3 で、" +
+      "この文書を書いた別セッションの参照に免除を足した。文書そのものには触っていない）。",
+    grounds: { type: "historical", marker: "Init/Prelude.lean" },
+  },
+  {
+    file: "docs/実数へ出たときLeanで何が起きるか.md",
+    reference: "Mathlib/Analysis/Polynomial/MahlerMeasure.lean",
+    reason:
+      "mathlib のファイル。1 変数 $\\mathbb{C}[X]$ の Mahler 測度の在り処として挙げている（cycle 46 step 3 で、この文書を書いた別セッションの参照に免除を足した。" +
+      "文書そのものには触っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "docs/実数へ出たときLeanで何が起きるか.md",
+    reference: "Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+    reason:
+      "mathlib のファイル。実対数の在り処として挙げている（cycle 46 step 3 で、この文書を書いた別セッションの参照に免除を足した。" +
+      "文書そのものには触っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "docs/実数へ出たときLeanで何が起きるか.md",
+    reference: "Mathlib/Data/Real/Basic.lean",
+    reason:
+      "mathlib のファイル。実数の構成の在り処として挙げている（cycle 46 step 3 で、この文書を書いた別セッションの参照に免除を足した。" +
+      "文書そのものには触っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "docs/実数へ出たときLeanで何が起きるか.md",
+    reference: "Mathlib/Dynamics/TopologicalEntropy/CoverEntropy.lean",
+    reason:
+      "mathlib のファイル。位相的エントロピーの在り処として挙げている（cycle 46 step 3 で、この文書を書いた別セッションの参照に免除を足した。" +
+      "文書そのものには触っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "docs/実数へ出たときLeanで何が起きるか.md",
+    reference: "Mathlib/NumberTheory/MahlerMeasure.lean",
+    reason:
+      "mathlib のファイル。1 変数 $\\mathbb{Z}[X]$ の Mahler 測度の在り処として挙げている（cycle 46 step 3 で、この文書を書いた別セッションの参照に免除を足した。" +
+      "文書そのものには触っていない）。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+    reason:
+      "mathlib のファイル。cycle 46 step 3 の実測で、Noether 局所環の $\\mathfrak m$ 進完備化が" +
+      "$\\mathfrak m$ 進完備であること（`IsAdicComplete` のインスタンス）の根拠として挙げている。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/RingTheory/WittVector/Complete.lean",
+    reason:
+      "mathlib のファイル。cycle 46 step 3 の実測で、完全体上の Witt ベクトル環が" +
+      "$p$ 進完備であること（`isAdicCompleteIdealSpanP`）の根拠として挙げている。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/NumberTheory/LocalField/Basic.lean",
+    reason:
+      "mathlib のファイル。cycle 46 step 3 の実測で、非アルキメデス局所体の整数環が" +
+      "$\\mathfrak m$ 進完備であることの根拠として挙げている。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
     file: "structured-latex/tools/scope-claim-support.ts",
     reference: "Mathlib/RingTheory/Henselian.lean",
     reason:

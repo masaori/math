@@ -860,9 +860,31 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "4 元体 $\\mathbb{F}_4$ と $L=3$ が仮定を全部満たし、段 3 の結論がその上で実際に使える" +
       "（`exists_root_on_galoisField`）。**ただしこれは退化した舞台である**" +
       "（極大イデアルが $0$ なので合同が等号になる）。**本文が当てているのは混標数の舞台であって、" +
-      "これではない。そう書く。** **残りは 1 つである。**",
+      "これではない。そう書く。** " +
+      "**cycle 46 step 3 で測り直した。判断は「自分では書かない」である。書く必要が無いからである。そう書く**" +
+      "（2026-08-05 実測）——**mathlib は $\\mathfrak m$ 進完備性を持っている。" +
+      "無かったのは 1 つの綴りについてだけだった。** " +
+      "Noether 局所環の $\\mathfrak m$ 進完備化（`Mathlib/RingTheory/AdicCompletion/LocalRing.lean` 127 行）、" +
+      "完全体上の Witt ベクトル環（`Mathlib/RingTheory/WittVector/Complete.lean` 116 行）、" +
+      "非アルキメデス局所体の整数環（`Mathlib/NumberTheory/LocalField/Basic.lean` 176 行）には" +
+      "いずれも `IsAdicComplete` のインスタンスが在る。" +
+      "無いのは付値による完備化の整数環（`adicCompletionIntegers`）の綴りだけで、" +
+      "**cycle 45 の実測そのものは正しく、誤っていたのは「だから素材が無い」という側である。** " +
+      "**そこで舞台を混標数で与え直した**（`PropTMixedWitness.lean`）——" +
+      "$\\mathbb{F}_4$ 上の Witt ベクトル環 $W(\\mathbb{F}_4)$ は標数 $0$ の離散付値環で、" +
+      "剰余体が $\\mathbb{F}_4$（標数 2）、**極大イデアルは $(2)\\neq0$ である**" +
+      "（`maximalIdeal_ne_bot`。cycle 45 の舞台との違いはここである）。" +
+      "$1$ の原始 3 乗根は Teichmüller 持ち上げで取り、段 3 の結論がその上で実際に使える" +
+      "（`exists_root_on_wittVector`）。**これは $\\mathbb{Q}_2$ の不分岐 2 次拡大の整数環であり、" +
+      "$L=3$ のとき本文が当てている舞台そのものである。** " +
+      "**途中で mathlib の欠落を 1 つ埋めた**——`HenselianRing R I` から局所環のクラス " +
+      "`HenselianLocalRing` へ渡す宣言が無い（`HenselianLocalRing` は `Mathlib/RingTheory/Henselian.lean` の外に" +
+      "1 度も現れない）。書く量は 2 行である（`henselianLocalRing_of_isAdicComplete`）。" +
+      "**それでもこの主張は完了しない。残りは 1 つで、中身が入れ替わった。そう書く**——" +
+      "残っているのは 本文の完備化がこの舞台と同型であることの同定 である" +
+      "（$\\mathbb{Z}[\\zeta_L]$ の 2 の上の素点での局所化と、その完備化が不分岐であることが要る）。",
     remainingItems: [
-      "完備化の整数環が $\\mathfrak m$ 進完備であること",
+      "本文の完備化がこの舞台と同型であることの同定",
     ],
   },
   {

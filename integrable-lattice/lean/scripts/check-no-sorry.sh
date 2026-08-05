@@ -961,6 +961,13 @@ targets=(
   IntegrableLattice.PropCDiscSeparable.separable_iff_discr_ne_zero
   IntegrableLattice.PropCDiscSeparable.discr_map_of_monic
   IntegrableLattice.PropCDiscSeparable.separable_map_iff_not_dvd_discr
+  # 命題 T の段 3 の舞台を混標数で（PropTMixedWitness.lean・cycle 46 step 3）
+  IntegrableLattice.PropTMixedWitness.henselianLocalRing_of_isAdicComplete
+  IntegrableLattice.PropTMixedWitness.maximalIdeal_wittVector
+  IntegrableLattice.PropTMixedWitness.henselianLocalRing_wittVector
+  IntegrableLattice.PropTMixedWitness.maximalIdeal_ne_bot
+  IntegrableLattice.PropTMixedWitness.exists_isPrimitiveRoot_three_O2
+  IntegrableLattice.PropTMixedWitness.exists_root_on_wittVector
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

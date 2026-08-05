@@ -1000,6 +1000,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 46 step 3 で新設。命題 T の段 3 の舞台を混標数（Witt ベクトル環）で与えた。
+    file: "PropTMixedWitness.lean",
+    declarationsAtReview: 8,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "の完備化がこの舞台であることの同定",
+        kind: "未形式化",
+        ledgerFragment: "本文の完備化がこの舞台と同型であることの同定",
+        crossFilePhrase: "完備化がこの舞台と同型であることの同定",
+      },
+    ],
+  },
+  {
     // cycle 46 step 2 で新設。判別式と分離性の同値を書いた。
     file: "PropCDiscSeparable.lean",
     declarationsAtReview: 4,
