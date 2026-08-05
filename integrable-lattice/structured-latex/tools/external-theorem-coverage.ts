@@ -347,7 +347,17 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "（`degree_eq_order_map`。$g_1$ の $\\bmod\\ p$ 還元の位数に等しい）。" +
       "**それでもこの外部定理は完了しない。残っているのは $\\mathrm{ord}$ の漸近そのものである。そう書く**——" +
       "$1$ の冪根での評価と、その積の付値を数える段が要る。本 step はその手前までである。" +
-      "**cycle 42 step 5 で第 3 段の半分を書いた**（`IwasawaOrdCounting.lean`）。**着手して測ると、この段は 2 つに割れた。そう書く**——(a) 評価を環準同型として受け取れば付値は分解に沿って足し算になること（`emultiplicity_eval_iwasawa`。$g=p^{\\mu}fh$ で $\\varphi(h)$ が単元・$\\varphi(p)$ が素元なら $v(\\varphi(g))=\\mu+v(\\varphi(f))$。単元の付値が $0$ であるというだけの内容である）と、その和の形（`sum_emultiplicity_eval_iwasawa`。$1$ の冪根を走る有限集合 $s$ について $\\sum_\\zeta v(\\varphi_\\zeta(g))=|s|\\mu+\\sum_\\zeta v(\\varphi_\\zeta(f))$。**$\\mu$ の側が $|s|$ に比例し、$\\lambda$ の側が $f$ の評価の和に落ちるという、漸近の骨格そのものである**）。(b) **その評価が実際に存在すること**——$\\mathbb{Z}_p[[X]]$ の元を $\\zeta-1$ で評価する写像の構成である。**冪級数の収束が要るので代数だけでは出ない。書いていない。そう書く。**本ファイルは評価を仮定として型に出しており、`PropT.lean` の段 5 と同じ受け取り方である。**残っているのはこの (b) と、$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側である。**",
+      "**cycle 42 step 5 で第 3 段の半分を書いた**（`IwasawaOrdCounting.lean`）。**着手して測ると、この段は 2 つに割れた。そう書く**——(a) 評価を環準同型として受け取れば付値は分解に沿って足し算になること（`emultiplicity_eval_iwasawa`。$g=p^{\\mu}fh$ で $\\varphi(h)$ が単元・$\\varphi(p)$ が素元なら $v(\\varphi(g))=\\mu+v(\\varphi(f))$。単元の付値が $0$ であるというだけの内容である）と、その和の形（`sum_emultiplicity_eval_iwasawa`。$1$ の冪根を走る有限集合 $s$ について $\\sum_\\zeta v(\\varphi_\\zeta(g))=|s|\\mu+\\sum_\\zeta v(\\varphi_\\zeta(f))$。**$\\mu$ の側が $|s|$ に比例し、$\\lambda$ の側が $f$ の評価の和に落ちるという、漸近の骨格そのものである**）。(b) **その評価が実際に存在すること**——$\\mathbb{Z}_p[[X]]$ の元を $\\zeta-1$ で評価する写像の構成である。**冪級数の収束が要るので代数だけでは出ない。書いていない。そう書く。**本ファイルは評価を仮定として型に出しており、`PropT.lean` の段 5 と同じ受け取り方である。**残っているのはこの (b) と、$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側である。**" +
+      "**cycle 43 step 4 で (b) を書いた**（`IwasawaEvaluation.lean`）。" +
+      "**この記録の射程が実測で狭まった。そう書く**——「収束が要る」という側は正しいが、「代数だけでは出ない=書けない」という側は誤りだった。" +
+      "**mathlib は評価写像を持っている**（`PowerSeries.eval₂Hom`、`Mathlib/RingTheory/PowerSeries/Evaluation.lean` 160 行。2026-08-05 実測）。" +
+      "cycle 42 step 5 が見つけられなかったのは、探した語が「収束」の側だったためである（cycle 40・41 の「定理の名前で引くと道具が見えない」の、概念の名前の側の版である）。" +
+      "**併せて $\\mathbb{R}$ 脱出かどうかの判定が実測で決まった**——`eval₂Hom` が要求している収束は `IsTopologicallyNilpotent`（$a^n\\to0$）で、位相は線形位相（$0$ の近傍がイデアルの基本系をなす）である。" +
+      "アルキメデス的な順序も絶対値も距離も使わない。**$p$ 進の位相はまさにこの形なので、この段は $\\mathbb{R}$ へ出ない。**" +
+      "書いたのは 4 つで、イデアルに属する元が評価点として使えること（`hasEval_of_mem`。**本文の $\\zeta-1$ がこの形である**）、評価写像そのもの（`evalHom`）、$X$ と定数の行き先（`evalHom_X` / `evalHom_C`）、" +
+      "そして cycle 42 step 5 の付値の足し算にこの評価を実際に渡した形（`emultiplicity_evalHom_iwasawa`。**仮定として受け取っていた環準同型が構成したもので埋まる**）である。" +
+      "**それでもこの外部定理は完了しない。残っているのは 2 つである。そう書く**——$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側（Theorem 5.6 に残る最後の中身）と、" +
+      "$1$ の $p^n$ 乗根 $\\zeta$ について $\\zeta-1$ が極大イデアルに属することの数論側の同定である。",
   },
   {
     name: "Cuoco–Monsky の類数の漸近（$\\mathbb{Z}_p^d$ 拡大の岩澤型漸近）",

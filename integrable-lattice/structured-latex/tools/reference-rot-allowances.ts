@@ -221,6 +221,15 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   },
   {
     file: "structured-latex/tools/external-theorem-coverage.ts",
+    reference: "Mathlib/RingTheory/PowerSeries/Evaluation.lean",
+    reason:
+      "mathlib のファイル。cycle 43 step 4 の実測で、冪級数の評価写像が**在る**こと" +
+      "（`PowerSeries.eval₂Hom`）と、それが要求している収束が線形位相での位相的冪零性であって" +
+      "アルキメデス的でないことの根拠として挙げている。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/external-theorem-coverage.ts",
     reference: "Mathlib/LinearAlgebra/FreeModule/PID.lean",
     reason:
       "mathlib のファイル。Smith 標準形が在ることの根拠として宣言行を直読した先である" +

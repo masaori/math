@@ -71,6 +71,7 @@ import IntegrableLattice.IwasawaOrdCounting
 import IntegrableLattice.ProductAlgebraNorm
 import IntegrableLattice.PropCCrtWiring
 import IntegrableLattice.HenselianStage
+import IntegrableLattice.IwasawaEvaluation
 import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition

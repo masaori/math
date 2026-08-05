@@ -800,6 +800,12 @@ targets=(
   IntegrableLattice.HenselianStage.henselianLocalRing_padicInt
   IntegrableLattice.HenselianStage.henselianLocalRing_localField
   IntegrableLattice.HenselianStage.exists_root_quadratic_localField
+  # Monsky の ord の漸近の第 3 段の残り半分＝評価写像の構成（IwasawaEvaluation.lean・cycle 43 step 4）
+  IntegrableLattice.IwasawaEvaluation.hasEval_of_mem
+  IntegrableLattice.IwasawaEvaluation.evalHom
+  IntegrableLattice.IwasawaEvaluation.evalHom_X
+  IntegrableLattice.IwasawaEvaluation.evalHom_C
+  IntegrableLattice.IwasawaEvaluation.emultiplicity_evalHom_iwasawa
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

@@ -782,6 +782,27 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 43 step 4 で新設。評価写像の構成（mathlib の eval₂Hom を線形位相の側から受け取る）。
+    file: "IwasawaEvaluation.lean",
+    externalEntry: "Monsky の p 進冪級数の定理",
+    declarationsAtReview: 5,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "$\\sum_{\\zeta}v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側",
+        kind: "未形式化",
+        ledgerFragment: "の側（Theorem 5.6 に残る最後の中身）",
+        crossFilePhrase: "Theorem 5.6 に残る最後の中身",
+      },
+      {
+        leanFragment: "$\\zeta-1$ が極大イデアルに属することの数論側の同定",
+        kind: "未形式化",
+        ledgerFragment: "が極大イデアルに属することの数論側の同定である",
+        crossFilePhrase: "極大イデアルに属することの数論側の同定",
+      },
+    ],
+  },
+  {
     // cycle 42 step 5 で新設。Monsky の ord の漸近の第 3 段の半分を書いた。
     file: "IwasawaOrdCounting.lean",
     externalEntry: "Monsky の p 進冪級数の定理",
