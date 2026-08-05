@@ -85,3 +85,4 @@ import IntegrableLattice.JacobiFormula
 import IntegrableLattice.IwasawaRootOfUnity
 import IntegrableLattice.WStarGaussDescent
 import IntegrableLattice.WStarGramAssembly
+import IntegrableLattice.PropCDiscSeparable

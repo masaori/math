@@ -1000,6 +1000,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 46 step 2 で新設。判別式と分離性の同値を書いた。
+    file: "PropCDiscSeparable.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "本文の $\\operatorname{disc}(\\rho)$ が `Polynomial.discr` であること",
+        kind: "未形式化",
+        ledgerFragment: "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定",
+        crossFilePhrase: "2 つの判別式の同定",
+      },
+    ],
+  },
+  {
     // cycle 46 step 1 で新設。$\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）を配線した。
     file: "WStarGaussDescent.lean",
     declarationsAtReview: 4,

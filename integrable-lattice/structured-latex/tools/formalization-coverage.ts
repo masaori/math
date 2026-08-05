@@ -287,9 +287,35 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`discr_not_zero_of_basis` / `discr_isUnit_of_basis` のようにいずれも分離的な体拡大を" +
       "仮定として要求する形で、逆向き——判別式が $0$ でなければ分離的——を述べた宣言も、" +
       "`Algebra.discr` の係数環の取り替えを述べた宣言も無い）。" +
-      "**したがってこの主張の残りは 1 つである。**",
+      "**したがってこの主張の残りは 1 つである。**" +
+      "**cycle 46 step 2 でその同値を書いた。この主張は完了である。そう書く**（`PropCDiscSeparable.lean`）。" +
+      "**cycle 45 step 2 の「素材の側である」という判定は誤りだった。素材は在った。そう書く**——" +
+      "本文の $\\operatorname{disc}(\\rho)$ は $\\rho$ という**多項式の判別式**であって、" +
+      "基底のトレース形式の判別式（`Algebra.discr`）ではない。" +
+      "多項式の側には一式が在る（`Polynomial.discr`・`resultant_deriv`・" +
+      "`isUnit_resultant_iff_isCoprime`・`resultant_map_map`。2026-08-05 実測）。" +
+      "**引いた語で見えるものは正しく見えていたが、要るものはその語では引けない場所に在った**——" +
+      "cycle 40・41 と同じ形で、「書けない理由」の記録が誤りだった件はこれで 13 件目になる。" +
+      "書いたのは 3 段で、体の上で「分離的 $\\iff$ 判別式が $0$ でない」" +
+      "（`separable_iff_discr_ne_zero`。モニックで次数が正なら成り立つ。" +
+      "微分の次数は体によって落ちうるので、終結式の次数を $\\deg\\rho-1$ へ揃える段が要る）、" +
+      "判別式が還元と交換すること（`discr_map_of_monic`）、" +
+      "そして本文の同値（`separable_map_iff_not_dvd_discr`）である。" +
+      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも出ない——扱うのは $\\mathbb{Z}[x]$ と " +
+      "$\\mathbb{F}_p[x]$ の多項式と、係数の多項式である終結式・判別式だけである。" +
+      "**それでもこの主張は完了しない。書いてみて、外側に段が 1 つ現れた。そう書く**——" +
+      "本文の $\\det G=\\operatorname{disc}(\\rho)\\prod_\\lambda m_\\lambda$ の $\\operatorname{disc}(\\rho)$ は" +
+      "**冪基底のトレース形式の Gram 行列式**（`Algebra.discr`）として Lean 側に入っており" +
+      "（`WStarGramDiscriminant.lean`）、本 step が書いた同値は**多項式の判別式**" +
+      "（`Polynomial.discr`）についてである。**2 つが等しいことは mathlib に無い**" +
+      "（2026-08-05 実測。`Polynomial.discr` を参照しているのは Sylvester 行列式の file と" +
+      "Weierstrass 曲線の file の 2 本だけで、`Algebra.discr` と結ぶ宣言は無い。" +
+      "`Algebra.discr_powerBasis_eq_norm` は在るが分離的な体拡大を要求する）。" +
+      "**したがって残りは 1 件である**——" +
+      "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定 である。" +
+      "**書いた段の外側に段が現れたのは 8 サイクル目である。そう書く。**",
     remainingItems: [
-      "$p\\nmid\\operatorname{disc}(\\rho)$ と「$\\rho\\bmod p$ が分離的」の同値だけである",
+      "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定",
     ],
   },
   {

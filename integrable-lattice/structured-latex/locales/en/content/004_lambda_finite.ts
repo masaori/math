@@ -330,6 +330,9 @@ export default defineBlocks([
       "IntegrableLattice.PropCWStarZero.not_dvd_det_of_isPLevel_zero",
       "IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_not_dvd_det",
       "IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_of_det_factorization",
+      "IntegrableLattice.PropCDiscSeparable.separable_iff_discr_ne_zero",
+      "IntegrableLattice.PropCDiscSeparable.discr_map_of_monic",
+      "IntegrableLattice.PropCDiscSeparable.separable_map_iff_not_dvd_discr",
     ],
     statement: [
       paragraph([

@@ -956,6 +956,11 @@ targets=(
   IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mu
   IntegrableLattice.WStarGramAssembly.trace_mu_eq_card
   IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mu_all
+  # 命題 C′ の判別式と分離性の同値（PropCDiscSeparable.lean・cycle 46 step 2）
+  IntegrableLattice.PropCDiscSeparable.resultant_deriv_eq_resultant
+  IntegrableLattice.PropCDiscSeparable.separable_iff_discr_ne_zero
+  IntegrableLattice.PropCDiscSeparable.discr_map_of_monic
+  IntegrableLattice.PropCDiscSeparable.separable_map_iff_not_dvd_discr
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと
