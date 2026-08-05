@@ -61,3 +61,4 @@ import IntegrableLattice.SpanningConnectivity
 import IntegrableLattice.NewtonPolytopeAdditivity
 import IntegrableLattice.CharacterDecompositionTwoVariable
 import IntegrableLattice.WStarRadicalMultiplicity
+import IntegrableLattice.WStarFactorExtraction

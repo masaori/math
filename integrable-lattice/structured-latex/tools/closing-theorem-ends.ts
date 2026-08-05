@@ -160,26 +160,42 @@ export const CLOSING_THEOREMS: readonly ClosingTheorem[] = [
       { binder: "a", kind: "データ", why: "重複度" },
       {
         binder: "hprime",
-        kind: "受け取る",
-        why:
-          "族が素元であることは、$\\chi$ の一意分解から出るはずのものである。" +
-          "本ファイルは族を受け取る形なので、ここは作っていない",
+        kind: "構成で与える",
+        suppliedBy: "exists_monic_prime_factorization",
       },
       {
         binder: "hndvd",
-        kind: "受け取る",
-        why: "族が相異なることも同じく、$\\chi$ の一意分解から出るはずのものである",
+        kind: "構成で与える",
+        suppliedBy: "exists_monic_prime_factorization",
       },
       {
         binder: "hmonic",
-        kind: "受け取る",
-        why:
-          "モニックな $\\chi$ の因子がモニックに取れることは、" +
-          "先頭係数が正の整数で積が $1$ であることから出るはずだが、書いていない",
+        kind: "構成で与える",
+        suppliedBy: "exists_monic_prime_factorization",
       },
       { binder: "hdeg", kind: "データ", why: "因子が定数でないこと。族の与え方の指定" },
       { binder: "ha", kind: "データ", why: "重複度が $0$ でないこと。族の与え方の指定" },
       { binder: "hdegrad", kind: "データ", why: "次数の指定。閉じる対象ではない" },
+    ],
+  },
+  {
+    // cycle 40 step 1。族を $\chi$ から作った形。**受け取る端は無くなったが、当てる先が新しい端になる。**
+    file: "WStarFactorExtraction.lean",
+    theorem: "exists_radical_and_multWeight",
+    entry: "paper_046_theorem_wstar_different",
+    ends: [
+      { binder: "K", kind: "データ", why: "商体。$\\mathbb{Q}$ を当てる" },
+      { binder: "χ", kind: "データ", why: "本文の $\\chi=\\chi_T$" },
+      {
+        binder: "hχ",
+        kind: "構成で与える",
+        suppliedBy: "exists_radical_and_multWeight_charpoly",
+      },
+      {
+        binder: "hdeg",
+        kind: "構成で与える",
+        suppliedBy: "exists_radical_and_multWeight_charpoly",
+      },
     ],
   },
   {

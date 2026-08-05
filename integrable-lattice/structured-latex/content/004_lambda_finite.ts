@@ -928,6 +928,10 @@ export default defineBlocks([
       "IntegrableLattice.WStarRadical.derivative_chi_eq_lower_mul_multWeight",
       "IntegrableLattice.WStarRadical.multWeight_mem_nonZeroDivisors",
       "IntegrableLattice.WStarRadical.det_weightedGram_ne_zero_of_factorization",
+      "IntegrableLattice.WStarFactorExtraction.exists_monic_prime_factorization",
+      "IntegrableLattice.WStarFactorExtraction.not_dvd_of_ne_of_monic_prime",
+      "IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight",
+      "IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight_charpoly",
     ],
     statement: [
       paragraph([

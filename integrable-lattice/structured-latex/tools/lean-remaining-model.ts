@@ -668,15 +668,35 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
   },
   {
     // cycle 39 step 3 で新設。rad(χ) と μ の構成を書いた。
+    // cycle 40 step 1 で、残っていた「χ から族を取り出す段」が別ファイルで書かれたので状態を改めた。
     file: "WStarRadicalMultiplicity.lean",
     declarationsAtReview: 15,
     heading: "形式化しなかったもの",
     items: [
       {
         leanFragment: "から族",
+        kind: "形式化済み",
+        witness: "exists_monic_prime_factorization",
+      },
+    ],
+  },
+  {
+    // cycle 40 step 1 で新設。χ から相異なる既約因子の族と重複度を取り出す段を書いた。
+    file: "WStarFactorExtraction.lean",
+    declarationsAtReview: 10,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "本文の $\\mu$ の構成と $G$ の同定",
         kind: "未形式化",
-        ledgerFragment: "から族を取り出す段",
-        crossFilePhrase: "$\\chi$ から相異なる既約因子の族を取り出す段",
+        ledgerFragment: "本文の $\\mu$ の構成と $G$ の同定",
+        crossFilePhrase: "成分ごとに重複度をとる元の構成",
+      },
+      {
+        leanFragment: "$w^*$ の等式を組み立てる段",
+        kind: "未形式化",
+        ledgerFragment: "$w^*$ の等式を組み立てる段",
+        crossFilePhrase: "$w^*$ の等式を $\\chi_T$ について 1 本にまとめる段",
       },
     ],
   },

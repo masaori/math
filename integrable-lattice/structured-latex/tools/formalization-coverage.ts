@@ -315,9 +315,28 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**本文は $\\rho=\\mathrm{rad}(\\chi)$ と $\\chi$ から定義している。** " +
       "したがって $\\chi$ から族を取り出す段（一意分解と、モニックな $\\chi$ の因子がモニックに取れること）が残る。" +
       "**「残りが N 件」と書かれた欄に入ると N 件ではない、が 4 サイクル続いたことになる**（cycle 35・36・38・39）。" +
-      "**残りは 1 つである。**",
+      "**cycle 40 step 1 でその 1 件を書いた**（`WStarFactorExtraction.lean`）。" +
+      "一意分解の因子をモニック化し（素因子の先頭係数は $\\chi$ がモニックなことから単元である）、" +
+      "同じものを数え上げて重複度にする（`exists_monic_prime_factorization`）。" +
+      "相異なることの中身は「同伴なモニック多項式は等しい」で、" +
+      "$\\chi$ を当てる先（整数行列の特性多項式）まで書いた（`exists_radical_and_multWeight_charpoly`）。" +
+      "**それでもこの主張は完了しない。書いてみて、今度は残っているものの中身が違うことが分かった。そう書く。** " +
+      "**cycle 39 が記号を取り違えていた**——cycle 39 の `multWeight` は $\\chi'/h$ であり、" +
+      "**本文の記号では $\\eta$ である**（本文の証明の第 1 段落が $\\eta=\\mu\\,\\rho'(\\theta)$ と書いており、" +
+      "本文の $\\mu$ は成分 $K_i=\\mathbb{Q}[x]/(f_i)$ ごとに重複度 $a_i$ をとる別の元である。2026-08-05 に本文を直読して確かめた）。" +
+      "**本文の $G$ は重みを $\\mu$ にとった Gram 行列 $\\langle x,y\\rangle=\\operatorname{Tr}(\\mu xy)$ なので、" +
+      "cycle 38・39 が $\\det G\\neq0$ と書いてきたものは、重みを $\\eta$ にとった別の行列についての主張である。** " +
+      "どちらも真だが同じ主張ではない。**`EulerDualBasis.det_weightedGram` は重み $\\mu_A$ について " +
+      "$\\det=\\pm N(\\rho'(\\theta)\\mu_A)$ を与えるので、本文の等式 $\\det G=\\pm N(\\eta)$ は " +
+      "$\\mu_A$ に本文の $\\mu$ を入れたときの形である。** " +
+      "**残りは 2 つである。** " +
+      "(i) 本文の $\\mu$ の構成と $G$ の同定" +
+      "（成分ごとに $a_i$ をとる元は $A_\\mathbb{Q}$ に住み、本文の $G$ はその重みの Gram 行列である）。" +
+      "(ii) $w^*$ の等式を組み立てる段（$\\chi=\\chi_T$ について 1 本にまとめる）" +
+      "（部品は揃っているが、`exists_isLeast_isPLevel_range_of_euler` へ当てる形にはなっていない）。",
     remainingItems: [
-      "$\\chi$ から族を取り出す段",
+      "本文の $\\mu$ の構成と $G$ の同定",
+      "$w^*$ の等式を組み立てる段",
     ],
   },
   {

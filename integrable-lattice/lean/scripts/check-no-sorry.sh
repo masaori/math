@@ -735,6 +735,17 @@ targets=(
   IntegrableLattice.WStarRadical.not_dvd_multWeight
   IntegrableLattice.WStarRadical.multWeight_mem_nonZeroDivisors
   IntegrableLattice.WStarRadical.det_weightedGram_ne_zero_of_factorization
+  # 命題 W* の族を χ から取り出す段（WStarFactorExtraction.lean・cycle 40 step 1）
+  IntegrableLattice.WStarFactorExtraction.monicize
+  IntegrableLattice.WStarFactorExtraction.monicize_monic
+  IntegrableLattice.WStarFactorExtraction.associated_monicize
+  IntegrableLattice.WStarFactorExtraction.prime_monicize
+  IntegrableLattice.WStarFactorExtraction.not_dvd_of_ne_of_monic_prime
+  IntegrableLattice.WStarFactorExtraction.natDegree_pos_of_monic_prime
+  IntegrableLattice.WStarFactorExtraction.associated_prod_map_monicize
+  IntegrableLattice.WStarFactorExtraction.exists_monic_prime_factorization
+  IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight
+  IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight_charpoly
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）
