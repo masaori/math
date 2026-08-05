@@ -23,11 +23,13 @@
 
 ### 決定可能性と計算 — `decide` が使えなくなり、`#eval` は値を返さなくなる
 
-**実数の等号・順序の判定は、mathlib では算法ではなく選択公理である。** 宣言を直読すると、
+**実数の等号・順序の判定は、mathlib では算法ではない。**
+判定手続きを与える代わりに、選択公理でその存在だけを言っている。宣言を直読すると、
 
 ```
 Mathlib/Data/Real/Basic.lean:489:  open scoped Classical in
-Mathlib/Data/Real/Basic.lean:490:  noncomputable instance linearOrder : LinearOrder ℝ := Lattice.toLinearOrder ℝ
+Mathlib/Data/Real/Basic.lean:490:  noncomputable instance linearOrder : LinearOrder ℝ :=
+Mathlib/Data/Real/Basic.lean:491:    Lattice.toLinearOrder ℝ
 Mathlib/Data/Real/Basic.lean:520:  noncomputable instance decidableLT (a b : ℝ) : Decidable (a < b) := by infer_instance
 Mathlib/Data/Real/Basic.lean:522:  noncomputable instance decidableLE (a b : ℝ) : Decidable (a ≤ b) := by infer_instance
 Mathlib/Data/Real/Basic.lean:524:  noncomputable instance decidableEq (a b : ℝ) : Decidable (a = b) := by infer_instance
@@ -62,7 +64,7 @@ because its `Decidable` instance
 did not reduce to `isTrue` or `isFalse`.
 Hint: Reduction got stuck on `Classical.choice`, which indicates that a `Decidable` instance is
 defined using classical reasoning, proving an instance exists rather than giving a concrete
-construction.
+construction. （以下略）
 ```
 
 `#eval` はエラーにはならないが、値を返さない。`#eval (2:ℕ) + 3` と `#eval (2:ℚ) + 3` は
@@ -78,8 +80,8 @@ Real.ofCauchy (sorry /- 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, ... -/)
 定義域の外でも値を返す。
 
 ```
-Mathlib/Analysis/SpecialFunctions/Log/Basic.lean:44:
-  noncomputable def log (x : ℝ) : ℝ := if hx : x = 0 then 0 else expOrderIso.symm ⟨|x|, abs_pos.2 hx⟩
+Mathlib/Analysis/SpecialFunctions/Log/Basic.lean:44:  noncomputable def log (x : ℝ) : ℝ :=
+Mathlib/Analysis/SpecialFunctions/Log/Basic.lean:45:    if hx : x = 0 then 0 else expOrderIso.symm ⟨|x|, abs_pos.2 hx⟩
 ```
 
 `Real.log 0 = 0` である（`log_zero`、同 102 行）。**これは間違いではないが、
@@ -97,8 +99,8 @@ $b=0$ の縮退も消えた（`Q5_c1_nat_least`・`Q5_c1_zero_b`）。
 | 層 | 実数へ出ると | 根拠 |
 | --- | --- | --- |
 | 記述 | 変わらない | 人が読む層である |
-| SageMath で式変形を一行ずつ | **厳密計算が浮動小数点へ落ちる** | `sagemath/check/` の 47 ディレクトリのうち、浮動小数点（`RR`/`RDF`/`.n()` 等）を使うのは 8 で、いずれも Mahler 測度・臨界点・アルキメデス側の検証である |
-| Lean 具体版 | **`decide` による自動検算ができなくなる。証明の検査は変わらない** | 上の実測。なお `by decide` はこのプロジェクトの Lean に 49 箇所あるが、実数に対する `decide` は原理的に通らないので、当然すべて可算側の対象である |
+| SageMath で式変形を一行ずつ | **厳密計算が浮動小数点へ落ちる** | `sagemath/check/` の 47 ディレクトリのうち、浮動小数点を計算に使う（`RR`・`RealField`・`CC`・`CDF`、または実対数を `float` で取る）のは 8 で、いずれも Mahler 測度・全域木エントロピー・臨界点・アルキメデス側の誤差評価である。ほかに 2 つが `float()` を使うが、これは厳密に求めた $\mathbb{Q}$ の値を桁を切って表示するだけである（`RDF` と `.n()` はこのリポジトリに 1 度も現れない） |
+| Lean 具体版 | **`decide` による自動検算ができなくなる。証明の検査は変わらない** | 上の実測。なお `by decide` はこのプロジェクトの Lean に 49 行・69 箇所あり、**そのどの行にも $\mathbb{R}$/$\mathbb{C}$ は現れない**（全数検査した）。実数に対する `decide` は上のとおり通らないので、これは当然である |
 | Lean 必要十分版 | 変わらない | 仮定の削り方の問題であって決定可能性の問題ではない |
 
 **要点は「証明できなくなる」ではなく「計算で裏を取る道が閉じる」である。**
@@ -121,8 +123,8 @@ $b=0$ の縮退も消えた（`Q5_c1_nat_least`・`Q5_c1_zero_b`）。
 
 **実数を使うかどうかで切っても、分布はほとんど変わらない。**
 $\mathbb{R}/\mathbb{C}$ を使う 3 ファイルで宣言された 68 件のうち 3 公理すべてに依存するのは
-53 件（78%）、それ以外の 712 件では 596 件（84%）で、**実数側のほうがむしろ低い**
-（宣言形を機械的に拾えなかった 5 件は集計から外した）。
+53 件（78%）、それ以外の 717 件では 598 件（83%）で、**実数側のほうがむしろ低い**
+（785 件すべてを、宣言が書かれているファイルへ機械的に対応づけた。同名の宣言が複数ファイルにある例は無い）。
 
 対にして並べると、何が公理を増やしているのかが見える。
 
@@ -138,7 +140,7 @@ $\mathbb{R}/\mathbb{C}$ を使う 3 ファイルで宣言された 68 件のう�
 | `Cycle25.Q5_c1_table_check`（表 8 件を `by decide` で検算） | 使わない | `propext` のみ |
 
 **すなわち `Classical.choice` は実数に特有ではない。** mathlib の補題はほとんどが古典論理で
-書かれているので、$\mathbb{N}$ の中だけで閉じた主張でも、mathlib の補題を一つ引いた時点で
+書かれているので、$\mathbb{N}$ の中だけで閉じた主張でも、そうした補題を一つ引いた時点で
 同じ 3 公理に依存する。逆に、公理が減るのは「実数を使っていないから」ではなく
 「証明が軽く、古典的な補題を経由していないから」である。
 
@@ -193,15 +195,17 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 `lean/IntegrableLattice/` は 75 ファイル・18175 行。このうち
 **$\mathbb{R}$ または $\mathbb{C}$ を型・項として使っているのは 3 ファイルだけである。**
 
-| ファイル | 何のために使っているか | 実数を使う行数 |
+| ファイル | 何のために使っているか | $\mathbb{R}/\mathbb{C}$ を含むコード行 |
 | --- | --- | --- |
 | `CrudeArchimedeanBound.lean` | 補題 Q0（アルキメデス粗上界）。1 の冪根の一次結合の複素絶対値で整数 $N$ を押さえ、$v_\ell(N)$ の上界を出す段。**この $\mathbb{C}$ が本物の脱出**で、末尾の `Real.logb` は $\mathbb{N}$ の不等式の言い換え | 23 |
 | `Cycle24Corrections.lean` | 補題 Q5 の $c_1$ の旧定義（実対数による）の検算と、**その実対数が除去できることの証明**、およびジャンク値による縮退の記録 | 17 |
 | `Cycle25Corrections.lean` | 訂正後の $c_1$（$\mathbb{N}$ 上の最小元）と旧定義の比較、命題 M の $\lambda=\lceil\log_\ell(e+1)\rceil$ の照合 | 22 |
 
-残る 72 ファイルは $\mathbb{N}$/$\mathbb{Z}$/$\mathbb{Q}$/$\mathbb{F}_\ell$/$\mathbb{Z}_p$/多項式環の中で閉じている。
+残る 72 ファイルには $\mathbb{R}$ も $\mathbb{C}$ もコードとして現れない
+（$\mathbb{R}$ の記号が出るのは `Cycle26ProofSteps.lean` の冒頭コメント 1 行だけである）。
 `Cycle26ProofSteps.lean` と `Cycle27ProofSteps.lean` は冒頭に「`Real` を 1 つも使わない」と
-明記してある（本文が「$\mathbb{R}$ 脱出は命題 Q の (Q4) ただ 1 箇所」と宣言していることとの整合を保つため）。
+明記してある（前者はさらに、本文が「$\mathbb{R}$ 脱出は命題 Q の (Q4) ただ 1 箇所」と
+宣言していることとの整合を理由に挙げている）。
 
 **論文本体の側も同じ形である。** `structured-latex/content/` の主張ブロックのうち
 `habitat: "R"` を宣言しているのは **36 件中 2 件**で、いずれも第 3 章
@@ -218,7 +222,7 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 
 以下、それぞれの案を実際に 27 件へ当てはめる。
 
-### (a) 現行 — 実数へ出るかどうかで分ける
+### 現行案 — 実数へ出るかどうかで分ける
 
 現行基準は三条件（① 本文が証明の根拠として引いている、② 可算側の内容を担う、
 ③ mathlib に無い）で分け、① を満たすが ② を満たさないものを
@@ -238,7 +242,7 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 ② は検証の強さを守るための条件ではない。第二に、隔離できているかの判定は人の読みであり、
 **台帳自身が「機械が確かめられないこと」としてそう書いている**。
 
-### (b) 一般的すぎて形式化が冗長になるものだけを外す
+### mathlib 在否案 — 一般的すぎて形式化が冗長になるものだけを外す
 
 「一般的すぎる」を判定できる形にする案は、実測できるものが一つある。
 
@@ -250,7 +254,7 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 この定義を採ると、**現行の三条件から ②（可算側の内容を担う）を落とすことと同じになる。**
 振り分けは次のように動く。
 
-| 種別 | (a) 現行 | (b) | 動く中身 |
+| 種別 | 現行案 | mathlib 在否案 | 動く中身 |
 | --- | --- | --- | --- |
 | 自分で証明する | 7 | **9** | $\mathbb{R}$ 脱出の 2 件が移ってくる |
 | mathlib から引く | 7 | 7 | 動かない |
@@ -266,9 +270,17 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 （`lean/logs/mathlib-gap-survey-cycle31-external.log`、mathlib `520045ab14`・8264 ファイル）では
 `lind schmidt` が 3 段とも 0 件である。Mahler 測度そのものは
 `Mathlib/Analysis/Polynomial/MahlerMeasure.lean` と `Mathlib/NumberTheory/MahlerMeasure.lean` に
-在るが、**同ログが宣言を直読して「両ファイルとも `MvPolynomial` の出現 0 件」＝1 変数のみ**と
-記録している。本論文が要るのは多変数である。したがって 2 件は「mathlib から引く」へは行かず、
-**「自分で証明する」へ行く**。中身は位相的エントロピーと多変数 Mahler 測度の定義から積むことになる。
+在るが、**同ログが「両ファイルとも `MvPolynomial` の出現 0 件」と記録している**＝1 変数のみである。
+本論文が要るのは多変数である。したがって 2 件は「mathlib から引く」へは行かず、
+**「自分で証明する」へ行く**。
+
+**ただし「定理が無い」と「素材が無い」は別である。** 位相的エントロピーの定義は mathlib に在る
+（`Mathlib/Dynamics/TopologicalEntropy/CoverEntropy.lean` の `coverEntropy`。Bowen–Dinaburg の被覆版で、
+値は `EReal`）。ただし対象は 1 つの写像 $T:X\to X$（$\mathbb{Z}$ 作用）であり、
+この 2 件が扱う $\mathbb{Z}^d$ 作用のエントロピーはその形では書けない。
+すなわち積むことになるのは、$\mathbb{Z}^d$ 作用のエントロピーと多変数 Mahler 測度である。
+上の走査は定理の名前で引いたものなので、道具の側の在否はこのように別に測る必要がある
+（「証明の手間」の節に挙げた Monsky の例と同じ話である）。
 
 長所は、線引きが**走査で判定できる一本の条件になる**ことである
 （現行の ② は「主張が可算の言葉で閉じているか」という人の読みを含む）。
@@ -279,14 +291,14 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 これは判定できる形にならない。台帳の履歴が、素材の有無の事前判定が
 少なくとも 3 回（Euler の双対基底公式・Newton 多面体・Monsky）覆ったことを記録している。
 
-### (c) 実測から出てくる案 — 「書く／引く」と「実数へ出るか」を別々の軸にする
+### 2 軸案 — 「書く／引く」と「実数へ出るか」を別々の軸にする
 
 上の実測が示しているのは、**現行基準が 1 本の軸に 2 つの別々の判断を載せている**ことである。
 
 - **書くか引くか** — mathlib に在るかで決まる。走査で判定できる。
 - **実数へ出るか** — 主張がどこに住んでいるかで決まる。研究上の記録として要る。
 
-これを 2 軸に分ける案である。振り分けの件数は (b) と同じ（9 / 7 / 0 / 11）だが、
+これを 2 軸に分ける案である。振り分けの件数は mathlib 在否案と同じ（9 / 7 / 0 / 11）だが、
 **「$\mathbb{R}$ 脱出である」という宣言は消さず、全エントリが持つ別の欄にする。**
 現在 2 件が持っている「なぜ主張の本体が $\mathbb{R}/\mathbb{C}$ の解析なのか」と
 「可算側の主張がそれに依存していないことの根拠」は、その欄へそのまま移せる。
@@ -294,8 +306,9 @@ Lean の kernel はどちらも同じ規則で検査し、この検査もどち�
 長所は、**実数への脱出の記録という研究上の資産を、形式化の作業計画から切り離して保てる**ことである。
 現行では「隔離する」と宣言することが「形式化しない」と同義なので、
 **記録したいだけの場合にも作業対象から外れてしまう**。
-短所は、台帳と検査 F の構造を変える手が入ることと、
-(b) と同じく書く量が 2 件ぶん増えることである。
+短所は、台帳と、それを毎回印字して腐りを検出する検査（`npm run verify:formalization`。
+基準の正本が「検査 F」と呼んでいるもの）の構造を変える手が入ることと、
+mathlib 在否案と同じく書く量が 2 件ぶん増えることである。
 
 ## リポジトリの思想との関係
 
@@ -324,11 +337,12 @@ SageMath の厳密計算と Lean の `decide` がそこで止まるという形�
 そこが論点になる。両側の言い分は次のとおりである。
 
 - **同じ線でよいとする側の根拠。** 外部定理を自分で書く理由は、それが
-  「本論文の主張の内容そのものを担っている」からである（基準の導出部）。
+  「本論文の主張の内容そのものを担っている」からである（基準の「自分で証明する」の条）。
   内容を担っていない実数側の定理を書いても、成果は増えず物量が増えるだけである
   （成果の出し方の「物量そのものに価値があるのではない」）。
-- **別の線にすべきとする側の根拠。** [証明の書き方](../../docs/context/証明の書き方.md)の
-  「根拠の明示」に照らすと、**引いた以上その根拠が正しいことは主張の正しさの一部**である。
+- **別の線にすべきとする側の根拠。** 基準の導出部が
+  [証明の書き方](../../docs/context/証明の書き方.md)の「根拠の明示」から引き出しているとおり、
+  **証明の根拠として引いた以上、その根拠が正しいことは主張の正しさの一部**である。
   実数側だから証明しない、というのはこの規律に例外を作ることにあたる。
   現行基準はその穴を「隔離できていることを機械の側で要求する」ことで塞いでいるが、
   **隔離の判定そのものは人の読み**であり、台帳がそう明記している。
