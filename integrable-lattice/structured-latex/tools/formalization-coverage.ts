@@ -647,12 +647,23 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**cycle 45 step 1 の全数の数え直しで、この欄が名指ししながら数えていなかった事柄が 4 つ見つかった**——" +
       "上に挙がっている 定理 X の付値計算そのもの・定理 G2 の 1・定理 G2 の 3・$A_{\\mathrm{gen}}$ の $L$ 非依存性 である。" +
       "**いずれも本文の部（(G′1)(G′2)(G′3)）ではないので、部の勘定からは漏れていた。** " +
-      "残り項目として数える（Matrix–Tree 定理と指標分解はそれぞれ cycle 37・cycle 39 で閉じたので数えない）。",
+      "残り項目として数える（Matrix–Tree 定理と指標分解はそれぞれ cycle 37・cycle 39 で閉じたので数えない）。" +
+      "**cycle 49 step 1 で全数の突き合わせをすると、この最後の文が言い過ぎだったことが分かった。そう書く**——" +
+      "外部定理としての Kirchhoff の定理と、道具としての指標分解は確かに閉じている。" +
+      "だが `BouquetClosedForm.lean` と `GeneralTowerClosedForm.lean` が挙げているのは" +
+      "$\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段） であって、" +
+      "外部定理としての Kirchhoff の内容でも、道具としての指標分解の内容でもない。" +
+      "**これは cycle 47 step 2 が 命題 W で見つけた「積公式の段」と同じ形である**" +
+      "（あちらも道具は 2 つとも在るのに、繋ぐ段が別に要った。cycle 48 step 4 の実測では、" +
+      "全域木数は行列式そのものではなく 1 行 1 列を落とした余因子の側なので、" +
+      "全余因子が等しいことを言う段が要る）。" +
+      "したがって $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段） を残り項目として数える。",
     remainingItems: [
       "定理 X の付値計算そのもの",
       "定理 G2 の 1（Galois 不変性",
       "定理 G2 の 3（配線）",
       "$A_{\\mathrm{gen}}$ の $L$ 非依存性",
+      "$\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）",
     ],
     partStates: [
       { part: "G′1", state: "残り", why: "消滅深度が無限大になる軌跡。Newton 多面体の辺方向へ落とす段が未形式化" },
@@ -669,7 +680,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**cycle 34 step 3 の照合で、`EllTwoClosedForm.lean` が挙げている matrix-tree 定理も足す**" +
       "（$\\kappa_n$ の独立計算に要る。外部定理の台帳を見よ）。" +
       "**cycle 34 step 5 の照合で足す**——本文の (G″2)(G″3)(G″4)(G″5) は、この欄が 1 度も触れていなかった。いずれも未形式化である（形式化してあるのは (G″1) の付値の議論だけである）。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。" +
+      "**cycle 49 step 1 で全数の突き合わせをすると、この欄が数えていない段が 1 つ見つかった。そう書く**——" +
+      "`EllTwoClosedForm.lean` が挙げている 塔の値 $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段） は、" +
+      "外部定理 Kirchhoff の内容でも道具としての指標分解の内容でもない。" +
+      "本文の 4 通りの閉形式は部 (G″2)–(G″5) として数えているが、この段はその手前にあり、部の勘定にも入っていなかった。" +
+      "**命題 G′ と 命題 W が同じ段を持っており、3 欄で共通の段である**（cycle 47 step 2・cycle 48 step 4 の実測）。",
+    remainingItems: ["塔の値 $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）"],
     partStates: [
       { part: "G″1", state: "済み", witness: "EllTwo.ordKappaAalpha" },
       { part: "G″2", state: "残り", why: "閉形式の導出そのものが未形式化" },
@@ -807,9 +824,21 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**定義ファイルの外に 1 度も現れず、どの体にもインスタンスが付いていない**" +
       "（数体の完備化がその舞台に載ることは述べられていない）。" +
       "**したがってここは配線ではなく素材の側である。段数は 1 段のままで、中身が入れ替わった。そう書く**——" +
-      "残っているのは 付値の位相が $\\mathfrak m$ 進位相であること（完備化の整数環が Hensel 的な舞台であることへ渡る 1 本） である。",
+      "残っているのは 付値の位相が $\\mathfrak m$ 進位相であること（完備化の整数環が Hensel 的な舞台であることへ渡る 1 本） である。" +
+      "**cycle 49 step 1 で全数の突き合わせをすると、この欄が数えていない段が 2 つ見つかった。" +
+      "段数は 1 段ではなく 3 段である。そう書く**——" +
+      "(1) `PropTHenselLift.lean` が挙げている 完備化の剰余体が原始 $L$ 乗根を持つことの同定。" +
+      "**cycle 48 step 2 は本文の段 3 が要求するものを「Hensel 的な混標数の局所環で、" +
+      "剰余体が原始 $L$ 乗根を持つこと」と測ったのに、欄はその前半しか数えていなかった。**" +
+      "(2) `PropTHenselLift.lean` が挙げている 段 4（Newton 多角形）の $v(m_j)=1$ そのもの。" +
+      "`PropT.lean` は段 4 の組合せ核を書いているが、$v(m_j)=1$ は外から来る事実として" +
+      "仮定の形で受け取っており、その事実自体は書かれていない。" +
+      "**どちらも `lean/` 側は cycle 42 から挙げていたのに、欄は 1 度も数えていなかった。**" +
+      "**したがってこの主張の残りは 3 つである。**",
     remainingItems: [
       "付値の位相が $\\mathfrak m$ 進位相であること（完備化の整数環が Hensel 的な舞台であることへ渡る 1 本）",
+      "完備化の剰余体が原始 $L$ 乗根を持つことの同定",
+      "段 4（Newton 多角形）の $v(m_j)=1$ そのもの",
     ],
   },
   {

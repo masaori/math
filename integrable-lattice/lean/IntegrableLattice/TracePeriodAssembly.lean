@@ -47,6 +47,11 @@ cycle 28 までに `PropCTracePeriod.lean` が形式化していたのは、命�
   cycle 48 step 1 で入った（`PropCResultantNorm.wStar_eq_zero_iff_separable_and_not_dvd`）。
   **どちらもこの file を書いた時点では残りだったが、いまは残りではない。そう書く。**
 - 命題 C″ (1) のしきい値 $w^*+1$ の最良性と、(3) の $e_k=\min\{m:g_m\ge k\}$ の同値。
+  **この 1 行は cycle 40 の時点で古くなっていた。cycle 49 step 1 の全数の突き合わせで直す。そう書く**——
+  (3) の同値は cycle 38 step 3 が書き（`TracePeriodStructure.tracePeriod_eq_pow_mul`）、
+  最良性そのものも cycle 40 step 3 が書いている（`TracePeriodThresholdSharp.ladder_fails_at_two`）。
+  **いま残っているのは最良性そのものではなく、その 2 つの続き**——全ての $k$ で破れる形と、
+  一般の $T$ についての配線である（台帳の 命題 C″ の欄がその 2 つを数えている）。
 
 ## 過剰仮定について
 
