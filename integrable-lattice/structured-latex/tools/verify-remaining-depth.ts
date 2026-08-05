@@ -24,14 +24,22 @@ const uncountable: string[] = [];
 /** cycle 40 step 2: 部ごとの状態を持つ欄は、残っている部の数が段数になる。 */
 const byParts: { block: string; depth: number; done: number; unwitnessed: number }[] = [];
 for (const entry of incomplete) {
-  if (entry.state === "部分的" && entry.remainingItems !== undefined) {
-    countable.push({ block: entry.block, depth: entry.remainingItems.length });
-  } else if (entry.state === "部分的" && entry.partStates !== undefined) {
-    const done = entry.partStates.filter((p) => p.state === "済み").length;
-    const unwitnessed = entry.partStates.filter((p) => p.state === "証拠なし").length;
-    const depth = entry.partStates.length - done;
-    countable.push({ block: entry.block, depth });
-    byParts.push({ block: entry.block, depth, done, unwitnessed });
+  if (
+    entry.state === "部分的" &&
+    (entry.remainingItems !== undefined || entry.partStates !== undefined)
+  ) {
+    // cycle 45 step 1: **両方を持つ欄はどちらも数える。**
+    // 以前はどちらか一方しか数えていなかったので、部で切られた欄に
+    // 「部ではない残り」を書き足しても段数に出なかった（実測で 4 欄・13 段が漏れていた）。
+    const itemDepth = entry.remainingItems?.length ?? 0;
+    let partDepth = 0;
+    if (entry.partStates !== undefined) {
+      const done = entry.partStates.filter((p) => p.state === "済み").length;
+      const unwitnessed = entry.partStates.filter((p) => p.state === "証拠なし").length;
+      partDepth = entry.partStates.length - done;
+      byParts.push({ block: entry.block, depth: partDepth, done, unwitnessed });
+    }
+    countable.push({ block: entry.block, depth: itemDepth + partDepth });
   } else {
     uncountable.push(entry.block);
   }

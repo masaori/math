@@ -325,10 +325,15 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "数列の側の `IsPeriodMod` で述べた（内容は同じである）。" +
       "**残りは 2 つである**——全ての $k$ で破れる形（反例が示すのはしきい値をこれ以上下げられないことまでで、" +
       "$k$ ごとに破れるかは $S$ に依る。この $S$ では $k=1$ では破れていない）と、" +
-      "一般の $T$ についての配線（Gram 行列が $(\\operatorname{Tr}T^{i+j})$ であることを、この file では数値で与えている）。",
+      "一般の $T$ についての配線（Gram 行列が $(\\operatorname{Tr}T^{i+j})$ であることを、この file では数値で与えている）。" +
+      "**cycle 45 step 1 の全数の数え直しで、この欄が名指ししながら数えていなかった事柄が 1 つ見つかった**——" +
+      "上の「$g_m$ を付値の最小として構成する段は書いておらず」がそれである。" +
+      "散文は cycle 40 からこれを名指ししていたが、残り項目の配列には入っていなかった。" +
+      "**残りは 3 つである。**",
     remainingItems: [
       "全ての $k$ で破れる形",
       "一般の $T$ についての配線",
+      "$g_m$ を付値の最小として構成する段",
     ],
   },
   {
@@ -549,9 +554,13 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "分解体で根を取り出す道は採らず、対数微分の道を採る。" +
       "**それでもこの項目は閉じない。残っているのは道の長さである。そう書く**——" +
       "$A=1-XM$ に当てて $\\operatorname{adj}(1-XM)$ を形式冪級数へ開く段と、" +
-      "係数を取り出して初期値 $\\operatorname{Tr}(M^{k})$（$2\\le k<r$）を読む段の 2 つが残る。",
+      "係数を取り出して初期値 $\\operatorname{Tr}(M^{k})$（$2\\le k<r$）を読む段の 2 つが残る。" +
+      "**cycle 45 step 1 の全数の数え直しで、この欄の数え方を直した**——" +
+      "散文はこの 2 つを名指ししているのに、残り項目の配列は「初期値の側」1 つとして数えていた。" +
+      "2 つに分けて数える。**残りは 4 件である。**",
     remainingItems: [
-      "残ったのは初期値の側である",
+      "$\\operatorname{adj}(1-XM)$ を形式冪級数へ開く段",
+      "係数を取り出して初期値 $\\operatorname{Tr}(M^{k})$（$2\\le k<r$）を読む段",
       "$w^*$ の等式を組み立てる段",
       "$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）",
     ],
@@ -653,7 +662,17 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`GeneralTowerClosedForm.lean` はさらに 定理 G2 の 1（Galois 不変性。配線）・定理 G2 の 3（配線）・" +
       "$A_{\\mathrm{gen}}$ の $L$ 非依存性・Matrix–Tree 定理を挙げている。" +
       "**cycle 34 step 5 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——(G′1) と (G′2) は、この欄が 1 度も触れていなかった。どちらも未形式化である。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。" +
+      "**cycle 45 step 1 の全数の数え直しで、この欄が名指ししながら数えていなかった事柄が 4 つ見つかった**——" +
+      "上に挙がっている 定理 X の付値計算そのもの・定理 G2 の 1・定理 G2 の 3・$A_{\\mathrm{gen}}$ の $L$ 非依存性 である。" +
+      "**いずれも本文の部（(G′1)(G′2)(G′3)）ではないので、部の勘定からは漏れていた。** " +
+      "残り項目として数える（Matrix–Tree 定理と指標分解はそれぞれ cycle 37・cycle 39 で閉じたので数えない）。",
+    remainingItems: [
+      "定理 X の付値計算そのもの",
+      "定理 G2 の 1（Galois 不変性",
+      "定理 G2 の 3（配線）",
+      "$A_{\\mathrm{gen}}$ の $L$ 非依存性",
+    ],
     partStates: [
       { part: "G′1", state: "残り", why: "消滅深度が無限大になる軌跡。Newton 多面体の辺方向へ落とす段が未形式化" },
       { part: "G′2", state: "残り", why: "段階的処理による点ごとの付値。未形式化" },
@@ -781,7 +800,17 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`TowerTypeCoefficients.lean` は (a) 定理 J7 の主張そのもの" +
       "（$b=\\sum_{P\\in S_\\infty}j^*(P)$。形式冪級数・Hasse 微分・$\\mathbb{Z}_\\ell$ 冪の**配線**が要る。" +
       "`PowerSeries` も二項冪級数も mathlib に在る）と " +
-      "(b) $\\Theta_{M'}$ から $M'\\ell^{M'}$ の係数を読み取る段の一般形（$O$ 記法を型にしていない）を挙げている。",
+      "(b) $\\Theta_{M'}$ から $M'\\ell^{M'}$ の係数を読み取る段の一般形（$O$ 記法を型にしていない）を挙げている。" +
+      "**cycle 45 step 1 の全数の数え直しで、この欄が名指ししながら数えていなかった事柄が 4 つ見つかった**——" +
+      "系 Q7 の $r=2$ そのもの・命題 J2′ の同値・定理 J7 の主張そのもの・" +
+      "$\\Theta_{M'}$ から $M'\\ell^{M'}$ の係数を読み取る段の一般形 である。" +
+      "**いずれも本文の部（(J1)〜(J6)）ではないので、部の勘定からは漏れていた。** 残り項目として数える。",
+    remainingItems: [
+      "系 Q7 の $r=2$ そのもの",
+      "命題 J2′ の同値",
+      "定理 J7 の主張そのもの",
+      "$\\Theta_{M'}$ から $M'\\ell^{M'}$ の係数を読み取る段の一般形",
+    ],
     partStates: [
       { part: "J1", state: "済み", witness: "j1_freshman_dream" },
       { part: "J1′", state: "済み", witness: "cexDigit_fails" },
@@ -801,7 +830,15 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**cycle 34 step 3 の照合で、`SInfinityDecision.lean` が挙げている 3 件を足す**——補題 W2 の (iv)、定理 W4 の主張そのもの、系 W7。" +
       "**cycle 34 step 5 の照合で足す**——本文の (K7) は、この欄が 1 度も触れていなかった。未形式化である。" +
       "**cycle 41 step 2 で (K6) の 証拠なし を解いた。結果は 残り である。そう書く**——" +
-      "内容は Cuoco–Monsky の係数そのもので、その外部定理は 未着手 である。",
+      "内容は Cuoco–Monsky の係数そのもので、その外部定理は 未着手 である。" +
+      "**cycle 45 step 1 の全数の数え直しで、この欄が名指ししながら数えていなかった事柄が 3 つ見つかった**——" +
+      "補題 W2 の (iv)・定理 W4 の主張そのもの・系 W7 である。" +
+      "**いずれも本文の部（(K1)〜(K7)）ではないので、部の勘定からは漏れていた。** 残り項目として数える。",
+    remainingItems: [
+      "補題 W2 の (iv)",
+      "定理 W4 の主張そのもの",
+      "系 W7",
+    ],
     partStates: [
       { part: "K1", state: "残り", why: "対応の主張は未形式化" },
       { part: "K2", state: "残り", why: "(iii) ⇒ (iv) は書いたが逆向きが未形式化（`SInfinityDecision.lean` の残り一覧がそう書いている）" },
@@ -887,7 +924,16 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（定理 G1 へ $\\alpha=\\gamma=0$・$\\beta=A_\\mathrm{gen}$ を入れた形が本文の式と一致し、" +
       "$c=\\Theta_L/\\varphi(\\ell^{L})$ は `corollary_G6_c_as_Theta` が与える）。" +
       "(M1) は規約（$v_\\ell(0)=+\\infty$）だけが形式化されており、層のどの点でも段データが同じであることは未形式化である。" +
-      "(M5) は条件 2 の根拠（望遠鏡和と境界）だけで、$M^{*}$ の 5 条件をまとめた主張は未形式化である。",
+      "(M5) は条件 2 の根拠（望遠鏡和と境界）だけで、$M^{*}$ の 5 条件をまとめた主張は未形式化である。" +
+      "**cycle 45 step 1 の全数の数え直しで、この欄が名指ししながら数えていなかった事柄が 2 つ見つかった**——" +
+      "定理 G2 の 1（Galois 不変性）と 系 Q7 の $r=2$ である。" +
+      "**どちらも本文の部（(M1)〜(M6)）ではないので、部の勘定からは漏れていた。** " +
+      "残り項目として数える（同じ照合が挙げていた voltage グラフのラプラシアン行列式は " +
+      "cycle 37・cycle 39 で閉じたので数えない）。",
+    remainingItems: [
+      "定理 G2 の 1",
+      "系 Q7 の $r=2$",
+    ],
     partStates: [
       { part: "M1", state: "残り", why: "cycle 41 step 2 で中を見て決めた。形式化されているのは規約（$v_\ell(0)=+\infty$。`Cycle25Corrections.lean`）だけで、(M1) の主張——深さ $k$ の層のどの点でも $(\mathcal{V}_k,\theta^\sharp_k,m^\sharp_k)$ が同じであること（Galois 共役と $\ell$ の上の素点が 1 つであること）——は未形式化である" },
       { part: "M2", state: "済み", witness: "lambda_u_eq_succ_log" },
