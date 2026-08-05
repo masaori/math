@@ -262,14 +262,6 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   },
   {
     file: "structured-latex/tools/formalization-coverage.ts",
-    reference: "Mathlib/RingTheory/Discriminant.lean",
-    reason:
-      "mathlib のファイル。cycle 47 step 1 の実測で、`Algebra.discr_powerBasis_eq_norm` が" +
-      "分離的な体拡大を要求する（したがって本文の場合には当たらない）ことの根拠として挙げている。",
-    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
-  },
-  {
-    file: "structured-latex/tools/formalization-coverage.ts",
     reference: "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
     reason:
       "mathlib のファイル。cycle 46 step 3 の実測で、Noether 局所環の $\\mathfrak m$ 進完備化が" +
@@ -331,14 +323,6 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     reason:
       "mathlib のファイル。cycle 44 step 2 の実測で、$\\prod_{k=1}^{L-1}(1-\\zeta^{k})=L$ が**在る**こと" +
       "（`IsPrimitiveRoot.prod_one_sub_pow_eq_order`）の根拠として宣言行を直読した先である。",
-    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
-  },
-  {
-    file: "structured-latex/tools/formalization-coverage.ts",
-    reference: "Mathlib/RingTheory/AdjoinRoot.lean",
-    reason:
-      "mathlib のファイル。cycle 44 step 1 の実測で、成分への射影が**在る**こと" +
-      "（`AdjoinRoot.algHomOfDvd`）の根拠として宣言行を直読した先である。",
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {

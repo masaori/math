@@ -71,6 +71,11 @@ $\mathbb{R}$ へ 1 度も出ない。使うのは多項式の整除・微分・�
   形は $w^*=0\iff p\nmid\det G$ を経由するはずで、そのためには
   $\det G$ が単因子の積であること（整数行列の Smith 標準形）が要る。
   **これは mathlib に無いと実測されている側である**（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。
+  **cycle 45 step 2 で測ると、Smith 標準形は要らなかった**（`PropCWStarZero.lean`。
+  余因子行列で $w^*=0\iff p\nmid\det G$ が出る）。
+  **cycle 48 step 1 で同値そのものを組み立てた**
+  （`PropCResultantNorm.wStar_eq_zero_iff_separable_and_not_dvd`）。
+  **いまは残りではない。そう書く。**
 * **本文の整数行列 $(\operatorname{Tr}T^{i+j})$ との同定。**
   段 5 の $G$ は代数のトレースで書いた Gram 行列である。2 つが同じ行列であることは
   命題 W\* の残り（Newton の公式の初期値）の側であって、本 step の内容ではない

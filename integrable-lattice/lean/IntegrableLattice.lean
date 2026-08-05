@@ -88,5 +88,6 @@ import IntegrableLattice.WStarGramAssembly
 import IntegrableLattice.PropCDiscSeparable
 import IntegrableLattice.PropTMixedWitness
 import IntegrableLattice.PropCDiscrIdentification
+import IntegrableLattice.PropCResultantNorm
 import IntegrableLattice.PropJ2PrimePolarization
 import IntegrableLattice.LatticeSegmentLength

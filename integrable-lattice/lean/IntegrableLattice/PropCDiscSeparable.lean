@@ -63,7 +63,9 @@ $\mathbb{R}$ へ 1 度も出ない。扱うのは $\mathbb{Z}[x]$ と $\mathbb{F
   Sylvester 行列式の定義元と Weierstrass 曲線の 2 本だけで、`Algebra.discr` と結ぶ宣言は無い。
   `Algebra.discr_powerBasis_eq_norm` は在るが分離的な体拡大を要求するので、
   $\rho\bmod p$ が分離的でない側には当たらない）。
-  **したがって 命題 C′ はまだ完了しない。残りは 2 つの判別式の同定 1 件である。**
+  **cycle 47 step 1 と cycle 48 step 1 でその同定を書いた**
+  （`PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative` と
+  `PropCResultantNorm.algebra_discr_eq_polynomial_discr`）。**いまは残りではない。そう書く。**
 -/
 import Mathlib
 import IntegrableLattice.PropCWStarZero

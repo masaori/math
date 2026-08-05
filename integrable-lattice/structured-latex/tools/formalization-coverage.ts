@@ -170,179 +170,55 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
     block: "paper_043b_theorem_trace_bound",
     state: "部分的",
     remaining:
-      "cycle 29 で上界の主張そのものを組み立てた（TracePeriodAssembly.lean の tracePeriod_propC_bound）。" +
-      "$\\pi_{\\mathrm{tr}}(p,k)\\mid p^{k-1}\\pi_{\\mathrm{tr}}(p,w^*+1)$ を、" +
-      "$k>w^*+1$ では梯子の反復から、$k\\le w^*+1$ では単調性から出す形で書いてある。" +
-      "その途中で、人手証明が暗黙に使っていた「最小周期は任意の周期を割る」を独立に証明した。" +
-      "cycle 29 step 3 で $w^*$ の定義そのものが入った（WStarElementaryDivisors.lean）。" +
-      "**step 1 の仕分けが「素材が無い」と判定したのは誤りだった。** " +
-      "整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は確かに mathlib に無いが" +
-      "（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29.log` の「整数行列の Smith 標準形」の段。" +
-      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、連結語 `Matrix.smithNormalForm` 0 件・" +
-      "語幹 `smith normal` 3 件。**cycle 29 step 1 以来「`Ideal.smithCoeffs` の整除補題そのものを" +
-      "名指しで走った走査は残っていない」と書かれていたが、cycle 41 step 4 で走らせて塞いだ**——" +
-      "`smithCoeffs` は 3 ファイルに在るが、その係数のあいだの整除を述べる宣言は無く、" +
-      "`invariantFactor` も 0 件である（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
-      "**鎖が無いという判定は変わらないが、根拠が読みから実測へ移った**）、" +
-      "$w^*$ を取り出すのに鎖は要らない——" +
-      "適合基底（`Ideal.smithNormalForm` が返す形）の係数の $p$ 進付値の最大値として書け、" +
-      "それが $\\min\\{j:\\ p^jA\\subseteq\\eta A\\ (p\\ \\text{の外で})\\}$ に等しいことを証明した" +
-      "（isLeast_isPLevel / isLeast_isPLevel_ideal）。$w^*=0$ の判定も入った" +
-      "（wStarOfCoeffs_eq_zero_iff。ただし本文の「$\\rho\\bmod p$ が分離的かつ $p\\nmid m_\\lambda$」" +
-      "への翻訳は入っていない）。" +
-      "残るのは 2 つ。(1) 本文が $w^*$ を Gram 行列 $G$ の側で定義していること——" +
-      "$G$ の単因子が $A/\\eta A$ の不変量に等しいという同一視は、" +
-      "体の上では行列の等式 $C\\,G=M_\\eta$ と $(\\det C)^2=1$ として入ったが" +
-      "（命題 W\\* の欄を見よ）。**cycle 36 step 5 でこの欄を構造化したときに、ここが古いことが分かった**——整数への降下そのものは cycle 30 step 1 で入っており（`WStarIntegralDescent.lean`）、cycle 36 step 1 は可約な場合の降下も書いた（`WStarReducibleDescent.lean`）。**残っているのはその降下を命題 C′ のトレース列の周期の主張へ結ぶ段である**（命題 C″ と同じ壁）。**cycle 37 step 3 でその段を書いた**（`TracePeriodWStarLift.lean` の `dvd_of_mulVec_dvd_of_isPLevel`）——本文の「$Gb\\equiv0\\ (p^k)$ から $b\\equiv0\\ (p^{k-w^*})$」がそれである。**cycle 19 から「整数行列の Smith 標準形が mathlib に無い」を理由に仮定として型に出したままだった段だが、行列の単因子は要らなかった**——$G$ の像について `IsPLevel`（$p$ の外での包含の最小レベル）だけを使えばよく、それは `isLeast_isPLevel` が部分加群の適合基底から与えている。`IsPLevel` を単位ベクトルへ当てると各 $i$ で $G y_i=m_i p^{w}e_i$ が出るので、$m=\\prod_i m_i$ で係数を揃えると行列の等式 $G\\,Y=(m\\,p^{w})I$ になり（`exists_mul_eq_smul_one_of_isPLevel`）、$\\det G\\neq0$ なら左右を入れ替えられる。**したがってこの主張の残りは 1 つである。**" +
-      "(2) $\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$ の" +
-      "重複度の積の形（ノルムの形 $\\det G=\\pm N(\\eta)$ は cycle 41 step 1 で入った）。" +
-      "**cycle 42 step 1 で、判別式の形そのものは入った**（`WStarGramDiscriminant.lean` の " +
-      "`det_weightedGram_eq_norm_mul_discr`）——重み $\\mu$ の Gram 行列は $\\mu$ 倍写像の行列の転置と " +
-      "重み無しの Gram 行列の積なので、行列式を取ると $\\det G=N(\\mu)\\cdot\\operatorname{disc}(\\rho)$ に" +
-      "分かれる（`weightedGram_eq_leftMulMatrix_transpose_mul`）。**符号は付かない**——" +
-      "cycle 41 の $\\pm N(\\eta)$ の $\\pm$ は $\\rho'(\\theta)$ のノルムとともに判別式の側へ吸われる。" +
-      "ここでいう $\\operatorname{disc}(\\rho)$ は冪基底のトレース形式の Gram 行列式（`Algebra.discr`）で、" +
-      "モニックな $\\rho$ についての本文の意味である。**モニック性も $\\theta$ が根であることも使わない**——" +
-      "要るのは基底が $\\theta$ の冪であることだけである。" +
-      "**$\\rho$ が既約な場合（本文が「とくに」と書いている場合）は重複度の積の形まで入った**" +
-      "（`det_weightedGram_of_scalar_mu`。$\\mu$ が定数 $a$ なので $N(\\mu)=a^{\\,r}$ であり、" +
-      "$r=\\deg\\rho$ が根の個数なのでこれが $\\prod_\\lambda m_\\lambda$ である）。" +
-      "**残っているのは可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$ である。そう書く**——" +
-      "$\\mu$ は成分 $K_i$ の上で $a_i$ をとる元なので $N(\\mu)=\\prod_i a_i^{\\deg f_i}$ が要り、" +
-      "そのためには $A_\\mathbb{Q}\\cong\\prod_i K_i$ の分解が要る。" +
-      "**2026-08-05 実測**: 中国剰余定理は環同型としては在るが" +
-      "（`Ideal.quotientInfRingEquivPiQuotient`、5 ファイル）、" +
-      "代数としての同型と、直積代数のノルムを因子のノルムの積へ分ける宣言は mathlib に無い" +
-      "（`Algebra.norm` と `Pi` を結ぶ宣言 0 件）。**配線ではなく素材が要る。**" +
-      "**併せて `Algebra.discr` と `Polynomial.discr` の一致は述べていない**——" +
-      "本文が言っているのは Gram 行列式の側であり、終結式で書く側は使っていないので、" +
-      "これは本主張の残りではない。" +
-      "上界の証明で $w^*$ が果たす役割は仮定として型に出してある。" +
-      "**cycle 43 step 1 でその素材を書いた**（`ProductAlgebraNorm.lean`）。" +
-      "**素材が要るという判定は当たっていた。当ててみて変わったのは残りの中身である。そう書く**——" +
-      "直積代数のノルムが成分のノルムの積になること（`norm_pi_fin`）と、" +
-      "中国剰余定理の代数版（`quotientInfAlgEquivPiQuotient`）を書いた。" +
-      "**トレースの側は mathlib に在り、ノルムの側だけが無かった**（2026-08-05 実測。" +
-      "`Algebra.trace_prod_apply` は在るが、同じ形のノルムの宣言は 1 件も無い）。" +
-      "行列の側から降りる道は塞がっている——`Matrix.det_blockDiagonal` は添字が全成分で共通の場合しか無く、" +
-      "成分ごとに次数が違う場合（`Matrix.blockDiagonal'`）の行列式の宣言が無いからである。" +
-      "そこで行列を経由せず、二成分の直積（`LinearMap.det_prodMap`）から成分数の帰納法で伸ばした。" +
-      "**それでもこの主張は完了しない。残りは 1 段のままで、中身が入れ替わった。そう書く**——" +
-      "残っているのは、本文の $\\mathbb{Q}[x]/(\\rho)$ を互いに素なイデアルの族へ当てる配線である" +
-      "（$\\rho$ の相異なる既約因子が生成するイデアルが対ごとに互いに素であることと、" +
-      "$\\mu$ が成分ごとに定数をとる元であることの同定）。**素材ではなく配線になった。**" +
-      "**cycle 43 step 2 でその配線を書いた**（`PropCCrtWiring.lean`）。" +
-      "相異なるモニック既約多項式が対ごとに互いに素であること（`pairwise_isCoprime_of_irreducible`）、" +
-      "その共通部分が積の生成するイデアルであること（`iInf_span_eq_span_prod`）、" +
-      "したがって $K[x]/(\\rho)\\cong\\prod_i K[x]/(f_i)$ が $K$ 代数の同型であること" +
-      "（`quotientProdAlgEquiv`）、各成分の階数が因子の次数であること（`finrank_quotient_span`）、" +
-      "そして本文の等式 $N(\\mu)=\\prod_i a_i^{\\deg f_i}$（`norm_eq_prod_pow_natDegree`）である。" +
-      "**可約な場合の重複度の積の形はこれで入った。** " +
-      "**それでもこの主張は完了しない。段数は 1 段のまま、中身がまた入れ替わった。そう書く**——" +
-      "残っているのは、成分への射影で $\\mu$ の像が $a_i$ であることの同定である。" +
-      "**`WStarMuGram.lean` が持っているのは $\\chi'/h\\equiv a_i\\,\\rho'\\pmod{f_i}$ という" +
-      "多項式の合同までで、射影を経由した像の等式は書いていない**" +
-      "（2026-08-05 に同ファイルを直読して確かめた。同ファイルの段 3 自身が" +
-      "「成分 $K_i$ での $\\mu$ の像そのものを $a_i$ と書く形にはしていない」と書いている）。" +
-      "**cycle 44 step 1 でその同定を書いた**（`PropCMuComponent.lean`）。" +
-      "**着手して測ると、要るものは 2 つに分かれ、片方は mathlib に在った。そう書く**——" +
-      "射影そのものは在り（`AdjoinRoot.algHomOfDvd`、`Mathlib/RingTheory/AdjoinRoot.lean` 456 行。" +
-      "2026-08-05 実測、mathlib `520045ab14` の 8264 ファイル）、自分で作る必要は無かった。" +
-      "無かったのは合同から像の等式へ渡るところで、渡るのに要るのは射影ではなく " +
-      "$\\rho'(\\theta_i)$ が $K_i$ の単元であることである" +
-      "（`WStarMuGram` の段 1 は $\\rho$ 自身の根についてしか言っていない）。" +
-      "書いたのは 5 段で、根における微分の値の単元性（`isUnit_aeval_derivative_of_root`）、" +
-      "射影を多項式の値へ当てる段（`algHomOfDvd_aeval_root` / `algHomOfDvd_mk`）、" +
-      "**像の同定そのもの**（`algHomOfDvd_mu_eq_multiplicity`）、" +
-      "中国剰余の同型の第 $i$ 成分がその射影であること" +
-      "（`quotientProdAlgEquiv_apply_eq_algHomOfDvd`）、そして仮定を落とした本文の等式" +
-      "（`norm_mu_eq_prod_pow_natDegree` と " +
-      "`det_weightedGram_mu_eq_prod_pow_mul_discr`。**重みは仮定ではなく本文の構成で与えられる**）である。" +
-      "**着手前に見込んでいた型の橋は要らなかった**——商の側の書き換えを先に済ませてから " +
-      "`AdjoinRoot` の側へ移れば繋がる。" +
-      "**それでもこの主張は完了しない。段数も 1 段のまま、中身が入れ替わった。そう書く**——" +
-      "残っているのは、本文の $w^*=0$ が「$\\rho\\bmod p$ が分離的、かつ全ての重複度で " +
-      "$p\\nmid m_\\lambda$」と同値であることの翻訳である。" +
-      "**これは本欄の散文が cycle 29 以来「入っていない」と名指ししていたのに、" +
-      "残り項目としては 1 度も数えられていなかった事柄である**" +
-      "（`wStarOfCoeffs_eq_zero_iff` が与えるのは「適合基底の係数がどれも $p$ で割れない」" +
-      "という別の判定である。2026-08-05 に同ファイルを直読して確かめた）。" +
-      "**名指しはされていたが数えられていなかったので、数が動かないまま残っていた。そう書く。** " +
-      "形は $w^*=0\\iff p\\nmid\\det G$ を経由するはずで、そのためには " +
-      "$\\det G$ が単因子の積であること（整数行列の Smith 標準形）が要る。" +
-      "**それは mathlib に無いと実測されている側である**" +
-      "（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
-      "**cycle 45 step 2 でその道を測った。Smith 標準形は要らなかった**（`PropCWStarZero.lean`）——" +
-      "$p\\nmid\\det G$ なら余因子行列が $\\det G$ 倍の逆を与えるので像は $p$ の外で全体を含み" +
-      "（`isPLevel_zero_of_not_dvd_det`）、逆にレベルが $0$ なら $G\\,Y=m\\,I$（$p\\nmid m$）の" +
-      "行列式を取れば $p\\nmid\\det G$ が出る（`not_dvd_det_of_isPLevel_zero`）。" +
-      "**単因子の積という順序づけられた不変量には 1 度も触れない。** " +
-      "これで $w^*=0\\iff p\\nmid\\det G$（`wStar_eq_zero_iff_not_dvd_det`）と、" +
-      "$\\det G$ が積の形をしているときの $p$ 進の条件の分解" +
-      "（`wStar_eq_zero_iff_of_det_factorization`）が入った。" +
-      "**「Smith 標準形が無いから書けない」という cycle 44 の記録は、" +
-      "「無い」という判定は正しく、「だから書けない」という推論が誤りだった。** " +
-      "**残っているのは $p\\nmid\\operatorname{disc}(\\rho)$ と「$\\rho\\bmod p$ が分離的」の同値だけである**" +
-      "（2026-08-05 実測。mathlib の `Algebra.discr` についての宣言は " +
-      "`discr_not_zero_of_basis` / `discr_isUnit_of_basis` のようにいずれも分離的な体拡大を" +
-      "仮定として要求する形で、逆向き——判別式が $0$ でなければ分離的——を述べた宣言も、" +
-      "`Algebra.discr` の係数環の取り替えを述べた宣言も無い）。" +
-      "**したがってこの主張の残りは 1 つである。**" +
-      "**cycle 46 step 2 でその同値を書いた。この主張は完了である。そう書く**（`PropCDiscSeparable.lean`）。" +
-      "**cycle 45 step 2 の「素材の側である」という判定は誤りだった。素材は在った。そう書く**——" +
-      "本文の $\\operatorname{disc}(\\rho)$ は $\\rho$ という**多項式の判別式**であって、" +
-      "基底のトレース形式の判別式（`Algebra.discr`）ではない。" +
-      "多項式の側には一式が在る（`Polynomial.discr`・`resultant_deriv`・" +
-      "`isUnit_resultant_iff_isCoprime`・`resultant_map_map`。2026-08-05 実測）。" +
-      "**引いた語で見えるものは正しく見えていたが、要るものはその語では引けない場所に在った**——" +
-      "cycle 40・41 と同じ形で、「書けない理由」の記録が誤りだった件はこれで 13 件目になる。" +
-      "書いたのは 3 段で、体の上で「分離的 $\\iff$ 判別式が $0$ でない」" +
-      "（`separable_iff_discr_ne_zero`。モニックで次数が正なら成り立つ。" +
-      "微分の次数は体によって落ちうるので、終結式の次数を $\\deg\\rho-1$ へ揃える段が要る）、" +
-      "判別式が還元と交換すること（`discr_map_of_monic`）、" +
-      "そして本文の同値（`separable_map_iff_not_dvd_discr`）である。" +
-      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも出ない——扱うのは $\\mathbb{Z}[x]$ と " +
-      "$\\mathbb{F}_p[x]$ の多項式と、係数の多項式である終結式・判別式だけである。" +
+      "命題 C′ は cycle 29 から cycle 48 まで 20 サイクル積み上げた。" +
+      "上界の主張そのもの（`TracePeriodAssembly.lean` の tracePeriod_propC_bound）、" +
+      "$w^*$ の定義（`WStarElementaryDivisors.lean`）、$w^*=0$ の判定" +
+      "（`PropCWStarZero.lean` の wStar_eq_zero_iff_not_dvd_det）、" +
+      "$\\rho\\bmod p$ の分離性との同値（`PropCDiscSeparable.lean`）、" +
+      "$\\det G$ の分解（`WStarGramDiscriminant.lean`・`ProductAlgebraNorm.lean`・" +
+      "`PropCCrtWiring.lean`・`PropCMuComponent.lean`）、そして最後に " +
+      "2 つの判別式（冪基底のトレース形式の Gram 行列式 `Algebra.discr` と" +
+      "多項式の判別式 `Polynomial.discr`）の同定が入った。" +
+      "**同定は 2 段に分かれ、cycle 47 step 1 が判別式とノルムの関係を" +
+      "分離性も体も使わずに書き（`PropCDiscrIdentification.lean` の " +
+      "discr_eq_sign_mul_norm_derivative）、cycle 48 step 1 が終結式とノルムの同定を書いた**" +
+      "（`PropCResultantNorm.lean` の norm_aeval_eq_resultant / " +
+      "algebra_discr_eq_polynomial_discr）。" +
+      "**この最後の段は mathlib に無かった**（2026-08-05 実測、" +
+      "`lean/logs/mathlib-gap-survey-cycle48-resultant-norm.log`。" +
+      "走査 script は `lean/scripts/mathlib-gap-survey-cycle48-resultant-norm.sh`。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、" +
+      "「終結式と剰余環のノルムの同定」は 3 段とも 0 件、" +
+      "`Algebra.discr` と `Polynomial.discr` を結ぶ連結語も 0 件である。" +
+      "**語幹で 1 件当たるが、当たっているのは終結式の章そのもの**なので、" +
+      "同じ script でその章を宣言行で直読した——`Algebra.norm` の出現は 0 件である。根の像の積として述べた " +
+      "`resultant_eq_prod_roots_sub` は $\\rho$ が分解することを要求するので " +
+      "$\\mathbb{Z}[x]$ の側には当たらない）。道具の側（`sylvesterMap` と " +
+      "`Polynomial.modByMonic`）は在り、cycle 47 が見立てた道——モニック除法で " +
+      "Sylvester 写像をブロック三角にする——はそのまま通った。" +
+      "**ただし途中で 1 つ、mathlib に無いものが出た**——モニック除法の**商**が $R$ 線形であること" +
+      "（同じ実測。`divByMonicHom` は 3 段とも 0 件で、宣言行を直読すると " +
+      "`divByMonic` について在るのは次数の補題と写像の可換性だけであり、" +
+      "加法性・スカラー倍を述べたものは無い。余りの側 `Polynomial.modByMonicHom` だけが在る）。" +
+      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも出ない（$\\rho$ の根を 1 度も使わない）。" +
+      "なお単因子の整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は mathlib に無いままだが" +
+      "（`Ideal.smithCoeffs` は在るが係数どうしの整除を述べた宣言は無い）、" +
+      "**cycle 45 step 2 でそれを要さない道が見つかっているので、$w^*=0$ の判定には要らなかった。**" +
       "**それでもこの主張は完了しない。書いてみて、外側に段が 1 つ現れた。そう書く**——" +
-      "本文の $\\det G=\\operatorname{disc}(\\rho)\\prod_\\lambda m_\\lambda$ の $\\operatorname{disc}(\\rho)$ は" +
-      "**冪基底のトレース形式の Gram 行列式**（`Algebra.discr`）として Lean 側に入っており" +
-      "（`WStarGramDiscriminant.lean`）、本 step が書いた同値は**多項式の判別式**" +
-      "（`Polynomial.discr`）についてである。**2 つが等しいことは mathlib に無い**" +
-      "（2026-08-05 実測。`Polynomial.discr` を参照しているのは Sylvester 行列式の file と" +
-      "Weierstrass 曲線の file の 2 本だけで、`Algebra.discr` と結ぶ宣言は無い。" +
-      "`Algebra.discr_powerBasis_eq_norm` は在るが分離的な体拡大を要求する）。" +
-      "**したがって残りは 1 件である**——" +
-      "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定 である。" +
-      "**書いた段の外側に段が現れたのは 8 サイクル目である。そう書く。**" +
-      "**cycle 47 step 1 でその同定の半分を書き、残りの中身が入れ替わった。そう書く**" +
-      "（`PropCDiscrIdentification.lean`。宣言 3 件）。" +
-      "**まず掲げた焦点どおり `Algebra.discr_powerBasis_eq_norm` が当たるかを測った。当たらない**" +
-      "（2026-08-05 実測。`Mathlib/RingTheory/Discriminant.lean` 201 行を直読すると " +
-      "`[Algebra.IsSeparable K L]` を要求し、$K,L$ が体であることも要求する。" +
-      "**$\\bar\\rho$ が分離的でない側こそが本文の主張の中身**なので使えない）。" +
-      "**そこで分離性も体も使わない道で書いた**——本プロジェクトが既に持っている " +
-      "Euler の双対基底（`EulerDualBasisCommRing.lean`）の $C\\,G=M_{\\rho'(\\theta)}$ の" +
-      "両辺の行列式を取れば、根にも分離性にも触れずに " +
-      "$\\operatorname{discr}_{A/R}(b)=(-1)^{r(r-1)/2}N(\\rho'(\\theta))$ が出る" +
-      "（`discr_eq_sign_mul_norm_derivative`。**mathlib の同名の定理の、体も分離性も要らない版である**）。" +
-      "そのために 2 つ書いた——反転の置換の符号 $(-1)^{r(r-1)/2}$（`sign_revPerm`。" +
-      "mathlib に無い。2026-08-05 実測で `revPerm` と `sign` を同時に含む宣言 0 件）と、" +
-      "Euler の係数行列の行列式の**符号そのもの**（`det_eulerHankel`。" +
-      "cycle 37 の `det_eulerHankel_sq` は $\\pm1$ までしか決めていなかった）である。" +
-      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも出ない（根を 1 度も使わない）。" +
-      "**それでもこの主張は完了しない。残りは 1 件のままで、中身が入れ替わった。そう書く**——" +
-      "残っているのは、モニックな $\\rho$ について " +
-      "$N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$ であること 1 件である" +
-      "（これと `Polynomial.resultant_deriv` を繋ぐと 2 つの判別式が一致する）。" +
-      "**2026-08-05 実測でその材料を測った**——mathlib の終結式の章に `Algebra.norm` は" +
-      "1 度も現れず、終結式を剰余環の乗法写像の行列式として述べた宣言は無い。" +
-      "終結式を根の像の積として述べた宣言（`resultant_eq_prod_roots_sub`）は在るが、" +
-      "$\\rho$ が分解することを要求するので $\\mathbb{Z}[x]$ の側には当たらない。" +
-      "**道具の側は在る**（`sylvesterMap` と `Polynomial.modByMonic`。" +
-      "$R[X]_{<m+n}$ をモニック除法で分解すると Sylvester 写像がブロック三角になり、" +
-      "対角ブロックが単位行列と $g$ 倍写像になる）ので、**ここは素材ではなく書く量のある段である。**",
+      "**本文は $w^*$ を「$G$ の最大単因子 $e_r$ の $p$ 進付値」と、単因子の鎖の言葉で定義している。** " +
+      "Lean 側の $w^*$（`WStarElementaryDivisors.wStarOfCoeffs`）は適合基底の係数の $p$ 進付値の" +
+      "最大値であり、鎖を経由しない。**2 つが同じ数であることは書いていない。** " +
+      "`TracePeriodWStarLift.lean` は cycle 37 からこれを残りとして挙げていたが、" +
+      "**この欄は 1 度も残り項目として数えていなかった**" +
+      "（cycle 45 step 1 が塞いだ数え落としとも、cycle 47 step 2 が見つけた経路とも違う——" +
+      "散文は単因子に触れており、検査 J も 検査 L も、欄が 完了 でない限り緑のままだった。" +
+      "**完了 と書いた瞬間に 検査 L が捕まえた。**そう書く）。" +
+      "鎖の存在そのものは整数行列の Smith 標準形であり、mathlib に無いと実測されている側である" +
+      "（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
+      "**したがってこの主張の残りは 1 件である**——" +
+      "本文が $w^*$ を単因子の鎖の言葉（最大単因子 $e_r$ の $p$ 進付値）で書いていることとの一致 である。",
     remainingItems: [
-      "$N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$ であること",
+      "本文が $w^*$ を単因子の鎖の言葉（最大単因子 $e_r$ の $p$ 進付値）で書いていることとの一致",
     ],
   },
   {

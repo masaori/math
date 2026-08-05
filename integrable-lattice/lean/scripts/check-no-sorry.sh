@@ -972,6 +972,21 @@ targets=(
   IntegrableLattice.PropCDiscrIdentification.sign_revPerm
   IntegrableLattice.PropCDiscrIdentification.det_eulerHankel
   IntegrableLattice.PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative
+  # 命題 C′ の終結式とノルムの同定（PropCResultantNorm.lean・cycle 48 step 1）
+  IntegrableLattice.PropCResultantNorm.add_divByMonic
+  IntegrableLattice.PropCResultantNorm.smul_divByMonic
+  IntegrableLattice.PropCResultantNorm.modByMonic_mem
+  IntegrableLattice.PropCResultantNorm.mul_degree_lt
+  IntegrableLattice.PropCResultantNorm.divByMonic_mem
+  IntegrableLattice.PropCResultantNorm.sylvesterMap_one_comp_triangularMap
+  IntegrableLattice.PropCResultantNorm.toMatrix_triangularMap
+  IntegrableLattice.PropCResultantNorm.resultant_eq_det_modMulMap
+  IntegrableLattice.PropCResultantNorm.aeval_eq_zero
+  IntegrableLattice.PropCResultantNorm.evalEquiv_apply_basis
+  IntegrableLattice.PropCResultantNorm.evalEquiv_eq_aeval
+  IntegrableLattice.PropCResultantNorm.norm_aeval_eq_resultant
+  IntegrableLattice.PropCResultantNorm.algebra_discr_eq_polynomial_discr
+  IntegrableLattice.PropCResultantNorm.wStar_eq_zero_iff_separable_and_not_dvd
   # 命題 J2′ の同値の代数の側（PropJ2PrimePolarization.lean・cycle 47 step 3）
   IntegrableLattice.PropJ2PrimePolarization.choose_two_add
   IntegrableLattice.PropJ2PrimePolarization.Bbar_eq_Abar_two_polarization

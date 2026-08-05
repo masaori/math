@@ -163,33 +163,9 @@ export function auditNamingCoverage(input: {
 export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
   {
     block: "paper_043b_theorem_trace_bound",
-    sentence: "ただし本文の「$\\rho\\bmod p$ が分離的かつ $p\\nmid m_\\lambda$」への翻訳は入っていない）。",
+    sentence: "**2 つが同じ数であることは書いていない。",
     kind: "残り",
-    why: "残り項目「本文の $w^*=0$ が…同値であることの翻訳である」がこの事柄そのものである（cycle 44 step 1 で数え直して項目へ入れた）",
-  },
-  {
-    block: "paper_043b_theorem_trace_bound",
-    sentence: "**cycle 19 から「整数行列の Smith 標準形が mathlib に無い」を理由に仮定として型に出したままだった段だが、行列の単因子は要らなかった**——$G$ の像について `IsPLevel`（$p$ の外での包含の最小レベル）だけを使えばよく、それは `isLeast_isPLevel` が部分加群の適合基底から与えている。",
-    kind: "済み",
-    why: "cycle 37 step 3 で書いた（`TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel`）。同じ段落の「したがってこの主張の残りは 1 つである」がその結論である",
-  },
-  {
-    block: "paper_043b_theorem_trace_bound",
-    sentence: "上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
-    kind: "済み",
-    why: "同上（`TracePeriodWStarLift.dvd_of_mulVec_dvd_of_isPLevel`）。上界の組み立てで $w^*$ が果たす役割はこの段が与える",
-  },
-  {
-    block: "paper_043b_theorem_trace_bound",
-    sentence: "**`WStarMuGram.lean` が持っているのは $\\chi'/h\\equiv a_i\\,\\rho'\\pmod{f_i}$ という多項式の合同までで、射影を経由した像の等式は書いていない**（2026-08-05 に同ファイルを直読して確かめた。",
-    kind: "済み",
-    why: "cycle 44 step 1 で書いた（`PropCMuComponent.algHomOfDvd_mu_eq_multiplicity`）",
-  },
-  {
-    block: "paper_043b_theorem_trace_bound",
-    sentence: "**これは本欄の散文が cycle 29 以来「入っていない」と名指ししていたのに、残り項目としては 1 度も数えられていなかった事柄である**（`wStarOfCoeffs_eq_zero_iff` が与えるのは「適合基底の係数がどれも $p$ で割れない」という別の判定である。",
-    kind: "対象外",
-    why: "この文は事柄を名指ししているのではなく、名指しと勘定が食い違っていたという経緯を書いている（指している事柄は残り項目そのもの）",
+    why: "残り項目「本文が $w^*$ を単因子の鎖の言葉（最大単因子 $e_r$ の $p$ 進付値）で書いていることとの一致」がこの事柄そのものである（cycle 48 step 1 で数え直して項目へ入れた）",
   },
   {
     block: "paper_046_theorem_wstar_different",

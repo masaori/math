@@ -75,13 +75,20 @@ $\mathbb{R}$ へ 1 度も出ない。使うのは有限自由加群のトレー�
   5 ファイル）、**代数としての同型ではなく、直積代数のノルムを因子のノルムの積へ分ける宣言は
   mathlib に無い**（`Algebra.norm` と `Pi` を結ぶ宣言 0 件）。
   **したがってここは配線ではなく素材が要る。そう書く。**
+  **cycle 43 step 1 でその素材を書き（`ProductAlgebraNorm.norm_pi_fin`）、
+  cycle 43 step 2・cycle 44 step 1 で配線した**（`PropCCrtWiring.norm_eq_prod_pow_natDegree` と
+  `PropCMuComponent.norm_mu_eq_prod_pow_natDegree`）。**いまは残りではない。そう書く。**
 * **`Algebra.discr` と `Polynomial.discr` の一致。**
   本文の $\operatorname{disc}(\rho)$ は前者の意味だが、多項式の判別式（終結式で書く側）と
   同じものであることは述べていない。**2026-08-05 実測**: mathlib の
   `Polynomial.discr`（`Mathlib/RingTheory/Polynomial/Resultant/Basic.lean` 930 行）は
   Sylvester 行列式で定義されており、`Algebra.discr` と結ぶ宣言は無い
-  （両者が同じファイルに現れることが 0 件）。**これは本主張の残りではない**——
-  本文が言っているのは Gram 行列式の側であり、終結式の形は使っていない。
+  （両者が同じファイルに現れることが 0 件）。
+  **cycle 46 step 2 の実測で、これは本主張の残りだと分かった**——
+  本文の $w^*=0$ の同値の側が、終結式で書く判別式を経由する。
+  **cycle 47 step 1 と cycle 48 step 1 で書いた**
+  （`PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative` と
+  `PropCResultantNorm.algebra_discr_eq_polynomial_discr`）。**いまは残りではない。そう書く。**
 -/
 import Mathlib
 import IntegrableLattice.EulerDualBasisCommRing

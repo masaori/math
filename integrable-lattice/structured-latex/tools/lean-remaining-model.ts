@@ -556,10 +556,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         witness: "dvd_of_mulVec_dvd_of_isPLevel",
       },
       {
+        // cycle 44 step 1（射影の同定）と cycle 48 step 1（$w^*=0$ の同値）で入った。
         leanFragment: "命題 C′ の $\\det G=\\operatorname{disc}",
-        kind: "未形式化",
-        ledgerFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
-        crossFilePhrase: "成分への射影で $\\mu$ の像が $a_i$ であることの同定",
+        kind: "形式化済み",
+        witness: "algHomOfDvd_mu_eq_multiplicity",
       },
       {
         leanFragment: "の最良性と",
@@ -899,16 +899,16 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの（実測つき）",
     items: [
       {
+        // cycle 43 step 1・2 と cycle 44 step 1 で入った。
         leanFragment: "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$",
-        kind: "未形式化",
-        ledgerFragment: "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$ である",
-        crossFilePhrase: "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$",
+        kind: "形式化済み",
+        witness: "norm_mu_eq_prod_pow_natDegree",
       },
       {
+        // cycle 47 step 1・cycle 48 step 1 で入った。
         leanFragment: "`Algebra.discr` と `Polynomial.discr` の一致",
-        kind: "未形式化",
-        ledgerFragment: "`Algebra.discr` と `Polynomial.discr` の一致は述べていない",
-        crossFilePhrase: "`Algebra.discr` と `Polynomial.discr` の一致",
+        kind: "形式化済み",
+        witness: "algebra_discr_eq_polynomial_discr",
       },
     ],
   },
@@ -987,10 +987,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 48 step 1 で組み立てた（部品は cycle 45・46 で揃っていた）。
         leanFragment: "が分離的、かつ全ての重複度で",
-        kind: "未形式化",
-        ledgerFragment: "同値であることの翻訳である",
-        crossFilePhrase: "$w^*=0$ が「$\\rho\\bmod p$ が分離的",
+        kind: "形式化済み",
+        witness: "wStar_eq_zero_iff_separable_and_not_dvd",
       },
       {
         leanFragment: "本文の整数行列 $(\\operatorname{Tr}T^{i+j})$ との同定",
@@ -1020,10 +1020,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 47 step 1・cycle 48 step 1 で入った。
         leanFragment: "本文の $\\operatorname{disc}(\\rho)$ が `Polynomial.discr` であること",
-        kind: "未形式化",
-        ledgerFragment: "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定",
-        crossFilePhrase: "2 つの判別式の同定",
+        kind: "形式化済み",
+        witness: "algebra_discr_eq_polynomial_discr",
       },
     ],
   },
@@ -1077,10 +1077,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
       {
         // 段 3 と `Polynomial.resultant_deriv` を繋ぐと 2 つの判別式が一致する。
         // その手前の 1 段（終結式が剰余環のノルムであること）が残っている。
+        // cycle 48 step 1 で書いた。命題 C′ はこれで閉じた。
         leanFragment: "N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$（モニックな $\\rho$ について）",
-        kind: "未形式化",
-        ledgerFragment: "$N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$ であること",
-        crossFilePhrase: "2 つの判別式の同定",
+        kind: "形式化済み",
+        witness: "norm_aeval_eq_resultant",
       },
     ],
   },
@@ -1157,10 +1157,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         crossFilePhrase: "整除の鎖との一致",
       },
       {
+        // cycle 44 step 1 で入った。
         leanFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定",
-        kind: "未形式化",
-        ledgerFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
-        crossFilePhrase: "命題 C′ に残るもう 1 つである",
+        kind: "形式化済み",
+        witness: "algHomOfDvd_mu_eq_multiplicity",
       },
     ],
   },

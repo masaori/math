@@ -475,6 +475,42 @@ cycle 19 はこの 3 点を step にする。
 | 7 | ユーザー方針の反映 | formalization_coverage_metric | done | 2026-08-03 | `outputs/reports/cycle27_ops_formalization_coverage.md` / `structured-latex/tools/{formalization-coverage,verify-formalization-coverage}.ts`（新設）＋ 本文（形式検証の到達点。日英）＋ `lean/README.md` ＋ `MEMORY.md` ＋ 本ファイル。`npm run check` は 24 → **25 段**。**ユーザー方針「論文の主張を全数 Lean 形式化することを目標とする」を正本へ記録し、現在の被覆を実測して毎サイクルの指標にした。** 実測: 主張（`theorem`/`claim`）**24 件**のうち **完了 5・部分的 14・未着手 5**、**全数まで残り 19 件**。**未着手 5 件のうち mathlib の欠落が理由なのは 3 件だけ**（命題 LSW と双対命題 D は多変数の Mahler 測度、命題 G は matrix-tree 定理）で、**残る 2 件（命題 W*・命題 F）はこちらの未着手**なので着手できる。**当初の判断を実測で訂正した**——台帳に「mathlib には Mahler 測度そのものが無い」と書きかけたが、3 段の引き方で実際に引いたら**在った**（連結語 3 件・語幹 5 件・ファイル名 3 件／8264 ファイル走査）。**欠けているのは多変数版**で、1 変数 $\mathbb{C}[X]$ と $\mathbb{Z}[X]$ の Mahler 測度は在り、**どちらも `MvPolynomial` を 1 度も使っていない**。「難しそう」を理由にしない規律は「無さそう」を理由にしないことも含む。**検査 F** は未形式化の件数と一件ずつの残り／理由を毎回印字し、(1) 主張が 1 つ残らず台帳にあること (2) 宣言が本文に実在すること (3) 完了・部分的は Lean の定理名を持つこと (4) 未着手は持たないこと (5) **宣言された定理名が `lean/` に実在すること**を確かめる。(5) を入れる過程で**紐づけが無いのに実際は形式化されていた主張を 3 件検出**（周期点数の終結式・命題 C′・命題 Q）し、紐づけを足した（16 → **19 件**、宣言 97 件すべて実在）。**本文は現在の被覆を数で述べ、全数形式化が目標である旨を書いた**（日英）。全数が達成されるまで「全主張を形式化した」とは書かない。検証: `npm run check`（**25 段**）exit 0、`build:pdf` 日 50 頁・英 64 頁。**限界**: 「完了」が本当に完了かは機械で確かめられない（人の判断）／**本文に書いた数と台帳の数が一致することは検査していない**（形式化が進めば本文が古くなる。cycle 28 へ送った）／命題 W* の「まだ調べていない」は調べれば変わりうる判定である。 |
 | 6 | — | rank:cycle27 | done | 2026-08-03 | 下記「cycle 27 総括」。掲げた 5 点はすべて潰れ、さらに**サイクルの途中でユーザーから 2 つの判断・指摘が入り、同じサイクル内で反映した**（step 4b・4c）。cycle 28 の焦点は 5 点。 |
 
+## cycle 48 step 列（2026-08-05 起こし。cycle 47 総括の「cycle 48 の焦点（案）」5 点を実測で裏取りして step にした）
+
+着手時に前提を一次情報で実測した（cycle 26 から数えて 23 サイクル目）。
+実測の結果、掲げられた 5 点はいずれも一次情報と一致した（前提の食い違い 0 件）。
+数はすべて機械に数えさせている（検査 F・検査 D の実出力）。人が書いた数を写した箇所は無い。
+実測値（すべて本サイクル着手時の実行出力）:
+
+- 焦点 0（全数形式化）: 検査 F の実出力で 本文の主張 24 件 / 台帳 24 件 / `lean/` の宣言 911 件、
+  完了 9・部分的 13・未着手 2、本文側の残り 15 件。外部定理は全 27 件で
+  自分で証明する 7 件（完了 4）・mathlib から引く 7 件・$\mathbb{R}$ 脱出として隔離する 2 件・
+  対象外 11 件、全数まで残り 18 件。状態ファイルの記載と一致する。
+- 焦点 1（命題 C′ の残り 1 段）: 一致する。残り項目は 1 件で、中身は
+  「$N_{A/R}(g(\theta))=\operatorname{Res}(\rho,g)$ であること」。
+- 焦点 2（命題 T の残り 1 段）: 一致する。検査 D の実出力で 命題 T は残り 1 段である。
+- 焦点 3（補題 W2 の (iv) の逆向き）: 一致する。命題 K の欄の残り項目に実在する。
+- 焦点 4（命題 W の積公式の段）: 一致する。命題 W は残り 3 段で、その 1 つである。
+- 焦点 5（段数の比較）: 検査 D の実出力で 数えられる欄 13 件・合計 57 段、
+  比べられる 5 件（命題 C′ 1・命題 N 3・命題 C″ 3・命題 T 1・命題 W 3）の合計は 11 段。
+  cycle 47 総括の数と一致する。
+
+**着手の順序は総括の焦点の順のままとした。** 理由は、焦点 1（命題 C′）が実測でいちばん完了に近く
+（残り 1 段）、**本サイクルの主目的が欄を実際に閉じることだからである。**
+
+**併せて、この作業ツリーには mathlib が無い状態から始めた**（worktree では gitignore された
+依存が無いのが正常な初期状態である）。別の作業ツリーの `.lake/packages` を複製して復旧してから
+着手した。**その結果、検査 F の「確かめられない — mathlib がこの作業ツリーに無い」が
+実際に走る状態になっている。**
+
+| # | track | step | status | done日 | 観察メモ |
+|---|------|------|--------|--------|----------|
+| 1 | ユーザー方針の反映 | propC_resultant_norm | done | 2026-08-05 | `lean/IntegrableLattice/PropCResultantNorm.lean`（新設・宣言 19 件）＋ `lean/IntegrableLattice.lean` ＋ `lean/scripts/check-no-sorry.sh` ＋ `lean/scripts/mathlib-gap-survey-cycle48-resultant-norm.sh`（新設）＋ `lean/logs/mathlib-gap-survey-cycle48-resultant-norm.log`（新設）＋ `lean/IntegrableLattice/{PropCDiscrIdentification,TracePeriodAssembly,WStarGramDiscriminant,PropCMuComponent,PropCDiscSeparable,TracePeriodWStarLift}.lean` の残り一覧 ＋ `structured-latex/tools/{formalization-coverage,lean-remaining-model,ledger-naming-model,reference-rot-allowances}.ts`（**本文の数学の内容は 1 文字も変えていない**）。**掲げた焦点は「命題 C′ の残り 1 段（終結式がノルムであること）を取る。これが入れば 命題 C′ は閉じる」だった。段は取れた。だが 命題 C′ は閉じない。そう書く。** **取れた側**——前サイクルが見立てた道はそのまま通った。Sylvester 写像 $(p,q)\mapsto\rho q+gp$ を、$g=1$ と置いた写像 $(p,q)\mapsto\rho q+p$（行列式は $\operatorname{Res}(\rho,1)=1$）と、モニック除法で作るブロック三角の写像 $(p,q)\mapsto((gp)\bmod\rho,\ q+(gp)\operatorname{div}\rho)$ の合成に分けると、行列式が $R[X]/(\rho)$ の上の $g$ 倍写像の行列式に落ちる（`norm_aeval_eq_resultant`）。**$\rho$ の根に 1 度も触れないので $\overline{\mathbb{Q}}$ へ出ない。これがこの段の要点である**——mathlib に在る版（`resultant_eq_prod_roots_sub`）は $\rho$ が分解することを要求するので、$\mathbb{Z}[x]$ の側には当たらない。**ただし道の途中で 1 つ、mathlib に無いものが出た**——モニック除法の**商**が $R$ 線形であること（余りの側 `Polynomial.modByMonicHom` だけが在る。2026-08-05 実測、`lean/logs/mathlib-gap-survey-cycle48-resultant-norm.log`。走査 script も新設した）。これと cycle 47 の判別式・ノルムの関係と mathlib の `resultant_deriv` を繋ぐと符号が 2 度現れて打ち消し合い、**2 つの判別式の同定**（`algebra_discr_eq_polynomial_discr`）が出る。**これが台帳の数えていた残り 1 件である。** **閉じなかった側。ここが本 step の主題である。そう書く**——欄を 完了 に書き換えた瞬間、**検査 L が 16 件の異議を出した。** `lean/` の 5 つの file が、命題 C′ について残りを挙げたままだったからである。**開けてみると 5 件中 4 件は既に済んでいた**（射影で $\mu$ の像が $a_i$ であること＝cycle 44、可約な場合の $N(\mu)=\prod m_\lambda$＝cycle 43・44、2 つの判別式＝cycle 47・48）。**書いた側が自分の file の残り一覧を直していなかっただけである。**残る 1 件は $w^*=0$ の同値で、**部品は cycle 45・46 で揃っていたのに 1 つの主張として組み立てられていなかった。組み立てた**（`wStar_eq_zero_iff_separable_and_not_dvd`。新しい数学は 1 つも入っていない）。**それでも 命題 C′ は閉じない。外側に段が 1 つ現れた。そう書く**——**本文は $w^*$ を「$G$ の最大単因子 $e_r$ の $p$ 進付値」と、単因子の鎖の言葉で定義している。**Lean 側の $w^*$ は適合基底の係数の $p$ 進付値の最大値であり、鎖を経由しない。2 つが同じ数であることは書いていない（鎖の存在は整数行列の Smith 標準形であり、mathlib に無い側である）。**この事柄は `TracePeriodWStarLift.lean` が cycle 37 から残りとして挙げていたのに、欄は 1 度も残り項目として数えていなかった。** **cycle 45 が塞いだ経路とも cycle 47 が見つけた経路とも違う。そう書く**——散文は単因子に触れており、検査 J も 検査 L も、欄が 完了 でない限り緑のままだった。**完了 と書いた瞬間に 検査 L が捕まえた。** **したがって件数は動いていない（本文 15 ＋ 外部定理 3 ＝ 18 件のまま）。段数も 1 段のまま、中身が入れ替わった。そう書く。** **機械が出した異議は合計 25 件**（検査 L 16 件・検査 F の被覆の数 6 件・検査 F の不在の根拠 1 件・検査 J 6 件・検査 R 4 件。重複を含む）。すべて登録して直した。検証: `npm run check`（45 段）exit 0、`lake build` 8739 jobs exit 0、`check-no-sorry.sh` 838 件すべて sorryAx 非依存、`verify-check-linkage.ts` OK。実測: `lean/` の宣言 911 → 930 件、ファイル 82 → 83 本、本文側の残り 15 件（不変）、段数 57 段（不変）。 |
+| 2 | ユーザー方針の反映 | propT_completion_stage | todo | | |
+| 3 | ユーザー方針の反映 | lemmaW2_converse | todo | | |
+| 4 | ユーザー方針の反映 | propW_product_formula | todo | | |
+| 5 | — | rank:cycle48 | todo | | |
+
 ## cycle 47 step 列（2026-08-05 起こし。cycle 46 総括の「cycle 47 の焦点（案）」5 点を実測で裏取りして step にした）
 
 着手時に前提を一次情報で実測した（cycle 26 から数えて 22 サイクル目）。

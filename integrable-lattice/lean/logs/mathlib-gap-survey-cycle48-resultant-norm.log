@@ -1,0 +1,77 @@
+=== 日付 ===
+2026-08-05T10:38:52Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 終結式と剰余環のノルムの同定 ===
+--- (1) 連結語の内容 grep: 'resultant_eq_norm'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'resultant.*algebra.norm'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'resultant.*algebra.norm'
+files=0
+
+=== 剰余環の乗法写像の行列式としての終結式 ===
+--- (1) 連結語の内容 grep: 'norm_eq_resultant'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'norm.*resultant'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'norm.*resultant'
+files=0
+
+=== 2 つの判別式（Algebra.discr と Polynomial.discr）の同定 ===
+--- (1) 連結語の内容 grep: 'Algebra.discr.*Polynomial.discr'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'discr.*discriminant.*resultant'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Resultant/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'discr.*discriminant.*resultant'
+files=0
+
+=== モニック除法の商の R 線形性 ===
+--- (1) 連結語の内容 grep: 'divByMonicHom'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'divByMonic.*linearMap'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'divByMonic.*linearMap'
+files=0
+
+=== 守備範囲を宣言行で直読する（在るが射程が足りないもの） ===
+--- 終結式の章に Algebra.norm が現れるか（現れれば同定が在る疑い）
+Mathlib/RingTheory/Polynomial/Resultant/Basic.lean : Algebra.norm の出現 0 件
+--- 根の像の積で述べた版は在るが、何を要求するか（宣言行）
+406:lemma resultant_eq_prod_roots_sub
+407-    {K : Type*} [Field K] (f g : K[X]) (hf : f.Monic) (hg : g.Monic)
+408-    (hf' : f.Splits) (hg' : g.Splits) :
+409-    resultant f g = ((f.roots ×ˢ g.roots).map fun ij ↦ ij.1 - ij.2).prod := by
+--- Algebra.discr をノルムで述べた版は何を要求するか（宣言行）
+195-    rw [← hn, Nat.one_le_iff_ne_zero, ← zero_lt_iff, Module.finrank_pos_iff]
+196-    infer_instance
+197-  rw [hn, Nat.cast_div h₂ hne, Nat.cast_mul, Nat.cast_sub hle]
+198-  ring
+199-
+200-/-- Formula for the discriminant of a power basis using the norm of the field extension. -/
+201:theorem discr_powerBasis_eq_norm [Algebra.IsSeparable K L] :
+202-    discr K pb.basis =
+203-      (-1) ^ (n * (n - 1) / 2) *
+204-      norm K (aeval pb.gen (minpoly K pb.gen).derivative) := by
+--- モニック除法について在るもの（宣言行）。余りは線形写像として在る
+66:def modByMonicHom (q : R[X]) : R[X] →ₗ[R] R[X] where
+--- 商について在るもの（宣言行）。次数の補題だけで加法性・スカラー倍は無い
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:132:def divByMonic (p q : R[X]) : R[X] :=
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:185:theorem zero_divByMonic (p : R[X]) : 0 /ₘ p = 0 := by
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:197:theorem divByMonic_zero (p : R[X]) : p /ₘ 0 = 0 :=
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:204:theorem divByMonic_eq_of_not_monic (p : R[X]) (hq : ¬Monic q) : p /ₘ q = 0 :=
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:271:theorem divByMonic_eq_zero_iff [Nontrivial R] (hq : Monic q) : p /ₘ q = 0 ↔ degree p < degree q :=
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:280:theorem degree_add_divByMonic (hq : Monic q) (h : degree q ≤ degree p) :
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:298:theorem degree_divByMonic_le (p q : R[X]) : degree (p /ₘ q) ≤ degree p :=
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:313:theorem degree_divByMonic_lt (p q : R[X]) (hp0 : p ≠ 0)
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:332:theorem natDegree_divByMonic (f : R[X]) {g : R[X]} (hg : g.Monic) :
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:375:theorem map_mod_divByMonic [Ring S] (f : R →+* S) (hq : Monic q) :
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:391:theorem map_divByMonic [Ring S] (f : R →+* S) (hq : Monic q) :
+.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Div.lean:438:theorem divByMonic_one (p : R[X]) : p /ₘ 1 = p := by

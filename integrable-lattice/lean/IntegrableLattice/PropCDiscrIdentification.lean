@@ -68,6 +68,12 @@ $\mathbb{R}$ へ 1 度も出ない。$\overline{\mathbb{Q}}$ へも出ない（�
   $R[X]_{<m+n}\cong R[X]_{<n}\oplus R[X]_{<m}$ の分解の下で Sylvester 写像がブロック三角になり、
   対角ブロックの片方が単位行列、もう片方が $g$ 倍写像になる、という道である。
   **ここは配線ではなく、書く量のある段である。そう書く。**
+  **cycle 48 step 1 で書いた**（`PropCResultantNorm.lean` の `norm_aeval_eq_resultant`）。
+  見立てた道はそのまま通った。**ただし、その道が要求するもののうち 1 つが mathlib に無かった**——
+  モニック除法の**商**が $R$ 線形であることで、mathlib が持っているのは
+  余りの側（`Polynomial.modByMonicHom`）だけである（`divByMonicHom` として書いた）。
+  段 3 とこれと `Polynomial.resultant_deriv` を繋いで、
+  2 つの判別式の同定（`algebra_discr_eq_polynomial_discr`）が入った。
 -/
 import Mathlib
 import IntegrableLattice.EulerDualBasisCommRing

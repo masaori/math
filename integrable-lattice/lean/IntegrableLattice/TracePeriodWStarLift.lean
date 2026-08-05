@@ -46,8 +46,10 @@ $\det G\neq0$ なら左右は入れ替えられる（`mul_comm_of_det_ne_zero`�
 * 成分への射影で $\mu$ の像が $a_i$ であることの同定
   （$\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ の残り）。
   これは 命題 C′ に残るもう 1 つである。
-  **ノルムを重複度の積へ分ける側は cycle 43 step 2 で入った**
-  （`PropCCrtWiring.norm_eq_prod_pow_natDegree`）。
+  **ノルムを重複度の積へ分ける側は cycle 43 step 2 で入り**
+  （`PropCCrtWiring.norm_eq_prod_pow_natDegree`）、
+  **射影の側は cycle 44 step 1 で入った**（`PropCMuComponent.algHomOfDvd_mu_eq_multiplicity`）。
+  **いまは残りではない。そう書く。**
 -/
 import Mathlib
 import IntegrableLattice.PropCTracePeriod
