@@ -59,14 +59,15 @@ $\mathbb{Z}_p$ を使った `IwasawaDecomposition.lean` と同じく、
 
 ## 形式化しなかったもの
 
-* **舞台そのものの構成（$\mathbb{Q}(\zeta_L)$ の 2 の上の素点での完備化）。**
+* **剰余体が原始 $L$ 乗根を持つことの同定。**
   本ファイルは「Hensel 的な局所環で、剰余体が原始 $L$ 乗根を持つ」ことを仮定として受け取っている。
-  **2026-08-05 実測**: `HenselianLocalRing` はこの版の mathlib では
-  `Mathlib/RingTheory/Henselian.lean` にしか現れず、**インスタンスが 1 つも無い**
-  （他のどのファイルもこの class を実装していない）。完備離散付値環から作る道は
-  `IsAdicComplete.henselianRing` を経由して手で書くことになる。
-  数論側の材料（`IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers`、6 ファイル）は在る。
-  **したがってここは素材ではなく配線である。そう書く。**
+  **このうち Hensel 性の側は cycle 43 step 3 で入った**（`HenselianStage.lean`。
+  完備な局所環が Hensel 的であることを書き、$\mathbb{Z}_p$ と非アルキメデス的局所体の整数環に当てた）。
+  **残っているのは根の側である**——本文が言っている $\mathbb{Q}(\zeta_L)$ の 2 の上での完備化について、
+  その剰余体が $\zeta_L$ の像を含むことは書いていない。
+  **2026-08-05 実測（cycle 42 の記録の訂正）**: 台帳と本ファイルは
+  「`HenselianLocalRing` のインスタンスが 1 つも無い」と書いていたが、`Field.henselian` が在る
+  （`Mathlib/RingTheory/Henselian.lean` 114 行）。**1 ファイルにしか現れないという側は正しい。**
 * **段 4 との接続（$v(m_j)=1$）。** 本ファイルが出すのは $r\equiv\zeta^{j}$ までで、
   $r=\zeta^{j}(1+m_j)$ と書いたときの $v(m_j)=1$ は段 4 の Newton 多角形の側である
   （組合せ核は `PropT.lean` の `newton_two_root_valuations` に在る）。

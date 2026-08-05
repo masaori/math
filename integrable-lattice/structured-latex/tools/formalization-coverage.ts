@@ -654,9 +654,26 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`Mathlib/RingTheory/Henselian.lean` にしか現れず、インスタンスが 1 つも無い。" +
       "数論側の材料（`IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers`、6 ファイル）と " +
       "`IsAdicComplete.henselianRing` は在るので、素材ではなく配線である。" +
-      "**段 4（Newton 多角形）との接続はこの段の内容ではない**——本ファイルが出すのは $r\\equiv\\zeta^{j}$ までで、$v(m_j)=1$ は段 4 の側である（組合せ核は `PropT.lean` に在る）。",
+      "**段 4（Newton 多角形）との接続はこの段の内容ではない**——本ファイルが出すのは $r\\equiv\\zeta^{j}$ までで、$v(m_j)=1$ は段 4 の側である（組合せ核は `PropT.lean` に在る）。" +
+      "**cycle 43 step 3 でその舞台を構成した**（`HenselianStage.lean`）。" +
+      "**着手時の実測で、台帳の記録が 1 つ誤っていたことが分かった。そう書く**——" +
+      "「`HenselianLocalRing` のインスタンスが 1 つも無い」と書いていたが、`Field.henselian` が在る" +
+      "（`Mathlib/RingTheory/Henselian.lean` 114 行。ただし体は退化した舞台であって、この段が要求するものではない）。" +
+      "**1 ファイルにしか現れないという側は正しく、配線であるという判定も当たっていた。** " +
+      "無いのは向きである——在るのは `HenselianLocalRing` から `HenselianRing` へ行く向きと " +
+      "`IsAdicComplete` から `HenselianRing` へ行く向きだけで、戻る向きが無い。" +
+      "**芯は 1 行である**（`henselianLocalRing_of_henselianRing`）——2 つの定義の違いは" +
+      "微分の値に単元性を要求する場所が環の中か剰余環の中かだけで、環の単元は剰余環でも単元だからである。" +
+      "これで完備な局所環が Hensel 的であること（`henselianLocalRing_of_isAdicComplete`）が出て、" +
+      "$\\mathbb{Z}_p$（`henselianLocalRing_padicInt`）と非アルキメデス的局所体の整数環" +
+      "（`henselianLocalRing_localField`）に当たる。**cycle 42 step 2 の持ち上げから舞台の仮定を落とせた**" +
+      "（`exists_root_quadratic_localField`）。" +
+      "**それでもこの主張は完了しない。段数も 1 段のまま、中身が入れ替わった。そう書く**——" +
+      "残っているのは、その舞台の剰余体が原始 $L$ 乗根を持つことの同定である" +
+      "（本文が言っているのは $\\mathbb{Q}(\\zeta_L)$ の 2 の上での完備化についてであり、" +
+      "`PropTHenselLift.lean` の段 1・段 2 は根の側を仮定として受け取ったままである）。",
     remainingItems: [
-      "舞台そのものの構成である",
+      "その舞台の剰余体が原始 $L$ 乗根を持つことの同定である",
     ],
   },
   {

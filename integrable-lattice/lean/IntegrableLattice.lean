@@ -70,6 +70,7 @@ import IntegrableLattice.TruncatedValuationStability
 import IntegrableLattice.IwasawaOrdCounting
 import IntegrableLattice.ProductAlgebraNorm
 import IntegrableLattice.PropCCrtWiring
+import IntegrableLattice.HenselianStage
 import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition

@@ -794,6 +794,12 @@ targets=(
   IntegrableLattice.PropCCrtWiring.quotientProdAlgEquiv
   IntegrableLattice.PropCCrtWiring.finrank_quotient_span
   IntegrableLattice.PropCCrtWiring.norm_eq_prod_pow_natDegree
+  # 命題 T の舞台の構成＝完備な局所環が Hensel 的であること（HenselianStage.lean・cycle 43 step 3）
+  IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing
+  IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete
+  IntegrableLattice.HenselianStage.henselianLocalRing_padicInt
+  IntegrableLattice.HenselianStage.henselianLocalRing_localField
+  IntegrableLattice.HenselianStage.exists_root_quadratic_localField
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

@@ -843,10 +843,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
-        leanFragment: "舞台そのものの構成",
+        leanFragment: "剰余体が原始 $L$ 乗根を持つことの同定",
         kind: "未形式化",
-        ledgerFragment: "舞台そのものの構成である",
-        crossFilePhrase: "$\\mathbb{Q}(\\zeta_L)$ の 2 の上の素点での完備化",
+        ledgerFragment: "その舞台の剰余体が原始 $L$ 乗根を持つことの同定である",
+        crossFilePhrase: "剰余体が $\\zeta_L$ の像を含むこと",
       },
       {
         leanFragment: "段 4 との接続（$v(m_j)=1$）",
@@ -873,6 +873,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         kind: "未形式化",
         ledgerFragment: "`Algebra.discr` と `Polynomial.discr` の一致は述べていない",
         crossFilePhrase: "`Algebra.discr` と `Polynomial.discr` の一致",
+      },
+    ],
+  },
+  {
+    // cycle 43 step 3 で新設。命題 T の段 3 が要求する舞台（Hensel 的な局所環）を構成した。
+    file: "HenselianStage.lean",
+    declarationsAtReview: 5,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "その舞台の剰余体が原始 $L$ 乗根を持つこと",
+        kind: "未形式化",
+        ledgerFragment: "その舞台の剰余体が原始 $L$ 乗根を持つことの同定である",
+        crossFilePhrase: "その舞台の剰余体が原始 $L$ 乗根を持つこと",
       },
     ],
   },
