@@ -879,10 +879,12 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 49 step 3: 根の側そのものは cycle 44 step 2 で入っており、
+        // 残っているのは舞台の同定だけである（`PropTResidueRoot.lean` の項目と同じもの）。
         leanFragment: "剰余体が原始 $L$ 乗根を持つことの同定",
         kind: "未形式化",
-        ledgerFragment: "その舞台の剰余体が原始 $L$ 乗根を持つことの同定である",
-        crossFilePhrase: "剰余体が $\\zeta_L$ の像を含むこと",
+        ledgerFragment: "完備化がこの舞台の形をしていること",
+        crossFilePhrase: "2 の上での完備化が、この舞台の形",
       },
       {
         leanFragment: "段 4 との接続（$v(m_j)=1$）",
@@ -1175,6 +1177,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         leanFragment: "Smith 標準形の鎖の存在そのもの",
         kind: "参照だけ",
         referent: { kind: "ログ", target: "mathlib-gap-survey-cycle49-smith-chain.log" },
+      },
+    ],
+  },
+  {
+    // cycle 49 step 3 で新設。m 進完備化の側から舞台を書き下した file。
+    file: "PropTAdicStage.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "本文の付値による完備化が、この $\\mathfrak m$ 進完備化と同じものであること",
+        kind: "未形式化",
+        ledgerFragment: "付値の位相が $\\mathfrak m$ 進位相であること",
+        crossFilePhrase: "付値の位相が $\\mathfrak m$ 進位相であること",
       },
     ],
   },

@@ -65,6 +65,7 @@ import IntegrableLattice.WStarRadicalMultiplicity
 import IntegrableLattice.WStarFactorExtraction
 import IntegrableLattice.WStarMuGram
 import IntegrableLattice.WStarGramDiscriminant
+import IntegrableLattice.PropTAdicStage
 import IntegrableLattice.PropTHenselLift
 import IntegrableLattice.WStarTracePowerBridge
 import IntegrableLattice.TruncatedValuationStability

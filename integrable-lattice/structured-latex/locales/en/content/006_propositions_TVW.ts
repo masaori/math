@@ -192,6 +192,7 @@ export default defineBlocks([
       "IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing",
       "IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete",
       "IntegrableLattice.HenselianStage.exists_root_quadratic_localField",
+      "IntegrableLattice.PropTAdicStage.henselianLocalRing_adicCompletion",
       "IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue",
       "IntegrableLattice.PropTResidueRoot.isUnit_natCast_of_odd",
       "IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue_of_odd",

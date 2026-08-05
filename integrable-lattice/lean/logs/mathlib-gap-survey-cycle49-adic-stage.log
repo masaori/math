@@ -1,0 +1,70 @@
+=== 日付 ===
+2026-08-05T12:30:56Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 付値の位相が m 進位相であること ===
+--- (1) 連結語の内容 grep: 'Valued.isAdic'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'valued.*isAdic'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'valued.*isAdic'
+files=0
+
+=== 付値環の m 進位相 ===
+--- (1) 連結語の内容 grep: 'valuationSubring.*isAdic'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'adic topology.*valuation'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'adic topology.*valuation'
+files=0
+
+=== 守備範囲を宣言行で直読する ===
+--- IsAdic そのものは在る（定義の宣言行）
+156:def IsAdic [H : TopologicalSpace R] (J : Ideal R) : Prop :=
+157-  H = J.adicTopology
+158-
+159-/-- A topological ring is `J`-adic if and only if it admits the powers of `J` as a basis of
+--- 非アルキメデス的局所体のクラスに instance が付いている型が在るか
+定義ファイルの外での出現 0 件
+--- 在る側: Noether 局所環の m 進完備化についての m 進完備性（宣言行）
+47-open Ideal Quotient
+48-
+49:theorem isLocalRing_of_isAdicComplete_maximal (m : Ideal R) [m.IsMaximal] [IsAdicComplete m R] :
+50-    IsLocalRing R :=
+51-  IsLocalRing.of_unique_max_ideal ⟨m, ‹m.IsMaximal›, fun _ hJ ↦
+52-    (‹m.IsMaximal›.eq_of_le hJ.ne_top <|
+53:      (IsAdicComplete.le_jacobson_bot m).trans <| sInf_le ⟨bot_le, hJ⟩).symm⟩
+54-
+55-open IsLocalRing
+56-
+--
+60-
+61-lemma isAdicComplete_self (fg : I.FG) :
+62:    IsAdicComplete (I.map (algebraMap R (AdicCompletion I R))) (AdicCompletion I R) :=
+63:  (IsAdicComplete.map_algebraMap_iff _ _).mpr (AdicCompletion.isAdicComplete fg)
+64-
+65-lemma isMaximal_map_of_le (m : Ideal R) [m.IsMaximal] (le : I ≤ m) (fg : I.FG) :
+66-    (m.map (algebraMap R (AdicCompletion I R))).IsMaximal := by
+--
+120-lemma isAdicComplete_of_fg [IsLocalRing R] (fg : (maximalIdeal R).FG) :
+--- 在る側: 非アルキメデス的局所体の整数環の m 進完備性（宣言行）
+176:instance : IsAdicComplete 𝓂[K] 𝒪[K] where
+177-  prec' f hf := by
+178-    let S n : Set 𝒪[K] := f n +ᵥ ((𝓂[K] ^ n : Ideal 𝒪[K]) : Set 𝒪[K])
+--- 在る側: 剰余体が完備化で保たれること（宣言行）
+131:lemma residueField_map_bijective_of_fg [IsLocalRing R] (fg : (maximalIdeal R).FG) :
+132-    haveI := AdicCompletion.isLocalRing_of_fg fg
+133-    haveI := AdicCompletion.algebraMap_isLocalHom_of_fg fg
+134-    Function.Bijective
+135-      (IsLocalRing.ResidueField.map (algebraMap R (AdicCompletion (maximalIdeal R) R))) := by
+--
+154:    AdicCompletion.residueField_map_bijective_of_fg (maximalIdeal R).fg_of_isNoetherianRing
+155-
+156-lemma spanFinrank_maximalIdeal_eq [IsNoetherianRing R] [IsLocalRing R] :
+157-    (maximalIdeal (AdicCompletion (maximalIdeal R) R)).spanFinrank =
+158-    (maximalIdeal R).spanFinrank := by

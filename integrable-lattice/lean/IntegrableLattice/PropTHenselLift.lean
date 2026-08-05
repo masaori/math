@@ -63,8 +63,13 @@ $\mathbb{Z}_p$ を使った `IwasawaDecomposition.lean` と同じく、
   本ファイルは「Hensel 的な局所環で、剰余体が原始 $L$ 乗根を持つ」ことを仮定として受け取っている。
   **このうち Hensel 性の側は cycle 43 step 3 で入った**（`HenselianStage.lean`。
   完備な局所環が Hensel 的であることを書き、$\mathbb{Z}_p$ と非アルキメデス的局所体の整数環に当てた）。
-  **残っているのは根の側である**——本文が言っている $\mathbb{Q}(\zeta_L)$ の 2 の上での完備化について、
-  その剰余体が $\zeta_L$ の像を含むことは書いていない。
+  **根の側も抽象な形では cycle 44 step 2 で入った**
+  （`PropTResidueRoot.isPrimitiveRoot_residue_of_odd`。剰余標数 2 の Hensel 的局所環で、
+  $L$ が奇なら原始 $L$ 乗根の像がまた原始 $L$ 乗根である）。
+  **cycle 49 step 1 の全数の突き合わせはこの箇条書きを「数えていない段」と読んだが、
+  同 step 3 で開けると、根の側は既に済んでいて舞台の同定だけが残っていた。そう書く**——
+  **残っているのは、本文が言っている $\mathbb{Q}(\zeta_L)$ の 2 の上での完備化が
+  この舞台の形をしていることの 1 本だけである**（`PropTResidueRoot.lean` が挙げている項目と同じものである）。
   **2026-08-05 実測（cycle 42 の記録の訂正）**: 台帳と本ファイルは
   「`HenselianLocalRing` のインスタンスが 1 つも無い」と書いていたが、`Field.henselian` が在る
   （`Mathlib/RingTheory/Henselian.lean` 114 行）。**1 ファイルにしか現れないという側は正しい。**

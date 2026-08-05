@@ -97,12 +97,14 @@ export const CLOSING_PRECONDITION_DISPOSITIONS: readonly ClosingDisposition[] = 
   {
     block: "paper_062_theorem_T",
     file: "PropTHenselLift.lean",
-    phrase: "剰余体が $\\zeta_L$ の像を含むこと",
+    phrase: "2 の上での完備化が、この舞台の形",
     kind: "数に当たる（別の言い方の残り項目）",
-    target: "完備化の剰余体が原始 $L$ 乗根を持つことの同定",
+    target:
+      "付値の位相が $\\mathfrak m$ 進位相であること（完備化の整数環が Hensel 的な舞台であることへ渡る 1 本）",
     why:
-      "cycle 49 step 1 でこの段を残り項目として数えるようにした。" +
-      "**cycle 42 から `lean/` が挙げていたのに、欄は 1 度も数えていなかった。**",
+      "**cycle 49 step 3 で開けると、step 1 の見立てが 1 件だけ二重計上だった。そう書く**——" +
+      "剰余体の側そのものは cycle 44 step 2 で入っており、この箇条書きに残っていたのは舞台の同定だけである。" +
+      "舞台の同定は 付値の位相の項目と同じものなので、そちらで数える。",
   },
   {
     block: "paper_062_theorem_T",

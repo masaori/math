@@ -995,6 +995,10 @@ targets=(
   IntegrableLattice.PropCElementaryDivisorChain.sup_factorization_eq_last_of_chain
   IntegrableLattice.PropCElementaryDivisorChain.isLeast_isPLevel_of_smith
   IntegrableLattice.PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last
+  # 命題 T の舞台を m 進完備化の側から具体化した段（PropTAdicStage.lean・cycle 49 step 3）
+  IntegrableLattice.PropTAdicStage.henselianLocalRing_adicCompletion
+  IntegrableLattice.PropTAdicStage.residueFieldEquiv
+  IntegrableLattice.PropTAdicStage.exists_root_quadratic_adicCompletion
   # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
   IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
   IntegrableLattice.PropKW2Converse.fst_latticeAut
