@@ -805,6 +805,15 @@ targets=(
   IntegrableLattice.PropCMuComponent.quotientProdAlgEquiv_apply_eq_algHomOfDvd
   IntegrableLattice.PropCMuComponent.norm_mu_eq_prod_pow_natDegree
   IntegrableLattice.PropCMuComponent.det_weightedGram_mu_eq_prod_pow_mul_discr
+  # 命題 C′ の残り 1 段＝w*=0 の判定を行列式の側へ渡す段（PropCWStarZero.lean・cycle 45 step 2）
+  IntegrableLattice.PropCWStarZero.det_smul_mem_range
+  IntegrableLattice.PropCWStarZero.isPLevel_zero_of_not_dvd_det
+  IntegrableLattice.PropCWStarZero.not_dvd_det_of_isPLevel_zero
+  IntegrableLattice.PropCWStarZero.isPLevel_zero_iff_not_dvd_det
+  IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_isPLevel_zero
+  IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_not_dvd_det
+  IntegrableLattice.PropCWStarZero.not_dvd_mul_prod_iff
+  IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_of_det_factorization
   # 命題 T の残り 1 段＝剰余体が原始 L 乗根を持つこと（PropTResidueRoot.lean・cycle 44 step 2）
   IntegrableLattice.PropTResidueRoot.isUnit_one_sub_pow
   IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue

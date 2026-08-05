@@ -271,9 +271,25 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "形は $w^*=0\\iff p\\nmid\\det G$ を経由するはずで、そのためには " +
       "$\\det G$ が単因子の積であること（整数行列の Smith 標準形）が要る。" +
       "**それは mathlib に無いと実測されている側である**" +
-      "（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。",
+      "（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
+      "**cycle 45 step 2 でその道を測った。Smith 標準形は要らなかった**（`PropCWStarZero.lean`）——" +
+      "$p\\nmid\\det G$ なら余因子行列が $\\det G$ 倍の逆を与えるので像は $p$ の外で全体を含み" +
+      "（`isPLevel_zero_of_not_dvd_det`）、逆にレベルが $0$ なら $G\\,Y=m\\,I$（$p\\nmid m$）の" +
+      "行列式を取れば $p\\nmid\\det G$ が出る（`not_dvd_det_of_isPLevel_zero`）。" +
+      "**単因子の積という順序づけられた不変量には 1 度も触れない。** " +
+      "これで $w^*=0\\iff p\\nmid\\det G$（`wStar_eq_zero_iff_not_dvd_det`）と、" +
+      "$\\det G$ が積の形をしているときの $p$ 進の条件の分解" +
+      "（`wStar_eq_zero_iff_of_det_factorization`）が入った。" +
+      "**「Smith 標準形が無いから書けない」という cycle 44 の記録は、" +
+      "「無い」という判定は正しく、「だから書けない」という推論が誤りだった。** " +
+      "**残っているのは $p\\nmid\\operatorname{disc}(\\rho)$ と「$\\rho\\bmod p$ が分離的」の同値だけである**" +
+      "（2026-08-05 実測。mathlib の `Algebra.discr` についての宣言は " +
+      "`discr_not_zero_of_basis` / `discr_isUnit_of_basis` のようにいずれも分離的な体拡大を" +
+      "仮定として要求する形で、逆向き——判別式が $0$ でなければ分離的——を述べた宣言も、" +
+      "`Algebra.discr` の係数環の取り替えを述べた宣言も無い）。" +
+      "**したがってこの主張の残りは 1 つである。**",
     remainingItems: [
-      "本文の $w^*=0$ が「$\\rho\\bmod p$ が分離的、かつ全ての重複度で $p\\nmid m_\\lambda$」と同値であることの翻訳である",
+      "$p\\nmid\\operatorname{disc}(\\rho)$ と「$\\rho\\bmod p$ が分離的」の同値だけである",
     ],
   },
   {

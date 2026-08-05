@@ -326,6 +326,10 @@ export default defineBlocks([
       "IntegrableLattice.PropCMuComponent.quotientProdAlgEquiv_apply_eq_algHomOfDvd",
       "IntegrableLattice.PropCMuComponent.norm_mu_eq_prod_pow_natDegree",
       "IntegrableLattice.PropCMuComponent.det_weightedGram_mu_eq_prod_pow_mul_discr",
+      "IntegrableLattice.PropCWStarZero.isPLevel_zero_of_not_dvd_det",
+      "IntegrableLattice.PropCWStarZero.not_dvd_det_of_isPLevel_zero",
+      "IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_not_dvd_det",
+      "IntegrableLattice.PropCWStarZero.wStar_eq_zero_iff_of_det_factorization",
     ],
     statement: [
       paragraph([
