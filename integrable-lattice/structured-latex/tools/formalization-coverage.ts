@@ -449,9 +449,23 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**書いてみて外側に段が 1 つ現れたので、いま残りは 3 件である。そう書く**——" +
       "3 件目が「$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）」である。" +
       "本文は $\\rho$ の無平方性を $\\mathbb{Z}[x]$ の側で言っており、$\\mu$ の構成が要るのは $\\mathbb{Q}[x]$ の側である。" +
-      "cycle 40 step 1 に続いて、**書いた段の外側に段が現れたのは 7 サイクル目である。**",
+      "cycle 40 step 1 に続いて、**書いた段の外側に段が現れたのは 7 サイクル目である。**" +
+      "**cycle 42 step 3 で、cycle 41 step 4 が「在る」と言った Newton の関係を実際に当ててみた。" +
+      "当たらなかった。そう書く**（2026-08-05 実測）——mathlib の Newton の関係" +
+      "（`MvPolynomial.psum` / `psum_eq_mul_esymm_sub_sum`）は" +
+      "**形式的な対称式の世界の恒等式であり、行列の特性多項式の係数へ渡す宣言が無い**。" +
+      "`Matrix.trace_pow` は 0 ファイル、`Matrix.trace_eq_sum_roots_charpoly` は $N=1$ だけで" +
+      "しかも代数閉体を要求する。**在ることと当たることは別である**——" +
+      "当たらない理由は「無い」ではなく「橋が無い」であり、渡すには根を分解体で取り出す段が要る。" +
+      "**代わりに橋の半分を架けた**（`WStarTracePowerBridge.lean`）——" +
+      "同定は (1) 代数側のトレースを行列のトレースへ移すことと " +
+      "(2) $T$ と $M_\\mu M_\\theta$ の関係を結ぶことに分かれ、**書いたのは (1) である**" +
+      "（`trace_mul_pow_eq_trace_leftMulMatrix` / `weightedGram_apply_eq_matrix_trace`。" +
+      "$z\\mapsto M_z$ が $R$ 代数の準同型なので積とも冪とも交換する。$\\mathbb{R}$ へも " +
+      "$\\overline{\\mathbb{Q}}$ へも出ない）。**したがって残りは、本文が「Newton の公式より」と引いている " +
+      "「同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること」そのものになった。** **成分ごとの分解は cycle 42 step 1 が測った中国剰余の壁と同じものである。**",
     remainingItems: [
-      "本文の整数行列 $G$ と重み $\\mu$ の Gram 行列の同定（冪和 $\\operatorname{Tr}T^N$ の初期値）",
+      "同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること",
       "$w^*$ の等式を組み立てる段",
       "$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）",
     ],

@@ -1024,6 +1024,9 @@ export default defineBlocks([
       "IntegrableLattice.WStarMuGram.det_weightedGram_mu_of_squarefree",
       "IntegrableLattice.WStarMuGram.psi_eta_recurrence",
       "IntegrableLattice.WStarMuGram.trace_pow_recurrence",
+      "IntegrableLattice.WStarTracePowerBridge.trace_pow_eq_trace_leftMulMatrix_pow",
+      "IntegrableLattice.WStarTracePowerBridge.trace_mul_pow_eq_trace_leftMulMatrix",
+      "IntegrableLattice.WStarTracePowerBridge.weightedGram_apply_eq_matrix_trace",
     ],
     statement: [
       paragraph([

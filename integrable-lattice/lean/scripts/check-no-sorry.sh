@@ -769,6 +769,10 @@ targets=(
   IntegrableLattice.PropTHenselLift.isUnit_sub_inv_pow_of_primitiveRoot
   IntegrableLattice.PropTHenselLift.exists_root_quadratic_of_henselian
   IntegrableLattice.PropTHenselLift.exists_root_congr_pow_of_odd
+  # 命題 W* の Gram 行列の同定の橋（WStarTracePowerBridge.lean・cycle 42 step 3）
+  IntegrableLattice.WStarTracePowerBridge.trace_pow_eq_trace_leftMulMatrix_pow
+  IntegrableLattice.WStarTracePowerBridge.trace_mul_pow_eq_trace_leftMulMatrix
+  IntegrableLattice.WStarTracePowerBridge.weightedGram_apply_eq_matrix_trace
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

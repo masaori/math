@@ -782,6 +782,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 42 step 3 で新設。代数側のトレースを行列のトレースへ移す橋を架けた。
+    file: "WStarTracePowerBridge.lean",
+    declarationsAtReview: 3,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること",
+        kind: "未形式化",
+        ledgerFragment: "同じ特性多項式をもつ 2 つの行列のトレース冪が一致すること",
+        crossFilePhrase: "整数行列 $G$ と代数側の Gram 行列の同定",
+      },
+      {
+        leanFragment: "成分ごとの分解",
+        kind: "未形式化",
+        ledgerFragment: "成分ごとの分解は cycle 42 step 1 が測った中国剰余の壁と同じものである",
+        crossFilePhrase: "成分ごとの分解（$\\operatorname{Tr}_A(\\mu\\theta^N)",
+      },
+    ],
+  },
+  {
     // cycle 42 step 2 で新設。命題 T の段 3（不分岐性と Hensel 持ち上げ）を書いた。
     file: "PropTHenselLift.lean",
     declarationsAtReview: 4,
