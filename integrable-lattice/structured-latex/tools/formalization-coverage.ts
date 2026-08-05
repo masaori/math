@@ -615,14 +615,16 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "命題 K は (K2)(K3)(K6) と、cycle 27 が形式化した (K5) の一意性・$r_0$ の書き換えまで。" +
       "(K1) の対応と (K4) の重複度の主張は未形式化。" +
       "**cycle 34 step 3 の照合で、`SInfinityDecision.lean` が挙げている 3 件を足す**——補題 W2 の (iv)、定理 W4 の主張そのもの、系 W7。" +
-      "**cycle 34 step 5 の照合で足す**——本文の (K7) は、この欄が 1 度も触れていなかった。未形式化である。",
+      "**cycle 34 step 5 の照合で足す**——本文の (K7) は、この欄が 1 度も触れていなかった。未形式化である。" +
+      "**cycle 41 step 2 で (K6) の 証拠なし を解いた。結果は 残り である。そう書く**——" +
+      "内容は Cuoco–Monsky の係数そのもので、その外部定理は 未着手 である。",
     partStates: [
       { part: "K1", state: "残り", why: "対応の主張は未形式化" },
       { part: "K2", state: "残り", why: "(iii) ⇒ (iv) は書いたが逆向きが未形式化（`SInfinityDecision.lean` の残り一覧がそう書いている）" },
       { part: "K3", state: "残り", why: "判定が有限に落ちることは書いたが、手続き全体の主張は未形式化" },
       { part: "K4", state: "残り", why: "重複度の主張は未形式化" },
       { part: "K5", state: "済み", witness: "k5_argmin_unique_above" },
-      { part: "K6", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない。内容は Cuoco–Monsky の係数そのものであり、その外部定理は未着手である" },
+      { part: "K6", state: "残り", why: "cycle 41 step 2 で中を見て決めた。内容は Cuoco–Monsky の係数そのもので、その外部定理は 未着手 である。さらに `SInfinityDecision.lean` の散文が、(K3) の手続きだけでは $b$ が決まらず (K4) の重複度計算が要ることを実例（$\ell=3$・$(p,q)=(3,1)$ で $|S_\infty|=1$ なのに $b=2$）で書いている。閉じる宣言を名指せない" },
       { part: "K7", state: "残り", why: "格子周長による上界。Newton 多面体の加法性は完了したが、この不等式そのものは未形式化" },
     ],
   },
@@ -695,14 +697,20 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "cycle 27 が形式化した $K(P_0)$ の存在と有界性まで。閉形式の導出そのものは未形式化。" +
       "**cycle 34 step 3 の照合で、`Cycle25Corrections.lean` が挙げている 3 件を足す**——定理 G2 の 1（Galois 不変性。配線）、系 Q7 の $r=2$（2 変数 Laurent 環の一意分解性）、および voltage グラフのラプラシアン行列式そのもの（matrix-tree 定理。外部定理の台帳を見よ）。" +
       "**cycle 34 step 5 の照合で足す**——本文の (M4) は、この欄が 1 度も触れていなかった。未形式化である。" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`（重ね方は添字の付け替えだけで、巡回の場合を 2 回使えば出る）、(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`（内容があるのは次数が層に依らないことだけである）、(c) 各層のブロックが voltage ラプラシアンの評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`（指標は群環から $R$ への環準同型を与えるので行列式とも交換する）。**したがってこの主張の残りは指標分解ではなくなった。ただし完了はしない。件数は動いていない。そう書く**——この主張はこれとは別の残りを持つ（下記）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（扱ったのは巡回群 1 つと巡回群 2 つの積までであり、導来グラフの側は辺の本数の核として受け取っている）。" +
+      "**cycle 41 step 2 で (M1)(M5)(M6) の 証拠なし を解いた。3 件のうち 1 件が 済み、2 件が 残り である。そう書く**——" +
+      "(M6)（$S_\\infty=\\emptyset$ の場合の 5 係数）は `Cycle24.corollary_G6` が閉じている" +
+      "（定理 G1 へ $\\alpha=\\gamma=0$・$\\beta=A_\\mathrm{gen}$ を入れた形が本文の式と一致し、" +
+      "$c=\\Theta_L/\\varphi(\\ell^{L})$ は `corollary_G6_c_as_Theta` が与える）。" +
+      "(M1) は規約（$v_\\ell(0)=+\\infty$）だけが形式化されており、層のどの点でも段データが同じであることは未形式化である。" +
+      "(M5) は条件 2 の根拠（望遠鏡和と境界）だけで、$M^{*}$ の 5 条件をまとめた主張は未形式化である。",
     partStates: [
-      { part: "M1", state: "証拠なし", why: "散文は規約を形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "M1", state: "残り", why: "cycle 41 step 2 で中を見て決めた。形式化されているのは規約（$v_\ell(0)=+\infty$。`Cycle25Corrections.lean`）だけで、(M1) の主張——深さ $k$ の層のどの点でも $(\mathcal{V}_k,\theta^\sharp_k,m^\sharp_k)$ が同じであること（Galois 共役と $\ell$ の上の素点が 1 つであること）——は未形式化である" },
       { part: "M2", state: "済み", witness: "lambda_u_eq_succ_log" },
       { part: "M3", state: "済み", witness: "Agen_level_indep" },
       { part: "M4", state: "残り", why: "未形式化（cycle 34 step 5 の照合で書き落としが見つかった部である）" },
-      { part: "M5", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
-      { part: "M6", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "M5", state: "残り", why: "cycle 41 step 2 で中を見て決めた。形式化されているのは条件 2 の根拠（望遠鏡和 `sum_totient_Ico` と境界 `layer_b_boundary`。$M\ge r^\sharp+K$ と同値であること）だけで、$M^{*}$ の 5 条件を 1 本にまとめた主張は未形式化である" },
+      { part: "M6", state: "済み", witness: "Cycle24.corollary_G6" },
     ],
   },
   {
@@ -715,15 +723,18 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**cycle 35 step 4 の照合で、この欄が本文の部を全部覆っていないことが分かったので足す**——" +
       "(U1a)（飽和深度を大きめに取ってもよいこと）は、この欄が 1 度も触れていなかった。未形式化である。" +
       "cycle 34 step 5 の検査がこれを見落としていたのは、部の記号を `[A-Z][0-9]+` の形でしか" +
-      "拾っていなかったためで、`U1a` のように後ろに小文字が付く形が素通りしていた。",
+      "拾っていなかったためで、`U1a` のように後ろに小文字が付く形が素通りしていた。" +
+      "**cycle 41 step 2 で (U2)(U4)(U6) の 証拠なし を解いた。3 件とも 残り である。そう書く**——" +
+      "(U2) は帳簿上の恒等式だけ、(U4) は $\\ell=2$ の具体値だけ、" +
+      "(U6) は切り捨て付値列から段データを出す側だけで、いずれも部を閉じていない。",
     partStates: [
       { part: "U1", state: "残り", why: "$c$・$d$ が (M3)+(M4) から出ることは書いたが、式そのものの導出が未形式化" },
       { part: "U1a", state: "残り", why: "飽和深度を大きめに取ってもよいこと。未形式化" },
-      { part: "U2", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "U2", state: "残り", why: "cycle 41 step 2 で中を見て決めた。在るのは `U2_bracket_eq_Tdef`（(M4) の角括弧が $T_\mathrm{def}$ と一致するという帳簿上の恒等式）だけで、(U2) の 3 分岐の主張そのものは未形式化である" },
       { part: "U3", state: "残り", why: "未形式化" },
-      { part: "U4", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "U4", state: "残り", why: "cycle 41 step 2 で中を見て決めた。在るのは $\ell=2$ の具体値（`U4_c_at_ell_two` / `U4_d_at_ell_two` / `U4_p_one_values`）だけで、(U4) の主張そのものは未形式化である" },
       { part: "U5", state: "残り", why: "未形式化" },
-      { part: "U6", state: "証拠なし", why: "散文は形式化したと書いているが、この部を閉じる宣言を名指せない" },
+      { part: "U6", state: "残り", why: "cycle 41 step 2 で中を見て決めた。`U6_trunc_determines_stage_data` は「切り捨て付値列 $\Rightarrow$ 段データ」の側だけで、`Cycle25Corrections.lean` 自身が、$\tilde E\bmod\ell^{N}$ が切り捨て付値列を決める側は形式化していないと書いている。半分である" },
     ],
   },
 ];
