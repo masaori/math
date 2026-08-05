@@ -55,6 +55,10 @@ report §5.2 の検算表の 2 例を機械的に再計算する。
   Laurent 多項式環の商が $\mathbb{F}_\ell[y^{\pm1}]$ になるという座標変換が要る。
   `AddMonoidAlgebra` も `Finsupp.mapDomain` の環準同型性（`AddMonoidAlgebra.mapDomain_mul`）も
   **mathlib に在る**ので、欠落ではなく**配線**である。
+  **cycle 48 step 3 で書いた**（`PropKW2Converse.lean` の `dvd_of_psi_eq_zero`。
+  同値そのものは `psi_eq_zero_iff_dvd`）。**「配線である」という cycle 20 の判定は当たっていた**——
+  使った素材は `AddMonoidAlgebra.domCongr` と `AddMonoidAlgebra.mapDomain` の 2 つだけである。
+  **いまは残りではない。そう書く。**
 * **定理 W4 の $e_j$ 側**（$\ell$ 進近傍の変形から定まる量）:
   $T$ 展開と $\bar\psi_u$ の合成を組む必要がある。これも配線。
 * **系 W7（$b\le\frac12\mathrm{per}(\mathrm{Newt})$）**: Ostrowski（Newton 多面体の加法性）と

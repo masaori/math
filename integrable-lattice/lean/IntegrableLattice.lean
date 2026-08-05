@@ -89,5 +89,6 @@ import IntegrableLattice.PropCDiscSeparable
 import IntegrableLattice.PropTMixedWitness
 import IntegrableLattice.PropCDiscrIdentification
 import IntegrableLattice.PropCResultantNorm
+import IntegrableLattice.PropKW2Converse
 import IntegrableLattice.PropJ2PrimePolarization
 import IntegrableLattice.LatticeSegmentLength

@@ -987,6 +987,17 @@ targets=(
   IntegrableLattice.PropCResultantNorm.norm_aeval_eq_resultant
   IntegrableLattice.PropCResultantNorm.algebra_discr_eq_polynomial_discr
   IntegrableLattice.PropCResultantNorm.wStar_eq_zero_iff_separable_and_not_dvd
+  # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
+  IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
+  IntegrableLattice.PropKW2Converse.fst_latticeAut
+  IntegrableLattice.PropKW2Converse.chi_mul_chi
+  IntegrableLattice.PropKW2Converse.chi_zero
+  IntegrableLattice.PropKW2Converse.chi_sub_one_dvd_chi_zsmul_sub_one
+  IntegrableLattice.PropKW2Converse.mapDomain_eq_sum
+  IntegrableLattice.PropKW2Converse.mapDomain_compFun
+  IntegrableLattice.PropKW2Converse.dvd_of_mapDomain_fst_eq_zero
+  IntegrableLattice.PropKW2Converse.dvd_of_psi_eq_zero
+  IntegrableLattice.PropKW2Converse.psi_eq_zero_iff_dvd
   # 命題 J2′ の同値の代数の側（PropJ2PrimePolarization.lean・cycle 47 step 3）
   IntegrableLattice.PropJ2PrimePolarization.choose_two_add
   IntegrableLattice.PropJ2PrimePolarization.Bbar_eq_Abar_two_polarization

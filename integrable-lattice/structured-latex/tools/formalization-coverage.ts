@@ -924,15 +924,31 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`perimeter` を含む宣言 0 件・`latticeLength` 0 件。cycle 46 step 4 の実測と同じで、変わらない）。" +
       "**それでも 系 W7 は閉じない。残り項目は 3 件のままである。そう書く**——" +
       "残っているのは、凸格子多角形を辺へ分けて格子長を総和する段と、" +
-      "$S_\\infty$ の各点が Newton 多面体の辺の方向を与えることから $b\\le\\frac12\\operatorname{per}$ を出す段である。",
+      "$S_\\infty$ の各点が Newton 多面体の辺の方向を与えることから $b\\le\\frac12\\operatorname{per}$ を出す段である。" +
+      "**cycle 48 step 3 で 補題 W2 の (iv) ⇒ (iii) を書いた。この項目は閉じた。そう書く**" +
+      "（`PropKW2Converse.lean`。宣言 11 件。同値そのものは `psi_eq_zero_iff_dvd`）。" +
+      "**cycle 20 が「欠落ではなく配線である」と書いた判定は当たっていた**——" +
+      "使った素材は `AddMonoidAlgebra.domCongr`（群の同型から代数同型）と " +
+      "`AddMonoidAlgebra.mapDomain` の 2 つだけで、群環の準同型の核を述べた宣言は使っていない" +
+      "（それが mathlib に無いことは cycle 47 step 3 の 3 段の走査で測ってある）。" +
+      "**中身は cycle 47 step 3 が切り分けたとおり 2 つに分かれた**——" +
+      "$u$ が原始的なら $u^\\perp$ を $(0,1)$ へ移す格子の自己同型が取れること（`latticeAut`。" +
+      "$u_1s+u_2t=1$ から行列式 $-1$ の行列を書き下すだけである）と、" +
+      "第 2 変数を $1$ に潰す写像の核が $(\\chi^{(0,1)}-1)$ で生成されること" +
+      "（`dvd_of_mapDomain_fst_eq_zero`）である。" +
+      "**後者の芯は 1 行の書き換えで、$E-\\iota(\\mathrm{fst}_*E)" +
+      "=\\sum_{(p,q)}c_{pq}\\chi^{(p,0)}(\\chi^{(0,q)}-1)$ と書くと、" +
+      "右辺の各項が $\\chi^{(0,1)}-1$ で割れる**（`chi_sub_one_dvd_chi_zsmul_sub_one`。" +
+      "整数の帰納法で、$\\chi^{a+b}=\\chi^{a}\\chi^{b}$ しか使わない）。" +
+      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも出ない。" +
+      "**それでもこの主張は完了しない。残り項目は 2 件になった。そう書く。**",
     remainingItems: [
-      "補題 W2 の (iv)",
       "定理 W4 の主張そのもの",
       "系 W7",
     ],
     partStates: [
       { part: "K1", state: "残り", why: "対応の主張は未形式化" },
-      { part: "K2", state: "残り", why: "(iii) ⇒ (iv) は書いたが逆向きが未形式化（`SInfinityDecision.lean` の残り一覧がそう書いている）" },
+      { part: "K2", state: "済み", witness: "psi_eq_zero_iff_dvd" },
       { part: "K3", state: "残り", why: "判定が有限に落ちることは書いたが、手続き全体の主張は未形式化" },
       { part: "K4", state: "残り", why: "重複度の主張は未形式化" },
       { part: "K5", state: "済み", witness: "k5_argmin_unique_above" },

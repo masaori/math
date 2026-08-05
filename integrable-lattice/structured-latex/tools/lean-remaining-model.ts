@@ -1242,12 +1242,32 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 48 step 3 で新設。補題 W2 の (iv) ⇒ (iii) を書いた。
+    file: "PropKW2Converse.lean",
+    declarationsAtReview: 12,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        // 判定を通る u が S_infty の点であることは SInfinityDecision.lean の側である。
+        leanFragment: "(iv) の判定と $S_\\infty$ の点との対応",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "SInfinityDecision.lean" },
+      },
+      {
+        leanFragment: "$j^*$（重複度）",
+        kind: "未形式化",
+        ledgerFragment: "(K4) の重複度の主張",
+        crossFilePhrase: "$j^*$（重複度）",
+      },
+    ],
+  },
+  {
     file: "SInfinityDecision.lean",
     declarationsAtReview: 23,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
     items: [
-      { leanFragment: "補題 W2 の (iv)", kind: "未形式化", ledgerFragment: "補題 W2",
-        crossFilePhrase: "補題 W2 の (iv)", },
+      // cycle 48 step 3 で書いた（PropKW2Converse.lean）。
+      { leanFragment: "補題 W2 の (iv)", kind: "形式化済み", witness: "dvd_of_psi_eq_zero" },
       { leanFragment: "定理 W4 の", kind: "未形式化", ledgerFragment: "定理 W4",
         crossFilePhrase: "定理 W4 の主張そのもの", },
       { leanFragment: "系 W7", kind: "未形式化", ledgerFragment: "系 W7",
