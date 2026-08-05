@@ -1006,10 +1006,11 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 48 step 2 で測り直した。同型は要らず、要るのは付値の位相が m 進位相であることである。
         leanFragment: "の完備化がこの舞台であることの同定",
         kind: "未形式化",
-        ledgerFragment: "本文の完備化がこの舞台と同型であることの同定",
-        crossFilePhrase: "完備化がこの舞台と同型であることの同定",
+        ledgerFragment: "付値の位相が $\\mathfrak m$ 進位相であること",
+        crossFilePhrase: "付値の位相が $\\mathfrak m$ 進位相であること",
       },
     ],
   },

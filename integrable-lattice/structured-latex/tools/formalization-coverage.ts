@@ -785,9 +785,31 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "1 度も現れない）。書く量は 2 行である（`henselianLocalRing_of_isAdicComplete`）。" +
       "**それでもこの主張は完了しない。残りは 1 つで、中身が入れ替わった。そう書く**——" +
       "残っているのは 本文の完備化がこの舞台と同型であることの同定 である" +
-      "（$\\mathbb{Z}[\\zeta_L]$ の 2 の上の素点での局所化と、その完備化が不分岐であることが要る）。",
+      "（$\\mathbb{Z}[\\zeta_L]$ の 2 の上の素点での局所化と、その完備化が不分岐であることが要る）。" +
+      "**cycle 48 step 2 で測った。段の形そのものが違っていた。そう書く**" +
+      "（2026-08-05 実測、`lean/logs/mathlib-gap-survey-cycle48-completion.log`。" +
+      "走査 script は `lean/scripts/mathlib-gap-survey-cycle48-completion.sh`。" +
+      "mathlib `520045ab14` の 8264 ファイルを 3 段で引いた）。" +
+      "**同型は要らない**——本文の段 3 が使うのは「Hensel 的な混標数の局所環で、" +
+      "剰余体が原始 $L$ 乗根を持つこと」だけであり、それが Witt ベクトル環と同型であることは" +
+      "1 度も使わない。同型を書く道（完備な離散付値環の構造定理）は 3 段とも 0 件で、" +
+      "**要らないものが無いという記録になっていた。** " +
+      "**要るのは、完備化そのものがその舞台であることである。そう書き直す。** " +
+      "**その形で測ると、鎖のうち 2 本は在り、1 本だけが無い**——" +
+      "完備化の整数環が離散付値環であることは在り（`IsDiscreteValuationRing` の" +
+      "インスタンスが `Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean` 76 行に在る。" +
+      "**cycle 45 が「無いのは $\\mathfrak m$ 進完備性だけ」と書いたのは正しい**）、" +
+      "$\\mathfrak m$ 進完備性と位相の完備性を結ぶ橋も在る" +
+      "（`IsAdic.isAdicComplete_iff`、`Mathlib/RingTheory/AdicCompletion/Topology.lean` 76 行）。" +
+      "**無いのはその橋を渡る手前の 1 本で、付値の位相が $\\mathfrak m$ 進位相であること" +
+      "（`IsAdic`）を述べた宣言が 3 段とも 0 件である。** " +
+      "迂回路も塞がっている——局所体のクラス `IsNonarchimedeanLocalField` は" +
+      "**定義ファイルの外に 1 度も現れず、どの体にもインスタンスが付いていない**" +
+      "（数体の完備化がその舞台に載ることは述べられていない）。" +
+      "**したがってここは配線ではなく素材の側である。段数は 1 段のままで、中身が入れ替わった。そう書く**——" +
+      "残っているのは 付値の位相が $\\mathfrak m$ 進位相であること（完備化の整数環が Hensel 的な舞台であることへ渡る 1 本） である。",
     remainingItems: [
-      "本文の完備化がこの舞台と同型であることの同定",
+      "付値の位相が $\\mathfrak m$ 進位相であること（完備化の整数環が Hensel 的な舞台であることへ渡る 1 本）",
     ],
   },
   {

@@ -61,6 +61,19 @@ $\mathfrak m$ 進完備性も $2$ 冪の合同で書かれている。アルキ�
   **本文の completion がその舞台と同型であることは書いていない。そう書く。**
   同型を書くには $\mathbb{Z}[\zeta_L]$ の 2 の上の素点での局所化と、
   その $\mathfrak m$ 進完備化が Witt ベクトル環に一致すること（不分岐性）が要る。
+  **cycle 48 step 2 で測ると、段の形そのものが違っていた。そう書く**——
+  **同型は要らない。** 本文の段 3 が使うのは「Hensel 的な混標数の局所環で、剰余体が原始 $L$ 乗根を
+  持つこと」だけで、それが Witt ベクトル環と同型であることは 1 度も使わない
+  （同型を書く道＝完備な離散付値環の構造定理は 3 段とも 0 件だが、**要らないものが無いという記録である**）。
+  **要るのは、完備化そのものがその舞台であることである。**
+  その形で測ると鎖のうち 2 本は在る——完備化の整数環が離散付値環であること
+  （`Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean` 76 行のインスタンス）と、
+  $\mathfrak m$ 進完備性と位相の完備性を結ぶ橋（`IsAdic.isAdicComplete_iff`）である。
+  **無いのは橋を渡る手前の 1 本で、付値の位相が $\mathfrak m$ 進位相であること（`IsAdic`）を
+  述べた宣言が 3 段とも 0 件である**（2026-08-05 実測、
+  `lean/logs/mathlib-gap-survey-cycle48-completion.log`）。
+  迂回路も塞がっている——局所体のクラス `IsNonarchimedeanLocalField` は定義ファイルの外に
+  1 度も現れず、どの体にもインスタンスが付いていない。
 -/
 import Mathlib
 import IntegrableLattice.PropTResidueRoot

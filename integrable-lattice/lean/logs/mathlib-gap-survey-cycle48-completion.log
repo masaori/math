@@ -1,0 +1,117 @@
+=== 日付 ===
+2026-08-05T11:01:34Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 完備化の整数環が離散付値環であること ===
+--- (1) 連結語の内容 grep: 'IsDiscreteValuationRing.*adicCompletionIntegers'
+files=1
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'adicCompletionIntegers'
+files=6
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean
+.lake/packages/mathlib/Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean
+.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/AdicValuation.lean
+.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'adicCompletionIntegers'
+files=0
+
+=== 完備化の整数環が m 進完備であること ===
+--- (1) 連結語の内容 grep: 'IsAdicComplete.*adicCompletionIntegers'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'isAdicComplete'
+files=18
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicIntegers.lean
+.lake/packages/mathlib/Mathlib/NumberTheory/LocalField/Basic.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Perfectoid/Untilt.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Perfectoid/FontaineTheta.lean
+.lake/packages/mathlib/Mathlib/RingTheory/Perfectoid/BDeRham.lean
+.lake/packages/mathlib/Mathlib/RingTheory/WittVector/Complete.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'isAdicComplete'
+files=0
+
+=== 完備な離散付値環と Witt ベクトル環の同型（Cohen の構造定理） ===
+--- (1) 連結語の内容 grep: 'WittVector.*equiv.*DiscreteValuationRing'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cohen structure'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cohen structure'
+files=0
+
+=== 円分体で n を割らない素数が不分岐であること ===
+--- (1) 連結語の内容 grep: 'IsUnramified.*cyclotomic'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cyclotomic.*unramified'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cyclotomic.*unramified'
+files=0
+
+=== 局所環が Hensel であることのクラス ===
+--- (1) 連結語の内容 grep: 'HenselianLocalRing'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'henselian'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'henselian'
+files=1
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+
+=== 付値の位相が m 進位相であること ===
+--- (1) 連結語の内容 grep: 'IsAdic.*[Vv]alu'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'isAdic.*integer'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'isAdic.*integer'
+files=0
+
+=== 非アルキメデス局所体のクラスのインスタンス ===
+--- (1) 連結語の内容 grep: 'instance.*IsNonarchimedeanLocalField'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'IsNonarchimedeanLocalField'
+files=1
+.lake/packages/mathlib/Mathlib/NumberTheory/LocalField/Basic.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'IsNonarchimedeanLocalField'
+files=0
+
+=== 守備範囲を宣言行で直読する（在るが射程が足りないもの） ===
+--- 完備化の整数環についてのインスタンス（宣言行）
+60:instance : IsPrincipalIdealRing (v.valuation K).integer := by
+65:instance : IsDiscreteValuationRing (v.valuation K).integer :=
+68:instance : IsPrincipalIdealRing (v.adicCompletionIntegers K) := by
+76:instance : IsDiscreteValuationRing (v.adicCompletionIntegers K) where
+99:theorem FinitePlace.embedding_apply (x : K) : embedding v x = ↑x := rfl
+103:noncomputable instance : ((Valued.v : Valuation (v.adicCompletion K) ℤᵐ⁰)).IsRankOneDiscrete where
+120:lemma one_lt_absNorm : 1 < absNorm v.asIdeal := by
+130:lemma one_lt_absNorm_nnreal : 1 < (absNorm v.asIdeal : ℝ≥0) := mod_cast one_lt_absNorm v
+133:lemma absNorm_ne_zero : (absNorm v.asIdeal : ℝ≥0) ≠ 0 :=
+142:theorem adicAbv_def {x : K} : adicAbv K v x = toNNReal (absNorm_ne_zero v) (v.valuation K x) := rfl
+145:theorem isNonarchimedean_adicAbv : IsNonarchimedean (adicAbv K v) :=
+150:noncomputable instance : (v.valuation K).RankOne :=
+--- IsAdicComplete のインスタンスは何に付いているか（宣言行）
+.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicIntegers.lean:532:instance : IsAdicComplete (maximalIdeal ℤ_[p]) ℤ_[p] where
+.lake/packages/mathlib/Mathlib/NumberTheory/LocalField/Basic.lean:176:instance : IsAdicComplete 𝓂[K] 𝒪[K] where
+.lake/packages/mathlib/Mathlib/RingTheory/WittVector/Complete.lean:116:instance isAdicCompleteIdealSpanP : IsAdicComplete (Ideal.span {(p : 𝕎 k)}) (𝕎 k) where
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean:170:instance (priority := 100) IsAdicComplete.henselianRing (R : Type*) [CommRing R] (I : Ideal R)
+.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/LocalRing.lean:127:instance [IsNoetherianRing R] [IsLocalRing R] : IsAdicComplete
+.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/Basic.lean:857:instance bot : IsAdicComplete (⊥ : Ideal R) M where
+.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/Basic.lean:862:instance (priority := 100) of_subsingleton [Subsingleton M] : IsAdicComplete I M where
+.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/Completeness.lean:226:instance : IsAdicComplete (.span {X} : Ideal (PowerSeries R)) (PowerSeries R) := by
+--- m 進完備性と位相の完備性を結ぶ橋（宣言行）
+31:protected lemma IsAdic.isHausdorff_iff : IsHausdorff I R ↔ T2Space R := by
+46:protected lemma IsAdic.isPrecomplete_iff : IsPrecomplete I R ↔ CompleteSpace R := by
+76:protected lemma IsAdic.isAdicComplete_iff : IsAdicComplete I R ↔ CompleteSpace R ∧ T2Space R := by
+--- HenselianLocalRing のインスタンスは何に付いているか（宣言行）
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean:114:instance (priority := 100) Field.henselian (K : Type*) [Field K] : HenselianLocalRing K where
+.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean:154:instance (R : Type*) [CommRing R] [hR : HenselianLocalRing R] :
+--- 完備なら Hensel であること（宣言行）
+37:* `IsAdicComplete.henselianRing`:
+170:instance (priority := 100) IsAdicComplete.henselianRing (R : Type*) [CommRing R] (I : Ideal R)
+--- 非アルキメデス局所体のクラスに、定義元の外でインスタンスが付いているか
+（上が空なら、このクラスは定義されているだけで、どの体にも付いていない）

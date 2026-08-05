@@ -262,6 +262,22 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   },
   {
     file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean",
+    reason:
+      "mathlib のファイル。cycle 48 step 2 の実測で、完備化の整数環が離散付値環であることが**在る**" +
+      "（インスタンスが 76 行に在る）ことの根拠として宣言行を直読した先である。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/RingTheory/AdicCompletion/Topology.lean",
+    reason:
+      "mathlib のファイル。cycle 48 step 2 の実測で、$\\mathfrak m$ 進完備性と位相の完備性を結ぶ橋" +
+      "（`IsAdic.isAdicComplete_iff`）が**在る**ことの根拠として宣言行を直読した先である。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
     reference: "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
     reason:
       "mathlib のファイル。cycle 46 step 3 の実測で、Noether 局所環の $\\mathfrak m$ 進完備化が" +
