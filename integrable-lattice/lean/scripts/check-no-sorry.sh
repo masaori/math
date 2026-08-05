@@ -746,6 +746,21 @@ targets=(
   IntegrableLattice.WStarFactorExtraction.exists_monic_prime_factorization
   IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight
   IntegrableLattice.WStarFactorExtraction.exists_radical_and_multWeight_charpoly
+  # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
+  IntegrableLattice.TracePeriodThresholdSharp.S
+  IntegrableLattice.TracePeriodThresholdSharp.a
+  IntegrableLattice.TracePeriodThresholdSharp.S_sq
+  IntegrableLattice.TracePeriodThresholdSharp.a_succ_succ
+  IntegrableLattice.TracePeriodThresholdSharp.dvd_of_two
+  IntegrableLattice.TracePeriodThresholdSharp.traceDiff_rec
+  IntegrableLattice.TracePeriodThresholdSharp.isPeriodMod_of_two
+  IntegrableLattice.TracePeriodThresholdSharp.isLeast_period_two
+  IntegrableLattice.TracePeriodThresholdSharp.isPeriodMod_eight_four
+  IntegrableLattice.TracePeriodThresholdSharp.isLeast_period_three
+  IntegrableLattice.TracePeriodThresholdSharp.gram
+  IntegrableLattice.TracePeriodThresholdSharp.gram_eq
+  IntegrableLattice.TracePeriodThresholdSharp.gram_smith
+  IntegrableLattice.TracePeriodThresholdSharp.ladder_fails_at_two
   # 命題 C″ (3) の構造の主張（TracePeriodStructure.lean・cycle 38 step 3）
   IntegrableLattice.TracePeriodStructure.tracePeriod_eq_pow_mul
   # w* をトレース列の周期の主張へ結ぶ段（TracePeriodWStarLift.lean・cycle 37 step 3）

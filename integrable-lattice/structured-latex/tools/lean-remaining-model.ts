@@ -681,6 +681,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 40 step 3 で新設。命題 C″ (1) のしきい値の最良性の反例を書いた。
+    file: "TracePeriodThresholdSharp.lean",
+    declarationsAtReview: 22,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "全ての $k$ で破れる、という形にはしていない",
+        kind: "未形式化",
+        ledgerFragment: "全ての $k$ で破れる形",
+        crossFilePhrase: "しきい値より下の全てのレベルで階段が破れること",
+      },
+      {
+        leanFragment: "一般の $T$ についての配線",
+        kind: "未形式化",
+        ledgerFragment: "一般の $T$ についての配線",
+        crossFilePhrase: "Gram 行列が一般の $T$ のトレースから来ることの配線",
+      },
+    ],
+  },
+  {
     // cycle 40 step 1 で新設。χ から相異なる既約因子の族と重複度を取り出す段を書いた。
     file: "WStarFactorExtraction.lean",
     declarationsAtReview: 10,
