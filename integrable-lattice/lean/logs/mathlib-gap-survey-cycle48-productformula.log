@@ -1,0 +1,70 @@
+=== 日付 ===
+2026-08-05T11:24:33Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== ラプラシアンの全余因子が等しいこと ===
+--- (1) 連結語の内容 grep: 'adjugate.*lapMatrix'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'cofactor.*laplacian'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'cofactor.*laplacian'
+files=0
+
+=== Kirchhoff の固有値形（非零固有値の積を頂点数で割る） ===
+--- (1) 連結語の内容 grep: 'charpoly.*spanningTree'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'spanning tree.*eigenvalue'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'spanning tree.*eigenvalue'
+files=0
+
+=== 被覆グラフ（voltage グラフ）の全域木数の積公式 ===
+--- (1) 連結語の内容 grep: 'voltage.*spanning'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'derived graph.*spanning'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'derived graph.*spanning'
+files=0
+
+=== 行和が 0 の行列の余因子 ===
+--- (1) 連結語の内容 grep: 'det_updateRow_sum'
+files=2
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Misc.lean
+--- (2) 語幹の case-insensitive 内容 grep: 'row sum.*adjugate'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'row sum.*adjugate'
+files=0
+
+=== 自プロジェクトの側（積公式の 2 つの道具は在るか） ===
+--- 2 変数の指標分解（宣言行）
+67:def blockCirculant₂ (c : V → V → (ZMod N × ZMod N') → R) :
+73:noncomputable def hat₂ (ζ ζ' : R) (c : V → V → (ZMod N × ZMod N') → R)
+80:def regroup : (V × (ZMod N × ZMod N')) ≃ ((V × ZMod N') × ZMod N) where
+87:def outerKernel (c : V → V → (ZMod N × ZMod N') → R) :
+92:noncomputable def innerKernel (ζ : R) (c : V → V → (ZMod N × ZMod N') → R) (j : ZMod N) :
+98:theorem blockCirculant₂_eq_submatrix (c : V → V → (ZMod N × ZMod N') → R) :
+107:theorem hat_outerKernel_eq_blockCirculant (ζ : R) (c : V → V → (ZMod N × ZMod N') → R)
+116:theorem hat_innerKernel_eq_hat₂ (ζ ζ' : R) (c : V → V → (ZMod N × ZMod N') → R)
+128:theorem det_blockCirculant₂ {ζ ζ' : R} (hζ : IsPrimitiveRoot ζ N) (hζ' : IsPrimitiveRoot ζ' N')
+162:def voltageDegree (a : V → V → ZMod N → R) (u : V) : R :=
+166:def derivedKernel (a : V → V → ZMod N → R) : V → V → ZMod N → R :=
+170:def derivedLaplacian (a : V → V → ZMod N → R) :
+--- Kirchhoff の matrix-tree（宣言行）
+66:theorem det_submatrix_incMatrixSigned_eq_zero_or_one_or_neg_one
+81:theorem sq_det_submatrix_eq_zero_or_one
+101:theorem det_mul_transpose_eq_card
+160:theorem det_mul_transpose_eq_card_spanning (s t : E → V) (r0 : V) {k : ℕ}
+--- 全余因子が等しいことを述べた宣言が自プロジェクトに在るか
+IntegrableLattice/JacobiFormula.lean:107:theorem det_updateRow_eq_sum_adjugate (A : Matrix n n R[X]) (i : n) (v : n → R[X]) :
+IntegrableLattice/JacobiFormula.lean:120:theorem derivative_det_eq_trace_adjugate (A : Matrix n n R[X]) :
+IntegrableLattice/NewtonInitialValues.lean:82:theorem adjugate_recursion (M : Matrix n n R) :
+IntegrableLattice/NewtonInitialValues.lean:98:theorem trace_adjugate_step (M : Matrix n n R) (k : ℕ) :
+（上が空なら、自プロジェクトにも無い）
+--- ただしその土台（行和が 0）は在る
+111:theorem lapMatrix_row_sum (s t : E → V) (u : V) :

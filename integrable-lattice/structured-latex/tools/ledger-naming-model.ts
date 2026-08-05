@@ -162,6 +162,12 @@ export function auditNamingCoverage(input: {
  */
 export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
   {
+    block: "paper_063_theorem_W",
+    sentence: "****この step は測っただけで 1 件も形式化していない。",
+    kind: "対象外",
+    why: "この文は事柄を名指ししているのではなく、cycle 48 step 4 が測っただけで書いていないという作業の記録である（指している事柄は残り項目そのもの）",
+  },
+  {
     block: "paper_043b_theorem_trace_bound",
     sentence: "**2 つが同じ数であることは書いていない。",
     kind: "残り",
