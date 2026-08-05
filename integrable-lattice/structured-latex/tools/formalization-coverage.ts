@@ -179,8 +179,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は確かに mathlib に無いが" +
       "（2026-08-04 実測、`lean/logs/mathlib-gap-survey-cycle29.log` の「整数行列の Smith 標準形」の段。" +
       "mathlib `520045ab14` の 8264 ファイルを 3 段で引き、連結語 `Matrix.smithNormalForm` 0 件・" +
-      "語幹 `smith normal` 3 件。ただし **`Ideal.smithCoeffs` の整除補題そのものを名指しで走った走査は" +
-      "残っていない**——鎖が無いことのこの一点だけは、上のログではなく cycle 29 step 1 の読みに依っている）、" +
+      "語幹 `smith normal` 3 件。**cycle 29 step 1 以来「`Ideal.smithCoeffs` の整除補題そのものを" +
+      "名指しで走った走査は残っていない」と書かれていたが、cycle 41 step 4 で走らせて塞いだ**——" +
+      "`smithCoeffs` は 3 ファイルに在るが、その係数のあいだの整除を述べる宣言は無く、" +
+      "`invariantFactor` も 0 件である（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
+      "**鎖が無いという判定は変わらないが、根拠が読みから実測へ移った**）、" +
       "$w^*$ を取り出すのに鎖は要らない——" +
       "適合基底（`Ideal.smithNormalForm` が返す形）の係数の $p$ 進付値の最大値として書け、" +
       "それが $\\min\\{j:\\ p^jA\\subseteq\\eta A\\ (p\\ \\text{の外で})\\}$ に等しいことを証明した" +
@@ -414,7 +417,11 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（$\\chi$ の根の $N$ 乗和）に他ならない。**cycle 41 step 1 はそこへ 1 段寄せた**——" +
       "両辺が $\\chi$ の与える同じ線形漸化式に従うことを書いたので" +
       "（`psi_eta_recurrence` / `trace_pow_recurrence`）、残るのは初期値 $N=0,\\dots,\\deg\\chi-1$ の一致だけである。" +
-      "**その一致は $\\chi$ の係数から冪和を出す関係（Newton の関係）そのものであり、mathlib にその形は無い。** " +
+      "**その一致は $\\chi$ の係数から冪和を出す関係（Newton の関係）そのものである。** " +
+      "**cycle 41 step 1 はここに「mathlib にその形は無い」と書いたが、同じサイクルの step 4 の走査で言い過ぎだと分かった。そう書く**——" +
+      "Newton の関係そのものは在る（`MvPolynomial.psum` と `psum_eq_mul_esymm_sub_sum`。" +
+      "`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
+      "**無いのは「行列のトレースの冪と特性多項式の係数を結ぶ形」のほうである。** " +
       "したがって残っている 1 件は" +
       "「本文の整数行列 $G$ と重み $\\mu$ の Gram 行列の同定（冪和 $\\operatorname{Tr}T^N$ の初期値）」である。" +
       "また段 1 が使う $\\mathbb{Q}[x]$ 側の無平方性（$\\mathbb{Z}[x]$ 側からの降下＝Gauss）は仮定として受け取っている。" +

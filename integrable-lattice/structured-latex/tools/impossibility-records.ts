@@ -139,13 +139,17 @@ export const IMPOSSIBILITY_RECORDS: readonly ImpossibilityRecord[] = [
     step: "Cuoco–Monsky の類数の漸近",
     entry: "Cuoco–Monsky の類数の漸近（$\\mathbb{Z}_p^d$ 拡大の岩澤型漸近）",
     measurement: {
-      absent: "CuocoMonsky / 語幹 `cuoco`、岩澤不変量の漸近、および多変数の完備群環",
-      log: "mathlib-gap-survey-cycle40-external-engines.log",
+      absent: "CuocoMonsky / 語幹 `cuoco`、岩澤不変量の漸近、および多変数の Weierstrass 準備定理",
+      log: "mathlib-gap-survey-cycle41-engines.log",
     },
     // cycle 40 step 4 の走査で、$d=1$ の engine（Weierstrass 準備定理）は在ることが分かった。
-    // ただし本論文が要るのは $\mathbb{Z}_p^d$（$d\ge2$）で、多変数の完備群環は依然として無い。
-    // **したがってこの件は「素材も無い」のままである。そう書く**——$d=1$ で書けることは、
-    // $d\ge2$ で書けることを意味しない。
+    // **cycle 41 step 4 で engine の名前で引き直したところ、「多変数の完備群環は無い」という
+    // 測定そのものが不正確だった。そう書く**——$\mathbb{Z}_p[[X_1,\dots,X_d]]$ は
+    // `MvPowerSeries` として在り、変数の生成するイデアルについて adic complete であることも在る
+    // (`MvPowerSeries.isAdicComplete`)。無いのは**多変数の Weierstrass 準備定理**と
+    // 完備群環との同一視である。
+    // **判定（素材も無い）は変えない**——決め手になる段が無いことは変わらないからである。
+    // 変わったのは「何が無いか」の精度である。
     inference: {
       kind: "素材も無い",
       searchedLog: "mathlib-gap-survey-cycle40-external-engines.log",

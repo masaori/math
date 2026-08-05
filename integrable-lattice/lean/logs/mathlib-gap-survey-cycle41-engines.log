@@ -1,0 +1,89 @@
+# cycle 41 step 4: 「mathlib に無い」と書いてある記録を engine の名前で引き直した走査ログ
+
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+
+日付: 2026-08-05 / mathlib: 520045ab14 / 走査したファイル数: 8264
+走査 script: `lean/scripts/mathlib-gap-survey-cycle41-engines.sh`
+
+## なぜやったか
+
+cycle 40 step 4 で、Monsky の定理の「素材も無い」という判定が誤りだと分かった。
+原因は探した語が**定理の名前**（`Monsky`）だったことである。
+定理の名前で引くと、その定理を**証明する道具**が在っても 0 件になる。
+本走査は、いま立っている「無い」の記録を全部、engine の名前で引き直した。
+
+## 結果（数はすべて script の実出力）
+
+### 冪和と係数の関係（Newton の関係）
+
+**cycle 41 step 1 が同じサイクルの中で「mathlib にその形は無い」と書いた記録である。**
+
+- `NewtonIdentities`: 1 ファイル（`Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean`）
+- `MvPolynomial.psum`: 2 ファイル
+- `esymm`: 10 ファイル
+- `Matrix.trace.*charpoly`: 4 ファイル
+
+**判定: 言い過ぎだった。** Newton の関係そのものは在る——`MvPolynomial.psum` が冪和
+$\sum_i X_i^{n}$ を定義し、`psum_eq_mul_esymm_sub_sum` が基本対称式からの漸化式を与える。
+**無いのは「行列のトレースの冪と特性多項式の係数を結ぶ形」であって、Newton の関係ではない。**
+step 1 の記録をそう直した。**自分の記録が同じサイクルの中で覆った初めての例である。**
+
+### Skolem–Mahler–Lech（線形回帰数列の零点集合）
+
+- `SkolemMahlerLech`: 0 ファイル（定理の名前）
+- `Strassmann`: 0 ファイル（engine）
+- `LinearRecurrence`: 4 ファイル
+- `mahlerSeries` / `MahlerBasis`: 2 / 1 ファイル
+
+**判定: 素材も無い のまま。** 別の角度を 1 つ確かめた——`MahlerBasis.lean` に在る Mahler は
+**連続関数の Mahler 基底**（$\mathbb{Z}_p\to\mathbb{Z}_p$ の連続関数の展開）であって、
+Mahler 測度でも Skolem–Mahler–Lech でもない。**同じ人名が別の対象に付いている。**
+零点集合を扱う道具（Strassmann の定理、p 進解析関数の零点の有限性）は依然 0 件である。
+
+### Cuoco–Monsky（$\mathbb{Z}_p^d$ 拡大の岩澤型漸近）
+
+- `CuocoMonsky`: 0 ファイル（定理の名前）
+- `MvPowerSeries.isAdicComplete`: 1 ファイル（`Mathlib/RingTheory/AdicCompletion/Completeness.lean`）
+- `MvPowerSeries`: 32 ファイル
+- `AdicCompletion`: 23 ファイル
+
+**判定: 「多変数の完備群環は無い」という測定そのものが不正確だった。**
+$\mathbb{Z}_p[[X_1,\dots,X_d]]$ は `MvPowerSeries (Fin d) ℤ_p` として在り、
+**変数の生成するイデアルについて adic complete であることも在る**（`MvPowerSeries.isAdicComplete`）。
+無いのは**多変数の Weierstrass 準備定理**と、**完備群環との同一視**である。
+測定の文をそう直した。**判定（素材も無い）は変えない**——決め手になる段（多変数の準備定理）が
+無いことは変わらないからである。**変わったのは「何が無いか」の精度である。**
+
+### 多変数の Mahler 測度
+
+- `MahlerMeasure`: 3 ファイル（1 変数）
+- `logMahler`: 1 ファイル
+- `torusIntegral`: 1 ファイル（`Mathlib/MeasureTheory/Integral/TorusIntegral.lean`）
+- `JensenFormula`: 2 ファイル
+
+**判定: 素材あり のまま。** engine の側を 2 つ足せた——トーラス上の積分（`torusIntegral`）と
+Jensen の公式（`JensenFormula`）は在る。多変数の Mahler 測度はこの 2 つで定義・評価する量なので、
+**「素材が無い」ではなく「多変数版がまだ書かれていない」である**という判定が engine の側からも支持される。
+**ただしこれは $\mathbb{R}/\mathbb{C}$ 側の量であり、本論文はこの段を $\mathbb{R}$ 脱出として隔離している。**
+
+### 整数行列の単因子の整除の鎖
+
+- `Matrix.smithNormalForm`: 0 ファイル
+- `smithCoeffs`: 3 ファイル
+- `smithNormalForm`: 5 ファイル
+- `invariantFactor`: 0 ファイル
+
+**判定: 鎖は無い のまま。** ただし **cycle 29 step 1 以来「この一点だけは走査が残っていない」と
+書かれていた穴は、本走査で塞いだ**——`Ideal.smithCoeffs` は在るが、その係数のあいだの整除
+（$a_1\mid a_2\mid\cdots$）を述べる宣言は無く、`invariantFactor` も 0 件である。
+台帳の「読みに依っている」という但し書きを外せる。
+
+## 走査の限界（正直に書く）
+
+- **engine の名前もこちらが選んでいる。** cycle 40 の教訓は「定理の名前で引くな」であって、
+  「engine の名前で引けば尽くせる」ではない。選んだ語の外側は依然として見えない。
+- **在ることが分かっても、当たるかは別である。** cycle 40 は実際に当てて確かめた
+  （`weierstrass_over_padicInt`）。本走査で新たに名前が挙がったもの
+  （`MvPolynomial.psum`・`torusIntegral`・`MvPowerSeries.isAdicComplete`）は、
+  **まだ当てていない。** そう書く。

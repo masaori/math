@@ -82,8 +82,12 @@ $(\operatorname{Tr}_{A_\mathbb{Q}/\mathbb{Q}}(\mu\theta^{j+k}))$ である。
 $\chi(\theta)=0$ と Cayley–Hamilton から、両辺は $\chi$ の与える同じ線形漸化式に従う。
 
 * $\chi$ の根の $N$ 乗和が $\psi(\eta\,\theta^N)$ に等しいこと。上の漸化式で残るのは
-  初期値 $N=0,\dots,\deg\chi-1$ の一致だけだが、**それは $\chi$ の係数から冪和を出す関係
-  （Newton の関係）そのものであり、mathlib にその形は無い。** 書いていない。そう書く。
+  初期値 $N=0,\dots,\deg\chi-1$ の一致だけで、それは $\chi$ の係数から冪和を出す関係
+  （Newton の関係）そのものである。書いていない。そう書く。
+  **この節は最初「mathlib にその形は無い」と書いていたが、同じサイクルの step 4 の走査で
+  言い過ぎだと分かったので直した**——Newton の関係そのものは在る（`MvPolynomial.psum` と
+  `psum_eq_mul_esymm_sub_sum`。`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。
+  無いのは行列のトレースの冪と特性多項式の係数を結ぶ形のほうである。
 * その降下（Gauss）は仮定として受け取っている。$\rho$ の無平方性は本文では $\mathbb{Z}[x]$ の側で
   言われており（`WStarRadical.squarefree_rad`）、段 1 が使うのは $\mathbb{Q}[x]$ へ写した側である。
   **書いてみて外側に現れた段であり、そう書く。**
