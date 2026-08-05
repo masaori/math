@@ -64,6 +64,7 @@ import IntegrableLattice.WStarRadicalMultiplicity
 import IntegrableLattice.WStarFactorExtraction
 import IntegrableLattice.WStarMuGram
 import IntegrableLattice.WStarGramDiscriminant
+import IntegrableLattice.PropTHenselLift
 import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition

@@ -317,7 +317,14 @@ export const SCOPE_CLAIMS: readonly ScopeClaim[] = [
       "命題 T の 2 の不分岐性は Hensel の持ち上げを円分体の完備化で使う。" +
       "台帳は「Hensel は mathlib に在るが円分体の完備化への配線が無い」と地の文で書いていたが、" +
       "登録が無かった。**cycle 34 step 4 で登録した**。" +
-      "2026-08-05 実測で、`Henselian` と `cyclotomic` が同じ行に現れる箇所は 0 件である。",
+      "2026-08-05 実測で、`Henselian` と `cyclotomic` が同じ行に現れる箇所は 0 件である。" +
+      "**cycle 42 step 2 で機構の名前で引き直した。判定は変わらないが、射程が狭まった。そう書く**——" +
+      "この段が要求しているのは円分体の完備化そのものではなく、" +
+      "「Hensel 的な局所環で、剰余体が原始 $L$ 乗根を持つこと」だけである。" +
+      "その舞台を仮定として受け取れば段 3 の中身は完備化を経由せずに書ける" +
+      "（`PropTHenselLift.lean`）。**配線が要るのは段 3 の全部ではなく舞台の構成だけである。** " +
+      "同じ実測で `HenselianLocalRing` のインスタンスがこの版の mathlib に 1 つも無いことも確かめた" +
+      "（`Mathlib/RingTheory/Henselian.lean` 以外のどのファイルもこの class を実装していない）。",
   },
   {
     entry: "paper_043b_theorem_trace_bound / 単因子の整除の鎖",

@@ -1,0 +1,75 @@
+# cycle 42 step 2: 命題 T の段 3 を機構の名前で引き直した走査
+
+実行日: 2026-08-05 / script: `scripts/mathlib-gap-survey-cycle42-hensel.sh`
+mathlib: この作業ツリーの `.lake/packages/mathlib`
+
+走査したファイル数: 8264
+
+## Hensel の持ち上げそのもの（機構）
+- `HenselianLocalRing`: 1 ファイル
+    .lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+- `HenselianRing`: 1 ファイル
+    .lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+- `IsAdicComplete.henselianRing`: 1 ファイル
+    .lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean
+- `hensels_lemma`: 1 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/Padics/Hensel.lean
+
+## 2 の不分岐性（機構は X^L-1 の分離性）
+- `X_pow_sub_one_separable_iff`: 3 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Basic.lean
+    .lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean
+    .lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean
+- `IsCyclotomicExtension`: 15 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/Complex.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/Discriminant.lean
+- `Algebra.IsUnramified`: 10 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Unramified.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/NumberField/ExistsRamified.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Discriminant/Different.lean
+- `Ideal.ramificationIdx`: 9 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Galois.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Unramified.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/RamificationInertia/Valuation.lean
+
+## 舞台の構成（完備化）
+- `adicCompletionIntegers`: 6 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean
+    .lake/packages/mathlib/Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean
+- `IsDiscreteValuationRing`: 20 ファイル
+    .lake/packages/mathlib/Mathlib/Topology/Algebra/Ring/Compact.lean
+    .lake/packages/mathlib/Mathlib/Topology/Algebra/Valued/LocallyCompact.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/Padics/RingHoms.lean
+- `IsAdicComplete`: 18 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicIntegers.lean
+    .lake/packages/mathlib/Mathlib/NumberTheory/LocalField/Basic.lean
+    .lake/packages/mathlib/Mathlib/RingTheory/Perfectoid/Untilt.lean
+
+## 原始根の冪の判定
+- `IsPrimitiveRoot.pow_eq_one_iff_dvd`: 0 ファイル
+- `IsPrimitiveRoot.pow_inj`: 1 ファイル
+    .lake/packages/mathlib/Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean
+
+## 判定は log 側に書く（この script は数を出すだけである）
+
+## 判定
+
+- **機構は在る。** `HenselianLocalRing` と `IsAdicComplete.henselianRing`
+  （どちらも `Mathlib/RingTheory/Henselian.lean`）、
+  `Polynomial.X_pow_sub_one_separable_iff`（3 ファイル）、
+  完備化の材料（`adicCompletionIntegers` 6 ファイル）。
+- **無いのは配線である。** `HenselianLocalRing` はこの版では
+  `Mathlib/RingTheory/Henselian.lean` にしか現れず、**インスタンスが 1 つも無い。**
+  完備離散付値環から Hensel 的局所環を作る道は自分で書くことになる。
+- **これまでの記録（円分体の完備化への配線が無い）は覆っていない。** 変わったのは射程である——
+  段 3 が要求しているのは円分体の完備化そのものではなく、
+  「Hensel 的な局所環で、剰余体が原始 $L$ 乗根を持つこと」だけであり、
+  その舞台を仮定として受け取れば段 3 の中身は完備化を経由せずに書ける
+  （`IntegrableLattice/PropTHenselLift.lean`）。
+- **走査の限界。** `IsPrimitiveRoot.pow_eq_one_iff_dvd` は連結語で引くと 0 件だが、
+  `IsPrimitiveRoot` の名前空間の中では `pow_eq_one_iff_dvd` として実在する
+  （`Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean` 122 行。本 step で実際に当てて使った）。
+  **連結語で 0 件でも無いとは限らない。** これは cycle 40・41 が見つけた
+  「定理の名前で引くと道具が見えない」と同じ形の、名前空間の側の版である。

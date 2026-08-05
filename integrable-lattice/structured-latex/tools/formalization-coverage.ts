@@ -593,9 +593,30 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "残るのは「$\pm1$ になるのが全域木のときに限る」という組合せの側）と、" +
       "2 の不分岐性・Hensel 持ち上げの段（Hensel は mathlib に在るが円分体の完備化への配線が無い）が残る。" +
       "**残りは 2 つである。**" +
-      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`。**重ね方は添字の付け替えだけである**——$V\\times(\\mathbb{Z}/N\\times\\mathbb{Z}/N')$ を $(V\\times\\mathbb{Z}/N')\\times\\mathbb{Z}/N$ と読み替えると外側が頂点集合 $V\\times\\mathbb{Z}/N'$ のブロック巡回行列になり、その各層のブロックが今度は頂点集合 $V$ のブロック巡回行列になるので、巡回の場合を 2 回使えば出る。(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`。**内容があるのは次数の側だけである**——隣接行列は定義がすでにブロック巡回で、言うべきことは $(u,g)$ の次数が $g$ に依らないことである。(c) 各層のブロックが評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`。voltage ラプラシアンを成分が群環 $R[\\mathbb{Z}/N]$ に住む行列として持つと、指標は群環から $R$ への環準同型を与え、その像がちょうど $\\widehat L(j)$ である。**環準同型なので行列式とも交換し、$\\det\\widehat L(j)$ は $\\det L(z)$ の $z=\\zeta^{j}$ での値になる。** **それでもこの主張は完了しない。そう書く**——この主張の残りは指標分解ではなく、2 の不分岐性・Hensel 持ち上げの段である（円分体の完備化への配線が mathlib に無い）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（一般の有限アーベル群は扱っておらず、基礎グラフを型として持っていない。`CharacterDecomposition.lean` と `CharacterDecompositionTwoVariable.lean` の残り一覧を見よ）。**残りは 1 つである。**",
+      "**cycle 37 step 2 で、外部定理 Kirchhoff の matrix-tree 定理そのものは完了した**（`SpanningConnectivity.det_submatrix_eq_one_or_neg_one` と `KirchhoffCounting.det_mul_transpose_eq_card_spanning`。根の行を落としたラプラシアンの行列式が全域木の個数に等しいところまで）。**この主張が matrix-tree を理由に挙げている段のうち、残っているのは指標分解（塔の各レベルへ分ける段）である**——本文は「指標による対角化と Kirchhoff の matrix-tree 定理から」と 2 つを並べて引いており、指標分解は Kirchhoff の定理の内容ではないので、本文の主張の側の残りとして数える。**cycle 38 step 2 でその指標分解の芯を書いた**（`CharacterDecomposition.lean` の `det_blockCirculant`。巡回群 $\\mathbb{Z}/N$ の平行移動で不変な行列——ブロック巡回行列——は、指標の行列で共役をとるとブロック対角になり、$\\det M=\\prod_j\\det\\widehat M(j)$ が出る）。**係数環に要るのは「$1$ の原始 $N$ 乗根を持ち $N$ が単元である整域」だけで、$\\mathbb{Z}[\\zeta_N]\\subset\\overline{\\mathbb{Q}}$ で足りる。$\\mathbb{R}$ にも $\\mathbb{C}$ にも出ない。** **cycle 39 step 2 で、cycle 38 が残していた 3 つを書いた**（`CharacterDecompositionTwoVariable.lean`）——(a) $\\Gamma=\\mathbb{Z}/N\\times\\mathbb{Z}/N'$（本文の $\\mathbb{Z}_\\ell^2$ 塔はこちら）の場合は `det_blockCirculant₂`。**重ね方は添字の付け替えだけである**——$V\\times(\\mathbb{Z}/N\\times\\mathbb{Z}/N')$ を $(V\\times\\mathbb{Z}/N')\\times\\mathbb{Z}/N$ と読み替えると外側が頂点集合 $V\\times\\mathbb{Z}/N'$ のブロック巡回行列になり、その各層のブロックが今度は頂点集合 $V$ のブロック巡回行列になるので、巡回の場合を 2 回使えば出る。(b) 導来グラフのラプラシアンがブロック巡回であることは `derivedLaplacian_eq_blockCirculant`。**内容があるのは次数の側だけである**——隣接行列は定義がすでにブロック巡回で、言うべきことは $(u,g)$ の次数が $g$ に依らないことである。(c) 各層のブロックが評価値であることは `hat_eq_evalChar` と `det_hat_eq_evalChar_det`。voltage ラプラシアンを成分が群環 $R[\\mathbb{Z}/N]$ に住む行列として持つと、指標は群環から $R$ への環準同型を与え、その像がちょうど $\\widehat L(j)$ である。**環準同型なので行列式とも交換し、$\\det\\widehat L(j)$ は $\\det L(z)$ の $z=\\zeta^{j}$ での値になる。** **それでもこの主張は完了しない。そう書く**——この主張の残りは指標分解ではなく、2 の不分岐性・Hensel 持ち上げの段である（円分体の完備化への配線が mathlib に無い）。**指標分解の側にも残りはあるが、それは本主張の残りではなく道具の一般性の話である**（一般の有限アーベル群は扱っておらず、基礎グラフを型として持っていない。`CharacterDecomposition.lean` と `CharacterDecompositionTwoVariable.lean` の残り一覧を見よ）。**残りは 1 つである。**" +
+      "**cycle 42 step 2 でその段の中身を書いた**（`PropTHenselLift.lean`）。" +
+      "**「Hensel は mathlib に在るが円分体の完備化への配線が無い」という記録を、" +
+      "定理の名前ではなく機構の名前で引き直した。判定は変わらないが、射程が狭まった。そう書く**——" +
+      "この段が要求しているのは円分体の完備化そのものではなく、" +
+      "「Hensel 的な局所環で、剰余体が原始 $L$ 乗根を持つこと」だけである。" +
+      "書いたのは 3 つで、(1) $L$ 奇なら標数 2 で $X^L-1$ が分離的であること" +
+      "（`separable_X_pow_sub_one_of_odd`。これが「2 は $\\mathbb{Q}(\\zeta_L)$ で不分岐」の中身であり、" +
+      "`X_pow_sub_one_separable_iff` がそのまま当たる）、" +
+      "(2) 剰余体で $\\zeta^{j}\\neq\\zeta^{-j}$ であること" +
+      "（`isUnit_sub_inv_pow_of_primitiveRoot`。$L\\nmid 2j$ から出るので、$L$ が奇であることが 2 度目に効く）、" +
+      "(3) $w^2-Aw+1$ の根の持ち上げ（`exists_root_quadratic_of_henselian`。" +
+      "$f(\\zeta^{j})$ が極大イデアルに入り $f'(\\zeta^{j})$ が単元であることを見て " +
+      "`HenselianLocalRing.is_henselian` へ渡すだけで、円分体も完備化も出てこない）。" +
+      "**それでもこの主張は完了しない。残ったのは舞台そのものの構成である。そう書く**——" +
+      "本ファイルは「Hensel 的な局所環で剰余体が原始 $L$ 乗根を持つ」ことを仮定として型に出しており、" +
+      "$\\mathbb{Q}(\\zeta_L)$ の 2 の上の素点での完備化がそれを満たすことは書いていない。" +
+      "**2026-08-05 実測**: `HenselianLocalRing` はこの版の mathlib では " +
+      "`Mathlib/RingTheory/Henselian.lean` にしか現れず、インスタンスが 1 つも無い。" +
+      "数論側の材料（`IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers`、6 ファイル）と " +
+      "`IsAdicComplete.henselianRing` は在るので、素材ではなく配線である。" +
+      "**段 4（Newton 多角形）との接続はこの段の内容ではない**——本ファイルが出すのは $r\\equiv\\zeta^{j}$ までで、$v(m_j)=1$ は段 4 の側である（組合せ核は `PropT.lean` に在る）。",
     remainingItems: [
-      "2 の不分岐性・Hensel 持ち上げの段",
+      "舞台そのものの構成である",
     ],
   },
   {

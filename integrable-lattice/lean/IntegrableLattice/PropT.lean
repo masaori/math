@@ -29,6 +29,9 @@
   mathlib に Hensel の補題（`Mathlib/NumberTheory/Padics/Hensel.lean`）はあるが $\mathbb{Z}_p$ 上の
   1 変数版であり、$\mathbb{Q}(\zeta_L)$ の素点での完備化・その付値環へ持ち上げる配線は自前で作る必要がある。
   **「mathlib に無い」とは書かない**（Hensel 自体は在る）。無いのは配線であって道具ではない。
+  **cycle 42 step 2 でこの段の中身を書いた**（`PropTHenselLift.lean`）。
+  そちらは舞台（Hensel 的な局所環で剰余体が原始 $L$ 乗根を持つこと）を仮定として受け取る形なので、
+  **本ファイルの段 3 が未形式化であることは変わらない**——残っているのは舞台の構成である。
 
 段 5 の総和と段 4 の Newton 多角形の組合せ核は、外部から来る事実を**仮定として明示**した形で形式化した
 （`v2_tau_eq_of_root_valuations`）。何を仮定したかが型に現れるので、人手証明のどこが Lean で

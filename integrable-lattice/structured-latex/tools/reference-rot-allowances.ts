@@ -204,6 +204,22 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/RingTheory/Henselian.lean",
+    reason:
+      "mathlib のファイル。cycle 42 step 2 の実測で、`HenselianLocalRing` が" +
+      "この 1 ファイルにしか現れず、インスタンスが 1 つも無いことの根拠として挙げている。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/scope-claim-support.ts",
+    reference: "Mathlib/RingTheory/Henselian.lean",
+    reason:
+      "mathlib のファイル。上と同じ実測の根拠であり、命題 T の段 3 が要求しているのが" +
+      "円分体の完備化そのものではなく Hensel 的な局所環であることの出所である。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
     file: "structured-latex/tools/external-theorem-coverage.ts",
     reference: "Mathlib/LinearAlgebra/FreeModule/PID.lean",
     reason:

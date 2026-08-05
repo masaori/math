@@ -782,6 +782,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 42 step 2 で新設。命題 T の段 3（不分岐性と Hensel 持ち上げ）を書いた。
+    file: "PropTHenselLift.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "舞台そのものの構成",
+        kind: "未形式化",
+        ledgerFragment: "舞台そのものの構成である",
+        crossFilePhrase: "$\\mathbb{Q}(\\zeta_L)$ の 2 の上の素点での完備化",
+      },
+      {
+        leanFragment: "段 4 との接続（$v(m_j)=1$）",
+        kind: "未形式化",
+        ledgerFragment: "段 4（Newton 多角形）との接続はこの段の内容ではない",
+        crossFilePhrase: "段 4 との接続（$v(m_j)=1$）",
+      },
+    ],
+  },
+  {
     // cycle 42 step 1 で新設。$\det G$ を判別式と重み（ノルム）へ分ける段を書いた。
     file: "WStarGramDiscriminant.lean",
     declarationsAtReview: 4,

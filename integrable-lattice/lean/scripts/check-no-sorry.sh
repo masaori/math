@@ -764,6 +764,11 @@ targets=(
   IntegrableLattice.WStarGramDiscriminant.weightedGram_one_eq_traceMatrix
   IntegrableLattice.WStarGramDiscriminant.det_weightedGram_eq_norm_mul_discr
   IntegrableLattice.WStarGramDiscriminant.det_weightedGram_of_scalar_mu
+  # 命題 T の段 3（2 の不分岐性と Hensel 持ち上げ。PropTHenselLift.lean・cycle 42 step 2）
+  IntegrableLattice.PropTHenselLift.separable_X_pow_sub_one_of_odd
+  IntegrableLattice.PropTHenselLift.isUnit_sub_inv_pow_of_primitiveRoot
+  IntegrableLattice.PropTHenselLift.exists_root_quadratic_of_henselian
+  IntegrableLattice.PropTHenselLift.exists_root_congr_pow_of_odd
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a
