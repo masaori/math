@@ -1051,6 +1051,17 @@ export default defineBlocks([
       "IntegrableLattice.NewtonInitialValues.trace_pow_eq_of_charpoly_eq",
       "IntegrableLattice.JacobiFormula.derivative_det",
       "IntegrableLattice.JacobiFormula.derivative_det_eq_trace_adjugate",
+      "IntegrableLattice.WStarGaussDescent.squarefree_map",
+      "IntegrableLattice.WStarGaussDescent.derivative_mul_mu_of_integral",
+      "IntegrableLattice.WStarGaussDescent.det_weightedGram_mu_of_integral",
+      "IntegrableLattice.WStarGramAssembly.charpoly_blockDiagonal",
+      "IntegrableLattice.WStarGramAssembly.trace_pi_fin",
+      "IntegrableLattice.WStarGramAssembly.charpoly_mulMatrix",
+      "IntegrableLattice.WStarGramAssembly.trace_pow_adjoinRoot_pow",
+      "IntegrableLattice.WStarGramAssembly.trace_mu_pow_eq_sum",
+      "IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mu",
+      "IntegrableLattice.WStarGramAssembly.trace_mu_eq_card",
+      "IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mu_all",
     ],
     statement: [
       paragraph([

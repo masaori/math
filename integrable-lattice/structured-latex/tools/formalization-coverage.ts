@@ -354,8 +354,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_046_theorem_wstar_different",
-    state: "部分的",
-    remaining:
+    state: "完了",
+    note:
       "cycle 28 で 3 段のうち 2 段を形式化した（PropWStarDifferent.lean）。" +
       "微分の段（$\\chi'=h\\cdot\\sum_i a_i f_i'(\\rho/f_i)$）と、" +
       "付値の段（$\\min\\{j:\\forall\\mathfrak p,\\ j\\,e_\\mathfrak p\\ge v_\\mathfrak p\\}" +
@@ -589,11 +589,33 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**これで cycle 43 step 5 の `trace_pow_eq_of_charpoly_eq_of_initial` が仮定として" +
       "受け取っていた初期値の一致が落ちた。** " +
       "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない（係数環は任意の可換環である）。" +
-      "**残りは 2 件である。**",
-    remainingItems: [
-      "$w^*$ の等式を組み立てる段",
-      "$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）",
-    ],
+      "**cycle 46 step 1 で残る 2 件を書いた。この主張は完了である。そう書く。** " +
+      "(1) $\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）は**配線だけだった**" +
+      "（`WStarGaussDescent.lean`）——cycle 38 step 1 の " +
+      "`WStarSquarefree.squarefree_map_of_monic` がその降下そのものであり、" +
+      "**書いた側と使う側が 3 サイクルにわたって繋がっていなかった。** " +
+      "これは cycle 35・36・40 の「数と実態がずれる」型ではなく、" +
+      "**在るものに気付かないまま同じ事柄を仮定として立て直した**型である。" +
+      "(2) $w^*$ の等式を組み立てる段は `WStarGramAssembly.lean` で書いた。" +
+      "**本文の整数行列 $G=(\\operatorname{Tr}T^{i+j})$ と代数の Gram 行列 " +
+      "$(\\operatorname{Tr}_{A_K}(\\mu\\theta^{j+k}))$ が同じ行列であることが、" +
+      "$\\operatorname{Tr}T^N=\\operatorname{Tr}_{A_K}(\\mu\\theta^N)$ である" +
+      "（`trace_pow_eq_trace_mu_all`）。** " +
+      "道は 3 つに分かれた。$\\chi$ を特性多項式にもつ行列を代数の側で作ること" +
+      "（$K[x]/(\\chi)$ の冪基底に関する $\\theta$ 倍写像。`charpoly_mulMatrix`）、" +
+      "重複度を落とすこと（$\\operatorname{Tr}_{K[x]/(f^a)}(\\theta^N)" +
+      "=a\\operatorname{Tr}_{K[x]/(f)}(\\theta^N)$。`trace_pow_adjoinRoot_pow`）、" +
+      "そして中国剰余で成分へ分けること（`trace_mu_pow_eq_sum`）である。" +
+      "**mathlib に無くて書いたのは 3 本**（一様なブロック対角の特性多項式 `charpoly_blockDiagonal`、" +
+      "添字の付け替えでトレースが変わらないこと `trace_reindex`、" +
+      "直積代数のトレースの分解 `trace_pi_fin`。いずれも 2026-08-05 実測で 0 件）。" +
+      "**ブロックの大きさが揃っていない形（`blockDiagonal\'`）は要らなかった**——" +
+      "揃っていない並べ方は代数の側（中国剰余）が引き受けるので、" +
+      "cycle 43 step 1 が測った「`blockDiagonal\'` の行列式が無い」という壁に当たらない。" +
+      "**$N=0$ の成分だけ道が違う。そう書く**——$T^0$ は単位行列で特性多項式の情報を持たないので" +
+      "トレース冪の一致が使えず、次元の勘定で書いた（`trace_mu_eq_card`。" +
+      "$\\operatorname{Tr}T^0=r$ と $\\sum_i a_i\\deg f_i=\\deg\\chi=r$）。" +
+      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない。",
   },
   {
     block: "paper_051_theorem_duality",

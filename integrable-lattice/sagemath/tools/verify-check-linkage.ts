@@ -113,7 +113,13 @@ if (!leanAvailable) {
   for (const { blockId, name } of leanRefs) {
     // `theorem Foo.bar` / `lemma Foo.bar` / namespace 内の宣言を素朴に探す。
     const short = name.split(".").pop() as string;
-    if (!leanSource.includes(name) && !new RegExp(`\\b(theorem|lemma|def)\\s+${short}\\b`).test(leanSource)) {
+    // 末尾の `\b` は素数付きの名前（`lemma_Q1'`）に当たらない——`'` は語の文字ではないので、
+    // `'` の後ろに語の境界が立たない。**実在する宣言を「見つからない」と報告していた**
+    // （cycle 46 step 1 に実測。`PropQLaurentLift.lemma_Q1'` の 1 件）。
+    // Lean の識別子に使える文字（`'` と `_` を含む）が続かないことを見る形へ直す。
+    const escaped = short.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const declPattern = new RegExp(`(theorem|lemma|def)\\s+${escaped}(?![A-Za-z0-9_'])`);
+    if (!leanSource.includes(name) && !declPattern.test(leanSource)) {
       problems.push(`${blockId}.lean が指す ${name} が Lean ソースに見つからない（対応が切れている）`);
     }
   }

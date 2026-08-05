@@ -933,6 +933,29 @@ targets=(
   IntegrableLattice.SpanningConnectivity.sum_incMatrixSigned_component
   IntegrableLattice.SpanningConnectivity.exists_ne_zero_vecMul_of_not_reach
   IntegrableLattice.SpanningConnectivity.det_submatrix_eq_zero_of_not_reach
+  # 命題 W* の Gauss 降下（WStarGaussDescent.lean・cycle 46 step 1）
+  IntegrableLattice.WStarGaussDescent.squarefree_map
+  IntegrableLattice.WStarGaussDescent.isUnit_aeval_derivative_of_integral
+  IntegrableLattice.WStarGaussDescent.derivative_mul_mu_of_integral
+  IntegrableLattice.WStarGaussDescent.det_weightedGram_mu_of_integral
+  # 命題 W* の Gram 行列の同定（WStarGramAssembly.lean・cycle 46 step 1）
+  IntegrableLattice.WStarGramAssembly.charmatrix_blockDiagonal
+  IntegrableLattice.WStarGramAssembly.charpoly_blockDiagonal
+  IntegrableLattice.WStarGramAssembly.trace_reindex
+  IntegrableLattice.WStarGramAssembly.trace_pow_eq_of_charpoly_eq_of_equiv
+  IntegrableLattice.WStarGramAssembly.charpoly_replicate
+  IntegrableLattice.WStarGramAssembly.trace_pow_replicate
+  IntegrableLattice.WStarGramAssembly.charpoly_mulMatrix
+  IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mulMatrix
+  IntegrableLattice.WStarGramAssembly.trace_pow_adjoinRoot_pow
+  IntegrableLattice.WStarGramAssembly.trace_pi_fin
+  IntegrableLattice.WStarGramAssembly.crtEquiv_apply
+  IntegrableLattice.WStarGramAssembly.crtEquiv_root
+  IntegrableLattice.WStarGramAssembly.pairwise_isCoprime_pow
+  IntegrableLattice.WStarGramAssembly.trace_mu_pow_eq_sum
+  IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mu
+  IntegrableLattice.WStarGramAssembly.trace_mu_eq_card
+  IntegrableLattice.WStarGramAssembly.trace_pow_eq_trace_mu_all
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと
