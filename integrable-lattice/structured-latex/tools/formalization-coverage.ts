@@ -243,9 +243,37 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**`WStarMuGram.lean` が持っているのは $\\chi'/h\\equiv a_i\\,\\rho'\\pmod{f_i}$ という" +
       "多項式の合同までで、射影を経由した像の等式は書いていない**" +
       "（2026-08-05 に同ファイルを直読して確かめた。同ファイルの段 3 自身が" +
-      "「成分 $K_i$ での $\\mu$ の像そのものを $a_i$ と書く形にはしていない」と書いている）。",
+      "「成分 $K_i$ での $\\mu$ の像そのものを $a_i$ と書く形にはしていない」と書いている）。" +
+      "**cycle 44 step 1 でその同定を書いた**（`PropCMuComponent.lean`）。" +
+      "**着手して測ると、要るものは 2 つに分かれ、片方は mathlib に在った。そう書く**——" +
+      "射影そのものは在り（`AdjoinRoot.algHomOfDvd`、`Mathlib/RingTheory/AdjoinRoot.lean` 456 行。" +
+      "2026-08-05 実測、mathlib `520045ab14` の 8264 ファイル）、自分で作る必要は無かった。" +
+      "無かったのは合同から像の等式へ渡るところで、渡るのに要るのは射影ではなく " +
+      "$\\rho'(\\theta_i)$ が $K_i$ の単元であることである" +
+      "（`WStarMuGram` の段 1 は $\\rho$ 自身の根についてしか言っていない）。" +
+      "書いたのは 5 段で、根における微分の値の単元性（`isUnit_aeval_derivative_of_root`）、" +
+      "射影を多項式の値へ当てる段（`algHomOfDvd_aeval_root` / `algHomOfDvd_mk`）、" +
+      "**像の同定そのもの**（`algHomOfDvd_mu_eq_multiplicity`）、" +
+      "中国剰余の同型の第 $i$ 成分がその射影であること" +
+      "（`quotientProdAlgEquiv_apply_eq_algHomOfDvd`）、そして仮定を落とした本文の等式" +
+      "（`norm_mu_eq_prod_pow_natDegree` と " +
+      "`det_weightedGram_mu_eq_prod_pow_mul_discr`。**重みは仮定ではなく本文の構成で与えられる**）である。" +
+      "**着手前に見込んでいた型の橋は要らなかった**——商の側の書き換えを先に済ませてから " +
+      "`AdjoinRoot` の側へ移れば繋がる。" +
+      "**それでもこの主張は完了しない。段数も 1 段のまま、中身が入れ替わった。そう書く**——" +
+      "残っているのは、本文の $w^*=0$ が「$\\rho\\bmod p$ が分離的、かつ全ての重複度で " +
+      "$p\\nmid m_\\lambda$」と同値であることの翻訳である。" +
+      "**これは本欄の散文が cycle 29 以来「入っていない」と名指ししていたのに、" +
+      "残り項目としては 1 度も数えられていなかった事柄である**" +
+      "（`wStarOfCoeffs_eq_zero_iff` が与えるのは「適合基底の係数がどれも $p$ で割れない」" +
+      "という別の判定である。2026-08-05 に同ファイルを直読して確かめた）。" +
+      "**名指しはされていたが数えられていなかったので、数が動かないまま残っていた。そう書く。** " +
+      "形は $w^*=0\\iff p\\nmid\\det G$ を経由するはずで、そのためには " +
+      "$\\det G$ が単因子の積であること（整数行列の Smith 標準形）が要る。" +
+      "**それは mathlib に無いと実測されている側である**" +
+      "（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。",
     remainingItems: [
-      "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
+      "本文の $w^*=0$ が「$\\rho\\bmod p$ が分離的、かつ全ての重複度で $p\\nmid m_\\lambda$」と同値であることの翻訳である",
     ],
   },
   {

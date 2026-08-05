@@ -933,9 +933,27 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     items: [
       {
         leanFragment: "成分への射影で $\\mu$ の像が $a_i$ であること",
+        kind: "形式化済み",
+        witness: "IntegrableLattice.PropCMuComponent.algHomOfDvd_mu_eq_multiplicity",
+      },
+    ],
+  },
+  {
+    // cycle 44 step 1 で新設。命題 C′ に残っていた「成分への射影で mu の像が a_i」を書いた。
+    file: "PropCMuComponent.lean",
+    declarationsAtReview: 10,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "が分離的、かつ全ての重複度で",
         kind: "未形式化",
-        ledgerFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定である",
-        crossFilePhrase: "成分への射影で $\\mu$ の像が $a_i$",
+        ledgerFragment: "同値であることの翻訳である",
+        crossFilePhrase: "$w^*=0$ が「$\\rho\\bmod p$ が分離的",
+      },
+      {
+        leanFragment: "本文の整数行列 $(\\operatorname{Tr}T^{i+j})$ との同定",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "TracePowerRecurrence.lean" },
       },
     ],
   },

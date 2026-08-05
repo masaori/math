@@ -229,6 +229,14 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
     grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
   },
   {
+    file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/RingTheory/AdjoinRoot.lean",
+    reason:
+      "mathlib のファイル。cycle 44 step 1 の実測で、成分への射影が**在る**こと" +
+      "（`AdjoinRoot.algHomOfDvd`）の根拠として宣言行を直読した先である。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
     file: "structured-latex/tools/external-theorem-coverage.ts",
     reference: "Mathlib/LinearAlgebra/FreeModule/PID.lean",
     reason:

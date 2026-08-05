@@ -322,6 +322,10 @@ export default defineBlocks([
       "IntegrableLattice.PropCCrtWiring.quotientProdAlgEquiv",
       "IntegrableLattice.PropCCrtWiring.finrank_quotient_span",
       "IntegrableLattice.PropCCrtWiring.norm_eq_prod_pow_natDegree",
+      "IntegrableLattice.PropCMuComponent.algHomOfDvd_mu_eq_multiplicity",
+      "IntegrableLattice.PropCMuComponent.quotientProdAlgEquiv_apply_eq_algHomOfDvd",
+      "IntegrableLattice.PropCMuComponent.norm_mu_eq_prod_pow_natDegree",
+      "IntegrableLattice.PropCMuComponent.det_weightedGram_mu_eq_prod_pow_mul_discr",
     ],
     statement: [
       paragraph([

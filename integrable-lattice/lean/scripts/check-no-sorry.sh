@@ -794,6 +794,17 @@ targets=(
   IntegrableLattice.PropCCrtWiring.quotientProdAlgEquiv
   IntegrableLattice.PropCCrtWiring.finrank_quotient_span
   IntegrableLattice.PropCCrtWiring.norm_eq_prod_pow_natDegree
+  # 命題 C′ の残り 1 段＝成分への射影で mu の像が a_i であること（PropCMuComponent.lean・cycle 44 step 1）
+  IntegrableLattice.PropCMuComponent.isUnit_aeval_derivative_of_root
+  IntegrableLattice.PropCMuComponent.aeval_root_eq_zero_of_dvd
+  IntegrableLattice.PropCMuComponent.algHomOfDvd_aeval_root
+  IntegrableLattice.PropCMuComponent.algHomOfDvd_mk
+  IntegrableLattice.PropCMuComponent.dvd_rad
+  IntegrableLattice.PropCMuComponent.algHomOfDvd_mu_eq_multiplicity
+  IntegrableLattice.PropCMuComponent.quotientProdAlgEquiv_mk
+  IntegrableLattice.PropCMuComponent.quotientProdAlgEquiv_apply_eq_algHomOfDvd
+  IntegrableLattice.PropCMuComponent.norm_mu_eq_prod_pow_natDegree
+  IntegrableLattice.PropCMuComponent.det_weightedGram_mu_eq_prod_pow_mul_discr
   # 命題 T の舞台の構成＝完備な局所環が Hensel 的であること（HenselianStage.lean・cycle 43 step 3）
   IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing
   IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete

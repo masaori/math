@@ -76,3 +76,4 @@ import IntegrableLattice.TracePowerRecurrence
 import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition
+import IntegrableLattice.PropCMuComponent
