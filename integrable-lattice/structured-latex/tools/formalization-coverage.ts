@@ -573,10 +573,24 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "係数を取り出して初期値 $\\operatorname{Tr}(M^{k})$（$2\\le k<r$）を読む段の 2 つが残る。" +
       "**cycle 45 step 1 の全数の数え直しで、この欄の数え方を直した**——" +
       "散文はこの 2 つを名指ししているのに、残り項目の配列は「初期値の側」1 つとして数えていた。" +
-      "2 つに分けて数える。**残りは 4 件である。**",
+      "2 つに分けて数える。" +
+      "**cycle 45 step 4 でその 2 つを書いた**（`NewtonInitialValues.lean`）。" +
+      "**台帳が「形式冪級数へ開く段」と書いていたものは、開かなくてよかった。そう書く**——" +
+      "余因子行列の定義式 $\\operatorname{adj}(A)A=(\\det A)I$ に $A=1-X\\widetilde M$ を入れると " +
+      "$\\operatorname{adj}(A)=(\\det A)I+X\\operatorname{adj}(A)\\widetilde M$ という" +
+      "**多項式の中の漸化式**になり（`adjugate_recursion`）、$\\widetilde M^{k}$ と組んでトレースを取ると " +
+      "$T_k=(\\det A)\\operatorname{Tr}(M^{k})+XT_{k+1}$（`trace_adjugate_step`）である。" +
+      "$K$ 回展開すれば対数微分の等式が $R[X]$ の中の等式として出る" +
+      "（`neg_derivative_charpolyRev_expand`）。**無限和も収束も要らない。** " +
+      "係数を読む段も書いた——定数項が $1$ の多項式を掛けても低次の係数の消滅は移る" +
+      "（`coeff_eq_zero_of_mul`）ので、$\\det(1-XM)$ の定数項が $1$ であることから" +
+      "係数ごとの一致が出る。**結論は本文が「Newton の公式より」と引いている事柄そのものである**——" +
+      "特性多項式が同じ 2 つの行列はトレース冪がすべて一致する（`trace_pow_eq_of_charpoly_eq`）。" +
+      "**これで cycle 43 step 5 の `trace_pow_eq_of_charpoly_eq_of_initial` が仮定として" +
+      "受け取っていた初期値の一致が落ちた。** " +
+      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない（係数環は任意の可換環である）。" +
+      "**残りは 2 件である。**",
     remainingItems: [
-      "$\\operatorname{adj}(1-XM)$ を形式冪級数へ開く段",
-      "係数を取り出して初期値 $\\operatorname{Tr}(M^{k})$（$2\\le k<r$）を読む段",
       "$w^*$ の等式を組み立てる段",
       "$\\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）",
     ],

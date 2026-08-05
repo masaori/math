@@ -79,6 +79,7 @@ import IntegrableLattice.IwasawaDecomposition
 import IntegrableLattice.PropCMuComponent
 import IntegrableLattice.PropCWStarZero
 import IntegrableLattice.PropTStageWitness
+import IntegrableLattice.NewtonInitialValues
 import IntegrableLattice.PropTResidueRoot
 import IntegrableLattice.JacobiFormula
 import IntegrableLattice.IwasawaRootOfUnity

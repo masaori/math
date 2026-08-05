@@ -825,6 +825,19 @@ targets=(
   IntegrableLattice.PropTStageWitness.exists_isPrimitiveRoot_three_galoisField
   IntegrableLattice.PropTStageWitness.stage_nonempty
   IntegrableLattice.PropTStageWitness.exists_root_on_galoisField
+  # Newton の公式の初期値（NewtonInitialValues.lean・cycle 45 step 4）
+  IntegrableLattice.NewtonInitialValues.det_oneSubX
+  IntegrableLattice.NewtonInitialValues.map_derivative_oneSubX
+  IntegrableLattice.NewtonInitialValues.derivative_charpolyRev
+  IntegrableLattice.NewtonInitialValues.adjugate_recursion
+  IntegrableLattice.NewtonInitialValues.trace_lift_pow
+  IntegrableLattice.NewtonInitialValues.trace_adjugate_step
+  IntegrableLattice.NewtonInitialValues.neg_derivative_charpolyRev_expand
+  IntegrableLattice.NewtonInitialValues.sum_trace_pow_congr_of_charpolyRev_eq
+  IntegrableLattice.NewtonInitialValues.coeff_eq_zero_of_mul
+  IntegrableLattice.NewtonInitialValues.coeff_sum_trace
+  IntegrableLattice.NewtonInitialValues.trace_pow_eq_of_charpolyRev_eq
+  IntegrableLattice.NewtonInitialValues.trace_pow_eq_of_charpoly_eq
   # Jacobi の公式（行列式の微分。JacobiFormula.lean・cycle 44 step 3）
   IntegrableLattice.JacobiFormula.derivative_det
   IntegrableLattice.JacobiFormula.det_updateRow_eq_sum_adjugate
