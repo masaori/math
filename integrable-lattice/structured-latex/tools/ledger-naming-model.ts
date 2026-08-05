@@ -234,6 +234,13 @@ export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
     why: "cycle 46 step 1 で配線した（`WStarGaussDescent.squarefree_map`。素材は cycle 38 step 1 の `squarefree_map_of_monic` に在った）",
   },
   {
+    // cycle 47 step 3: 命題 J2′ の残りが本プロジェクト側の配線であることを書いた文。
+    block: "paper_091_theorem_theta_padic",
+    sentence: "どちらも本プロジェクトの側の配線であって、mathlib を引く段ではない——$\\bar A_m$ を点ごとの値として持っているものを 2 変数多項式として見る段を、まだ書いていない。",
+    kind: "残り",
+    why: "この文が名指ししている 2 つ（$\\bar A_2\\not\\equiv0$ と $k=2$ を結ぶ側・$\\ell=2$ の側）は、どちらも残り項目「命題 J2′ の同値」の内側である。cycle 47 step 3 はその項目の中身を狭めただけで、項目そのものは残っている",
+  },
+  {
     // cycle 47 step 2: 命題 W の数え直しの経緯を書いた 2 文。事柄の名指しではない。
     block: "paper_063_theorem_W",
     sentence: "そう書く**——cycle 45 が塞いだのは台帳の散文が名指ししながら数に入れていない場合で、検査 J がそれを見る。",

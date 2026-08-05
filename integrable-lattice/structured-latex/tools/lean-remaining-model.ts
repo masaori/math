@@ -1028,6 +1028,27 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 47 step 3 で新設。命題 J2′ の同値のうち代数だけで閉じる側を書いた。
+    file: "PropJ2PrimePolarization.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの（実測つき）",
+    items: [
+      {
+        leanFragment: "と $k=2$（$\\bar g$ の最低次数が $2$ であること）の同値",
+        kind: "未形式化",
+        ledgerFragment: "命題 J2′ の同値",
+        crossFilePhrase: "命題 J2′ の同値",
+      },
+      {
+        // $\ell=2$ の側（$\bar A_2$ が平方でないことの判定）。同じ配線の先にある。
+        leanFragment: "の側**（破れる $\\iff\\bar A_2$ が $\\mathbb{F}_2[T,S]$ の平方でない）",
+        kind: "未形式化",
+        ledgerFragment: "命題 J2′ の同値",
+        crossFilePhrase: "$\\ell=2$ の側（平方かどうかの判定）",
+      },
+    ],
+  },
+  {
     // cycle 47 step 1 で新設。判別式とノルムの関係を分離性なしで書いた。
     file: "PropCDiscrIdentification.lean",
     declarationsAtReview: 3,

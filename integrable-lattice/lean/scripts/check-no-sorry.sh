@@ -972,6 +972,11 @@ targets=(
   IntegrableLattice.PropCDiscrIdentification.sign_revPerm
   IntegrableLattice.PropCDiscrIdentification.det_eulerHankel
   IntegrableLattice.PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative
+  # 命題 J2′ の同値の代数の側（PropJ2PrimePolarization.lean・cycle 47 step 3）
+  IntegrableLattice.PropJ2PrimePolarization.choose_two_add
+  IntegrableLattice.PropJ2PrimePolarization.Bbar_eq_Abar_two_polarization
+  IntegrableLattice.PropJ2PrimePolarization.Bbar_eq_zero_iff
+  IntegrableLattice.PropJ2PrimePolarization.fails_iff_Abar_two_ne_zero
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと
