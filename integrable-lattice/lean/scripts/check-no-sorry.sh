@@ -777,6 +777,9 @@ targets=(
   IntegrableLattice.TruncatedValuation.le_emultiplicity_of_pow_dvd
   IntegrableLattice.TruncatedValuation.min_emultiplicity_add_eq
   IntegrableLattice.TruncatedValuation.min_emultiplicity_add_eq_seq
+  # Monsky の ord の漸近の第 3 段（IwasawaOrdCounting.lean・cycle 42 step 5）
+  IntegrableLattice.IwasawaOrdCounting.emultiplicity_eval_iwasawa
+  IntegrableLattice.IwasawaOrdCounting.sum_emultiplicity_eval_iwasawa
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

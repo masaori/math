@@ -782,6 +782,27 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 42 step 5 で新設。Monsky の ord の漸近の第 3 段の半分を書いた。
+    file: "IwasawaOrdCounting.lean",
+    externalEntry: "Monsky の p 進冪級数の定理",
+    declarationsAtReview: 2,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "評価写像そのものの構成",
+        kind: "未形式化",
+        ledgerFragment: "その評価が実際に存在すること",
+        crossFilePhrase: "$\\mathbb{Z}_p[[X]]$ の元を $\\zeta-1$ で評価する写像の構成",
+      },
+      {
+        leanFragment: "$\\sum_{\\zeta}v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側",
+        kind: "未形式化",
+        ledgerFragment: "の側である",
+        crossFilePhrase: "distinguished 多項式の $1$ の冪根での値の付値を数える段",
+      },
+    ],
+  },
+  {
     // cycle 42 step 4 で新設。命題 U の (U6) の残る側のうち、切り捨て付値の安定性を書いた。
     file: "TruncatedValuationStability.lean",
     declarationsAtReview: 3,

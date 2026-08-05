@@ -346,7 +346,8 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
       "併せて **$\\lambda=\\deg f$ が分解の取り方に依らず $g$ から決まること**を書いた" +
       "（`degree_eq_order_map`。$g_1$ の $\\bmod\\ p$ 還元の位数に等しい）。" +
       "**それでもこの外部定理は完了しない。残っているのは $\\mathrm{ord}$ の漸近そのものである。そう書く**——" +
-      "$1$ の冪根での評価と、その積の付値を数える段が要る。本 step はその手前までである。",
+      "$1$ の冪根での評価と、その積の付値を数える段が要る。本 step はその手前までである。" +
+      "**cycle 42 step 5 で第 3 段の半分を書いた**（`IwasawaOrdCounting.lean`）。**着手して測ると、この段は 2 つに割れた。そう書く**——(a) 評価を環準同型として受け取れば付値は分解に沿って足し算になること（`emultiplicity_eval_iwasawa`。$g=p^{\\mu}fh$ で $\\varphi(h)$ が単元・$\\varphi(p)$ が素元なら $v(\\varphi(g))=\\mu+v(\\varphi(f))$。単元の付値が $0$ であるというだけの内容である）と、その和の形（`sum_emultiplicity_eval_iwasawa`。$1$ の冪根を走る有限集合 $s$ について $\\sum_\\zeta v(\\varphi_\\zeta(g))=|s|\\mu+\\sum_\\zeta v(\\varphi_\\zeta(f))$。**$\\mu$ の側が $|s|$ に比例し、$\\lambda$ の側が $f$ の評価の和に落ちるという、漸近の骨格そのものである**）。(b) **その評価が実際に存在すること**——$\\mathbb{Z}_p[[X]]$ の元を $\\zeta-1$ で評価する写像の構成である。**冪級数の収束が要るので代数だけでは出ない。書いていない。そう書く。**本ファイルは評価を仮定として型に出しており、`PropT.lean` の段 5 と同じ受け取り方である。**残っているのはこの (b) と、$\\sum_\\zeta v(\\varphi_\\zeta(f))=\\lambda n+O(1)$ の側である。**",
   },
   {
     name: "Cuoco–Monsky の類数の漸近（$\\mathbb{Z}_p^d$ 拡大の岩澤型漸近）",
