@@ -347,6 +347,7 @@ export default defineBlocks([
       "sagemath/check/cycle18_ops_NTW_recheck",
     ],
     lean: [
+      "IntegrableLattice.AllCofactorsEqual.adjugate_const_of_kernel_const",
       "IntegrableLattice.NoProjZero",
       "IntegrableLattice.torus_nondegenerate_three",
       "IntegrableLattice.torus_degenerate_two",

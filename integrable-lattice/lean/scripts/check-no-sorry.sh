@@ -999,6 +999,17 @@ targets=(
   IntegrableLattice.PropTAdicStage.henselianLocalRing_adicCompletion
   IntegrableLattice.PropTAdicStage.residueFieldEquiv
   IntegrableLattice.PropTAdicStage.exists_root_quadratic_adicCompletion
+  # 命題 W の積公式に要る 3 つ目の道具の代数の側（AllCofactorsEqual.lean・cycle 49 step 4）
+  IntegrableLattice.AllCofactorsEqual.mulVec_one_eq_zero
+  IntegrableLattice.AllCofactorsEqual.vecMul_one_eq_zero
+  IntegrableLattice.AllCofactorsEqual.det_eq_zero_of_row_sum_zero
+  IntegrableLattice.AllCofactorsEqual.mul_adjugate_eq_zero
+  IntegrableLattice.AllCofactorsEqual.adjugate_mul_eq_zero
+  IntegrableLattice.AllCofactorsEqual.mulVec_adjugate_col
+  IntegrableLattice.AllCofactorsEqual.vecMul_adjugate_row
+  IntegrableLattice.AllCofactorsEqual.adjugate_const_of_kernel_const
+  IntegrableLattice.AllCofactorsEqual.lapMatrixOfInc_symm
+  IntegrableLattice.AllCofactorsEqual.lapMatrix_col_sum
   # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
   IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
   IntegrableLattice.PropKW2Converse.fst_latticeAut

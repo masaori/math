@@ -1195,6 +1195,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 49 step 4 で新設。全余因子が等しいことの代数の側を書いた file。
+    file: "AllCofactorsEqual.lean",
+    declarationsAtReview: 10,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "核が定数ベクトルだけであること（連結性の側）",
+        kind: "未形式化",
+        ledgerFragment: "積公式の段",
+        crossFilePhrase: "核が定数ベクトルだけであること（連結性の側）",
+      },
+    ],
+  },
+  {
     file: "KirchhoffCounting.lean",
     declarationsAtReview: 4,
     heading: "形式化しなかったもの",
