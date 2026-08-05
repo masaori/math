@@ -77,3 +77,4 @@ import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition
 import IntegrableLattice.PropCMuComponent
+import IntegrableLattice.PropTResidueRoot

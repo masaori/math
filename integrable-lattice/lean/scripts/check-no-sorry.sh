@@ -805,6 +805,12 @@ targets=(
   IntegrableLattice.PropCMuComponent.quotientProdAlgEquiv_apply_eq_algHomOfDvd
   IntegrableLattice.PropCMuComponent.norm_mu_eq_prod_pow_natDegree
   IntegrableLattice.PropCMuComponent.det_weightedGram_mu_eq_prod_pow_mul_discr
+  # 命題 T の残り 1 段＝剰余体が原始 L 乗根を持つこと（PropTResidueRoot.lean・cycle 44 step 2）
+  IntegrableLattice.PropTResidueRoot.isUnit_one_sub_pow
+  IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue
+  IntegrableLattice.PropTResidueRoot.isUnit_natCast_of_odd
+  IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue_of_odd
+  IntegrableLattice.PropTResidueRoot.exists_root_congr_pow_of_odd_of_charTwo
   # 命題 T の舞台の構成＝完備な局所環が Hensel 的であること（HenselianStage.lean・cycle 43 step 3）
   IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing
   IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete

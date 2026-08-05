@@ -712,9 +712,27 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**それでもこの主張は完了しない。段数も 1 段のまま、中身が入れ替わった。そう書く**——" +
       "残っているのは、その舞台の剰余体が原始 $L$ 乗根を持つことの同定である" +
       "（本文が言っているのは $\\mathbb{Q}(\\zeta_L)$ の 2 の上での完備化についてであり、" +
-      "`PropTHenselLift.lean` の段 1・段 2 は根の側を仮定として受け取ったままである）。",
+      "`PropTHenselLift.lean` の段 1・段 2 は根の側を仮定として受け取ったままである）。" +
+      "**cycle 44 step 2 でその根の側を書いた**（`PropTResidueRoot.lean`）。" +
+      "**中身は 1 行の恒等式である**——$\\prod_{k=1}^{L-1}(1-\\zeta^{k})=L$ で、" +
+      "$L$ が $O$ の単元なら各因子も単元、すなわち極大イデアルに入らないので、" +
+      "剰余体で $0<k<L$ の全てで $\\zeta^{k}\\neq1$ になる。" +
+      "**恒等式そのものは mathlib に在った**（`IsPrimitiveRoot.prod_one_sub_pow_eq_order`、" +
+      "`Mathlib/RingTheory/RootsOfUnity/Lemmas.lean` 33 行。2026-08-05 実測、" +
+      "mathlib `520045ab14` の 8264 ファイル）。**無いのは剰余体の側へ渡す段で、" +
+      "在るのは代数体の整数環についてのもの**（`IsPrimitiveRoot.idealQuotient_mk`）**だけであり、" +
+      "イデアルの絶対ノルムと $n$ が互いに素であることを要求するので局所環の極大イデアルへは当たらない。**" +
+      "書いたのは 4 段で、因子の単元性（`isUnit_one_sub_pow`）、剰余体での原始性" +
+      "（`isPrimitiveRoot_residue`）、**本文の「$L$ 奇なら 2 は不分岐」の単元性としての言い換え**" +
+      "（`isUnit_natCast_of_odd`。剰余体の標数が 2 なら奇数は単元である）、そして " +
+      "cycle 42 step 2 の結論から舞台の根の仮定を落とした形" +
+      "（`exists_root_congr_pow_of_odd_of_charTwo`）である。" +
+      "**それでもこの主張は完了しない。段数も 1 段のまま、中身が入れ替わった。そう書く**——" +
+      "残っているのは、本文の $\\mathbb{Q}(\\zeta_L)$ の 2 の上での完備化がこの舞台の形をしていること" +
+      "（$\\zeta_L$ を含み、剰余体の標数が 2 であること）の同定である。" +
+      "**代数の側は入った。残ったのは数論の側である。**",
     remainingItems: [
-      "その舞台の剰余体が原始 $L$ 乗根を持つことの同定である",
+      "完備化がこの舞台の形をしていること",
     ],
   },
   {

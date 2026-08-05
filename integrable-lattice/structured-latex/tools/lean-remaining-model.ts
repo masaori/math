@@ -919,9 +919,22 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     items: [
       {
         leanFragment: "その舞台の剰余体が原始 $L$ 乗根を持つこと",
+        kind: "形式化済み",
+        witness: "IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue_of_odd",
+      },
+    ],
+  },
+  {
+    // cycle 44 step 2 で新設。命題 T に残っていた「剰余体が原始 L 乗根を持つこと」を書いた。
+    file: "PropTResidueRoot.lean",
+    declarationsAtReview: 5,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "の 2 の上での完備化が、この舞台の形をしていること",
         kind: "未形式化",
-        ledgerFragment: "その舞台の剰余体が原始 $L$ 乗根を持つことの同定である",
-        crossFilePhrase: "その舞台の剰余体が原始 $L$ 乗根を持つこと",
+        ledgerFragment: "完備化がこの舞台の形をしていること",
+        crossFilePhrase: "2 の上での完備化が、この舞台の形",
       },
     ],
   },
