@@ -63,6 +63,7 @@ import IntegrableLattice.CharacterDecompositionTwoVariable
 import IntegrableLattice.WStarRadicalMultiplicity
 import IntegrableLattice.WStarFactorExtraction
 import IntegrableLattice.WStarMuGram
+import IntegrableLattice.WStarGramDiscriminant
 import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition

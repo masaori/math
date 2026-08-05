@@ -195,10 +195,31 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "体の上では行列の等式 $C\\,G=M_\\eta$ と $(\\det C)^2=1$ として入ったが" +
       "（命題 W\\* の欄を見よ）。**cycle 36 step 5 でこの欄を構造化したときに、ここが古いことが分かった**——整数への降下そのものは cycle 30 step 1 で入っており（`WStarIntegralDescent.lean`）、cycle 36 step 1 は可約な場合の降下も書いた（`WStarReducibleDescent.lean`）。**残っているのはその降下を命題 C′ のトレース列の周期の主張へ結ぶ段である**（命題 C″ と同じ壁）。**cycle 37 step 3 でその段を書いた**（`TracePeriodWStarLift.lean` の `dvd_of_mulVec_dvd_of_isPLevel`）——本文の「$Gb\\equiv0\\ (p^k)$ から $b\\equiv0\\ (p^{k-w^*})$」がそれである。**cycle 19 から「整数行列の Smith 標準形が mathlib に無い」を理由に仮定として型に出したままだった段だが、行列の単因子は要らなかった**——$G$ の像について `IsPLevel`（$p$ の外での包含の最小レベル）だけを使えばよく、それは `isLeast_isPLevel` が部分加群の適合基底から与えている。`IsPLevel` を単位ベクトルへ当てると各 $i$ で $G y_i=m_i p^{w}e_i$ が出るので、$m=\\prod_i m_i$ で係数を揃えると行列の等式 $G\\,Y=(m\\,p^{w})I$ になり（`exists_mul_eq_smul_one_of_isPLevel`）、$\\det G\\neq0$ なら左右を入れ替えられる。**したがってこの主張の残りは 1 つである。**" +
       "(2) $\\det G=\\operatorname{disc}(\\rho)\\cdot\\prod_\\lambda m_\\lambda$ の" +
-      "重複度の積の形（ノルムの形 $\\det G=\\pm N(\\eta)$ は入った）。" +
+      "重複度の積の形（ノルムの形 $\\det G=\\pm N(\\eta)$ は cycle 41 step 1 で入った）。" +
+      "**cycle 42 step 1 で、判別式の形そのものは入った**（`WStarGramDiscriminant.lean` の " +
+      "`det_weightedGram_eq_norm_mul_discr`）——重み $\\mu$ の Gram 行列は $\\mu$ 倍写像の行列の転置と " +
+      "重み無しの Gram 行列の積なので、行列式を取ると $\\det G=N(\\mu)\\cdot\\operatorname{disc}(\\rho)$ に" +
+      "分かれる（`weightedGram_eq_leftMulMatrix_transpose_mul`）。**符号は付かない**——" +
+      "cycle 41 の $\\pm N(\\eta)$ の $\\pm$ は $\\rho'(\\theta)$ のノルムとともに判別式の側へ吸われる。" +
+      "ここでいう $\\operatorname{disc}(\\rho)$ は冪基底のトレース形式の Gram 行列式（`Algebra.discr`）で、" +
+      "モニックな $\\rho$ についての本文の意味である。**モニック性も $\\theta$ が根であることも使わない**——" +
+      "要るのは基底が $\\theta$ の冪であることだけである。" +
+      "**$\\rho$ が既約な場合（本文が「とくに」と書いている場合）は重複度の積の形まで入った**" +
+      "（`det_weightedGram_of_scalar_mu`。$\\mu$ が定数 $a$ なので $N(\\mu)=a^{\\,r}$ であり、" +
+      "$r=\\deg\\rho$ が根の個数なのでこれが $\\prod_\\lambda m_\\lambda$ である）。" +
+      "**残っているのは可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$ である。そう書く**——" +
+      "$\\mu$ は成分 $K_i$ の上で $a_i$ をとる元なので $N(\\mu)=\\prod_i a_i^{\\deg f_i}$ が要り、" +
+      "そのためには $A_\\mathbb{Q}\\cong\\prod_i K_i$ の分解が要る。" +
+      "**2026-08-05 実測**: 中国剰余定理は環同型としては在るが" +
+      "（`Ideal.quotientInfRingEquivPiQuotient`、5 ファイル）、" +
+      "代数としての同型と、直積代数のノルムを因子のノルムの積へ分ける宣言は mathlib に無い" +
+      "（`Algebra.norm` と `Pi` を結ぶ宣言 0 件）。**配線ではなく素材が要る。**" +
+      "**併せて `Algebra.discr` と `Polynomial.discr` の一致は述べていない**——" +
+      "本文が言っているのは Gram 行列式の側であり、終結式で書く側は使っていないので、" +
+      "これは本主張の残りではない。" +
       "上界の証明で $w^*$ が果たす役割は仮定として型に出してある。",
     remainingItems: [
-      "の重複度の積の形",
+      "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$ である",
     ],
   },
   {

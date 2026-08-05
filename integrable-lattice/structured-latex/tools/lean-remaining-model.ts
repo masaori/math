@@ -782,6 +782,26 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 42 step 1 で新設。$\det G$ を判別式と重み（ノルム）へ分ける段を書いた。
+    file: "WStarGramDiscriminant.lean",
+    declarationsAtReview: 4,
+    heading: "形式化しなかったもの（実測つき）",
+    items: [
+      {
+        leanFragment: "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$",
+        kind: "未形式化",
+        ledgerFragment: "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$ である",
+        crossFilePhrase: "可約な場合の $N(\\mu)=\\prod_\\lambda m_\\lambda$",
+      },
+      {
+        leanFragment: "`Algebra.discr` と `Polynomial.discr` の一致",
+        kind: "未形式化",
+        ledgerFragment: "`Algebra.discr` と `Polynomial.discr` の一致は述べていない",
+        crossFilePhrase: "`Algebra.discr` と `Polynomial.discr` の一致",
+      },
+    ],
+  },
+  {
     // cycle 38 step 1 で新設。無平方性から $\det G\neq0$ を出す段を書いた。
     file: "WStarSquarefreeNonzero.lean",
     declarationsAtReview: 4,

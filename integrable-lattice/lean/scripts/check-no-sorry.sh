@@ -759,6 +759,11 @@ targets=(
   IntegrableLattice.WStarMuGram.det_weightedGram_mu_of_squarefree
   IntegrableLattice.WStarMuGram.psi_eta_recurrence
   IntegrableLattice.WStarMuGram.trace_pow_recurrence
+  # 命題 C′ の det G の判別式・重複度の形（WStarGramDiscriminant.lean・cycle 42 step 1）
+  IntegrableLattice.WStarGramDiscriminant.weightedGram_eq_leftMulMatrix_transpose_mul
+  IntegrableLattice.WStarGramDiscriminant.weightedGram_one_eq_traceMatrix
+  IntegrableLattice.WStarGramDiscriminant.det_weightedGram_eq_norm_mul_discr
+  IntegrableLattice.WStarGramDiscriminant.det_weightedGram_of_scalar_mu
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

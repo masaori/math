@@ -281,6 +281,10 @@ export default defineBlocks([
       "IntegrableLattice.wStarOfCoeffs_eq_zero_iff",
       "IntegrableLattice.TracePeriodWStar.exists_mul_eq_smul_one_of_isPLevel",
       "IntegrableLattice.TracePeriodWStar.dvd_of_mulVec_dvd_of_isPLevel",
+      "IntegrableLattice.WStarGramDiscriminant.weightedGram_eq_leftMulMatrix_transpose_mul",
+      "IntegrableLattice.WStarGramDiscriminant.weightedGram_one_eq_traceMatrix",
+      "IntegrableLattice.WStarGramDiscriminant.det_weightedGram_eq_norm_mul_discr",
+      "IntegrableLattice.WStarGramDiscriminant.det_weightedGram_of_scalar_mu",
     ],
     statement: [
       paragraph([
