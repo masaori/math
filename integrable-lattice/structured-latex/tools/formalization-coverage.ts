@@ -168,8 +168,8 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
   },
   {
     block: "paper_043b_theorem_trace_bound",
-    state: "部分的",
-    remaining:
+    state: "完了",
+    note:
       "命題 C′ は cycle 29 から cycle 48 まで 20 サイクル積み上げた。" +
       "上界の主張そのもの（`TracePeriodAssembly.lean` の tracePeriod_propC_bound）、" +
       "$w^*$ の定義（`WStarElementaryDivisors.lean`）、$w^*=0$ の判定" +
@@ -215,11 +215,25 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**完了 と書いた瞬間に 検査 L が捕まえた。**そう書く）。" +
       "鎖の存在そのものは整数行列の Smith 標準形であり、mathlib に無いと実測されている側である" +
       "（`lean/logs/mathlib-gap-survey-cycle41-engines.log`）。" +
-      "**したがってこの主張の残りは 1 件である**——" +
-      "本文が $w^*$ を単因子の鎖の言葉（最大単因子 $e_r$ の $p$ 進付値）で書いていることとの一致 である。",
-    remainingItems: [
-      "本文が $w^*$ を単因子の鎖の言葉（最大単因子 $e_r$ の $p$ 進付値）で書いていることとの一致",
-    ],
+      "**cycle 49 step 2 でその一致を書いた。この主張は完了する。そう書く**" +
+      "（`PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last`）。" +
+      "**焦点は「鎖を経由せずに言えるかをまず測ること」だった。測った。鎖の存在を構成する必要は無い。そう書く**——" +
+      "既に在る `WStarElementaryDivisors.isLeast_isPLevel` が $w^*$ を内在的な集合" +
+      "$\\{j:\\ p^j\\mathbb{Z}^r\\subseteq G\\mathbb{Z}^r\\ (p\\ \\text{の外で})\\}$ の最小元として与えており、" +
+      "この集合は $G$ だけで決まって基底の取り方にも鎖にも依らない。**最小元は一意なので、" +
+      "同じ集合の最小元として書けるものはすべて等しい。** " +
+      "そこで、$U,V$ が単模で $UGV=\\operatorname{diag}(e)$ かつ $e$ が整除の鎖をなすとき、" +
+      "$v_p(e_{\\text{最後}})$ がその最小元であることを書いた（`isLeast_isPLevel_of_smith`）。" +
+      "中身は 4 つで、対角行列の像が成分ごとの整除で書けること、その像のレベルが対角成分の付値の最大値であること、" +
+      "単模行列を左右から掛けてもレベルが変わらないこと、そして整除の鎖では最大値が鎖の頂点の付値であることである。" +
+      "**Smith 標準形の存在（そのような $U,V,e$ が取れること）は使っていない**——" +
+      "本文が $e_r$ と書くとき、鎖は本文が仮定として置いているものだからである。" +
+      "**鎖が mathlib に無いことは 2026-08-05 に測り直した**" +
+      "（`lean/logs/mathlib-gap-survey-cycle49-smith-chain.log`。適合基底そのものは在るが、" +
+      "`smithCoeffs` を含む行のうち整除を述べているものは 0 件、`elementary divisor` も" +
+      "`invariant factor` も 3 段とも 0 件）。" +
+      "**$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない**"
+      + "（扱うのは $\\mathbb{Z}$ の整除と $\\mathbb{N}$ の付値だけである）。",
   },
   {
     block: "paper_044_theorem_newton",

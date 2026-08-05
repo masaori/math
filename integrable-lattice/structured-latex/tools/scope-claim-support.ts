@@ -248,6 +248,22 @@ export const SCOPE_CLAIMS: readonly ScopeClaim[] = [
       "（cycle 32 step 4 の実測で分かった。主張の中身は変わらない）。",
   },
   {
+    entry: "整数行列の Smith 標準形（適合基底の形）",
+    kind: "在るが概念を使っていない",
+    file: "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+    absentToken: "elementaryDivisor",
+    why:
+      "本論文の本文は $w^*$ を「Smith 標準形の最後の対角成分 $e_r$ の $p$ 進付値」と書いている。" +
+      "mathlib には適合基底の版（`Submodule.smithNormalForm` ほか）が在るが、" +
+      "**係数どうしの整除の鎖（単因子）は無い。** " +
+      "**cycle 49 step 2 で登録した**——同 step の走査で、`smithCoeffs` を含む行のうち整除を述べているものが" +
+      "0 件、`elementary divisor` も `invariant factor` も 3 段とも 0 件であることを測った" +
+      "（`lean/logs/mathlib-gap-survey-cycle49-smith-chain.log`）。" +
+      "**それでも本論文はこれを要さない**——鎖を仮定として受け取れば、" +
+      "$v_p(e_r)$ が内在的な最小元に一致することが言える" +
+      "（`PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last`）。",
+  },
+  {
     entry: "paper_031_theorem_lsw / 多変数の Mahler 測度（解析側）",
     kind: "在るが概念を使っていない",
     file: "Mathlib/Analysis/Polynomial/MahlerMeasure.lean",

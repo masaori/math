@@ -1152,16 +1152,29 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     heading: "形式化しなかったもの",
     items: [
       {
+        // cycle 49 step 2 で入った（鎖は仮定として受け取る。Smith 標準形の存在は使わない）。
         leanFragment: "の言う「$G$ の最大単因子」であること",
-        kind: "未形式化",
-        ledgerFragment: "単因子",
-        crossFilePhrase: "整除の鎖との一致",
+        kind: "形式化済み",
+        witness: "wStarOfCoeffs_eq_factorization_last",
       },
       {
         // cycle 44 step 1 で入った。
         leanFragment: "成分への射影で $\\mu$ の像が $a_i$ であることの同定",
         kind: "形式化済み",
         witness: "algHomOfDvd_mu_eq_multiplicity",
+      },
+    ],
+  },
+  {
+    // cycle 49 step 2 で新設。本文の単因子の鎖の言葉との一致を書いた file。
+    file: "PropCElementaryDivisorChain.lean",
+    declarationsAtReview: 9,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "Smith 標準形の鎖の存在そのもの",
+        kind: "参照だけ",
+        referent: { kind: "ログ", target: "mathlib-gap-survey-cycle49-smith-chain.log" },
       },
     ],
   },
@@ -1354,6 +1367,12 @@ export type LeanRemainingAuditInput = {
   readonly referentExists?: (referent: LeanRemainingReferent) => boolean;
   /** 宣言名が `lean/` に実在するか（`形式化済み` の証拠を確かめる。cycle 35 step 5）。 */
   readonly declarationExists?: (name: string) => boolean;
+  /**
+   * その欄について、この語が 対象外（別の欄で数えている）と宣言されているか（cycle 49 step 2）。
+   * 同じ file が 2 つの欄へ紐づき、項目が片方の欄の残りでしかない場合に使う。
+   * 宣言先の実在は「閉じる前提の検査」が確かめている。
+   */
+  readonly closingExempt?: (block: string, phrase: string) => boolean;
 };
 
 /**
@@ -1365,7 +1384,8 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
   counts: Record<LeanRemainingKind, number>;
   unlinked: number;
 } {
-  const { entry, section, linked, externalText = null, referentExists, declarationExists } = input;
+  const { entry, section, linked, externalText = null, referentExists, declarationExists,
+    closingExempt } = input;
   const violations: string[] = [];
   const counts: Record<LeanRemainingKind, number> = { 未形式化: 0, 形式化済み: 0, 参照だけ: 0 };
   let unlinked = 0;
@@ -1436,9 +1456,12 @@ export function auditLeanRemaining(input: LeanRemainingAuditInput): {
       );
     }
     for (const l of linked) {
-      if (l.state === "完了") {
-        violations.push(`[残りがあるのに完了] ${l.block} — ${entry.file} が未形式化の項目を挙げている`);
-      }
+      if (l.state !== "完了") continue;
+      // cycle 49 step 2: 同じ file が 2 つの欄へ紐づくとき、項目が片方の欄の残りでしかない場合がある。
+      // 「閉じる前提の検査」がその欄について 対象外（別の欄で数えている）を宣言していれば通す
+      // （宣言先の実在はあちらが確かめている。ここで二重に赤くしない）。
+      if (closingExempt?.(l.block, item.crossFilePhrase) === true) continue;
+      violations.push(`[残りがあるのに完了] ${l.block} — ${entry.file} が未形式化の項目を挙げている`);
     }
   });
   return { violations, counts, unlinked };

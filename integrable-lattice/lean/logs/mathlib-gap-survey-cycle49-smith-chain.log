@@ -1,0 +1,61 @@
+=== 日付 ===
+2026-08-05T12:15:53Z
+=== mathlib commit ===
+520045ab14e26149ee970e2e617ca04b09bde5d6
+=== toolchain ===
+leanprover/lean4:v4.32.1
+=== 走査対象 Mathlib/*.lean ファイル数 ===
+8264
+
+=== 行列の Smith 標準形（対角化そのもの） ===
+--- (1) 連結語の内容 grep: 'smithNormalFormMatrix'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'smith normal form'
+files=3
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Int.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean
+--- (3) 語幹の case-insensitive ファイル名検索: 'smith normal form'
+files=0
+
+=== 単因子の整除の鎖 ===
+--- (1) 連結語の内容 grep: 'smithCoeffs_dvd'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'elementary divisor'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'elementary divisor'
+files=0
+
+=== 不変因子 ===
+--- (1) 連結語の内容 grep: 'invariantFactors'
+files=0
+--- (2) 語幹の case-insensitive 内容 grep: 'invariant factor'
+files=0
+--- (3) 語幹の case-insensitive ファイル名検索: 'invariant factor'
+files=0
+
+=== 守備範囲を宣言行で直読する（在るが射程が足りないもの） ===
+--- 適合基底そのものは在る（Submodule.smithNormalForm の宣言行）
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:38:- `Submodule.smithNormalForm`: if `R` is a PID, then `M` has a basis
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:141:/-- The induction hypothesis of `Submodule.basisOfPid` and `Submodule.smithNormalForm`.
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:277:See also the stronger version `Submodule.smithNormalForm`.
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:297:See also the stronger version `Submodule.smithNormalForm`.
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:313:See also the stronger version `Submodule.smithNormalFormOfLE`.
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:482:See `Submodule.smithNormalFormOfLE` for a version of this theorem that returns
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:514:noncomputable def Submodule.smithNormalFormOfLE [Finite ι] (b : Basis ι R M) (N O : Submodule R M)
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:530:See also `Ideal.smithNormalForm`, which moreover proves that the dimension of
+--- Ideal.smithCoeffs について在る宣言（係数どうしの整除が在るか）
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:33:    (S ⧸ I) ≃ₗ[R] ∀ i, R ⧸ span ({I.smithCoeffs b hI i} : Set R) :=
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:39:    S ⧸ I ≃+ ∀ i, ZMod (I.smithCoeffs b hI i).natAbs :=
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:57:    (S ⧸ I) ≃ₗ[F] ⨁ i, R ⧸ span ({I.smithCoeffs b hI i} : Set R) :=
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:61:    [∀ i, Module.Free F (R ⧸ span ({I.smithCoeffs b hI i} : Set R))]
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:62:    [∀ i, Module.Finite F (R ⧸ span ({I.smithCoeffs b hI i} : Set R))] :
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:64:      ∑ i, Module.finrank F (R ⧸ span ({I.smithCoeffs b hI i} : Set R)) := by
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:31:    Associated (Algebra.norm R f) (∏ i, smithCoeffs b _ (span_singleton_eq_bot.not.2 hf) i) := by
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:57:    FiniteDimensional F (F[X] ⧸ span ({I.smithCoeffs b hI i} : Set F[X])) :=
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:58:  PowerBasis.finite <| AdjoinRoot.powerBasis <| I.smithCoeffs_ne_zero b hI i
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:69:  rw [natDegree_prod _ _ fun i _ => smithCoeffs_ne_zero b _ h i, finrank_quotient_eq_sum F h b]
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Norm.lean:71:  exact (AdjoinRoot.powerBasis <| smithCoeffs_ne_zero b _ h i).finrank
+.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean:682:The definitions `Ideal.ringBasis`, `Ideal.selfBasis`, `Ideal.smithCoeffs` are (noncomputable)
+--- smithCoeffs を含む行のうち、整除（∣ / Dvd）を述べているもの
+0

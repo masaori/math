@@ -26,6 +26,7 @@ import {
 import { FORMALIZATION_COVERAGE } from "./formalization-coverage.ts";
 import { EXTERNAL_THEOREM_COVERAGE } from "./external-theorem-coverage.ts";
 import { loadContentFiles } from "./content-modules.ts";
+import { CLOSING_PRECONDITION_DISPOSITIONS } from "./closing-precondition-dispositions.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const leanDir = join(here, "..", "..", "lean", "IntegrableLattice");
@@ -223,6 +224,14 @@ for (const entry of LEAN_REMAINING_LEDGER) {
   }));
   const result = auditLeanRemaining({
     declarationExists,
+    closingExempt: (block, phrase) =>
+      CLOSING_PRECONDITION_DISPOSITIONS.some(
+        (d) =>
+          d.block === block &&
+          d.file === entry.file &&
+          d.phrase === phrase &&
+          d.kind === "対象外（別の欄で数えている）",
+      ),
     entry,
     section,
     linked,

@@ -987,6 +987,14 @@ targets=(
   IntegrableLattice.PropCResultantNorm.norm_aeval_eq_resultant
   IntegrableLattice.PropCResultantNorm.algebra_discr_eq_polynomial_discr
   IntegrableLattice.PropCResultantNorm.wStar_eq_zero_iff_separable_and_not_dvd
+  # 命題 C′ の $w^*$ と本文の単因子の鎖の言葉との一致（PropCElementaryDivisorChain.lean・cycle 49 step 2）
+  IntegrableLattice.PropCElementaryDivisorChain.mem_range_diagonal_iff
+  IntegrableLattice.PropCElementaryDivisorChain.isLeast_isPLevel_diagonal
+  IntegrableLattice.PropCElementaryDivisorChain.isPLevel_mul_left_iff
+  IntegrableLattice.PropCElementaryDivisorChain.isPLevel_mul_right_iff
+  IntegrableLattice.PropCElementaryDivisorChain.sup_factorization_eq_last_of_chain
+  IntegrableLattice.PropCElementaryDivisorChain.isLeast_isPLevel_of_smith
+  IntegrableLattice.PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last
   # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
   IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
   IntegrableLattice.PropKW2Converse.fst_latticeAut

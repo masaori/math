@@ -336,6 +336,7 @@ export default defineBlocks([
       "IntegrableLattice.PropCDiscrIdentification.sign_revPerm",
       "IntegrableLattice.PropCDiscrIdentification.det_eulerHankel",
       "IntegrableLattice.PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative",
+      "IntegrableLattice.PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last",
     ],
     statement: [
       paragraph([

@@ -456,7 +456,18 @@ export const EXTERNAL_THEOREM_COVERAGE: readonly ExternalEntry[] = [
     presence:
       "2026-08-04 実測。`Submodule.smithNormalForm` ほかが `Mathlib/LinearAlgebra/FreeModule/PID.lean` に在る（宣言行で直読）。" +
       "**整除の鎖 $a_1\\mid a_2\\mid\\cdots$ は無い**が、cycle 29 step 3 で本論文には鎖が要らないことを確かめてある" +
-      "（$w^*$ は適合基底の係数の $p$ 進付値の最大値として書ける）。",
+      "（$w^*$ は適合基底の係数の $p$ 進付値の最大値として書ける）。" +
+      "**2026-08-05（cycle 49 step 2）に鎖の側を測り直した**（`lean/logs/mathlib-gap-survey-cycle49-smith-chain.log`。" +
+      "走査 script は `lean/scripts/mathlib-gap-survey-cycle49-smith-chain.sh`）——" +
+      "適合基底そのものは在るが、`smithCoeffs` を含む行のうち整除を述べているものは 0 件で、" +
+      "`elementary divisor` も `invariant factor` も 3 段とも 0 件である。**鎖が無いという記録は正しい。** " +
+      "**併せて、鎖が要らないという判断を機械が確かめられる形にした**——" +
+      "`PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last` は、" +
+      "$U,V$ が単模で $UGV=\\operatorname{diag}(e)$、$e$ が整除の鎖をなすなら" +
+      "$v_p(e_{\\text{最後}})$ が Lean 側の $w^*$ に等しいことを述べる。" +
+      "**鎖の存在は仮定として受け取っており、構成していない。** " +
+      "芯は最小元の一意性ひとつである——どちらも同じ内在的な集合" +
+      "$\\{j:\\ p^j\\mathbb{Z}^r\\subseteq G\\mathbb{Z}^r\\ (p\\ \\text{の外で})\\}$ の最小元だからである。",
   },
 
   // ---------- R 脱出として隔離する ----------

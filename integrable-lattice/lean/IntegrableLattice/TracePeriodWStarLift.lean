@@ -40,9 +40,11 @@ $\det G\neq0$ なら左右は入れ替えられる（`mul_comm_of_det_ne_zero`�
 
 * **$G$ の像の適合基底の係数が、本文の言う「$G$ の最大単因子」であること。**
   本ファイルが使うのは `IsPLevel`（$p$ の外での包含の最小レベル）だけで、
-  整除の鎖を経由していない。本文が $w^*=v_p(e_r)$ と書いているのは鎖の言葉なので、
-  **鎖の言葉との一致は書いていない**（`WStarElementaryDivisors` が
-  「最大単因子を経由していない」と書いているのと同じ限界である）。
+  整除の鎖を経由していない。本文が $w^*=v_p(e_r)$ と書いているのは鎖の言葉である。
+  **cycle 49 step 2 でこの一致を書いた。いまは残りではない。そう書く**
+  （`PropCElementaryDivisorChain.wStarOfCoeffs_eq_factorization_last`。
+  芯は最小元の一意性ひとつで、**Smith 標準形の存在は使っていない**——
+  鎖は本文が仮定として置いているものなので、仮定として受け取れば足りる）。
 * 成分への射影で $\mu$ の像が $a_i$ であることの同定
   （$\det G=\operatorname{disc}(\rho)\cdot\prod_\lambda m_\lambda$ の残り）。
   これは 命題 C′ に残るもう 1 つである。
