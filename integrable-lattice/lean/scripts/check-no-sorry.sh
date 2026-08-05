@@ -1010,6 +1010,15 @@ targets=(
   IntegrableLattice.AllCofactorsEqual.adjugate_const_of_kernel_const
   IntegrableLattice.AllCofactorsEqual.lapMatrixOfInc_symm
   IntegrableLattice.AllCofactorsEqual.lapMatrix_col_sum
+  # 命題 W の積公式に要る 3 つ目の道具の連結性の側（LaplacianKernelConnected.lean・cycle 50 step 1）
+  IntegrableLattice.LaplacianKernelConnected.vecMul_incMatrixSigned_apply
+  IntegrableLattice.LaplacianKernelConnected.dotProduct_lapMatrix_mulVec
+  IntegrableLattice.LaplacianKernelConnected.eq_of_mem_ker
+  IntegrableLattice.LaplacianKernelConnected.eq_of_adjOn
+  IntegrableLattice.LaplacianKernelConnected.eq_of_reachOn
+  IntegrableLattice.LaplacianKernelConnected.ker_eq_const_of_reachOn
+  IntegrableLattice.LaplacianKernelConnected.leftKer_eq_const_of_reachOn
+  IntegrableLattice.LaplacianKernelConnected.adjugate_const_of_reachOn
   # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
   IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
   IntegrableLattice.PropKW2Converse.fst_latticeAut

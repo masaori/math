@@ -51,6 +51,7 @@ import IntegrableLattice.DualityPAdicFiniteL
 import IntegrableLattice.WStarElementaryDivisors
 import IntegrableLattice.WStarIntegralDescent
 import IntegrableLattice.AllCofactorsEqual
+import IntegrableLattice.LaplacianKernelConnected
 import IntegrableLattice.MultigraphLaplacian
 import IntegrableLattice.CauchyBinet
 import IntegrableLattice.CrudeArchimedeanBound

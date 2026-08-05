@@ -1200,11 +1200,29 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     declarationsAtReview: 10,
     heading: "形式化しなかったもの",
     items: [
+      // cycle 50 step 1 で連結性の側を書いたので、未形式化から形式化済みへ移す。
       {
         leanFragment: "核が定数ベクトルだけであること（連結性の側）",
-        kind: "未形式化",
-        ledgerFragment: "積公式の段",
-        crossFilePhrase: "核が定数ベクトルだけであること（連結性の側）",
+        kind: "形式化済み",
+        witness: "ker_eq_const_of_reachOn",
+      },
+    ],
+  },
+  {
+    // cycle 50 step 1 で新設。全余因子が等しいことの連結性の側を書いた file。
+    file: "LaplacianKernelConnected.lean",
+    declarationsAtReview: 8,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "余因子の値そのものが全域木数であること",
+        kind: "形式化済み",
+        witness: "det_mul_transpose_eq_card_spanning",
+      },
+      {
+        leanFragment: "連結でない場合",
+        kind: "参照だけ",
+        referent: { kind: "lean ファイル", target: "SpanningConnectivity.lean" },
       },
     ],
   },

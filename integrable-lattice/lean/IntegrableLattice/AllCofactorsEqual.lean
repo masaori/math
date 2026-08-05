@@ -41,8 +41,9 @@ cycle 48 step 4 が測ると、**組み立てるだけではなかった**——
 
 ## 形式化しなかったもの
 
-* **核が定数ベクトルだけであること（連結性の側）。** 階数が $|V|-1$ であることと同じで、
-  グラフの連結性から出る。本ファイルは仮定として受け取っている。
+* **核が定数ベクトルだけであること（連結性の側）。** 本ファイルは仮定として受け取っている。
+  **cycle 50 step 1 で `LaplacianKernelConnected.lean` に書いた**（`ker_eq_const_of_reachOn`）——
+  階数を経由せず、$L=D\,D^{\mathsf T}$ から出る平方和ひとつで済み、係数は $\mathbb{Z}$ のままである。
 -/
 import Mathlib
 import IntegrableLattice.MultigraphLaplacian
