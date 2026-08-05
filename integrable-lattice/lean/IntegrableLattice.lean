@@ -78,3 +78,4 @@ import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition
 import IntegrableLattice.PropCMuComponent
 import IntegrableLattice.PropTResidueRoot
+import IntegrableLattice.JacobiFormula

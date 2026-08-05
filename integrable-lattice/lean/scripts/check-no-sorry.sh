@@ -811,6 +811,10 @@ targets=(
   IntegrableLattice.PropTResidueRoot.isUnit_natCast_of_odd
   IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue_of_odd
   IntegrableLattice.PropTResidueRoot.exists_root_congr_pow_of_odd_of_charTwo
+  # Jacobi の公式（行列式の微分。JacobiFormula.lean・cycle 44 step 3）
+  IntegrableLattice.JacobiFormula.derivative_det
+  IntegrableLattice.JacobiFormula.det_updateRow_eq_sum_adjugate
+  IntegrableLattice.JacobiFormula.derivative_det_eq_trace_adjugate
   # 命題 T の舞台の構成＝完備な局所環が Hensel 的であること（HenselianStage.lean・cycle 43 step 3）
   IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing
   IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete

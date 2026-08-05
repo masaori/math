@@ -530,7 +530,26 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "**$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない**——係数環は任意の可換環で、根も分解体も出てこない。" +
       "**それでもこの項目は閉じない。残ったのは初期値の側である。そう書く**——" +
       "$k<r$ での $\\operatorname{Tr}(M^{k})$ が特性多項式だけで決まることが Newton の公式そのものであり、" +
-      "閉じるには Jacobi の公式か、分解体で根を取り出す道（$\\overline{\\mathbb{Q}}$ へ出る）のどちらかが要る。",
+      "閉じるには Jacobi の公式か、分解体で根を取り出す道（$\\overline{\\mathbb{Q}}$ へ出る）のどちらかが要る。" +
+      "**cycle 44 step 3 でその Jacobi の公式を書いた**（`JacobiFormula.lean`）。" +
+      "**測ってみて、前サイクルの記録の後半が誤りだったことが分かった。そう書く**——" +
+      "「mathlib に Jacobi の公式は無い」という側は正しい（2026-08-05 実測。" +
+      "行列式の微分に当たるのは `Matrix.derivative_det_one_add_X_smul` だけで、" +
+      "これは $\\det(1+XM)$ の $0$ での微分＝1 次の係数しか与えない）。" +
+      "**誤っていたのは「したがって素材が足りない」という側である**——" +
+      "要る素材は 3 つとも在った（行列式が行について多重線形であること・余因子展開" +
+      "`Matrix.cramer_transpose_apply`・余因子行列 `Matrix.adjugate`）。**書いた量は 25 行である。** " +
+      "**これで「書けない理由」として記録されていたものが誤りだった件は 10 件目になる。" +
+      "ただし今回の形は前の 9 件と違う**——引き方は正しく、無いという判定も正しかった。" +
+      "**誤っていたのは「無いから書けない」という推論のほうである。** " +
+      "書いたのは 3 段で、行ごとの形（`derivative_det`）、余因子展開" +
+      "（`det_updateRow_eq_sum_adjugate`）、そして対数微分の道が要求している余因子行列の形" +
+      "（`derivative_det_eq_trace_adjugate`。$\\mathrm{d}\\det A=\\operatorname{tr}(\\operatorname{adj}(A)A')$）である。" +
+      "**$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも 1 度も出ない。したがって道の選択は決まった**——" +
+      "分解体で根を取り出す道は採らず、対数微分の道を採る。" +
+      "**それでもこの項目は閉じない。残っているのは道の長さである。そう書く**——" +
+      "$A=1-XM$ に当てて $\\operatorname{adj}(1-XM)$ を形式冪級数へ開く段と、" +
+      "係数を取り出して初期値 $\\operatorname{Tr}(M^{k})$（$2\\le k<r$）を読む段の 2 つが残る。",
     remainingItems: [
       "残ったのは初期値の側である",
       "$w^*$ の等式を組み立てる段",

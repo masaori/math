@@ -912,6 +912,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 44 step 3 で新設。対数微分の道が要求する Jacobi の公式を書いた。
+    file: "JacobiFormula.lean",
+    declarationsAtReview: 3,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "対数微分から冪和を取り出す段",
+        kind: "未形式化",
+        ledgerFragment: "係数を取り出して初期値",
+        crossFilePhrase: "余因子行列を形式冪級数の形へ開く",
+      },
+    ],
+  },
+  {
     // cycle 43 step 3 で新設。命題 T の段 3 が要求する舞台（Hensel 的な局所環）を構成した。
     file: "HenselianStage.lean",
     declarationsAtReview: 5,

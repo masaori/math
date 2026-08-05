@@ -1041,6 +1041,8 @@ export default defineBlocks([
       "IntegrableLattice.TracePowerRecurrence.sum_coeff_smul_trace_pow",
       "IntegrableLattice.TracePowerRecurrence.trace_pow_add_natDegree",
       "IntegrableLattice.TracePowerRecurrence.trace_pow_eq_of_charpoly_eq_of_initial",
+      "IntegrableLattice.JacobiFormula.derivative_det",
+      "IntegrableLattice.JacobiFormula.derivative_det_eq_trace_adjugate",
     ],
     statement: [
       paragraph([
