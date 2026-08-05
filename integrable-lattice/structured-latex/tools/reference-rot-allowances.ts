@@ -262,6 +262,14 @@ export const REFERENCE_ALLOWANCES: readonly ReferenceAllowance[] = [
   },
   {
     file: "structured-latex/tools/formalization-coverage.ts",
+    reference: "Mathlib/RingTheory/Discriminant.lean",
+    reason:
+      "mathlib のファイル。cycle 47 step 1 の実測で、`Algebra.discr_powerBasis_eq_norm` が" +
+      "分離的な体拡大を要求する（したがって本文の場合には当たらない）ことの根拠として挙げている。",
+    grounds: { type: "otherProject", project: "integrable-lattice/lean/.lake/packages/mathlib" },
+  },
+  {
+    file: "structured-latex/tools/formalization-coverage.ts",
     reference: "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
     reason:
       "mathlib のファイル。cycle 46 step 3 の実測で、Noether 局所環の $\\mathfrak m$ 進完備化が" +

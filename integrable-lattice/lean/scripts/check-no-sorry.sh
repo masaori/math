@@ -968,6 +968,10 @@ targets=(
   IntegrableLattice.PropTMixedWitness.maximalIdeal_ne_bot
   IntegrableLattice.PropTMixedWitness.exists_isPrimitiveRoot_three_O2
   IntegrableLattice.PropTMixedWitness.exists_root_on_wittVector
+  # 命題 C′ の 2 つの判別式の同定（PropCDiscrIdentification.lean・cycle 47 step 1）
+  IntegrableLattice.PropCDiscrIdentification.sign_revPerm
+  IntegrableLattice.PropCDiscrIdentification.det_eulerHankel
+  IntegrableLattice.PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative
 )
 
 # 一時ファイルは固定名にしない。固定名だと別 worktree で同時に走った別セッションと

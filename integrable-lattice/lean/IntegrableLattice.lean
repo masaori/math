@@ -87,3 +87,4 @@ import IntegrableLattice.WStarGaussDescent
 import IntegrableLattice.WStarGramAssembly
 import IntegrableLattice.PropCDiscSeparable
 import IntegrableLattice.PropTMixedWitness
+import IntegrableLattice.PropCDiscrIdentification

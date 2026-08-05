@@ -1028,6 +1028,22 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 47 step 1 で新設。判別式とノルムの関係を分離性なしで書いた。
+    file: "PropCDiscrIdentification.lean",
+    declarationsAtReview: 3,
+    heading: "形式化しなかったもの（実測つき）",
+    items: [
+      {
+        // 段 3 と `Polynomial.resultant_deriv` を繋ぐと 2 つの判別式が一致する。
+        // その手前の 1 段（終結式が剰余環のノルムであること）が残っている。
+        leanFragment: "N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$（モニックな $\\rho$ について）",
+        kind: "未形式化",
+        ledgerFragment: "$N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$ であること",
+        crossFilePhrase: "2 つの判別式の同定",
+      },
+    ],
+  },
+  {
     // cycle 46 step 1 で新設。$\mathbb{Q}[x]$ 側の無平方性への降下（Gauss）を配線した。
     file: "WStarGaussDescent.lean",
     declarationsAtReview: 4,

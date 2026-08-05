@@ -333,6 +333,9 @@ export default defineBlocks([
       "IntegrableLattice.PropCDiscSeparable.separable_iff_discr_ne_zero",
       "IntegrableLattice.PropCDiscSeparable.discr_map_of_monic",
       "IntegrableLattice.PropCDiscSeparable.separable_map_iff_not_dvd_discr",
+      "IntegrableLattice.PropCDiscrIdentification.sign_revPerm",
+      "IntegrableLattice.PropCDiscrIdentification.det_eulerHankel",
+      "IntegrableLattice.PropCDiscrIdentification.discr_eq_sign_mul_norm_derivative",
     ],
     statement: [
       paragraph([

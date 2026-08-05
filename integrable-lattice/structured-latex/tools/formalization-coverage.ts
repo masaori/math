@@ -313,9 +313,36 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`Algebra.discr_powerBasis_eq_norm` は在るが分離的な体拡大を要求する）。" +
       "**したがって残りは 1 件である**——" +
       "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定 である。" +
-      "**書いた段の外側に段が現れたのは 8 サイクル目である。そう書く。**",
+      "**書いた段の外側に段が現れたのは 8 サイクル目である。そう書く。**" +
+      "**cycle 47 step 1 でその同定の半分を書き、残りの中身が入れ替わった。そう書く**" +
+      "（`PropCDiscrIdentification.lean`。宣言 3 件）。" +
+      "**まず掲げた焦点どおり `Algebra.discr_powerBasis_eq_norm` が当たるかを測った。当たらない**" +
+      "（2026-08-05 実測。`Mathlib/RingTheory/Discriminant.lean` 201 行を直読すると " +
+      "`[Algebra.IsSeparable K L]` を要求し、$K,L$ が体であることも要求する。" +
+      "**$\\bar\\rho$ が分離的でない側こそが本文の主張の中身**なので使えない）。" +
+      "**そこで分離性も体も使わない道で書いた**——本プロジェクトが既に持っている " +
+      "Euler の双対基底（`EulerDualBasisCommRing.lean`）の $C\\,G=M_{\\rho'(\\theta)}$ の" +
+      "両辺の行列式を取れば、根にも分離性にも触れずに " +
+      "$\\operatorname{discr}_{A/R}(b)=(-1)^{r(r-1)/2}N(\\rho'(\\theta))$ が出る" +
+      "（`discr_eq_sign_mul_norm_derivative`。**mathlib の同名の定理の、体も分離性も要らない版である**）。" +
+      "そのために 2 つ書いた——反転の置換の符号 $(-1)^{r(r-1)/2}$（`sign_revPerm`。" +
+      "mathlib に無い。2026-08-05 実測で `revPerm` と `sign` を同時に含む宣言 0 件）と、" +
+      "Euler の係数行列の行列式の**符号そのもの**（`det_eulerHankel`。" +
+      "cycle 37 の `det_eulerHankel_sq` は $\\pm1$ までしか決めていなかった）である。" +
+      "$\\mathbb{R}$ へも $\\overline{\\mathbb{Q}}$ へも出ない（根を 1 度も使わない）。" +
+      "**それでもこの主張は完了しない。残りは 1 件のままで、中身が入れ替わった。そう書く**——" +
+      "残っているのは、モニックな $\\rho$ について " +
+      "$N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$ であること 1 件である" +
+      "（これと `Polynomial.resultant_deriv` を繋ぐと 2 つの判別式が一致する）。" +
+      "**2026-08-05 実測でその材料を測った**——mathlib の終結式の章に `Algebra.norm` は" +
+      "1 度も現れず、終結式を剰余環の乗法写像の行列式として述べた宣言は無い。" +
+      "終結式を根の像の積として述べた宣言（`resultant_eq_prod_roots_sub`）は在るが、" +
+      "$\\rho$ が分解することを要求するので $\\mathbb{Z}[x]$ の側には当たらない。" +
+      "**道具の側は在る**（`sylvesterMap` と `Polynomial.modByMonic`。" +
+      "$R[X]_{<m+n}$ をモニック除法で分解すると Sylvester 写像がブロック三角になり、" +
+      "対角ブロックが単位行列と $g$ 倍写像になる）ので、**ここは素材ではなく書く量のある段である。**",
     remainingItems: [
-      "2 つの判別式（トレース形式の Gram 行列式と多項式の判別式）の同定",
+      "$N_{A/R}(g(\\theta))=\\operatorname{Res}(\\rho,g)$ であること",
     ],
   },
   {
