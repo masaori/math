@@ -315,6 +315,10 @@ export default defineBlocks([
       "IntegrableLattice.WStarGramDiscriminant.weightedGram_one_eq_traceMatrix",
       "IntegrableLattice.WStarGramDiscriminant.det_weightedGram_eq_norm_mul_discr",
       "IntegrableLattice.WStarGramDiscriminant.det_weightedGram_of_scalar_mu",
+      "IntegrableLattice.ProductAlgebraNorm.norm_prod_apply",
+      "IntegrableLattice.ProductAlgebraNorm.norm_pi_fin",
+      "IntegrableLattice.ProductAlgebraNorm.norm_pi_fin_of_scalar",
+      "IntegrableLattice.ProductAlgebraNorm.quotientInfAlgEquivPiQuotient",
     ],
     statement: [
       paragraph([

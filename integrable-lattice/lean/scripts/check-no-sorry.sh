@@ -780,6 +780,13 @@ targets=(
   # Monsky の ord の漸近の第 3 段（IwasawaOrdCounting.lean・cycle 42 step 5）
   IntegrableLattice.IwasawaOrdCounting.emultiplicity_eval_iwasawa
   IntegrableLattice.IwasawaOrdCounting.sum_emultiplicity_eval_iwasawa
+  # 直積代数のノルムの分解＝中国剰余の代数側（ProductAlgebraNorm.lean・cycle 43 step 1）
+  IntegrableLattice.ProductAlgebraNorm.lmul_prod_eq_prodMap
+  IntegrableLattice.ProductAlgebraNorm.norm_prod_apply
+  IntegrableLattice.ProductAlgebraNorm.piFinSuccAlgEquiv
+  IntegrableLattice.ProductAlgebraNorm.norm_pi_fin
+  IntegrableLattice.ProductAlgebraNorm.norm_pi_fin_of_scalar
+  IntegrableLattice.ProductAlgebraNorm.quotientInfAlgEquivPiQuotient
   # 命題 C″ (1) のしきい値の最良性の反例（TracePeriodThresholdSharp.lean・cycle 40 step 3）
   IntegrableLattice.TracePeriodThresholdSharp.S
   IntegrableLattice.TracePeriodThresholdSharp.a

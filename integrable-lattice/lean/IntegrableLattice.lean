@@ -68,6 +68,7 @@ import IntegrableLattice.PropTHenselLift
 import IntegrableLattice.WStarTracePowerBridge
 import IntegrableLattice.TruncatedValuationStability
 import IntegrableLattice.IwasawaOrdCounting
+import IntegrableLattice.ProductAlgebraNorm
 import IntegrableLattice.TracePeriodThresholdSharp
 import IntegrableLattice.IwasawaMuInvariant
 import IntegrableLattice.IwasawaDecomposition

@@ -877,6 +877,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 43 step 1 で新設。直積代数のノルムの分解（中国剰余の代数側）を書いた。
+    file: "ProductAlgebraNorm.lean",
+    declarationsAtReview: 6,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "互いに素なイデアルの族として与える段",
+        kind: "未形式化",
+        ledgerFragment: "互いに素なイデアルの族へ当てる配線である",
+        crossFilePhrase: "互いに素なイデアルの族",
+      },
+    ],
+  },
+  {
     // cycle 38 step 1 で新設。無平方性から $\det G\neq0$ を出す段を書いた。
     file: "WStarSquarefreeNonzero.lean",
     declarationsAtReview: 4,
