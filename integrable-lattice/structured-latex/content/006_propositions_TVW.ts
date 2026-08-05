@@ -180,6 +180,8 @@ export default defineBlocks([
       "IntegrableLattice.PropTResidueRoot.isUnit_natCast_of_odd",
       "IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue_of_odd",
       "IntegrableLattice.PropTResidueRoot.exists_root_congr_pow_of_odd_of_charTwo",
+      "IntegrableLattice.PropTStageWitness.exists_isPrimitiveRoot_three_galoisField",
+      "IntegrableLattice.PropTStageWitness.exists_root_on_galoisField",
       "IntegrableLattice.CharacterDecomposition.det_blockCirculant",
       "IntegrableLattice.CharacterDecomposition.fourierInv_mul_mul_fourier",
       "IntegrableLattice.CharacterDecomposition.sum_pow_mul",

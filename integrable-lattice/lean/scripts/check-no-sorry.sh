@@ -820,6 +820,11 @@ targets=(
   IntegrableLattice.PropTResidueRoot.isUnit_natCast_of_odd
   IntegrableLattice.PropTResidueRoot.isPrimitiveRoot_residue_of_odd
   IntegrableLattice.PropTResidueRoot.exists_root_congr_pow_of_odd_of_charTwo
+  # 命題 T の舞台が空でないことの確認（PropTStageWitness.lean・cycle 45 step 3）
+  IntegrableLattice.PropTStageWitness.isPrimitiveRoot_of_orderOf_eq
+  IntegrableLattice.PropTStageWitness.exists_isPrimitiveRoot_three_galoisField
+  IntegrableLattice.PropTStageWitness.stage_nonempty
+  IntegrableLattice.PropTStageWitness.exists_root_on_galoisField
   # Jacobi の公式（行列式の微分。JacobiFormula.lean・cycle 44 step 3）
   IntegrableLattice.JacobiFormula.derivative_det
   IntegrableLattice.JacobiFormula.det_updateRow_eq_sum_adjugate
