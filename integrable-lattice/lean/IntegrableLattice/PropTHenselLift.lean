@@ -74,8 +74,10 @@ $\mathbb{Z}_p$ を使った `IwasawaDecomposition.lean` と同じく、
   「`HenselianLocalRing` のインスタンスが 1 つも無い」と書いていたが、`Field.henselian` が在る
   （`Mathlib/RingTheory/Henselian.lean` 114 行）。**1 ファイルにしか現れないという側は正しい。**
 * **段 4 との接続（$v(m_j)=1$）。** 本ファイルが出すのは $r\equiv\zeta^{j}$ までで、
-  $r=\zeta^{j}(1+m_j)$ と書いたときの $v(m_j)=1$ は段 4 の Newton 多角形の側である
-  （組合せ核は `PropT.lean` の `newton_two_root_valuations` に在る）。
+  $r=\zeta^{j}(1+m_j)$ と書いたときの $v(m_j)=1$ は段 4 の側である。
+  **cycle 50 step 3 で書いた**（`PropTNewtonStage.eq_two_mul_unit_of_root`。
+  Newton 多角形を組み立てずに出る——係数が単元・単元・2 の単元倍に分解するので、
+  $m$ が極大イデアルに属することから $m$ は 2 の単元倍である）。
 -/
 import Mathlib
 import IntegrableLattice.PropT

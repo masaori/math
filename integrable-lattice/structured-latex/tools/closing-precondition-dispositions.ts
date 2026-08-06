@@ -108,16 +108,6 @@ export const CLOSING_PRECONDITION_DISPOSITIONS: readonly ClosingDisposition[] = 
   },
   {
     block: "paper_062_theorem_T",
-    file: "PropTHenselLift.lean",
-    phrase: "段 4 との接続（$v(m_j)=1$）",
-    kind: "数に当たる（別の言い方の残り項目）",
-    target: "段 4（Newton 多角形）の $v(m_j)=1$ そのもの",
-    why:
-      "cycle 49 step 1 でこの段を残り項目として数えるようにした。" +
-      "`PropT.lean` は段 4 の組合せ核を書いているが、$v(m_j)=1$ 自体は仮定として受け取っている。",
-  },
-  {
-    block: "paper_062_theorem_T",
     file: "PropTResidueRoot.lean",
     phrase: "2 の上での完備化が、この舞台の形",
     kind: "数に当たる（別の言い方の残り項目）",

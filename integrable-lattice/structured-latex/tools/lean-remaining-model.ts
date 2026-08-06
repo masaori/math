@@ -894,6 +894,20 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 50 step 3 で新設。段 4 の $v(m_j)=1$ そのものを書いた file。
+    file: "PropTNewtonStage.lean",
+    declarationsAtReview: 11,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "$v(2)=1$ であること（2 が素元であること）",
+        kind: "未形式化",
+        ledgerFragment: "付値の位相が $\\mathfrak m$ 進位相であること",
+        crossFilePhrase: "2 が素元である舞台",
+      },
+    ],
+  },
+  {
     // cycle 42 step 2 で新設。命題 T の段 3（不分岐性と Hensel 持ち上げ）を書いた。
     file: "PropTHenselLift.lean",
     declarationsAtReview: 4,
@@ -908,10 +922,10 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
         crossFilePhrase: "2 の上での完備化が、この舞台の形",
       },
       {
+        // cycle 50 step 3 で書いた（Newton 多角形を組み立てずに出た）。
         leanFragment: "段 4 との接続（$v(m_j)=1$）",
-        kind: "未形式化",
-        ledgerFragment: "段 4（Newton 多角形）との接続はこの段の内容ではない",
-        crossFilePhrase: "段 4 との接続（$v(m_j)=1$）",
+        kind: "形式化済み",
+        witness: "eq_two_mul_unit_of_root",
       },
     ],
   },

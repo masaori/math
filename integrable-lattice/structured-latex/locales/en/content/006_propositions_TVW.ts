@@ -189,6 +189,8 @@ export default defineBlocks([
       "IntegrableLattice.PropTHenselLift.isUnit_sub_inv_pow_of_primitiveRoot",
       "IntegrableLattice.PropTHenselLift.exists_root_quadratic_of_henselian",
       "IntegrableLattice.PropTHenselLift.exists_root_congr_pow_of_odd",
+      "IntegrableLattice.PropTNewtonStage.eq_two_mul_unit_of_root",
+      "IntegrableLattice.PropTNewtonStage.pow_sub_one_eq_two_mul_unit_of_root",
       "IntegrableLattice.HenselianStage.henselianLocalRing_of_henselianRing",
       "IntegrableLattice.HenselianStage.henselianLocalRing_of_isAdicComplete",
       "IntegrableLattice.HenselianStage.exists_root_quadratic_localField",

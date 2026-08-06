@@ -69,6 +69,7 @@ import IntegrableLattice.WStarMuGram
 import IntegrableLattice.WStarGramDiscriminant
 import IntegrableLattice.PropTAdicStage
 import IntegrableLattice.PropTHenselLift
+import IntegrableLattice.PropTNewtonStage
 import IntegrableLattice.WStarTracePowerBridge
 import IntegrableLattice.TruncatedValuationStability
 import IntegrableLattice.IwasawaOrdCounting

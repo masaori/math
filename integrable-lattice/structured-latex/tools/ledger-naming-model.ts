@@ -161,6 +161,15 @@ export function auditNamingCoverage(input: {
  * **`残り` と判定したものは、この数え直しで残り項目・部として数え直した先を指している。**
  */
 export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
+  {
+    // cycle 50 step 3: 段 4 の $v(m_j)=1$ を書いたので、cycle 49 step 1 が足した文が「済み」になった。
+    block: "paper_062_theorem_T",
+    sentence: "`PropTHenselLift.lean` が挙げている 段 4（Newton 多角形）の $v(m_j)=1$ そのもの",
+    kind: "済み",
+    why:
+      "cycle 50 step 3 で書いた（`PropTNewtonStage.eq_two_mul_unit_of_root`）。" +
+      "Newton 多角形を組み立てず、係数が 単元・単元・2 の単元倍 に分解することから直接出た",
+  },
   // cycle 50 step 2: $\kappa_n$ の独立計算の芯を書いたときに、残る 2 つを散文で名指しした 3 件。
   {
     block: "paper_055_theorem_theta_infinity",

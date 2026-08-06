@@ -1039,6 +1039,18 @@ targets=(
   IntegrableLattice.KappaProductFormula.trace_adjugate_derivedLaplacian
   IntegrableLattice.KappaProductFormula.trace_adjugate_of_const
   IntegrableLattice.KappaProductFormula.card_mul_kappa
+  # 命題 T の段 4（Newton 多角形）の v(m_j)=1 そのもの（PropTNewtonStage.lean・cycle 50 step 3）
+  IntegrableLattice.PropTNewtonStage.isUnit_add_of_mem_maximalIdeal
+  IntegrableLattice.PropTNewtonStage.quadratic_of_root
+  IntegrableLattice.PropTNewtonStage.middle_coeff_eq
+  IntegrableLattice.PropTNewtonStage.const_coeff_eq
+  IntegrableLattice.PropTNewtonStage.isUnit_middle_coeff
+  IntegrableLattice.PropTNewtonStage.eq_two_mul_unit_of_mem_maximalIdeal
+  IntegrableLattice.PropTNewtonStage.pow_sub_one_eq_mul_unit
+  IntegrableLattice.PropTNewtonStage.pow_sub_one_eq_two_mul_unit
+  IntegrableLattice.PropTNewtonStage.mem_maximalIdeal_of_congr
+  IntegrableLattice.PropTNewtonStage.eq_two_mul_unit_of_root
+  IntegrableLattice.PropTNewtonStage.pow_sub_one_eq_two_mul_unit_of_root
   # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
   IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
   IntegrableLattice.PropKW2Converse.fst_latticeAut
