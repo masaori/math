@@ -34,8 +34,12 @@ const healthy: ClosingEntry = {
   named: [{ file: "F.lean", phrase: "降下の段", fragment: "降下" }],
 };
 
+/** 本文の照合の代わり（`対象外（本文が要求していない）` の検出テストで使う）。 */
+const blockText = (block: string) => (block === "本文の定義" ? "巡回群 2 つの積" : null);
+const allText = "巡回群 2 つの積";
+
 const run = (entries: ClosingEntry[], dispositions: ClosingDisposition[] = []) =>
-  auditClosingPrecondition({ entries, dispositions, openBlockExists });
+  auditClosingPrecondition({ entries, dispositions, openBlockExists, blockText, allText });
 
 expect(
   "名指しが残り項目に当たっていれば挙がらない（偽陽性でない）",
@@ -138,6 +142,59 @@ expect(
   ).length,
   2,
   "残り項目 1 件と lean の名指し 1 件（2 つとも挙がる）",
+);
+
+// --- cycle 50 step 4 で足した種別（本文の走査で確かめる）の検出 ------------------
+
+const textScan = (over: Partial<ClosingDisposition> = {}): ClosingDisposition => ({
+  block: "b",
+  file: "F.lean",
+  phrase: "降下の段",
+  kind: "対象外（本文が要求していない）",
+  target: "本文の定義",
+  textPresent: "巡回群 2 つの積",
+  textAbsent: "一般の有限アーベル群",
+  why: "",
+  ...over,
+});
+
+expect(
+  "本文が要求していないという宣言は、在るべき語と無いべき語が両方当たれば挙がらない",
+  run([{ ...healthy, remainingItems: ["別の段"] }], [textScan()]).violations.length,
+  0,
+  "本文に在るべき語が在り、無いべき語が無い",
+);
+
+expect(
+  "宣言先の本文ブロックが実在しなければ挙がる",
+  run([{ ...healthy, remainingItems: ["別の段"] }], [textScan({ target: "無いブロック" })])
+    .violations.length,
+  1,
+  "本文ブロックの実在を確かめる",
+);
+
+expect(
+  "本文の形として挙げた語がそのブロックに無ければ挙がる",
+  run([{ ...healthy, remainingItems: ["別の段"] }], [textScan({ textPresent: "巡回群 3 つの積" })])
+    .violations.length,
+  1,
+  "在るべき語の実在を確かめる",
+);
+
+expect(
+  "本文に無いとした語が本文に現れれば挙がる",
+  run([{ ...healthy, remainingItems: ["別の段"] }], [textScan({ textAbsent: "巡回群" })])
+    .violations.length,
+  1,
+  "無いべき語の不在を確かめる",
+);
+
+expect(
+  "無いべき語の宣言そのものが無ければ挙がる",
+  run([{ ...healthy, remainingItems: ["別の段"] }], [textScan({ textAbsent: undefined })])
+    .violations.length,
+  1,
+  "逃げ道（宣言を書かない）を塞ぐ",
 );
 
 expect(

@@ -40,10 +40,40 @@ for (const file of leanFiles) {
   declaredIn.set(file, names);
 }
 
-const jaBlocks: { id: string; lean?: readonly string[] }[] = [];
+const jaBlocks: { id: string; lean?: readonly string[]; labels?: readonly string[] }[] = [];
 for (const { blocks } of await loadContentFiles()) {
-  for (const block of blocks) jaBlocks.push(block as { id: string; lean?: readonly string[] });
+  for (const block of blocks) {
+    jaBlocks.push(block as { id: string; lean?: readonly string[]; labels?: readonly string[] });
+  }
 }
+
+/** 本文ブロックの地の文（`対象外（本文が要求していない）` の照合に使う。id でもラベルでも引ける）。 */
+function stringLeaves(node: unknown, out: string[]): void {
+  if (typeof node === "string") {
+    out.push(node);
+    return;
+  }
+  if (Array.isArray(node)) {
+    for (const child of node) stringLeaves(child, out);
+    return;
+  }
+  if (node !== null && typeof node === "object") {
+    for (const child of Object.values(node)) stringLeaves(child, out);
+  }
+}
+
+const blockPlainText = new Map<string, string>();
+for (const { blocks } of await loadContentFiles()) {
+  for (const block of blocks) {
+    const b = block as { id: string; labels?: readonly string[] };
+    const leaves: string[] = [];
+    stringLeaves(block, leaves);
+    const text = leaves.join("\n");
+    blockPlainText.set(b.id, text);
+    for (const label of b.labels ?? []) blockPlainText.set(label, text);
+  }
+}
+const allPlainText = [...new Set(blockPlainText.values())].join("\n");
 
 function blocksFor(file: string): string[] {
   const names = declaredIn.get(file) ?? new Set<string>();
@@ -105,6 +135,8 @@ const { violations, counts } = auditClosingPrecondition({
   entries,
   dispositions: CLOSING_PRECONDITION_DISPOSITIONS,
   openBlockExists: (block) => openBlocks.has(block),
+  blockText: (block) => blockPlainText.get(block) ?? null,
+  allText: allPlainText,
 });
 
 console.log("");
@@ -117,6 +149,7 @@ console.log(
   `  内訳: 残り項目にそのまま当たる ${counts.autoCounted} 件 / ` +
     `部で数えている ${counts.byPart} 件 / 別の言い方の残り項目 ${counts.byAlias} 件 / ` +
     `別の欄で数えている ${counts.byOtherBlock} 件 / ` +
+    `本文が要求していない（本文の走査で確かめる）${counts.byTextScan} 件 / ` +
     `**道具の一般性として対象外（機械が確かめられない）${counts.byHumanReading} 件**`,
 );
 console.log(
@@ -128,6 +161,13 @@ console.log(
     "`lean/` 側が何を挙げていても緑のままだった。** cycle 48 は 1 つの欄を 完了 に書いた瞬間に" +
     "16 件の異議を受け、そのうち 4 件は既に済んでいた腐りだった。" +
     "**他の欄でも同じ腐りが在るかは、閉じてみるまで分からない。だから閉じる前に全数で当てる。**",
+);
+console.log(
+  "  **cycle 50 step 4 で、機械が確かめられない処分を 1 件ずつ開けた。2 件は本文の走査で確かめられた。そう書く**——" +
+    "「一般の有限アーベル群による指標分解は本文の内容ではない」の根拠は" +
+    "「本文が voltage 群を巡回群 2 つの積として定義しており、一般の有限アーベル群を 1 度も要求していない」" +
+    "ことであって、本文を読めば決まる。**そこで、本文に在るべき語と本文に無いべき語の両方を宣言させ、" +
+    "機械が本文で確かめる種別へ移した。**残る「道具の一般性」は、本文の走査では決まらないものだけである。",
 );
 console.log(
   "  限界: **拾えるのは `lean/` が残り一覧に書いた事柄だけ**であり、" +

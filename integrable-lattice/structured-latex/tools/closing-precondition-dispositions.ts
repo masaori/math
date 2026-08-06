@@ -65,11 +65,15 @@ export const CLOSING_PRECONDITION_DISPOSITIONS: readonly ClosingDisposition[] = 
     block: "paper_062_theorem_T",
     file: "CharacterDecomposition.lean",
     phrase: "一般の有限アーベル群による指標分解",
-    kind: "対象外（道具の一般性）",
+    // cycle 50 step 4: 本文の走査で確かめられる側へ移した（機械が確かめない処分を 1 件減らす）。
+    kind: "対象外（本文が要求していない）",
+    target: "paper_def_graph_tower",
+    textPresent: "\\mathbb{Z}/N\\times\\mathbb{Z}/N'",
+    textAbsent: "有限アーベル群",
     why:
-      "本文の塔は $\\mathbb{Z}_\\ell^2$ であり、巡回群 2 つの積までで足りる" +
-      "（cycle 39 step 2 が書いた）。一般の有限アーベル群は道具の一般性の話であって、" +
-      "本文の主張の内容ではない。**この判断は人の読みであり、機械は確かめていない。**",
+      "本文は voltage 群を巡回群 2 つの積として定義しており（塔は $\\mathbb{Z}_\\ell^2$）、" +
+      "一般の有限アーベル群を 1 度も要求していない。**この 2 つは本文を走査すれば決まるので、" +
+      "cycle 50 step 4 で機械に確かめさせる側へ移した。**",
   },
   {
     block: "paper_062_theorem_T",
@@ -84,8 +88,11 @@ export const CLOSING_PRECONDITION_DISPOSITIONS: readonly ClosingDisposition[] = 
     block: "paper_062_theorem_T",
     file: "CharacterDecompositionTwoVariable.lean",
     phrase: "一般の有限アーベル群による指標分解",
-    kind: "対象外（道具の一般性）",
-    why: "同上（同じ事柄を 2 つのファイルが挙げている）。**機械は確かめていない。**",
+    kind: "対象外（本文が要求していない）",
+    target: "paper_def_graph_tower",
+    textPresent: "\\mathbb{Z}/N\\times\\mathbb{Z}/N'",
+    textAbsent: "有限アーベル群",
+    why: "同上（同じ事柄を 2 つのファイルが挙げている）。**本文の走査で機械が確かめる。**",
   },
   {
     block: "paper_062_theorem_T",
