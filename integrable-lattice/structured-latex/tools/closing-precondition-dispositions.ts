@@ -128,6 +128,43 @@ export const CLOSING_PRECONDITION_DISPOSITIONS: readonly ClosingDisposition[] = 
       "同じ段を別の言い方で挙げている。",
   },
   {
+    // cycle 50 step 2 で新設。$\kappa_n$ の独立計算の芯を書いた file が、残りを 2 つ挙げている。
+    block: "paper_055_theorem_theta_infinity",
+    file: "KappaProductFormula.lean",
+    phrase: "本ファイルの結論を 2 回当てる",
+    kind: "数に当たる（別の言い方の残り項目）",
+    target: "$\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）",
+    why:
+      "$\\mathbb{Z}_\\ell^2$ の 2 変数の塔への当てはめは、$\\kappa_n$ の独立計算 の内側である" +
+      "（1 変数の結論を 2 回当てる形になる）。欄はその段を 1 件として数えている。",
+  },
+  {
+    block: "paper_056_theorem_ell2_family",
+    file: "KappaProductFormula.lean",
+    phrase: "本ファイルの結論を 2 回当てる",
+    kind: "数に当たる（別の言い方の残り項目）",
+    target: "塔の値 $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）",
+    why: "同上（同じ段を 3 つの欄が共有している）。",
+  },
+  {
+    block: "paper_063_theorem_W",
+    file: "KappaProductFormula.lean",
+    phrase: "$\\kappa_n$ の独立計算",
+    kind: "数に当たる（別の言い方の残り項目）",
+    target: "積公式の段（全域木数と行列式を繋ぐ余因子の側が要る）",
+    why:
+      "命題 W の欄はこの段を 積公式の段 という名前で数えている" +
+      "（cycle 48 step 4 の測定で、その中身が全域木数と行列式を繋ぐ余因子の側だと分かっている）。",
+  },
+  {
+    block: "paper_063_theorem_W",
+    file: "KappaProductFormula.lean",
+    phrase: "本ファイルの結論を 2 回当てる",
+    kind: "数に当たる（別の言い方の残り項目）",
+    target: "積公式の段（全域木数と行列式を繋ぐ余因子の側が要る）",
+    why: "同上（2 変数の塔への当てはめも 積公式の段 の内側である）。",
+  },
+  {
     block: "paper_101_theorem_s_infinity_decision",
     file: "PropKW2Converse.lean",
     phrase: "$j^*$（重複度）",

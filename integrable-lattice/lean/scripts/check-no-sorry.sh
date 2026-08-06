@@ -1019,6 +1019,26 @@ targets=(
   IntegrableLattice.LaplacianKernelConnected.ker_eq_const_of_reachOn
   IntegrableLattice.LaplacianKernelConnected.leftKer_eq_const_of_reachOn
   IntegrableLattice.LaplacianKernelConnected.adjugate_const_of_reachOn
+  # 塔の全域木数を指標ごとの行列式の積へ繋ぐ段（KappaProductFormula.lean・cycle 50 step 2）
+  IntegrableLattice.KappaProductFormula.blockCirculant_add
+  IntegrableLattice.KappaProductFormula.hat_add
+  IntegrableLattice.KappaProductFormula.hat_smul
+  IntegrableLattice.KappaProductFormula.blockCirculant_mapC
+  IntegrableLattice.KappaProductFormula.blockCirculant_coreX
+  IntegrableLattice.KappaProductFormula.hat_coreX
+  IntegrableLattice.KappaProductFormula.det_add_X_smul_one
+  IntegrableLattice.KappaProductFormula.map_derivative_add_X
+  IntegrableLattice.KappaProductFormula.mapMatrix_eval_zero
+  IntegrableLattice.KappaProductFormula.eval_det_add_X
+  IntegrableLattice.KappaProductFormula.eval_derivative_det_add_X
+  IntegrableLattice.KappaProductFormula.eval_derivative_prod_of_eval_zero
+  IntegrableLattice.KappaProductFormula.trace_adjugate_blockCirculant
+  IntegrableLattice.KappaProductFormula.hat_zero_apply
+  IntegrableLattice.KappaProductFormula.row_sum_hat_zero_derivedKernel
+  IntegrableLattice.KappaProductFormula.det_hat_zero_derivedKernel
+  IntegrableLattice.KappaProductFormula.trace_adjugate_derivedLaplacian
+  IntegrableLattice.KappaProductFormula.trace_adjugate_of_const
+  IntegrableLattice.KappaProductFormula.card_mul_kappa
   # 補題 W2 の (iv) ⇒ (iii)（PropKW2Converse.lean・cycle 48 step 3）
   IntegrableLattice.PropKW2Converse.latticeAut_apply_perp
   IntegrableLattice.PropKW2Converse.fst_latticeAut

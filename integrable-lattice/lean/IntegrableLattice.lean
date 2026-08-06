@@ -86,6 +86,7 @@ import IntegrableLattice.PropTStageWitness
 import IntegrableLattice.NewtonInitialValues
 import IntegrableLattice.PropTResidueRoot
 import IntegrableLattice.JacobiFormula
+import IntegrableLattice.KappaProductFormula
 import IntegrableLattice.IwasawaRootOfUnity
 import IntegrableLattice.WStarGaussDescent
 import IntegrableLattice.WStarGramAssembly

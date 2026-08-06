@@ -671,7 +671,22 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "（あちらも道具は 2 つとも在るのに、繋ぐ段が別に要った。cycle 48 step 4 の実測では、" +
       "全域木数は行列式そのものではなく 1 行 1 列を落とした余因子の側なので、" +
       "全余因子が等しいことを言う段が要る）。" +
-      "したがって $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段） を残り項目として数える。",
+      "したがって $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段） を残り項目として数える。" +
+      "**cycle 50 step 2 でこの段の芯を書いた。閉じてはいない。そう書く**" +
+      "（`KappaProductFormula.lean`）——**行列式の等式をそのまま使うと両辺が $0$ になる**" +
+      "（ラプラシアンの行列式は $0$ である）ので、対角へ変数 $x$ を 1 つ足してから指標分解を当て、" +
+      "$x$ の 1 次の係数を両辺で比べた。左辺は Jacobi の公式で余因子行列の跡になり" +
+      "（cycle 44 step 3 の `derivative_det_eq_trace_adjugate` を、$M+x$ の微分が単位行列であることに当てるだけである）、" +
+      "右辺は積の微分で $\\det\\widehat L(0)=0$ が他の項をすべて消すので、" +
+      "$\\operatorname{tr}\\operatorname{adj}L=\\operatorname{tr}\\operatorname{adj}\\widehat L(0)\\cdot\\prod_{j\\neq0}\\det\\widehat L(j)$ が出る（`trace_adjugate_derivedLaplacian`）。" +
+      "**cycle 50 step 1 の全余因子が等しいことを両辺へ当てると、これは本文の $(★_2)$ の形そのものである**" +
+      "（`card_mul_kappa`。左辺が 塔の頂点数 $\\times$ 塔の全域木数、右辺の第 1 因子が基礎グラフの側の同じ量）。" +
+      "**固有値も特性根も使わない。$\\mathbb{R}$ へも $\\mathbb{C}$ へも 1 度も出ない**" +
+      "（係数環の仮定は指標分解と同じで、$x$ は多項式環の不定元である）。" +
+      "**それでもこの残り項目は閉じない。残っているのは 2 つである。そう書く**——" +
+      "Kirchhoff の定理が余因子を全域木数と結ぶのは符号付き接続行列から作ったラプラシアンについてであり、" +
+      "本 step が扱った voltage 核から作ったラプラシアンと同じ行列であることは書いていない（2 通りのラプラシアンの同定）。" +
+      "もう 1 つは 2 変数の塔への当てはめ である。",
     remainingItems: [
       "定理 X の付値計算そのもの",
       "定理 G2 の 1（Galois 不変性",
@@ -699,7 +714,22 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "`EllTwoClosedForm.lean` が挙げている 塔の値 $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段） は、" +
       "外部定理 Kirchhoff の内容でも道具としての指標分解の内容でもない。" +
       "本文の 4 通りの閉形式は部 (G″2)–(G″5) として数えているが、この段はその手前にあり、部の勘定にも入っていなかった。" +
-      "**命題 G′ と 命題 W が同じ段を持っており、3 欄で共通の段である**（cycle 47 step 2・cycle 48 step 4 の実測）。",
+      "**命題 G′ と 命題 W が同じ段を持っており、3 欄で共通の段である**（cycle 47 step 2・cycle 48 step 4 の実測）。" +
+      "**cycle 50 step 2 でこの段の芯を書いた。閉じてはいない。そう書く**" +
+      "（`KappaProductFormula.lean`）——**行列式の等式をそのまま使うと両辺が $0$ になる**" +
+      "（ラプラシアンの行列式は $0$ である）ので、対角へ変数 $x$ を 1 つ足してから指標分解を当て、" +
+      "$x$ の 1 次の係数を両辺で比べた。左辺は Jacobi の公式で余因子行列の跡になり" +
+      "（cycle 44 step 3 の `derivative_det_eq_trace_adjugate` を、$M+x$ の微分が単位行列であることに当てるだけである）、" +
+      "右辺は積の微分で $\\det\\widehat L(0)=0$ が他の項をすべて消すので、" +
+      "$\\operatorname{tr}\\operatorname{adj}L=\\operatorname{tr}\\operatorname{adj}\\widehat L(0)\\cdot\\prod_{j\\neq0}\\det\\widehat L(j)$ が出る（`trace_adjugate_derivedLaplacian`）。" +
+      "**cycle 50 step 1 の全余因子が等しいことを両辺へ当てると、これは本文の $(★_2)$ の形そのものである**" +
+      "（`card_mul_kappa`。左辺が 塔の頂点数 $\\times$ 塔の全域木数、右辺の第 1 因子が基礎グラフの側の同じ量）。" +
+      "**固有値も特性根も使わない。$\\mathbb{R}$ へも $\\mathbb{C}$ へも 1 度も出ない**" +
+      "（係数環の仮定は指標分解と同じで、$x$ は多項式環の不定元である）。" +
+      "**それでもこの残り項目は閉じない。残っているのは 2 つである。そう書く**——" +
+      "Kirchhoff の定理が余因子を全域木数と結ぶのは符号付き接続行列から作ったラプラシアンについてであり、" +
+      "本 step が扱った voltage 核から作ったラプラシアンと同じ行列であることは書いていない（2 通りのラプラシアンの同定）。" +
+      "もう 1 つは 2 変数の塔への当てはめ である。",
     remainingItems: ["塔の値 $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）"],
     partStates: [
       { part: "G″1", state: "済み", witness: "EllTwo.ordKappaAalpha" },
@@ -945,7 +975,22 @@ export const FORMALIZATION_COVERAGE: readonly CoverageEntry[] = [
       "仮定なしで出る**（`adjugate_const_of_reachOn`）。" +
       "**それでもこの残り項目は閉じない。そう書く**——この段に残っているのは、" +
       "その等しい余因子を塔の全域木数として指標ごとの行列式の積へ繋ぐ組み立て" +
-      "（$\\kappa_n$ の独立計算）であり、道具が揃ったのであって段が終わったのではない。",
+      "（$\\kappa_n$ の独立計算）であり、道具が揃ったのであって段が終わったのではない。" +
+      "**cycle 50 step 2 でこの段の芯を書いた。閉じてはいない。そう書く**" +
+      "（`KappaProductFormula.lean`）——**行列式の等式をそのまま使うと両辺が $0$ になる**" +
+      "（ラプラシアンの行列式は $0$ である）ので、対角へ変数 $x$ を 1 つ足してから指標分解を当て、" +
+      "$x$ の 1 次の係数を両辺で比べた。左辺は Jacobi の公式で余因子行列の跡になり" +
+      "（cycle 44 step 3 の `derivative_det_eq_trace_adjugate` を、$M+x$ の微分が単位行列であることに当てるだけである）、" +
+      "右辺は積の微分で $\\det\\widehat L(0)=0$ が他の項をすべて消すので、" +
+      "$\\operatorname{tr}\\operatorname{adj}L=\\operatorname{tr}\\operatorname{adj}\\widehat L(0)\\cdot\\prod_{j\\neq0}\\det\\widehat L(j)$ が出る（`trace_adjugate_derivedLaplacian`）。" +
+      "**cycle 50 step 1 の全余因子が等しいことを両辺へ当てると、これは本文の $(★_2)$ の形そのものである**" +
+      "（`card_mul_kappa`。左辺が 塔の頂点数 $\\times$ 塔の全域木数、右辺の第 1 因子が基礎グラフの側の同じ量）。" +
+      "**固有値も特性根も使わない。$\\mathbb{R}$ へも $\\mathbb{C}$ へも 1 度も出ない**" +
+      "（係数環の仮定は指標分解と同じで、$x$ は多項式環の不定元である）。" +
+      "**それでもこの残り項目は閉じない。残っているのは 2 つである。そう書く**——" +
+      "Kirchhoff の定理が余因子を全域木数と結ぶのは符号付き接続行列から作ったラプラシアンについてであり、" +
+      "本 step が扱った voltage 核から作ったラプラシアンと同じ行列であることは書いていない（2 通りのラプラシアンの同定）。" +
+      "もう 1 つは 2 変数の塔への当てはめ である。",
     remainingItems: [
       "積公式の段（全域木数と行列式を繋ぐ余因子の側が要る）",
       "付値の評価と総和の段",

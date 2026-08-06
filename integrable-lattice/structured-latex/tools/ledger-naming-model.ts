@@ -161,6 +161,34 @@ export function auditNamingCoverage(input: {
  * **`残り` と判定したものは、この数え直しで残り項目・部として数え直した先を指している。**
  */
 export const NAMING_DISPOSITIONS: readonly NamingDisposition[] = [
+  // cycle 50 step 2: $\kappa_n$ の独立計算の芯を書いたときに、残る 2 つを散文で名指しした 3 件。
+  {
+    block: "paper_055_theorem_theta_infinity",
+    sentence:
+      "Kirchhoff の定理が余因子を全域木数と結ぶのは符号付き接続行列から作ったラプラシアンについてであり",
+    kind: "残り",
+    why:
+      "残り項目「$\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）」の内側である" +
+      "（cycle 50 step 2 で芯を書いたが、2 通りのラプラシアンの同定と 2 変数の塔への当てはめが残る）",
+  },
+  {
+    block: "paper_056_theorem_ell2_family",
+    sentence:
+      "Kirchhoff の定理が余因子を全域木数と結ぶのは符号付き接続行列から作ったラプラシアンについてであり",
+    kind: "残り",
+    why:
+      "残り項目「塔の値 $\\kappa_n$ の独立計算（指標分解と matrix-tree を塔へ当てて全域木数を出す段）」の内側である" +
+      "（3 つの欄が同じ段を共有している）",
+  },
+  {
+    block: "paper_063_theorem_W",
+    sentence:
+      "Kirchhoff の定理が余因子を全域木数と結ぶのは符号付き接続行列から作ったラプラシアンについてであり",
+    kind: "残り",
+    why:
+      "残り項目「積公式の段（全域木数と行列式を繋ぐ余因子の側が要る）」の内側である" +
+      "（命題 W の欄はこの段をその名前で数えている）",
+  },
   {
     block: "paper_063_theorem_W",
     sentence: "****この step は測っただけで 1 件も形式化していない。",

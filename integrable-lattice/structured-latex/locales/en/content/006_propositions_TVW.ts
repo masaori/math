@@ -371,6 +371,7 @@ export default defineBlocks([
     lean: [
       "IntegrableLattice.AllCofactorsEqual.adjugate_const_of_kernel_const",
       "IntegrableLattice.LaplacianKernelConnected.adjugate_const_of_reachOn",
+      "IntegrableLattice.KappaProductFormula.card_mul_kappa",
       "IntegrableLattice.NoProjZero",
       "IntegrableLattice.torus_nondegenerate_three",
       "IntegrableLattice.torus_degenerate_two",

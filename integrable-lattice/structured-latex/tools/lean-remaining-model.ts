@@ -197,6 +197,27 @@ export const LEAN_REMAINING_LEDGER: readonly LeanRemainingFile[] = [
     ],
   },
   {
+    // cycle 50 step 2 で新設。塔の全域木数を指標ごとの行列式の積へ繋ぐ段の芯を書いた file。
+    file: "KappaProductFormula.lean",
+    declarationsAtReview: 20,
+    heading: "形式化しなかったもの",
+    items: [
+      {
+        leanFragment: "$\\kappa_n$ の独立計算 に残るのは、2 通りのラプラシアンの同定である",
+        kind: "未形式化",
+        ledgerFragment: "$\\kappa_n$ の独立計算",
+        // Bouquet / EllTwo の側も同じ語を未形式化として挙げている（2 つが「まだ書いていない」で一致する）。
+        crossFilePhrase: "$\\kappa_n$ の独立計算",
+      },
+      {
+        leanFragment: "の 2 変数の塔への当てはめ",
+        kind: "未形式化",
+        ledgerFragment: "2 変数の塔への当てはめ",
+        crossFilePhrase: "本ファイルの結論を 2 回当てる",
+      },
+    ],
+  },
+  {
     file: "CoefficientsDE.lean",
     declarationsAtReview: 39,
     heading: "形式化しなかったもの（mathlib の欠落か配線か）",
