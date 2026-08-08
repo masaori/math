@@ -111,6 +111,12 @@ set -e
 
 if [ "$status" -eq 124 ]; then
   log "=== tick 打ち切り（${TICK_TIMEOUT_SECONDS} 秒を超えた）"
+  # 打ち切られた tick は push 前で終わっている可能性が高い。作業ツリーに残った成果を
+  # 記録しておく（誰も見ないまま埋もれるのを防ぐ。監査ジョブがこのログを読む）。
+  leftover="$(git -C "$REPO_DIR" status --porcelain | wc -l | tr -d ' ')"
+  if [ "$leftover" != "0" ]; then
+    log "    未コミットの成果が ${leftover} ファイル残っている（次の tick は見送るので、人手で拾うか監査の通知を待つ）"
+  fi
 elif [ "$status" -ne 0 ]; then
   log "=== tick 異常終了 (exit $status)"
 else

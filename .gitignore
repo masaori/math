@@ -19,3 +19,6 @@ exact-solution-of-2d-ising-model-lambda/structured-latex/build/
 
 # 自動ループの実行ログ（各 tick の Claude セッションの出力）
 exact-solution-of-2d-ising-model-lambda/logs/
+
+# 監査用の一時 worktree（監査スクリプトが作って消す）
+exact-solution-of-2d-ising-model-lambda/logs/audit-worktree/
