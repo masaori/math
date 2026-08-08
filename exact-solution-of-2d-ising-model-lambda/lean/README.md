@@ -48,7 +48,7 @@ bash scripts/check-no-sorry.sh
 ```
 
 `lake exe cache get` を省くと mathlib を原本から building することになり、
-自動ループの 1 tick（50 分）では終わらない。取得済みの olean は `.lake/` に入り、
+自動ループの 1 tick（25 分で打ち切る）では終わらない。取得済みの olean は `.lake/` に入り、
 `.lake/` は git 管理外である（依存の固定は `lake-manifest.json` が担う）。
 
 ## 現状
