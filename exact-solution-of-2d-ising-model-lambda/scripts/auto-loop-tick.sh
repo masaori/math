@@ -96,7 +96,9 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
 3. 検証（npm run check / build:pdf / sage / verify-check-linkage / lake build）を通す。
    検証が落ちたら本文を直す。検証を主張に合わせて緩めない。
 4. 台帳と MEMORY を更新し、main へ push して反映を確認する。
-5. 1 セクション進めたら止まる。
+5. tick の最後に PDF を作り直す（cd structured-latex && npm run build:pdf）。
+   本文を変えなかった tick でも必ず行う。人間が開いたまま進み具合を見るため。
+6. 1 セクション進めたら止まる。
 EOF
 )
 

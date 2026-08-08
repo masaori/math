@@ -33,7 +33,8 @@
 5. **検証**（下の「検証コマンド」）。すべて通るまで直す。落ちたら本文を直す（検証を主張に合わせて緩めない）。
 6. **台帳と MEMORY の更新**: セクションの四層の状態、観察、日付を書く。
 7. **main へ push**し、`git merge-base --is-ancestor <commit> origin/main` で反映を確認する。
-8. **止まる。** 次のセクションへ進まない。次の tick を待つ。
+8. **PDF を作り直す**（下の「PDF を毎 tick 更新する」）。**tick の最後に必ず行う。**
+9. **止まる。** 次のセクションへ進まない。次の tick を待つ。
 
 ## レビュー観点（毎 tick、前進の前に）
 
@@ -73,6 +74,24 @@ sage sagemath/check/<対象名>/check.sage          # その tick で触れた�
 node sagemath/tools/verify-check-linkage.ts     # 検証 ↔ 証明 の対応
 (cd lean && lake build && bash scripts/check-no-sorry.sh)   # lean/ に中身がある場合
 ```
+
+## PDF を毎 tick 更新する（ユーザーの明示指示）
+
+**tick の最後に必ず PDF を作り直す。**
+
+```sh
+(cd structured-latex && npm run build:pdf)
+```
+
+- **本文を 1 行も変えなかった tick でも作り直す。** 人間は `build/document.pdf` を開いたまま
+  進み具合を見るので、ファイルが更新されないと「ループが止まった」ように見える。
+- 検証の一部としても同じコマンドを回すが（組めない文字・未解決参照・版面外へ出た行の検出）、
+  **それとは別に、tick の最後の状態で作り直すこと。** push のあとに台帳を直した場合など、
+  検証時点の PDF が最終状態とずれることがある。
+- 出力先は `structured-latex/build/document.pdf` で固定する（毎回同じパス。
+  開いている PDF ビューアがそのまま更新を拾えるようにするため）。
+- PDF は生成物なので git では追跡しない（正本は `content/`）。**追跡しようとしない。**
+- 生成に失敗したら、それは本文の欠陥である。台帳へ記録し、直してから tick を終える。
 
 ## git レシピ
 
