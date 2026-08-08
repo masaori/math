@@ -5,15 +5,16 @@
 ## 現在の到達点（2026-08-08 時点）
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
-および章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）が、
+章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
+および章「固有値の代数性」の入口（定義 1 件・主張 1 件。行配位の辞書式順序）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 18 件・主張 14 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 18 件と主張 14 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 46 件を登録）が通る |
-| Lean 必要十分版 | 主張 12 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 19 件・主張 15 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 19 件と主張 15 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 53 件を登録）が通る |
+| Lean 必要十分版 | 主張 13 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -72,6 +73,15 @@ $w_A(p)=\prod_{i=0}^{k-1}A_{p(i),p(i+1)}$ を定義し、次を示した。道�
 - 分配多項式は転送行列の冪のトレースである（$Z_L=\operatorname{Tr}(T^L)$）。
   $2^{L^2}$ 個の項の和として定義された分配多項式が、$2^L$ 次の行列の冪から計算できることになる。
 
+章「固有値の代数性」では、行列式を書くために要る添字集合の線形順序を用意した。
+スピン値の番号 $\varepsilon(+1)=0$・$\varepsilon(-1)=1$、値の異なる列番号の集合
+$D(\tau,\tau')\subset\{0,\dots,L-1\}$、その最小元 $k_0$、および
+$\tau\prec\tau'\iff\tau\ne\tau'$ かつ $k_0$ の位置で $\varepsilon$ の値が小さい、を定義し、次を示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- 行配位の辞書式順序は線形順序である（三分律と推移律）。
+  行配位に番号を付けて番号の大小を借りると番号の付け方に依存するので、$R_L$ の上に直接定めた。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
@@ -85,9 +95,9 @@ $w_A(p)=\prod_{i=0}^{k-1}A_{p(i),p(i+1)}$ を定義し、次を示した。道�
 
 ## 次回やること
 
-1. **特性多項式が $\mathbb{Z}[x][\lambda]$ に属すること**（章「固有値の代数性」の入口）。
-   章「転送行列」は $Z_L=\operatorname{Tr}(T^L)$ まで終わったので、次は転送行列の固有値が
-   代数的数であることへ進む。台帳の todo の先頭。
+1. **行配位の置換とその符号**（章「固有値の代数性」の続き）。行列式を置換にわたる和として
+   定めるために、置換の集合と、転倒数で定める符号を用意する。転倒数を書くために要る
+   添字集合の線形順序（行配位の辞書式順序）は済んでいる。台帳の todo の先頭。
 
 ## 未解決の設計問題
 
