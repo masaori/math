@@ -4,15 +4,15 @@
 
 ## 現在の到達点（2026-08-08 時点）
 
-章「分配多項式」（定義 4 件・主張 3 件）と、章「有限系の自由エントロピー」の定義部分
-（定義 4 件・主張 2 件）が、四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
+章「分配多項式」（定義 4 件・主張 3 件）と、章「有限系の自由エントロピー」
+（定義 4 件・主張 5 件）が、四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 8 件・主張 5 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 8 件と主張 5 件。`lake build` と `check-no-sorry.sh`（定理 12 件を登録）が通る |
-| Lean 必要十分版 | 主張 5 件について作成済み。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 8 件・主張 8 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 8 件と主張 8 件。`lake build` と `check-no-sorry.sh`（定理 20 件を登録）が通る |
+| Lean 必要十分版 | 主張 7 件について作成済み（$\Phi_L(1)=L^2\ell_2$ は既存の主張をつなぐだけなので置いていない）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -33,6 +33,9 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
 
 - 有理数の指数は表示の取り方によらない（$a/b=a'/b'$ ならば $v_p(a)-v_p(b)=v_p(a')-v_p(b')$）。
 - 分配多項式の正の有理点での値は正の有理数である（したがって $\Phi_L(q)$ が定まる）。
+- 対数の加法性 $\log(q_1q_2)=\log q_1+\log q_2$。これが $\log$ を対数と呼ぶ根拠である。
+- 対数の冪の法則 $\log(q^k)=k\log q$（$k\in\mathbb{N}$。$k=0$ の場合が $\log 1=0$）。
+- $\Phi_L(1)=L^2\ell_2$。すべての配位を等しく数える点での自由エントロピーは配位の総数の対数に等しい。
 
 ## 進め方（自動ループ）
 
@@ -47,9 +50,9 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
 
 ## 次回やること
 
-1. **$\log$ の加法性（$\log(q_1q_2)=\log q_1+\log q_2$）と $\Phi_L$ の基本性質**。
-   定義までは済んでいるので、対数と呼ぶ根拠にあたる加法性から書く。
-2. **章「転送行列」**。$T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$。
+1. **章「転送行列」の入口**。行配位を定義し、破れボンド数を行内・行間へ分解する
+   （辺の番号を横向き・縦向きに分けてあるのでそのまま使える）。台帳の todo の先頭。
+2. 続いて $T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$。
    指数形 $e^{K\sigma\sigma'}$ を経由しない経路で書く（README「形式変数のまま進む」）。
 
 ## 未解決の設計問題

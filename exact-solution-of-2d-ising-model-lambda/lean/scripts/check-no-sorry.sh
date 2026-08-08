@@ -45,6 +45,14 @@ targets=(
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos
+  Ising2DLambda.FreeEntropy.logRat_mul
+  Ising2DLambda.FreeEntropy.logRat_mul_from_necSuf
+  Ising2DLambda.NecSuf.FreeEntropy.sub_add_sub_of_mul
+  Ising2DLambda.FreeEntropy.logRat_pow
+  Ising2DLambda.FreeEntropy.logRat_pow_from_necSuf
+  Ising2DLambda.NecSuf.FreeEntropy.map_pow_eq_nsmul
+  Ising2DLambda.FreeEntropy.partitionPolynomial_eval_one
+  Ising2DLambda.FreeEntropy.freeEntropy_at_one
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
