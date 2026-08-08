@@ -2,6 +2,7 @@
 #
 # 本文（structured-latex/content/main-text.ts）の章「転送行列」の 2 つの主張
 #   (1) 辺の集合は行ごとに分割される
+#         j |-> iL+j+1 が {0,...,L-1} から E_{L,h,i} への全単射（縦は L^2 を足したもの）、
 #         E_{L,h} = 互いに素な合併 E_{L,h,i}（i = 0,...,L-1）、|E_{L,h,i}| = L
 #         端点は番号から直接読める
 #   (2) 破れボンド数は行内の破れと行間の破れに分かれる
@@ -22,22 +23,26 @@ load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
 
 
 def check_edge_row_partition(L):
-    """claim_edge_row_partition の 4 つの主張を、本文の Step の順に確かめる。"""
+    """claim_edge_row_partition の 5 つの主張を、本文の Step の順に確かめる。"""
     horizontal_rows = [horizontal_edge_numbers_of_row(L, i) for i in range(L)]
     vertical_rows = [vertical_edge_numbers_of_row(L, i) for i in range(L)]
 
-    # 1 つめ（Step 3）: 各行の本数は L。重複が無いことも同時に見る。
+    # 1 つめと 2 つめ（Step 3）: 番号付けの写像 j |-> iL+j+1（縦は L^2 を足したもの）が
+    # {0,...,L-1} から各行の辺の集合への全単射であること（値に重複が無いこと）と、
+    # その結果として本数が L であること。
     for i in range(L):
+        assert horizontal_rows[i] == [i * L + j + 1 for j in range(L)], (L, i)
+        assert vertical_rows[i] == [L * L + i * L + j + 1 for j in range(L)], (L, i)
         assert len(set(horizontal_rows[i])) == L, (L, i)
         assert len(set(vertical_rows[i])) == L, (L, i)
 
-    # 2 つめ（Step 4）: 異なる行どうしは互いに素。
+    # 3 つめ（Step 4）: 異なる行どうしは互いに素。
     for i in range(L):
         for i2 in range(i + 1, L):
             assert not (set(horizontal_rows[i]) & set(horizontal_rows[i2])), (L, i, i2)
             assert not (set(vertical_rows[i]) & set(vertical_rows[i2])), (L, i, i2)
 
-    # 3 つめ（Step 5）: 合併がもとの集合に一致する。
+    # 4 つめ（Step 5）: 合併がもとの集合に一致する。
     union_horizontal = set()
     for row in horizontal_rows:
         union_horizontal |= set(row)
@@ -48,7 +53,7 @@ def check_edge_row_partition(L):
         union_vertical |= set(row)
     assert union_vertical == set(vertical_edge_numbers(L)), L
 
-    # 4 つめ（Step 6）: 端点が番号から読める形と一致する。
+    # 5 つめ（Step 6）: 端点が番号から読める形と一致する。
     # 比較相手 endpoints は def_lattice の定義そのままなので、作り方は独立である。
     for i in range(L):
         for j in range(L):

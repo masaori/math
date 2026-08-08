@@ -12,12 +12,12 @@
   claim_edge_row_partition        edgeOfRow / edgeOfRow_boundary0 / edgeOfRow_boundary1_horizontal
                                   / edgeOfRow_boundary1_vertical / edgeEquiv
 
-人手証明の主張は「行ごとの辺の集合が、本数 L で、互いに素で、合併がもとの集合になり、
-端点が番号から直接読める」という 4 つである。Lean では前 3 つをまとめて
+人手証明の主張は「各行の辺が番号付けの写像と 1 対 1 に対応し、本数 L で、互いに素で、
+合併がもとの集合になり、端点が番号から直接読める」という 5 つである。Lean では前 4 つをまとめて
 「辺の番号の集合が (行番号, 列番号) の 2 つ組の 2 つのコピーと 1 対 1 に対応する」
-（`edgeEquiv`）として述べる。合併・互いに素・本数 L はこの 1 対 1 対応と同値であり、
+（`edgeEquiv`）として述べる。行ごとの全単射・合併・互いに素・本数 L はこの 1 対 1 対応と同値であり、
 人手証明の Step 2（分解の一意性）がそのまま単射性の証明になる。
-4 つめの端点は `edgeOfRow_boundary0` と 2 つの `edgeOfRow_boundary1_*` である。
+5 つめの端点は `edgeOfRow_boundary0` と 2 つの `edgeOfRow_boundary1_*` である。
 
 この主張には必要十分版を別に置いていない。主張の中身がこの格子の番号の付け方そのもの
 （どの番号がどの行に属するか）であり、それを抽象化すると同じ言明の言い換えにしかならないためである。
