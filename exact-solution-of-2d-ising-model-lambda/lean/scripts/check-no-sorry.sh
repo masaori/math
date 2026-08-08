@@ -61,6 +61,12 @@ targets=(
   Ising2DLambda.TransferMatrix.brokenBondCount_eq_row_decomposition
   Ising2DLambda.TransferMatrix.brokenBondCount_eq_row_decomposition_from_necSuf
   Ising2DLambda.NecSuf.TransferMatrix.card_filter_eq_sum_add_sum
+  Ising2DLambda.TransferMatrix.card_rowFamily
+  Ising2DLambda.TransferMatrix.configOfRows_rowsOf
+  Ising2DLambda.TransferMatrix.rowsOf_configOfRows
+  Ising2DLambda.TransferMatrix.transfer_weight_product
+  Ising2DLambda.TransferMatrix.transfer_weight_product_from_necSuf
+  Ising2DLambda.NecSuf.TransferMatrix.prod_pow_add_eq_pow
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -5,15 +5,15 @@
 ## 現在の到達点（2026-08-08 時点）
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
-および章「転送行列」の入口（定義 4 件・主張 2 件）が、
+および章「転送行列」（定義 7 件・主張 4 件。転送行列 T の定義まで）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 12 件・主張 10 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 12 件と主張 10 件。`lake build` と `check-no-sorry.sh`（定理 28 件を登録）が通る |
-| Lean 必要十分版 | 主張 8 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 15 件・主張 12 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 15 件と主張 12 件。`lake build` と `check-no-sorry.sh`（定理 34 件を登録）が通る |
+| Lean 必要十分版 | 主張 10 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -47,6 +47,16 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
   （$b(\sigma)=\sum_i b_\mathrm{h}(\rho_i(\sigma))+\sum_i b_\mathrm{v}(\rho_i(\sigma),\rho_{i+1}(\sigma))$）。
   これが転送行列を作る足場である。第 1 の和は行ごとに閉じ、第 2 の和は隣り合う 2 行だけを結ぶ。
 
+さらに、行配位の族 $C_L$ と写像 $\mathrm{rows}:\Sigma_L\to C_L$・$\mathrm{conf}:C_L\to\Sigma_L$、
+行配位を添字とする行列 $\mathrm{Mat}_{R_L}(\mathbb{Z}[x])$ とその積・冪・トレース、および転送行列
+$T_{\tau,\tau'}=x^{b_\mathrm{h}(\tau)+b_\mathrm{v}(\tau,\tau')}$ を定義し、次の 2 つを示した。
+指数形 $e^{K\sigma\sigma'}$ は経由していない。
+
+- 配位全体と行配位の族全体は 1 対 1 に対応する（$\mathrm{rows}$ が全単射で逆写像が $\mathrm{conf}$）。
+- 配位の重みは行に沿った転送行列の成分の積である
+  （$\prod_i T_{\rho_i(\sigma),\rho_{i+1}(\sigma)}=x^{b(\sigma)}$）。
+  すなわち分配多項式の和の 1 つの項が、転送行列の成分から得られる。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
@@ -60,12 +70,11 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
 
 ## 次回やること
 
-1. **転送行列そのものの定義**。行配位の 2 つ組を添字とする行列
-   $T\in M_{2^L}(\mathbb{Z}[x])$ を、行内破れ数と行間破れ数から
-   $T_{\tau,\tau'}=x^{\,b_\mathrm{h}(\tau)+b_\mathrm{v}(\tau,\tau')}$ の形で定め、
-   $Z_L=\operatorname{Tr}(T^L)$ を示す。台帳の todo の先頭。
-   指数形 $e^{K\sigma\sigma'}$ を経由しない経路で書く（README「形式変数のまま進む」）。
-   前提となる破れボンド数の分解は済んでいる。
+1. **$Z_L=\operatorname{Tr}(T^L)$**。転送行列の冪の成分を行配位の族にわたる和として書き下し、
+   トレースを取ると閉じた行の並びにわたる和になることを示す。そこへ
+   「配位全体と行配位の族全体の 1 対 1 対応」と「重みの積」を代入すると分配多項式が出る。
+   台帳の todo の先頭（もとのセクション 8 を割った後半）。
+   冪の成分表示は帰納法で自分で示す（mathlib の一般論へ委ねない）。
 
 ## 未解決の設計問題
 

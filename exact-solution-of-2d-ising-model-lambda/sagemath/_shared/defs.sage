@@ -162,3 +162,92 @@ def horizontal_edge_numbers_of_row(L, i):
 def vertical_edge_numbers_of_row(L, i):
     """claim_edge_row_partition: E_{L,v,i} = { L^2 + iL + j + 1 | j = 0, ..., L-1 }。"""
     return [L * L + i * L + j + 1 for j in range(L)]
+
+
+# --- 章「転送行列」の続き: 行配位の族と転送行列 ---------------------------
+#   def_row_family               -> row_families(L), row_config_key(L, tau)
+#   def_rows_map                 -> rows_map(L, sigma), config_from_rows(L, c)
+#   def_matrix_over_row_configs  -> row_matrix_product(L, A, B), row_matrix_pow(L, A, k),
+#                                   row_matrix_trace(L, A)
+#   def_transfer_matrix          -> transfer_matrix(L)
+
+
+def row_config_key(L, tau):
+    """行配位 tau（列番号を添字とする辞書）を、添字に使えるタプルへ直す。
+
+    本文では R_L の元そのものを添字に使うが、Sage の辞書の鍵にするには
+    ハッシュ可能な表現が要るため、値を列番号の順に並べたタプルで表す。
+    """
+    return tuple(tau[j] for j in range(L))
+
+
+def row_config_from_key(key):
+    """row_config_key の逆。タプルから行配位（辞書）へ戻す。"""
+    return dict(enumerate(key))
+
+
+def row_families(L):
+    """def_row_family: 行配位の族 c: Z/LZ -> R_L を全列挙する。個数は (2^L)^L = 2^(L^2)。
+
+    族は行番号 i = 0, ..., L-1 の順に行配位の表現（タプル）を並べたタプルで表す。
+    """
+    keys = [row_config_key(L, tau) for tau in row_configurations(L)]
+    for family in product(keys, repeat=L):
+        yield family
+
+
+def rows_map(L, sigma):
+    """def_rows_map: rows(sigma) = (rho_0(sigma), ..., rho_{L-1}(sigma))。"""
+    return tuple(row_config_key(L, row_restriction(L, sigma, i)) for i in range(L))
+
+
+def config_from_rows(L, c):
+    """def_rows_map: conf(c)((i,j)) = (c(i))(j)。rows の逆写像の候補。"""
+    return {(i, j): c[i][j] for i in range(L) for j in range(L)}
+
+
+def transfer_matrix(L):
+    """def_transfer_matrix: T_{tau,tau'} = x^{b_h(tau) + b_v(tau,tau')} in ZZ[x]。
+
+    行と列を行配位の表現（タプル）で添字づけた辞書として返す。
+    指数関数を経由せず、破れの本数だけを指数に置く（README「形式変数のまま進む」）。
+    """
+    keys = [row_config_key(L, tau) for tau in row_configurations(L)]
+    entries = {}
+    for key in keys:
+        tau = row_config_from_key(key)
+        intra = intra_row_broken_count(L, tau)
+        for key_next in keys:
+            tau_next = row_config_from_key(key_next)
+            inter = inter_row_broken_count(L, tau, tau_next)
+            entries[(key, key_next)] = x ** ZZ(intra + inter)
+    return entries
+
+
+def row_matrix_keys(L):
+    """行列の添字に使う行配位の表現をすべて並べる（個数は 2^L）。"""
+    return [row_config_key(L, tau) for tau in row_configurations(L)]
+
+
+def row_matrix_product(L, A, B):
+    """def_matrix_product: (AB)_{tau,tau''} = sum_{tau'} A_{tau,tau'} B_{tau',tau''}。"""
+    keys = row_matrix_keys(L)
+    entries = {}
+    for a in keys:
+        for c in keys:
+            entries[(a, c)] = sum((A[(a, b)] * B[(b, c)] for b in keys), PolynomialRingZx(0))
+    return entries
+
+
+def row_matrix_pow(L, A, k):
+    """def_matrix_product: A^1 = A、A^{k+1} = A^k A（k >= 1）。"""
+    assert k >= 1
+    result = A
+    for _ in range(k - 1):
+        result = row_matrix_product(L, result, A)
+    return result
+
+
+def row_matrix_trace(L, A):
+    """def_matrix_trace: Tr A = sum_{tau} A_{tau,tau}。"""
+    return sum((A[(key, key)] for key in row_matrix_keys(L)), PolynomialRingZx(0))
