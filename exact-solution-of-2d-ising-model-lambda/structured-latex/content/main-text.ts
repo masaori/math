@@ -2747,7 +2747,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
     lean: [
       "Ising2DLambda.TransferMatrix.rowMatrixPow_apply",
       "Ising2DLambda.TransferMatrix.rowMatrixPow_apply_from_necSuf",
-      "Ising2DLambda.NecSuf.TransferMatrix.matrixPow_apply_eq_sum_walkWeight",
+      "Ising2DLambda.NecSuf.TransferMatrix.matPow_apply_eq_sum_walkWeight",
     ],
     verification: ["sagemath/check/transfer-matrix-power-entry"],
     statement: [

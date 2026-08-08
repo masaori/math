@@ -46,6 +46,33 @@ const texPath = join(buildDir, "document.tex");
 const pdfPath = join(buildDir, "document.pdf");
 const withPdf = process.argv.includes("--pdf");
 
+/**
+ * 表紙に出す版。**開いている PDF がいつの内容かを、開いたまま判別できるようにするため**に出す
+ * （自動ループが 30 分ごとに同じパスへ上書きするので、見た目だけでは新旧が分からない）。
+ *
+ * 版は git のコミットで表す（内容の正本は `content/` であり、その状態を一意に指すのはコミットだから）。
+ * 未コミットの変更があるときは末尾に `+` を付ける——**そのときの PDF は、どのコミットとも一致しない**
+ * 中間状態なので、コミットのハッシュだけを見せると嘘になる。
+ * git が使えない環境では版を出さない（嘘の版を出すより無いほうがよい）。
+ */
+function versionLine(): string | null {
+  const git = (args: readonly string[]): string | null => {
+    const run = spawnSync("git", [...args], {
+      cwd: structuredLatexDir,
+      encoding: "utf8",
+    });
+    if (run.status !== 0 || typeof run.stdout !== "string") return null;
+    return run.stdout.trim();
+  };
+  const commit = git(["rev-parse", "--short", "HEAD"]);
+  if (commit === null || commit === "") return null;
+  const committedAt = git(["log", "-1", "--format=%cd", "--date=format:%Y-%m-%d %H:%M"]) ?? "";
+  const dirty = git(["status", "--porcelain"]);
+  const mark = dirty === null || dirty === "" ? "" : "+";
+  const suffix = mark === "" ? "" : "（未コミットの変更を含む）";
+  return `版 ${commit}${mark}${committedAt === "" ? "" : `・${committedAt}`}${suffix}`;
+}
+
 /** amsthm の環境名と見出し語。定理型 kind と 1 対 1 に対応させる。 */
 const THEOREM_ENVIRONMENTS: Record<TheoremLikeKind, { env: string; heading: string }> = {
   definition: { env: "definition", heading: "定義" },
@@ -221,6 +248,10 @@ console.log(
 // --- レンダリング ------------------------------------------------------------
 
 function renderDocument(inner: string): string {
+  // 版はタイトルの下に小さく出す（表紙を見れば、その PDF がいつの内容か分かるようにするため）。
+  const version = versionLine();
+  const titleVersion =
+    version === null ? "" : `\\\\[6pt]{\\normalfont\\small ${escapeText(version)}}`;
   return `% 自動生成ファイル — 直接編集しない。
 % 生成元: structured-latex/content/（tools/build-latex.ts）
 % 再生成: cd structured-latex && npm run build:pdf
@@ -273,7 +304,7 @@ function renderDocument(inner: string): string {
 \\crefname{structurednote}{ノート}{ノート}
 \\crefname{section}{節}{節}
 
-\\title{2次元 Ising 模型の厳密解 --- $\\Lambda$ と Fisher 零点の立場から}
+\\title{2次元 Ising 模型の厳密解 --- $\\Lambda$ と Fisher 零点の立場から${titleVersion}}
 \\date{}
 
 \\begin{document}
