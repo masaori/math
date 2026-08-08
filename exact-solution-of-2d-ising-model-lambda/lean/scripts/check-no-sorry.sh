@@ -170,6 +170,7 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_apply_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_period_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.iterLeft_rowShiftEquiv_eq
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrixPow_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_apply_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_L_from_necSuf

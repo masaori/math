@@ -99,18 +99,24 @@ theorem shiftMatrixPow_eq_necSuf (k : ℕ) (τ τ' : RowConfig L) :
     refine Finset.sum_congr rfl fun σ _ => ?_
     rw [ih σ, shiftMatrix_eq_necSuf]
 
+/-- 具体版の `S^[k]` が、必要十分版の左からの反復（添字の側の反復）の特殊化でもあること。
+
+人手証明では `S^[k]` の 1 つの記号が、引き戻しの反復（`precompIterate`）と、行列の添字を
+動かす反復（`iterLeft`）の両方を担っている。必要十分版はこの 2 つを分けたので、
+具体版へ戻すにはどちらとも一致することを言う必要がある。 -/
+theorem iterLeft_rowShiftEquiv_eq (m : ℕ) (σ : RowConfig L) :
+    NecSuf.AlgebraicEigenvalue.iterLeft (fun ρ => (rowShiftEquiv L) ρ) m σ
+      = rowShiftIterate L m σ := by
+  induction m generalizing σ with
+  | zero => rfl
+  | succ m ih => show rowShift L _ = rowShift L _; rw [ih σ]
+
 /-- シフト行列の冪の主張を、必要十分版から導いたもの。 -/
 theorem shiftMatrix_pow_apply_from_necSuf (k : ℕ) (τ τ' : RowConfig L) :
     rowMatrixPow L (shiftMatrix L) k τ τ'
       = if τ' = rowShiftIterate L (k + 1) τ then constPoly 1 else constPoly 0 := by
   classical
-  have hiter : ∀ (m : ℕ) (σ : RowConfig L),
-      NecSuf.AlgebraicEigenvalue.iterLeft (fun ρ => (rowShiftEquiv L) ρ) m σ
-        = rowShiftIterate L m σ := by
-    intro m
-    induction m with
-    | zero => intro σ; rfl
-    | succ m ih => intro σ; show rowShift L _ = rowShift L _; rw [ih σ]
+  have hiter := iterLeft_rowShiftEquiv_eq (L := L)
   rw [shiftMatrixPow_eq_necSuf,
     NecSuf.AlgebraicEigenvalue.permMatrix_pow_apply
       (fun a : Polynomial ℤ => mul_one a) (fun a : Polynomial ℤ => mul_zero a)
@@ -124,11 +130,19 @@ theorem shiftMatrix_pow_L_from_necSuf :
     rowMatrixPow L (shiftMatrix L) (L - 1) = identityRowMatrix L := by
   classical
   have hL : L - 1 + 1 = L := Nat.succ_pred_eq_of_pos (Nat.pos_of_ne_zero (NeZero.ne L))
+  have h : ∀ σ : RowConfig L,
+      NecSuf.AlgebraicEigenvalue.iterLeft (fun ρ => (rowShiftEquiv L) ρ) (L - 1 + 1) σ = σ := by
+    intro σ
+    rw [iterLeft_rowShiftEquiv_eq, hL]
+    exact rowShiftIterate_period_from_necSuf σ
   funext τ τ'
-  rw [shiftMatrix_pow_apply_from_necSuf, hL, rowShiftIterate_period_from_necSuf,
-    identityRowMatrix]
-  by_cases h : τ = τ'
-  · rw [if_pos h.symm, if_pos h]
-  · rw [if_neg (fun hc : τ' = τ => h hc.symm), if_neg h]
+  rw [shiftMatrixPow_eq_necSuf,
+    NecSuf.AlgebraicEigenvalue.permMatrix_pow_eq_identity
+      (fun a : Polynomial ℤ => mul_one a) (fun a : Polynomial ℤ => mul_zero a)
+      (rowShiftEquiv L) (L - 1) h,
+    NecSuf.AlgebraicEigenvalue.identityMat, identityRowMatrix]
+  by_cases hij : τ = τ'
+  · rw [if_pos hij, if_pos hij, constPoly_one]
+  · rw [if_neg hij, if_neg hij, constPoly_zero]
 
 end Ising2DLambda.AlgebraicEigenvalue
