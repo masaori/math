@@ -69,9 +69,9 @@ def iota(a):
 
 
 def in_deg_le(f, n):
-    """def_second_degree_bound: f in D_n か（k > n のすべての k で cf_k(f) = 0 か）。"""
+    """def_second_degree_bound: f in D_n か（k > n のすべての k で cf_k(f) = kappa(0) か）。"""
     for k in range(n + 1, n + 8):
-        if cf(f, k) != 0:
+        if cf(f, k) != const_poly(0):
             return False
     return True
 

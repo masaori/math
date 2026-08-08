@@ -3115,8 +3115,10 @@ Z_L
         "この章の目標は、",
         ref("def_transfer_matrix"),
         " の転送行列の特性多項式が ",
-        math(String.raw`\mathbb{Z}[x][\lambda]`),
-        " に属することを示し、そこから固有値が代数的であることを出すことである。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        "（",
+        ref("def_second_polynomial_ring"),
+        "）に属することを示し、そこから固有値が代数的であることを出すことである。",
         "特性多項式は行列式で定め、行列式は添字集合の置換にわたる和として定め、",
         "置換の符号は転倒数（順序が入れ替わる対の個数）で定める。",
         "転倒数を書くには添字集合に線形順序が要る。この定義はその順序を与える。",
@@ -4251,7 +4253,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_definition_lambda_polynomial",
+    id: "algebraic_eigenvalue_definition_second_polynomial",
     kind: "definition",
     title: { text: "整係数多項式を係数とする、もう 1 つの不定元の多項式" },
     labels: ["def_second_polynomial_ring"],
@@ -4284,13 +4286,25 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         math(String.raw`t^{k}`),
         " の係数を ",
         math(String.raw`\mathrm{cf}_k(f)\in\mathbb{Z}[x]`),
-        " と書く。",
-        math(String.raw`\mathrm{cf}_k(f)\ne0`),
+        " と書く（",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の零元と単位元は ",
+        ref("def_constant_polynomial"),
+        " の ",
+        math(String.raw`\kappa(0)`),
+        "、",
+        math(String.raw`\kappa(1)`),
+        " と書き、整数の ",
+        math(String.raw`0`),
+        "、",
+        math(String.raw`1`),
+        " と同じ記号では書かない）。",
+        math(String.raw`\mathrm{cf}_k(f)\ne\kappa(0)`),
         " となる ",
         math(String.raw`k`),
         " は有限個であり、",
       ]),
-      displayMath(String.raw`f=\sum_{k:\ \mathrm{cf}_k(f)\ne0}\mathrm{cf}_k(f)\cdot t^{\,k}`),
+      displayMath(String.raw`f=\sum_{k:\ \mathrm{cf}_k(f)\ne\kappa(0)}\mathrm{cf}_k(f)\cdot t^{\,k}`),
       paragraph([
         "が成り立つ。和と積は係数の言葉で",
       ]),
@@ -4319,7 +4333,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_definition_lambda_constant_embedding",
+    id: "algebraic_eigenvalue_definition_second_constant_embedding",
     kind: "definition",
     title: { text: "整係数多項式を定数として送る写像" },
     labels: ["def_second_constant_embedding"],
@@ -4339,7 +4353,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
       ]),
       displayMath(String.raw`\mathrm{cf}_0\bigl(\iota(a)\bigr):=a,
 \qquad
-\mathrm{cf}_k\bigl(\iota(a)\bigr):=0\quad(k\ge1)`),
+\mathrm{cf}_k\bigl(\iota(a)\bigr):=\kappa(0)\quad(k\ge1)`),
       paragraph([
         "で定める。",
         math(String.raw`\iota`),
@@ -4368,7 +4382,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_definition_lambda_degree_bound",
+    id: "algebraic_eigenvalue_definition_second_degree_bound",
     kind: "definition",
     title: { text: "次数が与えられた自然数以下である元の全体" },
     labels: ["def_second_degree_bound"],
@@ -4385,7 +4399,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         " 以下であるものの全体を",
       ]),
       displayMath(
-        String.raw`\mathcal{D}_n:=\bigl\{\,f\in\mathbb{Z}[x][t] \;\bigm|\; \text{任意の}\ k\in\mathbb{N}\ \text{について}\ k>n\ \text{ならば}\ \mathrm{cf}_k(f)=0\,\bigr\}`,
+        String.raw`\mathcal{D}_n:=\bigl\{\,f\in\mathbb{Z}[x][t] \;\bigm|\; \text{任意の}\ k\in\mathbb{N}\ \text{について}\ k>n\ \text{ならば}\ \mathrm{cf}_k(f)=\kappa(0)\,\bigr\}`,
       ),
       paragraph([
         "と書く。",
@@ -4404,7 +4418,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_definition_lambda_monic",
+    id: "algebraic_eigenvalue_definition_second_monic",
     kind: "definition",
     title: { text: "モニックな、次数がちょうど与えられた自然数である元の全体" },
     labels: ["def_second_monic"],
@@ -4459,20 +4473,28 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         " と ",
         math(String.raw`n''>n`),
         " から ",
-        math(String.raw`\mathrm{cf}_{n''}(f)=0`),
+        math(String.raw`\mathrm{cf}_{n''}(f)=\kappa(0)`),
         " が出るが、",
         math(String.raw`f\in\mathcal{M}_{n''}`),
         " から ",
         math(String.raw`\mathrm{cf}_{n''}(f)=\kappa(1)`),
         " も出る。",
-        math(String.raw`\kappa(1)\ne0`),
-        " なのでこれは矛盾である。",
+        ref("def_constant_polynomial"),
+        " の定め方から ",
+        math(String.raw`\kappa(0)`),
+        " と ",
+        math(String.raw`\kappa(1)`),
+        " は ",
+        math(String.raw`x^{0}`),
+        " の係数が異なるので ",
+        math(String.raw`\kappa(1)\ne\kappa(0)`),
+        " であり、これは矛盾である。",
       ]),
     ],
   },
 
   {
-    id: "algebraic_eigenvalue_claim_lambda_degree_sum",
+    id: "algebraic_eigenvalue_claim_second_degree_sum",
     kind: "claim",
     title: { text: "次数が n 以下である元の有限和は、次数が n 以下である" },
     labels: ["claim_second_degree_sum"],
@@ -4514,9 +4536,9 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 \mathrm{cf}_k\Bigl(\sum_{s\in S}f_s\Bigr)
 &=\sum_{s\in S}\mathrm{cf}_k(f_s)
 &&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数、}S\ \text{の元の個数についての帰納法})\\
-&=\sum_{s\in S}0
+&=\sum_{s\in S}\kappa(0)
 &&(\because\ f_s\in\mathcal{D}_n\ \text{と}\ k>n)\\
-&=0
+&=\kappa(0)
 &&(\because\ \text{零元の有限和は零元})
 \end{aligned}`),
       paragraph([
@@ -4536,7 +4558,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_claim_lambda_degree_prod",
+    id: "algebraic_eigenvalue_claim_second_degree_prod",
     kind: "claim",
     title: { text: "次数の上界は有限積で足し合わされる" },
     labels: ["claim_second_degree_prod"],
@@ -4590,9 +4612,9 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
-&=0\cdot\mathrm{cf}_{k-i}(g)
+&=\kappa(0)\cdot\mathrm{cf}_{k-i}(g)
 &&(\because\ f\in\mathcal{D}_m\ \text{と}\ i>m)\\
-&=0
+&=\kappa(0)
 &&(\because\ \mathbb{Z}[x]\ \text{の零元を掛けると零元})
 \end{aligned}`),
       paragraph([
@@ -4604,23 +4626,23 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
-&=\mathrm{cf}_i(f)\cdot0
+&=\mathrm{cf}_i(f)\cdot\kappa(0)
 &&(\because\ g\in\mathcal{D}_n\ \text{と}\ k-i>n)\\
-&=0
+&=\kappa(0)
 &&(\because\ \mathbb{Z}[x]\ \text{の零元を掛けると零元})
 \end{aligned}`),
       paragraph([
         "である。どちらの場合も項は ",
-        math(String.raw`0`),
+        math(String.raw`\kappa(0)`),
         " なので",
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{cf}_k(f\cdot g)
 &=\sum_{i=0}^{k}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
 &&(\because\ \blkref{def_second_polynomial_ring}\ \text{の積の係数})\\
-&=\sum_{i=0}^{k}0
+&=\sum_{i=0}^{k}\kappa(0)
 &&(\because\ \text{上の 2 つの場合})\\
-&=0
+&=\kappa(0)
 &&(\because\ \text{零元の有限和は零元})
 \end{aligned}`),
       paragraph([
@@ -4640,7 +4662,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         " であり、",
         math(String.raw`k>0=\sum_{s\in\emptyset}n_s`),
         " ならば ",
-        math(String.raw`\mathrm{cf}_k(\iota(\kappa(1)))=0`),
+        math(String.raw`\mathrm{cf}_k(\iota(\kappa(1)))=\kappa(0)`),
         " なので（",
         ref("def_second_constant_embedding"),
         "）、これは ",
@@ -4683,7 +4705,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_claim_lambda_monic_prod",
+    id: "algebraic_eigenvalue_claim_second_monic_prod",
     kind: "claim",
     title: { text: "モニックな元の有限積はモニックであり、その次数は次数の和である" },
     labels: ["claim_second_monic_prod"],
@@ -4740,15 +4762,15 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         " について、",
         math(String.raw`i>m`),
         " のときは ",
-        math(String.raw`\mathrm{cf}_i(f)=0`),
+        math(String.raw`\mathrm{cf}_i(f)=\kappa(0)`),
         "、",
         math(String.raw`i<m`),
         " のときは ",
         math(String.raw`m+n-i>n`),
         " より ",
-        math(String.raw`\mathrm{cf}_{m+n-i}(g)=0`),
+        math(String.raw`\mathrm{cf}_{m+n-i}(g)=\kappa(0)`),
         " なので、いずれの場合も項は ",
-        math(String.raw`0`),
+        math(String.raw`\kappa(0)`),
         " である。したがって",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -4756,7 +4778,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 &=\sum_{i=0}^{m+n}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{m+n-i}(g)
 &&(\because\ \blkref{def_second_polynomial_ring}\ \text{の積の係数})\\
 &=\mathrm{cf}_m(f)\cdot\mathrm{cf}_{n}(g)
-&&(\because\ i\ne m\ \text{の項は}\ 0\ \text{であり、零元は和に寄与しない})\\
+&&(\because\ i\ne m\ \text{の項は}\ \kappa(0)\ \text{であり、零元は和に寄与しない})\\
 &=\kappa(1)\cdot\kappa(1)
 &&(\because\ \blkref{def_second_monic})\\
 &=\kappa(1)
@@ -4795,7 +4817,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
-    id: "algebraic_eigenvalue_claim_lambda_monic_add_lower",
+    id: "algebraic_eigenvalue_claim_second_monic_add_lower",
     kind: "claim",
     title: { text: "モニックな元に次数の低い元を足してもモニックである" },
     labels: ["claim_second_monic_add_lower"],
@@ -4838,10 +4860,10 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 \mathrm{cf}_k(f+g)
 &=\mathrm{cf}_k(f)+\mathrm{cf}_k(g)
 &&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
-&=0+0
+&=\kappa(0)+\kappa(0)
 &&(\because\ f\in\mathcal{D}_n\ \text{と}\ k>n,\ \ g\in\mathcal{D}_{n'}\ \text{と}\ k>n>n')\\
-&=0
-&&(\because\ 0\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+&=\kappa(0)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -4852,10 +4874,10 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 \mathrm{cf}_n(f+g)
 &=\mathrm{cf}_n(f)+\mathrm{cf}_n(g)
 &&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
-&=\kappa(1)+0
+&=\kappa(1)+\kappa(0)
 &&(\because\ \blkref{def_second_monic}\text{、および}\ g\in\mathcal{D}_{n'}\ \text{と}\ n>n')\\
 &=\kappa(1)
-&&(\because\ 0\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
 \end{aligned}`),
       paragraph([
         "である。以上より ",
@@ -4899,7 +4921,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         [
           todo("未着手"),
           "「固有値の代数性」の続き: 特性多項式が ",
-          math(String.raw`\mathbb{Z}[x][\lambda]`),
+          math(String.raw`\mathbb{Z}[x][t]`),
           " のモニックな ",
           math(String.raw`2^{L}`),
           " 次の元であること。そこから固有値の代数性を出し、円分体上で対角化する。",
@@ -4909,10 +4931,20 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
           ref("claim_permutation_sign_mul"),
           "）、行列式の定義（",
           ref("def_determinant"),
-          "）と、次数を数えるのに使う 2 つの主張（",
+          "）、次数を数えるのに使う 2 つの主張（",
           ref("claim_permutation_moves_two"),
           "、",
           ref("claim_determinant_diagonal"),
+          "）、および ",
+          ref("def_second_polynomial_ring"),
+          " の次数とモニック性の 4 主張（",
+          ref("claim_second_degree_sum"),
+          "、",
+          ref("claim_second_degree_prod"),
+          "、",
+          ref("claim_second_monic_prod"),
+          "、",
+          ref("claim_second_monic_add_lower"),
           "）までは上で済んでいる。",
         ],
         [
