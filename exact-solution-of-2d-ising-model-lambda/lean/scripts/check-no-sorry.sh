@@ -67,6 +67,11 @@ targets=(
   Ising2DLambda.TransferMatrix.transfer_weight_product
   Ising2DLambda.TransferMatrix.transfer_weight_product_from_necSuf
   Ising2DLambda.NecSuf.TransferMatrix.prod_pow_add_eq_pow
+  Ising2DLambda.TransferMatrix.rowWalksBetween_one
+  Ising2DLambda.TransferMatrix.walkWeight_extendWalk
+  Ising2DLambda.TransferMatrix.rowMatrixPow_apply
+  Ising2DLambda.TransferMatrix.rowMatrixPow_apply_from_necSuf
+  Ising2DLambda.NecSuf.TransferMatrix.matPow_apply_eq_sum_walkWeight
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
