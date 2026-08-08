@@ -418,7 +418,12 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
     ],
     proof: [
       paragraph([
-        "Step 1（被覆）。",
+        "示すことは 2 つある。合併が ",
+        math(String.raw`\Sigma_L`),
+        " に等しいことと、互いに素であることである。",
+      ]),
+      paragraph([
+        "合併が等しいこと。",
         math(String.raw`A_{L,m}`),
         " の定義より ",
         math(String.raw`A_{L,m}\subset\Sigma_L`),
@@ -445,7 +450,7 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
         " は合併に属する。",
       ]),
       paragraph([
-        "Step 2（互いに素）。",
+        "互いに素であること。",
         math(String.raw`m\ne m'`),
         " とし、",
         math(String.raw`\sigma\in A_{L,m}\cap A_{L,m'}`),
@@ -1331,34 +1336,28 @@ Z_L(q)
         " についての帰納法で示す。",
       ]),
       paragraph([
-        "Step 1（",
         math(String.raw`k=0`),
-        " の場合）。",
-        math(String.raw`q^{0}=1`),
-        " であり、1 は表示 ",
-        math(String.raw`1/1`),
-        " を持つので、",
-        ref("def_rational_log"),
-        " と ",
-        ref("def_prime_exponent"),
-        " の ",
-        math(String.raw`v_p(1)=0`),
-        " より、各素数 ",
+        " のとき、各素数 ",
         math(String.raw`p`),
-        " について ",
-        math(String.raw`w_p(1)=v_p(1)-v_p(1)=0`),
-        " である。したがって ",
-        math(String.raw`\log 1`),
-        " は零写像、すなわち ",
-        math(String.raw`\Lambda`),
-        " の単位元である。一方 ",
-        ref("def_log_order_group"),
-        " の整数倍の定義より ",
-        math(String.raw`0\cdot\log q`),
-        " も零写像なので、両辺は等しい。",
+        " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\log(q^{0})\bigr)(p)
+&=\bigl(\log 1\bigr)(p)
+&&(\because\ q^{0}=1)\\
+&=w_p(1)
+&&(\because\ \text{正の有理数の対数の定義})\\
+&=v_p(1)-v_p(1)
+&&(\because\ 1=1/1)\\
+&=0
+&&\\
+&=\bigl(0\cdot\log q\bigr)(p)
+&&(\because\ \Lambda\ \text{の整数倍の定義})
+\end{aligned}`),
       paragraph([
-        "Step 2（帰納法の段）。ある ",
+        "であり、両辺は ",
+        math(String.raw`\Lambda`),
+        " の単位元（零写像）として等しい。ある ",
         math(String.raw`k\in\mathbb{N}`),
         " について ",
         math(String.raw`\log(q^{\,k})=k\,\log q`),
@@ -1376,7 +1375,7 @@ Z_L(q)
 &&(\because\ \Lambda\ \text{の整数倍の定義と }\mathbb{Z}\ \text{の分配則})
 \end{aligned}`),
       paragraph([
-        "となる。したがって Step 1 と合わせて、すべての ",
+        "となる。したがって k=0 の場合と合わせて、すべての ",
         math(String.raw`k\in\mathbb{N}`),
         " について ",
         math(String.raw`\log(q^{\,k})=k\,\log q`),
@@ -1758,7 +1757,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
     ],
     proof: [
       paragraph([
-        "Step 1（番号が正しい範囲に入ること）。",
+        "番号が正しい範囲に入ること。",
         math(String.raw`i,j\in\{0,1,\dots,L-1\}`),
         " のとき",
       ]),
@@ -1781,7 +1780,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " の番号の範囲）。",
       ]),
       paragraph([
-        "Step 2（分解の一意性）。",
+        "分解の一意性。",
         ref("def_lattice"),
         " で使った除法の原理により、",
         math(String.raw`0\le k\le L^2-1`),
@@ -1800,7 +1799,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " への全単射である。",
       ]),
       paragraph([
-        "Step 3（個数）。",
+        "個数。",
         math(String.raw`i`),
         " を固定する。",
         math(String.raw`j\ne j'`),
@@ -1828,7 +1827,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " であり、2 つめも示せた。",
       ]),
       paragraph([
-        "Step 4（互いに素であること）。",
+        "互いに素であること。",
         math(String.raw`i\ne i'`),
         " とし、",
         math(String.raw`E_{L,\mathrm{h},i}\cap E_{L,\mathrm{h},i'}`),
@@ -1840,7 +1839,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         math(String.raw`e=iL+j+1=i'L+j'+1`),
         " と書けるので ",
         math(String.raw`iL+j=i'L+j'`),
-        " である。Step 2 の一意性より ",
+        " である。上の分解の一意性より ",
         math(String.raw`i=i'`),
         " となり仮定に反する。よって共通部分は空である。",
         math(String.raw`E_{L,\mathrm{v},i}`),
@@ -1849,7 +1848,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " を引けば同じ議論になる。これで 3 つめが示せた。",
       ]),
       paragraph([
-        "Step 5（合併）。Step 1 により ",
+        "合併。番号が正しい範囲に入ることから ",
         math(String.raw`\bigcup_{i=0}^{L-1}E_{L,\mathrm{h},i}\subset E_{L,\mathrm{h}}`),
         " である。逆に ",
         math(String.raw`e\in E_{L,\mathrm{h}}`),
@@ -1859,7 +1858,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         math(String.raw`1\le e\le L^2`),
         " すなわち ",
         math(String.raw`0\le e-1\le L^2-1`),
-        " なので、Step 2 により ",
+        " なので、分解の一意性により ",
         math(String.raw`e-1=iL+j`),
         " と書ける。このとき ",
         math(String.raw`e=iL+j+1\in E_{L,\mathrm{h},i}`),
@@ -1876,11 +1875,11 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " に等しいことが従う。これで 4 つめが示せた。",
       ]),
       paragraph([
-        "Step 6（端点）。",
+        "端点。",
         math(String.raw`e=iL+j+1\in E_{L,\mathrm{h}}`),
         " のとき ",
         math(String.raw`e-1=iL+j`),
-        " であり、Step 2 の一意性により、この ",
+        " であり、分解の一意性により、この ",
         math(String.raw`(i,j)`),
         " は ",
         ref("def_lattice"),
@@ -2315,68 +2314,53 @@ b(\sigma)
     ],
     proof: [
       paragraph([
-        "Step 1（",
-        math(String.raw`\mathrm{conf}\circ\mathrm{rows}`),
-        " が恒等写像であること）。配位 ",
+        "配位 ",
         math(String.raw`\sigma\in\Sigma_L`),
-        " と頂点 ",
-        math(String.raw`(i,j)\in V_L`),
-        " を任意に取る。",
-        ref("def_rows_map"),
-        " の 2 つの定義式を順に使うと",
-      ]),
-      displayMath(
-        String.raw`\Bigl(\mathrm{conf}\bigl(\mathrm{rows}(\sigma)\bigr)\Bigr)\bigl((i,j)\bigr)
-=\Bigl(\bigl(\mathrm{rows}(\sigma)\bigr)(i)\Bigr)(j)
-=\bigl(\rho_i(\sigma)\bigr)(j)`,
-      ),
-      paragraph([
-        "であり、",
-        ref("def_row_restriction"),
-        " により右辺は ",
-        math(String.raw`\sigma((i,j))`),
-        " に等しい。頂点は任意だったので、写像として ",
-        math(String.raw`\mathrm{conf}(\mathrm{rows}(\sigma))=\sigma`),
-        " である。",
-      ]),
-      paragraph([
-        "Step 2（",
-        math(String.raw`\mathrm{rows}\circ\mathrm{conf}`),
-        " が恒等写像であること）。行配位の族 ",
+        "、行配位の族 ",
         math(String.raw`c\in C_L`),
-        " と ",
-        math(String.raw`i,j\in\mathbb{Z}/L\mathbb{Z}`),
-        " を任意に取る。",
-        ref("def_rows_map"),
-        " と ",
-        ref("def_row_restriction"),
-        " により",
+        "、頂点 ",
+        math(String.raw`(i,j)\in V_L`),
+        " を任意に取ると",
       ]),
-      displayMath(
-        String.raw`\Bigl(\bigl(\mathrm{rows}(\mathrm{conf}(c))\bigr)(i)\Bigr)(j)
-=\bigl(\rho_i(\mathrm{conf}(c))\bigr)(j)
-=\bigl(\mathrm{conf}(c)\bigr)\bigl((i,j)\bigr)
-=\bigl(c(i)\bigr)(j)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\mathrm{conf}\bigl(\mathrm{rows}(\sigma)\bigr)\Bigr)\bigl((i,j)\bigr)
+&=\Bigl(\bigl(\mathrm{rows}(\sigma)\bigr)(i)\Bigr)(j)
+&&(\because\ \mathrm{conf}\ \text{の定義})\\
+&=\bigl(\rho_i(\sigma)\bigr)(j)
+&&(\because\ \mathrm{rows}\ \text{の定義})\\
+&=\sigma\bigl((i,j)\bigr)
+&&(\because\ \text{行への制限の定義})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\bigl(\mathrm{rows}(\mathrm{conf}(c))\bigr)(i)\Bigr)(j)
+&=\bigl(\rho_i(\mathrm{conf}(c))\bigr)(j)
+&&(\because\ \mathrm{rows}\ \text{の定義})\\
+&=\bigl(\mathrm{conf}(c)\bigr)\bigl((i,j)\bigr)
+&&(\because\ \text{行への制限の定義})\\
+&=\bigl(c(i)\bigr)(j)
+&&(\because\ \mathrm{conf}\ \text{の定義})
+\end{aligned}`),
       paragraph([
-        math(String.raw`j`),
-        " は任意だったので、行配位として ",
-        math(String.raw`\bigl(\mathrm{rows}(\mathrm{conf}(c))\bigr)(i)=c(i)`),
-        " である。さらに ",
-        math(String.raw`i`),
-        " も任意だったので、行配位の族として ",
-        math(String.raw`\mathrm{rows}(\mathrm{conf}(c))=c`),
-        " である。",
-      ]),
-      paragraph([
-        "Step 3（結論）。Step 1 と Step 2 より ",
+        math(String.raw`(i,j)`),
+        " は任意だったので、写像として ",
+        math(String.raw`\mathrm{conf}\circ\mathrm{rows}=\mathrm{id}`),
+        " かつ ",
+        math(String.raw`\mathrm{rows}\circ\mathrm{conf}=\mathrm{id}`),
+        " である。したがって ",
         math(String.raw`\mathrm{rows}`),
         " は ",
         math(String.raw`\mathrm{conf}`),
-        " を逆写像に持つ。逆写像を持つ写像は全単射である。",
+        " を逆写像に持ち、逆写像を持つ写像は全単射である。",
       ]),
       paragraph([
-        "以上の各ステップは写像の値の計算だけからなり、実数体も複素数体も現れない。",
+        "引いたブロック: ",
+        ref("def_rows_map"),
+        "、",
+        ref("def_row_restriction"),
+        "。",
+      ]),
+      paragraph([
+        "以上は写像の値の計算だけからなり、実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -2835,6 +2819,422 @@ w_A(q)
         "以上は有限個の ",
         math(String.raw`\mathbb{Z}[x]`),
         " の元の和と積、および有限集合の間の 1 対 1 対応だけからなり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "transfer_matrix_definition_closed_walk",
+    kind: "definition",
+    title: { text: "閉じた道と、行配位の族から作る閉じた道" },
+    labels: ["def_closed_walk", "def_walk_of_family"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.TransferMatrix.closedRowWalks",
+      "Ising2DLambda.TransferMatrix.walkOfFamily",
+      "Ising2DLambda.TransferMatrix.familyOfWalk",
+    ],
+    statement: [
+      paragraph([
+        ref("def_row_walk"),
+        " の道のうち、長さが格子の一辺 ",
+        math(String.raw`L`),
+        " に等しく、両端の値が一致するものの全体を",
+      ]),
+      displayMath(
+        String.raw`W^{\mathrm{cl}}_{L}:=\bigl\{\,p\in W_{L,L} \;\bigm|\; p(0)=p(L)\,\bigr\}`,
+      ),
+      paragraph([
+        "と書き、その元を閉じた道と呼ぶ。",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`W_{L,L}`),
+        " は定義されており、",
+        math(String.raw`W^{\mathrm{cl}}_{L}`),
+        " はその部分集合なので有限集合である。",
+      ]),
+      paragraph([
+        "以下、整数 ",
+        math(String.raw`a\in\mathbb{Z}`),
+        " に対し、その ",
+        math(String.raw`L`),
+        " を法とする剰余類を ",
+        math(String.raw`\overline{a}\in\mathbb{Z}/L\mathbb{Z}`),
+        " と書く。",
+      ]),
+      paragraph([
+        ref("def_row_family"),
+        " の行配位の族 ",
+        math(String.raw`c\in C_L`),
+        " から閉じた道を作る写像 ",
+        math(String.raw`\Theta:C_L\to W^{\mathrm{cl}}_{L}`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\bigl(\Theta(c)\bigr)(i):=c(\overline{i})\qquad(i\in\{0,1,\dots,L\})`,
+      ),
+      paragraph([
+        "で定める。右辺は ",
+        math(String.raw`R_L`),
+        " の元なので ",
+        math(String.raw`\Theta(c)`),
+        " は ",
+        math(String.raw`W_{L,L}`),
+        " の元であり、",
+        math(String.raw`\overline{L}=\overline{0}`),
+        " より ",
+        math(String.raw`\bigl(\Theta(c)\bigr)(L)=c(\overline{0})=\bigl(\Theta(c)\bigr)(0)`),
+        " なので閉じている。すなわち右辺は ",
+        math(String.raw`W^{\mathrm{cl}}_{L}`),
+        " の元である。",
+      ]),
+      paragraph([
+        "逆向きに、閉じた道から行配位の族を作る写像 ",
+        math(String.raw`\Xi:W^{\mathrm{cl}}_{L}\to C_L`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\bigl(\Xi(p)\bigr)(\overline{a}):=p(a)\qquad(a\in\{0,1,\dots,L-1\})`,
+      ),
+      paragraph([
+        "で定める。",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " のどの元も ",
+        math(String.raw`\{0,1,\dots,L-1\}`),
+        " の中にちょうど 1 つ代表元を持つので、この式は ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " のすべての元に対して値をちょうど 1 つ定めており、右辺は ",
+        math(String.raw`R_L`),
+        " の元である。したがって ",
+        math(String.raw`\Xi(p)`),
+        " は ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " から ",
+        math(String.raw`R_L`),
+        " への写像、すなわち ",
+        math(String.raw`C_L`),
+        " の元である。",
+      ]),
+      paragraph([
+        "記号について。",
+        math(String.raw`\Theta`),
+        " と ",
+        math(String.raw`\Xi`),
+        " が結ぶのは、周期的な添字の上の写像（族）と、一列に並んだ添字の上の写像（道）である。",
+        "両者が別の対象であることは ",
+        ref("def_row_walk"),
+        " で述べたとおりであり、この 2 つの写像はその間の翻訳を担う。",
+        "ここに現れる対象はすべて有限集合とその上の写像であり、実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "transfer_matrix_claim_closed_walk_bijection",
+    kind: "claim",
+    title: { text: "行配位の族全体と閉じた道全体は 1 対 1 に対応する" },
+    labels: ["claim_closed_walk_bijection"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.TransferMatrix.familyOfWalk_walkOfFamily",
+      "Ising2DLambda.TransferMatrix.walkOfFamily_familyOfWalk",
+      "Ising2DLambda.TransferMatrix.closedWalkEquiv",
+    ],
+    verification: ["sagemath/check/transfer-matrix-trace"],
+    statement: [
+      paragraph([
+        ref("def_walk_of_family"),
+        " の写像 ",
+        math(String.raw`\Theta:C_L\to W^{\mathrm{cl}}_{L}`),
+        " は全単射であり、その逆写像は ",
+        math(String.raw`\Xi`),
+        " である。",
+      ]),
+      paragraph([
+        "すなわち、",
+        math(String.raw`L`),
+        " 個の行を周期的に並べて与えることと、",
+        math(String.raw`L+1`),
+        " 個の行配位を両端が一致するように一列に並べて与えることは、同じことである。",
+        "両辺の集合はどちらも有限集合であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Xi\circ\Theta`),
+        " が恒等写像であること。行配位の族 ",
+        math(String.raw`c\in C_L`),
+        " と ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の元を任意に取り、その ",
+        math(String.raw`\{0,1,\dots,L-1\}`),
+        " の中の代表元を ",
+        math(String.raw`a`),
+        " とすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\Xi\bigl(\Theta(c)\bigr)\Bigr)(\overline{a})
+&=\bigl(\Theta(c)\bigr)(a)
+&&(\because\ \Xi\ \text{の定義})\\
+&=c(\overline{a})
+&&(\because\ \Theta\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "である。取った元は任意だったので、写像として ",
+        math(String.raw`\Xi(\Theta(c))=c`),
+        " である。",
+      ]),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_walk_of_family"),
+        "。",
+      ]),
+      paragraph([
+        math(String.raw`\Theta\circ\Xi`),
+        " が恒等写像であること。閉じた道 ",
+        math(String.raw`p\in W^{\mathrm{cl}}_{L}`),
+        " と ",
+        math(String.raw`i\in\{0,1,\dots,L\}`),
+        " を任意に取る。",
+        math(String.raw`i\le L-1`),
+        " か ",
+        math(String.raw`i=L`),
+        " のいずれかであるから、場合を分ける（この 2 つの場合で ",
+        math(String.raw`\overline{i}`),
+        " の代表元が ",
+        math(String.raw`i`),
+        " であるかどうかが違うので、一続きの式にはしない）。",
+      ]),
+      paragraph([
+        math(String.raw`i\le L-1`),
+        " の場合。",
+        math(String.raw`i`),
+        " 自身が ",
+        math(String.raw`\overline{i}`),
+        " の ",
+        math(String.raw`\{0,1,\dots,L-1\}`),
+        " の中の代表元であるから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\Theta\bigl(\Xi(p)\bigr)\Bigr)(i)
+&=\bigl(\Xi(p)\bigr)(\overline{i})
+&&(\because\ \Theta\ \text{の定義})\\
+&=p(i)
+&&(\because\ \Xi\ \text{の定義。}i\ \text{は}\ \overline{i}\ \text{の代表元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`i=L`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\Theta\bigl(\Xi(p)\bigr)\Bigr)(L)
+&=\bigl(\Xi(p)\bigr)(\overline{L})
+&&(\because\ \Theta\ \text{の定義})\\
+&=\bigl(\Xi(p)\bigr)(\overline{0})
+&&(\because\ \overline{L}=\overline{0})\\
+&=p(0)
+&&(\because\ \Xi\ \text{の定義。}0\ \text{は}\ \overline{0}\ \text{の代表元})\\
+&=p(L)
+&&(\because\ p\ \text{が閉じた道であること})
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も値が一致し、",
+        math(String.raw`i`),
+        " は任意だったので、写像として ",
+        math(String.raw`\Theta(\Xi(p))=p`),
+        " である。",
+      ]),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_closed_walk"),
+        "、",
+        ref("def_walk_of_family"),
+        "。",
+      ]),
+      paragraph([
+        "結論。以上より ",
+        math(String.raw`\Theta`),
+        " は ",
+        math(String.raw`\Xi`),
+        " を逆写像に持つ。逆写像を持つ写像は全単射である。",
+        "以上は写像の値の計算と剰余類の代表元の取り扱いだけからなり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "transfer_matrix_theorem_partition_polynomial_is_trace",
+    kind: "theorem",
+    title: { text: "分配多項式は転送行列の冪のトレースである" },
+    labels: ["theorem_partition_polynomial_is_trace"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.TransferMatrix.partitionPolynomial_eq_trace",
+      "Ising2DLambda.TransferMatrix.partitionPolynomial_eq_trace_from_necSuf",
+      "Ising2DLambda.NecSuf.TransferMatrix.trace_matPow_eq_sum_cyclicWeight",
+    ],
+    verification: ["sagemath/check/transfer-matrix-trace"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中で",
+      ]),
+      displayMath(String.raw`Z_L=\operatorname{Tr}\bigl(T^{L}\bigr)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`Z_L`),
+        " は ",
+        ref("def_partition_polynomial"),
+        "、",
+        math(String.raw`T`),
+        " は ",
+        ref("def_transfer_matrix"),
+        "、冪とトレースは ",
+        ref("def_matrix_over_row_configs"),
+        "）。",
+      ]),
+      paragraph([
+        "左辺は ",
+        math(String.raw`2^{L^2}`),
+        " 個の配位にわたる和として定義された多項式であり、右辺は ",
+        math(String.raw`2^{L}`),
+        " 次の行列の冪の対角成分の和である。両辺とも ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、実数体も複素数体も現れない。",
+        "指数関数を経由していないので、この等式には代入も脱出も含まれない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備 1（閉じた道の全体が、両端の値ごとに互いに素な類へ分かれること）。",
+        math(String.raw`\tau\in R_L`),
+        " に対し ",
+        ref("def_row_walk"),
+        " の ",
+        math(String.raw`W_{L,L}(\tau,\tau)`),
+        " を考える。その元は ",
+        math(String.raw`p(0)=\tau=p(L)`),
+        " を満たすので ",
+        math(String.raw`W^{\mathrm{cl}}_{L}`),
+        " に属する。逆に ",
+        math(String.raw`p\in W^{\mathrm{cl}}_{L}`),
+        " は ",
+        math(String.raw`\tau:=p(0)`),
+        " と置けば ",
+        math(String.raw`p(L)=p(0)=\tau`),
+        " なので ",
+        math(String.raw`W_{L,L}(\tau,\tau)`),
+        " に属する。さらに ",
+        math(String.raw`\tau\ne\tau'`),
+        " なら ",
+        math(String.raw`W_{L,L}(\tau,\tau)`),
+        " と ",
+        math(String.raw`W_{L,L}(\tau',\tau')`),
+        " は互いに素である（両方に属する道は ",
+        math(String.raw`\tau=p(0)=\tau'`),
+        " を満たすため）。ゆえに ",
+        math(String.raw`W^{\mathrm{cl}}_{L}`),
+        " は ",
+        math(String.raw`\tau`),
+        " ごとの ",
+        math(String.raw`W_{L,L}(\tau,\tau)`),
+        " の互いに素な合併であり、その上の和は各類の上の和の和に等しい。",
+      ]),
+      paragraph([
+        "準備 2（行配位の族から作った閉じた道の重み）。配位 ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " を任意に取り、",
+        ref("def_rows_map"),
+        " の ",
+        math(String.raw`\mathrm{rows}(\sigma)\in C_L`),
+        " から作った閉じた道 ",
+        math(String.raw`\Theta(\mathrm{rows}(\sigma))`),
+        " の重みを計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
+&=\prod_{i=0}^{L-1}T_{\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)(i),\,\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)(i+1)}
+&&(\because\ \text{道に沿った成分の積の定義})\\
+&=\prod_{i=0}^{L-1}T_{\bigl(\mathrm{rows}(\sigma)\bigr)(\overline{i}),\,\bigl(\mathrm{rows}(\sigma)\bigr)(\overline{i+1})}
+&&(\because\ \Theta\ \text{の定義})\\
+&=\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}
+&&(\because\ \mathrm{rows}\ \text{の定義})\\
+&=x^{\,b(\sigma)}
+&&(\because\ \text{配位の重みは行に沿った成分の積である})
+\end{aligned}`),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_row_walk"),
+        "、",
+        ref("def_walk_of_family"),
+        "、",
+        ref("def_rows_map"),
+        "、",
+        ref("claim_transfer_weight_product"),
+        "。",
+        "第 3 の等号で、",
+        math(String.raw`\rho`),
+        " の添字（行番号）に剰余類を用いる約束（",
+        ref("claim_transfer_weight_product"),
+        " と同じ）をそのまま使っている。",
+      ]),
+      paragraph([
+        "以上を用いて、右辺から左辺へたどる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{Tr}\bigl(T^{L}\bigr)
+&=\sum_{\tau\in R_L}\bigl(T^{L}\bigr)_{\tau,\tau}
+&&(\because\ \text{トレースの定義})\\
+&=\sum_{\tau\in R_L}\ \sum_{p\in W_{L,L}(\tau,\tau)}w_T(p)
+&&(\because\ \text{行列の冪の成分は道に沿った成分の積の和である})\\
+&=\sum_{p\in W^{\mathrm{cl}}_{L}}w_T(p)
+&&(\because\ \text{準備 1})\\
+&=\sum_{c\in C_L}w_T\bigl(\Theta(c)\bigr)
+&&(\because\ \Theta\ \text{が全単射})\\
+&=\sum_{\sigma\in\Sigma_L}w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
+&&(\because\ \mathrm{rows}\ \text{が全単射})\\
+&=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
+&&(\because\ \text{準備 2})\\
+&=Z_L
+&&(\because\ \text{分配多項式の定義})
+\end{aligned}`),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_matrix_over_row_configs"),
+        "、",
+        ref("claim_matrix_pow_entry"),
+        "、",
+        ref("claim_closed_walk_bijection"),
+        "、",
+        ref("claim_rows_bijection"),
+        "、",
+        ref("def_partition_polynomial"),
+        "。",
+        "第 2 の等号は ",
+        ref("claim_matrix_pow_entry"),
+        " を ",
+        math(String.raw`A=T`),
+        "、",
+        math(String.raw`k=L`),
+        "、",
+        math(String.raw`\tau''=\tau`),
+        " として各 ",
+        math(String.raw`\tau\in R_L`),
+        " に用いたものである。",
+      ]),
+      paragraph([
+        "以上は有限集合の間の 1 対 1 対応と ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の有限個の元の和・積だけからなり、実数体も複素数体も現れない。",
+        "分配多項式は ",
+        math(String.raw`2^{L^2}`),
+        " 個の項の和として定義されているが、この等式により ",
+        math(String.raw`2^{L}`),
+        " 次の行列の冪から計算できることになる。",
+        "次の章では、この行列の固有値が特性多項式の根として代数的数であることを見る。",
       ]),
     ],
   },
