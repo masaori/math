@@ -2,21 +2,24 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-08 時点）
+## 現在の到達点（2026-08-09 時点）
 
-章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
-章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 17 件・主張 24 件・定理 1 件。行配位の辞書式順序・置換の符号・
+数はいずれも構造化テキストのラベルの数である（1 つのブロックが定義を 2 つ以上宣言している
+箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
+章「分配多項式」（定義 5 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
+章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
+および章「固有値の代数性」（定義 25 件・主張 31 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
-シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道）が、
+シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
+軌道による行配位の全体の分割）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 37 件・主張 42 件・定理 3 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` を実行済み（$L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$ で成立、厳密計算） |
-| Lean 具体版 | 定義 37 件と主張 42 件と定理 3 件。`lake build` と `check-no-sorry.sh`（定理 173 件を登録）が通る |
-| Lean 必要十分版 | 主張 39 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 48 件・主張 45 件・定理 3 件・注意 1 件（ラベルの数。合計 98 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 187 件を登録）が通る |
+| Lean 必要十分版 | 主張 42 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -208,6 +211,18 @@ $O(\tau)=\{\tau'\in R_L\mid \tau'=S^{[k]}(\tau)\ \text{を満たす}\ k\in\mathb
   相等が判定できること」「その点が 1 回以上の反復で戻ること」の 3 つだけであり、
   すなわち $S$ が全単射であることの半分（単射性）しか使っていないことである。
 
+さらに、軌道の全体 $\mathcal{O}_L=\{O(\tau)\mid\tau\in R_L\}$ を定義し、次の 3 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- 軌道の元の軌道はもとの軌道に等しい（$\tau'\in O(\tau)$ ならば $O(\tau')=O(\tau)$）。
+  証明は包含の補題「$\tau_2\in O(\tau_1)$ ならば $O(\tau_2)\subset O(\tau_1)$」を 2 度当てる。
+  2 度目に要る $\tau\in O(\tau')$ は、$S$ を逆向きに辿るのではなく、反復の回数
+  $k_0=(e(\tau)-1)\,m$ を取って前向きに戻ることで得る。
+- 2 つの軌道は一致するか互いに素である。
+- 軌道の全体は行配位の全体の分割である（どの元も空でない・相異なる 2 元は互いに素・合併が $R_L$）。
+  必要十分版が示したのは、これらが要求するのが「その点が 1 回以上の反復で戻ること」だけで、
+  **$S$ の単射性も全射性も、最小周期の最小性も使っていない**ことである。
+
 これは、シフト行列の特性多項式を軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積へ分解し、
 その根が 1 の $L$ 乗根であることを言うための足場である。
 軌道の大きさが $L$ の約数であることから、$\overline{\mathbb{Q}}$ を持ち出す前に
@@ -227,12 +242,11 @@ $O(\tau)=\{\tau'\in R_L\mid \tau'=S^{[k]}(\tau)\ \text{を満たす}\ k\in\mathb
 ## 次回やること
 
 1. **シフト行列の特性多項式が軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積に分解すること**
-   （章「固有値の代数性」の続き。台帳のセクション 10f）。先に「行配位の全体が軌道たちへ
-   分割されること」（軌道は互いに素で、合併が $R_L$）を立て、そのうえで分解を示す。
-   分割は「$\tau'\in O(\tau)$ ならば $O(\tau')=O(\tau)$」の形が素直で、そこには
-   $S$ の全単射性（逆向きにも辿れること）が効く。**軌道の個数を数える段とは違って
-   単射性だけでは足りない**ので、必要十分版の仮定を注意して見ること。
-   1 tick に収まらない見込みなら、分割と分解を別セクションへ割り直してよい。
+   （章「固有値の代数性」の続き。台帳のセクション 10f'）。行配位の全体が軌道たちへ
+   分割されることは済んでいるので、次は行列式を軌道ごとに分けて計算する段である。
+   シフト行列は置換行列なので、特性多項式の置換にわたる和のうち値が消えない項は
+   「各軌道の上を巡回する置換」に対応するものだけである。
+   1 tick に収まらない見込みなら、着手前に割り直すこと。
 
 ## 未解決の設計問題
 

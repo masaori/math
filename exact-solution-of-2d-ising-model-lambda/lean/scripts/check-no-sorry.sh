@@ -206,6 +206,20 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_injective_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.card_rowShiftOrbit_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_subset_of_mem
+  Ising2DLambda.AlgebraicEigenvalue.self_mem_rowShiftOrbit
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_of_mem
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_of_inter_nonempty
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbitSet_partition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbit_subset_of_mem
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.self_mem_orbit
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbit_eq_of_mem
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbit_eq_of_inter_nonempty
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbitSet_partition
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_of_mem_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_of_inter_nonempty_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbitSet_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbitSet_partition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
