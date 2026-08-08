@@ -94,6 +94,8 @@
 ### プロジェクト一覧
 
 - `exact-solution-of-2d-ising-model/` — 2次元Ising模型の厳密解の証明
+- `exact-solution-of-2d-ising-model-lambda/` — 同じ厳密解を、対数順序群 Λ と Fisher 零点の
+  立場から（可算で閉じる範囲を最大化し、ℝ 脱出を熱力学極限の一点へ隔離して）導出する
 - `integrable-lattice/` — 可算（対数順序群 Λ / ℚ̄）で厳密化できる可解格子模型の statement 探索
 - `cellular-automata-statistical-mechanics/` — 2値セルオートマトンの規則（グラフ形状・近傍・
   時間発展）と、統計力学／場の量子論に現れる作用素・代数構造との対応関係の探索
@@ -224,6 +226,16 @@
   **Lean は同じ主張に2つの証明を置く**: 人手証明と1対1に対応する具体版（人手証明の保証）と、
   不要な構造を取り払った抽象版（何が本質的かを示し、具体版が過剰な構造を要求していないかの検査）。
 - サブエージェントにこのプロジェクトの作業を委譲するときは、**指示に README を読ませることを含める。**
+
+- **`exact-solution-of-2d-ising-model-lambda/` で作業するときは、着手前に必ず
+  [その README](exact-solution-of-2d-ising-model-lambda/README.md) を読むこと。**
+- 要点: **可算（ℕ/ℤ/ℚ/Λ、および ℤ[x]・ℚ̄）で閉じる範囲を最大化し、ℝ/ℂ への脱出を
+  熱力学極限の一点へ隔離する**ことがゴールである。分配関数は整係数多項式 $Z_L(x)\in\mathbb{Z}[x]$
+  として定義し、**$x=e^{-2\beta J}$ の代入を入口に置かない**（代入は脱出なので宣言してから行う）。
+  本文の各ブロックは扱う量の住処（`habitat`）を宣言し、非可算なら脱出理由（`realEscape`）を書く
+  ——これは散文の約束ではなく型と実行時検査で強制される。
+  姉妹プロジェクト `exact-solution-of-2d-ising-model/` とは**ゴールが違う**（あちらは可読性、
+  こちらは可算／非可算の分別）。計算を引き写さず、可算側で書き直せるかを毎回問う。
 
 - **`integrable-lattice/` で作業するときは、着手前に必ず
   [その README](integrable-lattice/README.md) と

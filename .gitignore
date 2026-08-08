@@ -10,3 +10,9 @@ lean/.lake/
 
 # Node の依存（各パッケージ配下）
 node_modules/
+
+# 構造化テキストから生成する成果物（.tex / .pdf）。正本は content/ なので追跡しない
+exact-solution-of-2d-ising-model-lambda/structured-latex/build/
+
+# sage が .sage から生成する中間ファイル
+*.sage.py
