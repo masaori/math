@@ -38,7 +38,7 @@ export default defineBlocks([
     title: {
       text: "（極座標表現）の乗法群",
     },
-    labels: [],
+    labels: ["multiplicative_group_of_polar_representation"],
     statement: [
       paragraph(["（極座標表現）は二項演算 ", math(String.raw`\cdot`), " についてモノイドをなす。"]),
       displayMath(
@@ -850,162 +850,214 @@ b
         " の積について、体の公理をすべて確かめる。",
       ]),
       paragraph([
-        "示すべきことは次の (i)〜(v) である。",
+        "示すべきことは次の 5 つである。",
       ]),
       list([
         [
-          "(i) ",
           math(String.raw`(\mathbb{C},+)`),
-          " は可換群である。",
+          " は可換群である（加法の群構造）。",
         ],
         [
-          "(ii) 積は結合的・可換であり単位元 ",
+          "積は結合的・可換であり単位元 ",
           math(String.raw`1_{\mathbb{C}}`),
-          " をもつ。",
+          " をもつ（積のモノイド構造）。",
         ],
-        ["(iii) 分配律が成り立つ。"],
+        ["分配律が成り立つ。"],
         [
-          "(iv) ",
           math(String.raw`1_{\mathbb{C}}\ne 0_{\mathbb{C}}`),
-          "。",
+          " である（単位元と零元の相違）。",
         ],
         [
-          "(v) ",
           math(String.raw`0_{\mathbb{C}}`),
-          " 以外の元は積について可逆である。",
+          " 以外の元は積について可逆である（逆元の存在）。",
         ],
       ]),
       paragraph([
-        "Step 1: (i)。",
+        "以下 ",
+        math(String.raw`a,b,c,d,e,f\in\mathbb{R}`),
+        " とし、",
         math(String.raw`(a,b),(c,d),(e,f)\in\mathbb{C}`),
-        " に対して、",
+        " とする。",
       ]),
+      paragraph(["加法の結合律。"]),
       displayMath(
         String.raw`\begin{aligned}
-\left((a,b)+(c,d)\right)+(e,f)
-&= (a+c,\ b+d)+(e,f) \\
-&= \left((a+c)+e,\ (b+d)+f\right) \\
-&= \left(a+(c+e),\ b+(d+f)\right)
-\quad (\because \mathbb{R} \text{ の和の結合律}) \\
-&= (a,b)+(c+e,\ d+f) \\
-&= (a,b)+\left((c,d)+(e,f)\right)
+\bigl((a,b)+(c,d)\bigr)+(e,f)
+&= (a+c,\ b+d)+(e,f)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= \bigl((a+c)+e,\ (b+d)+f\bigr)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= \bigl(a+(c+e),\ b+(d+f)\bigr)
+&&(\because\ \mathbb{R}\ \text{の和の結合律を 2 箇所へ適用})\\
+&= (a,b)+(c+e,\ d+f)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= (a,b)+\bigl((c,d)+(e,f)\bigr)
+&&(\because\ \text{成分ごとの加法の定義})
 \end{aligned}`,
       ),
+      paragraph(["加法の可換律。"]),
       displayMath(
         String.raw`\begin{aligned}
 (a,b)+(c,d)
-&= (a+c,\ b+d) \\
+&= (a+c,\ b+d)
+&&(\because\ \text{成分ごとの加法の定義})\\
 &= (c+a,\ d+b)
-\quad (\because \mathbb{R} \text{ の和の可換律}) \\
+&&(\because\ \mathbb{R}\ \text{の和の可換律を 2 箇所へ適用})\\
 &= (c,d)+(a,b)
+&&(\because\ \text{成分ごとの加法の定義})
+\end{aligned}`,
+      ),
+      paragraph(["加法の単位元。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(a,b)+0_{\mathbb{C}}
+&= (a,b)+(0,0)
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))\\
+&= (a+0,\ b+0)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= (a,b)
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
+        "引いたブロックは ",
         ref("inclusion_rr_to_cc"),
-        " より ",
-        math(String.raw`0_{\mathbb{C}}=(0,0)`),
-        " であり、",
+        " である。",
       ]),
+      paragraph(["加法の逆元。"]),
       displayMath(
-        String.raw`(a,b)+0_{\mathbb{C}} = (a+0,\ b+0) = (a,b)`,
+        String.raw`\begin{aligned}
+(a,b)+(-a,-b)
+&= (a+(-a),\ b+(-b))
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= (0,0)
+&&(\because\ \mathbb{R}\ \text{の和の逆元を 2 箇所へ適用})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
+\end{aligned}`,
       ),
       paragraph([
-        "であるから ",
-        math(String.raw`0_{\mathbb{C}}`),
-        " は加法の単位元である。また ",
+        "ここで ",
+        math(String.raw`-a,-b\in\mathbb{R}`),
+        " なので ",
         math(String.raw`(-a,-b)\in\mathbb{R}^2=\mathbb{C}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`(a,b)+(-a,-b) = (a+(-a),\ b+(-b)) = (0,0) = 0_{\mathbb{C}}`,
-      ),
-      paragraph([
-        "であるから ",
-        math(String.raw`(a,b)`),
-        " は加法に関する逆元をもつ。以上より ",
+        " である。以上の 4 つより ",
         math(String.raw`(\mathbb{C},+)`),
-        " は可換群である。",
+        " は可換群である。引いたブロックは ",
+        ref("inclusion_rr_to_cc"),
+        " である。",
       ]),
       paragraph([
-        "なお ",
+        "この加法逆元は ",
         ref("multiply_by_minus_one"),
         " の ",
         math(String.raw`-z:=(-1_{\mathbb{C}})\cdot z`),
-        " は、この加法逆元と一致する。実際 ",
-        ref("inclusion_rr_to_cc"),
-        " より ",
-        math(String.raw`-1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0)`),
-        " であるから、",
+        " と一致する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (-1_{\mathbb{C}})\cdot(a,b)
-&= (-1,0)\cdot(a,b) \\
-&= \left((-1)a-0\cdot b,\ (-1)b+0\cdot a\right) \\
+&= (-1,0)\cdot(a,b)
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{より}\ -1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0))\\
+&= \bigl((-1)a-0\cdot b,\ (-1)b+0\cdot a\bigr)
+&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
 &= (-a,-b)
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元、}\ 0\ \text{を因子にもつ積は}\ 0\text{、}\ 0\ \text{は和の単位元})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 2: (ii)。積の結合律・可換律・単位元 ",
+        "引いたブロックは ",
+        ref("inclusion_rr_to_cc"),
+        " と ",
+        ref("definition_of_cc"),
+        " である。",
+      ]),
+      paragraph([
+        "積のモノイド構造。積の結合律・可換律・単位元 ",
         math(String.raw`1_{\mathbb{C}}`),
         " の存在は ",
         ref("multiplicative_group_of_cc"),
-        " の Step 1〜Step 3 で示した（これらは ",
+        " の「積の可換律」「積の結合律」「積の単位元」で示した",
+        "（これらは ",
         math(String.raw`\mathbb{C}`),
         " の全元について成り立つ主張である）。",
       ]),
-      paragraph(["Step 3: (iii)。分配律を確かめる。"]),
+      paragraph(["左からの分配律。"]),
       displayMath(
         String.raw`\begin{aligned}
-(a,b)\cdot\left((c,d)+(e,f)\right)
-&= (a,b)\cdot(c+e,\ d+f) \\
-&= \left(a(c+e)-b(d+f),\ a(d+f)+b(c+e)\right) \\
-&= \left(ac+ae-bd-bf,\ ad+af+bc+be\right)
-\quad (\because \mathbb{R} \text{ の分配律}) \\
-&= \left((ac-bd)+(ae-bf),\ (ad+bc)+(af+be)\right)
-\quad (\because \mathbb{R} \text{ の和の可換律・結合律}) \\
-&= (ac-bd,\ ad+bc)+(ae-bf,\ af+be) \\
+(a,b)\cdot\bigl((c,d)+(e,f)\bigr)
+&= (a,b)\cdot(c+e,\ d+f)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= \bigl(a(c+e)-b(d+f),\ a(d+f)+b(c+e)\bigr)
+&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
+&= \bigl(ac+ae-(bd+bf),\ ad+af+(bc+be)\bigr)
+&&(\because\ \mathbb{R}\ \text{の分配律を 4 箇所へ適用})\\
+&= \bigl((ac-bd)+(ae-bf),\ (ad+bc)+(af+be)\bigr)
+&&(\because\ \mathbb{R}\ \text{の和の可換律・結合律、および和の逆元の分配})\\
+&= (ac-bd,\ ad+bc)+(ae-bf,\ af+be)
+&&(\because\ \text{成分ごとの加法の定義})\\
 &= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
+&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積を 2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
-        "右からの分配律は、",
-        ref("multiplicative_group_of_cc"),
-        " の Step 1（積の可換律）より",
+        "引いたブロックは ",
+        ref("definition_of_cc"),
+        " である。第 4 の等号の「和の逆元の分配」とは ",
+        math(String.raw`-(bd+bf)=(-bd)+(-bf)`),
+        " のことである。",
       ]),
+      paragraph(["右からの分配律。"]),
       displayMath(
         String.raw`\begin{aligned}
-\left((c,d)+(e,f)\right)\cdot(a,b)
-&= (a,b)\cdot\left((c,d)+(e,f)\right) \\
-&= (a,b)\cdot(c,d)+(a,b)\cdot(e,f) \\
+\bigl((c,d)+(e,f)\bigr)\cdot(a,b)
+&= (a,b)\cdot\bigl((c,d)+(e,f)\bigr)
+&&(\because\ \mathbb{C}\ \text{の乗法群}\ \text{の積の可換律})\\
+&= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
+&&(\because\ \text{上で示した左からの分配律})\\
 &= (c,d)\cdot(a,b)+(e,f)\cdot(a,b)
+&&(\because\ \mathbb{C}\ \text{の乗法群}\ \text{の積の可換律を 2 箇所へ適用})
 \end{aligned}`,
       ),
-      paragraph(["として従う。"]),
       paragraph([
-        "Step 4: (iv)。",
-        math(String.raw`\mathbb{R}`),
-        " において ",
-        math(String.raw`1\ne 0`),
-        " であるから、第 1 成分を比べて ",
-        math(String.raw`1_{\mathbb{C}}=(1,0)\ne(0,0)=0_{\mathbb{C}}`),
-        "。",
+        "引いたブロックは ",
+        ref("multiplicative_group_of_cc"),
+        " である。",
+      ]),
+      paragraph(["単位元と零元の相違。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}}
+&= (1,0)
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 1_{\mathbb{C}}=(1,0))\\
+&\ne (0,0)
+&&(\because\ \mathbb{R}\ \text{において}\ 1\ne 0\ \text{であり、第 1 成分が異なる})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
+\end{aligned}`,
+      ),
+      paragraph([
+        "引いたブロックは ",
+        ref("inclusion_rr_to_cc"),
+        " である。",
       ]),
       paragraph([
-        "Step 5: (v)。",
+        "逆元の存在。",
         ref("multiplicative_group_of_cc"),
         " より ",
         math(String.raw`\mathbb{C}^{\times}=\mathbb{C}\setminus\{(0,0)\}`),
-        " は積について群をなす。特に ",
+        " は積について群をなす。したがって ",
         math(String.raw`z\ne 0_{\mathbb{C}}`),
         " なる ",
-        math(String.raw`z`),
-        " は積に関する逆元 ",
+        math(String.raw`z\in\mathbb{C}`),
+        " は ",
+        math(String.raw`z\in\mathbb{C}^{\times}`),
+        " であり、積に関する逆元 ",
         math(String.raw`z^{-1}\in\mathbb{C}^{\times}`),
         " をもつ。",
       ]),
       paragraph([
-        "Step 6: 結論。Step 1〜Step 5 より (i)〜(v) がすべて成り立つので、",
+        "結論。以上で 5 つがすべて成り立つので、",
         math(String.raw`\mathbb{C}`),
         " は体をなす。",
       ]),
@@ -1014,6 +1066,12 @@ b
       status: "converted",
       notes: [
         "原文の proof は TODO のみ。ここで証明を与えた。",
+        "2026-08-09: 式変形を一続きの鎖にし、根拠を行末の (∵ …) へ揃えた。" +
+          "Step 1〜Step 6 の番号は内容の分かる名前（加法の結合律・積のモノイド構造・" +
+          "左からの分配律・単位元と零元の相違・逆元の存在・結論など）へ改めた。" +
+          "加法の 4 つの性質・単位元と零元の相違・分配律の各段に、暗黙だった根拠" +
+          "（成分ごとの加法の定義、R の和の結合律・可換律・逆元、0 が和の単位元であること、" +
+          "-1_C = (-1,0) であること）を書き足してある。段は増えており、減った段は無い。",
         "原文の CC の定義は「CC := RR^2 に以下の演算を入れたもの」として積のみを明示しており、" +
           "加法が明示されていない。体であることを述べるには加法が必要なので、" +
           "本証明では RR^2 の成分ごとの加法を採ることを冒頭で明示した。",
@@ -1119,133 +1177,264 @@ b
     ],
     proof: [
       paragraph([
-        "1. モノイド準同型性。",
+        "モノイド準同型性。",
         math(String.raw`[(r,\theta)]_{\sim}, [(r',\theta')]_{\sim} \in (\text{極座標表現})`),
         " に対して、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim})
-&= \phi_{\mathrm{cartesian}}([(rr',\theta+\theta')]_{\sim}) \\
-&= (rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta'))
-\end{aligned}`,
-      ),
-      paragraph(["また、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\phi_{\mathrm{cartesian}}([(r,\theta)]_{\sim})\cdot\phi_{\mathrm{cartesian}}([(r',\theta')]_{\sim})
-&= (r\cos\theta,\ r\sin\theta)\cdot(r'\cos\theta',\ r'\sin\theta') \\
-&= (rr'\cos\theta\cos\theta' - rr'\sin\theta\sin\theta',\ rr'\cos\theta\sin\theta' + rr'\sin\theta\cos\theta') \\
-&= (rr'(\cos\theta\cos\theta'-\sin\theta\sin\theta'),\ rr'(\cos\theta\sin\theta'+\sin\theta\cos\theta')) \\
-&= (rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta'))
+\phi_{\mathrm{cartesian}}\bigl([(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}\bigr)
+&= \phi_{\mathrm{cartesian}}\bigl([(rr',\theta+\theta')]_{\sim}\bigr)
+&&(\because\ \text{極座標表現の演算})\\
+&= \bigl(rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta')\bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= \bigl(rr'(\cos\theta\cos\theta'-\sin\theta\sin\theta'),\ rr'(\cos\theta\sin\theta'+\sin\theta\cos\theta')\bigr)
+&&(\because\ \text{三角関数の加法定理})\\
+&= \bigl(rr'\cos\theta\cos\theta'-rr'\sin\theta\sin\theta',\ rr'\cos\theta\sin\theta'+rr'\sin\theta\cos\theta'\bigr)
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
+&= \bigl((r\cos\theta)(r'\cos\theta')-(r\sin\theta)(r'\sin\theta'),\ (r\cos\theta)(r'\sin\theta')+(r\sin\theta)(r'\cos\theta')\bigr)
+&&(\because\ \mathbb{R}\ \text{の積の可換律と結合律})\\
+&= (r\cos\theta,\ r\sin\theta)\cdot(r'\cos\theta',\ r'\sin\theta')
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= \phi_{\mathrm{cartesian}}\bigl([(r,\theta)]_{\sim}\bigr)\cdot\phi_{\mathrm{cartesian}}\bigl([(r',\theta')]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "よって両者は一致する（積 ",
-        math(String.raw`(a,b)\cdot(c,d) := (ac-bd,\ ad+bc)`),
-        " と三角関数の加法定理を用いた）。",
+        "である（引いたブロックは ",
+        ref("operations_on_polar_representation"),
+        "、",
+        ref("def_phi_cartesian"),
+        "、",
+        ref("definition_of_cc"),
+        "）。",
       ]),
       paragraph([
-        "2. 全単射性。合成 ",
+        "全単射性。合成 ",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}`),
-        " を計算する。以下で ",
-        math(String.raw`\cos(\arctan(y/x))=\dfrac{1}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}`),
-        "、",
-        math(String.raw`\sin(\arctan(y/x))=\dfrac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}`),
-        "（",
-        ref("cos_arctan_sin_arctan"),
-        "）と、",
-        math(String.raw`x<0`),
-        " のとき ",
-        math(String.raw`x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}`),
-        "（",
-        ref("negative_number_to_sqrt"),
-        "）を用いる。",
+        " が ",
+        math(String.raw`\mathbb{C}`),
+        " の恒等写像であることを、",
+        ref("def_phi_polar"),
+        " の場合分けに沿って場合ごとに示す。",
+        "場合分けなので全体を 1 つの式変形にはできないが、各場合の中の計算はそれぞれ一続きにする。",
+      ]),
+      paragraph([
+        math(String.raw`x>0`),
+        " の場合。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\!\left(
-\begin{cases}
-[(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x))]_{\sim} & (x>0) \\
-[(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)+\pi)]_{\sim} & (x<0,\ y\geq 0) \\
-[(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)-\pi)]_{\sim} & (x<0,\ y<0) \\
-[(y,\ \pi/2)]_{\sim} & (x=0 \wedge y>0) \\
-[(-y,\ -\pi/2)]_{\sim} & (x=0 \wedge y<0) \\
-[(0,0)]_{\sim} & (x=0 \wedge y=0)
-\end{cases}\right) \\[4pt]
-&= \begin{cases}
-(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))) & (x>0) \\
-(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)+\pi),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x)+\pi)) & (x<0,\ y\geq 0) \\
-(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)-\pi),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x)-\pi)) & (x<0,\ y<0) \\
-(y\cos(\pi/2),\ y\sin(\pi/2)) & (x=0 \wedge y>0) \\
-(-y\cos(-\pi/2),\ -y\sin(-\pi/2)) & (x=0 \wedge y<0) \\
-(0,0) & (x=0 \wedge y=0)
-\end{cases} \\[4pt]
-&= \begin{cases}
-(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))) & (x>0) \\
-(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))) & (x<0) \\
-(y\cos(\pi/2),\ y\sin(\pi/2)) & (x=0 \wedge y>0) \\
-(-y\cos(-\pi/2),\ -y\sin(-\pi/2)) & (x=0 \wedge y<0) \\
-(0,0) & (x=0 \wedge y=0)
-\end{cases} \\[4pt]
-&\overset{(\ast)}{=} \begin{cases}
-\left(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{1}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x>0) \\
-\left(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{1}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\dfrac{y/x}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x<0) \\
-(0,\ y) & (x=0 \wedge y>0) \\
-(0,\ y) & (x=0 \wedge y<0) \\
-(0,0) & (x=0 \wedge y=0)
-\end{cases} \\[4pt]
-&\overset{(\ast\ast)}{=} \begin{cases}
-\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x>0) \\
-\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x<0) \\
-(0,\ y) & (x=0 \wedge y>0) \\
-(0,\ y) & (x=0 \wedge y<0) \\
-(0,0) & (x=0 \wedge y=0)
-\end{cases} \\[4pt]
-&= \begin{cases}
-\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x>0) \\
-\left(\dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\ \dfrac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right) & (x<0) \\
-(0,\ y) & (x=0 \wedge y>0) \\
-(0,\ y) & (x=0 \wedge y<0) \\
-(0,0) & (x=0 \wedge y=0)
-\end{cases} \\[4pt]
-&= (x,y)
+&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)\bigr)\bigr]_{\sim}\Bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合})\\
+&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,(y/x)}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \arctan\ \text{の}\ \cos,\sin)\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x>0\ \text{なので分母と分子に}\ x\ \text{を掛けられる})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x>0\ \text{と平方根の一意性から}\ x=\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \text{平方根の一意性から}\ \sqrt{a}\sqrt{b}=\sqrt{ab})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x^2\bigl(1+(y/x)^2\bigr)=x^2+y^2)\\
+&= (x,\ y)
+&&(\because\ x>0\ \text{なので}\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\ne0\ \text{で約分できる})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(\ast)`),
-        " は ",
+        "である（引いたブロックは ",
+        ref("def_phi_polar"),
+        "、",
+        ref("def_phi_cartesian"),
+        "、",
         ref("cos_arctan_sin_arctan"),
-        " による（",
-        math(String.raw`x=0`),
-        " の行では ",
-        math(String.raw`\cos(\pm\pi/2)=0`),
         "、",
-        math(String.raw`\sin(\pi/2)=1`),
+        ref("sqrt_nonnegative_existence_uniqueness"),
         "、",
-        math(String.raw`\sin(-\pi/2)=-1`),
-        " を用いた）。",
-        math(String.raw`(\ast\ast)`),
-        " は分母・分子に ",
-        math(String.raw`x`),
-        " を掛け、",
+        ref("definition_of_sqrt_r_positive"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`x<0`),
+        " の場合。",
+        math(String.raw`y\geq 0`),
+        " と ",
+        math(String.raw`y<0`),
+        " で ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " の値は違うが、いずれも同じ式に着く。まず ",
+        math(String.raw`y\geq 0`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)+\pi\bigr)\bigr]_{\sim}\Bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x<0,\ y\geq0\ \text{の場合})\\
+&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos\bigl(\arctan(y/x)+\pi\bigr),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin\bigl(\arctan(y/x)+\pi\bigr)\Bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= \Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
+&&(\because\ \cos(\theta+\pi)=-\cos\theta,\ \sin(\theta+\pi)=-\sin\theta)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`y<0`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)-\pi\bigr)\bigr]_{\sim}\Bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x<0,\ y<0\ \text{の場合})\\
+&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos\bigl(\arctan(y/x)-\pi\bigr),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin\bigl(\arctan(y/x)-\pi\bigr)\Bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= \Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
+&&(\because\ \cos(\theta-\pi)=-\cos\theta,\ \sin(\theta-\pi)=-\sin\theta)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。いずれの場合も同じ式に着いたので、そこから続けると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)\\
+&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,(y/x)}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \arctan\ \text{の}\ \cos,\sin)\\
+&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x<0\ \text{なので分母と分子に}\ x\ \text{を掛けられる})\\
+&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x<0\ \text{のとき}\ x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}})\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \text{分子の負号と分母の負号が相殺する})\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ (-x)^2=x^2)\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \text{平方根の一意性から}\ \sqrt{a}\sqrt{b}=\sqrt{ab})\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x^2\bigl(1+(y/x)^2\bigr)=x^2+y^2)\\
+&\quad= (x,\ y)
+&&(\because\ x<0\ \text{なので}\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\ne0\ \text{で約分できる})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
+        ref("def_phi_polar"),
+        "、",
+        ref("def_phi_cartesian"),
+        "、",
+        ref("cos_arctan_sin_arctan"),
+        "、",
         ref("negative_number_to_sqrt"),
-        " により ",
-        math(String.raw`x>0`),
-        " のとき ",
-        math(String.raw`x=\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}`),
         "、",
-        math(String.raw`x<0`),
-        " のとき ",
-        math(String.raw`x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}`),
-        " を用いた（",
-        math(String.raw`x<0`),
-        " では負号が分母の負号と相殺する）。続いて ",
-        math(String.raw`x^2(1+(y/x)^2)=x^2+y^2`),
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`x=0`),
+        " かつ ",
+        math(String.raw`y>0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl([(y,\ \pi/2)]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y>0\ \text{の場合})\\
+&= \bigl(y\cos(\pi/2),\ y\sin(\pi/2)\bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (y\cdot 0,\ y\cdot 1)
+&&(\because\ \cos(\pi/2)=0,\ \sin(\pi/2)=1)\\
+&= (0,\ y)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ 1\ \text{は積の単位元})\\
+&= (x,\ y)
+&&(\because\ x=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
+        ref("def_phi_polar"),
         "、",
-        math(String.raw`(-x)^2=x^2`),
-        " による。",
+        ref("def_phi_cartesian"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`x=0`),
+        " かつ ",
+        math(String.raw`y<0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl([(-y,\ -\pi/2)]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y<0\ \text{の場合})\\
+&= \bigl((-y)\cos(-\pi/2),\ (-y)\sin(-\pi/2)\bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= \bigl((-y)\cdot 0,\ (-y)\cdot(-1)\bigr)
+&&(\because\ \cos(-\pi/2)=0,\ \sin(-\pi/2)=-1)\\
+&= (0,\ y)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ \text{負号を 2 度施すともとに戻る})\\
+&= (x,\ y)
+&&(\because\ x=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
+        ref("def_phi_polar"),
+        "、",
+        ref("def_phi_cartesian"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`x=0`),
+        " かつ ",
+        math(String.raw`y=0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl([(0,\ 0)]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y=0\ \text{の場合})\\
+&= (0\cdot\cos 0,\ 0\cdot\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,\ 0)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= (x,\ y)
+&&(\because\ x=0\ \text{かつ}\ y=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
+        ref("def_phi_polar"),
+        "、",
+        ref("def_phi_cartesian"),
+        "）。",
+      ]),
+      paragraph([
+        "以上で ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " の定義のすべての場合について ",
+        math(String.raw`(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)=(x,y)`),
+        " が示され、",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " である。",
       ]),
     ],
     conversion: {
