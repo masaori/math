@@ -174,6 +174,27 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrixPow_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_apply_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_L_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_add
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_period_exists
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_pos
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_minimalPeriod
+  Ising2DLambda.AlgebraicEigenvalue.not_rowShiftIterate_of_lt_minimalPeriod
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_mul
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_self_iff
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_dvd_L
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_add
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.minimalPeriod_pos
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_minimalPeriod
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.not_iterLeft_of_lt_minimalPeriod
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_eq_self_iff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.minimalPeriod_dvd_of_iterLeft_eq_self
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_iterLeft
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_add_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.iterLeft_period_exists
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_self_iff_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_dvd_L_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

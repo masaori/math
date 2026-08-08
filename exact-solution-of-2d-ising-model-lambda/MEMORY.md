@@ -6,17 +6,17 @@
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 15 件・主張 19 件・定理 1 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 16 件・主張 22 件・定理 1 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
-シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$）が、
+シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 35 件・主張 37 件・定理 3 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` を実行済み（$L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$ で成立、厳密計算） |
-| Lean 具体版 | 定義 35 件と主張 37 件と定理 3 件。`lake build` と `check-no-sorry.sh`（定理 140 件を登録）が通る |
-| Lean 必要十分版 | 主張 34 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 36 件・主張 40 件・定理 3 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` を実行済み（$L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$ で成立、厳密計算） |
+| Lean 具体版 | 定義 36 件と主張 40 件と定理 3 件。`lake build` と `check-no-sorry.sh`（定理 162 件を登録）が通る |
+| Lean 必要十分版 | 主張 37 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -183,8 +183,22 @@ $y$ ではなく $\gamma(y)$ へ当てる形になるためで、その理由は
   「$L$ 回の反復が恒等写像であること」だけで、**$e$ の位数がちょうど $L$ であることは
   使っていない**ことである。
 
-これは次のセクションで、$U$ の固有値が 1 の $L$ 乗根（円分体 $\mathbb{Q}(\omega)$ の元）で
-あることを述べ、そのうえで転送行列を $U$ の固有空間へ分けるための足場である。
+さらに、行配位 $\tau$ をもとへ戻す反復の回数の全体
+$K(\tau)=\{k\in\mathbb{N}\mid k\ge1,\ S^{[k]}(\tau)=\tau\}$ の最小元として最小周期 $e(\tau)$ を定め、
+次の 3 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- 反復の回数は足し算になる（$S^{[a+b]}(\tau)=S^{[a]}(S^{[b]}(\tau))$）。
+- もとへ戻る反復の回数は最小周期の倍数である（$S^{[k]}(\tau)=\tau\iff e(\tau)\mid k$）。
+  証明は自然数の除法 $k=e(\tau)q+r$ を使い、$r\ge1$ が最小性に反することで $r=0$ を出す。
+- 最小周期は格子の一辺を割り切る（$e(\tau)\mid L$）。
+  必要十分版が示したのは、これらが要求するのが「その点が 1 回以上の反復でもとへ戻ること」という
+  点ごとの仮定だけであり、$S$ が全単射であることも $R_L$ が有限であることも、
+  $S$ の位数が $L$ であることも使っていないことである。
+
+これは、シフト行列の特性多項式を軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積へ分解し、
+その根が 1 の $L$ 乗根であることを言うための足場である。
+軌道の大きさが $L$ の約数であることから、$\overline{\mathbb{Q}}$ を持ち出す前に
+「$\chi_U$ が $(t^{L}-1)$ の冪を割る」という $\mathbb{Z}[t]$ の中の整除関係として書ける。
 
 ## 進め方（自動ループ）
 
@@ -199,13 +213,11 @@ $y$ ではなく $\gamma(y)$ へ当てる形になるためで、その理由は
 
 ## 次回やること
 
-1. **シフト行列の固有値が 1 の $L$ 乗根であること**（章「固有値の代数性」の続き。
-   台帳のセクション 10d）。$U^{L}=I$ は済んだので、次は円分体 $\mathbb{Q}(\omega)$ を導入し、
-   $U$ の固有値がその元であることを述べる段である。解析関数としての $\cos$ は使わず、
-   1 の冪根 $\omega$ の有理式として扱う（README「形式変数のまま進む」）。
-   1 tick で四層まで終わる大きさに割り直してから着手すること
-   （$t^{L}-1$ の根としての $\omega$ の定義と、$\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$
-   あたりが最初の一塊になる見込み）。
+1. **行配位の軌道と、その元の個数が最小周期に等しいこと**（章「固有値の代数性」の続き。
+   台帳のセクション 10e）。軌道 $O(\tau)=\{S^{[k]}(\tau)\mid k\in\mathbb{N}\}$ を定め、
+   $k\mapsto S^{[k]}(\tau)$ が $\{0,\dots,e(\tau)-1\}$ から $O(\tau)$ への全単射であること
+   （したがって $\lvert O(\tau)\rvert=e(\tau)$）を示す。単射性に $S^{[k]}$ が単射であることが要るので、
+   それを 1 つの主張として立てる。そのあとが特性多項式の軌道ごとの分解（10f）である。
 
 ## 未解決の設計問題
 

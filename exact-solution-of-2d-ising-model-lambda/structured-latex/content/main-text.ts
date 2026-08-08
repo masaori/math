@@ -6885,7 +6885,9 @@ S'(\tau'')=S^{[k]}(\tau)
         "この定理は、シフト行列を「",
         math(String.raw`L`),
         " 乗すると単位行列になる行列」として特徴づける。",
-        "次のセクションでその固有値が 1 の ",
+        "この先は、個々の行配位がもとに戻るまでの回数（次の ",
+        ref("def_row_config_shift_minimal_period"),
+        "）を数え、それを使って特性多項式を分解し、最後にその根が 1 の ",
         math(String.raw`L`),
         " 乗根、すなわち円分体 ",
         math(String.raw`\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}`),
@@ -6893,6 +6895,361 @@ S'(\tau'')=S^{[k]}(\tau)
         "成分は ",
         math(String.raw`\mathbb{Z}[x]`),
         " の元であり、この証明にも実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_row_config_shift_minimal_period",
+    kind: "definition",
+    title: { text: "行配位の最小周期" },
+    labels: ["def_row_config_shift_minimal_period"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod"],
+    verification: ["sagemath/check/row-shift-minimal-period"],
+    statement: [
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " を任意に取る（",
+        ref("def_row_configuration"),
+        "）。",
+        math(String.raw`\tau`),
+        " をもとへ戻す反復の回数の全体を",
+      ]),
+      displayMath(String.raw`K(\tau):=\bigl\{\,k\in\mathbb{N}\ \bigm|\ k\ge1\ \text{かつ}\ S^{[k]}(\tau)=\tau\,\bigr\}\subset\mathbb{N}`),
+      paragraph([
+        "と置く（",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。",
+        ref("claim_row_config_shift_period"),
+        " より ",
+        math(String.raw`S^{[L]}(\tau)=\tau`),
+        " であり、",
+        ref("def_lattice"),
+        " の格子は ",
+        math(String.raw`L\ge1`),
+        " を満たすので ",
+        math(String.raw`L\in K(\tau)`),
+        " である。したがって ",
+        math(String.raw`K(\tau)`),
+        " は空でなく、自然数の整列性により最小元を持つ。",
+        "その最小元を ",
+        math(String.raw`e(\tau)\in\mathbb{N}`),
+        " と書き、",
+        math(String.raw`\tau`),
+        " の最小周期と呼ぶ。",
+      ]),
+      paragraph([
+        "定義から次の 3 つが成り立つ。",
+        math(String.raw`e(\tau)\ge1`),
+        " であること。",
+        math(String.raw`S^{[e(\tau)]}(\tau)=\tau`),
+        " であること。そして ",
+        math(String.raw`1\le k<e(\tau)`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " については ",
+        math(String.raw`S^{[k]}(\tau)\ne\tau`),
+        " であること。",
+      ]),
+      paragraph([
+        "最小周期は行配位ごとに異なりうる量であって、",
+        math(String.raw`L`),
+        " と一致するとは限らない。たとえばすべての列で同じ値を取る行配位は ",
+        math(String.raw`S`),
+        " で動かないので最小周期が ",
+        math(String.raw`1`),
+        " である。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " の大小だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_shift_iterate_add",
+    kind: "claim",
+    title: { text: "反復の回数は足し算になる" },
+    labels: ["claim_row_config_shift_iterate_add"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_add",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_add",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_add_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-shift-minimal-period"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a,b\in\mathbb{N}`),
+        " と任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`S^{[a+b]}(\tau)=S^{[a]}\bigl(S^{[b]}(\tau)\bigr)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a`),
+        " についての帰納法で示す（",
+        math(String.raw`b`),
+        " と ",
+        math(String.raw`\tau`),
+        " は固定してよい）。",
+      ]),
+      paragraph([
+        math(String.raw`a=0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[0+b]}(\tau)
+&=S^{[b]}(\tau)
+&&(\because\ 0\ \text{は}\ \mathbb{N}\ \text{の加法の単位元})\\
+&=S^{[0]}\bigl(S^{[b]}(\tau)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`a`),
+        " について主張が成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[(a+1)+b]}(\tau)
+&=S^{[(a+b)+1]}(\tau)
+&&(\because\ \mathbb{N}\ \text{の加法の結合則と可換性})\\
+&=S\bigl(S^{[a+b]}(\tau)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=S\Bigl(S^{[a]}\bigl(S^{[b]}(\tau)\bigr)\Bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=S^{[a+1]}\bigl(S^{[b]}(\tau)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})
+\end{aligned}`),
+      paragraph([
+        "である。したがってすべての ",
+        math(String.raw`a\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " の加法だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_shift_period_divides",
+    kind: "claim",
+    title: { text: "もとへ戻る反復の回数は最小周期の倍数である" },
+    labels: ["claim_row_config_shift_period_divides"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_self_iff",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_eq_self_iff",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_self_iff_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-shift-minimal-period"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau\in R_L`),
+        " と任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`S^{[k]}(\tau)=\tau
+\iff
+e(\tau)\ \text{は}\ k\ \text{を割り切る}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`e(\tau)`),
+        " は ",
+        ref("def_row_config_shift_minimal_period"),
+        "）。ここで「",
+        math(String.raw`e`),
+        " は ",
+        math(String.raw`k`),
+        " を割り切る」とは、",
+        math(String.raw`k=e\,q`),
+        " を満たす ",
+        math(String.raw`q\in\mathbb{N}`),
+        " が存在することを言う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "2 つの向きを別々に示す。以下 ",
+        math(String.raw`e:=e(\tau)`),
+        " と書く。",
+      ]),
+      paragraph([
+        "割り切れるならばもとへ戻ること。",
+        math(String.raw`k=e\,q`),
+        " と書けるとして、",
+        math(String.raw`q`),
+        " についての帰納法で ",
+        math(String.raw`S^{[e\,q]}(\tau)=\tau`),
+        " を示す。",
+        math(String.raw`q=0`),
+        " のときは ",
+        math(String.raw`S^{[0]}(\tau)=\tau`),
+        " であり（",
+        ref("def_row_config_shift_iterate"),
+        " の ",
+        math(String.raw`S^{[0]}=\mathrm{id}_{R_L}`),
+        "）、",
+        math(String.raw`q`),
+        " について成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[e\,(q+1)]}(\tau)
+&=S^{[e\,q+e]}(\tau)
+&&(\because\ \mathbb{N}\ \text{の分配則})\\
+&=S^{[e\,q]}\bigl(S^{[e]}(\tau)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_iterate_add})\\
+&=S^{[e\,q]}(\tau)
+&&(\because\ \blkref{def_row_config_shift_minimal_period}\ \text{の}\ S^{[e(\tau)]}(\tau)=\tau)\\
+&=\tau
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "もとへ戻るならば割り切れること。",
+        math(String.raw`S^{[k]}(\tau)=\tau`),
+        " とする。",
+        ref("def_row_config_shift_minimal_period"),
+        " より ",
+        math(String.raw`e\ge1`),
+        " なので、自然数の除法により ",
+        math(String.raw`k=e\,q+r`),
+        " かつ ",
+        math(String.raw`0\le r<e`),
+        " を満たす ",
+        math(String.raw`q,r\in\mathbb{N}`),
+        " が取れる。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau
+&=S^{[k]}(\tau)
+&&(\because\ \text{仮定})\\
+&=S^{[r+e\,q]}(\tau)
+&&(\because\ k=e\,q+r\ \text{と}\ \mathbb{N}\ \text{の加法の可換性})\\
+&=S^{[r]}\bigl(S^{[e\,q]}(\tau)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_iterate_add})\\
+&=S^{[r]}(\tau)
+&&(\because\ \text{上で示した「割り切れるならばもとへ戻る」})
+\end{aligned}`),
+      paragraph([
+        "である。もし ",
+        math(String.raw`r\ge1`),
+        " ならば ",
+        math(String.raw`r\in K(\tau)`),
+        " であり、",
+        math(String.raw`r<e`),
+        " は ",
+        math(String.raw`e`),
+        " が ",
+        math(String.raw`K(\tau)`),
+        " の最小元であることに反する。したがって ",
+        math(String.raw`r=0`),
+        " であり ",
+        math(String.raw`k=e\,q`),
+        "、すなわち ",
+        math(String.raw`e`),
+        " は ",
+        math(String.raw`k`),
+        " を割り切る。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " の加法・乗法・大小だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_minimal_period_divides_L",
+    kind: "claim",
+    title: { text: "最小周期は格子の一辺を割り切る" },
+    labels: ["claim_row_config_minimal_period_divides_L"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_dvd_L",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.minimalPeriod_dvd_of_iterLeft_eq_self",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_dvd_L_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-shift-minimal-period"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について、",
+        math(String.raw`e(\tau)`),
+        " は ",
+        math(String.raw`L`),
+        " を割り切る（",
+        math(String.raw`e(\tau)`),
+        " は ",
+        ref("def_row_config_shift_minimal_period"),
+        "、",
+        math(String.raw`L`),
+        " は ",
+        ref("def_lattice"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_row_config_shift_period"),
+        " より ",
+        math(String.raw`S^{[L]}(\tau)=\tau`),
+        " である。",
+        ref("claim_row_config_shift_period_divides"),
+        " を ",
+        math(String.raw`k=L`),
+        " に対して使うと、",
+        math(String.raw`e(\tau)`),
+        " は ",
+        math(String.raw`L`),
+        " を割り切る。",
+      ]),
+      paragraph([
+        "この主張は、次のセクションで特性多項式を軌道ごとの因子へ分解するときに使う。",
+        "軌道の大きさが ",
+        math(String.raw`L`),
+        " の約数であることから、各因子の根がすべて 1 の ",
+        math(String.raw`L`),
+        " 乗根になる。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " の乗法だけであり、実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -6954,8 +7311,16 @@ S'(\tau'')=S^{[k]}(\tau)
           "）、",
           "行配位の巡回シフトで転送行列の成分が変わらないこと（",
           ref("claim_transfer_matrix_shift_invariant"),
-          "）、およびシフト行列が転送行列と可換であること（",
+          "）、シフト行列が転送行列と可換であること（",
           ref("theorem_shift_matrix_commutes"),
+          "）、その ",
+          math(String.raw`L`),
+          " 乗が単位行列であること（",
+          ref("theorem_shift_matrix_order"),
+          "）、および行配位の最小周期が ",
+          math(String.raw`L`),
+          " を割り切ること（",
+          ref("claim_row_config_minimal_period_divides_L"),
           "）までは上で済んでいる。",
         ],
         [
