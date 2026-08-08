@@ -16,9 +16,10 @@
 `claim_coefficient_sum`）、および章「有限系の自由エントロピー」の定義 4 件と主張 5 件
 （`claim_rational_exponent_well_defined`・`claim_value_at_rational_is_positive`・
 `claim_log_additive`・`claim_log_power`・`claim_free_entropy_at_one`）、
-および章「転送行列」の定義 9 件と主張 5 件
+および章「転送行列」の定義 11 件と主張 6 件・定理 1 件
 （`claim_edge_row_partition`・`claim_broken_bond_row_decomposition`・
-`claim_rows_bijection`・`claim_transfer_weight_product`・`claim_matrix_pow_entry`）を形式化済み。
+`claim_rows_bijection`・`claim_transfer_weight_product`・`claim_matrix_pow_entry`・
+`claim_closed_walk_bijection`・`theorem_partition_polynomial_is_trace`）を形式化済み。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
 import Ising2DLambda.PartitionPolynomial.CoefficientSum
@@ -48,3 +49,6 @@ import Ising2DLambda.TransferMatrix.WeightProductFromNecSuf
 import Ising2DLambda.TransferMatrix.PowerEntry
 import Ising2DLambda.NecSuf.TransferMatrix.PowerEntry
 import Ising2DLambda.TransferMatrix.PowerEntryFromNecSuf
+import Ising2DLambda.TransferMatrix.Trace
+import Ising2DLambda.NecSuf.TransferMatrix.Trace
+import Ising2DLambda.TransferMatrix.TraceFromNecSuf

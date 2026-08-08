@@ -86,54 +86,101 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
         "縦向きの辺は両端の列番号が等しく行番号が 1 だけ異なる（隣り合う行の間）。",
       ]),
       paragraph([
-        math(String.raw`\partial_0,\partial_1`),
-        " を定めるために、番号を行と列へ分解する。除法の原理により、",
-        math(String.raw`0\le k\le L^2-1`),
-        " を満たす整数 ",
-        math(String.raw`k`),
-        " は",
+        math(String.raw`\mathbb{Z}`),
+        " と ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " を行き来する写像に名前を与える。一方は自然な射影",
       ]),
-      displayMath(String.raw`k=iL+j,\qquad i,j\in\{0,1,\dots,L-1\}`),
+      displayMath(String.raw`\pi:\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z},\qquad \pi(n):=n+L\mathbb{Z}`),
       paragraph([
-        "の形にただ一通りに書ける（",
-        math(String.raw`k`),
-        " を ",
-        math(String.raw`L`),
-        " で割った商が ",
-        math(String.raw`i`),
-        "、余りが ",
-        math(String.raw`j`),
-        "）。この分解を用いて、",
+        "であり、もう一方は代表を取る写像",
+      ]),
+      displayMath(
+        String.raw`s:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z},\qquad
+0\le s(y)\le L-1\ \text{かつ}\ \pi(s(y))=y`,
+      ),
+      paragraph([
+        "である。各 ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " に対しこの条件を満たす整数はちょうど 1 つなので（除法の原理）、",
+        math(String.raw`s`),
+        " は写像として定まる。以下、この 2 本以外の経路で ",
+        math(String.raw`\mathbb{Z}`),
+        " と ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " を行き来しない。とくに、整数を剰余類と「みなす」ことはしない。",
+      ]),
+      paragraph([
+        "また、",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の加法を ",
+        math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
+        " と書き、",
+        math(String.raw`\mathbb{Z}`),
+        " の加法 ",
+        math(String.raw`+`),
+        " と区別する。",
+        math(String.raw`\bar1:=\pi(1)\in\mathbb{Z}/L\mathbb{Z}`),
+        " と置く。",
+      ]),
+      paragraph([
+        "頂点 ",
+        math(String.raw`(i,j)\in V_L`),
+        " に対し、番号を与える写像 ",
+        math(String.raw`n_{\mathrm{h}},n_{\mathrm{v}}:V_L\to\mathbb{Z}`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`n_{\mathrm{h}}(i,j):=L\cdot s(i)+s(j)+1,\qquad
+n_{\mathrm{v}}(i,j):=L^2+L\cdot s(i)+s(j)+1`,
+      ),
+      paragraph([
+        "で定める（右辺は ",
+        math(String.raw`\mathbb{Z}`),
+        " の中の計算である）。",
+        math(String.raw`0\le s(i),s(j)\le L-1`),
+        " より ",
+        math(String.raw`n_{\mathrm{h}}(i,j)\in E_{L,\mathrm{h}}`),
+        " かつ ",
+        math(String.raw`n_{\mathrm{v}}(i,j)\in E_{L,\mathrm{v}}`),
+        " であり、どちらも全単射である（",
+        ref("claim_edge_row_partition"),
+        "）。",
+      ]),
+      paragraph([
+        "端点写像はこの全単射の逆向きに定める。",
         math(String.raw`e\in E_{L,\mathrm{h}}`),
         " に対しては ",
-        math(String.raw`e-1=iL+j`),
-        " として",
+        math(String.raw`e=n_{\mathrm{h}}(i,j)`),
+        " を満たす唯一の ",
+        math(String.raw`(i,j)\in V_L`),
+        " を取り",
       ]),
-      displayMath(String.raw`\partial_0(e):=(i,j),\qquad \partial_1(e):=(i,\,j+1)`),
+      displayMath(
+        String.raw`\partial_0(e):=(i,\,j),\qquad
+\partial_1(e):=\bigl(i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)`,
+      ),
       paragraph([
-        "と定め（行番号は変えず列番号だけを 1 進める。だから横向きである）、",
+        "と定め（行番号を変えず列番号だけを進める。だから横向きである）、",
         math(String.raw`e\in E_{L,\mathrm{v}}`),
         " に対しては ",
-        math(String.raw`e-L^2-1=iL+j`),
-        " として",
+        math(String.raw`e=n_{\mathrm{v}}(i,j)`),
+        " を満たす唯一の ",
+        math(String.raw`(i,j)\in V_L`),
+        " を取り",
       ]),
-      displayMath(String.raw`\partial_0(e):=(i,j),\qquad \partial_1(e):=(i+1,\,j)`),
+      displayMath(
+        String.raw`\partial_0(e):=(i,\,j),\qquad
+\partial_1(e):=\bigl(i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j\bigr)`,
+      ),
       paragraph([
-        "と定める（どちらの場合も分解される整数は ",
-        math(String.raw`0`),
-        " 以上 ",
-        math(String.raw`L^2-1`),
-        " 以下なので、上の分解が使える）。ここで ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " の元は ",
+        "と定める。行番号・列番号を進める操作が ",
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " の元とみなし（各剰余類はこの範囲にちょうど 1 つの代表を持つ）、",
-        math(String.raw`i+1`),
-        " と ",
-        math(String.raw`j+1`),
-        " の加法は ",
-        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " の中で行う。すなわち周期境界条件である。",
+        " の中の加法であることが、周期境界条件そのものである。",
+        math(String.raw`\bar1`),
+        " を足すのであって ",
+        math(String.raw`1`),
+        " を足すのではない。",
       ]),
       paragraph([
         "辺そのものを頂点の 2 元集合 ",
@@ -454,29 +501,31 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
         math(String.raw`m\ne m'`),
         " とし、",
         math(String.raw`\sigma\in A_{L,m}\cap A_{L,m'}`),
-        " が存在したとする。",
-        math(String.raw`A_{L,m}`),
-        " の定義より ",
-        math(String.raw`b(\sigma)=m`),
-        "、",
-        math(String.raw`A_{L,m'}`),
-        " の定義より ",
-        math(String.raw`b(\sigma)=m'`),
-        " である。",
-        ref("def_broken_bond_count"),
-        " の ",
-        math(String.raw`b`),
-        " は写像であり、1 つの ",
+        " が存在したとする。この ",
         math(String.raw`\sigma`),
-        " に対する値は 1 つなので ",
-        math(String.raw`m=b(\sigma)=m'`),
-        " となり、",
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m
+&=b(\sigma)
+&&(\because\ \sigma\in A_{L,m}\ \text{と}\ A_{L,m}\ \text{の定義})\\
+&=m'
+&&(\because\ b\ \text{は写像なので}\ \sigma\ \text{に対する値は 1 つであり、}
+\sigma\in A_{L,m'}\ \text{と}\ A_{L,m'}\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "となり、",
         math(String.raw`m\ne m'`),
         " に反する。したがってそのような ",
         math(String.raw`\sigma`),
         " は存在せず、",
         math(String.raw`A_{L,m}\cap A_{L,m'}=\varnothing`),
         " である。",
+      ]),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_broken_bond_count"),
+        "。",
       ]),
       paragraph([
         "以上の 2 つは有限集合の包含関係と写像の一意性だけからなり、実数体も複素数体も現れない。",
@@ -1672,29 +1721,40 @@ Z_L(q)
     verification: ["sagemath/check/transfer-matrix-row-decomposition"],
     statement: [
       paragraph([
-        "各整数 ",
-        math(String.raw`i\in\{0,1,\dots,L-1\}`),
-        " に対し、辺の番号の集合",
+        "各 ",
+        math(String.raw`i\in\mathbb{Z}/L\mathbb{Z}`),
+        " に対し、第 ",
+        math(String.raw`i`),
+        " 行の辺の番号の集合を",
       ]),
       displayMath(
-        String.raw`E_{L,\mathrm{h},i}:=\bigl\{\,iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\},\qquad
-E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\}`,
+        String.raw`E_{L,\mathrm{h},i}:=\bigl\{\,n_{\mathrm{h}}(i,j) \;\bigm|\; j\in\mathbb{Z}/L\mathbb{Z}\,\bigr\},\qquad
+E_{L,\mathrm{v},i}:=\bigl\{\,n_{\mathrm{v}}(i,j) \;\bigm|\; j\in\mathbb{Z}/L\mathbb{Z}\,\bigr\}`,
       ),
-      paragraph(["を定める。このとき次の 5 つが成り立つ。"]),
+      paragraph([
+        "と定める（",
+        math(String.raw`n_{\mathrm{h}},n_{\mathrm{v}}`),
+        " は ",
+        ref("def_lattice"),
+        "）。このとき次の 5 つが成り立つ。",
+      ]),
       list([
         [
-          "各 ",
+          math(String.raw`n_{\mathrm{h}}:V_L\to E_{L,\mathrm{h}}`),
+          " と ",
+          math(String.raw`n_{\mathrm{v}}:V_L\to E_{L,\mathrm{v}}`),
+          " は全単射である。とくに各 ",
           math(String.raw`i`),
-          " について、写像 ",
-          math(String.raw`j\mapsto iL+j+1`),
+          " について ",
+          math(String.raw`j\mapsto n_{\mathrm{h}}(i,j)`),
           " は ",
-          math(String.raw`\{0,1,\dots,L-1\}`),
+          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
           " から ",
           math(String.raw`E_{L,\mathrm{h},i}`),
-          " への全単射であり、写像 ",
-          math(String.raw`j\mapsto L^2+iL+j+1`),
+          " への全単射であり、",
+          math(String.raw`j\mapsto n_{\mathrm{v}}(i,j)`),
           " は ",
-          math(String.raw`\{0,1,\dots,L-1\}`),
+          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
           " から ",
           math(String.raw`E_{L,\mathrm{v},i}`),
           " への全単射である。",
@@ -1717,185 +1777,129 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
           " である。",
         ],
         [
-          math(String.raw`E_{L,\mathrm{h}}=\bigcup_{i=0}^{L-1}E_{L,\mathrm{h},i}`),
+          math(String.raw`E_{L,\mathrm{h}}=\bigcup_{i\in\mathbb{Z}/L\mathbb{Z}}E_{L,\mathrm{h},i}`),
           " かつ ",
-          math(String.raw`E_{L,\mathrm{v}}=\bigcup_{i=0}^{L-1}E_{L,\mathrm{v},i}`),
-          " である（",
-          math(String.raw`E_{L,\mathrm{h}}`),
-          " と ",
-          math(String.raw`E_{L,\mathrm{v}}`),
-          " は ",
-          ref("def_lattice"),
-          "）。",
+          math(String.raw`E_{L,\mathrm{v}}=\bigcup_{i\in\mathbb{Z}/L\mathbb{Z}}E_{L,\mathrm{v},i}`),
+          " である。",
         ],
         [
           "端点は番号から直接読める。すなわち ",
-          math(String.raw`i,j\in\{0,1,\dots,L-1\}`),
+          math(String.raw`(i,j)\in V_L`),
           " に対し",
-          math(String.raw`\ \partial_0(iL+j+1)=(i,j)`),
+          math(String.raw`\ \partial_0\bigl(n_{\mathrm{h}}(i,j)\bigr)=(i,j)`),
           "、",
-          math(String.raw`\partial_1(iL+j+1)=(i,\,j+1)`),
-          " であり、",
-          math(String.raw`\partial_0(L^2+iL+j+1)=(i,j)`),
+          math(String.raw`\partial_1\bigl(n_{\mathrm{h}}(i,j)\bigr)=(i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)`),
           "、",
-          math(String.raw`\partial_1(L^2+iL+j+1)=(i+1,\,j)`),
-          " である。ここで頂点の成分は ",
-          math(String.raw`\{0,1,\dots,L-1\}`),
-          " の元を ",
-          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-          " の元とみなしたものであり、",
-          math(String.raw`i+1`),
-          " と ",
-          math(String.raw`j+1`),
-          " の加法は ",
-          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-          " の中で行う（",
-          ref("def_lattice"),
-          " の約束）。",
+          math(String.raw`\partial_0\bigl(n_{\mathrm{v}}(i,j)\bigr)=(i,j)`),
+          "、",
+          math(String.raw`\partial_1\bigl(n_{\mathrm{v}}(i,j)\bigr)=(i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j)`),
+          " である。",
         ],
       ]),
     ],
     proof: [
       paragraph([
-        "番号が正しい範囲に入ること。",
-        math(String.raw`i,j\in\{0,1,\dots,L-1\}`),
-        " のとき",
-      ]),
-      displayMath(String.raw`0\le iL+j\le(L-1)L+(L-1)=L^2-1`),
-      paragraph([
-        "である（左の不等式は ",
-        math(String.raw`i,j\ge0`),
-        "、右の不等式は ",
-        math(String.raw`i,j\le L-1`),
-        " による）。したがって ",
-        math(String.raw`1\le iL+j+1\le L^2`),
-        " なので ",
-        math(String.raw`E_{L,\mathrm{h},i}\subset E_{L,\mathrm{h}}`),
-        " であり、",
-        math(String.raw`L^2+1\le L^2+iL+j+1\le 2L^2`),
-        " なので ",
-        math(String.raw`E_{L,\mathrm{v},i}\subset E_{L,\mathrm{v}}`),
-        " である（",
-        ref("def_lattice"),
-        " の番号の範囲）。",
-      ]),
-      paragraph([
-        "分解の一意性。",
-        ref("def_lattice"),
-        " で使った除法の原理により、",
-        math(String.raw`0\le k\le L^2-1`),
-        " を満たす整数 ",
-        math(String.raw`k`),
-        " は ",
-        math(String.raw`k=iL+j`),
+        "準備として、代表を取る写像 ",
+        math(String.raw`s`),
         "（",
-        math(String.raw`i,j\in\{0,1,\dots,L-1\}`),
-        "）の形にただ一通りに書ける。いいかえると、",
-        math(String.raw`(i,j)\mapsto iL+j`),
+        ref("def_lattice"),
+        "）は ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " から ",
+        math(String.raw`\{0,1,\dots,L-1\}`),
+        " への全単射である。実際 ",
+        math(String.raw`\pi\circ s=\mathrm{id}`),
+        " なので単射であり、",
+        math(String.raw`a\in\{0,1,\dots,L-1\}`),
+        " に対し ",
+        math(String.raw`s(\pi(a))=a`),
+        " なので全射である（",
+        math(String.raw`s(\pi(a))`),
+        " と ",
+        math(String.raw`a`),
+        " はどちらも ",
+        math(String.raw`\pi(a)`),
+        " の代表であり、代表は一意）。",
+      ]),
+      paragraph([
+        "また除法の原理により、写像 ",
+        math(String.raw`(a,b)\mapsto La+b`),
         " は ",
         math(String.raw`\{0,1,\dots,L-1\}`),
         " の 2 つ組全体から ",
         math(String.raw`\{0,1,\dots,L^2-1\}`),
         " への全単射である。",
       ]),
+      paragraph(["1 つめ。合成として"]),
+      displayMath(String.raw`\begin{aligned}
+n_{\mathrm{h}}
+&=\bigl((i,j)\mapsto L\cdot s(i)+s(j)+1\bigr)
+&&(\because\ n_{\mathrm{h}}\ \text{の定義})\\
+&=(k\mapsto k+1)\circ\bigl((a,b)\mapsto La+b\bigr)\circ(s\times s)
+&&(\because\ \text{写像の合成の定義})
+\end{aligned}`),
       paragraph([
-        "個数。",
+        "であり、右辺の 3 つはいずれも全単射である（",
+        math(String.raw`s\times s`),
+        " は上の準備、真ん中は除法の原理、",
+        math(String.raw`k\mapsto k+1`),
+        " は ",
+        math(String.raw`\{0,\dots,L^2-1\}`),
+        " から ",
+        math(String.raw`E_{L,\mathrm{h}}=\{1,\dots,L^2\}`),
+        " への全単射）。全単射の合成は全単射なので ",
+        math(String.raw`n_{\mathrm{h}}:V_L\to E_{L,\mathrm{h}}`),
+        " は全単射である。",
+        math(String.raw`n_{\mathrm{v}}`),
+        " は最後の写像を ",
+        math(String.raw`k\mapsto L^2+k+1`),
+        " に取り替えただけなので同じ議論が通る。",
         math(String.raw`i`),
-        " を固定する。",
-        math(String.raw`j\ne j'`),
-        " ならば ",
-        math(String.raw`iL+j\ne iL+j'`),
-        " なので、写像 ",
-        math(String.raw`j\mapsto iL+j+1`),
-        " は ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " から ",
-        math(String.raw`E_{L,\mathrm{h},i}`),
-        " への全単射である（全射は定義から）。",
-        math(String.raw`j\mapsto L^2+iL+j+1`),
-        " についても、両辺から ",
-        math(String.raw`L^2`),
-        " を引けば同じ議論になり、",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " から ",
-        math(String.raw`E_{L,\mathrm{v},i}`),
-        " への全単射である。これで 1 つめが示せた。",
-        "さらに全単射で写り合う有限集合の個数は等しいので ",
-        math(String.raw`|E_{L,\mathrm{h},i}|=L`),
-        " かつ ",
-        math(String.raw`|E_{L,\mathrm{v},i}|=L`),
-        " であり、2 つめも示せた。",
+        " を固定した制限も、単射写像の制限として単射であり、像への写像として全射である。",
       ]),
       paragraph([
-        "互いに素であること。",
-        math(String.raw`i\ne i'`),
-        " とし、",
-        math(String.raw`E_{L,\mathrm{h},i}\cap E_{L,\mathrm{h},i'}`),
-        " に元 ",
-        math(String.raw`e`),
-        " があったとする。すると ",
-        math(String.raw`j,j'\in\{0,1,\dots,L-1\}`),
-        " を取って ",
-        math(String.raw`e=iL+j+1=i'L+j'+1`),
-        " と書けるので ",
-        math(String.raw`iL+j=i'L+j'`),
-        " である。上の分解の一意性より ",
-        math(String.raw`i=i'`),
-        " となり仮定に反する。よって共通部分は空である。",
-        math(String.raw`E_{L,\mathrm{v},i}`),
-        " どうしについても、両辺から ",
-        math(String.raw`L^2`),
-        " を引けば同じ議論になる。これで 3 つめが示せた。",
-      ]),
-      paragraph([
-        "合併。番号が正しい範囲に入ることから ",
-        math(String.raw`\bigcup_{i=0}^{L-1}E_{L,\mathrm{h},i}\subset E_{L,\mathrm{h}}`),
-        " である。逆に ",
-        math(String.raw`e\in E_{L,\mathrm{h}}`),
-        " を取ると ",
-        ref("def_lattice"),
-        " より ",
-        math(String.raw`1\le e\le L^2`),
-        " すなわち ",
-        math(String.raw`0\le e-1\le L^2-1`),
-        " なので、分解の一意性により ",
-        math(String.raw`e-1=iL+j`),
-        " と書ける。このとき ",
-        math(String.raw`e=iL+j+1\in E_{L,\mathrm{h},i}`),
-        " である。よって両方の包含が成り立ち、合併は ",
-        math(String.raw`E_{L,\mathrm{h}}`),
-        " に等しい。縦向きについては、",
-        math(String.raw`e\in E_{L,\mathrm{v}}`),
-        " が ",
-        math(String.raw`L^2+1\le e\le2L^2`),
-        " すなわち ",
-        math(String.raw`0\le e-L^2-1\le L^2-1`),
-        " を満たすことから、同じ議論で ",
-        math(String.raw`E_{L,\mathrm{v}}`),
-        " に等しいことが従う。これで 4 つめが示せた。",
-      ]),
-      paragraph([
-        "端点。",
-        math(String.raw`e=iL+j+1\in E_{L,\mathrm{h}}`),
-        " のとき ",
-        math(String.raw`e-1=iL+j`),
-        " であり、分解の一意性により、この ",
-        math(String.raw`(i,j)`),
-        " は ",
-        ref("def_lattice"),
-        " が端点写像を定めるときに使う分解そのものである。したがって定義そのものから ",
-        math(String.raw`\partial_0(e)=(i,j)`),
-        "、",
-        math(String.raw`\partial_1(e)=(i,\,j+1)`),
+        "2 つめ。全単射で写り合う有限集合の個数は等しく、",
+        math(String.raw`|\mathbb{Z}/L\mathbb{Z}|=L`),
         " である。",
-        math(String.raw`e=L^2+iL+j+1\in E_{L,\mathrm{v}}`),
-        " のときは ",
-        math(String.raw`e-L^2-1=iL+j`),
-        " が定義で使う分解にあたるので、同じく ",
-        math(String.raw`\partial_0(e)=(i,j)`),
-        "、",
-        math(String.raw`\partial_1(e)=(i+1,\,j)`),
-        " である。これで 5 つめが示せた。",
+      ]),
+      paragraph([
+        "3 つめ。",
+        math(String.raw`e\in E_{L,\mathrm{h},i}\cap E_{L,\mathrm{h},i'}`),
+        " があれば ",
+        math(String.raw`e=n_{\mathrm{h}}(i,j)=n_{\mathrm{h}}(i',j')`),
+        " を満たす ",
+        math(String.raw`j,j'`),
+        " が取れる。1 つめの単射性より ",
+        math(String.raw`(i,j)=(i',j')`),
+        " となり ",
+        math(String.raw`i=i'`),
+        " である。対偶を取れば主張を得る。縦向きも同様である。",
+      ]),
+      paragraph([
+        "4 つめ。1 つめの全射性より、任意の ",
+        math(String.raw`e\in E_{L,\mathrm{h}}`),
+        " は ",
+        math(String.raw`e=n_{\mathrm{h}}(i,j)`),
+        " と書けるので ",
+        math(String.raw`e\in E_{L,\mathrm{h},i}`),
+        " である。逆の包含は各 ",
+        math(String.raw`E_{L,\mathrm{h},i}`),
+        " が ",
+        math(String.raw`n_{\mathrm{h}}`),
+        " の像の部分集合であることによる。縦向きも同様である。",
+      ]),
+      paragraph([
+        "5 つめ。",
+        ref("def_lattice"),
+        " は ",
+        math(String.raw`\partial_0,\partial_1`),
+        " を「",
+        math(String.raw`e=n_{\mathrm{h}}(i,j)`),
+        " を満たす唯一の ",
+        math(String.raw`(i,j)`),
+        "」を使って定めており、1 つめによりその ",
+        math(String.raw`(i,j)`),
+        " が実際に唯一存在する。したがって主張は定義そのものである。",
       ]),
       paragraph([
         "以上の各ステップは整数の大小比較と除法の原理、有限集合の数え上げだけからなり、",
@@ -1923,8 +1927,8 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " について",
       ]),
       displayMath(
-        String.raw`b(\sigma)=\sum_{i=0}^{L-1}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
-+\sum_{i=0}^{L-1}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)`,
+        String.raw`b(\sigma)=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
++\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)`,
       ),
       paragraph([
         "が成り立つ（",
@@ -1986,50 +1990,31 @@ b(\sigma)&=|B(\sigma)|
 \end{aligned}`),
       paragraph([
         "と置く。あわせて、各 ",
-        math(String.raw`i\in\{0,1,\dots,L-1\}`),
+        math(String.raw`i\in\mathbb{Z}/L\mathbb{Z}`),
         " について次の 2 つを準備する。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
-&=\bigl|\bigl\{\,j \;\bigm|\; iL+j+1\in B(\sigma)\,\bigr\}\bigr|
-&&(\because\ j\mapsto iL+j+1\ \text{が}\ E_{L,\mathrm{h},i}\ \text{への全単射})\\
-&=\bigl|\bigl\{\,j \;\bigm|\; \sigma((i,j))\ne\sigma((i,\,j+1))\,\bigr\}\bigr|
+&=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; n_{\mathrm{h}}(i,j)\in B(\sigma)\,\bigr\}\bigr|
+&&(\because\ j\mapsto n_{\mathrm{h}}(i,j)\ \text{が}\ E_{L,\mathrm{h},i}\ \text{への全単射})\\
+&=\bigl|\bigl\{\,j \;\bigm|\; \sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\bigr)\,\bigr\}\bigr|
 &&(\because\ \text{辺の集合は行ごとに分割される（端点の式）})\\
-&=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+1)\,\bigr\}\bigr|
+&=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}\bigr|
 &&(\because\ \text{行への制限の定義})\\
 &=b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
 &&(\because\ \text{行内破れ数の定義})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
-&=\bigl|\bigl\{\,j \;\bigm|\; L^2+iL+j+1\in B(\sigma)\,\bigr\}\bigr|
-&&(\because\ j\mapsto L^2+iL+j+1\ \text{が}\ E_{L,\mathrm{v},i}\ \text{への全単射})\\
-&=\bigl|\bigl\{\,j \;\bigm|\; \sigma((i,j))\ne\sigma((i+1,\,j))\,\bigr\}\bigr|
+&=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; n_{\mathrm{v}}(i,j)\in B(\sigma)\,\bigr\}\bigr|
+&&(\because\ j\mapsto n_{\mathrm{v}}(i,j)\ \text{が}\ E_{L,\mathrm{v},i}\ \text{への全単射})\\
+&=\bigl|\bigl\{\,j \;\bigm|\; \sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j)\bigr)\,\bigr\}\bigr|
 &&(\because\ \text{辺の集合は行ごとに分割される（端点の式）})\\
-&=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_{i+1}(\sigma)\bigr)(j)\,\bigr\}\bigr|
+&=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)(j)\,\bigr\}\bigr|
 &&(\because\ \text{行への制限の定義})\\
-&=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)
+&=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
 &&(\because\ \text{行間破れ数の定義})
 \end{aligned}`),
-      paragraph([
-        "ここで ",
-        math(String.raw`j`),
-        " の動く範囲 ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " は ",
-        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " とみなす（",
-        ref("def_lattice"),
-        " の約束）。この対応のもとで ",
-        math(String.raw`j+1`),
-        " はどちらの側でも ",
-        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " の中の加法であり、",
-        math(String.raw`j=L-1`),
-        " のとき ",
-        math(String.raw`0`),
-        " になる。",
-      ]),
       paragraph(["準備したものを使うと"]),
       displayMath(String.raw`\begin{aligned}
 b(\sigma)
@@ -2037,11 +2022,11 @@ b(\sigma)
 &&(\because\ \text{上の準備})\\
 &=\bigl|B(\sigma)\cap E_{L,\mathrm{h}}\bigr|+\bigl|B(\sigma)\cap E_{L,\mathrm{v}}\bigr|
 &&(\because\ E_L=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}\ \text{は互いに素な合併})\\
-&=\sum_{i=0}^{L-1}\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
-+\sum_{i=0}^{L-1}\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
+&=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
++\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
 &&(\because\ \text{辺の集合は行ごとに分割される})\\
-&=\sum_{i=0}^{L-1}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
-+\sum_{i=0}^{L-1}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)
+&=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
++\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
 &&(\because\ \text{上の準備})
 \end{aligned}`),
       paragraph([
@@ -2386,7 +2371,7 @@ b(\sigma)
         " の中で",
       ]),
       displayMath(
-        String.raw`\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}=x^{\,b(\sigma)}`,
+        String.raw`\prod_{i\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}=x^{\,b(\sigma)}`,
       ),
       paragraph([
         "が成り立つ（",
@@ -2432,13 +2417,13 @@ b(\sigma)
         " を固定する。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}
-&=\prod_{i=0}^{L-1}x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))}
+\prod_{i\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
+&=\prod_{i=0}^{L-1}x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
 &&(\because\ \text{転送行列の定義})\\
-&=x^{\,\sum_{i=0}^{L-1}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))\bigr)}
+&=x^{\,\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))\bigr)}
 &&(\because\ x^{a}x^{a'}=x^{a+a'}\ \text{を}\ L-1\ \text{回})\\
-&=x^{\,\sum_{i=0}^{L-1}b_{\mathrm{h}}(\rho_i(\sigma))
-+\sum_{i=0}^{L-1}b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))}
+&=x^{\,\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}(\rho_i(\sigma))
++\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
 &&(\because\ \text{有限個の自然数の和は項ごとに分けられる})\\
 &=x^{\,b(\sigma)}
 &&(\because\ \text{破れボンド数は行内の破れと行間の破れに分かれる})
@@ -2894,14 +2879,16 @@ w_A(q)
         " を",
       ]),
       displayMath(
-        String.raw`\bigl(\Xi(p)\bigr)(\overline{a}):=p(a)\qquad(a\in\{0,1,\dots,L-1\})`,
+        String.raw`\bigl(\Xi(p)\bigr)(y):=p\bigl(s(y)\bigr)\qquad(y\in\mathbb{Z}/L\mathbb{Z})`,
       ),
       paragraph([
-        "で定める。",
-        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " のどの元も ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " の中にちょうど 1 つ代表元を持つので、この式は ",
+        "で定める（",
+        math(String.raw`s`),
+        " は ",
+        ref("def_lattice"),
+        " の代表を取る写像）。",
+        math(String.raw`0\le s(y)\le L-1`),
+        " なので右辺は定義され、この式は ",
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
         " のすべての元に対して値をちょうど 1 つ定めており、右辺は ",
         math(String.raw`R_L`),
@@ -2966,11 +2953,11 @@ w_A(q)
         math(String.raw`c\in C_L`),
         " と ",
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " の元を任意に取り、その ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " の中の代表元を ",
-        math(String.raw`a`),
-        " とすると",
+        " の元 ",
+        math(String.raw`y`),
+        " を任意に取り、",
+        math(String.raw`a:=s(y)`),
+        " と置くと",
       ]),
       displayMath(String.raw`\begin{aligned}
 \Bigl(\Xi\bigl(\Theta(c)\bigr)\Bigr)(\overline{a})
@@ -3008,12 +2995,8 @@ w_A(q)
       paragraph([
         math(String.raw`i\le L-1`),
         " の場合。",
-        math(String.raw`i`),
-        " 自身が ",
-        math(String.raw`\overline{i}`),
-        " の ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " の中の代表元であるから",
+        math(String.raw`s(\overline{i})=i`),
+        " であるから",
       ]),
       displayMath(String.raw`\begin{aligned}
 \Bigl(\Theta\bigl(\Xi(p)\bigr)\Bigr)(i)
@@ -3109,7 +3092,12 @@ w_A(q)
     ],
     proof: [
       paragraph([
-        "準備 1（閉じた道の全体が、両端の値ごとに互いに素な類へ分かれること）。",
+        "先に 2 つの準備を置き、そのあとで ",
+        math(String.raw`Z_L`),
+        " から始まる 1 つの式変形を書く。",
+      ]),
+      paragraph([
+        "準備（閉じた道の類別）。",
         math(String.raw`\tau\in R_L`),
         " に対し ",
         ref("def_row_walk"),
@@ -3144,7 +3132,7 @@ w_A(q)
         " の互いに素な合併であり、その上の和は各類の上の和の和に等しい。",
       ]),
       paragraph([
-        "準備 2（行配位の族から作った閉じた道の重み）。配位 ",
+        "準備（族から作った閉じた道の重み）。配位 ",
         math(String.raw`\sigma\in\Sigma_L`),
         " を任意に取り、",
         ref("def_rows_map"),
@@ -3160,7 +3148,7 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
 &&(\because\ \text{道に沿った成分の積の定義})\\
 &=\prod_{i=0}^{L-1}T_{\bigl(\mathrm{rows}(\sigma)\bigr)(\overline{i}),\,\bigl(\mathrm{rows}(\sigma)\bigr)(\overline{i+1})}
 &&(\because\ \Theta\ \text{の定義})\\
-&=\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}
+&=\prod_{i\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
 &&(\because\ \mathrm{rows}\ \text{の定義})\\
 &=x^{\,b(\sigma)}
 &&(\because\ \text{配位の重みは行に沿った成分の積である})
@@ -3181,25 +3169,22 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
         ref("claim_transfer_weight_product"),
         " と同じ）をそのまま使っている。",
       ]),
-      paragraph([
-        "以上を用いて、右辺から左辺へたどる。",
-      ]),
       displayMath(String.raw`\begin{aligned}
-\operatorname{Tr}\bigl(T^{L}\bigr)
-&=\sum_{\tau\in R_L}\bigl(T^{L}\bigr)_{\tau,\tau}
-&&(\because\ \text{トレースの定義})\\
-&=\sum_{\tau\in R_L}\ \sum_{p\in W_{L,L}(\tau,\tau)}w_T(p)
-&&(\because\ \text{行列の冪の成分は道に沿った成分の積の和である})\\
-&=\sum_{p\in W^{\mathrm{cl}}_{L}}w_T(p)
-&&(\because\ \text{準備 1})\\
-&=\sum_{c\in C_L}w_T\bigl(\Theta(c)\bigr)
-&&(\because\ \Theta\ \text{が全単射})\\
-&=\sum_{\sigma\in\Sigma_L}w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
-&&(\because\ \mathrm{rows}\ \text{が全単射})\\
+Z_L
 &=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
-&&(\because\ \text{準備 2})\\
-&=Z_L
-&&(\because\ \text{分配多項式の定義})
+&&(\because\ \text{分配多項式の定義})\\
+&=\sum_{\sigma\in\Sigma_L}w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
+&&(\because\ \text{準備（族から作った閉じた道の重み）})\\
+&=\sum_{c\in C_L}w_T\bigl(\Theta(c)\bigr)
+&&(\because\ \mathrm{rows}\ \text{が全単射})\\
+&=\sum_{p\in W^{\mathrm{cl}}_{L}}w_T(p)
+&&(\because\ \Theta\ \text{が全単射})\\
+&=\sum_{\tau\in R_L}\ \sum_{p\in W_{L,L}(\tau,\tau)}w_T(p)
+&&(\because\ \text{準備（閉じた道の類別）})\\
+&=\sum_{\tau\in R_L}\bigl(T^{L}\bigr)_{\tau,\tau}
+&&(\because\ \text{行列の冪の成分は道に沿った成分の積の和である})\\
+&=\operatorname{Tr}\bigl(T^{L}\bigr)
+&&(\because\ \text{トレースの定義})
 \end{aligned}`),
       paragraph([
         "引いたブロック: ",
@@ -3213,9 +3198,8 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
         "、",
         ref("def_partition_polynomial"),
         "。",
-        "第 2 の等号は ",
         ref("claim_matrix_pow_entry"),
-        " を ",
+        " は ",
         math(String.raw`A=T`),
         "、",
         math(String.raw`k=L`),
@@ -3223,7 +3207,7 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
         math(String.raw`\tau''=\tau`),
         " として各 ",
         math(String.raw`\tau\in R_L`),
-        " に用いたものである。",
+        " に用いている。",
       ]),
       paragraph([
         "以上は有限集合の間の 1 対 1 対応と ",

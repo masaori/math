@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_broken_bond_row_decomposition",
+  "claim_closed_walk_bijection",
   "claim_coefficient_representation",
   "claim_coefficient_sum",
   "claim_configuration_partition",
@@ -20,6 +21,7 @@ export const ALL_LABELS = [
   "claim_transfer_weight_product",
   "claim_value_at_rational_is_positive",
   "def_broken_bond_count",
+  "def_closed_walk",
   "def_configuration",
   "def_finite_free_entropy",
   "def_inter_row_broken_count",
@@ -39,8 +41,10 @@ export const ALL_LABELS = [
   "def_row_walk",
   "def_rows_map",
   "def_transfer_matrix",
+  "def_walk_of_family",
   "def_walk_weight",
   "remark_planned_chapters",
+  "theorem_partition_polynomial_is_trace",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

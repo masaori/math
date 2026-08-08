@@ -44,8 +44,31 @@ def vertical_edge_numbers(L):
     return range(L * L + 1, 2 * L * L + 1)
 
 
+def representative(L, y):
+    """def_lattice: 代表を取る写像 s: Z/LZ -> Z（0 <= s(y) <= L-1、pi(s(y)) = y）。
+
+    ここでは Z/LZ の元を 0..L-1 の整数で表しているので s は恒等だが、
+    本文と同じ名前を置いて「どこで Z と Z/LZ を行き来したか」を見えるようにする。
+    """
+    return ZZ(y) % L
+
+
+def edge_number_horizontal(L, i, j):
+    """def_lattice: n_h(i,j) = L*s(i) + s(j) + 1。"""
+    return L * representative(L, i) + representative(L, j) + 1
+
+
+def edge_number_vertical(L, i, j):
+    """def_lattice: n_v(i,j) = L^2 + L*s(i) + s(j) + 1。"""
+    return L * L + L * representative(L, i) + representative(L, j) + 1
+
+
 def endpoints(L, e):
     """def_lattice: 辺の番号 e から両端 (d0(e), d1(e)) を読み出す。
+
+    本文では d0, d1 を n_h / n_v の逆向きとして定めている。ここでは番号から
+    (i, j) を復元して同じ値を返す（n_h / n_v が全単射なので一致する）。
+    行番号・列番号を進める加法は Z/LZ の中で行う（% L がそれにあたる）。
 
     本文と同じ分解を使う。番号を L で割った商が行番号 i、余りが列番号 j。
       e in E_{L,h} なら e - 1     = iL + j で、両端は (i,j) と (i,j+1)   同じ行の中
@@ -278,3 +301,36 @@ def walk_weight(L, A, p):
     for i in range(len(p) - 1):
         result *= A[(p[i], p[i + 1])]
     return result
+
+
+# --- 章「転送行列」の続き: 閉じた道 ---------------------------------------
+#   def_closed_walk / def_walk_of_family -> closed_row_walks(L), walk_of_family(L, c),
+#                                           family_of_walk(L, p)
+#   claim_closed_walk_bijection          -> 上の 3 つを突き合わせる
+#   theorem_partition_polynomial_is_trace -> partition_polynomial(L) と
+#                                            row_matrix_trace(L, row_matrix_pow(L, T, L))
+
+
+def closed_row_walks(L):
+    """def_closed_walk: W^cl_L = { p in W_{L,L} | p(0) = p(L) } を全列挙する。
+
+    道の表現は row_walks と同じ長さ L+1 のタプルである。
+    """
+    keys = row_matrix_keys(L)
+    for start in keys:
+        for p in row_walks(L, L, start, start):
+            yield p
+
+
+def walk_of_family(L, c):
+    """def_walk_of_family: (Theta(c))(i) = c(i mod L)（i = 0, ..., L）。
+
+    族 c は行番号 0, ..., L-1 の順に並べたタプル（row_families の表現）である。
+    i = L のとき i mod L = 0 なので、作られる道は必ず閉じている。
+    """
+    return tuple(c[i % L] for i in range(L + 1))
+
+
+def family_of_walk(L, p):
+    """def_walk_of_family: (Xi(p))(a mod L) = p(a)（a = 0, ..., L-1）。"""
+    return tuple(p[a] for a in range(L))

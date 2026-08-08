@@ -72,6 +72,13 @@ targets=(
   Ising2DLambda.TransferMatrix.rowMatrixPow_apply
   Ising2DLambda.TransferMatrix.rowMatrixPow_apply_from_necSuf
   Ising2DLambda.NecSuf.TransferMatrix.matPow_apply_eq_sum_walkWeight
+  Ising2DLambda.TransferMatrix.familyOfWalk_walkOfFamily
+  Ising2DLambda.TransferMatrix.walkOfFamily_familyOfWalk
+  Ising2DLambda.TransferMatrix.sum_closedRowWalks_eq_sum_between
+  Ising2DLambda.TransferMatrix.walkWeight_walkOfFamily_rowsOf
+  Ising2DLambda.TransferMatrix.partitionPolynomial_eq_trace
+  Ising2DLambda.TransferMatrix.partitionPolynomial_eq_trace_from_necSuf
+  Ising2DLambda.NecSuf.TransferMatrix.trace_matPow_eq_sum_cyclicWeight
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
