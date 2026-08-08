@@ -11,15 +11,15 @@
 および章「固有値の代数性」（定義 26 件・主張 35 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
-軌道による行配位の全体の分割・特性多項式の消えない項の同定）が、
+軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 49 件・主張 49 件・定理 3 件・注意 1 件（ラベルの数。合計 103 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 204 件を登録）が通る |
-| Lean 必要十分版 | 主張 46 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 50 件・主張 51 件・定理 3 件・注意 1 件（ラベルの数。合計 106 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 215 件を登録）が通る |
+| Lean 必要十分版 | 主張 48 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -238,6 +238,21 @@ $\mathfrak{S}^{\mathcal{O}}_L=\{\varphi\in\mathfrak{S}_L\mid\text{任意の }\ta
   （負号は特性行列の定義に現れるだけで証明には現れない）、および $\varphi(O)=O$ が使う単射性が
   **置換 $\varphi$ のもの**であって $S$ については何も要求しないことである。
 
+さらに、軌道を保つ置換 $\varphi$ の各軌道 $O$ への制限
+$\varphi\!\restriction_{O}:O\to O$、$(\varphi\!\restriction_{O})(\tau)=\varphi(\tau)$ を定義し、
+次の 2 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+行き先が $O$ に収まることは定めるだけでは言えないので、$\varphi(O)=O$ から出す段を定義の中に書いた。
+
+- 軌道への制限はその軌道の上の全単射である（単射性と全射性を別々に示す）。
+- 制限の全体が一致する軌道を保つ置換は一致する（対応が単射であること）。
+  証明が使うのは「どの $\tau$ も自分の軌道に属すること」だけであり、
+  軌道どうしが互いに素であることは使っていない（それが効くのは逆向きの構成の側である）。
+  必要十分版が示したのは、制限の構成と全単射性が要求するのが
+  **その集合が置換の像で閉じていること $O.\mathrm{image}\,\varphi=O$ だけ**であり、
+  その集合が軌道であることも添字の型が有限であることも使っていないこと、
+  および制限が置換を決めることが要求するのが**族が全体を覆うことだけ**であることである。
+
 これは、シフト行列の特性多項式を軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積へ分解し、
 その根が 1 の $L$ 乗根であることを言うための足場である。
 軌道の大きさが $L$ の約数であることから、$\overline{\mathbb{Q}}$ を持ち出す前に
@@ -256,12 +271,12 @@ $\mathfrak{S}^{\mathcal{O}}_L=\{\varphi\in\mathfrak{S}_L\mid\text{任意の }\ta
 
 ## 次回やること
 
-1. **軌道ごとの行列式の積への分解**（章「固有値の代数性」の続き。台帳のセクション 10f''）。
-   消えない項が軌道を保つ置換のものだけであることは済んでいるので、次は
-   「軌道を保つ置換の全体が、各軌道の上の置換の組の全体と 1 対 1 に対応すること」を示し、
-   $\chi_U$ の和を軌道ごとの積へ組み替える段である。符号が軌道ごとの符号の積になること
-   （転倒数を軌道ごとに分けて数えること）もここに入る。
-   1 tick に収まらない見込みなら、着手前に割り直すこと。
+1. **各軌道の上の置換の組から置換を貼り合わせること**（章「固有値の代数性」の続き。
+   台帳のセクション 10f''b）。軌道への制限とその 2 性質は済んでいるので、次は逆向きの構成である。
+   各軌道の上の置換の組を与えたとき、$\tau$ の属する軌道の置換を当てる形で $R_L$ の置換を定め、
+   それが軌道を保つ置換であること、その制限がもとの組に一致することを示す。
+   ここで初めて軌道どうしが互いに素であることが効く（属する軌道が一意でないと写像として定まらない）。
+   そのあと符号の分解（10f''c）、各因子が $t^{|O|}-1$ であること（10f'''）と続く。
 
 ## 未解決の設計問題
 

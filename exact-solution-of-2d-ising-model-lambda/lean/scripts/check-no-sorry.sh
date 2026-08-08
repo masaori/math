@@ -237,6 +237,17 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_iff_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_shift_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.image_orbit_eq_of_orbitPreserving_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.mem_of_orbitPreserving
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_val
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_bijective
+  Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.restrictionOf_val
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.restriction_bijective
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_agree_on_cover
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.apply_eq_of_restriction_eq
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_bijective_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

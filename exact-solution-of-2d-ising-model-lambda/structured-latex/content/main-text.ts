@@ -8519,6 +8519,285 @@ O(\tau)
   },
 
   {
+    id: "algebraic_eigenvalue_definition_orbit_restriction",
+    kind: "definition",
+    title: { text: "軌道を保つ置換の、軌道への制限" },
+    labels: ["def_orbit_restriction"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitRestriction"],
+    verification: ["sagemath/check/orbit-restriction"],
+    statement: [
+      paragraph([
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " と ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " を任意に取る（",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        ref("def_orbit_preserving_permutation"),
+        "、",
+        math(String.raw`\mathcal{O}_L`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        "）。写像",
+      ]),
+      displayMath(
+        String.raw`\varphi\!\restriction_{O}\;:\;O\longrightarrow O,\qquad \bigl(\varphi\!\restriction_{O}\bigr)(\tau):=\varphi(\tau)`,
+      ),
+      paragraph([
+        "を ",
+        math(String.raw`\varphi`),
+        " の ",
+        math(String.raw`O`),
+        " への制限と呼ぶ。",
+      ]),
+      paragraph([
+        "この写像の行き先が ",
+        math(String.raw`O`),
+        " であることは、定めるだけでは言えず示す必要がある。",
+        ref("claim_orbit_preserving_image"),
+        " より ",
+        math(String.raw`\{\varphi(\tau)\mid\tau\in O\}=O`),
+        " であり、とくに任意の ",
+        math(String.raw`\tau\in O`),
+        " について ",
+        math(String.raw`\varphi(\tau)\in O`),
+        " である。したがって上の対応は ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への写像として定まる。",
+      ]),
+      paragraph([
+        "記号 ",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " の下付きの ",
+        math(String.raw`O`),
+        " は制限する先の集合を指す添え名であって、成分の添字ではない。",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への写像であり、",
+        math(String.raw`R_L`),
+        " から ",
+        math(String.raw`R_L`),
+        " への写像である ",
+        math(String.raw`\varphi`),
+        " とは定義域も終域も異なる別の対象である。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_restriction_bijective",
+    kind: "claim",
+    title: { text: "軌道への制限はその軌道の上の全単射である" },
+    labels: ["claim_orbit_restriction_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_bijective",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.restriction_bijective",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_bijective_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-restriction"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " と ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " について、",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射である（",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " が単射であること。",
+        math(String.raw`\tau_1,\tau_2\in O`),
+        " が ",
+        math(String.raw`\bigl(\varphi\!\restriction_{O}\bigr)(\tau_1)=\bigl(\varphi\!\restriction_{O}\bigr)(\tau_2)`),
+        " を満たすとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\tau_1)
+&=\bigl(\varphi\!\restriction_{O}\bigr)(\tau_1)
+&&(\because\ \blkref{def_orbit_restriction})\\
+&=\bigl(\varphi\!\restriction_{O}\bigr)(\tau_2)
+&&(\because\ \text{この場合の仮定})\\
+&=\varphi(\tau_2)
+&&(\because\ \blkref{def_orbit_restriction})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\varphi`),
+        " は全単射なので（",
+        ref("def_permutation_sign"),
+        "）とくに単射であり、",
+        math(String.raw`\tau_1=\tau_2`),
+        " が従う。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " が全射であること。",
+        math(String.raw`\tau'\in O`),
+        " を任意に取る。",
+        ref("claim_orbit_preserving_image"),
+        " より ",
+        math(String.raw`\{\varphi(\tau)\mid\tau\in O\}=O`),
+        " なので、",
+        math(String.raw`\tau'\in O`),
+        " は左辺の元でもあり、",
+        math(String.raw`\tau'=\varphi(\tau_3)`),
+        " を満たす ",
+        math(String.raw`\tau_3\in O`),
+        " が取れる。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\varphi\!\restriction_{O}\bigr)(\tau_3)
+&=\varphi(\tau_3)
+&&(\because\ \blkref{def_orbit_restriction})\\
+&=\tau'
+&&(\because\ \tau_3\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\tau'`),
+        " は任意だったので ",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は全射である。",
+      ]),
+      paragraph([
+        ref("def_orbit_restriction"),
+        "、",
+        ref("claim_orbit_preserving_image"),
+        "、",
+        ref("def_permutation_sign"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この主張により、",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        math(String.raw`O`),
+        " の上の置換とみなせる対象になる。次のセクションで ",
+        math(String.raw`\chi_U`),
+        " の和を軌道ごとの積へ組み替えるとき、各軌道の因子はこの制限にわたる和として現れる。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_restriction_determines",
+    kind: "claim",
+    title: { text: "制限の全体が一致する軌道を保つ置換は一致する" },
+    labels: ["claim_orbit_restriction_determines"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_restriction_eq",
+      "Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-restriction"],
+    statement: [
+      paragraph([
+        math(String.raw`\varphi,\psi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " が、任意の ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " について ",
+        math(String.raw`\varphi\!\restriction_{O}=\psi\!\restriction_{O}`),
+        " を満たすならば ",
+        math(String.raw`\varphi=\psi`),
+        " である（",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        "）。",
+      ]),
+      paragraph([
+        "すなわち軌道を保つ置換は、各軌道への制限の全体によって定まる。これは、軌道を保つ置換の全体と",
+        "各軌道の上の置換の組の全体との対応が単射であることを述べている。",
+        "実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " を任意に取る。",
+        ref("def_row_config_orbit_set"),
+        " より ",
+        math(String.raw`O(\tau)\in\mathcal{O}_L`),
+        " であり、",
+        ref("def_row_config_orbit"),
+        " より ",
+        math(String.raw`\tau\in O(\tau)`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\tau)
+&=\bigl(\varphi\!\restriction_{O(\tau)}\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_restriction})\\
+&=\bigl(\psi\!\restriction_{O(\tau)}\bigr)(\tau)
+&&(\because\ \text{仮定を}\ O=O(\tau)\ \text{へ当てた})\\
+&=\psi(\tau)
+&&(\because\ \blkref{def_orbit_restriction})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\varphi=\psi`),
+        " である。",
+      ]),
+      paragraph([
+        ref("def_orbit_restriction"),
+        "、",
+        ref("def_row_config_orbit"),
+        "、",
+        ref("def_row_config_orbit_set"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この主張が使っているのは、軌道の全体が ",
+        math(String.raw`R_L`),
+        " を覆うこと（どの ",
+        math(String.raw`\tau`),
+        " も自分の軌道に属すること）だけである。軌道どうしが互いに素であること（",
+        ref("claim_row_config_orbit_disjoint_or_eq"),
+        "）は、逆向きの構成（各軌道の上の置換の組から ",
+        math(String.raw`R_L`),
+        " の置換を貼り合わせること）で使う。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
