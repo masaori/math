@@ -8,7 +8,19 @@
   人手証明のラベル            このファイル
   def_row_walk                RowWalk / rowWalksBetween
   def_walk_weight             walkWeight
-  claim_matrix_pow_entry      rowMatrixPow_apply（Step 1–9 と 1 対 1）
+  claim_matrix_pow_entry      rowMatrixPow_apply
+
+人手証明の証明は段に番号を振らず、次の 5 つの部分からなる。このファイルとの対応は次のとおり。
+
+  人手証明の部分                        このファイル
+  出発点（k = 1 の場合）                rowWalksBetween_one と `induction` の `zero` の枝
+  帰納法の仮定                          `induction ... generalizing τ τ''` の `ih`
+  道の延長が 1 対 1 対応であること      extendWalk / restrictWalk とその 4 つの補題
+                                        （人手証明の Φ と Ψ、および互いに逆であること）
+  対応する項が等しいこと                walkWeight_extendWalk
+  k + 1 の場合（5 つの等号）            `succ` の枝。第 1 の等号が rowMatrixPow_succ、
+                                        第 2 が ih、第 3 が sum_mul、第 4 が hfiber、
+                                        第 5 が sum_nbij'
 
 添字の対応。人手証明の道は写像 `p : {0,1,...,k} → R_L` であり、Lean では
 `Fin (k+1) → RowConfig L` として書く（長さ `k` の道の点は `k+1` 個）。
@@ -43,34 +55,35 @@ def rowWalksBetween (k : ℕ) (τ τ'' : RowConfig L) : Finset (RowWalk L k) :=
 noncomputable def walkWeight {k : ℕ} (A : RowMatrix L) (p : RowWalk L k) : Polynomial ℤ :=
   ∏ i : Fin k, A (p i.castSucc) (p i.succ)
 
-/-- 人手証明の Step 6 の延長写像 `Φ`。道 `p` の後ろに `τ'''` を 1 点足す。 -/
+/-- 人手証明の「道の延長が 1 対 1 対応であること」の延長写像 `Φ`。道 `p` の後ろに `τ'''` を 1 点足す。 -/
 def extendWalk {k : ℕ} (p : RowWalk L k) (τ''' : RowConfig L) : RowWalk L (k + 1) :=
   Fin.snoc p τ'''
 
-/-- 人手証明の Step 6 の逆向きの写像 `Ψ` の第 2 成分（定義域を狭めた写像）。 -/
+/-- 人手証明の「道の延長が 1 対 1 対応であること」の逆向きの写像 `Ψ` の第 2 成分
+（定義域を狭めた写像）。 -/
 def restrictWalk {k : ℕ} (q : RowWalk L (k + 1)) : RowWalk L k := Fin.init q
 
 omit [NeZero L] in
-/-- 人手証明の Step 6 の前半（延長した道の左端は変わらない）。 -/
+/-- 人手証明の「道の延長が 1 対 1 対応であること」の前半（延長した道の左端は変わらない）。 -/
 lemma extendWalk_zero {k : ℕ} (p : RowWalk L k) (τ''' : RowConfig L) :
     extendWalk L p τ''' 0 = p 0 := by
   unfold extendWalk
   rw [← Fin.castSucc_zero, Fin.snoc_castSucc]
 
 omit [NeZero L] in
-/-- 人手証明の Step 6 の前半（延長した道の右端は足した点である）。 -/
+/-- 人手証明の「道の延長が 1 対 1 対応であること」の前半（延長した道の右端は足した点である）。 -/
 lemma extendWalk_last {k : ℕ} (p : RowWalk L k) (τ''' : RowConfig L) :
     extendWalk L p τ''' (Fin.last (k + 1)) = τ''' :=
   Fin.snoc_last _ _
 
 omit [NeZero L] in
-/-- 人手証明の Step 6 の後半（`Ψ ∘ Φ` が恒等写像）。 -/
+/-- 人手証明の「道の延長が 1 対 1 対応であること」の後半（`Ψ ∘ Φ` が恒等写像）。 -/
 lemma restrictWalk_extendWalk {k : ℕ} (p : RowWalk L k) (τ''' : RowConfig L) :
     restrictWalk L (extendWalk L p τ''') = p :=
   Fin.init_snoc _ _
 
 omit [NeZero L] in
-/-- 人手証明の Step 6 の後半（`Φ ∘ Ψ` が恒等写像）。 -/
+/-- 人手証明の「道の延長が 1 対 1 対応であること」の後半（`Φ ∘ Ψ` が恒等写像）。 -/
 lemma extendWalk_restrictWalk {k : ℕ} (q : RowWalk L (k + 1)) :
     extendWalk L (restrictWalk L q) (q (Fin.last (k + 1))) = q :=
   Fin.snoc_init_self _
@@ -82,7 +95,8 @@ lemma restrictWalk_apply_zero {k : ℕ} (q : RowWalk L (k + 1)) :
   rw [Fin.castSucc_zero]
 
 omit [NeZero L] in
-/-- 人手証明の Step 7。延長した道の重みは、もとの重みに最後の成分を掛けたものである。 -/
+/-- 人手証明の「対応する項が等しいこと」。延長した道の重みは、もとの重みに最後の成分を
+掛けたものである。 -/
 lemma walkWeight_extendWalk {k : ℕ} (A : RowMatrix L) (p : RowWalk L k) (τ''' : RowConfig L) :
     walkWeight L A (extendWalk L p τ''')
       = walkWeight L A p * A (p (Fin.last k)) τ''' := by
@@ -94,7 +108,8 @@ lemma walkWeight_extendWalk {k : ℕ} (A : RowMatrix L) (p : RowWalk L k) (τ'''
     rw [Fin.snoc_castSucc, Fin.succ_castSucc, Fin.snoc_castSucc]
   · rw [Fin.snoc_castSucc, Fin.succ_last, Fin.snoc_last]
 
-/-- 人手証明の Step 1。長さ `1` の道は両端で決まるので、両端を指定した道はちょうど 1 つである
+/-- 人手証明の「出発点（`k = 1` の場合）」。長さ `1` の道は両端で決まるので、
+両端を指定した道はちょうど 1 つである
 （左端だけを値にとる長さ `0` の道へ右端を足したものである）。 -/
 lemma rowWalksBetween_one (τ τ'' : RowConfig L) :
     rowWalksBetween L 1 τ τ'' = {extendWalk L (fun _ => τ) τ''} := by
@@ -121,19 +136,20 @@ theorem rowMatrixPow_apply (A : RowMatrix L) (m : ℕ) (τ τ'' : RowConfig L) :
       = ∑ p ∈ rowWalksBetween L (m + 1) τ τ'', walkWeight L A p := by
   induction m generalizing τ τ'' with
   | zero =>
-      -- Step 1（`k = 1` の場合）。道はちょうど 1 つで、その重みは `A_{τ,τ''}` である。
+      -- 出発点（`k = 1` の場合）。道はちょうど 1 つで、その重みは `A_{τ,τ''}` である。
       rw [rowMatrixPow_one, rowWalksBetween_one, sum_singleton, walkWeight_extendWalk]
       unfold walkWeight
       rw [Fin.prod_univ_zero, one_mul]
   | succ m ih =>
-      -- Step 3（冪と積の定義を使う）。
+      -- `k+1` の場合の第 1 の等号（冪と積の定義を使う）。
       rw [rowMatrixPow_succ]
       show ∑ τ' : RowConfig L, rowMatrixPow L A m τ τ' * A τ' τ'' = _
-      -- Step 4（帰納法の仮定を代入する）。
+      -- 第 2 の等号（帰納法の仮定を各 `τ'` について使う）。
       rw [sum_congr rfl fun τ' _ => by rw [ih τ τ']]
-      -- Step 5（分配則で括弧を外す）。
+      -- 第 3 の等号（有限和と 1 つの元との積を項ごとの積の和にする）。
       rw [sum_congr rfl fun τ' (_ : τ' ∈ univ) => sum_mul _ _ _]
-      -- Step 8 の前半（二重和を、左端だけを固定した道の上の 1 つの和として読む）。
+      -- 第 4 の等号（二重和を、人手証明の組の集合 `P` の上の 1 つの和として読む。
+      -- ここでは `P` を「左端が `τ` の道の全体」として実現し、右端で束ねている）。
       have hfiber :
           ∑ τ' : RowConfig L,
               ∑ p ∈ rowWalksBetween L (m + 1) τ τ', walkWeight L A p * A τ' τ''
@@ -150,7 +166,7 @@ theorem rowMatrixPow_apply (A : RowMatrix L) (m : ℕ) (τ τ'' : RowConfig L) :
           obtain ⟨-, hlast⟩ := mem_filter.mp hp
           rw [hlast]
       rw [hfiber]
-      -- Step 6・Step 7（延長が 1 対 1 対応であり、対応する項が等しい）。
+      -- 第 5 の等号（道の延長が 1 対 1 対応であり、対応する項が等しい）。
       refine sum_nbij' (i := fun p => extendWalk L p τ'') (j := fun q => restrictWalk L q)
         ?_ ?_ ?_ ?_ ?_
       · intro p hp

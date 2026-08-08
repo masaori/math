@@ -1,7 +1,9 @@
 /-
 主張「行列の冪の成分は、道に沿った成分の積の和である」（ラベル `claim_matrix_pow_entry`）の
-必要十分版。手順は具体版（`Ising2DLambda/TransferMatrix/PowerEntry.lean`）の Step 1–9 と同じで、
-仮定だけを必要十分まで削ってある。
+必要十分版。手順は具体版（`Ising2DLambda/TransferMatrix/PowerEntry.lean`）と同じで、
+仮定だけを必要十分まで削ってある（人手証明の 5 つの部分——出発点・帰納法の仮定・
+道の延長が 1 対 1 対応であること・対応する項が等しいこと・`k+1` の場合——との対応は
+具体版のファイル冒頭にある表のとおりで、この版でも補題の並びは同じである）。
 
 削った結果に残ったのは次の 3 つである。
 
@@ -9,7 +11,7 @@
      ・和が可換モノイドをなすこと（有限和が確定し、順序を入れ替えられること）
      ・積が結合的で単位元 `1` をもつこと（道の重みの最後の因子を分けるところ、
        および長さ `0` の道の重みが `1` であること）
-     ・積が和に対して分配すること（Step 5）
+     ・積が和に対して分配すること（`k+1` の場合の第 3 の等号）
      である。積の可換性は議論のどのステップでも使っていないが、有限積の記法
      `Finset.prod` が mathlib では可換モノイドに対してしか定義されていないため、
      形式化としては可換な側を仮定する（この 1 点だけは数学的な必要性ではなく記法の都合である）。
@@ -55,10 +57,11 @@ def walksBetween (k : ℕ) (a a'' : ι) : Finset (Walk ι k) :=
 def walkWeight {k : ℕ} (A : Mat S ι) (p : Walk ι k) : S :=
   ∏ i : Fin k, A (p i.castSucc) (p i.succ)
 
-/-- 道の延長（具体版の `extendWalk`。人手証明の Step 6 の `Φ`）。 -/
+/-- 道の延長（具体版の `extendWalk`。人手証明の「道の延長が 1 対 1 対応であること」の `Φ`）。 -/
 def extendWalk {k : ℕ} (p : Walk ι k) (a''' : ι) : Walk ι (k + 1) := Fin.snoc p a'''
 
-/-- 定義域を狭めた道（具体版の `restrictWalk`。人手証明の Step 6 の `Ψ` の第 2 成分）。 -/
+/-- 定義域を狭めた道（具体版の `restrictWalk`。人手証明の「道の延長が 1 対 1 対応であること」の
+`Ψ` の第 2 成分）。 -/
 def restrictWalk {k : ℕ} (q : Walk ι (k + 1)) : Walk ι k := Fin.init q
 
 omit [Fintype ι] [DecidableEq ι] in
@@ -89,7 +92,7 @@ lemma restrictWalk_apply_zero {k : ℕ} (q : Walk ι (k + 1)) :
   rw [Fin.castSucc_zero]
 
 omit [Fintype ι] [DecidableEq ι] in
-/-- 人手証明の Step 7。積の結合性と、最後の因子を分けられることだけを使う。 -/
+/-- 人手証明の「対応する項が等しいこと」。積の結合性と、最後の因子を分けられることだけを使う。 -/
 lemma walkWeight_extendWalk {k : ℕ} (A : Mat S ι) (p : Walk ι k) (a''' : ι) :
     walkWeight A (extendWalk p a''') = walkWeight A p * A (p (Fin.last k)) a''' := by
   unfold walkWeight extendWalk
@@ -99,7 +102,7 @@ lemma walkWeight_extendWalk {k : ℕ} (A : Mat S ι) (p : Walk ι k) (a''' : ι)
     rw [Fin.snoc_castSucc, Fin.succ_castSucc, Fin.snoc_castSucc]
   · rw [Fin.snoc_castSucc, Fin.succ_last, Fin.snoc_last]
 
-/-- 人手証明の Step 1。長さ `1` の道は両端で決まる。 -/
+/-- 人手証明の「出発点（`k = 1` の場合）」。長さ `1` の道は両端で決まる。 -/
 lemma walksBetween_one (a a'' : ι) :
     walksBetween 1 a a'' = {extendWalk (fun _ => a) a''} := by
   refine eq_singleton_iff_unique_mem.mpr ⟨?_, ?_⟩

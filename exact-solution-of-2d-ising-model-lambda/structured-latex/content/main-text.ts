@@ -1095,71 +1095,46 @@ Z_L
     ],
     proof: [
       paragraph([
-        "Step 1（代入を和へ配る）。多項式への代入は、係数環 ",
-        math(String.raw`\mathbb{Z}`),
-        " から ",
-        math(String.raw`\mathbb{Q}`),
-        " への包含と ",
-        math(String.raw`x\mapsto q`),
-        " で定まる環準同型 ",
-        math(String.raw`\mathbb{Z}[x]\to\mathbb{Q}`),
-        " による像である。環準同型は和と積を保つので、",
-        ref("def_partition_polynomial"),
-        " の定義式へ適用して",
-      ]),
-      displayMath(String.raw`Z_L(q)=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}`),
-      paragraph([
-        "を得る（",
-        math(String.raw`\Sigma_L`),
-        " は ",
-        ref("def_configuration"),
-        "、",
-        math(String.raw`b(\sigma)`),
-        " は ",
-        ref("def_broken_bond_count"),
-        "）。右辺は有限個の有理数の和なので ",
-        math(String.raw`\mathbb{Q}`),
-        " の元である。",
-      ]),
-      paragraph([
-        "Step 2（各項が正であること）。",
+        "準備として、各 ",
         math(String.raw`\sigma\in\Sigma_L`),
-        " を固定する。",
-        ref("def_broken_bond_count"),
-        " より ",
+        " について ",
+        math(String.raw`q^{\,b(\sigma)}>0`),
+        " である。実際 ",
         math(String.raw`b(\sigma)\in\mathbb{N}`),
-        " である。",
-        math(String.raw`q>0`),
-        " なので、正の有理数を ",
+        " であり（",
+        ref("def_broken_bond_count"),
+        "）、正の有理数を ",
         math(String.raw`b(\sigma)`),
-        " 個掛けた ",
-        math(String.raw`q^{\,b(\sigma)}`),
-        " は正である（",
+        " 個掛けたものは正である（",
         math(String.raw`b(\sigma)=0`),
         " のときは空積で ",
         math(String.raw`q^{0}=1>0`),
-        "）。",
-      ]),
-      paragraph([
-        "Step 3（和が正であること）。",
-        ref("def_configuration"),
-        " より ",
+        "）。また ",
         math(String.raw`|\Sigma_L|=2^{L^2}\ge1`),
-        " なので、Step 1 の和は少なくとも 1 個の項を持つ。正の有理数を 1 個以上足したものは正なので ",
-        math(String.raw`Z_L(q)>0`),
-        " である。",
+        " なので（",
+        ref("def_configuration"),
+        "）、下の和は少なくとも 1 個の項を持つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\Bigl(\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}\Bigr)(q)
+&&(\because\ \text{分配多項式の定義})\\
+&=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
+&&(\because\ \text{代入は環準同型なので和と積を保つ})\\
+&\in\mathbb{Q}_{>0}
+&&(\because\ \text{正の有理数を 1 個以上足したものは正})
+\end{aligned}`),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_partition_polynomial"),
+        "、",
+        ref("def_configuration"),
+        "、",
+        ref("def_broken_bond_count"),
+        "。",
       ]),
       paragraph([
-        "Step 4（結論）。Step 1 より ",
-        math(String.raw`Z_L(q)\in\mathbb{Q}`),
-        "、Step 3 より ",
-        math(String.raw`Z_L(q)>0`),
-        " なので ",
-        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
-        " である。",
-      ]),
-      paragraph([
-        "以上の各ステップは有理数の四則と有限和だけからなり、実数体も複素数体も現れない。",
+        "以上は有理数の四則と有限和だけからなり、実数体も複素数体も現れない。",
         "代入したのは有理数であって、指数関数の値ではない。",
       ]),
     ],
@@ -2019,178 +1994,94 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
       paragraph([
         "配位 ",
         math(String.raw`\sigma\in\Sigma_L`),
-        " を固定する。",
+        " を固定する。この証明の中だけで使う記号として、破れている辺の番号の集合を",
       ]),
+      displayMath(String.raw`\begin{aligned}
+B(\sigma)&:=\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}\\[2pt]
+b(\sigma)&=|B(\sigma)|
+&&(\because\ \text{破れボンド数の定義})
+\end{aligned}`),
       paragraph([
-        "Step 1（破れている辺の集合を置く）。",
-        ref("def_broken_bond_count"),
-        " により、破れている辺の番号の集合を",
-      ]),
-      displayMath(
-        String.raw`B(\sigma):=\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}`,
-      ),
-      paragraph([
-        "と置けば ",
-        math(String.raw`b(\sigma)=|B(\sigma)|`),
-        " である。",
-      ]),
-      paragraph([
-        "Step 2（辺の向きで 2 つに分ける）。",
-        ref("def_lattice"),
-        " により ",
-        math(String.raw`E_L=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}`),
-        " であり、この 2 つは互いに素である。したがって",
-      ]),
-      displayMath(
-        String.raw`B(\sigma)=\bigl(B(\sigma)\cap E_{L,\mathrm{h}}\bigr)\cup\bigl(B(\sigma)\cap E_{L,\mathrm{v}}\bigr)`,
-      ),
-      paragraph([
-        "であり、右辺の 2 つも互いに素である（もとの 2 つが互いに素なので、その部分集合どうしも互いに素）。",
-        "互いに素な有限集合の合併の個数は個数の和なので",
-      ]),
-      displayMath(
-        String.raw`b(\sigma)=\bigl|B(\sigma)\cap E_{L,\mathrm{h}}\bigr|+\bigl|B(\sigma)\cap E_{L,\mathrm{v}}\bigr|`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 3（行ごとに分ける）。",
-        ref("claim_edge_row_partition"),
-        " の 3 つめと 4 つめにより、",
-        math(String.raw`E_{L,\mathrm{h}}`),
-        " は ",
-        math(String.raw`E_{L,\mathrm{h},i}`),
-        "（",
-        math(String.raw`i=0,1,\dots,L-1`),
-        "）の互いに素な合併である。共通部分を取っても互いに素性は保たれるので",
-      ]),
-      displayMath(
-        String.raw`\bigl|B(\sigma)\cap E_{L,\mathrm{h}}\bigr|=\sum_{i=0}^{L-1}\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|`,
-      ),
-      paragraph([
-        "であり、同じ理由で",
-      ]),
-      displayMath(
-        String.raw`\bigl|B(\sigma)\cap E_{L,\mathrm{v}}\bigr|=\sum_{i=0}^{L-1}\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|`,
-      ),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 4（横向きの 1 行分を数える）。",
+        "と置く。あわせて、各 ",
         math(String.raw`i\in\{0,1,\dots,L-1\}`),
-        " を固定する。",
-        ref("claim_edge_row_partition"),
-        " の 1 つめにより、写像 ",
-        math(String.raw`j\mapsto iL+j+1`),
-        " は ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " から ",
-        math(String.raw`E_{L,\mathrm{h},i}`),
-        " への全単射である。この写像で ",
-        math(String.raw`j`),
-        " に対応する番号 ",
-        math(String.raw`e=iL+j+1`),
-        " が ",
-        math(String.raw`B(\sigma)`),
-        " に属することは、",
-        ref("claim_edge_row_partition"),
-        " の 5 つめの端点の式と Step 1 の定義により",
+        " について次の 2 つを準備する。",
       ]),
-      displayMath(String.raw`\sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i,\,j+1)\bigr)`),
+      displayMath(String.raw`\begin{aligned}
+\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
+&=\bigl|\bigl\{\,j \;\bigm|\; iL+j+1\in B(\sigma)\,\bigr\}\bigr|
+&&(\because\ j\mapsto iL+j+1\ \text{が}\ E_{L,\mathrm{h},i}\ \text{への全単射})\\
+&=\bigl|\bigl\{\,j \;\bigm|\; \sigma((i,j))\ne\sigma((i,\,j+1))\,\bigr\}\bigr|
+&&(\because\ \text{辺の集合は行ごとに分割される（端点の式）})\\
+&=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+1)\,\bigr\}\bigr|
+&&(\because\ \text{行への制限の定義})\\
+&=b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
+&&(\because\ \text{行内破れ数の定義})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
+&=\bigl|\bigl\{\,j \;\bigm|\; L^2+iL+j+1\in B(\sigma)\,\bigr\}\bigr|
+&&(\because\ j\mapsto L^2+iL+j+1\ \text{が}\ E_{L,\mathrm{v},i}\ \text{への全単射})\\
+&=\bigl|\bigl\{\,j \;\bigm|\; \sigma((i,j))\ne\sigma((i+1,\,j))\,\bigr\}\bigr|
+&&(\because\ \text{辺の集合は行ごとに分割される（端点の式）})\\
+&=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_{i+1}(\sigma)\bigr)(j)\,\bigr\}\bigr|
+&&(\because\ \text{行への制限の定義})\\
+&=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)
+&&(\because\ \text{行間破れ数の定義})
+\end{aligned}`),
       paragraph([
-        "と同値である。さらに ",
-        ref("def_row_restriction"),
-        " により ",
-        math(String.raw`\sigma((i,j))=\bigl(\rho_i(\sigma)\bigr)(j)`),
-        " かつ ",
-        math(String.raw`\sigma((i,\,j+1))=\bigl(\rho_i(\sigma)\bigr)(j+1)`),
-        " なので、これは",
-      ]),
-      displayMath(
-        String.raw`\bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+1)`,
-      ),
-      paragraph([
-        "と同値である。全単射で写り合う 2 つの有限集合の個数は等しいので",
-      ]),
-      displayMath(
-        String.raw`\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
-=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+1)\,\bigr\}\bigr|
-=b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)`,
-      ),
-      paragraph([
-        "を得る（最後の等号は ",
-        ref("def_intra_row_broken_count"),
-        "）。ここで ",
+        "ここで ",
         math(String.raw`j`),
         " の動く範囲 ",
         math(String.raw`\{0,1,\dots,L-1\}`),
         " は ",
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " とみなしている（",
+        " とみなす（",
         ref("def_lattice"),
         " の約束）。この対応のもとで ",
         math(String.raw`j+1`),
-        " の意味も両側で一致する。どちらも ",
+        " はどちらの側でも ",
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
         " の中の加法であり、",
         math(String.raw`j=L-1`),
         " のとき ",
-        math(String.raw`j+1`),
-        " は ",
         math(String.raw`0`),
         " になる。",
       ]),
+      paragraph(["準備したものを使うと"]),
+      displayMath(String.raw`\begin{aligned}
+b(\sigma)
+&=|B(\sigma)|
+&&(\because\ \text{上の準備})\\
+&=\bigl|B(\sigma)\cap E_{L,\mathrm{h}}\bigr|+\bigl|B(\sigma)\cap E_{L,\mathrm{v}}\bigr|
+&&(\because\ E_L=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}\ \text{は互いに素な合併})\\
+&=\sum_{i=0}^{L-1}\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
++\sum_{i=0}^{L-1}\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
+&&(\because\ \text{辺の集合は行ごとに分割される})\\
+&=\sum_{i=0}^{L-1}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
++\sum_{i=0}^{L-1}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)
+&&(\because\ \text{上の準備})
+\end{aligned}`),
       paragraph([
-        "Step 5（縦向きの 1 行分を数える）。同じ ",
-        math(String.raw`i`),
-        " について、写像 ",
-        math(String.raw`j\mapsto L^2+iL+j+1`),
-        " は ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " から ",
-        math(String.raw`E_{L,\mathrm{v},i}`),
-        " への全単射である（",
-        ref("claim_edge_row_partition"),
-        " の 1 つめ）。",
-        ref("claim_edge_row_partition"),
-        " の 5 つめの端点の式により、",
-        math(String.raw`e=L^2+iL+j+1`),
-        " が ",
-        math(String.raw`B(\sigma)`),
-        " に属することは",
+        "を得る。互いに素な有限集合の合併の元の個数がそれぞれの個数の和であることを、",
+        "2 行目と 3 行目で使っている。",
       ]),
-      displayMath(String.raw`\sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i+1,\,j)\bigr)`),
       paragraph([
-        "と同値であり、",
+        "引いたブロック: ",
+        ref("def_broken_bond_count"),
+        "、",
+        ref("def_lattice"),
+        "、",
+        ref("claim_edge_row_partition"),
+        "、",
         ref("def_row_restriction"),
-        " を行番号 ",
-        math(String.raw`i`),
-        " と行番号 ",
-        math(String.raw`i+1`),
-        " について使うと、これは",
-      ]),
-      displayMath(
-        String.raw`\bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_{i+1}(\sigma)\bigr)(j)`,
-      ),
-      paragraph([
-        "と同値である。よって Step 4 と同じ数え方で",
-      ]),
-      displayMath(
-        String.raw`\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)`,
-      ),
-      paragraph([
-        "を得る（最後は ",
+        "、",
+        ref("def_intra_row_broken_count"),
+        "、",
         ref("def_inter_row_broken_count"),
-        "）。",
+        "。",
       ]),
       paragraph([
-        "Step 6（まとめる）。Step 4 と Step 5 を Step 3 へ代入し、その結果を Step 2 へ代入すると",
-      ]),
-      displayMath(
-        String.raw`b(\sigma)=\sum_{i=0}^{L-1}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
-+\sum_{i=0}^{L-1}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "以上の各ステップは有限集合の数え上げと整数の演算だけからなり、実数体も複素数体も現れない。",
+        "以上は有限集合の数え上げと整数の演算だけからなり、実数体も複素数体も現れない。",
         "この分解が転送行列を作る足場になる。第 1 の和は行ごとに閉じており、",
         "第 2 の和は隣り合う 2 行だけを結ぶからである。",
       ]),
