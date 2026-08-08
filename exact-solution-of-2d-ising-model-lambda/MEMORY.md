@@ -168,7 +168,7 @@ $U_{\tau,\tau'}=\kappa(1)\ (\tau'=S(\tau))$、$\kappa(0)$（それ以外）を�
 
 ## 進め方（自動ループ）
 
-このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
+このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
 [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md)、進捗の正本は
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) である（このファイルではない）。
 

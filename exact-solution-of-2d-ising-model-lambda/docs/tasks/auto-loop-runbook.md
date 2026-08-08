@@ -1,6 +1,6 @@
-# 自動ループ Runbook（30 分に 1 回）
+# 自動ループ Runbook（1 時間に 1 回）
 
-このファイルは、30 分ごとの cron が**毎回まっさらな文脈で**読み、決定論的に 1 tick 分を実行するための手順書である。
+このファイルは、1 時間ごとの cron が**毎回まっさらな文脈で**読み、決定論的に 1 tick 分を実行するための手順書である。
 状態は [auto-loop-state.md](auto-loop-state.md) に永続化する。判断の根拠は、この 2 ファイルと
 リポジトリ内の一次情報（`docs/context/`、このプロジェクトの [README](../../README.md)、
 `docs/discussion/Lee-Yang-Fisher零点プログラム/`、`docs/discussion/対数順序群上の統計力学/`）だけとする。
@@ -29,7 +29,7 @@
    tick が終わるとその tick が起動した子プロセスは道連れに終了するので、
    「裏で走らせたまま tick を終える」は成果が残らない
    （実測: 初回 tick が `lake update` を裏で走らせたまま終了し、取得済みの 305MB が消えた）。
-   1 tick（25 分）で終わらない見込みなら、**終わる大きさに割り直してから**着手する。
+   1 tick（45 分）で終わらない見込みなら、**終わる大きさに割り直してから**着手する。
 5. **検証**（下の「検証コマンド」）。すべて通るまで直す。落ちたら本文を直す（検証を主張に合わせて緩めない）。
 6. **台帳と MEMORY の更新**: セクションの四層の状態、観察、日付を書く。
 7. **main へ push**し、`git merge-base --is-ancestor <commit> origin/main` で反映を確認する。
@@ -142,7 +142,7 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 
 ## 報告（Slack）
 
-**毎 tick は報告しない**（30 分ごとに通知が来ると読まれなくなる）。次の 2 つの場合だけ
+**毎 tick は報告しない**（1 時間ごとに通知が来ると読まれなくなる）。次の 2 つの場合だけ
 `slack-notification` skill で報告する。
 
 - **セクションが `done` になったとき**（四層すべて満たした）。何を証明したかを 1–2 文で書く。
@@ -161,7 +161,7 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 | | |
 |---|---|
 | ラベル | `com.masaori.ising-lambda-audit` |
-| 実体 | `scripts/audit-loop.sh`（毎時 13 分と 43 分。tick の合間） |
+| 実体 | `scripts/audit-loop.sh`（毎時 55 分。tick が終わったあと） |
 | ログ | `logs/audit.log`（git 管理外） |
 
 監査がやること。
@@ -179,12 +179,12 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 
 ## 打ち切られたときの扱い
 
-25 分の上限に当たった tick は、push 前で終わっている可能性が高い。次のことを守る。
+45 分の上限に当たった tick は、push 前で終わっている可能性が高い。次のことを守る。
 
 - **打ち切りが起きたら、次の tick はまず作業ツリーに残った成果を拾う。**
   `git status` で未コミットの変更を確認し、検証を通してからコミットする（捨てない）。
-- **打ち切られたセクションは、やり直す前に割り直す。** 1 tick は 25 分で切れるので、
-  **20 分で四層まで終わる大きさ**を目安にする。四層のうち Lean が最も時間を食うので、
+- **打ち切られたセクションは、やり直す前に割り直す。** 1 tick は 45 分で切れるので、
+  **40 分で四層まで終わる大きさ**を目安にする。四層のうち Lean が最も時間を食うので、
   「定義を 3 件書いて主張を 2 件示す」ような塊は必ず割る。
 - 割り直したら台帳のセクション表を更新し、理由を「前進の記録」へ書く。
 
@@ -197,7 +197,7 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 |---|---|
 | ラベル | `com.masaori.ising-lambda-auto-loop` |
 | 定義 | `~/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist` |
-| 実体 | `scripts/auto-loop-tick.sh`（毎時 23 分と 53 分。多重起動を防ぎ、25 分で打ち切る） |
+| 実体 | `scripts/auto-loop-tick.sh`（毎時 5 分。多重起動を防ぎ、45 分で打ち切る） |
 | ログ | `logs/auto-loop.log`（git 管理外） |
 
 ```sh
