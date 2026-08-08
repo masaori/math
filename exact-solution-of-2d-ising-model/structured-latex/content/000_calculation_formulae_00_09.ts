@@ -23,11 +23,13 @@ export default defineBlocks([
 \end{aligned}`),
     ],
     proof: [
+      paragraph(["1 つめの等式。"]),
       displayMath(String.raw`\begin{aligned}
 \cosh(a)\sinh(b)
 &=
 \frac{\exp(a)+\exp(-a)}{2}
 \frac{\exp(b)-\exp(-b)}{2}
+&&(\because\ \cosh,\ \sinh\ \text{の定義})
 \\
 &=
 \frac{1}{4}
@@ -36,6 +38,7 @@ export default defineBlocks([
 -
 \left(\exp(a)\exp(-b)-\exp(-a)\exp(b)\right)
 \right)
+&&(\because\ \text{分配則})
 \\
 &=
 \frac{1}{2}
@@ -44,17 +47,22 @@ export default defineBlocks([
 -
 \frac{\exp(a-b)-\exp(-(a-b))}{2}
 \right)
+&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ})
 \\
 &=
 \frac{1}{2}
 \left(
 \sinh(a+b)-\sinh(a-b)
 \right)
-\\
+&&(\because\ \sinh\ \text{の定義})
+\end{aligned}`),
+      paragraph(["2 つめの等式。"]),
+      displayMath(String.raw`\begin{aligned}
 \cosh(a)\cosh(b)
 &=
 \frac{\exp(a)+\exp(-a)}{2}
 \frac{\exp(b)+\exp(-b)}{2}
+&&(\because\ \cosh\ \text{の定義})
 \\
 &=
 \frac{1}{4}
@@ -63,6 +71,7 @@ export default defineBlocks([
 +
 \left(\exp(a)\exp(-b)+\exp(-a)\exp(b)\right)
 \right)
+&&(\because\ \text{分配則})
 \\
 &=
 \frac{1}{2}
@@ -71,12 +80,14 @@ export default defineBlocks([
 +
 \frac{\exp(a-b)+\exp(-(a-b))}{2}
 \right)
+&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ})
 \\
 &=
 \frac{1}{2}
 \left(
 \cosh(a+b)+\cosh(a-b)
 \right)
+&&(\because\ \cosh\ \text{の定義})
 \end{aligned}`),
     ],
   },
