@@ -251,3 +251,30 @@ def row_matrix_pow(L, A, k):
 def row_matrix_trace(L, A):
     """def_matrix_trace: Tr A = sum_{tau} A_{tau,tau}。"""
     return sum((A[(key, key)] for key in row_matrix_keys(L)), PolynomialRingZx(0))
+
+
+# --- 章「転送行列」の続き: 行配位の道 -------------------------------------
+#   def_row_walk / def_walk_weight -> row_walks(L, k, start, goal), walk_weight(L, A, p)
+#   claim_matrix_pow_entry         -> 上の 2 つと row_matrix_pow(L, A, k) を突き合わせる
+
+
+def row_walks(L, k, start, goal):
+    """def_row_walk: W_{L,k}(tau, tau'') を全列挙する（k >= 1）。
+
+    道 p: {0,1,...,k} -> R_L を、行配位の表現（タプル）を i の順に並べた
+    長さ k+1 のタプルで表す。定義域は整数の集合であり剰余類ではないので、
+    行配位の族（row_families）とは別の対象である。
+    個数は |R_L|^{k-1} = (2^L)^{k-1}（両端が指定されているため）。
+    """
+    assert k >= 1
+    keys = row_matrix_keys(L)
+    for interior in product(keys, repeat=k - 1):
+        yield (start,) + interior + (goal,)
+
+
+def walk_weight(L, A, p):
+    """def_walk_weight: w_A(p) = prod_{i=0}^{k-1} A_{p(i),p(i+1)}。"""
+    result = PolynomialRingZx(1)
+    for i in range(len(p) - 1):
+        result *= A[(p[i], p[i + 1])]
+    return result

@@ -14,6 +14,7 @@ export const ALL_LABELS = [
   "claim_free_entropy_at_one",
   "claim_log_additive",
   "claim_log_power",
+  "claim_matrix_pow_entry",
   "claim_rational_exponent_well_defined",
   "claim_rows_bijection",
   "claim_transfer_weight_product",
@@ -35,8 +36,10 @@ export const ALL_LABELS = [
   "def_row_configuration",
   "def_row_family",
   "def_row_restriction",
+  "def_row_walk",
   "def_rows_map",
   "def_transfer_matrix",
+  "def_walk_weight",
   "remark_planned_chapters",
 ] as const
 

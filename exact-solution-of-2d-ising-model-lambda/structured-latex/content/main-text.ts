@@ -3,7 +3,9 @@
  *
  * 章「分配多項式」: 有限格子の分配関数を、指数関数を経由せず整係数多項式として定義する。
  * 章「有限系の自由エントロピー」: 有理点での値の素因数分解として Φ_L(q) ∈ Λ を定める。
- * 章「転送行列」: 行配位を定め、破れボンド数を行内・行間へ分解する（転送行列そのものは未着手）。
+ * 章「転送行列」: 行配位を定め、破れボンド数を行内・行間へ分解し、転送行列 T を定義して、
+ * 配位の重みが行に沿った成分の積であること・行列の冪の成分が道に沿った積の和であることを示す
+ * （Z_L = Tr(T^L) そのものは未着手）。
  * どの章にも ℝ/ℂ は現れない。
  *
  * 文書順はこの配列の並びが正本である（README「章立ての予定」の表が読む順序の正本）。
@@ -517,72 +519,30 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
       ]),
     ],
     proof: [
+      displayMath(String.raw`\begin{aligned}
+Z_L
+&=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
+&&(\because\ \text{分配多項式の定義})\\
+&=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}
+&&(\because\ \text{配位全体は破れボンド数の値ごとに類別される})\\
+&=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,m}
+&&(\because\ \sigma\in A_{L,m}\ \Rightarrow\ b(\sigma)=m)\\
+&=\sum_{m=0}^{2L^2}|A_{L,m}|\cdot x^{\,m}
+&&(\because\ \text{同じ元を }|A_{L,m}|\text{ 個足した})\\
+&=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}
+&&(\because\ \text{多重度の定義})
+\end{aligned}`),
       paragraph([
-        "Step 1（多重度を類の元の個数として読む）。",
-        ref("def_multiplicity"),
-        " により、",
-        math(String.raw`\Omega_L(m)`),
-        " は ",
-        ref("claim_configuration_partition"),
-        " の集合 ",
-        math(String.raw`A_{L,m}`),
-        " の元の個数 ",
-        math(String.raw`|A_{L,m}|`),
-        " である。",
-      ]),
-      paragraph([
-        "Step 2（類別）。",
-        ref("claim_configuration_partition"),
-        " により、",
-        math(String.raw`\{A_{L,m}\}_{m=0}^{2L^2}`),
-        " は ",
-        math(String.raw`\Sigma_L`),
-        " の互いに素な有限個の部分集合への分割である。",
-      ]),
-      paragraph([
-        "Step 3（和を類ごとに束ねる）。互いに素な有限個の有限集合の合併の上を走る和は、",
-        "各集合の上を走る和の総和に等しい。",
+        "引いたブロック: ",
         ref("def_partition_polynomial"),
-        " の定義の和にこれを適用して",
-      ]),
-      displayMath(
-        String.raw`Z_L=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
-=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 4（1 つの類の中では単項式が共通）。",
-        math(String.raw`m`),
-        " を固定する。",
+        "、",
         ref("claim_configuration_partition"),
-        " の ",
-        math(String.raw`A_{L,m}`),
-        " の定義より、",
-        math(String.raw`\sigma\in A_{L,m}`),
-        " ならば ",
-        math(String.raw`b(\sigma)=m`),
-        " である。したがって内側の和の各項は ",
-        math(String.raw`x^{\,m}`),
-        " に等しく、",
-      ]),
-      displayMath(
-        String.raw`\sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}
-=\sum_{\sigma\in A_{L,m}}x^{\,m}
-=|A_{L,m}|\cdot x^{\,m}
-=\Omega_L(m)\,x^{\,m}`,
-      ),
-      paragraph([
-        "となる（2 つ目の等号は同じ元を ",
-        math(String.raw`|A_{L,m}|`),
-        " 個足したこと、3 つ目の等号は Step 1）。",
+        "、",
+        ref("def_multiplicity"),
+        "。",
       ]),
       paragraph([
-        "Step 5（結論）。Step 4 を Step 3 の右辺の各項へ代入して",
-      ]),
-      displayMath(String.raw`Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}`),
-      paragraph(["を得る。"]),
-      paragraph([
-        "以上の各ステップは有限和の組み替えと数え上げだけからなり、",
+        "以上は有限和の組み替えと数え上げだけからなり、",
         math(String.raw`x`),
         " への代入を行っていない。実数体も複素数体も現れない。",
       ]),
@@ -619,48 +579,26 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
       ]),
     ],
     proof: [
+      displayMath(String.raw`\begin{aligned}
+\sum_{m=0}^{2L^2}\Omega_L(m)
+&=\sum_{m=0}^{2L^2}|A_{L,m}|
+&&(\because\ \text{多重度の定義})\\
+&=|\Sigma_L|
+&&(\because\ \text{配位全体は破れボンド数の値ごとに類別される})\\
+&=2^{L^2}
+&&(\because\ \text{配位の定義})
+\end{aligned}`),
       paragraph([
-        "Step 1（多重度を類の元の個数として読む）。",
+        "引いたブロック: ",
         ref("def_multiplicity"),
-        " により、",
-        math(String.raw`\Omega_L(m)`),
-        " は ",
+        "、",
         ref("claim_configuration_partition"),
-        " の集合 ",
-        math(String.raw`A_{L,m}`),
-        " の元の個数 ",
-        math(String.raw`|A_{L,m}|`),
-        " である。",
-      ]),
-      paragraph([
-        "Step 2（類別）。",
-        ref("claim_configuration_partition"),
-        " により、",
-        math(String.raw`\{A_{L,m}\}_{m=0}^{2L^2}`),
-        " は ",
-        math(String.raw`\Sigma_L`),
-        " の互いに素な有限個の部分集合への分割である。",
-      ]),
-      paragraph([
-        "Step 3（有限集合の分割の元の個数）。互いに素な有限個の有限集合の合併の元の個数は、",
-        "各集合の元の個数の和である。Step 2 の分割にこれを適用して",
-      ]),
-      displayMath(String.raw`|\Sigma_L|=\sum_{m=0}^{2L^2}|A_{L,m}|=\sum_{m=0}^{2L^2}\Omega_L(m)`),
-      paragraph(["を得る（最後の等号は Step 1）。"]),
-      paragraph([
-        "Step 4（配位の総数）。",
+        "、",
         ref("def_configuration"),
-        " により ",
-        math(String.raw`|\Sigma_L|=2^{L^2}`),
-        " である。",
+        "。",
       ]),
       paragraph([
-        "Step 5（結論）。Step 3 の左辺へ Step 4 を代入して ",
-        math(String.raw`\sum_{m=0}^{2L^2}\Omega_L(m)=2^{L^2}`),
-        " を得る。",
-      ]),
-      paragraph([
-        "以上の各ステップは有限集合の元の個数の計算だけからなり、実数体も複素数体も現れない。",
+        "以上は有限集合の元の個数の計算だけからなり、実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -1339,103 +1277,53 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
     ],
     proof: [
       paragraph([
-        "Step 1（表示を取る）。",
-        ref("def_rational_log"),
-        " により、1 以上の整数 ",
+        "1 以上の整数 ",
         math(String.raw`a_1,b_1,a_2,b_2`),
         " を取って ",
         math(String.raw`q_1=a_1/b_1`),
         "、",
         math(String.raw`q_2=a_2/b_2`),
-        " と書ける。",
-      ]),
-      paragraph([
-        "Step 2（積の表示を作る）。有理数の積の定義より",
-      ]),
-      displayMath(String.raw`q_1q_2=\frac{a_1a_2}{b_1b_2}`),
-      paragraph([
-        "である。",
-        math(String.raw`a_1a_2`),
-        " と ",
-        math(String.raw`b_1b_2`),
-        " はいずれも 1 以上の整数の積なので 1 以上の整数であり、右辺は ",
-        math(String.raw`q_1q_2`),
-        " の表示として ",
-        ref("def_rational_log"),
-        " の条件を満たす。",
-      ]),
-      paragraph([
-        "Step 3（積の指数を書く）。素数 ",
-        math(String.raw`p\in\mathcal{P}`),
-        " を固定する。",
-        ref("def_rational_log"),
-        " の ",
-        math(String.raw`w_p`),
-        " は表示の取り方によらない（",
-        ref("claim_rational_exponent_well_defined"),
-        "）ので、Step 2 の表示で計算してよく",
-      ]),
-      displayMath(String.raw`w_p(q_1q_2)=v_p(a_1a_2)-v_p(b_1b_2)`),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 4（指数の加法性）。",
-        ref("def_prime_exponent"),
-        " の指数の加法性を右辺の 2 項へ適用して",
-      ]),
-      displayMath(
-        String.raw`v_p(a_1a_2)=v_p(a_1)+v_p(a_2),\qquad v_p(b_1b_2)=v_p(b_1)+v_p(b_2)`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 5（並べ替える）。Step 4 を Step 3 へ代入すると",
-      ]),
-      displayMath(
-        String.raw`w_p(q_1q_2)=\bigl(v_p(a_1)+v_p(a_2)\bigr)-\bigl(v_p(b_1)+v_p(b_2)\bigr)`,
-      ),
-      paragraph([
-        "であり、この等式は ",
-        math(String.raw`\mathbb{Z}`),
-        " の中の等式なので、加法の可換性と結合性により右辺を並べ替えて",
-      ]),
-      displayMath(
-        String.raw`w_p(q_1q_2)=\bigl(v_p(a_1)-v_p(b_1)\bigr)+\bigl(v_p(a_2)-v_p(b_2)\bigr)=w_p(q_1)+w_p(q_2)`,
-      ),
-      paragraph([
-        "を得る（最後の等号は ",
-        ref("def_rational_log"),
-        " と Step 1 の表示）。",
-      ]),
-      paragraph([
-        "Step 6（",
-        math(String.raw`\Lambda`),
-        " の等式へ移す）。",
-        ref("def_rational_log"),
-        " により ",
-        math(String.raw`\log q`),
-        " は写像 ",
-        math(String.raw`p\mapsto w_p(q)`),
-        " そのものであり、",
-        ref("def_log_order_group"),
-        " により ",
-        math(String.raw`\Lambda`),
-        " の加法は素数ごとの ",
-        math(String.raw`\mathbb{Z}`),
-        " の加法である。したがって各素数 ",
+        " と書く。素数 ",
         math(String.raw`p`),
-        " について",
+        " を固定すると",
       ]),
-      displayMath(
-        String.raw`\bigl(\log(q_1q_2)\bigr)(p)=w_p(q_1q_2)=w_p(q_1)+w_p(q_2)=\bigl(\log q_1+\log q_2\bigr)(p)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\log(q_1q_2)\bigr)(p)
+&=w_p(q_1q_2)
+&&(\because\ \text{正の有理数の対数の定義})\\
+&=w_p\Bigl(\frac{a_1a_2}{b_1b_2}\Bigr)
+&&(\because\ \text{有理数の積の定義})\\
+&=v_p(a_1a_2)-v_p(b_1b_2)
+&&(\because\ \text{正の有理数の対数の定義、有理数の指数は表示によらない})\\
+&=\bigl(v_p(a_1)+v_p(a_2)\bigr)-\bigl(v_p(b_1)+v_p(b_2)\bigr)
+&&(\because\ \text{素因数分解の指数の加法性})\\
+&=\bigl(v_p(a_1)-v_p(b_1)\bigr)+\bigl(v_p(a_2)-v_p(b_2)\bigr)
+&&(\because\ \mathbb{Z}\ \text{の加法の可換性と結合性})\\
+&=w_p(q_1)+w_p(q_2)
+&&(\because\ \text{正の有理数の対数の定義})\\
+&=\bigl(\log q_1+\log q_2\bigr)(p)
+&&(\because\ \Lambda\ \text{の加法は素数ごとの }\mathbb{Z}\text{ の加法})
+\end{aligned}`),
       paragraph([
-        "が成り立つ（第 2 の等号は Step 5）。写像としてすべての素数で値が等しいので、",
+        "が成り立つ。写像としてすべての素数で値が等しいので、",
         math(String.raw`\Lambda`),
         " の元として ",
         math(String.raw`\log(q_1q_2)=\log q_1+\log q_2`),
         " である。",
       ]),
       paragraph([
-        "以上の各ステップは整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
+        "引いたブロック: ",
+        ref("def_rational_log"),
+        "、",
+        ref("claim_rational_exponent_well_defined"),
+        "、",
+        ref("def_prime_exponent"),
+        "、",
+        ref("def_log_order_group"),
+        "。",
+      ]),
+      paragraph([
+        "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
         "指数関数も実対数も使っていない。",
       ]),
     ],
@@ -1511,49 +1399,40 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
         " も零写像なので、両辺は等しい。",
       ]),
       paragraph([
-        "Step 2（帰納法の仮定）。ある ",
+        "Step 2（帰納法の段）。ある ",
         math(String.raw`k\in\mathbb{N}`),
         " について ",
         math(String.raw`\log(q^{\,k})=k\,\log q`),
-        " が成り立つとする。",
+        " が成り立つとすると",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(q^{\,k+1}\bigr)
+&=\log\bigl(q^{\,k}\cdot q\bigr)
+&&(\because\ \text{冪の定義})\\
+&=\log\bigl(q^{\,k}\bigr)+\log q
+&&(\because\ \text{対数の加法性、}q^{\,k},q\in\mathbb{Q}_{>0})\\
+&=k\,\log q+\log q
+&&(\because\ \text{帰納法の仮定})\\
+&=(k+1)\,\log q
+&&(\because\ \Lambda\ \text{の整数倍の定義と }\mathbb{Z}\ \text{の分配則})
+\end{aligned}`),
       paragraph([
-        "Step 3（1 つ増やす）。冪の定義より ",
-        math(String.raw`q^{\,k+1}=q^{\,k}\cdot q`),
-        " である。",
-        math(String.raw`q^{\,k}`),
-        " と ",
-        math(String.raw`q`),
-        " はいずれも正の有理数なので（正の有理数の積は正の有理数）、",
-        ref("claim_log_additive"),
-        " を適用して",
-      ]),
-      displayMath(String.raw`\log\bigl(q^{\,k+1}\bigr)=\log\bigl(q^{\,k}\bigr)+\log q`),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 4（帰納法の仮定を代入する）。Step 2 を Step 3 の右辺へ代入して",
-      ]),
-      displayMath(String.raw`\log\bigl(q^{\,k+1}\bigr)=k\,\log q+\log q`),
-      paragraph([
-        "を得る。",
-        ref("def_log_order_group"),
-        " の整数倍の定義より、各素数 ",
-        math(String.raw`p`),
-        " について右辺の値は ",
-        math(String.raw`k\cdot(\log q)(p)+(\log q)(p)=(k+1)\cdot(\log q)(p)`),
-        " である（",
-        math(String.raw`\mathbb{Z}`),
-        " の中の分配則）。したがって ",
-        math(String.raw`\log(q^{\,k+1})=(k+1)\,\log q`),
-        " である。",
-      ]),
-      paragraph([
-        "Step 5（結論）。Step 1 と Step 3–4 により、",
-        "すべての ",
+        "となる。したがって Step 1 と合わせて、すべての ",
         math(String.raw`k\in\mathbb{N}`),
         " について ",
         math(String.raw`\log(q^{\,k})=k\,\log q`),
         " が成り立つ。",
+      ]),
+      paragraph([
+        "引いたブロック: ",
+        ref("claim_log_additive"),
+        "、",
+        ref("def_log_order_group"),
+        "、",
+        ref("def_rational_log"),
+        "、",
+        ref("def_prime_exponent"),
+        "。",
       ]),
     ],
   },
@@ -1601,105 +1480,46 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
       ]),
     ],
     proof: [
+      displayMath(String.raw`\begin{aligned}
+\Phi_L(1)
+&=\log Z_L(1)
+&&(\because\ \text{有限系の自由エントロピーの定義、}1\in\mathbb{Q}_{>0})\\
+&=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\cdot1^{\,m}\Bigr)
+&&(\because\ \text{分配多項式の係数は多重度である、代入は環準同型})\\
+&=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\Bigr)
+&&(\because\ 1^{\,m}=1)\\
+&=\log\bigl(2^{L^2}\bigr)
+&&(\because\ \text{多重度の総和は配位の総数に等しい})\\
+&=L^2\,\log 2
+&&(\because\ \text{対数の冪の法則、}2\in\mathbb{Q}_{>0},\ L^2\in\mathbb{N})\\
+&=L^2\sum_{p:\ w_p(2)\ne0}w_p(2)\,\ell_p
+&&(\because\ \text{正の有理数の対数の定義})\\
+&=L^2\sum_{p:\ v_p(2)\ne0}v_p(2)\,\ell_p
+&&(\because\ w_p(2)=v_p(2)-v_p(1),\ v_p(1)=0)\\
+&=L^2\,\ell_2
+&&(\because\ 2\text{ は素数なので }v_2(2)=1,\ p\ne2\ \Rightarrow\ v_p(2)=0)
+\end{aligned}`),
       paragraph([
-        "Step 1（代入を係数表示で書く）。",
-        ref("claim_coefficient_representation"),
-        " により ",
-        math(String.raw`Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}`),
-        " である。",
-        ref("def_partition_polynomial"),
-        " の約束どおり、代入は係数環 ",
-        math(String.raw`\mathbb{Z}`),
-        " から ",
-        math(String.raw`\mathbb{Q}`),
-        " への包含と ",
-        math(String.raw`x\mapsto1`),
-        " で定まる環準同型による像である。環準同型は和と積を保つので",
-      ]),
-      displayMath(String.raw`Z_L(1)=\sum_{m=0}^{2L^2}\Omega_L(m)\cdot1^{\,m}=\sum_{m=0}^{2L^2}\Omega_L(m)`),
-      paragraph([
-        "を得る（最後の等号は ",
-        math(String.raw`1^{\,m}=1`),
-        "）。",
-      ]),
-      paragraph([
-        "Step 2（多重度の総和）。",
-        ref("claim_coefficient_sum"),
-        " により ",
-        math(String.raw`\sum_{m=0}^{2L^2}\Omega_L(m)=2^{L^2}`),
-        " なので、Step 1 と合わせて ",
-        math(String.raw`Z_L(1)=2^{L^2}`),
-        " である。これは 1 以上の整数であり、とくに正の有理数である。",
-      ]),
-      paragraph([
-        "Step 3（自由エントロピーの定義を使う）。",
-        math(String.raw`1\in\mathbb{Q}_{>0}`),
-        " なので ",
+        "引いたブロック: ",
         ref("def_finite_free_entropy"),
-        " が適用でき、Step 2 を代入して",
-      ]),
-      displayMath(String.raw`\Phi_L(1)=\log Z_L(1)=\log\bigl(2^{L^2}\bigr)`),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 4（冪の法則）。",
-        math(String.raw`2\in\mathbb{Q}_{>0}`),
-        " と ",
-        math(String.raw`L^2\in\mathbb{N}`),
-        " に ",
-        ref("claim_log_power"),
-        " を適用して",
-      ]),
-      displayMath(String.raw`\log\bigl(2^{L^2}\bigr)=L^2\,\log 2`),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 5（",
-        math(String.raw`\log 2`),
-        " を求める）。",
-        math(String.raw`2`),
-        " は表示 ",
-        math(String.raw`2/1`),
-        " を持つので、",
-        ref("def_rational_log"),
-        " より各素数 ",
-        math(String.raw`p`),
-        " について ",
-        math(String.raw`w_p(2)=v_p(2)-v_p(1)=v_p(2)`),
-        " である（",
-        math(String.raw`v_p(1)=0`),
-        " は ",
-        ref("def_prime_exponent"),
-        "）。",
-        math(String.raw`2`),
-        " は素数なのでその素因数分解は ",
-        math(String.raw`2=2^{1}`),
-        " であり、",
-        ref("def_prime_exponent"),
-        " より ",
-        math(String.raw`v_2(2)=1`),
         "、",
-        math(String.raw`2`),
-        " と異なる素数 ",
-        math(String.raw`p`),
-        " については ",
-        math(String.raw`v_p(2)=0`),
-        " である。したがって写像 ",
-        math(String.raw`p\mapsto w_p(2)`),
-        " は ",
+        ref("claim_value_at_rational_is_positive"),
+        "、",
+        ref("claim_coefficient_representation"),
+        "、",
+        ref("claim_coefficient_sum"),
+        "、",
+        ref("claim_log_power"),
+        "、",
+        ref("def_rational_log"),
+        "、",
+        ref("def_prime_exponent"),
+        "、",
         ref("def_log_order_group"),
-        " の ",
-        math(String.raw`\ell_2`),
-        " そのものであり、",
-        math(String.raw`\log 2=\ell_2`),
-        " である。",
+        "。",
       ]),
       paragraph([
-        "Step 6（結論）。Step 3、Step 4、Step 5 をこの順につないで",
-      ]),
-      displayMath(String.raw`\Phi_L(1)=\log\bigl(2^{L^2}\bigr)=L^2\,\log 2=L^2\,\ell_2`),
-      paragraph(["を得る。"]),
-      paragraph([
-        "以上の各ステップは有限和の数え上げ、整数の演算、素因数分解だけからなり、",
-        "実数体も複素数体も現れない。",
+        "以上は有限和の数え上げ、整数の演算、素因数分解だけからなり、実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -2820,6 +2640,412 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
   },
 
   {
+    id: "transfer_matrix_definition_row_walk",
+    kind: "definition",
+    title: { text: "行配位の道と、道に沿った成分の積" },
+    labels: ["def_row_walk", "def_walk_weight"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.TransferMatrix.RowWalk",
+      "Ising2DLambda.TransferMatrix.rowWalksBetween",
+      "Ising2DLambda.TransferMatrix.walkWeight",
+    ],
+    statement: [
+      paragraph([
+        "整数 ",
+        math(String.raw`k\ge1`),
+        " を固定する。長さ ",
+        math(String.raw`k`),
+        " の道とは写像",
+      ]),
+      displayMath(String.raw`p:\{0,1,\dots,k\}\to R_L`),
+      paragraph([
+        "のことであり（",
+        math(String.raw`R_L`),
+        " は ",
+        ref("def_row_configuration"),
+        "）、その全体の集合を ",
+        math(String.raw`W_{L,k}`),
+        " と書く。定義域は整数の集合 ",
+        math(String.raw`\{0,1,\dots,k\}`),
+        " であって剰余類の集合ではない。",
+        ref("def_row_family"),
+        " の行配位の族 ",
+        math(String.raw`c:\mathbb{Z}/L\mathbb{Z}\to R_L`),
+        " とは定義域が違う別の対象である（族は ",
+        math(String.raw`L`),
+        " 個の行を周期的に並べたもの、道は ",
+        math(String.raw`k+1`),
+        " 個の行配位を一列に並べたものである）。",
+      ]),
+      paragraph([
+        "両端を指定した道の全体を、",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " に対し",
+      ]),
+      displayMath(
+        String.raw`W_{L,k}(\tau,\tau''):=\bigl\{\,p\in W_{L,k} \;\bigm|\; p(0)=\tau,\ p(k)=\tau''\,\bigr\}`,
+      ),
+      paragraph([
+        "と書く。",
+        math(String.raw`W_{L,k}`),
+        " は有限集合 ",
+        math(String.raw`R_L`),
+        " への写像の全体なので有限集合であり、",
+        math(String.raw`W_{L,k}(\tau,\tau'')`),
+        " はその部分集合なので有限集合である。",
+      ]),
+      paragraph([
+        "行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        "（",
+        ref("def_matrix_over_row_configs"),
+        "）と道 ",
+        math(String.raw`p\in W_{L,k}`),
+        " に対し、道に沿った成分の積を",
+      ]),
+      displayMath(
+        String.raw`w_A(p):=\prod_{i=0}^{k-1}A_{p(i),\,p(i+1)}\ \in\ \mathbb{Z}[x]`,
+      ),
+      paragraph([
+        "で定める。積の添字 ",
+        math(String.raw`i`),
+        " は整数として ",
+        math(String.raw`0`),
+        " から ",
+        math(String.raw`k-1`),
+        " まで動かし、",
+        math(String.raw`i+1`),
+        " も整数の足し算である（剰余は取らない）。因子は ",
+        math(String.raw`k`),
+        " 個であり、有限個の ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元の積なので右辺は確定する。",
+      ]),
+      paragraph([
+        "記号について。",
+        math(String.raw`w_A`),
+        " の添字 ",
+        math(String.raw`A`),
+        " は、どの行列の成分を掛けるかを表す。",
+        ref("def_transfer_matrix"),
+        " の転送行列 ",
+        math(String.raw`T`),
+        " について使うときは ",
+        math(String.raw`w_T(p)`),
+        " と書く。",
+      ]),
+    ],
+  },
+
+  {
+    id: "transfer_matrix_claim_matrix_pow_entry",
+    kind: "claim",
+    title: { text: "行列の冪の成分は、道に沿った成分の積の和である" },
+    labels: ["claim_matrix_pow_entry"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.TransferMatrix.rowMatrixPow_apply",
+      "Ising2DLambda.TransferMatrix.rowMatrixPow_apply_from_necSuf",
+      "Ising2DLambda.NecSuf.TransferMatrix.matrixPow_apply_eq_sum_walkWeight",
+    ],
+    verification: ["sagemath/check/transfer-matrix-power-entry"],
+    statement: [
+      paragraph([
+        "任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        "、任意の整数 ",
+        math(String.raw`k\ge1`),
+        "、任意の行配位 ",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " について、",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中で",
+      ]),
+      displayMath(
+        String.raw`\bigl(A^{k}\bigr)_{\tau,\tau''}=\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)`,
+      ),
+      paragraph([
+        "が成り立つ（冪は ",
+        ref("def_matrix_over_row_configs"),
+        "、",
+        math(String.raw`W_{L,k}(\tau,\tau'')`),
+        " と ",
+        math(String.raw`w_A`),
+        " は ",
+        ref("def_row_walk"),
+        "）。右辺は有限集合の上の和なので ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元として確定する。",
+      ]),
+      paragraph([
+        "両辺とも ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "行列 ",
+        math(String.raw`A`),
+        " を固定し、",
+        math(String.raw`k`),
+        " についての帰納法で示す。主張は ",
+        math(String.raw`\tau,\tau''`),
+        " についての全称命題の形で帰納法を回す（帰納法の仮定を、後で別の組 ",
+        math(String.raw`(\tau,\tau'')`),
+        " に対して使うため）。",
+      ]),
+      paragraph([
+        "Step 1（",
+        math(String.raw`k=1`),
+        " の場合）。",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " を任意に取る。",
+        math(String.raw`W_{L,1}(\tau,\tau'')`),
+        " の元 ",
+        math(String.raw`p`),
+        " は定義域 ",
+        math(String.raw`\{0,1\}`),
+        " 上の写像であって ",
+        math(String.raw`p(0)=\tau`),
+        " と ",
+        math(String.raw`p(1)=\tau''`),
+        " を満たすものであり、この 2 つの値で写像が決まる。",
+        "したがって ",
+        math(String.raw`W_{L,1}(\tau,\tau'')`),
+        " はちょうど 1 つの元 ",
+        math(String.raw`p`),
+        " をもつ。その道の重みは、",
+        ref("def_row_walk"),
+        " により因子が 1 個の積なので",
+      ]),
+      displayMath(
+        String.raw`w_A(p)=\prod_{i=0}^{0}A_{p(i),\,p(i+1)}=A_{p(0),\,p(1)}=A_{\tau,\tau''}`,
+      ),
+      paragraph([
+        "である。ゆえに右辺は ",
+        math(String.raw`A_{\tau,\tau''}`),
+        " に等しい。一方 ",
+        ref("def_matrix_over_row_configs"),
+        " の冪の定義により ",
+        math(String.raw`A^{1}=A`),
+        " なので、左辺も ",
+        math(String.raw`A_{\tau,\tau''}`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 2（帰納法の仮定）。ある整数 ",
+        math(String.raw`k\ge1`),
+        " について、任意の ",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " で",
+      ]),
+      displayMath(
+        String.raw`\bigl(A^{k}\bigr)_{\tau,\tau''}=\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)`,
+      ),
+      paragraph([
+        "が成り立つと仮定する。以下、",
+        math(String.raw`\tau,\tau'''\in R_L`),
+        " を任意に取り、",
+        math(String.raw`k+1`),
+        " の場合を示す。",
+      ]),
+      paragraph([
+        "Step 3（冪と積の定義を使う）。",
+        ref("def_matrix_over_row_configs"),
+        " の冪の定義により ",
+        math(String.raw`A^{k+1}=A^{k}A`),
+        " であり、同じ定義の積により",
+      ]),
+      displayMath(
+        String.raw`\bigl(A^{k+1}\bigr)_{\tau,\tau'''}
+=\sum_{\tau''\in R_L}\bigl(A^{k}\bigr)_{\tau,\tau''}\,A_{\tau'',\tau'''}`,
+      ),
+      paragraph(["である。"]),
+      paragraph([
+        "Step 4（帰納法の仮定を代入する）。Step 2 を各 ",
+        math(String.raw`\tau''\in R_L`),
+        " について使うと",
+      ]),
+      displayMath(
+        String.raw`\sum_{\tau''\in R_L}\bigl(A^{k}\bigr)_{\tau,\tau''}\,A_{\tau'',\tau'''}
+=\sum_{\tau''\in R_L}\Bigl(\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\Bigr)A_{\tau'',\tau'''}`,
+      ),
+      paragraph(["を得る。"]),
+      paragraph([
+        "Step 5（分配則で括弧を外す）。有限和と ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の 1 つの元との積は項ごとの積の和に等しいので",
+      ]),
+      displayMath(
+        String.raw`\sum_{\tau''\in R_L}\Bigl(\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\Bigr)A_{\tau'',\tau'''}
+=\sum_{\tau''\in R_L}\ \sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\,A_{\tau'',\tau'''}`,
+      ),
+      paragraph(["である。"]),
+      paragraph([
+        "Step 6（道の延長が 1 対 1 対応であること）。組の集合",
+      ]),
+      displayMath(
+        String.raw`P:=\bigl\{\,(\tau'',p) \;\bigm|\; \tau''\in R_L,\ p\in W_{L,k}(\tau,\tau'')\,\bigr\}`,
+      ),
+      paragraph([
+        "から ",
+        math(String.raw`W_{L,k+1}(\tau,\tau''')`),
+        " への写像 ",
+        math(String.raw`\Phi`),
+        " を、",
+        math(String.raw`\Phi(\tau'',p)=q`),
+        " が",
+      ]),
+      displayMath(
+        String.raw`q(i):=p(i)\quad(0\le i\le k),\qquad q(k+1):=\tau'''`,
+      ),
+      paragraph([
+        "で与えられる写像 ",
+        math(String.raw`q:\{0,1,\dots,k+1\}\to R_L`),
+        " であるとして定める。",
+        math(String.raw`q(0)=p(0)=\tau`),
+        " と ",
+        math(String.raw`q(k+1)=\tau'''`),
+        " より ",
+        math(String.raw`q\in W_{L,k+1}(\tau,\tau''')`),
+        " である。逆向きの写像 ",
+        math(String.raw`\Psi`),
+        " を、",
+        math(String.raw`q\in W_{L,k+1}(\tau,\tau''')`),
+        " に対し",
+      ]),
+      displayMath(
+        String.raw`\Psi(q):=\bigl(q(k),\ q|_{\{0,1,\dots,k\}}\bigr)`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`q|_{\{0,1,\dots,k\}}`),
+        " は定義域を狭めた写像）。狭めた写像は ",
+        math(String.raw`0`),
+        " で ",
+        math(String.raw`\tau`),
+        " をとり ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`q(k)`),
+        " をとるので ",
+        math(String.raw`W_{L,k}(\tau,q(k))`),
+        " の元であり、",
+        math(String.raw`\Psi(q)\in P`),
+        " である。",
+      ]),
+      paragraph([
+        "この 2 つが互いに逆であることを見る。",
+        math(String.raw`(\tau'',p)\in P`),
+        " に対し、",
+        math(String.raw`\Phi(\tau'',p)`),
+        " の定義域を ",
+        math(String.raw`\{0,1,\dots,k\}`),
+        " へ狭めたものは ",
+        math(String.raw`p`),
+        " であり、その ",
+        math(String.raw`k`),
+        " での値は ",
+        math(String.raw`p(k)=\tau''`),
+        " なので ",
+        math(String.raw`\Psi(\Phi(\tau'',p))=(\tau'',p)`),
+        " である。逆に ",
+        math(String.raw`q\in W_{L,k+1}(\tau,\tau''')`),
+        " に対し、",
+        math(String.raw`\Phi(\Psi(q))`),
+        " は ",
+        math(String.raw`0\le i\le k`),
+        " で ",
+        math(String.raw`q(i)`),
+        " をとり、",
+        math(String.raw`k+1`),
+        " で ",
+        math(String.raw`\tau'''=q(k+1)`),
+        " をとるので、写像として ",
+        math(String.raw`q`),
+        " に等しい。ゆえに ",
+        math(String.raw`\Phi`),
+        " は全単射である。",
+      ]),
+      paragraph([
+        "Step 7（対応する項が等しいこと）。",
+        math(String.raw`(\tau'',p)\in P`),
+        " と ",
+        math(String.raw`q=\Phi(\tau'',p)`),
+        " について、",
+        ref("def_row_walk"),
+        " の定義により",
+      ]),
+      displayMath(
+        String.raw`w_A(q)=\prod_{i=0}^{k}A_{q(i),\,q(i+1)}
+=\Bigl(\prod_{i=0}^{k-1}A_{q(i),\,q(i+1)}\Bigr)A_{q(k),\,q(k+1)}`,
+      ),
+      paragraph([
+        "である（最後の因子を分けた。因子が ",
+        math(String.raw`k+1`),
+        " 個あるうちの ",
+        math(String.raw`i=k`),
+        " の項である）。",
+        math(String.raw`0\le i\le k`),
+        " では ",
+        math(String.raw`q(i)=p(i)`),
+        " なので括弧の中は ",
+        math(String.raw`w_A(p)`),
+        " に等しく、",
+        math(String.raw`q(k)=p(k)=\tau''`),
+        " と ",
+        math(String.raw`q(k+1)=\tau'''`),
+        " なので",
+      ]),
+      displayMath(String.raw`w_A(q)=w_A(p)\,A_{\tau'',\tau'''}`),
+      paragraph(["である。"]),
+      paragraph([
+        "Step 8（和を書き換える）。Step 5 の右辺は、組の集合 ",
+        math(String.raw`P`),
+        " の上の和",
+      ]),
+      displayMath(
+        String.raw`\sum_{(\tau'',p)\in P}w_A(p)\,A_{\tau'',\tau'''}`,
+      ),
+      paragraph([
+        "と同じものである（有限個の互いに素な集合にわたる二重和を、その合併の上の 1 つの和として読み替えた。",
+        "組の第 1 成分ごとに分ければもとの二重和に戻る）。Step 6 の全単射 ",
+        math(String.raw`\Phi`),
+        " に沿って添字を取り替え、Step 7 で各項を書き換えると",
+      ]),
+      displayMath(
+        String.raw`\sum_{(\tau'',p)\in P}w_A(p)\,A_{\tau'',\tau'''}
+=\sum_{q\in W_{L,k+1}(\tau,\tau''')}w_A(q)`,
+      ),
+      paragraph([
+        "を得る。Step 3 から Step 8 をつなぐと",
+      ]),
+      displayMath(
+        String.raw`\bigl(A^{k+1}\bigr)_{\tau,\tau'''}=\sum_{q\in W_{L,k+1}(\tau,\tau''')}w_A(q)`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\tau,\tau'''`),
+        " は任意だったので ",
+        math(String.raw`k+1`),
+        " の場合が示された。",
+      ]),
+      paragraph([
+        "Step 9（結論）。Step 1 と Step 2–Step 8 より、",
+        math(String.raw`k\ge1`),
+        " についての帰納法で主張が成り立つ。",
+      ]),
+      paragraph([
+        "以上の各ステップは有限個の ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元の和と積、および有限集合の間の 1 対 1 対応だけからなり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
@@ -2847,8 +3073,12 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
           math(String.raw`Z_L=\operatorname{Tr}\bigl(T^L\bigr)`),
           " を示す。転送行列 ",
           math(String.raw`T`),
-          " の定義と、配位の重みが行に沿った成分の積であることまでは上で済んでいる。",
-          "残るのは冪の成分を行配位の族にわたる和として書き下すことである。",
+          " の定義、配位の重みが行に沿った成分の積であること、および行列の冪の成分が",
+          "道に沿った成分の積の和であることまでは上で済んでいる。",
+          "残るのは、トレースを取ると両端が一致する道にわたる和になることと、",
+          "その道の全体が ",
+          ref("def_row_family"),
+          " の行配位の族の全体と 1 対 1 に対応することである。",
         ],
         [
           todo("未着手"),
