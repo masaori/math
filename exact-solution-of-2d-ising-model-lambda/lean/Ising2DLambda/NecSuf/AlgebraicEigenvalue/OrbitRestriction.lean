@@ -16,8 +16,13 @@
 1. `O.image φ = O`（`restrictionOf` と `restriction_bijective`）。制限が O から O への
    写像として定まること（行き先が O に収まること）と、全射性の両方に要る。
    人手証明が `claim_orbit_preserving_image` から出している段にあたる。
-   包含 `O.image φ ⊆ O` だけへ弱めると写像としては定まるが**全射性が出ない**
-   （反例: ι を有限にしなければ、像が真に小さい部分集合になる）。
+   包含 `O.image φ ⊆ O` へ弱めても、**φ が単射で O が有限（`Finset`）である限りは
+   個数の議論で等号が復元されるので全射性は出る**（`Finset.card_image_of_injective` と
+   `Finset.eq_of_subset_of_card_le`。これは人手証明の `claim_orbit_preserving_image` が
+   踏んでいる段そのものである）。ここで等号を仮定に置いているのは、人手証明がその段を
+   別の主張として先に済ませており、証明手順を具体版と揃えるためである。
+   包含が真に弱くなるのは**単射性を落として一般の写像にしたとき**で、そのときは全射性が出ない
+   （反例: `O = {a, b}`、`f a = f b = a` とすると `O.image f = {a} ⊆ O` だが制限は全射でない）。
 2. `DecidableEq ι`。`Finset.image` を書くために要る。
 3. 覆うこと `∀ i, ∃ O ∈ 𝒪, i ∈ O`（`eq_of_agree_on_cover`）。
    **軌道どうしが互いに素であることは使っていない。** 人手証明もこの段では
