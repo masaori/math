@@ -42,6 +42,10 @@ variable [Semiring S]
 /-- 人手証明の `D_n`（次数が `n` 以下である元の全体）。 -/
 def DegLe (f : Polynomial S) (n : ℕ) : Prop := ∀ k : ℕ, n < k → f.coeff k = 0
 
+/-- `D_n ⊂ D_{n'}`（`n ≤ n'` のとき）。人手証明が定義の中で述べていること。 -/
+theorem DegLe.mono {f : Polynomial S} {n n' : ℕ} (h : DegLe f n) (hn : n ≤ n') : DegLe f n' :=
+  fun k hk => h k (lt_of_le_of_lt hn hk)
+
 /-- 人手証明の `M_n`（モニックな次数 `n` の元の全体）。 -/
 def MonicDeg (f : Polynomial S) (n : ℕ) : Prop := DegLe f n ∧ f.coeff n = 1
 

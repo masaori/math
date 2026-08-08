@@ -4897,6 +4897,563 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
+    id: "algebraic_eigenvalue_definition_second_matrix",
+    kind: "definition",
+    title: { text: "もう 1 つの不定元の多項式を成分とする、行配位を添字とする行列" },
+    labels: ["def_second_matrix"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondRowMatrix"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " と同じ形の行列を、成分が ",
+        ref("def_second_polynomial_ring"),
+        " の ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " である場合について書き下す。すなわち写像 ",
+        math(String.raw`B:R_L\times R_L\to\mathbb{Z}[x][t]`),
+        " のことを行列と呼び、その全体の集合を ",
+        math(String.raw`\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        " と書く。値 ",
+        math(String.raw`B(\tau,\tau')`),
+        " を成分と呼び ",
+        math(String.raw`B_{\tau,\tau'}`),
+        " と書く。",
+      ]),
+      paragraph([
+        "成分の住む集合が違うので、",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " とは別の集合である。",
+        "一般の可換環を成分とする行列としてまとめて述べることはしない",
+        "（人手証明は具体的な対象について書く。抽象化は Lean の必要十分版の側で行う）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_second_determinant",
+    kind: "definition",
+    title: { text: "もう 1 つの不定元の多項式を成分とする行列の行列式" },
+    labels: ["def_second_determinant"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.secondDeterminant"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_second_matrix"),
+        " の行列 ",
+        math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        " の行列式 ",
+        math(String.raw`\mathrm{det}_{t}\,B\in\mathbb{Z}[x][t]`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\mathrm{det}_{t}\,B:=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`\mathfrak{S}_L`),
+        " と ",
+        math(String.raw`\mathrm{sgn}`),
+        " は ",
+        ref("def_permutation_sign"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "）。",
+        "整数である符号を ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元として使う経路は ",
+        math(String.raw`\iota\circ\kappa`),
+        " だけであり、新しい写像は導入しない。",
+      ]),
+      paragraph([
+        ref("def_determinant"),
+        " の ",
+        math(String.raw`\det`),
+        " とは値の住む集合が違うので、記号を分けて ",
+        math(String.raw`\mathrm{det}_{t}`),
+        " と書く。",
+        "右辺が定まる理由は ",
+        ref("def_determinant"),
+        " と同じである。和も積も有限個の項からなり、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積は可換かつ結合的なので ",
+        math(String.raw`\prod_{\tau\in R_L}`),
+        " は因子を並べる順序によらない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_indeterminate_t",
+    kind: "definition",
+    title: { text: "不定元 t 自身が定める元" },
+    labels: ["def_indeterminate_element"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.indeterminate"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_second_polynomial_ring"),
+        " の不定元 ",
+        math(String.raw`t`),
+        " そのものを ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元と見るときの係数を書いておく。すなわち",
+      ]),
+      displayMath(String.raw`\mathrm{cf}_1(t):=\kappa(1),
+\qquad
+\mathrm{cf}_k(t):=\kappa(0)\quad(k\ne1)`),
+      paragraph([
+        "である（",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        "以下では係数の言葉だけで議論するので、この 2 つの等式が ",
+        math(String.raw`t`),
+        " について使う唯一の性質である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_characteristic_matrix",
+    kind: "definition",
+    title: { text: "転送行列の型の行列に対する特性行列" },
+    labels: ["def_characteristic_matrix"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.charMatrix"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " に対して、",
+        ref("def_second_matrix"),
+        " の行列 ",
+        math(String.raw`\mathrm{ch}(A)\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        " を",
+      ]),
+      displayMath(String.raw`\mathrm{ch}(A)_{\tau,\tau'}:=
+\begin{cases}
+t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
+\iota\bigl(-A_{\tau,\tau'}\bigr) & (\tau\ne\tau'\ \text{のとき})
+\end{cases}
+\qquad(\tau,\tau'\in R_L)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "）。",
+      ]),
+      paragraph([
+        "これは通常 ",
+        math(String.raw`tI-A`),
+        " と書かれる行列であるが、符号の反転を ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中で先に済ませてある。",
+        math(String.raw`-A_{\tau,\tau'}`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の加法についての逆元であり、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元として扱う経路は ",
+        math(String.raw`\iota`),
+        " だけである。",
+        "こう書くと、以下の議論に ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の引き算が一度も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_characteristic_polynomial",
+    kind: "definition",
+    title: { text: "転送行列の型の行列に対する特性多項式" },
+    labels: ["def_characteristic_polynomial"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.charPoly"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " の特性多項式 ",
+        math(String.raw`\chi_A\in\mathbb{Z}[x][t]`),
+        " を",
+      ]),
+      displayMath(String.raw`\chi_A:=\mathrm{det}_{t}\bigl(\mathrm{ch}(A)\bigr)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "、",
+        math(String.raw`\mathrm{det}_{t}`),
+        " は ",
+        ref("def_second_determinant"),
+        "）。",
+        "とくに ",
+        ref("def_transfer_matrix"),
+        " の転送行列 ",
+        math(String.raw`T`),
+        " に対する ",
+        math(String.raw`\chi_T`),
+        " が、この章の目標である。",
+      ]),
+      paragraph([
+        "現れるのは整数、有限和、有限積、および ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " と ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_second_const_degree_zero",
+    kind: "claim",
+    title: { text: "定数として送った元の次数は 0 以下である" },
+    labels: ["claim_second_const_degree_zero"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_constSecond",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_C",
+    ],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in\mathbb{Z}[x]`),
+        " について ",
+        math(String.raw`\iota(a)\in\mathcal{D}_0`),
+        " である（",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "、",
+        math(String.raw`\mathcal{D}_0`),
+        " は ",
+        ref("def_second_degree_bound"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k>0`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k\bigl(\iota(a)\bigr)
+&=\kappa(0)
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{と}\ k\ge1)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k>0`),
+        " を満たす ",
+        math(String.raw`k`),
+        " は任意だったので ",
+        math(String.raw`\iota(a)\in\mathcal{D}_0`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_second_linear_monic",
+    kind: "claim",
+    title: { text: "不定元に定数を足したものはモニックな次数 1 の元である" },
+    labels: ["claim_second_linear_monic"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_indeterminate_add_constSecond",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_X_add_C",
+    ],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in\mathbb{Z}[x]`),
+        " について ",
+        math(String.raw`t+\iota(a)\in\mathcal{M}_1`),
+        " である（",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\mathcal{M}_1`),
+        " は ",
+        ref("def_second_monic"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一に、",
+        math(String.raw`k>1`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k\bigl(t+\iota(a)\bigr)
+&=\mathrm{cf}_k(t)+\mathrm{cf}_k\bigl(\iota(a)\bigr)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
+&=\kappa(0)+\kappa(0)
+&&(\because\ \blkref{def_indeterminate_element}\ \text{と}\ k\ne1,\ \ \blkref{def_second_constant_embedding}\ \text{と}\ k\ge1)\\
+&=\kappa(0)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`t+\iota(a)\in\mathcal{D}_1`),
+        " である。第二に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_1\bigl(t+\iota(a)\bigr)
+&=\mathrm{cf}_1(t)+\mathrm{cf}_1\bigl(\iota(a)\bigr)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
+&=\kappa(1)+\kappa(0)
+&&(\because\ \blkref{def_indeterminate_element}\ \text{、および}\ \blkref{def_second_constant_embedding}\ \text{と}\ 1\ge1)\\
+&=\kappa(1)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "である。以上より ",
+        math(String.raw`t+\iota(a)\in\mathcal{M}_1`),
+        " を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_characteristic_polynomial_monic",
+    kind: "claim",
+    title: {
+      text: "特性多項式はモニックな次数 2^L の元である",
+    },
+    labels: ["claim_characteristic_polynomial_monic"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly",
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_charDet",
+    ],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " について",
+      ]),
+      displayMath(String.raw`\chi_A\ \in\ \mathcal{M}_{2^{L}}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\chi_A`),
+        " は ",
+        ref("def_characteristic_polynomial"),
+        "、",
+        math(String.raw`\mathcal{M}_n`),
+        " は ",
+        ref("def_second_monic"),
+        "）。",
+        "とくに ",
+        ref("def_transfer_matrix"),
+        " の転送行列について ",
+        math(String.raw`\chi_T\in\mathcal{M}_{2^{L}}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う記号を先に置く。",
+        ref("def_row_permutation"),
+        " の置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`u(\varphi):=\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\varphi(\tau)}\ \in\ \mathbb{Z}[x][t]`,
+      ),
+      paragraph([
+        "と置く（",
+        ref("def_second_determinant"),
+        " の和の各項である）。また ",
+        ref("claim_permutation_moves_two"),
+        " の ",
+        math(String.raw`M(\varphi)=\{\tau\in R_L\mid\varphi(\tau)\ne\tau\}`),
+        " を使う。",
+        math(String.raw`|R_L|=2^{L}`),
+        " であり（",
+        ref("def_row_configuration"),
+        "）、",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`2^{L}\ge2`),
+        " である。",
+      ]),
+      paragraph([
+        "準備の第一は、恒等写像の項がモニックな次数 ",
+        math(String.raw`2^{L}`),
+        " の元であることである。",
+        math(String.raw`\mathrm{id}_{R_L}(\tau)=\tau`),
+        " なので各因子は ",
+        math(String.raw`t+\iota(-A_{\tau,\tau})`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\mathrm{id}_{R_L}(\tau)}
+&=\prod_{\tau\in R_L}\bigl(t+\iota(-A_{\tau,\tau})\bigr)
+&&(\because\ \blkref{def_characteristic_matrix})\\
+&\in\ \mathcal{M}_{\,\sum_{\tau\in R_L}1}
+&&(\because\ \blkref{claim_second_linear_monic}\ \text{、}\ \blkref{claim_second_monic_prod})\\
+&=\mathcal{M}_{\,|R_L|}=\mathcal{M}_{\,2^{L}}
+&&(\because\ \blkref{def_row_configuration}\ \text{の}\ |R_L|=2^{L})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "準備の第二は、恒等写像でない ",
+        math(String.raw`\varphi`),
+        " について ",
+        math(String.raw`u(\varphi)\in\mathcal{D}_{2^{L}-2}`),
+        " であることである。各 ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`n_\tau:=0\ (\tau\in M(\varphi))`),
+        "、",
+        math(String.raw`n_\tau:=1\ (\tau\notin M(\varphi))`),
+        " と置くと、",
+        math(String.raw`\tau\in M(\varphi)`),
+        " の因子は ",
+        math(String.raw`\iota(-A_{\tau,\varphi(\tau)})\in\mathcal{D}_0`),
+        "（",
+        ref("claim_second_const_degree_zero"),
+        "）、",
+        math(String.raw`\tau\notin M(\varphi)`),
+        " の因子は ",
+        math(String.raw`t+\iota(-A_{\tau,\tau})\in\mathcal{M}_1\subset\mathcal{D}_1`),
+        "（",
+        ref("claim_second_linear_monic"),
+        "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\tau\in R_L}n_\tau
+&=|R_L|-|M(\varphi)|
+&&(\because\ n_\tau\ \text{は}\ M(\varphi)\ \text{の外でだけ}\ 1)\\
+&\le|R_L|-2
+&&(\because\ \blkref{claim_permutation_moves_two})\\
+&=2^{L}-2
+&&(\because\ \blkref{def_row_configuration}\ \text{の}\ |R_L|=2^{L})
+\end{aligned}`),
+      paragraph([
+        "なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\varphi(\tau)}
+&\in\ \mathcal{D}_{\,\sum_{\tau\in R_L}n_\tau}
+&&(\because\ \blkref{claim_second_degree_prod})\\
+&\subset\ \mathcal{D}_{\,2^{L}-2}
+&&(\because\ \blkref{def_second_degree_bound}\ \text{の}\ \mathcal{D}_n\subset\mathcal{D}_{n'}\ (n\le n'))
+\end{aligned}`),
+      paragraph([
+        "であり、係数 ",
+        math(String.raw`\iota(\kappa(\mathrm{sgn}(\varphi)))`),
+        " は ",
+        ref("claim_second_const_degree_zero"),
+        " より ",
+        math(String.raw`\mathcal{D}_0`),
+        " の元だから、2 つの元の積についての ",
+        ref("claim_second_degree_prod"),
+        " を当てて ",
+        math(String.raw`u(\varphi)\in\mathcal{D}_{0+(2^{L}-2)}=\mathcal{D}_{2^{L}-2}`),
+        " を得る。",
+      ]),
+      paragraph([
+        "準備の第三は、恒等写像でない項の総和が ",
+        math(String.raw`\mathcal{D}_{2^{L}-2}`),
+        " の元であることである。これは準備の第二と ",
+        ref("claim_second_degree_sum"),
+        " から出る。",
+      ]),
+      paragraph([
+        "以上のもとで",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_A
+&=\mathrm{det}_{t}\bigl(\mathrm{ch}(A)\bigr)
+&&(\because\ \blkref{def_characteristic_polynomial})\\
+&=\sum_{\varphi\in\mathfrak{S}_L}u(\varphi)
+&&(\because\ \blkref{def_second_determinant}\ \text{と}\ u\ \text{の定め方})\\
+&=u(\mathrm{id}_{R_L})+\sum_{\varphi\in\mathfrak{S}_L,\ \varphi\ne\mathrm{id}_{R_L}}u(\varphi)
+&&(\because\ \text{有限和から 1 つの項を括り出す})\\
+&=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\mathrm{id}_{R_L}(\tau)}+\sum_{\varphi\ne\mathrm{id}_{R_L}}u(\varphi)
+&&(\because\ \blkref{claim_permutation_sign_values}\ \text{の}\ \mathrm{sgn}(\mathrm{id}_{R_L})=1)\\
+&=\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\mathrm{id}_{R_L}(\tau)}+\sum_{\varphi\ne\mathrm{id}_{R_L}}u(\varphi)
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{の}\ \iota(\kappa(1))\ \text{は単位元})
+\end{aligned}`),
+      paragraph([
+        "である。第 1 項は準備の第一より ",
+        math(String.raw`\mathcal{M}_{2^{L}}`),
+        " の元、第 2 項は準備の第三より ",
+        math(String.raw`\mathcal{D}_{2^{L}-2}`),
+        " の元であり、",
+        math(String.raw`2^{L}\ge2`),
+        " から ",
+        math(String.raw`2^{L}-2<2^{L}`),
+        " なので、",
+        ref("claim_second_monic_add_lower"),
+        " より ",
+        math(String.raw`\chi_A\in\mathcal{M}_{2^{L}}`),
+        " を得る。",
+      ]),
+      paragraph([
+        "使ったのは ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の和と積、",
+        math(String.raw`\iota(\kappa(1))`),
+        " が単位元であること、恒等写像の符号が ",
+        math(String.raw`1`),
+        " であること、そして恒等写像でない置換が 2 点以上を動かすことだけである。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の引き算は一度も使っていない",
+        "（符号の反転は ",
+        ref("def_characteristic_matrix"),
+        " で ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中に閉じ込めてある）。",
+        "符号の乗法性（",
+        ref("claim_permutation_sign_mul"),
+        "）も使っていない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },

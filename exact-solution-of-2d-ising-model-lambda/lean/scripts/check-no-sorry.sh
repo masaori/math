@@ -118,6 +118,19 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_mul
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_prod
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_add_of_degLe
+  Ising2DLambda.AlgebraicEigenvalue.degLe_constSecond
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_indeterminate_add_constSecond
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_identity_term
+  Ising2DLambda.AlgebraicEigenvalue.degLe_term_of_ne_one
+  Ising2DLambda.AlgebraicEigenvalue.degLe_rest
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_C
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_X_add_C
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_identity_term
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_term_of_ne_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_charDet
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
