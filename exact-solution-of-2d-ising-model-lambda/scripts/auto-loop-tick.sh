@@ -26,6 +26,26 @@ log() {
 # launchd は対話シェルの PATH を持たないので、必要なものを明示的に足す。
 # claude は ~/.local/bin、sage と tectonic は Homebrew（Intel は /usr/local、Apple Silicon は /opt/homebrew）。
 PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
+# node / npm / pnpm は nvm 配下にあり、上の固定パスには入っていない。
+# 足さないと tick の中で `npm run check` も `npm run build:pdf` も実行できず、
+# 検証を通さないまま tick が終わる（実測: 2 回目の tick で npm が見つからなかった）。
+# 既定バージョンの別名（~/.nvm/alias/default）を先に見て、無ければ最も新しいものを使う。
+if [ -d "$HOME/.nvm/versions/node" ]; then
+  nvm_default="$(cat "$HOME/.nvm/alias/default" 2>/dev/null || true)"
+  nvm_bin=""
+  if [ -n "$nvm_default" ]; then
+    nvm_bin="$(ls -d "$HOME"/.nvm/versions/node/v"${nvm_default#v}"* 2>/dev/null | sort -V | tail -1)"
+  fi
+  if [ -z "$nvm_bin" ]; then
+    nvm_bin="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1)"
+  fi
+  [ -n "$nvm_bin" ] && PATH="$nvm_bin/bin:$PATH"
+fi
+
+# lake / lean は elan 配下にあり、これも固定パスには入っていない。
+[ -d "$HOME/.elan/bin" ] && PATH="$HOME/.elan/bin:$PATH"
+
 export PATH
 
 if ! command -v claude >/dev/null 2>&1; then
