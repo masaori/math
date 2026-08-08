@@ -4,22 +4,26 @@
 
 ## 現在の到達点（2026-08-08 時点）
 
-雛形を作り、章「分配多項式」の入口まで書いた。
+章「分配多項式」は、定義と主張 3 件が四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 章「分配多項式」の定義 4 件・主張 1 件・注意 1 件。`npm run check` 全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 4 件と主張「多重度の総和は配位の総数に等しい」。`lake build` と `check-no-sorry.sh` が通る |
-| Lean 必要十分版 | 同じ主張について作成済み（有限型と有界な自然数値写像だけを仮定する形） |
+| 記述（構造化テキスト） | 章「分配多項式」の定義 4 件・主張 3 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` と `partition-polynomial-coefficient-representation` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 4 件と主張 3 件。`lake build` と `check-no-sorry.sh`（定理 6 件を登録）が通る |
+| Lean 必要十分版 | 主張 3 件について作成済み。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイドだけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
 詳細は [lean/README.md](lean/README.md)。
 
-書いた内容は、格子・配位・破れボンド数・多重度・分配多項式 $Z_L(x)\in\mathbb{Z}[x]$ の定義と、
-「多重度の総和は配位の総数に等しい」（$\sum_m\Omega_L(m)=2^{L^2}$）の証明である。
-この範囲に $\mathbb{R}/\mathbb{C}$ は現れない。
+書いた内容は、格子・配位・破れボンド数・多重度・分配多項式 $Z_L\in\mathbb{Z}[x]$ の定義と、
+次の 3 つの主張の証明である。この範囲に $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- 配位全体は破れボンド数の値ごとに類別される（被覆と互いに素性）。
+- 分配多項式の係数は多重度である（$Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)x^m$）。
+  分配多項式の定義は $\sum_{\sigma}x^{b(\sigma)}$ であり、係数表示は定義ではなく主張である。
+- 多重度の総和は配位の総数に等しい（$\sum_m\Omega_L(m)=2^{L^2}$）。
 
 ## 進め方（自動ループ）
 
@@ -34,13 +38,10 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 
 ## 次回やること
 
-1. **分配多項式の係数表示 $Z_L=\sum_m\Omega_L(m)x^m$ を Lean で形式化する**
-   （人手証明の定義ブロック「分配多項式」の中の等式。定義そのものは Lean に写してあるが、
-   この等式は未証明。これが済むと章「分配多項式」の定義側が四層すべてを満たす）。
-2. **章「有限系の自由エントロピー」を書く**。$\Phi_L=\log Z_L(q)\in\Lambda$（$q\in\mathbb{Q}_{>0}$、
+1. **章「有限系の自由エントロピー」を書く**。$\Phi_L=\log Z_L(q)\in\Lambda$（$q\in\mathbb{Q}_{>0}$、
    値の素因数分解の指数ベクトル）。SageMath 検証は既に $L=1,2,3$ で
    $Z_L(1/2)=2,\ 2^{-7}\cdot353,\ 2^{-11}\cdot9859$ を出しているので、そこから始められる。
-3. **章「転送行列」**。$T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$。
+2. **章「転送行列」**。$T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$。
    指数形 $e^{K\sigma\sigma'}$ を経由しない経路で書く（README「形式変数のまま進む」）。
 
 ## 未解決の設計問題
@@ -53,6 +54,11 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 
 ## 確認事項・注意
 
+- **検証コードが本文の定義そのものを実装しているかを疑う。** `_shared/defs.sage` の
+  `partition_polynomial(L)` は当初、分配多項式を多重度ベクトルから作っていた。本文の定義は
+  配位ごとの単項式の和なので、これは定義ではなく係数表示を実装していたことになり、
+  係数表示の検証が構成から自明（＝何も確かめない）になっていた。2026-08-08 のレビューで
+  定義どおりの実装へ直し、多重度から作る側を `partition_polynomial_from_multiplicity(L)` へ分けた。
 - **検証が本文を直させた例を消さない。** 辺集合を「2 元集合の集合」として定義していたため
   周期境界の $L\le2$ で $|E_L|=2L^2$ が破れていた。SageMath 検証が検出し、本文を
   「辺の番号の集合（横向き・縦向きに分割）と端点写像」の定義へ直した。

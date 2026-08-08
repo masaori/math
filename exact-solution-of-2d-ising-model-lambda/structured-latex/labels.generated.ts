@@ -6,7 +6,9 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_coefficient_representation",
   "claim_coefficient_sum",
+  "claim_configuration_partition",
   "def_broken_bond_count",
   "def_configuration",
   "def_lattice",

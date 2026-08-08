@@ -11,10 +11,14 @@
 非可算を宣言したブロックの証明だけが `ℝ` / `ℂ` を使ってよく、
 その場合はファイル冒頭に人手証明の `realEscape` と同じ理由を書く。
 
-現状: 章「分配多項式」の定義 4 件と主張「多重度の総和は配位の総数に等しい」
-（人手証明のラベル `claim_coefficient_sum`）を形式化済み。
+現状: 章「分配多項式」の定義 4 件と、主張 3 件
+（人手証明のラベル `claim_configuration_partition`・`claim_coefficient_representation`・
+`claim_coefficient_sum`）を形式化済み。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
 import Ising2DLambda.PartitionPolynomial.CoefficientSum
 import Ising2DLambda.NecSuf.PartitionPolynomial.CoefficientSum
 import Ising2DLambda.PartitionPolynomial.CoefficientSumFromNecSuf
+import Ising2DLambda.PartitionPolynomial.CoefficientRepresentation
+import Ising2DLambda.NecSuf.PartitionPolynomial.CoefficientRepresentation
+import Ising2DLambda.PartitionPolynomial.CoefficientRepresentationFromNecSuf

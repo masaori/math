@@ -53,32 +53,35 @@ bash scripts/check-no-sorry.sh
 
 ## 現状
 
-章「分配多項式」の定義 4 件と、主張「多重度の総和は配位の総数に等しい」
-（人手証明のラベル `claim_coefficient_sum`）を形式化済み。
+章「分配多項式」の定義 4 件と、主張 3 件（人手証明のラベル `claim_configuration_partition`、
+`claim_coefficient_representation`、`claim_coefficient_sum`）を形式化済み。
 
 | | 状態 |
 | --- | --- |
 | `lake update` / `lake exe cache get` | 2026-08-08 実行済み（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
 | `lake build` | 通る |
-| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 3 件を登録済み） |
+| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 6 件を登録済み） |
 
 | ファイル | 中身 |
 | --- | --- |
 | `Ising2DLambda/PartitionPolynomial/Basic.lean` | 格子・辺の番号と端点写像・配位・破れボンド数・多重度・分配多項式の定義（具体版） |
-| `Ising2DLambda/PartitionPolynomial/CoefficientSum.lean` | 具体版の定理。人手証明の Step 1–5 と 1 対 1 |
+| `Ising2DLambda/PartitionPolynomial/CoefficientSum.lean` | 多重度の総和は配位の総数に等しい（具体版）。人手証明の Step 1–5 と 1 対 1 |
+| `Ising2DLambda/PartitionPolynomial/CoefficientRepresentation.lean` | 分配多項式の係数は多重度である（具体版）。人手証明の Step 1–5 と 1 対 1 |
 | `Ising2DLambda/NecSuf/PartitionPolynomial/CoefficientSum.lean` | 必要十分版。有限型 `α` と有界な写像 `f : α → ℕ` だけを仮定する |
+| `Ising2DLambda/NecSuf/PartitionPolynomial/CoefficientRepresentation.lean` | 必要十分版。上に加えて値の側は可換モノイド `M` と `g : ℕ → M` だけを仮定する |
 | `Ising2DLambda/PartitionPolynomial/CoefficientSumFromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出 |
+| `Ising2DLambda/PartitionPolynomial/CoefficientRepresentationFromNecSuf.lean` | 同上（係数表示） |
 
-必要十分版が示したのは、この主張の証明が使っているのは「配位の集合が有限であること」
-「破れボンド数が `2L²` 以下の自然数を返す写像であること」だけであり、
-格子の形・周期境界条件・スピンの値が `{+1,-1}` であることは一切使っていない、ということである。
+必要十分版が示したのは次の 2 点である。
 
-Step 3 の「互いに素な有限個の有限集合の合併の元の個数は個数の和」は人手証明が明示的に
-適用している定理なので mathlib の `Finset.card_biUnion` を引く。一方
-`Finset.card_eq_sum_card_fiberwise` は人手証明の Step 2 と Step 3 を一度に済ませてしまうため、
-1 対 1 対応が崩れる。使っていない。
+- 多重度の総和の主張の証明が使っているのは「配位の集合が有限であること」
+  「破れボンド数が `2L²` 以下の自然数を返す写像であること」だけであり、
+  格子の形・周期境界条件・スピンの値が `{+1,-1}` であることは一切使っていない。
+- 係数表示の主張の証明は、これに加えて値の側に可換モノイドの構造しか使っていない。
+  多項式であること・係数が `ℤ` であること・足す量が不定元の冪であることは使っていない
+  （足す量が「破れボンド数だけで決まる」ことだけが効いている）。
 
-### まだ形式化していないもの
-
-分配多項式の係数表示 `Z_L = Σ_m Ω_L(m) x^m`（人手証明の定義ブロック「分配多項式」の中の等式）。
-`partitionPolynomial` の定義そのものは書いたが、この等式は未証明である。
+Step 3 の「互いに素な有限個の有限集合の合併の元の個数は個数の和」（および和の版）は
+人手証明が明示的に適用している定理なので mathlib の `Finset.card_biUnion` / `Finset.sum_biUnion`
+を引く。一方 `Finset.card_eq_sum_card_fiberwise` は人手証明の Step 2 と Step 3 を一度に
+済ませてしまうため、1 対 1 対応が崩れる。使っていない。
