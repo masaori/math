@@ -82,7 +82,11 @@ noncomputable def charMatrixOf (A : ι → ι → S) (i j : ι) : Polynomial S :
 /-- 人手証明の主張「特性行列の成分は、列の添字が行の添字でもその像でもないとき零元である」。
 
 証明は人手証明どおり 3 段（`ch` の非対角の場合 → 行列の成分が零元 → 零元の逆元は零元）。
-値の側に要求するのは可換半環だけである（引き算は現れない。`-0 = 0` は加法の逆元の性質）。 -/
+値の側に可換環を要求するのは**証明が引き算を使うからではなく、`charMatrixOf` の定義が
+`-A i j` を含むからである**（この定理の言明自体が `charMatrixOf` を含むので、
+仮定を可換半環まで弱めることはできない）。証明の中で負号に触れるのは最後の `-0 = 0` の
+1 段だけで、これは加法の逆元の性質である。項が消えることの本体
+`term_eq_zero_of_entry_zero` は負号を含まず、可換半環のままで通る。 -/
 theorem charMatrix_eq_zero_of_ne (f : ι → ι) {i j : ι} (hij : j ≠ i) (hfj : j ≠ f i) :
     charMatrixOf (permMatrixOf (S := S) f) i j = 0 := by
   classical
