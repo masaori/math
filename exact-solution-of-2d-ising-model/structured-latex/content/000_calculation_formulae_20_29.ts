@@ -466,127 +466,229 @@ b
         math(String.raw`0_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(0)=(0,0)`),
         " である。",
       ]),
-      paragraph(["Step 1: 積の可換律。"]),
+      paragraph([
+        "証明は独立した中間目標へ分かれるので、以下ではそれぞれに名前を付けて示す。",
+        "以下、",
+        math(String.raw`(a,b),(c,d),(e,f)\in\mathbb{C}`),
+        " は任意に取ったものとする（したがって ",
+        math(String.raw`a,b,c,d,e,f\in\mathbb{R}`),
+        "）。",
+      ]),
+      paragraph(["積の可換律。"]),
       displayMath(
         String.raw`\begin{aligned}
 (c,d)\cdot(a,b)
-&= (ca-db,\ cb+da) \\
+&= (ca-db,\ cb+da)
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= (ac-bd,\ cb+da)
+&&(\because\ \mathbb{R}\ \text{の積の可換律を 2 箇所へ適用})\\
+&= (ac-bd,\ bc+ad)
+&&(\because\ \mathbb{R}\ \text{の積の可換律を 2 箇所へ適用})\\
 &= (ac-bd,\ ad+bc)
-\quad (\because \mathbb{R} \text{ の積の可換律と和の可換律}) \\
+&&(\because\ \mathbb{R}\ \text{の和の可換律})\\
 &= (a,b)\cdot(c,d)
+&&(\because\ \mathbb{C}\ \text{の積の定義})
 \end{aligned}`,
       ),
-      paragraph(["Step 2: 積の結合律。", math(String.raw`(e,f)\in\mathbb{C}`), " をとると、"]),
+      paragraph(["積の結合律。"]),
       displayMath(
         String.raw`\begin{aligned}
 \left((a,b)\cdot(c,d)\right)\cdot(e,f)
-&= (ac-bd,\ ad+bc)\cdot(e,f) \\
-&= \left((ac-bd)e-(ad+bc)f,\ (ac-bd)f+(ad+bc)e\right) \\
+&= (ac-bd,\ ad+bc)\cdot(e,f)
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= \left((ac-bd)e-(ad+bc)f,\ (ac-bd)f+(ad+bc)e\right)
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
 &= \left(ace-bde-adf-bcf,\ acf-bdf+ade+bce\right)
-\quad (\because \mathbb{R} \text{ の分配律}) \\
-(a,b)\cdot\left((c,d)\cdot(e,f)\right)
-&= (a,b)\cdot(ce-df,\ cf+de) \\
-&= \left(a(ce-df)-b(cf+de),\ a(cf+de)+b(ce-df)\right) \\
+&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
 &= \left(ace-adf-bcf-bde,\ acf+ade+bce-bdf\right)
-\quad (\because \mathbb{R} \text{ の分配律})
+&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
+&= \left(a(ce-df)-b(cf+de),\ a(cf+de)+b(ce-df)\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
+&= (a,b)\cdot(ce-df,\ cf+de)
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= (a,b)\cdot\left((c,d)\cdot(e,f)\right)
+&&(\because\ \mathbb{C}\ \text{の積の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "両者の第 1 成分・第 2 成分はそれぞれ ",
+        "第 3 の等号と第 5 の等号では、",
         math(String.raw`\mathbb{R}`),
-        " の和の可換律・結合律により一致するので、積は結合的である。",
+        " の分配律と積の結合律を同時に使っている（例えば ",
+        math(String.raw`(ac-bd)e=ace-bde`),
+        " は分配律で 2 項に分けたうえで、各項の積の順序を結合律で括り直したものである）。",
+        "同じ定理を複数箇所へ同時に適用しているので 1 行にまとめてある。",
       ]),
-      paragraph(["Step 3: 単位元。"]),
+      paragraph(["積の単位元。"]),
       displayMath(
         String.raw`\begin{aligned}
 (a,b)\cdot 1_{\mathbb{C}}
-&= (a,b)\cdot(1,0) \\
-&= (a\cdot 1-b\cdot 0,\ a\cdot 0+b\cdot 1) \\
+&= (a,b)\cdot(1,0)
+&&(\because\ 1_{\mathbb{C}}=(1,0))\\
+&= (a\cdot 1-b\cdot 0,\ a\cdot 0+b\cdot 1)
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= (a-b\cdot 0,\ a\cdot 0+b)
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})\\
+&= (a-0,\ 0+b)
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0\text{。2 箇所へ適用})\\
 &= (a,b)
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
+\end{aligned}`,
+      ),
+      paragraph(["であり、また"]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot(a,b)
+&= (a,b)\cdot 1_{\mathbb{C}}
+&&(\because\ \text{上で示した積の可換律})\\
+&= (a,b)
+&&(\because\ \text{上の計算})
 \end{aligned}`,
       ),
       paragraph([
-        "であり、Step 1 より ",
-        math(String.raw`1_{\mathbb{C}}\cdot(a,b)=(a,b)`),
-        "。よって ",
+        "であるから ",
         math(String.raw`1_{\mathbb{C}}`),
         " は積の単位元である。",
       ]),
       paragraph([
-        "Step 4: ",
+        "零でないことと平方和が正であることの同値。",
         math(String.raw`z=(a,b)\in\mathbb{C}`),
         " について ",
         math(String.raw`z\ne(0,0)\iff a^2+b^2>0`),
-        "。",
+        " を示す。まず",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a^2+b^2
+&\ge 0+b^2
+&&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
+&\ge 0+0
+&&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+\end{aligned}`,
+      ),
       paragraph([
-        math(String.raw`a^2\ge 0`),
-        " かつ ",
-        math(String.raw`b^2\ge 0`),
-        " より ",
-        math(String.raw`a^2+b^2\ge 0`),
-        " である。",
+        "である。次に ",
         math(String.raw`a^2+b^2=0`),
-        " とすると ",
-        math(String.raw`a^2=-b^2\le 0`),
-        " かつ ",
+        " と仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a^2
+&= a^2+0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&= a^2+\left(b^2+(-b^2)\right)
+&&(\because\ -b^2\ \text{は}\ b^2\ \text{の和の逆元})\\
+&= \left(a^2+b^2\right)+(-b^2)
+&&(\because\ \mathbb{R}\ \text{の和の結合律})\\
+&= 0+(-b^2)
+&&(\because\ \text{仮定}\ a^2+b^2=0)\\
+&= -b^2
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&\le 0
+&&(\because\ b^2\ge 0\ \text{と、和の逆元が順序を反転すること})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり、",
         math(String.raw`a^2\ge 0`),
-        " より ",
-        math(String.raw`a^2=0`),
-        "、同様に ",
-        math(String.raw`b^2=0`),
-        "、よって ",
-        math(String.raw`a=b=0`),
-        "。逆に ",
-        math(String.raw`a=b=0`),
-        " なら ",
-        math(String.raw`a^2+b^2=0`),
-        "。ゆえに ",
-        math(String.raw`a^2+b^2=0\iff z=(0,0)`),
-        " であり、",
-        math(String.raw`a^2+b^2\ge 0`),
         " と併せて ",
+        math(String.raw`a^2=0`),
+        "、したがって ",
+        math(String.raw`a=0`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " では ",
+        math(String.raw`x\ne 0`),
+        " なら ",
+        math(String.raw`x^2>0`),
+        " だから）。",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " を入れ替えれば同じ議論で ",
+        math(String.raw`b=0`),
+        " を得る。逆に ",
+        math(String.raw`a=b=0`),
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a^2+b^2
+&= 0^2+0^2
+&&(\because\ \text{仮定}\ a=b=0)\\
+&= 0+0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0\text{。2 箇所へ適用})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。ゆえに ",
+        math(String.raw`a^2+b^2=0\iff z=(0,0)`),
+        " であり、これと ",
+        math(String.raw`a^2+b^2\ge 0`),
+        " を併せて ",
         math(String.raw`z\ne(0,0)\iff a^2+b^2>0`),
-        "。",
+        " を得る。",
       ]),
       paragraph([
-        "Step 5: ",
         math(String.raw`\mathbb{C}^{\times}`),
-        " は積について閉じる。次の恒等式が成り立つ。",
+        " が積について閉じること。まず次の恒等式を示す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (ac-bd)^2+(ad+bc)^2
-&= a^2c^2-2abcd+b^2d^2+a^2d^2+2abcd+b^2c^2 \\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2 \\
-&= (a^2+b^2)(c^2+d^2)
-\quad (\because \mathbb{R} \text{ の分配律})
+&= \left(a^2c^2-2abcd+b^2d^2\right)+\left(a^2d^2+2abcd+b^2c^2\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律・可換律を 2 箇所へ適用})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+\left((-2abcd)+2abcd\right)
+&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+0
+&&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&= \left(a^2+b^2\right)\left(c^2+d^2\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の可換律})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`z=(a,b),w=(c,d)\in\mathbb{C}^{\times}`),
-        " とすると Step 4 より ",
+        math(String.raw`z=(a,b),\ w=(c,d)\in\mathbb{C}^{\times}`),
+        " とすると、上で示した同値より ",
         math(String.raw`a^2+b^2>0`),
         " かつ ",
         math(String.raw`c^2+d^2>0`),
         " であるから ",
         math(String.raw`(a^2+b^2)(c^2+d^2)>0`),
-        "。上の恒等式より ",
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " では正の元どうしの積は正）。この恒等式より ",
         math(String.raw`zw=(ac-bd,\ ad+bc)`),
-        " の 2 つの成分の平方和は正であり、再び Step 4 より ",
+        " の 2 つの成分の平方和は正であり、再び上の同値より ",
         math(String.raw`zw\ne(0,0)`),
         "、すなわち ",
         math(String.raw`zw\in\mathbb{C}^{\times}`),
-        "。また ",
-        math(String.raw`1^2+0^2=1>0`),
-        " より ",
+        " である。また",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1^2+0^2
+&= 1+0
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元、および}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= 1
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&> 0
+&&(\because\ \mathbb{R}\ \text{の順序})
+\end{aligned}`,
+      ),
+      paragraph([
+        "より ",
         math(String.raw`1_{\mathbb{C}}\in\mathbb{C}^{\times}`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "Step 6: 逆元の存在。",
+        "逆元の存在。",
         math(String.raw`z=(a,b)\in\mathbb{C}^{\times}`),
-        " とすると Step 4 より ",
+        " とすると、上で示した同値より ",
         math(String.raw`a^2+b^2>0`),
         " であるから",
       ]),
@@ -597,29 +699,45 @@ b
       displayMath(
         String.raw`\begin{aligned}
 z\cdot w
+&= (a,b)\cdot\left(\frac{a}{a^2+b^2},\ \frac{-b}{a^2+b^2}\right)
+&&(\because\ w\ \text{の定め方})\\
 &= \left(a\cdot\frac{a}{a^2+b^2}-b\cdot\frac{-b}{a^2+b^2},\
-   a\cdot\frac{-b}{a^2+b^2}+b\cdot\frac{a}{a^2+b^2}\right) \\
-&= \left(\frac{a^2+b^2}{a^2+b^2},\ \frac{-ab+ab}{a^2+b^2}\right) \\
-&= (1,0) = 1_{\mathbb{C}}
+   a\cdot\frac{-b}{a^2+b^2}+b\cdot\frac{a}{a^2+b^2}\right)
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= \left(\frac{a^2}{a^2+b^2}-\frac{-b^2}{a^2+b^2},\
+   \frac{-ab}{a^2+b^2}+\frac{ab}{a^2+b^2}\right)
+&&(\because\ \mathbb{R}\ \text{の分数と積の関係を 4 箇所へ適用})\\
+&= \left(\frac{a^2-(-b^2)}{a^2+b^2},\ \frac{(-ab)+ab}{a^2+b^2}\right)
+&&(\because\ \mathbb{R}\ \text{の分母の等しい分数の差と和})\\
+&= \left(\frac{a^2+b^2}{a^2+b^2},\ \frac{0}{a^2+b^2}\right)
+&&(\because\ -(-b^2)=b^2\ \text{と、}\ -ab\ \text{が}\ ab\ \text{の和の逆元であること})\\
+&= \left(1,\ \frac{0}{a^2+b^2}\right)
+&&(\because\ a^2+b^2\ne 0\ \text{による約分})\\
+&= (1,\ 0)
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を分子にもつ分数は}\ 0)\\
+&= 1_{\mathbb{C}}
+&&(\because\ 1_{\mathbb{C}}=(1,0))
 \end{aligned}`,
       ),
       paragraph([
-        "Step 1 より ",
+        "である。上で示した積の可換律より ",
         math(String.raw`w\cdot z=z\cdot w=1_{\mathbb{C}}`),
-        "。また Step 5 と同じ議論により ",
-        math(String.raw`zw=1_{\mathbb{C}}\ne(0,0)`),
-        " から ",
-        math(String.raw`w\ne(0,0)`),
-        " が従う（",
+        " である。また ",
         math(String.raw`w=(0,0)`),
-        " なら ",
+        " とすると ",
+        ref("definition_of_cc"),
+        " の積の定義より ",
         math(String.raw`zw=(0,0)`),
-        " となり矛盾）。よって ",
+        " となって ",
+        math(String.raw`zw=1_{\mathbb{C}}\ne(0,0)`),
+        " に矛盾するから ",
+        math(String.raw`w\ne(0,0)`),
+        "、すなわち ",
         math(String.raw`w\in\mathbb{C}^{\times}`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "Step 7: 逆元の一意性。単位元 ",
+        "逆元の一意性。単位元 ",
         math(String.raw`e`),
         " をもつ結合的な二項演算をもつ集合 ",
         math(String.raw`S`),
@@ -636,11 +754,16 @@ z\cdot w
       displayMath(
         String.raw`\begin{aligned}
 b
-&= b\,e \quad (\because e \text{ は単位元}) \\
-&= b\,(a b') \quad (\because ab'=e) \\
-&= (b a)\,b' \quad (\because \text{結合律}) \\
-&= e\,b' \quad (\because ba=e) \\
+&= b\,e
+&&(\because\ e\ \text{は単位元})\\
+&= b\,(a b')
+&&(\because\ ab'=e)\\
+&= (b a)\,b'
+&&(\because\ \text{結合律})\\
+&= e\,b'
+&&(\because\ ba=e)\\
 &= b'
+&&(\because\ e\ \text{は単位元})
 \end{aligned}`,
       ),
       paragraph([
@@ -655,13 +778,16 @@ b
 \qquad (z=(a,b))`,
       ),
       paragraph([
-        "Step 8: 結論と記法。Step 5 より ",
+        "である。",
+      ]),
+      paragraph([
+        "結論と記法。上で示したところにより ",
         math(String.raw`\mathbb{C}^{\times}`),
-        " は積について閉じ、Step 2 より結合律を満たし、Step 3・Step 5 より単位元 ",
+        " は積について閉じ、結合律を満たし、単位元 ",
         math(String.raw`1_{\mathbb{C}}`),
-        " を含み、Step 6 より各元が逆元をもつ。したがって ",
+        " を含み、各元が逆元をもつ。したがって ",
         math(String.raw`\mathbb{C}^{\times}`),
-        " は群をなす（Step 1 より可換群である）。",
+        " は群をなす（積の可換律も示したので可換群である）。",
       ]),
       paragraph([
         "主張の最後の等式 ",
@@ -670,10 +796,16 @@ b
         math(String.raw`w\in\mathbb{C},\ z\in\mathbb{C}^{\times}`),
         " に対して商を ",
         math(String.raw`w/z:=w\cdot z^{-1}`),
-        " と定めると、Step 3 より",
+        " と定めると、",
       ]),
       displayMath(
-        String.raw`1/z = 1_{\mathbb{C}}\cdot z^{-1} = z^{-1}`,
+        String.raw`\begin{aligned}
+1/z
+&= 1_{\mathbb{C}}\cdot z^{-1}
+&&(\because\ \text{商の定め方})\\
+&= z^{-1}
+&&(\because\ \text{上で示した}\ 1_{\mathbb{C}}\ \text{が積の単位元であること})
+\end{aligned}`,
       ),
       paragraph(["であり、両記法は一致する。"]),
     ],
@@ -682,6 +814,13 @@ b
       notes: [
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "原文の z^{-1}=1/z は、商 w/z := w z^{-1} を定めたうえでの記法の一致として解釈した。",
+        "2026-08-09: 式変形の書き方を統一した。Step 1〜Step 8 の番号を内容の分かる名前へ改め、" +
+          "証明の中の相互参照（「Step 4 より」等）も名前で指すようにした。" +
+          "各計算を一続きの整列した式にし、根拠を行末の (∵ …) へ揃えた。" +
+          "結合律は、両辺を別々に展開して「第 1 成分・第 2 成分がそれぞれ一致する」と日本語で継いでいたのを、" +
+          "左辺から右辺までの 1 つの鎖へつないだ。単位元・平方和の同値・積で閉じること・逆元の存在は、" +
+          "根拠の書かれていなかった段（1 が積の単位元、0 を因子にもつ積が 0、和の逆元、約分など）を" +
+          "それぞれ独立した段として明示した。段は増えており、減った段は無い。",
       ],
     },
   },

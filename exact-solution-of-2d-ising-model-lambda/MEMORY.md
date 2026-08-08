@@ -8,15 +8,15 @@
 章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
 および章「固有値の代数性」（定義 15 件・主張 19 件・定理 1 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
-シフト行列と転送行列の可換性）が、
+シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 33 件・主張 33 件・定理 2 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` を実行済み（$L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$ で成立、厳密計算） |
-| Lean 具体版 | 定義 33 件と主張 33 件と定理 2 件。`lake build` と `check-no-sorry.sh`（定理 119 件を登録）が通る |
-| Lean 必要十分版 | 主張 30 件と定理 2 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 35 件・主張 37 件・定理 3 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` を実行済み（$L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$ で成立、厳密計算） |
+| Lean 具体版 | 定義 35 件と主張 37 件と定理 3 件。`lake build` と `check-no-sorry.sh`（定理 140 件を登録）が通る |
+| Lean 必要十分版 | 主張 34 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -164,7 +164,27 @@ $U_{\tau,\tau'}=\kappa(1)\ (\tau'=S(\tau))$、$\kappa(0)$（それ以外）を�
   有限和だけで、**分配則も積の結合則も積の可換性も使っていない**。そして可換性が行列に要求するのは
   シフトによる不変性ただ 1 つで、**$A$ が転送行列であることを使っていない**。
 
-これは次のセクションで転送行列を巡回シフトの固有空間へ分けるための足場である。
+さらに、平行移動の反復 $\gamma^{[k]}$（$\gamma^{[k+1]}=\gamma^{[k]}\circ\gamma$）と
+巡回シフトの反復 $S^{[k]}$（$S^{[k+1]}=S\circ S^{[k]}$）を定義し、次の 5 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+**2 つの反復で合成の順を変えている。** 噛み合わせの主張の帰納法が、帰納法の仮定を
+$y$ ではなく $\gamma(y)$ へ当てる形になるためで、その理由は本文に書いてある。
+上付きの角括弧は、これが積の反復ではなく合成の反復であることを記号に残すためのものである。
+
+- $\gamma^{[k]}(y)=y+_{\mathbb{Z}/L\mathbb{Z}}\pi(k)$。
+- $\gamma^{[L]}=\mathrm{id}$（$\pi(L)=0$ による）。
+- $(S^{[k]}(\tau))(y)=\tau(\gamma^{[k]}(y))$（2 つの反復の噛み合わせ）。
+- $S^{[L]}=\mathrm{id}$。
+- $(U^{k})_{\tau,\tau'}$ は $\tau'=S^{[k]}(\tau)$ のとき $\kappa(1)$、そうでないとき $\kappa(0)$。
+- シフト行列の $L$ 乗は単位行列である（$U^{L}=I$）。
+  必要十分版が示したのは、平行移動の反復が加法モノイドしか使っていないこと、
+  引き戻しの反復が値の型にも添字の型にも何も要求しないこと、そして $U^{L}=I$ が要求するのが
+  「$L$ 回の反復が恒等写像であること」だけで、**$e$ の位数がちょうど $L$ であることは
+  使っていない**ことである。
+
+これは次のセクションで、$U$ の固有値が 1 の $L$ 乗根（円分体 $\mathbb{Q}(\omega)$ の元）で
+あることを述べ、そのうえで転送行列を $U$ の固有空間へ分けるための足場である。
 
 ## 進め方（自動ループ）
 
@@ -179,12 +199,13 @@ $U_{\tau,\tau'}=\kappa(1)\ (\tau'=S(\tau))$、$\kappa(0)$（それ以外）を�
 
 ## 次回やること
 
-1. **円分体上での対角化**（章「固有値の代数性」の続き。台帳のセクション 10c）。
-   シフト行列 $U$ と転送行列 $T$ の可換性（$UT=TU$）は済んだので、次は $U$ の固有空間へ
-   $T$ を分ける段である。解析関数としての $\cos$ は使わず、1 の冪根 $\omega$（円分体
-   $\mathbb{Q}(\omega)$ の元）の有理式として扱う（README「形式変数のまま進む」）。
+1. **シフト行列の固有値が 1 の $L$ 乗根であること**（章「固有値の代数性」の続き。
+   台帳のセクション 10d）。$U^{L}=I$ は済んだので、次は円分体 $\mathbb{Q}(\omega)$ を導入し、
+   $U$ の固有値がその元であることを述べる段である。解析関数としての $\cos$ は使わず、
+   1 の冪根 $\omega$ の有理式として扱う（README「形式変数のまま進む」）。
    1 tick で四層まで終わる大きさに割り直してから着手すること
-   （$U^L=I$ とその固有値が 1 の $L$ 乗根であることあたりが最初の一塊になる見込み）。
+   （$t^{L}-1$ の根としての $\omega$ の定義と、$\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$
+   あたりが最初の一塊になる見込み）。
 
 ## 未解決の設計問題
 
