@@ -53,17 +53,32 @@ bash scripts/check-no-sorry.sh
 
 ## 現状
 
-**環境は整っている。形式化した定理はまだ 1 つも無い。**
+章「分配多項式」の定義 4 件と、主張「多重度の総和は配位の総数に等しい」
+（人手証明のラベル `claim_coefficient_sum`）を形式化済み。
 
 | | 状態 |
 | --- | --- |
 | `lake update` / `lake exe cache get` | 2026-08-08 実行済み（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
 | `lake build` | 通る |
-| `bash scripts/check-no-sorry.sh` | 通る（ただし検査対象の定理が 0 件なので、いまは実質的な検査をしていない） |
-| 形式化した定理 | 0 件（`Ising2DLambda.lean` は空の名前空間だけ） |
+| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 3 件を登録済み） |
 
-最初の形式化対象は人手証明の主張「多重度の総和は配位の総数に等しい」
-（ラベル `claim_coefficient_sum`）である。証明が使う数え上げは
-mathlib の `Finset.card_eq_sum_card_fiberwise`（有限集合をファイバーへ類別して個数を足す）に
-対応する形をしており、これが `import Mathlib.Data.Finset.Card` で引けることは確認済みである。
-ただし具体版はこの一般論へ丸投げせず、人手証明の Step 1–5 と 1 対 1 に対応させて書くこと。
+| ファイル | 中身 |
+| --- | --- |
+| `Ising2DLambda/PartitionPolynomial/Basic.lean` | 格子・辺の番号と端点写像・配位・破れボンド数・多重度・分配多項式の定義（具体版） |
+| `Ising2DLambda/PartitionPolynomial/CoefficientSum.lean` | 具体版の定理。人手証明の Step 1–5 と 1 対 1 |
+| `Ising2DLambda/NecSuf/PartitionPolynomial/CoefficientSum.lean` | 必要十分版。有限型 `α` と有界な写像 `f : α → ℕ` だけを仮定する |
+| `Ising2DLambda/PartitionPolynomial/CoefficientSumFromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出 |
+
+必要十分版が示したのは、この主張の証明が使っているのは「配位の集合が有限であること」
+「破れボンド数が `2L²` 以下の自然数を返す写像であること」だけであり、
+格子の形・周期境界条件・スピンの値が `{+1,-1}` であることは一切使っていない、ということである。
+
+Step 3 の「互いに素な有限個の有限集合の合併の元の個数は個数の和」は人手証明が明示的に
+適用している定理なので mathlib の `Finset.card_biUnion` を引く。一方
+`Finset.card_eq_sum_card_fiberwise` は人手証明の Step 2 と Step 3 を一度に済ませてしまうため、
+1 対 1 対応が崩れる。使っていない。
+
+### まだ形式化していないもの
+
+分配多項式の係数表示 `Z_L = Σ_m Ω_L(m) x^m`（人手証明の定義ブロック「分配多項式」の中の等式）。
+`partitionPolynomial` の定義そのものは書いたが、この等式は未証明である。

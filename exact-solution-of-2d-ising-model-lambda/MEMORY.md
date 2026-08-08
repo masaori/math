@@ -10,8 +10,8 @@
 | --- | --- |
 | 記述（構造化テキスト） | 章「分配多項式」の定義 4 件・主張 1 件・注意 1 件。`npm run check` 全通過 |
 | SageMath 検証 | `partition-polynomial-coefficient-sum` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | **未着手**（空の名前空間のみ。ただし環境は整っており `lake build` は通る） |
-| Lean 必要十分版 | **未着手** |
+| Lean 具体版 | 定義 4 件と主張「多重度の総和は配位の総数に等しい」。`lake build` と `check-no-sorry.sh` が通る |
+| Lean 必要十分版 | 同じ主張について作成済み（有限型と有界な自然数値写像だけを仮定する形） |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -34,10 +34,9 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 
 ## 次回やること
 
-1. **`claim_coefficient_sum` を Lean で形式化する**（具体版・必要十分版の 2 本立て）。
-   環境は整っているので、そのまま書き始めてよい。
-   形式化したら `lean/scripts/check-no-sorry.sh` の `targets` 配列へ定理名を追加し、
-   人手証明のブロックの `lean` フィールドにも定理名を書く。
+1. **分配多項式の係数表示 $Z_L=\sum_m\Omega_L(m)x^m$ を Lean で形式化する**
+   （人手証明の定義ブロック「分配多項式」の中の等式。定義そのものは Lean に写してあるが、
+   この等式は未証明。これが済むと章「分配多項式」の定義側が四層すべてを満たす）。
 2. **章「有限系の自由エントロピー」を書く**。$\Phi_L=\log Z_L(q)\in\Lambda$（$q\in\mathbb{Q}_{>0}$、
    値の素因数分解の指数ベクトル）。SageMath 検証は既に $L=1,2,3$ で
    $Z_L(1/2)=2,\ 2^{-7}\cdot353,\ 2^{-11}\cdot9859$ を出しているので、そこから始められる。

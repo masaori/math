@@ -24,6 +24,14 @@ export default defineBlocks([
     title: { text: "格子と配位" },
     labels: ["def_lattice", "def_configuration"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.PartitionPolynomial.Vertex",
+      "Ising2DLambda.PartitionPolynomial.Edge",
+      "Ising2DLambda.PartitionPolynomial.boundary0",
+      "Ising2DLambda.PartitionPolynomial.boundary1",
+      "Ising2DLambda.PartitionPolynomial.Config",
+      "Ising2DLambda.PartitionPolynomial.card_config",
+    ],
     statement: [
       paragraph([
         "整数 ",
@@ -196,6 +204,10 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
     title: { text: "破れボンド数" },
     labels: ["def_broken_bond_count"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.PartitionPolynomial.brokenBondCount",
+      "Ising2DLambda.PartitionPolynomial.brokenBondCount_le",
+    ],
     statement: [
       paragraph([
         ref("def_configuration"),
@@ -239,6 +251,7 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
     title: { text: "多重度" },
     labels: ["def_multiplicity"],
     habitat: "N",
+    lean: ["Ising2DLambda.PartitionPolynomial.multiplicity"],
     statement: [
       paragraph([
         "整数 ",
@@ -274,6 +287,7 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
     title: { text: "分配多項式" },
     labels: ["def_partition_polynomial"],
     habitat: "Z",
+    lean: ["Ising2DLambda.PartitionPolynomial.partitionPolynomial"],
     statement: [
       paragraph([
         math(String.raw`x`),
@@ -354,6 +368,11 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
     title: { text: "多重度の総和は配位の総数に等しい" },
     labels: ["claim_coefficient_sum"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow",
+      "Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow_from_necSuf",
+      "Ising2DLambda.NecSuf.PartitionPolynomial.sum_card_fiber_eq_card",
+    ],
     verification: ["sagemath/check/partition-polynomial-coefficient-sum"],
     statement: [
       paragraph([
