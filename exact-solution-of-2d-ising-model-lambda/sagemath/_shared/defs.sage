@@ -1,7 +1,7 @@
 # =============================================================
 # 共通定義 (sagemath/_shared/defs.sage)
 #
-# structured-latex/content/partition-polynomial.ts の定義に 1 対 1 で対応させる。
+# structured-latex/content/main-text.ts の定義に 1 対 1 で対応させる。
 #   def_lattice / def_configuration    -> vertices(L), edges(L), configurations(L)
 #   def_broken_bond_count              -> broken_bond_count(L, sigma)
 #   def_multiplicity                   -> multiplicity_vector(L)

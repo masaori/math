@@ -5,7 +5,7 @@
 **対象ラベル**: `claim_configuration_partition`, `claim_coefficient_representation`
 （structured-latex 側の安定識別子）
 
-- 本文: `structured-latex/content/partition-polynomial.ts` の主張
+- 本文: `structured-latex/content/main-text.ts` の主張
   「配位全体は破れボンド数の値ごとに類別される」と「分配多項式の係数は多重度である」
 - 併せて使う定義: `def_configuration` / `def_broken_bond_count` / `def_multiplicity` /
   `def_partition_polynomial`

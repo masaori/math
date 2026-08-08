@@ -1,6 +1,6 @@
 # 対象ラベル: claim_coefficient_sum
 #
-# 本文（structured-latex/content/partition-polynomial.ts）の主張
+# 本文（structured-latex/content/main-text.ts）の主張
 #     sum_m Omega_L(m) = 2^(L^2)
 # を、小さい L で総当たりに数え上げて確かめる。
 #

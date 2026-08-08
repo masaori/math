@@ -1,6 +1,6 @@
 # 対象ラベル: claim_configuration_partition, claim_coefficient_representation
 #
-# 本文（structured-latex/content/partition-polynomial.ts）の主張
+# 本文（structured-latex/content/main-text.ts）の主張
 #     Z_L = sum_{sigma in Sigma_L} x^{b(sigma)} = sum_{m=0}^{2L^2} Omega_L(m) x^m
 # と、その証明が使う類別
 #     Sigma_L = union_m A_{L,m} （互いに素）、A_{L,m} = { sigma | b(sigma) = m }

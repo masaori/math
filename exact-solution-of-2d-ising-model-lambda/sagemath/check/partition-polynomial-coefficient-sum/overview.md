@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_coefficient_sum` （structured-latex 側の安定識別子）
 
-- 本文: `structured-latex/content/partition-polynomial.ts` の主張「多重度の総和は配位の総数に等しい」
+- 本文: `structured-latex/content/main-text.ts` の主張「多重度の総和は配位の総数に等しい」
 - 併せて使う定義: `def_lattice` / `def_configuration` / `def_broken_bond_count` /
   `def_multiplicity` / `def_partition_polynomial`
 

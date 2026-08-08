@@ -1,7 +1,7 @@
 /-
 章「分配多項式」の具体版（人手証明と 1 対 1 に対応させる）。
 
-人手証明の正本は `structured-latex/content/partition-polynomial.ts`。
+人手証明の正本は `structured-latex/content/main-text.ts`。
 このファイルは人手証明の定義 4 件をそのまま Lean の定義へ写したものである。
 
   人手証明のラベル              このファイル
