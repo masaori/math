@@ -53,17 +53,20 @@ def RowMatrix : Type := RowConfig L → RowConfig L → Polynomial ℤ
 noncomputable def rowMatrixProduct (A B : RowMatrix L) : RowMatrix L :=
   fun τ τ'' => ∑ τ' : RowConfig L, A τ τ' * B τ' τ''
 
-/-- 行列の冪 `A¹ = A`、`A^{k+1} = A^k A`（`k ≥ 1`）。
-`k = 0` は人手証明が定めていないので、ここでも `A` を返す形にはせず、
-帰納の出発点を `k = 1` に置く（`rowMatrixPow L A 0 = A`）。 -/
+/-- 行列の冪。人手証明は `A¹ = A` と `A^{k+1} = A^k A` により `k ≥ 1` でだけ定めており、
+`A⁰` を定めていない（単位行列を導入していない）。Lean の再帰は `0` から始まるので、
+ここでは引数を 1 つずらし、`rowMatrixPow L A k` が人手証明の `A^{k+1}` を表すものとする。
+すなわち引数 `0` は人手証明の指数 `1` にあたる。この約束のもとで人手証明の
+`A^L` は `rowMatrixPow L A (L - 1)` である。 -/
 noncomputable def rowMatrixPow (A : RowMatrix L) : ℕ → RowMatrix L
   | 0 => A
   | k + 1 => rowMatrixProduct L (rowMatrixPow A k) A
 
-/-- 人手証明の `A¹ = A`。 -/
+/-- 人手証明の `A¹ = A`（引数のずらしにより Lean 側の引数は `0`）。 -/
 @[simp] lemma rowMatrixPow_one (A : RowMatrix L) : rowMatrixPow L A 0 = A := rfl
 
-/-- 人手証明の `A^{k+1} = A^k A`。 -/
+/-- 人手証明の `A^{k+1} = A^k A`（Lean 側では引数 `k` が指数 `k+1` を表すので、
+この等式は引数 `k+1` と引数 `k` を結ぶ形になる）。 -/
 lemma rowMatrixPow_succ (A : RowMatrix L) (k : ℕ) :
     rowMatrixPow L A (k + 1) = rowMatrixProduct L (rowMatrixPow L A k) A := rfl
 
