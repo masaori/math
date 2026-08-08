@@ -2,7 +2,7 @@
 
 [auto-loop-runbook.md](auto-loop-runbook.md) が毎 tick 読み書きする。**この台帳が進捗の正本**である。
 
-- 起動: launchd `com.masaori.ising-lambda-auto-loop`（毎時 23 分）
+- 起動: launchd `com.masaori.ising-lambda-auto-loop`（30 分おき。毎時 23 分と 53 分）
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
@@ -75,7 +75,7 @@
 
 - ラベル: `com.masaori.ising-lambda-auto-loop`
 - 定義: `~/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist`
-- 実体: `exact-solution-of-2d-ising-model-lambda/scripts/auto-loop-tick.sh`（毎時 23 分）
+- 実体: `exact-solution-of-2d-ising-model-lambda/scripts/auto-loop-tick.sh`（毎時 23 分と 53 分。25 分で打ち切る）
 - ログ: `exact-solution-of-2d-ising-model-lambda/logs/auto-loop.log`（git 管理外）
 - 各 tick は `claude -p` で**独立した新しいセッション**として走る（文脈を持ち越さない。
   持ち越すのはこの台帳とリポジトリの中身だけ）。

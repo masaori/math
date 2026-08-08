@@ -14,8 +14,8 @@ LOG_DIR="$PROJECT_DIR/logs"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 
-# 1 tick の上限。次の発火（60 分後）に食い込ませないため 50 分で打ち切る。
-TICK_TIMEOUT_SECONDS=3000
+# 1 tick の上限。次の発火（30 分後）に食い込ませないため 25 分で打ち切る。
+TICK_TIMEOUT_SECONDS=1500
 
 mkdir -p "$LOG_DIR"
 

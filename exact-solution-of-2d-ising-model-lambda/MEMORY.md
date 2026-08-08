@@ -23,7 +23,7 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 
 ## 進め方（自動ループ）
 
-このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
+このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
 [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md)、進捗の正本は
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) である（このファイルではない）。
 
