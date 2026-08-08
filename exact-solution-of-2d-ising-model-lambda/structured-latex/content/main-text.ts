@@ -8054,6 +8054,471 @@ O(\tau_1)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_shift_char_matrix_entry_zero",
+    kind: "claim",
+    title: {
+      text: "シフト行列の特性行列の成分は、列の添字が行の添字でもその像でもないとき零元である",
+    },
+    labels: ["claim_shift_char_matrix_entry_zero"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_eq_zero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.charMatrix_eq_zero_of_ne",
+      "Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_eq_zero_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-characteristic-term"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について、",
+        math(String.raw`\tau'\ne\tau`),
+        " かつ ",
+        math(String.raw`\tau'\ne S(\tau)`),
+        " ならば",
+      ]),
+      displayMath(String.raw`\mathrm{ch}(U)_{\tau,\tau'}=\iota\bigl(\kappa(0)\bigr)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+        ref("def_second_constant_embedding"),
+        " で見たとおり ",
+        math(String.raw`\iota\bigl(\kappa(0)\bigr)`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の零元なので、この主張は「シフト行列の特性行列は、対角成分と ",
+        math(String.raw`\tau'=S(\tau)`),
+        " の成分を除いて零元である」と述べている。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ch}(U)_{\tau,\tau'}
+&=\iota\bigl(-U_{\tau,\tau'}\bigr)
+&&(\because\ \blkref{def_characteristic_matrix}\ \text{の}\ \tau\ne\tau'\ \text{の場合})\\
+&=\iota\bigl(-\kappa(0)\bigr)
+&&(\because\ \blkref{def_shift_matrix}\ \text{の}\ \tau'\ne S(\tau)\ \text{の場合})\\
+&=\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元であり、零元の加法の逆元は零元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        ref("def_characteristic_matrix"),
+        "、",
+        ref("def_shift_matrix"),
+        "、",
+        ref("def_constant_polynomial"),
+        "、",
+        ref("def_second_constant_embedding"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " と ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_char_term_zero",
+    kind: "claim",
+    title: {
+      text: "行の添字にもその像にも当たらない値を取る置換の項は零元である",
+    },
+    labels: ["claim_shift_char_term_zero"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.term_eq_zero_of_entry_zero",
+      "Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-characteristic-term"],
+    statement: [
+      paragraph([
+        "置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " について、",
+        math(String.raw`\varphi(\tau_1)\ne\tau_1`),
+        " かつ ",
+        math(String.raw`\varphi(\tau_1)\ne S(\tau_1)`),
+        " を満たす ",
+        math(String.raw`\tau_1\in R_L`),
+        " が存在するとする。このとき ",
+        ref("def_second_determinant"),
+        " の和における ",
+        math(String.raw`\varphi`),
+        " の項について",
+      ]),
+      displayMath(
+        String.raw`\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(U)_{\tau,\varphi(\tau)}=\iota\bigl(\kappa(0)\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathfrak{S}_L`),
+        " と ",
+        math(String.raw`\mathrm{sgn}`),
+        " は ",
+        ref("def_permutation_sign"),
+        "）。すなわちこの項は零元であり、",
+        math(String.raw`\chi_U=\mathrm{det}_{t}\bigl(\mathrm{ch}(U)\bigr)`),
+        " の和に寄与しない（",
+        math(String.raw`\chi`),
+        " は ",
+        ref("def_characteristic_polynomial"),
+        "）。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(U)_{\tau,\varphi(\tau)}
+&=\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\mathrm{ch}(U)_{\tau_1,\varphi(\tau_1)}\cdot\prod_{\tau\in R_L\setminus\{\tau_1\}}\mathrm{ch}(U)_{\tau,\varphi(\tau)}
+&&(\because\ \text{有限積から 1 つの因子を括り出す})\\
+&=\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\iota\bigl(\kappa(0)\bigr)\cdot\prod_{\tau\in R_L\setminus\{\tau_1\}}\mathrm{ch}(U)_{\tau,\varphi(\tau)}
+&&(\because\ \varphi(\tau_1)\ne\tau_1\ \text{かつ}\ \varphi(\tau_1)\ne S(\tau_1)\ \text{と}\ \blkref{claim_shift_char_matrix_entry_zero})\\
+&=\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \mathbb{Z}[x][t]\ \text{の零元を掛けると零元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        ref("claim_shift_char_matrix_entry_zero"),
+        "、",
+        ref("def_second_constant_embedding"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この主張の対偶により、",
+        math(String.raw`\chi_U`),
+        " の和のうち零元でありうるものを除いて残るのは、任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`\varphi(\tau)=\tau`),
+        " または ",
+        math(String.raw`\varphi(\tau)=S(\tau)`),
+        " を満たす置換 ",
+        math(String.raw`\varphi`),
+        " の項だけである。次の主張は、そのような置換が軌道を保つことを述べる。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元と有限集合 ",
+        math(String.raw`R_L`),
+        " だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_orbit_preserving_permutation",
+    kind: "definition",
+    title: { text: "軌道を保つ置換" },
+    labels: ["def_orbit_preserving_permutation"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.OrbitPreserving"],
+    verification: ["sagemath/check/shift-matrix-characteristic-term"],
+    statement: [
+      paragraph([
+        "どの行配位もその軌道の中へ送る置換の全体を",
+      ]),
+      displayMath(
+        String.raw`\mathfrak{S}^{\mathcal{O}}_L:=\bigl\{\,\varphi\in\mathfrak{S}_L \;\bigm|\; \text{任意の}\ \tau\in R_L\ \text{について}\ \varphi(\tau)\in O(\tau)\,\bigr\}`,
+      ),
+      paragraph([
+        "と置き、その元を軌道を保つ置換と呼ぶ（",
+        math(String.raw`\mathfrak{S}_L`),
+        " は ",
+        ref("def_permutation_sign"),
+        "、",
+        math(String.raw`O(\tau)`),
+        " は ",
+        ref("def_row_config_orbit"),
+        "）。",
+      ]),
+      paragraph([
+        "上付きの ",
+        math(String.raw`\mathcal{O}`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        " の軌道の全体 ",
+        math(String.raw`\mathcal{O}_L`),
+        " を指す添え名であって、冪でも像でもない。",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        math(String.raw`\mathfrak{S}_L`),
+        " の部分集合であり、恒等写像 ",
+        math(String.raw`\mathrm{id}_{R_L}`),
+        " を元として持つ（",
+        ref("def_row_config_orbit"),
+        " で見たとおり ",
+        math(String.raw`\tau\in O(\tau)`),
+        " だから）。したがって空ではない。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_fixed_or_shift_preserves_orbit",
+    kind: "claim",
+    title: { text: "各行配位をそれ自身かその像へ送る置換は軌道を保つ" },
+    labels: ["claim_fixed_or_shift_preserves_orbit"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_shift",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_map",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_shift_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-characteristic-term"],
+    statement: [
+      paragraph([
+        "置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " が、任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`\varphi(\tau)=\tau`),
+        " または ",
+        math(String.raw`\varphi(\tau)=S(\tau)`),
+        " を満たすならば ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " である（",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        ref("def_orbit_preserving_permutation"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " を任意に取る。仮定より 2 つの場合がある。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi(\tau)=\tau`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\tau)
+&=\tau
+&&(\because\ \text{この場合の仮定})\\
+&=S^{[0]}(\tau)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`\varphi(\tau)\in O(\tau)`),
+        " である（",
+        ref("def_row_config_orbit"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi(\tau)=S(\tau)`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\tau)
+&=S(\tau)
+&&(\because\ \text{この場合の仮定})\\
+&=S\bigl(S^{[0]}(\tau)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})\\
+&=S^{[1]}(\tau)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]}\ \text{の}\ k=0\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`\varphi(\tau)\in O(\tau)`),
+        " である（",
+        ref("def_row_config_orbit"),
+        "）。",
+      ]),
+      paragraph([
+        "いずれの場合も ",
+        math(String.raw`\varphi(\tau)\in O(\tau)`),
+        " であり、",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " である（",
+        ref("def_orbit_preserving_permutation"),
+        "）。",
+      ]),
+      paragraph([
+        ref("def_row_config_shift_iterate"),
+        "、",
+        ref("def_row_config_orbit"),
+        "、",
+        ref("def_orbit_preserving_permutation"),
+        " を引いた。",
+      ]),
+      paragraph([
+        ref("claim_shift_char_term_zero"),
+        " と合わせると、",
+        math(String.raw`\chi_U`),
+        " の和のうち零元でない項を持ちうるのは ",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " の置換だけである。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_preserving_image",
+    kind: "claim",
+    title: { text: "軌道を保つ置換は各軌道をそれ自身へ写す" },
+    labels: ["claim_orbit_preserving_image"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.image_orbit_eq_of_orbitPreserving",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.image_orbit_eq",
+      "Ising2DLambda.AlgebraicEigenvalue.image_orbit_eq_of_orbitPreserving_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-characteristic-term"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " と ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\bigl\{\,\varphi(\tau) \;\bigm|\; \tau\in O\,\bigr\}=O`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        ref("def_orbit_preserving_permutation"),
+        "、",
+        math(String.raw`\mathcal{O}_L`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        "）。すなわち軌道を保つ置換は、どの軌道もその軌道自身の上へ写す。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使うものを先に置く。",
+        ref("def_row_config_orbit_set"),
+        " より ",
+        math(String.raw`O=O(\tau_0)`),
+        " を満たす ",
+        math(String.raw`\tau_0\in R_L`),
+        " が取れる。また像の集合を ",
+        math(String.raw`\varphi(O):=\{\varphi(\tau)\mid\tau\in O\}`),
+        " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi(O)\subset O`),
+        " であること。",
+        math(String.raw`\tau\in O`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+O(\tau)
+&=O(\tau_0)
+&&(\because\ \tau\in O=O(\tau_0)\ \text{と}\ \blkref{claim_row_config_orbit_mem_eq})\\
+&=O
+&&(\because\ \tau_0\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("def_orbit_preserving_permutation"),
+        " より ",
+        math(String.raw`\varphi(\tau)\in O(\tau)=O`),
+        " である。",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\varphi(O)\subset O`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi(O)=O`),
+        " であること。",
+        math(String.raw`\varphi`),
+        " は単射なので（",
+        ref("def_permutation_sign"),
+        " より ",
+        math(String.raw`\varphi`),
+        " は全単射）、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|\varphi(O)|
+&=|O|
+&&(\because\ \varphi\ \text{は単射なので}\ O\ \text{と}\ \varphi(O)\ \text{は 1 対 1 に対応する})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`O`),
+        " は有限集合 ",
+        math(String.raw`R_L`),
+        " の部分集合なので有限であり、有限集合の部分集合であって元の個数がもとと等しいものは",
+        "もとの集合に一致するから、",
+        math(String.raw`\varphi(O)\subset O`),
+        " と ",
+        math(String.raw`|\varphi(O)|=|O|`),
+        " から ",
+        math(String.raw`\varphi(O)=O`),
+        " が従う。",
+      ]),
+      paragraph([
+        ref("claim_row_config_orbit_mem_eq"),
+        "、",
+        ref("def_row_config_orbit_set"),
+        "、",
+        ref("def_orbit_preserving_permutation"),
+        "、",
+        ref("def_permutation_sign"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この主張は、次のセクションで ",
+        math(String.raw`\chi_U`),
+        " の和を軌道ごとの行列式の積へ書き直すときに使う。軌道を保つ置換は各軌道の上の置換を",
+        "定めるので、行列式の項を軌道ごとに分けて数えられるからである。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、および ",
+        math(String.raw`\mathbb{N}`),
+        " だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },

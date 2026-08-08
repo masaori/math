@@ -8,18 +8,18 @@
 箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
 章「分配多項式」（定義 5 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 25 件・主張 31 件・定理 2 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 26 件・主張 35 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
-軌道による行配位の全体の分割）が、
+軌道による行配位の全体の分割・特性多項式の消えない項の同定）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 48 件・主張 45 件・定理 3 件・注意 1 件（ラベルの数。合計 98 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 187 件を登録）が通る |
-| Lean 必要十分版 | 主張 42 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 49 件・主張 49 件・定理 3 件・注意 1 件（ラベルの数。合計 103 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 204 件を登録）が通る |
+| Lean 必要十分版 | 主張 46 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -223,6 +223,21 @@ $O(\tau)=\{\tau'\in R_L\mid \tau'=S^{[k]}(\tau)\ \text{を満たす}\ k\in\mathb
   必要十分版が示したのは、これらが要求するのが「その点が 1 回以上の反復で戻ること」だけで、
   **$S$ の単射性も全射性も、最小周期の最小性も使っていない**ことである。
 
+さらに、軌道を保つ置換の全体
+$\mathfrak{S}^{\mathcal{O}}_L=\{\varphi\in\mathfrak{S}_L\mid\text{任意の }\tau\text{ について }\varphi(\tau)\in O(\tau)\}$
+を定義し、次の 4 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- シフト行列の特性行列の成分は、列の添字が行の添字でもその像でもないとき零元である
+  （$\tau'\ne\tau$ かつ $\tau'\ne S(\tau)$ ならば $\mathrm{ch}(U)_{\tau,\tau'}=\iota(\kappa(0))$）。
+- そのような値を取る置換の項は零元である（$\chi_U$ の和に寄与しない）。
+  したがって零元でない項を持ちうるのは、各 $\tau$ を $\tau$ か $S(\tau)$ へ送る置換だけである。
+- 各行配位をそれ自身かその像へ送る置換は軌道を保つ（逆は成り立たない。$L=3$ で前者は 4 個、
+  後者は 36 個ある）。
+- 軌道を保つ置換は各軌道をそれ自身へ写す（$\varphi(O)=O$）。証明は包含と個数の 2 段。
+  必要十分版が示したのは、項が消えることの本体が重みに**何も要求せず**係数環も可換半環でよいこと
+  （負号は特性行列の定義に現れるだけで証明には現れない）、および $\varphi(O)=O$ が使う単射性が
+  **置換 $\varphi$ のもの**であって $S$ については何も要求しないことである。
+
 これは、シフト行列の特性多項式を軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積へ分解し、
 その根が 1 の $L$ 乗根であることを言うための足場である。
 軌道の大きさが $L$ の約数であることから、$\overline{\mathbb{Q}}$ を持ち出す前に
@@ -241,11 +256,11 @@ $O(\tau)=\{\tau'\in R_L\mid \tau'=S^{[k]}(\tau)\ \text{を満たす}\ k\in\mathb
 
 ## 次回やること
 
-1. **シフト行列の特性多項式が軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積に分解すること**
-   （章「固有値の代数性」の続き。台帳のセクション 10f'）。行配位の全体が軌道たちへ
-   分割されることは済んでいるので、次は行列式を軌道ごとに分けて計算する段である。
-   シフト行列は置換行列なので、特性多項式の置換にわたる和のうち値が消えない項は
-   「各軌道の上を巡回する置換」に対応するものだけである。
+1. **軌道ごとの行列式の積への分解**（章「固有値の代数性」の続き。台帳のセクション 10f''）。
+   消えない項が軌道を保つ置換のものだけであることは済んでいるので、次は
+   「軌道を保つ置換の全体が、各軌道の上の置換の組の全体と 1 対 1 に対応すること」を示し、
+   $\chi_U$ の和を軌道ごとの積へ組み替える段である。符号が軌道ごとの符号の積になること
+   （転倒数を軌道ごとに分けて数えること）もここに入る。
    1 tick に収まらない見込みなら、着手前に割り直すこと。
 
 ## 未解決の設計問題

@@ -220,6 +220,23 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_of_inter_nonempty_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbitSet_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbitSet_partition_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_eq_zero
+  Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero
+  Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_one
+  Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_shift
+  Ising2DLambda.AlgebraicEigenvalue.image_orbit_eq_of_orbitPreserving
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.charMatrix_eq_zero_of_ne
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.term_eq_zero_of_entry_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.charTerm_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_map
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.image_orbit_eq
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eq_permMatrixOf_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_iff_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPreserving_of_fixed_or_shift_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.image_orbit_eq_of_orbitPreserving_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
