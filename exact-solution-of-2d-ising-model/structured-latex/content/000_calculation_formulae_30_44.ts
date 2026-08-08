@@ -1426,9 +1426,27 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     statement: [
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
+        " について、",
+        math(String.raw`r \in \mathbb{R}_{\geq 0}`),
         "、",
-        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
-        " のとき、",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " を用いて ",
+        math(String.raw`\phi_{\mathrm{polar}}(z) = [(r,\theta)]_{\sim}`),
+        " とし、",
+        math(String.raw`\arg^{[0,2\pi)}(z) = \theta - 2n\pi`),
+        "（",
+        math(String.raw`n \in \mathbb{Z}`),
+        "）とする。さらに ",
+        math(String.raw`r \neq 0`),
+        " とする（",
+        ref("def_abs_arg"),
+        " と ",
+        ref("first_and_second_projections"),
+        " により ",
+        math(String.raw`r = |z|`),
+        " なので、これは ",
+        math(String.raw`z \neq 0`),
+        " と同じことである）。このとき",
       ]),
       displayMath(
         String.raw`\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right) =
@@ -1437,24 +1455,238 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 2\pi - \arg^{[0,2\pi)}(z) & (0<\arg^{[0,2\pi)}(z)<2\pi)
 \end{cases}`,
       ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r \neq 0`),
+        " は逆数 ",
+        math(String.raw`1/z`),
+        " が定まるために要る（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+        ref("def_abs_arg"),
+        " より ",
+        math(String.raw`\arg^{[0,2\pi)}(z) \in [0,2\pi)`),
+        " なので、2 つの場合はちょうど一方だけが成り立つ。",
+      ]),
     ],
     proof: [
+      paragraph([
+        "証明の中で使うものを 3 つ先に置く。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は積を保つ。実際 ",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " は全単射なモノイド準同型であり、かつ ",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " なので、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " の逆写像である。全単射なモノイド準同型の逆写像はモノイド準同型なので",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z z')=\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z')`,
+      ),
+      paragraph([
+        "が任意の ",
+        math(String.raw`z,z'\in\mathbb{C}`),
+        " について成り立つ。",
+      ]),
+      paragraph([
+        "第二に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は逆元を逆元へ写す。",
+        math(String.raw`r\neq0`),
+        " すなわち ",
+        math(String.raw`z\neq 0`),
+        " なので ",
+        math(String.raw`z^{-1}\in\mathbb{C}`),
+        " が定まり（",
+        ref("multiplicative_group_of_cc"),
+        "）、",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
-\arg^{[0,2\pi)}(z^{-1})
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\!\left(\phi_{\mathrm{polar}}(z^{-1})\right)\right) \\
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\!\left([(1/r,-\theta)]_{\sim}\right)\right)
-= s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z^{-1})
+&= \phi_{\mathrm{polar}}(z\,z^{-1})
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{polar}}(1_{\mathbb{C}})
+&&(\because\ z^{-1}\ \text{が}\ z\ \text{の逆元であること})\\
+&= [(1,0)]_{\sim}
+&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`0\leq\theta-2n\pi<2\pi`),
-        " より ",
-        math(String.raw`-2\pi<-\theta+2n\pi\leq 0`),
-        " を場合分けして結論を得る。",
+        "である。したがって ",
+        math(String.raw`\phi_{\mathrm{polar}}(z^{-1})`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
+        " の逆元であり、",
+        ref("multiplicative_group_of_polar_representation"),
+        " の逆元の形（",
+        math(String.raw`r\neq0`),
+        " の場合）により",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z^{-1})=[(1/r,-\theta)]_{\sim}`,
+      ),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第三に、",
+        math(String.raw`r\neq0`),
+        " なので ",
+        math(String.raw`1/r\neq0`),
+        " である（実数の商は、分子が ",
+        math(String.raw`0`),
+        " でなければ ",
+        math(String.raw`0`),
+        " でない）。",
+      ]),
+      paragraph([
+        "本体に入る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&= \arg^{[0,2\pi)}(z^{-1})
+&&(\because\ \mathbb{C}\text{の乗法群 の}\ z^{-1}=1/z)\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z^{-1}))\right)
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(1/r,-\theta)]_{\sim})\right)
+&&(\because\ \text{上で見た}\ \phi_{\mathrm{polar}}(z^{-1})\ \text{の形})\\
+&= s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ 1/r\neq0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("def_abs_arg"),
+        "、",
+        ref("first_and_second_projections"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "ここから先は ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " の値で 2 つに分かれる。",
+        ref("def_abs_arg"),
+        " よりこの値は ",
+        math(String.raw`[0,2\pi)`),
+        " にあるので、この 2 つで尽きている。",
+      ]),
+      paragraph([
+        math(String.raw`\theta-2n\pi = 0`),
+        " のとき。このとき ",
+        math(String.raw`-\theta-2(-n)\pi = -(\theta-2n\pi) = 0`),
+        " であり ",
+        math(String.raw`0 \leq 0 < 2\pi`),
+        " なので、",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数は ",
+        math(String.raw`-n`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+&= -\theta-2(-n)\pi
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&= -(\theta-2n\pi)
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= -\arg^{[0,2\pi)}(z)
+&&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
+&= -0
+&&(\because\ \arg^{[0,2\pi)}(z)=0\ \text{という、この場合の条件})\\
+&= 0
+&&(\because\ 0\ \text{の加法の逆元は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。この場合の条件 ",
+        math(String.raw`\theta-2n\pi=0`),
+        " は、仮定 ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " により主張の第 1 の場合の条件 ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=0`),
+        " と同じである。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+      paragraph([
+        math(String.raw`0 < \theta-2n\pi < 2\pi`),
+        " のとき。各辺に ",
+        math(String.raw`-1`),
+        " を掛けて向きを入れ替えると ",
+        math(String.raw`-2\pi < -(\theta-2n\pi) < 0`),
+        " であり、さらに各辺へ ",
+        math(String.raw`2\pi`),
+        " を足せば ",
+        math(String.raw`0 < -\theta-2(-n-1)\pi < 2\pi`),
+        " なので、",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数は ",
+        math(String.raw`-n-1`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+&= -\theta-2(-n-1)\pi
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&= \left(-\theta-2(-n)\pi\right)+2\pi
+&&(\because\ 2(-n-1)\pi=2(-n)\pi-2\pi)\\
+&= -(\theta-2n\pi)+2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= -\arg^{[0,2\pi)}(z)+2\pi
+&&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
+&= 2\pi-\arg^{[0,2\pi)}(z)
+&&(\because\ \mathbb{R}\ \text{の加法の交換律と差の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。この場合の条件も、仮定 ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " により主張の第 2 の場合の条件 ",
+        math(String.raw`0<\arg^{[0,2\pi)}(z)<2\pi`),
+        " と同じである。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文の証明は 3 つの等号を並べた式 1 本と、" +
+          "「0 ≤ θ-2nπ < 2π より -2π < -θ+2nπ ≤ 0 を場合分けして結論を得る」の 1 文だけで、" +
+          "φ_polar が逆元を逆元へ写すこと・極座標表現の逆元の形・pr_2 の適用・" +
+          "角度表現の切断が一意に定める整数の同定がいずれも書かれていなかったので、" +
+          "すべて段として明示した。商の場合（arg_of_quotient_of_complex_numbers）と" +
+          "同じ形（準備 3 つ・本体の 4 段の鎖・場合ごとの 5 段の鎖）へ揃えてある。" +
+          "段は増えており、減った段は無い。",
+        "自乗の場合（range_of_args_of_square_of_complex_numbers）と違い、r ≠ 0 を仮定に足した。" +
+          "自乗では r = 0 でも主張が成り立つので足さなかったが、逆数では z = 0 のとき 1/z が" +
+          "そもそも定まらない（ℂ の乗法群）。すなわちこれは主張を弱める仮定ではなく、" +
+          "主張が意味を持つために要る仮定である。商の場合の r_2 ≠ 0 と同じ扱いにした。",
+        "原文は r, θ, n を導入せずに証明の中で θ と n を使っていたので、" +
+          "商の場合と同じ設定を statement に書き下した。",
+        "原文の場合分けの範囲 -2π < -θ+2nπ ≤ 0 は、arg(z) = θ-2nπ ∈ [0,2π) から出る。" +
+          "本文ではこれを「arg(z) = 0 の場合」と「0 < arg(z) < 2π の場合」の 2 つに書き直した。" +
+          "主張の場合分けが arg(z) の値で書かれているので、そちらに揃えた方が" +
+          "どちらの場合の等式を示しているのかが一目で分かるためである。",
+      ],
+    },
   },
   // 旧 calculation_formulae_037（arg 計算のコツ）は計算の進め方の助言であって主張ではないため、
   // notes/000_calculation_formulae.ts（targets: arg_of_product_of_complex_numbers）へ移設した。
