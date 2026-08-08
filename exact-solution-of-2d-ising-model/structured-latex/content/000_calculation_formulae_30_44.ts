@@ -93,7 +93,17 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "Step 0: ",
+        "証明の中で使うものを先に置く。",
+        math(String.raw`z=(x,y)\in\mathbb{C}`),
+        "、",
+        math(String.raw`z_1=(a,b)\in\mathbb{C}`),
+        "、",
+        math(String.raw`z_2=(c,d)\in\mathbb{C}`),
+        " と書く（",
+        math(String.raw`x,y,a,b,c,d\in\mathbb{R}`),
+        "）。",
+      ]),
+      paragraph([
         math(String.raw`\operatorname{pr}_1`),
         " が well-defined であること。",
         ref("first_and_second_projections"),
@@ -109,10 +119,54 @@ export default defineBlocks([
         math(String.raw`r=r'`),
         " であり、いずれの場合も ",
         math(String.raw`r=r'`),
-        "。よって値は代表元によらない。",
+        " である。よって値は代表元によらない。",
       ]),
       paragraph([
-        "Step 1: (1) の証明。",
+        "非負実数の平方の比較。",
+        math(String.raw`u,v\in\mathbb{R}_{\ge 0}`),
+        " について ",
+        math(String.raw`u^2\le v^2`),
+        " ならば ",
+        math(String.raw`u\le v`),
+        " である。対偶を示す。",
+        math(String.raw`u>v\ (\ge 0)`),
+        " とすると ",
+        math(String.raw`u>0`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u^2
+&= u\cdot u
+&&(\because\ \text{平方の定め方})\\
+&> v\cdot u
+&&(\because\ u>v\ \text{と}\ u>0\text{。正の元を掛けても大小は保たれる})\\
+&\ge v\cdot v
+&&(\because\ u\ge v\ \text{と}\ v\ge 0\text{。非負の元を掛けても大小は保たれる})\\
+&= v^2
+&&(\because\ \text{平方の定め方})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから ",
+        math(String.raw`u^2>v^2`),
+        " である。とくに ",
+        math(String.raw`u,v\ge 0`),
+        " かつ ",
+        math(String.raw`u^2=v^2`),
+        " ならば ",
+        math(String.raw`u\le v`),
+        " かつ ",
+        math(String.raw`v\le u`),
+        " より ",
+        math(String.raw`u=v`),
+        " である。",
+      ]),
+      paragraph([
+        "以下、6 つの主張を順に示す。",
+      ]),
+      paragraph([
+        "(1) 成分による表示。",
         ref("def_abs_arg"),
         " より ",
         math(String.raw`|z|=\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))`),
@@ -132,237 +186,303 @@ y & (x=0,\ y>0),\\
 \end{cases}`,
       ),
       paragraph([
-        "上 3 つの場合は主張の形をしている。残りの 3 つの場合を確かめる。",
+        "上 3 つの場合は主張の形をしている。残りの 3 つの場合を確かめる。以下、",
         ref("definition_of_sqrt_r_positive"),
         " より ",
-        math(String.raw`\sqrt{a}^{(\mathbb{R}_{\ge 0})}`),
+        math(String.raw`\sqrt{s}^{(\mathbb{R}_{\ge 0})}`),
         " は ",
         math(String.raw`u\ge 0`),
         " かつ ",
-        math(String.raw`u^2=a`),
+        math(String.raw`u^2=s`),
         " を満たす唯一の ",
         math(String.raw`u`),
-        " である。",
+        " であることを使う。",
       ]),
-      list([
-        [
-          math(String.raw`x=0,\ y>0`),
-          " のとき ",
-          math(String.raw`x^2+y^2=y^2`),
-          " であり、",
-          math(String.raw`y>0`),
-          " すなわち ",
-          math(String.raw`y\ge 0`),
-          " かつ ",
-          math(String.raw`y^2=y^2`),
-          " であるから ",
-          math(String.raw`\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}=y`),
-          "。",
-        ],
-        [
-          math(String.raw`x=0,\ y<0`),
-          " のとき ",
-          math(String.raw`x^2+y^2=y^2=(-y)^2`),
-          " であり、",
-          math(String.raw`-y>0`),
-          " すなわち ",
-          math(String.raw`-y\ge 0`),
-          " であるから ",
-          math(String.raw`\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}=-y`),
-          "。",
-        ],
-        [
-          math(String.raw`x=0,\ y=0`),
-          " のとき ",
-          math(String.raw`x^2+y^2=0`),
-          " であり ",
-          math(String.raw`0\ge 0`),
-          " かつ ",
-          math(String.raw`0^2=0`),
-          " であるから ",
-          math(String.raw`\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}=0`),
-          "。",
-        ],
+      paragraph([
+        math(String.raw`x=0,\ y>0`),
+        " のとき、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}
+&= \sqrt{0^2+y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ x=0)\\
+&= \sqrt{0+y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&= y
+&&(\because\ y>0\ \text{なので}\ y\ge 0\ \text{であり}\ y^2=y^2\text{。平方根の一意性})\\
+&= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y>0\ \text{の場合})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`x=0,\ y<0`),
+        " のとき、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}
+&= \sqrt{0^2+y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ x=0)\\
+&= \sqrt{0+y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&= \sqrt{(-y)^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ (-y)^2=y^2)\\
+&= -y
+&&(\because\ y<0\ \text{なので}\ -y\ge 0\ \text{であり}\ (-y)^2=(-y)^2\text{。平方根の一意性})\\
+&= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y<0\ \text{の場合})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`x=0,\ y=0`),
+        " のとき、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}
+&= \sqrt{0^2+0^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ x=0\ \text{かつ}\ y=0)\\
+&= \sqrt{0+0}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0\text{。2 箇所へ適用})\\
+&= \sqrt{0}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&= 0
+&&(\because\ 0\ge 0\ \text{であり}\ 0^2=0\text{。平方根の一意性})\\
+&= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y=0\ \text{の場合})
+\end{aligned}`,
+      ),
       paragraph([
         "以上より、すべての場合で ",
         math(String.raw`|z|=\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "Step 2: (2) の証明。",
-        math(String.raw`x^2+y^2\ge 0`),
-        " であり、",
-        ref("definition_of_sqrt_r_positive"),
-        " より ",
-        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
-        "（",
-        math(String.raw`a\ge 0`),
-        "）であるから、",
+        "(2) 絶対値の平方。",
       ]),
       displayMath(
-        String.raw`|z|^2=\left(\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}\right)^2=x^2+y^2
-\quad (\because \text{Step 1})`,
+        String.raw`\begin{aligned}
+|z|^2
+&= \left(\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}\right)^2
+&&(\because\ \text{上で示した成分による表示})\\
+&= x^2+y^2
+&&(\because\ x^2+y^2\ge 0\ \text{と、平方根の定義}\ \left(\sqrt{s}^{(\mathbb{R}_{\ge 0})}\right)^2=s)
+\end{aligned}`,
       ),
       paragraph([
-        "Step 3: 補題（非負実数の平方の比較）。",
-        math(String.raw`u,v\in\mathbb{R}_{\ge 0}`),
-        " について ",
-        math(String.raw`u^2\le v^2\Rightarrow u\le v`),
-        " が成り立つ。実際、対偶を示す。",
-        math(String.raw`u>v\ (\ge 0)`),
-        " とすると ",
-        math(String.raw`u>0`),
-        " であり、",
-      ]),
-      displayMath(
-        String.raw`u^2=u\cdot u>v\cdot u\ge v\cdot v=v^2
-\quad (\because u>v,\ u>0,\ v\ge 0)`,
-      ),
-      paragraph([
-        "であるから ",
-        math(String.raw`u^2>v^2`),
-        "。特に ",
-        math(String.raw`u,v\ge 0`),
-        " かつ ",
-        math(String.raw`u^2=v^2`),
-        " ならば ",
-        math(String.raw`u\le v`),
-        " かつ ",
-        math(String.raw`v\le u`),
-        " より ",
-        math(String.raw`u=v`),
-        "。",
+        "(3) 絶対値が ",
+        math(String.raw`0`),
+        " であることと ",
+        math(String.raw`z=0_{\mathbb{C}}`),
+        " であることの同値。2 つの向きを別々に示す。",
       ]),
       paragraph([
-        "Step 4: (3) の証明。",
         math(String.raw`|z|=0`),
-        " とすると Step 2 より ",
-        math(String.raw`x^2+y^2=|z|^2=0`),
-        "。",
+        " とすると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x^2+y^2
+&= |z|^2
+&&(\because\ \text{上で示した絶対値の平方})\\
+&= 0^2
+&&(\because\ \text{仮定}\ |z|=0)\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
         ref("multiplicative_group_of_cc"),
-        " の Step 4 で示したとおり ",
+        " の「零でないことと平方和が正であることの同値」で示したとおり ",
         math(String.raw`x^2+y^2=0\iff(x,y)=(0,0)`),
         " であるから ",
         math(String.raw`z=0_{\mathbb{C}}`),
-        "。逆に ",
+        " である。逆に ",
         math(String.raw`z=0_{\mathbb{C}}=(0,0)`),
-        " なら Step 1 より ",
-        math(String.raw`|z|=\sqrt{0}^{(\mathbb{R}_{\ge 0})}=0`),
-        "。",
+        " とすると、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|z|
+&= \sqrt{0^2+0^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{上で示した成分による表示と}\ z=(0,0))\\
+&= 0
+&&(\because\ \text{上の}\ x=0,\ y=0\ \text{の場合の計算})
+\end{aligned}`,
+      ),
       paragraph([
-        "Step 5: (4) の証明。",
-        math(String.raw`z_1=(a,b),\ z_2=(c,d)`),
-        " とすると ",
-        ref("definition_of_cc"),
-        " より ",
-        math(String.raw`z_1z_2=(ac-bd,\ ad+bc)`),
-        " であるから、Step 2 と ",
-        ref("multiplicative_group_of_cc"),
-        " の Step 5 の恒等式より",
+        "(4) 積の絶対値。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 |z_1z_2|^2
-&= (ac-bd)^2+(ad+bc)^2 \quad (\because \text{Step 2}) \\
-&= (a^2+b^2)(c^2+d^2) \\
-&= |z_1|^2|z_2|^2 \quad (\because \text{Step 2}) \\
+&= \left|(ac-bd,\ ad+bc)\right|^2
+&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&= (ac-bd)^2+(ad+bc)^2
+&&(\because\ \text{上で示した絶対値の平方})\\
+&= (a^2+b^2)(c^2+d^2)
+&&(\because\ \text{複素数の乗法群の「積について閉じること」の恒等式})\\
+&= |z_1|^2|z_2|^2
+&&(\because\ \text{上で示した絶対値の平方。2 箇所へ適用})\\
 &= \left(|z_1|\,|z_2|\right)^2
+&&(\because\ \mathbb{R}\ \text{の積の可換律と結合律})
 \end{aligned}`,
       ),
       paragraph([
+        ref("definition_of_cc"),
+        "、",
+        ref("multiplicative_group_of_cc"),
+        "。",
         math(String.raw`|z_1z_2|\ge 0`),
         " かつ ",
         math(String.raw`|z_1|\,|z_2|\ge 0`),
-        " であるから、Step 3 より ",
+        " であるから、上で示した非負実数の平方の比較より ",
         math(String.raw`|z_1z_2|=|z_1|\,|z_2|`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "Step 6: Cauchy--Schwarz の不等式（2 成分の場合）。",
+        "Lagrange の恒等式。",
         math(String.raw`a,b,c,d\in\mathbb{R}`),
-        " について次の恒等式（Lagrange の恒等式）が成り立つ。",
+        " について次が成り立つ。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (ac+bd)^2+(ad-bc)^2
-&= a^2c^2+2abcd+b^2d^2+a^2d^2-2abcd+b^2c^2 \\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2 \\
+&= \left(a^2c^2+2abcd+b^2d^2\right)+\left(a^2d^2-2abcd+b^2c^2\right)
+&&(\because\ \mathbb{R}\ \text{の分配律。2 箇所へ適用})\\
+&= \left(a^2c^2+b^2d^2+a^2d^2+b^2c^2\right)+\left(2abcd+(-2abcd)\right)
+&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
+&= \left(a^2c^2+b^2d^2+a^2d^2+b^2c^2\right)+0
+&&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= (a^2+b^2)(c^2+d^2)
-\quad (\because \mathbb{R} \text{ の分配律})
+&&(\because\ \mathbb{R}\ \text{の分配律})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(ad-bc)^2\ge 0`),
-        " であるから ",
-        math(String.raw`(ac+bd)^2\le(a^2+b^2)(c^2+d^2)=\left(|z_1|\,|z_2|\right)^2`),
-        "（最後の等号は Step 2）。",
+        "Cauchy--Schwarz の不等式（2 成分の場合）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(ac+bd)^2
+&\le (ac+bd)^2+(ad-bc)^2
+&&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
+&= (a^2+b^2)(c^2+d^2)
+&&(\because\ \text{上で示した Lagrange の恒等式})\\
+&= |z_1|^2|z_2|^2
+&&(\because\ \text{上で示した絶対値の平方。2 箇所へ適用})\\
+&= \left(|z_1|\,|z_2|\right)^2
+&&(\because\ \mathbb{R}\ \text{の積の可換律と結合律})
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`ac+bd\le 0`),
         " のときは ",
         math(String.raw`ac+bd\le 0\le|z_1|\,|z_2|`),
-        "。",
+        " である。",
         math(String.raw`ac+bd>0`),
-        " のときは Step 3 を ",
-        math(String.raw`u=ac+bd,\ v=|z_1|\,|z_2|`),
+        " のときは、上で示した非負実数の平方の比較を ",
+        math(String.raw`u=ac+bd`),
+        "、",
+        math(String.raw`v=|z_1|\,|z_2|`),
         " に適用して ",
         math(String.raw`ac+bd\le|z_1|\,|z_2|`),
-        "。いずれの場合も",
+        " である。いずれの場合も",
       ]),
       displayMath(String.raw`ac+bd\le|z_1|\,|z_2|`),
       paragraph([
-        "Step 7: (5) の証明。",
-        math(String.raw`z_1+z_2=(a+c,\ b+d)`),
-        " であるから、",
+        "が成り立つ。",
+      ]),
+      paragraph([
+        "(5) 三角不等式。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 |z_1+z_2|^2
-&= (a+c)^2+(b+d)^2 \quad (\because \text{Step 2}) \\
-&= (a^2+b^2)+(c^2+d^2)+2(ac+bd)
-\quad (\because \mathbb{R} \text{ の分配律}) \\
-&= |z_1|^2+|z_2|^2+2(ac+bd) \quad (\because \text{Step 2}) \\
-&\le |z_1|^2+|z_2|^2+2|z_1|\,|z_2| \quad (\because \text{Step 6}) \\
+&= \left|(a+c,\ b+d)\right|^2
+&&(\because\ \mathbb{C}\ \text{の成分ごとの加法})\\
+&= (a+c)^2+(b+d)^2
+&&(\because\ \text{上で示した絶対値の平方})\\
+&= \left(a^2+b^2\right)+\left(c^2+d^2\right)+2(ac+bd)
+&&(\because\ \mathbb{R}\ \text{の分配律と、和の可換律・結合律})\\
+&= |z_1|^2+|z_2|^2+2(ac+bd)
+&&(\because\ \text{上で示した絶対値の平方。2 箇所へ適用})\\
+&\le |z_1|^2+|z_2|^2+2|z_1|\,|z_2|
+&&(\because\ \text{上で示した Cauchy--Schwarz の不等式と、和が順序を保つこと})\\
 &= \left(|z_1|+|z_2|\right)^2
+&&(\because\ \mathbb{R}\ \text{の分配律})
 \end{aligned}`,
       ),
       paragraph([
+        ref("complex_numbers_form_a_field"),
+        "。",
         math(String.raw`|z_1+z_2|\ge 0`),
         " かつ ",
         math(String.raw`|z_1|+|z_2|\ge 0`),
-        " であるから、Step 3 より ",
+        " であるから、上で示した非負実数の平方の比較より ",
         math(String.raw`|z_1+z_2|\le|z_1|+|z_2|`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "Step 8: (6) の証明。",
-        ref("inclusion_rr_to_cc"),
-        " より ",
-        math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}(x)=(x,0)`),
-        " であるから、Step 1 より",
+        "(6) 実数の絶対値との一致。",
       ]),
       displayMath(
-        String.raw`\left|\iota_{\mathbb{R}\to\mathbb{C}}(x)\right|
-=\sqrt{x^2+0^2}^{(\mathbb{R}_{\ge 0})}
-=\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}`,
+        String.raw`\begin{aligned}
+\left|\iota_{\mathbb{R}\to\mathbb{C}}(x)\right|
+&= \left|(x,0)\right|
+&&(\because\ \mathbb{R}\ \text{から}\ \mathbb{C}\ \text{への包含写像の定め方})\\
+&= \sqrt{x^2+0^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{上で示した成分による表示})\\
+&= \sqrt{x^2+0}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= \sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+\end{aligned}`,
       ),
       paragraph([
+        ref("inclusion_rr_to_cc"),
+        "。あとは ",
+        math(String.raw`x`),
+        " の符号で場合を分ける。",
         math(String.raw`x\ge 0`),
-        " のときは ",
-        math(String.raw`x\ge 0`),
-        " かつ ",
-        math(String.raw`x^2=x^2`),
-        " より ",
-        math(String.raw`\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}=x=|x|`),
-        "、",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
+&= x
+&&(\because\ x\ge 0\ \text{であり}\ x^2=x^2\text{。平方根の一意性})\\
+&= |x|
+&&(\because\ x\ge 0\ \text{における実数の絶対値の定め方})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
         math(String.raw`x<0`),
-        " のときは ",
-        math(String.raw`-x>0`),
-        " かつ ",
-        math(String.raw`(-x)^2=x^2`),
-        " より ",
-        math(String.raw`\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}=-x=|x|`),
-        "。",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
+&= \sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{では}\ (-x)^2=x^2)\\
+&= -x
+&&(\because\ x<0\ \text{なので}\ -x\ge 0\ \text{であり}\ (-x)^2=(-x)^2\text{。平方根の一意性})\\
+&= |x|
+&&(\because\ x<0\ \text{における実数の絶対値の定め方})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。いずれの場合も ",
+        math(String.raw`\left|\iota_{\mathbb{R}\to\mathbb{C}}(x)\right|=|x|`),
+        " である。",
       ]),
     ],
     conversion: {
@@ -371,6 +491,20 @@ y & (x=0,\ y>0),\\
         "原文（Typst）に対応ブロックは無い。行列ノルムの劣乗法性（labels: matrix_norm_submultiplicativity）の" +
           "証明が K=CC の場合に必要とする絶対値の性質（成分表示・乗法性・三角不等式）を、" +
           "絶対値の定義（labels: def_abs_arg）の直後にまとめて置いた。",
+        "2026-08-09: 証明を「一続きの式変形＋行末の (∵ …)」の形へ書き換えた。" +
+          "もっとも大きく直したのは 3 点である。第一に、(1) の残り 3 つの場合は" +
+          "「x^2+y^2=y^2 であり y>0 すなわち y>=0 かつ y^2=y^2 であるから」のように" +
+          "根拠を日本語の地の文へ並べていたので、場合ごとの鎖へ分け、0 を因子にもつ積が 0 であること・" +
+          "0 が和の単位元であること・(-y)^2=y^2 であることをそれぞれ別の段にした。" +
+          "第二に、Lagrange の恒等式で 2abcd が消える行を、和の逆元と和の単位元の 2 段へ分けた。" +
+          "第三に、Cauchy--Schwarz の不等式は原文が (ad-bc)^2>=0 から結論までを日本語で継いでいたので、" +
+          "(ac+bd)^2 から (|z_1||z_2|)^2 までの 1 つの鎖にした。" +
+          "(4)(5)(6) の各行に欠けていた根拠（積の可換律・結合律、和が順序を保つこと、包含写像の定め方など）も補った。" +
+          "段は増えており、減った段は無い。" +
+          "あわせて Step 0〜Step 8 の番号を内容の分かる名前へ改め、証明の中の相互参照" +
+          "（「Step 2 より」等）も名前で指すようにした（リポジトリの規約「文書・定理を番号や記号で管理しない」）。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後に ref で挙げている。",
       ],
     },
   },
