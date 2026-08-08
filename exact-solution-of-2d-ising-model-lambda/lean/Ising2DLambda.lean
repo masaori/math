@@ -84,3 +84,6 @@ import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrixOrderFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.RowShiftPeriod
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RowShiftPeriod
 import Ising2DLambda.AlgebraicEigenvalue.RowShiftPeriodFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.RowShiftOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RowShiftOrbit
+import Ising2DLambda.AlgebraicEigenvalue.RowShiftOrbitFromNecSuf

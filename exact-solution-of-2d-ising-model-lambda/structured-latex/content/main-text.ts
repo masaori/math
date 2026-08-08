@@ -7255,6 +7255,366 @@ S^{[e\,(q+1)]}(\tau)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_row_config_shift_iterate_injective",
+    kind: "claim",
+    title: { text: "反復した巡回シフトは単射である" },
+    labels: ["claim_row_config_shift_iterate_injective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_injective",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_injective",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_injective_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-shift-orbit"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`S^{[k]}:R_L\to R_L`),
+        " は単射である（",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。すなわち任意の ",
+        math(String.raw`\tau_1,\tau_2\in R_L`),
+        " について ",
+        math(String.raw`S^{[k]}(\tau_1)=S^{[k]}(\tau_2)`),
+        " ならば ",
+        math(String.raw`\tau_1=\tau_2`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のとき、",
+        math(String.raw`S^{[0]}(\tau_1)=S^{[0]}(\tau_2)`),
+        " を仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau_1
+&=S^{[0]}(\tau_1)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})\\
+&=S^{[0]}(\tau_2)
+&&(\because\ \text{仮定})\\
+&=\tau_2
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`k`),
+        " について主張が成り立つとする。",
+        math(String.raw`S^{[k+1]}(\tau_1)=S^{[k+1]}(\tau_2)`),
+        " を仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S\bigl(S^{[k]}(\tau_1)\bigr)
+&=S^{[k+1]}(\tau_1)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=S^{[k+1]}(\tau_2)
+&&(\because\ \text{仮定})\\
+&=S\bigl(S^{[k]}(\tau_2)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("claim_row_config_shift_bijective"),
+        " より ",
+        math(String.raw`S`),
+        " は全単射、とくに単射なので ",
+        math(String.raw`S^{[k]}(\tau_1)=S^{[k]}(\tau_2)`),
+        " が従い、帰納法の仮定から ",
+        math(String.raw`\tau_1=\tau_2`),
+        " である。したがってすべての ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この主張は、次の ",
+        ref("claim_row_config_orbit_card"),
+        " で反復の回数が相異なるところでは行く先も相異なることを言うために使う。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_row_config_orbit",
+    kind: "definition",
+    title: { text: "行配位の軌道" },
+    labels: ["def_row_config_orbit"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit"],
+    verification: ["sagemath/check/row-shift-orbit"],
+    statement: [
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " を任意に取る（",
+        ref("def_row_configuration"),
+        "）。",
+        math(String.raw`\tau`),
+        " から巡回シフトの反復で到達できる行配位の全体を",
+      ]),
+      displayMath(
+        String.raw`O(\tau):=\bigl\{\,\tau'\in R_L \;\bigm|\; \tau'=S^{[k]}(\tau)\ \text{を満たす}\ k\in\mathbb{N}\ \text{が存在する}\,\bigr\}\subset R_L`,
+      ),
+      paragraph([
+        "と置き、",
+        math(String.raw`\tau`),
+        " の軌道と呼ぶ（",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " と取れば ",
+        math(String.raw`\tau=S^{[0]}(\tau)`),
+        " なので ",
+        math(String.raw`\tau\in O(\tau)`),
+        " であり、とくに ",
+        math(String.raw`O(\tau)`),
+        " は空でない。",
+        math(String.raw`O(\tau)`),
+        " は有限集合 ",
+        math(String.raw`R_L`),
+        " の部分集合なので有限であり、その元の個数 ",
+        math(String.raw`|O(\tau)|`),
+        " は ",
+        math(String.raw`\mathbb{N}`),
+        " の元である。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_orbit_card",
+    kind: "claim",
+    title: { text: "軌道の元の個数は最小周期に等しい" },
+    labels: ["claim_row_config_orbit_card"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.card_rowShiftOrbit",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_orbit",
+      "Ising2DLambda.AlgebraicEigenvalue.card_rowShiftOrbit_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-shift-orbit"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`|O(\tau)|=e(\tau)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`O(\tau)`),
+        " は ",
+        ref("def_row_config_orbit"),
+        "、",
+        math(String.raw`e(\tau)`),
+        " は ",
+        ref("def_row_config_shift_minimal_period"),
+        "）。両辺は ",
+        math(String.raw`\mathbb{N}`),
+        " の元であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使うものを先に置く。以下 ",
+        math(String.raw`e:=e(\tau)`),
+        " と書く。反復の回数の集合",
+      ]),
+      displayMath(
+        String.raw`J(\tau):=\bigl\{\,k\in\mathbb{N} \;\bigm|\; k<e\,\bigr\}\subset\mathbb{N}`,
+      ),
+      paragraph([
+        "と、写像 ",
+        math(String.raw`\eta_\tau:J(\tau)\to O(\tau)`),
+        " を ",
+        math(String.raw`\eta_\tau(k):=S^{[k]}(\tau)`),
+        " で定める。行き先が ",
+        math(String.raw`O(\tau)`),
+        " に属することは ",
+        ref("def_row_config_orbit"),
+        " そのものである。",
+      ]),
+      paragraph([
+        "さらに、後の 2 か所で使うことを先に置く。",
+        math(String.raw`d\in\mathbb{N}`),
+        " が ",
+        math(String.raw`e\mid d`),
+        " と ",
+        math(String.raw`d<e`),
+        " をともに満たすならば ",
+        math(String.raw`d=0`),
+        " である。実際 ",
+        math(String.raw`d=e\,q`),
+        " と書けて、もし ",
+        math(String.raw`q\ge1`),
+        " ならば ",
+        math(String.raw`d=e\,q\ge e\cdot1=e`),
+        " となり ",
+        math(String.raw`d<e`),
+        " に反するので ",
+        math(String.raw`q=0`),
+        "、すなわち ",
+        math(String.raw`d=0`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`\eta_\tau`),
+        " が単射であること。",
+        math(String.raw`a,b\in J(\tau)`),
+        " が ",
+        math(String.raw`\eta_\tau(a)=\eta_\tau(b)`),
+        " を満たすとする。",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " は対称なので ",
+        math(String.raw`a\le b`),
+        " としてよい。このとき ",
+        math(String.raw`b-a\in\mathbb{N}`),
+        " が定まり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[a]}\bigl(S^{[b-a]}(\tau)\bigr)
+&=S^{[a+(b-a)]}(\tau)
+&&(\because\ \blkref{claim_row_config_shift_iterate_add})\\
+&=S^{[b]}(\tau)
+&&(\because\ a\le b\ \text{なので}\ a+(b-a)=b)\\
+&=\eta_\tau(b)
+&&(\because\ \eta_\tau\ \text{の定め方})\\
+&=\eta_\tau(a)
+&&(\because\ \text{仮定})\\
+&=S^{[a]}(\tau)
+&&(\because\ \eta_\tau\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("claim_row_config_shift_iterate_injective"),
+        " より ",
+        math(String.raw`S^{[a]}`),
+        " は単射なので ",
+        math(String.raw`S^{[b-a]}(\tau)=\tau`),
+        " が従い、",
+        ref("claim_row_config_shift_period_divides"),
+        " より ",
+        math(String.raw`e\mid b-a`),
+        " である。また ",
+        math(String.raw`b-a\le b<e`),
+        " なので、上で置いたことから ",
+        math(String.raw`b-a=0`),
+        " すなわち ",
+        math(String.raw`a=b`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`\eta_\tau`),
+        " が全射であること。",
+        math(String.raw`\tau'\in O(\tau)`),
+        " を任意に取る。",
+        ref("def_row_config_orbit"),
+        " より ",
+        math(String.raw`\tau'=S^{[k]}(\tau)`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " が取れる。",
+        ref("def_row_config_shift_minimal_period"),
+        " より ",
+        math(String.raw`e\ge1`),
+        " なので、自然数の除法により ",
+        math(String.raw`k=e\,q+r`),
+        " かつ ",
+        math(String.raw`0\le r<e`),
+        " を満たす ",
+        math(String.raw`q,r\in\mathbb{N}`),
+        " が取れる。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau'
+&=S^{[k]}(\tau)
+&&(\because\ k\ \text{の取り方})\\
+&=S^{[r+e\,q]}(\tau)
+&&(\because\ k=e\,q+r\ \text{と}\ \mathbb{N}\ \text{の加法の可換性})\\
+&=S^{[r]}\bigl(S^{[e\,q]}(\tau)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_iterate_add})\\
+&=S^{[r]}(\tau)
+&&(\because\ \blkref{claim_row_config_shift_period_divides}\ \text{の}\ e\mid e\,q\ \text{の場合})\\
+&=\eta_\tau(r)
+&&(\because\ \eta_\tau\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r<e`),
+        " なので ",
+        math(String.raw`r\in J(\tau)`),
+        " であり、",
+        math(String.raw`\tau'`),
+        " は ",
+        math(String.raw`\eta_\tau`),
+        " の像に属する。",
+      ]),
+      paragraph([
+        "以上で ",
+        math(String.raw`\eta_\tau`),
+        " は全単射である。全単射で結ばれた有限集合の元の個数は等しいので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|O(\tau)|
+&=|J(\tau)|
+&&(\because\ \eta_\tau:J(\tau)\to O(\tau)\ \text{が全単射})\\
+&=e
+&&(\because\ \mathbb{N}\ \text{の}\ e\ \text{未満の元は}\ 0,1,\dots,e-1\ \text{の}\ e\ \text{個})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "この主張は、次のセクションでシフト行列の特性多項式を軌道ごとの因子 ",
+        math(String.raw`t^{|O(\tau)|}-1`),
+        " の積へ分解するときに使う。",
+        ref("claim_row_config_minimal_period_divides_L"),
+        " と合わせると各軌道の元の個数が ",
+        math(String.raw`L`),
+        " の約数になるので、各因子が ",
+        math(String.raw`t^{L}-1`),
+        " を割り切ることが言える。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{N}`),
+        " の加法・乗法・減法・大小だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
@@ -7321,6 +7681,8 @@ S^{[e\,(q+1)]}(\tau)
           math(String.raw`L`),
           " を割り切ること（",
           ref("claim_row_config_minimal_period_divides_L"),
+          "）、および軌道の元の個数が最小周期に等しいこと（",
+          ref("claim_row_config_orbit_card"),
           "）までは上で済んでいる。",
         ],
         [

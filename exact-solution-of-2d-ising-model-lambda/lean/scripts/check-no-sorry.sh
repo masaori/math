@@ -195,6 +195,17 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_self_iff_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowShiftMinimalPeriod_dvd_L_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_injective
+  Ising2DLambda.AlgebraicEigenvalue.eq_zero_of_dvd_of_lt_period
+  Ising2DLambda.AlgebraicEigenvalue.eq_of_rowShiftIterate_eq_of_le
+  Ising2DLambda.AlgebraicEigenvalue.card_rowShiftOrbit
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterLeft_injective
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_zero_of_dvd_of_lt_period
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_iterLeft_eq_of_le
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_orbit
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_injective_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.card_rowShiftOrbit_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
