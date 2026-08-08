@@ -26,19 +26,29 @@ def vertices(L):
     return [(i, j) for i in range(L) for j in range(L)]
 
 
-def edges(L):
-    """def_lattice: 辺の添字集合 E_L = V_L x {h, v}（周期境界）と端点写像。
+def endpoints(L, e):
+    """def_lattice: 辺の番号 e in E_L = {1, ..., 2L^2} から両端 (d0(e), d1(e)) を読み出す。
 
-    返すのは添字ごとの端点の組 (d0(e), d1(e)) の列で、長さは常に 2L^2。
-    L <= 2 では異なる添字が同じ頂点対を指す（L=1 は自己ループ、L=2 は同じ 2 点を 2 本）。
-    頂点対の集合として重複を潰すと本数が 2L^2 からずれるので、必ず添字ごとに数える
+    本文と同じ分解を使う: e - 1 = 2(iL + j) + d, ここで 0 <= i, j < L, d in {0,1}。
+    d = 0 が横向き（(i,j) と (i+1,j)）、d = 1 が縦向き（(i,j) と (i,j+1)）。
+    加法は Z/LZ の中で行う（周期境界）。
+    """
+    quotient, d = divmod(ZZ(e) - 1, 2)
+    i, j = divmod(quotient, L)
+    if d == 0:
+        return ((i, j), ((i + 1) % L, j))
+    return ((i, j), (i, (j + 1) % L))
+
+
+def edges(L):
+    """def_lattice: 辺の番号ごとの端点の組を、番号 1, 2, ..., 2L^2 の順に並べて返す。
+
+    長さは常に 2L^2。L <= 2 では異なる番号が同じ頂点対を指す
+    （L=1 は d0 = d1、L=2 は横向きの 2 本が同じ 2 点を結ぶ）。
+    2 元集合として重複を潰すと本数が 2L^2 からずれるので、必ず番号ごとに数える
     （本文 def_lattice の但し書きと同じ理由）。
     """
-    result = []
-    for (i, j) in vertices(L):
-        result.append(((i, j), ((i + 1) % L, j)))   # 添字 ((i,j), h)
-        result.append(((i, j), (i, (j + 1) % L)))   # 添字 ((i,j), v)
-    return result
+    return [endpoints(L, e) for e in range(1, 2 * L * L + 1)]
 
 
 def configurations(L):
