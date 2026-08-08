@@ -699,16 +699,85 @@ s^2
       displayMath(String.raw`x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}`),
     ],
     proof: [
+      paragraph([
+        "準備として ",
+        math(String.raw`-x`),
+        " が平方根の定義の条件を満たすことを見る。",
+      ]),
       displayMath(String.raw`\begin{aligned}
-x&<0 \\
--\sqrt{a}^{(\mathbb{R}_{\ge 0})}=x \text{ になるような } a \\
-\sqrt{a}^{(\mathbb{R}_{\ge 0})}=-x \\
-\left(\text{自乗して }a\text{ になる実数のうち }a>0\text{ のもの}\right)=-x \\
-\left(\text{自乗して }a\text{ になる実数のうち }a>0\text{ のもの}\right)^2=(-x)^2 \\
-a=(-x)^2 \\
-x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
+-x
+&>-0
+&&(\because\ x<0\ \text{と加法の逆元による順序の反転})\\
+&=0
+&&(\because\ 0\ \text{の加法の逆元は}\ 0)
 \end{aligned}`),
+      paragraph([
+        "であり、とくに ",
+        math(String.raw`-x\in\mathbb{R}_{\ge 0}`),
+        " である。また ",
+        math(String.raw`(-x)^2\in\mathbb{R}_{\ge 0}`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-x)^2
+&=(-x)^2
+&&(\because\ \text{等号の反射律})
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。したがって ",
+        math(String.raw`y=-x`),
+        " は条件 ",
+        math(String.raw`y\in\mathbb{R}_{\ge 0}\ \land\ y^2=(-x)^2`),
+        " を満たす。この条件を満たす ",
+        math(String.raw`y`),
+        " はただ一つであり（",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "）、それが ",
+        math(String.raw`\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}`),
+        " である（",
+        ref("definition_of_sqrt_r_positive"),
+        "）。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
+&=-x
+&&(\because\ \text{平方根の定義と、条件を満たす元の一意性})
+\end{aligned}`),
+      paragraph([
+        "である。以上を使って主張を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
+&=-(-x)
+&&(\because\ \text{準備で得た等式})\\
+&=x
+&&(\because\ \text{加法の逆元の逆元はもとの元})
+\end{aligned}`),
+      paragraph([
+        "すなわち ",
+        math(String.raw`x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}`),
+        " である。",
+      ]),
+      paragraph([
+        "引いたブロック: ",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "。",
+      ]),
     ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（Typst）の証明は等号でつながった式変形ではなく、" +
+          "「-√a = x になるような a」「自乗して a になる実数のうち…」という探索の過程を" +
+          "数式の中の日本語として並べたものだった。どの行がどの行から従うのかが書かれておらず、" +
+          "そのままでは一ステップ一定理の形に写せない。" +
+          "原文が辿っていた筋（-x が平方根の条件を満たすことを見て、一意性から √((-x)^2) = -x を" +
+          "出し、両辺の符号を反転する）をそのまま保ったうえで、" +
+          "一続きの式変形と行末の根拠へ書き換えた。ステップは減らしていない。",
+      ],
+    },
   },
   {
     id: "calc_formulae_003_matrix_decomposition",

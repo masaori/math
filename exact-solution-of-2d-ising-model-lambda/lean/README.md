@@ -95,7 +95,9 @@ bash scripts/check-no-sorry.sh
 | `Ising2DLambda/NecSuf/AlgebraicEigenvalue/PermutationSign.lean` | 必要十分版。有限型と判定できる二項関係、および**三分律だけ**を仮定する（推移律を使っていない） |
 | `Ising2DLambda/AlgebraicEigenvalue/Determinant.lean` | 定数多項式を与える写像・単位行列・行列式の定義と、恒等でない置換が 2 点以上を動かすこと・対角行列の行列式（具体版） |
 | `Ising2DLambda/NecSuf/AlgebraicEigenvalue/Determinant.lean` | 必要十分版。添字の側は有限型と相等の判定、値の側は可換半環、重みには `w 1 = 1` **だけ**を仮定する（符号の乗法性を使っていない） |
-| `Ising2DLambda/AlgebraicEigenvalue/*FromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出（3 件） |
+| `Ising2DLambda/AlgebraicEigenvalue/SecondPolynomial.lean` | もう 1 つの不定元 `t` の多項式環 `ℤ[x][t]`・定数として送る写像・次数の上界 `D_n`・モニックな次数 `n` の元 `M_n` の定義と、4 主張（有限和・有限積の次数、モニックな元の有限積、モニック + 低次）（具体版） |
+| `Ising2DLambda/NecSuf/AlgebraicEigenvalue/SecondPolynomial.lean` | 必要十分版。係数環に**半環だけ**を仮定する（引き算も零因子の非存在も使っていない。2 元の補題は可換性さえ要らない） |
+| `Ising2DLambda/AlgebraicEigenvalue/*FromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出（4 件） |
 
 必要十分版が示したのは次の 4 点である。
 

@@ -4066,8 +4066,8 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
       ]),
       paragraph([
         "この主張は、次のセクションで特性多項式の次数を数えるときに使う。",
-        "恒等置換の項だけが ",
-        math(String.raw`\lambda`),
+        "恒等置換の項だけが特性多項式の不定元 ",
+        math(String.raw`t`),
         " を ",
         math(String.raw`|R_L|`),
         " 個ぶん含み、他の項は 2 個以上少ない、という形で効く。",
@@ -4246,6 +4246,630 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         "転倒数の作り方も、",
         ref("claim_permutation_sign_mul"),
         " の乗法性も使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_lambda_polynomial",
+    kind: "definition",
+    title: { text: "整係数多項式を係数とする、もう 1 つの不定元の多項式" },
+    labels: ["def_second_polynomial_ring"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondPoly"],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        "特性多項式を書く場所を用意する。",
+        ref("def_partition_polynomial"),
+        " の不定元 ",
+        math(String.raw`x`),
+        " とは別の不定元 ",
+        math(String.raw`t`),
+        " を取り、",
+        math(String.raw`\mathbb{Z}[x]`),
+        " を係数環とする ",
+        math(String.raw`t`),
+        " の多項式環を ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`f\in\mathbb{Z}[x][t]`),
+        " と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " に対して、",
+        math(String.raw`f`),
+        " の ",
+        math(String.raw`t^{k}`),
+        " の係数を ",
+        math(String.raw`\mathrm{cf}_k(f)\in\mathbb{Z}[x]`),
+        " と書く。",
+        math(String.raw`\mathrm{cf}_k(f)\ne0`),
+        " となる ",
+        math(String.raw`k`),
+        " は有限個であり、",
+      ]),
+      displayMath(String.raw`f=\sum_{k:\ \mathrm{cf}_k(f)\ne0}\mathrm{cf}_k(f)\cdot t^{\,k}`),
+      paragraph([
+        "が成り立つ。和と積は係数の言葉で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k(f+g)&=\mathrm{cf}_k(f)+\mathrm{cf}_k(g)\\
+\mathrm{cf}_k(f\cdot g)&=\sum_{i=0}^{k}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
+\end{aligned}
+\qquad(f,g\in\mathbb{Z}[x][t],\ k\in\mathbb{N})`),
+      paragraph([
+        "で与えられる。これは多項式環の演算の定義であって、証明すべきことではない。",
+        "以下の主張はすべてこの 2 つの等式だけから出る。",
+      ]),
+      paragraph([
+        "不定元の名前について 1 点を約束する。この不定元を ",
+        math(String.raw`\lambda`),
+        " と書かない。",
+        math(String.raw`\lambda`),
+        " は ",
+        ref("def_log_order_group"),
+        " の元を表す記号として固定してあり、同じ記号に 2 つの意味を持たせないためである。",
+      ]),
+      paragraph([
+        "現れるのは整数、有限和、有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_lambda_constant_embedding",
+    kind: "definition",
+    title: { text: "整係数多項式を定数として送る写像" },
+    labels: ["def_second_constant_embedding"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.constSecond"],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        math(String.raw`a\in\mathbb{Z}[x]`),
+        " に対して、",
+        ref("def_second_polynomial_ring"),
+        " の ",
+        math(String.raw`t`),
+        " について定数である元を与える写像 ",
+        math(String.raw`\iota:\mathbb{Z}[x]\to\mathbb{Z}[x][t]`),
+        " を",
+      ]),
+      displayMath(String.raw`\mathrm{cf}_0\bigl(\iota(a)\bigr):=a,
+\qquad
+\mathrm{cf}_k\bigl(\iota(a)\bigr):=0\quad(k\ge1)`),
+      paragraph([
+        "で定める。",
+        math(String.raw`\iota`),
+        " は和と積を保ち、",
+        math(String.raw`\iota\bigl(\kappa(0)\bigr)`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の零元、",
+        math(String.raw`\iota\bigl(\kappa(1)\bigr)`),
+        " は単位元である（",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元を ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元として扱う経路はこの写像だけとし、両者を同じ記号で書くことはしない",
+        "（",
+        ref("def_constant_polynomial"),
+        " で整数と定数多項式を書き分けたのと同じ理由である）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_lambda_degree_bound",
+    kind: "definition",
+    title: { text: "次数が与えられた自然数以下である元の全体" },
+    labels: ["def_second_degree_bound"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.DegLe"],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " に対して、",
+        ref("def_second_polynomial_ring"),
+        " の元のうち次数が ",
+        math(String.raw`n`),
+        " 以下であるものの全体を",
+      ]),
+      displayMath(
+        String.raw`\mathcal{D}_n:=\bigl\{\,f\in\mathbb{Z}[x][t] \;\bigm|\; \text{任意の}\ k\in\mathbb{N}\ \text{について}\ k>n\ \text{ならば}\ \mathrm{cf}_k(f)=0\,\bigr\}`,
+      ),
+      paragraph([
+        "と書く。",
+      ]),
+      paragraph([
+        "次数そのものを写像として定めず、上界の条件を満たす元の全体として定めている。",
+        "こうするのは、零多項式の次数をいくつと決めるかという約束が要らなくなるためであり、",
+        "以下で必要になるのが上界だけだからである。",
+        "定義から、",
+        math(String.raw`n\le n'`),
+        " ならば ",
+        math(String.raw`\mathcal{D}_n\subset\mathcal{D}_{n'}`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_lambda_monic",
+    kind: "definition",
+    title: { text: "モニックな、次数がちょうど与えられた自然数である元の全体" },
+    labels: ["def_second_monic"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.MonicDeg"],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`\mathcal{M}_n:=\bigl\{\,f\in\mathcal{D}_n \;\bigm|\; \mathrm{cf}_n(f)=\kappa(1)\,\bigr\}`,
+      ),
+      paragraph([
+        "と書き、この集合の元をモニックな次数 ",
+        math(String.raw`n`),
+        " の元と呼ぶ（",
+        math(String.raw`\mathcal{D}_n`),
+        " は ",
+        ref("def_second_degree_bound"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        "すなわち ",
+        math(String.raw`t^{\,n}`),
+        " の係数が ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の単位元であり、それより高い次数の係数がすべて ",
+        math(String.raw`0`),
+        " である元のことである。",
+      ]),
+      paragraph([
+        "この呼び方が意味をもつこと、すなわち ",
+        math(String.raw`f`),
+        " に対して ",
+        math(String.raw`f\in\mathcal{M}_n`),
+        " となる ",
+        math(String.raw`n`),
+        " が高々 1 つであることを見る。",
+        math(String.raw`n\ne n''`),
+        " として ",
+        math(String.raw`f\in\mathcal{M}_n`),
+        " と ",
+        math(String.raw`f\in\mathcal{M}_{n''}`),
+        " がともに成り立つとする。",
+        math(String.raw`n<n''`),
+        " としてよい。このとき ",
+        math(String.raw`f\in\mathcal{D}_n`),
+        " と ",
+        math(String.raw`n''>n`),
+        " から ",
+        math(String.raw`\mathrm{cf}_{n''}(f)=0`),
+        " が出るが、",
+        math(String.raw`f\in\mathcal{M}_{n''}`),
+        " から ",
+        math(String.raw`\mathrm{cf}_{n''}(f)=\kappa(1)`),
+        " も出る。",
+        math(String.raw`\kappa(1)\ne0`),
+        " なのでこれは矛盾である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_lambda_degree_sum",
+    kind: "claim",
+    title: { text: "次数が n 以下である元の有限和は、次数が n 以下である" },
+    labels: ["claim_second_degree_sum"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_sum",
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_sum_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_sum",
+    ],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        "、有限集合 ",
+        math(String.raw`S`),
+        "、および各 ",
+        math(String.raw`s\in S`),
+        " について ",
+        math(String.raw`f_s\in\mathcal{D}_n`),
+        " が与えられているとする（",
+        math(String.raw`\mathcal{D}_n`),
+        " は ",
+        ref("def_second_degree_bound"),
+        "）。このとき",
+      ]),
+      displayMath(String.raw`\sum_{s\in S}f_s\ \in\ \mathcal{D}_n`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k>n`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k\Bigl(\sum_{s\in S}f_s\Bigr)
+&=\sum_{s\in S}\mathrm{cf}_k(f_s)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数、}S\ \text{の元の個数についての帰納法})\\
+&=\sum_{s\in S}0
+&&(\because\ f_s\in\mathcal{D}_n\ \text{と}\ k>n)\\
+&=0
+&&(\because\ \text{零元の有限和は零元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k>n`),
+        " を満たす ",
+        math(String.raw`k`),
+        " は任意だったので ",
+        math(String.raw`\sum_{s\in S}f_s\in\mathcal{D}_n`),
+        " である。",
+      ]),
+      paragraph([
+        "使ったのは和の係数が係数の和であることと有限和の性質だけであり、",
+        "積も引き算も使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_lambda_degree_prod",
+    kind: "claim",
+    title: { text: "次数の上界は有限積で足し合わされる" },
+    labels: ["claim_second_degree_prod"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_mul",
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_prod",
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_prod_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_mul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_prod",
+    ],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        "有限集合 ",
+        math(String.raw`S`),
+        "、および各 ",
+        math(String.raw`s\in S`),
+        " について ",
+        math(String.raw`n_s\in\mathbb{N}`),
+        " と ",
+        math(String.raw`f_s\in\mathcal{D}_{n_s}`),
+        " が与えられているとする（",
+        math(String.raw`\mathcal{D}_n`),
+        " は ",
+        ref("def_second_degree_bound"),
+        "）。このとき",
+      ]),
+      displayMath(
+        String.raw`\prod_{s\in S}f_s\ \in\ \mathcal{D}_{\,\sum_{s\in S}n_s}`,
+      ),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、2 つの元の積について示す。",
+        math(String.raw`f\in\mathcal{D}_m`),
+        "、",
+        math(String.raw`g\in\mathcal{D}_n`),
+        " とし、",
+        math(String.raw`k>m+n`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " と ",
+        math(String.raw`0\le i\le k`),
+        " を取る。",
+        math(String.raw`i>m`),
+        " のときは",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
+&=0\cdot\mathrm{cf}_{k-i}(g)
+&&(\because\ f\in\mathcal{D}_m\ \text{と}\ i>m)\\
+&=0
+&&(\because\ \mathbb{Z}[x]\ \text{の零元を掛けると零元})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`i\le m`),
+        " のときは ",
+        math(String.raw`k-i\ge k-m>n`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
+&=\mathrm{cf}_i(f)\cdot0
+&&(\because\ g\in\mathcal{D}_n\ \text{と}\ k-i>n)\\
+&=0
+&&(\because\ \mathbb{Z}[x]\ \text{の零元を掛けると零元})
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も項は ",
+        math(String.raw`0`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k(f\cdot g)
+&=\sum_{i=0}^{k}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の積の係数})\\
+&=\sum_{i=0}^{k}0
+&&(\because\ \text{上の 2 つの場合})\\
+&=0
+&&(\because\ \text{零元の有限和は零元})
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`f\cdot g\in\mathcal{D}_{m+n}`),
+        " を得る。",
+      ]),
+      paragraph([
+        "本体は ",
+        math(String.raw`S`),
+        " の元の個数についての帰納法である。",
+        math(String.raw`S=\emptyset`),
+        " のとき、空積は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元 ",
+        math(String.raw`\iota(\kappa(1))`),
+        " であり、",
+        math(String.raw`k>0=\sum_{s\in\emptyset}n_s`),
+        " ならば ",
+        math(String.raw`\mathrm{cf}_k(\iota(\kappa(1)))=0`),
+        " なので（",
+        ref("def_second_constant_embedding"),
+        "）、これは ",
+        math(String.raw`\mathcal{D}_0`),
+        " の元である。",
+      ]),
+      paragraph([
+        "帰納の一歩では、",
+        math(String.raw`s_0\notin S'`),
+        " として ",
+        math(String.raw`S=S'\cup\{s_0\}`),
+        " と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{s\in S}f_s
+&=f_{s_0}\cdot\prod_{s\in S'}f_s
+&&(\because\ \text{有限積から 1 つの因子を括り出す})
+\end{aligned}`),
+      paragraph([
+        "であり、帰納法の仮定より ",
+        math(String.raw`\prod_{s\in S'}f_s\in\mathcal{D}_{\sum_{s\in S'}n_s}`),
+        " である。準備を ",
+        math(String.raw`f=f_{s_0}`),
+        "、",
+        math(String.raw`g=\prod_{s\in S'}f_s`),
+        " に当てると",
+      ]),
+      displayMath(
+        String.raw`\prod_{s\in S}f_s\ \in\ \mathcal{D}_{\,n_{s_0}+\sum_{s\in S'}n_s}=\mathcal{D}_{\,\sum_{s\in S}n_s}`,
+      ),
+      paragraph([
+        "を得る。",
+      ]),
+      paragraph([
+        "使ったのは積の係数の形と、零元を掛けると零元になることだけである。",
+        "引き算も、零因子が無いことも使っていない",
+        "（上界の主張なので、最高次の係数が消えないことを要求していない）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_lambda_monic_prod",
+    kind: "claim",
+    title: { text: "モニックな元の有限積はモニックであり、その次数は次数の和である" },
+    labels: ["claim_second_monic_prod"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_mul",
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_prod",
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_prod_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_mul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_prod",
+    ],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        "有限集合 ",
+        math(String.raw`S`),
+        "、および各 ",
+        math(String.raw`s\in S`),
+        " について ",
+        math(String.raw`n_s\in\mathbb{N}`),
+        " と ",
+        math(String.raw`f_s\in\mathcal{M}_{n_s}`),
+        " が与えられているとする（",
+        math(String.raw`\mathcal{M}_n`),
+        " は ",
+        ref("def_second_monic"),
+        "）。このとき",
+      ]),
+      displayMath(
+        String.raw`\prod_{s\in S}f_s\ \in\ \mathcal{M}_{\,\sum_{s\in S}n_s}`,
+      ),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、2 つの元の積について示す。",
+        math(String.raw`f\in\mathcal{M}_m`),
+        "、",
+        math(String.raw`g\in\mathcal{M}_n`),
+        " とする。",
+        math(String.raw`f\in\mathcal{D}_m`),
+        " かつ ",
+        math(String.raw`g\in\mathcal{D}_n`),
+        " なので ",
+        ref("claim_second_degree_prod"),
+        " の準備より ",
+        math(String.raw`f\cdot g\in\mathcal{D}_{m+n}`),
+        " である。残るのは ",
+        math(String.raw`t^{\,m+n}`),
+        " の係数であり、",
+        math(String.raw`0\le i\le m+n`),
+        " について、",
+        math(String.raw`i>m`),
+        " のときは ",
+        math(String.raw`\mathrm{cf}_i(f)=0`),
+        "、",
+        math(String.raw`i<m`),
+        " のときは ",
+        math(String.raw`m+n-i>n`),
+        " より ",
+        math(String.raw`\mathrm{cf}_{m+n-i}(g)=0`),
+        " なので、いずれの場合も項は ",
+        math(String.raw`0`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_{m+n}(f\cdot g)
+&=\sum_{i=0}^{m+n}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{m+n-i}(g)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の積の係数})\\
+&=\mathrm{cf}_m(f)\cdot\mathrm{cf}_{n}(g)
+&&(\because\ i\ne m\ \text{の項は}\ 0\ \text{であり、零元は和に寄与しない})\\
+&=\kappa(1)\cdot\kappa(1)
+&&(\because\ \blkref{def_second_monic})\\
+&=\kappa(1)
+&&(\because\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`f\cdot g\in\mathcal{M}_{m+n}`),
+        " を得る。",
+      ]),
+      paragraph([
+        "本体は ",
+        math(String.raw`S`),
+        " の元の個数についての帰納法である。",
+        math(String.raw`S=\emptyset`),
+        " のとき、空積は単位元 ",
+        math(String.raw`\iota(\kappa(1))`),
+        " であり ",
+        math(String.raw`\mathrm{cf}_0(\iota(\kappa(1)))=\kappa(1)`),
+        " なので（",
+        ref("def_second_constant_embedding"),
+        "）、これは ",
+        math(String.raw`\mathcal{M}_0`),
+        " の元である。",
+        "帰納の一歩は ",
+        ref("claim_second_degree_prod"),
+        " の本体と同じく 1 つの因子を括り出し、準備を当てればよい。",
+      ]),
+      paragraph([
+        "使ったのは積の係数の形、零元を掛けると零元になること、そして ",
+        math(String.raw`\kappa(1)`),
+        " が単位元であることだけである。引き算も、零因子が無いことも使っていない",
+        "（最高次の係数が単位元であることから、積の最高次の係数が消えないことが直接に出る）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_lambda_monic_add_lower",
+    kind: "claim",
+    title: { text: "モニックな元に次数の低い元を足してもモニックである" },
+    labels: ["claim_second_monic_add_lower"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_add_of_degLe",
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_add_of_degLe_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_add_of_degLe",
+    ],
+    verification: ["sagemath/check/second-polynomial-degree"],
+    statement: [
+      paragraph([
+        math(String.raw`n,n'\in\mathbb{N}`),
+        " が ",
+        math(String.raw`n'<n`),
+        " を満たし、",
+        math(String.raw`f\in\mathcal{M}_n`),
+        " と ",
+        math(String.raw`g\in\mathcal{D}_{n'}`),
+        " が与えられているとする（",
+        ref("def_second_degree_bound"),
+        "、",
+        ref("def_second_monic"),
+        "）。このとき",
+      ]),
+      displayMath(String.raw`f+g\ \in\ \mathcal{M}_n`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一に、",
+        math(String.raw`k>n`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k(f+g)
+&=\mathrm{cf}_k(f)+\mathrm{cf}_k(g)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
+&=0+0
+&&(\because\ f\in\mathcal{D}_n\ \text{と}\ k>n,\ \ g\in\mathcal{D}_{n'}\ \text{と}\ k>n>n')\\
+&=0
+&&(\because\ 0\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`f+g\in\mathcal{D}_n`),
+        " である。第二に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_n(f+g)
+&=\mathrm{cf}_n(f)+\mathrm{cf}_n(g)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
+&=\kappa(1)+0
+&&(\because\ \blkref{def_second_monic}\text{、および}\ g\in\mathcal{D}_{n'}\ \text{と}\ n>n')\\
+&=\kappa(1)
+&&(\because\ 0\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "である。以上より ",
+        math(String.raw`f+g\in\mathcal{M}_n`),
+        " を得る。",
+      ]),
+      paragraph([
+        "この主張が次のセクションで効く形は次のとおりである。特性多項式は ",
+        ref("def_determinant"),
+        " の和であり、恒等置換の項がモニックな次数 ",
+        math(String.raw`|R_L|`),
+        " の元、他の項の和が次数 ",
+        math(String.raw`|R_L|-2`),
+        " 以下の元になる。",
       ]),
     ],
   },

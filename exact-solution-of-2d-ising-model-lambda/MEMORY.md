@@ -6,15 +6,16 @@
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」の入口（定義 3 件・主張 5 件。行配位の辞書式順序・置換の符号・行列式）が、
+および章「固有値の代数性」の入口（定義 7 件・主張 9 件。行配位の辞書式順序・置換の符号・行列式・
+もう 1 つの不定元 $t$ の多項式環と次数）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 21 件・主張 19 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 21 件と主張 19 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 69 件を登録）が通る |
-| Lean 必要十分版 | 主張 17 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 25 件・主張 23 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 25 件と主張 23 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 85 件を登録）が通る |
+| Lean 必要十分版 | 主張 21 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -102,7 +103,25 @@ $\det A=\sum_{\varphi\in\mathfrak{S}_L}\kappa(\mathrm{sgn}(\varphi))\prod_{\tau\
   必要十分版が示したのは、この証明が値の側に可換半環しか要求せず（引き算を一度も使っていない）、
   重みには $w(\mathrm{id})=1$ しか要求しないこと、すなわち**符号の乗法性を使っていない**ことである。
 
-この 2 つは、次のセクションで特性多項式の次数を数えるための道具である。
+この 2 つは、特性多項式の次数を数えるための道具である。
+
+さらに、特性多項式を書く場所として、$\mathbb{Z}[x]$ を係数環とするもう 1 つの不定元 $t$ の
+多項式環 $\mathbb{Z}[x][t]$、係数写像 $\mathrm{cf}_k$、$\mathbb{Z}[x]$ の元を定数として送る写像
+$\iota$、次数が $n$ 以下である元の全体 $\mathcal{D}_n$、モニックな次数 $n$ の元の全体
+$\mathcal{M}_n$ を定義し、次の 4 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+**不定元を $\lambda$ と書かない。** $\lambda$ は対数順序群 $\Lambda$ の元を表す記号として
+固定してあるためである（README「1 つの記号は 1 つの意味に固定する」）。
+
+- $\mathcal{D}_n$ の元の有限和は $\mathcal{D}_n$ の元である。
+- 次数の上界は有限積で足し合わされる（$f_s\in\mathcal{D}_{n_s}$ なら
+  $\prod_s f_s\in\mathcal{D}_{\sum_s n_s}$）。
+- モニックな元の有限積はモニックであり、その次数は次数の和である。
+- モニックな元に次数の低い元を足してもモニックである。
+  必要十分版が示したのは、この 4 つの証明が係数環に**半環しか要求しない**ことである
+  （引き算も、零因子が無いことも使っていない。2 元の補題は積の可換性さえ使っていない）。
+
+次数を写像として定めず上界の条件として定めたのは、零多項式の次数を決める約束を要らなくするためである。
 
 ## 進め方（自動ループ）
 
@@ -117,9 +136,14 @@ $\det A=\sum_{\varphi\in\mathfrak{S}_L}\kappa(\mathrm{sgn}(\varphi))\prod_{\tau\
 
 ## 次回やること
 
-1. **特性多項式の定義と、それが $\mathbb{Z}[x][\lambda]$ のモニックな $2^L$ 次の元であること**
+1. **特性多項式の定義と、それが $\mathbb{Z}[x][t]$ のモニックな $2^L$ 次の元であること**
    （章「固有値の代数性」の続き）。必要な道具（行列式の定義、対角行列の行列式、
-   恒等でない置換が 2 点以上を動かすこと）は済んでいる。台帳の todo の先頭。
+   恒等でない置換が 2 点以上を動かすこと、$\mathbb{Z}[x][t]$ の次数とモニック性の 4 主張）は
+   済んでいる。台帳の todo の先頭。
+   着手前に決めることが 1 つある。特性多項式は $\mathbb{Z}[x][t]$ を成分とする行列の行列式なので、
+   既に書いた行列と行列式（成分が $\mathbb{Z}[x]$）をそのまま使えない。人手証明は抽象度を上げない
+   規律なので、$\mathbb{Z}[x][t]$ を成分とする行列とその行列式をもう 1 度書き下すことになる
+   （一般の可換環へ持ち上げるのは規律違反。抽象化は Lean の必要十分版の側で行う）。
 
 ## 未解決の設計問題
 

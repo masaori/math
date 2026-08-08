@@ -167,7 +167,7 @@ SageMath 検証は浮動小数点を既定にしない。$\mathbb{R}$ 脱出を�
 | 分配多項式 | 格子・配位・破れボンド数・多重度・$Z_L(x)\in\mathbb{Z}[x]$ | $\mathbb{N}$, $\mathbb{Z}[x]$ |
 | 有限系の自由エントロピー | $\Phi_L=\log Z_L(q)\in\Lambda$（素因数分解の指数ベクトル） | $\Lambda$ |
 | 転送行列 | $T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$ | $\mathbb{Z}[x]$ |
-| 固有値の代数性 | 特性多項式 $\in\mathbb{Z}[x][\lambda]$、円分体上の対角化 | $\overline{\mathbb{Q}}$ |
+| 固有値の代数性 | 特性多項式 $\in\mathbb{Z}[x][t]$、円分体上の対角化 | $\overline{\mathbb{Q}}$ |
 | Fisher 零点 | 零点 $\in\overline{\mathbb{Q}}$、Kramers–Wannier 双対、$x_c=\sqrt2-1$ | $\overline{\mathbb{Q}}$ |
 | 零点の詰め寄り | 相転移を $\mathbb{Q}$ 上の量化言明として書く | $\mathbb{Q}$, $\overline{\mathbb{Q}}$ |
 | 熱力学極限 | 自由エネルギー密度・零点密度。**ここが $\mathbb{R}$ 脱出** | $\mathbb{R}$ |

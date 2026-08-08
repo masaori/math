@@ -63,3 +63,6 @@ import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.Determinant
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.Determinant
 import Ising2DLambda.AlgebraicEigenvalue.DeterminantFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.SecondPolynomial
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.SecondPolynomial
+import Ising2DLambda.AlgebraicEigenvalue.SecondPolynomialFromNecSuf

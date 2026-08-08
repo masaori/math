@@ -102,6 +102,22 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal_from_necSuf
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.two_le_card_moved
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.det_diagonal
+  Ising2DLambda.AlgebraicEigenvalue.degLe_sum
+  Ising2DLambda.AlgebraicEigenvalue.degLe_mul
+  Ising2DLambda.AlgebraicEigenvalue.degLe_prod
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_mul
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_prod
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_add_of_degLe
+  Ising2DLambda.AlgebraicEigenvalue.degLe_sum_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.degLe_prod_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_prod_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_add_of_degLe_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_sum
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_prod
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_prod
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_add_of_degLe
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
