@@ -15,7 +15,9 @@
 （人手証明のラベル `claim_configuration_partition`・`claim_coefficient_representation`・
 `claim_coefficient_sum`）、および章「有限系の自由エントロピー」の定義 4 件と主張 5 件
 （`claim_rational_exponent_well_defined`・`claim_value_at_rational_is_positive`・
-`claim_log_additive`・`claim_log_power`・`claim_free_entropy_at_one`）を形式化済み。
+`claim_log_additive`・`claim_log_power`・`claim_free_entropy_at_one`）、
+および章「転送行列」の定義 4 件と主張 2 件
+（`claim_edge_row_partition`・`claim_broken_bond_row_decomposition`）を形式化済み。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
 import Ising2DLambda.PartitionPolynomial.CoefficientSum
@@ -35,3 +37,7 @@ import Ising2DLambda.FreeEntropy.Additivity
 import Ising2DLambda.NecSuf.FreeEntropy.Additivity
 import Ising2DLambda.FreeEntropy.AdditivityFromNecSuf
 import Ising2DLambda.FreeEntropy.AtOne
+import Ising2DLambda.TransferMatrix.Basic
+import Ising2DLambda.TransferMatrix.RowDecomposition
+import Ising2DLambda.NecSuf.TransferMatrix.RowDecomposition
+import Ising2DLambda.TransferMatrix.RowDecompositionFromNecSuf

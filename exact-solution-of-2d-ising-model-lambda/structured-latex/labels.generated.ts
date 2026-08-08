@@ -6,9 +6,11 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_broken_bond_row_decomposition",
   "claim_coefficient_representation",
   "claim_coefficient_sum",
   "claim_configuration_partition",
+  "claim_edge_row_partition",
   "claim_free_entropy_at_one",
   "claim_log_additive",
   "claim_log_power",
@@ -17,12 +19,16 @@ export const ALL_LABELS = [
   "def_broken_bond_count",
   "def_configuration",
   "def_finite_free_entropy",
+  "def_inter_row_broken_count",
+  "def_intra_row_broken_count",
   "def_lattice",
   "def_log_order_group",
   "def_multiplicity",
   "def_partition_polynomial",
   "def_prime_exponent",
   "def_rational_log",
+  "def_row_configuration",
+  "def_row_restriction",
   "remark_planned_chapters",
 ] as const
 

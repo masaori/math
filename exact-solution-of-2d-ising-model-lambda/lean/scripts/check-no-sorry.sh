@@ -53,6 +53,14 @@ targets=(
   Ising2DLambda.NecSuf.FreeEntropy.map_pow_eq_nsmul
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_one
   Ising2DLambda.FreeEntropy.freeEntropy_at_one
+  Ising2DLambda.TransferMatrix.card_rowConfig
+  Ising2DLambda.TransferMatrix.edgeOfSum_injective
+  Ising2DLambda.TransferMatrix.edgeOfRow_boundary0
+  Ising2DLambda.TransferMatrix.edgeOfRow_boundary1_horizontal
+  Ising2DLambda.TransferMatrix.edgeOfRow_boundary1_vertical
+  Ising2DLambda.TransferMatrix.brokenBondCount_eq_row_decomposition
+  Ising2DLambda.TransferMatrix.brokenBondCount_eq_row_decomposition_from_necSuf
+  Ising2DLambda.NecSuf.TransferMatrix.card_filter_eq_sum_add_sum
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

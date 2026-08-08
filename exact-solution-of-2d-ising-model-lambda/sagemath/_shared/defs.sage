@@ -112,3 +112,53 @@ def partition_polynomial_from_multiplicity(L):
     partition_polynomial(L) とは作り方が独立なので、両者の一致が主張の内容になる。
     """
     return PolynomialRingZx(multiplicity_vector(L))
+
+
+# --- 章「転送行列」の定義 -------------------------------------------------
+#   def_row_configuration        -> row_configurations(L)
+#   def_row_restriction          -> row_restriction(L, sigma, i)
+#   def_intra_row_broken_count   -> intra_row_broken_count(L, tau)
+#   def_inter_row_broken_count   -> inter_row_broken_count(L, tau, tau_next)
+#   claim_edge_row_partition     -> horizontal_edge_numbers_of_row(L, i)
+#                                   vertical_edge_numbers_of_row(L, i)
+
+
+def row_configurations(L):
+    """def_row_configuration: 行配位 tau: Z/LZ -> {+1,-1} を全列挙する。個数は 2^L。
+
+    行配位は列番号 j = 0, ..., L-1 を添字とする辞書として表す。
+    """
+    for values in product([1, -1], repeat=L):
+        yield dict(zip(range(L), values))
+
+
+def row_restriction(L, sigma, i):
+    """def_row_restriction: 配位 sigma の第 i 行への制限 rho_i(sigma) を返す。
+
+    本文と同じく rho_i(sigma) と呼び、sigma_i とは書かない
+    （添字を付けた sigma に別の意味を持たせないため）。
+    """
+    return {j: sigma[(i % L, j)] for j in range(L)}
+
+
+def intra_row_broken_count(L, tau):
+    """def_intra_row_broken_count: b_h(tau) = |{ j | tau(j) != tau(j+1) }|。
+
+    j+1 は Z/LZ の中の加法（周期境界）。
+    """
+    return sum(1 for j in range(L) if tau[j] != tau[(j + 1) % L])
+
+
+def inter_row_broken_count(L, tau, tau_next):
+    """def_inter_row_broken_count: b_v(tau, tau') = |{ j | tau(j) != tau'(j) }|。"""
+    return sum(1 for j in range(L) if tau[j] != tau_next[j])
+
+
+def horizontal_edge_numbers_of_row(L, i):
+    """claim_edge_row_partition: E_{L,h,i} = { iL + j + 1 | j = 0, ..., L-1 }。"""
+    return [i * L + j + 1 for j in range(L)]
+
+
+def vertical_edge_numbers_of_row(L, i):
+    """claim_edge_row_partition: E_{L,v,i} = { L^2 + iL + j + 1 | j = 0, ..., L-1 }。"""
+    return [L * L + i * L + j + 1 for j in range(L)]

@@ -4,15 +4,16 @@
 
 ## 現在の到達点（2026-08-08 時点）
 
-章「分配多項式」（定義 4 件・主張 3 件）と、章「有限系の自由エントロピー」
-（定義 4 件・主張 5 件）が、四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
+章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
+および章「転送行列」の入口（定義 4 件・主張 2 件）が、
+四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 8 件・主張 8 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 8 件と主張 8 件。`lake build` と `check-no-sorry.sh`（定理 20 件を登録）が通る |
-| Lean 必要十分版 | 主張 7 件について作成済み（$\Phi_L(1)=L^2\ell_2$ は既存の主張をつなぐだけなので置いていない）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 12 件・主張 10 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 12 件と主張 10 件。`lake build` と `check-no-sorry.sh`（定理 28 件を登録）が通る |
+| Lean 必要十分版 | 主張 8 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -37,6 +38,15 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
 - 対数の冪の法則 $\log(q^k)=k\log q$（$k\in\mathbb{N}$。$k=0$ の場合が $\log 1=0$）。
 - $\Phi_L(1)=L^2\ell_2$。すべての配位を等しく数える点での自由エントロピーは配位の総数の対数に等しい。
 
+章「転送行列」では、行配位 $\tau\in R_L$、配位の第 $i$ 行への制限 $\rho_i(\sigma)$、
+行内破れ数 $b_\mathrm{h}$、行間破れ数 $b_\mathrm{v}$ を定義し、次の 2 つを示した。
+この範囲にも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- 辺の番号の集合は行ごとに分割される（各行 $L$ 本・互いに素・合併がもとの集合・端点が番号から読める）。
+- 破れボンド数は行内の破れと行間の破れに分かれる
+  （$b(\sigma)=\sum_i b_\mathrm{h}(\rho_i(\sigma))+\sum_i b_\mathrm{v}(\rho_i(\sigma),\rho_{i+1}(\sigma))$）。
+  これが転送行列を作る足場である。第 1 の和は行ごとに閉じ、第 2 の和は隣り合う 2 行だけを結ぶ。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
@@ -50,10 +60,12 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
 
 ## 次回やること
 
-1. **章「転送行列」の入口**。行配位を定義し、破れボンド数を行内・行間へ分解する
-   （辺の番号を横向き・縦向きに分けてあるのでそのまま使える）。台帳の todo の先頭。
-2. 続いて $T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$。
+1. **転送行列そのものの定義**。行配位の 2 つ組を添字とする行列
+   $T\in M_{2^L}(\mathbb{Z}[x])$ を、行内破れ数と行間破れ数から
+   $T_{\tau,\tau'}=x^{\,b_\mathrm{h}(\tau)+b_\mathrm{v}(\tau,\tau')}$ の形で定め、
+   $Z_L=\operatorname{Tr}(T^L)$ を示す。台帳の todo の先頭。
    指数形 $e^{K\sigma\sigma'}$ を経由しない経路で書く（README「形式変数のまま進む」）。
+   前提となる破れボンド数の分解は済んでいる。
 
 ## 未解決の設計問題
 
@@ -76,6 +88,8 @@ $\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、
   周期境界の $L\le2$ で $|E_L|=2L^2$ が破れていた。SageMath 検証が検出し、本文を
   「辺の番号の集合（横向き・縦向きに分割）と端点写像」の定義へ直した。
   経緯は `sagemath/check/partition-polynomial-coefficient-sum/overview.md` に残してある。
+- **行への制限は $\rho_i(\sigma)$ と書く。$\sigma_i$ と書かない。** $\sigma$ は格子全体の配位を表す
+  記号として固定してあり、添字を付けた形に別の意味を持たせないため（README「記号の濫用を排除する」）。
 - 本文の地の文に強調記法（`**`）を使わない（他プロジェクトと同じ運用）。
 - 姉妹プロジェクト `exact-solution-of-2d-ising-model/` の計算を引き写さない。
   可算側で書き直せるかを毎回問う（README「姉妹プロジェクトとの違い」）。
