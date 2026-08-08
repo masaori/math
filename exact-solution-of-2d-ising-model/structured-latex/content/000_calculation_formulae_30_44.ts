@@ -995,38 +995,155 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
     statement: [
       paragraph([
         math(String.raw`z_1, z_2 \in \mathbb{C}`),
+        " について、",
+        math(String.raw`r_1, r_2 \in \mathbb{R}_{\geq 0}`),
+        "、",
+        math(String.raw`\theta_1, \theta_2 \in \mathbb{R}`),
+        " を用いて",
+        math(String.raw`\phi_{\mathrm{polar}}(z_i) = [(r_i,\theta_i)]_{\sim}`),
+        " とし、",
+        math(String.raw`\arg^{[0,2\pi)}(z_i) = \theta_i - 2n_i\pi`),
         "（",
-        math(String.raw`r_1, r_2 \neq 0`),
-        "）について、",
+        math(String.raw`n_i \in \mathbb{Z}`),
+        "）とする。さらに ",
+        math(String.raw`r_1 \neq 0`),
+        " かつ ",
+        math(String.raw`r_2 \neq 0`),
+        "（すなわち ",
+        math(String.raw`z_1 \neq 0`),
+        " かつ ",
+        math(String.raw`z_2 \neq 0`),
+        "）とし、",
         math(String.raw`\arg^{[0,2\pi)}(z_1 z_2) = \pi`),
-        " とする。このとき、",
+        " とする。このとき",
       ]),
       displayMath(
         String.raw`\begin{cases}
-\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2) = \pi & (\exists m\in\mathbb{Z}\ \text{s.t.}\ 0\leq\theta_1+\theta_2-2m\pi<2\pi) \\
-\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2) = \pi+2\pi & (\exists m\in\mathbb{Z}\ \text{s.t.}\ 2\pi\leq\theta_1+\theta_2-2m\pi<4\pi)
+\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2) = \pi & (0 \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 2\pi) \\
+\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2) = \pi+2\pi & (2\pi \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 4\pi)
 \end{cases}`,
       ),
+      paragraph([
+        "が成り立つ。場合分けの条件に現れる整数は ",
+        math(String.raw`n_1+n_2`),
+        " であって、条件を満たす整数が存在すること（",
+        math(String.raw`\exists m\in\mathbb{Z}`),
+        "）ではない。",
+        ref("angle_section_existence_uniqueness"),
+        " により ",
+        math(String.raw`0 \leq \theta_1+\theta_2-2m\pi < 2\pi`),
+        " を満たす整数 ",
+        math(String.raw`m`),
+        " はつねに存在し、同様に ",
+        math(String.raw`2\pi \leq \theta_1+\theta_2-2m'\pi < 4\pi`),
+        " を満たす整数 ",
+        math(String.raw`m'`),
+        " もつねに存在する（",
+        math(String.raw`m'=m-1`),
+        " と取ればよい）ので、存在の形で書くと 2 つの場合がつねに同時に成り立ち、",
+        math(String.raw`\pi = \pi+2\pi`),
+        " という偽の等式が出てしまう。",
+      ]),
+      paragraph([
+        math(String.raw`r_1 \neq 0`),
+        " かつ ",
+        math(String.raw`r_2 \neq 0`),
+        " が要るのは ",
+        ref("arg_of_product_of_complex_numbers"),
+        " を使うためである。",
+      ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`\arg^{[0,2\pi)}(z_1 z_2) = s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}) = \pi`),
-        " から場合分け。",
+        math(String.raw`0 \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 2\pi`),
+        " のとき。",
       ]),
-      paragraph(["a. ", math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<2\pi`), " のとき: ",
-        math(String.raw`\theta_1+\theta_2-2(n_1+n_2)\pi=\pi`),
-        " ゆえ ",
-        math(String.raw`\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)=\pi`),
-        "。",
+      displayMath(
+        String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
+&= \arg^{[0,2\pi)}(z_1 z_2)
+&&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張})\\
+&= \pi
+&&(\because\ \arg^{[0,2\pi)}(z_1 z_2)=\pi\ \text{という仮定})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。あわせて、この場合の ",
+        math(String.raw`\theta_1+\theta_2`),
+        " の値も定まる。",
       ]),
-      paragraph(["b. ", math(String.raw`2\pi\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi`), " のとき: ",
-        math(String.raw`\theta_1+\theta_2-2(n_1+n_2+1)\pi=\pi`),
-        " ゆえ ",
-        math(String.raw`\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)=3\pi`),
-        "。",
+      displayMath(
+        String.raw`\begin{aligned}
+\theta_1+\theta_2-2(n_1+n_2)\pi
+&= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= \arg^{[0,2\pi)}(z_1)+(\theta_2-2n_2\pi)
+&&(\because\ \arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi\ \text{という仮定})\\
+&= \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
+&&(\because\ \arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi\ \text{という仮定})\\
+&= \pi
+&&(\because\ \text{いま示したこと})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`2\pi \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 4\pi`),
+        " のとき。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
+&= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi\right)+2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の逆元と単位元})\\
+&= \arg^{[0,2\pi)}(z_1 z_2)+2\pi
+&&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張})\\
+&= \pi+2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_1 z_2)=\pi\ \text{という仮定})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。あわせて、この場合の ",
+        math(String.raw`\theta_1+\theta_2`),
+        " の値も定まる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\theta_1+\theta_2-2(n_1+n_2+1)\pi
+&= (\theta_1+\theta_2-2(n_1+n_2)\pi)-2\pi
+&&(\because\ 2(n_1+n_2+1)\pi=2(n_1+n_2)\pi+2\pi)\\
+&= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)-2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= \arg^{[0,2\pi)}(z_1)+(\theta_2-2n_2\pi)-2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi\ \text{という仮定})\\
+&= \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi\ \text{という仮定})\\
+&= \pi
+&&(\because\ \text{いま示したこと})
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("arg_of_product_of_complex_numbers"),
+        " を引いた。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文は証明が「s_{[0,2π)}([θ_1+θ_2]) = π から場合分け」の一文と、" +
+          "各場合について「θ_1+θ_2-2(n_1+n_2)π = π ゆえ」という日本語 1 行だけだった。" +
+          "各場合を一続きの鎖へ書き下し、各行の末尾へ (∵ …) を付けた。" +
+          "「ゆえ」が隠していたのは積の arg の主張そのものなので、" +
+          "そこを (∵ …) で題を挙げ、式の直後にラベル参照（arg_of_product_of_complex_numbers）を並べる形にした（この生成器は \\blkref を定義していないため）。" +
+          "原文が書いていた等式 θ_1+θ_2-2(n_1+n_2)π = π（第 2 の場合は θ_1+θ_2-2(n_1+n_2+1)π = π）も" +
+          "鎖として残してある。段は増えており、減った段は無い。" +
+          "あわせて、原文の statement が場合分けの条件を「∃m ∈ Z s.t. 0 ≤ θ_1+θ_2-2mπ < 2π」" +
+          "の形で書いていたのを、積の arg の主張と同じ n_1+n_2 の形へ直した。" +
+          "存在の形では、角度表現の切断の存在と一意性により 2 つの条件がつねに同時に満たされ" +
+          "（第 2 の条件は m' = m-1 で満たせる）、π = π+2π という偽の等式が出てしまうためである。" +
+          "その理由を statement に書いた。" +
+          "さらに、原文が (r_1, r_2 ≠ 0) と書くだけで r_i, θ_i, n_i を定義していなかったので、" +
+          "積の arg の主張と同じ設定を書き下した。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_035_claim_arg_of_square",
