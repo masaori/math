@@ -21,7 +21,7 @@ open Finset
 
 variable (L : ℕ) [NeZero L]
 
-/-- 具体版の類 `A_m` は、必要十分版の類の特殊化そのものである（定義が一致する）。 -/
+/-- 具体版の類 `A_{L,m}` は、必要十分版の類の特殊化そのものである（定義が一致する）。 -/
 lemma brokenFiber_eq_necSuf_fiber (m : ℕ) :
     brokenFiber L m = NecSuf.PartitionPolynomial.fiber (brokenBondCount L) m := rfl
 

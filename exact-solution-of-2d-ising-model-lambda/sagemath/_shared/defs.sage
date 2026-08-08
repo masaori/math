@@ -80,7 +80,7 @@ def configurations(L):
 
 
 def broken_bond_count(L, sigma):
-    """def_broken_bond_count: 破れている辺の添字の個数 m(sigma) を返す（N の元）。"""
+    """def_broken_bond_count: 破れている辺の番号の個数 b(sigma) を返す（N の元）。"""
     return sum(1 for (u, w) in edges(L) if sigma[u] != sigma[w])
 
 

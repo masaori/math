@@ -3,7 +3,7 @@
 # 本文（structured-latex/content/partition-polynomial.ts）の主張
 #     Z_L = sum_{sigma in Sigma_L} x^{b(sigma)} = sum_{m=0}^{2L^2} Omega_L(m) x^m
 # と、その証明が使う類別
-#     Sigma_L = union_m A_m （互いに素）、A_m = { sigma | b(sigma) = m }
+#     Sigma_L = union_m A_{L,m} （互いに素）、A_{L,m} = { sigma | b(sigma) = m }
 # を、小さい L で総当たりに数え上げて確かめる。
 #
 # 左辺（定義そのままの和）と右辺（多重度から作った多項式）は作り方が独立である
@@ -20,7 +20,7 @@ load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
 
 
 def classes(L):
-    """claim_configuration_partition: A_m = { sigma | b(sigma) = m } を m ごとに集める。
+    """claim_configuration_partition: A_{L,m} = { sigma | b(sigma) = m } を m ごとに集める。
 
     配位は辞書なので、要素の同一性は頂点の順を固定したタプルで表す。
     """
@@ -53,7 +53,7 @@ def report(L):
             if m != m2:
                 assert A[m] & A[m2] == set(), (L, m, m2)
 
-    # claim_coefficient_representation の Step 1: Omega_L(m) = |A_m|。
+    # claim_coefficient_representation の Step 1: Omega_L(m) = |A_{L,m}|。
     multiplicities = multiplicity_vector(L)
     for m in A:
         assert multiplicities[m] == len(A[m]), (L, m, multiplicities[m], len(A[m]))
@@ -83,7 +83,7 @@ def report(L):
     print('L =', L)
     print('  Z_L = sum_sigma x^{b(sigma)}       =', Z_from_definition)
     print('  Z_L = sum_m Omega_L(m) x^m         =', Z_from_multiplicity)
-    print('  Omega_L(m) = |A_m| (m = 0..2L^2)   =', multiplicities)
+    print('  Omega_L(m) = |A_{L,m}| (m = 0..2L^2)   =', multiplicities)
 
 
 for L in [1, 2, 3]:

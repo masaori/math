@@ -6,7 +6,7 @@
 不定元の冪であること・格子の形・スピンの値が `{+1,-1}` であることは、どこにも使っていない。
 
   使っている性質            なぜ削れないか
-  `Fintype α`               類 `A_m` を有限集合として扱い、その上の和を取るため。
+  `Fintype α`               類 `fiber f m` を有限集合として扱い、その上の和を取るため。
                             無限集合では Step 3 の「和の和」が意味をなさない。
   `DecidableEq α`           Step 3 で使う `Finset.sum_biUnion` が合併を取るのに要る。
                             決定可能でないと `biUnion` が定義できない。
@@ -43,7 +43,7 @@ lemma fiber_pairwiseDisjoint :
   exact fiber_pairwise_disjoint f N m (by simpa using hm) m' (by simpa using hm') hne
 
 omit [DecidableEq α] in
-/-- Step 4。1 つの類 `A_m` の中では `f a = m` なので、足し合わせる値はどれも `g m` に等しい。 -/
+/-- Step 4。1 つの類 `fiber f m` の中では `f a = m` なので、足し合わせる値はどれも `g m` に等しい。 -/
 lemma sum_fiber_const {M : Type*} [AddCommMonoid M] (g : ℕ → M) (m : ℕ) :
     ∑ a ∈ fiber f m, g (f a) = (fiber f m).card • g m := by
   have hterm : ∀ a ∈ fiber f m, g (f a) = g m := by

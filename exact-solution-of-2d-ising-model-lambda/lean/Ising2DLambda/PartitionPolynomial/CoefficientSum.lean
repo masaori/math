@@ -10,6 +10,11 @@
   Step 4（配位の総数）                          Basic.card_config
   Step 5（結論）                                multiplicity_sum_eq_two_pow
 
+Step 2 の被覆と互いに素性は、人手証明では独立した主張
+「配位全体は破れボンド数の値ごとに類別される」（ラベル `claim_configuration_partition`）である。
+Lean 側でもこの 2 つの補題（`biUnion_brokenFiber` / `brokenFiber_pairwise_disjoint`）が
+その主張の具体版にあたり、主張「分配多項式の係数は多重度である」の具体版からも引いている。
+
 Step 3 が使う「互いに素な有限個の有限集合の合併の元の個数は各集合の元の個数の和」は
 人手証明が明示的に適用している定理そのものなので、mathlib の `Finset.card_biUnion` を引く。
 一方、Step 2（各配位がちょうど 1 つの類に属すること）を一般論へ委ねてはならないので、
@@ -26,11 +31,11 @@ open Finset
 
 variable (L : ℕ) [NeZero L]
 
-/-- Step 1。人手証明の `A_m = {σ ∈ Σ_L | b(σ) = m}`。 -/
+/-- Step 1。人手証明の `A_{L,m} = {σ ∈ Σ_L | b(σ) = m}`。 -/
 def brokenFiber (m : ℕ) : Finset (Config L) :=
   univ.filter fun σ => brokenBondCount L σ = m
 
-/-- Step 1。多重度は `A_m` の元の個数である（多重度の定義そのもの）。 -/
+/-- Step 1。多重度は `A_{L,m}` の元の個数である（多重度の定義そのもの）。 -/
 lemma multiplicity_eq_card_brokenFiber (m : ℕ) :
     multiplicity L m = (brokenFiber L m).card := rfl
 

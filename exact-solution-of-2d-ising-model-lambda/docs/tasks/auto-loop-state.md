@@ -72,6 +72,21 @@
 各 tick のレビューで**何をなぜ直したか**を 1 行ずつ追記する。直すものが無かった tick も
 「見た範囲」と「問題なし」を残す（見ていないのに見たことにしない）。
 
+- 2026-08-08（tick 5 のレビュー、前 tick で切り出した主張 2 件「配位全体は破れボンド数の値ごとに
+  類別される」「分配多項式の係数は多重度である」の本文と、それを引く主張「多重度の総和は配位の
+  総数に等しい」の証明、および対応する SageMath 検証と Lean のコメント）:
+  3 つの主張の間のラベル参照は過不足なく、数学の内容にも誤りは無かった。記号の扱いを 2 点直した。
+  第一に、類の記号 $A_m$ が $L$ に依存するのに添字に $L$ を持っていなかった
+  （右辺の $\Sigma_L$ と $b$ は $L$ ごとに別物であり、他の $L$ 依存の対象は $V_L$・$E_L$・$\Sigma_L$・
+  $\Omega_L$・$Z_L$ とすべて $L$ を添字に書いている）。$A_{L,m}$ へ改めた。本文の 3 主張と
+  SageMath 検証・Lean のコメントも合わせた。
+  第二に、SageMath 側の 2 箇所で破れボンド数を $m(\sigma)$ と書いていた
+  （`_shared/defs.sage` の `broken_bond_count` の説明と、係数の総和の検証の overview）。
+  README は関数の名前とその値を走る変数に同じ文字を使うことを禁じており、本文でも関数は $b$、
+  値は $m$ と分けてある。$b(\sigma)$ へ直した。
+  あわせて Lean の `PartitionPolynomial/CoefficientSum.lean` の冒頭コメントが、被覆と互いに素性を
+  この主張の Step 2 としか説明しておらず、前 tick でそれが独立した主張へ切り出されたことを
+  反映していなかったので追記した。検証はすべて再実行して通っている。
 - 2026-08-08（tick 4 のレビュー、前 tick で書いた Lean 4 ファイル
   `PartitionPolynomial/Basic.lean`・`PartitionPolynomial/CoefficientSum.lean`・
   `NecSuf/PartitionPolynomial/CoefficientSum.lean`・`PartitionPolynomial/CoefficientSumFromNecSuf.lean`）:

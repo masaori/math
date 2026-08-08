@@ -35,8 +35,8 @@ lemma brokenFiber_pairwiseDisjoint :
   intro m hm m' hm' hne
   exact brokenFiber_pairwise_disjoint L m (by simpa using hm) m' (by simpa using hm') hne
 
-/-- Step 4。1 つの類 `A_m` の中では `b(σ) = m` なので、足し合わせる単項式はどれも `x^m` に等しい。
-したがって類の上の和は `x^m` を `|A_m| = Ω_L(m)` 個足したものになる。 -/
+/-- Step 4。1 つの類 `A_{L,m}` の中では `b(σ) = m` なので、足し合わせる単項式はどれも `x^m` に等しい。
+したがって類の上の和は `x^m` を `|A_{L,m}| = Ω_L(m)` 個足したものになる。 -/
 lemma sum_brokenFiber_monomial (m : ℕ) :
     ∑ σ ∈ brokenFiber L m, (Polynomial.X : Polynomial ℤ) ^ brokenBondCount L σ
       = Polynomial.C (multiplicity L m : ℤ) * Polynomial.X ^ m := by
@@ -47,7 +47,7 @@ lemma sum_brokenFiber_monomial (m : ℕ) :
     simp only [brokenFiber, mem_filter] at hσ
     rw [hσ.2]
   rw [sum_congr rfl hterm, sum_const]
-  -- 同じ元を `|A_m|` 個足したものは `|A_m| • x^m`。Step 1 によりこの個数が多重度である。
+  -- 同じ元を `|A_{L,m}|` 個足したものは `|A_{L,m}| • x^m`。Step 1 によりこの個数が多重度である。
   rw [multiplicity_eq_card_brokenFiber, nsmul_eq_mul]
   simp
 
