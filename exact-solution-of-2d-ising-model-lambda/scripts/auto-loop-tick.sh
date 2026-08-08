@@ -48,6 +48,15 @@ fi
 printf '%s\n' "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
+# 作業ツリーが汚れているときは見送る。
+# このリポジトリでは人間の対話セッションが同じ作業ツリーを使うので、
+# 編集の途中に tick が割り込むと互いの変更を踏む。ロックは tick どうしの衝突しか防げない。
+cd "$REPO_DIR"
+if [ -n "$(git status --porcelain)" ]; then
+  log "SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
+  exit 0
+fi
+
 PROMPT=$(cat <<'EOF'
 exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める。
 
@@ -60,7 +69,10 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
 
 そのうえで runbook のとおりに実行する。要点を再掲する。
 1. 既存出力のレビューと修正を先に行う（毎 tick 必須。飛ばして前進しない）。
+   直したら、前進に入る前にコミットして push まで済ませる。
 2. そのあと、台帳の todo の先頭セクションを 1 つだけ進める。2 つ以上進めない。
+   時間のかかる処理は前面で実行し、終わるまで待つ。裏で走らせたまま tick を終えると
+   その処理は道連れに終了し、成果が残らない。
 3. 検証（npm run check / build:pdf / sage / verify-check-linkage / lake build）を通す。
    検証が落ちたら本文を直す。検証を主張に合わせて緩めない。
 4. 台帳と MEMORY を更新し、main へ push して反映を確認する。
@@ -69,7 +81,6 @@ EOF
 )
 
 log "=== tick 開始"
-cd "$REPO_DIR"
 
 set +e
 timeout "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions "$PROMPT" >> "$LOG_FILE" 2>&1
