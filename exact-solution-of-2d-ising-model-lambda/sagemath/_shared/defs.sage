@@ -44,6 +44,15 @@ def vertical_edge_numbers(L):
     return range(L * L + 1, 2 * L * L + 1)
 
 
+def projection(L, n):
+    """def_lattice: 自然な射影 pi: Z -> Z/LZ。
+
+    ここでは Z/LZ の元を 0..L-1 の整数で表しているので剰余を取る操作にあたる。
+    本文と同じ名前を置いて「どこで Z と Z/LZ を行き来したか」を見えるようにする。
+    """
+    return ZZ(n) % L
+
+
 def representative(L, y):
     """def_lattice: 代表を取る写像 s: Z/LZ -> Z（0 <= s(y) <= L-1、pi(s(y)) = y）。
 
@@ -334,3 +343,35 @@ def walk_of_family(L, c):
 def family_of_walk(L, p):
     """def_walk_of_family: (Xi(p))(a mod L) = p(a)（a = 0, ..., L-1）。"""
     return tuple(p[a] for a in range(L))
+
+
+# --- 章「固有値の代数性」の定義 -------------------------------------------
+#   def_spin_index               -> spin_index(v)
+#   def_row_config_order         -> differing_indices(L, tau, tau_next),
+#                                   first_difference(L, tau, tau_next),
+#                                   row_config_less(L, tau, tau_next)
+
+
+def spin_index(v):
+    """def_spin_index: eps(+1) = 0、eps(-1) = 1。"""
+    assert v in (1, -1), v
+    return ZZ(0) if v == 1 else ZZ(1)
+
+
+def differing_indices(L, tau, tau_other):
+    """def_row_config_order: D(tau, tau') = { k in {0,...,L-1} | tau(pi(k)) != tau'(pi(k)) }。"""
+    return [k for k in range(L) if tau[projection(L, k)] != tau_other[projection(L, k)]]
+
+
+def first_difference(L, tau, tau_other):
+    """def_row_config_order: k_0(tau, tau') = min D(tau, tau')。tau = tau' のときは None。"""
+    d = differing_indices(L, tau, tau_other)
+    return min(d) if d else None
+
+
+def row_config_less(L, tau, tau_other):
+    """def_row_config_order: tau ≺ tau' の判定。"""
+    k0 = first_difference(L, tau, tau_other)
+    if k0 is None:
+        return False
+    return spin_index(tau[projection(L, k0)]) < spin_index(tau_other[projection(L, k0)])

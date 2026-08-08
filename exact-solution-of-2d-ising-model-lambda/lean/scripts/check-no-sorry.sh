@@ -78,6 +78,13 @@ targets=(
   Ising2DLambda.TransferMatrix.walkWeight_walkOfFamily_rowsOf
   Ising2DLambda.TransferMatrix.partitionPolynomial_eq_trace
   Ising2DLambda.TransferMatrix.partitionPolynomial_eq_trace_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.spinIndex_injective
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans
   Ising2DLambda.NecSuf.TransferMatrix.trace_matPow_eq_sum_cyclicWeight
 )
 

@@ -19,7 +19,9 @@
 および章「転送行列」の定義 11 件と主張 6 件・定理 1 件
 （`claim_edge_row_partition`・`claim_broken_bond_row_decomposition`・
 `claim_rows_bijection`・`claim_transfer_weight_product`・`claim_matrix_pow_entry`・
-`claim_closed_walk_bijection`・`theorem_partition_polynomial_is_trace`）を形式化済み。
+`claim_closed_walk_bijection`・`theorem_partition_polynomial_is_trace`）、
+および章「固有値の代数性」の定義 1 件と主張 1 件
+（`claim_row_config_order_linear`）を形式化済み。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
 import Ising2DLambda.PartitionPolynomial.CoefficientSum
@@ -52,3 +54,6 @@ import Ising2DLambda.TransferMatrix.PowerEntryFromNecSuf
 import Ising2DLambda.TransferMatrix.Trace
 import Ising2DLambda.NecSuf.TransferMatrix.Trace
 import Ising2DLambda.TransferMatrix.TraceFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.RowConfigOrder
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RowConfigOrder
+import Ising2DLambda.AlgebraicEigenvalue.RowConfigOrderFromNecSuf
