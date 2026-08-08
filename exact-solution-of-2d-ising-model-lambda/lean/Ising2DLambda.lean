@@ -99,3 +99,6 @@ import Ising2DLambda.AlgebraicEigenvalue.OrbitRestrictionFromNecSuf
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitGluing
 import Ising2DLambda.AlgebraicEigenvalue.OrbitGluing
 import Ising2DLambda.AlgebraicEigenvalue.OrbitGluingFromNecSuf
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.CrossOrbitInversions
+import Ising2DLambda.AlgebraicEigenvalue.CrossOrbitInversions
+import Ising2DLambda.AlgebraicEigenvalue.CrossOrbitInversionsFromNecSuf
