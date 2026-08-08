@@ -4062,16 +4062,27 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         " 個であり、偶数である。",
       ]),
       paragraph([
-        "整数 ",
-        math(String.raw`-1`),
-        " を、対がその集合に属するときだけ掛けることにすると、",
-        "いま見たことは各 ",
-        math(String.raw`(\tau,\tau')\in P_L`),
-        " について 3 つぶんの積が ",
-        math(String.raw`1`),
-        " になることを言っている。",
+        "準備として、",
         math(String.raw`P_L`),
-        " 全体でこの積を取れば",
+        " の部分集合 ",
+        math(String.raw`X`),
+        " に対して写像 ",
+        math(String.raw`f_X:P_L\to\mathbb{Z}`),
+        " を",
+      ]),
+      displayMath(String.raw`f_X(\tau,\tau'):=
+\begin{cases}
+-1 & \bigl((\tau,\tau')\in X\ \text{のとき}\bigr)\\
++1 & \bigl((\tau,\tau')\notin X\ \text{のとき}\bigr)
+\end{cases}`),
+      paragraph([
+        "で定める。いま見たことは、各 ",
+        math(String.raw`(\tau,\tau')\in P_L`),
+        " について ",
+        math(String.raw`f_A(\tau,\tau')\cdot f_C(\tau,\tau')\cdot f_B(\tau,\tau')=1`),
+        " が成り立つことを言っている（",
+        math(String.raw`-1`),
+        " が偶数個掛かるからである）。したがって",
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
@@ -4079,21 +4090,17 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 &&(\because\ \text{符号の定義})\\
 &=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
 &&(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi))\\
-&=\prod_{p\in P_L}f_A(p)\cdot\prod_{p\in P_L}f_C(p)\cdot\prod_{p\in P_L}f_B(p)
-&&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた積は}\ (-1)\ \text{の個数乗})\\
-&=\prod_{p\in P_L}\bigl(f_A(p)\cdot f_C(p)\cdot f_B(p)\bigr)
+&=\prod_{(\tau,\tau')\in P_L}f_A(\tau,\tau')\cdot\prod_{(\tau,\tau')\in P_L}f_C(\tau,\tau')\cdot\prod_{(\tau,\tau')\in P_L}f_B(\tau,\tau')
+&&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗})\\
+&=\prod_{(\tau,\tau')\in P_L}\bigl(f_A(\tau,\tau')\cdot f_C(\tau,\tau')\cdot f_B(\tau,\tau')\bigr)
 &&(\because\ \text{有限積の各因子ごとのまとめ})\\
-&=\prod_{p\in P_L}1
+&=\prod_{(\tau,\tau')\in P_L}1
 &&(\because\ \text{属するものの個数が偶数})\\
 &=1
 &&(\because\ 1\ \text{の有限積は}\ 1)
 \end{aligned}`),
       paragraph([
-        "である。ここで ",
-        math(String.raw`f_X(p):=-1\ (p\in X)`),
-        "、",
-        math(String.raw`f_X(p):=1\ (p\notin X)`),
-        " と置いた。これを使って",
+        "である。これを使って",
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(\varphi\circ\psi)

@@ -4,8 +4,8 @@
 加法性: 必要十分版 `NecSuf.FreeEntropy.sub_add_sub_of_mul` に
   G := Λ（`LogOrderGroup`）
   e := logNat（1 以上の整数の対数）
-を代入すると、具体版 `FreeEntropy.logRat_mul` の Step 3–5 が出る。
-残るのは Step 1–2（表示を取り、積の表示を作ること）で、これは必要十分版が仮定として
+を代入すると、具体版 `FreeEntropy.logRat_mul` の第 4・第 5 の等号が出る。
+残るのは前置きと第 2 の等号（表示を取り、積の表示を作ること）で、これは必要十分版が仮定として
 受け取っている部分である。
 
 冪の法則: 必要十分版 `NecSuf.FreeEntropy.map_pow_eq_nsmul` に

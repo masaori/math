@@ -68,7 +68,7 @@ def check_additive():
             left = log_rational(q1 * q2)
             right = lambda_add(log_rational(q1), log_rational(q2))
             assert left == right, (q1, q2, left, right)
-            # 本文 Step 6 の内容そのもの（各素数で値が一致すること）を、
+            # 本文の第 7 の等号と結びの内容そのもの（各素数で値が一致すること）を、
             # 現れうる素数すべてについて別途確かめる。
             primes = set(left.keys()) | set(right.keys())
             primes |= {ZZ(2), ZZ(3), ZZ(5), ZZ(7)}
