@@ -140,6 +140,18 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift_from_necSuf
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_iff
+  Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_apply_iff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_comm
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

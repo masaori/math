@@ -5938,6 +5938,290 @@ T_{S(\tau),S(\tau')}
   },
 
   {
+    id: "algebraic_eigenvalue_definition_shift_matrix",
+    kind: "definition",
+    title: { text: "シフト行列" },
+    labels: ["def_shift_matrix"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.shiftMatrix"],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        "シフト行列 ",
+        math(String.raw`U\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        " を、その成分により",
+      ]),
+      displayMath(String.raw`U_{\tau,\tau'}:=
+\begin{cases}
+\kappa(1) & (\tau'=S(\tau)\ \text{のとき})\\
+\kappa(0) & (\tau'\ne S(\tau)\ \text{のとき})
+\end{cases}
+\qquad(\tau,\tau'\in R_L)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "、行列の集合は ",
+        ref("def_matrix_over_row_configs"),
+        "）。",
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S`),
+        " は写像なので、各 ",
+        math(String.raw`\tau\in R_L`),
+        " に対し ",
+        math(String.raw`\tau'=S(\tau)`),
+        " となる ",
+        math(String.raw`\tau'`),
+        " はちょうど 1 つであり、場合分けはすべての対 ",
+        math(String.raw`(\tau,\tau')`),
+        " に対してどちらか一方だけに当たる。",
+      ]),
+      paragraph([
+        "成分は ",
+        math(String.raw`\kappa`),
+        " の像なので ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_matrix_left",
+    kind: "claim",
+    title: { text: "シフト行列を左から掛けると行の添字がシフトされる" },
+    labels: ["claim_shift_matrix_left"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        "任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " と任意の ",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`(UA)_{\tau,\tau''}=A_{S(\tau),\tau''}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、積は ",
+        ref("def_matrix_product"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(UA)_{\tau,\tau''}
+&=\sum_{\tau'\in R_L}U_{\tau,\tau'}\,A_{\tau',\tau''}
+&&(\because\ \blkref{def_matrix_product})\\
+&=U_{\tau,S(\tau)}\,A_{S(\tau),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}U_{\tau,\tau'}\,A_{\tau',\tau''}
+&&(\because\ R_L\ \text{を}\ \{S(\tau)\}\ \text{とその補集合へ分けた}) \\
+&=\kappa(1)\cdot A_{S(\tau),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)\cdot A_{\tau',\tau''}
+&&(\because\ \blkref{def_shift_matrix}\ \text{を 2 箇所へ適用})\\
+&=A_{S(\tau),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)\cdot A_{\tau',\tau''}
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})\\
+&=A_{S(\tau),\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元で、零元と任意の元の積は零元})\\
+&=A_{S(\tau),\tau''}+\kappa(0)
+&&(\because\ \text{零元の有限個の和は零元})\\
+&=A_{S(\tau),\tau''}
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元})
+\end{aligned}`),
+      paragraph([
+        "を得る。第 2 の等号で和を 2 つに分けられるのは、",
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S`),
+        " が写像であることから ",
+        math(String.raw`S(\tau)`),
+        " が ",
+        math(String.raw`R_L`),
+        " のただ 1 つの元として定まり、",
+        math(String.raw`R_L`),
+        " が ",
+        math(String.raw`\{S(\tau)\}`),
+        " とその補集合の互いに素な合併になるからである。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の有限個の元の和と積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_matrix_right",
+    kind: "claim",
+    title: { text: "シフト行列を右から掛けると列の添字が逆向きにシフトされる" },
+    labels: ["claim_shift_matrix_right"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        ref("claim_row_config_shift_bijective"),
+        " の逆写像を ",
+        math(String.raw`S'`),
+        " と書く。任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " と任意の ",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`(AU)_{\tau,\tau''}=A_{\tau,S'(\tau'')}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、積は ",
+        ref("def_matrix_product"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う同値を先に置く。",
+        math(String.raw`\tau',\tau''\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau''=S(\tau')
+&\iff S'(\tau'')=S'\bigl(S(\tau')\bigr)
+&&(\because\ S'\ \text{は写像であり、かつ単射})\\
+&\iff S'(\tau'')=\tau'
+&&(\because\ \blkref{claim_row_config_shift_bijective}\ \text{の}\ S'\circ S=\mathrm{id})
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。したがって ",
+        math(String.raw`\tau''=S(\tau')`),
+        " となる ",
+        math(String.raw`\tau'`),
+        " はちょうど ",
+        math(String.raw`S'(\tau'')`),
+        " だけである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(AU)_{\tau,\tau''}
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,U_{\tau',\tau''}
+&&(\because\ \blkref{def_matrix_product})\\
+&=A_{\tau,S'(\tau'')}\,U_{S'(\tau''),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}A_{\tau,\tau'}\,U_{\tau',\tau''}
+&&(\because\ R_L\ \text{を}\ \{S'(\tau'')\}\ \text{とその補集合へ分けた})\\
+&=A_{\tau,S'(\tau'')}\cdot\kappa(1)
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}A_{\tau,\tau'}\cdot\kappa(0)
+&&(\because\ \blkref{def_shift_matrix}\ \text{と上の同値を 2 箇所へ適用})\\
+&=A_{\tau,S'(\tau'')}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}A_{\tau,\tau'}\cdot\kappa(0)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})\\
+&=A_{\tau,S'(\tau'')}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}\kappa(0)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元で、任意の元と零元の積は零元})\\
+&=A_{\tau,S'(\tau'')}+\kappa(0)
+&&(\because\ \text{零元の有限個の和は零元})\\
+&=A_{\tau,S'(\tau'')}
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元})
+\end{aligned}`),
+      paragraph([
+        "を得る。現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の有限個の元の和と積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_theorem_shift_matrix_commutes",
+    kind: "theorem",
+    title: { text: "シフト行列と転送行列は可換である" },
+    labels: ["theorem_shift_matrix_commutes"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_comm",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        ref("def_shift_matrix"),
+        " の ",
+        math(String.raw`U`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`T`),
+        " について",
+      ]),
+      displayMath(String.raw`UT=TU`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " を任意に取り、",
+        ref("claim_row_config_shift_bijective"),
+        " の逆写像を ",
+        math(String.raw`S'`),
+        " と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(UT)_{\tau,\tau''}
+&=T_{S(\tau),\tau''}
+&&(\because\ \blkref{claim_shift_matrix_left})\\
+&=T_{S(\tau),\,S(S'(\tau''))}
+&&(\because\ \blkref{claim_row_config_shift_bijective}\ \text{の}\ S\circ S'=\mathrm{id})\\
+&=T_{\tau,\,S'(\tau'')}
+&&(\because\ \blkref{claim_transfer_matrix_shift_invariant})\\
+&=(TU)_{\tau,\tau''}
+&&(\because\ \blkref{claim_shift_matrix_right})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+        math(String.raw`\tau,\tau''`),
+        " は任意だったので ",
+        math(String.raw`UT=TU`),
+        " である。",
+      ]),
+      paragraph([
+        "この可換性が、次のセクションで転送行列を巡回シフトの固有空間へ分けるための足場である。",
+        "成分は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、この証明にも実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
@@ -5991,6 +6275,11 @@ T_{S(\tau),S(\tau')}
           ref("claim_second_monic_prod"),
           "、",
           ref("claim_second_monic_add_lower"),
+          "）、",
+          "行配位の巡回シフトで転送行列の成分が変わらないこと（",
+          ref("claim_transfer_matrix_shift_invariant"),
+          "）、およびシフト行列が転送行列と可換であること（",
+          ref("theorem_shift_matrix_commutes"),
           "）までは上で済んでいる。",
         ],
         [

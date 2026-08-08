@@ -20,8 +20,11 @@
 （`claim_edge_row_partition`・`claim_broken_bond_row_decomposition`・
 `claim_rows_bijection`・`claim_transfer_weight_product`・`claim_matrix_pow_entry`・
 `claim_closed_walk_bijection`・`theorem_partition_polynomial_is_trace`）、
-および章「固有値の代数性」の定義 1 件と主張 1 件
-（`claim_row_config_order_linear`）を形式化済み。
+および章「固有値の代数性」の定義 15 件と主張 19 件・定理 1 件
+（`claim_row_config_order_linear`・`claim_permutation_sign_values`・`claim_permutation_sign_mul`・
+`claim_permutation_moves_two`・`claim_determinant_diagonal`・ℤ[x][t] の次数の 4 主張・
+特性多項式の 3 主張・巡回シフトの 5 主張・シフト行列の 2 主張と
+`theorem_shift_matrix_commutes`）を形式化済み。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
 import Ising2DLambda.PartitionPolynomial.CoefficientSum
@@ -72,3 +75,6 @@ import Ising2DLambda.AlgebraicEigenvalue.CharacteristicPolynomialFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.RowConfigShift
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RowConfigShift
 import Ising2DLambda.AlgebraicEigenvalue.RowConfigShiftFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrix
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.ShiftMatrix
+import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrixFromNecSuf

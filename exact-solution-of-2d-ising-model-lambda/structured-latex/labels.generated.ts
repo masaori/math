@@ -34,6 +34,8 @@ export const ALL_LABELS = [
   "claim_second_linear_monic",
   "claim_second_monic_add_lower",
   "claim_second_monic_prod",
+  "claim_shift_matrix_left",
+  "claim_shift_matrix_right",
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",
   "claim_value_at_rational_is_positive",
@@ -75,12 +77,14 @@ export const ALL_LABELS = [
   "def_second_matrix",
   "def_second_monic",
   "def_second_polynomial_ring",
+  "def_shift_matrix",
   "def_spin_index",
   "def_transfer_matrix",
   "def_walk_of_family",
   "def_walk_weight",
   "remark_planned_chapters",
   "theorem_partition_polynomial_is_trace",
+  "theorem_shift_matrix_commutes",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
