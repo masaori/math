@@ -6,6 +6,7 @@
 #   def_broken_bond_count              -> broken_bond_count(L, sigma)
 #   def_multiplicity                   -> multiplicity_vector(L)
 #   def_partition_polynomial           -> partition_polynomial(L)
+#   claim_coefficient_representation   -> partition_polynomial_from_multiplicity(L)
 #
 # すべて厳密計算（ZZ / QQ / ZZ['x']）で書く。浮動小数点を使わない。
 # 使い方:
@@ -92,5 +93,22 @@ def multiplicity_vector(L):
 
 
 def partition_polynomial(L):
-    """def_partition_polynomial: Z_L(x) = sum_m Omega_L(m) x^m in ZZ[x]。"""
+    """def_partition_polynomial: Z_L = sum_{sigma in Sigma_L} x^{b(sigma)} in ZZ[x]。
+
+    本文の定義そのまま、配位ごとに単項式を足し上げて作る。
+    多重度から作ってはならない。多重度から作ると係数表示
+    Z_L = sum_m Omega_L(m) x^m が構成から自明になり、
+    claim_coefficient_representation の検証が空になるためである。
+    """
+    total = PolynomialRingZx(0)
+    for sigma in configurations(L):
+        total += x ** broken_bond_count(L, sigma)
+    return total
+
+
+def partition_polynomial_from_multiplicity(L):
+    """claim_coefficient_representation の右辺 sum_m Omega_L(m) x^m を、多重度から作る。
+
+    partition_polynomial(L) とは作り方が独立なので、両者の一致が主張の内容になる。
+    """
     return PolynomialRingZx(multiplicity_vector(L))

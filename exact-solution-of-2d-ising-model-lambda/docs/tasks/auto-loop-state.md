@@ -58,6 +58,19 @@
 各 tick のレビューで**何をなぜ直したか**を 1 行ずつ追記する。直すものが無かった tick も
 「見た範囲」と「問題なし」を残す（見ていないのに見たことにしない）。
 
+- 2026-08-08（tick 4 のレビュー、前 tick で書いた Lean 4 ファイル
+  `PartitionPolynomial/Basic.lean`・`PartitionPolynomial/CoefficientSum.lean`・
+  `NecSuf/PartitionPolynomial/CoefficientSum.lean`・`PartitionPolynomial/CoefficientSumFromNecSuf.lean`）:
+  人手証明との 1 対 1 対応を辺の番号付け（0 始まりへの読み替え）・端点写像の向き・Step 1–5 の
+  対応まで突き合わせたが、誤りは無かった。具体版は Step 2 を自分で示しており一般論へ丸投げしていない。
+  必要十分版の仮定 3 つ（有限性・相等の決定可能性・有界性）はいずれも削ると証明が通らないので残ってよい。
+  本文の `lean` フィールドが挙げる 13 個の名前が実際に Lean 側に存在することも確かめた。
+  代わりに SageMath 側に欠陥を 1 件見つけて直した。`_shared/defs.sage` の `partition_polynomial(L)` が
+  分配多項式を多重度ベクトルから作っていた。本文の定義は $Z_L=\sum_\sigma x^{b(\sigma)}$（配位ごとの
+  単項式の和）なので、これは定義ではなく係数表示の方を実装していたことになる。この作り方だと
+  係数表示 $Z_L=\sum_m\Omega_L(m)x^m$ が構成から自明になり、係数表示の検証が空になる。
+  定義どおり配位ごとに足し上げる実装へ直し、多重度から作る側を別関数
+  `partition_polynomial_from_multiplicity(L)` として分けた。再実行して $L=1,2,3$ の結果は変わらない。
 - 2026-08-08（tick 3 のレビュー、主張「多重度の総和は配位の総数に等しい」の証明 Step 1–5 の
   ラベル参照と、`lean/README.md`・`lean/scripts/check-no-sorry.sh`・`lean/Ising2DLambda.lean`）:
   証明の各ステップは根拠のラベル参照（多重度の定義・破れボンド数の定義・格子と配位の定義）が
