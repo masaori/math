@@ -131,6 +131,15 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_identity_term
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_term_of_ne_one
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_charDet
+  Ising2DLambda.AlgebraicEigenvalue.card_filter_columnTranslation
+  Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift
+  Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift
+  Ising2DLambda.AlgebraicEigenvalue.transferMatrix_rowShift
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslation_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

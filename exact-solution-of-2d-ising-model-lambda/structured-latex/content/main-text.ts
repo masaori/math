@@ -5258,7 +5258,7 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
     id: "algebraic_eigenvalue_claim_characteristic_polynomial_monic",
     kind: "claim",
     title: {
-      text: "特性多項式はモニックな次数 2^L の元である",
+      text: "特性多項式はモニックであり、その次数は行配位の個数に等しい",
     },
     labels: ["claim_characteristic_polynomial_monic"],
     habitat: "Z",
@@ -5455,6 +5455,474 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
         "符号の乗法性（",
         ref("claim_permutation_sign_mul"),
         "）も使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_column_translation",
+    kind: "definition",
+    title: { text: "列番号の平行移動" },
+    labels: ["def_column_translation"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.columnTranslation"],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\gamma:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z}`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\gamma(y):=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\qquad(y\in\mathbb{Z}/L\mathbb{Z})`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
+        " と ",
+        math(String.raw`\bar1`),
+        " は ",
+        ref("def_lattice"),
+        "）。",
+        ref("def_lattice"),
+        " の格子で列番号が ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の元であることから、この写像は列番号を 1 つ進める操作にあたる。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " とその加法だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_column_translation_bijective",
+    kind: "claim",
+    title: { text: "列番号の平行移動は全単射である" },
+    labels: ["claim_column_translation_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslationEquiv",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.translationEquiv",
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslation_eq_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        ref("def_column_translation"),
+        " の ",
+        math(String.raw`\gamma`),
+        " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う写像を先に置く。",
+        math(String.raw`-\bar1`),
+        " を ",
+        math(String.raw`\bar1`),
+        " の ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " における加法の逆元とし、写像 ",
+        math(String.raw`\gamma':\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z}`),
+        " を ",
+        math(String.raw`\gamma'(y):=y+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)`),
+        " で定める。",
+      ]),
+      paragraph([
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma'\bigl(\gamma(y)\bigr)
+&=\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)
+&&(\because\ \blkref{def_column_translation}\ \text{と}\ \gamma'\ \text{の定め方})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bigl(\bar1+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)\bigr)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の結合則})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}0
+&&(\because\ -\bar1\ \text{は}\ \bar1\ \text{の加法の逆元})\\
+&=y
+&&(\because\ 0\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "であり、また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma\bigl(\gamma'(y)\bigr)
+&=\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)\bigr)+_{\mathbb{Z}/L\mathbb{Z}}\bar1
+&&(\because\ \blkref{def_column_translation}\ \text{と}\ \gamma'\ \text{の定め方})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bigl((-\bar1)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の結合則})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}0
+&&(\because\ -\bar1\ \text{は}\ \bar1\ \text{の加法の逆元})\\
+&=y
+&&(\because\ 0\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`y`),
+        " は任意だったので ",
+        math(String.raw`\gamma'\circ\gamma`),
+        " と ",
+        math(String.raw`\gamma\circ\gamma'`),
+        " はともに ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の恒等写像である。したがって ",
+        math(String.raw`\gamma`),
+        " は全単射で、その逆写像は ",
+        math(String.raw`\gamma'`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_row_config_shift",
+    kind: "definition",
+    title: { text: "行配位の巡回シフト" },
+    labels: ["def_row_config_shift"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.rowShift"],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        ref("def_row_configuration"),
+        " の行配位 ",
+        math(String.raw`\tau\in R_L`),
+        " に対し、その巡回シフト ",
+        math(String.raw`S(\tau)`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\bigl(S(\tau)\bigr)(y):=\tau\bigl(\gamma(y)\bigr)\qquad(y\in\mathbb{Z}/L\mathbb{Z})`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`\gamma`),
+        " は ",
+        ref("def_column_translation"),
+        "）。",
+        math(String.raw`S(\tau)`),
+        " は ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " から ",
+        math(String.raw`\{+1,-1\}`),
+        " への写像なので ",
+        math(String.raw`R_L`),
+        " の元であり、",
+        math(String.raw`S:R_L\to R_L`),
+        " は写像である。",
+      ]),
+      paragraph([
+        "行配位を 1 列ぶんずらす操作である。次のセクションで転送行列をこの操作で分けるために使う。",
+        "この定義に現れるのは有限集合とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_shift_bijective",
+    kind: "claim",
+    title: { text: "行配位の巡回シフトは全単射である" },
+    labels: ["claim_row_config_shift_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftEquiv",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.precompEquiv",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S:R_L\to R_L`),
+        " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う写像を先に置く。",
+        ref("claim_column_translation_bijective"),
+        " の逆写像を ",
+        math(String.raw`\gamma'`),
+        " と書き、写像 ",
+        math(String.raw`S':R_L\to R_L`),
+        " を ",
+        math(String.raw`\bigl(S'(\tau)\bigr)(y):=\tau\bigl(\gamma'(y)\bigr)`),
+        " で定める。",
+      ]),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " と ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S'(S(\tau))\bigr)(y)
+&=\bigl(S(\tau)\bigr)\bigl(\gamma'(y)\bigr)
+&&(\because\ S'\ \text{の定め方})\\
+&=\tau\bigl(\gamma(\gamma'(y))\bigr)
+&&(\because\ \blkref{def_row_config_shift})\\
+&=\tau(y)
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{の}\ \gamma\circ\gamma'=\mathrm{id})
+\end{aligned}`),
+      paragraph([
+        "であり、また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S(S'(\tau))\bigr)(y)
+&=\bigl(S'(\tau)\bigr)\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_row_config_shift})\\
+&=\tau\bigl(\gamma'(\gamma(y))\bigr)
+&&(\because\ S'\ \text{の定め方})\\
+&=\tau(y)
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{の}\ \gamma'\circ\gamma=\mathrm{id})
+\end{aligned}`),
+      paragraph([
+        "である。2 つの写像が等しいとは定義域のすべての元での値が等しいことなので、",
+        math(String.raw`y`),
+        " が任意であることから ",
+        math(String.raw`S'(S(\tau))=\tau`),
+        " かつ ",
+        math(String.raw`S(S'(\tau))=\tau`),
+        " である。さらに ",
+        math(String.raw`\tau`),
+        " が任意であることから ",
+        math(String.raw`S'\circ S`),
+        " と ",
+        math(String.raw`S\circ S'`),
+        " はともに ",
+        math(String.raw`R_L`),
+        " の恒等写像であり、",
+        math(String.raw`S`),
+        " は全単射で逆写像は ",
+        math(String.raw`S'`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_intra_row_shift_invariant",
+    kind: "claim",
+    title: { text: "行内破れ数は巡回シフトで変わらない" },
+    labels: ["claim_intra_row_shift_invariant"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift",
+      "Ising2DLambda.AlgebraicEigenvalue.card_filter_columnTranslation",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv",
+      "Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`b_{\mathrm{h}}\bigl(S(\tau)\bigr)=b_{\mathrm{h}}(\tau)`),
+        " である（",
+        math(String.raw`b_{\mathrm{h}}`),
+        " は ",
+        ref("def_intra_row_broken_count"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う集合を先に置く。",
+      ]),
+      displayMath(
+        String.raw`X:=\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau\bigl(\gamma(z)\bigr)\,\bigr\}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`\gamma`),
+        " は ",
+        ref("def_column_translation"),
+        "）。",
+        ref("def_intra_row_broken_count"),
+        " の ",
+        math(String.raw`b_{\mathrm{h}}(\tau)`),
+        " を定める集合はこの ",
+        math(String.raw`X`),
+        " そのものであり、",
+        math(String.raw`b_{\mathrm{h}}(\tau)=|X|`),
+        " である。",
+      ]),
+      paragraph([
+        "また ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau)\bigr)\bigl(\gamma(y)\bigr)
+&\iff \tau\bigl(\gamma(y)\bigr)\ne\tau\bigl(\gamma(\gamma(y))\bigr)
+&&(\because\ \blkref{def_row_config_shift}\ \text{を 2 箇所へ適用})\\
+&\iff \gamma(y)\in X
+&&(\because\ X\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`b_{\mathrm{h}}(S(\tau))`),
+        " を定める集合は ",
+        math(String.raw`X`),
+        " の ",
+        math(String.raw`\gamma`),
+        " による逆像 ",
+        math(String.raw`\gamma^{-1}(X)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_{\mathrm{h}}\bigl(S(\tau)\bigr)
+&=\bigl|\gamma^{-1}(X)\bigr|
+&&(\because\ \blkref{def_intra_row_broken_count}\ \text{と上の同値})\\
+&=|X|
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{より}\ \gamma\ \text{は}\ \gamma^{-1}(X)\ \text{から}\ X\ \text{への全単射})\\
+&=b_{\mathrm{h}}(\tau)
+&&(\because\ X\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_inter_row_shift_invariant",
+    kind: "claim",
+    title: { text: "行間破れ数は 2 つの行配位を同時に巡回シフトしても変わらない" },
+    labels: ["claim_inter_row_shift_invariant"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv",
+      "Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について ",
+        math(String.raw`b_{\mathrm{v}}\bigl(S(\tau),S(\tau')\bigr)=b_{\mathrm{v}}(\tau,\tau')`),
+        " である（",
+        math(String.raw`b_{\mathrm{v}}`),
+        " は ",
+        ref("def_inter_row_broken_count"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う集合を先に置く。",
+      ]),
+      displayMath(
+        String.raw`Y:=\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau'(z)\,\bigr\}`,
+      ),
+      paragraph([
+        "と置く。",
+        ref("def_inter_row_broken_count"),
+        " の ",
+        math(String.raw`b_{\mathrm{v}}(\tau,\tau')`),
+        " を定める集合はこの ",
+        math(String.raw`Y`),
+        " そのものであり、",
+        math(String.raw`b_{\mathrm{v}}(\tau,\tau')=|Y|`),
+        " である。",
+      ]),
+      paragraph([
+        "また ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau')\bigr)(y)
+&\iff \tau\bigl(\gamma(y)\bigr)\ne\tau'\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_row_config_shift}\ \text{を 2 箇所へ適用})\\
+&\iff \gamma(y)\in Y
+&&(\because\ Y\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`b_{\mathrm{v}}(S(\tau),S(\tau'))`),
+        " を定める集合は ",
+        math(String.raw`\gamma^{-1}(Y)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_{\mathrm{v}}\bigl(S(\tau),S(\tau')\bigr)
+&=\bigl|\gamma^{-1}(Y)\bigr|
+&&(\because\ \blkref{def_inter_row_broken_count}\ \text{と上の同値})\\
+&=|Y|
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{より}\ \gamma\ \text{は}\ \gamma^{-1}(Y)\ \text{から}\ Y\ \text{への全単射})\\
+&=b_{\mathrm{v}}(\tau,\tau')
+&&(\because\ Y\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_transfer_matrix_shift_invariant",
+    kind: "claim",
+    title: { text: "転送行列の成分は行と列を同時に巡回シフトしても変わらない" },
+    labels: ["claim_transfer_matrix_shift_invariant"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.transferMatrix_rowShift",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`T_{S(\tau),S(\tau')}=T_{\tau,\tau'}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`T`),
+        " は ",
+        ref("def_transfer_matrix"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+T_{S(\tau),S(\tau')}
+&=x^{\,b_{\mathrm{h}}(S(\tau))+b_{\mathrm{v}}(S(\tau),S(\tau'))}
+&&(\because\ \blkref{def_transfer_matrix})\\
+&=x^{\,b_{\mathrm{h}}(\tau)+b_{\mathrm{v}}(S(\tau),S(\tau'))}
+&&(\because\ \blkref{claim_intra_row_shift_invariant})\\
+&=x^{\,b_{\mathrm{h}}(\tau)+b_{\mathrm{v}}(\tau,\tau')}
+&&(\because\ \blkref{claim_inter_row_shift_invariant})\\
+&=T_{\tau,\tau'}
+&&(\because\ \blkref{def_transfer_matrix})
+\end{aligned}`),
+      paragraph([
+        "を得る。指数は ",
+        math(String.raw`\mathbb{N}`),
+        " の元、成分は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、実数体も複素数体も現れない。",
       ]),
     ],
   },

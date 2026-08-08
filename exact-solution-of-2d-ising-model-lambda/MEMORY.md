@@ -6,16 +6,16 @@
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 12 件・主張 12 件。行配位の辞書式順序・置換の符号・行列式・
-もう 1 つの不定元 $t$ の多項式環と次数・特性多項式）が、
+および章「固有値の代数性」（定義 14 件・主張 17 件。行配位の辞書式順序・置換の符号・行列式・
+もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 30 件・主張 26 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 30 件と主張 26 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 98 件を登録）が通る |
-| Lean 必要十分版 | 主張 24 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 32 件・主張 31 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` を実行済み（$L=1,2,3$、巡回シフトは $L=1,2,3,4$ で成立、厳密計算） |
+| Lean 具体版 | 定義 32 件と主張 31 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 107 件を登録）が通る |
+| Lean 必要十分版 | 主張 28 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -137,6 +137,22 @@ $\chi_A=\mathrm{det}_{t}(\mathrm{ch}(A))$ を定義し、次の 3 つを示し�
   必要十分版が示したのは、この証明が重みに要求するのが $w(\mathrm{id})=1$ と「次数を上げないこと」
   だけであり、**符号の乗法性も、符号が $\pm1$ であることも使っていない**ことである。
 
+さらに、列番号の平行移動 $\gamma(y)=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1$ と、それで行配位を引き戻す
+巡回シフト $\bigl(S(\tau)\bigr)(y)=\tau(\gamma(y))$ を定義し、次の 5 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\gamma$ は全単射である（逆向きの平行移動との往復が恒等写像）。
+- $S$ は全単射である（$\gamma$ の逆写像で引き戻す写像が逆写像）。
+- 行内破れ数は巡回シフトで変わらない（$b_{\mathrm{h}}(S(\tau))=b_{\mathrm{h}}(\tau)$）。
+- 行間破れ数は 2 つの行配位を同時に巡回シフトしても変わらない
+  （$b_{\mathrm{v}}(S(\tau),S(\tau'))=b_{\mathrm{v}}(\tau,\tau')$）。
+- 転送行列の成分は行と列を同時に巡回シフトしても変わらない（$T_{S(\tau),S(\tau')}=T_{\tau,\tau'}$）。
+  必要十分版が示したのは、破れ数についての 2 主張が**同じ 1 つの数え上げの補題の、述語の取り方が
+  違うだけの特殊化**であること、すなわち破れ数が「値の相違を数えたもの」であることを使っていないことである。
+  平行移動の全単射性は加法群であることしか使っておらず、可換性も有限性も使っていない。
+
+これは次のセクションで転送行列を巡回シフトで分けるための足場である。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
@@ -150,13 +166,11 @@ $\chi_A=\mathrm{det}_{t}(\mathrm{ch}(A))$ を定義し、次の 3 つを示し�
 
 ## 次回やること
 
-1. **円分体上での対角化**（章「固有値の代数性」の続き）。特性多項式まで済んだので、
-   次は固有値そのものを扱う段である。台帳の todo の先頭。
-   着手前に決めることがある。特性多項式の根を円分体の言葉で書くには、行方向の並進対称性
-   （行配位の巡回シフト）で転送行列をブロックに分ける必要があり、そのシフトの固有値が
-   1 の冪根である。ここで $\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$ が入る。
-   解析関数としての $\cos$ は使わない（README「形式変数のまま進む」）。
-   1 tick で四層まで終わる大きさに割り直してから着手すること。
+1. **シフト行列 $U$ と、それが転送行列と可換であること**（章「固有値の代数性」の続き。
+   台帳のセクション 10b）。$U_{\tau,\tau'}=\kappa(1)\ (\tau'=S(\tau))$、$\kappa(0)$（それ以外）と
+   定めて $UT=TU$ を示す。$T_{S(\tau),S(\tau')}=T_{\tau,\tau'}$ と $S$ の全単射性は済んでいる。
+   そのあと（セクション 10c）が円分体上での対角化である。解析関数としての $\cos$ は使わない
+   （README「形式変数のまま進む」）。1 tick で四層まで終わる大きさに割り直してから着手すること。
 
 ## 未解決の設計問題
 
