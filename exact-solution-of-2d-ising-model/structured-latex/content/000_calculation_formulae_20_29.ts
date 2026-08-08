@@ -69,14 +69,10 @@ export default defineBlocks([
         math(String.raw`\cdot`),
         " を用いる。また ",
         math(String.raw`(\text{極座標表現}) = (\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim`),
-        " である。",
+        " である。証明は独立した中間目標へ分かれるので、以下ではそれぞれに名前を付けて示す。",
       ]),
       paragraph([
-        "Step 0: 二項演算 ",
-        math(String.raw`\cdot`),
-        " が well-defined であること。",
-      ]),
-      paragraph([
+        "準備（二項演算が well-defined であること）。",
         ref("operations_on_polar_representation"),
         " は同値類の代表元を用いて ",
         math(String.raw`[(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}:=[(rr',\theta+\theta')]_{\sim}`),
@@ -104,10 +100,13 @@ r=r'=0\ \lor\ \left(r=r'\land\theta\sim_{\mathrm{angle}}\theta'\right)`,
         math(String.raw`r'=r_1'=0`),
         " のとき。",
       ]),
-      displayMath(
-        String.raw`rr' = 0 = r_1r_1'
-\quad (\because \mathbb{R} \text{ では } 0 \text{ を因子にもつ積は } 0)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+rr'
+&= 0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= r_1r_1'
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)
+\end{aligned}`),
       paragraph([
         "であるから、",
         math(String.raw`(rr',\theta+\theta')`),
@@ -146,14 +145,17 @@ r=r'=0\ \lor\ \left(r=r'\land\theta\sim_{\mathrm{angle}}\theta'\right)`,
         math(String.raw`\theta'-\theta_1'=2n'\pi`),
         " であるから、",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 (\theta+\theta')-(\theta_1+\theta_1')
-&= (\theta-\theta_1)+(\theta'-\theta_1') \\
-&= 2n\pi+2n'\pi \\
+&= (\theta-\theta_1)+(\theta'-\theta_1')
+&&(\because\ \mathbb{R}\ \text{の和と差の整理})\\
+&= 2n\pi+(\theta'-\theta_1')
+&&(\because\ \theta-\theta_1=2n\pi)\\
+&= 2n\pi+2n'\pi
+&&(\because\ \theta'-\theta_1'=2n'\pi)\\
 &= 2(n+n')\pi
-\end{aligned}`,
-      ),
+&&(\because\ \mathbb{R}\ \text{の分配則})
+\end{aligned}`),
       paragraph([
         "であり ",
         math(String.raw`n+n'\in\mathbb{Z}`),
@@ -165,57 +167,76 @@ r=r'=0\ \lor\ \left(r=r'\land\theta\sim_{\mathrm{angle}}\theta'\right)`,
         math(String.raw`rr'=r_1r_1'`),
         " であるから、第 2 の選言により ",
         math(String.raw`(rr',\theta+\theta')\sim(r_1r_1',\theta_1+\theta_1')`),
-        "。",
-      ]),
-      paragraph([
-        "以上より ",
+        "。以上より ",
         math(String.raw`\cdot`),
         " は well-defined である。",
       ]),
-      paragraph(["Step 1: 結合律。"]),
       paragraph([
+        "結合律。",
         math(String.raw`[(r_1,\theta_1)]_{\sim},[(r_2,\theta_2)]_{\sim},[(r_3,\theta_3)]_{\sim}\in(\text{極座標表現})`),
         " に対して、",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 \left([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}\right)\cdot[(r_3,\theta_3)]_{\sim}
-&= [(r_1r_2,\theta_1+\theta_2)]_{\sim}\cdot[(r_3,\theta_3)]_{\sim} \\
-&= [((r_1r_2)r_3,\ (\theta_1+\theta_2)+\theta_3)]_{\sim} \\
+&= [(r_1r_2,\theta_1+\theta_2)]_{\sim}\cdot[(r_3,\theta_3)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義})\\
+&= [((r_1r_2)r_3,\ (\theta_1+\theta_2)+\theta_3)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義})\\
+&= [(r_1(r_2r_3),\ (\theta_1+\theta_2)+\theta_3)]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の積の結合律})\\
 &= [(r_1(r_2r_3),\ \theta_1+(\theta_2+\theta_3))]_{\sim}
-\quad (\because \mathbb{R} \text{ の積と和の結合律}) \\
-&= [(r_1,\theta_1)]_{\sim}\cdot[(r_2r_3,\theta_2+\theta_3)]_{\sim} \\
+&&(\because\ \mathbb{R}\ \text{の和の結合律})\\
+&= [(r_1,\theta_1)]_{\sim}\cdot[(r_2r_3,\theta_2+\theta_3)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義})\\
 &= [(r_1,\theta_1)]_{\sim}\cdot\left([(r_2,\theta_2)]_{\sim}\cdot[(r_3,\theta_3)]_{\sim}\right)
-\end{aligned}`,
-      ),
+&&(\because\ \text{極座標表現の積の定義})
+\end{aligned}`),
       paragraph([
-        "（",
+        "が成り立つ（積の定義は ",
+        ref("operations_on_polar_representation"),
+        "）。",
         math(String.raw`r_1,r_2,r_3\in\mathbb{R}_{\ge 0}`),
         " の積は ",
         math(String.raw`\mathbb{R}_{\ge 0}`),
         " に属するので、各段の右辺は ",
         math(String.raw`(\text{極座標表現})`),
-        " の元である。）",
+        " の元である。",
       ]),
       paragraph([
-        "Step 2: 単位元。",
+        "単位元。",
         math(String.raw`e:=[(1,0)]_{\sim}\in(\text{極座標表現})`),
         " とおくと、",
         math(String.raw`[(r,\theta)]_{\sim}\in(\text{極座標表現})`),
         " に対して",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 [(r,\theta)]_{\sim}\cdot e
-&= [(r\cdot 1,\ \theta+0)]_{\sim} \\
-&= [(r,\theta)]_{\sim} \\
-e\cdot[(r,\theta)]_{\sim}
-&= [(1\cdot r,\ 0+\theta)]_{\sim} \\
+&= [(r\cdot 1,\ \theta+0)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義と}\ e\ \text{の定め方})\\
+&= [(r,\ \theta+0)]_{\sim}
+&&(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元})\\
 &= [(r,\theta)]_{\sim}
-\end{aligned}`,
-      ),
+&&(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
+\end{aligned}`),
+      paragraph(["であり、また"]),
+      displayMath(String.raw`\begin{aligned}
+e\cdot[(r,\theta)]_{\sim}
+&= [(1\cdot r,\ 0+\theta)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義と}\ e\ \text{の定め方})\\
+&= [(r,\ 0+\theta)]_{\sim}
+&&(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元})\\
+&= [(r,\theta)]_{\sim}
+&&(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
+\end{aligned}`),
       paragraph([
-        "Step 3: Step 1 と Step 2 より、",
+        "である。したがって ",
+        math(String.raw`e`),
+        " は ",
+        math(String.raw`\cdot`),
+        " の単位元である。",
+      ]),
+      paragraph([
+        "モノイドであること。結合律と単位元の 2 つより、",
         math(String.raw`(\text{極座標表現})`),
         " は ",
         math(String.raw`\cdot`),
@@ -224,9 +245,9 @@ e\cdot[(r,\theta)]_{\sim}
         " をもつ結合的な二項演算をもつ、すなわちモノイドをなす。",
       ]),
       paragraph([
-        "Step 4: ",
+        "零元との一致の判定。",
         math(String.raw`[(r,\theta)]_{\sim}=[(0,0)]_{\sim}\iff r=0`),
-        "。",
+        " を、両向きに分けて示す。",
       ]),
       paragraph([
         "（",
@@ -263,15 +284,9 @@ e\cdot[(r,\theta)]_{\sim}
         "。",
       ]),
       paragraph([
-        "Step 5: ",
-        math(String.raw`(\text{極座標表現})^{\times}`),
-        " は ",
-        math(String.raw`\cdot`),
-        " について閉じ、単位元を含む。",
-      ]),
-      paragraph([
+        "積で閉じ、単位元を含むこと。",
         math(String.raw`[(r,\theta)]_{\sim},[(r',\theta')]_{\sim}\in(\text{極座標表現})^{\times}`),
-        " とすると、Step 4 より ",
+        " とすると、零元との一致の判定より ",
         math(String.raw`r\ne 0`),
         " かつ ",
         math(String.raw`r'\ne 0`),
@@ -287,28 +302,30 @@ e\cdot[(r,\theta)]_{\sim}
         math(String.raw`rr'>0`),
         "、特に ",
         math(String.raw`rr'\ne 0`),
-        "。よって Step 4 より",
+        "。よって",
       ]),
-      displayMath(
-        String.raw`[(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}
-= [(rr',\theta+\theta')]_{\sim}
-\ne [(0,0)]_{\sim}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+[(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}
+&= [(rr',\theta+\theta')]_{\sim}
+&&(\because\ \text{極座標表現の積の定義})\\
+&\ne [(0,0)]_{\sim}
+&&(\because\ rr'\ne 0\ \text{と零元との一致の判定})
+\end{aligned}`),
       paragraph([
         "すなわち積は ",
         math(String.raw`(\text{極座標表現})^{\times}`),
         " に属する。また ",
         math(String.raw`1\ne 0`),
-        " より Step 4 から ",
+        " より零元との一致の判定から ",
         math(String.raw`e=[(1,0)]_{\sim}\ne[(0,0)]_{\sim}`),
         " であり ",
         math(String.raw`e\in(\text{極座標表現})^{\times}`),
         "。",
       ]),
       paragraph([
-        "Step 6: 逆元の存在。",
+        "逆元の存在。",
         math(String.raw`[(r,\theta)]_{\sim}\in(\text{極座標表現})^{\times}`),
-        " とすると Step 5 の議論より ",
+        " とすると、直前の議論より ",
         math(String.raw`r>0`),
         " であるから ",
         math(String.raw`1/r\in\mathbb{R}_{>0}\subset\mathbb{R}_{\ge 0}`),
@@ -316,20 +333,34 @@ e\cdot[(r,\theta)]_{\sim}
         math(String.raw`[(1/r,-\theta)]_{\sim}\in(\text{極座標表現})^{\times}`),
         "（",
         math(String.raw`1/r\ne 0`),
-        " と Step 4）。このとき",
+        " と零元との一致の判定）。このとき",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 [(r,\theta)]_{\sim}\cdot[(1/r,-\theta)]_{\sim}
-&= [(r\cdot(1/r),\ \theta+(-\theta))]_{\sim} \\
-&= [(1,0)]_{\sim} = e \\
+&= [(r\cdot(1/r),\ \theta+(-\theta))]_{\sim}
+&&(\because\ \text{極座標表現の積の定義})\\
+&= [(1,\ \theta+(-\theta))]_{\sim}
+&&(\because\ r>0\ \text{より}\ r\cdot(1/r)=1)\\
+&= [(1,0)]_{\sim}
+&&(\because\ -\theta\ \text{は}\ \theta\ \text{の}\ \mathbb{R}\ \text{における加法の逆元})\\
+&= e
+&&(\because\ e\ \text{の定め方})
+\end{aligned}`),
+      paragraph(["であり、また"]),
+      displayMath(String.raw`\begin{aligned}
 [(1/r,-\theta)]_{\sim}\cdot[(r,\theta)]_{\sim}
-&= [((1/r)\cdot r,\ (-\theta)+\theta)]_{\sim} \\
-&= [(1,0)]_{\sim} = e
-\end{aligned}`,
-      ),
+&= [((1/r)\cdot r,\ (-\theta)+\theta)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義})\\
+&= [(1,\ (-\theta)+\theta)]_{\sim}
+&&(\because\ r>0\ \text{より}\ (1/r)\cdot r=1)\\
+&= [(1,0)]_{\sim}
+&&(\because\ -\theta\ \text{は}\ \theta\ \text{の}\ \mathbb{R}\ \text{における加法の逆元})\\
+&= e
+&&(\because\ e\ \text{の定め方})
+\end{aligned}`),
+      paragraph(["である。"]),
       paragraph([
-        "Step 7: 逆元の一意性。単位元 ",
+        "逆元の一意性。単位元 ",
         math(String.raw`e`),
         " をもつ結合的な二項演算をもつ集合 ",
         math(String.raw`S`),
@@ -343,18 +374,21 @@ e\cdot[(r,\theta)]_{\sim}
         math(String.raw`ab'=b'a=e`),
         " を満たすとすると、",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 b
-&= b\,e \quad (\because e \text{ は単位元}) \\
-&= b\,(a b') \quad (\because ab'=e) \\
-&= (b a)\,b' \quad (\because \text{結合律}) \\
-&= e\,b' \quad (\because ba=e) \\
+&= b\,e
+&&(\because\ e\ \text{は単位元})\\
+&= b\,(a b')
+&&(\because\ ab'=e)\\
+&= (b a)\,b'
+&&(\because\ \text{結合律})\\
+&= e\,b'
+&&(\because\ ba=e)\\
 &= b'
-\end{aligned}`,
-      ),
+&&(\because\ e\ \text{は単位元})
+\end{aligned}`),
       paragraph([
-        "であるから逆元は一意である。よって Step 6 の ",
+        "であるから逆元は一意である。よって逆元の存在で作った ",
         math(String.raw`[(1/r,-\theta)]_{\sim}`),
         " が ",
         math(String.raw`[(r,\theta)]_{\sim}`),
@@ -362,13 +396,13 @@ b
       ]),
       displayMath(String.raw`\left([(r,\theta)]_{\sim}\right)^{-1}=[(1/r,-\theta)]_{\sim}`),
       paragraph([
-        "Step 8: 結論。Step 5 より ",
+        "結論。積で閉じることより ",
         math(String.raw`(\text{極座標表現})^{\times}`),
         " は ",
         math(String.raw`\cdot`),
-        " について閉じており、Step 1 より結合律を満たし、Step 2・Step 5 より単位元 ",
+        " について閉じており、結合律を満たし、単位元 ",
         math(String.raw`e`),
-        " を含み、Step 6 より各元が逆元をもつ。したがって ",
+        " を含み、逆元の存在より各元が逆元をもつ。したがって ",
         math(String.raw`(\text{極座標表現})^{\times}`),
         " は ",
         math(String.raw`\cdot`),
@@ -380,7 +414,18 @@ b
       notes: [
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "二項演算 · の well-defined 性は極座標表現の演算の定義に含まれていないが、" +
-          "本主張（モノイド・群であること）の前提として必要なので Step 0 で示した。",
+          "本主張（モノイド・群であること）の前提として必要なので準備として示した。",
+        "2026-08-08: 式変形の書き方を統一した。中身は変えていない。" +
+          "全体は well-defined 性・結合律・単位元・零元との一致の判定・逆元など" +
+          "独立した中間目標へ分かれるので 1 つの鎖にはせず、" +
+          "その中に現れる計算をそれぞれ一続きの式にして各行の末尾へ (∵ …) を付けた。" +
+          "結合律の段は ℝ の積の結合律と和の結合律を 1 行で同時に使っていたので 2 段へ分け、" +
+          "単位元と逆元の段は 2 つの向きの計算が 1 つの整列した式に詰まっていたので" +
+          "別々の鎖に分けたうえで、暗黙だった単位元の適用を段として明示した" +
+          "（したがって段は増えており、減った段は無い）。" +
+          "あわせて Step の番号を内容の分かる名前へ改め、" +
+          "証明の中の相互参照（「Step 4 より」等）も名前で指すようにした" +
+          "（リポジトリの規約「文書・定理を番号や記号で管理しない」）。",
       ],
     },
   },

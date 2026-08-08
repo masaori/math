@@ -819,34 +819,59 @@ s^2
       paragraph(["と定めるとき、", math("T_B"), " は線型写像である。"]),
     ],
     proof: [
-      paragraph([math("A,C\\in\\operatorname{Mat}(n,\\mathbb{C})"), " に対して、"]),
+      paragraph([
+        "線型写像であるとは、和を保ち、スカラー倍を保つことである。",
+        "この 2 つを別々に示す。",
+      ]),
+      paragraph([
+        "第一に、和を保つこと。",
+        math("A,C\\in\\operatorname{Mat}(n,\\mathbb{C})"),
+        " に対して、",
+      ]),
       displayMath(String.raw`\begin{aligned}
 T_B(A+C)
-&=
-B(A+C)B^{-1}
-\\
-&=
-(BA+BC)B^{-1}
-\\
-&=
-BAB^{-1}+BCB^{-1}
-\\
-&=
-T_B(A)+T_B(C)
+&=B(A+C)B^{-1}
+&&(\because\ T_B\ \text{の定義})\\
+&=(BA+BC)B^{-1}
+&&(\because\ \text{行列の積の左からの分配則})\\
+&=BAB^{-1}+BCB^{-1}
+&&(\because\ \text{行列の積の右からの分配則})\\
+&=T_B(A)+T_B(C)
+&&(\because\ T_B\ \text{の定義})
 \end{aligned}`),
-      paragraph([math("\\alpha\\in\\mathbb{C}"), " に対して、"]),
+      paragraph([
+        "である。第二に、スカラー倍を保つこと。",
+        math("A\\in\\operatorname{Mat}(n,\\mathbb{C})"),
+        " と ",
+        math("\\alpha\\in\\mathbb{C}"),
+        " に対して、",
+      ]),
       displayMath(String.raw`\begin{aligned}
 T_B(\alpha A)
-&=
-B(\alpha A)B^{-1}
-\\
-&=
-\alpha(BAB^{-1})
-\\
-&=
-\alpha T_B(A)
+&=B(\alpha A)B^{-1}
+&&(\because\ T_B\ \text{の定義})\\
+&=\bigl(\alpha(BA)\bigr)B^{-1}
+&&(\because\ \text{スカラー倍と行列の積の交換})\\
+&=\alpha\bigl(BAB^{-1}\bigr)
+&&(\because\ \text{スカラー倍と行列の積の交換})\\
+&=\alpha\,T_B(A)
+&&(\because\ T_B\ \text{の定義})
 \end{aligned}`),
+      paragraph([
+        "である。以上より ",
+        math("T_B"),
+        " は線型写像である。",
+      ]),
     ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文（Typst）の証明は等号でつなげてはあったが、各行の根拠が書かれておらず、" +
+          "スカラー倍の側では B(αA)B^{-1} = α(BAB^{-1}) が 1 行に詰められていた" +
+          "（スカラー倍と行列の積の交換を 2 度使っている）。" +
+          "行末の (∵ …) を付け、詰まっていた行を 2 段へ分けた。ステップは減らしていない。",
+      ],
+    },
   },
   {
     id: "calc_formulae_006_definition_of_cc",

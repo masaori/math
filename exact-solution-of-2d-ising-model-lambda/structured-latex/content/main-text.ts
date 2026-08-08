@@ -1580,14 +1580,20 @@ Z_L(q)
         " を",
       ]),
       displayMath(
-        String.raw`b_{\mathrm{h}}(\tau):=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; \tau(j)\ne\tau(j+1)\,\bigr\}\bigr|`,
+        String.raw`b_{\mathrm{h}}(\tau):=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; \tau(j)\ne\tau(j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}\bigr|`,
       ),
       paragraph([
         "で定める（",
-        math(String.raw`j+1`),
-        " の加法は ",
+        math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
+        " と ",
+        math(String.raw`\bar1`),
+        " は ",
+        ref("def_lattice"),
+        " の ",
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-        " の中で行う）。また 2 つの行配位 ",
+        " の加法と ",
+        math(String.raw`\pi(1)`),
+        " である）。また 2 つの行配位 ",
         math(String.raw`\tau,\tau'\in R_L`),
         " に対し、行間破れ数 ",
         math(String.raw`b_{\mathrm{v}}(\tau,\tau')`),
@@ -4897,6 +4903,1325 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
+    id: "algebraic_eigenvalue_definition_second_matrix",
+    kind: "definition",
+    title: { text: "もう 1 つの不定元の多項式を成分とする、行配位を添字とする行列" },
+    labels: ["def_second_matrix"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondRowMatrix"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " と同じ形の行列を、成分が ",
+        ref("def_second_polynomial_ring"),
+        " の ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " である場合について書き下す。すなわち写像 ",
+        math(String.raw`B:R_L\times R_L\to\mathbb{Z}[x][t]`),
+        " のことを行列と呼び、その全体の集合を ",
+        math(String.raw`\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        " と書く。値 ",
+        math(String.raw`B(\tau,\tau')`),
+        " を成分と呼び ",
+        math(String.raw`B_{\tau,\tau'}`),
+        " と書く。",
+      ]),
+      paragraph([
+        "成分の住む集合が違うので、",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " とは別の集合である。",
+        "一般の可換環を成分とする行列としてまとめて述べることはしない",
+        "（人手証明は具体的な対象について書く。抽象化は Lean の必要十分版の側で行う）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_second_determinant",
+    kind: "definition",
+    title: { text: "もう 1 つの不定元の多項式を成分とする行列の行列式" },
+    labels: ["def_second_determinant"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.secondDeterminant"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_second_matrix"),
+        " の行列 ",
+        math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        " の行列式 ",
+        math(String.raw`\mathrm{det}_{t}\,B\in\mathbb{Z}[x][t]`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\mathrm{det}_{t}\,B:=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`\mathfrak{S}_L`),
+        " と ",
+        math(String.raw`\mathrm{sgn}`),
+        " は ",
+        ref("def_permutation_sign"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "）。",
+        "整数である符号を ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元として使う経路は ",
+        math(String.raw`\iota\circ\kappa`),
+        " だけであり、新しい写像は導入しない。",
+      ]),
+      paragraph([
+        ref("def_determinant"),
+        " の ",
+        math(String.raw`\det`),
+        " とは値の住む集合が違うので、記号を分けて ",
+        math(String.raw`\mathrm{det}_{t}`),
+        " と書く。",
+        "右辺が定まる理由は ",
+        ref("def_determinant"),
+        " と同じである。和も積も有限個の項からなり、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積は可換かつ結合的なので ",
+        math(String.raw`\prod_{\tau\in R_L}`),
+        " は因子を並べる順序によらない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_indeterminate_t",
+    kind: "definition",
+    title: { text: "不定元 t 自身が定める元" },
+    labels: ["def_indeterminate_element"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.indeterminate"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_second_polynomial_ring"),
+        " の不定元 ",
+        math(String.raw`t`),
+        " そのものを ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元と見るときの係数を書いておく。すなわち",
+      ]),
+      displayMath(String.raw`\mathrm{cf}_1(t):=\kappa(1),
+\qquad
+\mathrm{cf}_k(t):=\kappa(0)\quad(k\ne1)`),
+      paragraph([
+        "である（",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        "以下では係数の言葉だけで議論するので、この 2 つの等式が ",
+        math(String.raw`t`),
+        " について使う唯一の性質である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_characteristic_matrix",
+    kind: "definition",
+    title: { text: "転送行列の型の行列に対する特性行列" },
+    labels: ["def_characteristic_matrix"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.charMatrix"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " に対して、",
+        ref("def_second_matrix"),
+        " の行列 ",
+        math(String.raw`\mathrm{ch}(A)\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        " を",
+      ]),
+      displayMath(String.raw`\mathrm{ch}(A)_{\tau,\tau'}:=
+\begin{cases}
+t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
+\iota\bigl(-A_{\tau,\tau'}\bigr) & (\tau\ne\tau'\ \text{のとき})
+\end{cases}
+\qquad(\tau,\tau'\in R_L)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "）。",
+      ]),
+      paragraph([
+        "これは通常 ",
+        math(String.raw`tI-A`),
+        " と書かれる行列であるが、符号の反転を ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中で先に済ませてある。",
+        math(String.raw`-A_{\tau,\tau'}`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の加法についての逆元であり、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元として扱う経路は ",
+        math(String.raw`\iota`),
+        " だけである。",
+        "こう書くと、以下の議論に ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の引き算が一度も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_characteristic_polynomial",
+    kind: "definition",
+    title: { text: "転送行列の型の行列に対する特性多項式" },
+    labels: ["def_characteristic_polynomial"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.charPoly"],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " の特性多項式 ",
+        math(String.raw`\chi_A\in\mathbb{Z}[x][t]`),
+        " を",
+      ]),
+      displayMath(String.raw`\chi_A:=\mathrm{det}_{t}\bigl(\mathrm{ch}(A)\bigr)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "、",
+        math(String.raw`\mathrm{det}_{t}`),
+        " は ",
+        ref("def_second_determinant"),
+        "）。",
+        "とくに ",
+        ref("def_transfer_matrix"),
+        " の転送行列 ",
+        math(String.raw`T`),
+        " に対する ",
+        math(String.raw`\chi_T`),
+        " が、この章の目標である。",
+      ]),
+      paragraph([
+        "現れるのは整数、有限和、有限積、および ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " と ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_second_const_degree_zero",
+    kind: "claim",
+    title: { text: "定数として送った元の次数は 0 以下である" },
+    labels: ["claim_second_const_degree_zero"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.degLe_constSecond",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_C",
+    ],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in\mathbb{Z}[x]`),
+        " について ",
+        math(String.raw`\iota(a)\in\mathcal{D}_0`),
+        " である（",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "、",
+        math(String.raw`\mathcal{D}_0`),
+        " は ",
+        ref("def_second_degree_bound"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k>0`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k\bigl(\iota(a)\bigr)
+&=\kappa(0)
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{と}\ k\ge1)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k>0`),
+        " を満たす ",
+        math(String.raw`k`),
+        " は任意だったので ",
+        math(String.raw`\iota(a)\in\mathcal{D}_0`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_second_linear_monic",
+    kind: "claim",
+    title: { text: "不定元に定数を足したものはモニックな次数 1 の元である" },
+    labels: ["claim_second_linear_monic"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_indeterminate_add_constSecond",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_X_add_C",
+    ],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in\mathbb{Z}[x]`),
+        " について ",
+        math(String.raw`t+\iota(a)\in\mathcal{M}_1`),
+        " である（",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\mathcal{M}_1`),
+        " は ",
+        ref("def_second_monic"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一に、",
+        math(String.raw`k>1`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k\bigl(t+\iota(a)\bigr)
+&=\mathrm{cf}_k(t)+\mathrm{cf}_k\bigl(\iota(a)\bigr)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
+&=\kappa(0)+\kappa(0)
+&&(\because\ \blkref{def_indeterminate_element}\ \text{と}\ k\ne1,\ \ \blkref{def_second_constant_embedding}\ \text{と}\ k\ge1)\\
+&=\kappa(0)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`t+\iota(a)\in\mathcal{D}_1`),
+        " である。第二に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_1\bigl(t+\iota(a)\bigr)
+&=\mathrm{cf}_1(t)+\mathrm{cf}_1\bigl(\iota(a)\bigr)
+&&(\because\ \blkref{def_second_polynomial_ring}\ \text{の和の係数})\\
+&=\kappa(1)+\kappa(0)
+&&(\because\ \blkref{def_indeterminate_element}\ \text{、および}\ \blkref{def_second_constant_embedding}\ \text{と}\ 1\ge1)\\
+&=\kappa(1)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "である。以上より ",
+        math(String.raw`t+\iota(a)\in\mathcal{M}_1`),
+        " を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_characteristic_polynomial_monic",
+    kind: "claim",
+    title: {
+      text: "特性多項式はモニックであり、その次数は行配位の個数に等しい",
+    },
+    labels: ["claim_characteristic_polynomial_monic"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly",
+      "Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_charDet",
+    ],
+    verification: ["sagemath/check/characteristic-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " について",
+      ]),
+      displayMath(String.raw`\chi_A\ \in\ \mathcal{M}_{2^{L}}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\chi_A`),
+        " は ",
+        ref("def_characteristic_polynomial"),
+        "、",
+        math(String.raw`\mathcal{M}_n`),
+        " は ",
+        ref("def_second_monic"),
+        "）。",
+        "とくに ",
+        ref("def_transfer_matrix"),
+        " の転送行列について ",
+        math(String.raw`\chi_T\in\mathcal{M}_{2^{L}}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う記号を先に置く。",
+        ref("def_row_permutation"),
+        " の置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`u(\varphi):=\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\varphi(\tau)}\ \in\ \mathbb{Z}[x][t]`,
+      ),
+      paragraph([
+        "と置く（",
+        ref("def_second_determinant"),
+        " の和の各項である）。また ",
+        ref("claim_permutation_moves_two"),
+        " の ",
+        math(String.raw`M(\varphi)=\{\tau\in R_L\mid\varphi(\tau)\ne\tau\}`),
+        " を使う。",
+        math(String.raw`|R_L|=2^{L}`),
+        " であり（",
+        ref("def_row_configuration"),
+        "）、",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`2^{L}\ge2`),
+        " である。",
+      ]),
+      paragraph([
+        "準備の第一は、恒等写像の項がモニックな次数 ",
+        math(String.raw`2^{L}`),
+        " の元であることである。",
+        math(String.raw`\mathrm{id}_{R_L}(\tau)=\tau`),
+        " なので各因子は ",
+        math(String.raw`t+\iota(-A_{\tau,\tau})`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\mathrm{id}_{R_L}(\tau)}
+&=\prod_{\tau\in R_L}\bigl(t+\iota(-A_{\tau,\tau})\bigr)
+&&(\because\ \blkref{def_characteristic_matrix})\\
+&\in\ \mathcal{M}_{\,\sum_{\tau\in R_L}1}
+&&(\because\ \blkref{claim_second_linear_monic}\ \text{、}\ \blkref{claim_second_monic_prod})\\
+&=\mathcal{M}_{\,|R_L|}=\mathcal{M}_{\,2^{L}}
+&&(\because\ \blkref{def_row_configuration}\ \text{の}\ |R_L|=2^{L})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "準備の第二は、恒等写像でない ",
+        math(String.raw`\varphi`),
+        " について ",
+        math(String.raw`u(\varphi)\in\mathcal{D}_{2^{L}-2}`),
+        " であることである。各 ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`n_\tau:=0\ (\tau\in M(\varphi))`),
+        "、",
+        math(String.raw`n_\tau:=1\ (\tau\notin M(\varphi))`),
+        " と置くと、",
+        math(String.raw`\tau\in M(\varphi)`),
+        " の因子は ",
+        math(String.raw`\iota(-A_{\tau,\varphi(\tau)})\in\mathcal{D}_0`),
+        "（",
+        ref("claim_second_const_degree_zero"),
+        "）、",
+        math(String.raw`\tau\notin M(\varphi)`),
+        " の因子は ",
+        math(String.raw`t+\iota(-A_{\tau,\tau})\in\mathcal{M}_1\subset\mathcal{D}_1`),
+        "（",
+        ref("claim_second_linear_monic"),
+        "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\tau\in R_L}n_\tau
+&=|R_L|-|M(\varphi)|
+&&(\because\ n_\tau\ \text{は}\ M(\varphi)\ \text{の外でだけ}\ 1)\\
+&\le|R_L|-2
+&&(\because\ \blkref{claim_permutation_moves_two})\\
+&=2^{L}-2
+&&(\because\ \blkref{def_row_configuration}\ \text{の}\ |R_L|=2^{L})
+\end{aligned}`),
+      paragraph([
+        "なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\varphi(\tau)}
+&\in\ \mathcal{D}_{\,\sum_{\tau\in R_L}n_\tau}
+&&(\because\ \blkref{claim_second_degree_prod})\\
+&\subset\ \mathcal{D}_{\,2^{L}-2}
+&&(\because\ \blkref{def_second_degree_bound}\ \text{の}\ \mathcal{D}_n\subset\mathcal{D}_{n'}\ (n\le n'))
+\end{aligned}`),
+      paragraph([
+        "であり、係数 ",
+        math(String.raw`\iota(\kappa(\mathrm{sgn}(\varphi)))`),
+        " は ",
+        ref("claim_second_const_degree_zero"),
+        " より ",
+        math(String.raw`\mathcal{D}_0`),
+        " の元だから、2 つの元の積についての ",
+        ref("claim_second_degree_prod"),
+        " を当てて ",
+        math(String.raw`u(\varphi)\in\mathcal{D}_{0+(2^{L}-2)}=\mathcal{D}_{2^{L}-2}`),
+        " を得る。",
+      ]),
+      paragraph([
+        "準備の第三は、恒等写像でない項の総和が ",
+        math(String.raw`\mathcal{D}_{2^{L}-2}`),
+        " の元であることである。これは準備の第二と ",
+        ref("claim_second_degree_sum"),
+        " から出る。",
+      ]),
+      paragraph([
+        "以上のもとで",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_A
+&=\mathrm{det}_{t}\bigl(\mathrm{ch}(A)\bigr)
+&&(\because\ \blkref{def_characteristic_polynomial})\\
+&=\sum_{\varphi\in\mathfrak{S}_L}u(\varphi)
+&&(\because\ \blkref{def_second_determinant}\ \text{と}\ u\ \text{の定め方})\\
+&=u(\mathrm{id}_{R_L})+\sum_{\varphi\in\mathfrak{S}_L,\ \varphi\ne\mathrm{id}_{R_L}}u(\varphi)
+&&(\because\ \text{有限和から 1 つの項を括り出す})\\
+&=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\mathrm{id}_{R_L}(\tau)}+\sum_{\varphi\ne\mathrm{id}_{R_L}}u(\varphi)
+&&(\because\ \blkref{claim_permutation_sign_values}\ \text{の}\ \mathrm{sgn}(\mathrm{id}_{R_L})=1)\\
+&=\prod_{\tau\in R_L}\mathrm{ch}(A)_{\tau,\mathrm{id}_{R_L}(\tau)}+\sum_{\varphi\ne\mathrm{id}_{R_L}}u(\varphi)
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{の}\ \iota(\kappa(1))\ \text{は単位元})
+\end{aligned}`),
+      paragraph([
+        "である。第 1 項は準備の第一より ",
+        math(String.raw`\mathcal{M}_{2^{L}}`),
+        " の元、第 2 項は準備の第三より ",
+        math(String.raw`\mathcal{D}_{2^{L}-2}`),
+        " の元であり、",
+        math(String.raw`2^{L}\ge2`),
+        " から ",
+        math(String.raw`2^{L}-2<2^{L}`),
+        " なので、",
+        ref("claim_second_monic_add_lower"),
+        " より ",
+        math(String.raw`\chi_A\in\mathcal{M}_{2^{L}}`),
+        " を得る。",
+      ]),
+      paragraph([
+        "使ったのは ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の和と積、",
+        math(String.raw`\iota(\kappa(1))`),
+        " が単位元であること、恒等写像の符号が ",
+        math(String.raw`1`),
+        " であること、そして恒等写像でない置換が 2 点以上を動かすことだけである。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の引き算は一度も使っていない",
+        "（符号の反転は ",
+        ref("def_characteristic_matrix"),
+        " で ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中に閉じ込めてある）。",
+        "符号の乗法性（",
+        ref("claim_permutation_sign_mul"),
+        "）も使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_column_translation",
+    kind: "definition",
+    title: { text: "列番号の平行移動" },
+    labels: ["def_column_translation"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.columnTranslation"],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\gamma:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z}`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\gamma(y):=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\qquad(y\in\mathbb{Z}/L\mathbb{Z})`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
+        " と ",
+        math(String.raw`\bar1`),
+        " は ",
+        ref("def_lattice"),
+        "）。",
+        ref("def_lattice"),
+        " の格子で列番号が ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の元であることから、この写像は列番号を 1 つ進める操作にあたる。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " とその加法だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_column_translation_bijective",
+    kind: "claim",
+    title: { text: "列番号の平行移動は全単射である" },
+    labels: ["claim_column_translation_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslationEquiv",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.translationEquiv",
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslation_eq_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        ref("def_column_translation"),
+        " の ",
+        math(String.raw`\gamma`),
+        " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う写像を先に置く。",
+        math(String.raw`-\bar1`),
+        " を ",
+        math(String.raw`\bar1`),
+        " の ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " における加法の逆元とし、写像 ",
+        math(String.raw`\gamma':\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z}`),
+        " を ",
+        math(String.raw`\gamma'(y):=y+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)`),
+        " で定める。",
+      ]),
+      paragraph([
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma'\bigl(\gamma(y)\bigr)
+&=\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)
+&&(\because\ \blkref{def_column_translation}\ \text{と}\ \gamma'\ \text{の定め方})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bigl(\bar1+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)\bigr)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の結合則})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}0
+&&(\because\ -\bar1\ \text{は}\ \bar1\ \text{の加法の逆元})\\
+&=y
+&&(\because\ 0\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "であり、また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma\bigl(\gamma'(y)\bigr)
+&=\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}(-\bar1)\bigr)+_{\mathbb{Z}/L\mathbb{Z}}\bar1
+&&(\because\ \blkref{def_column_translation}\ \text{と}\ \gamma'\ \text{の定め方})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bigl((-\bar1)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の結合則})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}0
+&&(\because\ -\bar1\ \text{は}\ \bar1\ \text{の加法の逆元})\\
+&=y
+&&(\because\ 0\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`y`),
+        " は任意だったので ",
+        math(String.raw`\gamma'\circ\gamma`),
+        " と ",
+        math(String.raw`\gamma\circ\gamma'`),
+        " はともに ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の恒等写像である。したがって ",
+        math(String.raw`\gamma`),
+        " は全単射で、その逆写像は ",
+        math(String.raw`\gamma'`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_row_config_shift",
+    kind: "definition",
+    title: { text: "行配位の巡回シフト" },
+    labels: ["def_row_config_shift"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.rowShift"],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        ref("def_row_configuration"),
+        " の行配位 ",
+        math(String.raw`\tau\in R_L`),
+        " に対し、その巡回シフト ",
+        math(String.raw`S(\tau)`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\bigl(S(\tau)\bigr)(y):=\tau\bigl(\gamma(y)\bigr)\qquad(y\in\mathbb{Z}/L\mathbb{Z})`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`\gamma`),
+        " は ",
+        ref("def_column_translation"),
+        "）。",
+        math(String.raw`S(\tau)`),
+        " は ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " から ",
+        math(String.raw`\{+1,-1\}`),
+        " への写像なので ",
+        math(String.raw`R_L`),
+        " の元であり、",
+        math(String.raw`S:R_L\to R_L`),
+        " は写像である。",
+      ]),
+      paragraph([
+        "行配位を 1 列ぶんずらす操作である。次のセクションで転送行列をこの操作で分けるために使う。",
+        "この定義に現れるのは有限集合とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_shift_bijective",
+    kind: "claim",
+    title: { text: "行配位の巡回シフトは全単射である" },
+    labels: ["claim_row_config_shift_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftEquiv",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.precompEquiv",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S:R_L\to R_L`),
+        " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う写像を先に置く。",
+        ref("claim_column_translation_bijective"),
+        " の逆写像を ",
+        math(String.raw`\gamma'`),
+        " と書き、写像 ",
+        math(String.raw`S':R_L\to R_L`),
+        " を ",
+        math(String.raw`\bigl(S'(\tau)\bigr)(y):=\tau\bigl(\gamma'(y)\bigr)`),
+        " で定める。",
+      ]),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " と ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S'(S(\tau))\bigr)(y)
+&=\bigl(S(\tau)\bigr)\bigl(\gamma'(y)\bigr)
+&&(\because\ S'\ \text{の定め方})\\
+&=\tau\bigl(\gamma(\gamma'(y))\bigr)
+&&(\because\ \blkref{def_row_config_shift})\\
+&=\tau(y)
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{の}\ \gamma\circ\gamma'=\mathrm{id})
+\end{aligned}`),
+      paragraph([
+        "であり、また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S(S'(\tau))\bigr)(y)
+&=\bigl(S'(\tau)\bigr)\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_row_config_shift})\\
+&=\tau\bigl(\gamma'(\gamma(y))\bigr)
+&&(\because\ S'\ \text{の定め方})\\
+&=\tau(y)
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{の}\ \gamma'\circ\gamma=\mathrm{id})
+\end{aligned}`),
+      paragraph([
+        "である。2 つの写像が等しいとは定義域のすべての元での値が等しいことなので、",
+        math(String.raw`y`),
+        " が任意であることから ",
+        math(String.raw`S'(S(\tau))=\tau`),
+        " かつ ",
+        math(String.raw`S(S'(\tau))=\tau`),
+        " である。さらに ",
+        math(String.raw`\tau`),
+        " が任意であることから ",
+        math(String.raw`S'\circ S`),
+        " と ",
+        math(String.raw`S\circ S'`),
+        " はともに ",
+        math(String.raw`R_L`),
+        " の恒等写像であり、",
+        math(String.raw`S`),
+        " は全単射で逆写像は ",
+        math(String.raw`S'`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_intra_row_shift_invariant",
+    kind: "claim",
+    title: { text: "行内破れ数は巡回シフトで変わらない" },
+    labels: ["claim_intra_row_shift_invariant"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift",
+      "Ising2DLambda.AlgebraicEigenvalue.card_filter_columnTranslation",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv",
+      "Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`b_{\mathrm{h}}\bigl(S(\tau)\bigr)=b_{\mathrm{h}}(\tau)`),
+        " である（",
+        math(String.raw`b_{\mathrm{h}}`),
+        " は ",
+        ref("def_intra_row_broken_count"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う集合を先に置く。",
+      ]),
+      displayMath(
+        String.raw`X:=\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau\bigl(\gamma(z)\bigr)\,\bigr\}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`\gamma`),
+        " は ",
+        ref("def_column_translation"),
+        "）。",
+        ref("def_intra_row_broken_count"),
+        " が ",
+        math(String.raw`b_{\mathrm{h}}(\tau)`),
+        " を定めるのに使う集合は ",
+        math(
+          String.raw`\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau(z+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}`,
+        ),
+        " であり、",
+        ref("def_column_translation"),
+        " の ",
+        math(String.raw`\gamma(z)=z+_{\mathbb{Z}/L\mathbb{Z}}\bar1`),
+        " によりこれは ",
+        math(String.raw`X`),
+        " に等しい。したがって ",
+        math(String.raw`b_{\mathrm{h}}(\tau)=|X|`),
+        " である。",
+      ]),
+      paragraph([
+        "また ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau)\bigr)\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&\iff \bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau)\bigr)\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_column_translation})\\
+&\iff \tau\bigl(\gamma(y)\bigr)\ne\tau\bigl(\gamma(\gamma(y))\bigr)
+&&(\because\ \blkref{def_row_config_shift}\ \text{を 2 箇所へ適用})\\
+&\iff \gamma(y)\in X
+&&(\because\ X\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`b_{\mathrm{h}}(S(\tau))`),
+        " を定める集合は ",
+        math(String.raw`X`),
+        " の ",
+        math(String.raw`\gamma`),
+        " による逆像 ",
+        math(String.raw`\gamma^{-1}(X)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_{\mathrm{h}}\bigl(S(\tau)\bigr)
+&=\bigl|\gamma^{-1}(X)\bigr|
+&&(\because\ \blkref{def_intra_row_broken_count}\ \text{と上の同値})\\
+&=|X|
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{より}\ \gamma\ \text{は}\ \gamma^{-1}(X)\ \text{から}\ X\ \text{への全単射})\\
+&=b_{\mathrm{h}}(\tau)
+&&(\because\ X\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_inter_row_shift_invariant",
+    kind: "claim",
+    title: { text: "行間破れ数は 2 つの行配位を同時に巡回シフトしても変わらない" },
+    labels: ["claim_inter_row_shift_invariant"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv",
+      "Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift_from_necSuf",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について ",
+        math(String.raw`b_{\mathrm{v}}\bigl(S(\tau),S(\tau')\bigr)=b_{\mathrm{v}}(\tau,\tau')`),
+        " である（",
+        math(String.raw`b_{\mathrm{v}}`),
+        " は ",
+        ref("def_inter_row_broken_count"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う集合を先に置く。",
+      ]),
+      displayMath(
+        String.raw`Y:=\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau'(z)\,\bigr\}`,
+      ),
+      paragraph([
+        "と置く。",
+        ref("def_inter_row_broken_count"),
+        " の ",
+        math(String.raw`b_{\mathrm{v}}(\tau,\tau')`),
+        " を定める集合はこの ",
+        math(String.raw`Y`),
+        " そのものであり、",
+        math(String.raw`b_{\mathrm{v}}(\tau,\tau')=|Y|`),
+        " である。",
+      ]),
+      paragraph([
+        "また ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau')\bigr)(y)
+&\iff \tau\bigl(\gamma(y)\bigr)\ne\tau'\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_row_config_shift}\ \text{を 2 箇所へ適用})\\
+&\iff \gamma(y)\in Y
+&&(\because\ Y\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`b_{\mathrm{v}}(S(\tau),S(\tau'))`),
+        " を定める集合は ",
+        math(String.raw`\gamma^{-1}(Y)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_{\mathrm{v}}\bigl(S(\tau),S(\tau')\bigr)
+&=\bigl|\gamma^{-1}(Y)\bigr|
+&&(\because\ \blkref{def_inter_row_broken_count}\ \text{と上の同値})\\
+&=|Y|
+&&(\because\ \blkref{claim_column_translation_bijective}\ \text{より}\ \gamma\ \text{は}\ \gamma^{-1}(Y)\ \text{から}\ Y\ \text{への全単射})\\
+&=b_{\mathrm{v}}(\tau,\tau')
+&&(\because\ Y\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_transfer_matrix_shift_invariant",
+    kind: "claim",
+    title: { text: "転送行列の成分は行と列を同時に巡回シフトしても変わらない" },
+    labels: ["claim_transfer_matrix_shift_invariant"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.transferMatrix_rowShift",
+    ],
+    verification: ["sagemath/check/row-config-shift"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`T_{S(\tau),S(\tau')}=T_{\tau,\tau'}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`T`),
+        " は ",
+        ref("def_transfer_matrix"),
+        "、",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+T_{S(\tau),S(\tau')}
+&=x^{\,b_{\mathrm{h}}(S(\tau))+b_{\mathrm{v}}(S(\tau),S(\tau'))}
+&&(\because\ \blkref{def_transfer_matrix})\\
+&=x^{\,b_{\mathrm{h}}(\tau)+b_{\mathrm{v}}(S(\tau),S(\tau'))}
+&&(\because\ \blkref{claim_intra_row_shift_invariant})\\
+&=x^{\,b_{\mathrm{h}}(\tau)+b_{\mathrm{v}}(\tau,\tau')}
+&&(\because\ \blkref{claim_inter_row_shift_invariant})\\
+&=T_{\tau,\tau'}
+&&(\because\ \blkref{def_transfer_matrix})
+\end{aligned}`),
+      paragraph([
+        "を得る。指数は ",
+        math(String.raw`\mathbb{N}`),
+        " の元、成分は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_shift_matrix",
+    kind: "definition",
+    title: { text: "シフト行列" },
+    labels: ["def_shift_matrix"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.shiftMatrix"],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        "シフト行列 ",
+        math(String.raw`U\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        " を、その成分により",
+      ]),
+      displayMath(String.raw`U_{\tau,\tau'}:=
+\begin{cases}
+\kappa(1) & (\tau'=S(\tau)\ \text{のとき})\\
+\kappa(0) & (\tau'\ne S(\tau)\ \text{のとき})
+\end{cases}
+\qquad(\tau,\tau'\in R_L)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "、行列の集合は ",
+        ref("def_matrix_over_row_configs"),
+        "）。",
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S`),
+        " は写像なので、各 ",
+        math(String.raw`\tau\in R_L`),
+        " に対し ",
+        math(String.raw`\tau'=S(\tau)`),
+        " となる ",
+        math(String.raw`\tau'`),
+        " はちょうど 1 つであり、場合分けはすべての対 ",
+        math(String.raw`(\tau,\tau')`),
+        " に対してどちらか一方だけに当たる。",
+      ]),
+      paragraph([
+        "成分は ",
+        math(String.raw`\kappa`),
+        " の像なので ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_matrix_left",
+    kind: "claim",
+    title: { text: "シフト行列を左から掛けると行の添字がシフトされる" },
+    labels: ["claim_shift_matrix_left"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        "任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " と任意の ",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`(UA)_{\tau,\tau''}=A_{S(\tau),\tau''}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、積は ",
+        ref("def_matrix_product"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(UA)_{\tau,\tau''}
+&=\sum_{\tau'\in R_L}U_{\tau,\tau'}\,A_{\tau',\tau''}
+&&(\because\ \blkref{def_matrix_product})\\
+&=U_{\tau,S(\tau)}\,A_{S(\tau),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}U_{\tau,\tau'}\,A_{\tau',\tau''}
+&&(\because\ R_L\ \text{を}\ \{S(\tau)\}\ \text{とその補集合へ分けた}) \\
+&=\kappa(1)\cdot A_{S(\tau),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)\cdot A_{\tau',\tau''}
+&&(\because\ \blkref{def_shift_matrix}\ \text{を 2 箇所へ適用})\\
+&=A_{S(\tau),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)\cdot A_{\tau',\tau''}
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})\\
+&=A_{S(\tau),\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元で、零元と任意の元の積は零元})\\
+&=A_{S(\tau),\tau''}+\kappa(0)
+&&(\because\ \text{零元の有限個の和は零元})\\
+&=A_{S(\tau),\tau''}
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元})
+\end{aligned}`),
+      paragraph([
+        "を得る。第 2 の等号で和を 2 つに分けられるのは、",
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S`),
+        " が写像であることから ",
+        math(String.raw`S(\tau)`),
+        " が ",
+        math(String.raw`R_L`),
+        " のただ 1 つの元として定まり、",
+        math(String.raw`R_L`),
+        " が ",
+        math(String.raw`\{S(\tau)\}`),
+        " とその補集合の互いに素な合併になるからである。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の有限個の元の和と積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_matrix_right",
+    kind: "claim",
+    title: { text: "シフト行列を右から掛けると列の添字が逆向きにシフトされる" },
+    labels: ["claim_shift_matrix_right"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        ref("claim_row_config_shift_bijective"),
+        " の逆写像を ",
+        math(String.raw`S'`),
+        " と書く。任意の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " と任意の ",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`(AU)_{\tau,\tau''}=A_{\tau,S'(\tau'')}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、積は ",
+        ref("def_matrix_product"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う同値を先に置く。",
+        math(String.raw`\tau',\tau''\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau''=S(\tau')
+&\iff S'(\tau'')=S'\bigl(S(\tau')\bigr)
+&&(\because\ S'\ \text{は写像であり、かつ単射})\\
+&\iff S'(\tau'')=\tau'
+&&(\because\ \blkref{claim_row_config_shift_bijective}\ \text{の}\ S'\circ S=\mathrm{id})
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。したがって ",
+        math(String.raw`\tau''=S(\tau')`),
+        " となる ",
+        math(String.raw`\tau'`),
+        " はちょうど ",
+        math(String.raw`S'(\tau'')`),
+        " だけである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(AU)_{\tau,\tau''}
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,U_{\tau',\tau''}
+&&(\because\ \blkref{def_matrix_product})\\
+&=A_{\tau,S'(\tau'')}\,U_{S'(\tau''),\tau''}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}A_{\tau,\tau'}\,U_{\tau',\tau''}
+&&(\because\ R_L\ \text{を}\ \{S'(\tau'')\}\ \text{とその補集合へ分けた})\\
+&=A_{\tau,S'(\tau'')}\cdot\kappa(1)
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}A_{\tau,\tau'}\cdot\kappa(0)
+&&(\because\ \blkref{def_shift_matrix}\ \text{と上の同値を 2 箇所へ適用})\\
+&=A_{\tau,S'(\tau'')}
+  +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}A_{\tau,\tau'}\cdot\kappa(0)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})\\
+&=A_{\tau,S'(\tau'')}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne S'(\tau'')}}\kappa(0)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元で、任意の元と零元の積は零元})\\
+&=A_{\tau,S'(\tau'')}+\kappa(0)
+&&(\because\ \text{零元の有限個の和は零元})\\
+&=A_{\tau,S'(\tau'')}
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元})
+\end{aligned}`),
+      paragraph([
+        "を得る。現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の有限個の元の和と積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_theorem_shift_matrix_commutes",
+    kind: "theorem",
+    title: { text: "シフト行列と転送行列は可換である" },
+    labels: ["theorem_shift_matrix_commutes"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_comm",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix"],
+    statement: [
+      paragraph([
+        ref("def_shift_matrix"),
+        " の ",
+        math(String.raw`U`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`T`),
+        " について",
+      ]),
+      displayMath(String.raw`UT=TU`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " を任意に取り、",
+        ref("claim_row_config_shift_bijective"),
+        " の逆写像を ",
+        math(String.raw`S'`),
+        " と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(UT)_{\tau,\tau''}
+&=T_{S(\tau),\tau''}
+&&(\because\ \blkref{claim_shift_matrix_left})\\
+&=T_{S(\tau),\,S(S'(\tau''))}
+&&(\because\ \blkref{claim_row_config_shift_bijective}\ \text{の}\ S\circ S'=\mathrm{id})\\
+&=T_{\tau,\,S'(\tau'')}
+&&(\because\ \blkref{claim_transfer_matrix_shift_invariant})\\
+&=(TU)_{\tau,\tau''}
+&&(\because\ \blkref{claim_shift_matrix_right})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+        math(String.raw`\tau,\tau''`),
+        " は任意だったので ",
+        math(String.raw`UT=TU`),
+        " である。",
+      ]),
+      paragraph([
+        "この可換性が、次のセクションで転送行列を巡回シフトの固有空間へ分けるための足場である。",
+        "成分は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、この証明にも実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
@@ -4920,11 +6245,16 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         ],
         [
           todo("未着手"),
-          "「固有値の代数性」の続き: 特性多項式が ",
-          math(String.raw`\mathbb{Z}[x][t]`),
-          " のモニックな ",
+          "「固有値の代数性」の続き: 特性多項式の根が ",
+          math(String.raw`\overline{\mathbb{Q}}`),
+          " に属すること（固有値の代数性）と、円分体上での対角化。",
+          "特性多項式の定義（",
+          ref("def_characteristic_polynomial"),
+          "）とそれがモニックな ",
           math(String.raw`2^{L}`),
-          " 次の元であること。そこから固有値の代数性を出し、円分体上で対角化する。",
+          " 次の元であること（",
+          ref("claim_characteristic_polynomial_monic"),
+          "）、",
           "添字集合の線形順序（",
           ref("claim_row_config_order_linear"),
           "）、置換の符号（",
@@ -4945,6 +6275,11 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
           ref("claim_second_monic_prod"),
           "、",
           ref("claim_second_monic_add_lower"),
+          "）、",
+          "行配位の巡回シフトで転送行列の成分が変わらないこと（",
+          ref("claim_transfer_matrix_shift_invariant"),
+          "）、およびシフト行列が転送行列と可換であること（",
+          ref("theorem_shift_matrix_commutes"),
           "）までは上で済んでいる。",
         ],
         [

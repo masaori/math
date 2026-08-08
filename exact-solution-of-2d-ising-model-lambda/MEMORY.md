@@ -6,16 +6,17 @@
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」の入口（定義 7 件・主張 9 件。行配位の辞書式順序・置換の符号・行列式・
-もう 1 つの不定元 $t$ の多項式環と次数）が、
+および章「固有値の代数性」（定義 15 件・主張 19 件・定理 1 件。行配位の辞書式順序・置換の符号・
+行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
+シフト行列と転送行列の可換性）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 25 件・主張 23 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 25 件と主張 23 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 85 件を登録）が通る |
-| Lean 必要十分版 | 主張 21 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 33 件・主張 33 件・定理 2 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` を実行済み（$L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$ で成立、厳密計算） |
+| Lean 具体版 | 定義 33 件と主張 33 件と定理 2 件。`lake build` と `check-no-sorry.sh`（定理 119 件を登録）が通る |
+| Lean 必要十分版 | 主張 30 件と定理 2 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -123,9 +124,51 @@ $\mathcal{M}_n$ を定義し、次の 4 つを示した。ここにも $\mathbb{
 
 次数を写像として定めず上界の条件として定めたのは、零多項式の次数を決める約束を要らなくするためである。
 
+さらに、$\mathbb{Z}[x][t]$ を成分とする行列 $\mathrm{Mat}_{R_L}(\mathbb{Z}[x][t])$、その行列式
+$\mathrm{det}_{t}$、不定元 $t$ 自身が定める元、特性行列 $\mathrm{ch}(A)$、そして特性多項式
+$\chi_A=\mathrm{det}_{t}(\mathrm{ch}(A))$ を定義し、次の 3 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+**特性行列は $\mathrm{ch}(A)_{\tau,\tau'}=t+\iota(-A_{\tau,\tau'})$（対角では $t$ を足す）と書く。**
+通常 $tI-A$ と書かれる行列だが、符号の反転を $\mathbb{Z}[x]$ の中で先に済ませておくと、
+以降の議論に $\mathbb{Z}[x][t]$ の引き算が一度も現れない。
+
+- $\iota(a)\in\mathcal{D}_0$（定数として送った元の次数は 0 以下である）。
+- $t+\iota(a)\in\mathcal{M}_1$（不定元に定数を足したものはモニックな次数 1 の元である）。
+- $\chi_A\in\mathcal{M}_{2^{L}}$（特性多項式はモニックな次数 $2^{L}$ の元である）。
+  必要十分版が示したのは、この証明が重みに要求するのが $w(\mathrm{id})=1$ と「次数を上げないこと」
+  だけであり、**符号の乗法性も、符号が $\pm1$ であることも使っていない**ことである。
+
+さらに、列番号の平行移動 $\gamma(y)=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1$ と、それで行配位を引き戻す
+巡回シフト $\bigl(S(\tau)\bigr)(y)=\tau(\gamma(y))$ を定義し、次の 5 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\gamma$ は全単射である（逆向きの平行移動との往復が恒等写像）。
+- $S$ は全単射である（$\gamma$ の逆写像で引き戻す写像が逆写像）。
+- 行内破れ数は巡回シフトで変わらない（$b_{\mathrm{h}}(S(\tau))=b_{\mathrm{h}}(\tau)$）。
+- 行間破れ数は 2 つの行配位を同時に巡回シフトしても変わらない
+  （$b_{\mathrm{v}}(S(\tau),S(\tau'))=b_{\mathrm{v}}(\tau,\tau')$）。
+- 転送行列の成分は行と列を同時に巡回シフトしても変わらない（$T_{S(\tau),S(\tau')}=T_{\tau,\tau'}$）。
+  必要十分版が示したのは、破れ数についての 2 主張が**同じ 1 つの数え上げの補題の、述語の取り方が
+  違うだけの特殊化**であること、すなわち破れ数が「値の相違を数えたもの」であることを使っていないことである。
+  平行移動の全単射性は加法群であることしか使っておらず、可換性も有限性も使っていない。
+
+さらに、巡回シフトを成分へ書き写したシフト行列
+$U_{\tau,\tau'}=\kappa(1)\ (\tau'=S(\tau))$、$\kappa(0)$（それ以外）を定義し、次の 3 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない（成分は $\mathbb{Z}[x]$）。
+
+- シフト行列を左から掛けると行の添字がシフトされる（$(UA)_{\tau,\tau''}=A_{S(\tau),\tau''}$）。
+- シフト行列を右から掛けると列の添字が逆向きにシフトされる（$(AU)_{\tau,\tau''}=A_{\tau,S'(\tau'')}$。
+  $S'$ は $S$ の逆写像）。この 2 つは任意の行列 $A$ についての主張である。
+- シフト行列と転送行列は可換である（$UT=TU$）。
+  必要十分版が示したのは 2 点である。この証明が値の側に要求するのは単位元・零元の 4 規則と
+  有限和だけで、**分配則も積の結合則も積の可換性も使っていない**。そして可換性が行列に要求するのは
+  シフトによる不変性ただ 1 つで、**$A$ が転送行列であることを使っていない**。
+
+これは次のセクションで転送行列を巡回シフトの固有空間へ分けるための足場である。
+
 ## 進め方（自動ループ）
 
-このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
+このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
 [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md)、進捗の正本は
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) である（このファイルではない）。
 
@@ -136,14 +179,12 @@ $\mathcal{M}_n$ を定義し、次の 4 つを示した。ここにも $\mathbb{
 
 ## 次回やること
 
-1. **特性多項式の定義と、それが $\mathbb{Z}[x][t]$ のモニックな $2^L$ 次の元であること**
-   （章「固有値の代数性」の続き）。必要な道具（行列式の定義、対角行列の行列式、
-   恒等でない置換が 2 点以上を動かすこと、$\mathbb{Z}[x][t]$ の次数とモニック性の 4 主張）は
-   済んでいる。台帳の todo の先頭。
-   着手前に決めることが 1 つある。特性多項式は $\mathbb{Z}[x][t]$ を成分とする行列の行列式なので、
-   既に書いた行列と行列式（成分が $\mathbb{Z}[x]$）をそのまま使えない。人手証明は抽象度を上げない
-   規律なので、$\mathbb{Z}[x][t]$ を成分とする行列とその行列式をもう 1 度書き下すことになる
-   （一般の可換環へ持ち上げるのは規律違反。抽象化は Lean の必要十分版の側で行う）。
+1. **円分体上での対角化**（章「固有値の代数性」の続き。台帳のセクション 10c）。
+   シフト行列 $U$ と転送行列 $T$ の可換性（$UT=TU$）は済んだので、次は $U$ の固有空間へ
+   $T$ を分ける段である。解析関数としての $\cos$ は使わず、1 の冪根 $\omega$（円分体
+   $\mathbb{Q}(\omega)$ の元）の有理式として扱う（README「形式変数のまま進む」）。
+   1 tick で四層まで終わる大きさに割り直してから着手すること
+   （$U^L=I$ とその固有値が 1 の $L$ 乗根であることあたりが最初の一塊になる見込み）。
 
 ## 未解決の設計問題
 

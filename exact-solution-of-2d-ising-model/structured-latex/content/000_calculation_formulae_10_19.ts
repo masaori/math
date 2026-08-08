@@ -272,7 +272,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
         " の完備性から従う。ここが有理数体の代数だけでは閉じない箇所である）。極限・連続性は使わない。",
       ]),
       paragraph([
-        "存在。",
+        "存在。証明の中で使う記号を先に置く。",
         math(String.raw`\pi>0`),
         " より ",
         math(String.raw`2\pi>0`),
@@ -280,37 +280,62 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
         math(String.raw`t:=\dfrac{\theta}{2\pi}\in\mathbb{R}`),
         " が定まる。アルキメデス性を ",
         math(String.raw`a=t`),
-        " と ",
-        math(String.raw`a=-t`),
-        " に適用し、",
+        " に適用して ",
         math(String.raw`N>t`),
         " なる ",
         math(String.raw`N\in\mathbb{Z}`),
-        " と ",
+        " を、",
+        math(String.raw`a=-t`),
+        " に適用して ",
         math(String.raw`M>-t`),
         " なる ",
         math(String.raw`M\in\mathbb{Z}`),
-        " をとる。ここで ",
-        math(String.raw`-M<t`),
-        " である。集合",
+        " をとり、集合",
       ]),
       displayMath(String.raw`S:=\{\,m\in\mathbb{Z} \mid -M\le m\le N \ \wedge\ m\le t\,\}`),
       paragraph([
-        "は ",
-        math(String.raw`-M\in S`),
-        "（",
+        "を置く。",
+      ]),
+      paragraph([
+        "準備の第一は ",
         math(String.raw`-M<t`),
-        " かつ ",
-        math(String.raw`-M<t<N`),
-        "）より空でなく、",
-        math(String.raw`\{m\in\mathbb{Z}\mid -M\le m\le N\}`),
-        " の部分集合として有限である。有限かつ空でない整数の集合は最大元をもつので、",
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-M
+&<-(-t)
+&&(\because\ M>-t\ \text{の両辺に}\ -1\ \text{を掛けると不等号の向きが変わる})\\
+&=t
+&&(\because\ -(-t)=t)
+\end{aligned}`),
+      paragraph([
+        "準備の第二は ",
         math(String.raw`n:=\max S\in\mathbb{Z}`),
-        " が定まる。",
-        math(String.raw`n\in S`),
+        " が定まることである。",
+        math(String.raw`-M<t`),
+        " と ",
+        math(String.raw`-M<t<N`),
         " より ",
+        math(String.raw`-M\in S`),
+        " なので ",
+        math(String.raw`S`),
+        " は空でなく、",
+        math(String.raw`\{m\in\mathbb{Z}\mid -M\le m\le N\}`),
+        " の部分集合として有限である。有限かつ空でない整数の集合は最大元をもつ。",
+      ]),
+      paragraph([
+        "準備の第三は ",
         math(String.raw`n\le t`),
-        "。また ",
+        " である。これは ",
+        math(String.raw`n\in S`),
+        " と ",
+        math(String.raw`S`),
+        " の定め方から出る。",
+      ]),
+      paragraph([
+        "準備の第四は ",
+        math(String.raw`t<n+1`),
+        " である。",
         math(String.raw`n+1\le t`),
         " と仮定すると ",
         math(String.raw`n+1\le t<N`),
@@ -318,17 +343,45 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
         math(String.raw`-M\le n<n+1`),
         " より ",
         math(String.raw`n+1\in S`),
-        " となり ",
+        " となり、",
         math(String.raw`n=\max S`),
-        " に矛盾する。よって ",
-        math(String.raw`t<n+1`),
-        "。以上より ",
-        math(String.raw`0\le t-n<1`),
-        " であり、",
-        math(String.raw`2\pi>0`),
-        " を掛けて",
+        " に矛盾する。",
       ]),
-      displayMath(String.raw`0\le 2\pi t-2n\pi<2\pi,\qquad \text{すなわち}\quad 0\le\theta-2n\pi<2\pi`),
+      paragraph([
+        "以上のもとで、下界は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=2\pi\cdot0
+&&(\because\ 0\ \text{との積は}\ 0)\\
+&\le2\pi(t-n)
+&&(\because\ \text{準備の第三の}\ n\le t\ \text{より}\ 0\le t-n\ \text{、および}\ 2\pi>0)\\
+&=2\pi t-2n\pi
+&&(\because\ \text{分配則})\\
+&=\theta-2n\pi
+&&(\because\ t\ \text{の定め方より}\ \theta=2\pi t)
+\end{aligned}`),
+      paragraph([
+        "であり、上界は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\theta-2n\pi
+&=2\pi t-2n\pi
+&&(\because\ t\ \text{の定め方より}\ \theta=2\pi t)\\
+&=2\pi(t-n)
+&&(\because\ \text{分配則})\\
+&<2\pi\cdot1
+&&(\because\ \text{準備の第四の}\ t<n+1\ \text{より}\ t-n<1\ \text{、および}\ 2\pi>0)\\
+&=2\pi
+&&(\because\ 1\ \text{との積は変わらない})
+\end{aligned}`),
+      paragraph([
+        "である。すなわち ",
+        math(String.raw`0\le\theta-2n\pi<2\pi`),
+        " を満たす ",
+        math(String.raw`n\in\mathbb{Z}`),
+        " が存在する。",
+      ]),
       paragraph([
         "一意性。",
         math(String.raw`n,n'\in\mathbb{Z}`),
@@ -336,16 +389,35 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
         math(String.raw`0\le\theta-2n\pi<2\pi`),
         "、",
         math(String.raw`0\le\theta-2n'\pi<2\pi`),
-        " を満たすとする。第 2 式の各辺を第 1 式から辺々引くと",
+        " を満たすとする。下から評価すると",
       ]),
-      displayMath(
-        String.raw`-2\pi<(\theta-2n\pi)-(\theta-2n'\pi)=2(n'-n)\pi<2\pi`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+2(n'-n)\pi
+&=(\theta-2n\pi)-(\theta-2n'\pi)
+&&(\because\ \text{右辺を展開すると}\ 2n'\pi-2n\pi\ \text{になる})\\
+&>0-2\pi
+&&(\because\ 0\le\theta-2n\pi\ \text{と}\ \theta-2n'\pi<2\pi)\\
+&=-2\pi
+&&(\because\ 0\ \text{から引くと符号が変わる})
+\end{aligned}`),
       paragraph([
+        "であり、上から評価すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2(n'-n)\pi
+&=(\theta-2n\pi)-(\theta-2n'\pi)
+&&(\because\ \text{右辺を展開すると}\ 2n'\pi-2n\pi\ \text{になる})\\
+&<2\pi-0
+&&(\because\ \theta-2n\pi<2\pi\ \text{と}\ 0\le\theta-2n'\pi)\\
+&=2\pi
+&&(\because\ 0\ \text{を引いても変わらない})
+\end{aligned}`),
+      paragraph([
+        "である。各辺を ",
         math(String.raw`2\pi>0`),
         " で割って ",
         math(String.raw`-1<n'-n<1`),
-        "。",
+        " を得る。",
         math(String.raw`n'-n\in\mathbb{Z}`),
         " であり、この範囲にある整数は ",
         math(String.raw`0`),
@@ -363,6 +435,14 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
           "（定義が依存する事実を、その定義を使う側の主張の中で証明するという依存の逆転）。" +
           "これを解消するため、独立した claim として切り出し、文書順で" +
           "section_of_angle_representation より前に置いた。証明内容は Step 1 と同一である。",
+        "2026-08-08: 式変形の書き方の統一。存在の側は、記号を置く部分（t・N・M・S）を冒頭にまとめ、" +
+          "そこから使う 4 つの事実（-M<t、max S が定まること、n≤t、t<n+1）を準備として名前で並べ、" +
+          "そのうえで下界と上界をそれぞれ一続きの式にした。原文は 0≤t-n<1 を出してから" +
+          "「2π>0 を掛けて」と日本語で継いで結論の不等式を 1 行で置いており、" +
+          "分配則と θ=2πt の代入がどこで効いたのかが式に書かれていなかった。" +
+          "一意性の側は、原文が 2 つの不等式を辺々引いて -2π<…<2π を 1 行で書いていたのを、" +
+          "下からの評価と上からの評価の 2 つの鎖へ分けた（1 行では、どちらの端がどちらの仮定から" +
+          "出たのかが書かれない）。各行の末尾へ (∵ …) を付けた。ステップは減らしていない。",
       ],
     },
   },

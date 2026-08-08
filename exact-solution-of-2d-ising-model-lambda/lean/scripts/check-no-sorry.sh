@@ -118,6 +118,40 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_mul
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_prod
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_add_of_degLe
+  Ising2DLambda.AlgebraicEigenvalue.degLe_constSecond
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_indeterminate_add_constSecond
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_identity_term
+  Ising2DLambda.AlgebraicEigenvalue.degLe_term_of_ne_one
+  Ising2DLambda.AlgebraicEigenvalue.degLe_rest
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_C
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_X_add_C
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_identity_term
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_term_of_ne_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_charDet
+  Ising2DLambda.AlgebraicEigenvalue.card_filter_columnTranslation
+  Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift
+  Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift
+  Ising2DLambda.AlgebraicEigenvalue.transferMatrix_rowShift
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslation_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_filter_comp_equiv
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_iff
+  Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_mul_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.mul_shiftMatrix_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_transferMatrix_comm_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_apply_iff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_comm
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
