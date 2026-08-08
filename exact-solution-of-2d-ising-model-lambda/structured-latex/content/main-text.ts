@@ -5749,11 +5749,19 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
         ref("def_column_translation"),
         "）。",
         ref("def_intra_row_broken_count"),
-        " の ",
+        " が ",
         math(String.raw`b_{\mathrm{h}}(\tau)`),
-        " を定める集合はこの ",
+        " を定めるのに使う集合は ",
+        math(
+          String.raw`\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau(z+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}`,
+        ),
+        " であり、",
+        ref("def_column_translation"),
+        " の ",
+        math(String.raw`\gamma(z)=z+_{\mathbb{Z}/L\mathbb{Z}}\bar1`),
+        " によりこれは ",
         math(String.raw`X`),
-        " そのものであり、",
+        " に等しい。したがって ",
         math(String.raw`b_{\mathrm{h}}(\tau)=|X|`),
         " である。",
       ]),
@@ -5763,7 +5771,9 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau)\bigr)\bigl(\gamma(y)\bigr)
+\bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau)\bigr)\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&\iff \bigl(S(\tau)\bigr)(y)\ne\bigl(S(\tau)\bigr)\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_column_translation})\\
 &\iff \tau\bigl(\gamma(y)\bigr)\ne\tau\bigl(\gamma(\gamma(y))\bigr)
 &&(\because\ \blkref{def_row_config_shift}\ \text{を 2 箇所へ適用})\\
 &\iff \gamma(y)\in X
