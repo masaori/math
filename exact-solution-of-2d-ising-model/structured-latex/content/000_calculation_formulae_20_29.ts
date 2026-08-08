@@ -850,162 +850,214 @@ b
         " の積について、体の公理をすべて確かめる。",
       ]),
       paragraph([
-        "示すべきことは次の (i)〜(v) である。",
+        "示すべきことは次の 5 つである。",
       ]),
       list([
         [
-          "(i) ",
           math(String.raw`(\mathbb{C},+)`),
-          " は可換群である。",
+          " は可換群である（加法の群構造）。",
         ],
         [
-          "(ii) 積は結合的・可換であり単位元 ",
+          "積は結合的・可換であり単位元 ",
           math(String.raw`1_{\mathbb{C}}`),
-          " をもつ。",
+          " をもつ（積のモノイド構造）。",
         ],
-        ["(iii) 分配律が成り立つ。"],
+        ["分配律が成り立つ。"],
         [
-          "(iv) ",
           math(String.raw`1_{\mathbb{C}}\ne 0_{\mathbb{C}}`),
-          "。",
+          " である（単位元と零元の相違）。",
         ],
         [
-          "(v) ",
           math(String.raw`0_{\mathbb{C}}`),
-          " 以外の元は積について可逆である。",
+          " 以外の元は積について可逆である（逆元の存在）。",
         ],
       ]),
       paragraph([
-        "Step 1: (i)。",
+        "以下 ",
+        math(String.raw`a,b,c,d,e,f\in\mathbb{R}`),
+        " とし、",
         math(String.raw`(a,b),(c,d),(e,f)\in\mathbb{C}`),
-        " に対して、",
+        " とする。",
       ]),
+      paragraph(["加法の結合律。"]),
       displayMath(
         String.raw`\begin{aligned}
-\left((a,b)+(c,d)\right)+(e,f)
-&= (a+c,\ b+d)+(e,f) \\
-&= \left((a+c)+e,\ (b+d)+f\right) \\
-&= \left(a+(c+e),\ b+(d+f)\right)
-\quad (\because \mathbb{R} \text{ の和の結合律}) \\
-&= (a,b)+(c+e,\ d+f) \\
-&= (a,b)+\left((c,d)+(e,f)\right)
+\bigl((a,b)+(c,d)\bigr)+(e,f)
+&= (a+c,\ b+d)+(e,f)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= \bigl((a+c)+e,\ (b+d)+f\bigr)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= \bigl(a+(c+e),\ b+(d+f)\bigr)
+&&(\because\ \mathbb{R}\ \text{の和の結合律を 2 箇所へ適用})\\
+&= (a,b)+(c+e,\ d+f)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= (a,b)+\bigl((c,d)+(e,f)\bigr)
+&&(\because\ \text{成分ごとの加法の定義})
 \end{aligned}`,
       ),
+      paragraph(["加法の可換律。"]),
       displayMath(
         String.raw`\begin{aligned}
 (a,b)+(c,d)
-&= (a+c,\ b+d) \\
+&= (a+c,\ b+d)
+&&(\because\ \text{成分ごとの加法の定義})\\
 &= (c+a,\ d+b)
-\quad (\because \mathbb{R} \text{ の和の可換律}) \\
+&&(\because\ \mathbb{R}\ \text{の和の可換律を 2 箇所へ適用})\\
 &= (c,d)+(a,b)
+&&(\because\ \text{成分ごとの加法の定義})
+\end{aligned}`,
+      ),
+      paragraph(["加法の単位元。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(a,b)+0_{\mathbb{C}}
+&= (a,b)+(0,0)
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))\\
+&= (a+0,\ b+0)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= (a,b)
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
+        "引いたブロックは ",
         ref("inclusion_rr_to_cc"),
-        " より ",
-        math(String.raw`0_{\mathbb{C}}=(0,0)`),
-        " であり、",
+        " である。",
       ]),
+      paragraph(["加法の逆元。"]),
       displayMath(
-        String.raw`(a,b)+0_{\mathbb{C}} = (a+0,\ b+0) = (a,b)`,
+        String.raw`\begin{aligned}
+(a,b)+(-a,-b)
+&= (a+(-a),\ b+(-b))
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= (0,0)
+&&(\because\ \mathbb{R}\ \text{の和の逆元を 2 箇所へ適用})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
+\end{aligned}`,
       ),
       paragraph([
-        "であるから ",
-        math(String.raw`0_{\mathbb{C}}`),
-        " は加法の単位元である。また ",
+        "ここで ",
+        math(String.raw`-a,-b\in\mathbb{R}`),
+        " なので ",
         math(String.raw`(-a,-b)\in\mathbb{R}^2=\mathbb{C}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`(a,b)+(-a,-b) = (a+(-a),\ b+(-b)) = (0,0) = 0_{\mathbb{C}}`,
-      ),
-      paragraph([
-        "であるから ",
-        math(String.raw`(a,b)`),
-        " は加法に関する逆元をもつ。以上より ",
+        " である。以上の 4 つより ",
         math(String.raw`(\mathbb{C},+)`),
-        " は可換群である。",
+        " は可換群である。引いたブロックは ",
+        ref("inclusion_rr_to_cc"),
+        " である。",
       ]),
       paragraph([
-        "なお ",
+        "この加法逆元は ",
         ref("multiply_by_minus_one"),
         " の ",
         math(String.raw`-z:=(-1_{\mathbb{C}})\cdot z`),
-        " は、この加法逆元と一致する。実際 ",
-        ref("inclusion_rr_to_cc"),
-        " より ",
-        math(String.raw`-1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0)`),
-        " であるから、",
+        " と一致する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (-1_{\mathbb{C}})\cdot(a,b)
-&= (-1,0)\cdot(a,b) \\
-&= \left((-1)a-0\cdot b,\ (-1)b+0\cdot a\right) \\
+&= (-1,0)\cdot(a,b)
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{より}\ -1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0))\\
+&= \bigl((-1)a-0\cdot b,\ (-1)b+0\cdot a\bigr)
+&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
 &= (-a,-b)
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元、}\ 0\ \text{を因子にもつ積は}\ 0\text{、}\ 0\ \text{は和の単位元})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 2: (ii)。積の結合律・可換律・単位元 ",
+        "引いたブロックは ",
+        ref("inclusion_rr_to_cc"),
+        " と ",
+        ref("definition_of_cc"),
+        " である。",
+      ]),
+      paragraph([
+        "積のモノイド構造。積の結合律・可換律・単位元 ",
         math(String.raw`1_{\mathbb{C}}`),
         " の存在は ",
         ref("multiplicative_group_of_cc"),
-        " の Step 1〜Step 3 で示した（これらは ",
+        " の「積の可換律」「積の結合律」「積の単位元」で示した",
+        "（これらは ",
         math(String.raw`\mathbb{C}`),
         " の全元について成り立つ主張である）。",
       ]),
-      paragraph(["Step 3: (iii)。分配律を確かめる。"]),
+      paragraph(["左からの分配律。"]),
       displayMath(
         String.raw`\begin{aligned}
-(a,b)\cdot\left((c,d)+(e,f)\right)
-&= (a,b)\cdot(c+e,\ d+f) \\
-&= \left(a(c+e)-b(d+f),\ a(d+f)+b(c+e)\right) \\
-&= \left(ac+ae-bd-bf,\ ad+af+bc+be\right)
-\quad (\because \mathbb{R} \text{ の分配律}) \\
-&= \left((ac-bd)+(ae-bf),\ (ad+bc)+(af+be)\right)
-\quad (\because \mathbb{R} \text{ の和の可換律・結合律}) \\
-&= (ac-bd,\ ad+bc)+(ae-bf,\ af+be) \\
+(a,b)\cdot\bigl((c,d)+(e,f)\bigr)
+&= (a,b)\cdot(c+e,\ d+f)
+&&(\because\ \text{成分ごとの加法の定義})\\
+&= \bigl(a(c+e)-b(d+f),\ a(d+f)+b(c+e)\bigr)
+&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
+&= \bigl(ac+ae-(bd+bf),\ ad+af+(bc+be)\bigr)
+&&(\because\ \mathbb{R}\ \text{の分配律を 4 箇所へ適用})\\
+&= \bigl((ac-bd)+(ae-bf),\ (ad+bc)+(af+be)\bigr)
+&&(\because\ \mathbb{R}\ \text{の和の可換律・結合律、および和の逆元の分配})\\
+&= (ac-bd,\ ad+bc)+(ae-bf,\ af+be)
+&&(\because\ \text{成分ごとの加法の定義})\\
 &= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
+&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積を 2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
-        "右からの分配律は、",
-        ref("multiplicative_group_of_cc"),
-        " の Step 1（積の可換律）より",
+        "引いたブロックは ",
+        ref("definition_of_cc"),
+        " である。第 4 の等号の「和の逆元の分配」とは ",
+        math(String.raw`-(bd+bf)=(-bd)+(-bf)`),
+        " のことである。",
       ]),
+      paragraph(["右からの分配律。"]),
       displayMath(
         String.raw`\begin{aligned}
-\left((c,d)+(e,f)\right)\cdot(a,b)
-&= (a,b)\cdot\left((c,d)+(e,f)\right) \\
-&= (a,b)\cdot(c,d)+(a,b)\cdot(e,f) \\
+\bigl((c,d)+(e,f)\bigr)\cdot(a,b)
+&= (a,b)\cdot\bigl((c,d)+(e,f)\bigr)
+&&(\because\ \mathbb{C}\ \text{の乗法群}\ \text{の積の可換律})\\
+&= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
+&&(\because\ \text{上で示した左からの分配律})\\
 &= (c,d)\cdot(a,b)+(e,f)\cdot(a,b)
+&&(\because\ \mathbb{C}\ \text{の乗法群}\ \text{の積の可換律を 2 箇所へ適用})
 \end{aligned}`,
       ),
-      paragraph(["として従う。"]),
       paragraph([
-        "Step 4: (iv)。",
-        math(String.raw`\mathbb{R}`),
-        " において ",
-        math(String.raw`1\ne 0`),
-        " であるから、第 1 成分を比べて ",
-        math(String.raw`1_{\mathbb{C}}=(1,0)\ne(0,0)=0_{\mathbb{C}}`),
-        "。",
+        "引いたブロックは ",
+        ref("multiplicative_group_of_cc"),
+        " である。",
+      ]),
+      paragraph(["単位元と零元の相違。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}}
+&= (1,0)
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 1_{\mathbb{C}}=(1,0))\\
+&\ne (0,0)
+&&(\because\ \mathbb{R}\ \text{において}\ 1\ne 0\ \text{であり、第 1 成分が異なる})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
+\end{aligned}`,
+      ),
+      paragraph([
+        "引いたブロックは ",
+        ref("inclusion_rr_to_cc"),
+        " である。",
       ]),
       paragraph([
-        "Step 5: (v)。",
+        "逆元の存在。",
         ref("multiplicative_group_of_cc"),
         " より ",
         math(String.raw`\mathbb{C}^{\times}=\mathbb{C}\setminus\{(0,0)\}`),
-        " は積について群をなす。特に ",
+        " は積について群をなす。したがって ",
         math(String.raw`z\ne 0_{\mathbb{C}}`),
         " なる ",
-        math(String.raw`z`),
-        " は積に関する逆元 ",
+        math(String.raw`z\in\mathbb{C}`),
+        " は ",
+        math(String.raw`z\in\mathbb{C}^{\times}`),
+        " であり、積に関する逆元 ",
         math(String.raw`z^{-1}\in\mathbb{C}^{\times}`),
         " をもつ。",
       ]),
       paragraph([
-        "Step 6: 結論。Step 1〜Step 5 より (i)〜(v) がすべて成り立つので、",
+        "結論。以上で 5 つがすべて成り立つので、",
         math(String.raw`\mathbb{C}`),
         " は体をなす。",
       ]),
@@ -1014,6 +1066,12 @@ b
       status: "converted",
       notes: [
         "原文の proof は TODO のみ。ここで証明を与えた。",
+        "2026-08-09: 式変形を一続きの鎖にし、根拠を行末の (∵ …) へ揃えた。" +
+          "Step 1〜Step 6 の番号は内容の分かる名前（加法の結合律・積のモノイド構造・" +
+          "左からの分配律・単位元と零元の相違・逆元の存在・結論など）へ改めた。" +
+          "加法の 4 つの性質・単位元と零元の相違・分配律の各段に、暗黙だった根拠" +
+          "（成分ごとの加法の定義、R の和の結合律・可換律・逆元、0 が和の単位元であること、" +
+          "-1_C = (-1,0) であること）を書き足してある。段は増えており、減った段は無い。",
         "原文の CC の定義は「CC := RR^2 に以下の演算を入れたもの」として積のみを明示しており、" +
           "加法が明示されていない。体であることを述べるには加法が必要なので、" +
           "本証明では RR^2 の成分ごとの加法を採ることを冒頭で明示した。",
