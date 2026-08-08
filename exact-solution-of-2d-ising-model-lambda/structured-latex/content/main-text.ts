@@ -4,8 +4,10 @@
  * 章「分配多項式」: 有限格子の分配関数を、指数関数を経由せず整係数多項式として定義する。
  * 章「有限系の自由エントロピー」: 有理点での値の素因数分解として Φ_L(q) ∈ Λ を定める。
  * 章「転送行列」: 行配位を定め、破れボンド数を行内・行間へ分解し、転送行列 T を定義して、
- * 配位の重みが行に沿った成分の積であること・行列の冪の成分が道に沿った積の和であることを示す
- * （Z_L = Tr(T^L) そのものは未着手）。
+ * 配位の重みが行に沿った成分の積であること・行列の冪の成分が道に沿った積の和であること・
+ * Z_L = Tr(T^L) を示す。
+ * 章「固有値の代数性」: 行列式を書くために、行配位の集合の線形順序と、その上の置換の符号を用意する
+ * （行列式と特性多項式そのものは未着手）。
  * どの章にも ℝ/ℂ は現れない。
  *
  * 文書順はこの配列の並びが正本である（README「章立ての予定」の表が読む順序の正本）。
@@ -3674,6 +3676,460 @@ Z_L
   },
 
   {
+    id: "algebraic_eigenvalue_definition_permutation_sign",
+    kind: "definition",
+    title: { text: "行配位の置換、転倒数、そして符号" },
+    labels: ["def_row_permutation", "def_inversion_count", "def_permutation_sign"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orderedPairs",
+      "Ising2DLambda.AlgebraicEigenvalue.inversionCount",
+      "Ising2DLambda.AlgebraicEigenvalue.permSign",
+    ],
+    verification: ["sagemath/check/permutation-sign"],
+    statement: [
+      paragraph([
+        "行列式を置換にわたる和として定めるために、",
+        ref("def_row_configuration"),
+        " の行配位の集合 ",
+        math(String.raw`R_L`),
+        " の上の置換と、その符号を定める。",
+        "符号は ",
+        ref("def_row_config_order"),
+        " の順序 ",
+        math(String.raw`\prec`),
+        " に対する転倒数で定める。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`R_L`),
+        " の置換とは全単射 ",
+        math(String.raw`\varphi:R_L\to R_L`),
+        " のことであり、その全体を ",
+        math(String.raw`\mathfrak{S}_L`),
+        " と書く。",
+        math(String.raw`R_L`),
+        " は有限集合なので ",
+        math(String.raw`\mathfrak{S}_L`),
+        " も有限集合である。",
+        "2 つの置換 ",
+        math(String.raw`\varphi,\psi\in\mathfrak{S}_L`),
+        " の合成 ",
+        math(String.raw`\varphi\circ\psi`),
+        "（",
+        math(String.raw`(\varphi\circ\psi)(\tau)=\varphi(\psi(\tau))`),
+        "）は再び置換であり、恒等写像 ",
+        math(String.raw`\mathrm{id}_{R_L}`),
+        " も置換である。全単射 ",
+        math(String.raw`\varphi`),
+        " には逆写像 ",
+        math(String.raw`\varphi^{-1}\in\mathfrak{S}_L`),
+        " がある。",
+      ]),
+      paragraph([
+        "第二に、",
+        math(String.raw`\prec`),
+        " について順序づけられた対の集合を",
+      ]),
+      displayMath(
+        String.raw`P_L:=\bigl\{\,(\tau,\tau')\in R_L\times R_L \;\bigm|\; \tau\prec\tau'\,\bigr\}`,
+      ),
+      paragraph([
+        "と置き（",
+        math(String.raw`R_L\times R_L`),
+        " が有限集合なので ",
+        math(String.raw`P_L`),
+        " も有限集合）、置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " の転倒数を",
+      ]),
+      displayMath(
+        String.raw`\mathrm{inv}(\varphi):=\bigl|\,\bigl\{\,(\tau,\tau')\in P_L \;\bigm|\; \varphi(\tau')\prec\varphi(\tau)\,\bigr\}\,\bigr|\in\mathbb{N}`,
+      ),
+      paragraph([
+        "で定める。すなわち ",
+        math(String.raw`\mathrm{inv}(\varphi)`),
+        " は、",
+        math(String.raw`\varphi`),
+        " によって順序が入れ替わる対の個数である。",
+        "これは有限集合の元の個数なので自然数である。",
+      ]),
+      paragraph([
+        "第三に、置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " の符号を",
+      ]),
+      displayMath(String.raw`\mathrm{sgn}(\varphi):=(-1)^{\mathrm{inv}(\varphi)}\in\mathbb{Z}`),
+      paragraph([
+        "で定める。右辺は整数 ",
+        math(String.raw`-1`),
+        " の自然数冪であり、",
+        math(String.raw`\mathbb{Z}`),
+        " の中の計算である。",
+        "ここに現れるのは有限集合とその上の写像、数え上げ、および整数の積だけであり、実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_permutation_sign_values",
+    kind: "claim",
+    title: { text: "符号は +1 か -1 であり、恒等写像の符号は +1 である" },
+    labels: ["claim_permutation_sign_values"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_eq_one_or_neg_one",
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_mul_self",
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_id",
+    ],
+    verification: ["sagemath/check/permutation-sign"],
+    statement: [
+      paragraph([
+        ref("def_permutation_sign"),
+        " の符号について次の 3 つが成り立つ。",
+      ]),
+      list([
+        [
+          "任意の ",
+          math(String.raw`\varphi\in\mathfrak{S}_L`),
+          " について ",
+          math(String.raw`\mathrm{sgn}(\varphi)=+1`),
+          " または ",
+          math(String.raw`\mathrm{sgn}(\varphi)=-1`),
+          " である。",
+        ],
+        [
+          "任意の ",
+          math(String.raw`\varphi\in\mathfrak{S}_L`),
+          " について ",
+          math(String.raw`\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\varphi)=1`),
+          " である。",
+        ],
+        [
+          math(String.raw`\mathrm{sgn}(\mathrm{id}_{R_L})=+1`),
+          " である。",
+        ],
+      ]),
+      paragraph([
+        "いずれも ",
+        math(String.raw`\mathbb{Z}`),
+        " の中の等式であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一の主張。自然数 ",
+        math(String.raw`n`),
+        " が偶数なら ",
+        math(String.raw`(-1)^n=+1`),
+        "、奇数なら ",
+        math(String.raw`(-1)^n=-1`),
+        " であり、自然数は偶数か奇数のいずれかである。",
+        math(String.raw`n=\mathrm{inv}(\varphi)`),
+        " と置けばよい。",
+      ]),
+      paragraph(["第二の主張。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\varphi)
+&=(-1)^{\mathrm{inv}(\varphi)}\cdot(-1)^{\mathrm{inv}(\varphi)}
+&&(\because\ \text{符号の定義})\\
+&=\bigl((-1)^{2}\bigr)^{\mathrm{inv}(\varphi)}
+&&(\because\ \text{指数法則})\\
+&=1^{\mathrm{inv}(\varphi)}
+&&(\because\ (-1)^{2}=1)\\
+&=1
+&&(\because\ 1\ \text{の冪は}\ 1)
+\end{aligned}`),
+      paragraph([
+        "第三の主張。",
+        math(String.raw`(\tau,\tau')\in P_L`),
+        " ならば ",
+        math(String.raw`\tau\prec\tau'`),
+        " であり、",
+        ref("claim_row_config_order_linear"),
+        " の三分律から ",
+        math(String.raw`\tau'\prec\tau`),
+        " は成り立たない。",
+        math(String.raw`\mathrm{id}_{R_L}(\tau)=\tau`),
+        " なので、転倒数の定義に現れる集合は空であり ",
+        math(String.raw`\mathrm{inv}(\mathrm{id}_{R_L})=0`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\mathrm{id}_{R_L})
+&=(-1)^{\mathrm{inv}(\mathrm{id}_{R_L})}
+&&(\because\ \text{符号の定義})\\
+&=(-1)^{0}
+&&(\because\ \mathrm{inv}(\mathrm{id}_{R_L})=0)\\
+&=1
+&&(\because\ \text{0 乗は}\ 1)
+\end{aligned}`),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_permutation_sign"),
+        "、",
+        ref("def_inversion_count"),
+        "、",
+        ref("claim_row_config_order_linear"),
+        "。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_permutation_sign_mul",
+    kind: "claim",
+    title: { text: "符号は合成について乗法的である" },
+    labels: ["claim_permutation_sign_mul"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_comp",
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_comp",
+    ],
+    verification: ["sagemath/check/permutation-sign"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\varphi,\psi\in\mathfrak{S}_L`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{sgn}(\varphi\circ\psi)=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        ref("def_permutation_sign"),
+        "）。両辺は ",
+        math(String.raw`\mathbb{Z}`),
+        " の元であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として ",
+        math(String.raw`\psi`),
+        " が定める写像 ",
+        math(String.raw`\Psi:P_L\to P_L`),
+        " を",
+      ]),
+      displayMath(String.raw`\Psi(\tau,\tau'):=
+\begin{cases}
+\bigl(\psi(\tau),\psi(\tau')\bigr) & \bigl(\psi(\tau)\prec\psi(\tau')\ \text{のとき}\bigr)\\
+\bigl(\psi(\tau'),\psi(\tau)\bigr) & \bigl(\psi(\tau')\prec\psi(\tau)\ \text{のとき}\bigr)
+\end{cases}`),
+      paragraph([
+        "で定める。これが定まることを見る。",
+        math(String.raw`(\tau,\tau')\in P_L`),
+        " なら ",
+        math(String.raw`\tau\prec\tau'`),
+        " なので三分律から ",
+        math(String.raw`\tau\ne\tau'`),
+        " であり、",
+        math(String.raw`\psi`),
+        " が単射なので ",
+        math(String.raw`\psi(\tau)\ne\psi(\tau')`),
+        " である。ふたたび三分律から ",
+        math(String.raw`\psi(\tau)\prec\psi(\tau')`),
+        " と ",
+        math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+        " のちょうど一方が成り立つ。どちらの場合も右辺は ",
+        math(String.raw`P_L`),
+        " の元である。",
+      ]),
+      paragraph([
+        math(String.raw`\Psi`),
+        " は全単射である。実際 ",
+        math(String.raw`\psi^{-1}`),
+        " から同じ作り方で得られる写像 ",
+        math(String.raw`\Psi':P_L\to P_L`),
+        " が逆写像になる。",
+        math(String.raw`(\tau,\tau')\in P_L`),
+        " について、",
+        math(String.raw`\psi(\tau)\prec\psi(\tau')`),
+        " の場合は ",
+        math(String.raw`\Psi(\tau,\tau')=(\psi(\tau),\psi(\tau'))`),
+        " であり、その 2 成分を ",
+        math(String.raw`\psi^{-1}`),
+        " で戻すと ",
+        math(String.raw`\tau,\tau'`),
+        " で、",
+        math(String.raw`\tau\prec\tau'`),
+        " なので ",
+        math(String.raw`\Psi'(\Psi(\tau,\tau'))=(\tau,\tau')`),
+        " である。",
+        math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+        " の場合は ",
+        math(String.raw`\Psi(\tau,\tau')=(\psi(\tau'),\psi(\tau))`),
+        " であり、その 2 成分を ",
+        math(String.raw`\psi^{-1}`),
+        " で戻すと ",
+        math(String.raw`\tau',\tau`),
+        " で、やはり ",
+        math(String.raw`\tau\prec\tau'`),
+        " なので ",
+        math(String.raw`\Psi'(\Psi(\tau,\tau'))=(\tau,\tau')`),
+        " である。",
+        math(String.raw`\psi`),
+        " と ",
+        math(String.raw`\psi^{-1}`),
+        " を入れ替えれば同じ議論で ",
+        math(String.raw`\Psi(\Psi'(\tau,\tau'))=(\tau,\tau')`),
+        " が出る。",
+      ]),
+      paragraph([
+        "次に、",
+        math(String.raw`P_L`),
+        " の 3 つの部分集合",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| (\varphi\circ\psi)(\tau')\prec(\varphi\circ\psi)(\tau)\,\bigr\},\\
+B&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \psi(\tau')\prec\psi(\tau)\,\bigr\},\\
+C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\prec\varphi\bigl(\Psi(\tau,\tau')_1\bigr)\,\bigr\}
+\end{aligned}`),
+      paragraph([
+        "を置く（",
+        math(String.raw`(\upsilon,\upsilon')_1:=\upsilon`),
+        "、",
+        math(String.raw`(\upsilon,\upsilon')_2:=\upsilon'`),
+        " は対の成分を取り出す記号である）。転倒数の定義から ",
+        math(String.raw`|A|=\mathrm{inv}(\varphi\circ\psi)`),
+        " と ",
+        math(String.raw`|B|=\mathrm{inv}(\psi)`),
+        " である。また ",
+        math(String.raw`C`),
+        " は ",
+        math(String.raw`\Psi`),
+        " による ",
+        math(String.raw`\{(\upsilon,\upsilon')\in P_L\mid\varphi(\upsilon')\prec\varphi(\upsilon)\}`),
+        " の逆像であり、",
+        math(String.raw`\Psi`),
+        " が全単射なので ",
+        math(String.raw`|C|=\mathrm{inv}(\varphi)`),
+        " である。",
+      ]),
+      paragraph([
+        "各 ",
+        math(String.raw`(\tau,\tau')\in P_L`),
+        " について、",
+        math(String.raw`A,B,C`),
+        " のうちその対が属するものの個数は偶数である。場合を分けて確かめる。",
+      ]),
+      paragraph([
+        math(String.raw`\psi(\tau)\prec\psi(\tau')`),
+        " の場合。三分律から ",
+        math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+        " は成り立たないので、その対は ",
+        math(String.raw`B`),
+        " に属さない。このとき ",
+        math(String.raw`\Psi(\tau,\tau')=(\psi(\tau),\psi(\tau'))`),
+        " なので ",
+        math(String.raw`C`),
+        " の条件は ",
+        math(String.raw`\varphi(\psi(\tau'))\prec\varphi(\psi(\tau))`),
+        " であり、これは ",
+        math(String.raw`A`),
+        " の条件と同じである。よって属するものの個数は ",
+        math(String.raw`0`),
+        " 個か ",
+        math(String.raw`2`),
+        " 個であり、いずれも偶数である。",
+      ]),
+      paragraph([
+        math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+        " の場合。その対は ",
+        math(String.raw`B`),
+        " に属する。このとき ",
+        math(String.raw`\Psi(\tau,\tau')=(\psi(\tau'),\psi(\tau))`),
+        " なので ",
+        math(String.raw`C`),
+        " の条件は ",
+        math(String.raw`\varphi(\psi(\tau))\prec\varphi(\psi(\tau'))`),
+        " である。",
+        math(String.raw`\tau\ne\tau'`),
+        " と ",
+        math(String.raw`\varphi\circ\psi`),
+        " が単射であることから ",
+        math(String.raw`\varphi(\psi(\tau))\ne\varphi(\psi(\tau'))`),
+        " なので、三分律により ",
+        math(String.raw`A`),
+        " の条件と ",
+        math(String.raw`C`),
+        " の条件のちょうど一方が成り立つ。よって属するものの個数は ",
+        math(String.raw`B`),
+        " のぶんと合わせてちょうど ",
+        math(String.raw`2`),
+        " 個であり、偶数である。",
+      ]),
+      paragraph([
+        "整数 ",
+        math(String.raw`-1`),
+        " を、対がその集合に属するときだけ掛けることにすると、",
+        "いま見たことは各 ",
+        math(String.raw`(\tau,\tau')\in P_L`),
+        " について 3 つぶんの積が ",
+        math(String.raw`1`),
+        " になることを言っている。",
+        math(String.raw`P_L`),
+        " 全体でこの積を取れば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+&=(-1)^{\mathrm{inv}(\varphi\circ\psi)}\cdot(-1)^{\mathrm{inv}(\varphi)}\cdot(-1)^{\mathrm{inv}(\psi)}
+&&(\because\ \text{符号の定義})\\
+&=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
+&&(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi))\\
+&=\prod_{p\in P_L}f_A(p)\cdot\prod_{p\in P_L}f_C(p)\cdot\prod_{p\in P_L}f_B(p)
+&&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた積は}\ (-1)\ \text{の個数乗})\\
+&=\prod_{p\in P_L}\bigl(f_A(p)\cdot f_C(p)\cdot f_B(p)\bigr)
+&&(\because\ \text{有限積の各因子ごとのまとめ})\\
+&=\prod_{p\in P_L}1
+&&(\because\ \text{属するものの個数が偶数})\\
+&=1
+&&(\because\ 1\ \text{の有限積は}\ 1)
+\end{aligned}`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`f_X(p):=-1\ (p\in X)`),
+        "、",
+        math(String.raw`f_X(p):=1\ (p\notin X)`),
+        " と置いた。これを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\varphi\circ\psi)
+&=\mathrm{sgn}(\varphi\circ\psi)\cdot1\cdot1\\
+&=\mathrm{sgn}(\varphi\circ\psi)\cdot\bigl(\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\varphi)\bigr)\cdot\bigl(\mathrm{sgn}(\psi)\cdot\mathrm{sgn}(\psi)\bigr)
+&&(\because\ \text{符号の 2 乗は}\ 1)\\
+&=\bigl(\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\bigr)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\\
+&=1\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+&&(\because\ \text{直前の等式})\\
+&=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+\end{aligned}`),
+      paragraph(["を得る。"]),
+      paragraph([
+        "引いたブロック: ",
+        ref("def_permutation_sign"),
+        "、",
+        ref("def_inversion_count"),
+        "、",
+        ref("def_row_permutation"),
+        "、",
+        ref("claim_row_config_order_linear"),
+        "、",
+        ref("claim_permutation_sign_values"),
+        "。",
+      ]),
+      paragraph([
+        "以上で使ったのは、",
+        math(String.raw`\prec`),
+        " の三分律、置換が単射であること、有限集合の数え上げ、そして整数の積だけである。",
+        ref("claim_row_config_order_linear"),
+        " の推移律は一度も使っていない。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
@@ -3697,11 +4153,13 @@ Z_L
         ],
         [
           todo("未着手"),
-          "「固有値の代数性」の続き: 行配位の置換とその符号（転倒数）、行列式、そして特性多項式が ",
+          "「固有値の代数性」の続き: 行列式、そして特性多項式が ",
           math(String.raw`\mathbb{Z}[x][\lambda]`),
           " に属すること。そこから固有値の代数性を出し、円分体上で対角化する。",
           "行列式を書くために要る添字集合の線形順序（",
           ref("claim_row_config_order_linear"),
+          "）と、置換の符号（",
+          ref("claim_permutation_sign_mul"),
           "）までは上で済んでいる。",
         ],
         [

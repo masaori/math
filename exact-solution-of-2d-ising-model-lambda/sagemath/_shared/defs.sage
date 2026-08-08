@@ -375,3 +375,64 @@ def row_config_less(L, tau, tau_other):
     if k0 is None:
         return False
     return spin_index(tau[projection(L, k0)]) < spin_index(tau_other[projection(L, k0)])
+
+
+def row_config_key(L, tau):
+    """行配位を辞書のキーとして使えるタプルへ直す（表現の都合。本文の対象ではない）。"""
+    return tuple(tau[j] for j in range(L))
+
+
+def row_permutations(L):
+    """def_row_permutation: 置換の全体 S_L（R_L から R_L への全単射）を全列挙する。
+
+    置換は「行配位のキー -> 行配位」の辞書として表す。個数は (2^L)!。
+    """
+    configs = list(row_configurations(L))
+    keys = [row_config_key(L, tau) for tau in configs]
+    for perm in Permutations(len(configs)):
+        yield {keys[i]: configs[perm[i] - 1] for i in range(len(configs))}
+
+
+def apply_row_permutation(L, phi, tau):
+    """置換 phi を行配位 tau に施す。"""
+    return phi[row_config_key(L, tau)]
+
+
+def ordered_pairs(L):
+    """def_inversion_count: P_L = { (tau, tau') | tau ≺ tau' }。"""
+    configs = list(row_configurations(L))
+    return [
+        (tau, tau_other)
+        for tau in configs
+        for tau_other in configs
+        if row_config_less(L, tau, tau_other)
+    ]
+
+
+def inversion_count(L, phi, pairs=None):
+    """def_inversion_count: inv(phi) = |{ (tau,tau') in P_L | phi(tau') ≺ phi(tau) }|。"""
+    if pairs is None:
+        pairs = ordered_pairs(L)
+    return ZZ(sum(
+        1
+        for (tau, tau_other) in pairs
+        if row_config_less(
+            L, apply_row_permutation(L, phi, tau_other), apply_row_permutation(L, phi, tau)
+        )
+    ))
+
+
+def permutation_sign(L, phi, pairs=None):
+    """def_permutation_sign: sgn(phi) = (-1)^{inv(phi)} in ZZ。"""
+    return ZZ(-1) ** inversion_count(L, phi, pairs)
+
+
+def compose_row_permutations(L, phi, psi):
+    """置換の合成 (phi ∘ psi)(tau) = phi(psi(tau))。"""
+    # psi は「キー -> psi(その行配位)」なので、値の側へ phi を施せば合成になる。
+    return {key: apply_row_permutation(L, phi, image) for key, image in psi.items()}
+
+
+def identity_row_permutation(L):
+    """恒等置換 id_{R_L}。"""
+    return {row_config_key(L, tau): tau for tau in row_configurations(L)}

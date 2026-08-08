@@ -83,6 +83,15 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.permSign_eq_one_or_neg_one
+  Ising2DLambda.AlgebraicEigenvalue.permSign_mul_self
+  Ising2DLambda.AlgebraicEigenvalue.permSign_id
+  Ising2DLambda.AlgebraicEigenvalue.permSign_comp
+  Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.permSign_id_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_comp
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_mul_self
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans
   Ising2DLambda.NecSuf.TransferMatrix.trace_matPow_eq_sum_cyclicWeight
