@@ -2839,13 +2839,13 @@ w_A(q)
         " はその部分集合なので有限集合である。",
       ]),
       paragraph([
-        "以下、整数 ",
-        math(String.raw`a\in\mathbb{Z}`),
-        " に対し、その ",
-        math(String.raw`L`),
-        " を法とする剰余類を ",
-        math(String.raw`\overline{a}\in\mathbb{Z}/L\mathbb{Z}`),
-        " と書く。",
+        "以下、整数から剰余類へ移るときは ",
+        ref("def_lattice"),
+        " の射影 ",
+        math(String.raw`\pi`),
+        " を、剰余類から整数へ移るときは同じ定義の代表を取る写像 ",
+        math(String.raw`s`),
+        " を用いる。この 2 本以外の経路は使わない。",
       ]),
       paragraph([
         ref("def_row_family"),
@@ -2856,7 +2856,7 @@ w_A(q)
         " を",
       ]),
       displayMath(
-        String.raw`\bigl(\Theta(c)\bigr)(i):=c(\overline{i})\qquad(i\in\{0,1,\dots,L\})`,
+        String.raw`\bigl(\Theta(c)\bigr)(i):=c\bigl(\pi(i)\bigr)\qquad(i\in\{0,1,\dots,L\})`,
       ),
       paragraph([
         "で定める。右辺は ",
@@ -2866,9 +2866,11 @@ w_A(q)
         " は ",
         math(String.raw`W_{L,L}`),
         " の元であり、",
-        math(String.raw`\overline{L}=\overline{0}`),
+        math(String.raw`\pi(L)=\pi(0)`),
         " より ",
-        math(String.raw`\bigl(\Theta(c)\bigr)(L)=c(\overline{0})=\bigl(\Theta(c)\bigr)(0)`),
+        math(
+          String.raw`\bigl(\Theta(c)\bigr)(L)=c\bigl(\pi(0)\bigr)=\bigl(\Theta(c)\bigr)(0)`,
+        ),
         " なので閉じている。すなわち右辺は ",
         math(String.raw`W^{\mathrm{cl}}_{L}`),
         " の元である。",
@@ -2955,16 +2957,16 @@ w_A(q)
         math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
         " の元 ",
         math(String.raw`y`),
-        " を任意に取り、",
-        math(String.raw`a:=s(y)`),
-        " と置くと",
+        " を任意に取ると",
       ]),
       displayMath(String.raw`\begin{aligned}
-\Bigl(\Xi\bigl(\Theta(c)\bigr)\Bigr)(\overline{a})
-&=\bigl(\Theta(c)\bigr)(a)
+\Bigl(\Xi\bigl(\Theta(c)\bigr)\Bigr)(y)
+&=\bigl(\Theta(c)\bigr)\bigl(s(y)\bigr)
 &&(\because\ \Xi\ \text{の定義})\\
-&=c(\overline{a})
-&&(\because\ \Theta\ \text{の定義})
+&=c\Bigl(\pi\bigl(s(y)\bigr)\Bigr)
+&&(\because\ \Theta\ \text{の定義})\\
+&=c(y)
+&&(\because\ s\ \text{の定義（}\pi(s(y))=y\text{）})
 \end{aligned}`),
       paragraph([
         "である。取った元は任意だったので、写像として ",
@@ -2974,6 +2976,8 @@ w_A(q)
       paragraph([
         "引いたブロック: ",
         ref("def_walk_of_family"),
+        "、",
+        ref("def_lattice"),
         "。",
       ]),
       paragraph([
@@ -2987,39 +2991,55 @@ w_A(q)
         " か ",
         math(String.raw`i=L`),
         " のいずれかであるから、場合を分ける（この 2 つの場合で ",
-        math(String.raw`\overline{i}`),
-        " の代表元が ",
+        math(String.raw`s\bigl(\pi(i)\bigr)`),
+        " が ",
         math(String.raw`i`),
-        " であるかどうかが違うので、一続きの式にはしない）。",
+        " に等しいかどうかが違うので、一続きの式にはしない）。",
       ]),
       paragraph([
         math(String.raw`i\le L-1`),
-        " の場合。",
-        math(String.raw`s(\overline{i})=i`),
-        " であるから",
+        " の場合。このとき ",
+        math(String.raw`0\le i\le L-1`),
+        " かつ ",
+        math(String.raw`\pi(i)=\pi(i)`),
+        " であり、この 2 条件を満たす整数はちょうど 1 つなので（",
+        ref("def_lattice"),
+        "）",
+        math(String.raw`s\bigl(\pi(i)\bigr)=i`),
+        " である。ゆえに",
       ]),
       displayMath(String.raw`\begin{aligned}
 \Bigl(\Theta\bigl(\Xi(p)\bigr)\Bigr)(i)
-&=\bigl(\Xi(p)\bigr)(\overline{i})
+&=\bigl(\Xi(p)\bigr)\bigl(\pi(i)\bigr)
 &&(\because\ \Theta\ \text{の定義})\\
+&=p\Bigl(s\bigl(\pi(i)\bigr)\Bigr)
+&&(\because\ \Xi\ \text{の定義})\\
 &=p(i)
-&&(\because\ \Xi\ \text{の定義。}i\ \text{は}\ \overline{i}\ \text{の代表元})
+&&(\because\ s(\pi(i))=i)
 \end{aligned}`),
       paragraph([
         "である。",
       ]),
       paragraph([
         math(String.raw`i=L`),
-        " の場合。",
+        " の場合。このとき ",
+        math(String.raw`0\le 0\le L-1`),
+        " かつ ",
+        math(String.raw`\pi(0)=\pi(0)`),
+        " なので、上と同じ理由で ",
+        math(String.raw`s\bigl(\pi(0)\bigr)=0`),
+        " である。ゆえに",
       ]),
       displayMath(String.raw`\begin{aligned}
 \Bigl(\Theta\bigl(\Xi(p)\bigr)\Bigr)(L)
-&=\bigl(\Xi(p)\bigr)(\overline{L})
+&=\bigl(\Xi(p)\bigr)\bigl(\pi(L)\bigr)
 &&(\because\ \Theta\ \text{の定義})\\
-&=\bigl(\Xi(p)\bigr)(\overline{0})
-&&(\because\ \overline{L}=\overline{0})\\
+&=\bigl(\Xi(p)\bigr)\bigl(\pi(0)\bigr)
+&&(\because\ \pi(L)=\pi(0))\\
+&=p\Bigl(s\bigl(\pi(0)\bigr)\Bigr)
+&&(\because\ \Xi\ \text{の定義})\\
 &=p(0)
-&&(\because\ \Xi\ \text{の定義。}0\ \text{は}\ \overline{0}\ \text{の代表元})\\
+&&(\because\ s(\pi(0))=0)\\
 &=p(L)
 &&(\because\ p\ \text{が閉じた道であること})
 \end{aligned}`),
@@ -3035,6 +3055,8 @@ w_A(q)
         ref("def_closed_walk"),
         "、",
         ref("def_walk_of_family"),
+        "、",
+        ref("def_lattice"),
         "。",
       ]),
       paragraph([
@@ -3043,7 +3065,11 @@ w_A(q)
         " は ",
         math(String.raw`\Xi`),
         " を逆写像に持つ。逆写像を持つ写像は全単射である。",
-        "以上は写像の値の計算と剰余類の代表元の取り扱いだけからなり、実数体も複素数体も現れない。",
+        "以上は写像の値の計算と、射影 ",
+        math(String.raw`\pi`),
+        " と代表を取る写像 ",
+        math(String.raw`s`),
+        " の性質だけからなり、実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -3146,9 +3172,13 @@ w_A(q)
 w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
 &=\prod_{i=0}^{L-1}T_{\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)(i),\,\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)(i+1)}
 &&(\because\ \text{道に沿った成分の積の定義})\\
-&=\prod_{i=0}^{L-1}T_{\bigl(\mathrm{rows}(\sigma)\bigr)(\overline{i}),\,\bigl(\mathrm{rows}(\sigma)\bigr)(\overline{i+1})}
+&=\prod_{i=0}^{L-1}T_{\bigl(\mathrm{rows}(\sigma)\bigr)(\pi(i)),\,\bigl(\mathrm{rows}(\sigma)\bigr)(\pi(i+1))}
 &&(\because\ \Theta\ \text{の定義})\\
-&=\prod_{i\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
+&=\prod_{i=0}^{L-1}T_{\bigl(\mathrm{rows}(\sigma)\bigr)(\pi(i)),\,\bigl(\mathrm{rows}(\sigma)\bigr)(\pi(i)+_{\mathbb{Z}/L\mathbb{Z}}\bar1)}
+&&(\because\ \pi(i+1)=\pi(i)+_{\mathbb{Z}/L\mathbb{Z}}\pi(1)\ \text{と}\ \bar1=\pi(1))\\
+&=\prod_{y\in\mathbb{Z}/L\mathbb{Z}}T_{\bigl(\mathrm{rows}(\sigma)\bigr)(y),\,\bigl(\mathrm{rows}(\sigma)\bigr)(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1)}
+&&(\because\ \pi\ \text{の}\ \{0,1,\dots,L-1\}\ \text{への制限が}\ \mathbb{Z}/L\mathbb{Z}\ \text{への全単射})\\
+&=\prod_{y\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_y(\sigma),\,\rho_{y+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
 &&(\because\ \mathrm{rows}\ \text{の定義})\\
 &=x^{\,b(\sigma)}
 &&(\because\ \text{配位の重みは行に沿った成分の積である})
@@ -3162,12 +3192,19 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
         ref("def_rows_map"),
         "、",
         ref("claim_transfer_weight_product"),
+        "、",
+        ref("def_lattice"),
         "。",
-        "第 3 の等号で、",
-        math(String.raw`\rho`),
-        " の添字（行番号）に剰余類を用いる約束（",
-        ref("claim_transfer_weight_product"),
-        " と同じ）をそのまま使っている。",
+        "第 4 の等号で使った全単射性は、各剰余類がちょうど 1 つの代表を ",
+        math(String.raw`\{0,1,\dots,L-1\}`),
+        " の中に持つこと（",
+        ref("def_lattice"),
+        "。除法の原理）である。",
+        "積の添字は第 3 の等号までは整数 ",
+        math(String.raw`i`),
+        "、第 4 の等号からは剰余類 ",
+        math(String.raw`y`),
+        " であり、両者に同じ記号を使っていない。",
       ]),
       displayMath(String.raw`\begin{aligned}
 Z_L

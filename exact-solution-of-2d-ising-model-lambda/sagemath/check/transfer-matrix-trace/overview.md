@@ -62,7 +62,9 @@ L = 3: Theta の全単射性・閉じた道の類別・族から作った道の�
 本文は $R_L$ の元そのものを行列の添字に使い、道を写像 $p:\{0,1,\dots,L\}\to R_L$、
 族を写像 $c:\mathbb{Z}/L\mathbb{Z}\to R_L$ として書くが、検証側では行配位を
 「列番号の順に値を並べたタプル」で表し（`row_config_key`）、道をその表現を並べた長さ $L+1$ の
-タプル、族を長さ $L$ のタプルで表している。剰余類 $\overline{a}$ は Python の `a % L` にあたる。
+タプル、族を長さ $L$ のタプルで表している。本文の射影 $\pi:\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z}$ は
+Python の `a % L`、代表を取る写像 $s:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z}$ は
+（剰余類を $0,\dots,L-1$ で表しているので）恒等写像にあたる。
 いずれも主張の内容には影響しない。
 
 冪の添字は本文と同じ 1 始まりである（`row_matrix_pow(L, A, 1) == A`）。Lean 側だけは再帰が

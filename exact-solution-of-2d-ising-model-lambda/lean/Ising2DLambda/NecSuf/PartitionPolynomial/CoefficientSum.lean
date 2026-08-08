@@ -10,18 +10,18 @@
 
   使っている性質            なぜ削れないか
   `Fintype α`               類 `fiber f m` を有限集合として扱い、その元の個数を数えるため。
-                            無限集合では Step 3 の「個数の和」が意味をなさない。
-  `DecidableEq α`           Step 3 で使う `Finset.card_biUnion` が合併を取るのに要る。
+                            無限集合では第 2 の等号の「個数の和」が意味をなさない。
+  `DecidableEq α`           第 2 の等号で使う `Finset.card_biUnion` が合併を取るのに要る。
                             決定可能でないと `biUnion` が定義できない。
-  `f a ≤ N`（有界性）       Step 2 の被覆に要る。これが無いと `f a` の類が
+  `f a ≤ N`（有界性）       類別の被覆に要る。これが無いと `f a` の類が
                             添字の範囲 `{0,…,N}` の外に出て、合併が全体にならない。
 
 値域を `ℕ` に固定してあるのは、添字の範囲を `Finset.range (N+1)` として書くためであり、
 順序集合一般へ持ち上げるとこの書き方ができなくなる（持ち上げても本質は増えない）。
 
-証明手順は具体版と同じ Step 1–5 である（別の論法へ差し替えていない）。
-Step 4（配位の総数が `2^{L²}`）だけは具体版に固有の計算なので、ここでは
-`Fintype.card α` のまま残す。すなわちこの版が示すのは Step 1–3 の部分である。
+証明手順は具体版と同じである（別の論法へ差し替えていない）。人手証明の 3 つの等号のうち、
+第 3 の等号（配位の総数が `2^{L²}`）だけは具体版に固有の計算なので、ここでは
+`Fintype.card α` のまま残す。すなわちこの版が示すのは第 1・第 2 の等号の部分である。
 
 住処: ここに ℝ / ℂ は現れない（数え上げは ℕ）。
 -/
@@ -36,10 +36,10 @@ open Finset
 variable {α : Type*} [Fintype α] [DecidableEq α] (f : α → ℕ) (N : ℕ)
 
 omit [DecidableEq α] in
-/-- Step 1。値 `m` をとる元の類。 -/
+/-- 第 1 の等号。値 `m` をとる元の類。 -/
 def fiber (m : ℕ) : Finset α := univ.filter fun a => f a = m
 
-/-- Step 2（被覆）。各 `a` は `f a` の類に属し、有界性から添字が範囲に収まる。 -/
+/-- 類別（被覆）。各 `a` は `f a` の類に属し、有界性から添字が範囲に収まる。 -/
 lemma biUnion_fiber (hf : ∀ a, f a ≤ N) :
     (range (N + 1)).biUnion (fiber f) = (univ : Finset α) := by
   apply eq_univ_of_forall
@@ -48,7 +48,7 @@ lemma biUnion_fiber (hf : ∀ a, f a ≤ N) :
   exact ⟨f a, Nat.lt_succ_of_le (hf a), rfl⟩
 
 omit [DecidableEq α] in
-/-- Step 2（互いに素）。`f` は写像なのでただ 1 つの値をとる。 -/
+/-- 類別（互いに素）。`f` は写像なのでただ 1 つの値をとる。 -/
 lemma fiber_pairwise_disjoint :
     ∀ m ∈ range (N + 1), ∀ m' ∈ range (N + 1), m ≠ m' → Disjoint (fiber f m) (fiber f m') := by
   intro m _ m' _ hne
@@ -57,7 +57,7 @@ lemma fiber_pairwise_disjoint :
   simp only [fiber, mem_filter] at hm hm'
   exact hne (hm.2.symm.trans hm'.2)
 
-/-- Step 3。互いに素な有限個の有限集合の合併の元の個数は、各集合の元の個数の和である。 -/
+/-- 第 2 の等号。互いに素な有限個の有限集合の合併の元の個数は、各集合の元の個数の和である。 -/
 theorem sum_card_fiber_eq_card (hf : ∀ a, f a ≤ N) :
     ∑ m ∈ range (N + 1), (fiber f m).card = Fintype.card α := by
   rw [← card_univ, ← biUnion_fiber f N hf, card_biUnion (fiber_pairwise_disjoint f N)]

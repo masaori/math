@@ -30,9 +30,11 @@
   冪の成分表示の等号                        rowMatrixPow_apply
   トレースの定義の等号                      rowMatrixTrace の定義（`rfl`）
 
-添字について。人手証明は剰余類 `\overline{a} ∈ ℤ/Lℤ` と整数 `i ∈ {0,...,L}` を書き分けており、
-Lean でも `ZMod L`（族の定義域）と `Fin (L+1)`（道の定義域）で書き分ける。両者を結ぶのが
-`walkOfFamily`（整数を剰余類へ移す）と `familyOfWalk`（剰余類を代表元へ移す）である。
+添字について。人手証明は整数 `i ∈ {0,...,L}` と剰余類 `y ∈ ℤ/Lℤ` を書き分け、両者の行き来を
+射影 `π : ℤ → ℤ/Lℤ` と代表を取る写像 `s : ℤ/Lℤ → ℤ` の 2 本だけに限っている（`def_lattice`）。
+Lean でも `Fin (L+1)`（道の定義域）と `ZMod L`（族の定義域）で書き分ける。`π` にあたるのが
+`((· : ℕ) : ZMod L)`、`s` にあたるのが `ZMod.val` であり、この 2 つを使うのが
+`walkOfFamily`（`Θ`）と `familyOfWalk`（`Ξ`）である。
 冪の引数は `WeightProduct.lean` の約束どおり 1 つずれているので、人手証明の `T^L` は
 `rowMatrixPow L T (L - 1)` である。
 
@@ -52,16 +54,16 @@ def closedRowWalks : Finset (RowWalk L L) :=
   univ.filter fun p => p 0 = p (Fin.last L)
 
 /-- 行配位の族から閉じた道を作る写像 `Θ`（`def_walk_of_family`）。
-`(Θ(c))(i) = c(\overline{i})`。整数の添字をその剰余類へ移す。 -/
+`(Θ(c))(i) = c(π(i))`。整数の添字を射影 `π` で剰余類へ移す。 -/
 def walkOfFamily (c : RowFamily L) : RowWalk L L := fun i => c ((i : ℕ) : ZMod L)
 
 /-- 閉じた道から行配位の族を作る写像 `Ξ`（`def_walk_of_family`）。
-`(Ξ(p))(\overline{a}) = p(a)`。剰余類を `{0,...,L-1}` の中の代表元へ移す。 -/
+`(Ξ(p))(y) = p(s(y))`。剰余類を代表を取る写像 `s`（`ZMod.val`）で `{0,...,L-1}` へ移す。 -/
 def familyOfWalk (p : RowWalk L L) : RowFamily L :=
   fun a => p ⟨a.val, (ZMod.val_lt a).trans (Nat.lt_succ_self L)⟩
 
 /-- `Θ(c)` が閉じていること（`def_walk_of_family` の中で述べた事柄）。
-`\overline{L} = \overline{0}` から出る。 -/
+`π(L) = π(0)` から出る。 -/
 lemma walkOfFamily_mem_closedRowWalks (c : RowFamily L) :
     walkOfFamily L c ∈ closedRowWalks L := by
   refine mem_filter.mpr ⟨mem_univ _, ?_⟩
@@ -76,17 +78,17 @@ lemma familyOfWalk_walkOfFamily (c : RowFamily L) :
   rw [ZMod.natCast_val, ZMod.cast_id]
 
 /-- 人手証明の「`Θ ∘ Ξ` が恒等写像であること」。`i ≤ L-1` と `i = L` で場合を分ける
-（人手証明と同じ分け方。前者では `i` 自身が代表元、後者では代表元が `0` になる）。 -/
+（人手証明と同じ分け方。前者では `s(π(i)) = i`、後者では `s(π(L)) = 0` になる）。 -/
 lemma walkOfFamily_familyOfWalk (p : RowWalk L L) (hp : p ∈ closedRowWalks L) :
     walkOfFamily L (familyOfWalk L p) = p := by
   have hclosed : p 0 = p (Fin.last L) := (mem_filter.mp hp).2
   funext i
   show p ⟨(((i : ℕ) : ZMod L)).val, _⟩ = p i
   rcases lt_or_eq_of_le (Nat.lt_succ_iff.mp i.isLt) with hi | hi
-  · -- `i ≤ L-1` の場合。`i` 自身が `\overline{i}` の代表元である。
+  · -- `i ≤ L-1` の場合。`s(π(i)) = i` である。
     congr 1
     exact Fin.ext (ZMod.val_cast_of_lt hi)
-  · -- `i = L` の場合。代表元は `0` であり、閉じていることで `p(0) = p(L)` を使う。
+  · -- `i = L` の場合。`s(π(L)) = 0` であり、閉じていることで `p(0) = p(L)` を使う。
     have hival : ((i : ℕ) : ZMod L) = 0 := by rw [hi, ZMod.natCast_self]
     have hlast : i = Fin.last L := Fin.ext (by rw [hi, Fin.val_last])
     rw [hival, hlast, ← hclosed]
@@ -121,7 +123,9 @@ lemma sum_closedRowWalks_eq_sum_between (A : RowMatrix L) :
 lemma walkWeight_walkOfFamily_rowsOf (σ : Config L) :
     walkWeight L (transferMatrix L) (walkOfFamily L (rowsOf L σ))
       = Polynomial.X ^ brokenBondCount L σ := by
-  -- `Fin L` と `ZMod L` の間の添字の対応（人手証明の「剰余類 `\overline{i}`」にあたる）。
+  -- `Fin L` と `ZMod L` の間の添字の対応。人手証明の第 4 の等号
+  -- 「`π` の `{0,...,L-1}` への制限が `ℤ/Lℤ` への全単射」にあたる。
+  -- 続く `hstep` が第 3 の等号「`π(i+1) = π(i) +_{ℤ/Lℤ} 1̄`」にあたる。
   let e : Fin L ≃ ZMod L :=
     { toFun := fun i => (i.val : ZMod L)
       invFun := fun a => ⟨a.val, ZMod.val_lt a⟩
