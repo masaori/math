@@ -15,6 +15,21 @@ load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
 
 def report(L):
     """L x L 周期格子について、本文の各段を数え上げで確かめる。"""
+    # def_lattice: 横向きと縦向きの番号は互いに素で、それぞれ L^2 個、合わせて 2L^2 個。
+    horizontal = set(horizontal_edge_numbers(L))
+    vertical = set(vertical_edge_numbers(L))
+    assert len(horizontal) == L * L, L
+    assert len(vertical) == L * L, L
+    assert horizontal & vertical == set(), L
+    assert len(horizontal | vertical) == 2 * L * L, L
+    # 横向きの辺は行が 1 つずれ列が等しい、縦向きの辺は列が 1 つずれ行が等しい。
+    for e in horizontal:
+        (i0, j0), (i1, j1) = endpoints(L, e)
+        assert (i1, j1) == ((i0 + 1) % L, j0), (L, e)
+    for e in vertical:
+        (i0, j0), (i1, j1) = endpoints(L, e)
+        assert (i1, j1) == (i0, (j0 + 1) % L), (L, e)
+
     Z = partition_polynomial(L)                 # def_partition_polynomial
     multiplicities = multiplicity_vector(L)     # def_multiplicity
     coefficient_sum = sum(multiplicities)       # 本文 Step 3 の右辺

@@ -26,24 +26,41 @@ def vertices(L):
     return [(i, j) for i in range(L) for j in range(L)]
 
 
-def endpoints(L, e):
-    """def_lattice: 辺の番号 e in E_L = {1, ..., 2L^2} から両端 (d0(e), d1(e)) を読み出す。
+def horizontal_edge_numbers(L):
+    """def_lattice: 横向きの辺の番号の集合 E_{L,h} = {1, ..., L^2}。"""
+    return range(1, L * L + 1)
 
-    本文と同じ分解を使う: e - 1 = 2(iL + j) + d, ここで 0 <= i, j < L, d in {0,1}。
-    d = 0 が横向き（(i,j) と (i+1,j)）、d = 1 が縦向き（(i,j) と (i,j+1)）。
+
+def vertical_edge_numbers(L):
+    """def_lattice: 縦向きの辺の番号の集合 E_{L,v} = {L^2+1, ..., 2L^2}。
+
+    E_{L,h} と番号の範囲が重ならないので、両者は互いに素である
+    （札を付けて区別する必要がない。本文と同じ約束）。
+    """
+    return range(L * L + 1, 2 * L * L + 1)
+
+
+def endpoints(L, e):
+    """def_lattice: 辺の番号 e から両端 (d0(e), d1(e)) を読み出す。
+
+    本文と同じ分解を使う。番号を L で割った商が行 i、余りが列 j。
+      e in E_{L,h} なら e - 1     = iL + j で、両端は (i,j) と (i+1,j)
+      e in E_{L,v} なら e - L^2-1 = iL + j で、両端は (i,j) と (i,j+1)
     加法は Z/LZ の中で行う（周期境界）。
     """
-    quotient, d = divmod(ZZ(e) - 1, 2)
-    i, j = divmod(quotient, L)
-    if d == 0:
+    e = ZZ(e)
+    if e <= L * L:
+        i, j = divmod(e - 1, L)
         return ((i, j), ((i + 1) % L, j))
+    i, j = divmod(e - L * L - 1, L)
     return ((i, j), (i, (j + 1) % L))
 
 
 def edges(L):
     """def_lattice: 辺の番号ごとの端点の組を、番号 1, 2, ..., 2L^2 の順に並べて返す。
 
-    長さは常に 2L^2。L <= 2 では異なる番号が同じ頂点対を指す
+    長さは常に 2L^2（横向き L^2 本のあとに縦向き L^2 本）。
+    L <= 2 では異なる番号が同じ頂点対を指す
     （L=1 は d0 = d1、L=2 は横向きの 2 本が同じ 2 点を結ぶ）。
     2 元集合として重複を潰すと本数が 2L^2 からずれるので、必ず番号ごとに数える
     （本文 def_lattice の但し書きと同じ理由）。
