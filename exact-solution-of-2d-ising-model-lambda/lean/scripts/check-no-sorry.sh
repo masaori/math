@@ -261,6 +261,25 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.glueFun_mem_orbit_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.glueFun_bijective_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_gluePerm_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.inv_mem_of_orbitPreserving
+  Ising2DLambda.AlgebraicEigenvalue.card_crossOrderedPairsImage
+  Ising2DLambda.AlgebraicEigenvalue.disjoint_of_ne_of_mem_orbitSet
+  Ising2DLambda.AlgebraicEigenvalue.crossInversions_left_eq_sdiff
+  Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_right
+  Ising2DLambda.AlgebraicEigenvalue.card_sdiff_eq_card_sdiff
+  Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_eq_two_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_pairs_image_eq
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.crossInvLeft_eq_sdiff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_crossInvRight
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_sdiff_eq_card_sdiff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_crossInv_eq_two_mul
+  Ising2DLambda.AlgebraicEigenvalue.crossOrderedPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.crossOrderedPairsImage_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.crossInversions_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_asymm
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_total
+  Ising2DLambda.AlgebraicEigenvalue.card_crossOrderedPairsImage_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_eq_two_mul_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -8,19 +8,19 @@
 箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
 章「分配多項式」（定義 5 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 28 件・主張 38 件・定理 2 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 31 件・主張 40 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
 軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限・
-軌道ごとの置換の組の貼り合わせ）が、
+軌道ごとの置換の組の貼り合わせ・2 つの軌道にまたがる転倒対の偶数性）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 52 件・主張 54 件・定理 3 件・注意 1 件（ラベルの数。合計 111 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 228 件を登録）が通る |
-| Lean 必要十分版 | 主張 51 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 55 件・主張 56 件・定理 3 件・注意 1 件（ラベルの数。合計 116 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 247 件を登録）が通る |
+| Lean 必要十分版 | 主張 53 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -272,6 +272,30 @@ $\mathfrak{A}_L=\{\alpha\mid\alpha\ \text{は各}\ O\in\mathcal{O}_L\ \text{へ}
   指定されていることだけ**であり、全単射性と制限の一致が要求するのが「点の属する集合が
   一意であること」と「族の各元の上で組が全単射であること」だけであることである。
 
+さらに、2 つの軌道にまたがる対の全体
+$F(O,O')=\{(\tau,\tau')\in O\times O'\mid\tau\prec\tau'\}$、
+$F_\varphi(O,O')=\{(\tau,\tau')\in O\times O'\mid\varphi(\tau)\prec\varphi(\tau')\}$、
+およびまたがる転倒対の全体 $J_\varphi(O,O')$ を定義し、次の 2 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+入れ替えの写像を $\mathrm{sw}$ と書く（$\Sigma$ は格子全体の配位の集合 $\Sigma_L$ に固定してある）。
+
+- 軌道を保つ置換はまたがる順序づけられた対の個数を変えない（$|F_\varphi(O,O')|=|F(O,O')|$）。
+  証明は $\Upsilon(\tau,\tau')=(\varphi(\tau),\varphi(\tau'))$ が $O\times O'$ の上の全単射で、
+  $F_\varphi$ をちょうど $F$ へ写すことによる。
+- 2 つの相異なる軌道にまたがる転倒対の個数は偶数である
+  （$|J_\varphi(O,O')|=2\,|F(O,O')\setminus F_\varphi(O,O')|$）。
+  証明は $J_\varphi$ を $J_1$・$J_2$ へ分け、$J_1=F\setminus F_\varphi$、
+  $J_2$ が $\mathrm{sw}$ で $F_\varphi\setminus F$ と 1 対 1 に対応すること、
+  そして前の主張から $|F\setminus F_\varphi|=|F_\varphi\setminus F|$ が出ることによる。
+  必要十分版が示したのは、前者が要求するのが $\varphi$ と $\varphi^{-1}$ が 2 つの集合を
+  保つことだけ（$\prec$ には何も要求しない）であり、後者が要求するのが
+  それに加えて 2 つの集合が交わらないことと $\prec$ の三分律だけであること、
+  すなわち**推移律を使っていない**ことである。
+
+これは、置換の符号を軌道ごとの符号の積へ分解する（またがる対の寄与が $(-1)$ の冪に効かない）
+ための足場である。
+
 これは、シフト行列の特性多項式を軌道ごとの因子 $t^{\lvert O\rvert}-1$ の積へ分解し、
 その根が 1 の $L$ 乗根であることを言うための足場である。
 軌道の大きさが $L$ の約数であることから、$\overline{\mathbb{Q}}$ を持ち出す前に
@@ -290,10 +314,12 @@ $\mathfrak{A}_L=\{\alpha\mid\alpha\ \text{は各}\ O\in\mathcal{O}_L\ \text{へ}
 
 ## 次回やること
 
-1. **符号が軌道ごとの符号の積になること**（章「固有値の代数性」の続き。台帳のセクション 10f''c）。
-   軌道を保つ置換の全体と軌道ごとの置換の組の全体が 1 対 1 に対応することまでは済んでいるので、
-   次は符号である。転倒数を「同じ軌道に属する対」と「異なる軌道にまたがる対」へ分けて数え、
-   またぐ対の寄与が偶数であること（したがって符号に効かないこと）を示す。
+1. **転倒数の軌道ごとの分解と、符号が軌道ごとの符号の積になること**
+   （章「固有値の代数性」の続き。台帳のセクション 10f''c2）。
+   またがる対の寄与が偶数であることまでは済んでいるので、次は転倒数そのものを
+   「同じ軌道に属する対の転倒数の和」と「またがる対の転倒数の和」へ分け、
+   後者が偶数であることから $\mathrm{sgn}(\varphi)=\prod_O\mathrm{sgn}_O(\varphi\!\restriction_O)$ を出す。
+   軌道の上の置換の転倒数・符号はまだ定義していないので、そこで定義する。
    そのあと各因子が $t^{|O|}-1$ であること（10f'''）と続く。
 
 ## 未解決の設計問題
