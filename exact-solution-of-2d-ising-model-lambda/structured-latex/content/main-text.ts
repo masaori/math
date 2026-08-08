@@ -8800,6 +8800,532 @@ O(\tau)
   },
 
   {
+    id: "algebraic_eigenvalue_definition_orbit_permutation_family",
+    kind: "definition",
+    title: { text: "軌道ごとの置換の組" },
+    labels: ["def_orbit_permutation_family"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.OrbitFamilyBijective"],
+    verification: ["sagemath/check/orbit-gluing"],
+    statement: [
+      paragraph([
+        "軌道の全体 ",
+        math(String.raw`\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）の各元 ",
+        math(String.raw`O`),
+        " へ、",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射を 1 つずつ対応させる対応の全体を",
+      ]),
+      displayMath(
+        String.raw`\mathfrak{A}_L:=\bigl\{\,\alpha \;\bigm|\; \alpha\ \text{は}\ \mathcal{O}_L\ \text{の各元}\ O\ \text{へ}\ O\ \text{から}\ O\ \text{への全単射}\ \alpha(O)\ \text{を対応させる}\,\bigr\}`,
+      ),
+      paragraph([
+        "と置き、その元を軌道ごとの置換の組と呼ぶ。",
+      ]),
+      paragraph([
+        "記号について 2 つ断っておく。第一に、",
+        math(String.raw`\alpha(O)`),
+        " は ",
+        math(String.raw`\alpha`),
+        " を ",
+        math(String.raw`\mathcal{O}_L`),
+        " の元 ",
+        math(String.raw`O`),
+        " へ当てた結果であって、",
+        math(String.raw`R_L`),
+        " の元へ当てたものではない。",
+        math(String.raw`\alpha(O)`),
+        " 自身が ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への写像であり、その値は ",
+        math(String.raw`\bigl(\alpha(O)\bigr)(\tau)`),
+        " と丸括弧を 2 段に重ねて書く。第二に、",
+        math(String.raw`\mathfrak{A}_L`),
+        " の元は ",
+        math(String.raw`\mathfrak{S}_L`),
+        "（",
+        ref("def_permutation_sign"),
+        "）の元ではない。",
+        math(String.raw`\mathfrak{S}_L`),
+        " の元は ",
+        math(String.raw`R_L`),
+        " から ",
+        math(String.raw`R_L`),
+        " への全単射 1 つであり、",
+        math(String.raw`\mathfrak{A}_L`),
+        " の元は軌道ごとに 1 つずつ与えられた全単射の組である。",
+      ]),
+      paragraph([
+        math(String.raw`\mathfrak{A}_L`),
+        " は空ではない。各 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " へ ",
+        math(String.raw`O`),
+        " の恒等写像を対応させたものが元になるからである。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_orbit_gluing",
+    kind: "definition",
+    title: { text: "軌道ごとの置換の組の貼り合わせ" },
+    labels: ["def_orbit_gluing"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.glueFun"],
+    verification: ["sagemath/check/orbit-gluing"],
+    statement: [
+      paragraph([
+        math(String.raw`\alpha\in\mathfrak{A}_L`),
+        " を任意に取る（",
+        math(String.raw`\mathfrak{A}_L`),
+        " は ",
+        ref("def_orbit_permutation_family"),
+        "）。写像",
+      ]),
+      displayMath(
+        String.raw`\mathrm{gl}(\alpha)\;:\;R_L\longrightarrow R_L,\qquad \bigl(\mathrm{gl}(\alpha)\bigr)(\tau):=\bigl(\alpha(O(\tau))\bigr)(\tau)`,
+      ),
+      paragraph([
+        "を ",
+        math(String.raw`\alpha`),
+        " の貼り合わせと呼ぶ（",
+        math(String.raw`O(\tau)`),
+        " は ",
+        ref("def_row_config_orbit"),
+        "）。",
+      ]),
+      paragraph([
+        "右辺が定まることは、次の 3 つによる。",
+        ref("def_row_config_orbit_set"),
+        " より ",
+        math(String.raw`O(\tau)\in\mathcal{O}_L`),
+        " なので ",
+        math(String.raw`\alpha(O(\tau))`),
+        " が定まる。",
+        ref("def_row_config_orbit"),
+        " より ",
+        math(String.raw`\tau\in O(\tau)`),
+        " なので、その写像を ",
+        math(String.raw`\tau`),
+        " へ当てられる。そして ",
+        math(String.raw`\alpha(O(\tau))`),
+        " の値は ",
+        math(String.raw`O(\tau)`),
+        " の元であり、",
+        math(String.raw`O(\tau)\subset R_L`),
+        " なので ",
+        math(String.raw`R_L`),
+        " の元である。",
+      ]),
+      paragraph([
+        "この定義では、",
+        math(String.raw`\tau`),
+        " の属する軌道として ",
+        math(String.raw`O(\tau)`),
+        " を選んでいる。",
+        math(String.raw`\tau`),
+        " を含む ",
+        math(String.raw`\mathcal{O}_L`),
+        " の元が ",
+        math(String.raw`O(\tau)`),
+        " のほかにもあれば、どれを選ぶかで値が変わりうる。そうならないことは ",
+        ref("claim_row_config_orbit_mem_eq"),
+        " による（",
+        math(String.raw`\tau\in O`),
+        " かつ ",
+        math(String.raw`O=O(\tau_0)`),
+        " ならば ",
+        math(String.raw`O(\tau)=O(\tau_0)=O`),
+        "）。この一意性は ",
+        ref("claim_orbit_gluing_restriction"),
+        " で使う。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_gluing_bijective",
+    kind: "claim",
+    title: { text: "貼り合わせは行配位の全体の上の全単射である" },
+    labels: ["claim_orbit_gluing_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.glueFun_bijective",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.glue_bijective",
+      "Ising2DLambda.AlgebraicEigenvalue.glueFun_bijective_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-gluing"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\alpha\in\mathfrak{A}_L`),
+        " について ",
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " は ",
+        math(String.raw`R_L`),
+        " から ",
+        math(String.raw`R_L`),
+        " への全単射である。すなわち ",
+        math(String.raw`\mathrm{gl}(\alpha)\in\mathfrak{S}_L`),
+        " である（",
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " は ",
+        ref("def_orbit_gluing"),
+        "、",
+        math(String.raw`\mathfrak{S}_L`),
+        " は ",
+        ref("def_permutation_sign"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " が単射であること。",
+        math(String.raw`\tau_1,\tau_2\in R_L`),
+        " が ",
+        math(String.raw`\bigl(\mathrm{gl}(\alpha)\bigr)(\tau_1)=\bigl(\mathrm{gl}(\alpha)\bigr)(\tau_2)`),
+        " を満たすとし、この共通の値を ",
+        math(String.raw`\tau_3`),
+        " と置く。",
+        math(String.raw`\alpha(O(\tau_1))`),
+        " は ",
+        math(String.raw`O(\tau_1)`),
+        " から ",
+        math(String.raw`O(\tau_1)`),
+        " への写像なので（",
+        ref("def_orbit_permutation_family"),
+        "）",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau_3
+&=\bigl(\mathrm{gl}(\alpha)\bigr)(\tau_1)
+&&(\because\ \tau_3\ \text{の置き方})\\
+&=\bigl(\alpha(O(\tau_1))\bigr)(\tau_1)
+&&(\because\ \blkref{def_orbit_gluing})\\
+&\in O(\tau_1)
+&&(\because\ \blkref{def_orbit_permutation_family})
+\end{aligned}`),
+      paragraph([
+        "であり、同じ計算を ",
+        math(String.raw`\tau_2`),
+        " について行うと ",
+        math(String.raw`\tau_3\in O(\tau_2)`),
+        " である。したがって ",
+        math(String.raw`O(\tau_1)\cap O(\tau_2)`),
+        " は ",
+        math(String.raw`\tau_3`),
+        " を元に持ち空ではないので、",
+        ref("claim_row_config_orbit_disjoint_or_eq"),
+        " より ",
+        math(String.raw`O(\tau_1)=O(\tau_2)`),
+        " である。この集合を ",
+        math(String.raw`O`),
+        " と置くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\alpha(O)\bigr)(\tau_1)
+&=\bigl(\alpha(O(\tau_1))\bigr)(\tau_1)
+&&(\because\ O=O(\tau_1))\\
+&=\bigl(\mathrm{gl}(\alpha)\bigr)(\tau_1)
+&&(\because\ \blkref{def_orbit_gluing})\\
+&=\bigl(\mathrm{gl}(\alpha)\bigr)(\tau_2)
+&&(\because\ \text{この場合の仮定})\\
+&=\bigl(\alpha(O(\tau_2))\bigr)(\tau_2)
+&&(\because\ \blkref{def_orbit_gluing})\\
+&=\bigl(\alpha(O)\bigr)(\tau_2)
+&&(\because\ O=O(\tau_2))
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\alpha(O)`),
+        " は全単射なので（",
+        ref("def_orbit_permutation_family"),
+        "）とくに単射であり、",
+        math(String.raw`\tau_1=\tau_2`),
+        " が従う。ここで ",
+        math(String.raw`\tau_1,\tau_2\in O`),
+        " であることは ",
+        ref("def_row_config_orbit"),
+        " の ",
+        math(String.raw`\tau\in O(\tau)`),
+        " による。",
+      ]),
+      paragraph([
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " が全射であること。",
+        math(String.raw`\tau'\in R_L`),
+        " を任意に取る。",
+        ref("def_row_config_orbit"),
+        " より ",
+        math(String.raw`\tau'\in O(\tau')`),
+        " であり、",
+        math(String.raw`\alpha(O(\tau'))`),
+        " は ",
+        math(String.raw`O(\tau')`),
+        " から ",
+        math(String.raw`O(\tau')`),
+        " への全射なので（",
+        ref("def_orbit_permutation_family"),
+        "）、",
+        math(String.raw`\bigl(\alpha(O(\tau'))\bigr)(\tau_4)=\tau'`),
+        " を満たす ",
+        math(String.raw`\tau_4\in O(\tau')`),
+        " が取れる。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{gl}(\alpha)\bigr)(\tau_4)
+&=\bigl(\alpha(O(\tau_4))\bigr)(\tau_4)
+&&(\because\ \blkref{def_orbit_gluing})\\
+&=\bigl(\alpha(O(\tau'))\bigr)(\tau_4)
+&&(\because\ \tau_4\in O(\tau')\ \text{と}\ \blkref{claim_row_config_orbit_mem_eq})\\
+&=\tau'
+&&(\because\ \tau_4\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\tau'`),
+        " は任意だったので ",
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " は全射である。",
+      ]),
+      paragraph([
+        ref("def_orbit_gluing"),
+        "、",
+        ref("def_orbit_permutation_family"),
+        "、",
+        ref("def_row_config_orbit"),
+        "、",
+        ref("claim_row_config_orbit_mem_eq"),
+        "、",
+        ref("claim_row_config_orbit_disjoint_or_eq"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "単射性の証明で ",
+        ref("claim_row_config_orbit_disjoint_or_eq"),
+        " を使ったところが、この節で軌道どうしが互いに素であることが効いている箇所である。",
+        math(String.raw`\tau_1`),
+        " と ",
+        math(String.raw`\tau_2`),
+        " が別々の軌道の上で動かされているとき、行き先が一致したという仮定だけから",
+        "同じ軌道であることを出すのに、共通の元を持つ 2 つの軌道が一致することが要る。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_gluing_orbit_preserving",
+    kind: "claim",
+    title: { text: "貼り合わせは軌道を保つ置換である" },
+    labels: ["claim_orbit_gluing_orbit_preserving"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.gluePerm_orbitPreserving",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.glue_mem_block",
+      "Ising2DLambda.AlgebraicEigenvalue.glueFun_mem_orbit_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-gluing"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\alpha\in\mathfrak{A}_L`),
+        " について ",
+        math(String.raw`\mathrm{gl}(\alpha)\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " である（",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        ref("def_orbit_preserving_permutation"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_orbit_gluing_bijective"),
+        " より ",
+        math(String.raw`\mathrm{gl}(\alpha)\in\mathfrak{S}_L`),
+        " である。",
+        ref("def_orbit_preserving_permutation"),
+        " の条件を確かめる。",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{gl}(\alpha)\bigr)(\tau)
+&=\bigl(\alpha(O(\tau))\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_gluing})\\
+&\in O(\tau)
+&&(\because\ \blkref{def_orbit_permutation_family})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\mathrm{gl}(\alpha)\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " である。",
+      ]),
+      paragraph([
+        ref("claim_orbit_gluing_bijective"),
+        "、",
+        ref("def_orbit_gluing"),
+        "、",
+        ref("def_orbit_permutation_family"),
+        "、",
+        ref("def_orbit_preserving_permutation"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_gluing_restriction",
+    kind: "claim",
+    title: { text: "貼り合わせの各軌道への制限はもとの組に一致する" },
+    labels: ["claim_orbit_gluing_restriction"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_gluePerm",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.restriction_glue",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_gluePerm_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-gluing"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\alpha\in\mathfrak{A}_L`),
+        " と ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{gl}(\alpha)\!\restriction_{O}=\alpha(O)`,
+      ),
+      paragraph([
+        "である（",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        "、",
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " は ",
+        ref("def_orbit_gluing"),
+        "）。左辺が定まることは ",
+        ref("claim_orbit_gluing_orbit_preserving"),
+        " による。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使うものを先に置く。",
+        ref("def_row_config_orbit_set"),
+        " より ",
+        math(String.raw`O=O(\tau_0)`),
+        " を満たす ",
+        math(String.raw`\tau_0\in R_L`),
+        " が取れる。",
+      ]),
+      paragraph([
+        math(String.raw`\tau\in O`),
+        " を任意に取る。まず軌道が ",
+        math(String.raw`O`),
+        " に定まることを見る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+O(\tau)
+&=O(\tau_0)
+&&(\because\ \tau\in O=O(\tau_0)\ \text{と}\ \blkref{claim_row_config_orbit_mem_eq})\\
+&=O
+&&(\because\ \tau_0\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "である。これを使うと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{gl}(\alpha)\!\restriction_{O}\bigr)(\tau)
+&=\bigl(\mathrm{gl}(\alpha)\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_restriction})\\
+&=\bigl(\alpha(O(\tau))\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_gluing})\\
+&=\bigl(\alpha(O)\bigr)(\tau)
+&&(\because\ O(\tau)=O)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\mathrm{gl}(\alpha)\!\restriction_{O}=\alpha(O)`),
+        " である。",
+      ]),
+      paragraph([
+        ref("def_orbit_restriction"),
+        "、",
+        ref("def_orbit_gluing"),
+        "、",
+        ref("def_row_config_orbit_set"),
+        "、",
+        ref("claim_row_config_orbit_mem_eq"),
+        "、",
+        ref("claim_orbit_gluing_orbit_preserving"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この主張と ",
+        ref("claim_orbit_restriction_determines"),
+        " を合わせると、軌道を保つ置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " へその制限の組 ",
+        math(String.raw`O\mapsto\varphi\!\restriction_{O}`),
+        " を対応させる写像が ",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " から ",
+        math(String.raw`\mathfrak{A}_L`),
+        " への全単射であることが分かる。",
+        ref("claim_orbit_restriction_determines"),
+        " が単射であることを、この主張が全射であることを与える（",
+        math(String.raw`\alpha\in\mathfrak{A}_L`),
+        " に対して ",
+        math(String.raw`\mathrm{gl}(\alpha)`),
+        " が逆像である）。この 1 対 1 対応が、次のセクションで ",
+        math(String.raw`\chi_U`),
+        " の和を軌道ごとの積へ組み替えるときの土台になる。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },

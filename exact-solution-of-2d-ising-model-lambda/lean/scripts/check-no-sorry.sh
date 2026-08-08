@@ -248,6 +248,19 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_bijective_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_eq_of_mem_orbitSet
+  Ising2DLambda.AlgebraicEigenvalue.glueFun_mem_orbit
+  Ising2DLambda.AlgebraicEigenvalue.glueFun_apply_of_mem
+  Ising2DLambda.AlgebraicEigenvalue.glueFun_bijective
+  Ising2DLambda.AlgebraicEigenvalue.gluePerm_orbitPreserving
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_gluePerm
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.glue_mem_block
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.restriction_glue
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.glue_bijective
+  Ising2DLambda.AlgebraicEigenvalue.glueFun_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.glueFun_mem_orbit_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.glueFun_bijective_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestriction_gluePerm_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

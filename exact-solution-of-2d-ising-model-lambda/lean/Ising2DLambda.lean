@@ -96,3 +96,6 @@ import Ising2DLambda.AlgebraicEigenvalue.ShiftCharTermFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.OrbitRestriction
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitRestriction
 import Ising2DLambda.AlgebraicEigenvalue.OrbitRestrictionFromNecSuf
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitGluing
+import Ising2DLambda.AlgebraicEigenvalue.OrbitGluing
+import Ising2DLambda.AlgebraicEigenvalue.OrbitGluingFromNecSuf
