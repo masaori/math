@@ -5,15 +5,15 @@
 ## 現在の到達点（2026-08-08 時点）
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
-および章「転送行列」（定義 7 件・主張 4 件。転送行列 T の定義まで）が、
+および章「転送行列」（定義 9 件・主張 5 件。行列の冪の成分表示まで）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 15 件・主張 12 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 15 件と主張 12 件。`lake build` と `check-no-sorry.sh`（定理 34 件を登録）が通る |
-| Lean 必要十分版 | 主張 10 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 16 件・主張 13 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 16 件と主張 13 件。`lake build` と `check-no-sorry.sh`（定理 39 件を登録）が通る |
+| Lean 必要十分版 | 主張 11 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -57,6 +57,13 @@ $T_{\tau,\tau'}=x^{b_\mathrm{h}(\tau)+b_\mathrm{v}(\tau,\tau')}$ を定義し、
   （$\prod_i T_{\rho_i(\sigma),\rho_{i+1}(\sigma)}=x^{b(\sigma)}$）。
   すなわち分配多項式の和の 1 つの項が、転送行列の成分から得られる。
 
+さらに、長さ $k$ の道（写像 $p:\{0,1,\dots,k\}\to R_L$ の全体）と道に沿った成分の積
+$w_A(p)=\prod_{i=0}^{k-1}A_{p(i),p(i+1)}$ を定義し、次を示した。道の定義域は整数の集合であり、
+行配位の族（剰余類の集合の上の写像）とは別の対象である。
+
+- 行列の冪の成分は、道に沿った成分の積の和である
+  （$(A^k)_{\tau,\tau''}=\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)$。$k$ についての帰納法）。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
@@ -70,11 +77,11 @@ $T_{\tau,\tau'}=x^{b_\mathrm{h}(\tau)+b_\mathrm{v}(\tau,\tau')}$ を定義し、
 
 ## 次回やること
 
-1. **$Z_L=\operatorname{Tr}(T^L)$**。転送行列の冪の成分を行配位の族にわたる和として書き下し、
-   トレースを取ると閉じた行の並びにわたる和になることを示す。そこへ
-   「配位全体と行配位の族全体の 1 対 1 対応」と「重みの積」を代入すると分配多項式が出る。
-   台帳の todo の先頭（もとのセクション 8 を割った後半）。
-   冪の成分表示は帰納法で自分で示す（mathlib の一般論へ委ねない）。
+1. **$Z_L=\operatorname{Tr}(T^L)$**。冪の成分表示（済み）でトレースを取り、対角成分の和が
+   両端の一致する道にわたる和になることを示す。次に、その道の全体が行配位の族の全体と
+   1 対 1 に対応することを示す（道の $0$ 番と $k$ 番が同じ点であることと、周期的な添字づけの対応）。
+   そこへ「配位全体と行配位の族全体の 1 対 1 対応」と「重みの積」を代入すると分配多項式が出る。
+   台帳の todo の先頭（セクション 8c）。
 
 ## 未解決の設計問題
 
