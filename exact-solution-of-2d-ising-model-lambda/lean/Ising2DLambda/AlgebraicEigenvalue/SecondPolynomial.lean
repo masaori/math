@@ -9,6 +9,7 @@
   人手証明                          このファイル
   ℤ[x][t]                           SecondPoly
   cf_k(f)                           f.coeff k
+  κ(0) / κ(1)（ℤ[x] の零元・単位元） constPoly 0 / constPoly 1
   ι : ℤ[x] → ℤ[x][t]                constSecond
   D_n                               DegLe f n
   M_n                               MonicDeg f n
@@ -58,11 +59,15 @@ lemma constSecond_constPoly_zero : constSecond (constPoly 0) = 0 := by
 lemma constSecond_constPoly_one : constSecond (constPoly 1) = 1 := by
   simp [constSecond, constPoly_one]
 
-/-- 人手証明の `D_n = { f | 任意の k について k > n ならば cf_k(f) = 0 }`。
+/-- 人手証明の `D_n = { f | 任意の k について k > n ならば cf_k(f) = κ(0) }`。
 
 次数を写像として定めていないのは人手証明と同じ理由である（零多項式の次数を決める約束が
 要らなくなり、以下で必要になるのは上界だけである）。 -/
-def DegLe (f : SecondPoly) (n : ℕ) : Prop := ∀ k : ℕ, n < k → f.coeff k = 0
+def DegLe (f : SecondPoly) (n : ℕ) : Prop := ∀ k : ℕ, n < k → f.coeff k = constPoly 0
+
+/-- `κ(0)` は `ℤ[x]` の零元である（`constPoly_zero`）。以下の証明ではこの形で使う。 -/
+theorem DegLe.coeff_eq_zero {f : SecondPoly} {n k : ℕ} (h : DegLe f n) (hk : n < k) :
+    f.coeff k = 0 := by rw [h k hk, constPoly_zero]
 
 /-- 人手証明の `M_n = { f ∈ D_n | cf_n(f) = κ(1) }`。 -/
 def MonicDeg (f : SecondPoly) (n : ℕ) : Prop := DegLe f n ∧ f.coeff n = constPoly 1
@@ -79,25 +84,25 @@ theorem degLe_sum {ι : Type*} {T : Finset ι} {f : ι → SecondPoly} {n : ℕ}
     (h : ∀ s ∈ T, DegLe (f s) n) : DegLe (∑ s ∈ T, f s) n := by
   intro k hk
   -- 第 1 の等号（和の係数は係数の和）。
-  rw [Polynomial.finsetSum_coeff]
-  -- 第 2・第 3 の等号（各項が 0 で、零元の有限和は零元）。
-  exact Finset.sum_eq_zero fun s hs => h s hs k hk
+  rw [constPoly_zero, Polynomial.finsetSum_coeff]
+  -- 第 2・第 3 の等号（各項が κ(0) で、零元の有限和は零元）。
+  exact Finset.sum_eq_zero fun s hs => (h s hs).coeff_eq_zero hk
 
 /-- 人手証明の主張「次数の上界は有限積で足し合わされる」の準備（2 つの元の積）。 -/
 theorem degLe_mul {f g : SecondPoly} {m n : ℕ} (hf : DegLe f m) (hg : DegLe g n) :
     DegLe (f * g) (m + n) := by
   intro k hk
   -- 積の係数は畳み込みである。
-  rw [Polynomial.coeff_mul]
+  rw [constPoly_zero, Polynomial.coeff_mul]
   refine Finset.sum_eq_zero ?_
   intro p hp
   have hsum : p.1 + p.2 = k := Finset.mem_antidiagonal.mp hp
   by_cases hi : m < p.1
-  · -- i > m の場合。左の因子が 0。
-    rw [hf p.1 hi, zero_mul]
-  · -- i ≤ m の場合。k - i ≥ k - m > n なので右の因子が 0。
+  · -- i > m の場合。左の因子が κ(0)。
+    rw [hf.coeff_eq_zero hi, zero_mul]
+  · -- i ≤ m の場合。k - i ≥ k - m > n なので右の因子が κ(0)。
     have hp2 : n < p.2 := by omega
-    rw [hg p.2 hp2, mul_zero]
+    rw [hg.coeff_eq_zero hp2, mul_zero]
 
 /-- 人手証明の主張「次数の上界は有限積で足し合わされる」の本体（`T` の元の個数についての帰納法）。 -/
 theorem degLe_prod {ι : Type*} {f : ι → SecondPoly} {n : ι → ℕ} {T : Finset ι}
@@ -132,9 +137,9 @@ theorem monicDeg_mul {f g : SecondPoly} {m n : ℕ} (hf : MonicDeg f m) (hg : Mo
     have hsum : p.1 + p.2 = m + n := Finset.mem_antidiagonal.mp hp
     have hi : p.1 ≠ m := fun h => hne (Prod.ext h (by omega))
     by_cases hlt : m < p.1
-    · rw [hf.1 p.1 hlt, zero_mul]
+    · rw [hf.1.coeff_eq_zero hlt, zero_mul]
     · have hp2 : n < p.2 := by omega
-      rw [hg.1 p.2 hp2, mul_zero]
+      rw [hg.1.coeff_eq_zero hp2, mul_zero]
 
 /-- 人手証明の主張「モニックな元の有限積はモニックであり、その次数は次数の和である」の本体。 -/
 theorem monicDeg_prod {ι : Type*} {f : ι → SecondPoly} {n : ι → ℕ} {T : Finset ι}
@@ -159,8 +164,9 @@ theorem monicDeg_add_of_degLe {f g : SecondPoly} {n n' : ℕ}
   refine ⟨?_, ?_⟩
   · -- 第一（k > n の係数）。
     intro k hk
-    rw [Polynomial.coeff_add, hf.1 k hk, hg k (hlt.trans hk), add_zero]
+    rw [constPoly_zero, Polynomial.coeff_add, hf.1.coeff_eq_zero hk,
+      hg.coeff_eq_zero (hlt.trans hk), add_zero]
   · -- 第二（t^n の係数）。
-    rw [Polynomial.coeff_add, hf.2, hg n hlt, add_zero]
+    rw [Polynomial.coeff_add, hf.2, hg.coeff_eq_zero hlt, add_zero]
 
 end Ising2DLambda.AlgebraicEigenvalue
