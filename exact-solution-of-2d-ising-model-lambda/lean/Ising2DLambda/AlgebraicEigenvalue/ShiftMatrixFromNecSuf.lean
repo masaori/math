@@ -14,8 +14,12 @@
 このことは、具体版の証明が次を使っていないという主張の裏取りになっている。
 行配位であること・格子の形・スピンの値が ±1 であること・成分が多項式であること・
 成分が不定元の冪であること・シフトが巡回であること・`ℤ[x]` の分配則・積の結合則・
-積の可換性・引き算。とくに **`A` が転送行列であることは使っておらず、
-シフトで不変な行列であれば何でもシフト行列と可換になる**。
+積の可換性・引き算。分配則・結合則・可換性を使っていないことは、必要十分版が
+`AddCommMonoid` と法則を持たない `Mul` / `One` しか仮定していない（これらの法則を
+述べる語彙が無い）ことで機械的に裏取りされている。ここで渡している 4 つの規則は
+`one_mul` / `zero_mul` / `mul_one` / `mul_zero` であり、`ℤ[x]` がそれらを満たすことだけを使う。
+とくに **`A` が転送行列であることは使っておらず、シフトで不変な行列であれば
+何でもシフト行列と可換になる**。
 
 住処: ℤ / ℤ[x] のみ。ℝ / ℂ は現れない。
 -/
@@ -53,7 +57,9 @@ theorem shiftMatrix_mul_apply_from_necSuf (A : RowMatrix L) (τ τ'' : RowConfig
     refine Finset.sum_congr rfl fun τ' _ => ?_
     rw [shiftMatrix_eq_necSuf]
   rw [this]
-  exact NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply (rowShiftEquiv L) A τ τ''
+  exact NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply
+    (fun a : Polynomial ℤ => one_mul a) (fun a : Polynomial ℤ => zero_mul a)
+    (rowShiftEquiv L) A τ τ''
 
 /-- 右から掛ける主張を、必要十分版から導いたもの。 -/
 theorem mul_shiftMatrix_apply_from_necSuf (A : RowMatrix L) (τ τ'' : RowConfig L) :
@@ -68,7 +74,9 @@ theorem mul_shiftMatrix_apply_from_necSuf (A : RowMatrix L) (τ τ'' : RowConfig
     refine Finset.sum_congr rfl fun τ' _ => ?_
     rw [shiftMatrix_eq_necSuf]
   rw [this]
-  exact NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply (rowShiftEquiv L) A τ τ''
+  exact NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply
+    (fun a : Polynomial ℤ => mul_one a) (fun a : Polynomial ℤ => mul_zero a)
+    (rowShiftEquiv L) A τ τ''
 
 /-- 可換性を、必要十分版から導いたもの。
 
@@ -83,9 +91,13 @@ theorem shiftMatrix_transferMatrix_comm_from_necSuf :
       transferMatrix L (rowShiftEquiv L a) (rowShiftEquiv L b) = transferMatrix L a b :=
     fun a b => transferMatrix_rowShift a b
   have := NecSuf.AlgebraicEigenvalue.permMatrix_comm (S := Polynomial ℤ)
+    (fun a : Polynomial ℤ => one_mul a) (fun a : Polynomial ℤ => zero_mul a)
+    (fun a : Polynomial ℤ => mul_one a) (fun a : Polynomial ℤ => mul_zero a)
     (rowShiftEquiv L) (transferMatrix L) hA τ τ''
-  rw [NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply,
-    NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply] at this
+  rw [NecSuf.AlgebraicEigenvalue.permMatrix_mul_apply
+        (fun a : Polynomial ℤ => one_mul a) (fun a : Polynomial ℤ => zero_mul a),
+    NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply
+        (fun a : Polynomial ℤ => mul_one a) (fun a : Polynomial ℤ => mul_zero a)] at this
   exact this
 
 end Ising2DLambda.AlgebraicEigenvalue
