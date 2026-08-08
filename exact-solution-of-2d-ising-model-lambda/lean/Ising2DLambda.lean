@@ -11,9 +11,10 @@
 非可算を宣言したブロックの証明だけが `ℝ` / `ℂ` を使ってよく、
 その場合はファイル冒頭に人手証明の `realEscape` と同じ理由を書く。
 
-現状: 章「分配多項式」の定義 4 件と、主張 3 件
+現状: 章「分配多項式」の定義 4 件と主張 3 件
 （人手証明のラベル `claim_configuration_partition`・`claim_coefficient_representation`・
-`claim_coefficient_sum`）を形式化済み。
+`claim_coefficient_sum`）、および章「有限系の自由エントロピー」の定義 4 件と主張 2 件
+（`claim_rational_exponent_well_defined`・`claim_value_at_rational_is_positive`）を形式化済み。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
 import Ising2DLambda.PartitionPolynomial.CoefficientSum
@@ -22,3 +23,10 @@ import Ising2DLambda.PartitionPolynomial.CoefficientSumFromNecSuf
 import Ising2DLambda.PartitionPolynomial.CoefficientRepresentation
 import Ising2DLambda.NecSuf.PartitionPolynomial.CoefficientRepresentation
 import Ising2DLambda.PartitionPolynomial.CoefficientRepresentationFromNecSuf
+import Ising2DLambda.FreeEntropy.Basic
+import Ising2DLambda.FreeEntropy.RationalExponent
+import Ising2DLambda.NecSuf.FreeEntropy.RationalExponent
+import Ising2DLambda.FreeEntropy.RationalExponentFromNecSuf
+import Ising2DLambda.FreeEntropy.ValuePositive
+import Ising2DLambda.NecSuf.FreeEntropy.ValuePositive
+import Ising2DLambda.FreeEntropy.ValuePositiveFromNecSuf

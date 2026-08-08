@@ -39,6 +39,12 @@ targets=(
   Ising2DLambda.PartitionPolynomial.partitionPolynomial_eq_sum_multiplicity
   Ising2DLambda.PartitionPolynomial.partitionPolynomial_eq_sum_multiplicity_from_necSuf
   Ising2DLambda.NecSuf.PartitionPolynomial.sum_comp_eq_sum_nsmul
+  Ising2DLambda.FreeEntropy.rationalExponent_well_defined
+  Ising2DLambda.FreeEntropy.rationalExponent_well_defined_from_necSuf
+  Ising2DLambda.NecSuf.FreeEntropy.sub_eq_sub_of_mul_eq_mul
+  Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
+  Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
+  Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

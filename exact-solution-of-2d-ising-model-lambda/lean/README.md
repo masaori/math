@@ -54,13 +54,15 @@ bash scripts/check-no-sorry.sh
 ## 現状
 
 章「分配多項式」の定義 4 件と、主張 3 件（人手証明のラベル `claim_configuration_partition`、
-`claim_coefficient_representation`、`claim_coefficient_sum`）を形式化済み。
+`claim_coefficient_representation`、`claim_coefficient_sum`）、および
+章「有限系の自由エントロピー」の定義 4 件と主張 2 件
+（`claim_rational_exponent_well_defined`、`claim_value_at_rational_is_positive`）を形式化済み。
 
 | | 状態 |
 | --- | --- |
 | `lake update` / `lake exe cache get` | 2026-08-08 実行済み（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
 | `lake build` | 通る |
-| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 6 件を登録済み） |
+| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 12 件を登録済み） |
 
 | ファイル | 中身 |
 | --- | --- |
@@ -71,8 +73,15 @@ bash scripts/check-no-sorry.sh
 | `Ising2DLambda/NecSuf/PartitionPolynomial/CoefficientRepresentation.lean` | 必要十分版。上に加えて値の側は可換モノイド `M` と `g : ℕ → M` だけを仮定する |
 | `Ising2DLambda/PartitionPolynomial/CoefficientSumFromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出 |
 | `Ising2DLambda/PartitionPolynomial/CoefficientRepresentationFromNecSuf.lean` | 同上（係数表示） |
+| `Ising2DLambda/FreeEntropy/Basic.lean` | 素因数分解の指数・対数順序群 `Λ`・正の有理数の対数・有限系の自由エントロピーの定義（具体版） |
+| `Ising2DLambda/FreeEntropy/RationalExponent.lean` | 有理数の指数は表示の取り方によらない（具体版）。人手証明の Step 1–4 と 1 対 1 |
+| `Ising2DLambda/FreeEntropy/ValuePositive.lean` | 分配多項式の正の有理点での値は正（具体版）。人手証明の Step 1–4 と 1 対 1 |
+| `Ising2DLambda/NecSuf/FreeEntropy/RationalExponent.lean` | 必要十分版。可換群 `G` と積を和へ移す写像だけを仮定する |
+| `Ising2DLambda/NecSuf/FreeEntropy/ValuePositive.lean` | 必要十分版。狭義順序半環と、空でない有限添字集合だけを仮定する |
+| `Ising2DLambda/FreeEntropy/RationalExponentFromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出 |
+| `Ising2DLambda/FreeEntropy/ValuePositiveFromNecSuf.lean` | 同上（有理点での正値性） |
 
-必要十分版が示したのは次の 2 点である。
+必要十分版が示したのは次の 4 点である。
 
 - 多重度の総和の主張の証明が使っているのは「配位の集合が有限であること」
   「破れボンド数が `2L²` 以下の自然数を返す写像であること」だけであり、
@@ -80,6 +89,10 @@ bash scripts/check-no-sorry.sh
 - 係数表示の主張の証明は、これに加えて値の側に可換モノイドの構造しか使っていない。
   多項式であること・係数が `ℤ` であること・足す量が不定元の冪であることは使っていない
   （足す量が「破れボンド数だけで決まる」ことだけが効いている）。
+- 有理数の指数が表示によらないことの証明は、可換群と「積を和へ移す写像」しか使っていない。
+  素数であること・指数が素因数分解から来ることは使っていない。
+- 有理点での正値性の証明は、狭義順序半環と「添字集合が空でない有限集合」しか使っていない。
+  値が有理数であること・多項式であること・指数が破れボンド数であることは使っていない。
 
 Step 3 の「互いに素な有限個の有限集合の合併の元の個数は個数の和」（および和の版）は
 人手証明が明示的に適用している定理なので mathlib の `Finset.card_biUnion` / `Finset.sum_biUnion`

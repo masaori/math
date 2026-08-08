@@ -18,13 +18,13 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
-import blocks_partition_polynomial from './content/partition-polynomial.ts'
+import blocks_main_text from './content/main-text.ts'
 import notes_partition_polynomial from './notes/partition-polynomial.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
-  ...typeof blocks_partition_polynomial,
+  ...typeof blocks_main_text,
 ]
 
 /** 全ノート。 */

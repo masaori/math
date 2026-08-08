@@ -9,11 +9,17 @@ export const ALL_LABELS = [
   "claim_coefficient_representation",
   "claim_coefficient_sum",
   "claim_configuration_partition",
+  "claim_rational_exponent_well_defined",
+  "claim_value_at_rational_is_positive",
   "def_broken_bond_count",
   "def_configuration",
+  "def_finite_free_entropy",
   "def_lattice",
+  "def_log_order_group",
   "def_multiplicity",
   "def_partition_polynomial",
+  "def_prime_exponent",
+  "def_rational_log",
   "remark_planned_chapters",
 ] as const
 

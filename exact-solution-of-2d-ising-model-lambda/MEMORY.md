@@ -4,14 +4,15 @@
 
 ## 現在の到達点（2026-08-08 時点）
 
-章「分配多項式」は、定義と主張 3 件が四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
+章「分配多項式」（定義 4 件・主張 3 件）と、章「有限系の自由エントロピー」の定義部分
+（定義 4 件・主張 2 件）が、四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 章「分配多項式」の定義 4 件・主張 3 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` と `partition-polynomial-coefficient-representation` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 4 件と主張 3 件。`lake build` と `check-no-sorry.sh`（定理 6 件を登録）が通る |
-| Lean 必要十分版 | 主張 3 件について作成済み。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイドだけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 8 件・主張 5 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 8 件と主張 5 件。`lake build` と `check-no-sorry.sh`（定理 12 件を登録）が通る |
+| Lean 必要十分版 | 主張 5 件について作成済み。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -24,6 +25,14 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 - 分配多項式の係数は多重度である（$Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)x^m$）。
   分配多項式の定義は $\sum_{\sigma}x^{b(\sigma)}$ であり、係数表示は定義ではなく主張である。
 - 多重度の総和は配位の総数に等しい（$\sum_m\Omega_L(m)=2^{L^2}$）。
+
+章「有限系の自由エントロピー」では、素因数分解の指数 $v_p$、対数順序群
+$\Lambda=\{\,\lambda:\mathcal{P}\to\mathbb{Z}\ \text{有限台}\,\}$、正の有理数の対数
+$\log q=\sum_p w_p(q)\ell_p$、および $\Phi_L(q)=\log Z_L(q)$ を定義し、次の 2 つを示した。
+この範囲にも $\mathbb{R}/\mathbb{C}$ は現れない（$\log$ は級数でも実対数でもなく素因数分解である）。
+
+- 有理数の指数は表示の取り方によらない（$a/b=a'/b'$ ならば $v_p(a)-v_p(b)=v_p(a')-v_p(b')$）。
+- 分配多項式の正の有理点での値は正の有理数である（したがって $\Phi_L(q)$ が定まる）。
 
 ## 進め方（自動ループ）
 
@@ -38,9 +47,8 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 
 ## 次回やること
 
-1. **章「有限系の自由エントロピー」を書く**。$\Phi_L=\log Z_L(q)\in\Lambda$（$q\in\mathbb{Q}_{>0}$、
-   値の素因数分解の指数ベクトル）。SageMath 検証は既に $L=1,2,3$ で
-   $Z_L(1/2)=2,\ 2^{-7}\cdot353,\ 2^{-11}\cdot9859$ を出しているので、そこから始められる。
+1. **$\log$ の加法性（$\log(q_1q_2)=\log q_1+\log q_2$）と $\Phi_L$ の基本性質**。
+   定義までは済んでいるので、対数と呼ぶ根拠にあたる加法性から書く。
 2. **章「転送行列」**。$T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$。
    指数形 $e^{K\sigma\sigma'}$ を経由しない経路で書く（README「形式変数のまま進む」）。
 
@@ -48,8 +56,10 @@ mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` 
 
 - **content のファイルを分けるときの文書順の決め方。** システム（リポジトリ直下
   `structured-latex/`）は `content/` のファイル名昇順を文書順とみなす。一方リポジトリの規約は
-  ファイル名の連番プレフィックスを禁じている。現状は 1 ファイルなので配列順が文書順として機能しており
-  衝突していないが、章を増やすときにどちらかを変える必要がある
+  ファイル名の連番プレフィックスを禁じている。2026-08-08 に 2 つめの章を書くときこれに当たったので、
+  本文を 1 ファイル `content/main-text.ts` にまとめたまま章を見出しブロックで区切る形にした
+  （ファイルを分けない限り配列順が文書順として機能し、衝突しないため）。
+  本文が育ってファイルを分けたくなった時点で決着が要る
   （システム側に明示的な順序宣言を入れるのが筋。人間へ提案してから決める）。
 
 ## 確認事項・注意
