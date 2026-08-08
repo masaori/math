@@ -152,6 +152,27 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_apply_iff
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_permMatrix_apply
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_comm
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_apply
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_period
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_apply
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_period
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_apply
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_L
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterRight_add_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterRight_add_period
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.precompIterate_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.precompIterate_period
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_pow_apply
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_pow_eq_identity
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_period_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_period_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrixPow_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_apply_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_L_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

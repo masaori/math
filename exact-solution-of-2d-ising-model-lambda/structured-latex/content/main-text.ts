@@ -6221,6 +6221,682 @@ T_{S(\tau),S(\tau')}
     ],
   },
 
+
+  {
+    id: "algebraic_eigenvalue_definition_column_translation_iterate",
+    kind: "definition",
+    title: { text: "列番号の平行移動の反復" },
+    labels: ["def_column_translation_iterate"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate"],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        ref("def_column_translation"),
+        " の ",
+        math(String.raw`\gamma`),
+        " を ",
+        math(String.raw`k`),
+        " 回施す写像 ",
+        math(String.raw`\gamma^{[k]}:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z}`),
+        " を、",
+        math(String.raw`k\in\mathbb{N}`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\gamma^{[0]}:=\mathrm{id}_{\mathbb{Z}/L\mathbb{Z}},
+\qquad
+\gamma^{[k+1]}:=\gamma^{[k]}\circ\gamma`),
+      paragraph([
+        "により定める（",
+        math(String.raw`\mathrm{id}_{\mathbb{Z}/L\mathbb{Z}}`),
+        " は ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の恒等写像）。",
+      ]),
+      paragraph([
+        "冪の記法 ",
+        math(String.raw`\gamma^{k}`),
+        " を使わず角括弧を付けた ",
+        math(String.raw`\gamma^{[k]}`),
+        " と書くのは、この上付き文字が積の反復ではなく合成の反復であることを記号に残すためである",
+        "（1 つの記号に 2 つの意味を持たせない）。",
+      ]),
+      paragraph([
+        "合成の順を ",
+        math(String.raw`\gamma^{[k]}\circ\gamma`),
+        " と定め ",
+        math(String.raw`\gamma\circ\gamma^{[k]}`),
+        " と定めないのは、次の ",
+        ref("def_row_config_shift_iterate"),
+        " の反復と段ごとに噛み合わせるためである。",
+        "どちらの順で定めても同じ写像になるが、その一致を言うには別に 1 つ証明が要るので、",
+        "はじめから噛み合う側に固定する。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_column_translation_iterate_apply",
+    kind: "claim",
+    title: { text: "反復した平行移動は剰余類を足す操作である" },
+    labels: ["claim_column_translation_iterate_apply"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.translationIterate_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " と任意の ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`\gamma^{[k]}(y)=y+_{\mathbb{Z}/L\mathbb{Z}}\pi(k)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\gamma^{[k]}`),
+        " は ",
+        ref("def_column_translation_iterate"),
+        "、",
+        math(String.raw`\pi`),
+        " と ",
+        math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
+        " は ",
+        ref("def_lattice"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のとき、",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma^{[0]}(y)
+&=y
+&&(\because\ \blkref{def_column_translation_iterate}\ \text{の}\ \gamma^{[0]}=\mathrm{id}_{\mathbb{Z}/L\mathbb{Z}})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}0
+&&(\because\ 0\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の単位元})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\pi(0)
+&&(\because\ \blkref{def_lattice}\ \text{の}\ \pi\ \text{について}\ \pi(0)=0+L\mathbb{Z}=L\mathbb{Z}=0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`k`),
+        " について主張が成り立つとする。",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma^{[k+1]}(y)
+&=\gamma^{[k]}\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_column_translation_iterate}\ \text{の}\ \gamma^{[k+1]}=\gamma^{[k]}\circ\gamma)\\
+&=\gamma(y)+_{\mathbb{Z}/L\mathbb{Z}}\pi(k)
+&&(\because\ \text{帰納法の仮定を}\ \gamma(y)\ \text{へ適用})\\
+&=\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)+_{\mathbb{Z}/L\mathbb{Z}}\pi(k)
+&&(\because\ \blkref{def_column_translation})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bigl(\bar1+_{\mathbb{Z}/L\mathbb{Z}}\pi(k)\bigr)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の結合則})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bigl(\pi(1)+_{\mathbb{Z}/L\mathbb{Z}}\pi(k)\bigr)
+&&(\because\ \blkref{def_lattice}\ \text{の}\ \bar1=\pi(1))\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\pi(1+k)
+&&(\because\ \pi\ \text{は加法を保つ})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\pi(k+1)
+&&(\because\ \mathbb{Z}\ \text{の加法の可換性})
+\end{aligned}`),
+      paragraph([
+        "である。したがってすべての ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "第 6 の等号で使った「",
+        math(String.raw`\pi`),
+        " は加法を保つ」は、",
+        ref("def_lattice"),
+        " の ",
+        math(String.raw`\pi(n)=n+L\mathbb{Z}`),
+        " と剰余類の加法の定め方 ",
+        math(String.raw`(a+L\mathbb{Z})+_{\mathbb{Z}/L\mathbb{Z}}(b+L\mathbb{Z})=(a+b)+L\mathbb{Z}`),
+        " から直ちに従う。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}`),
+        " と有限集合 ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の加法だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_column_translation_period",
+    kind: "claim",
+    title: { text: "平行移動を L 回施すと恒等写像になる" },
+    labels: ["claim_column_translation_period"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_period",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.translationIterate_period",
+      "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_period_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        math(String.raw`\gamma^{[L]}=\mathrm{id}_{\mathbb{Z}/L\mathbb{Z}}`),
+        " である（",
+        math(String.raw`\gamma^{[L]}`),
+        " は ",
+        ref("def_column_translation_iterate"),
+        " で ",
+        math(String.raw`k=L`),
+        " としたもの）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma^{[L]}(y)
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\pi(L)
+&&(\because\ \blkref{claim_column_translation_iterate_apply})\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}0
+&&(\because\ \blkref{def_lattice}\ \text{の}\ \pi\ \text{について}\ \pi(L)=L+L\mathbb{Z}=L\mathbb{Z}=0)\\
+&=y
+&&(\because\ 0\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`y`),
+        " は任意だったので ",
+        math(String.raw`\gamma^{[L]}=\mathrm{id}_{\mathbb{Z}/L\mathbb{Z}}`),
+        " である。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の加法だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_row_config_shift_iterate",
+    kind: "definition",
+    title: { text: "行配位の巡回シフトの反復" },
+    labels: ["def_row_config_shift_iterate"],
+    habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate"],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        ref("def_row_config_shift"),
+        " の ",
+        math(String.raw`S`),
+        " を ",
+        math(String.raw`k`),
+        " 回施す写像 ",
+        math(String.raw`S^{[k]}:R_L\to R_L`),
+        " を、",
+        math(String.raw`k\in\mathbb{N}`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`S^{[0]}:=\mathrm{id}_{R_L},
+\qquad
+S^{[k+1]}:=S\circ S^{[k]}`),
+      paragraph([
+        "により定める（",
+        math(String.raw`\mathrm{id}_{R_L}`),
+        " は ",
+        math(String.raw`R_L`),
+        " の恒等写像）。上付きの角括弧の意味は ",
+        ref("def_column_translation_iterate"),
+        " と同じである。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_shift_iterate_apply",
+    kind: "claim",
+    title: { text: "反復した巡回シフトは反復した平行移動による引き戻しである" },
+    labels: ["claim_row_config_shift_iterate_apply"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.precompIterate_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        "、任意の ",
+        math(String.raw`\tau\in R_L`),
+        "、任意の ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`\bigl(S^{[k]}(\tau)\bigr)(y)=\tau\bigl(\gamma^{[k]}(y)\bigr)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "、",
+        math(String.raw`\gamma^{[k]}`),
+        " は ",
+        ref("def_column_translation_iterate"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。帰納法の仮定は「その ",
+        math(String.raw`k`),
+        " について、すべての ",
+        math(String.raw`\tau\in R_L`),
+        " とすべての ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " で等式が成り立つ」とする（次の段で ",
+        math(String.raw`y`),
+        " を動かしたところへ適用するため）。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のとき、",
+        math(String.raw`\tau\in R_L`),
+        " と ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S^{[0]}(\tau)\bigr)(y)
+&=\tau(y)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})\\
+&=\tau\bigl(\gamma^{[0]}(y)\bigr)
+&&(\because\ \blkref{def_column_translation_iterate}\ \text{の}\ \gamma^{[0]}=\mathrm{id}_{\mathbb{Z}/L\mathbb{Z}})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`k`),
+        " について主張が成り立つとする。",
+        math(String.raw`\tau\in R_L`),
+        " と ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S^{[k+1]}(\tau)\bigr)(y)
+&=\Bigl(S\bigl(S^{[k]}(\tau)\bigr)\Bigr)(y)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=\bigl(S^{[k]}(\tau)\bigr)\bigl(\gamma(y)\bigr)
+&&(\because\ \blkref{def_row_config_shift})\\
+&=\tau\Bigl(\gamma^{[k]}\bigl(\gamma(y)\bigr)\Bigr)
+&&(\because\ \text{帰納法の仮定を}\ \gamma(y)\ \text{へ適用})\\
+&=\tau\bigl(\gamma^{[k+1]}(y)\bigr)
+&&(\because\ \blkref{def_column_translation_iterate}\ \text{の}\ \gamma^{[k+1]}=\gamma^{[k]}\circ\gamma)
+\end{aligned}`),
+      paragraph([
+        "である。したがってすべての ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "第 3 の等号で帰納法の仮定を ",
+        math(String.raw`y`),
+        " ではなく ",
+        math(String.raw`\gamma(y)`),
+        " へ適用している。",
+        ref("def_column_translation_iterate"),
+        " が反復の順を ",
+        math(String.raw`\gamma^{[k]}\circ\gamma`),
+        " と定めているのはこのためである。",
+      ]),
+      paragraph([
+        "現れるのは有限集合とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_row_config_shift_period",
+    kind: "claim",
+    title: { text: "巡回シフトを L 回施すと恒等写像になる" },
+    labels: ["claim_row_config_shift_period"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_period",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.precompIterate_period",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_period_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        math(String.raw`S^{[L]}=\mathrm{id}_{R_L}`),
+        " である（",
+        math(String.raw`S^{[L]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        " で ",
+        math(String.raw`k=L`),
+        " としたもの）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " と ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(S^{[L]}(\tau)\bigr)(y)
+&=\tau\bigl(\gamma^{[L]}(y)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_iterate_apply})\\
+&=\tau(y)
+&&(\because\ \blkref{claim_column_translation_period})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`y`),
+        " は任意だったので、",
+        ref("def_row_configuration"),
+        " の行配位が ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " から ",
+        math(String.raw`\{+1,-1\}`),
+        " への写像であることから ",
+        math(String.raw`S^{[L]}(\tau)=\tau`),
+        " である。",
+        math(String.raw`\tau`),
+        " も任意だったので ",
+        math(String.raw`S^{[L]}=\mathrm{id}_{R_L}`),
+        " である。",
+      ]),
+      paragraph([
+        "現れるのは有限集合とその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_matrix_pow",
+    kind: "claim",
+    title: { text: "シフト行列の冪は反復したシフトの行列である" },
+    labels: ["claim_shift_matrix_pow"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_pow_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_apply_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        "任意の整数 ",
+        math(String.raw`k\ge1`),
+        " と任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`\bigl(U^{k}\bigr)_{\tau,\tau'}=
+\begin{cases}
+\kappa(1) & (\tau'=S^{[k]}(\tau)\ \text{のとき})\\
+\kappa(0) & (\tau'\ne S^{[k]}(\tau)\ \text{のとき})
+\end{cases}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、冪は ",
+        ref("def_matrix_over_row_configs"),
+        "、",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う等式を先に置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[1]}
+&=S\circ S^{[0]}
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=S\circ\mathrm{id}_{R_L}
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})\\
+&=S
+&&(\because\ \text{恒等写像との合成})
+\end{aligned}`),
+      paragraph([
+        "また ",
+        ref("claim_row_config_shift_bijective"),
+        " の逆写像を ",
+        math(String.raw`S'`),
+        " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=1`),
+        " のとき、",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " を任意に取ると ",
+        math(String.raw`\bigl(U^{1}\bigr)_{\tau,\tau'}=U_{\tau,\tau'}`),
+        " であり（",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`A^{1}=A`),
+        "）、",
+        ref("def_shift_matrix"),
+        " よりこれは ",
+        math(String.raw`\tau'=S(\tau)`),
+        " のとき ",
+        math(String.raw`\kappa(1)`),
+        "、そうでないとき ",
+        math(String.raw`\kappa(0)`),
+        " である。上の ",
+        math(String.raw`S^{[1]}=S`),
+        " により、この条件は ",
+        math(String.raw`\tau'=S^{[1]}(\tau)`),
+        " と同じものである。",
+      ]),
+      paragraph([
+        math(String.raw`k\ge1`),
+        " について主張が成り立つとする。",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(U^{k+1}\bigr)_{\tau,\tau''}
+&=\bigl(U^{k}U\bigr)_{\tau,\tau''}
+&&(\because\ \blkref{def_matrix_over_row_configs}\ \text{の}\ A^{k+1}=A^{k}A)\\
+&=\bigl(U^{k}\bigr)_{\tau,\,S'(\tau'')}
+&&(\because\ \blkref{claim_shift_matrix_right}\ \text{を}\ A=U^{k}\ \text{へ適用})
+\end{aligned}`),
+      paragraph([
+        "である。帰納法の仮定より、右辺は ",
+        math(String.raw`S'(\tau'')=S^{[k]}(\tau)`),
+        " のとき ",
+        math(String.raw`\kappa(1)`),
+        "、そうでないとき ",
+        math(String.raw`\kappa(0)`),
+        " である。この条件については",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S'(\tau'')=S^{[k]}(\tau)
+&\iff \tau''=S\bigl(S^{[k]}(\tau)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_bijective}\ \text{の}\ S\circ S'=\mathrm{id}_{R_L}\ \text{と}\ S'\circ S=\mathrm{id}_{R_L})\\
+&\iff \tau''=S^{[k+1]}(\tau)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。したがって ",
+        math(String.raw`\bigl(U^{k+1}\bigr)_{\tau,\tau''}`),
+        " は ",
+        math(String.raw`\tau''=S^{[k+1]}(\tau)`),
+        " のとき ",
+        math(String.raw`\kappa(1)`),
+        "、そうでないとき ",
+        math(String.raw`\kappa(0)`),
+        " であり、",
+        math(String.raw`k+1`),
+        " についても主張が成り立つ。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の有限個の元の和と積、および有限集合の上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_theorem_shift_matrix_order",
+    kind: "theorem",
+    title: { text: "シフト行列の L 乗は単位行列である" },
+    labels: ["theorem_shift_matrix_order"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_L",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permMatrix_pow_eq_identity",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_pow_L_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-order"],
+    statement: [
+      paragraph([
+        ref("def_shift_matrix"),
+        " の ",
+        math(String.raw`U`),
+        " と ",
+        ref("def_constant_polynomial"),
+        " の単位行列 ",
+        math(String.raw`I`),
+        " について",
+      ]),
+      displayMath(String.raw`U^{L}=I`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " を任意に取り、",
+        math(String.raw`\tau'=\tau`),
+        " の場合とそうでない場合に分ける。",
+        ref("def_lattice"),
+        " の格子は ",
+        math(String.raw`L\ge1`),
+        " を満たすので、",
+        ref("claim_shift_matrix_pow"),
+        " を ",
+        math(String.raw`k=L`),
+        " に対して使ってよい。",
+      ]),
+      paragraph([
+        math(String.raw`\tau'=\tau`),
+        " のとき、",
+        ref("claim_row_config_shift_period"),
+        " より ",
+        math(String.raw`S^{[L]}(\tau)=\tau=\tau'`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(U^{L}\bigr)_{\tau,\tau'}
+&=\kappa(1)
+&&(\because\ \blkref{claim_shift_matrix_pow}\ \text{の}\ \tau'=S^{[L]}(\tau)\ \text{の場合})\\
+&=I_{\tau,\tau'}
+&&(\because\ \blkref{def_identity_matrix}\ \text{の}\ \tau=\tau'\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`\tau'\ne\tau`),
+        " のとき、",
+        ref("claim_row_config_shift_period"),
+        " より ",
+        math(String.raw`S^{[L]}(\tau)=\tau`),
+        " なので ",
+        math(String.raw`\tau'\ne S^{[L]}(\tau)`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(U^{L}\bigr)_{\tau,\tau'}
+&=\kappa(0)
+&&(\because\ \blkref{claim_shift_matrix_pow}\ \text{の}\ \tau'\ne S^{[L]}(\tau)\ \text{の場合})\\
+&=I_{\tau,\tau'}
+&&(\because\ \blkref{def_identity_matrix}\ \text{の}\ \tau\ne\tau'\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        "である。いずれの場合も成分が一致し、",
+        math(String.raw`\tau,\tau'`),
+        " は任意だったので ",
+        math(String.raw`U^{L}=I`),
+        " である。",
+      ]),
+      paragraph([
+        "この定理は、シフト行列を「",
+        math(String.raw`L`),
+        " 乗すると単位行列になる行列」として特徴づける。",
+        "次のセクションでその固有値が 1 の ",
+        math(String.raw`L`),
+        " 乗根、すなわち円分体 ",
+        math(String.raw`\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}`),
+        " の元であることを見る。",
+        "成分は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元であり、この証明にも実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
   {
     id: "main_text_remark_planned_chapters",
     kind: "remark",

@@ -78,3 +78,6 @@ import Ising2DLambda.AlgebraicEigenvalue.RowConfigShiftFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrix
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.ShiftMatrix
 import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrixFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrixOrder
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.ShiftMatrixOrder
+import Ising2DLambda.AlgebraicEigenvalue.ShiftMatrixOrderFromNecSuf
