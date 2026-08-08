@@ -23,6 +23,9 @@ open TransferMatrix
 
 variable {L : ℕ} [NeZero L]
 
+-- この対応そのものは `L ≥ 1` を使わない（反復の段を 1 つずつ照らし合わせるだけである）。
+-- `L ≥ 1` が要るのは、この先で `K(τ)` が空でないことを言う箇所だけである。
+omit [NeZero L] in
 /-- 具体版の `S^[k]` が、必要十分版の左からの反復に写像 `rowShift L` を代入したものであること。 -/
 theorem rowShiftIterate_eq_iterLeft (k : ℕ) (τ : RowConfig L) :
     rowShiftIterate L k τ = NecSuf.AlgebraicEigenvalue.iterLeft (rowShift L) k τ := by
