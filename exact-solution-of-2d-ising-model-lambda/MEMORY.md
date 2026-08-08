@@ -52,7 +52,7 @@
 
 - **検証が本文を直させた例を消さない。** 辺集合を「2 元集合の集合」として定義していたため
   周期境界の $L\le2$ で $|E_L|=2L^2$ が破れていた。SageMath 検証が検出し、本文を
-  「辺の添字集合 $E_L=V_L\times\{\mathrm{h},\mathrm{v}\}$ と端点写像」の定義へ直した。
+  「辺の番号の集合（横向き・縦向きに分割）と端点写像」の定義へ直した。
   経緯は `sagemath/check/partition-polynomial-coefficient-sum/overview.md` に残してある。
 - 本文の地の文に強調記法（`**`）を使わない（他プロジェクトと同じ運用）。
 - 姉妹プロジェクト `exact-solution-of-2d-ising-model/` の計算を引き写さない。

@@ -32,7 +32,17 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`V_L:=(\mathbb{Z}/L\mathbb{Z})\times(\mathbb{Z}/L\mathbb{Z})`),
       paragraph([
-        "と、横向きの辺の番号の集合・縦向きの辺の番号の集合",
+        "の元を ",
+        math(String.raw`(i,j)`),
+        " と書き、第 1 成分 ",
+        math(String.raw`i`),
+        " を行番号、第 2 成分 ",
+        math(String.raw`j`),
+        " を列番号と呼ぶ。すなわち行番号が等しい頂点どうしが同じ行に属する。この呼び方は以下で固定し、",
+        "第 1 成分を列番号と読むことはしない。",
+      ]),
+      paragraph([
+        "次に、横向きの辺の番号の集合・縦向きの辺の番号の集合",
       ]),
       displayMath(
         String.raw`E_{L,\mathrm{h}}:=\{1,2,\dots,L^2\},\qquad
@@ -58,6 +68,8 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
       paragraph([
         "横向きと縦向きを最初から別の集合にしておくのは、後の章で破れボンド数を",
         "「同じ行の中の破れ」と「隣り合う行の間の破れ」に分けるとき、この分割をそのまま使うためである。",
+        "上で定める端点写像により、横向きの辺は両端の行番号が等しく（同じ行の中）、",
+        "縦向きの辺は両端の列番号が等しく行番号が 1 だけ異なる（隣り合う行の間）。",
       ]),
       paragraph([
         math(String.raw`\partial_0,\partial_1`),
@@ -83,15 +95,15 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
         math(String.raw`e-1=iL+j`),
         " として",
       ]),
-      displayMath(String.raw`\partial_0(e):=(i,j),\qquad \partial_1(e):=(i+1,\,j)`),
+      displayMath(String.raw`\partial_0(e):=(i,j),\qquad \partial_1(e):=(i,\,j+1)`),
       paragraph([
-        "と定め、",
+        "と定め（行番号は変えず列番号だけを 1 進める。だから横向きである）、",
         math(String.raw`e\in E_{L,\mathrm{v}}`),
         " に対しては ",
         math(String.raw`e-L^2-1=iL+j`),
         " として",
       ]),
-      displayMath(String.raw`\partial_0(e):=(i,j),\qquad \partial_1(e):=(i,\,j+1)`),
+      displayMath(String.raw`\partial_0(e):=(i,j),\qquad \partial_1(e):=(i+1,\,j)`),
       paragraph([
         "と定める（どちらの場合も分解される整数は ",
         math(String.raw`0`),

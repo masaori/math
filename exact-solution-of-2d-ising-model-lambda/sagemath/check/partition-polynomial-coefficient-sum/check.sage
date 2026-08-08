@@ -22,13 +22,14 @@ def report(L):
     assert len(vertical) == L * L, L
     assert horizontal & vertical == set(), L
     assert len(horizontal | vertical) == 2 * L * L, L
-    # 横向きの辺は行が 1 つずれ列が等しい、縦向きの辺は列が 1 つずれ行が等しい。
+    # 横向きの辺は行番号が等しく列番号が 1 ずれる（同じ行の中）、
+    # 縦向きの辺は列番号が等しく行番号が 1 ずれる（隣り合う行の間）。
     for e in horizontal:
         (i0, j0), (i1, j1) = endpoints(L, e)
-        assert (i1, j1) == ((i0 + 1) % L, j0), (L, e)
+        assert (i1, j1) == (i0, (j0 + 1) % L), (L, e)
     for e in vertical:
         (i0, j0), (i1, j1) = endpoints(L, e)
-        assert (i1, j1) == (i0, (j0 + 1) % L), (L, e)
+        assert (i1, j1) == ((i0 + 1) % L, j0), (L, e)
 
     Z = partition_polynomial(L)                 # def_partition_polynomial
     multiplicities = multiplicity_vector(L)     # def_multiplicity

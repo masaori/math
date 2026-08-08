@@ -22,7 +22,10 @@ x = PolynomialRingZx.gen()
 
 
 def vertices(L):
-    """def_lattice: 頂点集合 V_L = (Z/LZ)^2 を添字の組として返す。|V_L| = L^2。"""
+    """def_lattice: 頂点集合 V_L = (Z/LZ)^2 を添字の組 (i, j) として返す。|V_L| = L^2。
+
+    本文と同じく、第 1 成分 i を行番号、第 2 成分 j を列番号と呼ぶ。
+    """
     return [(i, j) for i in range(L) for j in range(L)]
 
 
@@ -43,17 +46,17 @@ def vertical_edge_numbers(L):
 def endpoints(L, e):
     """def_lattice: 辺の番号 e から両端 (d0(e), d1(e)) を読み出す。
 
-    本文と同じ分解を使う。番号を L で割った商が行 i、余りが列 j。
-      e in E_{L,h} なら e - 1     = iL + j で、両端は (i,j) と (i+1,j)
-      e in E_{L,v} なら e - L^2-1 = iL + j で、両端は (i,j) と (i,j+1)
+    本文と同じ分解を使う。番号を L で割った商が行番号 i、余りが列番号 j。
+      e in E_{L,h} なら e - 1     = iL + j で、両端は (i,j) と (i,j+1)   同じ行の中
+      e in E_{L,v} なら e - L^2-1 = iL + j で、両端は (i,j) と (i+1,j)   隣り合う行の間
     加法は Z/LZ の中で行う（周期境界）。
     """
     e = ZZ(e)
     if e <= L * L:
         i, j = divmod(e - 1, L)
-        return ((i, j), ((i + 1) % L, j))
+        return ((i, j), (i, (j + 1) % L))
     i, j = divmod(e - L * L - 1, L)
-    return ((i, j), (i, (j + 1) % L))
+    return ((i, j), ((i + 1) % L, j))
 
 
 def edges(L):
