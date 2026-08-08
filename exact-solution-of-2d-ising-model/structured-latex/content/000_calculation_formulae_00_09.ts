@@ -154,82 +154,162 @@ export default defineBlocks([
       ]),
     ],
     proof: [
-      paragraph([
-        "(1) の証明。定義より直ちに",
-      ]),
+      paragraph(["(1) の証明。"]),
       displayMath(
         String.raw`\begin{aligned}
 \cosh x - \sinh x
 &= \frac{\exp(x) + \exp(-x)}{2} - \frac{\exp(x) - \exp(-x)}{2}
-= \frac{2\exp(-x)}{2} = \exp(-x) \\
+&&(\because\ \cosh,\ \sinh\ \text{の定義})\\
+&= \frac{\bigl(\exp(x) + \exp(-x)\bigr) - \bigl(\exp(x) - \exp(-x)\bigr)}{2}
+&&(\because\ \text{分母の等しい分数の差})\\
+&= \frac{2\exp(-x)}{2}
+&&(\because\ \text{分子の整理})\\
+&= \exp(-x)
+&&(\because\ \text{約分})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \cosh x + \sinh x
 &= \frac{\exp(x) + \exp(-x)}{2} + \frac{\exp(x) - \exp(-x)}{2}
-= \frac{2\exp(x)}{2} = \exp(x)
+&&(\because\ \cosh,\ \sinh\ \text{の定義})\\
+&= \frac{\bigl(\exp(x) + \exp(-x)\bigr) + \bigl(\exp(x) - \exp(-x)\bigr)}{2}
+&&(\because\ \text{分母の等しい分数の和})\\
+&= \frac{2\exp(x)}{2}
+&&(\because\ \text{分子の整理})\\
+&= \exp(x)
+&&(\because\ \text{約分})
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
-        math(String.raw`\exp(\pm x) > 0`),
-        " である。特に ",
-        math(String.raw`2\cosh x = (\cosh x - \sinh x) + (\cosh x + \sinh x) = \exp(-x) + \exp(x) > 0`),
-        " より ",
-        math(String.raw`\cosh x > 0`),
-        "、また ",
-        math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
-        " より ",
+        math(String.raw`\exp(-x) > 0`),
+        " かつ ",
+        math(String.raw`\exp(x) > 0`),
+        " なので、この 2 式から ",
+        math(String.raw`\cosh x - \sinh x > 0`),
+        " すなわち ",
         math(String.raw`\cosh x > \sinh x`),
-        "。",
+        " が出る。また",
       ]),
-      paragraph(["(2) の証明。(1) の 2 式の積をとると、"]),
       displayMath(
-        String.raw`(\cosh x)^2 - (\sinh x)^2
-= (\cosh x - \sinh x)(\cosh x + \sinh x)
-= \exp(-x)\exp(x)
-= \exp(-x + x)
-= \exp(0)
-= 1`,
+        String.raw`\begin{aligned}
+2\cosh x
+&= (\cosh x - \sinh x) + (\cosh x + \sinh x)
+&&(\because\ \text{右辺の整理})\\
+&= \exp(-x) + \exp(x)
+&&(\because\ \text{上の 2 式})\\
+&> 0
+&&(\because\ \exp\ \text{の正値性})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、両辺を ",
+        math(String.raw`2 > 0`),
+        " で割って ",
+        math(String.raw`\cosh x > 0`),
+        " を得る。",
+      ]),
+      paragraph(["(2) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\cosh x)^2 - (\sinh x)^2
+&= (\cosh x - \sinh x)(\cosh x + \sinh x)
+&&(\because\ \text{2 乗の差の因数分解})\\
+&= \exp(-x)\exp(x)
+&&(\because\ \text{(1) の 2 式})\\
+&= \exp(-x + x)
+&&(\because\ \exp(x)\exp(y) = \exp(x+y))\\
+&= \exp(0)
+&&(\because\ -x + x = 0)\\
+&= 1
+&&(\because\ \exp(0) = 1)
+\end{aligned}`,
       ),
       paragraph([
         "(3) の証明。",
         math(String.raw`x > 0`),
         " のとき ",
         math(String.raw`-x < 0 < x`),
-        " であり、",
-        math(String.raw`\exp`),
-        " は狭義単調増加であるから ",
-        math(String.raw`\exp(-x) < \exp(0) = 1 < \exp(x)`),
-        "。よって ",
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-x)
+&< \exp(0)
+&&(\because\ \exp\ \text{が狭義単調増加で}\ -x < 0)\\
+&= 1
+&&(\because\ \exp(0) = 1)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+1
+&= \exp(0)
+&&(\because\ \exp(0) = 1)\\
+&< \exp(x)
+&&(\because\ \exp\ \text{が狭義単調増加で}\ 0 < x)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから ",
         math(String.raw`\exp(x) - \exp(-x) > 0`),
-        " すなわち ",
-        math(String.raw`\sinh x = \dfrac{\exp(x) - \exp(-x)}{2} > 0`),
-        "。(1) より ",
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh x
+&= \frac{\exp(x) - \exp(-x)}{2}
+&&(\because\ \sinh\ \text{の定義})\\
+&> 0
+&&(\because\ \text{正の実数を}\ 2 > 0\ \text{で割った値は正})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。(1) より ",
         math(String.raw`\cosh x > \sinh x`),
         " であるから ",
         math(String.raw`\cosh x > \sinh x > 0`),
-        "。",
+        " を得る。",
       ]),
       paragraph([
-        "(4) の証明。",
+        "(4) の証明。両方向を別々に示すので、ここは一続きの式にしない。",
+      ]),
+      paragraph([
         math(String.raw`a = b`),
-        " ならば ",
+        " ならば、両辺を 2 乗して ",
         math(String.raw`a^2 = b^2`),
-        " は明らか。逆に ",
+        " である。",
+      ]),
+      paragraph([
+        "逆に ",
         math(String.raw`a^2 = b^2`),
-        " とすると ",
-        math(String.raw`(a - b)(a + b) = a^2 - b^2 = 0`),
-        " であり、",
-        math(String.raw`a, b > 0`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(a - b)(a + b)
+&= a^2 - b^2
+&&(\because\ \text{2 乗の差の因数分解})\\
+&= 0
+&&(\because\ a^2 = b^2)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`a > 0`),
+        " かつ ",
+        math(String.raw`b > 0`),
         " より ",
         math(String.raw`a + b > 0`),
         " すなわち ",
         math(String.raw`a + b \neq 0`),
-        "。",
+        " であり、",
         math(String.raw`\mathbb{R}`),
         " は整域であるから ",
         math(String.raw`a - b = 0`),
         " すなわち ",
         math(String.raw`a = b`),
-        "。",
+        " を得る。",
       ]),
     ],
     conversion: {
