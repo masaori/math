@@ -93,15 +93,15 @@ def check_power():
 # --- claim_free_entropy_at_one -------------------------------------------------
 
 def check_free_entropy_at_one(L):
-    # 本文 Step 1-2: Z_L(1) は多重度の総和であり、配位の総数 2^{L^2} に等しい。
+    # 本文の第 2-第 4 の等号: Z_L(1) は多重度の総和であり、配位の総数 2^{L^2} に等しい。
     value = partition_polynomial(L)(QQ(1))
     assert value == sum(multiplicity_vector(L)), (L, value)
     assert value == ZZ(2) ** (L ** 2), (L, value)
-    # 本文 Step 3-6: Phi_L(1) = L^2 l_2。
+    # 本文の第 1・第 5-第 8 の等号: Phi_L(1) = L^2 l_2。
     left = free_entropy(L, QQ(1))
     right = lambda_smul(L ** 2, lambda_generator(2))
     assert left == right, (L, left, right)
-    # Step 5 の内容（log 2 = l_2）も単独で確かめる。
+    # 第 6-第 8 の等号の内容（log 2 = l_2）も単独で確かめる。
     assert log_rational(QQ(2)) == lambda_generator(2)
     print('L =', L, ' Z_L(1) =', value, ' Phi_L(1) =', left)
 

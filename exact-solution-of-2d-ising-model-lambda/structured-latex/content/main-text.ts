@@ -1450,7 +1450,7 @@ Z_L(q)
 &=\log Z_L(1)
 &&(\because\ \blkref{def_finite_free_entropy}\text{、}1\in\mathbb{Q}_{>0})\\
 &=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\cdot1^{\,m}\Bigr)
-&&(\because\ \text{分配多項式の係数は多重度である、代入は環準同型})\\
+&&(\because\ \blkref{claim_coefficient_representation}\text{、代入は環準同型})\\
 &=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\Bigr)
 &&(\because\ 1^{\,m}=1)\\
 &=\log\bigl(2^{L^2}\bigr)
@@ -4235,10 +4235,14 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
       paragraph([
         "使ったのは、",
         math(String.raw`\mathbb{Z}[x]`),
-        " が可換環であること（零元を掛けると零元、単位元を掛けても変わらない、有限和と有限積が定まる）と、",
+        " の和と積についての次の性質（零元を掛けると零元、単位元を掛けても変わらない、",
+        "有限和と有限積が定まる、積は可換）と、",
         "恒等写像の符号が ",
         math(String.raw`1`),
         " であることだけである。",
+        "引き算は一度も使っていない（符号が ",
+        math(String.raw`-1`),
+        " になる項は、恒等写像でない置換の項として消えているので現れない）。",
         "転倒数の作り方も、",
         ref("claim_permutation_sign_mul"),
         " の乗法性も使っていない。",
