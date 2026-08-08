@@ -230,6 +230,29 @@ def check_not_vacuous(L, perms, orbits, pairs):
     return nonzero
 
 
+def check_vacuity_profile(L, perms, orbits):
+    """5: どの L で偶数性の検証に中身があるかを記録する。
+
+    偶数性の等式は |J| = 2|F \\ F_phi| なので、両辺が 0 の場合は 0 = 2*0 を見ているだけで
+    何も確かめていない。どの L がその「空虚な場合しか見ていない」側なのかを、
+    overview.md の散文ではなく実行で確定させる（走らせた範囲の打ち切りを隠さないため）。
+
+    返すのは (偶数性が空虚でない例があるか, |F_phi| = |F| が空虚でない例があるか)。
+    """
+    even_has_content = False
+    ordered_has_content = False
+    for phi in perms:
+        for o_1 in orbits:
+            for o_2 in orbits:
+                if cross_ordered_pairs(L, o_1, o_2):
+                    ordered_has_content = True
+                if o_1 == o_2:
+                    continue
+                if cross_inversions(L, phi, o_1, o_2):
+                    even_has_content = True
+    return even_has_content, ordered_has_content
+
+
 def main():
     odd_found_anywhere = False
     nonzero_found_anywhere = False
@@ -247,6 +270,14 @@ def main():
         if check_not_vacuous(L, perms, orbits, pairs):
             nonzero_found_anywhere = True
             print(f'OK: L={L} で |J_phi(O,O\')| > 0 となる例がある（主張が空でない）')
+        even_has_content, ordered_has_content = check_vacuity_profile(L, perms, orbits)
+        assert ordered_has_content, (L, '|F_phi| = |F| の検証まで空虚になっている')
+        if even_has_content:
+            print(f'記録: L={L} の偶数性の検証には中身がある（|J| > 0 の場合を見ている）')
+        else:
+            print(f'記録: L={L} の偶数性の検証は空虚な場合しか見ていない'
+                  '（相異なる軌道にまたがる転倒対がつねに空で、0 = 2*0 を確かめている）。'
+                  'ただし |F_phi| = |F| の検証は空虚ではない')
     assert odd_found_anywhere, 'O = O\' で奇数になる例が 1 つも無い（限定の裏取りができていない）'
     assert nonzero_found_anywhere, 'J_phi(O,O\') がつねに空（主張が空虚）'
     print('（L=4 は S_L の全列挙（16! 通り）ができないので走らせていない）')
