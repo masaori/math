@@ -908,53 +908,37 @@ Z_L
     ],
     proof: [
       paragraph([
-        "Step 1（分母を払う）。",
-        math(String.raw`b`),
-        " と ",
-        math(String.raw`b'`),
-        " はいずれも 1 以上の整数なので ",
-        math(String.raw`bb'\ne0`),
-        " である。仮定 ",
+        "準備として ",
+        math(String.raw`ab'=a'b`),
+        " である（仮定 ",
         math(String.raw`a/b=a'/b'`),
         " の両辺に ",
-        math(String.raw`bb'`),
-        " を掛けて",
+        math(String.raw`bb'\ne0`),
+        " を掛けた。両辺は 1 以上の整数の積なので 1 以上の整数）。",
       ]),
-      displayMath(String.raw`ab'=a'b`),
+      displayMath(String.raw`\begin{aligned}
+v_p(a)+v_p(b')
+&=v_p(ab')
+&&(\because\ \text{素因数分解の指数の加法性})\\
+&=v_p(a'b)
+&&(\because\ ab'=a'b)\\
+&=v_p(a')+v_p(b)
+&&(\because\ \text{素因数分解の指数の加法性})
+\end{aligned}`),
       paragraph([
-        "を得る。両辺は 1 以上の整数の積なので、いずれも 1 以上の整数である。",
-      ]),
-      paragraph([
-        "Step 2（指数の加法性を両辺へ適用する）。",
-        ref("def_prime_exponent"),
-        " の指数の加法性より",
-      ]),
-      displayMath(
-        String.raw`v_p(ab')=v_p(a)+v_p(b'),\qquad v_p(a'b)=v_p(a')+v_p(b)`,
-      ),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 3（両辺の指数を比べる）。Step 1 の ",
-        math(String.raw`ab'=a'b`),
-        " は 1 以上の整数としての等式なので、その ",
-        math(String.raw`p`),
-        " の指数も等しく ",
-        math(String.raw`v_p(ab')=v_p(a'b)`),
-        " である。Step 2 を代入して",
-      ]),
-      displayMath(String.raw`v_p(a)+v_p(b')=v_p(a')+v_p(b)`),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 4（移項）。Step 3 の等式は ",
-        math(String.raw`\mathbb{Z}`),
-        " の中の等式である。両辺から ",
+        "であり、両辺から ",
         math(String.raw`v_p(b)+v_p(b')`),
-        " を引いて",
+        " を引いて ",
+        math(String.raw`v_p(a)-v_p(b)=v_p(a')-v_p(b')`),
+        " を得る。",
       ]),
-      displayMath(String.raw`v_p(a)-v_p(b)=v_p(a')-v_p(b')`),
-      paragraph(["を得る。"]),
       paragraph([
-        "以上の各ステップは整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
+        "引いたブロック: ",
+        ref("def_prime_exponent"),
+        "。",
+      ]),
+      paragraph([
+        "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
         "引き算のためだけに ",
         math(String.raw`\mathbb{N}`),
         " から ",
@@ -2463,64 +2447,27 @@ b(\sigma)
         math(String.raw`\sigma\in\Sigma_L`),
         " を固定する。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}
+&=\prod_{i=0}^{L-1}x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))}
+&&(\because\ \text{転送行列の定義})\\
+&=x^{\,\sum_{i=0}^{L-1}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))\bigr)}
+&&(\because\ x^{a}x^{a'}=x^{a+a'}\ \text{を}\ L-1\ \text{回})\\
+&=x^{\,\sum_{i=0}^{L-1}b_{\mathrm{h}}(\rho_i(\sigma))
++\sum_{i=0}^{L-1}b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))}
+&&(\because\ \text{有限個の自然数の和は項ごとに分けられる})\\
+&=x^{\,b(\sigma)}
+&&(\because\ \text{破れボンド数は行内の破れと行間の破れに分かれる})
+\end{aligned}`),
       paragraph([
-        "Step 1（各因子を書き下す）。",
+        "引いたブロック: ",
         ref("def_transfer_matrix"),
-        " を ",
-        math(String.raw`\tau=\rho_i(\sigma)`),
         "、",
-        math(String.raw`\tau'=\rho_{i+1}(\sigma)`),
-        " について使うと、各 ",
-        math(String.raw`i\in\{0,1,\dots,L-1\}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}
-=x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))}`,
-      ),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 2（指数法則で積をまとめる）。",
-        math(String.raw`\mathbb{Z}[x]`),
-        " の元 ",
-        math(String.raw`x`),
-        " と自然数 ",
-        math(String.raw`a,a'`),
-        " について ",
-        math(String.raw`x^{a}\,x^{a'}=x^{a+a'}`),
-        " が成り立つ。これを ",
-        math(String.raw`L`),
-        " 個の因子へ ",
-        math(String.raw`L-1`),
-        " 回続けて使うと、Step 1 とあわせて",
-      ]),
-      displayMath(
-        String.raw`\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}
-=x^{\,\sum_{i=0}^{L-1}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))\bigr)}`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 3（指数の和を 2 つに分ける）。有限個の自然数の和は項ごとに分けられるので",
-      ]),
-      displayMath(
-        String.raw`\sum_{i=0}^{L-1}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+1}(\sigma))\bigr)
-=\sum_{i=0}^{L-1}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
-+\sum_{i=0}^{L-1}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+1}(\sigma)\bigr)`,
-      ),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 4（分解を使う）。",
         ref("claim_broken_bond_row_decomposition"),
-        " により、Step 3 の右辺は ",
-        math(String.raw`b(\sigma)`),
-        " に等しい。これを Step 2 の指数へ代入して",
+        "。",
       ]),
-      displayMath(
-        String.raw`\prod_{i=0}^{L-1}T_{\rho_i(\sigma),\,\rho_{i+1}(\sigma)}=x^{\,b(\sigma)}`,
-      ),
-      paragraph(["を得る。"]),
       paragraph([
-        "以上の各ステップは自然数の和と ",
+        "以上は自然数の和と ",
         math(String.raw`\mathbb{Z}[x]`),
         " の積だけからなり、実数体も複素数体も現れない。",
         "残るのは、この積を行配位の族全体にわたって足し上げたものが ",

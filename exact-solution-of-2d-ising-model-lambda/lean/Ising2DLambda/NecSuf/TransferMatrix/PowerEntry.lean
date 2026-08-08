@@ -117,30 +117,32 @@ lemma walksBetween_one (a a'' : ι) :
     calc p = extendWalk (restrictWalk p) (p (Fin.last 1)) := (extendWalk_restrictWalk p).symm
       _ = extendWalk (fun _ => a) a'' := by rw [hinit, hp1]
 
-/-- 主張の必要十分版。人手証明の Step 1–9 と同じ手順で、値の側は可換半環、添字の側は
+/-- 主張の必要十分版。人手証明と同じ手順で、値の側は可換半環、添字の側は
 相等の判定できる有限型しか仮定していない。
 
-仮定について。有限型を外すと Step 3 の和と道の全体の和が確定しない。
+仮定について。有限型を外すと行列の積の和と道の全体の和が確定しない。
 相等の判定を外すと両端を指定した道の全体を filter として書けない。
-値の側の可換半環は上のファイル冒頭に書いたとおりで、分配則（Step 5）と結合性（Step 7）と
-単位元（Step 1）を使う。引き算・順序は使わないので環である必要はない。 -/
+値の側の可換半環は上のファイル冒頭に書いたとおりで、分配則（`k+1` の場合の第 3 の等号）と
+結合性（対応する項が等しいこと）と単位元（出発点）を使う。
+引き算・順序は使わないので環である必要はない。 -/
 theorem matPow_apply_eq_sum_walkWeight (A : Mat S ι) (m : ℕ) (a a'' : ι) :
     matPow A m a a'' = ∑ p ∈ walksBetween (m + 1) a a'', walkWeight A p := by
   induction m generalizing a a'' with
   | zero =>
-      -- Step 1（`k = 1` の場合）。
+      -- 出発点（`k = 1` の場合）。
       show A a a'' = _
       rw [walksBetween_one, sum_singleton, walkWeight_extendWalk]
       unfold walkWeight
       rw [Fin.prod_univ_zero, one_mul]
   | succ m ih =>
-      -- Step 3（冪と積の定義を使う）。
+      -- `k+1` の場合の第 1 の等号（冪と積の定義を使う）。
       show ∑ b : ι, matPow A m a b * A b a'' = _
-      -- Step 4（帰納法の仮定を代入する）。
+      -- 第 2 の等号（帰納法の仮定を各 `b` について使う）。
       rw [sum_congr rfl fun b _ => by rw [ih a b]]
-      -- Step 5（分配則で括弧を外す）。
+      -- 第 3 の等号（有限和と 1 つの元との積を項ごとの積の和にする）。
       rw [sum_congr rfl fun b (_ : b ∈ univ) => sum_mul _ _ _]
-      -- Step 8 の前半（二重和を、左端だけを固定した道の上の 1 つの和として読む）。
+      -- 第 4 の等号（二重和を、人手証明の組の集合 `P` の上の 1 つの和として読む。
+      -- ここでは `P` を「左端が `a` の道の全体」として実現し、右端で束ねている）。
       have hfiber :
           ∑ b : ι, ∑ p ∈ walksBetween (m + 1) a b, walkWeight A p * A b a''
             = ∑ p ∈ univ.filter (fun p : Walk ι (m + 1) => p 0 = a),
@@ -156,7 +158,7 @@ theorem matPow_apply_eq_sum_walkWeight (A : Mat S ι) (m : ℕ) (a a'' : ι) :
           obtain ⟨-, hlast⟩ := mem_filter.mp hp
           rw [hlast]
       rw [hfiber]
-      -- Step 6・Step 7（延長が 1 対 1 対応であり、対応する項が等しい）。
+      -- 第 5 の等号（道の延長が 1 対 1 対応であり、対応する項が等しい）。
       refine sum_nbij' (i := fun p => extendWalk p a'') (j := fun q => restrictWalk q)
         ?_ ?_ ?_ ?_ ?_
       · intro p hp
