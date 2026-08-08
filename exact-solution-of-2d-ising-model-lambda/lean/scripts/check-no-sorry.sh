@@ -280,6 +280,25 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_total
   Ising2DLambda.AlgebraicEigenvalue.card_crossOrderedPairsImage_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_eq_two_mul_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.inversionCount_eq_card_inversionPairs
+  Ising2DLambda.AlgebraicEigenvalue.orbitInversionCount_congr
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestrictionAmbient_eq
+  Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs
+  Ising2DLambda.AlgebraicEigenvalue.card_same_add_card_cross
+  Ising2DLambda.AlgebraicEigenvalue.sameOrbitInversionPairs_eq_biUnion
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.inversionCount_orbit_decomposition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inner_eq_filter_crossPairs
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_same_add_card_cross
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sameOrbit_eq_biUnion
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.innerInversionPairs_pairwiseDisjoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversion_count_decomposition
+  Ising2DLambda.AlgebraicEigenvalue.inversionPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_filter_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.inversionCount_orbit_decomposition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
