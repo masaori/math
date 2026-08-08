@@ -17,6 +17,17 @@
 「多重度の総和は配位の総数に等しい」（$\sum_m\Omega_L(m)=2^{L^2}$）の証明である。
 この範囲に $\mathbb{R}/\mathbb{C}$ は現れない。
 
+## 進め方（自動ループ）
+
+このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
+[docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md)、進捗の正本は
+[docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) である（このファイルではない）。
+
+- 1 tick = 既存出力のレビューと修正 → セクションを **1 つだけ** 前進 → 検証 → push → 停止。
+- 各 tick は launchd（`com.masaori.ising-lambda-auto-loop`）が起動する
+  **独立した Claude セッション**で走る。会話の文脈は持ち越さない。
+- 次に何をするかは、下の「次回やること」ではなく**状態台帳のセクション表**を見る。
+
 ## 次回やること
 
 1. **`claim_coefficient_sum` を Lean で形式化する**（具体版・必要十分版の 2 本立て）。

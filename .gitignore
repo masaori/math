@@ -16,3 +16,6 @@ exact-solution-of-2d-ising-model-lambda/structured-latex/build/
 
 # sage が .sage から生成する中間ファイル
 *.sage.py
+
+# 自動ループの実行ログ（各 tick の Claude セッションの出力）
+exact-solution-of-2d-ising-model-lambda/logs/
