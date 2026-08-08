@@ -12,6 +12,7 @@
   τ ≺ τ'                            rowConfigLess
   証明の準備の第一                  ne_at_firstDifference
   証明の準備の第二                  eq_below_firstDifference
+  証明の準備の第三                  rowConfigLess_trans の中の `key`
   三分律                            rowConfigLess_trichotomy
   推移律                            rowConfigLess_trans
 
@@ -159,7 +160,8 @@ theorem rowConfigLess_trans [NeZero L] {τ τ' τ'' : RowConfig L}
   obtain ⟨hne2, hlt2⟩ := h2
   set k0 := firstDifference hne1 with hk0
   set k1 := firstDifference hne2 with hk1
-  -- 3 つの場合に共通して使う形: 位置 `k` が `k_0(τ,τ'')` であることと `ε` の比較。
+  -- 人手証明の「準備の第三」。3 つの場合に共通して使う形で、
+  -- `k` 未満で `τ` と `τ''` が一致し、`k` で `ε` の値が小さければ `τ ≺ τ''` である。
   have key : ∀ k : ℕ, k < L →
       (∀ j < k, τ ((j : ℕ) : ZMod L) = τ'' ((j : ℕ) : ZMod L)) →
       spinIndex (τ ((k : ℕ) : ZMod L)) < spinIndex (τ'' ((k : ℕ) : ZMod L)) →

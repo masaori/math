@@ -67,8 +67,8 @@ bash scripts/check-no-sorry.sh
 | ファイル | 中身 |
 | --- | --- |
 | `Ising2DLambda/PartitionPolynomial/Basic.lean` | 格子・辺の番号と端点写像・配位・破れボンド数・多重度・分配多項式の定義（具体版） |
-| `Ising2DLambda/PartitionPolynomial/CoefficientSum.lean` | 多重度の総和は配位の総数に等しい（具体版）。人手証明の Step 1–5 と 1 対 1 |
-| `Ising2DLambda/PartitionPolynomial/CoefficientRepresentation.lean` | 分配多項式の係数は多重度である（具体版）。人手証明の Step 1–5 と 1 対 1 |
+| `Ising2DLambda/PartitionPolynomial/CoefficientSum.lean` | 多重度の総和は配位の総数に等しい（具体版）。人手証明の 3 つの等号と 1 対 1 |
+| `Ising2DLambda/PartitionPolynomial/CoefficientRepresentation.lean` | 分配多項式の係数は多重度である（具体版）。人手証明の 5 つの等号と 1 対 1 |
 | `Ising2DLambda/NecSuf/PartitionPolynomial/CoefficientSum.lean` | 必要十分版。有限型 `α` と有界な写像 `f : α → ℕ` だけを仮定する |
 | `Ising2DLambda/NecSuf/PartitionPolynomial/CoefficientRepresentation.lean` | 必要十分版。上に加えて値の側は可換モノイド `M` と `g : ℕ → M` だけを仮定する |
 | `Ising2DLambda/PartitionPolynomial/CoefficientSumFromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出 |
@@ -94,7 +94,7 @@ bash scripts/check-no-sorry.sh
 - 有理点での正値性の証明は、狭義順序半環と「添字集合が空でない有限集合」しか使っていない。
   値が有理数であること・多項式であること・指数が破れボンド数であることは使っていない。
 
-Step 3 の「互いに素な有限個の有限集合の合併の元の個数は個数の和」（および和の版）は
+「互いに素な有限個の有限集合の合併の元の個数は個数の和」（および和の版）は
 人手証明が明示的に適用している定理なので mathlib の `Finset.card_biUnion` / `Finset.sum_biUnion`
-を引く。一方 `Finset.card_eq_sum_card_fiberwise` は人手証明の Step 2 と Step 3 を一度に
-済ませてしまうため、1 対 1 対応が崩れる。使っていない。
+を引く。一方 `Finset.card_eq_sum_card_fiberwise` は、人手証明が配位全体の類別と数え上げに
+分けている 2 つの段を一度に済ませてしまうため、1 対 1 対応が崩れる。使っていない。

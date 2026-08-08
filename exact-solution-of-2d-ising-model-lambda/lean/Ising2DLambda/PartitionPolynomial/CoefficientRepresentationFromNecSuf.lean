@@ -34,7 +34,8 @@ theorem partitionPolynomial_eq_sum_multiplicity_from_necSuf :
     (fun m => (Polynomial.X : Polynomial ℤ) ^ m) (brokenBondCount_le L)
   rw [partitionPolynomial, h]
   -- 必要十分版の類は具体版の類そのもの（`brokenFiber_eq_necSuf_fiber`）であり、
-  -- その元の個数が多重度（Step 1）。あとは `k • x^m = C(k) * x^m` の書き直しだけである。
+  -- その元の個数が多重度である（人手証明の第 5 の等号）。
+  -- あとは `k • x^m = C(k) * x^m` の書き直しだけである。
   refine sum_congr rfl fun m _ => ?_
   rw [show NecSuf.PartitionPolynomial.fiber (brokenBondCount L) m = brokenFiber L m from rfl,
     ← multiplicity_eq_card_brokenFiber, nsmul_eq_mul]

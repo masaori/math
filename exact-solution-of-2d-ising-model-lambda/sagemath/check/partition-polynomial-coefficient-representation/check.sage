@@ -33,32 +33,32 @@ def classes(L):
 
 
 def report(L):
-    """L x L 周期格子について、本文の各 Step を数え上げで確かめる。"""
+    """L x L 周期格子について、本文の証明の各段を数え上げで確かめる。"""
     sites = vertices(L)
     all_configurations = set(
         tuple(sigma[v] for v in sites) for sigma in configurations(L)
     )
     A = classes(L)
 
-    # claim_configuration_partition の Step 1（被覆）: 合併が Sigma_L に一致する。
+    # claim_configuration_partition の被覆: 合併が Sigma_L に一致する。
     union = set()
     for m in A:
         assert A[m] <= all_configurations, (L, m)
         union |= A[m]
     assert union == all_configurations, L
 
-    # claim_configuration_partition の Step 2（互いに素）: m != m' なら共通元を持たない。
+    # claim_configuration_partition の互いに素性: m != m' なら共通元を持たない。
     for m in A:
         for m2 in A:
             if m != m2:
                 assert A[m] & A[m2] == set(), (L, m, m2)
 
-    # claim_coefficient_representation の Step 1: Omega_L(m) = |A_{L,m}|。
+    # claim_coefficient_representation の第 5 の等号（多重度の定義）: Omega_L(m) = |A_{L,m}|。
     multiplicities = multiplicity_vector(L)
     for m in A:
         assert multiplicities[m] == len(A[m]), (L, m, multiplicities[m], len(A[m]))
 
-    # claim_coefficient_representation の Step 4: 1 つの類の中では単項式が共通で、
+    # claim_coefficient_representation の第 3・第 4 の等号: 1 つの類の中では単項式が共通で、
     # 類の上の和は Omega_L(m) x^m に等しい。
     for m in A:
         class_sum = PolynomialRingZx(0)
@@ -68,7 +68,7 @@ def report(L):
                 class_sum += x ** broken_bond_count(L, sigma)
         assert class_sum == multiplicities[m] * x ** m, (L, m, class_sum)
 
-    # claim_coefficient_representation の Step 5（結論）:
+    # claim_coefficient_representation の結論:
     # 定義どおりの和と、多重度から作った多項式が一致する。
     Z_from_definition = partition_polynomial(L)
     Z_from_multiplicity = partition_polynomial_from_multiplicity(L)
