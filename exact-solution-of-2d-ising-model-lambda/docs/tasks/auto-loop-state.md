@@ -7,7 +7,7 @@
 
 ## 現在地
 
-- 次に進めるセクション: **形式検証の土台 / Lean の環境を整える**（台帳の todo の先頭）
+- 次に進めるセクション: **分配多項式 / 上記 2 件の Lean 具体版と必要十分版**（台帳の todo の先頭）
 - 前回のレビュー到達点: 本文（定義 4 件・主張 1 件）、`sagemath/`、`notes/`、`README`・`MEMORY`・
   `overview.md` を一巡した。次 tick は本文の証明の各ステップに根拠のラベル参照が過不足なく
   付いているかを、主張「多重度の総和は配位の総数に等しい」の Step 1–5 から見直す。
@@ -22,7 +22,7 @@
 |---|---|---|---|---|
 | 1 | 分配多項式 | 格子・配位・破れボンド数・多重度・分配多項式の定義 | 記述と SageMath まで | Lean 未着手 |
 | 2 | 分配多項式 | 多重度の総和は配位の総数に等しい | 記述と SageMath まで | Lean 未着手 |
-| 3 | 形式検証の土台 | Lean の環境を整える（`lake update` と `lake build` が通る状態にする） | todo | mathlib 未取得。**`lake update` のあと必ず `lake exe cache get` を実行する**（省くと mathlib を原本から building することになり、1 tick では終わらない）。前面で実行し終わるまで待つこと |
+| 3 | 形式検証の土台 | Lean の環境を整える（`lake update` と `lake build` が通る状態にする） | done | 2026-08-08 完了。`lake update` → `lake exe cache get`（8639 ファイル取得）→ `lake build` が通り、`check-no-sorry.sh` も通る。mathlib の実体は `lake-manifest.json` で固定し追跡している。`import Mathlib.Data.Finset.Card` が引けることも確認した |
 | 4 | 分配多項式 | 上記 2 件の Lean 具体版と必要十分版 | todo | 完了したら 1・2 を `done` にする |
 | 5 | 有限系の自由エントロピー | 有理点での評価と素因数分解、$\Phi_L\in\Lambda$ の定義 | todo | SageMath 側に $Z_L(1/2)$ の素因数分解が既にある |
 | 6 | 有限系の自由エントロピー | $\Phi_L$ の基本性質（この tick で何を示すかは台帳へ書いてから着手する） | todo | |

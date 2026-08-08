@@ -10,8 +10,12 @@
 | --- | --- |
 | 記述（構造化テキスト） | 章「分配多項式」の定義 4 件・主張 1 件・注意 1 件。`npm run check` 全通過 |
 | SageMath 検証 | `partition-polynomial-coefficient-sum` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | **未着手**（空の名前空間のみ。`lake update` / `lake build` も未実行） |
+| Lean 具体版 | **未着手**（空の名前空間のみ。ただし環境は整っており `lake build` は通る） |
 | Lean 必要十分版 | **未着手** |
+
+Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
+mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
+詳細は [lean/README.md](lean/README.md)。
 
 書いた内容は、格子・配位・破れボンド数・多重度・分配多項式 $Z_L(x)\in\mathbb{Z}[x]$ の定義と、
 「多重度の総和は配位の総数に等しい」（$\sum_m\Omega_L(m)=2^{L^2}$）の証明である。
@@ -31,7 +35,7 @@
 ## 次回やること
 
 1. **`claim_coefficient_sum` を Lean で形式化する**（具体版・必要十分版の 2 本立て）。
-   その前に `cd lean && lake update && lake build` が通ることを確認する（mathlib 未取得）。
+   環境は整っているので、そのまま書き始めてよい。
    形式化したら `lean/scripts/check-no-sorry.sh` の `targets` 配列へ定理名を追加し、
    人手証明のブロックの `lean` フィールドにも定理名を書く。
 2. **章「有限系の自由エントロピー」を書く**。$\Phi_L=\log Z_L(q)\in\Lambda$（$q\in\mathbb{Q}_{>0}$、

@@ -38,16 +38,32 @@
 ## セットアップと検証
 
 ```sh
-# elan（Lean のツールチェイン管理）が入っていること
+# elan（Lean のツールチェイン管理）が入っていること。lake は ~/.elan/bin にあり、
+# 非対話シェルの PATH には入っていないので通しておく。
 cd lean
-lake update      # 初回のみ（mathlib4 を取得する。時間がかかる）
+lake update          # 依存の解決と取得。lake-manifest.json を作る（追跡している）
+lake exe cache get   # mathlib のビルド済み olean を取得する。**省略してはならない**
 lake build
 bash scripts/check-no-sorry.sh
 ```
 
+`lake exe cache get` を省くと mathlib を原本から building することになり、
+自動ループの 1 tick（50 分）では終わらない。取得済みの olean は `.lake/` に入り、
+`.lake/` は git 管理外である（依存の固定は `lake-manifest.json` が担う）。
+
 ## 現状
 
-**未着手。** まだ形式化した定理が 1 つも無い（`Ising2DLambda.lean` は空の名前空間だけ）。
-`lake build` も未実行なので、`lake-manifest.json` はまだ無い。
+**環境は整っている。形式化した定理はまだ 1 つも無い。**
+
+| | 状態 |
+| --- | --- |
+| `lake update` / `lake exe cache get` | 2026-08-08 実行済み（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
+| `lake build` | 通る |
+| `bash scripts/check-no-sorry.sh` | 通る（ただし検査対象の定理が 0 件なので、いまは実質的な検査をしていない） |
+| 形式化した定理 | 0 件（`Ising2DLambda.lean` は空の名前空間だけ） |
+
 最初の形式化対象は人手証明の主張「多重度の総和は配位の総数に等しい」
-（ラベル `claim_coefficient_sum`）である。
+（ラベル `claim_coefficient_sum`）である。証明が使う数え上げは
+mathlib の `Finset.card_eq_sum_card_fiberwise`（有限集合をファイバーへ類別して個数を足す）に
+対応する形をしており、これが `import Mathlib.Data.Finset.Card` で引けることは確認済みである。
+ただし具体版はこの一般論へ丸投げせず、人手証明の Step 1–5 と 1 対 1 に対応させて書くこと。
