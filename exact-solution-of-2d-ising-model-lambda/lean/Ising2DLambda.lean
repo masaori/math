@@ -60,3 +60,6 @@ import Ising2DLambda.AlgebraicEigenvalue.RowConfigOrderFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PermutationSign
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.Determinant
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.Determinant
+import Ising2DLambda.AlgebraicEigenvalue.DeterminantFromNecSuf

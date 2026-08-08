@@ -95,6 +95,13 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans
   Ising2DLambda.NecSuf.TransferMatrix.trace_matPow_eq_sum_cyclicWeight
+  Ising2DLambda.AlgebraicEigenvalue.two_le_card_movedBy
+  Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal
+  Ising2DLambda.AlgebraicEigenvalue.determinant_identity
+  Ising2DLambda.AlgebraicEigenvalue.two_le_card_movedBy_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal_from_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.two_le_card_moved
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.det_diagonal
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

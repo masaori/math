@@ -54,14 +54,14 @@ bash scripts/check-no-sorry.sh
 ## 現状
 
 章「分配多項式」・章「有限系の自由エントロピー」・章「転送行列」の全体と、
-章「固有値の代数性」の行配位の辞書式順序・置換の符号までを形式化済み。
+章「固有値の代数性」の行配位の辞書式順序・置換の符号・行列式までを形式化済み。
 どこまで進んだかの正本は `docs/tasks/auto-loop-state.md` のセクション台帳である。
 
 | | 状態 |
 | --- | --- |
 | `lake update` / `lake exe cache get` | 2026-08-08 実行済み（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
 | `lake build` | 通る |
-| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 62 件を登録済み） |
+| `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 69 件を登録済み） |
 
 | ファイル | 中身 |
 | --- | --- |
@@ -74,6 +74,7 @@ bash scripts/check-no-sorry.sh
 | `Ising2DLambda/PartitionPolynomial/CoefficientRepresentationFromNecSuf.lean` | 同上（係数表示） |
 | `Ising2DLambda/FreeEntropy/Basic.lean` | 素因数分解の指数・対数順序群 `Λ`・正の有理数の対数・有限系の自由エントロピーの定義（具体版） |
 | `Ising2DLambda/FreeEntropy/RationalExponent.lean` | 有理数の指数は表示の取り方によらない（具体版）。人手証明の Step 1–4 と 1 対 1 |
+| `Ising2DLambda/FreeEntropy/Additivity.lean` | 対数の加法性と冪の法則（具体版）。加法性は人手証明の 7 つの等号、冪の法則は帰納法の 2 段と 1 対 1 |
 | `Ising2DLambda/FreeEntropy/ValuePositive.lean` | 分配多項式の正の有理点での値は正（具体版）。人手証明の Step 1–4 と 1 対 1 |
 | `Ising2DLambda/NecSuf/FreeEntropy/RationalExponent.lean` | 必要十分版。可換群 `G` と積を和へ移す写像だけを仮定する |
 | `Ising2DLambda/NecSuf/FreeEntropy/ValuePositive.lean` | 必要十分版。狭義順序半環と、空でない有限添字集合だけを仮定する |
@@ -92,7 +93,9 @@ bash scripts/check-no-sorry.sh
 | `Ising2DLambda/AlgebraicEigenvalue/PermutationSign.lean` | 置換・転倒数・符号の定義と、符号の値・乗法性（具体版） |
 | `Ising2DLambda/NecSuf/AlgebraicEigenvalue/RowConfigOrder.lean` | 必要十分版。被覆と、値の集合から `ℕ` への単射だけを仮定する |
 | `Ising2DLambda/NecSuf/AlgebraicEigenvalue/PermutationSign.lean` | 必要十分版。有限型と判定できる二項関係、および**三分律だけ**を仮定する（推移律を使っていない） |
-| `Ising2DLambda/AlgebraicEigenvalue/*FromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出（2 件） |
+| `Ising2DLambda/AlgebraicEigenvalue/Determinant.lean` | 定数多項式を与える写像・単位行列・行列式の定義と、恒等でない置換が 2 点以上を動かすこと・対角行列の行列式（具体版） |
+| `Ising2DLambda/NecSuf/AlgebraicEigenvalue/Determinant.lean` | 必要十分版。添字の側は有限型と相等の判定、値の側は可換半環、重みには `w 1 = 1` **だけ**を仮定する（符号の乗法性を使っていない） |
+| `Ising2DLambda/AlgebraicEigenvalue/*FromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出（3 件） |
 
 必要十分版が示したのは次の 4 点である。
 

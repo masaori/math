@@ -436,3 +436,64 @@ def compose_row_permutations(L, phi, psi):
 def identity_row_permutation(L):
     """恒等置換 id_{R_L}。"""
     return {row_config_key(L, tau): tau for tau in row_configurations(L)}
+
+
+# --- 章「固有値の代数性」の続き: 行列式 ------------------------------------
+#   def_constant_polynomial / def_identity_matrix / def_determinant
+#   claim_permutation_moves_two / claim_determinant_diagonal
+
+
+def const_poly(n):
+    """def_constant_polynomial: kappa(n) は x^0 の係数が n で他が 0 の多項式。
+
+    本文が整数と定数多項式を同じ記号で書かないので、検証側でもこの写像を通す
+    （ZZ の元をそのまま ZZ[x] の元として使わない）。
+    """
+    return PolynomialRingZx([ZZ(n)])
+
+
+def identity_row_matrix(L):
+    """def_identity_matrix: I_{tau,tau'} は tau = tau' なら kappa(1)、そうでなければ kappa(0)。"""
+    keys = row_matrix_keys(L)
+    return {
+        (a, b): (const_poly(1) if a == b else const_poly(0))
+        for a in keys
+        for b in keys
+    }
+
+
+def signed_row_permutations(L):
+    """S_L の各置換とその符号の対を並べる（符号を 1 度だけ計算するため）。
+
+    置換の全列挙は row_permutations（def_row_permutation）、符号は permutation_sign
+    （def_permutation_sign）であり、どちらも新しい定義ではない。
+    """
+    pairs = ordered_pairs(L)
+    return [(phi, permutation_sign(L, phi, pairs)) for phi in row_permutations(L)]
+
+
+def determinant(L, A, signed_perms=None, key_order=None):
+    """def_determinant: det A = sum_{phi} kappa(sgn(phi)) * prod_{tau} A_{tau,phi(tau)}。
+
+    積の添字 R_L には順序を入れない（ZZ[x] の積が可換なので順序によらない）。
+    key_order は、その順序によらないことを確かめるためだけに外から与える。
+    順序 ≺ が要るのは sgn を転倒数で定める箇所だけである。
+    """
+    if signed_perms is None:
+        signed_perms = signed_row_permutations(L)
+    keys = row_matrix_keys(L) if key_order is None else key_order
+    total = const_poly(0)
+    for phi, sgn in signed_perms:
+        product = const_poly(1)
+        for key in keys:
+            product *= A[(key, row_config_key(L, phi[key]))]
+        total += const_poly(sgn) * product
+    return total
+
+
+def moved_row_configs(L, phi):
+    """claim_permutation_moves_two: M(phi) = { tau in R_L | phi(tau) != tau }。"""
+    return [
+        key for key in row_matrix_keys(L)
+        if row_config_key(L, phi[key]) != key
+    ]

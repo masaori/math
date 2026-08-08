@@ -365,54 +365,96 @@ export default defineBlocks([
         math(String.raw`y_2^2=x`),
         " を満たすとする。",
       ]),
-      list([
-        [
-          math(String.raw`x=0`),
-          " のとき。",
-          math(String.raw`y_1^2=0`),
-          " で ",
-          math(String.raw`\mathbb{R}`),
-          " は整域だから ",
-          math(String.raw`y_1=0`),
-          "。同様に ",
-          math(String.raw`y_2=0`),
-          " なので ",
-          math(String.raw`y_1=y_2`),
-          "。",
-        ],
-        [
-          math(String.raw`x>0`),
-          " のとき。",
-          math(String.raw`y_1=0`),
-          " なら ",
-          math(String.raw`x=y_1^2=0`),
-          " となって矛盾するので ",
-          math(String.raw`y_1>0`),
-          "、同様に ",
-          math(String.raw`y_2>0`),
-          "。",
-          math(String.raw`y_1^2=y_2^2`),
-          " と ",
-          ref("cosh_sinh_basic_properties"),
-          " (4)（",
-          math(String.raw`a,b\in\mathbb{R}_{>0}`),
-          " について ",
-          math(String.raw`a^2=b^2\iff a=b`),
-          "）より ",
-          math(String.raw`y_1=y_2`),
-          "。",
-        ],
+      paragraph([
+        math(String.raw`x=0`),
+        " の場合と ",
+        math(String.raw`x>0`),
+        " の場合に分ける。",
+      ]),
+      paragraph([
+        math(String.raw`x=0`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_1^2
+&= x
+&&(\because\ y_1\ \text{の仮定})\\
+&= 0
+&&(\because\ \text{いまの場合分け})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\mathbb{R}`),
+        " は整域だから ",
+        math(String.raw`y_1=0`),
+        " である。",
+        math(String.raw`y_2`),
+        " についても同じ議論で ",
+        math(String.raw`y_2=0`),
+        " なので ",
+        math(String.raw`y_1=y_2`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`x>0`),
+        " のとき。まず ",
+        math(String.raw`y_1>0`),
+        " である。実際 ",
+        math(String.raw`y_1=0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= y_1^2
+&&(\because\ y_1\ \text{の仮定})\\
+&= 0^2
+&&(\because\ \text{仮定}\ y_1=0)\\
+&= 0
+&&(\because\ 0\ \text{の冪})
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`x>0`),
+        " に矛盾する。",
+        math(String.raw`y_1\in\mathbb{R}_{\ge0}`),
+        " なので ",
+        math(String.raw`y_1>0`),
+        " である。",
+        math(String.raw`y_2`),
+        " についても同じ議論で ",
+        math(String.raw`y_2>0`),
+        " である。",
+        math(String.raw`y_1^2=x=y_2^2`),
+        " と ",
+        ref("cosh_sinh_basic_properties"),
+        " (4)（",
+        math(String.raw`a,b\in\mathbb{R}_{>0}`),
+        " について ",
+        math(String.raw`a^2=b^2\iff a=b`),
+        "）より ",
+        math(String.raw`y_1=y_2`),
+        " である。",
       ]),
       paragraph([
         "存在。",
         math(String.raw`x=0`),
         " のときは ",
         math(String.raw`y:=0`),
-        " が ",
+        " と置けば ",
         math(String.raw`y\ge 0`),
-        " かつ ",
-        math(String.raw`y^2=0=x`),
-        " を満たす。以下 ",
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y^2
+&= 0^2
+&&(\because\ y\ \text{の定め方})\\
+&= 0
+&&(\because\ 0\ \text{の冪})\\
+&= x
+&&(\because\ \text{いまの場合分け})
+\end{aligned}`),
+      paragraph([
+        "を満たす。以下 ",
         math(String.raw`x>0`),
         " とし、",
       ]),
@@ -438,15 +480,19 @@ export default defineBlocks([
         math(String.raw`s>1`),
         " であり、",
       ]),
-      displayMath(
-        String.raw`s^2 = s\cdot s > (1+x)\cdot 1 = 1+x > x`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+s^2
+&= s\cdot s
+&&(\because\ \text{2 乗の定義})\\
+&> (1+x)\cdot 1
+&&(\because\ s>1+x>0\ \text{と}\ s>1>0\text{、順序体の乗法の単調性})\\
+&= 1+x
+&&(\because\ 1\ \text{は乗法の単位元})\\
+&> x
+&&(\because\ 1>0)
+\end{aligned}`),
       paragraph([
-        "（1 つ目の不等号は ",
-        math(String.raw`s>1+x>0`),
-        " と ",
-        math(String.raw`s>1>0`),
-        " から順序体の乗法の単調性による）となり ",
+        "となり ",
         math(String.raw`s^2\le x`),
         " に矛盾する。よって ",
         math(String.raw`S`),
@@ -494,13 +540,17 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 (y+\varepsilon)^2
 &= y^2+2y\varepsilon+\varepsilon^2
-   \quad (\because \text{分配律}) \\
+&&(\because\ \text{分配律})\\
 &\le y^2+2y\varepsilon+\varepsilon
-   \quad (\because \varepsilon^2\le\varepsilon) \\
-&= y^2+(2y+1)\varepsilon \\
+&&(\because\ \varepsilon^2\le\varepsilon)\\
+&= y^2+(2y+1)\varepsilon
+&&(\because\ \text{分配律})\\
 &\le y^2+(2y+1)\cdot\frac{x-y^2}{2y+1}
-   \quad \left(\because \varepsilon\le\frac{x-y^2}{2y+1},\ 2y+1>0\right) \\
-&= y^2+(x-y^2) = x
+&&\left(\because\ \varepsilon\le\frac{x-y^2}{2y+1},\ 2y+1>0\right)\\
+&= y^2+(x-y^2)
+&&(\because\ 2y+1\ne0\ \text{による約分})\\
+&= x
+&&(\because\ \mathbb{R}\ \text{の加法の結合性と逆元})
 \end{aligned}`,
       ),
       paragraph([
@@ -526,8 +576,22 @@ export default defineBlocks([
           "。",
           math(String.raw`\delta:=\dfrac{y^2-x}{2y}\in\mathbb{R}_{>0}`),
           " とおくと ",
-          math(String.raw`\delta=\dfrac{y^2-x}{2y}<\dfrac{y^2}{2y}=\dfrac{y}{2}<y`),
-          " なので ",
+          math(String.raw`\delta>0`),
+          " である。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta
+&= \frac{y^2-x}{2y}
+&&(\because\ \delta\ \text{の定め方})\\
+&< \frac{y^2}{2y}
+&&(\because\ y^2-x<y^2\ \text{と}\ 2y>0)\\
+&= \frac{y}{2}
+&&(\because\ y\ne0\ \text{による約分})\\
+&< y
+&&(\because\ y>0)
+\end{aligned}`),
+      paragraph([
+        "なので ",
         math(String.raw`y-\delta\in\mathbb{R}_{>0}`),
         " であり、",
       ]),
@@ -535,11 +599,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 (y-\delta)^2
 &= y^2-2y\delta+\delta^2
-   \quad (\because \text{分配律}) \\
+&&(\because\ \text{分配律})\\
 &\ge y^2-2y\delta
-   \quad (\because \delta^2\ge 0) \\
+&&(\because\ \delta^2\ge 0)\\
 &= y^2-2y\cdot\frac{y^2-x}{2y}
-   = y^2-(y^2-x) = x
+&&(\because\ \delta\ \text{の定め方})\\
+&= y^2-(y^2-x)
+&&(\because\ 2y\ne0\ \text{による約分})\\
+&= x
+&&(\because\ \mathbb{R}\ \text{の加法の結合性と逆元})
 \end{aligned}`,
       ),
       paragraph([
@@ -577,6 +645,11 @@ export default defineBlocks([
         " であり、",
         math(String.raw`y\in\mathbb{R}_{\ge 0}`),
         " なので存在が示された。一意性と合わせて主張を得る。",
+      ]),
+      paragraph([
+        "引いたブロック: ",
+        ref("cosh_sinh_basic_properties"),
+        "。",
       ]),
     ],
     conversion: {

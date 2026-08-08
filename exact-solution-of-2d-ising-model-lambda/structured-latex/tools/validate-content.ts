@@ -66,6 +66,7 @@ for (const { file, blocks } of contentFiles) {
     scanForTypstMath(block, file);
     checkProjectRules(block, file);
     collectRefTargets(block, file, refs);
+    collectBlockRefsInMath(block, file, refs);
   }
 }
 
@@ -258,6 +259,25 @@ function collectStrings(nodes: readonly Node[], out: string[]): void {
     if (node.type === "math" || node.type === "displayMath") out.push(node.tex);
     if (node.type === "paragraph") collectStrings(node.children, out);
     if (node.type === "list") node.items.forEach((item) => collectStrings(item, out));
+  }
+}
+
+/**
+ * 数式の中からブロックを引く命令 `\blkref{<ラベル>}` を集める。
+ *
+ * ラベル参照ノード（`ref`）は数式の中に置けないので、式変形の根拠 `(∵ …)` からブロックを
+ * 番号で引くために `\blkref` を用意している（LaTeX 側で `\cref` に展開される）。
+ * 型では中身が文字列なので検査できない。**ここで実在するラベルかを確かめる**
+ * （確かめないと、ラベルを改名したときに参照が黙って壊れる）。
+ */
+function collectBlockRefsInMath(block: ConvertedBlock, file: string, out: RefUse[]): void {
+  if (block.kind === "heading") return;
+  const strings: string[] = [];
+  for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, strings);
+  for (const tex of strings) {
+    for (const match of tex.matchAll(/\\blkref\{([^}]*)\}/g)) {
+      out.push({ target: match[1] ?? "", blockId: block.id, file });
+    }
   }
 }
 

@@ -304,6 +304,13 @@ function renderDocument(inner: string): string {
 \\crefname{structurednote}{ノート}{ノート}
 \\crefname{section}{節}{節}
 
+% 数式の中からブロックを番号で引くための命令。
+% ラベル参照ノード（ref）は数式の中に置けないので、式変形の根拠 (∵ …) から引くために用意する。
+% 引数はブロックのラベルで、実在するかは tools/validate-content.ts が検査する。
+% \\text{...} で囲むのは、数式モードのままだと「定義」「主張」が和文フォントで組まれず
+% 無言で消えるためである（実測: xeCJK は数式モードに CJK フォントを当てない）。
+\\newcommand{\\blkref}[1]{\\text{\\cref{lab:#1}}}
+
 \\title{2次元 Ising 模型の厳密解 --- $\\Lambda$ と Fisher 零点の立場から${titleVersion}}
 \\date{}
 

@@ -6,8 +6,8 @@
  * 章「転送行列」: 行配位を定め、破れボンド数を行内・行間へ分解し、転送行列 T を定義して、
  * 配位の重みが行に沿った成分の積であること・行列の冪の成分が道に沿った積の和であること・
  * Z_L = Tr(T^L) を示す。
- * 章「固有値の代数性」: 行列式を書くために、行配位の集合の線形順序と、その上の置換の符号を用意する
- * （行列式と特性多項式そのものは未着手）。
+ * 章「固有値の代数性」: 行配位の集合の線形順序と、その上の置換の符号を用意し、行列式を
+ * 置換にわたる和として定義する（特性多項式そのものは未着手）。
  * どの章にも ℝ/ℂ は現れない。
  *
  * 文書順はこの配列の並びが正本である（README「章立ての予定」の表が読む順序の正本）。
@@ -29,8 +29,8 @@ export default defineBlocks([
   {
     id: "partition_polynomial_definition_lattice_and_configuration",
     kind: "definition",
-    title: { text: "格子と配位" },
-    labels: ["def_lattice", "def_configuration"],
+    title: { text: "格子" },
+    labels: ["def_lattice"],
     habitat: "N",
     lean: [
       "Ising2DLambda.PartitionPolynomial.Vertex",
@@ -224,6 +224,21 @@ n_{\mathrm{v}}(i,j):=L^2+L\cdot s(i)+s(j)+1`,
         math(String.raw`|E_L|=L^2+L^2=2L^2`),
         " となる。",
       ]),
+    ],
+  },
+
+
+  {
+    id: "partition_polynomial_definition_configuration",
+    kind: "definition",
+    title: { text: "配位" },
+    labels: ["def_configuration"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.PartitionPolynomial.Config",
+      "Ising2DLambda.PartitionPolynomial.card_config",
+    ],
+    statement: [
       paragraph([
         "配位とは写像 ",
         math(String.raw`\sigma:V_L\to\{+1,-1\}`),
@@ -525,11 +540,6 @@ m
         " である。",
       ]),
       paragraph([
-        "引いたブロック: ",
-        ref("def_broken_bond_count"),
-        "。",
-      ]),
-      paragraph([
         "以上の 2 つは有限集合の包含関係と写像の一意性だけからなり、実数体も複素数体も現れない。",
       ]),
     ],
@@ -578,25 +588,16 @@ m
       displayMath(String.raw`\begin{aligned}
 Z_L
 &=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
-&&(\because\ \text{分配多項式の定義})\\
+&&(\because\ \blkref{def_partition_polynomial})\\
 &=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}
-&&(\because\ \text{配位全体は破れボンド数の値ごとに類別される})\\
+&&(\because\ \blkref{claim_configuration_partition})\\
 &=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,m}
 &&(\because\ \sigma\in A_{L,m}\ \Rightarrow\ b(\sigma)=m)\\
 &=\sum_{m=0}^{2L^2}|A_{L,m}|\cdot x^{\,m}
 &&(\because\ \text{同じ元を }|A_{L,m}|\text{ 個足した})\\
 &=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}
-&&(\because\ \text{多重度の定義})
+&&(\because\ \blkref{def_multiplicity})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_partition_polynomial"),
-        "、",
-        ref("claim_configuration_partition"),
-        "、",
-        ref("def_multiplicity"),
-        "。",
-      ]),
       paragraph([
         "以上は有限和の組み替えと数え上げだけからなり、",
         math(String.raw`x`),
@@ -638,21 +639,12 @@ Z_L
       displayMath(String.raw`\begin{aligned}
 \sum_{m=0}^{2L^2}\Omega_L(m)
 &=\sum_{m=0}^{2L^2}|A_{L,m}|
-&&(\because\ \text{多重度の定義})\\
+&&(\because\ \blkref{def_multiplicity})\\
 &=|\Sigma_L|
-&&(\because\ \text{配位全体は破れボンド数の値ごとに類別される})\\
+&&(\because\ \blkref{claim_configuration_partition})\\
 &=2^{L^2}
-&&(\because\ \text{配位の定義})
+&&(\because\ \blkref{def_configuration})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_multiplicity"),
-        "、",
-        ref("claim_configuration_partition"),
-        "、",
-        ref("def_configuration"),
-        "。",
-      ]),
       paragraph([
         "以上は有限集合の元の個数の計算だけからなり、実数体も複素数体も現れない。",
       ]),
@@ -975,11 +967,11 @@ Z_L
       displayMath(String.raw`\begin{aligned}
 v_p(a)+v_p(b')
 &=v_p(ab')
-&&(\because\ \text{素因数分解の指数の加法性})\\
+&&(\because\ \blkref{def_prime_exponent})\\
 &=v_p(a'b)
 &&(\because\ ab'=a'b)\\
 &=v_p(a')+v_p(b)
-&&(\because\ \text{素因数分解の指数の加法性})
+&&(\because\ \blkref{def_prime_exponent})
 \end{aligned}`),
       paragraph([
         "であり、両辺から ",
@@ -987,11 +979,6 @@ v_p(a)+v_p(b')
         " を引いて ",
         math(String.raw`v_p(a)-v_p(b)=v_p(a')-v_p(b')`),
         " を得る。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_prime_exponent"),
-        "。",
       ]),
       paragraph([
         "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
@@ -1158,21 +1145,12 @@ v_p(a)+v_p(b')
       displayMath(String.raw`\begin{aligned}
 Z_L(q)
 &=\Bigl(\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}\Bigr)(q)
-&&(\because\ \text{分配多項式の定義})\\
+&&(\because\ \blkref{def_partition_polynomial})\\
 &=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
 &&(\because\ \text{代入は環準同型なので和と積を保つ})\\
 &\in\mathbb{Q}_{>0}
 &&(\because\ \text{正の有理数を 1 個以上足したものは正})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_partition_polynomial"),
-        "、",
-        ref("def_configuration"),
-        "、",
-        ref("def_broken_bond_count"),
-        "。",
-      ]),
       paragraph([
         "以上は有理数の四則と有限和だけからなり、実数体も複素数体も現れない。",
         "代入したのは有理数であって、指数関数の値ではない。",
@@ -1305,17 +1283,17 @@ Z_L(q)
       displayMath(String.raw`\begin{aligned}
 \bigl(\log(q_1q_2)\bigr)(p)
 &=w_p(q_1q_2)
-&&(\because\ \text{正の有理数の対数の定義})\\
+&&(\because\ \blkref{def_rational_log})\\
 &=w_p\Bigl(\frac{a_1a_2}{b_1b_2}\Bigr)
 &&(\because\ \text{有理数の積の定義})\\
 &=v_p(a_1a_2)-v_p(b_1b_2)
 &&(\because\ \text{正の有理数の対数の定義、有理数の指数は表示によらない})\\
 &=\bigl(v_p(a_1)+v_p(a_2)\bigr)-\bigl(v_p(b_1)+v_p(b_2)\bigr)
-&&(\because\ \text{素因数分解の指数の加法性})\\
+&&(\because\ \blkref{def_prime_exponent})\\
 &=\bigl(v_p(a_1)-v_p(b_1)\bigr)+\bigl(v_p(a_2)-v_p(b_2)\bigr)
 &&(\because\ \mathbb{Z}\ \text{の加法の可換性と結合性})\\
 &=w_p(q_1)+w_p(q_2)
-&&(\because\ \text{正の有理数の対数の定義})\\
+&&(\because\ \blkref{def_rational_log})\\
 &=\bigl(\log q_1+\log q_2\bigr)(p)
 &&(\because\ \Lambda\ \text{の加法は素数ごとの }\mathbb{Z}\text{ の加法})
 \end{aligned}`),
@@ -1325,17 +1303,6 @@ Z_L(q)
         " の元として ",
         math(String.raw`\log(q_1q_2)=\log q_1+\log q_2`),
         " である。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_rational_log"),
-        "、",
-        ref("claim_rational_exponent_well_defined"),
-        "、",
-        ref("def_prime_exponent"),
-        "、",
-        ref("def_log_order_group"),
-        "。",
       ]),
       paragraph([
         "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
@@ -1397,7 +1364,7 @@ Z_L(q)
 &=\bigl(\log 1\bigr)(p)
 &&(\because\ q^{0}=1)\\
 &=w_p(1)
-&&(\because\ \text{正の有理数の対数の定義})\\
+&&(\because\ \blkref{def_rational_log})\\
 &=v_p(1)-v_p(1)
 &&(\because\ 1=1/1)\\
 &=0
@@ -1419,7 +1386,7 @@ Z_L(q)
 &=\log\bigl(q^{\,k}\cdot q\bigr)
 &&(\because\ \text{冪の定義})\\
 &=\log\bigl(q^{\,k}\bigr)+\log q
-&&(\because\ \text{対数の加法性、}q^{\,k},q\in\mathbb{Q}_{>0})\\
+&&(\because\ \blkref{claim_log_additive}\text{、}q^{\,k},q\in\mathbb{Q}_{>0})\\
 &=k\,\log q+\log q
 &&(\because\ \text{帰納法の仮定})\\
 &=(k+1)\,\log q
@@ -1431,17 +1398,6 @@ Z_L(q)
         " について ",
         math(String.raw`\log(q^{\,k})=k\,\log q`),
         " が成り立つ。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("claim_log_additive"),
-        "、",
-        ref("def_log_order_group"),
-        "、",
-        ref("def_rational_log"),
-        "、",
-        ref("def_prime_exponent"),
-        "。",
       ]),
     ],
   },
@@ -1492,41 +1448,22 @@ Z_L(q)
       displayMath(String.raw`\begin{aligned}
 \Phi_L(1)
 &=\log Z_L(1)
-&&(\because\ \text{有限系の自由エントロピーの定義、}1\in\mathbb{Q}_{>0})\\
+&&(\because\ \blkref{def_finite_free_entropy}\text{、}1\in\mathbb{Q}_{>0})\\
 &=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\cdot1^{\,m}\Bigr)
 &&(\because\ \text{分配多項式の係数は多重度である、代入は環準同型})\\
 &=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\Bigr)
 &&(\because\ 1^{\,m}=1)\\
 &=\log\bigl(2^{L^2}\bigr)
-&&(\because\ \text{多重度の総和は配位の総数に等しい})\\
+&&(\because\ \blkref{claim_coefficient_sum})\\
 &=L^2\,\log 2
-&&(\because\ \text{対数の冪の法則、}2\in\mathbb{Q}_{>0},\ L^2\in\mathbb{N})\\
+&&(\because\ \blkref{claim_log_power}\text{、}2\in\mathbb{Q}_{>0},\ L^2\in\mathbb{N})\\
 &=L^2\sum_{p:\ w_p(2)\ne0}w_p(2)\,\ell_p
-&&(\because\ \text{正の有理数の対数の定義})\\
+&&(\because\ \blkref{def_rational_log})\\
 &=L^2\sum_{p:\ v_p(2)\ne0}v_p(2)\,\ell_p
 &&(\because\ w_p(2)=v_p(2)-v_p(1),\ v_p(1)=0)\\
 &=L^2\,\ell_2
 &&(\because\ 2\text{ は素数なので }v_2(2)=1,\ p\ne2\ \Rightarrow\ v_p(2)=0)
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_finite_free_entropy"),
-        "、",
-        ref("claim_value_at_rational_is_positive"),
-        "、",
-        ref("claim_coefficient_representation"),
-        "、",
-        ref("claim_coefficient_sum"),
-        "、",
-        ref("claim_log_power"),
-        "、",
-        ref("def_rational_log"),
-        "、",
-        ref("def_prime_exponent"),
-        "、",
-        ref("def_log_order_group"),
-        "。",
-      ]),
       paragraph([
         "以上は有限和の数え上げ、整数の演算、素因数分解だけからなり、実数体も複素数体も現れない。",
       ]),
@@ -1988,7 +1925,7 @@ n_{\mathrm{h}}
       displayMath(String.raw`\begin{aligned}
 B(\sigma)&:=\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}\\[2pt]
 b(\sigma)&=|B(\sigma)|
-&&(\because\ \text{破れボンド数の定義})
+&&(\because\ \blkref{def_broken_bond_count})
 \end{aligned}`),
       paragraph([
         "と置く。あわせて、各 ",
@@ -2000,22 +1937,22 @@ b(\sigma)&=|B(\sigma)|
 &=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; n_{\mathrm{h}}(i,j)\in B(\sigma)\,\bigr\}\bigr|
 &&(\because\ j\mapsto n_{\mathrm{h}}(i,j)\ \text{が}\ E_{L,\mathrm{h},i}\ \text{への全単射})\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\bigr)\,\bigr\}\bigr|
-&&(\because\ \text{辺の集合は行ごとに分割される（端点の式）})\\
+&&(\because\ \blkref{claim_edge_row_partition}\text{（端点の式）})\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}\bigr|
-&&(\because\ \text{行への制限の定義})\\
+&&(\because\ \blkref{def_row_restriction})\\
 &=b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
-&&(\because\ \text{行内破れ数の定義})
+&&(\because\ \blkref{def_intra_row_broken_count})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
 &=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; n_{\mathrm{v}}(i,j)\in B(\sigma)\,\bigr\}\bigr|
 &&(\because\ j\mapsto n_{\mathrm{v}}(i,j)\ \text{が}\ E_{L,\mathrm{v},i}\ \text{への全単射})\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j)\bigr)\,\bigr\}\bigr|
-&&(\because\ \text{辺の集合は行ごとに分割される（端点の式）})\\
+&&(\because\ \blkref{claim_edge_row_partition}\text{（端点の式）})\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)(j)\,\bigr\}\bigr|
-&&(\because\ \text{行への制限の定義})\\
+&&(\because\ \blkref{def_row_restriction})\\
 &=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
-&&(\because\ \text{行間破れ数の定義})
+&&(\because\ \blkref{def_inter_row_broken_count})
 \end{aligned}`),
       paragraph(["準備したものを使うと"]),
       displayMath(String.raw`\begin{aligned}
@@ -2026,7 +1963,7 @@ b(\sigma)
 &&(\because\ E_L=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}\ \text{は互いに素な合併})\\
 &=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
 +\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
-&&(\because\ \text{辺の集合は行ごとに分割される})\\
+&&(\because\ \blkref{claim_edge_row_partition})\\
 &=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
 +\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
 &&(\because\ \text{上の準備})
@@ -2034,21 +1971,6 @@ b(\sigma)
       paragraph([
         "を得る。互いに素な有限集合の合併の元の個数がそれぞれの個数の和であることを、",
         "2 行目と 3 行目で使っている。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_broken_bond_count"),
-        "、",
-        ref("def_lattice"),
-        "、",
-        ref("claim_edge_row_partition"),
-        "、",
-        ref("def_row_restriction"),
-        "、",
-        ref("def_intra_row_broken_count"),
-        "、",
-        ref("def_inter_row_broken_count"),
-        "。",
       ]),
       paragraph([
         "以上は有限集合の数え上げと整数の演算だけからなり、実数体も複素数体も現れない。",
@@ -2316,14 +2238,14 @@ b(\sigma)
 &=\bigl(\rho_i(\sigma)\bigr)(j)
 &&(\because\ \mathrm{rows}\ \text{の定義})\\
 &=\sigma\bigl((i,j)\bigr)
-&&(\because\ \text{行への制限の定義})
+&&(\because\ \blkref{def_row_restriction})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \Bigl(\bigl(\mathrm{rows}(\mathrm{conf}(c))\bigr)(i)\Bigr)(j)
 &=\bigl(\rho_i(\mathrm{conf}(c))\bigr)(j)
 &&(\because\ \mathrm{rows}\ \text{の定義})\\
 &=\bigl(\mathrm{conf}(c)\bigr)\bigl((i,j)\bigr)
-&&(\because\ \text{行への制限の定義})\\
+&&(\because\ \blkref{def_row_restriction})\\
 &=\bigl(c(i)\bigr)(j)
 &&(\because\ \mathrm{conf}\ \text{の定義})
 \end{aligned}`),
@@ -2338,13 +2260,6 @@ b(\sigma)
         " は ",
         math(String.raw`\mathrm{conf}`),
         " を逆写像に持ち、逆写像を持つ写像は全単射である。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_rows_map"),
-        "、",
-        ref("def_row_restriction"),
-        "。",
       ]),
       paragraph([
         "以上は写像の値の計算だけからなり、実数体も複素数体も現れない。",
@@ -2421,22 +2336,15 @@ b(\sigma)
       displayMath(String.raw`\begin{aligned}
 \prod_{i\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
 &=\prod_{i=0}^{L-1}x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
-&&(\because\ \text{転送行列の定義})\\
+&&(\because\ \blkref{def_transfer_matrix})\\
 &=x^{\,\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))\bigr)}
 &&(\because\ x^{a}x^{a'}=x^{a+a'}\ \text{を}\ L-1\ \text{回})\\
 &=x^{\,\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}(\rho_i(\sigma))
 +\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
 &&(\because\ \text{有限個の自然数の和は項ごとに分けられる})\\
 &=x^{\,b(\sigma)}
-&&(\because\ \text{破れボンド数は行内の破れと行間の破れに分かれる})
+&&(\because\ \blkref{claim_broken_bond_row_decomposition})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_transfer_matrix"),
-        "、",
-        ref("claim_broken_bond_row_decomposition"),
-        "。",
-      ]),
       paragraph([
         "以上は自然数の和と ",
         math(String.raw`\mathbb{Z}[x]`),
@@ -2638,13 +2546,6 @@ b(\sigma)
 &&(\because\ W_{L,1}(\tau,\tau'')=\{p\})
 \end{aligned}`),
       paragraph([
-        "引いたブロック: ",
-        ref("def_matrix_over_row_configs"),
-        "、",
-        ref("def_row_walk"),
-        "。",
-      ]),
-      paragraph([
         "帰納法の仮定。ある整数 ",
         math(String.raw`k\ge1`),
         " について、任意の ",
@@ -2766,11 +2667,6 @@ w_A(q)
 &&(\because\ \text{道に沿った成分の積の定義})
 \end{aligned}`),
       paragraph([
-        "引いたブロック: ",
-        ref("def_row_walk"),
-        "。",
-      ]),
-      paragraph([
         math(String.raw`k+1`),
         " の場合。",
       ]),
@@ -2787,13 +2683,6 @@ w_A(q)
 &=\sum_{q\in W_{L,k+1}(\tau,\tau''')}w_A(q)
 &&(\because\ \Phi\ \text{が全単射で、対応する項が等しい})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_matrix_over_row_configs"),
-        "、",
-        ref("def_row_walk"),
-        "。",
-      ]),
       paragraph([
         math(String.raw`\tau,\tau'''`),
         " は任意だったので ",
@@ -2976,13 +2865,6 @@ w_A(q)
         " である。",
       ]),
       paragraph([
-        "引いたブロック: ",
-        ref("def_walk_of_family"),
-        "、",
-        ref("def_lattice"),
-        "。",
-      ]),
-      paragraph([
         math(String.raw`\Theta\circ\Xi`),
         " が恒等写像であること。閉じた道 ",
         math(String.raw`p\in W^{\mathrm{cl}}_{L}`),
@@ -3051,15 +2933,6 @@ w_A(q)
         " は任意だったので、写像として ",
         math(String.raw`\Theta(\Xi(p))=p`),
         " である。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_closed_walk"),
-        "、",
-        ref("def_walk_of_family"),
-        "、",
-        ref("def_lattice"),
-        "。",
       ]),
       paragraph([
         "結論。以上より ",
@@ -3185,33 +3058,10 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
 &=x^{\,b(\sigma)}
 &&(\because\ \text{配位の重みは行に沿った成分の積である})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_row_walk"),
-        "、",
-        ref("def_walk_of_family"),
-        "、",
-        ref("def_rows_map"),
-        "、",
-        ref("claim_transfer_weight_product"),
-        "、",
-        ref("def_lattice"),
-        "。",
-        "第 4 の等号で使った全単射性は、各剰余類がちょうど 1 つの代表を ",
-        math(String.raw`\{0,1,\dots,L-1\}`),
-        " の中に持つこと（",
-        ref("def_lattice"),
-        "。除法の原理）である。",
-        "積の添字は第 3 の等号までは整数 ",
-        math(String.raw`i`),
-        "、第 4 の等号からは剰余類 ",
-        math(String.raw`y`),
-        " であり、両者に同じ記号を使っていない。",
-      ]),
       displayMath(String.raw`\begin{aligned}
 Z_L
 &=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
-&&(\because\ \text{分配多項式の定義})\\
+&&(\because\ \blkref{def_partition_polynomial})\\
 &=\sum_{\sigma\in\Sigma_L}w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
 &&(\because\ \text{準備（族から作った閉じた道の重み）})\\
 &=\sum_{c\in C_L}w_T\bigl(\Theta(c)\bigr)
@@ -3225,29 +3075,6 @@ Z_L
 &=\operatorname{Tr}\bigl(T^{L}\bigr)
 &&(\because\ \text{トレースの定義})
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_matrix_over_row_configs"),
-        "、",
-        ref("claim_matrix_pow_entry"),
-        "、",
-        ref("claim_closed_walk_bijection"),
-        "、",
-        ref("claim_rows_bijection"),
-        "、",
-        ref("def_partition_polynomial"),
-        "。",
-        ref("claim_matrix_pow_entry"),
-        " は ",
-        math(String.raw`A=T`),
-        "、",
-        math(String.raw`k=L`),
-        "、",
-        math(String.raw`\tau''=\tau`),
-        " として各 ",
-        math(String.raw`\tau\in R_L`),
-        " に用いている。",
-      ]),
       paragraph([
         "以上は有限集合の間の 1 対 1 対応と ",
         math(String.raw`\mathbb{Z}[x]`),
@@ -3502,11 +3329,6 @@ Z_L
         " は成り立たない。",
       ]),
       paragraph([
-        "引いたブロック: ",
-        ref("def_row_config_order"),
-        "。",
-      ]),
-      paragraph([
         "推移律の証明にはもう 1 つ準備が要る。準備の第三として、",
         math(String.raw`\tau,\tau''\in R_L`),
         " と ",
@@ -3661,13 +3483,6 @@ Z_L
         "と自然数の大小の推移律から従う。よって準備の第三により ",
         math(String.raw`\tau\prec\tau''`),
         " である。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_row_config_order"),
-        "、",
-        ref("def_row_configuration"),
-        "。",
       ]),
       paragraph([
         "以上は有限集合の元の比較と自然数の大小だけからなり、実数体も複素数体も現れない。",
@@ -3864,15 +3679,6 @@ Z_L
 &=1
 &&(\because\ \text{0 乗は}\ 1)
 \end{aligned}`),
-      paragraph([
-        "引いたブロック: ",
-        ref("def_permutation_sign"),
-        "、",
-        ref("def_inversion_count"),
-        "、",
-        ref("claim_row_config_order_linear"),
-        "。",
-      ]),
     ],
   },
 
@@ -4114,24 +3920,328 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 \end{aligned}`),
       paragraph(["を得る。"]),
       paragraph([
-        "引いたブロック: ",
-        ref("def_permutation_sign"),
-        "、",
-        ref("def_inversion_count"),
-        "、",
-        ref("def_row_permutation"),
-        "、",
-        ref("claim_row_config_order_linear"),
-        "、",
-        ref("claim_permutation_sign_values"),
-        "。",
-      ]),
-      paragraph([
         "以上で使ったのは、",
         math(String.raw`\prec`),
         " の三分律、置換が単射であること、有限集合の数え上げ、そして整数の積だけである。",
         ref("claim_row_config_order_linear"),
         " の推移律は一度も使っていない。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_determinant",
+    kind: "definition",
+    title: { text: "定数多項式を与える写像、単位行列、そして行列式" },
+    labels: ["def_constant_polynomial", "def_identity_matrix", "def_determinant"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.constPoly",
+      "Ising2DLambda.AlgebraicEigenvalue.identityRowMatrix",
+      "Ising2DLambda.AlgebraicEigenvalue.determinant",
+    ],
+    verification: ["sagemath/check/determinant"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " の行列式を、",
+        ref("def_permutation_sign"),
+        " の符号を係数とする置換にわたる和として定める。",
+        "その前に、整数を成分として書くための写像と単位行列を用意する。",
+      ]),
+      paragraph([
+        "第一に、整数 ",
+        math(String.raw`n\in\mathbb{Z}`),
+        " に対して定数多項式を与える写像 ",
+        math(String.raw`\kappa:\mathbb{Z}\to\mathbb{Z}[x]`),
+        " を、",
+        math(String.raw`\kappa(n)`),
+        " は ",
+        math(String.raw`x^{0}`),
+        " の係数が ",
+        math(String.raw`n`),
+        " で他の係数がすべて ",
+        math(String.raw`0`),
+        " である多項式、として定める。",
+        math(String.raw`\kappa`),
+        " は和と積を保ち、",
+        math(String.raw`\kappa(0)`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の零元、",
+        math(String.raw`\kappa(1)`),
+        " は単位元である。",
+        "整数を ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元として扱う経路はこの写像だけとし、整数と定数多項式を同じ記号で書くことはしない",
+        "（どちらの集合の中で計算しているかを式に残すため）。",
+      ]),
+      paragraph([
+        "第二に、単位行列 ",
+        math(String.raw`I\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " を",
+      ]),
+      displayMath(String.raw`I_{\tau,\tau'}:=
+\begin{cases}
+\kappa(1) & (\tau=\tau'\ \text{のとき})\\
+\kappa(0) & (\tau\ne\tau'\ \text{のとき})
+\end{cases}
+\qquad(\tau,\tau'\in R_L)`),
+      paragraph([
+        "で定める。",
+      ]),
+      paragraph([
+        "第三に、行列式 ",
+        math(String.raw`\det A\in\mathbb{Z}[x]`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\det A:=\sum_{\varphi\in\mathfrak{S}_L}\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{\tau\in R_L}A_{\tau,\varphi(\tau)}`,
+      ),
+      paragraph([
+        "で定める。右辺が ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元として確定することを見る。",
+        ref("def_row_permutation"),
+        " の ",
+        math(String.raw`\mathfrak{S}_L`),
+        " は有限集合であり ",
+        math(String.raw`R_L`),
+        " も有限集合なので、和も積も有限個の項からなる。",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の積は可換かつ結合的なので、",
+        math(String.raw`\prod_{\tau\in R_L}`),
+        " は因子を並べる順序によらず定まる",
+        "（すなわちこの積を書くのに ",
+        ref("def_row_config_order"),
+        " の順序 ",
+        math(String.raw`\prec`),
+        " は要らない。",
+        math(String.raw`\prec`),
+        " が要るのは符号 ",
+        math(String.raw`\mathrm{sgn}(\varphi)`),
+        " を転倒数で定める箇所だけである）。",
+      ]),
+      paragraph([
+        "以上に現れるのは有限集合の上の和と積、整数、および整係数多項式だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_permutation_moves_two",
+    kind: "claim",
+    title: { text: "恒等写像でない置換は少なくとも 2 つの行配位を動かす" },
+    labels: ["claim_permutation_moves_two"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.two_le_card_movedBy",
+      "Ising2DLambda.AlgebraicEigenvalue.two_le_card_movedBy_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.two_le_card_moved",
+    ],
+    verification: ["sagemath/check/determinant"],
+    statement: [
+      paragraph([
+        ref("def_row_permutation"),
+        " の置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " が ",
+        math(String.raw`\varphi\ne\mathrm{id}_{R_L}`),
+        " を満たすとき、",
+        math(String.raw`\varphi`),
+        " が動かす行配位の集合",
+      ]),
+      displayMath(
+        String.raw`M(\varphi):=\bigl\{\,\tau\in R_L \;\bigm|\; \varphi(\tau)\ne\tau\,\bigr\}`,
+      ),
+      paragraph([
+        "について ",
+        math(String.raw`|M(\varphi)|\ge2`),
+        " が成り立つ。左辺は有限集合の元の個数なので ",
+        math(String.raw`\mathbb{N}`),
+        " の元であり、実数体は現れない。",
+      ]),
+      paragraph([
+        "この主張は、次のセクションで特性多項式の次数を数えるときに使う。",
+        "恒等置換の項だけが ",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`|R_L|`),
+        " 個ぶん含み、他の項は 2 個以上少ない、という形で効く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\varphi\ne\mathrm{id}_{R_L}`),
+        " なので、",
+        math(String.raw`\varphi(\tau_1)\ne\tau_1`),
+        " となる ",
+        math(String.raw`\tau_1\in R_L`),
+        " が取れる。",
+        math(String.raw`\tau_2:=\varphi(\tau_1)`),
+        " と置く。",
+      ]),
+      paragraph([
+        "第一に ",
+        math(String.raw`\tau_1\ne\tau_2`),
+        " である。これは ",
+        math(String.raw`\tau_2=\varphi(\tau_1)\ne\tau_1`),
+        " が ",
+        math(String.raw`\tau_1`),
+        " の取り方そのものだからである。",
+      ]),
+      paragraph([
+        "第二に ",
+        math(String.raw`\varphi(\tau_2)\ne\tau_2`),
+        " である。仮に ",
+        math(String.raw`\varphi(\tau_2)=\tau_2`),
+        " が成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi\bigl(\varphi(\tau_1)\bigr)
+&=\varphi(\tau_2)
+&&(\because\ \tau_2=\varphi(\tau_1))\\
+&=\tau_2
+&&(\because\ \text{仮定})\\
+&=\varphi(\tau_1)
+&&(\because\ \tau_2=\varphi(\tau_1))
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`\varphi`),
+        " が単射であることから ",
+        math(String.raw`\varphi(\tau_1)=\tau_1`),
+        " が出る。これは ",
+        math(String.raw`\tau_1`),
+        " の取り方に反する。したがって ",
+        math(String.raw`\varphi(\tau_2)\ne\tau_2`),
+        " である。",
+      ]),
+      paragraph([
+        "以上より ",
+        math(String.raw`\tau_1\in M(\varphi)`),
+        " と ",
+        math(String.raw`\tau_2\in M(\varphi)`),
+        " がともに成り立ち、この 2 つは相異なる。",
+        "相異なる 2 元を含む有限集合の元の個数は 2 以上なので ",
+        math(String.raw`|M(\varphi)|\ge2`),
+        " である。",
+      ]),
+      paragraph([
+        "使ったのは、置換が単射であることと有限集合の数え上げだけである。",
+        ref("def_row_config_order"),
+        " の順序も、行配位であることも、格子の形も使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_determinant_diagonal",
+    kind: "claim",
+    title: { text: "対角行列の行列式は対角成分の積である" },
+    labels: ["claim_determinant_diagonal"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal",
+      "Ising2DLambda.AlgebraicEigenvalue.determinant_identity",
+      "Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal_from_necSuf",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.det_diagonal",
+    ],
+    verification: ["sagemath/check/determinant"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " の行列 ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " が、相異なる任意の ",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " について ",
+        math(String.raw`A_{\tau,\tau'}=\kappa(0)`),
+        " を満たすとする。このとき",
+      ]),
+      displayMath(String.raw`\det A=\prod_{\tau\in R_L}A_{\tau,\tau}`),
+      paragraph([
+        "が成り立つ。とくに ",
+        ref("def_identity_matrix"),
+        " の単位行列について ",
+        math(String.raw`\det I=\kappa(1)`),
+        " である。いずれも ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の中の等式であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、恒等写像でない置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        " の項が ",
+        math(String.raw`\kappa(0)`),
+        " になることを見る。",
+        math(String.raw`\varphi\ne\mathrm{id}_{R_L}`),
+        " なので ",
+        math(String.raw`\varphi(\tau_1)\ne\tau_1`),
+        " となる ",
+        math(String.raw`\tau_1\in R_L`),
+        " が取れて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{\tau\in R_L}A_{\tau,\varphi(\tau)}
+&=\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot A_{\tau_1,\varphi(\tau_1)}\cdot\prod_{\tau\in R_L\setminus\{\tau_1\}}A_{\tau,\varphi(\tau)}
+&&(\because\ \text{有限積から 1 つの因子を括り出す})\\
+&=\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\kappa(0)\cdot\prod_{\tau\in R_L\setminus\{\tau_1\}}A_{\tau,\varphi(\tau)}
+&&(\because\ \varphi(\tau_1)\ne\tau_1\ \text{と仮定})\\
+&=\kappa(0)
+&&(\because\ \mathbb{Z}[x]\ \text{の零元を掛けると零元})
+\end{aligned}`),
+      paragraph([
+        "である。これを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\det A
+&=\sum_{\varphi\in\mathfrak{S}_L}\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{\tau\in R_L}A_{\tau,\varphi(\tau)}
+&&(\because\ \text{行列式の定義})\\
+&=\kappa\bigl(\mathrm{sgn}(\mathrm{id}_{R_L})\bigr)\cdot\prod_{\tau\in R_L}A_{\tau,\mathrm{id}_{R_L}(\tau)}
+&&(\because\ \text{恒等写像でない置換の項は}\ \kappa(0)\ \text{であり、零元は和に寄与しない})\\
+&=\kappa(1)\cdot\prod_{\tau\in R_L}A_{\tau,\mathrm{id}_{R_L}(\tau)}
+&&(\because\ \mathrm{sgn}(\mathrm{id}_{R_L})=1)\\
+&=\kappa(1)\cdot\prod_{\tau\in R_L}A_{\tau,\tau}
+&&(\because\ \mathrm{id}_{R_L}(\tau)=\tau)\\
+&=\prod_{\tau\in R_L}A_{\tau,\tau}
+&&(\because\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})
+\end{aligned}`),
+      paragraph([
+        "を得る。",
+      ]),
+      paragraph([
+        "単位行列 ",
+        math(String.raw`I`),
+        " は仮定を満たすので、いま示したことが使えて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\det I
+&=\prod_{\tau\in R_L}I_{\tau,\tau}
+&&(\because\ \text{いま示した等式})\\
+&=\prod_{\tau\in R_L}\kappa(1)
+&&(\because\ \text{単位行列の定義})\\
+&=\kappa(1)
+&&(\because\ \text{単位元の有限積は単位元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "使ったのは、",
+        math(String.raw`\mathbb{Z}[x]`),
+        " が可換環であること（零元を掛けると零元、単位元を掛けても変わらない、有限和と有限積が定まる）と、",
+        "恒等写像の符号が ",
+        math(String.raw`1`),
+        " であることだけである。",
+        "転倒数の作り方も、",
+        ref("claim_permutation_sign_mul"),
+        " の乗法性も使っていない。",
       ]),
     ],
   },
@@ -4160,13 +4270,21 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
         ],
         [
           todo("未着手"),
-          "「固有値の代数性」の続き: 行列式、そして特性多項式が ",
+          "「固有値の代数性」の続き: 特性多項式が ",
           math(String.raw`\mathbb{Z}[x][\lambda]`),
-          " に属すること。そこから固有値の代数性を出し、円分体上で対角化する。",
-          "行列式を書くために要る添字集合の線形順序（",
+          " のモニックな ",
+          math(String.raw`2^{L}`),
+          " 次の元であること。そこから固有値の代数性を出し、円分体上で対角化する。",
+          "添字集合の線形順序（",
           ref("claim_row_config_order_linear"),
-          "）と、置換の符号（",
+          "）、置換の符号（",
           ref("claim_permutation_sign_mul"),
+          "）、行列式の定義（",
+          ref("def_determinant"),
+          "）と、次数を数えるのに使う 2 つの主張（",
+          ref("claim_permutation_moves_two"),
+          "、",
+          ref("claim_determinant_diagonal"),
           "）までは上で済んでいる。",
         ],
         [

@@ -15,6 +15,10 @@ const KatexMath = ({ tex, display }: { tex: string; display: boolean }): ReactEl
     displayMode: display,
     throwOnError: false,
     errorColor: '#cc0000',
+    // `\blkref{<ラベル>}` は数式の中からブロックを引くための命令で、出版物では `\cref` へ
+    // 展開されて番号（「定義 1.3」など）になる。KaTeX は `\cref` を知らないので、
+    // プレビューではラベル名をそのまま見せる（未定義命令として赤字になるのを避ける）。
+    macros: { '\\blkref': '\\text{[#1]}' },
   })
   return (
     <span

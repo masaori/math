@@ -6,15 +6,15 @@
 
 章「分配多項式」（定義 4 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 11 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」の入口（定義 2 件・主張 3 件。行配位の辞書式順序と置換の符号）が、
+および章「固有値の代数性」の入口（定義 3 件・主張 5 件。行配位の辞書式順序・置換の符号・行列式）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 20 件・主張 17 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` を実行済み（$L=1,2,3$ で成立、厳密計算） |
-| Lean 具体版 | 定義 20 件と主張 17 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 62 件を登録）が通る |
-| Lean 必要十分版 | 主張 15 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 21 件・主張 19 件・定理 1 件・注意 1 件。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` を実行済み（$L=1,2,3$ で成立、厳密計算） |
+| Lean 具体版 | 定義 21 件と主張 19 件と定理 1 件。`lake build` と `check-no-sorry.sh`（定理 69 件を登録）が通る |
+| Lean 必要十分版 | 主張 17 件と定理 1 件について作成済み（$\Phi_L(1)=L^2\ell_2$ と辺の行ごとの分割には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -91,6 +91,19 @@ $\mathrm{sgn}(\varphi)=(-1)^{\mathrm{inv}(\varphi)}\in\mathbb{Z}$ を定義し�
 - 符号は合成について乗法的である（$\mathrm{sgn}(\varphi\circ\psi)=\mathrm{sgn}(\varphi)\mathrm{sgn}(\psi)$）。
   必要十分版が示したのは、この証明が三分律しか使っておらず、**推移律を使っていない**ことである。
 
+さらに、整数から定数多項式を与える写像 $\kappa:\mathbb{Z}\to\mathbb{Z}[x]$、単位行列 $I$、そして行列式
+$\det A=\sum_{\varphi\in\mathfrak{S}_L}\kappa(\mathrm{sgn}(\varphi))\prod_{\tau\in R_L}A_{\tau,\varphi(\tau)}$
+を定義し、次の 2 つを示した。$\kappa$ を明示的に置いたのは、整数と定数多項式を同じ記号で書かないためである。
+積 $\prod_{\tau\in R_L}$ に添字の順序は要らない（$\mathbb{Z}[x]$ の積が可換だから）。
+すなわち順序 $\prec$ が要るのは符号を転倒数で定める箇所だけである。
+
+- 恒等写像でない置換は少なくとも 2 つの行配位を動かす（$|M(\varphi)|\ge2$）。
+- 対角行列の行列式は対角成分の積である（$\det A=\prod_\tau A_{\tau,\tau}$）。とくに $\det I=\kappa(1)$。
+  必要十分版が示したのは、この証明が値の側に可換半環しか要求せず（引き算を一度も使っていない）、
+  重みには $w(\mathrm{id})=1$ しか要求しないこと、すなわち**符号の乗法性を使っていない**ことである。
+
+この 2 つは、次のセクションで特性多項式の次数を数えるための道具である。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **30 分に 1 回の自動ループ**で進む。手順の正本は
@@ -104,9 +117,9 @@ $\mathrm{sgn}(\varphi)=(-1)^{\mathrm{inv}(\varphi)}\in\mathbb{Z}$ を定義し�
 
 ## 次回やること
 
-1. **行列式の定義と、特性多項式が $\mathbb{Z}[x][\lambda]$ に属すること**（章「固有値の代数性」の続き）。
-   行列式を書くのに要る 2 つの道具（行配位の辞書式順序と、転倒数で定める置換の符号）は済んでいる。
-   台帳の todo の先頭。
+1. **特性多項式の定義と、それが $\mathbb{Z}[x][\lambda]$ のモニックな $2^L$ 次の元であること**
+   （章「固有値の代数性」の続き）。必要な道具（行列式の定義、対角行列の行列式、
+   恒等でない置換が 2 点以上を動かすこと）は済んでいる。台帳の todo の先頭。
 
 ## 未解決の設計問題
 
