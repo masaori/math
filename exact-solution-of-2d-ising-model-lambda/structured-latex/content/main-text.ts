@@ -2792,16 +2792,14 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         math(String.raw`k`),
         " についての帰納法で示す。主張は ",
         math(String.raw`\tau,\tau''`),
-        " についての全称命題の形で帰納法を回す（帰納法の仮定を、後で別の組 ",
+        " についての全称命題の形で回す（帰納法の仮定を、後で別の組 ",
         math(String.raw`(\tau,\tau'')`),
         " に対して使うため）。",
       ]),
       paragraph([
-        "Step 1（",
+        "出発点（",
         math(String.raw`k=1`),
         " の場合）。",
-        math(String.raw`\tau,\tau''\in R_L`),
-        " を任意に取る。",
         math(String.raw`W_{L,1}(\tau,\tau'')`),
         " の元 ",
         math(String.raw`p`),
@@ -2811,31 +2809,34 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         math(String.raw`p(0)=\tau`),
         " と ",
         math(String.raw`p(1)=\tau''`),
-        " を満たすものであり、この 2 つの値で写像が決まる。",
-        "したがって ",
-        math(String.raw`W_{L,1}(\tau,\tau'')`),
-        " はちょうど 1 つの元 ",
+        " を満たすものであり、この 2 つの値で写像が決まるので、",
+        math(String.raw`W_{L,1}(\tau,\tau'')=\{p\}`),
+        " である。この ",
         math(String.raw`p`),
-        " をもつ。その道の重みは、",
-        ref("def_row_walk"),
-        " により因子が 1 個の積なので",
+        " について",
       ]),
-      displayMath(
-        String.raw`w_A(p)=\prod_{i=0}^{0}A_{p(i),\,p(i+1)}=A_{p(0),\,p(1)}=A_{\tau,\tau''}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A^{1}\bigr)_{\tau,\tau''}
+&=A_{\tau,\tau''}
+&&(\because\ \text{行列の冪の定義 }A^{1}=A)\\
+&=A_{p(0),\,p(1)}
+&&(\because\ p(0)=\tau,\ p(1)=\tau'')\\
+&=\prod_{i=0}^{0}A_{p(i),\,p(i+1)}
+&&(\because\ \text{因子が }1\text{ 個の積})\\
+&=w_A(p)
+&&(\because\ \text{道に沿った成分の積の定義})\\
+&=\sum_{p'\in W_{L,1}(\tau,\tau'')}w_A(p')
+&&(\because\ W_{L,1}(\tau,\tau'')=\{p\})
+\end{aligned}`),
       paragraph([
-        "である。ゆえに右辺は ",
-        math(String.raw`A_{\tau,\tau''}`),
-        " に等しい。一方 ",
+        "引いたブロック: ",
         ref("def_matrix_over_row_configs"),
-        " の冪の定義により ",
-        math(String.raw`A^{1}=A`),
-        " なので、左辺も ",
-        math(String.raw`A_{\tau,\tau''}`),
-        " である。",
+        "、",
+        ref("def_row_walk"),
+        "。",
       ]),
       paragraph([
-        "Step 2（帰納法の仮定）。ある整数 ",
+        "帰納法の仮定。ある整数 ",
         math(String.raw`k\ge1`),
         " について、任意の ",
         math(String.raw`\tau,\tau''\in R_L`),
@@ -2852,39 +2853,7 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " の場合を示す。",
       ]),
       paragraph([
-        "Step 3（冪と積の定義を使う）。",
-        ref("def_matrix_over_row_configs"),
-        " の冪の定義により ",
-        math(String.raw`A^{k+1}=A^{k}A`),
-        " であり、同じ定義の積により",
-      ]),
-      displayMath(
-        String.raw`\bigl(A^{k+1}\bigr)_{\tau,\tau'''}
-=\sum_{\tau''\in R_L}\bigl(A^{k}\bigr)_{\tau,\tau''}\,A_{\tau'',\tau'''}`,
-      ),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 4（帰納法の仮定を代入する）。Step 2 を各 ",
-        math(String.raw`\tau''\in R_L`),
-        " について使うと",
-      ]),
-      displayMath(
-        String.raw`\sum_{\tau''\in R_L}\bigl(A^{k}\bigr)_{\tau,\tau''}\,A_{\tau'',\tau'''}
-=\sum_{\tau''\in R_L}\Bigl(\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\Bigr)A_{\tau'',\tau'''}`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "Step 5（分配則で括弧を外す）。有限和と ",
-        math(String.raw`\mathbb{Z}[x]`),
-        " の 1 つの元との積は項ごとの積の和に等しいので",
-      ]),
-      displayMath(
-        String.raw`\sum_{\tau''\in R_L}\Bigl(\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\Bigr)A_{\tau'',\tau'''}
-=\sum_{\tau''\in R_L}\ \sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\,A_{\tau'',\tau'''}`,
-      ),
-      paragraph(["である。"]),
-      paragraph([
-        "Step 6（道の延長が 1 対 1 対応であること）。組の集合",
+        "道の延長が 1 対 1 対応であること（写像を構成するので一続きの式にはしない）。組の集合",
       ]),
       displayMath(
         String.raw`P:=\bigl\{\,(\tau'',p) \;\bigm|\; \tau''\in R_L,\ p\in W_{L,k}(\tau,\tau'')\,\bigr\}`,
@@ -2970,75 +2939,62 @@ E_{L,\mathrm{v},i}:=\bigl\{\,L^2+iL+j+1 \;\bigm|\; j\in\{0,1,\dots,L-1\}\,\bigr\
         " は全単射である。",
       ]),
       paragraph([
-        "Step 7（対応する項が等しいこと）。",
+        "対応する項が等しいこと。",
         math(String.raw`(\tau'',p)\in P`),
         " と ",
         math(String.raw`q=\Phi(\tau'',p)`),
-        " について、",
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w_A(q)
+&=\prod_{i=0}^{k}A_{q(i),\,q(i+1)}
+&&(\because\ \text{道に沿った成分の積の定義})\\
+&=\Bigl(\prod_{i=0}^{k-1}A_{q(i),\,q(i+1)}\Bigr)A_{q(k),\,q(k+1)}
+&&(\because\ \text{因子が }k+1\text{ 個あるうちの }i=k\text{ の項を分けた})\\
+&=\Bigl(\prod_{i=0}^{k-1}A_{p(i),\,p(i+1)}\Bigr)A_{\tau'',\tau'''}
+&&(\because\ 0\le i\le k\ \text{で}\ q(i)=p(i),\ q(k)=p(k)=\tau'',\ q(k+1)=\tau''')\\
+&=w_A(p)\,A_{\tau'',\tau'''}
+&&(\because\ \text{道に沿った成分の積の定義})
+\end{aligned}`),
+      paragraph([
+        "引いたブロック: ",
         ref("def_row_walk"),
-        " の定義により",
+        "。",
       ]),
-      displayMath(
-        String.raw`w_A(q)=\prod_{i=0}^{k}A_{q(i),\,q(i+1)}
-=\Bigl(\prod_{i=0}^{k-1}A_{q(i),\,q(i+1)}\Bigr)A_{q(k),\,q(k+1)}`,
-      ),
       paragraph([
-        "である（最後の因子を分けた。因子が ",
         math(String.raw`k+1`),
-        " 個あるうちの ",
-        math(String.raw`i=k`),
-        " の項である）。",
-        math(String.raw`0\le i\le k`),
-        " では ",
-        math(String.raw`q(i)=p(i)`),
-        " なので括弧の中は ",
-        math(String.raw`w_A(p)`),
-        " に等しく、",
-        math(String.raw`q(k)=p(k)=\tau''`),
-        " と ",
-        math(String.raw`q(k+1)=\tau'''`),
-        " なので",
+        " の場合。",
       ]),
-      displayMath(String.raw`w_A(q)=w_A(p)\,A_{\tau'',\tau'''}`),
-      paragraph(["である。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A^{k+1}\bigr)_{\tau,\tau'''}
+&=\sum_{\tau''\in R_L}\bigl(A^{k}\bigr)_{\tau,\tau''}\,A_{\tau'',\tau'''}
+&&(\because\ \text{行列の冪の定義 }A^{k+1}=A^{k}A\text{ と行列の積の定義})\\
+&=\sum_{\tau''\in R_L}\Bigl(\sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\Bigr)A_{\tau'',\tau'''}
+&&(\because\ \text{帰納法の仮定を各 }\tau''\in R_L\text{ について使った})\\
+&=\sum_{\tau''\in R_L}\ \sum_{p\in W_{L,k}(\tau,\tau'')}w_A(p)\,A_{\tau'',\tau'''}
+&&(\because\ \text{有限和と 1 つの元との積は項ごとの積の和})\\
+&=\sum_{(\tau'',p)\in P}w_A(p)\,A_{\tau'',\tau'''}
+&&(\because\ \text{二重和を組の集合 }P\text{ の上の 1 つの和として読んだ})\\
+&=\sum_{q\in W_{L,k+1}(\tau,\tau''')}w_A(q)
+&&(\because\ \Phi\ \text{が全単射で、対応する項が等しい})
+\end{aligned}`),
       paragraph([
-        "Step 8（和を書き換える）。Step 5 の右辺は、組の集合 ",
-        math(String.raw`P`),
-        " の上の和",
+        "引いたブロック: ",
+        ref("def_matrix_over_row_configs"),
+        "、",
+        ref("def_row_walk"),
+        "。",
       ]),
-      displayMath(
-        String.raw`\sum_{(\tau'',p)\in P}w_A(p)\,A_{\tau'',\tau'''}`,
-      ),
       paragraph([
-        "と同じものである（有限個の互いに素な集合にわたる二重和を、その合併の上の 1 つの和として読み替えた。",
-        "組の第 1 成分ごとに分ければもとの二重和に戻る）。Step 6 の全単射 ",
-        math(String.raw`\Phi`),
-        " に沿って添字を取り替え、Step 7 で各項を書き換えると",
-      ]),
-      displayMath(
-        String.raw`\sum_{(\tau'',p)\in P}w_A(p)\,A_{\tau'',\tau'''}
-=\sum_{q\in W_{L,k+1}(\tau,\tau''')}w_A(q)`,
-      ),
-      paragraph([
-        "を得る。Step 3 から Step 8 をつなぐと",
-      ]),
-      displayMath(
-        String.raw`\bigl(A^{k+1}\bigr)_{\tau,\tau'''}=\sum_{q\in W_{L,k+1}(\tau,\tau''')}w_A(q)`,
-      ),
-      paragraph([
-        "である。",
         math(String.raw`\tau,\tau'''`),
         " は任意だったので ",
         math(String.raw`k+1`),
-        " の場合が示された。",
-      ]),
-      paragraph([
-        "Step 9（結論）。Step 1 と Step 2–Step 8 より、",
+        " の場合が示され、",
         math(String.raw`k\ge1`),
         " についての帰納法で主張が成り立つ。",
       ]),
       paragraph([
-        "以上の各ステップは有限個の ",
+        "以上は有限個の ",
         math(String.raw`\mathbb{Z}[x]`),
         " の元の和と積、および有限集合の間の 1 対 1 対応だけからなり、実数体も複素数体も現れない。",
       ]),
