@@ -38,7 +38,7 @@ export default defineBlocks([
     title: {
       text: "（極座標表現）の乗法群",
     },
-    labels: [],
+    labels: ["multiplicative_group_of_polar_representation"],
     statement: [
       paragraph(["（極座標表現）は二項演算 ", math(String.raw`\cdot`), " についてモノイドをなす。"]),
       displayMath(

@@ -196,6 +196,7 @@ export const ALL_LABELS = [
   "max_eigenvalue_of_V_plus_simple",
   "max_eigenvector_in_even_sector",
   "multiplicative_group_of_cc",
+  "multiplicative_group_of_polar_representation",
   "multiply_by_minus_one",
   "negative_number_to_sqrt",
   "nesting_of_commutator_of_H_and_Z",

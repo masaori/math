@@ -713,7 +713,31 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
     statement: [
       paragraph([
         math(String.raw`z_1, z_2 \in \mathbb{C}`),
-        " について同様の設定のもと、",
+        " について、",
+        math(String.raw`r_1, r_2 \in \mathbb{R}_{\geq 0}`),
+        "、",
+        math(String.raw`\theta_1, \theta_2 \in \mathbb{R}`),
+        " を用いて ",
+        math(String.raw`\phi_{\mathrm{polar}}(z_i) = [(r_i,\theta_i)]_{\sim}`),
+        " とし、",
+        math(String.raw`\arg^{[0,2\pi)}(z_i) = \theta_i - 2n_i\pi`),
+        "（",
+        math(String.raw`n_i \in \mathbb{Z}`),
+        "）とする。さらに ",
+        math(String.raw`r_1 \neq 0`),
+        " かつ ",
+        math(String.raw`r_2 \neq 0`),
+        " とする（",
+        ref("def_abs_arg"),
+        " と ",
+        ref("first_and_second_projections"),
+        " により ",
+        math(String.raw`r_i = |z_i|`),
+        " なので、これは ",
+        math(String.raw`z_1 \neq 0`),
+        " かつ ",
+        math(String.raw`z_2 \neq 0`),
+        " と同じことである）。このとき",
       ]),
       displayMath(
         String.raw`\arg^{[0,2\pi)}\!\left(\frac{z_1}{z_2}\right) =
@@ -722,19 +746,242 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
 \arg^{[0,2\pi)}(z_1) - \arg^{[0,2\pi)}(z_2) + 2\pi & (-2\pi < \theta_1-\theta_2-2(n_1-n_2)\pi < 0)
 \end{cases}`,
       ),
-    ],
-    proof: [
-      paragraph(["積の場合と同様の計算による。"]),
-      displayMath(
-        String.raw`\arg^{[0,2\pi)}\!\left(\frac{z_1}{z_2}\right)
-= s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)`,
-      ),
       paragraph([
-        math(String.raw`-2\pi < \theta_1-\theta_2-2(n_1-n_2)\pi < 2\pi`),
-        " を場合分けして結論を得る。",
+        "が成り立つ。",
+        math(String.raw`r_2 \neq 0`),
+        " は商 ",
+        math(String.raw`z_1/z_2`),
+        " が定まるために要る（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+        math(String.raw`r_1 \neq 0`),
+        " も落とせない。たとえば ",
+        math(String.raw`z_1 = 0`),
+        "、",
+        math(String.raw`z_2 = (0,1)`),
+        " では左辺が ",
+        math(String.raw`0`),
+        "、右辺が ",
+        math(String.raw`-\pi/2+2\pi`),
+        " になる。",
       ]),
     ],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        "証明の中で使うものを 4 つ先に置く。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は積を保つ。実際 ",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " は全単射なモノイド準同型であり、かつ ",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " なので、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " の逆写像である。全単射なモノイド準同型の逆写像はモノイド準同型なので",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z z')=\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z')`,
+      ),
+      paragraph([
+        "が任意の ",
+        math(String.raw`z,z'\in\mathbb{C}`),
+        " について成り立つ。",
+      ]),
+      paragraph([
+        "第二に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は逆元を逆元へ写す。",
+        math(String.raw`r_2\neq0`),
+        " すなわち ",
+        math(String.raw`z_2\neq 0`),
+        " なので ",
+        math(String.raw`z_2^{-1}\in\mathbb{C}`),
+        " が定まり（",
+        ref("multiplicative_group_of_cc"),
+        "）、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}(z_2)\cdot\phi_{\mathrm{polar}}(z_2^{-1})
+&= \phi_{\mathrm{polar}}(z_2\,z_2^{-1})
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{polar}}(1_{\mathbb{C}})
+&&(\because\ z_2^{-1}\ \text{が}\ z_2\ \text{の逆元であること})\\
+&= [(1,0)]_{\sim}
+&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`\phi_{\mathrm{polar}}(z_2^{-1})`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{polar}}(z_2)=[(r_2,\theta_2)]_{\sim}`),
+        " の逆元であり、",
+        ref("multiplicative_group_of_polar_representation"),
+        " の逆元の形（",
+        math(String.raw`r_2\neq0`),
+        " の場合）により",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z_2^{-1})=[(1/r_2,-\theta_2)]_{\sim}`,
+      ),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第三に、",
+        math(String.raw`r_1\neq0`),
+        " かつ ",
+        math(String.raw`r_2\neq0`),
+        " なので ",
+        math(String.raw`r_1/r_2\neq0`),
+        " である（実数の商は、分子が ",
+        math(String.raw`0`),
+        " でなければ ",
+        math(String.raw`0`),
+        " でない）。",
+      ]),
+      paragraph([
+        "第四に、",
+        math(String.raw`\arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi`),
+        " と ",
+        math(String.raw`\arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi`),
+        " はどちらも ",
+        math(String.raw`[0,2\pi)`),
+        " の元なので（",
+        ref("def_abs_arg"),
+        "）、その差について",
+      ]),
+      displayMath(
+        String.raw`-2\pi < \theta_1-\theta_2-2(n_1-n_2)\pi < 2\pi`,
+      ),
+      paragraph([
+        "が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\arg^{[0,2\pi)}\!\left(\frac{z_1}{z_2}\right)
+&= \arg^{[0,2\pi)}(z_1 z_2^{-1})
+&&(\because\ \mathbb{C}\text{の乗法群 の}\ z^{-1}=1/z)\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2^{-1}))\right)
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2^{-1}))\right)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(1/r_2,-\theta_2)]_{\sim})\right)
+&&(\because\ r_1,\theta_1\ \text{の取り方と、上で見た}\ \phi_{\mathrm{polar}}(z_2^{-1})\ \text{の形})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1\cdot(1/r_2),\ \theta_1+(-\theta_2))]_{\sim})\right)
+&&(\because\ \text{極座標表現の演算})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1/r_2,\ \theta_1-\theta_2)]_{\sim})\right)
+&&(\because\ \mathbb{R}\ \text{の商と差の定義})\\
+&= s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ r_1/r_2\neq0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("def_abs_arg"),
+        "、",
+        ref("operations_on_polar_representation"),
+        "、",
+        ref("first_and_second_projections"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "ここから先は ",
+        math(String.raw`\theta_1-\theta_2-2(n_1-n_2)\pi`),
+        " の値で 2 つに分かれる。第四の準備によりこの値は ",
+        math(String.raw`(-2\pi,2\pi)`),
+        " にあるので、この 2 つで尽きている。",
+      ]),
+      paragraph([
+        math(String.raw`0 \leq \theta_1-\theta_2-2(n_1-n_2)\pi < 2\pi`),
+        " のとき。この不等式は ",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数が ",
+        math(String.raw`n_1-n_2`),
+        " であることを言っているので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&= \theta_1-\theta_2-2(n_1-n_2)\pi
+&&(\because\ \text{角度表現の切断 の定義と、この場合の不等式})\\
+&= (\theta_1-2n_1\pi)-(\theta_2-2n_2\pi)
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= \arg^{[0,2\pi)}(z_1)-(\theta_2-2n_2\pi)
+&&(\because\ \arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi\ \text{という仮定})\\
+&= \arg^{[0,2\pi)}(z_1)-\arg^{[0,2\pi)}(z_2)
+&&(\because\ \arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi\ \text{という仮定})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+      paragraph([
+        math(String.raw`-2\pi < \theta_1-\theta_2-2(n_1-n_2)\pi < 0`),
+        " のとき。各辺に ",
+        math(String.raw`2\pi`),
+        " を足せば ",
+        math(String.raw`0 < \theta_1-\theta_2-2(n_1-n_2-1)\pi < 2\pi`),
+        " なので、",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数は ",
+        math(String.raw`n_1-n_2-1`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&= \theta_1-\theta_2-2(n_1-n_2-1)\pi
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&= (\theta_1-\theta_2-2(n_1-n_2)\pi)+2\pi
+&&(\because\ 2(n_1-n_2-1)\pi=2(n_1-n_2)\pi-2\pi)\\
+&= (\theta_1-2n_1\pi)-(\theta_2-2n_2\pi)+2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= \arg^{[0,2\pi)}(z_1)-(\theta_2-2n_2\pi)+2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi\ \text{という仮定})\\
+&= \arg^{[0,2\pi)}(z_1)-\arg^{[0,2\pi)}(z_2)+2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi\ \text{という仮定})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "原文は証明が「積の場合と同様の計算による」の一文と、途中の式 1 本と、" +
+          "「場合分けして結論を得る」の一文だけで、計算の中身が書かれていなかった。" +
+          "積の場合と同じ形の一続きの鎖へ書き下し、各行の末尾へ (∵ …) を付けた。" +
+          "原文が暗黙に使っていた段を 4 つ明示した。z_1/z_2 = z_1 z_2^{-1} と読み替える段、" +
+          "φ_polar が逆元を逆元へ写すこと（積を保つことと単位元を保つことから出る）、" +
+          "極座標表現の逆元の形 [(1/r_2, -θ_2)]、そして差 θ_1-θ_2-2(n_1-n_2)π が " +
+          "(-2π, 2π) に入ること（原文は範囲を根拠なく書いていた。arg が [0,2π) の元であることから出る）。" +
+          "段は増えており、減った段は無い。" +
+          "あわせて、原文の「同様の設定のもと」を書き下し、r_1 ≠ 0 かつ r_2 ≠ 0 を仮定として明示した。" +
+          "r_2 ≠ 0 は商が定まるために要り、r_1 ≠ 0 は pr_2 が r = 0 のとき [0] を返すために要る。" +
+          "z_1 = 0、z_2 = (0,1) が反例であることを statement に書いた（積の場合と同じ穴である）。" +
+          "引用のために「（極座標表現）の乗法群」へラベル multiplicative_group_of_polar_representation を付けた" +
+          "（内容は変えていない）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
