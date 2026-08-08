@@ -527,7 +527,21 @@ x^2+y^2
         math(String.raw`\arg^{[0,2\pi)}(z_i) = \theta_i - 2n_i\pi`),
         "（",
         math(String.raw`n_i \in \mathbb{Z}`),
-        "）とすると、",
+        "）とする。さらに ",
+        math(String.raw`r_1 \neq 0`),
+        " かつ ",
+        math(String.raw`r_2 \neq 0`),
+        " とする（",
+        ref("def_abs_arg"),
+        " と ",
+        ref("first_and_second_projections"),
+        " により ",
+        math(String.raw`r_i = |z_i|`),
+        " なので、これは ",
+        math(String.raw`z_1 \neq 0`),
+        " かつ ",
+        math(String.raw`z_2 \neq 0`),
+        " と同じことである）。このとき",
       ]),
       displayMath(
         String.raw`\arg^{[0,2\pi)}(z_1 z_2) =
@@ -536,38 +550,159 @@ x^2+y^2
 \arg^{[0,2\pi)}(z_1) + \arg^{[0,2\pi)}(z_2) - 2\pi & (2\pi \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 4\pi)
 \end{cases}`,
       ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r_1 \neq 0`),
+        " かつ ",
+        math(String.raw`r_2 \neq 0`),
+        " を落とすと主張は成り立たない。たとえば ",
+        math(String.raw`z_1 = 0`),
+        "、",
+        math(String.raw`z_2 = (0,1)`),
+        " では左辺が ",
+        math(String.raw`0`),
+        "、右辺が ",
+        math(String.raw`\pi/2`),
+        " になる。",
+      ]),
     ],
     proof: [
+      paragraph([
+        "証明の中で使うものを 2 つ先に置く。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は積を保つ。実際 ",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " は全単射なモノイド準同型であり、かつ ",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " なので、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " の逆写像である。全単射なモノイド準同型の逆写像はモノイド準同型なので",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z_1 z_2)=\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2)`,
+      ),
+      paragraph([
+        "である。第二に、",
+        math(String.raw`r_1 \neq 0`),
+        " かつ ",
+        math(String.raw`r_2 \neq 0`),
+        " なので ",
+        math(String.raw`r_1 r_2 \neq 0`),
+        " である（実数の積は、因子がどちらも ",
+        math(String.raw`0`),
+        " でなければ ",
+        math(String.raw`0`),
+        " でない）。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z_1 z_2)
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2))\right) \\
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\phi_{\mathrm{polar}}(z_2))\right) \\
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim})\right) \\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2))\right)
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2))\right)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim})\right)
+&&(\because\ r_i,\theta_i\ \text{の取り方})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim})\right)
+&&(\because\ \text{極座標表現の演算})\\
 &= s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ r_1 r_2\neq0)
 \end{aligned}`,
       ),
-      paragraph([math(String.raw`0 \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 4\pi`), " を場合分け："]),
-      paragraph(["a. ",
+      paragraph([
+        "である。",
+        ref("def_abs_arg"),
+        "、",
+        ref("operations_on_polar_representation"),
+        "、",
+        ref("first_and_second_projections"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "ここから先は ",
+        math(String.raw`\theta_1+\theta_2-2(n_1+n_2)\pi`),
+        " の値で 2 つに分かれる。",
+      ]),
+      paragraph([
         math(String.raw`0 \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 2\pi`),
-        " のとき:",
+        " のとき。この不等式は ",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数が ",
+        math(String.raw`n_1+n_2`),
+        " であることを言っているので、",
       ]),
       displayMath(
-        String.raw`s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
-= \theta_1+\theta_2-2(n_1+n_2)\pi
-= \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)`,
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&= \theta_1+\theta_2-2(n_1+n_2)\pi
+&&(\because\ \text{角度表現の切断 の定義と、この場合の不等式})\\
+&= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= \arg^{[0,2\pi)}(z_1)+(\theta_2-2n_2\pi)
+&&(\because\ \arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi\ \text{という仮定})\\
+&= \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
+&&(\because\ \arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi\ \text{という仮定})
+\end{aligned}`,
       ),
-      paragraph(["b. ",
+      paragraph([
+        "である。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+      paragraph([
         math(String.raw`2\pi \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 4\pi`),
-        " のとき:",
+        " のとき。両辺から ",
+        math(String.raw`2\pi`),
+        " を引けば ",
+        math(String.raw`0 \leq \theta_1+\theta_2-2(n_1+n_2+1)\pi < 2\pi`),
+        " なので、",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数は ",
+        math(String.raw`n_1+n_2+1`),
+        " である。したがって",
       ]),
       displayMath(
-        String.raw`s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
-= \theta_1+\theta_2-2(n_1+n_2+1)\pi
-= \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi`,
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&= \theta_1+\theta_2-2(n_1+n_2+1)\pi
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&= (\theta_1+\theta_2-2(n_1+n_2)\pi)-2\pi
+&&(\because\ 2(n_1+n_2+1)\pi=2(n_1+n_2)\pi+2\pi)\\
+&= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)-2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= \arg^{[0,2\pi)}(z_1)+(\theta_2-2n_2\pi)-2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_1)=\theta_1-2n_1\pi\ \text{という仮定})\\
+&= \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi
+&&(\because\ \arg^{[0,2\pi)}(z_2)=\theta_2-2n_2\pi\ \text{という仮定})
+\end{aligned}`,
       ),
+      paragraph([
+        "である。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形を一続きにし、根拠を行末の (∵ …) へ移すときに、原文が暗黙に使っていた " +
+          "r_1 ≠ 0 かつ r_2 ≠ 0（すなわち z_1 ≠ 0 かつ z_2 ≠ 0）を仮定として明示した。" +
+          "第2座標 pr_2 は r = 0 のとき [0] を返すので、この仮定が無いと " +
+          "pr_2([(r_1 r_2, θ_1+θ_2)]) = [θ_1+θ_2] の段が成り立たない。" +
+          "実際 z_1 = 0、z_2 = (0,1) は反例であり、その旨を statement に書いた。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_033_claim_arg_of_quotient",
