@@ -391,6 +391,12 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_sum
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_pi
   Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamilyAll_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_orbitPreserving
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.self_apply_mem_orbit
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_orbitPreserving_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitBij_eq_id_or_shift
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_id_or_apply_of_fixed_or_apply
+  Ising2DLambda.AlgebraicEigenvalue.orbitBij_eq_id_or_shift_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

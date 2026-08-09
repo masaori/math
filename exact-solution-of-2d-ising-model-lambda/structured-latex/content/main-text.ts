@@ -12802,6 +12802,11 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     title: { text: "巡回シフトは軌道を保つ置換である" },
     labels: ["claim_shift_orbit_preserving"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShift_orbitPreserving",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.self_apply_mem_orbit",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShift_orbitPreserving_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-bijection-id-or-shift"],
     statement: [
       paragraph([
@@ -12900,6 +12905,11 @@ S(\tau)
     },
     labels: ["claim_orbit_bijection_id_or_shift"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitBij_eq_id_or_shift",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_id_or_apply_of_fixed_or_apply",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitBij_eq_id_or_shift_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-bijection-id-or-shift"],
     statement: [
       paragraph([
