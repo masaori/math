@@ -20,6 +20,12 @@
 軌道についてだけ要求する（`OrbitFamilyBijective`）。貼り合わせが触るのは O(τ) の成分だけなので、
 軌道でない Finset における値は結果に一切効かない。
 
+同じ 𝔄_L に、あとのセクション（`OrbitFamilySum.lean`）が別の型 `OrbitPermFamily` を置いている。
+二重の対応ではなく役割が違う。このファイルの `OrbitFamily` + `OrbitFamilyBijective` が対応するのは
+貼り合わせの 3 主張（上表）であり、`OrbitPermFamily` が対応するのは和の添字としての 𝔄_L である
+（軌道でない Finset における値が自由だと、同じ組に見えるものが無数にあって和の添字にできない）。
+両者の橋渡しは `OrbitFamilySum.lean` の `extendFamily` にある。
+
 mathlib の `Equiv.Perm.subtypePerm` と群作用の軌道の一般論は引いていない
 （引くと「各行配位の属する軌道の上の写像を当てる」という人手証明の定め方が
 既製の構成へ置き換わる）。使ったのは `Equiv.ofBijective`（自分で示した全単射性を

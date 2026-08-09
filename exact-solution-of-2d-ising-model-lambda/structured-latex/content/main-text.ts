@@ -8834,6 +8834,7 @@ O(\tau)
     habitat: "N",
     lean: [
       "Ising2DLambda.AlgebraicEigenvalue.OrbitPermFamily",
+      "Ising2DLambda.AlgebraicEigenvalue.OrbitFamily",
       "Ising2DLambda.AlgebraicEigenvalue.OrbitFamilyBijective",
     ],
     verification: ["sagemath/check/orbit-gluing"],
