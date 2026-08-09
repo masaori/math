@@ -73,9 +73,18 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
 # このリポジトリでは人間の対話セッションが同じ作業ツリーを使うので、
 # 編集の途中に tick が割り込むと互いの変更を踏む。ロックは tick どうしの衝突しか防げない。
 cd "$REPO_DIR"
+LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 if [ -n "$(git status --porcelain)" ]; then
-  log "SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
-  exit 0
+  # 汚れている理由は 2 つある。人間が作業中か、前の tick が失敗して残骸を置いたか。
+  # 前者なら踏んではいけないので見送る。**後者で見送ると、残骸が片付くまで
+  # 以後のすべての tick が見送られ、ループが永久に止まる**（実測: 使用量の上限で
+  # 異常終了した tick の残骸がそれに当たった）。目印の有無で区別する。
+  if [ -f "$LEFTOVER_MARK" ]; then
+    log "前の tick の残骸がある。見送らずに拾いに行く（$(cat "$LEFTOVER_MARK")）"
+  else
+    log "SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
+    exit 0
+  fi
 fi
 
 PROMPT=$(cat <<'EOF'
@@ -110,18 +119,28 @@ timeout "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions "$PROMP
 status=$?
 set -e
 
+record_leftover() {  # 失敗した tick が残したものを目印へ書く（次の tick が拾う）
+  local reason="$1"
+  local files
+  files="$(git -C "$REPO_DIR" status --porcelain | wc -l | tr -d ' ')"
+  if [ "$files" != "0" ]; then
+    printf '%s に %s で終了し、%s ファイルが未コミットで残った\n' \
+      "$(date '+%Y-%m-%d %H:%M:%S')" "$reason" "$files" > "$LEFTOVER_MARK"
+    log "    未コミットの成果が ${files} ファイル残っている（目印を置いた。次の tick が拾う）"
+  else
+    rm -f "$LEFTOVER_MARK"
+  fi
+}
+
 if [ "$status" -eq 124 ]; then
   log "=== tick 打ち切り（${TICK_TIMEOUT_SECONDS} 秒を超えた）"
-  # 打ち切られた tick は push 前で終わっている可能性が高い。作業ツリーに残った成果を
-  # 記録しておく（誰も見ないまま埋もれるのを防ぐ。監査ジョブがこのログを読む）。
-  leftover="$(git -C "$REPO_DIR" status --porcelain | wc -l | tr -d ' ')"
-  if [ "$leftover" != "0" ]; then
-    log "    未コミットの成果が ${leftover} ファイル残っている（次の tick は見送るので、人手で拾うか監査の通知を待つ）"
-  fi
+  record_leftover "打ち切り"
 elif [ "$status" -ne 0 ]; then
   log "=== tick 異常終了 (exit $status)"
+  record_leftover "異常終了 (exit $status)"
 else
   log "=== tick 正常終了"
+  rm -f "$LEFTOVER_MARK"
 fi
 
 exit "$status"
