@@ -246,6 +246,11 @@ export default defineBlocks([
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-08-09: 式変形の書き方の統一。Step 0〜3 という番号での区切りを、" +
+          "それぞれの中間目標の名前（多重添字の和を各サイトごとの和の積へ直すこと・" +
+          "(1) の証明・(2) の証明・(3) の証明）へ変えた（リポジトリの規約「番号や記号で管理しない」）。" +
+          "(2) は式のあとに置かれていた日本語の説明（積が 1 になる条件、ν の単射性）を、" +
+          "3 段の一続きの鎖の各行末の (∵ …) へ移した。段は増えており、減った段は無い。",
         "原文（Typst）に対応ブロックは無い。原文および旧構造化テキストは ⊗ を抽象テンソル積の記号として" +
           "定義せずに使っていたため、README のゴール設定（M 個の 2×2 行列の積は具体的な 2^M × 2^M の" +
           "複素行列として専用記号で定義する）に従い、成分の式によるクロネッカー積 ⊠ を本文に置いた。" +
@@ -304,7 +309,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "Step 0: 多重添字についての和と、各サイトごとの和の入れ替え。",
+        "多重添字についての和を、各サイトごとの和の積へ直すこと。",
         math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
         " と、各 ",
         math(String.raw`k\in\{1,\dots,M\}`),
@@ -347,7 +352,7 @@ export default defineBlocks([
 \end{aligned}`,
       ),
       paragraph([
-        "Step 1: (1)。",
+        "(1) の証明。",
         math(String.raw`I=(i_1,\dots,i_M),\ L=(l_1,\dots,l_M)\in\mathcal{I}_M`),
         " を任意に取る。行列の積の定義と、",
         ref("def_kronecker"),
@@ -372,7 +377,7 @@ export default defineBlocks([
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(B_k)_{t_kl_k}\right)
 \quad (\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(B_k)_{tl_k}\right)
-\quad (\because \text{Step 0 を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
+\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kB_k)_{i_kl_k}
 \quad (\because \text{行列の積の定義}) \\
 &= \left((A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)\right)_{\nu(I),\nu(L)}
@@ -384,7 +389,9 @@ export default defineBlocks([
         " は全単射だから、これで両辺のすべての成分が一致することが示された。",
       ]),
       paragraph([
-        "Step 2: (2)。",
+        "(2) の証明。",
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
+        " を任意に取る。単位行列の成分は ",
         math(String.raw`\left(I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{ij}=\delta_{ij}`),
         "（",
         math(String.raw`i=j`),
@@ -392,36 +399,25 @@ export default defineBlocks([
         math(String.raw`1`),
         "、そうでなければ ",
         math(String.raw`0`),
-        "）であるから、",
+        "）である。",
       ]),
       displayMath(
-        String.raw`\left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{\nu(I),\nu(J)}
-= \prod_{k=1}^{M}\delta_{i_kj_k}
-= \begin{cases}1 & (I=J)\\ 0 & (I\neq J)\end{cases}`,
+        String.raw`\begin{aligned}
+\left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{\nu(I),\nu(J)}
+&= \prod_{k=1}^{M}\delta_{i_kj_k}
+\quad (\because \boxtimes \text{ の定義と単位行列の成分}) \\
+&= \begin{cases}1 & (I=J)\\ 0 & (I\neq J)\end{cases}
+\quad (\because \text{積が } 1 \text{ になるのは全ての } k \text{ で } i_k=j_k \text{、すなわち } I=J \text{ のときに限り、そうでなければ因子に } 0 \text{ が現れる}) \\
+&= \left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)_{\nu(I),\nu(J)}
+\quad (\because \nu \text{ は単射なので } I=J \iff \nu(I)=\nu(J) \text{、および単位行列の成分})
+\end{aligned}`,
       ),
       paragraph([
-        "（積が ",
-        math(String.raw`1`),
-        " になるのは全 ",
-        math(String.raw`k`),
-        " で ",
-        math(String.raw`i_k=j_k`),
-        " のとき、すなわち ",
-        math(String.raw`I=J`),
-        " のときに限り、そうでなければ因子に ",
-        math(String.raw`0`),
-        " が現れる）。",
         math(String.raw`\nu`),
-        " は単射だから ",
-        math(String.raw`I=J \iff \nu(I)=\nu(J)`),
-        " であり、右辺は ",
-        math(String.raw`2^M`),
-        " 次の単位行列の ",
-        math(String.raw`(\nu(I),\nu(J))`),
-        " 成分に等しい。",
+        " は全単射だから、これで両辺のすべての成分が一致することが示された。",
       ]),
       paragraph([
-        "Step 3: (3)。Step 1 と同じ計算を、第 2 の因子を数ベクトルに置き換えて行う。",
+        "(3) の証明。(1) と同じ計算を、第 2 の因子を数ベクトルに置き換えて行う。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -432,7 +428,7 @@ export default defineBlocks([
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
 \quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(v_k)_{t}\right)
-\quad (\because \text{Step 0}) \\
+\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段}) \\
 &= \prod_{k=1}^{M}(A_kv_k)_{i_k}
 = \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
 \end{aligned}`,
