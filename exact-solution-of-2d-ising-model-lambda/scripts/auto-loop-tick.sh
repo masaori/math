@@ -115,7 +115,9 @@ EOF
 log "=== tick 開始"
 
 set +e
-timeout "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions "$PROMPT" >> "$LOG_FILE" 2>&1
+# -k 60: SIGTERM の 60 秒後に SIGKILL を送る。付けないと、SIGTERM を無視したプロセスが
+# 居座ってロックが残り、以後の tick が「まだ走っている」で見送られ続ける。
+timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions "$PROMPT" >> "$LOG_FILE" 2>&1
 status=$?
 set -e
 
