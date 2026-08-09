@@ -5005,7 +5005,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
     title: { text: "不定元 t 自身が定める元" },
     labels: ["def_indeterminate_element"],
     habitat: "Z",
-    lean: ["Ising2DLambda.AlgebraicEigenvalue.indeterminate"],
+    lean: ["Polynomial.X"],
     verification: ["sagemath/check/characteristic-polynomial"],
     statement: [
       paragraph([
@@ -6288,7 +6288,7 @@ T_{S(\tau),S(\tau')}
     habitat: "N",
     lean: [
       "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_apply",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.translationIterate_apply",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterRight_add_apply",
       "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_apply_from_necSuf",
     ],
     verification: ["sagemath/check/shift-matrix-order"],
@@ -6395,7 +6395,7 @@ T_{S(\tau),S(\tau')}
     habitat: "N",
     lean: [
       "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_period",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.translationIterate_period",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterRight_add_period",
       "Ising2DLambda.AlgebraicEigenvalue.columnTranslationIterate_period_from_necSuf",
     ],
     verification: ["sagemath/check/shift-matrix-order"],
@@ -8718,7 +8718,8 @@ O(\tau)
     habitat: "N",
     lean: [
       "Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_restriction_eq",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.apply_eq_of_restriction_eq",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_agree_on_cover",
       "Ising2DLambda.AlgebraicEigenvalue.eq_of_orbitRestriction_eq_from_necSuf",
     ],
     verification: ["sagemath/check/orbit-restriction"],
@@ -9689,7 +9690,7 @@ O(\tau)
     habitat: "N",
     lean: [
       "Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_eq_two_mul",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_crossInversions_eq_two_mul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_crossInv_eq_two_mul",
       "Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_eq_two_mul_from_necSuf",
     ],
     verification: ["sagemath/check/cross-orbit-inversions"],
@@ -10141,8 +10142,9 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     labels: ["claim_orbit_inner_inversion_pairs"],
     habitat: "N",
     lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_filter",
       "Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_inner_inversion_pairs",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.inner_eq_filter_crossPairs",
       "Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs_from_necSuf",
     ],
     verification: ["sagemath/check/inversion-orbit-decomposition"],

@@ -14,7 +14,7 @@
   Inv^≠(φ)                                    crossOrbitInversionPairs
   Inv^=(φ)（証明の中だけの記号）               sameOrbitInversionPairs
   A(O)                                        innerInversionPairs
-  軌道の中の転倒対 = 制限の転倒対（集合の等号） card_innerInversionPairs の第 1 段
+  軌道の中の転倒対 = 制限の転倒対（集合の等号） innerInversionPairs_eq_filter
   |A(O)| = inv_O(φ↾_O)                        card_innerInversionPairs
   inv(φ) = Σ_O inv_O(φ↾_O) + |Inv^≠(φ)|       inversionCount_orbit_decomposition
 
@@ -111,9 +111,27 @@ lemma mem_inversionPairs {p : RowConfig L × RowConfig L} :
     p ∈ inversionPairs L φ ↔ rowConfigLess L p.1 p.2 ∧ rowConfigLess L (φ p.2) (φ p.1) := by
   simp [inversionPairs, Finset.mem_filter, mem_orderedPairs]
 
-/-- 人手証明の主張「1 つの軌道の中の転倒対の個数は、制限の転倒数である」。
+/-- 人手証明の主張「1 つの軌道の中の転倒対の個数は、制限の転倒数である」の第 1 の等式。
 
-人手証明どおり、まず**集合の等号**を示し、個数はそこから取る。 -/
+人手証明が示しているのは**集合の等号**であり、個数はそこから取る。したがって集合の等号を
+（証明の中の補題ではなく）主張として置く。人手証明の式変形の 4 段
+（Inv の定義 → P_L の定義 → O ⊂ R_L → F(O,O) の定義）に対応する。
+
+この等号に `hφ`（軌道を保つこと）は要らない。人手証明が「`φ` が軌道を保つことは
+`φ↾_O` が定まるためだけに要る」と書いていることに対応する。 -/
+theorem innerInversionPairs_eq_filter (L : ℕ) [NeZero L] (φ : Equiv.Perm (RowConfig L))
+    (O : Finset (RowConfig L)) :
+    innerInversionPairs L φ O
+      = (crossOrderedPairs L O O).filter fun p => rowConfigLess L (φ p.2) (φ p.1) := by
+  classical
+  ext p
+  simp only [innerInversionPairs, Finset.mem_filter, mem_inversionPairs,
+    mem_crossOrderedPairs]
+  tauto
+
+/-- 人手証明の主張「1 つの軌道の中の転倒対の個数は、制限の転倒数である」の第 2 の等式。
+
+人手証明どおり、集合の等号（`innerInversionPairs_eq_filter`）の両辺の個数を取る。 -/
 theorem card_innerInversionPairs (hφ : OrbitPreserving L φ) {O : Finset (RowConfig L)}
     (hO : O ∈ rowShiftOrbitSet L) :
     (innerInversionPairs L φ O).card
@@ -123,14 +141,7 @@ theorem card_innerInversionPairs (hφ : OrbitPreserving L φ) {O : Finset (RowCo
   have hval : orbitInversionCount L O (orbitRestrictionAmbient hφ hO)
       = orbitInversionCount L O φ :=
     orbitInversionCount_congr fun τ hτ => orbitRestrictionAmbient_eq hφ hO hτ
-  -- 人手証明の式変形（Inv の定義 → P_L の定義 → O ⊂ R_L → F(O,O) の定義）。集合の等号である。
-  have hset : innerInversionPairs L φ O
-      = (crossOrderedPairs L O O).filter fun p => rowConfigLess L (φ p.2) (φ p.1) := by
-    ext p
-    simp only [innerInversionPairs, Finset.mem_filter, mem_inversionPairs,
-      mem_crossOrderedPairs]
-    tauto
-  rw [hval, orbitInversionCount, ← hset]
+  rw [hval, orbitInversionCount, ← innerInversionPairs_eq_filter L φ O]
 
 /-- 人手証明の Step 1。 -/
 theorem card_same_add_card_cross (L : ℕ) [NeZero L] (φ : Equiv.Perm (RowConfig L)) :

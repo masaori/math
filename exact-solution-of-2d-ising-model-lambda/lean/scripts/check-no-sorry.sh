@@ -283,6 +283,7 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.inversionCount_eq_card_inversionPairs
   Ising2DLambda.AlgebraicEigenvalue.orbitInversionCount_congr
   Ising2DLambda.AlgebraicEigenvalue.orbitRestrictionAmbient_eq
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_filter
   Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs
   Ising2DLambda.AlgebraicEigenvalue.card_same_add_card_cross
   Ising2DLambda.AlgebraicEigenvalue.sameOrbitInversionPairs_eq_biUnion
