@@ -12797,6 +12797,381 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "algebraic_eigenvalue_claim_shift_orbit_preserving",
+    kind: "claim",
+    title: { text: "巡回シフトは軌道を保つ置換である" },
+    labels: ["claim_shift_orbit_preserving"],
+    habitat: "N",
+    verification: ["sagemath/check/orbit-bijection-id-or-shift"],
+    statement: [
+      paragraph([
+        ref("def_row_config_shift"),
+        " の巡回シフト ",
+        math(String.raw`S`),
+        " は ",
+        math(String.raw`S\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " を満たす（",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        ref("def_orbit_preserving_permutation"),
+        "）。したがって任意の ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " について制限 ",
+        math(String.raw`S\!\restriction_{O}`),
+        "（",
+        ref("def_orbit_restriction"),
+        "）が定まり、",
+        math(String.raw`S\!\restriction_{O}\in\mathfrak{B}_{O}`),
+        " である（",
+        math(String.raw`\mathfrak{B}_{O}`),
+        " は ",
+        ref("def_orbit_bijection_set"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`S`),
+        " は ",
+        math(String.raw`R_L`),
+        " から ",
+        math(String.raw`R_L`),
+        " への全単射なので（",
+        ref("claim_row_config_shift_bijective"),
+        "）",
+        math(String.raw`S\in\mathfrak{S}_L`),
+        " である（",
+        ref("def_row_permutation"),
+        "）。",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S(\tau)
+&=S\bigl(S^{[0]}(\tau)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})\\
+&=S^{[1]}(\tau)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]}\ \text{の}\ k=0\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`S(\tau)\in O(\tau)`),
+        " である（",
+        ref("def_row_config_orbit"),
+        "）。",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`S\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " である（",
+        ref("def_orbit_preserving_permutation"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`O\in\mathcal{O}_L`),
+        " を任意に取る。",
+        ref("def_orbit_restriction"),
+        " より ",
+        math(String.raw`S\!\restriction_{O}`),
+        " は ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への写像であり、",
+        ref("claim_orbit_restriction_bijective"),
+        " よりそれは全単射である。したがって ",
+        math(String.raw`S\!\restriction_{O}\in\mathfrak{B}_{O}`),
+        " である（",
+        ref("def_orbit_bijection_set"),
+        "）。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_bijection_id_or_shift",
+    kind: "claim",
+    title: {
+      text: "各行配位をそれ自身かその像へ送る軌道の上の全単射は、恒等写像か巡回シフトの制限である",
+    },
+    labels: ["claim_orbit_bijection_id_or_shift"],
+    habitat: "N",
+    verification: ["sagemath/check/orbit-bijection-id-or-shift"],
+    statement: [
+      paragraph([
+        math(String.raw`O\in\mathcal{O}_L`),
+        " と ",
+        math(String.raw`\psi\in\mathfrak{B}_{O}`),
+        " を任意に取る（",
+        math(String.raw`\mathcal{O}_L`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        "、",
+        math(String.raw`\mathfrak{B}_{O}`),
+        " は ",
+        ref("def_orbit_bijection_set"),
+        "）。任意の ",
+        math(String.raw`\tau\in O`),
+        " について ",
+        math(String.raw`\psi(\tau)=\tau`),
+        " または ",
+        math(String.raw`\psi(\tau)=S(\tau)`),
+        " が成り立つならば、",
+        math(String.raw`\psi=\mathrm{id}_{O}`),
+        " または ",
+        math(String.raw`\psi=S\!\restriction_{O}`),
+        " である（",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "、",
+        math(String.raw`S\!\restriction_{O}`),
+        " は ",
+        ref("claim_shift_orbit_preserving"),
+        " で定まる ",
+        math(String.raw`\mathfrak{B}_{O}`),
+        " の元）。実数体は現れない。",
+      ]),
+      paragraph([
+        math(String.raw`\mathrm{id}_{O}`),
+        " は ",
+        math(String.raw`O`),
+        " の恒等写像である。この主張は、",
+        math(String.raw`\chi_U`),
+        " の軌道ごとの和（",
+        ref("claim_shift_char_orbit_product"),
+        "）に零元でない項を与えうるのが、この 2 つの全単射だけであることを言うためのものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中だけで使う記号として、",
+        math(String.raw`\psi`),
+        " が動かさない行配位の全体",
+      ]),
+      displayMath(
+        String.raw`F:=\bigl\{\,\tau\in O \;\bigm|\; \psi(\tau)=\tau \,\bigr\}\subset O`,
+      ),
+      paragraph([
+        "を置く。場合分けは ",
+        math(String.raw`F=\emptyset`),
+        " か否かによる。両立しないので一続きの式変形にはできない。",
+      ]),
+      paragraph([
+        math(String.raw`F=\emptyset`),
+        " の場合。",
+        math(String.raw`\tau\in O`),
+        " を任意に取ると ",
+        math(String.raw`\tau\notin F`),
+        " なので ",
+        math(String.raw`\psi(\tau)\ne\tau`),
+        " であり、仮定の 2 つの場合のうち第 1 は起こらない。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\psi(\tau)
+&=S(\tau)
+&&(\because\ \text{仮定の第 2 の場合})\\
+&=\bigl(S\!\restriction_{O}\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_restriction})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\psi=S\!\restriction_{O}`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`F\ne\emptyset`),
+        " の場合。まず、",
+        math(String.raw`F`),
+        " が 1 つ前の行配位について閉じていることを見る。",
+        math(String.raw`\tau\in F`),
+        " と ",
+        math(String.raw`\tau'\in O`),
+        " が ",
+        math(String.raw`S(\tau')=\tau`),
+        " を満たすとする。仮定より ",
+        math(String.raw`\psi(\tau')=\tau'`),
+        " または ",
+        math(String.raw`\psi(\tau')=S(\tau')`),
+        " である。第 2 の場合には",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\psi(\tau')
+&=S(\tau')
+&&(\because\ \text{この場合の仮定})\\
+&=\tau
+&&(\because\ \tau'\ \text{の取り方})\\
+&=\psi(\tau)
+&&(\because\ \tau\in F)
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`\psi`),
+        " が単射であることから ",
+        math(String.raw`\tau'=\tau`),
+        " が出る。このとき ",
+        math(String.raw`\psi(\tau')=\psi(\tau)=\tau=\tau'`),
+        " なので、いずれの場合も ",
+        math(String.raw`\psi(\tau')=\tau'`),
+        "、すなわち ",
+        math(String.raw`\tau'\in F`),
+        " である。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`F=O`),
+        " を示す。",
+        math(String.raw`F\ne\emptyset`),
+        " なので ",
+        math(String.raw`\tau_0\in F`),
+        " を 1 つ取り、",
+        math(String.raw`e:=e(\tau_0)`),
+        " と置く（",
+        ref("def_row_config_shift_minimal_period"),
+        "）。",
+        math(String.raw`\tau_0\in O`),
+        " と ",
+        ref("claim_row_config_orbit_mem_eq"),
+        " より ",
+        math(String.raw`O(\tau_0)=O`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`j\in\mathbb{N}`),
+        " が ",
+        math(String.raw`j\le e`),
+        " を満たすとき ",
+        math(String.raw`S^{[e-j]}(\tau_0)\in F`),
+        " であることを、",
+        math(String.raw`j`),
+        " についての帰納法で示す（",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`j=0`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[e-0]}(\tau_0)
+&=S^{[e]}(\tau_0)
+&&(\because\ e-0=e)\\
+&=\tau_0
+&&(\because\ \blkref{claim_row_config_shift_period_divides}\ \text{と}\ e(\tau_0)\mid e)
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`\tau_0\in F`),
+        " なので ",
+        math(String.raw`S^{[e-0]}(\tau_0)\in F`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`j`),
+        " について成り立つとし、",
+        math(String.raw`j+1\le e`),
+        " とする。",
+        math(String.raw`\tau:=S^{[e-j]}(\tau_0)`),
+        " と ",
+        math(String.raw`\tau':=S^{[e-j-1]}(\tau_0)`),
+        " と置くと、帰納法の仮定より ",
+        math(String.raw`\tau\in F`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S(\tau')
+&=S\bigl(S^{[e-j-1]}(\tau_0)\bigr)
+&&(\because\ \tau'\ \text{の置き方})\\
+&=S^{[(e-j-1)+1]}(\tau_0)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=S^{[e-j]}(\tau_0)
+&&(\because\ (e-j-1)+1=e-j\ \text{（}j+1\le e\ \text{より}\ e-j-1\in\mathbb{N}\text{）})\\
+&=\tau
+&&(\because\ \tau\ \text{の置き方})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`\tau'\in O`),
+        " である（",
+        ref("def_row_config_orbit"),
+        " と ",
+        math(String.raw`O(\tau_0)=O`),
+        "）。したがって 1 つ前の行配位についての閉性より ",
+        math(String.raw`\tau'\in F`),
+        "、すなわち ",
+        math(String.raw`S^{[e-(j+1)]}(\tau_0)\in F`),
+        " である。これで帰納法が終わる。",
+      ]),
+      paragraph([
+        "最後に ",
+        math(String.raw`\tau\in O`),
+        " を任意に取る。",
+        math(String.raw`O=O(\tau_0)`),
+        " なので ",
+        math(String.raw`\tau=S^{[k]}(\tau_0)`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " が存在する（",
+        ref("def_row_config_orbit"),
+        "）。",
+        math(String.raw`e\ge1`),
+        " なので自然数の除法より ",
+        math(String.raw`k=e\,q+r`),
+        " かつ ",
+        math(String.raw`r<e`),
+        " を満たす ",
+        math(String.raw`q,r\in\mathbb{N}`),
+        " が取れる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau
+&=S^{[k]}(\tau_0)
+&&(\because\ k\ \text{の取り方})\\
+&=S^{[r+e\,q]}(\tau_0)
+&&(\because\ k=e\,q+r)\\
+&=S^{[r]}\bigl(S^{[e\,q]}(\tau_0)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_iterate_add})\\
+&=S^{[r]}(\tau_0)
+&&(\because\ \blkref{claim_row_config_shift_period_divides}\ \text{と}\ e(\tau_0)\mid e\,q)\\
+&=S^{[e-(e-r)]}(\tau_0)
+&&(\because\ r<e\ \text{より}\ e-(e-r)=r)
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`e-r\le e`),
+        " なので、上の帰納法の結論を ",
+        math(String.raw`j=e-r`),
+        " として当てると ",
+        math(String.raw`\tau\in F`),
+        " である。",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`F=O`),
+        "、すなわち任意の ",
+        math(String.raw`\tau\in O`),
+        " について ",
+        math(String.raw`\psi(\tau)=\tau`),
+        " であり ",
+        math(String.raw`\psi=\mathrm{id}_{O}`),
+        " である。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像、および自然数だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

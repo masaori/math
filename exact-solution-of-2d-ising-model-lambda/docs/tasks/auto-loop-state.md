@@ -7,10 +7,21 @@
 
 ## 現在地
 
-- 次に進めるセクション: **各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること**（セクション 10f'''c）。
-  軌道 $O$ の上の全単射のうち、和に零元でない項を与えるのは「軌道の上を巡回する置換」だけである
-  ことを見て、残った項を足し合わせる段である。
-- **次 tick のレビュー対象**: この tick（tick 38）で書いた
+- 次に進めるセクション: **セクション 10f'''c1 の Lean（具体版と必要十分版）**。
+  本文と SageMath は tick 39 で済んでおり、Lean が無いので `done` にしていない。
+  対象は 2 主張 `claim_shift_orbit_preserving` と `claim_orbit_bijection_id_or_shift` である。
+  そのあとが 10f'''c2（巡回シフトの制限の符号が $(-1)^{\lvert O\rvert-1}$）、
+  10f'''c3（各軌道の因子の和が $t^{\lvert O\rvert}-1$）である。
+- **次 tick のレビュー対象**: この tick（tick 39）で書いた本文 2 ブロック
+  （`claim_shift_orbit_preserving` / `claim_orbit_bijection_id_or_shift`）と
+  SageMath 検証 `orbit-bijection-id-or-shift`。とくに見るべき点は 2 つある。
+  第一に、$F=O$ を出す最後の段で「$e-r\le e$ なので帰納法の結論を $j=e-r$ として当てる」と
+  書いているが、帰納法の言明が $j\le e$ の範囲でしか主張していないことと、
+  $r<e$ から $e-r\ge1$ であることの扱いが、一ステップ一定理として十分か。
+  第二に、$F$ が 1 つ前の行配位について閉じることを証明の地の文で述べており、
+  独立した主張ブロックにしていない点（本文中で 1 度しか使わないので中に置いたが、
+  「1 ブロック 1 主張」の観点で分けるべきかを見る）。
+- 前の「次 tick のレビュー対象」（tick 38 で書いた分。tick 39 で見た。参考のため残す）:
   「シフト行列の特性多項式は、軌道ごとの和の積である」の本文 `claim_shift_char_orbit_product`、
   SageMath 検証 `shift-char-orbit-product`、および Lean 3 ファイル
   （具体版 `AlgebraicEigenvalue/ShiftCharOrbitProduct.lean`・必要十分版・導出）。
@@ -89,7 +100,9 @@
 | 10f'''b3 | 固有値の代数性 | 1 つの軌道の上の全単射の全体 $\mathfrak{B}_O$ と、軌道を 1 つ足した組の全体が「その軌道の上の全単射と残りの組との対」に 1 対 1 に対応すること（分配則の帰納法の一歩） | done | 2026-08-09 完了。定義 2 件・主張 1 件が四層すべて。もとの 10f'''b3（分配則そのもの）は 1 tick で四層まで終わらない大きさだったので 10f'''b3・10f'''b4・10f'''b5 へ割り直した |
 | 10f'''b4 | 固有値の代数性 | 有限積の分配則（$s$ の元の個数についての帰納法）$\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)=\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ | done | 2026-08-09 完了。主張 1 件が四層すべて。本文と SageMath は tick 36、Lean 具体版・必要十分版・導出は tick 37。和の添字にするための組の全体の有限性は、部分型の上の依存関数型との 1 対 1 対応を経由して移した（`Pi.fintype` が命題の上の Pi へ直接は効かないため）。mathlib の `Finset.prod_univ_sum` は引いていない |
 | 10f'''b5 | 固有値の代数性 | 分配則を $\chi_U$ へ当てて $\chi_U=\prod_{O}\bigl(\sum_{\psi\in\mathfrak{B}_O}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ とすること | done | 2026-08-09 完了。主張 1 件が四層すべて。Lean では $\mathfrak{A}(\mathcal{O}_L)$ と $\mathfrak{A}_L$ が別の型（所属の証明を受け取るか否か）なので、行き来する全単射を置いて和の添字を取り替えた。積の側は `Finset.prod_attach` と `Finset.attach_eq_univ` で移した |
-| 10f'''c | 固有値の代数性 | 各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（軌道の上を巡回する置換だけが残る） | todo | もとの 10f''' の後半 |
+| 10f'''c1 | 固有値の代数性 | 巡回シフトが軌道を保つ置換であることと、各行配位をそれ自身かその像へ送る軌道の上の全単射が恒等写像と巡回シフトの制限だけであること | 記述と SageMath まで | 2026-08-09（tick 39）。主張 2 件。Lean 未着手。もとの 10f'''c は 1 tick で四層まで終わらない大きさだったので 10f'''c1・10f'''c2・10f'''c3 へ割り直した（論法が 3 つ別々にあるため。下記「前進の記録」参照） |
+| 10f'''c2 | 固有値の代数性 | 軌道の上の巡回シフトの制限の符号が $(-1)^{\lvert O\rvert-1}$ であること（転倒数を数える段） | todo | もとの 10f'''c の一部 |
+| 10f'''c3 | 固有値の代数性 | 各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（零元でない 2 項を足し合わせる段） | todo | もとの 10f'''c の残り |
 | 10g | 固有値の代数性 | その根が 1 の $L$ 乗根であること（円分体 $\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$ の導入。ここで $\overline{\mathbb{Q}}$ へ入る） | todo | もとの 10d の続き |
 | 10h | 固有値の代数性 | 転送行列をシフト行列の固有空間へ分ける（対角化） | todo | もとの 10e |
 | 11 | Fisher 零点 | 零点が $\overline{\mathbb{Q}}$ に属すること、Kramers–Wannier 双対 | todo | |
@@ -102,6 +115,31 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-09（tick 39）: セクション 10f'''c を 3 つへ割り直し、その最初（10f'''c1）を
+  **記述と SageMath まで**進めた（**Lean は未着手なので `done` にしていない**）。
+  割り直した理由は、もとの 10f'''c に**論法が 3 つ別々に入っていた**ことである。
+  第一に「条件を満たす軌道の上の全単射は 2 つだけである」（$\psi$ が動かさない点の全体が
+  1 つ前の行配位について閉じることを使う議論）、第二に「巡回シフトの制限の符号が
+  $(-1)^{\lvert O\rvert-1}$ である」（順序 $\prec$ について転倒数を数える議論）、
+  第三に「零元でない 2 項を足し合わせて $t^{\lvert O\rvert}-1$ を得る」（$\mathbb{Z}[x][t]$ の計算）。
+  1 つのセクションは 1 つの論法で閉じるものに限るという runbook の割り方に従った。
+  この tick で書いたのは次の 2 主張である。
+  - `claim_shift_orbit_preserving`: 巡回シフト $S$ は軌道を保つ置換である
+    （$S\in\mathfrak{S}^{\mathcal{O}}_L$）。したがって制限 $S\!\restriction_{O}$ が定まり、
+    $\mathfrak{B}_{O}$ の元である。証明は $S(\tau)=S^{[1]}(\tau)\in O(\tau)$ の 2 段の鎖である。
+  - `claim_orbit_bijection_id_or_shift`: $\psi\in\mathfrak{B}_{O}$ が任意の $\tau\in O$ で
+    $\psi(\tau)=\tau$ または $\psi(\tau)=S(\tau)$ を満たすならば、$\psi=\mathrm{id}_{O}$ または
+    $\psi=S\!\restriction_{O}$ である。証明は $\psi$ が動かさない行配位の全体
+    $F=\{\tau\in O\mid\psi(\tau)=\tau\}$ が空か否かで分ける。空なら $\psi=S\!\restriction_{O}$。
+    空でなければ、$F$ が 1 つ前の行配位について閉じること（$\psi$ の単射性を使う）を見てから、
+    $S^{[e-j]}(\tau_0)\in F$ を $j$ についての帰納法で示し、任意の $\tau\in O$ を
+    $\tau=S^{[r]}(\tau_0)$（$r<e$）の形に直して $F=O$ を出す。
+  - SageMath 検証 `orbit-bijection-id-or-shift` を新設し、$L=1,\dots,6$ で通した。
+    健全性（条件を満たすものが 2 つに限ること）だけでなく**非空虚性**（その 2 つが実際に条件を
+    満たすこと）と、$\lvert O\rvert\ge2$ で 2 つが相異なることも確かめている。
+  - **残り**: この 2 主張の Lean 具体版・必要十分版。次の tick はここから拾う
+    （セクション 10f'''c2 へ進む前に、10f'''c1 の Lean を書いて `done` にすること）。
 
 - 2026-08-09（tick 38）: 分配則を $\chi_U$ へ当て、セクション 10f'''b5 が**四層すべて**を満たした
   （主張 1 件 `claim_shift_char_orbit_product`）。示したのは
