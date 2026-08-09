@@ -933,13 +933,27 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
       displayMath(
         String.raw`\begin{aligned}
 [c \cdot I,\, A]
-&= (c \cdot I)A - A(c \cdot I) \\
-&= cA - cA \\
+&= (c \cdot I)A - A(c \cdot I)
+\quad (\because \text{交換子の定義}) \\
+&= c(IA) - c(AI)
+\quad (\because \text{スカラー倍は行列の積の外へ出せる}) \\
+&= cA - cA
+\quad (\because \text{単位行列の性質}\ IA=A,\ AI=A) \\
 &= 0
+\quad (\because \text{同じ元の差は零行列})
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-10）。もとの鎖はどの行にも根拠が書かれておらず、" +
+          "さらに第 2 段が 2 つの定理を同時に適用していた" +
+          "（スカラー倍を積の外へ出すことと、単位行列を消すこと）。" +
+          "この 2 つを別々の段に割り、全 4 段のそれぞれに行末の (∵ …) を付けた。" +
+          "段は増えており、減った段は無い。主張と証明の中身は変えていない。",
+      ],
+    },
   },
   {
     id: "linear_space_general_004_lemma_centralizer_is_scalar",
