@@ -241,6 +241,7 @@ export const ALL_LABELS = [
   "sqrt_cc_of_inverse",
   "sqrt_expansion_via_polar",
   "sqrt_nonnegative_existence_uniqueness",
+  "sqrt_squared_is_original",
   "square_of_sqrt",
   "star_preserves_norm_and_limits",
   "tensor_anticommutation_from_single_site",

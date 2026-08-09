@@ -2362,7 +2362,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     kind: "claim",
     origin: { path: "_old/typst/parts/000_計算公式/040_claim_sqrtの2乗は元に戻る.typ", ordinal: 41 },
     title: { text: "sqrt の2乗は元に戻る" },
-    labels: [],
+    labels: ["sqrt_squared_is_original"],
     statement: [
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、", math(String.raw`\sqrt{z}\sqrt{z}=z`)]),
     ],
@@ -2484,17 +2484,88 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       ),
     ],
     proof: [
-      paragraph([ref("condition_of_commutativity_of_sqrt_and_product"), " より、"]),
-      displayMath(
-        String.raw`\sqrt{z}\sqrt{z} =
-\begin{cases}
-\sqrt{z^2} & (0 \leq 2\arg^{[0,2\pi)}(z) < 2\pi) \\
--\sqrt{z^2} & (2\pi \leq 2\arg^{[0,2\pi)}(z) < 4\pi)
-\end{cases}`,
-      ),
-      paragraph([math(String.raw`\sqrt{z}\sqrt{z}=z`), " より結論を得る。"]),
+      paragraph([
+        "証明の中で使う記号を先に置く。",
+        math(String.raw`\alpha:=\arg^{[0,2\pi)}(z)\in\mathbb{R}`),
+        " と書く（",
+        ref("def_abs_arg"),
+        "）。主張の場合分けは ",
+        math(String.raw`\alpha`),
+        " の値によるものである。",
+      ]),
+      paragraph([
+        math(String.raw`0\leq\alpha<\pi`),
+        " の場合。このとき ",
+        math(String.raw`0\leq\alpha+\alpha<2\pi`),
+        " なので、",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " は ",
+        math(String.raw`z_1=z_2=z`),
+        " について第 1 の場合を与える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z
+&=\sqrt{z}\sqrt{z}
+&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&=\sqrt{z\cdot z}
+&&(\because\ \text{sqrt と積が可換になる条件の第 1 の場合})\\
+&=\sqrt{z^2}
+&&(\because\ z\cdot z=z^{2})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\pi\leq\alpha<2\pi`),
+        " の場合。このとき ",
+        math(String.raw`2\pi\leq\alpha+\alpha<4\pi`),
+        " なので、",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " は ",
+        math(String.raw`z_1=z_2=z`),
+        " について第 2 の場合、すなわち ",
+        math(String.raw`\sqrt{z\cdot z}=-\sqrt{z}\sqrt{z}`),
+        " を与える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z
+&=\sqrt{z}\sqrt{z}
+&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&=-\bigl(-\sqrt{z}\sqrt{z}\bigr)
+&&(\because\ \mathbb{C}\ \text{の元}\ w\ \text{について}\ -(-w)=w)\\
+&=-\sqrt{z\cdot z}
+&&(\because\ \text{sqrt と積が可換になる条件の第 2 の場合})\\
+&=-\sqrt{z^2}
+&&(\because\ z\cdot z=z^{2})
+\end{aligned}`),
+      paragraph([
+        "2 つの場合は ",
+        math(String.raw`\alpha\in[0,2\pi)`),
+        " を尽くしているので、主張を得る。",
+      ]),
+      paragraph([
+        "引いたブロックは ",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        "、",
+        ref("sqrt_squared_is_original"),
+        "、",
+        ref("def_abs_arg"),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は「sqrt と積が可換になる条件より」の 1 文と " +
+          "場合分けの式 1 本、そして「sqrt(z)sqrt(z)=z より結論を得る」の 1 文だけで、" +
+          "z から出発する式変形が書かれていなかった。場合ごとに z から始まる一続きの鎖にし、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "原文が 2arg(z) と書いていた条件は、引く先の主張が arg(z_1)+arg(z_2) の形をしているので " +
+          "α+α の形へ書き直した（同じ量だが、どの主張のどの場合を当てているのかを式に残すため）。" +
+          "第 2 の場合の符号の反転は -(-w)=w の 1 段として明示した。主張と仮定は変えていない。" +
+          "引く先の「sqrt の2乗は元に戻る」はラベルを持っていなかったので、" +
+          "ラベル参照で引けるように sqrt_squared_is_original を与えた。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_043_claim_sqrt_of_reciprocal",
