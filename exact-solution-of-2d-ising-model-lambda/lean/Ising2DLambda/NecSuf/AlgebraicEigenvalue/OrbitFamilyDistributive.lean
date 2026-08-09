@@ -126,6 +126,10 @@ theorem prod_sum_eq_sum_prod_family [∀ i, Fintype (B i)]
       -- 出発点。両辺とも空積・1 元の和で `1` である。
       simp
   | insert i₀ s hi₀ ih =>
+      -- 人手証明の 8 つの等号との対応は具体版のコメントと同じである
+      --   （第 1: `Finset.prod_insert`、第 2: `ih`、第 3・第 4: `Fintype.sum_mul_sum`、
+      --     第 7: `Equiv.sum_comp`、第 5: `Fintype.sum_prod_type`、
+      --     第 6・第 8: `prod_attach_insertFamily`）。
       rw [Finset.prod_insert hi₀, ih, Fintype.sum_mul_sum]
       rw [← Equiv.sum_comp (insertFamilyEquiv (B := B) hi₀)]
       rw [Fintype.sum_prod_type]

@@ -114,6 +114,15 @@ theorem prod_sum_eq_sum_prod_orbitFamily
       -- 出発点。空集合にわたる積は 1、`𝔄(∅)` はちょうど 1 元。
       simp
   | insert O₀ s hO₀ ih =>
+      -- 人手証明の 8 つの等号との対応（左辺から進む段と、右辺から戻る段に分かれる）。
+      --   第 1（積から O₀ の因子を分ける）          `Finset.prod_insert hO₀`
+      --   第 2（帰納法の仮定）                      `ih`
+      --   第 3・第 4（分配則を 2 度）               `Fintype.sum_mul_sum`
+      --     人手証明はこの 2 段を「同じ分配則」と書いており、同じ定理の複数箇所への
+      --     同時適用に当たるので 1 つの補題にまとめてよい（`docs/context/証明の書き方.md`）。
+      --   第 7（ins と spl の 1 対 1 対応で添字を取り替える）  `Equiv.sum_comp`（右辺から）
+      --   第 5（2 重の和を積集合にわたる和へ）       `Fintype.sum_prod_type`（右辺から）
+      --   第 6・第 8（ins の値で書き換え、積へ戻す） `prod_attach_orbitInsertFamily`
       rw [Finset.prod_insert hO₀, ih, Fintype.sum_mul_sum]
       rw [← Equiv.sum_comp (orbitInsertFamilyEquiv hO₀)]
       rw [Fintype.sum_prod_type]
