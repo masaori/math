@@ -50,10 +50,17 @@ add() { problems+=("$1"); log "NG: $1"; }
 # 直近 3 時間ぶんを見る。
 since="$(date -v-3H '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -d '3 hours ago' '+%Y-%m-%d %H:%M:%S')"
 if [ -f "$LOG_DIR/auto-loop.log" ]; then
-  recent="$(awk -v since="$since" '$0 >= since' "$LOG_DIR/auto-loop.log" 2>/dev/null || true)"
-  cut_count="$(printf '%s\n' "$recent" | grep -c "打ち切り" || true)"
-  err_count="$(printf '%s\n' "$recent" | grep -c "異常終了" || true)"
-  [ "${cut_count:-0}" -gt 0 ] && add "直近 3 時間で tick が ${cut_count} 回 25 分の上限で打ち切られた（セクションが大きすぎる。割り直しが要る）"
+  # **このスクリプトが書いた行だけを見る。** ログには tick（Claude セッション）の説明文も
+  # そのまま流れ込むので、「打ち切り」の語を含む地の文が混ざる。
+  # 語で数えると、SageMath の絞り込みを「打ち切りとして記録した」と書いた文まで
+  # 打ち切りに数えてしまう（実測: 実際の打ち切り 0 回のところを 7 回と誤報した）。
+  # 目印は行頭の日時と `=== tick <結果>` の形に限る。
+  recent="$(awk -v since="$since" '/^20[0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] === / && $0 >= since' \
+    "$LOG_DIR/auto-loop.log" 2>/dev/null || true)"
+  cut_count="$(printf '%s\n' "$recent" | grep -c '=== tick 打ち切り' || true)"
+  err_count="$(printf '%s\n' "$recent" | grep -c '=== tick 異常終了' || true)"
+  cap_minutes="$(( $(grep -m1 '^TICK_TIMEOUT_SECONDS=' "$PROJECT_DIR/scripts/auto-loop-tick.sh" | cut -d= -f2) / 60 ))"
+  [ "${cut_count:-0}" -gt 0 ] && add "直近 3 時間で tick が ${cut_count} 回 ${cap_minutes} 分の上限で打ち切られた（セクションが大きすぎる。割り直しが要る）"
   [ "${err_count:-0}" -gt 0 ] && add "直近 3 時間で tick が ${err_count} 回異常終了した"
 fi
 
