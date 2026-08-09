@@ -58,9 +58,17 @@ fi
 # 前の tick が異常終了してロックが残った場合に備え、生きているプロセスがあるかを PID で確認する。
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   stale_pid="$(cat "$LOCK_DIR/pid" 2>/dev/null || true)"
-  if [ -n "$stale_pid" ] && kill -0 "$stale_pid" 2>/dev/null; then
+  # ロックが上限＋10 分より古ければ、プロセスが生きていても居座りとみなす。
+  # 生存だけを条件にすると、終了処理で固まったスクリプトに以後の tick が永久に止められる
+  # （実測: SIGKILL 後もスクリプトが 10 分以上ロックを握ったままだった）。
+  lock_age_limit=$(( TICK_TIMEOUT_SECONDS + 600 ))
+  lock_age="$(( $(date +%s) - $(stat -f %m "$LOCK_DIR" 2>/dev/null || echo 0) ))"
+  if [ -n "$stale_pid" ] && kill -0 "$stale_pid" 2>/dev/null && [ "$lock_age" -lt "$lock_age_limit" ]; then
     log "SKIP: 前の tick (pid $stale_pid) がまだ走っている"
     exit 0
+  fi
+  if [ "$lock_age" -ge "$lock_age_limit" ]; then
+    log "WARN: ロックが古すぎる（${lock_age} 秒）。居座りとみなして掃除する (pid ${stale_pid:-unknown})"
   fi
   log "WARN: 死んだロックを掃除した (pid ${stale_pid:-unknown})"
   rm -rf "$LOCK_DIR"
@@ -157,9 +165,12 @@ record_leftover() {  # 失敗した tick が残したものを目印へ書く（
   fi
 }
 
-if [ "$status" -eq 124 ]; then
-  log "=== tick 打ち切り（${TICK_TIMEOUT_SECONDS} 秒を超えた）"
-  record_leftover "打ち切り"
+# 124 = timeout が SIGTERM で終わらせた。137 = 128+9 で、SIGTERM に応じなかったため
+# timeout -k が SIGKILL へ昇格させた。どちらも「上限に当たった」なので同じ扱いにする
+# （実測: 137 を異常終了と報告して原因の切り分けを誤った）。
+if [ "$status" -eq 124 ] || [ "$status" -eq 137 ]; then
+  log "=== tick 打ち切り（${TICK_TIMEOUT_SECONDS} 秒を超えた。exit ${status}）"
+  record_leftover "打ち切り (exit $status)"
 elif [ "$status" -ne 0 ]; then
   log "=== tick 異常終了 (exit $status)"
   record_leftover "異常終了 (exit $status)"
