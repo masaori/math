@@ -1237,7 +1237,7 @@
 | 000_calculation_formulae_00_09 | 5 | 5 |
 | 000_calculation_formulae_10_19 | 1 | 1 |
 | 000_calculation_formulae_20_29 | 4 | 4 |
-| 000_calculation_formulae_30_44 | 13 | 10 |
+| 000_calculation_formulae_30_44 | 13 | 11 |
 | 000_calculation_formulae_45_46 | 2 | 0 |
 | 001_partition_function_2d_ising | 1 | 0 |
 | 002_linear_space_general | 12 | 0 |
@@ -1267,6 +1267,18 @@
 （リポジトリの規約が禁じているのは新しく番号を振ることである）。
 
 書き換えた証明（新しいものを上に足す）:
+
+- 2026-08-09（tick 31）: `000_calculation_formulae_30_44` の主張「$\mathbb{C}$ の逆数の $\sqrt{\cdot}$」。
+  原文は日本語 2 文だけで、偏角の和の計算も $\sqrt{1/z}$ から出発する式変形も 1 行も無かった。
+  場合ごとに $\sqrt{1/z}$ から始まる一続きの鎖（第 1 の場合 7 段、第 2 の場合 9 段）にし、
+  行末へ $(\because\ \dots)$ を付けた。**段は増えており、減った段は無い。**
+  原文が「$=\pm1$」と書いたところで黙って使っていた 2 つ——$\sqrt{z}\ne0$
+  （$1/\sqrt{z}$ が定まるために要る）と $\sqrt{1_{\mathbb{C}}}=1_{\mathbb{C}}$——を準備として書き下した。
+  前者は「sqrt の2乗は元に戻る」から背理法で、後者は $\phi_{\mathrm{polar}}(1_{\mathbb{C}})=[(1,0)]_\sim$ を
+  計算したうえで極座標表現による展開を当てて示した。
+  第 2 の場合の符号は、可換条件が $\sqrt{z_1z_2}=-\sqrt{z_1}\sqrt{z_2}$ の向きなので
+  $-(-w)=w$ を 1 段挟んで向きを合わせた。主張と仮定は変えていない。経緯は `conversion.notes` へ残した。
+  次は同じファイルの次の証明（$\mathbb{C}$ の $\sqrt{\cdot}$ の逆数）から。
 
 - 2026-08-09（tick 30）: `000_calculation_formulae_30_44` の主張「$z=\pm\sqrt{z^2}$」。
   原文は「sqrt と積が可換になる条件より」の 1 文と場合分けの式 1 本、そして

@@ -2585,25 +2585,236 @@ z
     ],
     proof: [
       paragraph([
-        math(String.raw`\arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}(1/z)`),
-        " を計算すると、",
-        math(String.raw`\theta-2n\pi=0`),
-        " のとき ",
-        math(String.raw`0`),
-        "、",
-        math(String.raw`0<\theta-2n\pi<2\pi`),
-        " のとき ",
-        math(String.raw`2\pi`),
-        "。",
+        "証明の中で使うものを 4 つ先に置く。",
       ]),
       paragraph([
+        "第一に、",
+        math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        " を ",
+        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
+        " なる代表元とし（",
+        ref("def_phi_polar"),
+        "、",
+        ref("polar_equivalence_class"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}`),
+        " を ",
+        math(String.raw`0\leq\theta-2n\pi<2\pi`),
+        " を満たすものとする（",
+        ref("angle_section_existence_uniqueness"),
+        "）。このとき ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " である（",
+        ref("def_abs_arg"),
+        "）。",
+      ]),
+      paragraph([
+        "第二に、仮定 ",
+        math(String.raw`z\neq 0`),
+        " により逆数 ",
+        math(String.raw`1/z`),
+        " が定まる（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+      ]),
+      paragraph([
+        "第三に、",
+        math(String.raw`\sqrt{z}\neq 0_{\mathbb{C}}`),
+        " である。実際 ",
+        math(String.raw`\sqrt{z}=0_{\mathbb{C}}`),
+        " とすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z
+&= \sqrt{z}\sqrt{z}
+&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&= 0_{\mathbb{C}}\cdot 0_{\mathbb{C}}
+&&(\because\ \text{この場合の仮定を 2 箇所へ適用})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \mathbb{C}\ \text{の積の定義})
+\end{aligned}`),
+      paragraph([
+        "となって ",
+        math(String.raw`z\neq 0`),
+        " に反する。したがって逆数 ",
+        math(String.raw`1/\sqrt{z}`),
+        " が定まる（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+      ]),
+      paragraph([
+        "第四に、",
+        math(String.raw`\sqrt{1_{\mathbb{C}}}=1_{\mathbb{C}}`),
+        " である。まず ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " の値を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}(1_{\mathbb{C}})
+&= \phi_{\mathrm{polar}}((1,0))
+&&(\because\ 1_{\mathbb{C}}=(1,0))\\
+&= \left[\left(\sqrt{1^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合})\\
+&= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の計算}\ 1^2+0^2=1)\\
+&= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の計算}\ 0/1=0)\\
+&= \left[\left(1,\ 0\right)\right]_{\sim}
+&&(\because\ \arctan 0=0)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`0\leq 0-2\cdot 0\cdot\pi<2\pi`),
+        " なので、この代表元に対する整数は ",
+        math(String.raw`0`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{1_{\mathbb{C}}}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{の計算})\\
+&= (1\cdot\cos 0,\ 1\cdot\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (1\cdot 1,\ 1\cdot\sin 0)
+&&(\because\ \cos 0=1)\\
+&= (1\cdot 1,\ 1\cdot 0)
+&&(\because\ \sin 0=0)\\
+&= (1,\ 0)
+&&(\because\ \mathbb{R}\ \text{の積の計算を 2 箇所へ適用})\\
+&= 1_{\mathbb{C}}
+&&(\because\ 1_{\mathbb{C}}=(1,0))
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`\arg^{[0,2\pi)}(z)=0`),
+        " の場合。まず 2 つの偏角の和を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&= 0+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&&(\because\ \text{この場合の仮定})\\
+&= 0+0
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 1 の場合})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{の和の計算})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`0\leq 0<2\pi`),
+        " なので、以下では ",
         ref("condition_of_commutativity_of_sqrt_and_product"),
-        " より ",
-        math(String.raw`\sqrt{z}\cdot\sqrt{1/z}=\pm\sqrt{z\cdot(1/z)}=\pm 1`),
-        " から結論。",
+        " の第 1 の場合が当たる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{\frac{1}{z}}
+&= 1_{\mathbb{C}}\cdot\sqrt{\frac{1}{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})\\
+&= \left(\frac{1}{\sqrt{z}}\cdot\sqrt{z}\right)\cdot\sqrt{\frac{1}{z}}
+&&(\because\ \text{準備の第三で取った}\ 1/\sqrt{z}\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)
+&&(\because\ \mathbb{C}\ \text{の積の結合律})\\
+&= \frac{1}{\sqrt{z}}\cdot\sqrt{z\cdot\frac{1}{z}}
+&&(\because\ \text{sqrt と積が可換になる条件の第 1 の場合})\\
+&= \frac{1}{\sqrt{z}}\cdot\sqrt{1_{\mathbb{C}}}
+&&(\because\ \text{準備の第二で取った}\ 1/z\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot 1_{\mathbb{C}}
+&&(\because\ \text{準備の第四})\\
+&= \frac{1}{\sqrt{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<\arg^{[0,2\pi)}(z)<2\pi`),
+        " の場合。まず 2 つの偏角の和を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&= \arg^{[0,2\pi)}(z)+\left(2\pi-\arg^{[0,2\pi)}(z)\right)
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 2 の場合})\\
+&= 2\pi
+&&(\because\ \mathbb{R}\ \text{の和の計算})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`2\pi\leq 2\pi<4\pi`),
+        " なので、以下では ",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " の第 2 の場合が当たる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{\frac{1}{z}}
+&= 1_{\mathbb{C}}\cdot\sqrt{\frac{1}{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})\\
+&= \left(\frac{1}{\sqrt{z}}\cdot\sqrt{z}\right)\cdot\sqrt{\frac{1}{z}}
+&&(\because\ \text{準備の第三で取った}\ 1/\sqrt{z}\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)
+&&(\because\ \mathbb{C}\ \text{の積の結合律})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-\left(-\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)\right)\right)
+&&(\because\ -(-w)=w)\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-\sqrt{z\cdot\frac{1}{z}}\right)
+&&(\because\ \text{sqrt と積が可換になる条件の第 2 の場合})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-\sqrt{1_{\mathbb{C}}}\right)
+&&(\because\ \text{準備の第二で取った}\ 1/z\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-1_{\mathbb{C}}\right)
+&&(\because\ \text{準備の第四})\\
+&= -\left(\frac{1}{\sqrt{z}}\cdot 1_{\mathbb{C}}\right)
+&&(\because\ \mathbb{C}\ \text{の積と符号の関係}\ a\cdot(-b)=-(a\cdot b))\\
+&= -\frac{1}{\sqrt{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "引いたブロックは ",
+        ref("def_phi_polar"),
+        "、",
+        ref("polar_equivalence_class"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        "、",
+        ref("def_abs_arg"),
+        "、",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("definition_of_cc"),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        "、",
+        ref("def_phi_cartesian"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("sqrt_expansion_via_polar"),
+        "、",
+        ref("sqrt_squared_is_original"),
+        "、",
+        ref("range_of_args_of_reciprocal_of_complex_numbers"),
+        "、",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " である。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は日本語 2 文だけで、" +
+          "偏角の和の計算も、sqrt(1/z) から出発する式変形も 1 行も書かれていなかった。" +
+          "場合ごとに sqrt(1/z) から始まる一続きの鎖（第 1 の場合 7 段、第 2 の場合 9 段）にし、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "原文が暗黙にしていた根拠を準備として書き下した。とくに " +
+          "sqrt(z) ≠ 0（1/sqrt(z) が定まるために要る）と sqrt(1_C) = 1_C は、" +
+          "原文が「= ±1」と書いたところで黙って使っていたものである。" +
+          "第 2 の場合の符号は、可換条件が sqrt(z_1 z_2) = -sqrt(z_1)sqrt(z_2) の向きなので、" +
+          "-(-w) = w を 1 段挟んで向きを合わせた。主張と仮定は変えていない。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_044_claim_reciprocal_of_sqrt",
