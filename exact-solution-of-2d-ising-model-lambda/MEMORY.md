@@ -22,7 +22,7 @@
 | --- | --- |
 | 記述（構造化テキスト） | 上記の定義 63 件・主張 73 件・定理 3 件・注意 1 件（ラベルの数。合計 140 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
 | SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 320 件を登録）が通る |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 331 件を登録）が通る |
 | Lean 必要十分版 | 主張 63 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -445,7 +445,7 @@ $s=\mathcal{O}_L$ と取ったものが $\mathfrak{A}_L$ である。$s$ を動�
   さらに、**第 2 の等式 $\mathrm{ins}(\mathrm{spl}(\beta))=\beta$ は $O_0\notin s$ すら要求しない**。
   場合分けが $O=O_0$ か否かだけによっているためで、この仮定が要るのは第 1 の等式の側だけである。
 
-さらに、軌道の部分集合にわたる有限積の分配則を示した（**本文と SageMath 検証まで。Lean は未着手**）。
+さらに、軌道の部分集合にわたる有限積の分配則を示した（四層すべて）。
 ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
 
 - $\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)
@@ -457,10 +457,16 @@ $s=\mathcal{O}_L$ と取ったものが $\mathfrak{A}_L$ である。$s$ を動�
   $\mathrm{ins}$ と $\mathrm{spl}$ が互いに逆であることで和の添字を組へ取り替える。
   $\mathbb{Z}[x][t]$ について使うのは積の結合則と可換性、単位元、および有限和と元の積に
   ついての分配則だけである（引き算も、零因子が無いことも使わない）。
+  必要十分版が示したのは、この段が要求するのが「添字の相等が判定できること」
+  「各成分の型が有限であること」「値の側が可換半環であること」の 3 つだけであり、
+  添字が軌道であることも、成分が全単射であることも、順序 $\prec$ も使っていないことである。
+  Lean では、和の添字にするために組の全体の有限性を先に置いた。
+  組の全体は命題の上の依存関数型なので `Pi.fintype` が直接は効かず、
+  部分型の上の依存関数型との 1 対 1 対応を経由して移してある
+  （この経路は添字の型が有限であることを要求しない）。
 
-残るのは、この分配則の Lean（具体版・必要十分版・導出）と、それを $\chi_U$ へ当てて
-組にわたる和を軌道ごとの和の積へ組み替える段、そして各軌道の因子の和が
-$t^{\lvert O\rvert}-1$ になる段である。
+残るのは、この分配則を $\chi_U$ へ当てて組にわたる和を軌道ごとの和の積へ組み替える段と、
+各軌道の因子の和が $t^{\lvert O\rvert}-1$ になる段である。
 
 ## 進め方（自動ループ）
 
@@ -475,15 +481,13 @@ $t^{\lvert O\rvert}-1$ になる段である。
 
 ## 次回やること
 
-1. **有限積の分配則の Lean**（章「固有値の代数性」の続き。台帳のセクション 10f'''b4）。
-   本文と SageMath 検証は tick 36 で済んでいるので、残っているのは Lean の
-   具体版・必要十分版・導出だけである。
-   **着手時にまず要ること**: 和の添字にするための `Fintype (FamilyOn B s)`。
-   `FamilyOn B s = ∀ i, i ∈ s → B i` は Prop 上の Pi なので `Pi.fintype` が直接は効かず、
-   `∀ i : {x // x ∈ s}, B i.1` との全単射（両向き `rfl`）を置いて `Fintype.ofEquiv` で移す。
-   帰納法の一歩は tick 35 の `insertFamily` / `splitFamily` から `Equiv` を作る。
-   mathlib の `Finset.prod_univ_sum` へ丸投げしない（必要十分版の要件に反する）。
-2. そのあと、分配則を $\chi_U$ へ当てる（セクション 10f'''b5）。$s=\mathcal{O}_L$ と取るだけである。
+1. **分配則を $\chi_U$ へ当てる**（章「固有値の代数性」の続き。台帳のセクション 10f'''b5）。
+   人手証明では $s=\mathcal{O}_L$ と取るだけである。
+   **Lean では橋渡しが 1 本要る**: 組の全体の 2 つの持ち方——所属の証明を受け取らない形と、
+   受け取る形——は同じ型ではないので、行き来する全単射を明示的に置いてから
+   和の添字を取り替える。積の側も、所属の証明つきの添字にわたる積から
+   軌道の全体にわたる積へ移す補題が要る。
+2. そのあと、各軌道の因子の和が $t^{\lvert O\rvert}-1$ であることを示す（セクション 10f'''c）。
 
 ## 未解決の設計問題
 

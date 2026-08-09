@@ -382,6 +382,11 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.insertFamily_rightInverse
   Ising2DLambda.AlgebraicEigenvalue.orbitFamilyInsert_leftInverse_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitFamilyInsert_rightInverse_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_attach_orbitInsertFamily
+  Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamily
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_attach_insertFamily
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_family
+  Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamily_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

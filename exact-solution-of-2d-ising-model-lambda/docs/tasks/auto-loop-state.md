@@ -7,54 +7,31 @@
 
 ## 現在地
 
-- 次に進めるセクション: **有限積の分配則の Lean（具体版・必要十分版・導出）**。
-  tick 36 で本文と SageMath 検証（`sagemath/check/orbit-family-distributive`）まで済ませ、
-  **Lean だけが残っている**（セクション 10f'''b4 は `記述と SageMath まで`）。
-  着手時にまず要るのは、和の添字にするための `Fintype (FamilyOn B s)` である。
-  `FamilyOn B s = ∀ i, i ∈ s → B i` は Prop 上の Pi なので `Pi.fintype` が直接は効かない。
-  `∀ i : {x // x ∈ s}, B i.1` との間の全単射（両向き `rfl` で閉じる）を置き、
-  `Fintype.ofEquiv` で移すのが素直である（この経路なら添字の型 `ι` が有限であることを要求しない）。
-  帰納法の一歩では tick 35 の `insertFamily` / `splitFamily` から `Equiv` を作って和の添字を
-  取り替える。積の側は `s.attach` にわたる積として持つことになるので、
-  `insert` の前後で積を分ける補題を別に立てる必要がある。
-- **次 tick のレビュー対象**: この tick で書いた本文の主張「軌道の部分集合にわたる有限積の分配則」と
-  SageMath 検証 `orbit-family-distributive`。とくに見るべき点は 2 つある。
-  第一に、検証の $g$ が「任意の対応」の代表として十分か（決定的に決めた
-  $t^{j+1}+(i+1)x^{j+1}+(i+j+2)$ が、分配則を退化させない形になっているか）。
-  第二に、本文の一歩の第 6・第 7 の等号（ins の値の書き換えと、添字の取り替え）が
-  2 段に分かれていること——1 段にまとめると「1 対 1 対応があるから項も等しい」という
-  飛躍になる——が保たれているか。
-- 前の「次に進めるセクション」の記述（tick 35 時点。参考のため残す）: 有限積の分配則
-  （台帳の todo の先頭。セクション 10f'''b4）。
-  この tick（tick 35）で、その帰納法の一歩——軌道を 1 つ足した組の全体
-  $\mathfrak{A}(\{O_0\}\cup s)$ が $\mathfrak{B}_{O_0}\times\mathfrak{A}(s)$ と
-  1 対 1 に対応すること——を四層すべてで済ませた（10f'''b3）。
-  **次の段はこうである。** $s$ の元の個数についての帰納法で
-  $\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)
-  =\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ を示す。
-  空集合の場合は両辺とも空積・1 元の和で $1$ になり、一歩は 10f'''b3 の 1 対 1 対応で
-  $(\psi,\alpha)$ の対にわたる和へ開いてから分配則を 2 度当てる。
-  **着手時にまず確かめること**: Lean では `OrbitPermFamilyOn s`（依存関数型）の上で
-  `Finset.induction_on` を回すことになる。`insert O₀ s` の側の和を
-  `orbitSplitFamily` / `orbitInsertFamily` で $(\psi,\alpha)$ の対の和へ移す補題が要る
-  （10f'''b3 の 2 本がその材料）。mathlib の `Finset.prod_univ_sum` へ丸投げしないこと。
-- 前回のレビュー到達点（tick 35）: 台帳が指示していたとおり、$\mathfrak{A}_L$ の
-  Lean での 2 つの持ち方（貼り合わせのセクションの `OrbitFamily` ＋ `OrbitFamilyBijective` と、
-  和の添字のための `OrbitPermFamily`）が二重の対応になっていないかを見た。
-  **2 件直した。** 詳細は「レビュー記録」。
-  **次 tick は、この tick で書いた 3 ファイル**（具体版 `AlgebraicEigenvalue/OrbitFamilyInsert.lean`・
-  必要十分版・導出）**を読み直すところから始める。**特に見るべき点は 3 つある。
-  第一に、`orbitInsertFamily` の `cast` が、人手証明の「場合分けはちょうど 1 つの値を与える」に
-  対応しているだけで、余計な仮定を持ち込んでいないこと（Lean の証明の定義的無関係性に
-  頼っている箇所が `rfl` で閉じている）。
-  第二に、必要十分版で `insertFamily_rightInverse` から `i₀ ∉ s` を削ったことが、
-  人手証明の第 2 の等式の場合分け（`O = O_0` か否かで分ける）と本当に一致していること。
-  第三に、`OrbitPermFamilyOn s` と前セクションの `OrbitPermFamily` の関係
-  （後者は前者の `s = univ` に当たる）が、次のセクションの帰納法で食い違わないこと。
-- **2026-08-09 の tick 34 は 45 分の上限で打ち切られ、2 ファイルが未コミットで残った。**
-  その残骸（最初の定義に詰め込まれていた 5 つの定義を 1 ブロック 1 定義へ分けたもの）は
-  tick 35 の開始時点で別のセッションがコミットして `origin/main` へ入れており（`363c707`）、
-  tick 35 は残骸の目印だけを片付けた。
+- 次に進めるセクション: **分配則を $\chi_U$ へ当てる**（セクション 10f'''b5）。
+  $s=\mathcal{O}_L$ と取るだけだが、**Lean では橋渡しが 1 本要る**。
+  具体版の `OrbitPermFamily L`（$\forall O,\ \mathfrak{B}_O$）と
+  `OrbitPermFamilyOn univ`（$\forall O,\ O\in\mathrm{univ}\to\mathfrak{B}_O$）は
+  **同じ型ではない**（後者は所属の証明を余分に受け取る）。人手証明では
+  $\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$ と等号で書いているので、Lean 側では
+  この 2 つを行き来する全単射を明示的に置いてから和の添字を取り替える。
+  積の側も `univ.attach` にわたる積から `univ` にわたる積へ移す補題が要る。
+- **次 tick のレビュー対象**: この tick（tick 37）で書いた分配則の Lean 3 ファイル
+  （具体版 `AlgebraicEigenvalue/OrbitFamilyDistributive.lean`・必要十分版
+  `NecSuf/AlgebraicEigenvalue/OrbitFamilyDistributive.lean`・導出）。とくに見るべき点は 3 つある。
+  第一に、具体版の帰納法の一歩が人手証明の 8 段の鎖と本当に対応しているか
+  （Lean では `Fintype.sum_mul_sum`・`Equiv.sum_comp`・`Fintype.sum_prod_type` の 3 手で
+  人手証明の第 3〜第 7 の等号をまとめている。まとめすぎて一ステップ一定理を崩していないか、
+  崩しているなら人手証明の段に合わせて分けるべきか）。
+  第二に、導出ファイルが `Subsingleton.elim` で 2 つの `Fintype` インスタンスを
+  突き合わせている箇所が、代入以外の内容を持ち込んでいないこと。
+  第三に、必要十分版の仮定 `[CommSemiring R]` が本当に必要十分か
+  （人手証明が使うと述べているのは積の結合則・可換性・単位元・分配則だけで、
+  和の側に零元と可換性が要る。可換半環より弱い仮定で通るなら削る）。
+- 前の「次に進めるセクション」の記述（tick 36 時点。参考のため残す）: 有限積の分配則の Lean。
+  着手時にまず要るのは `Fintype (FamilyOn B s)` である、という見立ては当たっていた
+  （`Fintype.ofEquiv` で部分型の Pi へ移す経路で通った）。
+- **2026-08-09 の tick 36 は、成果をコミットしたが push せずに終わっていた**
+  （`origin/main` が 1 コミット遅れていた）。tick 37 の開始時に push して反映を確認した。
 - **2026-08-09 の tick 33 は、機械の負荷が異常に高くセクションを前進できなかった。**
   レビューとその修正は済ませて push したが、前進には着手していない。
   `uptime` の負荷平均が 1004（別リポジトリのエージェントが多数の型検査を同時に走らせていた）で、
@@ -112,7 +89,7 @@
 | 10f'''b | 固有値の代数性 | $\chi_U$ の和を軌道を保つ置換だけに絞り、各項を軌道ごとの因子の積へ置き換えること | done | 2026-08-09 完了。主張 2 件が四層すべて。もとの 10f'''b（組にわたる和への書き直しと分配則）は 1 tick で四層まで終わらない大きさだったので 10f'''b・10f'''b2 へ割り直した |
 | 10f'''b2 | 固有値の代数性 | 和の添字を軌道ごとの置換の組 $\mathfrak{A}_L$ へ取り替えること | done | 2026-08-09 完了。定義 1 件・主張 3 件が四層すべて。本文と SageMath は異常終了した tick が残したもの、Lean は tick 32 で配線した。有限積の分配則による組み替えは重いので 10f'''b3 へ割り直した |
 | 10f'''b3 | 固有値の代数性 | 1 つの軌道の上の全単射の全体 $\mathfrak{B}_O$ と、軌道を 1 つ足した組の全体が「その軌道の上の全単射と残りの組との対」に 1 対 1 に対応すること（分配則の帰納法の一歩） | done | 2026-08-09 完了。定義 2 件・主張 1 件が四層すべて。もとの 10f'''b3（分配則そのもの）は 1 tick で四層まで終わらない大きさだったので 10f'''b3・10f'''b4・10f'''b5 へ割り直した |
-| 10f'''b4 | 固有値の代数性 | 有限積の分配則（$s$ の元の個数についての帰納法）$\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)=\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ | 記述と SageMath まで | 2026-08-09（tick 36）に本文（主張 1 件）と SageMath 検証 `orbit-family-distributive` を済ませた。**Lean は未着手。**次 tick はここから。具体版・必要十分版とも `OrbitPermFamilyOn`（依存関数型）の上の `Finset.induction_on` になり、和の添字にするための `Fintype (FamilyOn B s)` を先に置く必要がある（Prop 上の Pi なので `Fintype.ofEquiv` で部分型の Pi へ移す。ι が有限であることは要らない）。mathlib の `Finset.prod_univ_sum` へ丸投げしない |
+| 10f'''b4 | 固有値の代数性 | 有限積の分配則（$s$ の元の個数についての帰納法）$\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)=\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ | done | 2026-08-09 完了。主張 1 件が四層すべて。本文と SageMath は tick 36、Lean 具体版・必要十分版・導出は tick 37。和の添字にするための組の全体の有限性は、部分型の上の依存関数型との 1 対 1 対応を経由して移した（`Pi.fintype` が命題の上の Pi へ直接は効かないため）。mathlib の `Finset.prod_univ_sum` は引いていない |
 | 10f'''b5 | 固有値の代数性 | 分配則を $\chi_U$ へ当てて $\chi_U=\prod_{O}\bigl(\sum_{\psi\in\mathfrak{B}_O}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ とすること | todo | $s=\mathcal{O}_L$ と取るだけ。$\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$ を経由する |
 | 10f'''c | 固有値の代数性 | 各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（軌道の上を巡回する置換だけが残る） | todo | もとの 10f''' の後半 |
 | 10g | 固有値の代数性 | その根が 1 の $L$ 乗根であること（円分体 $\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$ の導入。ここで $\overline{\mathbb{Q}}$ へ入る） | todo | もとの 10d の続き |
@@ -127,6 +104,23 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-09（tick 37）: 有限積の分配則の **Lean 3 ファイル**（具体版・必要十分版・導出）を書き、
+  セクション 10f'''b4 が四層すべてを満たした。和の添字にするために組の全体
+  `FamilyOn B s = ∀ i, i ∈ s → B i` の有限性が要るが、これは命題の上の依存関数型なので
+  `Pi.fintype` が直接は効かない。部分型の上の依存関数型 `∀ i : {x // x ∈ s}, B i.1` との
+  1 対 1 対応（両向き `rfl`）を置き、`Fintype.ofEquiv` で移した。この経路は
+  **添字の型が有限であることを要求しない**。帰納法の一歩は tick 35 の `ins` / `spl` から
+  `Equiv` を作り、`Fintype.sum_mul_sum` で 2 重の和にし、`Fintype.sum_prod_type` で
+  積集合の和へ移してから `Equiv.sum_comp` で添字を組へ取り替えた。
+  積の側は `Finset.attach_insert` と `Finset.prod_image` で `O_0` の因子を分けた。
+  必要十分版の仮定は「添字の相等が判定できること」「各成分の型が有限であること」
+  「値の側が可換半環であること」の 3 つで、添字が軌道であることも成分が全単射であることも
+  順序 $\prec$ も使っていない。mathlib の `Finset.prod_univ_sum` へは丸投げしていない。
+  検証は `lake build`・sorry 非依存 331 件・構造化テキストの検査一式・
+  検証と証明の対応 32 件がすべて通っている。
+  **この tick は締切（22:10）が近く、並列の作業ストリーム（式変形の書き方の統一）を
+  1 件も進めていない。** 次 tick が続きから拾うこと。
 
 - 2026-08-09（tick 36）: 章「固有値の代数性」の続きとして、軌道の部分集合にわたる
   有限積の分配則を**本文と SageMath 検証まで**進めた（主張 1 件
@@ -1829,6 +1823,19 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 
 各 tick のレビューで**何をなぜ直したか**を 1 行ずつ追記する。直すものが無かった tick も
 「見た範囲」と「問題なし」を残す（見ていないのに見たことにしない）。
+
+- 2026-08-09（tick 37 のレビュー、前 tick で書いた分配則の本文
+  `claim_orbit_family_distributive` と SageMath 検証 `orbit-family-distributive`）:
+  台帳が挙げていた 2 つの確認点はいずれも**問題なし。直すものは無かった**。
+  - 第一の点（検証の $g$ が「任意の対応」の代表として十分か）は問題なし。
+    決定的に決めた $t^{j+1}+(i+1)x^{j+1}+(i+j+2)$ は零多項式にも定数にもならず、
+    $L=3$ で大きさ 3 の軌道が 2 つあるため右辺が 36 項になる（主張が空になっていない）。
+    $L=4$ で $s$ を全部分集合にわたって走らせていない打ち切りも `overview.md` に明記してある。
+  - 第二の点（一歩の第 6・第 7 の等号が 2 段に分かれていること）も問題なし。
+    第 6 が $\mathrm{ins}$ の値による項の書き換え、第 7 が 1 対 1 対応による添字の取り替えで
+    分かれており、直後の段落で「和の項は取り替えの前後で同じ元である」と述べている。
+  - 住処の宣言 `Z` は、同じ $\mathbb{Z}[x][t]$ を扱う近傍のブロック（`claim_shift_char_sum_family` 等）と
+    そろっていることも確認した。
 
 - 2026-08-09（tick 36 のレビュー、前 tick で書いた分配則の一歩の Lean 3 ファイル
   ——具体版 `AlgebraicEigenvalue/OrbitFamilyInsert.lean`・必要十分版・導出）:
