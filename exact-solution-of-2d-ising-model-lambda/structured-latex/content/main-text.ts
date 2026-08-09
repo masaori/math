@@ -11884,6 +11884,205 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "algebraic_eigenvalue_claim_non_orbit_preserving_term_zero",
+    kind: "claim",
+    title: { text: "軌道を保たない置換の項は零元である" },
+    labels: ["claim_non_orbit_preserving_term_zero"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_of_not_orbitPreserving",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_zero_of_not_of_forall_or",
+      "Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_of_not_orbitPreserving_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-char-sum"],
+    statement: [
+      paragraph([
+        "置換 ",
+        math(String.raw`\varphi\in\mathfrak{S}_L`),
+        "（",
+        ref("def_permutation_sign"),
+        "）が ",
+        math(String.raw`\varphi\notin\mathfrak{S}^{\mathcal{O}}_L`),
+        "（",
+        ref("def_orbit_preserving_permutation"),
+        "）を満たすとする。このとき ",
+        ref("def_second_determinant"),
+        " の和における ",
+        math(String.raw`\varphi`),
+        " の項について",
+      ]),
+      displayMath(
+        String.raw`\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(U)_{\tau,\varphi(\tau)}=\iota\bigl(\kappa(0)\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "）。すなわちこの項は零元である。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_fixed_or_shift_preserves_orbit"),
+        " の対偶により、仮定 ",
+        math(String.raw`\varphi\notin\mathfrak{S}^{\mathcal{O}}_L`),
+        " から「任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について ",
+        math(String.raw`\varphi(\tau)=\tau`),
+        " または ",
+        math(String.raw`\varphi(\tau)=S(\tau)`),
+        "」は成り立たない。すなわち ",
+        math(String.raw`\varphi(\tau_1)=\tau_1`),
+        " でも ",
+        math(String.raw`\varphi(\tau_1)=S(\tau_1)`),
+        " でもない ",
+        math(String.raw`\tau_1\in R_L`),
+        " が存在する。この ",
+        math(String.raw`\tau_1`),
+        " について求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(U)_{\tau,\varphi(\tau)}
+&=\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \varphi(\tau_1)\ne\tau_1\ \text{かつ}\ \varphi(\tau_1)\ne S(\tau_1)\ \text{と}\ \blkref{claim_shift_char_term_zero})
+\end{aligned}`),
+      paragraph([
+        ref("claim_fixed_or_shift_preserves_orbit"),
+        "、",
+        ref("claim_shift_char_term_zero"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この証明が使っているのは、2 つの主張を対偶でつなぐことだけである。",
+        "行列が ",
+        math(String.raw`\mathrm{ch}(U)`),
+        " であることも、軌道の作り方も、ここには現れない。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその上の写像、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_shift_char_sum_orbit_preserving",
+    kind: "claim",
+    title: {
+      text: "シフト行列の特性多項式は、軌道を保つ置換にわたる軌道ごとの因子の積の和である",
+    },
+    labels: ["claim_shift_char_sum_orbit_preserving"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_orbitFactor",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_subset_congr",
+      "Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_orbitFactor_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-char-sum"],
+    statement: [
+      paragraph([
+        ref("def_shift_matrix"),
+        " のシフト行列 ",
+        math(String.raw`U`),
+        " の特性多項式 ",
+        math(String.raw`\chi_U`),
+        "（",
+        ref("def_characteristic_polynomial"),
+        "）について",
+      ]),
+      displayMath(
+        String.raw`\chi_U=\sum_{\varphi\in\mathfrak{S}^{\mathcal{O}}_L}\ \prod_{O\in\mathcal{O}_L}W_{O}\bigl(\mathrm{ch}(U),\varphi\!\restriction_{O}\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " は ",
+        ref("def_orbit_preserving_permutation"),
+        "、",
+        math(String.raw`\mathcal{O}_L`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        "、",
+        math(String.raw`W_{O}`),
+        " は ",
+        ref("def_orbit_term_factor"),
+        "、",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        "）。",
+        "和の添字が ",
+        math(String.raw`\mathfrak{S}_L`),
+        " から ",
+        math(String.raw`\mathfrak{S}^{\mathcal{O}}_L`),
+        " へ狭まっている。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_U
+&=\mathrm{det}_{t}\bigl(\mathrm{ch}(U)\bigr)
+&&(\because\ \blkref{def_characteristic_polynomial})\\
+&=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(U)_{\tau,\varphi(\tau)}
+&&(\because\ \blkref{def_second_determinant})\\
+&=\sum_{\varphi\in\mathfrak{S}^{\mathcal{O}}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}\mathrm{ch}(U)_{\tau,\varphi(\tau)}
+&&(\because\ \mathfrak{S}^{\mathcal{O}}_L\subset\mathfrak{S}_L\ \text{と}\ \blkref{claim_non_orbit_preserving_term_zero})\\
+&=\sum_{\varphi\in\mathfrak{S}^{\mathcal{O}}_L}\ \prod_{O\in\mathcal{O}_L}W_{O}\bigl(\mathrm{ch}(U),\varphi\!\restriction_{O}\bigr)
+&&(\because\ \blkref{claim_orbit_term_factorization})
+\end{aligned}`),
+      paragraph([
+        ref("def_characteristic_polynomial"),
+        "、",
+        ref("def_second_determinant"),
+        "、",
+        ref("def_orbit_preserving_permutation"),
+        "、",
+        ref("claim_non_orbit_preserving_term_zero"),
+        "、",
+        ref("claim_orbit_term_factorization"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "第 3 の等号で落とした項は ",
+        math(String.raw`\mathfrak{S}_L\setminus\mathfrak{S}^{\mathcal{O}}_L`),
+        " の元が与えるものであり、",
+        ref("claim_non_orbit_preserving_term_zero"),
+        " によりいずれも零元である。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の有限和から零元である項を落としても値は変わらない。",
+      ]),
+      paragraph([
+        "第 4 の等号は ",
+        ref("claim_orbit_term_factorization"),
+        " を和の各項へ当てたものである。",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        " であることは、この主張を当てるために要る（第 3 の等号で和を狭めたのはそのためでもある）。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の有限和と有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },

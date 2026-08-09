@@ -343,6 +343,15 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor_from_necSuf
+  # 「χ_U を軌道を保つ置換にわたる和へ絞ること」（主張 2 件）
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_congr
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestrictionAmbient_eq_coe
+  Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_of_not_orbitPreserving
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_orbitFactor
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_zero_of_not_of_forall_or
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_subset_congr
+  Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_of_not_orbitPreserving_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_orbitFactor_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
