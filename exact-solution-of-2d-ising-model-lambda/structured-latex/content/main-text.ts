@@ -13198,6 +13198,139 @@ S(\tau')
   },
 
   {
+    id: "algebraic_eigenvalue_claim_orbit_permutation_sign_values",
+    kind: "claim",
+    title: {
+      text: "軌道の上の全単射の符号は +1 か -1 であり、恒等写像の符号は +1 である",
+    },
+    labels: ["claim_orbit_permutation_sign_values"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_one_or_neg_one",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_mul_self",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_id",
+    ],
+    verification: ["sagemath/check/orbit-permutation-sign-values"],
+    statement: [
+      paragraph([
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）を任意に取る。",
+        ref("def_orbit_bijection_set"),
+        " の ",
+        math(String.raw`\mathfrak{B}_{O}`),
+        "（",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射の全体）について、",
+        ref("def_orbit_permutation_sign"),
+        " の符号 ",
+        math(String.raw`\mathrm{sgn}_{O}`),
+        " は次の 3 つを満たす。",
+      ]),
+      list([
+        [
+          "任意の ",
+          math(String.raw`\psi\in\mathfrak{B}_{O}`),
+          " について ",
+          math(String.raw`\mathrm{sgn}_{O}(\psi)=+1`),
+          " または ",
+          math(String.raw`\mathrm{sgn}_{O}(\psi)=-1`),
+          " である。",
+        ],
+        [
+          "任意の ",
+          math(String.raw`\psi\in\mathfrak{B}_{O}`),
+          " について ",
+          math(String.raw`\mathrm{sgn}_{O}(\psi)\cdot\mathrm{sgn}_{O}(\psi)=1`),
+          " である。",
+        ],
+        [
+          math(String.raw`\mathrm{sgn}_{O}(\mathrm{id}_{O})=+1`),
+          " である（",
+          math(String.raw`\mathrm{id}_{O}`),
+          " は ",
+          math(String.raw`O`),
+          " の上の恒等写像である）。",
+        ],
+      ]),
+      paragraph([
+        "いずれも ",
+        math(String.raw`\mathbb{Z}`),
+        " の中の等式であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一の主張。自然数 ",
+        math(String.raw`n`),
+        " が偶数なら ",
+        math(String.raw`(-1)^n=+1`),
+        "、奇数なら ",
+        math(String.raw`(-1)^n=-1`),
+        " であり、自然数は偶数か奇数のいずれかである。",
+        math(String.raw`n=\mathrm{inv}_{O}(\psi)`),
+        " と置けばよい（",
+        ref("def_orbit_inversion_count"),
+        "）。",
+      ]),
+      paragraph(["第二の主張。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}_{O}(\psi)\cdot\mathrm{sgn}_{O}(\psi)
+&=(-1)^{\mathrm{inv}_{O}(\psi)}\cdot(-1)^{\mathrm{inv}_{O}(\psi)}
+&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&=\bigl((-1)^{2}\bigr)^{\mathrm{inv}_{O}(\psi)}
+&&(\because\ \text{指数法則})\\
+&=1^{\mathrm{inv}_{O}(\psi)}
+&&(\because\ (-1)^{2}=1)\\
+&=1
+&&(\because\ 1\ \text{の冪は}\ 1)
+\end{aligned}`),
+      paragraph([
+        "第三の主張。",
+        math(String.raw`(\tau,\tau')\in F(O,O)`),
+        " ならば ",
+        math(String.raw`\tau\prec\tau'`),
+        " であり（",
+        ref("def_cross_orbit_ordered_pairs"),
+        " で ",
+        math(String.raw`O'=O`),
+        " と取ったもの）、",
+        ref("claim_row_config_order_linear"),
+        " の三分律から ",
+        math(String.raw`\tau'\prec\tau`),
+        " は成り立たない。",
+        math(String.raw`\mathrm{id}_{O}(\tau)=\tau`),
+        " かつ ",
+        math(String.raw`\mathrm{id}_{O}(\tau')=\tau'`),
+        " なので、",
+        ref("def_orbit_inversion_count"),
+        " の転倒数の定義に現れる集合は空であり ",
+        math(String.raw`\mathrm{inv}_{O}(\mathrm{id}_{O})=0`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}_{O}(\mathrm{id}_{O})
+&=(-1)^{\mathrm{inv}_{O}(\mathrm{id}_{O})}
+&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&=(-1)^{0}
+&&(\because\ \mathrm{inv}_{O}(\mathrm{id}_{O})=0)\\
+&=1
+&&(\because\ \text{0 乗は}\ 1)
+\end{aligned}`),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と順序、自然数、および整数 ",
+        math(String.raw`-1`),
+        " の冪だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

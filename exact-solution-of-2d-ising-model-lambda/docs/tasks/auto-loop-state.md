@@ -7,6 +7,53 @@
 
 ## 現在地
 
+- **2026-08-10 の tick 44 は、レビューを済ませたうえでセクション 10f'''c2a（新設）の
+  本文と SageMath 検証まで進めた。Lean は 3 本書いたが `lake build` が締切までに返らなかった。**
+  レビューは前 tick が指定した Lean 3 本を対象に行い、2 つの懸念のどちらも
+  「証明を直す必要は無く、根拠を書き足すべきもの」と結論して書き足した（コミット済み・push 済み）。
+  第一の懸念（必要十分版の仮定 `hcover` と `hmem` が独立か）は**独立である**。
+  反例を 2 つ挙げて必要十分版のコメントへ書いた。`hmem` が出ないこと: 2 点の集合で
+  `f` を入れ替えとし `O` を片方だけにすると、周期も行き来も成り立つのに反復が `O` から出る。
+  `hcover` が出ないこと: `f = id` で `O` を 2 点にすると、`O` が 2 つの軌道の合併になる。
+  第二の懸念（具体版が集合 $F$ を述語で置いていること）は**述語のままでよい**。
+  人手証明は $F$ を集合として使っておらず（個数を数えず像も取らない）、所属だけで
+  「$F=\emptyset$ か否か」と「$F=O$」を論じているためである。その根拠を具体版のコメントへ書いた。
+  前進については、**10f'''c2 が 1 tick で四層まで終わらない大きさだったので割り直した**。
+  符号が $(-1)^{\lvert O\rvert-1}$ であることは、互換の符号が $-1$ であることと
+  巡回置換が $\lvert O\rvert-1$ 個の互換の積であることを経由するので、論法が複数ある。
+  そこで 10f'''c2a（符号の値・2 乗・恒等写像。$\mathfrak{S}_L$ について既に示した 3 性質の
+  台を $F(O,O)$ へ取り替えたもの）・10f'''c2b（互換とその符号が $-1$）・
+  10f'''c2c（巡回置換が互換の積であること）・10f'''c2d（結論）へ分けた。
+  今 tick はこのうち 10f'''c2a を進め、本文 1 主張と SageMath 検証
+  `orbit-permutation-sign-values`（$L=1,\dots,6$ で全通過。軌道ごとに $\mathfrak{B}_O$ を全列挙）
+  を書いた。**Lean は 3 本書いたが検証が済んでいない。**
+  `lake build` を 03:43 に走らせたが、機械の負荷が再び異常に高くなり（tick 33・40・41 と同じ症状。
+  `date` 1 つが 60 秒で返らない状態）、締切（04:10）までに 1 行も出力されなかった。
+  そのため状態は `記述と SageMath まで` とし、`done` にしていない。
+  **次 tick は、まず `lake build` と `check-no-sorry.sh`、`npm run check`、`npm run build:pdf` を
+  通すこと**（落ちていたら直す）。書いた Lean は次の 3 本である。
+  具体版 `AlgebraicEigenvalue/OrbitPermutationSignValues.lean`、必要十分版
+  `NecSuf/AlgebraicEigenvalue/OrbitPermutationSignValues.lean`、導出
+  `AlgebraicEigenvalue/OrbitPermutationSignValuesFromNecSuf.lean`。
+  `Ising2DLambda.lean` の import と `scripts/check-no-sorry.sh` の対象（12 件追加）も配線済みである。
+  必要十分版の中身は、この 3 主張が台に要求するのが「台の対が $\prec$ で順序づけられていること」と
+  「$\prec$ の非対称性」だけであり、**三分律の残りの 2 つの結論も推移律も台の型の有限性も
+  使っていない**ことである（第一・第二の主張は台にも順序にも何も要求しない）。
+  **次 tick のレビュー対象**: この 3 本の Lean と本文 `claim_orbit_permutation_sign_values`。
+  とくに見るべき点は 2 つある。第一に、必要十分版が `signOn` / `inversionCountOn` という
+  一般化した定義を新しく置いており、具体版の `orbitPermSign` がその特殊化であることを
+  `rfl` で述べている点（定義が一致していることに頼っているので、具体版の定義を変えると
+  黙って壊れる。主張として述べ直すべきかを見る）。
+  第二に、本文が第一の主張の根拠を「自然数は偶数か奇数のいずれかである」としか書いておらず、
+  一ステップ一定理として十分かどうか。
+  なお**並列の作業ストリーム（式変形の書き方の統一）は今 tick も行っていない**
+  （負荷で検証が返らないため。3 tick 連続で未着手である）。
+  **PDF の作り直しも今 tick はできていない**（同じ理由。`origin/main` が進めば
+  5 分おきの launchd が拾う）。
+  **生成物（`labels.generated.ts` / `document.generated.ts`）も鮮度が保証されていない。**
+  新しいラベル `claim_orbit_permutation_sign_values` を足したので `npm run gen` を走らせたが、
+  これも返らなかった。次 tick は `npm run gen` から始めること
+  （走らせずに `npm run check` すると鮮度の検査で落ちる）。
 - **2026-08-10 の tick 43 は、セクション 10f'''c1 の Lean を書いて四層すべてを満たした。**
   具体版 `AlgebraicEigenvalue/OrbitBijectionIdOrShift.lean`、必要十分版
   `NecSuf/AlgebraicEigenvalue/OrbitBijectionIdOrShift.lean`、導出
@@ -164,7 +211,10 @@
 | 10f'''b4 | 固有値の代数性 | 有限積の分配則（$s$ の元の個数についての帰納法）$\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)=\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ | done | 2026-08-09 完了。主張 1 件が四層すべて。本文と SageMath は tick 36、Lean 具体版・必要十分版・導出は tick 37。和の添字にするための組の全体の有限性は、部分型の上の依存関数型との 1 対 1 対応を経由して移した（`Pi.fintype` が命題の上の Pi へ直接は効かないため）。mathlib の `Finset.prod_univ_sum` は引いていない |
 | 10f'''b5 | 固有値の代数性 | 分配則を $\chi_U$ へ当てて $\chi_U=\prod_{O}\bigl(\sum_{\psi\in\mathfrak{B}_O}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ とすること | done | 2026-08-09 完了。主張 1 件が四層すべて。Lean では $\mathfrak{A}(\mathcal{O}_L)$ と $\mathfrak{A}_L$ が別の型（所属の証明を受け取るか否か）なので、行き来する全単射を置いて和の添字を取り替えた。積の側は `Finset.prod_attach` と `Finset.attach_eq_univ` で移した |
 | 10f'''c1 | 固有値の代数性 | 巡回シフトが軌道を保つ置換であることと、各行配位をそれ自身かその像へ送る軌道の上の全単射が恒等写像と巡回シフトの制限だけであること | done | 2026-08-10（tick 43）に四層すべて。主張 2 件。本文と SageMath は tick 39、Lean 具体版・必要十分版・導出は tick 43。必要十分版の結論は写像の等号ではなく各点の等式にした（`f` の制限が全単射であることを仮定しないため）。もとの 10f'''c は 1 tick で四層まで終わらない大きさだったので 10f'''c1・10f'''c2・10f'''c3 へ割り直した（論法が 3 つ別々にあるため。下記「前進の記録」参照） |
-| 10f'''c2 | 固有値の代数性 | 軌道の上の巡回シフトの制限の符号が $(-1)^{\lvert O\rvert-1}$ であること（転倒数を数える段） | todo | もとの 10f'''c の一部 |
+| 10f'''c2a | 固有値の代数性 | 軌道の上の全単射の符号の値（$\pm1$ であること・2 乗が $1$ であること・恒等写像で $+1$ であること） | 記述と SageMath まで | 2026-08-10（tick 44）。主張 1 件。SageMath は $L=1,\dots,6$ で全通過。Lean 3 本は書いたが `lake build` が負荷で返らず未検証。もとの 10f'''c2 は 1 tick で四層まで終わらない大きさだったので 10f'''c2a・10f'''c2b・10f'''c2c・10f'''c2d へ割り直した（互換を経由するので論法が複数ある） |
+| 10f'''c2b | 固有値の代数性 | 軌道の上の互換（2 点を入れ替える全単射）とその符号が $-1$ であること | todo | もとの 10f'''c2 の一部 |
+| 10f'''c2c | 固有値の代数性 | 軌道の上の巡回シフトの制限が $\lvert O\rvert-1$ 個の互換の積であること | todo | もとの 10f'''c2 の一部 |
+| 10f'''c2d | 固有値の代数性 | 軌道の上の巡回シフトの制限の符号が $(-1)^{\lvert O\rvert-1}$ であること（上の 3 つを合わせる段） | todo | もとの 10f'''c2 の結論。符号の乗法性（$\mathrm{sgn}_{O}$ 版）が要るならここで割り直す |
 | 10f'''c3 | 固有値の代数性 | 各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（零元でない 2 項を足し合わせる段） | todo | もとの 10f'''c の残り |
 | 10g | 固有値の代数性 | その根が 1 の $L$ 乗根であること（円分体 $\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$ の導入。ここで $\overline{\mathbb{Q}}$ へ入る） | todo | もとの 10d の続き |
 | 10h | 固有値の代数性 | 転送行列をシフト行列の固有空間へ分ける（対角化） | todo | もとの 10e |
