@@ -12088,7 +12088,6 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     title: { text: "軌道を保つ置換が定める、軌道ごとの置換の組" },
     labels: ["def_orbit_restriction_family"],
     habitat: "N",
-    lean: ["Ising2DLambda.AlgebraicEigenvalue.restrictionFamily"],
     verification: ["sagemath/check/shift-char-family-sum"],
     statement: [
       paragraph([
@@ -12180,11 +12179,6 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     title: { text: "制限の組を貼り合わせるともとの置換に戻る" },
     labels: ["claim_gluing_restriction_family"],
     habitat: "N",
-    lean: [
-      "Ising2DLambda.AlgebraicEigenvalue.glue_restrictionFamily",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_restriction_roundtrip",
-      "Ising2DLambda.AlgebraicEigenvalue.glue_restrictionFamily_from_necSuf",
-    ],
     verification: ["sagemath/check/shift-char-family-sum"],
     statement: [
       paragraph([
@@ -12257,11 +12251,6 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     title: { text: "貼り合わせの制限の組はもとの組に戻る" },
     labels: ["claim_restriction_family_gluing"],
     habitat: "N",
-    lean: [
-      "Ising2DLambda.AlgebraicEigenvalue.restrictionFamily_glue",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.family_eq_of_pointwise",
-      "Ising2DLambda.AlgebraicEigenvalue.restrictionFamily_glue_from_necSuf",
-    ],
     verification: ["sagemath/check/shift-char-family-sum"],
     statement: [
       paragraph([
@@ -12349,11 +12338,6 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     },
     labels: ["claim_shift_char_sum_family"],
     habitat: "Z",
-    lean: [
-      "Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_family",
-      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_of_inverse_congr",
-      "Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_family_from_necSuf",
-    ],
     verification: ["sagemath/check/shift-char-family-sum"],
     statement: [
       paragraph([

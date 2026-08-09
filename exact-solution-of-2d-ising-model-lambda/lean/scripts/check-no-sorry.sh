@@ -22,6 +22,25 @@ fi
 
 status=0
 
+# 0. どの .lean も入口から import されていること。
+#    **import されていないファイルはビルドも検査もされない。** 実測: 型エラーで壊れた下書きが
+#    import されないまま置かれ、lake build も sorry 検査も通ってしまった
+#    （壊れた宣言は字面に sorry が無くても sorryAx を使う）。
+orphans=""
+while IFS= read -r file; do
+  module="$(printf '%s' "$file" | sed 's#/#.#g; s#\.lean$##')"
+  grep -q "^import ${module}$" Ising2DLambda.lean || orphans="${orphans}  ${file}
+"
+done < <(find Ising2DLambda -name '*.lean' | sort)
+
+if [ -n "$orphans" ]; then
+  echo "NG: 入口 Ising2DLambda.lean から import されていない .lean がある（ビルドも検査もされない）:" >&2
+  printf '%s' "$orphans" >&2
+  status=1
+else
+  echo "OK: すべての .lean が入口から import されている"
+fi
+
 # 1. ソース中に sorry / admit が残っていないか
 if grep -rn --include='*.lean' -E '\bsorry\b|\badmit\b' Ising2DLambda.lean Ising2DLambda/; then
   echo "NG: ソース中に sorry / admit が残っている" >&2
