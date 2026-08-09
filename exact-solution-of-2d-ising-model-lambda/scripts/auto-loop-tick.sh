@@ -74,6 +74,9 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
 # 編集の途中に tick が割り込むと互いの変更を踏む。ロックは tick どうしの衝突しか防げない。
 cd "$REPO_DIR"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
+# 残骸が片付いていれば目印を消す（人手で拾ったあとも残り続けると、次の tick が
+# 「残骸がある」と誤認する）。
+[ -z "$(git status --porcelain)" ] && rm -f "$LEFTOVER_MARK"
 if [ -n "$(git status --porcelain)" ]; then
   # 汚れている理由は 2 つある。人間が作業中か、前の tick が失敗して残骸を置いたか。
   # 前者なら踏んではいけないので見送る。**後者で見送ると、残骸が片付くまで
@@ -86,6 +89,15 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 0
   fi
 fi
+
+# まとめに入る締切。上限（強制終了）の 10 分前に置く。
+# **時間を見積もらせるのではなく、時計を見て切り上げさせる。** LLM は作業時間を見積もれないが、
+# `date` で現在時刻を読むことはできる。強制終了は成果を書きかけで落とすので、その前に
+# 自分でまとめさせるほうが取りこぼしが小さい。
+SOFT_DEADLINE="$(date -v+$(( (TICK_TIMEOUT_SECONDS - 600) / 60 ))M '+%H:%M' 2>/dev/null \
+  || date -d "+$(( (TICK_TIMEOUT_SECONDS - 600) / 60 )) minutes" '+%H:%M')"
+HARD_DEADLINE="$(date -v+$(( TICK_TIMEOUT_SECONDS / 60 ))M '+%H:%M' 2>/dev/null \
+  || date -d "+$(( TICK_TIMEOUT_SECONDS / 60 )) minutes" '+%H:%M')"
 
 PROMPT=$(cat <<'EOF'
 exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める。
@@ -109,10 +121,21 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
 5. tick の最後に PDF を作り直す（cd structured-latex && npm run build:pdf）。
    本文を変えなかった tick でも必ず行う。人間が開いたまま進み具合を見るため。
 6. 1 セクション進めたら止まる。
+
+締切について。この tick は @HARD@ に強制終了される（書きかけでも落ちる）。
+そこで @SOFT@ を「まとめに入る締切」とする。作業の区切りごとに `date` で現在時刻を
+確認し、@SOFT@ を過ぎていたら**新しい着手をやめ、いま手元にあるものを検証して
+コミットし、push と台帳の更新まで済ませて終える**。中途半端な成果でも、検証を通して
+コミットしてあれば次の tick が続きから進められる。落ちたまま書きかけで残すより良い。
+時間の見積もりはしなくてよい（できない）。時計を見て判断すること。
 EOF
 )
+# ヒアドキュメントは <<'EOF' なので変数を展開しない（プロンプト中のバッククォートを
+# コマンド置換として実行させないため）。締切だけは後から差し込む。
+PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
+PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 
-log "=== tick 開始"
+log "=== tick 開始（まとめに入る締切 ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 
 set +e
 # -k 60: SIGTERM の 60 秒後に SIGKILL を送る。付けないと、SIGTERM を無視したプロセスが
