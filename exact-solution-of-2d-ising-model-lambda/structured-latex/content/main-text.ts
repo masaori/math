@@ -13604,6 +13604,7 @@ S(\tau')
     title: { text: "軌道の上の全単射の転倒対の集合" },
     labels: ["def_orbit_inversion_set"],
     habitat: "N",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitInversionSet"],
     verification: ["sagemath/check/orbit-transposition-sign"],
     statement: [
       paragraph([
@@ -13680,6 +13681,14 @@ S(\tau')
     title: { text: "互換の軌道への制限の符号は $-1$ である" },
     labels: ["claim_orbit_transposition_sign"],
     habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitInversionSet_eq",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_inversionCount",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_sign",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversionCountOn_transposition",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_transposition",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_sign_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-transposition-sign"],
     statement: [
       paragraph([
