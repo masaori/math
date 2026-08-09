@@ -1771,6 +1771,34 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 各 tick のレビューで**何をなぜ直したか**を 1 行ずつ追記する。直すものが無かった tick も
 「見た範囲」と「問題なし」を残す（見ていないのに見たことにしない）。
 
+- 2026-08-09（tick 33 のレビュー、前 tick で配線した「和の添字を軌道ごとの置換の組へ
+  取り替えること」の Lean 3 ファイル——具体版 `AlgebraicEigenvalue/OrbitFamilySum.lean`、
+  必要十分版 `NecSuf/AlgebraicEigenvalue/OrbitFamilySum.lean`、導出
+  `OrbitFamilySumFromNecSuf.lean`）: 台帳が挙げていた 3 つの確認点のうち 2 つは問題なく、
+  1 つで**本文と Lean の対応の食い違いを見つけて直した**。
+  - 第一の点（必要十分版が既製定理 `Finset.sum_bij'` の別名になっていないか）は**問題なし**。
+    `sum_eq_sum_of_inverse` は互いに逆な 2 写像から全単射 `equivOfInverse` を作り、
+    `Finset.sum_attach` と `Equiv.sum_comp` と `Finset.sum_congr` の 3 段でつないでおり、
+    一行の別名ではない。**具体版が `Finset.sum_bij'` を使っているのに必要十分版が別の
+    道具立てで書かれている点は、要件違反ではないと判断した。** 人手証明の 1 段
+    （「$\mathrm{res}$ と $\mathrm{gl}$ が互いに逆なので和の添字を取り替えられる」）は
+    どちらの版でも同じであり、しかも必要十分版が `Finset.sum_bij'` を呼ぶ形にすると、
+    それこそ「一行で終わる別名」（要件 3 が禁じるもの）になる。すなわち**両版が同じ
+    mathlib 補題を呼ぶことは、この場合むしろ要件と衝突する。** 判断の根拠として
+    ここへ残す（次の tick が同じ点を再検討しないため）。
+  - 第二の点（$\mathfrak{A}_L$ の Lean での持ち方が本文の定義と食い違っていないか）で
+    **1 件直した。** 本文の定義「軌道ごとの置換の組」（$\mathfrak{A}_L$）の `lean` は
+    `OrbitFamilyBijective` だけを挙げていたが、これは前セクションの `OrbitFamily`
+    （どの Finset に対しても写像を与える対応）に付く述語であって $\mathfrak{A}_L$ 自身では
+    ない。**前 tick の Lean のファイル冒頭が「これは和の添字にできない——軌道でない Finset
+    における値が自由なので、同じ組に見えるものが無数にある」と書いているとおりである。**
+    $\mathfrak{A}_L$ を忠実に写した型 `OrbitPermFamily` は前 tick に作られたのに、本文から
+    引かれていなかった。`lean` の先頭へ `OrbitPermFamily` を足した（`OrbitFamilyBijective`
+    は貼り合わせのセクションが使う持ち方なので残す）。本文の数学は変えていない。
+  - 第三の点（導出が `hright` へ渡す証明の定義的無関係性の説明で足りているか）は**問題なし**。
+    `OrbitFamilySumFromNecSuf.lean` の冒頭が、`restrictionFamily` へ渡す `OrbitPreserving`
+    の証明が違っても `OrbitPreserving` は Prop なので同じ組を指すことを明記している。
+
 - 2026-08-09（tick 32 のレビュー、前 tick で書いた $\chi_U$ の和の絞り込みの Lean 3 ファイルと、
   異常終了した tick が残した本文（定義 1 件・主張 3 件）・SageMath 検証 `shift-char-family-sum`）:
   台帳が挙げていた 3 つの確認点はいずれも問題なかった（詳細は「現在地」の

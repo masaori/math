@@ -8806,7 +8806,10 @@ O(\tau)
     title: { text: "軌道ごとの置換の組" },
     labels: ["def_orbit_permutation_family"],
     habitat: "N",
-    lean: ["Ising2DLambda.AlgebraicEigenvalue.OrbitFamilyBijective"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.OrbitPermFamily",
+      "Ising2DLambda.AlgebraicEigenvalue.OrbitFamilyBijective",
+    ],
     verification: ["sagemath/check/orbit-gluing"],
     statement: [
       paragraph([
