@@ -8,21 +8,22 @@
 箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
 章「分配多項式」（定義 5 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 38 件・主張 53 件・定理 2 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 39 件・主張 56 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
 軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限・
 軌道ごとの置換の組の貼り合わせ・2 つの軌道にまたがる転倒対の偶数性・転倒数の軌道ごとの分解・
 行配位の空でない部分集合の最小元・またぐ転倒対の全体の個数の偶数性・
-符号の軌道ごとの符号の積への分解・項の軌道ごとの因子への分解・$\chi_U$ の和の軌道を保つ置換への絞り込み）が、
+符号の軌道ごとの符号の積への分解・項の軌道ごとの因子への分解・$\chi_U$ の和の軌道を保つ置換への絞り込み・
+和の添字の軌道ごとの置換の組への取り替え）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 62 件・主張 70 件・定理 3 件・注意 1 件（ラベルの数。合計 136 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 315 件を登録）が通る |
-| Lean 必要十分版 | 主張 62 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 63 件・主張 73 件・定理 3 件・注意 1 件（ラベルの数。合計 140 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 320 件を登録）が通る |
+| Lean 必要十分版 | 主張 63 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -407,7 +408,27 @@ $W_{O}$ の第 1 引数に行列を書くのは、この因子が $B$ ごとに�
   Lean では、和の添字にするために軌道を保つ置換の全体を有限集合として持ち直した
   （述語との一致は主張として示してある）。
 
-残るのは、和の添字を軌道ごとの置換の組へ取り替えて分配則で積へ組み替える段と、
+さらに、軌道を保つ置換 $\varphi$ が定める軌道ごとの置換の組
+$\bigl(\mathrm{res}(\varphi)\bigr)(O)=\varphi\!\restriction_{O}$ を定義し、次の 3 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+$\mathrm{res}(\varphi)$ は 1 つの写像ではなく写像の組であり、その $O$ における値が写像である。
+$\mathrm{res}$ の定義域は $\mathfrak{S}^{\mathcal{O}}_L$ であって $\mathfrak{S}_L$ ではない。
+
+- 制限の組を貼り合わせるともとの置換に戻る（$\mathrm{gl}(\mathrm{res}(\varphi))=\varphi$）。
+- 貼り合わせの制限の組はもとの組に戻る（$\mathrm{res}(\mathrm{gl}(\alpha))=\alpha$）。
+  この 2 つで $\mathrm{res}$ と $\mathrm{gl}$ が互いに逆であることが言えた。
+- $\chi_U=\sum_{\alpha\in\mathfrak{A}_L}\prod_{O}W_{O}(\mathrm{ch}(U),\alpha(O))$。
+  前の主張との違いは和の添字だけである。
+  必要十分版が示したのは、はじめの 2 主張が前セクションの必要十分版を組の型へ
+  書き写しただけで新しい仮定を要求しないこと、すなわち新しく必要十分性を問うべきなのは
+  和の添字の取り替えだけであり、それが要求するのは**2 つの写像が互いに逆であることと
+  可換な加法モノイドだけ**であることである。
+  Lean では、和の添字にするために組の全体を依存関数型として持ち直した
+  （前セクションの「どの有限集合にも写像を与える対応」は、軌道でない有限集合における値が
+  自由なので和の添字にできない）。
+
+残るのは、有限積の分配則で組にわたる和を軌道ごとの和の積へ組み替える段と、
 各軌道の因子の和が $t^{\lvert O\rvert}-1$ になる段である。
 
 ## 進め方（自動ループ）
@@ -423,13 +444,13 @@ $W_{O}$ の第 1 引数に行列を書くのは、この因子が $B$ ごとに�
 
 ## 次回やること
 
-1. **和の添字を軌道ごとの置換の組へ取り替え、分配則で積へ組み替えること**
-   （章「固有値の代数性」の続き。台帳のセクション 10f'''b2）。$\mathfrak{S}^{\mathcal{O}}_L$ と
-   $\mathfrak{A}_L$ の 1 対 1 対応で添字を組へ取り替え、有限積の分配則で
+1. **有限積の分配則で、組にわたる和を軌道ごとの和の積へ組み替えること**
+   （章「固有値の代数性」の続き。台帳のセクション 10f'''b3）。
+   $\sum_{\alpha\in\mathfrak{A}_L}\prod_{O}W_{O}(\mathrm{ch}(U),\alpha(O))$ を
    $\prod_{O}\bigl(\sum_{\psi}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ の形にする。
-   **着手時にまず確かめること**: Lean の $\mathfrak{A}_L$ は型として定義してあり、
-   和の添字にできる有限集合になっていない。持ち直しだけで 1 tick を使う見込みなら、
-   そこでさらに割ること。
+   **着手時にまず確かめること**: Lean の $\mathfrak{A}_L$（`OrbitPermFamily`）は
+   依存関数型なので、mathlib の既製の分配則が直接は当たらない可能性がある。
+   当たらないなら人手証明の分配則をそのまま帰納法で書く。
 
 ## 未解決の設計問題
 

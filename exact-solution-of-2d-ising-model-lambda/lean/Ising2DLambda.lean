@@ -120,3 +120,6 @@ import Ising2DLambda.AlgebraicEigenvalue.OrbitTermFactorizationFromNecSuf
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.ShiftCharSum
 import Ising2DLambda.AlgebraicEigenvalue.ShiftCharSum
 import Ising2DLambda.AlgebraicEigenvalue.ShiftCharSumFromNecSuf
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitFamilySum
+import Ising2DLambda.AlgebraicEigenvalue.OrbitFamilySum
+import Ising2DLambda.AlgebraicEigenvalue.OrbitFamilySumFromNecSuf
