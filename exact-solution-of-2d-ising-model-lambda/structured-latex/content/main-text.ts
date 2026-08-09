@@ -14259,6 +14259,10 @@ C&:=\bigl\{\,(\tau_a,\tau_b)\,\bigr\}
     title: { text: "軌道の上の互換の反復合成" },
     labels: ["def_orbit_transposition_composite"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_mem_of_mem_orbitSet",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite",
+    ],
     verification: ["sagemath/check/orbit-transposition-composite"],
     statement: [
       paragraph([
@@ -14360,6 +14364,14 @@ C&:=\bigl\{\,(\tau_a,\tau_b)\,\bigr\}
     title: { text: "互換の反復合成は軌道の上の全単射である" },
     labels: ["claim_orbit_transposition_composite_bijective"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.bijective_comp_of_bijective",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_bijective",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionCompositeBij",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.compositeUpTo",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.compositeUpTo_bijective",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_bijective_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-transposition-composite"],
     statement: [
       paragraph([
