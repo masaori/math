@@ -492,32 +492,32 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
+        "準備。",
         math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
         " を任意に取り、両辺の ",
         math(String.raw`(\nu(I),\nu(J))`),
-        " 成分を比べる。",
-        math(String.raw`\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}=\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}`),
-        "（行列の和・スカラー倍は成分ごとの演算）であるから、",
+        " 成分を比べる。以下で ",
+        math(String.raw`\prod_{k\neq j}(A_k)_{i_kj_k}`),
+        " は ",
+        math(String.raw`k\in\{1,\dots,M\}\setminus\{j\}`),
+        " についての積を表す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left(A_1\boxtimes\cdots\boxtimes\left(\sum_{a=1}^{r}c_aB_a\right)\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
-&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
+&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}
 \quad (\because \boxtimes \text{ の定義}) \\
+&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
+\quad (\because \text{行列の和・スカラー倍は成分ごとの演算}) \\
 &= \sum_{a=1}^{r}c_a\left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)(B_a)_{i_jj_j}
 \quad (\because \text{複素数の分配律}) \\
 &= \sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
 \quad (\because \boxtimes \text{ の定義}) \\
 &= \left(\sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)\right)_{\nu(I),\nu(J)}
-\quad (\because \text{行列の和・スカラー倍は成分ごと})
+\quad (\because \text{行列の和・スカラー倍は成分ごとの演算})
 \end{aligned}`,
       ),
       paragraph([
-        "ここで ",
-        math(String.raw`\prod_{k\neq j}(A_k)_{i_kj_k}`),
-        " は ",
-        math(String.raw`k\in\{1,\dots,M\}\setminus\{j\}`),
-        " についての積である。",
         math(String.raw`\nu`),
         " は全単射だから、すべての成分が一致し両辺は等しい。",
         math(String.raw`r=1,\ c_1=c,\ B_1=A_j`),
@@ -534,6 +534,11 @@ export default defineBlocks([
         "原文（Typst）に対応ブロックは無い。「テンソル積の各因子についての C-線型性」" +
           "（スカラーを前に出す・和で展開する）は 004 章以降で繰り返し根拠として使われているのに、" +
           "定義も証明も本文に無かった（goal-alignment-audit の A-3）。",
+        "2026-08-10: 式変形の書き方の統一。第 1 段が「⊠ の定義」と「行列の和・スカラー倍は" +
+          "成分ごとの演算」の 2 つを同時に適用していたので 2 段に割った（一ステップ一定理）。" +
+          "式変形の前に置かれていた成分の分解の式は、鎖の中の 1 段になったので準備から外し、" +
+          "式変形の後ろにあった記法の断り（∏_{k≠j} の意味）は準備へ移した。" +
+          "段は増えており、減った段は無い。",
       ],
     },
   },
