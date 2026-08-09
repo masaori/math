@@ -131,18 +131,22 @@ T_B(I)
       paragraph(["が成り立つ。"]),
     ],
     proof: [
-      paragraph(["右辺を反交換子の定義に従って展開する。"]),
       displayMath(
         String.raw`\begin{aligned}
-a[b, c]_+ - [a, c]_+ b
-&= a(bc + cb) - (ac + ca)b \quad (\because \text{反交換子の定義}) \\
-&= abc + acb - acb - cab \quad (\because \text{行列の積の分配法則・結合法則}) \\
-&= abc - cab \\
-&= (ab)c - c(ab) \quad (\because \text{行列の積の結合法則}) \\
-&= [ab, c] \quad (\because \text{交換子の定義})
+[ab, c]
+&= (ab)c - c(ab) \quad (\because \text{交換子の定義}) \\
+&= abc - cab \quad (\because \text{行列の積の結合法則}) \\
+&= abc + acb - acb - cab \quad (\because\ acb - acb = O) \\
+&= a(bc + cb) - (ac + ca)b \quad (\because \text{行列の積の分配法則と結合法則}) \\
+&= a[b, c]_+ - [a, c]_+ b \quad (\because \text{反交換子の定義})
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は右辺から始めて左辺へ着く鎖だったので、主張の左辺 [ab, c] から始める向きへ書き直した。原文が黙って使っていた「acb - acb = O を足す」段を 1 行として明示し、原文が 1 行にまとめていた結合法則と分配法則の適用を分けた。段は増えており、減った段は無い。",
+      ],
+    },
   },
 ]);
