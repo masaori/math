@@ -13264,17 +13264,66 @@ S(\tau')
     ],
     proof: [
       paragraph([
-        "第一の主張。自然数 ",
-        math(String.raw`n`),
-        " が偶数なら ",
-        math(String.raw`(-1)^n=+1`),
-        "、奇数なら ",
-        math(String.raw`(-1)^n=-1`),
-        " であり、自然数は偶数か奇数のいずれかである。",
-        math(String.raw`n=\mathrm{inv}_{O}(\psi)`),
-        " と置けばよい（",
+        "第一の主張。",
         ref("def_orbit_inversion_count"),
-        "）。",
+        " の転倒数 ",
+        math(String.raw`\mathrm{inv}_{O}(\psi)`),
+        " は自然数であり、自然数は偶数か奇数のいずれかである。この 2 つの場合に分ける。",
+      ]),
+      paragraph([
+        "転倒数が偶数の場合。ある ",
+        math(String.raw`k\in\mathbb{N}`),
+        " があって ",
+        math(String.raw`\mathrm{inv}_{O}(\psi)=2k`),
+        " である（",
+        math(String.raw`\because`),
+        " 偶数の定義）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}_{O}(\psi)
+&=(-1)^{\mathrm{inv}_{O}(\psi)}
+&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&=(-1)^{2k}
+&&(\because\ \mathrm{inv}_{O}(\psi)=2k)\\
+&=\bigl((-1)^{2}\bigr)^{k}
+&&(\because\ \text{指数法則})\\
+&=1^{k}
+&&(\because\ (-1)^{2}=1)\\
+&=1
+&&(\because\ 1\ \text{の冪は}\ 1)
+\end{aligned}`),
+      paragraph([
+        "転倒数が奇数の場合。ある ",
+        math(String.raw`k\in\mathbb{N}`),
+        " があって ",
+        math(String.raw`\mathrm{inv}_{O}(\psi)=2k+1`),
+        " である（",
+        math(String.raw`\because`),
+        " 奇数の定義）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}_{O}(\psi)
+&=(-1)^{\mathrm{inv}_{O}(\psi)}
+&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&=(-1)^{2k+1}
+&&(\because\ \mathrm{inv}_{O}(\psi)=2k+1)\\
+&=(-1)^{2k}\cdot(-1)
+&&(\because\ \text{指数法則})\\
+&=\bigl((-1)^{2}\bigr)^{k}\cdot(-1)
+&&(\because\ \text{指数法則})\\
+&=1^{k}\cdot(-1)
+&&(\because\ (-1)^{2}=1)\\
+&=1\cdot(-1)
+&&(\because\ 1\ \text{の冪は}\ 1)\\
+&=-1
+&&(\because\ 1\ \text{は乗法の単位元})
+\end{aligned}`),
+      paragraph([
+        "いずれの場合も ",
+        math(String.raw`\mathrm{sgn}_{O}(\psi)=+1`),
+        " または ",
+        math(String.raw`\mathrm{sgn}_{O}(\psi)=-1`),
+        " である。",
       ]),
       paragraph(["第二の主張。"]),
       displayMath(String.raw`\begin{aligned}

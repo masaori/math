@@ -46,10 +46,18 @@ noncomputable def inversionCountOn (s : Finset (α × α)) (g : α → α) : ℕ
 noncomputable def signOn (s : Finset (α × α)) (g : α → α) : ℤ :=
   (-1) ^ inversionCountOn lt s g
 
-/-- 第一の主張の必要十分版。`(-1)` の冪であることしか使わない。 -/
+/-- 第一の主張の必要十分版。`(-1)` の冪であることしか使わない。
+
+手順は具体版と同じ（転倒数が偶数か奇数かで分け、それぞれ指数法則で計算する）。 -/
 theorem signOn_eq_or (s : Finset (α × α)) (g : α → α) :
-    signOn lt s g = 1 ∨ signOn lt s g = -1 :=
-  neg_one_pow_eq_or ℤ _
+    signOn lt s g = 1 ∨ signOn lt s g = -1 := by
+  rcases Nat.even_or_odd (inversionCountOn lt s g) with h | h
+  · obtain ⟨k, hk⟩ := h
+    left
+    rw [signOn, hk, ← two_mul, pow_mul, neg_one_sq, one_pow]
+  · obtain ⟨k, hk⟩ := h
+    right
+    rw [signOn, hk, pow_succ, pow_mul, neg_one_sq, one_pow, one_mul]
 
 /-- 第二の主張の必要十分版。指数法則と `(-1)^2 = 1` しか使わない。 -/
 theorem signOn_mul_self (s : Finset (α × α)) (g : α → α) :

@@ -28,11 +28,22 @@ open Finset TransferMatrix
 
 variable {L : ℕ} [NeZero L]
 
-/-- 第一の主張。軌道の上の全単射の符号は `+1` か `-1` である。 -/
+/-- 第一の主張。軌道の上の全単射の符号は `+1` か `-1` である。
+
+人手証明どおり、転倒数が偶数の場合と奇数の場合に分けて、それぞれ指数法則で計算する
+（mathlib の `neg_one_pow_eq_or` へ委ねない。委ねると人手証明の 2 つの場合分けが消える）。 -/
 theorem orbitPermSign_eq_one_or_neg_one (O : Finset (RowConfig L))
     (g : RowConfig L → RowConfig L) :
-    orbitPermSign L O g = 1 ∨ orbitPermSign L O g = -1 :=
-  neg_one_pow_eq_or ℤ _
+    orbitPermSign L O g = 1 ∨ orbitPermSign L O g = -1 := by
+  rcases Nat.even_or_odd (orbitInversionCount L O g) with h | h
+  · -- 偶数の場合: inv = k + k と書けて (-1)^{k+k} = ((-1)^2)^k = 1^k = 1
+    obtain ⟨k, hk⟩ := h
+    left
+    rw [orbitPermSign, hk, ← two_mul, pow_mul, neg_one_sq, one_pow]
+  · -- 奇数の場合: inv = 2k+1 と書けて (-1)^{2k+1} = ((-1)^2)^k · (-1) = 1 · (-1) = -1
+    obtain ⟨k, hk⟩ := h
+    right
+    rw [orbitPermSign, hk, pow_succ, pow_mul, neg_one_sq, one_pow, one_mul]
 
 /-- 第二の主張。符号の 2 乗は `1` である（人手証明の 4 つの等号）。 -/
 theorem orbitPermSign_mul_self (O : Finset (RowConfig L)) (g : RowConfig L → RowConfig L) :
