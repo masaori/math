@@ -1771,19 +1771,17 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       ]),
     ],
     proof: [
+      paragraph(["証明の中で使うものを 2 つ先に置く。"]),
       paragraph([
-        "Step 1: ",
+        "第一に、",
         math(String.raw`0\le\theta-2n\pi<2\pi`),
         " を満たす ",
         math(String.raw`n\in\mathbb{Z}`),
-        " の存在と一意性は ",
+        " は各 ",
+        math(String.raw`\theta\in\mathbb{R}`),
+        " に対してただ一つ存在する（",
         ref("angle_section_existence_uniqueness"),
-        " で証明済みである（",
-        ref("section_of_angle_representation"),
-        " の定義もこの主張を根拠にしている）。これにより本主張の仮定の意味が確定する。",
-      ]),
-      paragraph([
-        "特に、この一意性から ",
+        "）。この一意性により ",
         ref("section_of_angle_representation"),
         " の ",
         math(String.raw`s_{[0,2\pi)}`),
@@ -1794,9 +1792,16 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       ),
       paragraph(["が成り立つ。"]),
       paragraph([
-        "Step 2: 主張の右辺が代表元 ",
+        "第二に、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
+        " である。",
+      ]),
+      paragraph([
+        "主張の右辺が代表元 ",
         math(String.raw`(r,\theta)`),
-        " の取り方によらないこと。",
+        " の取り方によらないことを先に見る。",
         math(String.raw`(r,\theta)\sim(r',\theta')`),
         " とし、",
         math(String.raw`n,n'\in\mathbb{Z}`),
@@ -1804,160 +1809,184 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`0\le\theta-2n\pi<2\pi`),
         "、",
         math(String.raw`0\le\theta'-2n'\pi<2\pi`),
-        " を満たすもの（Step 1 により一意）とする。",
+        " を満たすもの（準備の第一により一意）とする。",
         ref("polar_equivalence_class"),
         " より次の 2 つの場合がある。",
       ]),
-      list([
-        [
-          math(String.raw`r=r'=0`),
-          " のとき。",
-          ref("definition_of_sqrt_r_positive"),
-          " より ",
-          math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
-          " であるから、両辺の内側の対はそれぞれ ",
-          math(String.raw`(0,\theta/2-n\pi)`),
-          " と ",
-          math(String.raw`(0,\theta'/2-n'\pi)`),
-          " であり、第 1 成分がともに ",
-          math(String.raw`0`),
-          " なので ",
-          ref("polar_equivalence_class"),
-          " の定義（",
-          math(String.raw`r=r'=0`),
-          " の場合）により同値、すなわち同じ同値類を定める。",
-        ],
-        [
-          math(String.raw`r=r'`),
-          " かつ ",
-          math(String.raw`\theta\sim_{\mathrm{angle}}\theta'`),
-          " のとき。",
-          ref("angle_equivalence_class"),
-          " より ",
-          math(String.raw`\theta-\theta'=2k\pi`),
-          " なる ",
-          math(String.raw`k\in\mathbb{Z}`),
-          " が存在する。すると ",
-          math(String.raw`\theta-2(n'+k)\pi=\theta'-2n'\pi\in[0,2\pi)`),
-          " であり、",
-          math(String.raw`n'+k\in\mathbb{Z}`),
-          " だから Step 1 の一意性より ",
-          math(String.raw`n=n'+k`),
-          "。よって",
-        ],
+      paragraph([
+        math(String.raw`r=r'=0`),
+        " のとき。準備の第二より両辺の内側の対はそれぞれ ",
+        math(String.raw`(0,\theta/2-n\pi)`),
+        " と ",
+        math(String.raw`(0,\theta'/2-n'\pi)`),
+        " であり、第 1 成分がともに ",
+        math(String.raw`0`),
+        " なので ",
+        ref("polar_equivalence_class"),
+        "（",
+        math(String.raw`r=r'=0`),
+        " の場合）により同値、すなわち同じ同値類を定める。",
+      ]),
+      paragraph([
+        math(String.raw`r=r'`),
+        " かつ ",
+        math(String.raw`\theta\sim_{\mathrm{angle}}\theta'`),
+        " のとき。",
+        ref("angle_equivalence_class"),
+        " より ",
+        math(String.raw`\theta-\theta'=2k\pi`),
+        " なる ",
+        math(String.raw`k\in\mathbb{Z}`),
+        " が存在する。このとき ",
+        math(String.raw`\theta-2(n'+k)\pi=\theta'-2n'\pi\in[0,2\pi)`),
+        " かつ ",
+        math(String.raw`n'+k\in\mathbb{Z}`),
+        " なので、準備の第一の一意性より ",
+        math(String.raw`n=n'+k`),
+        " である。したがって",
       ]),
       displayMath(
-        String.raw`\frac{\theta}{2}-n\pi
-=\frac{\theta'+2k\pi}{2}-(n'+k)\pi
-=\frac{\theta'}{2}+k\pi-n'\pi-k\pi
-=\frac{\theta'}{2}-n'\pi`,
+        String.raw`\begin{aligned}
+\frac{\theta}{2}-n\pi
+&= \frac{\theta'+2k\pi}{2}-(n'+k)\pi
+&&(\because\ \theta=\theta'+2k\pi\ \text{と}\ n=n'+k)\\
+&= \frac{\theta'}{2}+k\pi-(n'+k)\pi
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
+&= \frac{\theta'}{2}+k\pi-n'\pi-k\pi
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
+&= \frac{\theta'}{2}-n'\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律})
+\end{aligned}`,
       ),
       paragraph([
         "であり、第 1 成分も ",
         math(String.raw`\sqrt{r}^{\,\mathbb{R}_{\ge 0}}=\sqrt{r'}^{\,\mathbb{R}_{\ge 0}}`),
         " で一致するから、両者は同じ対であり同じ同値類を定める。いずれの場合も右辺は代表元によらない。",
+        ref("polar_equivalence_class"),
+        "、",
+        ref("angle_equivalence_class"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
       ]),
       paragraph([
-        "Step 3: ",
-        math(String.raw`r\ne 0`),
-        " の場合。",
-        ref("first_and_second_projections"),
-        " より",
+        "ここから先は ",
+        math(String.raw`r`),
+        " の値で 2 つに分かれる。",
       ]),
-      displayMath(
-        String.raw`\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))=\operatorname{pr}_1([(r,\theta)]_{\sim})=r,
-\qquad
-\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))=\operatorname{pr}_2([(r,\theta)]_{\sim})=[\theta]_{\sim_{\mathrm{angle}}}`,
-      ),
       paragraph([
-        "（第 2 式は ",
         math(String.raw`r\ne 0`),
-        " の場合の定義による。）したがって ",
-        ref("def_sqrt_cc"),
-        " の定義式に代入して、Step 1 の末尾の等式 ",
-        math(String.raw`s_{[0,2\pi)}([\theta]_{\sim_{\mathrm{angle}}})=\theta-2n\pi`),
-        " を用いると",
+        " のとき。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sqrt{z}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
-\quad (\because \text{定義}) \\
-&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([\theta]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right) \\
+&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_1\ \text{と}\ \phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([\theta]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_2\ \text{の}\ r\ne0\ \text{の場合})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}(\theta-2n\pi)\right)\right]_{\sim}\right)
-\quad (\because \text{Step 1}) \\
+&&(\because\ \text{準備の第一})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-\quad (\because \mathbb{R} \text{ の分配律})
+&&(\because\ \mathbb{R}\ \text{の分配律})
 \end{aligned}`,
       ),
-      paragraph(["これは主張の右辺そのものである。"]),
       paragraph([
-        "Step 4: ",
-        math(String.raw`r=0`),
-        " の場合。このとき ",
-        ref("first_and_second_projections"),
-        " より ",
-        math(String.raw`\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))=0`),
-        " かつ ",
-        math(String.raw`\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))=[0]_{\sim_{\mathrm{angle}}}`),
-        "（",
-        math(String.raw`r=0`),
-        " の場合の定義）である。",
-        math(String.raw`0\le 0-2\cdot 0\cdot\pi=0<2\pi`),
-        " より Step 1 の一意性から ",
-        math(String.raw`s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})=0`),
-        "。また ",
-        ref("definition_of_sqrt_r_positive"),
-        " より ",
-        math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
-        "。よって ",
+        "であり、これは主張の右辺そのものである。",
         ref("def_sqrt_cc"),
-        " と ",
-        ref("def_phi_cartesian"),
-        " より",
+        "、",
+        ref("first_and_second_projections"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+      paragraph([
+        math(String.raw`r=0`),
+        " のとき。まず左辺を計算する。",
       ]),
       displayMath(
-        String.raw`\sqrt{z}
-=\phi_{\mathrm{cartesian}}\!\left(\left[(0,\ \tfrac{1}{2}\cdot 0)\right]_{\sim}\right)
-=\phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
-=(0\cdot\cos 0,\ 0\cdot\sin 0)=(0,0)=0_{\mathbb{C}}`,
+        String.raw`\begin{aligned}
+\sqrt{z}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot 0\right)\right]_{\sim}\right)
+&&(\because\ 0\le 0-2\cdot0\cdot\pi<2\pi\ \text{と準備の第一})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{で}\ a\cdot 0=0)\\
+&= (0\cdot\cos 0,\ 0\cdot\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,0)=0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
+\end{aligned}`,
       ),
-      paragraph([
-        "一方、主張の右辺は ",
-        math(String.raw`\sqrt{r}^{\,\mathbb{R}_{\ge 0}}=\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
-        " であるから、",
-        ref("def_phi_cartesian"),
-        " より",
-      ]),
+      paragraph(["次に右辺を計算する。"]),
       displayMath(
-        String.raw`\phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-=\left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
-=(0,0)=0_{\mathbb{C}}`,
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ r=0\ \text{という、この場合の条件})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二})\\
+&= \left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,0)=0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
+\end{aligned}`,
       ),
       paragraph([
-        "（",
+        "であり、両辺は一致する。",
         math(String.raw`\cos,\sin`),
         " の値は ",
         math(String.raw`\mathbb{R}`),
-        " の元であり、",
+        " の元なので、最後の段は ",
         math(String.raw`\mathbb{R}`),
-        " において ",
-        math(String.raw`0\cdot a=0`),
-        " である。）よって両辺は一致する。",
+        " の中の計算である。",
+        ref("def_sqrt_cc"),
+        "、",
+        ref("first_and_second_projections"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("def_phi_cartesian"),
+        " を引いた。",
       ]),
       paragraph([
-        "Step 5: 結論。Step 3 と Step 4 により、",
+        "以上より、",
         math(String.raw`r\ne 0`),
         " と ",
         math(String.raw`r=0`),
-        " のいずれの場合も主張の等式が成り立つ。Step 2 により右辺は代表元の取り方によらないので、主張は ",
+        " のいずれの場合も主張の等式が成り立つ。右辺は代表元の取り方によらないので、主張は ",
         math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
         " なる任意の代表元 ",
         math(String.raw`(r,\theta)`),
         " について成り立つ。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は Step 1 から Step 5 までの " +
+          "5 段構成で、式と式の間に日本語の説明が挟まっていた。準備（n の一意性から出る " +
+          "s_{[0,2π)}([θ]) = θ-2nπ と、√0 = 0）を冒頭にまとめ、そのうえで代表元によらないこと・" +
+          "r ≠ 0 の場合・r = 0 の場合の計算をそれぞれ一続きの鎖にした。" +
+          "段は増えており、減った段は無い（r = 0 の場合は左辺 7 段・右辺 4 段へ、" +
+          "代表元によらないことの計算は 4 段へ、それぞれ書き下した）。",
+        "原文が Step 番号で並べていた「準備」と「本体」を分けた。Step 1（n の一意性）と " +
+          "√0 = 0 は式変形ではなく準備なので冒頭へ移し、Step 2（代表元によらないこと）・" +
+          "Step 3（r ≠ 0）・Step 4（r = 0）・Step 5（結論）は、独立した中間目標なので " +
+          "そのまま順に置いた（番号は外し、条件で呼ぶ形にした）。",
+        "原文が 1 本の式に 3 つの等号を並べていた θ/2 - nπ の計算を、1 行 1 等号の 4 段へ割った。" +
+          "原文は θ = θ'+2kπ と n = n'+k をどちらの段で使ったのかが式に書かれていなかった。",
+        "主張と仮定は変えていない（r ≠ 0 の仮定を足す必要はない。r = 0 でも主張は成り立ち、" +
+          "原文もその場合を Step 4 で扱っている）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_040_claim_sqrt_commutativity_condition",
