@@ -108,6 +108,16 @@ $(\because\ \dots)$」の形へ書き換える。** 対象は 2 つのプロジ�
   （`(cd ../exact-solution-of-2d-ising-model/structured-latex && npm run check)` と PDF 生成）。
 - 書き換えた証明の名前を台帳へ記録する（次の tick が続きから拾えるようにするため）。
 
+## PDF を常に最新に保つ（ユーザーの明示指示）
+
+**`origin/main` が進んだら自動で PDF を作り直す仕組みが別に走っている。**
+`scripts/refresh-pdf.sh` を launchd（`com.masaori.ising-lambda-pdf-refresh`）が 5 分おきに叩き、
+表紙に刻まれた版が `origin/main` と違えば作り直す。tick が走っている間と、
+作業ツリーが汚れている間は何もしない（「未コミットの変更を含む」中途半端な版を人に見せないため）。
+
+tick 側の義務は変わらない。**tick の最後に必ず PDF を作り直す**（下記）。
+自動の作り直しは、tick が失敗した場合や人が手元で見ている場合の取りこぼしを埋める保険である。
+
 ## PDF を毎 tick 更新する（ユーザーの明示指示）
 
 **tick の最後に必ず PDF を作り直す。**
