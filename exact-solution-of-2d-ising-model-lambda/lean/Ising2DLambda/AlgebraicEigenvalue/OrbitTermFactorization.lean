@@ -78,7 +78,8 @@ noncomputable def orbitFactor (L : ℕ) [NeZero L] (B : SecondRowMatrix L)
 
 /-- 人手証明の主張「軌道を保つ置換の項は、軌道ごとの因子の積である」。
 
-人手証明の式変形の 5 段をそのまま辿る。 -/
+人手証明の式変形の 6 段をそのまま辿る（最後の 2 段は、制限が値を変えないことを当てる段と、
+軌道の因子の定義へ畳む段であり、1 段にまとめない）。 -/
 theorem term_eq_prod_orbitFactor (B : SecondRowMatrix L) {φ : Equiv.Perm (RowConfig L)}
     (hφ : OrbitPreserving L φ) :
     constSecond (constPoly (permSign L φ)) * ∏ τ : RowConfig L, B τ (φ τ)
@@ -102,13 +103,18 @@ theorem term_eq_prod_orbitFactor (B : SecondRowMatrix L) {φ : Equiv.Perm (RowCo
           constSecond (constPoly (orbitPermSign L O.1 (orbitRestrictionAmbient hφ O.2)))
             * ∏ τ ∈ O.1, B τ (φ τ) := (Finset.prod_mul_distrib).symm
     _ = ∏ O ∈ (rowShiftOrbitSet L).attach,
-          orbitFactor L B O.1 (orbitRestrictionAmbient hφ O.2) := by
+          constSecond (constPoly (orbitPermSign L O.1 (orbitRestrictionAmbient hφ O.2)))
+            * ∏ τ ∈ O.1, B τ (orbitRestrictionAmbient hφ O.2 τ) := by
         refine Finset.prod_congr rfl ?_
         intro O _
-        unfold orbitFactor
         refine congrArg _ ?_
         refine Finset.prod_congr rfl ?_
         intro τ hτ
         rw [orbitRestrictionAmbient_eq hφ O.2 hτ]
+    _ = ∏ O ∈ (rowShiftOrbitSet L).attach,
+          orbitFactor L B O.1 (orbitRestrictionAmbient hφ O.2) := by
+        refine Finset.prod_congr rfl ?_
+        intro O _
+        rw [orbitFactor]
 
 end Ising2DLambda.AlgebraicEigenvalue
