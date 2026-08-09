@@ -3,7 +3,7 @@
 必要十分版。
 
 具体版（`Ising2DLambda.AlgebraicEigenvalue.OrbitPermutationSign`）の証明が実際に使っているのは
-次だけである。証明手順は具体版と同じ（同じ 9 段の式変形）。
+次だけである。証明手順は具体版と同じ（同じ 10 段の式変形）。
 
   使っている性質                            どこで
   値の側が可換モノイドであること              有限積を取る段・積の順序を入れ替える段
@@ -51,7 +51,8 @@ theorem pow_eq_prod_pow_of_even_remainder (u : M) (hu : u * u = 1) (s : Finset �
     _ = u ^ (∑ i ∈ s, f i) * u ^ (2 * k) := pow_add _ _ _
     _ = u ^ (∑ i ∈ s, f i) * (u ^ 2) ^ k := by rw [pow_mul]
     _ = u ^ (∑ i ∈ s, f i) * (1 : M) ^ k := by rw [pow_two, hu]
-    _ = u ^ (∑ i ∈ s, f i) := by rw [one_pow, mul_one]
+    _ = u ^ (∑ i ∈ s, f i) * (1 : M) := by rw [one_pow]
+    _ = u ^ (∑ i ∈ s, f i) := mul_one _
     _ = ∏ i ∈ s, u ^ f i := (Finset.prod_pow_eq_pow_sum s f u).symm
 
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

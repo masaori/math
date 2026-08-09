@@ -11465,15 +11465,17 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
 &&(\because\ \text{整数の冪の指数法則}\ a^{mn}=(a^{m})^{n})\\
 &=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}\cdot 1^{k}
 &&(\because\ (-1)^{2}=1)\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}\cdot 1
+&&(\because\ 1^{k}=1)\\
 &=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}
-&&(\because\ 1^{k}=1\ \text{であり}\ 1\ \text{は積の単位元である})\\
+&&(\because\ 1\ \text{は整数の積の単位元である})\\
 &=\prod_{O\in\mathcal{O}_L}(-1)^{\mathrm{inv}_{O}(\varphi\restriction_{O})}
 &&(\because\ \text{有限和を指数とする冪は冪の有限積である})\\
 &=\prod_{O\in\mathcal{O}_L}\mathrm{sgn}_{O}\bigl(\varphi\!\restriction_{O}\bigr)
 &&(\because\ \blkref{def_orbit_permutation_sign})
 \end{aligned}`),
       paragraph([
-        "第 8 の等号で使った「有限和を指数とする冪は冪の有限積である」は、",
+        "第 9 の等号で使った「有限和を指数とする冪は冪の有限積である」は、",
         math(String.raw`\mathcal{O}_L`),
         " の元の個数についての帰納法で ",
         math(String.raw`a^{m+n}=a^{m}a^{n}`),

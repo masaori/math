@@ -46,7 +46,7 @@ variable {φ : Equiv.Perm (RowConfig L)}
 
 /-- 人手証明の主張「軌道を保つ置換の符号は、軌道ごとの符号の積である」。
 
-人手証明の式変形の 9 段をそのまま辿る。準備で `|Inv^≠(φ)| = 2k` を取り、
+人手証明の式変形の 10 段をそのまま辿る。準備で `|Inv^≠(φ)| = 2k` を取り、
 `(-1)^{2k} = ((-1)^2)^k = 1^k = 1` でまたぐ項を落とす。 -/
 theorem permSign_eq_prod_orbitPermSign (hφ : OrbitPreserving L φ) :
     permSign L φ
@@ -69,7 +69,8 @@ theorem permSign_eq_prod_orbitPermSign (hφ : OrbitPreserving L φ) :
     _ = (-1 : ℤ) ^ total * (-1 : ℤ) ^ (2 * k) := by rw [hk]
     _ = (-1 : ℤ) ^ total * ((-1 : ℤ) ^ 2) ^ k := by rw [pow_mul]
     _ = (-1 : ℤ) ^ total * (1 : ℤ) ^ k := by norm_num
-    _ = (-1 : ℤ) ^ total := by rw [one_pow, mul_one]
+    _ = (-1 : ℤ) ^ total * (1 : ℤ) := by rw [one_pow]
+    _ = (-1 : ℤ) ^ total := mul_one _
     _ = ∏ O ∈ (rowShiftOrbitSet L).attach,
           (-1 : ℤ) ^ orbitInversionCount L O.1 (orbitRestrictionAmbient hφ O.2) := by
         rw [htotal, Finset.prod_pow_eq_pow_sum]
