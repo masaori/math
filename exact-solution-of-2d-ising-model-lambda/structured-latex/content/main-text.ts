@@ -12085,17 +12085,20 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
-    title: { text: "この先に置く章（未着手）" },
+    title: { text: "この先に書くこと" },
     labels: ["remark_planned_chapters"],
     habitat: "none",
     statement: [
       paragraph([
-        "本文はここまでで、以下は未着手である。",
-        "読む順序と各章が扱う量の住処は README の「章立ての予定」の表が正本である。",
+        "本文はここまでである。以下には 2 種類が混ざっている。",
+        "既に書いた章の残り（「続き」と書いたもの）と、まだ手つかずの章である。",
+        "読む順序と各章が扱う量の住処は README の「章立ての予定」の表が正本であり、",
+        "実行の順序は docs/tasks/auto-loop-state.md のセクション表が正本である。",
+        "ここに項目を足したら、必ずセクション表にも行を足すこと（足さないと実行の列に並ばず、落ちる）。",
       ]),
       list([
         [
-          todo("未着手"),
+          todo("残り"),
           "「有限系の自由エントロピー」の続き: 一般の ",
           math(String.raw`q`),
           " での ",
@@ -12105,7 +12108,7 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
           " までは上で済んでいる。",
         ],
         [
-          todo("未着手"),
+          todo("残り"),
           "「固有値の代数性」の続き: 特性多項式の根が ",
           math(String.raw`\overline{\mathbb{Q}}`),
           " に属すること（固有値の代数性）と、円分体上での対角化。",
