@@ -1298,7 +1298,7 @@
 | 000_calculation_formulae_00_09 | 5 | 5 |
 | 000_calculation_formulae_10_19 | 1 | 1 |
 | 000_calculation_formulae_20_29 | 4 | 4 |
-| 000_calculation_formulae_30_44 | 13 | 12 |
+| 000_calculation_formulae_30_44 | 13 | 13 |
 | 000_calculation_formulae_45_46 | 2 | 0 |
 | 001_partition_function_2d_ising | 1 | 0 |
 | 002_linear_space_general | 12 | 0 |
@@ -1328,6 +1328,17 @@
 （リポジトリの規約が禁じているのは新しく番号を振ることである）。
 
 書き換えた証明（新しいものを上に足す）:
+
+- 2026-08-09（tick 35）: `000_calculation_formulae_30_44` の定理「$\cos,\sin$ の Euler 表示」。
+  原文の証明は $e^{\pm i\theta}$ を 2 行並べて「辺々加えると／辺々引くと」と述べるだけで、
+  **主張の左辺（$\cos\theta$ と $\sin\theta$）から始まる式変形が 1 行も無かった。**
+  $\cos\theta$ と $\sin\theta$ のそれぞれから始まる一続きの鎖（各 4 段）にし、
+  行末へ $(\because\ \dots)$ を付けた。**段は増えており、減った段は無い。**
+  原文が黙って使っていた 2 つ——$e^{-i\theta}=\cos\theta-i\sin\theta$ を出すのに要る
+  $\cos$ の偶性と $\sin$ の奇性、および $2i\ne0$——を明示し、前者は証明の冒頭の準備として
+  切り出した（式変形の途中に日本語を挟まないため）。経緯は `conversion.notes` へ残した。
+  **これでこのファイルの 13 件がすべて済んだ。**
+  次は次のファイル `000_calculation_formulae_45_46` の 2 件（0 件済）から。
 
 - 2026-08-09（tick 32）: `000_calculation_formulae_30_44` の主張「$\mathbb{C}$ の $\sqrt{\cdot}$ の逆数」。
   原文の証明は「$\mathbb{C}$ の逆数の $\sqrt{\cdot}$ より。」の 1 文だけで、

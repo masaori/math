@@ -2920,15 +2920,56 @@ z
       ),
     ],
     proof: [
-      paragraph(["Eulerの公式 ", math(String.raw`e^{i\theta} = \cos\theta + i\sin\theta`), " より、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-e^{i\theta} &= \cos\theta + i\sin\theta \\
-e^{-i\theta} &= \cos\theta - i\sin\theta
-\end{aligned}`,
-      ),
-      paragraph(["辺々加えると ", math(String.raw`e^{i\theta}+e^{-i\theta}=2\cos\theta`), "、辺々引くと ", math(String.raw`e^{i\theta}-e^{-i\theta}=2i\sin\theta`), "。"]),
+      paragraph([
+        "準備として、Eulerの公式 ",
+        math(String.raw`e^{i\varphi} = \cos\varphi + i\sin\varphi`),
+        " を ",
+        math(String.raw`\varphi=-\theta`),
+        " で使う形を書いておく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e^{-i\theta}
+&=\cos(-\theta) + i\sin(-\theta)
+&&(\because\ \text{Eulerの公式})\\
+&=\cos\theta + i\,(-\sin\theta)
+&&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
+&=\cos\theta - i\sin\theta
+\end{aligned}`),
+      paragraph(["第 1 の等式を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+\cos\theta
+&=\frac{2\cos\theta}{2}\\
+&=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2}
+&&(\because\ i\sin\theta\ \text{を足して引いた})\\
+&=\frac{e^{i\theta} + (\cos\theta - i\sin\theta)}{2}
+&&(\because\ \text{Eulerの公式})\\
+&=\frac{e^{i\theta} + e^{-i\theta}}{2}
+&&(\because\ \text{上の準備})
+\end{aligned}`),
+      paragraph([
+        "第 2 の等式を示す。",
+        math(String.raw`2i\neq0`),
+        " なので割ってよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sin\theta
+&=\frac{2i\sin\theta}{2i}\\
+&=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2i}
+&&(\because\ \cos\theta\ \text{を足して引いた})\\
+&=\frac{e^{i\theta} - (\cos\theta - i\sin\theta)}{2i}
+&&(\because\ \text{Eulerの公式})\\
+&=\frac{e^{i\theta} - e^{-i\theta}}{2i}
+&&(\because\ \text{上の準備})
+\end{aligned}`),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes:
+        "式変形の書き方の統一（2026-08-09）。原文は「辺々加えると／辺々引くと」の 1 文で" +
+        "主張の左辺から始まる式変形が 1 行も無かったので、cos θ と sin θ のそれぞれから始まる" +
+        "一続きの鎖（各 4 段）にし、行末へ (∵ …) を付けた。" +
+        "原文が黙って使っていた 2 つ——e^{-iθ} を cos θ - i sin θ に書き換えるのに要る" +
+        "cos の偶性と sin の奇性、および 2i ≠ 0——を明示した。段は増えており、減った段は無い。",
+    },
   },
 ]);
