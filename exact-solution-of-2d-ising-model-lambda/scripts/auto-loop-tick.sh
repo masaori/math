@@ -77,6 +77,15 @@ fi
 printf '%s\n' "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
+# 機械の負荷が高すぎるときは見送る。負荷が高いと lake build も date も返らず、
+# 45 分の上限まで何もできずに終わる（実測 2026-08-10 05:00: load average 248。
+# 原因はこのループではなく、同じ機械で多数の対話セッションが MCP と Chrome を抱えていたこと）。
+load1="$(sysctl -n vm.loadavg 2>/dev/null | awk '{print int($2)}')"
+if [ -n "${load1:-}" ] && [ "$load1" -gt 32 ]; then
+  log "SKIP: 機械の負荷が高い（load average ${load1}）。この回は見送る"
+  exit 0
+fi
+
 # 作業ツリーが汚れているときは見送る。
 # このリポジトリでは人間の対話セッションが同じ作業ツリーを使うので、
 # 編集の途中に tick が割り込むと互いの変更を踏む。ロックは tick どうしの衝突しか防げない。
@@ -148,7 +157,14 @@ log "=== tick 開始（まとめに入る締切 ${SOFT_DEADLINE} / 強制終了 
 set +e
 # -k 60: SIGTERM の 60 秒後に SIGKILL を送る。付けないと、SIGTERM を無視したプロセスが
 # 居座ってロックが残り、以後の tick が「まだ走っている」で見送られ続ける。
-timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions "$PROMPT" >> "$LOG_FILE" 2>&1
+# --strict-mcp-config と空の --mcp-config で MCP サーバを 1 つも起動しない。
+# **これが無いと tick ごとに MCP（chrome-devtools 等）のプロセスが残り、機械が詰まる。**
+# 実測 2026-08-10 05:00: claude 32・npm 42・MCP 35・Chrome 54 プロセスが 7 時間分たまり、
+# load average が 248 に達して lake build も date も返らなくなった。
+# tick の作業（証明・SageMath・Lean・git）に MCP は 1 つも要らない。
+echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
+timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions \
+  --strict-mcp-config --mcp-config "$LOG_DIR/empty-mcp.json" "$PROMPT" >> "$LOG_FILE" 2>&1
 status=$?
 set -e
 
@@ -176,7 +192,10 @@ elif [ "$status" -ne 0 ]; then
   record_leftover "異常終了 (exit $status)"
 else
   log "=== tick 正常終了"
-  rm -f "$LEFTOVER_MARK"
+  # **正常終了でも成果が未コミットで残ることがある。** 実測 2026-08-10 03:35 の tick は、
+  # 機械の負荷で lake build が返らず、まとめの push を完了できないまま turn を終えた。
+  # 目印を消すと、以後の tick が「人間が作業中」と誤認して見送り続ける（実際 04:35 が見送った）。
+  record_leftover "正常終了したが未コミットの成果が残った"
 fi
 
 exit "$status"
