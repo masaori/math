@@ -507,6 +507,11 @@ $(-1)^{\lvert O\rvert-1}$ であること、そして各軌道の因子の和が
 
 ## 次回やること
 
+**2026-08-10 の tick 41・42 は機械の負荷（load average 143）で前進できていない。**
+tick 42 は tick 41 が未検証で残した本文の修正を検証して確定させただけである
+（`npm run check` は全通過。コミット 92bb98d が `origin/main` に入っている）。
+下の 1 が依然として次の着手である。
+
 1. **セクション 10f'''c1 の Lean を書く**（具体版と必要十分版）。対象は 2 主張
    `claim_shift_orbit_preserving` と `claim_orbit_bijection_id_or_shift` である。
    本文と SageMath は済んでいるので、Lean が入れば四層すべてになる。
