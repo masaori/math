@@ -1137,7 +1137,7 @@
 | 000_calculation_formulae_00_09 | 5 | 5 |
 | 000_calculation_formulae_10_19 | 1 | 1 |
 | 000_calculation_formulae_20_29 | 4 | 4 |
-| 000_calculation_formulae_30_44 | 13 | 8 |
+| 000_calculation_formulae_30_44 | 13 | 9 |
 | 000_calculation_formulae_45_46 | 2 | 0 |
 | 001_partition_function_2d_ising | 1 | 0 |
 | 002_linear_space_general | 12 | 0 |
@@ -1167,6 +1167,20 @@
 （リポジトリの規約が禁じているのは新しく番号を振ることである）。
 
 書き換えた証明（新しいものを上に足す）:
+
+- 2026-08-09（tick 29）: `000_calculation_formulae_30_44` の主張「sqrt の 2 乗は元に戻る」。
+  原文は 3 行の式で、根拠は途中の 1 行に $\sqrt{r}\cdot\sqrt{r}=r$ と書かれているだけだった。
+  $\phi_{\mathrm{cartesian}}$ が積を保つこと・極座標表現の演算・非負実数の $\sqrt{\cdot}$ の定義・
+  同値関係 $\sim$ が第 2 成分の $2\pi$ の整数倍の差を同一視すること・
+  $\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}$ をすべて段として明示し、
+  7 段の一続きの鎖にして行末へ $(\because\ \dots)$ を付けた。**段は増えており、減った段は無い。**
+  原文が $r,\theta,n$ を導入せずに証明の中で使っていたので、準備として書き下した。
+  **主張と仮定は変えていない**（この主張は $r=0$ でも成り立つので $r\neq0$ を足す必要はない。
+  $\mathrm{pr}_2$ を経由せず $\sqrt{\cdot}$ の極座標表現による展開をそのまま使うため、
+  前 4 tick で問題になった $r=0$ の場合分けが要らない）。
+  原文の $[\sqrt{r},\theta/2-n\pi]_{\sim}$ という書き方（同値類の中の対に括弧が無い）は、
+  同じファイルの他の証明と同じ $[(r,\theta)]_{\sim}$ の形へ揃えた。経緯は `conversion.notes` へ残した。
+  次は同じファイルの次の証明（$z=\pm\sqrt{z^2}$）から。
 
 - 2026-08-09（tick 28）: `000_calculation_formulae_30_44` の主張「sqrt と積が可換になる条件」。
   原文は 2 つの長い式変形の間と場合分けの間に日本語の説明が挟まっており、各行の根拠

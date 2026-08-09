@@ -2368,28 +2368,105 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     ],
     proof: [
       paragraph([
-        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
-        "、",
-        math(String.raw`0\leq\theta-2n\pi<2\pi`),
-        " とすると ",
-        ref("sqrt_expansion_via_polar"),
-        " より ",
-        math(String.raw`\sqrt{z}=\phi_{\mathrm{cartesian}}\!\left([\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\theta/2-n\pi]_{\sim}\right)`),
-        " だから、",
+        "証明の中で使うものを 3 つ先に置く。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      paragraph([
+        "第一に、",
+        math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        " を ",
+        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
+        " なる代表元とし（",
+        ref("def_phi_polar"),
+        "、",
+        ref("polar_equivalence_class"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}`),
+        " を ",
+        math(String.raw`0\leq\theta-2n\pi<2\pi`),
+        " を満たすものとする（",
+        ref("angle_section_existence_uniqueness"),
+        " により各 ",
+        math(String.raw`\theta\in\mathbb{R}`),
+        " に対してただ一つ存在する）。",
+      ]),
+      paragraph([
+        "第二に、",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " はモノイド準同型であり、",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " である。",
+      ]),
+      paragraph([
+        "第三に、",
+        ref("polar_equivalence_class"),
+        " の同値関係 ",
+        math(String.raw`\sim`),
+        " は第 2 成分の ",
+        math(String.raw`2\pi`),
+        " の整数倍の差を同一視するので、",
+        math(String.raw`[(r,\theta-2n\pi)]_{\sim}=[(r,\theta)]_{\sim}`),
+        " である。",
+      ]),
+      paragraph([
+        "求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
 \sqrt{z}\sqrt{z}
-&= \phi_{\mathrm{cartesian}}\!\left([\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\theta/2-n\pi]_{\sim}\right)
-   \cdot\phi_{\mathrm{cartesian}}\!\left([\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\theta/2-n\pi]_{\sim}\right) \\
-&= \phi_{\mathrm{cartesian}}\!\left([r,\theta-2n\pi]_{\sim}\right)
-   \quad(\because \sqrt{r}^{\,\mathbb{R}_{\geq 0}}\cdot\sqrt{r}^{\,\mathbb{R}_{\geq 0}}=r) \\
-&= \phi_{\mathrm{cartesian}}\!\left([r,\theta]_{\sim}\right)
-   = \phi_{\mathrm{cartesian}}(\phi_{\mathrm{polar}}(z)) = z
-\end{aligned}`,
-      ),
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+   \cdot\phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}
+   \cdot\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二の}\ \phi_{\mathrm{cartesian}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}}\cdot\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{極座標表現の演算})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta-2n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{実数の和の計算})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第三})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\phi_{\mathrm{polar}}(z)\right)
+&&(\because\ r,\theta\ \text{の取り方})\\
+&= z
+&&(\because\ \text{準備の第二の}\ \phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}})
+\end{aligned}`),
+      paragraph([
+        "引いたブロックは ",
+        ref("sqrt_expansion_via_polar"),
+        "、",
+        ref("isomorphism_of_phi_cartesian"),
+        "、",
+        ref("operations_on_polar_representation"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("polar_equivalence_class"),
+        "、",
+        ref("def_phi_polar"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は 3 行の式で、根拠は途中の 1 行に " +
+          "sqrt(r)·sqrt(r)=r と書かれているだけだった。φ_cartesian が積を保つこと・" +
+          "極座標表現の演算・非負実数の sqrt の定義・同値関係 ~ が 2π の整数倍の差を" +
+          "同一視すること・φ_cartesian ∘ φ_polar = id をすべて段として明示し、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "原文が r,θ,n を導入せずに使っていたので、準備として書き下した。" +
+          "主張と仮定は変えていない。" +
+          "原文の [sqrt(r), θ/2-nπ]_~ という書き方（同値類の中の対に括弧が無い）は、" +
+          "同じファイルの他の証明と同じ [(r,θ)]_~ の形へ揃えた。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_042_claim_square_of_sqrt",
