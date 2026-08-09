@@ -7,29 +7,27 @@
 
 ## 現在地
 
-- 次に進めるセクション: **分配則を $\chi_U$ へ当てる**（セクション 10f'''b5）。
-  $s=\mathcal{O}_L$ と取るだけだが、**Lean では橋渡しが 1 本要る**。
-  具体版の `OrbitPermFamily L`（$\forall O,\ \mathfrak{B}_O$）と
-  `OrbitPermFamilyOn univ`（$\forall O,\ O\in\mathrm{univ}\to\mathfrak{B}_O$）は
-  **同じ型ではない**（後者は所属の証明を余分に受け取る）。人手証明では
-  $\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$ と等号で書いているので、Lean 側では
-  この 2 つを行き来する全単射を明示的に置いてから和の添字を取り替える。
-  積の側も `univ.attach` にわたる積から `univ` にわたる積へ移す補題が要る。
-- **次 tick のレビュー対象**: この tick（tick 37）で書いた分配則の Lean 3 ファイル
-  （具体版 `AlgebraicEigenvalue/OrbitFamilyDistributive.lean`・必要十分版
-  `NecSuf/AlgebraicEigenvalue/OrbitFamilyDistributive.lean`・導出）。とくに見るべき点は 3 つある。
-  第一に、具体版の帰納法の一歩が人手証明の 8 段の鎖と本当に対応しているか
-  （Lean では `Fintype.sum_mul_sum`・`Equiv.sum_comp`・`Fintype.sum_prod_type` の 3 手で
-  人手証明の第 3〜第 7 の等号をまとめている。まとめすぎて一ステップ一定理を崩していないか、
-  崩しているなら人手証明の段に合わせて分けるべきか）。
-  第二に、導出ファイルが `Subsingleton.elim` で 2 つの `Fintype` インスタンスを
-  突き合わせている箇所が、代入以外の内容を持ち込んでいないこと。
-  第三に、必要十分版の仮定 `[CommSemiring R]` が本当に必要十分か
-  （人手証明が使うと述べているのは積の結合則・可換性・単位元・分配則だけで、
-  和の側に零元と可換性が要る。可換半環より弱い仮定で通るなら削る）。
-- 前の「次に進めるセクション」の記述（tick 36 時点。参考のため残す）: 有限積の分配則の Lean。
-  着手時にまず要るのは `Fintype (FamilyOn B s)` である、という見立ては当たっていた
-  （`Fintype.ofEquiv` で部分型の Pi へ移す経路で通った）。
+- 次に進めるセクション: **各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること**（セクション 10f'''c）。
+  軌道 $O$ の上の全単射のうち、和に零元でない項を与えるのは「軌道の上を巡回する置換」だけである
+  ことを見て、残った項を足し合わせる段である。
+- **次 tick のレビュー対象**: この tick（tick 38）で書いた
+  「シフト行列の特性多項式は、軌道ごとの和の積である」の本文 `claim_shift_char_orbit_product`、
+  SageMath 検証 `shift-char-orbit-product`、および Lean 3 ファイル
+  （具体版 `AlgebraicEigenvalue/ShiftCharOrbitProduct.lean`・必要十分版・導出）。
+  とくに見るべき点は 3 つある。
+  第一に、人手証明の第 3 の等号を「分配則を右辺から左辺へ向けて使う」と書いたのが、
+  一ステップ一定理として十分か（向きを明示しただけで足りるか、
+  分配則の対偶ならぬ逆向きの読み方を主張として別に置くべきか）。
+  第二に、SageMath 検証が $\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$ を
+  「同じ手続きで 2 度作ったものを突き合わせている」だけになっていないか
+  （検証が構成から自明になっていないか。過去に同種の事故がある）。
+  第三に、必要十分版 `prod_sum_eq_sum_prod_pi` が新しく要求するのは `Fintype ι` だけだと
+  述べているが、値の側の仮定 `[CommSemiring R]` を部分集合版から素通しにしている点。
+  部分集合版の側で可換半環より弱い仮定で通るなら、両方から削れる。
+- 前の「次に進めるセクション」の記述（tick 37 時点。参考のため残す）: 分配則を $\chi_U$ へ当てる段。
+  Lean の橋渡しが 1 本要るという見立ては当たっていた
+  （`OrbitPermFamilyOn univ` と `OrbitPermFamily L` を行き来する `Equiv` を置き、
+  積の側は `Finset.prod_attach` と `Finset.attach_eq_univ` で移した）。
 - **2026-08-09 の tick 36 は、成果をコミットしたが push せずに終わっていた**
   （`origin/main` が 1 コミット遅れていた）。tick 37 の開始時に push して反映を確認した。
 - **2026-08-09 の tick 33 は、機械の負荷が異常に高くセクションを前進できなかった。**
@@ -90,7 +88,7 @@
 | 10f'''b2 | 固有値の代数性 | 和の添字を軌道ごとの置換の組 $\mathfrak{A}_L$ へ取り替えること | done | 2026-08-09 完了。定義 1 件・主張 3 件が四層すべて。本文と SageMath は異常終了した tick が残したもの、Lean は tick 32 で配線した。有限積の分配則による組み替えは重いので 10f'''b3 へ割り直した |
 | 10f'''b3 | 固有値の代数性 | 1 つの軌道の上の全単射の全体 $\mathfrak{B}_O$ と、軌道を 1 つ足した組の全体が「その軌道の上の全単射と残りの組との対」に 1 対 1 に対応すること（分配則の帰納法の一歩） | done | 2026-08-09 完了。定義 2 件・主張 1 件が四層すべて。もとの 10f'''b3（分配則そのもの）は 1 tick で四層まで終わらない大きさだったので 10f'''b3・10f'''b4・10f'''b5 へ割り直した |
 | 10f'''b4 | 固有値の代数性 | 有限積の分配則（$s$ の元の個数についての帰納法）$\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)=\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ | done | 2026-08-09 完了。主張 1 件が四層すべて。本文と SageMath は tick 36、Lean 具体版・必要十分版・導出は tick 37。和の添字にするための組の全体の有限性は、部分型の上の依存関数型との 1 対 1 対応を経由して移した（`Pi.fintype` が命題の上の Pi へ直接は効かないため）。mathlib の `Finset.prod_univ_sum` は引いていない |
-| 10f'''b5 | 固有値の代数性 | 分配則を $\chi_U$ へ当てて $\chi_U=\prod_{O}\bigl(\sum_{\psi\in\mathfrak{B}_O}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ とすること | todo | $s=\mathcal{O}_L$ と取るだけ。$\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$ を経由する |
+| 10f'''b5 | 固有値の代数性 | 分配則を $\chi_U$ へ当てて $\chi_U=\prod_{O}\bigl(\sum_{\psi\in\mathfrak{B}_O}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ とすること | done | 2026-08-09 完了。主張 1 件が四層すべて。Lean では $\mathfrak{A}(\mathcal{O}_L)$ と $\mathfrak{A}_L$ が別の型（所属の証明を受け取るか否か）なので、行き来する全単射を置いて和の添字を取り替えた。積の側は `Finset.prod_attach` と `Finset.attach_eq_univ` で移した |
 | 10f'''c | 固有値の代数性 | 各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（軌道の上を巡回する置換だけが残る） | todo | もとの 10f''' の後半 |
 | 10g | 固有値の代数性 | その根が 1 の $L$ 乗根であること（円分体 $\mathbb{Q}(\omega)\subset\overline{\mathbb{Q}}$ の導入。ここで $\overline{\mathbb{Q}}$ へ入る） | todo | もとの 10d の続き |
 | 10h | 固有値の代数性 | 転送行列をシフト行列の固有空間へ分ける（対角化） | todo | もとの 10e |
@@ -104,6 +102,23 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-09（tick 38）: 分配則を $\chi_U$ へ当て、セクション 10f'''b5 が**四層すべて**を満たした
+  （主張 1 件 `claim_shift_char_orbit_product`）。示したのは
+  $\chi_U=\prod_{O\in\mathcal{O}_L}\bigl(\sum_{\psi\in\mathfrak{B}_O}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ で、
+  $2^{L}$ 個の行配位にわたる置換の全体についての和として定義された特性多項式が、
+  軌道ごとに閉じた和の積として書けたことになる。人手証明は 3 段の鎖である
+  （前セクションの主張・$\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$・分配則を $s=\mathcal{O}_L$ と取った段）。
+  SageMath 検証はこの 3 段を別々に確かめ、$\mathfrak{S}_L$ を要さない 2 段は $L=4$ まで、
+  $\chi_U$ を定義から作る段は $L=3$（$8!=40320$ 通り）まで走らせた。
+  軌道ごとの和がすべて零元でないことも assert してある（積が空虚でないことの確認）。
+  Lean は前 tick の見立てどおり橋渡しが 1 本要った。`OrbitPermFamilyOn univ`（所属の証明を
+  受け取る形）と `OrbitPermFamily L`（受け取らない形）を行き来する `Equiv`（往復は `rfl`）を置き、
+  積の側は `Finset.prod_attach` と `Finset.attach_eq_univ` で `univ` にわたる積へ移した。
+  必要十分版が示したのは、この段が新しく要求するのが**添字の型が有限であることだけ**である
+  ことである（部分集合版は `s : Finset ι` がもとから有限なので `ι` の有限性を要求しなかった）。
+  検証は `lake build`・sorry 非依存 335 件・構造化テキストの検査一式・PDF 64 ページ・
+  検証と証明の対応 33 件がすべて通っている。
 
 - 2026-08-09（tick 37）: 有限積の分配則の **Lean 3 ファイル**（具体版・必要十分版・導出）を書き、
   セクション 10f'''b4 が四層すべてを満たした。和の添字にするために組の全体
@@ -1835,6 +1850,25 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 
 各 tick のレビューで**何をなぜ直したか**を 1 行ずつ追記する。直すものが無かった tick も
 「見た範囲」と「問題なし」を残す（見ていないのに見たことにしない）。
+
+- 2026-08-09（tick 38 のレビュー、前 tick で書いた分配則の Lean 3 ファイル
+  ——具体版 `AlgebraicEigenvalue/OrbitFamilyDistributive.lean`・必要十分版・導出）:
+  台帳が挙げていた 3 つの確認点のうち 2 つは問題なし、1 つで**1 件直した**。
+  - 第一の点（帰納法の一歩が人手証明の 8 段の鎖と対応しているか）で**直した**。
+    対応そのものは崩れていない——`Fintype.sum_mul_sum` が人手証明の第 3・第 4（同じ分配則を
+    2 度当てる段）に、`Equiv.sum_comp` が第 7 に、`Fintype.sum_prod_type` が第 5 に、
+    `prod_attach_orbitInsertFamily` が第 6・第 8 に当たり、8 段すべてが現れている。
+    第 3・第 4 をまとめてよいのは「同じ定理の複数箇所への同時適用」に当たるからである
+    （`docs/context/証明の書き方.md`）。ただし**どの補題がどの等号かがファイルに書かれておらず**、
+    Lean が左辺と右辺の両側から進んでいるため読み手が対応を復元できなかった。
+    具体版と必要十分版の一歩へ、8 つの等号との対応をコメントとして書いた（証明は変えていない）。
+  - 第二の点（導出が `Subsingleton.elim` で持ち込んでいるものが無いか）は**問題なし**。
+    突き合わせているのは同じ型の上の 2 つの `Fintype` インスタンスだけで、
+    `Fintype` は `Subsingleton` なので内容を持たない。
+  - 第三の点（必要十分版の `[CommSemiring R]` が必要十分か）は**この tick では削れないと判断した**。
+    証明が使うのは積の可換モノイド・和の可換モノイド・分配則であり、可換半環はこれを束ねた
+    mathlib の最小の既製クラスである。より弱い仮定は複数のクラスの重ね合わせになるので、
+    分けて書く価値があるかは次のセクションで同じ仮定が要るかを見てから決める（台帳へ持ち越した）。
 
 - 2026-08-09（tick 37 のレビュー、前 tick で書いた分配則の本文
   `claim_orbit_family_distributive` と SageMath 検証 `orbit-family-distributive`）:

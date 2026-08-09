@@ -12711,6 +12711,92 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "algebraic_eigenvalue_claim_shift_char_orbit_product",
+    kind: "claim",
+    title: {
+      text: "シフト行列の特性多項式は、軌道ごとの和の積である",
+    },
+    labels: ["claim_shift_char_orbit_product"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_sum",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_pi",
+      "Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamilyAll_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-char-orbit-product"],
+    statement: [
+      paragraph([
+        ref("def_shift_matrix"),
+        " のシフト行列 ",
+        math(String.raw`U`),
+        " の特性多項式 ",
+        math(String.raw`\chi_U`),
+        "（",
+        ref("def_characteristic_polynomial"),
+        "）について",
+      ]),
+      displayMath(
+        String.raw`\chi_U=\prod_{O\in\mathcal{O}_L}\Bigl(\sum_{\psi\in\mathfrak{B}_{O}}W_{O}\bigl(\mathrm{ch}(U),\psi\bigr)\Bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathcal{O}_L`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        "、",
+        math(String.raw`\mathfrak{B}_{O}`),
+        " は ",
+        ref("def_orbit_bijection_set"),
+        "、",
+        math(String.raw`W_{O}`),
+        " は ",
+        ref("def_orbit_term_factor"),
+        "）。",
+        math(String.raw`2^{L}`),
+        " 個の行配位にわたる置換の全体についての和として定義された特性多項式が、",
+        "軌道ごとに閉じた和の積として書けたことになる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_orbit_family_distributive"),
+        " の対応 ",
+        math(String.raw`g`),
+        " として、各 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " と各 ",
+        math(String.raw`\psi\in\mathfrak{B}_{O}`),
+        " へ ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元 ",
+        math(String.raw`W_{O}\bigl(\mathrm{ch}(U),\psi\bigr)`),
+        " を与えるものを取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_U
+&=\sum_{\alpha\in\mathfrak{A}_L}\ \prod_{O\in\mathcal{O}_L}W_{O}\bigl(\mathrm{ch}(U),\alpha(O)\bigr)
+&&(\because\ \blkref{claim_shift_char_sum_family})\\
+&=\sum_{\alpha\in\mathfrak{A}(\mathcal{O}_L)}\ \prod_{O\in\mathcal{O}_L}W_{O}\bigl(\mathrm{ch}(U),\alpha(O)\bigr)
+&&(\because\ \blkref{def_orbit_family_on_subset}\ \text{の}\ \mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L)\\
+&=\prod_{O\in\mathcal{O}_L}\Bigl(\sum_{\psi\in\mathfrak{B}_{O}}W_{O}\bigl(\mathrm{ch}(U),\psi\bigr)\Bigr)
+&&(\because\ \blkref{claim_orbit_family_distributive}\ \text{を}\ s=\mathcal{O}_L\ \text{と取ったもの})
+\end{aligned}`),
+      paragraph([
+        "第 3 の等号は分配則を右辺から左辺へ向けて使っている。",
+        ref("claim_orbit_family_distributive"),
+        " は等式なので、どちらの向きに読んでもよい。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の有限和と有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
