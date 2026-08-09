@@ -180,12 +180,19 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 
 | | |
 |---|---|
-| ラベル | `com.masaori.ising-lambda-audit` |
-| 実体 | `scripts/audit-loop.sh`（毎時 55 分。tick が終わったあと） |
-| ログ | `logs/audit.log`（git 管理外） |
+| 毎時の軽い監査 | `com.masaori.ising-lambda-audit` → `scripts/audit-light.sh`（毎時 55 分） |
+| 日次の重い監査 | `com.masaori.ising-lambda-audit-full` → `scripts/audit-loop.sh`（毎日 04:20） |
+| ログ | `logs/audit.log`（git 管理外。軽いほうは行頭に `[light]` が付く） |
+
+**2 つに分けた理由**: SageMath の検証が 34 件（$L=6$ まで走るものもある）に増えて、
+監査 1 回が 1 時間の枠に収まらなくなり、次の回が前の回に重なって結果を 2 時間出せなくなった
+（実測 2026-08-10 02:00）。毎時は速い検査だけにし、SageMath の全数検証は日次へ移した。
 
 監査がやること。
 
+0. 毎時の軽い監査が見るもの: tick のログ、`origin/main` が止まっていないか（3 時間）、
+   構造化テキストの検査一式・PDF 生成・検証と証明の対応、Lean、台帳と本文の突き合わせ。
+   **SageMath の全数検証は見ない**（日次へ）。以下は日次の重い監査がやること。
 1. tick のログから、通知されていない失敗（打ち切り・異常終了）を拾う。
 2. `origin/main` を専用の worktree へ取り出し（走行中の tick と踏み合わないため）、
    依存を入れて**四層の検証を全部再現する**（構造化テキストの検査一式・PDF 生成・
