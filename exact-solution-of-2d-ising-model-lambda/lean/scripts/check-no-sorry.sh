@@ -299,6 +299,21 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_filter_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.existsUnique_rowConfigMin
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_isMin
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_mem
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_le
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_nonempty
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_orbit_ne
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.exists_min
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.min_unique
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.existsUnique_min
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.ne_of_mem_of_mem_of_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_compare
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_asymm
+  Ising2DLambda.AlgebraicEigenvalue.isRowConfigMin_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.existsUnique_rowConfigMin_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_orbit_ne_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.inversionCount_orbit_decomposition_from_necSuf
 )
 

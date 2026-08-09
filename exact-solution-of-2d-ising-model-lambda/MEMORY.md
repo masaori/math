@@ -18,8 +18,8 @@
 | 層 | 状態 |
 | --- | --- |
 | 記述（構造化テキスト） | 上記の定義 55 件・主張 56 件・定理 3 件・注意 1 件（ラベルの数。合計 116 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 247 件を登録）が通る |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 282 件を登録）が通る |
 | Lean 必要十分版 | 主張 53 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -321,6 +321,24 @@ $\mathrm{Inv}^{\ne}(\varphi)=\{(\tau,\tau')\in\mathrm{Inv}(\varphi)\mid O(\tau)\
 軌道の大きさが $L$ の約数であることから、$\overline{\mathbb{Q}}$ を持ち出す前に
 「$\chi_U$ が $(t^{L}-1)$ の冪を割る」という $\mathbb{Z}[t]$ の中の整除関係として書ける。
 
+さらに、行配位の空でない部分集合 $X\subset R_L$ の最小元 $\mu(X)$ を定義し、次の 2 つを示した。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+$\mu(X)$ は集合ではなく $R_L$ の元であり、$X$ が空のときは定まらない。
+
+- 空でない部分集合は $\prec$ の最小元をちょうど 1 つ持つ。
+  証明は、存在が元の個数についての帰納法（1 元の場合から始め、元を 1 つ足す）、
+  一意性が三分律の「ちょうど 1 つ」による背理法である。
+  **この証明は推移律を使う**（またがる転倒対の偶数性が三分律だけで通ったのと対照的である）。
+- 相異なる軌道の最小元は相異なる（$\mu(O)\in O$ と、相異なる軌道が互いに素であることによる）。
+  必要十分版が示したのは、存在が要求するのは「相異なる 2 点が比較できること」と推移律だけで
+  **非対称性は一意性の側でだけ要る**こと、および後者が**最小元の理論に属さず**
+  「交わらない 2 つの集合から取った 2 点は相異なる」という言明でしかないことである。
+
+これは、またぐ転倒対の全体の個数が偶数であることを示すための足場である。
+軌道の対ごとの偶数性を足し合わせるとき $(O,O')$ と $(O',O)$ を 2 度数えないよう、
+軌道の順序対の全体を $\mu(O)\prec\mu(O')$ かどうかで半分に分ける。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
@@ -334,14 +352,13 @@ $\mathrm{Inv}^{\ne}(\varphi)=\{(\tau,\tau')\in\mathrm{Inv}(\varphi)\mid O(\tau)\
 
 ## 次回やること
 
-1. **またぐ転倒対の全体の個数が偶数であることと、符号が軌道ごとの符号の積になること**
-   （章「固有値の代数性」の続き。台帳のセクション 10f''c3）。
-   転倒数の分解までは済んでいるので、次は $|\mathrm{Inv}^{\ne}(\varphi)|$ が偶数であることを、
-   軌道の対ごとの偶数性 $|J_\varphi(O,O')|$ を非順序対にわたって足し合わせて出し、そこから
-   $\mathrm{sgn}(\varphi)=\prod_O\mathrm{sgn}_O(\varphi\!\restriction_O)$ を出す。
-   軌道の上の全単射の符号 $\mathrm{sgn}_O$ はまだ定義していないので、そこで定義する。
-   足し合わせは順序対で走らせると 2 重に数えるので、非順序対にわたる和の書き方を先に決めること。
-   そのあと各因子が $t^{|O|}-1$ であること（10f'''）と続く。
+1. **またぐ転倒対の全体の個数が偶数であること**（章「固有値の代数性」の続き。
+   台帳のセクション 10f''c4）。軌道の相異なる順序対の全体を、最小元の順序
+   $\mu(O)\prec\mu(O')$ で半分に分け、$\mathrm{Inv}^{\ne}(\varphi)$ がその半分にわたる
+   $J_\varphi(O,O')$ の交わらない合併であることを示して、対ごとの偶数性を足し合わせる。
+   $J_\varphi(O,O')$ は $(O,O')$ と $(O',O)$ で同じ集合なので、半分だけを走らせる。
+   そのあと符号の積表示（10f''c5。軌道の上の全単射の符号 $\mathrm{sgn}_O$ の定義もそこで置く）、
+   各因子が $t^{|O|}-1$ であること（10f'''）と続く。
 
 ## 未解決の設計問題
 
