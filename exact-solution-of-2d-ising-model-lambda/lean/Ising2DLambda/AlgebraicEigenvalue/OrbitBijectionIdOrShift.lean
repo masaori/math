@@ -56,7 +56,11 @@ theorem shiftOrbitRestriction_val (O : OrbitIndex L) (τ : {τ : RowConfig L // 
 
 /-- 人手証明が証明の中だけで使う `F = { τ ∈ O | ψ(τ) = τ }`（`ψ` が動かさない行配位の全体）。
 
-Finset ではなく述語として置く（帰納法で現れる行配位ごとに所属の証明を持ち回さないため）。 -/
+Finset ではなく述語として置く（帰納法で現れる行配位ごとに所属の証明を持ち回さないため）。
+**これで人手証明との 1 対 1 対応は保たれている。** 述語 `Fixed O ψ` は集合 `F` の所属条件
+`t ∈ O ∧ ψ(t) = t` をそのまま書いたものであり、人手証明は `F` を集合として使っていない
+（元の個数を数えず、像も取らず、`F = ∅` か否かと `F = O` を所属だけで論じている）。
+したがって Finset として持ち直す必要はない。 -/
 def Fixed (O : Finset (RowConfig L))
     (ψ : {τ : RowConfig L // τ ∈ O} ≃ {τ : RowConfig L // τ ∈ O}) (t : RowConfig L) : Prop :=
   t ∈ O ∧ ambientOf O ψ t = t
