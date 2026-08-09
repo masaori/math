@@ -32,6 +32,7 @@ export const ALL_LABELS = [
   "claim_log_power",
   "claim_matrix_pow_entry",
   "claim_non_orbit_preserving_term_zero",
+  "claim_orbit_family_distributive",
   "claim_orbit_family_insert_bijection",
   "claim_orbit_gluing_bijective",
   "claim_orbit_gluing_orbit_preserving",

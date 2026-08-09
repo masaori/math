@@ -12594,6 +12594,123 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "algebraic_eigenvalue_claim_orbit_family_distributive",
+    kind: "claim",
+    title: {
+      text: "軌道の部分集合にわたる有限積の分配則",
+    },
+    labels: ["claim_orbit_family_distributive"],
+    habitat: "Z",
+    verification: ["sagemath/check/orbit-family-distributive"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " と各 ",
+        math(String.raw`\psi\in\mathfrak{B}_{O}`),
+        "（",
+        ref("def_orbit_bijection_set"),
+        "）へ ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元 ",
+        math(String.raw`g(O,\psi)`),
+        " を与える対応 ",
+        math(String.raw`g`),
+        " を任意に取る。このとき、任意の ",
+        math(String.raw`s\subset\mathcal{O}_L`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\prod_{O\in s}\Bigl(\sum_{\psi\in\mathfrak{B}_{O}}g(O,\psi)\Bigr)=\sum_{\alpha\in\mathfrak{A}(s)}\ \prod_{O\in s}g\bigl(O,\alpha(O)\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathfrak{A}(s)`),
+        " は ",
+        ref("def_orbit_family_on_subset"),
+        "）。両辺とも ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の有限和と有限積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s`),
+        " の元の個数についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点は ",
+        math(String.raw`s=\emptyset`),
+        " の場合である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{O\in\emptyset}\Bigl(\sum_{\psi\in\mathfrak{B}_{O}}g(O,\psi)\Bigr)
+&=1
+&&(\because\ \text{空集合にわたる有限積は}\ 1\ \text{である})\\
+&=\sum_{\alpha\in\mathfrak{A}(\emptyset)}1
+&&(\because\ \blkref{def_orbit_family_on_subset}\ \text{の}\ \mathfrak{A}(\emptyset)\ \text{がちょうど 1 元であること})\\
+&=\sum_{\alpha\in\mathfrak{A}(\emptyset)}\ \prod_{O\in\emptyset}g\bigl(O,\alpha(O)\bigr)
+&&(\because\ \text{空集合にわたる有限積は}\ 1\ \text{である})
+\end{aligned}`),
+      paragraph([
+        "一歩を示す。",
+        math(String.raw`s\subset\mathcal{O}_L`),
+        " について主張が成り立つとし、",
+        math(String.raw`O_0\in\mathcal{O}_L`),
+        " を ",
+        math(String.raw`O_0\notin s`),
+        " を満たすように取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{O\in\{O_0\}\cup s}\Bigl(\sum_{\psi\in\mathfrak{B}_{O}}g(O,\psi)\Bigr)
+&=\Bigl(\sum_{\psi\in\mathfrak{B}_{O_0}}g(O_0,\psi)\Bigr)\cdot\prod_{O\in s}\Bigl(\sum_{\psi\in\mathfrak{B}_{O}}g(O,\psi)\Bigr)
+&&(\because\ \text{元を 1 つ足した集合にわたる有限積は、その元での値と残りの積である}\ (O_0\notin s))\\
+&=\Bigl(\sum_{\psi\in\mathfrak{B}_{O_0}}g(O_0,\psi)\Bigr)\cdot\sum_{\alpha\in\mathfrak{A}(s)}\ \prod_{O\in s}g\bigl(O,\alpha(O)\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=\sum_{\psi\in\mathfrak{B}_{O_0}}\Bigl(g(O_0,\psi)\cdot\sum_{\alpha\in\mathfrak{A}(s)}\ \prod_{O\in s}g\bigl(O,\alpha(O)\bigr)\Bigr)
+&&(\because\ \mathbb{Z}[x][t]\ \text{の有限和と元の積についての分配則})\\
+&=\sum_{\psi\in\mathfrak{B}_{O_0}}\ \sum_{\alpha\in\mathfrak{A}(s)}\Bigl(g(O_0,\psi)\cdot\prod_{O\in s}g\bigl(O,\alpha(O)\bigr)\Bigr)
+&&(\because\ \text{同じ分配則を各}\ \psi\ \text{の項へ})\\
+&=\sum_{(\psi,\alpha)\in\mathfrak{B}_{O_0}\times\mathfrak{A}(s)}\Bigl(g(O_0,\psi)\cdot\prod_{O\in s}g\bigl(O,\alpha(O)\bigr)\Bigr)
+&&(\because\ \text{2 重の有限和は積集合にわたる有限和である})\\
+&=\sum_{(\psi,\alpha)\in\mathfrak{B}_{O_0}\times\mathfrak{A}(s)}\Bigl(g\bigl(O_0,(\mathrm{ins}(\psi,\alpha))(O_0)\bigr)\cdot\prod_{O\in s}g\bigl(O,(\mathrm{ins}(\psi,\alpha))(O)\bigr)\Bigr)
+&&(\because\ \blkref{claim_orbit_family_insert_bijection}\ \text{の}\ \mathrm{ins}\ \text{の定義と}\ O_0=O_0,\ (O\in s\ \Rightarrow\ O\ne O_0))\\
+&=\sum_{\beta\in\mathfrak{A}(\{O_0\}\cup s)}\Bigl(g\bigl(O_0,\beta(O_0)\bigr)\cdot\prod_{O\in s}g\bigl(O,\beta(O)\bigr)\Bigr)
+&&(\because\ \blkref{claim_orbit_family_insert_bijection}\ \text{の}\ \mathrm{ins}\ \text{と}\ \mathrm{spl}\ \text{が互いに逆であること})\\
+&=\sum_{\beta\in\mathfrak{A}(\{O_0\}\cup s)}\ \prod_{O\in\{O_0\}\cup s}g\bigl(O,\beta(O)\bigr)
+&&(\because\ \text{元を 1 つ足した集合にわたる有限積は、その元での値と残りの積である}\ (O_0\notin s))
+\end{aligned}`),
+      paragraph([
+        "第 6 の等号で ",
+        math(String.raw`O\in s`),
+        " から ",
+        math(String.raw`O\ne O_0`),
+        " が出るのは ",
+        math(String.raw`O_0\notin s`),
+        " による。第 7 の等号は、互いに逆な 2 つの写像が与える 1 対 1 対応で和の添字を",
+        "取り替えたものであり、和の項は取り替えの前後で同じ元である。",
+      ]),
+      paragraph([
+        "証明が ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " について使ったのは、積の結合則と可換性、単位元 ",
+        math(String.raw`1`),
+        "、および有限和と元の積についての分配則だけである。",
+        "「元を 1 つ足した集合にわたる有限積は、その元での値と残りの積である」と",
+        "「2 重の有限和は積集合にわたる有限和である」は、いずれも集合の元の個数についての",
+        "帰納法でこれらから出る。引き算も、零因子が無いことも使っていない。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の和と積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
