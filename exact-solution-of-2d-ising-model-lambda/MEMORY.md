@@ -445,7 +445,20 @@ $s=\mathcal{O}_L$ と取ったものが $\mathfrak{A}_L$ である。$s$ を動�
   さらに、**第 2 の等式 $\mathrm{ins}(\mathrm{spl}(\beta))=\beta$ は $O_0\notin s$ すら要求しない**。
   場合分けが $O=O_0$ か否かだけによっているためで、この仮定が要るのは第 1 の等式の側だけである。
 
-残るのは、有限積の分配則そのもの（$s$ の元の個数についての帰納法）と、それを $\chi_U$ へ当てて
+さらに、軌道の部分集合にわたる有限積の分配則を示した（**本文と SageMath 検証まで。Lean は未着手**）。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)
+  =\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g\bigl(O,\alpha(O)\bigr)$（任意の $s\subset\mathcal{O}_L$）。
+  証明は $s$ の元の個数についての帰納法である。出発点は空集合にわたる有限積が $1$ であることと
+  $\mathfrak{A}(\emptyset)$ がちょうど 1 元であること、一歩は 8 段の一続きの鎖で、
+  有限積から $O_0$ の因子を 1 つ分けて帰納法の仮定を当て、分配則を 2 度使って 2 重の和にし、
+  積集合にわたる和へまとめ、$\mathrm{ins}$ の値で項を書き換えてから、
+  $\mathrm{ins}$ と $\mathrm{spl}$ が互いに逆であることで和の添字を組へ取り替える。
+  $\mathbb{Z}[x][t]$ について使うのは積の結合則と可換性、単位元、および有限和と元の積に
+  ついての分配則だけである（引き算も、零因子が無いことも使わない）。
+
+残るのは、この分配則の Lean（具体版・必要十分版・導出）と、それを $\chi_U$ へ当てて
 組にわたる和を軌道ごとの和の積へ組み替える段、そして各軌道の因子の和が
 $t^{\lvert O\rvert}-1$ になる段である。
 
@@ -462,13 +475,14 @@ $t^{\lvert O\rvert}-1$ になる段である。
 
 ## 次回やること
 
-1. **有限積の分配則そのもの**（章「固有値の代数性」の続き。台帳のセクション 10f'''b4）。
-   $\prod_{O\in s}\bigl(\sum_{\psi\in\mathfrak{B}_O}g(O,\psi)\bigr)
-   =\sum_{\alpha\in\mathfrak{A}(s)}\prod_{O\in s}g(O,\alpha(O))$ を
-   $s$ の元の個数についての帰納法で示す。一歩に要る 1 対 1 対応は tick 35 で済んでいる。
-   **着手時にまず確かめること**: Lean では依存関数型 `OrbitPermFamilyOn` の上で
-   `Finset.induction_on` を回すことになる。mathlib の `Finset.prod_univ_sum` へ丸投げしない
-   （必要十分版の要件に反する）。
+1. **有限積の分配則の Lean**（章「固有値の代数性」の続き。台帳のセクション 10f'''b4）。
+   本文と SageMath 検証は tick 36 で済んでいるので、残っているのは Lean の
+   具体版・必要十分版・導出だけである。
+   **着手時にまず要ること**: 和の添字にするための `Fintype (FamilyOn B s)`。
+   `FamilyOn B s = ∀ i, i ∈ s → B i` は Prop 上の Pi なので `Pi.fintype` が直接は効かず、
+   `∀ i : {x // x ∈ s}, B i.1` との全単射（両向き `rfl`）を置いて `Fintype.ofEquiv` で移す。
+   帰納法の一歩は tick 35 の `insertFamily` / `splitFamily` から `Equiv` を作る。
+   mathlib の `Finset.prod_univ_sum` へ丸投げしない（必要十分版の要件に反する）。
 2. そのあと、分配則を $\chi_U$ へ当てる（セクション 10f'''b5）。$s=\mathcal{O}_L$ と取るだけである。
 
 ## 未解決の設計問題
