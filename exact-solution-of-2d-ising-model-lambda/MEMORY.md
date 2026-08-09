@@ -14,15 +14,15 @@
 軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限・
 軌道ごとの置換の組の貼り合わせ・2 つの軌道にまたがる転倒対の偶数性・転倒数の軌道ごとの分解・
 行配位の空でない部分集合の最小元・またぐ転倒対の全体の個数の偶数性・
-符号の軌道ごとの符号の積への分解）が、
+符号の軌道ごとの符号の積への分解・項の軌道ごとの因子への分解）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 61 件・主張 65 件・定理 3 件・注意 1 件（ラベルの数。合計 130 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 298 件を登録）が通る |
-| Lean 必要十分版 | 主張 57 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 62 件・主張 68 件・定理 3 件・注意 1 件（ラベルの数。合計 134 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 307 件を登録）が通る |
+| Lean 必要十分版 | 主張 60 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -376,6 +376,25 @@ $\mathrm{sgn}_{O}$ と $\mathrm{sgn}$ は定義域の違う別の写像である
 
 これで、シフト行列の特性多項式 $\chi_U$ を軌道ごとの因子の積へ組み替える材料が揃った。
 
+さらに、軌道の因子
+$W_{O}(B,\psi)=\iota\bigl(\kappa(\mathrm{sgn}_{O}(\psi))\bigr)\cdot\prod_{\tau\in O}B_{\tau,\psi(\tau)}\in\mathbb{Z}[x][t]$
+を定義し、次の 3 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+$W_{O}$ の第 1 引数に行列を書くのは、この因子が $B$ ごとに違う元だからである。
+
+- $\iota\circ\kappa$ は有限積を有限積へ写す（$\iota(\kappa(\prod_i n_i))=\prod_i\iota(\kappa(n_i))$）。
+  使うのは単位元と積を保つことだけで、和を保つことは使わない。
+- 行配位の全体にわたる有限積は、軌道ごとの有限積の積である
+  （$\prod_{\tau\in R_L}f(\tau)=\prod_{O}\prod_{\tau\in O}f(\tau)$）。
+  使うのは分割の 3 条件のうち合併と互いに素であることの 2 つだけである。
+- 軌道を保つ置換が与える項は、軌道ごとの因子の積である
+  （$\iota(\kappa(\mathrm{sgn}(\varphi)))\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}=\prod_{O}W_{O}(B,\varphi\!\restriction_{O})$）。
+  必要十分版が示したのは、この段が 2 つの分解（符号の積表示と積の軌道ごとの分解）を
+  受け取ってしまえば可換モノイドの性質しか使わず、**順序 $\prec$ も軌道の作り方も現れない**ことである。
+
+残るのは、$\chi_U$ の和を軌道ごとの置換の組にわたる和へ書き直して分配則で積へ組み替える段と、
+各軌道の因子の和が $t^{\lvert O\rvert}-1$ になる段である。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
@@ -389,12 +408,12 @@ $\mathrm{sgn}_{O}$ と $\mathrm{sgn}$ は定義域の違う別の写像である
 
 ## 次回やること
 
-1. **各軌道の因子が $t^{\lvert O\rvert}-1$ であること**（章「固有値の代数性」の続き。
-   台帳のセクション 10f'''）。消えない項の同定・軌道ごとの置換の組との 1 対 1 対応・
-   符号の積表示を $\chi_U$ の和へ代入して軌道ごとの積へ組み替え、各因子で
-   「$O$ の上を巡回する置換」以外の項が消えることを見る。
-   **1 tick に収まらない見込みが強いので、着手時にまず「和を積へ組み替える段」と
-   「各因子の計算」へ割り直すこと。**
+1. **$\chi_U$ の和を軌道ごとの置換の組にわたる和へ書き直し、和を積へ組み替えること**
+   （章「固有値の代数性」の続き。台帳のセクション 10f'''b）。消えない項の同定で和を
+   軌道を保つ置換だけに絞り、$\mathfrak{A}_L$ との 1 対 1 対応で添字を組へ取り替え、
+   有限積の分配則で $\prod_{O}\bigl(\sum_{\psi}W_{O}(\mathrm{ch}(U),\psi)\bigr)$ の形にする。
+   **分配則の段が重い見込みなので、着手時に「和の添字の取り替え」と「分配則」へ
+   さらに割ることを検討すること。**
 
 ## 未解決の設計問題
 

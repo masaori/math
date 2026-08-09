@@ -333,6 +333,16 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_prod_pow_of_even_remainder
   Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign_from_necSuf
+  # 「軌道を保つ置換の項は軌道ごとの因子の積である」（定義 1 件・主張 3 件）
+  Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod
+  Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit
+  Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.map_prod_of_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_eq_prod_of_partition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_prod_eq_prod_mul_of_decomp
+  Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -11524,6 +11524,366 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "algebraic_eigenvalue_claim_const_embedding_prod",
+    kind: "claim",
+    title: { text: "整数を係数へ送る写像は、有限積を有限積へ写す" },
+    labels: ["claim_const_embedding_prod"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.map_prod_of_mul",
+      "Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-term-factorization"],
+    statement: [
+      paragraph([
+        "有限集合 ",
+        math(String.raw`s`),
+        " と、その各元 ",
+        math(String.raw`i\in s`),
+        " へ整数 ",
+        math(String.raw`n_i\in\mathbb{Z}`),
+        " を与える写像を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`\iota\Bigl(\kappa\bigl(\textstyle\prod_{i\in s}n_i\bigr)\Bigr)=\prod_{i\in s}\iota\bigl(\kappa(n_i)\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "）。左辺の積は ",
+        math(String.raw`\mathbb{Z}`),
+        " の中の有限積、右辺の積は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の有限積であり、住む集合が違う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s`),
+        " の元の個数についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " が空のとき、左辺は ",
+        math(String.raw`\iota(\kappa(1))`),
+        "、右辺は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元であり、",
+        ref("def_second_constant_embedding"),
+        " により両者は等しい（空の積は単位元である）。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " について主張が成り立つとし、",
+        math(String.raw`s`),
+        " に属さない元 ",
+        math(String.raw`a`),
+        " を 1 つ足した ",
+        math(String.raw`s\cup\{a\}`),
+        " を考える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota\Bigl(\kappa\bigl(\textstyle\prod_{i\in s\cup\{a\}}n_i\bigr)\Bigr)
+&=\iota\Bigl(\kappa\bigl(n_a\cdot\textstyle\prod_{i\in s}n_i\bigr)\Bigr)
+&&(\because\ \text{有限積から因子を}\ 1\ \text{つ括り出す})\\
+&=\iota\Bigl(\kappa(n_a)\cdot\kappa\bigl(\textstyle\prod_{i\in s}n_i\bigr)\Bigr)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa\ \text{は積を保つ})\\
+&=\iota\bigl(\kappa(n_a)\bigr)\cdot\iota\Bigl(\kappa\bigl(\textstyle\prod_{i\in s}n_i\bigr)\Bigr)
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{の}\ \iota\ \text{は積を保つ})\\
+&=\iota\bigl(\kappa(n_a)\bigr)\cdot\prod_{i\in s}\iota\bigl(\kappa(n_i)\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=\prod_{i\in s\cup\{a\}}\iota\bigl(\kappa(n_i)\bigr)
+&&(\because\ \text{有限積へ因子を}\ 1\ \text{つ戻す})
+\end{aligned}`),
+      paragraph([
+        ref("def_constant_polynomial"),
+        "、",
+        ref("def_second_constant_embedding"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この証明が ",
+        math(String.raw`\kappa`),
+        " と ",
+        math(String.raw`\iota`),
+        " について使っているのは、単位元を単位元へ送ることと積を保つことだけである。",
+        "和を保つことは使っていない（この証明に和が一度も現れない）。",
+      ]),
+      paragraph([
+        "現れるのは有限集合と整数の積、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_prod_orbit_decomposition",
+    kind: "claim",
+    title: { text: "行配位の全体にわたる有限積は、軌道ごとの有限積の積である" },
+    labels: ["claim_prod_orbit_decomposition"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_eq_prod_of_partition",
+      "Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-term-factorization"],
+    statement: [
+      paragraph([
+        "各行配位 ",
+        math(String.raw`\tau\in R_L`),
+        " へ ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元 ",
+        math(String.raw`f(\tau)`),
+        " を与える写像 ",
+        math(String.raw`f`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`\prod_{\tau\in R_L}f(\tau)=\prod_{O\in\mathcal{O}_L}\ \prod_{\tau\in O}f(\tau)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathcal{O}_L`),
+        " は ",
+        ref("def_row_config_orbit_set"),
+        "）。両辺とも ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の有限積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in R_L}f(\tau)
+&=\prod_{\tau\in\bigcup_{O\in\mathcal{O}_L}O}f(\tau)
+&&(\because\ \blkref{claim_row_config_orbit_partition}\ \text{の合併が}\ R_L\ \text{であること})\\
+&=\prod_{O\in\mathcal{O}_L}\ \prod_{\tau\in O}f(\tau)
+&&(\because\ \text{互いに素な族の合併にわたる有限積は、族の元ごとの有限積の積である})
+\end{aligned}`),
+      paragraph([
+        ref("claim_row_config_orbit_partition"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "第 2 の等号で使った「互いに素な族の合併にわたる有限積は、族の元ごとの有限積の積である」は、",
+        math(String.raw`\mathcal{O}_L`),
+        " の元の個数についての帰納法で、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積の結合則と可換性から出る（互いに素であることは、同じ因子を 2 度掛けないために要る）。",
+        "使っているのは分割の 3 条件のうち合併と互いに素であることの 2 つだけで、",
+        "どの元も空でないことは使っていない。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_orbit_term_factor",
+    kind: "definition",
+    title: { text: "軌道の因子" },
+    labels: ["def_orbit_term_factor"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitFactor"],
+    verification: ["sagemath/check/orbit-term-factorization"],
+    statement: [
+      paragraph([
+        "行列 ",
+        math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        "（",
+        ref("def_second_matrix"),
+        "）、軌道 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）、および ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射 ",
+        math(String.raw`\psi`),
+        " を任意に取る。",
+        math(String.raw`B`),
+        " が定める ",
+        math(String.raw`O`),
+        " の因子を",
+      ]),
+      displayMath(
+        String.raw`W_{O}(B,\psi):=\iota\bigl(\kappa(\mathrm{sgn}_{O}(\psi))\bigr)\cdot\prod_{\tau\in O}B_{\tau,\psi(\tau)}\in\mathbb{Z}[x][t]`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`\mathrm{sgn}_{O}`),
+        " は ",
+        ref("def_orbit_permutation_sign"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "）。",
+        math(String.raw`\tau\in O`),
+        " について ",
+        math(String.raw`\psi(\tau)\in O\subset R_L`),
+        " なので、成分 ",
+        math(String.raw`B_{\tau,\psi(\tau)}`),
+        " は定まっている。",
+      ]),
+      paragraph([
+        "右辺の積は有限個の因子からなり、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積は可換かつ結合的なので、因子を並べる順序によらない。",
+        "整数である符号を ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元として使う経路は ",
+        ref("def_second_determinant"),
+        " と同じく ",
+        math(String.raw`\iota\circ\kappa`),
+        " だけである。",
+      ]),
+      paragraph([
+        math(String.raw`W_{O}`),
+        " の下付きの ",
+        math(String.raw`O`),
+        " は台に取った軌道を指す添え名であって、成分の添字ではない。",
+        "第 1 引数に行列を書くのは、この因子が ",
+        math(String.raw`B`),
+        " ごとに違う元だからである。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と順序と数え上げ、整数の積、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_term_factorization",
+    kind: "claim",
+    title: { text: "軌道を保つ置換が与える項は、軌道ごとの因子の積である" },
+    labels: ["claim_orbit_term_factorization"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_prod_eq_prod_mul_of_decomp",
+      "Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-term-factorization"],
+    statement: [
+      paragraph([
+        "任意の行列 ",
+        math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+        "（",
+        ref("def_second_matrix"),
+        "）と任意の ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        "（",
+        ref("def_orbit_preserving_permutation"),
+        "）について",
+      ]),
+      displayMath(
+        String.raw`\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}=\prod_{O\in\mathcal{O}_L}W_{O}\bigl(B,\varphi\!\restriction_{O}\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（左辺は ",
+        ref("def_second_determinant"),
+        " の和の ",
+        math(String.raw`\varphi`),
+        " の項、",
+        math(String.raw`W_{O}`),
+        " は ",
+        ref("def_orbit_term_factor"),
+        "、",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}
+&=\iota\Bigl(\kappa\bigl(\textstyle\prod_{O\in\mathcal{O}_L}\mathrm{sgn}_{O}(\varphi\restriction_{O})\bigr)\Bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}
+&&(\because\ \blkref{claim_permutation_sign_orbit_product})\\
+&=\Bigl(\prod_{O\in\mathcal{O}_L}\iota\bigl(\kappa(\mathrm{sgn}_{O}(\varphi\restriction_{O}))\bigr)\Bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}
+&&(\because\ \blkref{claim_const_embedding_prod})\\
+&=\Bigl(\prod_{O\in\mathcal{O}_L}\iota\bigl(\kappa(\mathrm{sgn}_{O}(\varphi\restriction_{O}))\bigr)\Bigr)\cdot\prod_{O\in\mathcal{O}_L}\ \prod_{\tau\in O}B_{\tau,\varphi(\tau)}
+&&(\because\ \blkref{claim_prod_orbit_decomposition})\\
+&=\prod_{O\in\mathcal{O}_L}\Bigl(\iota\bigl(\kappa(\mathrm{sgn}_{O}(\varphi\restriction_{O}))\bigr)\cdot\prod_{\tau\in O}B_{\tau,\varphi(\tau)}\Bigr)
+&&(\because\ \text{2 つの有限積の積は、成分ごとの積の有限積である})\\
+&=\prod_{O\in\mathcal{O}_L}\Bigl(\iota\bigl(\kappa(\mathrm{sgn}_{O}(\varphi\restriction_{O}))\bigr)\cdot\prod_{\tau\in O}B_{\tau,(\varphi\restriction_{O})(\tau)}\Bigr)
+&&(\because\ \blkref{def_orbit_restriction}\ \text{の}\ (\varphi\!\restriction_{O})(\tau)=\varphi(\tau))\\
+&=\prod_{O\in\mathcal{O}_L}W_{O}\bigl(B,\varphi\!\restriction_{O}\bigr)
+&&(\because\ \blkref{def_orbit_term_factor})
+\end{aligned}`),
+      paragraph([
+        ref("def_permutation_sign"),
+        "、",
+        ref("def_orbit_permutation_sign"),
+        "、",
+        ref("def_orbit_restriction"),
+        "、",
+        ref("def_orbit_term_factor"),
+        "、",
+        ref("claim_permutation_sign_orbit_product"),
+        "、",
+        ref("claim_const_embedding_prod"),
+        "、",
+        ref("claim_prod_orbit_decomposition"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "第 4 の等号で使った「2 つの有限積の積は、成分ごとの積の有限積である」は、",
+        math(String.raw`\mathcal{O}_L`),
+        " の元の個数についての帰納法で、",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積の結合則と可換性から出る。",
+      ]),
+      paragraph([
+        "この証明が使っているのは、符号の積表示と積の軌道ごとの分解という 2 つの分解、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積が可換かつ結合的であることだけである。",
+        "順序 ",
+        math(String.raw`\prec`),
+        " も軌道の作り方もここには現れない（どちらも 2 つの分解を作る側にある）。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と数え上げ、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },
