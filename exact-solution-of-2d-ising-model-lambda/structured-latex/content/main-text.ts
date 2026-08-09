@@ -11318,6 +11318,210 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "algebraic_eigenvalue_definition_orbit_permutation_sign",
+    kind: "definition",
+    title: { text: "軌道の上の全単射の符号" },
+    labels: ["def_orbit_permutation_sign"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitPermSign"],
+    verification: ["sagemath/check/orbit-permutation-sign"],
+    statement: [
+      paragraph([
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）と、",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射 ",
+        math(String.raw`\psi`),
+        " を任意に取る。",
+        ref("def_orbit_inversion_count"),
+        " の転倒数 ",
+        math(String.raw`\mathrm{inv}_{O}(\psi)\in\mathbb{N}`),
+        " を用いて、",
+        math(String.raw`\psi`),
+        " の符号を",
+      ]),
+      displayMath(
+        String.raw`\mathrm{sgn}_{O}(\psi):=(-1)^{\mathrm{inv}_{O}(\psi)}\in\mathbb{Z}`,
+      ),
+      paragraph([
+        "で定める。右辺は整数 ",
+        math(String.raw`-1`),
+        " の自然数冪であり、",
+        math(String.raw`\mathbb{Z}`),
+        " の中の計算である。",
+      ]),
+      paragraph([
+        "これは ",
+        ref("def_permutation_sign"),
+        " の符号を、転倒数を ",
+        math(String.raw`\mathrm{inv}`),
+        " から ",
+        math(String.raw`\mathrm{inv}_{O}`),
+        " へ取り替えて写したものである。",
+        "台が違うので同じ記号では書けず、下付きに ",
+        math(String.raw`O`),
+        " を付けて区別する。この下付きの ",
+        math(String.raw`O`),
+        " は台に取った集合を指す添え名であって、成分の添字ではない。",
+      ]),
+      paragraph([
+        math(String.raw`\mathrm{sgn}_{O}(\psi)`),
+        " の引数 ",
+        math(String.raw`\psi`),
+        " は ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射であって、",
+        math(String.raw`R_L`),
+        " の上の置換ではない。すなわち ",
+        math(String.raw`\mathrm{sgn}_{O}`),
+        " と ",
+        math(String.raw`\mathrm{sgn}`),
+        " は定義域が違う別の写像である。",
+      ]),
+      paragraph([
+        "この定義に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と順序と数え上げ、および整数の積だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_permutation_sign_orbit_product",
+    kind: "claim",
+    title: { text: "軌道を保つ置換の符号は、軌道ごとの符号の積である" },
+    labels: ["claim_permutation_sign_orbit_product"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_prod_pow_of_even_remainder",
+      "Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-permutation-sign"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\varphi\in\mathfrak{S}^{\mathcal{O}}_L`),
+        "（",
+        ref("def_orbit_preserving_permutation"),
+        "）について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{sgn}(\varphi)=\prod_{O\in\mathcal{O}_L}\mathrm{sgn}_{O}\bigl(\varphi\!\restriction_{O}\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{sgn}`),
+        " は ",
+        ref("def_permutation_sign"),
+        "、",
+        math(String.raw`\mathrm{sgn}_{O}`),
+        " は ",
+        ref("def_orbit_permutation_sign"),
+        "、",
+        math(String.raw`\varphi\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        "）。右辺は有限集合 ",
+        math(String.raw`\mathcal{O}_L`),
+        " にわたる整数の有限積である。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う記号を先に置く。",
+        ref("claim_cross_orbit_inversion_pairs_even"),
+        " により",
+      ]),
+      displayMath(
+        String.raw`k:=\sum_{(O,O')\in\mathcal{D}_L}\bigl|F(O,O')\setminus F_\varphi(O,O')\bigr|\in\mathbb{N}`,
+      ),
+      paragraph([
+        "と置くと ",
+        math(String.raw`\bigl|\mathrm{Inv}^{\ne}(\varphi)\bigr|=2k`),
+        " である。",
+      ]),
+      paragraph([
+        "求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\varphi)
+&=(-1)^{\mathrm{inv}(\varphi)}
+&&(\because\ \blkref{def_permutation_sign})\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})+\lvert\mathrm{Inv}^{\ne}(\varphi)\rvert}
+&&(\because\ \blkref{claim_inversion_count_orbit_decomposition})\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}\cdot(-1)^{\lvert\mathrm{Inv}^{\ne}(\varphi)\rvert}
+&&(\because\ \text{整数の冪の指数法則}\ a^{m+n}=a^{m}a^{n})\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}\cdot(-1)^{2k}
+&&(\because\ \text{準備で置いた}\ \lvert\mathrm{Inv}^{\ne}(\varphi)\rvert=2k)\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}\cdot\bigl((-1)^{2}\bigr)^{k}
+&&(\because\ \text{整数の冪の指数法則}\ a^{mn}=(a^{m})^{n})\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}\cdot 1^{k}
+&&(\because\ (-1)^{2}=1)\\
+&=(-1)^{\sum_{O\in\mathcal{O}_L}\mathrm{inv}_{O}(\varphi\restriction_{O})}
+&&(\because\ 1^{k}=1\ \text{であり}\ 1\ \text{は積の単位元である})\\
+&=\prod_{O\in\mathcal{O}_L}(-1)^{\mathrm{inv}_{O}(\varphi\restriction_{O})}
+&&(\because\ \text{有限和を指数とする冪は冪の有限積である})\\
+&=\prod_{O\in\mathcal{O}_L}\mathrm{sgn}_{O}\bigl(\varphi\!\restriction_{O}\bigr)
+&&(\because\ \blkref{def_orbit_permutation_sign})
+\end{aligned}`),
+      paragraph([
+        "第 8 の等号で使った「有限和を指数とする冪は冪の有限積である」は、",
+        math(String.raw`\mathcal{O}_L`),
+        " の元の個数についての帰納法で ",
+        math(String.raw`a^{m+n}=a^{m}a^{n}`),
+        " から出る（空の和は ",
+        math(String.raw`0`),
+        "、空の積は ",
+        math(String.raw`1`),
+        " であり、",
+        math(String.raw`a^{0}=1`),
+        " が出発点である）。",
+      ]),
+      paragraph([
+        ref("def_permutation_sign"),
+        "、",
+        ref("def_orbit_permutation_sign"),
+        "、",
+        ref("def_orbit_restriction"),
+        "、",
+        ref("def_cross_orbit_inversion_pairs"),
+        "、",
+        ref("claim_inversion_count_orbit_decomposition"),
+        "、",
+        ref("claim_cross_orbit_inversion_pairs_even"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "この証明が ",
+        math(String.raw`-1`),
+        " について使っているのは ",
+        math(String.raw`(-1)^{2}=1`),
+        " だけである。",
+        math(String.raw`-1`),
+        " が ",
+        math(String.raw`+1`),
+        " と異なることも、",
+        math(String.raw`\mathbb{Z}`),
+        " に引き算があることも使っていない。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と順序と数え上げ、および整数の積だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に置く章（未着手）" },

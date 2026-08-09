@@ -328,6 +328,11 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.crossInversions_disjoint_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_biUnion_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.card_crossOrbitInversionPairs_eq_two_mul_from_necSuf
+  # 「軌道を保つ置換の符号は軌道ごとの符号の積である」（定義 1 件・主張 1 件）
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_congr
+  Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_prod_pow_of_even_remainder
+  Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
