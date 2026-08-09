@@ -2823,7 +2823,10 @@ z
     title: { tex: String.raw`\mathbb{C}\text{の}\sqrt{\cdot}\text{の逆数}` },
     labels: ["sqrt_cc_of_inverse"],
     statement: [
-      paragraph([math(String.raw`z \in \mathbb{C}`), " について、"]),
+      paragraph([
+        math(String.raw`z \in \mathbb{C},\ z \neq 0`),
+        " について、",
+      ]),
       displayMath(
         String.raw`(\sqrt{z})^{-1} = \frac{1}{\sqrt{z}} =
 \begin{cases}
@@ -2833,9 +2836,73 @@ z
       ),
     ],
     proof: [
-      paragraph([ref("inverse_of_sqrt_cc"), " より。"]),
+      paragraph([
+        "証明の中で使うものを 1 つ先に置く。",
+        math(String.raw`z \neq 0`),
+        " なので ",
+        ref("inverse_of_sqrt_cc"),
+        " の準備の第三と同じ議論により ",
+        math(String.raw`\sqrt{z}\neq 0`),
+        " であり、",
+        math(String.raw`\mathbb{C}`),
+        " の乗法群（",
+        ref("multiplicative_group_of_cc"),
+        "）の中で ",
+        math(String.raw`\sqrt{z}`),
+        " の逆元 ",
+        math(String.raw`(\sqrt{z})^{-1}`),
+        " が定まる。",
+        math(String.raw`1/\sqrt{z}`),
+        " はこの逆元の別の書き方である。",
+      ]),
+      paragraph([
+        math(String.raw`\arg^{[0,2\pi)}(z) = 0`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sqrt{z})^{-1}
+&= \frac{1}{\sqrt{z}}
+&&(\because\ 1/\sqrt{z}\ \text{は逆元}\ (\sqrt{z})^{-1}\ \text{の別の書き方である})\\
+&= \sqrt{\frac{1}{z}}
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 1 の場合})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0 < \arg^{[0,2\pi)}(z) < 2\pi`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sqrt{z})^{-1}
+&= \frac{1}{\sqrt{z}}
+&&(\because\ 1/\sqrt{z}\ \text{は逆元}\ (\sqrt{z})^{-1}\ \text{の別の書き方である})\\
+&= -\left(-\frac{1}{\sqrt{z}}\right)
+&&(\because\ -(-w)=w)\\
+&= -\sqrt{\frac{1}{z}}
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 2 の場合})
+\end{aligned}`),
+      paragraph([
+        "引いたブロックは ",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("inverse_of_sqrt_cc"),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文の証明は「ℂ の逆数の sqrt より。」の 1 文だけで、" +
+          "(sqrt(z))^{-1} から出発する式変形が 1 行も書かれていなかった。" +
+          "場合ごとに (sqrt(z))^{-1} から始まる一続きの鎖（第 1 の場合 2 段、第 2 の場合 3 段）にし、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "第 2 の場合は、引く先が sqrt(1/z) = -1/sqrt(z) の向きなので、" +
+          "-(-w) = w を 1 段挟んで向きを合わせた。" +
+          "仮定を 1 つ足した。原文の主張には z ≠ 0 が無かったが、(sqrt(z))^{-1} が定まるためにも、" +
+          "引く先の主張（ℂ の逆数の sqrt）の仮定を満たすためにも要る。" +
+          "これは書き方の統一ではなく、原文に欠けていた仮定の補いである。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_045_theorem_euler_formula_cos_sin",

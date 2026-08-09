@@ -1288,7 +1288,7 @@
 | 000_calculation_formulae_00_09 | 5 | 5 |
 | 000_calculation_formulae_10_19 | 1 | 1 |
 | 000_calculation_formulae_20_29 | 4 | 4 |
-| 000_calculation_formulae_30_44 | 13 | 11 |
+| 000_calculation_formulae_30_44 | 13 | 12 |
 | 000_calculation_formulae_45_46 | 2 | 0 |
 | 001_partition_function_2d_ising | 1 | 0 |
 | 002_linear_space_general | 12 | 0 |
@@ -1318,6 +1318,17 @@
 （リポジトリの規約が禁じているのは新しく番号を振ることである）。
 
 書き換えた証明（新しいものを上に足す）:
+
+- 2026-08-09（tick 32）: `000_calculation_formulae_30_44` の主張「$\mathbb{C}$ の $\sqrt{\cdot}$ の逆数」。
+  原文の証明は「$\mathbb{C}$ の逆数の $\sqrt{\cdot}$ より。」の 1 文だけで、
+  $(\sqrt{z})^{-1}$ から出発する式変形が 1 行も無かった。場合ごとに $(\sqrt{z})^{-1}$ から
+  始まる一続きの鎖（第 1 の場合 2 段、第 2 の場合 3 段）にし、行末へ $(\because\ \dots)$ を
+  付けた。**段は増えており、減った段は無い。** 第 2 の場合は引く先が
+  $\sqrt{1/z}=-1/\sqrt{z}$ の向きなので、$-(-w)=w$ を 1 段挟んで向きを合わせた。
+  **仮定を 1 つ足した。** 原文の主張には $z\ne0$ が無かったが、$(\sqrt{z})^{-1}$ が
+  定まるためにも、引く先の主張の仮定を満たすためにも要る。これは書き方の統一ではなく、
+  **原文に欠けていた仮定の補い**である。経緯は `conversion.notes` へ残した。
+  次は同じファイルの残り 1 件（$\mathbb{C}$ の $\sqrt{\cdot}$ の 2 乗のあたり）から。
 
 - 2026-08-09（tick 31）: `000_calculation_formulae_30_44` の主張「$\mathbb{C}$ の逆数の $\sqrt{\cdot}$」。
   原文は日本語 2 文だけで、偏角の和の計算も $\sqrt{1/z}$ から出発する式変形も 1 行も無かった。
