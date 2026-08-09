@@ -8,20 +8,20 @@
 箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
 章「分配多項式」（定義 5 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 36 件・主張 47 件・定理 2 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 37 件・主張 50 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
 軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限・
 軌道ごとの置換の組の貼り合わせ・2 つの軌道にまたがる転倒対の偶数性・転倒数の軌道ごとの分解・
-行配位の空でない部分集合の最小元）が、
+行配位の空でない部分集合の最小元・またぐ転倒対の全体の個数の偶数性）が、
 四層すべて（記述・SageMath・Lean 具体版・Lean 必要十分版）を満たした。
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | 上記の定義 59 件・主張 61 件・定理 3 件・注意 1 件（ラベルの数。合計 124 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 282 件を登録）が通る |
-| Lean 必要十分版 | 主張 53 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | 上記の定義 60 件・主張 64 件・定理 3 件・注意 1 件（ラベルの数。合計 128 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 294 件を登録）が通る |
+| Lean 必要十分版 | 主張 56 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性には置いていない。前者は既存の主張をつなぐだけ、後者は番号の付け方そのもので抽象化すると同じ言明になるため。後者の必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -340,6 +340,22 @@ $\mu(X)$ は集合ではなく $R_L$ の元であり、$X$ が空のときは定
 軌道の対ごとの偶数性を足し合わせるとき $(O,O')$ と $(O',O)$ を 2 度数えないよう、
 軌道の順序対の全体を $\mu(O)\prec\mu(O')$ かどうかで半分に分ける。
 
+さらに、最小元で向きを付けた軌道の順序対の全体
+$\mathcal{D}_L=\{(O,O')\in\mathcal{O}_L\times\mathcal{O}_L\mid\mu(O)\prec\mu(O')\}$ を定義し、
+次の 3 つを示した。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\mathcal{D}_L$ の相異なる 2 元が与えるまたがる転倒対は交わらない。
+- またぐ転倒対の全体は、$\mathcal{D}_L$ にわたる $J_\varphi$ の合併である
+  （$\mathrm{Inv}^{\ne}(\varphi)=\bigcup_{(O,O')\in\mathcal{D}_L}J_\varphi(O,O')$。集合の等号として示した）。
+- またぐ転倒対の全体の個数は偶数である
+  （$|\mathrm{Inv}^{\ne}(\varphi)|=2\sum_{(O,O')\in\mathcal{D}_L}|F(O,O')\setminus F_\varphi(O,O')|$）。
+  必要十分版が示したのは、これらが $\mathcal{D}_L$ に要求するのが「向きについて非対称であること」と
+  「相異なる 2 元の順序対の一方を含むこと」だけであり、**最小元そのものは使っていない**ことである。
+  すなわち最小元は、その 2 条件を満たす集合を 1 つ作るための手段でしかない。
+
+これで、置換の符号を軌道ごとの符号の積へ分解する足場が揃った
+（転倒数の分解の第 2 項が偶数なので、$(-1)$ の冪に効かない）。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
@@ -353,13 +369,14 @@ $\mu(X)$ は集合ではなく $R_L$ の元であり、$X$ が空のときは定
 
 ## 次回やること
 
-1. **またぐ転倒対の全体の個数が偶数であること**（章「固有値の代数性」の続き。
-   台帳のセクション 10f''c4）。軌道の相異なる順序対の全体を、最小元の順序
-   $\mu(O)\prec\mu(O')$ で半分に分け、$\mathrm{Inv}^{\ne}(\varphi)$ がその半分にわたる
-   $J_\varphi(O,O')$ の交わらない合併であることを示して、対ごとの偶数性を足し合わせる。
-   $J_\varphi(O,O')$ は $(O,O')$ と $(O',O)$ で同じ集合なので、半分だけを走らせる。
-   そのあと符号の積表示（10f''c5。軌道の上の全単射の符号 $\mathrm{sgn}_O$ の定義もそこで置く）、
-   各因子が $t^{|O|}-1$ であること（10f'''）と続く。
+1. **符号が軌道ごとの符号の積になること**（章「固有値の代数性」の続き。
+   台帳のセクション 10f''c5）。軌道の上の全単射の符号
+   $\mathrm{sgn}_O(\psi)=(-1)^{\mathrm{inv}_O(\psi)}$ を定義し、
+   $\mathrm{sgn}(\varphi)=(-1)^{\mathrm{inv}(\varphi)}$ へ転倒数の分解を代入して、
+   またぐ項が偶数であることから
+   $\mathrm{sgn}(\varphi)=\prod_{O}\mathrm{sgn}_O(\varphi\!\restriction_O)$ を出す。
+   要るのは $(-1)$ の冪の法則だけで、新しい軌道の道具は要らない。
+   そのあと各因子が $t^{|O|}-1$ であること（10f'''）と続く。
 
 ## 未解決の設計問題
 

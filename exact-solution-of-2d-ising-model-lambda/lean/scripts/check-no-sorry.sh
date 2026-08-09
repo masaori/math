@@ -315,6 +315,19 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.existsUnique_rowConfigMin_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_orbit_ne_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.inversionCount_orbit_decomposition_from_necSuf
+  # 「またぐ転倒対の全体の個数の偶数性」（定義 1 件・主張 3 件）
+  Ising2DLambda.AlgebraicEigenvalue.ne_of_mem_orientedOrbitPairs
+  Ising2DLambda.AlgebraicEigenvalue.swap_not_mem_orientedOrbitPairs
+  Ising2DLambda.AlgebraicEigenvalue.mem_orientedOrbitPairs_or_swap
+  Ising2DLambda.AlgebraicEigenvalue.crossInversions_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_biUnion
+  Ising2DLambda.AlgebraicEigenvalue.card_crossOrbitInversionPairs_eq_two_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.crossInv_disjoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.crossInv_eq_biUnion
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_biUnion_eq_two_mul
+  Ising2DLambda.AlgebraicEigenvalue.crossInversions_disjoint_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_biUnion_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.card_crossOrbitInversionPairs_eq_two_mul_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
