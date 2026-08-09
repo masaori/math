@@ -27,7 +27,13 @@ $\chi_U$ を軌道ごとの因子の積へ組み替える道筋の最後の組�
 1. $\chi_U=\sum_{\alpha\in\mathfrak{A}_L}\prod_{O}W_{O}(\mathrm{ch}(U),\alpha(O))$
    （前セクションの主張。$\chi_U$ は $\mathfrak{S}_L$ の全列挙から定義どおりに作る）。
 2. $\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$（和の添字の集合そのものが一致すること）。
-   **個数の一致では足りない**ので、元の全体を突き合わせている。
+   確かめるのは、$\mathfrak{A}(s)$ を $s=\mathcal{O}_L$ で作る生成手続きが、
+   $\mathfrak{A}_L$ の定義（各 $O\in\mathcal{O}_L$ へ $\mathfrak{B}_O$ の元を与える対応）を
+   満たすものをちょうど全部作っていることである。健全性（各元が定義を満たすこと）を
+   生成手続きに依らずその場で判定し、完全性を「元が相異なることと、個数が独立に数えた
+   $\prod_O|O|!$ に一致すること」で出す（$|\mathfrak{B}_O|=|O|!$ も別に確かめる）。
+   **2026-08-09 のレビューで直した。** それまでは同じ生成手続きを 2 度走らせて
+   突き合わせており、構成から自明に一致するだけで何も確かめていなかった。
 3. 分配則を $s=\mathcal{O}_L$ と取った段
    （$\sum_{\alpha\in\mathfrak{A}(\mathcal{O}_L)}\prod_{O}W_{O}=\prod_{O}\sum_{\psi\in\mathfrak{B}_O}W_{O}$）。
 
@@ -69,6 +75,7 @@ $\mathfrak{S}_L$ を要さない 2 つは $L=4$ まで走らせた。
 | 実行日 | 結果 |
 |---|---|
 | 2026-08-09 | すべて通過（$\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$・分配則の $s=\mathcal{O}_L$ の場合・$\chi_U$ が軌道ごとの和の積であること） |
+| 2026-08-09（レビューで $\mathfrak{A}(\mathcal{O}_L)=\mathfrak{A}_L$ の検証を書き直したあと） | すべて通過（$L=1,2,3,4$ で $\mathfrak{A}(\mathcal{O}_L)$ の個数が $\prod_O|O|!$ に一致。$L=4$ で 27648 個） |
 
 ```
 sage sagemath/check/shift-char-orbit-product/check.sage

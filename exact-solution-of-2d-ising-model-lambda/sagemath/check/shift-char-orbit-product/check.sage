@@ -196,19 +196,43 @@ def families_on(orbits):
 def check_family_on_full_equals_family(L, orbits):
     """(b) A(O_L) = A_L。和の添字の集合そのものが一致すること。
 
-    どちらも「各軌道へその軌道の上の全単射を 1 つずつ与える対応の全体」なので、
-    元の全体を突き合わせて確かめる（個数だけでは一致を見たことにならない）。
+    A_L（def_orbit_permutation_family）の定義は「各 O in O_L へ B_O の元 alpha(O) を
+    与える対応の全体」である。ここで確かめるのは、生成手続き families_on(O_L) が
+    その定義を満たす対応をちょうど全部作っていることであって、
+    **同じ手続きを 2 度走らせて突き合わせることではない**
+    （2 度走らせても構成から自明に一致するだけで、何も確かめたことにならない）。
+
+    そこで 2 つに分けて見る。
+      健全性: families_on(O_L) の各元が A_L の定義を満たすこと
+              （定義域がちょうど O_L で、値 alpha(O) が O の上の全単射であること）を
+              生成手続きに依らず、その場で判定して確かめる。
+      完全性: 定義を満たす対応の全体は各軌道ごとの独立な選択なので prod_O |B_O| 個であり、
+              |B_O| = |O|! である。families_on(O_L) の元が相異なり、その個数が
+              prod_O factorial(|O|) に一致すれば、健全性と合わせて両者は一致する。
     """
     families_full = families_on(orbits)          # A(s) を s = O_L で取ったもの
-    families_all = families_on(orbit_set(L))     # A_L
-    as_set_full = {
+    orbit_keys = {frozenset(o) for o in orbits}
+    # 健全性。
+    for alpha in families_full:
+        assert {frozenset(o) for o in alpha.keys()} == orbit_keys, (
+            L, 'A(O_L) の元の定義域が O_L と一致しない')
+        for o in orbits:
+            psi = alpha[o]
+            assert set(psi.keys()) == set(o), (L, 'alpha(O) の定義域が O でない')
+            assert set(psi.values()) == set(o), (L, 'alpha(O) が O の上の全単射でない')
+    # 完全性（元が相異なることと、個数が独立に数えた prod_O |O|! に一致すること）。
+    as_tuples = {
         tuple(tuple(sorted(alpha[o].items())) for o in orbits) for alpha in families_full
     }
-    as_set_all = {
-        tuple(tuple(sorted(alpha[o].items())) for o in orbits) for alpha in families_all
-    }
-    assert as_set_full == as_set_all, (L, 'A(O_L) が A_L と一致しない')
-    print(f'OK: L={L} で A(O_L) = A_L（どちらも {len(as_set_full)} 個。元の全体を突き合わせた）')
+    assert len(as_tuples) == len(families_full), (L, 'A(O_L) に重複がある')
+    expected = 1
+    for o in orbits:
+        assert len(orbit_bijections(o)) == factorial(len(o)), (L, '|B_O| が |O|! でない')
+        expected *= factorial(len(o))
+    assert len(families_full) == expected, (L, 'A(O_L) の個数が prod_O |O|! と一致しない')
+    print(f'OK: L={L} で A(O_L) = A_L'
+          f'（各元が A_L の定義を満たし、個数 {len(families_full)} が'
+          f' prod_O |O|! = {expected} に一致する）')
     return families_full
 
 
