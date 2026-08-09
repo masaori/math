@@ -21,8 +21,8 @@
 | 層 | 状態 |
 | --- | --- |
 | 記述（構造化テキスト） | 上記の定義 70 件・主張 76 件・定理 3 件・注意 1 件（ラベルの数。合計 150 ラベル）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 335 件を登録）が通る |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 361 件を登録）が通る |
 | Lean 必要十分版 | 主張 65 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -527,13 +527,21 @@ $\lvert O\rvert-1$ 個の互換の積であること、そこから符号が $(-
 
 ## 次回やること
 
-**2026-08-10 の tick 44 は、セクション 10f'''c2a（軌道の上の全単射の符号の値）の本文と
-SageMath 検証まで進めた。Lean 3 本は書いたが機械の負荷で `lake build` が返らず未検証である。**
+**2026-08-10 の tick 45 は、tick 44 が未検証で残した Lean を通して 10f'''c2a（軌道の上の
+全単射の符号の値）を `done` にし、あわせて 10f'''c2b1（軌道の 2 点を入れ替える写像＝互換の
+定義と、その制限が軌道の上の全単射であること）を四層すべてで完了させた。**
+tick 44 の Lean が落ちていた原因は、必要十分版の定理名 `sign_mul_self` が既存の
+`PermutationSign.lean` の同名定理と同じ名前空間で衝突していたことである（`signOn_` へ改名した）。
 
-1. **まず `lake build` と `check-no-sorry.sh`・`npm run check`・`npm run build:pdf` を通す**
-   （tick 44 が書いた Lean 3 本 `OrbitPermutationSignValues` 系の検証）。
-2. そのあと 10f'''c2b（軌道の上の互換とその符号が $-1$）、10f'''c2c（巡回シフトの制限が
-   $\lvert O\rvert-1$ 個の互換の積）、10f'''c2d（符号が $(-1)^{\lvert O\rvert-1}$）。
+1. **レビュー**: 今 tick で書いた本文 2 ブロック（`def_orbit_transposition` /
+   `claim_orbit_transposition_bijective`）と Lean 3 本（`OrbitTransposition` 系）。
+   とくに、本文が「自分自身を逆写像に持つので全単射」と述べていて逆写像の存在から
+   全単射性が出ることを主張として引いていない点と、導出を `rfl` ではなく各点の等式で
+   述べた理由が正しいかを見る。
+2. そのあと 10f'''c2b2（互換の符号が $-1$ であること。$\tau_a\prec\tau\prec\tau_b$ を満たす
+   $\tau$ ごとに転倒対が 2 個ずつできることから $\mathrm{inv}_{O}$ が奇数だと出す）、
+   10f'''c2c（巡回シフトの制限が $\lvert O\rvert-1$ 個の互換の積）、
+   10f'''c2d（符号が $(-1)^{\lvert O\rvert-1}$）。
 3. そのあと、各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（10f'''c3）。
 4. そのあと、その根が 1 の $L$ 乗根であること（セクション 10g。ここで $\overline{\mathbb{Q}}$ へ入る）。
 

@@ -408,6 +408,15 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_one_or_neg_one_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_mul_self_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_id_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_involutive
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_mem
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionRestriction_val
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.transpositionOn_involutive
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.transpositionOn_mem
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_involutive_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_mem_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionRestriction_eq_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
