@@ -550,7 +550,7 @@ $(-1)^{\lvert O\rvert-1}$ であること、そして各軌道の因子の和が
    `claim_orbit_transposition_composite_bijective`）と Lean 3 本（`OrbitTranspositionComposite` 系）。
    とくに、合成の順（添字の小さい互換ほど先に作用する）を本文が主張ではなく段落の注意として
    述べている点と、Lean の具体版が帰納法の一歩で `show` を置いて高階の単一化を避けている点を見る。
-2. **今 tick は並列の作業ストリーム（式変形の書き方の統一）を行っていない。** 次 tick で行う。
+2. **並列の作業ストリーム（式変形の書き方の統一）は今 tick も行った**（姉妹プロジェクトの「クロネッカー積の転置」にラベル参照を入れた）。次 tick も 1 件進める。
 3. そのあと 10f'''c2c2（巡回シフトの制限が $\lvert O\rvert-1$ 個の互換の積であること。
    $\Psi^{O,\tau_0}_{\lvert O\rvert-1}=S\!\restriction_{O}$ を各点での値の帰納法で示す）、
    10f'''c2d（符号が $(-1)^{\lvert O\rvert-1}$）。
