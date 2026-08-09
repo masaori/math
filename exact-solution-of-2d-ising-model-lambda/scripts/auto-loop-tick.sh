@@ -163,8 +163,12 @@ set +e
 # load average が 248 に達して lake build も date も返らなくなった。
 # tick の作業（証明・SageMath・Lean・git）に MCP は 1 つも要らない。
 echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
-timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p --dangerously-skip-permissions \
-  --strict-mcp-config --mcp-config "$LOG_DIR/empty-mcp.json" "$PROMPT" >> "$LOG_FILE" 2>&1
+# **プロンプトは標準入力から渡す。** --mcp-config は可変長引数なので、引数として
+# プロンプトを続けると設定ファイル名として飲み込まれる
+# （実測 2026-08-10 06:05: "ENAMETOOLONG: name too long" で 2 秒で落ちた）。
+printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
+  --dangerously-skip-permissions --strict-mcp-config \
+  --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
 status=$?
 set -e
 
