@@ -217,7 +217,7 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 |---|---|
 | ラベル | `com.masaori.ising-lambda-auto-loop` |
 | 定義 | `~/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist` |
-| 実体 | `scripts/auto-loop-tick.sh`（毎時 5 分。多重起動を防ぎ、45 分で打ち切る） |
+| 実体 | `scripts/auto-loop-tick.sh`（毎時 5 分。見送られたときの再試行を 35 分に置く。多重起動を防ぎ、45 分で打ち切る） |
 | ログ | `logs/auto-loop.log`（git 管理外） |
 
 ```sh

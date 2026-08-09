@@ -2,7 +2,7 @@
 
 [auto-loop-runbook.md](auto-loop-runbook.md) が毎 tick 読み書きする。**この台帳が進捗の正本**である。
 
-- 起動: launchd `com.masaori.ising-lambda-auto-loop`（1 時間おき。毎時 5 分。上限 45 分）
+- 起動: launchd `com.masaori.ising-lambda-auto-loop`（毎時 5 分。見送られたときの再試行が 35 分。上限 45 分）
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
