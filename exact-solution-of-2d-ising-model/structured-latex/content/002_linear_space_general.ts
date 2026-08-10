@@ -1873,28 +1873,20 @@ W
 \end{aligned}`,
       ),
       paragraph([
-        "両辺は非負であるから、",
+        "である。ここから、",
         ref("matrix_norm_triangle_inequality"),
-        " の Step 0（非負実数の平方の単調性）より",
+        " の Step 0（非負実数の平方の単調性）と Step 4（Cauchy--Schwarz の不等式）により",
       ]),
       displayMath(
-        String.raw`\left|(AB)_{ij}\right|^2\le\left(\sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|\right)^2`,
-      ),
-      paragraph([
-        "さらに ",
-        ref("matrix_norm_triangle_inequality"),
-        " の Step 4（Cauchy--Schwarz の不等式）を ",
-        math(String.raw`u_k=|a_{ik}|,\ v_k=|b_{kj}|`),
-        " として適用すると",
-      ]),
-      displayMath(
-        String.raw`\left(\sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|\right)^2
-\le\left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{k=1}^{n}|b_{kj}|^2\right)`,
-      ),
-      paragraph(["よって"]),
-      displayMath(
-        String.raw`\left|(AB)_{ij}\right|^2
-\le\left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{l=1}^{n}|b_{lj}|^2\right)`,
+        String.raw`\begin{aligned}
+\left|(AB)_{ij}\right|^2
+&\le \left(\sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|\right)^2
+\quad (\because \text{直前の評価と、非負実数の平方の単調性}) \\
+&\le \left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{k=1}^{n}|b_{kj}|^2\right)
+\quad (\because \text{Cauchy--Schwarz の不等式を } u_k=|a_{ik}|,\ v_k=|b_{kj}| \text{ として適用}) \\
+&= \left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{l=1}^{n}|b_{lj}|^2\right)
+\quad (\because \text{第 2 因子の和の添字の付け替え})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3: 全成分についての和。Step 2 の不等式を ",
@@ -1934,6 +1926,13 @@ W
     conversion: {
       status: "converted",
       notes: [
+        "2026-08-10: Step 2（各成分の評価）が、3 つの式を別々の displayMath に置き、" +
+          "その間に「両辺は非負であるから」「さらに…適用すると」「よって」という日本語を" +
+          "挟んでいた。どの不等号がどの根拠によるのかが式から読み取れないので、" +
+          "平方以降を 1 行 1 関係の 3 段の鎖へまとめ、各行の末尾に (∵ …) を置いた" +
+          "（平方の単調性・Cauchy--Schwarz・和の添字の付け替えが別々の根拠であることが式の上に現れる）。" +
+          "あわせて、鎖の第 1 段（絶対値を行列の積の定義で書き下す段）に根拠が無かったので付けた。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "原文にはノルムの定義そのものが無かったため、Frobenius ノルムを定義するブロック" +
           "（labels: def_matrix_norm）とその基本性質のブロック（labels: matrix_norm_triangle_inequality）を" +
