@@ -1046,11 +1046,16 @@ C_N := \sum_{k=0}^{N}\frac{1}{k!}(A+B)^k`,
       displayMath(
         String.raw`\begin{aligned}
 AB^{m+1}
-&= (AB^m)B \\
-&= (B^mA)B \quad (\because \text{帰納法の仮定}) \\
-&= B^m(AB) \quad (\because \text{積の結合律}) \\
-&= B^m(BA) \quad (\because AB=BA) \\
+&= (AB^m)B
+&&(\because\ B^{m+1}=B^mB\ \text{と積の結合律})\\
+&= (B^mA)B
+&&(\because\ \text{帰納法の仮定})\\
+&= B^m(AB)
+&&(\because\ \text{積の結合律})\\
+&= B^m(BA)
+&&(\because\ AB=BA)\\
 &= B^{m+1}A
+&&(\because\ \text{積の結合律と}\ B^mB=B^{m+1})
 \end{aligned}`,
       ),
       paragraph([
@@ -1075,22 +1080,23 @@ AB^{m+1}
       displayMath(
         String.raw`\begin{aligned}
 (A+B)^{k+1}
-&= (A+B)^k(A+B) \\
+&= (A+B)^k(A+B)
+&&(\because\ \text{冪の定義})\\
 &= \left(\sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}\right)(A+B)
-\quad (\because \text{帰納法の仮定}) \\
+&&(\because\ \text{帰納法の仮定})\\
 &= \sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}A
  + \sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}B
-\quad (\because \text{積の分配律}) \\
+&&(\because\ \text{積の分配律})\\
 &= \sum_{j=0}^{k}\binom{k}{j}A^{j+1}B^{k-j}
  + \sum_{j=0}^{k}\binom{k}{j}A^{j}B^{k-j+1}
-\quad (\because \text{Step 1}) \\
+&&(\because\ \text{Step 1 を第 1 和の各項へ当てる})\\
 &= \sum_{j=1}^{k+1}\binom{k}{j-1}A^{j}B^{k+1-j}
  + \sum_{j=0}^{k}\binom{k}{j}A^{j}B^{k+1-j}
-\quad (\text{第 1 和で } j \to j-1 \text{ と添字を付け替えた}) \\
+&&(\because\ \text{第 1 和で}\ j \to j-1\ \text{と添字を付け替えた})\\
 &= \sum_{j=0}^{k+1}\left(\binom{k}{j-1}+\binom{k}{j}\right)A^{j}B^{k+1-j}
-\quad \left(\binom{k}{-1}:=0,\ \binom{k}{k+1}:=0\right) \\
+&&\left(\because\ \binom{k}{-1}:=0,\ \binom{k}{k+1}:=0\ \text{として和をまとめた}\right)\\
 &= \sum_{j=0}^{k+1}\binom{k+1}{j}A^{j}B^{k+1-j}
-\quad (\because \text{Pascal の関係式})
+&&(\because\ \text{Pascal の関係式})
 \end{aligned}`,
       ),
       paragraph([
@@ -1102,19 +1108,21 @@ AB^{m+1}
         String.raw`\begin{aligned}
 C_N
 &= \sum_{k=0}^{N}\frac{1}{k!}\sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}
-\quad (\because \text{Step 2}) \\
-&= \sum_{k=0}^{N}\sum_{j=0}^{k}\frac{1}{j!\,(k-j)!}A^jB^{k-j} \\
+&&(\because\ \text{Step 2 を各}\ k\ \text{へ当てる})\\
+&= \sum_{k=0}^{N}\sum_{j=0}^{k}\frac{1}{j!\,(k-j)!}A^jB^{k-j}
+&&\left(\because\ \binom{k}{j}\frac{1}{k!}=\frac{1}{j!\,(k-j)!}\right)\\
 &= \sum_{(j,l)\in D_N}\frac{1}{j!\,l!}A^jB^{l}
-\quad (l:=k-j,\ D_N:=\{(j,l)\in\mathbb{Z}_{\ge 0}^2 \mid j+l\le N\})
+&&(\because\ l:=k-j\ \text{と置くと添字は}\ D_N:=\{(j,l)\in\mathbb{Z}_{\ge 0}^2 \mid j+l\le N\}\ \text{を走る})
 \end{aligned}`,
       ),
       paragraph(["一方、有限和の積を展開して"]),
       displayMath(
         String.raw`\begin{aligned}
 S_NT_N
-&= \left(\sum_{j=0}^{N}\frac{1}{j!}A^j\right)\left(\sum_{l=0}^{N}\frac{1}{l!}B^l\right) \\
+&= \left(\sum_{j=0}^{N}\frac{1}{j!}A^j\right)\left(\sum_{l=0}^{N}\frac{1}{l!}B^l\right)
+&&(\because\ S_N,\ T_N\ \text{の置き方})\\
 &= \sum_{(j,l)\in Q_N}\frac{1}{j!\,l!}A^jB^{l}
-\quad (\because \text{積の分配律},\ Q_N:=\{0,1,\dots,N\}^2)
+&&(\because\ \text{積の分配律。添字は}\ Q_N:=\{0,1,\dots,N\}^2\ \text{を走る})
 \end{aligned}`,
       ),
       paragraph([
@@ -1161,10 +1169,15 @@ S_NT_N
         " (2) より",
       ]),
       displayMath(
-        String.raw`\left\|\frac{1}{j!\,l!}A^jB^{l}\right\|
-= \frac{\|A^jB^l\|}{j!\,l!}
-\le \frac{\|A^j\|\,\|B^l\|}{j!\,l!}
-\le \|I\|^2\cdot\frac{a^j}{j!}\cdot\frac{b^l}{l!}`,
+        String.raw`\begin{aligned}
+\left\|\frac{1}{j!\,l!}A^jB^{l}\right\|
+&= \frac{\|A^jB^l\|}{j!\,l!}
+&&(\because\ \text{ノルムのスカラー倍についての等式と}\ 1/(j!\,l!)>0)\\
+&\le \frac{\|A^j\|\,\|B^l\|}{j!\,l!}
+&&(\because\ \text{行列ノルムの劣乗法性と}\ 1/(j!\,l!)>0)\\
+&\le \|I\|^2\cdot\frac{a^j}{j!}\cdot\frac{b^l}{l!}
+&&(\because\ \|A^j\|\le\|I\|\,a^j\ \text{と}\ \|B^l\|\le\|I\|\,b^l)
+\end{aligned}`,
       ),
       paragraph([
         "Step 5: ",
@@ -1212,20 +1225,23 @@ S_NT_N
       displayMath(
         String.raw`\begin{aligned}
 \|S_NT_N-C_N\|
-&\le \sum_{(j,l)\in Q_N\setminus D_N}\left\|\frac{1}{j!\,l!}A^jB^{l}\right\| \\
+&\le \sum_{(j,l)\in Q_N\setminus D_N}\left\|\frac{1}{j!\,l!}A^jB^{l}\right\|
+&&(\because\ \text{三角不等式を有限個の項に繰り返し用いる})\\
 &\le \|I\|^2\sum_{(j,l)\in Q_N\setminus D_N}\frac{a^j}{j!}\cdot\frac{b^l}{l!}
-\quad (\because \text{Step 4}) \\
+&&(\because\ \text{Step 4 を各項へ当てる})\\
 &\le \|I\|^2\left(
 \left(\sum_{j=P_N}^{N}\frac{a^j}{j!}\right)\left(\sum_{l=0}^{N}\frac{b^l}{l!}\right)
 +\left(\sum_{j=0}^{N}\frac{a^j}{j!}\right)\left(\sum_{l=P_N}^{N}\frac{b^l}{l!}\right)
-\right) \\
+\right)
+&&(\because\ \text{上の添字集合の包含と、非負項を付け加えても和は増えるだけであること})\\
 &\le \|I\|^2\left(R_{P_N-1}(a)\,E(b)+E(a)\,R_{P_N-1}(b)\right)
+&&(\because\ \text{非負実数の指数級数の収束の (2)(3)})
 \end{aligned}`,
       ),
       paragraph([
-        "最後の不等号は ",
+        "最後の不等号で引いたのは ",
         ref("real_exp_series_converges"),
-        " の (2)(3) による。",
+        " の (2)(3) である。",
         math(String.raw`P_N\ge (N+1)/2`),
         " より ",
         math(String.raw`P_N-1\to\infty`),
@@ -1271,10 +1287,14 @@ S_NT_N
       displayMath(
         String.raw`\begin{aligned}
 \left\|S_NT_N-\exp(A)\exp(B)\right\|
-&\le \left\|S_NT_N-S_N\exp(B)\right\|+\left\|S_N\exp(B)-\exp(A)\exp(B)\right\| \\
-&= \left\|S_N\left(T_N-\exp(B)\right)\right\|+\left\|\left(S_N-\exp(A)\right)\exp(B)\right\| \\
-&\le \|S_N\|\cdot\left\|T_N-\exp(B)\right\|+\left\|S_N-\exp(A)\right\|\cdot\|\exp(B)\| \\
+&\le \left\|S_NT_N-S_N\exp(B)\right\|+\left\|S_N\exp(B)-\exp(A)\exp(B)\right\|
+&&(\because\ \text{三角不等式})\\
+&= \left\|S_N\left(T_N-\exp(B)\right)\right\|+\left\|\left(S_N-\exp(A)\right)\exp(B)\right\|
+&&(\because\ \text{積の分配律})\\
+&\le \|S_N\|\cdot\left\|T_N-\exp(B)\right\|+\left\|S_N-\exp(A)\right\|\cdot\|\exp(B)\|
+&&(\because\ \text{行列ノルムの劣乗法性を 2 つの項へ当てる})\\
 &\le M_A\left\|T_N-\exp(B)\right\|+M_B\left\|S_N-\exp(A)\right\|
+&&(\because\ \|S_N\|\le M_A\ \text{と}\ \|\exp(B)\|\le M_B)
 \end{aligned}`,
       ),
       paragraph([
@@ -1310,10 +1330,17 @@ S_NT_N
         " について",
       ]),
       displayMath(
-        String.raw`0\le\left\|\exp(A)\exp(B)-\exp(A+B)\right\|
-\le\left\|\exp(A)\exp(B)-S_NT_N\right\|
+        String.raw`\begin{aligned}
+0
+&\le\left\|\exp(A)\exp(B)-\exp(A+B)\right\|
+&&(\because\ \text{ノルムは非負実数として定まる})\\
+&\le\left\|\exp(A)\exp(B)-S_NT_N\right\|+\left\|S_NT_N-\exp(A+B)\right\|
+&&(\because\ \text{三角不等式})\\
+&\le\left\|\exp(A)\exp(B)-S_NT_N\right\|
 +\left\|S_NT_N-C_N\right\|
-+\left\|C_N-\exp(A+B)\right\|`,
++\left\|C_N-\exp(A+B)\right\|
+&&(\because\ \text{第 2 項へもう一度三角不等式})
+\end{aligned}`,
       ),
       paragraph([
         "右辺は Step 5・Step 6・Step 7 より ",
