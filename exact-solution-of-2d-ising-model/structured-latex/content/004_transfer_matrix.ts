@@ -2475,7 +2475,8 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
 &= \sum_{\mu=1}^M \sum_{j=1}^M Y_j \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right) \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M Y_j \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) \quad (\because \text{有限二重和の順序交換}) \\
 &= \sum_{j=1}^M Y_j \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because (\ast)) \\
-&= M Y_m
+&= Y_m \cdot M \quad (\because j\neq m \text{ の項は係数が } 0 \text{ なので落ち、残るのは } j=m \text{ の項だけである}) \\
+&= M Y_m \quad (\because \mathbb{C} \text{ の積の可換性})
 \end{aligned}`,
       ),
       paragraph(["Step 2: ", math(String.raw`\hat{Z}^{(-)}`), " からの復元。"]),
@@ -2486,17 +2487,30 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
 &= \sum_{\mu=1}^M \sum_{j=1}^M Z_j \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right) \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M Z_j \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) \quad (\because \text{有限二重和の順序交換}) \\
 &= \sum_{j=1}^M Z_j \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because (\ast)) \\
-&= M Z_m
+&= Z_m \cdot M \quad (\because j\neq m \text{ の項は係数が } 0 \text{ なので落ち、残るのは } j=m \text{ の項だけである}) \\
+&= M Z_m \quad (\because \mathbb{C} \text{ の積の可換性})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 3: 復元式。Step 1・Step 2 で得た等式の両辺を ",
-        math(String.raw`M`),
-        " で割って、",
+        "Step 3: 復元式。",
+        math(String.raw`M \geq 1`),
+        " なので ",
+        math(String.raw`\frac{1}{M} \in \mathbb{C}`),
+        " が取れる。",
       ]),
       displayMath(
-        String.raw`Y_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu \exp\!\left(i m\frac{2\pi\mu}{M}\right), \qquad
-Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{M}\right)`,
+        String.raw`\begin{aligned}
+Y_m
+&= \frac{1}{M}\cdot M\,Y_m \quad (\because \tfrac{1}{M}\cdot M = 1) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu \exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{Step 1 の等式})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_m
+&= \frac{1}{M}\cdot M\,Z_m \quad (\because \tfrac{1}{M}\cdot M = 1) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{Step 2 の等式})
+\end{aligned}`,
       ),
     ],
     conversion: { status: "converted" },
