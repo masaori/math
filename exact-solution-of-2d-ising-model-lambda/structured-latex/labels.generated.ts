@@ -118,6 +118,7 @@ export const ALL_LABELS = [
   "claim_shift_char_sum_family",
   "claim_shift_char_sum_orbit_preserving",
   "claim_shift_char_term_zero",
+  "claim_shift_matrix_eigenvalue_root_of_unity",
   "claim_shift_matrix_left",
   "claim_shift_matrix_pow",
   "claim_shift_matrix_right",

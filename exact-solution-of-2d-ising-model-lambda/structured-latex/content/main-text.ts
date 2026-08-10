@@ -20633,6 +20633,212 @@ z&=z\cdot1
   },
 
   {
+    id: "algebraic_eigenvalue_claim_shift_matrix_eigenvalue_root_of_unity",
+    kind: "claim",
+    title: { text: "シフト行列の固有値は 1 の L 乗根である" },
+    labels: ["claim_shift_matrix_eigenvalue_root_of_unity"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eigenvalue_rootOfUnity",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenvalue_pow_eq_one_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eigenvalue_rootOfUnity_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-matrix-eigenvalue-root-of-unity"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取り、",
+        ref("def_shift_matrix"),
+        " のシフト行列 ",
+        math(String.raw`U\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " を ",
+        ref("def_qbar_matrix_eval"),
+        " で運んだ行列 ",
+        math(String.raw`\mathrm{Ev}_{\xi}(U)\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " を考える。",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " が ",
+        math(String.raw`\mathrm{Ev}_{\xi}(U)`),
+        " の固有値（",
+        ref("def_qbar_eigenvalue"),
+        "）ならば",
+      ]),
+      displayMath(String.raw`z\in\mu_{L}`),
+      paragraph([
+        "である（",
+        math(String.raw`\mu_{L}`),
+        " は ",
+        ref("def_root_of_unity_set"),
+        "。すなわち ",
+        math(String.raw`z^{L}=1`),
+        "）。",
+      ]),
+      paragraph([
+        "この主張は ",
+        math(String.raw`\xi`),
+        " の取り方によらない。",
+        ref("def_shift_matrix"),
+        " のシフト行列の成分は ",
+        math(String.raw`\kappa(1)`),
+        " と ",
+        math(String.raw`\kappa(0)`),
+        " という定数多項式だけであり（",
+        ref("def_constant_polynomial"),
+        "）、代入しても値は ",
+        math(String.raw`1`),
+        " と ",
+        math(String.raw`0`),
+        " のままだからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_qbar_eigenvalue"),
+        " より、",
+        math(String.raw`\mathrm{Ev}_{\xi}(U)\cdot v=z\odot v`),
+        " かつ ",
+        math(String.raw`v\ne o_L`),
+        " を満たす ",
+        math(String.raw`v\in V_L`),
+        " が存在する（",
+        ref("def_qbar_eigenvector"),
+        "、",
+        ref("def_qbar_vector"),
+        "）。この ",
+        math(String.raw`v`),
+        " を 1 つ固定する。",
+        ref("def_lattice"),
+        " の格子は ",
+        math(String.raw`L\ge1`),
+        " を満たす。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{Ev}_{\xi}(U)\bigr)^{L}
+&=\mathrm{Ev}_{\xi}\bigl(U^{L}\bigr)
+&&(\because\ \blkref{claim_qbar_matrix_eval_pow}\text{。}\ L\ge1\ \text{は}\ \blkref{def_lattice})\\
+&=\mathrm{Ev}_{\xi}(I)
+&&(\because\ \blkref{theorem_shift_matrix_order})\\
+&=I^{\overline{\mathbb{Q}}}_L
+&&(\because\ \blkref{claim_qbar_matrix_eval_identity})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+z^{L}\odot v
+&=\bigl(\mathrm{Ev}_{\xi}(U)\bigr)^{L}\cdot v
+&&(\because\ \blkref{claim_qbar_eigenvector_pow}\ \text{を}\ k=L\ \text{で使った})\\
+&=I^{\overline{\mathbb{Q}}}_L\cdot v
+&&(\because\ \text{上の鎖})\\
+&=v
+&&(\because\ \blkref{claim_qbar_identity_action})
+\end{aligned}`),
+      paragraph([
+        "次に、",
+        math(String.raw`\bigl(z^{L}+(-1)\bigr)\odot v=o_L`),
+        " を示す（",
+        math(String.raw`-1`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の単位元 ",
+        math(String.raw`1`),
+        " の加法についての逆元である）。",
+        math(String.raw`V_L`),
+        " の元は ",
+        math(String.raw`R_L`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " への写像なので、各点で値が等しいことを示せばよい（",
+        ref("def_qbar_vector"),
+        "）。",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\bigl(z^{L}+(-1)\bigr)\odot v\bigr)(\tau)
+&=\bigl(z^{L}+(-1)\bigr)\,v(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=z^{L}\,v(\tau)+(-1)\,v(\tau)
+&&(\because\ \text{分配則})\\
+&=\bigl(z^{L}\odot v\bigr)(\tau)+(-1)\,v(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=v(\tau)+(-1)\,v(\tau)
+&&(\because\ \text{上の鎖で得た}\ z^{L}\odot v=v)\\
+&=1\cdot v(\tau)+(-1)\,v(\tau)
+&&(\because\ 1\ \text{は積の単位元})\\
+&=\bigl(1+(-1)\bigr)\,v(\tau)
+&&(\because\ \text{分配則})\\
+&=0\cdot v(\tau)
+&&(\because\ -1\ \text{は}\ 1\ \text{の加法についての逆元})\\
+&=0
+&&(\because\ \text{零元との積は零元である})\\
+&=o_L(\tau)
+&&(\because\ \blkref{def_qbar_zero_vector})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので ",
+        math(String.raw`\bigl(z^{L}+(-1)\bigr)\odot v=o_L`),
+        " である。",
+        math(String.raw`v\ne o_L`),
+        " と合わせて ",
+        ref("claim_qbar_smul_eq_zero"),
+        " を ",
+        math(String.raw`z^{L}+(-1)`),
+        " と ",
+        math(String.raw`v`),
+        " に当てると ",
+        math(String.raw`z^{L}+(-1)=0`),
+        " を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z^{L}
+&=z^{L}+0
+&&(\because\ 0\ \text{は加法の単位元})\\
+&=z^{L}+\bigl((-1)+1\bigr)
+&&(\because\ -1\ \text{は}\ 1\ \text{の加法についての逆元})\\
+&=\bigl(z^{L}+(-1)\bigr)+1
+&&(\because\ \text{加法の結合則})\\
+&=0+1
+&&(\because\ \text{上で得た}\ z^{L}+(-1)=0)\\
+&=1
+&&(\because\ 0\ \text{は加法の単位元})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`z^{L}=1`),
+        " すなわち ",
+        math(String.raw`z\in\mu_{L}`),
+        " である（",
+        ref("def_root_of_unity_set"),
+        "）。",
+      ]),
+      paragraph([
+        "この道筋は行列式の理論を経由していない。",
+        ref("claim_shift_char_root_of_unity"),
+        " は特性多項式 ",
+        math(String.raw`\chi_U`),
+        " の値を 0 にする代数的数が ",
+        math(String.raw`\mu_{L}`),
+        " に属することを述べており、こちらは固有ベクトルを持つ代数的数が ",
+        math(String.raw`\mu_{L}`),
+        " に属することを述べている。",
+        "2 つの主張は結論が同じ集合への所属であっても仮定が違うので、一方から他方は出ない。",
+        "橋を渡すには「非自明な核を持つ行列の行列式が零元であること」とその逆が要り、",
+        "本文にはまだ無い。固有ベクトルの側だけで済ませたのは、",
+        ref("theorem_shift_matrix_order"),
+        " の ",
+        math(String.raw`U^{L}=I`),
+        " を運べば足り、その理論を新たに立てずに済むからである。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、上の各行で引いた主張と、体の四則の規則",
+        "（分配則・単位元・加法の逆元・零元との積）だけである。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -20820,22 +21026,12 @@ z&=z\cdot1
           ref("claim_qbar_matrix_eval_pow"),
           "）、および零でない列ベクトルのスカラー倍が零ベクトルならばスカラーが 0 であること（",
           ref("claim_qbar_smul_eq_zero"),
-          "）までは上で済んでいる。",
-          "次に書くのは、",
-          ref("theorem_shift_matrix_order"),
-          " の ",
-          math(String.raw`U^{L}=I`),
-          " を ",
-          ref("def_qbar_matrix_eval"),
-          " で ",
-          math(String.raw`\overline{\mathbb{Q}}`),
-          " の行列の等式へ運び、",
-          ref("claim_qbar_eigenvector_pow"),
-          " と突き合わせてシフト行列の固有値が 1 の ",
+          "）、およびシフト行列の固有値が 1 の ",
           math(String.raw`L`),
-          " 乗根であることを出すこと（特性多項式の根の同定（",
-          ref("claim_shift_char_root_of_unity"),
-          "）との関係もそこで書く）、およびシフト行列の固有空間へ転送行列を分けること（対角化）である。",
+          " 乗根であること（",
+          ref("claim_shift_matrix_eigenvalue_root_of_unity"),
+          "）までは上で済んでいる。",
+          "次に書くのは、シフト行列の固有空間へ転送行列を分けること（対角化）である。",
         ],
         [
           todo("未着手"),
