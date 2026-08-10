@@ -13678,7 +13678,7 @@ S(\tau')
   {
     id: "algebraic_eigenvalue_claim_orbit_transposition_sign",
     kind: "claim",
-    title: { text: "互換の軌道への制限の符号は $-1$ である" },
+    title: { text: "互換の軌道への制限の符号は -1 である" },
     labels: ["claim_orbit_transposition_sign"],
     habitat: "Z",
     lean: [
@@ -15490,7 +15490,7 @@ C&:=\bigl\{\,(\tau,\tau')\in F(O,O) \bigm| \psi_1\bigl(\mathrm{srt}_{\psi_2}(\ta
   {
     id: "algebraic_eigenvalue_claim_orbit_transposition_composite_sign",
     kind: "claim",
-    title: { text: "互換の反復合成の符号は $(-1)^k$ である" },
+    title: { text: "互換の反復合成の符号は -1 の反復の回数乗である" },
     labels: ["claim_orbit_transposition_composite_sign"],
     habitat: "Z",
     lean: [
@@ -15745,7 +15745,9 @@ C&:=\bigl\{\,(\tau,\tau')\in F(O,O) \bigm| \psi_1\bigl(\mathrm{srt}_{\psi_2}(\ta
   {
     id: "algebraic_eigenvalue_claim_orbit_shift_restriction_sign",
     kind: "claim",
-    title: { text: "軌道の上の巡回シフトの制限の符号は $(-1)^{|O|-1}$ である" },
+    title: {
+      text: "軌道の上の巡回シフトの制限の符号は -1 の (軌道の元の個数 - 1) 乗である",
+    },
     labels: ["claim_orbit_shift_restriction_sign"],
     habitat: "Z",
     lean: [
@@ -15962,6 +15964,167 @@ W_{O}\bigl(\mathrm{ch}(U),\psi\bigr)
         " の元と有限集合 ",
         math(String.raw`R_L`),
         " とその部分集合だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_orbit_fixed_iff_card_one",
+    kind: "claim",
+    title: {
+      text: "軌道の元が巡回シフトで動かないことと、その軌道の元の個数が 1 であることは同値である",
+    },
+    labels: ["claim_orbit_fixed_iff_card_one"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_self_iff_card_orbit_eq_one",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.step_eq_self_iff_period_eq_one",
+      "Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_self_iff_card_orbit_eq_one_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-fixed-iff-card-one"],
+    statement: [
+      paragraph([
+        "軌道 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）と ",
+        math(String.raw`\tau\in O`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`S(\tau)=\tau\iff\lvert O\rvert=1`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`S`),
+        " は ",
+        ref("def_row_config_shift"),
+        "）。",
+        "両辺に現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " の元の相等と ",
+        math(String.raw`\mathbb{N}`),
+        " の元の相等だけであり、実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "この主張は、シフト行列の特性行列の対角成分 ",
+        math(String.raw`\mathrm{ch}(U)_{\tau,\tau}`),
+        " を軌道ごとに決めるために要る。",
+        ref("def_shift_matrix"),
+        " の場合分けは ",
+        math(String.raw`\tau=S(\tau)`),
+        " か否かによっており、それが軌道の元の個数で判定できることをここで示す。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " より ",
+        math(String.raw`O=O(\tau_1)`),
+        " を満たす ",
+        math(String.raw`\tau_1\in R_L`),
+        " が取れ（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_row_config_orbit_set"),
+        "）、",
+        math(String.raw`\tau\in O(\tau_1)`),
+        " より ",
+        math(String.raw`O(\tau)=O(\tau_1)=O`),
+        " である（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_row_config_orbit_mem_eq"),
+        "）。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lvert O\rvert
+&=\lvert O(\tau)\rvert
+&&(\because\ O=O(\tau))\\
+&=e(\tau)
+&&(\because\ \blkref{claim_row_config_orbit_card})
+\end{aligned}`),
+      paragraph([
+        "である。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S^{[1]}(\tau)
+&=\bigl(S\circ S^{[0]}\bigr)(\tau)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ k=0\ \text{の場合})\\
+&=S\bigl(\mathrm{id}_{R_L}(\tau)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[0]}=\mathrm{id}_{R_L})\\
+&=S(\tau)
+&&(\because\ \text{恒等写像の値})
+\end{aligned}`),
+      paragraph([
+        "である。以下、この 2 つを準備として 2 つの向きを別々に示す。",
+      ]),
+      paragraph([
+        "第一の向き。",
+        math(String.raw`S(\tau)=\tau`),
+        " を仮定する。準備の第二より ",
+        math(String.raw`S^{[1]}(\tau)=S(\tau)=\tau`),
+        " であるから、",
+        math(String.raw`e(\tau)`),
+        " は ",
+        math(String.raw`1`),
+        " を割り切る（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_row_config_shift_period_divides"),
+        "）。すなわち ",
+        math(String.raw`1=e(\tau)\,q`),
+        " を満たす ",
+        math(String.raw`q\in\mathbb{N}`),
+        " が存在する。",
+        math(String.raw`e(\tau)\ge1`),
+        " かつ ",
+        math(String.raw`q\ge1`),
+        " なので（",
+        math(String.raw`\because`),
+        " どちらかが ",
+        math(String.raw`0`),
+        " なら積が ",
+        math(String.raw`0`),
+        " になる）、",
+        math(String.raw`e(\tau)\ge2`),
+        " とすると ",
+        math(String.raw`e(\tau)\,q\ge2`),
+        " となって ",
+        math(String.raw`1=e(\tau)\,q`),
+        " に反する。よって ",
+        math(String.raw`e(\tau)=1`),
+        " であり、準備の第一より ",
+        math(String.raw`\lvert O\rvert=e(\tau)=1`),
+        " である。",
+      ]),
+      paragraph([
+        "第二の向き。",
+        math(String.raw`\lvert O\rvert=1`),
+        " を仮定する。準備の第一より ",
+        math(String.raw`e(\tau)=\lvert O\rvert=1`),
+        " であり、",
+        math(String.raw`1=1\cdot1`),
+        " なので ",
+        math(String.raw`e(\tau)`),
+        " は ",
+        math(String.raw`1`),
+        " を割り切る。よって ",
+        math(String.raw`S^{[1]}(\tau)=\tau`),
+        " であり（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_row_config_shift_period_divides"),
+        " を右辺から左辺へ用いる）、準備の第二より ",
+        math(String.raw`S(\tau)=S^{[1]}(\tau)=\tau`),
+        " である。",
+      ]),
+      paragraph([
+        "以上で使ったのは有限集合 ",
+        math(String.raw`R_L`),
+        " の元の相等、その部分集合の元の個数、および ",
+        math(String.raw`\mathbb{N}`),
+        " の積と大小だけである。実数体も複素数体も現れない。",
       ]),
     ],
   },

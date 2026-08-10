@@ -36,6 +36,7 @@ export const ALL_LABELS = [
   "claim_orbit_factor_zero",
   "claim_orbit_family_distributive",
   "claim_orbit_family_insert_bijection",
+  "claim_orbit_fixed_iff_card_one",
   "claim_orbit_gluing_bijective",
   "claim_orbit_gluing_orbit_preserving",
   "claim_orbit_gluing_restriction",
