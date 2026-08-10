@@ -21759,6 +21759,124 @@ z^{\,L+1}&=z^{L}\,z
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_mul_pow",
+    kind: "claim",
+    title: { text: "代数的数の積の冪は、冪の積である" },
+    labels: ["claim_qbar_mul_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_pow_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-mul-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`w,z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`(wz)^{n}=w^{n}z^{n}`),
+      paragraph([
+        "が成り立つ（冪は ",
+        ref("def_root_of_unity_set"),
+        " で置いた約束、すなわち ",
+        math(String.raw`y^{0}:=1`),
+        " と ",
+        math(String.raw`y^{j+1}:=y^{j}y`),
+        " による）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(wz)^{0}&=1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
+&=1\cdot 1
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=w^{0}\cdot 1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
+&=w^{0}z^{0}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)
+\end{aligned}`),
+      paragraph([
+        "一歩。",
+        math(String.raw`n\in\mathbb{N}`),
+        " について ",
+        math(String.raw`(wz)^{n}=w^{n}z^{n}`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(wz)^{n+1}&=(wz)^{n}(wz)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
+&=\bigl(w^{n}z^{n}\bigr)(wz)
+&&(\because\ \text{帰納法の仮定})\\
+&=w^{n}\bigl(z^{n}(wz)\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=w^{n}\bigl((z^{n}w)z\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=w^{n}\bigl((wz^{n})z\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ z^{n}\ \text{と}\ w\ \text{に当てる})\\
+&=w^{n}\bigl(w(z^{n}z)\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(w^{n}w\bigr)\bigl(z^{n}z\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=w^{n+1}\bigl(z^{n}z\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
+&=w^{n+1}z^{n+1}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)
+\end{aligned}`),
+      paragraph([
+        "したがってすべての ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について ",
+        math(String.raw`(wz)^{n}=w^{n}z^{n}`),
+        " である。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積の単位元・積の結合則・および ",
+        math(String.raw`z^{n}`),
+        " と ",
+        math(String.raw`w`),
+        " という 2 元についての可換則だけである。",
+        "加法も零元も分配則も、逆元の存在も、体であることも使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "この主張は、1 の ",
+        math(String.raw`L`),
+        " 乗根の全体 ",
+        math(String.raw`\mu_L`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）が積で閉じることを示すための足場である。",
+        "そこから、",
+        math(String.raw`\mu_L`),
+        " の元を掛ける操作が ",
+        math(String.raw`\mu_L`),
+        " の全単射であることを経て、",
+        math(String.raw`\mu_L`),
+        " の元の冪の総和（指数が ",
+        math(String.raw`L`),
+        " の倍数なら元の個数、そうでなければ零元）へ進む。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21974,15 +22092,23 @@ z^{\,L+1}&=z^{L}\,z
           math(String.raw`P_{A,z}(v)`),
           " の像が固有空間に入ること（",
           ref("claim_qbar_projector_image_eigenspace"),
+          "）、および代数的数の積の冪が冪の積であること（",
+          ref("claim_qbar_mul_pow"),
           "）までは上で済んでいる。",
           "次に書くのは、1 の ",
           math(String.raw`L`),
-          " 乗根の全体にわたる冪の和（指数が ",
+          " 乗根の全体 ",
+          math(String.raw`\mu_L`),
+          " が積で閉じることであり、続いて ",
+          math(String.raw`\mu_L`),
+          " の元を掛ける操作が ",
+          math(String.raw`\mu_L`),
+          " の全単射であること、",
+          math(String.raw`\mu_L`),
+          " の元の冪の総和（指数が ",
           math(String.raw`L`),
-          " の倍数なら ",
-          math(String.raw`L`),
-          "、そうでなければ 0）であり、その次に、シフト行列の固有空間たちが",
-          "列ベクトルの全体を張ることを組み立てる。",
+          " の倍数なら元の個数、そうでなければ 0）、",
+          "そして最後に、シフト行列の固有空間たちが列ベクトルの全体を張ることを組み立てる。",
         ],
         [
           todo("未着手"),

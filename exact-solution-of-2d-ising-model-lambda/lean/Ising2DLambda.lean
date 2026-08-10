@@ -270,3 +270,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarProjectorFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarProjectorEigenspace
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.ProjectorImageEigenspace
 import Ising2DLambda.AlgebraicEigenvalue.QbarProjectorEigenspaceFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarMulPow
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarMulPow
+import Ising2DLambda.AlgebraicEigenvalue.QbarMulPowFromNecSuf
