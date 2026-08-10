@@ -476,6 +476,15 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.signedProd_eq_unit
   Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero_of_not_mem_pair
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix_eq_sum_pair
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_ambientOf_refl
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_ambientOf_shift
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_pair_of_outside_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_add_of_outside_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_single_of_outside_zero
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
