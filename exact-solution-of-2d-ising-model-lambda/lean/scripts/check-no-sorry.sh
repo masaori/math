@@ -447,6 +447,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_comp
   Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_of_iterated_step
+  Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

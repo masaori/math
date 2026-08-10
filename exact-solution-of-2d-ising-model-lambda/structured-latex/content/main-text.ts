@@ -15493,6 +15493,11 @@ C&:=\bigl\{\,(\tau,\tau')\in F(O,O) \bigm| \psi_1\bigl(\mathrm{srt}_{\psi_2}(\ta
     title: { text: "互換の反復合成の符号は $(-1)^k$ である" },
     labels: ["claim_orbit_transposition_composite_sign"],
     habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_of_iterated_step",
+      "Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-transposition-composite-sign"],
     statement: [
       paragraph([
