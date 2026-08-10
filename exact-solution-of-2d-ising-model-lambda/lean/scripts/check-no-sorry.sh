@@ -444,6 +444,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_rowShiftRestriction
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.composite_eq_of_values
   Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_rowShiftRestriction_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_comp
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

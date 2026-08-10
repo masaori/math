@@ -15165,6 +15165,11 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
     title: { text: "軌道の上の全単射の符号は合成について乗法的である" },
     labels: ["claim_orbit_permutation_sign_mul"],
     habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_comp",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-permutation-sign-mul"],
     statement: [
       paragraph([
