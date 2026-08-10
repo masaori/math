@@ -40,6 +40,7 @@ export const ALL_LABELS = [
   "claim_orbit_gluing_bijective",
   "claim_orbit_gluing_orbit_preserving",
   "claim_orbit_gluing_restriction",
+  "claim_orbit_identity_factor",
   "claim_orbit_inner_inversion_pairs",
   "claim_orbit_min_ne",
   "claim_orbit_permutation_sign_mul",

@@ -16270,6 +16270,187 @@ t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
   },
 
   {
+    id: "algebraic_eigenvalue_claim_orbit_identity_factor",
+    kind: "claim",
+    title: {
+      text: "恒等写像の因子は、その軌道の元の個数で決まる",
+    },
+    labels: ["claim_orbit_identity_factor"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_two_le",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_card_one",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.unitSignProd_eq_pow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.unitSignProd_eq_single",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_two_le_from_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_card_one_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-identity-factor"],
+    statement: [
+      paragraph([
+        "軌道 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）を任意に取り、",
+        math(String.raw`\mathrm{id}_{O}`),
+        " を ",
+        math(String.raw`O`),
+        " の上の恒等写像とする。このとき",
+      ]),
+      displayMath(String.raw`W_{O}\bigl(\mathrm{ch}(U),\mathrm{id}_{O}\bigr)=
+\begin{cases}
+t^{\lvert O\rvert} & (\lvert O\rvert\ge2\ \text{のとき})\\
+t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
+\end{cases}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`W_{O}`),
+        " は ",
+        ref("def_orbit_term_factor"),
+        "、",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "、",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        "右辺の ",
+        math(String.raw`t^{\lvert O\rvert}`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元 ",
+        math(String.raw`t`),
+        " の自然数冪である。",
+      ]),
+      paragraph([
+        ref("claim_orbit_factor_zero"),
+        " により、軌道ごとの和で零元でありうるのは ",
+        math(String.raw`\mathrm{id}_{O}`),
+        " と ",
+        math(String.raw`S\!\restriction_{O}`),
+        " の因子だけである（",
+        ref("claim_orbit_bijection_id_or_shift"),
+        "）。ここでその一方、恒等写像の側の値を決める。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("claim_row_config_orbit_partition"),
+        " の第一の主張より ",
+        math(String.raw`O`),
+        " は空でないので ",
+        math(String.raw`\lvert O\rvert\ge1`),
+        " であり、",
+        math(String.raw`\lvert O\rvert\ge2`),
+        " と ",
+        math(String.raw`\lvert O\rvert=1`),
+        " の 2 つの場合はすべての場合を尽くしており、かつ重ならない。",
+        "また ",
+        math(String.raw`\mathrm{id}_{O}`),
+        " は ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射なので ",
+        math(String.raw`\mathrm{id}_{O}\in\mathfrak{B}_{O}`),
+        " である（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_orbit_bijection_set"),
+        "）。",
+      ]),
+      paragraph([
+        "まず両方の場合に共通する段を出す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+W_{O}\bigl(\mathrm{ch}(U),\mathrm{id}_{O}\bigr)
+&=\iota\bigl(\kappa(\mathrm{sgn}_{O}(\mathrm{id}_{O}))\bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\mathrm{id}_{O}(\tau)}
+&&(\because\ \blkref{def_orbit_term_factor})\\
+&=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\mathrm{id}_{O}(\tau)}
+&&(\because\ \blkref{claim_orbit_permutation_sign_values}\ \text{の第 3 の主張})\\
+&=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
+&&(\because\ \mathrm{id}_{O}(\tau)=\tau)\\
+&=\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{より}\ \iota(\kappa(1))\ \text{は}\ \mathbb{Z}[x][t]\ \text{の単位元})
+\end{aligned}`),
+      paragraph([
+        "である。以下、2 つの場合を別々に示す。",
+      ]),
+      paragraph([
+        "第一の場合。",
+        math(String.raw`\lvert O\rvert\ge2`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
+&=\prod_{\tau\in O}t
+&&(\because\ \blkref{claim_shift_char_diagonal_entry}\ \text{の第一の場合を各}\ \tau\in O\ \text{へ当てる})\\
+&=t^{\lvert O\rvert}
+&&(\because\ \text{等しい因子の有限積は、因子の個数を指数とする冪である})
+\end{aligned}`),
+      paragraph([
+        "である。第 2 の等号で使った「等しい因子の有限積は、因子の個数を指数とする冪である」は、",
+        math(String.raw`O`),
+        " の元の個数についての帰納法で出る（空の積は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元、",
+        math(String.raw`t^{0}`),
+        " も単位元であり、これが出発点である。1 つ元を足す段は ",
+        math(String.raw`t^{k+1}=t^{k}\cdot t`),
+        " による）。",
+      ]),
+      paragraph([
+        "第二の場合。",
+        math(String.raw`\lvert O\rvert=1`),
+        " を仮定する。このとき ",
+        math(String.raw`O=\{\tau_1\}`),
+        " を満たす ",
+        math(String.raw`\tau_1\in O`),
+        " が取れる（",
+        math(String.raw`\because`),
+        " 元の個数が ",
+        math(String.raw`1`),
+        " である有限集合は 1 元集合である）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
+&=\mathrm{ch}(U)_{\tau_1,\tau_1}
+&&(\because\ \text{1 元集合にわたる有限積は 1 つの因子である})\\
+&=t+\iota\bigl(-\kappa(1)\bigr)
+&&(\because\ \blkref{claim_shift_char_diagonal_entry}\ \text{の第二の場合を}\ \tau_1\in O\ \text{へ当てる})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元と有限集合 ",
+        math(String.raw`O`),
+        " の元の個数だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
