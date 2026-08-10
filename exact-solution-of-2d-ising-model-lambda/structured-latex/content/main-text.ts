@@ -18503,13 +18503,10 @@ z^{n}
   {
     id: "algebraic_eigenvalue_definition_qbar_matrix",
     kind: "definition",
-    title: { text: "代数的数を成分とする行列と、その積" },
-    labels: ["def_qbar_matrix", "def_qbar_matrix_product"],
+    title: { text: "代数的数を成分とする行列" },
+    labels: ["def_qbar_matrix"],
     habitat: "Qbar",
-    lean: [
-      "Ising2DLambda.AlgebraicEigenvalue.QbarRowMatrix",
-      "Ising2DLambda.AlgebraicEigenvalue.qbarRowMatrixProduct",
-    ],
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarRowMatrix"],
     verification: ["sagemath/check/qbar-action-product"],
     statement: [
       paragraph([
@@ -18535,8 +18532,32 @@ z^{n}
         " と書く。",
       ]),
       paragraph([
+        "成分の型が違うので、これは ",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " とは別の対象である。",
+        "実数体も複素数体も現れない（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は可算集合である）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_matrix_product",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の積" },
+    labels: ["def_qbar_matrix_product"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarRowMatrixProduct"],
+    verification: ["sagemath/check/qbar-action-product"],
+    statement: [
+      paragraph([
         math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
-        " に対し積 ",
+        "（",
+        ref("def_qbar_matrix"),
+        "）に対し積 ",
         math(String.raw`AB\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
         " を",
       ]),
@@ -18570,13 +18591,10 @@ z^{n}
   {
     id: "algebraic_eigenvalue_definition_qbar_vector",
     kind: "definition",
-    title: { text: "代数的数を成分とする列ベクトルと、行列の作用" },
-    labels: ["def_qbar_vector", "def_qbar_matrix_action"],
+    title: { text: "代数的数を成分とする列ベクトル" },
+    labels: ["def_qbar_vector"],
     habitat: "Qbar",
-    lean: [
-      "Ising2DLambda.AlgebraicEigenvalue.QbarRowVector",
-      "Ising2DLambda.AlgebraicEigenvalue.qbarAction",
-    ],
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarRowVector"],
     verification: ["sagemath/check/qbar-action-product"],
     statement: [
       paragraph([
@@ -18587,7 +18605,20 @@ z^{n}
         " と書く。値 ",
         math(String.raw`v(\tau)`),
         " を成分と呼ぶ（行列の成分と違い、添字は 1 つである）。",
+        "実数体も複素数体も現れない。",
       ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_matrix_action",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の列ベクトルへの作用" },
+    labels: ["def_qbar_matrix_action"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarAction"],
+    verification: ["sagemath/check/qbar-action-product"],
+    statement: [
       paragraph([
         math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
         "（",
