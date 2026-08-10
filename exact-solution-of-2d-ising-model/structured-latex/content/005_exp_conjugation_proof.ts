@@ -1595,15 +1595,33 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
       paragraph([
         "Step 6: 結論。Step 2 より ",
         math(String.raw`\|Q_N-\exp(X)Y\exp(-X)\|\to 0`),
-        " であるから、三角不等式より",
+        "、Step 5 より ",
+        math(String.raw`\|Q_N-P_N\|\to 0`),
+        " である。ノルムの基本性質（",
+        ref("matrix_norm_triangle_inequality"),
+        " の (2)(3)）と実数列の評価により",
       ]),
       displayMath(
-        String.raw`\left\|P_N-\exp(X)\,Y\,\exp(-X)\right\|
-\le \left\|P_N-Q_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|
-\longrightarrow 0`,
+        String.raw`\begin{aligned}
+\left\|P_N-\exp(X)\,Y\,\exp(-X)\right\|
+&= \left\|\left(P_N-Q_N\right)+\left(Q_N-\exp(X)\,Y\,\exp(-X)\right)\right\|
+   &&(\because\ \text{行列の和の結合則と}\ (-Q_N)+Q_N=O) \\
+&\le \left\|P_N-Q_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|
+   &&(\because\ \text{ノルムの三角不等式}) \\
+&= \left\|Q_N-P_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|
+   &&(\because\ \text{ノルムの斉次性を}\ c=-1\ \text{に取ること}) \\
+&\longrightarrow 0+0
+   &&(\because\ \text{Step 5 と Step 2}) \\
+&= 0
+   &&(\because\ \text{実数の加法の単位元})
+\end{aligned}`,
       ),
       paragraph([
-        "すなわち ",
+        "であり、左辺は非負（",
+        ref("matrix_norm_triangle_inequality"),
+        " の (1)）なので ",
+        math(String.raw`\left\|P_N-\exp(X)\,Y\,\exp(-X)\right\|\to 0`),
+        "。すなわち ",
         math(String.raw`P_N\to\exp(X)Y\exp(-X)`),
         "。これは主張 (1)（級数の収束）と (2) の第 1 の等号 ",
         math(String.raw`\exp(X)Y\exp(-X)=\sum_{m=0}^{\infty}\frac{1}{m!}\mathrm{ad}_X^{m}(Y)`),
