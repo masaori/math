@@ -508,6 +508,10 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_one_of_dvd_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_orbitFactor
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_orbitFactor_eval_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eval₂_X_pow_add_C_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_orbitFactor_eval_eq_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -201,3 +201,6 @@ import Ising2DLambda.AlgebraicEigenvalue.ShiftCharOrbitFactorizationFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnity
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RootOfUnity
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.OrbitFactorRoot
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitFactorRoot
+import Ising2DLambda.AlgebraicEigenvalue.OrbitFactorRootFromNecSuf
