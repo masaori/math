@@ -644,15 +644,47 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sigma^y\sigma^x &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix} = -i\,\sigma^z \\
-\sigma^x\sigma^y &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
-= i\begin{pmatrix}1&0\\0&-1\end{pmatrix} = i\,\sigma^z \\
-\sigma^z\sigma^y &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-= -i\begin{pmatrix}0&1\\1&0\end{pmatrix} = -i\,\sigma^x
+\sigma^y\sigma^x
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}0\cdot0+(-i)\cdot1 & 0\cdot1+(-i)\cdot0 \\ i\cdot0+0\cdot1 & i\cdot1+0\cdot0\end{pmatrix}
+&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
+&&(\because \mathbb{C} \text{ の四則}) \\
+&= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \text{行列のスカラー倍の定義}) \\
+&= -i\,\sigma^z
+&&(\because \text{Pauli 行列の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x\sigma^y
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}0\cdot0+1\cdot i & 0\cdot(-i)+1\cdot0 \\ 1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0\end{pmatrix}
+&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
+&&(\because \mathbb{C} \text{ の四則}) \\
+&= i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \text{行列のスカラー倍の定義}) \\
+&= i\,\sigma^z
+&&(\because \text{Pauli 行列の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z\sigma^y
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
+&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+&&(\because \mathbb{C} \text{ の四則}) \\
+&= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \text{行列のスカラー倍の定義}) \\
+&= -i\,\sigma^x
+&&(\because \text{Pauli 行列の定義})
 \end{aligned}`,
       ),
       paragraph([
