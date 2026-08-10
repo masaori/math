@@ -43,4 +43,38 @@ theorem qbarMatrixEval_product_from_necSuf (L : ℕ) [NeZero L] (ξ : Qbar) (A B
       (fun a b => map_mul (evalFirstHom ξ) a b)
       A B τ τ''
 
+/-- ℤ[x] の単位行列は、必要十分版の `identityMatMin` と同じ行列である
+（`κ(1)` が `ℤ[x]` の単位元、`κ(0)` が零元であることを使う。定義の展開だけでは一致しない）。 -/
+lemma identityRowMatrix_eq_identityMatMin (L : ℕ) [NeZero L] :
+    identityRowMatrix L = (NecSuf.AlgebraicEigenvalue.identityMatMin : RowMatrix L) := by
+  funext τ τ'
+  by_cases h : τ = τ'
+  · rw [identityRowMatrix, if_pos h, constPoly_one,
+      NecSuf.AlgebraicEigenvalue.identityMatMin, if_pos h]
+  · rw [identityRowMatrix, if_neg h, constPoly_zero,
+      NecSuf.AlgebraicEigenvalue.identityMatMin, if_neg h]
+
+/-- Qbar の単位行列も、必要十分版の `identityMatMin` そのものである
+（添字の相等の向きが違うだけなので、成分ごとに直す）。 -/
+lemma qbarIdentityMatrix_eq_identityMatMin (L : ℕ) [NeZero L] :
+    qbarIdentityMatrix L = (NecSuf.AlgebraicEigenvalue.identityMatMin : QbarRowMatrix L) := by
+  funext τ τ'
+  by_cases h : τ = τ'
+  · rw [qbarIdentityMatrix, if_pos h.symm,
+      NecSuf.AlgebraicEigenvalue.identityMatMin, if_pos h]
+  · rw [qbarIdentityMatrix, if_neg (fun hh => h hh.symm),
+      NecSuf.AlgebraicEigenvalue.identityMatMin, if_neg h]
+
+/-- 単位行列の側も、具体版は必要十分版の特殊化である。
+特殊化の仕方は積の側と同じで、`hone` に `map_one`、`hzero` に `map_zero` を渡す。 -/
+theorem qbarMatrixEval_identity_from_necSuf (L : ℕ) [NeZero L] (ξ : Qbar) :
+    qbarMatrixEval L ξ (identityRowMatrix L) = qbarIdentityMatrix L := by
+  rw [qbarIdentityMatrix_eq_identityMatMin, identityRowMatrix_eq_identityMatMin]
+  funext τ τ'
+  exact
+    NecSuf.AlgebraicEigenvalue.matEval_identity_necSuf
+      (ι := RowConfig L) (S := Polynomial ℤ) (T := Qbar)
+      (fun a => evalFirstHom ξ a)
+      (map_one (evalFirstHom ξ)) (map_zero (evalFirstHom ξ)) τ τ'
+
 end Ising2DLambda.AlgebraicEigenvalue

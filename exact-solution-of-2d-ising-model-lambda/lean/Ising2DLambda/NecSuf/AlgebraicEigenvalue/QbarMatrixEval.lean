@@ -54,4 +54,52 @@ theorem matEval_product_necSuf
     _ = matProduct (fun i j => f (A i j)) (fun j k => f (B j k)) i k := rfl
         -- 第 5・6 段。評価の定義へ戻し、行列の積の定義へまとめること。
 
+/-- 単位行列を、この段が要求する最小の構造だけで書いたもの。
+`ShiftMatrixOrder` の `identityMat` は section variable により `AddCommMonoid S` と `Mul S` を
+要求するが、**この段は和も積も一度も使わない**（対角で `1`、対角の外で `0` と読むだけである）。
+必要十分版の目的は「使っていない構造を仮定に残さないこと」なので、ここでは
+`Zero` と `One` と添字の相等の判定だけを要求する形で置く。
+定義が分岐しないことは下の `identityMatMin_eq_identityMat` で押さえる。 -/
+def identityMatMin {ι : Type*} [DecidableEq ι] {S : Type*} [Zero S] [One S] : ι → ι → S :=
+  fun i j => if i = j then (1 : S) else (0 : S)
+
+/-- 余計な構造があるときは `identityMat` と一致する（同じ定義を 2 つ置いたことにならない）。 -/
+lemma identityMatMin_eq_identityMat {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {S : Type*} [AddCommMonoid S] [Mul S] [One S] :
+    (identityMatMin : ι → ι → S) = (identityMat : ι → ι → S) := rfl
+
+/-- 主張「成分ごとの評価は単位行列を単位行列へ写す」の必要十分版。
+証明手順は具体版（`qbarMatrixEval_identity`）と同じである
+（成分ごとに、添字が等しいかで場合を分け、各場合で 4 段の鎖をたどる）。
+
+  使っている性質                なぜ削れないか
+  `DecidableEq ι`               単位行列の定義の場合分けに要る。
+  `Zero S` `One S`              `ℤ[x]` 側の単位行列を書くのに要る。
+  `Zero T` `One T`              値の側の単位行列を書くのに要る。
+  `hone`                        添字が等しい場合の第 3 段。写像が単位元を単位元へ送ること。
+  `hzero`                       添字が異なる場合の第 3 段。写像が零元を零元へ送ること。
+
+削れたもの: 有限性（`Fintype ι`）・加法・乗法・それらの法則・写像が和や積を保つこと・
+体であること・値が代数的数であること。すなわちこの段は「単位元を単位元へ、零元を零元へ送る
+写像を成分ごとに施すこと」だけである。 -/
+theorem matEval_identity_necSuf
+    {ι : Type*} [DecidableEq ι] {S T : Type*} [Zero S] [One S] [Zero T] [One T]
+    (f : S → T) (hone : f (1 : S) = (1 : T)) (hzero : f (0 : S) = (0 : T)) (i j : ι) :
+    f (identityMatMin i j) = (identityMatMin : ι → ι → T) i j := by
+  by_cases h : i = j
+  · calc f ((identityMatMin : ι → ι → S) i j)
+        = f (1 : S) := by rw [identityMatMin, if_pos h]
+          -- 第 2 段。添字が等しいときの単位行列の成分。
+      _ = (1 : T) := hone
+          -- 第 3 段。写像が単位元を単位元へ送ること。
+      _ = (identityMatMin : ι → ι → T) i j := by rw [identityMatMin, if_pos h]
+          -- 第 4 段。値の側の単位行列の成分へ戻すこと。
+  · calc f ((identityMatMin : ι → ι → S) i j)
+        = f (0 : S) := by rw [identityMatMin, if_neg h]
+          -- 第 2 段。添字が異なるときの単位行列の成分。
+      _ = (0 : T) := hzero
+          -- 第 3 段。写像が零元を零元へ送ること。
+      _ = (identityMatMin : ι → ι → T) i j := by rw [identityMatMin, if_neg h]
+          -- 第 4 段。値の側の単位行列の成分へ戻すこと。
+
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

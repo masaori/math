@@ -19946,6 +19946,104 @@ A^{k+1}\cdot v
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_matrix_eval_identity",
+    kind: "claim",
+    title: { text: "成分ごとの評価は単位行列を単位行列へ写す" },
+    labels: ["claim_qbar_matrix_eval_identity"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval_identity",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matEval_identity_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval_identity_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-matrix-eval-identity"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。",
+        ref("def_identity_matrix"),
+        " の単位行列 ",
+        math(String.raw`I\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " と ",
+        ref("def_qbar_identity_matrix"),
+        " の単位行列 ",
+        math(String.raw`I^{\overline{\mathbb{Q}}}_L\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " について",
+      ]),
+      displayMath(String.raw`\mathrm{Ev}_{\xi}(I)=I^{\overline{\mathbb{Q}}}_L`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{Ev}_{\xi}`),
+        " は ",
+        ref("def_qbar_matrix_eval"),
+        "）。左辺と右辺は成分の型が違う 2 つの単位行列を結ぶ等式であり、同一視ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_qbar_matrix"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau'\in R_L`),
+        " を任意に取る。",
+        ref("def_row_configuration"),
+        " の行配位の 2 元が等しいか否かは判定できるので、次の 2 つの場合に分かれる。",
+      ]),
+      paragraph([
+        math(String.raw`\tau=\tau'`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{Ev}_{\xi}(I)\bigr)_{\tau,\tau'}
+&=\bigl(I_{\tau,\tau'}\bigr)(\xi)
+&&(\because\ \blkref{def_qbar_matrix_eval})\\
+&=\bigl(\kappa(1)\bigr)(\xi)
+&&(\because\ \blkref{def_identity_matrix}\ \text{の}\ \tau=\tau'\ \text{の場合})\\
+&=1
+&&(\because\ \text{代入が単位元を単位元へ送ること}\ \blkref{def_partition_polynomial}\text{。}\ \kappa(1)\ \text{が}\ \mathbb{Z}[x]\ \text{の単位元であることは}\ \blkref{def_constant_polynomial})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}
+&&(\because\ \blkref{def_qbar_identity_matrix}\ \text{の}\ \tau'=\tau\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\ne\tau'`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{Ev}_{\xi}(I)\bigr)_{\tau,\tau'}
+&=\bigl(I_{\tau,\tau'}\bigr)(\xi)
+&&(\because\ \blkref{def_qbar_matrix_eval})\\
+&=\bigl(\kappa(0)\bigr)(\xi)
+&&(\because\ \blkref{def_identity_matrix}\ \text{の}\ \tau\ne\tau'\ \text{の場合})\\
+&=0
+&&(\because\ \text{代入が零元を零元へ送ること}\ \blkref{def_partition_polynomial}\text{。}\ \kappa(0)\ \text{が}\ \mathbb{Z}[x]\ \text{の零元であることは}\ \blkref{def_constant_polynomial})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}
+&&(\because\ \blkref{def_qbar_identity_matrix}\ \text{の}\ \tau'\ne\tau\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau`),
+        " と ",
+        math(String.raw`\tau'`),
+        " は任意なので、2 つの行列のすべての成分が等しく、主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が使っているのは、代入が ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の単位元と零元をそれぞれ ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の単位元と零元へ送ること（",
+        ref("def_partition_polynomial"),
+        " で置いた約束であり、証明すべきことではない）と、2 つの単位行列の定義だけである。",
+        "有限和も有限積も現れず、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -20121,8 +20219,16 @@ A^{k+1}\cdot v
           ref("def_qbar_matrix_eval"),
           "）を置いて、それが行列の積を保つこと（",
           ref("claim_qbar_matrix_eval_product"),
+          "）、およびそれが単位行列を単位行列へ写すこと（",
+          ref("claim_qbar_matrix_eval_identity"),
           "）までは上で済んでいる。",
           "次に書くのは、",
+          ref("def_qbar_matrix_eval"),
+          " が行列の冪を保つこと（",
+          ref("claim_qbar_matrix_eval_product"),
+          " と ",
+          ref("claim_qbar_matrix_eval_identity"),
+          " からの帰納法）であり、そのうえで ",
           ref("theorem_shift_matrix_order"),
           " の ",
           math(String.raw`U^{L}=I`),

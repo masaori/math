@@ -27,6 +27,8 @@
 -/
 import Ising2DLambda.AlgebraicEigenvalue.OrbitFactorRoot
 import Ising2DLambda.AlgebraicEigenvalue.QbarAction
+import Ising2DLambda.AlgebraicEigenvalue.QbarIdentityAction
+import Ising2DLambda.AlgebraicEigenvalue.Determinant
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -61,5 +63,38 @@ theorem qbarMatrixEval_product [NeZero L] (ξ : Qbar) (A B : RowMatrix L) :
         -- 第 5 段。Ev_ξ の定義（2 箇所へ適用）。
     _ = qbarRowMatrixProduct L (qbarMatrixEval L ξ A) (qbarMatrixEval L ξ B) τ τ'' := rfl
         -- 第 6 段。Qbar の行列の積の定義。
+
+/-- 人手証明の本体。`Ev_ξ(I) = I^Qbar_L`（`claim_qbar_matrix_eval_identity`）。
+成分ごとに、添字が等しいかどうかで場合を分け、各場合で 4 段の鎖をたどる。
+
+  人手証明                                    ここ
+  τ=τ' の第 1 段（Ev_ξ の定義）               qbarMatrixEval の展開（rfl）
+  τ=τ' の第 2 段（ℤ[x] の単位行列の対角成分）  identityRowMatrix の展開と if_pos
+  τ=τ' の第 3 段（代入が単位元を保つ）         map_one
+  τ=τ' の第 4 段（Qbar の単位行列の対角成分）  qbarIdentityMatrix の折りたたみ
+  τ≠τ' の 4 段も同様（κ(0) と map_zero を使う） -/
+theorem qbarMatrixEval_identity [NeZero L] (ξ : Qbar) :
+    qbarMatrixEval L ξ (identityRowMatrix L) = qbarIdentityMatrix L := by
+  funext τ τ'
+  by_cases h : τ = τ'
+  · calc qbarMatrixEval L ξ (identityRowMatrix L) τ τ'
+        = evalFirstHom ξ (identityRowMatrix L τ τ') := rfl
+          -- 第 1 段。Ev_ξ の定義（成分ごとの代入）。
+      _ = evalFirstHom ξ (constPoly 1) := by rw [identityRowMatrix, if_pos h]
+          -- 第 2 段。ℤ[x] の単位行列の対角成分は κ(1)。
+      _ = 1 := by rw [constPoly_one]; exact map_one _
+          -- 第 3 段。代入が単位元を単位元へ送ること。
+      _ = qbarIdentityMatrix L τ τ' := by rw [qbarIdentityMatrix, if_pos h.symm]
+          -- 第 4 段。Qbar の単位行列の対角成分は 1。
+  · calc qbarMatrixEval L ξ (identityRowMatrix L) τ τ'
+        = evalFirstHom ξ (identityRowMatrix L τ τ') := rfl
+          -- 第 1 段。Ev_ξ の定義（成分ごとの代入）。
+      _ = evalFirstHom ξ (constPoly 0) := by rw [identityRowMatrix, if_neg h]
+          -- 第 2 段。ℤ[x] の単位行列の非対角成分は κ(0)。
+      _ = 0 := by rw [constPoly_zero]; exact map_zero _
+          -- 第 3 段。代入が零元を零元へ送ること。
+      _ = qbarIdentityMatrix L τ τ' := by
+            rw [qbarIdentityMatrix, if_neg (fun hh => h hh.symm)]
+          -- 第 4 段。Qbar の単位行列の非対角成分は 0。
 
 end Ising2DLambda.AlgebraicEigenvalue
