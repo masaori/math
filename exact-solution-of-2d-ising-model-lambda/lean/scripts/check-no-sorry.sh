@@ -491,6 +491,10 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.add_mul_self_eq_zero_of_one_add_eq_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_eq_mul_geom
   Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitCard_dvd_L
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_mul_geom_eq_pow_L
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_dvd_pow_add_of_dvd
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_mul_geom_eq_pow_L_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
