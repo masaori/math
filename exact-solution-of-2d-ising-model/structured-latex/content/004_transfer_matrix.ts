@@ -236,23 +236,58 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 \quad (\because \text{成分比較})`,
       ),
       paragraph([
-        "が成り立つ（右辺の ",
-        math(String.raw`(1,1)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{11}+a_{22}}{2}+\frac{a_{11}-a_{22}}{2}=a_{11}`),
-        "、",
-        math(String.raw`(2,2)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{11}+a_{22}}{2}-\frac{a_{11}-a_{22}}{2}=a_{22}`),
-        "、",
-        math(String.raw`(1,2)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{12}+a_{21}}{2}-i\cdot\frac{i(a_{12}-a_{21})}{2}=a_{12}`),
-        "、",
-        math(String.raw`(2,1)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{12}+a_{21}}{2}+i\cdot\frac{i(a_{12}-a_{21})}{2}=a_{21}`),
-        "）。よって ",
+        "が成り立つ。右辺の 4 つの成分を 1 つずつ計算すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\frac{a_{11}+a_{22}}{2}I
++\frac{a_{12}+a_{21}}{2}\sigma^x
++\frac{i(a_{12}-a_{21})}{2}\sigma^y
++\frac{a_{11}-a_{22}}{2}\sigma^z\right)_{11}
+&=\frac{a_{11}+a_{22}}{2}\cdot 1+\frac{a_{11}-a_{22}}{2}\cdot 1
+&&(\because\ I_{11}=\sigma^z_{11}=1,\ \sigma^x_{11}=\sigma^y_{11}=0)\\
+&=\frac{a_{11}+a_{22}}{2}+\frac{a_{11}-a_{22}}{2}
+&&(\because\ \text{1 を掛けても変わらない})\\
+&=\frac{2a_{11}}{2}
+&&(\because\ \text{同分母の和})\\
+&=a_{11}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      paragraph([
+        "であり、同じ計算を残りの 3 つの成分について行うと、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\cdots)_{22}
+&=\frac{a_{11}+a_{22}}{2}\cdot 1+\frac{a_{11}-a_{22}}{2}\cdot(-1)
+&&(\because\ I_{22}=1,\ \sigma^z_{22}=-1,\ \sigma^x_{22}=\sigma^y_{22}=0)\\
+&=\frac{a_{11}+a_{22}}{2}-\frac{a_{11}-a_{22}}{2}
+&&(\because\ (-1)\ \text{を掛けることは符号を変えること})\\
+&=\frac{2a_{22}}{2}
+&&(\because\ \text{同分母の差})\\
+&=a_{22}
+&&(\because\ \text{約分})\\[1ex]
+(\cdots)_{12}
+&=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot(-i)
+&&(\because\ \sigma^x_{12}=1,\ \sigma^y_{12}=-i,\ I_{12}=\sigma^z_{12}=0)\\
+&=\frac{a_{12}+a_{21}}{2}+\frac{a_{12}-a_{21}}{2}
+&&(\because\ i\cdot(-i)=1)\\
+&=\frac{2a_{12}}{2}
+&&(\because\ \text{同分母の和})\\
+&=a_{12}
+&&(\because\ \text{約分})\\[1ex]
+(\cdots)_{21}
+&=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot i
+&&(\because\ \sigma^x_{21}=1,\ \sigma^y_{21}=i,\ I_{21}=\sigma^z_{21}=0)\\
+&=\frac{a_{12}+a_{21}}{2}-\frac{a_{12}-a_{21}}{2}
+&&(\because\ i\cdot i=-1)\\
+&=\frac{2a_{21}}{2}
+&&(\because\ \text{同分母の差})\\
+&=a_{21}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      paragraph([
+        "となる（",
+        math(String.raw`(\cdots)`),
+        " は上と同じ右辺の行列である）。よって ",
         math(String.raw`\mathcal{B}`),
         " は ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
@@ -609,15 +644,47 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sigma^y\sigma^x &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix} = -i\,\sigma^z \\
-\sigma^x\sigma^y &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
-= i\begin{pmatrix}1&0\\0&-1\end{pmatrix} = i\,\sigma^z \\
-\sigma^z\sigma^y &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-= -i\begin{pmatrix}0&1\\1&0\end{pmatrix} = -i\,\sigma^x
+\sigma^y\sigma^x
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}0\cdot0+(-i)\cdot1 & 0\cdot1+(-i)\cdot0 \\ i\cdot0+0\cdot1 & i\cdot1+0\cdot0\end{pmatrix}
+&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
+&&(\because \mathbb{C} \text{ の四則}) \\
+&= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \text{行列のスカラー倍の定義}) \\
+&= -i\,\sigma^z
+&&(\because \text{Pauli 行列の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x\sigma^y
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}0\cdot0+1\cdot i & 0\cdot(-i)+1\cdot0 \\ 1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0\end{pmatrix}
+&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
+&&(\because \mathbb{C} \text{ の四則}) \\
+&= i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \text{行列のスカラー倍の定義}) \\
+&= i\,\sigma^z
+&&(\because \text{Pauli 行列の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z\sigma^y
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
+&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+&&(\because \mathbb{C} \text{ の四則}) \\
+&= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \text{行列のスカラー倍の定義}) \\
+&= -i\,\sigma^x
+&&(\because \text{Pauli 行列の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1185,10 +1252,17 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         " について",
       ]),
       displayMath(
-        String.raw`\left(\sum_{I,J\in\mathcal{I}} t_{I,J}\Theta_{I,J}\right)(f_K)
-= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\delta_{J,K} f_I
-= \sum_{I\in\mathcal{I}} t_{I,K} f_I
-= T(f_K)`,
+        String.raw`\begin{aligned}
+\left(\sum_{I,J\in\mathcal{I}} t_{I,J}\Theta_{I,J}\right)(f_K)
+&= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\Theta_{I,J}(f_K)
+&&(\because\ \text{線型写像の和とスカラー倍の値の定義})\\
+&= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\delta_{J,K} f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）})\\
+&= \sum_{I\in\mathcal{I}} t_{I,K} f_I
+&&(\because\ \delta_{J,K}\ \text{は}\ J=K\ \text{のときだけ}\ 1\ \text{で他は}\ 0)\\
+&= T(f_K)
+&&(\because\ T(f_K)=\sum_{I\in\mathcal{I}} t_{I,K} f_I\ \text{（表示の取り方）})
+\end{aligned}`,
       ),
       paragraph([
         "であり、基底上で一致する線型写像は等しいから ",
@@ -1248,19 +1322,35 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         String.raw`\begin{aligned}
 E_{I,J}E_{K,L}
 &= (E_{i_1j_1}E_{k_1l_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}E_{k_Ml_M})
-\quad (\because \text{クロネッカー積の積の規則}) \\
-&= (\delta_{j_1,k_1}E_{i_1l_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}E_{i_Ml_M}) \\
+&&(\because\ \text{クロネッカー積の積の規則})\\
+&= (\delta_{j_1,k_1}E_{i_1l_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}E_{i_Ml_M})
+&&(\because\ E_{ij}E_{kl}=\delta_{j,k}E_{il}\ \text{を各因子へ同時に適用})\\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)
+   \bigl(E_{i_1l_1}\boxtimes\cdots\boxtimes E_{i_Ml_M}\bigr)
+&&(\because\ \text{各因子についての}\ \mathbb{C}\text{-線型性})\\
 &= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right) E_{I,L}
-\quad (\because \text{各因子についての } \mathbb{C}\text{-線型性})
-= \delta_{J,K}E_{I,L}
+&&(\because\ E_{I,L}\ \text{の定義})\\
+&= \delta_{J,K}E_{I,L}
+&&(\because\ \delta_{J,K}=\prod_{m=1}^{M}\delta_{j_m,k_m})
 \end{aligned}`,
       ),
       paragraph(["一方、任意の ", math(String.raw`P\in\mathcal{I}`), " について"]),
       displayMath(
-        String.raw`\left(\Theta_{I,J}\circ\Theta_{K,L}\right)(f_P)
-= \Theta_{I,J}\!\left(\delta_{L,P}f_K\right)
-= \delta_{L,P}\,\delta_{J,K}\,f_I
-= \delta_{J,K}\,\Theta_{I,L}(f_P)`,
+        String.raw`\begin{aligned}
+\left(\Theta_{I,J}\circ\Theta_{K,L}\right)(f_P)
+&= \Theta_{I,J}\!\left(\Theta_{K,L}(f_P)\right)
+&&(\because\ \text{写像の合成の定義})\\
+&= \Theta_{I,J}\!\left(\delta_{L,P}f_K\right)
+&&(\because\ \Theta_{K,L}(f_P)=\delta_{L,P}f_K\ \text{（}\Theta_{K,L}\ \text{の定義）})\\
+&= \delta_{L,P}\,\Theta_{I,J}(f_K)
+&&(\because\ \Theta_{I,J}\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&= \delta_{L,P}\,\delta_{J,K}\,f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）})\\
+&= \delta_{J,K}\,\delta_{L,P}\,f_I
+&&(\because\ \mathbb{C}\ \text{の乗法の可換則})\\
+&= \delta_{J,K}\,\Theta_{I,L}(f_P)
+&&(\because\ \Theta_{I,L}(f_P)=\delta_{L,P}f_I\ \text{（}\Theta_{I,L}\ \text{の定義）})
+\end{aligned}`,
       ),
       paragraph([
         "であり、基底上で一致するから ",
@@ -1268,8 +1358,19 @@ E_{I,J}E_{K,L}
         "。よって",
       ]),
       displayMath(
-        String.raw`\mathbf{end}(E_{I,J}E_{K,L}) = \delta_{J,K}\mathbf{end}(E_{I,L}) = \delta_{J,K}\Theta_{I,L}
-= \Theta_{I,J}\circ\Theta_{K,L} = \mathbf{end}(E_{I,J})\circ\mathbf{end}(E_{K,L})`,
+        String.raw`\begin{aligned}
+\mathbf{end}(E_{I,J}E_{K,L})
+&= \mathbf{end}\!\left(\delta_{J,K}E_{I,L}\right)
+&&(\because\ \text{上で示した}\ E_{I,J}E_{K,L}=\delta_{J,K}E_{I,L})\\
+&= \delta_{J,K}\,\mathbf{end}(E_{I,L})
+&&(\because\ \mathbf{end}\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&= \delta_{J,K}\,\Theta_{I,L}
+&&(\because\ \mathbf{end}(E_{I,L})=\Theta_{I,L}\ \text{（}\mathbf{end}\ \text{の定義）})\\
+&= \Theta_{I,J}\circ\Theta_{K,L}
+&&(\because\ \text{上で示した}\ \Theta_{I,J}\circ\Theta_{K,L}=\delta_{J,K}\Theta_{I,L})\\
+&= \mathbf{end}(E_{I,J})\circ\mathbf{end}(E_{K,L})
+&&(\because\ \mathbf{end}\ \text{の定義を 2 箇所へ同時に適用})
+\end{aligned}`,
       ),
       paragraph([
         "Step 4: (3)。",
@@ -1283,9 +1384,17 @@ E_{I,J}E_{K,L}
         "。和で展開する）より",
       ]),
       displayMath(
-        String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}
-= \underbrace{(E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})}_{M}
-= \sum_{I\in\mathcal{I}} E_{I,I}`,
+        String.raw`\begin{aligned}
+I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&= \underbrace{I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}}_{M}
+&&(\because\ \text{クロネッカー積の単位元の規則})\\
+&= \underbrace{(E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})}_{M}
+&&(\because\ I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}\ \text{を各因子へ同時に適用})\\
+&= \sum_{I\in\mathcal{I}} E_{i_1i_1}\boxtimes\cdots\boxtimes E_{i_Mi_M}
+&&(\because\ \text{各因子についての}\ \mathbb{C}\text{-線型性で和を展開})\\
+&= \sum_{I\in\mathcal{I}} E_{I,I}
+&&(\because\ E_{I,I}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph([
         "であり、各 ",
@@ -1312,9 +1421,18 @@ E_{I,J}E_{K,L}
         "（成分計算）より右辺は",
       ]),
       displayMath(
-        String.raw`(E_{i_1j_1}e_{k_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}e_{k_M})
-= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)f_I
-= \delta_{J,K}f_I`,
+        String.raw`\begin{aligned}
+(E_{i_1j_1}e_{k_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}e_{k_M})
+&= (\delta_{j_1,k_1}e_{i_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}e_{i_M})
+&&(\because\ E_{ij}e_k=\delta_{j,k}e_i\ \text{を各因子へ同時に適用})\\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)
+   \bigl(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\bigr)
+&&(\because\ \text{各因子についての}\ \mathbb{C}\text{-線型性})\\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)f_I
+&&(\because\ f_I\ \text{の定義})\\
+&= \delta_{J,K}f_I
+&&(\because\ \delta_{J,K}=\prod_{m=1}^{M}\delta_{j_m,k_m})
+\end{aligned}`,
       ),
       paragraph([
         "であり、左辺は ",
@@ -1592,22 +1710,37 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " について Step 1 を 2 回使うと",
       ]),
       displayMath(
-        String.raw`\varepsilon (Y_a Z_b)
-= (\varepsilon Y_a) Z_b
-= (-Y_a\varepsilon)Z_b
-= -Y_a(\varepsilon Z_b)
-= -Y_a(-Z_b\varepsilon)
-= (Y_a Z_b)\varepsilon`,
+        String.raw`\begin{aligned}
+\varepsilon (Y_a Z_b)
+&= (\varepsilon Y_a) Z_b
+&&(\because\ \mathrm{Mat}(2^M,\mathbb{C})\ \text{の積の結合律})\\
+&= (-Y_a\varepsilon)Z_b
+&&(\because\ \text{Step 1 の}\ \varepsilon Y_a = -Y_a\varepsilon)\\
+&= -\left(Y_a\varepsilon\right)Z_b
+&&(\because\ \text{スカラー倍と積の可換性})\\
+&= -Y_a(\varepsilon Z_b)
+&&(\because\ \mathrm{Mat}(2^M,\mathbb{C})\ \text{の積の結合律})\\
+&= -Y_a(-Z_b\varepsilon)
+&&(\because\ \text{Step 1 の}\ \varepsilon Z_b = -Z_b\varepsilon)\\
+&= (Y_a Z_b)\varepsilon
+&&(\because\ \text{スカラー倍と積の可換性、および}\ -(-1)=1)
+\end{aligned}`,
       ),
       paragraph([
-        "（積の結合律とスカラー倍の可換性を使った）。特に ",
+        "が成り立つ。特に ",
         math(String.raw`\varepsilon W = W\varepsilon`),
         " かつ ",
         math(String.raw`\varepsilon(Y_mZ_{m+1}) = (Y_mZ_{m+1})\varepsilon`),
         "。また",
       ]),
       displayMath(
-        String.raw`\varepsilon(\varepsilon W) = \varepsilon(W\varepsilon) = (\varepsilon W)\varepsilon`,
+        String.raw`\begin{aligned}
+\varepsilon(\varepsilon W)
+&= \varepsilon(W\varepsilon)
+&&(\because\ \text{上で示した}\ \varepsilon W = W\varepsilon)\\
+&= (\varepsilon W)\varepsilon
+&&(\because\ \mathrm{Mat}(2^M,\mathbb{C})\ \text{の積の結合律})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
@@ -1633,20 +1766,36 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         math(String.raw`\varepsilon A = A\varepsilon`),
         " を満たすから、",
         ref("end_is_algebra_isomorphism"),
-        " (2) より ",
-        math(String.raw`\hat{\varepsilon}\circ\hat{A} = \widehat{\varepsilon A} = \widehat{A\varepsilon} = \hat{A}\circ\hat{\varepsilon}`),
-        "。よって ",
+        " (2) より次が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{\varepsilon}\circ\hat{A}
+&= \widehat{\varepsilon A}
+&&(\because\ \mathbf{end}\ \text{が積を保つこと})\\
+&= \widehat{A\varepsilon}
+&&(\because\ \text{Step 2 の}\ \varepsilon A = A\varepsilon)\\
+&= \hat{A}\circ\hat{\varepsilon}
+&&(\because\ \mathbf{end}\ \text{が積を保つこと})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
         math(String.raw`f\in\mathcal{F}^{(\pm)}`),
         "（すなわち ",
         math(String.raw`\hat{\varepsilon}f = \pm f`),
         "）に対し",
       ]),
       displayMath(
-        String.raw`\hat{\varepsilon}\left(\hat{A}f\right)
-= \hat{A}\left(\hat{\varepsilon}f\right)
-= \hat{A}(\pm f)
-= \pm\,\hat{A}f
-\quad (\because \hat{A} \text{ の線型性})`,
+        String.raw`\begin{aligned}
+\hat{\varepsilon}\left(\hat{A}f\right)
+&= \hat{A}\left(\hat{\varepsilon}f\right)
+&&(\because\ \hat{\varepsilon}\circ\hat{A} = \hat{A}\circ\hat{\varepsilon})\\
+&= \hat{A}(\pm f)
+&&(\because\ f\in\mathcal{F}^{(\pm)}\ \text{すなわち}\ \hat{\varepsilon}f = \pm f)\\
+&= \pm\,\hat{A}f
+&&(\because\ \hat{A}\ \text{の線型性})
+\end{aligned}`,
       ),
       paragraph([
         "であり ",
@@ -1683,13 +1832,16 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
 \quad (\because \mathbf{end} \text{ の線型性と } \widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}) \\
 &= i K_1\left(-(\pm\hat{W}f) \pm \hat{W}f\right)
 \quad (\because \hat{W}f\in\mathcal{F}^{(\pm)} \text{ より } \hat{\varepsilon}(\hat{W}f) = \pm\hat{W}f) \\
-&= i K_1\cdot 0 = 0
+&= i K_1\left(\mp\hat{W}f \pm \hat{W}f\right)
+\quad (\because -(\pm x) = \mp x) \\
+&= i K_1\cdot 0
+\quad (\because \mp x \pm x = 0 \text{（複号同順）}) \\
+&= 0
+\quad (\because \text{零ベクトルのスカラー倍は零ベクトル})
 \end{aligned}`,
       ),
       paragraph([
-        "（複号同順。",
-        math(String.raw`-(\pm x)\pm x = \mp x \pm x = 0`),
-        "）。よって ",
+        "が成り立つ（複号同順）。よって ",
         math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
         "。",
       ]),
@@ -1721,10 +1873,19 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " に適用でき、",
       ]),
       displayMath(
-        String.raw`\hat{G}^{\,n+1}f = \hat{G}^{\,n}\!\left(\hat{G}f\right) = \hat{G}^{\,n}g
-= \left(\hat{G}^{(\pm)}\right)^{n}g
-= \left(\hat{G}^{(\pm)}\right)^{n}\!\left(\hat{G}^{(\pm)}f\right)
-= \left(\hat{G}^{(\pm)}\right)^{n+1}f`,
+        String.raw`\begin{aligned}
+\hat{G}^{\,n+1}f
+&= \hat{G}^{\,n}\!\left(\hat{G}f\right)
+&&(\because\ \text{写像の冪の定義})\\
+&= \hat{G}^{\,n}g
+&&(\because\ g := \hat{G}f)\\
+&= \left(\hat{G}^{(\pm)}\right)^{n}g
+&&(\because\ \text{帰納法の仮定を}\ g\in\mathcal{F}^{(\pm)}\ \text{に適用})\\
+&= \left(\hat{G}^{(\pm)}\right)^{n}\!\left(\hat{G}^{(\pm)}f\right)
+&&(\because\ \text{Step 4 の}\ g = \hat{G}^{(\pm)}f)\\
+&= \left(\hat{G}^{(\pm)}\right)^{n+1}f
+&&(\because\ \text{写像の冪の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 6: ",
@@ -1736,8 +1897,23 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " より",
       ]),
       displayMath(
-        String.raw`\mathbf{end}(V_1) = \mathbf{end}(\exp(G)) = \exp\!\left(\hat{G}\right), \qquad
-\mathbf{end}\!\left(V_1^{(\pm)}\right) = \mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right) = \exp\!\left(\hat{G}^{(\pm)}\right)`,
+        String.raw`\begin{aligned}
+\mathbf{end}(V_1)
+&= \mathbf{end}(\exp(G))
+&&(\because\ V_1 = \exp(G))\\
+&= \exp\!\left(\hat{G}\right)
+&&(\because\ \mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))\ \text{と}\ \hat{G} = \mathbf{end}(G))
+\end{aligned}`,
+      ),
+      paragraph(["および"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathbf{end}\!\left(V_1^{(\pm)}\right)
+&= \mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right)
+&&(\because\ V_1^{(\pm)} = \exp(G^{(\pm)}))\\
+&= \exp\!\left(\hat{G}^{(\pm)}\right)
+&&(\because\ \mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))\ \text{と}\ \hat{G}^{(\pm)} = \mathbf{end}(G^{(\pm)}))
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\mathcal{F}`),
@@ -1779,8 +1955,13 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " について部分和が",
       ]),
       displayMath(
-        String.raw`S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
-= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f =: S_N^{(\pm)}`,
+        String.raw`\begin{aligned}
+S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
+&= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f
+&&(\because\ \text{Step 5 を各}\ n\in\{0,\dots,N\}\ \text{に適用})\\
+&=: S_N^{(\pm)}
+&&(\because\ S_N^{(\pm)}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph([
         "と一致する。上の各点収束より ",
@@ -1800,8 +1981,15 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         "。よって",
       ]),
       displayMath(
-        String.raw`\left(\mathbf{end}(V_1)\right)f = \left(\exp(\hat{G})\right)f
-= \left(\exp(\hat{G}^{(\pm)})\right)f = \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f`,
+        String.raw`\begin{aligned}
+\left(\mathbf{end}(V_1)\right)f
+&= \left(\exp(\hat{G})\right)f
+&&(\because\ \text{Step 6 の}\ \mathbf{end}(V_1) = \exp(\hat{G}))\\
+&= \left(\exp(\hat{G}^{(\pm)})\right)f
+&&(\because\ \text{同一の点列}\ S_N = S_N^{(\pm)}\ \text{の極限の一意性})\\
+&= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f
+&&(\because\ \text{Step 6 の}\ \mathbf{end}(V_1^{(\pm)}) = \exp(\hat{G}^{(\pm)}))
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`f\in\mathcal{F}^{(\pm)}`),
@@ -1810,9 +1998,13 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " 上の写像として",
       ]),
       displayMath(
-        String.raw`\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
-= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)\big|_{\mathcal{F}^{(\pm)}}
-= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}`,
+        String.raw`\begin{aligned}
+\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
+&= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)\big|_{\mathcal{F}^{(\pm)}}
+&&(\because\ \text{上の等式が任意の}\ f\in\mathcal{F}^{(\pm)}\ \text{で成り立つこと})\\
+&= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}
+&&(\because\ V_1^{(\pm)}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph(["が示された。"]),
     ],
@@ -1895,32 +2087,73 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
     ],
     proof: [
       paragraph([
+        math(String.raw`k \equiv 0 \pmod{M}`),
+        " であるか否かで場合を分ける。",
+      ]),
+      paragraph([
         math(String.raw`(a)\; k \equiv 0 \pmod{M}`),
-        " のとき：",
-        math(String.raw`l \in \mathbb{Z}`),
-        " で ",
+        " のとき。",
         math(String.raw`k = lM`),
-        " とおくと、",
+        " を満たす ",
+        math(String.raw`l \in \mathbb{Z}`),
+        " を 1 つ取る。",
       ]),
       displayMath(
-        String.raw`\sum_{j=1}^{M} e^{lM \cdot 2\pi i j/M}
-= \sum_{j=1}^{M} e^{2\pi i l j}
-= \sum_{j=1}^{M} (\cos 2\pi lj + i\sin 2\pi lj)
-= \sum_{j=1}^{M} 1 = M`,
+        String.raw`\begin{aligned}
+\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j k}{M}\right)
+&= \sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j \cdot lM}{M}\right)
+&&(\because\ k = lM) \\
+&= \sum_{j=1}^{M} \exp\!\left(2\pi i\, l j\right)
+&&(\because\ M\ \text{で約分した}) \\
+&= \sum_{j=1}^{M} \left(\cos 2\pi l j + i \sin 2\pi l j\right)
+&&(\because\ \text{オイラーの公式}) \\
+&= \sum_{j=1}^{M} \left(1 + i \cdot 0\right)
+&&(\because\ lj \in \mathbb{Z}\ \text{なので}\ \cos 2\pi lj = 1,\ \sin 2\pi lj = 0) \\
+&= \sum_{j=1}^{M} 1 \\
+&= M
+&&(\because\ \text{項数が}\ M\ \text{である}) \\
+&= M\,\delta^M_{(k,0)}
+&&(\because\ k \equiv 0 \pmod{M}\ \text{なので}\ \delta^M_{(k,0)} = 1\ \text{である})
+\end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(b)`),
-        " その他のとき：等比数列の和の公式（公比 ",
-        math(String.raw`r = e^{2\pi i k/M} \neq 1`),
-        "）より、",
+        "引いたのは ",
+        ref("euler_formula_cos_sin"),
+        " と ",
+        ref("def_delta_M"),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`(b)\; k \not\equiv 0 \pmod{M}`),
+        " のとき。",
+        math(String.raw`r := \exp\!\left(\frac{2\pi i k}{M}\right) \in \mathbb{C}`),
+        " と置く。",
+        math(String.raw`k \not\equiv 0 \pmod{M}`),
+        " なので ",
+        math(String.raw`r \neq 1`),
+        " である。",
       ]),
       displayMath(
-        String.raw`\sum_{j=1}^{M} r^j
-= r \cdot \frac{1 - r^M}{1 - r}
-= r \cdot \frac{1 - e^{2\pi i k}}{1 - r}
-= r \cdot \frac{1 - 1}{1 - r}
-= 0`,
+        String.raw`\begin{aligned}
+\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j k}{M}\right)
+&= \sum_{j=1}^{M} r^{\,j}
+&&(\because\ r\ \text{の定義と}\ \exp(a)^{j} = \exp(ja)) \\
+&= r \cdot \frac{1 - r^{M}}{1 - r}
+&&(\because\ \text{等比数列の和の公式（}r \neq 1\text{）}) \\
+&= r \cdot \frac{1 - \exp\!\left(2\pi i k\right)}{1 - r}
+&&(\because\ r^{M} = \exp\!\left(2\pi i k\right)) \\
+&= r \cdot \frac{1 - 1}{1 - r}
+&&(\because\ k \in \mathbb{Z}\ \text{なので}\ \exp(2\pi i k) = 1) \\
+&= 0 \\
+&= M\,\delta^M_{(k,0)}
+&&(\because\ k \not\equiv 0 \pmod{M}\ \text{なので}\ \delta^M_{(k,0)} = 0\ \text{である})
+\end{aligned}`,
       ),
+      paragraph([
+        "引いたのは ",
+        ref("def_delta_M"),
+        " である。",
+      ]),
     ],
     conversion: { status: "converted" },
   },
@@ -2005,27 +2238,27 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j}\,
 \overbrace{\left(\sum_{k_2=1}^M\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(\pm)}}\,
-\exp\!\left(-i\frac{2\pi j}{M}\right) \\
+\exp\!\left(-i\frac{2\pi j}{M}\right) \quad (\because \hat{Y}_j,\ \hat{Z}_{-j}^{(\pm)}\ \text{の定義の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \left(Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)
 \left(\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)
-\exp\!\left(-i\frac{2\pi j}{M}\right) \\
+\exp\!\left(-i\frac{2\pi j}{M}\right) \quad (\because \text{有限和どうしの積は二重和である（分配則）}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 \exp\!\left(-i k_1\frac{2\pi j}{M}\right)\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\exp\!\left(-i\frac{2\pi j}{M}\right)
-(Y_{k_1}Z_{k_2}) \quad (\text{符号を前に、}YZ\text{を後ろに移動}) \\
+(Y_{k_1}Z_{k_2}) \quad (\because \text{複素数の積の可換性と結合則（符号と exp を前へ、}YZ\text{ を後ろへ移した）}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-\exp\!\left(-i\frac{2\pi j}{M}(k_1-k_2+1)\right)(Y_{k_1}Z_{k_2}) \quad (\text{exp をまとめる}) \\
+\exp\!\left(-i\frac{2\pi j}{M}(k_1-k_2+1)\right)(Y_{k_1}Z_{k_2}) \quad (\because \exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left(-(k_1-k_2+1)\,i\frac{2\pi j}{M}\right)\right)(Y_{k_1}Z_{k_2}) \\
+\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left(-(k_1-k_2+1)\,i\frac{2\pi j}{M}\right)\right)(Y_{k_1}Z_{k_2}) \quad (\because \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 M\,\delta^M_{-(k_1-k_2+1),\,0}(Y_{k_1}Z_{k_2}) \quad (\because \text{exp\_sum}) \\
 &= \frac{1}{M}\sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}}
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-M(Y_{k_1}Z_{k_2})
+M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) 
 \end{aligned}`,
       ),
       paragraph([
@@ -2038,8 +2271,8 @@ M(Y_{k_1}Z_{k_2})
         String.raw`\begin{aligned}
 &= \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ k_2\in\{2,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}} M(Y_{k_1}Z_{k_2})
 + \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) \\
-&= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) \\
-&= H_1^{(\pm)}
+&= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) \quad (\because \text{下記のとおり第 1 項は } k_1=k_2-1\text{、第 2 項は } k_1=M \text{ に限ること、および } \tfrac{1}{M}\cdot M=1) \\
+&= H_1^{(\pm)} \quad (\because H_1^{(\pm)}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -2074,19 +2307,19 @@ M(Y_{k_1}Z_{k_2})
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,\hat{Y}_j \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M\begin{cases}1 & (k_1\neq 1)\\ +1 & (k_1=1)\end{cases}Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(-)}}\,
-\overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} \\
+\overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} \quad (\because \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
-\left(Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)\left(Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right) \\
+\left(Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)\left(Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right) \quad (\because \text{有限和どうしの積は二重和である（分配則）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
-\exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} \\
+\exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} \quad (\because \text{複素数の積の可換性と結合則、および }\exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
-\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left((k_1-k_2)\,i\frac{2\pi j}{M}\right)\right)Z_{k_1}Y_{k_2} \\
+\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left((k_1-k_2)\,i\frac{2\pi j}{M}\right)\right)Z_{k_1}Y_{k_2} \quad (\because \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M M\,\delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} \quad (\because \text{exp\_sum}) \\
-&= \sum_{k_1,k_2=1}^M \delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} \\
-&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1-k_2\equiv 0 \pmod{M}}} Z_{k_1}Y_{k_2}
-= \sum_{\substack{k_1\in\{1,\dots,M\}\\ k_1=k_2}} Z_{k_1}Y_{k_2} \\
-&= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M \\
-&= H_2
+&= \sum_{k_1,k_2=1}^M \delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} \quad (\because \tfrac{1}{M}\cdot M=1) \\
+&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1-k_2\equiv 0 \pmod{M}}} Z_{k_1}Y_{k_2} \quad (\because \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
+&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1=k_2}} Z_{k_1}Y_{k_2} \quad (\because k_1,k_2\in\{1,\dots,M\}\ \text{では } k_1-k_2\equiv 0 \pmod{M} \text{ と } k_1=k_2 \text{ が同値}) \\
+&= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M \quad (\because \text{和の添字を } k_1=k_2 \text{ で走らせて書き下したもの}) \\
+&= H_2 \quad (\because H_2\ \text{の定義})
 \end{aligned}`,
       ),
     ],
@@ -2105,28 +2338,58 @@ M(Y_{k_1}Z_{k_2})
     ],
     proof: [
       paragraph([
-        ref("def_hatZ_hatY"),
-        " より、各 ",
+        "準備として、各 ",
         math(String.raw`j \in \{1,\dots,M\}`),
-        " について、",
+        " について係数が一致することを示す。",
       ]),
       displayMath(
-        String.raw`\exp\!\left(-i j \frac{2\pi M}{M}\right)
-= e^{-2\pi i j}
-= 1
-= e^{0}
-= \exp\!\left(-i j \frac{2\pi(-M)}{M}\right)`,
+        String.raw`\begin{aligned}
+\exp\!\left(-i \frac{2\pi j M}{M}\right)
+&= \exp(-2\pi i j)
+&&(\because\ M/M = 1)\\
+&= \cos(2\pi j) - i\sin(2\pi j)
+&&(\because\ \text{オイラーの公式})\\
+&= 1 - i\cdot 0
+&&(\because\ j \in \mathbb{Z}\ \text{での三角関数の値})\\
+&= 1
+&&(\because\ \text{複素数の四則})\\
+&= 1 + i\cdot 0
+&&(\because\ \text{複素数の四則})\\
+&= \cos(2\pi j) + i\sin(2\pi j)
+&&(\because\ j \in \mathbb{Z}\ \text{での三角関数の値})\\
+&= \exp(2\pi i j)
+&&(\because\ \text{オイラーの公式})\\
+&= \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
+&&(\because\ (-M)/M = -1)
+\end{aligned}`,
+      ),
+      paragraph(["この係数の一致を各項に当てる。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{Z}_M^{(-)}
+&= \sum_{j=1}^{M} Z_j \exp\!\left(-i \frac{2\pi j M}{M}\right)
+&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \text{で}\ \mu = M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)\\
+&= \sum_{j=1}^{M} Z_j \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
+&&(\because\ \text{上で示した各}\ j\ \text{についての係数の一致})\\
+&= \hat{Z}_{-M}^{(-)}
+&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \text{で}\ \mu = -M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{Y}_M
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i \frac{2\pi j M}{M}\right)
+&&(\because\ \text{定義}\ \hat{Y}_\mu\ \text{で}\ \mu = M)\\
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
+&&(\because\ \text{上で示した各}\ j\ \text{についての係数の一致})\\
+&= \hat{Y}_{-M}
+&&(\because\ \text{定義}\ \hat{Y}_\mu\ \text{で}\ \mu = -M)
+\end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        math(String.raw`\hat{Z}_M`),
-        " と ",
-        math(String.raw`\hat{Z}_{-M}`),
-        " の各 ",
-        math(String.raw`j`),
-        " 項の係数が一致する。",
-        math(String.raw`\hat{Y}`),
-        " も同様。",
+        "係数の一致と定義は ",
+        ref("def_hatZ_hatY"),
+        " による。",
       ]),
     ],
     conversion: { status: "converted" },
@@ -2212,7 +2475,8 @@ M(Y_{k_1}Z_{k_2})
 &= \sum_{\mu=1}^M \sum_{j=1}^M Y_j \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right) \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M Y_j \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) \quad (\because \text{有限二重和の順序交換}) \\
 &= \sum_{j=1}^M Y_j \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because (\ast)) \\
-&= M Y_m
+&= Y_m \cdot M \quad (\because j\neq m \text{ の項は係数が } 0 \text{ なので落ち、残るのは } j=m \text{ の項だけである}) \\
+&= M Y_m \quad (\because \mathbb{C} \text{ の積の可換性})
 \end{aligned}`,
       ),
       paragraph(["Step 2: ", math(String.raw`\hat{Z}^{(-)}`), " からの復元。"]),
@@ -2223,17 +2487,30 @@ M(Y_{k_1}Z_{k_2})
 &= \sum_{\mu=1}^M \sum_{j=1}^M Z_j \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right) \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M Z_j \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) \quad (\because \text{有限二重和の順序交換}) \\
 &= \sum_{j=1}^M Z_j \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because (\ast)) \\
-&= M Z_m
+&= Z_m \cdot M \quad (\because j\neq m \text{ の項は係数が } 0 \text{ なので落ち、残るのは } j=m \text{ の項だけである}) \\
+&= M Z_m \quad (\because \mathbb{C} \text{ の積の可換性})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 3: 復元式。Step 1・Step 2 で得た等式の両辺を ",
-        math(String.raw`M`),
-        " で割って、",
+        "Step 3: 復元式。",
+        math(String.raw`M \geq 1`),
+        " なので ",
+        math(String.raw`\frac{1}{M} \in \mathbb{C}`),
+        " が取れる。",
       ]),
       displayMath(
-        String.raw`Y_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu \exp\!\left(i m\frac{2\pi\mu}{M}\right), \qquad
-Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{M}\right)`,
+        String.raw`\begin{aligned}
+Y_m
+&= \frac{1}{M}\cdot M\,Y_m \quad (\because \tfrac{1}{M}\cdot M = 1) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu \exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{Step 1 の等式})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_m
+&= \frac{1}{M}\cdot M\,Z_m \quad (\because \tfrac{1}{M}\cdot M = 1) \\
+&= \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{Step 2 の等式})
+\end{aligned}`,
       ),
     ],
     conversion: { status: "converted" },
@@ -2351,14 +2628,18 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
       displayMath(
         String.raw`\sigma^y\sigma^z = \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} = \begin{pmatrix}0&i\\i&0\end{pmatrix} = i\begin{pmatrix}0&1\\1&0\end{pmatrix} = i\,\sigma^x \quad (\because \text{行列の積の成分計算})`,
       ),
+      paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x
+&= 1\cdot\sigma^x \quad (\because 1 \text{ は積の単位元}) \\
+&= ((-i)\,i)\,\sigma^x \quad (\because (-i)\,i = 1) \\
+&= -i\,(i\,\sigma^x) \quad (\because \text{スカラー倍の結合則}) \\
+&= -i\,\sigma^y\sigma^z \quad (\because \text{第 2 式 } \sigma^y\sigma^z = i\,\sigma^x)
+\end{aligned}`,
+      ),
       paragraph([
-        "第 2 式の両辺に ",
-        math(String.raw`-i`),
-        " を掛けると ",
-        math(String.raw`\sigma^x = -i\,\sigma^y\sigma^z`),
-        "（",
-        math(String.raw`i^{-1}=-i`),
-        "）。これらをクロネッカー積へ持ち上げる。",
+        "これらをクロネッカー積へ持ち上げる。",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の積は各因子ごとの積であり ",
         math(String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M) = (A_1 B_1)\boxtimes\cdots\boxtimes(A_M B_M)`),
@@ -2399,7 +2680,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
 &= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I) \\
 &= I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I \quad (\because \text{クロネッカー積の積の規則}) \\
 &= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \sigma_l^b \sigma_k^a
+&= \sigma_l^b \sigma_k^a \quad (\because \sigma_l^b, \sigma_k^a \text{ の定義（第 } l \text{ 因子・第 } k \text{ 因子のみが非自明）})
 \end{aligned}`,
       ),
       paragraph([
@@ -2419,8 +2700,21 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
         math(String.raw`\sigma_1^z=Z_1\in\mathcal{A}`),
         "、",
         math(String.raw`\sigma_1^y=Y_1\in\mathcal{A}`),
-        "、Step 1 より ",
-        math(String.raw`\sigma_1^x = -i\,\sigma_1^y\sigma_1^z = -i\,Y_1 Z_1 \in \mathcal{A}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_1^x
+&= -i\,\sigma_1^y\sigma_1^z \quad (\because \text{Step 1 の } \sigma_k^x = -i\,\sigma_k^y\sigma_k^z \text{ を } k=1 \text{ に取る}) \\
+&= -i\,Y_1 Z_1 \quad (\because \sigma_1^y = Y_1, \ \sigma_1^z = Z_1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`Y_1, Z_1\in\mathcal{A}`),
+        " かつ ",
+        math(String.raw`\mathcal{A}`),
+        " は積とスカラー倍について閉じるから ",
+        math(String.raw`\sigma_1^x\in\mathcal{A}`),
         "。",
       ]),
       paragraph([
@@ -2442,7 +2736,7 @@ Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{
       displayMath(
         String.raw`\begin{aligned}
 P_{m-1}P_{m-1}
-&= (\sigma_1^x\cdots\sigma_{m-1}^x)(\sigma_1^x\cdots\sigma_{m-1}^x) \\
+&= (\sigma_1^x\cdots\sigma_{m-1}^x)(\sigma_1^x\cdots\sigma_{m-1}^x) \quad (\because P_{m-1} \text{ の定義}) \\
 &= (\sigma_1^x\sigma_1^x)(\sigma_2^x\sigma_2^x)\cdots(\sigma_{m-1}^x\sigma_{m-1}^x) \quad (\because \text{異サイトの可換性}) \\
 &= I_{\mathrm{Mat}(2^M,\mathbb{C})} \quad (\because \sigma_k^x\sigma_k^x=I_{\mathrm{Mat}(2^M,\mathbb{C})})
 \end{aligned}`,
@@ -2461,7 +2755,7 @@ P_{m-1}P_{m-1}
 P_{m-1}Z_m
 &= P_{m-1}P_{m-1}\sigma_m^z \quad (\because Z_m = P_{m-1}\sigma_m^z) \\
 &= I_{\mathrm{Mat}(2^M,\mathbb{C})}\sigma_m^z \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
-&= \sigma_m^z
+&= \sigma_m^z \quad (\because I_{\mathrm{Mat}(2^M,\mathbb{C})} \text{ は積の単位元})
 \end{aligned}`,
       ),
       paragraph([
@@ -2470,12 +2764,32 @@ P_{m-1}Z_m
         math(String.raw`\mathcal{A}`),
         " は積について閉じるから ",
         math(String.raw`\sigma_m^z = P_{m-1}Z_m\in\mathcal{A}`),
-        "。同様に ",
-        math(String.raw`Y_m = P_{m-1}\sigma_m^y`),
-        " より ",
+        "。",
+        math(String.raw`\sigma_m^y`),
+        " についても同じ形の鎖が書ける。定義より ",
+        math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y = P_{m-1}\sigma_m^y`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_{m-1}Y_m
+&= P_{m-1}P_{m-1}\sigma_m^y \quad (\because Y_m = P_{m-1}\sigma_m^y) \\
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}\sigma_m^y \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
+&= \sigma_m^y \quad (\because I_{\mathrm{Mat}(2^M,\mathbb{C})} \text{ は積の単位元})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`P_{m-1}, Y_m\in\mathcal{A}`),
+        " かつ ",
+        math(String.raw`\mathcal{A}`),
+        " は積について閉じるから ",
         math(String.raw`\sigma_m^y = P_{m-1}Y_m\in\mathcal{A}`),
-        "、さらに Step 1 より ",
-        math(String.raw`\sigma_m^x = -i\,\sigma_m^y\sigma_m^z\in\mathcal{A}`),
+        "。さらに Step 1 より ",
+        math(String.raw`\sigma_m^x = -i\,\sigma_m^y\sigma_m^z`),
+        " であり、",
+        math(String.raw`\mathcal{A}`),
+        " は積とスカラー倍について閉じるから ",
+        math(String.raw`\sigma_m^x\in\mathcal{A}`),
         "。よって ",
         math(String.raw`\sigma_m^x,\sigma_m^y,\sigma_m^z\in\mathcal{A}`),
         " が示され、帰納法により すべての ",

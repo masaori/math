@@ -246,6 +246,11 @@ export default defineBlocks([
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-08-09: 式変形の書き方の統一。Step 0〜3 という番号での区切りを、" +
+          "それぞれの中間目標の名前（多重添字の和を各サイトごとの和の積へ直すこと・" +
+          "(1) の証明・(2) の証明・(3) の証明）へ変えた（リポジトリの規約「番号や記号で管理しない」）。" +
+          "(2) は式のあとに置かれていた日本語の説明（積が 1 になる条件、ν の単射性）を、" +
+          "3 段の一続きの鎖の各行末の (∵ …) へ移した。段は増えており、減った段は無い。",
         "原文（Typst）に対応ブロックは無い。原文および旧構造化テキストは ⊗ を抽象テンソル積の記号として" +
           "定義せずに使っていたため、README のゴール設定（M 個の 2×2 行列の積は具体的な 2^M × 2^M の" +
           "複素行列として専用記号で定義する）に従い、成分の式によるクロネッカー積 ⊠ を本文に置いた。" +
@@ -304,7 +309,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "Step 0: 多重添字についての和と、各サイトごとの和の入れ替え。",
+        "多重添字についての和を、各サイトごとの和の積へ直すこと。",
         math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
         " と、各 ",
         math(String.raw`k\in\{1,\dots,M\}`),
@@ -344,10 +349,11 @@ export default defineBlocks([
 &= \left(\prod_{k=1}^{M}\left(\sum_{s=1}^{2}c_k(s)\right)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
 \quad (\because \text{帰納法の仮定}) \\
 &= \prod_{k=1}^{M+1}\left(\sum_{t=1}^{2}c_k(t)\right)
+\quad (\because \text{有限積の最後の因子を戻した（積の定義）})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 1: (1)。",
+        "(1) の証明。",
         math(String.raw`I=(i_1,\dots,i_M),\ L=(l_1,\dots,l_M)\in\mathcal{I}_M`),
         " を任意に取る。行列の積の定義と、",
         ref("def_kronecker"),
@@ -372,7 +378,7 @@ export default defineBlocks([
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(B_k)_{t_kl_k}\right)
 \quad (\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(B_k)_{tl_k}\right)
-\quad (\because \text{Step 0 を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
+\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kB_k)_{i_kl_k}
 \quad (\because \text{行列の積の定義}) \\
 &= \left((A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)\right)_{\nu(I),\nu(L)}
@@ -384,7 +390,9 @@ export default defineBlocks([
         " は全単射だから、これで両辺のすべての成分が一致することが示された。",
       ]),
       paragraph([
-        "Step 2: (2)。",
+        "(2) の証明。",
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
+        " を任意に取る。単位行列の成分は ",
         math(String.raw`\left(I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{ij}=\delta_{ij}`),
         "（",
         math(String.raw`i=j`),
@@ -392,36 +400,25 @@ export default defineBlocks([
         math(String.raw`1`),
         "、そうでなければ ",
         math(String.raw`0`),
-        "）であるから、",
+        "）である。",
       ]),
       displayMath(
-        String.raw`\left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{\nu(I),\nu(J)}
-= \prod_{k=1}^{M}\delta_{i_kj_k}
-= \begin{cases}1 & (I=J)\\ 0 & (I\neq J)\end{cases}`,
+        String.raw`\begin{aligned}
+\left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{\nu(I),\nu(J)}
+&= \prod_{k=1}^{M}\delta_{i_kj_k}
+\quad (\because \boxtimes \text{ の定義と単位行列の成分}) \\
+&= \begin{cases}1 & (I=J)\\ 0 & (I\neq J)\end{cases}
+\quad (\because \text{積が } 1 \text{ になるのは全ての } k \text{ で } i_k=j_k \text{、すなわち } I=J \text{ のときに限り、そうでなければ因子に } 0 \text{ が現れる}) \\
+&= \left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)_{\nu(I),\nu(J)}
+\quad (\because \nu \text{ は単射なので } I=J \iff \nu(I)=\nu(J) \text{、および単位行列の成分})
+\end{aligned}`,
       ),
       paragraph([
-        "（積が ",
-        math(String.raw`1`),
-        " になるのは全 ",
-        math(String.raw`k`),
-        " で ",
-        math(String.raw`i_k=j_k`),
-        " のとき、すなわち ",
-        math(String.raw`I=J`),
-        " のときに限り、そうでなければ因子に ",
-        math(String.raw`0`),
-        " が現れる）。",
         math(String.raw`\nu`),
-        " は単射だから ",
-        math(String.raw`I=J \iff \nu(I)=\nu(J)`),
-        " であり、右辺は ",
-        math(String.raw`2^M`),
-        " 次の単位行列の ",
-        math(String.raw`(\nu(I),\nu(J))`),
-        " 成分に等しい。",
+        " は全単射だから、これで両辺のすべての成分が一致することが示された。",
       ]),
       paragraph([
-        "Step 3: (3)。Step 1 と同じ計算を、第 2 の因子を数ベクトルに置き換えて行う。",
+        "(3) の証明。(1) と同じ計算を、第 2 の因子を数ベクトルに置き換えて行う。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -429,12 +426,17 @@ export default defineBlocks([
 &= \sum_{p=1}^{2^M}\left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),p}
 \left(v_1\boxtimes\cdots\boxtimes v_M\right)_{p}
 \quad (\because \text{行列と数ベクトルの積の定義}) \\
-&= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
+&= \sum_{K\in\mathcal{I}_M}
+\left(\prod_{k=1}^{M}(A_k)_{i_kt_k}\right)\left(\prod_{k=1}^{M}(v_k)_{t_k}\right)
 \quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
+&= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
+\quad (\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(v_k)_{t}\right)
-\quad (\because \text{Step 0}) \\
+\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(v_k)_{t} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kv_k)_{i_k}
-= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
+\quad (\because \text{行列と数ベクトルの積の定義}) \\
+&= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
+\quad (\because \boxtimes \text{ の定義})
 \end{aligned}`,
       ),
     ],
@@ -445,6 +447,13 @@ export default defineBlocks([
           "004 章以降の証明で繰り返し根拠として使われているのに、定義も証明も本文に無かった" +
           "（goal-alignment-audit の A-3）。クロネッカー積として定義したことで、成分計算で証明できる" +
           "主張になったのでここに置いた。",
+        "2026-08-10: 式変形の書き方の統一。2 箇所を直した。準備（多重添字の和を各サイトごとの" +
+          "和の積へ直す段）の鎖の最終行に根拠が無かったので (∵ …) を付けた。" +
+          "(3) の鎖は、1 行で 2 つの定理を同時に適用していた段（ν が全単射であることと ⊠ の定義で" +
+          "書き換える段に、複素数の積の可換律・結合律による並べ替えを混ぜていた）を 2 段へ割り、" +
+          "さらに最後の行が 1 行に 2 つの等号を並べて根拠を 1 つも書いていなかったので" +
+          "2 段へ割って各行に (∵ …) を置いた（(1) の鎖と同じ形になった）。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
       ],
     },
   },
@@ -496,32 +505,32 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
+        "準備。",
         math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
         " を任意に取り、両辺の ",
         math(String.raw`(\nu(I),\nu(J))`),
-        " 成分を比べる。",
-        math(String.raw`\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}=\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}`),
-        "（行列の和・スカラー倍は成分ごとの演算）であるから、",
+        " 成分を比べる。以下で ",
+        math(String.raw`\prod_{k\neq j}(A_k)_{i_kj_k}`),
+        " は ",
+        math(String.raw`k\in\{1,\dots,M\}\setminus\{j\}`),
+        " についての積を表す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left(A_1\boxtimes\cdots\boxtimes\left(\sum_{a=1}^{r}c_aB_a\right)\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
-&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
+&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}
 \quad (\because \boxtimes \text{ の定義}) \\
+&= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
+\quad (\because \text{行列の和・スカラー倍は成分ごとの演算}) \\
 &= \sum_{a=1}^{r}c_a\left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)(B_a)_{i_jj_j}
 \quad (\because \text{複素数の分配律}) \\
 &= \sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
 \quad (\because \boxtimes \text{ の定義}) \\
 &= \left(\sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)\right)_{\nu(I),\nu(J)}
-\quad (\because \text{行列の和・スカラー倍は成分ごと})
+\quad (\because \text{行列の和・スカラー倍は成分ごとの演算})
 \end{aligned}`,
       ),
       paragraph([
-        "ここで ",
-        math(String.raw`\prod_{k\neq j}(A_k)_{i_kj_k}`),
-        " は ",
-        math(String.raw`k\in\{1,\dots,M\}\setminus\{j\}`),
-        " についての積である。",
         math(String.raw`\nu`),
         " は全単射だから、すべての成分が一致し両辺は等しい。",
         math(String.raw`r=1,\ c_1=c,\ B_1=A_j`),
@@ -538,6 +547,11 @@ export default defineBlocks([
         "原文（Typst）に対応ブロックは無い。「テンソル積の各因子についての C-線型性」" +
           "（スカラーを前に出す・和で展開する）は 004 章以降で繰り返し根拠として使われているのに、" +
           "定義も証明も本文に無かった（goal-alignment-audit の A-3）。",
+        "2026-08-10: 式変形の書き方の統一。第 1 段が「⊠ の定義」と「行列の和・スカラー倍は" +
+          "成分ごとの演算」の 2 つを同時に適用していたので 2 段に割った（一ステップ一定理）。" +
+          "式変形の前に置かれていた成分の分解の式は、鎖の中の 1 段になったので準備から外し、" +
+          "式変形の後ろにあった記法の断り（∏_{k≠j} の意味）は準備へ移した。" +
+          "段は増えており、減った段は無い。",
       ],
     },
   },
@@ -587,8 +601,19 @@ export default defineBlocks([
 \end{aligned}`,
       ),
       paragraph([
+        "第 2 の等号と第 4 の等号で ",
+        ref("def_kronecker"),
+        " のクロネッカー積の成分の定め方を引いた。",
+      ]),
+      paragraph([
         math(String.raw`\nu`),
-        " は全単射だから、これで両辺のすべての成分が一致することが示された。",
+        " は ",
+        ref("def_kronecker"),
+        " により全単射であり、",
+        math(String.raw`\{1,\dots,2^M\}`),
+        " のどの成分の番号も ",
+        math(String.raw`\nu(I)`),
+        " の形に書けるので、これで両辺のすべての成分が一致することが示された。",
       ]),
     ],
     conversion: {
@@ -597,6 +622,12 @@ export default defineBlocks([
         "原文（Typst）に対応ブロックは無い。009 章（V の固有値）の実対称性の議論が" +
           "「テンソル積の転置は因子ごとの転置になる」を根拠なしに使っていたので、" +
           "クロネッカー積の成分の定義から証明できる主張としてここに置いた。",
+        "式変形の書き方の統一（2026-08-10）。鎖と行末の (∵ …) は既にあったが、" +
+          "引いたブロックへのラベル参照が無く、(∵ ⊠ の定義) がどのブロックを指すかが" +
+          "式の中からは辿れなかった。式の直後に参照を置いた。" +
+          "あわせて、最後の段が「ν は全単射だから」とだけ述べていたところを、" +
+          "全単射性がどこで定めたものかと、そこから成分の番号がすべて尽くされることを書いた。" +
+          "式変形の段は 1 つも増減しておらず、主張と証明の中身は変えていない。",
       ],
     },
   },
@@ -711,11 +742,22 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         " について",
       ]),
       displayMath(
-        String.raw`(f_I)_{\nu(K)} = \prod_{k=1}^{M}(e_{i_k})_{k_k}
-= \prod_{k=1}^{M}\delta_{i_kk_k}
-= \begin{cases}1 & (I=K)\\ 0 & (I\neq K)\end{cases}
-\quad (\because \boxtimes \text{ の定義})`,
+        String.raw`\begin{aligned}
+(f_I)_{\nu(K)}
+&= \prod_{k=1}^{M}(e_{i_k})_{k_k}
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \prod_{k=1}^{M}\delta_{i_kk_k}
+\quad (\because (e_i)_t=\delta_{it}) \\
+&= \begin{cases}1 & (I=K)\\ 0 & (I\neq K)\end{cases}
+\quad (\because I=K \text{ ならばどの因子も } 1\text{、}
+I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があってその因子が } 0)
+\end{aligned}`,
       ),
+      paragraph([
+        "第 1 の等号で ",
+        ref("def_kronecker"),
+        " のクロネッカー積の成分の定め方を引いた。",
+      ]),
       paragraph([
         "すなわち ",
         math(String.raw`f_I`),
@@ -749,11 +791,22 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         " について",
       ]),
       displayMath(
-        String.raw`\left(E_{I,J}\right)_{\nu(K),\nu(L)}
-= \prod_{k=1}^{M}\delta_{i_kk_k}\delta_{j_kl_k}
-= \begin{cases}1 & (I=K \text{ かつ } J=L)\\ 0 & (\text{それ以外})\end{cases}
-\quad (\because \boxtimes \text{ の定義})`,
+        String.raw`\begin{aligned}
+\left(E_{I,J}\right)_{\nu(K),\nu(L)}
+&= \prod_{k=1}^{M}(E_{i_kj_k})_{k_kl_k}
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \prod_{k=1}^{M}\delta_{i_kk_k}\delta_{j_kl_k}
+\quad (\because (E_{ij})_{st}=\delta_{is}\delta_{jt}) \\
+&= \begin{cases}1 & (I=K \text{ かつ } J=L)\\ 0 & (\text{それ以外})\end{cases}
+\quad (\because I=K \text{ かつ } J=L \text{ ならばどの因子も } 1\text{、}
+\text{そうでなければ } 0 \text{ となる因子がある})
+\end{aligned}`,
       ),
+      paragraph([
+        "第 1 の等号で ",
+        ref("def_kronecker"),
+        " のクロネッカー積の成分の定め方を引いた。",
+      ]),
       paragraph([
         "すなわち ",
         math(String.raw`E_{I,J}`),
@@ -905,6 +958,14 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         "参照元が必要とする形はそれぞれ、(1) 行列単位（<centralizer_is_scalar>, <def_end_iso>）、" +
           "(2) 一般の基底 {I,σ^x,σ^y,σ^z}（<Z_Y_linearly_independent>, <Z_Y_generate_algebra>, 008 章）、" +
           "(3) 数ベクトルの標準基底（<def_end_iso> の F の基底）であるため、3 つの形を並べた。",
+        "式変形の書き方の統一（2026-08-10）。Step 1 と Step 2 の式が、3 つの等号を 1 行へ潰したうえで" +
+          "行末の (∵ ⊠ の定義) を式全体へ 1 つだけ付けていた。どの等号がその根拠によるのかが" +
+          "式から読み取れないので、1 行 1 等号の鎖へ分け、各行の末尾に根拠を置いた" +
+          "（クロネッカー積の成分の定め方・成分の定義・添字の一致による場合分けの 3 つが" +
+          "別々の根拠であることが、これで式の上に現れる）。あわせて、クロネッカー積の成分を" +
+          "取り出す段を明示的な 1 段として書き（Step 2 では (E_{i_k j_k})_{k_k l_k} の積を経由する）、" +
+          "引いたブロック <def_kronecker> への参照を式の直後に置いた。" +
+          "主張と証明の中身、および Step の分け方は変えていない。",
       ],
     },
   },
@@ -932,13 +993,27 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
       displayMath(
         String.raw`\begin{aligned}
 [c \cdot I,\, A]
-&= (c \cdot I)A - A(c \cdot I) \\
-&= cA - cA \\
+&= (c \cdot I)A - A(c \cdot I)
+\quad (\because \text{交換子の定義}) \\
+&= c(IA) - c(AI)
+\quad (\because \text{スカラー倍は行列の積の外へ出せる}) \\
+&= cA - cA
+\quad (\because \text{単位行列の性質}\ IA=A,\ AI=A) \\
 &= 0
+\quad (\because \text{同じ元の差は零行列})
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-10）。もとの鎖はどの行にも根拠が書かれておらず、" +
+          "さらに第 2 段が 2 つの定理を同時に適用していた" +
+          "（スカラー倍を積の外へ出すことと、単位行列を消すこと）。" +
+          "この 2 つを別々の段に割り、全 4 段のそれぞれに行末の (∵ …) を付けた。" +
+          "段は増えており、減った段は無い。主張と証明の中身は変えていない。",
+      ],
+    },
   },
   {
     id: "linear_space_general_004_lemma_centralizer_is_scalar",
@@ -1055,16 +1130,29 @@ E_{IJ} E_{KL}
         math(String.raw`E_{IJ}E_{KL}=\delta_{JK}E_{IL}`),
         "。また各因子に ",
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}`),
-        " を代入して各因子についての線型性（",
-        ref("kronecker_multilinear"),
-        "）で展開すると",
+        " を代入して展開すると",
       ]),
       displayMath(
-        String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}
-= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
-= \sum_{P\in\{1,2\}^M} E_{PP}
-\quad (\because \text{クロネッカー積の積の規則 (2)、} I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22} \text{、各因子についての線型性})`,
+        String.raw`\begin{aligned}
+I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
+&&(\because \text{クロネッカー積の積の規則 (2) を右辺から左辺へ}) \\
+&= (E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})
+&&(\because I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}) \\
+&= \sum_{P=(p_1,\dots,p_M)\in\{1,2\}^M}
+   E_{p_1 p_1}\boxtimes\cdots\boxtimes E_{p_M p_M}
+&&(\because \text{各因子についての線型性を } M \text{ 回}) \\
+&= \sum_{P\in\{1,2\}^M} E_{PP}
+&&(\because E_{PP} \text{ の定め方})
+\end{aligned}`,
       ),
+      paragraph([
+        "（引いたのは ",
+        ref("kronecker_product_rule"),
+        " (2) と ",
+        ref("kronecker_multilinear"),
+        " である）。",
+      ]),
       paragraph([
         "Step 3: ",
         math(String.raw`W`),
@@ -1394,10 +1482,25 @@ W
       displayMath(
         String.raw`\begin{aligned}
 \iota_{\mathbb{R}\to\mathbb{C}}(x)+\iota_{\mathbb{R}\to\mathbb{C}}(y)
-&= (x,0)+(y,0) = (x+y,0) = \iota_{\mathbb{R}\to\mathbb{C}}(x+y) \\
+&= (x,0)+(y,0)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
+&= (x+y,0)
+&&(\because \text{複素数の和の定め方}) \\
+&= \iota_{\mathbb{R}\to\mathbb{C}}(x+y)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \iota_{\mathbb{R}\to\mathbb{C}}(x)\cdot\iota_{\mathbb{R}\to\mathbb{C}}(y)
-&= (x,0)\cdot(y,0) = (xy-0\cdot 0,\ x\cdot 0+0\cdot y) = (xy,0)
-= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
+&= (x,0)\cdot(y,0)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
+&= (xy-0\cdot 0,\ x\cdot 0+0\cdot y)
+&&(\because \text{複素数の積の定め方}) \\
+&= (xy,0)
+&&(\because 0 \text{ を掛けた項が消えること}) \\
+&= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
 \end{aligned}`,
       ),
       paragraph([
@@ -1446,10 +1549,18 @@ W
       displayMath(
         String.raw`\begin{aligned}
 \|cA\|^2
-&= \sum_{i,j}|c\,a_{ij}|^2 \\
-&= \sum_{i,j}\left(|c|\,|a_{ij}|\right)^2 \quad (\because \text{Step 1}) \\
-&= |c|^2\sum_{i,j}|a_{ij}|^2 \\
+&= \sum_{i,j}|c\,a_{ij}|^2
+&&(\because \text{ノルムの定め方と } (cA)_{ij}=c\,a_{ij}) \\
+&= \sum_{i,j}\left(|c|\,|a_{ij}|\right)^2
+&&(\because \text{Step 1 の乗法性 } |zw|=|z||w|) \\
+&= \sum_{i,j}|c|^2\,|a_{ij}|^2
+&&(\because \text{積の平方は平方の積}) \\
+&= |c|^2\sum_{i,j}|a_{ij}|^2
+&&(\because \text{有限和についての分配律}) \\
+&= |c|^2\,\|A\|^2
+&&(\because \text{ノルムの定め方}) \\
 &= \left(|c|\,\|A\|\right)^2
+&&(\because \text{積の平方は平方の積})
 \end{aligned}`,
       ),
       paragraph([
@@ -1493,9 +1604,15 @@ W
         " について",
       ]),
       displayMath(
-        String.raw`0\le\sum_{k=1}^{m}(u_k-tv_k)^2
-= P-2tR+t^2Q
-\quad (\because \text{実数の平方は非負、および分配律})`,
+        String.raw`\begin{aligned}
+0
+&\le\sum_{k=1}^{m}(u_k-tv_k)^2
+&&(\because \text{実数の平方は非負であり、非負数の有限和は非負}) \\
+&= \sum_{k=1}^{m}\left(u_k^2-2tu_kv_k+t^2v_k^2\right)
+&&(\because \text{分配律}) \\
+&= P-2tR+t^2Q
+&&(\because P,\ Q,\ R \text{ の置き方と有限和の分解})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
@@ -1503,7 +1620,15 @@ W
         " とおくと",
       ]),
       displayMath(
-        String.raw`0\le P-2\frac{R^2}{Q}+\frac{R^2}{Q}=P-\frac{R^2}{Q}`,
+        String.raw`\begin{aligned}
+0
+&\le P-2\frac{R}{Q}R+\left(\frac{R}{Q}\right)^2Q
+&&(\because \text{上の不等式に } t=R/Q \text{ を代入した}) \\
+&= P-2\frac{R^2}{Q}+\frac{R^2}{Q}
+&&(\because Q>0 \text{ による約分}) \\
+&= P-\frac{R^2}{Q}
+&&(\because \text{同類項をまとめた})
+\end{aligned}`,
       ),
       paragraph([
         "となり、両辺に ",
@@ -1520,17 +1645,26 @@ W
         " であり、両辺とも非負なので",
       ]),
       displayMath(
-        String.raw`|a_{ij}+b_{ij}|^2\le\left(|a_{ij}|+|b_{ij}|\right)^2
-= |a_{ij}|^2+2|a_{ij}||b_{ij}|+|b_{ij}|^2
-\quad (\because \text{Step 0, 分配律})`,
+        String.raw`\begin{aligned}
+|a_{ij}+b_{ij}|^2
+&\le\left(|a_{ij}|+|b_{ij}|\right)^2
+&&(\because \text{Step 0 を } u=|a_{ij}+b_{ij}|,\ v=|a_{ij}|+|b_{ij}| \text{ に当てた}) \\
+&= |a_{ij}|^2+2|a_{ij}||b_{ij}|+|b_{ij}|^2
+&&(\because \text{分配律})
+\end{aligned}`,
       ),
       paragraph(["これを ", math(String.raw`i,j`), " について加えると、"]),
       displayMath(
         String.raw`\begin{aligned}
 \|A+B\|^2
-&= \sum_{i,j}|a_{ij}+b_{ij}|^2 \\
-&\le \sum_{i,j}|a_{ij}|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\sum_{i,j}|b_{ij}|^2 \\
+&= \sum_{i,j}|a_{ij}+b_{ij}|^2
+&&(\because \text{ノルムの定め方と } (A+B)_{ij}=a_{ij}+b_{ij}) \\
+&\le \sum_{i,j}\left(|a_{ij}|^2+2|a_{ij}||b_{ij}|+|b_{ij}|^2\right)
+&&(\because \text{上の各項ごとの不等式を } i,j \text{ について加えた}) \\
+&= \sum_{i,j}|a_{ij}|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\sum_{i,j}|b_{ij}|^2
+&&(\because \text{有限和の分解と分配律}) \\
 &= \|A\|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\|B\|^2
+&&(\because \text{ノルムの定め方})
 \end{aligned}`,
       ),
       paragraph([
@@ -1543,9 +1677,15 @@ W
         " として適用すると",
       ]),
       displayMath(
-        String.raw`\left(\sum_{i,j}|a_{ij}||b_{ij}|\right)^2
-\le\left(\sum_{i,j}|a_{ij}|^2\right)\left(\sum_{i,j}|b_{ij}|^2\right)
-= \|A\|^2\|B\|^2=\left(\|A\|\,\|B\|\right)^2`,
+        String.raw`\begin{aligned}
+\left(\sum_{i,j}|a_{ij}||b_{ij}|\right)^2
+&\le\left(\sum_{i,j}|a_{ij}|^2\right)\left(\sum_{i,j}|b_{ij}|^2\right)
+&&(\because \text{Step 4}) \\
+&= \|A\|^2\|B\|^2
+&&(\because \text{ノルムの定め方}) \\
+&= \left(\|A\|\,\|B\|\right)^2
+&&(\because \text{積の平方は平方の積})
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
@@ -1557,7 +1697,15 @@ W
         "。よって",
       ]),
       displayMath(
-        String.raw`\|A+B\|^2\le\|A\|^2+2\|A\|\,\|B\|+\|B\|^2=\left(\|A\|+\|B\|\right)^2`,
+        String.raw`\begin{aligned}
+\|A+B\|^2
+&\le\|A\|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\|B\|^2
+&&(\because \text{上の式変形}) \\
+&\le\|A\|^2+2\|A\|\,\|B\|+\|B\|^2
+&&(\because \sum_{i,j}|a_{ij}||b_{ij}|\le\|A\|\,\|B\|) \\
+&=\left(\|A\|+\|B\|\right)^2
+&&(\because \text{分配律})
+\end{aligned}`,
       ),
       paragraph([
         "となり、両辺の平方根をとる（Step 0、",
@@ -1580,8 +1728,15 @@ W
         " であるから、Step 5 より",
       ]),
       displayMath(
-        String.raw`0\le\|A-A'\|\le\|A-A_N\|+\|A_N-A'\|
-= \|A_N-A\|+\|A_N-A'\|`,
+        String.raw`\begin{aligned}
+0
+&\le\|A-A'\|
+&&(\because \text{(1)}) \\
+&\le\|A-A_N\|+\|A_N-A'\|
+&&(\because \text{Step 5 を } A-A'=(A-A_N)+(A_N-A') \text{ に当てた}) \\
+&= \|A_N-A\|+\|A_N-A'\|
+&&(\because \|A-A_N\|=\|A_N-A\|)
+\end{aligned}`,
       ),
       paragraph([
         "最後の等号は ",
@@ -1635,6 +1790,12 @@ W
         "原文（Typst）に対応ブロックは無い。ノルムの定義（labels: def_matrix_norm）を置いた以上、" +
           "極限の一意性や行列乗算の連続性（labels: matrix_multiplication_continuity）の議論が" +
           "前提としている非退化性・斉次性・三角不等式を明示的に証明しておく必要があるため追加した。",
+        "2026-08-10: 式変形の書き方の統一。証明の中の 8 つの式が、1 行に 2 つ以上の等号・不等号を" +
+          "並べたうえで根拠を 1 つだけ（あるいは 1 つも）付けていなかったので、" +
+          "1 行 1 関係の鎖へ分け、各行の末尾に (∵ …) を置いた。" +
+          "対象は、実数を複素数へ送る写像が和と積を保つことの 2 式、斉次性の式、" +
+          "Cauchy--Schwarz の証明の 2 式、三角不等式の 4 式、極限の一意性の式である。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
       ],
     },
   },
@@ -1725,28 +1886,20 @@ W
 \end{aligned}`,
       ),
       paragraph([
-        "両辺は非負であるから、",
+        "である。ここから、",
         ref("matrix_norm_triangle_inequality"),
-        " の Step 0（非負実数の平方の単調性）より",
+        " の Step 0（非負実数の平方の単調性）と Step 4（Cauchy--Schwarz の不等式）により",
       ]),
       displayMath(
-        String.raw`\left|(AB)_{ij}\right|^2\le\left(\sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|\right)^2`,
-      ),
-      paragraph([
-        "さらに ",
-        ref("matrix_norm_triangle_inequality"),
-        " の Step 4（Cauchy--Schwarz の不等式）を ",
-        math(String.raw`u_k=|a_{ik}|,\ v_k=|b_{kj}|`),
-        " として適用すると",
-      ]),
-      displayMath(
-        String.raw`\left(\sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|\right)^2
-\le\left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{k=1}^{n}|b_{kj}|^2\right)`,
-      ),
-      paragraph(["よって"]),
-      displayMath(
-        String.raw`\left|(AB)_{ij}\right|^2
-\le\left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{l=1}^{n}|b_{lj}|^2\right)`,
+        String.raw`\begin{aligned}
+\left|(AB)_{ij}\right|^2
+&\le \left(\sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|\right)^2
+\quad (\because \text{直前の評価と、非負実数の平方の単調性}) \\
+&\le \left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{k=1}^{n}|b_{kj}|^2\right)
+\quad (\because \text{Cauchy--Schwarz の不等式を } u_k=|a_{ik}|,\ v_k=|b_{kj}| \text{ として適用}) \\
+&= \left(\sum_{k=1}^{n}|a_{ik}|^2\right)\left(\sum_{l=1}^{n}|b_{lj}|^2\right)
+\quad (\because \text{第 2 因子の和の添字の付け替え})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3: 全成分についての和。Step 2 の不等式を ",
@@ -1786,6 +1939,13 @@ W
     conversion: {
       status: "converted",
       notes: [
+        "2026-08-10: Step 2（各成分の評価）が、3 つの式を別々の displayMath に置き、" +
+          "その間に「両辺は非負であるから」「さらに…適用すると」「よって」という日本語を" +
+          "挟んでいた。どの不等号がどの根拠によるのかが式から読み取れないので、" +
+          "平方以降を 1 行 1 関係の 3 段の鎖へまとめ、各行の末尾に (∵ …) を置いた" +
+          "（平方の単調性・Cauchy--Schwarz・和の添字の付け替えが別々の根拠であることが式の上に現れる）。" +
+          "あわせて、鎖の第 1 段（絶対値を行列の積の定義で書き下す段）に根拠が無かったので付けた。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "原文にはノルムの定義そのものが無かったため、Frobenius ノルムを定義するブロック" +
           "（labels: def_matrix_norm）とその基本性質のブロック（labels: matrix_norm_triangle_inequality）を" +
@@ -1840,38 +2000,94 @@ W
         String.raw`W_{i1} := w_i \quad (1\le i\le n), \qquad
 W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       ),
-      paragraph(["で定める。行列の積の定義より"]),
-      displayMath(
-        String.raw`(AW)_{i1}=\sum_{k=1}^{n}a_{ik}W_{k1}=\sum_{k=1}^{n}a_{ik}w_k=(Aw)_i,
-\qquad
-(AW)_{ij}=\sum_{k=1}^{n}a_{ik}\cdot 0=0 \quad (j\ge 2)`,
-      ),
+      paragraph(["で定める。第 1 列の成分は"]),
+      displayMath(String.raw`\begin{aligned}
+(AW)_{i1}
+&=\sum_{k=1}^{n}a_{ik}W_{k1}
+&&(\because\ \text{行列の積の定義})\\
+&=\sum_{k=1}^{n}a_{ik}w_k
+&&(\because\ W\ \text{の第 1 列の定め方})\\
+&=(Aw)_i
+&&(\because\ \text{行列と数ベクトルの積の定義})
+\end{aligned}`),
       paragraph([
-        "である。",
-        math(String.raw`|0|=0`),
-        "（",
+        "であり、",
+        math(String.raw`2\le j\le n`),
+        " について第 ",
+        math(String.raw`j`),
+        " 列の成分は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(AW)_{ij}
+&=\sum_{k=1}^{n}a_{ik}W_{kj}
+&&(\because\ \text{行列の積の定義})\\
+&=\sum_{k=1}^{n}a_{ik}\cdot 0
+&&(\because\ W\ \text{の第 2 列以降の定め方})\\
+&=0
+&&(\because\ 0\ \text{を掛けた項だけの有限和は}\ 0)
+\end{aligned}`),
+      paragraph(["である。これを使って"]),
+      displayMath(String.raw`\begin{aligned}
+\|AW\|
+&=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{ノルムの定義})\\
+&=\sqrt{\sum_{i=1}^{n}\left|(AW)_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない})\\
+&=\sqrt{\sum_{i=1}^{n}\left|(Aw)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{上の第 1 列の成分の等式})\\
+&=\|Aw\|
+&&(\because\ \text{ノルムの定義})
+\end{aligned}`),
+      paragraph([
+        "（第 2 の等号で ",
         ref("matrix_norm_triangle_inequality"),
-        " の Step 1）より第 2 列以降は平方和に寄与しないので、",
+        " の Step 1、第 1・第 4 の等号で ",
+        ref("def_matrix_norm"),
+        " を引いた）、および",
       ]),
-      displayMath(
-        String.raw`\|AW\|=\sqrt{\sum_{i=1}^{n}\left|(Aw)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}=\|Aw\|,
-\qquad
-\|W\|=\sqrt{\sum_{i=1}^{n}|w_i|^2}^{\,(\mathbb{R}_{\ge 0})}=\|w\|`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\|W\|
+&=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|W_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{ノルムの定義})\\
+&=\sqrt{\sum_{i=1}^{n}\left|W_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない})\\
+&=\sqrt{\sum_{i=1}^{n}\left|w_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ W\ \text{の第 1 列の定め方})\\
+&=\|w\|
+&&(\because\ \text{ノルムの定義})
+\end{aligned}`),
       paragraph([
-        "したがって ",
-        ref("matrix_norm_submultiplicativity"),
-        " より",
+        "（引いたブロックは 1 つ前の式と同じである）を得る。したがって",
       ]),
-      displayMath(
-        String.raw`\|Aw\|=\|AW\|\le\|A\|\cdot\|W\|=\|A\|\cdot\|w\|`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\|Aw\|
+&=\|AW\|
+&&(\because\ \text{上の第 1 の等式})\\
+&\le\|A\|\cdot\|W\|
+&&(\because\ \text{行列ノルムの劣乗法性})\\
+&=\|A\|\cdot\|w\|
+&&(\because\ \text{上の第 2 の等式})
+\end{aligned}`),
+      paragraph([
+        "である（不等号で ",
+        ref("matrix_norm_submultiplicativity"),
+        " を引いた）。",
+      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "原文（Typst）に対応ブロックは無い。exp 級数の各点収束（labels: exp_converges）の証明で" +
           "行列ノルムから数ベクトルの評価へ移る箇所が必要になるため、劣乗法性の直後に置いた。",
+        "2026-08-10: 式変形の書き方を統一した。もとは 4 つの式を別々に置き、その間に" +
+          "「行列の積の定義より」「である。|0|=0 より第 2 列以降は平方和に寄与しないので」" +
+          "「したがって …より」という日本語を挟んだうえ、1 つの式に 2 つ以上の等号を並べて" +
+          "根拠を 1 つも書いていなかった。どの等号がどの根拠によるのかが式から読み取れないので、" +
+          "1 行 1 関係の 4 つの鎖へ分け（第 1 列の成分・第 2 列以降の成分・‖AW‖=‖Aw‖ と ‖W‖=‖w‖・" +
+          "結論）、各行の末尾に (∵ …) を置いた。この生成器は blkref を定義していないので、" +
+          "(∵ …) には引いたブロックの題を書き、ラベル参照は式の直後に置いた。" +
+          "段は増えており、減った段は無い（‖W‖=‖w‖ の側はもとが 2 つの等号を 1 行に並べていたので" +
+          "4 段へ開いた）。主張も証明の筋も変えていない。",
       ],
     },
   },
@@ -2027,7 +2243,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " を Cauchy 列とすると、Step 1 より各成分について",
       ]),
       displayMath(
-        String.raw`\left|(A_N)_{ij}-(A_M)_{ij}\right|=\left|(A_N-A_M)_{ij}\right|\le\|A_N-A_M\|`,
+        String.raw`\begin{aligned}
+\left|(A_N)_{ij}-(A_M)_{ij}\right|
+&=\left|(A_N-A_M)_{ij}\right|
+&&(\because\ \text{行列の差は成分ごとである})\\
+&\le\|A_N-A_M\|
+&&(\because\ \text{Step 1})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
@@ -2065,8 +2287,15 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " (3) を繰り返し用いて",
       ]),
       displayMath(
-        String.raw`\|S_N-S_M\|=\left\|\sum_{m=M+1}^{N}B_m\right\|
-\le\sum_{m=M+1}^{N}\|B_m\|=T_N-T_M`,
+        String.raw`\begin{aligned}
+\|S_N-S_M\|
+&=\left\|\sum_{m=M+1}^{N}B_m\right\|
+&&(\because\ S_N\ \text{と}\ S_M\ \text{の定義と、有限和の差})\\
+&\le\sum_{m=M+1}^{N}\|B_m\|
+&&(\because\ \text{行列ノルムの三角不等式を繰り返し用いる})\\
+&=T_N-T_M
+&&(\because\ T_N\ \text{と}\ T_M\ \text{の定義と、有限和の差})
+\end{aligned}`,
       ),
       paragraph([
         "であるから ",
@@ -2091,7 +2320,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " (3) より",
       ]),
       displayMath(
-        String.raw`\|S\|\le\|S-S_N\|+\|S_N\|\le\|S-S_N\|+T`,
+        String.raw`\begin{aligned}
+\|S\|
+&\le\|S-S_N\|+\|S_N\|
+&&(\because\ S=(S-S_N)+S_N\ \text{と行列ノルムの三角不等式})\\
+&\le\|S-S_N\|+T
+&&(\because\ \|S_N\|\le T)
+\end{aligned}`,
       ),
       paragraph([
         "であり、右辺第 1 項は ",
@@ -2113,6 +2348,11 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         "原文（Typst）に対応ブロックは無い。exp 級数の収束（labels: exp_converges）と" +
           "可換行列の exp 積公式（labels: theorem_exp_product）が前提とする" +
           "「Mat(n,K) が完備であること」「絶対収束すれば収束すること」を明示するために追加した。",
+        "式変形の書き方の統一（2026-08-10）。3 箇所の式が 1 行に 2 つ以上の関係を並べ、" +
+          "根拠を 1 つも書いていなかった（Step 3 の成分の評価、Step 4 の部分和の差の評価、" +
+          "Step 5 のノルムの評価）。どの関係がどの根拠によるのかが式から読み取れないので、" +
+          "それぞれ 1 行 1 関係の鎖へ分け、各行の末尾に (∵ …) を置いた。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
       ],
     },
   },
@@ -2141,13 +2381,25 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       displayMath(
         String.raw`\begin{aligned}
 \|A_N B - AB\|
-&= \|(A_N - A)B\| \\
-&\leq \|A_N - A\| \cdot \|B\| \\
+&= \|(A_N - A)B\|
+&&(\because\ \text{行列の積の右分配則})\\
+&\leq \|A_N - A\| \cdot \|B\|
+&&(\because\ \text{行列ノルムの劣乗法性})\\
 &\to 0
+&&(\because\ \|A_N - A\| \to 0\ \text{と、収束する実数列に定数を掛けた列の極限})
 \end{aligned}`,
       ),
       paragraph(["（", ref("matrix_norm_submultiplicativity"), " を使用）"]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-10）。3 段の鎖はもとから 1 行 1 関係になっていたが、" +
+          "どの関係がどの根拠によるのかが式の上に無く、引いたブロックの参照が式の後ろに" +
+          "1 つだけ置かれていた。各行の末尾に (∵ …) を置いた（右分配則・劣乗法性・" +
+          "収束する実数列に定数を掛けた列の極限が別々の根拠であることが、これで式の上に現れる）。" +
+          "段は増えておらず減ってもおらず、主張も証明の筋も変えていない。",
+      ],
+    },
   },
 ]);

@@ -1426,9 +1426,27 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     statement: [
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
+        " について、",
+        math(String.raw`r \in \mathbb{R}_{\geq 0}`),
         "、",
-        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
-        " のとき、",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " を用いて ",
+        math(String.raw`\phi_{\mathrm{polar}}(z) = [(r,\theta)]_{\sim}`),
+        " とし、",
+        math(String.raw`\arg^{[0,2\pi)}(z) = \theta - 2n\pi`),
+        "（",
+        math(String.raw`n \in \mathbb{Z}`),
+        "）とする。さらに ",
+        math(String.raw`r \neq 0`),
+        " とする（",
+        ref("def_abs_arg"),
+        " と ",
+        ref("first_and_second_projections"),
+        " により ",
+        math(String.raw`r = |z|`),
+        " なので、これは ",
+        math(String.raw`z \neq 0`),
+        " と同じことである）。このとき",
       ]),
       displayMath(
         String.raw`\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right) =
@@ -1437,24 +1455,238 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 2\pi - \arg^{[0,2\pi)}(z) & (0<\arg^{[0,2\pi)}(z)<2\pi)
 \end{cases}`,
       ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r \neq 0`),
+        " は逆数 ",
+        math(String.raw`1/z`),
+        " が定まるために要る（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+        ref("def_abs_arg"),
+        " より ",
+        math(String.raw`\arg^{[0,2\pi)}(z) \in [0,2\pi)`),
+        " なので、2 つの場合はちょうど一方だけが成り立つ。",
+      ]),
     ],
     proof: [
+      paragraph([
+        "証明の中で使うものを 3 つ先に置く。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は積を保つ。実際 ",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " は全単射なモノイド準同型であり、かつ ",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " なので、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " の逆写像である。全単射なモノイド準同型の逆写像はモノイド準同型なので",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z z')=\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z')`,
+      ),
+      paragraph([
+        "が任意の ",
+        math(String.raw`z,z'\in\mathbb{C}`),
+        " について成り立つ。",
+      ]),
+      paragraph([
+        "第二に、",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " は逆元を逆元へ写す。",
+        math(String.raw`r\neq0`),
+        " すなわち ",
+        math(String.raw`z\neq 0`),
+        " なので ",
+        math(String.raw`z^{-1}\in\mathbb{C}`),
+        " が定まり（",
+        ref("multiplicative_group_of_cc"),
+        "）、",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
-\arg^{[0,2\pi)}(z^{-1})
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\!\left(\phi_{\mathrm{polar}}(z^{-1})\right)\right) \\
-&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\!\left([(1/r,-\theta)]_{\sim}\right)\right)
-= s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z^{-1})
+&= \phi_{\mathrm{polar}}(z\,z^{-1})
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{polar}}(1_{\mathbb{C}})
+&&(\because\ z^{-1}\ \text{が}\ z\ \text{の逆元であること})\\
+&= [(1,0)]_{\sim}
+&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`0\leq\theta-2n\pi<2\pi`),
-        " より ",
-        math(String.raw`-2\pi<-\theta+2n\pi\leq 0`),
-        " を場合分けして結論を得る。",
+        "である。したがって ",
+        math(String.raw`\phi_{\mathrm{polar}}(z^{-1})`),
+        " は ",
+        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
+        " の逆元であり、",
+        ref("multiplicative_group_of_polar_representation"),
+        " の逆元の形（",
+        math(String.raw`r\neq0`),
+        " の場合）により",
+      ]),
+      displayMath(
+        String.raw`\phi_{\mathrm{polar}}(z^{-1})=[(1/r,-\theta)]_{\sim}`,
+      ),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第三に、",
+        math(String.raw`r\neq0`),
+        " なので ",
+        math(String.raw`1/r\neq0`),
+        " である（実数の商は、分子が ",
+        math(String.raw`0`),
+        " でなければ ",
+        math(String.raw`0`),
+        " でない）。",
+      ]),
+      paragraph([
+        "本体に入る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&= \arg^{[0,2\pi)}(z^{-1})
+&&(\because\ \mathbb{C}\text{の乗法群 の}\ z^{-1}=1/z)\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z^{-1}))\right)
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(1/r,-\theta)]_{\sim})\right)
+&&(\because\ \text{上で見た}\ \phi_{\mathrm{polar}}(z^{-1})\ \text{の形})\\
+&= s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ 1/r\neq0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("def_abs_arg"),
+        "、",
+        ref("first_and_second_projections"),
+        " を引いた。",
+      ]),
+      paragraph([
+        "ここから先は ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " の値で 2 つに分かれる。",
+        ref("def_abs_arg"),
+        " よりこの値は ",
+        math(String.raw`[0,2\pi)`),
+        " にあるので、この 2 つで尽きている。",
+      ]),
+      paragraph([
+        math(String.raw`\theta-2n\pi = 0`),
+        " のとき。このとき ",
+        math(String.raw`-\theta-2(-n)\pi = -(\theta-2n\pi) = 0`),
+        " であり ",
+        math(String.raw`0 \leq 0 < 2\pi`),
+        " なので、",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数は ",
+        math(String.raw`-n`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+&= -\theta-2(-n)\pi
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&= -(\theta-2n\pi)
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= -\arg^{[0,2\pi)}(z)
+&&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
+&= -0
+&&(\because\ \arg^{[0,2\pi)}(z)=0\ \text{という、この場合の条件})\\
+&= 0
+&&(\because\ 0\ \text{の加法の逆元は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。この場合の条件 ",
+        math(String.raw`\theta-2n\pi=0`),
+        " は、仮定 ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " により主張の第 1 の場合の条件 ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=0`),
+        " と同じである。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+      paragraph([
+        math(String.raw`0 < \theta-2n\pi < 2\pi`),
+        " のとき。各辺に ",
+        math(String.raw`-1`),
+        " を掛けて向きを入れ替えると ",
+        math(String.raw`-2\pi < -(\theta-2n\pi) < 0`),
+        " であり、さらに各辺へ ",
+        math(String.raw`2\pi`),
+        " を足せば ",
+        math(String.raw`0 < -\theta-2(-n-1)\pi < 2\pi`),
+        " なので、",
+        ref("angle_section_existence_uniqueness"),
+        " が一意に定める整数は ",
+        math(String.raw`-n-1`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
+&= -\theta-2(-n-1)\pi
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&= \left(-\theta-2(-n)\pi\right)+2\pi
+&&(\because\ 2(-n-1)\pi=2(-n)\pi-2\pi)\\
+&= -(\theta-2n\pi)+2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= -\arg^{[0,2\pi)}(z)+2\pi
+&&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
+&= 2\pi-\arg^{[0,2\pi)}(z)
+&&(\because\ \mathbb{R}\ \text{の加法の交換律と差の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。この場合の条件も、仮定 ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " により主張の第 2 の場合の条件 ",
+        math(String.raw`0<\arg^{[0,2\pi)}(z)<2\pi`),
+        " と同じである。",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文の証明は 3 つの等号を並べた式 1 本と、" +
+          "「0 ≤ θ-2nπ < 2π より -2π < -θ+2nπ ≤ 0 を場合分けして結論を得る」の 1 文だけで、" +
+          "φ_polar が逆元を逆元へ写すこと・極座標表現の逆元の形・pr_2 の適用・" +
+          "角度表現の切断が一意に定める整数の同定がいずれも書かれていなかったので、" +
+          "すべて段として明示した。商の場合（arg_of_quotient_of_complex_numbers）と" +
+          "同じ形（準備 3 つ・本体の 4 段の鎖・場合ごとの 5 段の鎖）へ揃えてある。" +
+          "段は増えており、減った段は無い。",
+        "自乗の場合（range_of_args_of_square_of_complex_numbers）と違い、r ≠ 0 を仮定に足した。" +
+          "自乗では r = 0 でも主張が成り立つので足さなかったが、逆数では z = 0 のとき 1/z が" +
+          "そもそも定まらない（ℂ の乗法群）。すなわちこれは主張を弱める仮定ではなく、" +
+          "主張が意味を持つために要る仮定である。商の場合の r_2 ≠ 0 と同じ扱いにした。",
+        "原文は r, θ, n を導入せずに証明の中で θ と n を使っていたので、" +
+          "商の場合と同じ設定を statement に書き下した。",
+        "原文の場合分けの範囲 -2π < -θ+2nπ ≤ 0 は、arg(z) = θ-2nπ ∈ [0,2π) から出る。" +
+          "本文ではこれを「arg(z) = 0 の場合」と「0 < arg(z) < 2π の場合」の 2 つに書き直した。" +
+          "主張の場合分けが arg(z) の値で書かれているので、そちらに揃えた方が" +
+          "どちらの場合の等式を示しているのかが一目で分かるためである。",
+      ],
+    },
   },
   // 旧 calculation_formulae_037（arg 計算のコツ）は計算の進め方の助言であって主張ではないため、
   // notes/000_calculation_formulae.ts（targets: arg_of_product_of_complex_numbers）へ移設した。
@@ -1539,19 +1771,17 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ]),
     ],
     proof: [
+      paragraph(["証明の中で使うものを 2 つ先に置く。"]),
       paragraph([
-        "Step 1: ",
+        "第一に、",
         math(String.raw`0\le\theta-2n\pi<2\pi`),
         " を満たす ",
         math(String.raw`n\in\mathbb{Z}`),
-        " の存在と一意性は ",
+        " は各 ",
+        math(String.raw`\theta\in\mathbb{R}`),
+        " に対してただ一つ存在する（",
         ref("angle_section_existence_uniqueness"),
-        " で証明済みである（",
-        ref("section_of_angle_representation"),
-        " の定義もこの主張を根拠にしている）。これにより本主張の仮定の意味が確定する。",
-      ]),
-      paragraph([
-        "特に、この一意性から ",
+        "）。この一意性により ",
         ref("section_of_angle_representation"),
         " の ",
         math(String.raw`s_{[0,2\pi)}`),
@@ -1562,9 +1792,16 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ),
       paragraph(["が成り立つ。"]),
       paragraph([
-        "Step 2: 主張の右辺が代表元 ",
+        "第二に、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
+        " である。",
+      ]),
+      paragraph([
+        "主張の右辺が代表元 ",
         math(String.raw`(r,\theta)`),
-        " の取り方によらないこと。",
+        " の取り方によらないことを先に見る。",
         math(String.raw`(r,\theta)\sim(r',\theta')`),
         " とし、",
         math(String.raw`n,n'\in\mathbb{Z}`),
@@ -1572,160 +1809,184 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`0\le\theta-2n\pi<2\pi`),
         "、",
         math(String.raw`0\le\theta'-2n'\pi<2\pi`),
-        " を満たすもの（Step 1 により一意）とする。",
+        " を満たすもの（準備の第一により一意）とする。",
         ref("polar_equivalence_class"),
         " より次の 2 つの場合がある。",
       ]),
-      list([
-        [
-          math(String.raw`r=r'=0`),
-          " のとき。",
-          ref("definition_of_sqrt_r_positive"),
-          " より ",
-          math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
-          " であるから、両辺の内側の対はそれぞれ ",
-          math(String.raw`(0,\theta/2-n\pi)`),
-          " と ",
-          math(String.raw`(0,\theta'/2-n'\pi)`),
-          " であり、第 1 成分がともに ",
-          math(String.raw`0`),
-          " なので ",
-          ref("polar_equivalence_class"),
-          " の定義（",
-          math(String.raw`r=r'=0`),
-          " の場合）により同値、すなわち同じ同値類を定める。",
-        ],
-        [
-          math(String.raw`r=r'`),
-          " かつ ",
-          math(String.raw`\theta\sim_{\mathrm{angle}}\theta'`),
-          " のとき。",
-          ref("angle_equivalence_class"),
-          " より ",
-          math(String.raw`\theta-\theta'=2k\pi`),
-          " なる ",
-          math(String.raw`k\in\mathbb{Z}`),
-          " が存在する。すると ",
-          math(String.raw`\theta-2(n'+k)\pi=\theta'-2n'\pi\in[0,2\pi)`),
-          " であり、",
-          math(String.raw`n'+k\in\mathbb{Z}`),
-          " だから Step 1 の一意性より ",
-          math(String.raw`n=n'+k`),
-          "。よって",
-        ],
+      paragraph([
+        math(String.raw`r=r'=0`),
+        " のとき。準備の第二より両辺の内側の対はそれぞれ ",
+        math(String.raw`(0,\theta/2-n\pi)`),
+        " と ",
+        math(String.raw`(0,\theta'/2-n'\pi)`),
+        " であり、第 1 成分がともに ",
+        math(String.raw`0`),
+        " なので ",
+        ref("polar_equivalence_class"),
+        "（",
+        math(String.raw`r=r'=0`),
+        " の場合）により同値、すなわち同じ同値類を定める。",
+      ]),
+      paragraph([
+        math(String.raw`r=r'`),
+        " かつ ",
+        math(String.raw`\theta\sim_{\mathrm{angle}}\theta'`),
+        " のとき。",
+        ref("angle_equivalence_class"),
+        " より ",
+        math(String.raw`\theta-\theta'=2k\pi`),
+        " なる ",
+        math(String.raw`k\in\mathbb{Z}`),
+        " が存在する。このとき ",
+        math(String.raw`\theta-2(n'+k)\pi=\theta'-2n'\pi\in[0,2\pi)`),
+        " かつ ",
+        math(String.raw`n'+k\in\mathbb{Z}`),
+        " なので、準備の第一の一意性より ",
+        math(String.raw`n=n'+k`),
+        " である。したがって",
       ]),
       displayMath(
-        String.raw`\frac{\theta}{2}-n\pi
-=\frac{\theta'+2k\pi}{2}-(n'+k)\pi
-=\frac{\theta'}{2}+k\pi-n'\pi-k\pi
-=\frac{\theta'}{2}-n'\pi`,
+        String.raw`\begin{aligned}
+\frac{\theta}{2}-n\pi
+&= \frac{\theta'+2k\pi}{2}-(n'+k)\pi
+&&(\because\ \theta=\theta'+2k\pi\ \text{と}\ n=n'+k)\\
+&= \frac{\theta'}{2}+k\pi-(n'+k)\pi
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
+&= \frac{\theta'}{2}+k\pi-n'\pi-k\pi
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
+&= \frac{\theta'}{2}-n'\pi
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律})
+\end{aligned}`,
       ),
       paragraph([
         "であり、第 1 成分も ",
         math(String.raw`\sqrt{r}^{\,\mathbb{R}_{\ge 0}}=\sqrt{r'}^{\,\mathbb{R}_{\ge 0}}`),
         " で一致するから、両者は同じ対であり同じ同値類を定める。いずれの場合も右辺は代表元によらない。",
+        ref("polar_equivalence_class"),
+        "、",
+        ref("angle_equivalence_class"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
       ]),
       paragraph([
-        "Step 3: ",
-        math(String.raw`r\ne 0`),
-        " の場合。",
-        ref("first_and_second_projections"),
-        " より",
+        "ここから先は ",
+        math(String.raw`r`),
+        " の値で 2 つに分かれる。",
       ]),
-      displayMath(
-        String.raw`\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))=\operatorname{pr}_1([(r,\theta)]_{\sim})=r,
-\qquad
-\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))=\operatorname{pr}_2([(r,\theta)]_{\sim})=[\theta]_{\sim_{\mathrm{angle}}}`,
-      ),
       paragraph([
-        "（第 2 式は ",
         math(String.raw`r\ne 0`),
-        " の場合の定義による。）したがって ",
-        ref("def_sqrt_cc"),
-        " の定義式に代入して、Step 1 の末尾の等式 ",
-        math(String.raw`s_{[0,2\pi)}([\theta]_{\sim_{\mathrm{angle}}})=\theta-2n\pi`),
-        " を用いると",
+        " のとき。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sqrt{z}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
-\quad (\because \text{定義}) \\
-&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([\theta]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right) \\
+&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_1\ \text{と}\ \phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([\theta]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_2\ \text{の}\ r\ne0\ \text{の場合})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}(\theta-2n\pi)\right)\right]_{\sim}\right)
-\quad (\because \text{Step 1}) \\
+&&(\because\ \text{準備の第一})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-\quad (\because \mathbb{R} \text{ の分配律})
+&&(\because\ \mathbb{R}\ \text{の分配律})
 \end{aligned}`,
       ),
-      paragraph(["これは主張の右辺そのものである。"]),
       paragraph([
-        "Step 4: ",
-        math(String.raw`r=0`),
-        " の場合。このとき ",
-        ref("first_and_second_projections"),
-        " より ",
-        math(String.raw`\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))=0`),
-        " かつ ",
-        math(String.raw`\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))=[0]_{\sim_{\mathrm{angle}}}`),
-        "（",
-        math(String.raw`r=0`),
-        " の場合の定義）である。",
-        math(String.raw`0\le 0-2\cdot 0\cdot\pi=0<2\pi`),
-        " より Step 1 の一意性から ",
-        math(String.raw`s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})=0`),
-        "。また ",
-        ref("definition_of_sqrt_r_positive"),
-        " より ",
-        math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
-        "。よって ",
+        "であり、これは主張の右辺そのものである。",
         ref("def_sqrt_cc"),
-        " と ",
-        ref("def_phi_cartesian"),
-        " より",
+        "、",
+        ref("first_and_second_projections"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " を引いた。",
+      ]),
+      paragraph([
+        math(String.raw`r=0`),
+        " のとき。まず左辺を計算する。",
       ]),
       displayMath(
-        String.raw`\sqrt{z}
-=\phi_{\mathrm{cartesian}}\!\left(\left[(0,\ \tfrac{1}{2}\cdot 0)\right]_{\sim}\right)
-=\phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
-=(0\cdot\cos 0,\ 0\cdot\sin 0)=(0,0)=0_{\mathbb{C}}`,
+        String.raw`\begin{aligned}
+\sqrt{z}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot 0\right)\right]_{\sim}\right)
+&&(\because\ 0\le 0-2\cdot0\cdot\pi<2\pi\ \text{と準備の第一})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{で}\ a\cdot 0=0)\\
+&= (0\cdot\cos 0,\ 0\cdot\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,0)=0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
+\end{aligned}`,
       ),
-      paragraph([
-        "一方、主張の右辺は ",
-        math(String.raw`\sqrt{r}^{\,\mathbb{R}_{\ge 0}}=\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
-        " であるから、",
-        ref("def_phi_cartesian"),
-        " より",
-      ]),
+      paragraph(["次に右辺を計算する。"]),
       displayMath(
-        String.raw`\phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-=\left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
-=(0,0)=0_{\mathbb{C}}`,
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ r=0\ \text{という、この場合の条件})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二})\\
+&= \left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,0)=0_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
+\end{aligned}`,
       ),
       paragraph([
-        "（",
+        "であり、両辺は一致する。",
         math(String.raw`\cos,\sin`),
         " の値は ",
         math(String.raw`\mathbb{R}`),
-        " の元であり、",
+        " の元なので、最後の段は ",
         math(String.raw`\mathbb{R}`),
-        " において ",
-        math(String.raw`0\cdot a=0`),
-        " である。）よって両辺は一致する。",
+        " の中の計算である。",
+        ref("def_sqrt_cc"),
+        "、",
+        ref("first_and_second_projections"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("def_phi_cartesian"),
+        " を引いた。",
       ]),
       paragraph([
-        "Step 5: 結論。Step 3 と Step 4 により、",
+        "以上より、",
         math(String.raw`r\ne 0`),
         " と ",
         math(String.raw`r=0`),
-        " のいずれの場合も主張の等式が成り立つ。Step 2 により右辺は代表元の取り方によらないので、主張は ",
+        " のいずれの場合も主張の等式が成り立つ。右辺は代表元の取り方によらないので、主張は ",
         math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
         " なる任意の代表元 ",
         math(String.raw`(r,\theta)`),
         " について成り立つ。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は Step 1 から Step 5 までの " +
+          "5 段構成で、式と式の間に日本語の説明が挟まっていた。準備（n の一意性から出る " +
+          "s_{[0,2π)}([θ]) = θ-2nπ と、√0 = 0）を冒頭にまとめ、そのうえで代表元によらないこと・" +
+          "r ≠ 0 の場合・r = 0 の場合の計算をそれぞれ一続きの鎖にした。" +
+          "段は増えており、減った段は無い（r = 0 の場合は左辺 7 段・右辺 4 段へ、" +
+          "代表元によらないことの計算は 4 段へ、それぞれ書き下した）。",
+        "原文が Step 番号で並べていた「準備」と「本体」を分けた。Step 1（n の一意性）と " +
+          "√0 = 0 は式変形ではなく準備なので冒頭へ移し、Step 2（代表元によらないこと）・" +
+          "Step 3（r ≠ 0）・Step 4（r = 0）・Step 5（結論）は、独立した中間目標なので " +
+          "そのまま順に置いた（番号は外し、条件で呼ぶ形にした）。",
+        "原文が 1 本の式に 3 つの等号を並べていた θ/2 - nπ の計算を、1 行 1 等号の 4 段へ割った。" +
+          "原文は θ = θ'+2kπ と n = n'+k をどちらの段で使ったのかが式に書かれていなかった。",
+        "主張と仮定は変えていない（r ≠ 0 の仮定を足す必要はない。r = 0 でも主張は成り立ち、" +
+          "原文もその場合を Step 4 で扱っている）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_040_claim_sqrt_commutativity_condition",
@@ -1751,186 +2012,461 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     ],
     proof: [
       paragraph([
-        math(String.raw`r_1, r_2 \in \mathbb{R}_{\geq 0}`),
-        "、",
-        math(String.raw`\theta_1, \theta_2 \in \mathbb{R}`),
-        " を用いて ",
-        math(String.raw`\phi_{\mathrm{polar}}(z_1)=[(r_1,\theta_1)]_{\sim}`),
-        "、",
-        math(String.raw`\phi_{\mathrm{polar}}(z_2)=[(r_2,\theta_2)]_{\sim}`),
-        " とする。まず ",
-        math(String.raw`\sqrt{z_1 z_2}`),
-        " を ",
+        "証明の中で使うものを 3 つ先に置く。",
+      ]),
+      paragraph([
+        "第一に、",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
         math(String.raw`\phi_{\mathrm{cartesian}}`),
-        " で表す。",
+        " は全単射なモノイド準同型であり、",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " なので ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " はその逆写像である。全単射なモノイド準同型の逆写像はモノイド準同型なので",
       ]),
       displayMath(
-        String.raw`\begin{aligned}
-\sqrt{z_1 z_2}
-&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1 z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2))))]_{\sim}\right) \\
-&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1)\phi_{\mathrm{polar}}(z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\phi_{\mathrm{polar}}(z_2))))]_{\sim}\right) \quad (\because \phi_{\mathrm{polar}} \text{ の同型性}) \\
-&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1([(r_1,\theta_1)]_{\sim}[(r_2,\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}[(r_2,\theta_2)]_{\sim})))]_{\sim}\right) \\
-&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{\mathrm{pr}_1([(r_1 r_2,\theta_1+\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim})))]_{\sim}\right) \\
-&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}))]_{\sim}\right) \\
-&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})\right)
-\end{aligned}`,
-      ),
-      paragraph(["次に ", math(String.raw`\sqrt{z_1}\sqrt{z_2}`), " を計算する。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sqrt{z_1}\sqrt{z_2}
-&= \phi_{\mathrm{cartesian}}\!\left([(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}}))]_{\sim}\right)\,
-\phi_{\mathrm{cartesian}}\!\left([(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}))]_{\sim}\right) \\
-&= \left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\right)
-\left(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right) \\
-&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}) - \sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\right. \\
-&\qquad \left.\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}) + \sin\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right) \\
-&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right)
-\end{aligned}`,
+        String.raw`\phi_{\mathrm{polar}}(z_1 z_2)=\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2)`,
       ),
       paragraph([
-        "i. ",
+        "である。",
+      ]),
+      paragraph([
+        "第二に、",
+        ref("operations_on_polar_representation"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`[(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}=[(r_1 r_2,\ \theta_1+\theta_2)]_{\sim}`,
+      ),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第三に、",
+        ref("angle_section_existence_uniqueness"),
+        " より、各 ",
+        math(String.raw`\theta\in\mathbb{R}`),
+        " に対して ",
+        math(String.raw`0\leq\theta-2n\pi<2\pi`),
+        " を満たす ",
+        math(String.raw`n\in\mathbb{Z}`),
+        " がただ一つ存在する。この一意性により、",
+        ref("section_of_angle_representation"),
+        " の ",
+        math(String.raw`s_{[0,2\pi)}`),
+        " について ",
+        math(String.raw`s_{[0,2\pi)}([\theta]_{\sim_{\mathrm{angle}}})=\theta-2n\pi`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        "ここから先は ",
+        math(String.raw`r_1 r_2`),
+        " が ",
+        math(String.raw`0`),
+        " かどうかで分かれる。",
+        ref("first_and_second_projections"),
+        " の ",
+        math(String.raw`\mathrm{pr}_2`),
+        " が ",
+        math(String.raw`r=0`),
+        " のとき ",
+        math(String.raw`[0]_{\sim_{\mathrm{angle}}}`),
+        " を返す定義になっているため、",
+        math(String.raw`\mathrm{pr}_2([(r,\theta)]_{\sim})=[\theta]_{\sim_{\mathrm{angle}}}`),
+        " と書けるのは ",
+        math(String.raw`r\neq 0`),
+        " のときだけだからである。",
+      ]),
+      paragraph([
         math(String.raw`r_1=0`),
         " または ",
         math(String.raw`r_2=0`),
-        " のとき、",
-        math(String.raw`\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}=0`),
-        " より両者はともに ",
+        " のとき。まず左辺は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{z_1 z_2}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1 z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2)))\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2)))\right)\right]_{\sim}\right)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
+&&(\because\ r_1,r_2,\theta_1,\theta_2\ \text{の取り方})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1 r_2,\theta_1+\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の定義}\ \text{と}\ r_1 r_2=0)\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
+&&(\because\ r_1 r_2=0\ \text{と}\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \left(0\cdot\cos\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}),\ 0\cdot\sin\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,0)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r_1=0`),
+        " の場合は右辺の第 1 因子が",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{z_1}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta_1}{2}-n_1\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta_1}{2}-n_1\pi\right)\right]_{\sim}\right)
+&&(\because\ r_1=0\ \text{と}\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \left(0\cdot\cos\left(\tfrac{\theta_1}{2}-n_1\pi\right),\ 0\cdot\sin\left(\tfrac{\theta_1}{2}-n_1\pi\right)\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (0,0)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0)
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`\sqrt{z_1}\sqrt{z_2}=(0,0)\cdot\sqrt{z_2}=(0,0)`),
+        " である（",
         math(String.raw`(0,0)`),
-        " に等しく ",
-        math(String.raw`\sqrt{z_1 z_2}=\sqrt{z_1}\sqrt{z_2}`),
-        "。",
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " の零元であり、零元を因子にもつ積は零元である）。",
+        math(String.raw`r_2=0`),
+        " の場合も第 2 因子について同じ計算になる。したがってこの場合",
+        math(String.raw`\sqrt{z_1 z_2}=(0,0)=\sqrt{z_1}\sqrt{z_2}`),
+        " である。",
       ]),
       paragraph([
-        "ii. ",
+        "この場合が主張のどちらの場合にあたるかも見ておく。",
+        math(String.raw`r_1=0`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z_1)
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1))\right)
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\theta_1)]_{\sim})\right)
+&&(\because\ r_1=0\ \text{という、この場合の仮定})\\
+&= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第1座標, 第2座標 の定義})\\
+&= 0
+&&(\because\ \text{準備の第三を}\ \theta=0,\ n=0\ \text{へ当てた})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("def_abs_arg"),
+        " より ",
+        math(String.raw`\arg^{[0,2\pi)}(z_2)\in[0,2\pi)`),
+        " なので ",
+        math(String.raw`0\leq\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)<2\pi`),
+        " すなわち主張の第 1 の場合にあたり、いま示した等式はその場合の等式である。",
+        math(String.raw`r_2=0`),
+        " の場合も同じである。",
+      ]),
+      paragraph([
         math(String.raw`r_1\neq 0`),
         " かつ ",
         math(String.raw`r_2\neq 0`),
-        " のとき、",
-        math(String.raw`n_1, n_2 \in \mathbb{Z}`),
-        " で ",
+        " のとき。実数の積は因子がどちらも ",
+        math(String.raw`0`),
+        " でなければ ",
+        math(String.raw`0`),
+        " でないので ",
+        math(String.raw`r_1 r_2\neq 0`),
+        " である。",
+        math(String.raw`n_1,n_2\in\mathbb{Z}`),
+        " を ",
         math(String.raw`0\leq\theta_1-2n_1\pi<2\pi`),
         "、",
         math(String.raw`0\leq\theta_2-2n_2\pi<2\pi`),
-        " を満たすものがそれぞれただ一つ存在する。このとき、",
+        " を満たすもの（準備の第三によりそれぞれただ一つ存在する）とする。まず左辺は",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cos\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
-&= \cos\!\tfrac{1}{2}\!\left(\theta_1-2n_1\pi+\theta_2-2n_2\pi\right) \\
-&= \cos\!\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right) \\
-&= \begin{cases}
-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
--\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
-\end{cases}
-\end{aligned}`,
-      ),
-      paragraph(["同様に"]),
-      displayMath(
-        String.raw`\sin\!\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
-= \begin{cases}
-\sin\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
--\sin\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
-\end{cases}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{z_1 z_2}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1 z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2)))\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2)))\right)\right]_{\sim}\right)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
+&&(\because\ r_1,r_2,\theta_1,\theta_2\ \text{の取り方})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1 r_2,\theta_1+\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
+&&(\because\ \text{第1座標, 第2座標 の定義}\ \text{と}\ r_1 r_2\neq 0)\\
+&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "である。次に右辺は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{z_1}\sqrt{z_2}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)\cdot
+\phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義}\ \text{と}\ \text{第1座標, 第2座標 の定義}\ \text{を}\ r_1,r_2\neq 0\ \text{へ当てた})\\
+&= \left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\right)\cdot
+\left(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})-\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\right.\\
+&\qquad\left.\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})+\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right)
+&&(\because\ \mathbb{C}\ \text{の積の定義と}\ \sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}=\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}})\\
+&= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right)
+&&(\because\ \text{三角関数の加法定理})
+\end{aligned}`),
+      paragraph([
+        "である。両者を比べるために、右辺に現れる角を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
+&= \tfrac{1}{2}\!\left((\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)\right)
+&&(\because\ \text{準備の第三を}\ \theta_1,\theta_2\ \text{へ当てた})\\
+&= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
+&&(\because\ \text{実数の加法の交換則・結合則と分配則})\\
+&= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi
+&&(\because\ \text{実数の分配則})
+\end{aligned}`),
       paragraph([
         "また ",
+        math(String.raw`0\leq\theta_1-2n_1\pi<2\pi`),
+        " と ",
+        math(String.raw`0\leq\theta_2-2n_2\pi<2\pi`),
+        " を足して ",
         math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi`),
-        " であるから、次で場合分けする。",
+        " であるから、ここで場合を 2 つに分ける。",
       ]),
       paragraph([
-        "ii.a ",
         math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<2\pi`),
-        " のとき、",
+        " の場合。左辺に現れる角は",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
-&= \cos\!\tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
-= \cos\!\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right) \\
-&= \begin{cases}
-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
--\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
-\end{cases}
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
+&= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
+&&(\because\ \text{準備の第三を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2\ \text{へ当てた。いまの場合分けがその範囲の条件である})\\
+&= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi
+&&(\because\ \text{実数の分配則})
+\end{aligned}`),
       paragraph([
-        "同様に ",
-        math(String.raw`\sin`),
-        " も一致するので、この場合 ",
+        "であり、右辺に現れる角と一致する。したがって左辺と右辺の 2 つの成分がそれぞれ一致し、",
         math(String.raw`\sqrt{z_1 z_2}=\sqrt{z_1}\sqrt{z_2}`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "ii.b ",
         math(String.raw`2\pi\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi`),
-        " のとき、",
+        " の場合。このとき ",
         math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2+1)\pi<2\pi`),
-        " より、",
+        " なので、左辺に現れる角は",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cos\!\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
-&= \cos\!\tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2+1)\pi\right)
-= \cos\!\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2+1)\pi\right) \\
-&= \begin{cases}
-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2+1 \text{ は偶数}) \\
--\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2+1 \text{ は奇数})
-\end{cases}
-= \begin{cases}
--\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は偶数}) \\
-\cos\tfrac{\theta_1+\theta_2}{2} & (n_1+n_2 \text{ は奇数})
-\end{cases}
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
+&= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2+1)\pi\right)
+&&(\because\ \text{準備の第三を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2+1\ \text{へ当てた})\\
+&= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi-\pi
+&&(\because\ \text{実数の分配則})
+\end{aligned}`),
       paragraph([
-        "同様に ",
-        math(String.raw`\sin`),
-        " も符号が反転するので、この場合 ",
+        "である。したがって左辺の 2 つの成分は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
+&= \cos\left(\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right)-\pi\right)
+&&(\because\ \text{いま計算した角})\\
+&= -\cos\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right)
+&&(\because\ \cos(x-\pi)=-\cos x)\\
+&= -\cos\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
+&&(\because\ \text{右辺に現れる角の計算})
+\end{aligned}`),
+      paragraph([
+        "および",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
+&= \sin\left(\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right)-\pi\right)
+&&(\because\ \text{いま計算した角})\\
+&= -\sin\left(\tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi\right)
+&&(\because\ \sin(x-\pi)=-\sin x)\\
+&= -\sin\tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
+&&(\because\ \text{右辺に現れる角の計算})
+\end{aligned}`),
+      paragraph([
+        "となり、2 つの成分がどちらも符号を変えたものになるので ",
         math(String.raw`\sqrt{z_1 z_2}=-\sqrt{z_1}\sqrt{z_2}`),
-        "。",
+        " である。",
       ]),
       paragraph([
-        "以上より、",
-        math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<2\pi \iff 0\leq\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)<2\pi`),
-        " などから結論を得る。",
+        "最後に、場合分けの条件を主張の形へ書き直す。",
+        math(String.raw`r_1\neq 0`),
+        " かつ ",
+        math(String.raw`r_2\neq 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1))\right)+s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_2))\right)
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&= s_{[0,2\pi)}\!\left([\theta_1]_{\sim_{\mathrm{angle}}}\right)+s_{[0,2\pi)}\!\left([\theta_2]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第1座標, 第2座標 の定義}\ \text{と}\ r_1,r_2\neq 0)\\
+&= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)
+&&(\because\ \text{準備の第三})\\
+&= \theta_1+\theta_2-2(n_1+n_2)\pi
+&&(\because\ \text{実数の加法の交換則・結合則と分配則})
+\end{aligned}`),
+      paragraph([
+        "なので、2 つの場合分けの条件は主張の 2 つの場合の条件と一致する。",
+        ref("def_abs_arg"),
+        "、",
+        ref("def_sqrt_cc"),
+        "、",
+        ref("sqrt_expansion_via_polar"),
+        "、",
+        ref("def_phi_cartesian"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("first_and_second_projections"),
+        "、",
+        ref("operations_on_polar_representation"),
+        "、",
+        ref("section_of_angle_representation"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        "、",
+        ref("isomorphism_of_phi_cartesian"),
+        " を引いた。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は 2 つの長い式変形の間と " +
+          "場合分けの間に日本語の説明が挟まっており、各行の根拠（φ_polar が積を保つこと・" +
+          "極座標表現の演算・pr_1 と pr_2 の適用・φ_cartesian の定義・三角関数の加法定理・" +
+          "角度表現の切断が一意に定める整数の同定）が書かれていなかったので、すべて段として明示した。" +
+          "段は増えており、減った段は無い。",
+        "原文の場合分けの順序を変えた。原文は 2 つの式変形を先に済ませてから r_1 r_2 = 0 かどうかで " +
+          "分けていたが、pr_2([(r,θ)]) = [θ] と書けるのは r ≠ 0 のときだけである" +
+          "（第1座標, 第2座標 の pr_2 は r = 0 で [0] を返す）。原文の第 1 の式変形はこの段を " +
+          "r_1 r_2 = 0 の場合にも当てており、そこだけ正しくなかった（結論は第 1 成分が 0 に " +
+          "なるので変わらない）。そこで r_1 r_2 が 0 かどうかで先に分け、0 でない場合だけで " +
+          "その段を使う形にした。",
+        "原文が書いていなかった「r_1 = 0 または r_2 = 0 の場合が主張のどちらの場合にあたるか」を " +
+          "足した。主張は場合ごとに符号が違うので、どちらの場合かを言わないと等式が主張のどの行に " +
+          "対応するのか決まらない。r_1 = 0 なら arg(z_1) = 0 であり、arg(z_2) ∈ [0,2π) なので " +
+          "第 1 の場合（符号が +1 の場合）にあたる。",
+        "cos と sin の符号反転を、原文の「n_1+n_2 の偶奇による場合分け」ではなく " +
+          "cos(x-π) = -cos x、sin(x-π) = -sin x で書いた。原文は偶奇の場合分けを 2 度（右辺と左辺で）" +
+          "行っており、同じ角の比較なら偶奇に踏み込む必要がないためである。" +
+          "主張と仮定は変えていない。",
+        "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_041_claim_sqrt_squared_is_original",
     kind: "claim",
     origin: { path: "_old/typst/parts/000_計算公式/040_claim_sqrtの2乗は元に戻る.typ", ordinal: 41 },
     title: { text: "sqrt の2乗は元に戻る" },
-    labels: [],
+    labels: ["sqrt_squared_is_original"],
     statement: [
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、", math(String.raw`\sqrt{z}\sqrt{z}=z`)]),
     ],
     proof: [
       paragraph([
-        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
-        "、",
-        math(String.raw`0\leq\theta-2n\pi<2\pi`),
-        " とすると ",
-        ref("sqrt_expansion_via_polar"),
-        " より ",
-        math(String.raw`\sqrt{z}=\phi_{\mathrm{cartesian}}\!\left([\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\theta/2-n\pi]_{\sim}\right)`),
-        " だから、",
+        "証明の中で使うものを 3 つ先に置く。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      paragraph([
+        "第一に、",
+        math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        " を ",
+        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
+        " なる代表元とし（",
+        ref("def_phi_polar"),
+        "、",
+        ref("polar_equivalence_class"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}`),
+        " を ",
+        math(String.raw`0\leq\theta-2n\pi<2\pi`),
+        " を満たすものとする（",
+        ref("angle_section_existence_uniqueness"),
+        " により各 ",
+        math(String.raw`\theta\in\mathbb{R}`),
+        " に対してただ一つ存在する）。",
+      ]),
+      paragraph([
+        "第二に、",
+        ref("isomorphism_of_phi_cartesian"),
+        " より ",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " はモノイド準同型であり、",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " である。",
+      ]),
+      paragraph([
+        "第三に、",
+        ref("polar_equivalence_class"),
+        " の同値関係 ",
+        math(String.raw`\sim`),
+        " は第 2 成分の ",
+        math(String.raw`2\pi`),
+        " の整数倍の差を同一視するので、",
+        math(String.raw`[(r,\theta-2n\pi)]_{\sim}=[(r,\theta)]_{\sim}`),
+        " である。",
+      ]),
+      paragraph([
+        "求めたい値から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
 \sqrt{z}\sqrt{z}
-&= \phi_{\mathrm{cartesian}}\!\left([\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\theta/2-n\pi]_{\sim}\right)
-   \cdot\phi_{\mathrm{cartesian}}\!\left([\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\theta/2-n\pi]_{\sim}\right) \\
-&= \phi_{\mathrm{cartesian}}\!\left([r,\theta-2n\pi]_{\sim}\right)
-   \quad(\because \sqrt{r}^{\,\mathbb{R}_{\geq 0}}\cdot\sqrt{r}^{\,\mathbb{R}_{\geq 0}}=r) \\
-&= \phi_{\mathrm{cartesian}}\!\left([r,\theta]_{\sim}\right)
-   = \phi_{\mathrm{cartesian}}(\phi_{\mathrm{polar}}(z)) = z
-\end{aligned}`,
-      ),
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+   \cdot\phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}
+   \cdot\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第二の}\ \phi_{\mathrm{cartesian}}\ \text{が積を保つこと})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}}\cdot\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{極座標表現の演算})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta-2n\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{実数の和の計算})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta\right)\right]_{\sim}\right)
+&&(\because\ \text{準備の第三})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\phi_{\mathrm{polar}}(z)\right)
+&&(\because\ r,\theta\ \text{の取り方})\\
+&= z
+&&(\because\ \text{準備の第二の}\ \phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}})
+\end{aligned}`),
+      paragraph([
+        "引いたブロックは ",
+        ref("sqrt_expansion_via_polar"),
+        "、",
+        ref("isomorphism_of_phi_cartesian"),
+        "、",
+        ref("operations_on_polar_representation"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("polar_equivalence_class"),
+        "、",
+        ref("def_phi_polar"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は 3 行の式で、根拠は途中の 1 行に " +
+          "sqrt(r)·sqrt(r)=r と書かれているだけだった。φ_cartesian が積を保つこと・" +
+          "極座標表現の演算・非負実数の sqrt の定義・同値関係 ~ が 2π の整数倍の差を" +
+          "同一視すること・φ_cartesian ∘ φ_polar = id をすべて段として明示し、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "原文が r,θ,n を導入せずに使っていたので、準備として書き下した。" +
+          "主張と仮定は変えていない。" +
+          "原文の [sqrt(r), θ/2-nπ]_~ という書き方（同値類の中の対に括弧が無い）は、" +
+          "同じファイルの他の証明と同じ [(r,θ)]_~ の形へ揃えた。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_042_claim_square_of_sqrt",
@@ -1948,17 +2484,88 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ),
     ],
     proof: [
-      paragraph([ref("condition_of_commutativity_of_sqrt_and_product"), " より、"]),
-      displayMath(
-        String.raw`\sqrt{z}\sqrt{z} =
-\begin{cases}
-\sqrt{z^2} & (0 \leq 2\arg^{[0,2\pi)}(z) < 2\pi) \\
--\sqrt{z^2} & (2\pi \leq 2\arg^{[0,2\pi)}(z) < 4\pi)
-\end{cases}`,
-      ),
-      paragraph([math(String.raw`\sqrt{z}\sqrt{z}=z`), " より結論を得る。"]),
+      paragraph([
+        "証明の中で使う記号を先に置く。",
+        math(String.raw`\alpha:=\arg^{[0,2\pi)}(z)\in\mathbb{R}`),
+        " と書く（",
+        ref("def_abs_arg"),
+        "）。主張の場合分けは ",
+        math(String.raw`\alpha`),
+        " の値によるものである。",
+      ]),
+      paragraph([
+        math(String.raw`0\leq\alpha<\pi`),
+        " の場合。このとき ",
+        math(String.raw`0\leq\alpha+\alpha<2\pi`),
+        " なので、",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " は ",
+        math(String.raw`z_1=z_2=z`),
+        " について第 1 の場合を与える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z
+&=\sqrt{z}\sqrt{z}
+&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&=\sqrt{z\cdot z}
+&&(\because\ \text{sqrt と積が可換になる条件の第 1 の場合})\\
+&=\sqrt{z^2}
+&&(\because\ z\cdot z=z^{2})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\pi\leq\alpha<2\pi`),
+        " の場合。このとき ",
+        math(String.raw`2\pi\leq\alpha+\alpha<4\pi`),
+        " なので、",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " は ",
+        math(String.raw`z_1=z_2=z`),
+        " について第 2 の場合、すなわち ",
+        math(String.raw`\sqrt{z\cdot z}=-\sqrt{z}\sqrt{z}`),
+        " を与える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z
+&=\sqrt{z}\sqrt{z}
+&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&=-\bigl(-\sqrt{z}\sqrt{z}\bigr)
+&&(\because\ \mathbb{C}\ \text{の元}\ w\ \text{について}\ -(-w)=w)\\
+&=-\sqrt{z\cdot z}
+&&(\because\ \text{sqrt と積が可換になる条件の第 2 の場合})\\
+&=-\sqrt{z^2}
+&&(\because\ z\cdot z=z^{2})
+\end{aligned}`),
+      paragraph([
+        "2 つの場合は ",
+        math(String.raw`\alpha\in[0,2\pi)`),
+        " を尽くしているので、主張を得る。",
+      ]),
+      paragraph([
+        "引いたブロックは ",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        "、",
+        ref("sqrt_squared_is_original"),
+        "、",
+        ref("def_abs_arg"),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は「sqrt と積が可換になる条件より」の 1 文と " +
+          "場合分けの式 1 本、そして「sqrt(z)sqrt(z)=z より結論を得る」の 1 文だけで、" +
+          "z から出発する式変形が書かれていなかった。場合ごとに z から始まる一続きの鎖にし、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "原文が 2arg(z) と書いていた条件は、引く先の主張が arg(z_1)+arg(z_2) の形をしているので " +
+          "α+α の形へ書き直した（同じ量だが、どの主張のどの場合を当てているのかを式に残すため）。" +
+          "第 2 の場合の符号の反転は -(-w)=w の 1 段として明示した。主張と仮定は変えていない。" +
+          "引く先の「sqrt の2乗は元に戻る」はラベルを持っていなかったので、" +
+          "ラベル参照で引けるように sqrt_squared_is_original を与えた。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_043_claim_sqrt_of_reciprocal",
@@ -1978,25 +2585,236 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     ],
     proof: [
       paragraph([
-        math(String.raw`\arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}(1/z)`),
-        " を計算すると、",
-        math(String.raw`\theta-2n\pi=0`),
-        " のとき ",
-        math(String.raw`0`),
-        "、",
-        math(String.raw`0<\theta-2n\pi<2\pi`),
-        " のとき ",
-        math(String.raw`2\pi`),
-        "。",
+        "証明の中で使うものを 4 つ先に置く。",
       ]),
       paragraph([
+        "第一に、",
+        math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        " を ",
+        math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
+        " なる代表元とし（",
+        ref("def_phi_polar"),
+        "、",
+        ref("polar_equivalence_class"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}`),
+        " を ",
+        math(String.raw`0\leq\theta-2n\pi<2\pi`),
+        " を満たすものとする（",
+        ref("angle_section_existence_uniqueness"),
+        "）。このとき ",
+        math(String.raw`\arg^{[0,2\pi)}(z)=\theta-2n\pi`),
+        " である（",
+        ref("def_abs_arg"),
+        "）。",
+      ]),
+      paragraph([
+        "第二に、仮定 ",
+        math(String.raw`z\neq 0`),
+        " により逆数 ",
+        math(String.raw`1/z`),
+        " が定まる（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+      ]),
+      paragraph([
+        "第三に、",
+        math(String.raw`\sqrt{z}\neq 0_{\mathbb{C}}`),
+        " である。実際 ",
+        math(String.raw`\sqrt{z}=0_{\mathbb{C}}`),
+        " とすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z
+&= \sqrt{z}\sqrt{z}
+&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&= 0_{\mathbb{C}}\cdot 0_{\mathbb{C}}
+&&(\because\ \text{この場合の仮定を 2 箇所へ適用})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \mathbb{C}\ \text{の積の定義})
+\end{aligned}`),
+      paragraph([
+        "となって ",
+        math(String.raw`z\neq 0`),
+        " に反する。したがって逆数 ",
+        math(String.raw`1/\sqrt{z}`),
+        " が定まる（",
+        ref("multiplicative_group_of_cc"),
+        "）。",
+      ]),
+      paragraph([
+        "第四に、",
+        math(String.raw`\sqrt{1_{\mathbb{C}}}=1_{\mathbb{C}}`),
+        " である。まず ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " の値を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}(1_{\mathbb{C}})
+&= \phi_{\mathrm{polar}}((1,0))
+&&(\because\ 1_{\mathbb{C}}=(1,0))\\
+&= \left[\left(\sqrt{1^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合})\\
+&= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の計算}\ 1^2+0^2=1)\\
+&= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の計算}\ 0/1=0)\\
+&= \left[\left(1,\ 0\right)\right]_{\sim}
+&&(\because\ \arctan 0=0)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`0\leq 0-2\cdot 0\cdot\pi<2\pi`),
+        " なので、この代表元に対する整数は ",
+        math(String.raw`0`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{1_{\mathbb{C}}}
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{の計算})\\
+&= (1\cdot\cos 0,\ 1\cdot\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&= (1\cdot 1,\ 1\cdot\sin 0)
+&&(\because\ \cos 0=1)\\
+&= (1\cdot 1,\ 1\cdot 0)
+&&(\because\ \sin 0=0)\\
+&= (1,\ 0)
+&&(\because\ \mathbb{R}\ \text{の積の計算を 2 箇所へ適用})\\
+&= 1_{\mathbb{C}}
+&&(\because\ 1_{\mathbb{C}}=(1,0))
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`\arg^{[0,2\pi)}(z)=0`),
+        " の場合。まず 2 つの偏角の和を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&= 0+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&&(\because\ \text{この場合の仮定})\\
+&= 0+0
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 1 の場合})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{の和の計算})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`0\leq 0<2\pi`),
+        " なので、以下では ",
         ref("condition_of_commutativity_of_sqrt_and_product"),
-        " より ",
-        math(String.raw`\sqrt{z}\cdot\sqrt{1/z}=\pm\sqrt{z\cdot(1/z)}=\pm 1`),
-        " から結論。",
+        " の第 1 の場合が当たる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{\frac{1}{z}}
+&= 1_{\mathbb{C}}\cdot\sqrt{\frac{1}{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})\\
+&= \left(\frac{1}{\sqrt{z}}\cdot\sqrt{z}\right)\cdot\sqrt{\frac{1}{z}}
+&&(\because\ \text{準備の第三で取った}\ 1/\sqrt{z}\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)
+&&(\because\ \mathbb{C}\ \text{の積の結合律})\\
+&= \frac{1}{\sqrt{z}}\cdot\sqrt{z\cdot\frac{1}{z}}
+&&(\because\ \text{sqrt と積が可換になる条件の第 1 の場合})\\
+&= \frac{1}{\sqrt{z}}\cdot\sqrt{1_{\mathbb{C}}}
+&&(\because\ \text{準備の第二で取った}\ 1/z\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot 1_{\mathbb{C}}
+&&(\because\ \text{準備の第四})\\
+&= \frac{1}{\sqrt{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<\arg^{[0,2\pi)}(z)<2\pi`),
+        " の場合。まず 2 つの偏角の和を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
+&= \arg^{[0,2\pi)}(z)+\left(2\pi-\arg^{[0,2\pi)}(z)\right)
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 2 の場合})\\
+&= 2\pi
+&&(\because\ \mathbb{R}\ \text{の和の計算})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`2\pi\leq 2\pi<4\pi`),
+        " なので、以下では ",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " の第 2 の場合が当たる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{\frac{1}{z}}
+&= 1_{\mathbb{C}}\cdot\sqrt{\frac{1}{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})\\
+&= \left(\frac{1}{\sqrt{z}}\cdot\sqrt{z}\right)\cdot\sqrt{\frac{1}{z}}
+&&(\because\ \text{準備の第三で取った}\ 1/\sqrt{z}\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)
+&&(\because\ \mathbb{C}\ \text{の積の結合律})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-\left(-\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)\right)\right)
+&&(\because\ -(-w)=w)\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-\sqrt{z\cdot\frac{1}{z}}\right)
+&&(\because\ \text{sqrt と積が可換になる条件の第 2 の場合})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-\sqrt{1_{\mathbb{C}}}\right)
+&&(\because\ \text{準備の第二で取った}\ 1/z\ \text{の定め方})\\
+&= \frac{1}{\sqrt{z}}\cdot\left(-1_{\mathbb{C}}\right)
+&&(\because\ \text{準備の第四})\\
+&= -\left(\frac{1}{\sqrt{z}}\cdot 1_{\mathbb{C}}\right)
+&&(\because\ \mathbb{C}\ \text{の積と符号の関係}\ a\cdot(-b)=-(a\cdot b))\\
+&= -\frac{1}{\sqrt{z}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "引いたブロックは ",
+        ref("def_phi_polar"),
+        "、",
+        ref("polar_equivalence_class"),
+        "、",
+        ref("angle_section_existence_uniqueness"),
+        "、",
+        ref("def_abs_arg"),
+        "、",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("definition_of_cc"),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        "、",
+        ref("def_phi_cartesian"),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        ref("sqrt_expansion_via_polar"),
+        "、",
+        ref("sqrt_squared_is_original"),
+        "、",
+        ref("range_of_args_of_reciprocal_of_complex_numbers"),
+        "、",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " である。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は日本語 2 文だけで、" +
+          "偏角の和の計算も、sqrt(1/z) から出発する式変形も 1 行も書かれていなかった。" +
+          "場合ごとに sqrt(1/z) から始まる一続きの鎖（第 1 の場合 7 段、第 2 の場合 9 段）にし、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "原文が暗黙にしていた根拠を準備として書き下した。とくに " +
+          "sqrt(z) ≠ 0（1/sqrt(z) が定まるために要る）と sqrt(1_C) = 1_C は、" +
+          "原文が「= ±1」と書いたところで黙って使っていたものである。" +
+          "第 2 の場合の符号は、可換条件が sqrt(z_1 z_2) = -sqrt(z_1)sqrt(z_2) の向きなので、" +
+          "-(-w) = w を 1 段挟んで向きを合わせた。主張と仮定は変えていない。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_044_claim_reciprocal_of_sqrt",
@@ -2005,7 +2823,10 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { tex: String.raw`\mathbb{C}\text{の}\sqrt{\cdot}\text{の逆数}` },
     labels: ["sqrt_cc_of_inverse"],
     statement: [
-      paragraph([math(String.raw`z \in \mathbb{C}`), " について、"]),
+      paragraph([
+        math(String.raw`z \in \mathbb{C},\ z \neq 0`),
+        " について、",
+      ]),
       displayMath(
         String.raw`(\sqrt{z})^{-1} = \frac{1}{\sqrt{z}} =
 \begin{cases}
@@ -2015,9 +2836,73 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ),
     ],
     proof: [
-      paragraph([ref("inverse_of_sqrt_cc"), " より。"]),
+      paragraph([
+        "証明の中で使うものを 1 つ先に置く。",
+        math(String.raw`z \neq 0`),
+        " なので ",
+        ref("inverse_of_sqrt_cc"),
+        " の準備の第三と同じ議論により ",
+        math(String.raw`\sqrt{z}\neq 0`),
+        " であり、",
+        math(String.raw`\mathbb{C}`),
+        " の乗法群（",
+        ref("multiplicative_group_of_cc"),
+        "）の中で ",
+        math(String.raw`\sqrt{z}`),
+        " の逆元 ",
+        math(String.raw`(\sqrt{z})^{-1}`),
+        " が定まる。",
+        math(String.raw`1/\sqrt{z}`),
+        " はこの逆元の別の書き方である。",
+      ]),
+      paragraph([
+        math(String.raw`\arg^{[0,2\pi)}(z) = 0`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sqrt{z})^{-1}
+&= \frac{1}{\sqrt{z}}
+&&(\because\ 1/\sqrt{z}\ \text{は逆元}\ (\sqrt{z})^{-1}\ \text{の別の書き方である})\\
+&= \sqrt{\frac{1}{z}}
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 1 の場合})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0 < \arg^{[0,2\pi)}(z) < 2\pi`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sqrt{z})^{-1}
+&= \frac{1}{\sqrt{z}}
+&&(\because\ 1/\sqrt{z}\ \text{は逆元}\ (\sqrt{z})^{-1}\ \text{の別の書き方である})\\
+&= -\left(-\frac{1}{\sqrt{z}}\right)
+&&(\because\ -(-w)=w)\\
+&= -\sqrt{\frac{1}{z}}
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 2 の場合})
+\end{aligned}`),
+      paragraph([
+        "引いたブロックは ",
+        ref("multiplicative_group_of_cc"),
+        "、",
+        ref("inverse_of_sqrt_cc"),
+        " である。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文の証明は「ℂ の逆数の sqrt より。」の 1 文だけで、" +
+          "(sqrt(z))^{-1} から出発する式変形が 1 行も書かれていなかった。" +
+          "場合ごとに (sqrt(z))^{-1} から始まる一続きの鎖（第 1 の場合 2 段、第 2 の場合 3 段）にし、" +
+          "行末へ (∵ …) を付けた。段は増えており、減った段は無い。" +
+          "第 2 の場合は、引く先が sqrt(1/z) = -1/sqrt(z) の向きなので、" +
+          "-(-w) = w を 1 段挟んで向きを合わせた。" +
+          "仮定を 1 つ足した。原文の主張には z ≠ 0 が無かったが、(sqrt(z))^{-1} が定まるためにも、" +
+          "引く先の主張（ℂ の逆数の sqrt）の仮定を満たすためにも要る。" +
+          "これは書き方の統一ではなく、原文に欠けていた仮定の補いである。" +
+          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_045_theorem_euler_formula_cos_sin",
@@ -2035,15 +2920,57 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ),
     ],
     proof: [
-      paragraph(["Eulerの公式 ", math(String.raw`e^{i\theta} = \cos\theta + i\sin\theta`), " より、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-e^{i\theta} &= \cos\theta + i\sin\theta \\
-e^{-i\theta} &= \cos\theta - i\sin\theta
-\end{aligned}`,
-      ),
-      paragraph(["辺々加えると ", math(String.raw`e^{i\theta}+e^{-i\theta}=2\cos\theta`), "、辺々引くと ", math(String.raw`e^{i\theta}-e^{-i\theta}=2i\sin\theta`), "。"]),
+      paragraph([
+        "準備として、Eulerの公式 ",
+        math(String.raw`e^{i\varphi} = \cos\varphi + i\sin\varphi`),
+        " を ",
+        math(String.raw`\varphi=-\theta`),
+        " で使う形を書いておく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e^{-i\theta}
+&=\cos(-\theta) + i\sin(-\theta)
+&&(\because\ \text{Eulerの公式})\\
+&=\cos\theta + i\,(-\sin\theta)
+&&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
+&=\cos\theta - i\sin\theta
+\end{aligned}`),
+      paragraph(["第 1 の等式を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+\cos\theta
+&=\frac{2\cos\theta}{2}\\
+&=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2}
+&&(\because\ i\sin\theta\ \text{を足して引いた})\\
+&=\frac{e^{i\theta} + (\cos\theta - i\sin\theta)}{2}
+&&(\because\ \text{Eulerの公式})\\
+&=\frac{e^{i\theta} + e^{-i\theta}}{2}
+&&(\because\ \text{上の準備})
+\end{aligned}`),
+      paragraph([
+        "第 2 の等式を示す。",
+        math(String.raw`2i\neq0`),
+        " なので割ってよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sin\theta
+&=\frac{2i\sin\theta}{2i}\\
+&=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2i}
+&&(\because\ \cos\theta\ \text{を足して引いた})\\
+&=\frac{e^{i\theta} - (\cos\theta - i\sin\theta)}{2i}
+&&(\because\ \text{Eulerの公式})\\
+&=\frac{e^{i\theta} - e^{-i\theta}}{2i}
+&&(\because\ \text{上の準備})
+\end{aligned}`),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は「辺々加えると／辺々引くと」の 1 文で" +
+        "主張の左辺から始まる式変形が 1 行も無かったので、cos θ と sin θ のそれぞれから始まる" +
+        "一続きの鎖（各 4 段）にし、行末へ (∵ …) を付けた。" +
+        "原文が黙って使っていた 2 つ——e^{-iθ} を cos θ - i sin θ に書き換えるのに要る" +
+        "cos の偶性と sin の奇性、および 2i ≠ 0——を明示した。段は増えており、減った段は無い。",
+      ],
+    },
   },
 ]);

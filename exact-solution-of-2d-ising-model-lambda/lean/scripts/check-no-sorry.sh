@@ -22,6 +22,25 @@ fi
 
 status=0
 
+# 0. どの .lean も入口から import されていること。
+#    **import されていないファイルはビルドも検査もされない。** 実測: 型エラーで壊れた下書きが
+#    import されないまま置かれ、lake build も sorry 検査も通ってしまった
+#    （壊れた宣言は字面に sorry が無くても sorryAx を使う）。
+orphans=""
+while IFS= read -r file; do
+  module="$(printf '%s' "$file" | sed 's#/#.#g; s#\.lean$##')"
+  grep -q "^import ${module}$" Ising2DLambda.lean || orphans="${orphans}  ${file}
+"
+done < <(find Ising2DLambda -name '*.lean' | sort)
+
+if [ -n "$orphans" ]; then
+  echo "NG: 入口 Ising2DLambda.lean から import されていない .lean がある（ビルドも検査もされない）:" >&2
+  printf '%s' "$orphans" >&2
+  status=1
+else
+  echo "OK: すべての .lean が入口から import されている"
+fi
+
 # 1. ソース中に sorry / admit が残っていないか
 if grep -rn --include='*.lean' -E '\bsorry\b|\badmit\b' Ising2DLambda.lean Ising2DLambda/; then
   echo "NG: ソース中に sorry / admit が残っている" >&2
@@ -280,6 +299,229 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_total
   Ising2DLambda.AlgebraicEigenvalue.card_crossOrderedPairsImage_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.card_crossInversions_eq_two_mul_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.inversionCount_eq_card_inversionPairs
+  Ising2DLambda.AlgebraicEigenvalue.orbitInversionCount_congr
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestrictionAmbient_eq
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_filter
+  Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs
+  Ising2DLambda.AlgebraicEigenvalue.card_same_add_card_cross
+  Ising2DLambda.AlgebraicEigenvalue.sameOrbitInversionPairs_eq_biUnion
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.inversionCount_orbit_decomposition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inner_eq_filter_crossPairs
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_same_add_card_cross
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sameOrbit_eq_biUnion
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.innerInversionPairs_pairwiseDisjoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversion_count_decomposition
+  Ising2DLambda.AlgebraicEigenvalue.inversionPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.innerInversionPairs_eq_filter_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.card_innerInversionPairs_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.existsUnique_rowConfigMin
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_isMin
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_mem
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_le
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftOrbit_nonempty
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_orbit_ne
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.exists_min
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.min_unique
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.existsUnique_min
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.ne_of_mem_of_mem_of_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_compare
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_asymm
+  Ising2DLambda.AlgebraicEigenvalue.isRowConfigMin_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.existsUnique_rowConfigMin_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_orbit_ne_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.inversionCount_orbit_decomposition_from_necSuf
+  # 「またぐ転倒対の全体の個数の偶数性」（定義 1 件・主張 3 件）
+  Ising2DLambda.AlgebraicEigenvalue.ne_of_mem_orientedOrbitPairs
+  Ising2DLambda.AlgebraicEigenvalue.swap_not_mem_orientedOrbitPairs
+  Ising2DLambda.AlgebraicEigenvalue.mem_orientedOrbitPairs_or_swap
+  Ising2DLambda.AlgebraicEigenvalue.crossInversions_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_biUnion
+  Ising2DLambda.AlgebraicEigenvalue.card_crossOrbitInversionPairs_eq_two_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.crossInv_disjoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.crossInv_eq_biUnion
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_biUnion_eq_two_mul
+  Ising2DLambda.AlgebraicEigenvalue.crossInversions_disjoint_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.crossOrbitInversionPairs_eq_biUnion_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.card_crossOrbitInversionPairs_eq_two_mul_from_necSuf
+  # 「軌道を保つ置換の符号は軌道ごとの符号の積である」（定義 1 件・主張 1 件）
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_congr
+  Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_prod_pow_of_even_remainder
+  Ising2DLambda.AlgebraicEigenvalue.permSign_eq_prod_orbitPermSign_from_necSuf
+  # 「軌道を保つ置換の項は軌道ごとの因子の積である」（定義 1 件・主張 3 件）
+  Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod
+  Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit
+  Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.map_prod_of_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_eq_prod_of_partition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_prod_eq_prod_mul_of_decomp
+  Ising2DLambda.AlgebraicEigenvalue.constSecond_constPoly_prod_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_eq_prod_orbit_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.term_eq_prod_orbitFactor_from_necSuf
+  # 「χ_U を軌道を保つ置換にわたる和へ絞ること」（主張 2 件）
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_congr
+  Ising2DLambda.AlgebraicEigenvalue.orbitRestrictionAmbient_eq_coe
+  Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_of_not_orbitPreserving
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_orbitFactor
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_zero_of_not_of_forall_or
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_subset_congr
+  Ising2DLambda.AlgebraicEigenvalue.charTerm_shiftMatrix_eq_zero_of_not_orbitPreserving_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_orbitFactor_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.restrictionFamily_glue
+  Ising2DLambda.AlgebraicEigenvalue.glue_restrictionFamily
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_family
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_of_inverse
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_sum_family_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFamilyInsert_leftInverse
+  Ising2DLambda.AlgebraicEigenvalue.orbitFamilyInsert_rightInverse
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.insertFamily_leftInverse
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.insertFamily_rightInverse
+  Ising2DLambda.AlgebraicEigenvalue.orbitFamilyInsert_leftInverse_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFamilyInsert_rightInverse_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_attach_orbitInsertFamily
+  Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamily
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_attach_insertFamily
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_family
+  Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamily_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamilyAll
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_sum
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_pi
+  Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamilyAll_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_orbitPreserving
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.self_apply_mem_orbit
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_orbitPreserving_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitBij_eq_id_or_shift
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_id_or_apply_of_fixed_or_apply
+  Ising2DLambda.AlgebraicEigenvalue.orbitBij_eq_id_or_shift_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_one_or_neg_one
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_mul_self
+  Ising2DLambda.AlgebraicEigenvalue.orbitInversionCount_id
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_id
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_eq_or
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_mul_self
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversionCountOn_id
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_id
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_one_or_neg_one_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_mul_self_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_id_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_involutive
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_mem
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionRestriction_val
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.transpositionOn_involutive
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.transpositionOn_mem
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_involutive_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_mem_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionRestriction_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitInversionCount_eq_card
+  Ising2DLambda.AlgebraicEigenvalue.orbitInversionSet_eq
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_inversionCount
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_sign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversionSetOn_transposition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversionCountOn_transposition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_transposition
+  Ising2DLambda.AlgebraicEigenvalue.orbitInversionSet_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_inversionCount_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTransposition_sign_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_mem_of_mem_orbitSet
+  Ising2DLambda.AlgebraicEigenvalue.bijective_comp_of_bijective
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_bijective
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.bijective_comp_of_bijective
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.compositeUpTo_bijective
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_compositeUpTo
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_bijective_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_index_eq_of_lt_period
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_le_of_symm
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_index_eq_of_lt_period_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_ne_of_ne_of_lt_period
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_apply_rowShiftIterate
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.composite_apply_of_rec
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_apply_rowShiftIterate_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_rowShiftRestriction
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.composite_eq_of_values
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_rowShiftRestriction_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_comp
+  Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_comp_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_of_iterated_step
+  Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftOrbitRestriction_sign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_at_top_of_iterated
+  Ising2DLambda.AlgebraicEigenvalue.shiftOrbitRestriction_sign_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbitFactor_eq_zero_of_entry_zero
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_self_iff_card_orbit_eq_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.step_eq_self_iff_period_eq_one
+  Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_self_iff_card_orbit_eq_one_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_two_le
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_card_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.entry_of_not_right
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.entry_of_right
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_two_le_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_card_one_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_two_le
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_card_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.unitSignProd_eq_pow
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.unitSignProd_eq_single
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_two_le_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_card_one_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.constSecond_neg_one
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_shift_entry
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signedProd_eq_unit
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero_of_not_mem_pair
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix_eq_sum_pair
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_ambientOf_refl
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_ambientOf_shift
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_sum_pair_of_outside_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_add_of_outside_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_single_of_outside_zero
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.one_add_negUnitSecond
+  Ising2DLambda.AlgebraicEigenvalue.add_negUnitSecond_mul_eq_zero
+  Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.add_mul_self_eq_zero_of_one_add_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_eq_mul_geom
+  Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitCard_dvd_L
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_mul_geom_eq_pow_L
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_dvd_pow_add_of_dvd
+  Ising2DLambda.AlgebraicEigenvalue.orbitSum_mul_geom_eq_pow_L_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_pair_eq_pow_card_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_dvd_pow_L
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_dvd_pow_card_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_dvd_pow_L_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_congr_of_eq
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_factor
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_congr_of_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_factor_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_one_of_dvd_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_orbitFactor
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_orbitFactor_eval_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.eval₂_X_pow_add_C_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_orbitFactor_eval_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_one
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_mul
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_prod
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_prod_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_charPoly_shiftMatrix_eval_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mem_of_prod_eval_eq_zero_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_charPoly_shiftMatrix_eval_eq_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

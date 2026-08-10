@@ -9,12 +9,13 @@
     "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "validate": "node tools/validate-content.ts",
+    "validate:lean": "node tools/verify-lean-linkage.ts",
     "test:types": "node tools/negative-type-test.ts",
     "test:runtime": "node tools/schema-runtime-test.ts",
     "build:tex": "node tools/build-latex.ts",
     "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
     "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:no-notes && npm run test:types && npm run test:runtime"
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run validate:lean && npm run verify:no-notes && npm run test:types && npm run test:runtime"
   },
   "dependencies": {
     "zod": "3.25.76"

@@ -24,8 +24,7 @@ export default defineBlocks([
       ]),
     ],
     proof: [
-      paragraph(["（共役写像 ", math(String.raw`T_B`), " の定義は ", ref("mat_conj"), "）"]),
-      paragraph(["Step 1: 乗法性。", math(String.raw`A, C \in \mathrm{Mat}(n,\mathbb{C})`), " に対して、"]),
+      paragraph(["乗法性を示す。", math(String.raw`A, C \in \mathrm{Mat}(n,\mathbb{C})`), " とする。"]),
       displayMath(
         String.raw`\begin{aligned}
 T_B(AC)
@@ -38,7 +37,8 @@ T_B(AC)
 &= T_B(A) T_B(C) \quad (\because T_B \text{ の定義})
 \end{aligned}`,
       ),
-      paragraph(["Step 2: 単位性。"]),
+      paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
+      paragraph(["単位性を示す。"]),
       displayMath(
         String.raw`\begin{aligned}
 T_B(I)
@@ -47,10 +47,11 @@ T_B(I)
 &= I \quad (\because BB^{-1} = I)
 \end{aligned}`,
       ),
+      paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
       paragraph([
-        "Step 3: 合成則。",
+        "合成則を示す。",
         math(String.raw`A, B \in (\mathrm{Mat}(n,\mathbb{C}))^\times`),
-        "（正則）とする。まず、行列の積の逆元 ",
+        "（正則）とする。準備として、行列の積の逆元 ",
         math(String.raw`(AB)^{-1} = B^{-1}A^{-1}`),
         " を確認する。",
         math(String.raw`B^{-1}A^{-1}`),
@@ -98,6 +99,7 @@ T_B(I)
 &= T_{AB}(M) \quad (\because T_{AB} \text{ の定義})
 \end{aligned}`,
       ),
+      paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
       paragraph([
         "が成り立つ。よって、任意の ",
         math(String.raw`M \in \mathrm{Mat}(n,\mathbb{C})`),
@@ -108,7 +110,12 @@ T_B(I)
         " である。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。Step 1 / Step 2 / Step 3 という番号での区切りを、それぞれの中間目標の名前（乗法性・単位性・合成則）へ変えた。合成則の中の逆元の公式は式変形ではなく準備なので、そう呼び直した。証明の冒頭に置かれていた共役写像の定義への参照を、それを使った各鎖の直後へ移した（この生成器は \\blkref を定義していないので、(∵ …) の中には題を書き、ラベル参照は式の直後に置く）。式変形の段は 1 つも増減していない。",
+      ],
+    },
   },
   {
     id: "calculation_formulae_047_claim_commutator_via_anticommutators",
@@ -131,18 +138,22 @@ T_B(I)
       paragraph(["が成り立つ。"]),
     ],
     proof: [
-      paragraph(["右辺を反交換子の定義に従って展開する。"]),
       displayMath(
         String.raw`\begin{aligned}
-a[b, c]_+ - [a, c]_+ b
-&= a(bc + cb) - (ac + ca)b \quad (\because \text{反交換子の定義}) \\
-&= abc + acb - acb - cab \quad (\because \text{行列の積の分配法則・結合法則}) \\
-&= abc - cab \\
-&= (ab)c - c(ab) \quad (\because \text{行列の積の結合法則}) \\
-&= [ab, c] \quad (\because \text{交換子の定義})
+[ab, c]
+&= (ab)c - c(ab) \quad (\because \text{交換子の定義}) \\
+&= abc - cab \quad (\because \text{行列の積の結合法則}) \\
+&= abc + acb - acb - cab \quad (\because\ acb - acb = O) \\
+&= a(bc + cb) - (ac + ca)b \quad (\because \text{行列の積の分配法則と結合法則}) \\
+&= a[b, c]_+ - [a, c]_+ b \quad (\because \text{反交換子の定義})
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は右辺から始めて左辺へ着く鎖だったので、主張の左辺 [ab, c] から始める向きへ書き直した。原文が黙って使っていた「acb - acb = O を足す」段を 1 行として明示し、原文が 1 行にまとめていた結合法則と分配法則の適用を分けた。段は増えており、減った段は無い。",
+      ],
+    },
   },
 ]);

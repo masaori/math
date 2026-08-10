@@ -80,9 +80,13 @@ export default defineBlocks([
         " であるから",
       ]),
       displayMath(
-        String.raw`\frac{a^{m+1}}{(m+1)!}=\frac{a}{m+1}\cdot\frac{a^m}{m!}
-\le\frac{1}{2}\cdot\frac{a^m}{m!}
-\qquad (m\ge m_0)`,
+        String.raw`\begin{aligned}
+\frac{a^{m+1}}{(m+1)!}
+&= \frac{a}{m+1}\cdot\frac{a^m}{m!}
+\quad (\because\ (m+1)! = (m+1)\cdot m!) \\
+&\le \frac{1}{2}\cdot\frac{a^m}{m!}
+\quad (\because\ a/(m+1)\le 1/2 \text{ と } a^m/m!\ge 0)
+\end{aligned}`,
       ),
       paragraph([
         "これを ",
@@ -108,10 +112,15 @@ export default defineBlocks([
         " のとき等比数列の和の公式より",
       ]),
       displayMath(
-        String.raw`\sum_{m=m_0}^{N}\frac{a^m}{m!}
-\le\frac{a^{m_0}}{m_0!}\sum_{k=0}^{N-m_0}\left(\frac{1}{2}\right)^k
-=\frac{a^{m_0}}{m_0!}\left(2-\left(\frac{1}{2}\right)^{N-m_0}\right)
-\le\frac{2a^{m_0}}{m_0!}`,
+        String.raw`\begin{aligned}
+\sum_{m=m_0}^{N}\frac{a^m}{m!}
+&\le \frac{a^{m_0}}{m_0!}\sum_{k=0}^{N-m_0}\left(\frac{1}{2}\right)^k
+\quad (\because \text{各項へ直前の評価 } a^{m_0+k}/(m_0+k)!\le (1/2)^k a^{m_0}/m_0! \text{ を適用した}) \\
+&= \frac{a^{m_0}}{m_0!}\left(2-\left(\frac{1}{2}\right)^{N-m_0}\right)
+\quad (\because \text{等比数列の和の公式}) \\
+&\le \frac{2a^{m_0}}{m_0!}
+\quad (\because (1/2)^{N-m_0}\ge 0)
+\end{aligned}`,
       ),
       paragraph([
         "したがって ",
@@ -154,8 +163,15 @@ export default defineBlocks([
         " について",
       ]),
       displayMath(
-        String.raw`\sum_{m=p}^{q}\frac{a^m}{m!}=E_q(a)-E_{p-1}(a)\le E(a)-E_{p-1}(a)=R_{p-1}(a)
-\quad (\because (2))`,
+        String.raw`\begin{aligned}
+\sum_{m=p}^{q}\frac{a^m}{m!}
+&= E_q(a)-E_{p-1}(a)
+\quad (\because E_N(a)=\sum_{m=0}^{N}a^m/m! \text{ の差}) \\
+&\le E(a)-E_{p-1}(a)
+\quad (\because (2)) \\
+&= R_{p-1}(a)
+\quad (\because R_N(a)=E(a)-E_N(a) \text{ の定義})
+\end{aligned}`,
       ),
     ],
     conversion: {
@@ -232,7 +248,17 @@ export default defineBlocks([
         " より",
       ]),
       displayMath(
-        String.raw`\|A^{m+1}\|=\|A^m A\|\le\|A^m\|\cdot\|A\|\le\|A\|^m\cdot\|A\|=\|A\|^{m+1}`,
+        String.raw`\begin{aligned}
+\|A^{m+1}\|
+&= \|A^m A\|
+\quad (\because A^{m+1}=A^m A) \\
+&\le \|A^m\|\cdot\|A\|
+\quad (\because \text{ノルムの劣乗法性}) \\
+&\le \|A\|^m\cdot\|A\|
+\quad (\because \text{帰納法の仮定}) \\
+&= \|A\|^{m+1}
+\quad (\because \text{冪の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 2: 実数級数 ",
@@ -248,13 +274,20 @@ export default defineBlocks([
         "）であるから、Step 1 より",
       ]),
       displayMath(
-        String.raw`\sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
-= \|I\| + \sum_{m=1}^{N}\frac{\|A^m\|}{m!}
-\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
-\le \|I\| + E(\|A\|) = M_A`,
+        String.raw`\begin{aligned}
+\sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
+&= \|I\| + \sum_{m=1}^{N}\frac{\|A^m\|}{m!}
+\quad (\because m=0 \text{ の項は } \|A^0\|=\|I\| \text{、他の項は上の等式}) \\
+&\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
+\quad (\because \text{Step 1}) \\
+&\le \|I\| + E(\|A\|)
+\quad (\because \text{非負実数の指数級数の収束 } (2)) \\
+&= M_A
+\quad (\because M_A \text{ の定義})
+\end{aligned}`,
       ),
       paragraph([
-        "（最後の不等号は ",
+        "（第 3 行の不等号は ",
         ref("real_exp_series_converges"),
         " (2) による。）この実数級数は非負項なので部分和は単調非減少であり、いま ",
         math(String.raw`M_A`),
@@ -272,15 +305,33 @@ export default defineBlocks([
         " において収束する。",
       ]),
       paragraph([
-        "Step 4: (2)。",
+        "Step 4: (2)。有限和については",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|S_N(A)\|
+&\le \sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
+\quad (\because \text{ノルムの三角不等式 } (3) \text{ を繰り返し用いる}) \\
+&\le M_A
+\quad (\because \text{Step 2 の評価})
+\end{aligned}`,
+      ),
+      paragraph(["である。無限和については"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right\|
+&\le \sum_{m=0}^{\infty}\left\|\frac{1}{m!}A^m\right\|
+\quad (\because \text{Mat}(n,K) \text{ の完備性と絶対収束判定 } (2) \text{ の後半}) \\
+&\le M_A
+\quad (\because \text{Step 2 の評価})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
         ref("matrix_norm_triangle_inequality"),
-        " (3) を繰り返し用いると ",
-        math(String.raw`\|S_N(A)\|\le\sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|\le M_A`),
-        "。また ",
+        " と ",
         ref("matrix_completeness"),
-        " (2) の後半より ",
-        math(String.raw`\left\|\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right\|\le\sum_{m=0}^{\infty}\left\|\frac{1}{m!}A^m\right\|\le M_A`),
-        "。",
+        "）。",
       ]),
     ],
     conversion: {
@@ -478,7 +529,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " に適用して",
       ]),
       displayMath(
-        String.raw`0\le\left|(S_N)_{ij}-S_{ij}\right|\le\|S_N-S\|`,
+        String.raw`\begin{aligned}
+0
+&\le \left|(S_N)_{ij}-S_{ij}\right|
+&&(\because\ \text{絶対値は非負である})\\
+&= \left|(S_N-S)_{ij}\right|
+&&(\because\ \text{行列の差は成分ごとの差である})\\
+&\le \|S_N-S\|
+&&(\because\ \text{Step 1 を}\ B=S_N-S\ \text{に適用する})
+\end{aligned}`,
       ),
       paragraph([
         "右辺は ",
@@ -497,7 +556,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " より",
       ]),
       displayMath(
-        String.raw`0\le\|S_Nv-Sv\|=\|(S_N-S)v\|\le\|S_N-S\|\cdot\|v\|`,
+        String.raw`\begin{aligned}
+0
+&\le \|S_Nv-Sv\|
+&&(\because\ \text{ノルムは非負である})\\
+&= \|(S_N-S)v\|
+&&(\because\ \text{行列と数ベクトルの積の分配律})\\
+&\le \|S_N-S\|\cdot\|v\|
+&&(\because\ \text{行列のノルムによる数ベクトルの評価})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\|v\|`),
@@ -555,9 +622,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " (3) を有限個の項に繰り返し用い、続いて同 (2) を用いると",
       ]),
       displayMath(
-        String.raw`\|\Phi(Y)\|
-\le \sum_{k=1}^{n}\sum_{l=1}^{n}\left\|y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
-= \sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`,
+        String.raw`\begin{aligned}
+\|\Phi(Y)\|
+&= \left\|\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
+&&(\because\ \text{直前の等式})\\
+&\le \sum_{k=1}^{n}\sum_{l=1}^{n}\left\|y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
+&&(\because\ \text{三角不等式を有限個の項に繰り返し用いる})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|
+&&(\because\ \text{スカラー倍のノルム})
+\end{aligned}`,
       ),
       paragraph([
         "この二重和に Cauchy--Schwarz の不等式を適用する。全単射",
@@ -576,15 +649,19 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " に適用すると",
       ]),
       displayMath(
-        String.raw`\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|\right)^2
-\le\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|^2\right)
+        String.raw`\begin{aligned}
+\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|\right)^2
+&\le\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|^2\right)
 \left(\sum_{k=1}^{n}\sum_{l=1}^{n}\left\|\Phi\!\left(E^{(k,l)}\right)\right\|^2\right)
-=\|Y\|^2\,c_{\Phi}^2=\left(c_{\Phi}\|Y\|\right)^2`,
+&&(\because\ \text{有限列に対する Cauchy--Schwarz の不等式})\\
+&=\|Y\|^2\,c_{\Phi}^2
+&&(\because\ \left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a\ \text{を両方の和に用いる})\\
+&=\left(c_{\Phi}\|Y\|\right)^2
+&&(\because\ \text{非負実数の積の平方})
+\end{aligned}`,
       ),
       paragraph([
-        "（最後から 2 番目の等号は ",
-        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
-        " による）。左辺の平方の中身 ",
+        "左辺の平方の中身 ",
         math(String.raw`\sum_{k,l}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`),
         " と ",
         math(String.raw`c_{\Phi}\|Y\|`),
@@ -621,17 +698,23 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
       displayMath(
         String.raw`\begin{aligned}
 \Phi^{m+1}(Y+Z)
-&= \Phi\!\left(\Phi^m(Y+Z)\right) \\
+&= \Phi\!\left(\Phi^m(Y+Z)\right)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
 &= \Phi\!\left(\Phi^m(Y)+\Phi^m(Z)\right)
 \quad (\because \Phi^m \text{ の線型性}) \\
 &= \Phi\!\left(\Phi^m(Y)\right)+\Phi\!\left(\Phi^m(Z)\right)
 \quad (\because \Phi \text{ の線型性}) \\
-&= \Phi^{m+1}(Y)+\Phi^{m+1}(Z) \\
+&= \Phi^{m+1}(Y)+\Phi^{m+1}(Z)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
 \Phi^{m+1}(cY)
 &= \Phi\!\left(\Phi^m(cY)\right)
-= \Phi\!\left(c\,\Phi^m(Y)\right)
-= c\,\Phi\!\left(\Phi^m(Y)\right)
-= c\,\Phi^{m+1}(Y)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
+&= \Phi\!\left(c\,\Phi^m(Y)\right)
+\quad (\because \Phi^m \text{ の線型性}) \\
+&= c\,\Phi\!\left(\Phi^m(Y)\right)
+\quad (\because \Phi \text{ の線型性}) \\
+&= c\,\Phi^{m+1}(Y)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m)
 \end{aligned}`,
       ),
       paragraph([
@@ -642,17 +725,18 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         "-線型。ノルムについては Step 5 と帰納法の仮定より",
       ]),
       displayMath(
-        String.raw`\left\|\Phi^{m+1}(Y)\right\|
-= \left\|\Phi\!\left(\Phi^m(Y)\right)\right\|
-\le c_{\Phi}\left\|\Phi^m(Y)\right\|
-\le c_{\Phi}\cdot c_{\Phi}^{\,m}\|Y\|
-= c_{\Phi}^{\,m+1}\|Y\|`,
+        String.raw`\begin{aligned}
+\left\|\Phi^{m+1}(Y)\right\|
+&= \left\|\Phi\!\left(\Phi^m(Y)\right)\right\|
+&&(\because\ \Phi^{m+1}=\Phi\circ\Phi^m)\\
+&\le c_{\Phi}\left\|\Phi^m(Y)\right\|
+&&(\because\ \text{Step 5 を}\ Y=\Phi^m(Y)\ \text{に適用する})\\
+&\le c_{\Phi}\cdot c_{\Phi}^{\,m}\|Y\|
+&&(\because\ \text{帰納法の仮定と}\ c_{\Phi}\ge 0)\\
+&= c_{\Phi}^{\,m+1}\|Y\|
+&&(\because\ \text{非負実数の冪の指数法則})
+\end{aligned}`,
       ),
-      paragraph([
-        "（2 番目の不等号では ",
-        math(String.raw`c_{\Phi}\ge 0`),
-        " を用いた）。",
-      ]),
       paragraph([
         "Step 7: (2c)。",
         math(String.raw`Y\in\mathrm{Mat}(n,K)`),
@@ -665,19 +749,20 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         "）と (2b) より",
       ]),
       displayMath(
-        String.raw`\sum_{m=0}^{N}\left\|\frac{1}{m!}\Phi^m(Y)\right\|
-= \sum_{m=0}^{N}\frac{\left\|\Phi^m(Y)\right\|}{m!}
-\le \|Y\|\sum_{m=0}^{N}\frac{c_{\Phi}^{\,m}}{m!}
-\le \|Y\|\,E(c_{\Phi})`,
+        String.raw`\begin{aligned}
+\sum_{m=0}^{N}\left\|\frac{1}{m!}\Phi^m(Y)\right\|
+&= \sum_{m=0}^{N}\frac{\left\|\Phi^m(Y)\right\|}{m!}
+&&(\because\ \text{スカラー倍のノルムと}\ |1/m!|=1/m!)\\
+&\le \|Y\|\sum_{m=0}^{N}\frac{c_{\Phi}^{\,m}}{m!}
+&&(\because\ \text{(2b) を各項に適用する})\\
+&\le \|Y\|\,E(c_{\Phi})
+&&(\because\ \text{非負実数の指数級数の部分和の上界を}\ a=c_{\Phi}\ \text{に適用し、}\ \|Y\|\ge 0)
+\end{aligned}`,
       ),
       paragraph([
-        "（最後の不等号は ",
+        "（最後の不等号で引いたのは ",
         ref("real_exp_series_converges"),
-        " (2) を ",
-        math(String.raw`a=c_{\Phi}`),
-        " に適用したもの。",
-        math(String.raw`\|Y\|\ge 0`),
-        " なので両辺に掛けても不等号の向きは変わらない）。左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
+        " (2) である）。左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
         math(String.raw`\|Y\|\,E(c_{\Phi})`),
         " で上に有界であるから収束する（",
         math(String.raw`\mathbb{R}`),
@@ -711,9 +796,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " (3) より",
       ]),
       displayMath(
-        String.raw`0\le\left\|T_N(Y+Z)-\left(T(Y)+T(Z)\right)\right\|
-=\left\|\left(T_N(Y)-T(Y)\right)+\left(T_N(Z)-T(Z)\right)\right\|
-\le\left\|T_N(Y)-T(Y)\right\|+\left\|T_N(Z)-T(Z)\right\|`,
+        String.raw`\begin{aligned}
+0
+&\le \left\|T_N(Y+Z)-\left(T(Y)+T(Z)\right)\right\|
+&&(\because\ \text{ノルムは非負である})\\
+&= \left\|\left(T_N(Y)-T(Y)\right)+\left(T_N(Z)-T(Z)\right)\right\|
+&&(\because\ T_N\ \text{の線型性})\\
+&\le \left\|T_N(Y)-T(Y)\right\|+\left\|T_N(Z)-T(Z)\right\|
+&&(\because\ \text{三角不等式})
+\end{aligned}`,
       ),
       paragraph([
         "右辺は Step 7（",
@@ -744,9 +835,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " (2) より",
       ]),
       displayMath(
-        String.raw`0\le\left\|T_N(cY)-c\,T(Y)\right\|
-=\left\|c\left(T_N(Y)-T(Y)\right)\right\|
-=|c|\cdot\left\|T_N(Y)-T(Y)\right\|`,
+        String.raw`\begin{aligned}
+0
+&\le \left\|T_N(cY)-c\,T(Y)\right\|
+&&(\because\ \text{ノルムは非負である})\\
+&= \left\|c\left(T_N(Y)-T(Y)\right)\right\|
+&&(\because\ T_N\ \text{の線型性})\\
+&= |c|\cdot\left\|T_N(Y)-T(Y)\right\|
+&&(\because\ \text{スカラー倍のノルム})
+\end{aligned}`,
       ),
       paragraph([
         "であり、右辺は Step 7 より ",
@@ -949,11 +1046,16 @@ C_N := \sum_{k=0}^{N}\frac{1}{k!}(A+B)^k`,
       displayMath(
         String.raw`\begin{aligned}
 AB^{m+1}
-&= (AB^m)B \\
-&= (B^mA)B \quad (\because \text{帰納法の仮定}) \\
-&= B^m(AB) \quad (\because \text{積の結合律}) \\
-&= B^m(BA) \quad (\because AB=BA) \\
+&= (AB^m)B
+&&(\because\ B^{m+1}=B^mB\ \text{と積の結合律})\\
+&= (B^mA)B
+&&(\because\ \text{帰納法の仮定})\\
+&= B^m(AB)
+&&(\because\ \text{積の結合律})\\
+&= B^m(BA)
+&&(\because\ AB=BA)\\
 &= B^{m+1}A
+&&(\because\ \text{積の結合律と}\ B^mB=B^{m+1})
 \end{aligned}`,
       ),
       paragraph([
@@ -978,22 +1080,23 @@ AB^{m+1}
       displayMath(
         String.raw`\begin{aligned}
 (A+B)^{k+1}
-&= (A+B)^k(A+B) \\
+&= (A+B)^k(A+B)
+&&(\because\ \text{冪の定義})\\
 &= \left(\sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}\right)(A+B)
-\quad (\because \text{帰納法の仮定}) \\
+&&(\because\ \text{帰納法の仮定})\\
 &= \sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}A
  + \sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}B
-\quad (\because \text{積の分配律}) \\
+&&(\because\ \text{積の分配律})\\
 &= \sum_{j=0}^{k}\binom{k}{j}A^{j+1}B^{k-j}
  + \sum_{j=0}^{k}\binom{k}{j}A^{j}B^{k-j+1}
-\quad (\because \text{Step 1}) \\
+&&(\because\ \text{Step 1 を第 1 和の各項へ当てる})\\
 &= \sum_{j=1}^{k+1}\binom{k}{j-1}A^{j}B^{k+1-j}
  + \sum_{j=0}^{k}\binom{k}{j}A^{j}B^{k+1-j}
-\quad (\text{第 1 和で } j \to j-1 \text{ と添字を付け替えた}) \\
+&&(\because\ \text{第 1 和で}\ j \to j-1\ \text{と添字を付け替えた})\\
 &= \sum_{j=0}^{k+1}\left(\binom{k}{j-1}+\binom{k}{j}\right)A^{j}B^{k+1-j}
-\quad \left(\binom{k}{-1}:=0,\ \binom{k}{k+1}:=0\right) \\
+&&\left(\because\ \binom{k}{-1}:=0,\ \binom{k}{k+1}:=0\ \text{として和をまとめた}\right)\\
 &= \sum_{j=0}^{k+1}\binom{k+1}{j}A^{j}B^{k+1-j}
-\quad (\because \text{Pascal の関係式})
+&&(\because\ \text{Pascal の関係式})
 \end{aligned}`,
       ),
       paragraph([
@@ -1005,19 +1108,21 @@ AB^{m+1}
         String.raw`\begin{aligned}
 C_N
 &= \sum_{k=0}^{N}\frac{1}{k!}\sum_{j=0}^{k}\binom{k}{j}A^jB^{k-j}
-\quad (\because \text{Step 2}) \\
-&= \sum_{k=0}^{N}\sum_{j=0}^{k}\frac{1}{j!\,(k-j)!}A^jB^{k-j} \\
+&&(\because\ \text{Step 2 を各}\ k\ \text{へ当てる})\\
+&= \sum_{k=0}^{N}\sum_{j=0}^{k}\frac{1}{j!\,(k-j)!}A^jB^{k-j}
+&&\left(\because\ \binom{k}{j}\frac{1}{k!}=\frac{1}{j!\,(k-j)!}\right)\\
 &= \sum_{(j,l)\in D_N}\frac{1}{j!\,l!}A^jB^{l}
-\quad (l:=k-j,\ D_N:=\{(j,l)\in\mathbb{Z}_{\ge 0}^2 \mid j+l\le N\})
+&&(\because\ l:=k-j\ \text{と置くと添字は}\ D_N:=\{(j,l)\in\mathbb{Z}_{\ge 0}^2 \mid j+l\le N\}\ \text{を走る})
 \end{aligned}`,
       ),
       paragraph(["一方、有限和の積を展開して"]),
       displayMath(
         String.raw`\begin{aligned}
 S_NT_N
-&= \left(\sum_{j=0}^{N}\frac{1}{j!}A^j\right)\left(\sum_{l=0}^{N}\frac{1}{l!}B^l\right) \\
+&= \left(\sum_{j=0}^{N}\frac{1}{j!}A^j\right)\left(\sum_{l=0}^{N}\frac{1}{l!}B^l\right)
+&&(\because\ S_N,\ T_N\ \text{の置き方})\\
 &= \sum_{(j,l)\in Q_N}\frac{1}{j!\,l!}A^jB^{l}
-\quad (\because \text{積の分配律},\ Q_N:=\{0,1,\dots,N\}^2)
+&&(\because\ \text{積の分配律。添字は}\ Q_N:=\{0,1,\dots,N\}^2\ \text{を走る})
 \end{aligned}`,
       ),
       paragraph([
@@ -1064,10 +1169,15 @@ S_NT_N
         " (2) より",
       ]),
       displayMath(
-        String.raw`\left\|\frac{1}{j!\,l!}A^jB^{l}\right\|
-= \frac{\|A^jB^l\|}{j!\,l!}
-\le \frac{\|A^j\|\,\|B^l\|}{j!\,l!}
-\le \|I\|^2\cdot\frac{a^j}{j!}\cdot\frac{b^l}{l!}`,
+        String.raw`\begin{aligned}
+\left\|\frac{1}{j!\,l!}A^jB^{l}\right\|
+&= \frac{\|A^jB^l\|}{j!\,l!}
+&&(\because\ \text{ノルムのスカラー倍についての等式と}\ 1/(j!\,l!)>0)\\
+&\le \frac{\|A^j\|\,\|B^l\|}{j!\,l!}
+&&(\because\ \text{行列ノルムの劣乗法性と}\ 1/(j!\,l!)>0)\\
+&\le \|I\|^2\cdot\frac{a^j}{j!}\cdot\frac{b^l}{l!}
+&&(\because\ \|A^j\|\le\|I\|\,a^j\ \text{と}\ \|B^l\|\le\|I\|\,b^l)
+\end{aligned}`,
       ),
       paragraph([
         "Step 5: ",
@@ -1115,20 +1225,23 @@ S_NT_N
       displayMath(
         String.raw`\begin{aligned}
 \|S_NT_N-C_N\|
-&\le \sum_{(j,l)\in Q_N\setminus D_N}\left\|\frac{1}{j!\,l!}A^jB^{l}\right\| \\
+&\le \sum_{(j,l)\in Q_N\setminus D_N}\left\|\frac{1}{j!\,l!}A^jB^{l}\right\|
+&&(\because\ \text{三角不等式を有限個の項に繰り返し用いる})\\
 &\le \|I\|^2\sum_{(j,l)\in Q_N\setminus D_N}\frac{a^j}{j!}\cdot\frac{b^l}{l!}
-\quad (\because \text{Step 4}) \\
+&&(\because\ \text{Step 4 を各項へ当てる})\\
 &\le \|I\|^2\left(
 \left(\sum_{j=P_N}^{N}\frac{a^j}{j!}\right)\left(\sum_{l=0}^{N}\frac{b^l}{l!}\right)
 +\left(\sum_{j=0}^{N}\frac{a^j}{j!}\right)\left(\sum_{l=P_N}^{N}\frac{b^l}{l!}\right)
-\right) \\
+\right)
+&&(\because\ \text{上の添字集合の包含と、非負項を付け加えても和は増えるだけであること})\\
 &\le \|I\|^2\left(R_{P_N-1}(a)\,E(b)+E(a)\,R_{P_N-1}(b)\right)
+&&(\because\ \text{非負実数の指数級数の収束の (2)(3)})
 \end{aligned}`,
       ),
       paragraph([
-        "最後の不等号は ",
+        "最後の不等号で引いたのは ",
         ref("real_exp_series_converges"),
-        " の (2)(3) による。",
+        " の (2)(3) である。",
         math(String.raw`P_N\ge (N+1)/2`),
         " より ",
         math(String.raw`P_N-1\to\infty`),
@@ -1174,10 +1287,14 @@ S_NT_N
       displayMath(
         String.raw`\begin{aligned}
 \left\|S_NT_N-\exp(A)\exp(B)\right\|
-&\le \left\|S_NT_N-S_N\exp(B)\right\|+\left\|S_N\exp(B)-\exp(A)\exp(B)\right\| \\
-&= \left\|S_N\left(T_N-\exp(B)\right)\right\|+\left\|\left(S_N-\exp(A)\right)\exp(B)\right\| \\
-&\le \|S_N\|\cdot\left\|T_N-\exp(B)\right\|+\left\|S_N-\exp(A)\right\|\cdot\|\exp(B)\| \\
+&\le \left\|S_NT_N-S_N\exp(B)\right\|+\left\|S_N\exp(B)-\exp(A)\exp(B)\right\|
+&&(\because\ \text{三角不等式})\\
+&= \left\|S_N\left(T_N-\exp(B)\right)\right\|+\left\|\left(S_N-\exp(A)\right)\exp(B)\right\|
+&&(\because\ \text{積の分配律})\\
+&\le \|S_N\|\cdot\left\|T_N-\exp(B)\right\|+\left\|S_N-\exp(A)\right\|\cdot\|\exp(B)\|
+&&(\because\ \text{行列ノルムの劣乗法性を 2 つの項へ当てる})\\
 &\le M_A\left\|T_N-\exp(B)\right\|+M_B\left\|S_N-\exp(A)\right\|
+&&(\because\ \|S_N\|\le M_A\ \text{と}\ \|\exp(B)\|\le M_B)
 \end{aligned}`,
       ),
       paragraph([
@@ -1213,10 +1330,17 @@ S_NT_N
         " について",
       ]),
       displayMath(
-        String.raw`0\le\left\|\exp(A)\exp(B)-\exp(A+B)\right\|
-\le\left\|\exp(A)\exp(B)-S_NT_N\right\|
+        String.raw`\begin{aligned}
+0
+&\le\left\|\exp(A)\exp(B)-\exp(A+B)\right\|
+&&(\because\ \text{ノルムは非負実数として定まる})\\
+&\le\left\|\exp(A)\exp(B)-S_NT_N\right\|+\left\|S_NT_N-\exp(A+B)\right\|
+&&(\because\ \text{三角不等式})\\
+&\le\left\|\exp(A)\exp(B)-S_NT_N\right\|
 +\left\|S_NT_N-C_N\right\|
-+\left\|C_N-\exp(A+B)\right\|`,
++\left\|C_N-\exp(A+B)\right\|
+&&(\because\ \text{第 2 項へもう一度三角不等式})
+\end{aligned}`,
       ),
       paragraph([
         "右辺は Step 5・Step 6・Step 7 より ",
@@ -1274,25 +1398,40 @@ S_NT_N
     ],
     proof: [
       paragraph([
-        math(String.raw`\exp`),
-        " の定義より、",
+        "準備として、零行列の冪を書き下しておく。行列の冪の定義より ",
         math(String.raw`O^0 = I`),
-        "、",
+        " であり、",
         math(String.raw`n \geq 1`),
         " のとき ",
         math(String.raw`O^n = O`),
-        "（零行列の冪）であるから、",
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(O)
-&= \sum_{n=0}^{\infty} \frac{O^n}{n!} \\
-&= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O}{n!} \\
-&= I + O \cdot \sum_{n=1}^{\infty} \frac{1}{n!} \\
-&= I + O \\
+&= \sum_{n=0}^{\infty} \frac{O^n}{n!}
+&&(\because\ \text{exp の定義（行列の場合と、行列への線型写像の場合）})\\
+&= \frac{O^0}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
+&&(\because\ \text{収束級数の第 0 項を分ける})\\
+&= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
+&&(\because\ O^0 = I)\\
+&= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O}{n!}
+&&(\because\ n \geq 1\ \text{のとき}\ O^n = O)\\
+&= I + \sum_{n=1}^{\infty} \frac{O}{n!}
+&&(\because\ 0! = 1)\\
+&= I + O \cdot \sum_{n=1}^{\infty} \frac{1}{n!}
+&&(\because\ \text{収束級数のスカラー倍は各項のスカラー倍の和である})\\
+&= I + O
+&&(\because\ \text{零行列のスカラー倍は零行列である})\\
 &= I
+&&(\because\ \text{零行列は行列の加法の単位元である})
 \end{aligned}`,
       ),
+      paragraph([
+        "引いたブロックは ",
+        ref("def_exp"),
+        " である。",
+      ]),
     ],
     conversion: { status: "converted" },
   },
