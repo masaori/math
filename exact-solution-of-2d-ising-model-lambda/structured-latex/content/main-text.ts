@@ -20941,6 +20941,87 @@ A\cdot(B\cdot v)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_shift_transfer_commute",
+    kind: "claim",
+    title: { text: "評価で運んだシフト行列と転送行列は可換である" },
+    labels: ["claim_qbar_shift_transfer_commute"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarShiftTransfer_comm",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.map_comm_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarShiftTransfer_comm_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-shift-transfer-commute"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。",
+        ref("def_shift_matrix"),
+        " の ",
+        math(String.raw`U`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`T`),
+        " を ",
+        ref("def_qbar_matrix_eval"),
+        " で運んだ 2 つの行列について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Ev}_{\xi}(U)\,\mathrm{Ev}_{\xi}(T)=\mathrm{Ev}_{\xi}(T)\,\mathrm{Ev}_{\xi}(U)`,
+      ),
+      paragraph([
+        "が成り立つ（両辺の積は ",
+        ref("def_qbar_matrix_product"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の行列の積であり、",
+        ref("theorem_shift_matrix_commutes"),
+        " の ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の行列の積とは別の演算である）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}_{\xi}(U)\,\mathrm{Ev}_{\xi}(T)
+&=\mathrm{Ev}_{\xi}(UT)
+&&(\because\ \blkref{claim_qbar_matrix_eval_product}\ \text{を右辺から左辺へ使った})\\
+&=\mathrm{Ev}_{\xi}(TU)
+&&(\because\ \blkref{theorem_shift_matrix_commutes})\\
+&=\mathrm{Ev}_{\xi}(T)\,\mathrm{Ev}_{\xi}(U)
+&&(\because\ \blkref{claim_qbar_matrix_eval_product})
+\end{aligned}`),
+      paragraph([
+        "この段が使っているのは、成分ごとの評価が行列の積を保つこと（",
+        ref("claim_qbar_matrix_eval_product"),
+        "）と、",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の行列としての可換性（",
+        ref("theorem_shift_matrix_commutes"),
+        "）の 2 つだけである。",
+        "とくに、可換性そのものを ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の側で示し直してはいない。可換性は ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の側で既に示してあり、この段はそれを写像で運んでいるだけである。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "この主張と ",
+        ref("claim_qbar_commuting_preserves_eigenspace"),
+        " を合わせると、",
+        math(String.raw`\mathrm{Ev}_{\xi}(T)`),
+        " が ",
+        math(String.raw`\mathrm{Ev}_{\xi}(U)`),
+        " の各固有空間をそれ自身へ写すことになる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21134,11 +21215,10 @@ A\cdot(B\cdot v)
           ref("claim_shift_matrix_eigenvalue_root_of_unity"),
           "）、および可換な行列が固有空間を保つこと（",
           ref("claim_qbar_commuting_preserves_eigenspace"),
+          "）、および評価で運んだシフト行列と転送行列が可換であること（",
+          ref("claim_qbar_shift_transfer_commute"),
           "）までは上で済んでいる。",
-          "次に書くのは、シフト行列と転送行列を ",
-          math(String.raw`\mathrm{Ev}_{\xi}`),
-          " で運んだ 2 つの行列が可換であることと、そこから転送行列が",
-          "シフト行列の各固有空間をそれ自身へ写すことである（対角化へ向けた段）。",
+          "次に書くのは、転送行列がシフト行列の各固有空間をそれ自身へ写すことである（対角化へ向けた段）。",
         ],
         [
           todo("未着手"),
