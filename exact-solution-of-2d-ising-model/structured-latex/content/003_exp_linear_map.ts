@@ -80,9 +80,13 @@ export default defineBlocks([
         " であるから",
       ]),
       displayMath(
-        String.raw`\frac{a^{m+1}}{(m+1)!}=\frac{a}{m+1}\cdot\frac{a^m}{m!}
-\le\frac{1}{2}\cdot\frac{a^m}{m!}
-\qquad (m\ge m_0)`,
+        String.raw`\begin{aligned}
+\frac{a^{m+1}}{(m+1)!}
+&= \frac{a}{m+1}\cdot\frac{a^m}{m!}
+\quad (\because\ (m+1)! = (m+1)\cdot m!) \\
+&\le \frac{1}{2}\cdot\frac{a^m}{m!}
+\quad (\because\ a/(m+1)\le 1/2 \text{ と } a^m/m!\ge 0)
+\end{aligned}`,
       ),
       paragraph([
         "これを ",
@@ -108,10 +112,15 @@ export default defineBlocks([
         " のとき等比数列の和の公式より",
       ]),
       displayMath(
-        String.raw`\sum_{m=m_0}^{N}\frac{a^m}{m!}
-\le\frac{a^{m_0}}{m_0!}\sum_{k=0}^{N-m_0}\left(\frac{1}{2}\right)^k
-=\frac{a^{m_0}}{m_0!}\left(2-\left(\frac{1}{2}\right)^{N-m_0}\right)
-\le\frac{2a^{m_0}}{m_0!}`,
+        String.raw`\begin{aligned}
+\sum_{m=m_0}^{N}\frac{a^m}{m!}
+&\le \frac{a^{m_0}}{m_0!}\sum_{k=0}^{N-m_0}\left(\frac{1}{2}\right)^k
+\quad (\because \text{各項へ直前の評価 } a^{m_0+k}/(m_0+k)!\le (1/2)^k a^{m_0}/m_0! \text{ を適用した}) \\
+&= \frac{a^{m_0}}{m_0!}\left(2-\left(\frac{1}{2}\right)^{N-m_0}\right)
+\quad (\because \text{等比数列の和の公式}) \\
+&\le \frac{2a^{m_0}}{m_0!}
+\quad (\because (1/2)^{N-m_0}\ge 0)
+\end{aligned}`,
       ),
       paragraph([
         "したがって ",
@@ -154,8 +163,15 @@ export default defineBlocks([
         " について",
       ]),
       displayMath(
-        String.raw`\sum_{m=p}^{q}\frac{a^m}{m!}=E_q(a)-E_{p-1}(a)\le E(a)-E_{p-1}(a)=R_{p-1}(a)
-\quad (\because (2))`,
+        String.raw`\begin{aligned}
+\sum_{m=p}^{q}\frac{a^m}{m!}
+&= E_q(a)-E_{p-1}(a)
+\quad (\because E_N(a)=\sum_{m=0}^{N}a^m/m! \text{ の差}) \\
+&\le E(a)-E_{p-1}(a)
+\quad (\because (2)) \\
+&= R_{p-1}(a)
+\quad (\because R_N(a)=E(a)-E_N(a) \text{ の定義})
+\end{aligned}`,
       ),
     ],
     conversion: {
