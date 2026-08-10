@@ -1710,22 +1710,37 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " について Step 1 を 2 回使うと",
       ]),
       displayMath(
-        String.raw`\varepsilon (Y_a Z_b)
-= (\varepsilon Y_a) Z_b
-= (-Y_a\varepsilon)Z_b
-= -Y_a(\varepsilon Z_b)
-= -Y_a(-Z_b\varepsilon)
-= (Y_a Z_b)\varepsilon`,
+        String.raw`\begin{aligned}
+\varepsilon (Y_a Z_b)
+&= (\varepsilon Y_a) Z_b
+&&(\because\ \mathrm{Mat}(2^M,\mathbb{C})\ \text{の積の結合律})\\
+&= (-Y_a\varepsilon)Z_b
+&&(\because\ \text{Step 1 の}\ \varepsilon Y_a = -Y_a\varepsilon)\\
+&= -\left(Y_a\varepsilon\right)Z_b
+&&(\because\ \text{スカラー倍と積の可換性})\\
+&= -Y_a(\varepsilon Z_b)
+&&(\because\ \mathrm{Mat}(2^M,\mathbb{C})\ \text{の積の結合律})\\
+&= -Y_a(-Z_b\varepsilon)
+&&(\because\ \text{Step 1 の}\ \varepsilon Z_b = -Z_b\varepsilon)\\
+&= (Y_a Z_b)\varepsilon
+&&(\because\ \text{スカラー倍と積の可換性、および}\ -(-1)=1)
+\end{aligned}`,
       ),
       paragraph([
-        "（積の結合律とスカラー倍の可換性を使った）。特に ",
+        "が成り立つ。特に ",
         math(String.raw`\varepsilon W = W\varepsilon`),
         " かつ ",
         math(String.raw`\varepsilon(Y_mZ_{m+1}) = (Y_mZ_{m+1})\varepsilon`),
         "。また",
       ]),
       displayMath(
-        String.raw`\varepsilon(\varepsilon W) = \varepsilon(W\varepsilon) = (\varepsilon W)\varepsilon`,
+        String.raw`\begin{aligned}
+\varepsilon(\varepsilon W)
+&= \varepsilon(W\varepsilon)
+&&(\because\ \text{上で示した}\ \varepsilon W = W\varepsilon)\\
+&= (\varepsilon W)\varepsilon
+&&(\because\ \mathrm{Mat}(2^M,\mathbb{C})\ \text{の積の結合律})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
@@ -1751,20 +1766,36 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         math(String.raw`\varepsilon A = A\varepsilon`),
         " を満たすから、",
         ref("end_is_algebra_isomorphism"),
-        " (2) より ",
-        math(String.raw`\hat{\varepsilon}\circ\hat{A} = \widehat{\varepsilon A} = \widehat{A\varepsilon} = \hat{A}\circ\hat{\varepsilon}`),
-        "。よって ",
+        " (2) より次が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{\varepsilon}\circ\hat{A}
+&= \widehat{\varepsilon A}
+&&(\because\ \mathbf{end}\ \text{が積を保つこと})\\
+&= \widehat{A\varepsilon}
+&&(\because\ \text{Step 2 の}\ \varepsilon A = A\varepsilon)\\
+&= \hat{A}\circ\hat{\varepsilon}
+&&(\because\ \mathbf{end}\ \text{が積を保つこと})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
         math(String.raw`f\in\mathcal{F}^{(\pm)}`),
         "（すなわち ",
         math(String.raw`\hat{\varepsilon}f = \pm f`),
         "）に対し",
       ]),
       displayMath(
-        String.raw`\hat{\varepsilon}\left(\hat{A}f\right)
-= \hat{A}\left(\hat{\varepsilon}f\right)
-= \hat{A}(\pm f)
-= \pm\,\hat{A}f
-\quad (\because \hat{A} \text{ の線型性})`,
+        String.raw`\begin{aligned}
+\hat{\varepsilon}\left(\hat{A}f\right)
+&= \hat{A}\left(\hat{\varepsilon}f\right)
+&&(\because\ \hat{\varepsilon}\circ\hat{A} = \hat{A}\circ\hat{\varepsilon})\\
+&= \hat{A}(\pm f)
+&&(\because\ f\in\mathcal{F}^{(\pm)}\ \text{すなわち}\ \hat{\varepsilon}f = \pm f)\\
+&= \pm\,\hat{A}f
+&&(\because\ \hat{A}\ \text{の線型性})
+\end{aligned}`,
       ),
       paragraph([
         "であり ",
@@ -1801,13 +1832,16 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
 \quad (\because \mathbf{end} \text{ の線型性と } \widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}) \\
 &= i K_1\left(-(\pm\hat{W}f) \pm \hat{W}f\right)
 \quad (\because \hat{W}f\in\mathcal{F}^{(\pm)} \text{ より } \hat{\varepsilon}(\hat{W}f) = \pm\hat{W}f) \\
-&= i K_1\cdot 0 = 0
+&= i K_1\left(\mp\hat{W}f \pm \hat{W}f\right)
+\quad (\because -(\pm x) = \mp x) \\
+&= i K_1\cdot 0
+\quad (\because \mp x \pm x = 0 \text{（複号同順）}) \\
+&= 0
+\quad (\because \text{零ベクトルのスカラー倍は零ベクトル})
 \end{aligned}`,
       ),
       paragraph([
-        "（複号同順。",
-        math(String.raw`-(\pm x)\pm x = \mp x \pm x = 0`),
-        "）。よって ",
+        "が成り立つ（複号同順）。よって ",
         math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
         "。",
       ]),
@@ -1839,10 +1873,19 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " に適用でき、",
       ]),
       displayMath(
-        String.raw`\hat{G}^{\,n+1}f = \hat{G}^{\,n}\!\left(\hat{G}f\right) = \hat{G}^{\,n}g
-= \left(\hat{G}^{(\pm)}\right)^{n}g
-= \left(\hat{G}^{(\pm)}\right)^{n}\!\left(\hat{G}^{(\pm)}f\right)
-= \left(\hat{G}^{(\pm)}\right)^{n+1}f`,
+        String.raw`\begin{aligned}
+\hat{G}^{\,n+1}f
+&= \hat{G}^{\,n}\!\left(\hat{G}f\right)
+&&(\because\ \text{写像の冪の定義})\\
+&= \hat{G}^{\,n}g
+&&(\because\ g := \hat{G}f)\\
+&= \left(\hat{G}^{(\pm)}\right)^{n}g
+&&(\because\ \text{帰納法の仮定を}\ g\in\mathcal{F}^{(\pm)}\ \text{に適用})\\
+&= \left(\hat{G}^{(\pm)}\right)^{n}\!\left(\hat{G}^{(\pm)}f\right)
+&&(\because\ \text{Step 4 の}\ g = \hat{G}^{(\pm)}f)\\
+&= \left(\hat{G}^{(\pm)}\right)^{n+1}f
+&&(\because\ \text{写像の冪の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 6: ",
@@ -1854,8 +1897,23 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " より",
       ]),
       displayMath(
-        String.raw`\mathbf{end}(V_1) = \mathbf{end}(\exp(G)) = \exp\!\left(\hat{G}\right), \qquad
-\mathbf{end}\!\left(V_1^{(\pm)}\right) = \mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right) = \exp\!\left(\hat{G}^{(\pm)}\right)`,
+        String.raw`\begin{aligned}
+\mathbf{end}(V_1)
+&= \mathbf{end}(\exp(G))
+&&(\because\ V_1 = \exp(G))\\
+&= \exp\!\left(\hat{G}\right)
+&&(\because\ \mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))\ \text{と}\ \hat{G} = \mathbf{end}(G))
+\end{aligned}`,
+      ),
+      paragraph(["および"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathbf{end}\!\left(V_1^{(\pm)}\right)
+&= \mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right)
+&&(\because\ V_1^{(\pm)} = \exp(G^{(\pm)}))\\
+&= \exp\!\left(\hat{G}^{(\pm)}\right)
+&&(\because\ \mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))\ \text{と}\ \hat{G}^{(\pm)} = \mathbf{end}(G^{(\pm)}))
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\mathcal{F}`),
@@ -1897,8 +1955,13 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " について部分和が",
       ]),
       displayMath(
-        String.raw`S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
-= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f =: S_N^{(\pm)}`,
+        String.raw`\begin{aligned}
+S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
+&= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f
+&&(\because\ \text{Step 5 を各}\ n\in\{0,\dots,N\}\ \text{に適用})\\
+&=: S_N^{(\pm)}
+&&(\because\ S_N^{(\pm)}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph([
         "と一致する。上の各点収束より ",
@@ -1918,8 +1981,15 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         "。よって",
       ]),
       displayMath(
-        String.raw`\left(\mathbf{end}(V_1)\right)f = \left(\exp(\hat{G})\right)f
-= \left(\exp(\hat{G}^{(\pm)})\right)f = \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f`,
+        String.raw`\begin{aligned}
+\left(\mathbf{end}(V_1)\right)f
+&= \left(\exp(\hat{G})\right)f
+&&(\because\ \text{Step 6 の}\ \mathbf{end}(V_1) = \exp(\hat{G}))\\
+&= \left(\exp(\hat{G}^{(\pm)})\right)f
+&&(\because\ \text{同一の点列}\ S_N = S_N^{(\pm)}\ \text{の極限の一意性})\\
+&= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f
+&&(\because\ \text{Step 6 の}\ \mathbf{end}(V_1^{(\pm)}) = \exp(\hat{G}^{(\pm)}))
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`f\in\mathcal{F}^{(\pm)}`),
@@ -1928,9 +1998,13 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " 上の写像として",
       ]),
       displayMath(
-        String.raw`\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
-= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)\big|_{\mathcal{F}^{(\pm)}}
-= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}`,
+        String.raw`\begin{aligned}
+\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
+&= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)\big|_{\mathcal{F}^{(\pm)}}
+&&(\because\ \text{上の等式が任意の}\ f\in\mathcal{F}^{(\pm)}\ \text{で成り立つこと})\\
+&= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}
+&&(\because\ V_1^{(\pm)}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph(["が示された。"]),
     ],
