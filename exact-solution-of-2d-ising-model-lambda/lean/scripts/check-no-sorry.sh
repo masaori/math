@@ -519,6 +519,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero_necSuf
   Ising2DLambda.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_charPoly_shiftMatrix_eval_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mem_of_prod_eval_eq_zero_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_charPoly_shiftMatrix_eval_eq_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
