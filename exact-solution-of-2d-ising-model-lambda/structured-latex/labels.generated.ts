@@ -63,6 +63,7 @@ export const ALL_LABELS = [
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
   "claim_permutation_sign_values",
+  "claim_power_sum_telescope",
   "claim_prod_orbit_decomposition",
   "claim_rational_exponent_well_defined",
   "claim_restriction_family_gluing",

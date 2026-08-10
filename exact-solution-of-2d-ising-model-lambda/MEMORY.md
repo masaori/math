@@ -21,7 +21,7 @@
 | 層 | 状態 |
 | --- | --- |
 | 記述（構造化テキスト） | ラベルの数は合計 165 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
 | Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 397 件を登録）が通る |
 | Lean 必要十分版 | 主張 65 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
@@ -696,6 +696,26 @@ Lean 具体版・必要十分版・導出は tick 52）。ここにも $\mathbb{
 これで、シフト行列の特性多項式の軌道ごとの因子に残る 2 項の値が両方とも決まった。
 残るのは、この 2 項を足して $t^{\lvert O\rvert}-1$ を出す段である。
 
+さらに、倍数を指数とする冪と単位元の逆元との和が、約数を指数とするそれと冪の有限和との
+積であることを示した。**四層すべてを満たしている**（2026-08-10 の tick 61）。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない（$\mathbb{Z}[x][t]$ の中の等式である）。
+
+- 任意の $d\in\mathbb{N}$ と $k\in\mathbb{N}$ について
+  $t^{dk}+\iota(-\kappa(1))=\bigl(t^{d}+\iota(-\kappa(1))\bigr)\cdot\sum_{j<k}t^{dj}$ である。
+  通常 $t^{dk}-1=(t^{d}-1)(1+t^{d}+\dots+t^{d(k-1)})$ と書かれる等式を、$\mathbb{Z}[x][t]$ の
+  引き算を使わずに書いたものである（$u:=\iota(-\kappa(1))$ は単位元の加法についての逆元）。
+  証明は準備 2 つ（単位元と零元の確認、$\iota(\kappa(1))+u=\iota(\kappa(0))$）を置いてからの
+  $k$ についての帰納法で、出発点は $k=0$（両辺がともに零元）、一歩は 11 段の一続きの鎖である。
+  **仮定に $d\ge1$・$k\ge1$ を置いていない。** 出発点を $k=0$ に置けるので退化した場合を
+  除く必要がなく、使わない仮定を書かないためである。
+  必要十分版が示したのは、この段が要求するのが**半環と $1+u=0$ の 2 つだけ**であり、
+  $a$ が $t^{d}$ の形であること（$d$ そのものが消える）も、値が多項式であることも、
+  積の可換性も、加法の逆元の存在も使っていないことである。
+
+これを軌道の元の個数が格子の一辺を割り切ることと合わせると、軌道ごとの因子
+$t^{\lvert O\rvert}+\iota(-\kappa(1))$ が $t^{L}+\iota(-\kappa(1))$ を割ることが
+$\mathbb{Z}[x][t]$ の中で言える。それが次のセクションである。
+
 ## 進め方（自動ループ）
 
 このプロジェクトは **1 時間に 1 回の自動ループ**で進む。手順の正本は
@@ -708,6 +728,26 @@ Lean 具体版・必要十分版・導出は tick 52）。ここにも $\mathbb{
 - 次に何をするかは、下の「次回やること」ではなく**状態台帳のセクション表**を見る。
 
 ## 次回やること
+
+**2026-08-10 の tick 61 は、レビューで 1 件（本文末尾「この先に書くこと」の「済んでいる」の
+列挙が古かったのを直した）を直したうえで、セクション 10g を 10g1・10g2・10g3 の 3 つへ
+割り直し、その最初（倍数を指数とする冪と単位元の逆元との和が、約数を指数とするそれと
+冪の有限和との積であること）を四層すべてで完了させた。**
+
+1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_power_sum_telescope`）と
+   Lean 6 本（`PowerSumTelescope` 系。具体版 3・必要十分版 2・導出 1）。とくに、本文が
+   仮定に $d\ge1$・$k\ge1$ を置かなかったこと（使わない仮定を書かない判断）が主張の欄で
+   読み手に伝わるかと、必要十分版が半環と $1+u=0$ しか要求しない形で $d$ を消したことが
+   必要十分性の見極めとして適切かを見る。
+2. **並列の作業ストリーム（式変形の書き方の統一）は今 tick は行っていない**
+   （締切に間に合わなかった。姉妹プロジェクトの `004_transfer_matrix`、9 件ある）。
+   次 tick で 1 件進める。
+3. そのあとセクション 10g2（軌道ごとの因子が $t^{L}+\iota(-\kappa(1))$ を割ること。
+   軌道の元の個数が $L$ を割り切ること（`claim_row_config_orbit_card` と
+   `claim_row_config_minimal_period_divides_L`）と 10g1 を合わせる段）。
+4. そのあと 10g3（根が 1 の $L$ 乗根であること。ここで $\overline{\mathbb{Q}}$ へ入る）。
+
+### 前の tick の記録
 
 **2026-08-10 の tick 60 は、レビューでは直すところが無く、セクション 10f'''c3c2
 （軌道ごとの和が $t^{\lvert O\rvert}-1$ であること。2 項を足し合わせる段）を

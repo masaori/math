@@ -16947,6 +16947,200 @@ W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_power_sum_telescope",
+    kind: "claim",
+    title: {
+      text:
+        "倍数を指数とする冪と単位元の逆元との和は、約数を指数とするそれと冪の有限和との積である",
+    },
+    labels: ["claim_power_sum_telescope"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.one_add_negUnitSecond",
+      "Ising2DLambda.AlgebraicEigenvalue.add_negUnitSecond_mul_eq_zero",
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.add_mul_self_eq_zero_of_one_add_eq_zero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_eq_mul_geom",
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope_from_necSuf",
+    ],
+    verification: ["sagemath/check/power-sum-telescope"],
+    statement: [
+      paragraph([
+        "自然数 ",
+        math(String.raw`d\in\mathbb{N}`),
+        " と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`t^{dk}+\iota\bigl(-\kappa(1)\bigr)
+=\Bigl(t^{d}+\iota\bigl(-\kappa(1)\bigr)\Bigr)\cdot\sum_{j\in\{j'\in\mathbb{N}\,\mid\,j'<k\}}t^{dj}`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "通常 ",
+        math(String.raw`t^{dk}-1=(t^{d}-1)(1+t^{d}+\dots+t^{d(k-1)})`),
+        " と書かれる等式である（",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の引き算を使わずに書くため、単位元 ",
+        math(String.raw`\iota(\kappa(1))`),
+        " の加法についての逆元 ",
+        math(String.raw`\iota(-\kappa(1))`),
+        " を足す形で述べる）。",
+        "これを使うのは、",
+        ref("claim_shift_char_orbit_product"),
+        " の各因子の値（",
+        ref("claim_orbit_sum_two_terms"),
+        "）が ",
+        math(String.raw`d=\lvert O\rvert`),
+        " と取ったこの左辺の形をしており、軌道の元の個数が格子の一辺を割り切ること（",
+        ref("claim_row_config_minimal_period_divides_L"),
+        " と ",
+        ref("claim_row_config_orbit_card"),
+        "）から ",
+        math(String.raw`L=\lvert O\rvert k`),
+        " と書けるためである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備を 2 つ置く。以下 ",
+        math(String.raw`u:=\iota\bigl(-\kappa(1)\bigr)\in\mathbb{Z}[x][t]`),
+        " と書き、",
+        math(String.raw`\sum_{j<n}`),
+        " は ",
+        math(String.raw`\sum_{j\in\{j'\in\mathbb{N}\,\mid\,j'<n\}}`),
+        " の略記とする。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`\iota(\kappa(1))`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元、",
+        math(String.raw`\iota(\kappa(0))`),
+        " は零元である（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_constant_polynomial"),
+        " と ",
+        ref("def_second_constant_embedding"),
+        "）。",
+      ]),
+      paragraph([
+        "第二に、",
+        math(String.raw`\kappa(1)+\bigl(-\kappa(1)\bigr)=\kappa(0)`),
+        " が ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " で成り立ち、",
+        math(String.raw`\iota`),
+        " は和を和へ写すので（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_second_constant_embedding"),
+        "）",
+        math(String.raw`\iota(\kappa(1))+u=\iota(\kappa(0))`),
+        " である。すなわち ",
+        math(String.raw`u`),
+        " は単位元の加法についての逆元である。",
+      ]),
+      paragraph([
+        math(String.raw`d`),
+        " を固定し、",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のとき。添字の集合は ",
+        math(String.raw`\{j'\in\mathbb{N}\mid j'<0\}=\emptyset`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(t^{d}+u\bigr)\cdot\sum_{j<0}t^{dj}
+&=\bigl(t^{d}+u\bigr)\cdot\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \text{空集合にわたる有限和は零元である})\\
+&=\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \text{零元を掛けた積は零元である})\\
+&=\iota\bigl(\kappa(1)\bigr)+u
+&&(\because\ \text{準備の第二})\\
+&=t^{0}+u
+&&(\because\ t^{0}=\iota(\kappa(1)))\\
+&=t^{d\cdot 0}+u
+&&(\because\ d\cdot 0=0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`k`),
+        " で成り立つと仮定し、",
+        math(String.raw`k+1`),
+        " で示す。",
+        math(String.raw`\{j'\in\mathbb{N}\mid j'<k+1\}`),
+        " は ",
+        math(String.raw`\{j'\in\mathbb{N}\mid j'<k\}`),
+        " に ",
+        math(String.raw`k`),
+        " を足したものであり、",
+        math(String.raw`k`),
+        " は ",
+        math(String.raw`\{j'\in\mathbb{N}\mid j'<k\}`),
+        " に属さない。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(t^{d}+u\bigr)\cdot\sum_{j<k+1}t^{dj}
+&=\bigl(t^{d}+u\bigr)\cdot\Bigl(\sum_{j<k}t^{dj}+t^{dk}\Bigr)
+&&(\because\ \text{添字の集合に属さない元を 1 つ足した有限和は、もとの和とその項の和である})\\
+&=\bigl(t^{d}+u\bigr)\cdot\sum_{j<k}t^{dj}+\bigl(t^{d}+u\bigr)\cdot t^{dk}
+&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
+&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d}+u\bigr)\cdot t^{dk}
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d}\cdot t^{dk}+u\cdot t^{dk}\bigr)
+&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
+&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d(k+1)}+u\cdot t^{dk}\bigr)
+&&(\because\ t^{d}\cdot t^{dk}=t^{d+dk}\ \text{と}\ d+dk=d(k+1))\\
+&=t^{d(k+1)}+\Bigl(t^{dk}+u\cdot t^{dk}\Bigr)+u
+&&(\because\ \mathbb{Z}[x][t]\ \text{の加法の結合則と可換則})\\
+&=t^{d(k+1)}+\Bigl(\iota\bigl(\kappa(1)\bigr)\cdot t^{dk}+u\cdot t^{dk}\Bigr)+u
+&&(\because\ \text{準備の第一})\\
+&=t^{d(k+1)}+\Bigl(\bigl(\iota\bigl(\kappa(1)\bigr)+u\bigr)\cdot t^{dk}\Bigr)+u
+&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
+&=t^{d(k+1)}+\Bigl(\iota\bigl(\kappa(0)\bigr)\cdot t^{dk}\Bigr)+u
+&&(\because\ \text{準備の第二})\\
+&=t^{d(k+1)}+\iota\bigl(\kappa(0)\bigr)+u
+&&(\because\ \text{零元を掛けた積は零元である})\\
+&=t^{d(k+1)}+u
+&&(\because\ \text{零元を足しても変わらない})
+\end{aligned}`),
+      paragraph([
+        "である。これで帰納法が閉じた。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元と自然数だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

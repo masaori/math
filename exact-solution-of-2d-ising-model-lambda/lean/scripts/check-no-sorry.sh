@@ -485,6 +485,12 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_add_of_outside_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_eq_single_of_outside_zero
   Ising2DLambda.AlgebraicEigenvalue.orbitSum_shiftMatrix_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.one_add_negUnitSecond
+  Ising2DLambda.AlgebraicEigenvalue.add_negUnitSecond_mul_eq_zero
+  Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.add_mul_self_eq_zero_of_one_add_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_eq_mul_geom
+  Ising2DLambda.AlgebraicEigenvalue.powerSumTelescope_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
