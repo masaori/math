@@ -349,6 +349,7 @@ export default defineBlocks([
 &= \left(\prod_{k=1}^{M}\left(\sum_{s=1}^{2}c_k(s)\right)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
 \quad (\because \text{帰納法の仮定}) \\
 &= \prod_{k=1}^{M+1}\left(\sum_{t=1}^{2}c_k(t)\right)
+\quad (\because \text{有限積の最後の因子を戻した（積の定義）})
 \end{aligned}`,
       ),
       paragraph([
@@ -425,12 +426,17 @@ export default defineBlocks([
 &= \sum_{p=1}^{2^M}\left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),p}
 \left(v_1\boxtimes\cdots\boxtimes v_M\right)_{p}
 \quad (\because \text{行列と数ベクトルの積の定義}) \\
-&= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
+&= \sum_{K\in\mathcal{I}_M}
+\left(\prod_{k=1}^{M}(A_k)_{i_kt_k}\right)\left(\prod_{k=1}^{M}(v_k)_{t_k}\right)
 \quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
+&= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
+\quad (\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(v_k)_{t}\right)
-\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段}) \\
+\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(v_k)_{t} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kv_k)_{i_k}
-= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
+\quad (\because \text{行列と数ベクトルの積の定義}) \\
+&= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
+\quad (\because \boxtimes \text{ の定義})
 \end{aligned}`,
       ),
     ],
@@ -441,6 +447,13 @@ export default defineBlocks([
           "004 章以降の証明で繰り返し根拠として使われているのに、定義も証明も本文に無かった" +
           "（goal-alignment-audit の A-3）。クロネッカー積として定義したことで、成分計算で証明できる" +
           "主張になったのでここに置いた。",
+        "2026-08-10: 式変形の書き方の統一。2 箇所を直した。準備（多重添字の和を各サイトごとの" +
+          "和の積へ直す段）の鎖の最終行に根拠が無かったので (∵ …) を付けた。" +
+          "(3) の鎖は、1 行で 2 つの定理を同時に適用していた段（ν が全単射であることと ⊠ の定義で" +
+          "書き換える段に、複素数の積の可換律・結合律による並べ替えを混ぜていた）を 2 段へ割り、" +
+          "さらに最後の行が 1 行に 2 つの等号を並べて根拠を 1 つも書いていなかったので" +
+          "2 段へ割って各行に (∵ …) を置いた（(1) の鎖と同じ形になった）。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
       ],
     },
   },
