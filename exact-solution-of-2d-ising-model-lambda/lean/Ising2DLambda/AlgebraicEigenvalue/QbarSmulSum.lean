@@ -18,6 +18,7 @@ mathlib の `Finset.smul_sum` のような一般論へは委ねず、人手証�
 -/
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Ising2DLambda.AlgebraicEigenvalue.QbarActionSum
+import Ising2DLambda.AlgebraicEigenvalue.QbarActionLinear
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 

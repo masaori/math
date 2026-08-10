@@ -264,3 +264,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarActionSumFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarSmulSum
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarSmulSum
 import Ising2DLambda.AlgebraicEigenvalue.QbarSmulSumFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarProjector
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarProjector
+import Ising2DLambda.AlgebraicEigenvalue.QbarProjectorFromNecSuf

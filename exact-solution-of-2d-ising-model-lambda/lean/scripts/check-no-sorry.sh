@@ -590,6 +590,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarSmul_sum
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.smul_sum_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarSmul_sum_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarProjector_action
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.projector_action_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarProjector_action_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
