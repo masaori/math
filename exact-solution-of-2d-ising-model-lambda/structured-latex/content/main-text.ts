@@ -19797,6 +19797,144 @@ A^{k+1}\cdot v
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_matrix_eval",
+    kind: "definition",
+    title: { text: "整係数多項式を成分とする行列の、代数的数における値" },
+    labels: ["def_qbar_matrix_eval"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-matrix-eval"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " を任意に取る（",
+        ref("def_algebraic_numbers"),
+        "）。",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        " に対し、行列 ",
+        math(String.raw`\mathrm{Ev}_{\xi}(A)\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）を、その成分により",
+      ]),
+      displayMath(
+        String.raw`\bigl(\mathrm{Ev}_{\xi}(A)\bigr)_{\tau,\tau'}:=\bigl(A_{\tau,\tau'}\bigr)(\xi)\qquad(\tau,\tau'\in R_L)`,
+      ),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`\bigl(A_{\tau,\tau'}\bigr)(\xi)\in\overline{\mathbb{Q}}`),
+        " は ",
+        ref("def_partition_polynomial"),
+        " で約束した意味での代入（可換環 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " とその元 ",
+        math(String.raw`\xi`),
+        " についての評価）である。",
+      ]),
+      paragraph([
+        "丸括弧が付いたものだけが代入である。",
+        math(String.raw`A_{\tau,\tau'}\in\mathbb{Z}[x]`),
+        " は多項式そのもの、",
+        math(String.raw`\bigl(A_{\tau,\tau'}\bigr)(\xi)\in\overline{\mathbb{Q}}`),
+        " はその値であり、",
+        math(String.raw`\mathrm{Ev}_{\xi}`),
+        " は行列を行列へ送る写像であって行列の成分ではない。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と有限和・有限積だけであり、実数体も複素数体も現れない（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は可算集合である。",
+        ref("def_algebraic_numbers"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_matrix_eval_product",
+    kind: "claim",
+    title: { text: "成分ごとの評価は行列の積を保つ" },
+    labels: ["claim_qbar_matrix_eval_product"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-matrix-eval"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`A,B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        "（",
+        ref("def_matrix_over_row_configs"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Ev}_{\xi}(AB)=\mathrm{Ev}_{\xi}(A)\,\mathrm{Ev}_{\xi}(B)`,
+      ),
+      paragraph([
+        "が成り立つ（左辺の積は ",
+        ref("def_matrix_product"),
+        " の ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の行列の積、右辺の積は ",
+        ref("def_qbar_matrix_product"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の行列の積であり、別の演算である。",
+        math(String.raw`\mathrm{Ev}_{\xi}`),
+        " は ",
+        ref("def_qbar_matrix_eval"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_qbar_matrix"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{Ev}_{\xi}(AB)\bigr)_{\tau,\tau''}
+&=\bigl((AB)_{\tau,\tau''}\bigr)(\xi)
+&&(\because\ \blkref{def_qbar_matrix_eval})\\
+&=\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)(\xi)
+&&(\because\ \blkref{def_matrix_product})\\
+&=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)(\xi)
+&&(\because\ \text{代入が有限和を保つこと。}\ \blkref{def_partition_polynomial})\\
+&=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\bigr)(\xi)\,\bigl(B_{\tau',\tau''}\bigr)(\xi)
+&&(\because\ \text{代入が積を保つこと。}\ \blkref{def_partition_polynomial})\\
+&=\sum_{\tau'\in R_L}\bigl(\mathrm{Ev}_{\xi}(A)\bigr)_{\tau,\tau'}\,\bigl(\mathrm{Ev}_{\xi}(B)\bigr)_{\tau',\tau''}
+&&(\because\ \blkref{def_qbar_matrix_eval}\ \text{を 2 箇所へ適用})\\
+&=\bigl(\mathrm{Ev}_{\xi}(A)\,\mathrm{Ev}_{\xi}(B)\bigr)_{\tau,\tau''}
+&&(\because\ \blkref{def_qbar_matrix_product})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau`),
+        " と ",
+        math(String.raw`\tau''`),
+        " は任意なので、2 つの行列のすべての成分が等しく、主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が使っているのは、代入が有限和と積を保つこと（",
+        ref("def_partition_polynomial"),
+        " で置いた約束であり、証明すべきことではない）と、2 つの積の定義だけである。",
+        math(String.raw`R_L`),
+        " が有限集合であること（",
+        ref("def_row_configuration"),
+        "）から和は有限個の項からなる。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -19966,13 +20104,28 @@ A^{k+1}\cdot v
           ref("def_qbar_action_iterate"),
           "）を置いて、行列の冪の作用が作用を反復したものであること（",
           ref("claim_qbar_action_pow"),
+          "）、および固有ベクトルへ行列の冪を作用させると固有値の冪のスカラー倍になること（",
+          ref("claim_qbar_eigenvector_pow"),
+          "）、および整係数多項式を成分とする行列を代数的数で評価する写像（",
+          ref("def_qbar_matrix_eval"),
+          "）を置いて、それが行列の積を保つこと（",
+          ref("claim_qbar_matrix_eval_product"),
           "）までは上で済んでいる。",
-          "次に書くのは、固有ベクトルへ行列の冪を作用させると固有値の冪の",
-          "スカラー倍になること、およびシフト行列の固有値が 1 の ",
+          "次に書くのは、",
+          ref("theorem_shift_matrix_order"),
+          " の ",
+          math(String.raw`U^{L}=I`),
+          " を ",
+          ref("def_qbar_matrix_eval"),
+          " で ",
+          math(String.raw`\overline{\mathbb{Q}}`),
+          " の行列の等式へ運び、",
+          ref("claim_qbar_eigenvector_pow"),
+          " と突き合わせてシフト行列の固有値が 1 の ",
           math(String.raw`L`),
-          " 乗根であることを特性多項式の根の同定（",
+          " 乗根であることを出すこと（特性多項式の根の同定（",
           ref("claim_shift_char_root_of_unity"),
-          "）へつなぎ、シフト行列の固有空間へ転送行列を分けること（対角化）である。",
+          "）との関係もそこで書く）、およびシフト行列の固有空間へ転送行列を分けること（対角化）である。",
         ],
         [
           todo("未着手"),
