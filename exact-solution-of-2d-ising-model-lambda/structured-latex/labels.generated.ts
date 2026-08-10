@@ -87,6 +87,7 @@ export const ALL_LABELS = [
   "claim_qbar_prod_eq_zero",
   "claim_qbar_shift_transfer_commute",
   "claim_qbar_smul_eq_zero",
+  "claim_qbar_smul_sum",
   "claim_qbar_transfer_preserves_shift_eigenspace",
   "claim_rational_exponent_well_defined",
   "claim_restriction_family_gluing",

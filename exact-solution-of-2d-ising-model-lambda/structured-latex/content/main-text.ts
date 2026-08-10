@@ -21270,6 +21270,113 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_smul_sum",
+    kind: "claim",
+    title: { text: "スカラー倍は列ベクトルの有限和を保つ" },
+    labels: ["claim_qbar_smul_sum"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarSmul_sum",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.smul_sum_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarSmul_sum_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-smul-sum"],
+    statement: [
+      paragraph([
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）、集合 ",
+        math(String.raw`I`),
+        " の有限部分集合 ",
+        math(String.raw`s`),
+        "、および写像 ",
+        math(String.raw`i\mapsto v_i`),
+        "（",
+        math(String.raw`I`),
+        " から ",
+        math(String.raw`V_L`),
+        " への写像。",
+        ref("def_qbar_vector"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`z\odot\Bigl(\bigoplus_{i\in s}v_i\Bigr)=\bigoplus_{i\in s}\bigl(z\odot v_i\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\odot`),
+        " は ",
+        ref("def_qbar_vector_smul"),
+        "、",
+        math(String.raw`\bigoplus`),
+        " は ",
+        ref("def_qbar_vector_sum"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(z\odot\Bigl(\bigoplus_{i\in s}v_i\Bigr)\Bigr)(\tau)
+&=z\,\Bigl(\bigoplus_{i\in s}v_i\Bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=z\,\Bigl(\sum_{i\in s}v_i(\tau)\Bigr)
+&&(\because\ \blkref{def_qbar_vector_sum})\\
+&=\sum_{i\in s}z\,v_i(\tau)
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=\sum_{i\in s}\bigl(z\odot v_i\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\Bigl(\bigoplus_{i\in s}\bigl(z\odot v_i\bigr)\Bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_sum})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので、2 つの写像は等しい。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、元と有限和の積についての分配則だけである。",
+        "積の結合則も可換性も、加法の逆元も、体であることも使っていない。",
+        "行列の作用が有限和を保つこと（",
+        ref("claim_qbar_action_sum"),
+        "）が有限和の順序の入れ替えを要したのと違い、こちらは和が 1 つしか現れないので、",
+        "入れ替えは要らない。",
+        "また ",
+        math(String.raw`s`),
+        " が有限であることは分配則を有限個の項へ当てるために要るが、",
+        math(String.raw`R_L`),
+        " の有限性はこの段では使っていない（各 ",
+        math(String.raw`\tau`),
+        " ごとに独立な等式だからである）。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "この主張は、1 の ",
+        math(String.raw`L`),
+        " 乗根 ",
+        math(String.raw`z`),
+        " ごとに列ベクトルを固有空間へ落とす写像を作り、",
+        "その像が固有空間に入ることを示すための足場である。",
+        "そこでは、有限和として定めた列ベクトルへ ",
+        math(String.raw`z`),
+        " を掛ける操作を、各項へ掛ける操作に取り替える必要がある。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21471,6 +21578,8 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
           ref("def_qbar_vector_sum"),
           "）を置いて、行列の作用がそれを保つこと（",
           ref("claim_qbar_action_sum"),
+          "）、およびスカラー倍が列ベクトルの有限和を保つこと（",
+          ref("claim_qbar_smul_sum"),
           "）までは上で済んでいる。",
           "次に書くのは、1 の ",
           math(String.raw`L`),

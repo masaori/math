@@ -261,3 +261,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarTransferPreservesShiftEigenspaceFro
 import Ising2DLambda.AlgebraicEigenvalue.QbarActionSum
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarActionSum
 import Ising2DLambda.AlgebraicEigenvalue.QbarActionSumFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarSmulSum
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarSmulSum
+import Ising2DLambda.AlgebraicEigenvalue.QbarSmulSumFromNecSuf
