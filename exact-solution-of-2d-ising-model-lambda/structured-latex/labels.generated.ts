@@ -93,6 +93,7 @@ export const ALL_LABELS = [
   "claim_shift_char_diagonal_entry",
   "claim_shift_char_dvd_pow_L",
   "claim_shift_char_matrix_entry_zero",
+  "claim_shift_char_orbit_factorization",
   "claim_shift_char_orbit_product",
   "claim_shift_char_sum_family",
   "claim_shift_char_sum_orbit_preserving",
