@@ -1322,59 +1322,146 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         String.raw`\left\|X^{p}\,Y\,(-X)^{q}\right\| \le a^{p+q}\,\|Y\|`,
       ),
       paragraph([
-        "が成り立つ。実際、",
+        "が成り立つ。準備として ",
         math(String.raw`l\in\mathbb{Z}_{\ge 1}`),
         " について ",
         math(String.raw`\|X^{l}\|\le a^{l}`),
-        " は ",
-        ref("matrix_norm_submultiplicativity"),
-        " と ",
+        " を ",
         math(String.raw`l`),
-        " についての帰納法（",
+        " についての帰納法で示す。",
         math(String.raw`l=1`),
-        " は自明、",
-        math(String.raw`\|X^{l+1}\|=\|X^{l}X\|\le\|X^{l}\|\,\|X\|\le a^{l}\cdot a=a^{l+1}`),
-        "）で従い、",
+        " のときは ",
+        math(String.raw`\|X^{1}\|=\|X\|=a=a^{1}`),
+        "。",
+        math(String.raw`l`),
+        " のとき ",
+        math(String.raw`\|X^{l}\|\le a^{l}`),
+        " とすると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|X^{l+1}\right\|
+&= \left\|X^{l}X\right\|
+   \quad (\because \text{行列の冪の定義}) \\
+&\le \left\|X^{l}\right\|\,\|X\|
+   \quad (\because \text{ノルムの劣乗法性}) \\
+&\le a^{l}\,\|X\|
+   \quad (\because \text{帰納法の仮定}) \\
+&= a^{l}\,a
+   \quad (\because a \text{ の定義}) \\
+&= a^{l+1}
+   \quad (\because \text{指数法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、任意の ",
+        math(String.raw`l\in\mathbb{Z}_{\ge 1}`),
+        " について ",
+        math(String.raw`\|X^{l}\|\le a^{l}`),
+        " が成り立つ（劣乗法性は ",
+        ref("matrix_norm_submultiplicativity"),
+        "）。符号を付けたものも同じ評価をもつ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|(-X)^{l}\right\|
+&= \left\|(-1)^{l}X^{l}\right\|
+   \quad (\because (-X)^{l}=(-1)^{l}X^{l}) \\
+&= \left|(-1)^{l}\right|\,\left\|X^{l}\right\|
+   \quad (\because \text{ノルムの斉次性}) \\
+&= \left\|X^{l}\right\|
+   \quad (\because \left|(-1)^{l}\right|=1) \\
+&\le a^{l}
+   \quad (\because \text{直前の帰納法})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（斉次性は ",
         ref("matrix_norm_triangle_inequality"),
-        " (2) より ",
-        math(String.raw`\|(-X)^{l}\|=\|(-1)^{l}X^{l}\|=|(-1)^{l}|\,\|X^{l}\|=\|X^{l}\|\le a^{l}`),
-        "。よって",
+        " (2)）。以上を使って ",
+        math(String.raw`p,q`),
+        " の 4 つの場合を評価する。",
       ]),
       list([
         [
           math(String.raw`p\ge 1,\ q\ge 1`),
-          " のとき ",
-          math(String.raw`\left\|X^{p}Y(-X)^{q}\right\|\le\|X^{p}\|\,\|Y\|\,\|(-X)^{q}\|\le a^{p}\|Y\|a^{q}`),
-          "（劣乗法性を 2 回）。",
+          " のとき",
+          displayMath(
+            String.raw`\begin{aligned}
+\left\|X^{p}\,Y\,(-X)^{q}\right\|
+&\le \left\|X^{p}\right\|\,\left\|Y\,(-X)^{q}\right\|
+   \quad (\because \text{ノルムの劣乗法性}) \\
+&\le \left\|X^{p}\right\|\,\|Y\|\,\left\|(-X)^{q}\right\|
+   \quad (\because \text{ノルムの劣乗法性}) \\
+&\le a^{p}\,\|Y\|\,\left\|(-X)^{q}\right\|
+   \quad (\because \|X^{p}\|\le a^{p}) \\
+&\le a^{p}\,\|Y\|\,a^{q}
+   \quad (\because \|(-X)^{q}\|\le a^{q})
+\end{aligned}`,
+          ),
         ],
         [
           math(String.raw`p=0,\ q\ge 1`),
-          " のとき ",
-          math(String.raw`X^{0}Y(-X)^{q}=Y(-X)^{q}`),
-          " なので ",
-          math(String.raw`\left\|Y(-X)^{q}\right\|\le\|Y\|a^{q}=a^{0}\|Y\|a^{q}`),
-          "。",
+          " のとき",
+          displayMath(
+            String.raw`\begin{aligned}
+\left\|X^{0}\,Y\,(-X)^{q}\right\|
+&= \left\|Y\,(-X)^{q}\right\|
+   \quad (\because X^{0}=I \text{ と } IY=Y) \\
+&\le \|Y\|\,\left\|(-X)^{q}\right\|
+   \quad (\because \text{ノルムの劣乗法性}) \\
+&\le \|Y\|\,a^{q}
+   \quad (\because \|(-X)^{q}\|\le a^{q}) \\
+&= a^{0}\,\|Y\|\,a^{q}
+   \quad (\because a^{0}=1)
+\end{aligned}`,
+          ),
         ],
         [
           math(String.raw`p\ge 1,\ q=0`),
-          " のときも同様に ",
-          math(String.raw`\left\|X^{p}Y\right\|\le a^{p}\|Y\|=a^{p}\|Y\|a^{0}`),
-          "。",
+          " のとき",
+          displayMath(
+            String.raw`\begin{aligned}
+\left\|X^{p}\,Y\,(-X)^{0}\right\|
+&= \left\|X^{p}\,Y\right\|
+   \quad (\because (-X)^{0}=I \text{ と } YI=Y) \\
+&\le \left\|X^{p}\right\|\,\|Y\|
+   \quad (\because \text{ノルムの劣乗法性}) \\
+&\le a^{p}\,\|Y\|
+   \quad (\because \|X^{p}\|\le a^{p}) \\
+&= a^{p}\,\|Y\|\,a^{0}
+   \quad (\because a^{0}=1)
+\end{aligned}`,
+          ),
         ],
         [
           math(String.raw`p=q=0`),
-          " のとき ",
-          math(String.raw`X^{0}Y(-X)^{0}=Y`),
-          " なので ",
-          math(String.raw`\|Y\|=a^{0}\|Y\|a^{0}`),
-          "。",
+          " のとき",
+          displayMath(
+            String.raw`\begin{aligned}
+\left\|X^{0}\,Y\,(-X)^{0}\right\|
+&= \|Y\|
+   \quad (\because X^{0}=(-X)^{0}=I \text{ と } IYI=Y) \\
+&= a^{0}\,\|Y\|\,a^{0}
+   \quad (\because a^{0}=1)
+\end{aligned}`,
+          ),
         ],
       ]),
       paragraph([
-        "いずれの場合も ",
-        math(String.raw`\left\|X^{p}Y(-X)^{q}\right\|\le a^{p}\|Y\|a^{q}=a^{p+q}\|Y\|`),
-        "。",
+        "いずれの場合も次が成り立つ。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|X^{p}\,Y\,(-X)^{q}\right\|
+&\le a^{p}\,\|Y\|\,a^{q}
+   \quad (\because \text{上の 4 つの場合}) \\
+&= a^{p}\,a^{q}\,\|Y\|
+   \quad (\because \text{実数の積の可換性}) \\
+&= a^{p+q}\,\|Y\|
+   \quad (\because \text{指数法則})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 5: ",
         math(String.raw`\|Q_N-P_N\|\to 0`),
