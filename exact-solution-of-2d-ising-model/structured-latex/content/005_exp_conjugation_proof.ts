@@ -270,34 +270,80 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \overline{z+w}
-&= \overline{(x+u,\ y+v)} = (x+u,\ -(y+v)) = (x,-y)+(u,-v) = \overline{z}+\overline{w} \\
+&= \overline{(x+u,\ y+v)}
+   \quad (\because \mathbb{C} \text{ の加法の定義}) \\
+&= (x+u,\ -(y+v))
+   \quad (\because \text{複素共役の定義}) \\
+&= (x,-y)+(u,-v)
+   \quad (\because \mathbb{R} \text{ の符号の計算と } \mathbb{C} \text{ の加法の定義}) \\
+&= \overline{z}+\overline{w}
+   \quad (\because \text{複素共役の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \overline{z\,w}
-&= \overline{(xu-yv,\ xv+yu)} = (xu-yv,\ -(xv+yu)) \\
-&= \left(x u-(-y)(-v),\ x(-v)+(-y)u\right) = (x,-y)\cdot(u,-v) = \overline{z}\cdot\overline{w} \\
+&= \overline{(xu-yv,\ xv+yu)}
+   \quad (\because \mathbb{C} \text{ の乗法の定義}) \\
+&= (xu-yv,\ -(xv+yu))
+   \quad (\because \text{複素共役の定義}) \\
+&= \left(x u-(-y)(-v),\ x(-v)+(-y)u\right)
+   \quad (\because \mathbb{R} \text{ の符号の計算}) \\
+&= (x,-y)\cdot(u,-v)
+   \quad (\because \mathbb{C} \text{ の乗法の定義}) \\
+&= \overline{z}\cdot\overline{w}
+   \quad (\because \text{複素共役の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \overline{\overline{z}}
-&= \overline{(x,-y)} = (x,y) = z \\
+&= \overline{(x,-y)}
+   \quad (\because \text{複素共役の定義}) \\
+&= (x,y)
+   \quad (\because \text{複素共役の定義}) \\
+&= z
+   \quad (\because z=(x,y))
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \overline{z}\,z
-&= (x,-y)\cdot(x,y) = (x\cdot x-(-y)\cdot y,\ x\cdot y+(-y)\cdot x) = (x^2+y^2,\ 0)
-= \left(|z|^2\right)_{\mathbb{C}} \\
-\mathrm{Re}(z) &= x \le \sqrt{x^2+y^2}^{\,(\mathbb{R}_{\ge 0})} = |z|
+&= (x,-y)\cdot(x,y)
+   \quad (\because \text{複素共役の定義}) \\
+&= (x\cdot x-(-y)\cdot y,\ x\cdot y+(-y)\cdot x)
+   \quad (\because \mathbb{C} \text{ の乗法の定義}) \\
+&= (x^2+y^2,\ 0)
+   \quad (\because \mathbb{R} \text{ の符号の計算}) \\
+&= \left(|z|^2\right)_{\mathbb{C}}
+   \quad (\because \text{絶対値の基本性質 (2) と } \mathbb{R}\to\mathbb{C} \text{ の包含写像})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{Re}(z)
+&= x
+   \quad (\because \mathrm{Re} \text{ の定義}) \\
+&\le \sqrt{x^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because x\le|x|=\sqrt{x^2}^{\,(\mathbb{R}_{\ge 0})}) \\
+&\le \sqrt{x^2+y^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \sqrt{\cdot} \text{ の単調性と } x^2\le x^2+y^2) \\
+&= |z|
+   \quad (\because \text{絶対値の基本性質 (1)})
 \end{aligned}`,
       ),
       paragraph([
-        "が成り立つ（",
-        math(String.raw`\overline{z}z`),
-        " の最後の等号は ",
+        "が成り立つ（用いた ",
+        ref("definition_of_cc"),
+        "、",
         ref("abs_basic_properties"),
-        " (2) と ",
+        "、",
         ref("inclusion_rr_to_cc"),
         "、",
-        math(String.raw`\mathrm{Re}(z)\le|z|`),
-        " は ",
-        ref("abs_basic_properties"),
-        " (1) と ",
-        math(String.raw`x\le|x|=\sqrt{x^2}^{\,(\mathbb{R}_{\ge 0})}\le\sqrt{x^2+y^2}^{\,(\mathbb{R}_{\ge 0})}`),
-        "（",
         ref("definition_of_sqrt_r_positive"),
-        " の単調性）による）。",
+        " は各行の ",
+        math(String.raw`(\because\ \cdot)`),
+        " に挙げたとおりである）。",
       ]),
       paragraph(["Step 1: (0)。行列の積の定義と ", ref("definition_of_cc"), " の加法・乗法より、"]),
       displayMath(
@@ -336,35 +382,72 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \langle A,B+C\rangle
 &= \sum_{i,j}\overline{a_{ij}}\left(b_{ij}+c_{ij}\right)
- = \sum_{i,j}\left(\overline{a_{ij}}b_{ij}+\overline{a_{ij}}c_{ij}\right)
- = \langle A,B\rangle+\langle A,C\rangle \\
+   \quad (\because \text{(0) と行列の和の定義}) \\
+&= \sum_{i,j}\left(\overline{a_{ij}}b_{ij}+\overline{a_{ij}}c_{ij}\right)
+   \quad (\because \mathbb{C} \text{ の分配律}) \\
+&= \sum_{i,j}\overline{a_{ij}}b_{ij}+\sum_{i,j}\overline{a_{ij}}c_{ij}
+   \quad (\because \text{有限和の分割}) \\
+&= \langle A,B\rangle+\langle A,C\rangle
+   \quad (\because \text{(0)})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \langle A,\lambda B\rangle
 &= \sum_{i,j}\overline{a_{ij}}\left(\lambda b_{ij}\right)
- = \lambda\sum_{i,j}\overline{a_{ij}}b_{ij}
- = \lambda\langle A,B\rangle \\
+   \quad (\because \text{(0) とスカラー倍の定義}) \\
+&= \sum_{i,j}\lambda\left(\overline{a_{ij}}b_{ij}\right)
+   \quad (\because \mathbb{C} \text{ の乗法の可換性と結合律}) \\
+&= \lambda\sum_{i,j}\overline{a_{ij}}b_{ij}
+   \quad (\because \text{有限和と元の積についての分配律}) \\
+&= \lambda\langle A,B\rangle
+   \quad (\because \text{(0)})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \langle A+B,C\rangle
 &= \sum_{i,j}\overline{a_{ij}+b_{ij}}\;c_{ij}
- = \sum_{i,j}\left(\overline{a_{ij}}+\overline{b_{ij}}\right)c_{ij}
- = \langle A,C\rangle+\langle B,C\rangle \\
+   \quad (\because \text{(0) と行列の和の定義}) \\
+&= \sum_{i,j}\left(\overline{a_{ij}}+\overline{b_{ij}}\right)c_{ij}
+   \quad (\because \text{Step 0 の } \overline{z+w}=\overline{z}+\overline{w}) \\
+&= \sum_{i,j}\left(\overline{a_{ij}}c_{ij}+\overline{b_{ij}}c_{ij}\right)
+   \quad (\because \mathbb{C} \text{ の分配律}) \\
+&= \sum_{i,j}\overline{a_{ij}}c_{ij}+\sum_{i,j}\overline{b_{ij}}c_{ij}
+   \quad (\because \text{有限和の分割}) \\
+&= \langle A,C\rangle+\langle B,C\rangle
+   \quad (\because \text{(0)})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \langle \lambda A,B\rangle
 &= \sum_{i,j}\overline{\lambda a_{ij}}\;b_{ij}
- = \sum_{i,j}\overline{\lambda}\,\overline{a_{ij}}\,b_{ij}
- = \overline{\lambda}\langle A,B\rangle
+   \quad (\because \text{(0) とスカラー倍の定義}) \\
+&= \sum_{i,j}\overline{\lambda}\,\overline{a_{ij}}\,b_{ij}
+   \quad (\because \text{Step 0 の } \overline{zw}=\overline{z}\,\overline{w}) \\
+&= \overline{\lambda}\sum_{i,j}\overline{a_{ij}}\,b_{ij}
+   \quad (\because \text{有限和と元の積についての分配律}) \\
+&= \overline{\lambda}\langle A,B\rangle
+   \quad (\because \text{(0)})
 \end{aligned}`,
       ),
       paragraph(["Step 4: (3)。Step 0 の ", math(String.raw`\overline{z}z=\left(|z|^2\right)_{\mathbb{C}}`), " より、"]),
       displayMath(
-        String.raw`\langle A,A\rangle
-= \sum_{i,j}\overline{a_{ij}}\,a_{ij}
-= \sum_{i,j}\left(|a_{ij}|^2\right)_{\mathbb{C}}
-= \left(\sum_{i,j}|a_{ij}|^2\right)_{\mathbb{C}}`,
+        String.raw`\begin{aligned}
+\langle A,A\rangle
+&= \sum_{i,j}\overline{a_{ij}}\,a_{ij}
+   \quad (\because \text{(0)}) \\
+&= \sum_{i,j}\left(|a_{ij}|^2\right)_{\mathbb{C}}
+   \quad (\because \text{Step 0 の } \overline{z}z=\left(|z|^2\right)_{\mathbb{C}}) \\
+&= \left(\sum_{i,j}|a_{ij}|^2\right)_{\mathbb{C}}
+   \quad (\because \mathbb{R}\to\mathbb{C} \text{ の包含写像 } \iota_{\mathbb{R}\to\mathbb{C}} \text{ が加法を保つこと})
+\end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
+        "最後の段で引いたのは ",
         ref("inclusion_rr_to_cc"),
-        " の ",
-        math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
-        " が加法を保つことによる）。よって ",
+        " である。よって ",
         math(String.raw`\langle A,A\rangle`),
         " は非負実数 ",
         math(String.raw`\sum_{i,j}|a_{ij}|^2`),
