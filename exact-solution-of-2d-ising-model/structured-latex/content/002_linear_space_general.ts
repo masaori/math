@@ -2243,7 +2243,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " を Cauchy 列とすると、Step 1 より各成分について",
       ]),
       displayMath(
-        String.raw`\left|(A_N)_{ij}-(A_M)_{ij}\right|=\left|(A_N-A_M)_{ij}\right|\le\|A_N-A_M\|`,
+        String.raw`\begin{aligned}
+\left|(A_N)_{ij}-(A_M)_{ij}\right|
+&=\left|(A_N-A_M)_{ij}\right|
+&&(\because\ \text{行列の差は成分ごとである})\\
+&\le\|A_N-A_M\|
+&&(\because\ \text{Step 1})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
@@ -2281,8 +2287,15 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " (3) を繰り返し用いて",
       ]),
       displayMath(
-        String.raw`\|S_N-S_M\|=\left\|\sum_{m=M+1}^{N}B_m\right\|
-\le\sum_{m=M+1}^{N}\|B_m\|=T_N-T_M`,
+        String.raw`\begin{aligned}
+\|S_N-S_M\|
+&=\left\|\sum_{m=M+1}^{N}B_m\right\|
+&&(\because\ S_N\ \text{と}\ S_M\ \text{の定義と、有限和の差})\\
+&\le\sum_{m=M+1}^{N}\|B_m\|
+&&(\because\ \text{行列ノルムの三角不等式を繰り返し用いる})\\
+&=T_N-T_M
+&&(\because\ T_N\ \text{と}\ T_M\ \text{の定義と、有限和の差})
+\end{aligned}`,
       ),
       paragraph([
         "であるから ",
@@ -2307,7 +2320,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " (3) より",
       ]),
       displayMath(
-        String.raw`\|S\|\le\|S-S_N\|+\|S_N\|\le\|S-S_N\|+T`,
+        String.raw`\begin{aligned}
+\|S\|
+&\le\|S-S_N\|+\|S_N\|
+&&(\because\ S=(S-S_N)+S_N\ \text{と行列ノルムの三角不等式})\\
+&\le\|S-S_N\|+T
+&&(\because\ \|S_N\|\le T)
+\end{aligned}`,
       ),
       paragraph([
         "であり、右辺第 1 項は ",
@@ -2329,6 +2348,11 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         "原文（Typst）に対応ブロックは無い。exp 級数の収束（labels: exp_converges）と" +
           "可換行列の exp 積公式（labels: theorem_exp_product）が前提とする" +
           "「Mat(n,K) が完備であること」「絶対収束すれば収束すること」を明示するために追加した。",
+        "式変形の書き方の統一（2026-08-10）。3 箇所の式が 1 行に 2 つ以上の関係を並べ、" +
+          "根拠を 1 つも書いていなかった（Step 3 の成分の評価、Step 4 の部分和の差の評価、" +
+          "Step 5 のノルムの評価）。どの関係がどの根拠によるのかが式から読み取れないので、" +
+          "それぞれ 1 行 1 関係の鎖へ分け、各行の末尾に (∵ …) を置いた。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
       ],
     },
   },

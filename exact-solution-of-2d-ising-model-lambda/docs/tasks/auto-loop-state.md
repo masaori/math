@@ -1921,7 +1921,7 @@
 | 000_calculation_formulae_30_44 | 13 | 13 |
 | 000_calculation_formulae_45_46 | 2 | 2 |
 | 001_partition_function_2d_ising | 1 | 1 |
-| 002_linear_space_general | 12 | 11 |
+| 002_linear_space_general | 12 | 12 |
 | 003_exp_linear_map | 5 | 0 |
 | 004_transfer_matrix | 9 | 0 |
 | 005_exp_conjugation_proof | 4 | 0 |
@@ -1948,6 +1948,19 @@
 （リポジトリの規約が禁じているのは新しく番号を振ることである）。
 
 書き換えた証明（新しいものを上に足す）:
+
+- 2026-08-10（tick 55）: `002_linear_space_general` の主張
+  「$\mathrm{Mat}(n,K)$ の完備性と絶対収束判定」。3 箇所を直した。
+  Step 3 の成分の評価・Step 4 の部分和の差の評価・Step 5 のノルムの評価が、いずれも
+  1 行に 2 つ以上の関係（$=$ と $\le$）を並べたうえで根拠を 1 つも書いていなかった。
+  それぞれ 1 行 1 関係の鎖へ分け、各行の末尾に $(\because\ \dots)$ を置いた
+  （行列の差が成分ごとであること・Step 1・三角不等式の繰り返し・有限和の差、が
+  別々の根拠であることが、これで式の上に現れる）。
+  **段は増えており、減った段は無い。** 主張も証明の筋も変えていない。
+  経緯は `conversion.notes` へ残した。姉妹プロジェクト側の検証も全通過している
+  （`npm run check`・PDF 276 ページ）。
+  **これで `002_linear_space_general` は 12 件すべてが済みである。**
+  次のファイルは `003_exp_linear_map`（5 件、未着手）。
 
 - 2026-08-10（tick 54）: `002_linear_space_general` の主張
   「クロネッカー積の積の規則（各サイトごとの積になること）」。2 箇所を直した。
