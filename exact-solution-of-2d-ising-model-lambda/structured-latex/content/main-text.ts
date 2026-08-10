@@ -21022,6 +21022,90 @@ A\cdot(B\cdot v)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_transfer_preserves_shift_eigenspace",
+    kind: "claim",
+    title: { text: "転送行列はシフト行列の各固有空間をそれ自身へ写す" },
+    labels: ["claim_qbar_transfer_preserves_shift_eigenspace"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarTransfer_preserves_shift_eigenspace",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarTransfer_preserves_shift_eigenspace_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-transfer-preserves-shift-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。",
+        ref("def_shift_matrix"),
+        " の ",
+        math(String.raw`U`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`T`),
+        " を ",
+        ref("def_qbar_matrix_eval"),
+        " で運んだ行列について、",
+        math(String.raw`v\in E_{\mathrm{Ev}_{\xi}(U)}(z)`),
+        "（",
+        ref("def_qbar_eigenspace"),
+        "）を満たす任意の ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Ev}_{\xi}(T)\cdot v\in E_{\mathrm{Ev}_{\xi}(U)}(z)`,
+      ),
+      paragraph([
+        "である（点は ",
+        ref("def_qbar_matrix_action"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}_{\xi}(U)\cdot\bigl(\mathrm{Ev}_{\xi}(T)\cdot v\bigr)
+&=z\odot\bigl(\mathrm{Ev}_{\xi}(T)\cdot v\bigr)
+&&\left(\because\ \begin{aligned}
+&\blkref{claim_qbar_commuting_preserves_eigenspace}\ \text{を}\
+A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
+&\text{その仮定}\ AB=BA\ \text{は}\ \blkref{claim_qbar_shift_transfer_commute}
+\end{aligned}\right)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`\mathrm{Ev}_{\xi}(T)\cdot v`),
+        " は ",
+        ref("def_qbar_eigenspace"),
+        " の条件を満たし、",
+        math(String.raw`\mathrm{Ev}_{\xi}(T)\cdot v\in E_{\mathrm{Ev}_{\xi}(U)}(z)`),
+        " である。",
+      ]),
+      paragraph([
+        "この段は組み立てだけである。新しい論法は無く、既に示した 2 つの主張（",
+        ref("claim_qbar_commuting_preserves_eigenspace"),
+        "、",
+        ref("claim_qbar_shift_transfer_commute"),
+        "）を、この章が扱う 2 つの行列へ当てている。",
+        "とくに、",
+        math(String.raw`v`),
+        " が零ベクトルでないことは仮定していない（",
+        ref("def_qbar_eigenspace"),
+        " が零ベクトルを含むため、この主張は ",
+        math(String.raw`v=o_L`),
+        " のときも中身のある形で成り立つ）。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21217,8 +21301,10 @@ A\cdot(B\cdot v)
           ref("claim_qbar_commuting_preserves_eigenspace"),
           "）、および評価で運んだシフト行列と転送行列が可換であること（",
           ref("claim_qbar_shift_transfer_commute"),
+          "）、および転送行列がシフト行列の各固有空間をそれ自身へ写すこと（",
+          ref("claim_qbar_transfer_preserves_shift_eigenspace"),
           "）までは上で済んでいる。",
-          "次に書くのは、転送行列がシフト行列の各固有空間をそれ自身へ写すことである（対角化へ向けた段）。",
+          "次に書くのは、シフト行列の固有空間たちが列ベクトルの全体を張ること（対角化の本体）である。",
         ],
         [
           todo("未着手"),

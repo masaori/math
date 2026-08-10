@@ -582,6 +582,8 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarShiftTransfer_comm
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.map_comm_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarShiftTransfer_comm_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarTransfer_preserves_shift_eigenspace
+  Ising2DLambda.AlgebraicEigenvalue.qbarTransfer_preserves_shift_eigenspace_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
