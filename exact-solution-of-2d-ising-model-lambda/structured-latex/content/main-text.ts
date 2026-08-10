@@ -19396,8 +19396,10 @@ z^{n}
 &&(\because\ \text{有限和から }\tau'=\tau\text{ の 1 項を分ける})\\
 &=1\cdot v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot v(\tau')
 &&(\because\ \blkref{def_qbar_identity_matrix})\\
+&=v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot v(\tau')
+&&(\because\ \text{単位元との積})\\
 &=v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0
-&&(\because\ \text{単位元との積と、零元との積})\\
+&&(\because\ \text{零元との積})\\
 &=v(\tau)+0
 &&(\because\ \text{零元だけの有限和は零元である})\\
 &=v(\tau)

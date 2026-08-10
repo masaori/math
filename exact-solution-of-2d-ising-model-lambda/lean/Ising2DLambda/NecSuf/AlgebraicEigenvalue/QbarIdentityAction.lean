@@ -1,7 +1,7 @@
 /-
 「単位行列の作用は列ベクトルを動かさない」（`claim_qbar_identity_action`）の必要十分版。
 
-手順は具体版（`Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action`）と同じ 6 段の鎖である。
+手順は具体版（`Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action`）と同じ 7 段の鎖である。
 削ったのは次のもので、削っても同じ手順で通る。
 
 - 添字が行配位であること → 有限で相等が判定できる型でよい（1 項を分ける段と場合分けの段でだけ効く）。
@@ -15,8 +15,8 @@
 
 - `[Fintype ι]`: 有限和を取るために要る（無限和は定義されない）。
 - `[DecidableEq ι]`: 単位行列の成分の場合分け（`if j = i`）そのものに要る。
-- `hone` / `hzero`: 第 4 段で `1 * v i = v i` と `0 * v j = 0` をそれぞれ使う。
-- `[AddCommMonoid M]`: 有限和と、第 5・6 段（零元だけの和が零元・零元を足しても変わらない）に要る。
+- `hone` / `hzero`: 第 4 段で `1 * v i = v i` を、第 5 段で `0 * v j = 0` を使う。
+- `[AddCommMonoid M]`: 有限和と、第 6・7 段（零元だけの和が零元・零元を足しても変わらない）に要る。
   零元はこの構造のものだけを使う。
 -/
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
@@ -41,12 +41,15 @@ theorem identity_action_necSuf {ι M : Type*} [Fintype ι] [DecidableEq ι]
         · rw [if_pos rfl]
         · rw [if_neg (Finset.mem_erase.mp hj).1]
         -- 第 3 段。場合分け（対角では 1、対角の外では 0）。
+    _ = v i + ∑ j ∈ (univ : Finset ι).erase i, (0 : M) * v j := by
+        exact congrArg₂ (· + ·) (hone _) rfl
+        -- 第 4 段。単位元との積。
     _ = v i + ∑ _j ∈ (univ : Finset ι).erase i, (0 : M) := by
-        refine congrArg₂ (· + ·) (hone _) (sum_congr rfl fun j _ => hzero _)
-        -- 第 4 段。単位元との積と、零元との積。
+        exact congrArg₂ (· + ·) rfl (sum_congr rfl fun j _ => hzero _)
+        -- 第 5 段。零元との積。
     _ = v i + 0 := by rw [Finset.sum_const_zero]
-        -- 第 5 段。零元だけの有限和は零元である。
+        -- 第 6 段。零元だけの有限和は零元である。
     _ = v i := add_zero _
-        -- 第 6 段。零元を足しても変わらない。
+        -- 第 7 段。零元を足しても変わらない。
 
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

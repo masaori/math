@@ -10,9 +10,10 @@
   鎖の第 1 段（作用の定義）                     qbarAction の展開（rfl）
   鎖の第 2 段（τ'=τ の 1 項を分ける）           Finset.add_sum_erase
   鎖の第 3 段（単位行列の定義）                 if_pos / if_neg
-  鎖の第 4 段（単位元との積・零元との積）       one_mul / zero_mul
-  鎖の第 5 段（零元だけの有限和は零元）         Finset.sum_const_zero
-  鎖の第 6 段（零元を足しても変わらない）       add_zero
+  鎖の第 4 段（単位元との積）                   one_mul
+  鎖の第 5 段（零元との積）                     zero_mul
+  鎖の第 6 段（零元だけの有限和は零元）         Finset.sum_const_zero
+  鎖の第 7 段（零元を足しても変わらない）       add_zero
 
 mathlib の `Matrix.one_mulVec` とその一般論へは委ねず、人手証明の鎖をそのまま書く。
 
@@ -51,12 +52,15 @@ theorem qbarIdentity_action (v : QbarRowVector L) :
         · rw [if_pos rfl]
         · rw [if_neg (Finset.mem_erase.mp hτ').1]
         -- 第 3 段。単位行列の定義（対角では 1、対角の外では 0）。
+    _ = v τ + ∑ τ' ∈ (univ : Finset (RowConfig L)).erase τ, (0 : Qbar) * v τ' := by
+        exact congrArg₂ (· + ·) (one_mul _) rfl
+        -- 第 4 段。単位元との積。
     _ = v τ + ∑ _τ' ∈ (univ : Finset (RowConfig L)).erase τ, (0 : Qbar) := by
-        refine congrArg₂ (· + ·) (one_mul _) (sum_congr rfl fun τ' _ => zero_mul _)
-        -- 第 4 段。単位元との積と、零元との積。
+        exact congrArg₂ (· + ·) rfl (sum_congr rfl fun τ' _ => zero_mul _)
+        -- 第 5 段。零元との積。
     _ = v τ + 0 := by rw [Finset.sum_const_zero]
-        -- 第 5 段。零元だけの有限和は零元である。
+        -- 第 6 段。零元だけの有限和は零元である。
     _ = v τ := add_zero _
-        -- 第 6 段。零元を足しても変わらない。
+        -- 第 7 段。零元を足しても変わらない。
 
 end Ising2DLambda.AlgebraicEigenvalue
