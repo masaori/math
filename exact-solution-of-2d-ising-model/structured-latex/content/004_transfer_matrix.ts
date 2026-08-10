@@ -2628,14 +2628,18 @@ Z_m
       displayMath(
         String.raw`\sigma^y\sigma^z = \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} = \begin{pmatrix}0&i\\i&0\end{pmatrix} = i\begin{pmatrix}0&1\\1&0\end{pmatrix} = i\,\sigma^x \quad (\because \text{行列の積の成分計算})`,
       ),
+      paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x
+&= 1\cdot\sigma^x \quad (\because 1 \text{ は積の単位元}) \\
+&= ((-i)\,i)\,\sigma^x \quad (\because (-i)\,i = 1) \\
+&= -i\,(i\,\sigma^x) \quad (\because \text{スカラー倍の結合則}) \\
+&= -i\,\sigma^y\sigma^z \quad (\because \text{第 2 式 } \sigma^y\sigma^z = i\,\sigma^x)
+\end{aligned}`,
+      ),
       paragraph([
-        "第 2 式の両辺に ",
-        math(String.raw`-i`),
-        " を掛けると ",
-        math(String.raw`\sigma^x = -i\,\sigma^y\sigma^z`),
-        "（",
-        math(String.raw`i^{-1}=-i`),
-        "）。これらをクロネッカー積へ持ち上げる。",
+        "これらをクロネッカー積へ持ち上げる。",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の積は各因子ごとの積であり ",
         math(String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M) = (A_1 B_1)\boxtimes\cdots\boxtimes(A_M B_M)`),
@@ -2676,7 +2680,7 @@ Z_m
 &= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I) \\
 &= I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I \quad (\because \text{クロネッカー積の積の規則}) \\
 &= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \sigma_l^b \sigma_k^a
+&= \sigma_l^b \sigma_k^a \quad (\because \sigma_l^b, \sigma_k^a \text{ の定義（第 } l \text{ 因子・第 } k \text{ 因子のみが非自明）})
 \end{aligned}`,
       ),
       paragraph([
@@ -2696,8 +2700,21 @@ Z_m
         math(String.raw`\sigma_1^z=Z_1\in\mathcal{A}`),
         "、",
         math(String.raw`\sigma_1^y=Y_1\in\mathcal{A}`),
-        "、Step 1 より ",
-        math(String.raw`\sigma_1^x = -i\,\sigma_1^y\sigma_1^z = -i\,Y_1 Z_1 \in \mathcal{A}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_1^x
+&= -i\,\sigma_1^y\sigma_1^z \quad (\because \text{Step 1 の } \sigma_k^x = -i\,\sigma_k^y\sigma_k^z \text{ を } k=1 \text{ に取る}) \\
+&= -i\,Y_1 Z_1 \quad (\because \sigma_1^y = Y_1, \ \sigma_1^z = Z_1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`Y_1, Z_1\in\mathcal{A}`),
+        " かつ ",
+        math(String.raw`\mathcal{A}`),
+        " は積とスカラー倍について閉じるから ",
+        math(String.raw`\sigma_1^x\in\mathcal{A}`),
         "。",
       ]),
       paragraph([
@@ -2719,7 +2736,7 @@ Z_m
       displayMath(
         String.raw`\begin{aligned}
 P_{m-1}P_{m-1}
-&= (\sigma_1^x\cdots\sigma_{m-1}^x)(\sigma_1^x\cdots\sigma_{m-1}^x) \\
+&= (\sigma_1^x\cdots\sigma_{m-1}^x)(\sigma_1^x\cdots\sigma_{m-1}^x) \quad (\because P_{m-1} \text{ の定義}) \\
 &= (\sigma_1^x\sigma_1^x)(\sigma_2^x\sigma_2^x)\cdots(\sigma_{m-1}^x\sigma_{m-1}^x) \quad (\because \text{異サイトの可換性}) \\
 &= I_{\mathrm{Mat}(2^M,\mathbb{C})} \quad (\because \sigma_k^x\sigma_k^x=I_{\mathrm{Mat}(2^M,\mathbb{C})})
 \end{aligned}`,
@@ -2738,7 +2755,7 @@ P_{m-1}P_{m-1}
 P_{m-1}Z_m
 &= P_{m-1}P_{m-1}\sigma_m^z \quad (\because Z_m = P_{m-1}\sigma_m^z) \\
 &= I_{\mathrm{Mat}(2^M,\mathbb{C})}\sigma_m^z \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
-&= \sigma_m^z
+&= \sigma_m^z \quad (\because I_{\mathrm{Mat}(2^M,\mathbb{C})} \text{ は積の単位元})
 \end{aligned}`,
       ),
       paragraph([
@@ -2747,12 +2764,32 @@ P_{m-1}Z_m
         math(String.raw`\mathcal{A}`),
         " は積について閉じるから ",
         math(String.raw`\sigma_m^z = P_{m-1}Z_m\in\mathcal{A}`),
-        "。同様に ",
-        math(String.raw`Y_m = P_{m-1}\sigma_m^y`),
-        " より ",
+        "。",
+        math(String.raw`\sigma_m^y`),
+        " についても同じ形の鎖が書ける。定義より ",
+        math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y = P_{m-1}\sigma_m^y`),
+        " であるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_{m-1}Y_m
+&= P_{m-1}P_{m-1}\sigma_m^y \quad (\because Y_m = P_{m-1}\sigma_m^y) \\
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}\sigma_m^y \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
+&= \sigma_m^y \quad (\because I_{\mathrm{Mat}(2^M,\mathbb{C})} \text{ は積の単位元})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`P_{m-1}, Y_m\in\mathcal{A}`),
+        " かつ ",
+        math(String.raw`\mathcal{A}`),
+        " は積について閉じるから ",
         math(String.raw`\sigma_m^y = P_{m-1}Y_m\in\mathcal{A}`),
-        "、さらに Step 1 より ",
-        math(String.raw`\sigma_m^x = -i\,\sigma_m^y\sigma_m^z\in\mathcal{A}`),
+        "。さらに Step 1 より ",
+        math(String.raw`\sigma_m^x = -i\,\sigma_m^y\sigma_m^z`),
+        " であり、",
+        math(String.raw`\mathcal{A}`),
+        " は積とスカラー倍について閉じるから ",
+        math(String.raw`\sigma_m^x\in\mathcal{A}`),
         "。よって ",
         math(String.raw`\sigma_m^x,\sigma_m^y,\sigma_m^z\in\mathcal{A}`),
         " が示され、帰納法により すべての ",
