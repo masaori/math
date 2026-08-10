@@ -505,6 +505,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_factor
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_congr_of_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_eq_prod_orbit_factor_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_one_of_dvd_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
