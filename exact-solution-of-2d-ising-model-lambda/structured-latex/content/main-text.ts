@@ -17284,6 +17284,142 @@ t^{L}+u
   },
 
   {
+    id: "algebraic_eigenvalue_claim_prod_pair_eq_pow_card",
+    kind: "claim",
+    title: {
+      text:
+        "各因子の積が同じ値であるとき、軌道の集合にわたる 2 つの有限積の積は、その値の個数を指数とする冪である",
+    },
+    labels: ["claim_prod_pair_eq_pow_card"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_pair_eq_pow_card_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card_from_necSuf",
+    ],
+    verification: ["sagemath/check/prod-pair-eq-pow-card"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）の部分集合 ",
+        math(String.raw`s`),
+        "、2 つの写像 ",
+        math(String.raw`a:\mathcal{O}_L\to\mathbb{Z}[x][t]`),
+        "、",
+        math(String.raw`b:\mathcal{O}_L\to\mathbb{Z}[x][t]`),
+        "、および ",
+        math(String.raw`c\in\mathbb{Z}[x][t]`),
+        " を任意に取る（",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " は ",
+        ref("def_second_polynomial_ring"),
+        "）。すべての ",
+        math(String.raw`O\in s`),
+        " について ",
+        math(String.raw`a(O)\cdot b(O)=c`),
+        " が成り立つと仮定する。このとき",
+      ]),
+      displayMath(
+        String.raw`\Bigl(\prod_{O\in s}a(O)\Bigr)\cdot\prod_{O\in s}b(O)=c^{\lvert s\rvert}`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\lvert s\rvert\in\mathbb{N}`),
+        " は有限集合 ",
+        math(String.raw`s`),
+        " の元の個数）。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "これを使うのは、",
+        ref("claim_shift_char_orbit_product"),
+        " の各因子が ",
+        math(String.raw`t^{L}+\iota(-\kappa(1))`),
+        " を割り切ること（",
+        ref("claim_orbit_sum_divides_pow_L"),
+        "）から、",
+        math(String.raw`\chi_U`),
+        " がその冪を割り切ることを出すためである。",
+        "割り切ることを「積が与えられた値になる相手が存在すること」として述べているので、",
+        "相手の側を写像 ",
+        math(String.raw`b`),
+        " として受け取っている。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s`),
+        " の元の個数についての帰納法で示す。",
+        "仮定「すべての ",
+        math(String.raw`O\in s`),
+        " について ",
+        math(String.raw`a(O)\cdot b(O)=c`),
+        "」は部分集合へ遺伝するので、帰納法の各段でそのまま使える。",
+      ]),
+      paragraph([
+        math(String.raw`s=\emptyset`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\prod_{O\in\emptyset}a(O)\Bigr)\cdot\prod_{O\in\emptyset}b(O)
+&=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{O\in\emptyset}b(O)
+&&(\because\ \text{空集合にわたる有限積は単位元である})\\
+&=\iota\bigl(\kappa(1)\bigr)\cdot\iota\bigl(\kappa(1)\bigr)
+&&(\because\ \text{空集合にわたる有限積は単位元である})\\
+&=\iota\bigl(\kappa(1)\bigr)
+&&(\because\ \iota(\kappa(1))\ \text{は}\ \mathbb{Z}[x][t]\ \text{の単位元である})\\
+&=c^{0}
+&&(\because\ \text{零乗は単位元である})\\
+&=c^{\lvert\emptyset\rvert}
+&&(\because\ \lvert\emptyset\rvert=0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " で成り立つと仮定し、",
+        math(String.raw`s`),
+        " に属さない ",
+        math(String.raw`O_0\in\mathcal{O}_L`),
+        " を足した ",
+        math(String.raw`s\cup\{O_0\}`),
+        " で示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\prod_{O\in s\cup\{O_0\}}a(O)\Bigr)\cdot\prod_{O\in s\cup\{O_0\}}b(O)
+&=\Bigl(\bigl(\prod_{O\in s}a(O)\bigr)\cdot a(O_0)\Bigr)\cdot\prod_{O\in s\cup\{O_0\}}b(O)
+&&(\because\ \text{添字の集合に属さない元を 1 つ足した有限積は、もとの積とその項の積である})\\
+&=\Bigl(\bigl(\prod_{O\in s}a(O)\bigr)\cdot a(O_0)\Bigr)\cdot\Bigl(\bigl(\prod_{O\in s}b(O)\bigr)\cdot b(O_0)\Bigr)
+&&(\because\ \text{添字の集合に属さない元を 1 つ足した有限積は、もとの積とその項の積である})\\
+&=\Bigl(\bigl(\prod_{O\in s}a(O)\bigr)\cdot\bigl(\prod_{O\in s}b(O)\bigr)\Bigr)\cdot\bigl(a(O_0)\cdot b(O_0)\bigr)
+&&(\because\ \mathbb{Z}[x][t]\ \text{の乗法の結合則と可換則})\\
+&=c^{\lvert s\rvert}\cdot\bigl(a(O_0)\cdot b(O_0)\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=c^{\lvert s\rvert}\cdot c
+&&(\because\ \text{仮定を}\ O=O_0\ \text{に当てたもの})\\
+&=c^{\lvert s\rvert+1}
+&&(\because\ \mathbb{Z}[x][t]\ \text{の冪の定義})\\
+&=c^{\lvert s\cup\{O_0\}\rvert}
+&&(\because\ \text{属さない元を 1 つ足した有限集合の元の個数は 1 増える})
+\end{aligned}`),
+      paragraph([
+        "である。これで帰納法が閉じた。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`\mathcal{O}_L`),
+        " とその部分集合、その上の写像、および ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の有限積と自然数だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -17383,6 +17519,8 @@ t^{L}+u
           math(String.raw`t^{L}+\iota(-\kappa(1))`),
           " を割ること（",
           ref("claim_orbit_sum_divides_pow_L"),
+          "）、および軌道の集合にわたる 2 つの有限積の積が共通の値の個数を指数とする冪であること（",
+          ref("claim_prod_pair_eq_pow_card"),
           "）までは上で済んでいる。",
           "次に書くのは、これらの積を取って ",
           math(String.raw`\chi_U`),

@@ -495,6 +495,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.orbitSum_mul_geom_eq_pow_L
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_add_dvd_pow_add_of_dvd
   Ising2DLambda.AlgebraicEigenvalue.orbitSum_mul_geom_eq_pow_L_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_pair_eq_pow_card_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
