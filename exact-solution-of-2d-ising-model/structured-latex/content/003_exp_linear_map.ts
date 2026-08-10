@@ -529,7 +529,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " に適用して",
       ]),
       displayMath(
-        String.raw`0\le\left|(S_N)_{ij}-S_{ij}\right|\le\|S_N-S\|`,
+        String.raw`\begin{aligned}
+0
+&\le \left|(S_N)_{ij}-S_{ij}\right|
+&&(\because\ \text{絶対値は非負である})\\
+&= \left|(S_N-S)_{ij}\right|
+&&(\because\ \text{行列の差は成分ごとの差である})\\
+&\le \|S_N-S\|
+&&(\because\ \text{Step 1 を}\ B=S_N-S\ \text{に適用する})
+\end{aligned}`,
       ),
       paragraph([
         "右辺は ",
@@ -548,7 +556,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " より",
       ]),
       displayMath(
-        String.raw`0\le\|S_Nv-Sv\|=\|(S_N-S)v\|\le\|S_N-S\|\cdot\|v\|`,
+        String.raw`\begin{aligned}
+0
+&\le \|S_Nv-Sv\|
+&&(\because\ \text{ノルムは非負である})\\
+&= \|(S_N-S)v\|
+&&(\because\ \text{行列と数ベクトルの積の分配律})\\
+&\le \|S_N-S\|\cdot\|v\|
+&&(\because\ \text{行列のノルムによる数ベクトルの評価})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\|v\|`),
@@ -606,9 +622,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " (3) を有限個の項に繰り返し用い、続いて同 (2) を用いると",
       ]),
       displayMath(
-        String.raw`\|\Phi(Y)\|
-\le \sum_{k=1}^{n}\sum_{l=1}^{n}\left\|y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
-= \sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`,
+        String.raw`\begin{aligned}
+\|\Phi(Y)\|
+&= \left\|\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
+&&(\because\ \text{直前の等式})\\
+&\le \sum_{k=1}^{n}\sum_{l=1}^{n}\left\|y_{kl}\,\Phi\!\left(E^{(k,l)}\right)\right\|
+&&(\because\ \text{三角不等式を有限個の項に繰り返し用いる})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|
+&&(\because\ \text{スカラー倍のノルム})
+\end{aligned}`,
       ),
       paragraph([
         "この二重和に Cauchy--Schwarz の不等式を適用する。全単射",
@@ -627,15 +649,19 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " に適用すると",
       ]),
       displayMath(
-        String.raw`\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|\right)^2
-\le\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|^2\right)
+        String.raw`\begin{aligned}
+\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|\right)^2
+&\le\left(\sum_{k=1}^{n}\sum_{l=1}^{n}|y_{kl}|^2\right)
 \left(\sum_{k=1}^{n}\sum_{l=1}^{n}\left\|\Phi\!\left(E^{(k,l)}\right)\right\|^2\right)
-=\|Y\|^2\,c_{\Phi}^2=\left(c_{\Phi}\|Y\|\right)^2`,
+&&(\because\ \text{有限列に対する Cauchy--Schwarz の不等式})\\
+&=\|Y\|^2\,c_{\Phi}^2
+&&(\because\ \left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a\ \text{を両方の和に用いる})\\
+&=\left(c_{\Phi}\|Y\|\right)^2
+&&(\because\ \text{非負実数の積の平方})
+\end{aligned}`,
       ),
       paragraph([
-        "（最後から 2 番目の等号は ",
-        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
-        " による）。左辺の平方の中身 ",
+        "左辺の平方の中身 ",
         math(String.raw`\sum_{k,l}|y_{kl}|\,\left\|\Phi\!\left(E^{(k,l)}\right)\right\|`),
         " と ",
         math(String.raw`c_{\Phi}\|Y\|`),
@@ -672,17 +698,23 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
       displayMath(
         String.raw`\begin{aligned}
 \Phi^{m+1}(Y+Z)
-&= \Phi\!\left(\Phi^m(Y+Z)\right) \\
+&= \Phi\!\left(\Phi^m(Y+Z)\right)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
 &= \Phi\!\left(\Phi^m(Y)+\Phi^m(Z)\right)
 \quad (\because \Phi^m \text{ の線型性}) \\
 &= \Phi\!\left(\Phi^m(Y)\right)+\Phi\!\left(\Phi^m(Z)\right)
 \quad (\because \Phi \text{ の線型性}) \\
-&= \Phi^{m+1}(Y)+\Phi^{m+1}(Z) \\
+&= \Phi^{m+1}(Y)+\Phi^{m+1}(Z)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
 \Phi^{m+1}(cY)
 &= \Phi\!\left(\Phi^m(cY)\right)
-= \Phi\!\left(c\,\Phi^m(Y)\right)
-= c\,\Phi\!\left(\Phi^m(Y)\right)
-= c\,\Phi^{m+1}(Y)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
+&= \Phi\!\left(c\,\Phi^m(Y)\right)
+\quad (\because \Phi^m \text{ の線型性}) \\
+&= c\,\Phi\!\left(\Phi^m(Y)\right)
+\quad (\because \Phi \text{ の線型性}) \\
+&= c\,\Phi^{m+1}(Y)
+\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m)
 \end{aligned}`,
       ),
       paragraph([
@@ -693,17 +725,18 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         "-線型。ノルムについては Step 5 と帰納法の仮定より",
       ]),
       displayMath(
-        String.raw`\left\|\Phi^{m+1}(Y)\right\|
-= \left\|\Phi\!\left(\Phi^m(Y)\right)\right\|
-\le c_{\Phi}\left\|\Phi^m(Y)\right\|
-\le c_{\Phi}\cdot c_{\Phi}^{\,m}\|Y\|
-= c_{\Phi}^{\,m+1}\|Y\|`,
+        String.raw`\begin{aligned}
+\left\|\Phi^{m+1}(Y)\right\|
+&= \left\|\Phi\!\left(\Phi^m(Y)\right)\right\|
+&&(\because\ \Phi^{m+1}=\Phi\circ\Phi^m)\\
+&\le c_{\Phi}\left\|\Phi^m(Y)\right\|
+&&(\because\ \text{Step 5 を}\ Y=\Phi^m(Y)\ \text{に適用する})\\
+&\le c_{\Phi}\cdot c_{\Phi}^{\,m}\|Y\|
+&&(\because\ \text{帰納法の仮定と}\ c_{\Phi}\ge 0)\\
+&= c_{\Phi}^{\,m+1}\|Y\|
+&&(\because\ \text{非負実数の冪の指数法則})
+\end{aligned}`,
       ),
-      paragraph([
-        "（2 番目の不等号では ",
-        math(String.raw`c_{\Phi}\ge 0`),
-        " を用いた）。",
-      ]),
       paragraph([
         "Step 7: (2c)。",
         math(String.raw`Y\in\mathrm{Mat}(n,K)`),
@@ -716,19 +749,20 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         "）と (2b) より",
       ]),
       displayMath(
-        String.raw`\sum_{m=0}^{N}\left\|\frac{1}{m!}\Phi^m(Y)\right\|
-= \sum_{m=0}^{N}\frac{\left\|\Phi^m(Y)\right\|}{m!}
-\le \|Y\|\sum_{m=0}^{N}\frac{c_{\Phi}^{\,m}}{m!}
-\le \|Y\|\,E(c_{\Phi})`,
+        String.raw`\begin{aligned}
+\sum_{m=0}^{N}\left\|\frac{1}{m!}\Phi^m(Y)\right\|
+&= \sum_{m=0}^{N}\frac{\left\|\Phi^m(Y)\right\|}{m!}
+&&(\because\ \text{スカラー倍のノルムと}\ |1/m!|=1/m!)\\
+&\le \|Y\|\sum_{m=0}^{N}\frac{c_{\Phi}^{\,m}}{m!}
+&&(\because\ \text{(2b) を各項に適用する})\\
+&\le \|Y\|\,E(c_{\Phi})
+&&(\because\ \text{非負実数の指数級数の部分和の上界を}\ a=c_{\Phi}\ \text{に適用し、}\ \|Y\|\ge 0)
+\end{aligned}`,
       ),
       paragraph([
-        "（最後の不等号は ",
+        "（最後の不等号で引いたのは ",
         ref("real_exp_series_converges"),
-        " (2) を ",
-        math(String.raw`a=c_{\Phi}`),
-        " に適用したもの。",
-        math(String.raw`\|Y\|\ge 0`),
-        " なので両辺に掛けても不等号の向きは変わらない）。左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
+        " (2) である）。左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
         math(String.raw`\|Y\|\,E(c_{\Phi})`),
         " で上に有界であるから収束する（",
         math(String.raw`\mathbb{R}`),
@@ -762,9 +796,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " (3) より",
       ]),
       displayMath(
-        String.raw`0\le\left\|T_N(Y+Z)-\left(T(Y)+T(Z)\right)\right\|
-=\left\|\left(T_N(Y)-T(Y)\right)+\left(T_N(Z)-T(Z)\right)\right\|
-\le\left\|T_N(Y)-T(Y)\right\|+\left\|T_N(Z)-T(Z)\right\|`,
+        String.raw`\begin{aligned}
+0
+&\le \left\|T_N(Y+Z)-\left(T(Y)+T(Z)\right)\right\|
+&&(\because\ \text{ノルムは非負である})\\
+&= \left\|\left(T_N(Y)-T(Y)\right)+\left(T_N(Z)-T(Z)\right)\right\|
+&&(\because\ T_N\ \text{の線型性})\\
+&\le \left\|T_N(Y)-T(Y)\right\|+\left\|T_N(Z)-T(Z)\right\|
+&&(\because\ \text{三角不等式})
+\end{aligned}`,
       ),
       paragraph([
         "右辺は Step 7（",
@@ -795,9 +835,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " (2) より",
       ]),
       displayMath(
-        String.raw`0\le\left\|T_N(cY)-c\,T(Y)\right\|
-=\left\|c\left(T_N(Y)-T(Y)\right)\right\|
-=|c|\cdot\left\|T_N(Y)-T(Y)\right\|`,
+        String.raw`\begin{aligned}
+0
+&\le \left\|T_N(cY)-c\,T(Y)\right\|
+&&(\because\ \text{ノルムは非負である})\\
+&= \left\|c\left(T_N(Y)-T(Y)\right)\right\|
+&&(\because\ T_N\ \text{の線型性})\\
+&= |c|\cdot\left\|T_N(Y)-T(Y)\right\|
+&&(\because\ \text{スカラー倍のノルム})
+\end{aligned}`,
       ),
       paragraph([
         "であり、右辺は Step 7 より ",
