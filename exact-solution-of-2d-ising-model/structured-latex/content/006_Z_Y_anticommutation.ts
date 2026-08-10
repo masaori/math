@@ -1156,22 +1156,33 @@ Y_\mu Y_\mu
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
-\quad (\because \text{クロネッカー積の積の規則}) \\
+&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&= \overbrace{I}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{I}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&= \overbrace{I}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{I}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{I}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^y\sigma^y = I.\ \text{Pauli 行列の積}) \\
 &= I\boxtimes\cdots\boxtimes I
-\quad (\because\ \sigma^x\sigma^x = \sigma^y\sigma^y = II = I,\ \text{すなわち } \text{pauli\_matrix\_products}) \\
+&&(\because\ II = I) \\
 &= I_{\mathrm{Mat}(2^M,\mathbb{C})}
-\quad (\because \text{クロネッカー積の積の規則 (2)})
+&&(\because\ \text{クロネッカー積の積の規則 (2)})
 \end{aligned}`,
       ),
       paragraph(["であるから"]),
       displayMath(
         String.raw`\begin{aligned}
 [Y_\mu, Y_\mu]_+
-&= Y_\mu Y_\mu + Y_\mu Y_\mu \\
-&= I_{\mathrm{Mat}(2^M,\mathbb{C})} + I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
+&= Y_\mu Y_\mu + Y_\mu Y_\mu
+&&(\because\ \text{反交換子の定義}) \\
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})} + I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&&(\because\ \text{上の計算を 2 箇所へ適用}) \\
 &= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}
-= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}\,\delta^M_{(\mu,\mu)}
-\quad (\because\ \delta^M_{(\mu,\mu)} = 1)
+&&(\because\ \text{同じ行列の和}) \\
+&= 2 I_{\mathrm{Mat}(2^M,\mathbb{C})}\,\delta^M_{(\mu,\mu)}
+&&(\because\ \delta^M_{(\mu,\mu)} = 1)
 \end{aligned}`,
       ),
       paragraph([math(String.raw`\mu < \nu`), " のとき、因子ごとの積をとると"]),
@@ -1184,17 +1195,20 @@ Y_\mu Y_\nu
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
-\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ \text{上のクロネッカー積による表示}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
-\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^x\sigma^x = II = I,\ I\sigma^a = \sigma^a)
 \end{aligned}`,
       ),
       displayMath(
@@ -1206,17 +1220,20 @@ Y_\nu Y_\mu
 \boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
-\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ \text{上のクロネッカー積による表示}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
-\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^x\sigma^x = II = I,\ \sigma^a I = \sigma^a)
 \end{aligned}`,
       ),
       paragraph([
@@ -1236,12 +1253,44 @@ Y_\nu Y_\mu
         ref("kronecker_multilinear"),
         "）でスカラー ",
         math(String.raw`-1`),
-        " を外へ出して",
+        " を外へ出すと",
       ]),
       displayMath(
-        String.raw`Y_\nu Y_\mu = -\,Y_\mu Y_\nu,
-\qquad\text{したがって}\qquad
-[Y_\mu, Y_\nu]_+ = Y_\mu Y_\nu + Y_\nu Y_\mu = 0`,
+        String.raw`\begin{aligned}
+Y_\nu Y_\mu
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{上の計算}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(-\,\sigma^y\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^x\sigma^y = -\,\sigma^y\sigma^x.\ \text{Pauli 行列の積}) \\
+&= -\left(I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&= -\,Y_\mu Y_\nu
+&&(\because\ \text{上の計算})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[Y_\mu, Y_\nu]_+
+&= Y_\mu Y_\nu + Y_\nu Y_\mu
+&&(\because\ \text{反交換子の定義}) \\
+&= Y_\mu Y_\nu + (-\,Y_\mu Y_\nu)
+&&(\because\ \text{直前の等式}) \\
+&= 0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\mu > \nu`),
@@ -1258,13 +1307,15 @@ Y_\mu Y_\nu
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
-\boxtimes I\boxtimes\cdots\boxtimes I \\
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{クロネッカー積の積の規則 (1)、}\ \sigma^x\sigma^x = II = I) \\
 Y_\nu Y_\mu
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{クロネッカー積の積の規則 (1)、}\ \sigma^x\sigma^x = II = I)
 \end{aligned}`,
       ),
       paragraph([
@@ -1300,12 +1351,45 @@ Y_\nu Y_\mu
         ref("kronecker_multilinear"),
         "）でスカラー ",
         math(String.raw`-1`),
-        " を外へ出して、同じく ",
-        math(String.raw`Y_\nu Y_\mu = -\,Y_\mu Y_\nu`),
-        " すなわち ",
-        math(String.raw`[Y_\mu,Y_\nu]_+ = 0`),
-        "。",
+        " を外へ出すと",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Y_\nu Y_\mu
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{上の計算}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(-\,\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^y\sigma^x = -\,\sigma^x\sigma^y.\ \text{Pauli 行列の積}) \\
+&= -\left(I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&&(\because\ \text{第 }\nu\text{ 因子についての線型性}) \\
+&= -\,Y_\mu Y_\nu
+&&(\because\ \text{上の計算})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[Y_\mu, Y_\nu]_+
+&= Y_\mu Y_\nu + Y_\nu Y_\mu
+&&(\because\ \text{反交換子の定義}) \\
+&= Y_\mu Y_\nu + (-\,Y_\mu Y_\nu)
+&&(\because\ \text{直前の等式}) \\
+&= 0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`,
+      ),
       paragraph([
         "よって ",
         math(String.raw`\mu \neq \nu`),
