@@ -18704,6 +18704,217 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_vector_operations",
+    kind: "definition",
+    title: { text: "代数的数を成分とする列ベクトルの和とスカラー倍" },
+    labels: ["def_qbar_vector_add", "def_qbar_vector_smul"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarVectorAdd",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarVectorSmul",
+    ],
+    verification: ["sagemath/check/qbar-action-linear"],
+    statement: [
+      paragraph([
+        math(String.raw`v,w\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）に対し、和 ",
+        math(String.raw`v\oplus w\in V_L`),
+        " とスカラー倍 ",
+        math(String.raw`z\odot v\in V_L`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`(v\oplus w)(\tau):=v(\tau)+w(\tau),\qquad
+(z\odot v)(\tau):=z\,v(\tau)\qquad(\tau\in R_L)`,
+      ),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`+`),
+        " と積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " のものであり、左辺の ",
+        math(String.raw`\oplus`),
+        " と ",
+        math(String.raw`\odot`),
+        " は列ベクトルどうし・代数的数と列ベクトルの演算である。",
+        "同じ記号を使うと、どちらの集合の演算かが式に書かれないので、記号を分けて書く。",
+        "実数体も複素数体も現れない（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は可算集合である）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_action_add",
+    kind: "claim",
+    title: { text: "行列の作用は列ベクトルの和を保つ" },
+    labels: ["claim_qbar_action_add"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_add",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_add_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_add_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-action-linear"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v,w\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`A\cdot(v\oplus w)=(A\cdot v)\oplus(A\cdot w)`),
+      paragraph([
+        "が成り立つ（点は ",
+        ref("def_qbar_matrix_action"),
+        "、",
+        math(String.raw`\oplus`),
+        " は ",
+        ref("def_qbar_vector_add"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(v\oplus w)\bigr)(\tau)
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(v\oplus w)(\tau')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(v(\tau')+w(\tau')\bigr)
+&&(\because\ \blkref{def_qbar_vector_add})\\
+&=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,v(\tau')+A_{\tau,\tau'}\,w(\tau')\bigr)
+&&(\because\ \text{元と 2 元の和の積についての分配則})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,v(\tau')+\sum_{\tau'\in R_L}A_{\tau,\tau'}\,w(\tau')
+&&(\because\ \text{有限和の項ごとの分割})\\
+&=(A\cdot v)(\tau)+(A\cdot w)(\tau)
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_add})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので、2 つの写像は等しい。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、元と 2 元の和の積についての分配則と、",
+        "加法が可換モノイドであること（有限和を項ごとに分けるのに要る）だけである。",
+        "積の結合則も可換性も、加法の逆元も、体であることも使っていない。",
+        "現れるのは ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と有限和だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_action_smul",
+    kind: "claim",
+    title: { text: "行列の作用は列ベクトルのスカラー倍を保つ" },
+    labels: ["claim_qbar_action_smul"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_smul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_smul_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_smul_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-action-linear"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`A\cdot(z\odot v)=z\odot(A\cdot v)`),
+      paragraph([
+        "が成り立つ（点は ",
+        ref("def_qbar_matrix_action"),
+        "、",
+        math(String.raw`\odot`),
+        " は ",
+        ref("def_qbar_vector_smul"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(z\odot v)\bigr)(\tau)
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(z\odot v)(\tau')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(z\,v(\tau')\bigr)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,z\bigr)v(\tau')
+&&(\because\ \text{積の結合則})\\
+&=\sum_{\tau'\in R_L}\bigl(z\,A_{\tau,\tau'}\bigr)v(\tau')
+&&(\because\ \text{積の可換性})\\
+&=\sum_{\tau'\in R_L}z\bigl(A_{\tau,\tau'}\,v(\tau')\bigr)
+&&(\because\ \text{積の結合則})\\
+&=z\sum_{\tau'\in R_L}A_{\tau,\tau'}\,v(\tau')
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=z\,(A\cdot v)(\tau)
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl(z\odot(A\cdot v)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので、2 つの写像は等しい。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積の結合則と可換性、および元と有限和の積についての",
+        "分配則だけである。",
+        math(String.raw`z`),
+        " を成分の左へ移す箇所で積の可換性を使っており、",
+        "そこが前の主張（和を保つこと）との違いである。",
+        "加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -18843,6 +19054,14 @@ z^{n}
           ref("def_qbar_vector"),
           "）を置いて、行列の積の作用が作用を 2 度施したものであること（",
           ref("claim_qbar_action_product"),
+          "）、および列ベクトルの和とスカラー倍（",
+          ref("def_qbar_vector_add"),
+          "、",
+          ref("def_qbar_vector_smul"),
+          "）を置いて、作用がその 2 つを保つこと（",
+          ref("claim_qbar_action_add"),
+          "、",
+          ref("claim_qbar_action_smul"),
           "）までは上で済んでいる。",
           "次に書くのは、代数的数を成分とする行列の固有ベクトルと固有値を定め、",
           "シフト行列の固有空間へ転送行列を分けること（対角化）である。",

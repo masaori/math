@@ -215,3 +215,6 @@ import Ising2DLambda.AlgebraicEigenvalue.ShiftCharRootOfUnityFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarAction
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarAction
 import Ising2DLambda.AlgebraicEigenvalue.QbarActionFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarActionLinear
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarActionLinear
+import Ising2DLambda.AlgebraicEigenvalue.QbarActionLinearFromNecSuf
