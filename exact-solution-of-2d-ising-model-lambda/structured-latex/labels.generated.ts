@@ -69,6 +69,7 @@ export const ALL_LABELS = [
   "claim_row_config_shift_iterate_injective",
   "claim_row_config_shift_period",
   "claim_row_config_shift_period_divides",
+  "claim_row_shift_iterate_distinct_below_period",
   "claim_rows_bijection",
   "claim_second_const_degree_zero",
   "claim_second_degree_prod",
