@@ -263,34 +263,54 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
 = c\,\left(C_1\boxtimes\cdots\boxtimes C_M\right)
 \quad (\because \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})`,
       ),
-      paragraph(["が成り立つ。これらを使って計算する。まず"]),
-      displayMath(
-        String.raw`\begin{aligned}
-XY &= (x_1\boxtimes\cdots\boxtimes x_M)(y_1\boxtimes\cdots\boxtimes y_M) \\
-&= (x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)
-\quad (\because \text{クロネッカー積の積の規則})
-\end{aligned}`,
-      ),
-      paragraph(["同様に（積の順序だけを入れ替えて）"]),
-      displayMath(
-        String.raw`\begin{aligned}
-YX &= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M) \\
-&= (y_1x_1)\boxtimes\cdots\boxtimes(y_Mx_M)
-\quad (\because \text{クロネッカー積の積の規則}) \\
-&= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{(y_jx_j)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
-\quad (\because\ i\neq j \text{ では } y_ix_i = x_iy_i) \\
-&= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{\left((-1)\,(x_jy_j)\right)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
-\quad (\because\ y_jx_j = -(x_jy_j)) \\
-&= (-1)\left((x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)\right)
-\quad (\because \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
-&= -\,XY
-\end{aligned}`,
-      ),
       paragraph([
-        "したがって ",
-        math(String.raw`XY + YX = XY + (-XY) = 0`),
-        "。",
+        "が成り立つ。準備は以上である。以下、この 2 つを ",
+        math(String.raw`(\ast)`),
+        " (積の規則)・",
+        math(String.raw`(\ast\ast)`),
+        " (第 ",
+        math(String.raw`j`),
+        " 因子についての線型性) と呼ぶ。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+XY
+&= (x_1\boxtimes\cdots\boxtimes x_M)(y_1\boxtimes\cdots\boxtimes y_M)
+&&(\because\ X, Y \text{ の定義}) \\
+&= (x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)
+&&(\because\ (\ast))
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+YX
+&= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M)
+&&(\because\ X, Y \text{ の定義}) \\
+&= (y_1x_1)\boxtimes\cdots\boxtimes(y_Mx_M)
+&&(\because\ (\ast)) \\
+&= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{(y_jx_j)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
+&&(\because\ i\neq j \text{ では } y_ix_i = x_iy_i) \\
+&= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{\left((-1)\,(x_jy_j)\right)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
+&&(\because\ y_jx_j = -(x_jy_j)) \\
+&= (-1)\left((x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)\right)
+&&(\because\ (\ast\ast)) \\
+&= (-1)\,(XY)
+&&(\because\ \text{上の } XY \text{ の計算}) \\
+&= -\,XY
+&&(\because\ \text{スカラー } -1 \text{ 倍は加法の逆元})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+[X, Y]_+
+&= XY + YX
+&&(\because\ [X, Y]_+ \text{ の定義}) \\
+&= XY + (-\,XY)
+&&(\because\ \text{上の } YX \text{ の計算}) \\
+&= 0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "converted",
