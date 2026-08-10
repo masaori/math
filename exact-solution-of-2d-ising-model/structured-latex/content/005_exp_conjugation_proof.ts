@@ -1249,9 +1249,17 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
         " の証明 Step 0）に注意すると、有限和の分配律より",
       ]),
       displayMath(
-        String.raw`Q_N
-= \left(\sum_{p=0}^{N}\frac{1}{p!}X^{p}\right)Y\left(\sum_{q=0}^{N}\frac{1}{q!}(-X)^{q}\right)
-= \sum_{p=0}^{N}\sum_{q=0}^{N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q}`,
+        String.raw`\begin{aligned}
+Q_N
+&= S_N(X)\,Y\,S_N(-X)
+   \quad (\because Q_N \text{ の定義（Step 2）}) \\
+&= \left(\sum_{p=0}^{N}\frac{1}{p!}X^{p}\right)Y\left(\sum_{q=0}^{N}\frac{1}{q!}(-X)^{q}\right)
+   \quad (\because \text{部分和 } S_N \text{ の定義}) \\
+&= \sum_{p=0}^{N}\sum_{q=0}^{N}\frac{1}{p!}\,\frac{1}{q!}\,X^{p}\,Y\,(-X)^{q}
+   \quad (\because \text{有限和の分配律を 2 度}) \\
+&= \sum_{p=0}^{N}\sum_{q=0}^{N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q}
+   \quad (\because \text{スカラーの積})
+\end{aligned}`,
       ),
       paragraph([
         "一方 ",
@@ -1265,10 +1273,17 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
       displayMath(
         String.raw`\begin{aligned}
 P_N
-&= \sum_{m=0}^{N}\frac{1}{m!}\sum_{k=0}^{m}\binom{m}{k}X^{k}Y(-X)^{m-k} \\
-&= \sum_{m=0}^{N}\sum_{k=0}^{m}\frac{1}{k!\,(m-k)!}\,X^{k}\,Y\,(-X)^{m-k} \\
+&= \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
+   \quad (\because P_N \text{ の定義（Step 1）}) \\
+&= \sum_{m=0}^{N}\frac{1}{m!}\sum_{k=0}^{m}\binom{m}{k}X^{k}Y(-X)^{m-k}
+   \quad (\because \text{ad の二項展開}) \\
+&= \sum_{m=0}^{N}\sum_{k=0}^{m}\frac{1}{m!}\binom{m}{k}\,X^{k}\,Y\,(-X)^{m-k}
+   \quad (\because \text{有限和の分配律}) \\
+&= \sum_{m=0}^{N}\sum_{k=0}^{m}\frac{1}{k!\,(m-k)!}\,X^{k}\,Y\,(-X)^{m-k}
+   \quad (\because \tfrac{1}{m!}\tbinom{m}{k}=\tfrac{1}{k!\,(m-k)!}) \\
 &= \sum_{(p,q)\in T_N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q},
 \qquad T_N:=\left\{(p,q)\in\mathbb{Z}_{\ge 0}^{2} \;\middle|\; p+q\le N\right\}
+   \quad (\because \text{添字の全単射 } (m,k)\mapsto(k,\ m-k))
 \end{aligned}`,
       ),
       paragraph([
@@ -1285,11 +1300,18 @@ P_N
         " であるから",
       ]),
       displayMath(
-        String.raw`Q_N-P_N
-= \sum_{(p,q)\in D_N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q},
+        String.raw`\begin{aligned}
+Q_N-P_N
+&= \sum_{(p,q)\in\{0,\dots,N\}^{2}}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q}
+   -\sum_{(p,q)\in T_N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q}
+   \quad (\because \text{上の 2 つの有限和表示}) \\
+&= \sum_{(p,q)\in\{0,\dots,N\}^{2}\setminus T_N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q}
+   \quad (\because T_N\subset\{0,\dots,N\}^{2} \text{ による有限和の差}) \\
+&= \sum_{(p,q)\in D_N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q},
 \qquad
-D_N := \{0,\dots,N\}^{2}\setminus T_N
-= \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}`,
+D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
+   \quad (\because D_N \text{ の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 4: 項ごとのノルム評価。",
