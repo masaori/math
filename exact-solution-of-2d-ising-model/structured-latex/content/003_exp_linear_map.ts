@@ -248,7 +248,17 @@ export default defineBlocks([
         " より",
       ]),
       displayMath(
-        String.raw`\|A^{m+1}\|=\|A^m A\|\le\|A^m\|\cdot\|A\|\le\|A\|^m\cdot\|A\|=\|A\|^{m+1}`,
+        String.raw`\begin{aligned}
+\|A^{m+1}\|
+&= \|A^m A\|
+\quad (\because A^{m+1}=A^m A) \\
+&\le \|A^m\|\cdot\|A\|
+\quad (\because \text{ノルムの劣乗法性}) \\
+&\le \|A\|^m\cdot\|A\|
+\quad (\because \text{帰納法の仮定}) \\
+&= \|A\|^{m+1}
+\quad (\because \text{冪の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 2: 実数級数 ",
@@ -264,13 +274,20 @@ export default defineBlocks([
         "）であるから、Step 1 より",
       ]),
       displayMath(
-        String.raw`\sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
-= \|I\| + \sum_{m=1}^{N}\frac{\|A^m\|}{m!}
-\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
-\le \|I\| + E(\|A\|) = M_A`,
+        String.raw`\begin{aligned}
+\sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
+&= \|I\| + \sum_{m=1}^{N}\frac{\|A^m\|}{m!}
+\quad (\because m=0 \text{ の項は } \|A^0\|=\|I\| \text{、他の項は上の等式}) \\
+&\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
+\quad (\because \text{Step 1}) \\
+&\le \|I\| + E(\|A\|)
+\quad (\because \text{非負実数の指数級数の収束 } (2)) \\
+&= M_A
+\quad (\because M_A \text{ の定義})
+\end{aligned}`,
       ),
       paragraph([
-        "（最後の不等号は ",
+        "（第 3 行の不等号は ",
         ref("real_exp_series_converges"),
         " (2) による。）この実数級数は非負項なので部分和は単調非減少であり、いま ",
         math(String.raw`M_A`),
@@ -288,15 +305,33 @@ export default defineBlocks([
         " において収束する。",
       ]),
       paragraph([
-        "Step 4: (2)。",
+        "Step 4: (2)。有限和については",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|S_N(A)\|
+&\le \sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
+\quad (\because \text{ノルムの三角不等式 } (3) \text{ を繰り返し用いる}) \\
+&\le M_A
+\quad (\because \text{Step 2 の評価})
+\end{aligned}`,
+      ),
+      paragraph(["である。無限和については"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right\|
+&\le \sum_{m=0}^{\infty}\left\|\frac{1}{m!}A^m\right\|
+\quad (\because \text{Mat}(n,K) \text{ の完備性と絶対収束判定 } (2) \text{ の後半}) \\
+&\le M_A
+\quad (\because \text{Step 2 の評価})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
         ref("matrix_norm_triangle_inequality"),
-        " (3) を繰り返し用いると ",
-        math(String.raw`\|S_N(A)\|\le\sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|\le M_A`),
-        "。また ",
+        " と ",
         ref("matrix_completeness"),
-        " (2) の後半より ",
-        math(String.raw`\left\|\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right\|\le\sum_{m=0}^{\infty}\left\|\frac{1}{m!}A^m\right\|\le M_A`),
-        "。",
+        "）。",
       ]),
     ],
     conversion: {
