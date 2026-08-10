@@ -542,6 +542,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.identity_action_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

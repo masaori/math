@@ -224,3 +224,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarEigenspaceFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarIdentityAction
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarIdentityAction
 import Ising2DLambda.AlgebraicEigenvalue.QbarIdentityActionFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarActionPow
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarActionPow
+import Ising2DLambda.AlgebraicEigenvalue.QbarActionPowFromNecSuf

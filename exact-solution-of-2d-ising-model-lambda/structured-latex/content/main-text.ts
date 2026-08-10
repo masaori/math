@@ -19423,6 +19423,204 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_matrix_power",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の冪" },
+    labels: ["def_qbar_matrix_power"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarMatrixPow"],
+    verification: ["sagemath/check/qbar-action-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " に対し、冪 ",
+        math(String.raw`A^{k}\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " を ",
+        math(String.raw`k`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L,\qquad A^{k+1}:=A\,A^{k}\qquad(k\in\mathbb{N})`),
+      paragraph([
+        "と定める（右辺の単位行列は ",
+        ref("def_qbar_identity_matrix"),
+        "、積は ",
+        ref("def_qbar_matrix_product"),
+        "）。",
+      ]),
+      paragraph([
+        "2 点、",
+        ref("def_matrix_over_row_configs"),
+        " で置いた ",
+        math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " の冪との違いを書いておく。第一に、成分の型が違うので別の対象である",
+        "（同じ記号 ",
+        math(String.raw`A^{k}`),
+        " を使うが、どちらの冪かは行列の成分がどちらの集合の元かで決まる）。",
+        "第二に、出発点と一歩の取り方が違う。",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の側は ",
+        math(String.raw`A^{1}:=A`),
+        " から始めて ",
+        math(String.raw`A^{k+1}:=A^{k}A`),
+        " と右から掛けるが、ここでは ",
+        math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L`),
+        " から始めて左から掛ける。左から掛けるのは、次の主張の帰納法の一歩で ",
+        math(String.raw`A^{k+1}`),
+        " から左の因子 ",
+        math(String.raw`A`),
+        " を 1 つ外し、残りへ帰納法の仮定を当てるためである",
+        "（",
+        ref("claim_qbar_action_product"),
+        " が外せるのは左の因子である）。",
+        math(String.raw`k=0`),
+        " から始めるのは、その出発点が ",
+        ref("claim_qbar_identity_action"),
+        " でそのまま済むためである。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_action_iterate",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の作用の反復" },
+    labels: ["def_qbar_action_iterate"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarActionIterate"],
+    verification: ["sagemath/check/qbar-action-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " に対し、作用（",
+        ref("def_qbar_matrix_action"),
+        "）を ",
+        math(String.raw`k`),
+        " 回反復した列ベクトル ",
+        math(String.raw`\mathrm{it}^{[k]}_{A}(v)\in V_L`),
+        " を ",
+        math(String.raw`k`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\mathrm{it}^{[0]}_{A}(v):=v,\qquad \mathrm{it}^{[k+1]}_{A}(v):=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)\qquad(k\in\mathbb{N})`),
+      paragraph([
+        "と定める。上付きの角括弧は、これが積の反復ではなく作用の反復であることを記号に残すための",
+        "ものである（",
+        ref("def_row_config_shift_iterate"),
+        " の ",
+        math(String.raw`S^{[k]}`),
+        " と同じ約束である）。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_action_pow",
+    kind: "claim",
+    title: { text: "行列の冪の作用は、作用を反復したものである" },
+    labels: ["claim_qbar_action_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-action-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を任意に取る。このとき任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`A^{k}\cdot v=\mathrm{it}^{[k]}_{A}(v)`),
+      paragraph([
+        "が成り立つ（左辺の冪は ",
+        ref("def_qbar_matrix_power"),
+        "、点は ",
+        ref("def_qbar_matrix_action"),
+        "、右辺は ",
+        ref("def_qbar_action_iterate"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A`),
+        " と ",
+        math(String.raw`v`),
+        " を固定し、",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{0}\cdot v
+&=I^{\overline{\mathbb{Q}}}_L\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=v
+&&(\because\ \blkref{claim_qbar_identity_action})\\
+&=\mathrm{it}^{[0]}_{A}(v)
+&&(\because\ \blkref{def_qbar_action_iterate})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k`),
+        " の場合に ",
+        math(String.raw`A^{k}\cdot v=\mathrm{it}^{[k]}_{A}(v)`),
+        " が成り立つとして、",
+        math(String.raw`k+1`),
+        " の場合を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{k+1}\cdot v
+&=\bigl(A\,A^{k}\bigr)\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A\cdot\bigl(A^{k}\cdot v\bigr)
+&&(\because\ \blkref{claim_qbar_action_product})\\
+&=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=\mathrm{it}^{[k+1]}_{A}(v)
+&&(\because\ \blkref{def_qbar_action_iterate})
+\end{aligned}`),
+      paragraph([
+        "よって任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について新しく使っているものは無い。使っているのは上の各行で引いた 2 つの主張",
+        "（単位行列の作用が列ベクトルを動かさないことと、行列の積の作用が作用を 2 度施した",
+        "ものであること）と、2 つの定義の再帰の式だけである。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
