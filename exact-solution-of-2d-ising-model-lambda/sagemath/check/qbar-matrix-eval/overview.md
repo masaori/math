@@ -67,4 +67,9 @@ L=3: R_L は 8 元。7 個の ξ について 6 段すべてと Ev_ξ(AB) = Ev_�
 
 ## 四層のどこまで済んでいるか
 
-**記述と SageMath まで。Lean 未着手**（具体版・必要十分版とも未作成。次の tick で置く）。
+**四層すべて**（記述・SageMath・Lean 具体版・Lean 必要十分版）。
+Lean は `lean/Ising2DLambda/AlgebraicEigenvalue/QbarMatrixEval.lean`（具体版
+`qbarMatrixEval_product`。鎖の 6 段が calc の 6 段に 1 対 1 で対応する）、
+`lean/Ising2DLambda/NecSuf/AlgebraicEigenvalue/QbarMatrixEval.lean`（必要十分版
+`matEval_product_necSuf`）、`lean/Ising2DLambda/AlgebraicEigenvalue/QbarMatrixEvalFromNecSuf.lean`
+（具体版が必要十分版の特殊化であること）である（2026-08-11 に `lake build` と sorry 検査を通した）。

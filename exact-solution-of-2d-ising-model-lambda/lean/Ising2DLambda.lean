@@ -230,3 +230,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarActionPowFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarEigenvectorPow
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarEigenvectorPow
 import Ising2DLambda.AlgebraicEigenvalue.QbarEigenvectorPowFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixEval
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarMatrixEval
+import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixEvalFromNecSuf
