@@ -437,6 +437,10 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_index_eq_of_lt_period
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_of_le_of_symm
   Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_index_eq_of_lt_period_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_ne_of_ne_of_lt_period
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_apply_rowShiftIterate
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.composite_apply_of_rec
+  Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_apply_rowShiftIterate_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

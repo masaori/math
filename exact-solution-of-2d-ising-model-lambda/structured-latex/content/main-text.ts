@@ -14667,6 +14667,298 @@ S^{[a]}\bigl(S^{[b-a]}(\tau)\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_orbit_transposition_composite_values",
+    kind: "claim",
+    title: { text: "互換の反復合成が基点の反復に与える値" },
+    labels: ["claim_orbit_transposition_composite_values"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rowShiftIterate_ne_of_ne_of_lt_period",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_apply_rowShiftIterate",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.composite_apply_of_rec",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_apply_rowShiftIterate_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-transposition-composite-values"],
+    statement: [
+      paragraph([
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）と ",
+        math(String.raw`\tau_0\in O`),
+        " を任意に取り、",
+        math(String.raw`\tau_0`),
+        " の最小周期を ",
+        math(String.raw`e(\tau_0)`),
+        " と書く（",
+        ref("def_row_config_shift_minimal_period"),
+        "）。",
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k<e(\tau_0)`),
+        " を満たすとする。このとき ",
+        math(String.raw`r<e(\tau_0)`),
+        " を満たす任意の ",
+        math(String.raw`r\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`\Psi^{O,\tau_0}_{k}\bigl(S^{[r]}(\tau_0)\bigr)=
+\begin{cases}
+S^{[r+1]}(\tau_0) & (r<k\ \text{のとき})\\
+\tau_0            & (r=k\ \text{のとき})\\
+S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
+\end{cases}`),
+      paragraph([
+        "である（",
+        math(String.raw`\Psi^{O,\tau_0}_{k}`),
+        " は ",
+        ref("def_orbit_transposition_composite"),
+        "、",
+        math(String.raw`S^{[k]}`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。実数体は現れない。",
+      ]),
+      paragraph([
+        math(String.raw`\Psi^{O,\tau_0}_{k}`),
+        " の定義域は ",
+        math(String.raw`O`),
+        " であり、",
+        math(String.raw`S^{[r]}(\tau_0)\in O`),
+        " なので（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_orbit_transposition_composite"),
+        " でこれを見た）、左辺は定まっている。",
+      ]),
+      paragraph([
+        "3 つの場合を言葉で述べると、",
+        math(String.raw`\Psi^{O,\tau_0}_{k}`),
+        " は基点から数えて ",
+        math(String.raw`k`),
+        " 番目までの反復を 1 つ先へ送り、",
+        math(String.raw`k`),
+        " 番目を基点へ戻し、それより先の反復を動かさない、ということである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`r<e(\tau_0)`),
+        " と ",
+        math(String.raw`j<e(\tau_0)`),
+        " を満たす ",
+        math(String.raw`r\in\mathbb{N}`),
+        " と ",
+        math(String.raw`j\in\mathbb{N}`),
+        " について、",
+        math(String.raw`r\neq j`),
+        " ならば ",
+        math(String.raw`S^{[r]}(\tau_0)\neq S^{[j]}(\tau_0)`),
+        " であることを見る。これは ",
+        ref("claim_row_shift_iterate_distinct_below_period"),
+        " の対偶である。以下では、",
+        ref("def_orbit_transposition"),
+        " の 3 つの場合のどれに入るかを、この事実で判定する。",
+      ]),
+      paragraph([
+        "そのうえで ",
+        math(String.raw`k`),
+        " についての帰納法で示す。示す言明は「",
+        math(String.raw`k<e(\tau_0)`),
+        " ならば、",
+        math(String.raw`r<e(\tau_0)`),
+        " を満たす任意の ",
+        math(String.raw`r\in\mathbb{N}`),
+        " について上の等式が成り立つ」である。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " の場合。",
+        math(String.raw`r<e(\tau_0)`),
+        " を任意に取る。",
+        math(String.raw`r<0`),
+        " を満たす ",
+        math(String.raw`r\in\mathbb{N}`),
+        " は無いので、第 1 の場合は起こらない。",
+      ]),
+      paragraph([
+        math(String.raw`r=0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{0}\bigl(S^{[0]}(\tau_0)\bigr)
+&=\mathrm{id}_{O}\bigl(S^{[0]}(\tau_0)\bigr)
+&&(\because\ \blkref{def_orbit_transposition_composite})\\
+&=S^{[0]}(\tau_0)
+&&(\because\ \mathrm{id}_{O}\ \text{は}\ O\ \text{の恒等写像})\\
+&=\tau_0
+&&(\because\ \blkref{def_row_config_shift_iterate})
+\end{aligned}`),
+      paragraph([
+        "であり、これは第 2 の場合の値である。",
+      ]),
+      paragraph([
+        math(String.raw`r>0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{0}\bigl(S^{[r]}(\tau_0)\bigr)
+&=\mathrm{id}_{O}\bigl(S^{[r]}(\tau_0)\bigr)
+&&(\because\ \blkref{def_orbit_transposition_composite})\\
+&=S^{[r]}(\tau_0)
+&&(\because\ \mathrm{id}_{O}\ \text{は}\ O\ \text{の恒等写像})
+\end{aligned}`),
+      paragraph([
+        "であり、これは第 3 の場合の値である。",
+      ]),
+      paragraph([
+        math(String.raw`k`),
+        " について成り立つと仮定して ",
+        math(String.raw`k+1`),
+        " について示す。",
+        math(String.raw`k+1<e(\tau_0)`),
+        " とする。",
+        math(String.raw`k<k+1`),
+        " なので ",
+        math(String.raw`k<e(\tau_0)`),
+        " であり、帰納法の仮定が使える。以下 ",
+        math(String.raw`t:=t^{O}_{\tau_0,\,S^{[k+1]}(\tau_0)}`),
+        " と書く（",
+        ref("def_orbit_transposition"),
+        " の互換の ",
+        math(String.raw`O`),
+        " への制限。",
+        ref("def_orbit_transposition_composite"),
+        " でこれが ",
+        math(String.raw`\mathfrak{B}_{O}`),
+        " の元であることを見た）。",
+        math(String.raw`t`),
+        " の定義における第 1 の点は ",
+        math(String.raw`\tau_0`),
+        "、第 2 の点は ",
+        math(String.raw`S^{[k+1]}(\tau_0)`),
+        " である。",
+        math(String.raw`r<e(\tau_0)`),
+        " を任意に取り、4 つの場合に分ける。",
+      ]),
+      paragraph([
+        math(String.raw`r<k`),
+        " の場合。",
+        math(String.raw`r+1\le k<k+1<e(\tau_0)`),
+        " より ",
+        math(String.raw`r+1<e(\tau_0)`),
+        " であり、",
+        math(String.raw`r+1\neq0`),
+        " と ",
+        math(String.raw`r+1\neq k+1`),
+        " から、準備により ",
+        math(String.raw`S^{[r+1]}(\tau_0)\neq\tau_0`),
+        " かつ ",
+        math(String.raw`S^{[r+1]}(\tau_0)\neq S^{[k+1]}(\tau_0)`),
+        " である（",
+        math(String.raw`\tau_0=S^{[0]}(\tau_0)`),
+        " は ",
+        ref("def_row_config_shift_iterate"),
+        "）。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{k+1}\bigl(S^{[r]}(\tau_0)\bigr)
+&=t\Bigl(\Psi^{O,\tau_0}_{k}\bigl(S^{[r]}(\tau_0)\bigr)\Bigr)
+&&(\because\ \blkref{def_orbit_transposition_composite})\\
+&=t\bigl(S^{[r+1]}(\tau_0)\bigr)
+&&(\because\ \text{帰納法の仮定の第 1 の場合})\\
+&=S^{[r+1]}(\tau_0)
+&&(\because\ \blkref{def_orbit_transposition}\ \text{の第 3 の場合})
+\end{aligned}`),
+      paragraph([
+        "であり、これは ",
+        math(String.raw`r<k+1`),
+        " すなわち第 1 の場合の値である。",
+      ]),
+      paragraph([
+        math(String.raw`r=k`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{k+1}\bigl(S^{[k]}(\tau_0)\bigr)
+&=t\Bigl(\Psi^{O,\tau_0}_{k}\bigl(S^{[k]}(\tau_0)\bigr)\Bigr)
+&&(\because\ \blkref{def_orbit_transposition_composite})\\
+&=t(\tau_0)
+&&(\because\ \text{帰納法の仮定の第 2 の場合})\\
+&=S^{[k+1]}(\tau_0)
+&&(\because\ \blkref{def_orbit_transposition}\ \text{の第 1 の場合})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`r+1=k+1`),
+        " なのでこれは第 1 の場合の値である。",
+      ]),
+      paragraph([
+        math(String.raw`r=k+1`),
+        " の場合。",
+        math(String.raw`k+1\neq0`),
+        " と ",
+        math(String.raw`k+1<e(\tau_0)`),
+        " から、準備により ",
+        math(String.raw`S^{[k+1]}(\tau_0)\neq\tau_0`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{k+1}\bigl(S^{[k+1]}(\tau_0)\bigr)
+&=t\Bigl(\Psi^{O,\tau_0}_{k}\bigl(S^{[k+1]}(\tau_0)\bigr)\Bigr)
+&&(\because\ \blkref{def_orbit_transposition_composite})\\
+&=t\bigl(S^{[k+1]}(\tau_0)\bigr)
+&&(\because\ \text{帰納法の仮定の第 3 の場合。}\ k+1>k)\\
+&=\tau_0
+&&(\because\ \blkref{def_orbit_transposition}\ \text{の第 2 の場合})
+\end{aligned}`),
+      paragraph([
+        "であり、これは第 2 の場合の値である。",
+      ]),
+      paragraph([
+        math(String.raw`r>k+1`),
+        " の場合。",
+        math(String.raw`r\neq0`),
+        " と ",
+        math(String.raw`r\neq k+1`),
+        " と ",
+        math(String.raw`r<e(\tau_0)`),
+        " から、準備により ",
+        math(String.raw`S^{[r]}(\tau_0)\neq\tau_0`),
+        " かつ ",
+        math(String.raw`S^{[r]}(\tau_0)\neq S^{[k+1]}(\tau_0)`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{k+1}\bigl(S^{[r]}(\tau_0)\bigr)
+&=t\Bigl(\Psi^{O,\tau_0}_{k}\bigl(S^{[r]}(\tau_0)\bigr)\Bigr)
+&&(\because\ \blkref{def_orbit_transposition_composite})\\
+&=t\bigl(S^{[r]}(\tau_0)\bigr)
+&&(\because\ \text{帰納法の仮定の第 3 の場合。}\ r>k+1>k)\\
+&=S^{[r]}(\tau_0)
+&&(\because\ \blkref{def_orbit_transposition}\ \text{の第 3 の場合})
+\end{aligned}`),
+      paragraph([
+        "であり、これは第 3 の場合の値である。以上で 4 つの場合が尽くされた（",
+        math(String.raw`r<k+1`),
+        " は ",
+        math(String.raw`r<k`),
+        " と ",
+        math(String.raw`r=k`),
+        " に分かれる）。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と元の相等、および ",
+        math(String.raw`\mathbb{N}`),
+        " だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
