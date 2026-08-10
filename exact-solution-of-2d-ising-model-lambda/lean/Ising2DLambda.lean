@@ -244,3 +244,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixPowSuccRightFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixEvalPow
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.EvalPow
 import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixEvalPowFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarSmulEqZero
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.SmulEqZero
+import Ising2DLambda.AlgebraicEigenvalue.QbarSmulEqZeroFromNecSuf

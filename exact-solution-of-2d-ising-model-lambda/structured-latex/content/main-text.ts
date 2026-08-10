@@ -20505,6 +20505,134 @@ A^{(k+1)+1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_smul_eq_zero",
+    kind: "claim",
+    title: { text: "零でない列ベクトルのスカラー倍が零ベクトルならば、スカラーは 0 である" },
+    labels: ["claim_qbar_smul_eq_zero"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarSmul_eq_zero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.smul_eq_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarSmul_eq_zero_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-smul-eq-zero"],
+    statement: [
+      paragraph([
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を任意に取る。",
+        math(String.raw`z\odot v=o_L`),
+        "（",
+        ref("def_qbar_vector_smul"),
+        "、",
+        ref("def_qbar_zero_vector"),
+        "）かつ ",
+        math(String.raw`v\ne o_L`),
+        " ならば ",
+        math(String.raw`z=0`),
+        " である（",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の零元）。",
+      ]),
+      paragraph([
+        math(String.raw`v\ne o_L`),
+        " という仮定は落とせない。",
+        math(String.raw`v=o_L`),
+        " のときは任意の ",
+        math(String.raw`z`),
+        " について ",
+        math(String.raw`z\odot v=o_L`),
+        " が成り立つからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`V_L`),
+        " の元は ",
+        math(String.raw`R_L`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " への写像であり（",
+        ref("def_qbar_vector"),
+        "）、2 つの写像が等しいことは各点で値が等しいことである。",
+        "したがって ",
+        math(String.raw`v\ne o_L`),
+        " から、",
+        math(String.raw`v(\tau_1)\ne o_L(\tau_1)`),
+        " を満たす ",
+        math(String.raw`\tau_1\in R_L`),
+        " が存在する（",
+        ref("def_row_configuration"),
+        "）。この ",
+        math(String.raw`\tau_1`),
+        " を 1 つ固定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+v(\tau_1)&\ne o_L(\tau_1)
+&&(\because\ \tau_1\ \text{の取り方})\\
+&=0
+&&(\because\ \blkref{def_qbar_zero_vector})
+\end{aligned}`),
+      paragraph([
+        "すなわち ",
+        math(String.raw`v(\tau_1)\ne0`),
+        " である。次に、この点での値を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z\,v(\tau_1)
+&=(z\odot v)(\tau_1)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=o_L(\tau_1)
+&&(\because\ \text{仮定}\ z\odot v=o_L)\\
+&=0
+&&(\because\ \blkref{def_qbar_zero_vector})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は体なので ",
+        math(String.raw`v(\tau_1)`),
+        " は積についての逆元 ",
+        math(String.raw`v(\tau_1)^{-1}\in\overline{\mathbb{Q}}`),
+        " を持つ（",
+        ref("def_algebraic_numbers"),
+        "。",
+        math(String.raw`v(\tau_1)\ne0`),
+        " は上で示した）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z&=z\cdot1
+&&(\because\ 1\ \text{は積の単位元})\\
+&=z\cdot\bigl(v(\tau_1)\,v(\tau_1)^{-1}\bigr)
+&&(\because\ v(\tau_1)^{-1}\ \text{は}\ v(\tau_1)\ \text{の積についての逆元})\\
+&=\bigl(z\,v(\tau_1)\bigr)\,v(\tau_1)^{-1}
+&&(\because\ \text{積の結合則})\\
+&=0\cdot v(\tau_1)^{-1}
+&&(\because\ \text{上の鎖で得た}\ z\,v(\tau_1)=0)\\
+&=0
+&&(\because\ \text{零元との積は零元である})
+\end{aligned}`),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、零でない元が積についての逆元を持つことだけである",
+        "（",
+        ref("def_algebraic_numbers"),
+        "。代数閉であることも、各元が ",
+        math(String.raw`\mathbb{Q}`),
+        " 上代数的であることも使っていない）。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -20690,6 +20818,8 @@ A^{(k+1)+1}
           ref("claim_qbar_matrix_pow_succ_right"),
           "）、および成分ごとの評価が行列の冪を保つこと（",
           ref("claim_qbar_matrix_eval_pow"),
+          "）、および零でない列ベクトルのスカラー倍が零ベクトルならばスカラーが 0 であること（",
+          ref("claim_qbar_smul_eq_zero"),
           "）までは上で済んでいる。",
           "次に書くのは、",
           ref("theorem_shift_matrix_order"),

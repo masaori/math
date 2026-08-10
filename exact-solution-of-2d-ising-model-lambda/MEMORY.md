@@ -23,9 +23,9 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 212 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 83 で `claim_qbar_matrix_eval_pow`（成分ごとの評価が行列の冪を保つこと）の Lean を置いた。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 513 件を登録）が通る |
+| 記述（構造化テキスト） | ラベルの数は合計 213 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` / `qbar-smul-eq-zero` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 84 で `claim_qbar_smul_eq_zero`（零でない列ベクトルのスカラー倍が零ベクトルならばスカラーが 0 であること）の Lean を置いた。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 516 件を登録）が通る |
 | Lean 必要十分版 | 主張 109 件と定理 3 件について作成済み（うち 1 件（行列の積の結合則）は、既にある作用の側の必要十分版をそのまま特殊化したもので、新しい必要十分版を書き起こしていない。2026-08-11 の tick 79 で、本文の `lean` フィールド（ブロックに対応する Lean の定理名）を機械的に数え直した。本文の主張は 118 件なので、必要十分版を置いていない主張は **9 件**である（前の記録の 16 件は、必要十分版が実在するのに本文へ名前が書かれていなかった 2 件と、tick 79 で新たに置いた 1 件を含んでいた）。置いていない 9 件は $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・閉じた道の 1 対 1 対応・置換の符号の値・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復（2 件）・軌道ごとの置換の符号の値・軌道の互換の全単射性である。理由が台帳に残っているのは $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの往復の 4 件だけで——1 つめは既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため——残りは次のレビュー以降で 1 件ずつ判定する）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -1280,7 +1280,24 @@ $\mathrm{Ev}_{\xi}$ が行列の冪を保つことの帰納法で一歩の向き
 
 これで、$U^{L}=I$（$\mathrm{Mat}_{R_L}(\mathbb{Z}[x])$ の等式）を $\mathrm{Ev}_{\xi}$ で
 $\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})$ の等式へ運ぶ道具が揃った。
-次はそれを固有ベクトルの冪の主張と突き合わせ、シフト行列の固有値が 1 の $L$ 乗根であることを出す。
+
+さらに、零でない列ベクトルのスカラー倍が零ベクトルならばスカラーが 0 であることを示した。
+**四層すべてを満たしている**（2026-08-11 の tick 84）。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $z\odot v=o_L$ かつ $v\ne o_L$ ならば $z=0$ である。
+  証明は、$v\ne o_L$ から $v(\tau_1)\ne0$ を満たす $\tau_1$ を取る準備（写像の相等は
+  各点の相等であることによる）と、2 つの鎖である。第 1 の鎖（3 段）は
+  $z\,v(\tau_1)=(z\odot v)(\tau_1)=o_L(\tau_1)=0$、第 2 の鎖（5 段）は
+  $v(\tau_1)$ の逆元を掛けて $z=0$ を出すものである。
+  仮定 $v\ne o_L$ は落とせない（$v=o_L$ なら任意の $z$ について $z\odot v=o_L$ である）。
+  必要十分版が示したのは、この段が要求するのがスカラー倍が各点の積であること・
+  零ベクトルが各点で零であること・積の右単位元・零でない元の右逆元・積の結合則・
+  零元との積の**6 つだけ**であり、加法も分配則も積の可換性も左単位元・左逆元も、
+  型の代数構造も添字の型の有限性も、値が代数的数であること（代数閉であることも
+  各元が $\mathbb{Q}$ 上代数的であることも）も使っていないことである。
+
+次は $\mathrm{Ev}_{\xi}(U)^{L}=I^{\overline{\mathbb{Q}}}_L$ を固有ベクトルの冪の主張と
+突き合わせ、シフト行列の固有値が 1 の $L$ 乗根であることを出す（最後にこのスカラーの段を使う）。
 
 ## 確認事項・注意
 
