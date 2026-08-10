@@ -20262,6 +20262,113 @@ A^{k+1}\cdot v
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_matrix_pow_succ_right",
+    kind: "claim",
+    title: { text: "代数的数を成分とする行列の冪は右から掛けても得られる" },
+    labels: ["claim_qbar_matrix_pow_succ_right"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixPow_succ_right",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_succ_right_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixPow_succ_right_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-matrix-pow-succ-right"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`A^{k+1}=A^{k}A`),
+      paragraph([
+        "が成り立つ（冪は ",
+        ref("def_qbar_matrix_power"),
+        "、積は ",
+        ref("def_qbar_matrix_product"),
+        "）。",
+      ]),
+      paragraph([
+        ref("def_qbar_matrix_power"),
+        " の冪は ",
+        math(String.raw`A^{k+1}:=A\,A^{k}`),
+        " と左から掛けて定めてあるので、右から掛けた形は定義ではなく主張である。",
+        "これが要るのは、",
+        ref("def_matrix_over_row_configs"),
+        " の冪が右から掛ける形で定めてあり、",
+        ref("def_qbar_matrix_eval"),
+        " が冪を保つことを ",
+        math(String.raw`k`),
+        " についての帰納法で示すときに、一歩の向きを揃える必要があるためである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A`),
+        " を固定し、",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{0+1}
+&=A\,A^{0}
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A\,I^{\overline{\mathbb{Q}}}_L
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A
+&&(\because\ \blkref{claim_qbar_identity_matrix_unit})\\
+&=I^{\overline{\mathbb{Q}}}_L\,A
+&&(\because\ \blkref{claim_qbar_identity_matrix_unit})\\
+&=A^{0}A
+&&(\because\ \blkref{def_qbar_matrix_power})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k`),
+        " について ",
+        math(String.raw`A^{k+1}=A^{k}A`),
+        " が成り立つとする（帰納法の仮定）。",
+        math(String.raw`k+1`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{(k+1)+1}
+&=A\,A^{k+1}
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A\,\bigl(A^{k}A\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(A\,A^{k}\bigr)A
+&&(\because\ \blkref{claim_qbar_matrix_product_assoc})\\
+&=A^{k+1}A
+&&(\because\ \blkref{def_qbar_matrix_power})
+\end{aligned}`),
+      paragraph([
+        "以上より、任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、",
+        ref("claim_qbar_matrix_product_assoc"),
+        " と ",
+        ref("claim_qbar_identity_matrix_unit"),
+        " の 2 つだけである",
+        "（成分の性質は、その 2 つの主張が要求するもの以上には使っていない）。",
+        "とくに、出発点で単位行列を左右の両側から掛けるので、",
+        ref("claim_qbar_identity_matrix_unit"),
+        " の左右 2 つの等式がどちらも要る。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -20443,6 +20550,8 @@ A^{k+1}\cdot v
           ref("claim_qbar_matrix_product_assoc"),
           "）、および単位行列が積の単位元であること（",
           ref("claim_qbar_identity_matrix_unit"),
+          "）、および冪が右から掛けても得られること（",
+          ref("claim_qbar_matrix_pow_succ_right"),
           "）までは上で済んでいる。",
           "次に書くのは、",
           ref("def_qbar_matrix_eval"),
@@ -20459,13 +20568,9 @@ A^{k+1}\cdot v
           " の冪は ",
           math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L`),
           " から始めて左から掛けるので、出発点も一歩の向きも違う。",
-          "そこで次に、既に示した積の結合則（",
-          ref("claim_qbar_matrix_product_assoc"),
-          "）と単位元（",
-          ref("claim_qbar_identity_matrix_unit"),
-          "）から出る「冪は右から掛けても得られること」（",
-          math(String.raw`A^{k+1}=A^{k}A`),
-          "）を書く。そのうえで ",
+          "向きを揃える段は既に上で書いた（",
+          ref("claim_qbar_matrix_pow_succ_right"),
+          "）ので、これを帰納法の一歩で使う。そのうえで ",
           ref("theorem_shift_matrix_order"),
           " の ",
           math(String.raw`U^{L}=I`),
