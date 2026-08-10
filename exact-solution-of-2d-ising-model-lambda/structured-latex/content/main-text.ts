@@ -16451,6 +16451,238 @@ W_{O}\bigl(\mathrm{ch}(U),\mathrm{id}_{O}\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_orbit_shift_restriction_factor",
+    kind: "claim",
+    title: {
+      text: "軌道の元の個数が 2 以上のとき、巡回シフトの制限の因子は単位元の加法についての逆元である",
+    },
+    labels: ["claim_orbit_shift_restriction_factor"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.signedProd_eq_unit",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-shift-restriction-factor"],
+    statement: [
+      paragraph([
+        "軌道 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）を任意に取り、",
+        math(String.raw`\lvert O\rvert\ge2`),
+        " を仮定する。このとき",
+      ]),
+      displayMath(
+        String.raw`W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)=\iota\bigl(-\kappa(1)\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`W_{O}`),
+        " は ",
+        ref("def_orbit_term_factor"),
+        "、",
+        math(String.raw`S\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        " の制限で ",
+        ref("claim_shift_orbit_preserving"),
+        " により定まり、",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        "右辺の ",
+        math(String.raw`\iota(-\kappa(1))`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元 ",
+        math(String.raw`\iota(\kappa(1))`),
+        " の加法についての逆元である。",
+      ]),
+      paragraph([
+        ref("claim_orbit_factor_zero"),
+        " と ",
+        ref("claim_orbit_bijection_id_or_shift"),
+        " により、軌道ごとの和で零元でありうるのは ",
+        math(String.raw`\mathrm{id}_{O}`),
+        " と ",
+        math(String.raw`S\!\restriction_{O}`),
+        " の因子だけである。その一方は ",
+        ref("claim_orbit_identity_factor"),
+        " で決めた。ここで残りの一方、巡回シフトの制限の側の値を決める。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        math(String.raw`\lvert O\rvert=1`),
+        " を除いてあるのは、その場合に ",
+        math(String.raw`S\!\restriction_{O}`),
+        " と ",
+        math(String.raw`\mathrm{id}_{O}`),
+        " が写像として一致し、この主張が ",
+        ref("claim_orbit_identity_factor"),
+        " の第二の場合と食い違うためである",
+        "（そのときの値は ",
+        math(String.raw`t+\iota(-\kappa(1))`),
+        " であって ",
+        math(String.raw`\iota(-\kappa(1))`),
+        " ではない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備を 4 つ置く。以下 ",
+        math(String.raw`u:=\iota\bigl(-\kappa(1)\bigr)\in\mathbb{Z}[x][t]`),
+        " と書く。",
+      ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`S`),
+        " は軌道を保つ置換なので（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_shift_orbit_preserving"),
+        "）その制限 ",
+        math(String.raw`S\!\restriction_{O}`),
+        " が定まり、それは ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への全単射である（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_orbit_restriction_bijective"),
+        "）。したがって ",
+        math(String.raw`S\!\restriction_{O}\in\mathfrak{B}_{O}`),
+        " であり（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_orbit_bijection_set"),
+        "）、",
+        math(String.raw`W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)`),
+        " が定まっている。",
+      ]),
+      paragraph([
+        "第二に、",
+        ref("def_constant_polynomial"),
+        " より ",
+        math(String.raw`\kappa`),
+        " は和を保つので ",
+        math(String.raw`\kappa(-1)=-\kappa(1)`),
+        " であり、したがって ",
+        math(String.raw`\iota\bigl(\kappa(-1)\bigr)=u`),
+        " である。",
+      ]),
+      paragraph([
+        "第三に、任意の ",
+        math(String.raw`\tau\in O`),
+        " について ",
+        math(String.raw`\lvert O\rvert\ne1`),
+        " なので ",
+        math(String.raw`S(\tau)\ne\tau`),
+        " であり（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_orbit_fixed_iff_card_one"),
+        " の対偶）、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ch}(U)_{\tau,S(\tau)}
+&=\iota\bigl(-U_{\tau,S(\tau)}\bigr)
+&&(\because\ \blkref{def_characteristic_matrix}\ \text{の}\ \tau\ne\tau'\ \text{の場合})\\
+&=\iota\bigl(-\kappa(1)\bigr)
+&&(\because\ \blkref{def_shift_matrix}\ \text{の}\ \tau'=S(\tau)\ \text{の場合})\\
+&=u
+&&(\because\ u\ \text{の置き方})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第四に、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u\cdot u
+&=\iota\bigl(-\kappa(1)\bigr)\cdot\iota\bigl(-\kappa(1)\bigr)
+&&(\because\ u\ \text{の置き方})\\
+&=\iota\Bigl(\bigl(-\kappa(1)\bigr)\cdot\bigl(-\kappa(1)\bigr)\Bigr)
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{より}\ \iota\ \text{は積を保つ})\\
+&=\iota\bigl(\kappa(1)\cdot\kappa(1)\bigr)
+&&(\because\ \mathbb{Z}[x]\ \text{の中で加法の逆元どうしの積はもとの元どうしの積に等しい})\\
+&=\iota\bigl(\kappa(1)\bigr)
+&&(\because\ \blkref{def_constant_polynomial}\ \text{より}\ \kappa(1)\ \text{は}\ \mathbb{Z}[x]\ \text{の単位元})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("def_second_constant_embedding"),
+        " より ",
+        math(String.raw`\iota(\kappa(1))`),
+        " は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元である。",
+      ]),
+      paragraph([
+        "以上のもとで、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)
+&=\iota\Bigl(\kappa\bigl(\mathrm{sgn}_{O}(S\!\restriction_{O})\bigr)\Bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,(S\restriction_{O})(\tau)}
+&&(\because\ \blkref{def_orbit_term_factor})\\
+&=\iota\Bigl(\kappa\bigl((-1)^{\lvert O\rvert-1}\bigr)\Bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,(S\restriction_{O})(\tau)}
+&&(\because\ \blkref{claim_orbit_shift_restriction_sign})\\
+&=\iota\Bigl(\kappa\bigl((-1)^{\lvert O\rvert-1}\bigr)\Bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,S(\tau)}
+&&(\because\ \blkref{def_orbit_restriction}\ \text{より}\ (S\!\restriction_{O})(\tau)=S(\tau))\\
+&=\iota\Bigl(\kappa\bigl((-1)^{\lvert O\rvert-1}\bigr)\Bigr)\cdot\prod_{\tau\in O}u
+&&(\because\ \text{準備の第三})\\
+&=\iota\Bigl(\kappa\bigl((-1)^{\lvert O\rvert-1}\bigr)\Bigr)\cdot u^{\lvert O\rvert}
+&&(\because\ \text{等しい因子の有限積は、因子の個数を指数とする冪である})\\
+&=\Bigl(\iota\bigl(\kappa(-1)\bigr)\Bigr)^{\lvert O\rvert-1}\cdot u^{\lvert O\rvert}
+&&(\because\ \blkref{claim_const_embedding_prod}\ \text{を}\ \lvert O\rvert-1\ \text{個の添字それぞれに}\ n_i=-1\ \text{を取って当てる})\\
+&=u^{\lvert O\rvert-1}\cdot u^{\lvert O\rvert}
+&&(\because\ \text{準備の第二})\\
+&=u^{(\lvert O\rvert-1)+\lvert O\rvert}
+&&(\because\ \text{冪の指数法則})\\
+&=u^{2(\lvert O\rvert-1)+1}
+&&(\because\ \lvert O\rvert\ge1\ \text{より}\ (\lvert O\rvert-1)+\lvert O\rvert=2(\lvert O\rvert-1)+1)\\
+&=(u\cdot u)^{\lvert O\rvert-1}\cdot u
+&&(\because\ \text{冪の指数法則})\\
+&=\Bigl(\iota\bigl(\kappa(1)\bigr)\Bigr)^{\lvert O\rvert-1}\cdot u
+&&(\because\ \text{準備の第四})\\
+&=u
+&&(\because\ \text{単位元の自然数冪は単位元であり、単位元を掛けても変わらない})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`u=\iota(-\kappa(1))`),
+        " なので、これが示すべき等式である。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " と ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元、整数の冪、および有限集合 ",
+        math(String.raw`O`),
+        " の元の個数だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

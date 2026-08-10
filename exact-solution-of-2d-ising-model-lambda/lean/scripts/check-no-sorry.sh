@@ -471,6 +471,11 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.unitSignProd_eq_single
   Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_two_le_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_id_of_card_one_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.constSecond_neg_one
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_shift_entry
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.signedProd_eq_unit
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_shift_of_two_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
