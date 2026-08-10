@@ -730,31 +730,69 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \binom{m}{k-1}+\binom{m}{k}
-&= \frac{m!}{(k-1)!\,(m-k+1)!}+\frac{m!}{k!\,(m-k)!} \\
+&= \frac{m!}{(k-1)!\,(m-k+1)!}+\frac{m!}{k!\,(m-k)!}
+   \quad (\because \text{二項係数の定義}) \\
 &= \frac{m!\cdot k}{k!\,(m+1-k)!}+\frac{m!\cdot (m+1-k)}{k!\,(m+1-k)!}
    \quad \left(\because k!=k\cdot(k-1)!,\ (m+1-k)!=(m+1-k)\cdot(m-k)!\right) \\
-&= \frac{m!\left(k+(m+1-k)\right)}{k!\,(m+1-k)!} \\
-&= \frac{m!\,(m+1)}{k!\,(m+1-k)!} \\
+&= \frac{m!\left(k+(m+1-k)\right)}{k!\,(m+1-k)!}
+   \quad (\because \text{分配律}) \\
+&= \frac{m!\,(m+1)}{k!\,(m+1-k)!}
+   \quad (\because k+(m+1-k)=m+1) \\
 &= \frac{(m+1)!}{k!\,(m+1-k)!}
    \quad (\because (m+1)!=(m+1)\cdot m!) \\
 &= \binom{m+1}{k}
+   \quad (\because \text{二項係数の定義})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`k=0`),
-        " のときは ",
-        math(String.raw`\binom{m}{-1}+\binom{m}{0}=0+1=1=\binom{m+1}{0}`),
-        "、",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\binom{m}{-1}+\binom{m}{0}
+&= 0+\binom{m}{0}
+   \quad (\because k<0 \text{ のとき } \binom{m}{k}:=0 \text{ という約束}) \\
+&= \binom{m}{0}
+   \quad (\because \text{零元との和}) \\
+&= 1
+   \quad (\because \text{二項係数の定義と } 0!=1) \\
+&= \binom{m+1}{0}
+   \quad (\because \text{二項係数の定義と } 0!=1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`k=m+1`),
-        " のときは ",
-        math(String.raw`\binom{m}{m}+\binom{m}{m+1}=1+0=1=\binom{m+1}{m+1}`),
-        "、",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\binom{m}{m}+\binom{m}{m+1}
+&= \binom{m}{m}+0
+   \quad (\because k>m \text{ のとき } \binom{m}{k}:=0 \text{ という約束}) \\
+&= \binom{m}{m}
+   \quad (\because \text{零元との和}) \\
+&= 1
+   \quad (\because \text{二項係数の定義と } 0!=1) \\
+&= \binom{m+1}{m+1}
+   \quad (\because \text{二項係数の定義と } 0!=1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`k<0`),
         " または ",
         math(String.raw`k>m+1`),
-        " のときは両辺とも ",
+        " のときは、",
+        math(String.raw`\binom{m}{k-1}`),
+        " も ",
+        math(String.raw`\binom{m}{k}`),
+        " も ",
+        math(String.raw`\binom{m+1}{k}`),
+        " も約束により ",
         math(String.raw`0`),
-        "。",
+        " なので、両辺とも ",
+        math(String.raw`0`),
+        " である。",
       ]),
       paragraph([
         "Step 2: ",
@@ -762,11 +800,19 @@ export default defineBlocks([
         " の場合。",
       ]),
       displayMath(
-        String.raw`\sum_{k=0}^{0}\binom{0}{k}X^{k}Y(-X)^{0-k}
-= \binom{0}{0}X^{0}Y(-X)^{0}
-= 1\cdot I\,Y\,I
-= Y
-= \mathrm{ad}_X^{0}(Y)`,
+        String.raw`\begin{aligned}
+\sum_{k=0}^{0}\binom{0}{k}X^{k}Y(-X)^{0-k}
+&= \binom{0}{0}X^{0}Y(-X)^{0}
+   \quad (\because \text{和の項が } k=0 \text{ の 1 つだけである}) \\
+&= 1\cdot X^{0}Y(-X)^{0}
+   \quad (\because \binom{0}{0}=1) \\
+&= 1\cdot I\,Y\,I
+   \quad (\because P^{0}:=I \text{ という約束}) \\
+&= Y
+   \quad (\because \text{単位行列との積とスカラー } 1 \text{ 倍}) \\
+&= \mathrm{ad}_X^{0}(Y)
+   \quad (\because \mathrm{ad}_X^{0} \text{ の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3: 帰納段階。ある ",
@@ -801,6 +847,7 @@ export default defineBlocks([
 &= -\sum_{k=0}^{m}\binom{m}{k}X^{k}Y\left(-(-X)^{m+1-k}\right)
    \quad (\because \text{Step 0}) \\
 &= \sum_{k=0}^{m}\binom{m}{k}X^{k}Y(-X)^{m+1-k}
+   \quad (\because \text{符号の反転が 2 度で打ち消し合うこと})
 \end{aligned}`,
       ),
       paragraph([
@@ -813,8 +860,11 @@ export default defineBlocks([
         "）と付け替えると",
       ]),
       displayMath(
-        String.raw`\sum_{k=0}^{m}\binom{m}{k}X^{k+1}Y(-X)^{m-k}
-= \sum_{j=1}^{m+1}\binom{m}{j-1}X^{j}Y(-X)^{m+1-j}`,
+        String.raw`\begin{aligned}
+\sum_{k=0}^{m}\binom{m}{k}X^{k+1}Y(-X)^{m-k}
+&= \sum_{j=1}^{m+1}\binom{m}{j-1}X^{j}Y(-X)^{m+1-j}
+   \quad (\because \text{添字の付け替え } j:=k+1 \text{（全単射なので和の値は変わらない）})
+\end{aligned}`,
       ),
       paragraph([
         "第 2 項の添字を ",
@@ -831,7 +881,8 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \mathrm{ad}_X^{m+1}(Y)
 &= \sum_{j=0}^{m+1}\binom{m}{j-1}X^{j}Y(-X)^{m+1-j}
-   +\sum_{j=0}^{m+1}\binom{m}{j}X^{j}Y(-X)^{m+1-j} \\
+   +\sum_{j=0}^{m+1}\binom{m}{j}X^{j}Y(-X)^{m+1-j}
+   \quad (\because \binom{m}{-1}=0,\ \binom{m}{m+1}=0 \text{ の約束により足した項が } 0 \text{ である}) \\
 &= \sum_{j=0}^{m+1}\left(\binom{m}{j-1}+\binom{m}{j}\right)X^{j}Y(-X)^{m+1-j}
    \quad (\because \text{分配律}) \\
 &= \sum_{j=0}^{m+1}\binom{m+1}{j}X^{j}Y(-X)^{m+1-j}
