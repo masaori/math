@@ -19300,6 +19300,127 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_identity_matrix",
+    kind: "definition",
+    title: { text: "代数的数を成分とする単位行列" },
+    labels: ["def_qbar_identity_matrix"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarIdentityMatrix"],
+    verification: ["sagemath/check/qbar-identity-action"],
+    statement: [
+      paragraph([
+        "単位行列 ",
+        math(String.raw`I^{\overline{\mathbb{Q}}}_L\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）を",
+      ]),
+      displayMath(String.raw`\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}:=\begin{cases}1&(\tau'=\tau)\\0&(\tau'\ne\tau)\end{cases}\qquad(\tau,\tau'\in R_L)`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`1`),
+        " と ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の単位元と零元である。",
+        "場合分けが意味をもつのは、",
+        math(String.raw`R_L`),
+        " の 2 元が等しいか否かが判定できるからである（行配位は有限集合 ",
+        math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+        " の上の写像なので、値を突き合わせれば決まる）。",
+      ]),
+      paragraph([
+        "成分の型が違うので、これは ",
+        ref("def_identity_matrix"),
+        " で置いた ",
+        math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " の単位行列 ",
+        math(String.raw`I`),
+        " とは別の対象である。上付きの ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は、どちらの集合の単位行列かを記号に残すためのものである。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_identity_action",
+    kind: "claim",
+    title: { text: "単位行列の作用は列ベクトルを動かさない" },
+    labels: ["claim_qbar_identity_action"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.identity_action_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-identity-action"],
+    statement: [
+      paragraph([
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`I^{\overline{\mathbb{Q}}}_L\cdot v=v`),
+      paragraph([
+        "が成り立つ（左辺の単位行列は ",
+        ref("def_qbar_identity_matrix"),
+        "、点は ",
+        ref("def_qbar_matrix_action"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(I^{\overline{\mathbb{Q}}}_L\cdot v\bigr)(\tau)
+&=\sum_{\tau'\in R_L}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,v(\tau')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau}\,v(\tau)
++\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,v(\tau')
+&&(\because\ \text{有限和から }\tau'=\tau\text{ の 1 項を分ける})\\
+&=1\cdot v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot v(\tau')
+&&(\because\ \blkref{def_qbar_identity_matrix})\\
+&=v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0
+&&(\because\ \text{単位元との積と、零元との積})\\
+&=v(\tau)+0
+&&(\because\ \text{零元だけの有限和は零元である})\\
+&=v(\tau)
+&&(\because\ \text{零元を足しても変わらない})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので、2 つの写像は等しい。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、単位元との積・零元との積・零元との和の 3 つだけである",
+        "（加法の逆元も、零元でない元の逆元も、積の可換性も、体であることも使っていない）。",
+        math(String.raw`R_L`),
+        " について使っているのは、有限集合であることと 2 元の相等が判定できることの 2 つだけである",
+        "（1 項を分ける段と、場合分けの段でそれぞれ効く）。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -19459,8 +19580,13 @@ z^{n}
           ref("claim_qbar_eigenspace_add"),
           "、",
           ref("claim_qbar_eigenspace_smul"),
+          "）、および代数的数を成分とする単位行列（",
+          ref("def_qbar_identity_matrix"),
+          "）を置いて、その作用が列ベクトルを動かさないこと（",
+          ref("claim_qbar_identity_action"),
           "）までは上で済んでいる。",
-          "次に書くのは、シフト行列の固有値が 1 の ",
+          "次に書くのは、行列の冪の作用が反復した作用であること、そこから固有値の冪が",
+          "得られること、およびシフト行列の固有値が 1 の ",
           math(String.raw`L`),
           " 乗根であることを特性多項式の根の同定（",
           ref("claim_shift_char_root_of_unity"),
