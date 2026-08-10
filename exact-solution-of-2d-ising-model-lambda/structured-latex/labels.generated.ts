@@ -86,6 +86,7 @@ export const ALL_LABELS = [
   "claim_qbar_matrix_product_assoc",
   "claim_qbar_prod_eq_zero",
   "claim_qbar_projector_action",
+  "claim_qbar_projector_image_eigenspace",
   "claim_qbar_shift_transfer_commute",
   "claim_qbar_smul_eq_zero",
   "claim_qbar_smul_sum",

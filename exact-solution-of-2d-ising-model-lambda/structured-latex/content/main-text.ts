@@ -21571,6 +21571,192 @@ A\cdot P_{A,z}(v)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_projector_image_eigenspace",
+    kind: "claim",
+    title: { text: "落とす写像の像は固有空間に入る" },
+    labels: ["claim_qbar_projector_image_eigenspace"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarProjector_mem_eigenspace",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.projector_image_eigenspace_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarProjector_mem_eigenspace_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-projector-image-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）、",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "、",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を任意に取る。",
+        math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+        "（",
+        ref("def_qbar_matrix_power"),
+        "、",
+        ref("def_qbar_identity_matrix"),
+        "）と ",
+        math(String.raw`z^{L}=1`),
+        " を仮定すると",
+      ]),
+      displayMath(
+        String.raw`P_{A,z}(v)\in E_{A}(z)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`P_{A,z}`),
+        " は ",
+        ref("def_qbar_projector"),
+        "、",
+        math(String.raw`E_{A}(z)`),
+        " は ",
+        ref("def_qbar_eigenspace"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "先に準備を 3 つ置く。",
+      ]),
+      paragraph([
+        "準備 1。",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、",
+        math(String.raw`k\in\mathbb{N}`),
+        " に対し ",
+        math(String.raw`a_k:=\bigl(A^{k}\cdot v\bigr)(\tau)\in\overline{\mathbb{Q}}`),
+        " と置く（点は ",
+        ref("def_qbar_matrix_action"),
+        "）。",
+        math(String.raw`a_k`),
+        " は ",
+        math(String.raw`\tau`),
+        " にも依るが、以下の議論では ",
+        math(String.raw`\tau`),
+        " を固定したままなので添字に書かない。",
+      ]),
+      paragraph([
+        "準備 2。",
+        math(String.raw`a_L=a_0`),
+        " である。実際",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a_L&=\bigl(A^{L}\cdot v\bigr)(\tau)
+&&(\because\ \text{準備 1})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_L\cdot v\bigr)(\tau)
+&&(\because\ \text{仮定}\ A^{L}=I^{\overline{\mathbb{Q}}}_L)\\
+&=v(\tau)
+&&(\because\ \blkref{claim_qbar_identity_action})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_L\cdot v\bigr)(\tau)
+&&(\because\ \blkref{claim_qbar_identity_action})\\
+&=\bigl(A^{0}\cdot v\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_matrix_power}\ \text{の}\ A^{0}:=I^{\overline{\mathbb{Q}}}_L)\\
+&=a_0
+&&(\because\ \text{準備 1})
+\end{aligned}`),
+      paragraph([
+        "準備 3。",
+        math(String.raw`z^{\,L+1}=z`),
+        " である。実際",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z^{\,L+1}&=z^{L}\,z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ z^{j+1}:=z^{j}z)\\
+&=1\cdot z
+&&(\because\ \text{仮定}\ z^{L}=1)\\
+&=z
+\end{aligned}`),
+      paragraph([
+        ref("def_qbar_eigenspace"),
+        " により示すべきことは ",
+        math(String.raw`A\cdot P_{A,z}(v)=z\odot P_{A,z}(v)`),
+        " である。両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、準備 1 で取った ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot P_{A,z}(v)\bigr)(\tau)
+&=\Bigl(\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k+1}\cdot v\bigr)\Bigr)(\tau)
+&&(\because\ \blkref{claim_qbar_projector_action})\\
+&=\sum_{k=0}^{L-1}\bigl(z^{\,L-k}\odot\bigl(A^{k+1}\cdot v\bigr)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_sum})\\
+&=\sum_{k=0}^{L-1}z^{\,L-k}\,\bigl(A^{k+1}\cdot v\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\sum_{k=0}^{L-1}z^{\,L-k}\,a_{k+1}
+&&(\because\ \text{準備 1})\\
+&=\sum_{j=1}^{L}z^{\,L-j+1}\,a_{j}
+&&(\because\ k\mapsto k+1\ \text{が}\ \{0,\dots,L-1\}\ \text{から}\ \{1,\dots,L\}\ \text{への全単射で、対応する項が等しい})\\
+&=\Bigl(\sum_{j=1}^{L-1}z^{\,L-j+1}\,a_{j}\Bigr)+z^{\,1}\,a_{L}
+&&(\because\ \text{有限和から}\ j=L\ \text{の 1 項を分ける。}\ L-L+1=1)\\
+&=\Bigl(\sum_{j=1}^{L-1}z^{\,L-j+1}\,a_{j}\Bigr)+z\,a_{0}
+&&(\because\ \text{準備 2、および}\ z^{1}=z)\\
+&=\Bigl(\sum_{j=1}^{L-1}z^{\,L-j+1}\,a_{j}\Bigr)+z^{\,L+1}\,a_{0}
+&&(\because\ \text{準備 3})\\
+&=\sum_{k=0}^{L-1}z^{\,L-k+1}\,a_{k}
+&&(\because\ \text{有限和へ}\ k=0\ \text{の 1 項を戻す。}\ L-0+1=L+1)\\
+&=\sum_{k=0}^{L-1}z\,\bigl(z^{\,L-k}\,a_{k}\bigr)
+&&(\because\ z^{\,L-k+1}=z^{\,L-k}z\ \text{と積の可換則})\\
+&=z\,\sum_{k=0}^{L-1}z^{\,L-k}\,a_{k}
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=z\,\sum_{k=0}^{L-1}\bigl(z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\bigr)(\tau)
+&&(\because\ \text{準備 1 と}\ \blkref{def_qbar_vector_smul})\\
+&=z\,\Bigl(\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\Bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_sum})\\
+&=z\,\bigl(P_{A,z}(v)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_projector})\\
+&=\bigl(z\odot P_{A,z}(v)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので ",
+        math(String.raw`A\cdot P_{A,z}(v)=z\odot P_{A,z}(v)`),
+        " であり、",
+        ref("def_qbar_eigenspace"),
+        " により ",
+        math(String.raw`P_{A,z}(v)\in E_{A}(z)`),
+        " である。",
+      ]),
+      paragraph([
+        "2 点、注意を書いておく。第一に、",
+        math(String.raw`j=L`),
+        " の項を分ける段と ",
+        math(String.raw`k=0`),
+        " の項を戻す段は ",
+        math(String.raw`L\ge1`),
+        " でなければ書けない（",
+        math(String.raw`L=1`),
+        " のときは残りの和 ",
+        math(String.raw`\sum_{j=1}^{0}`),
+        " が空和になるだけで、鎖はそのまま通る）。",
+        "格子の一辺 ",
+        math(String.raw`L`),
+        " は ",
+        math(String.raw`L\ge1`),
+        " なのでこれは満たされている。",
+        "第二に、この段で初めて ",
+        math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+        "（準備 2）と ",
+        math(String.raw`z^{L}=1`),
+        "（準備 3）を使った。",
+        ref("def_qbar_projector"),
+        " と ",
+        ref("claim_qbar_projector_action"),
+        " はどちらも使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21778,14 +21964,23 @@ A\cdot P_{A,z}(v)
           ref("def_qbar_projector"),
           "）を置いて、それへの行列の作用が冪の指数を 1 つ進めること（",
           ref("claim_qbar_projector_action"),
-          "）までは上で済んでいる。",
-          "次に書くのは、その右辺の添字を 1 つずらし、",
+          "）、および ",
           math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
           " と ",
           math(String.raw`z^{L}=1`),
-          " で巻き戻して、",
+          " のもとで ",
           math(String.raw`P_{A,z}(v)`),
-          " の像が固有空間に入ることを示す段である。",
+          " の像が固有空間に入ること（",
+          ref("claim_qbar_projector_image_eigenspace"),
+          "）までは上で済んでいる。",
+          "次に書くのは、1 の ",
+          math(String.raw`L`),
+          " 乗根の全体にわたる冪の和（指数が ",
+          math(String.raw`L`),
+          " の倍数なら ",
+          math(String.raw`L`),
+          "、そうでなければ 0）であり、その次に、シフト行列の固有空間たちが",
+          "列ベクトルの全体を張ることを組み立てる。",
         ],
         [
           todo("未着手"),

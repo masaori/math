@@ -593,6 +593,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarProjector_action
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.projector_action_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarProjector_action_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarProjector_mem_eigenspace
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.projector_image_eigenspace_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarProjector_mem_eigenspace_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
