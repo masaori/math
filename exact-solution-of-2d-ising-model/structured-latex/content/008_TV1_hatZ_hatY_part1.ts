@@ -54,70 +54,127 @@ export default defineBlocks([
         math(String.raw`[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]`),
         " について、",
         math(String.raw`\mu \in \mathcal{M}`),
+        " を任意に取る。準備として次の 3 つを先に用意する。",
+      ]),
+      paragraph([
+        "準備 1（",
+        math(String.raw`\hat{Y}`),
+        " の ",
+        math(String.raw`M`),
+        " ずれ）。",
+        math(String.raw`\nu \in \mathbb{Z}`),
         " について、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]
-&= \left[\overbrace{\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,e^{-i\frac{2\pi j}{M}}\right)}^{H_1^{(\pm)}},\ \hat{Z}_\mu^{(\pm)}\right] \\
-&= \frac{1}{M}\left(\left(\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)\hat{Z}_\mu^{(\pm)}
-   - \hat{Z}_\mu^{(\pm)}\left(\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)\right) \\
-&= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   - \sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   - e^{-i\frac{2\pi j}{M}}\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   - \hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   + \hat{Y}_j\hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
-   \quad (\because \hat{Z}_\mu^{(\pm)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\pm)}) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   + \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+ \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-   \quad (\because \text{反交換子の値}) \\
-&= 2\sum_{j\in\{1,\dots,M\}} \delta^M_{-j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Y}_j\, I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
-&= 2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j
+\hat{Y}_{\nu+M}
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j(\nu+M)}{M}\right)
+&&(\because\ \text{$\hat{Z}, \hat{Y}$ の定義})\\
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j\nu}{M}\right)\exp\!\left(-i 2\pi j\right)
+&&(\because\ \text{指数法則})\\
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j\nu}{M}\right)\cdot 1
+&&(\because\ j \in \mathbb{Z}\ \text{でのオイラーの公式}\ \text{（$\hat{Z}_M^{(-)}=\hat{Z}_{-M}^{(-)},\ \hat{Y}_M=\hat{Y}_{-M}$ と同じ計算）})\\
+&= \hat{Y}_{\nu}
+&&(\because\ \text{$\hat{Z}, \hat{Y}$ の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "ここで ",
-        math(String.raw`j\in\{1,\dots,M\}`),
-        " かつ ",
-        math(String.raw`-j+\mu\equiv 0 \pmod{M}`),
-        " となる ",
+        "準備 2（指数の ",
+        math(String.raw`M`),
+        " ずれ）。",
+        math(String.raw`\nu \in \mathbb{Z}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp\!\left(-i\frac{2\pi(\nu+M)}{M}\right)
+&= \exp\!\left(-i\frac{2\pi\nu}{M}\right)\exp\!\left(-i 2\pi\right)
+&&(\because\ \text{指数法則})\\
+&= \exp\!\left(-i\frac{2\pi\nu}{M}\right)\cdot 1
+&&(\because\ \text{オイラーの公式})\\
+&= \exp\!\left(-i\frac{2\pi\nu}{M}\right)
+&&(\because\ \text{複素数の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 3（和に残る ",
         math(String.raw`j`),
-        " は次で与えられる：",
+        " の決定）。",
+        math(String.raw`j \in \{1,\dots,M\}`),
+        " かつ ",
+        math(String.raw`-j+\mu \equiv 0 \pmod{M}`),
+        " を満たす ",
+        math(String.raw`j`),
+        " はちょうど 1 つであり、",
       ]),
       displayMath(
         String.raw`j = \begin{cases}
 M & (\mu = -M) \\
 M+\mu & (-M+1 \leq \mu \leq -1) \\
 \mu & (1 \leq \mu \leq M)
-\end{cases}`,
+\end{cases}
+\qquad (\because\ 1 \leq j \leq M\ \text{と合同式の条件})`,
       ),
+      paragraph([
+        "また、",
+        math(String.raw`\hat{Z}_\mu^{(\pm)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\pm)}`),
+        " である（",
+        ref("anticommutator_of_hat_Z_and_hat_Y"),
+        " の ",
+        math(String.raw`[\hat{Z}_\mu^{(\pm)}, \hat{Y}_\nu]_+ = 0`),
+        " を移項したもの）。以上のもとで、",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 [H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]
+&= \left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)\hat{Z}_\mu^{(\pm)}
+   - \hat{Z}_\mu^{(\pm)}\left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)
+&&(\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す、と交換子の定義})\\
+&= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   - \sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \text{有限和と行列の積の分配則})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   - e^{-i\frac{2\pi j}{M}}\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   - \hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \text{分配則})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   + \hat{Y}_j\hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \hat{Z}_\mu^{(\pm)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\pm)}\ \text{すなわち $\hat{Z}$ と $\hat{Y}$ の反交換関係})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   + \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \text{分配則})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+
+&&(\because\ \text{反交換子の定義})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z},\hat{Z}]_+\ \text{の値})\\
+&= 2\sum_{j\in\{1,\dots,M\}} \delta^M_{-j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Y}_j
+&&(\because\ \text{単位行列との積とスカラーの整理})\\
+&= 2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j
+&&(\because\ \text{$\delta^M$ の定義})\\
 &= 2\begin{cases}
 e^{-i\frac{2\pi M}{M}}\hat{Y}_M & (\mu = -M) \\
 e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
 e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
-\end{cases} \\
+\end{cases}
+&&(\because\ \text{準備 3})\\
 &= 2\, e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
+&&(\because\ \text{準備 1 と準備 2}\ (\nu = \mu\ \text{または}\ \nu = -M))
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\because`),
-        " ",
-        math(String.raw`\hat{Y}`),
-        " の定義より ",
-        math(String.raw`M`),
-        " ズレは値が等しく ",
-        math(String.raw`\hat{Y}_\mu = \hat{Y}_{M+\mu}`),
-        "、および ",
-        math(String.raw`e^{-i\frac{2\pi(-M)}{M}}\hat{Y}_{-M} = 1\cdot\hat{Y}_{M-2M} = e^{-i\frac{2\pi M}{M}}\hat{Y}_M`),
-        "。",
+        "引いたブロックは ",
+        ref("def_hatZ_hatY"),
+        "、",
+        ref("hatZ_hatY_M_periodicity"),
+        "、",
+        ref("H1_H2_via_hatZ_hatY"),
+        "、",
+        ref("anticommutator_of_hat_Z_and_hat_Y"),
+        "、",
+        ref("def_delta_M"),
+        " である。",
       ]),
       paragraph([
         "(2) ",
@@ -356,6 +413,7 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の全計算過程を各ステップ忠実に翻訳。statement に原文にある [H2, hatZ^(+)] の関係式を追加した。",
+        "(1) [H1, hatZ^(±)] の式変形を一続きの鎖へ書き換えた（2026-08-11）。H_1 の表式を overbrace の地の文で示していたのをやめて行末の根拠へ移し、j の決定・Ŷ と指数の M ずれを準備として先に置き、原文が式のあとの日本語で述べていた最後の等号（場合分けから 2 e^{-i2πμ/M} Ŷ_μ へ）も同じ鎖の中に入れた。全 12 段へ根拠を付けた。段は減らしていない（増えている）。",
         "(2) [H1, hatZ^(∓)] の最終段で原文は第2項（-4/M e^{-i2πμ/M} Σ_k Y_k M δ^M_{(k,0)}）を 0 として結論しているが、この項は一般に消えず（k=M で δ=1）、原文の該当ステップの正当化は不完全。忠実性のため原文どおり `- 0` を残した。",
       ],
     },
