@@ -1189,7 +1189,10 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
       displayMath(
         String.raw`\begin{aligned}
 \left\|C_N D_N-CD\right\|
-&= \left\|C_N D_N-C_N D+C_N D-CD\right\| \\
+&= \left\|C_N D_N-C_N D+C_N D-CD\right\|
+   \quad (\because \text{中間項 } C_N D \text{ を引いて足した}) \\
+&= \left\|C_N(D_N-D)+(C_N-C)D\right\|
+   \quad (\because \text{行列の積の分配律}) \\
 &\le \left\|C_N(D_N-D)\right\|+\left\|(C_N-C)D\right\|
    \quad (\because \text{三角不等式}) \\
 &\le \left\|C_N\right\|\left\|D_N-D\right\|+\left\|C_N-C\right\|\left\|D\right\|
@@ -1198,8 +1201,18 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
       ),
       paragraph([
         "であり、",
-        math(String.raw`\|C_N\|=\|C+(C_N-C)\|\le\|C\|+\|C_N-C\|`),
-        " は ",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|C_N\right\|
+&= \left\|C+(C_N-C)\right\|
+   \quad (\because C_N=C+(C_N-C)) \\
+&\le \left\|C\right\|+\left\|C_N-C\right\|
+   \quad (\because \text{三角不等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "は ",
         math(String.raw`\|C_N-C\|\to 0`),
         " より有界（十分大きい ",
         math(String.raw`N`),
