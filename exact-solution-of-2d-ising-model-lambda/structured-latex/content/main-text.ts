@@ -18501,6 +18501,209 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_matrix",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列と、その積" },
+    labels: ["def_qbar_matrix", "def_qbar_matrix_product"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.QbarRowMatrix",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarRowMatrixProduct",
+    ],
+    verification: ["sagemath/check/qbar-action-product"],
+    statement: [
+      paragraph([
+        ref("def_matrix_over_row_configs"),
+        " と同じ添字集合を使い、成分だけを ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " に取り替えた行列を扱う（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は ",
+        ref("def_algebraic_numbers"),
+        "）。写像 ",
+        math(String.raw`A:R_L\times R_L\to\overline{\mathbb{Q}}`),
+        " のことを代数的数を成分とする行列と呼び、その全体の集合を ",
+        math(String.raw`\mathrm{Mat}_{R_L}\bigl(\overline{\mathbb{Q}}\bigr)`),
+        " と書く（",
+        math(String.raw`R_L`),
+        " は ",
+        ref("def_row_configuration"),
+        "）。値 ",
+        math(String.raw`A(\tau,\tau')`),
+        " を成分と呼び ",
+        math(String.raw`A_{\tau,\tau'}`),
+        " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " に対し積 ",
+        math(String.raw`AB\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`(AB)_{\tau,\tau''}:=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\qquad(\tau,\tau''\in R_L)`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`R_L`),
+        " は有限集合なので右辺は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の有限個の元の和であり、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元として確定する）。",
+      ]),
+      paragraph([
+        "成分の型が違うので、これは ",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+        " とその積とは別の対象である。同じ記号 ",
+        math(String.raw`AB`),
+        " を使うが、どちらの積かは行列の成分がどちらの集合の元かで決まる。",
+        "実数体も複素数体も現れない（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は可算集合である）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_vector",
+    kind: "definition",
+    title: { text: "代数的数を成分とする列ベクトルと、行列の作用" },
+    labels: ["def_qbar_vector", "def_qbar_matrix_action"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.QbarRowVector",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction",
+    ],
+    verification: ["sagemath/check/qbar-action-product"],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`v:R_L\to\overline{\mathbb{Q}}`),
+        " のことを列ベクトルと呼び、その全体の集合を ",
+        math(String.raw`V_L:=\bigl\{\,v\mid v:R_L\to\overline{\mathbb{Q}}\,\bigr\}`),
+        " と書く。値 ",
+        math(String.raw`v(\tau)`),
+        " を成分と呼ぶ（行列の成分と違い、添字は 1 つである）。",
+      ]),
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        " に対し、",
+        math(String.raw`A`),
+        " の ",
+        math(String.raw`v`),
+        " への作用 ",
+        math(String.raw`A\cdot v\in V_L`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`(A\cdot v)(\tau):=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,v(\tau')\qquad(\tau\in R_L)`,
+      ),
+      paragraph([
+        "で定める（右辺は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の有限個の元の和である）。",
+        "作用を表す点 ",
+        math(String.raw`\cdot`),
+        " は、行列どうしの積（",
+        ref("def_qbar_matrix_product"),
+        "）と区別するために書く。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_action_product",
+    kind: "claim",
+    title: { text: "行列の積の作用は、作用を 2 度施したものである" },
+    labels: ["claim_qbar_action_product"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_product",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_product_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_product_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-action-product"],
+    statement: [
+      paragraph([
+        math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`(AB)\cdot v=A\cdot(B\cdot v)`),
+      paragraph([
+        "が成り立つ（左辺の ",
+        math(String.raw`AB`),
+        " は ",
+        ref("def_qbar_matrix_product"),
+        "、点は ",
+        ref("def_qbar_matrix_action"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((AB)\cdot v\bigr)(\tau)
+&=\sum_{\tau''\in R_L}(AB)_{\tau,\tau''}\,v(\tau'')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{\tau''\in R_L}\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)v(\tau'')
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)v(\tau'')
+&&(\because\ \text{有限和と元の積についての分配則})\\
+&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,v(\tau'')\bigr)
+&&(\because\ \text{積の結合則})\\
+&=\sum_{\tau'\in R_L}\ \sum_{\tau''\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,v(\tau'')\bigr)
+&&(\because\ \text{有限和の順序の入れ替え})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\sum_{\tau''\in R_L}B_{\tau',\tau''}\,v(\tau'')
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(B\cdot v)(\tau')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl(A\cdot(B\cdot v)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_matrix_action})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので、2 つの写像は等しい。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積の結合則と、有限和と元の積についての分配則",
+        "（両側）だけである。加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
+        "有限和の順序の入れ替えが使えるのは ",
+        math(String.raw`R_L`),
+        " が有限集合で、加法が可換かつ結合的だからである。",
+        "現れるのは ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と有限和・有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -18634,8 +18837,15 @@ z^{n}
           math(String.raw`L`),
           " 乗根であること（",
           ref("claim_shift_char_root_of_unity"),
+          "）、および代数的数を成分とする行列と列ベクトル（",
+          ref("def_qbar_matrix"),
+          "、",
+          ref("def_qbar_vector"),
+          "）を置いて、行列の積の作用が作用を 2 度施したものであること（",
+          ref("claim_qbar_action_product"),
           "）までは上で済んでいる。",
-          "次に書くのは、転送行列をシフト行列の固有空間へ分けること（対角化）である。",
+          "次に書くのは、代数的数を成分とする行列の固有ベクトルと固有値を定め、",
+          "シフト行列の固有空間へ転送行列を分けること（対角化）である。",
         ],
         [
           todo("未着手"),
