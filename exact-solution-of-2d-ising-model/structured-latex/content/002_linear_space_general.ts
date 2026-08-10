@@ -1469,10 +1469,25 @@ W
       displayMath(
         String.raw`\begin{aligned}
 \iota_{\mathbb{R}\to\mathbb{C}}(x)+\iota_{\mathbb{R}\to\mathbb{C}}(y)
-&= (x,0)+(y,0) = (x+y,0) = \iota_{\mathbb{R}\to\mathbb{C}}(x+y) \\
+&= (x,0)+(y,0)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
+&= (x+y,0)
+&&(\because \text{複素数の和の定め方}) \\
+&= \iota_{\mathbb{R}\to\mathbb{C}}(x+y)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \iota_{\mathbb{R}\to\mathbb{C}}(x)\cdot\iota_{\mathbb{R}\to\mathbb{C}}(y)
-&= (x,0)\cdot(y,0) = (xy-0\cdot 0,\ x\cdot 0+0\cdot y) = (xy,0)
-= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
+&= (x,0)\cdot(y,0)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
+&= (xy-0\cdot 0,\ x\cdot 0+0\cdot y)
+&&(\because \text{複素数の積の定め方}) \\
+&= (xy,0)
+&&(\because 0 \text{ を掛けた項が消えること}) \\
+&= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
+&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
 \end{aligned}`,
       ),
       paragraph([
@@ -1521,10 +1536,18 @@ W
       displayMath(
         String.raw`\begin{aligned}
 \|cA\|^2
-&= \sum_{i,j}|c\,a_{ij}|^2 \\
-&= \sum_{i,j}\left(|c|\,|a_{ij}|\right)^2 \quad (\because \text{Step 1}) \\
-&= |c|^2\sum_{i,j}|a_{ij}|^2 \\
+&= \sum_{i,j}|c\,a_{ij}|^2
+&&(\because \text{ノルムの定め方と } (cA)_{ij}=c\,a_{ij}) \\
+&= \sum_{i,j}\left(|c|\,|a_{ij}|\right)^2
+&&(\because \text{Step 1 の乗法性 } |zw|=|z||w|) \\
+&= \sum_{i,j}|c|^2\,|a_{ij}|^2
+&&(\because \text{積の平方は平方の積}) \\
+&= |c|^2\sum_{i,j}|a_{ij}|^2
+&&(\because \text{有限和についての分配律}) \\
+&= |c|^2\,\|A\|^2
+&&(\because \text{ノルムの定め方}) \\
 &= \left(|c|\,\|A\|\right)^2
+&&(\because \text{積の平方は平方の積})
 \end{aligned}`,
       ),
       paragraph([
@@ -1568,9 +1591,15 @@ W
         " について",
       ]),
       displayMath(
-        String.raw`0\le\sum_{k=1}^{m}(u_k-tv_k)^2
-= P-2tR+t^2Q
-\quad (\because \text{実数の平方は非負、および分配律})`,
+        String.raw`\begin{aligned}
+0
+&\le\sum_{k=1}^{m}(u_k-tv_k)^2
+&&(\because \text{実数の平方は非負であり、非負数の有限和は非負}) \\
+&= \sum_{k=1}^{m}\left(u_k^2-2tu_kv_k+t^2v_k^2\right)
+&&(\because \text{分配律}) \\
+&= P-2tR+t^2Q
+&&(\because P,\ Q,\ R \text{ の置き方と有限和の分解})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
@@ -1578,7 +1607,15 @@ W
         " とおくと",
       ]),
       displayMath(
-        String.raw`0\le P-2\frac{R^2}{Q}+\frac{R^2}{Q}=P-\frac{R^2}{Q}`,
+        String.raw`\begin{aligned}
+0
+&\le P-2\frac{R}{Q}R+\left(\frac{R}{Q}\right)^2Q
+&&(\because \text{上の不等式に } t=R/Q \text{ を代入した}) \\
+&= P-2\frac{R^2}{Q}+\frac{R^2}{Q}
+&&(\because Q>0 \text{ による約分}) \\
+&= P-\frac{R^2}{Q}
+&&(\because \text{同類項をまとめた})
+\end{aligned}`,
       ),
       paragraph([
         "となり、両辺に ",
@@ -1595,17 +1632,26 @@ W
         " であり、両辺とも非負なので",
       ]),
       displayMath(
-        String.raw`|a_{ij}+b_{ij}|^2\le\left(|a_{ij}|+|b_{ij}|\right)^2
-= |a_{ij}|^2+2|a_{ij}||b_{ij}|+|b_{ij}|^2
-\quad (\because \text{Step 0, 分配律})`,
+        String.raw`\begin{aligned}
+|a_{ij}+b_{ij}|^2
+&\le\left(|a_{ij}|+|b_{ij}|\right)^2
+&&(\because \text{Step 0 を } u=|a_{ij}+b_{ij}|,\ v=|a_{ij}|+|b_{ij}| \text{ に当てた}) \\
+&= |a_{ij}|^2+2|a_{ij}||b_{ij}|+|b_{ij}|^2
+&&(\because \text{分配律})
+\end{aligned}`,
       ),
       paragraph(["これを ", math(String.raw`i,j`), " について加えると、"]),
       displayMath(
         String.raw`\begin{aligned}
 \|A+B\|^2
-&= \sum_{i,j}|a_{ij}+b_{ij}|^2 \\
-&\le \sum_{i,j}|a_{ij}|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\sum_{i,j}|b_{ij}|^2 \\
+&= \sum_{i,j}|a_{ij}+b_{ij}|^2
+&&(\because \text{ノルムの定め方と } (A+B)_{ij}=a_{ij}+b_{ij}) \\
+&\le \sum_{i,j}\left(|a_{ij}|^2+2|a_{ij}||b_{ij}|+|b_{ij}|^2\right)
+&&(\because \text{上の各項ごとの不等式を } i,j \text{ について加えた}) \\
+&= \sum_{i,j}|a_{ij}|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\sum_{i,j}|b_{ij}|^2
+&&(\because \text{有限和の分解と分配律}) \\
 &= \|A\|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\|B\|^2
+&&(\because \text{ノルムの定め方})
 \end{aligned}`,
       ),
       paragraph([
@@ -1618,9 +1664,15 @@ W
         " として適用すると",
       ]),
       displayMath(
-        String.raw`\left(\sum_{i,j}|a_{ij}||b_{ij}|\right)^2
-\le\left(\sum_{i,j}|a_{ij}|^2\right)\left(\sum_{i,j}|b_{ij}|^2\right)
-= \|A\|^2\|B\|^2=\left(\|A\|\,\|B\|\right)^2`,
+        String.raw`\begin{aligned}
+\left(\sum_{i,j}|a_{ij}||b_{ij}|\right)^2
+&\le\left(\sum_{i,j}|a_{ij}|^2\right)\left(\sum_{i,j}|b_{ij}|^2\right)
+&&(\because \text{Step 4}) \\
+&= \|A\|^2\|B\|^2
+&&(\because \text{ノルムの定め方}) \\
+&= \left(\|A\|\,\|B\|\right)^2
+&&(\because \text{積の平方は平方の積})
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
@@ -1632,7 +1684,15 @@ W
         "。よって",
       ]),
       displayMath(
-        String.raw`\|A+B\|^2\le\|A\|^2+2\|A\|\,\|B\|+\|B\|^2=\left(\|A\|+\|B\|\right)^2`,
+        String.raw`\begin{aligned}
+\|A+B\|^2
+&\le\|A\|^2+2\sum_{i,j}|a_{ij}||b_{ij}|+\|B\|^2
+&&(\because \text{上の式変形}) \\
+&\le\|A\|^2+2\|A\|\,\|B\|+\|B\|^2
+&&(\because \sum_{i,j}|a_{ij}||b_{ij}|\le\|A\|\,\|B\|) \\
+&=\left(\|A\|+\|B\|\right)^2
+&&(\because \text{分配律})
+\end{aligned}`,
       ),
       paragraph([
         "となり、両辺の平方根をとる（Step 0、",
@@ -1655,8 +1715,15 @@ W
         " であるから、Step 5 より",
       ]),
       displayMath(
-        String.raw`0\le\|A-A'\|\le\|A-A_N\|+\|A_N-A'\|
-= \|A_N-A\|+\|A_N-A'\|`,
+        String.raw`\begin{aligned}
+0
+&\le\|A-A'\|
+&&(\because \text{(1)}) \\
+&\le\|A-A_N\|+\|A_N-A'\|
+&&(\because \text{Step 5 を } A-A'=(A-A_N)+(A_N-A') \text{ に当てた}) \\
+&= \|A_N-A\|+\|A_N-A'\|
+&&(\because \|A-A_N\|=\|A_N-A\|)
+\end{aligned}`,
       ),
       paragraph([
         "最後の等号は ",
@@ -1710,6 +1777,12 @@ W
         "原文（Typst）に対応ブロックは無い。ノルムの定義（labels: def_matrix_norm）を置いた以上、" +
           "極限の一意性や行列乗算の連続性（labels: matrix_multiplication_continuity）の議論が" +
           "前提としている非退化性・斉次性・三角不等式を明示的に証明しておく必要があるため追加した。",
+        "2026-08-10: 式変形の書き方の統一。証明の中の 8 つの式が、1 行に 2 つ以上の等号・不等号を" +
+          "並べたうえで根拠を 1 つだけ（あるいは 1 つも）付けていなかったので、" +
+          "1 行 1 関係の鎖へ分け、各行の末尾に (∵ …) を置いた。" +
+          "対象は、実数を複素数へ送る写像が和と積を保つことの 2 式、斉次性の式、" +
+          "Cauchy--Schwarz の証明の 2 式、三角不等式の 4 式、極限の一意性の式である。" +
+          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
       ],
     },
   },
