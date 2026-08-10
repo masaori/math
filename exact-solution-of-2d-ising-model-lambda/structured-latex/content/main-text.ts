@@ -20369,6 +20369,142 @@ A^{(k+1)+1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_matrix_eval_pow",
+    kind: "claim",
+    title: { text: "成分ごとの評価は行列の冪を保つ" },
+    labels: ["claim_qbar_matrix_eval_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval_pow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eval_pow_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval_pow_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-matrix-eval-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`A\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+        "（",
+        ref("def_matrix_over_row_configs"),
+        "）と、",
+        math(String.raw`k\ge1`),
+        " を満たす整数 ",
+        math(String.raw`k`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`\mathrm{Ev}_{\xi}\bigl(A^{k}\bigr)=\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{k}`,
+      ),
+      paragraph([
+        "が成り立つ（左辺の冪は ",
+        ref("def_matrix_over_row_configs"),
+        " の ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の行列の冪、右辺の冪は ",
+        ref("def_qbar_matrix_power"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の行列の冪であり、別の演算である。",
+        math(String.raw`\mathrm{Ev}_{\xi}`),
+        " は ",
+        ref("def_qbar_matrix_eval"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`k\ge1`),
+        " に限るのは、",
+        ref("def_matrix_over_row_configs"),
+        " の冪が ",
+        math(String.raw`A^{1}:=A`),
+        " から始めて ",
+        math(String.raw`k\ge1`),
+        " についてだけ定めてあるためである",
+        "（",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の行列については単位行列を使う冪の出発点を置いていない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\xi`),
+        " と ",
+        math(String.raw`A`),
+        " を固定し、",
+        math(String.raw`k\ge1`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=1`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}_{\xi}\bigl(A^{1}\bigr)
+&=\mathrm{Ev}_{\xi}(A)
+&&(\because\ \blkref{def_matrix_over_row_configs})\\
+&=\mathrm{Ev}_{\xi}(A)\,I^{\overline{\mathbb{Q}}}_L
+&&(\because\ \blkref{claim_qbar_identity_matrix_unit})\\
+&=\mathrm{Ev}_{\xi}(A)\,\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{0}
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{1}
+&&(\because\ \blkref{def_qbar_matrix_power})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k\ge1`),
+        " について ",
+        math(String.raw`\mathrm{Ev}_{\xi}(A^{k})=\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{k}`),
+        " が成り立つとする（帰納法の仮定）。",
+        math(String.raw`k+1`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}_{\xi}\bigl(A^{k+1}\bigr)
+&=\mathrm{Ev}_{\xi}\bigl(A^{k}A\bigr)
+&&(\because\ \blkref{def_matrix_over_row_configs})\\
+&=\mathrm{Ev}_{\xi}\bigl(A^{k}\bigr)\,\mathrm{Ev}_{\xi}(A)
+&&(\because\ \blkref{claim_qbar_matrix_eval_product})\\
+&=\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{k}\,\mathrm{Ev}_{\xi}(A)
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{k+1}
+&&(\because\ \blkref{claim_qbar_matrix_pow_succ_right})
+\end{aligned}`),
+      paragraph([
+        "以上より、",
+        math(String.raw`k\ge1`),
+        " を満たす任意の整数 ",
+        math(String.raw`k`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "2 つの冪は出発点も一歩の向きも違うので、一歩を合わせるために ",
+        ref("claim_qbar_matrix_pow_succ_right"),
+        " が要る。これが最後の段である。",
+        "出発点の側は、",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の冪が ",
+        math(String.raw`k=1`),
+        " から始まるので、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の側でも ",
+        math(String.raw`k=1`),
+        " に合わせる必要があり、そこで ",
+        ref("claim_qbar_identity_matrix_unit"),
+        " の右から掛ける側を使う。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、上の各行で引いた 3 つの主張だけである",
+        "（代入については ",
+        ref("claim_qbar_matrix_eval_product"),
+        " を通してしか触れていない）。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -20552,25 +20688,10 @@ A^{(k+1)+1}
           ref("claim_qbar_identity_matrix_unit"),
           "）、および冪が右から掛けても得られること（",
           ref("claim_qbar_matrix_pow_succ_right"),
+          "）、および成分ごとの評価が行列の冪を保つこと（",
+          ref("claim_qbar_matrix_eval_pow"),
           "）までは上で済んでいる。",
           "次に書くのは、",
-          ref("def_qbar_matrix_eval"),
-          " が行列の冪を保つことである。ただしこれは ",
-          ref("claim_qbar_matrix_eval_product"),
-          " と ",
-          ref("claim_qbar_matrix_eval_identity"),
-          " だけからは出ない。",
-          ref("def_matrix_over_row_configs"),
-          " の冪は ",
-          math(String.raw`A^{1}:=A`),
-          " から始めて右から掛け、",
-          ref("def_qbar_matrix_power"),
-          " の冪は ",
-          math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L`),
-          " から始めて左から掛けるので、出発点も一歩の向きも違う。",
-          "向きを揃える段は既に上で書いた（",
-          ref("claim_qbar_matrix_pow_succ_right"),
-          "）ので、これを帰納法の一歩で使う。そのうえで ",
           ref("theorem_shift_matrix_order"),
           " の ",
           math(String.raw`U^{L}=I`),

@@ -78,6 +78,7 @@ export const ALL_LABELS = [
   "claim_qbar_identity_action",
   "claim_qbar_identity_matrix_unit",
   "claim_qbar_matrix_eval_identity",
+  "claim_qbar_matrix_eval_pow",
   "claim_qbar_matrix_eval_product",
   "claim_qbar_matrix_pow_succ_right",
   "claim_qbar_matrix_product_assoc",
