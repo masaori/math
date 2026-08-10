@@ -14959,6 +14959,207 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
   },
 
   {
+    id: "algebraic_eigenvalue_claim_orbit_transposition_composite_is_shift",
+    kind: "claim",
+    title: { text: "巡回シフトの制限は軌道の元の個数より 1 つ少ない個数の互換の合成である" },
+    labels: ["claim_orbit_transposition_composite_is_shift"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_rowShiftRestriction",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.composite_eq_of_values",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitTranspositionComposite_eq_rowShiftRestriction_from_necSuf",
+    ],
+    verification: ["sagemath/check/orbit-transposition-composite-is-shift"],
+    statement: [
+      paragraph([
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）と ",
+        math(String.raw`\tau_0\in O`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\Psi^{O,\tau_0}_{\lvert O\rvert-1}=S\!\restriction_{O}`),
+      paragraph([
+        "である（",
+        math(String.raw`\Psi^{O,\tau_0}_{k}`),
+        " は ",
+        ref("def_orbit_transposition_composite"),
+        "、",
+        math(String.raw`S\!\restriction_{O}`),
+        " は ",
+        ref("def_orbit_restriction"),
+        " の制限で ",
+        ref("claim_shift_orbit_preserving"),
+        " により定まる）。実数体は現れない。",
+      ]),
+      paragraph([
+        "左辺は ",
+        math(String.raw`\lvert O\rvert-1`),
+        " 個の互換を合成したものである（",
+        ref("def_orbit_transposition_composite"),
+        " の下付きの添字は合成した互換の個数である）。",
+        "すなわちこの主張は、軌道の上の巡回シフトの制限が ",
+        math(String.raw`\lvert O\rvert-1`),
+        " 個の互換の合成として書けることを述べている。",
+      ]),
+      paragraph([
+        "左辺の下付きの添字は ",
+        math(String.raw`\tau_0`),
+        " に依存しない一方、写像 ",
+        math(String.raw`\Psi^{O,\tau_0}_{k}`),
+        " 自体は基点 ",
+        math(String.raw`\tau_0`),
+        " に依存する。この主張は、",
+        math(String.raw`k=\lvert O\rvert-1`),
+        " と取ったものに限っては基点の取り方によらず同じ写像になることも述べている。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として ",
+        math(String.raw`e:=e(\tau_0)`),
+        " と置く（",
+        ref("def_row_config_shift_minimal_period"),
+        "）。",
+        math(String.raw`O\in\mathcal{O}_L`),
+        " より ",
+        math(String.raw`O=O(\tau_1)`),
+        " を満たす ",
+        math(String.raw`\tau_1\in R_L`),
+        " が取れ（",
+        math(String.raw`\because`),
+        " ",
+        ref("def_row_config_orbit_set"),
+        "）、",
+        math(String.raw`\tau_0\in O(\tau_1)`),
+        " より ",
+        math(String.raw`O(\tau_0)=O(\tau_1)=O`),
+        " である（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_row_config_orbit_mem_eq"),
+        "）。したがって ",
+        ref("claim_row_config_orbit_card"),
+        " より ",
+        math(String.raw`\lvert O\rvert=\lvert O(\tau_0)\rvert=e`),
+        " である。",
+        ref("def_row_config_shift_minimal_period"),
+        " より ",
+        math(String.raw`e\ge1`),
+        " なので ",
+        math(String.raw`e-1\in\mathbb{N}`),
+        " が定まり、",
+        math(String.raw`e-1<e`),
+        " である。",
+      ]),
+      paragraph([
+        "2 つの写像はどちらも ",
+        math(String.raw`O`),
+        " から ",
+        math(String.raw`O`),
+        " への写像なので、各点での値が一致することを示せばよい。",
+        math(String.raw`\tau\in O`),
+        " を任意に取る。",
+        math(String.raw`O=O(\tau_0)`),
+        " なので ",
+        math(String.raw`\tau=S^{[k]}(\tau_0)`),
+        " を満たす ",
+        math(String.raw`k\in\mathbb{N}`),
+        " が存在する（",
+        ref("def_row_config_orbit"),
+        "）。",
+        math(String.raw`e\ge1`),
+        " なので自然数の除法より ",
+        math(String.raw`k=e\,q+r`),
+        " かつ ",
+        math(String.raw`r<e`),
+        " を満たす ",
+        math(String.raw`q,r\in\mathbb{N}`),
+        " が取れる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau
+&=S^{[k]}(\tau_0)
+&&(\because\ k\ \text{の取り方})\\
+&=S^{[r+e\,q]}(\tau_0)
+&&(\because\ k=e\,q+r)\\
+&=S^{[r]}\bigl(S^{[e\,q]}(\tau_0)\bigr)
+&&(\because\ \blkref{claim_row_config_shift_iterate_add})\\
+&=S^{[r]}(\tau_0)
+&&(\because\ \blkref{claim_row_config_shift_period_divides}\ \text{と}\ e\mid e\,q)
+\end{aligned}`),
+      paragraph([
+        "である。以下 ",
+        math(String.raw`r<e-1`),
+        " の場合と ",
+        math(String.raw`r=e-1`),
+        " の場合に分ける（",
+        math(String.raw`r<e`),
+        " より ",
+        math(String.raw`r>e-1`),
+        " は起こらない）。",
+      ]),
+      paragraph([
+        math(String.raw`r<e-1`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{e-1}(\tau)
+&=\Psi^{O,\tau_0}_{e-1}\bigl(S^{[r]}(\tau_0)\bigr)
+&&(\because\ \text{上の式変形})\\
+&=S^{[r+1]}(\tau_0)
+&&(\because\ \blkref{claim_orbit_transposition_composite_values}\ \text{の第 1 の場合。}\ e-1<e,\ r<e)\\
+&=S\bigl(S^{[r]}(\tau_0)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=S(\tau)
+&&(\because\ \text{上の式変形})\\
+&=\bigl(S\!\restriction_{O}\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_restriction})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r=e-1`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{O,\tau_0}_{e-1}(\tau)
+&=\Psi^{O,\tau_0}_{e-1}\bigl(S^{[r]}(\tau_0)\bigr)
+&&(\because\ \text{上の式変形})\\
+&=\tau_0
+&&(\because\ \blkref{claim_orbit_transposition_composite_values}\ \text{の第 2 の場合。}\ e-1<e,\ r<e)\\
+&=S^{[e]}(\tau_0)
+&&(\because\ \blkref{claim_row_config_shift_period_divides}\ \text{と}\ e\mid e)\\
+&=S^{[r+1]}(\tau_0)
+&&(\because\ r=e-1\ \text{と}\ e\ge1\ \text{より}\ r+1=e)\\
+&=S\bigl(S^{[r]}(\tau_0)\bigr)
+&&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
+&=S(\tau)
+&&(\because\ \text{上の式変形})\\
+&=\bigl(S\!\restriction_{O}\bigr)(\tau)
+&&(\because\ \blkref{def_orbit_restriction})
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も ",
+        math(String.raw`\Psi^{O,\tau_0}_{e-1}(\tau)=\bigl(S\!\restriction_{O}\bigr)(\tau)`),
+        " であり、",
+        math(String.raw`\tau`),
+        " は任意だったので ",
+        math(String.raw`\Psi^{O,\tau_0}_{e-1}=S\!\restriction_{O}`),
+        " である。",
+        math(String.raw`\lvert O\rvert=e`),
+        " なのでこれが示すべき等式である。",
+      ]),
+      paragraph([
+        "現れるのは有限集合 ",
+        math(String.raw`R_L`),
+        " とその部分集合、その上の写像と数え上げ、および ",
+        math(String.raw`\mathbb{N}`),
+        " の大小と除法だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

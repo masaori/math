@@ -47,6 +47,7 @@ export const ALL_LABELS = [
   "claim_orbit_term_factorization",
   "claim_orbit_transposition_bijective",
   "claim_orbit_transposition_composite_bijective",
+  "claim_orbit_transposition_composite_is_shift",
   "claim_orbit_transposition_composite_values",
   "claim_orbit_transposition_sign",
   "claim_oriented_orbit_pairs_cross_disjoint",
