@@ -206,3 +206,6 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitFactorRoot
 import Ising2DLambda.AlgebraicEigenvalue.OrbitFactorRootFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.SecondEvaluationProd
 import Ising2DLambda.AlgebraicEigenvalue.SecondEvaluationProdFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarProdZero
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarProdZero
+import Ising2DLambda.AlgebraicEigenvalue.QbarProdZeroFromNecSuf

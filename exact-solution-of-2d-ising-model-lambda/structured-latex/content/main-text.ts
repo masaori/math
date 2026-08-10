@@ -18192,6 +18192,147 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_prod_eq_zero",
+    kind: "claim",
+    title: { text: "代数的数の有限積が 0 ならば、0 である因子がある" },
+    labels: ["claim_qbar_prod_eq_zero"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.exists_eq_zero_of_prod_eq_zero_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-prod-zero"],
+    statement: [
+      paragraph([
+        "有限集合 ",
+        math(String.raw`s`),
+        " と、その各元 ",
+        math(String.raw`i\in s`),
+        " へ ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元 ",
+        math(String.raw`c_i`),
+        " を与える写像を任意に取る（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は ",
+        ref("def_algebraic_numbers"),
+        "）。このとき",
+      ]),
+      displayMath(
+        String.raw`\prod_{i\in s}c_i=0
+\ \Longrightarrow\ c_{i_0}=0\ \text{を満たす}\ i_0\in s\ \text{が存在する}`,
+      ),
+      paragraph([
+        "が成り立つ。積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中の有限積であり、",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の零元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s`),
+        " の元の個数についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " が空のとき、空の積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の単位元 ",
+        math(String.raw`1`),
+        " である。",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は体なので ",
+        math(String.raw`1\ne0`),
+        " であり（",
+        ref("def_algebraic_numbers"),
+        "）、仮定 ",
+        math(String.raw`\prod_{i\in s}c_i=0`),
+        " を満たす写像は無い。したがって主張は成り立つ。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " について主張が成り立つとし、",
+        math(String.raw`s`),
+        " に属さない元 ",
+        math(String.raw`a`),
+        " を 1 つ足した ",
+        math(String.raw`s\cup\{a\}`),
+        " について ",
+        math(String.raw`\prod_{i\in s\cup\{a\}}c_i=0`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&=\prod_{i\in s\cup\{a\}}c_i
+&&(\because\ \text{仮定})\\
+&=c_a\cdot\prod_{i\in s}c_i
+&&(\because\ \text{有限積から因子を}\ 1\ \text{つ括り出す})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`c_a=0`),
+        " の場合は ",
+        math(String.raw`i_0=a`),
+        " と取れば結論が出る（",
+        math(String.raw`a\in s\cup\{a\}`),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`c_a\ne0`),
+        " の場合を見る。",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は体なので ",
+        math(String.raw`c_a`),
+        " は積についての逆元 ",
+        math(String.raw`c_a^{-1}\in\overline{\mathbb{Q}}`),
+        " を持つ（",
+        ref("def_algebraic_numbers"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{i\in s}c_i
+&=1\cdot\prod_{i\in s}c_i
+&&(\because\ 1\ \text{は積の単位元})\\
+&=\bigl(c_a^{-1}\cdot c_a\bigr)\cdot\prod_{i\in s}c_i
+&&(\because\ c_a^{-1}\ \text{は}\ c_a\ \text{の積についての逆元})\\
+&=c_a^{-1}\cdot\Bigl(c_a\cdot\prod_{i\in s}c_i\Bigr)
+&&(\because\ \text{積の結合則})\\
+&=c_a^{-1}\cdot 0
+&&(\because\ \text{上の鎖で得た}\ c_a\cdot\prod_{i\in s}c_i=0)\\
+&=0
+&&(\because\ \text{零元との積は零元である})
+\end{aligned}`),
+      paragraph([
+        "帰納法の仮定から ",
+        math(String.raw`c_{i_0}=0`),
+        " を満たす ",
+        math(String.raw`i_0\in s`),
+        " が存在し、",
+        math(String.raw`s\subset s\cup\{a\}`),
+        " なので ",
+        math(String.raw`i_0\in s\cup\{a\}`),
+        " である。",
+      ]),
+      paragraph([
+        "この証明が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積と単位元と零元、零元でない元が積についての逆元を持つこと、",
+        "および ",
+        math(String.raw`1\ne0`),
+        " だけである。和も分配則も、代数閉であることも使っていない。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -18319,10 +18460,12 @@ z^{n}
           ref("claim_orbit_factor_root"),
           "）、および代数的数における値を取る写像が有限積を有限積へ写すこと（",
           ref("claim_second_evaluation_prod"),
+          "）、および代数的数の有限積が 0 ならば 0 である因子があること（",
+          ref("claim_qbar_prod_eq_zero"),
           "）までは上で済んでいる。",
           "次に書くのは、シフト行列の特性多項式の値を 0 にする代数的数が 1 の ",
           math(String.raw`L`),
-          " 乗根であることである。",
+          " 乗根であることである（上の 3 つを合わせる段）。",
         ],
         [
           todo("未着手"),

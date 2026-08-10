@@ -68,6 +68,7 @@ export const ALL_LABELS = [
   "claim_power_sum_telescope",
   "claim_prod_orbit_decomposition",
   "claim_prod_pair_eq_pow_card",
+  "claim_qbar_prod_eq_zero",
   "claim_rational_exponent_well_defined",
   "claim_restriction_family_gluing",
   "claim_root_of_unity_divisor",
