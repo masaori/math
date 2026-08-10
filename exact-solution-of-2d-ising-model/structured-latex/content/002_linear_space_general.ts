@@ -1987,38 +1987,94 @@ W
         String.raw`W_{i1} := w_i \quad (1\le i\le n), \qquad
 W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       ),
-      paragraph(["で定める。行列の積の定義より"]),
-      displayMath(
-        String.raw`(AW)_{i1}=\sum_{k=1}^{n}a_{ik}W_{k1}=\sum_{k=1}^{n}a_{ik}w_k=(Aw)_i,
-\qquad
-(AW)_{ij}=\sum_{k=1}^{n}a_{ik}\cdot 0=0 \quad (j\ge 2)`,
-      ),
+      paragraph(["で定める。第 1 列の成分は"]),
+      displayMath(String.raw`\begin{aligned}
+(AW)_{i1}
+&=\sum_{k=1}^{n}a_{ik}W_{k1}
+&&(\because\ \text{行列の積の定義})\\
+&=\sum_{k=1}^{n}a_{ik}w_k
+&&(\because\ W\ \text{の第 1 列の定め方})\\
+&=(Aw)_i
+&&(\because\ \text{行列と数ベクトルの積の定義})
+\end{aligned}`),
       paragraph([
-        "である。",
-        math(String.raw`|0|=0`),
-        "（",
+        "であり、",
+        math(String.raw`2\le j\le n`),
+        " について第 ",
+        math(String.raw`j`),
+        " 列の成分は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(AW)_{ij}
+&=\sum_{k=1}^{n}a_{ik}W_{kj}
+&&(\because\ \text{行列の積の定義})\\
+&=\sum_{k=1}^{n}a_{ik}\cdot 0
+&&(\because\ W\ \text{の第 2 列以降の定め方})\\
+&=0
+&&(\because\ 0\ \text{を掛けた項だけの有限和は}\ 0)
+\end{aligned}`),
+      paragraph(["である。これを使って"]),
+      displayMath(String.raw`\begin{aligned}
+\|AW\|
+&=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{ノルムの定義})\\
+&=\sqrt{\sum_{i=1}^{n}\left|(AW)_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない})\\
+&=\sqrt{\sum_{i=1}^{n}\left|(Aw)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{上の第 1 列の成分の等式})\\
+&=\|Aw\|
+&&(\because\ \text{ノルムの定義})
+\end{aligned}`),
+      paragraph([
+        "（第 2 の等号で ",
         ref("matrix_norm_triangle_inequality"),
-        " の Step 1）より第 2 列以降は平方和に寄与しないので、",
+        " の Step 1、第 1・第 4 の等号で ",
+        ref("def_matrix_norm"),
+        " を引いた）、および",
       ]),
-      displayMath(
-        String.raw`\|AW\|=\sqrt{\sum_{i=1}^{n}\left|(Aw)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}=\|Aw\|,
-\qquad
-\|W\|=\sqrt{\sum_{i=1}^{n}|w_i|^2}^{\,(\mathbb{R}_{\ge 0})}=\|w\|`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\|W\|
+&=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|W_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{ノルムの定義})\\
+&=\sqrt{\sum_{i=1}^{n}\left|W_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない})\\
+&=\sqrt{\sum_{i=1}^{n}\left|w_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ W\ \text{の第 1 列の定め方})\\
+&=\|w\|
+&&(\because\ \text{ノルムの定義})
+\end{aligned}`),
       paragraph([
-        "したがって ",
-        ref("matrix_norm_submultiplicativity"),
-        " より",
+        "（引いたブロックは 1 つ前の式と同じである）を得る。したがって",
       ]),
-      displayMath(
-        String.raw`\|Aw\|=\|AW\|\le\|A\|\cdot\|W\|=\|A\|\cdot\|w\|`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\|Aw\|
+&=\|AW\|
+&&(\because\ \text{上の第 1 の等式})\\
+&\le\|A\|\cdot\|W\|
+&&(\because\ \text{行列ノルムの劣乗法性})\\
+&=\|A\|\cdot\|w\|
+&&(\because\ \text{上の第 2 の等式})
+\end{aligned}`),
+      paragraph([
+        "である（不等号で ",
+        ref("matrix_norm_submultiplicativity"),
+        " を引いた）。",
+      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "原文（Typst）に対応ブロックは無い。exp 級数の各点収束（labels: exp_converges）の証明で" +
           "行列ノルムから数ベクトルの評価へ移る箇所が必要になるため、劣乗法性の直後に置いた。",
+        "2026-08-10: 式変形の書き方を統一した。もとは 4 つの式を別々に置き、その間に" +
+          "「行列の積の定義より」「である。|0|=0 より第 2 列以降は平方和に寄与しないので」" +
+          "「したがって …より」という日本語を挟んだうえ、1 つの式に 2 つ以上の等号を並べて" +
+          "根拠を 1 つも書いていなかった。どの等号がどの根拠によるのかが式から読み取れないので、" +
+          "1 行 1 関係の 4 つの鎖へ分け（第 1 列の成分・第 2 列以降の成分・‖AW‖=‖Aw‖ と ‖W‖=‖w‖・" +
+          "結論）、各行の末尾に (∵ …) を置いた。この生成器は blkref を定義していないので、" +
+          "(∵ …) には引いたブロックの題を書き、ラベル参照は式の直後に置いた。" +
+          "段は増えており、減った段は無い（‖W‖=‖w‖ の側はもとが 2 つの等号を 1 行に並べていたので" +
+          "4 段へ開いた）。主張も証明の筋も変えていない。",
       ],
     },
   },
