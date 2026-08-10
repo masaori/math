@@ -1844,15 +1844,24 @@ X(-X)
         " が定まって",
       ]),
       displayMath(
-        String.raw`e^{\mathrm{ad}_X}(Y)
-= \exp\!\left(\mathrm{ad}_X\right)(Y)
-= \lim_{N\to\infty}P_N
-= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
+        String.raw`\begin{aligned}
+e^{\mathrm{ad}_X}(Y)
+&= \exp\!\left(\mathrm{ad}_X\right)(Y)
+   &&(\because\ e^{\mathrm{ad}_X}:=\exp(\mathrm{ad}_X)\ \text{という本定理の主張での記号の定め方}) \\
+&= \lim_{N\to\infty}P_N
+   &&(\because\ \text{指数写像の定義}\ \text{と、その級数が収束すること。}\ P_N\ \text{は Step 2 の有限和}) \\
+&= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
+   &&(\because\ \text{無限級数の値は部分和の列の極限であること})
+\end{aligned}`,
       ),
       paragraph([
-        "が成り立つ（",
+        "が成り立つ（この式変形で引いたのは ",
+        ref("def_exp"),
+        "、",
+        ref("exp_converges"),
+        "、",
         ref("matrix_exp_conjugation"),
-        " (2) の第 2 の等号）。Step 1 の記号の一致と合わせて主張を得る。",
+        " (2) の第 2 の等号である）。Step 1 の記号の一致と合わせて主張を得る。",
       ]),
       paragraph([
         "解析（非可算集合 ",
