@@ -2344,13 +2344,25 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       displayMath(
         String.raw`\begin{aligned}
 \|A_N B - AB\|
-&= \|(A_N - A)B\| \\
-&\leq \|A_N - A\| \cdot \|B\| \\
+&= \|(A_N - A)B\|
+&&(\because\ \text{行列の積の右分配則})\\
+&\leq \|A_N - A\| \cdot \|B\|
+&&(\because\ \text{行列ノルムの劣乗法性})\\
 &\to 0
+&&(\because\ \|A_N - A\| \to 0\ \text{と、収束する実数列に定数を掛けた列の極限})
 \end{aligned}`,
       ),
       paragraph(["（", ref("matrix_norm_submultiplicativity"), " を使用）"]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-10）。3 段の鎖はもとから 1 行 1 関係になっていたが、" +
+          "どの関係がどの根拠によるのかが式の上に無く、引いたブロックの参照が式の後ろに" +
+          "1 つだけ置かれていた。各行の末尾に (∵ …) を置いた（右分配則・劣乗法性・" +
+          "収束する実数列に定数を掛けた列の極限が別々の根拠であることが、これで式の上に現れる）。" +
+          "段は増えておらず減ってもおらず、主張も証明の筋も変えていない。",
+      ],
+    },
   },
 ]);
