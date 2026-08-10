@@ -1117,16 +1117,29 @@ E_{IJ} E_{KL}
         math(String.raw`E_{IJ}E_{KL}=\delta_{JK}E_{IL}`),
         "。また各因子に ",
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}`),
-        " を代入して各因子についての線型性（",
-        ref("kronecker_multilinear"),
-        "）で展開すると",
+        " を代入して展開すると",
       ]),
       displayMath(
-        String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}
-= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
-= \sum_{P\in\{1,2\}^M} E_{PP}
-\quad (\because \text{クロネッカー積の積の規則 (2)、} I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22} \text{、各因子についての線型性})`,
+        String.raw`\begin{aligned}
+I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
+&&(\because \text{クロネッカー積の積の規則 (2) を右辺から左辺へ}) \\
+&= (E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})
+&&(\because I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}) \\
+&= \sum_{P=(p_1,\dots,p_M)\in\{1,2\}^M}
+   E_{p_1 p_1}\boxtimes\cdots\boxtimes E_{p_M p_M}
+&&(\because \text{各因子についての線型性を } M \text{ 回}) \\
+&= \sum_{P\in\{1,2\}^M} E_{PP}
+&&(\because E_{PP} \text{ の定め方})
+\end{aligned}`,
       ),
+      paragraph([
+        "（引いたのは ",
+        ref("kronecker_product_rule"),
+        " (2) と ",
+        ref("kronecker_multilinear"),
+        " である）。",
+      ]),
       paragraph([
         "Step 3: ",
         math(String.raw`W`),
