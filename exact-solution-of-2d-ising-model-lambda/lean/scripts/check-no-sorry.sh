@@ -453,6 +453,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.shiftOrbitRestriction_sign
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_at_top_of_iterated
   Ising2DLambda.AlgebraicEigenvalue.shiftOrbitRestriction_sign_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbitFactor_eq_zero_of_entry_zero
+  Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

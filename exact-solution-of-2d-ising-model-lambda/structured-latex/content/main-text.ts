@@ -15850,7 +15850,11 @@ C&:=\bigl\{\,(\tau,\tau')\in F(O,O) \bigm| \psi_1\bigl(\mathrm{srt}_{\psi_2}(\ta
     },
     labels: ["claim_orbit_factor_zero"],
     habitat: "Z",
-    lean: [],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.orbitFactor_eq_zero_of_entry_zero",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitFactor_shiftMatrix_eq_zero_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-factor-zero"],
     statement: [
       paragraph([
