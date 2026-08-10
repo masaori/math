@@ -20839,6 +20839,108 @@ z^{L}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_commuting_preserves_eigenspace",
+    kind: "claim",
+    title: { text: "可換な行列は固有空間を保つ" },
+    labels: ["claim_qbar_commuting_preserves_eigenspace"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarCommuting_preserves_eigenspace",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.commuting_preserves_eigenspace_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarCommuting_preserves_eigenspace_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-commuting-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " を任意に取る。",
+        math(String.raw`AB=BA`),
+        "（",
+        ref("def_qbar_matrix_product"),
+        "）ならば、",
+        math(String.raw`v\in E_{A}(z)`),
+        "（",
+        ref("def_qbar_eigenspace"),
+        "）を満たす任意の ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）について",
+      ]),
+      displayMath(String.raw`B\cdot v\in E_{A}(z)`),
+      paragraph([
+        "である（点は ",
+        ref("def_qbar_matrix_action"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "示すべきは ",
+        math(String.raw`A\cdot(B\cdot v)=z\odot(B\cdot v)`),
+        " である（",
+        ref("def_qbar_eigenspace"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A\cdot(B\cdot v)
+&=(AB)\cdot v
+&&(\because\ \blkref{claim_qbar_action_product}\ \text{を右辺から左辺へ使った})\\
+&=(BA)\cdot v
+&&(\because\ \text{仮定}\ AB=BA)\\
+&=B\cdot(A\cdot v)
+&&(\because\ \blkref{claim_qbar_action_product})\\
+&=B\cdot(z\odot v)
+&&(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&=z\odot(B\cdot v)
+&&(\because\ \blkref{claim_qbar_action_smul})
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`B\cdot v`),
+        " は ",
+        ref("def_qbar_eigenspace"),
+        " の条件を満たし、",
+        math(String.raw`B\cdot v\in E_{A}(z)`),
+        " である。",
+      ]),
+      paragraph([
+        "この段が使っているのは、行列の積の作用が作用を 2 度施したものであること（",
+        ref("claim_qbar_action_product"),
+        "）と、作用がスカラー倍を保つこと（",
+        ref("claim_qbar_action_smul"),
+        "）の 2 つと、仮定の等式だけである。",
+        "固有ベクトルではなく固有空間について述べたのは、",
+        math(String.raw`B\cdot v`),
+        " が零ベクトルになりうるからである",
+        "（零ベクトルは固有ベクトルではないが ",
+        math(String.raw`E_{A}(z)`),
+        " には属する）。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "これはシフト行列 ",
+        math(String.raw`U`),
+        " と転送行列 ",
+        math(String.raw`T`),
+        " の可換性（",
+        ref("theorem_shift_matrix_commutes"),
+        "）を、固有空間の言葉へ翻訳するための段である。",
+        math(String.raw`\mathrm{Ev}_{\xi}`),
+        " で ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " へ運んだ 2 つの行列が可換であること（",
+        ref("claim_qbar_matrix_eval_product"),
+        " による）と合わせると、転送行列がシフト行列の各固有空間をそれ自身へ写すことになる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21030,8 +21132,13 @@ z^{L}
           math(String.raw`L`),
           " 乗根であること（",
           ref("claim_shift_matrix_eigenvalue_root_of_unity"),
+          "）、および可換な行列が固有空間を保つこと（",
+          ref("claim_qbar_commuting_preserves_eigenspace"),
           "）までは上で済んでいる。",
-          "次に書くのは、シフト行列の固有空間へ転送行列を分けること（対角化）である。",
+          "次に書くのは、シフト行列と転送行列を ",
+          math(String.raw`\mathrm{Ev}_{\xi}`),
+          " で運んだ 2 つの行列が可換であることと、そこから転送行列が",
+          "シフト行列の各固有空間をそれ自身へ写すことである（対角化へ向けた段）。",
         ],
         [
           todo("未着手"),

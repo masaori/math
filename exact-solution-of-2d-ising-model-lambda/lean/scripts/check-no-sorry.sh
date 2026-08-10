@@ -576,6 +576,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eigenvalue_rootOfUnity
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenvalue_pow_eq_one_necSuf
   Ising2DLambda.AlgebraicEigenvalue.shiftMatrix_eigenvalue_rootOfUnity_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarCommuting_preserves_eigenspace
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.commuting_preserves_eigenspace_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarCommuting_preserves_eigenspace_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
