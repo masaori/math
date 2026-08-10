@@ -2338,28 +2338,58 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
     ],
     proof: [
       paragraph([
-        ref("def_hatZ_hatY"),
-        " より、各 ",
+        "準備として、各 ",
         math(String.raw`j \in \{1,\dots,M\}`),
-        " について、",
+        " について係数が一致することを示す。",
       ]),
       displayMath(
-        String.raw`\exp\!\left(-i j \frac{2\pi M}{M}\right)
-= e^{-2\pi i j}
-= 1
-= e^{0}
-= \exp\!\left(-i j \frac{2\pi(-M)}{M}\right)`,
+        String.raw`\begin{aligned}
+\exp\!\left(-i \frac{2\pi j M}{M}\right)
+&= \exp(-2\pi i j)
+&&(\because\ M/M = 1)\\
+&= \cos(2\pi j) - i\sin(2\pi j)
+&&(\because\ \text{オイラーの公式})\\
+&= 1 - i\cdot 0
+&&(\because\ j \in \mathbb{Z}\ \text{での三角関数の値})\\
+&= 1
+&&(\because\ \text{複素数の四則})\\
+&= 1 + i\cdot 0
+&&(\because\ \text{複素数の四則})\\
+&= \cos(2\pi j) + i\sin(2\pi j)
+&&(\because\ j \in \mathbb{Z}\ \text{での三角関数の値})\\
+&= \exp(2\pi i j)
+&&(\because\ \text{オイラーの公式})\\
+&= \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
+&&(\because\ (-M)/M = -1)
+\end{aligned}`,
+      ),
+      paragraph(["この係数の一致を各項に当てる。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{Z}_M^{(-)}
+&= \sum_{j=1}^{M} Z_j \exp\!\left(-i \frac{2\pi j M}{M}\right)
+&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \text{で}\ \mu = M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)\\
+&= \sum_{j=1}^{M} Z_j \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
+&&(\because\ \text{上で示した各}\ j\ \text{についての係数の一致})\\
+&= \hat{Z}_{-M}^{(-)}
+&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \text{で}\ \mu = -M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{Y}_M
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i \frac{2\pi j M}{M}\right)
+&&(\because\ \text{定義}\ \hat{Y}_\mu\ \text{で}\ \mu = M)\\
+&= \sum_{j=1}^{M} Y_j \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
+&&(\because\ \text{上で示した各}\ j\ \text{についての係数の一致})\\
+&= \hat{Y}_{-M}
+&&(\because\ \text{定義}\ \hat{Y}_\mu\ \text{で}\ \mu = -M)
+\end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        math(String.raw`\hat{Z}_M`),
-        " と ",
-        math(String.raw`\hat{Z}_{-M}`),
-        " の各 ",
-        math(String.raw`j`),
-        " 項の係数が一致する。",
-        math(String.raw`\hat{Y}`),
-        " も同様。",
+        "係数の一致と定義は ",
+        ref("def_hatZ_hatY"),
+        " による。",
       ]),
     ],
     conversion: { status: "converted" },
