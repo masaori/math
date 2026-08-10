@@ -1632,29 +1632,83 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         " (4)）による。",
       ]),
       paragraph([
-        "Step 7: (3)。",
-        math(String.raw`X(-X)=-X^2=(-X)X`),
-        " なので ",
-        ref("theorem_exp_product"),
-        " が適用でき、",
-        ref("theorem_exp_zero"),
-        " と合わせて",
+        "Step 7: (3)。まず ",
+        math(String.raw`X`),
+        " と ",
+        math(String.raw`-X`),
+        " が交換することを見る。",
       ]),
       displayMath(
-        String.raw`\exp(X)\exp(-X)=\exp\!\left(X+(-X)\right)=\exp(O)=I,
-\qquad
-\exp(-X)\exp(X)=\exp(O)=I`,
+        String.raw`\begin{aligned}
+X(-X)
+&= -\left(XX\right)
+   &&(\because\ \text{行列のスカラー倍と積の両立を}\ c=-1\ \text{に取ること}) \\
+&= -X^2
+   &&(\because\ \text{行列の冪の定義}) \\
+&= -\left(XX\right)
+   &&(\because\ \text{行列の冪の定義}) \\
+&= (-X)X
+   &&(\because\ \text{行列のスカラー倍と積の両立を}\ c=-1\ \text{に取ること})
+\end{aligned}`,
       ),
       paragraph([
-        "したがって ",
+        "よって ",
+        ref("theorem_exp_product"),
+        " が適用できる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(X)\exp(-X)
+&= \exp\!\left(X+(-X)\right)
+   &&(\because\ \text{可換な 2 つの行列の指数の積}\ \text{と、直前に示した}\ X(-X)=(-X)X) \\
+&= \exp(O)
+   &&(\because\ \text{行列の加法についての逆元}\ X+(-X)=O) \\
+&= I
+   &&(\because\ \text{零行列の指数は単位行列であること})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-X)\exp(X)
+&= \exp\!\left((-X)+X\right)
+   &&(\because\ \text{可換な 2 つの行列の指数の積}\ \text{と、直前に示した}\ (-X)X=X(-X)) \\
+&= \exp(O)
+   &&(\because\ \text{行列の加法についての逆元}\ (-X)+X=O) \\
+&= I
+   &&(\because\ \text{零行列の指数は単位行列であること})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（上の 2 つの式変形で引いたのは ",
+        ref("theorem_exp_product"),
+        " と ",
+        ref("theorem_exp_zero"),
+        "。）",
+      ]),
+      paragraph([
+        "2 つの積がどちらも ",
+        math(String.raw`I`),
+        " なので、逆行列の定義により ",
         math(String.raw`\exp(X)`),
         " は正則で ",
         math(String.raw`\exp(X)^{-1}=\exp(-X)`),
-        "。よって ",
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{Ad}_{\exp(X)}(Y)
+&= \exp(X)\,Y\,\exp(X)^{-1}
+   &&(\because\ \mathrm{Ad}\ \text{の定義}) \\
+&= \exp(X)\,Y\,\exp(-X)
+   &&(\because\ \text{直前に示した}\ \exp(X)^{-1}=\exp(-X)) \\
+&= \exp(\mathrm{ad}_X)(Y)
+   &&(\because\ \text{Step 6 で示した (2)})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（この式変形で引いたのは ",
         ref("def_ad_X_matrix"),
-        " の ",
-        math(String.raw`\mathrm{Ad}_{\exp(X)}(Y)=\exp(X)Y\exp(X)^{-1}=\exp(X)Y\exp(-X)=\exp(\mathrm{ad}_X)(Y)`),
-        "。",
+        "。）",
       ]),
     ],
     conversion: {
