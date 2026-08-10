@@ -459,6 +459,12 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_self_iff_card_orbit_eq_one
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.step_eq_self_iff_period_eq_one
   Ising2DLambda.AlgebraicEigenvalue.rowShift_eq_self_iff_card_orbit_eq_one_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_two_le
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_card_one
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.entry_of_not_right
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.entry_of_right
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_two_le_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_card_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

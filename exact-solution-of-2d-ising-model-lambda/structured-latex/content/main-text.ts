@@ -16130,6 +16130,146 @@ S^{[1]}(\tau)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_shift_char_diagonal_entry",
+    kind: "claim",
+    title: {
+      text: "シフト行列の特性行列の対角成分は、その軌道の元の個数で決まる",
+    },
+    labels: ["claim_shift_char_diagonal_entry"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_two_le",
+      "Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_card_one",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.entry_of_not_right",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.entry_of_right",
+      "Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_two_le_from_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.charMatrix_shiftMatrix_diag_of_card_one_from_necSuf",
+    ],
+    verification: ["sagemath/check/shift-char-diagonal-entry"],
+    statement: [
+      paragraph([
+        "軌道 ",
+        math(String.raw`O\in\mathcal{O}_L`),
+        "（",
+        ref("def_row_config_orbit_set"),
+        "）と ",
+        math(String.raw`\tau\in O`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\mathrm{ch}(U)_{\tau,\tau}=
+\begin{cases}
+t & (\lvert O\rvert\ge2\ \text{のとき})\\
+t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
+\end{cases}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`U`),
+        " は ",
+        ref("def_shift_matrix"),
+        "、",
+        math(String.raw`\mathrm{ch}`),
+        " は ",
+        ref("def_characteristic_matrix"),
+        "、",
+        math(String.raw`t`),
+        " は ",
+        ref("def_indeterminate_element"),
+        "、",
+        math(String.raw`\iota`),
+        " は ",
+        ref("def_second_constant_embedding"),
+        "、",
+        math(String.raw`\kappa`),
+        " は ",
+        ref("def_constant_polynomial"),
+        "）。",
+        math(String.raw`\tau\in O`),
+        " より ",
+        math(String.raw`\lvert O\rvert\ge1`),
+        " なので、この 2 つの場合はすべての場合を尽くしており、かつ重ならない。",
+      ]),
+      paragraph([
+        "既に示した ",
+        ref("claim_shift_char_matrix_entry_zero"),
+        " は対角成分を扱っていない。ここで残りの成分のうち対角成分の値を決めることで、",
+        "軌道ごとの因子に現れる恒等写像の項を計算できるようになる。",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の等式であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("def_characteristic_matrix"),
+        " の ",
+        math(String.raw`\tau=\tau'`),
+        " の場合により",
+      ]),
+      displayMath(String.raw`\mathrm{ch}(U)_{\tau,\tau}=t+\iota\bigl(-U_{\tau,\tau}\bigr)`),
+      paragraph([
+        "である。以下、2 つの場合を別々に示す。",
+      ]),
+      paragraph([
+        "第一の場合。",
+        math(String.raw`\lvert O\rvert\ge2`),
+        " を仮定する。このとき ",
+        math(String.raw`\lvert O\rvert\ne1`),
+        " なので ",
+        math(String.raw`S(\tau)\ne\tau`),
+        " である（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_orbit_fixed_iff_card_one"),
+        " の対偶）。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ch}(U)_{\tau,\tau}
+&=t+\iota\bigl(-U_{\tau,\tau}\bigr)
+&&(\because\ \text{準備})\\
+&=t+\iota\bigl(-\kappa(0)\bigr)
+&&(\because\ \blkref{def_shift_matrix}\ \text{の}\ \tau\ne S(\tau)\ \text{の場合})\\
+&=t+\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \kappa(0)\ \text{は}\ \mathbb{Z}[x]\ \text{の零元であり、零元の加法の逆元は零元})\\
+&=t
+&&(\because\ \blkref{def_second_constant_embedding}\ \text{より}\ \iota(\kappa(0))\ \text{は}\ \mathbb{Z}[x][t]\ \text{の零元})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第二の場合。",
+        math(String.raw`\lvert O\rvert=1`),
+        " を仮定する。このとき ",
+        math(String.raw`S(\tau)=\tau`),
+        " である（",
+        math(String.raw`\because`),
+        " ",
+        ref("claim_orbit_fixed_iff_card_one"),
+        " を右辺から左辺へ用いる）。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ch}(U)_{\tau,\tau}
+&=t+\iota\bigl(-U_{\tau,\tau}\bigr)
+&&(\because\ \text{準備})\\
+&=t+\iota\bigl(-\kappa(1)\bigr)
+&&(\because\ \blkref{def_shift_matrix}\ \text{の}\ \tau=S(\tau)\ \text{の場合})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " と ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元、および有限集合 ",
+        math(String.raw`O`),
+        " の元の個数だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

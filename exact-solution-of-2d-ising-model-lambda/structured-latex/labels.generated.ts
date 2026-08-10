@@ -84,6 +84,7 @@ export const ALL_LABELS = [
   "claim_second_linear_monic",
   "claim_second_monic_add_lower",
   "claim_second_monic_prod",
+  "claim_shift_char_diagonal_entry",
   "claim_shift_char_matrix_entry_zero",
   "claim_shift_char_orbit_product",
   "claim_shift_char_sum_family",
