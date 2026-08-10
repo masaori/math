@@ -45,6 +45,7 @@ export const ALL_LABELS = [
   "claim_orbit_preserving_image",
   "claim_orbit_restriction_bijective",
   "claim_orbit_restriction_determines",
+  "claim_orbit_shift_restriction_sign",
   "claim_orbit_term_factorization",
   "claim_orbit_transposition_bijective",
   "claim_orbit_transposition_composite_bijective",

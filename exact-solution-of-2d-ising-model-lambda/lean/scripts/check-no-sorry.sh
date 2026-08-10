@@ -450,6 +450,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_of_iterated_step
   Ising2DLambda.AlgebraicEigenvalue.ambientComposite_sign_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.shiftOrbitRestriction_sign
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.value_at_top_of_iterated
+  Ising2DLambda.AlgebraicEigenvalue.shiftOrbitRestriction_sign_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

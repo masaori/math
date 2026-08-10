@@ -20,9 +20,9 @@
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 161 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| 記述（構造化テキスト） | ラベルの数は合計 165 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
 | SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 385 件を登録）が通る |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 397 件を登録）が通る |
 | Lean 必要十分版 | 主張 65 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -599,8 +599,23 @@ Lean 具体版・必要十分版・導出は tick 52）。ここにも $\mathbb{
   必要十分版が示したのは、この段の帰納法が**モノイドしか要求しない**ことである
   （順序も軌道も互換も、値が $\mathbb{Z}$ であることも $u=-1$ であることも積の可換性も使わない）。
 
-残るのは、そこから $\mathrm{sgn}_{O}(S\!\restriction_{O})=(-1)^{\lvert O\rvert-1}$ を出すこと、
-そして各軌道の因子の和が $t^{\lvert O\rvert}-1$ になる段である。
+さらに、軌道の上の巡回シフトの制限の符号が $(-1)^{\lvert O\rvert-1}$ であることを示した。
+**四層すべてを満たしている**（2026-08-10 の tick 54）。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\mathrm{sgn}_{O}\bigl(S\!\restriction_{O}\bigr)=(-1)^{\lvert O\rvert-1}$ である。
+  証明は、$O$ が空でないことから基点 $\tau_0\in O$ を取り、$O=O(\tau_0)$ から
+  $\lvert O\rvert=e(\tau_0)$ を出し、$e(\tau_0)\ge1$ と合わせて $\lvert O\rvert-1<e(\tau_0)$ を得てから、
+  $\Psi^{O,\tau_0}_{\lvert O\rvert-1}=S\!\restriction_{O}$ と反復合成の符号が $(-1)^{k}$ であることを
+  2 段の鎖でつなぐものである。右辺に $\tau_0$ が現れないので、この値は基点の取り方によらない。
+  Lean の具体版では、$S\!\restriction_{O}$ を ambient の写像として渡し、写像としての等式を
+  $O$ の上での値の一致へ落としてから、符号が $O$ の中の値だけで決まることで符号の等式へ移した。
+  必要十分版が示したのは、この段が要求するのが**上界より下で列の値が $u^{k}$ であること・
+  着目する元の符号が第 $n-1$ 項の符号に等しいこと・$n=e$・$1\le e$ の 4 つだけ**であり、
+  行配位も巡回シフトも軌道も互換も順序も、符号が $(-1)$ の冪であることも、
+  元が写像であることさえ使っていないことである。
+
+これで、シフト行列の特性多項式の各軌道の因子に現れる 2 つの項（恒等写像と巡回シフトの制限）の
+符号が両方とも決まった。残るのは、各軌道の因子の和が $t^{\lvert O\rvert}-1$ になる段である。
 
 ## 進め方（自動ループ）
 
@@ -614,6 +629,22 @@ Lean 具体版・必要十分版・導出は tick 52）。ここにも $\mathbb{
 - 次に何をするかは、下の「次回やること」ではなく**状態台帳のセクション表**を見る。
 
 ## 次回やること
+
+**2026-08-10 の tick 54 は、レビューでは直すところが無く、セクション 10f'''c2d2b
+（軌道の上の巡回シフトの制限の符号が $(-1)^{\lvert O\rvert-1}$ であること）を
+四層すべてで完了させた。**
+
+1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_orbit_shift_restriction_sign`）と
+   Lean 3 本（`OrbitShiftRestrictionSign` 系）。とくに、本文の準備の段が前々セクションの
+   証明と同じ議論（$\lvert O\rvert=e(\tau_0)$ を出す 3 行）を二重に書いていることが
+   許容範囲かと、必要十分版が写像であることすら使わない形にまで薄めた結果、
+   検査として意味のある仮定が残っているかを見る。
+2. **並列の作業ストリーム（式変形の書き方の統一）は今 tick も行った**（下の記録を見る）。
+   次 tick も 1 件進める。
+3. そのあと、各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（10f'''c3）。
+4. そのあと、その根が 1 の $L$ 乗根であること（セクション 10g。ここで $\overline{\mathbb{Q}}$ へ入る）。
+
+### 前の tick の記録
 
 **2026-08-10 の tick 53 は、レビューで 2 件（Lean の導出のファイル冒頭が必要十分版の仮定の個数を
 6 と書いていたのを 8 へ訂正、および台帳の「現在地」が 2 tick ぶん止まっていたのを追記）を
@@ -632,8 +663,6 @@ $(-1)^{k}$ であること）を四層すべてで完了させた。**
    $k=\lvert O\rvert-1$ を代入する）。
 4. そのあと、各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（10f'''c3）。
 5. そのあと、その根が 1 の $L$ 乗根であること（セクション 10g。ここで $\overline{\mathbb{Q}}$ へ入る）。
-
-### 前の tick の記録
 
 **2026-08-10 の tick 52 は、レビューでは直すところが無く、前 tick が残した Lean 3 本を書いて
 セクション 10f'''c2d1（軌道の上の全単射の符号が合成について乗法的であること）を
