@@ -21106,6 +21106,170 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_vector_sum",
+    kind: "definition",
+    title: { text: "代数的数を成分とする列ベクトルの有限和" },
+    labels: ["def_qbar_vector_sum"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarVectorSum"],
+    verification: ["sagemath/check/qbar-action-sum"],
+    statement: [
+      paragraph([
+        "集合 ",
+        math(String.raw`I`),
+        " とその有限部分集合 ",
+        math(String.raw`s\subset I`),
+        "、および写像 ",
+        math(String.raw`i\mapsto v_i`),
+        "（",
+        math(String.raw`I`),
+        " から ",
+        math(String.raw`V_L`),
+        " への写像。",
+        ref("def_qbar_vector"),
+        "）に対し、有限和 ",
+        math(String.raw`\bigoplus_{i\in s}v_i\in V_L`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\Bigl(\bigoplus_{i\in s}v_i\Bigr)(\tau):=\sum_{i\in s}v_i(\tau)\qquad(\tau\in R_L)`,
+      ),
+      paragraph([
+        "で定める。右辺は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の有限個の元の和であり、左辺の ",
+        math(String.raw`\bigoplus`),
+        " は列ベクトルどうしの演算である。2 元の和（",
+        ref("def_qbar_vector_add"),
+        "）と同じ理由で、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法とは記号を分けて書く。",
+      ]),
+      paragraph([
+        "定義を成分ごとに置いたのは、",
+        math(String.raw`\oplus`),
+        " を繰り返す形で定めると、足す順序に依らないことを別に示す必要が生じるからである",
+        "（成分ごとに置けば、それは ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の有限和が持つ性質にそのまま帰着する）。",
+        "とくに ",
+        math(String.raw`s=\emptyset`),
+        " のとき ",
+        math(String.raw`\bigoplus_{i\in s}v_i=o_L`),
+        "（",
+        ref("def_qbar_zero_vector"),
+        "）である。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_action_sum",
+    kind: "claim",
+    title: { text: "行列の作用は列ベクトルの有限和を保つ" },
+    labels: ["claim_qbar_action_sum"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_sum",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_sum_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_sum_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-action-sum"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）、集合 ",
+        math(String.raw`I`),
+        " の有限部分集合 ",
+        math(String.raw`s`),
+        "、および写像 ",
+        math(String.raw`i\mapsto v_i`),
+        "（",
+        math(String.raw`I`),
+        " から ",
+        math(String.raw`V_L`),
+        " への写像）を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`A\cdot\Bigl(\bigoplus_{i\in s}v_i\Bigr)=\bigoplus_{i\in s}\bigl(A\cdot v_i\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（点は ",
+        ref("def_qbar_matrix_action"),
+        "、",
+        math(String.raw`\bigoplus`),
+        " は ",
+        ref("def_qbar_vector_sum"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(A\cdot\Bigl(\bigoplus_{i\in s}v_i\Bigr)\Bigr)(\tau)
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\Bigl(\bigoplus_{i\in s}v_i\Bigr)(\tau')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\Bigl(\sum_{i\in s}v_i(\tau')\Bigr)
+&&(\because\ \blkref{def_qbar_vector_sum})\\
+&=\sum_{\tau'\in R_L}\ \sum_{i\in s}A_{\tau,\tau'}\,v_i(\tau')
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=\sum_{i\in s}\ \sum_{\tau'\in R_L}A_{\tau,\tau'}\,v_i(\tau')
+&&(\because\ \text{有限和の順序の入れ替え})\\
+&=\sum_{i\in s}\bigl(A\cdot v_i\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\Bigl(\bigoplus_{i\in s}\bigl(A\cdot v_i\bigr)\Bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_sum})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので、2 つの写像は等しい。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、元と有限和の積についての分配則と、",
+        "加法が可換モノイドであること（有限和の順序を入れ替えるのに要る）だけである。",
+        "積の結合則も可換性も、加法の逆元も、体であることも使っていない。",
+        "有限和の順序の入れ替えが使えるのは、",
+        math(String.raw`R_L`),
+        " も ",
+        math(String.raw`s`),
+        " も有限集合だからである。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "2 元の和についての同じ主張（",
+        ref("claim_qbar_action_add"),
+        "）を項の個数について繰り返せば得られる形だが、繰り返しの帰納法を書く代わりに、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の有限和が持つ性質へ直接帰着させた（有限和の定義を成分ごとに置いた",
+        ref("def_qbar_vector_sum"),
+        " の利点である）。",
+      ]),
+      paragraph([
+        "この主張は、シフト行列の固有空間たちが列ベクトルの全体を張ることを示すための足場である。",
+        "そこでは、与えられた列ベクトルを固有空間の元の有限和として書き、",
+        "その両辺へ行列を作用させる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -21303,8 +21467,18 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
           ref("claim_qbar_shift_transfer_commute"),
           "）、および転送行列がシフト行列の各固有空間をそれ自身へ写すこと（",
           ref("claim_qbar_transfer_preserves_shift_eigenspace"),
+          "）、および列ベクトルの有限和（",
+          ref("def_qbar_vector_sum"),
+          "）を置いて、行列の作用がそれを保つこと（",
+          ref("claim_qbar_action_sum"),
           "）までは上で済んでいる。",
-          "次に書くのは、シフト行列の固有空間たちが列ベクトルの全体を張ること（対角化の本体）である。",
+          "次に書くのは、1 の ",
+          math(String.raw`L`),
+          " 乗根 ",
+          math(String.raw`z`),
+          " ごとに列ベクトルを固有空間へ落とす写像 ",
+          math(String.raw`P_z`),
+          " を置き、その像が固有空間に入ること（対角化の本体の第 1 段）である。",
         ],
         [
           todo("未着手"),
