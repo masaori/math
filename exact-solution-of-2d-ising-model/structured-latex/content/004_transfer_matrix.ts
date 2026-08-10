@@ -1252,10 +1252,17 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         " について",
       ]),
       displayMath(
-        String.raw`\left(\sum_{I,J\in\mathcal{I}} t_{I,J}\Theta_{I,J}\right)(f_K)
-= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\delta_{J,K} f_I
-= \sum_{I\in\mathcal{I}} t_{I,K} f_I
-= T(f_K)`,
+        String.raw`\begin{aligned}
+\left(\sum_{I,J\in\mathcal{I}} t_{I,J}\Theta_{I,J}\right)(f_K)
+&= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\Theta_{I,J}(f_K)
+&&(\because\ \text{線型写像の和とスカラー倍の値の定義})\\
+&= \sum_{I,J\in\mathcal{I}} t_{I,J}\,\delta_{J,K} f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）})\\
+&= \sum_{I\in\mathcal{I}} t_{I,K} f_I
+&&(\because\ \delta_{J,K}\ \text{は}\ J=K\ \text{のときだけ}\ 1\ \text{で他は}\ 0)\\
+&= T(f_K)
+&&(\because\ T(f_K)=\sum_{I\in\mathcal{I}} t_{I,K} f_I\ \text{（表示の取り方）})
+\end{aligned}`,
       ),
       paragraph([
         "であり、基底上で一致する線型写像は等しいから ",
@@ -1315,19 +1322,35 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         String.raw`\begin{aligned}
 E_{I,J}E_{K,L}
 &= (E_{i_1j_1}E_{k_1l_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}E_{k_Ml_M})
-\quad (\because \text{クロネッカー積の積の規則}) \\
-&= (\delta_{j_1,k_1}E_{i_1l_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}E_{i_Ml_M}) \\
+&&(\because\ \text{クロネッカー積の積の規則})\\
+&= (\delta_{j_1,k_1}E_{i_1l_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}E_{i_Ml_M})
+&&(\because\ E_{ij}E_{kl}=\delta_{j,k}E_{il}\ \text{を各因子へ同時に適用})\\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)
+   \bigl(E_{i_1l_1}\boxtimes\cdots\boxtimes E_{i_Ml_M}\bigr)
+&&(\because\ \text{各因子についての}\ \mathbb{C}\text{-線型性})\\
 &= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right) E_{I,L}
-\quad (\because \text{各因子についての } \mathbb{C}\text{-線型性})
-= \delta_{J,K}E_{I,L}
+&&(\because\ E_{I,L}\ \text{の定義})\\
+&= \delta_{J,K}E_{I,L}
+&&(\because\ \delta_{J,K}=\prod_{m=1}^{M}\delta_{j_m,k_m})
 \end{aligned}`,
       ),
       paragraph(["一方、任意の ", math(String.raw`P\in\mathcal{I}`), " について"]),
       displayMath(
-        String.raw`\left(\Theta_{I,J}\circ\Theta_{K,L}\right)(f_P)
-= \Theta_{I,J}\!\left(\delta_{L,P}f_K\right)
-= \delta_{L,P}\,\delta_{J,K}\,f_I
-= \delta_{J,K}\,\Theta_{I,L}(f_P)`,
+        String.raw`\begin{aligned}
+\left(\Theta_{I,J}\circ\Theta_{K,L}\right)(f_P)
+&= \Theta_{I,J}\!\left(\Theta_{K,L}(f_P)\right)
+&&(\because\ \text{写像の合成の定義})\\
+&= \Theta_{I,J}\!\left(\delta_{L,P}f_K\right)
+&&(\because\ \Theta_{K,L}(f_P)=\delta_{L,P}f_K\ \text{（}\Theta_{K,L}\ \text{の定義）})\\
+&= \delta_{L,P}\,\Theta_{I,J}(f_K)
+&&(\because\ \Theta_{I,J}\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&= \delta_{L,P}\,\delta_{J,K}\,f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）})\\
+&= \delta_{J,K}\,\delta_{L,P}\,f_I
+&&(\because\ \mathbb{C}\ \text{の乗法の可換則})\\
+&= \delta_{J,K}\,\Theta_{I,L}(f_P)
+&&(\because\ \Theta_{I,L}(f_P)=\delta_{L,P}f_I\ \text{（}\Theta_{I,L}\ \text{の定義）})
+\end{aligned}`,
       ),
       paragraph([
         "であり、基底上で一致するから ",
@@ -1335,8 +1358,19 @@ E_{I,J}E_{K,L}
         "。よって",
       ]),
       displayMath(
-        String.raw`\mathbf{end}(E_{I,J}E_{K,L}) = \delta_{J,K}\mathbf{end}(E_{I,L}) = \delta_{J,K}\Theta_{I,L}
-= \Theta_{I,J}\circ\Theta_{K,L} = \mathbf{end}(E_{I,J})\circ\mathbf{end}(E_{K,L})`,
+        String.raw`\begin{aligned}
+\mathbf{end}(E_{I,J}E_{K,L})
+&= \mathbf{end}\!\left(\delta_{J,K}E_{I,L}\right)
+&&(\because\ \text{上で示した}\ E_{I,J}E_{K,L}=\delta_{J,K}E_{I,L})\\
+&= \delta_{J,K}\,\mathbf{end}(E_{I,L})
+&&(\because\ \mathbf{end}\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&= \delta_{J,K}\,\Theta_{I,L}
+&&(\because\ \mathbf{end}(E_{I,L})=\Theta_{I,L}\ \text{（}\mathbf{end}\ \text{の定義）})\\
+&= \Theta_{I,J}\circ\Theta_{K,L}
+&&(\because\ \text{上で示した}\ \Theta_{I,J}\circ\Theta_{K,L}=\delta_{J,K}\Theta_{I,L})\\
+&= \mathbf{end}(E_{I,J})\circ\mathbf{end}(E_{K,L})
+&&(\because\ \mathbf{end}\ \text{の定義を 2 箇所へ同時に適用})
+\end{aligned}`,
       ),
       paragraph([
         "Step 4: (3)。",
@@ -1350,9 +1384,17 @@ E_{I,J}E_{K,L}
         "。和で展開する）より",
       ]),
       displayMath(
-        String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}
-= \underbrace{(E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})}_{M}
-= \sum_{I\in\mathcal{I}} E_{I,I}`,
+        String.raw`\begin{aligned}
+I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&= \underbrace{I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}}_{M}
+&&(\because\ \text{クロネッカー積の単位元の規則})\\
+&= \underbrace{(E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})}_{M}
+&&(\because\ I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}\ \text{を各因子へ同時に適用})\\
+&= \sum_{I\in\mathcal{I}} E_{i_1i_1}\boxtimes\cdots\boxtimes E_{i_Mi_M}
+&&(\because\ \text{各因子についての}\ \mathbb{C}\text{-線型性で和を展開})\\
+&= \sum_{I\in\mathcal{I}} E_{I,I}
+&&(\because\ E_{I,I}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph([
         "であり、各 ",
@@ -1379,9 +1421,18 @@ E_{I,J}E_{K,L}
         "（成分計算）より右辺は",
       ]),
       displayMath(
-        String.raw`(E_{i_1j_1}e_{k_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}e_{k_M})
-= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)f_I
-= \delta_{J,K}f_I`,
+        String.raw`\begin{aligned}
+(E_{i_1j_1}e_{k_1})\boxtimes\cdots\boxtimes(E_{i_Mj_M}e_{k_M})
+&= (\delta_{j_1,k_1}e_{i_1})\boxtimes\cdots\boxtimes(\delta_{j_M,k_M}e_{i_M})
+&&(\because\ E_{ij}e_k=\delta_{j,k}e_i\ \text{を各因子へ同時に適用})\\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)
+   \bigl(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\bigr)
+&&(\because\ \text{各因子についての}\ \mathbb{C}\text{-線型性})\\
+&= \left(\prod_{m=1}^{M}\delta_{j_m,k_m}\right)f_I
+&&(\because\ f_I\ \text{の定義})\\
+&= \delta_{J,K}f_I
+&&(\because\ \delta_{J,K}=\prod_{m=1}^{M}\delta_{j_m,k_m})
+\end{aligned}`,
       ),
       paragraph([
         "であり、左辺は ",
