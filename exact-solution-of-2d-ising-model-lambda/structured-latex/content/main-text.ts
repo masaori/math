@@ -20138,6 +20138,130 @@ A^{k+1}\cdot v
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_identity_matrix_unit",
+    kind: "claim",
+    title: { text: "代数的数を成分とする単位行列は積の単位元である" },
+    labels: ["claim_qbar_identity_matrix_unit"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarIdentityMatrix_mul",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrix_mul_qbarIdentityMatrix",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.identity_action_right_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarIdentityMatrix_mul_from_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrix_mul_qbarIdentityMatrix_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-identity-matrix-unit"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`I^{\overline{\mathbb{Q}}}_L\,A=A\qquad\text{かつ}\qquad A\,I^{\overline{\mathbb{Q}}}_L=A`),
+      paragraph([
+        "が成り立つ（単位行列は ",
+        ref("def_qbar_identity_matrix"),
+        "、積は ",
+        ref("def_qbar_matrix_product"),
+        "）。",
+      ]),
+      paragraph([
+        "これは ",
+        ref("claim_qbar_identity_action"),
+        "（単位行列の作用が列ベクトルを動かさないこと）とは別の主張である。",
+        "あちらは行列 1 つと列ベクトル 1 つ、こちらは行列 2 つについての等式であり、",
+        "右から掛ける側は列ベクトルへの作用としては書けない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_qbar_matrix"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau''\in R_L`),
+        " を任意に取る。",
+      ]),
+      paragraph(["左から掛ける側。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(I^{\overline{\mathbb{Q}}}_L\,A\bigr)_{\tau,\tau''}
+&=\sum_{\tau'\in R_L}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,A_{\tau',\tau''}
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau}\,A_{\tau,\tau''}
++\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,A_{\tau',\tau''}
+&&(\because\ \text{有限和から }\tau'=\tau\text{ の 1 項を分ける})\\
+&=1\cdot A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot A_{\tau',\tau''}
+&&(\because\ \blkref{def_qbar_identity_matrix})\\
+&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot A_{\tau',\tau''}
+&&(\because\ \text{単位元との積})\\
+&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0
+&&(\because\ \text{零元との積})\\
+&=A_{\tau,\tau''}+0
+&&(\because\ \text{零元だけの有限和は零元である})\\
+&=A_{\tau,\tau''}
+&&(\because\ \text{零元を足しても変わらない})
+\end{aligned}`),
+      paragraph([
+        "右から掛ける側。分けるのは ",
+        math(String.raw`\tau'=\tau''`),
+        " の項であり、単位行列の成分は第 2 添字が第 1 添字に等しいときに ",
+        math(String.raw`1`),
+        " なので、残る項では第 2 添字 ",
+        math(String.raw`\tau''`),
+        " が第 1 添字 ",
+        math(String.raw`\tau'`),
+        " と異なる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\,I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau''}
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau',\tau''}
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=A_{\tau,\tau''}\,\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau'',\tau''}
++\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}A_{\tau,\tau'}\,\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau',\tau''}
+&&(\because\ \text{有限和から }\tau'=\tau''\text{ の 1 項を分ける})\\
+&=A_{\tau,\tau''}\cdot1+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}A_{\tau,\tau'}\cdot0
+&&(\because\ \blkref{def_qbar_identity_matrix})\\
+&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}A_{\tau,\tau'}\cdot0
+&&(\because\ \text{単位元との積})\\
+&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}0
+&&(\because\ \text{零元との積})\\
+&=A_{\tau,\tau''}+0
+&&(\because\ \text{零元だけの有限和は零元である})\\
+&=A_{\tau,\tau''}
+&&(\because\ \text{零元を足しても変わらない})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau`),
+        " と ",
+        math(String.raw`\tau''`),
+        " は任意なので、2 つの等式のいずれも全成分で成り立ち、主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、単位元との積・零元との積・零元との和だけである",
+        "（積の可換性も、積の結合則も、分配則も、加法の逆元も、零元でない元の逆元も、",
+        "体であることも使っていない）。",
+        "ただし左から掛ける側が使うのは ",
+        math(String.raw`1\cdot a=a`),
+        " と ",
+        math(String.raw`0\cdot a=0`),
+        "、右から掛ける側が使うのは ",
+        math(String.raw`a\cdot1=a`),
+        " と ",
+        math(String.raw`a\cdot0=0`),
+        " であり、積の可換性を使わない以上この 2 組は別々に要る。",
+        math(String.raw`R_L`),
+        " について使っているのは、有限集合であることと 2 元の相等が判定できることの 2 つだけである。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -20317,6 +20441,8 @@ A^{k+1}\cdot v
           ref("claim_qbar_matrix_eval_identity"),
           "）、および代数的数を成分とする行列の積が結合的であること（",
           ref("claim_qbar_matrix_product_assoc"),
+          "）、および単位行列が積の単位元であること（",
+          ref("claim_qbar_identity_matrix_unit"),
           "）までは上で済んでいる。",
           "次に書くのは、",
           ref("def_qbar_matrix_eval"),
@@ -20333,9 +20459,11 @@ A^{k+1}\cdot v
           " の冪は ",
           math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L`),
           " から始めて左から掛けるので、出発点も一歩の向きも違う。",
-          "そこで先に、単位行列が積の単位元であること、および既に示した積の結合則（",
+          "そこで次に、既に示した積の結合則（",
           ref("claim_qbar_matrix_product_assoc"),
-          "）と合わせて出る「冪は右から掛けても得られること」（",
+          "）と単位元（",
+          ref("claim_qbar_identity_matrix_unit"),
+          "）から出る「冪は右から掛けても得られること」（",
           math(String.raw`A^{k+1}=A^{k}A`),
           "）を書く。そのうえで ",
           ref("theorem_shift_matrix_order"),
