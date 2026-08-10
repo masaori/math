@@ -498,6 +498,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_pair_eq_pow_card_necSuf
   Ising2DLambda.AlgebraicEigenvalue.prod_pair_eq_pow_card_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_dvd_pow_L
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_dvd_pow_card_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.charPoly_shiftMatrix_dvd_pow_L_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

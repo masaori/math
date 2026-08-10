@@ -20,10 +20,10 @@
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 174 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 442 件を登録）が通る |
-| Lean 必要十分版 | 主張 66 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | ラベルの数は合計 175 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 445 件を登録）が通る |
+| Lean 必要十分版 | 主張 67 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -1000,6 +1000,25 @@ tick 44 の Lean が落ちていた原因は、必要十分版の定理名 `sign
    10f'''c2d（符号が $(-1)^{\lvert O\rvert-1}$）。
 3. そのあと、各軌道の因子の和が $t^{\lvert O\rvert}-1$ であること（10f'''c3）。
 4. そのあと、その根が 1 の $L$ 乗根であること（セクション 10g。ここで $\overline{\mathbb{Q}}$ へ入る）。
+
+さらに、シフト行列の特性多項式がその冪の因子であることを示した。
+**四層すべてを満たしている**（2026-08-10 の tick 64）。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\chi_U\cdot g=\bigl(t^{L}+\iota(-\kappa(1))\bigr)^{\lvert\mathcal{O}_L\rvert}$ を満たす
+  $g\in\mathbb{Z}[x][t]$ が存在する。すなわち $\chi_U$ は $t^{L}+\iota(-\kappa(1))$ の
+  $\lvert\mathcal{O}_L\rvert$ 乗を $\mathbb{Z}[x][t]$ の中で割り切る。
+  証明は、各軌道 $O$ について $a(O)\cdot h=t^{L}+\iota(-\kappa(1))$ を満たす $h$ を 1 つ選んで
+  写像 $b$ とし（$\mathcal{O}_L$ は有限集合なので有限個の選択で済む）、
+  $g:=\prod_{O}b(O)$ と置いてから 3 段の鎖（$g$ の定義・$\chi_U=\prod_{O}a(O)$・
+  2 つの有限積の積の等式）で閉じるものである。
+  必要十分版が示したのは、この段が要求するのが**可換モノイドと、添字の相等が決定できることと、
+  添字の型が有限であることの 3 つだけ**であり、特性多項式であることも軌道であることも、
+  $a(O)$ が和として作られていることも使っていないことである。
+  すなわち「各因子が $c$ を割るならば積が $c$ の添字の個数乗を割る」という言明でしかない。
+
+これで、$2^{L}$ 個の行配位にわたる置換の全体についての和として定義された $\chi_U$ が、
+$t^{L}+\iota(-\kappa(1))$ の冪の因子であることが $\mathbb{Z}[x][t]$ の中の整除関係として書けた。
+$\overline{\mathbb{Q}}$ へはまだ入っていない。次は根を取る段で入る。
 
 ## 未解決の設計問題
 
