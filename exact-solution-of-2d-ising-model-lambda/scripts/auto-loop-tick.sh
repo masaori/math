@@ -80,9 +80,17 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
 # 機械の負荷が高すぎるときは見送る。負荷が高いと lake build も date も返らず、
 # 45 分の上限まで何もできずに終わる（実測 2026-08-10 05:00: load average 248。
 # 原因はこのループではなく、同じ機械で多数の対話セッションが MCP と Chrome を抱えていたこと）。
+# 判定は load average の数字ではなく、**実際に応答するか**で行う。
+# 他セッションの iOS シミュレータや Chrome で load が常時 100 を超える機械なので、
+# 数字で切ると走れる回まで見送ってしまう（実測 2026-08-11 01:00: load 122 が 1 時間以上続き、
+# ループが見送りを繰り返した）。逆に、応答が遅いときは lake build も git も返らないので、
+# 45 分を無駄に使い切る。そこで軽い操作の所要時間を測る。
+probe_start="$(date +%s)"
+timeout 30 git -C "$REPO_DIR" status --porcelain >/dev/null 2>&1
+probe_elapsed=$(( $(date +%s) - probe_start ))
 load1="$(sysctl -n vm.loadavg 2>/dev/null | awk '{print int($2)}')"
-if [ -n "${load1:-}" ] && [ "$load1" -gt 32 ]; then
-  log "SKIP: 機械の負荷が高い（load average ${load1}）。この回は見送る"
+if [ "$probe_elapsed" -ge 20 ]; then
+  log "SKIP: 機械が応答しない（git status に ${probe_elapsed} 秒。load average ${load1:-不明}）"
   exit 0
 fi
 
