@@ -18939,6 +18939,323 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_zero_vector",
+    kind: "definition",
+    title: { text: "零ベクトル" },
+    labels: ["def_qbar_zero_vector"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarZeroVector"],
+    verification: ["sagemath/check/qbar-eigenspace"],
+    statement: [
+      paragraph([
+        "零ベクトル ",
+        math(String.raw`o_L\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）を",
+      ]),
+      displayMath(String.raw`o_L(\tau):=0\qquad(\tau\in R_L)`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の零元である。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_eigenvector",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の固有ベクトル" },
+    labels: ["def_qbar_eigenvector"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.IsQbarEigenvector"],
+    verification: ["sagemath/check/qbar-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " と ",
+        math(String.raw`v\in V_L`),
+        " について、",
+      ]),
+      displayMath(String.raw`A\cdot v=z\odot v\quad\text{かつ}\quad v\ne o_L`),
+      paragraph([
+        "が成り立つとき、",
+        math(String.raw`v`),
+        " は ",
+        math(String.raw`A`),
+        " の ",
+        math(String.raw`z`),
+        " に属する固有ベクトルであるという（点は ",
+        ref("def_qbar_matrix_action"),
+        "、",
+        math(String.raw`\odot`),
+        " は ",
+        ref("def_qbar_vector_smul"),
+        "、",
+        math(String.raw`o_L`),
+        " は ",
+        ref("def_qbar_zero_vector"),
+        "）。",
+        "零ベクトルを除くのは、除かないと任意の ",
+        math(String.raw`z`),
+        " について ",
+        math(String.raw`o_L`),
+        " が条件を満たしてしまい、",
+        math(String.raw`z`),
+        " が ",
+        math(String.raw`A`),
+        " から何も決まらなくなるためである。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_eigenvalue",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の固有値" },
+    labels: ["def_qbar_eigenvalue"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.IsQbarEigenvalue"],
+    verification: ["sagemath/check/qbar-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " について、",
+        math(String.raw`z`),
+        " に属する ",
+        math(String.raw`A`),
+        " の固有ベクトル（",
+        ref("def_qbar_eigenvector"),
+        "）が少なくとも 1 つ存在するとき、",
+        math(String.raw`z`),
+        " は ",
+        math(String.raw`A`),
+        " の固有値であるという。",
+      ]),
+      paragraph([
+        "固有ベクトルは ",
+        math(String.raw`V_L`),
+        " の元、固有値は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元であり、別の集合の対象である。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_eigenspace",
+    kind: "definition",
+    title: { text: "代数的数を成分とする行列の固有空間" },
+    labels: ["def_qbar_eigenspace"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace"],
+    verification: ["sagemath/check/qbar-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " に対し、",
+      ]),
+      displayMath(
+        String.raw`E_{A}(z):=\{\,v\in V_L\mid A\cdot v=z\odot v\,\}\subset V_L`,
+      ),
+      paragraph([
+        "と定める。",
+        "固有ベクトルの定義（",
+        ref("def_qbar_eigenvector"),
+        "）と違い、条件から ",
+        math(String.raw`v\ne o_L`),
+        " を外してある。",
+        "外すのは、外さないと和とスカラー倍で閉じなくなるためである",
+        "（",
+        math(String.raw`v`),
+        " が条件を満たすとき ",
+        math(String.raw`0\odot v=o_L`),
+        " も満たすので、零ベクトルを除いた集合はスカラー倍で閉じない）。",
+        "したがって ",
+        math(String.raw`E_A(z)`),
+        " の元は固有ベクトルとは限らず、",
+        math(String.raw`o_L`),
+        " 以外の元がちょうど ",
+        math(String.raw`z`),
+        " に属する固有ベクトルである。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_eigenspace_add",
+    kind: "claim",
+    title: { text: "固有空間は和で閉じる" },
+    labels: ["claim_qbar_eigenspace_add"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenspace_add_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " を任意に取る。",
+        math(String.raw`v,w\in E_{A}(z)`),
+        "（",
+        ref("def_qbar_eigenspace"),
+        "）ならば ",
+        math(String.raw`v\oplus w\in E_{A}(z)`),
+        "（",
+        ref("def_qbar_vector_add"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "示すべきは ",
+        math(String.raw`A\cdot(v\oplus w)=z\odot(v\oplus w)`),
+        " である。両辺は ",
+        math(String.raw`V_L`),
+        " の元、すなわち ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(v\oplus w)\bigr)(\tau)
+&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(\tau)
+&&(\because\ \blkref{claim_qbar_action_add})\\
+&=(A\cdot v)(\tau)+(A\cdot w)(\tau)
+&&(\because\ \blkref{def_qbar_vector_add})\\
+&=(z\odot v)(\tau)+(z\odot w)(\tau)
+&&(\because\ v,w\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&=z\,v(\tau)+z\,w(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=z\bigl(v(\tau)+w(\tau)\bigr)
+&&(\because\ \text{元と 2 元の和の積についての分配則})\\
+&=z\,(v\oplus w)(\tau)
+&&(\because\ \blkref{def_qbar_vector_add})\\
+&=\bigl(z\odot(v\oplus w)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので 2 つの写像は等しく、",
+        math(String.raw`v\oplus w\in E_{A}(z)`),
+        " である。",
+      ]),
+      paragraph([
+        "この段が使っているのは、作用が和を保つこと（",
+        ref("claim_qbar_action_add"),
+        "）と、スカラー倍が和に配ること（第 5 段の分配則）の 2 つだけである。",
+        math(String.raw`A`),
+        " の成分についても ",
+        math(String.raw`z`),
+        " についても、それ以外の性質は使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_eigenspace_smul",
+    kind: "claim",
+    title: { text: "固有空間はスカラー倍で閉じる" },
+    labels: ["claim_qbar_eigenspace_smul"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenspace_smul_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-eigenspace"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        " と ",
+        math(String.raw`z,c\in\overline{\mathbb{Q}}`),
+        " を任意に取る。",
+        math(String.raw`v\in E_{A}(z)`),
+        " ならば ",
+        math(String.raw`c\odot v\in E_{A}(z)`),
+        "（",
+        ref("def_qbar_vector_smul"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "示すべきは ",
+        math(String.raw`A\cdot(c\odot v)=z\odot(c\odot v)`),
+        " である。両辺は ",
+        math(String.raw`R_L`),
+        " 上の写像なので、",
+        math(String.raw`\tau\in R_L`),
+        " を任意に取り、その ",
+        math(String.raw`\tau`),
+        " における値が等しいことを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(c\odot v)\bigr)(\tau)
+&=\bigl(c\odot(A\cdot v)\bigr)(\tau)
+&&(\because\ \blkref{claim_qbar_action_smul})\\
+&=c\,(A\cdot v)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=c\,(z\odot v)(\tau)
+&&(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&=c\bigl(z\,v(\tau)\bigr)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=(c\,z)\,v(\tau)
+&&(\because\ \text{積の結合則})\\
+&=(z\,c)\,v(\tau)
+&&(\because\ \text{積の可換性})\\
+&=z\bigl(c\,v(\tau)\bigr)
+&&(\because\ \text{積の結合則})\\
+&=z\,(c\odot v)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\bigl(z\odot(c\odot v)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`),
+        " は任意だったので 2 つの写像は等しく、",
+        math(String.raw`c\odot v\in E_{A}(z)`),
+        " である。",
+      ]),
+      paragraph([
+        "この段が使っているのは、作用がスカラー倍を保つこと（",
+        ref("claim_qbar_action_smul"),
+        "）と、2 つのスカラー倍が交換できること（第 5 段から第 7 段の、結合則・可換性・結合則）の",
+        "2 つだけである。前の主張（和で閉じること）が積の可換性を使わなかったのに対し、",
+        "この主張は ",
+        math(String.raw`c`),
+        " と ",
+        math(String.raw`z`),
+        " の順を入れ替える箇所で使っている。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -19086,9 +19403,24 @@ z^{n}
           ref("claim_qbar_action_add"),
           "、",
           ref("claim_qbar_action_smul"),
+          "）、および零ベクトル・固有ベクトル・固有値・固有空間（",
+          ref("def_qbar_zero_vector"),
+          "、",
+          ref("def_qbar_eigenvector"),
+          "、",
+          ref("def_qbar_eigenvalue"),
+          "、",
+          ref("def_qbar_eigenspace"),
+          "）を置いて、固有空間が和とスカラー倍で閉じること（",
+          ref("claim_qbar_eigenspace_add"),
+          "、",
+          ref("claim_qbar_eigenspace_smul"),
           "）までは上で済んでいる。",
-          "次に書くのは、代数的数を成分とする行列の固有ベクトルと固有値を定め、",
-          "シフト行列の固有空間へ転送行列を分けること（対角化）である。",
+          "次に書くのは、シフト行列の固有値が 1 の ",
+          math(String.raw`L`),
+          " 乗根であることを特性多項式の根の同定（",
+          ref("claim_shift_char_root_of_unity"),
+          "）へつなぎ、シフト行列の固有空間へ転送行列を分けること（対角化）である。",
         ],
         [
           todo("未着手"),
