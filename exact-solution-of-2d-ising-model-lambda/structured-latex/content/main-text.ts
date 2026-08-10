@@ -20044,6 +20044,100 @@ A^{k+1}\cdot v
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_matrix_product_assoc",
+    kind: "claim",
+    title: { text: "代数的数を成分とする行列の積は結合的である" },
+    labels: ["claim_qbar_matrix_product_assoc"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixProduct_assoc",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_product_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixProduct_assoc_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-matrix-product-assoc"],
+    statement: [
+      paragraph([
+        math(String.raw`A,B,C\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`(AB)C=A(BC)`),
+      paragraph([
+        "が成り立つ（積はいずれも ",
+        ref("def_qbar_matrix_product"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_qbar_matrix"),
+        " の行列は ",
+        math(String.raw`R_L\times R_L`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
+        math(String.raw`\tau,\tau'''\in R_L`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((AB)C\bigr)_{\tau,\tau'''}
+&=\sum_{\tau''\in R_L}(AB)_{\tau,\tau''}\,C_{\tau'',\tau'''}
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=\sum_{\tau''\in R_L}\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)C_{\tau'',\tau'''}
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)C_{\tau'',\tau'''}
+&&(\because\ \text{有限和と元の積についての分配則})\\
+&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,C_{\tau'',\tau'''}\bigr)
+&&(\because\ \text{積の結合則})\\
+&=\sum_{\tau'\in R_L}\ \sum_{\tau''\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,C_{\tau'',\tau'''}\bigr)
+&&(\because\ \text{有限和の順序の入れ替え})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\sum_{\tau''\in R_L}B_{\tau',\tau''}\,C_{\tau'',\tau'''}
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(BC)_{\tau',\tau'''}
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=\bigl(A(BC)\bigr)_{\tau,\tau'''}
+&&(\because\ \blkref{def_qbar_matrix_product})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau`),
+        " と ",
+        math(String.raw`\tau'''`),
+        " は任意なので、2 つの行列のすべての成分が等しく、主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積の結合則と、有限和と元の積についての分配則（両側）だけである",
+        "（積の可換性も、単位元も、加法の逆元も、零元でない元の逆元も、体であることも使っていない）。",
+        "有限和の順序の入れ替えが使えるのは ",
+        ref("def_row_configuration"),
+        " の ",
+        math(String.raw`R_L`),
+        " が有限集合で、加法が可換かつ結合的だからである。",
+        "現れるのは ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と有限和・有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "この主張は ",
+        ref("claim_qbar_action_product"),
+        "（列ベクトルへの作用についての結合性）とは別の主張である。",
+        "あちらは行列 2 つと列ベクトル 1 つ、こちらは行列 3 つについての等式であり、",
+        "行列の冪を右から掛ける形へ書き直すにはこちらが要る。",
+        "ただし証明の中身は同じ有限和の書き換えであり、",
+        ref("claim_qbar_action_product"),
+        " の証明で列ベクトルを ",
+        math(String.raw`C`),
+        " の第 ",
+        math(String.raw`\tau'''`),
+        " 列と取ったものに等しい（Lean では、この 2 つの主張が同じ必要十分版の 2 つの特殊化として",
+        "得られることを導出で見せている）。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

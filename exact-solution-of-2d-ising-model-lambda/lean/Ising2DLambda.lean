@@ -233,3 +233,5 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarEigenvectorPowFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixEval
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarMatrixEval
 import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixEvalFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixProductAssoc
+import Ising2DLambda.AlgebraicEigenvalue.QbarMatrixProductAssocFromNecSuf
