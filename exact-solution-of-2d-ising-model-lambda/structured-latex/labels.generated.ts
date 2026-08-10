@@ -89,6 +89,7 @@ export const ALL_LABELS = [
   "claim_second_const_degree_zero",
   "claim_second_degree_prod",
   "claim_second_degree_sum",
+  "claim_second_evaluation_prod",
   "claim_second_linear_monic",
   "claim_second_monic_add_lower",
   "claim_second_monic_prod",

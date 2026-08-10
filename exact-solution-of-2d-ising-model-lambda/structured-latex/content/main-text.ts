@@ -18087,6 +18087,111 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_second_evaluation_prod",
+    kind: "claim",
+    title: { text: "代数的数における値を取る写像は、有限積を有限積へ写す" },
+    labels: ["claim_second_evaluation_prod"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.evalSecond_prod",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.map_prod_of_mul",
+      "Ising2DLambda.AlgebraicEigenvalue.evalSecond_prod_from_necSuf",
+    ],
+    verification: ["sagemath/check/second-evaluation-prod"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " を任意に取る。有限集合 ",
+        math(String.raw`s`),
+        " と、その各元 ",
+        math(String.raw`i\in s`),
+        " へ ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元 ",
+        math(String.raw`f_i`),
+        " を与える写像を任意に取る（",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " は ",
+        ref("def_second_polynomial_ring"),
+        "）。このとき",
+      ]),
+      displayMath(
+        String.raw`\mathrm{ev}_{\xi,z}\Bigl(\textstyle\prod_{i\in s}f_i\Bigr)=\prod_{i\in s}\mathrm{ev}_{\xi,z}(f_i)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{ev}_{\xi,z}`),
+        " は ",
+        ref("def_second_evaluation"),
+        "）。左辺の積は ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の中の有限積、右辺の積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中の有限積であり、住む集合が違う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s`),
+        " の元の個数についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " が空のとき、左辺は ",
+        math(String.raw`\mathrm{ev}_{\xi,z}`),
+        " が ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の単位元へ与える値、右辺は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の単位元 ",
+        math(String.raw`1`),
+        " であり、",
+        ref("def_second_evaluation"),
+        " が単位元を単位元へ送ることから両者は等しい（空の積は単位元である）。",
+      ]),
+      paragraph([
+        math(String.raw`s`),
+        " について主張が成り立つとし、",
+        math(String.raw`s`),
+        " に属さない元 ",
+        math(String.raw`a`),
+        " を 1 つ足した ",
+        math(String.raw`s\cup\{a\}`),
+        " を考える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ev}_{\xi,z}\Bigl(\textstyle\prod_{i\in s\cup\{a\}}f_i\Bigr)
+&=\mathrm{ev}_{\xi,z}\Bigl(f_a\cdot\textstyle\prod_{i\in s}f_i\Bigr)
+&&(\because\ \text{有限積から因子を}\ 1\ \text{つ括り出す})\\
+&=\mathrm{ev}_{\xi,z}(f_a)\cdot\mathrm{ev}_{\xi,z}\Bigl(\textstyle\prod_{i\in s}f_i\Bigr)
+&&(\because\ \blkref{def_second_evaluation}\ \text{の}\ \mathrm{ev}_{\xi,z}\ \text{が積を保つこと})\\
+&=\mathrm{ev}_{\xi,z}(f_a)\cdot\prod_{i\in s}\mathrm{ev}_{\xi,z}(f_i)
+&&(\because\ \text{帰納法の仮定})\\
+&=\prod_{i\in s\cup\{a\}}\mathrm{ev}_{\xi,z}(f_i)
+&&(\because\ \text{有限積へ因子を}\ 1\ \text{つ戻す})
+\end{aligned}`),
+      paragraph([
+        "この証明が ",
+        math(String.raw`\mathrm{ev}_{\xi,z}`),
+        " について使っているのは、単位元を単位元へ送ることと積を保つことだけである。",
+        "和を保つことは使っていない（この証明に和が一度も現れない）。",
+        "したがって ",
+        ref("claim_const_embedding_prod"),
+        " と同じ論法であり、必要十分版も同じものを使う。",
+      ]),
+      paragraph([
+        "現れるのは ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の元と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

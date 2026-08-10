@@ -204,3 +204,5 @@ import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.OrbitFactorRoot
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrbitFactorRoot
 import Ising2DLambda.AlgebraicEigenvalue.OrbitFactorRootFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.SecondEvaluationProd
+import Ising2DLambda.AlgebraicEigenvalue.SecondEvaluationProdFromNecSuf

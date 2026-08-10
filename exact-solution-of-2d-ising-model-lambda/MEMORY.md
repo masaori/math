@@ -23,9 +23,9 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 181 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 456 件を登録）が通る |
+| 記述（構造化テキスト） | ラベルの数は合計 182 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化。`lake build` と `check-no-sorry.sh`（定理 460 件を登録）が通る |
 | Lean 必要十分版 | 主張 68 件と定理 3 件について作成済み（$\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復には置いていない。前者は既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため。3 つめの必要性は分解の必要十分版の仮定として検査されている）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -732,24 +732,23 @@ $\mathbb{Z}[x][t]$ の中で言える。それが次のセクションである�
 
 ## 次回やること
 
-**2026-08-10 の tick 61 は、レビューで 1 件（本文末尾「この先に書くこと」の「済んでいる」の
-列挙が古かったのを直した）を直したうえで、セクション 10g を 10g1・10g2・10g3 の 3 つへ
-割り直し、その最初（倍数を指数とする冪と単位元の逆元との和が、約数を指数とするそれと
-冪の有限和との積であること）を四層すべてで完了させた。**
+**2026-08-10 の tick 68 は、レビューで 2 件（本文末尾「この先に書くこと」の済みの列挙が
+前 tick 分だけ遅れていたのと、台帳の「前進の記録」に前 tick の項が無かったの）を直したうえで、
+セクション 10g3c を 10g3c1・10g3c2 の 2 つへ割り直し、その最初（代数的数における値を取る
+写像が有限積を有限積へ写すこと）を四層すべてで完了させた。**
 
-1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_power_sum_telescope`）と
-   Lean 6 本（`PowerSumTelescope` 系。具体版 3・必要十分版 2・導出 1）。とくに、本文が
-   仮定に $d\ge1$・$k\ge1$ を置かなかったこと（使わない仮定を書かない判断）が主張の欄で
-   読み手に伝わるかと、必要十分版が半環と $1+u=0$ しか要求しない形で $d$ を消したことが
-   必要十分性の見極めとして適切かを見る。
-2. **並列の作業ストリーム（式変形の書き方の統一）は今 tick も行った**（姉妹プロジェクトの
-   「$Z_m,Y_m$ は線型独立」の Step 1 で、地の文の括弧に 4 つ並べていた成分比較を、
-   成分ごとに 4 行の鎖へ分けて各行に根拠を付けた）。次 tick も 1 件進める
-   （`004_transfer_matrix` の残り 8 件）。
-3. そのあとセクション 10g2（軌道ごとの因子が $t^{L}+\iota(-\kappa(1))$ を割ること。
-   軌道の元の個数が $L$ を割り切ること（`claim_row_config_orbit_card` と
-   `claim_row_config_minimal_period_divides_L`）と 10g1 を合わせる段）。
-4. そのあと 10g3（根が 1 の $L$ 乗根であること。ここで $\overline{\mathbb{Q}}$ へ入る）。
+1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_second_evaluation_prod`）と
+   Lean 2 本（`SecondEvaluationProd` 系。具体版 3 定理・導出 1）と SageMath の
+   `second-evaluation-prod`。とくに、必要十分版を新しく書き起こさず既存の
+   `map_prod_of_mul` の特殊化として導出したことが、必要十分性の見極めとして適切か
+   （別名の定義を作らないという規律に沿う一方、必要十分版の層を空にしていないか）を見る。
+2. **並列の作業ストリーム（式変形の書き方の統一）は今 tick も行った**。次 tick も 1 件進める
+   （姉妹プロジェクトの `004_transfer_matrix` の残り）。
+3. そのあとセクション 10g3c2（シフト行列の特性多項式の値を 0 にする代数的数が
+   1 の $L$ 乗根であること）。積の値を因子の値の積へ開き（10g3c1）、$\overline{\mathbb{Q}}$ に
+   零因子が無いことで値が 0 になる因子を 1 つ取り、軌道ごとの因子の根（10g3b）と
+   $\lvert O\rvert\mid L$ と $\mu_d\subset\mu_n$（10g3a）を合わせる。
+4. そのあと 10h（転送行列をシフト行列の固有空間へ分ける）。
 
 ### 前の tick の記録
 
@@ -1056,7 +1055,33 @@ $\overline{\mathbb{Q}}$ は可算集合なので、これは実数体・複素�
   SageMath は $\overline{\mathbb{Q}}$ そのものを置けないので円分体 $\mathbb{Q}(\zeta_m)$ の中で
   $\mu_m$ を全列挙して確かめた（$d=1,\dots,8$・$n=1,\dots,24$ の 192 組。厳密計算のみ）。
 
-次は、軌道ごとの因子の根が 1 の $\lvert O\rvert$ 乗根であることである。
+さらに、$\mathbb{Z}[x][t]$ の元の代数的数における値
+$\mathrm{ev}_{\xi,z}(f)=\sum_{k}\bigl(\mathrm{cf}_k(f)\bigr)(\xi)\,z^{k}\in\overline{\mathbb{Q}}$ を定義し、
+軌道ごとの因子についての主張を示した。**四層すべてを満たしている**（2026-08-10 の tick 67）。
+値は $\overline{\mathbb{Q}}$ に留まり、実数体・複素数体へは出ていない。
+
+係数（$\mathbb{Z}[x]$ の元）に入れる $\xi$ と不定元 $t$ に入れる $z$ は別の記号にしてある。
+
+- $\mathrm{ev}_{\xi,z}\bigl(t^{m}+\iota(-\kappa(1))\bigr)=0$ ならば $z\in\mu_{m}$ である。
+  証明は 5 段の鎖で値を $z^{m}-1$ まで計算し、$z^{m}=1$ を出すだけである。
+  仮定に $m\ge1$ を置いていない（$m=0$ でも因子が零元・$\mu_0=\overline{\mathbb{Q}}$ で成り立つ）。
+  必要十分版が示したのは、この段が要求するのが係数環と値の側が可換半環であることと、
+  その間の環準同型があることの 3 つだけであることである。
+
+さらに、この評価写像が有限積を有限積へ写すことを示した。
+**四層すべてを満たしている**（2026-08-10 の tick 68）。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $\mathrm{ev}_{\xi,z}\bigl(\prod_{i\in s}f_i\bigr)=\prod_{i\in s}\mathrm{ev}_{\xi,z}(f_i)$。
+  左辺の積は $\mathbb{Z}[x][t]$ の中、右辺の積は $\overline{\mathbb{Q}}$ の中であり、住む集合が違う。
+  証明は $s$ の元の個数についての帰納法で、一歩は 4 段の一続きの鎖である。
+  必要十分版を新しく書き起こしていない。この段が要求するのは単位元の保存と積の保存の
+  2 つだけであり、それは $\iota\circ\kappa$ の側で既に置いた必要十分版
+  （単位元と積を保つ写像は有限積を有限積へ写す）そのものだからである。
+  導出はその特殊化として書いた。2 つの具体版が 1 つの言明の特殊化であることが見える。
+
+次は、シフト行列の特性多項式の値を 0 にする代数的数が 1 の $L$ 乗根であることである
+（積の値を因子の値の積へ開き、$\overline{\mathbb{Q}}$ に零因子が無いことで 0 になる因子を 1 つ取り、
+軌道ごとの因子の根と $\lvert O\rvert\mid L$ を合わせる）。
 
 ## 未解決の設計問題
 

@@ -512,6 +512,10 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_orbitFactor_eval_eq_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.eval₂_X_pow_add_C_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_orbitFactor_eval_eq_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_one
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_mul
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_prod
+  Ising2DLambda.AlgebraicEigenvalue.evalSecond_prod_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
