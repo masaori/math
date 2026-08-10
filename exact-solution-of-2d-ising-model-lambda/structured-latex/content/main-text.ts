@@ -17073,17 +17073,17 @@ W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)
         " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\bigl(t^{d}+u\bigr)\cdot\sum_{j<0}t^{dj}
-&=\bigl(t^{d}+u\bigr)\cdot\iota\bigl(\kappa(0)\bigr)
-&&(\because\ \text{空集合にわたる有限和は零元である})\\
-&=\iota\bigl(\kappa(0)\bigr)
-&&(\because\ \text{零元を掛けた積は零元である})\\
-&=\iota\bigl(\kappa(1)\bigr)+u
-&&(\because\ \text{準備の第二})\\
+t^{d\cdot 0}+u
 &=t^{0}+u
+&&(\because\ d\cdot 0=0)\\
+&=\iota\bigl(\kappa(1)\bigr)+u
 &&(\because\ t^{0}=\iota(\kappa(1)))\\
-&=t^{d\cdot 0}+u
-&&(\because\ d\cdot 0=0)
+&=\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \text{準備の第二})\\
+&=\bigl(t^{d}+u\bigr)\cdot\iota\bigl(\kappa(0)\bigr)
+&&(\because\ \text{零元を掛けた積は零元である})\\
+&=\bigl(t^{d}+u\bigr)\cdot\sum_{j<0}t^{dj}
+&&(\because\ \text{空集合にわたる有限和は零元である})
 \end{aligned}`),
       paragraph([
         "である。",
@@ -17105,29 +17105,29 @@ W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)
         " に属さない。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\bigl(t^{d}+u\bigr)\cdot\sum_{j<k+1}t^{dj}
-&=\bigl(t^{d}+u\bigr)\cdot\Bigl(\sum_{j<k}t^{dj}+t^{dk}\Bigr)
-&&(\because\ \text{添字の集合に属さない元を 1 つ足した有限和は、もとの和とその項の和である})\\
-&=\bigl(t^{d}+u\bigr)\cdot\sum_{j<k}t^{dj}+\bigl(t^{d}+u\bigr)\cdot t^{dk}
-&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
-&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d}+u\bigr)\cdot t^{dk}
-&&(\because\ \text{帰納法の仮定})\\
-&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d}\cdot t^{dk}+u\cdot t^{dk}\bigr)
-&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
-&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d(k+1)}+u\cdot t^{dk}\bigr)
-&&(\because\ t^{d}\cdot t^{dk}=t^{d+dk}\ \text{と}\ d+dk=d(k+1))\\
-&=t^{d(k+1)}+\Bigl(t^{dk}+u\cdot t^{dk}\Bigr)+u
-&&(\because\ \mathbb{Z}[x][t]\ \text{の加法の結合則と可換則})\\
-&=t^{d(k+1)}+\Bigl(\iota\bigl(\kappa(1)\bigr)\cdot t^{dk}+u\cdot t^{dk}\Bigr)+u
-&&(\because\ \text{準備の第一})\\
-&=t^{d(k+1)}+\Bigl(\bigl(\iota\bigl(\kappa(1)\bigr)+u\bigr)\cdot t^{dk}\Bigr)+u
-&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
-&=t^{d(k+1)}+\Bigl(\iota\bigl(\kappa(0)\bigr)\cdot t^{dk}\Bigr)+u
-&&(\because\ \text{準備の第二})\\
+t^{d(k+1)}+u
 &=t^{d(k+1)}+\iota\bigl(\kappa(0)\bigr)+u
+&&(\because\ \text{零元を足しても変わらない})\\
+&=t^{d(k+1)}+\Bigl(\iota\bigl(\kappa(0)\bigr)\cdot t^{dk}\Bigr)+u
 &&(\because\ \text{零元を掛けた積は零元である})\\
-&=t^{d(k+1)}+u
-&&(\because\ \text{零元を足しても変わらない})
+&=t^{d(k+1)}+\Bigl(\bigl(\iota\bigl(\kappa(1)\bigr)+u\bigr)\cdot t^{dk}\Bigr)+u
+&&(\because\ \text{準備の第二})\\
+&=t^{d(k+1)}+\Bigl(\iota\bigl(\kappa(1)\bigr)\cdot t^{dk}+u\cdot t^{dk}\Bigr)+u
+&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
+&=t^{d(k+1)}+\Bigl(t^{dk}+u\cdot t^{dk}\Bigr)+u
+&&(\because\ \text{準備の第一})\\
+&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d(k+1)}+u\cdot t^{dk}\bigr)
+&&(\because\ \mathbb{Z}[x][t]\ \text{の加法の結合則と可換則})\\
+&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d}\cdot t^{dk}+u\cdot t^{dk}\bigr)
+&&(\because\ t^{d}\cdot t^{dk}=t^{d+dk}\ \text{と}\ d+dk=d(k+1))\\
+&=\bigl(t^{dk}+u\bigr)+\bigl(t^{d}+u\bigr)\cdot t^{dk}
+&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
+&=\bigl(t^{d}+u\bigr)\cdot\sum_{j<k}t^{dj}+\bigl(t^{d}+u\bigr)\cdot t^{dk}
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(t^{d}+u\bigr)\cdot\Bigl(\sum_{j<k}t^{dj}+t^{dk}\Bigr)
+&&(\because\ \mathbb{Z}[x][t]\ \text{の分配則})\\
+&=\bigl(t^{d}+u\bigr)\cdot\sum_{j<k+1}t^{dj}
+&&(\because\ \text{添字の集合に属さない元を 1 つ足した有限和は、もとの和とその項の和である})
 \end{aligned}`),
       paragraph([
         "である。これで帰納法が閉じた。",

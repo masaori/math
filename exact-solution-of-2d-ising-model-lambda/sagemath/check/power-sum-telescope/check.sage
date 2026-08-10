@@ -12,7 +12,8 @@
 #      加法についての逆元であること）。
 #   3. 帰納法の出発点（k = 0）。空集合にわたる有限和が零元であり、
 #      (t^d + u) * 0 = 0 = iota(kappa(1)) + u = t^{d*0} + u であること。
-#   4. 帰納法の一歩の各段（k から k+1 へ）。11 段の鎖の各行を左辺から順に確かめる。
+#   4. 帰納法の一歩の各段（k から k+1 へ）。主張の左辺 t^{d(k+1)} + u から始まる
+#      11 段の鎖の各行を順に確かめる。
 #   5. 主張そのもの。すべての (d, k) で等式が成り立つこと。
 #   6. 主張が空でないこと。両辺が零元でない (d, k) が実際にあること
 #      （k = 0 では両辺が零元なので、それだけでは何も確かめたことにならない）。
@@ -83,34 +84,34 @@ for d in D_RANGE:
 # 4. 帰納法の一歩の各段（k から k+1 へ）。鎖の各行を順に確かめる。
 for d in D_RANGE:
     for k in K_RANGE:
-        lhs = (t**d + u) * power_sum(d, k + 1)
-        step1 = (t**d + u) * (power_sum(d, k) + t**(d * k))
-        step2 = (t**d + u) * power_sum(d, k) + (t**d + u) * t**(d * k)
-        step3 = (t**(d * k) + u) + (t**d + u) * t**(d * k)
-        step4 = (t**(d * k) + u) + (t**d * t**(d * k) + u * t**(d * k))
-        step5 = (t**(d * k) + u) + (t**(d * (k + 1)) + u * t**(d * k))
-        step6 = t**(d * (k + 1)) + (t**(d * k) + u * t**(d * k)) + u
-        step7 = t**(d * (k + 1)) + (one * t**(d * k) + u * t**(d * k)) + u
-        step8 = t**(d * (k + 1)) + ((one + u) * t**(d * k)) + u
-        step9 = t**(d * (k + 1)) + (zero * t**(d * k)) + u
-        step10 = t**(d * (k + 1)) + zero + u
-        step11 = t**(d * (k + 1)) + u
-        # 添字の集合に属さない元を 1 つ足した有限和は、もとの和とその項の和である。
-        assert lhs == step1, '4: 第 1 段（和から最大の項を分ける）が破れた d=%s k=%s' % (d, k)
-        assert step1 == step2, '4: 第 2 段（分配則）が破れた'
-        # 帰納法の仮定（この検証では k についての等式を直接確かめる形で代用する）。
-        assert (t**d + u) * power_sum(d, k) == t**(d * k) + u, '4: 帰納法の仮定が破れた'
-        assert step2 == step3, '4: 第 3 段（帰納法の仮定）が破れた'
+        lhs = t**(d * (k + 1)) + u
+        step1 = t**(d * (k + 1)) + zero + u
+        step2 = t**(d * (k + 1)) + (zero * t**(d * k)) + u
+        step3 = t**(d * (k + 1)) + ((one + u) * t**(d * k)) + u
+        step4 = t**(d * (k + 1)) + (one * t**(d * k) + u * t**(d * k)) + u
+        step5 = t**(d * (k + 1)) + (t**(d * k) + u * t**(d * k)) + u
+        step6 = (t**(d * k) + u) + (t**(d * (k + 1)) + u * t**(d * k))
+        step7 = (t**(d * k) + u) + (t**d * t**(d * k) + u * t**(d * k))
+        step8 = (t**(d * k) + u) + (t**d + u) * t**(d * k)
+        step9 = (t**d + u) * power_sum(d, k) + (t**d + u) * t**(d * k)
+        step10 = (t**d + u) * (power_sum(d, k) + t**(d * k))
+        step11 = (t**d + u) * power_sum(d, k + 1)
+        assert lhs == step1, '4: 第 1 段（零元を足しても変わらない）が破れた d=%s k=%s' % (d, k)
+        assert step1 == step2, '4: 第 2 段（零元を掛けた積は零元）が破れた'
+        assert step2 == step3, '4: 第 3 段（準備の第二）が破れた'
         assert step3 == step4, '4: 第 4 段（分配則）が破れた'
+        assert step4 == step5, '4: 第 5 段（単位元）が破れた'
+        assert step5 == step6, '4: 第 6 段（加法の結合則と可換則）が破れた'
         assert t**d * t**(d * k) == t**(d + d * k), '4: 指数法則が破れた'
         assert d + d * k == d * (k + 1), '4: 指数の計算が破れた'
-        assert step4 == step5, '4: 第 5 段（指数法則）が破れた'
-        assert step5 == step6, '4: 第 6 段（加法の結合則と可換則）が破れた'
-        assert step6 == step7, '4: 第 7 段（単位元）が破れた'
+        assert step6 == step7, '4: 第 7 段（指数法則）が破れた'
         assert step7 == step8, '4: 第 8 段（分配則）が破れた'
-        assert step8 == step9, '4: 第 9 段（準備の第二）が破れた'
-        assert step9 == step10, '4: 第 10 段（零元を掛けた積は零元）が破れた'
-        assert step10 == step11, '4: 第 11 段（零元を足しても変わらない）が破れた'
+        # 帰納法の仮定（この検証では k についての等式を直接確かめる形で代用する）。
+        assert (t**d + u) * power_sum(d, k) == t**(d * k) + u, '4: 帰納法の仮定が破れた'
+        assert step8 == step9, '4: 第 9 段（帰納法の仮定）が破れた'
+        assert step9 == step10, '4: 第 10 段（分配則）が破れた'
+        # 添字の集合に属さない元を 1 つ足した有限和は、もとの和とその項の和である。
+        assert step10 == step11, '4: 第 11 段（和へ最大の項を戻す）が破れた'
 
 # 5. 主張そのもの。
 for d in D_RANGE:
