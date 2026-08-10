@@ -1120,8 +1120,28 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\mathrm{ad}_X(Z+W) &= X(Z+W)-(Z+W)X = (XZ-ZX)+(XW-WX) = \mathrm{ad}_X(Z)+\mathrm{ad}_X(W) \\
-\mathrm{ad}_X(cZ) &= X(cZ)-(cZ)X = c(XZ-ZX) = c\,\mathrm{ad}_X(Z)
+\mathrm{ad}_X(Z+W)
+&= X(Z+W)-(Z+W)X
+&&(\because\ \mathrm{ad}_X \text{ の定義})\\
+&= (XZ+XW)-(ZX+WX)
+&&(\because\ \text{行列の積の分配律})\\
+&= (XZ-ZX)+(XW-WX)
+&&(\because\ \text{行列の加法の交換則と結合則})\\
+&= \mathrm{ad}_X(Z)+\mathrm{ad}_X(W)
+&&(\because\ \mathrm{ad}_X \text{ の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}_X(cZ)
+&= X(cZ)-(cZ)X
+&&(\because\ \mathrm{ad}_X \text{ の定義})\\
+&= c(XZ)-c(ZX)
+&&(\because\ \text{スカラー倍と行列の積の両立})\\
+&= c(XZ-ZX)
+&&(\because\ \text{スカラー倍の分配律})\\
+&= c\,\mathrm{ad}_X(Z)
+&&(\because\ \mathrm{ad}_X \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
