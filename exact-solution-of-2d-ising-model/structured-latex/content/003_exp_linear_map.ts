@@ -1398,25 +1398,40 @@ S_NT_N
     ],
     proof: [
       paragraph([
-        math(String.raw`\exp`),
-        " の定義より、",
+        "準備として、零行列の冪を書き下しておく。行列の冪の定義より ",
         math(String.raw`O^0 = I`),
-        "、",
+        " であり、",
         math(String.raw`n \geq 1`),
         " のとき ",
         math(String.raw`O^n = O`),
-        "（零行列の冪）であるから、",
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(O)
-&= \sum_{n=0}^{\infty} \frac{O^n}{n!} \\
-&= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O}{n!} \\
-&= I + O \cdot \sum_{n=1}^{\infty} \frac{1}{n!} \\
-&= I + O \\
+&= \sum_{n=0}^{\infty} \frac{O^n}{n!}
+&&(\because\ \text{exp の定義（行列の場合と、行列への線型写像の場合）})\\
+&= \frac{O^0}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
+&&(\because\ \text{収束級数の第 0 項を分ける})\\
+&= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
+&&(\because\ O^0 = I)\\
+&= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O}{n!}
+&&(\because\ n \geq 1\ \text{のとき}\ O^n = O)\\
+&= I + \sum_{n=1}^{\infty} \frac{O}{n!}
+&&(\because\ 0! = 1)\\
+&= I + O \cdot \sum_{n=1}^{\infty} \frac{1}{n!}
+&&(\because\ \text{収束級数のスカラー倍は各項のスカラー倍の和である})\\
+&= I + O
+&&(\because\ \text{零行列のスカラー倍は零行列である})\\
 &= I
+&&(\because\ \text{零行列は行列の加法の単位元である})
 \end{aligned}`,
       ),
+      paragraph([
+        "引いたブロックは ",
+        ref("def_exp"),
+        " である。",
+      ]),
     ],
     conversion: { status: "converted" },
   },
