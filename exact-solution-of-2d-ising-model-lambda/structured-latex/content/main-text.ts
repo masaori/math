@@ -12601,6 +12601,11 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
     },
     labels: ["claim_orbit_family_distributive"],
     habitat: "Z",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamily",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_family",
+      "Ising2DLambda.AlgebraicEigenvalue.prod_sum_eq_sum_prod_orbitFamily_from_necSuf",
+    ],
     verification: ["sagemath/check/orbit-family-distributive"],
     statement: [
       paragraph([
@@ -19802,6 +19807,7 @@ A^{k+1}\cdot v
     title: { text: "整係数多項式を成分とする行列の、代数的数における値" },
     labels: ["def_qbar_matrix_eval"],
     habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval"],
     verification: ["sagemath/check/qbar-matrix-eval"],
     statement: [
       paragraph([
@@ -19859,6 +19865,11 @@ A^{k+1}\cdot v
     title: { text: "成分ごとの評価は行列の積を保つ" },
     labels: ["claim_qbar_matrix_eval_product"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval_product",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matEval_product_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval_product_from_necSuf",
+    ],
     verification: ["sagemath/check/qbar-matrix-eval"],
     statement: [
       paragraph([
