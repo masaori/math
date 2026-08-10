@@ -729,11 +729,22 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         " について",
       ]),
       displayMath(
-        String.raw`(f_I)_{\nu(K)} = \prod_{k=1}^{M}(e_{i_k})_{k_k}
-= \prod_{k=1}^{M}\delta_{i_kk_k}
-= \begin{cases}1 & (I=K)\\ 0 & (I\neq K)\end{cases}
-\quad (\because \boxtimes \text{ の定義})`,
+        String.raw`\begin{aligned}
+(f_I)_{\nu(K)}
+&= \prod_{k=1}^{M}(e_{i_k})_{k_k}
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \prod_{k=1}^{M}\delta_{i_kk_k}
+\quad (\because (e_i)_t=\delta_{it}) \\
+&= \begin{cases}1 & (I=K)\\ 0 & (I\neq K)\end{cases}
+\quad (\because I=K \text{ ならばどの因子も } 1\text{、}
+I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があってその因子が } 0)
+\end{aligned}`,
       ),
+      paragraph([
+        "第 1 の等号で ",
+        ref("def_kronecker"),
+        " のクロネッカー積の成分の定め方を引いた。",
+      ]),
       paragraph([
         "すなわち ",
         math(String.raw`f_I`),
@@ -767,11 +778,22 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         " について",
       ]),
       displayMath(
-        String.raw`\left(E_{I,J}\right)_{\nu(K),\nu(L)}
-= \prod_{k=1}^{M}\delta_{i_kk_k}\delta_{j_kl_k}
-= \begin{cases}1 & (I=K \text{ かつ } J=L)\\ 0 & (\text{それ以外})\end{cases}
-\quad (\because \boxtimes \text{ の定義})`,
+        String.raw`\begin{aligned}
+\left(E_{I,J}\right)_{\nu(K),\nu(L)}
+&= \prod_{k=1}^{M}(E_{i_kj_k})_{k_kl_k}
+\quad (\because \boxtimes \text{ の定義}) \\
+&= \prod_{k=1}^{M}\delta_{i_kk_k}\delta_{j_kl_k}
+\quad (\because (E_{ij})_{st}=\delta_{is}\delta_{jt}) \\
+&= \begin{cases}1 & (I=K \text{ かつ } J=L)\\ 0 & (\text{それ以外})\end{cases}
+\quad (\because I=K \text{ かつ } J=L \text{ ならばどの因子も } 1\text{、}
+\text{そうでなければ } 0 \text{ となる因子がある})
+\end{aligned}`,
       ),
+      paragraph([
+        "第 1 の等号で ",
+        ref("def_kronecker"),
+        " のクロネッカー積の成分の定め方を引いた。",
+      ]),
       paragraph([
         "すなわち ",
         math(String.raw`E_{I,J}`),
@@ -923,6 +945,14 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         "参照元が必要とする形はそれぞれ、(1) 行列単位（<centralizer_is_scalar>, <def_end_iso>）、" +
           "(2) 一般の基底 {I,σ^x,σ^y,σ^z}（<Z_Y_linearly_independent>, <Z_Y_generate_algebra>, 008 章）、" +
           "(3) 数ベクトルの標準基底（<def_end_iso> の F の基底）であるため、3 つの形を並べた。",
+        "式変形の書き方の統一（2026-08-10）。Step 1 と Step 2 の式が、3 つの等号を 1 行へ潰したうえで" +
+          "行末の (∵ ⊠ の定義) を式全体へ 1 つだけ付けていた。どの等号がその根拠によるのかが" +
+          "式から読み取れないので、1 行 1 等号の鎖へ分け、各行の末尾に根拠を置いた" +
+          "（クロネッカー積の成分の定め方・成分の定義・添字の一致による場合分けの 3 つが" +
+          "別々の根拠であることが、これで式の上に現れる）。あわせて、クロネッカー積の成分を" +
+          "取り出す段を明示的な 1 段として書き（Step 2 では (E_{i_k j_k})_{k_k l_k} の積を経由する）、" +
+          "引いたブロック <def_kronecker> への参照を式の直後に置いた。" +
+          "主張と証明の中身、および Step の分け方は変えていない。",
       ],
     },
   },
