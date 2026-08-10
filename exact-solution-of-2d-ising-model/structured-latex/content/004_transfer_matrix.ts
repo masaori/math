@@ -236,23 +236,58 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 \quad (\because \text{成分比較})`,
       ),
       paragraph([
-        "が成り立つ（右辺の ",
-        math(String.raw`(1,1)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{11}+a_{22}}{2}+\frac{a_{11}-a_{22}}{2}=a_{11}`),
-        "、",
-        math(String.raw`(2,2)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{11}+a_{22}}{2}-\frac{a_{11}-a_{22}}{2}=a_{22}`),
-        "、",
-        math(String.raw`(1,2)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{12}+a_{21}}{2}-i\cdot\frac{i(a_{12}-a_{21})}{2}=a_{12}`),
-        "、",
-        math(String.raw`(2,1)`),
-        " 成分は ",
-        math(String.raw`\frac{a_{12}+a_{21}}{2}+i\cdot\frac{i(a_{12}-a_{21})}{2}=a_{21}`),
-        "）。よって ",
+        "が成り立つ。右辺の 4 つの成分を 1 つずつ計算すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\frac{a_{11}+a_{22}}{2}I
++\frac{a_{12}+a_{21}}{2}\sigma^x
++\frac{i(a_{12}-a_{21})}{2}\sigma^y
++\frac{a_{11}-a_{22}}{2}\sigma^z\right)_{11}
+&=\frac{a_{11}+a_{22}}{2}\cdot 1+\frac{a_{11}-a_{22}}{2}\cdot 1
+&&(\because\ I_{11}=\sigma^z_{11}=1,\ \sigma^x_{11}=\sigma^y_{11}=0)\\
+&=\frac{a_{11}+a_{22}}{2}+\frac{a_{11}-a_{22}}{2}
+&&(\because\ \text{1 を掛けても変わらない})\\
+&=\frac{2a_{11}}{2}
+&&(\because\ \text{同分母の和})\\
+&=a_{11}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      paragraph([
+        "であり、同じ計算を残りの 3 つの成分について行うと、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\cdots)_{22}
+&=\frac{a_{11}+a_{22}}{2}\cdot 1+\frac{a_{11}-a_{22}}{2}\cdot(-1)
+&&(\because\ I_{22}=1,\ \sigma^z_{22}=-1,\ \sigma^x_{22}=\sigma^y_{22}=0)\\
+&=\frac{a_{11}+a_{22}}{2}-\frac{a_{11}-a_{22}}{2}
+&&(\because\ (-1)\ \text{を掛けることは符号を変えること})\\
+&=\frac{2a_{22}}{2}
+&&(\because\ \text{同分母の差})\\
+&=a_{22}
+&&(\because\ \text{約分})\\[1ex]
+(\cdots)_{12}
+&=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot(-i)
+&&(\because\ \sigma^x_{12}=1,\ \sigma^y_{12}=-i,\ I_{12}=\sigma^z_{12}=0)\\
+&=\frac{a_{12}+a_{21}}{2}+\frac{a_{12}-a_{21}}{2}
+&&(\because\ i\cdot(-i)=1)\\
+&=\frac{2a_{12}}{2}
+&&(\because\ \text{同分母の和})\\
+&=a_{12}
+&&(\because\ \text{約分})\\[1ex]
+(\cdots)_{21}
+&=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot i
+&&(\because\ \sigma^x_{21}=1,\ \sigma^y_{21}=i,\ I_{21}=\sigma^z_{21}=0)\\
+&=\frac{a_{12}+a_{21}}{2}-\frac{a_{12}-a_{21}}{2}
+&&(\because\ i\cdot i=-1)\\
+&=\frac{2a_{21}}{2}
+&&(\because\ \text{同分母の差})\\
+&=a_{21}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      paragraph([
+        "となる（",
+        math(String.raw`(\cdots)`),
+        " は上と同じ右辺の行列である）。よって ",
         math(String.raw`\mathcal{B}`),
         " は ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
