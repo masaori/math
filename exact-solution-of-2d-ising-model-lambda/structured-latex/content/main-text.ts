@@ -19621,6 +19621,182 @@ A^{k+1}\cdot v
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_eigenvector_pow",
+    kind: "claim",
+    title: { text: "固有ベクトルへ行列の冪を作用させると、固有値の冪のスカラー倍になる" },
+    labels: ["claim_qbar_eigenvector_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_smul_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-eigenvector-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（",
+        ref("def_qbar_matrix"),
+        "）と ",
+        math(String.raw`v\in V_L`),
+        "（",
+        ref("def_qbar_vector"),
+        "）と ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）が ",
+        math(String.raw`A\cdot v=z\odot v`),
+        " を満たすとする。このとき任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`A^{k}\cdot v=z^{k}\odot v`),
+      paragraph([
+        "が成り立つ（左辺の冪は ",
+        ref("def_qbar_matrix_power"),
+        "、点は ",
+        ref("def_qbar_matrix_action"),
+        "、",
+        math(String.raw`\odot`),
+        " は ",
+        ref("def_qbar_vector_smul"),
+        "、右辺の ",
+        math(String.raw`z^{k}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の積の反復で ",
+        math(String.raw`z^{0}=1`),
+        "・",
+        math(String.raw`z^{k+1}=z^{k}z`),
+        " と約束したもの（",
+        ref("def_root_of_unity_set"),
+        "）である）。",
+      ]),
+      paragraph([
+        "仮定は ",
+        ref("def_qbar_eigenvector"),
+        " の 2 条件のうち等式の側だけである。",
+        math(String.raw`v\ne o_L`),
+        " は使わないので、",
+        math(String.raw`z`),
+        " に属する固有ベクトルにはこの主張がそのまま当たる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、スカラー倍についての 2 つの等式を作る。",
+        "第一に、任意の ",
+        math(String.raw`w\in V_L`),
+        " と任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(1\odot w)(\tau)
+&=1\,w(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=w(\tau)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\tau`),
+        " は任意なので ",
+        math(String.raw`1\odot w=w`),
+        " である。第二に、任意の ",
+        math(String.raw`y,z\in\overline{\mathbb{Q}}`),
+        " と任意の ",
+        math(String.raw`w\in V_L`),
+        " と任意の ",
+        math(String.raw`\tau\in R_L`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((y\,z)\odot w\bigr)(\tau)
+&=(y\,z)\,w(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=y\,\bigl(z\,w(\tau)\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=y\,\bigl((z\odot w)(\tau)\bigr)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\bigl(y\odot(z\odot w)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\tau`),
+        " は任意なので ",
+        math(String.raw`(y\,z)\odot w=y\odot(z\odot w)`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`A`),
+        " と ",
+        math(String.raw`v`),
+        " と ",
+        math(String.raw`z`),
+        " を固定し、",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{0}\cdot v
+&=I^{\overline{\mathbb{Q}}}_L\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=v
+&&(\because\ \blkref{claim_qbar_identity_action})\\
+&=1\odot v
+&&(\because\ \text{準備の第 1 の等式})\\
+&=z^{0}\odot v
+&&(\because\ z^{0}=1\ \text{の約束。}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k`),
+        " の場合に ",
+        math(String.raw`A^{k}\cdot v=z^{k}\odot v`),
+        " が成り立つとして、",
+        math(String.raw`k+1`),
+        " の場合を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{k+1}\cdot v
+&=\bigl(A\,A^{k}\bigr)\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A\cdot\bigl(A^{k}\cdot v\bigr)
+&&(\because\ \blkref{claim_qbar_action_product})\\
+&=A\cdot\bigl(z^{k}\odot v\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=z^{k}\odot\bigl(A\cdot v\bigr)
+&&(\because\ \blkref{claim_qbar_action_smul})\\
+&=z^{k}\odot\bigl(z\odot v\bigr)
+&&(\because\ \text{仮定}\ A\cdot v=z\odot v)\\
+&=\bigl(z^{k}z\bigr)\odot v
+&&(\because\ \text{準備の第 2 の等式})\\
+&=z^{k+1}\odot v
+&&(\because\ z^{k+1}=z^{k}z\ \text{の約束。}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+      paragraph([
+        "よって任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、単位元との積と積の結合則だけである",
+        "（準備の 2 つの等式でだけ使う。逆元も、可換性も、体であることも使わない）。",
+        "行列については上の各行で引いた 3 つの主張だけを使う。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
