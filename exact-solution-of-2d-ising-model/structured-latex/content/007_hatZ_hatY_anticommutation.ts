@@ -120,26 +120,52 @@ export default defineBlocks([
       ]),
       paragraph([
         math(String.raw`[\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\mp)}]_+`),
-        " の計算: 第 2 の因子の ",
-        math(String.raw`k=1`),
-        " の符号が ",
-        math(String.raw`\pm 1`),
-        " になるため、",
+        " の計算に入る前に、2 つの符号の積の値を求めておく。",
         math(String.raw`j=1`),
-        " の項の符号積が ",
-        math(String.raw`-1`),
-        "（他は ",
-        math(String.raw`+1`),
-        "）となる。",
+        " のとき ",
+        math(String.raw`\varepsilon^{(\pm)}_1\varepsilon^{(\mp)}_1 = (\mp 1)(\pm 1) = -1`),
+        "（複合同順）であり、",
+        math(String.raw`j\neq 1`),
+        " のとき ",
+        math(String.raw`\varepsilon^{(\pm)}_j\varepsilon^{(\mp)}_j = (+1)(+1) = +1`),
+        " である。すなわち ",
+        math(String.raw`j=1`),
+        " の項だけ符号が反転する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 [\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\mp)}]_+
-&= \sum_{j=1}^M \underbrace{\begin{cases}+1 & (j\neq 1)\\ \mp 1 & (j=1)\end{cases}\begin{cases}+1 & (j\neq 1)\\ \pm 1 & (j=1)\end{cases}}_{j=1 \text{ のみ } -1,\ \text{他は } +1}\exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
-&= \underbrace{\left(-2\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)}_{j=1 \text{ の項を打ち消すために 2 回引く}} + \sum_{j=1}^M \exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
-&= \underbrace{2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}_{[\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\pm)}]_+} + \left(-2\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&= \sum_{j=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\mp)}_j\exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&&(\because\ \text{第 1 式の鎖の第 1 段から第 8 段までと同じ計算。第 2 の因子の符号だけが}\ \varepsilon^{(\mp)}\ \text{である}) \\
+&= \varepsilon^{(\pm)}_1\varepsilon^{(\mp)}_1\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+ + \sum_{j=2}^M \varepsilon^{(\pm)}_j\varepsilon^{(\mp)}_j\exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&&(\because\ \text{有限和から}\ j=1\ \text{の項を分けた}) \\
+&= (-1)\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+ + \sum_{j=2}^M \exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&&(\because\ \text{上で求めた符号の積の値}) \\
+&= (-1)\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
+&\quad + \left(\sum_{j=1}^M \exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+ - \exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ j=1\ \text{の項を足して引いた}) \\
+&= \sum_{j=1}^M \exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+ + \left(-2\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ \text{同じ項どうしをまとめた}) \\
+&= \sum_{j=1}^M \exp\!\left(-i\frac{2\pi j}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
+ + \left(-2\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ j\mu+j\nu = j(\mu+\nu)) \\
+&= 2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+ + \left(-2\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ \text{1 の冪根の総和の公式を}\ k=-(\mu+\nu)\ \text{で使った})
 \end{aligned}`,
       ),
+      paragraph([
+        "この鎖で引いたブロックは ",
+        ref("def_delta_M"),
+        "（第 7 段）、",
+        ref("exp_sum"),
+        "（第 7 段）である",
+        "（第 1 段が引くブロックは第 1 式の鎖と同じである）。",
+      ]),
       paragraph([
         math(String.raw`[\hat{Z}_\mu^{(\pm)}, \hat{Y}_\nu]_+`),
         "、",
@@ -153,7 +179,8 @@ export default defineBlocks([
         "原文の [hatZ^(±),hatZ^(±)]_+ と [hatZ^(±),hatZ^(∓)]_+ の二重和展開を全ステップ忠実に再現した。",
         "原文の場合分け記法は KaTeX の cases 環境で表記した。" +
           "ただし第 1 式の鎖では、符号の場合分けに ε^{(±)}_j という名前を証明の冒頭で与え、" +
-          "各行の根拠を行末の (∵ …) で書けるようにした（第 2 式の鎖はまだ cases のままである）。",
+          "各行の根拠を行末の (∵ …) で書けるようにした。第 2 式の鎖も同じ名前を使い、" +
+          "符号の積の値を計算の前に求めてから 7 段の鎖にした（cases の下線つき注記を廃した）。",
         "[hatZ^(±),hatY]_+ と [hatY,hatY]_+ は原文自体が「同様」として省略。",
         "抽象テンソル積の記法を廃した。I_{(C^2)^{⊗M}}（抽象テンソル冪の単位元）を、" +
           "<def_kronecker> で具体的に定義された 2^M 次の単位行列 I_{Mat(2^M,C)} へ置き換えた。" +
