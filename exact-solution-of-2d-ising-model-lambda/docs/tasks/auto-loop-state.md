@@ -839,6 +839,22 @@
   成分が実際に別の集合の元であることも確かめた）で、鎖の 6 段に 1 対 1 で対応させて通した。
   検証は構造化テキストの検査一式・PDF 96 ページで未解決参照 0 件・検証と証明の対応 67 件が通過。
   **Lean は次の tick で置く**（この tick は締切に当たったため、記述と SageMath を通した状態で止めた）。
+  Lean は書きかけたが `lake build` が締切までに終わらなかったので、**未検証のものを残さないため
+  作業ツリーから取り除いた**（未検証の Lean を置くと、監査の `lake build` と sorry 検査が
+  他の tick を巻き込んで落ちる）。次の tick が同じところで詰まらないよう、分かったことを残す。
+  - 置くファイルは 3 つ。`AlgebraicEigenvalue/QbarMatrixEval.lean`（具体版。`qbarMatrixEval` と
+    `qbarMatrixEval_product`）、`NecSuf/AlgebraicEigenvalue/QbarMatrixEval.lean`（必要十分版）、
+    `AlgebraicEigenvalue/QbarMatrixEvalFromNecSuf.lean`（導出）。入口 `Ising2DLambda.lean` の
+    import と `scripts/check-no-sorry.sh` の登録も要る。
+  - 具体版は `evalFirstHom ξ`（`OrbitFactorRoot.lean` にある $\mathbb{Z}[x]\to\overline{\mathbb{Q}}$ の
+    環準同型）を成分ごとに施す形で書ける。鎖の 6 段は
+    `rfl` / `rfl` / `map_sum` / `Finset.sum_congr` と `map_mul` / `rfl` / `rfl` で通る見込みである
+    （この 3 ファイル自体のビルドは通った。落ちたのは入口の import である）。
+  - **詰まった点**: 必要十分版で行列の積を `matProduct` という名前で新しく定義したところ、
+    `NecSuf/AlgebraicEigenvalue/ShiftMatrixOrder.lean` に同名の定義が既にあり、入口での import が
+    「環境に既にある」と言って落ちた。**同じ定義を 2 つ置かず、`ShiftMatrixOrder.lean` の
+    `matProduct` を import して使うこと**（その版の仮定は `[Fintype ι] [DecidableEq ι]` と
+    `[AddCommMonoid S] [Mul S] [One S]` である）。
 
 - 2026-08-10（tick 76）: セクション 10h2c3a（固有ベクトルへ行列の冪を作用させると、
   固有値の冪のスカラー倍になること）が**四層すべて**を満たした。主張 1 件
