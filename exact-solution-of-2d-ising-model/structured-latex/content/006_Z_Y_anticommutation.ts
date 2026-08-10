@@ -748,14 +748,20 @@ Z_\mu Y_\mu
 \boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
-\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ Z_\mu,\ Y_\mu\ \text{の定義}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
-\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-\quad (\because\ \sigma^x\sigma^x = II = I)
+&&(\because\ II = I.\ \text{単位行列どうしの積})
 \end{aligned}`,
       ),
       displayMath(
@@ -763,11 +769,16 @@ Z_\mu Y_\mu
 Y_\mu Z_\mu
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
-\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-\quad (\because\ \sigma^x\sigma^x = II = I)
+&&(\because\ II = I.\ \text{単位行列どうしの積})
 \end{aligned}`,
       ),
       paragraph([
@@ -788,9 +799,35 @@ Y_\mu Z_\mu
         " を外へ出すと",
       ]),
       displayMath(
-        String.raw`Y_\mu Z_\mu = -\,Z_\mu Y_\mu,
-\qquad\text{したがって}\qquad
-[Z_\mu, Y_\mu]_+ = Z_\mu Y_\mu + Y_\mu Z_\mu = 0`,
+        String.raw`\begin{aligned}
+Y_\mu Z_\mu
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{上の計算}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(-\,\sigma^z\sigma^y)}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^y\sigma^z = -\,\sigma^z\sigma^y.\ \text{Pauli 行列の積}) \\
+&= -\left(I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&= -\,Z_\mu Y_\mu
+&&(\because\ \text{上の計算})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[Z_\mu, Y_\mu]_+
+&= Z_\mu Y_\mu + Y_\mu Z_\mu
+&&(\because\ \text{反交換子の定義}) \\
+&= Z_\mu Y_\mu + (-\,Z_\mu Y_\mu)
+&&(\because\ \text{直前の等式}) \\
+&= 0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`,
       ),
       paragraph([
         "（これは ",
@@ -814,17 +851,32 @@ Z_\mu Y_\nu
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^x}^{\mu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
-\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ Z_\mu,\ Y_\nu\ \text{の定義}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
-\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ I\ \text{は積の単位元}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ II = I.\ \text{単位行列どうしの積})
 \end{aligned}`,
       ),
       displayMath(
@@ -836,17 +888,32 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
-\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ Y_\nu,\ Z_\mu\ \text{の定義}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
-\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ I\ \text{は積の単位元}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ II = I.\ \text{単位行列どうしの積})
 \end{aligned}`,
       ),
       paragraph([
@@ -889,9 +956,41 @@ Y_\nu Z_\mu
         " を外へ出して",
       ]),
       displayMath(
-        String.raw`Y_\nu Z_\mu = -\,Z_\mu Y_\nu,
-\qquad\text{したがって}\qquad
-[Z_\mu, Y_\nu]_+ = Z_\mu Y_\nu + Y_\nu Z_\mu = 0`,
+        String.raw`\begin{aligned}
+Y_\nu Z_\mu
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{上の計算}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(-\,\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^x\sigma^z = -\,\sigma^z\sigma^x.\ \text{Pauli 行列の積}) \\
+&= -\left(I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
+\boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&= -\,Z_\mu Y_\nu
+&&(\because\ \text{上の計算})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[Z_\mu, Y_\nu]_+
+&= Z_\mu Y_\nu + Y_\nu Z_\mu
+&&(\because\ \text{反交換子の定義}) \\
+&= Z_\mu Y_\nu + (-\,Z_\mu Y_\nu)
+&&(\because\ \text{直前の等式}) \\
+&= 0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\mu > \nu`),
@@ -918,17 +1017,32 @@ Z_\mu Y_\nu
 \boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
-\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ Z_\mu,\ Y_\nu\ \text{の定義}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{(\sigma^x I)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z I)}^{\mu\text{th}}
-\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{(\sigma^x I)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(\sigma^z I)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ I\ \text{は積の単位元}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ II = I.\ \text{単位行列どうしの積})
 \end{aligned}`,
       ),
       displayMath(
@@ -940,17 +1054,32 @@ Y_\nu Z_\mu
 &\qquad \cdot \left(\overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^x}^{\nu\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
-\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right) \\
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}\right)
+&&(\because\ Y_\nu,\ Z_\mu\ \text{の定義}) \\
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{(I\sigma^x)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^z)}^{\mu\text{th}}
-\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}} \\
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \text{クロネッカー積の積の規則}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{(I\sigma^x)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{(I\sigma^z)}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M\text{th}}
+&&(\because\ I\ \text{は積の単位元}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ II = I.\ \text{単位行列どうしの積})
 \end{aligned}`,
       ),
       paragraph([
@@ -973,9 +1102,41 @@ Y_\nu Z_\mu
         " が外へ出て",
       ]),
       displayMath(
-        String.raw`Y_\nu Z_\mu = -\,Z_\mu Y_\nu,
-\qquad\text{したがって}\qquad
-[Z_\mu, Y_\nu]_+ = 0`,
+        String.raw`\begin{aligned}
+Y_\nu Z_\mu
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \text{上の計算}) \\
+&= I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(-\,\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \sigma^y\sigma^x = -\,\sigma^x\sigma^y.\ \text{Pauli 行列の積}) \\
+&= -\left(I\boxtimes\cdots\boxtimes I
+\boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
+\boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
+\boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
+\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&&(\because\ \text{第 }\nu\text{ 因子についての線型性}) \\
+&= -\,Z_\mu Y_\nu
+&&(\because\ \text{上の計算})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[Z_\mu, Y_\nu]_+
+&= Z_\mu Y_\nu + Y_\nu Z_\mu
+&&(\because\ \text{反交換子の定義}) \\
+&= Z_\mu Y_\nu + (-\,Z_\mu Y_\nu)
+&&(\because\ \text{直前の等式}) \\
+&= 0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`,
       ),
       paragraph([
         "3 通りすべてで ",
