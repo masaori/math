@@ -18485,7 +18485,7 @@ z^{n}
       paragraph([
         "この段が新しく使っているのは ",
         math(String.raw`\overline{\mathbb{Q}}`),
-        " の有限積と、既に示した 5 つの主張だけである。",
+        " の有限積と、上の各行で引いた既出の主張だけである。",
         "現れるのは ",
         math(String.raw`\mathbb{Z}[x][t]`),
         " の元と ",
