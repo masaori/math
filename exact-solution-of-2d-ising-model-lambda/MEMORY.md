@@ -23,10 +23,10 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 209 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 81 で `claim_qbar_identity_matrix_unit`（代数的数を成分とする単位行列が積の単位元であること）の Lean を置いた。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 507 件を登録）が通る |
-| Lean 必要十分版 | 主張 106 件と定理 3 件について作成済み（うち 1 件（行列の積の結合則）は、既にある作用の側の必要十分版をそのまま特殊化したもので、新しい必要十分版を書き起こしていない。2026-08-11 の tick 79 で、本文の `lean` フィールド（ブロックに対応する Lean の定理名）を機械的に数え直した。本文の主張は 115 件なので、必要十分版を置いていない主張は **9 件**である（前の記録の 16 件は、必要十分版が実在するのに本文へ名前が書かれていなかった 2 件と、tick 79 で新たに置いた 1 件を含んでいた）。置いていない 9 件は $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・閉じた道の 1 対 1 対応・置換の符号の値・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復（2 件）・軌道ごとの置換の符号の値・軌道の互換の全単射性である。理由が台帳に残っているのは $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの往復の 4 件だけで——1 つめは既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため——残りは次のレビュー以降で 1 件ずつ判定する）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+| 記述（構造化テキスト） | ラベルの数は合計 212 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 83 で `claim_qbar_matrix_eval_pow`（成分ごとの評価が行列の冪を保つこと）の Lean を置いた。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 513 件を登録）が通る |
+| Lean 必要十分版 | 主張 109 件と定理 3 件について作成済み（うち 1 件（行列の積の結合則）は、既にある作用の側の必要十分版をそのまま特殊化したもので、新しい必要十分版を書き起こしていない。2026-08-11 の tick 79 で、本文の `lean` フィールド（ブロックに対応する Lean の定理名）を機械的に数え直した。本文の主張は 118 件なので、必要十分版を置いていない主張は **9 件**である（前の記録の 16 件は、必要十分版が実在するのに本文へ名前が書かれていなかった 2 件と、tick 79 で新たに置いた 1 件を含んでいた）。置いていない 9 件は $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・閉じた道の 1 対 1 対応・置換の符号の値・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復（2 件）・軌道ごとの置換の符号の値・軌道の互換の全単射性である。理由が台帳に残っているのは $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの往復の 4 件だけで——1 つめは既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため——残りは次のレビュー以降で 1 件ずつ判定する）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -1260,6 +1260,27 @@ $\mathrm{it}^{[k+1]}_{A}(v):=A\cdot(\mathrm{it}^{[k]}_{A}(v))$）を定義し、
 
 これが要るのは、$\mathbb{Z}[x]$ の行列の冪が右から掛ける形で定めてあり、
 $\mathrm{Ev}_{\xi}$ が行列の冪を保つことの帰納法で一歩の向きを揃える必要があるためである。
+
+さらに、成分ごとの評価 $\mathrm{Ev}_{\xi}$ が行列の冪を保つことを示した。
+**四層すべてを満たしている**（2026-08-11 の tick 83）。ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+- $k\ge1$ を満たす任意の整数 $k$ について
+  $\mathrm{Ev}_{\xi}(A^{k})=\bigl(\mathrm{Ev}_{\xi}(A)\bigr)^{k}$ である。
+  $k\ge1$ に限るのは、$\mathbb{Z}[x]$ の行列の冪が $A^{1}:=A$ から始めて $k\ge1$ でだけ
+  定めてあるためである（$\mathbb{Z}[x]$ の行列については単位行列を使う出発点を置いていない）。
+  証明は $k$ についての帰納法で、出発点が 4 段（$\mathbb{Z}[x]$ の冪の定義・単位行列を右から
+  掛ける・$\overline{\mathbb{Q}}$ の冪の定義 2 段）、一歩が 4 段（$\mathbb{Z}[x]$ の冪の定義・
+  評価が積を保つこと・帰納法の仮定・冪が右から掛けても得られること）の鎖である。
+  2 つの冪は出発点も一歩の向きも違うので、一歩の最後で向きを揃える主張が要る。
+  必要十分版が示したのは、この段が要求するのが**7 本の等式だけ**（写像が積を保つこと 1 本・
+  2 つの冪の再帰の式 4 本・単位元を右から掛ける等式 1 本・行き先の冪が右から掛けた形にも
+  書けること 1 本）であり、加法も零元も分配則も結合則も積の可換性も、型の代数構造も
+  添字の型の有限性も、写像が環準同型であることも使っていないことである
+  （mathlib から何も import していない）。
+
+これで、$U^{L}=I$（$\mathrm{Mat}_{R_L}(\mathbb{Z}[x])$ の等式）を $\mathrm{Ev}_{\xi}$ で
+$\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})$ の等式へ運ぶ道具が揃った。
+次はそれを固有ベクトルの冪の主張と突き合わせ、シフト行列の固有値が 1 の $L$ 乗根であることを出す。
 
 ## 確認事項・注意
 
