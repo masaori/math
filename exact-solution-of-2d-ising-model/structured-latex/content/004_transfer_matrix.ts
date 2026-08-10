@@ -2087,32 +2087,73 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     ],
     proof: [
       paragraph([
+        math(String.raw`k \equiv 0 \pmod{M}`),
+        " であるか否かで場合を分ける。",
+      ]),
+      paragraph([
         math(String.raw`(a)\; k \equiv 0 \pmod{M}`),
-        " のとき：",
-        math(String.raw`l \in \mathbb{Z}`),
-        " で ",
+        " のとき。",
         math(String.raw`k = lM`),
-        " とおくと、",
+        " を満たす ",
+        math(String.raw`l \in \mathbb{Z}`),
+        " を 1 つ取る。",
       ]),
       displayMath(
-        String.raw`\sum_{j=1}^{M} e^{lM \cdot 2\pi i j/M}
-= \sum_{j=1}^{M} e^{2\pi i l j}
-= \sum_{j=1}^{M} (\cos 2\pi lj + i\sin 2\pi lj)
-= \sum_{j=1}^{M} 1 = M`,
+        String.raw`\begin{aligned}
+\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j k}{M}\right)
+&= \sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j \cdot lM}{M}\right)
+&&(\because\ k = lM) \\
+&= \sum_{j=1}^{M} \exp\!\left(2\pi i\, l j\right)
+&&(\because\ M\ \text{で約分した}) \\
+&= \sum_{j=1}^{M} \left(\cos 2\pi l j + i \sin 2\pi l j\right)
+&&(\because\ \text{オイラーの公式}) \\
+&= \sum_{j=1}^{M} \left(1 + i \cdot 0\right)
+&&(\because\ lj \in \mathbb{Z}\ \text{なので}\ \cos 2\pi lj = 1,\ \sin 2\pi lj = 0) \\
+&= \sum_{j=1}^{M} 1 \\
+&= M
+&&(\because\ \text{項数が}\ M\ \text{である}) \\
+&= M\,\delta^M_{(k,0)}
+&&(\because\ k \equiv 0 \pmod{M}\ \text{なので}\ \delta^M_{(k,0)} = 1\ \text{である})
+\end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(b)`),
-        " その他のとき：等比数列の和の公式（公比 ",
-        math(String.raw`r = e^{2\pi i k/M} \neq 1`),
-        "）より、",
+        "引いたのは ",
+        ref("euler_formula_cos_sin"),
+        " と ",
+        ref("def_delta_M"),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`(b)\; k \not\equiv 0 \pmod{M}`),
+        " のとき。",
+        math(String.raw`r := \exp\!\left(\frac{2\pi i k}{M}\right) \in \mathbb{C}`),
+        " と置く。",
+        math(String.raw`k \not\equiv 0 \pmod{M}`),
+        " なので ",
+        math(String.raw`r \neq 1`),
+        " である。",
       ]),
       displayMath(
-        String.raw`\sum_{j=1}^{M} r^j
-= r \cdot \frac{1 - r^M}{1 - r}
-= r \cdot \frac{1 - e^{2\pi i k}}{1 - r}
-= r \cdot \frac{1 - 1}{1 - r}
-= 0`,
+        String.raw`\begin{aligned}
+\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j k}{M}\right)
+&= \sum_{j=1}^{M} r^{\,j}
+&&(\because\ r\ \text{の定義と}\ \exp(a)^{j} = \exp(ja)) \\
+&= r \cdot \frac{1 - r^{M}}{1 - r}
+&&(\because\ \text{等比数列の和の公式（}r \neq 1\text{）}) \\
+&= r \cdot \frac{1 - \exp\!\left(2\pi i k\right)}{1 - r}
+&&(\because\ r^{M} = \exp\!\left(2\pi i k\right)) \\
+&= r \cdot \frac{1 - 1}{1 - r}
+&&(\because\ k \in \mathbb{Z}\ \text{なので}\ \exp(2\pi i k) = 1) \\
+&= 0 \\
+&= M\,\delta^M_{(k,0)}
+&&(\because\ k \not\equiv 0 \pmod{M}\ \text{なので}\ \delta^M_{(k,0)} = 0\ \text{である})
+\end{aligned}`,
       ),
+      paragraph([
+        "引いたのは ",
+        ref("def_delta_M"),
+        " である。",
+      ]),
     ],
     conversion: { status: "converted" },
   },
