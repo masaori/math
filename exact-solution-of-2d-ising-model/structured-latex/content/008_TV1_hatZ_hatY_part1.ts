@@ -181,66 +181,129 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
         math(String.raw`[H_1^{(\pm)}, \hat{Z}_\mu^{(\mp)}]`),
         " について、",
         math(String.raw`\mu \in \mathcal{M}`),
-        " について、",
+        " を任意に取る。準備 1 と準備 2 に加えて、次の 3 つを先に用意する。",
       ]),
+      paragraph([
+        "準備 4（",
+        math(String.raw`H_1^{(\pm)}`),
+        " の表式）。",
+      ]),
+      displayMath(
+        String.raw`H_1^{(\pm)}
+= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,e^{-i\frac{2\pi j}{M}}\right)
+\qquad (\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す})`,
+      ),
+      paragraph([
+        "準備 5（反交換関係の移項）。",
+        math(String.raw`j \in \{1,\dots,M\}`),
+        " について ",
+        math(String.raw`\hat{Z}_\mu^{(\mp)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\mp)}`),
+        " である（",
+        ref("anticommutator_of_hat_Z_and_hat_Y"),
+        " の ",
+        math(String.raw`[\hat{Z}_\mu^{(\mp)}, \hat{Y}_j]_+ = 0`),
+        " を移項したもの）。",
+      ]),
+      paragraph([
+        "準備 6（第 1 項の和に残る ",
+        math(String.raw`j`),
+        " の決定）。",
+        math(String.raw`j \in \{1,\dots,M\}`),
+        " かつ ",
+        math(String.raw`-j+\mu \equiv 0 \pmod{M}`),
+        " を満たす ",
+        math(String.raw`j`),
+        " はちょうど 1 つであり、",
+      ]),
+      displayMath(
+        String.raw`j = \begin{cases}
+2M+\mu & (\mu = -M) \\
+M+\mu & (-M+1 \leq \mu \leq -1) \\
+\mu & (1 \leq \mu \leq M)
+\end{cases}
+\qquad (\because\ 1 \leq j \leq M\ \text{と合同式の条件})`,
+      ),
+      paragraph(["以上のもとで、"]),
       displayMath(
         String.raw`\begin{aligned}
 [H_1^{(\pm)}, \hat{Z}_\mu^{(\mp)}]
-&= \left[\overbrace{\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,e^{-i\frac{2\pi j}{M}}\right)}^{H_1^{(\pm)}},\ \hat{Z}_\mu^{(\mp)}\right] \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}},\ \hat{Z}_\mu^{(\mp)}\right] \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)},\ \hat{Z}_\mu^{(\mp)}\right] \\
+&= \left[\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,e^{-i\frac{2\pi j}{M}}\right),\ \hat{Z}_\mu^{(\mp)}\right]
+&&(\because\ \text{準備 4})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}},\ \hat{Z}_\mu^{(\mp)}\right]
+&&(\because\ \text{交換子の定義と、有限和・スカラー倍についての分配則})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)},\ \hat{Z}_\mu^{(\mp)}\right]
+&&(\because\ \text{スカラー倍を交換子の外へ出した})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
-   - \hat{Z}_\mu^{(\mp)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right) \\
+   - \hat{Z}_\mu^{(\mp)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \text{交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
    + \hat{Y}_j\hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right)
-   \quad (\because \hat{Z}_\mu^{(\mp)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\mp)}) \\
+&&(\because\ \text{準備 5})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
-   + \hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right) \\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\mp)}]_+ \\
+   + \hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right)
+&&(\because\ \text{分配則})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\mp)}]_+
+&&(\because\ \text{反交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(
-   \overbrace{2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}^{[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right) \\
+   2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)
+&&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z}^{(\pm)},\hat{Z}^{(\mp)}]_+\ \text{の値})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) \\
+   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ \text{分配則と、有限和の項ごとの分割})\\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}-i\frac{2\pi}{M}(-j+\mu)}\hat{Y}_j \\
+   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}-i\frac{2\pi}{M}(-j+\mu)}\hat{Y}_j
+&&(\because\ \text{単位行列との積とスカラーの整理、および指数法則})\\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi\mu}{M}}\hat{Y}_j \\
+   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi\mu}{M}}\hat{Y}_j
+&&(\because\ \text{指数の中の}\ j\ \text{が打ち消し合う})\\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{j\in\{1,\dots,M\}} \hat{Y}_j \\
+   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{j\in\{1,\dots,M\}} \hat{Y}_j
+&&(\because\ j\ \text{によらない因子を有限和の外へ出した})\\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{j\in\{1,\dots,M\}}\sum_{k=1}^{M} Y_k\, e^{-i k\frac{2\pi j}{M}} \\
+   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{j\in\{1,\dots,M\}}\sum_{k=1}^{M} Y_k\, e^{-i k\frac{2\pi j}{M}}
+&&(\because\ \text{$\hat{Z}, \hat{Y}$ の定義})\\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{k=1}^{M} Y_k\sum_{j\in\{1,\dots,M\}} e^{-i k\frac{2\pi j}{M}} \\
+   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{k=1}^{M} Y_k\sum_{j\in\{1,\dots,M\}} e^{-i k\frac{2\pi j}{M}}
+&&(\because\ \text{有限和の順序の入れ替えと、$k$ によらない因子を内側の和の外へ出した})\\
 &= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
    - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{k=1}^{M} Y_k\, M\,\delta^M_{(k,0)}
-   \quad (\because \text{指数和の公式})
+&&(\because\ \text{指数和の公式})\\
+&= 2\begin{cases}
+e^{-i\frac{2\pi(2M+\mu)}{M}}\hat{Y}_{2M+\mu} & (\mu = -M) \\
+e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
+e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
+\end{cases} - 0
+&&\left(\because\ \begin{aligned}
+&\text{第 1 項は準備 6}\\
+&\text{第 2 項は原文が}\ 0\ \text{とおいている}
+\end{aligned}\right)\\
+&= 2\, e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
+&&(\because\ \text{準備 1 と準備 2}\ (\nu = \mu\ \text{または}\ \nu = M+\mu))
 \end{aligned}`,
       ),
       paragraph([
         "指数和の公式は ",
         ref("exp_sum"),
-        " による。第1項の ",
-        math(String.raw`\delta^M_{-j+\mu,0}`),
-        " による ",
-        math(String.raw`j`),
-        " の決定は ",
-        math(String.raw`j = 2M+\mu\ (\mu=-M),\ M+\mu\ (-M+1\leq\mu\leq-1),\ \mu\ (1\leq\mu\leq M)`),
-        "。原文では第2項を ",
+        " による。第 2 項を ",
         math(String.raw`0`),
-        " として次の結論を得ている：",
+        " とおく段は、原文の扱いをそのまま写したものであり、本文では確かめていない。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-[H_1^{(\pm)}, \hat{Z}_\mu^{(\mp)}]
-&= 2\begin{cases}
-e^{-i\frac{2\pi(2M+\mu)}{M}}\hat{Y}_{2M+\mu} & (\mu = -M) \\
-e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
-e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
-\end{cases} - 0 \\
-&= 2\, e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
-\end{aligned}`,
-      ),
+      paragraph([
+        "引いたブロックは ",
+        ref("def_hatZ_hatY"),
+        "、",
+        ref("hatZ_hatY_M_periodicity"),
+        "、",
+        ref("H1_H2_via_hatZ_hatY"),
+        "、",
+        ref("anticommutator_of_hat_Z_and_hat_Y"),
+        "、",
+        ref("def_delta_M"),
+        "、",
+        ref("exp_sum"),
+        " である。",
+      ]),
       paragraph([
         "(3) ",
         math(String.raw`[H_1^{(\pm)}, \hat{Y}_\mu]`),

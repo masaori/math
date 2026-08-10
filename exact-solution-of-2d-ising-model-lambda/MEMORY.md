@@ -8,7 +8,7 @@
 箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
 章「分配多項式」（定義 10 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 43 件・主張 65 件・定理 2 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 44 件・主張 66 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
 軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限・
@@ -23,9 +23,9 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 217 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
-| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` / `qbar-smul-eq-zero` / `shift-matrix-eigenvalue-root-of-unity` / `qbar-commuting-eigenspace` / `qbar-shift-transfer-commute` / `qbar-transfer-preserves-shift-eigenspace` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 88 で `claim_qbar_transfer_preserves_shift_eigenspace`（転送行列がシフト行列の各固有空間をそれ自身へ写すこと）の Lean を置いた。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 528 件を登録）が通る |
+| 記述（構造化テキスト） | ラベルの数は合計 219 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` / `qbar-smul-eq-zero` / `shift-matrix-eigenvalue-root-of-unity` / `qbar-commuting-eigenspace` / `qbar-shift-transfer-commute` / `qbar-transfer-preserves-shift-eigenspace` / `qbar-action-sum` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 89 で `claim_qbar_action_sum`（行列の作用が列ベクトルの有限和を保つこと）の Lean を置いた。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 531 件を登録）が通る |
 | Lean 必要十分版 | 主張 110 件と定理 3 件について作成済み（うち 1 件（行列の積の結合則）は、既にある作用の側の必要十分版をそのまま特殊化したもので、新しい必要十分版を書き起こしていない。2026-08-11 の tick 79 で、本文の `lean` フィールド（ブロックに対応する Lean の定理名）を機械的に数え直した。本文の主張は 118 件なので、必要十分版を置いていない主張は **9 件**である（前の記録の 16 件は、必要十分版が実在するのに本文へ名前が書かれていなかった 2 件と、tick 79 で新たに置いた 1 件を含んでいた）。置いていない 9 件は $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・閉じた道の 1 対 1 対応・置換の符号の値・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復（2 件）・軌道ごとの置換の符号の値・軌道の互換の全単射性である。理由が台帳に残っているのは $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの往復の 4 件だけで——1 つめは既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため——残りは次のレビュー以降で 1 件ずつ判定する）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
@@ -781,20 +781,17 @@ $\mathbb{Z}[x][t]$ の中で言える。それが次のセクションである�
 
 ## 次回やること
 
-**2026-08-10 の tick 70 は、レビューで 1 件（代数的数の有限積が 0 ならば 0 である因子が
-あることの証明で、使った性質の列挙に零元の吸収律が抜けていたの）を直したうえで、
-セクション 10g3c2b（シフト行列の特性多項式の値を 0 にする代数的数が 1 の $L$ 乗根で
-あること）を四層すべてで完了させた。**
+**2026-08-11 の tick 89 は、レビューで直すところが無く、セクション 10h3d-a
+（列ベクトルの有限和と、行列の作用がそれを保つこと）を四層すべてで完了させた。**
+あわせて、もとのセクション 10h3d（対角化の本体）を論法ごとに 4 つへ割り直した。
 
-1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_shift_char_root_of_unity`）と
-   Lean 3 本（`ShiftCharRootOfUnity` 系）と SageMath の `shift-char-root-of-unity`。
-   とくに、必要十分版が「組み立てだけ」を抜き出した形（写像・値の構造・因子からの所属・
-   指数の整除・所属先の単調性の 5 条件）になっており、対象についての性質を持ち込んで
-   いないかを見る。SageMath 側は $\chi_U$ を行列式として直に計算する段を $L\le4$ に
-   絞ってあるので、その打ち切りが overview.md に書かれているかも確かめる。
-2. **次に進めるセクションは 10h**（転送行列をシフト行列の固有空間へ分ける＝対角化）。
-   状態台帳のセクション表が正本である。着手前に、論法が 1 つに収まる大きさかを見て、
-   必要なら割り直す。
+1. **レビュー**: 今 tick で書いた本文 2 ブロック（`def_qbar_vector_sum`・`claim_qbar_action_sum`）と
+   Lean 3 本（`QbarActionSum` 系）と SageMath の `qbar-action-sum`。
+   とくに、有限和を成分ごとに定めたこと（$\oplus$ の繰り返しでは定めない）が本文に書かれており、
+   その 2 通りの定め方が一致することを SageMath 側で確かめてあるかを見る。
+2. **次に進めるセクションは 10h3d-b**（1 の $L$ 乗根 $z$ ごとに列ベクトルを固有空間へ落とす
+   写像 $P_z$ の定義と、その像が固有空間に入ること）。状態台帳のセクション表が正本である。
+   着手前に、論法が 1 つに収まる大きさかを見て、必要なら割り直す。
 3. **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**
    （台帳の「式変形の書き方の統一」の表が正本。姉妹プロジェクト側が残りの中心）。
 
@@ -1335,8 +1332,30 @@ $\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})$ の等式へ運ぶ道具が揃った
   2 元についての可換性 1 本だけ**であり、行列であることも値の型の代数構造も添字の型の
   有限性も、結合則も単位元も分配則も使っていないことである。
 
-次は、この 2 つ（可換な行列が固有空間を保つことと、運んだ 2 つの行列の可換性）を合わせて、
-転送行列がシフト行列の各固有空間をそれ自身へ写すことを組み立てる（対角化へ向けた段）。
+さらに、この 2 つ（可換な行列が固有空間を保つことと、運んだ 2 つの行列の可換性）を合わせて、
+転送行列がシフト行列の各固有空間をそれ自身へ写すことを組み立てた。
+**四層すべてを満たしている**（2026-08-11 の tick 88）。新しい論法を持たない段なので、
+必要十分版は新しく書かず、既存 2 本の特殊化を合わせた導出だけを置いた。
+
+さらに、列ベクトルの有限和 $\bigl(\bigoplus_{i\in s}v_i\bigr)(\tau):=\sum_{i\in s}v_i(\tau)$ を定義し、
+次を示した。**四層すべてを満たしている**（2026-08-11 の tick 89）。
+ここにも $\mathbb{R}/\mathbb{C}$ は現れない。
+
+有限和は**成分ごとに**定めた（2 元の和 $\oplus$ の繰り返しでは定めない）。繰り返しで定めると
+足す順序に依らないことを別に示す必要が生じるが、成分ごとに置けばそれは
+$\overline{\mathbb{Q}}$ の有限和が持つ性質にそのまま帰着する。添字集合が空のときの値は零ベクトルである。
+
+- 行列の作用は列ベクトルの有限和を保つ
+  （$A\cdot\bigl(\bigoplus_{i\in s}v_i\bigr)=\bigoplus_{i\in s}\bigl(A\cdot v_i\bigr)$）。
+  証明は帰納法ではなく 6 段の一続きの鎖である（作用の定義・有限和の定義・元と有限和の積に
+  ついての分配則・有限和の順序の入れ替え・作用の定義・有限和の定義）。
+  必要十分版が示したのは、この段が要求するのが**作用の側の添字の型が有限であることと、
+  値の側が非単位的・非結合的半環であることだけ**であり、有限和の添字の型の有限性は
+  要らない（和を取るのは有限部分集合の上だから）こと、そして 2 元の和の版と仮定が
+  まったく同じであること、すなわち項の個数を増やしても新しい性質は要らないことである。
+
+次は、1 の $L$ 乗根 $z$ ごとに列ベクトルを固有空間へ落とす写像 $P_z$ を置き、
+その像が固有空間に入ることを示す（対角化の本体の第 1 段）。
 
 ## 確認事項・注意
 
