@@ -1535,17 +1535,47 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         String.raw`\begin{aligned}
 \sum_{(p,q)\in A_N}\frac{a^{p}}{p!}\frac{a^{q}}{q!}
 &= \left(\sum_{p=L+1}^{N}\frac{a^{p}}{p!}\right)\left(\sum_{q=0}^{N}\frac{a^{q}}{q!}\right)
- \le R_{L}(a)\,E(a) \\
+   &&(\because\ \text{長方形の添字集合にわたる有限和の、積への分解（分配律）}) \\
+&\le R_{L}(a)\left(\sum_{q=0}^{N}\frac{a^{q}}{q!}\right)
+   &&(\because\ \sum_{p=L+1}^{N}\tfrac{a^{p}}{p!}\le R_{L}(a)\ \text{と}\ \sum_{q=0}^{N}\tfrac{a^{q}}{q!}\ge 0) \\
+&= R_{L}(a)\,E_N(a)
+   &&(\because\ E_N(a)\ \text{の定義}) \\
+&\le R_{L}(a)\,E(a)
+   &&(\because\ E_N(a)\le E(a)\ \text{と}\ R_{L}(a)\ge 0)
+\end{aligned}`,
+      ),
+      paragraph(["同じ 4 段を ", math(String.raw`B_N`), " について繰り返して"]),
+      displayMath(
+        String.raw`\begin{aligned}
 \sum_{(p,q)\in B_N}\frac{a^{p}}{p!}\frac{a^{q}}{q!}
 &= \left(\sum_{p=0}^{N}\frac{a^{p}}{p!}\right)\left(\sum_{q=L+1}^{N}\frac{a^{q}}{q!}\right)
- \le E(a)\,R_{L}(a)
+   &&(\because\ \text{長方形の添字集合にわたる有限和の、積への分解（分配律）}) \\
+&\le \left(\sum_{p=0}^{N}\frac{a^{p}}{p!}\right)R_{L}(a)
+   &&(\because\ \sum_{q=L+1}^{N}\tfrac{a^{q}}{q!}\le R_{L}(a)\ \text{と}\ \sum_{p=0}^{N}\tfrac{a^{p}}{p!}\ge 0) \\
+&= E_N(a)\,R_{L}(a)
+   &&(\because\ E_N(a)\ \text{の定義}) \\
+&\le E(a)\,R_{L}(a)
+   &&(\because\ E_N(a)\le E(a)\ \text{と}\ R_{L}(a)\ge 0)
 \end{aligned}`,
       ),
       paragraph(["よって"]),
       displayMath(
-        String.raw`\left\|Q_N-P_N\right\| \le 2\,\|Y\|\,E(a)\,R_{L}(a),
-\qquad L=\left\lfloor N/2\right\rfloor`,
+        String.raw`\begin{aligned}
+\left\|Q_N-P_N\right\|
+&\le \|Y\|\left(\sum_{(p,q)\in A_N}\frac{a^{p}}{p!}\frac{a^{q}}{q!}
+   +\sum_{(p,q)\in B_N}\frac{a^{p}}{p!}\frac{a^{q}}{q!}\right)
+   &&(\because\ \text{上の}\ \left\|Q_N-P_N\right\|\ \text{の評価の最後の行}) \\
+&\le \|Y\|\bigl(R_{L}(a)\,E(a)+E(a)\,R_{L}(a)\bigr)
+   &&(\because\ \text{直前の 2 つの評価と}\ \|Y\|\ge 0) \\
+&= 2\,\|Y\|\,E(a)\,R_{L}(a)
+   &&(\because\ \text{実数の積の可換性と}\ c+c=2c)
+\end{aligned}`,
       ),
+      paragraph([
+        "である（",
+        math(String.raw`L=\left\lfloor N/2\right\rfloor`),
+        "）。",
+      ]),
       paragraph([
         math(String.raw`N\to\infty`),
         " のとき ",
