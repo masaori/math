@@ -1370,6 +1370,8 @@ i\,(-1)^{(n-1)/2} & (n \text{ 奇数}) \\
         math(String.raw`\alpha = \tfrac{i}{2}`),
         "、",
         math(String.raw`X = K_1 H_1^{(\pm)}`),
+        "、",
+        math(String.raw`W = \hat{Z}_\mu^{(\pm)}`),
         " として使い、さらに補題 2 で ",
         math(String.raw`i^n`),
         " を書き換える。",
@@ -1379,51 +1381,46 @@ i\,(-1)^{(n-1)/2} & (n \text{ 奇数}) \\
 \underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
 &= \left(\tfrac{i}{2}\right)^{n}
    \underbrace{\left[K_1 H_1^{(\pm)},\dots,\left[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
-   \quad (\because \text{補題 1}) \\
+&&(\because\ \text{補題 1}) \\
 &= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
 (-1)^{(n-1)/2}(2K_1)^{n} e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{交換子のネスト (h1.z)}) \\
+&&(\because\ \text{交換子のネスト (h1.z)}) \\
 &= \begin{cases}
 i^{n}\,2^{-n}\,(-1)^{(n-1)/2}\,2^{n}K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,(-1)^{n/2}\,2^{n}K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
-   \quad \left(\because \left(\tfrac{i}{2}\right)^{n} = i^{n}2^{-n},\ (2K_1)^n = 2^n K_1^n\right) \\
+&&\left(\because\ \left(\tfrac{i}{2}\right)^{n} = i^{n}2^{-n},\ (2K_1)^n = 2^n K_1^n\right) \\
 &= \begin{cases}
 i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
-   \quad (\because 2^{-n}2^{n} = 1) \\
+&&(\because\ 2^{-n}2^{n} = 1) \\
 &= \begin{cases}
 i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{補題 2}) \\
+&&(\because\ \text{補題 2}) \\
 &= \begin{cases}
 i\,(-1)^{n-1}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
-\end{cases} \\
+\end{cases}
+&&\left(\because\ \tfrac{n-1}{2}+\tfrac{n-1}{2} = n-1,\ \tfrac{n}{2}+\tfrac{n}{2} = n\right) \\
 &= \begin{cases}
 i\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
+&&(\because\ n\text{ 奇数なら }(-1)^{n-1} = 1,\ n\text{ 偶数なら }(-1)^{n} = 1) \\
+&= \begin{cases}
+i\,K_1^{n}\, e^{-i 2\pi\mu/M}\hat{Y}_\mu & (n\text{ 奇数}) \\
+K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
+\end{cases}
+&&(\because\ \theta = \tfrac{2\pi\mu}{M}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "最後の等号は、",
-        math(String.raw`n`),
-        " が奇数なら ",
-        math(String.raw`n-1`),
-        " は偶数で ",
-        math(String.raw`(-1)^{n-1} = 1`),
-        "、",
-        math(String.raw`n`),
-        " が偶数なら ",
-        math(String.raw`(-1)^{n} = 1`),
-        " による。",
-        math(String.raw`e^{-i\theta} = e^{-i 2\pi\mu/M}`),
-        " なので (h1.z) の主張の形になる。",
+        "最後の行が (h1.z) の主張の右辺である。",
       ]),
       paragraph([
         "(h1.y) について、同じく補題 1 を ",
@@ -1564,6 +1561,7 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         "原文 proof は (h1.z) の代入計算のみを扱い、(h1.y)/(h2.z−)/(h2.y) は statement で「同様」とされ本文計算が無かった。下流の extract_taylor_coefficient_of_Z_Y の proof が 4 式すべてを必要とするため、statement に (h1.y)/(h2.y) の式を明示的に書き足し、proof でも 4 式すべての代入計算を書き下した。",
         "原文の指数簡約は (-1)^{1/2} という実数の範囲で意味をなさない中間式を経由しており（(n-1)/2+n/2 を (2n+2)/2+1/2 と書く等）、最終結果は正しいものの各ステップの正当化が不能だった。生成子のスカラー倍に関する補題 1（ad_{αX}^n = α^n ad_X^n）と虚数単位の冪に関する補題 2（i^n の偶奇分解）を明示的に立て、すべての指数を整数の範囲で扱う形へ書き改めた。",
         "4 式すべての結果は sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_02_scaled_nested_commutators.sage で n=0..8、M=3,4,5、複数の (K1,K2) について数値的に確認済み。",
+        "(h1.z) の代入計算を一続きの鎖の書き方へ揃えた（2026-08-11）。鎖の途中に \\quad で割り込ませていた (∵ …) を行末の列（&&）へ移し、根拠の無かった 2 段（(-1)^{(n-1)/2}(-1)^{(n-1)/2} = (-1)^{n-1} の段と、(-1)^{n-1} = 1 で符号が消える段）に根拠を付け、鎖のあとの地の文（「最後の等号は…による」「e^{-iθ} = e^{-i2πμ/M} なので主張の形になる」）を鎖の最後の 2 段として取り込んで、鎖の終点を主張の右辺の形（i K_1^n e^{-i2πμ/M} Ŷ_μ）まで延ばした。補題 1 を当てるときの W = Ẑ_μ^{(±)} も冒頭で明示した。段は減らしていない（増えている）。",
       ],
     },
   },
