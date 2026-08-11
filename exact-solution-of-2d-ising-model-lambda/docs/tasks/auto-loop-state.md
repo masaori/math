@@ -7,6 +7,21 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 133 は、tick 132 の「一次因子との積の先頭の係数は、もとの先頭の係数である」を
+  四層すべて突き合わせて修正不要と確認し、旧セクション 10h3d-c4b-d4b2c（取った根が既出の根と
+  相異なること）を 3 つの論法（残りの因子の値の非零性・積からの因子の取り出し・背理法本体）で
+  d4b2c1・d4b2c2・d4b2c3 へ割り直し、先頭の d4b2c1「一次因子との分解の残りの因子の、
+  その一次因子の根における値は零でない」（$w\in\mu_n$、$f=t^{\,n}+\widehat{-1}$、係数上界つきの
+  $B$ について $f=(t-\widehat{w})B$ ならば $\mathrm{aev}_{w}(B)\ne0$）を四層すべてで完了させた。**
+  本文は、因数定理の 2 つの仮定（係数上界・根の条件）を確かめて $f=(t-\widehat{w})g$ を作り、
+  一次因子の消去（d4b1）で $B=g$ を得て、商の値の非零性（d3e2）を写す適用の鎖である。
+  必要十分版は 2 つの分解の等式・左因子の消去・等しい元での値の書き換えだけを仮定し、
+  型に代数構造は一切不要（積は抽象の 2 項演算でよい）。検証は全通過
+  （構造化テキスト 263 ラベル・PDF 133 ページで未解決参照 0 件・検証と証明の対応 117 件・
+  SageMath 新設の `root-polynomial-remaining-factor-value-ne-zero`・`lake build`・
+  sorry 検査 661 件）。次に進めるのは d4b2c2（一次因子の積から 1 つの因子を先頭へ
+  取り出せること）である。
+
 - **2026-08-12 の tick 132 は、tick 131 の「一次因子との積の係数は、上の番号で零である」を
   四層すべて突き合わせて修正不要と確認し、d4b2b「一次因子との積の先頭の係数は、もとの先頭の
   係数である」を四層すべてで完了させた。** 本文は積の番号 $m+1$ の係数を開き、
@@ -1515,8 +1530,10 @@
 | 10h3d-c4b-d4b1L | 固有値の代数性 | 同主張の Lean 具体版と必要十分版 | done | 2026-08-12 の tick 130。具体版 `qbarPolyLinearFactorCancellation`、必要十分版 `poly_linear_factor_cancellation_necSuf`、導出 `qbarPolyLinearFactorCancellation_from_necSuf` |
 | 10h3d-c4b-d4b2a | 固有値の代数性 | 一次因子との積の係数は、上の番号で零であること（$k>m$ で $\mathrm{ac}_k(C)=0$ ならば $k>m+1$ で $\mathrm{ac}_k((t-\widehat{w})C)=0$。有限和の計算の鎖 1 本） | done | 2026-08-12 の tick 131 で四層すべて完了。主張 1 件 `claim_qbar_poly_linear_factor_coeff_bound`。SageMath は `qbar-poly-linear-factor-coeff-bound`。Lean 具体版 `qbarPolyLinearFactorCoeffBound`、必要十分版 `poly_linear_factor_coeff_bound_necSuf`（可換環で足りる。体・代数閉性は不要）、導出 `qbarPolyLinearFactorCoeffBound_from_necSuf`。帰納法本体（d4b2d）が一次因子を掛け重ねた積へ d4b1 の消去を当てるときの係数の仮定を供給する |
 | 10h3d-c4b-d4b2b | 固有値の代数性 | 一次因子との積の先頭の係数はもとの先頭の係数であること（$\mathrm{ac}_{m+1}((t-\widehat{w})C)=\mathrm{ac}_m(C)$。同種の計算の鎖 1 本） | done | 2026-08-12 の tick 132 で四層すべて完了。主張 1 件 `claim_qbar_poly_linear_factor_leading_coeff`。SageMath は `qbar-poly-linear-factor-leading-coeff`。Lean 具体版 `qbarPolyLinearFactorLeadingCoeff`、必要十分版 `poly_linear_factor_leading_coeff_necSuf`（可換環で足りる。体・代数閉性は不要）、導出 `qbarPolyLinearFactorLeadingCoeff_from_necSuf`。分解の帰納法（d4b2d）が商の先頭の係数 1 を保つために使う |
-| 10h3d-c4b-d4b2c | 固有値の代数性 | 取った根は既出の根と相異なること（$f=t^{\,n}+\widehat{-1}$ の分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ で、$g$ の根 $w$ は各 $w_i$ と異なる。背理法 1 本） | todo | $w=w_i$ と仮定すると、積を並べ替えて $f=(t-\widehat{w_i})h$ とし、d4b1 の消去で $h$ を因数定理の商（d3e1 により $K_n(w_i)$）と同定する。$\mathrm{aev}_{w_i}(h)$ は評価の乗法性から因子 $\mathrm{aev}_{w_i}(g)=0$ を含み零、一方 d3e2 の単根性から非零で矛盾 |
-| 10h3d-c4b-d4b2d | 固有値の代数性 | 分解を構成する帰納法本体（$j\le n$ について、相異なる $w_1,\dots,w_j\in\mu_n$ と係数上界 $n-j$・先頭の係数 1 の商 $g$ による分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ が存在する。$j$ についての帰納法 1 本） | todo | 一歩は、$j<n$ なら先頭の係数 1 から $g\ne0$・次数 1 以上を出し、代数閉であること（`def_algebraic_numbers`）で根 $w$ を取り、因数定理（`claim_qbar_factor_theorem`）で割り、d4b2a・d4b2b で係数上界とモニック性を保ち、d4b2c で相異なることを保つ。$j=n$ が下界 $\lvert\mu_n\rvert\ge n$ を与える（組み立ては d5） |
+| 10h3d-c4b-d4b2c1 | 固有値の代数性 | 一次因子との分解の残りの因子の、その一次因子の根における値は零でない（$w\in\mu_n$、$f=t^{\,n}+\widehat{-1}$、係数上界つきの $B$ について $f=(t-\widehat{w})B$ ならば $\mathrm{aev}_{w}(B)\ne0$。適用の鎖 1 本） | done | 2026-08-12 の tick 133 で四層すべて完了。因数定理の 2 仮定を確かめて $f=(t-\widehat{w})g$ を作り、d4b1 の消去で $B=g$、d3e2 の単根性で $\mathrm{aev}_w(g)\ne0$ を写す。必要十分版は 2 つの分解の等式・消去・値の書き換えだけを仮定し、型に代数構造は一切不要 |
+| 10h3d-c4b-d4b2c2 | 固有値の代数性 | 一次因子の積から 1 つの因子を先頭へ取り出せること（$(t-\widehat{w_1})\cdots(t-\widehat{w_j})$ の並べ替え。帰納法 1 本） | todo | 積の可換則・結合則による並べ替え。d4b2c3 が既出の根 $w_i$ の因子を先頭へ出すのに使う。分解の表し方（帰納的な積）は d4b2d の言明の形と合わせて決める |
+| 10h3d-c4b-d4b2c3 | 固有値の代数性 | 取った根は既出の根と相異なること（分解 $f=(t-\widehat{w_i})\,h$、$h=A\,g$、$\mathrm{aev}_{w}(g)=0$ ならば $w\ne w_i$。背理法 1 本） | todo | $w=w_i$ と仮定すると、評価の乗法性（def_qbar_poly_evaluation の約束）から $\mathrm{aev}_{w_i}(h)=\mathrm{aev}_{w_i}(A)\cdot\mathrm{aev}_{w_i}(g)=0$。一方 d4b2c1 から $\mathrm{aev}_{w_i}(h)\ne0$ で矛盾（$h$ の係数上界は d4b2a で保つ） |
+| 10h3d-c4b-d4b2d | 固有値の代数性 | 分解を構成する帰納法本体（$j\le n$ について、相異なる $w_1,\dots,w_j\in\mu_n$ と係数上界 $n-j$・先頭の係数 1 の商 $g$ による分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ が存在する。$j$ についての帰納法 1 本） | todo | 一歩は、$j<n$ なら先頭の係数 1 から $g\ne0$・次数 1 以上を出し、代数閉であること（`def_algebraic_numbers`）で根 $w$ を取り、因数定理（`claim_qbar_factor_theorem`）で割り、d4b2a・d4b2b で係数上界とモニック性を保ち、d4b2c2・d4b2c3 で相異なることを保つ。$j=n$ が下界 $\lvert\mu_n\rvert\ge n$ を与える（組み立ては d5） |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | todo | 組み立ての段。新しい論法は持たない見込み |
 | 10h3d-c4c | 固有値の代数性 | 1 の $L$ 乗根の全体にわたる冪の和の値（指数が $L$ の倍数なら元の個数、そうでなければ 0） | todo | 論法は「$w^{m}\ne1$ なる $w$ を取り、10h3d-c4a から $(w^{m}-1)S=0$ を出して $S=0$ を得る」1 本 |
 | 10h3d-d | 固有値の代数性 | シフト行列の固有空間たちが列ベクトルの全体を張ること（組み立て） | todo | 10h3d-a〜c を合わせるだけの段。新しい論法は持たない見込み |
@@ -1530,6 +1547,13 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 133）: 旧 d4b2c（取った根が既出の根と相異なること）は「残りの因子の値の
+  非零性」「積からの因子の取り出し（並べ替えの帰納法）」「背理法本体」の 3 つの論法を含むため
+  d4b2c1・d4b2c2・d4b2c3 へ割り直し、先頭の d4b2c1「一次因子との分解の残りの因子の、
+  その一次因子の根における値は零でない」を四層すべてで完了した。商の $K_n(w)$ への同定（d3e1）は
+  使わずに済む（d3e2 が同じ式の商について値の非零性を直接主張しているため）。必要十分版は
+  2 つの分解の等式・左因子の消去・値の書き換えだけを仮定し、型に代数構造は一切不要である。
 
 - 2026-08-12（tick 132）: d4b2b「一次因子との積の先頭の係数は、もとの先頭の係数である」を
   四層すべてで完了した。人手証明と SageMath は積の係数公式、上の番号の係数の零性、零元との積、
@@ -5069,6 +5093,12 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 133）: tick 132 の「一次因子との積の先頭の係数は、もとの先頭の係数である」の
+  本文・SageMath・Lean 具体版・必要十分版・導出を突き合わせた。本文の 4 段の鎖は SageMath の
+  段ごとの assertion（`qbar-poly-linear-factor-leading-coeff`）と 1 対 1 に対応し、Lean 具体版の
+  calc も同じ 4 段、必要十分版は同じ手順を可換環だけで通していた。sorry 検査への 3 件の登録、
+  本文の `lean` フィールド、本文末尾の済み一覧も揃っていた。修正は無かった。
 
 - 2026-08-12（tick 132）: tick 131 の「一次因子との積の係数は、上の番号で零である」の本文・
   SageMath・Lean 具体版・必要十分版・導出を突き合わせた。本文の準備 3 段と本体 6 段は

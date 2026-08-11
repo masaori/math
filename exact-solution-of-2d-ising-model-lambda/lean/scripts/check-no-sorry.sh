@@ -714,6 +714,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorLeadingCoeff
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_leading_coeff_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorLeadingCoeff_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialRemainingFactorValueNeZero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.remaining_factor_value_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialRemainingFactorValueNeZero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

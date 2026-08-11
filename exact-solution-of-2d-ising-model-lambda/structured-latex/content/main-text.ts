@@ -25693,6 +25693,131 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_polynomial_remaining_factor_value_ne_zero",
+    kind: "claim",
+    title: { text: "一次因子との分解の残りの因子の、その一次因子の根における値は零でない" },
+    labels: ["claim_root_polynomial_remaining_factor_value_ne_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-polynomial-remaining-factor-value-ne-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootPolynomialRemainingFactorValueNeZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.remaining_factor_value_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootPolynomialRemainingFactorValueNeZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、", math(String.raw`w\in\mu_n`), "（",
+        ref("def_root_of_unity_set"), "）を任意に取る。",
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`f:=t^{\,n}+\widehat{-1}\in\overline{\mathbb{Q}}[t]`),
+        "（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "）と、",
+        math(String.raw`B\in\overline{\mathbb{Q}}[t]`), " を「",
+        math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`n<k`),
+        " を満たすならば ", math(String.raw`\mathrm{ac}_k(B)=0`),
+        "」となるように取る。このとき、",
+      ]),
+      displayMath(String.raw`f=(t-\widehat{w})B\ \text{ならば}\ \mathrm{aev}_{w}(B)\neq0`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\mathrm{aev}_{w}`), " は ",
+        ref("def_qbar_poly_evaluation"), "、", math(String.raw`0`), " は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"),
+        "）の零元である）。これは、根の個数の下界の帰納法で、新しく取った根が既出の根と",
+        "相異なることを出すための道具である。既出の根 ", math(String.raw`w`),
+        " で分解の先頭の一次因子を取り出したとき、残りの因子 ", math(String.raw`B`),
+        " の ", math(String.raw`w`), " における値が零でないので、",
+        math(String.raw`B`), " の因子が根に持つ元は ", math(String.raw`w`),
+        " と一致できない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", ref("claim_qbar_factor_theorem"), " を ",
+        math(String.raw`f`), "、", math(String.raw`w`), "、",
+        math(String.raw`n`), " に当てるために、その 2 つの仮定を確かめる。",
+        "第 1 に、", math(String.raw`k\in\mathbb{N}`), " が ",
+        math(String.raw`n<k`), " を満たすとき ",
+        math(String.raw`\mathrm{ac}_k(f)=0`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(f)
+&=\mathrm{ac}_k(t^{\,n})+\mathrm{ac}_k(\widehat{-1})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
+&=0+\mathrm{ac}_k(\widehat{-1})
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{。}\ n<k\ \text{より}\ k\ne n)\\
+&=0+0
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{。}\ n<k\ \text{と}\ n\ge1\ \text{より}\ k\ge1)\\
+&=0
+&&(\because\ \text{零元との和})
+\end{aligned}`),
+      paragraph([
+        "第 2 に、", math(String.raw`\mathrm{aev}_{w}(f)=0`), " である。仮定より ",
+        math(String.raw`w\in\mu_{n}`), "、すなわち ", math(String.raw`w^{\,n}=1`),
+        " なので（", ref("def_root_of_unity_set"), "）、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(f)
+&=\mathrm{aev}_{w}(t^{\,n})+\mathrm{aev}_{w}(\widehat{-1})
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は和を保つ})\\
+&=w^{\,n}+\mathrm{aev}_{w}(\widehat{-1})
+&&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow})\\
+&=w^{\,n}+(-1)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\text{。}\ \mathrm{aev}_{w}(\widehat{a})=a)\\
+&=1+(-1)
+&&(\because\ w^{\,n}=1)\\
+&=0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`),
+      paragraph([
+        "そこで ", ref("claim_qbar_factor_theorem"), " の商を",
+      ]),
+      displayMath(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "と置くと（", math(String.raw`K_k(w)`), " は ",
+        ref("claim_qbar_poly_power_difference_factorization"), " の約束）、",
+        math(String.raw`f=(t-\widehat{w})g`), " である。また ",
+        ref("claim_qbar_factor_quotient_coeff_bound"), " より、",
+        math(String.raw`j\in\mathbb{N}`), " が ", math(String.raw`n\le j`),
+        " を満たすならば ", math(String.raw`\mathrm{ac}_j(g)=0`),
+        " であり、とくに ", math(String.raw`n<j`), " ならば ",
+        math(String.raw`\mathrm{ac}_j(g)=0`), " である。",
+      ]),
+      paragraph([
+        "本体を示す。まず一次因子との積の等式を作る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(t-\widehat{w})B
+&=f
+&&(\because\ \text{本主張の仮定}\ f=(t-\widehat{w})B)\\
+&=(t-\widehat{w})g
+&&(\because\ \blkref{claim_qbar_factor_theorem}\text{。準備の 2 つの検査による})
+\end{aligned}`),
+      paragraph([
+        "この等式と、", math(String.raw`B`), " の係数の仮定（本主張の仮定）および ",
+        math(String.raw`g`), " の係数の上界（準備）により、",
+        ref("claim_qbar_poly_linear_factor_cancellation"), " を ",
+        math(String.raw`B`), "、", math(String.raw`g`), "、",
+        math(String.raw`n`), " に当てることができ、",
+        math(String.raw`B=g`), " を得る。そこで値を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(B)
+&=\mathrm{aev}_{w}(g)
+&&(\because\ B=g)
+\end{aligned}`),
+      paragraph([
+        "終点は ", ref("claim_root_factor_quotient_value_ne_zero"),
+        " により零でない（同じ ", math(String.raw`n\ge1`), "・",
+        math(String.raw`w\in\mu_n`), "・同じ式の商 ", math(String.raw`g`),
+        " についての主張である）。ゆえに ",
+        math(String.raw`\mathrm{aev}_{w}(B)\neq0`),
+        " である。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25971,6 +26096,8 @@ w^{\,1}
           ref("claim_qbar_poly_linear_factor_coeff_bound"),
           "）、および一次因子との積の先頭の係数がもとの先頭の係数であること（",
           ref("claim_qbar_poly_linear_factor_leading_coeff"),
+          "）、および一次因子との分解の残りの因子のその根における値が零でないこと（",
+          ref("claim_root_polynomial_remaining_factor_value_ne_zero"),
           "）までは上で済んでいる。次に書くのは、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
