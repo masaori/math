@@ -22940,6 +22940,335 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_polynomial_ring",
+    kind: "definition",
+    title: { text: "代数的数を係数とする 1 変数多項式" },
+    labels: ["def_qbar_polynomial_ring"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarPoly"],
+    verification: ["sagemath/check/qbar-poly-power-difference-factorization"],
+    statement: [
+      paragraph([
+        "根の個数を数える場所を用意する。",
+        ref("def_second_polynomial_ring"),
+        " の不定元 ",
+        math(String.raw`t`),
+        " を同じ名前で使い、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を係数環とする ",
+        math(String.raw`t`),
+        " の多項式環を ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        " と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " に対して、",
+        math(String.raw`f`),
+        " の ",
+        math(String.raw`t^{k}`),
+        " の係数を ",
+        math(String.raw`\mathrm{ac}_k(f)\in\overline{\mathbb{Q}}`),
+        " と書く（",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " の係数を表す ",
+        math(String.raw`\mathrm{cf}_k`),
+        " とは別の記号にする。係数環が違うので同じ記号では書かない）。",
+        math(String.raw`\mathrm{ac}_k(f)\ne 0`),
+        " となる ",
+        math(String.raw`k`),
+        " は有限個であり、和と積は係数の言葉で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(f+g)&=\mathrm{ac}_k(f)+\mathrm{ac}_k(g)\\
+\mathrm{ac}_k(f\cdot g)&=\sum_{i=0}^{k}\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)
+\end{aligned}
+\qquad(f,g\in\overline{\mathbb{Q}}[t],\ k\in\mathbb{N})`),
+      paragraph([
+        "で与えられる。これは多項式環の演算の定義であって、証明すべきことではない。",
+        "冪は ",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        " と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`f^{0}:=1`),
+        "、",
+        math(String.raw`f^{k+1}:=f^{k}f`),
+        " で約束する（",
+        math(String.raw`1`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の積の単位元、すなわち ",
+        math(String.raw`\mathrm{ac}_0=1`),
+        " で他の係数が ",
+        math(String.raw`0`),
+        " の元である）。",
+        "この約束は ",
+        ref("def_root_of_unity_set"),
+        " で ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元に置いた約束と同じ形だが、住む環が違うので別に置く。",
+      ]),
+      paragraph([
+        "現れるのは代数的数、有限和、有限積だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_definition_qbar_constant_embedding",
+    kind: "definition",
+    title: { text: "代数的数を定数多項式として送る写像" },
+    labels: ["def_qbar_constant_embedding"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarConst"],
+    verification: ["sagemath/check/qbar-poly-power-difference-factorization"],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\widehat{\ \cdot\ }:\overline{\mathbb{Q}}\to\overline{\mathbb{Q}}[t]`),
+        " を、",
+        math(String.raw`a\in\overline{\mathbb{Q}}`),
+        " に対して ",
+        math(String.raw`\mathrm{ac}_0(\widehat{a})=a`),
+        " かつ ",
+        math(String.raw`k\ge1`),
+        " で ",
+        math(String.raw`\mathrm{ac}_k(\widehat{a})=0`),
+        " となる ",
+        ref("def_qbar_polynomial_ring"),
+        " の元 ",
+        math(String.raw`\widehat{a}`),
+        " を返す写像として定める。",
+      ]),
+      paragraph([
+        "係数の言葉で書いた和と積の定義（",
+        ref("def_qbar_polynomial_ring"),
+        "）から、",
+        math(String.raw`a,b\in\overline{\mathbb{Q}}`),
+        " について ",
+        math(String.raw`\widehat{a+b}=\widehat{a}+\widehat{b}`),
+        "、",
+        math(String.raw`\widehat{a\,b}=\widehat{a}\,\widehat{b}`),
+        "、",
+        math(String.raw`\widehat{1}=1`),
+        "、",
+        math(String.raw`\widehat{0}=0`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        "係数の集合の元 ",
+        math(String.raw`a`),
+        " と、それを定数として送った多項式 ",
+        math(String.raw`\widehat{a}`),
+        " を同じ記号では書かない（",
+        ref("def_second_constant_embedding"),
+        " と同じ約束である。",
+        "同一視をせず、行き来はこの写像だけを通る）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_poly_power_difference_factorization",
+    kind: "claim",
+    title: {
+      text: "不定元と定数の冪の差は、その 2 元の差を因子に持つ",
+    },
+    labels: ["claim_qbar_poly_power_difference_factorization"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowerDifferenceFactorization",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_difference_factorization_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowerDifferenceFactorization_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-poly-power-difference-factorization"],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取り、",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。",
+        ref("def_qbar_polynomial_ring"),
+        " の元 ",
+        math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`),
+        " を ",
+        math(String.raw`n`),
+        " についての次の約束で定める（",
+        math(String.raw`\widehat{w}`),
+        " は ",
+        ref("def_qbar_constant_embedding"),
+        " による定数多項式である）。",
+      ]),
+      displayMath(
+        String.raw`K_{0}(w):=0,\qquad K_{n+1}(w):=K_{n}(w)\,\widehat{w}+t^{\,n}`,
+      ),
+      paragraph([
+        "このとき",
+      ]),
+      displayMath(String.raw`(t-\widehat{w})\,K_{n}(w)=t^{\,n}-\widehat{w}^{\,n}`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " を固定する。",
+        "以下の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        "（",
+        ref("def_qbar_polynomial_ring"),
+        "）の中で行う。",
+      ]),
+      paragraph([
+        "準備。任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`t\,t^{k}=t^{k}t`),
+        " が成り立つ（冪の約束（",
+        ref("def_qbar_polynomial_ring"),
+        "）が与えるのは ",
+        math(String.raw`t^{k+1}=t^{k}t`),
+        " の向きだけなので、",
+        math(String.raw`t\,t^{k}`),
+        " をこれへ結び付けるにはこの等式が要る）。",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t\,t^{0}&=t\cdot 1
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{0}=1)\\
+&=t
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
+&=1\cdot t
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
+&=t^{0}t
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{0}=1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`t\,t^{k}=t^{k}t`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{k+1}=t^{k}t)\\
+&=\bigl(t\,t^{k}\bigr)t
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則})\\
+&=\bigl(t^{k}t\bigr)t
+&&(\because\ \text{帰納法の仮定})\\
+&=t^{k+1}t
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{k+1}=t^{k}t)
+\end{aligned}`),
+      paragraph([
+        "以下、主張を ",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(t-\widehat{w})\,K_{0}(w)&=(t-\widehat{w})\cdot 0
+&&(\because\ K_{0}(w)=0\ \text{の約束})\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の零元})\\
+&=1-1
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の加法の逆元})\\
+&=t^{0}-1
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{0}=1)\\
+&=t^{0}-\widehat{w}^{\,0}
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ \widehat{w}^{\,0}=1)
+\end{aligned}`),
+      paragraph([
+        "一歩（",
+        math(String.raw`n`),
+        " から ",
+        math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`(t-\widehat{w})\,K_{n}(w)=t^{\,n}-\widehat{w}^{\,n}`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(t-\widehat{w})\,K_{n+1}(w)&=(t-\widehat{w})\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
+&&(\because\ K_{n+1}(w)\ \text{の約束})\\
+&=(t-\widehat{w})\bigl(K_{n}(w)\,\widehat{w}\bigr)+(t-\widehat{w})t^{\,n}
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&=\bigl((t-\widehat{w})K_{n}(w)\bigr)\widehat{w}+(t-\widehat{w})t^{\,n}
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則})\\
+&=\bigl(t^{\,n}-\widehat{w}^{\,n}\bigr)\widehat{w}+(t-\widehat{w})t^{\,n}
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n}\widehat{w}\bigr)+(t-\widehat{w})t^{\,n}
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+(t-\widehat{w})t^{\,n}
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ \widehat{w}^{\,n+1}=\widehat{w}^{\,n}\widehat{w})\\
+&=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t\,t^{\,n}-\widehat{w}\,t^{\,n}\bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t^{\,n}t-\widehat{w}\,t^{\,n}\bigr)
+&&(\because\ \text{準備の等式}\ t\,t^{\,n}=t^{\,n}t)\\
+&=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t^{\,n+1}-\widehat{w}\,t^{\,n}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{\,n+1}=t^{\,n}t)\\
+&=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t^{\,n+1}-t^{\,n}\widehat{w}\bigr)
+&&(\because\ t\ \text{と}\ \widehat{w}\ \text{が可換であること})\\
+&=t^{\,n+1}-\widehat{w}^{\,n+1}
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の加法の結合則と可換則により}\ t^{\,n}\widehat{w}\ \text{が相殺する})
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、すべての ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "第 10 の等号で使った ",
+        math(String.raw`\widehat{w}\,t^{\,n}=t^{\,n}\widehat{w}`),
+        " は、係数の言葉で書いた積の定義（",
+        ref("def_qbar_polynomial_ring"),
+        "）と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の積の可換則から出る。",
+        "係数どうしの積が可換なら多項式どうしの積も可換だからである。",
+      ]),
+      paragraph([
+        "この主張は ",
+        ref("claim_qbar_power_difference_factorization"),
+        "（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の 2 元についての同じ等式）と同じ鎖であり、住む環だけが ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " から ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " へ変わっている。",
+        "同じ鎖を 2 度書いているのは、人手証明を一般の環へ持ち上げないという規則による",
+        "（持ち上げるのは Lean の必要十分版だけで、そこでは 2 つは同じ 1 本の定理の別々の特殊化である）。",
+      ]),
+      paragraph([
+        "これは、",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        " が ",
+        math(String.raw`w`),
+        " を根に持つとき ",
+        math(String.raw`f`),
+        " が ",
+        math(String.raw`(t-\widehat{w})`),
+        " を因子に持つこと（因数定理）を示すための足場である。",
+        "そこでは ",
+        math(String.raw`f`),
+        " を係数と冪の有限和に分け、各項へこの等式を当てて ",
+        math(String.raw`(t-\widehat{w})`),
+        " をくくり出す。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

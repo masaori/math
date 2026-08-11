@@ -627,6 +627,8 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_difference_factorization_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowerDifferenceFactorization
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowerDifferenceFactorization_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
