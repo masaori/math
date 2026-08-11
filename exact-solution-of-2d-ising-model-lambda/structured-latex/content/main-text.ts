@@ -24592,6 +24592,109 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_subset_card_bound",
+    kind: "claim",
+    title: { text: "1 の冪根の全体の有限部分集合の元の個数は指数を超えない" },
+    labels: ["claim_root_of_unity_subset_card_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-of-unity-subset-card-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnitySubsetCardLe",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_of_unity_subset_card_le_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnitySubsetCardLe_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、有限集合 ", math(String.raw`s\subset\overline{\mathbb{Q}}`),
+        " が「", math(String.raw`w\in s`), " ならば ", math(String.raw`w\in\mu_{n}`),
+        "」を満たすとする（", math(String.raw`\mu_{n}`), " は ", ref("def_root_of_unity_set"),
+        "）。このとき ", math(String.raw`\lvert s\rvert\le n`), " である。",
+      ]),
+      paragraph([
+        "仮定 ", math(String.raw`n\ge1`), " は外せない。",
+        math(String.raw`n=0`), " のときは ", math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
+        "（", ref("def_root_of_unity_set"), "）なので、1 つの元だけからなる有限部分集合が反例になる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", ref("def_qbar_polynomial_ring"), " の元",
+      ]),
+      displayMath(String.raw`f:=t^{\,n}+\widehat{-1}\ \in\overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "を置く（", math(String.raw`t^{\,n}`), " は ", ref("def_qbar_polynomial_ring"),
+        " の冪の約束、", math(String.raw`\widehat{-1}`), " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の元 ", math(String.raw`-1`), " を ", ref("def_qbar_constant_embedding"),
+        " で定数として送ったものである）。",
+        ref("claim_qbar_distinct_roots_card_bound"),
+        " を ", math(String.raw`f`), "、", math(String.raw`s`), "、", math(String.raw`n`),
+        " に当てるために、その 3 つの仮定を順に確かめる。",
+      ]),
+      paragraph(["第 1 に ", math(String.raw`f\ne0`), " である。番号 0 の係数を計算すると、"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0(f)
+&=\mathrm{ac}_0(t^{\,n})+\mathrm{ac}_0(\widehat{-1})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
+&=0+\mathrm{ac}_0(\widehat{-1})
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{。}\ n\ge1\ \text{より}\ 0\ne n)\\
+&=0+(-1)
+&&(\because\ \blkref{def_qbar_constant_embedding})\\
+&=-1
+&&(\because\ \text{零元との和})
+\end{aligned}`),
+      paragraph([
+        "であり、体 ", math(String.raw`\overline{\mathbb{Q}}`), " では ",
+        math(String.raw`-1\ne0`), " である（もし ", math(String.raw`-1=0`),
+        " なら両辺に 1 を足して ", math(String.raw`0=1`),
+        " となり、", ref("def_algebraic_numbers"), " の体であることに反する）。",
+        "零元はすべての係数が零の族なので（", ref("def_qbar_polynomial_ring"), "）、",
+        math(String.raw`f\ne0`), " である。",
+      ]),
+      paragraph([
+        "第 2 に、", math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`n<k`),
+        " を満たすとき ", math(String.raw`\mathrm{ac}_k(f)=0`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(f)
+&=\mathrm{ac}_k(t^{\,n})+\mathrm{ac}_k(\widehat{-1})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
+&=0+\mathrm{ac}_k(\widehat{-1})
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{。}\ n<k\ \text{より}\ k\ne n)\\
+&=0+0
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{。}\ n<k\ \text{と}\ n\ge1\ \text{より}\ k\ge1)\\
+&=0
+&&(\because\ \text{零元との和})
+\end{aligned}`),
+      paragraph([
+        "第 3 に、", math(String.raw`w\in s`), " ならば ",
+        math(String.raw`\mathrm{aev}_{w}(f)=0`), " である。仮定より ",
+        math(String.raw`w\in\mu_{n}`), "、すなわち ", math(String.raw`w^{\,n}=1`),
+        " なので（", ref("def_root_of_unity_set"), "）、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(f)
+&=\mathrm{aev}_{w}(t^{\,n})+\mathrm{aev}_{w}(\widehat{-1})
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は和を保つ})\\
+&=w^{\,n}+\mathrm{aev}_{w}(\widehat{-1})
+&&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow})\\
+&=w^{\,n}+(-1)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\text{。}\ \mathrm{aev}_{w}(\widehat{a})=a)\\
+&=1+(-1)
+&&(\because\ w^{\,n}=1)\\
+&=0
+&&(\because\ \text{加法の逆元})
+\end{aligned}`),
+      paragraph([
+        "である。以上の 3 つにより ", ref("claim_qbar_distinct_roots_card_bound"),
+        " を ", math(String.raw`f`), "、", math(String.raw`s`), "、", math(String.raw`n`),
+        " に当てることができ、", math(String.raw`\lvert s\rvert\le n`),
+        " を得る。この議論に実数体も複素数体も現れず、代数的数と有限集合の中で閉じている。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -24835,8 +24938,19 @@ f
           ref("claim_qbar_factor_quotient_other_root_zero"),
           "）、および零でない多項式の相異なる根が係数の上界を超えないこと（",
           ref("claim_qbar_distinct_roots_card_bound"),
+          "）、および 1 の冪根の全体の有限部分集合の元の個数が指数を超えないこと（",
+          ref("claim_root_of_unity_subset_card_bound"),
           "）までは上で済んでいる。",
-          "次に書くのは、この根の個数の上界を用いて ",
+          "次に書くのは、",
+          math(String.raw`\mu_n`),
+          " 自身が有限集合で元の個数が ",
+          math(String.raw`n`),
+          " 以下であること（有限部分集合の上界からの背理法）、",
+          "因数定理の商の根における値が零でないこと（単根性）、",
+          math(String.raw`t^{\,n}+\widehat{-1}`),
+          " が ",
+          math(String.raw`n`),
+          " 個の相異なる根を持つこと（下界）、それらを合わせて ",
           math(String.raw`\mu_n`),
           " がちょうど ",
           math(String.raw`n`),

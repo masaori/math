@@ -666,6 +666,12 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientOtherRootZero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_quotient_other_root_zero_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientOtherRootZero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarDistinctRootsCardLe
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.distinct_roots_card_le_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarDistinctRootsCardLe_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnitySubsetCardLe
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_of_unity_subset_card_le_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnitySubsetCardLe_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
