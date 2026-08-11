@@ -34,8 +34,8 @@ export default defineBlocks([
 [H_2, \hat{Z}_\mu^{(-)}]
 &= -2 \hat{Y}_\mu \\
 [H_2, \hat{Z}_\mu^{(+)}]
-&= -2 \hat{Y}_\mu + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
-   \left(-2\, e^{-i \frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right) \\
+&= -2 \hat{Y}_\mu + \frac{4}{M}\sum_{j\in\{1,\dots,M\}}
+   e^{-i \frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j \\
 [H_2, \hat{Y}_\mu]
 &= 2 \hat{Z}_\mu^{(-)}
 \end{aligned}`,
@@ -549,20 +549,50 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
         String.raw`\begin{aligned}
 &\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-[\hat{Z}_\mu^{(+)},\hat{Z}_{-j}^{(-)}]_+\right)\hat{Y}_j \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(
-   -\overbrace{2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_{-j}^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)\hat{Y}_j \\
+   -\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)\right)\hat{Y}_j
+&&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z}^{(\pm)},\hat{Z}^{(\mp)}]_+\ \text{の値を}\ \nu=-j\ \text{で使う})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(
+   -2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+   + 4\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Y}_j
+&&(\because\ \text{括弧の展開（負号を両項へ配る）と複素数の四則})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)\right) \\
+   + 4\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)
+&&(\because\ \text{分配則と単位行列との積})\\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j\right)
+   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(4\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)
+&&(\because\ \text{項ごとの和の有限和は有限和どうしの和})\\
+&= -2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}}\hat{Y}_j
+   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j
+&&(\because\ \text{$\delta^M$ の定義とスカラーの整理})\\
 &= -2\begin{cases}
 \hat{Y}_M & (\mu = -M) \\
 \hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
 \hat{Y}_\mu & (1 \leq \mu \leq M)
 \end{cases}
-   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right) \\
+   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j
+&&(\because\ \text{準備 2})\\
 &= -2\,\hat{Y}_\mu
-   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)
+   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j
+&&(\because\ \text{準備 3}\ \text{（$\mu=-M$ では $\nu=0,-M$ として 2 度、$-M+1\leq\mu\leq-1$ では $\nu=\mu$ として 1 度当てる）})
 \end{aligned}`,
       ),
+      paragraph([
+        "第 2 項は消えない。",
+        math(String.raw`\hat{Y}_j`),
+        " の定義を入れて ",
+        math(String.raw`j`),
+        " について和を取ると ",
+        math(String.raw`4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1`),
+        " になる（",
+        ref("why_008_applies_only_to_minus_sector"),
+        " が ",
+        math(String.raw`\left[H_2,\hat{Z}_\mu^{(+)}\right] = -2\hat{Y}_\mu + 4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1`),
+        " として使っている形である）。",
+        "すなわち ",
+        math(String.raw`[H_2, \hat{Z}_\mu^{(+)}] \neq -2\hat{Y}_\mu`),
+        " であり、(4.1) と同じ形にはならない。",
+      ]),
       paragraph([
         "(5) ",
         math(String.raw`[H_2, \hat{Y}_\mu]`),
@@ -602,9 +632,9 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の全計算過程を各ステップ忠実に翻訳。statement に原文にある [H2, hatZ^(+)] の関係式を追加した。",
         "(1) [H1, hatZ^(±)] の式変形を一続きの鎖へ書き換えた（2026-08-11）。H_1 の表式を overbrace の地の文で示していたのをやめて行末の根拠へ移し、j の決定・Ŷ と指数の M ずれを準備として先に置き、原文が式のあとの日本語で述べていた最後の等号（場合分けから 2 e^{-i2πμ/M} Ŷ_μ へ）も同じ鎖の中に入れた。全 12 段へ根拠を付けた。段は減らしていない（増えている）。",
-        "(4) [H2, hatZ^(±)] の符号によらない共通部分と (4.1)（Ẑ^(-) の場合）を一続きの鎖へ書き換えた（2026-08-11）。H_2 の表式を overbrace の地の文で示していたのをやめて行末の根拠へ移し、Ẑ と Ŷ の入れ替え・和に残る j の決定・Ŷ の M 周期性を準備として先に置き、全段（共通部分 8 段、(4.1) 5 段）に根拠を付けた。段は減らしていない（増えている）。(4.2) はまだ書き換えていない（下記の要確認事項があるため）。",
-        "(4.2) [H2, hatZ^(+)] の第 2 段で、-[Ẑ_μ^(+), Ẑ_{-j}^(-)]_+ を「-2Mδ I + (-2e^{-i2π(-j+μ)/M}·2I)」と展開しているが、反交換子の値（007 の claim「Ẑ, Ŷ の反交換関係」の第 2 式）は [Ẑ^(±),Ẑ^(∓)]_+ = 2Mδ I + (-2e^{...}·2I) なので、その符号を反転した -2Mδ I + (+2e^{...}·2I) にならなければならない（第 2 項の符号が合わない）。さらに次の段で係数の ·2 が落ちて -2e^{...}Ŷ_j になっている。すなわち第 2 項は係数と符号の両方が食い違う。原文（_old/typst）に当たって、原文側の誤りか移行時の誤りかを判定してから直す。忠実性のため現時点では原文どおりの式を残している。",
-        "(4.2) の食い違いについて、原本（_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ の 3.2 の節）に当たって判定した（2026-08-11）。**原本にも同じ式が書かれており、移行時の誤りではなく原文側の誤りである。** 正しい値は次のとおり: -[Ẑ_μ^(+), Ẑ_{-j}^(-)]_+ = -(2Mδ^M_{-j+μ,0} I + (-2e^{-i2π(-j+μ)/M}·2I)) = -2Mδ^M_{-j+μ,0} I + 4e^{-i2π(-j+μ)/M} I であり、したがって [H_2, Ẑ_μ^(+)] = -2Ŷ_μ + (4/M)Σ_{j=1}^{M} e^{-i2π(-j+μ)/M} Ŷ_j となる（原文は第 2 項を -(2/M)Σ_j e^{...}Ŷ_j としており、符号と係数の両方が違う）。残った第 2 項は消えない（Ŷ_j の定義を入れて j について和を取ると M e^{-i2πμ/M} Y_1 になる）。**この主張の statement 自体が誤った値を載せているので、直すときは statement と (4.2) の両方を直し、さらにこの主張を引いている 012_free_energy・013_even_sector_modes・014_even_sector_T_action の 6 箇所が [H_2, Ẑ^(+)] の値に依存していないかを確かめること。** 書き方の統一（中身を変えない作業）の枠を超えるので、判定だけを記録して式は原文どおりに残してある。",
+        "(4) [H2, hatZ^(±)] の符号によらない共通部分と (4.1)（Ẑ^(-) の場合）を一続きの鎖へ書き換えた（2026-08-11）。H_2 の表式を overbrace の地の文で示していたのをやめて行末の根拠へ移し、Ẑ と Ŷ の入れ替え・和に残る j の決定・Ŷ の M 周期性を準備として先に置き、全段（共通部分 8 段、(4.1) 5 段）に根拠を付けた。段は減らしていない（増えている）。",
+        "(4.2) [H2, hatZ^(+)] は、原文の式が誤っていたので**中身を直したうえで**一続きの鎖へ書き換えた（2026-08-11）。誤りは第 2 段で、-[Ẑ_μ^(+), Ẑ_{-j}^(-)]_+ を展開するとき負号を第 2 項へ配っておらず（反交換子の値は 007 の claim「Ẑ, Ŷ の反交換関係」の第 2 式 [Ẑ^(±),Ẑ^(∓)]_+ = 2Mδ I + (-2e^{...}·2I) なので、負号を付けた値は -2Mδ I + 4e^{...} I である）、さらに次の段で係数の ·2 が落ちていた。原本（_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ の 3.2 の節）にも同じ式が書かれており、移行時の誤りではなく原文側の誤りである。正しい結論は [H_2, Ẑ_μ^(+)] = -2Ŷ_μ + (4/M)Σ_{j=1}^{M} e^{-i2π(-j+μ)/M} Ŷ_j であり、statement もこの値へ直した（原文は第 2 項を -(2/M)Σ_j e^{...}Ŷ_j としており、符号と係数の両方が違っていた）。鎖は 7 段で全段に根拠を付けてある。",
+        "この修正が下流を壊さないことを確かめた（2026-08-11）。この主張を引いているのは 012_free_energy・013_even_sector_modes・014_even_sector_T_action の 6 箇所で、いずれも (C) [H_2, Ẑ_μ^(-)] = -2Ŷ_μ の側だけを使っており、誤っていた [H_2, Ẑ_μ^(+)] の値には依存していない。むしろ 013 の claim「008 章が (-) セクターにしか使えない理由」は [H_2, Ẑ_μ^(+)] = -2Ŷ_μ + 4e^{-i2πμ/M} Y_1 を独立に導いており、これは今回直した値と一致する（Ŷ_j の定義を入れて j について和を取ると (4/M)Σ_j e^{-i2π(-j+μ)/M} Ŷ_j = 4e^{-i2πμ/M} Y_1）。つまり修正前は 008 と 013 が食い違っていた。",
         "(2) [H1, hatZ^(∓)] の最終段で原文は第2項（-4/M e^{-i2πμ/M} Σ_k Y_k M δ^M_{(k,0)}）を 0 として結論しているが、この項は一般に消えず（k=M で δ=1）、原文の該当ステップの正当化は不完全。忠実性のため原文どおり `- 0` を残した。",
       ],
     },
