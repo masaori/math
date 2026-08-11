@@ -55,6 +55,14 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 $g=\sum_k\widehat{\mathrm{ac}_k(f)}K_k(w)$ の係数が $n$ 以上で零であること。`lake build` と
 sorry 検査 600 件を含む検証一式は全通過した。
 
+2026-08-11 の tick 112 では、「因数定理の商 $g=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)$
+の係数は $n$ 以上の番号で零である」を四層すべてで完了した。論法は有限和の係数へ前段の
+係数上界を当てる鎖 1 本（11 段）で、根の条件 $\mathrm{aev}_{w}(f)=0$ は使わない。
+必要十分版は係数環が半環で足りることに加え、係数の列が任意の写像 $c:\mathbb{N}\to R$ で
+よい（多項式の係数であることを使わない）ことを示す。本文のラベルは 245 件、
+検証と証明の対応は 99 件、sorry 検査の登録は 607 件。次は 10h3d-c4b-c3
+（相異なる根における商の値が零であること）。
+
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
 詳細は [lean/README.md](lean/README.md)。

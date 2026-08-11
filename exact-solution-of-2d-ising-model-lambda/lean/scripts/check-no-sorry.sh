@@ -656,6 +656,13 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_diff_sum_coeff_bound_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowDiffSum_eq_coeffBound_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffSumCoeffBound_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyCoeffRangeSum
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyCoeffConstMul
+  Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientCoeffBound
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.coeff_range_sum_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.coeff_C_mul_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_quotient_coeff_bound_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientCoeffBound_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

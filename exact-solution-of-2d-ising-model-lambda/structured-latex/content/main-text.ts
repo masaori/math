@@ -24285,6 +24285,129 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_factor_quotient_coeff_bound",
+    kind: "claim",
+    title: { text: "因数定理の商の係数は、上界の番号以上で零である" },
+    labels: ["claim_qbar_factor_quotient_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-factor-quotient-coeff-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientCoeffBound",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_quotient_coeff_bound_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientCoeffBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"),
+        " の元 ",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        " と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を、「",
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k>n`),
+        " を満たすならば ",
+        math(String.raw`\mathrm{ac}_k(f)=0`),
+        " である」を満たすように取り（",
+        ref("claim_qbar_poly_monomial_decomposition"),
+        " と同じ取り方である）、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。",
+        ref("claim_qbar_factor_theorem"),
+        " が構成した商と同じ式で",
+      ]),
+      displayMath(
+        String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`\widehat{\mathrm{ac}_k(f)}`),
+        " は係数を ",
+        ref("def_qbar_constant_embedding"),
+        " の定数として送る写像で送った定数多項式、",
+        math(String.raw`K_k(w)`),
+        " は ",
+        ref("claim_qbar_poly_power_difference_factorization"),
+        " の約束）。このとき、",
+        math(String.raw`j\in\mathbb{N}`),
+        " が ",
+        math(String.raw`n\le j`),
+        " を満たすならば",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{j}(g)=0`),
+      paragraph([
+        "が成り立つ。",
+        ref("claim_qbar_factor_theorem"),
+        " が商を構成するときに使った根の条件 ",
+        math(String.raw`\mathrm{aev}_{w}(f)=0`),
+        " は、この主張では使わない（商の係数がどこで尽きるかは、",
+        math(String.raw`w`),
+        " が根であるかによらない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ",
+        ref("def_qbar_polynomial_ring"),
+        " の ",
+        math(String.raw`\mathrm{ac}_{j}`),
+        " であり、値の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の中で行う。",
+        math(String.raw`n\le j`),
+        " を満たす ",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る。",
+        math(String.raw`0\le k\le n`),
+        " を満たす各 ",
+        math(String.raw`k`),
+        " について ",
+        math(String.raw`k\le n\le j`),
+        " すなわち ",
+        math(String.raw`k\le j`),
+        " が従うことを、鎖の中で使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{j}(g)
+&=\mathrm{ac}_{j}\Bigl(\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\Bigr)
+&&(\because\ g\ \text{の定め方})\\
+&=\sum_{k=0}^{n}\mathrm{ac}_{j}\bigl(\widehat{\mathrm{ac}_k(f)}\,K_k(w)\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数。有限和へ繰り返し当てる})\\
+&=\sum_{k=0}^{n}\ \sum_{i=0}^{j}\mathrm{ac}_{i}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j-i}\bigl(K_k(w)\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数。各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\Bigl(\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
++\sum_{i=1}^{j}\mathrm{ac}_{i}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j-i}\bigl(K_k(w)\bigr)\Bigr)
+&&(\because\ \text{有限和から}\ i=0\ \text{の項を分ける。各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\Bigl(\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
++\sum_{i=1}^{j}0\cdot\mathrm{ac}_{j-i}\bigl(K_k(w)\bigr)\Bigr)
+&&(\because\ 1\le i\ \text{の各項では}\ \blkref{def_qbar_constant_embedding}\ \text{の正次数の係数が零。各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\Bigl(\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
++\sum_{i=1}^{j}0\Bigr)
+&&(\because\ \text{零を掛けると零。各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元。有限和の各項へ繰り返し当てる})\\
+&=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \mathrm{ac}_{0}(\widehat{a})=a\ \text{を各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot 0
+&&(\because\ \text{各項で}\ k\le j\ \text{なので}\ \blkref{claim_qbar_pow_diff_sum_coeff_bound}\ \text{を各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}0
+&&(\because\ \text{零を掛けると零。各項へ同時に当てる})\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元。有限和へ繰り返し当てる})
+\end{aligned}`),
+      paragraph([
+        "終点は主張の右辺である。この主張は、零でない多項式の相異なる根の個数を次数で抑える帰納法の一歩で、",
+        "商の係数の上界を 1 つ下げるために使う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
