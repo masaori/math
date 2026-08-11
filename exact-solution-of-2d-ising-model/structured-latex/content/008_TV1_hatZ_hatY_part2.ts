@@ -1504,14 +1504,30 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
       displayMath(
         String.raw`\lambda^2 - 2\lambda\gamma_1(\theta_\mu) + \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 0`,
       ),
-      paragraph(["であり、2 次方程式の解の公式より"]),
+      paragraph([
+        "である。以下の鎖の第 4 の等号では、根号の中の ",
+        math(String.raw`4`),
+        " が正の実数で偏角が ",
+        math(String.raw`0`),
+        " であることから ",
+        ref("condition_of_commutativity_of_sqrt_and_product"),
+        " を用いる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \lambda
-&= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{(-2\gamma_1(\theta_\mu))^2 - 4(\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2} \\
-&= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{4\gamma_1(\theta_\mu)^2 - 4(\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2} \\
-&= \frac{2\gamma_1(\theta_\mu) \pm 2\sqrt{\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2} \\
+&= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{(-2\gamma_1(\theta_\mu))^2 - 4(\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2}
+&& (\because\ \text{2 次方程式の解の公式。係数は}\ a=1,\ b=-2\gamma_1(\theta_\mu),\ c=\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)) \\
+&= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{4\gamma_1(\theta_\mu)^2 - 4(\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2}
+&& (\because\ (-2\gamma_1(\theta_\mu))^2 = 4\gamma_1(\theta_\mu)^2\ \text{（負元の 2 乗は 2 乗、積の 2 乗）}) \\
+&= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{4\bigl(\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))\bigr)}}{2}
+&& (\because\ \text{分配則で}\ 4\ \text{をくくる}) \\
+&= \frac{2\gamma_1(\theta_\mu) \pm 2\sqrt{\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2}
+&& (\because\ \text{「sqrt と積が可換になる条件」より}\ \sqrt{4z}=\sqrt{4}\,\sqrt{z}=2\sqrt{z}) \\
+&= \gamma_1(\theta_\mu) \pm \sqrt{\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}
+&& (\because\ \text{分子の各項と分母を}\ 2\ \text{で約分}) \\
 &= \gamma_1(\theta_\mu) \pm \sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
+&& (\because\ \text{同じ元}\ \gamma_1(\theta_\mu)^2\ \text{を引いて消す})
 \end{aligned}`,
       ),
       paragraph([
