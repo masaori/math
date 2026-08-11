@@ -140,12 +140,24 @@ export default defineBlocks([
         " に適用すると、",
       ]),
       displayMath(
-        String.raw`\phi_{\mathrm{polar}}(t,0) =
-\begin{cases}
-[(\sqrt{t^2}^{\,(\mathbb{R}_{\geq 0})},\ \arctan(0/t))]_{\sim} = [(t,\ 0)]_{\sim} & (t > 0) \\
-[(\sqrt{t^2}^{\,(\mathbb{R}_{\geq 0})},\ \arctan(0/t) + \pi)]_{\sim} = [(-t,\ \pi)]_{\sim} & (t < 0) \\
-[(0,\ 0)]_{\sim} & (t = 0)
-\end{cases}`,
+        String.raw`\begin{aligned}
+t>0:\qquad
+\phi_{\mathrm{polar}}(t,0)
+&=[(\sqrt{t^2}^{\,(\mathbb{R}_{\geq 0})},\ \arctan(0/t))]_{\sim}
+&& (\because\ \text{極座標表示の定義の}\ x>0\ \text{の場合})\\
+&=[(t,\ 0)]_{\sim}
+&& (\because\ \sqrt{t^2}^{\,(\mathbb{R}_{\geq 0})}=t,\ \arctan 0=0)\\[3pt]
+t<0:\qquad
+\phi_{\mathrm{polar}}(t,0)
+&=[(\sqrt{t^2}^{\,(\mathbb{R}_{\geq 0})},\ \arctan(0/t)+\pi)]_{\sim}
+&& (\because\ \text{極座標表示の定義の}\ x<0,\ y\geq0\ \text{の場合})\\
+&=[(-t,\ \pi)]_{\sim}
+&& (\because\ \sqrt{t^2}^{\,(\mathbb{R}_{\geq 0})}=-t,\ \arctan 0=0)\\[3pt]
+t=0:\qquad
+\phi_{\mathrm{polar}}(t,0)
+&=[(0,\ 0)]_{\sim}
+&& (\because\ \text{極座標表示の定義の}\ (x,y)=(0,0)\ \text{の場合})
+\end{aligned}`,
       ),
       paragraph([
         "（",
