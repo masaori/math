@@ -25168,6 +25168,60 @@ n
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_repeated_sum_ne_zero",
+    kind: "claim",
+    title: { text: "零でない代数的数を正の個数だけ足した有限和は零でない" },
+    labels: ["claim_qbar_repeated_sum_ne_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-repeated-sum-ne-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarRepeatedSumNeZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.repeated_sum_ne_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarRepeatedSumNeZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`a\ne0`), " を満たすとし、",
+        math(String.raw`n\in\mathbb{N}`), " が ",
+        math(String.raw`n\geq1`), " を満たすとする。このとき体 ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の中で",
+      ]),
+      displayMath(String.raw`\sum_{i:\ i<n}a\neq0`),
+      paragraph([
+        "が成り立つ。左辺は、", math(String.raw`i<n`),
+        " を満たす自然数 ", math(String.raw`i`),
+        " の全体にわたる、同じ元 ", math(String.raw`a`), " を ",
+        math(String.raw`n`), " 個足す有限和である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["背理法で示す。", math(String.raw`\sum_{i:\ i<n}a=0`), " と仮定する。"]),
+      paragraph([ref("claim_qbar_repeated_sum_factorization"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a
+&=\sum_{i:\ i<n}a
+&&(\because\ \text{同じ元の有限和は、単位元の有限和との積である})\\
+&=0
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "また ", math(String.raw`n\geq1`), " であるから、",
+        ref("claim_qbar_unit_sum_ne_zero"), " より ",
+        math(String.raw`\sum_{i:\ i<n}1\neq0`), " である。そこで ",
+        ref("claim_qbar_no_zero_divisors"), " を、積が零元である 2 つの元 ",
+        math(String.raw`\sum_{i:\ i<n}1`), "（零元でない方）と ",
+        math(String.raw`a`), "（他方）へ適用すると ",
+        math(String.raw`a=0`), " を得る。これは仮定 ",
+        math(String.raw`a\ne0`), " に反する。ゆえに仮定 ",
+        math(String.raw`\sum_{i:\ i<n}a=0`), " は偽である。",
+        "この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25432,8 +25486,9 @@ n
           ref("claim_qbar_unit_sum_eq_rational"),
           "）、および単位元を正の個数だけ足した有限和が零でないこと（",
           ref("claim_qbar_unit_sum_ne_zero"),
+          "）、および零でない代数的数を正の個数だけ足した有限和が零でないこと（",
+          ref("claim_qbar_repeated_sum_ne_zero"),
           "）までは上で済んでいる。次に書くのは、",
-          "零でない代数的数を正の個数だけ足した有限和が零でないこと（組み立て）、",
           "商のもとの根における値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",

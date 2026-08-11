@@ -7,6 +7,18 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 125 は、tick 124 の「単位元を正の個数だけ足した有限和は零でない」を
+  四層すべて突き合わせ（修正はレビュー記録の 1 件のみ。本文末尾の進捗記述の反映漏れ）、
+  セクション 10h3d-c4b-d3d3（零でない代数的数を正の個数だけ足した有限和は零でない）を
+  四層すべてで完了させた。** 本文は、和を単位元の有限和との積へ分解し、単位元の和の非零性と
+  零因子の消去を当てる適用の鎖 1 本（背理法）である。必要十分版は分解・非零性・消去の
+  3 仮定だけを要求する（和や積の法則そのものも体も代数閉性も不要）。検証は全通過
+  （構造化テキスト 256 ラベル・PDF 129 ページで未解決参照 0 件・検証と証明の対応 110 件・
+  SageMath 新設の `qbar-repeated-sum-ne-zero`・`lake build`・sorry 検査 640 件）。
+  これで旧 d3d（零でない代数的数の $n$ 個の和の非零性）の 3 分割がすべて済んだ。
+  次に進めるのは 10h3d-c4b-d3e（因数定理の商 $g$ が $K_n(w)$ に等しいことと
+  $\mathrm{aev}_{w}(g)\ne0$。着手時に論法の数で割り直す）である。
+
 - **2026-08-12 の tick 124 は、tick 123 の「単位元の有限和は、自然数の与える有理数に等しい」を
   本文・SageMath・Lean 具体版・必要十分版・導出・sorry 登録まで突き合わせて修正不要と確認し、
   セクション 10h3d-c4b-d3d2b（単位元を正の個数だけ足した有限和は零でない）を四層すべてで
@@ -1417,7 +1429,7 @@
 | 10h3d-c4b-d3d1L | 固有値の代数性 | 同主張の Lean 具体版と必要十分版 | done | 2026-08-11 の tick 122。具体版 `qbarRepeatedSumFactorization`、必要十分版 `repeated_sum_factorization_necSuf`、導出 `qbarRepeatedSumFactorization_from_necSuf` |
 | 10h3d-c4b-d3d2a | 固有値の代数性 | 単位元の有限和は、自然数の与える有理数に等しいこと（$\sum_{i<n}1=n$。$n$ についての帰納法 1 本。部分集合の鎖 $\mathbb{N}\subset\mathbb{Q}$ と、$\mathbb{Q}\subset\overline{\mathbb{Q}}$ が部分体であること） | done | 2026-08-12 の tick 123 で四層すべて完了。主張 1 件 `claim_qbar_unit_sum_eq_rational`。SageMath は `qbar-unit-sum-rational-value`。Lean 具体版 `qbarUnitSumEqRational`（鎖 ℕ→ℚ→ℚ̄ を `Nat.cast` と `algebraMap ℚ Qbar` で書く）、必要十分版 `unit_sum_eq_rational_necSuf`（要るのは有限和の空和と再帰、および自然数を値の側へ送る写像の 2 つの再帰式だけ。等式は「両辺が同じ再帰を満たすこと」そのもので、加法の性質も積も体も部分体も使わない）、導出 `qbarUnitSumEqRational_from_necSuf`。旧 d3d2 は論法が 2 つ（等式の帰納法と非零性の適用の鎖）だったので tick 123 で d3d2a・d3d2b へ割った |
 | 10h3d-c4b-d3d2b | 固有値の代数性 | 単位元の $n$ 個（$n\ge1$）の有限和は零でないこと（d3d2a の等式と、$\mathbb{Q}$ で $n\ge1$ ならば $n\ne0$ であること。適用の鎖 1 本） | done | 2026-08-12 の tick 124 で四層すべて完了。主張 1 件 `claim_qbar_unit_sum_ne_zero`。SageMath は `qbar-unit-sum-ne-zero`。Lean 具体版 `qbarUnitSumNeZero`、必要十分版 `unit_sum_ne_zero_necSuf`（要るのは有限和と自然数の像の等式、および正の自然数の像の非零性だけ）、導出 `qbarUnitSumNeZero_from_necSuf` |
-| 10h3d-c4b-d3d3 | 固有値の代数性 | 零でない代数的数の $n$ 個（$n\ge1$）の和は零でないこと（組み立て。d3d1 の分解と d3d2b の非零性へ `claim_qbar_no_zero_divisors` を当てる） | todo | 適用の鎖 1 本の見込み |
+| 10h3d-c4b-d3d3 | 固有値の代数性 | 零でない代数的数の $n$ 個（$n\ge1$）の和は零でないこと（組み立て。d3d1 の分解と d3d2b の非零性へ `claim_qbar_no_zero_divisors` を当てる） | done | 2026-08-12 の tick 125 で四層すべて完了。主張 1 件 `claim_qbar_repeated_sum_ne_zero`。SageMath は `qbar-repeated-sum-ne-zero`。Lean 具体版 `qbarRepeatedSumNeZero`、必要十分版 `repeated_sum_ne_zero_necSuf`（要るのは和の積への分解・単位元の和の非零性・零元でない左因子の消去の 3 つだけ。和や積の法則も体も代数閉性も不要）、導出 `qbarRepeatedSumNeZero_from_necSuf` |
 | 10h3d-c4b-d3e | 固有値の代数性 | 組み立て: $f=t^{\,n}+\widehat{-1}$ の因数定理の商 $g$ が $K_n(w)$ に等しいこと（有限和の計算）と、$\mathrm{aev}_{w}(g)\ne0$（単根性の核） | todo | 有限和の計算が独立の論法なら着手時にさらに割る |
 | 10h3d-c4b-d4 | 固有値の代数性 | $t^{\,n}+\widehat{-1}$ が $n$ 個の相異なる根を持つこと（下界の帰納法） | todo | 代数閉であることで根を 1 つ取り、因数定理で割って帰納法。単根性（d3）で取った根が商の根でないことを言う。着手時に割り直す |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | todo | 組み立ての段。新しい論法は持たない見込み |
@@ -1433,6 +1445,14 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 125）: 「零でない代数的数を正の個数だけ足した有限和は零でない」
+  （10h3d-c4b-d3d3）を四層すべてで完了した。和を単位元の有限和との積へ分解し
+  （`claim_qbar_repeated_sum_factorization`）、単位元の和の非零性
+  （`claim_qbar_unit_sum_ne_zero`）と零因子の消去（`claim_qbar_no_zero_divisors`）を
+  当てる適用の鎖 1 本である。SageMath は 7 つの零でない代数的数と $n=1,\dots,8$ で鎖を
+  厳密計算し、$a=0$・$n=0$ の反例も確かめた。Lean の必要十分版は分解・非零性・消去の
+  3 仮定だけへ薄めた（和や積の法則も体も代数閉性も不要）。
 
 - 2026-08-12（tick 124）: 「単位元を正の個数だけ足した有限和は零でない」を四層すべてで
   完了した。前段の等式 $\sum_{i<n}1=n$ を用い、和が零ならば $n=0$ となって $n\ge1$ に
@@ -4851,6 +4871,12 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 125）: tick 124 の「単位元を正の個数だけ足した有限和は零でない」の
+  本文・SageMath・Lean 具体版・必要十分版・導出・sorry 登録 3 件を突き合わせた。
+  鎖と各層は整合していたが、本文末尾の「この先に書くこと」が tick 123・124 の完了分
+  （単位元の有限和の 2 主張）を「次に書くのは」に残したままだったので、
+  済んだ側へ移して先に push した。
 
 - 2026-08-12（tick 124）: tick 123 の「単位元の有限和は、自然数の与える有理数に等しい」の
   本文・SageMath・Lean 具体版・必要十分版・導出を突き合わせた。本文の帰納法の出発点と一歩が
