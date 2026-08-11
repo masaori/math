@@ -99,6 +99,7 @@ export const ALL_LABELS = [
   "claim_qbar_poly_power_difference_factorization",
   "claim_qbar_pow_diff_quotient_root_value",
   "claim_qbar_pow_diff_sum_coeff_bound",
+  "claim_qbar_pow_ne_zero",
   "claim_qbar_power_difference_factorization",
   "claim_qbar_prod_eq_zero",
   "claim_qbar_projector_action",

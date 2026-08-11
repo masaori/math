@@ -24902,6 +24902,66 @@ n+1
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_pow_ne_zero",
+    kind: "claim",
+    title: { text: "零でない代数的数の冪は零でない" },
+    labels: ["claim_qbar_pow_ne_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-pow-ne-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowNeZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_ne_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowNeZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）が ", math(String.raw`w\ne0`),
+        " を満たすとし、", math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。このとき ", math(String.raw`w^{\,n}\ne0`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w`), " を固定し、", math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([math(String.raw`n=0`), " のとき。"]),
+      displayMath(String.raw`\begin{aligned}
+w^{\,0}
+&=1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の元の冪の約束})\\
+&\ne0
+&&(\because\ \overline{\mathbb{Q}}\ \text{は体であり}\ 1\ne0)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k\in\mathbb{N}`), " について ",
+        math(String.raw`w^{\,k}\ne0`), " を帰納法の仮定とする。",
+        math(String.raw`w^{\,k+1}=0`), " と仮定すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{\,k}\cdot w
+&=w^{\,k+1}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の元の冪の約束})\\
+&=0
+&&(\because\ \text{仮定}\ w^{\,k+1}=0)
+\end{aligned}`),
+      paragraph([
+        "帰納法の仮定 ", math(String.raw`w^{\,k}\ne0`), " と上の等式へ、",
+        ref("claim_qbar_no_zero_divisors"), " を ",
+        math(String.raw`a=w^{\,k}`), "、", math(String.raw`b=w`),
+        " として当てると ", math(String.raw`w=0`), " となり、仮定 ",
+        math(String.raw`w\ne0`), " と矛盾する。したがって ",
+        math(String.raw`w^{\,k+1}\ne0`), " である。",
+      ]),
+      paragraph([
+        "出発点と一歩により、すべての ", math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25158,7 +25218,9 @@ n+1
           ref("claim_qbar_pow_diff_quotient_root_value"),
           "）、および 1 の冪根が零でないこと（",
           ref("claim_root_of_unity_element_ne_zero"),
-          "）までは上で済んでいる。次に書くのは、零でない代数的数の冪が零でないこと、",
+          "）、および零でない代数的数の冪が零でないこと（",
+          ref("claim_qbar_pow_ne_zero"),
+          "）までは上で済んでいる。次に書くのは、",
           "商のもとの根における値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",

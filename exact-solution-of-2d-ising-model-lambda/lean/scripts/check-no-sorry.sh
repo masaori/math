@@ -681,6 +681,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityElementNeZero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_of_unity_element_ne_zero_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityElementNeZero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPowNeZero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_ne_zero_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPowNeZero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

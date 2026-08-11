@@ -861,18 +861,34 @@ c_2 s_1 = c_1\cos\theta_\mu
       ),
     ],
     proof: [
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 \gamma_2(-\theta_\mu)
-&= i\,e^{-i\theta_\mu} s_2^*\bigl(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2\bigr) \\
-\overline{\gamma_2(\theta_\mu)}
-&= \overline{i\,e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)} \\
-&= (-i)\,e^{-i\theta_\mu}\,s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
-= -\gamma_2(-\theta_\mu)
-\end{aligned}`,
-      ),
+&=i\,e^{-i\theta_\mu}s_2^*\bigl(c_1\cos\theta_\mu+i\sin\theta_\mu-s_1c_2\bigr)
+&&(\because\ \gamma_2\ \text{の定義と}\ \cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)\\
+&=-\Bigl((-i)e^{-i\theta_\mu}s_2^*\bigl(c_1\cos\theta_\mu+i\sin\theta_\mu-s_1c_2\bigr)\Bigr)
+&&(\because\ -(-i)=i)\\
+&=-\overline{i\,e^{i\theta_\mu}s_2^*\bigl(c_1\cos\theta_\mu-i\sin\theta_\mu-s_1c_2\bigr)}
+&&(\because\ \text{複素共役は積を保ち、実数を固定し、}\ \overline{i}=-i,\ \overline{e^{i\theta_\mu}}=e^{-i\theta_\mu})\\
+&=-\overline{\gamma_2(\theta_\mu)}
+&&(\because\ \gamma_2\ \text{の定義})
+\end{aligned}`),
+      paragraph([ref("def_A_theta"), " の ", math(String.raw`\gamma_2`), " の定義を引いた。"]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+&=\gamma_2(\theta_\mu)\Bigl(-\overline{\gamma_2(\theta_\mu)}\Bigr)
+&&(\because\ \gamma_2(-\theta_\mu)=-\overline{\gamma_2(\theta_\mu)})\\
+&=-\Bigl(\gamma_2(\theta_\mu)\overline{\gamma_2(\theta_\mu)}\Bigr)
+&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&=-\lvert\gamma_2(\theta_\mu)\rvert^2
+&&(\because\ \lvert z\rvert^2=z\overline z)
+\end{aligned}`),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-08-11 の式変形統一で、複素共役の計算を gamma_2(-theta_mu) から -overline{gamma_2(theta_mu)} までの 4 段へつなぎ、各行末に根拠を置いた。statement の第 2 式も 3 段の鎖として明示した。内容は変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_024_claim_arg_of_gamma2_mu",
