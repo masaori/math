@@ -24962,6 +24962,73 @@ w^{\,k}\cdot w
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_repeated_sum_factorization",
+    kind: "claim",
+    title: { text: "同じ元の有限和は、単位元の有限和との積である" },
+    labels: ["claim_qbar_repeated_sum_factorization"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-repeated-sum-factorization"],
+    statement: [
+      paragraph([
+        math(String.raw`a\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）と ",
+        math(String.raw`n\in\mathbb{N}`), " を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`\sum_{i:\ i<n}a=\Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a`,
+      ),
+      paragraph([
+        "が成り立つ。両辺の和はいずれも、", math(String.raw`i<n`),
+        " を満たす自然数 ", math(String.raw`i`),
+        " の全体にわたる有限和であり、項は ", math(String.raw`i`),
+        " によらない（左辺は同じ元 ", math(String.raw`a`), " を ",
+        math(String.raw`n`), " 個、右辺の括弧の中は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の積の単位元 ",
+        math(String.raw`1`), " を ", math(String.raw`n`), " 個足す）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a\in\overline{\mathbb{Q}}`),
+        " を固定し、", math(String.raw`n`), " についての帰納法で示す。",
+      ]),
+      paragraph(["出発点（", math(String.raw`n=0`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i:\ i<0}a
+&=0
+&&(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0)\\
+&=0\cdot a
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&=\Bigl(\sum_{i:\ i<0}1\Bigr)\cdot a
+&&(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0)
+\end{aligned}`),
+      paragraph([
+        "一歩（", math(String.raw`n`), " から ", math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`\sum_{i:\ i<n}a=\bigl(\sum_{i:\ i<n}1\bigr)\cdot a`),
+        " を帰納法の仮定とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i:\ i<n+1}a
+&=\Bigl(\sum_{i:\ i<n}a\Bigr)+a
+&&(\because\ \text{有限和から添字}\ i=n\ \text{の項を分ける})\\
+&=\Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a+a
+&&(\because\ \text{帰納法の仮定})\\
+&=\Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a+1\cdot a
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=\Bigl(\Bigl(\sum_{i:\ i<n}1\Bigr)+1\Bigr)\cdot a
+&&(\because\ \text{体}\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\Bigl(\sum_{i:\ i<n+1}1\Bigr)\cdot a
+&&(\because\ \text{有限和へ添字}\ i=n\ \text{の項を合わせる})
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、すべての ", math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25220,7 +25287,10 @@ w^{\,k}\cdot w
           ref("claim_root_of_unity_element_ne_zero"),
           "）、および零でない代数的数の冪が零でないこと（",
           ref("claim_qbar_pow_ne_zero"),
+          "）、および同じ元の有限和が単位元の有限和との積であること（",
+          ref("claim_qbar_repeated_sum_factorization"),
           "）までは上で済んでいる。次に書くのは、",
+          "単位元の有限和が有理数として零でないこと（標数 0 の側）、",
           "商のもとの根における値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
