@@ -612,6 +612,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.mulMap_bijective_necSuf
   Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_mul_invariant_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -22274,6 +22274,102 @@ z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_power_sum_invariant",
+    kind: "claim",
+    title: {
+      text: "1 の冪根の全体にわたる冪の和は、1 の冪根の冪を掛けても動かない",
+    },
+    labels: ["claim_root_of_unity_power_sum_invariant"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_mul_invariant_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-power-sum-invariant"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " を ",
+        math(String.raw`n\ge1`),
+        " を満たすように任意に取り、",
+        math(String.raw`\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）が有限集合であると仮定する。",
+        math(String.raw`m\in\mathbb{N}`),
+        " を任意に取り、",
+      ]),
+      displayMath(String.raw`S_{n,m}:=\sum_{z\in\mu_{n}}z^{m}\in\overline{\mathbb{Q}}`),
+      paragraph([
+        "と置く（右辺は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の有限個の元の和であり、仮定した有限性によって定まる）。このとき任意の ",
+        math(String.raw`w\in\mu_{n}`),
+        " について",
+      ]),
+      displayMath(String.raw`w^{m}\,S_{n,m}=S_{n,m}`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w\in\mu_{n}`),
+        " を任意に取る。",
+        ref("claim_root_of_unity_mul_map_bijective"),
+        " により ",
+        math(String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_mul_map"),
+        "）は全単射である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
+&&(\because\ S_{n,m}\ \text{の定義})\\
+&=\sum_{z\in\mu_{n}}w^{m}z^{m}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和へ})\\
+&=\sum_{z\in\mu_{n}}(wz)^{m}
+&&(\because\ \blkref{claim_qbar_mul_pow}\ \text{を}\ w\ \text{と}\ z\ \text{へ})\\
+&=\sum_{z\in\mu_{n}}\bigl(\theta^{(n)}_{w}(z)\bigr)^{m}
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&=\sum_{y\in\mu_{n}}y^{m}
+&&(\because\ \blkref{claim_root_of_unity_mul_map_bijective}\ \text{による添字の取り替え})\\
+&=S_{n,m}
+&&(\because\ S_{n,m}\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "第 5 の等号は和の添字の取り替えである。",
+        math(String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n}`),
+        " が全単射で、逆写像が ",
+        math(String.raw`\theta^{(n)}_{w^{n-1}}`),
+        " なので、",
+        math(String.raw`z`),
+        " にわたる有限和は ",
+        math(String.raw`y=\theta^{(n)}_{w}(z)`),
+        " にわたる有限和と同じ項を同じ回数ずつ足し合わせている（",
+        math(String.raw`z=\theta^{(n)}_{w^{n-1}}(y)`),
+        " が対応を戻す）。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、有限和が定まること（加法の結合則と可換則）と、",
+        "積が有限和へ分配されることの 2 つだけである。",
+        math(String.raw`\mu_{n}`),
+        " の有限性は仮定であって、ここでは示していない（",
+        math(String.raw`\mu_{n}`),
+        " がちょうど ",
+        math(String.raw`n`),
+        " 個の元を持つことは別の段で示す）。",
+        "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -22499,8 +22595,14 @@ z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
           ref("def_root_of_unity_mul_map"),
           "）が全単射であること（",
           ref("claim_root_of_unity_mul_map_bijective"),
+          "）、および 1 の冪根の全体にわたる冪の和が 1 の冪根の冪を掛けても動かないこと（",
+          ref("claim_root_of_unity_power_sum_invariant"),
           "）までは上で済んでいる。",
           "次に書くのは ",
+          math(String.raw`\mu_n`),
+          " がちょうど ",
+          math(String.raw`n`),
+          " 個の元を持つこと（有限性の仮定を外すため）と、そこから出る ",
           math(String.raw`\mu_L`),
           " の元の冪の総和（指数が ",
           math(String.raw`L`),
