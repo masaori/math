@@ -26,7 +26,8 @@ $(t-\widehat{w})K_{n}(w)=t^{\,n}-\widehat{w}^{\,n}$ だけを見る。
 3. **一歩**。鎖の第 1 から第 10 の等号を、それぞれ別に確かめる
    （$K_{n+1}$ の約束・分配則・積の結合則・帰納法の仮定・分配則・冪の約束
    $\widehat{w}^{\,n+1}=\widehat{w}^{\,n}\widehat{w}$・分配則・準備の等式・冪の約束
-   $t^{\,n+1}=t^{\,n}t$・$t$ と $\widehat{w}$ の可換性）。
+   $t^{\,n+1}=t^{\,n}t$・$\overline{\mathbb{Q}}[t]$ の積の可換則（この鎖では
+   $\widehat{w}\,t^{\,n}=t^{\,n}\widehat{w}$ の場合を使う））。
 4. **主張そのもの**。$(t-\widehat{w})K_{n}(w)=t^{\,n}-\widehat{w}^{\,n}$。
 5. **$\overline{\mathbb{Q}}$ の 2 元についての版との一致**。$t$ に値 $z$ を入れると
    $K_{n}(w)$ の値が $H_{n}(z,w)$（`claim_qbar_power_difference_factorization`）に一致すること。

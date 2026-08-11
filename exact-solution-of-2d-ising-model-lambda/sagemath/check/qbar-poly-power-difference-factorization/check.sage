@@ -89,7 +89,7 @@ def check_step(samples, nmax):
             # 第 8・第 9 の等号（準備の等式 t t^n = t^n t と冪の約束 t^{n+1} = t^n t）
             assert t * tn == tn * t
             assert tn * t == pow_rec(t, n + 1)
-            # 第 10 の等号（t と ŵ の可換性。係数どうしの積が可換だから出る）
+            # 第 10 の等号（Qbar[t] の積の可換則。ここで使うのは ŵ t^n = t^n ŵ の場合）
             assert cw * tn == tn * cw
     print("   通過（n = 0,...,%d）" % nmax)
 

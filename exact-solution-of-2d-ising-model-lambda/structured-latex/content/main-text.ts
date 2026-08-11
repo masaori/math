@@ -23217,7 +23217,7 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
 &=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t^{\,n+1}-\widehat{w}\,t^{\,n}\bigr)
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{\,n+1}=t^{\,n}t)\\
 &=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t^{\,n+1}-t^{\,n}\widehat{w}\bigr)
-&&(\because\ t\ \text{と}\ \widehat{w}\ \text{が可換であること})\\
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則})\\
 &=t^{\,n+1}-\widehat{w}^{\,n+1}
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の加法の結合則と可換則により}\ t^{\,n}\widehat{w}\ \text{が相殺する})
 \end{aligned}`),
@@ -23227,14 +23227,32 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
         " について主張が成り立つ。",
       ]),
       paragraph([
-        "第 10 の等号で使った ",
+        "第 10 の等号で引いた ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の積の可換則（この鎖で使うのは ",
         math(String.raw`\widehat{w}\,t^{\,n}=t^{\,n}\widehat{w}`),
-        " は、係数の言葉で書いた積の定義（",
+        " の場合である）は、係数の言葉で書いた積の定義（",
         ref("def_qbar_polynomial_ring"),
         "）と ",
         math(String.raw`\overline{\mathbb{Q}}`),
         " の積の可換則から出る。",
         "係数どうしの積が可換なら多項式どうしの積も可換だからである。",
+        "ここを「",
+        math(String.raw`t`),
+        " と ",
+        math(String.raw`\widehat{w}`),
+        " が可換であること」で埋めることはできない。",
+        "この鎖が必要とするのは ",
+        math(String.raw`\widehat{w}`),
+        " と ",
+        math(String.raw`t^{\,n}`),
+        " の可換性であり、それを ",
+        math(String.raw`t`),
+        " との可換性から出すには ",
+        math(String.raw`n`),
+        " についての帰納法がもう 1 本要るからである",
+        "（住む環が可換である以上、その 1 本を立てるより積の可換則を引くほうが短い。",
+        "2 元の可換性だけで足りることは Lean の必要十分版が示す）。",
       ]),
       paragraph([
         "この主張は ",
