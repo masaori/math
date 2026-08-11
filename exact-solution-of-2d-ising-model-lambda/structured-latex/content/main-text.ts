@@ -24823,7 +24823,7 @@ n+1
 &=\sum_{i:\ i<n}\bigl(w^{\,n-1}\cdot w\bigr)+w^{\,n}
 &&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和の各項へ同時に当てる})\\
 &=\sum_{i:\ i<n}w^{\,n}+w^{\,n}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の冪の約束}\ w^{\,(n-1)+1}=w^{\,n-1}w\ \text{と}\ (n-1)+1=n)\\
+&&(\because\ \overline{\mathbb{Q}}\ \text{の元の冪の約束}\ w^{\,(n-1)+1}=w^{\,n-1}w\ \text{と}\ (n-1)+1=n)\\
 &=\sum_{i:\ i<n+1}w^{\,n}
 &&(\because\ \text{有限和へ添字}\ i=n\ \text{の項を 1 つ足す})\\
 &=\sum_{i:\ i<n+1}w^{\,(n+1)-1}
