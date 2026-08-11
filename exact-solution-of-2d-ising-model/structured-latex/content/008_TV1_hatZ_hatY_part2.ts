@@ -1186,10 +1186,15 @@ c_2 s_1 = c_1\cos\theta_\mu
         " を掛けて",
       ]),
       displayMath(
-        String.raw`\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-= \frac{\gamma_2(\theta_\mu)\,\gamma_2(\theta_\mu)}{\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)}
-= \frac{z^2}{-r^2}
-= z^2 \cdot \left(-\frac{1}{r^2}\right)`,
+        String.raw`\begin{aligned}
+\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
+&= \frac{\gamma_2(\theta_\mu)\,\gamma_2(\theta_\mu)}{\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)}
+&&(\because\ \text{分子と分母に同じ } \gamma_2(\theta_\mu) = z \neq 0 \text{ を掛けても商は変わらない}) \\
+&= \frac{z^2}{-r^2}
+&&(\because\ \text{分子は } z \text{ の定義、分母は上の積の等式 } \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = -r^2) \\
+&= z^2 \cdot \left(-\frac{1}{r^2}\right)
+&&(\because\ -r^2 \neq 0 \text{ による商から積への書き換え})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3: 各因子の極座標表現。Step 0 と Step 1 より",
