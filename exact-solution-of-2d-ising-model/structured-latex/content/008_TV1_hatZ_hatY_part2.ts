@@ -177,25 +177,53 @@ t=0:\qquad
         " より",
       ]),
       displayMath(
-        String.raw`\arg^{[0,2\pi)}(t) = s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(t,0))\right)
-= \begin{cases}
-s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t > 0) \\
-s_{[0,2\pi)}([\pi]_{\sim_{\mathrm{angle}}}) = \pi & (t < 0) \\
-s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}) = 0 & (t = 0)
-\end{cases}`,
+        String.raw`\begin{aligned}
+t>0:\qquad
+\arg^{[0,2\pi)}(t)
+&=s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(t,0))\right)
+&&(\because\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&=s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(t,\ 0)]_{\sim})\right)
+&&(\because\ \text{上の}\ t>0\ \text{の場合の}\ \phi_{\mathrm{polar}}(t,0)=[(t,\ 0)]_{\sim})\\
+&=s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})
+&&(\because\ \mathrm{pr}_2\ \text{の定義の}\ r=t>0\ \text{の場合})\\
+&=0
+&&(\because\ 0\in[0,2\pi)\ \text{なので代表を返す写像}\ s_{[0,2\pi)}\ \text{はそのまま}\ 0\ \text{を返す})\\[3pt]
+t<0:\qquad
+\arg^{[0,2\pi)}(t)
+&=s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(t,0))\right)
+&&(\because\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&=s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(-t,\ \pi)]_{\sim})\right)
+&&(\because\ \text{上の}\ t<0\ \text{の場合の}\ \phi_{\mathrm{polar}}(t,0)=[(-t,\ \pi)]_{\sim})\\
+&=s_{[0,2\pi)}([\pi]_{\sim_{\mathrm{angle}}})
+&&(\because\ \mathrm{pr}_2\ \text{の定義の}\ r=-t>0\ \text{の場合})\\
+&=\pi
+&&(\because\ \pi\in[0,2\pi)\ \text{なので}\ s_{[0,2\pi)}\ \text{はそのまま}\ \pi\ \text{を返す})\\[3pt]
+t=0:\qquad
+\arg^{[0,2\pi)}(t)
+&=s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(t,0))\right)
+&&(\because\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&=s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\ 0)]_{\sim})\right)
+&&(\because\ \text{上の}\ t=0\ \text{の場合の}\ \phi_{\mathrm{polar}}(t,0)=[(0,\ 0)]_{\sim})\\
+&=s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})
+&&(\because\ \mathrm{pr}_2\ \text{の定義は}\ r=0\ \text{のとき}\ [0]_{\sim_{\mathrm{angle}}}\ \text{を返す})\\
+&=0
+&&(\because\ 0\in[0,2\pi)\ \text{なので}\ s_{[0,2\pi)}\ \text{はそのまま}\ 0\ \text{を返す})
+\end{aligned}`,
       ),
       paragraph([
         "（",
-        math(String.raw`t = 0`),
-        " の行では ",
-        ref("first_and_second_projections"),
-        " の ",
+        math(String.raw`\arg^{[0,2\pi)}`),
+        " と ",
+        math(String.raw`s_{[0,2\pi)}`),
+        " は ",
+        ref("def_abs_arg"),
+        "、",
         math(String.raw`\mathrm{pr}_2`),
-        " の定義が ",
-        math(String.raw`r = 0`),
-        " のとき ",
-        math(String.raw`[0]_{\sim_{\mathrm{angle}}}`),
-        " を返すことを用いた。すなわち本リポジトリの規約では ",
+        " は ",
+        ref("first_and_second_projections"),
+        "。",
+        math(String.raw`t = 0`),
+        " の場合が示すとおり、本リポジトリの規約では ",
         math(String.raw`\arg^{[0,2\pi)}(0_{\mathbb{C}}) = 0`),
         " である。）まとめると ",
         math(String.raw`\arg^{[0,2\pi)}(t) = 0 \iff t \geq 0`),
