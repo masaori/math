@@ -705,6 +705,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.firstRootOfUnitySet
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.singleton_of_mem_iff_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.firstRootOfUnitySet_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCancellation
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_cancellation_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCancellation_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

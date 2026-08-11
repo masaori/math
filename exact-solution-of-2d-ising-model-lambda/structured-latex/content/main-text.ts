@@ -25410,6 +25410,11 @@ w^{\,1}
     labels: ["claim_qbar_poly_linear_factor_cancellation"],
     habitat: "Qbar",
     verification: ["sagemath/check/qbar-poly-linear-factor-cancellation"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCancellation",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_cancellation_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCancellation_from_necSuf",
+    ],
     statement: [
       paragraph([
         ref("def_qbar_polynomial_ring"), " の元 ",
