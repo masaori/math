@@ -24749,6 +24749,95 @@ n+1
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_pow_diff_quotient_root_value",
+    kind: "claim",
+    title: { text: "冪の差の因数分解の商の、もとの根における値" },
+    labels: ["claim_qbar_pow_diff_quotient_root_value"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-pow-diff-quotient-root-value"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、", math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を任意に取る。",
+        "冪の差の因数分解の商 ", math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`), "（",
+        ref("claim_qbar_poly_power_difference_factorization"), " の約束）の、",
+        math(String.raw`w`), " における値（", ref("def_qbar_poly_evaluation"), "）について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{aev}_{w}\bigl(K_{n}(w)\bigr)=\sum_{i:\ i<n}w^{\,n-1}`,
+      ),
+      paragraph([
+        "が成り立つ。右辺の和は、", math(String.raw`i<n`),
+        " を満たす自然数 ", math(String.raw`i`),
+        " の全体にわたる有限和であり、項は ", math(String.raw`i`),
+        " によらない（同じ元 ", math(String.raw`w^{\,n-1}`), " を ",
+        math(String.raw`n`), " 個足す。", math(String.raw`n\ge1`),
+        " なので指数 ", math(String.raw`n-1`), " は自然数である）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " を固定する。主張を ", math(String.raw`n\ge1`),
+        " を満たす ", math(String.raw`n`), " についての帰納法で示す。",
+      ]),
+      paragraph(["出発点（", math(String.raw`n=1`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}\bigl(K_{1}(w)\bigr)
+&=\mathrm{aev}_{w}\bigl(K_{0}(w)\,\widehat{w}+t^{\,0}\bigr)
+&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{1}(w)=K_{0}(w)\,\widehat{w}+t^{\,0})\\
+&=\mathrm{aev}_{w}\bigl(0\cdot\widehat{w}+t^{\,0}\bigr)
+&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{0}(w)=0)\\
+&=\mathrm{aev}_{w}\bigl(0+t^{\,0}\bigr)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の零元})\\
+&=\mathrm{aev}_{w}\bigl(t^{\,0}\bigr)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の加法の単位元})\\
+&=w^{\,0}
+&&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow})\\
+&=\sum_{i:\ i<1}w^{\,0}
+&&(\because\ \text{添字が}\ i=0\ \text{の 1 項だけの有限和はその項に等しい})\\
+&=\sum_{i:\ i<1}w^{\,1-1}
+&&(\because\ 1-1=0)
+\end{aligned}`),
+      paragraph([
+        "一歩（", math(String.raw`n`), " から ", math(String.raw`n+1`),
+        " へ。", math(String.raw`n\ge1`), "）。",
+        math(String.raw`\mathrm{aev}_{w}\bigl(K_{n}(w)\bigr)=\sum_{i:\ i<n}w^{\,n-1}`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}\bigl(K_{n+1}(w)\bigr)
+&=\mathrm{aev}_{w}\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
+&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
+&=\mathrm{aev}_{w}\bigl(K_{n}(w)\,\widehat{w}\bigr)+\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)
+&&(\because\ \mathrm{aev}_{w}\ \text{は和を保つ（}\blkref{def_qbar_poly_evaluation}\text{）})\\
+&=\mathrm{aev}_{w}\bigl(K_{n}(w)\bigr)\cdot\mathrm{aev}_{w}\bigl(\widehat{w}\bigr)+\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)
+&&(\because\ \mathrm{aev}_{w}\ \text{は積を保つ（}\blkref{def_qbar_poly_evaluation}\text{）})\\
+&=\mathrm{aev}_{w}\bigl(K_{n}(w)\bigr)\cdot w+\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)
+&&(\because\ \mathrm{aev}_{w}(\widehat{w})=w\ \text{（}\blkref{def_qbar_poly_evaluation}\text{）})\\
+&=\mathrm{aev}_{w}\bigl(K_{n}(w)\bigr)\cdot w+w^{\,n}
+&&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow})\\
+&=\Bigl(\sum_{i:\ i<n}w^{\,n-1}\Bigr)\cdot w+w^{\,n}
+&&(\because\ \text{帰納法の仮定})\\
+&=\sum_{i:\ i<n}\bigl(w^{\,n-1}\cdot w\bigr)+w^{\,n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和の各項へ同時に当てる})\\
+&=\sum_{i:\ i<n}w^{\,n}+w^{\,n}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の冪の約束}\ w^{\,(n-1)+1}=w^{\,n-1}w\ \text{と}\ (n-1)+1=n)\\
+&=\sum_{i:\ i<n+1}w^{\,n}
+&&(\because\ \text{有限和へ添字}\ i=n\ \text{の項を 1 つ足す})\\
+&=\sum_{i:\ i<n+1}w^{\,(n+1)-1}
+&&(\because\ (n+1)-1=n)
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、", math(String.raw`n\ge1`),
+        " を満たすすべての ", math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25001,7 +25090,9 @@ n+1
           math(String.raw`n`),
           " 以下であること（",
           ref("claim_root_of_unity_finite_card_bound"),
-          "）までは上で済んでいる。次に書くのは、因数定理の商の根における値が零でないこと（単根性）、",
+          "）、および冪の差の因数分解の商のもとの根における値の計算（",
+          ref("claim_qbar_pow_diff_quotient_root_value"),
+          "）までは上で済んでいる。次に書くのは、その値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
           math(String.raw`n`),
