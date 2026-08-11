@@ -702,6 +702,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootFactorQuotientValueNeZero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_chain_ne_zero_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootFactorQuotientValueNeZero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.firstRootOfUnitySet
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.singleton_of_mem_iff_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.firstRootOfUnitySet_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

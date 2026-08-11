@@ -22,6 +22,7 @@ export const ALL_LABELS = [
   "claim_cross_orbit_ordered_card",
   "claim_determinant_diagonal",
   "claim_edge_row_partition",
+  "claim_first_root_of_unity_set",
   "claim_fixed_or_shift_preserves_orbit",
   "claim_free_entropy_at_one",
   "claim_gluing_restriction_family",

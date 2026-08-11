@@ -25343,6 +25343,67 @@ g
   },
 
   {
+    id: "algebraic_eigenvalue_claim_first_root_of_unity_set",
+    kind: "claim",
+    title: { text: "1 乗して 1 になる代数的数は 1 だけである" },
+    labels: ["claim_first_root_of_unity_set"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/first-root-of-unity-set"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.firstRootOfUnitySet",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.singleton_of_mem_iff_eq_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.firstRootOfUnitySet_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_root_of_unity_set"), " の ", math(String.raw`\mu_1`),
+        " は、体 ", math(String.raw`\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）の積の単位元 ", math(String.raw`1`),
+        " だけからなる集合である。すなわち",
+      ]),
+      displayMath(String.raw`\mu_1=\{1\}`),
+      paragraph([
+        "である。したがって ", math(String.raw`t+\widehat{-1}`),
+        " は相異なる根を 1 個持つ。これは、",
+        math(String.raw`t^{\,n}+\widehat{-1}`), " が相異なる根を ",
+        math(String.raw`n`), " 個持つことを示す帰納法の出発点である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "集合の等号を両包含で示す。まず ", math(String.raw`w\in\mu_1`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w
+&=w^{\,1}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の元の 1 乗})\\
+&=1
+&&(\because\ w\in\mu_1\ \text{と}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+      paragraph([
+        "ゆえに ", math(String.raw`w\in\{1\}`), " であり、",
+        math(String.raw`\mu_1\subseteq\{1\}`), " である。逆に、",
+        math(String.raw`w\in\{1\}`), " を任意に取る。すると ",
+        math(String.raw`w=1`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{\,1}
+&=1^{\,1}
+&&(\because\ w=1)\\
+&=1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の単位元の 1 乗})
+\end{aligned}`),
+      paragraph([
+        "である。", ref("def_root_of_unity_set"), " より ",
+        math(String.raw`w\in\mu_1`), " であり、",
+        math(String.raw`\{1\}\subseteq\mu_1`), " である。両包含から求める集合の等号を得る。",
+        "この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
