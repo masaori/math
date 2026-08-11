@@ -4,6 +4,7 @@
 必要なのは、集合への所属が指定した元との相等と同値であることだけである。
 型の代数構造、冪、単位元は要らない。
 -/
+import Mathlib.Data.Set.Insert
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
