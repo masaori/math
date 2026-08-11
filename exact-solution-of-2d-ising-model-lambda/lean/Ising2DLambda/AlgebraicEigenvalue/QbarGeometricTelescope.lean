@@ -7,12 +7,14 @@
 
   人手証明                                          このファイル
   G_n(z) = Σ_{k=0}^{n-1} z^k                        `qbarGeomSum`
+  準備（z z^k = z^k z。k についての帰納法）          `pow_succ'`（mathlib の証明も同じ帰納法）
   出発点（G_0 は空和）                               `Nat.zero` の場合。`Finset.range 0` が空
   一歩の第 1 の等号（G_{n+1} = G_n + z^n）           `Finset.sum_range_succ`
   一歩の第 2・第 4 の等号（分配則）                   `sub_mul` / `mul_add`（環の分配則）
   一歩の第 3 の等号（帰納法の仮定）                   `ih`
-  一歩の第 5 の等号（z z^n = z^{n+1}）               `pow_succ`
-  一歩の第 6 の等号（z^n が相殺する）                 加法群の計算
+  一歩の第 5 の等号（1 z^n = z^n）                   `one_mul`
+  一歩の第 6・第 7 の等号（z z^n = z^n z = z^{n+1}） `pow_succ'`
+  一歩の第 8 の等号（z^n が相殺する）                 加法群の計算
 
 mathlib の `geom_sum_mul`・`Finset.geom_sum_eq` 等の既製定理へは委ねない。
 帰納法と分配則だけで人手証明の 4 段・6 段の鎖をそのまま書く。

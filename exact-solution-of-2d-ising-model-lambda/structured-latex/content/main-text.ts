@@ -22414,7 +22414,49 @@ w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
     proof: [
       paragraph([
         math(String.raw`z\in\overline{\mathbb{Q}}`),
-        " を固定し、",
+        " を固定する。",
+      ]),
+      paragraph([
+        "準備。任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`z\,z^{k}=z^{k}z`),
+        " が成り立つ（冪の約束（",
+        ref("def_root_of_unity_set"),
+        "）が与えるのは ",
+        math(String.raw`z^{k+1}=z^{k}z`),
+        " の向きだけなので、",
+        math(String.raw`z\,z^{k}`),
+        " をこれへ結び付けるにはこの等式が要る）。",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z\,z^{0}&=z\cdot 1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=1\cdot z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=z^{0}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`z\,z^{k}=z^{k}z`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
+&=\bigl(z\,z^{k}\bigr)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(z^{k}z\bigr)z
+&&(\because\ \text{帰納法の仮定})\\
+&=z^{k+1}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
+\end{aligned}`),
+      paragraph([
+        "以下、主張を ",
         math(String.raw`n`),
         " についての帰納法で示す。",
       ]),
@@ -22451,8 +22493,12 @@ w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
 &&(\because\ \text{帰納法の仮定})\\
 &=(z^{n}-1)+\bigl(z\,z^{n}-1\cdot z^{n}\bigr)
 &&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=(z^{n}-1)+\bigl(z\,z^{n}-z^{n}\bigr)
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=(z^{n}-1)+\bigl(z^{n}z-z^{n}\bigr)
+&&(\because\ \text{準備の}\ z\,z^{n}=z^{n}z)\\
 &=(z^{n}-1)+\bigl(z^{n+1}-z^{n}\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z\ \text{と}\ 1\ \text{が積の単位元であること})\\
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
 &=z^{n+1}-1
 &&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}\ \text{が相殺する})
 \end{aligned}`),
@@ -22465,10 +22511,13 @@ w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
         "この段が ",
         math(String.raw`\overline{\mathbb{Q}}`),
         " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）と、",
-        "積が和へ分配されること、積の単位元があること、そして零元との積が零元であることだけである。",
+        "積が和へ分配されること、積が結合的であること（準備の段で使う）、積の単位元があること、",
+        "そして零元との積が零元であることだけである。",
         "積の可換則も、積の逆元の存在も、代数閉であることも使っていない（",
         math(String.raw`z`),
-        " は自分自身の冪とだけ掛け合わされる）。",
+        " は自分自身の冪とだけ掛け合わされ、",
+        math(String.raw`z\,z^{k}=z^{k}z`),
+        " は準備の段で結合則から出している）。",
         "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
       ]),
       paragraph([

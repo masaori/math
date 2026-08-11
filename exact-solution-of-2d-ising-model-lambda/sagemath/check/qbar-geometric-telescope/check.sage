@@ -22,6 +22,18 @@ def geom_sum(z, n, one, zero):
     return acc
 
 
+def check_pow_comm(samples, nmax, one, name):
+    # 人手証明の準備の段（z z^k = z^k z）。冪の約束が与えるのは z^{k+1} = z^k z の
+    # 向きだけなので、z z^k をそれへ結び付けるにはこの等式が要る。
+    # 可換でない環でも成り立つ（掛け合わせているのが z と z 自身の冪だけだから）。
+    print("0. 準備（z z^k = z^k z）: %s" % name)
+    for z in samples:
+        for k in range(0, nmax + 1):
+            assert z * pow_rec(z, k, one) == pow_rec(z, k, one) * z
+            assert z * pow_rec(z, k, one) == pow_rec(z, k + 1, one)
+    print("   通過（k = 0,...,%d）" % nmax)
+
+
 def check_base(samples, one, zero, name):
     print("1. 出発点（(z-1) G_0(z) = z^0 - 1 = 0）: %s" % name)
     for z in samples:
@@ -84,6 +96,8 @@ def check_noncommutative(nmax):
     ]
     # この 3 つは互いに可換ではない（可換性を仮定していないことの裏取り）。
     assert samples[0] * samples[1] != samples[1] * samples[0]
+    # 準備の段（z z^k = z^k z）も可換でない環で確かめる。
+    check_pow_comm(samples, nmax, one, "2 次整数行列環")
     for z in samples:
         for n in range(0, nmax + 1):
             assert (z - one) * geom_sum(z, n, one, zero) == pow_rec(z, n, one) - one
@@ -119,6 +133,7 @@ QBAR_SAMPLES = [
 ]
 ONE = QQbar(1)
 ZERO = QQbar(0)
+check_pow_comm(QBAR_SAMPLES, 8, ONE, "QQbar")
 check_base(QBAR_SAMPLES, ONE, ZERO, "QQbar")
 check_step(QBAR_SAMPLES, 8, ONE, ZERO, "QQbar")
 check_claim(QBAR_SAMPLES, 8, ONE, ZERO, "QQbar")
