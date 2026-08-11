@@ -2105,37 +2105,64 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
 -\dfrac{1}{\gamma_2(-\theta_\mu)} & (0 < \varphi \leq \pi)
 \end{cases}`,
       ),
-      paragraph(["Step 8: Step 6 と Step 7 を組み合わせる。"]),
+      paragraph([
+        "Step 8: Step 6 と Step 7 を組み合わせる。準備として、Step 7 の等式の両辺へ ",
+        math(String.raw`\gamma_2(-\theta_\mu)`),
+        " を掛けた等式を作る。",
+      ]),
       displayMath(
-        String.raw`\frac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\gamma_2(-\theta_\mu)}
-= \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\left(\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\gamma_2(-\theta_\mu)\right)^{-1}`,
-      ),
-      paragraph(["ここで Step 7 より、"]),
-      displayMath(
-        String.raw`\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\gamma_2(-\theta_\mu)
-= \begin{cases}
+        String.raw`\begin{aligned}
+\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\gamma_2(-\theta_\mu)
+&= \begin{cases}
+\dfrac{1}{\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\mu) & (\varphi = 0 \text{ or } \pi < \varphi < 2\pi) \\
+-\dfrac{1}{\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\mu) & (0 < \varphi \leq \pi)
+\end{cases}
+&& (\because\ \text{Step 7 の 2 つの場合の記述}) \\
+&= \begin{cases}
 1 & (\varphi = 0 \text{ or } \pi < \varphi < 2\pi) \\
 -1 & (0 < \varphi \leq \pi)
-\end{cases}`,
+\end{cases}
+&& (\because\ \gamma_2(-\theta_\mu)\ne0\ \text{と逆数との積})
+\end{aligned}`,
       ),
-      paragraph(["よって Step 6 の結果と合わせて各場合を計算すると、"]),
+      paragraph([
+        "準備の等式の左辺は各場合で ",
+        math(String.raw`\pm1`),
+        " であり零でない。そこで、",
+      ]),
       displayMath(
-        String.raw`\frac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\gamma_2(-\theta_\mu)}
-= \begin{cases}
+        String.raw`\begin{aligned}
+\frac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\gamma_2(-\theta_\mu)}
+&= \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\left(\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\gamma_2(-\theta_\mu)\right)^{-1}
+&& \left(\because\ \sqrt{\tfrac{1}{(\gamma_2(-\theta_\mu))^2}}\ne0\ \text{と}\ \mathbb{C}\ \text{の積の可換性から}\ \sqrt{\tfrac{1}{(\gamma_2(-\theta_\mu))^2}}\,\bigl(\sqrt{\tfrac{1}{(\gamma_2(-\theta_\mu))^2}}\,\gamma_2(-\theta_\mu)\bigr)^{-1}=\tfrac{1}{\gamma_2(-\theta_\mu)}\right) \\
+&= \begin{cases}
+\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}} & (\varphi = 0 \text{ or } \tfrac{\pi}{2} < \varphi \leq \pi \text{ or } \tfrac{3\pi}{2} < \varphi < 2\pi) \\
+-\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}} & (0 < \varphi \leq \tfrac{\pi}{2} \text{ or } \pi < \varphi \leq \tfrac{3\pi}{2})
+\end{cases}
+\cdot\left(\sqrt{\frac{1}{(\gamma_2(-\theta_\mu))^2}}\,\gamma_2(-\theta_\mu)\right)^{-1}
+&& (\because\ \text{Step 6}) \\
+&= \begin{cases}
+\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot 1^{-1} & (\varphi = 0) \\
+-\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot(-1)^{-1} & (0 < \varphi \leq \tfrac{\pi}{2}) \\
+\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot(-1)^{-1} & (\tfrac{\pi}{2} < \varphi \leq \pi) \\
+-\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot 1^{-1} & (\pi < \varphi \leq \tfrac{3\pi}{2}) \\
+\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot 1^{-1} & (\tfrac{3\pi}{2} < \varphi < 2\pi)
+\end{cases}
+&& (\because\ \text{準備の等式。2 つの場合分けを}\ \varphi\ \text{の区間の共通細分（5 区間）で重ねた}) \\
+&= \begin{cases}
 \sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot 1 & (\varphi = 0) \\
 -\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot(-1) & (0 < \varphi \leq \tfrac{\pi}{2}) \\
 \sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot(-1) & (\tfrac{\pi}{2} < \varphi \leq \pi) \\
 -\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot 1 & (\pi < \varphi \leq \tfrac{3\pi}{2}) \\
 \sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}\cdot 1 & (\tfrac{3\pi}{2} < \varphi < 2\pi)
-\end{cases}`,
-      ),
-      paragraph(["各場合の符号を計算すると、"]),
-      displayMath(
-        String.raw`\frac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\gamma_2(-\theta_\mu)}
-= \begin{cases}
+\end{cases}
+&& (\because\ 1^{-1}=1\ \text{と}\ (-1)^{-1}=-1) \\
+&= \begin{cases}
 \sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}} & (0 \leq \varphi \leq \tfrac{\pi}{2} \text{ or } \tfrac{3\pi}{2} < \varphi < 2\pi) \\
 -\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}} & (\tfrac{\pi}{2} < \varphi \leq \tfrac{3\pi}{2})
-\end{cases}`,
+\end{cases}
+&& (\because\ \text{各場合の符号の積の計算と、同符号の区間の合併})
+\end{aligned}`,
       ),
       paragraph([
         "Part B: ",
