@@ -1233,32 +1233,56 @@ c_2 s_1 = c_1\cos\theta_\mu
         math(String.raw`\phi_{\mathrm{polar}}\!\left(-\dfrac{1}{r^2}\right) = \left[\left(\dfrac{1}{r^2},\ \pi\right)\right]_{\sim}`),
         "。",
       ]),
-      paragraph(["Step 4: 商の極座標表現。Step 0 の準同型性と Step 2, Step 3 より、"]),
+      paragraph(["Step 4: 商の極座標表現。"]),
       displayMath(
-        String.raw`\phi_{\mathrm{polar}}\!\left(\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}\right)
-= [(r^2,\ 2\varphi_\mu)]_{\sim}\cdot\left[\left(\tfrac{1}{r^2},\ \pi\right)\right]_{\sim}
-= \left[\left(r^2\cdot\tfrac{1}{r^2},\ 2\varphi_\mu + \pi\right)\right]_{\sim}
-= [(1,\ 2\varphi_\mu + \pi)]_{\sim}`,
+        String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}\!\left(\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}\right)
+&= \phi_{\mathrm{polar}}\!\left(z^2\cdot\left(-\tfrac{1}{r^2}\right)\right)
+&&(\because\ \text{Step 2 の商から積への書き換え}) \\
+&= \phi_{\mathrm{polar}}(z^2)\cdot\phi_{\mathrm{polar}}\!\left(-\tfrac{1}{r^2}\right)
+&&(\because\ \text{Step 0 の }\phi_{\mathrm{polar}}\text{ の乗法性}) \\
+&= [(r^2,\ 2\varphi_\mu)]_{\sim}\cdot\left[\left(\tfrac{1}{r^2},\ \pi\right)\right]_{\sim}
+&&(\because\ \text{Step 3 の各因子の極座標表現}) \\
+&= \left[\left(r^2\cdot\tfrac{1}{r^2},\ 2\varphi_\mu + \pi\right)\right]_{\sim}
+&&(\because\ \text{極座標表現の積の定義}) \\
+&= [(1,\ 2\varphi_\mu + \pi)]_{\sim}
+&&(\because\ r^2\cdot\tfrac{1}{r^2} = 1)
+\end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        ref("def_abs_arg"),
-        " と ",
-        ref("first_and_second_projections"),
-        " より ",
-        math(String.raw`\left|\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}\right| = \mathrm{pr}_1([(1, 2\varphi_\mu+\pi)]_{\sim}) = 1`),
-        " であり（特に第 1 成分 ",
+        "よって、絶対値は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}\right|
+&= \mathrm{pr}_1\!\left([(1,\ 2\varphi_\mu+\pi)]_{\sim}\right)
+&&(\because\ \text{絶対値の定義}) \\
+&= 1
+&&(\because\ \text{第 1 射影は代表の第 1 成分を返す})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（", ref("def_abs_arg"), "、", ref("first_and_second_projections"),
+        "）。第 1 成分 ",
         math(String.raw`1 \neq 0`),
         " なので ",
         math(String.raw`\mathrm{pr}_2`),
         " は ",
         math(String.raw`[2\varphi_\mu+\pi]_{\sim_{\mathrm{angle}}}`),
-        " を返す）、",
+        " を返し、偏角は",
       ]),
       displayMath(
-        String.raw`\arg^{[0,2\pi)}\!\left(\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}\right)
-= s_{[0,2\pi)}\!\left([\,2\varphi_\mu + \pi\,]_{\sim_{\mathrm{angle}}}\right)`,
+        String.raw`\begin{aligned}
+\arg^{[0,2\pi)}\!\left(\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}\right)
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\!\left([(1,\ 2\varphi_\mu+\pi)]_{\sim}\right)\right)
+&&(\because\ \text{偏角の定義}) \\
+&= s_{[0,2\pi)}\!\left([\,2\varphi_\mu + \pi\,]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \text{第 2 射影は第 1 成分が零でないとき角の類を返す})
+\end{aligned}`,
       ),
+      paragraph([
+        "（", ref("def_abs_arg"), "、", ref("first_and_second_projections"), "）。",
+      ]),
       paragraph([
         "Step 5: ",
         math(String.raw`\bmod 2\pi`),
