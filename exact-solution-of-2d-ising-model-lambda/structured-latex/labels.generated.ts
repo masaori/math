@@ -103,6 +103,7 @@ export const ALL_LABELS = [
   "claim_qbar_poly_linear_factor_product_extract",
   "claim_qbar_poly_monomial_decomposition",
   "claim_qbar_poly_power_difference_factorization",
+  "claim_qbar_poly_product_coeff_bound",
   "claim_qbar_pow_diff_quotient_root_value",
   "claim_qbar_pow_diff_sum_coeff_bound",
   "claim_qbar_pow_ne_zero",

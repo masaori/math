@@ -25693,6 +25693,78 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_product_coeff_bound",
+    kind: "claim",
+    title: { text: "係数上界つき多項式の積の係数は、上界の和より上の番号で零である" },
+    labels: ["claim_qbar_poly_product_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-product-coeff-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyProductCoeffBound",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_product_coeff_bound_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyProductCoeffBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`P,Q\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`p,q\in\mathbb{N}`), " を、「",
+        math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`k>p`),
+        " を満たすならば ", math(String.raw`\mathrm{ac}_k(P)=0`),
+        "」かつ「", math(String.raw`k\in\mathbb{N}`), " が ",
+        math(String.raw`k>q`), " を満たすならば ",
+        math(String.raw`\mathrm{ac}_k(Q)=0`),
+        "」となるように取る。このとき、", math(String.raw`k\in\mathbb{N}`),
+        " が ", math(String.raw`k>p+q`), " を満たすならば",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{k}(PQ)=0`),
+      paragraph([
+        "が成り立つ。すなわち 2 つの多項式の積の係数の尽きる番号は、それぞれの尽きる番号の和を",
+        "超えない。これは、根の個数の下界の帰納法で、取り出した残りの因子と商の積 ",
+        math(String.raw`h=Bg`),
+        " の係数の上界を、主張の適用として出すための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ", ref("def_qbar_polynomial_ring"), " の ",
+        math(String.raw`\mathrm{ac}_{k}`),
+        " であり、値の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）の中で行う。",
+        math(String.raw`k>p+q`), " を満たす ", math(String.raw`k\in\mathbb{N}`),
+        " を任意に取る。", math(String.raw`q\ge0`), " なので ",
+        math(String.raw`k>p+q\ge p`), "、すなわち ", math(String.raw`p<k`),
+        " が従うことを、鎖の中で使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{k}(PQ)
+&=\sum_{i=0}^{k}\mathrm{ac}_i(P)\cdot\mathrm{ac}_{k-i}(Q)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\sum_{i=0}^{p}\mathrm{ac}_i(P)\cdot\mathrm{ac}_{k-i}(Q)
++\sum_{i=p+1}^{k}\mathrm{ac}_i(P)\cdot\mathrm{ac}_{k-i}(Q)
+&&(\because\ p<k\ \text{なので、有限和を番号}\ p\ \text{で 2 つに分けられる})\\
+&=\sum_{i=0}^{p}\mathrm{ac}_i(P)\cdot 0
++\sum_{i=p+1}^{k}\mathrm{ac}_i(P)\cdot\mathrm{ac}_{k-i}(Q)
+&&(\because\ i\le p\ \text{と}\ k>p+q\ \text{より}\ k-i\ge k-p>q\text{。本主張の}\ Q\ \text{の係数の仮定を各項へ同時に当てる})\\
+&=\sum_{i=0}^{p}\mathrm{ac}_i(P)\cdot 0
++\sum_{i=p+1}^{k}0\cdot\mathrm{ac}_{k-i}(Q)
+&&(\because\ i\ge p+1\ \text{より}\ i>p\text{。本主張の}\ P\ \text{の係数の仮定を各項へ同時に当てる})\\
+&=\sum_{i=0}^{p}0
++\sum_{i=p+1}^{k}0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零。各項へ同時に当てる})\\
+&=0+0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元の有限和})\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との和})
+\end{aligned}`),
+      paragraph([
+        "これで主張が示された。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_root_polynomial_remaining_factor_value_ne_zero",
     kind: "claim",
     title: { text: "一次因子との分解の残りの因子の、その一次因子の根における値は零でない" },
