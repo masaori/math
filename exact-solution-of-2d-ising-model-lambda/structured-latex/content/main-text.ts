@@ -24127,8 +24127,14 @@ f
 &=\sum_{k=0}^{n}\Bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}
 -\widehat{\mathrm{ac}_k(f)\,w^{\,k}}\Bigr)
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の有限和と加法の逆元の分配})\\
+&=\sum_{k=0}^{n}\Bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}
+-\widehat{\mathrm{ac}_k(f)}\cdot\widehat{w^{\,k}}\Bigr)
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{より定数として送る写像は積を保つ。各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\Bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}
+-\widehat{\mathrm{ac}_k(f)}\cdot\widehat{w}^{\,k}\Bigr)
+&&(\because\ \blkref{claim_qbar_constant_embedding_pow}\ \text{を各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\bigl(t^{\,k}-\widehat{w}^{\,k}\bigr)
-&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{より積を保ち、}\ \blkref{claim_qbar_constant_embedding_pow}\ \text{を各項へ当て、分配則でくくる})\\
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則で各項をくくる})\\
 &=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,(t-\widehat{w})K_k(w)
 &&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{を各項へ同時に当てる})\\
 &=(t-\widehat{w})\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)

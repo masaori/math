@@ -40,11 +40,15 @@ def main():
             - R(sum((f[k] * qbar_pow(w, k) for k in range(n + 1)), QQbar(0)))
         line3 = sum((R(f[k]) * t^k - R(f[k] * qbar_pow(w, k))
                      for k in range(n + 1)), R.zero())
+        line3a = sum((R(f[k]) * t^k - R(f[k]) * R(qbar_pow(w, k))
+                      for k in range(n + 1)), R.zero())
+        line3b = sum((R(f[k]) * t^k - R(f[k]) * R(w)^k
+                      for k in range(n + 1)), R.zero())
         line4 = sum((R(f[k]) * (t^k - R(w)^k) for k in range(n + 1)), R.zero())
         line5 = sum((R(f[k]) * (t - R(w)) * K(w, k)
                      for k in range(n + 1)), R.zero())
         line6 = (t - R(w)) * g
-        assert f == line1 == line2 == line3 == line4 == line5 == line6
+        assert f == line1 == line2 == line3 == line3a == line3b == line4 == line5 == line6
     print("   通過（根を持つ多項式 %d 個）" % len(ROOTED))
     print("2. 因数定理の等式")
     for f, w in ROOTED:

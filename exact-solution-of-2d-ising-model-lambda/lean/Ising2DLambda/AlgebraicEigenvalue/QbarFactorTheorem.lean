@@ -1,6 +1,6 @@
 /-
 章「固有値の代数性」の「根を持つ多項式は一次式を因子に持つ」の具体版。
-人手証明の八段の鎖と同じ商を構成する。既製の因数定理には委ねない。
+人手証明の十段の鎖と同じ商を構成する。既製の因数定理には委ねない。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolyEvalCoefficientSum
 import Ising2DLambda.AlgebraicEigenvalue.QbarConstEmbeddingPow
@@ -31,11 +31,19 @@ theorem qbarFactorTheorem (f : QbarPoly) (w : Qbar) (n : ℕ)
           (qbarConst (f.coeff k) * Polynomial.X ^ k - qbarConst (f.coeff k * w ^ k)) := by
             rw [Finset.sum_sub_distrib]
     _ = ∑ k ∈ Finset.range (n + 1),
-          qbarConst (f.coeff k) * (Polynomial.X ^ k - qbarConst w ^ k) := by
+          (qbarConst (f.coeff k) * Polynomial.X ^ k
+            - qbarConst (f.coeff k) * qbarConst (w ^ k)) := by
             refine Finset.sum_congr rfl (fun k _ => ?_)
             rw [show qbarConst (f.coeff k * w ^ k)
                 = qbarConst (f.coeff k) * qbarConst (w ^ k) by simp [qbarConst]]
+    _ = ∑ k ∈ Finset.range (n + 1),
+          (qbarConst (f.coeff k) * Polynomial.X ^ k
+            - qbarConst (f.coeff k) * qbarConst w ^ k) := by
+            refine Finset.sum_congr rfl (fun k _ => ?_)
             rw [qbarConstEmbeddingPow]
+    _ = ∑ k ∈ Finset.range (n + 1),
+          qbarConst (f.coeff k) * (Polynomial.X ^ k - qbarConst w ^ k) := by
+            refine Finset.sum_congr rfl (fun k _ => ?_)
             ring
     _ = ∑ k ∈ Finset.range (n + 1),
           qbarConst (f.coeff k) * ((Polynomial.X - qbarConst w) * qbarPolyPowDiffSum w k) := by
