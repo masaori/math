@@ -3762,6 +3762,15 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 137）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 12 の 2 本の計算を整えた。
+1 本目（$c_1\cos\theta_\mu-i\sin\theta_\mu$）の 3 段に根拠が無かったので、Euler 表示の代入・
+共通因子 $i\ne0$ の約分・分配則を各行末に付け、2 本目（$+i\sin\theta_\mu$ の側）が
+「同様に」と結果だけ書かれていたので、同じ 3 段の鎖へ開いた。内容は変えていない。
+姉妹側の生成器は `\blkref` を定義していないため、(∵ …) には引いたブロックの題
+（「$\cos,\sin$ の Euler 表示」）を書いた（既存の注記の流儀に合わせた）。
+**次の tick は同じ主張の Step 13 以降（分子分母への代入と整理）に根拠の粗い行が無いかを見る。**
+
 **2026-08-12（tick 136）**: `008_TV1_hatZ_hatY_part2` の主張
 「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Steps 9–11 を、独立していた
 3 つの表示から一続きの 3 段の鎖へ直し、$\gamma_2$ の定義の代入・三角関数の偶奇性・

@@ -2201,14 +2201,25 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
       displayMath(
         String.raw`\begin{aligned}
 c_1\cos\theta_\mu - i\sin\theta_\mu
-&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} - i\cdot\frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2i} \\
-&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} - \frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2} \\
+&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} - i\cdot\frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2i}
+&& (\because\ \text{「$\cos,\sin$ の Euler 表示」の }\cos\theta_\mu\text{ と }\sin\theta_\mu\text{ の表式を代入}) \\
+&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} - \frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2}
+&& (\because\ i\cdot\tfrac{1}{2i}=\tfrac{1}{2}\text{。共通因子}\ i\ne0\ \text{の約分}) \\
 &= \frac{(c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu}}{2}
+&& (\because\ \text{分配則で}\ e^{i\theta_\mu},\ e^{-i\theta_\mu}\ \text{の係数をまとめる})
 \end{aligned}`,
       ),
-      paragraph(["同様に、"]),
+      paragraph(["もう 1 本も同じ 3 段で計算する。"]),
       displayMath(
-        String.raw`c_1\cos\theta_\mu + i\sin\theta_\mu = \frac{(c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu}}{2}`,
+        String.raw`\begin{aligned}
+c_1\cos\theta_\mu + i\sin\theta_\mu
+&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} + i\cdot\frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2i}
+&& (\because\ \text{「$\cos,\sin$ の Euler 表示」の }\cos\theta_\mu\text{ と }\sin\theta_\mu\text{ の表式を代入}) \\
+&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} + \frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2}
+&& (\because\ i\cdot\tfrac{1}{2i}=\tfrac{1}{2}\text{。共通因子}\ i\ne0\ \text{の約分}) \\
+&= \frac{(c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu}}{2}
+&& (\because\ \text{分配則で}\ e^{i\theta_\mu},\ e^{-i\theta_\mu}\ \text{の係数をまとめる})
+\end{aligned}`,
       ),
       paragraph(["Step 13: 分子分母へ代入し整理すると、"]),
       displayMath(
