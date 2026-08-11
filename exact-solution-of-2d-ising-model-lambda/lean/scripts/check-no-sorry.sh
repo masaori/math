@@ -618,6 +618,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_telescope_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.no_zero_divisors_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

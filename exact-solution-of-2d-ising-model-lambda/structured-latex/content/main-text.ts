@@ -22539,6 +22539,103 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_no_zero_divisors",
+    kind: "claim",
+    title: {
+      text: "代数的数の積が零元ならば、零元でない方で割って他方が零元と分かる",
+    },
+    labels: ["claim_qbar_no_zero_divisors"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.no_zero_divisors_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-no-zero-divisors"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）が ",
+        math(String.raw`ab=0`),
+        " と ",
+        math(String.raw`a\ne0`),
+        " を満たすとする。このとき",
+      ]),
+      displayMath(String.raw`b=0`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は体であり（",
+        ref("def_algebraic_numbers"),
+        "）、",
+        math(String.raw`a\ne0`),
+        " であるから、",
+        math(String.raw`a^{-1}a=1`),
+        " を満たす ",
+        math(String.raw`a^{-1}\in\overline{\mathbb{Q}}`),
+        " が取れる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b&=1\cdot b
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=\bigl(a^{-1}a\bigr)b
+&&(\because\ \text{準備で取った}\ a^{-1}\ \text{の性質}\ a^{-1}a=1)\\
+&=a^{-1}(ab)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=a^{-1}\cdot 0
+&&(\because\ \text{仮定}\ ab=0)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元})
+\end{aligned}`),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積が結合的であること、積の単位元があること、",
+        "零元との積が零元であること、そして ",
+        math(String.raw`a\ne0`),
+        " に対して ",
+        math(String.raw`a^{-1}a=1`),
+        " を満たす元が取れることだけである。",
+        "積の可換則も、加法についての性質も、代数閉であることも使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "これは、",
+        math(String.raw`\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）の元 ",
+        math(String.raw`z`),
+        " が ",
+        math(String.raw`z\ne1`),
+        " を満たすとき、伸縮の等式（",
+        ref("claim_qbar_geometric_telescope"),
+        "）の左辺 ",
+        math(String.raw`(z-1)G_{n}(z)`),
+        " が零元であることから ",
+        math(String.raw`G_{n}(z)=0`),
+        " を出すための段であり、",
+        "1 の冪根の全体にわたる冪の和 ",
+        math(String.raw`S_{n,m}`),
+        " について ",
+        math(String.raw`(w^{m}-1)S_{n,m}=0`),
+        "（",
+        ref("claim_root_of_unity_power_sum_invariant"),
+        "）から ",
+        math(String.raw`S_{n,m}=0`),
+        " を出すための段でもある。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -22768,6 +22865,8 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
           ref("claim_root_of_unity_power_sum_invariant"),
           "）、および代数的数の冪の有限和が 1 を引いたものを掛けると伸縮すること（",
           ref("claim_qbar_geometric_telescope"),
+          "）、および代数的数の積が零元ならば零元でない方で割って他方が零元と分かること（",
+          ref("claim_qbar_no_zero_divisors"),
           "）までは上で済んでいる。",
           "次に書くのは ",
           math(String.raw`\mu_n`),
