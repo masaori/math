@@ -22739,6 +22739,155 @@ b&=1\cdot b
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_power_difference_factorization",
+    kind: "claim",
+    title: {
+      text: "代数的数の冪の差は、もとの 2 元の差を因子に持つ",
+    },
+    labels: ["claim_qbar_power_difference_factorization"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-power-difference-factorization"],
+    statement: [
+      paragraph([
+        math(String.raw`z,w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取り、",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。",
+        math(String.raw`H_{n}(z,w)\in\overline{\mathbb{Q}}`),
+        " を ",
+        math(String.raw`n`),
+        " についての次の約束で定める。",
+      ]),
+      displayMath(
+        String.raw`H_{0}(z,w):=0,\qquad H_{n+1}(z,w):=H_{n}(z,w)\,w+z^{n}`,
+      ),
+      paragraph([
+        "このとき",
+      ]),
+      displayMath(String.raw`(z-w)\,H_{n}(z,w)=z^{n}-w^{n}`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z,w\in\overline{\mathbb{Q}}`),
+        " を固定し、",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(z-w)\,H_{0}(z,w)&=(z-w)\cdot 0
+&&(\because\ H_{0}(z,w)=0\ \text{の約束})\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&=1-1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
+&=z^{0}-1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&=z^{0}-w^{0}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1)
+\end{aligned}`),
+      paragraph([
+        "一歩（",
+        math(String.raw`n`),
+        " から ",
+        math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`(z-w)\,H_{n}(z,w)=z^{n}-w^{n}`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(z-w)\,H_{n+1}(z,w)&=(z-w)\bigl(H_{n}(z,w)\,w+z^{n}\bigr)
+&&(\because\ H_{n+1}(z,w)\ \text{の約束})\\
+&=(z-w)\bigl(H_{n}(z,w)\,w\bigr)+(z-w)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\bigl((z-w)H_{n}(z,w)\bigr)w+(z-w)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(z^{n}-w^{n}\bigr)w+(z-w)z^{n}
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(z^{n}w-w^{n}w\bigr)+(z-w)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+(z-w)z^{n}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w)\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z\,z^{n}-w\,z^{n}\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n}z-w\,z^{n}\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-w\,z^{n}\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-z^{n}w\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&=z^{n+1}-w^{n+1}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}w\ \text{が相殺する})
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、すべての ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）、",
+        "積が和へ分配されること、積が結合的であること、積の単位元があること、",
+        "零元との積が零元であること、そして ",
+        math(String.raw`z`),
+        " と ",
+        math(String.raw`w`),
+        " が可換であることだけである（可換則を使っているのは第 8 と第 10 の等号の 2 箇所で、",
+        "どちらも ",
+        math(String.raw`z^{n}`),
+        " と ",
+        math(String.raw`z`),
+        "、",
+        math(String.raw`z^{n}`),
+        " と ",
+        math(String.raw`w`),
+        " の入れ替えである）。",
+        "積の逆元の存在も、代数閉であることも使っていない。実数体も複素数体も現れない",
+        "（元は代数的数、指数は自然数である）。",
+      ]),
+      paragraph([
+        math(String.raw`w=1`),
+        " と取ると ",
+        math(String.raw`H_{n}(z,1)`),
+        " の約束は ",
+        math(String.raw`G_{n}(z)`),
+        "（",
+        ref("claim_qbar_geometric_telescope"),
+        "）の約束に一致し、この主張は伸縮の等式に一致する。",
+        "すなわちこれは伸縮の等式を 2 元へ広げたものである。",
+      ]),
+      paragraph([
+        "これは、",
+        math(String.raw`\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）がちょうど ",
+        math(String.raw`n`),
+        " 個の元を持つことを示すための足場である。",
+        "その論法は「",
+        math(String.raw`z^{n}-1`),
+        " の根が高々 ",
+        math(String.raw`n`),
+        " 個であること」を経由し、そこで根 ",
+        math(String.raw`w`),
+        " を持つ多項式が ",
+        math(String.raw`(t-w)`),
+        " を因子に持つことを使う。この主張はその因数分解を与える等式である。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
