@@ -3795,6 +3795,15 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 139）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 14（$x=e^{i\theta_\mu}$ の置換と
+$(c_1+1)$ でのくくり出し）が、結果の式だけで根拠を持たなかったので、分子と分母をそれぞれ
+2 段の鎖（$x$ の定義と指数法則による書き換え・$c_1>0$ より $c_1+1\ne0$ とし分配則でくくる）へ
+開き、$x\ne0$ と $x^{-1}=e^{-i\theta_\mu}$ の根拠も添えた。内容は変えていない。
+姉妹側の検査一式・検証と証明の対応 116 件・PDF 292 ページは通過した。
+**次の tick は同じ主張の Step 15 以降（$\alpha_1\alpha_2^{-1}$ の 2 本の計算に行ごとの根拠が
+無い）から続ける。**
+
 **2026-08-12（tick 138）**: `008_TV1_hatZ_hatY_part2` の主張
 「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 13 の 3 段へ、
 Steps 9--11 の比と Step 12 の計算結果の代入・共通分母 2 への通分と共通因子の約分・

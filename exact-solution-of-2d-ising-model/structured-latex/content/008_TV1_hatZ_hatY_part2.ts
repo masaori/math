@@ -2236,17 +2236,32 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       paragraph([
         "Step 14: ",
         math(String.raw`x := e^{i\theta_\mu}`),
-        " とおくと、分子 ",
-        math(String.raw`= (c_1 - 1)x^2 - 2 s_1 c_2 x + (c_1 + 1)`),
-        "、分母 ",
-        math(String.raw`= (c_1 - 1)x^{-2} - 2 s_1 c_2 x^{-1} + (c_1 + 1)`),
-        "。",
-        math(String.raw`(c_1 + 1)`),
-        " でくくると、",
+        " とおく（",
+        math(String.raw`x\,e^{-i\theta_\mu} = e^{i\theta_\mu}e^{-i\theta_\mu} = 1`),
+        " より ",
+        math(String.raw`x \neq 0`),
+        " であり、",
+        math(String.raw`x^{-1} = e^{-i\theta_\mu}`),
+        "）。Step 13 の分子を書き直す。",
       ]),
       displayMath(
-        String.raw`\text{分子} = (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^2 - \frac{2 s_1 c_2}{c_1 + 1}x + 1\right), \quad
-\text{分母} = (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^{-2} - \frac{2 s_1 c_2}{c_1 + 1}x^{-1} + 1\right)`,
+        String.raw`\begin{aligned}
+(c_1 - 1)e^{2i\theta_\mu} + (c_1 + 1) - 2 s_1 c_2\, e^{i\theta_\mu}
+&= (c_1 - 1)x^2 - 2 s_1 c_2\, x + (c_1 + 1)
+&& (\because\ x\ \text{の定義と指数法則}\ e^{2i\theta_\mu}=(e^{i\theta_\mu})^2\text{。項を}\ x\ \text{の降冪に並べ替え}) \\
+&= (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^2 - \frac{2 s_1 c_2}{c_1 + 1}x + 1\right)
+&& (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配則でくくる})
+\end{aligned}`,
+      ),
+      paragraph(["分母も同じ 2 段で書き直す。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(c_1 + 1) + (c_1 - 1)e^{-2i\theta_\mu} - 2 s_1 c_2\, e^{-i\theta_\mu}
+&= (c_1 - 1)x^{-2} - 2 s_1 c_2\, x^{-1} + (c_1 + 1)
+&& (\because\ x^{-1} = e^{-i\theta_\mu}\ \text{と指数法則}\ e^{-2i\theta_\mu}=(e^{-i\theta_\mu})^2\text{。項を}\ x^{-1}\ \text{の降冪に並べ替え}) \\
+&= (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^{-2} - \frac{2 s_1 c_2}{c_1 + 1}x^{-1} + 1\right)
+&& (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配則でくくる})
+\end{aligned}`,
       ),
       paragraph(["Step 15: ", math(String.raw`\dfrac{c_1 - 1}{c_1 + 1} = \alpha_1\alpha_2^{-1}`), " の証明。"]),
       displayMath(
