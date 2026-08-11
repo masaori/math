@@ -244,6 +244,11 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 | ラベル | `com.masaori.ising-lambda-auto-loop` |
 | 定義 | `~/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist` |
 | 実体 | `scripts/auto-loop-tick.sh`（毎時 5 分。見送られたときの再試行を 35 分に置く。多重起動を防ぎ、45 分で打ち切る） |
+| 使うエージェント | **Claude と Codex を 1 tick ごとに交互**（ユーザー指示）。Claude は `claude-fable-5` の effort medium、Codex は `gpt-5.6-sol` の reasoning medium。直前に使ったほうを `logs/last-agent` に記録し、その反対を選ぶ（見送られた回では記録しないので偏らない） |
+
+交互にするのは、**同じモデルの癖がそのまま証明の癖になるのを避けるため**である。
+どちらが書いた tick かはログの `=== tick 開始（<エージェント名> / …）` で分かる。
+片方でしか起きない失敗（例: 特定の CLI の引数の扱い）を切り分けるときはここを見る。
 | ログ | `logs/auto-loop.log`（git 管理外） |
 
 ```sh

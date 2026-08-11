@@ -49,10 +49,13 @@ fi
 
 export PATH
 
-if ! command -v claude >/dev/null 2>&1; then
-  log "SKIP: claude が PATH に無い"
-  exit 1
-fi
+# tick は Claude と Codex を交互に使う（ユーザー指示）。両方が要る。
+for cli in claude codex; do
+  if ! command -v "$cli" >/dev/null 2>&1; then
+    log "SKIP: $cli が PATH に無い"
+    exit 1
+  fi
+done
 
 # 多重起動の防止。mkdir は失敗が原子的なのでロックに使える。
 # 前の tick が異常終了してロックが残った場合に備え、生きているプロセスがあるかを PID で確認する。
@@ -160,7 +163,14 @@ EOF
 PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
 PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 
-log "=== tick 開始（まとめに入る締切 ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
+# どちらのコーディングエージェントを使うかを交互に決める（ユーザー指示）。
+# 同じモデルの癖がそのまま証明の癖になるのを避けるため。直前に使ったほうを記録し、
+# その反対を選ぶ（実際に起動した回だけ記録するので、見送られた回で偏らない）。
+AGENT_MARK="$LOG_DIR/last-agent"
+last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
+if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
+
+log "=== tick 開始（${agent} / まとめに入る締切 ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 
 set +e
 # -k 60: SIGTERM の 60 秒後に SIGKILL を送る。付けないと、SIGTERM を無視したプロセスが
@@ -174,11 +184,21 @@ echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 # **プロンプトは標準入力から渡す。** --mcp-config は可変長引数なので、引数として
 # プロンプトを続けると設定ファイル名として飲み込まれる
 # （実測 2026-08-10 06:05: "ENAMETOOLONG: name too long" で 2 秒で落ちた）。
-printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-  --dangerously-skip-permissions --strict-mcp-config \
-  --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+# codex も `-` を渡すと標準入力から読む。モデルと推論の強さはユーザー指定
+# （Claude は Fable 5 の medium、Codex は Sol の medium）。
+if [ "$agent" = "claude" ]; then
+  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
+    --model claude-fable-5 --effort medium \
+    --dangerously-skip-permissions --strict-mcp-config \
+    --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+else
+  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
+    -m gpt-5.6-sol -c model_reasoning_effort=medium \
+    --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+fi
 status=$?
 set -e
+printf '%s\n' "$agent" > "$AGENT_MARK"
 
 record_leftover() {  # 失敗した tick が残したものを目印へ書く（次の tick が拾う）
   local reason="$1"
