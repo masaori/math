@@ -22746,6 +22746,11 @@ b&=1\cdot b
     },
     labels: ["claim_qbar_power_difference_factorization"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_difference_factorization_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization_from_necSuf",
+    ],
     verification: ["sagemath/check/qbar-power-difference-factorization"],
     statement: [
       paragraph([
