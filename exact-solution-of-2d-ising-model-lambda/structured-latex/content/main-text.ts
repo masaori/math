@@ -24843,6 +24843,65 @@ n+1
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_element_ne_zero",
+    kind: "claim",
+    title: { text: "1 の冪根は零でない" },
+    labels: ["claim_root_of_unity_element_ne_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-of-unity-element-ne-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityElementNeZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_of_unity_element_ne_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityElementNeZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、", math(String.raw`w\in\mu_{n}`), "（",
+        ref("def_root_of_unity_set"), "）を任意に取る。このとき ",
+        math(String.raw`w\ne0`), " である。ここで ", math(String.raw`0`),
+        " は体 ", math(String.raw`\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）の加法の単位元（零元）である。",
+      ]),
+      paragraph([
+        "仮定 ", math(String.raw`n\ge1`), " は外せない。",
+        math(String.raw`n=0`), " のときは ",
+        math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`), "（",
+        ref("def_root_of_unity_set"), "）なので、零元 ",
+        math(String.raw`0\in\mu_{0}`), " が反例になる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "背理法で示す。", math(String.raw`w=0`),
+        " と仮定して、体 ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の中の等式 ", math(String.raw`1=0`), " を導く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=w^{\,n}
+&&(\because\ w\in\mu_{n}\ \text{の条件}\ w^{\,n}=1\text{（}\blkref{def_root_of_unity_set}\text{）})\\
+&=0^{\,n}
+&&(\because\ \text{仮定}\ w=0)\\
+&=0^{\,(n-1)+1}
+&&(\because\ n\ge1\ \text{より}\ n-1\in\mathbb{N}\ \text{であり}\ (n-1)+1=n)\\
+&=0^{\,n-1}\cdot 0
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{で置いた}\ \overline{\mathbb{Q}}\ \text{の元の冪の約束}\ z^{\,k+1}=z^{\,k}\cdot z)\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})
+\end{aligned}`),
+      paragraph([
+        "一方、体 ", math(String.raw`\overline{\mathbb{Q}}`), " では ",
+        math(String.raw`1\ne0`), " である（", ref("def_algebraic_numbers"),
+        " の体であること）。これは上の等式 ", math(String.raw`1=0`),
+        " と矛盾する。したがって仮定 ", math(String.raw`w=0`), " は偽であり、",
+        math(String.raw`w\ne0`), " である。",
+        "この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25097,7 +25156,10 @@ n+1
           ref("claim_root_of_unity_finite_card_bound"),
           "）、および冪の差の因数分解の商のもとの根における値の計算（",
           ref("claim_qbar_pow_diff_quotient_root_value"),
-          "）までは上で済んでいる。次に書くのは、その値が零でないこと（単根性）、",
+          "）、および 1 の冪根が零でないこと（",
+          ref("claim_root_of_unity_element_ne_zero"),
+          "）までは上で済んでいる。次に書くのは、零でない代数的数の冪が零でないこと、",
+          "商のもとの根における値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
           math(String.raw`n`),
