@@ -95,6 +95,7 @@ export const ALL_LABELS = [
   "claim_rational_exponent_well_defined",
   "claim_restriction_family_gluing",
   "claim_root_of_unity_divisor",
+  "claim_root_of_unity_mul",
   "claim_row_config_min_unique",
   "claim_row_config_minimal_period_divides_L",
   "claim_row_config_orbit_card",

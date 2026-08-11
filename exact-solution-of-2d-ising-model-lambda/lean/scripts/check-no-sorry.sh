@@ -600,6 +600,9 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_pow_necSuf
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_mul_comm_of_comm
   Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_mem_pow_eq_one_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

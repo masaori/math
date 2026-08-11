@@ -273,3 +273,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarProjectorEigenspaceFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarMulPow
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarMulPow
 import Ising2DLambda.AlgebraicEigenvalue.QbarMulPowFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityMul
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RootOfUnityMul
+import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityMulFromNecSuf

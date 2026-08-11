@@ -21877,6 +21877,90 @@ z^{\,L+1}&=z^{L}\,z
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_mul",
+    kind: "claim",
+    title: { text: "1 の冪根の全体は積で閉じている" },
+    labels: ["claim_root_of_unity_mul"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_mem_pow_eq_one_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-mul"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。",
+        math(String.raw`w\in\mu_{n}`),
+        " と ",
+        math(String.raw`z\in\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`wz\in\mu_{n}`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_root_of_unity_set"),
+        " により ",
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " かつ ",
+        math(String.raw`w^{n}=1`),
+        " であり、同じく ",
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " かつ ",
+        math(String.raw`z^{n}=1`),
+        " である。",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は体なので積で閉じており（",
+        ref("def_algebraic_numbers"),
+        "）、",
+        math(String.raw`wz\in\overline{\mathbb{Q}}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(wz)^{n}&=w^{n}z^{n}
+&&(\because\ \blkref{claim_qbar_mul_pow})\\
+&=1\cdot z^{n}
+&&(\because\ w^{n}=1)\\
+&=1\cdot 1
+&&(\because\ z^{n}=1)\\
+&=1
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`wz\in\overline{\mathbb{Q}}`),
+        " かつ ",
+        math(String.raw`(wz)^{n}=1`),
+        " であり、",
+        ref("def_root_of_unity_set"),
+        " により ",
+        math(String.raw`wz\in\mu_{n}`),
+        " である。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積で閉じていること・積の単位元・および ",
+        ref("claim_qbar_mul_pow"),
+        " が使う性質（結合則と 2 元についての可換則）だけである。",
+        "加法も零元も分配則も、逆元の存在も、代数閉であることも使っていない。",
+        math(String.raw`n=0`),
+        " のときも鎖はそのまま通る（",
+        math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
+        " なので主張は自明だが、鎖はそれを使っていない）。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -22094,16 +22178,14 @@ z^{\,L+1}&=z^{L}\,z
           ref("claim_qbar_projector_image_eigenspace"),
           "）、および代数的数の積の冪が冪の積であること（",
           ref("claim_qbar_mul_pow"),
+          "）、および 1 の冪根の全体が積で閉じていること（",
+          ref("claim_root_of_unity_mul"),
           "）までは上で済んでいる。",
-          "次に書くのは、1 の ",
-          math(String.raw`L`),
-          " 乗根の全体 ",
-          math(String.raw`\mu_L`),
-          " が積で閉じることであり、続いて ",
+          "次に書くのは、",
           math(String.raw`\mu_L`),
           " の元を掛ける操作が ",
           math(String.raw`\mu_L`),
-          " の全単射であること、",
+          " の全単射であることであり、続いて ",
           math(String.raw`\mu_L`),
           " の元の冪の総和（指数が ",
           math(String.raw`L`),
