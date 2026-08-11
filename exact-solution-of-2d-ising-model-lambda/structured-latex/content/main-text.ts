@@ -24147,6 +24147,139 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_pow_diff_sum_coeff_bound",
+    kind: "claim",
+    title: { text: "冪の差の因数分解の商の係数は、その番号以上で零である" },
+    labels: ["claim_qbar_pow_diff_sum_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-pow-diff-sum-coeff-bound"],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取り、",
+        math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`),
+        " を ",
+        ref("claim_qbar_poly_power_difference_factorization"),
+        " の約束（",
+        math(String.raw`K_{0}(w)=0`),
+        "、",
+        math(String.raw`K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n}`),
+        "）で取る。このとき、",
+        math(String.raw`j\in\mathbb{N}`),
+        " が ",
+        math(String.raw`n\le j`),
+        " を満たすならば",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{j}\bigl(K_{n}(w)\bigr)=0`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{ac}_{j}`),
+        " は ",
+        ref("def_qbar_polynomial_ring"),
+        " の係数）。この主張は、根の個数を次数で抑える段で使う。",
+        ref("claim_qbar_factor_theorem"),
+        " が構成した商 ",
+        math(String.raw`g=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)`),
+        " の係数が ",
+        math(String.raw`n-1`),
+        " より先で尽きることが、ここから出る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " を固定する。以下の係数はすべて ",
+        ref("def_qbar_polynomial_ring"),
+        " の ",
+        math(String.raw`\mathrm{ac}_{j}`),
+        " であり、値の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の中で行う。",
+        math(String.raw`n`),
+        " についての帰納法で示す（",
+        math(String.raw`j`),
+        " は各段の中で任意に取る）。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る（",
+        math(String.raw`0\le j`),
+        " は常に成り立つ）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{j}\bigl(K_{0}(w)\bigr)
+&=\mathrm{ac}_{j}(0)
+&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{0}(w)=0)\\
+&=0
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の零元はすべての係数が零の族である})
+\end{aligned}`),
+      paragraph([
+        "一歩。「",
+        math(String.raw`n\le j'`),
+        " を満たす任意の ",
+        math(String.raw`j'\in\mathbb{N}`),
+        " について ",
+        math(String.raw`\mathrm{ac}_{j'}(K_{n}(w))=0`),
+        "」を仮定し、",
+        math(String.raw`n+1\le j`),
+        " を満たす ",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る。",
+        math(String.raw`n+1\le j`),
+        " から ",
+        math(String.raw`j\ne n`),
+        "、",
+        math(String.raw`n\le j`),
+        "、および ",
+        math(String.raw`1\le j`),
+        " が従う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{j}\bigl(K_{n+1}(w)\bigr)
+&=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
+&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
+&=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}\bigr)+\mathrm{ac}_{j}\bigl(t^{\,n}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
+&=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}\bigr)+0
+&&(\because\ j\ne n\ \text{なので}\ \blkref{claim_qbar_poly_indeterminate_power_coefficient})\\
+&=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}\bigr)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元})\\
+&=\sum_{i=0}^{j}\mathrm{ac}_{i}\bigl(K_{n}(w)\bigr)\cdot\mathrm{ac}_{j-i}\bigl(\widehat{w}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\Bigl(\sum_{i=0}^{j-1}\mathrm{ac}_{i}\bigl(K_{n}(w)\bigr)\cdot\mathrm{ac}_{j-i}\bigl(\widehat{w}\bigr)\Bigr)
++\mathrm{ac}_{j}\bigl(K_{n}(w)\bigr)\cdot\mathrm{ac}_{0}\bigl(\widehat{w}\bigr)
+&&(\because\ 1\le j\ \text{なので有限和から}\ i=j\ \text{の項を分ける})\\
+&=\Bigl(\sum_{i=0}^{j-1}\mathrm{ac}_{i}\bigl(K_{n}(w)\bigr)\cdot 0\Bigr)
++\mathrm{ac}_{j}\bigl(K_{n}(w)\bigr)\cdot\mathrm{ac}_{0}\bigl(\widehat{w}\bigr)
+&&(\because\ i\le j-1\ \text{の各項では}\ 1\le j-i\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{を各項へ同時に当てる})\\
+&=\Bigl(\sum_{i=0}^{j-1}0\Bigr)
++\mathrm{ac}_{j}\bigl(K_{n}(w)\bigr)\cdot\mathrm{ac}_{0}\bigl(\widehat{w}\bigr)
+&&(\because\ \text{零を掛けると零。各項へ同時に当てる})\\
+&=\mathrm{ac}_{j}\bigl(K_{n}(w)\bigr)\cdot\mathrm{ac}_{0}\bigl(\widehat{w}\bigr)
+&&(\because\ 0\ \text{は加法の単位元。有限和の各項へ繰り返し当てる})\\
+&=\mathrm{ac}_{j}\bigl(K_{n}(w)\bigr)\cdot w
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \mathrm{ac}_{0}(\widehat{w})=w)\\
+&=0\cdot w
+&&(\because\ n\le j\ \text{なので帰納法の仮定を}\ j'=j\ \text{へ当てる})\\
+&=0
+&&(\because\ \text{零を掛けると零})
+\end{aligned}`),
+      paragraph([
+        "終点は主張の右辺である。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

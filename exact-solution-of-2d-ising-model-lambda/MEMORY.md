@@ -40,6 +40,14 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 因数分解から $f=(t-\widehat w)g$ を得る。必要十分版は可換環上の有限和の言明まで薄めた。
 次は「零でない多項式の根は次数を超えないこと」である。
 
+2026-08-11 の tick 110 では、レビューで因数定理の鎖の第 5 段（根拠 3 つが 1 行に
+まとまっていた）を 3 段へ割り（本文・Lean 具体版・SageMath を同じ粒度に保った）、
+「零でない多項式の根は次数を超えないこと」を論法の数で 4 つへ割り直したうえで、最初の段
+「冪の差の因数分解の商 $K_n(w)$ の係数は $n$ 以上の番号で零である」
+（`claim_qbar_pow_diff_sum_coeff_bound`）を**記述と SageMath まで**進めた（$n$ についての
+帰納法 1 本。Lean 具体版・必要十分版は未着手で、実行の列の先頭に積んである）。
+本文のラベルは 244 件、検証と証明の対応は 98 件。次は同主張の Lean である。
+
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
 詳細は [lean/README.md](lean/README.md)。

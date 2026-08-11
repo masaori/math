@@ -94,6 +94,7 @@ export const ALL_LABELS = [
   "claim_qbar_poly_indeterminate_power_coefficient",
   "claim_qbar_poly_monomial_decomposition",
   "claim_qbar_poly_power_difference_factorization",
+  "claim_qbar_pow_diff_sum_coeff_bound",
   "claim_qbar_power_difference_factorization",
   "claim_qbar_prod_eq_zero",
   "claim_qbar_projector_action",
