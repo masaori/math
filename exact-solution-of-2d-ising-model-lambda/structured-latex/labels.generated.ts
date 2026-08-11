@@ -110,6 +110,7 @@ export const ALL_LABELS = [
   "claim_qbar_smul_sum",
   "claim_qbar_transfer_preserves_shift_eigenspace",
   "claim_qbar_unit_sum_eq_rational",
+  "claim_qbar_unit_sum_ne_zero",
   "claim_rational_exponent_well_defined",
   "claim_restriction_family_gluing",
   "claim_root_of_unity_divisor",

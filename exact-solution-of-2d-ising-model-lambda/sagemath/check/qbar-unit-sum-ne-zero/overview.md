@@ -1,0 +1,13 @@
+# SageMath Check: 単位元を正の個数だけ足した有限和は零でない
+
+**対象ラベル**: `claim_qbar_unit_sum_ne_zero`
+
+前段の等式 $\sum_{i<n}1=n$ と、有理数および代数的数の中で正の自然数が零でないことを
+$n=1,\dots,12$ について厳密計算で確かめる。仮定 $n\geq1$ を外すと $n=0$ で結論が破れることも確かめる。
+浮動小数点は使わない。
+
+```sh
+sage sagemath/check/qbar-unit-sum-ne-zero/check.sage
+```
+
+**2026-08-12 実行: すべて通過。**

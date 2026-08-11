@@ -1200,9 +1200,15 @@ c_2 s_1 = c_1\cos\theta_\mu
         "Step 3: 各因子の極座標表現。Step 0 と Step 1 より",
       ]),
       displayMath(
-        String.raw`\phi_{\mathrm{polar}}(z^2) = \phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z)
-= [(r,\varphi_\mu)]_{\sim}\cdot[(r,\varphi_\mu)]_{\sim}
-= [(r^2,\ 2\varphi_\mu)]_{\sim}`,
+        String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}(z^2)
+&= \phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z)
+&& (\because\ \phi_{\mathrm{polar}}\ \text{の乗法性}) \\
+&= [(r,\varphi_\mu)]_{\sim}\cdot[(r,\varphi_\mu)]_{\sim}
+&& (\because\ \text{Step 1}) \\
+&= [(r^2,\ 2\varphi_\mu)]_{\sim}
+&& (\because\ \text{極座標表現の積の定義})
+\end{aligned}`,
       ),
       paragraph([
         "また ",
@@ -1212,10 +1218,15 @@ c_2 s_1 = c_1\cos\theta_\mu
         " より",
       ]),
       displayMath(
-        String.raw`\phi_{\mathrm{cartesian}}\!\left(\left[\left(\tfrac{1}{r^2},\ \pi\right)\right]_{\sim}\right)
-= \left(\tfrac{1}{r^2}\cos\pi,\ \tfrac{1}{r^2}\sin\pi\right)
-= \left(-\tfrac{1}{r^2},\ 0\right)
-= -\frac{1}{r^2}`,
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}\!\left(\left[\left(\tfrac{1}{r^2},\ \pi\right)\right]_{\sim}\right)
+&= \left(\tfrac{1}{r^2}\cos\pi,\ \tfrac{1}{r^2}\sin\pi\right)
+&& (\because\ \phi_{\mathrm{cartesian}}\ \text{の定義}) \\
+&= \left(-\tfrac{1}{r^2},\ 0\right)
+&& (\because\ \cos\pi=-1,\ \sin\pi=0) \\
+&= -\frac{1}{r^2}
+&& (\because\ \mathbb{R}\ \text{を}\ \mathbb{C}\ \text{の実軸と同一視する})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、Step 0 より ",
@@ -1348,6 +1359,8 @@ c_2 s_1 = c_1\cos\theta_\mu
           "（φ_μ := arg^{[0,2π)}(γ_2(θ_μ))）。よって絶対値は 1、偏角は 2φ_μ + π を mod 2π で [0,2π) へ還元した値。",
         "商が定義されるための前提 γ_2(θ_μ) ≠ 0 を statement に明示した（原文には無い）。",
         "原文の note（逆数と積の arg の参考事実）は notes/008_TV1_hatZ_hatY.ts にそのまま残してある。",
+        "2026-08-12 の式変形統一で、Step 3 の 2 本の根拠の無い等号列を一続きの鎖へ直し、" +
+          "各行末に乗法性・Step 1・極座標表現の積・直交座標表示・三角関数値・実軸との同一視という根拠を付けた。内容は変えていない。",
       ],
     },
   },

@@ -25121,6 +25121,53 @@ w^{\,k}\cdot w
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_unit_sum_ne_zero",
+    kind: "claim",
+    title: { text: "単位元を正の個数だけ足した有限和は零でない" },
+    labels: ["claim_qbar_unit_sum_ne_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-unit-sum-ne-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarUnitSumNeZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.unit_sum_ne_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarUnitSumNeZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " とし、", math(String.raw`n\geq1`),
+        " とする。このとき体 ", math(String.raw`\overline{\mathbb{Q}}`), " の中で",
+      ]),
+      displayMath(String.raw`\sum_{i:\ i<n}1\neq0`),
+      paragraph([
+        "が成り立つ。有限和と零元はいずれも ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の元である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["背理法で示す。", math(String.raw`\sum_{i:\ i<n}1=0`), " と仮定する。"]),
+      paragraph([ref("claim_qbar_unit_sum_eq_rational"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+n
+&=\sum_{i:\ i<n}1
+&&(\because\ \text{単位元の有限和は自然数の与える有理数に等しい})\\
+&=0
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "この等式は ", math(String.raw`\overline{\mathbb{Q}}`), " の中の等式である。",
+        math(String.raw`\mathbb{Q}`), " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体なので、部分体の相等はもとの体の相等の制限である（",
+        ref("def_algebraic_numbers"), " の第 1 条件）。したがって有理数として ",
+        math(String.raw`n=0`), " であり、部分集合の鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Q}`),
+        " により自然数としても ", math(String.raw`n=0`), " である。これは ",
+        math(String.raw`n\geq1`), " に反する。ゆえに仮定は偽である。",
+        "この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
