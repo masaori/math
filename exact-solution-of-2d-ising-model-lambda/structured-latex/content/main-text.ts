@@ -24968,6 +24968,11 @@ w^{\,k}\cdot w
     labels: ["claim_qbar_repeated_sum_factorization"],
     habitat: "Qbar",
     verification: ["sagemath/check/qbar-repeated-sum-factorization"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarRepeatedSumFactorization",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.repeated_sum_factorization_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarRepeatedSumFactorization_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`a\in\overline{\mathbb{Q}}`), "（",

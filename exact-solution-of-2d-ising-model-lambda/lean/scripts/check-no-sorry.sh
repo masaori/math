@@ -684,6 +684,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPowNeZero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_ne_zero_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPowNeZero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarRepeatedSumFactorization
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.repeated_sum_factorization_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarRepeatedSumFactorization_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

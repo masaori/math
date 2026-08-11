@@ -2978,12 +2978,31 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
     ],
     proof: [
       paragraph([
+        ref("det_A_theta"),
+        " と ",
+        ref("eigenvector_of_A_theta"),
+        " より、",
         math(String.raw`\det A(\theta_\mu) = 1`),
-        " より ",
-        math(String.raw`\lambda_{+,\mu}\cdot\lambda_{-,\mu} = 1`),
-        "。",
-        math(String.raw`\lambda_{+,\mu} + \lambda_{-,\mu} = 2\gamma_1(\theta_\mu) \geq 2 > 0`),
-        " かつ積が正であるから両固有値は正。",
+        " と固有値の和・積から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_{+,\mu}\lambda_{-,\mu}
+&=\det A(\theta_\mu)
+&&\quad(\because\ \lambda_{+,\mu},\lambda_{-,\mu}\ \text{は}\ A(\theta_\mu)\ \text{の固有値})\\
+&=1
+&&\quad(\because\ \det A(\theta_\mu)=1)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\lambda_{+,\mu}+\lambda_{-,\mu}
+&=2\gamma_1(\theta_\mu)
+&&\quad(\because\ \lambda_{\pm,\mu}=\gamma_1(\theta_\mu)\pm\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\\
+&\geq2
+&&\quad(\because\ \gamma_1(\theta_\mu)\geq1)\\
+&>0
+&&\quad(\because\ 2>0)
+\end{aligned}`),
+      paragraph([
+        "積が正で和が正であるから、両固有値は正である。",
         math(String.raw`\gamma(\theta_\mu) \geq 0`),
         " を用いて ",
         math(String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}`),
