@@ -1490,9 +1490,14 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
       displayMath(
         String.raw`\begin{aligned}
 \text{(左辺)}
-&= \begin{vmatrix} \gamma_1(\theta_\mu) - \lambda & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) - \lambda \end{vmatrix} \\
-&= (\gamma_1(\theta_\mu) - \lambda)(\gamma_1(\theta_\mu) - \lambda) - (\gamma_2(\theta_\mu))(-\gamma_2(-\theta_\mu)) \\
+&= \begin{vmatrix} \gamma_1(\theta_\mu) - \lambda & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) - \lambda \end{vmatrix}
+&& (\because\ A(\theta_\mu)\ \text{の成分表示}) \\
+&= (\gamma_1(\theta_\mu) - \lambda)(\gamma_1(\theta_\mu) - \lambda) - \gamma_2(\theta_\mu)(-\gamma_2(-\theta_\mu))
+&& (\because\ 2\times2\ \text{行列の行列式の定義}) \\
+&= (\gamma_1(\theta_\mu) - \lambda)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \text{同じ元の積は 2 乗であり、負元を引くことは元を足すこと}) \\
 &= \gamma_1(\theta_\mu)^2 - 2\lambda\gamma_1(\theta_\mu) + \lambda^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \text{平方の展開と複素数の積の可換則})
 \end{aligned}`,
       ),
       paragraph(["より"]),
@@ -1669,7 +1674,10 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
     ],
     conversion: {
       status: "converted",
-      notes: ["原文の固有方程式・行列式展開・固有ベクトルの行基本変形を全ステップ復元。虚数単位は i、中間の複素平方根は \\sqrt{-1_C} 表記で保持。"],
+      notes: [
+        "原文の固有方程式・行列式展開・固有ベクトルの行基本変形を全ステップ復元。虚数単位は i、中間の複素平方根は \\sqrt{-1_C} 表記で保持。",
+        "2026-08-12 の式変形統一で、固有方程式の左辺の 3 段を 4 段へ開き、行列の成分表示・2×2 行列式・負号の整理・平方の展開を各行の根拠として明示した。内容は変えていない。",
+      ],
     },
   },
   {
