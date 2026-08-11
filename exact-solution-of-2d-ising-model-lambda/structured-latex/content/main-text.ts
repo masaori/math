@@ -24695,6 +24695,60 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_finite_card_bound",
+    kind: "claim",
+    title: { text: "1 の冪根の全体は有限であり元の個数は指数を超えない" },
+    labels: ["claim_root_of_unity_finite_card_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-of-unity-finite-card-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityFiniteCardLe",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_ncard_le_of_finset_card_le_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityFiniteCardLe_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとする。このとき ", math(String.raw`\mu_n`), "（",
+        ref("def_root_of_unity_set"), "）は有限集合であり、",
+        math(String.raw`\lvert\mu_n\rvert\le n`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず有限性を背理法で示す。", math(String.raw`\mu_n`), " が無限集合であると仮定する。",
+        "無限集合から任意の有限個数の相異なる元を取れるので、",
+        math(String.raw`\mu_n`), " の有限部分集合 ", math(String.raw`s`), " で",
+      ]),
+      displayMath(String.raw`\lvert s\rvert=n+1`),
+      paragraph([
+        "を満たすものがある。一方、", ref("claim_root_of_unity_subset_card_bound"),
+        " をこの ", math(String.raw`s`), " に当てると ", math(String.raw`\lvert s\rvert\le n`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+n+1
+&=\lvert s\rvert
+&& (\because\ \lvert s\rvert=n+1)\\
+&\le n
+&& (\because\ \blkref{claim_root_of_unity_subset_card_bound})
+\end{aligned}`),
+      paragraph([
+        "となるが、自然数について ", math(String.raw`n<n+1`), " なので矛盾する。ゆえに ",
+        math(String.raw`\mu_n`), " は有限集合である。",
+      ]),
+      paragraph([
+        "有限集合になった ", math(String.raw`\mu_n`), " 自身を有限部分集合として ",
+        ref("claim_root_of_unity_subset_card_bound"), " に当てると、",
+      ]),
+      displayMath(String.raw`\lvert\mu_n\rvert\le n`),
+      paragraph([
+        "を得る。この議論に実数体も複素数体も現れず、代数的数の集合と自然数の大小だけで閉じている。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -24941,12 +24995,13 @@ f
           "）、および 1 の冪根の全体の有限部分集合の元の個数が指数を超えないこと（",
           ref("claim_root_of_unity_subset_card_bound"),
           "）までは上で済んでいる。",
-          "次に書くのは、",
+          "および ",
           math(String.raw`\mu_n`),
           " 自身が有限集合で元の個数が ",
           math(String.raw`n`),
-          " 以下であること（有限部分集合の上界からの背理法）、",
-          "因数定理の商の根における値が零でないこと（単根性）、",
+          " 以下であること（",
+          ref("claim_root_of_unity_finite_card_bound"),
+          "）までは上で済んでいる。次に書くのは、因数定理の商の根における値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
           math(String.raw`n`),

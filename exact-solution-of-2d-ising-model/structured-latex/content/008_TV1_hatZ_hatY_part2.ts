@@ -526,7 +526,13 @@ s_2^* = \sinh 2K_2^* > 0`,
         math(String.raw`0_{\mathbb{C}}`),
         " でないから",
       ]),
-      displayMath(String.raw`\gamma_2(\theta_\mu) = 0_{\mathbb{C}} \iff w_\mu = 0_{\mathbb{C}}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta_\mu)=0_{\mathbb{C}}
+&\iff \bigl(i\,e^{i\theta_\mu}s_2^*\bigr)w_\mu=0_{\mathbb{C}}
+&& (\because\ \gamma_2(\theta_\mu)=\bigl(i\,e^{i\theta_\mu}s_2^*\bigr)w_\mu)\\
+&\iff w_\mu=0_{\mathbb{C}}
+&& (\because\ \mathbb{C}\ \text{は整域であり、Step 1 より第 1 因子は零元でない})
+\end{aligned}`),
       paragraph([
         "ここで ",
         math(String.raw`c_1\cos\theta_\mu - s_1 c_2 \in \mathbb{R}`),
@@ -537,7 +543,9 @@ s_2^* = \sinh 2K_2^* > 0`,
         " の成分表示で",
       ]),
       displayMath(
-        String.raw`w_\mu = \bigl(c_1\cos\theta_\mu - s_1 c_2,\; -\sin\theta_\mu\bigr) \in \mathbb{R}^2 = \mathbb{C}`,
+        String.raw`w_\mu
+= \bigl(c_1\cos\theta_\mu-s_1c_2,\;-\sin\theta_\mu\bigr)\in\mathbb{R}^2=\mathbb{C}
+\quad (\because\ \text{複素数の成分表示の定義})`,
       ),
       paragraph([
         "であり、",
@@ -547,11 +555,23 @@ s_2^* = \sinh 2K_2^* > 0`,
         " であるから",
       ]),
       displayMath(
-        String.raw`w_\mu = 0_{\mathbb{C}}
-\iff \begin{cases} c_1\cos\theta_\mu - s_1 c_2 = 0 \\ -\sin\theta_\mu = 0 \end{cases}
-\iff \begin{cases} \sin\theta_\mu = 0 \\ c_2 s_1 - c_1\cos\theta_\mu = 0 \end{cases}`,
+        String.raw`\begin{aligned}
+w_\mu=0_{\mathbb{C}}
+&\iff \bigl(c_1\cos\theta_\mu-s_1c_2,\;-\sin\theta_\mu\bigr)=(0,0)
+&& (\because\ w_\mu\ \text{の成分表示と}\ 0_{\mathbb{C}}=(0,0))\\
+&\iff \begin{cases}
+c_1\cos\theta_\mu-s_1c_2=0\\
+-\sin\theta_\mu=0
+\end{cases}
+&& (\because\ \text{順序対の相等は各成分の相等と同値})\\
+&\iff \begin{cases}
+\sin\theta_\mu=0\\
+c_2s_1-c_1\cos\theta_\mu=0
+\end{cases}
+&& (\because\ \text{各式を}\ -1\ \text{倍し、実数の積を交換した})
+\end{aligned}`,
       ),
-      paragraph(["（2 番目の同値は各式を ", math(String.raw`-1`), " 倍しただけである。）これで第 1 の同値を得た。"]),
+      paragraph(["これで第 1 の同値を得た。"]),
       paragraph([
         "Step 3: 第 2 の同値。第 2 式 ",
         math(String.raw`c_2 s_1 - c_1\cos\theta_\mu = 0`),
@@ -727,6 +747,7 @@ s_2^* = \sinh 2K_2^* > 0`,
         "2026-08-11 の式変形統一（続き）で、Step 1 を直した。|e^{iθ_μ}|² の計算（1 行に等号 2 つ・根拠なし）を 2 段の鎖へ、" +
           "絶対値の積の計算（1 行に等号 2 つと不等号・根拠が前置の散文）を 6 段の鎖へ開き、各行末に (∵ …) を置いた。" +
           "この生成器は blkref を定義していないので、(∵ …) には引いたブロックの題を書き、ラベル参照は式の前後の散文に残した。内容は変えていない。",
+        "2026-08-11 の式変形統一（続き）で、Step 2 の零積からの同値と複素数の成分表示を、2 段・1 段・3 段の鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
       ],
     },
   },

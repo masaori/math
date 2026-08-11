@@ -109,6 +109,7 @@ export const ALL_LABELS = [
   "claim_rational_exponent_well_defined",
   "claim_restriction_family_gluing",
   "claim_root_of_unity_divisor",
+  "claim_root_of_unity_finite_card_bound",
   "claim_root_of_unity_geometric_sum_zero",
   "claim_root_of_unity_mul",
   "claim_root_of_unity_mul_map_bijective",
