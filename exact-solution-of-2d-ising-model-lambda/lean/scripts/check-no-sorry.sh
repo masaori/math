@@ -675,6 +675,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityFiniteCardLe
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_ncard_le_of_finset_card_le_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityFiniteCardLe_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffQuotientRootValue
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_diff_quotient_root_value_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffQuotientRootValue_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

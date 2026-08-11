@@ -681,21 +681,48 @@ M \mid 2\mu
         math(String.raw`M \mid 2\mu`),
         " を意味する。",
         math(String.raw`\mu \in \mathcal{M}`),
-        " より ",
-        math(String.raw`1 \leq |\mu| \leq M`),
-        " すなわち ",
-        math(String.raw`2 \leq 2|\mu| \leq 2M`),
-        " であり、この範囲で ",
+        " より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1
+&\leq |\mu|
+&& (\because\ \mu\in\mathcal{M})\\
+|\mu|
+&\leq M
+&& (\because\ \mu\in\mathcal{M})\\
+2
+&\leq 2|\mu|
+&& (\because\ 1\leq|\mu|\ \text{の両辺を正数}\ 2\ \text{倍した})\\
+2|\mu|
+&\leq 2M
+&& (\because\ |\mu|\leq M\ \text{の両辺を正数}\ 2\ \text{倍した})\\
+M
+&\mid 2|\mu|
+&& (\because\ M\mid2\mu\ \text{ならば}\ M\mid|2\mu|=2|\mu|)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。この範囲で ",
         math(String.raw`M`),
         " の倍数は ",
         math(String.raw`M`),
         " と ",
         math(String.raw`2M`),
-        " のみであるから ",
-        math(String.raw`2|\mu| = M`),
-        " または ",
-        math(String.raw`2|\mu| = 2M`),
-        "、すなわち ",
+        " のみであるから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2|\mu|
+&\in\{M,2M\}
+&& (\because\ 2\leq2|\mu|\leq2M\ \text{かつ}\ M\mid2|\mu|)\\
+|\mu|
+&\in\{M/2,M\}
+&& (\because\ \text{各候補を}\ 2\ \text{で割った})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
         math(String.raw`|\mu| = M/2`),
         "（このとき ",
         math(String.raw`M`),
@@ -705,17 +732,45 @@ M \mid 2\mu
       ]),
       paragraph([
         math(String.raw`|\mu| = M/2`),
-        " の場合、",
-        math(String.raw`\theta_\mu = \pm\pi`),
-        " ゆえ ",
-        math(String.raw`\cos\theta_\mu = -1`),
-        " であり、第 2 式は ",
-        math(String.raw`c_2 s_1 = -c_1`),
-        " を要求する。しかし Step 0 より ",
-        math(String.raw`c_2 s_1 > 0`),
-        " かつ ",
-        math(String.raw`-c_1 < 0`),
-        " であり矛盾する。よってこの場合は起こらず、",
+        " の場合は ",
+        math(String.raw`\mu=\pm M/2`),
+        " なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\theta_\mu
+&=\frac{2\pi(\pm M/2)}{M}
+&& (\because\ \theta_\mu=2\pi\mu/M\ \text{へ}\ \mu=\pm M/2\ \text{を代入した})\\
+&=\pm\pi
+&& (\because\ M\geq1\ \text{なので}\ M\ne0\ \text{として約した})\\
+\cos\theta_\mu
+&=\cos(\pm\pi)
+&& (\because\ \theta_\mu=\pm\pi)\\
+&=-1
+&& (\because\ \cos(\pm\pi)=-1)\\
+c_2s_1
+&=c_1\cos\theta_\mu
+&& (\because\ \text{第 2 式})\\
+&=-c_1
+&& (\because\ \cos\theta_\mu=-1)
+\end{aligned}`,
+      ),
+      paragraph(["一方、Step 0 の正値性から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&<c_2s_1
+&& (\because\ c_2>0\ \text{かつ}\ s_1>0)\\
+c_2s_1
+&=-c_1
+&& (\because\ \text{上の第 2 式の計算})\\
+-c_1
+&<0
+&& (\because\ c_1>0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり矛盾する。よってこの場合は起こらず、",
         math(String.raw`|\mu| = M`),
         " すなわち ",
         math(String.raw`\mu = \pm M`),
@@ -726,9 +781,21 @@ M \mid 2\mu
         math(String.raw`\Leftarrow`),
         "）",
         math(String.raw`\mu = \pm M`),
-        " とすると ",
-        math(String.raw`\theta_\mu = \pm 2\pi \in \pi\mathbb{Z}`),
-        " であり、第 1 式が成り立つ。第 2 式はそのまま保たれる。",
+        " とすると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\theta_\mu
+&=\frac{2\pi(\pm M)}{M}
+&& (\because\ \theta_\mu=2\pi\mu/M\ \text{へ}\ \mu=\pm M\ \text{を代入した})\\
+&=\pm2\pi
+&& (\because\ M\geq1\ \text{なので}\ M\ne0\ \text{として約した})\\
+&\in\pi\mathbb{Z}
+&& (\because\ \pm2\in\mathbb{Z})
+\end{aligned}`,
+      ),
+      paragraph([
+        "ゆえに第 1 式が成り立つ。第 2 式は連立条件の両側に同じ形で置かれているので、そのまま保たれる。",
       ]),
       paragraph([
         "Step 5: 第 4 の同値。",
@@ -765,6 +832,7 @@ M \mid 2\mu
           "この生成器は blkref を定義していないので、(∵ …) には引いたブロックの題を書き、ラベル参照は式の前後の散文に残した。内容は変えていない。",
         "2026-08-11 の式変形統一（続き）で、Step 2 の零積からの同値と複素数の成分表示を、2 段・1 段・3 段の鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
         "2026-08-11 の式変形統一（さらに続き）で、Step 3' の μ への翻訳（1 行に同値 3 つ・根拠なし）を 3 段の鎖へ、M の偶奇の言い換え（散文中の同値）を奇数 1 段・偶数 2 段の鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
+        "2026-08-11 の式変形統一（さらに続き）で、Step 4 の両向きに散文で埋め込まれていた範囲評価・倍数の候補・M/2 の場合の矛盾・μ=±M の逆向きを、それぞれ一続きの関係式へ開き、各行末に根拠を置いた。内容は変えていない。",
       ],
     },
   },

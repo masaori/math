@@ -24755,6 +24755,11 @@ n+1
     labels: ["claim_qbar_pow_diff_quotient_root_value"],
     habitat: "Qbar",
     verification: ["sagemath/check/qbar-pow-diff-quotient-root-value"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffQuotientRootValue",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_diff_quotient_root_value_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffQuotientRootValue_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
