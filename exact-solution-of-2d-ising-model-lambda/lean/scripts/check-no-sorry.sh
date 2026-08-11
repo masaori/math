@@ -720,6 +720,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductExtract
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.linear_factor_product_extract_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductExtract_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyExtractedRootDistinct
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.extracted_root_distinct_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyExtractedRootDistinct_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

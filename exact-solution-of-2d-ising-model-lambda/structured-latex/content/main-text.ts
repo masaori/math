@@ -25896,6 +25896,82 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_extracted_root_distinct",
+    kind: "claim",
+    title: { text: "取り出した分解の残りの因子の根は、取り出した因子の根と相異なる" },
+    labels: ["claim_qbar_poly_extracted_root_distinct"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-extracted-root-distinct"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyExtractedRootDistinct",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.extracted_root_distinct_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyExtractedRootDistinct_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、", math(String.raw`w\in\mu_n`), "（",
+        ref("def_root_of_unity_set"), "）を任意に取る。",
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`f:=t^{\,n}+\widehat{-1}\in\overline{\mathbb{Q}}[t]`),
+        "（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "）と、",
+        math(String.raw`h\in\overline{\mathbb{Q}}[t]`), " を「",
+        math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`n<k`),
+        " を満たすならば ", math(String.raw`\mathrm{ac}_k(h)=0`),
+        "」かつ ", math(String.raw`f=(t-\widehat{w})h`),
+        " となるように取る。さらに ",
+        math(String.raw`A\in\overline{\mathbb{Q}}[t]`), "、",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`), " を ",
+        math(String.raw`h=Ag`), " となるように取り、",
+        math(String.raw`w'\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`\mathrm{aev}_{w'}(g)=0`), "（",
+        math(String.raw`\mathrm{aev}_{w'}`), " は ",
+        ref("def_qbar_poly_evaluation"), "）となるように取る。このとき、",
+      ]),
+      displayMath(String.raw`w'\neq w`),
+      paragraph([
+        "が成り立つ。これは、根の個数の下界の帰納法で、商の根として新しく取った元 ",
+        math(String.raw`w'`), " が、既出の根 ", math(String.raw`w`),
+        " と相異なることを出すための道具である。既出の根の一次因子は、一次因子の積から",
+        "先頭へ取り出して（", ref("claim_qbar_poly_linear_factor_product_extract"),
+        "）分解 ", math(String.raw`f=(t-\widehat{w})h`), " の形に整えてから当てる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "背理法で示す。", math(String.raw`w'=w`), " と仮定する。まず ",
+        math(String.raw`\mathrm{aev}_{w}(h)`), " を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(h)
+&=\mathrm{aev}_{w}(Ag)
+&&(\because\ \text{本主張の仮定}\ h=Ag)\\
+&=\mathrm{aev}_{w}(A)\cdot\mathrm{aev}_{w}(g)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は積を保つ})\\
+&=\mathrm{aev}_{w}(A)\cdot\mathrm{aev}_{w'}(g)
+&&(\because\ \text{背理法の仮定}\ w'=w)\\
+&=\mathrm{aev}_{w}(A)\cdot0
+&&(\because\ \text{本主張の仮定}\ \mathrm{aev}_{w'}(g)=0)\\
+&=0
+&&(\because\ \text{零元との積は零元である})
+\end{aligned}`),
+      paragraph([
+        "一方、本主張の仮定（", math(String.raw`n\ge1`), "・",
+        math(String.raw`w\in\mu_n`), "・", math(String.raw`h`),
+        " の係数の上界・", math(String.raw`f=(t-\widehat{w})h`), "）により、",
+        ref("claim_root_polynomial_remaining_factor_value_ne_zero"), " を ",
+        math(String.raw`w`), "、", math(String.raw`h`), " に当てることができ、",
+        math(String.raw`\mathrm{aev}_{w}(h)\neq0`),
+        " を得る。これは上の計算と矛盾する。ゆえに ",
+        math(String.raw`w'\neq w`),
+        " である。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -26178,6 +26254,8 @@ w^{\,1}
           ref("claim_root_polynomial_remaining_factor_value_ne_zero"),
           "）、および一次因子の積から指定した一つの因子を先頭へ取り出せること（",
           ref("claim_qbar_poly_linear_factor_product_extract"),
+          "）、および取り出した分解の残りの因子の根が取り出した因子の根と相異なること（",
+          ref("claim_qbar_poly_extracted_root_distinct"),
           "）までは上で済んでいる。次に書くのは、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",

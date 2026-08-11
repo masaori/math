@@ -95,6 +95,7 @@ export const ALL_LABELS = [
   "claim_qbar_matrix_product_assoc",
   "claim_qbar_mul_pow",
   "claim_qbar_no_zero_divisors",
+  "claim_qbar_poly_extracted_root_distinct",
   "claim_qbar_poly_indeterminate_power_coefficient",
   "claim_qbar_poly_linear_factor_cancellation",
   "claim_qbar_poly_linear_factor_coeff_bound",
