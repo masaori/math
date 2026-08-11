@@ -1649,32 +1649,23 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
 i\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
-\end{cases} \\
+\end{cases}
+&&(\because\ n = 0\ \text{の項を分け、}\ n \geq 1\ \text{の各項へ「cosh, sinh の展開係数への変換」の (h1.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\hat{Z}_\mu^{(\pm)}\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\frac{2\pi\mu}{M}}\,\hat{Y}_\mu\right) \\
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\frac{2\pi\mu}{M}}\,\hat{Y}_\mu\right)
+&&(\because\ K_1^{0}\hat{Z}_\mu^{(\pm)} = \tfrac{1}{0!}\hat{Z}_\mu^{(\pm)}\ \text{なので}\ n = 0\ \text{の項を偶数側の和へ吸収した}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
-   + i\,e^{-i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu \\
+   + i\,e^{-i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu
+&&(\because\ \hat{Z}_\mu^{(\pm)},\ \hat{Y}_\mu,\ i\,e^{-i 2\pi\mu/M}\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
 &= \cosh(K_1)\hat{Z}_\mu^{(\pm)} + i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Y}_\mu
+&&(\because\ \text{「sinh, cosh のテイラー展開」})
 \end{aligned}`,
       ),
       paragraph([
-        "ここで 1 行目の ",
+        "鎖の終点は主張の (h1.z) の右辺と字句どおり一致する。",
+        "以下の 3 式でも、",
         math(String.raw`n = 0`),
-        " 項を分けて書いたが、",
-        ref("cosh_sinh_coefficient_conversion"),
-        " (h1.z) の偶数側は ",
-        math(String.raw`n = 0`),
-        " でも ",
-        math(String.raw`K_1^{0}\hat{Z}_\mu^{(\pm)} = \hat{Z}_\mu^{(\pm)} = \frac{1}{0!}\hat{Z}_\mu^{(\pm)}`),
-        " と一致するので、2 行目では ",
-        math(String.raw`n = 0`),
-        " 項を偶数側の和へ吸収した（以下の 3 式でも同様）。3 行目では ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}, \hat{Y}_\mu`),
-        " および ",
-        math(String.raw`i\,e^{-i 2\pi\mu/M}`),
-        " が ",
-        math(String.raw`n`),
-        " に依らないので和の外へ出した。",
+        " の項を同じ理由で偶数側の和へ吸収する。",
       ]),
       paragraph(["(h1.y) について、"]),
       displayMath(
