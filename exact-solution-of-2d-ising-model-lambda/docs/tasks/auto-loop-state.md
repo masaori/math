@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 138 は、tick 137 の「係数上界つき多項式の積の係数は、上界の和より上の
+  番号で零である」を四層すべて突き合わせて修正不要と確認し、r2「一次因子の積の係数は、
+  因子の個数より上の番号で零である」を四層すべてで完了させた。** 本文と Lean 具体版は
+  因子の個数についての同じ帰納法で、出発点は空積、一歩は最後の因子を可換則で先頭へ移して
+  既存の一次因子との積の係数上界を当てる。SageMath は空積・帰納法の一歩・本体を
+  `QQbar` の厳密計算で確認した。必要十分版が要求するのは可換環であり、体・代数閉性は不要である。
+  検証は構造化テキスト 268 ラベル・PDF 137 ページで未解決参照 0 件・検証と証明の対応 122 件・
+  `lake build`・sorry 検査 673 件ですべて通過した。次は r3（因子の取り出しの強化）である。
+
 - **2026-08-12 の tick 137 は、tick 136 の「根の多項式は相異なる根の一次因子を順に取り出せる」
   （d4b2d。記述と SageMath まで）のレビューで、根の相異性の段に既存の主張の適用では出ない箇所
   （$B$ の形と係数上界。レビュー記録を見よ）を見つけ、修復を r1–r4 の 4 セクションへ割って
@@ -1580,7 +1589,7 @@
 | 10h3d-c4b-d4b2c3 | 固有値の代数性 | 取った根は既出の根と相異なること（$w\in\mu_n$、係数上界つきの $h$ で $f=(t-\widehat{w})h$、$h=Ag$、$\mathrm{aev}_{w'}(g)=0$ ならば $w'\ne w$。背理法 1 本） | done | 2026-08-12 の tick 135 で四層すべて完了。主張 1 件 `claim_qbar_poly_extracted_root_distinct`。$w'=w$ と仮定して $\mathrm{aev}_{w}(h)=\mathrm{aev}_{w}(A)\cdot\mathrm{aev}_{w'}(g)=0$ を 5 段の鎖で出し、d4b2c1 の $\mathrm{aev}_{w}(h)\ne0$ と矛盾させる。SageMath は `qbar-poly-extracted-root-distinct`。Lean 具体版 `qbarPolyExtractedRootDistinct`、必要十分版 `extracted_root_distinct_necSuf`（要るのは分解の等式・その点での評価が「この積」を保つこと 1 件・「この値」と零元の積が零元であること 1 件・終点の非零性だけ。多項式であること・環の法則・体・代数閉性は一切不要）、導出 `qbarPolyExtractedRootDistinct_from_necSuf` |
 | 10h3d-c4b-d4b2d | 固有値の代数性 | 分解を構成する帰納法本体（$j\le n$ について、相異なる $w_1,\dots,w_j\in\mu_n$ と係数上界 $n-j$・先頭の係数 1 の商 $g$ による分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ が存在する。$j$ についての帰納法 1 本） | 記述と SageMath まで | 2026-08-12 の tick 136。主張 `claim_root_polynomial_distinct_factorization` と SageMath `root-polynomial-distinct-factorization`。$1\le n\le6$ の全段で厳密計算が通過。Lean は未着手。**tick 137 のレビューで、根の相異性の段に既存の主張の適用では出ない箇所が見つかった（$h=Bg$ の係数上界）。r1–r4 で修復する** |
 | 10h3d-c4b-d4b2d-r1 | 固有値の代数性 | 係数上界つき 2 つの多項式の積の係数は、上界の和より上の番号で零であること（$k>p$ で $\mathrm{ac}_k(P)=0$、$k>q$ で $\mathrm{ac}_k(Q)=0$ ならば $k>p+q$ で $\mathrm{ac}_k(PQ)=0$。積の係数の有限和を番号 $p$ で分けて全項を消す鎖 1 本） | done | 2026-08-12 の tick 137 で四層すべて完了。主張 1 件 `claim_qbar_poly_product_coeff_bound`。SageMath は `qbar-poly-product-coeff-bound`（7 段の鎖を段ごとに厳密計算）。Lean 具体版 `qbarPolyProductCoeffBound`（本文の「和を番号 $p$ で分けて前半・後半で別の仮定を当てる」を、項ごとの $i>p$ か否かの場合分けとして書いた。対応はコメントに明記）、必要十分版 `poly_product_coeff_bound_necSuf`（**半環で足りる**。一次因子との積の係数上界（d4b2a）が可換環を要したのと違い、一次式を作らないので引き算が一度も出ない。積の可換性も体も代数閉性も不要）、導出 `qbarPolyProductCoeffBound_from_necSuf`。d4b2d の証明の修復の道具（レビュー記録 2026-08-12 tick 137）。$h=Bg$ の係数上界を主張の適用として出すのに使う |
-| 10h3d-c4b-d4b2d-r2 | 固有値の代数性 | 一次因子の積の係数は、因子の個数より上の番号で零であること（$k>m$ ならば $\mathrm{ac}_k(\prod_{i=0}^{m-1}(t-\widehat{w(i)}))=0$。$m$ についての帰納法 1 本。一歩は可換則と d4b2a） | todo | 因子の取り出しの強化（r3）が場合 $i=j$ で使う |
+| 10h3d-c4b-d4b2d-r2 | 固有値の代数性 | 一次因子の積の係数は、因子の個数より上の番号で零であること（$k>m$ ならば $\mathrm{ac}_k(\prod_{i=0}^{m-1}(t-\widehat{w(i)}))=0$。$m$ についての帰納法 1 本。一歩は可換則と d4b2a） | done | 2026-08-12 の tick 138 で四層すべて完了。主張 1 件 `claim_qbar_poly_linear_factor_product_coeff_bound`。SageMath は `qbar-poly-linear-factor-product-coeff-bound`（空積・帰納法の一歩・本体を厳密計算）。Lean 具体版 `qbarPolyLinearFactorProductCoeffBound`、必要十分版 `poly_linear_factor_product_coeff_bound_necSuf`（可換環で足り、体・代数閉性は不要）、導出 `qbarPolyLinearFactorProductCoeffBound_from_necSuf`。因子の取り出しの強化（r3）が場合 $i=j$ で使う |
 | 10h3d-c4b-d4b2d-r3 | 固有値の代数性 | 因子の取り出しの強化（取り出した残りの因子 $B$ は係数上界 $j-1$ つきに取れることを statement へ加え、証明と Lean 具体版・必要十分版・導出を更新する） | todo | 場合 $i=j$ は r2、場合 $i\ne j$ は可換則と d4b2a で上界を保つ。tick 134 の Lean の更新を含む |
 | 10h3d-c4b-d4b2d-r4 | 固有値の代数性 | 帰納法本体（d4b2d）の欠陥段の書き直し（$B$ の上界（r3）と積の係数上界（r1）で $k>n$ における $\mathrm{ac}_k(h)=0$ を主張の適用として出す） | todo | 書き直し後に SageMath の対応も見直す |
 | 10h3d-c4b-d4b2dL | 固有値の代数性 | 同主張の Lean 具体版・必要十分版・導出 | todo | r1–r4 の修復が済んでから着手する。本文の帰納法と 1 対 1 に対応させる。必要十分版では、根を供給する性質・因数分解・係数上界と先頭係数・既出元との相異性という帰納法が実際に使う仮定だけへ削る |
@@ -1597,6 +1606,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 138）: r2「一次因子の積の係数は、因子の個数より上の番号で零である」を
+  四層すべてで完了した。因子の個数についての帰納法 1 本で、出発点は空積、一歩は最後の因子を
+  可換則で先頭へ移して d4b2a の一次因子との積の係数上界を当てる。次の r3 が、取り出した残りの
+  因子の係数上界を statement に加えるための道具である。
 
 - 2026-08-12（tick 137）: r1「係数上界つき多項式の積の係数は、上界の和より上の番号で零である」を
   四層すべてで完了した。積の係数の有限和を番号 $p$ で分け、前半は $Q$ の係数の仮定、後半は
@@ -3762,6 +3776,12 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 138）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 13 の 3 段へ、
+Steps 9--11 の比と Step 12 の計算結果の代入・共通分母 2 への通分と共通因子の約分・
+分配則と指数法則を、それぞれ行末の根拠として付けた。内容は変えていない。
+**次の tick は同じ主張の Step 14 以降（$x=e^{i\theta_\mu}$ の置換と因数分解）から続ける。**
+
 **2026-08-12（tick 137）**: `008_TV1_hatZ_hatY_part2` の主張
 「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 12 の 2 本の計算を整えた。
 1 本目（$c_1\cos\theta_\mu-i\sin\theta_\mu$）の 3 段に根拠が無かったので、Euler 表示の代入・
@@ -5201,6 +5221,13 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 138）: tick 137 の「係数上界つき多項式の積の係数は、上界の和より上の番号で
+  零である」の本文・SageMath・Lean 具体版・必要十分版・導出・sorry 登録を突き合わせた。
+  本文の 7 段は SageMath の段ごとの assertion と対応し、Lean の項ごとの場合分けは、本文が有限和を
+  前半と後半へ分けて別々の係数仮定を当てることと同じである。必要十分版は引き算を使わず半環で通り、
+  具体版はその特殊化として導出され、入口 import・sorry 検査登録・本文の Lean 対応も揃っていた。
+  修正は無かった。
 
 - 2026-08-12（tick 137）: tick 136 の「根の多項式は相異なる根の一次因子を順に取り出せる」
   （d4b2d。記述と SageMath まで）を、引いている主張の statement と突き合わせた。**欠陥を 1 つ

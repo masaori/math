@@ -2225,9 +2225,12 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-&= \frac{e^{i\theta_\mu}\left(\dfrac{(c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu}}{2} - s_1 c_2\right)}{e^{-i\theta_\mu}\left(\dfrac{(c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu}}{2} - s_1 c_2\right)} \\
-&= \frac{e^{i\theta_\mu}\left((c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu} - 2 s_1 c_2\right)}{e^{-i\theta_\mu}\left((c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu} - 2 s_1 c_2\right)} \\
+&= \frac{e^{i\theta_\mu}\left(\dfrac{(c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu}}{2} - s_1 c_2\right)}{e^{-i\theta_\mu}\left(\dfrac{(c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu}}{2} - s_1 c_2\right)}
+&& (\because\ \text{Steps 9--11 の比へ Step 12 の 2 つの計算結果を代入}) \\
+&= \frac{e^{i\theta_\mu}\left((c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu} - 2 s_1 c_2\right)}{e^{-i\theta_\mu}\left((c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu} - 2 s_1 c_2\right)}
+&& (\because\ \text{分子と分母の括弧内を共通分母 }2\text{ へ通分し、共通因子 }\tfrac12\text{ を約分}) \\
 &= \frac{(c_1 - 1)e^{2i\theta_\mu} + (c_1 + 1) - 2 s_1 c_2\, e^{i\theta_\mu}}{(c_1 + 1) + (c_1 - 1)e^{-2i\theta_\mu} - 2 s_1 c_2\, e^{-i\theta_\mu}}
+&& (\because\ \text{分配則と }e^{i\theta_\mu}e^{-i\theta_\mu}=e^{-i\theta_\mu}e^{i\theta_\mu}=1)
 \end{aligned}`,
       ),
       paragraph([

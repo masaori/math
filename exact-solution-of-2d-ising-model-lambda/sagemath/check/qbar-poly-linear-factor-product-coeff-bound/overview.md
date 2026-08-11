@@ -1,0 +1,19 @@
+# SageMath Check: 一次因子の積の係数は、因子の個数より上の番号で零である
+
+**対象ラベル**: `claim_qbar_poly_linear_factor_product_coeff_bound`
+
+本文の帰納法を厳密計算（`QQbar`）で確かめる。浮動小数点は使わない。
+
+- 出発点: 空積が単位多項式であり、正の番号の係数が零であること。
+- 一歩: $m+1$ 個の積を $m$ 個の積と最後の一次因子の積へ分け、交換則で一次因子を先頭へ移せること。
+- 帰納法の仮定と、一次因子との積の係数上界を当てた結論。
+- $m=0,\dots,7$ で、$m$ 個の一次因子の積の $m$ より上の番号の係数が零であること。
+- 番号 $m$ の係数が $1$ であり、上界が過大でないこと。
+
+根には $0,1,-2,\zeta_3,\sqrt2,-5/7,\zeta_5\in\overline{\mathbb{Q}}$ を用いる。
+
+```sh
+sage sagemath/check/qbar-poly-linear-factor-product-coeff-bound/check.sage
+```
+
+**2026-08-12 実行: すべて通過。**

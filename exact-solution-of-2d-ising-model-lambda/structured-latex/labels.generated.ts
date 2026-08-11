@@ -100,6 +100,7 @@ export const ALL_LABELS = [
   "claim_qbar_poly_linear_factor_cancellation",
   "claim_qbar_poly_linear_factor_coeff_bound",
   "claim_qbar_poly_linear_factor_leading_coeff",
+  "claim_qbar_poly_linear_factor_product_coeff_bound",
   "claim_qbar_poly_linear_factor_product_extract",
   "claim_qbar_poly_monomial_decomposition",
   "claim_qbar_poly_power_difference_factorization",

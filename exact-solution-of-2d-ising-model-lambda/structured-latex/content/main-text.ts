@@ -25765,6 +25765,81 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_linear_factor_product_coeff_bound",
+    kind: "claim",
+    title: { text: "一次因子の積の係数は、因子の個数より上の番号で零である" },
+    labels: ["claim_qbar_poly_linear_factor_product_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-linear-factor-product-coeff-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductCoeffBound",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_product_coeff_bound_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductCoeffBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`m\in\mathbb{N}`), " と、代数的数の列 ",
+        math(String.raw`w:\mathbb{N}\to\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を任意に取る。", ref("def_qbar_polynomial_ring"),
+        " の中で、番号の小さいものから順に掛ける有限積を",
+      ]),
+      displayMath(String.raw`F_m:=\prod_{i=0}^{m-1}(t-\widehat{w(i)})\in\overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "と定める（", math(String.raw`m=0`), " のときは空積で単位元）。ここで ",
+        math(String.raw`\widehat{\ \cdot\ }`), " は ", ref("def_qbar_constant_embedding"),
+        " である。このとき、", math(String.raw`k\in\mathbb{N}`), " が ",
+        math(String.raw`k>m`), " を満たすならば",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_k(F_m)=0`),
+      paragraph([
+        "が成り立つ。すなわち、", math(String.raw`m`),
+        " 個の一次因子の積の係数は、因子の個数より上の番号で零である。これは、一次因子の積から",
+        "指定した因子を取り出したあとの因子について、係数の上界を与えるための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m\in\mathbb{N}`), " について帰納法で示す。出発点 ",
+        math(String.raw`m=0`), " では ", math(String.raw`F_0=1`),
+        " である。したがって、任意の ", math(String.raw`k>0`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(F_0)
+&=\mathrm{ac}_k(1)
+&&(\because\ F_0\ \text{は空積})\\
+&=0
+&&(\because\ k>0\ \text{と}\ \blkref{def_qbar_polynomial_ring}\ \text{の単位元の係数})
+\end{aligned}`),
+      paragraph([
+        "である。一歩を示す。", math(String.raw`F_m`), " について、", math(String.raw`k>m`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(F_m)=0`), " と仮定する。有限積の約束から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_{m+1}
+&=F_m(t-\widehat{w(m)})
+&&(\because\ F_{m+1}\ \text{の有限積から最後の因子を分ける})\\
+&=(t-\widehat{w(m)})F_m
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則})
+\end{aligned}`),
+      paragraph([
+        "を得る。", ref("claim_qbar_poly_linear_factor_coeff_bound"), " を ",
+        math(String.raw`C=F_m`), "、係数の上界 ", math(String.raw`m`), "、根 ",
+        math(String.raw`w(m)`), " へ当てると、任意の ", math(String.raw`k>m+1`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(F_{m+1})
+&=\mathrm{ac}_k\bigl((t-\widehat{w(m)})F_m\bigr)
+&&(\because\ \text{上で得た有限積の等式})\\
+&=0
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{と帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "を得る。これで帰納法が閉じた。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_root_polynomial_remaining_factor_value_ne_zero",
     kind: "claim",
     title: { text: "一次因子との分解の残りの因子の、その一次因子の根における値は零でない" },
