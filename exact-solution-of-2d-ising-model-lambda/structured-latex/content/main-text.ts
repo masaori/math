@@ -25987,11 +25987,18 @@ F_{m+1}
       ]),
       displayMath(String.raw`\prod_{k=0}^{j-1}(t-\widehat{w(k)})=(t-\widehat{w(i)})B`),
       paragraph([
-        "を満たすものが存在する（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
-        ref("def_qbar_constant_embedding"), "）。有限積は番号の小さい因子から順に掛け、",
+        "かつ「", math(String.raw`l\in\mathbb{N}`), " が ", math(String.raw`j-1<l`),
+        " を満たすならば ", math(String.raw`\mathrm{ac}_l(B)=0`),
+        "」を満たすものが存在する（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "。", math(String.raw`i<j`), " より ",
+        math(String.raw`j\ge1`), " なので、", math(String.raw`j-1`),
+        " は自然数である）。有限積は番号の小さい因子から順に掛け、",
         math(String.raw`j=0`), " のときは単位元とする。根の相異性は仮定しない。",
         "これは、根の個数の下界の帰納法で、既出の根に対応する一次因子を積の先頭へ",
-        "移し、残りを一つの多項式として扱うための道具である。",
+        "移し、残りを一つの多項式として扱うための道具である。残りの因子の係数の上界は、",
+        "分解の帰納法本体が積の係数上界（",
+        ref("claim_qbar_poly_product_coeff_bound"),
+        "）を当てるときの仮定を供給する。",
       ]),
     ],
     proof: [
@@ -26016,6 +26023,19 @@ F_{m+1}
 &&(\because\ i=j\ \text{と}\ B\ \text{の取り方})
 \end{aligned}`),
       paragraph([
+        "この場合の係数の上界を確かめる。示すべき上界は ",
+        math(String.raw`(j+1)-1=j`), " である。",
+        math(String.raw`l\in\mathbb{N}`), " が ", math(String.raw`j<l`),
+        " を満たすとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_l(B)
+&=\mathrm{ac}_l\!\left(\prod_{k=0}^{j-1}(t-\widehat{w(k)})\right)
+&&(\because\ B\ \text{の取り方})\\
+&=0
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_product_coeff_bound}\ \text{を因子の個数}\ j\ \text{へ当てる})
+\end{aligned}`),
+      paragraph([
         "次に ", math(String.raw`i\ne j`), " の場合を扱う。",
         math(String.raw`i<j+1`), " と合わせると ", math(String.raw`i<j`),
         " である。帰納法の仮定により、ある ",
@@ -26023,7 +26043,9 @@ F_{m+1}
       ]),
       displayMath(String.raw`\prod_{k=0}^{j-1}(t-\widehat{w(k)})=(t-\widehat{w(i)})A`),
       paragraph([
-        "を満たす。", math(String.raw`B:=A(t-\widehat{w(j)})`), " と取ると、",
+        "かつ「", math(String.raw`l\in\mathbb{N}`), " が ", math(String.raw`j-1<l`),
+        " を満たすならば ", math(String.raw`\mathrm{ac}_l(A)=0`),
+        "」を満たす。", math(String.raw`B:=A(t-\widehat{w(j)})`), " と取ると、",
       ]),
       displayMath(String.raw`\begin{aligned}
 \prod_{k=0}^{j}(t-\widehat{w(k)})
@@ -26035,6 +26057,23 @@ F_{m+1}
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則})\\
 &=(t-\widehat{w(i)})B
 &&(\because\ B\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "この場合の係数の上界を確かめる。示すべき上界は ",
+        math(String.raw`(j+1)-1=j`), " である。",
+        math(String.raw`i<j`), " より ", math(String.raw`j\ge1`),
+        " なので ", math(String.raw`j=(j-1)+1`), " である。",
+        math(String.raw`l\in\mathbb{N}`), " が ", math(String.raw`j<l`),
+        " を満たすとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_l(B)
+&=\mathrm{ac}_l\bigl(A(t-\widehat{w(j)})\bigr)
+&&(\because\ B\ \text{の取り方})\\
+&=\mathrm{ac}_l\bigl((t-\widehat{w(j)})A\bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則})\\
+&=0
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{を}\ C=A\text{、係数の上界}\ j-1\ \text{へ当てる。帰納法の仮定と}\ l>j=(j-1)+1\ \text{による})
 \end{aligned}`),
       paragraph([
         "これで 2 つの場合が尽くされ、帰納法が閉じた。この議論に実数体も複素数体も現れない。",
