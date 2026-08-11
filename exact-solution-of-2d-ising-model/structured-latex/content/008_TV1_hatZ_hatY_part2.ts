@@ -922,42 +922,70 @@ c_2 s_1 = c_1\cos\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-&= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)\right) \\
-&= \underbrace{(i\cdot i)\left(e^{i\theta_\mu + i(-\theta_\mu)}\right)}_{-1}\,s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\,s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2) \\
-&= \underbrace{(-1)(e^0)}_{-1}\,s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\,s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2) \quad (\because \cos \text{ は偶関数}, \sin \text{ は奇関数}) \\
-&= -(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2) \\
-&= -(s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right) \\
-&= -(s_2^*)^2\left((c_1\cos\tfrac{2\pi\mu}{M} - s_1 c_2)^2 + (\sin\tfrac{2\pi\mu}{M})^2\right) \quad (\because \theta_\mu = \tfrac{2\pi\mu}{M})
+&= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)\right)
+&&(\because\ \gamma_2\ \text{の定義})\\
+&= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)\right)
+&&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
+&= (i\cdot i)\left(e^{i\theta_\mu}e^{-i\theta_\mu}\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&&(\because\ \mathbb{C}\ \text{の積の可換性と結合則で因子を並べ替えた})\\
+&= (-1)\left(e^{i\theta_\mu + i(-\theta_\mu)}\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&&(\because\ i\cdot i=-1\ \text{と指数法則})\\
+&= (-1)(e^0)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&&(\because\ i\theta_\mu + i(-\theta_\mu)=0)\\
+&= -(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&&(\because\ e^0=1)\\
+&= -(s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right)
+&&(\because\ (a-ib)(a+ib)=a^2+b^2\ \text{を}\ a=c_1\cos\theta_\mu - s_1 c_2,\ b=\sin\theta_\mu\ \text{へ当てた})\\
+&= -(s_2^*)^2\left((c_1\cos\tfrac{2\pi\mu}{M} - s_1 c_2)^2 + (\sin\tfrac{2\pi\mu}{M})^2\right)
+&&(\because\ \theta_\mu = \tfrac{2\pi\mu}{M})
 \end{aligned}`,
       ),
       paragraph([
-        "ここで ",
+        ref("def_A_theta"),
+        " の ",
+        math(String.raw`\gamma_2`),
+        " の定義を引いた。ここで ",
         math(String.raw`s_2^* > 0`),
         "（",
         ref("def_transfer_matrix_symbols"),
         "）より ",
         math(String.raw`(s_2^*)^2 > 0`),
-        " である。また ",
-        math(String.raw`\gamma_2(\theta_\mu)`),
-        " の定義より",
+        " である。また",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 |\gamma_2(\theta_\mu)|^2
-&= \left|i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right|^2 \\
-&= (s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right) \quad (\because |i| = |e^{i\theta_\mu}| = 1)
+&= \left|i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right|^2
+&&(\because\ \gamma_2\ \text{の定義})\\
+&= (s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right)
+&&(\because\ |i| = |e^{i\theta_\mu}| = 1\ \text{と、絶対値は積を保つこと})
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
-        math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
-        " より ",
-        math(String.raw`|\gamma_2(\theta_\mu)|^2 > 0`),
-        " であるから ",
-        math(String.raw`(c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2 = \dfrac{|\gamma_2(\theta_\mu)|^2}{(s_2^*)^2} > 0`),
-        "。したがって ",
-        math(String.raw`\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = -(s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right) < 0`),
-        " すなわち負の実数であり、負の実数の偏角は ",
+        "である。この 2 つから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2
+&= \dfrac{|\gamma_2(\theta_\mu)|^2}{(s_2^*)^2}
+&&(\because\ \text{直前の等式の両辺を}\ (s_2^*)^2 > 0\ \text{で割った})\\
+&> 0
+&&(\because\ \gamma_2(\theta_\mu) \neq 0\ \text{より}\ |\gamma_2(\theta_\mu)|^2 > 0)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+&= -(s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right)
+&&(\because\ \text{最初の式変形})\\
+&< 0
+&&(\because\ (s_2^*)^2 > 0\ \text{と直前の不等式の積は正であり、その}\ (-1)\ \text{倍は負})
+\end{aligned}`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)`),
+        " は負の実数であり、負の実数の偏角は ",
         math(String.raw`\pi`),
         " であるから ",
         math(String.raw`\arg^{[0,2\pi)}(\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)) = \pi`),
