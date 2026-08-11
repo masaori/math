@@ -7,6 +7,16 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 126 は、tick 125 の「零でない代数的数を正の個数だけ足した有限和は零でない」を
+  四層すべて突き合わせて修正不要と確認し、旧セクション 10h3d-c4b-d3e を独立の論法ごとに
+  d3e1（因数定理の商と冪の差の商の一致）と d3e2（商のもとの根における値の非零性）へ分け、
+  先頭の d3e1 を四層すべてで完了させた。** 本文は $f=t^n+\widehat{-1}$ の係数を
+  因数定理の商 $g=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}K_k(w)$ へ入れ、番号 $n$ の項だけが
+  $K_n(w)$ として残る 4 段の鎖である。必要十分版は、指定した 1 項が求める値で、そのほかの項が
+  すべて零であることだけを要求する。検証は全通過（構造化テキスト 257 ラベル・
+  検証と証明の対応 111 件・SageMath 新設の `root-polynomial-factor-quotient`・
+  `lake build`・sorry 検査 643 件）。次に進めるのは d3e2（$\mathrm{aev}_{w}(g)\ne0$）である。
+
 - **2026-08-12 の tick 125 は、tick 124 の「単位元を正の個数だけ足した有限和は零でない」を
   四層すべて突き合わせ（修正はレビュー記録の 1 件のみ。本文末尾の進捗記述の反映漏れ）、
   セクション 10h3d-c4b-d3d3（零でない代数的数を正の個数だけ足した有限和は零でない）を
@@ -1430,7 +1440,8 @@
 | 10h3d-c4b-d3d2a | 固有値の代数性 | 単位元の有限和は、自然数の与える有理数に等しいこと（$\sum_{i<n}1=n$。$n$ についての帰納法 1 本。部分集合の鎖 $\mathbb{N}\subset\mathbb{Q}$ と、$\mathbb{Q}\subset\overline{\mathbb{Q}}$ が部分体であること） | done | 2026-08-12 の tick 123 で四層すべて完了。主張 1 件 `claim_qbar_unit_sum_eq_rational`。SageMath は `qbar-unit-sum-rational-value`。Lean 具体版 `qbarUnitSumEqRational`（鎖 ℕ→ℚ→ℚ̄ を `Nat.cast` と `algebraMap ℚ Qbar` で書く）、必要十分版 `unit_sum_eq_rational_necSuf`（要るのは有限和の空和と再帰、および自然数を値の側へ送る写像の 2 つの再帰式だけ。等式は「両辺が同じ再帰を満たすこと」そのもので、加法の性質も積も体も部分体も使わない）、導出 `qbarUnitSumEqRational_from_necSuf`。旧 d3d2 は論法が 2 つ（等式の帰納法と非零性の適用の鎖）だったので tick 123 で d3d2a・d3d2b へ割った |
 | 10h3d-c4b-d3d2b | 固有値の代数性 | 単位元の $n$ 個（$n\ge1$）の有限和は零でないこと（d3d2a の等式と、$\mathbb{Q}$ で $n\ge1$ ならば $n\ne0$ であること。適用の鎖 1 本） | done | 2026-08-12 の tick 124 で四層すべて完了。主張 1 件 `claim_qbar_unit_sum_ne_zero`。SageMath は `qbar-unit-sum-ne-zero`。Lean 具体版 `qbarUnitSumNeZero`、必要十分版 `unit_sum_ne_zero_necSuf`（要るのは有限和と自然数の像の等式、および正の自然数の像の非零性だけ）、導出 `qbarUnitSumNeZero_from_necSuf` |
 | 10h3d-c4b-d3d3 | 固有値の代数性 | 零でない代数的数の $n$ 個（$n\ge1$）の和は零でないこと（組み立て。d3d1 の分解と d3d2b の非零性へ `claim_qbar_no_zero_divisors` を当てる） | done | 2026-08-12 の tick 125 で四層すべて完了。主張 1 件 `claim_qbar_repeated_sum_ne_zero`。SageMath は `qbar-repeated-sum-ne-zero`。Lean 具体版 `qbarRepeatedSumNeZero`、必要十分版 `repeated_sum_ne_zero_necSuf`（要るのは和の積への分解・単位元の和の非零性・零元でない左因子の消去の 3 つだけ。和や積の法則も体も代数閉性も不要）、導出 `qbarRepeatedSumNeZero_from_necSuf` |
-| 10h3d-c4b-d3e | 固有値の代数性 | 組み立て: $f=t^{\,n}+\widehat{-1}$ の因数定理の商 $g$ が $K_n(w)$ に等しいこと（有限和の計算）と、$\mathrm{aev}_{w}(g)\ne0$（単根性の核） | todo | 有限和の計算が独立の論法なら着手時にさらに割る |
+| 10h3d-c4b-d3e1 | 固有値の代数性 | $f=t^{\,n}+\widehat{-1}$ に対する因数定理の商 $g$ が冪の差の商 $K_n(w)$ に等しいこと | done | 2026-08-12 の tick 126 で四層すべて完了。主張 1 件 `claim_root_polynomial_factor_quotient`。因数定理の有限和の番号 $n$ の項だけが $K_n(w)$ として残る鎖。SageMath は `root-polynomial-factor-quotient`。Lean 具体版 `rootPolynomialFactorQuotientEq`、必要十分版 `single_term_sum_necSuf`、導出 `rootPolynomialFactorQuotientEq_from_necSuf`。旧 d3e は有限和の係数計算と値の非零性という独立の論法を持つため分割した |
+| 10h3d-c4b-d3e2 | 固有値の代数性 | $g=K_n(w)$ と、$w^{n-1}\ne0$ の正の個数の有限和の非零性から $\mathrm{aev}_{w}(g)\ne0$ を得る | todo | d3a・d3b・d3c・d3d3・d3e1 を組み立てる適用の鎖 1 本 |
 | 10h3d-c4b-d4 | 固有値の代数性 | $t^{\,n}+\widehat{-1}$ が $n$ 個の相異なる根を持つこと（下界の帰納法） | todo | 代数閉であることで根を 1 つ取り、因数定理で割って帰納法。単根性（d3）で取った根が商の根でないことを言う。着手時に割り直す |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | todo | 組み立ての段。新しい論法は持たない見込み |
 | 10h3d-c4c | 固有値の代数性 | 1 の $L$ 乗根の全体にわたる冪の和の値（指数が $L$ の倍数なら元の個数、そうでなければ 0） | todo | 論法は「$w^{m}\ne1$ なる $w$ を取り、10h3d-c4a から $(w^{m}-1)S=0$ を出して $S=0$ を得る」1 本 |
@@ -1445,6 +1456,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 126）: 旧 10h3d-c4b-d3e を「因数定理の商と冪の差の商の一致」と
+  「その商のもとの根における値の非零性」へ分け、先頭の一致を四層すべてで完了した。
+  $f=t^n+\widehat{-1}$ の係数により、因数定理の有限和は番号 $n$ の項 $K_n(w)$ だけを残す。
+  必要十分版はこの論法を「有限和の 1 項以外がすべて零である」という仮定まで薄めた。
 
 - 2026-08-12（tick 125）: 「零でない代数的数を正の個数だけ足した有限和は零でない」
   （10h3d-c4b-d3d3）を四層すべてで完了した。和を単位元の有限和との積へ分解し
@@ -3532,6 +3548,13 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 126）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\gamma_2$ の商の偏角」（`arg_of_gamma2_quotient`）の Step 5（$\bmod 2\pi$ の還元）を整えた。
+3 つの場合の各行に 2 つあった含意を分け、範囲の変形・区間 $[0,2\pi)$ へ入る整数 $n$ の一意性・
+偏角の値までをそれぞれ 4〜5 段の鎖へ開いて、各行末に根拠を置いた。内容は変えていない。
+検査一式と PDF 292 ページは通過した。
+**この主張は Step 6 の点検が残っている。次の tick は Step 6 から続ける。**
+
 **2026-08-12（tick 125）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\gamma_2$ の商の偏角」（`arg_of_gamma2_quotient`）の Step 4（商の極座標表現）で、
 根拠の無い 3 等号の 1 行の鎖を 5 段の一続きの鎖（積への書き換え・乗法性・各因子の表現・
@@ -4879,6 +4902,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 126）: tick 125 の「零でない代数的数を正の個数だけ足した有限和は零でない」の
+  本文・SageMath・Lean 具体版・必要十分版・導出・sorry 登録 3 件を突き合わせた。
+  本文の分解・単位元の和の非零性・零因子の消去は SageMath の assertion と Lean の各適用に
+  1 対 1 で対応し、必要十分版の 3 仮定とコメントも整合していた。修正は無かった。
 
 - 2026-08-12（tick 125）: tick 124 の「単位元を正の個数だけ足した有限和は零でない」の
   本文・SageMath・Lean 具体版・必要十分版・導出・sorry 登録 3 件を突き合わせた。

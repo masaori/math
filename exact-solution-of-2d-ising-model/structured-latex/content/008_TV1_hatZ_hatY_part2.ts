@@ -1304,13 +1304,41 @@ c_2 s_1 = c_1\cos\theta_\mu
         String.raw`\begin{aligned}
 0 \leq \varphi_\mu < \tfrac{\pi}{2}
 &\Rightarrow \pi \leq 2\varphi_\mu+\pi < 2\pi
-&&\Rightarrow n = 0,\ \arg^{[0,2\pi)} = 2\varphi_\mu + \pi \\
+&&(\because\ \text{不等式の各辺を 2 倍して }\pi\text{ を足す}) \\
+&\Rightarrow 0 \leq (2\varphi_\mu+\pi)-2\cdot0\cdot\pi < 2\pi
+&&(\because\ \pi\geq0) \\
+&\Rightarrow n=0
+&&(\because\ \text{条件を満たす }n\in\mathbb{Z}\text{ の一意性}) \\
+&\Rightarrow \arg^{[0,2\pi)}=2\varphi_\mu+\pi
+&&(\because\ \text{区間 }[0,2\pi)\text{ への代表を返す写像の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \tfrac{\pi}{2} \leq \varphi_\mu < \tfrac{3\pi}{2}
 &\Rightarrow 2\pi \leq 2\varphi_\mu+\pi < 4\pi
-&&\Rightarrow n = 1,\ \arg^{[0,2\pi)} = 2\varphi_\mu - \pi \\
+&&(\because\ \text{不等式の各辺を 2 倍して }\pi\text{ を足す}) \\
+&\Rightarrow 0 \leq (2\varphi_\mu+\pi)-2\cdot1\cdot\pi < 2\pi
+&&(\because\ \text{各辺から }2\pi\text{ を引く}) \\
+&\Rightarrow n=1
+&&(\because\ \text{条件を満たす }n\in\mathbb{Z}\text{ の一意性}) \\
+&\Rightarrow \arg^{[0,2\pi)}=2\varphi_\mu-\pi
+&&(\because\ (2\varphi_\mu+\pi)-2\pi=2\varphi_\mu-\pi)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \tfrac{3\pi}{2} \leq \varphi_\mu < 2\pi
 &\Rightarrow 4\pi \leq 2\varphi_\mu+\pi < 5\pi
-&&\Rightarrow n = 2,\ \arg^{[0,2\pi)} = 2\varphi_\mu - 3\pi
+&&(\because\ \text{不等式の各辺を 2 倍して }\pi\text{ を足す}) \\
+&\Rightarrow 0 \leq (2\varphi_\mu+\pi)-2\cdot2\cdot\pi < \pi
+&&(\because\ \text{各辺から }4\pi\text{ を引く}) \\
+&\Rightarrow 0 \leq (2\varphi_\mu+\pi)-2\cdot2\cdot\pi < 2\pi
+&&(\because\ \pi<2\pi) \\
+&\Rightarrow n=2
+&&(\because\ \text{条件を満たす }n\in\mathbb{Z}\text{ の一意性}) \\
+&\Rightarrow \arg^{[0,2\pi)}=2\varphi_\mu-3\pi
+&&(\because\ (2\varphi_\mu+\pi)-4\pi=2\varphi_\mu-3\pi)
 \end{aligned}`,
       ),
       paragraph(["を得る。これで主張の場合分けが示された。"]),

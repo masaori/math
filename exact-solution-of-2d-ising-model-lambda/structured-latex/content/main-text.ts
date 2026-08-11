@@ -25222,6 +25222,62 @@ n
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_polynomial_factor_quotient",
+    kind: "claim",
+    title: { text: "1 の冪根を根に持つ多項式の因数定理の商は、冪の差の商に等しい" },
+    labels: ["claim_root_polynomial_factor_quotient"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-polynomial-factor-quotient"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootPolynomialFactorQuotientEq",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.single_term_sum_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootPolynomialFactorQuotientEq_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\geq1`),
+        " を満たし、", math(String.raw`w\in\mu_n`), " とする。多項式 ",
+      ]),
+      displayMath(String.raw`f:=t^{\,n}+\widehat{-1}\in\overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "に対して、", ref("claim_qbar_factor_theorem"), " で構成する商を",
+      ]),
+      displayMath(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "と置く。このとき ", math(String.raw`g=K_n(w)`), " である。",
+        math(String.raw`K_k(w)`), " は ", ref("claim_qbar_poly_power_difference_factorization"),
+        " の約束による。すべての和・積・係数は ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`), " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`f=t^{\,n}+\widehat{-1}`), " の係数のうち、番号 ",
+        math(String.raw`n`), " の係数は 1 である。また、番号 ",
+        math(String.raw`k<n`), " の項について、", math(String.raw`k=0`),
+        " ならば ", math(String.raw`K_0(w)=0`), " であり、",
+        math(String.raw`1\leq k<n`), " ならば ", math(String.raw`\mathrm{ac}_k(f)=0`),
+        " である。したがって、有限和の番号 ", math(String.raw`n`),
+        " 以外の項はすべて零である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g
+&=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)
+&&(\because\ g\ \text{の定め方})\\
+&=\widehat{\mathrm{ac}_n(f)}\,K_n(w)
+&&(\because\ \text{番号}\ n\ \text{以外の項はすべて零})\\
+&=\widehat{1}\,K_n(w)
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{と}\ \blkref{def_qbar_constant_embedding})\\
+&=K_n(w)
+&&(\because\ \widehat{1}\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "終点が求める等式である。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
