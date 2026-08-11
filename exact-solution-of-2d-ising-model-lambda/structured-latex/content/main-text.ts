@@ -23014,6 +23014,30 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
         " の元に置いた約束と同じ形だが、住む環が違うので別に置く。",
       ]),
       paragraph([
+        "不定元 ",
+        math(String.raw`t`),
+        " 自身の係数は ",
+        math(String.raw`\mathrm{ac}_1(t)=1`),
+        " であり、",
+        math(String.raw`j\in\mathbb{N}`),
+        " が ",
+        math(String.raw`j\ne 1`),
+        " を満たすとき ",
+        math(String.raw`\mathrm{ac}_j(t)=0`),
+        " である。",
+        "また、係数がすべて等しい 2 つの多項式は等しい（",
+        math(String.raw`f,g\in\overline{\mathbb{Q}}[t]`),
+        " について、すべての ",
+        math(String.raw`k\in\mathbb{N}`),
+        " で ",
+        math(String.raw`\mathrm{ac}_k(f)=\mathrm{ac}_k(g)`),
+        " ならば ",
+        math(String.raw`f=g`),
+        "）。",
+        "いずれも多項式環の作り方そのものであって、証明すべきことではない",
+        "（多項式とは、有限個を除いて零である係数の族にほかならない）。",
+      ]),
+      paragraph([
         "現れるのは代数的数、有限和、有限積だけであり、実数体も複素数体も現れない。",
       ]),
     ],
@@ -23282,6 +23306,206 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
         " を係数と冪の有限和に分け、各項へこの等式を当てて ",
         math(String.raw`(t-\widehat{w})`),
         " をくくり出す。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_poly_indeterminate_power_coefficient",
+    kind: "claim",
+    title: {
+      text: "不定元の冪の係数は、番号が指数と一致するときだけ単位元である",
+    },
+    labels: ["claim_qbar_poly_indeterminate_power_coefficient"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyIndeterminatePowerCoefficient",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.indeterminate_power_coefficient_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyIndeterminatePowerCoefficient_from_necSuf",
+    ],
+    verification: [
+      "sagemath/check/qbar-poly-indeterminate-power-coefficient",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{N}`),
+        " と ",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る。",
+        ref("def_qbar_polynomial_ring"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " において",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_j\bigl(t^{\,k}\bigr)=
+\begin{cases}
+1 & (j=k)\\
+0 & (j\ne k)
+\end{cases}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`1`),
+        " と ",
+        math(String.raw`0`),
+        " は係数環 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の積の単位元と加法の零元であり、",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " のそれではない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "係数の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の中で行う。",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`k=0`),
+        "）。",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_j\bigl(t^{\,0}\bigr)&=\mathrm{ac}_j(1)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{0}=1)\\
+&=\begin{cases}
+1 & (j=0)\\
+0 & (j\ne 0)
+\end{cases}
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の}\ 1\ \text{の係数})
+\end{aligned}`),
+      paragraph([
+        "これは ",
+        math(String.raw`k=0`),
+        " の場合の主張そのものである。",
+      ]),
+      paragraph([
+        "一歩（",
+        math(String.raw`k`),
+        " から ",
+        math(String.raw`k+1`),
+        " へ）。すべての ",
+        math(String.raw`j\in\mathbb{N}`),
+        " について ",
+        math(String.raw`\mathrm{ac}_j(t^{\,k})`),
+        " が ",
+        math(String.raw`j=k`),
+        " のとき ",
+        math(String.raw`1`),
+        "、そうでないとき ",
+        math(String.raw`0`),
+        " であることを仮定する。",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取り、",
+        math(String.raw`j=0`),
+        " の場合と ",
+        math(String.raw`j\ge 1`),
+        " の場合に分ける（この 2 つで ",
+        math(String.raw`\mathbb{N}`),
+        " を尽くす）。",
+      ]),
+      paragraph([
+        "場合 1（",
+        math(String.raw`j=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0\bigl(t^{\,k+1}\bigr)&=\mathrm{ac}_0\bigl(t^{\,k}t\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{\,k+1}=t^{\,k}t)\\
+&=\sum_{i=0}^{0}\mathrm{ac}_i\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{0-i}(t)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\mathrm{ac}_0\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{0}(t)
+&&(\because\ \text{和の項が}\ i=0\ \text{の}\ 1\ \text{つだけであること})\\
+&=\mathrm{ac}_0\bigl(t^{\,k}\bigr)\cdot 0
+&&(\because\ 0\ne 1\ \text{なので}\ \blkref{def_qbar_polynomial_ring}\ \text{より}\ \mathrm{ac}_0(t)=0)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元})
+\end{aligned}`),
+      paragraph([
+        "一方 ",
+        math(String.raw`0\ne k+1`),
+        " なので、これは ",
+        math(String.raw`j=0`),
+        " における主張である。",
+      ]),
+      paragraph([
+        "場合 2（",
+        math(String.raw`j\ge 1`),
+        "）。",
+        math(String.raw`j=j'+1`),
+        " となる ",
+        math(String.raw`j'\in\mathbb{N}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{j'+1}\bigl(t^{\,k+1}\bigr)&=\mathrm{ac}_{j'+1}\bigl(t^{\,k}t\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{\,k+1}=t^{\,k}t)\\
+&=\sum_{i=0}^{j'+1}\mathrm{ac}_i\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{j'+1-i}(t)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{1}(t)
++\sum_{\substack{0\le i\le j'+1\\ i\ne j'}}\mathrm{ac}_i\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{j'+1-i}(t)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ i=j'\ \text{の項を取り出す})\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{1}(t)
++\sum_{\substack{0\le i\le j'+1\\ i\ne j'}}\mathrm{ac}_i\bigl(t^{\,k}\bigr)\cdot 0
+&&(\because\ i\ne j'\ \text{では}\ j'+1-i\ne 1\ \text{なので}\ \blkref{def_qbar_polynomial_ring}\ \text{より}\ \mathrm{ac}_{j'+1-i}(t)=0)\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{1}(t)
++\sum_{\substack{0\le i\le j'+1\\ i\ne j'}}0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元})\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{1}(t)+0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元だけからなる有限和は零元})\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)\cdot\mathrm{ac}_{1}(t)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元})\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)\cdot 1
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{より}\ \mathrm{ac}_1(t)=1)\\
+&=\mathrm{ac}_{j'}\bigl(t^{\,k}\bigr)
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=\begin{cases}
+1 & (j'=k)\\
+0 & (j'\ne k)
+\end{cases}
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`j'=k`),
+        " と ",
+        math(String.raw`j'+1=k+1`),
+        " は同値なので（",
+        math(String.raw`\mathbb{N}`),
+        " の後者は単射である）、これは ",
+        math(String.raw`j=j'+1`),
+        " における主張である。",
+      ]),
+      paragraph([
+        "場合 1 と場合 2 ですべての ",
+        math(String.raw`j\in\mathbb{N}`),
+        " を尽くしたので一歩が言えた。",
+        "出発点と一歩により、すべての ",
+        math(String.raw`k\in\mathbb{N}`),
+        " とすべての ",
+        math(String.raw`j\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この主張は、多項式 ",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        " をその係数を用いた単項式の有限和 ",
+        math(String.raw`\sum_{k}\widehat{\mathrm{ac}_k(f)}\,t^{\,k}`),
+        "（",
+        math(String.raw`\widehat{\ \cdot\ }`),
+        " は ",
+        ref("def_qbar_constant_embedding"),
+        "）へ分解するための足場である。",
+        "分解が書ければ、各項へ ",
+        ref("claim_qbar_poly_power_difference_factorization"),
+        " を当てて ",
+        math(String.raw`(t-\widehat{w})`),
+        " をくくり出せる（因数定理）。",
       ]),
     ],
   },
