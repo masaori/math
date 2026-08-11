@@ -21961,6 +21961,99 @@ z^{\,L+1}&=z^{L}\,z
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_pow",
+    kind: "claim",
+    title: { text: "1 の冪根の冪は 1 の冪根である" },
+    labels: ["claim_root_of_unity_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_mem_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取り、",
+        math(String.raw`w\in\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）を任意に取る。このとき任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`w^{k}\in\mu_{n}`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`k=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{0}&=1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{0}=1)\\
+1^{n}&=1
+&&(\because\ \text{単位元の反復積は単位元である})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\in\overline{\mathbb{Q}}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " が体であること（",
+        ref("def_algebraic_numbers"),
+        "）による。よって ",
+        ref("def_root_of_unity_set"),
+        " により ",
+        math(String.raw`w^{0}=1\in\mu_{n}`),
+        " である。",
+      ]),
+      paragraph([
+        "一歩（",
+        math(String.raw`k`),
+        " のとき ",
+        math(String.raw`w^{k}\in\mu_{n}`),
+        " が成り立つと仮定して ",
+        math(String.raw`k+1`),
+        " のときを示す）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{k+1}&=w^{k}\,w
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
+&\in\mu_{n}
+&&(\because\ \blkref{claim_root_of_unity_mul}\ \text{を}\ w^{k}\in\mu_{n}\ \text{（帰納法の仮定）と}\ w\in\mu_{n}\ \text{（仮定）へ当てる})
+\end{aligned}`),
+      paragraph([
+        "以上より、任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`w^{k}\in\mu_{n}`),
+        " である。",
+      ]),
+      paragraph([
+        "この段が使っているのは、",
+        math(String.raw`\mu_{n}`),
+        " が 1 を含むことと積で閉じていること（",
+        ref("claim_root_of_unity_mul"),
+        "）の 2 つだけである。",
+        math(String.raw`w`),
+        " が 1 の冪根であることは、",
+        math(String.raw`w\in\mu_{n}`),
+        " という所属としてしか使っていない。",
+        "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

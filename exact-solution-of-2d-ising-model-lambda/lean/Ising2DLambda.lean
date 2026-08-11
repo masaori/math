@@ -276,3 +276,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarMulPowFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityMul
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RootOfUnityMul
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityMulFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityPow
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.RootOfUnityPow
+import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityPowFromNecSuf
