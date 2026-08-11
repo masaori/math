@@ -1596,17 +1596,19 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
 -\gamma_2(-\theta_\mu) & \mp\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
 \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
-\quad (\because \text{行の基本変形}) \\[4pt]
+&& (\because\ \text{第 1 行を零でない複素数で定数倍する行基本変形}) \\[4pt]
 &\begin{pmatrix}
 \gamma_2(-\theta_\mu) & \dfrac{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}{\mp\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}} \\
 -\gamma_2(-\theta_\mu) & \mp\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
-\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0 \\[4pt]
+\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+&& (\because\ \text{第 1 行の第 1 成分を約分し、第 2 成分の分子をまとめた}) \\[4pt]
 &\begin{pmatrix}
 \gamma_2(-\theta_\mu) & \dfrac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\mp\sqrt{-1_{\mathbb{C}}\cdot\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}} \\
 -\gamma_2(-\theta_\mu) & \mp\sqrt{-1_{\mathbb{C}}\cdot\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
 \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+&& (\because\ \sqrt{z}\,\sqrt{z}=z\ \text{と}\ -z=(-1_{\mathbb{C}})z)
 \end{aligned}`,
       ),
       paragraph([
@@ -1632,18 +1634,20 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
 \gamma_2(-\theta_\mu) & \dfrac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\mp(-\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})} \\
 -\gamma_2(-\theta_\mu) & \mp(-\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})
 \end{pmatrix}
-\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0 \\[4pt]
+\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+&& (\because\ \text{根号と積が可換になる条件を分母と第 2 行へ代入した}) \\[4pt]
 &\begin{pmatrix}
 \gamma_2(-\theta_\mu) & \dfrac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\pm\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}} \\
 -\gamma_2(-\theta_\mu) & \pm\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
-\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0 \\[4pt]
+\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+&& (\because\ \mp(-x)=\pm x\ \text{として符号を整理した}) \\[4pt]
 &\begin{pmatrix}
 \gamma_2(-\theta_\mu) & \dfrac{\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{\pm\sqrt{-1_{\mathbb{C}}}} \\
 -\gamma_2(-\theta_\mu) & \pm\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
 \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
-\quad (\because \text{約分})
+&& (\because\ \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\ne0\ \text{なので約分した})
 \end{aligned}`,
       ),
       paragraph([
@@ -1663,18 +1667,20 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
 \gamma_2(-\theta_\mu) & \pm\left(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\cdot\dfrac{1_{\mathbb{C}}}{\sqrt{-1_{\mathbb{C}}}}\right) \\
 -\gamma_2(-\theta_\mu) & \pm\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
-\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0 \\[4pt]
+\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+&& (\because\ 1/(\pm x)=\pm(1/x)\ \text{として逆数を積へ書き直した}) \\[4pt]
 &\begin{pmatrix}
 \gamma_2(-\theta_\mu) & \mp\left(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\cdot\sqrt{-1_{\mathbb{C}}}\right) \\
 -\gamma_2(-\theta_\mu) & \pm\sqrt{-1_{\mathbb{C}}}\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
-\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0 \\[4pt]
+\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+&& (\because\ \text{複素平方根の逆数の公式を代入し、符号を整理した}) \\[4pt]
 &\begin{pmatrix}
 \gamma_2(-\theta_\mu) & \mp i\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \\
 -\gamma_2(-\theta_\mu) & \pm i\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
 \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
-\quad (\because \sqrt{-1_{\mathbb{C}}} = i)
+&& (\because\ \sqrt{-1_{\mathbb{C}}}=i\ \text{と複素数の積の可換則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1693,6 +1699,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
       notes: [
         "原文の固有方程式・行列式展開・固有ベクトルの行基本変形を全ステップ復元。虚数単位は i、中間の複素平方根は \\sqrt{-1_C} 表記で保持。",
         "2026-08-12 の式変形統一で、固有方程式の左辺の 3 段を 4 段へ開き、行列の成分表示・2×2 行列式・負号の整理・平方の展開を各行の根拠として明示した。内容は変えていない。",
+        "2026-08-12 の式変形統一で、固有ベクトルを求める行基本変形以降の 9 段すべてへ、行の定数倍・約分・平方根の積・符号整理・逆数公式・虚数単位という根拠を行末に付けた。内容は変えていない。",
       ],
     },
   },
