@@ -708,6 +708,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCancellation
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_cancellation_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCancellation_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCoeffBound
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_coeff_bound_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCoeffBound_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

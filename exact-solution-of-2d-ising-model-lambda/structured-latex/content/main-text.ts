@@ -25553,6 +25553,92 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_linear_factor_coeff_bound",
+    kind: "claim",
+    title: { text: "一次因子との積の係数は、上の番号で零である" },
+    labels: ["claim_qbar_poly_linear_factor_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-linear-factor-coeff-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCoeffBound",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_coeff_bound_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorCoeffBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`C\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`m\in\mathbb{N}`), " を、", math(String.raw`k>m`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(C)=0`),
+        " となるように取り、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を任意に取る。このとき、",
+        math(String.raw`k\in\mathbb{N}`), " が ",
+        math(String.raw`k>m+1`), " を満たすならば",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{k}\bigl((t-\widehat{w})C\bigr)=0`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"),
+        "）。すなわち一次因子を掛けても、係数の尽きる番号は 1 つしか上がらない。これは、",
+        "根の個数の下界の帰納法で、一次因子を掛け重ねた積の係数の上界を保つための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ", ref("def_qbar_polynomial_ring"), " の ",
+        math(String.raw`\mathrm{ac}_{k}`),
+        " であり、値の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）の中で行う。",
+        "準備として、", math(String.raw`i\in\mathbb{N}`), " が ",
+        math(String.raw`i\ge2`), " を満たすとき、一次式 ",
+        math(String.raw`t-\widehat{w}\in\overline{\mathbb{Q}}[t]`),
+        " の係数を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_i(t-\widehat{w})
+&=\mathrm{ac}_i(t)-\mathrm{ac}_i(\widehat{w})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数と加法の逆元})\\
+&=0-0
+&&(\because\ i\ne1\ \text{なので}\ \mathrm{ac}_i(t)=0\text{。}\ i\ge1\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{w})=0)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との差})
+\end{aligned}`),
+      paragraph([
+        "本体を示す。", math(String.raw`k>m+1`), " を満たす ",
+        math(String.raw`k\in\mathbb{N}`), " を任意に取る。",
+        math(String.raw`m+1\ge1`), " なので ", math(String.raw`k\ge2`),
+        " が従うことを、鎖の中で使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{k}\bigl((t-\widehat{w})C\bigr)
+&=\sum_{i=0}^{k}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{k-i}(C)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\mathrm{ac}_0(t-\widehat{w})\cdot\mathrm{ac}_{k}(C)
++\mathrm{ac}_1(t-\widehat{w})\cdot\mathrm{ac}_{k-1}(C)
++\sum_{i=2}^{k}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{k-i}(C)
+&&(\because\ k\ge2\ \text{なので、有限和から番号}\ 0,1\ \text{の項を取り出せる})\\
+&=\mathrm{ac}_0(t-\widehat{w})\cdot 0
++\mathrm{ac}_1(t-\widehat{w})\cdot 0
++\sum_{i=2}^{k}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{k-i}(C)
+&&(\because\ k>m+1\ \text{より}\ k>m\ \text{かつ}\ k-1>m\text{。本主張の係数の仮定を 2 箇所へ同時に当てる})\\
+&=\mathrm{ac}_0(t-\widehat{w})\cdot 0
++\mathrm{ac}_1(t-\widehat{w})\cdot 0
++\sum_{i=2}^{k}0\cdot\mathrm{ac}_{k-i}(C)
+&&(\because\ \text{準備で計算した一次式の係数を各項へ同時に当てる})\\
+&=0+0+\sum_{i=2}^{k}0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零。各箇所へ同時に当てる})\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元の有限和と零元との和})
+\end{aligned}`),
+      paragraph([
+        "これで主張が示された。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25827,6 +25913,8 @@ w^{\,1}
           ref("claim_first_root_of_unity_set"),
           "）、および一次因子が消去できること（",
           ref("claim_qbar_poly_linear_factor_cancellation"),
+          "）、および一次因子との積の係数が上の番号で零であること（",
+          ref("claim_qbar_poly_linear_factor_coeff_bound"),
           "）までは上で済んでいる。次に書くのは、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
