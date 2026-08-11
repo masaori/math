@@ -24153,6 +24153,11 @@ f
     labels: ["claim_qbar_pow_diff_sum_coeff_bound"],
     habitat: "Qbar",
     verification: ["sagemath/check/qbar-pow-diff-sum-coeff-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffSumCoeffBound",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_diff_sum_coeff_bound_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffSumCoeffBound_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`w\in\overline{\mathbb{Q}}`),

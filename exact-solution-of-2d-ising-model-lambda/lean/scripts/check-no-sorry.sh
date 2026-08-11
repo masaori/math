@@ -650,6 +650,12 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarFactorTheorem
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_from_finite_sum_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarFactorTheorem_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyCoeffMulConst
+  Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffSumCoeffBound
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.coeff_mul_C_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_diff_sum_coeff_bound_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowDiffSum_eq_coeffBound_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPowDiffSumCoeffBound_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
