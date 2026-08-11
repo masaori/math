@@ -632,6 +632,11 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyIndeterminatePowerCoefficient
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.indeterminate_power_coefficient_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyIndeterminatePowerCoefficient_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyCoeffConstMulPow
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyMonomialDecomposition
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.coeff_C_mul_X_pow_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monomial_decomposition_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyMonomialDecomposition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

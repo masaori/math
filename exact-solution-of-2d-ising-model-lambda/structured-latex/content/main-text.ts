@@ -23511,6 +23511,281 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
   },
 
   {
+    id: "algebraic_eigenvalue_definition_qbar_poly_evaluation",
+    kind: "definition",
+    title: {
+      text: "代数的数を係数とする多項式の、代数的数における値",
+    },
+    labels: ["def_qbar_poly_evaluation"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarPolyEval"],
+    verification: ["sagemath/check/qbar-poly-monomial-decomposition"],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " を任意に取る（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は ",
+        ref("def_algebraic_numbers"),
+        "）。",
+        ref("def_qbar_polynomial_ring"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の元 ",
+        math(String.raw`f`),
+        " に対し、その値を",
+      ]),
+      displayMath(
+        String.raw`\mathrm{aev}_{w}(f):=\sum_{k:\ \mathrm{ac}_k(f)\ne 0}\mathrm{ac}_k(f)\cdot w^{\,k}\ \in\ \overline{\mathbb{Q}}`,
+      ),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`\mathrm{ac}_k(f)\in\overline{\mathbb{Q}}`),
+        " は ",
+        ref("def_qbar_polynomial_ring"),
+        " の係数であり、",
+        math(String.raw`w^{\,k}`),
+        " は ",
+        ref("def_root_of_unity_set"),
+        " で置いた ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元の冪の約束による。",
+        "和は有限個の項からなる（",
+        math(String.raw`\mathrm{ac}_k(f)\ne 0`),
+        " となる ",
+        math(String.raw`k`),
+        " は有限個だから）。",
+      ]),
+      paragraph([
+        math(String.raw`\mathrm{aev}_{w}:\overline{\mathbb{Q}}[t]\to\overline{\mathbb{Q}}`),
+        " は和と積を保ち、",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の零元を ",
+        math(String.raw`0`),
+        " へ、単位元を ",
+        math(String.raw`1`),
+        " へ送る（多項式環からの代入が環準同型であることの、係数環を動かさない場合である。",
+        ref("def_second_evaluation"),
+        " で ",
+        math(String.raw`\mathbb{Z}[x][t]`),
+        " について置いた約束と同じ形のもので、証明すべきことではない）。",
+        "とくに加法についての逆元を逆元へ送る。",
+      ]),
+      paragraph([
+        math(String.raw`a\in\overline{\mathbb{Q}}`),
+        " について ",
+        math(String.raw`\mathrm{aev}_{w}(\widehat{a})=a`),
+        " であり（",
+        ref("def_qbar_constant_embedding"),
+        " より ",
+        math(String.raw`\widehat{a}`),
+        " は ",
+        math(String.raw`\mathrm{ac}_0=a`),
+        " で他の係数が ",
+        math(String.raw`0`),
+        " の元だから）、また ",
+        math(String.raw`\mathrm{aev}_{w}(t)=w`),
+        " である（",
+        ref("def_qbar_polynomial_ring"),
+        " より ",
+        math(String.raw`\mathrm{ac}_1(t)=1`),
+        " で他の係数が ",
+        math(String.raw`0`),
+        " だから）。",
+      ]),
+      paragraph([
+        "現れるのは代数的数と有限和・有限積だけであり、実数体も複素数体も現れない",
+        "（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は可算集合である。",
+        ref("def_algebraic_numbers"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_qbar_poly_monomial_decomposition",
+    kind: "claim",
+    title: {
+      text: "多項式は、その係数を定数として送ったものと不定元の冪との積の有限和に等しい",
+    },
+    labels: ["claim_qbar_poly_monomial_decomposition"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyMonomialDecomposition",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.monomial_decomposition_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyMonomialDecomposition_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-poly-monomial-decomposition"],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の元 ",
+        math(String.raw`f`),
+        " と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を、「",
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k>n`),
+        " を満たすならば ",
+        math(String.raw`\mathrm{ac}_k(f)=0`),
+        " である」を満たすように取る（",
+        ref("def_qbar_polynomial_ring"),
+        " より ",
+        math(String.raw`\mathrm{ac}_k(f)\ne 0`),
+        " となる ",
+        math(String.raw`k`),
+        " は有限個なので、そのような ",
+        math(String.raw`n`),
+        " は必ず取れる）。このとき",
+      ]),
+      displayMath(
+        String.raw`f=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\widehat{\ \cdot\ }`),
+        " は ",
+        ref("def_qbar_constant_embedding"),
+        "、和と積は ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " のものである）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "係数の計算はすべて係数環 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の中で行う。",
+        "まず準備として、",
+        math(String.raw`a\in\overline{\mathbb{Q}}`),
+        " と ",
+        math(String.raw`k\in\mathbb{N}`),
+        " と ",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取り、",
+        math(String.raw`\mathrm{ac}_j\bigl(\widehat{a}\,t^{\,k}\bigr)`),
+        " を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_j\bigl(\widehat{a}\,t^{\,k}\bigr)
+&=\sum_{i=0}^{j}\mathrm{ac}_i\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j-i}\bigl(t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\mathrm{ac}_0\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j}\bigl(t^{\,k}\bigr)
++\sum_{i=1}^{j}\mathrm{ac}_i\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j-i}\bigl(t^{\,k}\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ i=0\ \text{の項を取り出す})\\
+&=\mathrm{ac}_0\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j}\bigl(t^{\,k}\bigr)
++\sum_{i=1}^{j}0\cdot\mathrm{ac}_{j-i}\bigl(t^{\,k}\bigr)
+&&(\because\ i\ge 1\ \text{では}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{a})=0)\\
+&=\mathrm{ac}_0\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j}\bigl(t^{\,k}\bigr)+\sum_{i=1}^{j}0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元})\\
+&=\mathrm{ac}_0\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j}\bigl(t^{\,k}\bigr)+0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元だけからなる有限和は零元})\\
+&=\mathrm{ac}_0\bigl(\widehat{a}\bigr)\cdot\mathrm{ac}_{j}\bigl(t^{\,k}\bigr)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元})\\
+&=a\cdot\mathrm{ac}_{j}\bigl(t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_0(\widehat{a})=a)\\
+&=a\cdot\begin{cases}
+1 & (j=k)\\
+0 & (j\ne k)
+\end{cases}
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient})\\
+&=\begin{cases}
+a & (j=k)\\
+0 & (j\ne k)
+\end{cases}
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元、}\ 0\ \text{との積は零元})
+\end{aligned}`),
+      paragraph([
+        "以下、この結果を「準備の段」と呼ぶ。",
+        "次に ",
+        math(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}\in\overline{\mathbb{Q}}[t]`),
+        " と置き、",
+        math(String.raw`j\in\mathbb{N}`),
+        " を任意に取って ",
+        math(String.raw`\mathrm{ac}_j(g)=\mathrm{ac}_j(f)`),
+        " を示す。",
+        math(String.raw`j\le n`),
+        " の場合と ",
+        math(String.raw`j>n`),
+        " の場合に分ける（この 2 つで ",
+        math(String.raw`\mathbb{N}`),
+        " を尽くす）。",
+      ]),
+      paragraph([
+        "場合 1（",
+        math(String.raw`j\le n`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_j(g)
+&=\sum_{k=0}^{n}\mathrm{ac}_j\bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数を有限和へ繰り返し当てる})\\
+&=\mathrm{ac}_j\bigl(\widehat{\mathrm{ac}_j(f)}\,t^{\,j}\bigr)
++\sum_{\substack{0\le k\le n\\ k\ne j}}\mathrm{ac}_j\bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}\bigr)
+&&(\because\ j\le n\ \text{より}\ k=j\ \text{の項が和の範囲にあり、}\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則で取り出せる})\\
+&=\mathrm{ac}_j(f)
++\sum_{\substack{0\le k\le n\\ k\ne j}}\mathrm{ac}_j\bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}\bigr)
+&&(\because\ \text{準備の段を}\ a=\mathrm{ac}_j(f)\ \text{と}\ k=j\ \text{へ当てる})\\
+&=\mathrm{ac}_j(f)+\sum_{\substack{0\le k\le n\\ k\ne j}}0
+&&(\because\ k\ne j\ \text{なので準備の段})\\
+&=\mathrm{ac}_j(f)+0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元だけからなる有限和は零元})\\
+&=\mathrm{ac}_j(f)
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "場合 2（",
+        math(String.raw`j>n`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_j(g)
+&=\sum_{k=0}^{n}\mathrm{ac}_j\bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数を有限和へ繰り返し当てる})\\
+&=\sum_{k=0}^{n}0
+&&(\because\ 0\le k\le n<j\ \text{より}\ k\ne j\ \text{なので準備の段})\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元だけからなる有限和は零元})\\
+&=\mathrm{ac}_j(f)
+&&(\because\ j>n\ \text{についての仮定})
+\end{aligned}`),
+      paragraph([
+        "場合 1 と場合 2 ですべての ",
+        math(String.raw`j\in\mathbb{N}`),
+        " を尽くしたので、すべての ",
+        math(String.raw`j\in\mathbb{N}`),
+        " について ",
+        math(String.raw`\mathrm{ac}_j(g)=\mathrm{ac}_j(f)`),
+        " である。",
+        "係数がすべて等しい 2 つの多項式は等しい（",
+        ref("def_qbar_polynomial_ring"),
+        "）ので ",
+        math(String.raw`f=g`),
+        "、すなわち主張の等式が成り立つ。",
+      ]),
+      paragraph([
+        "この分解が書けたので、次はその各項へ ",
+        ref("claim_qbar_poly_power_difference_factorization"),
+        " を当てて ",
+        math(String.raw`(t-\widehat{w})`),
+        " をくくり出せる（因数定理）。",
+        "そこで根であることを述べるために ",
+        ref("def_qbar_poly_evaluation"),
+        " の ",
+        math(String.raw`\mathrm{aev}_{w}`),
+        " を使う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
