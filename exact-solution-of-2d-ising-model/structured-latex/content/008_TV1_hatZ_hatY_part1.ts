@@ -1054,63 +1054,88 @@ D_{n+1}
       paragraph([
         "基底段階（",
         math(String.raw`n = 0`),
-        "、偶数）：",
-        math(String.raw`E_0 = \hat{Z}_\mu^{(-)}`),
-        " であり、偶数側の右辺は ",
-        math(String.raw`(-1)^{0}(2K_2^*)^0\hat{Z}_\mu^{(-)} = \hat{Z}_\mu^{(-)}`),
-        " で一致する。",
+        "、偶数）。",
+        math(String.raw`E_0`),
+        " から主張の偶数側の右辺へ至る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+E_0
+&= \hat{Z}_\mu^{(-)}
+&&(\because\ 0\ \text{重の交換子の規約}) \\
+&= 1\cdot 1\cdot\hat{Z}_\mu^{(-)}
+&&(\because\ 1\ \text{はスカラー倍の単位元}) \\
+&= (-1)^{0/2}(2K_2^*)^{0}\hat{Z}_\mu^{(-)}
+&&(\because\ \alpha^{0}=1\ \text{を}\ \alpha=-1\ \text{と}\ \alpha=2K_2^*\ \text{へ})
+\end{aligned}`,
+      ),
       paragraph([
         "帰納段階 1（",
         math(String.raw`n`),
         " 偶数 → ",
         math(String.raw`n+1`),
-        " 奇数）：",
+        " 奇数）。",
+        math(String.raw`n`),
+        " が偶数で ",
         math(String.raw`E_n = (-1)^{n/2}(2K_2^*)^n\hat{Z}_\mu^{(-)}`),
-        " と仮定すると、",
+        " と仮定する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E_{n+1}
-&= \left[K_2^* H_2,\ (-1)^{n/2}(2K_2^*)^n\hat{Z}_\mu^{(-)}\right] \\
+&= \left[K_2^* H_2,\ E_n\right]
+&&(\because\ n\ \text{重の交換子の定義}) \\
+&= \left[K_2^* H_2,\ (-1)^{n/2}(2K_2^*)^n\hat{Z}_\mu^{(-)}\right]
+&&(\because\ \text{帰納法の仮定}) \\
 &= K_2^*\cdot(-1)^{n/2}(2K_2^*)^n\left[H_2,\ \hat{Z}_\mu^{(-)}\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&(\because\ \text{交換子の双線型性}) \\
 &= K_2^*\cdot(-1)^{n/2}(2K_2^*)^n\cdot\left(-2\,\hat{Y}_\mu\right)
-   \quad (\because \text{(C)}) \\
+&&(\because\ \text{(C)}) \\
+&= (-1)\cdot(-1)^{n/2}(2K_2^*)^{n+1}\hat{Y}_\mu
+&&(\because\ 2K_2^*\cdot(2K_2^*)^{n}=(2K_2^*)^{n+1}\ \text{とスカラーの積の可換性}) \\
 &= (-1)^{n/2+1}(2K_2^*)^{n+1}\hat{Y}_\mu
+&&(\because\ (-1)\cdot(-1)^{k}=(-1)^{k+1}) \\
+&= (-1)^{((n+1)+1)/2}(2K_2^*)^{n+1}\hat{Y}_\mu
+&&(\because\ \tfrac{(n+1)+1}{2}=\tfrac{n}{2}+1)
 \end{aligned}`,
       ),
       paragraph([
+        "最後の行が、",
         math(String.raw`n+1`),
-        " は奇数で、奇数側の右辺の符号は ",
-        math(String.raw`(-1)^{((n+1)+1)/2} = (-1)^{n/2+1}`),
-        " であり一致する。",
+        " が奇数のときの主張の右辺である。",
       ]),
       paragraph([
         "帰納段階 2（",
         math(String.raw`n`),
         " 奇数 → ",
         math(String.raw`n+1`),
-        " 偶数）：",
+        " 偶数）。",
+        math(String.raw`n`),
+        " が奇数で ",
         math(String.raw`E_n = (-1)^{(n+1)/2}(2K_2^*)^n\hat{Y}_\mu`),
-        " と仮定すると、",
+        " と仮定する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E_{n+1}
-&= \left[K_2^* H_2,\ (-1)^{(n+1)/2}(2K_2^*)^n\hat{Y}_\mu\right] \\
+&= \left[K_2^* H_2,\ E_n\right]
+&&(\because\ n\ \text{重の交換子の定義}) \\
+&= \left[K_2^* H_2,\ (-1)^{(n+1)/2}(2K_2^*)^n\hat{Y}_\mu\right]
+&&(\because\ \text{帰納法の仮定}) \\
 &= K_2^*\cdot(-1)^{(n+1)/2}(2K_2^*)^n\left[H_2,\ \hat{Y}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&(\because\ \text{交換子の双線型性}) \\
 &= K_2^*\cdot(-1)^{(n+1)/2}(2K_2^*)^n\cdot 2\,\hat{Z}_\mu^{(-)}
-   \quad (\because \text{(D)}) \\
+&&(\because\ \text{(D)}) \\
 &= (-1)^{(n+1)/2}(2K_2^*)^{n+1}\hat{Z}_\mu^{(-)}
+&&(\because\ 2K_2^*\cdot(2K_2^*)^{n}=(2K_2^*)^{n+1}\ \text{とスカラーの積の可換性})
 \end{aligned}`,
       ),
       paragraph([
+        "最後の行が、",
         math(String.raw`n+1`),
-        " は偶数で、偶数側の右辺の符号は ",
-        math(String.raw`(-1)^{(n+1)/2}`),
-        " であり一致する。以上により (h2.z−) が成り立つ。",
+        " が偶数のときの主張の右辺である。基底段階と 2 つの帰納段階により、すべての ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について (h2.z−) が成り立つ。",
       ]),
 
       paragraph([
@@ -1193,6 +1218,7 @@ F_{n+1}
         "原文の proof は「TODO : note 参考にして、帰納法で行ける」というアウトラインのみで帰納法本体は未記述だった。4 式それぞれについて n に関する帰納法（基底 n=0 と、偶数 n→奇数 n+1 / 奇数 n→偶数 n+1 の 2 つの帰納段階）を人手で書き下し、todo を除去した。",
         "原文 note の n=0..4 具体例を block-level notes に忠実に翻訳。原文の (h2.z^+) は「これは使われない」というメモのみで式が無いため statement・notes とも省いた。原文 note の (h1.y) n=3 は exp の符号が n=1 と不整合（誤植）だったため、本作業で n=1 と同じ e^{-i2π(-μ)/M}（= e^{+iθ}）へ修正した。用いる 1 重公式 [H_1^{(±)}, hat(Y)_mu] = -2 e^{iθ} hat(Z)_mu^{(±)} は sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_01_single_commutators.sage の (B) で数値的に確認済み。帰納法の証明は note の具体例ではなく commutator_of_H_and_Z_Y の 1 重公式から直接構成した。",
         "(h1.z) の帰納法を一続きの鎖へ書き換えた（2026-08-11）。基底段階と 2 つの帰納段階のそれぞれを 1 つの鎖にし、鎖の終点を主張の右辺の形（(-1)^{((n+1)-1)/2} 等）まで延ばして、全段に行末の根拠を付けた。段は減らしていない（増えている）。翌 tick のレビューで、基底段階の鎖が主張の右辺から始まって C_0 へ着く向きだったのを、C_0 から始めて右辺へ着く向きへ直した（証明の書き方の「式変形は主張の左辺から始める」。段と根拠は同じものを順に読み替えただけで、中身は変えていない）。",
+        "(h2.z−) の帰納法を一続きの鎖へ書き換えた（2026-08-11）。基底段階を E_0 から始まる 3 段の鎖にし、2 つの帰納段階には E_{n+1} = [K_2^* H_2, E_n] の段を先頭へ足したうえで、鎖の終点を主張の右辺の形（(-1)^{((n+1)+1)/2} 等）まで延ばし、全段に行末の根拠を付けた。「n+1 は奇数で、右辺の符号は… であり一致する」という地の文は、鎖の最後の段（指数の書き換え）へ移した。段は減らしていない（増えている）。",
         "(h1.y) の帰納法を一続きの鎖へ書き換えた（2026-08-11）。基底段階を D_0 から始まる 3 段の鎖にし、2 つの帰納段階には D_{n+1} = [K_1 H_1^{(±)}, D_n] の段を先頭へ足したうえで、鎖の終点を主張の右辺の形（(-1)^{((n+1)+1)/2} 等）まで延ばし、全段に行末の根拠を付けた。overbrace の地の文（e^{iθ}e^{-iθ} = 1）も行末の根拠へ移した。段は減らしていない（増えている）。",
         "原文 statement の (h1.y) 奇数側は hat(Z)_mu^{(+)} と書かれているが、用いる 1 重公式 [H_1^{(±)}, hat(Y)_mu] = -2 e^{iθ} hat(Z)_mu^{(±)} は H_1 と同符号の hat(Z) を返すため、構造化側では hat(Z)_mu^{(±)} とした（移行時点からの表記であり、本作業で変更していない）。",
       ],
