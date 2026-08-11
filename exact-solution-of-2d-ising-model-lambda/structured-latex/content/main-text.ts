@@ -23988,6 +23988,101 @@ a & (j=k)\\
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_evaluation_coefficient_sum",
+    kind: "claim",
+    title: {
+      text: "多項式の値は係数の有限和で書ける",
+    },
+    labels: ["claim_qbar_evaluation_coefficient_sum"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalCoefficientSum",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_sum_map_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalCoefficientSum_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-evaluation-coefficient-sum"],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"),
+        " の ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の元 ",
+        math(String.raw`f`),
+        " と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を、「",
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`k>n`),
+        " を満たすならば ",
+        math(String.raw`\mathrm{ac}_k(f)=0`),
+        " である」を満たすように取り（",
+        ref("claim_qbar_poly_monomial_decomposition"),
+        " と同じ取り方である）、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(
+        String.raw`\mathrm{aev}_{w}(f)=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot w^{\,k}`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{aev}_{w}`),
+        " は ",
+        ref("def_qbar_poly_evaluation"),
+        "。右辺の和と積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " のもの、",
+        math(String.raw`w^{\,k}`),
+        " は ",
+        ref("def_root_of_unity_set"),
+        " で置いた ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元の冪の約束である）。",
+        ref("def_qbar_poly_evaluation"),
+        " の和は係数が零でない項だけを走るが、この右辺は ",
+        math(String.raw`0`),
+        " から ",
+        math(String.raw`n`),
+        " までのすべての ",
+        math(String.raw`k`),
+        " を走る。この 2 つが等しいことが主張である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(f)
+&=\mathrm{aev}_{w}\Bigl(\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}\Bigr)
+&&(\because\ \blkref{claim_qbar_poly_monomial_decomposition})\\
+&=\sum_{k=0}^{n}\mathrm{aev}_{w}\bigl(\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は和を保つ。有限和へ繰り返し当てる})\\
+&=\sum_{k=0}^{n}\mathrm{aev}_{w}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{aev}_{w}\bigl(t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は積を保つ。各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot\mathrm{aev}_{w}\bigl(t^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w}(\widehat{a})=a\ \text{を各項へ同時に当てる})\\
+&=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot w^{\,k}
+&&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow}\ \text{を各項へ同時に当てる})
+\end{aligned}`),
+      paragraph([
+        "終点は主張の右辺である。",
+      ]),
+      paragraph([
+        "この主張は、因数定理の段で使う。",
+        math(String.raw`f`),
+        " から ",
+        math(String.raw`\widehat{\mathrm{aev}_{w}(f)}`),
+        " を引いた差を係数の有限和で書き直し、各項へ ",
+        ref("claim_qbar_poly_power_difference_factorization"),
+        " を当てて ",
+        math(String.raw`(t-\widehat{w})`),
+        " をくくり出す。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
