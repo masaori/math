@@ -266,18 +266,20 @@ t=0:\qquad
         "。正数どうしの不等式の積より",
       ]),
       displayMath(
-        String.raw`c_1 c_2^* > s_1 c_2^* > s_1 s_2^* > 0`,
+        String.raw`\begin{aligned}
+c_1 c_2^*
+&>s_1 c_2^*
+&&(\because\ c_1>s_1\ \text{の両辺に正数}\ c_2^*\ \text{を掛けた})\\
+s_1 c_2^*
+&>s_1 s_2^*
+&&(\because\ c_2^*>s_2^*\ \text{の両辺に正数}\ s_1\ \text{を掛けた})\\
+s_1 s_2^*
+&>0
+&&(\because\ s_1>0\ \text{かつ}\ s_2^*>0)
+\end{aligned}`,
       ),
       paragraph([
-        "（第 1 の不等号は ",
-        math(String.raw`c_1 > s_1`),
-        " の両辺に ",
-        math(String.raw`c_2^* > 0`),
-        " を掛けたもの、第 2 の不等号は ",
-        math(String.raw`c_2^* > s_2^*`),
-        " の両辺に ",
-        math(String.raw`s_1 > 0`),
-        " を掛けたもの。）よって ",
+        "よって ",
         math(String.raw`s_1 s_2^* > 0`),
         " で割って ",
         math(String.raw`\dfrac{c_1 c_2^*}{s_1 s_2^*} > 1`),
@@ -302,7 +304,8 @@ t=0:\qquad
           "pr_2（labels: first_and_second_projections）が r = 0 のとき [0] を返す定義なので arg^{[0,2π)}(0_C) = 0 であり、" +
           "境界を arg = 0 側に含める原文の場合分けは正しい（statement の修正は不要）。",
         "さらに K_1, K_2 ∈ R_{>0} のもとでは c_1 c_2^* > s_1 s_2^* > 0 ゆえ c_1 c_2^*/(s_1 s_2^*) > 1 ≥ cos θ_μ となり、" +
-          "第 2 の場合（arg = π）は空である。この事実を statement へ追記した（原文には無い）。",
+        "第 2 の場合（arg = π）は空である。この事実を statement へ追記した（原文には無い）。",
+        "2026-08-11 の式変形統一で、Step 5 の正値性の鎖を 1 行 1 不等号へ分け、後置の散文にあった根拠を各行末へ移した。内容は変えていない。",
       ],
     },
   },

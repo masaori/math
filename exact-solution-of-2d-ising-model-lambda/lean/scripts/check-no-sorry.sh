@@ -663,6 +663,9 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.coeff_C_mul_necSuf
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_quotient_coeff_bound_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientCoeffBound_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientOtherRootZero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_quotient_other_root_zero_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientOtherRootZero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

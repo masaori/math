@@ -24408,6 +24408,105 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_factor_quotient_other_root_zero",
+    kind: "claim",
+    title: { text: "一次因子を取り除いた商は、もとの根と相異なる根で零になる" },
+    labels: ["claim_qbar_factor_quotient_other_root_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-factor-quotient-other-root-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientOtherRootZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_quotient_other_root_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarFactorQuotientOtherRootZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"),
+        " の元 ",
+        math(String.raw`f,g\in\overline{\mathbb{Q}}[t]`),
+        " と ",
+        math(String.raw`w,w'\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。",
+        math(String.raw`f=(t-\widehat{w})g`),
+        "、",
+        math(String.raw`\mathrm{aev}_{w'}(f)=0`),
+        "、",
+        math(String.raw`w'\ne w`),
+        " が成り立つならば",
+      ]),
+      displayMath(String.raw`\mathrm{aev}_{w'}(g)=0`),
+      paragraph([
+        "が成り立つ。特に、",
+        ref("claim_qbar_factor_theorem"),
+        " で根 ",
+        math(String.raw`w`),
+        " に対応する一次因子を取り除いた商は、",
+        math(String.raw`w`),
+        " と相異なる根 ",
+        math(String.raw`w'`),
+        " を根として保つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で行う。まず、仮定と ",
+        ref("def_qbar_poly_evaluation"),
+        " の和・加法の逆元・積を保つ性質から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\mathrm{aev}_{w'}(f)
+&&(\because\ \mathrm{aev}_{w'}(f)=0)\\
+&=\mathrm{aev}_{w'}\bigl((t-\widehat{w})g\bigr)
+&&(\because\ f=(t-\widehat{w})g)\\
+&=\mathrm{aev}_{w'}(t-\widehat{w})\,\mathrm{aev}_{w'}(g)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より値を取る写像は積を保つ})\\
+&=\bigl(\mathrm{aev}_{w'}(t)-\mathrm{aev}_{w'}(\widehat{w})\bigr)\,\mathrm{aev}_{w'}(g)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より値を取る写像は和と加法の逆元を保つ})\\
+&=(w'-w)\,\mathrm{aev}_{w'}(g)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w'}(t)=w'\ \text{と}\ \mathrm{aev}_{w'}(\widehat{w})=w)
+\end{aligned}`),
+      paragraph([
+        "次に ",
+        math(String.raw`w'-w\ne0`),
+        " を確かめる。もし ",
+        math(String.raw`w'-w=0`),
+        " ならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w'
+&=(w'-w)+w
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法と加法の逆元})\\
+&=0+w
+&&(\because\ w'-w=0)\\
+&=w
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "となり、仮定 ",
+        math(String.raw`w'\ne w`),
+        " に反する。したがって ",
+        math(String.raw`w'-w\ne0`),
+        " である。上の鎖を左右逆に読めば ",
+        math(String.raw`(w'-w)\,\mathrm{aev}_{w'}(g)=0`),
+        " であるから、",
+        ref("claim_qbar_no_zero_divisors"),
+        " を ",
+        math(String.raw`a=w'-w`),
+        "、",
+        math(String.raw`b=\mathrm{aev}_{w'}(g)`),
+        " として当てると ",
+        math(String.raw`\mathrm{aev}_{w'}(g)=0`),
+        " を得る。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -24647,6 +24746,8 @@ f
           ref("claim_qbar_pow_diff_sum_coeff_bound"),
           "、",
           ref("claim_qbar_factor_quotient_coeff_bound"),
+          "）、および一次因子を取り除いた商が、もとの根と相異なる根で零になること（",
+          ref("claim_qbar_factor_quotient_other_root_zero"),
           "）までは上で済んでいる。",
           "次に書くのは、零でない多項式の相異なる根が次数を超えないことと、それを用いて ",
           math(String.raw`\mu_n`),

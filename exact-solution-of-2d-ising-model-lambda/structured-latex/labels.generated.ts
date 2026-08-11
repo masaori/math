@@ -81,6 +81,7 @@ export const ALL_LABELS = [
   "claim_qbar_evaluation_coefficient_sum",
   "claim_qbar_evaluation_indeterminate_pow",
   "claim_qbar_factor_quotient_coeff_bound",
+  "claim_qbar_factor_quotient_other_root_zero",
   "claim_qbar_factor_theorem",
   "claim_qbar_geometric_telescope",
   "claim_qbar_identity_action",

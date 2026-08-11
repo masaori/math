@@ -23,9 +23,9 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 241 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| 記述（構造化テキスト） | ラベルの数は合計 246 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
 | SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` / `qbar-smul-eq-zero` / `shift-matrix-eigenvalue-root-of-unity` / `qbar-commuting-eigenspace` / `qbar-shift-transfer-commute` / `qbar-transfer-preserves-shift-eigenspace` / `qbar-action-sum` / `qbar-smul-sum` / `qbar-projector-action` / `qbar-projector-image-eigenspace` / `qbar-mul-pow` / `root-of-unity-mul` / `root-of-unity-pow` / `root-of-unity-mul-map` / `root-of-unity-power-sum-invariant` / `qbar-geometric-telescope` / `qbar-no-zero-divisors` / `root-of-unity-geometric-sum-zero` / `qbar-power-difference-factorization` / `qbar-poly-power-difference-factorization` / `qbar-poly-indeterminate-power-coefficient` / `qbar-poly-monomial-decomposition` / `qbar-const-embedding-pow` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 107 で `claim_qbar_evaluation_indeterminate_pow`（代入は不定元の冪を代数的数の冪へ写す）の Lean を置いた。mathlib の `map_pow` / `Polynomial.eval_pow` へ委ねず、帰納法を自分で書いてある。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 587 件を登録）が通る |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 610 件を登録）が通る |
 | Lean 必要十分版 | 主張 113 件と定理 3 件について作成済み（うち 1 件（行列の積の結合則）は、既にある作用の側の必要十分版をそのまま特殊化したもので、新しい必要十分版を書き起こしていない。2026-08-11 の tick 79 で、本文の `lean` フィールド（ブロックに対応する Lean の定理名）を機械的に数え直した。本文の主張は 120 件（tick 106 時点）なので、必要十分版を置いていない主張は **9 件**である（前の記録の 16 件は、必要十分版が実在するのに本文へ名前が書かれていなかった 2 件と、tick 79 で新たに置いた 1 件を含んでいた）。置いていない 9 件は $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・閉じた道の 1 対 1 対応・置換の符号の値・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復（2 件）・軌道ごとの置換の符号の値・軌道の互換の全単射性である。理由が台帳に残っているのは $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの往復の 4 件だけで——1 つめは既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため——残りは次のレビュー以降で 1 件ずつ判定する）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
 
 2026-08-11 の tick 108 では、主張「多項式の値は係数の有限和で書ける」
@@ -62,6 +62,13 @@ sorry 検査 600 件を含む検証一式は全通過した。
 よい（多項式の係数であることを使わない）ことを示す。本文のラベルは 245 件、
 検証と証明の対応は 99 件、sorry 検査の登録は 607 件。次は 10h3d-c4b-c3
 （相異なる根における商の値が零であること）。
+
+2026-08-11 の tick 113 では、「一次因子を取り除いた商は、もとの根と相異なる根で零になる」を
+四層すべてで完了した。因子分解をもう一つの根で評価して
+$0=(w'-w)\mathrm{aev}_{w'}(g)$ を得て、$w'-w\ne0$ から零でない因子を左から割る。
+必要十分版は、多項式の型の積・それを保つ写像・因子の値とその左逆元だけを仮定する。
+本文のラベルは 246 件、検証と証明の対応は 100 件、sorry 検査の登録は 610 件。
+次は「零でない多項式の相異なる根は次数を超えないこと」の帰納法本体である。
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -848,13 +855,14 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-**2026-08-11 の tick 109 は、レビューで直すところが無く、根を持つ多項式が一次式を
-因子に持つことを四層すべてで完了させた。**
+**2026-08-11 の tick 113 は、前回成果をレビューし、本文末尾と台帳の不整合を修正したうえで、
+一次因子を取り除いた商が相異なる根で零になることを四層すべてで完了させた。**
 
-1. **レビュー**: 因数定理の本文 1 ブロック、SageMath `qbar-factor-theorem`、Lean の具体版・
+1. **レビュー**: 一次因子を取り除いた商について、本文の 2 つの鎖、SageMath、Lean の具体版・
    必要十分版・導出を突き合わせる。
-2. **次に進めるセクションは「零でない多項式の根は次数を超えないこと」**。
-   状態台帳のセクション表が正本であり、論法は次数についての帰納法 1 本である。
+2. **次に進めるセクションは「零でない多項式の相異なる根は次数を超えないこと」**。
+   状態台帳のセクション表が正本であり、因数定理・商の係数上界・商が相異なる根を保つことを
+   使う帰納法本体である。
 3. **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**
    （台帳の「式変形の書き方の統一」の表が正本）。
 4. **push の直前に `lake build` を回す。** tick 90 は Lean を書いたあと再ビルドせずに
