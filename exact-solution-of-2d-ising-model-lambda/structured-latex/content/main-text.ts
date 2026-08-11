@@ -22636,6 +22636,109 @@ b&=1\cdot b
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_geometric_sum_zero",
+    kind: "claim",
+    title: {
+      text: "1 でない 1 の冪根の、冪の有限和は零元である",
+    },
+    labels: ["claim_root_of_unity_geometric_sum_zero"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityGeometricSumZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_sum_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityGeometricSumZero_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-geometric-sum-zero"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取り、",
+        math(String.raw`z\in\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）が ",
+        math(String.raw`z\ne1`),
+        " を満たすとする。このとき、",
+        math(String.raw`G_{n}(z)=\sum_{k=0}^{n-1}z^{k}`),
+        "（",
+        ref("claim_qbar_geometric_telescope"),
+        " で置いた元）について",
+      ]),
+      displayMath(String.raw`G_{n}(z)=0`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`z-1\ne0`),
+        " である。実際、",
+        math(String.raw`z-1=0`),
+        " とすると両辺に ",
+        math(String.raw`1`),
+        " を足して ",
+        math(String.raw`z=1`),
+        " となり、仮定 ",
+        math(String.raw`z\ne1`),
+        " に反する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(z-1)\,G_{n}(z)&=z^{n}-1
+&&(\because\ \text{伸縮の等式})\\
+&=1-1
+&&(\because\ z\in\mu_{n}\ \text{すなわち}\ z^{n}=1)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の同じ元どうしの差は零元})
+\end{aligned}`),
+      paragraph([
+        "第 1 の等号は ",
+        ref("claim_qbar_geometric_telescope"),
+        "、第 2 の等号は ",
+        ref("def_root_of_unity_set"),
+        " による。",
+      ]),
+      paragraph([
+        "この等式に、積が零元ならば零元でない方で割って他方が零元と分かること（",
+        ref("claim_qbar_no_zero_divisors"),
+        "）を ",
+        math(String.raw`a=z-1`),
+        "、",
+        math(String.raw`b=G_{n}(z)`),
+        " として当てる。仮定 ",
+        math(String.raw`ab=0`),
+        " は上の等式であり、仮定 ",
+        math(String.raw`a\ne0`),
+        " は準備で示した ",
+        math(String.raw`z-1\ne0`),
+        " である。よって ",
+        math(String.raw`G_{n}(z)=0`),
+        " を得る。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について新たに使っているのは、引いた 2 つの主張が要求する性質のほかに、",
+        "同じ元どうしの差が零元であること、および ",
+        math(String.raw`z-1=0`),
+        " と ",
+        math(String.raw`z=1`),
+        " が同値であること（加法群であること）だけである。",
+        "積の可換則も、代数閉であることも使っていない。実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "これは、1 の冪根の全体にわたる冪の和 ",
+        math(String.raw`S_{n,m}`),
+        "（",
+        ref("claim_root_of_unity_power_sum_invariant"),
+        "）を、原始根を取って ",
+        math(String.raw`G_{n}`),
+        " の値として書き直す経路のための段である。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -22867,6 +22970,8 @@ b&=1\cdot b
           ref("claim_qbar_geometric_telescope"),
           "）、および代数的数の積が零元ならば零元でない方で割って他方が零元と分かること（",
           ref("claim_qbar_no_zero_divisors"),
+          "）、および 1 でない 1 の冪根の冪の有限和が零元であること（",
+          ref("claim_root_of_unity_geometric_sum_zero"),
           "）までは上で済んでいる。",
           "次に書くのは ",
           math(String.raw`\mu_n`),
