@@ -461,17 +461,25 @@ s_2^* = \sinh 2K_2^* > 0`,
         math(String.raw`i\,e^{i\theta_\mu} s_2^*`),
         " が ",
         math(String.raw`\mathbb{C}^\times`),
-        " に属すること。",
+        " に属すること。準備として 3 つの因子の絶対値を確かめる。",
         ref("euler_formula_cos_sin"),
         " より ",
         math(String.raw`e^{i\theta_\mu} = \cos\theta_\mu + i\sin\theta_\mu`),
         " であるから、",
-        ref("abs_basic_properties"),
-        " (2) より ",
-        math(String.raw`|e^{i\theta_\mu}|^2 = (\cos\theta_\mu)^2 + (\sin\theta_\mu)^2 = 1`),
-        "、すなわち ",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|e^{i\theta_\mu}\right|^2
+&= (\cos\theta_\mu)^2 + (\sin\theta_\mu)^2
+&& (\because\ \text{絶対値の基本性質 (2)})\\
+&= 1
+&& (\because\ \cos^2 t + \sin^2 t = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "すなわち ",
         math(String.raw`|e^{i\theta_\mu}| = 1`),
-        "。同様に ",
+        "（絶対値は非負なので平方が 1 なら値も 1）。同様に ",
         math(String.raw`|i| = 1`),
         " であり、",
         math(String.raw`s_2^* > 0`),
@@ -479,10 +487,24 @@ s_2^* = \sinh 2K_2^* > 0`,
         math(String.raw`|s_2^*| = s_2^*`),
         "（",
         ref("abs_basic_properties"),
-        " (6)）。よって乗法性（同 (4)）より",
+        " (6)）。この準備のもとで、",
       ]),
       displayMath(
-        String.raw`\left|i\,e^{i\theta_\mu} s_2^*\right| = |i|\,\left|e^{i\theta_\mu}\right|\,|s_2^*| = s_2^* > 0`,
+        String.raw`\begin{aligned}
+\left|i\,e^{i\theta_\mu} s_2^*\right|
+&= |i|\,\left|e^{i\theta_\mu}\right|\,\left|s_2^*\right|
+&& (\because\ \text{絶対値の乗法性。絶対値の基本性質 (4)})\\
+&= 1\cdot\left|e^{i\theta_\mu}\right|\,\left|s_2^*\right|
+&& (\because\ |i| = 1)\\
+&= 1\cdot 1\cdot\left|s_2^*\right|
+&& (\because\ \left|e^{i\theta_\mu}\right| = 1)\\
+&= 1\cdot 1\cdot s_2^*
+&& (\because\ |s_2^*| = s_2^*)\\
+&= s_2^*
+&& (\because\ 1\ \text{との積})\\
+&> 0
+&& (\because\ \text{Step 0 の}\ s_2^* > 0)
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
@@ -702,6 +724,9 @@ s_2^* = \sinh 2K_2^* > 0`,
           "sin θ_μ = 0 ⟺ M | 2μ ⟺（M が偶数なら）μ ≡ 0 または μ ≡ M/2 (mod M) という正しい形で書いた。" +
           "μ = ±M/2 の排除は Step 4 の（⇒）で c_2 s_1 = -c_1 < 0 と正値性の矛盾として行う。",
         "2026-08-11 の式変形統一で、Step 0 の K_2^*>0 の導出を地の文から 4 段の鎖へ移し、各不等号の根拠を行末へ付けた。内容は変えていない。",
+        "2026-08-11 の式変形統一（続き）で、Step 1 を直した。|e^{iθ_μ}|² の計算（1 行に等号 2 つ・根拠なし）を 2 段の鎖へ、" +
+          "絶対値の積の計算（1 行に等号 2 つと不等号・根拠が前置の散文）を 6 段の鎖へ開き、各行末に (∵ …) を置いた。" +
+          "この生成器は blkref を定義していないので、(∵ …) には引いたブロックの題を書き、ラベル参照は式の前後の散文に残した。内容は変えていない。",
       ],
     },
   },
