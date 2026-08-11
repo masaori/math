@@ -22273,6 +22273,8 @@ w^{k+1}&=w^{k}\,w
           ref("claim_qbar_mul_pow"),
           "）、および 1 の冪根の全体が積で閉じていること（",
           ref("claim_root_of_unity_mul"),
+          "）、および 1 の冪根の冪が 1 の冪根であること（",
+          ref("claim_root_of_unity_pow"),
           "）までは上で済んでいる。",
           "次に書くのは、",
           math(String.raw`\mu_L`),
