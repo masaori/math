@@ -25034,6 +25034,93 @@ w^{\,k}\cdot w
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_unit_sum_eq_rational",
+    kind: "claim",
+    title: { text: "単位元の有限和は、自然数の与える有理数に等しい" },
+    labels: ["claim_qbar_unit_sum_eq_rational"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-unit-sum-rational-value"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarUnitSumEqRational",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.unit_sum_eq_rational_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarUnitSumEqRational_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " を任意に取る。このとき体 ",
+        math(String.raw`\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）の中で",
+      ]),
+      displayMath(String.raw`\sum_{i:\ i<n}1=n`),
+      paragraph([
+        "が成り立つ。左辺は、", math(String.raw`i<n`),
+        " を満たす自然数 ", math(String.raw`i`),
+        " の全体にわたる、体 ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の積の単位元 ", math(String.raw`1`), " を ", math(String.raw`n`),
+        " 個足す有限和である。右辺の ", math(String.raw`n`),
+        " は、自然数 ", math(String.raw`n`), " を ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と見たものである。ここで自然数・整数・有理数は部分集合の鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}`),
+        " をなし、和と積はこの鎖の上で一致する（初等的事実として使う）。さらに ",
+        math(String.raw`\mathbb{Q}`), " は ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の部分体である（",
+        ref("def_algebraic_numbers"),
+        " の第 1 条件）。いずれも部分集合の包含であって、同じ元をそのまま指すから、",
+        "新しい写像を定義する必要はない（写像を要するのは 2 つの集合の元を同一視するときであり、",
+        "部分集合はその元がもとの集合の元そのものである）。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`n`), " についての帰納法で示す。"]),
+      paragraph(["出発点（", math(String.raw`n=0`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i:\ i<0}1
+&=0
+&&(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0)
+\end{aligned}`),
+      paragraph([
+        "この ", math(String.raw`0`), " は部分体 ", math(String.raw`\mathbb{Q}`),
+        " の零元に一致し（", ref("def_algebraic_numbers"),
+        " の第 1 条件。部分体の零元はもとの体の零元である）、自然数 ",
+        math(String.raw`0`), " は部分集合の鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Q}`),
+        " によりその元そのものである。したがって右辺の ",
+        math(String.raw`n=0`), " に一致する。",
+      ]),
+      paragraph([
+        "一歩（", math(String.raw`n`), " から ", math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`\sum_{i:\ i<n}1=n`),
+        " を帰納法の仮定とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i:\ i<n+1}1
+&=\Bigl(\sum_{i:\ i<n}1\Bigr)+1
+&&(\because\ \text{有限和から添字}\ i=n\ \text{の項を分ける})\\
+&=n+1
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "最後の行の和は体 ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法だが、", math(String.raw`n`), " と ", math(String.raw`1`),
+        " はいずれも部分体 ", math(String.raw`\mathbb{Q}`),
+        " の元なので、その値は ", math(String.raw`\mathbb{Q}`),
+        " の加法の値に一致し（", ref("def_algebraic_numbers"),
+        " の第 1 条件。部分体の加法はもとの体の加法の制限である）、",
+        "さらに自然数どうしの和は有理数としての和に一致する（部分集合の鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Q}`),
+        " の上で和が一致するという初等的事実）。すなわち最後の行の値は自然数 ",
+        math(String.raw`n+1`), " である。",
+      ]),
+      paragraph([
+        "出発点と一歩により、すべての ", math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
