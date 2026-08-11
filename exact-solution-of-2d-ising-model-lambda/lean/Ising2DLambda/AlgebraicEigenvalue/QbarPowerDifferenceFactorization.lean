@@ -7,13 +7,14 @@
 
   人手証明                                          このファイル
   H_0(z,w) = 0、H_{n+1} = H_n w + z^n               `qbarPowDiffSum`
+  準備（z z^k = z^k z。結合則と単位元だけ）          `pow_succ'`（下の第 8 の等号で使う）
   出発点（H_0 = 0、z^0 = w^0 = 1）                   `Nat.zero` の場合
   一歩の第 1 の等号（H_{n+1} の約束）                `qbarPowDiffSum` の展開
   一歩の第 2・第 5・第 7 の等号（分配則）            `mul_add` / `sub_mul`
   一歩の第 3 の等号（積の結合則）                    `mul_assoc`
   一歩の第 4 の等号（帰納法の仮定）                  `ih`
   一歩の第 6 の等号（w^{n+1} = w^n w）               `pow_succ`
-  一歩の第 8・第 9 の等号（z z^n = z^n z = z^{n+1}） `pow_succ'`
+  一歩の第 8・第 9 の等号（z z^n = z^n z = z^{n+1}） `pow_succ'`（人手証明では準備の等式を引く）
   一歩の第 10 の等号（w z^n = z^n w。可換則）        `Commute.pow_right`
   一歩の第 11 の等号（z^n w が相殺する）             加法群の計算
 

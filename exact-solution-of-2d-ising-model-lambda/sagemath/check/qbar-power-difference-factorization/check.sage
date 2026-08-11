@@ -22,6 +22,18 @@ def h_rec(z, w, n, one, zero):
     return acc
 
 
+def check_prep(samples, kmax, one, name):
+    # 準備の段。z z^k = z^k z（積の結合則と単位元だけから出る。積の可換則は使わない）。
+    # 環全体が可換でなくても成り立つことを、行列環でも見る（下の check_prep の呼び出し）。
+    print("0. 準備（z z^k = z^k z）: %s" % name)
+    for z in samples:
+        for k in range(0, kmax + 1):
+            zk = pow_rec(z, k, one)
+            assert z * zk == zk * z
+            assert zk * z == pow_rec(z, k + 1, one)
+    print("   通過（k = 0,...,%d）" % kmax)
+
+
 def check_base(pairs, one, zero, name):
     print("1. 出発点（(z-w) H_0(z,w) = z^0 - w^0 = 0）: %s" % name)
     for (z, w) in pairs:
@@ -52,10 +64,10 @@ def check_step(pairs, nmax, one, zero, name):
             assert wn * w == pow_rec(w, n + 1, one)
             # 第 7 の等号（分配則）
             assert (z - w) * zn == z * zn - w * zn
-            # 第 8・第 9 の等号（可換則と冪の約束 z^{n+1} = z^n z）
+            # 第 8・第 9 の等号（準備の等式 z z^n = z^n z と冪の約束 z^{n+1} = z^n z）
             assert z * zn == zn * z
             assert zn * z == pow_rec(z, n + 1, one)
-            # 第 10 の等号（可換則。ここで z と w の可換性が要る）
+            # 第 10 の等号（ここで z と w の可換性が要る。可換性を使うのはこの 1 箇所だけ）
             assert w * zn == zn * w
     print("   通過（n = 0,...,%d）" % nmax)
 
@@ -100,7 +112,7 @@ def check_factor_theorem(samples, nmax):
 
 def check_noncommutative_fails(nmax):
     # 必要十分版の仮定の裏取り。z と w が可換でないと主張は成り立たない
-    # （本文が可換則を使っている 2 箇所のうち、第 10 の等号が効かなくなる）。
+    # （本文が z と w の可換性を使う唯一の箇所である第 10 の等号が効かなくなる）。
     # 可換な 2 元では通ることも併せて見る。
     print("6. 必要十分版の仮定の裏取り（可換性が要ること）: 2 次整数行列環")
     M = MatrixSpace(ZZ, 2, 2)
@@ -109,6 +121,8 @@ def check_noncommutative_fails(nmax):
     a = M([[0, -1], [1, 0]])
     b = M([[1, 1], [0, 1]])
     assert a * b != b * a
+    # 準備の段は環が可換でなくても成り立つ（同じ元どうしの入れ替えだから）。
+    check_prep([a, b], nmax, one, "2 次整数行列環")
     found = False
     for n in range(0, nmax + 1):
         if (a - b) * h_rec(a, b, n, one, zero) != pow_rec(a, n, one) - pow_rec(b, n, one):
@@ -133,6 +147,7 @@ samples = [
 ]
 pairs = [(z, w) for z in samples for w in samples]
 
+check_prep(samples, 6, one, "QQbar")
 check_base(pairs, one, zero, "QQbar")
 check_step(pairs, 6, one, zero, "QQbar")
 check_claim(pairs, 6, one, zero, "QQbar")

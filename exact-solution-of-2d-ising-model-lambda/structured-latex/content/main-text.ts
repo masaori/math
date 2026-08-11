@@ -22779,7 +22779,54 @@ b&=1\cdot b
     proof: [
       paragraph([
         math(String.raw`z,w\in\overline{\mathbb{Q}}`),
-        " を固定し、",
+        " を固定する。",
+      ]),
+      paragraph([
+        "準備。任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`z\,z^{k}=z^{k}z`),
+        " が成り立つ（冪の約束（",
+        ref("def_root_of_unity_set"),
+        "）が与えるのは ",
+        math(String.raw`z^{k+1}=z^{k}z`),
+        " の向きだけなので、",
+        math(String.raw`z\,z^{k}`),
+        " をこれへ結び付けるにはこの等式が要る。",
+        "この主張の眼目は ",
+        math(String.raw`z`),
+        " と ",
+        math(String.raw`w`),
+        " が可換であること以外を使わない点にあるので、ここを積の可換則で埋めることはできない）。",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z\,z^{0}&=z\cdot 1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=1\cdot z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=z^{0}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`z\,z^{k}=z^{k}z`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
+&=\bigl(z\,z^{k}\bigr)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(z^{k}z\bigr)z
+&&(\because\ \text{帰納法の仮定})\\
+&=z^{k+1}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
+\end{aligned}`),
+      paragraph([
+        "以下、主張を ",
         math(String.raw`n`),
         " についての帰納法で示す。",
       ]),
@@ -22825,11 +22872,11 @@ b&=1\cdot b
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z\,z^{n}-w\,z^{n}\bigr)
 &&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n}z-w\,z^{n}\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&&(\because\ \text{準備の等式}\ z\,z^{n}=z^{n}z)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-w\,z^{n}\bigr)
 &&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-z^{n}w\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&&(\because\ z\ \text{と}\ w\ \text{が可換であること})\\
 &=z^{n+1}-w^{n+1}
 &&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}w\ \text{が相殺する})
 \end{aligned}`),
@@ -22847,16 +22894,16 @@ b&=1\cdot b
         math(String.raw`z`),
         " と ",
         math(String.raw`w`),
-        " が可換であることだけである（可換則を使っているのは第 8 と第 10 の等号の 2 箇所で、",
-        "どちらも ",
-        math(String.raw`z^{n}`),
-        " と ",
+        " が可換であることだけである（一歩の鎖で ",
         math(String.raw`z`),
-        "、",
-        math(String.raw`z^{n}`),
         " と ",
         math(String.raw`w`),
-        " の入れ替えである）。",
+        " の可換性を使っているのは第 10 の等号の 1 箇所",
+        "（",
+        math(String.raw`w\,z^{n}=z^{n}w`),
+        "）だけである。第 8 の等号の ",
+        math(String.raw`z\,z^{n}=z^{n}z`),
+        " は同じ元どうしの入れ替えであり、準備の段で積の結合則と単位元だけから示してある）。",
         "積の逆元の存在も、代数閉であることも使っていない。実数体も複素数体も現れない",
         "（元は代数的数、指数は自然数である）。",
       ]),
