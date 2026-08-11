@@ -3693,6 +3693,14 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 133）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part A、Step 5 の 8 つの場合の含意鎖
+（根拠なし）へ、Step 4 のどの場合を使ったか・各辺を $-2$ 倍して $3\pi$（$5\pi$）を足す
+不等式の変形・区間の包含という根拠を各行末に付けた。内容は変えていない。
+姉妹側の検査一式・検証と証明の対応 116 件・PDF 292 ページは通過した。
+**この主張には Step 6 以降にも根拠の粗い行（Step 6 の第 2 の等号、Step 8 の組み合わせ）が
+残るため、次の tick は同じ主張の Step 6 から続ける。**
+
 **2026-08-12（tick 132）**: `008_TV1_hatZ_hatY_part2` の主張
 「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part A、Step 4 で同じ行に連結されていた
 2 つの等号を、Step 2・Step 3 の代入と各場合で $\pi$ を足す計算に分け、各行末に根拠を付けた。

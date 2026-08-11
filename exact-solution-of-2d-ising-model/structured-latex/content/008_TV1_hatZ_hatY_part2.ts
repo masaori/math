@@ -2029,14 +2029,22 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varphi = 0 &\Rightarrow \text{sum} = \pi \in [0,2\pi) \\
-0 < \varphi < \tfrac{\pi}{2} &\Rightarrow 2\pi < 3\pi - 2\varphi < 3\pi \Rightarrow \text{sum} \in [2\pi,4\pi) \\
-\varphi = \tfrac{\pi}{2} &\Rightarrow \text{sum} = 2\pi \in [2\pi,4\pi) \\
-\tfrac{\pi}{2} < \varphi < \pi &\Rightarrow \pi < 3\pi - 2\varphi < 2\pi \Rightarrow \text{sum} \in [0,2\pi) \\
-\varphi = \pi &\Rightarrow \text{sum} = \pi \in [0,2\pi) \\
-\pi < \varphi < \tfrac{3\pi}{2} &\Rightarrow 2\pi < 5\pi - 2\varphi < 3\pi \Rightarrow \text{sum} \in [2\pi,4\pi) \\
-\varphi = \tfrac{3\pi}{2} &\Rightarrow \text{sum} = 2\pi \in [2\pi,4\pi) \\
+\varphi = 0 &\Rightarrow \text{sum} = \pi \in [0,2\pi)
+&& (\because\ \text{Step 4 の第 1 の場合と}\ 0 \leq \pi < 2\pi) \\
+0 < \varphi < \tfrac{\pi}{2} &\Rightarrow 2\pi < 3\pi - 2\varphi < 3\pi \Rightarrow \text{sum} \in [2\pi,4\pi)
+&& (\because\ \text{Step 4 の第 2 の場合。各辺を}\ {-2}\ \text{倍して}\ 3\pi\ \text{を足すと不等号の向きが反転し、}(2\pi,3\pi) \subset [2\pi,4\pi)) \\
+\varphi = \tfrac{\pi}{2} &\Rightarrow \text{sum} = 2\pi \in [2\pi,4\pi)
+&& (\because\ \text{Step 4 の第 2 の場合へ}\ \varphi=\tfrac{\pi}{2}\ \text{を代入すると}\ 3\pi-\pi=2\pi) \\
+\tfrac{\pi}{2} < \varphi < \pi &\Rightarrow \pi < 3\pi - 2\varphi < 2\pi \Rightarrow \text{sum} \in [0,2\pi)
+&& (\because\ \text{Step 4 の第 2 の場合。各辺を}\ {-2}\ \text{倍して}\ 3\pi\ \text{を足すと不等号の向きが反転し、}(\pi,2\pi) \subset [0,2\pi)) \\
+\varphi = \pi &\Rightarrow \text{sum} = \pi \in [0,2\pi)
+&& (\because\ \text{Step 4 の第 3 の場合と}\ 0 \leq \pi < 2\pi) \\
+\pi < \varphi < \tfrac{3\pi}{2} &\Rightarrow 2\pi < 5\pi - 2\varphi < 3\pi \Rightarrow \text{sum} \in [2\pi,4\pi)
+&& (\because\ \text{Step 4 の第 4 の場合。各辺を}\ {-2}\ \text{倍して}\ 5\pi\ \text{を足すと不等号の向きが反転し、}(2\pi,3\pi) \subset [2\pi,4\pi)) \\
+\varphi = \tfrac{3\pi}{2} &\Rightarrow \text{sum} = 2\pi \in [2\pi,4\pi)
+&& (\because\ \text{Step 4 の第 4 の場合へ}\ \varphi=\tfrac{3\pi}{2}\ \text{を代入すると}\ 5\pi-3\pi=2\pi) \\
 \tfrac{3\pi}{2} < \varphi < 2\pi &\Rightarrow \pi < 5\pi - 2\varphi < 2\pi \Rightarrow \text{sum} \in [0,2\pi)
+&& (\because\ \text{Step 4 の第 4 の場合。各辺を}\ {-2}\ \text{倍して}\ 5\pi\ \text{を足すと不等号の向きが反転し、}(\pi,2\pi) \subset [0,2\pi))
 \end{aligned}`,
       ),
       paragraph(["以上をまとめると、"]),
@@ -2308,6 +2316,7 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
       notes: [
         "原文の Part A（Steps 1-8 の偏角場合分け）と Part B（Steps 9-18 の α1,α2 因数分解）を全ステップ復元。arg^[0,2π)(γ2(-θμ)) を φ と略記。",
         "2026-08-12 の式変形統一で、Part A の Step 4 に同じ行で連結されていた 2 つの等号を、Step 2・Step 3 の代入と各場合で π を足す計算に分け、各行末に根拠を付けた。内容は変えていない。",
+        "2026-08-12 の式変形統一（続き）で、Part A の Step 5 の 8 つの場合の含意鎖（根拠なし）へ、Step 4 のどの場合を使ったか・各辺を −2 倍して 3π（5π）を足す不等式の変形・区間の包含という根拠を各行末に付けた。内容は変えていない。",
       ],
     },
   },
