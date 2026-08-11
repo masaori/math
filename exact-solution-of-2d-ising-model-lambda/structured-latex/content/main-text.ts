@@ -25818,6 +25818,84 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_linear_factor_product_extract",
+    kind: "claim",
+    title: { text: "一次因子の積から指定した一つの因子を先頭へ取り出せる" },
+    labels: ["claim_qbar_poly_linear_factor_product_extract"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-linear-factor-product-extract"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductExtract",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.linear_factor_product_extract_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductExtract_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`j\in\mathbb{N}`), " と写像 ",
+        math(String.raw`w:\mathbb{N}\to\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を任意に取る。",
+        math(String.raw`i\in\mathbb{N}`), " が ", math(String.raw`i<j`),
+        " を満たすならば、", ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`B\in\overline{\mathbb{Q}}[t]`), " であって",
+      ]),
+      displayMath(String.raw`\prod_{k=0}^{j-1}(t-\widehat{w(k)})=(t-\widehat{w(i)})B`),
+      paragraph([
+        "を満たすものが存在する（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "）。有限積は番号の小さい因子から順に掛け、",
+        math(String.raw`j=0`), " のときは単位元とする。根の相異性は仮定しない。",
+        "これは、根の個数の下界の帰納法で、既出の根に対応する一次因子を積の先頭へ",
+        "移し、残りを一つの多項式として扱うための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`j`), " について帰納法で示す。", math(String.raw`j=0`),
+        " のとき、", math(String.raw`i<0`), " を満たす自然数 ", math(String.raw`i`),
+        " は存在しないので主張は成り立つ。", math(String.raw`j\in\mathbb{N}`),
+        " について主張が成り立つと仮定し、", math(String.raw`i<j+1`),
+        " を満たす ", math(String.raw`i\in\mathbb{N}`), " を任意に取る。",
+      ]),
+      paragraph([
+        "まず ", math(String.raw`i=j`), " の場合を扱う。この場合は ",
+        math(String.raw`B:=\prod_{k=0}^{j-1}(t-\widehat{w(k)})`), " と取れる。実際、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{k=0}^{j}(t-\widehat{w(k)})
+&=\left(\prod_{k=0}^{j-1}(t-\widehat{w(k)})\right)(t-\widehat{w(j)})
+&&(\because\ \text{番号の小さい因子から順に掛ける有限積の約束})\\
+&=(t-\widehat{w(j)})\left(\prod_{k=0}^{j-1}(t-\widehat{w(k)})\right)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則})\\
+&=(t-\widehat{w(i)})B
+&&(\because\ i=j\ \text{と}\ B\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "次に ", math(String.raw`i\ne j`), " の場合を扱う。",
+        math(String.raw`i<j+1`), " と合わせると ", math(String.raw`i<j`),
+        " である。帰納法の仮定により、ある ",
+        math(String.raw`A\in\overline{\mathbb{Q}}[t]`), " が存在して",
+      ]),
+      displayMath(String.raw`\prod_{k=0}^{j-1}(t-\widehat{w(k)})=(t-\widehat{w(i)})A`),
+      paragraph([
+        "を満たす。", math(String.raw`B:=A(t-\widehat{w(j)})`), " と取ると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{k=0}^{j}(t-\widehat{w(k)})
+&=\left(\prod_{k=0}^{j-1}(t-\widehat{w(k)})\right)(t-\widehat{w(j)})
+&&(\because\ \text{番号の小さい因子から順に掛ける有限積の約束})\\
+&=\bigl((t-\widehat{w(i)})A\bigr)(t-\widehat{w(j)})
+&&(\because\ \text{帰納法の仮定})\\
+&=(t-\widehat{w(i)})\bigl(A(t-\widehat{w(j)})\bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則})\\
+&=(t-\widehat{w(i)})B
+&&(\because\ B\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "これで 2 つの場合が尽くされ、帰納法が閉じた。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -26098,6 +26176,8 @@ w^{\,1}
           ref("claim_qbar_poly_linear_factor_leading_coeff"),
           "）、および一次因子との分解の残りの因子のその根における値が零でないこと（",
           ref("claim_root_polynomial_remaining_factor_value_ne_zero"),
+          "）、および一次因子の積から指定した一つの因子を先頭へ取り出せること（",
+          ref("claim_qbar_poly_linear_factor_product_extract"),
           "）までは上で済んでいる。次に書くのは、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",

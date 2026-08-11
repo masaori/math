@@ -717,6 +717,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootPolynomialRemainingFactorValueNeZero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.remaining_factor_value_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootPolynomialRemainingFactorValueNeZero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductExtract
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.linear_factor_product_extract_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorProductExtract_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
