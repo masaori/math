@@ -25281,6 +25281,68 @@ g
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_factor_quotient_value_ne_zero",
+    kind: "claim",
+    title: { text: "因数定理の商の、もとの根における値は零でない" },
+    labels: ["claim_root_factor_quotient_value_ne_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-factor-quotient-value-ne-zero"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootFactorQuotientValueNeZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eq_chain_ne_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootFactorQuotientValueNeZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\geq1`),
+        " を満たすとし、", math(String.raw`w\in\mu_n`), "（",
+        ref("def_root_of_unity_set"), "）を任意に取る。多項式 ",
+        math(String.raw`f:=t^{\,n}+\widehat{-1}\in\overline{\mathbb{Q}}[t]`),
+        " に対して ", ref("claim_qbar_factor_theorem"), " で構成する商を ",
+        math(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`),
+        " と置く（", ref("claim_root_polynomial_factor_quotient"),
+        " と同じ約束である）。このとき、", math(String.raw`g`), " の ",
+        math(String.raw`w`), " における値（", ref("def_qbar_poly_evaluation"), "）について",
+      ]),
+      displayMath(String.raw`\mathrm{aev}_{w}(g)\neq0`),
+      paragraph([
+        "が成り立つ。ここで ", math(String.raw`0`), " は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）の加法の単位元（零元）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、値の側の 3 つの非零性を確かめる。第 1 に、",
+        math(String.raw`n\geq1`), " と ", math(String.raw`w\in\mu_n`),
+        " から ", math(String.raw`w\neq0`), " である（",
+        ref("claim_root_of_unity_element_ne_zero"), "）。第 2 に、",
+        math(String.raw`n\geq1`), " なので ", math(String.raw`n-1`),
+        " は自然数であり、", math(String.raw`w\neq0`), " から ",
+        math(String.raw`w^{\,n-1}\neq0`), " である（",
+        ref("claim_qbar_pow_ne_zero"), "）。第 3 に、零でない元 ",
+        math(String.raw`w^{\,n-1}`), " を ", math(String.raw`n`),
+        " 個（", math(String.raw`n\geq1`), "）足す有限和について ",
+        math(String.raw`\sum_{i:\ i<n}w^{\,n-1}\neq0`), " である（",
+        ref("claim_qbar_repeated_sum_ne_zero"), "）。",
+      ]),
+      paragraph(["そのうえで、", math(String.raw`\mathrm{aev}_{w}(g)`), " を計算する。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(g)
+&=\mathrm{aev}_{w}\bigl(K_n(w)\bigr)
+&&(\because\ g=K_n(w)\ \text{（}\blkref{claim_root_polynomial_factor_quotient}\text{）})\\
+&=\sum_{i:\ i<n}w^{\,n-1}
+&&(\because\ \blkref{claim_qbar_pow_diff_quotient_root_value})
+\end{aligned}`),
+      paragraph([
+        "終点は、準備の第 3 で零でないことを示した元である。ゆえに ",
+        math(String.raw`\mathrm{aev}_{w}(g)\neq0`),
+        " である。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25547,8 +25609,11 @@ g
           ref("claim_qbar_unit_sum_ne_zero"),
           "）、および零でない代数的数を正の個数だけ足した有限和が零でないこと（",
           ref("claim_qbar_repeated_sum_ne_zero"),
+          "）、および因数定理の商が冪の差の商に等しいこと（",
+          ref("claim_root_polynomial_factor_quotient"),
+          "）、および因数定理の商のもとの根における値が零でないこと（単根性。",
+          ref("claim_root_factor_quotient_value_ne_zero"),
           "）までは上で済んでいる。次に書くのは、",
-          "商のもとの根における値が零でないこと（単根性）、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
           math(String.raw`n`),

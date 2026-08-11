@@ -7,6 +7,19 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 127 は、tick 126 の「因数定理の商と冪の差の商の一致」を四層すべて
+  突き合わせ（修正はレビュー記録の 1 件。準備段落のラベル参照の追加）、セクション
+  10h3d-c4b-d3e2（因数定理の商のもとの根における値の非零性 $\mathrm{aev}_{w}(g)\ne0$）を
+  四層すべてで完了させた。** 本文は、準備で 3 つの非零性（$w\ne0$・$w^{n-1}\ne0$・
+  零でない元を正の個数だけ足した有限和の非零性）を立て、$\mathrm{aev}_{w}(g)$ を
+  $g=K_n(w)$ と商の値の計算の 2 段の等式で有限和へ書き換えて終点の非零性を当てる
+  組み立ての鎖である。必要十分版は 2 段の等式と終点の非零性だけを要求する
+  （型に代数構造は一切不要）。検証は全通過（構造化テキスト 258 ラベル・PDF 130 ページで
+  未解決参照 0 件・検証と証明の対応 112 件・SageMath 新設の
+  `root-factor-quotient-value-ne-zero`・`lake build`・sorry 検査 646 件）。
+  これで旧 d3（単根性）の分割がすべて済んだ。次に進めるのは 10h3d-c4b-d4
+  （$t^{\,n}+\widehat{-1}$ が $n$ 個の相異なる根を持つこと。着手時に論法の数で割り直す）である。
+
 - **2026-08-12 の tick 126 は、tick 125 の「零でない代数的数を正の個数だけ足した有限和は零でない」を
   四層すべて突き合わせて修正不要と確認し、旧セクション 10h3d-c4b-d3e を独立の論法ごとに
   d3e1（因数定理の商と冪の差の商の一致）と d3e2（商のもとの根における値の非零性）へ分け、
@@ -1441,7 +1454,7 @@
 | 10h3d-c4b-d3d2b | 固有値の代数性 | 単位元の $n$ 個（$n\ge1$）の有限和は零でないこと（d3d2a の等式と、$\mathbb{Q}$ で $n\ge1$ ならば $n\ne0$ であること。適用の鎖 1 本） | done | 2026-08-12 の tick 124 で四層すべて完了。主張 1 件 `claim_qbar_unit_sum_ne_zero`。SageMath は `qbar-unit-sum-ne-zero`。Lean 具体版 `qbarUnitSumNeZero`、必要十分版 `unit_sum_ne_zero_necSuf`（要るのは有限和と自然数の像の等式、および正の自然数の像の非零性だけ）、導出 `qbarUnitSumNeZero_from_necSuf` |
 | 10h3d-c4b-d3d3 | 固有値の代数性 | 零でない代数的数の $n$ 個（$n\ge1$）の和は零でないこと（組み立て。d3d1 の分解と d3d2b の非零性へ `claim_qbar_no_zero_divisors` を当てる） | done | 2026-08-12 の tick 125 で四層すべて完了。主張 1 件 `claim_qbar_repeated_sum_ne_zero`。SageMath は `qbar-repeated-sum-ne-zero`。Lean 具体版 `qbarRepeatedSumNeZero`、必要十分版 `repeated_sum_ne_zero_necSuf`（要るのは和の積への分解・単位元の和の非零性・零元でない左因子の消去の 3 つだけ。和や積の法則も体も代数閉性も不要）、導出 `qbarRepeatedSumNeZero_from_necSuf` |
 | 10h3d-c4b-d3e1 | 固有値の代数性 | $f=t^{\,n}+\widehat{-1}$ に対する因数定理の商 $g$ が冪の差の商 $K_n(w)$ に等しいこと | done | 2026-08-12 の tick 126 で四層すべて完了。主張 1 件 `claim_root_polynomial_factor_quotient`。因数定理の有限和の番号 $n$ の項だけが $K_n(w)$ として残る鎖。SageMath は `root-polynomial-factor-quotient`。Lean 具体版 `rootPolynomialFactorQuotientEq`、必要十分版 `single_term_sum_necSuf`、導出 `rootPolynomialFactorQuotientEq_from_necSuf`。旧 d3e は有限和の係数計算と値の非零性という独立の論法を持つため分割した |
-| 10h3d-c4b-d3e2 | 固有値の代数性 | $g=K_n(w)$ と、$w^{n-1}\ne0$ の正の個数の有限和の非零性から $\mathrm{aev}_{w}(g)\ne0$ を得る | todo | d3a・d3b・d3c・d3d3・d3e1 を組み立てる適用の鎖 1 本 |
+| 10h3d-c4b-d3e2 | 固有値の代数性 | $g=K_n(w)$ と、$w^{n-1}\ne0$ の正の個数の有限和の非零性から $\mathrm{aev}_{w}(g)\ne0$ を得る | done | 2026-08-12 の tick 127 で四層すべて完了。主張 1 件 `claim_root_factor_quotient_value_ne_zero`。準備で 3 つの非零性（$w\ne0$・$w^{n-1}\ne0$・正の個数の有限和）を立て、2 段の等式（d3e1 と d3a）で書き換える鎖。SageMath は `root-factor-quotient-value-ne-zero`。Lean 具体版 `rootFactorQuotientValueNeZero`、必要十分版 `eq_chain_ne_zero_necSuf`（要るのは 2 段の等式と終点の非零性だけ。型に代数構造は一切不要）、導出 `rootFactorQuotientValueNeZero_from_necSuf` |
 | 10h3d-c4b-d4 | 固有値の代数性 | $t^{\,n}+\widehat{-1}$ が $n$ 個の相異なる根を持つこと（下界の帰納法） | todo | 代数閉であることで根を 1 つ取り、因数定理で割って帰納法。単根性（d3）で取った根が商の根でないことを言う。着手時に割り直す |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | todo | 組み立ての段。新しい論法は持たない見込み |
 | 10h3d-c4c | 固有値の代数性 | 1 の $L$ 乗根の全体にわたる冪の和の値（指数が $L$ の倍数なら元の個数、そうでなければ 0） | todo | 論法は「$w^{m}\ne1$ なる $w$ を取り、10h3d-c4a から $(w^{m}-1)S=0$ を出して $S=0$ を得る」1 本 |
@@ -1456,6 +1469,17 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 127）: 「因数定理の商の、もとの根における値は零でない」（10h3d-c4b-d3e2。
+  単根性の核 $\mathrm{aev}_{w}(g)\ne0$）を四層すべてで完了した。準備で 3 つの非零性
+  （`claim_root_of_unity_element_ne_zero`・`claim_qbar_pow_ne_zero`・
+  `claim_qbar_repeated_sum_ne_zero`）を立て、$\mathrm{aev}_{w}(g)$ を 2 段の等式
+  （`claim_root_polynomial_factor_quotient` と `claim_qbar_pow_diff_quotient_root_value`）で
+  有限和へ書き換えて終点の非零性を当てる組み立ての鎖である。SageMath は $n=1,\dots,8$ の
+  全 $w\in\mu_n$ で準備・鎖・主張を厳密計算した。必要十分版は「2 段の等式の鎖の始点は、
+  終点が指定した元と異なるならその元と異なる」まで薄め、型に代数構造が一切不要であることを
+  示した。あわせて、本文末尾の「この先に書くこと」に tick 126 完了分（$g=K_n(w)$）が
+  済んだ側へ移されていなかった食い違いを直した。
 
 - 2026-08-12（tick 126）: 旧 10h3d-c4b-d3e を「因数定理の商と冪の差の商の一致」と
   「その商のもとの根における値の非零性」へ分け、先頭の一致を四層すべてで完了した。
