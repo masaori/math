@@ -858,81 +858,90 @@ M & (\mu = M)
       paragraph([
         "基底段階（",
         math(String.raw`n = 0`),
-        "、偶数）：0 重の交換子の規約より ",
-        math(String.raw`C_0 = \hat{Z}_\mu^{(\pm)}`),
-        " であり、主張の偶数側の右辺は ",
-        math(String.raw`(-1)^{0/2}(2K_1)^0\hat{Z}_\mu^{(\pm)} = 1\cdot 1\cdot\hat{Z}_\mu^{(\pm)} = \hat{Z}_\mu^{(\pm)}`),
-        " で一致する。",
+        "、偶数）。主張の偶数側の右辺から ",
+        math(String.raw`C_0`),
+        " へ至る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(-1)^{0/2}(2K_1)^{0}\hat{Z}_\mu^{(\pm)}
+&= 1\cdot 1\cdot\hat{Z}_\mu^{(\pm)}
+&&(\because\ \alpha^{0}=1\ \text{を}\ \alpha=-1\ \text{と}\ \alpha=2K_1\ \text{へ}) \\
+&= \hat{Z}_\mu^{(\pm)}
+&&(\because\ 1\ \text{はスカラー倍の単位元}) \\
+&= C_0
+&&(\because\ 0\ \text{重の交換子の規約})
+\end{aligned}`,
+      ),
       paragraph([
         "帰納段階 1（",
         math(String.raw`n`),
         " 偶数 → ",
         math(String.raw`n+1`),
-        " 奇数）：",
+        " 奇数）。",
         math(String.raw`n`),
         " が偶数で ",
         math(String.raw`C_n = (-1)^{n/2}(2K_1)^n\hat{Z}_\mu^{(\pm)}`),
-        " と仮定すると、",
+        " と仮定する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 C_{n+1}
-&= \left[K_1 H_1^{(\pm)},\ (-1)^{n/2}(2K_1)^n\hat{Z}_\mu^{(\pm)}\right] \\
+&= \left[K_1 H_1^{(\pm)},\ C_n\right]
+&&(\because\ n\ \text{重の交換子の定義}) \\
+&= \left[K_1 H_1^{(\pm)},\ (-1)^{n/2}(2K_1)^n\hat{Z}_\mu^{(\pm)}\right]
+&&(\because\ \text{帰納法の仮定}) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(\pm)},\ \hat{Z}_\mu^{(\pm)}\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&(\because\ \text{交換子の双線型性}) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot 2 e^{-i\theta}\hat{Y}_\mu
-   \quad (\because \text{(A)}) \\
+&&(\because\ \text{(A)}) \\
 &= (-1)^{n/2}(2K_1)^{n+1} e^{-i\theta}\hat{Y}_\mu
+&&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
+&= (-1)^{((n+1)-1)/2}(2K_1)^{n+1} e^{-i\theta}\hat{Y}_\mu
+&&(\because\ \tfrac{(n+1)-1}{2}=\tfrac{n}{2})
 \end{aligned}`,
       ),
       paragraph([
-        "一方、",
+        "最後の行が、",
         math(String.raw`n+1`),
-        " は奇数なので主張の奇数側の右辺は ",
-        math(String.raw`(-1)^{((n+1)-1)/2}(2K_1)^{n+1}e^{-i\theta}\hat{Y}_\mu = (-1)^{n/2}(2K_1)^{n+1}e^{-i\theta}\hat{Y}_\mu`),
-        " であり、係数 ",
-        math(String.raw`(2K_1)^{n+1}`),
-        "、符号 ",
-        math(String.raw`(-1)^{n/2}`),
-        "、位相因子 ",
-        math(String.raw`e^{-i\theta}`),
-        " のすべてが一致する。",
+        " が奇数のときの主張の右辺である。",
       ]),
       paragraph([
         "帰納段階 2（",
         math(String.raw`n`),
         " 奇数 → ",
         math(String.raw`n+1`),
-        " 偶数）：",
+        " 偶数）。",
         math(String.raw`n`),
         " が奇数で ",
         math(String.raw`C_n = (-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\hat{Y}_\mu`),
-        " と仮定すると、",
+        " と仮定する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 C_{n+1}
-&= \left[K_1 H_1^{(\pm)},\ (-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\hat{Y}_\mu\right] \\
+&= \left[K_1 H_1^{(\pm)},\ C_n\right]
+&&(\because\ n\ \text{重の交換子の定義}) \\
+&= \left[K_1 H_1^{(\pm)},\ (-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\hat{Y}_\mu\right]
+&&(\because\ \text{帰納法の仮定}) \\
 &= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\left[H_1^{(\pm)},\ \hat{Y}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&(\because\ \text{交換子の双線型性}) \\
 &= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\cdot\left(-2 e^{i\theta}\hat{Z}_\mu^{(\pm)}\right)
-   \quad (\because \text{(B)}) \\
-&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,\overbrace{e^{-i\theta}e^{i\theta}}^{=\,1}\,\hat{Z}_\mu^{(\pm)} \\
-&= (-1)^{(n-1)/2+1}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)} \\
+&&(\because\ \text{(B)}) \\
+&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,e^{-i\theta}e^{i\theta}\,\hat{Z}_\mu^{(\pm)}
+&&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
+&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
+&&(\because\ e^{-i\theta}e^{i\theta}=e^{0}=1) \\
+&= (-1)^{(n-1)/2+1}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
+&&(\because\ (-1)\cdot(-1)^{k}=(-1)^{k+1}) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
+&&(\because\ \tfrac{n-1}{2}+1=\tfrac{n+1}{2})
 \end{aligned}`,
       ),
       paragraph([
-        "最後の等号は ",
-        math(String.raw`\dfrac{n-1}{2}+1 = \dfrac{n+1}{2}`),
-        " による。",
+        "最後の行が、",
         math(String.raw`n+1`),
-        " は偶数なので主張の偶数側の右辺 ",
-        math(String.raw`(-1)^{(n+1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}`),
-        " と一致する（位相因子は ",
-        math(String.raw`e^{-i\theta}e^{i\theta}=1`),
-        " により消える）。以上 2 つの帰納段階と基底段階により、すべての ",
+        " が偶数のときの主張の右辺である。基底段階と 2 つの帰納段階により、すべての ",
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
         " について (h1.z) が成り立つ。",
       ]),
