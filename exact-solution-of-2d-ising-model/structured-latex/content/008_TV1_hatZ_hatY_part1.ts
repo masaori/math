@@ -1675,15 +1675,23 @@ K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
 -i\cdot K_1^{n}\cdot e^{i\frac{2\pi\mu}{M}}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 K_1^{n}\cdot\hat{Y}_\mu & (n\text{ 偶数})
-\end{cases} \\
+\end{cases}
+&&(\because\ n = 0\ \text{の項を分け、}\ n \geq 1\ \text{の各項へ「cosh, sinh の展開係数への変換」の (h1.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\hat{Y}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\frac{2\pi\mu}{M}}\,\hat{Z}_\mu^{(\pm)}\right) \\
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\frac{2\pi\mu}{M}}\,\hat{Z}_\mu^{(\pm)}\right)
+&&(\because\ K_1^{0}\hat{Y}_\mu = \tfrac{1}{0!}\hat{Y}_\mu\ \text{なので}\ n = 0\ \text{の項を偶数側の和へ吸収した}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu
-   - i\,e^{i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)} \\
-&= \cosh(K_1)\hat{Y}_\mu - i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)} \\
+   - i\,e^{i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
+&&(\because\ \hat{Y}_\mu,\ \hat{Z}_\mu^{(\pm)},\ (-i)\,e^{i 2\pi\mu/M}\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
+&= \cosh(K_1)\hat{Y}_\mu - i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)}
+&&(\because\ \text{「sinh, cosh のテイラー展開」}) \\
 &= -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu
+&&(\because\ \text{行列の和の可換則により 2 つの項を並べ替えた})
 \end{aligned}`,
       ),
+      paragraph([
+        "鎖の終点は主張の (h1.y) の右辺と字句どおり一致する。",
+      ]),
       paragraph(["(h2.z−) について、"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1728,6 +1736,7 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         "どちらが誤りかは数値検証で確定させた。sagemath/check/040_claim_extract_taylor_coefficient_of_Z_Y/check_04_original_typo_refuted.sage により、原文 proof の cases 表式 —— (h1.y) 奇数項 i K_1^n e^{iθ} hat(Y)_mu・偶数項 K_1^n hat(Z)_mu、(h2.z−) の (K_2^*)^n と偶数項に残る i —— は M=3,4,5・n=1..4 のすべてで残差が 1e-3 を大きく超えて成り立たない一方、statement と整合する修正後の cases は残差 1e-8 以下で成立することを確認した。したがって誤りは proof 側にあり、statement は正しい。",
         "4 式の最終形（cosh/sinh 表示）そのものも check_03_taylor_sums.sage で、級数を 40 次で打ち切って M=3,4,5・全 mu ∈ calM・複数の (K1,K2) について残差 1e-8 以下であることを確認済み。土台となる 1 重公式 (A)〜(D) は check_01_single_commutators.sage で確認した。",
         "原文 statement は (h1.y)/(h2.y) の左辺を「Σ (⋯)」と省略していたが、どの生成子でネストした交換子かが左辺だけで確定しないため、他の 2 式と同じ形へ明示的に書き下した。",
+        "(h1.y) の鎖を (h1.z) と同じ「一続きの鎖＋行末の (∵ …)」の形へ揃えた（2026-08-11）。根拠の無かった 5 段すべてに行末の根拠を付け、鎖の終点が主張の (h1.y) の右辺と字句どおり一致することを地の文で述べた。段は減らしていない。残りは (h2.z−)・(h2.y) の 2 式である。",
       ],
     },
   },
