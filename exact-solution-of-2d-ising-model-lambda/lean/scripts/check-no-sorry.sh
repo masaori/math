@@ -647,6 +647,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalCoefficientSum
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_sum_map_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalCoefficientSum_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarFactorTheorem
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_from_finite_sum_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarFactorTheorem_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

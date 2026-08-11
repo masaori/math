@@ -24083,6 +24083,64 @@ a & (j=k)\\
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_factor_theorem",
+    kind: "claim",
+    title: { text: "根を持つ多項式は一次式を因子に持つ" },
+    labels: ["claim_qbar_factor_theorem"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarFactorTheorem",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.factor_from_finite_sum_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarFactorTheorem_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-factor-theorem"],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"),
+        " の元 ", math(String.raw`f\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`n\in\mathbb{N}`), " を、", math(String.raw`k>n`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(f)=0`), " となるように取り、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), " を任意に取る。",
+        ref("def_qbar_poly_evaluation"), " の値が ",
+        math(String.raw`\mathrm{aev}_{w}(f)=0`), " を満たすならば、",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`), " で",
+      ]),
+      displayMath(String.raw`f=(t-\widehat{w})g`),
+      paragraph(["を満たすものが存在する（", math(String.raw`\widehat{w}`), " は ", ref("def_qbar_constant_embedding"), "）。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`),
+        " と置く（", math(String.raw`K_k(w)`), " は ", ref("claim_qbar_poly_power_difference_factorization"), "）。",
+        "以下の計算はすべて ", math(String.raw`\overline{\mathbb{Q}}[t]`), " の中で行う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f
+&=f-\widehat{\mathrm{aev}_{w}(f)}
+&&(\because\ \mathrm{aev}_{w}(f)=0\ \text{と}\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{0}=0)\\
+&=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,t^{\,k}
+-\widehat{\sum_{k=0}^{n}\mathrm{ac}_k(f)\,w^{\,k}}
+&&(\because\ \blkref{claim_qbar_poly_monomial_decomposition}\ \text{と}\ \blkref{claim_qbar_evaluation_coefficient_sum})\\
+&=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,t^{\,k}
+-\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)\,w^{\,k}}
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{より定数として送る写像は和を保つ。有限和へ繰り返し当てる})\\
+&=\sum_{k=0}^{n}\Bigl(\widehat{\mathrm{ac}_k(f)}\,t^{\,k}
+-\widehat{\mathrm{ac}_k(f)\,w^{\,k}}\Bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の有限和と加法の逆元の分配})\\
+&=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\bigl(t^{\,k}-\widehat{w}^{\,k}\bigr)
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{より積を保ち、}\ \blkref{claim_qbar_constant_embedding_pow}\ \text{を各項へ当て、分配則でくくる})\\
+&=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,(t-\widehat{w})K_k(w)
+&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{を各項へ同時に当てる})\\
+&=(t-\widehat{w})\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則・可換則と有限和への分配則})\\
+&=(t-\widehat{w})g
+&&(\because\ g\ \text{の定め方})
+\end{aligned}`),
+      paragraph(["終点が求める等式である。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

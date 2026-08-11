@@ -96,9 +96,27 @@ export default defineBlocks([
       paragraph(["Step 2: 符号の判定。", math(String.raw`s_1 s_2^* > 0`), " で割ると、実数の順序の性質より"]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_1(\theta_\mu) > 0 &\iff c_1 c_2^* > s_1 s_2^*\cos\theta_\mu \iff \cos\theta_\mu < \frac{c_1 c_2^*}{s_1 s_2^*} \\
-\gamma_1(\theta_\mu) = 0 &\iff c_1 c_2^* = s_1 s_2^*\cos\theta_\mu \iff \cos\theta_\mu = \frac{c_1 c_2^*}{s_1 s_2^*} \\
-\gamma_1(\theta_\mu) < 0 &\iff c_1 c_2^* < s_1 s_2^*\cos\theta_\mu \iff \cos\theta_\mu > \frac{c_1 c_2^*}{s_1 s_2^*}
+\gamma_1(\theta_\mu)>0
+&\iff c_1c_2^*-s_1s_2^*\cos\theta_\mu>0
+&&(\because\ \gamma_1\ \text{の定義})\\
+&\iff c_1c_2^*>s_1s_2^*\cos\theta_\mu
+&&(\because\ \text{実数の不等式の両辺へ同じ数を足した})\\
+&\iff \cos\theta_\mu<\frac{c_1c_2^*}{s_1s_2^*}
+&&(\because\ s_1s_2^*>0\ \text{で両辺を割った})\\[3pt]
+\gamma_1(\theta_\mu)=0
+&\iff c_1c_2^*-s_1s_2^*\cos\theta_\mu=0
+&&(\because\ \gamma_1\ \text{の定義})\\
+&\iff c_1c_2^*=s_1s_2^*\cos\theta_\mu
+&&(\because\ \text{実数の等式の両辺へ同じ数を足した})\\
+&\iff \cos\theta_\mu=\frac{c_1c_2^*}{s_1s_2^*}
+&&(\because\ s_1s_2^*>0\ \text{で両辺を割った})\\[3pt]
+\gamma_1(\theta_\mu)<0
+&\iff c_1c_2^*-s_1s_2^*\cos\theta_\mu<0
+&&(\because\ \gamma_1\ \text{の定義})\\
+&\iff c_1c_2^*<s_1s_2^*\cos\theta_\mu
+&&(\because\ \text{実数の不等式の両辺へ同じ数を足した})\\
+&\iff \cos\theta_\mu>\frac{c_1c_2^*}{s_1s_2^*}
+&&(\because\ s_1s_2^*>0\ \text{で両辺を割った})
 \end{aligned}`,
       ),
       paragraph([
