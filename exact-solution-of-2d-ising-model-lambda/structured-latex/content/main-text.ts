@@ -24529,6 +24529,69 @@ w'
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_distinct_roots_card_bound",
+    kind: "claim",
+    title: { text: "零でない多項式の相異なる根は係数の上界を超えない" },
+    labels: ["claim_qbar_distinct_roots_card_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-distinct-roots-card-bound"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarDistinctRootsCardLe",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.distinct_roots_card_le_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarDistinctRootsCardLe_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), "、", math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        "、有限集合 ", math(String.raw`s\subset\overline{\mathbb{Q}}`), " が次を満たすとする。",
+      ]),
+      list([
+        [math(String.raw`f\ne0`), " である。"],
+        [math(String.raw`n<k`), " ならば ", math(String.raw`\mathrm{ac}_k(f)=0`), " である。"],
+        [math(String.raw`w\in s`), " ならば ", math(String.raw`\mathrm{aev}_{w}(f)=0`), " である。"],
+      ]),
+      paragraph(["このとき ", math(String.raw`\lvert s\rvert\le n`), " である。有限集合なので、その元は初めから相異なる。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`n`), " について帰納法で示す。"]),
+      paragraph(["出発点として ", math(String.raw`n=0`), " とする。もし ", math(String.raw`s\ne\varnothing`),
+        " ならば ", math(String.raw`w\in s`), " を 1 つ取れる。", ref("claim_qbar_factor_theorem"), " より、"]),
+      displayMath(String.raw`g:=\widehat{\mathrm{ac}_0(f)}K_0(w)\in\overline{\mathbb{Q}}[t]`),
+      paragraph(["と置くと ", math(String.raw`f=(t-\widehat w)g`), " である。一方、", ref("claim_qbar_factor_quotient_coeff_bound"),
+        " を任意の ", math(String.raw`j\in\mathbb{N}`), " に当てると ", math(String.raw`\mathrm{ac}_j(g)=0`),
+        " である。すべての係数が零である 2 つの多項式は等しいので ", math(String.raw`g=0`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+f
+&=(t-\widehat w)g \quad(\because\ \blkref{claim_qbar_factor_theorem})\\
+&=(t-\widehat w)0 \quad(\because\ g=0)\\
+&=0 \quad(\because\ \text{零元との積})
+\end{aligned}`),
+      paragraph(["となって ", math(String.raw`f\ne0`), " に反する。したがって ", math(String.raw`s=\varnothing`),
+        " であり、", math(String.raw`\lvert s\rvert=0`), " である。"]),
+      paragraph(["次に、ある ", math(String.raw`n\in\mathbb{N}`), " で主張が成り立つと仮定し、係数の上界を ",
+        math(String.raw`n+1`), " とする。", math(String.raw`s=\varnothing`), " なら結論は直ちに成り立つので、",
+        math(String.raw`s\ne\varnothing`), " とし、", math(String.raw`w\in s`), " を 1 つ取る。"]),
+      displayMath(String.raw`g:=\sum_{k=0}^{n+1}\widehat{\mathrm{ac}_k(f)}K_k(w)\in\overline{\mathbb{Q}}[t]`),
+      paragraph(["と置く。", ref("claim_qbar_factor_theorem"), " より ", math(String.raw`f=(t-\widehat w)g`),
+        " である。もし ", math(String.raw`g=0`), " なら上と同じ 3 段の鎖で ", math(String.raw`f=0`),
+        " となるので、", math(String.raw`g\ne0`), " である。", ref("claim_qbar_factor_quotient_coeff_bound"),
+        " より ", math(String.raw`n<j`), " ならば ", math(String.raw`\mathrm{ac}_j(g)=0`), " である。また、",
+        math(String.raw`w'\in s\setminus\{w\}`), " ならば ", math(String.raw`w'\ne w`), " であり、",
+        ref("claim_qbar_factor_quotient_other_root_zero"), " より ", math(String.raw`\mathrm{aev}_{w'}(g)=0`), " である。"]),
+      paragraph(["したがって帰納法の仮定を ", math(String.raw`g`), " と ", math(String.raw`s\setminus\{w\}`),
+        " に当てることができ、"]),
+      displayMath(String.raw`\lvert s\setminus\{w\}\rvert\le n`),
+      paragraph(["を得る。", math(String.raw`w\in s`), " なので、"]),
+      displayMath(String.raw`\begin{aligned}
+\lvert s\rvert
+&=\lvert s\setminus\{w\}\rvert+1 \quad(\because\ w\in s)\\
+&\le n+1 \quad(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph(["である。これで帰納法が閉じた。この議論に実数体も複素数体も現れず、代数的数と有限集合の中で閉じている。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -24770,8 +24833,10 @@ w'
           ref("claim_qbar_factor_quotient_coeff_bound"),
           "）、および一次因子を取り除いた商が、もとの根と相異なる根で零になること（",
           ref("claim_qbar_factor_quotient_other_root_zero"),
+          "）、および零でない多項式の相異なる根が係数の上界を超えないこと（",
+          ref("claim_qbar_distinct_roots_card_bound"),
           "）までは上で済んでいる。",
-          "次に書くのは、零でない多項式の相異なる根が次数を超えないことと、それを用いて ",
+          "次に書くのは、この根の個数の上界を用いて ",
           math(String.raw`\mu_n`),
           " がちょうど ",
           math(String.raw`n`),

@@ -399,14 +399,25 @@ s_1 s_2^*
         " の ",
         math(String.raw`K_2^* := -\tfrac{1}{2}\log(\tanh K_2)`),
         " において、",
-        math(String.raw`K_2 > 0`),
-        " より ",
-        math(String.raw`0 < \tanh K_2 < 1`),
-        " であるから ",
-        math(String.raw`\log(\tanh K_2) < 0`),
-        "、よって ",
-        math(String.raw`K_2^* = -\tfrac{1}{2}\log(\tanh K_2) > 0`),
-        "。したがって ",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&<\tanh K_2
+&& (\because\ K_2>0\ \text{における}\ \tanh\ \text{の正値性})\\
+\tanh K_2
+&<1
+&& (\because\ K_2>0\ \text{における}\ \tanh\ \text{の上界})\\
+\log(\tanh K_2)
+&<0
+&& (\because\ 0<\tanh K_2<1\ \text{における実対数の符号})\\
+K_2^*=-\frac12\log(\tanh K_2)
+&>0
+&& (\because\ \text{負数に負数}\ -\tfrac12\ \text{を掛けた})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
         math(String.raw`K_1, K_2, K_2^* \in \mathbb{R}_{>0}`),
         " であり、",
         math(String.raw`x > 0`),
@@ -687,9 +698,10 @@ s_2^* = \sinh 2K_2^* > 0`,
         "最終形 μ = ±M かつ c_1 = s_1 c_2 を第 4 の同値として追加した（後続ブロックが参照する形）。",
         "Lean 形式化での指摘を受けて 2 点を明示化した。(a) Step 0 で K_2 > 0 ⟹ 0 < tanh K_2 < 1 ⟹ K_2^* > 0 ⟹ s_2^* > 0 " +
           "を 1 段ずつ書き、s_2^* ≠ 0（Step 1 の第 1 因子が非零であることに不可欠。s_2^* = 0 なら γ_2 は恒等的に 0）を " +
-          "statement 側にも明記した。(b) 第 1 式 sin θ_μ = 0 だけを μ の言葉に翻訳した中間段を Step 3' として独立させ、" +
+        "statement 側にも明記した。(b) 第 1 式 sin θ_μ = 0 だけを μ の言葉に翻訳した中間段を Step 3' として独立させ、" +
           "sin θ_μ = 0 ⟺ M | 2μ ⟺（M が偶数なら）μ ≡ 0 または μ ≡ M/2 (mod M) という正しい形で書いた。" +
           "μ = ±M/2 の排除は Step 4 の（⇒）で c_2 s_1 = -c_1 < 0 と正値性の矛盾として行う。",
+        "2026-08-11 の式変形統一で、Step 0 の K_2^*>0 の導出を地の文から 4 段の鎖へ移し、各不等号の根拠を行末へ付けた。内容は変えていない。",
       ],
     },
   },

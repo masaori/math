@@ -75,6 +75,7 @@ export const ALL_LABELS = [
   "claim_qbar_action_sum",
   "claim_qbar_commuting_preserves_eigenspace",
   "claim_qbar_constant_embedding_pow",
+  "claim_qbar_distinct_roots_card_bound",
   "claim_qbar_eigenspace_add",
   "claim_qbar_eigenspace_smul",
   "claim_qbar_eigenvector_pow",
