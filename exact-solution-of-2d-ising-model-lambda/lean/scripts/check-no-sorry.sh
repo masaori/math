@@ -637,6 +637,9 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.coeff_C_mul_X_pow_necSuf
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.monomial_decomposition_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyMonomialDecomposition_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarConstEmbeddingPow
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.constant_embedding_pow_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarConstEmbeddingPow_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

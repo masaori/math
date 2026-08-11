@@ -23786,6 +23786,110 @@ a & (j=k)\\
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_constant_embedding_pow",
+    kind: "claim",
+    title: {
+      text: "定数として送る写像は冪を冪へ写す",
+    },
+    labels: ["claim_qbar_constant_embedding_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarConstEmbeddingPow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.constant_embedding_pow_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarConstEmbeddingPow_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-const-embedding-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\widehat{w^{\,n}}=\widehat{w}^{\,n}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\widehat{\ \cdot\ }`),
+        " は ",
+        ref("def_qbar_constant_embedding"),
+        "。左辺の冪は ",
+        ref("def_root_of_unity_set"),
+        " で置いた ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元の冪の約束、右辺の冪は ",
+        ref("def_qbar_polynomial_ring"),
+        " で置いた ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の元の冪の約束である。",
+        "2 つの冪は住む環が違う別々の約束なので、この等式は約束からは出ず、示すべき主張である）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " を固定し、",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat{w^{\,0}}&=\widehat{1}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1)\\
+&=1
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{1}=1)\\
+&=\widehat{w}^{\,0}
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ \widehat{w}^{\,0}=1)
+\end{aligned}`),
+      paragraph([
+        "一歩（",
+        math(String.raw`n`),
+        " から ",
+        math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`\widehat{w^{\,n}}=\widehat{w}^{\,n}`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat{w^{\,n+1}}&=\widehat{w^{\,n}w}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w)\\
+&=\widehat{w^{\,n}}\,\widehat{w}
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{a\,b}=\widehat{a}\,\widehat{b})\\
+&=\widehat{w}^{\,n}\,\widehat{w}
+&&(\because\ \text{帰納法の仮定})\\
+&=\widehat{w}^{\,n+1}
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ \widehat{w}^{\,n+1}=\widehat{w}^{\,n}\widehat{w})
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、すべての ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "これは因数定理の鎖の一段のための足場である。",
+        "そこでは根の条件 ",
+        math(String.raw`\mathrm{aev}_{w}(f)=0`),
+        "（",
+        ref("def_qbar_poly_evaluation"),
+        "）を定数として送った ",
+        math(String.raw`\widehat{\mathrm{aev}_{w}(f)}`),
+        " を係数ごとの項 ",
+        math(String.raw`\widehat{\mathrm{ac}_k(f)}\,\widehat{w}^{\,k}`),
+        " の有限和へ開くとき、",
+        math(String.raw`\widehat{w^{\,k}}`),
+        " を ",
+        math(String.raw`\widehat{w}^{\,k}`),
+        " へ書き換える段でこの主張を使う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
