@@ -1365,17 +1365,42 @@ c_2 s_1 = c_1\cos\theta_\mu
 \phi_{\mathrm{polar}}(s_2^*) = [(s_2^*,\ 0)]_{\sim}`,
       ),
       paragraph([
-        "（それぞれ ",
-        math(String.raw`\phi_{\mathrm{cartesian}}([(1,\pi/2)]_{\sim}) = (\cos\tfrac{\pi}{2}, \sin\tfrac{\pi}{2}) = (0,1) = i`),
-        "、",
-        math(String.raw`\phi_{\mathrm{cartesian}}([(1,\theta_\mu)]_{\sim}) = (\cos\theta_\mu, \sin\theta_\mu) = e^{i\theta_\mu}`),
-        "（",
-        ref("euler_formula_cos_sin"),
-        " の Euler の公式）、",
-        math(String.raw`\phi_{\mathrm{cartesian}}([(s_2^*,0)]_{\sim}) = (s_2^*, 0) = s_2^*`),
-        "（",
-        math(String.raw`s_2^* > 0`),
-        "）による。）",
+        "この 3 つの等式は、", ref("def_phi_cartesian"),
+        " をそれぞれの類へ当てた次の 3 本の鎖で確かめられる",
+        "（2 本目の鎖の Euler の公式は ", ref("euler_formula_cos_sin"), "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{\pi}{2}\right)\right]_{\sim}\right)
+&= \left(\cos\tfrac{\pi}{2},\ \sin\tfrac{\pi}{2}\right)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義}) \\
+&= (0,\ 1)
+&&(\because\ \cos\tfrac{\pi}{2}=0,\ \sin\tfrac{\pi}{2}=1) \\
+&= i
+&&(\because\ \mathbb{R}^2=\mathbb{C}\ \text{の同一視で}\ (0,1)\ \text{は}\ i)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}([(1,\ \theta_\mu)]_{\sim})
+&= (\cos\theta_\mu,\ \sin\theta_\mu)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義}) \\
+&= e^{i\theta_\mu}
+&&(\because\ \text{Euler の公式})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\phi_{\mathrm{cartesian}}([(s_2^*,\ 0)]_{\sim})
+&= (s_2^*\cos 0,\ s_2^*\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義}) \\
+&= (s_2^*,\ 0)
+&&(\because\ \cos 0=1,\ \sin 0=0) \\
+&= s_2^*
+&&(\because\ \mathbb{R}^2=\mathbb{C}\ \text{の同一視。}s_2^*>0\ \text{なので実軸上の点})
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`\psi_\mu := \arg^{[0,2\pi)}(w_\mu)`),
         " とおくと Step 1 と同様に ",
         math(String.raw`\phi_{\mathrm{polar}}(w_\mu) = [(|w_\mu|, \psi_\mu)]_{\sim}`),

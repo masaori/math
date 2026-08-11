@@ -3572,6 +3572,14 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 127）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\gamma_2$ の商の偏角」（`arg_of_gamma2_quotient`）の Step 6（$\varphi_\mu$ 自身の書き下し）を
+点検した。括弧書きの散文に埋まっていた根拠の無い 3 本の等号列
+（$\phi_{\mathrm{cartesian}}$ の 3 つの類での値）を、各行末に根拠を置いた 3 本の一続きの鎖へ
+開いた（この生成器は `\blkref` を定義していないので、$(\because\ \dots)$ には題を書き、
+ラベル参照は鎖の前の散文に置いた）。内容は変えていない。検査一式と PDF 292 ページは通過した。
+**これで `arg_of_gamma2_quotient` の全 Step の点検が済んだ。次の tick は次の主張から続ける。**
+
 **2026-08-12（tick 126）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\gamma_2$ の商の偏角」（`arg_of_gamma2_quotient`）の Step 5（$\bmod 2\pi$ の還元）を整えた。
 3 つの場合の各行に 2 つあった含意を分け、範囲の変形・区間 $[0,2\pi)$ へ入る整数 $n$ の一意性・
