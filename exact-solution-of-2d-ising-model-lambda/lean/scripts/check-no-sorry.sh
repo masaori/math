@@ -606,6 +606,12 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_mem_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powPred_mul
+  Ising2DLambda.AlgebraicEigenvalue.mulMap_left
+  Ising2DLambda.AlgebraicEigenvalue.mulMap_right
+  Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.mulMap_bijective_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

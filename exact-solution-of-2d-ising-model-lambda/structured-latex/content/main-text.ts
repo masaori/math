@@ -22054,6 +22054,226 @@ w^{k+1}&=w^{k}\,w
   },
 
   {
+    id: "algebraic_eigenvalue_def_root_of_unity_mul_map",
+    kind: "definition",
+    title: { text: "1 の冪根を掛ける写像" },
+    labels: ["def_root_of_unity_mul_map"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.AlgebraicEigenvalue.mulMap"],
+    verification: ["sagemath/check/root-of-unity-mul-map"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取り、",
+        math(String.raw`w\in\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）を任意に取る。写像",
+      ]),
+      displayMath(
+        String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n},\qquad
+\theta^{(n)}_{w}(z):=wz`,
+      ),
+      paragraph([
+        "を定める。ここで ",
+        math(String.raw`wz`),
+        " は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の積（",
+        ref("def_algebraic_numbers"),
+        "）である。行き先が ",
+        math(String.raw`\mu_{n}`),
+        " に収まること、すなわち ",
+        math(String.raw`z\in\mu_{n}`),
+        " ならば ",
+        math(String.raw`wz\in\mu_{n}`),
+        " であることは ",
+        ref("claim_root_of_unity_mul"),
+        " による（これを言わないと写像として定まらない）。",
+      ]),
+      paragraph([
+        "上付きの ",
+        math(String.raw`(n)`),
+        " と下付きの ",
+        math(String.raw`w`),
+        " は、この写像が ",
+        math(String.raw`n`),
+        " と ",
+        math(String.raw`w`),
+        " の取り方に依存することを記号に残すためのものである。",
+        "掛ける操作を表す文字に ",
+        math(String.raw`m`),
+        " を使わない（",
+        math(String.raw`m`),
+        " は多重度 ",
+        math(String.raw`\Omega_L(m)`),
+        " の添字に固定してある）ので ",
+        math(String.raw`\theta`),
+        " とした。",
+        "実数体も複素数体も現れない（定義域も値域も代数的数の部分集合である）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_claim_root_of_unity_mul_map_bijective",
+    kind: "claim",
+    title: { text: "1 の冪根を掛ける写像は全単射である" },
+    labels: ["claim_root_of_unity_mul_map_bijective"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mulMap_bijective_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-mul-map"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`),
+        " を ",
+        math(String.raw`n\ge1`),
+        " を満たすように任意に取り、",
+        math(String.raw`w\in\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）を任意に取る。このとき ",
+        ref("def_root_of_unity_mul_map"),
+        " の写像 ",
+        math(String.raw`\theta^{(n)}_{w}`),
+        " は全単射であり、その逆写像は ",
+        math(String.raw`\theta^{(n)}_{w^{n-1}}`),
+        " である。すなわち任意の ",
+        math(String.raw`z\in\mu_{n}`),
+        " について",
+      ]),
+      displayMath(String.raw`\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)=z,
+\qquad
+\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)=z`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("claim_root_of_unity_pow"),
+        " を ",
+        math(String.raw`k=n-1`),
+        " に当てて ",
+        math(String.raw`w^{n-1}\in\mu_{n}`),
+        " を得る。したがって ",
+        ref("def_root_of_unity_mul_map"),
+        " により写像 ",
+        math(String.raw`\theta^{(n)}_{w^{n-1}}:\mu_{n}\to\mu_{n}`),
+        " が定まる。この 2 つの元の積は次のように 1 である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{n-1}\,w&=w^{(n-1)+1}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
+&=w^{n}
+&&(\because\ n\ge1\ \text{より}\ (n-1)+1=n)\\
+&=1
+&&(\because\ w\in\mu_{n}\ \text{と}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`z\in\mu_{n}`),
+        " を任意に取る。第 1 の往復は次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)&=\theta^{(n)}_{w^{n-1}}(wz)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&=w^{n-1}(wz)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
+&=(w^{n-1}w)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=1\cdot z
+&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "第 2 の往復は次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)&=\theta^{(n)}_{w}(w^{n-1}z)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
+&=w(w^{n-1}z)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&=(w\,w^{n-1})z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=(w^{n-1}w)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&=1\cdot z
+&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "単射性。",
+        math(String.raw`z_1\in\mu_{n}`),
+        " と ",
+        math(String.raw`z_2\in\mu_{n}`),
+        " が ",
+        math(String.raw`\theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2)`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
+&&(\because\ \text{第 1 の往復を}\ z_1\ \text{へ})\\
+&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_2)\bigr)
+&&(\because\ \theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2))\\
+&=z_2
+&&(\because\ \text{第 1 の往復を}\ z_2\ \text{へ})
+\end{aligned}`),
+      paragraph([
+        "全射性。",
+        math(String.raw`z\in\mu_{n}`),
+        " を任意に取る。",
+        ref("def_root_of_unity_mul_map"),
+        " により ",
+        math(String.raw`\theta^{(n)}_{w^{n-1}}(z)\in\mu_{n}`),
+        " であり、第 2 の往復により ",
+        math(String.raw`\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)=z`),
+        " である。すなわち ",
+        math(String.raw`z`),
+        " は ",
+        math(String.raw`\theta^{(n)}_{w}`),
+        " の像に属する。",
+      ]),
+      paragraph([
+        "以上より ",
+        math(String.raw`\theta^{(n)}_{w}`),
+        " は単射かつ全射、すなわち全単射であり、2 つの往復が恒等写像であることから ",
+        math(String.raw`\theta^{(n)}_{w^{n-1}}`),
+        " がその逆写像である。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、積の結合則・積の可換則・積の単位元の 3 つだけである。",
+        "加法も零元も分配則も、逆元の存在も、代数閉であることも使っていない。",
+        math(String.raw`w`),
+        " が 1 の冪根であることは、",
+        math(String.raw`w^{n-1}w=1`),
+        " という 1 つの等式（と可換則から出る ",
+        math(String.raw`w\,w^{n-1}=1`),
+        "）としてしか使っていない。",
+        math(String.raw`n\ge1`),
+        " が要るのは準備の第 2 段 ",
+        math(String.raw`(n-1)+1=n`),
+        " だけである（",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
+        " なので ",
+        math(String.raw`w=0`),
+        " が取れてしまい、掛ける操作は全単射でない）。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -22275,12 +22495,12 @@ w^{k+1}&=w^{k}\,w
           ref("claim_root_of_unity_mul"),
           "）、および 1 の冪根の冪が 1 の冪根であること（",
           ref("claim_root_of_unity_pow"),
+          "）、および 1 の冪根を掛ける写像（",
+          ref("def_root_of_unity_mul_map"),
+          "）が全単射であること（",
+          ref("claim_root_of_unity_mul_map_bijective"),
           "）までは上で済んでいる。",
-          "次に書くのは、",
-          math(String.raw`\mu_L`),
-          " の元を掛ける操作が ",
-          math(String.raw`\mu_L`),
-          " の全単射であることであり、続いて ",
+          "次に書くのは ",
           math(String.raw`\mu_L`),
           " の元の冪の総和（指数が ",
           math(String.raw`L`),
