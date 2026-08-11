@@ -130,6 +130,7 @@ export const ALL_LABELS = [
   "claim_root_of_unity_pow",
   "claim_root_of_unity_power_sum_invariant",
   "claim_root_of_unity_subset_card_bound",
+  "claim_root_polynomial_distinct_factorization",
   "claim_root_polynomial_factor_quotient",
   "claim_root_polynomial_remaining_factor_value_ne_zero",
   "claim_row_config_min_unique",

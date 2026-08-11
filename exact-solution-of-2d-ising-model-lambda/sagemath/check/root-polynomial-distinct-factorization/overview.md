@@ -1,0 +1,16 @@
+# SageMath Check: 根の多項式は相異なる根の一次因子を順に取り出せる
+
+**対象ラベル**: `claim_root_polynomial_distinct_factorization`
+
+本文の帰納法に対応させ、$1\le n\le6$ と $0\le j\le n$ について、
+$f=t^n-1$ が相異なる $j$ 個の根の一次因子の積と商 $g$ に分かれること、
+$g$ の係数が番号 $n-j$ より上で零で先頭係数が $1$ であること、選んだ各根が
+$n$ 乗して $1$ になり互いに相異なることを `QQbar` の厳密計算で確かめる。
+各一歩では本文と同じく $g$ の根を一つ取り、一次因子で割って次の商を作る。
+浮動小数点は使わない。
+
+```sh
+sage sagemath/check/root-polynomial-distinct-factorization/check.sage
+```
+
+**2026-08-12 実行: すべて通過。**

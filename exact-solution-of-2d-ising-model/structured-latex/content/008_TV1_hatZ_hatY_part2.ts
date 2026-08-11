@@ -2177,18 +2177,17 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
         math(String.raw`\sqrt{\ }`),
         " の中身に等しいことを示す。",
       ]),
-      paragraph(["Step 9: ", math(String.raw`\gamma_2`), " の定義の代入。"]),
+      paragraph(["Steps 9–11: ", math(String.raw`\gamma_2`), " の定義を代入し、偶奇性を使って共通因子を約分する。"]),
       displayMath(
-        String.raw`\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-= \frac{i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)}`,
-      ),
-      paragraph(["Step 10: ", math(String.raw`\cos(-\theta) = \cos\theta,\ \sin(-\theta) = -\sin\theta`), " を適用すると、"]),
-      displayMath(
-        String.raw`= \frac{i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,e^{-i\theta_\mu}s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}`,
-      ),
-      paragraph(["Step 11: ", math(String.raw`i\,s_2^*`), " を約分すると、"]),
-      displayMath(
-        String.raw`= \frac{e^{i\theta_\mu}(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{e^{-i\theta_\mu}(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}`,
+        String.raw`\begin{aligned}
+\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
+&= \frac{i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)}
+&& (\because\ \gamma_2\ \text{の定義を分子と分母へ代入}) \\
+&= \frac{i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,e^{-i\theta_\mu}s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}
+&& (\because\ \cos(-\theta_\mu)=\cos\theta_\mu\ \text{かつ}\ \sin(-\theta_\mu)=-\sin\theta_\mu) \\
+&= \frac{e^{i\theta_\mu}(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{e^{-i\theta_\mu}(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}
+&& (\because\ i\,s_2^*\ne0\ \text{なので分子と分母の共通因子を約分})
+\end{aligned}`,
       ),
       paragraph([
         "Step 12: ",

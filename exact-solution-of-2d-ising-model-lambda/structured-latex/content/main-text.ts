@@ -25972,6 +25972,194 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_polynomial_distinct_factorization",
+    kind: "claim",
+    title: { text: "根の多項式は相異なる根の一次因子を順に取り出せる" },
+    labels: ["claim_root_polynomial_distinct_factorization"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-polynomial-distinct-factorization"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、", ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`f:=t^{\,n}+\widehat{-1}\in\overline{\mathbb{Q}}[t]`),
+        "（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "）を取る。", math(String.raw`j\in\mathbb{N}`),
+        " が ", math(String.raw`j\le n`), " を満たすならば、互いに相異なる ",
+        math(String.raw`w(0),\dots,w(j-1)\in\mu_n`), "（",
+        ref("def_root_of_unity_set"), "）と ",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`), " であって、",
+      ]),
+      list([
+        [
+          math(String.raw`f=\left(\prod_{i=0}^{j-1}(t-\widehat{w(i)})\right)g`),
+          "（有限積は番号の小さい因子から順に掛け、", math(String.raw`j=0`),
+          " のときは単位元とする）、",
+        ],
+        [
+          math(String.raw`k>n-j`), " ならば ",
+          math(String.raw`\mathrm{ac}_k(g)=0`),
+          "（", math(String.raw`\mathrm{ac}_k`), " は ",
+          ref("def_qbar_polynomial_ring"), " の係数）、",
+        ],
+        [math(String.raw`\mathrm{ac}_{n-j}(g)=1`), "、"],
+      ]),
+      paragraph([
+        "を同時に満たすものが存在する。", math(String.raw`j=0`),
+        " のとき根の列は空であり、相異性の条件は空虚に成り立つ。",
+        "この主張は、", math(String.raw`j=n`),
+        " として ", math(String.raw`\mu_n`), " に少なくとも ",
+        math(String.raw`n`), " 個の元があることを出すための帰納法本体である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`j`), " について帰納法で示す。出発点 ",
+        math(String.raw`j=0`), " では、根の列を空、", math(String.raw`g:=f`),
+        " と取る。分解の等式は単位元との積である。", math(String.raw`k>n`),
+        " ならば、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(g)
+&=\mathrm{ac}_k(f)
+&&(\because\ g=f)\\
+&=\mathrm{ac}_k(t^{\,n})+\mathrm{ac}_k(\widehat{-1})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
+&=0+0
+&&(\because\ k>n\ \text{より}\ k\ne n\ \text{かつ}\ k\ge1\text{。}\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{と}\ \blkref{def_qbar_constant_embedding})\\
+&=0
+&&(\because\ \text{零元との和})
+\end{aligned}`),
+      paragraph(["また先頭の係数は、"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{n}(g)
+&=\mathrm{ac}_{n}(f)
+&&(\because\ g=f)\\
+&=\mathrm{ac}_{n}(t^{\,n})+\mathrm{ac}_{n}(\widehat{-1})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
+&=1+0
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{と}\ n\ge1\ \text{に対する}\ \blkref{def_qbar_constant_embedding})\\
+&=1
+&&(\because\ \text{零元との和})
+\end{aligned}`),
+      paragraph([
+        "である。よって出発点が成り立つ。",
+      ]),
+      paragraph([
+        "一歩を示す。", math(String.raw`j<n`), " とし、", math(String.raw`j`),
+        " における主張を満たす互いに相異なる ",
+        math(String.raw`w(0),\dots,w(j-1)\in\mu_n`), " と ",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`),
+        " を取る。", math(String.raw`m:=n-j`), " と置くと ",
+        math(String.raw`m\ge1`), " であり、帰納法の仮定から ",
+        math(String.raw`\mathrm{ac}_{m}(g)=1\ne0`),
+        " である。したがって ", math(String.raw`g`),
+        " は次数 1 以上の多項式である。", ref("def_algebraic_numbers"),
+        " の代数閉性により、ある ", math(String.raw`w(j)\in\overline{\mathbb{Q}}`),
+        " が存在して ", math(String.raw`\mathrm{aev}_{w(j)}(g)=0`),
+        " を満たす。",
+      ]),
+      paragraph([
+        ref("claim_qbar_factor_theorem"), " を ", math(String.raw`g`), "、",
+        math(String.raw`w(j)`), "、", math(String.raw`m`),
+        " に当て、その主張で指定された商を ",
+        math(String.raw`q\in\overline{\mathbb{Q}}[t]`), " と書く。このとき",
+      ]),
+      displayMath(String.raw`g=(t-\widehat{w(j)})q`),
+      paragraph([
+        "である。", ref("claim_qbar_factor_quotient_coeff_bound"), " より、",
+        math(String.raw`k\ge m`), " ならば ",
+        math(String.raw`\mathrm{ac}_k(q)=0`), " である。これは ",
+        math(String.raw`k>n-(j+1)`), " ならば係数が零であるという、次の段の上界である。",
+        "さらに ", ref("claim_qbar_poly_linear_factor_leading_coeff"),
+        " を ", math(String.raw`q`), " と ", math(String.raw`m-1`),
+        " に当てると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=\mathrm{ac}_{m}(g)
+&&(\because\ \text{帰納法の仮定})\\
+&=\mathrm{ac}_{m}\bigl((t-\widehat{w(j)})q\bigr)
+&&(\because\ g=(t-\widehat{w(j)})q)\\
+&=\mathrm{ac}_{m-1}(q)
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_leading_coeff}\ \text{と}\ m=(m-1)+1)
+\end{aligned}`),
+      paragraph([
+        "を得る。すなわち ", math(String.raw`\mathrm{ac}_{n-(j+1)}(q)=1`),
+        " である。分解の等式は、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f
+&=\left(\prod_{i=0}^{j-1}(t-\widehat{w(i)})\right)g
+&&(\because\ \text{帰納法の仮定})\\
+&=\left(\prod_{i=0}^{j-1}(t-\widehat{w(i)})\right)(t-\widehat{w(j)})q
+&&(\because\ g=(t-\widehat{w(j)})q)\\
+&=\left(\prod_{i=0}^{j}(t-\widehat{w(i)})\right)q
+&&(\because\ \text{番号の小さい因子から順に掛ける有限積の約束})
+\end{aligned}`),
+      paragraph([
+        "となる。",
+      ]),
+      paragraph([
+        "残るのは根の所属と相異性である。まず上の分解へ ",
+        math(String.raw`\mathrm{aev}_{w(j)}`), " を当てると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w(j)}(f)
+&=\mathrm{aev}_{w(j)}\left(\left(\prod_{i=0}^{j-1}(t-\widehat{w(i)})\right)(t-\widehat{w(j)})q\right)
+&&(\because\ \text{上の分解})\\
+&=0
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は積を保ち、}\ \mathrm{aev}_{w(j)}(t-\widehat{w(j)})=w(j)-w(j)=0)
+\end{aligned}`),
+      paragraph([
+        "他方、", math(String.raw`f=t^{\,n}+\widehat{-1}`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\mathrm{aev}_{w(j)}(f)
+&&(\because\ \text{上の計算})\\
+&=w(j)^{\,n}+(-1)
+&&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow}\ \text{と}\ \blkref{def_qbar_poly_evaluation})
+\end{aligned}`),
+      paragraph([
+        "である。加法の逆元を移せば ", math(String.raw`w(j)^{\,n}=1`),
+        "、したがって ", math(String.raw`w(j)\in\mu_n`), " である（",
+        ref("def_root_of_unity_set"), "）。",
+      ]),
+      paragraph([
+        "最後に、", math(String.raw`i<j`), " を満たす ",
+        math(String.raw`i\in\mathbb{N}`), " を任意に取る。",
+        ref("claim_qbar_poly_linear_factor_product_extract"),
+        " により、ある ", math(String.raw`B\in\overline{\mathbb{Q}}[t]`), " が存在して",
+      ]),
+      displayMath(String.raw`\prod_{r=0}^{j-1}(t-\widehat{w(r)})=(t-\widehat{w(i)})B`),
+      paragraph([
+        "を満たす。したがって ", math(String.raw`h:=Bg`), " と置けば ",
+        math(String.raw`f=(t-\widehat{w(i)})h`), " かつ ",
+        math(String.raw`h=Bg`), " である。", math(String.raw`g`),
+        " の係数は番号 ", math(String.raw`n-j`), " で尽き、", math(String.raw`B`),
+        " は ", math(String.raw`j-1`), " 個の一次因子の積であるから、",
+        ref("claim_qbar_poly_linear_factor_coeff_bound"),
+        " をその各因子へ順に当てると、", math(String.raw`k>n-1`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(h)=0`),
+        " である。特に ", math(String.raw`k>n`), " ならば零である。",
+        "ここで ", math(String.raw`\mathrm{aev}_{w(j)}(g)=0`),
+        " だから、", ref("claim_qbar_poly_extracted_root_distinct"),
+        " を ", math(String.raw`w(i)`), "、", math(String.raw`h`), "、",
+        math(String.raw`B`), "、", math(String.raw`g`), "、",
+        math(String.raw`w(j)`), " に当てて ", math(String.raw`w(j)\ne w(i)`),
+        " を得る。", math(String.raw`i<j`), " は任意だったので、新しい根は既出の根のすべてと相異なる。",
+      ]),
+      paragraph([
+        "以上により、根の列へ ", math(String.raw`w(j)`),
+        " を加え、商を ", math(String.raw`q`),
+        " に替えれば帰納法の一歩が閉じる。出発点と一歩により、すべての ",
+        math(String.raw`j\le n`), " について主張が成り立つ。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
