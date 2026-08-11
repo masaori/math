@@ -599,10 +599,15 @@ c_2s_1-c_1\cos\theta_\mu=0
         " を用いて",
       ]),
       displayMath(
-        String.raw`\theta_\mu \in \pi\mathbb{Z}
-\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\mu}{M} = k\pi
-\iff \exists k \in \mathbb{Z}:\ 2\mu = kM
-\iff M \mid 2\mu`,
+        String.raw`\begin{aligned}
+\theta_\mu \in \pi\mathbb{Z}
+&\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\mu}{M} = k\pi
+&& (\because\ \theta_\mu = 2\pi\mu/M\ \text{を代入し、}\pi\mathbb{Z}\ \text{の元であることを}\ k\ \text{の存在で書いた})\\
+&\iff \exists k \in \mathbb{Z}:\ 2\mu = kM
+&& (\because\ \text{両辺に}\ M/\pi\ \text{を掛けた。}\pi\ne0\ \text{かつ}\ M\ge1\ \text{なので同値})\\
+&\iff M \mid 2\mu
+&& (\because\ \text{整除}\ M\mid2\mu\ \text{の定義そのもの})
+\end{aligned}`,
       ),
       paragraph([
         "ここで ",
@@ -611,19 +616,30 @@ c_2s_1-c_1\cos\theta_\mu=0
         math(String.raw`M`),
         " の偶奇で言い換える。",
         math(String.raw`M`),
-        " が奇数のときは ",
-        math(String.raw`\gcd(M,2) = 1`),
-        " より ",
-        math(String.raw`M \mid 2\mu \iff M \mid \mu`),
-        "。",
+        " が奇数の場合。",
+      ]),
+      displayMath(
+        String.raw`M \mid 2\mu \iff M \mid \mu
+\qquad (\because\ \gcd(M,2)=1\ \text{なので}\ M\ \text{が}\ 2\mu\ \text{を割れば}\ \mu\ \text{を割る。逆は倍を取るだけ})`,
+      ),
+      paragraph([
         math(String.raw`M`),
-        " が偶数のとき、",
+        " が偶数の場合。",
         math(String.raw`M = 2M'`),
-        " とおくと ",
-        math(String.raw`M \mid 2\mu \iff 2M' \mid 2\mu \iff M' \mid \mu`),
-        " であり、",
+        " とおくと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+M \mid 2\mu
+&\iff 2M' \mid 2\mu
+&& (\because\ M=2M'\ \text{を代入した})\\
+&\iff M' \mid \mu
+&& (\because\ \text{両辺の商の等式を}\ 2\ \text{で約した。}2\ne0\ \text{なので同値})
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`M' = M/2`),
-        " だから、",
+        " だから、これは ",
         math(String.raw`\mu \equiv 0 \pmod{M}`),
         " または ",
         math(String.raw`\mu \equiv M/2 \pmod{M}`),
@@ -748,6 +764,7 @@ c_2s_1-c_1\cos\theta_\mu=0
           "絶対値の積の計算（1 行に等号 2 つと不等号・根拠が前置の散文）を 6 段の鎖へ開き、各行末に (∵ …) を置いた。" +
           "この生成器は blkref を定義していないので、(∵ …) には引いたブロックの題を書き、ラベル参照は式の前後の散文に残した。内容は変えていない。",
         "2026-08-11 の式変形統一（続き）で、Step 2 の零積からの同値と複素数の成分表示を、2 段・1 段・3 段の鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
+        "2026-08-11 の式変形統一（さらに続き）で、Step 3' の μ への翻訳（1 行に同値 3 つ・根拠なし）を 3 段の鎖へ、M の偶奇の言い換え（散文中の同値）を奇数 1 段・偶数 2 段の鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
       ],
     },
   },
