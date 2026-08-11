@@ -7,7 +7,8 @@ namespace Ising2DLambda.AlgebraicEigenvalue
 theorem qbarFactorTheorem_from_necSuf (f : QbarPoly) (w : Qbar) (n : ℕ)
     (hcoeff : ∀ k : ℕ, n < k → f.coeff k = 0)
     (hroot : qbarPolyEval w f = 0) :
-    ∃ g : QbarPoly, f = (Polynomial.X - qbarConst w) * g := by
+    f = (Polynomial.X - qbarConst w)
+        * ∑ k ∈ Finset.range (n + 1), qbarConst (f.coeff k) * qbarPolyPowDiffSum w k := by
   apply NecSuf.AlgebraicEigenvalue.factor_from_finite_sum_necSuf
       f Polynomial.X (qbarConst w) (fun k => qbarConst (f.coeff k))
       (qbarPolyPowDiffSum w) n

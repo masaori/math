@@ -13,9 +13,7 @@ theorem factor_from_finite_sum_necSuf {R : Type*} [CommRing R]
     (hf : f = ∑ k ∈ Finset.range (n + 1), a k * x ^ k)
     (hroot : (∑ k ∈ Finset.range (n + 1), a k * w ^ k) = 0)
     (hfactor : ∀ k : ℕ, x ^ k - w ^ k = (x - w) * K k) :
-    ∃ g : R, f = (x - w) * g := by
-  let g := ∑ k ∈ Finset.range (n + 1), a k * K k
-  refine ⟨g, ?_⟩
+    f = (x - w) * ∑ k ∈ Finset.range (n + 1), a k * K k := by
   calc
     f = ∑ k ∈ Finset.range (n + 1), a k * x ^ k := hf
     _ = (∑ k ∈ Finset.range (n + 1), a k * x ^ k) - 0 := by ring
@@ -33,6 +31,5 @@ theorem factor_from_finite_sum_necSuf {R : Type*} [CommRing R]
           rw [Finset.mul_sum]
           refine Finset.sum_congr rfl (fun k _ => ?_)
           ring
-    _ = (x - w) * g := rfl
 
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

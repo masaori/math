@@ -12,9 +12,8 @@ open Polynomial
 theorem qbarFactorTheorem (f : QbarPoly) (w : Qbar) (n : ℕ)
     (hcoeff : ∀ k : ℕ, n < k → f.coeff k = 0)
     (hroot : qbarPolyEval w f = 0) :
-    ∃ g : QbarPoly, f = (Polynomial.X - qbarConst w) * g := by
-  let g := ∑ k ∈ Finset.range (n + 1), qbarConst (f.coeff k) * qbarPolyPowDiffSum w k
-  refine ⟨g, ?_⟩
+    f = (Polynomial.X - qbarConst w)
+        * ∑ k ∈ Finset.range (n + 1), qbarConst (f.coeff k) * qbarPolyPowDiffSum w k := by
   have heval : (∑ k ∈ Finset.range (n + 1), f.coeff k * w ^ k) = 0 := by
     rw [← qbarPolyEvalCoefficientSum w f n hcoeff, hroot]
   calc
@@ -54,6 +53,5 @@ theorem qbarFactorTheorem (f : QbarPoly) (w : Qbar) (n : ℕ)
             rw [Finset.mul_sum]
             refine Finset.sum_congr rfl (fun k _ => ?_)
             ring
-    _ = (Polynomial.X - qbarConst w) * g := rfl
 
 end Ising2DLambda.AlgebraicEigenvalue
