@@ -8,7 +8,7 @@
 箇所があるので、ブロックの数とは一致しない。実測値をここに書く）。
 章「分配多項式」（定義 10 件・主張 3 件）、章「有限系の自由エントロピー」（定義 4 件・主張 5 件）、
 章「転送行列」（定義 14 件・主張 6 件・定理 1 件。$Z_L=\operatorname{Tr}(T^L)$ まで）、
-および章「固有値の代数性」（定義 44 件・主張 66 件・定理 2 件。行配位の辞書式順序・置換の符号・
+および章「固有値の代数性」（定義 44 件・主張 67 件・定理 2 件。行配位の辞書式順序・置換の符号・
 行列式・もう 1 つの不定元 $t$ の多項式環と次数・特性多項式・行配位の巡回シフト・
 シフト行列と転送行列の可換性・シフト行列の位数 $U^{L}=I$・行配位の最小周期・行配位の軌道・
 軌道による行配位の全体の分割・特性多項式の消えない項の同定・軌道を保つ置換の軌道への制限・
@@ -23,10 +23,14 @@ $\mathbb{Z}[x][t]$ の元の代数的数における値 $\mathrm{ev}_{\xi,z}$ �
 
 | 層 | 状態 |
 | --- | --- |
-| 記述（構造化テキスト） | ラベルの数は合計 240 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
+| 記述（構造化テキスト） | ラベルの数は合計 241 件（定義・主張・定理・注意）。`npm run check` と `npm run build:pdf` が全通過 |
 | SageMath 検証 | `partition-polynomial-coefficient-sum` / `partition-polynomial-coefficient-representation` / `free-entropy-definition` / `free-entropy-additivity` / `transfer-matrix-row-decomposition` / `transfer-matrix-trace-formula` / `transfer-matrix-power-entry` / `transfer-matrix-trace` / `row-config-order` / `permutation-sign` / `determinant` / `second-polynomial-degree` / `characteristic-polynomial` / `row-config-shift` / `shift-matrix` / `shift-matrix-order` / `row-shift-minimal-period` / `row-shift-orbit` / `row-shift-orbit-partition` / `shift-matrix-characteristic-term` / `orbit-restriction` / `orbit-gluing` / `cross-orbit-inversions` / `inversion-orbit-decomposition` / `row-config-min` / `oriented-orbit-pairs` / `orbit-permutation-sign` / `orbit-term-factorization` / `shift-char-sum` / `shift-char-family-sum` / `orbit-family-insert` / `orbit-family-distributive` / `shift-char-orbit-product` / `orbit-bijection-id-or-shift` / `orbit-permutation-sign-values` / `orbit-transposition` / `orbit-transposition-sign` / `orbit-transposition-composite` / `row-shift-iterate-distinct` / `orbit-transposition-composite-values` / `power-sum-telescope` / `orbit-sum-divides-pow-L` / `prod-pair-eq-pow-card` / `shift-char-dvd-pow-L` / `shift-char-orbit-factorization` / `root-of-unity-divisor` / `orbit-factor-root` / `second-evaluation-prod` / `qbar-prod-zero` / `qbar-action-product` / `qbar-action-linear` / `qbar-eigenspace` / `qbar-identity-action` / `qbar-action-pow` / `qbar-eigenvector-pow` / `qbar-matrix-eval` / `qbar-matrix-eval-identity` / `qbar-matrix-product-assoc` / `qbar-identity-matrix-unit` / `qbar-matrix-pow-succ-right` / `qbar-matrix-eval-pow` / `qbar-smul-eq-zero` / `shift-matrix-eigenvalue-root-of-unity` / `qbar-commuting-eigenspace` / `qbar-shift-transfer-commute` / `qbar-transfer-preserves-shift-eigenspace` / `qbar-action-sum` / `qbar-smul-sum` / `qbar-projector-action` / `qbar-projector-image-eigenspace` / `qbar-mul-pow` / `root-of-unity-mul` / `root-of-unity-pow` / `root-of-unity-mul-map` / `root-of-unity-power-sum-invariant` / `qbar-geometric-telescope` / `qbar-no-zero-divisors` / `root-of-unity-geometric-sum-zero` / `qbar-power-difference-factorization` / `qbar-poly-power-difference-factorization` / `qbar-poly-indeterminate-power-coefficient` / `qbar-poly-monomial-decomposition` / `qbar-const-embedding-pow` を実行済み（走らせた $L$ の範囲は検証ごとに違う。分配多項式まわりは $L=1,2,3$、巡回シフトとシフト行列は $L=1,2,3,4$、最小周期と軌道と分割は $L=1,\dots,6$。いずれも厳密計算。各 `overview.md` が正本） |
-| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 106 で `claim_qbar_constant_embedding_pow`（定数として送る写像は冪を冪へ写す）の Lean を置いた。mathlib の `map_pow`（主張そのもの）へ委ねず、帰納法を自分で書いてある。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 584 件を登録）が通る |
+| Lean 具体版 | 上記の定義と主張と定理に対応する形式化（2026-08-11 の tick 107 で `claim_qbar_evaluation_indeterminate_pow`（代入は不定元の冪を代数的数の冪へ写す）の Lean を置いた。mathlib の `map_pow` / `Polynomial.eval_pow` へ委ねず、帰納法を自分で書いてある。未着手の主張は無い）。`lake build` と `check-no-sorry.sh`（定理 587 件を登録）が通る |
 | Lean 必要十分版 | 主張 113 件と定理 3 件について作成済み（うち 1 件（行列の積の結合則）は、既にある作用の側の必要十分版をそのまま特殊化したもので、新しい必要十分版を書き起こしていない。2026-08-11 の tick 79 で、本文の `lean` フィールド（ブロックに対応する Lean の定理名）を機械的に数え直した。本文の主張は 120 件（tick 106 時点）なので、必要十分版を置いていない主張は **9 件**である（前の記録の 16 件は、必要十分版が実在するのに本文へ名前が書かれていなかった 2 件と、tick 79 で新たに置いた 1 件を含んでいた）。置いていない 9 件は $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・閉じた道の 1 対 1 対応・置換の符号の値・転送行列の巡回シフト不変性・組の貼り合わせの両向きの往復（2 件）・軌道ごとの置換の符号の値・軌道の互換の全単射性である。理由が台帳に残っているのは $\Phi_L(1)=L^2\ell_2$・辺の行ごとの分割・転送行列の巡回シフト不変性・組の貼り合わせの往復の 4 件だけで——1 つめは既存の主張をつなぐだけ、3 つめは番号の付け方そのもので抽象化すると同じ言明になるため、4 つめは前セクションの必要十分版を組の型へ書き写しただけで新しい仮定を要求しないため——残りは次のレビュー以降で 1 件ずつ判定する）。数え上げ側は有限型と有界な自然数値写像だけ、値の側は半環／可換モノイド／可換群／可換半環／狭義順序半環だけを仮定する |
+
+2026-08-11 の tick 107 では SageMath 検証 `qbar-evaluation-indeterminate-pow` を追加した。
+また本文の主張は 121 件になったが、新しい主張は直前の必要十分版を共有するため、
+必要十分版を置いていない主張は 9 件のままである。
 
 Lean の環境は 2026-08-08 に整えた。`lake update` → `lake exe cache get` → `lake build` が通り、
 mathlib の実体は `lean/lake-manifest.json` で固定してある（`.lake/` は git 管理外）。
@@ -797,6 +801,8 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
   約束からは出ない主張である。必要十分版が示したのは、要るのが両側の冪の約束と写像が単位元と
   積を保つことだけで、**積の結合則すら使わない**こと。`Monoid` を仮定せず
   `One`/`Mul`/`Pow _ ℕ` の記号と約束の仮定だけで書いた）。
+- $\mathrm{aev}_{w}(t^{\,n})=w^{\,n}$（tick 107。帰納法の出発点 3 段・一歩 5 段。
+  必要十分版は直前の段と同じ定理を共有し、代入写像へ特殊化した）。
 
 ## 進め方（自動ループ）
 
@@ -811,17 +817,14 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-**2026-08-11 の tick 106 は、レビューで直すところが無く、セクション 10h3d-c4b-b2c を 4 つへ
-割り直したうえで、最初の段 10h3d-c4b-b2c1（定数として送る写像は冪を冪へ写す。
-$\widehat{w^{\,n}}=\widehat{w}^{\,n}$）を四層すべてで完了させた。**
+**2026-08-11 の tick 107 は、レビューで直すところが無く、セクション 10h3d-c4b-b2c2
+（代入は不定元の冪を代数的数の冪へ写す。$\mathrm{aev}_{w}(t^{\,n})=w^{\,n}$）を
+四層すべてで完了させた。**
 
-1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_qbar_constant_embedding_pow`）と
-   Lean 3 本（`QbarConstEmbeddingPow` 系）と SageMath の `qbar-const-embedding-pow`。
-   とくに、必要十分版が「積の結合則すら使わない」と述べていることが具体版の鎖と
-   突き合わせて正しいかを見る。
-2. **次に進めるセクションは 10h3d-c4b-b2c2**（代入は不定元の冪を代数的数の冪へ写す。
-   $\mathrm{aev}_{w}(t^{\,n})=w^{\,n}$）。状態台帳のセクション表が正本である。
-   論法は b2c1 と同じ形の帰納法 1 本（積を保つこと・$\mathrm{aev}_{w}(t)=w$・両側の冪の約束）。
+1. **レビュー**: 今 tick で書いた本文 1 ブロック（`claim_qbar_evaluation_indeterminate_pow`）と
+   Lean 具体版・共有する必要十分版からの導出・SageMath の `qbar-evaluation-indeterminate-pow`。
+2. **次に進めるセクションは 10h3d-c4b-b2c3**（多項式の値は係数の有限和で書ける）。
+   状態台帳のセクション表が正本である。論法は b2b の分解へ代入を当てて項ごとに開く鎖 1 本。
 3. **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**
    （台帳の「式変形の書き方の統一」の表が正本）。
 4. **push の直前に `lake build` を回す。** tick 90 は Lean を書いたあと再ビルドせずに

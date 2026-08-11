@@ -1700,14 +1700,21 @@ K_1^{n}\cdot\hat{Y}_\mu & (n\text{ 偶数})
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
 -i\cdot (2K_2^*)^{n}\cdot\hat{Y}_\mu & (n\text{ 奇数}) \\
 (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 偶数})
-\end{cases} \\
+\end{cases}
+&&(\because\ n = 0\ \text{の項を分け、}\ n \geq 1\ \text{の各項へ「cosh, sinh の展開係数への変換」の (h2.z−)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\hat{Z}_\mu^{(-)}\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\hat{Y}_\mu\right) \\
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\hat{Y}_\mu\right)
+&&(\because\ (2K_2^*)^{0}\hat{Z}_\mu^{(-)} = \tfrac{1}{0!}\hat{Z}_\mu^{(-)}\ \text{なので}\ n = 0\ \text{の項を偶数側の和へ吸収した}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Z}_\mu^{(-)}
-   - i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Y}_\mu \\
+   - i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\hat{Y}_\mu
+&&(\because\ \hat{Z}_\mu^{(-)},\ \hat{Y}_\mu,\ -i\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
 &= \cosh(2K_2^*)\hat{Z}_\mu^{(-)} - i\sinh(2K_2^*)\hat{Y}_\mu
+&&(\because\ \text{「sinh, cosh のテイラー展開」})
 \end{aligned}`,
       ),
+      paragraph([
+        "鎖の終点は主張の (h2.z−) の右辺と字句どおり一致する。",
+      ]),
       paragraph(["(h2.y) について、"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1737,6 +1744,7 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         "4 式の最終形（cosh/sinh 表示）そのものも check_03_taylor_sums.sage で、級数を 40 次で打ち切って M=3,4,5・全 mu ∈ calM・複数の (K1,K2) について残差 1e-8 以下であることを確認済み。土台となる 1 重公式 (A)〜(D) は check_01_single_commutators.sage で確認した。",
         "原文 statement は (h1.y)/(h2.y) の左辺を「Σ (⋯)」と省略していたが、どの生成子でネストした交換子かが左辺だけで確定しないため、他の 2 式と同じ形へ明示的に書き下した。",
         "(h1.y) の鎖を (h1.z) と同じ「一続きの鎖＋行末の (∵ …)」の形へ揃えた（2026-08-11）。根拠の無かった 5 段すべてに行末の根拠を付け、鎖の終点が主張の (h1.y) の右辺と字句どおり一致することを地の文で述べた。段は減らしていない。残りは (h2.z−)・(h2.y) の 2 式である。",
+        "(h2.z−) の鎖を (h1.z)・(h1.y) と同じ「一続きの鎖＋行末の (∵ …)」の形へ揃えた（2026-08-11）。根拠の無かった 4 段すべてに行末の根拠を付け、鎖の終点が主張の (h2.z−) の右辺と字句どおり一致することを地の文で述べた。段は減らしていない。残りは (h2.y) の 1 式である。",
       ],
     },
   },

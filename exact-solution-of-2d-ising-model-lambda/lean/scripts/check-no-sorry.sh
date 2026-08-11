@@ -640,6 +640,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarConstEmbeddingPow
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.constant_embedding_pow_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarConstEmbeddingPow_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyEval_eq_eval
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalIndeterminatePow
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalIndeterminatePow_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

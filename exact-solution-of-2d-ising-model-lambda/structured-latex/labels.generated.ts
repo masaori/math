@@ -78,6 +78,7 @@ export const ALL_LABELS = [
   "claim_qbar_eigenspace_add",
   "claim_qbar_eigenspace_smul",
   "claim_qbar_eigenvector_pow",
+  "claim_qbar_evaluation_indeterminate_pow",
   "claim_qbar_geometric_telescope",
   "claim_qbar_identity_action",
   "claim_qbar_identity_matrix_unit",

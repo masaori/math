@@ -23890,6 +23890,104 @@ a & (j=k)\\
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_evaluation_indeterminate_pow",
+    kind: "claim",
+    title: {
+      text: "代入は不定元の冪を代数的数の冪へ写す",
+    },
+    labels: ["claim_qbar_evaluation_indeterminate_pow"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalIndeterminatePow",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.constant_embedding_pow_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyEvalIndeterminatePow_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-evaluation-indeterminate-pow"],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)=w^{\,n}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{aev}_{w}`),
+        " は ",
+        ref("def_qbar_poly_evaluation"),
+        "。左辺の冪は ",
+        ref("def_qbar_polynomial_ring"),
+        " で置いた ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の元の冪の約束、右辺の冪は ",
+        ref("def_root_of_unity_set"),
+        " で置いた ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元の冪の約束である）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`),
+        " を固定し、",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}\bigl(t^{\,0}\bigr)
+&=\mathrm{aev}_{w}(1)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{0}=1)\\
+&=1
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は単位元を保つ})\\
+&=w^{\,0}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1)
+\end{aligned}`),
+      paragraph([
+        "一歩（",
+        math(String.raw`n`),
+        " から ",
+        math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`\mathrm{aev}_{w}(t^{\,n})=w^{\,n}`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}\bigl(t^{\,n+1}\bigr)
+&=\mathrm{aev}_{w}\bigl(t^{\,n}t\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ t^{n+1}=t^{n}t)\\
+&=\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)\,\mathrm{aev}_{w}(t)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は積を保つ})\\
+&=w^{\,n}\,\mathrm{aev}_{w}(t)
+&&(\because\ \text{帰納法の仮定})\\
+&=w^{\,n}w
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w}(t)=w)\\
+&=w^{\,n+1}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w)
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、すべての ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この主張は、多項式の値を係数の有限和で書く次の段で、",
+        math(String.raw`\mathrm{aev}_{w}(t^{\,k})`),
+        " を ",
+        math(String.raw`w^{\,k}`),
+        " へ書き換えるために使う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
