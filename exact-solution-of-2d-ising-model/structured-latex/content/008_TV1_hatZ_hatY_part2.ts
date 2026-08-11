@@ -2267,22 +2267,44 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \alpha_1\alpha_2^{-1}
-&= (\tanh K_1\tanh K_2^*)\cdot((\tanh K_1)^{-1}\tanh K_2^*)^{-1} \\
-&= (\tanh K_1\tanh K_2^*)\cdot(\tanh K_1(\tanh K_2^*)^{-1}) \\
+&= (\tanh K_1\tanh K_2^*)\cdot((\tanh K_1)^{-1}\tanh K_2^*)^{-1}
+&& (\because\ \alpha_1,\alpha_2\ \text{の定義}) \\
+&= (\tanh K_1\tanh K_2^*)\cdot(\tanh K_1(\tanh K_2^*)^{-1})
+&& (\because\ \text{非零な積の逆数と逆数の逆数}) \\
+&= (\tanh K_1)^2\cdot\bigl(\tanh K_2^*(\tanh K_2^*)^{-1}\bigr)
+&& (\because\ \text{複素数の積の可換則と結合則}) \\
+&= (\tanh K_1)^2\cdot 1
+&& (\because\ \tanh K_2^*\neq0\ \text{と逆数の定義}) \\
 &= (\tanh K_1)^2
+&& (\because\ \text{積の単位元})
 \end{aligned}`,
       ),
       paragraph(["一方、"]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{c_1 - 1}{c_1 + 1}
-&= \frac{\cosh 2K_1 - 1}{\cosh 2K_1 + 1} \\
-&= \frac{2\sinh^2 K_1}{2\cosh^2 K_1} \quad (\because \cosh 2x - 1 = 2\sinh^2 x,\ \cosh 2x + 1 = 2\cosh^2 x) \\
+&= \frac{\cosh 2K_1 - 1}{\cosh 2K_1 + 1}
+&& (\because\ c_1=\cosh 2K_1) \\
+&= \frac{2\sinh^2 K_1}{2\cosh^2 K_1}
+&& (\because\ \cosh 2x-1=2\sinh^2x\ \text{と}\ \cosh 2x+1=2\cosh^2x) \\
+&= \frac{\sinh^2 K_1}{\cosh^2 K_1}
+&& (\because\ 2\neq0\ \text{より分子と分母の共通因子}\ 2\ \text{を約分}) \\
+&= \left(\frac{\sinh K_1}{\cosh K_1}\right)^2
+&& (\because\ \text{分数の積}) \\
 &= (\tanh K_1)^2
+&& (\because\ \tanh\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph(["よって、"]),
-      displayMath(String.raw`\frac{c_1 - 1}{c_1 + 1} = \alpha_1\alpha_2^{-1} \quad \cdots (\star)`),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{c_1 - 1}{c_1 + 1}
+&= (\tanh K_1)^2
+&& (\because\ \text{上の第 2 の計算}) \\
+&= \alpha_1\alpha_2^{-1}
+&& (\because\ \text{上の第 1 の計算を逆向きに使う})
+\end{aligned}\quad \cdots (\star)`,
+      ),
       paragraph(["Step 16: ", math(String.raw`\dfrac{2 s_1 c_2}{c_1 + 1} = \alpha_1 + \alpha_2^{-1}`), " の証明。まず"]),
       displayMath(
         String.raw`\begin{aligned}

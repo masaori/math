@@ -26320,15 +26320,42 @@ f
       ]),
       displayMath(String.raw`\prod_{r=0}^{j-1}(t-\widehat{w(r)})=(t-\widehat{w(i)})B`),
       paragraph([
-        "を満たす。したがって ", math(String.raw`h:=Bg`), " と置けば ",
-        math(String.raw`f=(t-\widehat{w(i)})h`), " かつ ",
-        math(String.raw`h=Bg`), " である。", math(String.raw`g`),
-        " の係数は番号 ", math(String.raw`n-j`), " で尽き、", math(String.raw`B`),
-        " は ", math(String.raw`j-1`), " 個の一次因子の積であるから、",
-        ref("claim_qbar_poly_linear_factor_coeff_bound"),
-        " をその各因子へ順に当てると、", math(String.raw`k>n-1`),
-        " ならば ", math(String.raw`\mathrm{ac}_k(h)=0`),
-        " である。特に ", math(String.raw`k>n`), " ならば零である。",
+        "を満たし、さらに ", math(String.raw`l\in\mathbb{N}`), " が ",
+        math(String.raw`j-1<l`), " を満たすならば ",
+        math(String.raw`\mathrm{ac}_l(B)=0`), " である。", math(String.raw`h:=Bg`),
+        " と置く。分解の等式は、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f
+&=\left(\prod_{r=0}^{j-1}(t-\widehat{w(r)})\right)g
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl((t-\widehat{w(i)})B\bigr)g
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_product_extract})\\
+&=(t-\widehat{w(i)})(Bg)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則})\\
+&=(t-\widehat{w(i)})h
+&&(\because\ h\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "となり、", math(String.raw`h=Bg`), " である。次に ",
+        math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`n-1<k`),
+        " を満たすとする。", math(String.raw`B`), " の係数は番号 ",
+        math(String.raw`j-1`), " で尽き、帰納法の仮定から ", math(String.raw`g`),
+        " の係数は番号 ", math(String.raw`n-j`), " で尽きる。また ",
+        math(String.raw`j\ge1`), " なので ",
+        math(String.raw`(j-1)+(n-j)=n-1`), " である。したがって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(h)
+&=\mathrm{ac}_k(Bg)
+&&(\because\ h\ \text{の取り方})\\
+&=0
+&&(\because\ \blkref{claim_qbar_poly_product_coeff_bound}\ \text{を係数の上界}\ j-1\ \text{と}\ n-j\ \text{へ当てる})
+\end{aligned}`),
+      paragraph([
+        "を得る。特に ", math(String.raw`k>n`), " ならば ",
+        math(String.raw`n-1<k`), " なので ", math(String.raw`\mathrm{ac}_k(h)=0`),
+        " である。",
         "ここで ", math(String.raw`\mathrm{aev}_{w(j)}(g)=0`),
         " だから、", ref("claim_qbar_poly_extracted_root_distinct"),
         " を ", math(String.raw`w(i)`), "、", math(String.raw`h`), "、",
