@@ -3669,6 +3669,12 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 132）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part A、Step 4 で同じ行に連結されていた
+2 つの等号を、Step 2・Step 3 の代入と各場合で $\pi$ を足す計算に分け、各行末に根拠を付けた。
+内容は変えていない。**この主張には Step 5 以降の根拠の無い式変形が残るため、次の tick は
+同じ主張の Step 5 から続ける。**
+
 **2026-08-12（tick 131）**: `008_TV1_hatZ_hatY_part2` の次の主張
 「$A(\theta_\mu)$ の対角化 $(P_\mu, D_\mu)$」（`diagonalization_P_D`）の Step 3 にある
 $\det P_\mu$ の計算（1 行に等号 2 つ・根拠は後置きの括弧書き $(2\sqrt{M})^2=4M$）を、

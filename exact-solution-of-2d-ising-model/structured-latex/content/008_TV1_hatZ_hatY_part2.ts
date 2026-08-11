@@ -2008,12 +2008,14 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
 0 & (\varphi = \pi) \\
 4\pi - 2\varphi & (\pi < \varphi < 2\pi)
 \end{cases}
-= \begin{cases}
+&& (\because\ \text{Step 2 と Step 3}) \\
+&= \begin{cases}
 \pi & (\varphi = 0) \\
 3\pi - 2\varphi & (0 < \varphi < \pi) \\
 \pi & (\varphi = \pi) \\
 5\pi - 2\varphi & (\pi < \varphi < 2\pi)
 \end{cases}
+&& (\because\ \text{各場合で}\ \pi\ \text{を足す})
 \end{aligned}`,
       ),
       paragraph([
@@ -2303,7 +2305,10 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
     ],
     conversion: {
       status: "converted",
-      notes: ["原文の Part A（Steps 1-8 の偏角場合分け）と Part B（Steps 9-18 の α1,α2 因数分解）を全ステップ復元。arg^[0,2π)(γ2(-θμ)) を φ と略記。"],
+      notes: [
+        "原文の Part A（Steps 1-8 の偏角場合分け）と Part B（Steps 9-18 の α1,α2 因数分解）を全ステップ復元。arg^[0,2π)(γ2(-θμ)) を φ と略記。",
+        "2026-08-12 の式変形統一で、Part A の Step 4 に同じ行で連結されていた 2 つの等号を、Step 2・Step 3 の代入と各場合で π を足す計算に分け、各行末に根拠を付けた。内容は変えていない。",
+      ],
     },
   },
   {
