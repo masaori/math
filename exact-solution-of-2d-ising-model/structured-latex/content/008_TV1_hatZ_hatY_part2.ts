@@ -2061,11 +2061,18 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
 &= \begin{cases}
 \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot\dfrac{1}{(\gamma_2(-\theta_\mu))^2}} & (0 \leq \text{sum} < 2\pi) \\
 -\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot\dfrac{1}{(\gamma_2(-\theta_\mu))^2}} & (2\pi \leq \text{sum} < 4\pi)
-\end{cases} \\
+\end{cases}
+&& (\because\ \text{根号と積の交換条件}) \\
+&= \begin{cases}
+\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot\dfrac{1}{(\gamma_2(-\theta_\mu))^2}} & (\varphi = 0 \text{ or } \tfrac{\pi}{2} < \varphi \leq \pi \text{ or } \tfrac{3\pi}{2} < \varphi < 2\pi) \\
+-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot\dfrac{1}{(\gamma_2(-\theta_\mu))^2}} & (0 < \varphi \leq \tfrac{\pi}{2} \text{ or } \pi < \varphi \leq \tfrac{3\pi}{2})
+\end{cases}
+&& (\because\ \text{Step 5 の 2 つの場合の記述}) \\
 &= \begin{cases}
 \sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}} & (\varphi = 0 \text{ or } \tfrac{\pi}{2} < \varphi \leq \pi \text{ or } \tfrac{3\pi}{2} < \varphi < 2\pi) \\
 -\sqrt{\dfrac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}} & (0 < \varphi \leq \tfrac{\pi}{2} \text{ or } \pi < \varphi \leq \tfrac{3\pi}{2})
 \end{cases}
+&& (\because\ \gamma_2(-\theta_\mu)\ne0\ \text{なので、分子と分母の共通因子}\ \gamma_2(-\theta_\mu)\ \text{を各場合で約分})
 \end{aligned}`,
       ),
       paragraph([

@@ -3707,6 +3707,13 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 134）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part A、Step 6 の 2 段目が、
+Step 5 の場合分けの代入と根号内の共通因子の約分を同時に行い、どちらの行にも根拠が無かった。
+場合分けだけを写す中間段を加え、根号と積の交換条件・Step 5・非零な共通因子の約分を
+各行末の根拠として分けた。内容は変えていない。
+**次の tick は同じ主張の Step 8 の組み合わせから続ける。**
+
 **2026-08-12（tick 133）**: `008_TV1_hatZ_hatY_part2` の主張
 「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part A、Step 5 の 8 つの場合の含意鎖
 （根拠なし）へ、Step 4 のどの場合を使ったか・各辺を $-2$ 倍して $3\pi$（$5\pi$）を足す
