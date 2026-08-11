@@ -1827,12 +1827,22 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
         String.raw`\begin{aligned}
 \det P_\mu
 &= \frac{+i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}\cdot\frac{1}{2\sqrt{M}}
- - \frac{-i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}\cdot\frac{1}{2\sqrt{M}} \\
+ - \frac{-i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}\cdot\frac{1}{2\sqrt{M}}
+&& (\because\ 2\times2\ \text{行列式の定義}) \\[4pt]
+&= \frac{i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)\cdot 2\sqrt{M}}
+ - \frac{-i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)\cdot 2\sqrt{M}}
+&& (\because\ \text{分数の積は、分子の積を分母の積で割ったもの}) \\[4pt]
+&= \frac{i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)\cdot 2\sqrt{M}}
+ + \frac{i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)\cdot 2\sqrt{M}}
+&& (\because\ \text{分子の負号を分数の外へ出し、負元を引くことは加えること}) \\[4pt]
+&= 2\cdot\frac{i\,t}{2\sqrt{M}\,\gamma_2(-\theta_\mu)\cdot 2\sqrt{M}}
+&& (\because\ \text{同じ項を 2 つ加えることは 2 倍すること}) \\[4pt]
 &= 2\cdot\frac{i\,t}{4M\,\gamma_2(-\theta_\mu)}
- = \frac{i\,t}{2M\,\gamma_2(-\theta_\mu)}
+&& (\because\ \text{積の可換性と}\ (2\sqrt{M})\cdot(2\sqrt{M})=4M\text{（}\sqrt{M}\ \text{の 2 乗は}\ M\text{）}) \\[4pt]
+&= \frac{i\,t}{2M\,\gamma_2(-\theta_\mu)}
+&& (\because\ \text{分子と分母を 2 で約分})
 \end{aligned}`,
       ),
-      paragraph(["（", math(String.raw`(2\sqrt{M})^2 = 4M`), " を使った。）"]),
       paragraph([
         "Step 4: ",
         math(String.raw`\det P_\mu \neq 0`),
@@ -1902,6 +1912,8 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
           "γ_2(θ_μ) ≠ 0（ゆえに根号の中身 -|γ_2(θ_μ)|^2 ≠ 0）と M ≥ 1 の下で非零であることを示すステップを追加した。" +
           "あわせて、原文が 1 行で済ませていた『固有ベクトルに任意定数を代入する』段も、任意定数 c の選択が可能である" +
           "こと（γ_2(-θ_μ) ≠ 0）と AP = PD から A = PDP^{-1} への移行に分けて書いた。",
+        "2026-08-12 の式変形統一で、Step 3 の det P_μ の計算（1 行に等号 2 つ・根拠は後置きの括弧書き）を、" +
+          "行列式の定義・分数の積・負号の整理・同じ項の和・√M の 2 乗・約分を各行末の根拠にした 6 段の鎖へ開いた。内容は変えていない。",
       ],
     },
   },
