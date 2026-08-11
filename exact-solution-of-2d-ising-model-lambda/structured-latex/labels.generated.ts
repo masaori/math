@@ -96,6 +96,7 @@ export const ALL_LABELS = [
   "claim_qbar_mul_pow",
   "claim_qbar_no_zero_divisors",
   "claim_qbar_poly_indeterminate_power_coefficient",
+  "claim_qbar_poly_linear_factor_cancellation",
   "claim_qbar_poly_monomial_decomposition",
   "claim_qbar_poly_power_difference_factorization",
   "claim_qbar_pow_diff_quotient_root_value",

@@ -25404,6 +25404,150 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_linear_factor_cancellation",
+    kind: "claim",
+    title: { text: "一次因子は消去できる" },
+    labels: ["claim_qbar_poly_linear_factor_cancellation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-linear-factor-cancellation"],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`A,B\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`n\in\mathbb{N}`), " を、", math(String.raw`k>n`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(A)=0`), " かつ ",
+        math(String.raw`\mathrm{ac}_k(B)=0`), " となるように取り、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`(t-\widehat{w})A=(t-\widehat{w})B\ \text{ならば}\ A=B`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"),
+        "）。すなわち一次因子との積が等しい 2 つの多項式は等しい。これは、",
+        ref("claim_qbar_factor_theorem"),
+        " の等式を満たす多項式が式で指定した商のほかに無いこと（商の一意性）を出すための道具であり、",
+        "根の個数の下界の帰納法で、一次因子を除いた商へ残りの根を移す段が使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、一次式 ", math(String.raw`t-\widehat{w}\in\overline{\mathbb{Q}}[t]`),
+        " の係数を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0(t-\widehat{w})
+&=\mathrm{ac}_0(t)-\mathrm{ac}_0(\widehat{w})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数と加法の逆元})\\
+&=0-w
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の}\ \mathrm{ac}_j(t)\ \text{と}\ \blkref{def_qbar_constant_embedding})\\
+&=-w
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との差})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_1(t-\widehat{w})
+&=\mathrm{ac}_1(t)-\mathrm{ac}_1(\widehat{w})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数と加法の逆元})\\
+&=1-0
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の}\ \mathrm{ac}_1(t)=1\ \text{と}\ \blkref{def_qbar_constant_embedding})\\
+&=1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との差})
+\end{aligned}`),
+      paragraph([
+        "また、", math(String.raw`i\in\mathbb{N}`), " が ", math(String.raw`i\ge2`),
+        " を満たすとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_i(t-\widehat{w})
+&=\mathrm{ac}_i(t)-\mathrm{ac}_i(\widehat{w})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数と加法の逆元})\\
+&=0-0
+&&(\because\ i\ne1\ \text{なので}\ \mathrm{ac}_i(t)=0\text{。}\ i\ge1\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{w})=0)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との差})
+\end{aligned}`),
+      paragraph([
+        "つづいて準備として、任意の ", math(String.raw`C\in\overline{\mathbb{Q}}[t]`),
+        " と任意の ", math(String.raw`m\in\mathbb{N}`),
+        " について、一次因子との積の番号 ", math(String.raw`m+1`),
+        " の係数を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+1}\bigl((t-\widehat{w})C\bigr)
+&=\sum_{i=0}^{m+1}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{m+1-i}(C)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数})\\
+&=\mathrm{ac}_0(t-\widehat{w})\cdot\mathrm{ac}_{m+1}(C)
++\mathrm{ac}_1(t-\widehat{w})\cdot\mathrm{ac}_{m}(C)
++\sum_{i=2}^{m+1}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{m+1-i}(C)
+&&(\because\ \text{有限和から番号}\ 0,1\ \text{の項を取り出す。}\ m=0\ \text{のとき第 3 の和は空で零元})\\
+&=(-w)\cdot\mathrm{ac}_{m+1}(C)+1\cdot\mathrm{ac}_{m}(C)
++\sum_{i=2}^{m+1}0\cdot\mathrm{ac}_{m+1-i}(C)
+&&(\because\ \text{準備で計算した一次式の係数を各項へ同時に当てる})\\
+&=(-w)\cdot\mathrm{ac}_{m+1}(C)+\mathrm{ac}_{m}(C)+0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の単位元・零元の積と、零元の有限和})\\
+&=\mathrm{ac}_{m}(C)+(-w)\cdot\mathrm{ac}_{m+1}(C)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の和の可換則と零元との和})
+\end{aligned}`),
+      paragraph([
+        "本体は ", math(String.raw`j\in\mathbb{N}`), " についての帰納法である。示す言明は、",
+      ]),
+      displayMath(String.raw`P(j):\ \text{任意の}\ k\in\mathbb{N}\ \text{について、}\ k+j\ge n+1\ \text{ならば}\ \mathrm{ac}_k(A)=\mathrm{ac}_k(B)`),
+      paragraph([
+        "である。出発点 ", math(String.raw`P(0)`), " を示す。",
+        math(String.raw`k+0\ge n+1`), " を満たす ", math(String.raw`k\in\mathbb{N}`),
+        " を任意に取ると ", math(String.raw`k>n`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(A)
+&=0
+&&(\because\ k>n\ \text{と本主張の係数の仮定})\\
+&=\mathrm{ac}_k(B)
+&&(\because\ k>n\ \text{と本主張の係数の仮定})
+\end{aligned}`),
+      paragraph([
+        "一歩を示す。", math(String.raw`P(j)`), " を仮定して ",
+        math(String.raw`P(j+1)`), " を示す。",
+        math(String.raw`k+(j+1)\ge n+1`), " を満たす ",
+        math(String.raw`k\in\mathbb{N}`), " を任意に取る。",
+        math(String.raw`k+j\ge n+1`), " の場合は、帰納法の仮定 ",
+        math(String.raw`P(j)`), " がそのまま ",
+        math(String.raw`\mathrm{ac}_k(A)=\mathrm{ac}_k(B)`),
+        " を与える。残る場合は ", math(String.raw`k+j+1=n+1`),
+        " の場合である。このとき ", math(String.raw`(k+1)+j\ge n+1`),
+        " が成り立つことに注意して、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(A)
+&=\bigl(\mathrm{ac}_k(A)+(-w)\cdot\mathrm{ac}_{k+1}(A)\bigr)-(-w)\cdot\mathrm{ac}_{k+1}(A)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元と結合則})\\
+&=\mathrm{ac}_{k+1}\bigl((t-\widehat{w})A\bigr)-(-w)\cdot\mathrm{ac}_{k+1}(A)
+&&(\because\ \text{準備で計算した一次因子との積の係数})\\
+&=\mathrm{ac}_{k+1}\bigl((t-\widehat{w})B\bigr)-(-w)\cdot\mathrm{ac}_{k+1}(A)
+&&(\because\ \text{本主張の仮定}\ (t-\widehat{w})A=(t-\widehat{w})B)\\
+&=\mathrm{ac}_{k+1}\bigl((t-\widehat{w})B\bigr)-(-w)\cdot\mathrm{ac}_{k+1}(B)
+&&(\because\ (k+1)+j\ge n+1\ \text{と帰納法の仮定}\ P(j))\\
+&=\bigl(\mathrm{ac}_k(B)+(-w)\cdot\mathrm{ac}_{k+1}(B)\bigr)-(-w)\cdot\mathrm{ac}_{k+1}(B)
+&&(\because\ \text{準備で計算した一次因子との積の係数})\\
+&=\mathrm{ac}_k(B)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元と結合則})
+\end{aligned}`),
+      paragraph([
+        "これで帰納法が閉じ、任意の ", math(String.raw`j\in\mathbb{N}`),
+        " について ", math(String.raw`P(j)`), " が成り立つ。特に ",
+        math(String.raw`P(n+1)`), " を取ると、任意の ",
+        math(String.raw`k\in\mathbb{N}`), " が ",
+        math(String.raw`k+(n+1)\ge n+1`), " を満たすので、すべての ",
+        math(String.raw`k\in\mathbb{N}`), " で ",
+        math(String.raw`\mathrm{ac}_k(A)=\mathrm{ac}_k(B)`), " である。",
+        ref("def_qbar_polynomial_ring"),
+        " の「係数がすべて等しい 2 つの多項式は等しい」から ",
+        math(String.raw`A=B`), " を得る。",
+        "この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25674,6 +25818,10 @@ w^{\,1}
           ref("claim_root_polynomial_factor_quotient"),
           "）、および因数定理の商のもとの根における値が零でないこと（単根性。",
           ref("claim_root_factor_quotient_value_ne_zero"),
+          "）、および 1 乗して 1 になる代数的数が 1 だけであること（下界の帰納法の出発点。",
+          ref("claim_first_root_of_unity_set"),
+          "）、および一次因子が消去できること（",
+          ref("claim_qbar_poly_linear_factor_cancellation"),
           "）までは上で済んでいる。次に書くのは、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
