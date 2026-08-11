@@ -22370,6 +22370,126 @@ w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_geometric_telescope",
+    kind: "claim",
+    title: {
+      text: "代数的数の冪の有限和は、1 を引いたものを掛けると伸縮する",
+    },
+    labels: ["claim_qbar_geometric_telescope"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_telescope_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-geometric-telescope"],
+    statement: [
+      paragraph([
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取り、",
+        math(String.raw`n\in\mathbb{N}`),
+        " を任意に取る。",
+      ]),
+      displayMath(
+        String.raw`G_{n}(z):=\sum_{k=0}^{n-1}z^{k}\in\overline{\mathbb{Q}}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`n=0`),
+        " のときは空和であり ",
+        math(String.raw`G_{0}(z)=0`),
+        "、",
+        math(String.raw`n+1`),
+        " のときは ",
+        math(String.raw`G_{n+1}(z)=G_{n}(z)+z^{n}`),
+        " である）。このとき",
+      ]),
+      displayMath(String.raw`(z-1)\,G_{n}(z)=z^{n}-1`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z\in\overline{\mathbb{Q}}`),
+        " を固定し、",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（",
+        math(String.raw`n=0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(z-1)\,G_{0}(z)&=(z-1)\cdot 0
+&&(\because\ G_{0}(z)\ \text{は空和である})\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&=1-1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
+&=z^{0}-1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+\end{aligned}`),
+      paragraph([
+        "一歩（",
+        math(String.raw`n`),
+        " から ",
+        math(String.raw`n+1`),
+        " へ）。",
+        math(String.raw`(z-1)\,G_{n}(z)=z^{n}-1`),
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(z-1)\,G_{n+1}(z)&=(z-1)\bigl(G_{n}(z)+z^{n}\bigr)
+&&(\because\ G_{n+1}(z)\ \text{の定義})\\
+&=(z-1)\,G_{n}(z)+(z-1)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=(z^{n}-1)+(z-1)z^{n}
+&&(\because\ \text{帰納法の仮定})\\
+&=(z^{n}-1)+\bigl(z\,z^{n}-1\cdot z^{n}\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=(z^{n}-1)+\bigl(z^{n+1}-z^{n}\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z\ \text{と}\ 1\ \text{が積の単位元であること})\\
+&=z^{n+1}-1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}\ \text{が相殺する})
+\end{aligned}`),
+      paragraph([
+        "出発点と一歩により、すべての ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。",
+      ]),
+      paragraph([
+        "この段が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）と、",
+        "積が和へ分配されること、積の単位元があること、そして零元との積が零元であることだけである。",
+        "積の可換則も、積の逆元の存在も、代数閉であることも使っていない（",
+        math(String.raw`z`),
+        " は自分自身の冪とだけ掛け合わされる）。",
+        "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
+      ]),
+      paragraph([
+        "これは、",
+        math(String.raw`\mu_{n}`),
+        "（",
+        ref("def_root_of_unity_set"),
+        "）の元 ",
+        math(String.raw`z`),
+        " が ",
+        math(String.raw`z\ne1`),
+        " を満たすとき ",
+        math(String.raw`G_{n}(z)=0`),
+        " を出すための足場である（",
+        math(String.raw`z^{n}-1=0`),
+        " と、体に零因子が無いことによる）。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -22597,6 +22717,8 @@ w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
           ref("claim_root_of_unity_mul_map_bijective"),
           "）、および 1 の冪根の全体にわたる冪の和が 1 の冪根の冪を掛けても動かないこと（",
           ref("claim_root_of_unity_power_sum_invariant"),
+          "）、および代数的数の冪の有限和が 1 を引いたものを掛けると伸縮すること（",
+          ref("claim_qbar_geometric_telescope"),
           "）までは上で済んでいる。",
           "次に書くのは ",
           math(String.raw`\mu_n`),
