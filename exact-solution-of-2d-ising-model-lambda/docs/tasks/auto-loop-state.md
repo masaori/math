@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 132 は、tick 131 の「一次因子との積の係数は、上の番号で零である」を
+  四層すべて突き合わせて修正不要と確認し、d4b2b「一次因子との積の先頭の係数は、もとの先頭の
+  係数である」を四層すべてで完了させた。** 本文は積の番号 $m+1$ の係数を開き、
+  $\mathrm{ac}_{m+1}(C)=0$ を当て、零元との積・和を順に処理する 4 段の鎖である。
+  必要十分版は任意の可換環で通り、体・代数閉性は不要である。検証は全通過
+  （構造化テキスト 262 ラベル・PDF 132 ページで未解決参照 0 件・検証と証明の対応 116 件・
+  SageMath 新設の `qbar-poly-linear-factor-leading-coeff`・`lake build`・sorry 検査 658 件）。
+  次に進めるのは d4b2c（取った根が既出の根と相異なること）である。
+
 - **2026-08-12 の tick 131 は、tick 130 の「一次因子は消去できる」の Lean（具体版・必要十分版・
   導出）を本文と突き合わせて修正不要と確認し、旧セクション 10h3d-c4b-d4b2（下界の帰納法本体）を
   4 つの論法（係数の上界・先頭の係数の維持・根の相異・帰納法本体）で
@@ -1505,7 +1514,7 @@
 | 10h3d-c4b-d4b1 | 固有値の代数性 | 一次因子は消去できること（$(t-\widehat{w})A=(t-\widehat{w})B$ ならば $A=B$。係数の番号を上から下へ辿る帰納法 1 本） | done | 本文と SageMath（`qbar-poly-linear-factor-cancellation`）は 2026-08-12 の tick 129、Lean 具体版・必要十分版・導出は tick 130。主張 1 件 `claim_qbar_poly_linear_factor_cancellation`。因数定理の商の一意性（帰納法の一歩で「取った根が商の根でない」を出すのに使う）の道具。必要十分版は可換環で足り、体・代数閉性は不要 |
 | 10h3d-c4b-d4b1L | 固有値の代数性 | 同主張の Lean 具体版と必要十分版 | done | 2026-08-12 の tick 130。具体版 `qbarPolyLinearFactorCancellation`、必要十分版 `poly_linear_factor_cancellation_necSuf`、導出 `qbarPolyLinearFactorCancellation_from_necSuf` |
 | 10h3d-c4b-d4b2a | 固有値の代数性 | 一次因子との積の係数は、上の番号で零であること（$k>m$ で $\mathrm{ac}_k(C)=0$ ならば $k>m+1$ で $\mathrm{ac}_k((t-\widehat{w})C)=0$。有限和の計算の鎖 1 本） | done | 2026-08-12 の tick 131 で四層すべて完了。主張 1 件 `claim_qbar_poly_linear_factor_coeff_bound`。SageMath は `qbar-poly-linear-factor-coeff-bound`。Lean 具体版 `qbarPolyLinearFactorCoeffBound`、必要十分版 `poly_linear_factor_coeff_bound_necSuf`（可換環で足りる。体・代数閉性は不要）、導出 `qbarPolyLinearFactorCoeffBound_from_necSuf`。帰納法本体（d4b2d）が一次因子を掛け重ねた積へ d4b1 の消去を当てるときの係数の仮定を供給する |
-| 10h3d-c4b-d4b2b | 固有値の代数性 | 一次因子との積の先頭の係数はもとの先頭の係数であること（$\mathrm{ac}_{m+1}((t-\widehat{w})C)=\mathrm{ac}_m(C)$。同種の計算の鎖 1 本） | todo | d4b1 の準備の積の係数公式と $\mathrm{ac}_{m+1}(C)=0$ から出る。分解の帰納法（d4b2d）が商のモニック性（先頭の係数が 1 であること）を保つのに使う |
+| 10h3d-c4b-d4b2b | 固有値の代数性 | 一次因子との積の先頭の係数はもとの先頭の係数であること（$\mathrm{ac}_{m+1}((t-\widehat{w})C)=\mathrm{ac}_m(C)$。同種の計算の鎖 1 本） | done | 2026-08-12 の tick 132 で四層すべて完了。主張 1 件 `claim_qbar_poly_linear_factor_leading_coeff`。SageMath は `qbar-poly-linear-factor-leading-coeff`。Lean 具体版 `qbarPolyLinearFactorLeadingCoeff`、必要十分版 `poly_linear_factor_leading_coeff_necSuf`（可換環で足りる。体・代数閉性は不要）、導出 `qbarPolyLinearFactorLeadingCoeff_from_necSuf`。分解の帰納法（d4b2d）が商の先頭の係数 1 を保つために使う |
 | 10h3d-c4b-d4b2c | 固有値の代数性 | 取った根は既出の根と相異なること（$f=t^{\,n}+\widehat{-1}$ の分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ で、$g$ の根 $w$ は各 $w_i$ と異なる。背理法 1 本） | todo | $w=w_i$ と仮定すると、積を並べ替えて $f=(t-\widehat{w_i})h$ とし、d4b1 の消去で $h$ を因数定理の商（d3e1 により $K_n(w_i)$）と同定する。$\mathrm{aev}_{w_i}(h)$ は評価の乗法性から因子 $\mathrm{aev}_{w_i}(g)=0$ を含み零、一方 d3e2 の単根性から非零で矛盾 |
 | 10h3d-c4b-d4b2d | 固有値の代数性 | 分解を構成する帰納法本体（$j\le n$ について、相異なる $w_1,\dots,w_j\in\mu_n$ と係数上界 $n-j$・先頭の係数 1 の商 $g$ による分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ が存在する。$j$ についての帰納法 1 本） | todo | 一歩は、$j<n$ なら先頭の係数 1 から $g\ne0$・次数 1 以上を出し、代数閉であること（`def_algebraic_numbers`）で根 $w$ を取り、因数定理（`claim_qbar_factor_theorem`）で割り、d4b2a・d4b2b で係数上界とモニック性を保ち、d4b2c で相異なることを保つ。$j=n$ が下界 $\lvert\mu_n\rvert\ge n$ を与える（組み立ては d5） |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | todo | 組み立ての段。新しい論法は持たない見込み |
@@ -1521,6 +1530,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 132）: d4b2b「一次因子との積の先頭の係数は、もとの先頭の係数である」を
+  四層すべてで完了した。人手証明と SageMath は積の係数公式、上の番号の係数の零性、零元との積、
+  零元との和を同じ 4 段で辿る。Lean の具体版も同じ 4 段であり、必要十分版は同じ手順が任意の
+  可換環で通ることを示した。これで分解の帰納法本体に必要な係数上界と先頭係数の維持が揃った。
 
 - 2026-08-12（tick 131）: 旧セクション 10h3d-c4b-d4b2（根の個数の下界の帰納法本体）は、
   一次因子との積の係数の上界（有限和の計算の鎖）、先頭の係数の維持（同種の鎖）、
@@ -5049,6 +5063,12 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 132）: tick 131 の「一次因子との積の係数は、上の番号で零である」の本文・
+  SageMath・Lean 具体版・必要十分版・導出を突き合わせた。本文の準備 3 段と本体 6 段は
+  SageMath の assertion に対応し、Lean は同じ積の係数公式へ係数の仮定を 2 回当てていた。
+  sorry 検査への 3 件の登録、本文の `lean` フィールド、本文末尾の済み一覧も揃っていた。
+  修正は無かった。
 
 - 2026-08-12（tick 131）: tick 130 の「一次因子は消去できる」の Lean 具体版・必要十分版・導出を
   本文と突き合わせた。具体版の帰納法 $P(j)$・出発点・一歩の 6 段の calc は本文の鎖と 1 対 1 に

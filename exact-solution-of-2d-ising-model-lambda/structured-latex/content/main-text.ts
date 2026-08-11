@@ -25639,6 +25639,60 @@ w^{\,1}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_poly_linear_factor_leading_coeff",
+    kind: "claim",
+    title: { text: "一次因子との積の先頭の係数は、もとの先頭の係数である" },
+    labels: ["claim_qbar_poly_linear_factor_leading_coeff"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-poly-linear-factor-leading-coeff"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorLeadingCoeff",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.poly_linear_factor_leading_coeff_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarPolyLinearFactorLeadingCoeff_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`C\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`m\in\mathbb{N}`), " を、", math(String.raw`k>m`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(C)=0`),
+        " となるように取り、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）を任意に取る。このとき、",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{m+1}\bigl((t-\widehat{w})C\bigr)=\mathrm{ac}_{m}(C)`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"),
+        "）。すなわち一次因子を掛けると、先頭の係数は変わらず、係数の尽きる番号だけが 1 つ上がる。",
+        "これは根の個数の下界の帰納法で、商の先頭の係数が 1 であることを保つための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ", ref("def_qbar_polynomial_ring"), " の係数であり、値の計算はすべて ",
+        math(String.raw`\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"), "）の中で行う。",
+        "一次因子との積の番号 ", math(String.raw`m+1`),
+        " の係数を積の係数公式で開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+1}\bigl((t-\widehat{w})C\bigr)
+&=\mathrm{ac}_{m}(C)+(-w)\cdot\mathrm{ac}_{m+1}(C)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数と}\ \blkref{def_qbar_constant_embedding}\ \text{の係数})\\
+&=\mathrm{ac}_{m}(C)+(-w)\cdot0
+&&(\because\ m+1>m\ \text{と本主張の係数の仮定})\\
+&=\mathrm{ac}_{m}(C)+0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積})\\
+&=\mathrm{ac}_{m}(C)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との和})
+\end{aligned}`),
+      paragraph([
+        "これで主張が示された。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -25915,6 +25969,8 @@ w^{\,1}
           ref("claim_qbar_poly_linear_factor_cancellation"),
           "）、および一次因子との積の係数が上の番号で零であること（",
           ref("claim_qbar_poly_linear_factor_coeff_bound"),
+          "）、および一次因子との積の先頭の係数がもとの先頭の係数であること（",
+          ref("claim_qbar_poly_linear_factor_leading_coeff"),
           "）までは上で済んでいる。次に書くのは、",
           math(String.raw`t^{\,n}+\widehat{-1}`),
           " が ",
