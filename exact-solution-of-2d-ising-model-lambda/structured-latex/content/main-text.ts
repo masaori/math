@@ -27720,6 +27720,81 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)=b
   },
 
   {
+    id: "fisher_zero_claim_dual_broken_edges_even",
+    kind: "claim",
+    title: { text: "破れた辺の双対像は偶部分グラフである" },
+    labels: ["claim_dual_broken_edges_even"],
+    habitat: "N",
+    verification: ["sagemath/check/dual-broken-edges-even"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、配位 ", math(String.raw`\sigma\in\Sigma_L`),
+        " を任意に取る。破れた辺集合の双対像を",
+      ]),
+      displayMath(String.raw`A_\sigma:=\delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)\subseteq E_L`),
+      paragraph(["と置く。このとき ", math(String.raw`\operatorname{Even}_L(A_\sigma)`), " である。"]),
+    ],
+    proof: [
+      paragraph([
+        "頂点 ", math(String.raw`(i,j)\in V_L`), " を任意に取る。辺 ", math(String.raw`e\in E_L`),
+        " について、", math(String.raw`e\in A_\sigma`), " ならば ", math(String.raw`a_\sigma(e):=1`),
+        "、そうでなければ ", math(String.raw`a_\sigma(e):=0`), " と定める。また、",
+        math(String.raw`e\in\mathcal{B}_L(\sigma)`), " ならば ", math(String.raw`q_\sigma(e):=1`),
+        "、そうでなければ ", math(String.raw`q_\sigma(e):=0`), " と定める。すると ",
+        ref("def_broken_edge_set"), " より",
+      ]),
+      displayMath(String.raw`(-1)^{q_\sigma(e)}
+=\sigma\bigl(\partial_0(e)\bigr)\sigma\bigl(\partial_1(e)\bigr)
+\quad(\because\ \sigma\ \text{の値は }+1\text{ または }-1)`),
+      paragraph([ref("def_edge_subset_incidence_count"), " と ", ref("def_dual_edge_map"), " を順に開くと"]),
+      displayMath(String.raw`\begin{aligned}
+d_{A_\sigma}(i,j)
+&=\sum_{\substack{e\in A_\sigma,\ a\in\{0,1\}\\ \partial_a(e)=(i,j)}}1
+&&(\because\ \blkref{def_edge_subset_incidence_count})\\
+&=a_\sigma\bigl(n_{\mathrm h}(i,j)\bigr)
+ +a_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)
+ +a_\sigma\bigl(n_{\mathrm v}(i,j)\bigr)
+ +a_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
+&&(\because\ \text{端点写像})\\
+&=q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
+ +q_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)
+ +q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j-\bar1)\bigr)
+ +q_\sigma\bigl(n_{\mathrm h}(i-\bar1,j-\bar1)\bigr)
+&&(\because\ A_\sigma=\delta_L(\mathcal{B}_L(\sigma))\ \text{と}\ \blkref{def_dual_edge_map})
+\end{aligned}`),
+      paragraph([
+        "最後の右辺に現れる四辺を、書かれた順に ", math(String.raw`e_1,e_2,e_3,e_4`),
+        " と書く（辺が一致する場合も四つの位置は保つ）。これらは、頂点 ", math(String.raw`(i-\bar1,j-\bar1)`), "、",
+        math(String.raw`(i-\bar1,j)`), "、", math(String.raw`(i,j)`), "、",
+        math(String.raw`(i,j-\bar1)`), " をこの順に結ぶ一つの格子面の境界である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-1)^{d_{A_\sigma}(i,j)}
+&=\prod_{r=1}^{4}(-1)^{q_\sigma(e_r)}
+&&(\because\ d_{A_\sigma}(i,j)\ \text{についての直前の等式})\\
+&=\prod_{r=1}^{4}
+  \sigma\bigl(\partial_0(e_r)\bigr)\sigma\bigl(\partial_1(e_r)\bigr)
+&&(\because\ (-1)^{q_\sigma(e)}\ \text{についての等式})\\
+&=\sigma(i-\bar1,j-\bar1)^2\sigma(i-\bar1,j)^2
+  \sigma(i,j)^2\sigma(i,j-\bar1)^2
+&&(\because\ \text{各頂点は境界の二つの端点として現れる})\\
+&=1
+&&(\because\ \sigma(v)\in\{+1,-1\})
+\end{aligned}`),
+      paragraph([
+        "自然数 ", math(String.raw`n`), " について ", math(String.raw`(-1)^n=1`),
+        " であることと ", math(String.raw`n`), " が偶数であることは同値なので、ある ",
+        math(String.raw`k_{i,j}\in\mathbb{N}`), " が存在して",
+      ]),
+      displayMath(String.raw`d_{A_\sigma}(i,j)=2k_{i,j}`),
+      paragraph([
+        "となる。頂点は任意だったから ", ref("def_even_edge_subset"), " より ",
+        math(String.raw`\operatorname{Even}_L(A_\sigma)`), " である。全過程は有限集合・自然数・整数の積だけで閉じる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

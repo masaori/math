@@ -4818,22 +4818,37 @@ T_{(V)}(I)
         " であるから、",
       ]),
       displayMath(
-        String.raw`\mathrm{Mat}(2^M,\mathbb{C})
-= \mathcal{A}
-\subseteq \mathcal{E}
-\subseteq \mathrm{Mat}(2^M,\mathbb{C})
-\quad (\because \text{Z\_Y\_generate\_algebra})`,
+        String.raw`\begin{aligned}
+\mathrm{Mat}(2^M,\mathbb{C})
+&= \mathcal{A}
+&& (\because \text{Z\_Y\_generate\_algebra}) \\
+&\subseteq \mathcal{E}
+&& (\because \mathcal{E}\ \text{は生成元を含み、和・スカラー倍・積について閉じ、単位元を含む}) \\
+&\subseteq \mathrm{Mat}(2^M,\mathbb{C})
+&& (\because \mathcal{E}\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph([
-        "すなわち ",
-        math(String.raw`\mathcal{E} = \mathrm{Mat}(2^M,\mathbb{C})`),
-        " である。これは、任意の ",
-        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " について ",
-        math(String.raw`T_{(V)}(x) = T_{(V')}(x)`),
-        "、すなわち",
+        "したがって",
       ]),
-      displayMath(String.raw`T_{(V)} = T_{(V')}`),
+      displayMath(
+        String.raw`\mathcal{E} = \mathrm{Mat}(2^M,\mathbb{C})
+\quad (\because\ \text{二つの包含による集合の相等})`,
+      ),
+      paragraph([
+        "である。任意の ",
+        math(String.raw`x \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_{(V)}(x) = T_{(V')}(x)
+\quad (\because\ x\in\mathcal{E}\ \text{と}\ \mathcal{E}\ \text{の定義})`,
+      ),
+      paragraph(["なので"]),
+      displayMath(
+        String.raw`T_{(V)} = T_{(V')}
+\quad (\because\ \text{写像の相等は全ての入力での値の相等})`,
+      ),
       paragraph(["が成り立つことを意味する。"]),
     ],
     conversion: {
@@ -4843,6 +4858,7 @@ T_{(V)}(I)
         "移行漏れだった証明を _old/typst の原本（038_claim_T_V_eq_T_Vprime.typ）から復旧。Step 1〜4 を圧縮せず全ステップ再現した。",
         "原文の statement は「任意の x に対して T_((V))(x) = T_((V'))(x)」であり、構造化側にあった「V x V^{-1} = V' x V'^{-1}」という別表記を原文どおりに戻した（V x V^{-1} = T_V(x) であることは Step 1 の T_((V)) = T_V を経由して初めて言えるため、statement 段階では原文の形が正しい）。",
         "原文の T_((V_2)) は、構造化側の def_T_V が用いる T_{V_2} の表記に統一した。",
+        "2026-08-12 の式変形統一で、Step 4 の包含鎖を一行一関係へ分け、生成部分代数の最小性・集合の相等・各点での写像の相等・写像の外延性をそれぞれ独立した行と行末根拠へ開いた。内容は変えていない。",
       ],
     },
   },

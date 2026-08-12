@@ -21,6 +21,7 @@ export const ALL_LABELS = [
   "claim_cross_orbit_inversions_even",
   "claim_cross_orbit_ordered_card",
   "claim_determinant_diagonal",
+  "claim_dual_broken_edges_even",
   "claim_dual_edge_map_bijective",
   "claim_edge_row_partition",
   "claim_even_subgraph_spin_sum",
