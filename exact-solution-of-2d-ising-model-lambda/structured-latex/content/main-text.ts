@@ -26507,6 +26507,58 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_power_of_multiple",
+    kind: "claim",
+    title: {
+      text: "指数が根の次数の倍数ならば 1 の冪根の冪は 1 である",
+    },
+    labels: ["claim_root_of_unity_power_of_multiple"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerOfMultiple",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_multiple_eq_one_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerOfMultiple_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-power-of-multiple"],
+    statement: [
+      paragraph([
+        math(String.raw`n,m\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " および ", math(String.raw`n\mid m`), " を満たすとし、",
+        math(String.raw`w\in\mu_n`), "（", ref("def_root_of_unity_set"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`w^{m}=1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n\mid m`), " より、", math(String.raw`m=nk`),
+        " を満たす ", math(String.raw`k\in\mathbb{N}`), " を取る。また ",
+        math(String.raw`w\in\mu_n`), " より ", math(String.raw`w^n=1`),
+        " である（", ref("def_root_of_unity_set"), "）。したがって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{m}
+&=w^{nk}
+&&(\because\ m=nk)\\
+&=(w^n)^k
+&&(\because\ \overline{\mathbb{Q}}\ \text{の冪の法則})\\
+&=1^k
+&&(\because\ w^n=1)\\
+&=1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の単位元の冪})
+\end{aligned}`),
+      paragraph([
+        "この段が ", math(String.raw`\overline{\mathbb{Q}}`),
+        " について使っているのは、自然数を指数とする冪について ",
+        math(String.raw`w^{nk}=(w^n)^k`), " と ", math(String.raw`1^k=1`),
+        " が成り立つことだけである。加法・零元・分配則・逆元・体・代数閉性は使わない。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

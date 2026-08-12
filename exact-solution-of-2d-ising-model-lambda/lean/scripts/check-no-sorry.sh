@@ -742,6 +742,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.powerSumZero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_sum_zero_necSuf
   Ising2DLambda.AlgebraicEigenvalue.powerSumZero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerOfMultiple
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_multiple_eq_one_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerOfMultiple_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

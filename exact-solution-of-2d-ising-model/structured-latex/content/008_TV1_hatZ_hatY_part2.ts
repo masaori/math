@@ -2756,7 +2756,15 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         math(String.raw`\theta`),
         " に依存するから、",
       ]),
-      displayMath(String.raw`\gamma_2(\theta + 2k\pi) = \gamma_2(\theta) \qquad (k \in \mathbb{Z},\ \theta \in \mathbb{R})`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta+2k\pi)
+&=i e^{i(\theta+2k\pi)}s_2^*\bigl(c_1\cos(\theta+2k\pi)-i\sin(\theta+2k\pi)-s_1c_2\bigr)
+&& (\because\ \gamma_2\ \text{の定義})\\
+&=i e^{i\theta}s_2^*\bigl(c_1\cos\theta-i\sin\theta-s_1c_2\bigr)
+&& (\because\ e^{i\theta},\cos\theta,\sin\theta\ \text{の}\ 2\pi\ \text{周期性})\\
+&=\gamma_2(\theta)
+&& (\because\ \gamma_2\ \text{の定義})
+\end{aligned}`),
       paragraph([
         "Step 0-2: ",
         math(String.raw`\delta^M_{\mu+\nu,0} \neq 0`),
@@ -2771,8 +2779,18 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         " であるから、Step 0-1 より",
       ]),
       displayMath(
-        String.raw`\gamma_2(\theta_\nu) = \gamma_2(-\theta_\mu), \qquad
-\gamma_2(-\theta_\nu) = \gamma_2(\theta_\mu - 2k\pi) = \gamma_2(\theta_\mu)`,
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\nu)
+&=\gamma_2(-\theta_\mu+2k\pi)
+&& (\because\ \theta_\nu=-\theta_\mu+2k\pi)\\
+&=\gamma_2(-\theta_\mu)
+&& (\because\ \gamma_2\ \text{の}\ 2\pi\ \text{周期性}),\\[3pt]
+\gamma_2(-\theta_\nu)
+&=\gamma_2(\theta_\mu-2k\pi)
+&& (\because\ \theta_\nu=-\theta_\mu+2k\pi)\\
+&=\gamma_2(\theta_\mu)
+&& (\because\ \gamma_2\ \text{の}\ 2\pi\ \text{周期性})
+\end{aligned}`,
       ),
       paragraph([
         "（",
@@ -2788,7 +2806,13 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         " の元として一致する：",
       ]),
       displayMath(
-        String.raw`\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu) = \gamma_2(-\theta_\mu)\gamma_2(\theta_\mu) = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`,
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)
+&=\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)
+&& (\because\ \text{上の二つの等式})\\
+&=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \mathbb{C}\ \text{の積の可換則})
+\end{aligned}`,
       ),
       paragraph([
         "Step 0-3: ",
@@ -2801,7 +2825,15 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         math(String.raw`\mathbb{C}`),
         " への写像である。写像は等しい入力に等しい値を返すから、Step 0-2 の等式より",
       ]),
-      displayMath(String.raw`t_\nu = \sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} = \sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} = t_\mu`),
+      displayMath(String.raw`\begin{aligned}
+t_\nu
+&=\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}
+&& (\because\ t_\nu\ \text{の定義})\\
+&=\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
+&& (\because\ \text{根号の中身について上で得た等式})\\
+&=t_\mu
+&& (\because\ t_\mu\ \text{の定義})
+\end{aligned}`),
       paragraph([
         "すなわち ",
         math(String.raw`t_\nu`),
@@ -2822,7 +2854,17 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         math(String.raw`|\gamma_2(\theta_\mu)|^2 > 0`),
         " であるから",
       ]),
-      displayMath(String.raw`t_\mu^2 = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = -|\gamma_2(\theta_\mu)|^2 \neq 0_{\mathbb{C}}, \qquad \text{ゆえに } t_\mu \neq 0_{\mathbb{C}}`),
+      displayMath(String.raw`\begin{aligned}
+t_\mu^2
+&=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ t_\mu\ \text{の定義と}\ (\sqrt{z})^2=z)\\
+&=-|\gamma_2(\theta_\mu)|^2
+&& (\because\ \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)=-|\gamma_2(\theta_\mu)|^2)\\
+&\neq0_{\mathbb{C}}
+&& (\because\ \gamma_2(\theta_\mu)\neq0\ \text{より}\ |\gamma_2(\theta_\mu)|^2>0),\\
+t_\mu&\neq0_{\mathbb{C}}
+&& (\because\ t_\mu=0_{\mathbb{C}}\ \text{ならば}\ t_\mu^2=0_{\mathbb{C}})
+\end{aligned}`),
       paragraph([
         "後述の a) の係数の括弧は ",
         math(String.raw`-t_\mu t_\nu + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = t_\mu^2 - t_\mu t_\nu = t_\mu(t_\mu - t_\nu)`),

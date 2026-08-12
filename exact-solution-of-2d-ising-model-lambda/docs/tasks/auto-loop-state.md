@@ -7,6 +7,17 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 144 は、tick 143 の c4c1「冪が 1 でない 1 の冪根があるとき、冪の和は
+  零元である」を四層で突き合わせて修正不要と確認し、c4c2 を独立した二論法へ割り直したうえで、
+  先頭の c4c2a「指数が根の次数の倍数ならば 1 の冪根の冪は 1 である」を四層すべてで完了させた。**
+  本文は $n\mid m$ から $m=nk$ を取り、$w^m=w^{nk}=(w^n)^k=1^k=1$ と進む 4 段の鎖である。
+  SageMath は $n=1,\dots,8$・$k=0,\dots,12$ の全 468 組を `QQbar` で厳密計算した。
+  必要十分版 `power_multiple_eq_one_necSuf` は単位元と自然数冪の記号だけを持つ型の上で、冪の法則・
+  根の条件・単位元の冪を個別の仮定として受け取る（加法・積の演算そのもの・体・代数閉性は不要）。
+  検証は構造化テキスト 271 ラベル・PDF 139 ページで未解決参照 0 件・検証と証明の対応 125 件・
+  `lake build`・sorry 検査 689 件ですべて通過した。次は c4c2b（各項が 1 である有限和を
+  $\lvert\mu_n\rvert=n$ へ数え替える段）である。
+
 - **2026-08-12 の tick 143 は、tick 142 の d5「1 の $n$ 乗根の全体はちょうど $n$ 個の元を持つ」を
   四層で突き合わせて修正不要と確認し、10h3d-c4c を論法の数で 4 つへ割り直したうえで、先頭の
   c4c1「冪が 1 でない 1 の冪根があるとき、冪の和は零元である」を四層すべてで完了させた。**
@@ -1655,7 +1666,8 @@
 | 10h3d-c4b-d4b2dL | 固有値の代数性 | 同主張の Lean 具体版・必要十分版・導出 | done | 2026-08-12 の tick 141 で完了。具体版 `rootPolynomialDistinctFactorization`（本文と同じ $j$ の帰納法。準備 4 補題 `rootPolynomialCoeffBound`・`rootPolynomialDistinctFactorizationRootExists`・`rootPolynomialDistinctFactorizationQuotient`・`rootPolynomialLinearFactorRootMem` を本文の準備の段に対応させた。根の存在は Qbar の定義が持つ代数閉性 `IsAlgClosed.exists_root` で引く）、必要十分版 `root_polynomial_distinct_factorization_necSuf`（可換モノイドの上で、根の供給・因数分解・所属・取り出し・積の上界・単調性・相異性の仮定だけで同じ帰納法が通る。加法・分配則・体・代数閉性そのものは要求しない）、導出 `rootPolynomialDistinctFactorization_from_necSuf`（仮定を出発点の係数計算・代数閉性・因数定理の 3 条件・評価・r3・r1・d4b2c3 で埋める） |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | done | 2026-08-12 の tick 142 で四層すべて完了。主張 `claim_root_of_unity_card`。SageMath は `root-of-unity-card`。Lean 具体版 `rootOfUnityCardEq`、必要十分版 `card_eq_of_upper_and_distinct_sequence_necSuf`（有限性・上界・相異なる $n$ 個の元だけを要求し、元の型に代数構造は不要）、導出 `rootOfUnityCardEq_from_necSuf` |
 | 10h3d-c4c1 | 固有値の代数性 | 冪が 1 でない 1 の冪根があるとき、冪の和は零元であること（$w\in\mu_n$、$w^{m}\ne1$ ならば $S_{n,m}=0$） | done | 2026-08-12（tick 143）に四層すべて。主張 1 件 `claim_root_of_unity_power_sum_zero`。準備 2 つ（$\mu_n$ の有限性・$w^{m}-1\ne0$）と 4 段の鎖 $(w^{m}-1)S=w^{m}S-1\cdot S=w^{m}S-S=S-S=0$ に `claim_qbar_no_zero_divisors` を当てる 1 本。SageMath は $n=1,\dots,8$・$m=0,\dots,17$ で全通過（該当する $(n,m,w)$ 372 組。仮定が外せないことも記録）。必要十分版 `power_sum_zero_necSuf` が示したのは、この段が「$a$ 倍で動かない元は、$a-1$ が左可逆なら零元である」という 1 本の言明であり、$S$ が和であることも $a$ が冪であることも体であることも可換性も使っていないこと。もとの 10h3d-c4c は論法が複数（この鎖・倍数の場合の値・$w^{m}\ne1$ なる元の存在）あったので 10h3d-c4c1・10h3d-c4c2・10h3d-c4c3 へ割り直した |
-| 10h3d-c4c2 | 固有値の代数性 | 指数が $n$ の倍数のときの冪の和の値（各項が 1 であり、和は元の個数 $n$ が与える代数的数であること） | todo | 各項 $w^{m}=1$ を出すには冪の法則（$w^{ab}=(w^{a})^{b}$ など）が要る見込み。単位元の有限和は `claim_qbar_unit_sum_eq_nat`（$\sum_{i<n}1=n$）があるが、添字が $\mu_n$ の元にわたる形への取り替えが要る。着手時に論法の数で割り直す |
+| 10h3d-c4c2a | 固有値の代数性 | 指数が $n$ の倍数ならば 1 の $n$ 乗根の冪は 1 であること（$n\mid m$、$w\in\mu_n$ ならば $w^m=1$。冪の法則の鎖 1 本） | done | 2026-08-12 の tick 144 で四層すべて完了。主張 `claim_root_of_unity_power_of_multiple`。SageMath は `root-of-unity-power-of-multiple`（468 組）。Lean 具体版 `rootOfUnityPowerOfMultiple`、必要十分版 `power_multiple_eq_one_necSuf`（単位元と自然数冪の記号、および鎖の 3 等式だけ）、導出 `rootOfUnityPowerOfMultiple_from_necSuf`。旧 c4c2 は各項の計算と有限和の数え替えという独立した二論法を持つため分割した |
+| 10h3d-c4c2b | 固有値の代数性 | 指数が $n$ の倍数のときの冪の和の値（c4c2a で各項を 1 にし、$\mu_n$ にわたる単位元の和を $\lvert\mu_n\rvert=n$ が与える代数的数へ数え替える） | todo | `claim_qbar_unit_sum_eq_nat` と `claim_root_of_unity_card` を使う。添字が $\mu_n$ の元にわたる和と番号 $0,\dots,n-1$ にわたる和の間を、有限集合の元の個数を介して明示する |
 | 10h3d-c4c3 | 固有値の代数性 | $n$ が $m$ を割らないとき $w^{m}\ne1$ を満たす $w\in\mu_n$ が存在すること | todo | 見込みの論法: すべての $w\in\mu_n$ で $w^{m}=1$ なら $\mu_n\subset\mu_m$ となり、$\lvert\mu_n\rvert=n$（`claim_root_of_unity_card`）と $\lvert\mu_m\rvert=m$ の比較から矛盾を出す背理法。指数の除法（$m=qn+r$）による還元が要る場合は着手時に割り直す |
 | 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | todo | 組み立てだけの段の見込み |
 | 10h3d-d | 固有値の代数性 | シフト行列の固有空間たちが列ベクトルの全体を張ること（組み立て） | todo | 10h3d-a〜c を合わせるだけの段。新しい論法は持たない見込み |
@@ -1669,6 +1681,12 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 144）: c4c2「指数が $n$ の倍数のときの冪の和の値」を、各根の冪を 1 にする
+  c4c2a と、その有限和を根の個数へ数え替える c4c2b へ分け、先頭の c4c2a を四層すべてで完了した。
+  本文と Lean 具体版は $m=nk$ を取って冪の法則を当てる同じ鎖である。必要十分版は鎖に現れる
+  3 等式だけを仮定として受け取るので、値の型に単位元と自然数冪の記号以外を要求しない。
+  次は c4c2b である。
 
 - 2026-08-12（tick 143）: 10h3d-c4c「1 の $L$ 乗根の全体にわたる冪の和の値」を論法の数で
   4 つ（c4c1 冪が 1 でない元があるときの零性・c4c2 倍数の場合の値・c4c3 そのような元の存在・
@@ -3873,6 +3891,13 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 144）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\psi$ の反交換関係」（`anticommutator_of_psi`）の Step 0（平方根の分枝の一致）を進めた。
+$\gamma_2$ の周期性、$\theta_\nu=-\theta_\mu+2k\pi$ から得る二つの値の一致、根号の中身の一致、
+$t_\nu=t_\mu$、$t_\mu\ne0$ の計算を一続きの鎖へ開き、全行に根拠を付けた。内容は変えていない。
+姉妹側の検査一式・検証と証明の対応 116 件・PDF 294 ページは通過した。
+**次の tick は同じ証明の a)（二つの生成演算子の反交換子）から続ける。**
+
 **2026-08-12（tick 143）**: `008_TV1_hatZ_hatY_part2` の主張
 「$V$ と $\psi$ の交換関係」（`commutation_V_psi`）の証明の鎖 9 段すべてへ行末の
 $(\because\ \dots)$ を付けた（もとは 9 段中 3 段にしか無く、うち 1 つはラベル名の
@@ -5360,6 +5385,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 144）: tick 143 の c4c1「冪が 1 でない 1 の冪根があるとき、冪の和は零元である」を
+  本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・sorry 登録まで突き合わせた。
+  本文の準備 2 つと 4 段の鎖、具体版の同じ鎖、必要十分版の左逆元による消去、導出での仮定の供給は
+  1 対 1 に対応し、SageMath は該当する 372 組と仮定を外した対照を厳密計算していた。修正は無かった。
 
 - 2026-08-12（tick 143）: tick 142 の d5「1 の $n$ 乗根の全体はちょうど $n$ 個の元を持つ」を
   本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・sorry 登録まで突き合わせた。
