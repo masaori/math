@@ -5223,25 +5223,72 @@ V
         math(String.raw`\theta_M = 2\pi`),
         "、",
         math(String.raw`\theta_{-M} = -2\pi`),
-        " より ",
-        math(String.raw`e^{i\theta_M} = 1 = e^{i\theta_{-M}}`),
-        "、",
-        math(String.raw`\cos\theta_M = \cos\theta_{-M} = 1`),
-        "、",
-        math(String.raw`\sin\theta_M = \sin\theta_{-M} = 0`),
-        "。",
-        ref("def_A_theta"),
-        " より",
+        " である。したがって ",
+        math(String.raw`\theta_M`),
+        " と ",
+        math(String.raw`\theta_{-M}`),
+        " の指数関数・余弦・正弦の値はそれぞれ一致する。",
       ]),
       displayMath(
-        String.raw`\gamma_2(\theta_M)
-= i \cdot 1 \cdot s_2^*(c_1 \cdot 1 - i \cdot 0 - s_1 c_2)
-= i\,s_2^*(c_1 - s_1 c_2)
-= \gamma_2(\theta_{-M})`,
+        String.raw`\begin{aligned}
+e^{i\theta_M}
+&= e^{2\pi i}
+&& (\because\ \theta_M=2\pi) \\
+&= 1
+&& (\because\ e^{2\pi i}=1) \\
+&= e^{-2\pi i}
+&& (\because\ e^{-2\pi i}=1) \\
+&= e^{i\theta_{-M}}
+&& (\because\ \theta_{-M}=-2\pi), \\
+\cos\theta_M
+&= \cos 2\pi
+&& (\because\ \theta_M=2\pi) \\
+&= 1
+&& (\because\ \cos 2\pi=1) \\
+&= \cos(-2\pi)
+&& (\because\ \cos(-2\pi)=1) \\
+&= \cos\theta_{-M}
+&& (\because\ \theta_{-M}=-2\pi), \\
+\sin\theta_M
+&= \sin 2\pi
+&& (\because\ \theta_M=2\pi) \\
+&= 0
+&& (\because\ \sin 2\pi=0) \\
+&= \sin(-2\pi)
+&& (\because\ \sin(-2\pi)=0) \\
+&= \sin\theta_{-M}
+&& (\because\ \theta_{-M}=-2\pi).
+\end{aligned}`,
       ),
-      paragraph([math(String.raw`\gamma_2(-\theta_M) = \gamma_2(-\theta_{-M})`), " も同様。"]),
+      paragraph([
+        ref("def_A_theta"),
+        " にこれらの値を代入すると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(\theta_M)
+&= i \cdot 1 \cdot s_2^*(c_1 \cdot 1 - i \cdot 0 - s_1 c_2)
+&& (\because\ \text{def\_A\_theta と上の指数関数・余弦・正弦の値}) \\
+&= i\,s_2^*(c_1-s_1c_2)
+&& (\because\ \text{複素数の四則演算}) \\
+&= \gamma_2(\theta_{-M})
+&& (\because\ \text{def\_A\_theta と上の指数関数・余弦・正弦の値}), \\
+\gamma_2(-\theta_M)
+&= i \cdot 1 \cdot s_2^*(c_1 \cdot 1 - i \cdot 0 - s_1 c_2)
+&& (\because\ -\theta_M=-2\pi\ \text{と def\_A\_theta}) \\
+&= i\,s_2^*(c_1-s_1c_2)
+&& (\because\ \text{複素数の四則演算}) \\
+&= \gamma_2(-\theta_{-M})
+&& (\because\ -\theta_{-M}=2\pi\ \text{と def\_A\_theta}).
+\end{aligned}`,
+      ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-08-13 の式変形統一で、二つの周期性等式をそれぞれ始点から結論まで連続した等号列にし、各行へ根拠を明記した。主張と使用する定義は変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_044_claim_critical_condition",

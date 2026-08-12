@@ -143,6 +143,104 @@ theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edg
   push_cast
   rw [← two_mul, show (2 : ZMod 2) = 0 from rfl, zero_mul]
 
+/-- 人手証明の二周期の等式。自明セクターの二つの巻き付き偶奇を、復元した辺集合の
+縦向き周期閉路と横向き周期閉路へ双対辺写像の逆写像で戻す。 -/
+theorem reconstructedEdgeSet_winding_equations (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (∑ i : ZMod L,
+      (if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0 ∧
+    (∑ j : ZMod L,
+      (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  have hHorizontal : horizontalWindingParity L A = 0 := congrArg Prod.fst hSector.2
+  have hVertical : verticalWindingParity L A = 0 := congrArg Prod.snd hSector.2
+  rw [← image_reconstructedEdgeSet L A] at hHorizontal hVertical
+  change (∑ i : ZMod L,
+    (if edgeOfRow L false i (-1) ∈ (reconstructedEdgeSet L A).image (dualEdgeEquiv L)
+      then 1 else 0) : ZMod 2) = 0 at hHorizontal
+  change (∑ j : ZMod L,
+    (if edgeOfRow L true (-1) j ∈ (reconstructedEdgeSet L A).image (dualEdgeEquiv L)
+      then 1 else 0) : ZMod 2) = 0 at hVertical
+  simp only [mem_image_dualEdgeEquiv_iff, dualEdgeEquiv_symm_horizontal] at hHorizontal
+  simp only [mem_image_dualEdgeEquiv_iff, dualEdgeEquiv_symm_vertical] at hVertical
+  constructor
+  · calc
+      (∑ i : ZMod L,
+          (if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+        ∑ i : ZMod L,
+          (if edgeOfRow L true (i - 1) (-1) ∈ reconstructedEdgeSet L A then 1 else 0) := by
+            symm
+            exact Fintype.sum_bijective (Equiv.addRight (-1)) (Equiv.addRight (-1)).bijective
+              (fun i : ZMod L =>
+                (if edgeOfRow L true (i - 1) (-1) ∈ reconstructedEdgeSet L A then 1 else 0 :
+                  ZMod 2))
+              (fun i : ZMod L =>
+                (if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0 :
+                  ZMod 2))
+              (fun _ => by simp [sub_eq_add_neg])
+      _ = 0 := hHorizontal
+  · calc
+      (∑ j : ZMod L,
+          (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+        ∑ j : ZMod L,
+          (if edgeOfRow L false (-1) (j - 1) ∈ reconstructedEdgeSet L A then 1 else 0) := by
+            symm
+            exact Fintype.sum_bijective (Equiv.addRight (-1)) (Equiv.addRight (-1)).bijective
+              (fun j : ZMod L =>
+                (if edgeOfRow L false (-1) (j - 1) ∈ reconstructedEdgeSet L A then 1 else 0 :
+                  ZMod 2))
+              (fun j : ZMod L =>
+                (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0 :
+                  ZMod 2))
+              (fun _ => by simp [sub_eq_add_neg])
+      _ = 0 := hVertical
+
+/-- 人手証明の行和・列和の等式。格子面の等式を一周期にわたって足し、添字を一つ
+ずらした有限和を同じ有限和へ戻す。 -/
+theorem reconstructedEdgeSet_row_column_sum_invariant (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) :
+    (∀ i : ZMod L,
+      (∑ j : ZMod L,
+        (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+      ∑ j : ZMod L,
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0)) ∧
+    (∀ j : ZMod L,
+      (∑ i : ZMod L,
+        (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+      ∑ i : ZMod L,
+        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0)) := by
+  classical
+  have hshift (f : ZMod L → ZMod 2) : (∑ x : ZMod L, f (x + 1)) = ∑ x : ZMod L, f x := by
+    exact Fintype.sum_bijective (Equiv.addRight 1) (Equiv.addRight 1).bijective
+      (fun x : ZMod L => f (x + 1)) f (fun _ => rfl)
+  constructor
+  · intro i
+    have hsum := Finset.sum_congr rfl
+      (fun j (_ : j ∈ (Finset.univ : Finset (ZMod L))) =>
+        reconstructedEdgeSet_face_equation L A hEven i j)
+    simp only [Finset.sum_add_distrib, Finset.sum_const_zero] at hsum
+    rw [hshift (fun j : ZMod L =>
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0))] at hsum
+    have htwo : (2 : ZMod 2) = 0 := rfl
+    linear_combination hsum -
+      (∑ j : ZMod L,
+        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo -
+      (∑ j : ZMod L,
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo
+  · intro j
+    have hsum := Finset.sum_congr rfl
+      (fun i (_ : i ∈ (Finset.univ : Finset (ZMod L))) =>
+        reconstructedEdgeSet_face_equation L A hEven i j)
+    simp only [Finset.sum_add_distrib, Finset.sum_const_zero] at hsum
+    rw [hshift (fun i : ZMod L =>
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0))] at hsum
+    have htwo : (2 : ZMod 2) = 0 := rfl
+    linear_combination hsum -
+      (∑ i : ZMod L,
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo -
+      (∑ i : ZMod L,
+        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo
+
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by
   simp only [dualBrokenEdgeSet]

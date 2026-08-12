@@ -802,6 +802,8 @@ targets=(
   Ising2DLambda.FisherZero.mem_image_dualEdgeEquiv_iff
   Ising2DLambda.FisherZero.dualImage_incidenceCount
   Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation
+  Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations
+  Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
