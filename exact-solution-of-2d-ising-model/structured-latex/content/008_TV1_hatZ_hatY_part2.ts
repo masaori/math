@@ -3984,12 +3984,18 @@ X^{n+1}\psi_\mu^\dagger
       displayMath(
         String.raw`\begin{aligned}
 T_{(V')}(\psi_\mu^\dagger)
-&= \exp(X)\psi_\mu^\dagger\exp(-X) \\
-&= \psi_\mu^\dagger\exp(X + \gamma(\theta_\mu)I)\exp(-X) \quad (\because \text{Step 4}) \\
-&= \psi_\mu^\dagger\exp((X + \gamma(\theta_\mu)I) + (-X)) \quad (\because \text{theorem\_exp\_product}) \\
-&= \psi_\mu^\dagger\exp(\gamma(\theta_\mu)I) \\
-&= \psi_\mu^\dagger\cdot e^{\gamma(\theta_\mu)}I \quad (\because (\gamma(\theta_\mu)I)^n = (\gamma(\theta_\mu))^n I) \\
+&= \exp(X)\psi_\mu^\dagger\exp(-X)
+&&(\because\ \text{証明冒頭の鎖})\\
+&= \psi_\mu^\dagger\exp(X + \gamma(\theta_\mu)I)\exp(-X)
+&&(\because\ \text{Step 4})\\
+&= \psi_\mu^\dagger\exp((X + \gamma(\theta_\mu)I) + (-X))
+&&(\because\ \text{指数行列の積の定理})\\
+&= \psi_\mu^\dagger\exp(\gamma(\theta_\mu)I)
+&&(\because\ (X + \gamma(\theta_\mu)I) + (-X) = \gamma(\theta_\mu)I)\\
+&= \psi_\mu^\dagger\cdot e^{\gamma(\theta_\mu)}I
+&&(\because\ (\gamma(\theta_\mu)I)^n = (\gamma(\theta_\mu))^n I)\\
 &= e^{+\gamma(\theta_\mu)}\psi_\mu^\dagger
+&&(\because\ \text{単位行列とのスカラー倍の積})
 \end{aligned}`,
       ),
       paragraph([math(String.raw`T_{(V')}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`), " について。"]),
@@ -4063,6 +4069,7 @@ T_{(V')}(\psi_\mu)
         "2026-08-13 の式変形統一で、Step 2 の X と生成演算子の積を反対側へ移す結論を一行一等号の三段へ開き、交換子の定義・スカラーの交換・分配則を各行に明示した。内容は変えていない。次は同じ証明の Step 3 から続ける。",
         "2026-08-13 の式変形統一で、Step 3 の帰納法を直した。出発点（1 行に等号 2 つ・根拠なし）を四段の鎖へ、帰納法の一歩（根拠のない 2 行と、結合則と Step 2 を一段にまとめた 1 行）を七段の鎖へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 4 から続ける。",
         "2026-08-13 の式変形統一で、Step 4 の有限和の等式三つを一行一等号の鎖へ開き、各項への右作用・Step 3・有限和への分配則を各行末に明示した。内容は変えていない。次は Step 5 から続ける。",
+        "2026-08-13 の式変形統一で、Step 5 の結論の鎖（根拠のない行が三つ、根拠の書式も不揃い）を一行一等号の六段へ整え、証明冒頭の鎖・Step 4・指数行列の積の定理・行列の和の相殺・スカラー行列の指数・単位行列とのスカラー倍の積を各行末に明示した。内容は変えていない。次は Step 1' 以降の ψ 側から続ける。",
       ],
     },
   },
