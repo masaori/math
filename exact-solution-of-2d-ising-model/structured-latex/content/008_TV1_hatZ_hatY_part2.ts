@@ -4790,8 +4790,11 @@ T_{(V)}(\hat{Y}_\mu)
         " について",
       ]),
       displayMath(
-        String.raw`T_{(V)}(X)
-= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(X)\right)\right)`,
+        String.raw`\begin{aligned}
+T_{(V)}(X)
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(X)\right)\right)
+&&\bigl(\because\ \text{\cref{lab:def_T_V}}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "である。すなわち ",
@@ -4830,6 +4833,7 @@ T_{(V)}
 &= T_{(V_1^{(\pm)})^{1/2} V_2 (V_1^{(\pm)})^{1/2}}
    \quad (\because \text{conjugation\_is\_ring\_homomorphism}) \\
 &= T_V
+   \quad (\because V=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2})
 \end{aligned}`,
       ),
       paragraph([
@@ -4884,9 +4888,14 @@ T_{(V)}
         " より",
       ]),
       displayMath(
-        String.raw`Z_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)}\exp\!\left(i\,m\frac{2\pi\mu}{M}\right),
-\quad
-Y_m = \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)`,
+        String.raw`\begin{aligned}
+Z_m
+&= \frac{1}{M}\sum_{\mu=1}^M \hat{Z}_\mu^{(-)}\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)
+&&\bigl(\because\ \text{\cref{lab:recover_Z_Y_from_hatZ_hatY}}\bigr) \\
+Y_m
+&= \frac{1}{M}\sum_{\mu=1}^M \hat{Y}_\mu\exp\!\left(i\,m\frac{2\pi\mu}{M}\right)
+&&\bigl(\because\ \text{\cref{lab:recover_Z_Y_from_hatZ_hatY}}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "が成り立つ。",
@@ -5095,6 +5104,7 @@ T_{(V)}(I)
         "原文の statement は「任意の x に対して T_((V))(x) = T_((V'))(x)」であり、構造化側にあった「V x V^{-1} = V' x V'^{-1}」という別表記を原文どおりに戻した（V x V^{-1} = T_V(x) であることは Step 1 の T_((V)) = T_V を経由して初めて言えるため、statement 段階では原文の形が正しい）。",
         "原文の T_((V_2)) は、構造化側の def_T_V が用いる T_{V_2} の表記に統一した。",
         "2026-08-12 の式変形統一で、Step 4 の包含鎖を一行一関係へ分け、生成部分代数の最小性・集合の相等・各点での写像の相等・写像の外延性をそれぞれ独立した行と行末根拠へ開いた。内容は変えていない。",
+        "2026-08-13 の式変形統一で、Step 1 の T_(V) の定義による作用と T_(V)=T_V の終点、および Step 2 の Z_m・Y_m の復元式に行末根拠を補い、二つの復元式を一行一等号へ分けた。内容は変えていない。",
       ],
     },
   },

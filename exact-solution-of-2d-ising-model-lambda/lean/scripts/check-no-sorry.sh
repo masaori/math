@@ -819,6 +819,10 @@ targets=(
   Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial
   Ising2DLambda.NecSuf.FisherZero.weighted_sum_eq_of_inverse_necSuf
   Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial_from_necSuf
+  Ising2DLambda.FisherZero.highTemperaturePolynomial_eq_sum_sectors
+  Ising2DLambda.FisherZero.highTemperatureSectorDecomposition
+  Ising2DLambda.NecSuf.FisherZero.sum_eq_sum_label_fibers_necSuf
+  Ising2DLambda.FisherZero.highTemperatureSectorDecomposition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

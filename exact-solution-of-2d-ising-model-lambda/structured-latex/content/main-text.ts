@@ -28152,6 +28152,7 @@ Z_L
     labels: ["def_high_temperature_sector_polynomial"],
     habitat: "Z",
     verification: ["sagemath/check/high-temperature-sector-decomposition"],
+    lean: ["Ising2DLambda.FisherZero.highTemperatureSectorPolynomial"],
     statement: [
       paragraph([
         math(String.raw`L\ge1`), " とし、", math(String.raw`a,b\in\{0,1\}`),
@@ -28177,6 +28178,11 @@ Z_L
     labels: ["claim_high_temperature_sector_decomposition"],
     habitat: "Z",
     verification: ["sagemath/check/high-temperature-sector-decomposition"],
+    lean: [
+      "Ising2DLambda.FisherZero.highTemperatureSectorDecomposition",
+      "Ising2DLambda.NecSuf.FisherZero.sum_eq_sum_label_fibers_necSuf",
+      "Ising2DLambda.FisherZero.highTemperatureSectorDecomposition_from_necSuf",
+    ],
     statement: [
       paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
       displayMath(String.raw`H_L=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L`),
