@@ -27871,6 +27871,114 @@ q_\sigma\bigl(n_{\mathrm h}(\pi(-1),j)\bigr)\right)\bmod2\\
   },
 
   {
+    id: "fisher_zero_claim_trivial_sector_configuration_reconstruction",
+    kind: "claim",
+    title: { text: "自明セクターの偶部分グラフから配位を復元できる" },
+    labels: ["claim_trivial_sector_configuration_reconstruction"],
+    habitat: "N",
+    verification: ["sagemath/check/trivial-sector-configuration-reconstruction"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、自明セクターの偶部分グラフ ",
+        math(String.raw`A\in\mathcal E_L^{0,0}`), " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\left|\left\{\sigma\in\Sigma_L\ \middle|\
+\delta_L\bigl(\mathcal B_L(\sigma)\bigr)=A\right\}\right|=2`),
+      paragraph([
+        "である。二つの配位は互いに全スピン反転で結ばれる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_dual_edge_map_bijective"), " の逆写像を用いて ",
+        math(String.raw`B:=\delta_L^{-1}(A)\subseteq E_L`), " と置き、辺の所属を表す二値を",
+      ]),
+      displayMath(String.raw`b_{\mathrm h}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm h}(i,j)\bigr),\qquad
+b_{\mathrm v}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)
+\qquad\bigl(b_{\mathrm h}(i,j),b_{\mathrm v}(i,j)\in\mathbb Z/2\mathbb Z\bigr)`),
+      paragraph([
+        "で定める。", ref("def_even_edge_subset"), " と ", ref("def_dual_edge_map"),
+        " を開くと、各格子面の境界について",
+      ]),
+      displayMath(String.raw`b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j)
++b_{\mathrm v}(i,j+\bar1)+b_{\mathrm h}(i+\bar1,j)=0
+\quad\text{in }\mathbb Z/2\mathbb Z`),
+      paragraph([
+        "となる。また二つの巻き付き偶奇が零であることを ", ref("def_torus_winding_parities"),
+        " と双対辺写像の定義で戻すと",
+      ]),
+      displayMath(String.raw`\sum_i b_{\mathrm v}(i,\pi(-1))=0,\qquad
+\sum_j b_{\mathrm h}(\pi(-1),j)=0
+\quad\text{in }\mathbb Z/2\mathbb Z`),
+      paragraph([
+        "を得る。格子面の等式を一つの行に沿って足すと縦向き辺の項は二度ずつ現れて消えるので",
+      ]),
+      displayMath(String.raw`\sum_j b_{\mathrm h}(i+\bar1,j)
+=\sum_j b_{\mathrm h}(i,j)
+\quad(\because\ \text{格子面の等式を }j\text{ にわたって有限和する})`),
+      paragraph(["である。同じく一つの列に沿って足すと"]),
+      displayMath(String.raw`\sum_i b_{\mathrm v}(i,j+\bar1)
+=\sum_i b_{\mathrm v}(i,j)
+\quad(\because\ \text{格子面の等式を }i\text{ にわたって有限和する})`),
+      paragraph(["である。したがって任意の行と列について"]),
+      displayMath(String.raw`\sum_j b_{\mathrm h}(i,j)=0,\qquad
+\sum_i b_{\mathrm v}(i,j)=0
+\quad\text{in }\mathbb Z/2\mathbb Z`),
+      paragraph([
+        ref("def_residue_maps"), " の代表を用いる。空和を零元とし、頂点 ",
+        math(String.raw`(i,j)\in V_L`), " に対して基点から縦向き、次に横向きへ進む道の偶奇を",
+      ]),
+      displayMath(String.raw`t(i,j):=
+\sum_{r=0}^{s(i)-1}b_{\mathrm v}(\pi(r),0)
++\sum_{c=0}^{s(j)-1}b_{\mathrm h}(i,\pi(c))
+\quad\text{in }\mathbb Z/2\mathbb Z`),
+      paragraph(["で定め、配位を"]),
+      displayMath(String.raw`\sigma_A(i,j):=(-1)^{t(i,j)}\in\{+1,-1\}`),
+      paragraph([
+        "で定める。横向き辺について、", math(String.raw`s(j)<L-1`), " なら二つの有限和の差は末尾の一項なので",
+      ]),
+      displayMath(String.raw`t(i,j+\bar1)+t(i,j)=b_{\mathrm h}(i,j)`),
+      paragraph([
+        math(String.raw`s(j)=L-1`), " なら同じ等式は行全体の和が零であることから従う。縦向き辺について、",
+        math(String.raw`s(i)<L-1`), " なら格子面の等式を ", math(String.raw`c=0,\ldots,s(j)-1`),
+        " にわたって足すと中間の縦向き辺が二度ずつ現れて消えるので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t(i+\bar1,j)+t(i,j)
+&=b_{\mathrm v}(i,0)+
+\sum_{c=0}^{s(j)-1}\bigl(b_{\mathrm h}(i+\bar1,\pi(c))+b_{\mathrm h}(i,\pi(c))\bigr)
+&&\bigl(\because\ t\ \text{の定義}\bigr)\\
+&=b_{\mathrm v}(i,j)
+&&\bigl(\because\ \text{格子面の等式の望遠鏡和}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`s(i)=L-1`), " の場合も、列全体の和が零であることを使うと同じ等式になる。ゆえにすべての辺 ",
+        math(String.raw`e\in E_L`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e\in\mathcal B_L(\sigma_A)
+&\Longleftrightarrow t(\partial_0(e))+t(\partial_1(e))=1
+&&\bigl(\because\ \sigma_A(v)=(-1)^{t(v)}\bigr)\\
+&\Longleftrightarrow e\in B
+&&\bigl(\because\ \text{横向き辺と縦向き辺についての直前の等式}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\delta_L\bigl(\mathcal B_L(\sigma_A)\bigr)
+=\delta_L(B)=A
+\quad(\because\ B=\delta_L^{-1}(A))`),
+      paragraph([
+        "したがって原像は空でない。", ref("claim_global_spin_reversal_preserves_broken_edge"), " より ",
+        math(String.raw`\nu_L(\sigma_A)`), " も原像に属し、基点で値が反対なので ",
+        math(String.raw`\nu_L(\sigma_A)\ne\sigma_A`), " である。任意の別の原像 ",
+        math(String.raw`\tau`), " について、", math(String.raw`\delta_L`), " の単射性から ",
+        math(String.raw`\mathcal B_L(\tau)=\mathcal B_L(\sigma_A)`), " である。",
+        ref("claim_same_broken_edges_equal_or_global_reversal"), " を適用すると",
+      ]),
+      displayMath(String.raw`\tau=\sigma_A\quad\text{または}\quad\tau=\nu_L(\sigma_A)`),
+      paragraph(["となるので原像の元の個数は 2 である。全過程は有限集合と二値の有限和だけで閉じる。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

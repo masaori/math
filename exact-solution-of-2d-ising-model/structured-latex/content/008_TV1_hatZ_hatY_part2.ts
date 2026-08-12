@@ -4473,7 +4473,18 @@ T_{(V')}(\psi_\mu)
       ),
       paragraph(["すなわち ", math(String.raw`\hat{Z}_\mu^{(-)} = q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu`), "、", math(String.raw`\hat{Y}_\mu = q_{12}\psi_\mu^\dagger + q_{22}\psi_\mu`), " である。一方、", ref("commutation_V_psi"), " と ", ref("lambda_eq_exp_gamma"), " より"]),
       displayMath(
-        String.raw`T_{(V)}(\psi_\mu^\dagger) = e^{\gamma(\theta_\mu)}\psi_\mu^\dagger, \quad T_{(V)}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`,
+        String.raw`\begin{aligned}
+T_{(V)}(\psi_\mu^\dagger)
+&= \lambda_{+,\mu}\psi_\mu^\dagger
+\quad (\because \text{フェルミオン生成演算子への作用}) \\
+&= e^{\gamma(\theta_\mu)}\psi_\mu^\dagger
+\quad (\because \lambda_{+,\mu}=e^{\gamma(\theta_\mu)}), \\
+T_{(V)}(\psi_\mu)
+&= \lambda_{-,\mu}\psi_\mu
+\quad (\because \text{フェルミオン消滅演算子への作用}) \\
+&= e^{-\gamma(\theta_\mu)}\psi_\mu
+\quad (\because \lambda_{-,\mu}=e^{-\gamma(\theta_\mu)}).
+\end{aligned}`,
       ),
       paragraph(["であり、", ref("action_of_T_Vprime_on_psi"), " より"]),
       displayMath(
@@ -4481,17 +4492,30 @@ T_{(V')}(\psi_\mu)
       ),
       paragraph(["である。したがって"]),
       displayMath(
-        String.raw`T_{(V)}(\psi_\mu^\dagger) = T_{(V')}(\psi_\mu^\dagger), \quad T_{(V)}(\psi_\mu) = T_{(V')}(\psi_\mu) \quad \cdots (\star)`,
+        String.raw`\begin{aligned}
+T_{(V)}(\psi_\mu^\dagger)
+&= e^{\gamma(\theta_\mu)}\psi_\mu^\dagger
+\quad (\because \text{直前の }T_{(V)}\text{ の作用}) \\
+&= T_{(V')}(\psi_\mu^\dagger)
+\quad (\because \text{直前の }T_{(V')}\text{ の作用}), \\
+T_{(V)}(\psi_\mu)
+&= e^{-\gamma(\theta_\mu)}\psi_\mu
+\quad (\because \text{直前の }T_{(V)}\text{ の作用}) \\
+&= T_{(V')}(\psi_\mu)
+\quad (\because \text{直前の }T_{(V')}\text{ の作用}).
+\end{aligned}`,
       ),
       paragraph(["が成り立つ。これより、"]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V)}(\hat{Z}_\mu^{(-)})
-&= T_{(V)}(q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu) \\
+&= T_{(V)}(q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu)
+\quad (\because \hat{Z}_\mu^{(-)}=q_{11}\psi_\mu^\dagger+q_{21}\psi_\mu) \\
 &= q_{11}T_{(V)}(\psi_\mu^\dagger) + q_{21}T_{(V)}(\psi_\mu) \quad (\because T_{(V)} \text{ の線型性}) \\
-&= q_{11}T_{(V')}(\psi_\mu^\dagger) + q_{21}T_{(V')}(\psi_\mu) \quad (\because (\star)) \\
+&= q_{11}T_{(V')}(\psi_\mu^\dagger) + q_{21}T_{(V')}(\psi_\mu) \quad (\because \text{直前の二つの作用の一致}) \\
 &= T_{(V')}(q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu) \quad (\because T_{(V')} \text{ の線型性}) \\
 &= T_{(V')}(\hat{Z}_\mu^{(-)})
+\quad (\because q_{11}\psi_\mu^\dagger+q_{21}\psi_\mu=\hat{Z}_\mu^{(-)})
 \end{aligned}`,
       ),
       paragraph(["が成り立つ。同様に ", math(String.raw`T_{(V)}(\hat{Y}_\mu) = T_{(V')}(\hat{Y}_\mu)`), " が成り立つ。"]),
@@ -4526,7 +4550,10 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
     ],
     conversion: {
       status: "converted",
-      notes: ["ソースを忠実に翻訳（場合 1: フェルミオン経由、場合 2: A(θμ)=I 経由）。"],
+      notes: [
+        "ソースを忠実に翻訳（場合 1: フェルミオン経由、場合 2: A(θμ)=I 経由）。",
+        "2026-08-12 の式変形統一で、復元後の T_(V) の二つの作用を固有値の作用と指数表示の代入へ分け、T_(V') との一致を生成演算子・消滅演算子ごとの鎖へ開いた。hat Z の作用の鎖には始点と終点で使う復元式の根拠を補った。内容は変えていない。",
+      ],
     },
   },
   {

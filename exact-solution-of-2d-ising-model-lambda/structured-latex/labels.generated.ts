@@ -191,6 +191,7 @@ export const ALL_LABELS = [
   "claim_torus_homology_sector_partition",
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",
+  "claim_trivial_sector_configuration_reconstruction",
   "claim_value_at_rational_is_positive",
   "def_algebraic_numbers",
   "def_attainable_broken_edge_sets",
