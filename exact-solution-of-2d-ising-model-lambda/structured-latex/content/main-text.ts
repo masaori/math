@@ -27397,8 +27397,9 @@ S_L(A)
 \end{aligned}`),
       paragraph([
         math(String.raw`\operatorname{Even}_L(A)`), " が成り立たない場合、", ref("def_even_edge_subset"),
-        " の否定により、", math(String.raw`d_A(v_0)`), " が奇数である頂点 ", math(String.raw`v_0\in V_L`),
-        " を一つ取る。配位 ", math(String.raw`\sigma`), " の ", math(String.raw`v_0`),
+        " の否定により、", math(String.raw`d_A(v_0)=2k_0+1`), " を満たす頂点 ", math(String.raw`v_0\in V_L`),
+        " と自然数 ", math(String.raw`k_0\in\mathbb{N}`), " を一つ取れる（自然数の偶奇による）。配位 ",
+        math(String.raw`\sigma`), " の ", math(String.raw`v_0`),
         " における値だけを符号反転する配位を ", math(String.raw`F_{v_0}(\sigma)`), " と書く。",
         math(String.raw`F_{v_0}`), " は自分自身を逆写像に持ち、不動点を持たない。さらに",
       ]),
