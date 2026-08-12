@@ -792,6 +792,11 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.cyclic_change_parity_zero_necSuf
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero_from_necSuf
+  Ising2DLambda.FisherZero.globalSpinReversal_dualBrokenEdgeSet
+  Ising2DLambda.FisherZero.sameDualBrokenEdges_eq_or_globalSpinReversal
+  Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_of_exists
+  Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf
+  Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
