@@ -3379,9 +3379,18 @@ s_1^2 c_2^2 (s_2^*)^2
         " に適用して",
       ]),
       displayMath(
-        String.raw`\lambda_{+,\mu}\,\lambda_{-,\mu}
-= \gamma_1(\theta_\mu)^2 - \Bigl(\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\Bigr)^2
-= \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1`,
+        String.raw`\begin{aligned}
+\lambda_{+,\mu}\,\lambda_{-,\mu}
+&=\left(\gamma_1(\theta_\mu)+\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\right)
+  \left(\gamma_1(\theta_\mu)-\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\right)
+&&\left(\because\ \lambda_{\pm,\mu}\ \text{の式を代入}\right)\\
+&=\gamma_1(\theta_\mu)^2-\left(\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\right)^2
+&&\left(\because\ (a+b)(a-b)=a^2-b^2\right)\\
+&=\gamma_1(\theta_\mu)^2+\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&&\left(\because\ (\sqrt{z})^2=z,\ z=-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\right)\\
+&=1
+&&\left(\because\ \text{Step 5 の終点}\right)
+\end{aligned}`,
       ),
       paragraph(["以上で statement の 3 つの等式がすべて示された。"]),
     ],
@@ -3397,6 +3406,7 @@ s_1^2 c_2^2 (s_2^*)^2
           "(iii) c_2 s_2^* = c_2^*（duality_c2_star_eq_s2_star_c2）の 3 関係を明示的に使う形へ書き直した。" +
           "2026-08-12 の式変形統一で、Step 5 の結論を Step 4 の終点から始まる 5 段の鎖へ開き、" +
           "(i) の同時適用・零元の計算・(ii) の適用を各行末の根拠として明示した。内容は変えていない。" +
+          "続いて Step 6 の固有値の積を、固有値の式の代入・平方差・複素平方根の定義・Step 5 の終点という 4 段の鎖へ開き、各等号へ根拠を付けた。内容は変えていない。" +
         "また statement の残り 2 式（γ_1^2 + γ_2γ_2(-θ) = 1 と λ_+λ_- = 1）の証明も原文には無かったので補った。",
         "2026-08-12 の式変形統一で、Step 1 の行列式の計算を 3 段の一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
         "2026-08-12 の式変形統一で、Step 4 の c_2 の消去を二つの鎖へ分け、Step 3 の 2 式を足して整理する鎖にも各行の根拠を付けた。内容は変えていない。",

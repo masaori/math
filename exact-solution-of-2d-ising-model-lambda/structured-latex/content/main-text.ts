@@ -27159,6 +27159,96 @@ Z_L(1)
   },
 
   {
+    id: "fisher_zero_definition_broken_edge_set_polynomial",
+    kind: "definition",
+    title: { text: "破れた辺の集合の生成多項式" },
+    labels: ["def_broken_edge_set_polynomial"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.brokenEdgeSet",
+      "Ising2DLambda.FisherZero.attainableBrokenEdgeSets",
+      "Ising2DLambda.FisherZero.lowTemperaturePolynomial",
+    ],
+    verification: ["sagemath/check/low-temperature-polynomial-identity"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、配位 ", math(String.raw`\sigma\in\Sigma_L`),
+        " を任意に取る。", math(String.raw`\sigma`), " のもとで破れている辺の番号の集合を",
+      ]),
+      displayMath(String.raw`\mathcal{B}_L(\sigma):=\left\{\,e\in E_L\ \middle|\ \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\right\}`),
+      paragraph(["と定める。実現できる破れた辺の集合の全体を"]),
+      displayMath(String.raw`\mathfrak{B}_L:=\left\{\,\mathcal{B}_L(\sigma)\ \middle|\ \sigma\in\Sigma_L\,\right\}`),
+      paragraph(["と定め、その生成多項式を"]),
+      displayMath(String.raw`D_L:=\sum_{B\in\mathfrak{B}_L}x^{\,|B|}\ \in\ \mathbb{Z}[x]`),
+      paragraph([
+        "で定める。", math(String.raw`\Sigma_L`), " と ", math(String.raw`E_L`),
+        " は有限集合なので、", math(String.raw`\mathfrak{B}_L`), " も有限集合である。",
+        math(String.raw`\mathcal{B}_L(\sigma)`), " の定義と ", ref("def_broken_bond_count"), " より ",
+        math(String.raw`|\mathcal{B}_L(\sigma)|=b(\sigma)`), " である。",
+        "有限集合・自然数・整数係数多項式だけを用い、実数体、複素数体、指数関数は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_low_temperature_polynomial_identity",
+    kind: "claim",
+    title: { text: "分配多項式は破れた辺の集合の生成多項式の二倍である" },
+    labels: ["claim_low_temperature_polynomial_identity"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_lowTemperaturePolynomial",
+      "Ising2DLambda.NecSuf.FisherZero.sum_eq_two_nsmul_sum_image_necSuf",
+      "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_lowTemperaturePolynomial_from_necSuf",
+    ],
+    verification: ["sagemath/check/low-temperature-polynomial-identity"],
+    statement: [
+      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+      displayMath(String.raw`Z_L=2D_L`),
+      paragraph([
+        "が成り立つ。これは低温展開に用いる恒等式であるが、温度や指数関数を導入せず、",
+        "二つの有限な数え上げ多項式の等式として述べている。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B\in\mathfrak{B}_L`), " を任意に取り、",
+        math(String.raw`\mathcal{B}_L(\sigma)=B`), " を満たす ", math(String.raw`\sigma\in\Sigma_L`),
+        " を一つ取る。", math(String.raw`B`), " の原像を",
+      ]),
+      displayMath(String.raw`\Sigma_L(B):=\left\{\,\tau\in\Sigma_L\ \middle|\ \mathcal{B}_L(\tau)=B\,\right\}`),
+      paragraph(["と書く。", ref("claim_global_spin_reversal_preserves_broken_edge"), " より"]),
+      displayMath(String.raw`\mathcal{B}_L\bigl(\nu_L(\sigma)\bigr)=\mathcal{B}_L(\sigma)=B`),
+      paragraph([
+        "である。また、", math(String.raw`(0,0)\in V_L`), " における値は ",
+        math(String.raw`\sigma((0,0))\in\{+1,-1\}`), " なので ",
+        math(String.raw`\nu_L(\sigma)((0,0))=-\sigma((0,0))\ne\sigma((0,0))`), " であり、",
+        math(String.raw`\nu_L(\sigma)\ne\sigma`), " である。",
+        ref("claim_same_broken_edges_equal_or_global_reversal"), " を ",
+        math(String.raw`\tau\in\Sigma_L(B)`), " へ適用すると",
+      ]),
+      displayMath(String.raw`\Sigma_L(B)=\left\{\sigma,\nu_L(\sigma)\right\},\qquad |\Sigma_L(B)|=2`),
+      paragraph(["を得る。したがって有限和を ", math(String.raw`\mathcal{B}_L`), " の値ごとにまとめると"]),
+      displayMath(String.raw`\begin{aligned}
+Z_L
+&=\sum_{\tau\in\Sigma_L}x^{\,b(\tau)}
+&&(\because\ \blkref{def_partition_polynomial})\\
+&=\sum_{B\in\mathfrak{B}_L}\ \sum_{\tau\in\Sigma_L(B)}x^{\,b(\tau)}
+&&(\because\ \mathcal{B}_L\ \text{の値ごとに有限和を分ける})\\
+&=\sum_{B\in\mathfrak{B}_L}\ \sum_{\tau\in\Sigma_L(B)}x^{\,|B|}
+&&(\because\ b(\tau)=|\mathcal{B}_L(\tau)|=|B|)\\
+&=\sum_{B\in\mathfrak{B}_L}2x^{\,|B|}
+&&(\because\ |\Sigma_L(B)|=2)\\
+&=2\sum_{B\in\mathfrak{B}_L}x^{\,|B|}
+&&(\because\ \mathbb{Z}[x]\ \text{の分配則})\\
+&=2D_L
+&&(\because\ \blkref{def_broken_edge_set_polynomial})
+\end{aligned}`),
+      paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -27465,7 +27555,9 @@ Z_L(1)
           math(String.raw`\overline{\mathbb{Q}}`),
           " に属すること（",
           ref("claim_fisher_zero_algebraicity"),
-          "）までは上で済んでいる。次に Kramers–Wannier 双対を可算な多項式恒等式として導き、自己双対点 ",
+          "）、および破れた辺の集合の生成多項式による低温展開（",
+          ref("claim_low_temperature_polynomial_identity"),
+          "）までは上で済んでいる。次に偶部分グラフによる高温展開と周期トーラスの境界セクターを組み合わせ、Kramers–Wannier 双対を可算な多項式恒等式として導き、自己双対点 ",
           math(String.raw`x_c=\sqrt2-1`),
           " を出す。",
         ],

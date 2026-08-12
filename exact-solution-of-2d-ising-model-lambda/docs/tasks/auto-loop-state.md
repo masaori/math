@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 153 は、前 tick の「同じ破れた辺の集合を与える配位は全スピン反転を
+  除いて一意である」を四層で突き合わせて修正不要と確認し、「分配多項式は破れた辺の集合の
+  生成多項式の二倍である」を四層すべてで完了させた。** 実現できる破れた辺集合の生成多項式
+  $D_L$ を整数係数多項式として定義し、各集合の原像が互いに異なる全スピン反転の対なので
+  $Z_L=2D_L$ となることを有限和の類別で示した。必要十分版は、有限写像の各実現値の原像が
+  二元で重みが写像の値だけで決まる、という可換加法モノイド上の言明まで薄めた。
+  次は偶部分グラフ生成多項式による高温展開である。式変形の書き方の統一では、姉妹側の
+  「$\det A(\theta_\mu)=1$」の Step 6 を整え、この証明の統一を完了した。
+
 - **2026-08-12 の tick 152 は、前 tick の「全スピン反転は各辺の破れを保つ」を四層で
   突き合わせて修正不要と確認し、「同じ破れた辺の集合を与える配位は全スピン反転を除いて
   一意である」を四層すべてで完了させた。** 各頂点で二つの配位が一致するという命題が
@@ -1759,7 +1768,7 @@
 | Fisher 零点の代数性 | Fisher 零点 | 整係数多項式を代数的数で評価する写像と有限格子の Fisher 零点集合を定義し、零点が非零な整係数多項式 $Z_L$ の根であることを示す | done | 2026-08-12 の tick 150 で四層すべて完了。主張 `claim_fisher_zero_algebraicity`。$Z_L(1)=2^{L^2}\ne0$ から $Z_L\ne0$ を出し、Fisher 零点の定義を開いて $\mathrm{Ev}^{F}_{\xi}(Z_L)=0$ を得る。SageMath は `fisher-zero-algebraicity`。Lean 具体版 `fisherZero_algebraicity`、必要十分版 `nonzero_root_witness_necSuf`、導出 `fisherZero_algebraicity_from_necSuf`。旧行は代数性と双対という独立した二論法を含んでいたため分割した |
 | 全スピン反転と破れた辺 | Fisher 零点 | 全スピン反転を定義し、各辺の破れを保つことを示す | done | 2026-08-12 の tick 151 で四層すべて完了。主張 `claim_global_spin_reversal_preserves_broken_edge`。SageMath は `global-spin-reversal-broken-edge`、Lean 具体版 `globalSpinReversal_brokenEdge_iff`、必要十分版 `injective_map_ne_iff`、導出 `globalSpinReversal_brokenEdge_iff_from_necSuf` |
 | 破れた辺の集合の二つの原像 | Fisher 零点 | 同じ破れた辺の集合を与える二つの配位は、互いに等しいか全スピン反転で結ばれることを示す | done | 2026-08-12 の tick 152 で四層すべて完了。主張 `claim_same_broken_edges_equal_or_global_reversal`。横・縦の辺をたどる二つの帰納法で一致・不一致を全頂点へ伝播。SageMath は `same-broken-edges-two-preimages`。Lean 具体版 `sameBrokenEdges_eq_or_globalSpinReversal`、必要十分版 `eq_or_map_of_constant_agreement`、導出 `sameBrokenEdges_eq_or_globalSpinReversal_from_necSuf` |
-| 低温展開の多項式恒等式 | Fisher 零点 | 破れた辺の集合の生成多項式を定義し、$Z_L$ がその 2 倍であることを示す | todo | 前二行を組み立てる。指数関数を使わない |
+| 低温展開の多項式恒等式 | Fisher 零点 | 破れた辺の集合の生成多項式を定義し、$Z_L$ がその 2 倍であることを示す | done | 2026-08-12 の tick 153 で四層すべて完了。定義 `def_broken_edge_set_polynomial` と主張 `claim_low_temperature_polynomial_identity`。SageMath は `low-temperature-polynomial-identity`。Lean 具体版 `partitionPolynomial_eq_two_mul_lowTemperaturePolynomial`、必要十分版 `sum_eq_two_nsmul_sum_image_necSuf`（有限写像・二元の各原像・可換加法モノイドだけ）、導出 `partitionPolynomial_eq_two_mul_lowTemperaturePolynomial_from_necSuf` |
 | 偶部分グラフと高温展開 | Fisher 零点 | 偶部分グラフ生成多項式を定義し、有限和の展開から高温展開の多項式恒等式を示す | todo | 有限集合・整数多項式だけで書く |
 | 周期トーラスの境界セクターと Kramers--Wannier 双対 | Fisher 零点 | 周期境界の四つのホモロジーセクターを明示し、低温展開と高温展開を可算な双対恒等式へ結ぶ | todo | 周期格子は平面グラフではないため、周期分配関数一つをそのまま自己双対としない。四境界条件の混合を明示してから双対を書く |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
@@ -1771,6 +1780,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 153）: 実現できる破れた辺の集合の生成多項式 $D_L$ を定義し、各原像が
+  全スピン反転の対でちょうど二元であることを使って $Z_L=2D_L$ を四層すべてで完了した。
+  SageMath は $L=1,2,3$ の全配位、Lean 具体版は有限和の fiberwise 分解を使って本文と同じ
+  類別を行う。必要十分版により、積や多項式の構造は組み立てそのものには不要であることを確認した。
 
 - 2026-08-12（tick 152）: 同じ破れた辺の集合を持つ二配位について、各頂点での一致が
   隣接辺に沿って保存されることと周期格子の連結性を組み合わせ、全頂点で一致するか
@@ -4020,6 +4034,12 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 153）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\det A(\theta_\mu)=1$」の Step 6 を整えた。固有値の式の代入、平方差、複素平方根の定義、
+Step 5 の終点を 4 段の鎖へ開いて各等号へ根拠を付けた。内容は変えていない。
+これでこの証明の Step 1〜Step 6 はすべて統一済みである。次は同じファイルでこの主張より後に
+ある証明の先頭から続ける。
+
 **2026-08-12（tick 152）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\det A(\theta_\mu)=1$」の Step 5 を整えた。Step 4 の終点から始め、関係 (i) の
 二箇所への適用、零元の計算、関係 (ii) の適用を 5 段の鎖へ開いて各等号へ根拠を付けた。
@@ -5565,6 +5585,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 153、前 tick の「同じ破れた辺の集合を与える配位は全スピン反転を除いて
+  一意である」）: 本文の辺に沿う一致の伝播、SageMath の全数検査、Lean の具体版・必要十分版・
+  導出、入口 import、sorry 検査登録を突き合わせた。仮定・二つの結論・格子の連結性の使い方は
+  全層で対応しており、修正は無かった。
 
 - 2026-08-12（tick 152、前 tick の「全スピン反転は各辺の破れを保つ」）:
   本文の定義と二段同値、SageMath の全数検査、Lean の具体版・必要十分版・導出、入口 import、

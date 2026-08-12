@@ -771,6 +771,9 @@ targets=(
   Ising2DLambda.FisherZero.sameBrokenEdges_eq_or_globalSpinReversal
   Ising2DLambda.NecSuf.FisherZero.eq_or_map_of_constant_agreement
   Ising2DLambda.FisherZero.sameBrokenEdges_eq_or_globalSpinReversal_from_necSuf
+  Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_lowTemperaturePolynomial
+  Ising2DLambda.NecSuf.FisherZero.sum_eq_two_nsmul_sum_image_necSuf
+  Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_lowTemperaturePolynomial_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

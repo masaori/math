@@ -424,3 +424,6 @@ import Ising2DLambda.FisherZero.GlobalSpinReversalFromNecSuf
 import Ising2DLambda.FisherZero.SameBrokenEdges
 import Ising2DLambda.NecSuf.FisherZero.SameBrokenEdges
 import Ising2DLambda.FisherZero.SameBrokenEdgesFromNecSuf
+import Ising2DLambda.FisherZero.LowTemperaturePolynomial
+import Ising2DLambda.NecSuf.FisherZero.LowTemperaturePolynomial
+import Ising2DLambda.FisherZero.LowTemperaturePolynomialFromNecSuf
