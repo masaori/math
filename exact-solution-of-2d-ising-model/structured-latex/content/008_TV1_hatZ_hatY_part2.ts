@@ -4534,9 +4534,17 @@ T_{(V)}(\hat{Y}_\mu)
 \quad (\because q_{12}\psi_\mu^\dagger+q_{22}\psi_\mu=\hat{Y}_\mu).
 \end{aligned}`,
       ),
-      paragraph(["場合 2: ", math(String.raw`\gamma_2(\theta_\mu) = 0`), "。", math(String.raw`T_{(V)}`), " について ", ref("T_V_hatZ_hatY"), " より ", math(String.raw`(T_{(V)}(\hat{Z}_\mu^{(-)}), T_{(V)}(\hat{Y}_\mu)) = (\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)A(\theta_\mu)`), " であり、", ref("A_theta_is_identity_when_gamma2_zero"), " より ", math(String.raw`A(\theta_\mu) = I`), " であるから、"]),
+      paragraph(["場合 2: ", math(String.raw`\gamma_2(\theta_\mu) = 0`), "。", math(String.raw`T_{(V)}`), " について、", ref("T_V_hatZ_hatY"), " と ", ref("A_theta_is_identity_when_gamma2_zero"), " より"]),
       displayMath(
-        String.raw`(T_{(V)}(\hat{Z}_\mu^{(-)}), T_{(V)}(\hat{Y}_\mu)) = (\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)I = (\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)`,
+        String.raw`\begin{aligned}
+(T_{(V)}(\hat{Z}_\mu^{(-)}),\, T_{(V)}(\hat{Y}_\mu))
+&= (\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu)A(\theta_\mu)
+\quad (\because \text{T\_V\_hatZ\_hatY}) \\
+&= (\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu)I
+\quad (\because \gamma_2(\theta_\mu)=0\text{ のとき }A(\theta_\mu)=I\text{：A\_theta\_is\_identity\_when\_gamma2\_zero}) \\
+&= (\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu)
+\quad (\because \text{単位行列との積})
+\end{aligned}`,
       ),
       paragraph([
         "すなわち ",
@@ -4569,6 +4577,7 @@ T_{(V)}(\hat{Y}_\mu)
         "ソースを忠実に翻訳（場合 1: フェルミオン経由、場合 2: A(θμ)=I 経由）。",
         "2026-08-12 の式変形統一で、復元後の T_(V) の二つの作用を固有値の作用と指数表示の代入へ分け、T_(V') との一致を生成演算子・消滅演算子ごとの鎖へ開いた。hat Z の作用の鎖には始点と終点で使う復元式の根拠を補った。内容は変えていない。",
         "2026-08-12 の式変形統一で、hat Y の作用を復元式・二つの線型性・生成消滅演算子上の作用の一致を一行ずつ使う五段の鎖へ開いた。内容は変えていない。",
+        "2026-08-12 の式変形統一で、場合 2（γ_2(θ_μ)=0）の二つの等号を一行一等号の三段の鎖へ開き、各行末へ根拠を付けた。内容は変えていない。",
       ],
     },
   },
