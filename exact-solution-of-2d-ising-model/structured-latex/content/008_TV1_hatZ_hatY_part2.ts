@@ -3435,23 +3435,36 @@ s_1^2 c_2^2 (s_2^*)^2
         math(String.raw`-\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu) = |\gamma_2(\theta_\mu)|^2`),
         " であるから、",
       ]),
-      displayMath(
-        String.raw`\gamma_1(\theta_\mu)^2
-= 1 - \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-= 1 + |\gamma_2(\theta_\mu)|^2 \geq 1`,
-      ),
-      paragraph([
-        math(String.raw`\gamma_1(\theta_\mu) = c_1 c_2^* - s_1 s_2^*\cos\theta_\mu \geq c_1 c_2^* - s_1 s_2^* > 0`),
-        "（",
-        math(String.raw`\cosh > \sinh`),
-        " より ",
-        math(String.raw`c_1 c_2^* > s_1 s_2^*`),
-        "）から正であるので ",
-        math(String.raw`\gamma_1(\theta_\mu) \geq 1`),
-        "。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_1(\theta_\mu)^2
+&= 1 - \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+&& (\because\ \det A(\theta_\mu)=1)\\
+&= 1 + |\gamma_2(\theta_\mu)|^2
+&& (\because\ \gamma_2(-\theta_\mu)=-\overline{\gamma_2(\theta_\mu)})\\
+&\geq 1
+&& (\because\ |\gamma_2(\theta_\mu)|^2\geq 0)
+\end{aligned}`),
+      paragraph(["最初の二つの等号では ", ref("det_A_theta"), " と ", ref("relation_of_gamma_2"), " を順に引いた。"]),
+      paragraph(["また、"]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_1(\theta_\mu)
+&= c_1 c_2^* - s_1 s_2^*\cos\theta_\mu
+&& (\because\ \gamma_1\ \text{の定義})\\
+&\geq c_1 c_2^* - s_1 s_2^*
+&& (\because\ \cos\theta_\mu\leq 1)\\
+&> 0
+&& (\because\ \cosh>\sinh\ \text{より}\ c_1c_2^*>s_1s_2^*)
+\end{aligned}`),
+      paragraph(["したがって、"]),
+      displayMath(String.raw`\gamma_1(\theta_\mu)\geq1
+\quad(\because\ \gamma_1(\theta_\mu)^2\geq1\ \text{かつ}\ \gamma_1(\theta_\mu)>0)`),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-08-12 の式変形統一で、二乗の下界と正値性をそれぞれ一続きの鎖へ開き、全行へ根拠を付けた。内容は変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_034a_definition_gamma_theta_mu",

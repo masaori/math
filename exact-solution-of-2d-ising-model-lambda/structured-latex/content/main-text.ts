@@ -27282,6 +27282,142 @@ Z_L
   },
 
   {
+    id: "fisher_zero_definition_incidence_count",
+    kind: "definition",
+    title: { text: "辺の部分集合が頂点に持つ端点の個数" },
+    labels: ["def_edge_subset_incidence_count"],
+    habitat: "N",
+    verification: ["sagemath/check/even-subgraph-spin-sum"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、辺の部分集合 ", math(String.raw`A\subseteq E_L`),
+        " と頂点 ", math(String.raw`v\in V_L`), " を取る。端点の番号の集合を ",
+        math(String.raw`I:=\{0,1\}`), " とし、",
+        math(String.raw`\partial_a(e):=\partial_0(e)`), "（", math(String.raw`a=0`), "）、",
+        math(String.raw`\partial_a(e):=\partial_1(e)`), "（", math(String.raw`a=1`), "）と定める。",
+        math(String.raw`A`), " が ", math(String.raw`v`), " に持つ端点の個数を",
+      ]),
+      displayMath(String.raw`d_A(v):=\left|\left\{\,(e,a)\in A\times I\ \middle|\ \partial_a(e)=v\,\right\}\right|\ \in\ \mathbb{N}`),
+      paragraph([
+        "で定める。同じ辺の二つの端点が同じ頂点である場合も、端点の番号 ", math(String.raw`a`),
+        " が異なるので二回数える。したがって自己ループを持つ ", math(String.raw`L=1`),
+        " でも通常の次数と一致する。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_even_edge_subset",
+    kind: "definition",
+    title: { text: "偶部分グラフ" },
+    labels: ["def_even_edge_subset"],
+    habitat: "N",
+    verification: ["sagemath/check/even-subgraph-spin-sum"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。", ref("def_edge_subset_incidence_count"),
+        " の端点の個数を用い、辺の部分集合 ", math(String.raw`A\subseteq E_L`),
+        " が偶部分グラフであることを",
+      ]),
+      displayMath(String.raw`\operatorname{Even}_L(A)\quad\Longleftrightarrow\quad
+\forall v\in V_L\ \exists k_v\in\mathbb{N}:\ d_A(v)=2k_v`),
+      paragraph(["で定める。すなわち、すべての頂点に接続する端点の個数が偶数である。"]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_even_subgraph_polynomial",
+    kind: "definition",
+    title: { text: "偶部分グラフ生成多項式" },
+    labels: ["def_even_subgraph_polynomial"],
+    habitat: "Z",
+    verification: ["sagemath/check/even-subgraph-spin-sum"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。", ref("def_even_edge_subset"),
+        " を満たす辺の部分集合の生成多項式を",
+      ]),
+      displayMath(String.raw`P_L(y):=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}y^{\,|A|}\ \in\ \mathbb{Z}[y]`),
+      paragraph(["で定める。辺の集合は有限なので、この和は有限である。"]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_edge_subset_spin_sum",
+    kind: "definition",
+    title: { text: "辺の部分集合に対応するスピン単項式の和" },
+    labels: ["def_edge_subset_spin_sum"],
+    habitat: "Z",
+    verification: ["sagemath/check/even-subgraph-spin-sum"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、辺の部分集合 ", math(String.raw`A\subseteq E_L`),
+        " を取る。", math(String.raw`A`), " に対応するスピン単項式を全配位について足した整数を",
+      ]),
+      displayMath(String.raw`S_L(A):=\sum_{\sigma\in\Sigma_L}\ \prod_{e\in A}
+\sigma(\partial_0(e))\,\sigma(\partial_1(e))\ \in\ \mathbb{Z}`),
+      paragraph(["で定める。空積は整数の単位元 ", math(String.raw`1`), " とする。"]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_even_subgraph_spin_sum",
+    kind: "claim",
+    title: { text: "スピン単項式の和は偶部分グラフだけで非零になる" },
+    labels: ["claim_even_subgraph_spin_sum"],
+    habitat: "Z",
+    verification: ["sagemath/check/even-subgraph-spin-sum"],
+    statement: [
+      paragraph([math(String.raw`L\ge1`), " とし、辺の部分集合 ", math(String.raw`A\subseteq E_L`), " を任意に取る。このとき"]),
+      displayMath(String.raw`S_L(A)=
+\begin{cases}
+2^{L^2},&\operatorname{Even}_L(A),\\
+0,&\neg\operatorname{Even}_L(A)
+\end{cases}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([ref("def_edge_subset_incidence_count"), " と有限積の可換則より、任意の配位 ", math(String.raw`\sigma\in\Sigma_L`), " について"]),
+      displayMath(String.raw`\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
+=\prod_{v\in V_L}\sigma(v)^{d_A(v)}
+\quad(\because\ A\times I\ \text{の項を端点の値ごとに並べ替える})`),
+      paragraph(["である。", math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ場合、各 ", math(String.raw`v\in V_L`), " で ", math(String.raw`d_A(v)=2k_v`), " と書けるので"]),
+      displayMath(String.raw`\begin{aligned}
+S_L(A)
+&=\sum_{\sigma\in\Sigma_L}\prod_{v\in V_L}\sigma(v)^{d_A(v)}
+&&(\because\ \text{直前の有限積の並べ替え})\\
+&=\sum_{\sigma\in\Sigma_L}\prod_{v\in V_L}\bigl(\sigma(v)^2\bigr)^{k_v}
+&&(\because\ d_A(v)=2k_v)\\
+&=\sum_{\sigma\in\Sigma_L}1
+&&(\because\ \sigma(v)\in\{+1,-1\}\ \text{なので}\ \sigma(v)^2=1)\\
+&=|\Sigma_L|
+&&(\because\ \text{単位元の有限和})\\
+&=2^{L^2}
+&&(\because\ \Sigma_L\ \text{は}\ L^2\ \text{頂点への二値写像の全体})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\operatorname{Even}_L(A)`), " が成り立たない場合、", ref("def_even_edge_subset"),
+        " の否定により、", math(String.raw`d_A(v_0)`), " が奇数である頂点 ", math(String.raw`v_0\in V_L`),
+        " を一つ取る。配位 ", math(String.raw`\sigma`), " の ", math(String.raw`v_0`),
+        " における値だけを符号反転する配位を ", math(String.raw`F_{v_0}(\sigma)`), " と書く。",
+        math(String.raw`F_{v_0}`), " は自分自身を逆写像に持ち、不動点を持たない。さらに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{v\in V_L}\bigl(F_{v_0}(\sigma)(v)\bigr)^{d_A(v)}
+&=(-\sigma(v_0))^{d_A(v_0)}\prod_{\substack{v\in V_L\\v\ne v_0}}\sigma(v)^{d_A(v)}
+&&(\because\ F_{v_0}\ \text{の定義})\\
+&=-\sigma(v_0)^{d_A(v_0)}\prod_{\substack{v\in V_L\\v\ne v_0}}\sigma(v)^{d_A(v)}
+&&(\because\ d_A(v_0)\ \text{は奇数})\\
+&=-\prod_{v\in V_L}\sigma(v)^{d_A(v)}
+&&(\because\ \text{有限積へ}\ v_0\ \text{の因子を戻す})
+\end{aligned}`),
+      paragraph(["である。したがって ", math(String.raw`\Sigma_L`), " を ", math(String.raw`\{\sigma,F_{v_0}(\sigma)\}`), " の対に分けると各対の和が零になり、"]),
+      displayMath(String.raw`S_L(A)=0\quad(\because\ \text{符号が反対の二項ごとに有限和をまとめる})`),
+      paragraph(["を得る。全過程は有限集合、自然数、整数だけで閉じ、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
