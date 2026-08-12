@@ -439,3 +439,5 @@ import Ising2DLambda.FisherZero.TorusHomologySectorFromNecSuf
 import Ising2DLambda.FisherZero.DualEdgeMap
 import Ising2DLambda.NecSuf.FisherZero.DualEdgeMap
 import Ising2DLambda.FisherZero.DualEdgeMapFromNecSuf
+import Ising2DLambda.FisherZero.DualBrokenEdgesEven
+import Ising2DLambda.NecSuf.FisherZero.DualBrokenEdgesEven
