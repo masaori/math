@@ -28272,6 +28272,7 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
     labels: ["def_kw_dual_transform"],
     habitat: "Qbar",
     verification: ["sagemath/check/kw-dual-transform-domain"],
+    lean: ["Ising2DLambda.FisherZero.kwDualTransform"],
     statement: [
       paragraph([
         math(String.raw`\xi\in\overline{\mathbb{Q}}`),
@@ -28321,6 +28322,11 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
     labels: ["claim_kw_dual_transform_domain"],
     habitat: "Qbar",
     verification: ["sagemath/check/kw-dual-transform-domain"],
+    lean: [
+      "Ising2DLambda.FisherZero.kwDualTransform_domain",
+      "Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_domain_necSuf",
+      "Ising2DLambda.FisherZero.kwDualTransform_domain_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`\xi\in\overline{\mathbb{Q}}`),

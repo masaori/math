@@ -826,6 +826,9 @@ targets=(
   Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity
   Ising2DLambda.NecSuf.FisherZero.four_step_equality_chain_necSuf
   Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity_from_necSuf
+  Ising2DLambda.FisherZero.kwDualTransform_domain
+  Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_domain_necSuf
+  Ising2DLambda.FisherZero.kwDualTransform_domain_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

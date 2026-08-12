@@ -2501,12 +2501,14 @@ a(\theta_\mu)
       displayMath(
         String.raw`\begin{aligned}
 \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
-&:= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) \cdot P_\mu \\
+&:= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) \cdot P_\mu
+&&\left(\because\ \text{定義「フェルミオン」}\right)\\
 &= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) \cdot \frac{1}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}
 \begin{pmatrix}
 +i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} & -i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \\
 \gamma_2(-\theta_\mu) & \gamma_2(-\theta_\mu)
 \end{pmatrix}
+&&\left(\because\ \text{主張「}A(\theta_\mu)\text{ の対角化 }(P_\mu,D_\mu)\text{」の }P_\mu\text{ の表示}\right)
 \end{aligned}`,
       ),
       paragraph(["すなわち"]),
