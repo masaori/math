@@ -628,15 +628,18 @@ n_\mu^2
       displayMath(
         String.raw`\begin{aligned}
 A\,n_\nu
-&= A\,\psi_\nu^\dagger \psi_{-\nu} \\
+&= A\,\psi_\nu^\dagger \psi_{-\nu}
+   \quad (\because \text{フェルミオン数演算子 } n_\nu \text{ の定義}) \\
 &= (-\psi_\nu^\dagger A)\,\psi_{-\nu}
    \quad (\because A\psi_\nu^\dagger = -\psi_\nu^\dagger A) \\
 &= -\psi_\nu^\dagger\,(A \psi_{-\nu})
    \quad (\because \text{結合法則}) \\
 &= -\psi_\nu^\dagger\,(-\psi_{-\nu} A)
    \quad (\because A\psi_{-\nu} = -\psi_{-\nu}A) \\
-&= \psi_\nu^\dagger \psi_{-\nu} A \\
+&= \psi_\nu^\dagger \psi_{-\nu} A
+   \quad (\because \text{符号の積 } (-1)(-1) = 1 \text{ と結合法則}) \\
 &= n_\nu A
+   \quad (\because \text{フェルミオン数演算子 } n_\nu \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -650,13 +653,23 @@ A\,n_\nu
       ]),
       paragraph(["Step 3（(2) の証明）。(1) を 2 回使って"]),
       displayMath(
-        String.raw`n_\mu n_\nu
-= \psi_\mu^\dagger\left(\psi_{-\mu} n_\nu\right)
-= \psi_\mu^\dagger\left(n_\nu \psi_{-\mu}\right)
-= \left(\psi_\mu^\dagger n_\nu\right)\psi_{-\mu}
-= \left(n_\nu \psi_\mu^\dagger\right)\psi_{-\mu}
-= n_\nu\,\psi_\mu^\dagger\psi_{-\mu}
-= n_\nu n_\mu`,
+        String.raw`\begin{aligned}
+n_\mu n_\nu
+&= \left(\psi_\mu^\dagger \psi_{-\mu}\right) n_\nu
+   \quad (\because \text{フェルミオン数演算子 } n_\mu \text{ の定義}) \\
+&= \psi_\mu^\dagger\left(\psi_{-\mu} n_\nu\right)
+   \quad (\because \text{結合法則}) \\
+&= \psi_\mu^\dagger\left(n_\nu \psi_{-\mu}\right)
+   \quad (\because \text{(1) を } A = \psi_{-\mu} \text{ へ適用}) \\
+&= \left(\psi_\mu^\dagger n_\nu\right)\psi_{-\mu}
+   \quad (\because \text{結合法則}) \\
+&= \left(n_\nu \psi_\mu^\dagger\right)\psi_{-\mu}
+   \quad (\because \text{(1) を } A = \psi_\mu^\dagger \text{ へ適用}) \\
+&= n_\nu\left(\psi_\mu^\dagger\psi_{-\mu}\right)
+   \quad (\because \text{結合法則}) \\
+&= n_\nu n_\mu
+   \quad (\because \text{フェルミオン数演算子 } n_\mu \text{ の定義})
+\end{aligned}`,
       ),
     ],
     conversion: { status: "added" },

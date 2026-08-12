@@ -28590,6 +28590,149 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
   },
 
   {
+    id: "fisher_zero_claim_kw_self_dual_quadratic_equivalence",
+    kind: "claim",
+    title: { text: "自己双対条件は二次方程式と同値" },
+    labels: ["claim_kw_self_dual_quadratic_equivalence"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/kw-self-dual-quadratic-equivalence"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`1+\xi\ne0`),
+        " を満たすとする。",
+        math(String.raw`2:=1+1`),
+        "、",
+        math(String.raw`\xi^2:=\xi\cdot\xi`),
+        " と置く。このとき、二つの条件",
+      ]),
+      displayMath(String.raw`\mathrm{KW}(\xi)=\xi
+\qquad\text{と}\qquad
+\xi^2+2\xi-1=0`),
+      paragraph([
+        "は同値である（",
+        math(String.raw`\mathrm{KW}`),
+        " は ",
+        ref("def_kw_dual_transform"),
+        "。",
+        math(String.raw`\xi^2+2\xi-1`),
+        " は ",
+        math(String.raw`\xi^2+2\xi+(-1)`),
+        " を表し、すべての演算は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・加法の逆元である）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。仮定 ",
+        math(String.raw`1+\xi\ne0`),
+        " により、",
+        math(String.raw`(1+\xi)(1+\xi)^{-1}=1`),
+        " を満たす積の逆元 ",
+        math(String.raw`(1+\xi)^{-1}\in\overline{\mathbb{Q}}`),
+        " が取れる（",
+        ref("def_algebraic_numbers"),
+        "）。まず、仮定によらず成り立つ等式 ",
+        math(String.raw`\mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi`),
+        "（",
+        math(String.raw`1-\xi`),
+        " は ",
+        math(String.raw`1+(-\xi)`),
+        " を表す）を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{KW}(\xi)\cdot(1+\xi)
+&=\bigl((1-\xi)\cdot(1+\xi)^{-1}\bigr)\cdot(1+\xi)
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=(1-\xi)\cdot\bigl((1+\xi)^{-1}\cdot(1+\xi)\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&=(1-\xi)\cdot\bigl((1+\xi)\cdot(1+\xi)^{-1}\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
+&=(1-\xi)\cdot 1
+&&\bigl(\because\ \text{準備の逆元の等式}\bigr)\\
+&=1-\xi
+&&\bigl(\because\ \text{単位元との積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "同値の二方向は別々の含意なので、一続きにはつながず、それぞれの中の計算を一続きの鎖で書く。",
+      ]),
+      paragraph([
+        "第一の方向。",
+        math(String.raw`\mathrm{KW}(\xi)=\xi`),
+        " を仮定して ",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " を示す。まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi\cdot(1+\xi)
+&=\mathrm{KW}(\xi)\cdot(1+\xi)
+&&\bigl(\because\ \text{仮定}\ \mathrm{KW}(\xi)=\xi\bigr)\\
+&=1-\xi
+&&\bigl(\because\ \text{準備の等式}\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)
+\end{aligned}`),
+      paragraph(["を得る。これを使って"]),
+      displayMath(String.raw`\begin{aligned}
+\xi^2+2\xi-1
+&=\bigl(\xi\cdot(1+\xi)-\xi\bigr)+2\xi-1
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\ \xi\cdot(1+\xi)=\xi+\xi^2\ \text{の移項}\bigr)\\
+&=\bigl((1-\xi)-\xi\bigr)+2\xi-1
+&&\bigl(\because\ \text{上の計算}\ \xi\cdot(1+\xi)=1-\xi\bigr)\\
+&=(1-2\xi)+2\xi-1
+&&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
+&=0
+&&\bigl(\because\ \text{加法の逆元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "第二の方向。",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " を仮定して ",
+        math(String.raw`\mathrm{KW}(\xi)=\xi`),
+        " を示す。差に ",
+        math(String.raw`1+\xi`),
+        " を掛けた値を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(1+\xi)\cdot\bigl(\mathrm{KW}(\xi)-\xi\bigr)
+&=(1+\xi)\cdot\mathrm{KW}(\xi)-(1+\xi)\cdot\xi
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\mathrm{KW}(\xi)\cdot(1+\xi)-\xi\cdot(1+\xi)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を 2 つの積へ適用}\bigr)\\
+&=(1-\xi)-\xi\cdot(1+\xi)
+&&\bigl(\because\ \text{準備の等式}\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)\\
+&=(1-\xi)-(\xi+\xi^2)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=-\bigl(\xi^2+2\xi-1\bigr)
+&&\bigl(\because\ \xi+\xi=2\xi\ \text{と加法の逆元の分配}\bigr)\\
+&=-0
+&&\bigl(\because\ \text{仮定}\ \xi^2+2\xi-1=0\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元の加法の逆元は零元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "仮定より ",
+        math(String.raw`1+\xi\ne0`),
+        " であるから、",
+        ref("claim_qbar_no_zero_divisors"),
+        " を ",
+        math(String.raw`a=1+\xi`),
+        "、",
+        math(String.raw`b=\mathrm{KW}(\xi)-\xi`),
+        " へ適用して ",
+        math(String.raw`\mathrm{KW}(\xi)-\xi=0`),
+        " を得る。両辺に ",
+        math(String.raw`\xi`),
+        " を加えて ",
+        math(String.raw`\mathrm{KW}(\xi)=\xi`),
+        " である。二方向が示されたので、二つの条件は同値である。全過程は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・逆元の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

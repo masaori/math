@@ -40,6 +40,7 @@ export const ALL_LABELS = [
   "claim_inversion_count_orbit_decomposition",
   "claim_kw_dual_transform_domain",
   "claim_kw_dual_transform_involution",
+  "claim_kw_self_dual_quadratic_equivalence",
   "claim_log_additive",
   "claim_log_power",
   "claim_low_temperature_polynomial_identity",
