@@ -430,3 +430,6 @@ import Ising2DLambda.FisherZero.LowTemperaturePolynomialFromNecSuf
 import Ising2DLambda.FisherZero.EvenSubgraphSpinSum
 import Ising2DLambda.NecSuf.FisherZero.EvenSubgraphSpinSum
 import Ising2DLambda.FisherZero.EvenSubgraphSpinSumFromNecSuf
+import Ising2DLambda.FisherZero.HighTemperaturePolynomial
+import Ising2DLambda.NecSuf.FisherZero.HighTemperaturePolynomial
+import Ising2DLambda.FisherZero.HighTemperaturePolynomialFromNecSuf

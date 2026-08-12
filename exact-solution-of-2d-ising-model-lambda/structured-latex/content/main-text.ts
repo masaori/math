@@ -27458,6 +27458,11 @@ S_L(A)
     title: { text: "高温展開の多項式恒等式" },
     labels: ["claim_high_temperature_polynomial_identity"],
     habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.highTemperaturePolynomial_identity",
+      "Ising2DLambda.NecSuf.FisherZero.common_sum_two_evaluations_necSuf",
+      "Ising2DLambda.FisherZero.highTemperaturePolynomial_identity_from_necSuf",
+    ],
     verification: ["sagemath/check/high-temperature-polynomial-identity"],
     statement: [
       paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),

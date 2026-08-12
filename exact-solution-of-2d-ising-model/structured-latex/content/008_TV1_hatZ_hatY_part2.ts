@@ -3711,19 +3711,34 @@ T_{(V')}(\psi_\mu^\dagger)
         String.raw`\begin{aligned}
 \psi_\nu^\dagger \psi_{-\nu}\psi_\mu^\dagger
 &= \psi_\nu^\dagger(\delta^M_{\mu-\nu,0}\,I - \psi_\mu^\dagger\psi_{-\nu})
-\quad (\because [\psi_{-\nu}, \psi_\mu^\dagger]_+ = \delta^M_{\mu-\nu,0}\,I) \\
-&= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger - \psi_\nu^\dagger\psi_\mu^\dagger\psi_{-\nu} \\
-&= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger + \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu}
-\quad (\because [\psi_\nu^\dagger, \psi_\mu^\dagger]_+ = 0)
+&& (\because [\psi_{-\nu}, \psi_\mu^\dagger]_+ = \delta^M_{\mu-\nu,0}\,I) \\
+&= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger I
+   - \psi_\nu^\dagger\psi_\mu^\dagger\psi_{-\nu}
+&& (\because \text{分配則}) \\
+&= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+   - \psi_\nu^\dagger\psi_\mu^\dagger\psi_{-\nu}
+&& (\because \psi_\nu^\dagger I=\psi_\nu^\dagger) \\
+&= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+   - (-\psi_\mu^\dagger\psi_\nu^\dagger)\psi_{-\nu}
+&& (\because [\psi_\nu^\dagger, \psi_\mu^\dagger]_+ = 0) \\
+&= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+   + \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu}
+&& (\because \text{加法逆元の符号則})
 \end{aligned}`,
       ),
       paragraph(["（反交換関係は ", ref("anticommutator_of_psi"), " による）。ゆえに"]),
       displayMath(
         String.raw`\begin{aligned}
 [\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu^\dagger]
-&= \psi_\nu^\dagger \psi_{-\nu}\psi_\mu^\dagger - \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu} \\
-&= (\delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger + \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu}) - \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu} \\
+&= \psi_\nu^\dagger \psi_{-\nu}\psi_\mu^\dagger
+   - \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu}
+&& (\because \text{交換子の定義}) \\
+&= (\delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+   + \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu})
+   - \psi_\mu^\dagger\psi_\nu^\dagger\psi_{-\nu}
+&& (\because \text{直前の式変形}) \\
 &= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+&& (\because \text{加法逆元による相殺})
 \end{aligned}`,
       ),
       paragraph(["Step 2: ", math(String.raw`[X, \psi_\mu^\dagger] = +\gamma(\theta_\mu)\psi_\mu^\dagger`), "。"]),
@@ -3988,6 +4003,7 @@ T_{(V')}(\psi_\mu)
       notes: [
         "現行ソースに再同期（X の和を γ2(θν)≠0 に限定）し、Step 1-5（ψ^†）と Step 1'-2'（ψ）の場合分け・周期性・帰納法・exp 極限を全展開。Steps 3'-5' は符号反転で同様として簡潔化（ソースも同様）。",
         "2026-08-12 の式変形統一で、証明冒頭の X と -X の可換性、指数行列の積、共役作用の定義を 2 段・3 段・2 段の鎖へ開き、全行へ根拠を付けた。内容は変えていない。次は Step 1 から続ける。",
+        "2026-08-12 の式変形統一で Step 1 の二つの計算を一行一等号へ分け、分配・単位行列・反交換・交換子定義・相殺の根拠を各行へ付けた。内容は変えていない。次は Step 2 から続ける。",
       ],
     },
   },

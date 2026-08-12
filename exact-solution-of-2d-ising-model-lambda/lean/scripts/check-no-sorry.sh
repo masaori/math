@@ -777,6 +777,9 @@ targets=(
   Ising2DLambda.FisherZero.evenSubgraph_spinSum
   Ising2DLambda.NecSuf.FisherZero.sum_product_piecewise_even_necSuf
   Ising2DLambda.FisherZero.evenSubgraph_spinSum_from_necSuf
+  Ising2DLambda.FisherZero.highTemperaturePolynomial_identity
+  Ising2DLambda.NecSuf.FisherZero.common_sum_two_evaluations_necSuf
+  Ising2DLambda.FisherZero.highTemperaturePolynomial_identity_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
