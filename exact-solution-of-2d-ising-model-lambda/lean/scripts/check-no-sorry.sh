@@ -758,6 +758,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarProjector_reconstruction
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_orthogonal_reconstruction_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarProjector_reconstruction_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarEigenspaces_span
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_family_spans_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarEigenspaces_span_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

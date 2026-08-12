@@ -79,6 +79,7 @@ export const ALL_LABELS = [
   "claim_qbar_distinct_roots_card_bound",
   "claim_qbar_eigenspace_add",
   "claim_qbar_eigenspace_smul",
+  "claim_qbar_eigenspaces_span",
   "claim_qbar_eigenvector_pow",
   "claim_qbar_evaluation_coefficient_sum",
   "claim_qbar_evaluation_indeterminate_pow",

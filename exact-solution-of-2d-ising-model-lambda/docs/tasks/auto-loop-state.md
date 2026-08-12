@@ -7,6 +7,12 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 149 は、前 tick の復元式を四層で突き合わせ、Lean 3 定理の sorry 依存検査への
+  登録漏れを直したうえで、「シフト行列の固有空間たちは列ベクトルの全体を張る」を四層すべてで
+  完了させた。** 各 $z\in\mu_L$ に $u_z:=L^{-1}P_{A,z}(v)$ を割り当て、像の所属・固有空間の
+  スカラー倍への閉性・復元式を組み合わせた。次は Fisher 零点の代数性と Kramers--Wannier 双対である。
+  式変形の書き方の統一では、姉妹側の「$\det A(\theta_\mu)=1$」の Step 2 を整えた。
+
 - **2026-08-12 の tick 148 は、tick 147 の「1 の冪根の全体にわたる冪の和の値」を
   四層で突き合わせて修正不要と確認し、「固有空間へ落とす写像から列ベクトルを
   復元できること」を四層すべてで完了させた。** 各成分で根と冪の二重有限和を
@@ -1723,7 +1729,7 @@
 | 10h3d-c4c3 | 固有値の代数性 | $n$ が $m$ を割らないとき $w^{m}\ne1$ を満たす $w\in\mu_n$ が存在すること | done | 2026-08-12 の tick 146 で四層すべて完了。主張 `claim_root_of_unity_power_not_one_exists`。台帳の見込みの論法（$\mu_n\subset\mu_m$ と $\lvert\mu_m\rvert=m$ の比較）は $n\le m$ しか出ず矛盾にならないので、除法 $m=nq+r$（$1\le r<n$）へ変更: すべての $w\in\mu_n$ で $w^{m}=1$ と仮定すると鎖 $w^{r}=1\cdot w^{r}=\dots=w^{m}=1$ から $\mu_n\subseteq\mu_r$ となり、`claim_root_of_unity_card`・`claim_root_of_unity_subset_card_bound`（指数 $r$）で $n=\lvert\mu_n\rvert\le r<n$ の矛盾。SageMath は `root-of-unity-power-not-one-exists`（93 組）。Lean 具体版 `rootOfUnityPowerNotOneExists`、必要十分版 `power_not_one_exists_necSuf`（単位元・積・冪の記号と鎖の 4 法則・除法の分解・境界 1 仮定だけ。$1\le r$ も $n\nmid m$ も不要）、導出 `rootOfUnityPowerNotOneExists_from_necSuf` |
 | 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | done | 2026-08-12 の tick 147 で四層すべて完了。主張 `claim_root_of_unity_power_sum_value`。本文は $n\mid m$ の場合に c4c2b、$n\nmid m$ の場合に c4c3 で witness を取り c4c1 を当てる場合分け。SageMath は `root-of-unity-power-sum-value`（144 組）。Lean 具体版 `powerSumValue`、必要十分版 `piecewise_value_necSuf`（命題の両側の値だけを要求し、値の型に構造は不要）、導出 `powerSumValue_from_necSuf` |
 | 10h3d-d1 | 固有値の代数性 | 固有空間へ落とす写像から列ベクトルを復元できること（$\bigoplus_{z\in\mu_L}L^{-1}\odot P_{A,z}(v)=v$） | done | 2026-08-12 の tick 148 で四層すべて完了。主張 `claim_qbar_projector_reconstruction`。根にわたる冪の和の値を使い $k=0$ の項だけを残す。SageMath は `qbar-projector-reconstruction`。Lean 具体版 `qbarProjector_reconstruction`、必要十分版 `finite_orthogonal_reconstruction_necSuf`（一般の体上の有限線形結合）、導出 `qbarProjector_reconstruction_from_necSuf` |
-| 10h3d-d2 | 固有値の代数性 | 復元式の各加数が対応する固有空間に入ることを合わせ、固有空間たちが列ベクトルの全体を張ると結論する | todo | d1 の復元式と `claim_qbar_projector_image_eigenspace`、固有空間のスカラー倍の閉性の組み立て |
+| 10h3d-d2 | 固有値の代数性 | 復元式の各加数が対応する固有空間に入ることを合わせ、固有空間たちが列ベクトルの全体を張ると結論する | done | 2026-08-12 の tick 149 で四層すべて完了。主張 `claim_qbar_eigenspaces_span`。各根に $u_z=L^{-1}P_{A,z}(v)$ を割り当て、像の所属・スカラー倍への閉性・復元式を組み合わせた |
 | 11 | Fisher 零点 | 零点が $\overline{\mathbb{Q}}$ に属すること、Kramers–Wannier 双対 | todo | |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
 | 12b | 有限系の自由エントロピー | 一般の $q$ での $\Phi_L(q)$ の性質（双対な点どうしの関係） | todo | 本文末尾の「この先に書くこと」に「続き」として載っていたが、セクション表に無く実行の列から落ちていた（2026-08-09 に追加）。自己双対点のあとに置くのは、双対な点どうしの関係が Kramers–Wannier 双対を定義してからでないと書けないため |
@@ -1734,6 +1740,10 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 149）: 「シフト行列の固有空間たちは列ベクトルの全体を張る」を四層すべてで
+  完了した。SageMath は $L=1,\dots,4$ で各項の固有方程式と復元を QQbar で厳密計算した。
+  Lean は具体版・必要十分版・導出を持つ。
 
 - 2026-08-12（tick 148）: 旧「シフト行列の固有空間たちが列ベクトルの全体を張ること」を、
   フーリエ型の復元式と、その各加数の所属を組み立てる段の 2 つへ分け、先頭の復元式を
@@ -3962,6 +3972,11 @@
 | 行列の冪の成分は道に沿った積の和である | 済（2026-08-08。帰納法の 3 つの段——出発点・重みの対応・k+1 の場合——をそれぞれ一続きにした。写像 Φ・Ψ の構成は一続きにしていない） |
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
+
+**2026-08-12（tick 149）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\det A(\theta_\mu)=1$」の Step 2 を、定義の代入、$i^2=-1$ と指数法則、平方差、
+$(iv)^2=-v^2$、$u^2+v^2=1$ の 5 段の鎖へ開き、各等号へ根拠を付けた。内容は変えていない。
+次の tick は同じ証明の Step 3 から続ける。
 
 **2026-08-12（tick 148）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\det A(\theta_\mu)=1$」の Step 1（$2\times2$ 行列の行列式の定義から

@@ -3226,8 +3226,10 @@ c_\mu c_\nu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_2(\theta_\mu) &= i\,e^{i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) - i v\bigr) \\
+\gamma_2(\theta_\mu) &= i\,e^{i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) - i v\bigr)
+&&\left(\because\ \text{\(\gamma_2\) の定義と \(u,v\) の略記}\right)\\
 \gamma_2(-\theta_\mu) &= i\,e^{-i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) + i v\bigr)
+&&\left(\because\ \cos(-\theta_\mu)=u,\ \sin(-\theta_\mu)=-v\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -3246,9 +3248,21 @@ c_\mu c_\nu
         "）より",
       ]),
       displayMath(
-        String.raw`\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-= -(s_2^*)^2\Bigl((c_1 u - s_1 c_2)^2 + v^2\Bigr)
-= -(s_2^*)^2\Bigl((c_1 u - s_1 c_2)^2 + 1 - u^2\Bigr)`,
+        String.raw`\begin{aligned}
+\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+&=i^2e^{i\theta_\mu}e^{-i\theta_\mu}(s_2^*)^2
+  \bigl((c_1u-s_1c_2)-iv\bigr)\bigl((c_1u-s_1c_2)+iv\bigr)
+&&\left(\because\ \text{直前の 2 式の代入と積の結合則}\right)\\
+&=-e^0(s_2^*)^2
+  \bigl((c_1u-s_1c_2)-iv\bigr)\bigl((c_1u-s_1c_2)+iv\bigr)
+&&\left(\because\ i^2=-1,\ e^{i\theta_\mu}e^{-i\theta_\mu}=e^0\right)\\
+&=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2-(iv)^2\Bigr)
+&&\left(\because\ e^0=1,\ (a-b)(a+b)=a^2-b^2\right)\\
+&=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2+v^2\Bigr)
+&&\left(\because\ (iv)^2=-v^2\right)\\
+&=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2+1-u^2\Bigr)
+&&\left(\because\ u^2+v^2=1\right)
+\end{aligned}`,
       ),
       paragraph([
         "Step 3: 展開。",

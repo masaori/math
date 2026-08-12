@@ -26867,6 +26867,65 @@ n
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_eigenspaces_span",
+    kind: "claim",
+    title: { text: "シフト行列の固有空間たちは列ベクトルの全体を張る" },
+    labels: ["claim_qbar_eigenspaces_span"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspaces_span",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_family_spans_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspaces_span_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-eigenspaces-span"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（", ref("def_qbar_matrix"), "）が ",
+        math(String.raw`A^L=I_L^{\overline{\mathbb{Q}}}`), " を満たし、",
+        math(String.raw`v\in V_L`), "（", ref("def_qbar_vector"),
+        "）であるとする。このとき、各 ", math(String.raw`z\in\mu_L`), " に対して ",
+        math(String.raw`u_z\in E_A(z)`), " を満たす列ベクトルの族 ",
+        math(String.raw`(u_z)_{z\in\mu_L}`), " が存在して、",
+      ]),
+      displayMath(String.raw`\bigoplus_{z\in\mu_L}u_z=v`),
+      paragraph([
+        "が成り立つ。したがって、1 の ", math(String.raw`L`),
+        " 乗根に対応する固有空間たちは ", math(String.raw`V_L`), " の全体を張る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z\in\mu_L`), " ごとに",
+      ]),
+      displayMath(String.raw`u_z:=\frac{1}{L}\odot P_{A,z}(v)`),
+      paragraph(["と置く。このとき"]),
+      displayMath(String.raw`\begin{aligned}
+P_{A,z}(v)&\in E_A(z)
+&&(\because\ \blkref{claim_qbar_projector_image_eigenspace},\ A^L=I_L^{\overline{\mathbb{Q}}},\ z^L=1)\\
+u_z&=\frac{1}{L}\odot P_{A,z}(v)
+&&(\because\ u_z\ \text{の定義})\\
+&\in E_A(z)
+&&(\because\ \blkref{claim_qbar_eigenspace_smul})
+\end{aligned}`),
+      paragraph([
+        "また、", ref("claim_qbar_projector_reconstruction"), " により",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigoplus_{z\in\mu_L}u_z
+&=\bigoplus_{z\in\mu_L}\frac{1}{L}\odot P_{A,z}(v)
+&&(\because\ u_z\ \text{の定義})\\
+&=v
+&&(\because\ \blkref{claim_qbar_projector_reconstruction})
+\end{aligned}`),
+      paragraph([
+        "したがって求める族は存在する。この段は代数的数を成分とする有限個の列ベクトルの",
+        "スカラー倍と有限和だけで閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -27159,12 +27218,13 @@ n
           math(String.raw`n`),
           " 個の元を持つこと（",
           ref("claim_root_of_unity_card"),
-          "）までは上で済んでいる。次に書くのは、",
-          math(String.raw`\mu_L`),
-          " の元の冪の総和（指数が ",
-          math(String.raw`L`),
-          " の倍数なら元の個数、そうでなければ 0）、",
-          "そして最後に、シフト行列の固有空間たちが列ベクトルの全体を張ることを組み立てる。",
+          "）、および 1 の冪根の全体にわたる冪の和の値（",
+          ref("claim_root_of_unity_power_sum_value"),
+          "）、および固有空間へ落とす写像から列ベクトルを復元できること（",
+          ref("claim_qbar_projector_reconstruction"),
+          "）、およびシフト行列の固有空間たちが列ベクトルの全体を張ること（",
+          ref("claim_qbar_eigenspaces_span"),
+          "）までは上で済んでいる。",
         ],
         [
           todo("未着手"),
