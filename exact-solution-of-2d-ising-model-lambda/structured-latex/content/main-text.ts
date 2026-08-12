@@ -27877,6 +27877,11 @@ q_\sigma\bigl(n_{\mathrm h}(\pi(-1),j)\bigr)\right)\bmod2\\
     labels: ["claim_trivial_sector_configuration_reconstruction"],
     habitat: "N",
     verification: ["sagemath/check/trivial-sector-configuration-reconstruction"],
+    lean: [
+      "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two",
+      "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
+      "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`L\ge1`), " とし、自明セクターの偶部分グラフ ",
