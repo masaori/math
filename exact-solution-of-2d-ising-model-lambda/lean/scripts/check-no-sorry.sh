@@ -797,6 +797,11 @@ targets=(
   Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_of_exists
   Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf
   Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf
+  Ising2DLambda.FisherZero.mem_reconstructedEdgeSet_iff
+  Ising2DLambda.FisherZero.image_reconstructedEdgeSet
+  Ising2DLambda.FisherZero.mem_image_dualEdgeEquiv_iff
+  Ising2DLambda.FisherZero.dualImage_incidenceCount
+  Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
