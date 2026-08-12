@@ -27366,6 +27366,11 @@ Z_L
     title: { text: "スピン単項式の和は偶部分グラフだけで非零になる" },
     labels: ["claim_even_subgraph_spin_sum"],
     habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.evenSubgraph_spinSum",
+      "Ising2DLambda.NecSuf.FisherZero.sum_product_piecewise_even_necSuf",
+      "Ising2DLambda.FisherZero.evenSubgraph_spinSum_from_necSuf",
+    ],
     verification: ["sagemath/check/even-subgraph-spin-sum"],
     statement: [
       paragraph([math(String.raw`L\ge1`), " とし、辺の部分集合 ", math(String.raw`A\subseteq E_L`), " を任意に取る。このとき"]),
@@ -27381,39 +27386,48 @@ Z_L
       displayMath(String.raw`\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
 =\prod_{v\in V_L}\sigma(v)^{d_A(v)}
 \quad(\because\ A\times I\ \text{の項を端点の値ごとに並べ替える})`),
-      paragraph(["である。", math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ場合、各 ", math(String.raw`v\in V_L`), " で ", math(String.raw`d_A(v)=2k_v`), " と書けるので"]),
+      paragraph(["である。有限和に対する分配則を頂点ごとに繰り返すと"]),
       displayMath(String.raw`\begin{aligned}
 S_L(A)
 &=\sum_{\sigma\in\Sigma_L}\prod_{v\in V_L}\sigma(v)^{d_A(v)}
 &&(\because\ \text{直前の有限積の並べ替え})\\
-&=\sum_{\sigma\in\Sigma_L}\prod_{v\in V_L}\bigl(\sigma(v)^2\bigr)^{k_v}
+&=\prod_{v\in V_L}\left(\sum_{s\in\{+1,-1\}}s^{d_A(v)}\right)
+&&(\because\ \text{有限和に対する有限積の分配則})
+\end{aligned}`),
+      paragraph([math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ場合、各 ", math(String.raw`v\in V_L`), " で ", math(String.raw`d_A(v)=2k_v`), " と書ける。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{s\in\{+1,-1\}}s^{d_A(v)}
+&=1^{2k_v}+(-1)^{2k_v}
 &&(\because\ d_A(v)=2k_v)\\
-&=\sum_{\sigma\in\Sigma_L}1
-&&(\because\ \sigma(v)\in\{+1,-1\}\ \text{なので}\ \sigma(v)^2=1)\\
-&=|\Sigma_L|
-&&(\because\ \text{単位元の有限和})\\
+&=2
+&&(\because\ (-1)^{2k_v}=1),
+\end{aligned}`),
+      paragraph(["ゆえに"]),
+      displayMath(String.raw`\begin{aligned}
+S_L(A)
+&=\prod_{v\in V_L}2
+&&(\because\ \text{各頂点の二値和が }2)\\
+&=2^{|V_L|}
+&&(\because\ \text{一定値の有限積})\\
 &=2^{L^2}
-&&(\because\ \Sigma_L\ \text{は}\ L^2\ \text{頂点への二値写像の全体})
+&&(\because\ |V_L|=L^2)
 \end{aligned}`),
       paragraph([
         math(String.raw`\operatorname{Even}_L(A)`), " が成り立たない場合、", ref("def_even_edge_subset"),
         " の否定により、", math(String.raw`d_A(v_0)=2k_0+1`), " を満たす頂点 ", math(String.raw`v_0\in V_L`),
-        " と自然数 ", math(String.raw`k_0\in\mathbb{N}`), " を一つ取れる（自然数の偶奇による）。配位 ",
-        math(String.raw`\sigma`), " の ", math(String.raw`v_0`),
-        " における値だけを符号反転する配位を ", math(String.raw`F_{v_0}(\sigma)`), " と書く。",
-        math(String.raw`F_{v_0}`), " は自分自身を逆写像に持ち、不動点を持たない。さらに",
+        " と自然数 ", math(String.raw`k_0\in\mathbb{N}`), " を一つ取れる（自然数の偶奇による）。この頂点の二値和は",
       ]),
       displayMath(String.raw`\begin{aligned}
-\prod_{v\in V_L}\bigl(F_{v_0}(\sigma)(v)\bigr)^{d_A(v)}
-&=(-\sigma(v_0))^{d_A(v_0)}\prod_{\substack{v\in V_L\\v\ne v_0}}\sigma(v)^{d_A(v)}
-&&(\because\ F_{v_0}\ \text{の定義})\\
-&=-\sigma(v_0)^{d_A(v_0)}\prod_{\substack{v\in V_L\\v\ne v_0}}\sigma(v)^{d_A(v)}
-&&(\because\ d_A(v_0)\ \text{は奇数})\\
-&=-\prod_{v\in V_L}\sigma(v)^{d_A(v)}
-&&(\because\ \text{有限積へ}\ v_0\ \text{の因子を戻す})
+\sum_{s\in\{+1,-1\}}s^{d_A(v_0)}
+&=1^{2k_0+1}+(-1)^{2k_0+1}
+&&(\because\ d_A(v_0)=2k_0+1)\\
+&=1+(-1)
+&&(\because\ 1^n=1,\ (-1)^{2k_0+1}=-1)\\
+&=0
+&&(\because\ \text{整数の加法逆元})
 \end{aligned}`),
-      paragraph(["である。したがって ", math(String.raw`\Sigma_L`), " を ", math(String.raw`\{\sigma,F_{v_0}(\sigma)\}`), " の対に分けると各対の和が零になり、"]),
-      displayMath(String.raw`S_L(A)=0\quad(\because\ \text{符号が反対の二項ごとに有限和をまとめる})`),
+      paragraph(["である。したがって頂点ごとの二値和の有限積は零因子を一つ持ち、"]),
+      displayMath(String.raw`S_L(A)=0\quad(\because\ \text{零因子を含む有限積は零})`),
       paragraph(["を得る。全過程は有限集合、自然数、整数だけで閉じ、実数体も複素数体も現れない。"]),
     ],
   },

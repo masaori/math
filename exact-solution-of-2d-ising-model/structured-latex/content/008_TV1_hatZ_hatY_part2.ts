@@ -3524,17 +3524,23 @@ s_1^2 c_2^2 (s_2^*)^2
 &>0
 &&\quad(\because\ 2>0)
 \end{aligned}`),
-      paragraph([
-        "積が正で和が正であるから、両固有値は正である。",
-        math(String.raw`\gamma(\theta_\mu) \geq 0`),
-        " を用いて ",
-        math(String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}`),
-        " と書け、",
-        math(String.raw`\cosh(\gamma(\theta_\mu)) = \gamma_1(\theta_\mu)`),
-        " と定義が整合する。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_{+,\mu}&>0,\qquad \lambda_{-,\mu}>0
+&&\quad(\because\ \lambda_{+,\mu}\lambda_{-,\mu}>0\ \text{かつ}\ \lambda_{+,\mu}+\lambda_{-,\mu}>0)\\
+\gamma(\theta_\mu)&\geq0
+&&\quad(\because\ \gamma(\theta_\mu)=\operatorname{arccosh}(\gamma_1(\theta_\mu))\in\mathbb{R}_{\geq0})\\
+\lambda_{\pm,\mu}&=e^{\pm\gamma(\theta_\mu)}
+&&\quad(\because\ \text{正の二固有値を相反する指数として書く})\\
+\cosh(\gamma(\theta_\mu))&=\gamma_1(\theta_\mu)
+&&\quad(\because\ \gamma(\theta_\mu)\ \text{の定義})
+\end{aligned}`),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-08-12 の式変形統一で、固有値の積・和から指数表示と arccosh の整合性へ至る既存の内容を一続きの式へまとめ、全行へ根拠を付けた。内容は変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_033_definition_Vprime",

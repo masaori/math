@@ -774,6 +774,9 @@ targets=(
   Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_lowTemperaturePolynomial
   Ising2DLambda.NecSuf.FisherZero.sum_eq_two_nsmul_sum_image_necSuf
   Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_lowTemperaturePolynomial_from_necSuf
+  Ising2DLambda.FisherZero.evenSubgraph_spinSum
+  Ising2DLambda.NecSuf.FisherZero.sum_product_piecewise_even_necSuf
+  Ising2DLambda.FisherZero.evenSubgraph_spinSum_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
