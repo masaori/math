@@ -26426,6 +26426,87 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_power_sum_zero",
+    kind: "claim",
+    title: {
+      text: "冪が 1 でない 1 の冪根があるとき、冪の和は零元である",
+    },
+    labels: ["claim_root_of_unity_power_sum_zero"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumZero",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_sum_zero_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumZero_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-power-sum-zero"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとし、", math(String.raw`m\in\mathbb{N}`), " を任意に取る。",
+        math(String.raw`w\in\mu_{n}`), "（", ref("def_root_of_unity_set"),
+        "）が ", math(String.raw`w^{m}\ne1`), " を満たすならば、",
+        "1 の冪根の全体にわたる冪の和 ",
+        math(String.raw`S_{n,m}=\sum_{z\in\mu_{n}}z^{m}`),
+        "（", ref("claim_root_of_unity_power_sum_invariant"),
+        " で置いた元）について",
+      ]),
+      displayMath(String.raw`S_{n,m}=0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備を 2 つ置く。第 1 に、", math(String.raw`n\ge1`), " なので ",
+        ref("claim_root_of_unity_finite_card_bound"), " により ",
+        math(String.raw`\mu_{n}`), " は有限集合である。したがって ",
+        math(String.raw`S_{n,m}`), " が定まり、",
+        ref("claim_root_of_unity_power_sum_invariant"),
+        " の有限性の仮定が満たされる。",
+      ]),
+      paragraph([
+        "第 2 に、", math(String.raw`w^{m}-1\ne0`), " である。実際、",
+        math(String.raw`w^{m}-1=0`), " とすると両辺に ", math(String.raw`1`),
+        " を足して ", math(String.raw`w^{m}=1`), " となり、仮定 ",
+        math(String.raw`w^{m}\ne1`), " に反する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(w^{m}-1)\,S_{n,m}
+&=w^{m}S_{n,m}-1\cdot S_{n,m}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=w^{m}S_{n,m}-S_{n,m}
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=S_{n,m}-S_{n,m}
+&&(\because\ \blkref{claim_root_of_unity_power_sum_invariant})\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の同じ元どうしの差は零元})
+\end{aligned}`),
+      paragraph([
+        "この等式に、積が零元ならば零元でない方で割って他方が零元と分かること（",
+        ref("claim_qbar_no_zero_divisors"), "）を ",
+        math(String.raw`a=w^{m}-1`), "、", math(String.raw`b=S_{n,m}`),
+        " として当てる。仮定 ", math(String.raw`ab=0`),
+        " は上の等式であり、仮定 ", math(String.raw`a\ne0`),
+        " は準備で示した ", math(String.raw`w^{m}-1\ne0`), " である。よって ",
+        math(String.raw`S_{n,m}=0`), " を得る。",
+      ]),
+      paragraph([
+        "この段が ", math(String.raw`\overline{\mathbb{Q}}`),
+        " について新たに使っているのは、引いた 2 つの主張が要求する性質のほかに、",
+        "積が和へ分配されること、積の単位元があること、同じ元どうしの差が零元であること、および ",
+        math(String.raw`w^{m}-1=0`), " と ", math(String.raw`w^{m}=1`),
+        " が同値であること（加法群であること）だけである。",
+        "積の可換則も、代数閉であることも使っていない。実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "指数 ", math(String.raw`m`), " が ", math(String.raw`n`),
+        " の倍数でないときに ", math(String.raw`w^{m}\ne1`), " を満たす ",
+        math(String.raw`w\in\mu_{n}`),
+        " が実際に存在すること、および倍数のときの ", math(String.raw`S_{n,m}`),
+        " の値は、この主張の適用先であり、次のセクションで別に示す。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

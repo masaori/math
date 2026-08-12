@@ -739,6 +739,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityCardEq
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_eq_of_upper_and_distinct_sequence_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityCardEq_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powerSumZero
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_sum_zero_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powerSumZero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
