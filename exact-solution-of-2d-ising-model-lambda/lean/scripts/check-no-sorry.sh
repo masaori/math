@@ -768,6 +768,9 @@ targets=(
   Ising2DLambda.FisherZero.globalSpinReversal_brokenEdge_iff
   Ising2DLambda.NecSuf.FisherZero.injective_map_ne_iff
   Ising2DLambda.FisherZero.globalSpinReversal_brokenEdge_iff_from_necSuf
+  Ising2DLambda.FisherZero.sameBrokenEdges_eq_or_globalSpinReversal
+  Ising2DLambda.NecSuf.FisherZero.eq_or_map_of_constant_agreement
+  Ising2DLambda.FisherZero.sameBrokenEdges_eq_or_globalSpinReversal_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

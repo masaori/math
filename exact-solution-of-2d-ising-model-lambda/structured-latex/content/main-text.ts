@@ -27098,6 +27098,67 @@ Z_L(1)
   },
 
   {
+    id: "fisher_zero_claim_same_broken_edges_equal_or_global_reversal",
+    kind: "claim",
+    title: { text: "同じ破れた辺の集合を与える配位は全スピン反転を除いて一意である" },
+    labels: ["claim_same_broken_edges_equal_or_global_reversal"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.sameBrokenEdges_eq_or_globalSpinReversal",
+      "Ising2DLambda.NecSuf.FisherZero.eq_or_map_of_constant_agreement",
+      "Ising2DLambda.FisherZero.sameBrokenEdges_eq_or_globalSpinReversal_from_necSuf",
+    ],
+    verification: ["sagemath/check/same-broken-edges-two-preimages"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、配位 ", math(String.raw`\sigma,\tau\in\Sigma_L`),
+        " を任意に取る。すべての辺 ", math(String.raw`e\in E_L`), " について",
+      ]),
+      displayMath(String.raw`\sigma(\partial_0(e))\ne\sigma(\partial_1(e))
+\quad\Longleftrightarrow\quad
+\tau(\partial_0(e))\ne\tau(\partial_1(e))`),
+      paragraph(["が成り立つならば、"]),
+      displayMath(String.raw`\tau=\sigma\qquad\text{または}\qquad\tau=\nu_L(\sigma)`),
+      paragraph([
+        "である。したがって、破れた辺の集合を指定したとき、その原像に含まれる配位は高々二つである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "頂点 ", math(String.raw`v\in V_L`), " に対し ",
+        math(String.raw`C(v)`), " を ", math(String.raw`\tau(v)=\sigma(v)`),
+        " という命題とする。仮定と ", math(String.raw`\{+1,-1\}`),
+        " の四つの場合を調べると、任意の辺 ", math(String.raw`e\in E_L`), " について",
+      ]),
+      displayMath(String.raw`C(\partial_0(e))\quad\Longleftrightarrow\quad C(\partial_1(e))`),
+      paragraph([
+        "を得る。実際、一方の端点で二つの配位の値が等しければ、もう一方の端点では、",
+        "両方ともその値と等しいか、両方ともその値の符号反転である。逆向きも同じである。",
+      ]),
+      paragraph([
+        math(String.raw`(i,j)\in V_L`), " を任意に取る。", ref("claim_edge_row_partition"),
+        " の横向きの辺を ", math(String.raw`j`), " 回、縦向きの辺を ",
+        math(String.raw`i`), " 回たどる道に、直前の同値を一辺ずつ適用する。",
+        "自然数の代表 ", math(String.raw`s(i),s(j)\in\{0,1,\dots,L-1\}`),
+        " についての二つの帰納法により",
+      ]),
+      displayMath(String.raw`C((i,j))\quad\Longleftrightarrow\quad C((0,0))`),
+      paragraph(["を得る。これは周期格子の全頂点が ", math(String.raw`(0,0)`), " と辺で結ばれていることを明示したものである。"]),
+      paragraph([math(String.raw`C((0,0))`), " が成り立つ場合、任意の ", math(String.raw`v\in V_L`), " について"]),
+      displayMath(String.raw`\tau(v)=\sigma(v)\quad(\because\ C(v)\Longleftrightarrow C((0,0)))`),
+      paragraph(["なので ", math(String.raw`\tau=\sigma`), " である。"]),
+      paragraph([math(String.raw`C((0,0))`), " が成り立たない場合、任意の ", math(String.raw`v\in V_L`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+\tau(v)
+&\ne\sigma(v) &&(\because\ C(v)\Longleftrightarrow C((0,0)))\\
+&\Longleftrightarrow \tau(v)=-\sigma(v) &&(\because\ \tau(v),\sigma(v)\in\{+1,-1\})\\
+&\Longleftrightarrow \tau(v)=\bigl(\nu_L(\sigma)\bigr)(v) &&(\because\ \blkref{def_global_spin_reversal})
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`\tau=\nu_L(\sigma)`), " である。現れるのは有限集合、整数、有限の道、自然数についての帰納法だけであり、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
