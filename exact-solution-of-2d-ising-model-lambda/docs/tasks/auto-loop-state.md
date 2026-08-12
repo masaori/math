@@ -7,6 +7,17 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 145 は、前 tick の異常終了で残った c4c2b「指数が根の次数の倍数のときの
+  冪の和の値」を回収し、レビューで見つけた Lean の import と定理名の誤りを直して、四層すべてで
+  完了させた。** 本文は各根の冪を 1 にし、全単射で番号の集合へ添字を取り替え、
+  $\lvert\mu_n\rvert=n$ と単位元の有限和の値を当てる鎖である。SageMath は
+  $n=1,\dots,8$・$k=0,\dots,12$ の 104 組を `QQbar` で厳密計算した。必要十分版
+  `sum_const_reindex_necSuf` は可換加法モノイド上で、各項の値・添字型の元の個数・番号の集合に
+  わたる有限和の値だけを要求する（積・冪・体・代数閉性は不要）。検証は構造化テキスト
+  272 ラベル・PDF 140 ページで未解決参照 0 件・検証と証明の対応 126 件・`lake build`・
+  sorry 検査 693 件ですべて通過した。次は c4c3（$n$ が $m$ を割らないとき
+  $w^m\ne1$ を満たす $w\in\mu_n$ の存在）である。
+
 - **2026-08-12 の tick 144 は、tick 143 の c4c1「冪が 1 でない 1 の冪根があるとき、冪の和は
   零元である」を四層で突き合わせて修正不要と確認し、c4c2 を独立した二論法へ割り直したうえで、
   先頭の c4c2a「指数が根の次数の倍数ならば 1 の冪根の冪は 1 である」を四層すべてで完了させた。**
@@ -1667,7 +1678,7 @@
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | done | 2026-08-12 の tick 142 で四層すべて完了。主張 `claim_root_of_unity_card`。SageMath は `root-of-unity-card`。Lean 具体版 `rootOfUnityCardEq`、必要十分版 `card_eq_of_upper_and_distinct_sequence_necSuf`（有限性・上界・相異なる $n$ 個の元だけを要求し、元の型に代数構造は不要）、導出 `rootOfUnityCardEq_from_necSuf` |
 | 10h3d-c4c1 | 固有値の代数性 | 冪が 1 でない 1 の冪根があるとき、冪の和は零元であること（$w\in\mu_n$、$w^{m}\ne1$ ならば $S_{n,m}=0$） | done | 2026-08-12（tick 143）に四層すべて。主張 1 件 `claim_root_of_unity_power_sum_zero`。準備 2 つ（$\mu_n$ の有限性・$w^{m}-1\ne0$）と 4 段の鎖 $(w^{m}-1)S=w^{m}S-1\cdot S=w^{m}S-S=S-S=0$ に `claim_qbar_no_zero_divisors` を当てる 1 本。SageMath は $n=1,\dots,8$・$m=0,\dots,17$ で全通過（該当する $(n,m,w)$ 372 組。仮定が外せないことも記録）。必要十分版 `power_sum_zero_necSuf` が示したのは、この段が「$a$ 倍で動かない元は、$a-1$ が左可逆なら零元である」という 1 本の言明であり、$S$ が和であることも $a$ が冪であることも体であることも可換性も使っていないこと。もとの 10h3d-c4c は論法が複数（この鎖・倍数の場合の値・$w^{m}\ne1$ なる元の存在）あったので 10h3d-c4c1・10h3d-c4c2・10h3d-c4c3 へ割り直した |
 | 10h3d-c4c2a | 固有値の代数性 | 指数が $n$ の倍数ならば 1 の $n$ 乗根の冪は 1 であること（$n\mid m$、$w\in\mu_n$ ならば $w^m=1$。冪の法則の鎖 1 本） | done | 2026-08-12 の tick 144 で四層すべて完了。主張 `claim_root_of_unity_power_of_multiple`。SageMath は `root-of-unity-power-of-multiple`（468 組）。Lean 具体版 `rootOfUnityPowerOfMultiple`、必要十分版 `power_multiple_eq_one_necSuf`（単位元と自然数冪の記号、および鎖の 3 等式だけ）、導出 `rootOfUnityPowerOfMultiple_from_necSuf`。旧 c4c2 は各項の計算と有限和の数え替えという独立した二論法を持つため分割した |
-| 10h3d-c4c2b | 固有値の代数性 | 指数が $n$ の倍数のときの冪の和の値（c4c2a で各項を 1 にし、$\mu_n$ にわたる単位元の和を $\lvert\mu_n\rvert=n$ が与える代数的数へ数え替える） | todo | `claim_qbar_unit_sum_eq_nat` と `claim_root_of_unity_card` を使う。添字が $\mu_n$ の元にわたる和と番号 $0,\dots,n-1$ にわたる和の間を、有限集合の元の個数を介して明示する |
+| 10h3d-c4c2b | 固有値の代数性 | 指数が $n$ の倍数のときの冪の和の値（c4c2a で各項を 1 にし、$\mu_n$ にわたる単位元の和を $\lvert\mu_n\rvert=n$ が与える代数的数へ数え替える） | done | 2026-08-12 の tick 145 で四層すべて完了。主張 `claim_root_of_unity_power_sum_multiple_value`。本文は c4c2a で各項を 1 にし、$\lvert\mu_n\rvert=n$ が与える全単射で番号の集合へ添字を取り替え、`claim_qbar_unit_sum_eq_rational` を当てる。SageMath は `root-of-unity-power-sum-multiple-value`（104 組）。Lean 具体版 `powerSumMultipleValue`、必要十分版 `sum_const_reindex_necSuf`（可換加法モノイド・各項の定数値・添字型の元の個数・番号の集合にわたる有限和の値だけ）、導出 `powerSumMultipleValue_from_necSuf` |
 | 10h3d-c4c3 | 固有値の代数性 | $n$ が $m$ を割らないとき $w^{m}\ne1$ を満たす $w\in\mu_n$ が存在すること | todo | 見込みの論法: すべての $w\in\mu_n$ で $w^{m}=1$ なら $\mu_n\subset\mu_m$ となり、$\lvert\mu_n\rvert=n$（`claim_root_of_unity_card`）と $\lvert\mu_m\rvert=m$ の比較から矛盾を出す背理法。指数の除法（$m=qn+r$）による還元が要る場合は着手時に割り直す |
 | 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | todo | 組み立てだけの段の見込み |
 | 10h3d-d | 固有値の代数性 | シフト行列の固有空間たちが列ベクトルの全体を張ること（組み立て） | todo | 10h3d-a〜c を合わせるだけの段。新しい論法は持たない見込み |
@@ -1681,6 +1692,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 145）: 前 tick の異常終了で残った c4c2b を回収し、四層すべてで完了した。
+  $S_{n,m}$ の定義、c4c2a による各項の値 1、$\mu_n$ と番号の集合の全単射による添字の
+  取り替え、単位元の $n$ 個の和の値を一続きの鎖にした。必要十分版は同じ鎖を一般の可換加法
+  モノイド上で通し、積・冪・体・代数閉性を除いた。次は c4c3 である。
 
 - 2026-08-12（tick 144）: c4c2「指数が $n$ の倍数のときの冪の和の値」を、各根の冪を 1 にする
   c4c2a と、その有限和を根の個数へ数え替える c4c2b へ分け、先頭の c4c2a を四層すべてで完了した。
@@ -5385,6 +5401,14 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 145）: 前 tick の異常終了で残った c4c2b の本文・SageMath・Lean 具体版・
+  必要十分版・導出・入口 import・sorry 登録を突き合わせた。本文と SageMath の鎖は一致していたが、
+  Lean の具体版は現行名 `Nat.card_coe_set_eq` を誤った名前空間で参照し、必要十分版は使用する
+  `Finset.sum_congr`・`Fintype.equivFin`・`Fin.sum_univ_eq_sum_range` を供給するモジュールを
+  import していなかったため `lake build` が失敗した。定理名と import を直した。あわせて台帳の
+  todo 行が実在しないラベル `claim_qbar_unit_sum_eq_nat` を挙げていたので、実際に使う
+  `claim_qbar_unit_sum_eq_rational` へ訂正した。
 
 - 2026-08-12（tick 144）: tick 143 の c4c1「冪が 1 でない 1 の冪根があるとき、冪の和は零元である」を
   本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・sorry 登録まで突き合わせた。

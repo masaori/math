@@ -26559,6 +26559,94 @@ w^{m}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_power_sum_multiple_value",
+    kind: "claim",
+    title: {
+      text: "指数が根の次数の倍数のとき、冪の和は根の次数の与える代数的数である",
+    },
+    labels: ["claim_root_of_unity_power_sum_multiple_value"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumMultipleValue",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_const_reindex_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumMultipleValue_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-power-sum-multiple-value"],
+    statement: [
+      paragraph([
+        math(String.raw`n,m\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " および ", math(String.raw`n\mid m`),
+        " を満たすとする。このとき、1 の冪根の全体にわたる冪の和 ",
+        math(String.raw`S_{n,m}=\sum_{z\in\mu_{n}}z^{m}`),
+        "（", ref("claim_root_of_unity_power_sum_invariant"),
+        " で置いた元）について",
+      ]),
+      displayMath(String.raw`S_{n,m}=n`),
+      paragraph([
+        "が成り立つ。右辺の ", math(String.raw`n`),
+        " は、自然数 ", math(String.raw`n`), " を部分集合の鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
+        " により ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の元と見たものである（", ref("claim_qbar_unit_sum_eq_rational"),
+        " の statement と同じ約束）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備を 2 つ置く。第 1 に、", math(String.raw`n\ge1`), " なので ",
+        ref("claim_root_of_unity_finite_card_bound"), " により ",
+        math(String.raw`\mu_{n}`), " は有限集合である。したがって ",
+        math(String.raw`S_{n,m}`), " が定まる。",
+      ]),
+      paragraph([
+        "第 2 に、", ref("claim_root_of_unity_card"), " により ",
+        math(String.raw`\lvert\mu_{n}\rvert=n`),
+        "（", ref("def_cardinality_notation"),
+        "）である。有限集合の元の個数が ", math(String.raw`n`),
+        " であることから、番号の集合 ",
+        math(String.raw`\{\,i\in\mathbb{N}\mid i<n\,\}`), " から ",
+        math(String.raw`\mu_{n}`), " への全単射 ",
+        math(String.raw`e:\{\,i\in\mathbb{N}\mid i<n\,\}\to\mu_{n}`),
+        " が存在する（有限集合の数え上げ。全単射で写り合う有限集合の個数が等しいことと同じく、",
+        "初等的事実として使う）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_{n,m}
+&=\sum_{z\in\mu_{n}}z^{m}
+&&(\because\ S_{n,m}\ \text{の定義}\ \blkref{claim_root_of_unity_power_sum_invariant})\\
+&=\sum_{z\in\mu_{n}}1
+&&(\because\ \blkref{claim_root_of_unity_power_of_multiple}\ \text{を各項の}\ z\in\mu_{n}\ \text{へ})\\
+&=\sum_{i:\ i<n}1
+&&(\because\ \text{全単射}\ e\ \text{による添字の取り替え})\\
+&=n
+&&(\because\ \blkref{claim_qbar_unit_sum_eq_rational})
+\end{aligned}`),
+      paragraph([
+        "第 2 の等号は、", ref("claim_root_of_unity_power_of_multiple"),
+        " という同じ主張をすべての項へ同時に適用したものである。",
+        "第 3 の等号の両辺はどちらも ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の単位元 ", math(String.raw`1`),
+        " を項とする有限和であり、全単射 ", math(String.raw`e`),
+        " で添字を取り替えても各項の値は変わらないから、和の値は等しい。",
+      ]),
+      paragraph([
+        "この段が ", math(String.raw`\overline{\mathbb{Q}}`),
+        " について新たに使っているのは、引いた 3 つの主張が要求する性質のほかに、",
+        "全単射による有限和の添字の取り替えだけである。",
+        "積の法則も、体であることも、代数閉であることも使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+      paragraph([
+        "指数 ", math(String.raw`m`), " が ", math(String.raw`n`),
+        " の倍数でないときに ", math(String.raw`w^{m}\ne1`), " を満たす ",
+        math(String.raw`w\in\mu_{n}`),
+        " が存在すること（", ref("claim_root_of_unity_power_sum_zero"),
+        " の仮定を満たす元の存在）は、次のセクションで別に示す。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
