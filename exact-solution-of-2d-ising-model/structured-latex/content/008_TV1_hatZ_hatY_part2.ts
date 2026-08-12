@@ -3743,11 +3743,13 @@ T_{(V')}(\psi_\mu^\dagger)
       ),
       paragraph(["Step 2: ", math(String.raw`[X, \psi_\mu^\dagger] = +\gamma(\theta_\mu)\psi_\mu^\dagger`), "。"]),
       displayMath(
-        String.raw`[X, \psi_\mu^\dagger]
-= +\sum_{\substack{\nu \in \{1,\dots,M\} \\ \gamma_2(\theta_\nu) \neq 0}} \gamma(\theta_\nu)\,[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu^\dagger]
-\quad (\because \text{scalar\_identity\_commutes})
-= +\sum_{\substack{\nu \in \{1,\dots,M\} \\ \gamma_2(\theta_\nu) \neq 0}} \gamma(\theta_\nu)\,\delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
-\quad (\because \text{Step 1})`,
+        String.raw`\begin{aligned}
+[X, \psi_\mu^\dagger]
+&= +\sum_{\substack{\nu \in \{1,\dots,M\} \\ \gamma_2(\theta_\nu) \neq 0}} \gamma(\theta_\nu)\,[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu^\dagger]
+&&(\because\ \text{scalar\_identity\_commutes})\\
+&= +\sum_{\substack{\nu \in \{1,\dots,M\} \\ \gamma_2(\theta_\nu) \neq 0}} \gamma(\theta_\nu)\,\delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
+&&(\because\ \text{Step 1})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\delta^M_{\mu-\nu,0} \neq 0`),
@@ -3828,12 +3830,27 @@ T_{(V')}(\psi_\mu^\dagger)
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta_{M-k})
-&= i\,e^{i\theta_{M-k}}s_2^*(c_1\cos\theta_{M-k} - i\sin\theta_{M-k} - s_1 c_2) \\
+&= i\,e^{i\theta_{M-k}}s_2^*(c_1\cos\theta_{M-k} - i\sin\theta_{M-k} - s_1 c_2)
+&&(\because\ \gamma_2\ \text{の定義})\\
 &= i\,e^{-i\theta_k}s_2^*(c_1\cos\theta_k + i\sin\theta_k - s_1 c_2)
-= \gamma_2(-\theta_k) = \gamma_2(\theta_{-k}) \\
+&&(\because\ e^{i\theta_{M-k}} = e^{-i\theta_k},\ \cos\theta_{M-k} = \cos\theta_k,\ \sin\theta_{M-k} = -\sin\theta_k)\\
+&= \gamma_2(-\theta_k)
+&&(\because\ \gamma_2\ \text{の定義に}\ -\theta_k\ \text{を代入した形})\\
+&= \gamma_2(\theta_{-k})
+&&(\because\ \theta_{-k} = -\theta_k)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \gamma_2(-\theta_{M-k})
+&= i\,e^{-i\theta_{M-k}}s_2^*(c_1\cos\theta_{M-k} + i\sin\theta_{M-k} - s_1 c_2)
+&&(\because\ \gamma_2\ \text{の定義に}\ -\theta_{M-k}\ \text{を代入した形})\\
 &= i\,e^{i\theta_k}s_2^*(c_1\cos\theta_k - i\sin\theta_k - s_1 c_2)
-= \gamma_2(\theta_k) = \gamma_2(-\theta_{-k})
+&&(\because\ e^{-i\theta_{M-k}} = e^{i\theta_k},\ \cos\theta_{M-k} = \cos\theta_k,\ \sin\theta_{M-k} = -\sin\theta_k)\\
+&= \gamma_2(\theta_k)
+&&(\because\ \gamma_2\ \text{の定義})\\
+&= \gamma_2(-\theta_{-k})
+&&(\because\ -\theta_{-k} = \theta_k)
 \end{aligned}`,
       ),
       paragraph([
@@ -4004,6 +4021,7 @@ T_{(V')}(\psi_\mu)
         "現行ソースに再同期（X の和を γ2(θν)≠0 に限定）し、Step 1-5（ψ^†）と Step 1'-2'（ψ）の場合分け・周期性・帰納法・exp 極限を全展開。Steps 3'-5' は符号反転で同様として簡潔化（ソースも同様）。",
         "2026-08-12 の式変形統一で、証明冒頭の X と -X の可換性、指数行列の積、共役作用の定義を 2 段・3 段・2 段の鎖へ開き、全行へ根拠を付けた。内容は変えていない。次は Step 1 から続ける。",
         "2026-08-12 の式変形統一で Step 1 の二つの計算を一行一等号へ分け、分配・単位行列・反交換・交換子定義・相殺の根拠を各行へ付けた。内容は変えていない。次は Step 2 から続ける。",
+        "2026-08-13 の式変形統一で、Step 2 の冒頭の交換子の和（1 表示に等号 2 つ）を一行一等号の二段へ、場合 b) の γ₂ の周期性の二本（1 行に等号 3 つ・根拠なし）を代入を明示した四段の鎖二本へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 2 の残り（場合分け a〜c の散文中の等式）か Step 3 から続ける。",
       ],
     },
   },

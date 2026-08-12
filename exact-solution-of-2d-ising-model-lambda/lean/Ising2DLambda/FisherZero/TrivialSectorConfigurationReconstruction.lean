@@ -241,6 +241,59 @@ theorem reconstructedEdgeSet_row_column_sum_invariant (L : ℕ) [NeZero L]
       (∑ i : ZMod L,
         (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo
 
+/-- 人手証明の「したがって任意の行と列について和が零」。二周期の等式を出発点、
+行和・列和の不変性を一歩とする帰納法で、横辺の行和と縦辺の列和がすべて零になる。 -/
+theorem reconstructedEdgeSet_all_row_column_sums_zero (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (∀ i : ZMod L,
+      (∑ j : ZMod L,
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) ∧
+    (∀ j : ZMod L,
+      (∑ i : ZMod L,
+        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) := by
+  classical
+  obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations L A hSector
+  obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant L A hSector.1
+  constructor
+  · -- 横向き辺の行和。出発点は行 -1、帰納法の一歩は行和の不変性である
+    have haux : ∀ n : ℕ,
+        (∑ j : ZMod L,
+          (if edgeOfRow L false (-1 + (n : ZMod L)) j ∈ reconstructedEdgeSet L A
+            then 1 else 0) : ZMod 2) = 0 := by
+      intro n
+      induction n with
+      | zero => simpa using hwh
+      | succ k ih =>
+        have hstep := hrow (-1 + (k : ZMod L))
+        rw [show (-1 + ((k + 1 : ℕ) : ZMod L)) = (-1 + (k : ZMod L)) + 1 by
+          push_cast; ring]
+        rw [hstep, ih]
+    intro i
+    have hrepr : i = -1 + (((i + 1).val : ℕ) : ZMod L) := by
+      rw [ZMod.natCast_rightInverse (i + 1)]
+      ring
+    rw [hrepr]
+    exact haux (i + 1).val
+  · -- 縦向き辺の列和。出発点は列 -1、帰納法の一歩は列和の不変性である
+    have haux : ∀ n : ℕ,
+        (∑ i : ZMod L,
+          (if edgeOfRow L true i (-1 + (n : ZMod L)) ∈ reconstructedEdgeSet L A
+            then 1 else 0) : ZMod 2) = 0 := by
+      intro n
+      induction n with
+      | zero => simpa using hwv
+      | succ k ih =>
+        have hstep := hcol (-1 + (k : ZMod L))
+        rw [show (-1 + ((k + 1 : ℕ) : ZMod L)) = (-1 + (k : ZMod L)) + 1 by
+          push_cast; ring]
+        rw [hstep, ih]
+    intro j
+    have hrepr : j = -1 + (((j + 1).val : ℕ) : ZMod L) := by
+      rw [ZMod.natCast_rightInverse (j + 1)]
+      ring
+    rw [hrepr]
+    exact haux (j + 1).val
+
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by
   simp only [dualBrokenEdgeSet]
