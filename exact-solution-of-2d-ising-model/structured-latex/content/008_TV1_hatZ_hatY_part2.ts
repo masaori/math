@@ -4702,7 +4702,14 @@ T_{(V)}(Y_m)
         " について",
       ]),
       displayMath(
-        String.raw`T_{(V)}(Z_m) = T_{(V')}(Z_m), \quad T_{(V)}(Y_m) = T_{(V')}(Y_m)`,
+        String.raw`\begin{aligned}
+T_{(V)}(Z_m)
+&= T_{(V')}(Z_m)
+   \quad (\because \text{直前の }Z_m\text{ に対する式変形}) \\
+T_{(V)}(Y_m)
+&= T_{(V')}(Y_m)
+   \quad (\because \text{直前の }Y_m\text{ に対する式変形})
+\end{aligned}`,
       ),
       paragraph(["である。"]),
       paragraph(["Step 3: 一致する元の集合は、和・スカラー倍・積で閉じ、単位元を含む。"]),

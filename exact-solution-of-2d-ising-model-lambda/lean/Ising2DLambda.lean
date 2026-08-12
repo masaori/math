@@ -433,3 +433,6 @@ import Ising2DLambda.FisherZero.EvenSubgraphSpinSumFromNecSuf
 import Ising2DLambda.FisherZero.HighTemperaturePolynomial
 import Ising2DLambda.NecSuf.FisherZero.HighTemperaturePolynomial
 import Ising2DLambda.FisherZero.HighTemperaturePolynomialFromNecSuf
+import Ising2DLambda.FisherZero.TorusHomologySector
+import Ising2DLambda.NecSuf.FisherZero.TorusHomologySector
+import Ising2DLambda.FisherZero.TorusHomologySectorFromNecSuf

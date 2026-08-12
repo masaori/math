@@ -27527,6 +27527,102 @@ S_L(A)
   },
 
   {
+    id: "fisher_zero_definition_torus_winding_parities",
+    kind: "definition",
+    title: { text: "辺部分集合の二つの巻き付き偶奇" },
+    labels: ["def_torus_winding_parities"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.FisherZero.horizontalWindingParity",
+      "Ising2DLambda.FisherZero.verticalWindingParity",
+    ],
+    verification: ["sagemath/check/torus-homology-sector-partition"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、辺の部分集合 ", math(String.raw`A\subseteq E_L`),
+        " を取る。横向きの周期境界をまたぐ辺と縦向きの周期境界をまたぐ辺の集合を、それぞれ",
+      ]),
+      displayMath(String.raw`C_{L,\mathrm{h}}:=\{n_{\mathrm{h}}(i,\pi(-1))\mid i\in\mathbb{Z}/L\mathbb{Z}\},\qquad
+C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`),
+      paragraph([
+        "で定める。", math(String.raw`\pi`), " と ", math(String.raw`n_{\mathrm{h}},n_{\mathrm{v}}`),
+        " はそれぞれ ", ref("def_residue_maps"), " と ", ref("def_edge_numbering"),
+        " で定めた写像であり、整数 ", math(String.raw`-1`), " と剰余類 ", math(String.raw`\pi(-1)`),
+        " を同一視していない。二つの巻き付き偶奇を",
+      ]),
+      displayMath(String.raw`\varepsilon_{L,\mathrm{h}}(A):=|A\cap C_{L,\mathrm{h}}|\bmod 2,\qquad
+\varepsilon_{L,\mathrm{v}}(A):=|A\cap C_{L,\mathrm{v}}|\bmod 2`),
+      paragraph([
+        "で定める。値はどちらも有限集合 ", math(String.raw`\{0,1\}\subset\mathbb{N}`),
+        " に属する。これは閉じた辺部分集合がトーラスの二方向を横切る回数の偶奇であり、",
+        "実数体も複素数体も用いない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_torus_homology_sector",
+    kind: "definition",
+    title: { text: "周期トーラスの四つの辺セクター" },
+    labels: ["def_torus_homology_sector"],
+    habitat: "N",
+    lean: ["Ising2DLambda.FisherZero.torusHomologySector"],
+    verification: ["sagemath/check/torus-homology-sector-partition"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\{0,1\}`), " に対し、偶部分グラフのセクターを",
+      ]),
+      displayMath(String.raw`\mathcal{E}^{a,b}_L:=\{A\subseteq E_L\mid
+\operatorname{Even}_L(A),\ \varepsilon_{L,\mathrm{h}}(A)=a,\ \varepsilon_{L,\mathrm{v}}(A)=b\}`),
+      paragraph([
+        "で定める。上付きの ", math(String.raw`a,b`), " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_torus_homology_sector_partition",
+    kind: "claim",
+    title: { text: "偶部分グラフは四つの巻き付きセクターへ一意に分かれる" },
+    labels: ["claim_torus_homology_sector_partition"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.FisherZero.torusHomologySector_unique",
+      "Ising2DLambda.NecSuf.FisherZero.fiber_label_unique_necSuf",
+      "Ising2DLambda.FisherZero.torusHomologySector_unique_from_necSuf",
+    ],
+    verification: ["sagemath/check/torus-homology-sector-partition"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。任意の偶部分グラフ ", math(String.raw`A\subseteq E_L`),
+        " に対し、", math(String.raw`A\in\mathcal{E}^{a,b}_L`), " を満たす組 ",
+        math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`), " がただ一つ存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph(["存在について、"]),
+      displayMath(String.raw`(a,b):=\bigl(\varepsilon_{L,\mathrm{h}}(A),\varepsilon_{L,\mathrm{v}}(A)\bigr)
+\in\{0,1\}\times\{0,1\}
+\quad(\because\ \blkref{def_torus_winding_parities})`),
+      paragraph([ref("def_torus_homology_sector"), " より、この組について"]),
+      displayMath(String.raw`A\in\mathcal{E}^{a,b}_L
+\quad(\because\ A\ \text{は偶部分グラフであり、二つの等式は }(a,b)\text{ の定め方そのもの})`),
+      paragraph([
+        "である。一意性について、", math(String.raw`A\in\mathcal{E}^{a',b'}_L`),
+        " を満たす別の組 ", math(String.raw`(a',b')\in\{0,1\}\times\{0,1\}`), " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a'&=\varepsilon_{L,\mathrm{h}}(A)=a
+&&\bigl(\because\ A\in\mathcal{E}^{a',b'}_L,\ A\in\mathcal{E}^{a,b}_L\bigr),\\
+b'&=\varepsilon_{L,\mathrm{v}}(A)=b
+&&\bigl(\because\ A\in\mathcal{E}^{a',b'}_L,\ A\in\mathcal{E}^{a,b}_L\bigr).
+\end{aligned}`),
+      displayMath(String.raw`(a',b')=(a,b)\quad(\because\ \text{順序対の二成分がそれぞれ等しい})`),
+      paragraph(["したがって四つのセクターは偶部分グラフ全体を重なりなく覆う。全過程は有限集合と自然数の偶奇だけで閉じる。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

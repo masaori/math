@@ -780,6 +780,9 @@ targets=(
   Ising2DLambda.FisherZero.highTemperaturePolynomial_identity
   Ising2DLambda.NecSuf.FisherZero.common_sum_two_evaluations_necSuf
   Ising2DLambda.FisherZero.highTemperaturePolynomial_identity_from_necSuf
+  Ising2DLambda.FisherZero.torusHomologySector_unique
+  Ising2DLambda.NecSuf.FisherZero.fiber_label_unique_necSuf
+  Ising2DLambda.FisherZero.torusHomologySector_unique_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
