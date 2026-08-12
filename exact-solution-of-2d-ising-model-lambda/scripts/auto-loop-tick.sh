@@ -167,8 +167,22 @@ PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 # 同じモデルの癖がそのまま証明の癖になるのを避けるため。直前に使ったほうを記録し、
 # その反対を選ぶ（実際に起動した回だけ記録するので、見送られた回で偏らない）。
 AGENT_MARK="$LOG_DIR/last-agent"
+BLOCKED_MARK="$LOG_DIR/claude-blocked-until"   # 使用量上限で claude が使えない期限（epoch 秒）
 last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
 if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
+
+# claude が使用量の上限に当たっている間は codex だけで回す。
+# 上限中の claude は 3 秒で落ちるだけなので、交互のまま回すと半分の回が無駄になる
+# （実測 2026-08-12 13:35: 週次上限に達し、リセットは 5 日後だった）。
+if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
+  blocked_until="$(cat "$BLOCKED_MARK" 2>/dev/null || echo 0)"
+  if [ "$(date +%s)" -lt "${blocked_until:-0}" ]; then
+    log "claude は使用量の上限中（$(date -r "$blocked_until" '+%m-%d %H:%M' 2>/dev/null) まで）。codex で回す"
+    agent="codex"
+  else
+    rm -f "$BLOCKED_MARK"
+  fi
+fi
 
 log "=== tick 開始（${agent} / まとめに入る締切 ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 
@@ -199,6 +213,19 @@ fi
 status=$?
 set -e
 printf '%s\n' "$agent" > "$AGENT_MARK"
+
+# 使用量の上限に当たったら、期限を記録して以後はその期限まで claude を選ばない。
+# 週次の上限はリセットまで数日あるので 1 日ごとに、セッション上限は 3 時間後に試し直す
+# （リセット時刻の文言を解析するより、期限を短く置いて試し直すほうが壊れにくい）。
+if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
+  recent_output="$(tail -5 "$LOG_FILE")"
+  case "$recent_output" in
+    *"weekly limit"*) date -v+1d +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 86400 )) > "$BLOCKED_MARK"
+                      log "    claude が週次の上限に達した。1 日後まで codex だけで回す" ;;
+    *"session limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
+                      log "    claude がセッションの上限に達した。3 時間後まで codex だけで回す" ;;
+  esac
+fi
 
 record_leftover() {  # 失敗した tick が残したものを目印へ書く（次の tick が拾う）
   local reason="$1"
