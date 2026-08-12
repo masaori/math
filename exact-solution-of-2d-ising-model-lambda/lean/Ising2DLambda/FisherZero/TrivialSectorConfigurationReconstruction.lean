@@ -2,10 +2,11 @@
 「自明セクターの偶部分グラフから配位を復元できる」の具体版。双対辺写像の逆像として
 元の辺集合を復元し、偶部分グラフ性から格子面の等式・二周期の等式・行和と列和の等式・
 全行と全列の周期和の零性を導き、基点付き道和の定義と横向き辺についての道和の差までを
-置く存在構成の前半と、復元した配位が一つ得られた後に全スピン反転による二つの原像だけが
-あると示す個数計算を置く。
+置く存在構成の前半、縦向き辺についての道和の差、および復元した配位が一つ得られた後に
+全スピン反転による二つの原像だけがあると示す個数計算を置く。
 
-存在構成のうち、縦向き辺についての道和の差と復元の組み立ては続く tick でこのファイルへ加える。
+存在構成のうち、復元の組み立て（道和から定めた配位の破れた辺集合が復元した辺集合に
+一致すること）は続く tick でこのファイルへ加える。
 -/
 import Ising2DLambda.FisherZero.DualBrokenEdgesWinding
 import Ising2DLambda.FisherZero.LowTemperaturePolynomial
@@ -374,6 +375,145 @@ theorem reconstructionPathParity_horizontal_difference (L : ℕ) [NeZero L]
           (∑ c ∈ Finset.range j.val,
             (if edgeOfRow (n + 1) false i (c : ZMod (n + 1)) ∈
               reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo
+
+/-- 人手証明の「格子面の等式の望遠鏡和」の核。隣り合う二項の和を範囲にわたって足すと、
+`ℤ/2ℤ` では中間の項が二度ずつ現れて消え、両端の二項だけが残る。 -/
+lemma sum_range_adjacent_pairs_char_two (f : ℕ → ZMod 2) (m : ℕ) :
+    (∑ c ∈ Finset.range m, (f (c + 1) + f c)) = f m + f 0 := by
+  have htwo : (2 : ZMod 2) = 0 := rfl
+  induction m with
+  | zero =>
+      simp only [Finset.range_zero, Finset.sum_empty]
+      linear_combination (- f 0) * htwo
+  | succ k ih =>
+      rw [Finset.sum_range_succ, ih]
+      linear_combination (f k) * htwo
+
+/-- 人手証明の縦向き辺についての道和の差。横向きの有限和の差は格子面の等式の望遠鏡和で
+縦向きの両端二項へ落ち、縦向きの有限和の差は、代表が `L - 1` 未満なら有限和の末尾の一項、
+`L - 1` なら列全体の和が零であることから、どちらも列 `0` の縦辺の項になる。 -/
+theorem reconstructionPathParity_vertical_difference (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (i j : ZMod L) :
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  cases L with
+  | zero => exact (NeZero.ne 0 rfl).elim
+  | succ n =>
+      have htwo : (2 : ZMod 2) = 0 := rfl
+      -- 格子面の等式を、行 i と行 i + 1 の横辺二項＝列 c と列 c + 1 の縦辺二項の形へ移す
+      have hface : ∀ c : ℕ,
+          ((if edgeOfRow (n + 1) false (i + 1) ((c : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) +
+            (if edgeOfRow (n + 1) false i ((c : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) =
+          (if edgeOfRow (n + 1) true i (((c + 1 : ℕ) : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) +
+            (if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) := by
+        intro c
+        have hf := reconstructedEdgeSet_face_equation (n + 1) A hSector.1 i
+          ((c : ZMod (n + 1)))
+        push_cast
+        linear_combination hf -
+          ((if edgeOfRow (n + 1) true i ((c : ZMod (n + 1)) + 1) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0 : ZMod 2) +
+            (if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo
+      -- 横向きの有限和の差。格子面の等式の望遠鏡和で両端の縦辺二項だけが残る
+      have hHsum : ((∑ c ∈ Finset.range j.val,
+            (if edgeOfRow (n + 1) false (i + 1) ((c : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0)) +
+          ∑ c ∈ Finset.range j.val,
+            (if edgeOfRow (n + 1) false i ((c : ZMod (n + 1))) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) =
+          (if edgeOfRow (n + 1) true i j ∈ reconstructedEdgeSet (n + 1) A then 1 else 0) +
+            (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
+              then 1 else 0) := by
+        rw [← Finset.sum_add_distrib]
+        calc
+          (∑ c ∈ Finset.range j.val,
+              ((if edgeOfRow (n + 1) false (i + 1) ((c : ZMod (n + 1))) ∈
+                  reconstructedEdgeSet (n + 1) A then 1 else 0) +
+                (if edgeOfRow (n + 1) false i ((c : ZMod (n + 1))) ∈
+                  reconstructedEdgeSet (n + 1) A then 1 else 0)) : ZMod 2) =
+            ∑ c ∈ Finset.range j.val,
+              ((if edgeOfRow (n + 1) true i (((c + 1 : ℕ) : ZMod (n + 1))) ∈
+                  reconstructedEdgeSet (n + 1) A then 1 else 0) +
+                (if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
+                  reconstructedEdgeSet (n + 1) A then 1 else 0)) :=
+              Finset.sum_congr rfl (fun c _ => hface c)
+          _ = (if edgeOfRow (n + 1) true i (((j.val : ℕ) : ZMod (n + 1))) ∈
+                reconstructedEdgeSet (n + 1) A then 1 else 0) +
+              (if edgeOfRow (n + 1) true i (((0 : ℕ) : ZMod (n + 1))) ∈
+                reconstructedEdgeSet (n + 1) A then 1 else 0) :=
+              sum_range_adjacent_pairs_char_two (fun c =>
+                if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
+                  reconstructedEdgeSet (n + 1) A then 1 else 0) j.val
+          _ = _ := by rw [ZMod.natCast_zmod_val j, Nat.cast_zero]
+      -- 縦向きの有限和の差。代表が末尾未満なら末尾の一項、末尾なら列全体の和の零性を使う
+      have hvert : ((∑ r ∈ Finset.range (i + 1).val,
+            (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0)) +
+          ∑ r ∈ Finset.range i.val,
+            (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) =
+          (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
+            then 1 else 0) := by
+        by_cases hi : i = -1
+        · subst hi
+          have hcol :=
+            (reconstructedEdgeSet_all_row_column_sums_zero (n + 1) A hSector).2 0
+          let residueEquiv : Fin (n + 1) ≃ ZMod (n + 1) :=
+            { toFun := fun r => (r.val : ZMod (n + 1))
+              invFun := fun z => ⟨z.val, z.val_lt⟩
+              left_inv := fun r => Fin.ext (by
+                simp only [ZMod.val_natCast, Nat.mod_eq_of_lt r.isLt])
+              right_inv := fun z => ZMod.natCast_zmod_val z }
+          have hcolFin : (∑ r : Fin (n + 1),
+              (if edgeOfRow (n + 1) true ((r.val : ZMod (n + 1))) 0 ∈
+                reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
+            calc
+              _ = ∑ r : ZMod (n + 1),
+                  (if edgeOfRow (n + 1) true r 0 ∈ reconstructedEdgeSet (n + 1) A
+                    then 1 else 0) := Fintype.sum_equiv residueEquiv _ _
+                      (fun _ => rfl)
+              _ = 0 := hcol
+          have hcolRange : (∑ r ∈ Finset.range (n + 1),
+              (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
+                reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
+            rw [← Fin.sum_univ_eq_sum_range]
+            exact hcolFin
+          rw [Finset.sum_range_succ] at hcolRange
+          have hcast : ((n : ℕ) : ZMod (n + 1)) = -1 := by
+            apply ZMod.val_injective (n + 1)
+            rw [ZMod.val_natCast, Nat.mod_eq_of_lt (Nat.lt_succ_self n), ZMod.val_neg_one]
+          simp only [neg_add_cancel, ZMod.val_zero, Finset.range_zero, Finset.sum_empty,
+            zero_add, ZMod.val_neg_one]
+          rw [← hcast]
+          linear_combination hcolRange -
+            (if edgeOfRow (n + 1) true ((n : ZMod (n + 1))) 0 ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0 : ZMod 2) * htwo
+        · have hilt : i.val + 1 < n + 1 := by
+            have hibound := ZMod.val_lt i
+            by_contra hnot
+            have hval : i.val = n := by omega
+            apply hi
+            apply ZMod.val_injective (n + 1)
+            rw [hval, ZMod.val_neg_one]
+          have hival : (i + 1).val = i.val + 1 := by
+            rw [show i + 1 = ((i.val + 1 : ℕ) : ZMod (n + 1)) by
+              rw [Nat.cast_add, ZMod.natCast_zmod_val, Nat.cast_one]]
+            rw [ZMod.val_natCast, Nat.mod_eq_of_lt hilt]
+          rw [hival, Finset.sum_range_succ, ZMod.natCast_zmod_val i]
+          linear_combination (∑ r ∈ Finset.range i.val,
+            (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) * htwo
+      rw [reconstructionPathParity, reconstructionPathParity]
+      linear_combination hvert + hHsum +
+        (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
+          then 1 else 0 : ZMod 2) * htwo
 
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by
