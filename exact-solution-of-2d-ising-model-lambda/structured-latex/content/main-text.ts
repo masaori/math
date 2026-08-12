@@ -27902,14 +27902,16 @@ b_{\mathrm v}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)
       ]),
       displayMath(String.raw`b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j)
 +b_{\mathrm v}(i,j+\bar1)+b_{\mathrm h}(i+\bar1,j)=0
-\quad\text{in }\mathbb Z/2\mathbb Z`),
+\quad\text{in }\mathbb Z/2\mathbb Z
+\quad(\because\ \blkref{def_even_edge_subset},\ \blkref{def_dual_edge_map})`),
       paragraph([
         "となる。また二つの巻き付き偶奇が零であることを ", ref("def_torus_winding_parities"),
         " と双対辺写像の定義で戻すと",
       ]),
       displayMath(String.raw`\sum_i b_{\mathrm v}(i,\pi(-1))=0,\qquad
 \sum_j b_{\mathrm h}(\pi(-1),j)=0
-\quad\text{in }\mathbb Z/2\mathbb Z`),
+\quad\text{in }\mathbb Z/2\mathbb Z
+\quad(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map})`),
       paragraph([
         "を得る。格子面の等式を一つの行に沿って足すと縦向き辺の項は二度ずつ現れて消えるので",
       ]),
@@ -27937,7 +27939,8 @@ b_{\mathrm v}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)
       paragraph([
         "で定める。横向き辺について、", math(String.raw`s(j)<L-1`), " なら二つの有限和の差は末尾の一項なので",
       ]),
-      displayMath(String.raw`t(i,j+\bar1)+t(i,j)=b_{\mathrm h}(i,j)`),
+      displayMath(String.raw`t(i,j+\bar1)+t(i,j)=b_{\mathrm h}(i,j)
+\quad(\because\ t\ \text{の定義})`),
       paragraph([
         math(String.raw`s(j)=L-1`), " なら同じ等式は行全体の和が零であることから従う。縦向き辺について、",
         math(String.raw`s(i)<L-1`), " なら格子面の等式を ", math(String.raw`c=0,\ldots,s(j)-1`),
@@ -27962,9 +27965,13 @@ e\in\mathcal B_L(\sigma_A)
 &\Longleftrightarrow e\in B
 &&\bigl(\because\ \text{横向き辺と縦向き辺についての直前の等式}\bigr).
 \end{aligned}`),
-      displayMath(String.raw`\delta_L\bigl(\mathcal B_L(\sigma_A)\bigr)
-=\delta_L(B)=A
-\quad(\because\ B=\delta_L^{-1}(A))`),
+      displayMath(String.raw`\begin{aligned}
+\delta_L\bigl(\mathcal B_L(\sigma_A)\bigr)
+&=\delta_L(B)
+&&\bigl(\because\ \mathcal B_L(\sigma_A)=B\bigr)\\
+&=A
+&&\bigl(\because\ B=\delta_L^{-1}(A),\ \blkref{claim_dual_edge_map_bijective}\bigr).
+\end{aligned}`),
       paragraph([
         "したがって原像は空でない。", ref("claim_global_spin_reversal_preserves_broken_edge"), " より ",
         math(String.raw`\nu_L(\sigma_A)`), " も原像に属し、基点で値が反対なので ",
