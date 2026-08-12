@@ -27433,6 +27433,80 @@ S_L(A)
   },
 
   {
+    id: "fisher_zero_definition_high_temperature_polynomial",
+    kind: "definition",
+    title: { text: "高温展開の整数多項式" },
+    labels: ["def_high_temperature_polynomial"],
+    habitat: "Z",
+    verification: ["sagemath/check/high-temperature-polynomial-identity"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。偶部分グラフだけにわたる整数係数多項式を",
+      ]),
+      displayMath(String.raw`H_L(x):=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}\ \in\ \mathbb{Z}[x]`),
+      paragraph([
+        "で定める。", math(String.raw`|E_L|=2L^2`), " かつ ", math(String.raw`A\subseteq E_L`),
+        " なので指数は自然数であり、和は有限である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_high_temperature_polynomial_identity",
+    kind: "claim",
+    title: { text: "高温展開の多項式恒等式" },
+    labels: ["claim_high_temperature_polynomial_identity"],
+    habitat: "Z",
+    verification: ["sagemath/check/high-temperature-polynomial-identity"],
+    statement: [
+      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+      displayMath(String.raw`2^{L^2}Z_L=H_L`),
+      paragraph(["が成り立つ。温度、指数関数、実数体への代入は用いない。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\sigma\in\Sigma_L`), " と ", math(String.raw`e\in E_L`),
+        " を任意に取る。辺の両端のスピンの積は、辺が破れていなければ ", math(String.raw`1`),
+        "、破れていれば ", math(String.raw`-1`), " なので、",
+      ]),
+      displayMath(String.raw`(1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))
+=\begin{cases}2,&\sigma(\partial_0(e))=\sigma(\partial_1(e)),\\2x,&\sigma(\partial_0(e))\ne\sigma(\partial_1(e)).\end{cases}`),
+      paragraph(["したがって全辺にわたる積を取り、全配位について足すと"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\sigma\in\Sigma_L}\prod_{e\in E_L}
+\bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)
+&=\sum_{\sigma\in\Sigma_L}2^{2L^2}x^{b(\sigma)}
+&&(\because\ \text{一辺の二つの場合を全辺へ掛ける})\\
+&=2^{2L^2}Z_L
+&&(\because\ \blkref{def_partition_polynomial})
+\end{aligned}`),
+      paragraph(["一方、各辺の二項を有限分配則で展開し、有限和の順序を入れ替えると"]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{\sigma\in\Sigma_L}\prod_{e\in E_L}
+\bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)\\
+&=\sum_{A\subseteq E_L}(1+x)^{2L^2-|A|}(1-x)^{|A|}
+\sum_{\sigma\in\Sigma_L}\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
+&&(\because\ \text{全辺の二項展開と有限和の順序の入れ替え})\\
+&=\sum_{A\subseteq E_L}(1+x)^{2L^2-|A|}(1-x)^{|A|}S_L(A)
+&&(\because\ \blkref{def_edge_subset_spin_sum})\\
+&=2^{L^2}\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}
+&&(\because\ \blkref{claim_even_subgraph_spin_sum})\\
+&=2^{L^2}H_L
+&&(\because\ \blkref{def_high_temperature_polynomial})
+\end{aligned}`),
+      paragraph(["である。二つの計算の始点は同じなので"]),
+      displayMath(String.raw`2^{2L^2}Z_L=2^{L^2}H_L`),
+      paragraph([
+        math(String.raw`\mathbb{Z}[x]`), " は整域であり ", math(String.raw`2^{L^2}\ne0`),
+        " なので、この共通因子を消去して ", math(String.raw`2^{L^2}Z_L=H_L`), " を得る。",
+        "全過程は有限集合、自然数、整数係数多項式だけで閉じる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -27741,7 +27815,9 @@ S_L(A)
           ref("claim_fisher_zero_algebraicity"),
           "）、および破れた辺の集合の生成多項式による低温展開（",
           ref("claim_low_temperature_polynomial_identity"),
-          "）までは上で済んでいる。次に偶部分グラフによる高温展開と周期トーラスの境界セクターを組み合わせ、Kramers–Wannier 双対を可算な多項式恒等式として導き、自己双対点 ",
+          "）、および偶部分グラフによる高温展開（",
+          ref("claim_high_temperature_polynomial_identity"),
+          "）までは上で済んでいる。次に周期トーラスの境界セクターを明示して Kramers–Wannier 双対を可算な多項式恒等式として導き、自己双対点 ",
           math(String.raw`x_c=\sqrt2-1`),
           " を出す。",
         ],

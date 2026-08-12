@@ -3665,22 +3665,47 @@ T_{(V')}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`,
         math(String.raw`X`),
         " と ",
         math(String.raw`-X`),
-        " は可換（",
-        math(String.raw`X(-X) = -X^2 = (-X)X`),
-        "）だから ",
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+X(-X)
+&=-X^2
+&&(\because\ \text{スカラー }-1\text{ を積の外へ出す})\\
+&=(-X)X
+&&(\because\ \text{同じ }X\text{ どうしの積})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので可換である。したがって ",
         ref("theorem_exp_product"),
         " より",
       ]),
       displayMath(
-        String.raw`\exp(X)\exp(-X) = \exp(X + (-X)) = \exp(O) = I \quad (\because \text{theorem\_exp\_zero})`,
+        String.raw`\begin{aligned}
+\exp(X)\exp(-X)
+&=\exp(X+(-X))
+&&(\because\ \text{指数行列の積の定理})\\
+&=\exp(O)
+&&(\because\ X+(-X)=O)\\
+&=I
+&&(\because\ \text{零行列の指数行列})
+\end{aligned}`,
       ),
       paragraph([
         "故に ",
         math(String.raw`V'^{-1} = \exp(-X)`),
         " であり、",
-        math(String.raw`T_{(V')}(\psi_\mu^\dagger) = V'\psi_\mu^\dagger V'^{-1} = \exp(X)\psi_\mu^\dagger\exp(-X)`),
-        "。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V')}(\psi_\mu^\dagger)
+&=V'\psi_\mu^\dagger V'^{-1}
+&&(\because\ T_{(V')}\ \text{の定義})\\
+&=\exp(X)\psi_\mu^\dagger\exp(-X)
+&&(\because\ V'=\exp(X),\ V'^{-1}=\exp(-X))
+\end{aligned}`,
+      ),
       paragraph(["Step 1: ", math(String.raw`[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu^\dagger] = \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger`), "。"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3960,7 +3985,10 @@ T_{(V')}(\psi_\mu)
     ],
     conversion: {
       status: "converted",
-      notes: ["現行ソースに再同期（X の和を γ2(θν)≠0 に限定）し、Step 1-5（ψ^†）と Step 1'-2'（ψ）の場合分け・周期性・帰納法・exp 極限を全展開。Steps 3'-5' は符号反転で同様として簡潔化（ソースも同様）。"],
+      notes: [
+        "現行ソースに再同期（X の和を γ2(θν)≠0 に限定）し、Step 1-5（ψ^†）と Step 1'-2'（ψ）の場合分け・周期性・帰納法・exp 極限を全展開。Steps 3'-5' は符号反転で同様として簡潔化（ソースも同様）。",
+        "2026-08-12 の式変形統一で、証明冒頭の X と -X の可換性、指数行列の積、共役作用の定義を 2 段・3 段・2 段の鎖へ開き、全行へ根拠を付けた。内容は変えていない。次は Step 1 から続ける。",
+      ],
     },
   },
   {

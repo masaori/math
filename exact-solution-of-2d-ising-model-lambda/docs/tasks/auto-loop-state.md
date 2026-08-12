@@ -7,6 +7,13 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 156 は、前 tick の「偶部分グラフとスピン単項式の和」を四層で
+  突き合わせて修正不要と確認し、「高温展開の多項式恒等式」を記述と SageMath まで進めた。**
+  一辺の重みを二項表示し、全辺へ展開して `claim_even_subgraph_spin_sum` を適用することで、
+  整数係数多項式の等式 $2^{L^2}Z_L=H_L$ を得た。Lean 具体版・必要十分版・導出は未着手なので、
+  このセクションは `todo` のままである。次 tick はこの三本を完成させる。式変形の書き方の統一では、
+  姉妹側の「$T_{(V')}$ の $\psi$ への作用」の証明冒頭を整えた。
+
 - **2026-08-12 の tick 155 は、レビュー修正を独立して `origin/main` へ反映したあと、
   「偶部分グラフとスピン単項式の和」を四層すべてで完了させた。** レビューでは、非偶部分グラフ側で
   定義の否定から奇次数を取る橋渡しを自然数の偶奇として明示した。前進では、人手証明を配位和から
@@ -1786,7 +1793,7 @@
 | 破れた辺の集合の二つの原像 | Fisher 零点 | 同じ破れた辺の集合を与える二つの配位は、互いに等しいか全スピン反転で結ばれることを示す | done | 2026-08-12 の tick 152 で四層すべて完了。主張 `claim_same_broken_edges_equal_or_global_reversal`。横・縦の辺をたどる二つの帰納法で一致・不一致を全頂点へ伝播。SageMath は `same-broken-edges-two-preimages`。Lean 具体版 `sameBrokenEdges_eq_or_globalSpinReversal`、必要十分版 `eq_or_map_of_constant_agreement`、導出 `sameBrokenEdges_eq_or_globalSpinReversal_from_necSuf` |
 | 低温展開の多項式恒等式 | Fisher 零点 | 破れた辺の集合の生成多項式を定義し、$Z_L$ がその 2 倍であることを示す | done | 2026-08-12 の tick 153 で四層すべて完了。定義 `def_broken_edge_set_polynomial` と主張 `claim_low_temperature_polynomial_identity`。SageMath は `low-temperature-polynomial-identity`。Lean 具体版 `partitionPolynomial_eq_two_mul_lowTemperaturePolynomial`、必要十分版 `sum_eq_two_nsmul_sum_image_necSuf`（有限写像・二元の各原像・可換加法モノイドだけ）、導出 `partitionPolynomial_eq_two_mul_lowTemperaturePolynomial_from_necSuf` |
 | 偶部分グラフとスピン単項式の和 | Fisher 零点 | 偶部分グラフ生成多項式を定義し、辺部分集合に対応するスピン単項式の全配位和が偶部分グラフだけで $2^{L^2}$、それ以外で零になることを示す | done | 2026-08-12 の tick 155 で四層すべて完了。主張 `claim_even_subgraph_spin_sum`。SageMath は `even-subgraph-spin-sum`。Lean 具体版 `evenSubgraph_spinSum`、必要十分版 `sum_product_piecewise_even_necSuf`（有限な添字型・可換半環・各局所和の偶奇による二択値だけ）、導出 `evenSubgraph_spinSum_from_necSuf` |
-| 高温展開の多項式恒等式 | Fisher 零点 | 一辺の重みの二項表示を全辺へ展開し、直前のスピン単項式の和を適用して高温展開の整数多項式恒等式を示す | todo | 有限集合・整数多項式だけで書く |
+| 高温展開の多項式恒等式 | Fisher 零点 | 一辺の重みの二項表示を全辺へ展開し、直前のスピン単項式の和を適用して高温展開の整数多項式恒等式を示す | todo | 2026-08-12 の tick 156 で記述と SageMath まで完了。定義 `def_high_temperature_polynomial`、主張 `claim_high_temperature_polynomial_identity`、SageMath `high-temperature-polynomial-identity`。Lean 具体版・必要十分版・導出は未着手。有限集合・整数多項式だけで書く |
 | 周期トーラスの境界セクターと Kramers--Wannier 双対 | Fisher 零点 | 周期境界の四つのホモロジーセクターを明示し、低温展開と高温展開を可算な双対恒等式へ結ぶ | todo | 周期格子は平面グラフではないため、周期分配関数一つをそのまま自己双対としない。四境界条件の混合を明示してから双対を書く |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
 | 12b | 有限系の自由エントロピー | 一般の $q$ での $\Phi_L(q)$ の性質（双対な点どうしの関係） | todo | 本文末尾の「この先に書くこと」に「続き」として載っていたが、セクション表に無く実行の列から落ちていた（2026-08-09 に追加）。自己双対点のあとに置くのは、双対な点どうしの関係が Kramers–Wannier 双対を定義してからでないと書けないため |
@@ -1797,6 +1804,13 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 156）: 高温展開の整数多項式 $H_L$ を定義し、記述と SageMath まで進めた。
+  一辺の二項表示を全辺へ掛けた側は $2^{2L^2}Z_L$、辺部分集合ごとに展開した側は
+  `claim_even_subgraph_spin_sum` により $2^{L^2}H_L$ となる。同じ有限和の二通りの計算を突き合わせ、
+  整域 $\mathbb{Z}[x]$ で非零な共通因子を消去して $2^{L^2}Z_L=H_L$ を得た。SageMath は
+  $L=1,2$ の全配位で一辺表示の全辺積を検査し、全辺部分集合から直接作った両多項式を比較した。
+  Lean 三本は次 tick へ残す。
 
 - 2026-08-12（tick 155）: 「偶部分グラフとスピン単項式の和」を四層すべてで完了した。
   人手証明と Lean 具体版は、辺ごとの積を頂点ごとの冪へ並べ替え、全配位和を頂点ごとの二値和の
@@ -4063,6 +4077,11 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 156）**: `008_TV1_hatZ_hatY_part2` の主張
+「$T_{(V')}$ の $\psi$ への作用」の証明冒頭を整えた。$X$ と $-X$ の可換性、指数行列の積、
+共役作用の定義を 2 段・3 段・2 段の鎖へ開き、全行へ根拠を付けた。内容は変えていない。
+次は同じ証明の Step 1 から続ける。
+
 **2026-08-12（tick 155）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\lambda_{\pm,\mu}=e^{\pm\gamma(\theta_\mu)}$」を整えた。固有値の積と和から得る正値性、
 $\gamma$ の非負性、指数表示、arccosh の定義との整合性を一続きの表示へまとめ、全行へ根拠を付けた。
@@ -5624,6 +5643,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 156）: 前 tick の「偶部分グラフとスピン単項式の和」を、本文、SageMath、
+  Lean 具体版・必要十分版・導出、入口 import、sorry 登録まで突き合わせた。辺ごとの積を頂点ごとの
+  冪へ並べ替える段、配位和を局所和の積へ分配する段、偶奇による二択値は全層で対応していた。
+  本文末尾の「この先に書くこと」とセクション表の todo 先頭も一致しており、修正は無かった。
 
 - 2026-08-12（tick 155）: 「偶部分グラフとスピン単項式の和」を本文と SageMath で突き合わせた。
   非偶部分グラフ側で、定義の否定から「奇次数の頂点がある」へ進む自然数の偶奇が省略されていたため、
