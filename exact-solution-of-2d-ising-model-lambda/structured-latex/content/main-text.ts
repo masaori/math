@@ -27691,10 +27691,26 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)=b
 &=n_{\mathrm{v}}(i,j)
 &&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法と減法})
 \end{aligned}`),
-      paragraph(["である。反対向きの往復も、二つの向きの辺ごとに"]),
-      displayMath(String.raw`\delta_L\!\left(\eta_L\bigl(n_{\mathrm{h}}(i,j)\bigr)\right)=n_{\mathrm{h}}(i,j),\qquad
-\delta_L\!\left(\eta_L\bigl(n_{\mathrm{v}}(i,j)\bigr)\right)=n_{\mathrm{v}}(i,j)
-\quad(\because\ \text{同じ加法と減法})`),
+      paragraph(["である。反対向きの往復について、横向き辺では"]),
+      displayMath(String.raw`\begin{aligned}
+\delta_L\!\left(\eta_L\bigl(n_{\mathrm{h}}(i,j)\bigr)\right)
+&=\delta_L\bigl(n_{\mathrm{v}}(i-\bar1,j)\bigr)
+&&(\because\ \eta_L\ \text{の定め方})\\
+&=n_{\mathrm{h}}\bigl((i-\bar1)+\bar1,j\bigr)
+&&(\because\ \blkref{def_dual_edge_map})\\
+&=n_{\mathrm{h}}(i,j)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の減法と加法})
+\end{aligned}`),
+      paragraph(["縦向き辺では"]),
+      displayMath(String.raw`\begin{aligned}
+\delta_L\!\left(\eta_L\bigl(n_{\mathrm{v}}(i,j)\bigr)\right)
+&=\delta_L\bigl(n_{\mathrm{h}}(i,j-\bar1)\bigr)
+&&(\because\ \eta_L\ \text{の定め方})\\
+&=n_{\mathrm{v}}\bigl(i,(j-\bar1)+\bar1\bigr)
+&&(\because\ \blkref{def_dual_edge_map})\\
+&=n_{\mathrm{v}}(i,j)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の減法と加法})
+\end{aligned}`),
       paragraph([
         "となる。したがって ", math(String.raw`\eta_L`), " は ",
         math(String.raw`\delta_L`), " の両側逆写像であり、", math(String.raw`\delta_L`),
