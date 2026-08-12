@@ -3039,15 +3039,43 @@ c_\mu c_\nu
       paragraph([
         "c) ",
         math(String.raw`[\psi_\mu, \psi_\nu]_+`),
-        " について、双線型性より ",
-        math(String.raw`(-i)(-i) = -1`),
-        " となり、a) と同じ",
+        " について、反交換子の双線型性より",
       ]),
       displayMath(
-        String.raw`[\psi_\mu, \psi_\nu]_+
-= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
+        String.raw`\begin{aligned}
+[\psi_\mu, \psi_\nu]_+
+&= c_\mu c_\nu\Bigl(
+(-i)(-i)\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}[\hat{Z}_\mu^{(-)}, \hat{Z}_\nu^{(-)}]_+ \\
+&\quad + (-i)\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\nu)[\hat{Z}_\mu^{(-)}, \hat{Y}_\nu]_+ \\
+&\quad + \gamma_2(-\theta_\mu)\,(-i)\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}[\hat{Y}_\mu, \hat{Z}_\nu^{(-)}]_+ \\
+&\quad + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)[\hat{Y}_\mu, \hat{Y}_\nu]_+
+\Bigr)
+&& (\because\ \text{反交換子の双線型性と}\ \psi_\mu,\psi_\nu\ \text{の定義})\\
+&= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&& (\because\ \text{二つの交差項の反交換子は零であり、}\ (-i)(-i)=-1)
+\end{aligned}`,
       ),
-      paragraph(["となる。a) と同じ議論により ", math(String.raw`[\psi_\mu, \psi_\nu]_+ = 0`), "。"]),
+      paragraph([
+        math(String.raw`\delta^M_{\mu+\nu,0} \neq 0`),
+        " のとき、a) で示した二つの式変形を当てると、係数の括弧は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}
++\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\\
+&=-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
++\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \text{a) の平方根の積と}\ \gamma_2\ \text{の積の式変形})\\
+&=0
+&& (\because\ \mathbb{C}\ \text{の加法逆元})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\delta^M_{\mu+\nu,0} = 0`),
+        " のときは、先に得た反交換子の式の因子が零なので、全体が ",
+        math(String.raw`0`),
+        " となる。以上から ", math(String.raw`[\psi_\mu, \psi_\nu]_+ = 0`), "。",
+      ]),
     ],
     conversion: {
       status: "converted",
@@ -3065,6 +3093,7 @@ c_\mu c_\nu
           "t_μ ≠ 0 ゆえ分枝の一致が不可欠であること）を追加した。主張そのものは変えていない。",
         "2026-08-12 の式変形統一で、a) の反交換子の双線型展開・平方根の積・γ₂ の積・係数の消去を一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
         "2026-08-12 の式変形統一で、b) の反交換子の双線型展開・係数の括弧・係数の積・最後の約分を一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
+        "2026-08-12 の式変形統一で、c) の反交換子の双線型展開・交差項の消去・係数の括弧の消去を一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
       ],
     },
   },

@@ -752,6 +752,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerNotOneExists
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_not_one_exists_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerNotOneExists_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powerSumValue
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.piecewise_value_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.powerSumValue_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

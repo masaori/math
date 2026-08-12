@@ -7,6 +7,18 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 147 は、tick 146 の「指数が根の次数の倍数でないとき、冪が 1 でない
+  1 の冪根が存在する」を四層で突き合わせて修正不要と確認し、c4c4「1 の $n$ 乗根の全体に
+  わたる冪の和の値」を四層すべてで完了させた。** $n\mid m$ の場合は c4c2b により
+  $S_{n,m}=n$、$n\nmid m$ の場合は c4c3 で $w^m\ne1$ なる $w\in\mu_n$ を取り c4c1 により
+  $S_{n,m}=0$ とした。必要十分版 `piecewise_value_necSuf` は命題の成立側・不成立側の値だけを
+  要求し、値の型に代数構造を一切要求しない。SageMath は $n=1,\dots,8$・$m=0,\dots,17$ の
+  全 144 組を `QQbar` で厳密計算した。検証は構造化テキスト 274 ラベル・PDF 141 ページで
+  未解決参照 0 件・検証と証明の対応 128 件・`lake build`・sorry 検査 699 件ですべて通過した。
+  次は「シフト行列の固有空間たちが列ベクトルの全体を
+  張ること」の組み立てである。式変形の書き方の統一では、姉妹側の「$\psi$ の反交換関係」の
+  c)（二つの消滅演算子の反交換子）を整えた。**
+
 - **2026-08-12 の tick 146 は、tick 145 の c4c2b「指数が根の次数の倍数のときの冪の和の値」を
   四層で突き合わせて修正不要と確認し、c4c3「$n$ が $m$ を割らないとき $w^{m}\ne1$ を満たす
   $w\in\mu_n$ が存在すること」を四層すべてで完了させた。** 台帳の見込みの論法（$\mu_m$ との
@@ -1697,7 +1709,7 @@
 | 10h3d-c4c2a | 固有値の代数性 | 指数が $n$ の倍数ならば 1 の $n$ 乗根の冪は 1 であること（$n\mid m$、$w\in\mu_n$ ならば $w^m=1$。冪の法則の鎖 1 本） | done | 2026-08-12 の tick 144 で四層すべて完了。主張 `claim_root_of_unity_power_of_multiple`。SageMath は `root-of-unity-power-of-multiple`（468 組）。Lean 具体版 `rootOfUnityPowerOfMultiple`、必要十分版 `power_multiple_eq_one_necSuf`（単位元と自然数冪の記号、および鎖の 3 等式だけ）、導出 `rootOfUnityPowerOfMultiple_from_necSuf`。旧 c4c2 は各項の計算と有限和の数え替えという独立した二論法を持つため分割した |
 | 10h3d-c4c2b | 固有値の代数性 | 指数が $n$ の倍数のときの冪の和の値（c4c2a で各項を 1 にし、$\mu_n$ にわたる単位元の和を $\lvert\mu_n\rvert=n$ が与える代数的数へ数え替える） | done | 2026-08-12 の tick 145 で四層すべて完了。主張 `claim_root_of_unity_power_sum_multiple_value`。本文は c4c2a で各項を 1 にし、$\lvert\mu_n\rvert=n$ が与える全単射で番号の集合へ添字を取り替え、`claim_qbar_unit_sum_eq_rational` を当てる。SageMath は `root-of-unity-power-sum-multiple-value`（104 組）。Lean 具体版 `powerSumMultipleValue`、必要十分版 `sum_const_reindex_necSuf`（可換加法モノイド・各項の定数値・添字型の元の個数・番号の集合にわたる有限和の値だけ）、導出 `powerSumMultipleValue_from_necSuf` |
 | 10h3d-c4c3 | 固有値の代数性 | $n$ が $m$ を割らないとき $w^{m}\ne1$ を満たす $w\in\mu_n$ が存在すること | done | 2026-08-12 の tick 146 で四層すべて完了。主張 `claim_root_of_unity_power_not_one_exists`。台帳の見込みの論法（$\mu_n\subset\mu_m$ と $\lvert\mu_m\rvert=m$ の比較）は $n\le m$ しか出ず矛盾にならないので、除法 $m=nq+r$（$1\le r<n$）へ変更: すべての $w\in\mu_n$ で $w^{m}=1$ と仮定すると鎖 $w^{r}=1\cdot w^{r}=\dots=w^{m}=1$ から $\mu_n\subseteq\mu_r$ となり、`claim_root_of_unity_card`・`claim_root_of_unity_subset_card_bound`（指数 $r$）で $n=\lvert\mu_n\rvert\le r<n$ の矛盾。SageMath は `root-of-unity-power-not-one-exists`（93 組）。Lean 具体版 `rootOfUnityPowerNotOneExists`、必要十分版 `power_not_one_exists_necSuf`（単位元・積・冪の記号と鎖の 4 法則・除法の分解・境界 1 仮定だけ。$1\le r$ も $n\nmid m$ も不要）、導出 `rootOfUnityPowerNotOneExists_from_necSuf` |
-| 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | todo | 組み立てだけの段の見込み |
+| 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | done | 2026-08-12 の tick 147 で四層すべて完了。主張 `claim_root_of_unity_power_sum_value`。本文は $n\mid m$ の場合に c4c2b、$n\nmid m$ の場合に c4c3 で witness を取り c4c1 を当てる場合分け。SageMath は `root-of-unity-power-sum-value`（144 組）。Lean 具体版 `powerSumValue`、必要十分版 `piecewise_value_necSuf`（命題の両側の値だけを要求し、値の型に構造は不要）、導出 `powerSumValue_from_necSuf` |
 | 10h3d-d | 固有値の代数性 | シフト行列の固有空間たちが列ベクトルの全体を張ること（組み立て） | todo | 10h3d-a〜c を合わせるだけの段。新しい論法は持たない見込み |
 | 11 | Fisher 零点 | 零点が $\overline{\mathbb{Q}}$ に属すること、Kramers–Wannier 双対 | todo | |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
@@ -1709,6 +1721,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 147）: c4c4「1 の $n$ 乗根の全体にわたる冪の和の値」を四層すべてで
+  完了した。$n\mid m$ と $n\nmid m$ の場合分けだけで、前者は c4c2b、後者は c4c3 と c4c1 の
+  適用で閉じる。必要十分版により、この組み立て自体は値の型の代数構造を使わないことを確認した。
+  次は「シフト行列の固有空間たちが列ベクトルの全体を張ること」である。
 
 - 2026-08-12（tick 146）: c4c3 を四層すべてで完了した。台帳の見込みの論法は矛盾が出ないため
   除法による背理法へ変更した（変更の理由はセクション表の行に記載）。必要十分版で、この論法に
@@ -3929,6 +3946,14 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 147）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\psi$ の反交換関係」（`anticommutator_of_psi`）の c)（二つの消滅演算子の反交換子）を
+進めた。反交換子の双線型展開、交差項の消去と $(-i)(-i)=-1$、a) で示した二つの積の
+式変形による係数の消去を一続きの鎖へ開き、各等号に根拠を付けた。内容は変えていない。
+これで同証明の Step 0 と a)〜c) の統一は完了した。次の tick は同じファイルでこの主張より後に
+ある証明の先頭から続ける。
+姉妹側の構造化テキストの検査一式・検証と証明の対応 116 件・PDF 294 ページは通過した。
+
 **2026-08-12（tick 146）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\psi$ の反交換関係」（`anticommutator_of_psi`）の b)（生成演算子と消滅演算子の反交換子）を
 進めた。反交換子の双線型展開（交差項の消去と $(i)(-i)=1$）、係数の括弧（a) の平方根の積・
@@ -5438,6 +5463,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 147）: tick 146 の c4c3「指数が根の次数の倍数でないとき、冪が 1 でない
+  1 の冪根が存在する」を、本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・
+  sorry 登録まで突き合わせた。除法の余りによる 7 段の鎖、部分集合の個数上界による矛盾、
+  必要十分版の境界仮定、導出での有限性・個数の供給は対応しており、修正は無かった。
 
 - 2026-08-12（tick 146）: tick 145 の c4c2b の本文・SageMath・Lean 具体版・必要十分版・導出・
   入口 import・sorry 登録（3 件）を突き合わせた。鎖の各段と根拠、住処 Qbar の宣言、

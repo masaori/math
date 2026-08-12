@@ -26742,6 +26742,65 @@ n
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_power_sum_value",
+    kind: "claim",
+    title: {
+      text: "1 の冪根の全体にわたる冪の和の値",
+    },
+    labels: ["claim_root_of_unity_power_sum_value"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumValue",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.piecewise_value_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.powerSumValue_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-power-sum-value"],
+    statement: [
+      paragraph([
+        math(String.raw`n,m\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとする。このとき、1 の冪根の全体にわたる冪の和 ",
+        math(String.raw`S_{n,m}=\sum_{z\in\mu_n}z^m`), "（",
+        ref("claim_root_of_unity_power_sum_invariant"), " で置いた元）について",
+      ]),
+      displayMath(String.raw`S_{n,m}=
+\begin{cases}
+  n,& n\mid m,\\
+  0,& n\nmid m
+\end{cases}`),
+      paragraph([
+        "が成り立つ。第 1 の場合の右辺 ", math(String.raw`n`),
+        " は、", ref("claim_root_of_unity_power_sum_multiple_value"),
+        " の statement と同じく ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の元を表す。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n\mid m`), " が成り立つ場合と成り立たない場合に分ける。",
+      ]),
+      paragraph([
+        math(String.raw`n\mid m`), " が成り立つ場合は、",
+        ref("claim_root_of_unity_power_sum_multiple_value"), " により ",
+        math(String.raw`S_{n,m}=n`), " である。",
+      ]),
+      paragraph([
+        math(String.raw`n\nmid m`), " が成り立つ場合は、",
+        ref("claim_root_of_unity_power_not_one_exists"), " により ",
+        math(String.raw`w^m\ne1`), " を満たす ", math(String.raw`w\in\mu_n`),
+        " が存在する。この元を ", ref("claim_root_of_unity_power_sum_zero"),
+        " に当てると、", math(String.raw`S_{n,m}=0`), " である。",
+      ]),
+      paragraph([
+        "二つの場合は自然数の割り切り関係について互いに排他的であり、すべての場合を尽くす。",
+        "したがって statement の場合分けが成り立つ。",
+        "この段は引いた 3 つの主張を命題の場合分けで組み立てただけであり、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の演算について新しい性質を使っていない。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
