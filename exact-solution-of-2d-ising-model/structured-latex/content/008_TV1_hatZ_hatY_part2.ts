@@ -3270,13 +3270,23 @@ c_\mu c_\nu
         " より",
       ]),
       displayMath(
-        String.raw`\gamma_1(\theta_\mu)^2 = c_1^2 (c_2^*)^2 - 2 c_1 c_2^* s_1 s_2^* u + s_1^2 (s_2^*)^2 u^2`,
+        String.raw`\begin{aligned}
+\gamma_1(\theta_\mu)^2
+&=\bigl(c_1c_2^*-s_1s_2^*u\bigr)^2
+&&\left(\because\ \gamma_1(\theta_\mu)=c_1c_2^*-s_1s_2^*u\right)\\
+&=c_1^2(c_2^*)^2-2c_1c_2^*s_1s_2^*u+s_1^2(s_2^*)^2u^2
+&&\left(\because\ (a-b)^2=a^2-2ab+b^2\right)
+\end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
-&= -(s_2^*)^2\Bigl(c_1^2 u^2 - 2 c_1 s_1 c_2 u + s_1^2 c_2^2 + 1 - u^2\Bigr) \\
-&= -c_1^2 (s_2^*)^2 u^2 + 2 c_1 s_1 c_2 (s_2^*)^2 u - s_1^2 c_2^2 (s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2 u^2
+&=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2+1-u^2\Bigr)
+&&\left(\because\ \text{Step 2 の終点}\right)\\
+&=-(s_2^*)^2\Bigl(c_1^2u^2-2c_1s_1c_2u+s_1^2c_2^2+1-u^2\Bigr)
+&&\left(\because\ (a-b)^2=a^2-2ab+b^2\right)\\
+&=-c_1^2(s_2^*)^2u^2+2c_1s_1c_2(s_2^*)^2u-s_1^2c_2^2(s_2^*)^2-(s_2^*)^2+(s_2^*)^2u^2
+&&\left(\because\ \text{分配則}\right)
 \end{aligned}`,
       ),
       paragraph([

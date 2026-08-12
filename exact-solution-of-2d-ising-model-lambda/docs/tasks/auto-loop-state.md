@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 150 は、前 tick の「シフト行列の固有空間たちは列ベクトルの全体を張る」を
+  四層で突き合わせて修正不要と確認し、旧「Fisher 零点の代数性と Kramers--Wannier 双対」を
+  独立した二論法へ分割したうえで、先頭の「有限格子の Fisher 零点は代数的である」を四層すべてで
+  完了させた。** 整係数多項式を代数的数で評価する写像と Fisher 零点集合を定義し、
+  $Z_L(1)=2^{L^2}\ne0$ から $Z_L$ が零多項式でないことを示して、各 Fisher 零点が $Z_L$ という
+  非零な整係数多項式の根であることを確定した。SageMath は $L=1,2,3$ の実在する 20 個の根を
+  `QQbar` で厳密計算した（$L=1$ では $Z_1=2$ なので根は無い）。次は Kramers--Wannier 双対である。
+  式変形の書き方の統一では、姉妹側の「$\det A(\theta_\mu)=1$」の Step 3 を整えた。
+
 - **2026-08-12 の tick 149 は、前 tick の復元式を四層で突き合わせ、Lean 3 定理の sorry 依存検査への
   登録漏れを直したうえで、「シフト行列の固有空間たちは列ベクトルの全体を張る」を四層すべてで
   完了させた。** 各 $z\in\mu_L$ に $u_z:=L^{-1}P_{A,z}(v)$ を割り当て、像の所属・固有空間の
@@ -1730,7 +1739,8 @@
 | 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | done | 2026-08-12 の tick 147 で四層すべて完了。主張 `claim_root_of_unity_power_sum_value`。本文は $n\mid m$ の場合に c4c2b、$n\nmid m$ の場合に c4c3 で witness を取り c4c1 を当てる場合分け。SageMath は `root-of-unity-power-sum-value`（144 組）。Lean 具体版 `powerSumValue`、必要十分版 `piecewise_value_necSuf`（命題の両側の値だけを要求し、値の型に構造は不要）、導出 `powerSumValue_from_necSuf` |
 | 10h3d-d1 | 固有値の代数性 | 固有空間へ落とす写像から列ベクトルを復元できること（$\bigoplus_{z\in\mu_L}L^{-1}\odot P_{A,z}(v)=v$） | done | 2026-08-12 の tick 148 で四層すべて完了。主張 `claim_qbar_projector_reconstruction`。根にわたる冪の和の値を使い $k=0$ の項だけを残す。SageMath は `qbar-projector-reconstruction`。Lean 具体版 `qbarProjector_reconstruction`、必要十分版 `finite_orthogonal_reconstruction_necSuf`（一般の体上の有限線形結合）、導出 `qbarProjector_reconstruction_from_necSuf` |
 | 10h3d-d2 | 固有値の代数性 | 復元式の各加数が対応する固有空間に入ることを合わせ、固有空間たちが列ベクトルの全体を張ると結論する | done | 2026-08-12 の tick 149 で四層すべて完了。主張 `claim_qbar_eigenspaces_span`。各根に $u_z=L^{-1}P_{A,z}(v)$ を割り当て、像の所属・スカラー倍への閉性・復元式を組み合わせた |
-| 11 | Fisher 零点 | 零点が $\overline{\mathbb{Q}}$ に属すること、Kramers–Wannier 双対 | todo | |
+| Fisher 零点の代数性 | Fisher 零点 | 整係数多項式を代数的数で評価する写像と有限格子の Fisher 零点集合を定義し、零点が非零な整係数多項式 $Z_L$ の根であることを示す | done | 2026-08-12 の tick 150 で四層すべて完了。主張 `claim_fisher_zero_algebraicity`。$Z_L(1)=2^{L^2}\ne0$ から $Z_L\ne0$ を出し、Fisher 零点の定義を開いて $\mathrm{Ev}^{F}_{\xi}(Z_L)=0$ を得る。SageMath は `fisher-zero-algebraicity`。Lean 具体版 `fisherZero_algebraicity`、必要十分版 `nonzero_root_witness_necSuf`、導出 `fisherZero_algebraicity_from_necSuf`。旧行は代数性と双対という独立した二論法を含んでいたため分割した |
+| Kramers--Wannier 双対 | Fisher 零点 | 有限格子の分配多項式に対する Kramers--Wannier 双対を可算な多項式恒等式として導く | todo | 自己双対点を出す前に必要。指数関数や実結合を入口に置かず、高温展開と低温展開の有限な数え上げから書く |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
 | 12b | 有限系の自由エントロピー | 一般の $q$ での $\Phi_L(q)$ の性質（双対な点どうしの関係） | todo | 本文末尾の「この先に書くこと」に「続き」として載っていたが、セクション表に無く実行の列から落ちていた（2026-08-09 に追加）。自己双対点のあとに置くのは、双対な点どうしの関係が Kramers–Wannier 双対を定義してからでないと書けないため |
 | 13 | 零点の詰め寄り | 相転移を $\mathbb{Q}$ 上の量化言明として書く | todo | |
@@ -1740,6 +1750,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 150）: 旧「Fisher 零点の代数性と Kramers--Wannier 双対」を二つへ分け、
+  先頭の「有限格子の Fisher 零点は代数的である」を四層すべてで完了した。
+  Fisher 零点を $\overline{\mathbb{Q}}$ の中の $Z_L$ の根として定義するだけで済ませず、
+  $Z_L(1)=2^{L^2}\ne0$ を使って、根を持つ多項式が零多項式でないことまで証拠に含めた。
 
 - 2026-08-12（tick 149）: 「シフト行列の固有空間たちは列ベクトルの全体を張る」を四層すべてで
   完了した。SageMath は $L=1,\dots,4$ で各項の固有方程式と復元を QQbar で厳密計算した。
@@ -3973,6 +3988,12 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 150）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\det A(\theta_\mu)=1$」の Step 3 を整えた。$\gamma_1(\theta_\mu)^2$ を定義の代入と
+平方の展開の 2 段へ、$\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)$ を Step 2 の終点・平方の展開・
+分配則の 3 段へ開き、各等号へ根拠を付けた。内容は変えていない。
+次の tick は同じ証明の Step 4 から続ける。
+
 **2026-08-12（tick 149）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\det A(\theta_\mu)=1$」の Step 2 を、定義の代入、$i^2=-1$ と指数法則、平方差、
 $(iv)^2=-v^2$、$u^2+v^2=1$ の 5 段の鎖へ開き、各等号へ根拠を付けた。内容は変えていない。
@@ -5502,6 +5523,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 150）: tick 149 の「シフト行列の固有空間たちは列ベクトルの全体を張る」を、
+  本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・sorry 登録まで突き合わせた。
+  各根へ割り当てた $L^{-1}P_{A,z}(v)$ の固有空間への所属と、その有限和が元へ戻ることは
+  全層で対応しており、修正は無かった。
 
 - 2026-08-12（tick 149）: tick 148 の「固有空間へ落とす写像から列ベクトルを復元できる」を、
   本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・sorry 登録まで突き合わせた。

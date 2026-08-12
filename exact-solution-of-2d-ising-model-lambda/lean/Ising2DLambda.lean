@@ -415,3 +415,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarProjectorReconstructionFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarEigenspacesSpan
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.QbarEigenspacesSpan
 import Ising2DLambda.AlgebraicEigenvalue.QbarEigenspacesSpanFromNecSuf
+import Ising2DLambda.FisherZero.Algebraicity
+import Ising2DLambda.NecSuf.FisherZero.Algebraicity
+import Ising2DLambda.FisherZero.AlgebraicityFromNecSuf

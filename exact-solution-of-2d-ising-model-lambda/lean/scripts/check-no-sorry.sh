@@ -761,6 +761,10 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarEigenspaces_span
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_family_spans_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarEigenspaces_span_from_necSuf
+  Ising2DLambda.FisherZero.partitionPolynomial_ne_zero
+  Ising2DLambda.FisherZero.fisherZero_algebraicity
+  Ising2DLambda.NecSuf.FisherZero.nonzero_root_witness_necSuf
+  Ising2DLambda.FisherZero.fisherZero_algebraicity_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

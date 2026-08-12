@@ -26926,6 +26926,113 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
   },
 
   {
+    id: "fisher_zero_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "Fisher 零点" },
+    labels: [],
+  },
+
+  {
+    id: "fisher_zero_definition_qbar_polynomial_evaluation",
+    kind: "definition",
+    title: { text: "整係数多項式の代数的数における値" },
+    labels: ["def_qbar_polynomial_evaluation"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.FisherZero.qbarPolynomialEval"],
+    verification: ["sagemath/check/fisher-zero-algebraicity"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`), " と ",
+        math(String.raw`f=\sum_{m=0}^{n}a_mx^{m}\in\mathbb{Z}[x]`),
+        " を任意に取る。整数係数を ", math(String.raw`\mathbb{Z}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
+        " の鎖で送り、不定元を ", math(String.raw`\xi`), " へ送る値を",
+      ]),
+      displayMath(String.raw`\mathrm{Ev}^{F}_{\xi}(f):=\sum_{m=0}^{n}a_m\,\xi^{m}\in\overline{\mathbb{Q}}`),
+      paragraph([
+        "と定める。上付きの ", math(String.raw`F`),
+        " は Fisher 零点に使う一変数多項式の評価であることを表し、",
+        math(String.raw`\mathbb{Z}[x][t]`), " の第二変数を評価する ",
+        ref("def_second_evaluation"), " と区別する。有限和・代数的数の加法・積・冪だけなので、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_finite_lattice_fisher_zeros",
+    kind: "definition",
+    title: { text: "有限格子の Fisher 零点" },
+    labels: ["def_finite_lattice_fisher_zeros"],
+    habitat: "Qbar",
+    lean: ["Ising2DLambda.FisherZero.FisherZeroSet"],
+    verification: ["sagemath/check/fisher-zero-algebraicity"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。有限格子の Fisher 零点の全体を",
+      ]),
+      displayMath(String.raw`\mathcal{F}_{L}:=\left\{\,\xi\in\overline{\mathbb{Q}}\ \middle|\ \mathrm{Ev}^{F}_{\xi}(Z_L)=0\,\right\}`),
+      paragraph([
+        "で定める（", math(String.raw`Z_L\in\mathbb{Z}[x]`), " は ",
+        ref("def_partition_polynomial"), "、", math(String.raw`\mathrm{Ev}^{F}_{\xi}`), " は ",
+        ref("def_qbar_polynomial_evaluation"), "）。温度や指数関数を導入せず、",
+        "分配多項式そのものの代数的数における根を Fisher 零点と呼ぶ。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_algebraicity",
+    kind: "claim",
+    title: { text: "有限格子の Fisher 零点は代数的である" },
+    labels: ["claim_fisher_zero_algebraicity"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.fisherZero_algebraicity",
+      "Ising2DLambda.NecSuf.FisherZero.nonzero_root_witness_necSuf",
+      "Ising2DLambda.FisherZero.fisherZero_algebraicity_from_necSuf",
+    ],
+    verification: ["sagemath/check/fisher-zero-algebraicity"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " と ", math(String.raw`\xi\in\mathcal{F}_{L}`),
+        " を任意に取る。このとき、", math(String.raw`\xi`),
+        " は零元でない整係数多項式の根である。具体的には",
+      ]),
+      displayMath(String.raw`Z_L\ne0,\qquad \mathrm{Ev}^{F}_{\xi}(Z_L)=0`),
+      paragraph([
+        "が成り立つ。したがって ", math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " は整数係数、したがって有理数係数の零でない多項式の根という意味で代数的である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["まず ", math(String.raw`Z_L`), " が零多項式でないことを確かめる。"]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(1)
+&=\sum_{m=0}^{2L^2}\Omega_L(m)\,1^{m}
+&&(\because\ \blkref{claim_coefficient_representation})\\
+&=\sum_{m=0}^{2L^2}\Omega_L(m)
+&&(\because\ 1^{m}=1)\\
+&=2^{L^2}
+&&(\because\ \blkref{claim_coefficient_sum})\\
+&\ne0
+&&(\because\ 2^{L^2}\ \text{は正の自然数})
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`Z_L\ne0`), " である。次に ",
+        math(String.raw`\xi\in\mathcal{F}_{L}`), " と ",
+        ref("def_finite_lattice_fisher_zeros"), " より",
+      ]),
+      displayMath(String.raw`\mathrm{Ev}^{F}_{\xi}(Z_L)=0`),
+      paragraph([
+        "である。ゆえに零元でない整係数多項式として ", math(String.raw`Z_L`),
+        " 自身を取ればよい。現れるのは自然数、整数、代数的数と有限和・有限積だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -27227,10 +27334,12 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
           "）までは上で済んでいる。",
         ],
         [
-          todo("未着手"),
+          todo("残り"),
           "「Fisher 零点」: 零点が ",
           math(String.raw`\overline{\mathbb{Q}}`),
-          " に属することと Kramers–Wannier 双対から、自己双対点 ",
+          " に属すること（",
+          ref("claim_fisher_zero_algebraicity"),
+          "）までは上で済んでいる。次に Kramers–Wannier 双対を可算な多項式恒等式として導き、自己双対点 ",
           math(String.raw`x_c=\sqrt2-1`),
           " を出す。",
         ],
