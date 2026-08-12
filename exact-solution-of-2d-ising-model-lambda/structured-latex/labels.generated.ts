@@ -39,6 +39,7 @@ export const ALL_LABELS = [
   "claim_intra_row_shift_invariant",
   "claim_inversion_count_orbit_decomposition",
   "claim_kw_dual_transform_domain",
+  "claim_kw_dual_transform_involution",
   "claim_log_additive",
   "claim_log_power",
   "claim_low_temperature_polynomial_identity",

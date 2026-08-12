@@ -28433,6 +28433,158 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
   },
 
   {
+    id: "fisher_zero_claim_kw_dual_transform_involution",
+    kind: "claim",
+    title: { text: "双対変換の対合性" },
+    labels: ["claim_kw_dual_transform_involution"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/kw-dual-transform-involution"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`1+\xi\ne0`),
+        " を満たすとする。このとき",
+      ]),
+      displayMath(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))=\xi`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{KW}`),
+        " は ",
+        ref("def_kw_dual_transform"),
+        "。左辺が定義できることは ",
+        ref("claim_kw_dual_transform_domain"),
+        " による）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。仮定 ",
+        math(String.raw`1+\xi\ne0`),
+        " により、",
+        math(String.raw`(1+\xi)(1+\xi)^{-1}=1`),
+        " を満たす積の逆元 ",
+        math(String.raw`(1+\xi)^{-1}\in\overline{\mathbb{Q}}`),
+        " が取れる（",
+        ref("def_algebraic_numbers"),
+        "）。また ",
+        ref("claim_kw_dual_transform_domain"),
+        " により ",
+        math(String.raw`1+\mathrm{KW}(\xi)\ne0`),
+        " であるから、",
+        math(String.raw`\bigl(1+\mathrm{KW}(\xi)\bigr)\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}=1`),
+        " を満たす積の逆元 ",
+        math(String.raw`\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\in\overline{\mathbb{Q}}`),
+        " が取れ（",
+        ref("def_algebraic_numbers"),
+        "）、",
+        math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))`),
+        " が ",
+        ref("def_kw_dual_transform"),
+        " を ",
+        math(String.raw`\mathrm{KW}(\xi)`),
+        " へ適用して定義できる。また ",
+        math(String.raw`2:=1+1`),
+        " と置く。まず ",
+        math(String.raw`1+\mathrm{KW}(\xi)`),
+        " と ",
+        math(String.raw`1-\mathrm{KW}(\xi)`),
+        "（",
+        math(String.raw`1+\bigl(-\mathrm{KW}(\xi)\bigr)`),
+        " を表す）を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1+\mathrm{KW}(\xi)
+&=1+(1-\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=(1+\xi)(1+\xi)^{-1}+(1-\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \text{準備の等式}\ (1+\xi)(1+\xi)^{-1}=1\bigr)\\
+&=\bigl((1+\xi)+(1-\xi)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=2\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \xi+(-\xi)=0\ \text{と}\ 1+1=2\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+1-\mathrm{KW}(\xi)
+&=1-(1-\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=(1+\xi)(1+\xi)^{-1}-(1-\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \text{準備の等式}\ (1+\xi)(1+\xi)^{-1}=1\bigr)\\
+&=\bigl((1+\xi)-(1-\xi)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=2\xi\cdot(1+\xi)^{-1}
+&&\bigl(\because\ 1+(-1)=0\ \text{と}\ \xi+\xi=2\xi\bigr)
+\end{aligned}`),
+      paragraph([
+        "次に、",
+        math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))`),
+        " と ",
+        math(String.raw`\xi`),
+        " のそれぞれに ",
+        math(String.raw`1+\mathrm{KW}(\xi)`),
+        " を掛けた値を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{KW}(\mathrm{KW}(\xi))\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
+&=\Bigl(\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\Bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\ \text{を}\ \mathrm{KW}(\xi)\ \text{へ適用}\bigr)\\
+&=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
+&=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot 1
+&&\bigl(\because\ \text{準備の逆元の等式}\bigr)\\
+&=1-\mathrm{KW}(\xi)
+&&\bigl(\because\ \text{単位元との積}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
+&=\xi\cdot\bigl(2\cdot(1+\xi)^{-1}\bigr)
+&&\bigl(\because\ \text{上の計算}\ 1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\bigr)\\
+&=2\xi\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則を}\ \xi\cdot(2\cdot y)=2\xi\cdot y\ \text{へ適用}\bigr)\\
+&=1-\mathrm{KW}(\xi)
+&&\bigl(\because\ \text{上の計算}\ 1-\mathrm{KW}(\xi)=2\xi\cdot(1+\xi)^{-1}\bigr)
+\end{aligned}`),
+      paragraph([
+        "二つの値が一致したので、差に ",
+        math(String.raw`1+\mathrm{KW}(\xi)`),
+        " を掛けた値を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\mathrm{KW}(\mathrm{KW}(\xi))-\xi\Bigr)
+&=\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\mathrm{KW}(\mathrm{KW}(\xi))-\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\xi
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\mathrm{KW}(\mathrm{KW}(\xi))\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)-\xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を 2 つの積へ適用}\bigr)\\
+&=\bigl(1-\mathrm{KW}(\xi)\bigr)-\bigl(1-\mathrm{KW}(\xi)\bigr)
+&&\bigl(\because\ \text{上の 2 つの計算}\bigr)\\
+&=0
+&&\bigl(\because\ \text{加法の逆元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備より ",
+        math(String.raw`1+\mathrm{KW}(\xi)\ne0`),
+        " であるから、",
+        ref("claim_qbar_no_zero_divisors"),
+        " を ",
+        math(String.raw`a=1+\mathrm{KW}(\xi)`),
+        "、",
+        math(String.raw`b=\mathrm{KW}(\mathrm{KW}(\xi))-\xi`),
+        " へ適用して ",
+        math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))-\xi=0`),
+        " を得る。両辺に ",
+        math(String.raw`\xi`),
+        " を加えて ",
+        math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))=\xi`),
+        " である。全過程は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・逆元の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
