@@ -28224,6 +28224,43 @@ H_L
   },
 
   {
+    id: "fisher_zero_claim_mixed_boundary_duality_identity",
+    kind: "claim",
+    title: { text: "四境界条件の混合の双対恒等式" },
+    labels: ["claim_mixed_boundary_duality_identity"],
+    habitat: "Z",
+    verification: ["sagemath/check/mixed-boundary-duality-identity"],
+    statement: [
+      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+      displayMath(String.raw`H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L=2^{\,L^2+1}\,G^{0,0}_L`),
+      paragraph([
+        "が成り立つ。左辺は高温展開の四つの巻き付きセクター多項式（",
+        ref("def_high_temperature_sector_polynomial"),
+        "）の和、右辺は低温展開が与える自明セクターの生成多項式（",
+        ref("def_sector_generating_polynomial"),
+        "）の ", math(String.raw`2^{L^2+1}`), " 倍である。周期正方格子は平面グラフではないため、",
+        "一つのセクター多項式どうしの等式にはならず、四つの境界条件（巻き付きセクター）の混合が",
+        "自明セクターと結ばれる形で双対恒等式が成り立つ。",
+        "有限集合と整数係数多項式だけの等式であり、実数体、複素数体、指数関数は現れない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
+&=H_L
+&&\bigl(\because\ \blkref{claim_high_temperature_sector_decomposition}\bigr)\\
+&=2^{L^2}Z_L
+&&\bigl(\because\ \blkref{claim_high_temperature_polynomial_identity}\bigr)\\
+&=2^{L^2}\bigl(2G^{0,0}_L\bigr)
+&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\bigr)\\
+&=2^{\,L^2+1}\,G^{0,0}_L
+&&\bigl(\because\ \text{冪の指数法則 }2^{L^2}\cdot2=2^{L^2+1}\bigr)
+\end{aligned}`),
+      paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -28534,7 +28571,9 @@ H_L
           ref("claim_low_temperature_polynomial_identity"),
           "）、および偶部分グラフによる高温展開（",
           ref("claim_high_temperature_polynomial_identity"),
-          "）までは上で済んでいる。次に周期トーラスの境界セクターを明示して Kramers–Wannier 双対を可算な多項式恒等式として導き、自己双対点 ",
+          "）、および周期トーラスの境界セクターを明示した Kramers–Wannier 双対の可算な多項式恒等式（",
+          ref("claim_mixed_boundary_duality_identity"),
+          "）までは上で済んでいる。次に自己双対点 ",
           math(String.raw`x_c=\sqrt2-1`),
           " を出す。",
         ],
