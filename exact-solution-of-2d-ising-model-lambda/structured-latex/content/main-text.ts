@@ -28439,6 +28439,11 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
     labels: ["claim_kw_dual_transform_involution"],
     habitat: "Qbar",
     verification: ["sagemath/check/kw-dual-transform-involution"],
+    lean: [
+      "Ising2DLambda.FisherZero.kwDualTransform_involution",
+      "Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_involution_necSuf",
+      "Ising2DLambda.FisherZero.kwDualTransform_involution_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`\xi\in\overline{\mathbb{Q}}`),

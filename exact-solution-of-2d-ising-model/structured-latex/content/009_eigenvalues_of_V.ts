@@ -453,9 +453,15 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
         " より",
       ]),
       displayMath(
-        String.raw`0 = [\psi_\mu^\dagger, \psi_\mu^\dagger]_+
-= \psi_\mu^\dagger\psi_\mu^\dagger + \psi_\mu^\dagger\psi_\mu^\dagger
-= 2(\psi_\mu^\dagger)^2`,
+        String.raw`\begin{aligned}
+0
+&= [\psi_\mu^\dagger, \psi_\mu^\dagger]_+
+   \quad (\because \text{反交換関係の第 1 式}) \\
+&= \psi_\mu^\dagger\psi_\mu^\dagger + \psi_\mu^\dagger\psi_\mu^\dagger
+   \quad (\because \text{反交換子の定義}) \\
+&= 2(\psi_\mu^\dagger)^2
+   \quad (\because \text{同じ項の和})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`2 \neq 0`),
@@ -532,6 +538,7 @@ n_\mu^2
 &= n_\mu - 0 \cdot 0
    \quad (\because \text{(1)}) \\
 &= n_\mu
+   \quad (\because \text{零行列との積と差})
 \end{aligned}`,
       ),
     ],

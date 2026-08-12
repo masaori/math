@@ -463,3 +463,6 @@ import Ising2DLambda.FisherZero.MixedBoundaryDualityIdentityFromNecSuf
 import Ising2DLambda.FisherZero.KwDualTransformDomain
 import Ising2DLambda.NecSuf.FisherZero.KwDualTransformDomain
 import Ising2DLambda.FisherZero.KwDualTransformDomainFromNecSuf
+import Ising2DLambda.FisherZero.KwDualTransformInvolution
+import Ising2DLambda.NecSuf.FisherZero.KwDualTransformInvolution
+import Ising2DLambda.FisherZero.KwDualTransformInvolutionFromNecSuf

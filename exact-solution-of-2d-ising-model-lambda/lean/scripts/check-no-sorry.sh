@@ -829,6 +829,9 @@ targets=(
   Ising2DLambda.FisherZero.kwDualTransform_domain
   Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_domain_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_domain_from_necSuf
+  Ising2DLambda.FisherZero.kwDualTransform_involution
+  Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_involution_necSuf
+  Ising2DLambda.FisherZero.kwDualTransform_involution_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
