@@ -4582,22 +4582,16 @@ T_{(V')}(W)
 \gamma_2(-\theta_\mu) & \gamma_2(-\theta_\mu)
 \end{pmatrix}`,
       ),
-      paragraph(["である。まず ", math(String.raw`P_\mu`), " が可逆であることを示す。行列式は"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\det P_\mu
-&= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\Bigl((+i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu) - (-i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu)\Bigr)
-\quad (\because P_\mu \text{ \u306e\u5b9a\u7fa9\u3068 }2\times2\text{ \u884c\u5217\u306e\u884c\u5217\u5f0f}) \\
-&= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\cdot 2i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\mu)
-\quad (\because \text{\u5206\u914d\u5f8b\u3068\u7b26\u53f7\u306e\u8a08\u7b97})
-\end{aligned}`,
-      ),
       paragraph([
-        "である。",
+        "である。まず ",
+        math(String.raw`P_\mu`),
+        " が可逆であることを示す。準備として、",
         ref("relation_of_gamma_2"),
         " より ",
         math(String.raw`\gamma_2(\theta_\mu) \neq 0 \iff \gamma_2(-\theta_\mu) \neq 0`),
         "、ゆえ ",
+        math(String.raw`\gamma_2(-\theta_\mu) \neq 0`),
+        " かつ ",
         math(String.raw`\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) \neq 0`),
         " かつ ",
         math(String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \neq 0`),
@@ -4607,7 +4601,29 @@ T_{(V')}(W)
         math(String.raw`(\sqrt{z})^2 = z \neq 0`),
         " ゆえ ",
         math(String.raw`\sqrt{z} \neq 0`),
-        "）である。よって ",
+        "）である。行列式は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\det P_\mu
+&= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\Bigl((+i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu) - (-i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu)\Bigr)
+\quad (\because P_\mu \text{ \u306e\u5b9a\u7fa9\u3068 }2\times2\text{ \u884c\u5217\u306e\u884c\u5217\u5f0f}) \\
+&= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\cdot 2i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\mu)
+\quad (\because \text{\u5206\u914d\u5f8b\u3068\u7b26\u53f7\u306e\u8a08\u7b97}) \\
+&= \frac{2i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\mu)}{4M\,\gamma_2(-\theta_\mu)^2}
+\quad (\because (2\sqrt{M}\,\gamma_2(-\theta_\mu))^2 = 4M\,\gamma_2(-\theta_\mu)^2\text{。}(\sqrt{M})^2 = M\text{ は }\text{square\_of\_sqrt}) \\
+&= \frac{i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}}{2M\,\gamma_2(-\theta_\mu)}
+\quad (\because \gamma_2(-\theta_\mu)\neq0\text{ による共通因子 }2\gamma_2(-\theta_\mu)\text{ の約分})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。分子は ",
+        math(String.raw`i \neq 0`),
+        " と ",
+        math(String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \neq 0`),
+        "（準備）の積なので零でなく、分母 ",
+        math(String.raw`2M\,\gamma_2(-\theta_\mu)`),
+        " も零でない。よって ",
         math(String.raw`\det P_\mu \neq 0`),
         " であり ",
         math(String.raw`P_\mu`),
@@ -4736,6 +4752,7 @@ T_{(V)}(\hat{Y}_\mu)
         "2026-08-12 の式変形統一で、復元後の T_(V) の二つの作用を固有値の作用と指数表示の代入へ分け、T_(V') との一致を生成演算子・消滅演算子ごとの鎖へ開いた。hat Z の作用の鎖には始点と終点で使う復元式の根拠を補った。内容は変えていない。",
         "2026-08-12 の式変形統一で、hat Y の作用を復元式・二つの線型性・生成消滅演算子上の作用の一致を一行ずつ使う五段の鎖へ開いた。内容は変えていない。",
         "2026-08-12 の式変形統一で、場合 2（γ_2(θ_μ)=0）の二つの等号を一行一等号の三段の鎖へ開き、各行末へ根拠を付けた。内容は変えていない。",
+        "2026-08-13 の式変形統一で、det P_μ の計算を最終形（i√(γ_2(θ_μ)γ_2(−θ_μ))/(2Mγ_2(−θ_μ))）まで一行一等号で完成させ、約分が使う非零性の準備を鎖の前へ移した。内容は変えていない。",
       ],
     },
   },
