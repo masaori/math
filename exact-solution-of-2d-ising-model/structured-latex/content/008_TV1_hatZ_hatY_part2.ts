@@ -4109,35 +4109,49 @@ T_{(V')}(\psi_\mu)
       displayMath(String.raw`A(\theta_\mu) = I \quad (2 \times 2 \text{ 単位行列})`),
     ],
     proof: [
-      paragraph([math(String.raw`\gamma_2(\theta_\mu) = 0`), " を満たす ", math(String.raw`\mu \in \mathcal{M}`), " を固定する。"]),
-      paragraph(["Step 1: ", math(String.raw`\gamma_2(-\theta_\mu) = 0`), "。", ref("relation_of_gamma_2"), " より ", math(String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}`), " であるから、"]),
+      paragraph([math(String.raw`\gamma_2(\theta_\mu) = 0`), " を満たす ", math(String.raw`\mu \in \mathcal{M}`), " を固定する。以下で引く関係式は ", ref("relation_of_gamma_2"), "、", ref("det_A_theta"), "、", ref("gamma1_geq_1"), "、", ref("def_A_theta"), " である。"]),
+      paragraph(["Step 1: ", math(String.raw`\gamma_2(-\theta_\mu) = 0`), "。"]),
       displayMath(
-        String.raw`\gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)} = -\overline{0} = 0 \quad (\because \gamma_2(\theta_\mu) = 0)`,
+        String.raw`\begin{aligned}
+\gamma_2(-\theta_\mu)
+&= -\overline{\gamma_2(\theta_\mu)}
+&&(\because\ \gamma_2 \text{ の対称性 } \gamma_2(-\theta_\mu) = -\overline{\gamma_2(\theta_\mu)}) \\
+&= -\overline{0}
+&&(\because\ \gamma_2(\theta_\mu) = 0) \\
+&= 0
+&&(\because\ \overline{0} = 0,\ -0 = 0)
+\end{aligned}`,
       ),
-      paragraph(["Step 2: ", math(String.raw`\gamma_1(\theta_\mu) = 1`), "。", ref("det_A_theta"), " より ", math(String.raw`\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1`), " であるから、"]),
+      paragraph(["Step 2: ", math(String.raw`\gamma_1(\theta_\mu) = 1`), "。"]),
       displayMath(
-        String.raw`\gamma_1(\theta_\mu)^2 = 1 - \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1 - 0\cdot 0 = 1 \quad (\because \gamma_2(\theta_\mu) = 0,\ \text{Step 1})`,
+        String.raw`\begin{aligned}
+\gamma_1(\theta_\mu)^2
+&= 1 - \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&&(\because\ \det A(\theta_\mu) = 1 \text{ の等式 } \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 1 \text{ を移項}) \\
+&= 1 - 0 \cdot 0
+&&(\because\ \gamma_2(\theta_\mu) = 0,\ \text{Step 1}) \\
+&= 1
+&&(\because\ 0 \cdot 0 = 0,\ 1 - 0 = 1)
+\end{aligned}`,
       ),
       paragraph([ref("gamma1_geq_1"), " より ", math(String.raw`\gamma_1(\theta_\mu) \geq 1 > 0`), " であるから、", math(String.raw`\gamma_1(\theta_\mu)^2 = 1`), " と合わせて ", math(String.raw`\gamma_1(\theta_\mu) = 1`), " を得る。"]),
       paragraph([
         "Step 3: ",
         math(String.raw`A(\theta_\mu) = I`),
         "。",
-        ref("det_A_theta"),
-        " の証明中で確認したとおり、",
-        math(String.raw`A(\theta_\mu) = \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}`),
-        " と表される（",
-        ref("def_A_theta"),
-        " の各成分の ",
-        math(String.raw`\gamma_1, \gamma_2`),
-        " による書き換え）。Step 1, Step 2 の結果を代入すると、",
       ]),
       displayMath(
-        String.raw`A(\theta_\mu)
-= \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}
-= \begin{pmatrix} 1 & 0 \\ -0 & 1 \end{pmatrix}
-= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
-= I`,
+        String.raw`\begin{aligned}
+A(\theta_\mu)
+&= \begin{pmatrix} \gamma_1(\theta_\mu) & \gamma_2(\theta_\mu) \\ -\gamma_2(-\theta_\mu) & \gamma_1(\theta_\mu) \end{pmatrix}
+&&(\because\ \det A(\theta_\mu) = 1 \text{ の証明中の成分表示。} A(\theta_\mu) \text{ の各成分の } \gamma_1, \gamma_2 \text{ による書き換え}) \\
+&= \begin{pmatrix} 1 & 0 \\ -0 & 1 \end{pmatrix}
+&&(\because\ \gamma_2(\theta_\mu) = 0,\ \text{Step 1, Step 2}) \\
+&= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+&&(\because\ -0 = 0) \\
+&= I
+&&(\because\ 2 \times 2 \text{ 単位行列の定義})
+\end{aligned}`,
       ),
       paragraph(["である。"]),
     ],
