@@ -2309,18 +2309,28 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \alpha_1 + \alpha_2^{-1}
-&= \tanh K_1\tanh K_2^* + (\tanh K_1)^{-1}(\tanh K_2^*)^{-1} \\
-&= \tanh K_1\tanh K_2^* + \frac{\tanh K_1}{\tanh K_2^*} \quad (\because \alpha_2^{-1} = ((\tanh K_1)^{-1}\tanh K_2^*)^{-1} = \tanh K_1(\tanh K_2^*)^{-1}) \\
+&= \tanh K_1\tanh K_2^* + \left((\tanh K_1)^{-1}\tanh K_2^*\right)^{-1}
+&& (\because\ \alpha_1,\alpha_2\ \text{の定義}) \\
+&= \tanh K_1\tanh K_2^* + \tanh K_1(\tanh K_2^*)^{-1}
+&& (\because\ \text{積の逆元は逆元の積であり、}((\tanh K_1)^{-1})^{-1} = \tanh K_1) \\
 &= \tanh K_1\left(\tanh K_2^* + (\tanh K_2^*)^{-1}\right)
+&& (\because\ \text{分配則で}\ \tanh K_1\ \text{をくくり出す})
 \end{aligned}`,
       ),
       paragraph(["ここで、"]),
       displayMath(
         String.raw`\begin{aligned}
 \tanh K_2^* + (\tanh K_2^*)^{-1}
-&= \frac{\sinh K_2^*}{\cosh K_2^*} + \frac{\cosh K_2^*}{\sinh K_2^*} \\
-&= \frac{\sinh^2 K_2^* + \cosh^2 K_2^*}{\sinh K_2^*\cosh K_2^*} \\
-&= \frac{2\cosh 2K_2^*}{\sinh 2K_2^*} \quad (\because \cosh^2 x + \sinh^2 x = \cosh 2x,\ 2\sinh x\cosh x = \sinh 2x)
+&= \frac{\sinh K_2^*}{\cosh K_2^*} + \frac{\cosh K_2^*}{\sinh K_2^*}
+&& (\because\ \tanh\ \text{の定義と、分数の逆数}) \\
+&= \frac{\sinh^2 K_2^* + \cosh^2 K_2^*}{\sinh K_2^*\cosh K_2^*}
+&& (\because\ \text{通分}) \\
+&= \frac{\cosh 2K_2^*}{\sinh K_2^*\cosh K_2^*}
+&& (\because\ \cosh^2 x + \sinh^2 x = \cosh 2x) \\
+&= \frac{2\cosh 2K_2^*}{2\sinh K_2^*\cosh K_2^*}
+&& (\because\ \text{分子と分母に 2 を掛ける}) \\
+&= \frac{2\cosh 2K_2^*}{\sinh 2K_2^*}
+&& (\because\ 2\sinh x\cosh x = \sinh 2x)
 \end{aligned}`,
       ),
       paragraph([
@@ -2330,38 +2340,80 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
         " より、",
       ]),
       displayMath(
-        String.raw`\sinh 2K_2^*
-= \frac{e^{2K_2^*} - e^{-2K_2^*}}{2}
-= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2}
-= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2}
-= \frac{1}{\sinh 2K_2}`,
+        String.raw`\begin{aligned}
+\sinh 2K_2^*
+&= \frac{e^{2K_2^*} - e^{-2K_2^*}}{2}
+&& (\because\ \sinh\ \text{の定義}) \\
+&= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2}
+&& (\because\ e^{-2K_2^*} = \tanh K_2\ \text{と、その逆数}\ e^{2K_2^*} = (\tanh K_2)^{-1}) \\
+&= \frac{\dfrac{\cosh K_2}{\sinh K_2} - \dfrac{\sinh K_2}{\cosh K_2}}{2}
+&& (\because\ \tanh\ \text{の定義と、分数の逆数}) \\
+&= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2}
+&& (\because\ \text{通分}) \\
+&= \frac{1}{2\sinh K_2\cosh K_2}
+&& (\because\ \cosh^2 x - \sinh^2 x = 1) \\
+&= \frac{1}{\sinh 2K_2}
+&& (\because\ 2\sinh x\cosh x = \sinh 2x)
+\end{aligned}`,
       ),
       displayMath(
-        String.raw`\cosh 2K_2^*
-= \frac{e^{2K_2^*} + e^{-2K_2^*}}{2}
-= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2}
-= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2}
-= \frac{\cosh 2K_2}{\sinh 2K_2}`,
+        String.raw`\begin{aligned}
+\cosh 2K_2^*
+&= \frac{e^{2K_2^*} + e^{-2K_2^*}}{2}
+&& (\because\ \cosh\ \text{の定義}) \\
+&= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2}
+&& (\because\ e^{-2K_2^*} = \tanh K_2\ \text{と、その逆数}\ e^{2K_2^*} = (\tanh K_2)^{-1}) \\
+&= \frac{\dfrac{\cosh K_2}{\sinh K_2} + \dfrac{\sinh K_2}{\cosh K_2}}{2}
+&& (\because\ \tanh\ \text{の定義と、分数の逆数}) \\
+&= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2}
+&& (\because\ \text{通分}) \\
+&= \frac{\cosh 2K_2}{2\sinh K_2\cosh K_2}
+&& (\because\ \cosh^2 x + \sinh^2 x = \cosh 2x) \\
+&= \frac{\cosh 2K_2}{\sinh 2K_2}
+&& (\because\ 2\sinh x\cosh x = \sinh 2x)
+\end{aligned}`,
       ),
       paragraph(["よって、"]),
       displayMath(
-        String.raw`\frac{2\cosh 2K_2^*}{\sinh 2K_2^*}
-= 2\cdot\frac{\cosh 2K_2/\sinh 2K_2}{1/\sinh 2K_2}
-= 2\cosh 2K_2,
-\qquad
-\alpha_1 + \alpha_2^{-1} = \tanh K_1\cdot 2\cosh 2K_2 = 2\tanh K_1\cosh 2K_2`,
+        String.raw`\begin{aligned}
+\frac{2\cosh 2K_2^*}{\sinh 2K_2^*}
+&= 2\cdot\frac{\cosh 2K_2/\sinh 2K_2}{1/\sinh 2K_2}
+&& (\because\ \text{上の 2 本の計算を代入}) \\
+&= 2\cosh 2K_2
+&& (\because\ \text{分子と分母に}\ \sinh 2K_2\ \text{を掛ける})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\alpha_1 + \alpha_2^{-1}
+&= \tanh K_1\cdot\frac{2\cosh 2K_2^*}{\sinh 2K_2^*}
+&& (\because\ \text{この Step の最初の鎖と、その次の鎖}) \\
+&= \tanh K_1\cdot 2\cosh 2K_2
+&& (\because\ \text{直前の計算}) \\
+&= 2\tanh K_1\cosh 2K_2
+&& (\because\ \text{積の可換性})
+\end{aligned}`,
       ),
       paragraph(["一方、"]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{2 s_1 c_2}{c_1 + 1}
-&= \frac{2\sinh 2K_1\cosh 2K_2}{\cosh 2K_1 + 1} \\
-&= \frac{2\cdot 2\sinh K_1\cosh K_1\cdot\cosh 2K_2}{2\cosh^2 K_1} \quad (\because \sinh 2x = 2\sinh x\cosh x,\ \cosh 2x + 1 = 2\cosh^2 x) \\
-&= \frac{2\sinh K_1\cosh 2K_2}{\cosh K_1} = 2\tanh K_1\cosh 2K_2
+&= \frac{2\sinh 2K_1\cosh 2K_2}{\cosh 2K_1 + 1}
+&& (\because\ s_1, c_1, c_2\ \text{の定義}) \\
+&= \frac{2\cdot 2\sinh K_1\cosh K_1\cdot\cosh 2K_2}{\cosh 2K_1 + 1}
+&& (\because\ \sinh 2x = 2\sinh x\cosh x) \\
+&= \frac{2\cdot 2\sinh K_1\cosh K_1\cdot\cosh 2K_2}{2\cosh^2 K_1}
+&& (\because\ \cosh 2x + 1 = 2\cosh^2 x) \\
+&= \frac{2\sinh K_1\cosh 2K_2}{\cosh K_1}
+&& (\because\ \text{分子と分母を}\ 2\cosh K_1\ \text{で割る}) \\
+&= 2\tanh K_1\cosh 2K_2
+&& (\because\ \tanh\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph(["よって、"]),
-      displayMath(String.raw`\frac{2 s_1 c_2}{c_1 + 1} = \alpha_1 + \alpha_2^{-1} \quad \cdots (\star\star)`),
+      displayMath(
+        String.raw`\frac{2 s_1 c_2}{c_1 + 1} = \alpha_1 + \alpha_2^{-1} \quad (\because\ \text{両者とも}\ 2\tanh K_1\cosh 2K_2\ \text{に等しい}) \quad \cdots (\star\star)`,
+      ),
       paragraph(["Step 17: 因数分解の検証。", math(String.raw`(1 - \alpha_1 x)(1 - \alpha_2^{-1}x)`), " を展開すると、"]),
       displayMath(
         String.raw`(1 - \alpha_1 x)(1 - \alpha_2^{-1}x)
@@ -2401,6 +2453,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
         "原文の Part A（Steps 1-8 の偏角場合分け）と Part B（Steps 9-18 の α1,α2 因数分解）を全ステップ復元。arg^[0,2π)(γ2(-θμ)) を φ と略記。",
         "2026-08-12 の式変形統一で、Part A の Step 4 に同じ行で連結されていた 2 つの等号を、Step 2・Step 3 の代入と各場合で π を足す計算に分け、各行末に根拠を付けた。内容は変えていない。",
         "2026-08-12 の式変形統一（続き）で、Part A の Step 5 の 8 つの場合の含意鎖（根拠なし）へ、Step 4 のどの場合を使ったか・各辺を −2 倍して 3π（5π）を足す不等式の変形・区間の包含という根拠を各行末に付けた。内容は変えていない。",
+        "2026-08-12 の式変形統一（続き）で、Part B の Step 16 の 7 本の計算をすべて一続きの鎖＋行末の根拠へ開いた。あわせて、最初の鎖の中間式 (tanh K_1)^{-1}(tanh K_2^*)^{-1}（これは α_2^{-1} ではなく α_1^{-1} に等しい）が誤っていたのを ((tanh K_1)^{-1} tanh K_2^*)^{-1} へ直した（結論と以降の行は正しかった）。",
       ],
     },
   },

@@ -3836,6 +3836,16 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 141）**: `008_TV1_hatZ_hatY_part2` の主張
+「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 16 の 7 本の計算
+（$\alpha_1+\alpha_2^{-1}$ のくくり出し・$\tanh K_2^*+(\tanh K_2^*)^{-1}$・
+$\sinh 2K_2^*$・$\cosh 2K_2^*$・その商・組み立て・$2s_1c_2/(c_1+1)$）をすべて
+一続きの鎖＋行末の $(\because\ \dots)$ へ開いた。**あわせて誤りを 1 件直した**:
+最初の鎖の中間式 $(\tanh K_1)^{-1}(\tanh K_2^*)^{-1}$ は $\alpha_2^{-1}$ ではなく
+$\alpha_1^{-1}$ に等しく誤りだったので、$((\tanh K_1)^{-1}\tanh K_2^*)^{-1}$ へ直した
+（結論と以降の行は正しかった）。姉妹側の検査一式・検証と証明の対応 116 件・
+PDF 293 ページは通過した。**次の tick は同じ主張の Step 17–18（因数分解の検証と結論）から続ける。**
+
 **2026-08-12（tick 140）**: `008_TV1_hatZ_hatY_part2` の主張
 「$a(\theta_\mu)$」（`equation_of_a_theta_mu`）の Part B、Step 15 にある
 $\alpha_1\alpha_2^{-1}$ と $(c_1-1)/(c_1+1)$ の 2 本の計算を、それぞれ逆数の積・結合則・
