@@ -2974,40 +2974,65 @@ t_\mu&\neq0_{\mathbb{C}}
         " のときは、先に得た反交換子の式の因子が零なので、同じ結論を得る。以上から ",
         math(String.raw`[\psi_\mu^\dagger, \psi_\nu^\dagger]_+ = 0`), "。",
       ]),
-      paragraph(["b) ", math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+`), " について、双線型性より"]),
+      paragraph(["b) ", math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+`), " について、反交換子の双線型性より"]),
       displayMath(
-        String.raw`[\psi_\mu^\dagger, \psi_\nu]_+
-= c_\mu c_\nu\bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
+        String.raw`\begin{aligned}
+[\psi_\mu^\dagger, \psi_\nu]_+
+&= c_\mu c_\nu\Bigl(
+(i)(-i)\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}[\hat{Z}_\mu^{(-)}, \hat{Z}_\nu^{(-)}]_+ \\
+&\quad + i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\nu)[\hat{Z}_\mu^{(-)}, \hat{Y}_\nu]_+ \\
+&\quad + \gamma_2(-\theta_\mu)\,(-i)\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}[\hat{Y}_\mu, \hat{Z}_\nu^{(-)}]_+ \\
+&\quad + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)[\hat{Y}_\mu, \hat{Y}_\nu]_+
+\Bigr)
+&& (\because\ \text{反交換子の双線型性と}\ \psi_\mu^\dagger,\psi_\nu\ \text{の定義})\\
+&= c_\mu c_\nu\bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&& (\because\ \text{二つの交差項の反交換子は零であり、}\ (i)(-i)=1)
+\end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`(i)(-i) = 1`),
-        " より第 1 項の符号が正になり、",
-        math(String.raw`[\hat{Z}_\mu^{(-)}, \hat{Y}_\nu]_+ = 0`),
-        " により中間 2 項は消える）。",
         math(String.raw`\delta^M_{\mu+\nu,0} \neq 0`),
-        " のとき a) と同じ計算により係数の和は",
+        " のとき、a) で示した平方根の積の式変形と ",
+        math(String.raw`\gamma_2`),
+        " の積の式変形を使うと、係数の括弧は",
       ]),
       displayMath(
-        String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = 2\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`,
+        String.raw`\begin{aligned}
+&\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\\
+&=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)
+&& (\because\ \text{a) の平方根の積の式変形})\\
+&=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \text{a) の}\ \gamma_2\ \text{の積の式変形})\\
+&=2\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \text{同じ項の和})
+\end{aligned}`,
       ),
-      paragraph([
-        "また ",
-        math(String.raw`\gamma_2(-\theta_\nu) = \gamma_2(\theta_\mu)`),
-        " より ",
-        math(String.raw`c_\mu c_\nu = \dfrac{1}{4M\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)} = \dfrac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}`),
-        " であるから、",
-      ]),
+      paragraph(["である。また係数の積は"]),
       displayMath(
-        String.raw`[\psi_\mu^\dagger, \psi_\nu]_+
-= \frac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\cdot 2\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot 2M\cdot\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
-= \delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
+        String.raw`\begin{aligned}
+c_\mu c_\nu
+&=\frac{1}{4M\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)}
+&& (\because\ c_\mu,c_\nu\ \text{の定義と分数の積})\\
+&=\frac{1}{4M\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)}
+&& (\because\ \text{Step 0-2 の}\ \gamma_2(-\theta_\nu)=\gamma_2(\theta_\mu))\\
+&=\frac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
+&& (\because\ \mathbb{C}\ \text{の積の可換則})
+\end{aligned}`,
+      ),
+      paragraph(["であるから、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[\psi_\mu^\dagger, \psi_\nu]_+
+&= \frac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\cdot 2\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)\cdot 2M\cdot\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&& (\because\ \text{上の三つの式変形})\\
+&= \delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&& (\because\ \text{約分})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\delta^M_{\mu+\nu,0} = 0`),
-        " のときは全体が ",
+        " のときは、先に得た反交換子の式の因子が零なので、全体が ",
         math(String.raw`0`),
-        "。以上から ",
+        " となり、同じ結論を得る。以上から ",
         math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+ = \delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "。",
       ]),
@@ -3039,6 +3064,7 @@ t_\mu&\neq0_{\mathbb{C}}
           "(b) proof に Step 0（γ_2 の 2π 周期性 → 根号の中身の一致 → 写像の一価性から t_ν = t_μ → " +
           "t_μ ≠ 0 ゆえ分枝の一致が不可欠であること）を追加した。主張そのものは変えていない。",
         "2026-08-12 の式変形統一で、a) の反交換子の双線型展開・平方根の積・γ₂ の積・係数の消去を一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
+        "2026-08-12 の式変形統一で、b) の反交換子の双線型展開・係数の括弧・係数の積・最後の約分を一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
       ],
     },
   },
