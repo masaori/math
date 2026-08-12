@@ -7,6 +7,21 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 141 は、tick 140 の r4「帰納法本体の欠陥段の書き直し」を本文・SageMath で
+  突き合わせて修正不要と確認し、d4b2dL「分解を構成する帰納法本体の Lean 具体版・必要十分版・導出」を
+  完了させた。これで d4b2d が四層すべてを満たした。** 具体版
+  `rootPolynomialDistinctFactorization` は本文と同じ $j$ についての帰納法で、準備 4 補題
+  （出発点の係数上界・代数閉性による根の存在・因数定理の商の 3 条件・一次因子の根の $\mu_n$ への所属）を
+  本文の準備の段と 1 対 1 に対応させた。根の存在は Qbar の定義（$\mathbb{Q}$ の代数閉包）が持つ性質
+  `IsAlgClosed.exists_root` で引き、次数 1 以上は先頭の係数 $1\ne0$ から出す。必要十分版
+  `root_polynomial_distinct_factorization_necSuf` は可換モノイドの上で、根の供給・因数分解・所属・
+  取り出し・積の上界・単調性・相異性を抽象的な仮定として受け取り、同じ帰納法を通す
+  （加法・分配則・体・代数閉性そのものは値の型に要求しない）。導出はこれらの仮定を
+  出発点の係数計算・代数閉性・因数定理の 3 条件・評価・r3・r1・d4b2c3 で埋める。
+  検証は構造化テキスト 268 ラベル・PDF 138 ページで未解決参照 0 件・検証と証明の対応 122 件・
+  `lake build`・sorry 検査 680 件ですべて通過した。次は d5（$\mu_n$ がちょうど $n$ 個の元を持つこと。
+  d2 の上界と d4 の下界の組み立て）である。
+
 - **2026-08-12 の tick 140 は、tick 139 の r3「因子の取り出しの強化」を本文・SageMath・
   Lean 具体版・必要十分版・導出まで突き合わせて修正不要と確認し、r4「帰納法本体の欠陥段の
   書き直し」を完了させた。** 取り出した残りの因子 $B$ の係数上界 $j-1$ は r3、商 $g$ の
@@ -1609,12 +1624,12 @@
 | 10h3d-c4b-d4b2c1 | 固有値の代数性 | 一次因子との分解の残りの因子の、その一次因子の根における値は零でない（$w\in\mu_n$、$f=t^{\,n}+\widehat{-1}$、係数上界つきの $B$ について $f=(t-\widehat{w})B$ ならば $\mathrm{aev}_{w}(B)\ne0$。適用の鎖 1 本） | done | 2026-08-12 の tick 133 で四層すべて完了。因数定理の 2 仮定を確かめて $f=(t-\widehat{w})g$ を作り、d4b1 の消去で $B=g$、d3e2 の単根性で $\mathrm{aev}_w(g)\ne0$ を写す。必要十分版は 2 つの分解の等式・消去・値の書き換えだけを仮定し、型に代数構造は一切不要 |
 | 10h3d-c4b-d4b2c2 | 固有値の代数性 | 一次因子の積から 1 つの因子を先頭へ取り出せること（$(t-\widehat{w_1})\cdots(t-\widehat{w_j})$ の並べ替え。帰納法 1 本） | done | 2026-08-12 の tick 134 で四層すべて完了。番号 $0,\dots,j-1$ の順序つき有限積として書き、最後の因子か否かで分ける $j$ についての帰納法。必要十分版は可換モノイドだけを要求する |
 | 10h3d-c4b-d4b2c3 | 固有値の代数性 | 取った根は既出の根と相異なること（$w\in\mu_n$、係数上界つきの $h$ で $f=(t-\widehat{w})h$、$h=Ag$、$\mathrm{aev}_{w'}(g)=0$ ならば $w'\ne w$。背理法 1 本） | done | 2026-08-12 の tick 135 で四層すべて完了。主張 1 件 `claim_qbar_poly_extracted_root_distinct`。$w'=w$ と仮定して $\mathrm{aev}_{w}(h)=\mathrm{aev}_{w}(A)\cdot\mathrm{aev}_{w'}(g)=0$ を 5 段の鎖で出し、d4b2c1 の $\mathrm{aev}_{w}(h)\ne0$ と矛盾させる。SageMath は `qbar-poly-extracted-root-distinct`。Lean 具体版 `qbarPolyExtractedRootDistinct`、必要十分版 `extracted_root_distinct_necSuf`（要るのは分解の等式・その点での評価が「この積」を保つこと 1 件・「この値」と零元の積が零元であること 1 件・終点の非零性だけ。多項式であること・環の法則・体・代数閉性は一切不要）、導出 `qbarPolyExtractedRootDistinct_from_necSuf` |
-| 10h3d-c4b-d4b2d | 固有値の代数性 | 分解を構成する帰納法本体（$j\le n$ について、相異なる $w_1,\dots,w_j\in\mu_n$ と係数上界 $n-j$・先頭の係数 1 の商 $g$ による分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ が存在する。$j$ についての帰納法 1 本） | 記述と SageMath まで | 2026-08-12 の tick 136 に主張 `claim_root_polynomial_distinct_factorization` と SageMath `root-polynomial-distinct-factorization` を作成。tick 140 に、tick 137 のレビューで見つかった $h=Bg$ の係数上界の欠陥を r1–r4 により修復した。$1\le n\le6$ の全段で厳密計算が通過。Lean は未着手 |
+| 10h3d-c4b-d4b2d | 固有値の代数性 | 分解を構成する帰納法本体（$j\le n$ について、相異なる $w_1,\dots,w_j\in\mu_n$ と係数上界 $n-j$・先頭の係数 1 の商 $g$ による分解 $f=(t-\widehat{w_1})\cdots(t-\widehat{w_j})g$ が存在する。$j$ についての帰納法 1 本） | done | 2026-08-12 の tick 136 に主張 `claim_root_polynomial_distinct_factorization` と SageMath `root-polynomial-distinct-factorization` を作成。tick 140 に、tick 137 のレビューで見つかった $h=Bg$ の係数上界の欠陥を r1–r4 により修復した。$1\le n\le6$ の全段で厳密計算が通過。Lean は tick 141（d4b2dL）で完了し、四層すべてを満たした |
 | 10h3d-c4b-d4b2d-r1 | 固有値の代数性 | 係数上界つき 2 つの多項式の積の係数は、上界の和より上の番号で零であること（$k>p$ で $\mathrm{ac}_k(P)=0$、$k>q$ で $\mathrm{ac}_k(Q)=0$ ならば $k>p+q$ で $\mathrm{ac}_k(PQ)=0$。積の係数の有限和を番号 $p$ で分けて全項を消す鎖 1 本） | done | 2026-08-12 の tick 137 で四層すべて完了。主張 1 件 `claim_qbar_poly_product_coeff_bound`。SageMath は `qbar-poly-product-coeff-bound`（7 段の鎖を段ごとに厳密計算）。Lean 具体版 `qbarPolyProductCoeffBound`（本文の「和を番号 $p$ で分けて前半・後半で別の仮定を当てる」を、項ごとの $i>p$ か否かの場合分けとして書いた。対応はコメントに明記）、必要十分版 `poly_product_coeff_bound_necSuf`（**半環で足りる**。一次因子との積の係数上界（d4b2a）が可換環を要したのと違い、一次式を作らないので引き算が一度も出ない。積の可換性も体も代数閉性も不要）、導出 `qbarPolyProductCoeffBound_from_necSuf`。d4b2d の証明の修復の道具（レビュー記録 2026-08-12 tick 137）。$h=Bg$ の係数上界を主張の適用として出すのに使う |
 | 10h3d-c4b-d4b2d-r2 | 固有値の代数性 | 一次因子の積の係数は、因子の個数より上の番号で零であること（$k>m$ ならば $\mathrm{ac}_k(\prod_{i=0}^{m-1}(t-\widehat{w(i)}))=0$。$m$ についての帰納法 1 本。一歩は可換則と d4b2a） | done | 2026-08-12 の tick 138 で四層すべて完了。主張 1 件 `claim_qbar_poly_linear_factor_product_coeff_bound`。SageMath は `qbar-poly-linear-factor-product-coeff-bound`（空積・帰納法の一歩・本体を厳密計算）。Lean 具体版 `qbarPolyLinearFactorProductCoeffBound`、必要十分版 `poly_linear_factor_product_coeff_bound_necSuf`（可換環で足り、体・代数閉性は不要）、導出 `qbarPolyLinearFactorProductCoeffBound_from_necSuf`。因子の取り出しの強化（r3）が場合 $i=j$ で使う |
 | 10h3d-c4b-d4b2d-r3 | 固有値の代数性 | 因子の取り出しの強化（取り出した残りの因子 $B$ は係数上界 $j-1$ つきに取れることを statement へ加え、証明と Lean 具体版・必要十分版・導出を更新する） | done | 2026-08-12 の tick 139 で完了（四層すべて）。`claim_qbar_poly_linear_factor_product_extract` の statement を強化し、場合 $i=j$ は r2、場合 $i\ne j$ は可換則と d4b2a で上界を出す段を証明へ足した。SageMath `qbar-poly-linear-factor-product-extract` は帰納法どおりの $B$ の構成・分解・係数上界・上界が過大でないことを厳密計算。Lean 具体版 `qbarPolyLinearFactorProductExtract`（存在の結論を等式と係数上界の連言へ強化）、必要十分版 `linear_factor_product_extract_necSuf`（可換モノイドと抽象的な上界の述語 2 仮定だけ。多項式の係数であることを使わない）、導出は hprod を r2・hstep を d4b2a で埋める |
 | 10h3d-c4b-d4b2d-r4 | 固有値の代数性 | 帰納法本体（d4b2d）の欠陥段の書き直し（$B$ の上界（r3）と積の係数上界（r1）で $k>n$ における $\mathrm{ac}_k(h)=0$ を主張の適用として出す） | done | 2026-08-12 の tick 140。本文は r3 から $B$ の上界 $j-1$、帰納法の仮定から $g$ の上界 $n-j$ を取り、r1 を $h=Bg$ へ当てて上界 $n-1$ を得る鎖へ修復。SageMath は各帰納段・各既出根で同じ $B$・$h$・上界・相異性を検査する形へ更新した |
-| 10h3d-c4b-d4b2dL | 固有値の代数性 | 同主張の Lean 具体版・必要十分版・導出 | todo | r1–r4 の修復が済んでから着手する。本文の帰納法と 1 対 1 に対応させる。必要十分版では、根を供給する性質・因数分解・係数上界と先頭係数・既出元との相異性という帰納法が実際に使う仮定だけへ削る |
+| 10h3d-c4b-d4b2dL | 固有値の代数性 | 同主張の Lean 具体版・必要十分版・導出 | done | 2026-08-12 の tick 141 で完了。具体版 `rootPolynomialDistinctFactorization`（本文と同じ $j$ の帰納法。準備 4 補題 `rootPolynomialCoeffBound`・`rootPolynomialDistinctFactorizationRootExists`・`rootPolynomialDistinctFactorizationQuotient`・`rootPolynomialLinearFactorRootMem` を本文の準備の段に対応させた。根の存在は Qbar の定義が持つ代数閉性 `IsAlgClosed.exists_root` で引く）、必要十分版 `root_polynomial_distinct_factorization_necSuf`（可換モノイドの上で、根の供給・因数分解・所属・取り出し・積の上界・単調性・相異性の仮定だけで同じ帰納法が通る。加法・分配則・体・代数閉性そのものは要求しない）、導出 `rootPolynomialDistinctFactorization_from_necSuf`（仮定を出発点の係数計算・代数閉性・因数定理の 3 条件・評価・r3・r1・d4b2c3 で埋める） |
 | 10h3d-c4b-d5 | 固有値の代数性 | $\mu_n$ がちょうど $n$ 個の元を持つこと（d2 の上界と d4 の下界の組み立て。$L$ を割らない指数のとき $w^{m}\ne1$ なる $w$ を取れるようにする） | todo | 組み立ての段。新しい論法は持たない見込み |
 | 10h3d-c4c | 固有値の代数性 | 1 の $L$ 乗根の全体にわたる冪の和の値（指数が $L$ の倍数なら元の個数、そうでなければ 0） | todo | 論法は「$w^{m}\ne1$ なる $w$ を取り、10h3d-c4a から $(w^{m}-1)S=0$ を出して $S=0$ を得る」1 本 |
 | 10h3d-d | 固有値の代数性 | シフト行列の固有空間たちが列ベクトルの全体を張ること（組み立て） | todo | 10h3d-a〜c を合わせるだけの段。新しい論法は持たない見込み |
@@ -1628,6 +1643,15 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 141）: d4b2dL「分解を構成する帰納法本体の Lean 具体版・必要十分版・導出」を
+  完了し、d4b2d が四層すべてを満たした。具体版は本文と同じ $j$ の帰納法で、準備 4 補題を本文の
+  準備の段（出発点の係数の鎖・代数閉性・因数定理の商の 3 条件・分解の評価）と対応させ、
+  帰納法の一歩は根の追加・分解の書き換え・取り出しと積の上界による相異性を本文と同じ順で行う。
+  必要十分版が示したのは、この帰納法が値の型に要求するのが可換モノイド（有限積の結合則・交換則）
+  だけであり、根の供給・因数分解・所属・相異性はすべて抽象的な仮定として受け取れることである
+  （代数閉性は仮定の供給側に隔離される）。次は d5（$\mu_n$ がちょうど $n$ 個の元を持つことの
+  組み立て）である。
 
 - 2026-08-12（tick 140）: r4「帰納法本体の欠陥段の書き直し」を完了した。r3 が与える $B$ の
   係数上界 $j-1$ と帰納法の仮定が与える $g$ の係数上界 $n-j$ へ r1 を当て、$h=Bg$ の係数は
@@ -5273,6 +5297,12 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 141）: tick 140 の r4「帰納法本体の欠陥段の書き直し」の本文と SageMath を
+  突き合わせた。本文は r3 の取り出し（$B$ と上界 $j-1$）・$h:=Bg$ の分解の 4 段の鎖・r1 による
+  $n-1$ より上の係数の零性・「特に $k>n$ ならば」の単調性の段・d4b2c3 の適用が、引く主張の仮定と
+  過不足なく噛み合っていた。SageMath は各帰納段・各既出根で同じ $B$・$h$・上界・相異性を
+  厳密計算していた。修正は無かった。
 
 - 2026-08-12（tick 140）: tick 139 の r3「因子の取り出しの強化」の statement・本文・SageMath・
   Lean 具体版・必要十分版・導出・sorry 登録を突き合わせた。本文の帰納法の二場合と Lean 具体版の

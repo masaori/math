@@ -729,6 +729,13 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyExtractedRootDistinct
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.extracted_root_distinct_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolyExtractedRootDistinct_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialCoeffBound
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorizationRootExists
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorizationQuotient
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialLinearFactorRootMem
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorization
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_polynomial_distinct_factorization_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorization_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

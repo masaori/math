@@ -26164,6 +26164,11 @@ F_{m+1}
     labels: ["claim_root_polynomial_distinct_factorization"],
     habitat: "Qbar",
     verification: ["sagemath/check/root-polynomial-distinct-factorization"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorization",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_polynomial_distinct_factorization_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorization_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
