@@ -137,7 +137,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
 &= \sum_{j=1}^{n}\sum_{k=1}^{n} B_{jk}A_{kj}
    \quad (\because \text{有限和の順序交換と } \mathbb{C} \text{ の積の可換性}) \\
 &= \sum_{j=1}^{n} (BA)_{jj} \quad (\because \text{積の定義}) \\
-&= \mathrm{tr}(BA)
+&= \mathrm{tr}(BA) \quad (\because \text{トレースの定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -162,8 +162,14 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
         " に適用して",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}(PAP^{-1}) = \mathrm{tr}\bigl((PA)P^{-1}\bigr)
-= \mathrm{tr}\bigl(P^{-1}(PA)\bigr) = \mathrm{tr}\bigl((P^{-1}P)A\bigr) = \mathrm{tr}(I_n A) = \mathrm{tr}(A)`,
+        String.raw`\begin{aligned}
+\mathrm{tr}(PAP^{-1})
+&= \mathrm{tr}\bigl((PA)P^{-1}\bigr) \quad (\because \text{行列の積の結合法則}) \\
+&= \mathrm{tr}\bigl(P^{-1}(PA)\bigr) \quad (\because \text{(2) 巡回性}) \\
+&= \mathrm{tr}\bigl((P^{-1}P)A\bigr) \quad (\because \text{行列の積の結合法則}) \\
+&= \mathrm{tr}(I_n A) \quad (\because \text{逆行列の定義 } P^{-1}P = I_n) \\
+&= \mathrm{tr}(A) \quad (\because \text{単位行列との積})
+\end{aligned}`,
       ),
     ],
     conversion: {
