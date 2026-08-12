@@ -812,6 +812,9 @@ targets=(
   Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet
   Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet
   Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two
+  Ising2DLambda.NecSuf.FisherZero.image_eq_admissible_filter_necSuf
+  Ising2DLambda.FisherZero.attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets
+  Ising2DLambda.FisherZero.attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

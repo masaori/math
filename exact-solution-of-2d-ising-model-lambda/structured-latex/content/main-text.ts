@@ -27997,6 +27997,11 @@ e\in\mathcal B_L(\sigma_A)
     labels: ["claim_attainable_dual_image_trivial_sector"],
     habitat: "N",
     verification: ["sagemath/check/attainable-dual-image-trivial-sector"],
+    lean: [
+      "Ising2DLambda.FisherZero.attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets",
+      "Ising2DLambda.NecSuf.FisherZero.image_eq_admissible_filter_necSuf",
+      "Ising2DLambda.FisherZero.attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`L\ge1`), " とする。", ref("def_attainable_broken_edge_sets"),

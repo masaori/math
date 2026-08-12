@@ -4003,19 +4003,33 @@ T_{(V')}(\psi_\mu^\dagger)
       displayMath(
         String.raw`\begin{aligned}
 \psi_\nu^\dagger \psi_{-\nu}\psi_\mu
-&= \psi_\nu^\dagger(-\psi_\mu\psi_{-\nu}) \quad (\because [\psi_{-\nu}, \psi_\mu]_+ = 0) \\
-&= -\psi_\nu^\dagger\psi_\mu\psi_{-\nu} \\
-&= -(\delta^M_{\nu+\mu,0}\,I - \psi_\mu\psi_\nu^\dagger)\psi_{-\nu} \quad (\because [\psi_\nu^\dagger, \psi_\mu]_+ = \delta^M_{\nu+\mu,0}\,I) \\
-&= -\delta^M_{\nu+\mu,0}\,\psi_{-\nu} + \psi_\mu\psi_\nu^\dagger\psi_{-\nu}
+&= \psi_\nu^\dagger(-\psi_\mu\psi_{-\nu})
+&&(\because\ [\psi_{-\nu},\psi_\mu]_+=0)\\
+&= -\psi_\nu^\dagger\psi_\mu\psi_{-\nu}
+&&(\because\ \text{スカラー倍と行列の積の結合則})\\
+&= -(\delta^M_{\nu+\mu,0}\,I-\psi_\mu\psi_\nu^\dagger)\psi_{-\nu}
+&&(\because\ [\psi_\nu^\dagger,\psi_\mu]_+=\delta^M_{\nu+\mu,0}\,I)\\
+&= -\delta^M_{\nu+\mu,0}\,I\psi_{-\nu}+\psi_\mu\psi_\nu^\dagger\psi_{-\nu}
+&&(\because\ \text{分配則})\\
+&= -\delta^M_{\nu+\mu,0}\,\psi_{-\nu}+\psi_\mu\psi_\nu^\dagger\psi_{-\nu}
+&&(\because\ I\psi_{-\nu}=\psi_{-\nu})
 \end{aligned}`,
       ),
       paragraph(["（反交換関係は ", ref("anticommutator_of_psi"), " による）。ゆえに ", math(String.raw`[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu] = -\delta^M_{\nu+\mu,0}\,\psi_{-\nu}`), "。"]),
       paragraph(["Step 2': ", math(String.raw`[X, \psi_\mu] = -\gamma(\theta_\mu)\psi_\mu`), "。"]),
       displayMath(
-        String.raw`[X, \psi_\mu]
-= +\sum_{\substack{\nu \in \{1,\dots,M\} \\ \gamma_2(\theta_\nu) \neq 0}} \gamma(\theta_\nu)\,[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu]
-= -\sum_{\substack{\nu \in \{1,\dots,M\} \\ \gamma_2(\theta_\nu) \neq 0}} \gamma(\theta_\nu)\,\delta^M_{\nu+\mu,0}\,\psi_{-\nu}
-\quad (\because \text{Step 1'})`,
+        String.raw`\begin{aligned}
+[X,\psi_\mu]
+&=\left[\sum_{\substack{\nu\in\{1,\dots,M\}\\\gamma_2(\theta_\nu)\neq0}}
+\gamma(\theta_\nu)\psi_\nu^\dagger\psi_{-\nu},\,\psi_\mu\right]
+&&(\because\ X\ \text{の定義})\\
+&=\sum_{\substack{\nu\in\{1,\dots,M\}\\\gamma_2(\theta_\nu)\neq0}}
+\gamma(\theta_\nu)[\psi_\nu^\dagger\psi_{-\nu},\psi_\mu]
+&&(\because\ \text{交換子の有限和とスカラー倍への分配則})\\
+&=-\sum_{\substack{\nu\in\{1,\dots,M\}\\\gamma_2(\theta_\nu)\neq0}}
+\gamma(\theta_\nu)\delta^M_{\nu+\mu,0}\psi_{-\nu}
+&&(\because\ \text{Step 1'})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\delta^M_{\nu+\mu,0} \neq 0`),
@@ -4051,11 +4065,18 @@ T_{(V')}(\psi_\mu^\dagger)
       displayMath(
         String.raw`\begin{aligned}
 T_{(V')}(\psi_\mu)
-&= \exp(X)\psi_\mu\exp(-X) \\
-&= \psi_\mu\exp(X - \gamma(\theta_\mu)I)\exp(-X) \\
-&= \psi_\mu\exp((X - \gamma(\theta_\mu)I) + (-X)) \quad (\because \text{theorem\_exp\_product}) \\
-&= \psi_\mu\cdot e^{-\gamma(\theta_\mu)}I \quad (\because \text{Step 5 と同様}) \\
+&= \exp(X)\psi_\mu\exp(-X)
+&&(\because\ \text{証明冒頭の鎖})\\
+&= \psi_\mu\exp(X-\gamma(\theta_\mu)I)\exp(-X)
+&&(\because\ \text{Steps 3'--4'})\\
+&= \psi_\mu\exp((X-\gamma(\theta_\mu)I)+(-X))
+&&(\because\ \text{指数行列の積の定理})\\
+&= \psi_\mu\exp(-\gamma(\theta_\mu)I)
+&&(\because\ (X-\gamma(\theta_\mu)I)+(-X)=-\gamma(\theta_\mu)I)\\
+&= \psi_\mu\cdot e^{-\gamma(\theta_\mu)}I
+&&(\because\ (-\gamma(\theta_\mu)I)^n=(-\gamma(\theta_\mu))^nI)\\
 &= e^{-\gamma(\theta_\mu)}\psi_\mu
+&&(\because\ \text{単位行列とのスカラー倍の積})
 \end{aligned}`,
       ),
     ],
@@ -4070,6 +4091,7 @@ T_{(V')}(\psi_\mu)
         "2026-08-13 の式変形統一で、Step 3 の帰納法を直した。出発点（1 行に等号 2 つ・根拠なし）を四段の鎖へ、帰納法の一歩（根拠のない 2 行と、結合則と Step 2 を一段にまとめた 1 行）を七段の鎖へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 4 から続ける。",
         "2026-08-13 の式変形統一で、Step 4 の有限和の等式三つを一行一等号の鎖へ開き、各項への右作用・Step 3・有限和への分配則を各行末に明示した。内容は変えていない。次は Step 5 から続ける。",
         "2026-08-13 の式変形統一で、Step 5 の結論の鎖（根拠のない行が三つ、根拠の書式も不揃い）を一行一等号の六段へ整え、証明冒頭の鎖・Step 4・指数行列の積の定理・行列の和の相殺・スカラー行列の指数・単位行列とのスカラー倍の積を各行末に明示した。内容は変えていない。次は Step 1' 以降の ψ 側から続ける。",
+        "2026-08-13 の式変形統一で、Step 1' の反交換計算を五段、Step 2' の交換子の有限和を三段、Steps 3'--5' の結論を六段の一行一等号へ整え、各行末に根拠を明示した。内容は変えていない。これでこの証明ブロックの式変形統一は完了した。",
       ],
     },
   },
