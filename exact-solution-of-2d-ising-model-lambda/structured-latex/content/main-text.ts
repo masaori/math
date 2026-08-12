@@ -27746,7 +27746,10 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)=b
       displayMath(String.raw`(-1)^{q_\sigma(e)}
 =\sigma\bigl(\partial_0(e)\bigr)\sigma\bigl(\partial_1(e)\bigr)
 \quad(\because\ \sigma\ \text{の値は }+1\text{ または }-1)`),
-      paragraph([ref("def_edge_subset_incidence_count"), " と ", ref("def_dual_edge_map"), " を順に開くと"]),
+      paragraph([
+        ref("def_edge_subset_incidence_count"), " と ", ref("def_dual_edge_map"), " を順に開き、",
+        ref("claim_dual_edge_map_bijective"), " により双対辺の唯一の原像を取ると",
+      ]),
       displayMath(String.raw`\begin{aligned}
 d_{A_\sigma}(i,j)
 &=\sum_{\substack{e\in A_\sigma,\ a\in\{0,1\}\\ \partial_a(e)=(i,j)}}1
@@ -27760,7 +27763,8 @@ d_{A_\sigma}(i,j)
  +q_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)
  +q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j-\bar1)\bigr)
  +q_\sigma\bigl(n_{\mathrm h}(i-\bar1,j-\bar1)\bigr)
-&&(\because\ A_\sigma=\delta_L(\mathcal{B}_L(\sigma))\ \text{と}\ \blkref{def_dual_edge_map})
+&&(\because\ A_\sigma=\delta_L(\mathcal{B}_L(\sigma)),\
+  \blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective})
 \end{aligned}`),
       paragraph([
         "最後の右辺に現れる四辺を、書かれた順に ", math(String.raw`e_1,e_2,e_3,e_4`),
