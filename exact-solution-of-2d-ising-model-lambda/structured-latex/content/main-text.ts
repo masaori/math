@@ -27837,21 +27837,23 @@ q_\sigma\bigl(n_{\mathrm v}(i,\pi(-1))\bigr)\right)\bmod2
 \blkref{claim_dual_edge_map_bijective})`),
       paragraph([ref("def_broken_edge_set"), " と端点写像より、この和の各項は ",
         math(String.raw`\sigma(i,\pi(-1))`), " と ", math(String.raw`\sigma(i+\bar1,\pi(-1))`),
-        " が異なるときだけ 1 である。有限集合 ", math(String.raw`\mathbb Z/L\mathbb Z`),
-        " の置換 ", math(String.raw`i\mapsto i+\bar1`), " で添字を取り替えると" ]),
+        " が異なるときだけ 1 である。二元集合の符号化 ",
+        math(String.raw`c:\{+1,-1\}\to\mathbb Z/2\mathbb Z`), " を ",
+        math(String.raw`c(+1):=0`), "、", math(String.raw`c(-1):=1`), " で定めると" ]),
       displayMath(String.raw`\begin{aligned}
-(-1)^{\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))}
-&=\prod_i \sigma(i,\pi(-1))\sigma(i+\bar1,\pi(-1))
-&&\bigl(\because\ (-1)^{q_\sigma(e)}=\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)\\
-&=\left(\prod_i\sigma(i,\pi(-1))\right)
-  \left(\prod_i\sigma(i+\bar1,\pi(-1))\right)
-&&\bigl(\because\ \text{有限積の分配}\bigr)\\
-&=\left(\prod_i\sigma(i,\pi(-1))\right)^2
+\left(\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))\right)\bmod2
+&=\sum_i\left(c(\sigma(i,\pi(-1)))+c(\sigma(i+\bar1,\pi(-1)))\right)
+&&\bigl(\because\ \text{二つの二値が異なることは符号化した値の和が }1\text{ であることと同値}\bigr)\\
+&=\sum_i c(\sigma(i,\pi(-1)))
+  +\sum_i c(\sigma(i+\bar1,\pi(-1)))
+&&\bigl(\because\ \text{有限和の分配}\bigr)\\
+&=\sum_i c(\sigma(i,\pi(-1)))
+  +\sum_i c(\sigma(i,\pi(-1)))
 &&\bigl(\because\ i\mapsto i+\bar1\ \text{は全単射}\bigr)\\
-&=1
-&&\bigl(\because\ \sigma(v)\in\{+1,-1\}\bigr).
+&=0
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\ \text{では同じ元の和は零元}\bigr).
 \end{aligned}`),
-      paragraph(["よって指数は偶数であり、直前の和の表示から ",
+      paragraph(["最初の等式と直前の鎖から ",
         math(String.raw`\varepsilon_{L,\mathrm h}(A_\sigma)=0`), " である。縦向き境界については、",
         "その唯一の原像が行 ", math(String.raw`\pi(-1)`), " に並ぶ横向き辺なので、同じ鎖で",
       ]),
