@@ -26647,6 +26647,101 @@ S_{n,m}
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_power_not_one_exists",
+    kind: "claim",
+    title: {
+      text: "指数が根の次数の倍数でないとき、冪が 1 でない 1 の冪根が存在する",
+    },
+    labels: ["claim_root_of_unity_power_not_one_exists"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerNotOneExists",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_not_one_exists_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityPowerNotOneExists_from_necSuf",
+    ],
+    verification: ["sagemath/check/root-of-unity-power-not-one-exists"],
+    statement: [
+      paragraph([
+        math(String.raw`n,m\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たし、", math(String.raw`n`), " が ", math(String.raw`m`),
+        " を割り切らないとする。このとき、",
+        math(String.raw`w^{m}\ne1`), " を満たす ", math(String.raw`w\in\mu_{n}`),
+        "（", ref("def_root_of_unity_set"), "）が存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備を 1 つ置く。", math(String.raw`n\ge1`),
+        " なので、自然数の除法により、",
+      ]),
+      displayMath(String.raw`m=nq+r,\qquad 0\le r<n`),
+      paragraph([
+        "を満たす ", math(String.raw`q,r\in\mathbb{N}`),
+        " を取る。ここで ", math(String.raw`r\ne0`), " である。もし ",
+        math(String.raw`r=0`), " なら ", math(String.raw`m=nq`), " となって ",
+        math(String.raw`n`), " が ", math(String.raw`m`),
+        " を割り切り、仮定に反するからである。したがって ",
+        math(String.raw`1\le r`), " である。",
+      ]),
+      paragraph([
+        "背理法で示す。結論を否定し、すべての ", math(String.raw`w\in\mu_{n}`),
+        " が ", math(String.raw`w^{m}=1`),
+        " を満たすと仮定する。", math(String.raw`w\in\mu_{n}`),
+        " を任意に取る。", math(String.raw`w^{n}=1`), " である（",
+        ref("def_root_of_unity_set"), "）。このとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{r}
+&=1\cdot w^{r}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=1^{q}\cdot w^{r}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の単位元の冪})\\
+&=(w^{n})^{q}\cdot w^{r}
+&&(\because\ w^{n}=1)\\
+&=w^{nq}\cdot w^{r}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の冪の法則（指数の積）})\\
+&=w^{nq+r}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の冪の法則（指数の和）})\\
+&=w^{m}
+&&(\because\ m=nq+r)\\
+&=1
+&&(\because\ \text{背理法の仮定})
+\end{aligned}`),
+      paragraph([
+        "である。すなわち、すべての ", math(String.raw`w\in\mu_{n}`), " が ",
+        math(String.raw`w^{r}=1`), "、つまり ", math(String.raw`w\in\mu_{r}`),
+        " を満たす（", ref("def_root_of_unity_set"), "）。",
+        math(String.raw`n\ge1`), " なので ",
+        ref("claim_root_of_unity_finite_card_bound"), " により ",
+        math(String.raw`\mu_{n}`), " は有限集合である。よって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+n
+&=\lvert\mu_{n}\rvert
+&&(\because\ \blkref{claim_root_of_unity_card})\\
+&\le r
+&&(\because\ \blkref{claim_root_of_unity_subset_card_bound}\ \text{を指数}\ r\ (1\le r)\text{、有限集合}\ \mu_{n}\ \text{に当てる})\\
+&<n
+&&(\because\ \text{準備の}\ r<n)
+\end{aligned}`),
+      paragraph([
+        "となり、自然数の狭義の大小が ", math(String.raw`n<n`),
+        " を許さないことと矛盾する。したがって背理法の仮定は成り立たず、",
+        math(String.raw`w^{m}\ne1`), " を満たす ", math(String.raw`w\in\mu_{n}`),
+        " が存在する。",
+      ]),
+      paragraph([
+        "この段が ", math(String.raw`\overline{\mathbb{Q}}`),
+        " について新たに使っているのは、引いた 3 つの主張が要求する性質のほかに、",
+        "冪の法則（指数の和・指数の積）、単位元の冪、積の単位元だけである。",
+        "自然数の側で使ったのは除法と大小だけである。",
+        "積の可換則も、体であることも、代数閉であることも使っていない。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

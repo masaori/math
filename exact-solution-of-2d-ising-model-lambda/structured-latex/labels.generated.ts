@@ -131,6 +131,7 @@ export const ALL_LABELS = [
   "claim_root_of_unity_mul",
   "claim_root_of_unity_mul_map_bijective",
   "claim_root_of_unity_pow",
+  "claim_root_of_unity_power_not_one_exists",
   "claim_root_of_unity_power_of_multiple",
   "claim_root_of_unity_power_sum_invariant",
   "claim_root_of_unity_power_sum_multiple_value",
