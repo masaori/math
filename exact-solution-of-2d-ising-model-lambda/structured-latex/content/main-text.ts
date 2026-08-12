@@ -26378,6 +26378,54 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_claim_root_of_unity_card",
+    kind: "claim",
+    title: { text: "1 の冪根の全体はちょうど指数個の元を持つ" },
+    labels: ["claim_root_of_unity_card"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/root-of-unity-card"],
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityCardEq",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_eq_of_upper_and_distinct_sequence_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityCardEq_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`n\ge1`),
+        " を満たすとする。このとき ", math(String.raw`\mu_n`), "（",
+        ref("def_root_of_unity_set"), "）はちょうど ", math(String.raw`n`),
+        " 個の元を持つ。すなわち ", math(String.raw`\lvert\mu_n\rvert=n`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_root_of_unity_finite_card_bound"), " より ", math(String.raw`\mu_n`),
+        " は有限集合であり、",
+      ]),
+      displayMath(String.raw`\lvert\mu_n\rvert\le n`),
+      paragraph([
+        "である。一方、", ref("claim_root_polynomial_distinct_factorization"), " を ",
+        math(String.raw`j=n`), " に当てると、互いに相異なる ",
+        math(String.raw`w(0),\dots,w(n-1)\in\mu_n`), " が存在する。したがって、",
+      ]),
+      displayMath(String.raw`n\le\lvert\mu_n\rvert`),
+      paragraph(["である。二つの不等式を組み合わせると、"]),
+      displayMath(String.raw`\begin{aligned}
+\lvert\mu_n\rvert
+&\le n
+&&(\because\ \blkref{claim_root_of_unity_finite_card_bound})\\
+&\le\lvert\mu_n\rvert
+&&(\because\ \blkref{claim_root_polynomial_distinct_factorization}\ \text{を}\ j=n\ \text{に当てる})
+\end{aligned}`),
+      paragraph([
+        "であるから、自然数の大小の反対称性により ",
+        math(String.raw`\lvert\mu_n\rvert=n`),
+        " を得る。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -26662,15 +26710,15 @@ f
           ref("claim_qbar_poly_linear_factor_product_extract"),
           "）、および取り出した分解の残りの因子の根が取り出した因子の根と相異なること（",
           ref("claim_qbar_poly_extracted_root_distinct"),
-          "）までは上で済んでいる。次に書くのは、",
-          math(String.raw`t^{\,n}+\widehat{-1}`),
-          " が ",
-          math(String.raw`n`),
-          " 個の相異なる根を持つこと（下界）、それらを合わせて ",
+          "）、および根の多項式が相異なる根の一次因子を順に取り出せること（",
+          ref("claim_root_polynomial_distinct_factorization"),
+          "）、および ",
           math(String.raw`\mu_n`),
           " がちょうど ",
           math(String.raw`n`),
-          " 個の元を持つこと（有限性の仮定を外すため）と、そこから出る ",
+          " 個の元を持つこと（",
+          ref("claim_root_of_unity_card"),
+          "）までは上で済んでいる。次に書くのは、",
           math(String.raw`\mu_L`),
           " の元の冪の総和（指数が ",
           math(String.raw`L`),

@@ -2416,13 +2416,25 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       ),
       paragraph(["Step 17: 因数分解の検証。", math(String.raw`(1 - \alpha_1 x)(1 - \alpha_2^{-1}x)`), " を展開すると、"]),
       displayMath(
-        String.raw`(1 - \alpha_1 x)(1 - \alpha_2^{-1}x)
-= 1 - (\alpha_1 + \alpha_2^{-1})x + \alpha_1\alpha_2^{-1}x^2
-\overset{(\star),(\star\star)}{=} 1 - \frac{2 s_1 c_2}{c_1 + 1}x + \frac{c_1 - 1}{c_1 + 1}x^2`,
+        String.raw`\begin{aligned}
+(1 - \alpha_1 x)(1 - \alpha_2^{-1}x)
+&= 1-\alpha_2^{-1}x-\alpha_1x+\alpha_1\alpha_2^{-1}x^2
+&& (\because\ \text{分配則}) \\
+&= 1-(\alpha_1+\alpha_2^{-1})x+\alpha_1\alpha_2^{-1}x^2
+&& (\because\ \text{分配則}) \\
+&= 1-\frac{2s_1c_2}{c_1+1}x+\frac{c_1-1}{c_1+1}x^2
+&& (\because\ (\star),(\star\star))
+\end{aligned}`,
       ),
       paragraph(["よって"]),
       displayMath(
-        String.raw`(c_1 + 1)(1 - \alpha_1 x)(1 - \alpha_2^{-1}x) = (c_1 + 1) - 2 s_1 c_2 x + (c_1 - 1)x^2`,
+        String.raw`\begin{aligned}
+(c_1+1)(1-\alpha_1x)(1-\alpha_2^{-1}x)
+&=(c_1+1)\left(1-\frac{2s_1c_2}{c_1+1}x+\frac{c_1-1}{c_1+1}x^2\right)
+&& (\because\ \text{上の計算}) \\
+&=(c_1+1)-2s_1c_2x+(c_1-1)x^2
+&& (\because\ c_1+1\ne0\ \text{と分配則})
+\end{aligned}`,
       ),
       paragraph([
         "これは Step 14 の分子と一致する（",
@@ -2435,15 +2447,23 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       ]),
       paragraph(["Step 18: 結論。Step 14 と Step 17 より、"]),
       displayMath(
-        String.raw`\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-= \frac{(c_1 + 1)(1 - \alpha_1 e^{i\theta_\mu})(1 - \alpha_2^{-1}e^{i\theta_\mu})}{(c_1 + 1)(1 - \alpha_1 e^{-i\theta_\mu})(1 - \alpha_2^{-1}e^{-i\theta_\mu})}
-= \frac{(1 - \alpha_1 e^{i\theta_\mu})(1 - \alpha_2^{-1}e^{i\theta_\mu})}{(1 - \alpha_1 e^{-i\theta_\mu})(1 - \alpha_2^{-1}e^{-i\theta_\mu})}`,
+        String.raw`\begin{aligned}
+\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
+&=\frac{(c_1+1)(1-\alpha_1e^{i\theta_\mu})(1-\alpha_2^{-1}e^{i\theta_\mu})}{(c_1+1)(1-\alpha_1e^{-i\theta_\mu})(1-\alpha_2^{-1}e^{-i\theta_\mu})}
+&& (\because\ \text{Step 14 と Step 17}) \\
+&=\frac{(1-\alpha_1e^{i\theta_\mu})(1-\alpha_2^{-1}e^{i\theta_\mu})}{(1-\alpha_1e^{-i\theta_\mu})(1-\alpha_2^{-1}e^{-i\theta_\mu})}
+&& (\because\ c_1+1\ne0\ \text{による約分})
+\end{aligned}`,
       ),
       paragraph(["したがって ", math(String.raw`a(\theta_\mu)`), " の定義より、"]),
       displayMath(
-        String.raw`a(\theta_\mu)
-= \sqrt{\frac{(1 - \alpha_1 e^{i\theta_\mu})(1 - \alpha_2^{-1}e^{i\theta_\mu})}{(1 - \alpha_1 e^{-i\theta_\mu})(1 - \alpha_2^{-1}e^{-i\theta_\mu})}}
-= \sqrt{\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}`,
+        String.raw`\begin{aligned}
+a(\theta_\mu)
+&=\sqrt{\frac{(1-\alpha_1e^{i\theta_\mu})(1-\alpha_2^{-1}e^{i\theta_\mu})}{(1-\alpha_1e^{-i\theta_\mu})(1-\alpha_2^{-1}e^{-i\theta_\mu})}}
+&& (\because\ a(\theta_\mu)\ \text{の定義}) \\
+&=\sqrt{\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}
+&& (\because\ \text{上の計算})
+\end{aligned}`,
       ),
       paragraph(["Part A の Step 8 の結果と合わせて、Claim のステートメントが示された。"]),
     ],
@@ -2454,6 +2474,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
         "2026-08-12 の式変形統一で、Part A の Step 4 に同じ行で連結されていた 2 つの等号を、Step 2・Step 3 の代入と各場合で π を足す計算に分け、各行末に根拠を付けた。内容は変えていない。",
         "2026-08-12 の式変形統一（続き）で、Part A の Step 5 の 8 つの場合の含意鎖（根拠なし）へ、Step 4 のどの場合を使ったか・各辺を −2 倍して 3π（5π）を足す不等式の変形・区間の包含という根拠を各行末に付けた。内容は変えていない。",
         "2026-08-12 の式変形統一（続き）で、Part B の Step 16 の 7 本の計算をすべて一続きの鎖＋行末の根拠へ開いた。あわせて、最初の鎖の中間式 (tanh K_1)^{-1}(tanh K_2^*)^{-1}（これは α_2^{-1} ではなく α_1^{-1} に等しい）が誤っていたのを ((tanh K_1)^{-1} tanh K_2^*)^{-1} へ直した（結論と以降の行は正しかった）。",
+        "2026-08-12 の式変形統一（続き）で、Part B の Step 17–18 を一続きの鎖へ開いた。因数分解は分配則を 1 段ずつ適用し、c_1+1 の乗法と約分を分け、最後の 2 本の等式にも Step 14・Step 17、a(θ_μ) の定義という根拠を各行末へ付けた。内容は変えていない。",
       ],
     },
   },

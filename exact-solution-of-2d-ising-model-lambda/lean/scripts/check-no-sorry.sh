@@ -736,6 +736,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorization
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.root_polynomial_distinct_factorization_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rootPolynomialDistinctFactorization_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnityCardEq
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.card_eq_of_upper_and_distinct_sequence_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.rootOfUnityCardEq_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
