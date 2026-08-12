@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_low_temperature_polynomial_identity`
 
-- 併せて検証: `def_broken_edge_set_polynomial`
+- 併せて検証: `def_broken_edge_set`、`def_attainable_broken_edge_sets`、`def_broken_edge_set_polynomial`
 - 範囲: 破れた辺の集合の各原像が二配位であることと、$Z_L=2D_L$ の有限多項式恒等式
 
 ## チェック一覧

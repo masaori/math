@@ -27159,16 +27159,12 @@ Z_L(1)
   },
 
   {
-    id: "fisher_zero_definition_broken_edge_set_polynomial",
+    id: "fisher_zero_definition_broken_edge_set",
     kind: "definition",
-    title: { text: "破れた辺の集合の生成多項式" },
-    labels: ["def_broken_edge_set_polynomial"],
+    title: { text: "配位のもとで破れている辺の集合" },
+    labels: ["def_broken_edge_set"],
     habitat: "Z",
-    lean: [
-      "Ising2DLambda.FisherZero.brokenEdgeSet",
-      "Ising2DLambda.FisherZero.attainableBrokenEdgeSets",
-      "Ising2DLambda.FisherZero.lowTemperaturePolynomial",
-    ],
+    lean: ["Ising2DLambda.FisherZero.brokenEdgeSet"],
     verification: ["sagemath/check/low-temperature-polynomial-identity"],
     statement: [
       paragraph([
@@ -27176,15 +27172,52 @@ Z_L(1)
         " を任意に取る。", math(String.raw`\sigma`), " のもとで破れている辺の番号の集合を",
       ]),
       displayMath(String.raw`\mathcal{B}_L(\sigma):=\left\{\,e\in E_L\ \middle|\ \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\right\}`),
-      paragraph(["と定める。実現できる破れた辺の集合の全体を"]),
+      paragraph([
+        "と定める。", math(String.raw`E_L`), " は有限集合なので、",
+        math(String.raw`\mathcal{B}_L(\sigma)`), " も有限集合である。",
+        ref("def_broken_bond_count"), " より ",
+        math(String.raw`|\mathcal{B}_L(\sigma)|=b(\sigma)`), " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_attainable_broken_edge_sets",
+    kind: "definition",
+    title: { text: "実現できる破れた辺の集合の全体" },
+    labels: ["def_attainable_broken_edge_sets"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.FisherZero.attainableBrokenEdgeSets"],
+    verification: ["sagemath/check/low-temperature-polynomial-identity"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。", ref("def_broken_edge_set"),
+        " で定めた集合のうち、配位によって実現できるものの全体を",
+      ]),
       displayMath(String.raw`\mathfrak{B}_L:=\left\{\,\mathcal{B}_L(\sigma)\ \middle|\ \sigma\in\Sigma_L\,\right\}`),
-      paragraph(["と定め、その生成多項式を"]),
+      paragraph([
+        "と定める。", math(String.raw`\Sigma_L`), " は有限集合なので、",
+        math(String.raw`\mathfrak{B}_L`), " も有限集合である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_broken_edge_set_polynomial",
+    kind: "definition",
+    title: { text: "破れた辺の集合の生成多項式" },
+    labels: ["def_broken_edge_set_polynomial"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.FisherZero.lowTemperaturePolynomial"],
+    verification: ["sagemath/check/low-temperature-polynomial-identity"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。", ref("def_attainable_broken_edge_sets"),
+        " で定めた有限集合族の生成多項式を",
+      ]),
       displayMath(String.raw`D_L:=\sum_{B\in\mathfrak{B}_L}x^{\,|B|}\ \in\ \mathbb{Z}[x]`),
       paragraph([
-        "で定める。", math(String.raw`\Sigma_L`), " と ", math(String.raw`E_L`),
-        " は有限集合なので、", math(String.raw`\mathfrak{B}_L`), " も有限集合である。",
-        math(String.raw`\mathcal{B}_L(\sigma)`), " の定義と ", ref("def_broken_bond_count"), " より ",
-        math(String.raw`|\mathcal{B}_L(\sigma)|=b(\sigma)`), " である。",
+        "で定める。",
         "有限集合・自然数・整数係数多項式だけを用い、実数体、複素数体、指数関数は現れない。",
       ]),
     ],
