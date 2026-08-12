@@ -27991,6 +27991,62 @@ e\in\mathcal B_L(\sigma_A)
   },
 
   {
+    id: "fisher_zero_claim_attainable_dual_image_trivial_sector",
+    kind: "claim",
+    title: { text: "実現できる破れた辺集合の双対像は自明セクターの全体である" },
+    labels: ["claim_attainable_dual_image_trivial_sector"],
+    habitat: "N",
+    verification: ["sagemath/check/attainable-dual-image-trivial-sector"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。", ref("def_attainable_broken_edge_sets"),
+        " の有限集合族と ", ref("def_torus_homology_sector"), " の自明セクターについて、集合として",
+      ]),
+      displayMath(String.raw`\left\{\,\delta_L(B)\ \middle|\ B\in\mathfrak{B}_L\,\right\}
+=\mathcal{E}^{0,0}_L`),
+      paragraph(["が成り立つ。左辺の ", math(String.raw`\delta_L(B)`),
+        " は辺の部分集合 ", math(String.raw`B`), " の像である。"]),
+    ],
+    proof: [
+      paragraph([
+        "集合の等号を両包含で示す。まず左辺が右辺に含まれることを示す。",
+        math(String.raw`B\in\mathfrak{B}_L`), " を任意に取る。",
+        ref("def_attainable_broken_edge_sets"), " より、",
+        math(String.raw`\mathcal{B}_L(\sigma)=B`), " を満たす配位 ",
+        math(String.raw`\sigma\in\Sigma_L`), " が存在する。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_L(B)
+&=\delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)
+&&\bigl(\because\ \mathcal{B}_L(\sigma)=B\bigr)\\
+&\in\mathcal{E}^{0,0}_L
+&&\bigl(\because\ \blkref{claim_dual_broken_edges_even},\ \blkref{claim_dual_broken_edges_winding_zero}\bigr).
+\end{aligned}`),
+      paragraph([
+        "次に右辺が左辺に含まれることを示す。",
+        math(String.raw`A\in\mathcal{E}^{0,0}_L`), " を任意に取る。",
+        ref("claim_trivial_sector_configuration_reconstruction"), " より、",
+        math(String.raw`\delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)=A`),
+        " を満たす配位 ", math(String.raw`\sigma\in\Sigma_L`),
+        " が存在する（原像の元の個数は 2 なので、特に原像は空でない）。",
+        math(String.raw`B:=\mathcal{B}_L(\sigma)`), " と置くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B
+&\in\mathfrak{B}_L
+&&\bigl(\because\ \blkref{def_attainable_broken_edge_sets}\bigr)\\
+\delta_L(B)
+&=A
+&&\bigl(\because\ \delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)=A\bigr).
+\end{aligned}`),
+      paragraph([
+        "ゆえに ", math(String.raw`A`), " は左辺に属する。両包含から集合の等号が従う。",
+        "全過程は有限集合の元の取り出しと写像の像だけで閉じる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

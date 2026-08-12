@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_attainable_dual_image_trivial_sector",
   "claim_broken_bond_row_decomposition",
   "claim_characteristic_polynomial_monic",
   "claim_closed_walk_bijection",
