@@ -28146,6 +28146,78 @@ Z_L
   },
 
   {
+    id: "fisher_zero_definition_high_temperature_sector_polynomial",
+    kind: "definition",
+    title: { text: "高温展開のセクター多項式" },
+    labels: ["def_high_temperature_sector_polynomial"],
+    habitat: "Z",
+    verification: ["sagemath/check/high-temperature-sector-decomposition"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、", math(String.raw`a,b\in\{0,1\}`),
+        " を取る。", ref("def_torus_homology_sector"), " で定めたセクター ",
+        math(String.raw`\mathcal{E}^{a,b}_L`), " だけにわたる整数係数多項式を",
+      ]),
+      displayMath(String.raw`H^{a,b}_L:=\sum_{A\in\mathcal{E}^{a,b}_L}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}\ \in\ \mathbb{Z}[x]`),
+      paragraph([
+        "で定める。", math(String.raw`\mathcal{E}^{a,b}_L`), " は有限集合なのでこの和は有限和であり、",
+        math(String.raw`A\subseteq E_L`), " かつ ", math(String.raw`|E_L|=2L^2`),
+        " なので指数 ", math(String.raw`2L^2-|A|`), " は自然数である。上付きの ",
+        math(String.raw`a,b`), " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
+        "有限集合・自然数・整数係数多項式だけを用い、実数体、複素数体、指数関数は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_high_temperature_sector_decomposition",
+    kind: "claim",
+    title: { text: "高温展開の多項式は四つのセクター多項式の和である" },
+    labels: ["claim_high_temperature_sector_decomposition"],
+    habitat: "Z",
+    verification: ["sagemath/check/high-temperature-sector-decomposition"],
+    statement: [
+      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+      displayMath(String.raw`H_L=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L`),
+      paragraph([
+        "が成り立つ。高温展開の整数多項式は、偶部分グラフの四つの巻き付きセクターに対応する",
+        "四つの多項式の和へ分解する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、和の添字の集合を確かめる。",
+        ref("def_torus_homology_sector"), " より、任意の ",
+        math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`), " と任意の ",
+        math(String.raw`A\in\mathcal{E}^{a,b}_L`), " について ",
+        math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ。逆に ",
+        ref("claim_torus_homology_sector_partition"), " より、",
+        math(String.raw`\operatorname{Even}_L(A)`), " を満たす任意の ",
+        math(String.raw`A\subseteq E_L`), " に対し、", math(String.raw`A\in\mathcal{E}^{a,b}_L`),
+        " を満たす組 ", math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`),
+        " がただ一つ存在する。したがって偶部分グラフの全体は、四つの有限集合 ",
+        math(String.raw`\mathcal{E}^{0,0}_L,\mathcal{E}^{0,1}_L,\mathcal{E}^{1,0}_L,\mathcal{E}^{1,1}_L`),
+        " の重なりのない合併である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+H_L
+&=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}
+&&\bigl(\because\ \blkref{def_high_temperature_polynomial}\bigr)\\
+&=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}\ \sum_{A\in\mathcal{E}^{a,b}_L}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}
+&&\bigl(\because\ \text{重なりのない合併にわたる有限和の分割（準備）}\bigr)\\
+&=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}H^{a,b}_L
+&&\bigl(\because\ \blkref{def_high_temperature_sector_polynomial}\bigr)\\
+&=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
+&&\bigl(\because\ \{0,1\}\times\{0,1\}\ \text{の四つの元を書き並べる}\bigr)
+\end{aligned}`),
+      paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
