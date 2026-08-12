@@ -4341,8 +4341,12 @@ A(\theta_\mu)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\psi_\nu^\dagger &= c_\nu\bigl(+i\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}\,\hat{Z}_\nu^{(-)} + \gamma_2(-\theta_\nu)\hat{Y}_\nu\bigr) \\
-\psi_{-\nu} &= c_{-\nu}\bigl(-i\sqrt{\gamma_2(\theta_{-\nu})\gamma_2(-\theta_{-\nu})}\,\hat{Z}_{-\nu}^{(-)} + \gamma_2(-\theta_{-\nu})\hat{Y}_{-\nu}\bigr)
+\psi_\nu^\dagger
+&= c_\nu\bigl(+i\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}\,\hat{Z}_\nu^{(-)} + \gamma_2(-\theta_\nu)\hat{Y}_\nu\bigr)
+&& (\because\ \text{フェルミオンの定義と }c_\nu\text{ の定義}) \\
+\psi_{-\nu}
+&= c_{-\nu}\bigl(-i\sqrt{\gamma_2(\theta_{-\nu})\gamma_2(-\theta_{-\nu})}\,\hat{Z}_{-\nu}^{(-)} + \gamma_2(-\theta_{-\nu})\hat{Y}_{-\nu}\bigr)
+&& (\because\ \text{フェルミオンの定義と }c_{-\nu}\text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -4358,10 +4362,18 @@ A(\theta_\mu)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-[\psi_\nu^\dagger, \hat{Z}_\mu^{(-)}]_+ &= c_\nu\bigl(+i\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I \\
-[\psi_{-\nu}, \hat{Z}_\mu^{(-)}]_+ &= c_{-\nu}\bigl(-i\sqrt{\gamma_2(\theta_{-\nu})\gamma_2(-\theta_{-\nu})}\bigr)\cdot 2M\delta^M_{\mu-\nu,0}\,I \\
-[\psi_\nu^\dagger, \hat{Y}_\mu]_+ &= c_\nu\,\gamma_2(-\theta_\nu)\cdot 2M\delta^M_{\mu+\nu,0}\,I \\
-[\psi_{-\nu}, \hat{Y}_\mu]_+ &= c_{-\nu}\,\gamma_2(-\theta_{-\nu})\cdot 2M\delta^M_{\mu-\nu,0}\,I
+[\psi_\nu^\dagger, \hat{Z}_\mu^{(-)}]_+
+&= c_\nu\bigl(+i\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I
+&& (\because\ \text{フェルミオンの表示、反交換子の双線型性、}\ [\hat Z_\nu^{(-)},\hat Y_\mu]_+=0) \\
+[\psi_{-\nu}, \hat{Z}_\mu^{(-)}]_+
+&= c_{-\nu}\bigl(-i\sqrt{\gamma_2(\theta_{-\nu})\gamma_2(-\theta_{-\nu})}\bigr)\cdot 2M\delta^M_{\mu-\nu,0}\,I
+&& (\because\ \text{フェルミオンの表示、反交換子の双線型性、}\ [\hat Z_{-\nu}^{(-)},\hat Y_\mu]_+=0) \\
+[\psi_\nu^\dagger, \hat{Y}_\mu]_+
+&= c_\nu\,\gamma_2(-\theta_\nu)\cdot 2M\delta^M_{\mu+\nu,0}\,I
+&& (\because\ \text{フェルミオンの表示、反交換子の双線型性、}\ [\hat Z_\nu^{(-)},\hat Y_\mu]_+=0) \\
+[\psi_{-\nu}, \hat{Y}_\mu]_+
+&= c_{-\nu}\,\gamma_2(-\theta_{-\nu})\cdot 2M\delta^M_{\mu-\nu,0}\,I
+&& (\because\ \text{フェルミオンの表示、反交換子の双線型性、}\ [\hat Z_{-\nu}^{(-)},\hat Y_\mu]_+=0)
 \end{aligned}`,
       ),
       paragraph([
@@ -4509,6 +4521,7 @@ T_{(V')}(W)
         "現行ソース（Phase-1 で規約撤去・場合分け簡約済み）を Step 1-4 まで忠実に翻訳。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の" +
           "単位行列 I_{Mat(2^M,C)} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-08-13 の式変形統一で、Step 3 の準備に残っていたフェルミオンの表示二式と、そこから得る反交換子四式へ行末根拠を付けた。内容は変えていない。",
       ],
     },
   },
