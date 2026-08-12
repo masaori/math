@@ -4241,7 +4241,15 @@ A(\theta_\mu)
         " であるから、",
       ]),
       displayMath(
-        String.raw`\gamma_1(\theta_\nu)^2 = 1 - \gamma_2(\theta_\nu)\gamma_2(-\theta_\nu) = 1 - 0\cdot\gamma_2(-\theta_\nu) = 1 \quad (\because \gamma_2(\theta_\nu) = 0)`,
+        String.raw`\begin{aligned}
+\gamma_1(\theta_\nu)^2
+&= 1 - \gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)
+&& (\because\ \det A(\theta_\nu)=1) \\
+&= 1 - 0\cdot\gamma_2(-\theta_\nu)
+&& (\because\ \gamma_2(\theta_\nu)=0) \\
+&= 1
+&& (\because\ 0\cdot\gamma_2(-\theta_\nu)=0)
+\end{aligned}`,
       ),
       paragraph([
         ref("gamma1_geq_1"),
@@ -4249,14 +4257,24 @@ A(\theta_\mu)
         math(String.raw`\gamma_1(\theta_\nu) \geq 1 > 0`),
         " であるから ",
         math(String.raw`\gamma_1(\theta_\nu) = 1`),
-        "。よって ",
-        math(String.raw`\gamma(\theta_\nu) = \mathrm{arccosh}(\gamma_1(\theta_\nu)) = \mathrm{arccosh}(1) = 0`),
-        "（",
+        "。ここで ",
         math(String.raw`\gamma(\theta_\nu)`),
         " の定義は ",
         ref("def_gamma_theta_mu"),
-        "）。",
+        " であるから、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma(\theta_\nu)
+&= \mathrm{arccosh}(\gamma_1(\theta_\nu))
+&& (\because\ \gamma(\theta_\nu)\text{ の定義}) \\
+&= \mathrm{arccosh}(1)
+&& (\because\ \gamma_1(\theta_\nu)=1) \\
+&= 0
+&& (\because\ \mathrm{arccosh}(1)=0)
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
       paragraph(["Step 2: ", math(String.raw`\gamma_2(\theta_\mu) = 0`), " かつ ", math(String.raw`\delta^M_{\mu\pm\nu,0} \neq 0`), " ならば ", math(String.raw`\gamma_2(\theta_\nu) = 0`), "（ゆえに ", math(String.raw`\gamma(\theta_\nu) = 0`), "）。"]),
       paragraph([
         math(String.raw`\nu \in \{1,\dots,M\}`),
@@ -4367,7 +4385,15 @@ A(\theta_\mu)
         " より",
       ]),
       displayMath(
-        String.raw`[\psi_\nu^\dagger \psi_{-\nu}, W] = \psi_\nu^\dagger[\psi_{-\nu}, W]_+ - [\psi_\nu^\dagger, W]_+\psi_{-\nu} = \psi_\nu^\dagger O - O\psi_{-\nu} = O`,
+        String.raw`\begin{aligned}
+[\psi_\nu^\dagger \psi_{-\nu}, W]
+&= \psi_\nu^\dagger[\psi_{-\nu}, W]_+ - [\psi_\nu^\dagger, W]_+\psi_{-\nu}
+&& (\because\ \text{積の交換子を反交換子で表す恒等式}) \\
+&= \psi_\nu^\dagger O - O\psi_{-\nu}
+&& (\because\ [\psi_{-\nu},W]_+=O,\ [\psi_\nu^\dagger,W]_+=O) \\
+&= O
+&& (\because\ AO=OA=O)
+\end{aligned}`,
       ),
       paragraph([
         "また ",
@@ -4406,11 +4432,31 @@ A(\theta_\mu)
         "）を示す。",
       ]),
       displayMath(
-        String.raw`X^{n+1}W = X\cdot X^n W = X\cdot W X^n = (XW)X^n = (WX)X^n = W X^{n+1} \quad (\because XW = WX)`,
+        String.raw`\begin{aligned}
+X^{n+1}W
+&= X\cdot X^n W
+&& (\because\ X^{n+1}=X\cdot X^n) \\
+&= X\cdot W X^n
+&& (\because\ X^nW=WX^n) \\
+&= (XW)X^n
+&& (\because\ \text{行列積の結合則}) \\
+&= (WX)X^n
+&& (\because\ XW=WX) \\
+&= W X^{n+1}
+&& (\because\ \text{行列積の結合則と }X^{n+1}=X\cdot X^n)
+\end{aligned}`,
       ),
       paragraph([math(String.raw`n = 0`), " で ", math(String.raw`X^0 W = W = W X^0`), " だから全 ", math(String.raw`n \geq 0`), " で成立する。よって"]),
       displayMath(
-        String.raw`\left(\sum_{n=0}^N \frac{X^n}{n!}\right)W = \sum_{n=0}^N \frac{X^n W}{n!} = \sum_{n=0}^N \frac{W X^n}{n!} = W\left(\sum_{n=0}^N \frac{X^n}{n!}\right)`,
+        String.raw`\begin{aligned}
+\left(\sum_{n=0}^N \frac{X^n}{n!}\right)W
+&= \sum_{n=0}^N \frac{X^n W}{n!}
+&& (\because\ \text{行列積の有限和に関する分配則}) \\
+&= \sum_{n=0}^N \frac{W X^n}{n!}
+&& (\because\ X^nW=WX^n) \\
+&= W\left(\sum_{n=0}^N \frac{X^n}{n!}\right)
+&& (\because\ \text{行列積の有限和に関する分配則})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`N \to \infty`),
@@ -4433,7 +4479,17 @@ A(\theta_\mu)
         "）であり、",
       ]),
       displayMath(
-        String.raw`T_{(V')}(W) = \exp(X)W\exp(-X) = W\exp(X)\exp(-X) = W`,
+        String.raw`\begin{aligned}
+T_{(V')}(W)
+&= \exp(X)W\exp(-X)
+&& (\because\ T_{(V')}\text{ の定義}) \\
+&= W\exp(X)\exp(-X)
+&& (\because\ \exp(X)W=W\exp(X)) \\
+&= WI
+&& (\because\ \exp(X)\exp(-X)=I) \\
+&= W
+&& (\because\ I\text{ は単位行列})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3 より ",
