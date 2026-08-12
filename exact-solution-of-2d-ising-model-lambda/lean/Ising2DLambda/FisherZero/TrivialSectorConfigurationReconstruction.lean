@@ -4,7 +4,8 @@
 導く存在構成の前半と、復元した配位が一つ得られた後に全スピン反転による二つの原像だけが
 あると示す個数計算を置く。
 
-存在構成のうち、道和と辺差の等式、復元の組み立ては続く tick でこのファイルへ加える。
+存在構成のうち、道和の定義と横向き辺の差、縦向き辺の差、復元の組み立ては
+続く tick でこのファイルへ加える。
 -/
 import Ising2DLambda.FisherZero.DualBrokenEdgesWinding
 import Ising2DLambda.FisherZero.LowTemperaturePolynomial
