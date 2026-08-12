@@ -787,6 +787,8 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.map_bijective_of_two_sided_inverse_necSuf
   Ising2DLambda.FisherZero.dualEdgeEquiv_bijective_from_necSuf
   Ising2DLambda.NecSuf.FisherZero.four_signs_even_necSuf
+  Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven
+  Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

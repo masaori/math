@@ -27726,6 +27726,11 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)=b
     labels: ["claim_dual_broken_edges_even"],
     habitat: "N",
     verification: ["sagemath/check/dual-broken-edges-even"],
+    lean: [
+      "Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven",
+      "Ising2DLambda.NecSuf.FisherZero.four_signs_even_necSuf",
+      "Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`L\ge1`), " とし、配位 ", math(String.raw`\sigma\in\Sigma_L`),

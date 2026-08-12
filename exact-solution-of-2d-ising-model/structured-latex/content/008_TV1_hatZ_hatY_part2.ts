@@ -4428,8 +4428,10 @@ T_{(V')}(\psi_\mu)
       displayMath(
         String.raw`\begin{aligned}
 \det P_\mu
-&= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\Bigl((+i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu) - (-i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu)\Bigr) \\
+&= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\Bigl((+i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu) - (-i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\gamma_2(-\theta_\mu)\Bigr)
+\quad (\because P_\mu \text{ \u306e\u5b9a\u7fa9\u3068 }2\times2\text{ \u884c\u5217\u306e\u884c\u5217\u5f0f}) \\
 &= \frac{1}{(2\sqrt{M}\,\gamma_2(-\theta_\mu))^2}\cdot 2i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\mu)
+\quad (\because \text{\u5206\u914d\u5f8b\u3068\u7b26\u53f7\u306e\u8a08\u7b97})
 \end{aligned}`,
       ),
       paragraph([

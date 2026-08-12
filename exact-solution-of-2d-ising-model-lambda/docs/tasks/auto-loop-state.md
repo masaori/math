@@ -7,6 +7,14 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 162 は、前 tick の Lean 核を本文・SageMath と突き合わせて
+  修正不要と確認し、「破れた辺の双対像は偶部分グラフ」を四層すべてで完了した。**
+  Lean 具体版は局所端点数を格子面境界の四つの破れ指示子の和へ書き換え、
+  四辺のスピン積が $1$ であることから必要十分版の四符号の偶数性を適用した。
+  次は、破れた辺の双対像の二つの巻き付き偶奇がどちらも $0$ であることを示す。
+  式変形の書き方の統一では、姉妹側の「$T_{(V)}$ と $T_{(V')}$ は
+  $\hat Z^{(-)},\hat Y$ 上で一致する」の $P_\mu$ の行列式計算を整えた。
+
 - **2026-08-12 の tick 161 は、前 tick の双対像の偶次数証明に欠けていた全単射性の参照を
   レビュー修正して独立に push したあと、同じセクションの Lean 配線を途中まで進めた。**
   双対像 dualBrokenEdgeSet と双対辺写像の横向き・縦向き辺への作用を具体版に置き、
@@ -1834,7 +1842,7 @@
 | 高温展開の多項式恒等式 | Fisher 零点 | 一辺の重みの二項表示を全辺へ展開し、直前のスピン単項式の和を適用して高温展開の整数多項式恒等式を示す | done | 2026-08-12 の tick 157 で四層すべて完了。定義 `def_high_temperature_polynomial`、主張 `claim_high_temperature_polynomial_identity`、SageMath `high-temperature-polynomial-identity`、Lean 具体版 `highTemperaturePolynomial_identity`、必要十分版 `common_sum_two_evaluations_necSuf`、導出 `highTemperaturePolynomial_identity_from_necSuf`。有限集合・整数多項式だけで閉じる |
 | 偶部分グラフの四つの巻き付きセクター | Fisher 零点 | 二つの周期境界を横切る辺の個数の偶奇を定義し、偶部分グラフ全体が四セクターへ一意に分かれることを示す | done | 2026-08-12 の tick 158 で四層すべて完了。tick 159 のレビュで Lean を本文と同じセクター所属の命題へ修正した。定義 `def_torus_winding_parities`・`def_torus_homology_sector`、主張 `claim_torus_homology_sector_partition`。SageMath は `torus-homology-sector-partition`、Lean 具体版 `torusHomologySector_unique`、必要十分版 `admissible_fiber_label_unique_necSuf`、導出 `torusHomologySector_unique_from_necSuf` |
 | 双対辺写像の全単射性 | Fisher 零点 | 正方格子の横向き辺と縦向き辺を座標をずらして交換する双対辺写像を定義し、明示した逆写像の二つの往復律から全単射性を示す | done | 2026-08-12 の tick 159 で四層すべて。定義 `def_dual_edge_map`、主張 `claim_dual_edge_map_bijective`。SageMath は `dual-edge-map-bijective`（$L=1,\dots,5$）。Lean 具体版 `dualEdgeEquiv_bijective`、必要十分版 `map_bijective_of_two_sided_inverse_necSuf`（写像・逆写像・二つの往復律だけ）、導出 `dualEdgeEquiv_bijective_from_necSuf`。もとのセクションは、写像の全単射性、破れた辺の像の偶次数性、二つの巻き付き偶奇の消滅という三つの独立した論法を含んでいたため分割した |
-| 破れた辺の双対像は偶部分グラフ | Fisher 零点 | 任意の配位に対し、破れた辺集合を双対辺写像で送った像が、各双対頂点で偶数本の端点を持つことを示す | todo | 2026-08-12 の tick 160 で記述と SageMath まで。tick 161 で Lean の双対像の定義・双対辺写像の二つの座標作用と、必要十分版 four_signs_even_necSuf（四つの符号積が $1$ なら負号の個数が偶数）まで。局所端点数を四指示子の和へ移す具体版と導出は未了 |
+| 破れた辺の双対像は偶部分グラフ | Fisher 零点 | 任意の配位に対し、破れた辺集合を双対辺写像で送った像が、各双対頂点で偶数本の端点を持つことを示す | done | 2026-08-12 の tick 162 で四層すべて完了。SageMath は `dual-broken-edges-even`。Lean 具体版 `dualBrokenEdgeSet_isEven`、必要十分版 `four_signs_even_necSuf`、導出 `dualBrokenEdgeSet_isEven_from_necSuf`。局所端点数を格子面境界の四指示子の和へ書き換え、四辺の符号積から偶数性を得る |
 | 破れた辺の双対像の巻き付き偶奇 | Fisher 零点 | 任意の配位に対し、破れた辺の双対像の二つの巻き付き偶奇がどちらも $0$ であることを示す | todo | 周期方向の閉路に沿って破れを数え、出発点と終点が同じスピンなので偶数になることを使う |
 | 自明セクターの偶部分グラフから配位を復元する | Fisher 零点 | 双対側の自明セクターに属する偶部分グラフが破れた辺集合として実現し、その原像が全スピン反転の二配位であることを示す | todo | 存在の構成と原像の二元性を一つの論法として閉じる |
 | 四境界条件の混合と Kramers--Wannier 双対 | Fisher 零点 | 非自明な三セクターを捨てず、周期・反周期の四境界条件の混合として低温展開と高温展開を可算な双対恒等式へ結ぶ | todo | 周期格子は平面グラフではないため、周期分配関数一つをそのまま自己双対としない |
@@ -1847,6 +1855,11 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 162）: 局所端点数を双対辺の座標で全辺集合から数え直し、
+  格子面境界の四つの破れ指示子の和と一致することを Lean で示した。
+  各破れ指示子を両端スピンの積に移し、四辺の積で各頂点が二度ずつ現れることから
+  符号積を $1$ とし、`four_signs_even_necSuf` を特殊化した。
 
 - 2026-08-12（tick 161）: Lean 具体側に破れた辺集合の双対像 dualBrokenEdgeSet を定義し、
   双対辺写像が横向き辺を一列ずらした縦向き辺へ、縦向き辺を一行ずらした横向き辺へ送る
@@ -4157,6 +4170,12 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 162）**: `008_TV1_hatZ_hatY_part2` の主張
+「$T_{(V)}$ と $T_{(V')}$ は $\hat Z^{(-)},\hat Y$ 上で一致する」の
+$P_\mu$ の行列式計算を整えた。$2\times2$ 行列の行列式の定義と、
+分配律・符号計算の根拠を二つの等号の行末へ付けた。内容は変えていない。
+次は同じ証明の $P_\mu^{-1}$ を用いた復元の鏖から続ける。
+
 **2026-08-12（tick 160）**: `008_TV1_hatZ_hatY_part2` の主張
 「$T_{(V')}$ の $\psi$ への作用」の Step 4 を整えた。生成部分代数から全行列環へ至る包含を
 一行一関係へ分け、集合の相等、各点での値の相等、写像の外延性をそれぞれ独立した表示と
@@ -5745,6 +5764,10 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 162）: 前 tick の Lean 追加分を、本文の格子面境界の四辺と
+  SageMath の四指示子の順序に突き合わせた。双対辺写像の座標作用と、四符号の積が
+  $1$ なら真である指示子の個数が偶数であるという必要十分版は一致しており、修正は無かった。
 
 - 2026-08-12（tick 161）: 前 tick の「破れた辺の双対像は偶部分グラフである」を本文と
   SageMath で突き合わせた。双対像の指示関数を元の破れ指示関数へ置き換える等式が、
