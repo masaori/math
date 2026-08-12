@@ -2628,28 +2628,42 @@ a(\theta_\mu)
       displayMath(
         String.raw`\begin{aligned}
 T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
-&= T_{(V)}\!\bigl(\bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr)\cdot P_\mu\bigr) \\
+&= T_{(V)}\!\bigl(\bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr)\cdot P_\mu\bigr)
+\quad (\because\ \text{フェルミオンの定義}) \\
 &= \begin{pmatrix} T_{(V)}(\hat{Z}_\mu^{(-)}) & T_{(V)}(\hat{Y}_\mu) \end{pmatrix}\cdot P_\mu
-\quad (\because T_{(V)} \text{ の線形性}) \\
+\quad (\because\ T_{(V)} \text{ の線形性}) \\
 &= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) A(\theta_\mu)\cdot P_\mu
-\quad (\because \text{T\_V\_hatZ\_hatY}) \\
+\quad (\because\ T_{(V)}\ \text{の}\ \hat{Z}_\mu^{(-)}, \hat{Y}_\mu\ \text{への作用}) \\
 &= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr)(P_\mu D_\mu P_\mu^{-1})\cdot P_\mu
-\quad (\because A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}) \\
-&= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) P_\mu D_\mu \\
-&= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix} D_\mu \\
-&= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}\begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu} \end{pmatrix} \\
-&= \begin{pmatrix} \lambda_{+,\mu}\psi_\mu^\dagger & \lambda_{-,\mu}\psi_\mu \end{pmatrix} \\
+\quad (\because\ A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}) \\
+&= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) P_\mu D_\mu
+\quad (\because\ \text{行列の積の結合則と}\ P_\mu^{-1}P_\mu = I) \\
+&= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix} D_\mu
+\quad (\because\ \text{フェルミオンの定義}) \\
+&= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}\begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu} \end{pmatrix}
+\quad (\because\ D_\mu\ \text{の成分}) \\
+&= \begin{pmatrix} \lambda_{+,\mu}\psi_\mu^\dagger & \lambda_{-,\mu}\psi_\mu \end{pmatrix}
+\quad (\because\ \text{行ベクトルと対角行列の積の成分計算}) \\
 &= \begin{pmatrix} \bigl(\gamma_1(\theta_\mu) + \sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\bigr)\psi_\mu^\dagger & \bigl(\gamma_1(\theta_\mu) - \sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\bigr)\psi_\mu \end{pmatrix}
+\quad (\because\ \lambda_{\pm,\mu}\ \text{の値})
 \end{aligned}`,
       ),
       paragraph([
-        "（",
+        "ここで、第 3 の等号の作用は ",
+        ref("T_V_hatZ_hatY"),
+        "、第 4 の等号の対角化 ",
         math(String.raw`A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}`),
-        " と固有値 ",
+        " と第 7・第 9 の等号の ",
+        math(String.raw`D_\mu`),
+        " の成分・固有値 ",
         math(String.raw`\lambda_{\pm,\mu} = \gamma_1(\theta_\mu) \pm \sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}`),
         " は ",
         ref("eigenvector_of_A_theta"),
-        " による）。両成分を比較して主張を得る。",
+        " および ",
+        ref("diagonalization_P_D"),
+        "、第 1・第 6 の等号は ",
+        ref("def_fermi"),
+        " による。両成分を比較して主張を得る。",
       ]),
     ],
     conversion: {
