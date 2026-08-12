@@ -2914,8 +2914,10 @@ t_\mu&\neq0_{\mathbb{C}}
 &\quad + i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\gamma_2(-\theta_\nu)[\hat{Z}_\mu^{(-)}, \hat{Y}_\nu]_+ \\
 &\quad + \gamma_2(-\theta_\mu)\,i\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}[\hat{Y}_\mu, \hat{Z}_\nu^{(-)}]_+ \\
 &\quad + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)[\hat{Y}_\mu, \hat{Y}_\nu]_+
-\Bigr) \\
+\Bigr)
+&& (\because\ \text{反交換子の双線型性と}\ \psi_\mu^\dagger,\psi_\nu^\dagger\ \text{の定義})\\
 &= c_\mu c_\nu\bigl(-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\bigr)\cdot 2M\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&& (\because\ \text{二つの交差項の反交換子は零であり、}\ i^2=-1)
 \end{aligned}`,
       ),
       paragraph([
@@ -2925,11 +2927,17 @@ t_\mu&\neq0_{\mathbb{C}}
         "（平方根が単一値であることから従う分枝の一致）を使うと",
       ]),
       displayMath(
-        String.raw`\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}
-= t_\mu t_\nu
-= t_\mu^2
-= \bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\bigr)^2
-= \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) \quad (\because (\sqrt{z})^2 = z)`,
+        String.raw`\begin{aligned}
+\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}
+&=t_\mu t_\nu
+&& (\because\ t_\mu,t_\nu\ \text{の定義})\\
+&=t_\mu^2
+&& (\because\ \text{Step 0-3 の}\ t_\nu=t_\mu)\\
+&=\bigl(\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\bigr)^2
+&& (\because\ t_\mu\ \text{の定義})\\
+&=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ (\sqrt{z})^2=z)
+\end{aligned}`,
       ),
       paragraph([
         "（第 2 の等号が Step 0-3 の ",
@@ -2941,20 +2949,30 @@ t_\mu&\neq0_{\mathbb{C}}
         " より",
       ]),
       displayMath(
-        String.raw`\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = \gamma_2(-\theta_\mu)\gamma_2(\theta_\mu) = \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)`,
+        String.raw`\begin{aligned}
+\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)
+&=\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)
+&& (\because\ \text{Step 0-2 の}\ \gamma_2(-\theta_\nu)=\gamma_2(\theta_\mu))\\
+&=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \mathbb{C}\ \text{の積の可換則})
+\end{aligned}`,
       ),
       paragraph(["したがって係数の和は"]),
       displayMath(
-        String.raw`-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)} + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)
-= -\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 0`,
+        String.raw`\begin{aligned}
+&-\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\sqrt{\gamma_2(\theta_\nu)\gamma_2(-\theta_\nu)}
++\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)\\
+&=-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
++\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
+&& (\because\ \text{上の二つの式変形})\\
+&=0
+&& (\because\ \mathbb{C}\ \text{の加法逆元})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\delta^M_{\mu+\nu,0} = 0`),
-        " のときは全体が ",
-        math(String.raw`0`),
-        "。以上から ",
-        math(String.raw`[\psi_\mu^\dagger, \psi_\nu^\dagger]_+ = 0`),
-        "。",
+        " のときは、先に得た反交換子の式の因子が零なので、同じ結論を得る。以上から ",
+        math(String.raw`[\psi_\mu^\dagger, \psi_\nu^\dagger]_+ = 0`), "。",
       ]),
       paragraph(["b) ", math(String.raw`[\psi_\mu^\dagger, \psi_\nu]_+`), " について、双線型性より"]),
       displayMath(
@@ -3017,9 +3035,10 @@ t_\mu&\neq0_{\mathbb{C}}
           "t_ν = -t_μ（逆分枝）を取ると第 1 式・第 2 式がいずれも偽になることが定理として確認されている。" +
           "本リポジトリの √ は def_sqrt_cc で単一値の写像 C → C として定義されているので逆分枝は起こらないが、" +
           "その一意性を使っていることが statement にも proof にも書かれていなかった。" +
-          "そこで (a) statement に『√ は def_sqrt_cc の単一値写像である』ことを明記し、" +
+        "そこで (a) statement に『√ は def_sqrt_cc の単一値写像である』ことを明記し、" +
           "(b) proof に Step 0（γ_2 の 2π 周期性 → 根号の中身の一致 → 写像の一価性から t_ν = t_μ → " +
           "t_μ ≠ 0 ゆえ分枝の一致が不可欠であること）を追加した。主張そのものは変えていない。",
+        "2026-08-12 の式変形統一で、a) の反交換子の双線型展開・平方根の積・γ₂ の積・係数の消去を一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
       ],
     },
   },
