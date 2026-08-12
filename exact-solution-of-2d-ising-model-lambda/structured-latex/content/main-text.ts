@@ -27471,7 +27471,11 @@ S_L(A)
         "、破れていれば ", math(String.raw`-1`), " なので、",
       ]),
       displayMath(String.raw`(1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))
-=\begin{cases}2,&\sigma(\partial_0(e))=\sigma(\partial_1(e)),\\2x,&\sigma(\partial_0(e))\ne\sigma(\partial_1(e)).\end{cases}`),
+=\begin{cases}
+  2,&\sigma(\partial_0(e))=\sigma(\partial_1(e)),\\
+  2x,&\sigma(\partial_0(e))\ne\sigma(\partial_1(e))
+\end{cases}
+\quad(\because\ \text{二つの場合で両端のスピンの積を代入する})`),
       paragraph(["したがって全辺にわたる積を取り、全配位について足すと"]),
       displayMath(String.raw`\begin{aligned}
 \sum_{\sigma\in\Sigma_L}\prod_{e\in E_L}
@@ -27485,9 +27489,17 @@ S_L(A)
       displayMath(String.raw`\begin{aligned}
 &\sum_{\sigma\in\Sigma_L}\prod_{e\in E_L}
 \bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)\\
+&=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}
+\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
+&&(\because\ \text{全辺の二項展開})\\
+&=\sum_{A\subseteq E_L}\sum_{\sigma\in\Sigma_L}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}
+\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
+&&(\because\ \text{有限和の順序の入れ替え})\\
 &=\sum_{A\subseteq E_L}(1+x)^{2L^2-|A|}(1-x)^{|A|}
 \sum_{\sigma\in\Sigma_L}\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
-&&(\because\ \text{全辺の二項展開と有限和の順序の入れ替え})\\
+&&(\because\ \text{配位に依らない因子を有限和の外へ出す})\\
 &=\sum_{A\subseteq E_L}(1+x)^{2L^2-|A|}(1-x)^{|A|}S_L(A)
 &&(\because\ \blkref{def_edge_subset_spin_sum})\\
 &=2^{L^2}\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
@@ -27497,12 +27509,15 @@ S_L(A)
 &&(\because\ \blkref{def_high_temperature_polynomial})
 \end{aligned}`),
       paragraph(["である。二つの計算の始点は同じなので"]),
-      displayMath(String.raw`2^{2L^2}Z_L=2^{L^2}H_L`),
-      paragraph([
-        math(String.raw`\mathbb{Z}[x]`), " は整域であり ", math(String.raw`2^{L^2}\ne0`),
-        " なので、この共通因子を消去して ", math(String.raw`2^{L^2}Z_L=H_L`), " を得る。",
-        "全過程は有限集合、自然数、整数係数多項式だけで閉じる。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+2^{2L^2}Z_L
+&=2^{L^2}H_L
+&&(\because\ \text{同じ有限和の二つの計算})\\
+2^{L^2}Z_L
+&=H_L
+&&(\because\ \mathbb{Z}[x]\ \text{は整域であり }2^{L^2}\ne0\text{ なので共通因子を消去})
+\end{aligned}`),
+      paragraph(["全過程は有限集合、自然数、整数係数多項式だけで閉じる。"]),
     ],
   },
 
