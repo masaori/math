@@ -2894,8 +2894,10 @@ t_\mu&\neq0_{\mathbb{C}}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\psi_\mu^\dagger &= c_\mu\bigl(+i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\hat{Z}_\mu^{(-)} + \gamma_2(-\theta_\mu)\hat{Y}_\mu\bigr) \\
+\psi_\mu^\dagger &= c_\mu\bigl(+i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\hat{Z}_\mu^{(-)} + \gamma_2(-\theta_\mu)\hat{Y}_\mu\bigr)
+&&\left(\because\ \text{定義「フェルミオン」の}\ \psi_\mu^\dagger\ \text{の表示式で}\ c_\mu\ \text{を括り出した}\right)\\
 \psi_\mu &= c_\mu\bigl(-i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,\hat{Z}_\mu^{(-)} + \gamma_2(-\theta_\mu)\hat{Y}_\mu\bigr)
+&&\left(\because\ \text{定義「フェルミオン」の}\ \psi_\mu\ \text{の表示式で}\ c_\mu\ \text{を括り出した}\right)
 \end{aligned}`,
       ),
       paragraph(["である。また、", ref("anticommutator_of_hat_Z_and_hat_Y"), " より、"]),
