@@ -27566,7 +27566,10 @@ C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`)
     title: { text: "周期トーラスの四つの辺セクター" },
     labels: ["def_torus_homology_sector"],
     habitat: "N",
-    lean: ["Ising2DLambda.FisherZero.torusHomologySector"],
+    lean: [
+      "Ising2DLambda.FisherZero.torusHomologySector",
+      "Ising2DLambda.FisherZero.IsInTorusHomologySector",
+    ],
     verification: ["sagemath/check/torus-homology-sector-partition"],
     statement: [
       paragraph([
@@ -27588,7 +27591,7 @@ C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`)
     habitat: "N",
     lean: [
       "Ising2DLambda.FisherZero.torusHomologySector_unique",
-      "Ising2DLambda.NecSuf.FisherZero.fiber_label_unique_necSuf",
+      "Ising2DLambda.NecSuf.FisherZero.admissible_fiber_label_unique_necSuf",
       "Ising2DLambda.FisherZero.torusHomologySector_unique_from_necSuf",
     ],
     verification: ["sagemath/check/torus-homology-sector-partition"],

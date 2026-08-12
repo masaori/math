@@ -10,9 +10,9 @@ open Ising2DLambda.PartitionPolynomial
 
 /-- 必要十分版から得る四セクターへの一意な所属。 -/
 theorem torusHomologySector_unique_from_necSuf (L : ℕ) [NeZero L]
-    (A : Finset (Edge L)) (_hEven : IsEvenEdgeSubset L A) :
-    ∃! sector : Fin 2 × Fin 2, torusHomologySector L A = sector := by
-  exact Ising2DLambda.NecSuf.FisherZero.fiber_label_unique_necSuf
-    (torusHomologySector L) A
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) :
+    ∃! sector : Fin 2 × Fin 2, IsInTorusHomologySector L A sector := by
+  exact Ising2DLambda.NecSuf.FisherZero.admissible_fiber_label_unique_necSuf
+    (IsEvenEdgeSubset L) (torusHomologySector L) A hEven
 
 end Ising2DLambda.FisherZero

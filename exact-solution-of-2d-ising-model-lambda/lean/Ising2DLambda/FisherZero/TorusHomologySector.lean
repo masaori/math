@@ -24,12 +24,17 @@ def verticalWindingParity (L : ℕ) [NeZero L] (A : Finset (Edge L)) : Fin 2 :=
 def torusHomologySector (L : ℕ) [NeZero L] (A : Finset (Edge L)) : Fin 2 × Fin 2 :=
   (horizontalWindingParity L A, verticalWindingParity L A)
 
+/-- 偶部分グラフ `A` が、二つの巻き付き偶奇 `sector` のセクターに属すること。 -/
+def IsInTorusHomologySector (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (sector : Fin 2 × Fin 2) : Prop :=
+  IsEvenEdgeSubset L A ∧ torusHomologySector L A = sector
+
 /-- `claim_torus_homology_sector_partition` の具体版。 -/
 theorem torusHomologySector_unique (L : ℕ) [NeZero L]
-    (A : Finset (Edge L)) (_hEven : IsEvenEdgeSubset L A) :
-    ∃! sector : Fin 2 × Fin 2, torusHomologySector L A = sector := by
-  refine ⟨torusHomologySector L A, rfl, ?_⟩
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) :
+    ∃! sector : Fin 2 × Fin 2, IsInTorusHomologySector L A sector := by
+  refine ⟨torusHomologySector L A, ⟨hEven, rfl⟩, ?_⟩
   intro sector hsector
-  exact hsector.symm
+  exact hsector.2.symm
 
 end Ising2DLambda.FisherZero
