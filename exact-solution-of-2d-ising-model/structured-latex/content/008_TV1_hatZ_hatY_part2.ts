@@ -5563,14 +5563,33 @@ e^{i\theta_M}
         math(String.raw`c_1 = s_1 c_2`),
         " と仮定する。両辺は正の実数（",
         math(String.raw`s_1 c_2 > 0`),
-        "）であり、両辺を 2 乗して Step 0 の 2 式を代入すると",
+        "）である。まず両辺を 2 乗して Step 0 の 2 式を代入すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-c_1^2 &= s_1^2 c_2^2 \\
-1 + s_1^2 &= s_1^2 (1 + s_2^2) \\
-1 + s_1^2 &= s_1^2 + s_1^2 s_2^2 \\
-1 &= s_1^2 s_2^2 = (s_1 s_2)^2
+c_1^2
+&= (s_1 c_2)^2
+   \quad (\because\ c_1 = s_1 c_2\ \text{（仮定）}) \\
+&= s_1^2 c_2^2
+   \quad (\because\ \text{積の 2 乗は 2 乗の積}) \\
+&= s_1^2 (1 + s_2^2)
+   \quad (\because\ \text{Step 0 の } c_2^2 = 1 + s_2^2) \\
+&= s_1^2 + s_1^2 s_2^2
+   \quad (\because\ \text{分配則})
+\end{aligned}`,
+      ),
+      paragraph(["が成り立つ。この両辺から ", math(String.raw`s_1^2`), " を引くと"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(s_1 s_2)^2
+&= s_1^2 s_2^2
+   \quad (\because\ \text{積の 2 乗は 2 乗の積}) \\
+&= c_1^2 - s_1^2
+   \quad (\because\ \text{上の等式の両辺から } s_1^2 \text{ を引く}) \\
+&= (1 + s_1^2) - s_1^2
+   \quad (\because\ \text{Step 0 の } c_1^2 = 1 + s_1^2) \\
+&= 1
+   \quad (\because\ \text{加法逆元の相殺})
 \end{aligned}`,
       ),
       paragraph([
@@ -5602,12 +5621,18 @@ c_1^2 &= s_1^2 c_2^2 \\
       displayMath(
         String.raw`\begin{aligned}
 (s_1 c_2)^2
-&= s_1^2 c_2^2 \\
-&= s_1^2 (1 + s_2^2) \\
-&= s_1^2 + s_1^2 s_2^2 \\
-&= s_1^2 + (s_1 s_2)^2 \\
-&= s_1^2 + 1 \\
+&= s_1^2 c_2^2
+   \quad (\because\ \text{積の 2 乗は 2 乗の積}) \\
+&= s_1^2 (1 + s_2^2)
+   \quad (\because\ \text{Step 0 の } c_2^2 = 1 + s_2^2) \\
+&= s_1^2 + s_1^2 s_2^2
+   \quad (\because\ \text{分配則}) \\
+&= s_1^2 + (s_1 s_2)^2
+   \quad (\because\ \text{積の 2 乗は 2 乗の積}) \\
+&= s_1^2 + 1
+   \quad (\because\ s_1 s_2 = 1\ \text{（仮定）と } 1^2 = 1) \\
 &= c_1^2
+   \quad (\because\ \text{Step 0 の } c_1^2 = 1 + s_1^2)
 \end{aligned}`,
       ),
       paragraph([
@@ -5698,6 +5723,9 @@ c_1^2 &= s_1^2 c_2^2 \\
           "「正の実数について a^2 = b^2 ⟺ a = b」（labels: cosh_sinh_basic_properties (4)）で符号を確定させている。",
         "γ2 の零点と Ising 臨界点の対応（この claim の帰結）は数学的内容なので note ではなく statement に置いた。" +
           "その導出（gamma_2_theta_is_0 との接続）は proof の Step 3 に書いた。",
+        "2026-08-13 の式変形統一で、Step 1 の積み重ねた等式列（根拠なし・最終行に等号 2 つ）を、" +
+          "2 乗の代入の鎖と s_1^2 を引く鎖の二本の一行一等号の鎖へ分け、Step 2 の鎖の各行へ行末根拠を付けた。" +
+          "内容は変えていない。",
       ],
     },
   },
