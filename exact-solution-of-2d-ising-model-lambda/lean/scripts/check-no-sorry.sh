@@ -808,6 +808,10 @@ targets=(
   Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_difference
   Ising2DLambda.FisherZero.sum_range_adjacent_pairs_char_two
   Ising2DLambda.FisherZero.reconstructionPathParity_vertical_difference
+  Ising2DLambda.FisherZero.reconstructionSpin_ne_iff_add_eq_one
+  Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet
+  Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet
+  Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

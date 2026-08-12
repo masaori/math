@@ -511,6 +511,61 @@ theorem reconstructionPathParity_vertical_difference (L : ℕ) [NeZero L]
         (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
           then 1 else 0 : ZMod 2) * htwo
 
+/-- 道和の偶奇をスピン値へ戻す写像。零なら `+1`、非零なら `-1` とする。 -/
+def reconstructionSpin (q : ZMod 2) : SpinValue :=
+  if q = 0 then ⟨1, Or.inl rfl⟩ else ⟨-1, Or.inr rfl⟩
+
+lemma reconstructionSpin_ne_iff_add_eq_one (a b : ZMod 2) :
+    reconstructionSpin a ≠ reconstructionSpin b ↔ a + b = 1 := by
+  fin_cases a <;> fin_cases b <;> decide
+
+/-- 人手証明の `σ_A(i,j)=(-1)^{t(i,j)}`。 -/
+noncomputable def reconstructedConfiguration (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) : Config L := fun v =>
+  reconstructionSpin (reconstructionPathParity L A v.1 v.2)
+
+/-- 道和から復元した配位の破れた辺集合は、双対辺写像で戻した辺集合に等しい。 -/
+theorem reconstructedConfiguration_brokenEdgeSet (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    brokenEdgeSet L (reconstructedConfiguration L A) = reconstructedEdgeSet L A := by
+  classical
+  ext e
+  rw [brokenEdgeSet, Finset.mem_filter]
+  simp only [Finset.mem_univ, true_and]
+  rw [show e = edgeEquiv L ((edgeEquiv L).symm e) by simp]
+  rcases (edgeEquiv L).symm e with ⟨i, j⟩ | ⟨i, j⟩
+  · simp only [edgeEquiv_inl_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_horizontal,
+      reconstructedConfiguration, reconstructionSpin_ne_iff_add_eq_one]
+    have h := reconstructionPathParity_horizontal_difference L A hSector i j
+    rw [add_comm] at h
+    by_cases he : edgeOfRow L false i j ∈ reconstructedEdgeSet L A
+    · simpa [he] using h
+    · simp only [he, iff_false]
+      have hzero : reconstructionPathParity L A i j +
+          reconstructionPathParity L A i (j + 1) = 0 := by simpa [he] using h
+      intro hone
+      rw [hone] at hzero
+      norm_num at hzero
+  · simp only [edgeEquiv_inr_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_vertical,
+      reconstructedConfiguration, reconstructionSpin_ne_iff_add_eq_one]
+    have h := reconstructionPathParity_vertical_difference L A hSector i j
+    rw [add_comm] at h
+    by_cases he : edgeOfRow L true i j ∈ reconstructedEdgeSet L A
+    · simpa [he] using h
+    · simp only [he, iff_false]
+      have hzero : reconstructionPathParity L A i j +
+          reconstructionPathParity L A (i + 1) j = 0 := by simpa [he] using h
+      intro hone
+      rw [hone] at hzero
+      norm_num at hzero
+
+/-- 道和から復元した配位の双対破れ像は、もとの自明セクターの偶部分グラフに等しい。 -/
+theorem reconstructedConfiguration_dualBrokenEdgeSet (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    dualBrokenEdgeSet L (reconstructedConfiguration L A) = A := by
+  rw [dualBrokenEdgeSet, reconstructedConfiguration_brokenEdgeSet L A hSector,
+    image_reconstructedEdgeSet]
+
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by
   simp only [dualBrokenEdgeSet]
@@ -537,5 +592,14 @@ theorem trivialSectorConfiguration_fiber_card_two_of_exists
     (globalSpinReversal_dualBrokenEdgeSet L σ)
     (sameDualBrokenEdges_eq_or_globalSpinReversal L σ)
   simpa [hσ] using h
+
+/-- 自明セクターの偶部分グラフを双対破れ像として持つ配位はちょうど二つである。 -/
+theorem trivialSectorConfiguration_fiber_card_two
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (univ.filter fun σ : Config L => dualBrokenEdgeSet L σ = A).card = 2 := by
+  apply trivialSectorConfiguration_fiber_card_two_of_exists L A
+  exact ⟨reconstructedConfiguration L A,
+    reconstructedConfiguration_dualBrokenEdgeSet L A hSector⟩
 
 end Ising2DLambda.FisherZero

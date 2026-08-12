@@ -3950,10 +3950,15 @@ X^{n+1}\psi_\mu^\dagger
       paragraph(["となるから、全 ", math(String.raw`n \geq 0`), " で成立する。"]),
       paragraph(["Step 4: ", math(String.raw`\exp(X)\psi_\mu^\dagger = \psi_\mu^\dagger \exp(X + \gamma(\theta_\mu)I)`), "。"]),
       displayMath(
-        String.raw`\sum_{n=0}^N \frac{X^n}{n!}\,\psi_\mu^\dagger
-= \sum_{n=0}^N \frac{X^n\psi_\mu^\dagger}{n!}
-= \sum_{n=0}^N \frac{\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^n}{n!} \quad (\because \text{Step 3})
-= \psi_\mu^\dagger \sum_{n=0}^N \frac{(X + \gamma(\theta_\mu)I)^n}{n!}`,
+        String.raw`\begin{aligned}
+\sum_{n=0}^N \frac{X^n}{n!}\,\psi_\mu^\dagger
+&= \sum_{n=0}^N \frac{X^n\psi_\mu^\dagger}{n!}
+&& (\because\ \text{有限和の各項へ右から }\psi_\mu^\dagger\text{ を掛ける})\\
+&= \sum_{n=0}^N \frac{\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^n}{n!}
+&& (\because\ \text{Step 3})\\
+&= \psi_\mu^\dagger \sum_{n=0}^N \frac{(X + \gamma(\theta_\mu)I)^n}{n!}
+&& (\because\ \text{有限和に対する分配則})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`N \to \infty`),
@@ -4057,6 +4062,7 @@ T_{(V')}(\psi_\mu)
         "2026-08-13 の式変形統一で、Step 2 の冒頭の交換子の和（1 表示に等号 2 つ）を一行一等号の二段へ、場合 b) の γ₂ の周期性の二本（1 行に等号 3 つ・根拠なし）を代入を明示した四段の鎖二本へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 2 の残り（場合分け a〜c の散文中の等式）か Step 3 から続ける。",
         "2026-08-13 の式変形統一で、Step 2 の X と生成演算子の積を反対側へ移す結論を一行一等号の三段へ開き、交換子の定義・スカラーの交換・分配則を各行に明示した。内容は変えていない。次は同じ証明の Step 3 から続ける。",
         "2026-08-13 の式変形統一で、Step 3 の帰納法を直した。出発点（1 行に等号 2 つ・根拠なし）を四段の鎖へ、帰納法の一歩（根拠のない 2 行と、結合則と Step 2 を一段にまとめた 1 行）を七段の鎖へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 4 から続ける。",
+        "2026-08-13 の式変形統一で、Step 4 の有限和の等式三つを一行一等号の鎖へ開き、各項への右作用・Step 3・有限和への分配則を各行末に明示した。内容は変えていない。次は Step 5 から続ける。",
       ],
     },
   },
