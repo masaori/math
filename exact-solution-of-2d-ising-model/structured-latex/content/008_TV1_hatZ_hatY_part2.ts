@@ -3191,9 +3191,18 @@ c_\mu c_\nu
       ),
       paragraph([math(String.raw`2 \times 2`), " 行列の行列式の定義より"]),
       displayMath(
-        String.raw`\det A(\theta_\mu)
-= \gamma_1(\theta_\mu)\cdot\gamma_1(\theta_\mu) - \gamma_2(\theta_\mu)\cdot\bigl(-\gamma_2(-\theta_\mu)\bigr)
-= \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)`,
+        String.raw`\begin{aligned}
+\det A(\theta_\mu)
+&= \gamma_1(\theta_\mu)\cdot\gamma_1(\theta_\mu)
+  - \gamma_2(\theta_\mu)\cdot\bigl(-\gamma_2(-\theta_\mu)\bigr)
+&&\left(\because\ 2\times2\ \text{行列の行列式の定義と直前の行列表示}\right)\\
+&= \gamma_1(\theta_\mu)^2
+  - \bigl(-\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)\bigr)
+&&\left(\because\ \text{冪の定義と積の結合則}\right)\\
+&= \gamma_1(\theta_\mu)^2
+  + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
+&&\left(\because\ a-(-b)=a+b\right)
+\end{aligned}`,
       ),
       paragraph([
         "これで statement の第 1 の量と第 2 の量が等しいことが言えた。残りは、この値が ",
@@ -3339,7 +3348,8 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
           "実際 c_2 s_2^* = c_2^* を落とすと det A(θ_μ) は θ_μ に依存し 1 にならない（Lean 側 det_AMat / det_AMat_eq_one で確認済み）。" +
           "そこで証明を、def_A_theta の定義から直接 det を計算し、(i) c_1^2 - s_1^2 = 1、(ii) (c_2^*)^2 - (s_2^*)^2 = 1、" +
           "(iii) c_2 s_2^* = c_2^*（duality_c2_star_eq_s2_star_c2）の 3 関係を明示的に使う形へ書き直した。" +
-          "また statement の残り 2 式（γ_1^2 + γ_2γ_2(-θ) = 1 と λ_+λ_- = 1）の証明も原文には無かったので補った。",
+        "また statement の残り 2 式（γ_1^2 + γ_2γ_2(-θ) = 1 と λ_+λ_- = 1）の証明も原文には無かったので補った。",
+        "2026-08-12 の式変形統一で、Step 1 の行列式の計算を 3 段の一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
       ],
     },
   },

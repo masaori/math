@@ -7,6 +7,18 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 148 は、tick 147 の「1 の冪根の全体にわたる冪の和の値」を
+  四層で突き合わせて修正不要と確認し、「固有空間へ落とす写像から列ベクトルを
+  復元できること」を四層すべてで完了させた。** 各成分で根と冪の二重有限和を
+  入れ替え、根にわたる冪の和の値で指数 $k=0$ の項だけを残し、$L$ で割って
+  $A^0v=v$ に戻した。必要十分版は「係数の和が一つの番号でだけ非零」という
+  一般の体上の有限線形結合まで薄めた。次は、復元式の各加数が対応する固有空間に
+  入ることを組み合わせ、シフト行列の固有空間たちが列ベクトルの全体を張ると結論する。
+  検証は構造化テキスト 275 ラベル・PDF 141 ページで未解決参照 0 件・検証と証明の対応
+  129 件・`lake build`・sorry 検査 699 件ですべて通過した。
+  式変形の書き方の統一では、姉妹側の「$\det A(\theta_\mu)=1$」の Step 1（行列式の
+  定義からの計算）を整えた。**
+
 - **2026-08-12 の tick 147 は、tick 146 の「指数が根の次数の倍数でないとき、冪が 1 でない
   1 の冪根が存在する」を四層で突き合わせて修正不要と確認し、c4c4「1 の $n$ 乗根の全体に
   わたる冪の和の値」を四層すべてで完了させた。** $n\mid m$ の場合は c4c2b により
@@ -1710,7 +1722,8 @@
 | 10h3d-c4c2b | 固有値の代数性 | 指数が $n$ の倍数のときの冪の和の値（c4c2a で各項を 1 にし、$\mu_n$ にわたる単位元の和を $\lvert\mu_n\rvert=n$ が与える代数的数へ数え替える） | done | 2026-08-12 の tick 145 で四層すべて完了。主張 `claim_root_of_unity_power_sum_multiple_value`。本文は c4c2a で各項を 1 にし、$\lvert\mu_n\rvert=n$ が与える全単射で番号の集合へ添字を取り替え、`claim_qbar_unit_sum_eq_rational` を当てる。SageMath は `root-of-unity-power-sum-multiple-value`（104 組）。Lean 具体版 `powerSumMultipleValue`、必要十分版 `sum_const_reindex_necSuf`（可換加法モノイド・各項の定数値・添字型の元の個数・番号の集合にわたる有限和の値だけ）、導出 `powerSumMultipleValue_from_necSuf` |
 | 10h3d-c4c3 | 固有値の代数性 | $n$ が $m$ を割らないとき $w^{m}\ne1$ を満たす $w\in\mu_n$ が存在すること | done | 2026-08-12 の tick 146 で四層すべて完了。主張 `claim_root_of_unity_power_not_one_exists`。台帳の見込みの論法（$\mu_n\subset\mu_m$ と $\lvert\mu_m\rvert=m$ の比較）は $n\le m$ しか出ず矛盾にならないので、除法 $m=nq+r$（$1\le r<n$）へ変更: すべての $w\in\mu_n$ で $w^{m}=1$ と仮定すると鎖 $w^{r}=1\cdot w^{r}=\dots=w^{m}=1$ から $\mu_n\subseteq\mu_r$ となり、`claim_root_of_unity_card`・`claim_root_of_unity_subset_card_bound`（指数 $r$）で $n=\lvert\mu_n\rvert\le r<n$ の矛盾。SageMath は `root-of-unity-power-not-one-exists`（93 組）。Lean 具体版 `rootOfUnityPowerNotOneExists`、必要十分版 `power_not_one_exists_necSuf`（単位元・積・冪の記号と鎖の 4 法則・除法の分解・境界 1 仮定だけ。$1\le r$ も $n\nmid m$ も不要）、導出 `rootOfUnityPowerNotOneExists_from_necSuf` |
 | 10h3d-c4c4 | 固有値の代数性 | 1 の $n$ 乗根の全体にわたる冪の和の値の確定（c4c1〜c4c3 の組み立て。指数が $n$ の倍数なら元の個数、そうでなければ 0） | done | 2026-08-12 の tick 147 で四層すべて完了。主張 `claim_root_of_unity_power_sum_value`。本文は $n\mid m$ の場合に c4c2b、$n\nmid m$ の場合に c4c3 で witness を取り c4c1 を当てる場合分け。SageMath は `root-of-unity-power-sum-value`（144 組）。Lean 具体版 `powerSumValue`、必要十分版 `piecewise_value_necSuf`（命題の両側の値だけを要求し、値の型に構造は不要）、導出 `powerSumValue_from_necSuf` |
-| 10h3d-d | 固有値の代数性 | シフト行列の固有空間たちが列ベクトルの全体を張ること（組み立て） | todo | 10h3d-a〜c を合わせるだけの段。新しい論法は持たない見込み |
+| 10h3d-d1 | 固有値の代数性 | 固有空間へ落とす写像から列ベクトルを復元できること（$\bigoplus_{z\in\mu_L}L^{-1}\odot P_{A,z}(v)=v$） | done | 2026-08-12 の tick 148 で四層すべて完了。主張 `claim_qbar_projector_reconstruction`。根にわたる冪の和の値を使い $k=0$ の項だけを残す。SageMath は `qbar-projector-reconstruction`。Lean 具体版 `qbarProjector_reconstruction`、必要十分版 `finite_orthogonal_reconstruction_necSuf`（一般の体上の有限線形結合）、導出 `qbarProjector_reconstruction_from_necSuf` |
+| 10h3d-d2 | 固有値の代数性 | 復元式の各加数が対応する固有空間に入ることを合わせ、固有空間たちが列ベクトルの全体を張ると結論する | todo | d1 の復元式と `claim_qbar_projector_image_eigenspace`、固有空間のスカラー倍の閉性の組み立て |
 | 11 | Fisher 零点 | 零点が $\overline{\mathbb{Q}}$ に属すること、Kramers–Wannier 双対 | todo | |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
 | 12b | 有限系の自由エントロピー | 一般の $q$ での $\Phi_L(q)$ の性質（双対な点どうしの関係） | todo | 本文末尾の「この先に書くこと」に「続き」として載っていたが、セクション表に無く実行の列から落ちていた（2026-08-09 に追加）。自己双対点のあとに置くのは、双対な点どうしの関係が Kramers–Wannier 双対を定義してからでないと書けないため |
@@ -1721,6 +1734,10 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 148）: 旧「シフト行列の固有空間たちが列ベクトルの全体を張ること」を、
+  フーリエ型の復元式と、その各加数の所属を組み立てる段の 2 つへ分け、先頭の復元式を
+  四層すべてで完了した。次は固有空間たちが全体を張ることの組み立てである。
 
 - 2026-08-12（tick 147）: c4c4「1 の $n$ 乗根の全体にわたる冪の和の値」を四層すべてで
   完了した。$n\mid m$ と $n\nmid m$ の場合分けだけで、前者は c4c2b、後者は c4c3 と c4c1 の
@@ -3946,6 +3963,13 @@
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
 
+**2026-08-12（tick 148）**: `008_TV1_hatZ_hatY_part2` の主張
+「$\det A(\theta_\mu)=1$」の Step 1（$2\times2$ 行列の行列式の定義から
+$\det A(\theta_\mu)=\gamma_1(\theta_\mu)^2+\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)$ を得る段）を
+3 段の一続きの鎖へ開き、各等号に根拠を付けた。内容は変えていない。
+姉妹側の構造化テキストの検査一式・検証と証明の対応 116 件・PDF 294 ページは通過した。
+次の tick は同じ証明の Step 2 から続ける。
+
 **2026-08-12（tick 147）**: `008_TV1_hatZ_hatY_part2` の主張
 「$\psi$ の反交換関係」（`anticommutator_of_psi`）の c)（二つの消滅演算子の反交換子）を
 進めた。反交換子の双線型展開、交差項の消去と $(-i)(-i)=-1$、a) で示した二つの積の
@@ -5463,6 +5487,11 @@ $V_L$ の側から定め、端点写像はその逆向きとした。規律そ�
 `check-no-sorry.sh` に、すべての .lean が入口から import されていることの検査を足した。
 
 ## レビュー記録
+
+- 2026-08-12（tick 148）: tick 147 の c4c4「1 の $n$ 乗根の全体にわたる冪の和の値」を、
+  本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・sorry 登録まで突き合わせた。
+  二つの場合分けと各既存主張の適用、必要十分版の仮定、導出での具体的な値の供給は対応しており、
+  修正は無かった。
 
 - 2026-08-12（tick 147）: tick 146 の c4c3「指数が根の次数の倍数でないとき、冪が 1 でない
   1 の冪根が存在する」を、本文・SageMath・Lean 具体版・必要十分版・導出・入口 import・

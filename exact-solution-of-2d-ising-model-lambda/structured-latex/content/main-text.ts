@@ -26801,6 +26801,72 @@ n
   },
 
   {
+    id: "algebraic_eigenvalue_claim_qbar_projector_reconstruction",
+    kind: "claim",
+    title: { text: "固有空間へ落とす写像から列ベクトルを復元できる" },
+    labels: ["claim_qbar_projector_reconstruction"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.AlgebraicEigenvalue.qbarProjector_reconstruction",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_orthogonal_reconstruction_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.qbarProjector_reconstruction_from_necSuf",
+    ],
+    verification: ["sagemath/check/qbar-projector-reconstruction"],
+    statement: [
+      paragraph([
+        math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+        "（", ref("def_qbar_matrix"), "）と ",
+        math(String.raw`v\in V_L`), "（", ref("def_qbar_vector"),
+        "）を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\bigoplus_{z\in\mu_L}\frac{1}{L}\odot P_{A,z}(v)=v`),
+      paragraph([
+        "が成り立つ。", math(String.raw`\mu_L`), " は ",
+        ref("def_root_of_unity_set"), "、", math(String.raw`P_{A,z}`), " は ",
+        ref("def_qbar_projector"), "、", math(String.raw`\bigoplus`), " は ",
+        ref("def_qbar_vector_sum"), " である。", math(String.raw`L\ge1`),
+        " なので ", math(String.raw`L`), " が与える ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の元は零元でなく、",
+        math(String.raw`1/L\in\overline{\mathbb{Q}}`), " が定まる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\tau\in R_L`), " を任意に取る。", math(String.raw`0\le k<L`),
+        " に対し、", ref("claim_root_of_unity_power_sum_value"), " を ",
+        math(String.raw`n=L`), "、", math(String.raw`m=L-k`), " へ当てると",
+      ]),
+      displayMath(String.raw`\sum_{z\in\mu_L}z^{L-k}=\begin{cases}L,&k=0,\\0,&1\le k<L\end{cases}`),
+      paragraph([
+        "である。実際、", math(String.raw`k=0`), " なら ", math(String.raw`L\mid L-k`),
+        " である。", math(String.raw`1\le k<L`), " なら ",
+        math(String.raw`0<L-k<L`), " なので ", math(String.raw`L\nmid L-k`), " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\bigoplus_{z\in\mu_L}\frac{1}{L}\odot P_{A,z}(v)\Bigr)(\tau)
+&=\sum_{z\in\mu_L}\frac{1}{L}\,\bigl(P_{A,z}(v)\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_vector_sum},\ \blkref{def_qbar_vector_smul})\\
+&=\frac{1}{L}\sum_{z\in\mu_L}\sum_{k=0}^{L-1}z^{L-k}\,\bigl(A^k\cdot v\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_projector},\ \blkref{def_qbar_vector_sum},\ \blkref{def_qbar_vector_smul})\\
+&=\frac{1}{L}\sum_{k=0}^{L-1}\Bigl(\sum_{z\in\mu_L}z^{L-k}\Bigr)\bigl(A^k\cdot v\bigr)(\tau)
+&&(\because\ \text{有限和の順序の入れ替えと分配則})\\
+&=\frac{1}{L}\,L\,\bigl(A^0\cdot v\bigr)(\tau)
+&&(\because\ \blkref{claim_root_of_unity_power_sum_value},\ \text{上の場合分け})\\
+&=\bigl(A^0\cdot v\bigr)(\tau)
+&&(\because\ L\ne0)\\
+&=\bigl(I_L^{\overline{\mathbb{Q}}}\cdot v\bigr)(\tau)
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=v(\tau)
+&&(\because\ \blkref{claim_qbar_identity_action})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\tau\in R_L`), " は任意だったので二つの列ベクトルは等しい。",
+        "この段は有限和と代数的数の四則演算だけで閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

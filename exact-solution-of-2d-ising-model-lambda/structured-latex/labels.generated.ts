@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "claim_qbar_prod_eq_zero",
   "claim_qbar_projector_action",
   "claim_qbar_projector_image_eigenspace",
+  "claim_qbar_projector_reconstruction",
   "claim_qbar_repeated_sum_factorization",
   "claim_qbar_repeated_sum_ne_zero",
   "claim_qbar_shift_transfer_commute",
