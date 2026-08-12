@@ -4744,11 +4744,10 @@ T_{(V)}(\alpha x + \beta y)
    \quad (\because T_{(V')}\text{ の線型性})
 \end{aligned}`,
       ),
-      paragraph([
-        "ゆえ ",
-        math(String.raw`\alpha x + \beta y \in \mathcal{E}`),
-        " である。",
-      ]),
+      displayMath(
+        String.raw`\alpha x + \beta y \in \mathcal{E}
+\quad (\because\ \mathcal{E}\ \text{の定義と直前の等式})`,
+      ),
       paragraph([
         "（積について閉じる）",
         math(String.raw`x, y \in \mathcal{E}`),
@@ -4767,14 +4766,26 @@ T_{(V)}(x y)
    \quad (\because T_{(V')}\text{ の乗法性、conjugation\_is\_ring\_homomorphism})
 \end{aligned}`,
       ),
-      paragraph(["ゆえ ", math(String.raw`x y \in \mathcal{E}`), " である。"]),
+      displayMath(
+        String.raw`x y \in \mathcal{E}
+\quad (\because\ \mathcal{E}\ \text{の定義と直前の等式})`,
+      ),
       paragraph([
-        "（単位元を含む）",
-        math(String.raw`T_{(V)}(I) = I = T_{(V')}(I)`),
-        "（Step 1 の単位性）より ",
-        math(String.raw`I \in \mathcal{E}`),
-        " である。",
+        "（単位元を含む）Step 1 の単位性より",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V)}(I)
+&= I
+\quad (\because T_{(V)}\text{ の単位性}) \\
+&= T_{(V')}(I)
+\quad (\because T_{(V')}\text{ の単位性})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`I \in \mathcal{E}
+\quad (\because\ \mathcal{E}\ \text{の定義と直前の等式})`,
+      ),
       paragraph([
         "以上より ",
         math(String.raw`\mathcal{E}`),

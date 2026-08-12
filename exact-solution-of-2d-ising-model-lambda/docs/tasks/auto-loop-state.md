@@ -7,6 +7,13 @@
 
 ## 現在地
 
+- **2026-08-12 の tick 159 は、前 tick の巻き付き四セクターの Lean が本文より弱い
+  命題になっていたのを修正して独立に push したあと、双対辺写像が全単射であることを
+  四層すべてで完了した。** 横向き辺を座標を一つずらした縦向き辺へ、縦向き辺を
+  座標を一つずらした横向き辺へ送り、逆写像と二つの往復律を明示した。次は、
+  配位の破れた辺集合をこの写像で送った像が偶部分グラフであることを示す。
+  式変形の書き方の統一では、姉妹側の「$T_{(V')}$ の $\psi$ への作用」の Step 3 を整えた。
+
 - **2026-08-12 の tick 158 は、前 tick の高温展開四層を突き合わせて修正不要と確認し、
   旧「周期トーラスの境界セクターと Kramers--Wannier 双対」を独立した論法へ分割したうえで、
   先頭の「偶部分グラフは四つの巻き付きセクターへ一意に分かれる」を四層すべてで完了した。**
@@ -1810,8 +1817,10 @@
 | 低温展開の多項式恒等式 | Fisher 零点 | 破れた辺の集合の生成多項式を定義し、$Z_L$ がその 2 倍であることを示す | done | 2026-08-12 の tick 153 で四層すべて完了。定義 `def_broken_edge_set_polynomial` と主張 `claim_low_temperature_polynomial_identity`。SageMath は `low-temperature-polynomial-identity`。Lean 具体版 `partitionPolynomial_eq_two_mul_lowTemperaturePolynomial`、必要十分版 `sum_eq_two_nsmul_sum_image_necSuf`（有限写像・二元の各原像・可換加法モノイドだけ）、導出 `partitionPolynomial_eq_two_mul_lowTemperaturePolynomial_from_necSuf` |
 | 偶部分グラフとスピン単項式の和 | Fisher 零点 | 偶部分グラフ生成多項式を定義し、辺部分集合に対応するスピン単項式の全配位和が偶部分グラフだけで $2^{L^2}$、それ以外で零になることを示す | done | 2026-08-12 の tick 155 で四層すべて完了。主張 `claim_even_subgraph_spin_sum`。SageMath は `even-subgraph-spin-sum`。Lean 具体版 `evenSubgraph_spinSum`、必要十分版 `sum_product_piecewise_even_necSuf`（有限な添字型・可換半環・各局所和の偶奇による二択値だけ）、導出 `evenSubgraph_spinSum_from_necSuf` |
 | 高温展開の多項式恒等式 | Fisher 零点 | 一辺の重みの二項表示を全辺へ展開し、直前のスピン単項式の和を適用して高温展開の整数多項式恒等式を示す | done | 2026-08-12 の tick 157 で四層すべて完了。定義 `def_high_temperature_polynomial`、主張 `claim_high_temperature_polynomial_identity`、SageMath `high-temperature-polynomial-identity`、Lean 具体版 `highTemperaturePolynomial_identity`、必要十分版 `common_sum_two_evaluations_necSuf`、導出 `highTemperaturePolynomial_identity_from_necSuf`。有限集合・整数多項式だけで閉じる |
-| 偶部分グラフの四つの巻き付きセクター | Fisher 零点 | 二つの周期境界を横切る辺の個数の偶奇を定義し、偶部分グラフ全体が四セクターへ一意に分かれることを示す | done | 2026-08-12 の tick 158 で四層すべて完了。定義 `def_torus_winding_parities`・`def_torus_homology_sector`、主張 `claim_torus_homology_sector_partition`。SageMath は `torus-homology-sector-partition`、Lean 具体版 `torusHomologySector_unique`、必要十分版 `fiber_label_unique_necSuf`、導出 `torusHomologySector_unique_from_necSuf` |
-| 双対辺写像と破れた辺集合の自明セクター | Fisher 零点 | 正方格子の各辺を交差する双対辺へ送る写像を定義し、配位の破れた辺集合の像が偶部分グラフかつ巻き付き偶奇 $(0,0)$ であることを示す | todo | 低温展開の辺集合と高温展開の偶部分グラフを同じ辺集合とみなさず、写像を明示して結ぶ |
+| 偶部分グラフの四つの巻き付きセクター | Fisher 零点 | 二つの周期境界を横切る辺の個数の偶奇を定義し、偶部分グラフ全体が四セクターへ一意に分かれることを示す | done | 2026-08-12 の tick 158 で四層すべて完了。tick 159 のレビュで Lean を本文と同じセクター所属の命題へ修正した。定義 `def_torus_winding_parities`・`def_torus_homology_sector`、主張 `claim_torus_homology_sector_partition`。SageMath は `torus-homology-sector-partition`、Lean 具体版 `torusHomologySector_unique`、必要十分版 `admissible_fiber_label_unique_necSuf`、導出 `torusHomologySector_unique_from_necSuf` |
+| 双対辺写像の全単射性 | Fisher 零点 | 正方格子の横向き辺と縦向き辺を座標をずらして交換する双対辺写像を定義し、明示した逆写像の二つの往復律から全単射性を示す | done | 2026-08-12 の tick 159 で四層すべて。定義 `def_dual_edge_map`、主張 `claim_dual_edge_map_bijective`。SageMath は `dual-edge-map-bijective`（$L=1,\dots,5$）。Lean 具体版 `dualEdgeEquiv_bijective`、必要十分版 `map_bijective_of_two_sided_inverse_necSuf`（写像・逆写像・二つの往復律だけ）、導出 `dualEdgeEquiv_bijective_from_necSuf`。もとのセクションは、写像の全単射性、破れた辺の像の偶次数性、二つの巻き付き偶奇の消滅という三つの独立した論法を含んでいたため分割した |
+| 破れた辺の双対像は偶部分グラフ | Fisher 零点 | 任意の配位に対し、破れた辺集合を双対辺写像で送った像が、各双対頂点で偶数本の端点を持つことを示す | todo | 一つの格子面の四辺に沿うスピン積が $1$ であることを、破れた辺の本数の偶奇へ言い換える |
+| 破れた辺の双対像の巻き付き偶奇 | Fisher 零点 | 任意の配位に対し、破れた辺の双対像の二つの巻き付き偶奇がどちらも $0$ であることを示す | todo | 周期方向の閉路に沿って破れを数え、出発点と終点が同じスピンなので偶数になることを使う |
 | 自明セクターの偶部分グラフから配位を復元する | Fisher 零点 | 双対側の自明セクターに属する偶部分グラフが破れた辺集合として実現し、その原像が全スピン反転の二配位であることを示す | todo | 存在の構成と原像の二元性を一つの論法として閉じる |
 | 四境界条件の混合と Kramers--Wannier 双対 | Fisher 零点 | 非自明な三セクターを捨てず、周期・反周期の四境界条件の混合として低温展開と高温展開を可算な双対恒等式へ結ぶ | todo | 周期格子は平面グラフではないため、周期分配関数一つをそのまま自己双対としない |
 | 12 | Fisher 零点 | 自己双対点 $x_c=\sqrt2-1$ | todo | |
@@ -1823,6 +1832,18 @@
 セクションを細かく割り直してよい。割り直したらこの表を更新し、理由を「レビュー記録」へ書く。
 
 ## 前進の記録
+
+- 2026-08-12（tick 159）: 旧「双対辺写像と破れた辺集合の自明セクター」は、
+  写像の全単射性、破れた辺の像の偶次数性、二つの巻き付き偶奇の消滅という三つの
+  独立した論法を含むため三つへ分割した。先頭では、辺の番号付けの全単射を使い、
+  $\delta_L(n_{\mathrm h}(i,j))=n_{\mathrm v}(i,j+\bar1)$ および
+  $\delta_L(n_{\mathrm v}(i,j))=n_{\mathrm h}(i+\bar1,j)$ と定義した。逆向きに
+  $\eta_L(n_{\mathrm h}(i,j))=n_{\mathrm v}(i-\bar1,j)$ および
+  $\eta_L(n_{\mathrm v}(i,j))=n_{\mathrm h}(i,j-\bar1)$ を定め、辺の二つの向きごとに
+  $\eta_L\circ\delta_L=\mathrm{id}$ と $\delta_L\circ\eta_L=\mathrm{id}$ を確かめて全単射性を得た。
+  SageMath は $L=1,\dots,5$ の全辺で像・逆像・二つの往復律を厳密検査した。
+  Lean 必要十分版は任意の二型間の写像に対し、逆写像と二つの往復律だけから同じ
+  三段の単射性の鎖と、逆写像が原像を与える全射性を導いた。
 
 - 2026-08-12（tick 158）: 旧「周期トーラスの境界セクターと Kramers--Wannier 双対」は、
   セクターの定義と分割、低温側から双対格子の自明セクターへの写像、その逆構成、四境界条件を
@@ -4107,6 +4128,12 @@
 | 行列の冪の成分は道に沿った積の和である | 済（2026-08-08。帰納法の 3 つの段——出発点・重みの対応・k+1 の場合——をそれぞれ一続きにした。写像 Φ・Ψ の構成は一続きにしていない） |
 
 ### 姉妹プロジェクト（`exact-solution-of-2d-ising-model`）
+
+**2026-08-12（tick 159）**: `008_TV1_hatZ_hatY_part2` の主張
+「$T_{(V')}$ の $\psi$ への作用」の Step 3 を整えた。加法・スカラー倍と積の
+閉性の結論を地の文から行末根拠つきの式へ移し、単位元の場合は二つの単位性を
+別々の等号に分けた二段の鎖と、集合への所属の結論へ開いた。内容は変えていない。
+次は同じ証明の Step 4 から続ける。
 
 **2026-08-12（tick 158）**: `008_TV1_hatZ_hatY_part2` の主張
 「$T_{(V')}$ の $\psi$ への作用」の Step 2 を整えた。$Z_m$ と $Y_m$ について直前の二つの

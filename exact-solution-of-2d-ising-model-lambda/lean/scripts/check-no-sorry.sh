@@ -783,6 +783,9 @@ targets=(
   Ising2DLambda.FisherZero.torusHomologySector_unique
   Ising2DLambda.NecSuf.FisherZero.admissible_fiber_label_unique_necSuf
   Ising2DLambda.FisherZero.torusHomologySector_unique_from_necSuf
+  Ising2DLambda.FisherZero.dualEdgeEquiv_bijective
+  Ising2DLambda.NecSuf.FisherZero.map_bijective_of_two_sided_inverse_necSuf
+  Ising2DLambda.FisherZero.dualEdgeEquiv_bijective_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

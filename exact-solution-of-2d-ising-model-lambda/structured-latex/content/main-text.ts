@@ -27626,6 +27626,84 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)=b
   },
 
   {
+    id: "fisher_zero_definition_dual_edge_map",
+    kind: "definition",
+    title: { text: "正方格子の双対辺写像" },
+    labels: ["def_dual_edge_map"],
+    habitat: "N",
+    lean: ["Ising2DLambda.FisherZero.dualEdgeEquiv"],
+    verification: ["sagemath/check/dual-edge-map-bijective"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。横向き辺と縦向き辺の座標は、",
+        ref("def_edge_numbering"), " の写像 ", math(String.raw`n_{\mathrm{h}},n_{\mathrm{v}}`),
+        " によって辺番号と一対一に対応する。双対辺写像 ",
+        math(String.raw`\delta_L:E_L\to E_L`), " を",
+      ]),
+      displayMath(String.raw`\delta_L\bigl(n_{\mathrm{h}}(i,j)\bigr):=n_{\mathrm{v}}(i,j+_{\mathbb{Z}/L\mathbb{Z}}\bar1),\qquad
+\delta_L\bigl(n_{\mathrm{v}}(i,j)\bigr):=n_{\mathrm{h}}(i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,j)`),
+      paragraph([
+        "で定める。",
+        math(String.raw`i,j\in\mathbb{Z}/L\mathbb{Z}`), " であり、上の二つの加法はどちらも剩余類の集合内の加法である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_dual_edge_map_bijective",
+    kind: "claim",
+    title: { text: "双対辺写像は全単射である" },
+    labels: ["claim_dual_edge_map_bijective"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.FisherZero.dualEdgeEquiv_bijective",
+      "Ising2DLambda.NecSuf.FisherZero.map_bijective_of_two_sided_inverse_necSuf",
+      "Ising2DLambda.FisherZero.dualEdgeEquiv_bijective_from_necSuf",
+    ],
+    verification: ["sagemath/check/dual-edge-map-bijective"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とする。写像 ", math(String.raw`\delta_L:E_L\to E_L`),
+        " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["逆向きの写像 ", math(String.raw`\eta_L:E_L\to E_L`), " を"]),
+      displayMath(String.raw`\eta_L\bigl(n_{\mathrm{h}}(i,j)\bigr):=n_{\mathrm{v}}(i-_{\mathbb{Z}/L\mathbb{Z}}\bar1,j),\qquad
+\eta_L\bigl(n_{\mathrm{v}}(i,j)\bigr):=n_{\mathrm{h}}(i,j-_{\mathbb{Z}/L\mathbb{Z}}\bar1)`),
+      paragraph(["で定める。横向き辺について"]),
+      displayMath(String.raw`\begin{aligned}
+\eta_L\!\left(\delta_L\bigl(n_{\mathrm{h}}(i,j)\bigr)\right)
+&=\eta_L\bigl(n_{\mathrm{v}}(i,j+\bar1)\bigr)
+&&(\because\ \blkref{def_dual_edge_map})\\
+&=n_{\mathrm{h}}\bigl(i,(j+\bar1)-\bar1\bigr)
+&&(\because\ \eta_L\ \text{の定め方})\\
+&=n_{\mathrm{h}}(i,j)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法と減法})
+\end{aligned}`),
+      paragraph(["縦向き辺について同様に"]),
+      displayMath(String.raw`\begin{aligned}
+\eta_L\!\left(\delta_L\bigl(n_{\mathrm{v}}(i,j)\bigr)\right)
+&=\eta_L\bigl(n_{\mathrm{h}}(i+\bar1,j)\bigr)
+&&(\because\ \blkref{def_dual_edge_map})\\
+&=n_{\mathrm{v}}\bigl((i+\bar1)-\bar1,j\bigr)
+&&(\because\ \eta_L\ \text{の定め方})\\
+&=n_{\mathrm{v}}(i,j)
+&&(\because\ \mathbb{Z}/L\mathbb{Z}\ \text{の加法と減法})
+\end{aligned}`),
+      paragraph(["である。反対向きの往復も、二つの向きの辺ごとに"]),
+      displayMath(String.raw`\delta_L\!\left(\eta_L\bigl(n_{\mathrm{h}}(i,j)\bigr)\right)=n_{\mathrm{h}}(i,j),\qquad
+\delta_L\!\left(\eta_L\bigl(n_{\mathrm{v}}(i,j)\bigr)\right)=n_{\mathrm{v}}(i,j)
+\quad(\because\ \text{同じ加法と減法})`),
+      paragraph([
+        "となる。したがって ", math(String.raw`\eta_L`), " は ",
+        math(String.raw`\delta_L`), " の両側逆写像であり、", math(String.raw`\delta_L`),
+        " は全単射である。全過程は有限集合と剩余類の加減だけで閉じる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

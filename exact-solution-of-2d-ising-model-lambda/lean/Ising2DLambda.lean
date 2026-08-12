@@ -436,3 +436,6 @@ import Ising2DLambda.FisherZero.HighTemperaturePolynomialFromNecSuf
 import Ising2DLambda.FisherZero.TorusHomologySector
 import Ising2DLambda.NecSuf.FisherZero.TorusHomologySector
 import Ising2DLambda.FisherZero.TorusHomologySectorFromNecSuf
+import Ising2DLambda.FisherZero.DualEdgeMap
+import Ising2DLambda.NecSuf.FisherZero.DualEdgeMap
+import Ising2DLambda.FisherZero.DualEdgeMapFromNecSuf
