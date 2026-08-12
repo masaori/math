@@ -4459,9 +4459,16 @@ T_{(V')}(\psi_\mu)
       displayMath(
         String.raw`\begin{aligned}
 \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr)
-&= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) P_\mu P_\mu^{-1} \\
-&= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix} P_\mu^{-1} \quad (\because \text{def\_fermi}) \\
+&= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) I
+\quad (\because \text{単位行列との積}) \\
+&= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) (P_\mu P_\mu^{-1})
+\quad (\because P_\mu P_\mu^{-1}=I) \\
+&= \left(\bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) P_\mu\right) P_\mu^{-1}
+\quad (\because \text{行列の積の結合則}) \\
+&= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix} P_\mu^{-1}
+\quad (\because \text{def\_fermi}) \\
 &= \begin{pmatrix} q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu & q_{12}\psi_\mu^\dagger + q_{22}\psi_\mu \end{pmatrix}
+\quad (\because 1\times2\text{ 行列と }2\times2\text{ 行列の積の定義})
 \end{aligned}`,
       ),
       paragraph(["すなわち ", math(String.raw`\hat{Z}_\mu^{(-)} = q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu`), "、", math(String.raw`\hat{Y}_\mu = q_{12}\psi_\mu^\dagger + q_{22}\psi_\mu`), " である。一方、", ref("commutation_V_psi"), " と ", ref("lambda_eq_exp_gamma"), " より"]),

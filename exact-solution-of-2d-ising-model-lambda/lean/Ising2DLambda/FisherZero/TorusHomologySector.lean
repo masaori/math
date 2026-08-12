@@ -12,13 +12,11 @@ open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
 
 /-- 横向きの周期境界を横切る辺が `A` に入る本数の偶奇。 -/
 def horizontalWindingParity (L : ℕ) [NeZero L] (A : Finset (Edge L)) : Fin 2 :=
-  ⟨(A.filter fun e => e.val < L ^ 2 ∧ edgeColumn L e + 1 = L).card % 2,
-    Nat.mod_lt _ (by norm_num)⟩
+  ∑ i : ZMod L, if edgeOfRow L false i (-1) ∈ A then 1 else 0
 
 /-- 縦向きの周期境界を横切る辺が `A` に入る本数の偶奇。 -/
 def verticalWindingParity (L : ℕ) [NeZero L] (A : Finset (Edge L)) : Fin 2 :=
-  ⟨(A.filter fun e => ¬ e.val < L ^ 2 ∧ edgeRow L e + 1 = L).card % 2,
-    Nat.mod_lt _ (by norm_num)⟩
+  ∑ j : ZMod L, if edgeOfRow L true (-1) j ∈ A then 1 else 0
 
 /-- 二つの巻き付き偶奇が与える四つのセクターの添字。 -/
 def torusHomologySector (L : ℕ) [NeZero L] (A : Finset (Edge L)) : Fin 2 × Fin 2 :=

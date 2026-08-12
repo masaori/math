@@ -442,3 +442,6 @@ import Ising2DLambda.FisherZero.DualEdgeMapFromNecSuf
 import Ising2DLambda.FisherZero.DualBrokenEdgesEven
 import Ising2DLambda.NecSuf.FisherZero.DualBrokenEdgesEven
 import Ising2DLambda.FisherZero.DualBrokenEdgesEvenFromNecSuf
+import Ising2DLambda.FisherZero.DualBrokenEdgesWinding
+import Ising2DLambda.NecSuf.FisherZero.DualBrokenEdgesWinding
+import Ising2DLambda.FisherZero.DualBrokenEdgesWindingFromNecSuf

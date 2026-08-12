@@ -789,6 +789,9 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.four_signs_even_necSuf
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven_from_necSuf
+  Ising2DLambda.NecSuf.FisherZero.cyclic_change_parity_zero_necSuf
+  Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero
+  Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

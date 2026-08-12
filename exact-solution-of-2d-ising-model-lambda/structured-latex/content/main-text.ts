@@ -27804,6 +27804,71 @@ d_{A_\sigma}(i,j)
   },
 
   {
+    id: "fisher_zero_claim_dual_broken_edges_winding_zero",
+    kind: "claim",
+    title: { text: "破れた辺の双対像の二つの巻き付き偶奇は零である" },
+    labels: ["claim_dual_broken_edges_winding_zero"],
+    habitat: "N",
+    verification: ["sagemath/check/dual-broken-edges-winding-zero"],
+    lean: [
+      "Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero",
+      "Ising2DLambda.NecSuf.FisherZero.cyclic_change_parity_zero_necSuf",
+      "Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、配位 ", math(String.raw`\sigma\in\Sigma_L`),
+        " を任意に取る。", ref("claim_dual_broken_edges_even"), " の辺集合 ",
+        math(String.raw`A_\sigma=\delta_L(\mathcal{B}_L(\sigma))`), " について",
+      ]),
+      displayMath(String.raw`\varepsilon_{L,\mathrm h}(A_\sigma)=0,\qquad
+\varepsilon_{L,\mathrm v}(A_\sigma)=0`),
+      paragraph(["である。したがって ", math(String.raw`A_\sigma\in\mathcal{E}^{0,0}_L`), " である。"]),
+    ],
+    proof: [
+      paragraph([
+        "双対辺写像の定義を開くと、横向き境界を横切る双対辺の唯一の原像は、",
+        "列 ", math(String.raw`\pi(-1)`), " に並ぶ縦向き辺である。したがって",
+      ]),
+      displayMath(String.raw`\varepsilon_{L,\mathrm h}(A_\sigma)
+=\left(\sum_{i\in\mathbb Z/L\mathbb Z}
+q_\sigma\bigl(n_{\mathrm v}(i,\pi(-1))\bigr)\right)\bmod2
+\quad(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\
+\blkref{claim_dual_edge_map_bijective})`),
+      paragraph([ref("def_broken_edge_set"), " と端点写像より、この和の各項は ",
+        math(String.raw`\sigma(i,\pi(-1))`), " と ", math(String.raw`\sigma(i+\bar1,\pi(-1))`),
+        " が異なるときだけ 1 である。有限集合 ", math(String.raw`\mathbb Z/L\mathbb Z`),
+        " の置換 ", math(String.raw`i\mapsto i+\bar1`), " で添字を取り替えると" ]),
+      displayMath(String.raw`\begin{aligned}
+(-1)^{\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))}
+&=\prod_i \sigma(i,\pi(-1))\sigma(i+\bar1,\pi(-1))
+&&\bigl(\because\ (-1)^{q_\sigma(e)}=\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)\\
+&=\left(\prod_i\sigma(i,\pi(-1))\right)
+  \left(\prod_i\sigma(i+\bar1,\pi(-1))\right)
+&&\bigl(\because\ \text{有限積の分配}\bigr)\\
+&=\left(\prod_i\sigma(i,\pi(-1))\right)^2
+&&\bigl(\because\ i\mapsto i+\bar1\ \text{は全単射}\bigr)\\
+&=1
+&&\bigl(\because\ \sigma(v)\in\{+1,-1\}\bigr).
+\end{aligned}`),
+      paragraph(["よって指数は偶数であり、直前の和の表示から ",
+        math(String.raw`\varepsilon_{L,\mathrm h}(A_\sigma)=0`), " である。縦向き境界については、",
+        "その唯一の原像が行 ", math(String.raw`\pi(-1)`), " に並ぶ横向き辺なので、同じ鎖で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon_{L,\mathrm v}(A_\sigma)
+&=\left(\sum_{j\in\mathbb Z/L\mathbb Z}
+q_\sigma\bigl(n_{\mathrm h}(\pi(-1),j)\bigr)\right)\bmod2\\
+&=0
+&&\bigl(\because\ j\mapsto j+\bar1\ \text{に沿う閉路へ同じ議論を適用}\bigr).
+\end{aligned}`),
+      paragraph([ref("claim_dual_broken_edges_even"), " と ", ref("def_torus_homology_sector"),
+        " より ", math(String.raw`A_\sigma\in\mathcal E_L^{0,0}`),
+        " である。全過程は有限集合・二値・自然数の偶奇だけで閉じる。" ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
