@@ -765,6 +765,9 @@ targets=(
   Ising2DLambda.FisherZero.fisherZero_algebraicity
   Ising2DLambda.NecSuf.FisherZero.nonzero_root_witness_necSuf
   Ising2DLambda.FisherZero.fisherZero_algebraicity_from_necSuf
+  Ising2DLambda.FisherZero.globalSpinReversal_brokenEdge_iff
+  Ising2DLambda.NecSuf.FisherZero.injective_map_ne_iff
+  Ising2DLambda.FisherZero.globalSpinReversal_brokenEdge_iff_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

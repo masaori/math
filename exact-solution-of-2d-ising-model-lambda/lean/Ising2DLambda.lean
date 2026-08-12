@@ -418,3 +418,6 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarEigenspacesSpanFromNecSuf
 import Ising2DLambda.FisherZero.Algebraicity
 import Ising2DLambda.NecSuf.FisherZero.Algebraicity
 import Ising2DLambda.FisherZero.AlgebraicityFromNecSuf
+import Ising2DLambda.FisherZero.GlobalSpinReversal
+import Ising2DLambda.NecSuf.FisherZero.GlobalSpinReversal
+import Ising2DLambda.FisherZero.GlobalSpinReversalFromNecSuf

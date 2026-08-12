@@ -27033,6 +27033,71 @@ Z_L(1)
   },
 
   {
+    id: "fisher_zero_definition_global_spin_reversal",
+    kind: "definition",
+    title: { text: "全スピン反転" },
+    labels: ["def_global_spin_reversal"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.spinReversal",
+      "Ising2DLambda.FisherZero.globalSpinReversal",
+    ],
+    verification: ["sagemath/check/global-spin-reversal-broken-edge"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、配位 ", math(String.raw`\sigma\in\Sigma_L`),
+        " を任意に取る。全スピン反転 ", math(String.raw`\nu_L:\Sigma_L\to\Sigma_L`), " を",
+      ]),
+      displayMath(String.raw`\bigl(\nu_L(\sigma)\bigr)(v):=-\sigma(v)\qquad(v\in V_L)`),
+      paragraph([
+        "で定める。", math(String.raw`\sigma(v)\in\{+1,-1\}\subset\mathbb{Z}`),
+        " なので ", math(String.raw`-\sigma(v)\in\{+1,-1\}`),
+        " であり、右辺は再び配位を与える。現れるのは有限集合と整数の加法逆元だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_global_spin_reversal_preserves_broken_edge",
+    kind: "claim",
+    title: { text: "全スピン反転は各辺の破れを保つ" },
+    labels: ["claim_global_spin_reversal_preserves_broken_edge"],
+    habitat: "Z",
+    lean: [
+      "Ising2DLambda.FisherZero.globalSpinReversal_brokenEdge_iff",
+      "Ising2DLambda.NecSuf.FisherZero.injective_map_ne_iff",
+      "Ising2DLambda.FisherZero.globalSpinReversal_brokenEdge_iff_from_necSuf",
+    ],
+    verification: ["sagemath/check/global-spin-reversal-broken-edge"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), "、", math(String.raw`\sigma\in\Sigma_L`), "、",
+        math(String.raw`e\in E_L`), " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\bigl(\nu_L(\sigma)\bigr)(\partial_0(e))\ne\bigl(\nu_L(\sigma)\bigr)(\partial_1(e))
+\quad\Longleftrightarrow\quad
+\sigma(\partial_0(e))\ne\sigma(\partial_1(e))`),
+      paragraph([
+        "が成り立つ。すなわち、辺 ", math(String.raw`e`), " が全スピン反転後に破れていることと、反転前に破れていることは同値である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+&\bigl(\nu_L(\sigma)\bigr)(\partial_0(e))\ne\bigl(\nu_L(\sigma)\bigr)(\partial_1(e))\\
+&\quad\Longleftrightarrow -\sigma(\partial_0(e))\ne-\sigma(\partial_1(e))
+&& (\because\ \blkref{def_global_spin_reversal})\\
+&\quad\Longleftrightarrow \sigma(\partial_0(e))\ne\sigma(\partial_1(e))
+&& (\because\ \mathbb{Z}\ \text{で加法逆元を取る写像は単射})
+\end{aligned}`),
+      paragraph([
+        "である。最後の同値は、整数 ", math(String.raw`a,b`), " について ",
+        math(String.raw`-a=-b\Longleftrightarrow a=b`),
+        " の両辺を否定したものである。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

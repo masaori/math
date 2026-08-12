@@ -3297,18 +3297,29 @@ c_\mu c_\nu
         " を使うと",
       ]),
       displayMath(
-        String.raw`2 c_1 s_1 c_2 (s_2^*)^2 u = 2 c_1 s_1 (c_2 s_2^*) s_2^* u = 2 c_1 s_1 c_2^* s_2^* u,
-\qquad
-s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
+        String.raw`\begin{aligned}
+2 c_1 s_1 c_2 (s_2^*)^2 u
+&=2 c_1 s_1 (c_2 s_2^*) s_2^* u
+&&\left(\because\ (s_2^*)^2=s_2^*s_2^*\ \text{と積の結合則}\right)\\
+&=2 c_1 s_1 c_2^* s_2^* u
+&&\left(\because\ \text{(iii)}\ c_2s_2^*=c_2^*\right),\\[4pt]
+s_1^2 c_2^2 (s_2^*)^2
+&=s_1^2 (c_2 s_2^*)^2
+&&\left(\because\ c_2^2(s_2^*)^2=(c_2s_2^*)^2\right)\\
+&=s_1^2 (c_2^*)^2
+&&\left(\because\ \text{(iii)}\ c_2s_2^*=c_2^*\right)
+\end{aligned}`,
       ),
       paragraph(["これを代入して Step 3 の 2 式を足すと"]),
       displayMath(
         String.raw`\begin{aligned}
 \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
 &= \bigl(c_1^2 (c_2^*)^2 - 2 c_1 c_2^* s_1 s_2^* u + s_1^2 (s_2^*)^2 u^2\bigr) \\
-&\quad + \bigl(-c_1^2 (s_2^*)^2 u^2 + 2 c_1 s_1 c_2^* s_2^* u - s_1^2 (c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2 u^2\bigr) \\
+&\quad + \bigl(-c_1^2 (s_2^*)^2 u^2 + 2 c_1 s_1 c_2^* s_2^* u - s_1^2 (c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2 u^2\bigr)
+&&\left(\because\ \text{Step 3 の 2 式と直前の}\ c_2\ \text{の消去}\right)\\
 &= \bigl(c_1^2 - s_1^2\bigr)(c_2^*)^2 - (s_2^*)^2
  + (s_2^*)^2 u^2\bigl(s_1^2 - c_1^2 + 1\bigr)
+&&\left(\because\ u\ \text{の 1 次の項を相殺し、残る項を分配則でまとめる}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -3374,6 +3385,7 @@ s_1^2 c_2^2 (s_2^*)^2 = s_1^2 (c_2 s_2^*)^2 = s_1^2 (c_2^*)^2`,
           "(iii) c_2 s_2^* = c_2^*（duality_c2_star_eq_s2_star_c2）の 3 関係を明示的に使う形へ書き直した。" +
         "また statement の残り 2 式（γ_1^2 + γ_2γ_2(-θ) = 1 と λ_+λ_- = 1）の証明も原文には無かったので補った。",
         "2026-08-12 の式変形統一で、Step 1 の行列式の計算を 3 段の一続きの鎖へ開き、各等号へ根拠を付けた。内容は変えていない。",
+        "2026-08-12 の式変形統一で、Step 4 の c_2 の消去を二つの鎖へ分け、Step 3 の 2 式を足して整理する鎖にも各行の根拠を付けた。内容は変えていない。",
       ],
     },
   },
