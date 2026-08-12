@@ -3913,17 +3913,41 @@ X\psi_\mu^\dagger
 &&(\because\ \text{分配則})
 \end{aligned}`,
       ),
-      paragraph(["Step 3: 帰納法で ", math(String.raw`X^n \psi_\mu^\dagger = \psi_\mu^\dagger (X + \gamma(\theta_\mu)I)^n`), " を示す。"]),
+      paragraph(["Step 3: 帰納法で ", math(String.raw`X^n \psi_\mu^\dagger = \psi_\mu^\dagger (X + \gamma(\theta_\mu)I)^n`), " を示す。", math(String.raw`n = 0`), " のときは"]),
+      displayMath(
+        String.raw`\begin{aligned}
+X^0\psi_\mu^\dagger
+&= I\psi_\mu^\dagger
+&&(\because\ \text{冪の定義}\ X^0 = I)\\
+&= \psi_\mu^\dagger
+&&(\because\ \text{単位行列との積})\\
+&= \psi_\mu^\dagger I
+&&(\because\ \text{単位行列との積})\\
+&= \psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^0
+&&(\because\ \text{冪の定義}\ (X + \gamma(\theta_\mu)I)^0 = I)
+\end{aligned}`,
+      ),
+      paragraph(["で成立する。", math(String.raw`n`), " で成立すると仮定すると"]),
       displayMath(
         String.raw`\begin{aligned}
 X^{n+1}\psi_\mu^\dagger
-&= X\cdot X^n\psi_\mu^\dagger \\
-&= X\cdot \psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^n \quad (\because \text{帰納法の仮定}) \\
-&= (\psi_\mu^\dagger(X + \gamma(\theta_\mu)I))\cdot(X + \gamma(\theta_\mu)I)^n \quad (\because \text{Step 2 のまとめ}) \\
+&= (X\cdot X^n)\psi_\mu^\dagger
+&&(\because\ \text{冪の定義})\\
+&= X\cdot(X^n\psi_\mu^\dagger)
+&&(\because\ \text{積の結合則})\\
+&= X\cdot\bigl(\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^n\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&= (X\psi_\mu^\dagger)\cdot(X + \gamma(\theta_\mu)I)^n
+&&(\because\ \text{積の結合則})\\
+&= \bigl(\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)\bigr)\cdot(X + \gamma(\theta_\mu)I)^n
+&&(\because\ \text{Step 2 のまとめ})\\
+&= \psi_\mu^\dagger\bigl((X + \gamma(\theta_\mu)I)\cdot(X + \gamma(\theta_\mu)I)^n\bigr)
+&&(\because\ \text{積の結合則})\\
 &= \psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^{n+1}
+&&(\because\ \text{冪の定義})
 \end{aligned}`,
       ),
-      paragraph([math(String.raw`n = 0`), " のときは ", math(String.raw`X^0\psi_\mu^\dagger = \psi_\mu^\dagger = \psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^0`), " で成立するから、全 ", math(String.raw`n \geq 0`), " で成立する。"]),
+      paragraph(["となるから、全 ", math(String.raw`n \geq 0`), " で成立する。"]),
       paragraph(["Step 4: ", math(String.raw`\exp(X)\psi_\mu^\dagger = \psi_\mu^\dagger \exp(X + \gamma(\theta_\mu)I)`), "。"]),
       displayMath(
         String.raw`\sum_{n=0}^N \frac{X^n}{n!}\,\psi_\mu^\dagger
@@ -4032,6 +4056,7 @@ T_{(V')}(\psi_\mu)
         "2026-08-12 の式変形統一で Step 1 の二つの計算を一行一等号へ分け、分配・単位行列・反交換・交換子定義・相殺の根拠を各行へ付けた。内容は変えていない。次は Step 2 から続ける。",
         "2026-08-13 の式変形統一で、Step 2 の冒頭の交換子の和（1 表示に等号 2 つ）を一行一等号の二段へ、場合 b) の γ₂ の周期性の二本（1 行に等号 3 つ・根拠なし）を代入を明示した四段の鎖二本へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 2 の残り（場合分け a〜c の散文中の等式）か Step 3 から続ける。",
         "2026-08-13 の式変形統一で、Step 2 の X と生成演算子の積を反対側へ移す結論を一行一等号の三段へ開き、交換子の定義・スカラーの交換・分配則を各行に明示した。内容は変えていない。次は同じ証明の Step 3 から続ける。",
+        "2026-08-13 の式変形統一で、Step 3 の帰納法を直した。出発点（1 行に等号 2 つ・根拠なし）を四段の鎖へ、帰納法の一歩（根拠のない 2 行と、結合則と Step 2 を一段にまとめた 1 行）を七段の鎖へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 4 から続ける。",
       ],
     },
   },
