@@ -28052,6 +28052,94 @@ B
   },
 
   {
+    id: "fisher_zero_definition_sector_generating_polynomial",
+    kind: "definition",
+    title: { text: "セクターごとの生成多項式" },
+    labels: ["def_sector_generating_polynomial"],
+    habitat: "Z",
+    verification: ["sagemath/check/sector-generating-polynomial"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), " とし、", math(String.raw`a,b\in\{0,1\}`),
+        " を取る。", ref("def_torus_homology_sector"),
+        " で定めたセクターの生成多項式を",
+      ]),
+      displayMath(String.raw`G^{a,b}_L:=\sum_{A\in\mathcal{E}^{a,b}_L}x^{\,|A|}\ \in\ \mathbb{Z}[x]`),
+      paragraph([
+        "で定める。", math(String.raw`\mathcal{E}^{a,b}_L`),
+        " は有限集合なのでこの和は有限和である。上付きの ", math(String.raw`a,b`),
+        " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
+        "有限集合・自然数・整数係数多項式だけを用い、実数体、複素数体、指数関数は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_low_temperature_trivial_sector_expression",
+    kind: "claim",
+    title: { text: "低温展開の自明セクター表示" },
+    labels: ["claim_low_temperature_trivial_sector_expression"],
+    habitat: "Z",
+    verification: ["sagemath/check/sector-generating-polynomial"],
+    statement: [
+      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+      displayMath(String.raw`Z_L=2G^{0,0}_L`),
+      paragraph([
+        "が成り立つ。分配多項式は自明セクターの生成多項式の二倍であり、",
+        "温度や指数関数を導入せず、二つの有限な数え上げ多項式の等式として述べている。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", ref("def_attainable_broken_edge_sets"), " の各 ",
+        math(String.raw`B\in\mathfrak{B}_L`), " をその ", ref("def_dual_edge_map"),
+        " による像 ", math(String.raw`\delta_L(B)`), " へ送る写像を ",
+        math(String.raw`\Delta_L:\mathfrak{B}_L\to\mathcal{E}^{0,0}_L,\ \Delta_L(B):=\delta_L(B)`),
+        " と書く。この写像の終域が正しいこと、すなわち任意の ",
+        math(String.raw`B\in\mathfrak{B}_L`), " について ",
+        math(String.raw`\delta_L(B)\in\mathcal{E}^{0,0}_L`), " であることと、",
+        math(String.raw`\Delta_L`), " の像が ", math(String.raw`\mathcal{E}^{0,0}_L`),
+        " の全体であること（全射性）は、",
+        ref("claim_attainable_dual_image_trivial_sector"),
+        " の集合の等号がそのまま与える。次に ", math(String.raw`\Delta_L`),
+        " の単射性を示す。", math(String.raw`B,B'\in\mathfrak{B}_L`), " が ",
+        math(String.raw`\delta_L(B)=\delta_L(B')`), " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B
+&=\delta_L^{-1}\bigl(\delta_L(B)\bigr)
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr)\\
+&=\delta_L^{-1}\bigl(\delta_L(B')\bigr)
+&&\bigl(\because\ \delta_L(B)=\delta_L(B')\bigr)\\
+&=B'
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`\Delta_L`), " は全単射である。また ",
+        ref("claim_dual_edge_map_bijective"), " より ", math(String.raw`\delta_L`),
+        " は単射なので、有限集合 ", math(String.raw`B`), " の像の元の個数は",
+      ]),
+      displayMath(String.raw`|\delta_L(B)|=|B|
+\quad\bigl(\because\ \text{単射写像は有限集合の元の個数を保つ}\bigr)`),
+      paragraph(["である。以上を組み合わせると"]),
+      displayMath(String.raw`\begin{aligned}
+Z_L
+&=2D_L
+&&\bigl(\because\ \blkref{claim_low_temperature_polynomial_identity}\bigr)\\
+&=2\sum_{B\in\mathfrak{B}_L}x^{\,|B|}
+&&\bigl(\because\ \blkref{def_broken_edge_set_polynomial}\bigr)\\
+&=2\sum_{B\in\mathfrak{B}_L}x^{\,|\delta_L(B)|}
+&&\bigl(\because\ |\delta_L(B)|=|B|\bigr)\\
+&=2\sum_{A\in\mathcal{E}^{0,0}_L}x^{\,|A|}
+&&\bigl(\because\ \text{全単射 }\Delta_L\text{ による有限和の添字の取り替え}\bigr)\\
+&=2G^{0,0}_L
+&&\bigl(\because\ \blkref{def_sector_generating_polynomial}\bigr)
+\end{aligned}`),
+      paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
