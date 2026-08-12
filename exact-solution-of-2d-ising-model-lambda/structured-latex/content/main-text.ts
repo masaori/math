@@ -28266,6 +28266,167 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
   },
 
   {
+    id: "fisher_zero_definition_kw_dual_transform",
+    kind: "definition",
+    title: { text: "双対変換" },
+    labels: ["def_kw_dual_transform"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/kw-dual-transform-domain"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`1+\xi\ne0`),
+        " を満たすとする。", math(String.raw`\overline{\mathbb{Q}}`),
+        " は体であるから（", ref("def_algebraic_numbers"), "）、",
+        math(String.raw`(1+\xi)^{-1}(1+\xi)=1`),
+        " を満たす積の逆元 ",
+        math(String.raw`(1+\xi)^{-1}\in\overline{\mathbb{Q}}`),
+        " が取れる。双対変換の値を",
+      ]),
+      displayMath(
+        String.raw`\mathrm{KW}(\xi):=(1-\xi)\cdot(1+\xi)^{-1}\ \in\ \overline{\mathbb{Q}}`,
+      ),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`1-\xi`),
+        " は ",
+        math(String.raw`1+(-\xi)`),
+        "（",
+        math(String.raw`-\xi`),
+        " は ",
+        math(String.raw`\xi`),
+        " の加法の逆元）を表す。名前の ",
+        math(String.raw`\mathrm{KW}`),
+        " は Kramers--Wannier 双対に由来する。高温展開の一辺の重み（",
+        ref("def_high_temperature_polynomial"),
+        " の ",
+        math(String.raw`1+x`),
+        " と ",
+        math(String.raw`1-x`),
+        "）の比を代数的数の点で見る変換であり、後続のセクションで自己双対点 ",
+        math(String.raw`x_c`),
+        " をこの変換の不動点として特定する。",
+        "現れる演算はすべて体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・逆元であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_kw_dual_transform_domain",
+    kind: "claim",
+    title: { text: "双対変換の値は分母を零にしない" },
+    labels: ["claim_kw_dual_transform_domain"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/kw-dual-transform-domain"],
+    statement: [
+      paragraph([
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`1+\xi\ne0`),
+        " を満たすとする。このとき",
+      ]),
+      displayMath(String.raw`1+\mathrm{KW}(\xi)\ne0`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathrm{KW}`),
+        " は ",
+        ref("def_kw_dual_transform"),
+        "）。したがって ",
+        math(String.raw`\mathrm{KW}(\xi)`),
+        " は再び ",
+        ref("def_kw_dual_transform"),
+        " の仮定を満たし、",
+        math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))`),
+        " が定義できる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`2:=1+1\in\mathbb{Q}`),
+        " と置く。",
+        math(String.raw`\mathbb{Q}`),
+        " の中で ",
+        math(String.raw`2\ne0`),
+        " であり、",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、同じ 2 つの元は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元としても異なる。すなわち ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で ",
+        math(String.raw`2\ne0`),
+        " かつ ",
+        math(String.raw`1\ne0`),
+        " である。また仮定 ",
+        math(String.raw`1+\xi\ne0`),
+        " により、",
+        math(String.raw`(1+\xi)(1+\xi)^{-1}=1`),
+        " を満たす積の逆元 ",
+        math(String.raw`(1+\xi)^{-1}\in\overline{\mathbb{Q}}`),
+        " が取れる（",
+        ref("def_algebraic_numbers"),
+        "）。まず ",
+        math(String.raw`1+\mathrm{KW}(\xi)`),
+        " を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1+\mathrm{KW}(\xi)
+&=1+(1-\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=(1+\xi)(1+\xi)^{-1}+(1-\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \text{準備の等式}\ (1+\xi)(1+\xi)^{-1}=1\bigr)\\
+&=\bigl((1+\xi)+(1-\xi)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=2\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \xi+(-\xi)=0\ \text{と}\ 1+1=2\bigr)
+\end{aligned}`),
+      paragraph([
+        "次に ",
+        math(String.raw`2\cdot(1+\xi)^{-1}\ne0`),
+        " を背理法で示す。",
+        math(String.raw`2\cdot(1+\xi)^{-1}=0`),
+        " と仮定する。準備より ",
+        math(String.raw`2\ne0`),
+        " であるから、",
+        ref("claim_qbar_no_zero_divisors"),
+        " を ",
+        math(String.raw`a=2`),
+        "、",
+        math(String.raw`b=(1+\xi)^{-1}`),
+        " へ適用して ",
+        math(String.raw`(1+\xi)^{-1}=0`),
+        " を得る。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=(1+\xi)(1+\xi)^{-1}
+&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&=(1+\xi)\cdot 0
+&&\bigl(\because\ \text{上で得た}\ (1+\xi)^{-1}=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、準備の ",
+        math(String.raw`1\ne0`),
+        " と矛盾する。ゆえに ",
+        math(String.raw`1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\ne0`),
+        " である。全過程は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・逆元の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
