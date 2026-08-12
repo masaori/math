@@ -28058,6 +28058,7 @@ B
     labels: ["def_sector_generating_polynomial"],
     habitat: "Z",
     verification: ["sagemath/check/sector-generating-polynomial"],
+    lean: ["Ising2DLambda.FisherZero.sectorGeneratingPolynomial"],
     statement: [
       paragraph([
         math(String.raw`L\ge1`), " とし、", math(String.raw`a,b\in\{0,1\}`),
@@ -28081,6 +28082,11 @@ B
     labels: ["claim_low_temperature_trivial_sector_expression"],
     habitat: "Z",
     verification: ["sagemath/check/sector-generating-polynomial"],
+    lean: [
+      "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial",
+      "Ising2DLambda.NecSuf.FisherZero.weighted_sum_eq_of_inverse_necSuf",
+      "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial_from_necSuf",
+    ],
     statement: [
       paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
       displayMath(String.raw`Z_L=2G^{0,0}_L`),

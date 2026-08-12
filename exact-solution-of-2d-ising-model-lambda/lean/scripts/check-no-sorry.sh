@@ -815,6 +815,10 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.image_eq_admissible_filter_necSuf
   Ising2DLambda.FisherZero.attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets
   Ising2DLambda.FisherZero.attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets_from_necSuf
+  Ising2DLambda.FisherZero.card_image_dualEdgeEquiv
+  Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial
+  Ising2DLambda.NecSuf.FisherZero.weighted_sum_eq_of_inverse_necSuf
+  Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
