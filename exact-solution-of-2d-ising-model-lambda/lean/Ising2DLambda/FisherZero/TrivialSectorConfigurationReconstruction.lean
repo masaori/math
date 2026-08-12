@@ -295,6 +295,86 @@ theorem reconstructedEdgeSet_all_row_column_sums_zero (L : ℕ) [NeZero L]
     rw [hrepr]
     exact haux (j + 1).val
 
+/-- 人手証明の「基点から縦向き、次に横向きへ進む道の偶奇」。
+各座標は `ZMod.val` が与える `0, …, L - 1` の代表を使う。 -/
+noncomputable def reconstructionPathParity (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (i j : ZMod L) : ZMod 2 :=
+  (∑ r ∈ Finset.range i.val,
+    (if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0)) +
+  ∑ c ∈ Finset.range j.val,
+    (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0)
+
+/-- 人手証明の横向き辺についての道和の差。代表が `L - 1` 未満なら
+有限和の末尾の一項を取り出し、`L - 1` なら行全体の和が零であることを使う。 -/
+theorem reconstructionPathParity_horizontal_difference (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (i j : ZMod L) :
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  cases L with
+  | zero => exact (NeZero.ne 0 rfl).elim
+  | succ n =>
+      have hrow := (reconstructedEdgeSet_all_row_column_sums_zero (n + 1) A hSector).1 i
+      let residueEquiv : Fin (n + 1) ≃ ZMod (n + 1) :=
+        { toFun := fun c => (c.val : ZMod (n + 1))
+          invFun := fun z => ⟨z.val, z.val_lt⟩
+          left_inv := fun c => Fin.ext (by
+            simp only [ZMod.val_natCast, Nat.mod_eq_of_lt c.isLt])
+          right_inv := fun z => ZMod.natCast_zmod_val z }
+      have hrowFin : (∑ c : Fin (n + 1),
+          (if edgeOfRow (n + 1) false i (c.val : ZMod (n + 1)) ∈
+            reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
+        calc
+          _ = ∑ c : ZMod (n + 1),
+              (if edgeOfRow (n + 1) false i c ∈ reconstructedEdgeSet (n + 1) A
+                then 1 else 0) := Fintype.sum_equiv residueEquiv _ _
+                  (fun _ => rfl)
+          _ = 0 := hrow
+      have hrowRange : (∑ c ∈ Finset.range (n + 1),
+          (if edgeOfRow (n + 1) false i (c : ZMod (n + 1)) ∈
+          reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
+        rw [← Fin.sum_univ_eq_sum_range]
+        exact hrowFin
+      have htwo : (2 : ZMod 2) = 0 := rfl
+      by_cases hj : j = -1
+      · subst j
+        have hcast : ((n : ℕ) : ZMod (n + 1)) = -1 := by
+          apply ZMod.val_injective (n + 1)
+          rw [ZMod.val_natCast, Nat.mod_eq_of_lt (Nat.lt_succ_self n), ZMod.val_neg_one]
+        rw [reconstructionPathParity, reconstructionPathParity]
+        simp only [neg_add_cancel, ZMod.val_zero, Finset.range_zero, Finset.sum_empty,
+          add_zero, ZMod.val_neg_one]
+        rw [Finset.sum_range_succ] at hrowRange
+        rw [← hcast]
+        linear_combination hrowRange +
+          (∑ r ∈ Finset.range i.val,
+            (if edgeOfRow (n + 1) true (r : ZMod (n + 1)) 0 ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo -
+          (if edgeOfRow (n + 1) false i (n : ZMod (n + 1)) ∈
+            reconstructedEdgeSet (n + 1) A then 1 else 0) * htwo
+      · have hjlt : j.val + 1 < n + 1 := by
+          have hjbound := ZMod.val_lt j
+          by_contra hnot
+          have hval : j.val = n := by omega
+          apply hj
+          apply ZMod.val_injective (n + 1)
+          rw [hval, ZMod.val_neg_one]
+        have hjval : (j + 1).val = j.val + 1 := by
+          rw [show j + 1 = ((j.val + 1 : ℕ) : ZMod (n + 1)) by
+            rw [Nat.cast_add, ZMod.natCast_zmod_val, Nat.cast_one]]
+          rw [ZMod.val_natCast, Nat.mod_eq_of_lt hjlt]
+        rw [reconstructionPathParity, reconstructionPathParity, hjval,
+          Finset.sum_range_succ]
+        rw [ZMod.natCast_zmod_val j]
+        linear_combination
+          (∑ r ∈ Finset.range i.val,
+            (if edgeOfRow (n + 1) true (r : ZMod (n + 1)) 0 ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo +
+          (∑ c ∈ Finset.range j.val,
+            (if edgeOfRow (n + 1) false i (c : ZMod (n + 1)) ∈
+              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo
+
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by
   simp only [dualBrokenEdgeSet]

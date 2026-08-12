@@ -3900,10 +3900,19 @@ T_{(V')}(\psi_\mu^\dagger)
         math(String.raw`\mu \in \mathcal{M}`),
         " について ",
         math(String.raw`[X, \psi_\mu^\dagger] = \gamma(\theta_\mu)\psi_\mu^\dagger`),
-        "、すなわち ",
-        math(String.raw`X\psi_\mu^\dagger = \psi_\mu^\dagger X + \gamma(\theta_\mu)\psi_\mu^\dagger = \psi_\mu^\dagger(X + \gamma(\theta_\mu)I)`),
-        "。",
+        " である。したがって",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+X\psi_\mu^\dagger
+&=\psi_\mu^\dagger X+\gamma(\theta_\mu)\psi_\mu^\dagger
+&&(\because\ [X,\psi_\mu^\dagger]=\gamma(\theta_\mu)\psi_\mu^\dagger\ \text{と交換子の定義})\\
+&=\psi_\mu^\dagger X+\psi_\mu^\dagger\gamma(\theta_\mu)I
+&&(\because\ \gamma(\theta_\mu)\ \text{はスカラー})\\
+&=\psi_\mu^\dagger\bigl(X+\gamma(\theta_\mu)I\bigr)
+&&(\because\ \text{分配則})
+\end{aligned}`,
+      ),
       paragraph(["Step 3: 帰納法で ", math(String.raw`X^n \psi_\mu^\dagger = \psi_\mu^\dagger (X + \gamma(\theta_\mu)I)^n`), " を示す。"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4022,6 +4031,7 @@ T_{(V')}(\psi_\mu)
         "2026-08-12 の式変形統一で、証明冒頭の X と -X の可換性、指数行列の積、共役作用の定義を 2 段・3 段・2 段の鎖へ開き、全行へ根拠を付けた。内容は変えていない。次は Step 1 から続ける。",
         "2026-08-12 の式変形統一で Step 1 の二つの計算を一行一等号へ分け、分配・単位行列・反交換・交換子定義・相殺の根拠を各行へ付けた。内容は変えていない。次は Step 2 から続ける。",
         "2026-08-13 の式変形統一で、Step 2 の冒頭の交換子の和（1 表示に等号 2 つ）を一行一等号の二段へ、場合 b) の γ₂ の周期性の二本（1 行に等号 3 つ・根拠なし）を代入を明示した四段の鎖二本へ開き、各行末へ根拠を付けた。内容は変えていない。次は Step 2 の残り（場合分け a〜c の散文中の等式）か Step 3 から続ける。",
+        "2026-08-13 の式変形統一で、Step 2 の X と生成演算子の積を反対側へ移す結論を一行一等号の三段へ開き、交換子の定義・スカラーの交換・分配則を各行に明示した。内容は変えていない。次は同じ証明の Step 3 から続ける。",
       ],
     },
   },
