@@ -28230,6 +28230,11 @@ H_L
     labels: ["claim_mixed_boundary_duality_identity"],
     habitat: "Z",
     verification: ["sagemath/check/mixed-boundary-duality-identity"],
+    lean: [
+      "Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity",
+      "Ising2DLambda.NecSuf.FisherZero.four_step_equality_chain_necSuf",
+      "Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity_from_necSuf",
+    ],
     statement: [
       paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
       displayMath(String.raw`H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L=2^{\,L^2+1}\,G^{0,0}_L`),

@@ -823,6 +823,9 @@ targets=(
   Ising2DLambda.FisherZero.highTemperatureSectorDecomposition
   Ising2DLambda.NecSuf.FisherZero.sum_eq_sum_label_fibers_necSuf
   Ising2DLambda.FisherZero.highTemperatureSectorDecomposition_from_necSuf
+  Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity
+  Ising2DLambda.NecSuf.FisherZero.four_step_equality_chain_necSuf
+  Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
