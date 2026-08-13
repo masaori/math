@@ -1741,30 +1741,53 @@ P^{(\pm)} f
         " の同一視のもとで",
       ]),
       displayMath(
-        String.raw`\left(V_1\right)\big|_{\mathcal{F}^{(\pm)}} = \left(V_1^{(\pm)}\right)\big|_{\mathcal{F}^{(\pm)}}`,
+        String.raw`\left(V_1\right)\big|_{\mathcal{F}^{(\pm)}}
+= \left(V_1^{(\pm)}\right)\big|_{\mathcal{F}^{(\pm)}}
+\quad (\because \text{固有空間上での }V_1\text{ の制限})`,
       ),
       paragraph([
         "すなわち任意の ",
         math(String.raw`f \in \mathcal{F}^{(\pm)}`),
-        " について ",
-        math(String.raw`V_1 f = V_1^{(\pm)} f`),
-        " を主張している。",
+        " について次を主張している。",
+      ]),
+      displayMath(
+        String.raw`V_1 f
+= V_1^{(\pm)} f
+\quad (\because \left.V_1\right|_{\mathcal{F}^{(\pm)}}=\left.V_1^{(\pm)}\right|_{\mathcal{F}^{(\pm)}})`,
+      ),
+      paragraph([
         ref("epsilon_projector_properties"),
         " (4) より、任意の ",
         math(String.raw`x \in \mathcal{F}`),
         " について ",
         math(String.raw`P^{(\pm)}x \in \mathrm{im}\,P^{(\pm)} = \mathcal{F}^{(\pm)}`),
-        " なので",
+        " なので、次の鎖を得る。",
       ]),
-      displayMath(String.raw`V_1\left(P^{(\pm)}x\right) = V_1^{(\pm)}\left(P^{(\pm)}x\right)`),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(V_1P^{(\pm)}\right)x
+&=V_1\left(P^{(\pm)}x\right)
+  \quad (\because \text{行列積の作用})\\
+&=V_1^{(\pm)}\left(P^{(\pm)}x\right)
+  \quad (\because P^{(\pm)}x\in\mathcal{F}^{(\pm)}\text{ と上の制限の等式})\\
+&=\left(V_1^{(\pm)}P^{(\pm)}\right)x
+  \quad (\because \text{行列積の作用})
+\end{aligned}`,
+      ),
       paragraph([
-        "が任意の ",
+        "この等式が任意の ",
         math(String.raw`x`),
         " について成り立つ。行列は ",
         math(String.raw`\mathcal{F} = \mathbb{C}^{2^M}`),
-        " のすべてのベクトルへの作用で決まるので ",
-        math(String.raw`V_1P^{(\pm)} = V_1^{(\pm)}P^{(\pm)}`),
-        "。",
+        " のすべてのベクトルへの作用で決まるので、",
+      ]),
+      displayMath(
+        String.raw`V_1P^{(\pm)}
+=V_1^{(\pm)}P^{(\pm)}
+\quad (\because \text{すべての }x\in\mathcal{F}\text{ への作用が等しい})`,
+      ),
+      paragraph([
+        "である。",
       ]),
       paragraph([
         "(2) ",
