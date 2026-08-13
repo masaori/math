@@ -3276,8 +3276,10 @@ V Q_\epsilon
 g(1,\dots,1)
 &= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\left(1 - \tfrac12\right)
    \quad (\because g\ \text{の定義に}\ \epsilon_\mu=1\ \text{を代入}) \\
+&= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\cdot\frac12
+   \quad \left(\because 1-\tfrac12=\tfrac12\right) \\
 &= \frac{1}{2}\sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)
-   \quad \left(\because 1-\tfrac12=\tfrac12\ \text{と和の線型性}\right)
+   \quad \left(\because \text{和の線型性}\right)
 \end{aligned}`,
       ),
       displayMath(
@@ -3285,8 +3287,10 @@ g(1,\dots,1)
 g(0,\dots,0)
 &= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\left(0 - \tfrac12\right)
    \quad (\because g\ \text{の定義に}\ \epsilon_\mu=0\ \text{を代入}) \\
+&= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\cdot\left(-\frac12\right)
+   \quad \left(\because 0-\tfrac12=-\tfrac12\right) \\
 &= -\frac{1}{2}\sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)
-   \quad \left(\because 0-\tfrac12=-\tfrac12\ \text{と和の線型性}\right)
+   \quad \left(\because \text{和の線型性}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -3299,6 +3303,11 @@ g(0,\dots,0)
 \Lambda_{\max}\Lambda_{\min}
 &= (2s_2)^{M/2}e^{g(1,\dots,1)}\,(2s_2)^{M/2}e^{g(0,\dots,0)}
    \quad (\because \Lambda_{\max},\Lambda_{\min}\ \text{の表式}) \\
+&= \left((2s_2)^{M/2}(2s_2)^{M/2}\right)
+   \left(e^{g(1,\dots,1)}e^{g(0,\dots,0)}\right)
+   \quad (\because \text{積の可換則と結合則}) \\
+&= (2s_2)^{M}\left(e^{g(1,\dots,1)}e^{g(0,\dots,0)}\right)
+   \quad (\because \text{冪の法則}) \\
 &= (2s_2)^{M}e^{g(1,\dots,1)+g(0,\dots,0)}
    \quad (\because \text{指数法則}) \\
 &= (2s_2)^{M}e^{0}
