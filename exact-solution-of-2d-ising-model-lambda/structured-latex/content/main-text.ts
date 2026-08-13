@@ -32454,6 +32454,11 @@ a'\cdot C
     labels: ["claim_quadratic_positive_mul_nonnegative_negative_first"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-mul-nonnegative-negative-first"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegative_negativeFirst",
+      "Ising2DLambda.NecSuf.FisherZero.positive_mul_nonnegative_negativeFirst_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegative_negativeFirst_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`), " を ",

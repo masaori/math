@@ -676,13 +676,34 @@ D\, f_{\iota(\mu)}
         ref("pauli_matrix_products"),
         " より ",
         math(String.raw`\sigma^x\sigma^x = I`),
-        " なので、",
+        " である。したがって ",
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
-        " について ",
-        math(String.raw`(\sigma^x)^{2p} = I`),
-        "、",
-        math(String.raw`(\sigma^x)^{2p+1} = \sigma^x`),
-        "。よって ",
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^x)^{2p}
+&= \left((\sigma^x)^2\right)^p
+   \quad (\because \text{行列の冪の指数法則}) \\
+&= I^p
+   \quad (\because (\sigma^x)^2=I) \\
+&= I
+   \quad (\because \text{単位行列の自然数冪}),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^x)^{2p+1}
+&= (\sigma^x)^{2p}\sigma^x
+   \quad (\because \text{行列の冪の加法則}) \\
+&= I\sigma^x
+   \quad (\because (\sigma^x)^{2p}=I) \\
+&= \sigma^x
+   \quad (\because \text{単位行列の作用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
         math(String.raw`t \in \mathbb{R}`),
         " について ",
         ref("def_exp"),
