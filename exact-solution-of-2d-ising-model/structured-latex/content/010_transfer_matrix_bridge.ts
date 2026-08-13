@@ -759,16 +759,33 @@ e^{-2K_2^*}
         math(String.raw`K_2 > 0`),
         " より ",
         math(String.raw`0 < t < 1`),
-        " であり（",
+        " である（",
         ref("cosh_sinh_basic_properties"),
         " の ",
         math(String.raw`\cosh x > \sinh x > 0\ (x>0)`),
-        "）、",
-        math(String.raw`e^{-K_2^*} = t^{1/2}`),
-        "、",
-        math(String.raw`e^{K_2^*} = t^{-1/2}`),
-        " である。よって",
+        "）。また",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{-K_2^*}
+&= \left(e^{-2K_2^*}\right)^{1/2}
+   \quad (\because \text{指数法則 } e^{-2K_2^*} = (e^{-K_2^*})^2 \text{ と } e^{-K_2^*} > 0 \text{ の正の平方根}) \\
+&= t^{1/2}
+   \quad (\because e^{-2K_2^*} = t),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{K_2^*}
+&= \frac{1}{e^{-K_2^*}}
+   \quad (\because \text{指数法則 } e^{K_2^*}e^{-K_2^*} = 1) \\
+&= \frac{1}{t^{1/2}}
+   \quad (\because e^{-K_2^*} = t^{1/2}) \\
+&= t^{-1/2}
+   \quad (\because \text{負冪の定義 } t^{-1/2} = 1/t^{1/2})
+\end{aligned}`,
+      ),
+      paragraph(["である。よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \cosh K_2^*

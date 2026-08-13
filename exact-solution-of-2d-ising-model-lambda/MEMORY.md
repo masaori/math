@@ -18,7 +18,11 @@ $C:=-A$ と線形比較 $b'\cdot C\le c\cdot B$ を平方へ移して $A\cdot A<
 $V:=-B$ と $(2\cdot b')\cdot V\le c\cdot A$ から $2(B\cdot B)<A\cdot A$（第二条件）を得る。
 SageMath（`sagemath/check/quadratic-positive-mul-nonnegative-negative-first/`）は 181700 組で
 各段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの主張の Lean
-（具体版・必要十分版・導出）を完成させる。
+（具体版・必要十分版・導出）を完成させる。式変形統一では姉妹側
+「$2\times2$ の転送行列の恒等式」（`010_transfer_matrix_bridge`）Step 2 の散文に
+根拠なしで埋まっていた $e^{-K_2^*}=t^{1/2}$、$e^{K_2^*}=t^{-1/2}$ を、
+指数法則と正の平方根・逆数の根拠付き等式鎖へ開いた。次の式変形統一は同ファイルの
+次の根拠なしの計算（散文内の等号を含めて機械走査する）から続ける。
 
 2026-08-14 の tick 221 は、「非負係数条件と負の第二係数条件の積」の Lean 具体版・
 必要十分版・導出を完成させ、四層すべてを満たした。本文と SageMath のレビューでは、
