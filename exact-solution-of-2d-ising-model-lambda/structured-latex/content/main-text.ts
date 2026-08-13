@@ -31767,6 +31767,108 @@ a'\cdot a'&\le(a+a')\cdot(a+a') &&\bigl(\because\ 0\le a'\le a+a'\text{ と乗�
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_add_nonnegative_negative_first",
+    kind: "claim",
+    title: { text: "非負係数条件と負の第一係数条件の和" },
+    labels: ["claim_quadratic_positive_add_nonnegative_negative_first"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-add-nonnegative-negative-first"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeFirst",
+      "Ising2DLambda.NecSuf.FisherZero.positive_add_nonnegative_negativeFirst_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeFirst_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`),
+        " について、",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        " が正錐の非負係数条件を満たし、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " が正錐の負の第一係数条件（",
+        ref("def_quadratic_positive_cone"),
+        " の第三の条件: ",
+        math(String.raw`a'<0`),
+        " かつ ",
+        math(String.raw`0<b'`),
+        " かつ ",
+        math(String.raw`a'\cdot a'<2\cdot(b'\cdot b')`),
+        "）を満たすならば、",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。すべての係数と比較は有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_quadratic_addition_representation"),
+        " により ",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
+        " である。",
+        math(String.raw`A:=a+a'`),
+        " と置き、",
+        math(String.raw`0\le A`),
+        " か否かで分ける。",
+      ]),
+      paragraph([
+        math(String.raw`0\le A`),
+        " の場合。次の二つを得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&<b+b' &&\bigl(\because\ 0\le b,\ 0<b'\text{ と加法の単調性}\bigr)\\
+(A,b+b')&\ne(0,0) &&\bigl(\because\ 0<b+b'\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって表示は正錐の第一条件を満たす。",
+      ]),
+      paragraph([
+        math(String.raw`0\le A`),
+        " でない場合。",
+        math(String.raw`A<0`),
+        " である。まず負の第一係数の絶対値が増えないことを、積の順序として示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a'&\le A &&\bigl(\because\ 0\le a\text{ と }A=a+a'\bigr)\\
+A\cdot A&\le a'\cdot A &&\bigl(\because\ a'\le A\text{ の両辺へ負の }A\text{ を右から掛ける}\bigr)\\
+&\le a'\cdot a' &&\bigl(\because\ a'\le A\text{ の両辺へ負の }a'\text{ を左から掛ける}\bigr)
+\end{aligned}`),
+      paragraph([
+        "第二係数については次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&<b' &&\bigl(\because\ \eta\text{ が負の第一係数条件を満たす}\bigr)\\
+&\le b+b' &&\bigl(\because\ 0\le b\text{ と加法の単調性}\bigr)\\
+b'\cdot b'&\le(b+b')\cdot(b+b') &&\bigl(\because\ 0\le b'\le b+b'\text{ と乗法の単調性}\bigr)
+\end{aligned}`),
+      paragraph([
+        "以上と負の第一係数条件をつなぐ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A\cdot A
+&\le a'\cdot a' &&\bigl(\because\ A\cdot A\le a'\cdot A\le a'\cdot a'\bigr)\\
+&<2\cdot(b'\cdot b') &&\bigl(\because\ \eta\text{ が負の第一係数条件を満たす}\bigr)\\
+&\le2\cdot\bigl((b+b')\cdot(b+b')\bigr) &&\bigl(\because\ b'\cdot b'\le(b+b')\cdot(b+b')\text{ の両辺へ正の }2\text{ を掛ける}\bigr)
+\end{aligned}`),
+      paragraph([
+        "ゆえに表示 ",
+        math(String.raw`(A,b+b')`),
+        " は正錐の第三条件（負の第一係数条件）を満たす。二つの場合を合わせて ",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。全過程は ",
+        math(String.raw`\mathbb{Q}`),
+        " の加法・積・順序と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

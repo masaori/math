@@ -900,6 +900,9 @@ targets=(
   Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeSecond
   Ising2DLambda.NecSuf.FisherZero.positive_add_nonnegative_negativeSecond_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeSecond_from_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeFirst
+  Ising2DLambda.NecSuf.FisherZero.positive_add_nonnegative_negativeFirst_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeFirst_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
