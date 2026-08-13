@@ -29768,6 +29768,7 @@ b
     labels: ["def_quadratic_field_set"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-cone"],
+    lean: ["Ising2DLambda.FisherZero.quadraticFieldSet"],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -29817,6 +29818,11 @@ b
     labels: ["def_quadratic_representation_map"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-cone"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticRepresentation",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_spec",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_eq",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -29863,6 +29869,11 @@ b
     labels: ["def_quadratic_positive_cone"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-cone"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositiveCone",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_generator",
+      "Ising2DLambda.FisherZero.quadraticGenerator_mem_positiveCone",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -29955,6 +29966,7 @@ b
     title: { text: "根の取り替えと正錐" },
     labels: ["remark_positive_cone_sign_choice"],
     habitat: "Qbar",
+    lean: ["Ising2DLambda.FisherZero.quadraticFieldSet_neg"],
     statement: [
       paragraph([
         math(String.raw`s`),

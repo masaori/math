@@ -484,3 +484,4 @@ import Ising2DLambda.FisherZero.OneSLinearlyIndependentFromNecSuf
 import Ising2DLambda.FisherZero.QuadraticRepresentationUnique
 import Ising2DLambda.NecSuf.FisherZero.QuadraticRepresentationUnique
 import Ising2DLambda.FisherZero.QuadraticRepresentationUniqueFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveCone

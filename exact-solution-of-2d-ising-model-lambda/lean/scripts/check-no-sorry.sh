@@ -853,6 +853,11 @@ targets=(
   Ising2DLambda.FisherZero.quadraticRepresentationUnique
   Ising2DLambda.NecSuf.FisherZero.quadratic_representation_unique_necSuf
   Ising2DLambda.FisherZero.quadraticRepresentationUnique_from_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_spec
+  Ising2DLambda.FisherZero.quadraticRepresentation_eq
+  Ising2DLambda.FisherZero.quadraticRepresentation_generator
+  Ising2DLambda.FisherZero.quadraticGenerator_mem_positiveCone
+  Ising2DLambda.FisherZero.quadraticFieldSet_neg
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

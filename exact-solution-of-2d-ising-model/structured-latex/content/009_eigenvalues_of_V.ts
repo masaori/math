@@ -2535,7 +2535,22 @@ U\,S_2\,U^{-1} = -\,S_2`,
         ref("pauli_matrix_products"),
         " より ",
         math(String.raw`\sigma^x\sigma^x = \sigma^z\sigma^z = I`),
-        " なので ",
+        " なので、各サイト ",
+        math(String.raw`m`),
+        " で",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_m^x\sigma_m^x
+&= I
+   \quad (\because\ \text{パウリ行列の積}), \\
+\sigma_m^z\sigma_m^z
+&= I
+   \quad (\because\ \text{パウリ行列の積})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。したがって ",
         math(String.raw`\sigma_m^x`),
         "、",
         math(String.raw`\sigma_m^z`),
@@ -2569,9 +2584,27 @@ U\,S_2\,U^{-1} = -\,S_2`,
         " より",
       ]),
       displayMath(
-        String.raw`F\sigma_k^x F^{-1} = \sigma_k^z\sigma_k^x\sigma_k^z = -\sigma_k^x, \quad
-F\sigma_k^y F^{-1} = -\sigma_k^y, \quad
-F\sigma_k^z F^{-1} = \sigma_k^z`,
+        String.raw`\begin{aligned}
+F\sigma_k^x F^{-1}
+&= \sigma_k^z\sigma_k^x\sigma_k^z
+   \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^x\text{ と可換}) \\
+&= -\sigma_k^x\sigma_k^z\sigma_k^z
+   \quad (\because\ \text{パウリ行列の積}) \\
+&= -\sigma_k^x
+   \quad (\because\ \text{パウリ行列の積}), \\
+F\sigma_k^y F^{-1}
+&= \sigma_k^z\sigma_k^y\sigma_k^z
+   \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^y\text{ と可換}) \\
+&= -\sigma_k^y\sigma_k^z\sigma_k^z
+   \quad (\because\ \text{パウリ行列の積}) \\
+&= -\sigma_k^y
+   \quad (\because\ \text{パウリ行列の積}), \\
+F\sigma_k^z F^{-1}
+&= \sigma_k^z\sigma_k^z\sigma_k^z
+   \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^z\text{ と可換}) \\
+&= \sigma_k^z
+   \quad (\because\ \text{パウリ行列の積})
+\end{aligned}`,
       ),
       paragraph([
         "同様に ",
@@ -2595,9 +2628,29 @@ F\sigma_k^z F^{-1} = \sigma_k^z`,
         "）、",
       ]),
       displayMath(
-        String.raw`U\sigma_k^x U^{-1} = -\sigma_k^x, \qquad
-U\sigma_k^y U^{-1} = \begin{cases}+\sigma_k^y & (k\ \text{奇数}) \\ -\sigma_k^y & (k\ \text{偶数})\end{cases}, \qquad
-U\sigma_k^z U^{-1} = \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^z & (k\ \text{偶数})\end{cases}`,
+        String.raw`\begin{aligned}
+U\sigma_k^x U^{-1}
+&= E\left(F\sigma_k^xF^{-1}\right)E^{-1}
+   \quad (\because\ U=EF) \\
+&= E(-\sigma_k^x)E^{-1}
+   \quad (\because\ F\text{ による共役の計算}) \\
+&= -\sigma_k^x
+   \quad (\because\ E\sigma_k^xE^{-1}=\sigma_k^x), \\
+U\sigma_k^y U^{-1}
+&= E\left(F\sigma_k^yF^{-1}\right)E^{-1}
+   \quad (\because\ U=EF) \\
+&= -E\sigma_k^yE^{-1}
+   \quad (\because\ F\text{ による共役の計算}) \\
+&= \begin{cases}+\sigma_k^y & (k\ \text{奇数}) \\ -\sigma_k^y & (k\ \text{偶数})\end{cases}
+   \quad (\because\ E\text{ による共役の場合分け}), \\
+U\sigma_k^z U^{-1}
+&= E\left(F\sigma_k^zF^{-1}\right)E^{-1}
+   \quad (\because\ U=EF) \\
+&= E\sigma_k^zE^{-1}
+   \quad (\because\ F\text{ による共役の計算}) \\
+&= \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^z & (k\ \text{偶数})\end{cases}
+   \quad (\because\ E\text{ による共役の場合分け})
+\end{aligned}`,
       ),
       paragraph([
         "以下、共役 ",
@@ -2637,10 +2690,14 @@ U\sigma_k^z U^{-1} = \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^
         String.raw`\begin{aligned}
 U Z_m U^{-1}
 &= (-1)^{m-1}\cdot\begin{cases}-1 & (m\ \text{奇数}) \\ +1 & (m\ \text{偶数})\end{cases}\ Z_m
-= -\,Z_m, \\
+   \quad (\because\ \text{Step 1 を }Z_m\text{ の各因子に適用}) \\
+&= -\,Z_m
+   \quad (\because\ m\ \text{の偶奇ごとに符号を計算}), \\
 U Y_m U^{-1}
 &= (-1)^{m-1}\cdot\begin{cases}+1 & (m\ \text{奇数}) \\ -1 & (m\ \text{偶数})\end{cases}\ Y_m
-= +\,Y_m
+   \quad (\because\ \text{Step 1 を }Y_m\text{ の各因子に適用}) \\
+&= +\,Y_m
+   \quad (\because\ m\ \text{の偶奇ごとに符号を計算})
 \end{aligned}`,
       ),
       paragraph([
@@ -2700,10 +2757,22 @@ U Y_m U^{-1}
         " の有限和である。Step 2 より各項について",
       ]),
       displayMath(
-        String.raw`U\left(Y_j Z_k\right)U^{-1}
-= \left(U Y_j U^{-1}\right)\left(U Z_k U^{-1}\right)
-= (+Y_j)(-Z_k) = -\,Y_j Z_k, \qquad
-U\left(Z_j Y_j\right)U^{-1} = (-Z_j)(+Y_j) = -\,Z_j Y_j`,
+        String.raw`\begin{aligned}
+U\left(Y_j Z_k\right)U^{-1}
+&= \left(U Y_j U^{-1}\right)\left(U Z_k U^{-1}\right)
+   \quad (\because\ \text{共役は積を保つ}) \\
+&= (+Y_j)(-Z_k)
+   \quad (\because\ \text{Step 2}) \\
+&= -\,Y_j Z_k
+   \quad (\because\ \text{スカラー倍と行列積の両立}), \\
+U\left(Z_j Y_j\right)U^{-1}
+&= \left(U Z_j U^{-1}\right)\left(U Y_j U^{-1}\right)
+   \quad (\because\ \text{共役は積を保つ}) \\
+&= (-Z_j)(+Y_j)
+   \quad (\because\ \text{Step 2}) \\
+&= -\,Z_j Y_j
+   \quad (\because\ \text{スカラー倍と行列積の両立})
+\end{aligned}`,
       ),
       paragraph([
         "なので、共役の ",
@@ -2724,8 +2793,22 @@ U H_2 U^{-1} = -\,H_2`,
         " であり、スカラー倍は共役と可換なので Step 3 から",
       ]),
       displayMath(
-        String.raw`U S_1^{(\pm)} U^{-1} = iK_1\,U H_1^{(\pm)} U^{-1} = -\,S_1^{(\pm)}, \qquad
-U S_2 U^{-1} = iK_2^*\,U H_2 U^{-1} = -\,S_2`,
+        String.raw`\begin{aligned}
+U S_1^{(\pm)} U^{-1}
+&= iK_1\,U H_1^{(\pm)} U^{-1}
+   \quad (\because\ S_1^{(\pm)}=iK_1H_1^{(\pm)}\ \text{かつ共役はスカラー倍を保つ}) \\
+&= -iK_1H_1^{(\pm)}
+   \quad (\because\ \text{Step 3}) \\
+&= -\,S_1^{(\pm)}
+   \quad (\because\ S_1^{(\pm)}=iK_1H_1^{(\pm)}), \\
+U S_2 U^{-1}
+&= iK_2^*\,U H_2 U^{-1}
+   \quad (\because\ S_2=iK_2^*H_2\ \text{かつ共役はスカラー倍を保つ}) \\
+&= -iK_2^*H_2
+   \quad (\because\ \text{Step 3}) \\
+&= -\,S_2
+   \quad (\because\ S_2=iK_2^*H_2)
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`K_1, K_2^* > 0`),
