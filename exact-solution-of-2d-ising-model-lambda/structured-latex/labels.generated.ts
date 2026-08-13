@@ -145,6 +145,7 @@ export const ALL_LABELS = [
   "claim_quadratic_multiplication_representation",
   "claim_quadratic_negation_mem",
   "claim_quadratic_negation_representation",
+  "claim_quadratic_positive_add_mixed_signs",
   "claim_quadratic_positive_add_negative_first_negative_first",
   "claim_quadratic_positive_add_negative_second_negative_second",
   "claim_quadratic_positive_add_nonnegative",

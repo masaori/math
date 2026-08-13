@@ -32075,6 +32075,137 @@ a+a'&<0 &&\bigl(\because\ a<0,\ a'<0\text{ と加法の単調性}\bigr)\\
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_add_mixed_signs",
+    kind: "claim",
+    title: { text: "二つの混合符号条件の和" },
+    labels: ["claim_quadratic_positive_add_mixed_signs"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-add-mixed-signs"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_mixedSigns",
+      "Ising2DLambda.NecSuf.FisherZero.positive_add_mixedSigns_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_mixedSigns_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " を ", math(String.raw`s\cdot s=2`), " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`), " について、",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`), " が正錐の負の第二係数条件、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " が正錐の負の第一係数条件を満たすならば、",
+        math(String.raw`\xi+\eta\in P_s`), " である。すべての係数と比較は有理数体 ",
+        math(String.raw`\mathbb{Q}`), " に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_quadratic_addition_representation"), " により ",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`), " である。",
+        math(String.raw`c:=-a'`), "、", math(String.raw`u:=-b`), "、",
+        math(String.raw`A:=a+a'=a-c`), "、", math(String.raw`B:=b+b'=b'-u`),
+        " と置く。このとき ", math(String.raw`a,c,u,b'\in\mathbb{Q}_{>0}`), " である。",
+      ]),
+      paragraph(["まず交差積を比較する。"]),
+      displayMath(String.raw`\begin{aligned}
+(c\cdot u)\cdot(c\cdot u)
+&=(c\cdot c)\cdot(u\cdot u)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(u\cdot u)
+  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<u\cdot u\bigr)\\
+&=\bigl(2\cdot(u\cdot u)\bigr)\cdot(b'\cdot b')
+  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&<(a\cdot a)\cdot(b'\cdot b')
+  &&\bigl(\because\ 2\cdot(u\cdot u)<a\cdot a\text{ と }0<b'\cdot b'\bigr)\\
+&=(a\cdot b')\cdot(a\cdot b')
+  &&\bigl(\because\ \text{結合則・可換則}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("claim_rational_square_lt_implies_lt"), " を非負有理数 ",
+        math(String.raw`c\cdot u`), " と ", math(String.raw`a\cdot b'`),
+        " へ適用して ", math(String.raw`c\cdot u<a\cdot b'`), " を得る。",
+      ]),
+      paragraph([
+        "まず ", math(String.raw`0\le A`), " かつ ", math(String.raw`0\le B`),
+        " の場合を考える。もし ", math(String.raw`(A,B)=(0,0)`), " ならば ",
+        math(String.raw`c=a`), " かつ ", math(String.raw`u=b'`),
+        " となり、直前の狭義不等式の両辺が等しくなる。ゆえに表示 ",
+        math(String.raw`(A,B)`), " は正錐の第一条件を満たす。",
+      ]),
+      paragraph([
+        "次に ", math(String.raw`0\le A`), " かつ ", math(String.raw`B<0`),
+        " の場合を考える。", math(String.raw`U:=u-b'=-B`),
+        " と置くと ", math(String.raw`0<U`), " である。",
+        math(String.raw`A=0`), " ならば ", math(String.raw`c=a`),
+        " と ", math(String.raw`b'<u`), " から ",
+        math(String.raw`a\cdot b'<c\cdot u`),
+        " となって交差積の比較に反するので、", math(String.raw`0<A`), " である。さらに、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a\cdot U
+&=a\cdot u-a\cdot b' &&\bigl(\because\ U=u-b'\bigr)\\
+&<a\cdot u-c\cdot u &&\bigl(\because\ c\cdot u<a\cdot b'\bigr)\\
+&=u\cdot A &&\bigl(\because\ A=a-c\text{ と分配則・可換則}\bigr).
+\end{aligned}`),
+      paragraph(["両辺は正なので平方の大小を保つ。これを負の第二係数条件へ組み込む。"]),
+      displayMath(String.raw`\begin{aligned}
+(u\cdot u)\cdot\bigl(2\cdot(U\cdot U)\bigr)
+&=\bigl(2\cdot(u\cdot u)\bigr)\cdot(U\cdot U)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&<(a\cdot a)\cdot(U\cdot U)
+  &&\bigl(\because\ 2\cdot(u\cdot u)<a\cdot a\text{ と }0<U\cdot U\bigr)\\
+&=(a\cdot U)\cdot(a\cdot U)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&<(u\cdot A)\cdot(u\cdot A)
+  &&\bigl(\because\ 0<a\cdot U<u\cdot A\bigr)\\
+&=(u\cdot u)\cdot(A\cdot A)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<u\cdot u`), " なのでこの正因子を消去し、",
+        math(String.raw`2\cdot(B\cdot B)<A\cdot A`),
+        " を得る。したがって表示は正錐の第二条件を満たす。",
+      ]),
+      paragraph([
+        "最後に ", math(String.raw`A<0`), " の場合を考える。",
+        math(String.raw`B\le0`), " ならば ", math(String.raw`a<c`), " と ",
+        math(String.raw`b'\le u`), " から ",
+        math(String.raw`a\cdot b'<c\cdot b'\le c\cdot u`),
+        " となって交差積の比較に反する。ゆえに ", math(String.raw`0<B`),
+        " である。", math(String.raw`C:=c-a=-A`), " と置くと ",
+        math(String.raw`0<C`), " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b'\cdot C
+&=c\cdot b'-a\cdot b' &&\bigl(\because\ C=c-a\text{ と分配則・可換則}\bigr)\\
+&<c\cdot b'-c\cdot u &&\bigl(\because\ c\cdot u<a\cdot b'\bigr)\\
+&=c\cdot B &&\bigl(\because\ B=b'-u\text{ と分配則}\bigr).
+\end{aligned}`),
+      paragraph(["両辺は正なので平方の大小を保つ。これを負の第一係数条件へ組み込む。"]),
+      displayMath(String.raw`\begin{aligned}
+(b'\cdot b')\cdot(C\cdot C)
+&=(b'\cdot C)\cdot(b'\cdot C)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&<(c\cdot B)\cdot(c\cdot B)
+  &&\bigl(\because\ 0<b'\cdot C<c\cdot B\bigr)\\
+&=(c\cdot c)\cdot(B\cdot B)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(B\cdot B)
+  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<B\cdot B\bigr)\\
+&=(b'\cdot b')\cdot\bigl(2\cdot(B\cdot B)\bigr)
+  &&\bigl(\because\ \text{結合則・可換則}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<b'\cdot b'`), " なのでこの正因子を消去し、",
+        math(String.raw`A\cdot A<2\cdot(B\cdot B)`),
+        " を得る。したがって表示は正錐の第三条件を満たす。三つの場合を合わせて ",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。全過程は有理数の四則と順序、および代数的数の加法だけで閉じる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
