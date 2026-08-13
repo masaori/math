@@ -1670,33 +1670,28 @@ P^{(\pm)} f
       displayMath(
         String.raw`\begin{aligned}
 (V_1V_2)^{n+1}P
-&= V_1V_2\,(V_1V_2)^{n}P \\
+&= V_1V_2\,(V_1V_2)^{n}P
+   \quad (\because \text{冪の定義}) \\
 &= V_1V_2\,(V_1V_2)^{n}P\,P
    \quad (\because P^2 = P) \\
 &= V_1V_2\,P\,(V_1V_2)^{n}P
-   \quad (\because P \text{ は } V_1, V_2 \text{ と可換}) \\
+   \quad (\because P \text{ は } V_1, V_2 \text{ と可換なので } (V_1V_2)^{n} \text{ とも可換}) \\
 &= V_1\,P\,V_2\,(V_1V_2)^{n}P
    \quad (\because P \text{ は } V_2 \text{ と可換}) \\
 &= V_1^{(\pm)}\,P\,V_2\,(V_1V_2)^{n}P
    \quad (\because \text{(1)}) \\
+&= V_1^{(\pm)}\,V_2\,P\,(V_1V_2)^{n}P
+   \quad (\because P \text{ は } V_2 \text{ と可換}) \\
+&= V_1^{(\pm)}\,V_2\,(V_1V_2)^{n}P\,P
+   \quad (\because P \text{ は } V_1, V_2 \text{ と可換なので } (V_1V_2)^{n} \text{ とも可換}) \\
 &= V_1^{(\pm)}\,V_2\,(V_1V_2)^{n}P
-   \quad (\because P \text{ を再び右へ戻し } P^2 = P) \\
+   \quad (\because P^2 = P) \\
 &= V_1^{(\pm)}\,V_2\,\left(V_1^{(\pm)}V_2\right)^{n}P
    \quad (\because \text{帰納法の仮定}) \\
 &= \left(V_1^{(\pm)}V_2\right)^{n+1}P
+   \quad (\because \text{冪の定義})
 \end{aligned}`,
       ),
-      paragraph([
-        "（6 行目では ",
-        math(String.raw`P`),
-        " が ",
-        math(String.raw`V_2, V_1, V_1^{(\pm)}`),
-        " のすべてと可換であることを使って ",
-        math(String.raw`P`),
-        " を右端まで移し、右端の ",
-        math(String.raw`P\,P = P`),
-        " でまとめた。）",
-      ]),
     ],
     conversion: { status: "added" },
   },
