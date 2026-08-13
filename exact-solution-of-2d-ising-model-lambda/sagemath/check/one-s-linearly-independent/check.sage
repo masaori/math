@@ -19,6 +19,7 @@ assert len(roots) == 2, "t^2 - 2 の QQbar の根がちょうど 2 個でない"
 BOUND = 6
 checked_nonzero = 0
 checked_chain = 0
+checked_rearrangement = 0
 checked_b_zero = 0
 
 for s in roots:
@@ -46,6 +47,18 @@ for s in roots:
                 # r の構成と、矛盾の段の中身。
                 r = binv * (-a)
                 assert r in QQ, "r = b^{-1}·(-a) ∈ QQ が壊れている"
+                # chain1 の五段のうち、仮定に依存しない恒等変形を各段で検査する。
+                chain1_0 = QQbar(b) * s
+                chain1_1 = QQbar(0) + QQbar(b) * s
+                chain1_2 = (QQbar(-a) + QQbar(a)) + QQbar(b) * s
+                chain1_3 = QQbar(-a) + (QQbar(a) + QQbar(b) * s)
+                assert chain1_0 == chain1_1, "chain1 の加法の単位元の段が壊れている"
+                assert chain1_1 == chain1_2, "chain1 の加法の逆元の段が壊れている"
+                assert chain1_2 == chain1_3, "chain1 の加法の結合則の段が壊れている"
+                if QQbar(a) + QQbar(b) * s == 0:
+                    assert chain1_3 == QQbar(-a) + 0, "chain1 の仮定の代入段が壊れている"
+                    assert QQbar(-a) + 0 == QQbar(-a), "chain1 の終段が壊れている"
+                checked_rearrangement += 1
                 # chain2 の結合則の段（仮定に依存しない）: b^{-1}·(b·s) = (b^{-1}·b)·s = s。
                 assert QQbar(binv) * (QQbar(b) * s) == s, "積の結合則の段が壊れている"
                 # chain3: r ∈ QQ なので r·r ≠ 2（claim_no_rational_square_two）。
@@ -59,4 +72,5 @@ for s in roots:
                 checked_b_zero += 1
 
 print(f"OK: 2 根 × 標本で a+b·s ≠ 0 を {checked_nonzero} 組、"
-      f"b≠0 の鎖を {checked_chain} 組、b=0 の段を {checked_b_zero} 組検査した")
+      f"移項の恒等変形を {checked_rearrangement} 組、b≠0 の鎖を {checked_chain} 組、"
+      f"b=0 の段を {checked_b_zero} 組検査した")

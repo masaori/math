@@ -6,7 +6,8 @@
 
 - 実行日: 2026-08-13
 - 結果: 通過（$s\cdot s=2$ を満たす `QQbar` の 2 根 × 有理数の標本で、
-  $(a,b)\ne(0,0)$ の 4416 組すべてで $a+b\cdot s\ne0$、$b\ne0$ の鎖 4324 組、
+  $(a,b)\ne(0,0)$ の 4416 組すべてで $a+b\cdot s\ne0$、移項の恒等変形 4324 組、
+  $b\ne0$ の鎖 4324 組、
   $b=0$ の段 92 組を厳密検査した）
 - 帰属: `QQ` / `QQbar` の厳密計算。浮動小数点は使わない。
 
@@ -16,7 +17,10 @@
 $a+b\cdot s=0$ ならば $(a,b)=(0,0)$」。証明の組み立てを一行ずつ突き合わせる。
 
 - 準備: $b\ne0$ の場合の逆元の等式 $b^{-1}\cdot b=1$ と $r:=b^{-1}\cdot(-a)\in\mathbb{Q}$
-- 鎖の結合則の段（仮定に依存しない）: $b^{-1}\cdot(b\cdot s)=(b^{-1}\cdot b)\cdot s=s$
+- 移項の五段: $b\cdot s=0+b\cdot s=((-a)+a)+b\cdot s=(-a)+(a+b\cdot s)$ を各段で検査し、
+  $a+b\cdot s=0$ のとき終点が $-a$ になることを検査する
+- 逆元の鎖の結合則の段（仮定に依存しない）:
+  $b^{-1}\cdot(b\cdot s)=(b^{-1}\cdot b)\cdot s=s$
 - 矛盾の段: $r\in\mathbb{Q}$ なので $r\cdot r\ne2$（`claim_no_rational_square_two`）。
   したがって $s\ne r$ であり、対偶として $a+b\cdot s\ne0$
 - $b=0$ の段: $a+0\cdot s=a$ なので $a\ne0$ なら $a+b\cdot s\ne0$
