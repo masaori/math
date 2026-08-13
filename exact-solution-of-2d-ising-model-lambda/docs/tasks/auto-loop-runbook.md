@@ -126,7 +126,9 @@ $(\because\ \dots)$」の形へ書き換える。** 対象は 2 つのプロジ�
 ## いまの状態を Web で公開する（ユーザーの明示指示）
 
 `scripts/publish-artifact.sh` が、版・これから書くこと・済んだ範囲・直近の前進とレビューを
-1 枚の HTML にして <https://masaori.github.io/artifacts/math/ising-lambda/> へ置く。
+1 枚の HTML にして artifacts リポジトリの GitHub Pages へ置く。**URL を決め打ちしない**
+（リポジトリの所有が移って決め打ちの URL が 404 になった実例がある。実測 2026-08-13）。
+実際の URL は公開のたびに `logs/publish-artifact.log` の「OK: 公開した」の行に出る。
 tick の最後と、PDF を作り直したときに自動で走るので、**tick が手で呼ぶ必要はない**。
 
 - 元になるのは台帳（`docs/tasks/auto-loop-state.md`）である。台帳の書き方が崩れると

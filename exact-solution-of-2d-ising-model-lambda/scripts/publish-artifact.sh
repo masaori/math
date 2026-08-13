@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # 毎 tick の成果を HTML と PDF で公開する（ユーザー指示）。
 #
-# 公開先は masaori/artifacts の GitHub Pages で、URL は
-#   https://masaori.github.io/artifacts/math/ising-lambda/
+# 公開先は artifacts リポジトリの GitHub Pages。**URL を決め打ちしない**
+# （リポジトリの所有が masaori から hexagonal-computation へ移り、決め打ちした URL が
+#  実測 2026-08-13 に 404 になった）。公開スクリプトが出力した URL をそのまま使う。
 # エージェント CLI 内蔵の公開機能は使わない（グローバル指示。アカウントが切り替わると閲覧できなくなる）。
 #
 # 置くもの:
@@ -131,9 +132,21 @@ ul {{ padding-left:1.2em; font-size:.9rem; }} li {{ margin:6px 0; }}
 """)
 PY
 
-if /Users/masaori/git/masaori/artifacts/publish.py --src "$STAGE" --repo math --path "$SLUG" >> "$LOG_FILE" 2>&1; then
-  log "OK: 公開した（版 ${commit}）→ https://masaori.github.io/artifacts/math/$SLUG/"
-else
+out="$(/Users/masaori/git/masaori/artifacts/publish.py --src "$STAGE" --repo math --path "$SLUG" 2>&1)"
+status=$?
+printf '%s\n' "$out" >> "$LOG_FILE"
+url="$(printf '%s\n' "$out" | grep -o 'https://[^ ]*/artifacts/math/'"$SLUG"'/' | tail -1)"
+
+if [ "$status" -ne 0 ]; then
   log "NG: 公開に失敗した（版 ${commit}）"
   exit 1
 fi
+if [ -z "$url" ]; then
+  log "NG: 公開はできたが URL を取れなかった（版 ${commit}）"
+  exit 1
+fi
+if ! curl -sfI "$url" >/dev/null 2>&1; then
+  log "NG: 公開した URL が読めない（版 ${commit}・$url）"
+  exit 1
+fi
+log "OK: 公開した（版 ${commit}）→ $url"
