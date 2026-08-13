@@ -617,30 +617,27 @@ D\, f_{\iota(\mu)}
         math(String.raw`K_1 D`),
         " に適用すると ",
         math(String.raw`\exp(K_1 D)`),
-        " は対角行列で",
-      ]),
-      displayMath(
-        String.raw`\left(\exp(K_1 D)\right)_{\iota(\mu),\iota(\mu')}
-= \begin{cases}
-\exp\!\left(K_1\sum_{m=1}^{M}\mu(m)\mu(m+1)\right) & (\iota(\mu) = \iota(\mu')) \\
-0 & (\iota(\mu) \neq \iota(\mu'))
-\end{cases}`,
-      ),
-      paragraph([
-        "Step 3。",
+        " は対角行列である。さらに ",
         ref("def_config_basis_iso"),
         " より ",
         math(String.raw`\iota`),
-        " は全単射なので ",
-        math(String.raw`\iota(\mu) = \iota(\mu') \iff \mu = \mu'`),
-        " であり、",
-        ref("def_transfer_matrix"),
-        " の ",
-        math(String.raw`\delta_{\mu=\mu'}`),
-        " と一致する。",
-        math(String.raw`K_1 = J'`),
-        " を代入して主張の等式を得る。",
+        " は全単射なので、成分を主張の右辺まで一続きに計算できる。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\exp(K_1 D)\right)_{\iota(\mu),\iota(\mu')}
+&= \begin{cases}
+\exp\!\left(K_1\displaystyle\sum_{m=1}^{M}\mu(m)\mu(m+1)\right)
+  & (\iota(\mu) = \iota(\mu')) \\
+0 & (\iota(\mu) \neq \iota(\mu'))
+\end{cases}
+  \quad (\because \text{対角行列の指数関数と Step 1 の対角成分}) \\
+&= \delta_{\mu=\mu'}\exp\!\left(K_1\sum_{m=1}^{M}\mu(m)\mu(m+1)\right)
+  \quad (\because \iota \text{ の単射性より }\iota(\mu)=\iota(\mu')\iff\mu=\mu') \\
+&= \delta_{\mu=\mu'}\exp\!\left(\sum_{m=1}^{M}J'\,\mu(m)\mu(m+1)\right)
+  \quad (\because K_1=J').
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
