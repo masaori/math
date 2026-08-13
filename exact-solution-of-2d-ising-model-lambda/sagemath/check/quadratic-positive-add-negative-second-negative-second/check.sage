@@ -27,6 +27,12 @@ for a in positive:
                 assert (a * a) * (2 * bp * bp) < (a * a) * (ap * ap)
                 assert (a * a) * (ap * ap) == cross_right * cross_right
                 assert cross_left < cross_right
+                # 和の平方展開の鎖を一段ずつ検査する（本文の五段に対応）
+                assert 2 * B * B == 2 * b * b + 2 * cross_left + 2 * bp * bp
+                assert 2 * b * b + 2 * cross_left + 2 * bp * bp < a * a + 2 * cross_left + 2 * bp * bp
+                assert a * a + 2 * cross_left + 2 * bp * bp < a * a + 2 * cross_right + 2 * bp * bp
+                assert a * a + 2 * cross_right + 2 * bp * bp < a * a + 2 * cross_right + ap * ap
+                assert a * a + 2 * cross_right + ap * ap == A * A
                 assert 2 * B * B < A * A
                 checked += 1
 
