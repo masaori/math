@@ -7,11 +7,13 @@
 
 export const ALL_LABELS = [
   "claim_certificate_gives_uniform_bound",
+  "claim_dual_face_four_vertices",
   "claim_edge_boundary_is_separating",
   "claim_finite_geometric_sum",
   "claim_minimal_separating_growth",
   "claim_minimal_separating_is_edge_boundary",
   "claim_negative_origin_has_separating_subset",
+  "claim_oriented_edge_data",
   "claim_partition_value_at_least_one",
   "claim_peierls_bound",
   "claim_separating_contains_edge_boundary",
@@ -20,6 +22,9 @@ export const ALL_LABELS = [
   "def_broken_count",
   "def_cardinality_notation",
   "def_configuration",
+  "def_coordinate_unit_vectors",
+  "def_dual_face_adjacency",
+  "def_dual_face_vertex_set",
   "def_edge_boundary",
   "def_inner_edges",
   "def_low_temperature_certificate",
