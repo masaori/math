@@ -705,11 +705,16 @@ D\, f_{\iota(\mu)}
         " のテイラー展開。）したがって",
       ]),
       displayMath(
-        String.raw`(2s_2)^{1/2}\exp\!\left(K_2^*\sigma^x\right)
-= \begin{pmatrix}
+        String.raw`\begin{aligned}
+(2s_2)^{1/2}\exp\!\left(K_2^*\sigma^x\right)
+&= (2s_2)^{1/2}\bigl(\cosh(K_2^*)\,I + \sinh(K_2^*)\,\sigma^x\bigr)
+   \quad (\because \text{上の閉じた形に } t = K_2^* \text{ を代入}) \\
+&= \begin{pmatrix}
 (2s_2)^{1/2}\cosh K_2^* & (2s_2)^{1/2}\sinh K_2^* \\
 (2s_2)^{1/2}\sinh K_2^* & (2s_2)^{1/2}\cosh K_2^*
-\end{pmatrix}`,
+\end{pmatrix}
+   \quad (\because I,\ \sigma^x \text{ の成分を書き下し、スカラー倍を各成分へ掛ける})
+\end{aligned}`,
       ),
       paragraph([
         "なので、示すべきは次の 2 つの等式である。",
@@ -729,9 +734,22 @@ D\, f_{\iota(\mu)}
         math(String.raw`K_2^* = -\tfrac12\log(\tanh K_2)`),
         " より ",
         math(String.raw`\log(\tanh K_2) = -2K_2^*`),
-        " すなわち",
+        " である。よって",
       ]),
-      displayMath(String.raw`e^{-2K_2^*} = \tanh K_2 =: t`),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{-2K_2^*}
+&= e^{\log(\tanh K_2)}
+   \quad (\because \log(\tanh K_2) = -2K_2^* \text{ を指数へ代入}) \\
+&= \tanh K_2
+   \quad (\because \exp \text{ と } \log \text{ は互いに逆写像})
+\end{aligned}`,
+      ),
+      paragraph([
+        "以後 ",
+        math(String.raw`t := \tanh K_2`),
+        " と置く。",
+      ]),
       paragraph([
         math(String.raw`K_2 > 0`),
         " より ",
@@ -814,8 +832,19 @@ D\, f_{\iota(\mu)}
         " なので",
       ]),
       displayMath(
-        String.raw`(2s_2)^{1/2} = 2\left(\sinh K_2\,\cosh K_2\right)^{1/2}, \qquad
-t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
+        String.raw`\begin{aligned}
+(2s_2)^{1/2}
+&= \left(4\sinh K_2\,\cosh K_2\right)^{1/2}
+   \quad (\because 2s_2 = 4\sinh K_2\cosh K_2 \text{ の代入}) \\
+&= 4^{1/2}\left(\sinh K_2\,\cosh K_2\right)^{1/2}
+   \quad (\because \text{非負実数の平方根は積を保つ}) \\
+&= 2\left(\sinh K_2\,\cosh K_2\right)^{1/2}
+   \quad (\because 4^{1/2} = 2)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}
+   \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2} \text{ の代入})`,
       ),
       paragraph(["したがって"]),
       displayMath(
