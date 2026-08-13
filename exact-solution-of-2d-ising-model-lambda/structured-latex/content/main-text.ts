@@ -31103,6 +31103,172 @@ r\cdot r
   },
 
   {
+    id: "fisher_zero_claim_quadratic_addition_mem",
+    kind: "claim",
+    title: { text: "二次体の台集合の加法による閉性" },
+    labels: ["claim_quadratic_addition_mem"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-addition"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "）。任意の ",
+        math(String.raw`\xi\in Q_s`),
+        "、",
+        math(String.raw`\eta\in Q_s`),
+        "（",
+        ref("def_quadratic_field_set"),
+        "）と ",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        "、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        "（",
+        ref("def_quadratic_representation_map"),
+        "）について、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の和 ",
+        math(String.raw`\xi+\eta`),
+        " は ",
+        math(String.raw`Q_s`),
+        " に属する（",
+        math(String.raw`a+a'`),
+        "、",
+        math(String.raw`b+b'`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の和）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`a,a'\in\mathbb{Q}`),
+        " の ",
+        math(String.raw`\mathbb{Q}`),
+        " での和 ",
+        math(String.raw`a+a'`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " での和と同じ元である。",
+        math(String.raw`b+b'`),
+        " も同様である。次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi+\eta
+&=\bigl(a+b\cdot s\bigr)+\bigl(a'+b'\cdot s\bigr)
+&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\text{ を両方の項へ同時適用}\bigr)\\
+&=a+\bigl(b\cdot s+(a'+b'\cdot s)\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a+\bigl((b\cdot s+a')+b'\cdot s\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a+\bigl((a'+b\cdot s)+b'\cdot s\bigr)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=a+\bigl(a'+(b\cdot s+b'\cdot s)\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(a+a')+\bigl(b\cdot s+b'\cdot s\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(a+a')+(b+b')\cdot s
+&&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a+a'\in\mathbb{Q}`),
+        "、",
+        math(String.raw`b+b'\in\mathbb{Q}`),
+        " なので、組 ",
+        math(String.raw`(a+a',b+b')`),
+        " が ",
+        ref("def_quadratic_field_set"),
+        " の存在条件の証人になり、",
+        math(String.raw`\xi+\eta\in Q_s`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_quadratic_addition_representation",
+    kind: "claim",
+    title: { text: "二次体の和の表示" },
+    labels: ["claim_quadratic_addition_representation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-addition"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "）。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`),
+        " と ",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        "、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " について、",
+        ref("claim_quadratic_addition_mem"),
+        " により ",
+        math(String.raw`\xi+\eta\in Q_s`),
+        " であり、",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
+        " である。後のセクションの「正錐と加法の両立」で、和の正値の条件を表示の組 ",
+        math(String.raw`(a+a',b+b')`),
+        " の有理数の不等式として扱うための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`a+a',b+b'\in\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " でも同じ和である。",
+        ref("claim_quadratic_addition_mem"),
+        " の証明の鎖により",
+      ]),
+      displayMath(String.raw`\xi+\eta=(a+a')+(b+b')\cdot s
+\qquad\bigl(\because\ \blkref{claim_quadratic_addition_mem}\text{ の証明の鎖の始点と終点}\bigr)`),
+      paragraph([
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)`),
+        " は ",
+        math(String.raw`\xi+\eta`),
+        " を表す唯一の組である（",
+        ref("def_quadratic_representation_map"),
+        "）。上の表示 ",
+        math(String.raw`(a+a',b+b')`),
+        " に ",
+        ref("claim_quadratic_representation_unique"),
+        " を適用して ",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
+        " を得る。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
