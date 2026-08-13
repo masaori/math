@@ -448,7 +448,28 @@ m_L(\sigma^{+})&=\#\bigl(D_{\mathrm{in}}(\sigma^{+})\cup D_{\mathrm{bd}}(\sigma^
         math(String.raw`D(\sigma)`),
         " 自身が分離集合である（",
         ref("def_separating_set"),
-        "）。分離集合は有限集合なので、元の個数について最小のものを取れば極小分離集合が得られ、それは ",
+        "）。",
+      ]),
+      paragraph([
+        "次に、",
+        math(String.raw`D(\sigma)`),
+        " の部分集合であって分離集合であるものの全体を考える。",
+        math(String.raw`D(\sigma)`),
+        " は有限集合なので部分集合は有限個であり、この全体は有限の族である。前段より ",
+        math(String.raw`D(\sigma)`),
+        " 自身が属するので空でない。その中で元の個数が最小のものを一つ取り ",
+        math(String.raw`F`),
+        " と置く。",
+        math(String.raw`F`),
+        " の任意の真部分集合は、元の個数が ",
+        math(String.raw`F`),
+        " より少なく、かつ ",
+        math(String.raw`D(\sigma)`),
+        " の部分集合なので、個数の最小性より分離集合でない。よって ",
+        math(String.raw`F`),
+        " は極小分離集合であり（",
+        ref("def_separating_set"),
+        " の後段）、",
         math(String.raw`D(\sigma)`),
         " の部分集合である。",
       ]),
@@ -570,7 +591,7 @@ m_L(\sigma^{+})&=\#\bigl(D_{\mathrm{in}}(\sigma^{+})\cup D_{\mathrm{bd}}(\sigma^
         " を低温側の証拠と呼ぶ。",
       ]),
       list([
-        [math(String.raw`0<q<1`), " である。"],
+        [math(String.raw`C\ge1`), " かつ ", math(String.raw`0<q<1`), " である。"],
         [
           "すべての整数 ",
           math(String.raw`L\ge1`),
@@ -639,14 +660,22 @@ m_L(\sigma^{+})&=\#\bigl(D_{\mathrm{in}}(\sigma^{+})\cup D_{\mathrm{bd}}(\sigma^
     ],
     proof: [
       paragraph([
-        "証拠の三つ目の条件 ",
+        "証拠の一つ目の条件から ",
+        math(String.raw`C\ge1`),
+        " かつ ",
+        math(String.raw`q>0`),
+        " なので ",
+        math(String.raw`Cq>0`),
+        " である。三つ目の条件 ",
         math(String.raw`3Cq\le1`),
-        " から ",
-        math(String.raw`Cq\le\tfrac13<1`),
+        " の両辺を正の数 ",
+        math(String.raw`3`),
+        " で割ると ",
+        math(String.raw`Cq\le\tfrac13`),
         " である。よって ",
         math(String.raw`r=Cq`),
         " と置くと ",
-        math(String.raw`0<r<1`),
+        math(String.raw`0<r\le\tfrac13<1`),
         " である。",
       ]),
       displayMath(
@@ -660,8 +689,10 @@ R_L(q)
 &&(\because\ r=Cq\ \text{と冪の法則})\\
 &\le\frac{r}{1-r}
 &&(\because\ \blkref{claim_finite_geometric_sum})\\
-&\le\frac{1/3}{1-1/3}
-&&(\because\ r\le\tfrac13\ \text{と右辺が}\ r\ \text{について増加})\\
+&\le\frac{1/3}{1-r}
+&&(\because\ r\le\tfrac13\ \text{と}\ 1-r>0\text{。正の分母の分数は分子を大きくすると増えるか等しい})\\
+&\le\frac{1/3}{2/3}
+&&(\because\ r\le\tfrac13\ \text{より}\ 1-r\ge\tfrac23>0\text{。正の分子の分数は分母を小さくすると増えるか等しい})\\
 &=\frac12
 &&(\because\ \text{有理数の計算})
 \end{aligned}`,
