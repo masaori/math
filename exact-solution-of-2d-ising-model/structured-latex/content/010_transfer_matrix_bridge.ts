@@ -2024,7 +2024,8 @@ BB
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(P^{(\pm)}\left(V^{(\pm)}\right)^{n}\right)
-&= \mathrm{tr}\!\left(P^{(\pm)}B\left(V_2V_1^{(\pm)}\right)^{n-1}V_2B\right) \\
+&= \mathrm{tr}\!\left(P^{(\pm)}B\left(V_2V_1^{(\pm)}\right)^{n-1}V_2B\right)
+   \quad (\because \text{直前の鎖で得た }\left(V^{(\pm)}\right)^{n}\text{ の表示を代入}) \\
 &= \mathrm{tr}\!\left(B\,P^{(\pm)}B\left(V_2V_1^{(\pm)}\right)^{n-1}V_2\right)
    \quad (\because \text{巡回性で右端の } B \text{ を左へ}) \\
 &= \mathrm{tr}\!\left(P^{(\pm)}BB\left(V_2V_1^{(\pm)}\right)^{n-1}V_2\right)
