@@ -30447,6 +30447,11 @@ r\cdot r
     labels: ["claim_quadratic_trichotomy_at_least_one"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-trichotomy-at-least-one"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticTrichotomyAtLeastOne",
+      "Ising2DLambda.NecSuf.FisherZero.quadratic_trichotomy_at_least_one_necSuf",
+      "Ising2DLambda.FisherZero.quadraticTrichotomyAtLeastOne_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
