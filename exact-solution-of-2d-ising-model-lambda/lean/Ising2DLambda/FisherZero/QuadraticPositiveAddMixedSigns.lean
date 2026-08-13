@@ -73,9 +73,12 @@ theorem quadraticPositive_add_mixedSigns_coefficients
         · exact hApos
       let U := u - b'
       have hU : 0 < U := by simpa [U] using sub_pos.mpr hbpU
+      -- 本文の三段: a·U = a·u − a·b' < a·u − c·u = u·A
       have hRatio : a * U < u * A := by
-        dsimp [U, A, c] at hCross ⊢
-        nlinarith
+        calc
+          a * U = a * u - a * b' := by dsimp [U]; ring
+          _ < a * u - c * u := sub_lt_sub_left hCross (a * u)
+          _ = u * A := by dsimp [A, c]; ring
       have haU : 0 < a * U := mul_pos ha hU
       have huA : 0 < u * A := mul_pos hu hApos
       have hRatioSquare :
@@ -123,9 +126,12 @@ theorem quadraticPositive_add_mixedSigns_coefficients
     let C := c - a
     have hC : 0 < C := by simpa [C] using sub_pos.mpr haC
     have huB : 0 < B := hBpos
+    -- 本文の三段: b'·C = c·b' − a·b' < c·b' − c·u = c·B
     have hRatio : b' * C < c * B := by
-      dsimp [C, B, u] at hCross ⊢
-      nlinarith
+      calc
+        b' * C = c * b' - a * b' := by dsimp [C]; ring
+        _ < c * b' - c * u := sub_lt_sub_left hCross (c * b')
+        _ = c * B := by dsimp [B, u]; ring
     have hb'C : 0 < b' * C := mul_pos hb' hC
     have hcB : 0 < c * B := mul_pos hc huB
     have hRatioSquare :

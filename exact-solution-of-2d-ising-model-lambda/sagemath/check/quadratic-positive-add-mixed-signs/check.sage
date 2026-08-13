@@ -38,6 +38,10 @@ for a in positive:
                     assert A > 0
                     U = u - bp
                     assert U > 0
+                    # 比の比較 a·U < u·A を本文の三段に合わせて検査する。
+                    assert a * U == a * u - a * bp
+                    assert a * u - a * bp < a * u - c * u
+                    assert a * u - c * u == u * A
                     assert a * U < u * A
                     assert (a * U) * (a * U) < (u * A) * (u * A)
                     assert (u * u) * (2 * U * U) < (u * u) * (A * A)
@@ -48,6 +52,10 @@ for a in positive:
                     assert B > 0
                     C = c - a
                     assert C > 0
+                    # 比の比較 b'·C < c·B を本文の三段に合わせて検査する。
+                    assert bp * C == c * bp - a * bp
+                    assert c * bp - a * bp < c * bp - c * u
+                    assert c * bp - c * u == c * B
                     assert bp * C < c * B
                     assert (bp * C) * (bp * C) < (c * B) * (c * B)
                     assert (bp * bp) * (C * C) < (bp * bp) * (2 * B * B)
