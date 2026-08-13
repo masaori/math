@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-13 時点）
 
+2026-08-13 の tick 196 は、セクション「二次体の正錐と三分律」を論法の数で二つ
+（二次体の正錐の定義・二次体の三分律）へ割り、先頭の「二次体の正錐の定義」を記述と
+SageMath まで進めた。台集合 $Q_s:=\{a+b\cdot s\mid a,b\in\mathbb{Q}\}$
+（`def_quadratic_field_set`）、表示の写像 $\mathrm{rep}_s:Q_s\to\mathbb{Q}\times\mathbb{Q}$
+（`def_quadratic_representation_map`。well-defined 性は
+`claim_quadratic_representation_unique` から）、正錐 $P_s$
+（`def_quadratic_positive_cone`。表示 $(a,b)$ の有理数の不等式三条件:
+$0\le a,0\le b,(a,b)\ne(0,0)$／$0<a,b<0,2b^2<a^2$／$a<0,0<b,a^2<2b^2$）を定義し、
+$\mathrm{rep}_s(s)=(0,1)$ が第一条件を満たすことでこの正錐が「$s$ を正と宣言する」選択で
+あること、根の取り替え $s\mapsto-s$ で同じ構造が対で得られることを remark
+（`remark_positive_cone_sign_choice`）に書いた。SageMath
+（`sagemath/check/quadratic-positive-cone/`）は三条件と実代数的数 `AA` の厳密順序の一致
+361 組・取り替えの恒等式 722 組・表示の一意性の対偶 1200 組を検査して通過した。
+**Lean は未着手**で、次 tick はこの定義の Lean 形式化を書くか、続けて「二次体の三分律」を
+進める。レビューでは前 tick の「二次体の表示の一意性」の Lean 三本と姉妹側の境界項の
+根拠補いを突き合わせ、修正不要と確認した。式変形統一では姉妹側「$V$ は正定値、とくに
+$\mathrm{tr}(V)>0$」を整えた。次 tick の式変形統一は同ファイルの次の根拠なしの鎖から続ける。
+
 2026-08-13 の tick 195 は、「二次体の表示の一意性」の Lean 具体版・必要十分版・導出を
 完成させ、四層すべてを満たした。具体版は本文の十四段の等式列、一次独立性の適用、二本の
 六段の等式列を同じ順に実装した。必要十分版は係数側と値側の加法可換群、加法を保つ係数写像、

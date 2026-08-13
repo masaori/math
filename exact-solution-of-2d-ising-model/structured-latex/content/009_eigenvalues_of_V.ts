@@ -2329,22 +2329,33 @@ S_1^{(\pm)}
       displayMath(String.raw`\mathrm{tr}(V) \in \mathbb{R}_{>0}, \qquad \mathrm{tr}(V^{-1}) \in \mathbb{R}_{>0}`),
     ],
     proof: [
+      paragraph(["Step 1（表示）。"]),
+      displayMath(String.raw`\begin{aligned}
+V
+&= (V_1^{(\pm)})^{1/2}\,V_2\,(V_1^{(\pm)})^{1/2}
+   \quad (\because V \text{ の定義}) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)V_2\,\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because (V_1^{(\pm)})^{1/2} \text{ の規約}) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)(2\sinh 2K_2)^{M/2}
+   \exp\!\left(K_2^*\textstyle\sum_{m}\sigma_m^x\right)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because V_2 \text{ の記号の定義}) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)(2s_2)^{M/2}\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{実対称性の Step 1: 指数の中身は } S_2\text{。}s_2 := \sinh 2K_2) \\
+&= (2s_2)^{M/2}\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{スカラー行列は全行列と可換})
+\end{aligned}`),
       paragraph([
-        "Step 1（表示）。",
+        "これが statement の表示である（",
+        math(String.raw`V_2`),
+        " の記号の定義は ",
         ref("def_transfer_matrix_symbols"),
-        " より ",
-        math(String.raw`V_2 = (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\sum_{m}\sigma_m^x\right)`),
-        " であり、",
-        ref("iH_is_real_symmetric"),
-        " の Step 1 より指数の中身は ",
+        "、指数の中身が ",
         math(String.raw`S_2`),
-        " に等しい。よって ",
-        math(String.raw`V_2 = (2s_2)^{M/2}\exp(S_2)`),
-        " であり、",
-        math(String.raw`(2s_2)^{M/2}`),
-        " はスカラーなので ",
+        " に等しいことは ",
+        ref("iH_is_real_symmetric"),
+        " の Step 1、スカラーを前へ出す操作は ",
         ref("scalar_identity_commutes"),
-        " により前へ出せて statement の表示を得る。",
+        "）。",
       ]),
       paragraph([
         "Step 2（各因子の性質）。",
@@ -2361,14 +2372,14 @@ S_1^{(\pm)}
         [math(String.raw`B := \exp\!\left(\tfrac12 S_1^{(\pm)}\right)`), " はエルミートかつ正定値、とくに可逆"],
         [math(String.raw`A := \exp(S_2)`), " は正定値"],
       ]),
-      paragraph([
-        "Step 3（正定値性）。",
-        math(String.raw`B`),
-        " がエルミートなので ",
-        math(String.raw`B^* = B`),
-        " であり、",
-      ]),
-      displayMath(String.raw`\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right) = B A B = B^* A B`),
+      paragraph(["Step 3（正定値性）。"]),
+      displayMath(String.raw`\begin{aligned}
+\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+&= B A B
+   \quad (\because A,\ B \text{ の定義}) \\
+&= B^* A B
+   \quad (\because B \text{ はエルミート: } B^* = B)
+\end{aligned}`),
       paragraph([
         ref("exp_hermitian_is_positive_definite"),
         " (2) より ",
@@ -2387,25 +2398,56 @@ S_1^{(\pm)}
         "Step 4（可逆性と ",
         math(String.raw`V^{-1}`),
         "）。",
-        math(String.raw`\exp(\pm\tfrac12 S_1^{(\pm)})`),
-        " と ",
-        math(String.raw`\exp(\pm S_2)`),
-        " は互いに逆行列（",
+        math(String.raw`W := (2s_2)^{-M/2}\,\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)
+\exp\!\left(-S_2\right)\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)`),
+        " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+W\,V
+&= (2s_2)^{-M/2}\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   (2s_2)^{M/2}\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because W \text{ の定義と Step 1 の表示}) \\
+&= (2s_2)^{-M/2}(2s_2)^{M/2}\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)
+   \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{スカラー行列は全行列と可換}) \\
+&= \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)
+   \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because (2s_2)^{-M/2}(2s_2)^{M/2} = 1) \\
+&= \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)
+   \exp\!\left(-\tfrac12 S_1^{(\pm)} + \tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{可換行列の exp 積公式。} -\tfrac12 S_1^{(\pm)} \text{ と } \tfrac12 S_1^{(\pm)} \text{ は可換}) \\
+&= \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \exp(O) = I) \\
+&= \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2 + S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{可換行列の exp 積公式。} -S_2 \text{ と } S_2 \text{ は可換}) \\
+&= \exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \exp(O) = I) \\
+&= \exp\!\left(-\tfrac12 S_1^{(\pm)} + \tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{可換行列の exp 積公式。} -\tfrac12 S_1^{(\pm)} \text{ と } \tfrac12 S_1^{(\pm)} \text{ は可換}) \\
+&= I
+   \quad (\because \exp(O) = I)
+\end{aligned}`),
+      paragraph([
+        "（スカラーを前へ出す操作は ",
+        ref("scalar_identity_commutes"),
+        "、可換行列の exp 積公式は ",
         ref("theorem_exp_product"),
         "、",
+        math(String.raw`\exp(O) = I`),
+        " は ",
         ref("theorem_exp_zero"),
-        "）なので、",
+        "。）同じ形の鎖で ",
+        math(String.raw`V\,W = I`),
+        " も得られるから ",
+        math(String.raw`V`),
+        " は可逆で、",
       ]),
       displayMath(
-        String.raw`V^{-1} = (2s_2)^{-M/2}\,\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)
+        String.raw`V^{-1} = W = (2s_2)^{-M/2}\,\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)
 \exp\!\left(-S_2\right)\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)`,
       ),
       paragraph([
-        "実際、右辺と ",
-        math(String.raw`V`),
-        " の積は内側から順に打ち消し合って ",
-        math(String.raw`I`),
-        " になる。",
+        "である。",
         math(String.raw`-\tfrac12 S_1^{(\pm)}`),
         " と ",
         math(String.raw`-S_2`),
