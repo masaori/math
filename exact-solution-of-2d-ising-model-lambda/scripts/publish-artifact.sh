@@ -37,8 +37,32 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then exit 0; fi
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 commit="$(git -C "$REPO_DIR" rev-parse --short HEAD)"
-subject="$(git -C "$REPO_DIR" log -1 --format='%s')"
 agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
+
+# その tick が何をしたか。コミットの件名は短すぎて中身が分からないので、台帳の
+# 「現在地」の先頭（＝直近の tick の記録）を本文にする。
+summary="$(python3 - "$PROJECT_DIR/docs/tasks/auto-loop-state.md" <<'PYEOF'
+import re, sys
+
+text = open(sys.argv[1], encoding="utf-8").read()
+section = re.search(r"^## 現在地\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+if section is None:
+    raise SystemExit(0)
+
+# 先頭の箇条書き 1 件だけを取り出し、行の折り返しを畳む。
+lines, body = section.group(1).strip().split("\n"), []
+for line in lines:
+    if line.startswith("- ") and body:
+        break
+    if line.startswith("- "):
+        body.append(line[2:].strip())
+    elif line.strip():
+        body.append(line.strip())
+text = " ".join(body).replace("**", "")
+print(text if len(text) <= 1200 else text[:1200] + "…")
+PYEOF
+)"
+[ -z "$summary" ] && summary="$(git -C "$REPO_DIR" log -1 --format='%s')"
 
 if ! (cd "$PROJECT_DIR/structured-latex" && npm run --silent build:html >> "$LOG_FILE" 2>&1); then
   log "NG: 論文 HTML の生成に失敗した（版 ${commit}）"
@@ -73,7 +97,7 @@ log "OK: 公開した（版 ${commit}）→ $url"
 NOTIFIED="$LOG_DIR/last-notified-commit"
 if [ "$(cat "$NOTIFIED" 2>/dev/null || true)" != "$commit" ]; then
   message="2次元 Ising 模型（Λ の立場）の自動ループが前進した（版 ${commit}・直近の tick: ${agent}）。
-${subject}
+${summary}
 ${url}"
   if curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
       -H "Content-Type: application/json" \
