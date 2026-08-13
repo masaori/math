@@ -1443,17 +1443,38 @@ V' y
         math(String.raw`X`),
         " と ",
         math(String.raw`-X`),
-        " は可換なので ",
+        " は可換なので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(X)\exp(-X)
+&= \exp\bigl(X+(-X)\bigr)
+   \quad (\because \text{指数行列の積の定理}) \\
+&= \exp(0)
+   \quad (\because \text{加法の逆元}) \\
+&= I
+   \quad (\because \exp(0)=I)
+\end{aligned}`,
+      ),
+      paragraph([
         ref("theorem_exp_product"),
-        " より ",
-        math(String.raw`\exp(X)\exp(-X) = \exp(X + (-X)) = \exp(0)`),
-        " であり、",
+        "、",
         ref("theorem_exp_zero"),
-        " より ",
-        math(String.raw`\exp(0) = I`),
-        "。同様に ",
-        math(String.raw`\exp(-X)\exp(X) = I`),
-        " だから ",
+        "。同様に",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-X)\exp(X)
+&= \exp\bigl((-X)+X\bigr)
+   \quad (\because \text{指数行列の積の定理}) \\
+&= \exp(0)
+   \quad (\because \text{加法の逆元}) \\
+&= I
+   \quad (\because \exp(0)=I)
+\end{aligned}`,
+      ),
+      paragraph([
+        "だから ",
         math(String.raw`V' = \exp(X)`),
         " は可逆で ",
         math(String.raw`V'^{-1} = \exp(-X)`),
@@ -1488,7 +1509,8 @@ V' y
       ]),
       displayMath(
         String.raw`e^{g(\epsilon)} = \prod_{\mu \in \mathcal{I}}
-\exp\!\left(\gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right)`,
+\exp\!\left(\gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right)
+\quad (\because \text{実数の指数法則})`,
       ),
       paragraph([
         math(String.raw`\epsilon`),
@@ -1522,10 +1544,15 @@ V' y
         " として適用でき",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}(V'^{-1})
-= 2^{M-m}\prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{-\gamma(\theta_\mu)}{2}\right)
-= 2^{M-m}\prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{\gamma(\theta_\mu)}{2}\right)
-= \mathrm{tr}(V')`,
+        String.raw`\begin{aligned}
+\mathrm{tr}(V'^{-1})
+&= 2^{M-m}\prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{-\gamma(\theta_\mu)}{2}\right)
+   \quad (\because \text{Steps 1--3 を }-X\text{ へ適用}) \\
+&= 2^{M-m}\prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{\gamma(\theta_\mu)}{2}\right)
+   \quad (\because \cosh\text{ は偶関数}) \\
+&= \mathrm{tr}(V')
+   \quad (\because \text{Steps 2--3 の }\mathrm{tr}(V')\text{ の計算})
+\end{aligned}`,
       ),
       paragraph([
         "最後から 2 番目の等号は ",
@@ -1543,13 +1570,23 @@ V' y
         ref("cosh_sinh_basic_properties"),
         " より ",
         math(String.raw`\cosh x \geq 1`),
-        "。よって各因子は ",
-        math(String.raw`2\cosh(\gamma(\theta_\mu)/2) \geq 2 > 0`),
-        " であり、",
-        math(String.raw`2^{M-m} > 0`),
-        " と合わせて ",
-        math(String.raw`\mathrm{tr}(V') > 0`),
-        "。",
+        "。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\cosh\!\left(\frac{\gamma(\theta_\mu)}{2}\right)
+&\geq 2
+   \quad (\because \cosh x\geq1) \\
+&>0
+   \quad (\because 2>0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。さらに ",
+        math(String.raw`2^{M-m}>0`),
+        " なので、正の因子の有限積である Step 2--3 の表示から ",
+        math(String.raw`\mathrm{tr}(V')>0`),
+        " を得る。",
       ]),
     ],
     conversion: { status: "added" },

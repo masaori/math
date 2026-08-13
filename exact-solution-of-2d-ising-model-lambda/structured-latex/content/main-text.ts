@@ -28895,6 +28895,11 @@ s\cdot s
     labels: ["claim_self_dual_quadratic_roots"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-quadratic-roots"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualQuadratic_roots",
+      "Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_necSuf",
+      "Ising2DLambda.FisherZero.selfDualQuadratic_roots_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -29100,6 +29105,11 @@ s\cdot s
     labels: ["claim_self_dual_quadratic_roots_distinct"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-quadratic-roots-distinct"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct",
+      "Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_distinct_necSuf",
+      "Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
