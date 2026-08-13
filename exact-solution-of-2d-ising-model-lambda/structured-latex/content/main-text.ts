@@ -28596,6 +28596,11 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
     labels: ["claim_kw_self_dual_quadratic_equivalence"],
     habitat: "Qbar",
     verification: ["sagemath/check/kw-self-dual-quadratic-equivalence"],
+    lean: [
+      "Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence",
+      "Ising2DLambda.NecSuf.FisherZero.kw_self_dual_quadratic_equivalence_necSuf",
+      "Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`\xi\in\overline{\mathbb{Q}}`),

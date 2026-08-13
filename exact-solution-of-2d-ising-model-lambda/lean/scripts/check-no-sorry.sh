@@ -832,6 +832,9 @@ targets=(
   Ising2DLambda.FisherZero.kwDualTransform_involution
   Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_involution_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_involution_from_necSuf
+  Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence
+  Ising2DLambda.NecSuf.FisherZero.kw_self_dual_quadratic_equivalence_necSuf
+  Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

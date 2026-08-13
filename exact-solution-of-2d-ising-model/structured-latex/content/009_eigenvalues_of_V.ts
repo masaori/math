@@ -739,10 +739,17 @@ n_\mu n_\nu
       paragraph([
         "基底段階（",
         math(String.raw`k = 0`),
-        "）：",
-        math(String.raw`\mathrm{tr}(I) = 2^M = 2^{M-0}`),
-        " で成立。",
+        "）。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}(I)
+&= 2^M
+   \quad (\because \text{トレースの基本性質 (3)}) \\
+&= 2^{M-0}
+   \quad (\because M-0=M)
+\end{aligned}`,
+      ),
       paragraph([
         "帰納段階：",
         math(String.raw`k \geq 1`),
@@ -752,7 +759,7 @@ n_\mu n_\nu
         math(String.raw`\mu_1,\dots,\mu_k \in \mathcal{I}`),
         " を取り、",
       ]),
-      displayMath(String.raw`P := n_{\mu_2} n_{\mu_3}\cdots n_{\mu_k}`),
+      displayMath(String.raw`P := R_{\mu_2}^{(e_2)} R_{\mu_3}^{(e_3)}\cdots R_{\mu_k}^{(e_k)}`),
       paragraph([
         "とおく。",
         math(String.raw`\mu_1 \neq \mu_j`),
@@ -766,7 +773,11 @@ n_\mu n_\nu
         math(String.raw`\psi_{-\mu_1}`),
         " はどの ",
         math(String.raw`n_{\mu_j}`),
-        " とも可換であり、したがって積 ",
+        " とも可換である。ゆえに単位行列とも可換であることと分配法則から ",
+        math(String.raw`I-n_{\mu_j}`),
+        " とも可換であり、したがって各 ",
+        math(String.raw`R_{\mu_j}^{(e_j)}`),
+        " および積 ",
         math(String.raw`P`),
         " とも可換である。同じく ",
         ref("number_operators_commute"),
@@ -794,20 +805,51 @@ n_\mu n_\nu
 \end{aligned}`,
       ),
       paragraph([
-        "移項して ",
-        math(String.raw`2\,\mathrm{tr}(n_{\mu_1}P) = \mathrm{tr}(P)`),
-        "。帰納法の仮定から ",
-        math(String.raw`\mathrm{tr}(P) = 2^{M-(k-1)}`),
-        " なので",
+        "したがって",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(n_{\mu_1}\cdots n_{\mu_k}\right)
-= \frac{1}{2}\,\mathrm{tr}(P) = \frac{1}{2}\cdot 2^{M-k+1} = 2^{M-k}`,
+        String.raw`\begin{aligned}
+2\,\mathrm{tr}(n_{\mu_1}P)
+&= \mathrm{tr}(P)
+   \quad (\because \text{直前の等式を移項}) \\
+\mathrm{tr}(n_{\mu_1}P)
+&= \frac{1}{2}\,\mathrm{tr}(P)
+   \quad (\because \text{両辺を }2\text{ で割る}) \\
+&= \frac{1}{2}\cdot 2^{M-(k-1)}
+   \quad (\because \text{帰納法の仮定}) \\
+&= 2^{M-k}
+   \quad (\because M-(k-1)=M-k+1)
+\end{aligned}`,
       ),
       paragraph([
-        "（トレースが積の順序に依らないこと ",
-        ref("number_operators_commute"),
-        " (2) より、添字の並べ替えで値は変わらないので、一般の相異なる添字列についても同じ結論を得る。）",
+        "まず ",
+        math(String.raw`e_1=1`),
+        " の場合は ",
+        math(String.raw`R_{\mu_1}^{(1)}=n_{\mu_1}`),
+        " なので、上の計算から直ちに結論を得る。次に ",
+        math(String.raw`e_1=0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(R_{\mu_1}^{(0)}P\right)
+&= \mathrm{tr}\!\left((I-n_{\mu_1})P\right)
+   \quad (\because R_{\mu_1}^{(0)}=I-n_{\mu_1}) \\
+&= \mathrm{tr}(P)-\mathrm{tr}(n_{\mu_1}P)
+   \quad (\because \text{分配法則とトレースの線型性}) \\
+&= \mathrm{tr}(P)-\frac{1}{2}\,\mathrm{tr}(P)
+   \quad (\because \text{上の計算}) \\
+&= \frac{1}{2}\,\mathrm{tr}(P)
+   \quad (\because \text{複素数の四則演算}) \\
+&= 2^{M-k}
+   \quad (\because \text{帰納法の仮定と上の冪の計算})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`e_1\in\{0,1\}`),
+        " なので二つの場合は尽くされ、帰納段階が示された。したがって任意の ",
+        math(String.raw`e_1,\dots,e_k\in\{0,1\}`),
+        " について主張が成り立つ。",
       ]),
     ],
     conversion: {
