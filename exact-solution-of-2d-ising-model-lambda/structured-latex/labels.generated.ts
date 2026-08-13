@@ -141,6 +141,8 @@ export const ALL_LABELS = [
   "claim_qbar_unit_sum_ne_zero",
   "claim_quadratic_addition_mem",
   "claim_quadratic_addition_representation",
+  "claim_quadratic_multiplication_mem",
+  "claim_quadratic_multiplication_representation",
   "claim_quadratic_negation_mem",
   "claim_quadratic_negation_representation",
   "claim_quadratic_representation_unique",

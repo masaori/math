@@ -4,6 +4,25 @@
 
 ## 現在の到達点（2026-08-13 時点）
 
+2026-08-13 の tick 208 は、todo 先頭の「二次体の積の表示」
+（`claim_quadratic_multiplication_mem`・`claim_quadratic_multiplication_representation`。
+$\xi,\eta\in Q_s$ について $\xi\cdot\eta\in Q_s$ と
+$\mathrm{rep}_s(\xi\cdot\eta)=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')$）を記述と
+SageMath まで進めた。証明は三つの補助等式（$a\cdot(b'\cdot s)=(a\cdot b')\cdot s$ が 1 段、
+$(b\cdot s)\cdot a'=(b\cdot a')\cdot s$ が 3 段、
+$(b\cdot s)\cdot(b'\cdot s)=2\cdot(b\cdot b')$ が $s\cdot s=2$ を使う 7 段）を準備に置き、
+十四段の鎖で $\xi\cdot\eta=(a\cdot a'+2\cdot(b\cdot b'))+(a\cdot b'+b\cdot a')\cdot s$ を
+立てる。閉性は証人 $(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')$、表示は一意性
+（`claim_quadratic_representation_unique`）の適用で得る。SageMath
+（`sagemath/check/quadratic-multiplication/`）は $t^2-2$ の両根 × 有理数四つ組（7 値）で
+両立 49 組・補助等式と鎖と表示 4802 組を厳密検査して通過した。**Lean は未着手**で、次 tick は
+この二主張の Lean（具体版・必要十分版・導出）を完成させる。レビューでは前 tick の
+「二次体の和の表示」の Lean 三本と姉妹側「分配関数の偶奇セクター分解」の式変形統一を
+突き合わせ、数学内容の修正は不要と確認した。台帳の整理では、前 tick が tick 202 の三記録を
+保管庫へ移さず削除していたのを git の履歴から復元し、「これより古い N 件」を保管庫の実数に
+合わせた。この tick は式変形統一を行っていない（レビューと台帳復元を優先した）。次の統一は
+姉妹側 `010_transfer_matrix_bridge` の次の根拠なしの鎖から続ける。
+
 2026-08-13 の tick 207 は、「二次体の和の表示」の Lean 具体版・必要十分版・導出を
 完成させ、四層すべてを満たした。具体版は本文の七段の等式列で和の表示を作り、
 必要十分版は表示等式と表示の一意性だけを要求する。レビューでは前 tick の本文・

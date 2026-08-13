@@ -31279,6 +31279,213 @@ r\cdot r
   },
 
   {
+    id: "fisher_zero_claim_quadratic_multiplication_mem",
+    kind: "claim",
+    title: { text: "二次体の台集合の乗法による閉性" },
+    labels: ["claim_quadratic_multiplication_mem"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-multiplication"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "）。任意の ",
+        math(String.raw`\xi\in Q_s`),
+        "、",
+        math(String.raw`\eta\in Q_s`),
+        "（",
+        ref("def_quadratic_field_set"),
+        "）と ",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        "、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        "（",
+        ref("def_quadratic_representation_map"),
+        "）について、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の積 ",
+        math(String.raw`\xi\cdot\eta`),
+        " は ",
+        math(String.raw`Q_s`),
+        " に属する（",
+        math(String.raw`a\cdot a'+2\cdot(b\cdot b')`),
+        "、",
+        math(String.raw`a\cdot b'+b\cdot a'`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の和と積）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`a\cdot a'+2\cdot(b\cdot b')`),
+        "、",
+        math(String.raw`a\cdot b'+b\cdot a'`),
+        " の ",
+        math(String.raw`\mathbb{Q}`),
+        " での和と積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " での和と積と同じ元である。まず、あとで使う三つの補助等式を立てる。第一に",
+      ]),
+      displayMath(String.raw`a\cdot(b'\cdot s)=(a\cdot b')\cdot s
+\qquad\bigl(\because\ \text{乗法の結合則}\bigr)`),
+      paragraph(["第二に"]),
+      displayMath(String.raw`\begin{aligned}
+(b\cdot s)\cdot a'
+&=b\cdot(s\cdot a')
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=b\cdot(a'\cdot s)
+&&\bigl(\because\ \text{乗法の可換則}\bigr)\\
+&=(b\cdot a')\cdot s
+&&\bigl(\because\ \text{乗法の結合則}\bigr)
+\end{aligned}`),
+      paragraph(["第三に"]),
+      displayMath(String.raw`\begin{aligned}
+(b\cdot s)\cdot(b'\cdot s)
+&=\bigl((b\cdot s)\cdot b'\bigr)\cdot s
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=\bigl(b\cdot(s\cdot b')\bigr)\cdot s
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=\bigl(b\cdot(b'\cdot s)\bigr)\cdot s
+&&\bigl(\because\ \text{乗法の可換則}\bigr)\\
+&=\bigl((b\cdot b')\cdot s\bigr)\cdot s
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=(b\cdot b')\cdot(s\cdot s)
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=(b\cdot b')\cdot 2
+&&\bigl(\because\ s\cdot s=2\text{（仮定}\ \blkref{claim_sqrt_two_exists}\text{）}\bigr)\\
+&=2\cdot(b\cdot b')
+&&\bigl(\because\ \text{乗法の可換則}\bigr)
+\end{aligned}`),
+      paragraph(["次の鎖を得る。"]),
+      displayMath(String.raw`\begin{aligned}
+\xi\cdot\eta
+&=\bigl(a+b\cdot s\bigr)\cdot\bigl(a'+b'\cdot s\bigr)
+&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\text{ を両方の項へ同時適用}\bigr)\\
+&=a\cdot\bigl(a'+b'\cdot s\bigr)+(b\cdot s)\cdot\bigl(a'+b'\cdot s\bigr)
+&&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)\\
+&=\bigl(a\cdot a'+a\cdot(b'\cdot s)\bigr)+(b\cdot s)\cdot\bigl(a'+b'\cdot s\bigr)
+&&\bigl(\because\ \text{分配則}\ u\cdot(v+w)=u\cdot v+u\cdot w\bigr)\\
+&=\bigl(a\cdot a'+a\cdot(b'\cdot s)\bigr)+\bigl((b\cdot s)\cdot a'+(b\cdot s)\cdot(b'\cdot s)\bigr)
+&&\bigl(\because\ \text{分配則}\ u\cdot(v+w)=u\cdot v+u\cdot w\bigr)\\
+&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot s)\cdot a'+(b\cdot s)\cdot(b'\cdot s)\bigr)
+&&\bigl(\because\ \text{第一の補助等式}\bigr)\\
+&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot a')\cdot s+(b\cdot s)\cdot(b'\cdot s)\bigr)
+&&\bigl(\because\ \text{第二の補助等式}\bigr)\\
+&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot a')\cdot s+2\cdot(b\cdot b')\bigr)
+&&\bigl(\because\ \text{第三の補助等式}\bigr)\\
+&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl(2\cdot(b\cdot b')+(b\cdot a')\cdot s\bigr)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=a\cdot a'+\Bigl((a\cdot b')\cdot s+\bigl(2\cdot(b\cdot b')+(b\cdot a')\cdot s\bigr)\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a\cdot a'+\Bigl(\bigl((a\cdot b')\cdot s+2\cdot(b\cdot b')\bigr)+(b\cdot a')\cdot s\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a\cdot a'+\Bigl(\bigl(2\cdot(b\cdot b')+(a\cdot b')\cdot s\bigr)+(b\cdot a')\cdot s\Bigr)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=a\cdot a'+\Bigl(2\cdot(b\cdot b')+\bigl((a\cdot b')\cdot s+(b\cdot a')\cdot s\bigr)\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl((a\cdot b')\cdot s+(b\cdot a')\cdot s\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
+&&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a\cdot a'+2\cdot(b\cdot b')\in\mathbb{Q}`),
+        "、",
+        math(String.raw`a\cdot b'+b\cdot a'\in\mathbb{Q}`),
+        " なので、組 ",
+        math(String.raw`\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
+        " が ",
+        ref("def_quadratic_field_set"),
+        " の存在条件の証人になり、",
+        math(String.raw`\xi\cdot\eta\in Q_s`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_quadratic_multiplication_representation",
+    kind: "claim",
+    title: { text: "二次体の積の表示" },
+    labels: ["claim_quadratic_multiplication_representation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-multiplication"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "）。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`),
+        " と ",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        "、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " について、",
+        ref("claim_quadratic_multiplication_mem"),
+        " により ",
+        math(String.raw`\xi\cdot\eta\in Q_s`),
+        " であり、",
+        math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
+        " である。後のセクションの「正錐と乗法の両立」で、積の正値の条件を表示の組の有理数の不等式として扱うための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\in\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " でも同じ和と積である。",
+        ref("claim_quadratic_multiplication_mem"),
+        " の証明の鎖により",
+      ]),
+      displayMath(String.raw`\xi\cdot\eta=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
+\qquad\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\text{ の証明の鎖の始点と終点}\bigr)`),
+      paragraph([
+        math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)`),
+        " は ",
+        math(String.raw`\xi\cdot\eta`),
+        " を表す唯一の組である（",
+        ref("def_quadratic_representation_map"),
+        "）。上の表示 ",
+        math(String.raw`\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
+        " に ",
+        ref("claim_quadratic_representation_unique"),
+        " を適用して ",
+        math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
+        " を得る。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
