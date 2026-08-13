@@ -915,6 +915,9 @@ targets=(
   Ising2DLambda.FisherZero.quadraticPositiveCone_add_mem
   Ising2DLambda.NecSuf.FisherZero.positive_cone_add_closed_necSuf
   Ising2DLambda.FisherZero.quadraticPositiveCone_add_mem_from_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegativeCoefficients
+  Ising2DLambda.NecSuf.FisherZero.positive_mul_nonnegative_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegativeCoefficients_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

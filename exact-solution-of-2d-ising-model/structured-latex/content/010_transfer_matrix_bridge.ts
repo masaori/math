@@ -2046,12 +2046,27 @@ BB
 \quad (\because \text{Step 1--3})`,
       ),
       paragraph([
-        "statement の 4 項の形は ",
-        math(String.raw`P^{(\pm)} = \tfrac12(I\pm\varepsilon)`),
-        " を代入して ",
+        "さらに ",
+        ref("def_epsilon_projectors"),
+        " の射影子の定義と ",
         ref("trace_basic_properties"),
-        " (1) の線型性で展開したものである。",
+        " (1) の線型性により、次の鎖で statement の 4 項の形を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z(J,J')
+&= \mathrm{tr}\!\left(\tfrac12(I+\varepsilon)\left(V^{(+)}\right)^{N_{\mathrm{row}}}\right)
+ + \mathrm{tr}\!\left(\tfrac12(I-\varepsilon)\left(V^{(-)}\right)^{N_{\mathrm{row}}}\right)
+   \quad (\because P^{(\pm)}=\tfrac12(I\pm\varepsilon)) \\
+&= \tfrac12\Bigl(
+  \mathrm{tr}\bigl((V^{(+)})^{N_{\mathrm{row}}}\bigr)
+ + \mathrm{tr}\bigl(\varepsilon\,(V^{(+)})^{N_{\mathrm{row}}}\bigr)
+ + \mathrm{tr}\bigl((V^{(-)})^{N_{\mathrm{row}}}\bigr)
+ - \mathrm{tr}\bigl(\varepsilon\,(V^{(-)})^{N_{\mathrm{row}}}\bigr)
+\Bigr)
+   \quad (\because \text{トレースの線型性})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",

@@ -152,6 +152,7 @@ export const ALL_LABELS = [
   "claim_quadratic_positive_add_nonnegative_negative_first",
   "claim_quadratic_positive_add_nonnegative_negative_second",
   "claim_quadratic_positive_cone_add_closed",
+  "claim_quadratic_positive_mul_nonnegative",
   "claim_quadratic_representation_unique",
   "claim_quadratic_trichotomy_at_least_one",
   "claim_quadratic_trichotomy_at_most_one",
