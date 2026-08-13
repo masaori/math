@@ -389,6 +389,16 @@ m_L(\sigma^{+})&=\#\bigl(D_{\mathrm{in}}(\sigma^{+})\cup D_{\mathrm{bd}}(\sigma^
         math(String.raw`F`),
         " を分離集合と呼ぶ。",
       ]),
+    ],
+  },
+
+  {
+    id: "separating_set_definition_minimal_separating_set",
+    kind: "definition",
+    title: { text: "極小分離集合" },
+    labels: ["def_minimal_separating_set"],
+    habitat: "N",
+    statement: [
       paragraph([
         "分離集合 ",
         math(String.raw`F`),
@@ -468,8 +478,8 @@ m_L(\sigma^{+})&=\#\bigl(D_{\mathrm{in}}(\sigma^{+})\cup D_{\mathrm{bd}}(\sigma^
         " の部分集合なので、個数の最小性より分離集合でない。よって ",
         math(String.raw`F`),
         " は極小分離集合であり（",
-        ref("def_separating_set"),
-        " の後段）、",
+        ref("def_minimal_separating_set"),
+        "）、",
         math(String.raw`D(\sigma)`),
         " の部分集合である。",
       ]),
@@ -840,8 +850,8 @@ m_L(\sigma^{+})&=\#\bigl(D_{\mathrm{in}}(\sigma^{+})\cup D_{\mathrm{bd}}(\sigma^
         " の真部分集合であって分離集合であることになり、",
         math(String.raw`F`),
         " が極小分離集合であること（",
-        ref("def_separating_set"),
-        " の後段）に矛盾する。よって ",
+        ref("def_minimal_separating_set"),
+        "）に矛盾する。よって ",
         math(String.raw`F=\partial W_F`),
         " である。",
       ]),

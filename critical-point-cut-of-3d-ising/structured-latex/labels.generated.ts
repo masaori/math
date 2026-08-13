@@ -25,6 +25,7 @@ export const ALL_LABELS = [
   "def_low_temperature_certificate",
   "def_low_temperature_rational_points",
   "def_minimal_separating_count",
+  "def_minimal_separating_set",
   "def_negative_origin_polynomial",
   "def_negative_origin_ratio",
   "def_partition_polynomial",
