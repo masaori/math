@@ -4,6 +4,20 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 224 は、レビューで前 tick の「非負係数条件と負の第一係数条件の積」の
+Lean 三本を本文と突き合わせ、修正不要と確認した。そのあと「負の第二係数条件どうしの積」
+（`claim_quadratic_positive_mul_negative_second_negative_second`）を記述と SageMath まで
+進めた。$u:=-b$、$u':=-b'$ を置くと積の表示は
+$(A,B)=(a\cdot a'+2\cdot(u\cdot u'),\ -(a\cdot u'+u\cdot a'))$ で、正どうしの積の和から
+$0<A$、$0<V:=a\cdot u'+u\cdot a'$ により $B<0$ を得る。$D:=a\cdot a-2\cdot(u\cdot u)>0$
+を使う中間比較 $D\cdot(2\cdot(u'\cdot u'))<D\cdot(a'\cdot a')$ を移項し、交差項
+$4\cdot((a\cdot a')\cdot(u\cdot u'))$ を両辺へ加えて $2\cdot(B\cdot B)<A\cdot A$
+（負の第二係数条件）へつないだ。場合分けは不要（先行二つの積の補題と違い、両係数の
+符号が確定する）。SageMath
+（`sagemath/check/quadratic-positive-mul-negative-second-negative-second/`）は 45369 組で
+各段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの主張の Lean
+（具体版・必要十分版・導出）を完成させる。
+
 2026-08-14 の tick 223 は、「非負係数条件と負の第一係数条件の積」
 （`claim_quadratic_positive_mul_nonnegative_negative_first`）の Lean 具体版・必要十分版・導出を
 完成させ、四層すべてを満たした。レビューでは本文と SageMath の混合符号の排除、二つの背理法、
