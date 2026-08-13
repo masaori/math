@@ -1256,11 +1256,20 @@ P^{(-)}P^{(+)}
    \quad (\because I-I=0)
 \end{aligned}`,
       ),
-      paragraph([
-        "(3) ",
-        math(String.raw`P^{(+)} + P^{(-)} = \tfrac12(I+\varepsilon) + \tfrac12(I-\varepsilon) = I`),
-        "。",
-      ]),
+      paragraph(["(3)"]),
+      displayMath(
+        String.raw`\begin{aligned}
+P^{(+)} + P^{(-)}
+&= \tfrac12\left(I+\varepsilon\right) + \tfrac12\left(I-\varepsilon\right)
+   \quad (\because P^{(+)} \text{ と } P^{(-)} \text{ の定義}) \\
+&= \tfrac12\left(I+\varepsilon+I-\varepsilon\right)
+   \quad (\because \text{スカラー倍の分配法則}) \\
+&= \tfrac12\left(2I\right)
+   \quad (\because \text{同類項をまとめる}) \\
+&= I
+   \quad (\because \text{スカラー倍を整理する})
+\end{aligned}`,
+      ),
       paragraph([
         "(4) ",
         ref("def_eigenspaces_of_epsilon"),
@@ -1276,28 +1285,51 @@ P^{(-)}P^{(+)}
         math(String.raw`(\subseteq)`),
         " ",
         math(String.raw`y \in \mathrm{im}\,P^{(\pm)}`),
-        " とすると ",
+        " とすると、ある ",
+        math(String.raw`x`),
+        " について ",
         math(String.raw`y = P^{(\pm)}x`),
-        " と書けて、(2) より ",
-        math(String.raw`P^{(\pm)}y = \left(P^{(\pm)}\right)^2x = P^{(\pm)}x = y`),
-        "。よって",
+        " と書ける。まず",
       ]),
       displayMath(
-        String.raw`\varepsilon y = \varepsilon P^{(\pm)} y
-= \varepsilon\cdot\tfrac{1}{2}\left(I \pm \varepsilon\right) y
-= \tfrac{1}{2}\left(\varepsilon \pm \varepsilon^2\right) y
-= \tfrac{1}{2}\left(\varepsilon \pm I\right) y
-= \pm\,\tfrac{1}{2}\left(I \pm \varepsilon\right) y
-= \pm\,P^{(\pm)}y = \pm y`,
+        String.raw`\begin{aligned}
+P^{(\pm)}y
+&= P^{(\pm)}P^{(\pm)}x
+   \quad (\because y = P^{(\pm)}x) \\
+&= \left(P^{(\pm)}\right)^2x
+   \quad (\because \text{積の冪の表記}) \\
+&= P^{(\pm)}x
+   \quad (\because \text{(2) の冪等性}) \\
+&= y
+   \quad (\because y = P^{(\pm)}x)
+\end{aligned}`,
+      ),
+      paragraph(["である。よって（複号同順）"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon y
+&= \varepsilon P^{(\pm)} y
+   \quad (\because \text{上の等式 } y = P^{(\pm)}y) \\
+&= \varepsilon\cdot\tfrac{1}{2}\left(I \pm \varepsilon\right) y
+   \quad (\because P^{(\pm)} \text{ の定義}) \\
+&= \tfrac{1}{2}\left(\varepsilon I \pm \varepsilon^2\right) y
+   \quad (\because \text{分配法則}) \\
+&= \tfrac{1}{2}\left(\varepsilon \pm \varepsilon^2\right) y
+   \quad (\because \varepsilon I=\varepsilon) \\
+&= \tfrac{1}{2}\left(\varepsilon \pm I\right) y
+   \quad (\because \text{(1) } \varepsilon^2=I) \\
+&= \pm\,\tfrac{1}{2}\left(I \pm \varepsilon\right) y
+   \quad (\because \text{複号同順の符号の整理。上の符号では }
+     \tfrac12(\varepsilon+I)=+\tfrac12(I+\varepsilon)
+     \text{、下の符号では } \tfrac12(\varepsilon-I)=-\tfrac12(I-\varepsilon)) \\
+&= \pm\,P^{(\pm)}y
+   \quad (\because P^{(\pm)} \text{ の定義}) \\
+&= \pm\,y
+   \quad (\because \text{上の等式 } y = P^{(\pm)}y)
+\end{aligned}`,
       ),
       paragraph([
-        "（複号同順。",
-        math(String.raw`\tfrac12(\varepsilon\pm I) = \pm\tfrac12(I\pm\varepsilon)`),
-        " は、上の符号では ",
-        math(String.raw`\tfrac12(\varepsilon+I) = +\tfrac12(I+\varepsilon)`),
-        "、下の符号では ",
-        math(String.raw`\tfrac12(\varepsilon-I) = -\tfrac12(I-\varepsilon)`),
-        " による。）よって ",
+        "よって ",
         math(String.raw`y \in \mathcal{F}^{(\pm)}`),
         "。",
       ]),
@@ -1310,13 +1342,26 @@ P^{(-)}P^{(+)}
         " とすると",
       ]),
       displayMath(
-        String.raw`P^{(\pm)} f = \tfrac{1}{2}\left(I \pm \varepsilon\right) f
-= \tfrac{1}{2}\left(f \pm (\pm f)\right) = \tfrac{1}{2}(f + f) = f`,
+        String.raw`\begin{aligned}
+P^{(\pm)} f
+&= \tfrac{1}{2}\left(I \pm \varepsilon\right) f
+   \quad (\because P^{(\pm)} \text{ の定義}) \\
+&= \tfrac{1}{2}\left(If \pm \varepsilon f\right)
+   \quad (\because \text{分配法則}) \\
+&= \tfrac{1}{2}\left(f \pm \varepsilon f\right)
+   \quad (\because If=f) \\
+&= \tfrac{1}{2}\left(f \pm (\pm f)\right)
+   \quad (\because \text{仮定 } \varepsilon f = \pm f) \\
+&= \tfrac{1}{2}\left(f + f\right)
+   \quad (\because \text{複号同順により } \pm(\pm f) = f) \\
+&= \tfrac{1}{2}\left(2f\right)
+   \quad (\because \text{同類項をまとめる}) \\
+&= f
+   \quad (\because \text{スカラー倍を整理する})
+\end{aligned}`,
       ),
       paragraph([
-        "（複号同順なので ",
-        math(String.raw`\pm(\pm f) = f`),
-        "）。よって ",
+        "よって ",
         math(String.raw`f = P^{(\pm)}f \in \mathrm{im}\,P^{(\pm)}`),
         "。",
       ]),
