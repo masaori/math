@@ -1105,8 +1105,10 @@ a(e)+\frac12\varepsilon_{i(e)}
       displayMath(
         String.raw`\begin{aligned}
 (1-r)\cdot\sum_{n=1}^{N}r^{\,n}
-&=\sum_{n=1}^{N}r^{\,n}-\sum_{n=1}^{N}r^{\,n+1}
+&=\sum_{n=1}^{N}r^{\,n}-r\cdot\sum_{n=1}^{N}r^{\,n}
 &&(\because\ \text{分配則})\\
+&=\sum_{n=1}^{N}r^{\,n}-\sum_{n=1}^{N}r^{\,n+1}
+&&(\because\ r\cdot r^{\,n}=r^{\,n+1}\ \text{（冪の法則）を各項へ同時適用})\\
 &=r-r^{\,N+1}
 &&(\because\ \text{隣り合う項が打ち消す})\\
 &\le r
