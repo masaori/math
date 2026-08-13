@@ -32274,6 +32274,11 @@ B&=a\cdot b'+b\cdot a'
     labels: ["claim_quadratic_positive_mul_nonnegative_negative_second"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-mul-nonnegative-negative-second"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegative_negativeSecond",
+      "Ising2DLambda.NecSuf.FisherZero.positive_mul_nonnegative_negativeSecond_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegative_negativeSecond_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`), " を ",

@@ -329,51 +329,32 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         math(String.raw`\sigma^z`),
         "）より",
       ]),
-      displayMath(
-        String.raw`\sigma_m^z\, f_{\iota(\mu)}
-= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
-   f_{\iota(\mu)}`,
-      ),
-      paragraph([
-        ref("def_config_basis_iso"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
-   f_{\iota(\mu)}
-= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
-   \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_M}\right)`,
-      ),
       paragraph([
         ref("kronecker_product_rule"),
-        "（クロネッカー積の積は因子ごとの積）より",
+        "（クロネッカー積の積は因子ごとの積）と ",
+        ref("kronecker_multilinear"),
+        " を順に用いると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma_m^z\, f_{\iota(\mu)}
+&= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
+   f_{\iota(\mu)}
+   \quad (\because \text{サイト演算子 }\sigma_m^z\text{ の定義}) \\
+&= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
+   \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_M}\right)
+   \quad (\because \text{配位基底同型の定義}) \\
 &= (I e_{i_1})\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes(I e_{i_M})
    \quad (\because \text{クロネッカー積の積の規則}) \\
 &= e_{i_1}\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes e_{i_M}
    \quad (\because \text{恒等行列の作用}) \\
 &= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_M}
-   \quad (\because \sigma^z e_{i_m}=\mu(m)e_{i_m})
+   \quad (\because \sigma^z e_{i_m}=\mu(m)e_{i_m}) \\
+&= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)
+   \quad (\because \text{クロネッカー積の多重線型性}) \\
+&= \mu(m)\, f_{\iota(\mu)}
+   \quad (\because \text{配位基底同型の定義})
 \end{aligned}`,
-      ),
-      paragraph([
-        ref("kronecker_multilinear"),
-        " より、スカラーを外へ出して",
-      ]),
-      displayMath(
-        String.raw`e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_M}
-= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)`,
-      ),
-      paragraph([
-        ref("def_config_basis_iso"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)
-= \mu(m)\, f_{\iota(\mu)}`,
       ),
       paragraph(["積については、いま示した作用を 2 回用いると"]),
       displayMath(

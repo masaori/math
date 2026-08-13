@@ -918,6 +918,9 @@ targets=(
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegativeCoefficients
   Ising2DLambda.NecSuf.FisherZero.positive_mul_nonnegative_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegativeCoefficients_from_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegative_negativeSecond
+  Ising2DLambda.NecSuf.FisherZero.positive_mul_nonnegative_negativeSecond_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_mul_of_nonnegative_negativeSecond_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
