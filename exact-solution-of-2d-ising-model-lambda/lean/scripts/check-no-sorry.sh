@@ -850,6 +850,9 @@ targets=(
   Ising2DLambda.FisherZero.oneSLinearlyIndependent
   Ising2DLambda.NecSuf.FisherZero.one_s_linearly_independent_necSuf
   Ising2DLambda.FisherZero.oneSLinearlyIndependent_from_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentationUnique
+  Ising2DLambda.NecSuf.FisherZero.quadratic_representation_unique_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentationUnique_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -29588,6 +29588,11 @@ a
     labels: ["claim_quadratic_representation_unique"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-representation-unique"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticRepresentationUnique",
+      "Ising2DLambda.NecSuf.FisherZero.quadratic_representation_unique_necSuf",
+      "Ising2DLambda.FisherZero.quadraticRepresentationUnique_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

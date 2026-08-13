@@ -2189,12 +2189,14 @@ Y_m Z_{m+1}
       displayMath(
         String.raw`\begin{aligned}
 Y_M Z_1
-&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y\right)\sigma_1^z \\
+&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y\right)\sigma_1^z
+   \quad (\because Y_M,\ Z_1 \text{ の定義}) \\
 &= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
    \quad (\because \sigma_1^z \text{ は他の因子と可換}) \\
 &= -i\,\sigma_1^y\,\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
    \quad (\because \text{Step 0}) \\
 &= -i\,G
+   \quad (\because G \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([

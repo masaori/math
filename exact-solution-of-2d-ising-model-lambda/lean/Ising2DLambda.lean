@@ -481,3 +481,6 @@ import Ising2DLambda.FisherZero.NoRationalSquareTwoFromNecSuf
 import Ising2DLambda.FisherZero.OneSLinearlyIndependent
 import Ising2DLambda.NecSuf.FisherZero.OneSLinearlyIndependent
 import Ising2DLambda.FisherZero.OneSLinearlyIndependentFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticRepresentationUnique
+import Ising2DLambda.NecSuf.FisherZero.QuadraticRepresentationUnique
+import Ising2DLambda.FisherZero.QuadraticRepresentationUniqueFromNecSuf
