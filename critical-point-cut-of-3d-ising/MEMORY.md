@@ -45,4 +45,5 @@ $R_L(q)$ の上界である。どちらも本文に `todo` を残してあり、
 30 分ごと（毎時 0 分と 30 分）に launchd が 1 tick を起動する。
 2 次元側のループ（毎時 5 分と 35 分）と衝突しないよう、**専用の git worktree**
 （`~/git/masaori/math-ising-3d-cut-loop`）で作業して `origin/main` へ push する。
-詳細は runbook の「起動の仕組み」。
+起動は `~/.local/bin/ising-3d-cut-loop-launcher.sh`（リポジトリ外）、ログは
+`~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log`。詳細は runbook の「起動の仕組み」。

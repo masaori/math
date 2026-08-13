@@ -15,15 +15,25 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-MAIN_PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd -P)"
-MAIN_REPO_DIR="$(cd "$MAIN_PROJECT_DIR/.." && pwd -P)"
 
 # このループ専用の作業ツリーと、その中のプロジェクト。
 LOOP_WORKTREE="$HOME/git/masaori/math-ising-3d-cut-loop"
 LOOP_BRANCH="ising-3d-cut-loop"
 PROJECT_NAME="critical-point-cut-of-3d-ising"
 
-LOG_DIR="$MAIN_PROJECT_DIR/logs"
+# 共有チェックアウト（メインの作業ツリー）の場所は、スクリプトの位置から辿らずに
+# git の共通ディレクトリから求める。このスクリプトはメイン側からもループ用 worktree からも
+# 起動されるので、位置に依存させると依存のコピー元を自分自身にしてしまう。
+GIT_COMMON_DIR="$(git -C "$SCRIPT_DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
+if [ -n "$GIT_COMMON_DIR" ]; then
+  MAIN_REPO_DIR="$(cd "$(dirname "$GIT_COMMON_DIR")" && pwd -P)"
+else
+  MAIN_REPO_DIR="$HOME/git/masaori/math"
+fi
+
+# ログとロックはリポジトリの外に置く。作業ツリーはこのスクリプト自身が作ったり origin/main へ
+# 合わせ直したりするので、その中にログを置くと「まだ無い」「消える」が起きる。
+LOG_DIR="$HOME/Library/Logs/ising-3d-cut-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
@@ -259,10 +269,11 @@ fi
 # 人間が開いたまま進み具合を見られるように、PDF をメインの作業ツリー側の固定パスへ置く。
 # build/ は gitignore なので、コピーしても人間の作業と衝突しない。
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
-if [ -f "$loop_pdf" ]; then
-  mkdir -p "$MAIN_PROJECT_DIR/structured-latex/build"
-  cp "$loop_pdf" "$MAIN_PROJECT_DIR/structured-latex/build/document.pdf" \
-    && log "    PDF をメイン側へ複製した（$MAIN_PROJECT_DIR/structured-latex/build/document.pdf）"
+main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"
+if [ -f "$loop_pdf" ] && [ -d "$MAIN_REPO_DIR/$PROJECT_NAME" ]; then
+  mkdir -p "$main_pdf_dir"
+  cp "$loop_pdf" "$main_pdf_dir/document.pdf" \
+    && log "    PDF をメイン側へ複製した（$main_pdf_dir/document.pdf）"
 fi
 
 exit "$status"

@@ -122,7 +122,8 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 25 分の上限に当たった tick は、push 前で終わっている可能性が高い。
 
 - **次の tick はまず作業ツリーに残った成果を拾う。** `git status` を確認し、
-  検証を通してからコミットする（捨てない）。目印は `logs/leftover-from-tick` にある。
+  検証を通してからコミットする（捨てない）。目印は
+  `~/Library/Logs/ising-3d-cut-auto-loop/leftover-from-tick` にある。
 - **打ち切られたセクションは、やり直す前に割り直す。** 割る基準は中身である（上の大方針 3）。
 - **時計は見る。** tick には毎回「まとめに入る締切」（強制終了の 5 分前）が渡される。
   作業の区切りごとに `date` で現在時刻を確認し、締切を過ぎたら新しい着手をやめて、
@@ -137,16 +138,19 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 | --- | --- |
 | ラベル | `com.masaori.ising-3d-cut-auto-loop` |
 | 定義 | `~/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist` |
+| 起動 | `~/.local/bin/ising-3d-cut-loop-launcher.sh`（リポジトリ外。専用 worktree を用意して tick 本体を exec する） |
 | 実体 | `scripts/auto-loop-tick.sh`（毎時 0 分と 30 分。多重起動を防ぎ、25 分で打ち切る） |
+| 作業ツリー | `~/git/masaori/math-ising-3d-cut-loop`（ブランチ `ising-3d-cut-loop`。毎 tick の冒頭で `origin/main` へ合わせる） |
 | 使うエージェント | **Claude と Codex を 1 tick ごとに交互**（2 次元側と同じ運用）。Claude は `claude-fable-5` の effort medium、Codex は `gpt-5.6-sol` の reasoning medium。直前に使ったほうを `logs/last-agent` に記録し、その反対を選ぶ |
-| ログ | `logs/auto-loop.log`（git 管理外） |
+| ログ | `~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log`（リポジトリ外。作業ツリーを合わせ直しても消えないため） |
 
 ```sh
-bash scripts/auto-loop-tick.sh                                        # 手で 1 tick 回す
+bash ~/.local/bin/ising-3d-cut-loop-launcher.sh                       # 手で 1 tick 回す
 launchctl kickstart -k gui/$(id -u)/com.masaori.ising-3d-cut-auto-loop # 次の発火を待たず起動する
 launchctl bootout gui/$(id -u)/com.masaori.ising-3d-cut-auto-loop      # 止める
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist
 ```
 
-2 次元側のループ（`com.masaori.ising-lambda-auto-loop`。毎時 5 分と 35 分）と同じ作業ツリーを
-使うので、**互いに作業ツリーの汚れで見送り合う**。発火時刻をずらしてあるのはそのためである。
+**2 次元側のループ（`com.masaori.ising-lambda-auto-loop`。毎時 5 分と 35 分）とは別の作業ツリーで走る。**
+同じ作業ツリーを共有すると、あちらの tick が 45 分走る間こちらは「汚れている」で見送られ続けるためである。
+発火時刻をずらしてあるのは機械の負荷を分けるため。
