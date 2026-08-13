@@ -2886,6 +2886,7 @@ U S_2 U^{-1}
 &= (2s_2)^{M/2}\,\mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)
    \quad \left(\because \text{可換なので } \exp\!\left(\tfrac12 S_1\right)^2 = \exp(S_1)\right) \\
 &= (2s_2)^{M/2}\,\tau
+   \quad (\because\ \tau \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -2932,12 +2933,14 @@ U S_2 U^{-1}
       displayMath(
         String.raw`\begin{aligned}
 \tau
-&= \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right) \\
+&= \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)
+   \quad (\because\ \tau \text{ の定義}) \\
 &= \mathrm{tr}\!\left(U\exp(S_1)\exp(S_2)U^{-1}\right)
    \quad (\because \text{トレースは共役で不変}) \\
 &= \mathrm{tr}\!\left(\left(U\exp(S_1)U^{-1}\right)\left(U\exp(S_2)U^{-1}\right)\right)
    \quad (\because U^{-1}U = I) \\
-&= \mathrm{tr}\!\left(\exp\!\left(US_1U^{-1}\right)\exp\!\left(US_2U^{-1}\right)\right) \\
+&= \mathrm{tr}\!\left(\exp\!\left(US_1U^{-1}\right)\exp\!\left(US_2U^{-1}\right)\right)
+   \quad \left(\because \text{上の等式 } U\exp(S)U^{-1} = \exp\!\left(USU^{-1}\right)\right) \\
 &= \mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)
    \quad (\because \text{符号反転共役})
 \end{aligned}`,
@@ -2972,9 +2975,34 @@ U S_2 U^{-1}
         " から",
       ]),
       displayMath(
-        String.raw`\left(c^{-1}V'^{-1}\right)V = \left(c^{-1}V'^{-1}\right)\left(cV'\right)
-= c^{-1}c\,\left(V'^{-1}V'\right) = I, \qquad
-V\left(c^{-1}V'^{-1}\right) = c\,c^{-1}\left(V'V'^{-1}\right) = I`,
+        String.raw`\begin{aligned}
+\left(c^{-1}V'^{-1}\right)V
+&= \left(c^{-1}V'^{-1}\right)\left(cV'\right)
+   \quad (\because\ V = cV') \\
+&= c^{-1}c\,\left(V'^{-1}V'\right)
+   \quad (\because \text{スカラー倍は行列の積と可換に前へ出せる}) \\
+&= 1\cdot\left(V'^{-1}V'\right)
+   \quad (\because\ c^{-1}c = 1) \\
+&= V'^{-1}V'
+   \quad (\because \text{スカラー } 1 \text{ の積}) \\
+&= I
+   \quad (\because\ V'^{-1} \text{ は } V' \text{ の逆行列})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+V\left(c^{-1}V'^{-1}\right)
+&= \left(cV'\right)\left(c^{-1}V'^{-1}\right)
+   \quad (\because\ V = cV') \\
+&= c\,c^{-1}\left(V'V'^{-1}\right)
+   \quad (\because \text{スカラー倍は行列の積と可換に前へ出せる}) \\
+&= 1\cdot\left(V'V'^{-1}\right)
+   \quad (\because\ c\,c^{-1} = 1) \\
+&= V'V'^{-1}
+   \quad (\because \text{スカラー } 1 \text{ の積}) \\
+&= I
+   \quad (\because\ V'^{-1} \text{ は } V' \text{ の逆行列})
+\end{aligned}`,
       ),
       paragraph([
         "（スカラー倍は行列の積と可換に前へ出せる：",
