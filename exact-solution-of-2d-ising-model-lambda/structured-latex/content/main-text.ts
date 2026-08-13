@@ -30005,10 +30005,10 @@ b
   },
 
   {
-    id: "fisher_zero_claim_quadratic_zero_representation",
+    id: "fisher_zero_claim_quadratic_zero_mem",
     kind: "claim",
-    title: { text: "二次体の零元の特徴づけ" },
-    labels: ["claim_quadratic_zero_representation"],
+    title: { text: "二次体の台集合への零元の所属" },
+    labels: ["claim_quadratic_zero_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-zero-negation"],
     statement: [
@@ -30028,7 +30028,60 @@ b
         math(String.raw`Q_s`),
         "（",
         ref("def_quadratic_field_set"),
-        "）に属し、任意の ",
+        "）に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法の単位元である。",
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の元でもある。次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=0+0
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=0+0\cdot s
+&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)
+\end{aligned}`),
+      paragraph([
+        "組 ",
+        math(String.raw`(0,0)`),
+        " が ",
+        ref("def_quadratic_field_set"),
+        " の存在条件の証人になるから ",
+        math(String.raw`0\in Q_s`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_quadratic_zero_representation",
+    kind: "claim",
+    title: { text: "二次体の零元の表示による特徴づけ" },
+    labels: ["claim_quadratic_zero_representation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-zero-negation"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "）。任意の ",
         math(String.raw`\xi\in Q_s`),
         " について、",
         math(String.raw`\xi=0`),
@@ -30066,17 +30119,6 @@ b
 &=0+0\cdot s
 &&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)
 \end{aligned}`),
-      paragraph([
-        "組 ",
-        math(String.raw`(0,0)`),
-        "（",
-        math(String.raw`0\in\mathbb{Q}`),
-        "）が ",
-        ref("def_quadratic_field_set"),
-        " の存在条件の証人になるから ",
-        math(String.raw`0\in Q_s`),
-        " である。",
-      ]),
       paragraph([
         "第一の方向（",
         math(String.raw`\xi=0`),
@@ -30130,10 +30172,10 @@ a+b\cdot s
   },
 
   {
-    id: "fisher_zero_claim_quadratic_negation_representation",
+    id: "fisher_zero_claim_quadratic_negation_mem",
     kind: "claim",
-    title: { text: "二次体の加法逆元の表示" },
-    labels: ["claim_quadratic_negation_representation"],
+    title: { text: "二次体の台集合の加法逆元による閉性" },
+    labels: ["claim_quadratic_negation_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-zero-negation"],
     statement: [
@@ -30159,19 +30201,13 @@ a+b\cdot s
         math(String.raw`-\xi`),
         " は ",
         math(String.raw`Q_s`),
-        " に属し、",
-        math(String.raw`\mathrm{rep}_s(-\xi)=(-a,-b)`),
-        " である（",
+        " に属する（",
         math(String.raw`-a`),
         "、",
         math(String.raw`-b`),
         " は ",
         math(String.raw`\mathbb{Q}`),
-        " の加法の逆元）。後のセクションの三分律で、場合「加法の逆元 ",
-        math(String.raw`-\xi`),
-        " が正である」を表示の組の符号の反転 ",
-        math(String.raw`(-a,-b)`),
-        " の条件として扱うための道具である。",
+        " の加法の逆元）。",
       ]),
     ],
     proof: [
@@ -30213,13 +30249,73 @@ a+b\cdot s
         ref("def_quadratic_field_set"),
         " の存在条件の証人になり、",
         math(String.raw`-\xi\in Q_s`),
-        " である。",
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_quadratic_negation_representation",
+    kind: "claim",
+    title: { text: "二次体の加法逆元の表示" },
+    labels: ["claim_quadratic_negation_representation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-zero-negation"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "）。任意の ",
+        math(String.raw`\xi\in Q_s`),
+        " と ",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        " について、",
+        ref("claim_quadratic_negation_mem"),
+        " により ",
+        math(String.raw`-\xi\in Q_s`),
+        " であり、",
+        math(String.raw`\mathrm{rep}_s(-\xi)=(-a,-b)`),
+        " である。後のセクションの三分律で、場合「加法の逆元が正である」を表示の組 ",
+        math(String.raw`(-a,-b)`),
+        " の条件として扱うための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`-a,-b\in\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " でも同じ加法の逆元である。次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-\xi
+&=-\bigl(a+b\cdot s\bigr)
+&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\bigr)\\
+&=(-a)+\bigl(-(b\cdot s)\bigr)
+&&\bigl(\because\ \text{和の加法逆元}\ -(u+v)=(-u)+(-v)\bigr)\\
+&=(-a)+(-b)\cdot s
+&&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)
+\end{aligned}`),
+      paragraph([
         math(String.raw`\mathrm{rep}_s(-\xi)`),
         " は ",
         math(String.raw`-\xi`),
         " を表す唯一の組である（",
         ref("def_quadratic_representation_map"),
-        "）から、上の鎖の表示 ",
+        "）。上の鎖の表示 ",
         math(String.raw`(-a,-b)`),
         " に ",
         ref("claim_quadratic_representation_unique"),

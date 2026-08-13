@@ -1,5 +1,5 @@
-# 対象ラベル: claim_quadratic_zero_representation
-# （claim_quadratic_negation_representation も同じ検証で見る）
+# 対象ラベル: claim_quadratic_zero_mem, claim_quadratic_zero_representation,
+# claim_quadratic_negation_mem, claim_quadratic_negation_representation
 # 帰属: QQ / QQbar の厳密計算。浮動小数点を使わない。
 
 # claim_quadratic_zero_representation: s·s=2 を満たす s ∈ QQbar について、

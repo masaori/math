@@ -2,9 +2,8 @@
 
 ## 対象
 
-**対象ラベル**: `claim_quadratic_zero_representation`
-
-（同じ検証で `claim_quadratic_negation_representation` の内容も見る。）
+**対象ラベル**: `claim_quadratic_zero_mem`、`claim_quadratic_zero_representation`、
+`claim_quadratic_negation_mem`、`claim_quadratic_negation_representation`
 
 - 実行日: 2026-08-13
 - 結果: 通過（加法逆元の両立 19 組、零元の特徴づけ 722 組、
@@ -13,10 +12,8 @@
 
 ## 何を確かめるか
 
-主張は「$s\cdot s=2$ を満たす $s\in\overline{\mathbb{Q}}$ について、
-$0\in Q_s$ であり $\xi=0\iff\mathrm{rep}_s(\xi)=(0,0)$」（零元の特徴づけ）と、
-「$\xi\in Q_s$、$(a,b):=\mathrm{rep}_s(\xi)$ について、$-\xi\in Q_s$ であり
-$\mathrm{rep}_s(-\xi)=(-a,-b)$」（加法逆元の表示）。
+四主張は「$0\in Q_s$」「$\xi=0\iff\mathrm{rep}_s(\xi)=(0,0)$」
+「$-\xi\in Q_s$」「$\mathrm{rep}_s(-\xi)=(-a,-b)$」である。
 
 - **zero-chain**: 準備の鎖 $0=0+0=0+0\cdot s$ の各段が `QQbar` の厳密等号で成り立つ。
 - **zero-iff**: 標本の全組（分子 $-4..4$、分母 $1..3$ の有理数の組、$s$ の 2 根）で
