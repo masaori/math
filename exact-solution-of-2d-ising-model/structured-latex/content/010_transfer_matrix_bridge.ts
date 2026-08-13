@@ -556,9 +556,17 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " について",
       ]),
       displayMath(
-        String.raw`D\, f_{\iota(\mu)}
-= \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)}
-= \left(\sum_{m=1}^{M}\mu(m)\mu(m+1)\right) f_{\iota(\mu)}`,
+        String.raw`\begin{aligned}
+D\, f_{\iota(\mu)}
+&= \left(\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right) f_{\iota(\mu)}
+   \quad (\because D\text{ の定義の代入}) \\
+&= \sum_{m=1}^{M}\left(\sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)}\right)
+   \quad (\because \text{行列の有限和とベクトルの積の分配則}) \\
+&= \sum_{m=1}^{M}\Bigl(\mu(m)\mu(m+1)\, f_{\iota(\mu)}\Bigr)
+   \quad (\because \sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)} = \mu(m)\mu(m+1) f_{\iota(\mu)}\text{ を全項へ同時適用}) \\
+&= \left(\sum_{m=1}^{M}\mu(m)\mu(m+1)\right) f_{\iota(\mu)}
+   \quad (\because \text{スカラー倍の有限和の括り出し（分配則）})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",
