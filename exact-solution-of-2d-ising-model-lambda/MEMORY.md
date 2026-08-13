@@ -4,6 +4,22 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 222 は、レビューで前 tick の「非負係数条件と負の第二係数条件の積」の
+Lean の流儀の逸脱を直した（具体版が必要十分版を呼ぶだけの包装、導出が具体版を呼ぶだけの
+空洞になっていたのを、具体版へ本文と 1 対 1 の証明を書き、導出へ必要十分版経由の証明を
+移した）。そのあと「非負係数条件と負の第一係数条件の積」
+（`claim_quadratic_positive_mul_nonnegative_negative_first`）を記述と SageMath まで進めた。
+$c:=-a'$ を置き、積の表示 $(A,B)=(2\cdot(b\cdot b')-a\cdot c,\ a\cdot b'-b\cdot c)$ について、
+混合符号の排除で二場合に分けた。$2(b\cdot b)<a\cdot a$ の場合は背理法
+（$B\le0$ なら $(a\cdot a)\cdot(b'\cdot b')\le(b\cdot b)\cdot(c\cdot c)<(b\cdot b)\cdot2(b'\cdot b')$
+から $a\cdot a<2(b\cdot b)$ が出て矛盾）で $0<B$ を得て、$0\le A$ なら第一条件、$A<0$ なら
+$C:=-A$ と線形比較 $b'\cdot C\le c\cdot B$ を平方へ移して $A\cdot A<2(B\cdot B)$（第三条件）を
+得る。$a\cdot a<2(b\cdot b)$ の場合は対称に $0<A$ で、$0\le B$ なら第一条件、$B<0$ なら
+$V:=-B$ と $(2\cdot b')\cdot V\le c\cdot A$ から $2(B\cdot B)<A\cdot A$（第二条件）を得る。
+SageMath（`sagemath/check/quadratic-positive-mul-nonnegative-negative-first/`）は 181700 組で
+各段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの主張の Lean
+（具体版・必要十分版・導出）を完成させる。
+
 2026-08-14 の tick 221 は、「非負係数条件と負の第二係数条件の積」の Lean 具体版・
 必要十分版・導出を完成させ、四層すべてを満たした。本文と SageMath のレビューでは、
 二つの背理法、二つの線形比較、二つの平方比較の各中間段と四つの符号場合が一致しており、
