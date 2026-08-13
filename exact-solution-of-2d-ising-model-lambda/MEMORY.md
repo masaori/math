@@ -4,6 +4,25 @@
 
 ## 現在の到達点（2026-08-13 時点）
 
+2026-08-13 の tick 188 は、セクション「自己双対方程式の因数分解と根の全体」を記述と
+SageMath まで進めた。主張は二ブロックに分けた。因数分解の主張
+（`claim_self_dual_quadratic_roots`）は、$s\cdot s=2$ を満たす $s\in\overline{\mathbb{Q}}$
+について、任意の $\xi\in\overline{\mathbb{Q}}$ で $\xi^2+2\xi-1=0$ と
+「$\xi=-1+s$ または $\xi=-1-s$」が同値であること。準備で因数分解
+$((\xi+1)-s)\cdot((\xi+1)+s)=\xi^2+2\xi-1$ を十四段の鎖で立て、第一の方向は各根で
+対応する因子を零へ落とし、第二の方向は第一因子の零・非零の場合分けと零因子の不在
+（`claim_qbar_no_zero_divisors`）で第二因子を消す。二根の相異の主張
+（`claim_self_dual_quadratic_roots_distinct`）は $-1+s\ne-1-s$（背理法。$s=-s$ から
+$2\cdot s=0$、零因子の不在で $s=0$、$2=0$ の矛盾）で、あわせて根はちょうど二つである。
+SageMath（`sagemath/check/self-dual-quadratic-roots/`・
+`sagemath/check/self-dual-quadratic-roots-distinct/`）は `QQbar` で $s$ の 2 通り × 19 点の
+全段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの二主張の Lean
+（具体版・必要十分版・導出）を完成させる。レビューでは前 tick の「二の平方根の存在」の
+Lean 三本と姉妹側「射影の代数」Step 1–5 を突き合わせて修正不要と確認した。
+式変形統一では姉妹側 `009_eigenvalues_of_V` の「$V'$ の固有値」の証明（Step 1〜4）を
+一行一等号と行末根拠へ整えた。次 tick は同ファイルの
+「$\mathrm{tr}(V')=\mathrm{tr}(V'^{-1})>0$」以降の根拠なしの鎖から続ける。
+
 2026-08-13 の tick 187 は、「二の平方根の存在」の Lean 具体版・必要十分版・導出を完成させ、
 四層すべてを満たした。具体版は本文と同じ二次係数の四段、代数閉性による根の取り出し、
 評価写像の十一段を実装した。必要十分版は同じ手順を零元・等式・含意だけへ薄め、導出は

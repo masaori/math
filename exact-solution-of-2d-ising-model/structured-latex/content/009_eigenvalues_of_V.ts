@@ -1286,7 +1286,9 @@ X Q_\epsilon
    \left(\epsilon_\mu Q_\epsilon - \tfrac{1}{2} Q_\epsilon\right)
    \quad (\because \text{同時固有空間分解 (3)}) \\
 &= \left(\sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right) Q_\epsilon
-= g(\epsilon)\,Q_\epsilon
+   \quad (\because \text{有限和の線型性で } Q_\epsilon \text{ を右へくくり出す}) \\
+&= g(\epsilon)\,Q_\epsilon
+   \quad (\because g(\epsilon) \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1301,10 +1303,17 @@ X Q_\epsilon
         " を仮定すると、Step 1 より",
       ]),
       displayMath(
-        String.raw`X^{k+1}Q_\epsilon = X\left(X^k Q_\epsilon\right)
-= X\left(g(\epsilon)^k Q_\epsilon\right)
-= g(\epsilon)^k\left(X Q_\epsilon\right)
-= g(\epsilon)^{k+1} Q_\epsilon`,
+        String.raw`\begin{aligned}
+X^{k+1}Q_\epsilon
+&= X\left(X^k Q_\epsilon\right)
+   \quad (\because \text{冪の定義 } X^{k+1} = X X^k \text{ と行列の積の結合法則}) \\
+&= X\left(g(\epsilon)^k Q_\epsilon\right)
+   \quad (\because \text{帰納法の仮定}) \\
+&= g(\epsilon)^k\left(X Q_\epsilon\right)
+   \quad (\because \text{スカラー倍と行列の積の交換}) \\
+&= g(\epsilon)^{k+1} Q_\epsilon
+   \quad (\because \text{Step 1 の } X Q_\epsilon = g(\epsilon) Q_\epsilon \text{ と冪の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3（指数関数へ）。",
@@ -1320,8 +1329,15 @@ X Q_\epsilon
         " と書くと、Step 2 と有限和の線型性から",
       ]),
       displayMath(
-        String.raw`E_K Q_\epsilon = \sum_{k=0}^{K}\frac{1}{k!}X^k Q_\epsilon
-= \left(\sum_{k=0}^{K}\frac{g(\epsilon)^k}{k!}\right) Q_\epsilon`,
+        String.raw`\begin{aligned}
+E_K Q_\epsilon
+&= \sum_{k=0}^{K}\frac{1}{k!}X^k Q_\epsilon
+   \quad (\because E_K \text{ の定義と行列の積の分配法則}) \\
+&= \sum_{k=0}^{K}\frac{1}{k!}\,g(\epsilon)^k Q_\epsilon
+   \quad (\because \text{Step 2 を各項へ適用}) \\
+&= \left(\sum_{k=0}^{K}\frac{g(\epsilon)^k}{k!}\right) Q_\epsilon
+   \quad (\because \text{有限和の線型性で } Q_\epsilon \text{ を右へくくり出す})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`K \to \infty`),
@@ -1343,11 +1359,31 @@ X Q_\epsilon
         math(String.raw`y = Q_\epsilon x`),
         " と書けて、",
         ref("joint_eigenspace_decomposition"),
-        " (1) より ",
-        math(String.raw`Q_\epsilon y = Q_\epsilon^2 x = Q_\epsilon x = y`),
-        " だから",
+        " (1) より",
       ]),
-      displayMath(String.raw`V' y = V' Q_\epsilon y = e^{g(\epsilon)} Q_\epsilon y = e^{g(\epsilon)} y`),
+      displayMath(
+        String.raw`\begin{aligned}
+Q_\epsilon y
+&= Q_\epsilon^2 x
+   \quad (\because y = Q_\epsilon x) \\
+&= Q_\epsilon x
+   \quad (\because \text{(1) の冪等性}) \\
+&= y
+   \quad (\because y = Q_\epsilon x)
+\end{aligned}`,
+      ),
+      paragraph(["だから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+V' y
+&= V' Q_\epsilon y
+   \quad (\because \text{上の } Q_\epsilon y = y) \\
+&= e^{g(\epsilon)} Q_\epsilon y
+   \quad (\because \text{Step 3 の } V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon) \\
+&= e^{g(\epsilon)} y
+   \quad (\because \text{上の } Q_\epsilon y = y)
+\end{aligned}`,
+      ),
       paragraph([
         ref("joint_eigenspace_decomposition"),
         " (5) より ",

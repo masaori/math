@@ -28889,6 +28889,316 @@ s\cdot s
   },
 
   {
+    id: "fisher_zero_claim_self_dual_quadratic_roots",
+    kind: "claim",
+    title: { text: "自己双対方程式の因数分解と根の全体" },
+    labels: ["claim_self_dual_quadratic_roots"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-quadratic-roots"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`s\cdot s=2`),
+        " を満たすとする（そのような ",
+        math(String.raw`s`),
+        " の存在は ",
+        ref("claim_sqrt_two_exists"),
+        "）。",
+        math(String.raw`2:=1+1`),
+        "、",
+        math(String.raw`\xi^2:=\xi\cdot\xi`),
+        " と置く。このとき、任意の ",
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " について、二つの条件",
+      ]),
+      displayMath(String.raw`\xi^2+2\xi-1=0
+\qquad\text{と}\qquad
+\bigl(\xi=-1+s\ \text{または}\ \xi=-1-s\bigr)`),
+      paragraph([
+        "は同値である（",
+        math(String.raw`\xi^2+2\xi-1`),
+        " は ",
+        math(String.raw`\xi^2+2\xi+(-1)`),
+        " を、",
+        math(String.raw`-1+s`),
+        " は ",
+        math(String.raw`(-1)+s`),
+        " を、",
+        math(String.raw`-1-s`),
+        " は ",
+        math(String.raw`(-1)+(-s)`),
+        " を表し、すべての演算は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・加法の逆元である）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。仮定 ",
+        math(String.raw`s\cdot s=2`),
+        " のもとで、",
+        math(String.raw`\xi`),
+        " によらず成り立つ因数分解の等式 ",
+        math(String.raw`\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1`),
+        " を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
+&=\bigl((\xi+1)-s\bigr)\cdot(\xi+1)+\bigl((\xi+1)-s\bigr)\cdot s
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\bigl((\xi+1)\cdot(\xi+1)-s\cdot(\xi+1)\bigr)+\bigl((\xi+1)\cdot s-s\cdot s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則を 2 つの積へ適用}\bigr)\\
+&=\bigl((\xi+1)\cdot(\xi+1)-s\cdot(\xi+1)\bigr)+\bigl(s\cdot(\xi+1)-s\cdot s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
+&=(\xi+1)\cdot(\xi+1)+\Bigl(\bigl(-\bigl(s\cdot(\xi+1)\bigr)+s\cdot(\xi+1)\bigr)-s\cdot s\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=(\xi+1)\cdot(\xi+1)+\bigl(0-s\cdot s\bigr)
+&&\bigl(\because\ \text{加法の逆元}\bigr)\\
+&=(\xi+1)\cdot(\xi+1)-s\cdot s
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=(\xi+1)\cdot(\xi+1)-2
+&&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)\\
+&=\bigl((\xi+1)\cdot\xi+(\xi+1)\cdot1\bigr)-2
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\bigl((\xi\cdot\xi+1\cdot\xi)+(\xi+1)\bigr)-2
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則と単位元との積}\bigr)\\
+&=\bigl((\xi^2+\xi)+(\xi+1)\bigr)-2
+&&\bigl(\because\ \xi^2\ \text{の定義と単位元との積}\bigr)\\
+&=\bigl((\xi^2+(\xi+\xi))+1\bigr)-2
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\bigl((\xi^2+2\xi)+1\bigr)-2
+&&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
+&=(\xi^2+2\xi)+(1-2)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\xi^2+2\xi-1
+&&\bigl(\because\ \mathbb{Q}\ \text{の中の計算}\ 1-2=-1\bigr)
+\end{aligned}`),
+      paragraph([
+        "同値の二方向は別々の含意なので、一続きにはつながず、それぞれの中の計算を一続きの鎖で書く。",
+      ]),
+      paragraph([
+        "第一の方向。",
+        math(String.raw`\xi=-1+s`),
+        " または ",
+        math(String.raw`\xi=-1-s`),
+        " を仮定して ",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " を示す。二つの場合は別々の仮定なので場合分けする。",
+        math(String.raw`\xi=-1+s`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi^2+2\xi-1
+&=\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&=\Bigl(\bigl(((-1)+s)+1\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \text{仮定}\ \xi=-1+s\bigr)\\
+&=\Bigl(\bigl(s+((-1)+1)\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則・結合則}\bigr)\\
+&=\bigl((s+0)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \text{加法の逆元}\ (-1)+1=0\bigr)\\
+&=(s-s)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=0\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \text{加法の逆元}\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元との積}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\xi=-1-s`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi^2+2\xi-1
+&=\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl(((-1)+(-s))+1\bigr)+s\Bigr)
+&&\bigl(\because\ \text{仮定}\ \xi=-1-s\bigr)\\
+&=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl((-s)+((-1)+1)\bigr)+s\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則・結合則}\bigr)\\
+&=\bigl((\xi+1)-s\bigr)\cdot\bigl(((-s)+0)+s\bigr)
+&&\bigl(\because\ \text{加法の逆元}\ (-1)+1=0\bigr)\\
+&=\bigl((\xi+1)-s\bigr)\cdot\bigl((-s)+s\bigr)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=\bigl((\xi+1)-s\bigr)\cdot0
+&&\bigl(\because\ \text{加法の逆元}\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元との積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "いずれの場合も ",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " である。",
+      ]),
+      paragraph([
+        "第二の方向。",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " を仮定して ",
+        math(String.raw`\xi=-1+s`),
+        " または ",
+        math(String.raw`\xi=-1-s`),
+        " を示す。準備の等式と仮定から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
+&=\xi^2+2\xi-1
+&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&=0
+&&\bigl(\because\ \text{仮定}\ \xi^2+2\xi-1=0\bigr)
+\end{aligned}`),
+      paragraph([
+        "を得る。第一因子 ",
+        math(String.raw`(\xi+1)-s`),
+        " が零元か否かで場合分けする。",
+        math(String.raw`(\xi+1)-s=0`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi
+&=s-1
+&&\bigl(\because\ (\xi+1)-s=0\ \text{の移項}\bigr)\\
+&=-1+s
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`(\xi+1)-s\ne0`),
+        " の場合は、",
+        ref("claim_qbar_no_zero_divisors"),
+        " を ",
+        math(String.raw`a=(\xi+1)-s`),
+        "、",
+        math(String.raw`b=(\xi+1)+s`),
+        " へ適用して ",
+        math(String.raw`(\xi+1)+s=0`),
+        " を得るから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi
+&=(-s)-1
+&&\bigl(\because\ (\xi+1)+s=0\ \text{の移項}\bigr)\\
+&=-1-s
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。いずれの場合も ",
+        math(String.raw`\xi=-1+s`),
+        " または ",
+        math(String.raw`\xi=-1-s`),
+        " が成り立つ。二方向が示されたので、二つの条件は同値である。全過程は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・加法の逆元の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_quadratic_roots_distinct",
+    kind: "claim",
+    title: { text: "自己双対方程式の二根は相異なる" },
+    labels: ["claim_self_dual_quadratic_roots_distinct"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-quadratic-roots-distinct"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が ",
+        math(String.raw`s\cdot s=2`),
+        " を満たすとする（",
+        math(String.raw`2:=1+1`),
+        "。そのような ",
+        math(String.raw`s`),
+        " の存在は ",
+        ref("claim_sqrt_two_exists"),
+        "）。このとき",
+      ]),
+      displayMath(String.raw`-1+s\ \ne\ -1-s`),
+      paragraph([
+        "が成り立つ。したがって ",
+        ref("claim_self_dual_quadratic_roots"),
+        " とあわせて、",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " を満たす ",
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " はちょうど二つである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\mathbb{Q}`),
+        " の中で ",
+        math(String.raw`2\ne0`),
+        " であり、",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中でも ",
+        math(String.raw`2\ne0`),
+        " である。",
+      ]),
+      paragraph([
+        "背理法による。",
+        math(String.raw`-1+s=-1-s`),
+        " と仮定する。両辺へ ",
+        math(String.raw`1`),
+        " を加えて（移項）",
+        math(String.raw`s=-s`),
+        " を得る。これを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2\cdot s
+&=(1+1)\cdot s
+&&\bigl(\because\ 2\ \text{の定義}\bigr)\\
+&=1\cdot s+1\cdot s
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=s+s
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+&=(-s)+s
+&&\bigl(\because\ \text{上で導いた}\ s=-s\bigr)\\
+&=0
+&&\bigl(\because\ \text{加法の逆元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備より ",
+        math(String.raw`2\ne0`),
+        " であるから、",
+        ref("claim_qbar_no_zero_divisors"),
+        " を ",
+        math(String.raw`a=2`),
+        "、",
+        math(String.raw`b=s`),
+        " へ適用して ",
+        math(String.raw`s=0`),
+        " を得る。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2
+&=s\cdot s
+&&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)\\
+&=0\cdot0
+&&\bigl(\because\ \text{上で得た}\ s=0\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元との積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、準備の ",
+        math(String.raw`2\ne0`),
+        " と矛盾する。ゆえに ",
+        math(String.raw`-1+s\ne-1-s`),
+        " である。全過程は体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法・積・加法の逆元の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

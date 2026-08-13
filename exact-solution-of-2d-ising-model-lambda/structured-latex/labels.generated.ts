@@ -181,6 +181,8 @@ export const ALL_LABELS = [
   "claim_second_linear_monic",
   "claim_second_monic_add_lower",
   "claim_second_monic_prod",
+  "claim_self_dual_quadratic_roots",
+  "claim_self_dual_quadratic_roots_distinct",
   "claim_shift_char_diagonal_entry",
   "claim_shift_char_dvd_pow_L",
   "claim_shift_char_matrix_entry_zero",
