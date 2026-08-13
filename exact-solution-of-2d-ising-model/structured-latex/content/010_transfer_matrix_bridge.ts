@@ -431,25 +431,35 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
     ],
     proof: [
       paragraph([
-        "Step 1（冪）。対角行列の積は成分ごとの積になる：",
-        math(String.raw`(DD')_{kl} = \sum_j D_{kj}D'_{jl}`),
-        " において ",
-        math(String.raw`D_{kj} \neq 0`),
-        " は ",
-        math(String.raw`j = k`),
-        " のときだけ、",
-        math(String.raw`D'_{jl}\neq 0`),
-        " は ",
-        math(String.raw`j = l`),
-        " のときだけなので、",
+        "Step 1（冪）。対角行列 ",
+        math(String.raw`D, D'`),
+        " の積の成分を計算する。",
         math(String.raw`k \neq l`),
-        " なら和のすべての項が ",
-        math(String.raw`0`),
-        "、",
-        math(String.raw`k = l`),
-        " なら ",
-        math(String.raw`D_{kk}D'_{kk}`),
-        " だけが残る。よって ",
+        " の場合:",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(DD')_{kl}
+&= \sum_{j=1}^{n} D_{kj}D'_{jl}
+   \quad (\because \text{行列積の成分の定義}) \\
+&= D_{kk}D'_{kl}
+   \quad (\because j \neq k \text{ の項は } D_{kj} = 0) \\
+&= 0
+   \quad (\because k \neq l \text{ より } D'_{kl} = 0).
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`k = l`), " の場合:"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(DD')_{kk}
+&= \sum_{j=1}^{n} D_{kj}D'_{jk}
+   \quad (\because \text{行列積の成分の定義}) \\
+&= D_{kk}D'_{kk}
+   \quad (\because j \neq k \text{ の項は } D_{kj} = 0).
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって対角行列どうしの積は対角行列で、対角成分は成分ごとの積である。ゆえに ",
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
         " について帰納法により ",
         math(String.raw`D^p`),
@@ -468,9 +478,22 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         ref("def_exp"),
         " の部分和 ",
         math(String.raw`E_K := \sum_{p=0}^{K}\frac{1}{p!}D^p`),
-        " は、有限個の対角行列の線型結合なので対角行列で、",
+        " は、有限個の対角行列の線型結合なので対角行列で、成分は次のとおりである。",
       ]),
-      displayMath(String.raw`(E_K)_{kk} = \sum_{p=0}^{K}\frac{d_k^{\,p}}{p!}, \qquad (E_K)_{kl} = 0 \ (k\neq l)`),
+      displayMath(
+        String.raw`\begin{aligned}
+(E_K)_{kk}
+&= \sum_{p=0}^{K}\frac{1}{p!}(D^p)_{kk}
+   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+&= \sum_{p=0}^{K}\frac{d_k^{\,p}}{p!}
+   \quad (\because \text{Step 1 より } (D^p)_{kk} = d_k^{\,p}), \\
+(E_K)_{kl}
+&= \sum_{p=0}^{K}\frac{1}{p!}(D^p)_{kl}
+   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+&= 0
+   \quad (\because \text{Step 1 より } k \neq l \text{ では } (D^p)_{kl} = 0).
+\end{aligned}`,
+      ),
       paragraph([
         "Step 3（極限）。",
         ref("exp_converges"),
@@ -478,16 +501,20 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         math(String.raw`E_K \to \exp(D)`),
         "（",
         ref("def_matrix_norm"),
-        " のノルムについて）。このノルムは ",
-        math(String.raw`\|A\| = \sqrt{\sum_{k,l}|A_{kl}|^2}`),
-        " なので、任意の ",
+        " のノルムについて）。任意の ",
         math(String.raw`(k,l)`),
-        " について ",
-        math(String.raw`|A_{kl}| \leq \|A\|`),
-        "（非負実数の有限和の 1 項だから）。よって",
+        " について",
       ]),
       displayMath(
-        String.raw`\left|(E_K)_{kl} - \exp(D)_{kl}\right| \leq \|E_K - \exp(D)\| \to 0`,
+        String.raw`\begin{aligned}
+\left|(E_K)_{kl} - \exp(D)_{kl}\right|
+&= \left|\bigl(E_K - \exp(D)\bigr)_{kl}\right|
+   \quad (\because \text{行列の差は成分ごと}) \\
+&\leq \|E_K - \exp(D)\|
+   \quad (\because \|A\| = \sqrt{\textstyle\sum_{k,l}|A_{kl}|^2}\text{ の非負実数の有限和の 1 項}) \\
+&\to 0
+   \quad (\because E_K \to \exp(D)).
+\end{aligned}`,
       ),
       paragraph([
         "すなわち成分ごとに収束する。",
