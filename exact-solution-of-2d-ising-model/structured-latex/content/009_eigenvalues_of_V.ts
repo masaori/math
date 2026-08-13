@@ -3212,8 +3212,15 @@ B
         " だから",
       ]),
       displayMath(
-        String.raw`V Q_\epsilon = (2s_2)^{M/2}V'Q_\epsilon
-= (2s_2)^{M/2}e^{g(\epsilon)}Q_\epsilon = \Lambda_\epsilon Q_\epsilon`,
+        String.raw`\begin{aligned}
+V Q_\epsilon
+&= (2s_2)^{M/2}V'Q_\epsilon
+   \quad (\because V=(2s_2)^{M/2}V') \\
+&= (2s_2)^{M/2}e^{g(\epsilon)}Q_\epsilon
+   \quad (\because V'Q_\epsilon=e^{g(\epsilon)}Q_\epsilon) \\
+&= \Lambda_\epsilon Q_\epsilon
+   \quad (\because \Lambda_\epsilon\ \text{の定義})
+\end{aligned}`,
       ),
       paragraph([
         "対角化可能性・重複度・総個数は ",
@@ -3265,16 +3272,41 @@ B
         " のときである。それぞれ",
       ]),
       displayMath(
-        String.raw`g(1,\dots,1) = \frac{1}{2}\sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu), \qquad
-g(0,\dots,0) = -\frac{1}{2}\sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)`,
+        String.raw`\begin{aligned}
+g(1,\dots,1)
+&= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\left(1 - \tfrac12\right)
+   \quad (\because g\ \text{の定義に}\ \epsilon_\mu=1\ \text{を代入}) \\
+&= \frac{1}{2}\sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)
+   \quad \left(\because 1-\tfrac12=\tfrac12\ \text{と和の線型性}\right)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+g(0,\dots,0)
+&= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\left(0 - \tfrac12\right)
+   \quad (\because g\ \text{の定義に}\ \epsilon_\mu=0\ \text{を代入}) \\
+&= -\frac{1}{2}\sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)
+   \quad \left(\because 0-\tfrac12=-\tfrac12\ \text{と和の線型性}\right)
+\end{aligned}`,
       ),
       paragraph([
         "を代入して statement の ",
         math(String.raw`\Lambda_{\max}, \Lambda_{\min}`),
-        " を得る。積は指数部分が打ち消し合って ",
-        math(String.raw`\Lambda_{\max}\Lambda_{\min} = (2s_2)^{M}`),
-        "。",
+        " を得る。積は次の鎖で求まる。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Lambda_{\max}\Lambda_{\min}
+&= (2s_2)^{M/2}e^{g(1,\dots,1)}\,(2s_2)^{M/2}e^{g(0,\dots,0)}
+   \quad (\because \Lambda_{\max},\Lambda_{\min}\ \text{の表式}) \\
+&= (2s_2)^{M}e^{g(1,\dots,1)+g(0,\dots,0)}
+   \quad (\because \text{指数法則}) \\
+&= (2s_2)^{M}e^{0}
+   \quad (\because g(1,\dots,1)+g(0,\dots,0)=0) \\
+&= (2s_2)^{M}
+   \quad (\because e^0=1)
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
