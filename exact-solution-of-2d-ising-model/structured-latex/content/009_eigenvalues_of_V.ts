@@ -2897,8 +2897,17 @@ U S_2 U^{-1}
         " の表示に適用して",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}(V^{-1}) = (2s_2)^{-M/2}\,
-\mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)`,
+        String.raw`\begin{aligned}
+\mathrm{tr}(V^{-1})
+&= (2s_2)^{-M/2}\,
+   \mathrm{tr}\!\left(\exp\!\left(-\tfrac12 S_1\right)\exp(-S_2)\exp\!\left(-\tfrac12 S_1\right)\right)
+   \quad (\because \text{トレースの線型性}) \\
+&= (2s_2)^{-M/2}\,
+   \mathrm{tr}\!\left(\exp\!\left(-\tfrac12 S_1\right)\exp\!\left(-\tfrac12 S_1\right)\exp(-S_2)\right)
+   \quad (\because \text{トレースの巡回性}) \\
+&= (2s_2)^{-M/2}\,\mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)
+   \quad \left(\because \exp\!\left(-\tfrac12 S_1\right)^2=\exp(-S_1)\right)
+\end{aligned}`,
       ),
       paragraph([
         "Step 2（",
@@ -3015,10 +3024,24 @@ V\left(c^{-1}V'^{-1}\right)
         math(String.raw`AB = BA = I`),
         " かつ ",
         math(String.raw`AC = CA = I`),
-        " なら ",
-        math(String.raw`B = BI = B(AC) = (BA)C = IC = C`),
-        "）ので",
+        " なら次の鎖で一意である）。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+B
+&=BI
+   \quad (\because \text{単位行列}) \\
+&=B(AC)
+   \quad (\because AC=I) \\
+&=(BA)C
+   \quad (\because \text{結合則}) \\
+&=IC
+   \quad (\because BA=I) \\
+&=C
+   \quad (\because \text{単位行列})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
       displayMath(String.raw`V^{-1} = c^{-1}V'^{-1}`),
       paragraph([
         "が従う。したがって ",
@@ -3026,8 +3049,14 @@ V\left(c^{-1}V'^{-1}\right)
         " (1) より",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}(V) = c\,\mathrm{tr}(V'), \qquad
-\mathrm{tr}(V^{-1}) = c^{-1}\,\mathrm{tr}(V'^{-1})`,
+        String.raw`\begin{aligned}
+\mathrm{tr}(V)
+&=c\,\mathrm{tr}(V')
+   \quad (\because V=cV'\ \text{とトレースの線型性}), \\
+\mathrm{tr}(V^{-1})
+&=c^{-1}\,\mathrm{tr}(V'^{-1})
+   \quad (\because V^{-1}=c^{-1}V'^{-1}\ \text{とトレースの線型性})
+\end{aligned}`,
       ),
       paragraph([
         ref("trace_of_Vprime"),
@@ -3038,10 +3067,15 @@ V\left(c^{-1}V'^{-1}\right)
         " でなく、辺々割ることができて",
       ]),
       displayMath(
-        String.raw`\frac{\mathrm{tr}(V)}{\mathrm{tr}(V^{-1})}
-= \frac{c\,\mathrm{tr}(V')}{c^{-1}\,\mathrm{tr}(V'^{-1})}
-= c^2\,\frac{\mathrm{tr}(V')}{\mathrm{tr}(V'^{-1})}
-= c^2`,
+        String.raw`\begin{aligned}
+\frac{\mathrm{tr}(V)}{\mathrm{tr}(V^{-1})}
+&=\frac{c\,\mathrm{tr}(V')}{c^{-1}\,\mathrm{tr}(V'^{-1})}
+   \quad (\because \text{直前の二つの表示}) \\
+&=c^2\,\frac{\mathrm{tr}(V')}{\mathrm{tr}(V'^{-1})}
+   \quad (\because c\ne0) \\
+&=c^2
+   \quad (\because \mathrm{tr}(V')=\mathrm{tr}(V'^{-1}))
+\end{aligned}`,
       ),
       paragraph([
         "一方 Step 1・Step 2 より（",
@@ -3053,9 +3087,13 @@ V\left(c^{-1}V'^{-1}\right)
         "）",
       ]),
       displayMath(
-        String.raw`\frac{\mathrm{tr}(V)}{\mathrm{tr}(V^{-1})}
-= \frac{(2s_2)^{M/2}\,\tau}{(2s_2)^{-M/2}\,\tau}
-= (2s_2)^{M}`,
+        String.raw`\begin{aligned}
+\frac{\mathrm{tr}(V)}{\mathrm{tr}(V^{-1})}
+&=\frac{(2s_2)^{M/2}\,\tau}{(2s_2)^{-M/2}\,\tau}
+   \quad (\because \text{Step 1 と Step 2}) \\
+&=(2s_2)^M
+   \quad (\because \tau\ne0\ \text{かつ指数法則})
+\end{aligned}`,
       ),
       paragraph([
         "よって ",
