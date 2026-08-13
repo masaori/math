@@ -995,11 +995,33 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
       ),
       paragraph([
         math(String.raw`f \in \mathcal{F}^{(\pm)}`),
-        " なら ",
-        math(String.raw`\varepsilon(Wf) = W(\varepsilon f) = W(\pm f) = \pm Wf`),
-        " なので ",
+        " とすると、",
+        ref("def_eigenspaces_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f = \pm f`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon(Wf)
+&= (\varepsilon W)f
+   \quad (\because \text{行列の積の結合則}) \\
+&= (W\varepsilon)f
+   \quad (\because \text{上の等式鎖 } \varepsilon W = W\varepsilon) \\
+&= W(\varepsilon f)
+   \quad (\because \text{行列の積の結合則}) \\
+&= W(\pm f)
+   \quad (\because \varepsilon f = \pm f) \\
+&= \pm (Wf)
+   \quad (\because \text{スカラー倍は行列の作用と交換する})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので ",
         math(String.raw`Wf \in \mathcal{F}^{(\pm)}`),
-        "。",
+        "（",
+        ref("def_eigenspaces_of_epsilon"),
+        "）。",
       ]),
       paragraph([
         "(2) ",

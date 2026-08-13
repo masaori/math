@@ -32725,6 +32725,98 @@ B&=-(a\cdot u'+u\cdot a')
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_mul_negative_first_negative_first",
+    kind: "claim",
+    title: { text: "負の第一係数条件どうしの積" },
+    labels: ["claim_quadratic_positive_mul_negative_first_negative_first"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-mul-negative-first-negative-first"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`), " を ",
+        math(String.raw`s\cdot s=2`), " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`), " について、",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`), " と ",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " がともに正錐の負の第一係数条件を満たすならば、",
+        math(String.raw`\xi\cdot\eta\in P_s`), " である。ここで積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の積であり、すべての係数と比較は有理数体 ",
+        math(String.raw`\mathbb{Q}`), " に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_quadratic_multiplication_representation"), " により ",
+        math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')`),
+        " である。", math(String.raw`c:=-a`), "、", math(String.raw`c':=-a'`), "、",
+        math(String.raw`A:=a\cdot a'+2\cdot(b\cdot b')`), "、",
+        math(String.raw`B:=a\cdot b'+b\cdot a'`),
+        " と置く。負の第一係数条件により ",
+        math(String.raw`0<c`), "、", math(String.raw`0<b`), "、",
+        math(String.raw`c\cdot c<2\cdot(b\cdot b)`), "、および ",
+        math(String.raw`0<c'`), "、", math(String.raw`0<b'`), "、",
+        math(String.raw`c'\cdot c'<2\cdot(b'\cdot b')`), " である。",
+        math(String.raw`a=-c`), " と ", math(String.raw`a'=-c'`), " を代入して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A&=c\cdot c'+2\cdot(b\cdot b')
+  &&\bigl(\because\ a=-c,\ a'=-c'\text{ と負号の積}\bigr),\\
+B&=-(c\cdot b'+b\cdot c')
+  &&\bigl(\because\ a=-c,\ a'=-c'\text{ と負号の積・分配則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。", math(String.raw`0<c\cdot c'`), " と ",
+        math(String.raw`0<2\cdot(b\cdot b')`),
+        " はいずれも正どうしの積なので、その和として ",
+        math(String.raw`0<A`), " である。同様に ",
+        math(String.raw`V:=c\cdot b'+b\cdot c'`), " と置くと ",
+        math(String.raw`0<V`), " であり、", math(String.raw`B=-V`), " から ",
+        math(String.raw`B<0`), " である。",
+      ]),
+      paragraph([
+        "次に ", math(String.raw`2\cdot(B\cdot B)<A\cdot A`), " を示す。",
+        math(String.raw`D:=2\cdot(b\cdot b)-c\cdot c`), " と置くと、",
+        math(String.raw`c\cdot c<2\cdot(b\cdot b)`), " の移項により ",
+        math(String.raw`0<D`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(2\cdot(b\cdot b)\bigr)\cdot(c'\cdot c')-(c\cdot c)\cdot(c'\cdot c')
+&=D\cdot(c'\cdot c')
+  &&\bigl(\because\ D\text{ の定義と分配則}\bigr)\\
+&<D\cdot\bigl(2\cdot(b'\cdot b')\bigr)
+  &&\bigl(\because\ c'\cdot c'<2\cdot(b'\cdot b')\text{ と }0<D\bigr)\\
+&=\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)-(c\cdot c)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
+  &&\bigl(\because\ D\text{ の定義と分配則}\bigr)
+\end{aligned}`),
+      paragraph(["である。両端を移項して"]),
+      displayMath(String.raw`\bigl(2\cdot(b\cdot b)\bigr)\cdot(c'\cdot c')+(c\cdot c)\cdot\bigl(2\cdot(b'\cdot b')\bigr)<\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)+(c\cdot c)\cdot(c'\cdot c')`),
+      paragraph(["を得る。これを使って"]),
+      displayMath(String.raw`\begin{aligned}
+2\cdot(B\cdot B)
+&=2\cdot(V\cdot V)
+  &&\bigl(\because\ B=-V\text{ と負号の積}\bigr)\\
+&=(c\cdot c)\cdot\bigl(2\cdot(b'\cdot b')\bigr)+4\cdot\bigl((c\cdot c')\cdot(b\cdot b')\bigr)+\bigl(2\cdot(b\cdot b)\bigr)\cdot(c'\cdot c')
+  &&\bigl(\because\ V=c\cdot b'+b\cdot c'\text{ と分配則・結合則・可換則}\bigr)\\
+&<\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)+(c\cdot c)\cdot(c'\cdot c')+4\cdot\bigl((c\cdot c')\cdot(b\cdot b')\bigr)
+  &&\bigl(\because\ \text{上の不等式の両辺へ }4\cdot\bigl((c\cdot c')\cdot(b\cdot b')\bigr)\text{ を加える}\bigr)\\
+&=A\cdot A
+  &&\bigl(\because\ A=c\cdot c'+2\cdot(b\cdot b')\text{ と分配則・結合則・可換則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。したがって ", math(String.raw`0<A`), "、",
+        math(String.raw`B<0`), "、",
+        math(String.raw`2\cdot(B\cdot B)<A\cdot A`),
+        " が揃い、表示は正錐の負の第二係数条件を満たす（",
+        ref("def_quadratic_positive_cone"), "）。ゆえに ",
+        math(String.raw`\xi\cdot\eta\in P_s`),
+        " である。全過程は有理数の四則と順序、および代数的数の積だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "fisher_zero_claim_quadratic_positive_cone_add_closed",
     kind: "claim",
     title: { text: "正錐と加法の両立" },

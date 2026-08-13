@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 226 は、レビューで前 tick の「負の第二係数条件どうしの積」の Lean 三本を
+本文と突き合わせ、修正不要と確認した。そのあと「負の第一係数条件どうしの積」
+（`claim_quadratic_positive_mul_negative_first_negative_first`）を記述と SageMath まで進めた。
+$c:=-a$、$c':=-a'$ を置くと積の表示は
+$(A,B)=(c\cdot c'+2\cdot(b\cdot b'),\ -(c\cdot b'+b\cdot c'))$ で、正どうしの積の和から
+$0<A$、$0<V:=c\cdot b'+b\cdot c'$ により $B<0$ を得る。$D:=2\cdot(b\cdot b)-c\cdot c>0$
+を使う中間比較 $D\cdot(c'\cdot c')<D\cdot(2\cdot(b'\cdot b'))$ を移項し、交差項
+$4\cdot((c\cdot c')\cdot(b\cdot b'))$ を両辺へ加えて $2\cdot(B\cdot B)<A\cdot A$
+（負の第二係数条件）へつないだ。前 tick「負の第二係数条件どうしの積」の鏡像
+（$a,b$ の役割交換）で場合分けは不要。SageMath
+（`sagemath/check/quadratic-positive-mul-negative-first-negative-first/`）は 99856 組で
+各段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの主張の Lean
+（具体版・必要十分版・導出）を完成させる。式変形統一では姉妹側
+「レイリー上限のセクター分解」（`011_max_eigenvalue`）の
+$\varepsilon(Wf)=W(\varepsilon f)=W(\pm f)=\pm Wf$ の一行圧縮を、結合則・可換の等式鎖・
+固有空間の定義・スカラー倍の交換を行末根拠にした五段の等式鎖へ開いた。
+次の式変形統一は同ファイルの次の根拠なしの計算（散文内の等号を含めて機械走査する）から続ける。
+
 2026-08-14 の tick 225 は、「負の第二係数条件どうしの積」の Lean 具体版
 `quadraticPositive_mul_of_negativeSecond_negativeSecond`、必要十分版
 `positive_mul_negativeSecond_negativeSecond_necSuf`、導出を完成させ、四層を揃えた。レビューでは
