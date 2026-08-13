@@ -31972,6 +31972,109 @@ b+b'&<0 &&\bigl(\because\ b<0,\ b'<0\text{ と加法の単調性}\bigr)
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_add_negative_first_negative_first",
+    kind: "claim",
+    title: { text: "負の第一係数条件どうしの和" },
+    labels: ["claim_quadratic_positive_add_negative_first_negative_first"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-add-negative-first-negative-first"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_negativeFirst_negativeFirst",
+      "Ising2DLambda.NecSuf.FisherZero.positive_add_negativeFirst_negativeFirst_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_negativeFirst_negativeFirst_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`),
+        " について、",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        " と ",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " がともに正錐の負の第一係数条件（",
+        ref("def_quadratic_positive_cone"),
+        " の第三の条件）を満たすならば、",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。すべての係数と比較は有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_quadratic_addition_representation"),
+        " により ",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
+        " である。二つの第一係数は負であり、二つの第二係数は正なので、次を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a+a'&<0 &&\bigl(\because\ a<0,\ a'<0\text{ と加法の単調性}\bigr)\\
+0&<b+b' &&\bigl(\because\ 0<b,\ 0<b'\text{ と加法の単調性}\bigr)
+\end{aligned}`),
+      paragraph([
+        "交差項の大小を得る。まず二つの負の第一係数の積は正である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&<a\cdot a' &&\bigl(\because\ a<0\text{ かつ }a'<0\bigr)\\
+0&\le a\cdot a' &&\bigl(\because\ 0<a\cdot a'\bigr)\\
+0&<b\cdot b' &&\bigl(\because\ 0<b\text{ かつ }0<b'\bigr)\\
+0&\le2\cdot(b\cdot b') &&\bigl(\because\ 0<b\cdot b'\text{ と }0<2\bigr)
+\end{aligned}`),
+      paragraph([
+        "この二つの非負有理数の平方を比較する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a\cdot a')\cdot(a\cdot a')
+&=(a\cdot a)\cdot(a'\cdot a')
+  &&\bigl(\because\ \text{結合則と可換則}\bigr)\\
+&< \bigl(2\cdot(b\cdot b)\bigr)\cdot(a'\cdot a')
+  &&\bigl(\because\ a\cdot a<2\cdot(b\cdot b)\text{ と }0<a'\cdot a'\bigr)\\
+&< \bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
+  &&\bigl(\because\ a'\cdot a'<2\cdot(b'\cdot b')\text{ と }0<2\cdot(b\cdot b)\bigr)\\
+&=\bigl(2\cdot(b\cdot b')\bigr)\cdot\bigl(2\cdot(b\cdot b')\bigr)
+  &&\bigl(\because\ \text{結合則と可換則}\bigr)
+\end{aligned}`),
+      paragraph([
+        ref("claim_rational_square_lt_implies_lt"),
+        " を二つの非負有理数 ",
+        math(String.raw`a\cdot a'`),
+        " と ",
+        math(String.raw`2\cdot(b\cdot b')`),
+        " へ適用すると、",
+        math(String.raw`a\cdot a'<2\cdot(b\cdot b')`),
+        " を得る。これを和の平方へ組み込む。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a+a')\cdot(a+a')
+&=(a\cdot a)+2\cdot(a\cdot a')+(a'\cdot a')
+  &&\bigl(\because\ \text{分配則・結合則・可換則}\bigr)\\
+&<2\cdot(b\cdot b)+2\cdot(a\cdot a')+(a'\cdot a')
+  &&\bigl(\because\ a\cdot a<2\cdot(b\cdot b)\text{ と加法の単調性}\bigr)\\
+&<2\cdot(b\cdot b)+2\cdot\bigl(2\cdot(b\cdot b')\bigr)+(a'\cdot a')
+  &&\bigl(\because\ a\cdot a'<2\cdot(b\cdot b')\text{ の両辺へ正の }2\text{ を掛けて加える}\bigr)\\
+&<2\cdot(b\cdot b)+2\cdot\bigl(2\cdot(b\cdot b')\bigr)+2\cdot(b'\cdot b')
+  &&\bigl(\because\ a'\cdot a'<2\cdot(b'\cdot b')\text{ と加法の単調性}\bigr)\\
+&=2\cdot\bigl((b+b')\cdot(b+b')\bigr)
+  &&\bigl(\because\ \text{分配則・結合則・可換則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって表示 ",
+        math(String.raw`(a+a',b+b')`),
+        " は正錐の第三条件を満たし、",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。全過程は ",
+        math(String.raw`\mathbb{Q}`),
+        " の加法・積・順序と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
