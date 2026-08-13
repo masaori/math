@@ -257,4 +257,7 @@ else
   record_leftover "正常終了したが未コミットの成果が残った"
 fi
 
+# 毎 tick の成果を HTML と PDF で公開する（ユーザー指示）。失敗しても tick の結果は変えない。
+bash "$PROJECT_DIR/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 || log "    アーティファクトの公開に失敗した"
+
 exit "$status"

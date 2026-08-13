@@ -123,6 +123,17 @@ $(\because\ \dots)$」の形へ書き換える。** 対象は 2 つのプロジ�
   （`(cd ../exact-solution-of-2d-ising-model/structured-latex && npm run check)` と PDF 生成）。
 - 書き換えた証明の名前を台帳へ記録する（次の tick が続きから拾えるようにするため）。
 
+## いまの状態を Web で公開する（ユーザーの明示指示）
+
+`scripts/publish-artifact.sh` が、版・これから書くこと・済んだ範囲・直近の前進とレビューを
+1 枚の HTML にして <https://masaori.github.io/artifacts/math/ising-lambda/> へ置く。
+tick の最後と、PDF を作り直したときに自動で走るので、**tick が手で呼ぶ必要はない**。
+
+- 元になるのは台帳（`docs/tasks/auto-loop-state.md`）である。台帳の書き方が崩れると
+  このページも崩れる。台帳の節の名前（「セクション台帳」「前進の記録」「レビュー記録」）は変えない。
+- **PDF はここへ置かない。** 証明本体はローカルの `structured-latex/build/document.pdf` で読む。
+- 公開先は URL を知っていれば誰でも読めるので、置くのは上記の進捗情報だけにする。
+
 ## PDF を常に最新に保つ（ユーザーの明示指示）
 
 **`origin/main` が進んだら自動で PDF を作り直す仕組みが別に走っている。**

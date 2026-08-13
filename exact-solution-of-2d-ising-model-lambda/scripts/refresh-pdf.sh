@@ -57,6 +57,7 @@ git merge-base --is-ancestor HEAD origin/main 2>/dev/null && git merge --ff-only
 log "PDF を作り直す（${stamped:-なし} → ${head}）"
 if (cd "$PROJECT_DIR/structured-latex" && npm run build:pdf >> "$LOG_FILE" 2>&1); then
   log "OK: PDF を ${head} で作り直した"
+  bash "$PROJECT_DIR/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 || log "NG: アーティファクトの公開に失敗した"
 else
   log "NG: PDF の生成に失敗した（内容の欠陥。監査が拾う）"
 fi
