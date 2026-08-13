@@ -735,8 +735,26 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " である。よって",
       ]),
       displayMath(
-        String.raw`\cosh K_2^* = \frac{t^{-1/2} + t^{1/2}}{2} = \frac{1+t}{2\,t^{1/2}}, \qquad
-\sinh K_2^* = \frac{t^{-1/2} - t^{1/2}}{2} = \frac{1-t}{2\,t^{1/2}}`,
+        String.raw`\begin{aligned}
+\cosh K_2^*
+&= \frac{e^{K_2^*} + e^{-K_2^*}}{2}
+   \quad (\because \cosh \text{ の定義 } \cosh x = \tfrac{e^{x}+e^{-x}}{2}) \\
+&= \frac{t^{-1/2} + t^{1/2}}{2}
+   \quad (\because e^{K_2^*} = t^{-1/2},\ e^{-K_2^*} = t^{1/2}) \\
+&= \frac{1+t}{2\,t^{1/2}}
+   \quad (\because \text{分子・分母に } t^{1/2} \text{ を掛ける}),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh K_2^*
+&= \frac{e^{K_2^*} - e^{-K_2^*}}{2}
+   \quad (\because \sinh \text{ の定義 } \sinh x = \tfrac{e^{x}-e^{-x}}{2}) \\
+&= \frac{t^{-1/2} - t^{1/2}}{2}
+   \quad (\because e^{K_2^*} = t^{-1/2},\ e^{-K_2^*} = t^{1/2}) \\
+&= \frac{1-t}{2\,t^{1/2}}
+   \quad (\because \text{分子・分母に } t^{1/2} \text{ を掛ける}).
+\end{aligned}`,
       ),
       paragraph([
         "さらに ",
@@ -744,8 +762,26 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " なので",
       ]),
       displayMath(
-        String.raw`1 + t = \frac{\cosh K_2 + \sinh K_2}{\cosh K_2} = \frac{e^{K_2}}{\cosh K_2}, \qquad
-1 - t = \frac{\cosh K_2 - \sinh K_2}{\cosh K_2} = \frac{e^{-K_2}}{\cosh K_2}`,
+        String.raw`\begin{aligned}
+1 + t
+&= 1 + \frac{\sinh K_2}{\cosh K_2}
+   \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2}) \\
+&= \frac{\cosh K_2 + \sinh K_2}{\cosh K_2}
+   \quad (\because \text{通分}) \\
+&= \frac{e^{K_2}}{\cosh K_2}
+   \quad (\because \cosh x + \sinh x = e^{x}),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+1 - t
+&= 1 - \frac{\sinh K_2}{\cosh K_2}
+   \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2}) \\
+&= \frac{\cosh K_2 - \sinh K_2}{\cosh K_2}
+   \quad (\because \text{通分}) \\
+&= \frac{e^{-K_2}}{\cosh K_2}
+   \quad (\because \cosh x - \sinh x = e^{-x}).
+\end{aligned}`,
       ),
       paragraph([
         "（",
@@ -771,29 +807,51 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
       ),
       paragraph(["したがって"]),
       displayMath(
-        String.raw`\frac{(2s_2)^{1/2}}{2\,t^{1/2}}
-= \frac{2\left(\sinh K_2\cosh K_2\right)^{1/2}}{2}
-  \left(\frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
-= \left(\sinh K_2\cosh K_2 \cdot \frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
-= \left(\cosh^2 K_2\right)^{1/2}
-= \cosh K_2`,
+        String.raw`\begin{aligned}
+\frac{(2s_2)^{1/2}}{2\,t^{1/2}}
+&= \frac{2\left(\sinh K_2\cosh K_2\right)^{1/2}}{2}
+   \left(\frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
+   \quad (\because \text{直前の 2 式の代入}) \\
+&= \left(\sinh K_2\cosh K_2\right)^{1/2}
+   \left(\frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
+   \quad (\because \text{約分 } \tfrac{2}{2} = 1) \\
+&= \left(\sinh K_2\cosh K_2 \cdot \frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
+   \quad (\because \text{非負実数の平方根は積を保つ}) \\
+&= \left(\cosh^2 K_2\right)^{1/2}
+   \quad (\because \text{約分 } \tfrac{\sinh K_2}{\sinh K_2} = 1) \\
+&= \cosh K_2
+   \quad (\because \cosh K_2 > 0)
+\end{aligned}`,
       ),
-      paragraph([
-        "（非負実数の平方根は積を保ち、",
-        math(String.raw`\cosh K_2 > 0`),
-        " なので ",
-        math(String.raw`(\cosh^2 K_2)^{1/2} = \cosh K_2`),
-        "。）",
-      ]),
       paragraph(["Step 4（結論）。Step 2・Step 3 を合わせて"]),
       displayMath(
         String.raw`\begin{aligned}
 (2s_2)^{1/2}\cosh K_2^*
+&= (2s_2)^{1/2}\,\frac{1+t}{2\,t^{1/2}}
+   \quad (\because \text{Step 2 の } \cosh K_2^* \text{ の式}) \\
 &= \frac{(2s_2)^{1/2}}{2\,t^{1/2}}\,(1+t)
-= \cosh K_2 \cdot \frac{e^{K_2}}{\cosh K_2} = e^{K_2}, \\
+   \quad (\because \text{積の並べ替え}) \\
+&= \cosh K_2 \cdot (1+t)
+   \quad (\because \text{Step 3 の前因子の式}) \\
+&= \cosh K_2 \cdot \frac{e^{K_2}}{\cosh K_2}
+   \quad (\because \text{Step 2 の } 1+t \text{ の式}) \\
+&= e^{K_2}
+   \quad (\because \text{約分 } \tfrac{\cosh K_2}{\cosh K_2} = 1),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 (2s_2)^{1/2}\sinh K_2^*
+&= (2s_2)^{1/2}\,\frac{1-t}{2\,t^{1/2}}
+   \quad (\because \text{Step 2 の } \sinh K_2^* \text{ の式}) \\
 &= \frac{(2s_2)^{1/2}}{2\,t^{1/2}}\,(1-t)
-= \cosh K_2 \cdot \frac{e^{-K_2}}{\cosh K_2} = e^{-K_2}
+   \quad (\because \text{積の並べ替え}) \\
+&= \cosh K_2 \cdot (1-t)
+   \quad (\because \text{Step 3 の前因子の式}) \\
+&= \cosh K_2 \cdot \frac{e^{-K_2}}{\cosh K_2}
+   \quad (\because \text{Step 2 の } 1-t \text{ の式}) \\
+&= e^{-K_2}
+   \quad (\because \text{約分 } \tfrac{\cosh K_2}{\cosh K_2} = 1).
 \end{aligned}`,
       ),
       paragraph(["これで主張の 2 式が示された。"]),
