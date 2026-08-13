@@ -1528,11 +1528,23 @@ P^{(\pm)} f
       paragraph([
         "Step 2（",
         math(String.raw`V_2`),
-        " との可換性）。Step 1 より ",
-        math(String.raw`\varepsilon`),
-        " は ",
+        " との可換性）。",
         math(String.raw`R := K_2^*\sum_{m=1}^{M}\sigma_m^x`),
-        " と可換である。可換なら冪とも可換（",
+        " と置くと、次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon R
+&= K_2^*\sum_{m=1}^{M}\varepsilon\,\sigma_m^x
+   \quad (\because \text{スカラー倍との可換性と、行列積の有限和への分配}) \\
+&= K_2^*\sum_{m=1}^{M}\sigma_m^x\,\varepsilon
+   \quad (\because \text{Step 1 の }\varepsilon\sigma_k^x=\sigma_k^x\varepsilon\text{ を全項へ同時適用}) \\
+&= R\,\varepsilon
+   \quad (\because \text{行列積の有限和への分配とスカラー倍との可換性})
+\end{aligned}`,
+      ),
+      paragraph([
+        "可換なら冪とも可換（",
         math(String.raw`\varepsilon R^p = R^p\varepsilon`),
         " が ",
         math(String.raw`p`),
@@ -1581,11 +1593,22 @@ P^{(\pm)} f
 \end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        math(String.raw`\varepsilon`),
-        " は ",
         math(String.raw`D = \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z`),
-        " と可換であり、Step 2 と同じ冪・有限和・極限の議論で ",
+        " と置くと、次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon D
+&= \sum_{m=1}^{M}\varepsilon\,\sigma_m^z\sigma_{m+1}^z
+   \quad (\because \text{行列積の有限和への分配}) \\
+&= \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\,\varepsilon
+   \quad (\because \text{上の }\varepsilon\,\sigma_m^z\sigma_{m+1}^z=\sigma_m^z\sigma_{m+1}^z\,\varepsilon\text{ を全項へ同時適用}) \\
+&= D\,\varepsilon
+   \quad (\because \text{行列積の有限和への分配})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって Step 2 と同じ冪・有限和・極限の議論で ",
         math(String.raw`\varepsilon\exp(K_1D)=\exp(K_1D)\varepsilon`),
         " である。したがって",
       ]),
@@ -1651,9 +1674,21 @@ P^{(\pm)} f
       paragraph([
         "は各項が ",
         math(String.raw`Y\cdot Z`),
-        " の形なので、和への分配則により ",
-        math(String.raw`\varepsilon H_1^{(\pm)} = H_1^{(\pm)}\varepsilon`),
-        "。Step 2 と同じ議論で ",
+        " の形なので、次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon H_1^{(\pm)}
+&= \sum_{m=1}^{M-1}\varepsilon\,(Y_mZ_{m+1}) \mp \varepsilon\,(Y_MZ_1)
+   \quad (\because \text{行列積の有限和への分配}) \\
+&= \sum_{m=1}^{M-1}(Y_mZ_{m+1})\,\varepsilon \mp (Y_MZ_1)\,\varepsilon
+   \quad (\because \text{上の }\varepsilon\,(Y_mZ_{m'})=(Y_mZ_{m'})\,\varepsilon\text{ を全項へ同時適用}) \\
+&= H_1^{(\pm)}\,\varepsilon
+   \quad (\because \text{行列積の有限和への分配})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 2 と同じ議論で ",
         math(String.raw`\varepsilon`),
         " は ",
         math(String.raw`\exp(iK_1H_1^{(\pm)}) = V_1^{(\pm)}`),
