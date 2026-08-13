@@ -22,3 +22,7 @@ exact-solution-of-2d-ising-model-lambda/logs/
 
 # 監査用の一時 worktree（監査スクリプトが作って消す）
 exact-solution-of-2d-ising-model-lambda/logs/audit-worktree/
+
+# 3 次元プロジェクト: 生成成果物と自動ループのログ
+critical-point-cut-of-3d-ising/structured-latex/build/
+critical-point-cut-of-3d-ising/logs/
