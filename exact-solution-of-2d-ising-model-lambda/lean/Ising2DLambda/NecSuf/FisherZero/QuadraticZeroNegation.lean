@@ -33,7 +33,7 @@ theorem zero_representation_necSuf
 
 theorem neg_mem_necSuf
     {A K : Type} (negA : A → A) (negK : K → K) (combine : A → A → K)
-    (a b : A) (x : K) (hx : x = combine a b)
+    (a b : A) (x : K)
     (hneg : negK x = combine (negA a) (negA b)) :
     ∃ a' b' : A, negK x = combine a' b' := by
   exact ⟨negA a, negA b, hneg⟩

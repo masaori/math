@@ -32,8 +32,7 @@ theorem quadraticNeg_mem_from_necSuf (s : Qbar) (xi : QuadraticFieldElement s) :
       Neg.neg Neg.neg
       (fun c d : ℚ => algebraMap ℚ Qbar c + algebraMap ℚ Qbar d * s)
       (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2 (xi : Qbar)
-  · exact quadraticRepresentation_spec s xi
-  · calc
+  calc
       -(xi : Qbar) =
           -(algebraMap ℚ Qbar (quadraticRepresentation s xi).1 +
             algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s) := by
