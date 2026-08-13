@@ -1623,10 +1623,23 @@ P^{(\pm)} f
         math(String.raw`(2\sinh 2K_2)^{M/2}`),
         " は ",
         ref("scalar_identity_commutes"),
-        " より任意の行列と可換なので、定義のスカラー因子を上の等式へ掛けると ",
-        math(String.raw`\varepsilon V_2=V_2\varepsilon`),
-        " を得る。",
+        " より任意の行列と可換なので、次の鎖を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon V_2
+&= \varepsilon\left((2\sinh 2K_2)^{M/2}\exp(R)\right)
+   \quad (\because V_2\text{ の定義と }R\text{ の定義}) \\
+&= (2\sinh 2K_2)^{M/2}\left(\varepsilon\exp(R)\right)
+   \quad (\because \text{スカラー倍との可換性}) \\
+&= (2\sinh 2K_2)^{M/2}\left(\exp(R)\,\varepsilon\right)
+   \quad (\because \text{上の }\varepsilon\exp(R)=\exp(R)\varepsilon) \\
+&= \left((2\sinh 2K_2)^{M/2}\exp(R)\right)\varepsilon
+   \quad (\because \text{スカラー倍との可換性}) \\
+&= V_2\,\varepsilon
+   \quad (\because V_2\text{ の定義と }R\text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 3（",
         math(String.raw`V_1`),
@@ -1749,21 +1762,48 @@ P^{(\pm)} f
         "Step 5（",
         math(String.raw`P^{(\pm)}`),
         "）。",
-        math(String.raw`P^{(\pm)} = \tfrac12(I \pm \varepsilon)`),
-        " は ",
-        math(String.raw`I`),
-        " と ",
-        math(String.raw`\varepsilon`),
-        " の線型結合であり、",
-        math(String.raw`I`),
-        " は任意の行列と可換なので、",
+        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        " を ",
+        math(String.raw`\varepsilon X = X\varepsilon`),
+        " を満たす行列とする（Step 2–4 より ",
+        math(String.raw`V_1, V_2, V_1^{(\pm)}, (V_1^{(\pm)})^{1/2}`),
+        " がこれにあたる）。次の鎖を得る（複号同順）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P^{(\pm)}X
+&= \tfrac12\left(I \pm \varepsilon\right)X
+   \quad (\because P^{(\pm)}\text{ の定義}) \\
+&= \tfrac12\left(IX \pm \varepsilon X\right)
+   \quad (\because \text{分配法則}) \\
+&= \tfrac12\left(X \pm \varepsilon X\right)
+   \quad (\because IX=X) \\
+&= \tfrac12\left(X \pm X\varepsilon\right)
+   \quad (\because \text{仮定 }\varepsilon X=X\varepsilon) \\
+&= \tfrac12\left(XI \pm X\varepsilon\right)
+   \quad (\because X=XI) \\
+&= X\cdot\tfrac12\left(I \pm \varepsilon\right)
+   \quad (\because \text{分配法則とスカラー倍との可換性}) \\
+&= X\,P^{(\pm)}
+   \quad (\because P^{(\pm)}\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
         math(String.raw`\varepsilon`),
         " と可換な行列は ",
         math(String.raw`P^{(\pm)}`),
-        " とも可換である。",
+        " とも可換である。この計算では ",
+        ref("def_epsilon_projectors"),
+        " を用いた。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "式変形の書き方の統一（2026-08-14）: Step 2 末尾の散文に埋まっていたスカラー因子の付加（εV₂=V₂ε の導出）と、Step 5 の散文に埋まっていた線型結合との可換の計算を、一行一等号と行末根拠の鎖へ開いた。等式・根拠の内容は変えていない。",
+      ],
+    },
   },
 
   {

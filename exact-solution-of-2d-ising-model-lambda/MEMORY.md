@@ -16,7 +16,12 @@ $4\cdot((a\cdot a')\cdot(u\cdot u'))$ を両辺へ加えて $2\cdot(B\cdot B)<A\
 符号が確定する）。SageMath
 （`sagemath/check/quadratic-positive-mul-negative-second-negative-second/`）は 45369 組で
 各段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの主張の Lean
-（具体版・必要十分版・導出）を完成させる。
+（具体版・必要十分版・導出）を完成させる。式変形統一では姉妹側
+「$\varepsilon$ は $V_1,V_2,V_1^{(\pm)}$ と可換」（`010_transfer_matrix_bridge`）の散文に
+埋まっていた二つの計算（Step 2 末尾のスカラー因子の付加による
+$\varepsilon V_2=V_2\varepsilon$ の導出と、Step 5 の線型結合との可換）を、
+一行一等号と行末根拠の鎖へ開いた。次の式変形統一は同ファイルの次の根拠なしの計算
+（散文内の等号を含めて機械走査する）から続ける。
 
 2026-08-14 の tick 223 は、「非負係数条件と負の第一係数条件の積」
 （`claim_quadratic_positive_mul_nonnegative_negative_first`）の Lean 具体版・必要十分版・導出を
