@@ -2344,6 +2344,31 @@ V
 &= (2s_2)^{M/2}\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
    \quad (\because \text{スカラー行列は全行列と可換})
 \end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+V\,W
+&= (2s_2)^{M/2}\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(\pm)}\right)
+   (2s_2)^{-M/2}\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{Step 1 の表示と } W \text{ の定義}) \\
+&= (2s_2)^{M/2}(2s_2)^{-M/2}\exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)
+   \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{スカラー行列は全行列と可換}) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)
+   \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because (2s_2)^{M/2}(2s_2)^{-M/2} = 1) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)
+   \exp\!\left(\tfrac12 S_1^{(\pm)}-\tfrac12 S_1^{(\pm)}\right)\exp(-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{可換行列の exp 積公式。}\tfrac12 S_1^{(\pm)} \text{ と }-\tfrac12 S_1^{(\pm)} \text{ は可換}) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2)\exp(-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \exp(O) = I) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp(S_2-S_2)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{可換行列の exp 積公式。}S_2 \text{ と }-S_2 \text{ は可換}) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}\right)\exp\!\left(-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \exp(O) = I) \\
+&= \exp\!\left(\tfrac12 S_1^{(\pm)}-\tfrac12 S_1^{(\pm)}\right)
+   \quad (\because \text{可換行列の exp 積公式。}\tfrac12 S_1^{(\pm)} \text{ と }-\tfrac12 S_1^{(\pm)} \text{ は可換}) \\
+&= I
+   \quad (\because \exp(O) = I)
+\end{aligned}`),
       paragraph([
         "これが statement の表示である（",
         math(String.raw`V_2`),
@@ -2436,9 +2461,11 @@ W\,V
         math(String.raw`\exp(O) = I`),
         " は ",
         ref("theorem_exp_zero"),
-        "。）同じ形の鎖で ",
+        "。）以上の二つの鎖から ",
         math(String.raw`V\,W = I`),
-        " も得られるから ",
+        " と ",
+        math(String.raw`W\,V = I`),
+        " がともに成り立つから ",
         math(String.raw`V`),
         " は可逆で、",
       ]),
