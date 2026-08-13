@@ -22,6 +22,8 @@ for a in nonnegative:
                     assert (A, B) != (0, 0)
                 else:
                     assert bp <= B
+                    assert B * B <= bp * B
+                    assert bp * B <= bp * bp
                     assert B * B <= bp * bp
                     assert ap <= A
                     assert ap * ap <= A * A
