@@ -28738,6 +28738,152 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
   },
 
   {
+    id: "fisher_zero_claim_sqrt_two_exists",
+    kind: "claim",
+    title: { text: "二の平方根の存在" },
+    labels: ["claim_sqrt_two_exists"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/sqrt-two-exists"],
+    statement: [
+      paragraph([
+        "ある ",
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）が存在して、",
+      ]),
+      displayMath(String.raw`s\cdot s=2`),
+      paragraph([
+        "を満たす（",
+        math(String.raw`2:=1+1`),
+        "）。この主張は存在だけを述べる。",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元が 2 つあることと、そのどちらを ",
+        math(String.raw`\sqrt2`),
+        " と呼ぶかの特定は、後のセクションで順序を導入してから行う",
+        "（体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は ",
+        ref("def_algebraic_numbers"),
+        " のとおり同型を除いてしか固定されておらず、順序なしには 2 根を区別する言明を書けない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`2:=1+1\in\mathbb{Q}`),
+        " と置く。",
+        math(String.raw`\mathbb{Q}`),
+        " の中で ",
+        math(String.raw`2\ne0`),
+        " かつ ",
+        math(String.raw`1\ne0`),
+        " であり、",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中でも ",
+        math(String.raw`2\ne0`),
+        " かつ ",
+        math(String.raw`1\ne0`),
+        " である。",
+        math(String.raw`-2\in\overline{\mathbb{Q}}`),
+        " を ",
+        math(String.raw`2`),
+        " の加法の逆元（",
+        math(String.raw`(-2)+2=0`),
+        " を満たす元）とし、多項式",
+      ]),
+      displayMath(String.raw`g:=t^{2}+\widehat{-2}\ \in\ \overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "と置く（",
+        math(String.raw`t^{2}`),
+        " は ",
+        ref("def_qbar_polynomial_ring"),
+        " の冪の約束、",
+        math(String.raw`\widehat{-2}`),
+        " は ",
+        ref("def_qbar_constant_embedding"),
+        "）。まず ",
+        math(String.raw`g`),
+        " の ",
+        math(String.raw`t^{2}`),
+        " の係数を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_2(g)
+&=\mathrm{ac}_2\bigl(t^{2}\bigr)+\mathrm{ac}_2\bigl(\widehat{-2}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
+&=1+\mathrm{ac}_2\bigl(\widehat{-2}\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{を}\ k=2,\ j=2\ \text{へ適用}\bigr)\\
+&=1+0
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ 2\ge1\ \text{番の係数}\bigr)\\
+&=1
+&&\bigl(\because\ \text{零元との和}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備より ",
+        math(String.raw`1\ne0`),
+        " であるから ",
+        math(String.raw`\mathrm{ac}_2(g)\ne0`),
+        " であり、",
+        math(String.raw`g`),
+        " は次数 1 以上の多項式である。",
+        ref("def_algebraic_numbers"),
+        " の代数閉性により、ある ",
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " が存在して ",
+        math(String.raw`\mathrm{aev}_{s}(g)=0`),
+        " を満たす（",
+        math(String.raw`\mathrm{aev}`),
+        " は ",
+        ref("def_qbar_poly_evaluation"),
+        "）。この ",
+        math(String.raw`s`),
+        " が主張の等式を満たすことを、主張の左辺から計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s\cdot s
+&=\mathrm{aev}_{s}(t)\cdot\mathrm{aev}_{s}(t)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{s}(t)=s\bigr)\\
+&=\mathrm{aev}_{s}(t\cdot t)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は積を保つ}\bigr)\\
+&=\mathrm{aev}_{s}\bigl(t^{2}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ t^{2}=t^{1}\cdot t=t\cdot t\bigr)\\
+&=\mathrm{aev}_{s}\bigl(t^{2}\bigr)+0
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=\mathrm{aev}_{s}\bigl(t^{2}\bigr)+\bigl((-2)+2\bigr)
+&&\bigl(\because\ \text{準備の加法の逆元}\ (-2)+2=0\bigr)\\
+&=\mathrm{aev}_{s}\bigl(t^{2}\bigr)+\bigl(\mathrm{aev}_{s}\bigl(\widehat{-2}\bigr)+2\bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の定数の値}\ \mathrm{aev}_{s}\bigl(\widehat{-2}\bigr)=-2\bigr)\\
+&=\bigl(\mathrm{aev}_{s}\bigl(t^{2}\bigr)+\mathrm{aev}_{s}\bigl(\widehat{-2}\bigr)\bigr)+2
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\mathrm{aev}_{s}\bigl(t^{2}+\widehat{-2}\bigr)+2
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は和を保つ}\bigr)\\
+&=\mathrm{aev}_{s}(g)+2
+&&\bigl(\because\ g\ \text{の定義}\bigr)\\
+&=0+2
+&&\bigl(\because\ \text{上で取った}\ \mathrm{aev}_{s}(g)=0\bigr)\\
+&=2
+&&\bigl(\because\ \text{零元との和}\bigr)
+\end{aligned}`),
+      paragraph([
+        "ゆえに ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす ",
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " が存在する。全過程は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}[t]`),
+        " の有限個の加法・積・係数の取り出し・多項式の値だけで閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

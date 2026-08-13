@@ -195,6 +195,7 @@ export const ALL_LABELS = [
   "claim_shift_matrix_pow",
   "claim_shift_matrix_right",
   "claim_shift_orbit_preserving",
+  "claim_sqrt_two_exists",
   "claim_torus_homology_sector_partition",
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",

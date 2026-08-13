@@ -921,11 +921,63 @@ n_\mu n_\nu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-R_\mu^{(1)}R_\mu^{(1)} &= n_\mu^2 = n_\mu = R_\mu^{(1)}, \\
-R_\mu^{(0)}R_\mu^{(0)} &= (I-n_\mu)^2 = I - 2n_\mu + n_\mu^2 = I - n_\mu = R_\mu^{(0)}, \\
-R_\mu^{(1)}R_\mu^{(0)} &= n_\mu(I - n_\mu) = n_\mu - n_\mu^2 = 0
-= R_\mu^{(0)}R_\mu^{(1)}, \\
-R_\mu^{(1)} + R_\mu^{(0)} &= n_\mu + (I - n_\mu) = I
+R_\mu^{(1)}R_\mu^{(1)}
+&= n_\mu^2
+   \quad (\because R_\mu^{(1)} = n_\mu \text{ の定義と冪の記法}) \\
+&= n_\mu
+   \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
+&= R_\mu^{(1)}
+   \quad (\because R_\mu^{(1)} = n_\mu \text{ の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(0)}R_\mu^{(0)}
+&= (I-n_\mu)^2
+   \quad (\because R_\mu^{(0)} = I - n_\mu \text{ の定義と冪の記法}) \\
+&= I - 2n_\mu + n_\mu^2
+   \quad (\because \text{分配法則と、単位行列との積}) \\
+&= I - 2n_\mu + n_\mu
+   \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
+&= I - n_\mu
+   \quad (\because -2n_\mu + n_\mu = -n_\mu) \\
+&= R_\mu^{(0)}
+   \quad (\because R_\mu^{(0)} = I - n_\mu \text{ の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(1)}R_\mu^{(0)}
+&= n_\mu(I - n_\mu)
+   \quad (\because R_\mu^{(1)},\ R_\mu^{(0)} \text{ の定義}) \\
+&= n_\mu - n_\mu^2
+   \quad (\because \text{分配法則と、単位行列との積}) \\
+&= n_\mu - n_\mu
+   \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
+&= 0
+   \quad (\because \text{加法の逆元})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(0)}R_\mu^{(1)}
+&= (I - n_\mu)n_\mu
+   \quad (\because R_\mu^{(0)},\ R_\mu^{(1)} \text{ の定義}) \\
+&= n_\mu - n_\mu^2
+   \quad (\because \text{分配法則と、単位行列との積}) \\
+&= n_\mu - n_\mu
+   \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
+&= 0
+   \quad (\because \text{加法の逆元})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(1)} + R_\mu^{(0)}
+&= n_\mu + (I - n_\mu)
+   \quad (\because R_\mu^{(1)},\ R_\mu^{(0)} \text{ の定義}) \\
+&= I
+   \quad (\because n_\mu + (-n_\mu) = 0 \text{ と零元との和})
 \end{aligned}`,
       ),
       paragraph([
