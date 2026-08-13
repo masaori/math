@@ -151,6 +151,7 @@ export const ALL_LABELS = [
   "claim_quadratic_zero_mem",
   "claim_quadratic_zero_representation",
   "claim_rational_exponent_well_defined",
+  "claim_rational_square_lt_implies_lt",
   "claim_rational_square_ne_double_square",
   "claim_restriction_family_gluing",
   "claim_root_factor_quotient_value_ne_zero",
