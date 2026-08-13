@@ -31109,6 +31109,11 @@ r\cdot r
     labels: ["claim_quadratic_addition_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-addition"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticAdd_mem",
+      "Ising2DLambda.NecSuf.FisherZero.add_mem_necSuf",
+      "Ising2DLambda.FisherZero.quadraticAdd_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -31206,6 +31211,11 @@ r\cdot r
     labels: ["claim_quadratic_addition_representation"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-addition"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticRepresentation_add",
+      "Ising2DLambda.NecSuf.FisherZero.add_representation_necSuf",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_add_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

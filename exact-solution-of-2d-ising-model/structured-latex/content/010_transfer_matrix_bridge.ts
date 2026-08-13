@@ -1755,8 +1755,15 @@ P^{(\pm)} f
         " について",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}(X) = \mathrm{tr}\!\left(\left(P^{(+)}+P^{(-)}\right)X\right)
-= \mathrm{tr}\!\left(P^{(+)}X\right) + \mathrm{tr}\!\left(P^{(-)}X\right)`,
+        String.raw`\begin{aligned}
+\mathrm{tr}(X)
+&= \mathrm{tr}\!\left(IX\right)
+   \quad (\because \text{単位行列の作用}) \\
+&= \mathrm{tr}\!\left(\left(P^{(+)}+P^{(-)}\right)X\right)
+   \quad (\because P^{(+)}+P^{(-)}=I) \\
+&= \mathrm{tr}\!\left(P^{(+)}X\right) + \mathrm{tr}\!\left(P^{(-)}X\right)
+   \quad (\because \text{トレースの線型性})
+\end{aligned}`,
       ),
       paragraph([
         "これを ",
@@ -1766,8 +1773,10 @@ P^{(\pm)} f
         " に適用して",
       ]),
       displayMath(
-        String.raw`Z(J,J') = \mathrm{tr}\!\left(P^{(+)}(V_1V_2)^{N_{\mathrm{row}}}\right)
-+ \mathrm{tr}\!\left(P^{(-)}(V_1V_2)^{N_{\mathrm{row}}}\right)`,
+        String.raw`Z(J,J')
+= \mathrm{tr}\!\left(P^{(+)}(V_1V_2)^{N_{\mathrm{row}}}\right)
++ \mathrm{tr}\!\left(P^{(-)}(V_1V_2)^{N_{\mathrm{row}}}\right)
+\quad (\because \text{分配関数の Pauli 表示と上のトレース分解})`,
       ),
       paragraph([
         "Step 2（各セクターで ",
@@ -1780,7 +1789,8 @@ P^{(\pm)} f
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(P^{(\pm)}(V_1V_2)^{N_{\mathrm{row}}}\right)
-= \mathrm{tr}\!\left(P^{(\pm)}\left(V_1^{(\pm)}V_2\right)^{N_{\mathrm{row}}}\right)`,
+= \mathrm{tr}\!\left(P^{(\pm)}\left(V_1^{(\pm)}V_2\right)^{N_{\mathrm{row}}}\right)
+\quad (\because \text{セクター内での }V_1\text{ の置換})`,
       ),
       paragraph([
         "（",
@@ -1798,17 +1808,34 @@ P^{(\pm)} f
         math(String.raw`B := \left(V_1^{(\pm)}\right)^{1/2}`),
         " と略記する。",
         ref("theorem_exp_product"),
-        " より ",
-        math(String.raw`BB = \exp\!\left(\tfrac12 iK_1H_1^{(\pm)}\right)\exp\!\left(\tfrac12 iK_1H_1^{(\pm)}\right) = \exp\!\left(iK_1H_1^{(\pm)}\right) = V_1^{(\pm)}`),
-        " である（同じ行列どうしは可換）。",
+        " と同じ行列どうしの可換性より次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+BB
+&= \exp\!\left(\tfrac12 iK_1H_1^{(\pm)}\right)
+   \exp\!\left(\tfrac12 iK_1H_1^{(\pm)}\right)
+   \quad (\because B\text{ の定義}) \\
+&= \exp\!\left(iK_1H_1^{(\pm)}\right)
+   \quad (\because \text{可換する行列の指数関数の積}) \\
+&= V_1^{(\pm)}
+   \quad (\because V_1^{(\pm)}\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`n := N_{\mathrm{row}} \geq 1`),
         " として",
       ]),
       displayMath(
-        String.raw`\left(V^{(\pm)}\right)^{n}
-= \left(B V_2 B\right)^{n}
-= B\,\underbrace{(V_2 B B)(V_2 BB)\cdots(V_2BB)}_{n-1 \text{ 個}}\,V_2\,B
-= B\,\left(V_2 V_1^{(\pm)}\right)^{n-1}V_2\,B`,
+        String.raw`\begin{aligned}
+\left(V^{(\pm)}\right)^{n}
+&= \left(B V_2 B\right)^{n}
+   \quad (\because V^{(\pm)}\text{ の定義}) \\
+&= B\,\underbrace{(V_2 B B)(V_2 BB)\cdots(V_2BB)}_{n-1 \text{ 個}}\,V_2\,B
+   \quad (\because \text{行列積の結合法則}) \\
+&= B\,\left(V_2 V_1^{(\pm)}\right)^{n-1}V_2\,B
+   \quad (\because BB=V_1^{(\pm)})
+\end{aligned}`,
       ),
       paragraph([
         "（結合法則で括り直し、隣接する ",
@@ -1834,20 +1861,17 @@ P^{(\pm)} f
 &= \mathrm{tr}\!\left(P^{(\pm)}V_1^{(\pm)}\left(V_2V_1^{(\pm)}\right)^{n-1}V_2\right)
    \quad (\because BB = V_1^{(\pm)}) \\
 &= \mathrm{tr}\!\left(P^{(\pm)}\left(V_1^{(\pm)}V_2\right)^{n}\right)
+   \quad (\because \text{行列積の結合法則})
 \end{aligned}`,
       ),
-      paragraph([
-        "最後の等号は ",
-        math(String.raw`V_1^{(\pm)}\left(V_2V_1^{(\pm)}\right)^{n-1}V_2 = \left(V_1^{(\pm)}V_2\right)^{n}`),
-        "（結合法則で括り直すだけ）による。",
-      ]),
       paragraph([
         "Step 4（結論）。Step 1〜3 を合わせて",
       ]),
       displayMath(
         String.raw`Z(J,J')
 = \mathrm{tr}\!\left(P^{(+)}\left(V^{(+)}\right)^{N_{\mathrm{row}}}\right)
-+ \mathrm{tr}\!\left(P^{(-)}\left(V^{(-)}\right)^{N_{\mathrm{row}}}\right)`,
++ \mathrm{tr}\!\left(P^{(-)}\left(V^{(-)}\right)^{N_{\mathrm{row}}}\right)
+\quad (\because \text{Step 1--3})`,
       ),
       paragraph([
         "statement の 4 項の形は ",

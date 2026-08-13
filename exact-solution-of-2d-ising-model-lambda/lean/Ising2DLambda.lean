@@ -497,3 +497,6 @@ import Ising2DLambda.FisherZero.QuadraticTrichotomyAtLeastOneFromNecSuf
 import Ising2DLambda.FisherZero.QuadraticTrichotomyAtMostOne
 import Ising2DLambda.NecSuf.FisherZero.QuadraticTrichotomyAtMostOne
 import Ising2DLambda.FisherZero.QuadraticTrichotomyAtMostOneFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticAddition
+import Ising2DLambda.NecSuf.FisherZero.QuadraticAddition
+import Ising2DLambda.FisherZero.QuadraticAdditionFromNecSuf
