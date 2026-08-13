@@ -65,10 +65,12 @@ $\mathbb{R}$ 側の定理は**辞書**として別に書く。動機づけと比
 | --- | --- | --- |
 | 記述 | 一ステップ一定理・根拠の明示・住処の宣言で人手証明を書く | `structured-latex/content/` |
 | SageMath 検証 | 式変形と数え上げを**一行ずつ**厳密に確かめる（`ZZ`/`QQ`） | `sagemath/check/<対象名>/` |
-| Lean 具体版 | 人手証明と 1 対 1 に対応する証明 | `lean/`（未着手） |
-| Lean 必要十分版 | 同じ手順のまま抽象度だけ必要十分まで上げる | `lean/`（未着手） |
+| Lean 具体版 | 人手証明と **1 対 1 に対応する**証明 | `lean/Ising3DCut/` |
+| Lean 必要十分版 | 同じ手順のまま抽象度だけ必要十分まで上げる | `lean/Ising3DCut/NecSuf/` |
 
-四層を全部満たせない段階では、どこまで済んだかを必ず明示する。
+**四層すべてを満たしたときだけ「完了」と書く**（2 次元側と同じ運用）。
+満たせない段階では、どこまで済んだかを必ず明示する（「記述と SageMath まで。Lean 未着手」）。
+Lean 側の規約は [lean/README.md](lean/README.md)、SageMath 側は [sagemath/README.md](sagemath/README.md)。
 
 ## 構成と検証コマンド
 
@@ -77,7 +79,8 @@ critical-point-cut-of-3d-ising/
 ├── README.md                  # このファイル（ゴールと立場）
 ├── MEMORY.md                  # 引き継ぎメモ
 ├── structured-latex/          # 証明の正本（構造化テキスト）
-├── sagemath/                  # 厳密計算による裏取り
+├── sagemath/                  # 厳密計算による裏取り（ZZ/QQ のみ。浮動小数点は使わない）
+├── lean/                      # 形式検証（具体版 Ising3DCut / 必要十分版 Ising3DCut/NecSuf）
 ├── docs/tasks/                # 自動ループの手順書と状態台帳
 ├── scripts/                   # 自動ループの起動スクリプト
 └── logs/                      # 実行ログ（git 管理外）
@@ -88,6 +91,7 @@ critical-point-cut-of-3d-ising/
 (cd structured-latex && npm run check)    # 生成物の鮮度 → 型検査 → 実行時検証 → ノート非混入
 (cd structured-latex && npm run build:pdf) # PDF を作る（tectonic が必要）
 node sagemath/tools/verify-check-linkage.ts # 検証 ↔ 証明の対応
+(cd lean && lake build && bash scripts/check-no-sorry.sh)  # Lean（import 漏れ・sorry 非依存）
 ```
 
 初回のみ `(cd structured-latex && pnpm install)`（Node 22.18 以降）。

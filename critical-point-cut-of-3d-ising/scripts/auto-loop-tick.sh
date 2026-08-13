@@ -149,6 +149,34 @@ ensure_node_modules() {
 ensure_node_modules "structured-latex"
 ensure_node_modules "$PROJECT_NAME/structured-latex"
 
+# Lean の依存（mathlib）も gitignore なので worktree には無い。**ダウンロードし直さない。**
+# 2 次元側と同じ Lean/mathlib の版に固定してあるので、lake-manifest.json が一致するなら
+# 共有チェックアウトの 2 次元側から clone copy（copy-on-write）で持ち込む。
+# 8GB 級なので実複製もダウンロードも 25 分の tick には収まらない。
+ensure_lake_packages() {
+  local dst="$LOOP_WORKTREE/$PROJECT_NAME/lean/.lake/packages"
+  local self_src="$MAIN_REPO_DIR/$PROJECT_NAME/lean/.lake/packages"
+  local sibling_src="$MAIN_REPO_DIR/exact-solution-of-2d-ising-model-lambda/lean/.lake/packages"
+  [ -d "$dst" ] && return 0
+  [ -d "$LOOP_WORKTREE/$PROJECT_NAME/lean" ] || return 0
+  local src=""
+  if [ -d "$self_src" ] && cmp -s "$MAIN_REPO_DIR/$PROJECT_NAME/lean/lake-manifest.json" \
+      "$LOOP_WORKTREE/$PROJECT_NAME/lean/lake-manifest.json"; then
+    src="$self_src"
+  elif [ -d "$sibling_src" ] && cmp -s "$MAIN_REPO_DIR/exact-solution-of-2d-ising-model-lambda/lean/lake-manifest.json" \
+      "$LOOP_WORKTREE/$PROJECT_NAME/lean/lake-manifest.json"; then
+    src="$sibling_src"
+  fi
+  if [ -n "$src" ]; then
+    mkdir -p "$(dirname "$dst")"
+    cp -Rc "$src" "$dst" 2>/dev/null || cp -R "$src" "$dst"
+    log "    Lean の依存を clone copy で持ち込んだ（$src）"
+  else
+    log "    WARN: Lean の依存を持ち込めなかった（lake-manifest.json が一致する取得済みの依存が無い）"
+  fi
+}
+ensure_lake_packages
+
 # --- 締切 --------------------------------------------------------------------
 # まとめに入る締切は強制終了の 5 分前に置く。時間を見積もらせるのではなく時計を見させる。
 SOFT_DEADLINE="$(date -v+$(( (TICK_TIMEOUT_SECONDS - 300) / 60 ))M '+%H:%M' 2>/dev/null \
@@ -268,6 +296,11 @@ fi
 
 # 人間が開いたまま進み具合を見られるように、PDF をメインの作業ツリー側の固定パスへ置く。
 # build/ は gitignore なので、コピーしても人間の作業と衝突しない。
+# 論文 HTML を公開し、tick の完了を Slack へ報告する（作業概要と公開 URL を添える。ユーザー指示）。
+# 失敗しても tick の結果は変えない。
+bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 \
+  || log "    アーティファクトの公開に失敗した"
+
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
 main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"
 if [ -f "$loop_pdf" ] && [ -d "$MAIN_REPO_DIR/$PROJECT_NAME" ]; then

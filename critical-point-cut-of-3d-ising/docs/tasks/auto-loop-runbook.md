@@ -63,15 +63,26 @@
 
 修正した場合は、**何をなぜ直したかを台帳の「レビュー記録」へ 1 行で残す**。
 
-## セクション完了の条件
+## セクション完了の条件（四層。2 次元側と同じ）
 
-セクションを `done` にしてよいのは次をすべて満たしたときだけである。
+セクションを `done` にしてよいのは次を**すべて**満たしたときだけである
+（[docs/context/証明の書き方.md](../../../docs/context/証明の書き方.md) の四層の検証）。
 
-- 本文が構造化テキストで書けている（一ステップ一定理・記号の帰属・住処の宣言）。
-- 対応する SageMath 検証があり、**実行して通っている**（`overview.md` に対象ラベル・結果・実行日）。
-- 未証明の `todo` がそのセクションに残っていない。
+1. **記述**: 本文が構造化テキストで書けている（一ステップ一定理・根拠の明示・記号の帰属・住処の宣言）。
+   未証明の `todo` がそのセクションに残っていない。
+2. **SageMath 検証**: 式変形と数え上げを**一行ずつ**確かめる検証があり、**実行して通っている**
+   （`sagemath/check/<対象名>/overview.md` に対象ラベル・結果・実行日）。`ZZ`/`QQ` の厳密計算で行う。
+3. **Lean 具体版**: 人手証明と **1 対 1 に対応する**証明が `lean/Ising3DCut/` にあり、
+   `lake build` が通り `sorry` が無い。**人手証明の計算を mathlib の一般論へ委ねない。**
+4. **Lean 必要十分版**: 同じ手順のまま抽象度だけ必要十分まで上げた版が `lean/Ising3DCut/NecSuf/` にあり、
+   仮定が「具体版の証明が実際に使っている性質」だけになっている。削れなかった仮定は理由をコメントに書く。
+   **mathlib の高抽象度の既製定理へ丸投げしたものは認めない。**
 
-Lean は未着手である。Lean が要るセクションを `done` にするときは「記述と SageMath まで」と書く。
+四層のどこまで済んだかは台帳の `status` に正直に書く（`記述まで` / `記述と SageMath まで` /
+`Lean 具体版まで` / `done`）。**Lean 未着手を黙って `done` にしない。**
+
+**1 tick 1 セクションの上限があるので、Lean は 1 tick に 1 主張（具体版・必要十分版・導出の 3 本）** を
+上限とする。それで収まらない主張は、先に本文の側で論法ごとに割り直す。
 
 ## 検証コマンド（push 前に毎回）
 
@@ -80,6 +91,8 @@ Lean は未着手である。Lean が要るセクションを `done` にする�
 (cd structured-latex && npm run build:pdf)   # PDF まで組めること（組めない文字・未解決参照を検出）
 sage sagemath/check/<対象名>/check.sage       # その tick で触れた検証
 node sagemath/tools/verify-check-linkage.ts  # 検証 ↔ 証明の対応
+(cd lean && lake build)                      # Lean が通ること
+(cd lean && bash scripts/check-no-sorry.sh)  # 入口からの import・sorry 非依存・登録漏れ
 ```
 
 ラベル・ブロックを増減したら `(cd structured-latex && npm run gen)` を先に走らせる
@@ -110,12 +123,27 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 
 作業単位の区切りそれ自体は停止理由にならない——が、**1 tick 1 セクションの上限は守る**。
 
-## 報告（Slack）
+## 報告（Slack。毎 tick・ユーザー指示）
 
-**毎 tick は報告しない。** 次の 2 つの場合だけ `slack-notification` skill で報告する。
+**毎 tick の完了時に、作業内容の概要と公開したアーティファクトの URL を添えて Slack へ報告する。**
+これは `scripts/publish-artifact.sh` が tick の最後に自動で行う（tick が手で呼ぶ必要はない）。
 
-- **セクションが `done` になったとき**。何を証明したかを 1–2 文で書く。
-- **止まったとき**（上の「止まってよい場合」に該当し、人間の判断を待つとき）。何が論点かを書く。
+- 本文は台帳の「現在地」の先頭項目をそのまま使う。**だから「現在地」の先頭に、
+  その tick で何をしたかを人間が読める日本語で書くこと。** 番号や記号だけで書かない。
+- 同じ版（コミット）では二度送らない。
+- **止まったとき**（下の「止まってよい場合」に該当し人間の判断を待つとき）は、
+  それとは別に `slack-notification` skill で論点を報告する。
+
+## 論文を Web で公開する（ユーザー指示）
+
+`scripts/publish-artifact.sh` が `structured-latex/content/` から論文 1 枚の HTML
+（`tools/build-html.ts`）を作り、artifacts リポジトリの GitHub Pages へ置く。tick の最後に自動で走る。
+
+- **公開するのは論文であって、進捗の報告ではない。** 台帳の内容は HTML へ載せない。
+- **PDF は公開しない。** 手元の `structured-latex/build/document.pdf` で読む
+  （tick はメイン側の同じパスへ複製するので、ビューアを開いたままにできる）。
+- **URL を決め打ちしない。** 実際の URL は
+  `~/Library/Logs/ising-3d-cut-auto-loop/publish-artifact.log` の「OK: 公開した」の行に出る。
 
 ## 打ち切られたときの扱い
 
