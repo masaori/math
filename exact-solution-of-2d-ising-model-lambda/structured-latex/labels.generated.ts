@@ -47,6 +47,7 @@ export const ALL_LABELS = [
   "claim_low_temperature_trivial_sector_expression",
   "claim_matrix_pow_entry",
   "claim_mixed_boundary_duality_identity",
+  "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
   "claim_orbit_bijection_id_or_shift",
   "claim_orbit_factor_root",

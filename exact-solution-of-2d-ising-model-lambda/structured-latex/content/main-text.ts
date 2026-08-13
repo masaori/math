@@ -29209,6 +29209,155 @@ s\cdot s
   },
 
   {
+    id: "fisher_zero_claim_no_rational_square_two",
+    kind: "claim",
+    title: { text: "有理数の平方は二にならない" },
+    labels: ["claim_no_rational_square_two"],
+    habitat: "Q",
+    verification: ["sagemath/check/no-rational-square-two"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`q\in\mathbb{Q}`),
+        " について",
+      ]),
+      displayMath(String.raw`q\cdot q\ne2`),
+      paragraph([
+        "である（",
+        math(String.raw`2:=1+1\in\mathbb{Q}`),
+        "、積は ",
+        math(String.raw`\mathbb{Q}`),
+        " の積）。この主張は、後のセクションで自己双対方程式の二根を区別する順序を導入するときに、",
+        math(String.raw`1`),
+        " と ",
+        math(String.raw`s`),
+        "（",
+        ref("claim_sqrt_two_exists"),
+        " の元）が ",
+        math(String.raw`\mathbb{Q}`),
+        " 上一次独立であることの根拠として使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "背理法による。ある ",
+        math(String.raw`q\in\mathbb{Q}`),
+        " が ",
+        math(String.raw`q\cdot q=2`),
+        " を満たすと仮定する。",
+      ]),
+      paragraph([
+        "準備として、",
+        math(String.raw`q\cdot q=2`),
+        " を満たす正の有理数 ",
+        math(String.raw`r\in\mathbb{Q}_{>0}`),
+        " を作る。有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序の三分律により、",
+        math(String.raw`q>0`),
+        "・",
+        math(String.raw`q=0`),
+        "・",
+        math(String.raw`q<0`),
+        " のちょうど 1 つが成り立つ。",
+        math(String.raw`q=0`),
+        " の場合は ",
+        math(String.raw`q\cdot q=0\cdot0=0`),
+        "（零元との積）であり、",
+        math(String.raw`\mathbb{Q}`),
+        " の中で ",
+        math(String.raw`2\ne0`),
+        " なので仮定 ",
+        math(String.raw`q\cdot q=2`),
+        " と矛盾する。よって ",
+        math(String.raw`q>0`),
+        " または ",
+        math(String.raw`q<0`),
+        " である。",
+        math(String.raw`q>0`),
+        " の場合は ",
+        math(String.raw`r:=q`),
+        " と置く。",
+        math(String.raw`q<0`),
+        " の場合は ",
+        math(String.raw`r:=-q`),
+        " と置く（このとき ",
+        math(String.raw`r>0`),
+        " であり、",
+        math(String.raw`r\cdot r=(-q)\cdot(-q)=q\cdot q`),
+        " は分配則と加法の逆元の性質から従う）。どちらの場合も",
+      ]),
+      displayMath(String.raw`r\in\mathbb{Q}_{>0},\qquad r\cdot r=2`),
+      paragraph([
+        "である。整数 ",
+        math(String.raw`m:=w_2(r)\in\mathbb{Z}`),
+        " と置く（",
+        math(String.raw`w_2`),
+        " は ",
+        ref("def_rational_log"),
+        " の、素数 ",
+        math(String.raw`2`),
+        " での指数）。素数 ",
+        math(String.raw`2`),
+        " での指数を数える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=1-0
+&&\bigl(\because\ \mathbb{Z}\ \text{の減法}\bigr)\\
+&=v_2(2)-v_2(1)
+&&\bigl(\because\ \blkref{def_prime_exponent}\ \text{を}\ 2=2^{1}\ \text{と}\ 1\ \text{（空積）へ適用}\bigr)\\
+&=w_2(2)
+&&\bigl(\because\ \blkref{def_rational_log}\ \text{の}\ w_2\ \text{の定義を表示}\ 2=2/1\ \text{へ適用}\bigr)\\
+&=w_2(r\cdot r)
+&&\bigl(\because\ \text{準備で得た}\ r\cdot r=2\bigr)\\
+&=\bigl(\log(r\cdot r)\bigr)(2)
+&&\bigl(\because\ \blkref{def_rational_log}\ \text{の}\ \log\ \text{の定義}\bigr)\\
+&=\bigl(\log r+\log r\bigr)(2)
+&&\bigl(\because\ \blkref{claim_log_additive}\ \text{を}\ q_1=q_2=r\ \text{へ適用}\bigr)\\
+&=(\log r)(2)+(\log r)(2)
+&&\bigl(\because\ \blkref{def_log_order_group}\ \text{の加法は素数ごとの}\ \mathbb{Z}\ \text{の加法}\bigr)\\
+&=w_2(r)+w_2(r)
+&&\bigl(\because\ \blkref{def_rational_log}\ \text{の}\ \log\ \text{の定義}\bigr)\\
+&=m+m
+&&\bigl(\because\ m\ \text{の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        "整数 ",
+        math(String.raw`m`),
+        " について、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序の三分律により ",
+        math(String.raw`m\ge1`),
+        " または ",
+        math(String.raw`m\le0`),
+        " である。",
+        math(String.raw`m\ge1`),
+        " ならば ",
+        math(String.raw`m+m\ge1+1=2>1`),
+        "（順序と加法の両立）で、上の ",
+        math(String.raw`m+m=1`),
+        " と矛盾する。",
+        math(String.raw`m\le0`),
+        " ならば ",
+        math(String.raw`m+m\le0+0=0<1`),
+        "（順序と加法の両立）で、やはり ",
+        math(String.raw`m+m=1`),
+        " と矛盾する。どちらの場合も矛盾が出たので、仮定が偽であり、任意の ",
+        math(String.raw`q\in\mathbb{Q}`),
+        " について ",
+        math(String.raw`q\cdot q\ne2`),
+        " である。",
+      ]),
+      paragraph([
+        "全過程は有理数の四則と順序、整数の順序、および素因数分解の指数（",
+        math(String.raw`\Lambda`),
+        " の成分）の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

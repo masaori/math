@@ -1680,8 +1680,30 @@ V' y
     ],
     proof: [
       paragraph([
-        "(1) 成分計算による。",
-        math(String.raw`((AB)^*)_{kl} = \overline{(AB)_{lk}} = \overline{\sum_j A_{lj}B_{jk}} = \sum_j \overline{B_{jk}}\,\overline{A_{lj}} = \sum_j (B^*)_{kj}(A^*)_{jl} = (B^*A^*)_{kl}`),
+        "(1) 成分計算による。任意の成分 ",
+        math(String.raw`(k,l)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+((AB)^*)_{kl}
+&= \overline{(AB)_{lk}}
+   \quad (\because \text{共役転置の定義}) \\
+&= \overline{\textstyle\sum_j A_{lj}B_{jk}}
+   \quad (\because \text{行列積の定義}) \\
+&= \textstyle\sum_j \overline{A_{lj}B_{jk}}
+   \quad (\because \text{複素共役は和を保つ}) \\
+&= \textstyle\sum_j \overline{A_{lj}}\,\overline{B_{jk}}
+   \quad (\because \text{複素共役は積を保つ}) \\
+&= \textstyle\sum_j \overline{B_{jk}}\,\overline{A_{lj}}
+   \quad (\because \mathbb{C}\text{ の積の可換性}) \\
+&= \textstyle\sum_j (B^*)_{kj}(A^*)_{jl}
+   \quad (\because \text{共役転置の定義}) \\
+&= (B^*A^*)_{kl}
+   \quad (\because \text{行列積の定義})
+\end{aligned}`,
+      ),
+      paragraph([
         "（複素共役が和と積を保つことは ",
         ref("conjugation_is_ring_homomorphism"),
         " による）。第 2 式も同様。",
