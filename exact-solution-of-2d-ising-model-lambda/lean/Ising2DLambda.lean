@@ -469,3 +469,6 @@ import Ising2DLambda.FisherZero.KwDualTransformInvolutionFromNecSuf
 import Ising2DLambda.FisherZero.KwSelfDualQuadraticEquivalence
 import Ising2DLambda.NecSuf.FisherZero.KwSelfDualQuadraticEquivalence
 import Ising2DLambda.FisherZero.KwSelfDualQuadraticEquivalenceFromNecSuf
+import Ising2DLambda.FisherZero.SqrtTwoExists
+import Ising2DLambda.NecSuf.FisherZero.SqrtTwoExists
+import Ising2DLambda.FisherZero.SqrtTwoExistsFromNecSuf

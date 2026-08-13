@@ -835,6 +835,9 @@ targets=(
   Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence
   Ising2DLambda.NecSuf.FisherZero.kw_self_dual_quadratic_equivalence_necSuf
   Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence_from_necSuf
+  Ising2DLambda.FisherZero.sqrtTwo_exists
+  Ising2DLambda.NecSuf.FisherZero.sqrt_two_exists_necSuf
+  Ising2DLambda.FisherZero.sqrtTwo_exists_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

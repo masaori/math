@@ -28744,6 +28744,11 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
     labels: ["claim_sqrt_two_exists"],
     habitat: "Qbar",
     verification: ["sagemath/check/sqrt-two-exists"],
+    lean: [
+      "Ising2DLambda.FisherZero.sqrtTwo_exists",
+      "Ising2DLambda.NecSuf.FisherZero.sqrt_two_exists_necSuf",
+      "Ising2DLambda.FisherZero.sqrtTwo_exists_from_necSuf",
+    ],
     statement: [
       paragraph([
         "ある ",

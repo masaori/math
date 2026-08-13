@@ -1009,27 +1009,47 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " の 2 因子を隣接させられて",
       ]),
       displayMath(
-        String.raw`Q_\epsilon Q_{\epsilon'}
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
+        String.raw`\begin{aligned}
+Q_\epsilon Q_{\epsilon'}
+&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
   R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
-= 0`,
+   \quad (\because \text{因子の可換性により添字 }\nu\text{ の二因子を隣接させる}) \\
+&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
+   \quad (\because \epsilon_\nu\neq\epsilon'_\nu\text{ と Step 0 の直交性}) \\
+&= 0
+   \quad (\because \text{零行列との積})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\epsilon = \epsilon'`),
-        " のときは各因子が Step 0 より冪等なので ",
-        math(String.raw`Q_\epsilon^2 = Q_\epsilon`),
-        "。",
+        " のときは各因子が Step 0 より冪等なので",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Q_\epsilon^2
+&= \prod_{\mu\in\mathcal I}R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}
+   \quad (\because \text{因子の可換性}) \\
+&= \prod_{\mu\in\mathcal I}R_\mu^{(\epsilon_\mu)}
+   \quad (\because \text{Step 0 の冪等性を各因子へ適用}) \\
+&= Q_\epsilon
+   \quad (\because Q_\epsilon\text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2（(2) の証明）。Step 0 の ",
         math(String.raw`R_\mu^{(1)} + R_\mu^{(0)} = I`),
         " を各因子に代入し、可換な有限個の因子の積を分配法則で展開すると",
       ]),
       displayMath(
-        String.raw`I = \prod_{\mu \in \mathcal{I}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
-= \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}
-= \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} Q_\epsilon`,
+        String.raw`\begin{aligned}
+I
+&= \prod_{\mu \in \mathcal{I}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
+   \quad (\because \text{Step 0 の }R_\mu^{(1)}+R_\mu^{(0)}=I) \\
+&= \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}
+   \quad (\because \text{有限積を分配法則で展開}) \\
+&= \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} Q_\epsilon
+   \quad (\because Q_\epsilon\text{ の定義})
+\end{aligned}`,
       ),
       paragraph([
         "（展開して現れる項は、各 ",
@@ -1049,20 +1069,46 @@ R_\mu^{(1)} + R_\mu^{(0)}
       ]),
       displayMath(
         String.raw`n_\nu Q_\epsilon
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right) n_\nu R_\nu^{(\epsilon_\nu)}`,
+= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right) n_\nu R_\nu^{(\epsilon_\nu)}
+\quad (\because Q_\epsilon\text{ の定義と因子の可換性})`,
       ),
       paragraph([
         math(String.raw`\epsilon_\nu = 1`),
-        " なら ",
-        math(String.raw`n_\nu R_\nu^{(1)} = n_\nu n_\nu = n_\nu = R_\nu^{(1)} = \epsilon_\nu R_\nu^{(\epsilon_\nu)}`),
-        "、",
-        math(String.raw`\epsilon_\nu = 0`),
-        " なら ",
-        math(String.raw`n_\nu R_\nu^{(0)} = n_\nu(I - n_\nu) = 0 = \epsilon_\nu R_\nu^{(\epsilon_\nu)}`),
-        "。いずれの場合も ",
-        math(String.raw`n_\nu Q_\epsilon = \epsilon_\nu Q_\epsilon`),
-        "。",
+        " なら",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+n_\nu R_\nu^{(1)}
+&= n_\nu n_\nu \quad (\because R_\nu^{(1)}\text{ の定義}) \\
+&= n_\nu \quad (\because \text{Step 0 の冪等性}) \\
+&= R_\nu^{(1)} \quad (\because R_\nu^{(1)}\text{ の定義}) \\
+&= \epsilon_\nu R_\nu^{(\epsilon_\nu)} \quad (\because \epsilon_\nu=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon_\nu = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+n_\nu R_\nu^{(0)}
+&= n_\nu(I-n_\nu) \quad (\because R_\nu^{(0)}\text{ の定義}) \\
+&= 0 \quad (\because \text{Step 0 の直交性}) \\
+&= \epsilon_\nu R_\nu^{(\epsilon_\nu)} \quad (\because \epsilon_\nu=0)
+\end{aligned}`,
+      ),
+      paragraph(["いずれの場合も"]),
+      displayMath(
+        String.raw`\begin{aligned}
+n_\nu Q_\epsilon
+&= \left(\prod_{\mu\neq\nu}R_\mu^{(\epsilon_\mu)}\right)n_\nu R_\nu^{(\epsilon_\nu)}
+   \quad (\because Q_\epsilon\text{ の定義と因子の可換性}) \\
+&= \left(\prod_{\mu\neq\nu}R_\mu^{(\epsilon_\mu)}\right)\epsilon_\nu R_\nu^{(\epsilon_\nu)}
+   \quad (\because \text{上の二つの場合}) \\
+&= \epsilon_\nu Q_\epsilon
+   \quad (\because Q_\epsilon\text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 4（(4) の証明）。",
         math(String.raw`T := \{\mu \in \mathcal{I} \mid \epsilon_\mu = 1\}`),
@@ -1072,7 +1118,8 @@ R_\mu^{(1)} + R_\mu^{(0)}
       ]),
       displayMath(
         String.raw`\prod_{\mu \in \mathcal{I}\setminus T}(I - n_\mu)
-= \sum_{S \subseteq \mathcal{I}\setminus T} (-1)^{|S|} \prod_{\mu \in S} n_\mu`,
+= \sum_{S \subseteq \mathcal{I}\setminus T} (-1)^{|S|} \prod_{\mu \in S} n_\mu
+\quad (\because \text{有限積を分配法則で展開})`,
       ),
       paragraph([
         "であるから、トレースの線型性（",
@@ -1093,14 +1140,18 @@ R_\mu^{(1)} + R_\mu^{(0)}
         String.raw`\begin{aligned}
 \mathrm{tr}(Q_\epsilon)
 &= \sum_{S \subseteq \mathcal{I}\setminus T} (-1)^{|S|}\,
-   \mathrm{tr}\!\left(\prod_{\mu \in T \cup S} n_\mu\right) \\
-&= \sum_{S \subseteq \mathcal{I}\setminus T} (-1)^{|S|}\, 2^{M - |T| - |S|} \\
+   \mathrm{tr}\!\left(\prod_{\mu \in T \cup S} n_\mu\right)
+   \quad (\because \text{上の展開とトレースの線型性}) \\
+&= \sum_{S \subseteq \mathcal{I}\setminus T} (-1)^{|S|}\, 2^{M - |T| - |S|}
+   \quad (\because \text{数演算子の積のトレース}) \\
 &= 2^{M-|T|}\sum_{j=0}^{m-|T|}\binom{m-|T|}{j}(-1)^{j}\,2^{-j}
    \quad (\because |\mathcal{I}\setminus T| = m - |T| \text{ で、大きさ } j \text{ の部分集合は } \tbinom{m-|T|}{j} \text{ 個}) \\
 &= 2^{M-|T|}\left(1 - \tfrac{1}{2}\right)^{m-|T|}
    \quad (\because \text{二項定理}) \\
-&= 2^{M-|T|}\cdot 2^{-(m-|T|)} \\
+&= 2^{M-|T|}\cdot 2^{-(m-|T|)}
+   \quad (\because 1-\tfrac12=\tfrac12=2^{-1}\text{ と冪の法則}) \\
 &= 2^{M-m}
+   \quad (\because \text{同じ底の冪の積})
 \end{aligned}`,
       ),
       paragraph([
@@ -1134,12 +1185,24 @@ R_\mu^{(1)} + R_\mu^{(0)}
         math(String.raw`\epsilon = \epsilon'`),
         " のとき ",
         math(String.raw`Q_\epsilon x_\epsilon = y_\epsilon`),
-        " である。よって ",
-        math(String.raw`0 = Q_{\epsilon'}\left(\sum_\epsilon y_\epsilon\right) = y_{\epsilon'}`),
-        " が各 ",
+        " である。よって各 ",
         math(String.raw`\epsilon'`),
-        " について成り立ち、直和である。",
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&= Q_{\epsilon'}0
+   \quad (\because \text{線型写像は零ベクトルを零ベクトルへ写す}) \\
+&= Q_{\epsilon'}\left(\sum_\epsilon y_\epsilon\right)
+   \quad (\because \sum_\epsilon y_\epsilon=0) \\
+&= \sum_\epsilon Q_{\epsilon'}y_\epsilon
+   \quad (\because \text{行列作用の線型性}) \\
+&= y_{\epsilon'}
+   \quad (\because \text{(1) の直交性と冪等性})
+\end{aligned}`,
+      ),
+      paragraph(["が成り立つので、和は直和である。"]),
       paragraph([
         "（次元の整合：",
         math(String.raw`\left|\{0,1\}^{\mathcal{I}}\right| = 2^m`),
