@@ -29404,6 +29404,11 @@ m+m
     labels: ["claim_one_s_linearly_independent"],
     habitat: "Qbar",
     verification: ["sagemath/check/one-s-linearly-independent"],
+    lean: [
+      "Ising2DLambda.FisherZero.oneSLinearlyIndependent",
+      "Ising2DLambda.NecSuf.FisherZero.one_s_linearly_independent_necSuf",
+      "Ising2DLambda.FisherZero.oneSLinearlyIndependent_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

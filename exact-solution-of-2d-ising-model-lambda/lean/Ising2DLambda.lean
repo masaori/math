@@ -478,3 +478,6 @@ import Ising2DLambda.FisherZero.SelfDualQuadraticRootsFromNecSuf
 import Ising2DLambda.FisherZero.NoRationalSquareTwo
 import Ising2DLambda.NecSuf.FisherZero.NoRationalSquareTwo
 import Ising2DLambda.FisherZero.NoRationalSquareTwoFromNecSuf
+import Ising2DLambda.FisherZero.OneSLinearlyIndependent
+import Ising2DLambda.NecSuf.FisherZero.OneSLinearlyIndependent
+import Ising2DLambda.FisherZero.OneSLinearlyIndependentFromNecSuf

@@ -847,6 +847,9 @@ targets=(
   Ising2DLambda.FisherZero.noRationalSquareTwo
   Ising2DLambda.NecSuf.FisherZero.no_rational_square_two_necSuf
   Ising2DLambda.FisherZero.noRationalSquareTwo_from_necSuf
+  Ising2DLambda.FisherZero.oneSLinearlyIndependent
+  Ising2DLambda.NecSuf.FisherZero.one_s_linearly_independent_necSuf
+  Ising2DLambda.FisherZero.oneSLinearlyIndependent_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

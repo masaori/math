@@ -1919,15 +1919,23 @@ x^*\exp(S)x
         " である。",
       ]),
       paragraph([
-        "(2) ",
-        math(String.raw`(B^*AB)^* = B^* A^* B^{**} = B^* A B`),
-        "（",
+        "(2) 共役転置について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(B^*AB)^*
+&= B^*A^*B^{**}
+   \quad (\because \text{積の共役転置}) \\
+&= B^*A^*B
+   \quad (\because B^{**}=B) \\
+&= B^*AB
+   \quad (\because A^*=A)
+\end{aligned}`,
+      ),
+      paragraph([
+        "（積の共役転置は ",
         ref("star_preserves_norm_and_limits"),
-        " (1) と ",
-        math(String.raw`B^{**} = B`),
-        "、および ",
-        math(String.raw`A^* = A`),
-        "）よりエルミート。",
+        " (1) 第 1 式による）のでエルミートである。",
         math(String.raw`x \neq 0`),
         " なら ",
         math(String.raw`B`),
@@ -1935,30 +1943,74 @@ x^*\exp(S)x
         math(String.raw`Bx \neq 0`),
         " であり、",
       ]),
-      displayMath(String.raw`x^*(B^*AB)x = (Bx)^* A (Bx) > 0`),
+      displayMath(
+        String.raw`\begin{aligned}
+x^*(B^*AB)x
+&= (Bx)^*A(Bx)
+   \quad (\because \text{積の共役転置}) \\
+&>0
+   \quad (\because A\ \text{は正定値かつ}\ Bx\ne0)
+\end{aligned}`,
+      ),
       paragraph([
         "(3) ",
-        math(String.raw`(\alpha A)^* = \overline{\alpha}A^* = \alpha A`),
-        "（",
-        math(String.raw`\alpha`),
-        " は実数）よりエルミートで、",
-        math(String.raw`x^*(\alpha A)x = \alpha (x^*Ax) > 0`),
-        "。",
+        math(String.raw`\alpha\in\mathbb{R}_{>0}`),
+        " なので",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\alpha A)^*
+&= \overline{\alpha}A^*
+   \quad (\because \text{共役転置の線型性}) \\
+&= \alpha A^*
+   \quad (\because \alpha\in\mathbb{R}) \\
+&= \alpha A
+   \quad (\because A^*=A)
+\end{aligned}`,
+      ),
+      paragraph(["よりエルミートである。また ", math(String.raw`x\ne0`), " ならば"]),
+      displayMath(
+        String.raw`\begin{aligned}
+x^*(\alpha A)x
+&= \alpha(x^*Ax)
+   \quad (\because \text{スカラー倍と行列積の結合則}) \\
+&>0
+   \quad (\because \alpha>0\ \text{かつ}\ x^*Ax>0)
+\end{aligned}`,
+      ),
       paragraph([
         "(4) ",
         math(String.raw`e_k \in \mathbb{C}^n`),
         " を第 ",
         math(String.raw`k`),
-        " 標準基底ベクトルとすると ",
-        math(String.raw`e_k^* A e_k = A_{kk}`),
-        " であり、",
-        math(String.raw`e_k \neq 0`),
-        " なので ",
-        math(String.raw`A_{kk} \in \mathbb{R}_{>0}`),
-        "。したがって ",
-        math(String.raw`\mathrm{tr}(A) = \sum_{k=1}^{n} A_{kk} \in \mathbb{R}_{>0}`),
-        "。",
+        " 標準基底ベクトルとする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+A_{kk}
+&= e_k^*Ae_k
+   \quad (\because \text{標準基底ベクトルによる対角成分の表示}) \\
+&>0
+   \quad (\because A\ \text{は正定値かつ}\ e_k\ne0)
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}(A)
+&= \sum_{k=1}^{n}A_{kk}
+   \quad (\because \text{トレースの定義}) \\
+&>0
+   \quad (\because n\ge1\ \text{かつ各}\ A_{kk}>0)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`A`),
+        " はエルミートなので各 ",
+        math(String.raw`A_{kk}`),
+        " は実数であり、よって ",
+        math(String.raw`\mathrm{tr}(A)\in\mathbb{R}_{>0}`),
+        " である。",
       ]),
     ],
     conversion: { status: "added" },
