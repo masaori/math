@@ -884,6 +884,12 @@ targets=(
   Ising2DLambda.FisherZero.quadraticRepresentation_add
   Ising2DLambda.NecSuf.FisherZero.add_representation_necSuf
   Ising2DLambda.FisherZero.quadraticRepresentation_add_from_necSuf
+  Ising2DLambda.FisherZero.quadraticMul_mem
+  Ising2DLambda.NecSuf.FisherZero.mul_mem_necSuf
+  Ising2DLambda.FisherZero.quadraticMul_mem_from_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_mul
+  Ising2DLambda.NecSuf.FisherZero.mul_representation_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_mul_from_necSuf
   Ising2DLambda.FisherZero.quadraticTrichotomyAtMostOne_from_necSuf
 )
 

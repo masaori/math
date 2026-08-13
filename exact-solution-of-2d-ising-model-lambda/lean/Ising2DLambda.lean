@@ -500,3 +500,6 @@ import Ising2DLambda.FisherZero.QuadraticTrichotomyAtMostOneFromNecSuf
 import Ising2DLambda.FisherZero.QuadraticAddition
 import Ising2DLambda.NecSuf.FisherZero.QuadraticAddition
 import Ising2DLambda.FisherZero.QuadraticAdditionFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticMultiplication
+import Ising2DLambda.NecSuf.FisherZero.QuadraticMultiplication
+import Ising2DLambda.FisherZero.QuadraticMultiplicationFromNecSuf

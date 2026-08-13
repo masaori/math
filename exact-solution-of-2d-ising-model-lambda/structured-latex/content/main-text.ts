@@ -31285,6 +31285,11 @@ r\cdot r
     labels: ["claim_quadratic_multiplication_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-multiplication"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticMul_mem",
+      "Ising2DLambda.NecSuf.FisherZero.mul_mem_necSuf",
+      "Ising2DLambda.FisherZero.quadraticMul_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -31425,6 +31430,11 @@ r\cdot r
     labels: ["claim_quadratic_multiplication_representation"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-multiplication"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticRepresentation_mul",
+      "Ising2DLambda.NecSuf.FisherZero.mul_representation_necSuf",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_mul_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

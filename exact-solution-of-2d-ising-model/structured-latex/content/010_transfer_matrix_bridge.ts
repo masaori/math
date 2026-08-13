@@ -684,10 +684,14 @@ D\, f_{\iota(\mu)}
         " の級数を偶数項と奇数項に分けると",
       ]),
       displayMath(
-        String.raw`\exp(t\sigma^x)
-= \left(\sum_{p=0}^{\infty}\frac{t^{2p}}{(2p)!}\right) I
+        String.raw`\begin{aligned}
+\exp(t\sigma^x)
+&= \left(\sum_{p=0}^{\infty}\frac{t^{2p}}{(2p)!}\right) I
 + \left(\sum_{p=0}^{\infty}\frac{t^{2p+1}}{(2p+1)!}\right)\sigma^x
-= \cosh(t)\,I + \sinh(t)\,\sigma^x`,
+   \quad (\because \text{絶対収束する指数級数を偶数項と奇数項へ分割し、}(\sigma^x)^{2p}=I,\ (\sigma^x)^{2p+1}=\sigma^x\text{ を適用}) \\
+&= \cosh(t)\,I + \sinh(t)\,\sigma^x
+   \quad (\because \cosh,\sinh\text{ のテイラー展開})
+\end{aligned}`,
       ),
       paragraph([
         "（級数の分割は ",
