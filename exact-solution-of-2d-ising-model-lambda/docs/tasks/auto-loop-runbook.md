@@ -129,6 +129,8 @@ $(\because\ \dots)$」の形へ書き換える。** 対象は 2 つのプロジ�
 1 枚の HTML にして artifacts リポジトリの GitHub Pages へ置く。**URL を決め打ちしない**
 （リポジトリの所有が移って決め打ちの URL が 404 になった実例がある。実測 2026-08-13）。
 実際の URL は公開のたびに `logs/publish-artifact.log` の「OK: 公開した」の行に出る。
+公開に成功したら Slack へ版・要約・URL を流す（ユーザー指示）。**同じ版では二度送らない**
+（PDF の作り直し側からも公開が走るため。送った版は `logs/last-notified-commit` に残す）。
 tick の最後と、PDF を作り直したときに自動で走るので、**tick が手で呼ぶ必要はない**。
 
 - 元になるのは台帳（`docs/tasks/auto-loop-state.md`）である。台帳の書き方が崩れると

@@ -30357,6 +30357,11 @@ a+b\cdot s
     labels: ["claim_rational_square_ne_double_square"],
     habitat: "Q",
     verification: ["sagemath/check/rational-square-ne-double-square"],
+    lean: [
+      "Ising2DLambda.FisherZero.rationalSquareNeDoubleSquare",
+      "Ising2DLambda.NecSuf.FisherZero.rational_square_ne_double_square_necSuf",
+      "Ising2DLambda.FisherZero.rationalSquareNeDoubleSquare_from_necSuf",
+    ],
     statement: [
       paragraph([
         "任意の ",

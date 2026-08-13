@@ -150,3 +150,20 @@ if ! curl -sfI "$url" >/dev/null 2>&1; then
   exit 1
 fi
 log "OK: 公開した（版 ${commit}）→ $url"
+
+# Slack へ URL を知らせる（ユーザー指示）。**同じ版で二度は送らない**
+# （PDF の作り直し側からも呼ばれるため、素直に送ると同じ内容が重複する）。
+NOTIFIED="$LOG_DIR/last-notified-commit"
+if [ "$(cat "$NOTIFIED" 2>/dev/null || true)" != "$commit" ]; then
+  message="2次元 Ising 模型（Λ の立場）の自動ループが前進した（版 ${commit}・直近の tick: ${agent}）。
+${subject}
+${url}"
+  if curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
+      -H "Content-Type: application/json" \
+      --data "$(jq -n --arg message "$message" --arg repository "$(basename "$REPO_DIR")" \
+        '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1; then
+    printf '%s' "$commit" > "$NOTIFIED"
+  else
+    log "NG: Slack への通知に失敗した（版 ${commit}）"
+  fi
+fi

@@ -488,3 +488,6 @@ import Ising2DLambda.FisherZero.QuadraticPositiveCone
 import Ising2DLambda.FisherZero.QuadraticZeroNegation
 import Ising2DLambda.NecSuf.FisherZero.QuadraticZeroNegation
 import Ising2DLambda.FisherZero.QuadraticZeroNegationFromNecSuf
+import Ising2DLambda.FisherZero.RationalSquareNeDoubleSquare
+import Ising2DLambda.NecSuf.FisherZero.RationalSquareNeDoubleSquare
+import Ising2DLambda.FisherZero.RationalSquareNeDoubleSquareFromNecSuf

@@ -870,6 +870,9 @@ targets=(
   Ising2DLambda.FisherZero.quadraticRepresentation_neg
   Ising2DLambda.NecSuf.FisherZero.neg_representation_necSuf
   Ising2DLambda.FisherZero.quadraticRepresentation_neg_from_necSuf
+  Ising2DLambda.FisherZero.rationalSquareNeDoubleSquare
+  Ising2DLambda.NecSuf.FisherZero.rational_square_ne_double_square_necSuf
+  Ising2DLambda.FisherZero.rationalSquareNeDoubleSquare_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
