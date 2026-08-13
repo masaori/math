@@ -31645,10 +31645,14 @@ q\cdot q
         " を得る。",
       ]),
       displayMath(String.raw`\begin{aligned}
-a&=0 &&\bigl(\because\ 0\le a,\ 0\le a',\ a+a'=0\text{ と順序の反対称性}\bigr)\\
-a'&=0 &&\bigl(\because\ 0\le a,\ 0\le a',\ a+a'=0\text{ と順序の反対称性}\bigr)\\
-b&=0 &&\bigl(\because\ 0\le b,\ 0\le b',\ b+b'=0\text{ と順序の反対称性}\bigr)\\
-b'&=0 &&\bigl(\because\ 0\le b,\ 0\le b',\ b+b'=0\text{ と順序の反対称性}\bigr)
+a&\le0 &&\bigl(\because\ 0\le a'\text{ と }a+a'=0\text{。両辺に }-a'\text{ を足す}\bigr)\\
+a&=0 &&\bigl(\because\ 0\le a\text{ と }a\le0\text{ に順序の反対称性を適用する}\bigr)\\
+a'&\le0 &&\bigl(\because\ 0\le a\text{ と }a+a'=0\text{。両辺に }-a\text{ を足す}\bigr)\\
+a'&=0 &&\bigl(\because\ 0\le a'\text{ と }a'\le0\text{ に順序の反対称性を適用する}\bigr)\\
+b&\le0 &&\bigl(\because\ 0\le b'\text{ と }b+b'=0\text{。両辺に }-b'\text{ を足す}\bigr)\\
+b&=0 &&\bigl(\because\ 0\le b\text{ と }b\le0\text{ に順序の反対称性を適用する}\bigr)\\
+b'&\le0 &&\bigl(\because\ 0\le b\text{ と }b+b'=0\text{。両辺に }-b\text{ を足す}\bigr)\\
+b'&=0 &&\bigl(\because\ 0\le b'\text{ と }b'\le0\text{ に順序の反対称性を適用する}\bigr)
 \end{aligned}`),
       paragraph([
         "したがって ",

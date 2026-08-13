@@ -18,6 +18,16 @@ for a in samples:
                 assert A >= 0
                 assert B >= 0
                 assert (A, B) != (0, 0)
+                if A == 0:
+                    assert a <= 0
+                    assert ap <= 0
+                    assert a == 0
+                    assert ap == 0
+                if B == 0:
+                    assert b <= 0
+                    assert bp <= 0
+                    assert b == 0
+                    assert bp == 0
                 checked += 1
 
 print(f"OK: 非負係数条件どうしの和を {checked} 組で厳密検査した")

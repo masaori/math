@@ -25,8 +25,14 @@ theorem quadraticPositive_add_of_nonnegativeCoefficients
   intro hPair
   have hA := congrArg Prod.fst hPair
   have hB := congrArg Prod.snd hPair
-  have ha0 : (quadraticRepresentation s xi).1 = 0 := by linarith
-  have hb0 : (quadraticRepresentation s xi).2 = 0 := by linarith
+  have haNonpos : (quadraticRepresentation s xi).1 ≤ 0 := by
+    linarith only [heta.1, hA]
+  have ha0 : (quadraticRepresentation s xi).1 = 0 :=
+    le_antisymm haNonpos hxi.1
+  have hbNonpos : (quadraticRepresentation s xi).2 ≤ 0 := by
+    linarith only [heta.2.1, hB]
+  have hb0 : (quadraticRepresentation s xi).2 = 0 :=
+    le_antisymm hbNonpos hxi.2.1
   exact hxi.2.2 (Prod.ext ha0 hb0)
 
 end Ising2DLambda.FisherZero
