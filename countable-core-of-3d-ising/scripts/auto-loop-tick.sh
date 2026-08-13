@@ -19,7 +19,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 # このループ専用の作業ツリーと、その中のプロジェクト。
 LOOP_WORKTREE="$HOME/git/masaori/math-ising-3d-cut-loop"
 LOOP_BRANCH="ising-3d-cut-loop"
-PROJECT_NAME="critical-point-cut-of-3d-ising"
+PROJECT_NAME="countable-core-of-3d-ising"
 
 # 共有チェックアウト（メインの作業ツリー）の場所は、スクリプトの位置から辿らずに
 # git の共通ディレクトリから求める。このスクリプトはメイン側からもループ用 worktree からも
@@ -185,14 +185,14 @@ HARD_DEADLINE="$(date -v+$(( TICK_TIMEOUT_SECONDS / 60 ))M '+%H:%M' 2>/dev/null 
   || date -d "+$(( TICK_TIMEOUT_SECONDS / 60 )) minutes" '+%H:%M')"
 
 PROMPT=$(cat <<'EOF'
-critical-point-cut-of-3d-ising の自動ループを 1 tick 進める。
+countable-core-of-3d-ising の自動ループを 1 tick 進める。
 
 まず次を全て読む。
 - docs/context/ の全ファイル（リポジトリ全体の思想。ここが最上位）
-- critical-point-cut-of-3d-ising/README.md（ゴールと立場。許される脱出の定義）
-- critical-point-cut-of-3d-ising/docs/tasks/auto-loop-runbook.md（1 tick の手順の正本）
-- critical-point-cut-of-3d-ising/docs/tasks/auto-loop-state.md（状態台帳）
-- critical-point-cut-of-3d-ising/MEMORY.md
+- countable-core-of-3d-ising/README.md（ゴールと立場。許される脱出の定義）
+- countable-core-of-3d-ising/docs/tasks/auto-loop-runbook.md（1 tick の手順の正本）
+- countable-core-of-3d-ising/docs/tasks/auto-loop-state.md（状態台帳）
+- countable-core-of-3d-ising/MEMORY.md
 - docs/discussion/3次元Isingを可算側で書く/ の全ファイル（方針と文献の格付け）
 
 そのうえで runbook のとおりに実行する。要点を再掲する。
@@ -209,7 +209,7 @@ critical-point-cut-of-3d-ising の自動ループを 1 tick 進める。
    検証が落ちたら本文を直す。検証を主張に合わせて緩めない。
 5. 台帳と MEMORY を更新し、main へ push して反映を確認する
    （git push origin HEAD:main と git merge-base --is-ancestor での確認）。
-6. tick の最後に PDF を作り直す（cd critical-point-cut-of-3d-ising/structured-latex && npm run build:pdf）。
+6. tick の最後に PDF を作り直す（cd countable-core-of-3d-ising/structured-latex && npm run build:pdf）。
    本文を変えなかった tick でも必ず行う。
 7. 1 セクション進めたら止まる。
 
@@ -297,9 +297,15 @@ fi
 # 人間が開いたまま進み具合を見られるように、PDF をメインの作業ツリー側の固定パスへ置く。
 # build/ は gitignore なので、コピーしても人間の作業と衝突しない。
 # 論文 HTML を公開し、tick の完了を Slack へ報告する（作業概要と公開 URL を添える。ユーザー指示）。
-# 失敗しても tick の結果は変えない。
-bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 \
-  || log "    アーティファクトの公開に失敗した"
+# **検証が通ってコミット済みのときだけ公開・通知する。** 失敗・打ち切りの tick の内容を
+# 「前進した」と通知しないため、また未コミットの内容に HEAD の版番号を付けて公開しないため
+# （2026-08-13 の 2 回目のレビューの指摘）。
+if [ "$status" -eq 0 ] && [ -z "$(git -C "$LOOP_WORKTREE" status --porcelain)" ]; then
+  bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 \
+    || log "    アーティファクトの公開に失敗した"
+else
+  log "    公開と通知を見送った（exit ${status}、未コミット $(git -C "$LOOP_WORKTREE" status --porcelain | wc -l | tr -d ' ') ファイル）"
+fi
 
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
 main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"

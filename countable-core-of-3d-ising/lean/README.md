@@ -33,7 +33,7 @@
 ## 検査
 
 ```sh
-cd critical-point-cut-of-3d-ising/lean
+cd countable-core-of-3d-ising/lean
 lake build
 bash scripts/check-no-sorry.sh
 ```

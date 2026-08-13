@@ -2,7 +2,7 @@
 # 本プロジェクトの形式化した定理が sorry に依存していないことを確認する。
 #
 # 使い方:
-#   cd critical-point-cut-of-3d-ising/lean && bash scripts/check-no-sorry.sh
+#   cd countable-core-of-3d-ising/lean && bash scripts/check-no-sorry.sh
 #
 # 終了コード 0 = すべて sorry 非依存。1 = sorryAx への依存、ソース中の sorry、
 # または入口から import されていない .lean を検出。

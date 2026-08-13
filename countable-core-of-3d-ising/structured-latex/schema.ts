@@ -132,7 +132,7 @@ export type Habitation =
 export type Linkage = {
   /**
    * 対応する SageMath 検証ディレクトリのパス
-   * （プロジェクトルート `critical-point-cut-of-3d-ising/` からの相対）。
+   * （プロジェクトルート `countable-core-of-3d-ising/` からの相対）。
    * 実在するかは `tools/validate-content.ts` が実行時に検査する（型システムは fs を読めない）。
    */
   verification?: readonly string[];
