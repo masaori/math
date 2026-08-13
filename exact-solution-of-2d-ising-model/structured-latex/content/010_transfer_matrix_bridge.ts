@@ -1159,31 +1159,35 @@ e^{-2K_2^*}
         ref("def_transfer_matrix"),
         " の**成分で定義された** ",
         math(String.raw`V_1, V_2 \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " について ",
-        math(String.raw`Z(J,J') = \mathrm{tr}((V_1V_2)^{N_{\mathrm{row}}})`),
-        " を主張している（記号の読み替えは冒頭のとおり）。",
-      ]),
-      paragraph([
+        " を扱う。これらを ",
+        math(String.raw`V_1^{\mathrm{comp}},V_2^{\mathrm{comp}}`),
+        " と書き、パウリ行列表示の行列を ",
+        math(String.raw`V_1^{\mathrm{Pauli}},V_2^{\mathrm{Pauli}}`),
+        " と書く。",
         ref("V1_component_equals_pauli"),
         " と ",
         ref("V2_component_equals_pauli"),
-        " より、",
+        " により、",
         ref("def_config_basis_iso"),
-        " の同一視のもとで、成分で定義された ",
-        math(String.raw`V_1, V_2`),
-        " はパウリ行列表示の ",
-        math(String.raw`V_1, V_2`),
-        " と**行列として同一**である（すべての ",
+        " の全単射が与える行列番号について ",
+        math(String.raw`V_1^{\mathrm{comp}}=V_1^{\mathrm{Pauli}}`),
+        " および ",
+        math(String.raw`V_2^{\mathrm{comp}}=V_2^{\mathrm{Pauli}}`),
+        " が成り立つ（すべての ",
         math(String.raw`(\mu,\mu')`),
         " 成分が一致し、",
         math(String.raw`\iota`),
         " が全単射なのですべての行・列番号の組を尽くす）。",
       ]),
-      paragraph([
-        "同一の行列に対する ",
-        math(String.raw`\mathrm{tr}((V_1V_2)^{N_{\mathrm{row}}})`),
-        " は同じ値なので、主張が従う。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+Z(J,J')
+&=\mathrm{tr}\!\left(\left(V_1^{\mathrm{comp}}V_2^{\mathrm{comp}}\right)^{N_{\mathrm{row}}}\right)
+&&\bigl(\because\ \text{分配関数の転送行列表示}\bigr)\\
+&=\mathrm{tr}\!\left(\left(V_1^{\mathrm{Pauli}}V_2^{\mathrm{comp}}\right)^{N_{\mathrm{row}}}\right)
+&&\bigl(\because\ V_1\text{ の成分定義とパウリ表示の一致}\bigr)\\
+&=\mathrm{tr}\!\left(\left(V_1^{\mathrm{Pauli}}V_2^{\mathrm{Pauli}}\right)^{N_{\mathrm{row}}}\right)
+&&\bigl(\because\ V_2\text{ の成分定義とパウリ表示の一致}\bigr)
+\end{aligned}`),
       paragraph([
         "（",
         ref("def_transfer_matrix"),

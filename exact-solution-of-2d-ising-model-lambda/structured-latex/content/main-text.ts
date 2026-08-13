@@ -31591,6 +31591,84 @@ q\cdot q
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_add_nonnegative",
+    kind: "claim",
+    title: { text: "正錐の非負係数条件どうしの和" },
+    labels: ["claim_quadratic_positive_add_nonnegative"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-add-nonnegative"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegativeCoefficients",
+      "Ising2DLambda.NecSuf.FisherZero.positive_add_nonnegative_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegativeCoefficients_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`),
+        " について、",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        " と ",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " がともに正錐の非負係数条件（",
+        ref("def_quadratic_positive_cone"),
+        " の第一条件）を満たすならば、",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。すべての係数と比較は有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_quadratic_addition_representation"),
+        " により ",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
+        " である。非負性は次の鎖で得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&\le a+a' &&\bigl(\because\ 0\le a,\ 0\le a'\text{ と加法の単調性}\bigr)\\
+0&\le b+b' &&\bigl(\because\ 0\le b,\ 0\le b'\text{ と加法の単調性}\bigr)
+\end{aligned}`),
+      paragraph([
+        "残る条件 ",
+        math(String.raw`(a+a',b+b')\ne(0,0)`),
+        " を背理法で示す。",
+        math(String.raw`(a+a',b+b')=(0,0)`),
+        " と仮定すると、組の等しさから ",
+        math(String.raw`a+a'=0`),
+        " と ",
+        math(String.raw`b+b'=0`),
+        " を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a&=0 &&\bigl(\because\ 0\le a,\ 0\le a',\ a+a'=0\text{ と順序の反対称性}\bigr)\\
+a'&=0 &&\bigl(\because\ 0\le a,\ 0\le a',\ a+a'=0\text{ と順序の反対称性}\bigr)\\
+b&=0 &&\bigl(\because\ 0\le b,\ 0\le b',\ b+b'=0\text{ と順序の反対称性}\bigr)\\
+b'&=0 &&\bigl(\because\ 0\le b,\ 0\le b',\ b+b'=0\text{ と順序の反対称性}\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`(a,b)=(0,0)`),
+        " となり、",
+        math(String.raw`(a,b)\ne(0,0)`),
+        " に矛盾する。ゆえに表示 ",
+        math(String.raw`(a+a',b+b')`),
+        " は正錐の第一条件を満たし、",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。全過程は ",
+        math(String.raw`\mathbb{Q}`),
+        " の加法と順序、および ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

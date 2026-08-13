@@ -145,6 +145,7 @@ export const ALL_LABELS = [
   "claim_quadratic_multiplication_representation",
   "claim_quadratic_negation_mem",
   "claim_quadratic_negation_representation",
+  "claim_quadratic_positive_add_nonnegative",
   "claim_quadratic_representation_unique",
   "claim_quadratic_trichotomy_at_least_one",
   "claim_quadratic_trichotomy_at_most_one",
