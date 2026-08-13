@@ -1068,11 +1068,21 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         " なので",
       ]),
       displayMath(
-        String.raw`W P^{(\pm)}
-= V_1^{1/2}V_2V_1^{1/2}P^{(\pm)}
-= \left(V_1^{1/2}P^{(\pm)}\right)V_2\left(V_1^{1/2}P^{(\pm)}\right)
-= \left(V_1^{(\pm)}\right)^{1/2}V_2\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}
-= V^{(\pm)}P^{(\pm)}`,
+        String.raw`\begin{aligned}
+W P^{(\pm)}
+&= V_1^{1/2}V_2V_1^{1/2}P^{(\pm)}
+   \quad (\because W=V_1^{1/2}V_2V_1^{1/2}) \\
+&= \left(V_1^{1/2}P^{(\pm)}\right)V_2\left(V_1^{1/2}P^{(\pm)}\right)
+   \quad (\because P^{(\pm)}\text{ の可換性と }(P^{(\pm)})^2=P^{(\pm)}) \\
+&= \left(\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}\right)
+   V_2
+   \left(\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}\right)
+   \quad (\because V_1^{1/2}P^{(\pm)}=(V_1^{(\pm)})^{1/2}P^{(\pm)}\text{ を二箇所へ適用する}) \\
+&= \left(V_1^{(\pm)}\right)^{1/2}V_2\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}
+   \quad (\because P^{(\pm)}\text{ の可換性と }(P^{(\pm)})^2=P^{(\pm)}) \\
+&= V^{(\pm)}P^{(\pm)}
+   \quad (\because V^{(\pm)}=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2}).
+\end{aligned}`,
       ),
       paragraph([
         "（途中で ",

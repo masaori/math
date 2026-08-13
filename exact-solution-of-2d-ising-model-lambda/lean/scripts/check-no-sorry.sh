@@ -927,6 +927,9 @@ targets=(
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_negativeSecond_negativeSecond
   Ising2DLambda.NecSuf.FisherZero.positive_mul_negativeSecond_negativeSecond_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_negativeSecond_negativeSecond_from_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_mul_of_negativeFirst_negativeFirst
+  Ising2DLambda.NecSuf.FisherZero.positive_mul_negativeFirst_negativeFirst_necSuf
+  Ising2DLambda.FisherZero.quadraticPositive_mul_of_negativeFirst_negativeFirst_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

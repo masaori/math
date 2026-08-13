@@ -32731,6 +32731,11 @@ B&=-(a\cdot u'+u\cdot a')
     labels: ["claim_quadratic_positive_mul_negative_first_negative_first"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-mul-negative-first-negative-first"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_negativeFirst_negativeFirst",
+      "Ising2DLambda.NecSuf.FisherZero.positive_mul_negativeFirst_negativeFirst_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_negativeFirst_negativeFirst_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`), " を ",
