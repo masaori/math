@@ -1709,25 +1709,48 @@ V' y
         " による）。第 2 式も同様。",
       ]),
       paragraph([
-        "(2) ",
+        "(2) 任意の ",
+        math(String.raw`A\in\mathrm{Mat}(n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|A^*\|
+&= \sqrt{\textstyle\sum_{k,l}|(A^*)_{kl}|^2}
+   \quad (\because \text{行列ノルムの定義}) \\
+&= \sqrt{\textstyle\sum_{k,l}|\overline{A_{lk}}|^2}
+   \quad (\because \text{共役転置の定義}) \\
+&= \sqrt{\textstyle\sum_{k,l}|A_{lk}|^2}
+   \quad (\because \text{複素共役は絶対値を保つ}) \\
+&= \sqrt{\textstyle\sum_{k,l}|A_{kl}|^2}
+   \quad (\because (k,l)\mapsto(l,k)\text{ は添字集合の全単射}) \\
+&= \|A\|
+   \quad (\because \text{行列ノルムの定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "ここで行列ノルムの定義は ",
         ref("def_matrix_norm"),
-        " のノルムは ",
-        math(String.raw`\|A\| = \sqrt{\sum_{k,l}|A_{kl}|^2}`),
-        " であり、",
-        math(String.raw`|(A^*)_{kl}| = |\overline{A_{lk}}| = |A_{lk}|`),
-        "（",
+        "、複素共役が絶対値を保つことは ",
         ref("abs_basic_properties"),
-        "）なので、",
-        math(String.raw`(k,l) \mapsto (l,k)`),
-        " は添字集合の全単射だから和の値は変わらない。",
+        " による。",
       ]),
       paragraph([
-        "(3) (1) の第 2 式より ",
-        math(String.raw`A_N^* - A^* = (A_N - A)^*`),
-        " なので、(2) より ",
-        math(String.raw`\|A_N^* - A^*\| = \|A_N - A\| \to 0`),
-        "。",
+        "(3) ",
+        math(String.raw`A_N\to A`),
+        " と仮定する。このとき",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|A_N^*-A^*\|
+&= \|(A_N-A)^*\|
+   \quad (\because \text{(1) の共役転置の線型性}) \\
+&= \|A_N-A\|
+   \quad (\because \text{(2)}) \\
+&\longrightarrow 0
+   \quad (\because A_N\to A\ \text{の仮定})
+\end{aligned}`,
+      ),
     ],
     conversion: { status: "added" },
   },

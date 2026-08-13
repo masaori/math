@@ -844,6 +844,9 @@ targets=(
   Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct
   Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_distinct_necSuf
   Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct_from_necSuf
+  Ising2DLambda.FisherZero.noRationalSquareTwo
+  Ising2DLambda.NecSuf.FisherZero.no_rational_square_two_necSuf
+  Ising2DLambda.FisherZero.noRationalSquareTwo_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

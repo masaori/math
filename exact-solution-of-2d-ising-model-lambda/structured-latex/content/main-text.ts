@@ -29215,6 +29215,11 @@ s\cdot s
     labels: ["claim_no_rational_square_two"],
     habitat: "Q",
     verification: ["sagemath/check/no-rational-square-two"],
+    lean: [
+      "Ising2DLambda.FisherZero.noRationalSquareTwo",
+      "Ising2DLambda.NecSuf.FisherZero.no_rational_square_two_necSuf",
+      "Ising2DLambda.FisherZero.noRationalSquareTwo_from_necSuf",
+    ],
     statement: [
       paragraph([
         "任意の ",
