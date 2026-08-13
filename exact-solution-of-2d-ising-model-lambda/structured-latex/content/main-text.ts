@@ -29261,9 +29261,16 @@ s\cdot s
         math(String.raw`q<0`),
         " のちょうど 1 つが成り立つ。",
         math(String.raw`q=0`),
-        " の場合は ",
-        math(String.raw`q\cdot q=0\cdot0=0`),
-        "（零元との積）であり、",
+        " の場合は次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q\cdot q
+&=0\cdot0
+&&\bigl(\because\ q=0\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元との積}\bigr)
+\end{aligned}`),
+      paragraph([
         math(String.raw`\mathbb{Q}`),
         " の中で ",
         math(String.raw`2\ne0`),
@@ -29281,12 +29288,20 @@ s\cdot s
         math(String.raw`q<0`),
         " の場合は ",
         math(String.raw`r:=-q`),
-        " と置く（このとき ",
+        " と置く。このとき ",
         math(String.raw`r>0`),
-        " であり、",
-        math(String.raw`r\cdot r=(-q)\cdot(-q)=q\cdot q`),
-        " は分配則と加法の逆元の性質から従う）。どちらの場合も",
+        " であり、次の鎖を得る。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+r\cdot r
+&=(-q)\cdot(-q)
+&&\bigl(\because\ r=-q\bigr)\\
+&=q\cdot q
+&&\bigl(\because\ \text{分配則と加法の逆元の性質}\bigr)\\
+&=2
+&&\bigl(\because\ \text{背理法の仮定}\bigr)
+\end{aligned}`),
+      paragraph(["したがって、どちらの場合も"]),
       displayMath(String.raw`r\in\mathbb{Q}_{>0},\qquad r\cdot r=2`),
       paragraph([
         "である。整数 ",
@@ -29333,15 +29348,35 @@ s\cdot s
         math(String.raw`m\le0`),
         " である。",
         math(String.raw`m\ge1`),
-        " ならば ",
-        math(String.raw`m+m\ge1+1=2>1`),
-        "（順序と加法の両立）で、上の ",
+        " ならば次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m+m
+&\ge1+1
+&&\bigl(\because\ m\ge1\ \text{と順序・加法の両立}\bigr)\\
+&=2
+&&\bigl(\because\ 2:=1+1\bigr)\\
+&>1
+&&\bigl(\because\ \mathbb{Z}\ \text{の順序}\bigr)
+\end{aligned}`),
+      paragraph([
+        "これは上の ",
         math(String.raw`m+m=1`),
         " と矛盾する。",
         math(String.raw`m\le0`),
-        " ならば ",
-        math(String.raw`m+m\le0+0=0<1`),
-        "（順序と加法の両立）で、やはり ",
+        " ならば次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m+m
+&\le0+0
+&&\bigl(\because\ m\le0\ \text{と順序・加法の両立}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法}\bigr)\\
+&<1
+&&\bigl(\because\ \mathbb{Z}\ \text{の順序}\bigr)
+\end{aligned}`),
+      paragraph([
+        "これはやはり ",
         math(String.raw`m+m=1`),
         " と矛盾する。どちらの場合も矛盾が出たので、仮定が偽であり、任意の ",
         math(String.raw`q\in\mathbb{Q}`),
