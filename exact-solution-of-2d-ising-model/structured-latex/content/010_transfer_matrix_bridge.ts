@@ -1221,23 +1221,41 @@ t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}`,
         String.raw`\begin{aligned}
 \left(P^{(\pm)}\right)^2
 &= \tfrac{1}{4}\left(I \pm \varepsilon\right)\left(I \pm \varepsilon\right)
-= \tfrac{1}{4}\left(I \pm 2\varepsilon + \varepsilon^2\right)
-= \tfrac{1}{4}\left(2I \pm 2\varepsilon\right)
-= \tfrac{1}{2}\left(I \pm \varepsilon\right) = P^{(\pm)} \\
+   \quad (\because P^{(\pm)} \text{ の定義}) \\
+&= \tfrac{1}{4}\left(I \pm \varepsilon \pm \varepsilon + \varepsilon^2\right)
+   \quad (\because \text{分配法則と } I\varepsilon=\varepsilon I=\varepsilon) \\
+&= \tfrac{1}{4}\left(I \pm 2\varepsilon + \varepsilon^2\right)
+   \quad (\because \text{同類項をまとめる}) \\
+&= \tfrac{1}{4}\left(2I \pm 2\varepsilon\right)
+   \quad (\because \varepsilon^2=I) \\
+&= \tfrac{1}{2}\left(I \pm \varepsilon\right)
+   \quad (\because \text{スカラー倍を整理する}) \\
+&= P^{(\pm)}
+   \quad (\because P^{(\pm)} \text{ の定義}), \\
 P^{(+)}P^{(-)}
 &= \tfrac{1}{4}\left(I + \varepsilon\right)\left(I - \varepsilon\right)
-= \tfrac{1}{4}\left(I - \varepsilon^2\right)
-= \tfrac{1}{4}\left(I - I\right) = 0
+   \quad (\because P^{(+)} \text{ と } P^{(-)} \text{ の定義}) \\
+&= \tfrac{1}{4}\left(I-I\varepsilon+\varepsilon I-\varepsilon^2\right)
+   \quad (\because \text{分配法則}) \\
+&= \tfrac{1}{4}\left(I-\varepsilon^2\right)
+   \quad (\because I\varepsilon=\varepsilon I=\varepsilon) \\
+&= \tfrac{1}{4}\left(I-I\right)
+   \quad (\because \varepsilon^2=I) \\
+&= 0
+   \quad (\because I-I=0), \\
+P^{(-)}P^{(+)}
+&= \tfrac{1}{4}\left(I - \varepsilon\right)\left(I + \varepsilon\right)
+   \quad (\because P^{(-)} \text{ と } P^{(+)} \text{ の定義}) \\
+&= \tfrac{1}{4}\left(I+I\varepsilon-\varepsilon I-\varepsilon^2\right)
+   \quad (\because \text{分配法則}) \\
+&= \tfrac{1}{4}\left(I-\varepsilon^2\right)
+   \quad (\because I\varepsilon=\varepsilon I=\varepsilon) \\
+&= \tfrac{1}{4}\left(I-I\right)
+   \quad (\because \varepsilon^2=I) \\
+&= 0
+   \quad (\because I-I=0)
 \end{aligned}`,
       ),
-      paragraph([
-        math(String.raw`I`),
-        " と ",
-        math(String.raw`\varepsilon`),
-        " は可換なので ",
-        math(String.raw`P^{(-)}P^{(+)} = 0`),
-        " も同様。",
-      ]),
       paragraph([
         "(3) ",
         math(String.raw`P^{(+)} + P^{(-)} = \tfrac12(I+\varepsilon) + \tfrac12(I-\varepsilon) = I`),
