@@ -934,7 +934,8 @@ e^{-2K_2^*}
       ]),
       displayMath(
         String.raw`\exp\!\left(\sum_{m=1}^{M} K_2\,\mu(m)\mu'(m)\right)
-= \prod_{m=1}^{M}\exp\!\left(K_2\,\mu(m)\mu'(m)\right)`,
+= \prod_{m=1}^{M}\exp\!\left(K_2\,\mu(m)\mu'(m)\right)
+\quad (\because \text{実数の指数法則を有限和へ繰り返し適用})`,
       ),
       paragraph([
         ref("two_by_two_transfer_identity"),
@@ -957,13 +958,19 @@ e^{-2K_2^*}
         " なので",
       ]),
       displayMath(
-        String.raw`\exp\!\left(K_2\,\mu(m)\mu'(m)\right) = A_{i_m j_m}`,
+        String.raw`\exp\!\left(K_2\,\mu(m)\mu'(m)\right)
+= A_{i_m j_m}
+\quad (\because A \text{ の成分定義と }\varsigma_{i_m}=\mu(m),\ \varsigma_{j_m}=\mu'(m))`,
       ),
       paragraph(["すなわち"]),
       displayMath(
-        String.raw`\exp\!\left(\sum_{m=1}^{M} K_2\,\mu(m)\mu'(m)\right)
-= \prod_{m=1}^{M} A_{i_m j_m}
-= \left(\underbrace{A \boxtimes \cdots \boxtimes A}_{M}\right)_{\iota(\mu),\iota(\mu')}`,
+        String.raw`\begin{aligned}
+\exp\!\left(\sum_{m=1}^{M} K_2\,\mu(m)\mu'(m)\right)
+&= \prod_{m=1}^{M} A_{i_m j_m}
+   \quad (\because \text{直前の成分の等式を有限積の全因子へ同時適用}) \\
+&= \left(\underbrace{A \boxtimes \cdots \boxtimes A}_{M}\right)_{\iota(\mu),\iota(\mu')}
+   \quad (\because \text{クロネッカー積の成分の定義})
+\end{aligned}`,
       ),
       paragraph([
         "最後の等号は ",
@@ -984,11 +991,15 @@ e^{-2K_2^*}
         " 個の因子から前へ出せて",
       ]),
       displayMath(
-        String.raw`\underbrace{A \boxtimes \cdots \boxtimes A}_{M}
-= \left((2s_2)^{1/2}\right)^{M}
+        String.raw`\begin{aligned}
+\underbrace{A \boxtimes \cdots \boxtimes A}_{M}
+&= \left((2s_2)^{1/2}\right)^{M}
   \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M}
-= (2s_2)^{M/2}\,
-  \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M}`,
+   \quad (\because A=(2s_2)^{1/2}\exp(K_2^*\sigma^x)\text{ とクロネッカー積の多重線型性}) \\
+&= (2s_2)^{M/2}\,
+  \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M}
+   \quad (\because ((2s_2)^{1/2})^M=(2s_2)^{M/2})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3（1 因子の ",
@@ -1013,7 +1024,8 @@ e^{-2K_2^*}
       ]),
       displayMath(
         String.raw`(\sigma_m^x)^{p}
-= I\boxtimes\cdots\boxtimes(\sigma^x)^{p}\boxtimes\cdots\boxtimes I`,
+= I\boxtimes\cdots\boxtimes(\sigma^x)^{p}\boxtimes\cdots\boxtimes I
+\quad (\because \text{クロネッカー積の積の法則と }I^p=I)`,
       ),
       paragraph([
         "であり（",
@@ -1032,7 +1044,8 @@ e^{-2K_2^*}
       ]),
       displayMath(
         String.raw`\exp\!\left(K_2^*\sigma_m^x\right)
-= I\boxtimes\cdots\boxtimes\exp\!\left(K_2^*\sigma^x\right)\boxtimes\cdots\boxtimes I`,
+= I\boxtimes\cdots\boxtimes\exp\!\left(K_2^*\sigma^x\right)\boxtimes\cdots\boxtimes I
+\quad (\because \text{指数級数の部分和へ直前の冪の等式を適用し、成分ごとの極限を取る})`,
       ),
       paragraph([
         "Step 4（積にまとめる）。相異なる ",
@@ -1057,7 +1070,8 @@ e^{-2K_2^*}
       ]),
       displayMath(
         String.raw`\exp\!\left(K_2^*\sum_{m=1}^{M}\sigma_m^x\right)
-= \prod_{m=1}^{M}\exp\!\left(K_2^*\sigma_m^x\right)`,
+= \prod_{m=1}^{M}\exp\!\left(K_2^*\sigma_m^x\right)
+\quad (\because \text{互いに可換な行列の指数の積の定理を有限和へ繰り返し適用})`,
       ),
       paragraph([
         "右辺に Step 3 を代入し、",
@@ -1074,14 +1088,16 @@ e^{-2K_2^*}
       ]),
       displayMath(
         String.raw`\prod_{m=1}^{M}\exp\!\left(K_2^*\sigma_m^x\right)
-= \underbrace{\exp(K_2^*\sigma^x)\boxtimes\cdots\boxtimes\exp(K_2^*\sigma^x)}_{M}`,
+= \underbrace{\exp(K_2^*\sigma^x)\boxtimes\cdots\boxtimes\exp(K_2^*\sigma^x)}_{M}
+\quad (\because \text{Step 3 の表示とクロネッカー積の積の法則})`,
       ),
       paragraph([
         "Step 5（結論）。Step 2 と Step 4 を合わせると",
       ]),
       displayMath(
         String.raw`\underbrace{A \boxtimes \cdots \boxtimes A}_{M}
-= (2s_2)^{M/2}\exp\!\left(K_2^*\sum_{m=1}^{M}\sigma_m^x\right)`,
+= (2s_2)^{M/2}\exp\!\left(K_2^*\sum_{m=1}^{M}\sigma_m^x\right)
+\quad (\because \text{Step 2 の表示へ Step 4 の二つの等式を代入})`,
       ),
       paragraph([
         "であり、これと Step 1 を合わせて、",

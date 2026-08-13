@@ -873,6 +873,9 @@ targets=(
   Ising2DLambda.FisherZero.rationalSquareNeDoubleSquare
   Ising2DLambda.NecSuf.FisherZero.rational_square_ne_double_square_necSuf
   Ising2DLambda.FisherZero.rationalSquareNeDoubleSquare_from_necSuf
+  Ising2DLambda.FisherZero.rationalSquareLtImpliesLt
+  Ising2DLambda.NecSuf.FisherZero.rational_square_lt_implies_lt_necSuf
+  Ising2DLambda.FisherZero.rationalSquareLtImpliesLt_from_necSuf
   Ising2DLambda.FisherZero.quadraticTrichotomyAtLeastOne
   Ising2DLambda.NecSuf.FisherZero.quadratic_trichotomy_at_least_one_necSuf
   Ising2DLambda.FisherZero.quadraticTrichotomyAtLeastOne_from_necSuf

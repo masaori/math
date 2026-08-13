@@ -31502,6 +31502,11 @@ r\cdot r
     labels: ["claim_rational_square_lt_implies_lt"],
     habitat: "Q",
     verification: ["sagemath/check/rational-square-lt-implies-lt"],
+    lean: [
+      "Ising2DLambda.FisherZero.rationalSquareLtImpliesLt",
+      "Ising2DLambda.NecSuf.FisherZero.rational_square_lt_implies_lt_necSuf",
+      "Ising2DLambda.FisherZero.rationalSquareLtImpliesLt_from_necSuf",
+    ],
     statement: [
       paragraph([
         "任意の ",

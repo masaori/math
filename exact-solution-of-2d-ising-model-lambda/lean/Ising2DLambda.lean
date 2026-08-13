@@ -503,3 +503,6 @@ import Ising2DLambda.FisherZero.QuadraticAdditionFromNecSuf
 import Ising2DLambda.FisherZero.QuadraticMultiplication
 import Ising2DLambda.NecSuf.FisherZero.QuadraticMultiplication
 import Ising2DLambda.FisherZero.QuadraticMultiplicationFromNecSuf
+import Ising2DLambda.FisherZero.RationalSquareLtImpliesLt
+import Ising2DLambda.NecSuf.FisherZero.RationalSquareLtImpliesLt
+import Ising2DLambda.FisherZero.RationalSquareLtImpliesLtFromNecSuf
