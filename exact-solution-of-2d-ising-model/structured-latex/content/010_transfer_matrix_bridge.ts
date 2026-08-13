@@ -1412,10 +1412,18 @@ P^{(\pm)} f
         " について",
       ]),
       displayMath(
-        String.raw`\varepsilon\,\sigma_k^x = \sigma_k^x\,\varepsilon, \qquad
-\varepsilon\,\sigma_k^z = -\,\sigma_k^z\,\varepsilon, \qquad
-\varepsilon\,\sigma_k^y = -\,\sigma_k^y\,\varepsilon
-\qquad (k \in \{1,\dots,M\})`,
+        String.raw`\begin{aligned}
+\varepsilon\,\sigma_k^x
+&= \sigma_k^x\,\varepsilon
+   \quad (\because \sigma^x\sigma^x=I\text{ と、相異なるサイトの因子の可換性}) \\
+\varepsilon\,\sigma_k^z
+&= -\,\sigma_k^z\,\varepsilon
+   \quad (\because \sigma^z\sigma^x=-\sigma^x\sigma^z\text{ と、相異なるサイトの因子の可換性}) \\
+\varepsilon\,\sigma_k^y
+&= -\,\sigma_k^y\,\varepsilon
+   \quad (\because \sigma^y\sigma^x=-\sigma^x\sigma^y\text{ と、相異なるサイトの因子の可換性})
+\qquad (k \in \{1,\dots,M\})
+\end{aligned}`,
       ),
       paragraph([
         "（",
@@ -1443,32 +1451,66 @@ P^{(\pm)} f
         ref("def_exp"),
         " の部分和とも可換であり、",
         ref("matrix_multiplication_continuity"),
-        " による極限との交換から ",
-        math(String.raw`\varepsilon\exp(R) = \exp(R)\varepsilon`),
-        "。スカラー ",
+        " による極限との交換から次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\exp(R)
+&= \varepsilon\lim_{n\to\infty}\sum_{p=0}^{n}\frac{R^p}{p!}
+   \quad (\because \exp\text{ の定義}) \\
+&= \lim_{n\to\infty}\sum_{p=0}^{n}\frac{\varepsilon R^p}{p!}
+   \quad (\because \text{行列積の連続性と有限和への分配}) \\
+&= \lim_{n\to\infty}\sum_{p=0}^{n}\frac{R^p\varepsilon}{p!}
+   \quad (\because \varepsilon R^p=R^p\varepsilon) \\
+&= \left(\lim_{n\to\infty}\sum_{p=0}^{n}\frac{R^p}{p!}\right)\varepsilon
+   \quad (\because \text{有限和への分配と行列積の連続性}) \\
+&= \exp(R)\varepsilon
+   \quad (\because \exp\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "スカラー ",
         math(String.raw`(2\sinh 2K_2)^{M/2}`),
         " は ",
         ref("scalar_identity_commutes"),
-        " より任意の行列と可換なので ",
-        math(String.raw`\varepsilon V_2 = V_2\varepsilon`),
-        "。",
+        " より任意の行列と可換なので、定義のスカラー因子を上の等式へ掛けると ",
+        math(String.raw`\varepsilon V_2=V_2\varepsilon`),
+        " を得る。",
       ]),
       paragraph([
         "Step 3（",
         math(String.raw`V_1`),
-        " との可換性）。Step 1 より ",
-        math(String.raw`\varepsilon\,\sigma_m^z\sigma_{m+1}^z
-= (-1)^2\,\sigma_m^z\sigma_{m+1}^z\,\varepsilon = \sigma_m^z\sigma_{m+1}^z\,\varepsilon`),
-        "（",
-        math(String.raw`\sigma^z`),
-        " が 2 個なので符号が 2 回反転して戻る）。よって ",
+        " との可換性）。Step 1 より次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,\sigma_m^z\sigma_{m+1}^z
+&= (-1)^2\,\sigma_m^z\sigma_{m+1}^z\,\varepsilon
+   \quad (\because \sigma^z\text{ が二個なので、Step 1 の反可換性を二回適用}) \\
+&= \sigma_m^z\sigma_{m+1}^z\,\varepsilon
+   \quad (\because (-1)^2=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
         math(String.raw`\varepsilon`),
         " は ",
         math(String.raw`D = \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z`),
-        " と可換であり、Step 2 と同じ議論で ",
-        math(String.raw`\varepsilon V_1 = \varepsilon\exp(K_1D) = \exp(K_1D)\varepsilon = V_1\varepsilon`),
-        "。",
+        " と可換であり、Step 2 と同じ冪・有限和・極限の議論で ",
+        math(String.raw`\varepsilon\exp(K_1D)=\exp(K_1D)\varepsilon`),
+        " である。したがって",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon V_1
+&= \varepsilon\exp(K_1D)
+   \quad (\because V_1\text{ の定義}) \\
+&= \exp(K_1D)\varepsilon
+   \quad (\because \varepsilon\text{ と }\exp(K_1D)\text{ の可換性}) \\
+&= V_1\varepsilon
+   \quad (\because V_1\text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 4（",
         math(String.raw`V_1^{(\pm)}`),
@@ -1489,13 +1531,28 @@ P^{(\pm)} f
         " とは反可換なので",
       ]),
       displayMath(
-        String.raw`\varepsilon Z_m = -\,Z_m\,\varepsilon, \qquad
-\varepsilon Y_m = -\,Y_m\,\varepsilon`,
+        String.raw`\begin{aligned}
+\varepsilon Z_m
+&= -\,Z_m\,\varepsilon
+   \quad (\because \sigma_j^x\text{ との可換性と }\sigma_m^z\text{ との反可換性}) \\
+\varepsilon Y_m
+&= -\,Y_m\,\varepsilon
+   \quad (\because \sigma_j^x\text{ との可換性と }\sigma_m^y\text{ との反可換性})
+\end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        math(String.raw`\varepsilon\,(Y_mZ_{m'}) = (-1)^2 (Y_mZ_{m'})\,\varepsilon = (Y_mZ_{m'})\,\varepsilon`),
-        " であり、",
+        "よって次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,(Y_mZ_{m'})
+&= (-1)^2 (Y_mZ_{m'})\,\varepsilon
+   \quad (\because \varepsilon\text{ と }Y_m,Z_{m'}\text{ の反可換性を一回ずつ適用}) \\
+&= (Y_mZ_{m'})\,\varepsilon
+   \quad (\because (-1)^2=1)
+\end{aligned}`,
+      ),
+      paragraph([
         ref("def_V1_pm"),
         " の",
       ]),
@@ -1505,7 +1562,7 @@ P^{(\pm)} f
       paragraph([
         "は各項が ",
         math(String.raw`Y\cdot Z`),
-        " の形なので ",
+        " の形なので、和への分配則により ",
         math(String.raw`\varepsilon H_1^{(\pm)} = H_1^{(\pm)}\varepsilon`),
         "。Step 2 と同じ議論で ",
         math(String.raw`\varepsilon`),
