@@ -224,6 +224,11 @@ if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
                       log "    claude が週次の上限に達した。1 日後まで codex だけで回す" ;;
     *"session limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
                       log "    claude がセッションの上限に達した。3 時間後まで codex だけで回す" ;;
+    # 支出の上限。解除は人がやる（claude.ai の設定で上限を上げる）ので、こちらは待つしかない。
+    # 実測 2026-08-14 00:35: "You've hit your monthly spend limit" で 3 秒で落ち、
+    # この文言を拾えていなかったため claude の回が 2 回とも空振りした。
+    *"spend limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
+                      log "    claude が支出の上限に達した。3 時間後まで codex だけで回す" ;;
   esac
 fi
 
