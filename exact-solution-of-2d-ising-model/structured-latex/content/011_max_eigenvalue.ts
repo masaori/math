@@ -976,10 +976,23 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         math(String.raw`V_1^{1/2} = \exp(\tfrac12 K_1D)`),
         " と可換であり、同 Step 2 より ",
         math(String.raw`V_2`),
-        " とも可換である。よって ",
-        math(String.raw`\varepsilon W = \varepsilon V_1^{1/2}V_2V_1^{1/2} = V_1^{1/2}V_2V_1^{1/2}\varepsilon = W\varepsilon`),
-        "。",
+        " とも可換である。よって次の等式鎖を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon W
+&= \varepsilon V_1^{1/2}V_2V_1^{1/2}
+   \quad (\because W=V_1^{1/2}V_2V_1^{1/2}) \\
+&= V_1^{1/2}\varepsilon V_2V_1^{1/2}
+   \quad (\because \varepsilon V_1^{1/2}=V_1^{1/2}\varepsilon) \\
+&= V_1^{1/2}V_2\varepsilon V_1^{1/2}
+   \quad (\because \varepsilon V_2=V_2\varepsilon) \\
+&= V_1^{1/2}V_2V_1^{1/2}\varepsilon
+   \quad (\because \varepsilon V_1^{1/2}=V_1^{1/2}\varepsilon) \\
+&= W\varepsilon
+   \quad (\because W=V_1^{1/2}V_2V_1^{1/2}).
+\end{aligned}`,
+      ),
       paragraph([
         math(String.raw`f \in \mathcal{F}^{(\pm)}`),
         " なら ",

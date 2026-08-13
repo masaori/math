@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 225 は、「負の第二係数条件どうしの積」の Lean 具体版
+`quadraticPositive_mul_of_negativeSecond_negativeSecond`、必要十分版
+`positive_mul_negativeSecond_negativeSecond_necSuf`、導出を完成させ、四層を揃えた。レビューでは
+前 tick の本文と SageMath の係数の符号、中間比較、移項、交差項の付加、平方展開を突き合わせて
+修正不要と確認した。具体版は本文の鎖を有理係数二次体上で自前で実装し、必要十分版は線形順序
+可換環上で同じ鎖を持ち、導出は必要十分版を特殊化する。入口 import と sorry 非依存検査にも
+三定理を登録した。式変形統一では姉妹側「レイリー上限のセクター分解」の
+$\varepsilon W=W\varepsilon$ を、$W$ の定義と可換性を行末根拠にした五段の等式鎖へ開いた。
+次の本文は「負の第一係数条件どうしの積」、次の式変形統一は同じ証明の直後にある
+$\varepsilon(Wf)=W(\varepsilon f)=W(\pm f)=\pm Wf$ の計算から続ける。
+
 2026-08-14 の tick 224 は、レビューで前 tick の「非負係数条件と負の第一係数条件の積」の
 Lean 三本を本文と突き合わせ、修正不要と確認した。そのあと「負の第二係数条件どうしの積」
 （`claim_quadratic_positive_mul_negative_second_negative_second`）を記述と SageMath まで
