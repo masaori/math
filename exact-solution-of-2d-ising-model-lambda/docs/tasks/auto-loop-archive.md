@@ -14,6 +14,21 @@
 
 ## 現在地の記録（過去分）
 
+- **2026-08-13 の tick 208 は、前 tick の「二次体の和の表示」の Lean 三本と姉妹側
+  「分配関数の偶奇セクター分解」の式変形統一をレビューし、修正不要と確認した。そのあと
+  todo 先頭の「二次体の積の表示」（`claim_quadratic_multiplication_mem`・
+  `claim_quadratic_multiplication_representation`）を記述と SageMath まで進めた。**
+  証明は三つの補助等式（$a\cdot(b'\cdot s)=(a\cdot b')\cdot s$ が 1 段、
+  $(b\cdot s)\cdot a'=(b\cdot a')\cdot s$ が 3 段、$(b\cdot s)\cdot(b'\cdot s)=2\cdot(b\cdot b')$
+  が $s\cdot s=2$ を使う 7 段）を準備に置き、十四段の鎖で
+  $\xi\cdot\eta=(a\cdot a'+2\cdot(b\cdot b'))+(a\cdot b'+b\cdot a')\cdot s$ を立てる。
+  閉性は証人 $(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')$、表示は一意性の適用で得る。
+  SageMath（`sagemath/check/quadratic-multiplication/`）は両根 × 有理数四つ組で両立 49 組・
+  補助等式と鎖と表示 4802 組を厳密検査して通過した。**Lean は未着手**で、次 tick は
+  この二主張の Lean（具体版・必要十分版・導出）を完成させる。式変形統一では姉妹側
+  「$V_1$ の二つの定義の一致」の証明 Step 1 の $D\,f_{\iota(\mu)}$ の二等号の鎖を、
+  一行一等号と行末根拠の四行へ開いた。次の統一は同ファイルの次の根拠なしの鎖から続ける。
+
 - **2026-08-13 の tick 207 は、前 tick の「二次体の和の表示」の本文・SageMath と姉妹側の
   式変形統一を突き合わせ、修正不要と確認した。そのあと同セクションの Lean 具体版・
   必要十分版・導出を完成させ、四層すべてを満たした。** 具体版は本文と同じ七段の鎖で
@@ -2074,6 +2089,15 @@
 
 
 ## 前進の記録（過去分）
+
+- 2026-08-13（tick 208）: todo 先頭の「二次体の積の表示」
+  （`claim_quadratic_multiplication_mem`・`claim_quadratic_multiplication_representation`）を
+  記述と SageMath まで進めた。三つの補助等式（結合則 1 段・結合と可換の 3 段・
+  $s\cdot s=2$ を使う 7 段）を準備に置き、十四段の鎖で
+  $\xi\cdot\eta=(a\cdot a'+2\cdot(b\cdot b'))+(a\cdot b'+b\cdot a')\cdot s$ を立てる。
+  閉性は証人 $(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')$、表示は一意性の適用。
+  SageMath（`sagemath/check/quadratic-multiplication/`）は 49+4802 組を厳密検査して通過した。
+  Lean は未着手。
 
 - 2026-08-13（tick 207）: 「二次体の和の表示」の Lean 具体版・必要十分版・導出を
   完成させた。具体版は本文と同じ七段の等式列で和を $Q_s$ へ持ち上げ、表示の
@@ -4619,6 +4643,14 @@
 
 
 ## レビュー記録（過去分）
+
+- 2026-08-13（tick 208）: 前 tick の「二次体の和の表示」の Lean 三本と、姉妹側
+  「分配関数の偶奇セクター分解」の式変形統一を突き合わせた。具体版は本文と同じ七段の
+  calc 鎖で和を持ち上げ、必要十分版は表示等式と一意性だけを要求し、導出は具体版の各段を
+  渡す。sorry 検査への六定理の登録と本文の `lean` フィールドも揃っている。姉妹側の
+  書き換えも等号と根拠を失っていない。数学内容の修正は無い。台帳の整理で、前 tick が
+  tick 202 の三記録（現在地・前進・レビュー）を保管庫へ移さず削除していたため、git の
+  履歴から原文を復元して保管庫へ入れ、「これより古い N 件」を保管庫の実数に合わせた。
 
 - 2026-08-13（tick 207）: 前 tick の「二次体の和の表示」の本文・SageMath と、姉妹側
   の式変形統一を突き合わせた。本文と SageMath の七段は一致し、姉妹側も可換性と

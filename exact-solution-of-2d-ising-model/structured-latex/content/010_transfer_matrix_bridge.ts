@@ -1317,6 +1317,13 @@ P^{(-)}P^{(+)}
    \quad (\because I-I=0)
 \end{aligned}`,
       ),
+      paragraph([
+        "この計算では ",
+        ref("def_epsilon_projectors"),
+        " と ",
+        ref("def_eigenspaces_of_epsilon"),
+        " を用いた。",
+      ]),
       paragraph(["(3)"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1331,6 +1338,7 @@ P^{(+)} + P^{(-)}
    \quad (\because \text{スカラー倍を整理する})
 \end{aligned}`,
       ),
+      paragraph(["この計算では ", ref("def_epsilon_projectors"), " を用いた。"]),
       paragraph([
         "(4) ",
         ref("def_eigenspaces_of_epsilon"),
@@ -1365,6 +1373,7 @@ P^{(\pm)}y
    \quad (\because y = P^{(\pm)}x)
 \end{aligned}`,
       ),
+      paragraph(["この計算では (2) の冪等性を用いた。"]),
       paragraph(["である。よって（複号同順）"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1389,6 +1398,13 @@ P^{(\pm)}y
    \quad (\because \text{上の等式 } y = P^{(\pm)}y)
 \end{aligned}`,
       ),
+      paragraph([
+        "この計算では ",
+        ref("def_epsilon_projectors"),
+        " と ",
+        ref("def_eigenspaces_of_epsilon"),
+        " を用いた。",
+      ]),
       paragraph([
         "よって ",
         math(String.raw`y \in \mathcal{F}^{(\pm)}`),
@@ -1422,12 +1438,24 @@ P^{(\pm)} f
 \end{aligned}`,
       ),
       paragraph([
+        "この計算では ",
+        ref("def_epsilon_projectors"),
+        " と ",
+        ref("def_eigenspaces_of_epsilon"),
+        " を用いた。",
+      ]),
+      paragraph([
         "よって ",
         math(String.raw`f = P^{(\pm)}f \in \mathrm{im}\,P^{(\pm)}`),
         "。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "式変形の書き方の統一（2026-08-14）: 各式変形の行末に残っていた根拠に対応するラベル参照を、各鎖の直後へ追加した。等式・不等式・場合分け・使用する根拠の内容は変えていない。",
+      ],
+    },
   },
 
   {

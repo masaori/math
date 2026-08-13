@@ -31673,6 +31673,100 @@ b'&=0 &&\bigl(\because\ 0\le b'\text{ と }b'\le0\text{ に順序の反対称性
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_add_nonnegative_negative_second",
+    kind: "claim",
+    title: { text: "非負係数条件と負の第二係数条件の和" },
+    labels: ["claim_quadratic_positive_add_nonnegative_negative_second"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-add-nonnegative-negative-second"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeSecond",
+      "Ising2DLambda.NecSuf.FisherZero.positive_add_nonnegative_negativeSecond_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_add_of_nonnegative_negativeSecond_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in Q_s`),
+        " について、",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+        " が正錐の非負係数条件を満たし、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " が正錐の負の第二係数条件を満たすならば、",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。すべての係数と比較は有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_quadratic_addition_representation"),
+        " により ",
+        math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
+        " である。",
+        math(String.raw`B:=b+b'`),
+        " と置き、",
+        math(String.raw`0\le B`),
+        " か否かで分ける。",
+      ]),
+      paragraph([
+        math(String.raw`0\le B`),
+        " の場合。次の二つを得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&<a+a' &&\bigl(\because\ 0\le a,\ 0<a'\text{ と加法の単調性}\bigr)\\
+(a+a',B)&\ne(0,0) &&\bigl(\because\ 0<a+a'\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって表示は正錐の第一条件を満たす。",
+      ]),
+      paragraph([
+        math(String.raw`0\le B`),
+        " でない場合。",
+        math(String.raw`B<0`),
+        " である。まず負の第二係数の絶対値が増えないことを、積の順序として示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b'&\le B &&\bigl(\because\ 0\le b\text{ と }B=b+b'\bigr)\\
+B\cdot B&\le b'\cdot B &&\bigl(\because\ b'\le B\text{ の両辺へ負の }B\text{ を右から掛ける}\bigr)\\
+&\le b'\cdot b' &&\bigl(\because\ b'\le B\text{ の両辺へ負の }b'\text{ を左から掛ける}\bigr)
+\end{aligned}`),
+      paragraph([
+        "第一係数については次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0&<a' &&\bigl(\because\ \eta\text{ が負の第二係数条件を満たす}\bigr)\\
+&\le a+a' &&\bigl(\because\ 0\le a\text{ と加法の単調性}\bigr)\\
+a'\cdot a'&\le(a+a')\cdot(a+a') &&\bigl(\because\ 0\le a'\le a+a'\text{ と乗法の単調性}\bigr)
+\end{aligned}`),
+      paragraph([
+        "以上と負の第二係数条件をつなぐ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2\cdot(B\cdot B)
+&\le2\cdot(b'\cdot b') &&\bigl(\because\ B\cdot B\le b'\cdot b'\text{ の両辺へ正の }2\text{ を掛ける}\bigr)\\
+&<a'\cdot a' &&\bigl(\because\ \eta\text{ が負の第二係数条件を満たす}\bigr)\\
+&\le(a+a')\cdot(a+a') &&\bigl(\because\ 0\le a'\le a+a'\text{ と乗法の単調性}\bigr)
+\end{aligned}`),
+      paragraph([
+        "ゆえに表示 ",
+        math(String.raw`(a+a',B)`),
+        " は正錐の第二条件を満たす。二つの場合を合わせて ",
+        math(String.raw`\xi+\eta\in P_s`),
+        " である。全過程は ",
+        math(String.raw`\mathbb{Q}`),
+        " の加法・積・順序と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の加法の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
