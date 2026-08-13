@@ -30351,6 +30351,91 @@ a+b\cdot s
   },
 
   {
+    id: "fisher_zero_claim_rational_square_ne_double_square",
+    kind: "claim",
+    title: { text: "有理数の平方は二倍の平方にならない（混合符号の排除）" },
+    labels: ["claim_rational_square_ne_double_square"],
+    habitat: "Q",
+    verification: ["sagemath/check/rational-square-ne-double-square"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a,b\in\mathbb{Q}`),
+        " について、",
+        math(String.raw`b\ne0`),
+        " ならば",
+      ]),
+      displayMath(String.raw`a\cdot a\ne2\cdot(b\cdot b)`),
+      paragraph([
+        "である（",
+        math(String.raw`2:=1+1\in\mathbb{Q}`),
+        "、積は ",
+        math(String.raw`\mathbb{Q}`),
+        " の積）。後のセクションの三分律で、表示の組 ",
+        math(String.raw`(a,b)`),
+        " の符号が混合する場合（正錐 ",
+        ref("def_quadratic_positive_cone"),
+        " の第二条件・第三条件）を扱うとき、",
+        math(String.raw`b\ne0`),
+        " のもとで ",
+        math(String.raw`a\cdot a`),
+        " と ",
+        math(String.raw`2\cdot(b\cdot b)`),
+        " の大小の比較が「小さい」「大きい」の 2 つの場合で尽くされる（等しい場合が起きない）ことの根拠として使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "背理法による。ある ",
+        math(String.raw`a,b\in\mathbb{Q}`),
+        "（",
+        math(String.raw`b\ne0`),
+        "）が ",
+        math(String.raw`a\cdot a=2\cdot(b\cdot b)`),
+        " を満たすと仮定する。",
+        math(String.raw`b\ne0`),
+        " なので、体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で乗法逆元 ",
+        math(String.raw`b^{-1}\in\mathbb{Q}`),
+        "（",
+        math(String.raw`b\cdot b^{-1}=1`),
+        "）が存在する。有理数 ",
+        math(String.raw`r:=a\cdot b^{-1}\in\mathbb{Q}`),
+        " と置き、次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r\cdot r
+&=(a\cdot b^{-1})\cdot(a\cdot b^{-1})
+&&\bigl(\because\ r\ \text{の定義}\bigr)\\
+&=(a\cdot a)\cdot(b^{-1}\cdot b^{-1})
+&&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
+&=\bigl(2\cdot(b\cdot b)\bigr)\cdot(b^{-1}\cdot b^{-1})
+&&\bigl(\because\ \text{背理法の仮定}\bigr)\\
+&=2\cdot\bigl((b\cdot b^{-1})\cdot(b\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
+&=2\cdot(1\cdot1)
+&&\bigl(\because\ \text{乗法逆元}\ b\cdot b^{-1}=1\bigr)\\
+&=2
+&&\bigl(\because\ \text{乗法単位元}\ 1\cdot1=1,\ 2\cdot1=2\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`r\in\mathbb{Q}`),
+        " が ",
+        math(String.raw`r\cdot r=2`),
+        " を満たすが、これは ",
+        ref("claim_no_rational_square_two"),
+        " と矛盾する。ゆえに ",
+        math(String.raw`a\cdot a\ne2\cdot(b\cdot b)`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
