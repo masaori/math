@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 220 は、「非負係数条件と負の第二係数条件の積」
+（`claim_quadratic_positive_mul_nonnegative_negative_second`）を記述と SageMath まで進めた。
+$u:=-b'$ を置き、積の表示 $(A,B)=(a\cdot a'-2(b\cdot u),\ b\cdot a'-a\cdot u)$ について、
+混合符号の排除（`claim_rational_square_ne_double_square`）で $a\cdot a\ne2(b\cdot b)$ を
+確かめてから二場合に分けた。$2(b\cdot b)<a\cdot a$ の場合は、$A\le0$ と仮定すると平方比較の
+鎖から $a\cdot a<2(b\cdot b)$ が出て矛盾するので $0<A$ であり、$0\le B$ なら第一条件、
+$B<0$ なら $V:=-B$ と線形比較 $a'\cdot V\le u\cdot A$ を平方へ移して
+$2(B\cdot B)<A\cdot A$（第二条件）を得る。$a\cdot a<2(b\cdot b)$ の場合は対称に $0<B$ で、
+$0\le A$ なら第一条件、$A<0$ なら $C:=-A$ と $a'\cdot C\le(2u)\cdot B$ から
+$A\cdot A<2(B\cdot B)$（第三条件）を得る。SageMath
+（`sagemath/check/quadratic-positive-mul-nonnegative-negative-second/`）は 122475 組で
+背理法の鎖・線形比較・平方の鎖の各段を厳密検査して通過した。**Lean は未着手**で、
+次 tick はこの主張の Lean（具体版・必要十分版・導出）を完成させる。レビューでは前 tick の
+「正錐の非負係数条件どうしの積」を四層で突き合わせ、修正不要と確認した。式変形統一は
+この tick では行っていない（時間切れ。次 tick は姉妹側の機械走査で特定する次の根拠なしの
+計算から続ける）。
+
 2026-08-14 の tick 219 は、「正錐と乗法の両立」を独立な六つの符号場合と最後の
 組み立てへ割り、先頭の「正錐の非負係数条件どうしの積」を四層すべてで完成させた。
 積の表示 $(A,B)=(aa'+2bb',ab'+ba')$ は非負係数から $A,B\ge0$ となる。さらに各因子は
