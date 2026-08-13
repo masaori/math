@@ -844,14 +844,20 @@ e^{-2K_2^*}
         ref("cosh_sinh_basic_properties"),
         " による。）",
       ]),
+      paragraph(["Step 3（前因子）。まず"]),
+      displayMath(String.raw`\begin{aligned}
+2s_2
+&= 2\sinh 2K_2
+   \quad (\because s_2 = \sinh 2K_2 \text{ の代入}) \\
+&= 2\left(2\sinh K_2\cosh K_2\right)
+   \quad (\because \text{倍角公式 }\sinh 2K_2 = 2\sinh K_2\cosh K_2) \\
+&= 4\sinh K_2\cosh K_2
+   \quad (\because \text{数の積の結合則})
+\end{aligned}`),
       paragraph([
-        "Step 3（前因子）。倍角公式 ",
-        math(String.raw`\sinh 2K_2 = 2\sinh K_2\cosh K_2`),
-        "（",
+        "である（倍角公式は ",
         ref("cosh_sinh_basic_properties"),
-        "）より ",
-        math(String.raw`2s_2 = 4\sinh K_2\cosh K_2`),
-        " であり、",
+        " による）。",
         math(String.raw`\sinh K_2, \cosh K_2 > 0`),
         " なので",
       ]),
