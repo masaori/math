@@ -30011,6 +30011,11 @@ b
     labels: ["claim_quadratic_zero_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-zero-negation"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticZero_mem",
+      "Ising2DLambda.NecSuf.FisherZero.zero_mem_necSuf",
+      "Ising2DLambda.FisherZero.quadraticZero_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -30072,6 +30077,11 @@ b
     labels: ["claim_quadratic_zero_representation"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-zero-negation"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticRepresentation_eq_zero_iff",
+      "Ising2DLambda.NecSuf.FisherZero.zero_representation_necSuf",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_eq_zero_iff_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -30178,6 +30188,11 @@ a+b\cdot s
     labels: ["claim_quadratic_negation_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-zero-negation"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticNeg_mem",
+      "Ising2DLambda.NecSuf.FisherZero.neg_mem_necSuf",
+      "Ising2DLambda.FisherZero.quadraticNeg_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -30265,6 +30280,11 @@ a+b\cdot s
     labels: ["claim_quadratic_negation_representation"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-zero-negation"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticRepresentation_neg",
+      "Ising2DLambda.NecSuf.FisherZero.neg_representation_necSuf",
+      "Ising2DLambda.FisherZero.quadraticRepresentation_neg_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

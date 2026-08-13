@@ -858,6 +858,18 @@ targets=(
   Ising2DLambda.FisherZero.quadraticRepresentation_generator
   Ising2DLambda.FisherZero.quadraticGenerator_mem_positiveCone
   Ising2DLambda.FisherZero.quadraticFieldSet_neg
+  Ising2DLambda.FisherZero.quadraticZero_mem
+  Ising2DLambda.NecSuf.FisherZero.zero_mem_necSuf
+  Ising2DLambda.FisherZero.quadraticZero_mem_from_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_eq_zero_iff
+  Ising2DLambda.NecSuf.FisherZero.zero_representation_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_eq_zero_iff_from_necSuf
+  Ising2DLambda.FisherZero.quadraticNeg_mem
+  Ising2DLambda.NecSuf.FisherZero.neg_mem_necSuf
+  Ising2DLambda.FisherZero.quadraticNeg_mem_from_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_neg
+  Ising2DLambda.NecSuf.FisherZero.neg_representation_necSuf
+  Ising2DLambda.FisherZero.quadraticRepresentation_neg_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
