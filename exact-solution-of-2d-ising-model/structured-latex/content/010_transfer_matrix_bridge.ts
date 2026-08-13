@@ -256,7 +256,52 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         math(String.raw`\mathbb{C}^2`),
         " の中で",
       ]),
-      displayMath(String.raw`\sigma^z e_1 = e_1, \qquad \sigma^z e_2 = -e_2`),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z e_1
+&=
+\begin{pmatrix}
+  1 & 0 \\
+  0 & -1
+\end{pmatrix}
+\begin{pmatrix}
+  1 \\
+  0
+\end{pmatrix}
+\quad (\because \text{定義の代入}) \\
+&=
+\begin{pmatrix}
+  1 \\
+  0
+\end{pmatrix}
+\quad (\because \text{行列と列ベクトルの積}) \\
+&= e_1
+\quad (\because e_1 \text{ の定義}),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z e_2
+&=
+\begin{pmatrix}
+  1 & 0 \\
+  0 & -1
+\end{pmatrix}
+\begin{pmatrix}
+  0 \\
+  1
+\end{pmatrix}
+\quad (\because \text{定義の代入}) \\
+&=
+\begin{pmatrix}
+  0 \\
+  -1
+\end{pmatrix}
+\quad (\because \text{行列と列ベクトルの積}) \\
+&= -e_2
+\quad (\because e_2 \text{ の定義}).
+\end{aligned}`,
+      ),
       paragraph([
         "である。",
         ref("def_config_basis_iso"),
@@ -282,30 +327,70 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         math(String.raw`m`),
         " 因子だけが ",
         math(String.raw`\sigma^z`),
-        "）と ",
+        "）より",
+      ]),
+      displayMath(
+        String.raw`\sigma_m^z\, f_{\iota(\mu)}
+= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
+   f_{\iota(\mu)}`,
+      ),
+      paragraph([
+        ref("def_config_basis_iso"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
+   f_{\iota(\mu)}
+= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
+   \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_M}\right)`,
+      ),
+      paragraph([
         ref("kronecker_product_rule"),
         "（クロネッカー積の積は因子ごとの積）より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma_m^z\, f_{\iota(\mu)}
-&= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
-   \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_M}\right) \\
 &= (I e_{i_1})\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes(I e_{i_M})
    \quad (\because \text{クロネッカー積の積の規則}) \\
-&= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_M} \\
-&= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)
-   \quad (\because \text{クロネッカー積の多重線型性}) \\
-&= \mu(m)\, f_{\iota(\mu)}
+&= e_{i_1}\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes e_{i_M}
+   \quad (\because \text{恒等行列の作用}) \\
+&= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_M}
+   \quad (\because \sigma^z e_{i_m}=\mu(m)e_{i_m})
 \end{aligned}`,
       ),
       paragraph([
-        "スカラーを外へ出す操作は ",
         ref("kronecker_multilinear"),
-        " による。積についても ",
-        math(String.raw`\sigma_m^z\sigma_{m'}^z f_{\iota(\mu)} = \sigma_m^z(\mu(m')f_{\iota(\mu)}) = \mu(m)\mu(m')f_{\iota(\mu)}`),
-        " と 2 回適用すればよい。",
+        " より、スカラーを外へ出して",
       ]),
+      displayMath(
+        String.raw`e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_M}
+= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)`,
+      ),
+      paragraph([
+        ref("def_config_basis_iso"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}\right)
+= \mu(m)\, f_{\iota(\mu)}`,
+      ),
+      paragraph(["積については、いま示した作用を 2 回用いると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_m^z\sigma_{m'}^z f_{\iota(\mu)}
+&= \sigma_m^z\left(\mu(m')f_{\iota(\mu)}\right)
+   \quad (\because \sigma_{m'}^z f_{\iota(\mu)}=\mu(m')f_{\iota(\mu)}) \\
+&= \mu(m')\sigma_m^z f_{\iota(\mu)}
+   \quad (\because \text{行列作用の線型性}) \\
+&= \mu(m')\left(\mu(m)f_{\iota(\mu)}\right)
+   \quad (\because \sigma_m^z f_{\iota(\mu)}=\mu(m)f_{\iota(\mu)}) \\
+&= \left(\mu(m')\mu(m)\right)f_{\iota(\mu)}
+   \quad (\because \text{スカラー倍の結合律}) \\
+&= \mu(m)\mu(m')f_{\iota(\mu)}
+   \quad (\because \text{複素数の乗法の交換律}).
+\end{aligned}`,
+      ),
       paragraph([
         "基底 ",
         math(String.raw`(f_I)_{I\in\mathcal{I}}`),

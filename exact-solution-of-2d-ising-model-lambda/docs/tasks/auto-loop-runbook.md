@@ -123,20 +123,22 @@ $(\because\ \dots)$」の形へ書き換える。** 対象は 2 つのプロジ�
   （`(cd ../exact-solution-of-2d-ising-model/structured-latex && npm run check)` と PDF 生成）。
 - 書き換えた証明の名前を台帳へ記録する（次の tick が続きから拾えるようにするため）。
 
-## いまの状態を Web で公開する（ユーザーの明示指示）
+## 論文を Web で公開する（ユーザーの明示指示）
 
-`scripts/publish-artifact.sh` が、版・これから書くこと・済んだ範囲・直近の前進とレビューを
-1 枚の HTML にして artifacts リポジトリの GitHub Pages へ置く。**URL を決め打ちしない**
-（リポジトリの所有が移って決め打ちの URL が 404 になった実例がある。実測 2026-08-13）。
-実際の URL は公開のたびに `logs/publish-artifact.log` の「OK: 公開した」の行に出る。
-公開に成功したら Slack へ版・要約・URL を流す（ユーザー指示）。**同じ版では二度送らない**
-（PDF の作り直し側からも公開が走るため。送った版は `logs/last-notified-commit` に残す）。
+`scripts/publish-artifact.sh` が `structured-latex/content/` から論文 1 枚の HTML
+（`tools/build-html.ts`）を作り、artifacts リポジトリの GitHub Pages へ置く。
 tick の最後と、PDF を作り直したときに自動で走るので、**tick が手で呼ぶ必要はない**。
 
-- 元になるのは台帳（`docs/tasks/auto-loop-state.md`）である。台帳の書き方が崩れると
-  このページも崩れる。台帳の節の名前（「セクション台帳」「前進の記録」「レビュー記録」）は変えない。
-- **PDF はここへ置かない。** 証明本体はローカルの `structured-latex/build/document.pdf` で読む。
-- 公開先は URL を知っていれば誰でも読めるので、置くのは上記の進捗情報だけにする。
+- **公開するのは論文であって、進捗の報告ではない。** 台帳の内容はここへ載せない。
+- **PDF は公開しない。** 手元の `structured-latex/build/document.pdf` で読む。
+- **URL を決め打ちしない**（リポジトリの所有が移って決め打ちの URL が 404 になった実例がある。
+  実測 2026-08-13）。実際の URL は `logs/publish-artifact.log` の「OK: 公開した」の行に出る。
+  公開に成功したら Slack へ版・要約・URL を流す（同じ版では二度送らない）。
+- 数式は KaTeX の TeX 文字列のまま埋め、読んでいる位置だけをブラウザ側で組む。
+  生成時に組むと出力が 13.6MB になり、公開先の git 履歴へ tick ごとにその大きさが積まれる
+  （公開先は履歴を消さない）。TeX のまま置けば 1.5MB で済む。
+- 採番（定義 0.1 等）と参照の文字列は PDF 側と一致させてある。`build-latex.ts` の採番規則を
+  変えたら `build-html.ts` も合わせる。
 
 ## PDF を常に最新に保つ（ユーザーの明示指示）
 
