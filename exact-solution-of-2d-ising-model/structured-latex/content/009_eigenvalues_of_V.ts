@@ -1781,17 +1781,45 @@ V' y
     ],
     proof: [
       paragraph([
-        "(1) まずエルミート性。",
-        ref("star_preserves_norm_and_limits"),
-        " (1) を繰り返し使うと ",
-        math(String.raw`(S^k)^* = (S^*)^k = S^k`),
-        " であり、",
-        math(String.raw`1/k! \in \mathbb{R}`),
-        " なので部分和 ",
+        "(1) まずエルミート性。部分和を ",
         math(String.raw`E_K := \sum_{k=0}^{K}\frac{1}{k!}S^k`),
-        " はエルミートである（",
-        math(String.raw`E_K^* = \sum_k \overline{1/k!}\,(S^k)^* = E_K`),
-        "）。",
+        " と置く。任意の ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S^k)^*
+&= (S^*)^k
+   \quad (\because \text{積の共役転置 } (AB)^* = B^*A^* \text{ を } k \text{ 回繰り返す}) \\
+&= S^k
+   \quad (\because S \text{ はエルミート、すなわち } S^* = S)
+\end{aligned}`,
+      ),
+      paragraph([
+        "（積の共役転置は ",
+        ref("star_preserves_norm_and_limits"),
+        " (1) 第 1 式による）。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+E_K^*
+&= \Bigl(\textstyle\sum_{k=0}^{K}\frac{1}{k!}S^k\Bigr)^*
+   \quad (\because E_K \text{ の定義}) \\
+&= \textstyle\sum_{k=0}^{K}\overline{\left(\frac{1}{k!}\right)}\,(S^k)^*
+   \quad (\because \text{共役転置の線型性を和の各項へ適用}) \\
+&= \textstyle\sum_{k=0}^{K}\frac{1}{k!}\,(S^k)^*
+   \quad (\because 1/k! \in \mathbb{R} \text{ なので } \overline{1/k!} = 1/k!) \\
+&= \textstyle\sum_{k=0}^{K}\frac{1}{k!}\,S^k
+   \quad (\because \text{上で得た } (S^k)^* = S^k) \\
+&= E_K
+   \quad (\because E_K \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（共役転置の線型性は ",
+        ref("star_preserves_norm_and_limits"),
+        " (1) 第 2 式による）。",
         ref("exp_converges"),
         " より ",
         math(String.raw`E_K \to \exp(S)`),
@@ -1799,9 +1827,17 @@ V' y
         ref("star_preserves_norm_and_limits"),
         " (3) より ",
         math(String.raw`E_K^* \to \exp(S)^*`),
-        "。左辺は ",
-        math(String.raw`E_K^* = E_K \to \exp(S)`),
-        " なので、極限の一意性から ",
+        "。上の等式 ",
+        math(String.raw`E_K^* = E_K`),
+        " より、同じ点列 ",
+        math(String.raw`E_K`),
+        " が ",
+        math(String.raw`\exp(S)^*`),
+        " と ",
+        math(String.raw`\exp(S)`),
+        " の両方へ収束するから、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4)（極限の一意性）より ",
         math(String.raw`\exp(S)^* = \exp(S)`),
         "。",
       ]),
@@ -1812,21 +1848,37 @@ V' y
         math(String.raw`\exp(S/2)^* = \exp(S/2)`),
         "。また ",
         math(String.raw`S/2`),
-        " は自分自身と可換なので ",
-        ref("theorem_exp_product"),
-        " より",
+        " は自分自身と可換なので",
       ]),
       displayMath(
-        String.raw`\exp(S/2)\exp(S/2) = \exp(S/2 + S/2) = \exp(S)`,
+        String.raw`\begin{aligned}
+\exp(S/2)\exp(S/2)
+&= \exp(S/2 + S/2)
+   \quad (\because \text{可換な行列の指数の積}) \\
+&= \exp(S)
+   \quad (\because S/2 + S/2 = S)
+\end{aligned}`,
       ),
       paragraph([
-        "さらに ",
-        math(String.raw`\exp(S/2)\exp(-S/2) = \exp(0) = I`),
-        "（",
+        "（可換な行列の指数の積は ",
         ref("theorem_exp_product"),
-        "、",
+        " による）。さらに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(S/2)\exp(-S/2)
+&= \exp\bigl(S/2 + (-S/2)\bigr)
+   \quad (\because \text{可換な行列の指数の積}) \\
+&= \exp(0)
+   \quad (\because S/2 + (-S/2) = 0) \\
+&= I
+   \quad (\because \text{零行列の指数})
+\end{aligned}`,
+      ),
+      paragraph([
+        "（零行列の指数は ",
         ref("theorem_exp_zero"),
-        "）より ",
+        " による）ので ",
         math(String.raw`\exp(S/2)`),
         " は可逆である。よって ",
         math(String.raw`x \in \mathbb{C}^n\setminus\{0\}`),
@@ -1835,19 +1887,36 @@ V' y
         " であり、",
       ]),
       displayMath(
-        String.raw`x^*\exp(S)x
-= x^*\exp(S/2)^*\exp(S/2)x
-= \left(\exp(S/2)x\right)^*\left(\exp(S/2)x\right)
-= w^* w
-= \sum_{k=1}^{n}|w_k|^2
-= \|w\|^2 > 0`,
+        String.raw`\begin{aligned}
+x^*\exp(S)x
+&= x^*\bigl(\exp(S/2)\exp(S/2)\bigr)x
+   \quad (\because \text{上で得た } \exp(S/2)\exp(S/2) = \exp(S)) \\
+&= x^*\exp(S/2)^*\exp(S/2)x
+   \quad (\because \text{上で示した } \exp(S/2)^* = \exp(S/2)) \\
+&= \left(\exp(S/2)x\right)^*\left(\exp(S/2)x\right)
+   \quad (\because \text{積の共役転置を } n \times 1 \text{ 行列 } x \text{ へ適用}) \\
+&= w^* w
+   \quad (\because w \text{ の定義}) \\
+&= \textstyle\sum_{k=1}^{n}\overline{w_k}\,w_k
+   \quad (\because \text{行列積の定義（} 1 \times 1 \text{ 成分）}) \\
+&= \textstyle\sum_{k=1}^{n}|w_k|^2
+   \quad (\because \overline{z}\,z = |z|^2) \\
+&= \|w\|^2
+   \quad (\because \text{ベクトルノルムの定義})
+\end{aligned}`,
       ),
       paragraph([
-        "（",
+        "（積の共役転置は ",
+        ref("star_preserves_norm_and_limits"),
+        " (1) 第 1 式による）。",
         math(String.raw`w \neq 0`),
         " なのでどれかの ",
         math(String.raw`w_k \neq 0`),
-        " であり、平方和は正）。",
+        " であり、非負項の和が正の項を含むから ",
+        math(String.raw`\|w\|^2 > 0`),
+        "。よって ",
+        math(String.raw`x^*\exp(S)x > 0`),
+        " である。",
       ]),
       paragraph([
         "(2) ",

@@ -49,6 +49,7 @@ export const ALL_LABELS = [
   "claim_mixed_boundary_duality_identity",
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
+  "claim_one_s_linearly_independent",
   "claim_orbit_bijection_id_or_shift",
   "claim_orbit_factor_root",
   "claim_orbit_factor_zero",

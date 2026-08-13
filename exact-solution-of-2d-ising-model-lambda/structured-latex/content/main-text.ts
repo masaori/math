@@ -29398,6 +29398,185 @@ m+m
   },
 
   {
+    id: "fisher_zero_claim_one_s_linearly_independent",
+    kind: "claim",
+    title: { text: "一と s の一次独立性" },
+    labels: ["claim_one_s_linearly_independent"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/one-s-linearly-independent"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "。",
+        math(String.raw`2:=1+1`),
+        "）。任意の ",
+        math(String.raw`a\in\mathbb{Q}`),
+        " と ",
+        math(String.raw`b\in\mathbb{Q}`),
+        " について、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で",
+      ]),
+      displayMath(String.raw`a+b\cdot s=0\ \text{ならば}\ (a,b)=(0,0)`),
+      paragraph([
+        "である（",
+        math(String.raw`a,b`),
+        " は部分体 ",
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " の元として扱い、加法・積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " のものである。結論は組の等号、すなわち ",
+        math(String.raw`a=0`),
+        " かつ ",
+        math(String.raw`b=0`),
+        " を指す）。この主張は、後のセクションで集合 ",
+        math(String.raw`\{a+b\cdot s\mid a,b\in\mathbb{Q}\}`),
+        " の元の表示 ",
+        math(String.raw`(a,b)`),
+        " が一意であること（正値性の定義の well-defined 性）の根拠として使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、",
+        math(String.raw`\mathbb{Q}`),
+        " の元とその四則の結果は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元および四則の結果と同じものであり、",
+        math(String.raw`\mathbb{Q}`),
+        " の 2 元が ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で等しいことと ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で等しいことは同値である（同じ元だからである）。",
+      ]),
+      paragraph([
+        "まず ",
+        math(String.raw`b=0`),
+        " を背理法で示す。",
+        math(String.raw`a+b\cdot s=0`),
+        " のもとで ",
+        math(String.raw`b\ne0`),
+        " と仮定する。体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で ",
+        math(String.raw`b^{-1}\cdot b=1`),
+        " を満たす積の逆元 ",
+        math(String.raw`b^{-1}\in\mathbb{Q}`),
+        " が取れ、準備よりこの等式は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中でも成り立つ。有理数 ",
+        math(String.raw`r:=b^{-1}\cdot(-a)\in\mathbb{Q}`),
+        " と置く（",
+        math(String.raw`-a`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の加法の逆元、積は ",
+        math(String.raw`\mathbb{Q}`),
+        " の積）。仮定から次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b\cdot s
+&=0+b\cdot s
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=\bigl((-a)+a\bigr)+b\cdot s
+&&\bigl(\because\ \text{加法の逆元}\ (-a)+a=0\bigr)\\
+&=(-a)+\bigl(a+b\cdot s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=(-a)+0
+&&\bigl(\because\ \text{仮定}\ a+b\cdot s=0\bigr)\\
+&=-a
+&&\bigl(\because\ \text{加法の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["これを使って ", math(String.raw`s`), " を計算する。"]),
+      displayMath(String.raw`\begin{aligned}
+s
+&=1\cdot s
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+&=\bigl(b^{-1}\cdot b\bigr)\cdot s
+&&\bigl(\because\ \text{準備の等式}\ b^{-1}\cdot b=1\bigr)\\
+&=b^{-1}\cdot\bigl(b\cdot s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&=b^{-1}\cdot(-a)
+&&\bigl(\because\ \text{上で得た}\ b\cdot s=-a\bigr)\\
+&=r
+&&\bigl(\because\ r\ \text{の定義}\bigr)
+\end{aligned}`),
+      paragraph(["この等式で ", math(String.raw`s\cdot s`), " を書き換える。"]),
+      displayMath(String.raw`\begin{aligned}
+r\cdot r
+&=s\cdot s
+&&\bigl(\because\ \text{上で得た}\ s=r\bigr)\\
+&=2
+&&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " と ",
+        math(String.raw`2`),
+        " はどちらも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元であるから、準備より等式 ",
+        math(String.raw`r\cdot r=2`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の中でも成り立つ。これは ",
+        ref("claim_no_rational_square_two"),
+        " を ",
+        math(String.raw`q=r`),
+        " へ適用した ",
+        math(String.raw`r\cdot r\ne2`),
+        " と矛盾する。ゆえに ",
+        math(String.raw`b=0`),
+        " である。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`b=0`),
+        " のもとで ",
+        math(String.raw`a=0`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a
+&=a+0
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=a+0\cdot s
+&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
+&=a+b\cdot s
+&&\bigl(\because\ \text{上で得た}\ b=0\bigr)\\
+&=0
+&&\bigl(\because\ \text{仮定}\ a+b\cdot s=0\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`a=0`),
+        " かつ ",
+        math(String.raw`b=0`),
+        "、すなわち ",
+        math(String.raw`(a,b)=(0,0)`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
