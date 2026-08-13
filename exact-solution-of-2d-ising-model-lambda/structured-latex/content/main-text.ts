@@ -29582,6 +29582,181 @@ a
   },
 
   {
+    id: "fisher_zero_claim_quadratic_representation_unique",
+    kind: "claim",
+    title: { text: "二次体の表示の一意性" },
+    labels: ["claim_quadratic_representation_unique"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-representation-unique"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（",
+        ref("claim_sqrt_two_exists"),
+        "。",
+        math(String.raw`2:=1+1`),
+        "）。任意の ",
+        math(String.raw`a\in\mathbb{Q}`),
+        "、",
+        math(String.raw`b\in\mathbb{Q}`),
+        "、",
+        math(String.raw`a'\in\mathbb{Q}`),
+        "、",
+        math(String.raw`b'\in\mathbb{Q}`),
+        " について、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で",
+      ]),
+      displayMath(String.raw`a+b\cdot s=a'+b'\cdot s\ \text{ならば}\ (a,b)=(a',b')`),
+      paragraph([
+        "である（",
+        math(String.raw`a,b,a',b'`),
+        " は部分体 ",
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " の元として扱い、加法・積は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " のものである。結論は組の等号、すなわち ",
+        math(String.raw`a=a'`),
+        " かつ ",
+        math(String.raw`b=b'`),
+        " を指す）。この主張により、集合 ",
+        math(String.raw`\{a+b\cdot s\mid a,b\in\mathbb{Q}\}`),
+        " の各元の表示 ",
+        math(String.raw`(a,b)`),
+        " は一意であり、後のセクションで正値性を表示 ",
+        math(String.raw`(a,b)`),
+        " の有理数の不等式で定義するときの well-defined 性の根拠になる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\alpha:=a+(-a')\in\mathbb{Q}`),
+        "、",
+        math(String.raw`\beta:=b+(-b')\in\mathbb{Q}`),
+        " と置く（",
+        math(String.raw`-a'`),
+        "、",
+        math(String.raw`-b'`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の加法の逆元、加法は ",
+        math(String.raw`\mathbb{Q}`),
+        " のもの。",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、以下の計算は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中の計算であり、",
+        math(String.raw`\mathbb{Q}`),
+        " の 2 元の等号は両方の体で同値である）。仮定 ",
+        math(String.raw`a+b\cdot s=a'+b'\cdot s`),
+        " のもとで次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha+\beta\cdot s
+&=\bigl(a+(-a')\bigr)+\bigl(b+(-b')\bigr)\cdot s
+&&\bigl(\because\ \alpha,\beta\ \text{の定義}\bigr)\\
+&=\bigl(a+(-a')\bigr)+\bigl(b\cdot s+(-b')\cdot s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=a+\Bigl((-a')+\bigl(b\cdot s+(-b')\cdot s\bigr)\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a+\Bigl(\bigl(b\cdot s+(-b')\cdot s\bigr)+(-a')\Bigr)
+&&\bigl(\because\ \text{加法の交換則}\bigr)\\
+&=a+\Bigl(b\cdot s+\bigl((-b')\cdot s+(-a')\bigr)\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=\bigl(a+b\cdot s\bigr)+\bigl((-b')\cdot s+(-a')\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=\bigl(a'+b'\cdot s\bigr)+\bigl((-b')\cdot s+(-a')\bigr)
+&&\bigl(\because\ \text{仮定}\ a+b\cdot s=a'+b'\cdot s\bigr)\\
+&=a'+\Bigl(b'\cdot s+\bigl((-b')\cdot s+(-a')\bigr)\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a'+\Bigl(\bigl(b'\cdot s+(-b')\cdot s\bigr)+(-a')\Bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=a'+\Bigl(\bigl(b'+(-b')\bigr)\cdot s+(-a')\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=a'+\bigl(0\cdot s+(-a')\bigr)
+&&\bigl(\because\ \text{加法の逆元}\ b'+(-b')=0\bigr)\\
+&=a'+\bigl(0+(-a')\bigr)
+&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
+&=a'+(-a')
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=0
+&&\bigl(\because\ \text{加法の逆元}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\alpha\in\mathbb{Q}`),
+        "、",
+        math(String.raw`\beta\in\mathbb{Q}`),
+        "、",
+        math(String.raw`\alpha+\beta\cdot s=0`),
+        " なので、",
+        ref("claim_one_s_linearly_independent"),
+        " を ",
+        math(String.raw`(a,b)=(\alpha,\beta)`),
+        " へ適用して ",
+        math(String.raw`\alpha=0`),
+        " かつ ",
+        math(String.raw`\beta=0`),
+        " を得る。これで ",
+        math(String.raw`a=a'`),
+        " を導く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a
+&=a+0
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=a+\bigl((-a')+a'\bigr)
+&&\bigl(\because\ \text{加法の逆元}\ (-a')+a'=0\bigr)\\
+&=\bigl(a+(-a')\bigr)+a'
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=\alpha+a'
+&&\bigl(\because\ \alpha\ \text{の定義}\bigr)\\
+&=0+a'
+&&\bigl(\because\ \text{上で得た}\ \alpha=0\bigr)\\
+&=a'
+&&\bigl(\because\ \text{加法の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["同じ形で ", math(String.raw`b=b'`), " を導く。"]),
+      displayMath(String.raw`\begin{aligned}
+b
+&=b+0
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=b+\bigl((-b')+b'\bigr)
+&&\bigl(\because\ \text{加法の逆元}\ (-b')+b'=0\bigr)\\
+&=\bigl(b+(-b')\bigr)+b'
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=\beta+b'
+&&\bigl(\because\ \beta\ \text{の定義}\bigr)\\
+&=0+b'
+&&\bigl(\because\ \text{上で得た}\ \beta=0\bigr)\\
+&=b'
+&&\bigl(\because\ \text{加法の単位元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`a=a'`),
+        " かつ ",
+        math(String.raw`b=b'`),
+        "、すなわち ",
+        math(String.raw`(a,b)=(a',b')`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`),
+        " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

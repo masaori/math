@@ -2062,17 +2062,37 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
         " の行列表示から直接成分計算して",
       ]),
       displayMath(
-        String.raw`\sigma^z\sigma^y
-= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-= \begin{pmatrix}0&-i\\-i&0\end{pmatrix} = -i\,\sigma^x, \qquad
-\sigma^y\sigma^x
-= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-= \begin{pmatrix}-i&0\\0&i\end{pmatrix} = -i\,\sigma^z`,
+        String.raw`\begin{aligned}
+\sigma^z\sigma^y
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+   \quad (\because \text{Pauli 行列の行列表示}) \\
+&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+   \quad (\because \text{行列積の成分計算}) \\
+&= -i\,\sigma^x
+   \quad (\because \sigma^x \text{ の行列表示})
+\end{aligned}`,
       ),
       displayMath(
-        String.raw`\sigma^x\sigma^z
-= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-= \begin{pmatrix}0&-1\\1&0\end{pmatrix} = -i\,\sigma^y`,
+        String.raw`\begin{aligned}
+\sigma^y\sigma^x
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+   \quad (\because \text{Pauli 行列の行列表示}) \\
+&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
+   \quad (\because \text{行列積の成分計算}) \\
+&= -i\,\sigma^z
+   \quad (\because \sigma^z \text{ の行列表示})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x\sigma^z
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+   \quad (\because \text{Pauli 行列の行列表示}) \\
+&= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
+   \quad (\because \text{行列積の成分計算}) \\
+&= -i\,\sigma^y
+   \quad (\because \sigma^y \text{ の行列表示})
+\end{aligned}`,
       ),
       paragraph([
         "また ",
@@ -2118,13 +2138,32 @@ Z_m Y_m
    \quad (\because \text{Step 0})
 \end{aligned}`,
       ),
-      paragraph([
-        "よって ",
-        math(String.raw`H_2 = \sum_{m=1}^{M} Z_mY_m = -i\sum_{m=1}^{M}\sigma_m^x`),
-        " であり、",
-        math(String.raw`S_2 = iK_2^*H_2 = i(-i)K_2^*\sum_m \sigma_m^x = K_2^*\sum_{m=1}^{M}\sigma_m^x`),
-        "。",
-      ]),
+      paragraph(["よって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+H_2
+&= \sum_{m=1}^{M} Z_mY_m
+   \quad (\because H_2 \text{ の定義}) \\
+&= \sum_{m=1}^{M} (-i\,\sigma_m^x)
+   \quad (\because \text{上で得た } Z_mY_m = -i\,\sigma_m^x) \\
+&= -i\sum_{m=1}^{M}\sigma_m^x
+   \quad (\because \text{スカラー倍の和の分配})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_2
+&= iK_2^*H_2
+   \quad (\because S_2 \text{ の定義}) \\
+&= iK_2^*\left(-i\sum_{m=1}^{M}\sigma_m^x\right)
+   \quad (\because \text{上で得た } H_2 \text{ の表示}) \\
+&= i(-i)\,K_2^*\sum_{m=1}^{M}\sigma_m^x
+   \quad (\because \text{スカラー倍の交換}) \\
+&= K_2^*\sum_{m=1}^{M}\sigma_m^x
+   \quad (\because i\cdot(-i) = 1)
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2（",
         math(String.raw`S_1^{(\pm)}`),
@@ -2159,16 +2198,26 @@ Y_M Z_1
 \end{aligned}`,
       ),
       paragraph([
+        "これらと ",
         ref("def_V1_pm"),
         " の ",
-        math(String.raw`H_1^{(\pm)} = Y_1Z_2 + \cdots + Y_{M-1}Z_M \mp Y_MZ_1`),
-        " に代入し ",
-        math(String.raw`i \cdot (-i) = 1`),
-        " を使うと",
+        math(String.raw`H_1^{(\pm)}`),
+        " の定義を使うと",
       ]),
       displayMath(
-        String.raw`S_1^{(\pm)} = iK_1H_1^{(\pm)}
-= K_1\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z \mp K_1\,G`,
+        String.raw`\begin{aligned}
+S_1^{(\pm)}
+&= iK_1H_1^{(\pm)}
+   \quad (\because S_1^{(\pm)} \text{ の定義}) \\
+&= iK_1\left(\sum_{m=1}^{M-1} Y_mZ_{m+1} \mp Y_MZ_1\right)
+   \quad (\because H_1^{(\pm)} \text{ の定義}) \\
+&= iK_1\left(\sum_{m=1}^{M-1}\left(-i\,\sigma_m^z\sigma_{m+1}^z\right) \mp (-i\,G)\right)
+   \quad (\because \text{上で得た } Y_mZ_{m+1},\ Y_MZ_1 \text{ の表示}) \\
+&= i(-i)\,K_1\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z \mp G\right)
+   \quad (\because \text{スカラー倍の和の分配と交換}) \\
+&= K_1\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z \mp K_1\,G
+   \quad (\because i\cdot(-i) = 1 \text{ と分配則})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3（実対称性）。",
