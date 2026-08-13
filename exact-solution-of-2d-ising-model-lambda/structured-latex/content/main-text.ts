@@ -32789,8 +32789,12 @@ B&=-(c\cdot b'+b\cdot c')
 &=\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)-(c\cdot c)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
   &&\bigl(\because\ D\text{ の定義と分配則}\bigr)
 \end{aligned}`),
-      paragraph(["である。両端を移項して"]),
-      displayMath(String.raw`\bigl(2\cdot(b\cdot b)\bigr)\cdot(c'\cdot c')+(c\cdot c)\cdot\bigl(2\cdot(b'\cdot b')\bigr)<\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)+(c\cdot c)\cdot(c'\cdot c')`),
+      paragraph(["である。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(2\cdot(b\cdot b)\bigr)\cdot(c'\cdot c')+(c\cdot c)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
+&<\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)+(c\cdot c)\cdot(c'\cdot c')
+  &&\bigl(\because\ \text{上の不等式の両端を移項する}\bigr)
+\end{aligned}`),
       paragraph(["を得る。これを使って"]),
       displayMath(String.raw`\begin{aligned}
 2\cdot(B\cdot B)
