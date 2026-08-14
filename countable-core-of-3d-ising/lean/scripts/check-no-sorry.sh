@@ -72,6 +72,9 @@ targets=(
   Ising3DCut.NullModel.multiplicity_palindrome
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
+  Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
+  Ising3DCut.NecSuf.NullModel.one_le_card_fiber
+  Ising3DCut.NullModel.one_le_periodicMultiplicity_zero_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
