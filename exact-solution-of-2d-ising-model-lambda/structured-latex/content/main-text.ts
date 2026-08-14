@@ -34752,6 +34752,259 @@ L^2\,\ell_2+\Phi_L(q)
   },
 
   {
+    id: "zero_pinching_def_distance_squared_to_rational",
+    kind: "definition",
+    title: { text: "零点と有理点の距離の二乗" },
+    labels: ["def_distance_squared_to_rational"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/distance-squared-to-rational"],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\mathrm{dsq}:\overline{\mathbb{Q}}\times\mathbb{Q}\to R`),
+        " を次で定める。",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元 ",
+        math(String.raw`\xi`),
+        " と ",
+        math(String.raw`\mathbb{Q}`),
+        " の元 ",
+        math(String.raw`q`),
+        " に対し、",
+        math(String.raw`\xi=a+b\cdot\omega`),
+        " を満たすちょうど 1 つの組 ",
+        math(String.raw`(a,b)\in R\times R`),
+        "（",
+        ref("def_real_closed_subfield"),
+        " の第 4 条件）を取り、",
+      ]),
+      displayMath(String.raw`\mathrm{dsq}(\xi,q):=(a-q)\cdot(a-q)+b\cdot b\ \in\ R`),
+      paragraph([
+        "とする。この定義が意味をもつこと: 組 ",
+        math(String.raw`(a,b)`),
+        " は ",
+        math(String.raw`\xi`),
+        " からちょうど 1 つに定まる（",
+        ref("def_real_closed_subfield"),
+        " の第 4 条件）。",
+        math(String.raw`q\in R`),
+        " である（",
+        ref("claim_rationals_are_real_algebraic"),
+        "）。したがって ",
+        math(String.raw`a-q\in R`),
+        " であり（",
+        ref("def_real_closed_subfield"),
+        " の第 1 条件。部分体は加法と加法逆元で閉じる）、右辺の 2 つの積とその和も ",
+        math(String.raw`R`),
+        " の元である（部分体は乗法と加法で閉じる）。",
+      ]),
+      paragraph([
+        "「距離の二乗」という名前は実数体の距離関数を使うことを意味しない。",
+        "右辺は ",
+        math(String.raw`R`),
+        " の中の減法・乗法・加法だけで書かれており、のちの詰め寄りの述語では ",
+        math(String.raw`\mathrm{dsq}`),
+        " の値の大小（",
+        ref("def_real_algebraic_strict_order"),
+        " の ",
+        math(String.raw`<_{R}`),
+        "）だけを使う。全体は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分集合 ",
+        math(String.raw`R`),
+        " の中の定義であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "zero_pinching_claim_distance_squared_zero_iff_equal",
+    kind: "claim",
+    title: { text: "距離の二乗の零性は一致と同値である" },
+    labels: ["claim_distance_squared_zero_iff_equal"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/distance-squared-to-rational"],
+    statement: [
+      paragraph([
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の任意の元 ",
+        math(String.raw`\xi`),
+        " と ",
+        math(String.raw`\mathbb{Q}`),
+        " の任意の元 ",
+        math(String.raw`q`),
+        " について、",
+        math(String.raw`\mathrm{dsq}(\xi,q)=0`),
+        "（",
+        ref("def_distance_squared_to_rational"),
+        "）と ",
+        math(String.raw`\xi=q`),
+        " は同値である。ここで右の等式は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中の等式である（",
+        math(String.raw`q`),
+        " は ",
+        ref("def_algebraic_numbers"),
+        " の第 1 条件により ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元でもある）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\xi=a+b\cdot\omega`),
+        " を満たすちょうど 1 つの組 ",
+        math(String.raw`(a,b)\in R\times R`),
+        " を取る（",
+        ref("def_real_closed_subfield"),
+        " の第 4 条件）。",
+        math(String.raw`q\in R`),
+        " である（",
+        ref("claim_rationals_are_real_algebraic"),
+        "）。同値の 2 つの向きを別々に示す（一続きの式変形にはならない）。",
+      ]),
+      paragraph([
+        "第 1 の向き（",
+        math(String.raw`\xi=q`),
+        " ならば ",
+        math(String.raw`\mathrm{dsq}(\xi,q)=0`),
+        "）。",
+        math(String.raw`q=q+0\cdot\omega`),
+        " である（零元の乗法と加法単位元）。ゆえに組 ",
+        math(String.raw`(q,0)\in R\times R`),
+        " は ",
+        math(String.raw`\xi=q`),
+        " の第 4 条件の形の表示であり、表示の一意性（",
+        ref("def_real_closed_subfield"),
+        " の第 4 条件）から ",
+        math(String.raw`a=q`),
+        "、",
+        math(String.raw`b=0`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{dsq}(\xi,q)
+&=(q-q)\cdot(q-q)+0\cdot0
+&&(\because\ \blkref{def_distance_squared_to_rational}\text{、}a=q\text{、}b=0)\\
+&=0\cdot0+0\cdot0
+&&(\because\ \text{加法逆元の定義 }q-q=0)\\
+&=0
+&&(\because\ \text{零元の乗法と加法})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "第 2 の向き（",
+        math(String.raw`\mathrm{dsq}(\xi,q)=0`),
+        " ならば ",
+        math(String.raw`\xi=q`),
+        "）。まず ",
+        math(String.raw`b=0`),
+        " を背理法で示す。",
+        math(String.raw`b\ne0`),
+        " と仮定する。",
+        math(String.raw`b`),
+        " の乗法逆元 ",
+        math(String.raw`b^{-1}\in R`),
+        " が存在する（",
+        ref("def_real_closed_subfield"),
+        " の第 1 条件。部分体は零元でない元の乗法逆元で閉じる）。",
+        math(String.raw`w:=(a-q)\cdot b^{-1}\in R`),
+        " と置く（部分体は乗法で閉じる）。仮定 ",
+        math(String.raw`\mathrm{dsq}(\xi,q)=0`),
+        " は移項により ",
+        math(String.raw`(a-q)\cdot(a-q)=-(b\cdot b)`),
+        " と同値である（",
+        ref("def_distance_squared_to_rational"),
+        "）。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w\cdot w
+&=\bigl((a-q)\cdot b^{-1}\bigr)\cdot\bigl((a-q)\cdot b^{-1}\bigr)
+&&(\because\ w\ \text{の定義})\\
+&=\bigl((a-q)\cdot(a-q)\bigr)\cdot\bigl(b^{-1}\cdot b^{-1}\bigr)
+&&(\because\ \text{乗法の交換則と結合則})\\
+&=\bigl(-(b\cdot b)\bigr)\cdot\bigl(b^{-1}\cdot b^{-1}\bigr)
+&&(\because\ (a-q)\cdot(a-q)=-(b\cdot b))\\
+&=-\Bigl(\bigl(b\cdot b^{-1}\bigr)\cdot\bigl(b\cdot b^{-1}\bigr)\Bigr)
+&&(\because\ \text{負号の括り出しと、乗法の交換則・結合則})\\
+&=-(1\cdot1)
+&&(\because\ \text{乗法逆元の定義 }b\cdot b^{-1}=1)\\
+&=-1
+&&(\because\ \text{乗法単位元})
+\end{aligned}`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`w=0`),
+        " とすると ",
+        math(String.raw`0=0\cdot0=w\cdot w=-1`),
+        "（零元の乗法）となり、両辺へ ",
+        math(String.raw`1`),
+        " を加えて ",
+        math(String.raw`1=0`),
+        " となって体の公理 ",
+        math(String.raw`1\ne0`),
+        " に矛盾する。ゆえに ",
+        math(String.raw`w\ne0`),
+        " である。すると零元でない ",
+        math(String.raw`w\in R`),
+        " が ",
+        math(String.raw`w\cdot w=-1`),
+        " を満たすことになり、",
+        ref("claim_neg_one_not_square"),
+        " に矛盾する。ゆえに ",
+        math(String.raw`b=0`),
+        " である。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`a=q`),
+        " を示す。",
+        math(String.raw`b=0`),
+        " を仮定 ",
+        math(String.raw`\mathrm{dsq}(\xi,q)=0`),
+        " へ代入すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=(a-q)\cdot(a-q)+0\cdot0
+&&(\because\ \blkref{def_distance_squared_to_rational}\text{、}b=0)\\
+&=(a-q)\cdot(a-q)
+&&(\because\ \text{零元の乗法と加法})
+\end{aligned}`),
+      paragraph([
+        "である。体は零因子を持たないので（",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " は体、",
+        ref("def_algebraic_numbers"),
+        "）、",
+        math(String.raw`a-q=0`),
+        "、すなわち移項により ",
+        math(String.raw`a=q`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi
+&=a+b\cdot\omega
+&&(\because\ \text{組 }(a,b)\text{ の取り方})\\
+&=q+0\cdot\omega
+&&(\because\ a=q\text{、}b=0)\\
+&=q
+&&(\because\ \text{零元の乗法と加法単位元})
+\end{aligned}`),
+      paragraph([
+        "である。全過程は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " とその部分集合 ",
+        math(String.raw`R`),
+        " の中の等式の操作だけで閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

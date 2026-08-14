@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 246 は、レビューで前 tick の「実代数的数の順序」の Lean 三本（具体版・
+必要十分版・導出）を本文と突き合わせ、修正不要と確認した。そのあとセクション
+「零点と有理点の距離の二乗」を記述と SageMath まで進めた。二ブロック:
+`def_distance_squared_to_rational`（写像 $\mathrm{dsq}:\overline{\mathbb{Q}}\times\mathbb{Q}\to R$。
+一意表示 $\xi=a+b\cdot\omega$ と $q\in\mathbb{Q}\subseteq R$ から
+$\mathrm{dsq}(\xi,q):=(a-q)\cdot(a-q)+b\cdot b\in R$。well-defined 性は一意表示・
+`claim_rationals_are_real_algebraic`・部分体の閉性）と
+`claim_distance_squared_zero_iff_equal`（$\mathrm{dsq}(\xi,q)=0\Leftrightarrow\xi=q$。
+第 1 の向きは $q=q+0\cdot\omega$ の表示と一意性から $a=q$、$b=0$。第 2 の向きは
+$b\ne0$ と仮定して $w:=(a-q)\cdot b^{-1}$ の六段の鎖で $w\cdot w=-1$ を出し、$w=0$ なら
+$1\ne0$ に、$w\ne0$ なら `claim_neg_one_not_square` に矛盾。$b=0$ のあと零因子の不在で
+$a=q$）。SageMath（`sagemath/check/distance-squared-to-rational/`）はモデル
+$R=\texttt{AA}$、$\omega=\texttt{QQbar(I)}$ で一意表示（121 組）・所属・同値
+（$\xi$ 11 点 × $q$ 6 点）を厳密検査した（成分次数 2 以下に限る理由は overview に注記）。
+**Lean は未着手**で、次 tick はこの二ブロックの Lean（具体版・必要十分版・導出）を進める。
+次の本文は「詰め寄りの述語の定式化」。
+
 2026-08-14 の tick 245 は、レビューで「実代数的数の順序」を二つの定義と一つの三分法へ分割し、
 SageMath の対象ラベルも揃えて前進前に main へ反映した。そのあと同セクションの Lean 具体版・
 必要十分版・導出を完成させ、四層を揃えた。有理数の所属は自然数の帰納、整数の符号、分母の
