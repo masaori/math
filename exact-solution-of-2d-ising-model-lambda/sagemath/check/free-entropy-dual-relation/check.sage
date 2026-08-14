@@ -89,9 +89,11 @@ for L in (1, 2, 3):
         # 1 行目: Z_L(q) = 2·G^{0,0}_L(q)（claim_low_temperature_trivial_sector_expression の代入）
         assert Z(q) == 2 * sector_generating_polynomials[(0, 0)](q)
         left = 2 ** (L * L) * Z(q)
-        # 2 行目: 2^{L^2}·(2·G^{0,0}_L(q)) = 2^{L^2+1}·G^{0,0}_L(q)
+        # 2 行目: 2^{L^2}·(2·G^{0,0}_L(q)) = (2^{L^2}·2)·G^{0,0}_L(q)
+        assert left == (2 ** (L * L) * 2) * sector_generating_polynomials[(0, 0)](q)
+        # 3 行目: (2^{L^2}·2)·G^{0,0}_L(q) = 2^{L^2+1}·G^{0,0}_L(q)
         assert left == 2 ** (L * L + 1) * sector_generating_polynomials[(0, 0)](q)
-        # 3 行目: = H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
+        # 4 行目: = H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
         #（claim_mixed_boundary_duality_identity の代入。H^{a,b}_L を独立に数え上げる）
         sector_high_values = {(a, b): QQ(0) for a in (0, 1) for b in (0, 1)}
         for subset in edge_subsets(L):
@@ -101,10 +103,10 @@ for L in (1, 2, 3):
             size = len(subset)
             sector_high_values[key] += (1 + q) ** (2 * L * L - size) * (1 - q) ** size
         assert left == sum(sector_high_values.values())
-        # 4 行目: = Σ (1+q)^{2L^2}·G^{a,b}_L(KW(q))（claim_sector_value_duality の四つの適用）
+        # 5 行目: = Σ (1+q)^{2L^2}·G^{a,b}_L(KW(q))（claim_sector_value_duality の四つの適用）
         assert left == sum((1 + q) ** (2 * L * L) * sector_values[key]
                            for key in sector_values)
-        # 5 行目: = (1+q)^{2L^2}·S（分配則による括り出し）
+        # 6 行目: = (1+q)^{2L^2}·S（分配則による括り出し）
         assert left == (1 + q) ** (2 * L * L) * S
 
         # --- claim_free_entropy_dual_relation の準備（正値性） ---

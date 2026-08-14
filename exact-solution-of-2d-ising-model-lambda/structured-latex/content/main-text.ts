@@ -34080,8 +34080,10 @@ H^{a,b}_L(q)
 2^{L^2}\cdot Z_L(q)
 &=2^{L^2}\cdot\bigl(2\cdot G^{0,0}_L(q)\bigr)
 &&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\ \text{と、代入は環準同型なので積を保つ}\bigr)\\
+&=\bigl(2^{L^2}\cdot2\bigr)\cdot G^{0,0}_L(q)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=2^{\,L^2+1}\cdot G^{0,0}_L(q)
-&&\bigl(\because\ \text{積の結合則と冪の指数法則}\ 2^{L^2}\cdot2=2^{L^2+1}\bigr)\\
+&&\bigl(\because\ \text{冪の指数法則}\ 2^{L^2}\cdot2=2^{L^2+1}\bigr)\\
 &=H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
 &&\bigl(\because\ \blkref{claim_mixed_boundary_duality_identity}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)\\
 &=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
