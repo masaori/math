@@ -708,12 +708,20 @@ e_k^\top W^{2a+1}e_k
         ref("def_rayleigh_sup"),
         "）。いずれの場合も ",
         math(String.raw`e_k^\top W^ne_k \leq c^n`),
-        " なので、",
-        math(String.raw`d`),
-        " 個足して ",
-        math(String.raw`\mathrm{tr}(W^n) \leq d\,c^n = 2^Mc^n`),
-        "。",
+        " である。これを標準基底の全体にわたって足すと",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}(W^n)
+&=\sum_{k=1}^{d} e_k^\top W^n e_k
+&&\bigl(\because\ \text{冒頭のトレースの標準基底表示}\bigr)\\
+&\leq \sum_{k=1}^{d} c^n
+&&\bigl(\because\ \text{各 }k\text{ の評価 }e_k^\top W^ne_k \leq c^n\text{ と、項ごとの不等式の有限和は順序を保つ}\bigr)\\
+&=d\,c^n
+&&\bigl(\because\ \text{同じ項 }c^n\text{ を }d\text{ 個足した和}\bigr)\\
+&=2^M c^n
+&&\bigl(\because\ d=2^M\ \text{（冒頭の略記）}\bigr)
+\end{aligned}`),
+      paragraph(["となり、上からの評価を得る。"]),
       paragraph([
         "Step 2（下からの評価の準備：モーメントの対数凸性）。単位ベクトル ",
         math(String.raw`x`),
