@@ -33,6 +33,8 @@ import Ising3DCut.NullModel.EvenMultiplicity
 import Ising3DCut.NecSuf.NullModel.EvenMultiplicity
 import Ising3DCut.NullModel.EvenMultiplicityFromNecSuf
 import Ising3DCut.NullModel.GaloisHyperoctahedralBound
+import Ising3DCut.NecSuf.NullModel.GaloisHyperoctahedralBound
+import Ising3DCut.NullModel.GaloisHyperoctahedralBoundFromNecSuf
 import Ising3DCut.NecSuf.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.MultiplicityPalindromeFromNecSuf
 import Ising3DCut.NullModel.PeriodicConstantUnbroken
