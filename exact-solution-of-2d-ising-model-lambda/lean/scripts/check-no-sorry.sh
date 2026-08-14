@@ -1040,6 +1040,16 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_transpose
   Ising2DLambda.ThermodynamicLimit.openSeamBrokenCountSecond_le
   Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_glueSecond
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_pos
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_le_one
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_one_le
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_le_one
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_one_le
+  Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_glue_bounds_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_one_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

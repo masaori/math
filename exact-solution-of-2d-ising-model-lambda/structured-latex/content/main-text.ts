@@ -37256,6 +37256,10 @@ x^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb{Z}[x]`),
       "整係数多項式 Z^{op}_{a,b}(x) を正の実数 t で評価し、接合前後の値を実数の順序で比較するため。" +
       "使うのは実数体への脱出の宣言に挙げた順序体の性質と、多項式の有限和の評価だけであり、" +
       "実対数・完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_pos",
+    ],
     verification: ["sagemath/check/open-rectangle-gluing-inequality"],
     statement: [
       paragraph([
@@ -37295,6 +37299,17 @@ t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\ \in\ \mathbb{R}`),
       "正の実数 t で評価した開境界分配多項式を実数の順序で比較するため。" +
       "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限和・有限積だけであり、" +
       "実対数・完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_one_le",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_glue_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_one_le_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_one_le_from_necSuf",
+    ],
     verification: ["sagemath/check/open-rectangle-gluing-inequality"],
     statement: [
       paragraph([
@@ -37499,8 +37514,8 @@ t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}t^{\,b^{\mathrm{op}}_{c,b}(\tau)}
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 長方形の接合不等式、" +
-            "周期境界との差の境界評価、それらによる自由エネルギー密度の極限の存在、零点密度。",
+          "「熱力学極限」の残り: 周期境界との差の境界評価、" +
+            "それらによる自由エネルギー密度の極限の存在、零点密度。",
         ],
         [
           todo("未着手"),
