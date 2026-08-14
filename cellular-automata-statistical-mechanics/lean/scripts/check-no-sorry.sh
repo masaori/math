@@ -61,6 +61,10 @@ targets=(
   CellularAutomata.EssentialDependency.card_scan_pairs_from_necessary_sufficient
   CellularAutomata.NecSuf.EssentialDependency.essentialDep_iff_flip
   CellularAutomata.NecSuf.EssentialDependency.card_scan_pairs
+  CellularAutomata.RedundantNeighbor.restrict_baseExtend
+  CellularAutomata.RedundantNeighbor.no_essentialDep_on_added_element
+  CellularAutomata.RedundantNeighbor.essentialDep_transfer
+  CellularAutomata.RedundantNeighbor.supp_extendRule
 )
 
 tmpfile="$(mktemp /tmp/check-axioms-XXXXXX.lean)"
