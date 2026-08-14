@@ -34,6 +34,7 @@ export const ALL_LABELS = [
   "claim_fisher_zero_algebraicity",
   "claim_fixed_or_shift_preserves_orbit",
   "claim_free_energy_density_nonnegative",
+  "claim_free_energy_density_upper_bound",
   "claim_free_entropy_at_one",
   "claim_free_entropy_dual_relation",
   "claim_global_spin_reversal_preserves_broken_edge",
