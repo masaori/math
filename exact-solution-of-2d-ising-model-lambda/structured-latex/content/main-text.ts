@@ -54,6 +54,8 @@ export default defineBlocks([
     statement: [
       paragraph([
         "整数 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
         math(String.raw`L\ge1`),
         " を固定する。",
         math(String.raw`\mathbb{Z}`),
