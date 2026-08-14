@@ -78,6 +78,9 @@ targets=(
   Ising3DCut.NullModel.periodicMultiplicity_full_eq_zero
   Ising3DCut.NecSuf.NullModel.no_odd_cycle_all_opposite
   Ising3DCut.NullModel.periodicMultiplicity_full_eq_zero_from_necSuf
+  Ising3DCut.NullModel.periodicMultiplicity_not_palindrome
+  Ising3DCut.NecSuf.NullModel.ne_of_one_le_of_eq_zero
+  Ising3DCut.NullModel.periodicMultiplicity_not_palindrome_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
