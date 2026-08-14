@@ -117,7 +117,14 @@ fi
 cd "$LOOP_WORKTREE"
 
 # 前の tick の残骸があるかを見る。残骸が無いなら origin/main へ合わせる（追跡外は触らない）。
-if [ -z "$(git status --porcelain)" ]; then
+# **判定は追跡済みファイルの変更だけで行う。** 未追跡のファイル・ディレクトリで見送ると、
+# ディレクトリ改名の残骸や再生成物が残っただけでループが恒久的に止まる
+# （実測 2026-08-14: 旧名のディレクトリが未追跡で残り、7 回連続で見送られた）。
+untracked_count="$(git status --porcelain | grep -c '^??' || true)"
+if [ "$untracked_count" != "0" ]; then
+  log "    未追跡が ${untracked_count} 件ある（見送らない。追跡済みの変更だけで判定する）"
+fi
+if [ -z "$(git status --porcelain --untracked-files=no)" ]; then
   rm -f "$LEFTOVER_MARK"
   git checkout -q -B "$LOOP_BRANCH" origin/main >> "$LOG_FILE" 2>&1
 else
@@ -157,8 +164,11 @@ ensure_lake_packages() {
   local dst="$LOOP_WORKTREE/$PROJECT_NAME/lean/.lake/packages"
   local self_src="$MAIN_REPO_DIR/$PROJECT_NAME/lean/.lake/packages"
   local sibling_src="$MAIN_REPO_DIR/exact-solution-of-2d-ising-model-lambda/lean/.lake/packages"
-  [ -d "$dst" ] && return 0
+  # **ソースだけの packages では lake build が mathlib を丸ごと再ビルドし、tick の上限に収まらない。**
+  # ビルド済みの成果物があるかどうかで判定する（実測 2026-08-13: 締切内に終わらなかった）。
+  [ -d "$dst/mathlib/.lake/build" ] && return 0
   [ -d "$LOOP_WORKTREE/$PROJECT_NAME/lean" ] || return 0
+  [ -d "$dst" ] && rm -rf "$dst"
   local src=""
   if [ -d "$self_src" ] && cmp -s "$MAIN_REPO_DIR/$PROJECT_NAME/lean/lake-manifest.json" \
       "$LOOP_WORKTREE/$PROJECT_NAME/lean/lake-manifest.json"; then
