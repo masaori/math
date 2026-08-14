@@ -182,6 +182,12 @@ SageMath 検証には着手しなかった（レビューのみ）。次 tick �
 同日の次 tick は着手前レビューで Lean 具体版を本文と突き合わせ、lake build と no-sorry 検査
 （37 件）を再実行して不備なしを確認したが、残り時間が足りず必要十分版には着手しなかった
 （レビューのみ）。次 tick が Lean 必要十分版を行う。
+2026-08-15 に同セクションの Lean 必要十分版と導出を完了し、四層が揃った
+（`lean/Ising3DCut/NecSuf/NullModel/PartitionSupportEndpoints.lean` と
+`lean/Ising3DCut/NullModel/PartitionSupportEndpointsFromNecSuf.lean`。検査への登録は計 39 件）。
+必要十分版は格子・辺・値 ±1・定数配位・二部性を仮定せず、有限型上の自然数値の重み、
+両端の水準集合の個数が 2 以上であること、有限和の範囲だけから、両端係数と範囲外係数を
+具体版と同じ順で示した。次の先頭未完了セクションは「全スピン反転による多重度の偶数性」である。
 
 ## 自動ループ
 

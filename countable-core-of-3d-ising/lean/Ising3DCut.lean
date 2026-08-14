@@ -27,6 +27,8 @@ import Ising3DCut.NullModel.PartitionCoefficientsNonnegative
 import Ising3DCut.NecSuf.NullModel.PartitionCoefficientsNonnegative
 import Ising3DCut.NullModel.PartitionCoefficientsNonnegativeFromNecSuf
 import Ising3DCut.NullModel.PartitionSupportEndpoints
+import Ising3DCut.NecSuf.NullModel.PartitionSupportEndpoints
+import Ising3DCut.NullModel.PartitionSupportEndpointsFromNecSuf
 import Ising3DCut.NecSuf.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.MultiplicityPalindromeFromNecSuf
 import Ising3DCut.NullModel.PeriodicConstantUnbroken
