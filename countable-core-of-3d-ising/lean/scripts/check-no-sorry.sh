@@ -88,6 +88,7 @@ targets=(
   Ising3DCut.NullModel.rationalPolynomial_eq_of_primeExponentData_eq
   Ising3DCut.NecSuf.NullModel.eq_of_injective_data_at_too_many_points
   Ising3DCut.NullModel.rationalPolynomial_eq_of_primeExponentData_eq_from_necSuf
+  Ising3DCut.NullModel.same_partition_different_pairData
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
