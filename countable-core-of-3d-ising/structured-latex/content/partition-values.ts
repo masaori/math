@@ -696,4 +696,105 @@ X^{\#E_L}Z_L(X^{-1})
       ]),
     ],
   },
+
+  {
+    id: "univariate_loss_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "単変数化で潰れる二点データ" },
+    labels: [],
+  },
+
+  {
+    id: "univariate_loss_definition_signed_pair_polynomial",
+    kind: "definition",
+    title: { text: "標識した二点の符号付き多項式" },
+    labels: ["def_signed_pair_polynomial"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "自由境界の箱の相異なる二点 ",
+        math(String.raw`u,v\in V_L`),
+        " を標識する。各 ",
+        math(String.raw`0\le m\le\#E_L`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`C_{L;u,v}(m)=\#\{\sigma:m_L(\sigma)=m,\ \sigma(u)=\sigma(v)\}-\#\{\sigma:m_L(\sigma)=m,\ \sigma(u)\ne\sigma(v)\}\in\mathbb Z`,
+      ),
+      paragraph(["と定め、有限和"]),
+      displayMath(
+        String.raw`P_{L;u,v}(X)=\sum_{m=0}^{\#E_L}C_{L;u,v}(m)X^m\in\mathbb Z[X]`,
+      ),
+      paragraph([
+        "を標識した二点の符号付き多項式と呼ぶ。これは点対ごとの一致配位数と不一致配位数の差を保存する有限の二点データである。標識を忘れる写像は ",
+        math(String.raw`P_{L;u,v}(X)`),
+        " を捨て、",
+        ref("def_partition_polynomial"),
+        " の ",
+        math(String.raw`Z_L(X)`),
+        " だけを残す。",
+      ]),
+    ],
+  },
+
+  {
+    id: "univariate_loss_claim_same_partition_different_pair_data",
+    kind: "claim",
+    title: { text: "同じ分配多項式は異なる二点データを区別しない" },
+    labels: ["claim_same_partition_different_pair_data"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        math(String.raw`L=2`),
+        " の自由境界の箱で ",
+        math(String.raw`a=(0,0,0)`),
+        "、",
+        math(String.raw`b=(1,0,0)`),
+        "、",
+        math(String.raw`c=(1,1,1)`),
+        " と置く。点対 ",
+        math(String.raw`(a,b)`),
+        " を標識した箱と点対 ",
+        math(String.raw`(a,c)`),
+        " を標識した箱は同じ分配多項式 ",
+        math(String.raw`Z_2(X)`),
+        " を持つが、",
+        math(String.raw`P_{2;a,b}(X)\ne P_{2;a,c}(X)`),
+        " である。したがって単変数の分配多項式だけから、標識した二点の有限データは決まらない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "二つの標識付き箱は頂点集合、辺集合、配位集合、破れ数を変えず、標識した点対だけが異なる。よって ",
+        ref("def_partition_polynomial"),
+        " から両者の分配多項式は同じ ",
+        math(String.raw`Z_2(X)`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`V_2=\{0,1\}^3`),
+        " の各配位を八つの頂点値の組として有限列挙する。十二本の辺のうち破れた辺が四本である配位を、標識点の値が一致するものと異なるものに分けると、次の整数になる。",
+      ]),
+      displayMath(
+        String.raw`\begin{array}{c|cc|c}
+\text{標識点対}&\#\{\sigma:m_2(\sigma)=4,\ \sigma(u)=\sigma(v)\}&\#\{\sigma:m_2(\sigma)=4,\ \sigma(u)\ne\sigma(v)\}&C_{2;u,v}(4)\\ \hline
+(a,b)&20&10&20-10=10\\
+(a,c)&12&18&12-18=-6
+\end{array}`,
+      ),
+      paragraph([
+        ref("def_signed_pair_polynomial"),
+        " により、",
+        math(String.raw`P_{2;a,b}(X)`),
+        " の四次係数は ",
+        math(String.raw`10`),
+        "、",
+        math(String.raw`P_{2;a,c}(X)`),
+        " の四次係数は ",
+        math(String.raw`-6`),
+        " である。係数が異なるので二つの整係数多項式は等しくない。",
+      ]),
+    ],
+  },
 ]);
