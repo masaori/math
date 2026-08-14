@@ -3194,12 +3194,16 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
 s_2^* = \sinh 2K_2^*
 &= \frac{e^{2K_2^*} - e^{-2K_2^*}}{2}
    \quad (\because \sinh x = \tfrac{1}{2}(e^{x}-e^{-x})) \\
-&= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2} \\
-&= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} - \frac{\sinh K_2}{\cosh K_2}\right) \\
-&= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2} \\
+&= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2}
+   \quad (\because \text{準備の } e^{2K_2^*} = (\tanh K_2)^{-1},\ e^{-2K_2^*} = \tanh K_2) \\
+&= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} - \frac{\sinh K_2}{\cosh K_2}\right)
+   \quad (\because \tanh x = \tfrac{\sinh x}{\cosh x}\ \text{とその逆数}) \\
+&= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2}
+   \quad (\because \text{通分。分母 } \sinh K_2\cosh K_2 \neq 0\ \text{は準備で確認済み}) \\
 &= \frac{1}{\sinh 2K_2}
    \quad (\because \cosh^2 x - \sinh^2 x = 1,\ 2\sinh x\cosh x = \sinh 2x) \\
 &= \frac{1}{s_2}
+   \quad (\because s_2 = \sinh 2K_2\ \text{の定義})
 \end{aligned}`,
       ),
       displayMath(
@@ -3207,12 +3211,16 @@ s_2^* = \sinh 2K_2^*
 c_2^* = \cosh 2K_2^*
 &= \frac{e^{2K_2^*} + e^{-2K_2^*}}{2}
    \quad (\because \cosh x = \tfrac{1}{2}(e^{x}+e^{-x})) \\
-&= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2} \\
-&= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} + \frac{\sinh K_2}{\cosh K_2}\right) \\
-&= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2} \\
+&= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2}
+   \quad (\because \text{準備の } e^{2K_2^*} = (\tanh K_2)^{-1},\ e^{-2K_2^*} = \tanh K_2) \\
+&= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} + \frac{\sinh K_2}{\cosh K_2}\right)
+   \quad (\because \tanh x = \tfrac{\sinh x}{\cosh x}\ \text{とその逆数}) \\
+&= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2}
+   \quad (\because \text{通分。分母 } \sinh K_2\cosh K_2 \neq 0\ \text{は準備で確認済み}) \\
 &= \frac{\cosh 2K_2}{\sinh 2K_2}
    \quad (\because \cosh^2 x + \sinh^2 x = \cosh 2x,\ 2\sinh x\cosh x = \sinh 2x) \\
 &= \frac{c_2}{s_2}
+   \quad (\because c_2 = \cosh 2K_2\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
