@@ -550,9 +550,19 @@ export default defineBlocks([
       ),
       paragraph(["となり、合わせて"]),
       displayMath(
-        String.raw`\left(\left\|A-tB\right\|^2\right)_{\mathbb{C}}
-= \left(\|A\|^2\right)_{\mathbb{C}}-\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-= \left(\|A\|^2-\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}`,
+        String.raw`\begin{aligned}
+\left(\left\|A-tB\right\|^2\right)_{\mathbb{C}}
+&= \left(\|A\|^2\right)_{\mathbb{C}}
+   -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   +\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \text{直前の三つの計算を展開式へ代入}) \\
+&= \left(\|A\|^2\right)_{\mathbb{C}}
+   -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \mathbb{C} \text{ の加法の結合律と加法逆元}) \\
+&= \left(\|A\|^2-\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が減法を保つこと})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
@@ -582,7 +592,8 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \left(\|A+B\|^2\right)_{\mathbb{C}}
-&= \langle A+B,\ A+B\rangle \\
+&= \langle A+B,\ A+B\rangle
+   \quad (\because \text{(3)}) \\
 &= \langle A,A\rangle+\langle A,B\rangle+\langle B,A\rangle+\langle B,B\rangle
    \quad (\because \text{(2)}) \\
 &= \left(\|A\|^2\right)_{\mathbb{C}}
@@ -605,10 +616,15 @@ export default defineBlocks([
         " と Step 5 の (4) より",
       ]),
       displayMath(
-        String.raw`\|A+B\|^2
-\le \|A\|^2+2|u|+\|B\|^2
-\le \|A\|^2+2\|A\|\,\|B\|+\|B\|^2
-= \left(\|A\|+\|B\|\right)^2`,
+        String.raw`\begin{aligned}
+\|A+B\|^2
+&\le \|A\|^2+2|u|+\|B\|^2
+   \quad (\because \mathrm{Re}(u)\le |u|) \\
+&\le \|A\|^2+2\|A\|\,\|B\|+\|B\|^2
+   \quad (\because \text{Step 5 の Cauchy--Schwarz の不等式}) \\
+&= \left(\|A\|+\|B\|\right)^2
+   \quad (\because \mathbb{R} \text{ の分配律})
+\end{aligned}`,
       ),
       paragraph([
         "となり、両辺とも非負なので平方の単調性（",

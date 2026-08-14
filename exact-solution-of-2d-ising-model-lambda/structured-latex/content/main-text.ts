@@ -37498,6 +37498,137 @@ t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}t^{\,b^{\mathrm{op}}_{c,b}(\tau)}
   },
 
   {
+    id: "thermodynamic_limit_claim_periodic_open_boundary_comparison",
+    kind: "claim",
+    title: { text: "周期境界と開境界の境界評価" },
+    labels: ["claim_periodic_open_boundary_comparison"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した周期境界と開境界の分配多項式を、実数の順序で比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限和だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/periodic-open-boundary-comparison"],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る。周期境界の分配多項式 ",
+        math(String.raw`Z_L`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）と、一辺が ",
+        math(String.raw`L`),
+        " の開境界正方形の値 ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(t)`),
+        "（",
+        ref("def_open_rectangle_partition_value"),
+        "）の間に、",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<_{\mathbb{R}}t\le_{\mathbb{R}}1:&
+t^{2L}Z^{\mathrm{op}}_{L,L}(t)
+\le_{\mathbb{R}} Z_L(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{L,L}(t),\\[2mm]
+1\le_{\mathbb{R}}t:&
+Z^{\mathrm{op}}_{L,L}(t)
+\le_{\mathbb{R}} Z_L(t)
+\le_{\mathbb{R}} t^{2L}Z^{\mathrm{op}}_{L,L}(t)
+\end{array}`),
+      paragraph(["が成り立つ。ここで丸括弧は正の実数での評価を表す。"]),
+    ],
+    proof: [
+      paragraph([
+        "各剰余類を ",
+        math(String.raw`0,1,\ldots,L-1`),
+        " の唯一の代表元で表すと、周期境界の頂点集合 ",
+        math(String.raw`V_L`),
+        " と開境界正方形の頂点集合 ",
+        math(String.raw`V^{\mathrm{op}}_{L,L}`),
+        " は一対一に対応する。したがって、頂点をこの対応で読み替えることにより配位にも全単射",
+      ]),
+      displayMath(String.raw`\Sigma_L\longleftrightarrow\Sigma^{\mathrm{op}}_{L,L}`),
+      paragraph([
+        "が定まる。以下では対応する二つの配位を同じ文字 ",
+        math(String.raw`\sigma`),
+        " で書く。周期境界にだけある、右端から左端へ戻る横向きの辺と、下端から上端へ戻る縦向きの辺のうち、破れているものの本数を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s^{\mathrm{bd}}_L(\sigma)
+&:=\bigl|\{i\in\mathbb{N}\mid 0\le i<L\ \text{かつ}\
+\sigma(i,L-1)\ne\sigma(i,0)\}\bigr|\\
+&\quad+\bigl|\{j\in\mathbb{N}\mid 0\le j<L\ \text{かつ}\
+\sigma(L-1,j)\ne\sigma(0,j)\}\bigr|\ \in\ \mathbb{N}
+\end{aligned}`),
+      paragraph([
+        "と定める。候補は各向きに ",
+        math(String.raw`L`),
+        " 本ずつ、合計 ",
+        math(String.raw`2L`),
+        " 本なので、",
+      ]),
+      displayMath(String.raw`0\le s^{\mathrm{bd}}_L(\sigma)\le2L`),
+      paragraph([
+        "である。周期境界の辺集合は、開境界正方形の内部辺と上の ",
+        math(String.raw`2L`),
+        " 本の境界横断辺との互いに交わらない和である。ゆえに、破れボンド数の定義（",
+        ref("def_broken_bond_count"),
+        "、",
+        ref("def_open_rectangle_broken_bond_count"),
+        "）から、",
+      ]),
+      displayMath(String.raw`b(\sigma)
+=b^{\mathrm{op}}_{L,L}(\sigma)+s^{\mathrm{bd}}_L(\sigma)`),
+      paragraph(["を得る。したがって、配位の全単射とこの分解により、"]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(t)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{L,L}}
+t^{\,b^{\mathrm{op}}_{L,L}(\sigma)+s^{\mathrm{bd}}_L(\sigma)}
+&&\bigl(\because\ \text{上の配位の全単射と破れボンド数の分解}\bigr)\\
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{L,L}}
+t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}t^{\,s^{\mathrm{bd}}_L(\sigma)}
+&&\bigl(\because\ t^{m+n}=t^m t^n\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " の場合、自然数冪の順序と ",
+        math(String.raw`0\le s^{\mathrm{bd}}_L(\sigma)\le2L`),
+        " から、",
+      ]),
+      displayMath(String.raw`t^{2L}\le_{\mathbb{R}}t^{\,s^{\mathrm{bd}}_L(\sigma)}\le_{\mathbb{R}}1`),
+      paragraph(["である。各項へ掛けて有限和を取ると、"]),
+      displayMath(String.raw`\begin{aligned}
+t^{2L}\sum_{\sigma}t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}
+&\le_{\mathbb{R}} Z_L(t)
+&&\bigl(\because\ \text{項ごとの下からの評価の有限和}\bigr)\\
+&\le_{\mathbb{R}}\sum_{\sigma}t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}
+&&\bigl(\because\ \text{項ごとの上からの評価の有限和}\bigr)\\
+&=Z^{\mathrm{op}}_{L,L}(t)
+&&\bigl(\because\ \blkref{def_open_rectangle_partition_value}\bigr)
+\end{aligned}`),
+      paragraph([
+        "を得る。第一行左辺の和も ",
+        ref("def_open_rectangle_partition_value"),
+        " により ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(t)`),
+        " なので、第一の場合の二つの不等式が従う。",
+        math(String.raw`1\le_{\mathbb{R}}t`),
+        " の場合は自然数冪の順序が",
+      ]),
+      displayMath(String.raw`1\le_{\mathbb{R}}t^{\,s^{\mathrm{bd}}_L(\sigma)}\le_{\mathbb{R}}t^{2L}`),
+      paragraph([
+        "となる。同じ項ごとの乗法と有限和を順に適用し、",
+        ref("def_open_rectangle_partition_value"),
+        " で和を書き戻すと、第二の場合の二つの不等式を得る。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -37514,8 +37645,7 @@ t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}t^{\,b^{\mathrm{op}}_{c,b}(\tau)}
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 周期境界との差の境界評価、" +
-            "それらによる自由エネルギー密度の極限の存在、零点密度。",
+          "「熱力学極限」の残り: 自由エネルギー密度の極限の存在、零点密度。",
         ],
         [
           todo("未着手"),

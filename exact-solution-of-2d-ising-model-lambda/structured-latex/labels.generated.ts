@@ -93,6 +93,7 @@ export const ALL_LABELS = [
   "claim_partition_value_dual_factorization",
   "claim_partition_value_positive_at_positive_real",
   "claim_partition_value_upper_bound",
+  "claim_periodic_open_boundary_comparison",
   "claim_permutation_moves_two",
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
