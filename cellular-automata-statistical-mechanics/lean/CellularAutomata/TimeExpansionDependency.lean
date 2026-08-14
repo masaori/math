@@ -38,6 +38,7 @@ claim_one_step_dependency_finite_decidability について形式化した範囲:
 （有限集合の直積の個数の積、範囲 {0,…,τ} の個数、filter の所属）に限る。
 -/
 import CellularAutomata.RedundantNeighbor
+import CellularAutomata.NecSuf.TimeExpansionDependency
 
 namespace CellularAutomata.TimeExpansionDependency
 
@@ -158,5 +159,59 @@ theorem time_strictly_increases (τ : ℕ) (s t : ℕ) (u v : V)
     (h : ((s, u), (t, v)) ∈ oneStepDep N f τ) : s < t := by
   obtain ⟨-, ht, -⟩ := (mem_oneStepDep N f τ s t u v).mp h
   exact ht ▸ Nat.lt_succ_self s
+
+omit [Fintype V] [DecidableEq V] in
+/-- 具体版の大域写像の定義の一致が、必要十分版の状態型を `State` に
+    特殊化して得られること。 -/
+theorem globalMap_eq_extendRule_from_necessary_sufficient (v : V) (y : V → State) :
+    globalMap N f y v = extendRule (N v) (f v) y := by
+  exact CellularAutomata.NecSuf.TimeExpansionDependency.globalMap_eq_extendRule N f v y
+
+omit [Fintype V] in
+/-- 具体版の大域一点反転の特徴づけが、必要十分版を `State`、`nu`、
+    基準値 `zero` に特殊化し、点ごとの依存を有限依存台に集めることで得られる。 -/
+theorem globalFlip_iff_mem_supp_from_necessary_sufficient (u v : V) :
+    (∃ y : V → State, globalMap N f y v ≠ globalMap N f (flip u y) v) ↔
+      u ∈ (supp (f v)).map (Function.Embedding.subtype (· ∈ N v)) := by
+  change (∃ y : V → State,
+    CellularAutomata.NecSuf.TimeExpansionDependency.globalMap N f y v ≠
+      CellularAutomata.NecSuf.TimeExpansionDependency.globalMap N f
+        (CellularAutomata.NecSuf.EssentialDependency.flip nu u y) v) ↔ _
+  rw [CellularAutomata.NecSuf.TimeExpansionDependency.globalFlip_iff_essentialDep
+    N f nu ne_iff_eq_nu State.zero u v]
+  constructor
+  · rintro ⟨hu, hdep⟩
+    exact Finset.mem_map.mpr ⟨⟨u, hu⟩, (mem_supp_iff (f v) ⟨u, hu⟩).mpr hdep, rfl⟩
+  · intro hmem
+    obtain ⟨w, hw, hwu⟩ := Finset.mem_map.mp hmem
+    have hu : u ∈ N v := hwu ▸ w.property
+    have hw' : w = ⟨u, hu⟩ := Subtype.ext hwu
+    exact ⟨hu, (mem_supp_iff (f v) ⟨u, hu⟩).mp (hw' ▸ hw)⟩
+
+/-- イベント集合の個数公式が、必要十分版の有限集合の直積公式に
+    `I = [0,τ]` を代入して得られること。 -/
+theorem card_eventSet_from_necessary_sufficient (τ : ℕ) :
+    (eventSet (V := V) τ).card = (τ + 1) * Fintype.card V := by
+  calc
+    (eventSet (V := V) τ).card =
+        (CellularAutomata.NecSuf.TimeExpansionDependency.eventSet
+          (V := V) (timeInterval τ)).card := rfl
+    _ = (timeInterval τ).card * Fintype.card V :=
+      CellularAutomata.NecSuf.TimeExpansionDependency.card_eventSet (timeInterval τ)
+    _ = (τ + 1) * Fintype.card V := by rw [card_timeInterval]
+
+/-- 具体版の時刻増加が、必要十分版の `next s = s+1`、`lt = (<)` と
+    `s < s+1` の特殊化で得られること。 -/
+theorem time_strictly_increases_from_necessary_sufficient
+    (τ : ℕ) (s t : ℕ) (u v : V)
+    (h : ((s, u), (t, v)) ∈ oneStepDep N f τ) : s < t := by
+  obtain ⟨-, ht, hmem⟩ := (mem_oneStepDep N f τ s t u v).mp h
+  obtain ⟨w, hw, hwu⟩ := Finset.mem_map.mp hmem
+  have hu : u ∈ N v := hwu ▸ w.property
+  have hw' : w = ⟨u, hu⟩ := Subtype.ext hwu
+  have hdep : EssentialDep (f v) ⟨u, hu⟩ :=
+    (mem_supp_iff (f v) ⟨u, hu⟩).mp (hw' ▸ hw)
+  exact CellularAutomata.NecSuf.TimeExpansionDependency.time_strictly_increases
+    N f (· + 1) (· < ·) Nat.lt_succ_self (s, u) (t, v) ⟨ht, hu, hdep⟩
 
 end CellularAutomata.TimeExpansionDependency

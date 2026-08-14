@@ -2,5 +2,6 @@
 import CellularAutomata.EssentialDependency
 import CellularAutomata.NecSuf.EssentialDependency
 import CellularAutomata.NecSuf.RedundantNeighbor
+import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.RedundantNeighbor
 import CellularAutomata.TimeExpansionDependency
