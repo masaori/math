@@ -146,4 +146,133 @@ Z_L(1)
       paragraph(["となる。"]),
     ],
   },
+
+  {
+    id: "partition_support_endpoints_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "帰無モデル: 分配多項式の台の両端" },
+    labels: [],
+  },
+
+  {
+    id: "partition_support_endpoints_claim",
+    kind: "claim",
+    title: { text: "分配多項式の台の両端は 0 と辺の本数である" },
+    labels: ["claim_partition_support_endpoints"],
+    habitat: "Z",
+    statement: [
+      paragraph(["自由境界の分配多項式の両端の係数は"]),
+      displayMath(
+        String.raw`[X^0]Z_L(X)=\Omega_L(0)\ge2,\qquad
+[X^{\#E_L}]Z_L(X)=\Omega_L(\#E_L)\ge2`,
+      ),
+      paragraph([
+        "を満たす。したがって、係数が非零である最小の次数は ",
+        math(String.raw`0`),
+        "、最大の次数は ",
+        math(String.raw`\#E_L`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "すべての点で値 ",
+        math(String.raw`+1`),
+        " を取る配位を ",
+        math(String.raw`\sigma^+`),
+        "、すべての点で値 ",
+        math(String.raw`-1`),
+        " を取る配位を ",
+        math(String.raw`\sigma^-`),
+        " と置く（",
+        ref("def_configuration"),
+        "）。箱には点 ",
+        math(String.raw`(0,0,0)`),
+        " が属するので、この二つの配位は異なる。",
+      ]),
+      paragraph([
+        "各辺の両端で定数配位の値は等しい。したがって、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+D_L(\sigma^+)&=\varnothing
+&&(\because\ \blkref{def_broken_count})\\
+m_L(\sigma^+)&=0
+&&(\because\ \blkref{def_broken_count})\\
+D_L(\sigma^-)&=\varnothing
+&&(\because\ \blkref{def_broken_count})\\
+m_L(\sigma^-)&=0
+&&(\because\ \blkref{def_broken_count})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。破れ数が ",
+        math(String.raw`0`),
+        " の水準集合は相異なる二つの配位 ",
+        math(String.raw`\sigma^+,\sigma^-`),
+        " を含むので、",
+        math(String.raw`\Omega_L(0)\ge2`),
+        " である（",
+        ref("def_multiplicity"),
+        "）。",
+      ]),
+      paragraph([
+        "奇数側だけ反転する全単射 ",
+        math(String.raw`T`),
+        "（",
+        ref("claim_odd_flip_involution"),
+        "）をこの二つの配位に適用する。すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+m_L(T\sigma^+)
+&=\#E_L-m_L(\sigma^+)
+&&(\because\ \blkref{claim_broken_complement})\\
+&=\#E_L
+&&(\because\ m_L(\sigma^+)=0)\\
+m_L(T\sigma^-)
+&=\#E_L-m_L(\sigma^-)
+&&(\because\ \blkref{claim_broken_complement})\\
+&=\#E_L
+&&(\because\ m_L(\sigma^-)=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`T`),
+        " は単射で ",
+        math(String.raw`\sigma^+\ne\sigma^-`),
+        " なので、",
+        math(String.raw`T\sigma^+\ne T\sigma^-`),
+        " である。よって破れ数が ",
+        math(String.raw`\#E_L`),
+        " の水準集合も相異なる二つの配位を含み、",
+        math(String.raw`\Omega_L(\#E_L)\ge2`),
+        " である（",
+        ref("def_multiplicity"),
+        "）。",
+      ]),
+      paragraph([
+        "係数と多重度の一致（",
+        ref("claim_partition_coefficients_nonnegative"),
+        "）を次数 ",
+        math(String.raw`0`),
+        " と ",
+        math(String.raw`\#E_L`),
+        " に適用すると、主張した二つの係数の等式と非零性を得る。さらに ",
+        math(String.raw`Z_L(X)`),
+        " の定義は次数 ",
+        math(String.raw`0`),
+        " から ",
+        math(String.raw`\#E_L`),
+        " までの有限和なので、これより小さい次数または大きい次数の項は無い（",
+        ref("def_partition_polynomial"),
+        "）。したがって台の両端はそれぞれ ",
+        math(String.raw`0`),
+        " と ",
+        math(String.raw`\#E_L`),
+        " である。",
+      ]),
+    ],
+  },
 ]);
