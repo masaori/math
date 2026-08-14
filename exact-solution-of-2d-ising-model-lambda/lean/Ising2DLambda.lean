@@ -572,3 +572,6 @@ import Ising2DLambda.FisherZero.RealAlgebraicOrderFromNecSuf
 import Ising2DLambda.FisherZero.DistanceSquaredToRational
 import Ising2DLambda.NecSuf.FisherZero.DistanceSquaredToRational
 import Ising2DLambda.FisherZero.DistanceSquaredToRationalFromNecSuf
+import Ising2DLambda.FisherZero.ZeroPinchingPredicate
+import Ising2DLambda.NecSuf.FisherZero.ZeroPinchingPredicate
+import Ising2DLambda.FisherZero.ZeroPinchingPredicateFromNecSuf
