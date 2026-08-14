@@ -2263,7 +2263,7 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
       displayMath(
         String.raw`\begin{aligned}
 (\text{右辺})
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp\!\left(-i\frac{2\pi j}{M}\right) \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp\!\left(-i\frac{2\pi j}{M}\right) \quad (\because \text{主張の右辺を書き下したもの}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j}\,
 \overbrace{\left(\sum_{k_2=1}^M\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(\pm)}}\,
@@ -2287,19 +2287,9 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
 M\,\delta^M_{-(k_1-k_2+1),\,0}(Y_{k_1}Z_{k_2}) \quad (\because \text{exp\_sum}) \\
 &= \frac{1}{M}\sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}}
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) 
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`k_2\geq 2`),
-        " の項と ",
-        math(String.raw`k_2=1`),
-        " の項に分けると、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
+M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
 &= \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ k_2\in\{2,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}} M(Y_{k_1}Z_{k_2})
-+ \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) \\
++ \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) \quad (\because k_2=1\ \text{の項とそれ以外（}k_2\in\{2,\dots,M\}\text{）の項へ和を分けた}) \\
 &= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) \quad (\because \text{下記のとおり第 1 項は } k_1=k_2-1\text{、第 2 項は } k_1=M \text{ に限ること、および } \tfrac{1}{M}\cdot M=1) \\
 &= H_1^{(\pm)} \quad (\because H_1^{(\pm)}\ \text{の定義})
 \end{aligned}`,
@@ -2333,7 +2323,7 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
       displayMath(
         String.raw`\begin{aligned}
 (\text{右辺})
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,\hat{Y}_j \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,\hat{Y}_j \quad (\because \text{主張の右辺を書き下したもの}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M\begin{cases}1 & (k_1\neq 1)\\ +1 & (k_1=1)\end{cases}Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(-)}}\,
 \overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} \quad (\because \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義の展開}) \\
@@ -2352,7 +2342,17 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-08-14: 式変形の書き方を統一した。H_1^{(±)} の計算はもとが 2 つの鎖に割れ、" +
+          "間に「k_2≥2 の項と k_2=1 の項に分けると、」という日本語を挟んでいた（2 つめの鎖は" +
+          "先頭が = で始まり、単独では読めない形だった）。1 つの鎖へつなぎ、分割の行の末尾に" +
+          "(∵ k_2=1 の項とそれ以外の項へ和を分けた) を置いた。あわせて両方の鎖の先頭行" +
+          "（(右辺) = …）に根拠 (∵ 主張の右辺を書き下したもの) を足した。段は増えており、" +
+          "減った段は無い。主張も証明の筋も変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_013_claim_hatZ_hatY_M_periodicity",
