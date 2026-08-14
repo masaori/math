@@ -85,6 +85,7 @@ export default defineBlocks([
     title: { text: "依存経路に沿って時刻は厳密に増える" },
     labels: ["claim_path_time_strictly_increases"],
     habitat: "N",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         "任意の依存経路 ",
@@ -213,6 +214,7 @@ export default defineBlocks([
     title: { text: "一段依存関係は到達可能関係に含まれる" },
     labels: ["claim_one_step_subset_reachability"],
     habitat: "finite",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         math(String.raw`D_\tau\subseteq C_\tau`),
@@ -263,6 +265,7 @@ export default defineBlocks([
     title: { text: "到達可能関係は推移的である" },
     labels: ["claim_reachability_transitive"],
     habitat: "finite",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         math(String.raw`(a,b)\in C_\tau`),
@@ -355,6 +358,7 @@ export default defineBlocks([
     title: { text: "到達可能関係は一段依存関係を含む最小の推移的関係である" },
     labels: ["claim_reachability_minimal"],
     habitat: "finite",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         math(String.raw`R\subseteq E_\tau\times E_\tau`),
@@ -447,6 +451,7 @@ export default defineBlocks([
     title: { text: "相互に到達可能な二つのイベントは存在しない" },
     labels: ["claim_no_mutual_reachability"],
     habitat: "N",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         math(String.raw`(a,b)\in C_\tau`),
@@ -509,6 +514,7 @@ export default defineBlocks([
     title: { text: "どのイベントも自分自身に到達しない" },
     labels: ["claim_reachability_irreflexive"],
     habitat: "N",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         math(String.raw`(a,a)\in C_\tau`),
@@ -624,6 +630,7 @@ export default defineBlocks([
     title: { text: "反射的到達可能関係はイベント集合上の部分順序である" },
     labels: ["claim_reachability_partial_order"],
     habitat: "finite",
+    verification: ["sagemath/check/transitive-closure-antisymmetry"],
     statement: [
       paragraph([
         "反射的到達可能関係 ",
