@@ -3316,8 +3316,10 @@ B_2 := \begin{pmatrix}
       displayMath(
         String.raw`\begin{aligned}
 T_{(V)}(\hat{Z}_\mu^{(-)})
-&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})\right)\right) \\
-&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(\cosh(K_1)\hat{Z}_\mu^{(-)} + i e^{-i\theta_\mu}\sinh(K_1)\hat{Y}_\mu\right)\right) \\
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})\right)\right)
+   \quad (\because V=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2}\ \text{と共役作用の合成則}) \\
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(\cosh(K_1)\hat{Z}_\mu^{(-)} + i e^{-i\theta_\mu}\sinh(K_1)\hat{Y}_\mu\right)\right)
+   \quad (\because \text{直積作用の計算}) \\
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left(\left(T_{V_2}(\hat{Z}_\mu^{(-)}),\ T_{V_2}(\hat{Y}_\mu)\right)
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}\right)
    \quad (\because T\text{ の線型性}) \\
@@ -3325,9 +3327,11 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}\right)
    \quad (\because \text{直積作用の計算}) \\
 &= \left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)}),\ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right) B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix} \\
+   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}
+   \quad (\because T\text{ の線型性}) \\
 &= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_1(\theta_\mu)\, B_2
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}
+   \quad (\because \text{直積作用の計算})
 \end{aligned}`,
       ),
       paragraph([
@@ -3338,8 +3342,10 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
       displayMath(
         String.raw`\begin{aligned}
 T_{(V)}(\hat{Y}_\mu)
-&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right)\right) \\
-&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(-i e^{i\theta_\mu}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu\right)\right) \\
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right)\right)
+   \quad (\because V=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2}\ \text{と共役作用の合成則}) \\
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(-i e^{i\theta_\mu}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu\right)\right)
+   \quad (\because \text{直積作用の計算}) \\
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left(\left(T_{V_2}(\hat{Z}_\mu^{(-)}),\ T_{V_2}(\hat{Y}_\mu)\right)
    \begin{pmatrix}-i e^{i\theta_\mu}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
    \quad (\because T\text{ の線型性}) \\
@@ -3348,6 +3354,7 @@ T_{(V)}(\hat{Y}_\mu)
    \quad (\because \text{直積作用の計算}) \\
 &= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_1(\theta_\mu)\, B_2
    \begin{pmatrix}-i e^{i\theta_\mu}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \quad (\because T\text{ の線型性と直積作用の計算})
 \end{aligned}`,
       ),
       paragraph([
@@ -3356,8 +3363,9 @@ T_{(V)}(\hat{Y}_\mu)
         " の 2 列）、",
       ]),
       displayMath(
-        String.raw`\left(T_{(V)}(\hat{Z}_\mu^{(-)}),\ T_{(V)}(\hat{Y}_\mu)\right)
-= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_1(\theta_\mu)\, B_2\, B_1(\theta_\mu)`,
+String.raw`\left(T_{(V)}(\hat{Z}_\mu^{(-)}),\ T_{(V)}(\hat{Y}_\mu)\right)
+= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_1(\theta_\mu)\, B_2\, B_1(\theta_\mu)
+\quad (\because \text{直前の二列を並べ、}B_1(\theta_\mu)\text{ の二列の定義を用いた})`,
       ),
       paragraph([
         "最後に ",
@@ -3400,15 +3408,25 @@ a^2 - b^2 = \cosh^2 K_1 - \sinh^2 K_1 = 1`,
       displayMath(
         String.raw`\begin{aligned}
 N_{11} &= C\cdot a + (iS)\cdot\left(i e^{-i\theta} b\right)
-        = Ca + i^2 S b\, e^{-i\theta}
-        = Ca - S b\, e^{-i\theta} \\
+        &&(\because \text{行列積の定義}) \\
+&= Ca + i^2 S b\, e^{-i\theta}
+        &&(\because \text{複素数の積の結合則と可換則}) \\
+&= Ca - S b\, e^{-i\theta}
+        &&(\because i^2=-1) \\
 N_{12} &= C\cdot\left(-i e^{i\theta} b\right) + (iS)\cdot a
-        = i\left(Sa - C b\, e^{i\theta}\right) \\
+        &&(\because \text{行列積の定義}) \\
+&= i\left(Sa - C b\, e^{i\theta}\right)
+        &&(\because \text{分配則と複素数の積の可換則}) \\
 N_{21} &= (-iS)\cdot a + C\cdot\left(i e^{-i\theta} b\right)
-        = i\left(C b\, e^{-i\theta} - Sa\right) \\
+        &&(\because \text{行列積の定義}) \\
+&= i\left(C b\, e^{-i\theta} - Sa\right)
+        &&(\because \text{分配則と複素数の積の可換則}) \\
 N_{22} &= (-iS)\cdot\left(-i e^{i\theta} b\right) + C\cdot a
-        = i^2 S b\, e^{i\theta} + Ca
-        = Ca - S b\, e^{i\theta}
+        &&(\because \text{行列積の定義}) \\
+&= i^2 S b\, e^{i\theta} + Ca
+        &&(\because (-i)(-i)=i^2\ \text{と複素数の積の結合則}) \\
+&= Ca - S b\, e^{i\theta}
+        &&(\because i^2=-1\ \text{と加法の可換則})
 \end{aligned}`,
       ),
       paragraph([
@@ -3419,18 +3437,22 @@ N_{22} &= (-iS)\cdot\left(-i e^{i\theta} b\right) + C\cdot a
       displayMath(
         String.raw`\begin{aligned}
 P_{11}
-&= a\, N_{11} + \left(-i e^{i\theta} b\right) N_{21} \\
+&= a\, N_{11} + \left(-i e^{i\theta} b\right) N_{21}
+   &&(\because \text{行列積の定義}) \\
 &= a\left(Ca - S b\, e^{-i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\cdot i\left(C b\, e^{-i\theta} - Sa\right) \\
+   + \left(-i e^{i\theta} b\right)\cdot i\left(C b\, e^{-i\theta} - Sa\right)
+   &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
 &= Ca^2 - S ab\, e^{-i\theta}
    + e^{i\theta} b\left(C b\, e^{-i\theta} - Sa\right)
    \quad (\because -i\cdot i = 1) \\
 &= Ca^2 - S ab\, e^{-i\theta} + C b^2 - S ab\, e^{i\theta}
    \quad (\because e^{i\theta}e^{-i\theta} = 1) \\
-&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right) \\
+&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right)
+   &&(\because \text{分配則による括り出し}) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
    \quad (\because a^2+b^2 = c_1,\ 2ab = s_1,\ e^{i\theta}+e^{-i\theta} = 2\cos\theta) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
+   &&(\because C=c_2^*,\ S=s_2^*\ \text{の略記})
 \end{aligned}`,
       ),
       paragraph([
@@ -3450,14 +3472,19 @@ P_{11}
       displayMath(
         String.raw`\begin{aligned}
 P_{22}
-&= \left(i e^{-i\theta} b\right) N_{12} + a\, N_{22} \\
+&= \left(i e^{-i\theta} b\right) N_{12} + a\, N_{22}
+   &&(\because \text{行列積の定義}) \\
 &= \left(i e^{-i\theta} b\right)\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + a\left(Ca - S b\, e^{i\theta}\right) \\
+   + a\left(Ca - S b\, e^{i\theta}\right)
+   &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
 &= -e^{-i\theta} b\left(Sa - C b\, e^{i\theta}\right) + Ca^2 - S ab\, e^{i\theta}
    \quad (\because i\cdot i = -1) \\
-&= -S ab\, e^{-i\theta} + C b^2 + Ca^2 - S ab\, e^{i\theta} \\
-&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right) \\
+&= -S ab\, e^{-i\theta} + C b^2 + Ca^2 - S ab\, e^{i\theta}
+   &&(\because \text{分配則と }e^{-i\theta}e^{i\theta}=1) \\
+&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right)
+   &&(\because \text{加法の可換則と分配則による括り出し}) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
+   &&(\because a^2+b^2=c_1,\ 2ab=s_1,\ e^{i\theta}+e^{-i\theta}=2\cos\theta,\ C=c_2^*,\ S=s_2^*)
 \end{aligned}`,
       ),
       paragraph([
@@ -3471,12 +3498,16 @@ P_{22}
       displayMath(
         String.raw`\begin{aligned}
 P_{12}
-&= a\, N_{12} + \left(-i e^{i\theta} b\right) N_{22} \\
+&= a\, N_{12} + \left(-i e^{i\theta} b\right) N_{22}
+   &&(\because \text{行列積の定義}) \\
 &= a\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\left(Ca - S b\, e^{i\theta}\right) \\
+   + \left(-i e^{i\theta} b\right)\left(Ca - S b\, e^{i\theta}\right)
+   &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
 &= i\left[S a^2 - C ab\, e^{i\theta}\right]
-   + i\left[-C ab\, e^{i\theta} + S b^2 e^{2i\theta}\right] \\
+   + i\left[-C ab\, e^{i\theta} + S b^2 e^{2i\theta}\right]
+   &&(\because \text{分配則と複素数の積の結合則}) \\
 &= i\left[S\left(a^2 + b^2 e^{2i\theta}\right) - 2C ab\, e^{i\theta}\right]
+   &&(\because \text{分配則による括り出し})
 \end{aligned}`,
       ),
       paragraph([
@@ -3487,10 +3518,12 @@ P_{12}
       displayMath(
         String.raw`\begin{aligned}
 a^2 + b^2 e^{2i\theta}
-&= e^{i\theta}\left(a^2 e^{-i\theta} + b^2 e^{i\theta}\right) \\
+&= e^{i\theta}\left(a^2 e^{-i\theta} + b^2 e^{i\theta}\right)
+   &&(\because e^{i\theta}e^{-i\theta}=1\ \text{と指数法則}) \\
 &= e^{i\theta}\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
    \quad (\because \text{Euler の公式}) \\
-&= e^{i\theta}\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right) \\
+&= e^{i\theta}\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
+   &&(\because \text{分配則による整理}) \\
 &= e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right)
    \quad (\because a^2+b^2 = c_1,\ a^2-b^2 = 1)
 \end{aligned}`,
@@ -3499,12 +3532,16 @@ a^2 + b^2 e^{2i\theta}
       displayMath(
         String.raw`\begin{aligned}
 P_{12}
-&= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - C s_1 e^{i\theta}\right] \\
-&= i e^{i\theta}\left[S\left(c_1\cos\theta - i\sin\theta\right) - C s_1\right] \\
-&= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right] \\
+&= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - C s_1 e^{i\theta}\right]
+   &&(\because \text{直前の補助計算と }2ab=s_1) \\
+&= i e^{i\theta}\left[S\left(c_1\cos\theta - i\sin\theta\right) - C s_1\right]
+   &&(\because \text{分配則による }e^{i\theta}\text{ の括り出し}) \\
+&= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
+   &&(\because S=s_2^*,\ C=c_2^*\ \text{の略記}) \\
 &= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
    \quad (\because c_2^* = s_2^* c_2) \\
 &= i e^{i\theta} s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
+   &&(\because \text{分配則による }s_2^*\text{ の括り出し})
 \end{aligned}`,
       ),
       paragraph([
@@ -3532,12 +3569,16 @@ P_{12}
       displayMath(
         String.raw`\begin{aligned}
 P_{21}
-&= \left(i e^{-i\theta} b\right) N_{11} + a\, N_{21} \\
+&= \left(i e^{-i\theta} b\right) N_{11} + a\, N_{21}
+   &&(\because \text{行列積の定義}) \\
 &= \left(i e^{-i\theta} b\right)\left(Ca - S b\, e^{-i\theta}\right)
-   + a\cdot i\left(C b\, e^{-i\theta} - Sa\right) \\
+   + a\cdot i\left(C b\, e^{-i\theta} - Sa\right)
+   &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
 &= i\left[C ab\, e^{-i\theta} - S b^2 e^{-2i\theta}\right]
-   + i\left[C ab\, e^{-i\theta} - S a^2\right] \\
+   + i\left[C ab\, e^{-i\theta} - S a^2\right]
+   &&(\because \text{分配則と複素数の積の結合則}) \\
 &= -i\left[S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}\right]
+   &&(\because \text{分配則による括り出し})
 \end{aligned}`,
       ),
       paragraph([
@@ -3554,11 +3595,13 @@ P_{21}
       displayMath(
         String.raw`\begin{aligned}
 S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}
-&= e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right) \\
-\therefore\quad
+&= e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+   &&(\because \text{Step 4 の補助計算で }\theta\text{ を }-\theta\text{ に置換}) \\
 P_{21}
 &= -i e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
-= -\gamma_2(-\theta)
+   &&(\because \text{直前の等式を }P_{21}\text{ の表示へ代入}) \\
+&= -\gamma_2(-\theta)
+   &&(\because \gamma_2\text{ の定義と }\cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)
 \end{aligned}`,
       ),
       paragraph([
@@ -3584,8 +3627,9 @@ P_{21}
         "。したがって statement を得る：",
       ]),
       displayMath(
-        String.raw`\left(T_{(V)}(\hat{Z}_\mu^{(-)}),\ T_{(V)}(\hat{Y}_\mu)\right)
-= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, A(\theta_\mu)`,
+String.raw`\left(T_{(V)}(\hat{Z}_\mu^{(-)}),\ T_{(V)}(\hat{Y}_\mu)\right)
+= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, A(\theta_\mu)
+\quad (\because B_1(\theta_\mu)B_2B_1(\theta_\mu)=A(\theta_\mu))`,
       ),
     ],
     conversion: {
@@ -3594,6 +3638,7 @@ P_{21}
         "原文 proof の (z)/(y) 各行列簡約と『よって』の合流までを忠実に翻訳。原文が TODO（Mathematica で数値確認済みとして略）としていた最終の B1·B2·B1 = A(θ_μ) の明示的行列積を、4 成分すべて途中式込みで人手計算して埋め、todo を除去した。",
         "行列積の結果は statement（および def_A_theta の A(θ) の定義）と完全に一致した。ただし (1,2)/(2,1) 成分は素の計算では c_2^*（＝S）が現れ、A(θ) の γ_2 に現れる c_2 とは K_2 と K_2^* の双対関係 c_2^* = s_2^* c_2 を経由して一致する。この関係を duality_c2_star_eq_s2_star_c2 として独立した claim に切り出し、参照した。statement 側の修正は不要だった。",
         "原文の (z)/(y) 個別鎖では第1行列の (1,2)/(2,1) 成分を i e^{-iθ} 形（別表示）で書く箇所があり、原文『よって』段の B1（calc_of_TxT と整合する -i e^{iθ}, i e^{-iθ} 形）と内部で不整合。ここでは確立済みの B1（calc_of_TxT_hatZxhatY, 014）に統一して原文の最終結論を再現した。",
+        "T_(V) の hat Z, hat Y への作用の証明に残っていた根拠なしの等号へ、共役作用の合成則・線型性・行列積・複素数の四則演算・Euler の公式の行末根拠を補い、一行に複数の等号があった Step 1 の四成分と Step 5 の終端を一行一等号へ開いた（2026-08-15）。主張と計算内容は変えていない。",
       ],
     },
   },
