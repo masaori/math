@@ -35953,6 +35953,11 @@ b(\sigma_{+})
       "分配多項式の値 Z_L(t) ∈ ℝ を実数の順序で上から評価するため。" +
       "使う性質は「実数体への脱出の宣言」に挙げた順序体の性質と ι_{ℚ→ℝ} だけであり、" +
       "実対数・完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_le_upperBound",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_le_uniform_bound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_le_upperBound_from_necSuf",
+    ],
     verification: ["sagemath/check/partition-value-upper-bound"],
     statement: [
       paragraph([
