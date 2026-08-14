@@ -149,6 +149,10 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
 5. tick の最後に PDF を作り直す（cd structured-latex && npm run build:pdf）。
    本文を変えなかった tick でも必ず行う。人間が開いたまま進み具合を見るため。
 6. 1 セクション進めたら止まる。
+7. **Slack へ通知しない**（slack-notification skill も curl も使わない）。tick の完了報告は
+   このスクリプトが公開処理の中で 1 通だけ送る。自分でも送ると 1 tick で 2 通届く。
+   例外は、人間の判断を待って止まるときだけである。
+   通知の本文は台帳の「現在地」の先頭項目なので、そこに何をしたかを 1〜2 文で簡潔に書く。
 
 締切について。この tick は @HARD@ に強制終了される（書きかけでも落ちる）。
 そこで @SOFT@ を「まとめに入る締切」とする。作業の区切りごとに `date` で現在時刻を

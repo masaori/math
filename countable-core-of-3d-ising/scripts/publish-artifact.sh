@@ -72,7 +72,9 @@ for line in lines:
     elif line.strip():
         body.append(line.strip())
 text = " ".join(body).replace("**", "")
-print(text if len(text) <= 1200 else text[:1200] + "…")
+# **短く切る。** 人間が Slack で読むのは「その tick が何をしたか」の 1〜2 文だけであり、
+# 台帳の記述をそのまま流すと読まれない（2026-08-14 のユーザー指摘）。
+print(text if len(text) <= 240 else text[:240] + "…")
 PYEOF
 )"
 [ -z "$summary" ] && summary="$(git -C "$REPO_DIR" log -1 --format='%s')"
@@ -108,7 +110,7 @@ log "OK: 公開した（版 ${commit}）→ $url"
 # **同じ版で二度は送らない**（別経路から呼ばれても重複しないため）。
 NOTIFIED="$LOG_DIR/last-notified-commit"
 if [ "$(cat "$NOTIFIED" 2>/dev/null || true)" != "$commit" ]; then
-  message="${title}: 自動ループが 1 tick 前進した（版 ${commit}・直近の tick: ${agent}）。
+  message="${title}（${agent} / 版 ${commit}）
 ${summary}
 ${url}"
   if curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
