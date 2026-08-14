@@ -524,7 +524,8 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
       displayMath(
         String.raw`\begin{aligned}
 n_\mu^2
-&= (\psi_\mu^\dagger\psi_{-\mu})(\psi_\mu^\dagger\psi_{-\mu}) \\
+&= (\psi_\mu^\dagger\psi_{-\mu})(\psi_\mu^\dagger\psi_{-\mu})
+   \quad (\because \text{フェルミオン数演算子 } n_\mu \text{ の定義}) \\
 &= \psi_\mu^\dagger\left(\psi_{-\mu}\psi_\mu^\dagger\right)\psi_{-\mu}
    \quad (\because \text{行列の積の結合法則}) \\
 &= \psi_\mu^\dagger\left(I - n_\mu\right)\psi_{-\mu}
@@ -546,6 +547,7 @@ n_\mu^2
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-08-15 の式変形統一で、(3) の鎖の先頭行（フェルミオン数演算子の定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
       ],
     },
   },
