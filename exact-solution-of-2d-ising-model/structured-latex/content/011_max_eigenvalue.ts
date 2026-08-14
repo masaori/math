@@ -874,22 +874,38 @@ m_k^{\,2}
         " はいずれも定義済みである。）",
       ]),
       paragraph([
-        "Step 3（下からの評価）。Step 2 の ",
-        math(String.raw`m_k^2 \leq m_{k-1}m_{k+1}`),
-        " すなわち ",
-        math(String.raw`\dfrac{m_{k+1}}{m_k} \geq \dfrac{m_k}{m_{k-1}}`),
-        " より、比 ",
+        "Step 3（下からの評価）。まず、任意の ",
+        math(String.raw`k \geq 1`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{m_k}{m_{k-1}}
+&=\frac{m_k^2}{m_{k-1}\,m_k}
+&&\bigl(\because\ \text{分子と分母に }m_k>0\text{ を掛けた（Step 2 の正値性）}\bigr)\\
+&\leq\frac{m_{k-1}\,m_{k+1}}{m_{k-1}\,m_k}
+&&\bigl(\because\ \text{Step 2 の }m_k^2 \leq m_{k-1}m_{k+1}\text{ と、正の分母での商は順序を保つ}\bigr)\\
+&=\frac{m_{k+1}}{m_k}
+&&\bigl(\because\ m_{k-1}>0\ \text{の約分}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、比 ",
         math(String.raw`m_{k+1}/m_k`),
         " は ",
         math(String.raw`k`),
-        " について単調非減少である。",
-        math(String.raw`m_0 = \|x\|^2 = 1`),
-        " なので",
+        " について単調非減少である。したがって",
       ]),
-      displayMath(
-        String.raw`m_n = \frac{m_n}{m_{n-1}}\cdot\frac{m_{n-1}}{m_{n-2}}\cdots\frac{m_1}{m_0}
-\geq \left(\frac{m_1}{m_0}\right)^{n} = \left(x^\top Wx\right)^{n}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+m_n
+&=m_0\cdot\frac{m_1}{m_0}\cdot\frac{m_2}{m_1}\cdots\frac{m_n}{m_{n-1}}
+&&\bigl(\because\ \text{望遠鏡積（分母は Step 2 の正値性により零でない）}\bigr)\\
+&=\frac{m_1}{m_0}\cdot\frac{m_2}{m_1}\cdots\frac{m_n}{m_{n-1}}
+&&\bigl(\because\ m_0=x^\top W^0x=\|x\|^2=1\ \text{（}x\text{ は単位ベクトル）}\bigr)\\
+&\geq\left(\frac{m_1}{m_0}\right)^{n}
+&&\bigl(\because\ \text{各 }j\text{ で }\tfrac{m_j}{m_{j-1}}\geq\tfrac{m_1}{m_0}\text{（上の単調非減少を }j-1\text{ 回適用）と、}\\
+&&&\quad\text{正の項どうしの積は順序を保つ}\bigr)\\
+&=\left(x^\top Wx\right)^{n}
+&&\bigl(\because\ m_1=x^\top Wx\ \text{と}\ m_0=1\bigr)
+\end{aligned}`),
       paragraph([
         "一方、",
         math(String.raw`W^n`),
@@ -951,6 +967,7 @@ m_k^{\,2}
       notes: [
         "この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。c(M) は上限として定義され、上からの評価は rayleigh_bounds_operator_norm、下からの評価はモーメント列の対数凸性による。対角化可能性は正しいが本文にまだ無く、挟み撃ちには不要である。",
         "2026-08-14 の式変形統一で、Step 2 の対数凸性を任意の k へ移す奇数・偶数の場合分けを、それぞれ四段の一続きの不等式鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
+        "2026-08-14 の式変形統一で、Step 3 冒頭の比の単調性（三段）と望遠鏡積からの下からの評価（四段）を、それぞれ一続きの根拠付きの鎖へ開いた。内容は変えていない。",
       ],
     },
   },
