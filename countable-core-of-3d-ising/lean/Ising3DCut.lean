@@ -16,3 +16,6 @@ import Ising3DCut.NullModel.OddFlipInvolutionFromNecSuf
 import Ising3DCut.NullModel.OddFlipReversesEdges
 import Ising3DCut.NecSuf.NullModel.OddFlipReversesEdges
 import Ising3DCut.NullModel.OddFlipReversesEdgesFromNecSuf
+import Ising3DCut.NullModel.BrokenComplement
+import Ising3DCut.NecSuf.NullModel.BrokenComplement
+import Ising3DCut.NullModel.BrokenComplementFromNecSuf
