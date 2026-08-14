@@ -33061,6 +33061,11 @@ A\cdot A
     labels: ["claim_quadratic_positive_cone_mul_closed"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-cone-mul-closed"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositiveCone_mul_mem",
+      "Ising2DLambda.NecSuf.FisherZero.positive_cone_mul_closed_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositiveCone_mul_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

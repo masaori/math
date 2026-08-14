@@ -1183,12 +1183,30 @@ x^\top Wx
         math(String.raw`\mathbb{R}^{2^M}`),
         " の単位ベクトルでもあるので ",
         math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
-        " であり（上でこの集合が空でないことも確かめた）、上限の比較から ",
-        math(String.raw`c_\pm \leq c(M)`),
-        "。よって ",
-        math(String.raw`\max(c_+,c_-) \leq c(M)`),
-        "。よって等号が成り立つ。",
+        " である（上でこの集合が空でないことも確かめた）。したがって",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c_\pm
+&= \sup \mathcal{R}_\pm
+  \quad (\because c_\pm \text{ の定義})\\
+&\leq \sup \mathcal{R}
+  \quad (\because \mathcal{R}_\pm \subseteq \mathcal{R} \text{ と上限の単調性})\\
+&= c(M)
+  \quad (\because c(M) \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph(["両方の符号について成り立つので、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\max(c_+,c_-)
+&\leq c(M)
+  \quad (\because c_+\leq c(M) \text{ かつ } c_-\leq c(M))\\
+&\leq \max(c_+,c_-)
+  \quad (\because \text{上で示したレイリー商の上界})
+\end{aligned}`,
+      ),
+      paragraph(["よって等号が成り立つ。"]),
     ],
     conversion: {
       status: "added",
