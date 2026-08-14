@@ -37,6 +37,7 @@
 （ℕ の加法の結合則、有限個の有限集合の合併の個数は個数の和以下、部分集合の個数は全体以下、
 一元集合との直積の個数）に限る。
 -/
+import CellularAutomata.NecSuf.FinitePropagationBoundary
 import CellularAutomata.TransitiveClosureAntisymmetry
 
 namespace CellularAutomata.FinitePropagationBoundary
@@ -234,5 +235,110 @@ theorem dependencySourceSet_zero_empty (τ : ℕ) (v : V) :
     rw [propagationBoundary, Finset.Icc_eq_empty (by omega), Finset.biUnion_empty]
   rw [hempty] at hsub
   exact Set.subset_empty_iff.mp (by simpa using hsub)
+
+private abbrev EventSetAsSetFP (τ : ℕ) : Set (ℕ × V) :=
+  ↑(eventSet (V := V) τ)
+
+private abbrev OneStepAsSetFP (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
+  ↑(oneStepDep N f τ)
+
+/-- 具体版の経路時刻差は、必要十分版を有限舞台の一段依存へ特殊化して得られる。 -/
+theorem path_time_increment_exact_from_necessary_sufficient
+    (τ n : ℕ) (p : ℕ → ℕ × V) (hpath : IsDepPath N f τ n p) :
+    (p n).1 = (p 0).1 + n := by
+  exact CellularAutomata.NecSuf.FinitePropagationBoundary.path_time_increment_exact
+    (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ)
+    (fun a b h => oneStep_time_succ N f τ a b h) n p
+    ((isDepPath_iff_necessary_sufficient N f τ n p).mp hpath)
+
+omit [Fintype V] in
+/-- 具体版の伝播球は、必要十分版へ直接依存元 `suppV` を代入した特殊化である。 -/
+theorem propagationBall_eq_necessary_sufficient (n : ℕ) (v : V) :
+    propagationBall N f n v =
+      CellularAutomata.NecSuf.FinitePropagationBoundary.propagationBall (suppV N f) n v := by
+  induction n using Nat.twoStepInduction generalizing v with
+  | zero => rfl
+  | one => rfl
+  | more n ih0 ih1 =>
+      simp only [propagationBall,
+        CellularAutomata.NecSuf.FinitePropagationBoundary.propagationBall]
+      congr 1
+      funext u
+      exact ih1 u
+
+omit [Fintype V] in
+/-- 具体版の伝播球の再帰的個数上界は必要十分版の特殊化である。 -/
+theorem card_propagationBall_succ_le_from_necessary_sufficient
+    (n : ℕ) (hn : 1 ≤ n) (v : V) :
+    (propagationBall N f (n + 1) v).card ≤
+      ∑ u ∈ suppV N f v, (propagationBall N f n u).card := by
+  simpa only [propagationBall_eq_necessary_sufficient N f] using
+    (CellularAutomata.NecSuf.FinitePropagationBoundary.card_propagationBall_succ_le
+      (suppV N f) n hn v)
+
+/-- 具体版の経路始点セルの所属は必要十分版の特殊化である。 -/
+theorem start_cell_in_propagationBall_from_necessary_sufficient
+    (τ n : ℕ) (p : ℕ → ℕ × V) (hpath : IsDepPath N f τ n p) :
+    (p 0).2 ∈ propagationBall N f n (p n).2 := by
+  have h := CellularAutomata.NecSuf.FinitePropagationBoundary.start_cell_in_propagationBall
+    (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (suppV N f)
+    (fun a b hab => oneStep_source_mem_suppV N f τ a b hab) n p
+    ((isDepPath_iff_necessary_sufficient N f τ n p).mp hpath)
+  simpa only [← propagationBall_eq_necessary_sufficient N f] using h
+
+/-- 具体版の依存元集合は、必要十分版をイベント集合と一段依存へ特殊化した集合に等しい。 -/
+theorem dependencySourceSet_eq_necessary_sufficient (τ t : ℕ) (v : V) :
+    dependencySourceSet N f τ t v =
+      CellularAutomata.NecSuf.FinitePropagationBoundary.dependencySourceSet
+        (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (t, v) := by
+  ext a
+  simp only [dependencySourceSet,
+    CellularAutomata.NecSuf.FinitePropagationBoundary.dependencySourceSet, Set.mem_setOf_eq]
+  constructor
+  · rintro ⟨ha, hr⟩
+    exact ⟨ha, (reachable_iff_necessary_sufficient N f τ a (t, v)).mp hr⟩
+  · rintro ⟨ha, hr⟩
+    exact ⟨ha, (reachable_iff_necessary_sufficient N f τ a (t, v)).mpr hr⟩
+
+/-- 具体版の依存元集合の有限性は、必要十分版でイベント集合の有限性だけから得られる。 -/
+theorem dependencySourceSet_finite_from_necessary_sufficient (τ t : ℕ) (v : V) :
+    (dependencySourceSet N f τ t v).Finite := by
+  rw [dependencySourceSet_eq_necessary_sufficient N f τ t v]
+  exact CellularAutomata.NecSuf.FinitePropagationBoundary.dependencySourceSet_finite
+    (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (t, v) (Finset.finite_toSet _)
+
+/-- 具体版の有限伝播境界の包含は必要十分版の特殊化である。 -/
+theorem dependencySourceSet_subset_boundary_from_necessary_sufficient
+    (τ t : ℕ) (v : V) :
+    dependencySourceSet N f τ t v ⊆ ↑(propagationBoundary N f t v) := by
+  rw [dependencySourceSet_eq_necessary_sufficient N f τ t v]
+  have h := CellularAutomata.NecSuf.FinitePropagationBoundary.dependencySourceSet_subset_boundary
+    (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (suppV N f)
+    (fun a b hab => oneStep_time_succ N f τ a b hab)
+    (fun a b hab => oneStep_source_mem_suppV N f τ a b hab) t v
+  simpa only [propagationBoundary,
+    CellularAutomata.NecSuf.FinitePropagationBoundary.propagationBoundary,
+    propagationBall_eq_necessary_sufficient N f] using h
+
+/-- 具体版の依存元個数上界は必要十分版の特殊化である。 -/
+theorem card_dependencySourceSet_le_from_necessary_sufficient (τ t : ℕ) (v : V) :
+    (dependencySourceSet N f τ t v).ncard ≤
+      ∑ n ∈ Finset.Icc 1 t, (propagationBall N f n v).card := by
+  rw [dependencySourceSet_eq_necessary_sufficient N f τ t v]
+  simpa only [propagationBall_eq_necessary_sufficient N f] using
+    (CellularAutomata.NecSuf.FinitePropagationBoundary.card_dependencySourceSet_le
+      (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (suppV N f)
+      (fun a b hab => oneStep_time_succ N f τ a b hab)
+      (fun a b hab => oneStep_source_mem_suppV N f τ a b hab)
+      (Finset.finite_toSet _) t v)
+
+/-- 具体版の時刻 0 での空性は必要十分版の特殊化である。 -/
+theorem dependencySourceSet_zero_empty_from_necessary_sufficient (τ : ℕ) (v : V) :
+    dependencySourceSet N f τ 0 v = ∅ := by
+  rw [dependencySourceSet_eq_necessary_sufficient N f τ 0 v]
+  exact CellularAutomata.NecSuf.FinitePropagationBoundary.dependencySourceSet_zero_empty
+    (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (suppV N f)
+    (fun a b hab => oneStep_time_succ N f τ a b hab)
+    (fun a b hab => oneStep_source_mem_suppV N f τ a b hab) v
 
 end CellularAutomata.FinitePropagationBoundary

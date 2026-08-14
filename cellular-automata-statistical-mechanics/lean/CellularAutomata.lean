@@ -2,6 +2,7 @@
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
 import CellularAutomata.NecSuf.EssentialDependency
+import CellularAutomata.NecSuf.FinitePropagationBoundary
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
