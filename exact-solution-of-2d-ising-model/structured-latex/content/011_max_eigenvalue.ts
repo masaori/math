@@ -769,9 +769,29 @@ e_k^\top W^{2a+1}e_k
         ref("psd_cauchy_schwarz"),
         " を ",
         math(String.raw`P = I`),
-        "（半正定値）として使うと ",
-        math(String.raw`\left(m_{a+b}\right)^2 = \left((W^bx)^\top(W^ax)\right)^2 \leq \|W^ax\|^2\|W^bx\|^2 = m_{2a}m_{2b}`),
-        "。",
+        "（半正定値）として使うと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(m_{a+b}\right)^2
+&=\left(x^\top W^{a+b}x\right)^2
+&&\bigl(\because\ m_k=x^\top W^kx\ \text{の定義}\bigr)\\
+&=\left(x^\top W^bW^ax\right)^2
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=\left(\left(W^bx\right)^\top\left(W^ax\right)\right)^2
+&&\bigl(\because\ (W^b)^\top=W^b\ \text{（}W\text{ は実対称）}\bigr)\\
+&\leq \|W^ax\|^2\,\|W^bx\|^2
+&&\bigl(\because\ \text{半正定値双線型形式の Cauchy--Schwarz の不等式を }P=I\text{ として適用}\bigr)\\
+&=\left(\left(W^ax\right)^\top\left(W^ax\right)\right)
+  \left(\left(W^bx\right)^\top\left(W^bx\right)\right)
+&&\bigl(\because\ \text{ユークリッドノルムの定義}\bigr)\\
+&=\left(x^\top W^aW^ax\right)\left(x^\top W^bW^bx\right)
+&&\bigl(\because\ (W^a)^\top=W^a\ \text{かつ }(W^b)^\top=W^b\ \text{（}W\text{ は実対称）}\bigr)\\
+&=\left(x^\top W^{2a}x\right)\left(x^\top W^{2b}x\right)
+&&\bigl(\because\ \text{冪の指数法則を両因子へ適用}\bigr)\\
+&=m_{2a}\,m_{2b}
+&&\bigl(\because\ m_k=x^\top W^kx\ \text{の定義を両因子へ適用}\bigr)
+\end{aligned}`),
+      paragraph([
         "この 2 式から、任意の ",
         math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
         " について",

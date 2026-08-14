@@ -34254,6 +34254,11 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "正の有理点は Fisher 零点でない" },
     labels: ["claim_positive_rational_not_fisher_zero"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.positiveRational_not_mem_fisherZero",
+      "Ising2DLambda.NecSuf.FisherZero.embedded_nonzero_value_not_mem_zeroSet_necSuf",
+      "Ising2DLambda.FisherZero.positiveRational_not_mem_fisherZero_from_necSuf",
+    ],
     verification: ["sagemath/check/positive-rational-not-fisher-zero"],
     statement: [
       paragraph([

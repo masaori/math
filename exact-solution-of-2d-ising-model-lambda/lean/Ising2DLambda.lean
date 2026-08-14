@@ -560,3 +560,6 @@ import Ising2DLambda.FisherZero.SectorValueDualityFromNecSuf
 import Ising2DLambda.FisherZero.FreeEntropyDualRelation
 import Ising2DLambda.NecSuf.FisherZero.FreeEntropyDualRelation
 import Ising2DLambda.FisherZero.FreeEntropyDualRelationFromNecSuf
+import Ising2DLambda.FisherZero.PositiveRationalNotFisherZero
+import Ising2DLambda.NecSuf.FisherZero.PositiveRationalNotFisherZero
+import Ising2DLambda.FisherZero.PositiveRationalNotFisherZeroFromNecSuf

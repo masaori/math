@@ -967,6 +967,9 @@ targets=(
   Ising2DLambda.FisherZero.freeEntropyDualRelation
   Ising2DLambda.NecSuf.FisherZero.free_entropy_dual_relation_necSuf
   Ising2DLambda.FisherZero.freeEntropyDualRelation_from_necSuf
+  Ising2DLambda.FisherZero.positiveRational_not_mem_fisherZero
+  Ising2DLambda.NecSuf.FisherZero.embedded_nonzero_value_not_mem_zeroSet_necSuf
+  Ising2DLambda.FisherZero.positiveRational_not_mem_fisherZero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
