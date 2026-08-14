@@ -2312,20 +2312,8 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
 = \sigma^z\sum_{n=0}^{\infty}\frac{(-K_2^*)^n}{n!}(\sigma^x)^n
 = \sigma^z\exp\!\left(-K_2^*\sigma^x\right)`,
       ),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp\!\left(K_2^*\sigma^x\right)\sigma^z\exp\!\left(-K_2^*\sigma^x\right)
-&= \sigma^z\exp\!\left(-K_2^*\sigma^x\right)\exp\!\left(-K_2^*\sigma^x\right) \\
-&= \sigma^z\exp\!\left(-2K_2^*\sigma^x\right)
-   \quad (\because \text{可換な行列の exp 積公式}) \\
-&= \sigma^z\left(\cosh(2K_2^*)\sigma^0 - \sinh(2K_2^*)\sigma^x\right)
-   \quad (\because \text{Step 2},\ \cosh(-t)=\cosh t,\ \sinh(-t)=-\sinh t) \\
-&= \cosh(2K_2^*)\,\sigma^z - \sinh(2K_2^*)\,\sigma^z\sigma^x \\
-&= c_2^*\,\sigma^z - i\,s_2^*\,\sigma^y
-\end{aligned}`,
-      ),
       paragraph([
-        "最後の等号では ",
+        "また、",
         math(String.raw`c_2^* = \cosh 2K_2^*,\ s_2^* = \sinh 2K_2^*`),
         "（",
         ref("def_transfer_matrix_symbols"),
@@ -2338,11 +2326,27 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
 = \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
 = \begin{pmatrix}0&1\\-1&0\end{pmatrix}
 = i\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-= i\,\sigma^y`,
+= i\,\sigma^y
+\quad (\because \text{行列の積の成分計算とスカラー倍の定義})`,
       ),
       paragraph([
-        "を用いた。",
+        "を使う。すると",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp\!\left(K_2^*\sigma^x\right)\sigma^z\exp\!\left(-K_2^*\sigma^x\right)
+&= \sigma^z\exp\!\left(-K_2^*\sigma^x\right)\exp\!\left(-K_2^*\sigma^x\right)
+   \quad (\because \text{直前の式 } \exp(K_2^*\sigma^x)\sigma^z = \sigma^z\exp(-K_2^*\sigma^x)) \\
+&= \sigma^z\exp\!\left(-2K_2^*\sigma^x\right)
+   \quad (\because \text{可換な行列の exp 積公式}) \\
+&= \sigma^z\left(\cosh(2K_2^*)\sigma^0 - \sinh(2K_2^*)\sigma^x\right)
+   \quad (\because \text{Step 2},\ \cosh(-t)=\cosh t,\ \sinh(-t)=-\sinh t) \\
+&= \cosh(2K_2^*)\,\sigma^z - \sinh(2K_2^*)\,\sigma^z\sigma^x
+   \quad (\because \text{行列の積の分配則と}\ \sigma^z\sigma^0 = \sigma^z) \\
+&= c_2^*\,\sigma^z - i\,s_2^*\,\sigma^y
+   \quad (\because \text{上で計算した}\ \sigma^z\sigma^x = i\,\sigma^y\ \text{と略記}\ c_2^*,\ s_2^*)
+\end{aligned}`,
+      ),
       paragraph([
         "Step 5: 結論。",
         math(String.raw`K_2^* > 0`),
