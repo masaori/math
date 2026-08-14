@@ -1982,16 +1982,31 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         math(String.raw`S_N^{(\pm)} = S_N \to \left(\exp(\hat{G}^{(\pm)})\right)f`),
         " であり、同一の点列が 2 つの極限 ",
         math(String.raw`\alpha,\beta`),
-        " を持てば、ノルムの三角不等式より任意の ",
-        math(String.raw`N`),
-        " で ",
-        math(String.raw`\|\alpha-\beta\| \leq \|\alpha - S_N\| + \|S_N - \beta\| \to 0`),
-        "、すなわち ",
-        math(String.raw`\|\alpha-\beta\|=0`),
-        " だから ",
-        math(String.raw`\alpha=\beta`),
-        "。よって",
+        " を持てば、ノルムの三角不等式と極限の定義から次の鎖を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&\leq \|\alpha-\beta\|
+&&\left(\because\ \text{ノルムの非負性}\right)\\
+&\leq \|\alpha-S_N\|+\|S_N-\beta\|
+&&\left(\because\ \alpha-\beta=(\alpha-S_N)+(S_N-\beta)\ \text{と三角不等式}\right)\\
+&\longrightarrow 0
+&&\left(\because\ S_N\to\alpha\ \text{かつ}\ S_N\to\beta\right).
+\end{aligned}`,
+      ),
+      paragraph(["したがって次の鎖を得る。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|\alpha-\beta\|
+&=0
+&&\left(\because\ 0\leq\|\alpha-\beta\|\leq\|\alpha-S_N\|+\|S_N-\beta\|\to0\right)\\
+\alpha
+&=\beta
+&&\left(\because\ \|\alpha-\beta\|=0\ \text{なら}\ \alpha-\beta=0\right).
+\end{aligned}`,
+      ),
+      paragraph(["よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \left(\mathbf{end}(V_1)\right)f
@@ -2029,6 +2044,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
           "「線型同型を一つ取る」だけでは Step 3・Step 4 が成立しない。<def_end_iso> を書き換えた理由はそちら参照。",
         "原文の statement は式のみで、両辺が F^{(±)} 上の写像として一致するという意味であることと" +
           "M の範囲が書かれていなかったため明示した（主張の内容自体は変えていない）。",
+        "式変形の書き方の統一（2026-08-14）: 同一の点列の極限の一意性を散文中で圧縮していた箇所を、" +
+          "三角不等式・二つの収束・ノルム零からの一致を一行ずつ根拠付きで示す鎖へ開いた。内容は変えていない。",
       ],
     },
   },
