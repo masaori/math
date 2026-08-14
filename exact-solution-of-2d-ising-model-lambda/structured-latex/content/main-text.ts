@@ -36178,6 +36178,142 @@ Z_L(t)
   },
 
   {
+    id: "thermodynamic_limit_claim_real_log_natural_power",
+    kind: "claim",
+    title: { text: "実対数の自然数冪" },
+    labels: ["claim_real_log_natural_power"],
+    habitat: "R",
+    realEscape:
+      "実対数の値 log_ℝ(u^n) ∈ ℝ について述べるため。使う性質は「実数体への脱出の宣言」に挙げた" +
+      "順序体の性質と ι_{ℚ→ℝ}、「実対数の導入」の乗法を加法へ移す性質、および本文で証明済みの" +
+      "実対数の 1 における値だけであり、狭義単調性・完備性・極限は使わない。",
+    verification: ["sagemath/check/real-log-natural-power"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`u\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}u`),
+        " と、各 ",
+        math(String.raw`n\in\mathbb{N}`),
+        " に対し、",
+        math(
+          String.raw`\log_{\mathbb{R}}\bigl(u^{n}\bigr)=\iota_{\mathbb{Q}\to\mathbb{R}}(n)\cdot\log_{\mathbb{R}}(u)`,
+        ),
+        " である（",
+        math(String.raw`n\in\mathbb{N}\subset\mathbb{Q}`),
+        " なので ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}(n)`),
+        " が確定する。",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " は ",
+        ref("remark_real_field_escape"),
+        "）。左辺が確定すること: 証明の準備により任意の ",
+        math(String.raw`n\in\mathbb{N}`),
+        " で ",
+        math(String.raw`0<_{\mathbb{R}}u^{n}`),
+        "、すなわち ",
+        math(String.raw`u^{n}\in\mathbb{R}_{>0}`),
+        " なので、",
+        math(String.raw`\log_{\mathbb{R}}`),
+        " の定義域（",
+        ref("remark_real_logarithm"),
+        "）に入っている。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 1 つ置く。任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について ",
+        math(String.raw`0<_{\mathbb{R}}u^{k}`),
+        " である。これは指数 ",
+        math(String.raw`k`),
+        " についての帰納法による: 指数が ",
+        math(String.raw`0`),
+        " のとき ",
+        math(String.raw`u^{0}=1`),
+        " であり ",
+        math(String.raw`0<_{\mathbb{R}}1`),
+        "（",
+        ref("remark_real_field_escape"),
+        " に挙げた順序体の性質）。指数が ",
+        math(String.raw`k`),
+        " で成り立つとき、",
+        math(String.raw`u^{k+1}=u^{k}\cdot u`),
+        " は正の元どうしの積なので正である（同、",
+        ref("remark_real_field_escape"),
+        "）。",
+      ]),
+      paragraph([
+        "本体は指数 ",
+        math(String.raw`n`),
+        " についての帰納法による。帰納法は一続きの式変形にできないので、",
+        "指数が ",
+        math(String.raw`0`),
+        " の場合と、指数 ",
+        math(String.raw`k`),
+        " で成り立つと仮定して指数 ",
+        math(String.raw`k+1`),
+        " を示す場合とに分け、それぞれの中の計算を一続きに書く。",
+        "指数が ",
+        math(String.raw`0`),
+        " の場合:",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}\bigl(u^{0}\bigr)
+&=\log_{\mathbb{R}}(1)
+&&(\because\ \text{冪の指数 }0\text{ の約束 }u^{0}=1)\\
+&=0
+&&(\because\ \blkref{claim_real_log_one})\\
+&=0\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \text{零元との積は零元})\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(0)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \text{体準同型は加法単位元を加法単位元へ移す。}\blkref{remark_real_field_escape})
+\end{aligned}`),
+      paragraph([
+        "指数 ",
+        math(String.raw`k\in\mathbb{N}`),
+        " で ",
+        math(
+          String.raw`\log_{\mathbb{R}}\bigl(u^{k}\bigr)=\iota_{\mathbb{Q}\to\mathbb{R}}(k)\cdot\log_{\mathbb{R}}(u)`,
+        ),
+        " が成り立つと仮定した場合:",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}\bigl(u^{k+1}\bigr)
+&=\log_{\mathbb{R}}\bigl(u^{k}\cdot u\bigr)
+&&(\because\ \text{冪の再帰的な約束 }u^{k+1}=u^{k}\cdot u)\\
+&=\log_{\mathbb{R}}\bigl(u^{k}\bigr)+\log_{\mathbb{R}}(u)
+&&(\because\ \text{乗法を加法へ移す性質（}\blkref{remark_real_logarithm}\text{）。}u^{k},u\in\mathbb{R}_{>0}\text{ は準備による})\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(k)\cdot\log_{\mathbb{R}}(u)+\log_{\mathbb{R}}(u)
+&&(\because\ \text{帰納法の仮定})\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(k)\cdot\log_{\mathbb{R}}(u)+1\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \text{乗法単位元})\\
+&=\bigl(\iota_{\mathbb{Q}\to\mathbb{R}}(k)+1\bigr)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \text{分配則。}\blkref{remark_real_field_escape}\text{ に挙げた順序体の性質})\\
+&=\bigl(\iota_{\mathbb{Q}\to\mathbb{R}}(k)+\iota_{\mathbb{Q}\to\mathbb{R}}(1)\bigr)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \text{体準同型は乗法単位元を乗法単位元へ移す。}\blkref{remark_real_field_escape})\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(k+1)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \text{体準同型は加法を保つ }\iota_{\mathbb{Q}\to\mathbb{R}}(k)+\iota_{\mathbb{Q}\to\mathbb{R}}(1)=\iota_{\mathbb{Q}\to\mathbb{R}}(k+1)\text{。}\blkref{remark_real_field_escape})
+\end{aligned}`),
+      paragraph([
+        "以上より、任意の ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。使った実数体の性質は、実数体への脱出の宣言（",
+        ref("remark_real_field_escape"),
+        "）に挙げた順序体の性質と ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        "、実対数の導入（",
+        ref("remark_real_logarithm"),
+        "）の乗法を加法へ移す性質、および実対数の 1 における値（",
+        ref("claim_real_log_one"),
+        "）だけであり、狭義単調性・完備性・極限は使っていない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -36194,9 +36330,7 @@ Z_L(t)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 実対数の自然数冪（",
-          math(String.raw`\log_{\mathbb{R}}(u^{n})=n\cdot\log_{\mathbb{R}}(u)`),
-          "）、自由エネルギー密度の上からの評価（分配多項式の値の上界に実対数を施す）、自由エネルギー密度の極限の存在（完備性を使う。使う形の宣言は済んだ）、零点密度。",
+          "「熱力学極限」の残り: 自由エネルギー密度の上からの評価（分配多項式の値の上界に実対数を施す）、自由エネルギー密度の極限の存在（完備性を使う。使う形の宣言は済んだ）、零点密度。",
         ],
         [
           todo("未着手"),

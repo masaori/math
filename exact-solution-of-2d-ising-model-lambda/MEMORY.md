@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 260 は、レビューで前 tick の「分配多項式の値の上からの評価」の Lean 三本が
+本文と一対一に揃っていることを確認したうえで、本文ブロック
+`claim_partition_value_upper_bound` に lean 宣言（Lean 名の対応付け）が欠けていた欠落を補い、
+前進前に main へ反映した。そのあと「実対数の自然数冪」を記述と SageMath まで進めた。一ブロック:
+`claim_real_log_natural_power`
+（$\log_{\mathbb{R}}(u^{n})=\iota_{\mathbb{Q}\to\mathbb{R}}(n)\cdot\log_{\mathbb{R}}(u)$。
+指数についての帰納法一本。基底は実対数の 1 における値 `claim_real_log_one`、歩みは乗法を加法へ
+移す性質・分配則・体準同型の加法保存だけを使い、狭義単調性・完備性は使わない。自然数倍は
+$\iota_{\mathbb{Q}\to\mathbb{R}}(n)$ を通して書き、記号の濫用を避けた。準備は冪の正値性のみ）。
+SageMath（`sagemath/check/real-log-natural-power/`）は可算側（冪の正値性・分配則・$\iota$ の
+加法保存のモデル）を厳密に、実対数に触れる行だけ ball の整合で検査した（合計 451 件）。
+**Lean は未着手**で、次 tick はこの一片の Lean（具体版・必要十分版・導出）を進める。
+次の本文はその後「自由エネルギー密度の上からの評価」（分配多項式の値の上界に実対数を施し、
+この冪の等式で $L$ に依らない上界へ落とす）。式変形統一は姉妹側の転送行列章の後続から続ける。
+
 2026-08-15 の tick 259 は、レビューで前 tick の「分配多項式の値の上からの評価」の本文と
 SageMath を突き合わせ、四つの準備・五段の不等式鎖・有限標本検査の範囲が一致しているため
 修正不要と確認した。そのあと Lean 具体版 `partitionPolynomial_eval_real_le_upperBound`、

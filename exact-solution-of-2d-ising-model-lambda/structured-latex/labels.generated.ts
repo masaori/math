@@ -180,6 +180,7 @@ export const ALL_LABELS = [
   "claim_rational_square_ne_double_square",
   "claim_rationals_are_real_algebraic",
   "claim_real_algebraic_order_trichotomy",
+  "claim_real_log_natural_power",
   "claim_real_log_one",
   "claim_restriction_family_gluing",
   "claim_root_factor_quotient_value_ne_zero",
