@@ -429,4 +429,143 @@ m_L(F\sigma)
       ]),
     ],
   },
+
+  {
+    id: "galois_bound_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "帰無モデル: Galois 群の上限" },
+    labels: [],
+  },
+
+  {
+    id: "galois_bound_definition_nonfixed_roots",
+    kind: "definition",
+    title: { text: "逆数写像の固定根を除いた根の集合" },
+    labels: ["def_nonfixed_reciprocal_roots"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([
+        "自由境界の分配多項式 ",
+        math(String.raw`Z_L(X)`),
+        " の相異なる根から ",
+        math(String.raw`+1,-1`),
+        " を除いた有限集合を",
+      ]),
+      displayMath(
+        String.raw`R_L=\{\,\alpha\in\overline{\mathbb Q}:Z_L(\alpha)=0,\ \alpha\ne1,\ \alpha\ne-1\,\}`,
+      ),
+      paragraph([
+        "と定める。重複根は一度だけ含める。",
+        math(String.raw`K_L\subset\overline{\mathbb Q}`),
+        " を ",
+        math(String.raw`Z_L(X)`),
+        " の分解体とし、",
+        math(String.raw`G_L=\operatorname{Aut}_{\mathbb Q}(K_L)`),
+        " と置く。これらは代数的数の有限集合・有限次代数拡大・有限置換群に属し、非可算への脱出を含まない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "galois_bound_claim_hyperoctahedral",
+    kind: "claim",
+    title: { text: "Galois 群は逆数対の置換群に埋め込まれる" },
+    labels: ["claim_galois_hyperoctahedral_bound"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([
+        "ある自然数 ",
+        math(String.raw`r_L\in\mathbb N`),
+        " が存在して、",
+        math(String.raw`R_L`),
+        " は ",
+        math(String.raw`r_L`),
+        " 個の互いに交わらない逆数対 ",
+        math(String.raw`\{\alpha,\alpha^{-1}\}`),
+        " の合併である。さらに ",
+        math(String.raw`G_L`),
+        " の各元は逆数対を置換し、各対の中では二元を保つか交換する。したがって、作用による準同型は単射であり、",
+      ]),
+      displayMath(String.raw`G_L\hookrightarrow C_2\wr\mathfrak S_{r_L}`),
+      paragraph([
+        "を得る。右辺は ",
+        math(String.raw`r_L`),
+        " 個の二元対を保つ置換全体、すなわち超八面体群である。根 ",
+        math(String.raw`-1`),
+        " が存在する場合も、それは有理数なので分解体を広げず、この作用から除いてよい。",
+      ]),
+    ],
+    proof: [
+      paragraph(["まず回文性から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+X^{\#E_L}Z_L(X^{-1})
+&=X^{\#E_L}\sum_{m=0}^{\#E_L}\Omega_L(m)X^{-m}
+&& (\because\ \blkref{def_partition_polynomial})\\
+&=\sum_{m=0}^{\#E_L}\Omega_L(m)X^{\#E_L-m}
+&& (\because\ \text{有限和の各項を掛ける})\\
+&=\sum_{m=0}^{\#E_L}\Omega_L(\#E_L-m)X^{\#E_L-m}
+&& (\because\ \blkref{claim_palindrome})\\
+&=Z_L(X)
+&& (\because\ \blkref{def_partition_polynomial}\ \text{の有限和の添字を逆順にする})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となる。定数項は ",
+        math(String.raw`\Omega_L(0)\ge2`),
+        " なので 0 は根でない（",
+        ref("claim_partition_support_endpoints"),
+        "）。よって ",
+        math(String.raw`\alpha`),
+        " が根なら前段の等式へ ",
+        math(String.raw`X=\alpha`),
+        " を代入して ",
+        math(String.raw`Z_L(\alpha^{-1})=0`),
+        " を得る。",
+      ]),
+      paragraph([
+        math(String.raw`R_L`),
+        " では ",
+        math(String.raw`\alpha=\alpha^{-1}`),
+        " なら ",
+        math(String.raw`\alpha^2=1`),
+        "、したがって ",
+        math(String.raw`\alpha\in\{1,-1\}`),
+        " となり定義に反する。ゆえに逆数写像は ",
+        math(String.raw`R_L`),
+        " 上で不動点を持たない対合である。有限集合上の不動点を持たない対合の軌道は相異なる二元集合なので、ある ",
+        math(String.raw`r_L\in\mathbb N`),
+        " に対して主張の逆数対への分割を得る。",
+      ]),
+      paragraph([
+        math(String.raw`g\in G_L`),
+        " と ",
+        math(String.raw`\alpha\in R_L`),
+        " を取る。係数が有理数なので ",
+        math(String.raw`Z_L(g(\alpha))=g(Z_L(\alpha))=0`),
+        " である。また体の自己同型は積と 1 を保つので",
+      ]),
+      displayMath(
+        String.raw`g(\alpha^{-1})g(\alpha)=g(\alpha^{-1}\alpha)=g(1)=1`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`g(\alpha^{-1})=g(\alpha)^{-1}`),
+        " である。ゆえに ",
+        math(String.raw`g`),
+        " は逆数対を逆数対へ送る。これは ",
+        math(String.raw`G_L`),
+        " から超八面体群への準同型を与える。分解体 ",
+        math(String.raw`K_L`),
+        " は全ての根で生成され、除いた根 ",
+        math(String.raw`1,-1`),
+        " は有理数で各自己同型が固定する。したがって ",
+        math(String.raw`R_L`),
+        " の全元を固定する自己同型は ",
+        math(String.raw`K_L`),
+        " の全元を固定し、恒等写像である。よって準同型は単射である。",
+      ]),
+    ],
+  },
 ]);
