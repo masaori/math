@@ -182,6 +182,15 @@ export default defineBlocks([
 \cos(\arctan(x))
 &=
 \cos\left(\arcsin\left(x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}\right)\right)
+&&(\because\ \arctan\ \text{の定義})
+\\
+&=
+\sqrt{
+1-\left(
+\sin\left(\arcsin\left(x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}\right)\right)
+\right)^2
+}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \cos\ \text{の定義})
 \\
 &=
 \sqrt{
@@ -189,27 +198,48 @@ export default defineBlocks([
 x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 \right)^2
 }^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \sin\ \text{は}\ \arcsin\ \text{の逆関数})
+\\
+&=
+\sqrt{1-\frac{x^2}{\left(\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}\right)^2}}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{商の二乗は二乗の商})
 \\
 &=
 \sqrt{1-\frac{x^2}{1+x^2}}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{非負の平方根の二乗はもとの数})
+\\
+&=
+\sqrt{\frac{(1+x^2)-x^2}{1+x^2}}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{通分})
 \\
 &=
 \sqrt{\frac{1}{1+x^2}}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \text{加法逆元}\ x^2-x^2=0)
+\\
+&=
+\frac{\sqrt{1}^{(\mathbb{R}_{\ge 0})}}{\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}}
+&&(\because\ \text{商の平方根は平方根の商})
 \\
 &=
 \frac{1}{\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}}
+&&(\because\ \sqrt{1}=1)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \sin(\arctan(x))
 &=
 \sin\left(\arcsin\left(x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}\right)\right)
+&&(\because\ \arctan\ \text{の定義})
 \\
 &=
 \frac{x}{\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}}
+&&(\because\ \sin\ \text{は}\ \arcsin\ \text{の逆関数})
 \end{aligned}`),
     ],
     conversion: {
       status: "converted",
+      notes: [
+        "2026-08-14 の式変形統一で、根拠なしの圧縮鎖を行末根拠付きの九段・二段の鎖へ開いた（cos(arcsin(·)) の一段を cos の定義と逆関数の二段へ、平方・通分・平方根の商の各操作を一段ずつへ）。内容は変えていない。",
+      ],
     },
   },
   {
