@@ -114,11 +114,11 @@ const cases: Case[] = [
   },
   {
     name: "habitat が想定外の値",
-    // 診断は「"countable" は CountableHabitat | EscapingHabitat に代入できない」と出る。
+    // 診断は「"countably_infinite" は CountableHabitat | EscapingHabitat に代入できない」と出る。
     expect: "Habitat",
     files: (broken) => ({
       "fixture.ts": blocksModule(
-        block({ id: "neg_habitat_value", habitat: broken ? "countable" : "Lambda" }),
+        block({ id: "neg_habitat_value", habitat: broken ? "countably_infinite" : "Lambda" }),
         "defineBlocks",
       ),
     }),

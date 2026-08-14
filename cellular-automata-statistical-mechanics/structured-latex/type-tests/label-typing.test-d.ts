@@ -84,8 +84,8 @@ void defineBlocks([
     id: "type_test_habitat_value",
     kind: "claim",
     labels: [],
-    // @ts-expect-error 住処は宣言済みの値のみ（"countable" のような自由語は書けない）。
-    habitat: "countable",
+    // @ts-expect-error 住処は宣言済みの値のみ（"countably_infinite" のような自由語は書けない）。
+    habitat: "countably_infinite",
     statement: [],
   },
 ]);

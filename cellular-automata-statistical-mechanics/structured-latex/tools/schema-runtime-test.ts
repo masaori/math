@@ -38,7 +38,7 @@ const base = {
 const schemaCases: Case[] = [
   {
     name: "habitat が想定外の値なら拒む",
-    value: { ...base, habitat: "countable" },
+    value: { ...base, habitat: "countably_infinite" },
     expect: /habitat/,
   },
   {

@@ -46,7 +46,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "状態集合" },
     labels: ["def_state_set"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         math(String.raw`A:=\{0,1\}`),
@@ -63,7 +63,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "局所真理値表" },
     labels: ["def_local_truth_table"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "有限集合 ",
@@ -117,7 +117,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "2 元集合の入れ替え写像" },
     labels: ["def_negation_map"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "写像 ",
@@ -151,7 +151,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "一点反転写像" },
     labels: ["def_flip_map"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -189,7 +189,7 @@ x(u) & (u\in S\setminus\{w\})
     kind: "definition",
     title: { text: "本質的依存" },
     labels: ["def_essential_dependency"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -222,7 +222,7 @@ x(u) & (u\in S\setminus\{w\})
     kind: "definition",
     title: { text: "本質的依存台" },
     labels: ["def_essential_dependency_support"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -253,7 +253,7 @@ x(u) & (u\in S\setminus\{w\})
     kind: "claim",
     title: { text: "本質的依存は一点反転の検査と同値である" },
     labels: ["claim_flip_test_equivalence"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -371,7 +371,7 @@ x(u) & (u\in S\setminus\{w\})
     kind: "claim",
     title: { text: "本質的依存台は真理値表から有限回の比較で決定できる" },
     labels: ["claim_support_finite_decidability"],
-    habitat: "N",
+    habitat: "finite",
     statement: [
       paragraph([
         "局所真理値表 ",

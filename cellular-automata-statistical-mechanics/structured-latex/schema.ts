@@ -78,11 +78,20 @@ export type {
 // これを散文の約束事にせず、ブロックの必須フィールドとして型で強制する。
 
 /**
- * 可算側の住処。ℕ ⊂ ℤ ⊂ ℚ ⊂ Λ（対数順序群）、および ℚ̄（代数的数。Λ とは別方向の可算拡大）。
+ * 可算側の住処。有限集合・高々可算集合、ℕ ⊂ ℤ ⊂ ℚ ⊂ Λ（対数順序群）、
+ * および ℚ̄（代数的数。Λ とは別方向の可算拡大）。
  * `"none"` は「数量を扱わないブロック」（方法論的な注意・文書構造上の但し書きなど）。
  * どれも **ℝ/ℂ へ脱出していない**ことを主張する値であり、`realEscape` を書けない。
  */
-export type CountableHabitat = "N" | "Z" | "Q" | "Lambda" | "Qbar" | "none";
+export type CountableHabitat =
+  | "finite"
+  | "countable"
+  | "N"
+  | "Z"
+  | "Q"
+  | "Lambda"
+  | "Qbar"
+  | "none";
 
 /**
  * 非可算側の住処。`"R"` / `"C"` は主要な量そのものが ℝ / ℂ に住む場合、
@@ -95,6 +104,8 @@ export type EscapingHabitat = "R" | "C" | "mixed";
 export type Habitat = CountableHabitat | EscapingHabitat;
 
 const COUNTABLE_HABITATS = [
+  "finite",
+  "countable",
   "N",
   "Z",
   "Q",
@@ -132,7 +143,7 @@ export type Habitation =
 export type Linkage = {
   /**
    * 対応する SageMath 検証ディレクトリのパス
-   * （プロジェクトルート `exact-solution-of-2d-ising-model-lambda/` からの相対）。
+   * （プロジェクトルート `cellular-automata-statistical-mechanics/` からの相対）。
    * 実在するかは `tools/validate-content.ts` が実行時に検査する（型システムは fs を読めない）。
    */
   verification?: readonly string[];
