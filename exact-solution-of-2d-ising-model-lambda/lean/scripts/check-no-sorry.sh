@@ -982,6 +982,10 @@ targets=(
   Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy
   Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference_trichotomy_necSuf
   Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy_from_necSuf
+  Ising2DLambda.FisherZero.realClosedComponents_spec
+  Ising2DLambda.FisherZero.distanceSquaredToRational_eq_zero_iff
+  Ising2DLambda.NecSuf.FisherZero.distanceSquaredOfPair_eq_zero_iff_necSuf
+  Ising2DLambda.FisherZero.distanceSquaredToRational_eq_zero_iff_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

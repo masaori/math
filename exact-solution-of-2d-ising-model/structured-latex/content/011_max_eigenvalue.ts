@@ -757,13 +757,20 @@ e_k^\top W^{2a+1}e_k
         math(String.raw`y \to W^{b}x`),
         " として使うと",
       ]),
-      displayMath(
-        String.raw`\left(m_{a+b+1}\right)^2
-= \left(\left(W^bx\right)^\top W\left(W^ax\right)\right)^2
-\leq \left(\left(W^ax\right)^\top W\left(W^ax\right)\right)
-     \left(\left(W^bx\right)^\top W\left(W^bx\right)\right)
-= m_{2a+1}\,m_{2b+1}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\left(m_{a+b+1}\right)^2
+&=\left(x^\top W^{a+b+1}x\right)^2
+&&\bigl(\because\ m_k=x^\top W^kx\ \text{の定義}\bigr)\\
+&=\left(\left(W^bx\right)^\top W\left(W^ax\right)\right)^2
+&&\bigl(\because\ W^{a+b+1}=W^bWW^a\ \text{（冪の指数法則）と}\ (W^b)^\top=W^b\ \text{（}W\text{ は実対称）}\bigr)\\
+&\leq\left(\left(W^ax\right)^\top W\left(W^ax\right)\right)
+  \left(\left(W^bx\right)^\top W\left(W^bx\right)\right)
+&&\bigl(\because\ \text{半正定値双線型形式の Cauchy--Schwarz の不等式を }P=W\text{ として適用}\bigr)\\
+&=\left(x^\top W^{2a+1}x\right)\left(x^\top W^{2b+1}x\right)
+&&\bigl(\because\ (W^a)^\top=W^a\text{、}(W^b)^\top=W^b\text{ と冪の指数法則}\bigr)\\
+&=m_{2a+1}\,m_{2b+1}
+&&\bigl(\because\ m_k=x^\top W^kx\ \text{の定義を両因子へ適用}\bigr)
+\end{aligned}`),
       paragraph([
         "同様に ",
         ref("psd_cauchy_schwarz"),
@@ -1000,6 +1007,7 @@ c^{n}
         "2026-08-14 の式変形統一で、Step 3 冒頭の比の単調性（三段）と望遠鏡積からの下からの評価（四段）を、それぞれ一続きの根拠付きの鎖へ開いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、半正定値行列の二次形式をトレースで上から評価する計算を、成分表示・二つの Cauchy--Schwarz・有限和の分配則を行末根拠にした八段の一続きの鎖へ開いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、トレース評価の A = W^n への適用（三段）と、単位ベクトル上の上限を取って c^n ≤ tr(W^n) を得る圧縮（三段）を、それぞれ行末根拠付きの鎖へ開いた。内容は変えていない。",
+        "2026-08-14 の式変形統一で、モーメントの対数凸性に使う P = W 版の Cauchy--Schwarz の一行圧縮を、定義・冪の指数法則・実対称性・不等式・定義への復帰の五段へ開いた。内容は変えていない。",
       ],
     },
   },

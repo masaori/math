@@ -91,4 +91,4 @@ check_representation_unique()
 check_dsq_in_R()
 check_zero_iff_equal()
 print("零点と有理点の距離の二乗: 有限標本検査がすべて通過"
-      "（普遍量化された主張の証明は本文が担う。Lean は未着手）", flush=True)
+      "（普遍量化された主張の証明は本文と Lean が担う）", flush=True)

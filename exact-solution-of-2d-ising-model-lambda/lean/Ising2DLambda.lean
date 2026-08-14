@@ -569,3 +569,6 @@ import Ising2DLambda.FisherZero.RealClosedSubfieldFromNecSuf
 import Ising2DLambda.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.NecSuf.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.FisherZero.RealAlgebraicOrderFromNecSuf
+import Ising2DLambda.FisherZero.DistanceSquaredToRational
+import Ising2DLambda.NecSuf.FisherZero.DistanceSquaredToRational
+import Ising2DLambda.FisherZero.DistanceSquaredToRationalFromNecSuf
