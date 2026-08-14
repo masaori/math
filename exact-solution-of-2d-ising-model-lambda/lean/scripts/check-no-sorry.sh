@@ -1000,6 +1000,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.real_nonempty_bddAbove_has_supremum
   Ising2DLambda.ThermodynamicLimit.isFreeEnergyDensityLimit_iff_twoSidedLimitOn
   Ising2DLambda.ThermodynamicLimit.real_upperBoundComplete_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.allPlusConfig_brokenBondCount_eq_zero
+  Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_nonnegative
+  Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_monotone_sum_nonnegative_necSuf
+  Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_nonnegative_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

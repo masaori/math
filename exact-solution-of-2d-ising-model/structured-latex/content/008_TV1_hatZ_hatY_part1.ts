@@ -3032,35 +3032,41 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
       displayMath(
         String.raw`\begin{aligned}
 \left(T_{(V_1^{(\pm)})^{1/2}} \times T_{(V_1^{(\pm)})^{1/2}}\right)(\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)
-&= \left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)}),\ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right) \\
+&= \left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)}),\ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right)
+   \quad (\because \text{直積写像の定義}) \\
 &= \left(
    \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}\cosh(K_1) \\ i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\end{pmatrix},\ \
    \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}-i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
-   \right) \\
+   \right)
+   \quad (\because \text{二つの共役作用の行列表示}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
    \cosh(K_1) & -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\
    i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1) & \cosh(K_1)
    \end{pmatrix}
+   \quad (\because \text{二つの列ベクトルを一つの行列の二列として並べる})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \left(T_{V_2} \times T_{V_2}\right)(\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)
-&= \left(T_{V_2}(\hat{Z}_\mu^{(-)}),\ T_{V_2}(\hat{Y}_\mu)\right) \\
+&= \left(T_{V_2}(\hat{Z}_\mu^{(-)}),\ T_{V_2}(\hat{Y}_\mu)\right)
+   \quad (\because \text{直積写像の定義}) \\
 &= \left(
    \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}\cosh(2K_2^*) \\ -i\sinh(2K_2^*)\end{pmatrix},\ \
    \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}
-   \right) \\
+   \right)
+   \quad (\because \text{二つの共役作用の行列表示}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
    \cosh(2K_2^*) & i\sinh(2K_2^*) \\
    -i\sinh(2K_2^*) & \cosh(2K_2^*)
    \end{pmatrix}
+   \quad (\because \text{二つの列ベクトルを一つの行列の二列として並べる})
 \end{aligned}`,
       ),
       paragraph([

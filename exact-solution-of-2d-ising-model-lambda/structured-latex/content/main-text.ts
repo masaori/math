@@ -35739,6 +35739,7 @@ Z_L(t)
     title: { text: "全て正の定数配位" },
     labels: ["def_constant_plus_configuration"],
     habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.allPlusConfig"],
     verification: ["sagemath/check/free-energy-density-lower-bound"],
     statement: [
       paragraph([
@@ -35774,6 +35775,7 @@ Z_L(t)
     title: { text: "全て正の定数配位の破れボンド数は零である" },
     labels: ["claim_constant_plus_breaks_no_bond"],
     habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.allPlusConfig_brokenBondCount_eq_zero"],
     verification: ["sagemath/check/free-energy-density-lower-bound"],
     statement: [
       paragraph([
@@ -35823,6 +35825,11 @@ b(\sigma_{+})
       "使う性質は「実数体への脱出の宣言」に挙げた順序体の性質と ι_{ℚ→ℝ}、" +
       "「実対数の導入」に挙げた二性質（乗法を加法へ移す・狭義単調）、および本文で証明済みの" +
       "実対数の 1 における値だけであり、完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_nonnegative",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_monotone_sum_nonnegative_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_nonnegative_from_necSuf",
+    ],
     verification: ["sagemath/check/free-energy-density-lower-bound"],
     statement: [
       paragraph([
