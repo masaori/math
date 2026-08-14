@@ -36602,6 +36602,7 @@ Z_L(t)
       "使うのは集合の内包的定義と「実数体への脱出の宣言」に挙げた範囲だけであり、" +
       "完備性はまだ使わない。",
     verification: ["sagemath/check/free-energy-density-supremum"],
+    lean: ["Ising2DLambda.ThermodynamicLimit.freeEnergyDensityValueSet"],
     statement: [
       paragraph([
         "正の実数 ",
@@ -36649,6 +36650,11 @@ Z_L(t)
       "使うのはその一つの形と、順序体の性質、および本文で証明済みの" +
       "自由エネルギー密度の上からの評価だけである。",
     verification: ["sagemath/check/free-energy-density-supremum"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensityValueSet_has_supremum",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.indexedValueSet_has_supremum_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensityValueSet_has_supremum_from_necSuf",
+    ],
     statement: [
       paragraph([
         "各 ",

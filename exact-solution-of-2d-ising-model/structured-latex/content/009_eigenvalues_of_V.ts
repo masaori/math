@@ -1546,7 +1546,8 @@ V' y
 \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} e^{g(\epsilon)}
 &= \prod_{\mu \in \mathcal{I}}
    \left(\exp\!\left(-\tfrac{\gamma(\theta_\mu)}{2}\right)
-   + \exp\!\left(+\tfrac{\gamma(\theta_\mu)}{2}\right)\right) \\
+   + \exp\!\left(+\tfrac{\gamma(\theta_\mu)}{2}\right)\right)
+   \quad \left(\because \text{各 }\epsilon_\mu\in\{0,1\}\text{ の独立な選択による有限積の展開}\right) \\
 &= \prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{\gamma(\theta_\mu)}{2}\right)
    \quad \left(\because \cosh x = \frac{e^x + e^{-x}}{2}\right)
 \end{aligned}`,
@@ -1608,7 +1609,12 @@ V' y
         " を得る。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-15 の式変形統一で、フェルミオン数演算子の積和を指数関数の有限積へ分解する鎖の先頭行に、各二値成分の独立な選択による有限積の展開という行末根拠を補った。内容は変えていない。",
+      ],
+    },
   },
 
   {

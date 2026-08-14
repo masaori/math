@@ -37,7 +37,10 @@
 
 - $L$ の標本は $\{1,2,3\}$、$t$ の標本は正の**有理数** $7$ 点（1 未満・1・1 超えを含む）。
   普遍量化された主張そのものの証明は本文の人手証明が担う。
-- Lean（具体版・必要十分版・導出）は未着手である。
+- Lean 具体版 `freeEnergyDensityValueSet_has_supremum`、必要十分版
+  `indexedValueSet_has_supremum_necSuf`、導出
+  `freeEnergyDensityValueSet_has_supremum_from_necSuf` があり、`lake build` と
+  `scripts/check-no-sorry.sh` の対象に登録している。
 
 ## 実行方法
 
