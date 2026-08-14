@@ -153,6 +153,12 @@ $m\in\{0,\ldots,\#E_L\}$ に対し、係数を取る写像の有限和に対す�
 人手証明の四行と同じ順で形式化した。次の層は Lean 必要十分版である。
 同日の次 tick は着手前レビューで Lean 具体版に不備なしを確認したが、残り時間が足りず
 必要十分版には着手しなかった（レビューのみ）。次 tick が必要十分版を行う。
+2026-08-14 に同セクションの Lean 必要十分版と導出を完了し、四層が揃った
+（`lean/Ising3DCut/NecSuf/NullModel/PartitionCoefficientsNonnegative.lean` と
+`lean/Ising3DCut/NullModel/PartitionCoefficientsNonnegativeFromNecSuf.lean`。検査への登録は計 36 件）。
+必要十分版は点・辺・値 ±1・破れ数を仮定せず、有限型上の自然数値の重み、有限和の上端、
+半環上の水準多項式だけで係数と水準集合の個数の一致を示し、非負性の行だけ整数へ特殊化した。
+次の先頭未完了セクションは「分配多項式の台の両端」で、次の層は記述である。
 
 ## 自動ループ
 
