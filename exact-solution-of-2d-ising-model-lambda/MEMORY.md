@@ -4,6 +4,22 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 256 は、レビューで、前 tick が「補った」と記録した $L\in\mathbb{N}$ の帰属が
+実際には文書冒頭の格子の定義にだけ入っており、「有限系の実自由エントロピー」
+`def_finite_real_free_entropy` と「自由エネルギー密度」`def_free_energy_density` の定義は
+「各 $L\ge1$」のままだったことを見つけ、両ブロックへ帰属を補って前進前に main へ反映した。
+そのあと「自由エネルギー密度の極限の存在」から順序の議論だけで閉じる部分を
+「自由エネルギー密度の下からの評価」として切り出し、記述と SageMath まで進めた。三ブロック:
+`def_constant_plus_configuration`（全て正の定数配位 $\sigma_+$。正値性の証明中の準備を参照可能な
+定義として独立させた）、`claim_constant_plus_breaks_no_bond`（$b(\sigma_+)=0$。可算側 $\mathbb{N}$
+で閉じる四段の鎖）、`claim_free_energy_density_nonnegative`（$0\le_{\mathbb{R}}\psi_L(t)$。準備は
+1 項分離による $1\le_{\mathbb{R}}Z_L(t)$、実対数の 1 における値と狭義単調性による
+$0\le_{\mathbb{R}}\varphi_L(t)$、$0<1/L^2$ の埋め込みの正値性。完備性は使わない）。SageMath
+（`sagemath/check/free-energy-density-lower-bound/`）は可算側を厳密に、実対数に触れる不等式だけ
+ball の分離で検査した（合計 165 件）。**Lean は未着手**で、次 tick はこの三ブロックの Lean
+（具体版・必要十分版・導出）を進める。時間切れで式変形統一は行わなかった。次の式変形統一は
+姉妹側「ホロノミック量子場 p142 下段」のスカラー相殺を含む圧縮行から続ける。
+
 2026-08-14 の tick 255 は、レビューで前 tick の自由エネルギー密度の定義に
 $L\in\mathbb{N}$ の帰属が明記されていない欠落を見つけ、本文へ補って前進前に main へ反映した。
 そのあと「自由エネルギー密度と極限の言明の定式化」の Lean 具体版・必要十分版・導出を完成させ、

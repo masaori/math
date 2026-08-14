@@ -35734,6 +35734,209 @@ Z_L(t)
   },
 
   {
+    id: "thermodynamic_limit_def_constant_plus_configuration",
+    kind: "definition",
+    title: { text: "全て正の定数配位" },
+    labels: ["def_constant_plus_configuration"],
+    habitat: "N",
+    verification: ["sagemath/check/free-energy-density-lower-bound"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " に対し、",
+        math(String.raw`\sigma_{+}:V_L\to\{+1,-1\}`),
+        " を、すべての頂点 ",
+        math(String.raw`v\in V_L`),
+        " に ",
+        math(String.raw`+1`),
+        " を割り当てる定数写像とする。写像なので ",
+        math(String.raw`\sigma_{+}\in\Sigma_L`),
+        " である（",
+        ref("def_configuration"),
+        "）。",
+      ]),
+      paragraph([
+        "これは ",
+        ref("claim_partition_value_positive_at_positive_real"),
+        " の証明の準備で置いた定数写像と同じものである。以後のブロックが参照できるよう、",
+        "ここで定義として独立させる。この定義は有限集合の上の写像だけで書けており、",
+        "実数体を使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_constant_plus_breaks_no_bond",
+    kind: "claim",
+    title: { text: "全て正の定数配位の破れボンド数は零である" },
+    labels: ["claim_constant_plus_breaks_no_bond"],
+    habitat: "N",
+    verification: ["sagemath/check/free-energy-density-lower-bound"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " に対し、",
+        math(String.raw`b(\sigma_{+})=0`),
+        " である（",
+        math(String.raw`\sigma_{+}`),
+        " は ",
+        ref("def_constant_plus_configuration"),
+        "、",
+        math(String.raw`b`),
+        " は ",
+        ref("def_broken_bond_count"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+b(\sigma_{+})
+&=\bigl|\bigl\{\,e\in E_L \;\bigm|\; \sigma_{+}(\partial_0(e))\ne\sigma_{+}(\partial_1(e))\,\bigr\}\bigr|
+&&(\because\ \text{破れボンド数の定義 }\blkref{def_broken_bond_count})\\
+&=\bigl|\bigl\{\,e\in E_L \;\bigm|\; +1\ne+1\,\bigr\}\bigr|
+&&(\because\ \text{任意の }v\in V_L\text{ で }\sigma_{+}(v)=+1\text{。}\blkref{def_constant_plus_configuration})\\
+&=|\varnothing|
+&&(\because\ +1=+1\text{ なので条件を満たす辺の番号は存在しない})\\
+&=0
+&&(\because\ \text{空集合の元の個数})
+\end{aligned}`),
+      paragraph([
+        "この証明は有限集合の数え上げだけで書けており、実数体を使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_free_energy_density_nonnegative",
+    kind: "claim",
+    title: { text: "自由エネルギー密度は非負である" },
+    labels: ["claim_free_energy_density_nonnegative"],
+    habitat: "R",
+    realEscape:
+      "自由エネルギー密度 ψ_L(t) ∈ ℝ を実数の順序で下から評価するため。" +
+      "使う性質は「実数体への脱出の宣言」に挙げた順序体の性質と ι_{ℚ→ℝ}、" +
+      "「実対数の導入」に挙げた二性質（乗法を加法へ移す・狭義単調）、および本文で証明済みの" +
+      "実対数の 1 における値だけであり、完備性・極限は使わない。",
+    verification: ["sagemath/check/free-energy-density-lower-bound"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、各 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " に対し、",
+        math(String.raw`0\le_{\mathbb{R}}\psi_L(t)`),
+        " である（",
+        math(String.raw`\psi_L(t)`),
+        " は ",
+        ref("def_free_energy_density"),
+        "。略記 ",
+        math(String.raw`\le_{\mathbb{R}}`),
+        " は ",
+        ref("remark_real_completeness_escape"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。第一に、任意の ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " について ",
+        math(String.raw`0<_{\mathbb{R}}t^{\,b(\sigma)}`),
+        " である。これは指数 ",
+        math(String.raw`b(\sigma)\in\mathbb{N}`),
+        "（",
+        ref("def_broken_bond_count"),
+        "）についての帰納法による: 指数が ",
+        math(String.raw`0`),
+        " のとき ",
+        math(String.raw`t^{0}=1`),
+        " であり ",
+        math(String.raw`0<_{\mathbb{R}}1`),
+        "（",
+        ref("remark_real_field_escape"),
+        " に挙げた順序体の性質）。指数が ",
+        math(String.raw`k`),
+        " で成り立つとき、",
+        math(String.raw`t^{k+1}=t^{k}\cdot t`),
+        " は正の元どうしの積なので正である（同、",
+        ref("remark_real_field_escape"),
+        "）。",
+      ]),
+      paragraph([
+        "第二に、",
+        math(String.raw`1\le_{\mathbb{R}}Z_L(t)`),
+        " を次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=t^{0}
+&&(\because\ \text{冪の指数 }0\text{ の約束 }t^{0}=1)\\
+&=t^{\,b(\sigma_{+})}
+&&(\because\ b(\sigma_{+})=0\text{。}\blkref{claim_constant_plus_breaks_no_bond})\\
+&\le_{\mathbb{R}}t^{\,b(\sigma_{+})}+\sum_{\sigma\in\Sigma_L\setminus\{\sigma_{+}\}}t^{\,b(\sigma)}
+&&(\because\ \text{加えた和は正の項の有限和なので }0\le_{\mathbb{R}}\text{（準備の第一と、正の元どうしの和は正。}\blkref{remark_real_field_escape}\text{）})\\
+&=\sum_{\sigma\in\Sigma_L}t^{\,b(\sigma)}
+&&(\because\ \sigma_{+}\in\Sigma_L\text{（}\blkref{def_constant_plus_configuration}\text{）なので分離した 1 項を有限和へ戻せる})\\
+&=Z_L(t)
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_partition_polynomial})
+\end{aligned}`),
+      paragraph([
+        "第三に、",
+        math(String.raw`0<_{\mathbb{R}}\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)`),
+        " を次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(0)
+&&(\because\ \text{体準同型は加法単位元を加法単位元へ移す。}\blkref{remark_real_field_escape})\\
+&<_{\mathbb{R}}\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)
+&&(\because\ 0<\tfrac{1}{L^2}\text{（}L\ge1\text{ なので }1\le L^2\text{、正の有理数の逆元は正。可算側 }\mathbb{Q}\text{ の計算）と、}\iota_{\mathbb{Q}\to\mathbb{R}}\text{ が順序を }<_{\mathbb{R}}\text{ へ移すこと（}\blkref{remark_real_field_escape}\text{）})
+\end{aligned}`),
+      paragraph(["本体の式変形は、主張の左辺 ", math(String.raw`0`), " から始める次の一続きである。"]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\log_{\mathbb{R}}(1)
+&&(\because\ \blkref{claim_real_log_one})\\
+&\le_{\mathbb{R}}\log_{\mathbb{R}}\bigl(Z_L(t)\bigr)
+&&(\because\ \text{準備の第二 }1\le_{\mathbb{R}}Z_L(t)\text{。}1=Z_L(t)\text{ なら等号、}1<_{\mathbb{R}}Z_L(t)\text{ なら狭義単調（}\blkref{remark_real_logarithm}\text{）})\\
+&=\varphi_L(t)
+&&(\because\ \text{有限系の実自由エントロピーの定義 }\blkref{def_finite_real_free_entropy})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)\cdot 0
+&&(\because\ \text{零元との積は零元})\\
+&\le_{\mathbb{R}}\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)\cdot\varphi_L(t)
+&&(\because\ \text{上の }0\le_{\mathbb{R}}\varphi_L(t)\text{ と準備の第三。正の元を掛けることは順序と両立する（}\blkref{remark_real_field_escape}\text{）。}0=\varphi_L(t)\text{ なら等号})\\
+&=\psi_L(t)
+&&(\because\ \text{自由エネルギー密度の定義 }\blkref{def_free_energy_density})
+\end{aligned}`),
+      paragraph([
+        "以上より ",
+        math(String.raw`0\le_{\mathbb{R}}\psi_L(t)`),
+        " である。使った実数体の性質は、実数体への脱出の宣言（",
+        ref("remark_real_field_escape"),
+        "）に挙げた順序体の性質と ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        "、実対数の導入（",
+        ref("remark_real_logarithm"),
+        "）に挙げた二性質だけであり、完備性・極限は使っていない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -35750,7 +35953,7 @@ Z_L(t)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 自由エネルギー密度の極限の存在（完備性を使う。使う形の宣言は済んだ）、零点密度。",
+          "「熱力学極限」の残り: 自由エネルギー密度の上からの評価、自由エネルギー密度の極限の存在（完備性を使う。使う形の宣言は済んだ）、零点密度。",
         ],
         [
           todo("未着手"),
