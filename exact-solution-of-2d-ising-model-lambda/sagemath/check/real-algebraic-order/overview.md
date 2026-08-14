@@ -3,7 +3,8 @@
 ## 対象
 
 **対象ラベル**: `claim_rationals_are_real_algebraic`, `claim_neg_one_not_square`,
-`def_real_algebraic_order`
+`def_real_algebraic_strict_order`, `def_real_algebraic_nonstrict_order`,
+`claim_real_algebraic_order_trichotomy`
 
 - 実行日: 2026-08-14
 - 結果: 有限標本検査がすべて通過
@@ -21,7 +22,8 @@
   $q=k\cdot n^{-1}$ を `AA` の中に再構成し、`AA(q)`・`QQbar(q)` と同じ元であること
 - $-1$ は非零元の平方でない（`claim_neg_one_not_square`）: 非零サンプル 7 点で
   $w\cdot w\ne-1$、あわせて $x^2+1$ が `AA` に根を持たないこと
-- 順序の三分法（`def_real_algebraic_order`）: サンプル 8 点の全対 64 組について、
+- 狭義順序と三分法（`def_real_algebraic_strict_order`,
+  `claim_real_algebraic_order_trichotomy`）: サンプル 8 点の全対 64 組について、
   $z:=b-a$ が「$z=0$」「$z=w^2$（$w\ne0$）」「$-z=w^2$（$w\ne0$）」のちょうど 1 つを
   満たすこと（厳密平方根で $w$ を構成）、および定義の $<_R$ がこのモデルで `AA` の
   組み込みの厳密順序と一致すること

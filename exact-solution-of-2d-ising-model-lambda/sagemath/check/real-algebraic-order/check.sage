@@ -1,5 +1,6 @@
 # 対象ラベル: claim_rationals_are_real_algebraic, claim_neg_one_not_square,
-#              def_real_algebraic_order
+#              def_real_algebraic_strict_order, def_real_algebraic_nonstrict_order,
+#              claim_real_algebraic_order_trichotomy
 # QQ・AA・QQbar の厳密計算だけを使う。浮動小数点を使わない。
 # モデル: R = AA（実代数的数体）。有限標本での検査であり、普遍量化された主張
 # そのものの証明ではない（主張の証明は本文の人手証明と Lean が担う）。
@@ -59,7 +60,8 @@ def check_neg_one_not_square():
 
 
 def check_order_trichotomy():
-    # def_real_algebraic_order: a <_R b :⟺ ∃w≠0, b - a = w·w。
+    # def_real_algebraic_strict_order / claim_real_algebraic_order_trichotomy:
+    # a <_R b :⟺ ∃w≠0, b - a = w·w。
     # 各対 (a,b) について「a <_R b」「a = b」「b <_R a」のちょうど 1 つが成り立ち、
     # それが AA の組み込みの厳密順序と一致することを検査する。
     pairs = 0
