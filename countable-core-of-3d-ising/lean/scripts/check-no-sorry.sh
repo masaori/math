@@ -85,6 +85,7 @@ targets=(
   Ising3DCut.NullModel.galoisGroup_embeds_in_pairPermutations
   Ising3DCut.NecSuf.NullModel.embeds_in_pairPermutations
   Ising3DCut.NullModel.galoisGroup_embeds_in_pairPermutations_from_necSuf
+  Ising3DCut.NullModel.rationalPolynomial_eq_of_primeExponentData_eq
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
