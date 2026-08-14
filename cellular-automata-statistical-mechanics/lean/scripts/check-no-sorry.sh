@@ -65,10 +65,19 @@ targets=(
   CellularAutomata.RedundantNeighbor.no_essentialDep_on_added_element
   CellularAutomata.RedundantNeighbor.essentialDep_transfer
   CellularAutomata.RedundantNeighbor.supp_extendRule
+  CellularAutomata.RedundantNeighbor.restrict_baseExtend_from_necessary_sufficient
+  CellularAutomata.RedundantNeighbor.no_essentialDep_on_added_element_from_necessary_sufficient
+  CellularAutomata.RedundantNeighbor.essentialDep_transfer_from_necessary_sufficient
+  CellularAutomata.RedundantNeighbor.supp_extendRule_from_necessary_sufficient
+  CellularAutomata.NecSuf.RedundantNeighbor.restrict_baseExtend
+  CellularAutomata.NecSuf.RedundantNeighbor.no_essentialDep_on_added_element
+  CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_transfer
+  CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_extendRule_iff
 )
 
-tmpfile="$(mktemp /tmp/check-axioms-XXXXXX.lean)"
-trap 'rm -f "$tmpfile"' EXIT
+tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
+tmpfile="$tmpdir/check.lean"
+trap 'rm -f "$tmpfile"; rmdir "$tmpdir"' EXIT
 
 {
   echo "import CellularAutomata"

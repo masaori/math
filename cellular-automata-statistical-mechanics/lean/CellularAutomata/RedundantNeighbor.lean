@@ -23,6 +23,7 @@ supp f ⊆ S を包含写像で Finset T へ写した像との等号として述
 （写像の外延性、部分型の値の等号、有限集合の所属の場合分け）に限る。
 -/
 import CellularAutomata.EssentialDependency
+import CellularAutomata.NecSuf.RedundantNeighbor
 
 namespace CellularAutomata.RedundantNeighbor
 
@@ -126,5 +127,49 @@ theorem supp_extendRule (f : (↥S → State) → State) :
       have : u = ⟨w, hw⟩ := Subtype.ext huw
       exact this ▸ hu
     exact (essentialDep_transfer S f w hw).mpr ((mem_supp_iff f ⟨w, hw⟩).mp this)
+
+omit [Fintype T] in
+/-- 具体版の制限・基準値延長の恒等性が、必要十分版を状態型 `State` と基準値 `zero` に
+    特殊化して得られること。 -/
+theorem restrict_baseExtend_from_necessary_sufficient (x : ↥S → State) :
+    restrict S (baseExtend S x) = x := by
+  exact CellularAutomata.NecSuf.RedundantNeighbor.restrict_baseExtend S State.zero x
+
+omit [Fintype T] in
+/-- 具体版の追加元への非依存が、必要十分版を `State` と `nu` に特殊化して得られること。 -/
+theorem no_essentialDep_on_added_element_from_necessary_sufficient
+    (f : (↥S → State) → State) (w : T) (hw : w ∉ S) :
+    ¬ EssentialDep (extendRule S f) w := by
+  exact CellularAutomata.NecSuf.RedundantNeighbor.no_essentialDep_on_added_element
+    S nu ne_iff_eq_nu f w hw
+
+omit [Fintype T] in
+/-- 具体版の依存移送が、必要十分版を基準値 `zero` に特殊化して得られること。 -/
+theorem essentialDep_transfer_from_necessary_sufficient
+    (f : (↥S → State) → State) (w : T) (hw : w ∈ S) :
+    EssentialDep (extendRule S f) w ↔ EssentialDep f ⟨w, hw⟩ := by
+  exact CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_transfer
+    S State.zero f w hw
+
+/-- 具体版の依存台の等号が、必要十分版の点ごとの同値を有限型 `T` 上で集めることから得られる。 -/
+theorem supp_extendRule_from_necessary_sufficient (f : (↥S → State) → State) :
+    supp (extendRule S f) = (supp f).map (Function.Embedding.subtype (· ∈ S)) := by
+  ext w
+  rw [mem_supp_iff]
+  constructor
+  · intro hdep
+    obtain ⟨hw, hsmall⟩ :=
+      (CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_extendRule_iff
+        S nu ne_iff_eq_nu State.zero f w).mp hdep
+    exact Finset.mem_map.mpr
+      ⟨⟨w, hw⟩, (mem_supp_iff f ⟨w, hw⟩).mpr hsmall, rfl⟩
+  · intro hmem
+    obtain ⟨u, hu, huw⟩ := Finset.mem_map.mp hmem
+    have hw : w ∈ S := huw ▸ u.property
+    have hsmall : EssentialDep f ⟨w, hw⟩ := by
+      have : u = ⟨w, hw⟩ := Subtype.ext huw
+      exact (mem_supp_iff f ⟨w, hw⟩).mp (this ▸ hu)
+    exact (CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_extendRule_iff
+      S nu ne_iff_eq_nu State.zero f w).mpr ⟨hw, hsmall⟩
 
 end CellularAutomata.RedundantNeighbor
