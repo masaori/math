@@ -13,3 +13,6 @@ import Ising3DCut.NullModel.EdgeEndpointParityFromNecSuf
 import Ising3DCut.NullModel.OddFlipInvolution
 import Ising3DCut.NecSuf.NullModel.OddFlipInvolution
 import Ising3DCut.NullModel.OddFlipInvolutionFromNecSuf
+import Ising3DCut.NullModel.OddFlipReversesEdges
+import Ising3DCut.NecSuf.NullModel.OddFlipReversesEdges
+import Ising3DCut.NullModel.OddFlipReversesEdgesFromNecSuf

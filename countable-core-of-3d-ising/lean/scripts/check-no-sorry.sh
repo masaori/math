@@ -63,6 +63,9 @@ targets=(
   Ising3DCut.NecSuf.NullModel.flipOn_bijective
   Ising3DCut.NullModel.oddFlip_oddFlip_from_necSuf
   Ising3DCut.NullModel.oddFlip_bijective_from_necSuf
+  Ising3DCut.NullModel.oddFlip_reverses_edge
+  Ising3DCut.NecSuf.NullModel.flipOn_reverses_edge
+  Ising3DCut.NullModel.oddFlip_reverses_edge_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
