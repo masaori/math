@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 254 は、レビューで前 tick の「実対数と有限系の実自由エントロピー」の
+Lean 三本を本文と突き合わせ、修正不要と確認した。そのあと「熱力学極限」章のセクション
+「自由エネルギー密度の極限」を「自由エネルギー密度と極限の言明の定式化」と
+「自由エネルギー密度の極限の存在」へ割り直し（定式化は宣言済みの順序体の性質だけで書けるが、
+存在の証明は完備性という別の道具を要するため）、前者を記述と SageMath まで進めた。
+三ブロック: `def_free_energy_density`（$\psi_L(t):=\iota_{\mathbb{Q}\to\mathbb{R}}(1/L^2)
+\cdot\varphi_L(t)$。$1/L^2\in\mathbb{Q}$ は可算側で確定させ、実数の除法を使わない）、
+`def_free_energy_density_limit_statement`（$f$ が極限であることの定式化。絶対値を導入せず
+$-\varepsilon<_{\mathbb{R}}\psi_L(t)-f<_{\mathbb{R}}\varepsilon$ の 2 不等式で書く。
+存在はまだ主張しない）、`remark_real_completeness_escape`（完備性への脱出の宣言。使う形を
+「空でなく上に有界な部分集合は上限を持つ」の一つに限る。宣言のみでまだ使わない。
+$\le_{\mathbb{R}}$ の略記の初出もここ）。SageMath（`sagemath/check/free-energy-density/`）は
+可算側と $t=1$ での $\psi_L(1)=\log 2$（$L$ に依らない）を記号計算で厳密に、実対数に触れる
+検査だけ ball 算術で検査した（合計 50 件）。**Lean は未着手**で、次 tick はこの三ブロックの
+Lean（具体版・必要十分版・導出）を進める。式変形統一は締切のためこの tick では行わなかった。
+次の式変形統一は姉妹側「$Z,Y$ から和・スカラー倍・積だけで複素行列がすべて得られる」以降から。
+
 2026-08-14 の tick 253 は、レビューで前 tick の「実対数と有限系の実自由エントロピー」の
 本文と SageMath を突き合わせ、修正不要と確認した。そのあと Lean 具体版
 `realLogarithm_mul`・`realLogarithm_strictMono`・`realLogarithm_one` と有限系の実自由
