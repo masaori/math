@@ -662,15 +662,29 @@ q(t_0)
 &&\bigl(\because\ \text{標準基底 }e_k\text{ による対角成分の表示 }(W^n)_{kk}=e_k^\top W^n e_k\bigr)
 \end{aligned}`),
       paragraph([
-        "Step 1（上からの評価）。",
+        "Step 1（上からの評価）。まず ",
         math(String.raw`n = 2a`),
-        " が偶数なら ",
-        math(String.raw`e_k^\top W^{2a}e_k = (W^a e_k)^\top(W^ae_k) = \|W^ae_k\|^2`),
-        " なので ",
+        " が偶数の場合。各 ",
+        math(String.raw`k`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e_k^\top W^{2a}e_k
+&=(W^a e_k)^\top(W^a e_k)
+&&\bigl(\because\ W^{2a}=W^aW^a\ \text{（冪の指数法則）と}\ (W^a)^\top=W^a\ \text{（}W\text{ は実対称）}\bigr)\\
+&=\|W^a e_k\|^2
+&&\bigl(\because\ \text{ノルムの定義}\bigr)\\
+&\leq \bigl(c^a\,\|e_k\|\bigr)^2
+&&\bigl(\because\ \text{作用素ノルムのレイリー上限評価の}\ a\ \text{回の適用と、非負の両辺の二乗は順序を保つ}\bigr)\\
+&=c^{2a}\,\|e_k\|^2
+&&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=c^{n}
+&&\bigl(\because\ \|e_k\|=1\ \text{と}\ n=2a\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（レイリー上限評価は ",
         ref("rayleigh_bounds_operator_norm"),
-        " より ",
-        math(String.raw`\leq c^{2a}\|e_k\|^2 = c^{n}`),
-        "。",
+        "）。次に ",
         math(String.raw`n = 2a+1`),
         " が奇数なら",
       ]),
