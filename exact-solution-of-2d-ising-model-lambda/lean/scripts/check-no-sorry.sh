@@ -970,6 +970,9 @@ targets=(
   Ising2DLambda.FisherZero.positiveRational_not_mem_fisherZero
   Ising2DLambda.NecSuf.FisherZero.embedded_nonzero_value_not_mem_zeroSet_necSuf
   Ising2DLambda.FisherZero.positiveRational_not_mem_fisherZero_from_necSuf
+  Ising2DLambda.FisherZero.realClosedOmega_pow_four
+  Ising2DLambda.NecSuf.FisherZero.omega_pow_four_of_square_neg_one_necSuf
+  Ising2DLambda.FisherZero.realClosedOmega_pow_four_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

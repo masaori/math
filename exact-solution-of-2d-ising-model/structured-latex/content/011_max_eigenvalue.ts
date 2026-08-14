@@ -806,18 +806,44 @@ e_k^\top W^{2a+1}e_k
         math(String.raw`b := a+1`),
         " と取る。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-k = 2p+1 \ (\text{奇数、} p \in \mathbb{Z}_{\geq 0})
-&: \ (a,b) = (p,\,p+1) \text{ を } P = I \text{ 版へ代入して} \\
-&\qquad m_k^{\,2} = \left(m_{a+b}\right)^2 \leq m_{2a}\,m_{2b}
-= m_{2p}\,m_{2p+2} = m_{k-1}\,m_{k+1} \\
-k = 2p+2 \ (\text{偶数、} p \in \mathbb{Z}_{\geq 0})
-&: \ (a,b) = (p,\,p+1) \text{ を } P = W \text{ 版へ代入して} \\
-&\qquad m_k^{\,2} = \left(m_{a+b+1}\right)^2 \leq m_{2a+1}\,m_{2b+1}
-= m_{2p+1}\,m_{2p+3} = m_{k-1}\,m_{k+1}
-\end{aligned}`,
-      ),
+      paragraph([
+        math(String.raw`k=2p+1`),
+        "（奇数、",
+        math(String.raw`p\in\mathbb{Z}_{\geq0}`),
+        "）の場合は ",
+        math(String.raw`(a,b)=(p,p+1)`),
+        " と取る。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_k^{\,2}
+&=\left(m_{a+b}\right)^2
+&&(\because\ k=2p+1=a+b)\\
+&\leq m_{2a}\,m_{2b}
+&&(\because\ P=I\ \text{版の不等式})\\
+&=m_{2p}\,m_{2p+2}
+&&(\because\ a=p,\ b=p+1)\\
+&=m_{k-1}\,m_{k+1}
+&&(\because\ k=2p+1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k=2p+2`),
+        "（偶数、",
+        math(String.raw`p\in\mathbb{Z}_{\geq0}`),
+        "）の場合も ",
+        math(String.raw`(a,b)=(p,p+1)`),
+        " と取る。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_k^{\,2}
+&=\left(m_{a+b+1}\right)^2
+&&(\because\ k=2p+2=a+b+1)\\
+&\leq m_{2a+1}\,m_{2b+1}
+&&(\because\ P=W\ \text{版の不等式})\\
+&=m_{2p+1}\,m_{2p+3}
+&&(\because\ a=p,\ b=p+1)\\
+&=m_{k-1}\,m_{k+1}
+&&(\because\ k=2p+2)
+\end{aligned}`),
       paragraph([
         "（添字の確認。奇数の場合は ",
         math(String.raw`a+b = p+(p+1) = 2p+1 = k`),
@@ -924,6 +950,7 @@ k = 2p+2 \ (\text{偶数、} p \in \mathbb{Z}_{\geq 0})
       status: "added",
       notes: [
         "この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。c(M) は上限として定義され、上からの評価は rayleigh_bounds_operator_norm、下からの評価はモーメント列の対数凸性による。対角化可能性は正しいが本文にまだ無く、挟み撃ちには不要である。",
+        "2026-08-14 の式変形統一で、Step 2 の対数凸性を任意の k へ移す奇数・偶数の場合分けを、それぞれ四段の一続きの不等式鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
       ],
     },
   },

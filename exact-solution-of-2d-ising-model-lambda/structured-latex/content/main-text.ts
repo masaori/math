@@ -34346,6 +34346,11 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "実閉部分体と虚数単位" },
     labels: ["def_real_closed_subfield"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.realClosedOmega_pow_four",
+      "Ising2DLambda.NecSuf.FisherZero.omega_pow_four_of_square_neg_one_necSuf",
+      "Ising2DLambda.FisherZero.realClosedOmega_pow_four_from_necSuf",
+    ],
     verification: ["sagemath/check/real-closed-subfield"],
     statement: [
       paragraph([

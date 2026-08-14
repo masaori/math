@@ -563,3 +563,6 @@ import Ising2DLambda.FisherZero.FreeEntropyDualRelationFromNecSuf
 import Ising2DLambda.FisherZero.PositiveRationalNotFisherZero
 import Ising2DLambda.NecSuf.FisherZero.PositiveRationalNotFisherZero
 import Ising2DLambda.FisherZero.PositiveRationalNotFisherZeroFromNecSuf
+import Ising2DLambda.FisherZero.RealClosedSubfield
+import Ising2DLambda.NecSuf.FisherZero.RealClosedSubfield
+import Ising2DLambda.FisherZero.RealClosedSubfieldFromNecSuf
