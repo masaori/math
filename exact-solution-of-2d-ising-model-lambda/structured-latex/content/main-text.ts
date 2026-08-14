@@ -34016,6 +34016,219 @@ H^{a,b}_L(q)
   },
 
   {
+    id: "fisher_zero_claim_partition_value_dual_factorization",
+    kind: "claim",
+    title: { text: "分配多項式の値の双対分解" },
+    labels: ["claim_partition_value_dual_factorization"],
+    habitat: "Q",
+    verification: ["sagemath/check/free-entropy-dual-relation"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`q\in\mathbb{Q}_{(0,1)}`),
+        "（",
+        ref("def_unit_interval_rationals"),
+        "）とする。",
+        ref("claim_kw_dual_preserves_unit_interval"),
+        " により ",
+        math(String.raw`\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}`),
+        " である。このとき ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で",
+      ]),
+      displayMath(
+        String.raw`2^{L^2}\cdot Z_L(q)=(1+q)^{2L^2}\cdot
+\Bigl(G^{0,0}_L(\mathrm{KW}(q))+G^{0,1}_L(\mathrm{KW}(q))+G^{1,0}_L(\mathrm{KW}(q))+G^{1,1}_L(\mathrm{KW}(q))\Bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`Z_L`),
+        " は ",
+        ref("def_partition_polynomial"),
+        "、",
+        math(String.raw`G^{a,b}_L`),
+        " は ",
+        ref("def_sector_generating_polynomial"),
+        "。丸括弧は多項式への代入である）。分配多項式の ",
+        math(String.raw`q`),
+        " での値は、双対な点 ",
+        math(String.raw`\mathrm{KW}(q)`),
+        " での四つのセクター生成多項式の値の和で書ける。",
+        "周期正方格子では単一セクターどうしの等式にはならず（",
+        ref("claim_mixed_boundary_duality_identity"),
+        "）、四つの巻き付きセクターの和が現れる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("def_unit_interval_rationals"),
+        " より ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " であり、",
+        ref("claim_kw_dual_preserves_unit_interval"),
+        " より ",
+        math(String.raw`\mathrm{KW}(q)`),
+        " が定義されて ",
+        math(String.raw`\mathbb{Q}`),
+        " の元である。以下の式変形はすべて ",
+        math(String.raw`\mathbb{Q}`),
+        " の等式である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2^{L^2}\cdot Z_L(q)
+&=2^{L^2}\cdot\bigl(2\cdot G^{0,0}_L(q)\bigr)
+&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\ \text{と、代入は環準同型なので積を保つ}\bigr)\\
+&=2^{\,L^2+1}\cdot G^{0,0}_L(q)
+&&\bigl(\because\ \text{積の結合則と冪の指数法則}\ 2^{L^2}\cdot2=2^{L^2+1}\bigr)\\
+&=H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
+&&\bigl(\because\ \blkref{claim_mixed_boundary_duality_identity}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)\\
+&=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
+&&\bigl(\because\ \blkref{claim_sector_value_duality}\ \text{を四つの組}\ (a,b)\ \text{へ同時に適用}\bigr)\\
+&=(1+q)^{2L^2}\cdot\sum_{(a,b)\in\{0,1\}\times\{0,1\}}G^{a,b}_L(\mathrm{KW}(q))
+&&\bigl(\because\ \text{分配則による共通因子の括り出し}\bigr)
+\end{aligned}`),
+      paragraph([
+        "最後の和の四つの元 ",
+        math(String.raw`(0,0),(0,1),(1,0),(1,1)`),
+        " を書き並べたものが主張の右辺である。全過程は有理数の四則と有限和の中で閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_free_entropy_dual_relation",
+    kind: "claim",
+    title: { text: "双対な点どうしの自由エントロピーの関係" },
+    labels: ["claim_free_entropy_dual_relation"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/free-entropy-dual-relation"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`q\in\mathbb{Q}_{(0,1)}`),
+        "（",
+        ref("def_unit_interval_rationals"),
+        "）とする。このとき ",
+        math(String.raw`\Lambda`),
+        "（",
+        ref("def_log_order_group"),
+        "）の中で",
+      ]),
+      displayMath(
+        String.raw`L^2\,\ell_2+\Phi_L(q)=2L^2\,\log(1+q)+
+\log\Bigl(G^{0,0}_L(\mathrm{KW}(q))+G^{0,1}_L(\mathrm{KW}(q))+G^{1,0}_L(\mathrm{KW}(q))+G^{1,1}_L(\mathrm{KW}(q))\Bigr)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\Phi_L`),
+        " は ",
+        ref("def_finite_free_entropy"),
+        "、",
+        math(String.raw`\log`),
+        " は ",
+        ref("def_rational_log"),
+        "）。左辺は ",
+        math(String.raw`q`),
+        " での自由エントロピー、右辺はすべて双対な点 ",
+        math(String.raw`\mathrm{KW}(q)`),
+        " で評価した量と ",
+        math(String.raw`1+q`),
+        " の対数である。すなわち有限系の自由エントロピーの双対関係は、",
+        "実数の対数を使わず ",
+        math(String.raw`\Lambda`),
+        " の等式として成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。証明の中だけで使う略記として、双対な点での四つのセクター生成多項式の値の和を",
+      ]),
+      displayMath(
+        String.raw`S:=G^{0,0}_L(\mathrm{KW}(q))+G^{0,1}_L(\mathrm{KW}(q))+G^{1,0}_L(\mathrm{KW}(q))+G^{1,1}_L(\mathrm{KW}(q))\ \in\ \mathbb{Q}`,
+      ),
+      paragraph([
+        "と置く（各値は ",
+        math(String.raw`\mathbb{Q}`),
+        " の元であり、",
+        math(String.raw`\mathbb{Q}`),
+        " は和で閉じる）。",
+        math(String.raw`\log`),
+        " を適用するために、現れる量がすべて ",
+        math(String.raw`\mathbb{Q}_{>0}`),
+        " の元であることを先に確かめる。",
+        ref("def_unit_interval_rationals"),
+        " より ",
+        math(String.raw`0<q`),
+        " であり、両辺へ ",
+        math(String.raw`1`),
+        " を加えて ",
+        math(String.raw`1<1+q`),
+        "、",
+        math(String.raw`0<1`),
+        " との推移律で ",
+        math(String.raw`0<1+q`),
+        " である。正の有理数の冪は正なので ",
+        math(String.raw`(1+q)^{2L^2}\in\mathbb{Q}_{>0}`),
+        "、また ",
+        math(String.raw`0<2`),
+        " から同じく ",
+        math(String.raw`2^{L^2}\in\mathbb{Q}_{>0}`),
+        " である。",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "（",
+        ref("def_unit_interval_rationals"),
+        "）なので ",
+        ref("claim_value_at_rational_is_positive"),
+        " により ",
+        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+        " であり、正の有理数どうしの積は正なので ",
+        math(String.raw`2^{L^2}\cdot Z_L(q)\in\mathbb{Q}_{>0}`),
+        " である。最後に ",
+        math(String.raw`0<S`),
+        " を背理法で示す。",
+        math(String.raw`S\le0`),
+        " と仮定すると、正の有理数と非正の有理数の積は非正なので ",
+        math(String.raw`(1+q)^{2L^2}\cdot S\le0`),
+        " であるが、",
+        ref("claim_partition_value_dual_factorization"),
+        " により ",
+        math(String.raw`(1+q)^{2L^2}\cdot S=2^{L^2}\cdot Z_L(q)>0`),
+        " なので矛盾する。よって ",
+        math(String.raw`S\in\mathbb{Q}_{>0}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^2\,\ell_2+\Phi_L(q)
+&=L^2\,\ell_2+\log Z_L(q)
+&&\bigl(\because\ \blkref{def_finite_free_entropy}\bigr)\\
+&=L^2\,\log2+\log Z_L(q)
+&&\bigl(\because\ 2\ \text{は素数なので}\ \log2=\ell_2\ \text{（}\blkref{def_rational_log}\text{）}\bigr)\\
+&=\log\bigl(2^{L^2}\bigr)+\log Z_L(q)
+&&\bigl(\because\ \blkref{claim_log_power}\bigr)\\
+&=\log\bigl(2^{L^2}\cdot Z_L(q)\bigr)
+&&\bigl(\because\ \blkref{claim_log_additive}\text{、}2^{L^2},Z_L(q)\in\mathbb{Q}_{>0}\bigr)\\
+&=\log\bigl((1+q)^{2L^2}\cdot S\bigr)
+&&\bigl(\because\ \blkref{claim_partition_value_dual_factorization}\bigr)\\
+&=\log\bigl((1+q)^{2L^2}\bigr)+\log S
+&&\bigl(\because\ \blkref{claim_log_additive}\text{、}(1+q)^{2L^2},S\in\mathbb{Q}_{>0}\bigr)\\
+&=2L^2\,\log(1+q)+\log S
+&&\bigl(\because\ \blkref{claim_log_power}\bigr)
+\end{aligned}`),
+      paragraph([
+        "略記 ",
+        math(String.raw`S`),
+        " を元の四項の和へ戻したものが主張の右辺である。全過程は有理数の四則・順序比較と ",
+        math(String.raw`\Lambda`),
+        " の加法の中で閉じ、実数体も複素数体も実数の対数も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -34030,19 +34243,6 @@ H^{a,b}_L(q)
         "ここに項目を足したら、必ずセクション表にも行を足すこと（足さないと実行の列に並ばず、落ちる）。",
       ]),
       list([
-        [
-          todo("未着手"),
-          "「有限系の自由エントロピー」: 一般の ",
-          math(String.raw`q`),
-          " での ",
-          math(String.raw`\Phi_L(q)`),
-          " の性質。とくに Kramers–Wannier 双対で移り合う 2 点 ",
-          math(String.raw`q`),
-          " と ",
-          math(String.raw`q^{*}`),
-          " での値の関係を書く（双対変換を定義したあとでないと書けないので、",
-          "自己双対点のあとに置く）。",
-        ],
         [
           todo("未着手"),
           "「零点の詰め寄り」: 相転移を ",
