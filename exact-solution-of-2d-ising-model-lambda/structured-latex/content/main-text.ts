@@ -34241,6 +34241,101 @@ L^2\,\ell_2+\Phi_L(q)
   },
 
   {
+    id: "zero_pinching_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "零点の詰め寄り" },
+    labels: [],
+  },
+
+  {
+    id: "zero_pinching_claim_positive_rational_not_fisher_zero",
+    kind: "claim",
+    title: { text: "正の有理点は Fisher 零点でない" },
+    labels: ["claim_positive_rational_not_fisher_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/positive-rational-not-fisher-zero"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        " と ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る。",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体なので（",
+        ref("def_algebraic_numbers"),
+        " の第 1 条件）、",
+        math(String.raw`q`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元でもある。このとき",
+      ]),
+      displayMath(String.raw`q\notin\mathcal{F}_{L}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathcal{F}_{L}`),
+        " は ",
+        ref("def_finite_lattice_fisher_zeros"),
+        "）。すなわち、どの有限格子でも Fisher 零点の集合は正の有理数を 1 つも含まない。",
+        "「零点が正実軸に触れること」として述べる相転移は有限系では起きず、",
+        "格子を大きくしたときの零点の詰め寄りとしてだけ問える。これがこの章の出発点である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("claim_coefficient_representation"),
+        " により ",
+        math(String.raw`Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{m}`),
+        " であり、係数 ",
+        math(String.raw`\Omega_L(m)\in\mathbb{N}`),
+        " は多重度である（",
+        ref("def_multiplicity"),
+        "）。以下の第 1 行は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の等式、以降は ",
+        math(String.raw`\mathbb{Q}`),
+        " の中の言明である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}^{F}_{q}(Z_L)
+&=\sum_{m=0}^{2L^2}\Omega_L(m)\,q^{m}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_evaluation}\text{、係数は }\blkref{claim_coefficient_representation}\bigr)\\
+&=Z_L(q)
+&&\bigl(\because\ \mathbb{Q}\ \text{は}\ \overline{\mathbb{Q}}\ \text{の部分体なので（}\blkref{def_algebraic_numbers}\text{ の第 1 条件）、}\\
+&&&\quad\text{右辺の有限和・積・冪は }\mathbb{Q}\text{ の演算の値と同じ元であり、}\\
+&&&\quad\text{それは代入（環準同型）の値である（}\blkref{def_partition_polynomial}\text{ の約束）}\bigr)\\
+&\in\mathbb{Q}_{>0}
+&&\bigl(\because\ \blkref{claim_value_at_rational_is_positive}\bigr)
+\end{aligned}`),
+      paragraph([
+        "正の有理数は ",
+        math(String.raw`\mathbb{Q}`),
+        " の零元でなく、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の零元は部分体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の零元と同じ元なので（",
+        ref("def_algebraic_numbers"),
+        " の第 1 条件。部分体の零元はもとの体の零元である）、",
+        math(String.raw`\mathrm{Ev}^{F}_{q}(Z_L)\ne0`),
+        " である。ここで ",
+        math(String.raw`q\in\mathcal{F}_{L}`),
+        " と仮定すると、",
+        ref("def_finite_lattice_fisher_zeros"),
+        " により ",
+        math(String.raw`\mathrm{Ev}^{F}_{q}(Z_L)=0`),
+        " となり矛盾する。ゆえに ",
+        math(String.raw`q\notin\mathcal{F}_{L}`),
+        " である。全過程は有理数と代数的数の有限和・有限積・順序比較だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
