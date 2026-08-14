@@ -311,7 +311,7 @@ function renderDocument(inner: string): string {
 % 無言で消えるためである（実測: xeCJK は数式モードに CJK フォントを当てない）。
 \\newcommand{\\blkref}[1]{\\text{\\cref{lab:#1}}}
 
-\\title{2次元 Ising 模型の厳密解 --- $\\Lambda$ と Fisher 零点の立場から${titleVersion}}
+\\title{3 次元 Ising 模型の可算コアを同定する${titleVersion}}
 \\date{}
 
 \\begin{document}

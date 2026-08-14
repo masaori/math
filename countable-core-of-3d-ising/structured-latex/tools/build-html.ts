@@ -235,7 +235,7 @@ const tocHtml = toc
 const html = `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2次元 Ising 模型の厳密解 — Λ と Fisher 零点の立場から</title>
+<title>3 次元 Ising 模型の可算コアを同定する</title>
 <style>${katexCss()}</style>
 <style>
 :root { color-scheme: light dark; --fg:#1a1a1a; --bg:#fff; --muted:#666; --line:#dcdcdc; --panel:#f7f7f7; }
@@ -267,7 +267,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 </style></head><body>
-<h1>2次元 Ising 模型の厳密解 — <span class="math" data-tex="\\Lambda"></span> と Fisher 零点の立場から</h1>
+<h1>3 次元 Ising 模型の可算コアを同定する</h1>
 <p class="version">${escapeHtml(versionLine())}</p>
 <nav><ul>${tocHtml}</ul></nav>
 ${body.join("\n")}

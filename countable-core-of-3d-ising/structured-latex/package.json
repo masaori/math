@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "3次元 Ising 模型の臨界点を有理数の切断として定め、低温側の証拠の存在を未解決問題として立てる証明本体（構造化テキスト）。許される非可算への脱出は格子サイズの熱力学極限だけである。",
+  "description": "3 次元 Ising 模型の有限格子の可算データから、箱の大きさの極限で効く部分と潰れる部分を分離する証明本体（構造化テキスト）。許される非可算への脱出は箱の大きさの極限だけである。",
   "scripts": {
     "gen": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project .",
     "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
