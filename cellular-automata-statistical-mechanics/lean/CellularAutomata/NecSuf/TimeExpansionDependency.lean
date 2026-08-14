@@ -47,13 +47,14 @@ theorem globalFlip_iff_essentialDep
   rw [← essentialDep_iff_flip nu uniqueAlternative (extendRule (N v) (f v)) u]
   exact essentialDep_extendRule_iff (N v) nu uniqueAlternative base (f v) u
 
-/-- 選んだ有限時間集合と舞台の直積として得るイベント集合。 -/
-def eventSet [DecidableEq Time] [Fintype V] [DecidableEq V]
-    (I : Finset Time) : Finset (Time × V) :=
+/-- 選んだ有限時間集合と舞台の直積として得るイベント集合。
+    直積の構成と個数の積の法則に等号判定は要らないので、
+    要るのは選んだ時間集合の有限性（`Finset Time`）と舞台の有限性だけである。 -/
+def eventSet [Fintype V] (I : Finset Time) : Finset (Time × V) :=
   I ×ˢ (Finset.univ : Finset V)
 
 /-- イベント集合の個数は、二つの有限集合の個数の積である。 -/
-theorem card_eventSet [DecidableEq Time] [Fintype V] [DecidableEq V] (I : Finset Time) :
+theorem card_eventSet [Fintype V] (I : Finset Time) :
     (eventSet (V := V) I).card = I.card * Fintype.card V := by
   rw [eventSet, Finset.card_product, Finset.card_univ]
 

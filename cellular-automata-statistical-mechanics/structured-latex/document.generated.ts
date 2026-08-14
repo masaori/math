@@ -21,6 +21,7 @@ import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.gener
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
+import blocks_transitive_closure_antisymmetry from './content/transitive-closure-antisymmetry.ts'
 
 
 
@@ -29,6 +30,7 @@ export type AllBlocks = [
   ...typeof blocks_essential_dependency,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_time_expansion_dependency,
+  ...typeof blocks_transitive_closure_antisymmetry,
 ]
 
 /** 全ノート。 */

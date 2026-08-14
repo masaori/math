@@ -188,6 +188,7 @@ theorem globalFlip_iff_mem_supp_from_necessary_sufficient (u v : V) :
     have hw' : w = ⟨u, hu⟩ := Subtype.ext hwu
     exact ⟨hu, (mem_supp_iff (f v) ⟨u, hu⟩).mp (hw' ▸ hw)⟩
 
+omit [DecidableEq V] in
 /-- イベント集合の個数公式が、必要十分版の有限集合の直積公式に
     `I = [0,τ]` を代入して得られること。 -/
 theorem card_eventSet_from_necessary_sufficient (τ : ℕ) :
