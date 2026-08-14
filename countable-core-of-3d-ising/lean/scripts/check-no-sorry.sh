@@ -82,6 +82,7 @@ targets=(
   Ising3DCut.NullModel.multiplicity_even
   Ising3DCut.NecSuf.NullModel.card_eq_two_mul_of_fixedPointFree_involution
   Ising3DCut.NullModel.multiplicity_even_from_necSuf
+  Ising3DCut.NullModel.galoisGroup_embeds_in_pairPermutations
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero

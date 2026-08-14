@@ -68,6 +68,9 @@ mathlib は 2 次元側と同じ v4.32.1 に固定して `lake build` と検査�
 ## 次回やること
 
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) のセクション台帳が正本である。
+2026-08-15 に「Galois 群の上限」の Lean 具体版を完了した。非固定根上の逆数対合、Galois
+自己同型による根の置換、逆数との可換、根への作用の忠実性を人手証明と同じ順で形式化した。
+次の層は Lean 必要十分版である。
 2026-08-15 の次 tick は着手前レビューで「Galois 群の上限」の SageMath 検証 4 本を再実行して
 すべて通過・不備なしを確認したが、残り時間が足りず Lean 具体版には着手しなかった
 （レビューのみ）。次の tick が「Galois 群の上限」の Lean 具体版を行う。
