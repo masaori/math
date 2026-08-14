@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 228 は、レビューで前 tick の「負の第一係数条件どうしの積」の Lean 三本を
+本文と突き合わせ、修正不要と確認した。そのあと「二つの混合符号条件の積」
+（`claim_quadratic_positive_mul_mixed_signs`）を記述と SageMath まで進めた。
+$\xi$ が負の第二係数条件、$\eta$ が負の第一係数条件を満たす場合で、$u:=-b$、$c':=-a'$ を
+置くと積の表示は $(A,B)=(-(a\cdot c'+2\cdot(u\cdot b')),\ a\cdot b'+u\cdot c')$ で、
+正どうしの積の和から $A<0$（$C:=a\cdot c'+2\cdot(u\cdot b')>0$、$A=-C$）と $0<B$ を得る。
+$D:=a\cdot a-2\cdot(u\cdot u)>0$ を使う中間比較 $D\cdot(c'\cdot c')<D\cdot(2\cdot(b'\cdot b'))$
+を移項し、交差項 $4\cdot((a\cdot c')\cdot(u\cdot b'))$ を両辺へ加えて
+$A\cdot A<2\cdot(B\cdot B)$（負の第一係数条件）へつないだ。場合分けは不要。
+逆順（負の第一 × 負の第二）は「正錐と乗法の両立の組み立て」で積の可換則による転送で
+帰着する予定。SageMath（`sagemath/check/quadratic-positive-mul-mixed-signs/`）は 67308 組で
+各段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの主張の Lean
+（具体版・必要十分版・導出）を完成させる。式変形統一では姉妹側
+「レイリー上限のセクター分解」(3) の直交性 $x_+^\top x_-=0$ の三等号の圧縮を、
+転置の積の法則・射影子の実対称性・$P^{(+)}P^{(-)}=0$・零行列の作用を行末根拠にした
+五段の鎖へ開いた。次の式変形統一は同じ証明の直後にある交叉項消去の計算
+（$x^\top Wx=x_+^\top Wx_++x_-^\top Wx_-$）から続ける。
+
 2026-08-14 の tick 227 は、「負の第一係数条件どうしの積」の Lean 具体版
 `quadraticPositive_mul_of_negativeFirst_negativeFirst`、必要十分版
 `positive_mul_negativeFirst_negativeFirst_necSuf`、導出を完成させ、四層を揃えた。

@@ -1109,8 +1109,19 @@ W P^{(\pm)}
         " も実対称であり、",
       ]),
       displayMath(
-        String.raw`x_+^\top x_- = \left(P^{(+)}x\right)^\top\left(P^{(-)}x\right)
-= x^\top P^{(+)}P^{(-)}x = 0`,
+        String.raw`\begin{aligned}
+x_+^\top x_-
+&= \left(P^{(+)}x\right)^\top\left(P^{(-)}x\right)
+   \quad (\because x_\pm = P^{(\pm)}x \text{ の定義}) \\
+&= x^\top \left(P^{(+)}\right)^\top P^{(-)}x
+   \quad (\because \text{転置の積の法則 } (AB)^\top = B^\top A^\top \text{ と結合則}) \\
+&= x^\top P^{(+)}P^{(-)}x
+   \quad (\because P^{(+)} \text{ は実対称: } (P^{(+)})^\top = P^{(+)}) \\
+&= x^\top\, 0\, x
+   \quad (\because P^{(+)}P^{(-)} = 0) \\
+&= 0
+   \quad (\because \text{零行列の作用})
+\end{aligned}`,
       ),
       paragraph([
         "（",

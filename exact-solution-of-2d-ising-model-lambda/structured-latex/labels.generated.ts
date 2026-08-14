@@ -152,6 +152,7 @@ export const ALL_LABELS = [
   "claim_quadratic_positive_add_nonnegative_negative_first",
   "claim_quadratic_positive_add_nonnegative_negative_second",
   "claim_quadratic_positive_cone_add_closed",
+  "claim_quadratic_positive_mul_mixed_signs",
   "claim_quadratic_positive_mul_negative_first_negative_first",
   "claim_quadratic_positive_mul_negative_second_negative_second",
   "claim_quadratic_positive_mul_nonnegative",
