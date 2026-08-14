@@ -924,21 +924,33 @@ m_n
         " については",
       ]),
       displayMath(
-        String.raw`x^\top A x
-\leq \left(\sum_{k=1}^{d}|x_k|\sqrt{A_{kk}}\right)^2
-\leq \left(\sum_{k=1}^{d}x_k^2\right)\left(\sum_{k=1}^{d}A_{kk}\right)
-= \|x\|^2\,\mathrm{tr}(A)`,
+        String.raw`\begin{aligned}
+x^\top A x
+&=|x^\top A x|
+&&\bigl(\because\ A\text{ は半正定値なので }0\leq x^\top A x\bigr)\\
+&=\left|\sum_{k,l=1}^{d}x_kx_lA_{kl}\right|
+&&\bigl(\because\ \text{行列の積の成分表示}\bigr)\\
+&\leq\sum_{k,l=1}^{d}|x_k|\,|x_l|\,|A_{kl}|
+&&\bigl(\because\ \text{有限和の三角不等式}\bigr)\\
+&\leq\sum_{k,l=1}^{d}|x_k|\,|x_l|\sqrt{A_{kk}A_{ll}}
+&&\bigl(\because\ |A_{kl}|\leq\sqrt{A_{kk}A_{ll}}\bigr)\\
+&=\sum_{k,l=1}^{d}|x_k|\,|x_l|\sqrt{A_{kk}}\sqrt{A_{ll}}
+&&\bigl(\because\ A_{kk},A_{ll}\geq0\text{ と平方根の積の法則}\bigr)\\
+&=\left(\sum_{k=1}^{d}|x_k|\sqrt{A_{kk}}\right)^2
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&\leq\left(\sum_{k=1}^{d}x_k^2\right)\left(\sum_{k=1}^{d}A_{kk}\right)
+&&\bigl(\because\ \mathbb{R}^d\text{ の Cauchy--Schwarz}\bigr)\\
+&=\|x\|^2\,\mathrm{tr}(A)
+&&\bigl(\because\ \text{ノルムとトレースの定義}\bigr).
+\end{aligned}`,
       ),
       paragraph([
-        "が成り立つ（1 つ目の不等号は ",
+        math(String.raw`|A_{kl}|`),
+        " を評価する不等号は ",
         ref("psd_cauchy_schwarz"),
         " による ",
         math(String.raw`|A_{kl}| = |e_k^\top A e_l| \leq \sqrt{A_{kk}A_{ll}}`),
-        " を成分表示 ",
-        math(String.raw`x^\top Ax = \sum_{k,l}x_kx_lA_{kl}`),
-        " に代入したもの、2 つ目は ",
-        math(String.raw`\mathbb{R}^d`),
-        " の Cauchy–Schwarz）。これを ",
+        " の適用である。これを ",
         math(String.raw`A = W^n`),
         " と単位ベクトル ",
         math(String.raw`x`),
@@ -968,6 +980,7 @@ m_n
         "この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。c(M) は上限として定義され、上からの評価は rayleigh_bounds_operator_norm、下からの評価はモーメント列の対数凸性による。対角化可能性は正しいが本文にまだ無く、挟み撃ちには不要である。",
         "2026-08-14 の式変形統一で、Step 2 の対数凸性を任意の k へ移す奇数・偶数の場合分けを、それぞれ四段の一続きの不等式鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、Step 3 冒頭の比の単調性（三段）と望遠鏡積からの下からの評価（四段）を、それぞれ一続きの根拠付きの鎖へ開いた。内容は変えていない。",
+        "2026-08-14 の式変形統一で、半正定値行列の二次形式をトレースで上から評価する計算を、成分表示・二つの Cauchy--Schwarz・有限和の分配則を行末根拠にした八段の一続きの鎖へ開いた。内容は変えていない。",
       ],
     },
   },
