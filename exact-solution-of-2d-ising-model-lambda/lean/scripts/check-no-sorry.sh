@@ -973,6 +973,15 @@ targets=(
   Ising2DLambda.FisherZero.realClosedOmega_pow_four
   Ising2DLambda.NecSuf.FisherZero.omega_pow_four_of_square_neg_one_necSuf
   Ising2DLambda.FisherZero.realClosedOmega_pow_four_from_necSuf
+  Ising2DLambda.FisherZero.rational_mem_realClosedCarrier
+  Ising2DLambda.NecSuf.FisherZero.rational_mem_of_closure_necSuf
+  Ising2DLambda.FisherZero.rational_mem_realClosedCarrier_from_necSuf
+  Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier
+  Ising2DLambda.NecSuf.FisherZero.positive_negative_exclusive_necSuf
+  Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier_from_necSuf
+  Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy
+  Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference_trichotomy_necSuf
+  Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

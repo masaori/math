@@ -34455,6 +34455,11 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "有理数は実代数的数である" },
     labels: ["claim_rationals_are_real_algebraic"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.rational_mem_realClosedCarrier",
+      "Ising2DLambda.NecSuf.FisherZero.rational_mem_of_closure_necSuf",
+      "Ising2DLambda.FisherZero.rational_mem_realClosedCarrier_from_necSuf",
+    ],
     verification: ["sagemath/check/real-algebraic-order"],
     statement: [
       paragraph([
@@ -34553,6 +34558,11 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "零元でない実代数的数の平方は -1 にならない" },
     labels: ["claim_neg_one_not_square"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier",
+      "Ising2DLambda.NecSuf.FisherZero.positive_negative_exclusive_necSuf",
+      "Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier_from_necSuf",
+    ],
     verification: ["sagemath/check/real-algebraic-order"],
     statement: [
       paragraph([
@@ -34610,6 +34620,10 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "実代数的数の狭義順序" },
     labels: ["def_real_algebraic_strict_order"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.realAlgebraicLt",
+      "Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference",
+    ],
     verification: ["sagemath/check/real-algebraic-order"],
     statement: [
       paragraph([
@@ -34647,6 +34661,10 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "実代数的数の広義順序" },
     labels: ["def_real_algebraic_nonstrict_order"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.realAlgebraicLe",
+      "Ising2DLambda.NecSuf.FisherZero.nonstrictOrderOfDifference",
+    ],
     verification: ["sagemath/check/real-algebraic-order"],
     statement: [
       paragraph([
@@ -34676,6 +34694,11 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "実代数的数の狭義順序の三分法" },
     labels: ["claim_real_algebraic_order_trichotomy"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy",
+      "Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference_trichotomy_necSuf",
+      "Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy_from_necSuf",
+    ],
     verification: ["sagemath/check/real-algebraic-order"],
     statement: [
       paragraph([
