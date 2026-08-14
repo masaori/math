@@ -1121,7 +1121,10 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    \quad (\because \text{結合法則とスカラー倍}) \\
 &= Z_j + Z_j\,I
    \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jY_j = I)) \\
+&= Z_j + Z_j
+   \quad (\because \text{単位行列の性質 } Z_j\,I = Z_j) \\
 &= 2Z_j
+   \quad (\because \text{同類項をまとめる})
 \end{aligned}`,
       ),
       paragraph([
@@ -1174,7 +1177,10 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    \quad (\because \text{結合法則とスカラー倍}) \\
 &= Y_m + Y_m\,I
    \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
+&= Y_m + Y_m
+   \quad (\because \text{単位行列の性質 } Y_m\,I = Y_m) \\
 &= 2Y_m
+   \quad (\because \text{同類項をまとめる})
 \end{aligned}`,
       ),
       paragraph([
@@ -1201,7 +1207,8 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= -2Y_M
    \quad (\because \text{直前の displayMath と同じ計算}\ (Y_m, Z_{m+1}) \to (Y_M, Z_1)) \\
-&= 2\left(-Y_M\right) \\
+&= 2\left(-Y_M\right)
+   \quad (\because \text{スカラー倍の符号の整理 } -2Y_M = 2(-Y_M)) \\
 &= 2\,Y_0^{\flat}
    \quad (\because Y_0^{\flat} := -Y_M)
 \end{aligned}`,
@@ -1473,6 +1480,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       notes: [
         "(A)(B) が成り立つ仕組みは反周期性 e^{-iM θ~_μ} = -1 である。整数運動量では e^{-iM θ_μ} = +1 なので、同じ計算をすると境界項の符号が合わず H_1^{(-)} 側でしか閉じない。ここが (+) と (-) を分ける唯一の点である。",
         "M=2,3,4,5 の全 μ について数値で確認済み（sagemath/check/046_claim_even_sector_modes/check_02_commutators.sage）。",
+        "2026-08-15 の式変形統一で、三つの鎖の最終行（= 2Z_j・= 2Y_m・= 2(−Y_M)）に欠けていた行末根拠を補い、単位行列の消去と同類項の統合の圧縮を開いた。内容は変えていない。",
       ],
     },
   },
