@@ -522,14 +522,30 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`\begin{aligned}
--t\langle A,B\rangle &= -\frac{\overline{u}\,u}{\left(\|B\|^2\right)_{\mathbb{C}}}
- = -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}} \\
--\overline{t}\langle B,A\rangle &= -\frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
- = -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}} \\
+-t\langle A,B\rangle
+&= -\frac{\overline{u}\,u}{\left(\|B\|^2\right)_{\mathbb{C}}}
+   \quad (\because t \text{ の定義と } \langle A,B\rangle=u \text{ の代入}) \\
+&= -\frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
+   \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}}) \\
+&= -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと}) \\
+-\overline{t}\langle B,A\rangle
+&= -\frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
+   \quad (\because \overline{t}=u/\left(\|B\|^2\right)_{\mathbb{C}} \text{ と } \langle B,A\rangle=\overline{u} \text{ の代入}) \\
+&= -\frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
+   \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}} \text{ と } \mathbb{C} \text{ の乗法の可換性}) \\
+&= -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと}) \\
 \overline{t}\,t\,\langle B,B\rangle
 &= \frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}\left(\|B\|^2\right)_{\mathbb{C}}}
    \cdot\left(\|B\|^2\right)_{\mathbb{C}}
- = \left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \overline{t},\ t \text{ の定義と } \langle B,B\rangle=\left(\|B\|^2\right)_{\mathbb{C}} \text{ の代入}) \\
+&= \frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
+   \quad (\because \left(\|B\|^2\right)_{\mathbb{C}}\ne 0_{\mathbb{C}} \text{ による約分}) \\
+&= \frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
+   \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}} \text{ と } \mathbb{C} \text{ の乗法の可換性}) \\
+&= \left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
+   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと})
 \end{aligned}`,
       ),
       paragraph(["となり、合わせて"]),
