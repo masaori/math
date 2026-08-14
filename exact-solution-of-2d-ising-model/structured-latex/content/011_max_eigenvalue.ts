@@ -688,10 +688,21 @@ e_k^\top W^{2a}e_k
         math(String.raw`n = 2a+1`),
         " が奇数なら",
       ]),
-      displayMath(
-        String.raw`e_k^\top W^{2a+1}e_k = (W^ae_k)^\top W (W^ae_k)
-\leq c\,\|W^ae_k\|^2 \leq c\cdot c^{2a} = c^{n}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+e_k^\top W^{2a+1}e_k
+&=(W^ae_k)^\top W(W^ae_k)
+&&\bigl(\because\ W^{2a+1}=W^aWW^a\ \text{（冪の指数法則）と}\ (W^a)^\top=W^a\ \text{（}W\text{ は実対称）}\bigr)\\
+&\leq c\,\|W^ae_k\|^2
+&&\bigl(\because\ \text{レイリー商の上限 }c\text{ の定義}\bigr)\\
+&\leq c\,\bigl(c^a\|e_k\|\bigr)^2
+&&\bigl(\because\ \text{作用素ノルムのレイリー上限評価の}\ a\ \text{回の適用と、非負量による乗法は順序を保つ}\bigr)\\
+&=c\cdot c^{2a}\,\|e_k\|^2
+&&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=c^{2a+1}
+&&\bigl(\because\ \|e_k\|=1\ \text{と冪の指数法則}\bigr)\\
+&=c^n
+&&\bigl(\because\ n=2a+1\bigr)
+\end{aligned}`),
       paragraph([
         "（1 つ目の不等号は ",
         ref("def_rayleigh_sup"),
