@@ -38,6 +38,21 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
 commit="$(git -C "$REPO_DIR" rev-parse --short HEAD)"
 agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
 
+# 通知の見出しはプロジェクト README の表題から取る。**固定文字列にすると、ゴール設定が
+# 変わったときに古い名前を通知し続ける**（実測 2026-08-14: 降格した「臨界点の切断」を
+# 名乗り続けていた）。
+title="$(sed -n '1s/^#\{1,\} *//p' "$PROJECT_DIR/README.md")"
+[ -z "$title" ] && title="3 次元 Ising（可算側）"
+
+# リポジトリ名は共有チェックアウトの名前にする。**worktree 名を使うと通知先の分類が壊れる**
+# （このループは専用 worktree で走るので、素朴に basename を取ると worktree 名になる）。
+git_common_dir="$(git -C "$REPO_DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
+if [ -n "$git_common_dir" ]; then
+  repository="$(basename "$(dirname "$git_common_dir")")"
+else
+  repository="$(basename "$REPO_DIR")"
+fi
+
 # その tick が何をしたか。コミットの件名は短いので、台帳の「現在地」の先頭
 # （＝直近の tick の記録）を本文にする。
 summary="$(python3 - "$PROJECT_DIR/docs/tasks/auto-loop-state.md" <<'PYEOF'
@@ -93,12 +108,12 @@ log "OK: 公開した（版 ${commit}）→ $url"
 # **同じ版で二度は送らない**（別経路から呼ばれても重複しないため）。
 NOTIFIED="$LOG_DIR/last-notified-commit"
 if [ "$(cat "$NOTIFIED" 2>/dev/null || true)" != "$commit" ]; then
-  message="3次元 Ising の臨界点の切断（可算側）の自動ループが 1 tick 前進した（版 ${commit}・直近の tick: ${agent}）。
+  message="${title}: 自動ループが 1 tick 前進した（版 ${commit}・直近の tick: ${agent}）。
 ${summary}
 ${url}"
   if curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
       -H "Content-Type: application/json" \
-      --data "$(jq -n --arg message "$message" --arg repository "$(basename "$REPO_DIR")" \
+      --data "$(jq -n --arg message "$message" --arg repository "$repository" \
         '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1; then
     printf '%s' "$commit" > "$NOTIFIED"
   else
