@@ -254,6 +254,7 @@ x(u) & (u\in S\setminus\{w\})
     title: { text: "本質的依存は一点反転の検査と同値である" },
     labels: ["claim_flip_test_equivalence"],
     habitat: "finite",
+    verification: ["sagemath/check/essential-dependency-support"],
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -372,6 +373,7 @@ x(u) & (u\in S\setminus\{w\})
     title: { text: "本質的依存台は真理値表から有限回の比較で決定できる" },
     labels: ["claim_support_finite_decidability"],
     habitat: "finite",
+    verification: ["sagemath/check/essential-dependency-support"],
     statement: [
       paragraph([
         "局所真理値表 ",
