@@ -36496,12 +36496,19 @@ Z_L(t)
         ref("remark_real_field_escape"),
         "）。指数が ",
         math(String.raw`k`),
-        " で成り立つとき ",
-        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(q^{k+1}\bigr)=\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(q^{k}\cdot q\bigr)=\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(q^{k}\bigr)\cdot\iota_{\mathbb{Q}\to\mathbb{R}}(q)=\iota_{\mathbb{Q}\to\mathbb{R}}(q)^{k}\cdot\iota_{\mathbb{Q}\to\mathbb{R}}(q)=\iota_{\mathbb{Q}\to\mathbb{R}}(q)^{k+1}`),
-        "（冪の再帰的な約束、体準同型は乗法を保つこと（",
-        ref("remark_real_field_escape"),
-        "）、帰納法の仮定、再び冪の再帰的な約束）。",
+        " で成り立つときは次の一続きである。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(q^{k+1}\bigr)
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(q^{k}\cdot q\bigr)
+&&(\because\ \text{冪の再帰的な約束 }q^{k+1}=q^k\cdot q)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(q^{k}\bigr)\cdot\iota_{\mathbb{Q}\to\mathbb{R}}(q)
+&&(\because\ \text{体準同型は乗法を保つ（}\blkref{remark_real_field_escape}\text{）})\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(q)^{k}\cdot\iota_{\mathbb{Q}\to\mathbb{R}}(q)
+&&(\because\ \text{帰納法の仮定})\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(q)^{k+1}
+&&(\because\ \text{冪の再帰的な約束})
+\end{aligned}`),
       paragraph([
         "第五に、",
         math(
