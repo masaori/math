@@ -16,7 +16,7 @@ def box_sites(box_side):
 
 
 def inner_edges(box_side):
-    # def_inner_edges: V_L の隣接する二点の組（順序なし）
+    # def_edge_set と def_endpoint_maps: 始点・方向から得る二端点を順序なしの組で列挙
     sites = set(box_sites(box_side))
     edges = set()
     for u in sites:
@@ -99,7 +99,7 @@ def check_broken_complement(box_side):
 
 
 def multiplicities_by_enumeration(box_side):
-    # def_multiplicity: Ω^free_L(m) を全数列挙で数える
+    # def_multiplicity: 自由境界の Ω_L(m) を全数列挙で数える
     edges = inner_edges(box_side)
     multiplicity = {}
     for configuration in all_configurations(box_side):

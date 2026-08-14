@@ -11,7 +11,7 @@
 | 奇数側反転が対合（$T(T\sigma)=\sigma$） | `claim_odd_flip_involution` | $L=1,2$ の全配位 |
 | 各辺の破れの反転（$(T\sigma)(u)\ne(T\sigma)(v)\Leftrightarrow\sigma(u)=\sigma(v)$） | `claim_odd_flip_reverses_edges` | $L=2$ の全配位 × 全 12 辺 |
 | 破れ数の補数（$m(T\sigma)=\#E_L-m(\sigma)$） | `claim_broken_complement` | $L=2$ の全配位 |
-| 多重度の回文性（$\Omega^{\mathrm{free}}_L(m)=\Omega^{\mathrm{free}}_L(\#E_L-m)$） | `claim_palindrome` | 下記 |
+| 多重度の回文性（自由境界の $\Omega_L(m)=\Omega_L(\#E_L-m)$） | `claim_palindrome` | 下記 |
 
 回文性そのものは三通りで確認した。
 
