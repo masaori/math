@@ -69,6 +69,9 @@ targets=(
   Ising3DCut.NullModel.brokenCount_oddFlip
   Ising3DCut.NecSuf.NullModel.card_filter_of_iff_not
   Ising3DCut.NullModel.brokenCount_oddFlip_from_necSuf
+  Ising3DCut.NullModel.multiplicity_palindrome
+  Ising3DCut.NecSuf.NullModel.card_fiber_complement
+  Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
