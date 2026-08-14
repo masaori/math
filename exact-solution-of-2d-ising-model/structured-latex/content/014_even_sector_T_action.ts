@@ -1210,9 +1210,18 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
+&= \frac{1}{0!}\check{Y}_\mu
+   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
+-i\,K_1^{n}\,e^{i\tilde\theta}\,\check{Z}_\mu & (n\text{ 奇数}) \\
+K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h1.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Y}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\tilde\theta}\,\check{Z}_\mu\right)
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h1.y)}) \\
+   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
+   - i\,e^{i\tilde\theta}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
+   \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i e^{i\tilde\theta} \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(K_1)\check{Y}_\mu - i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu
    \quad (\because \sinh, \cosh \text{ のテイラー展開}) \\
 &= -i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
@@ -1222,9 +1231,18 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
+&= \frac{1}{0!}\check{Z}_\mu
+   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
+-i\,(2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 奇数}) \\
+(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h2.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Z}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\check{Y}_\mu\right)
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h2.z)}) \\
+   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Z}_\mu
+   - i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Y}_\mu
+   \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
    \quad (\because \sinh, \cosh \text{ のテイラー展開})
 \end{aligned}`,
@@ -1233,9 +1251,18 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
+&= \frac{1}{0!}\check{Y}_\mu
+   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
+i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
+(2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h2.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Y}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,(2K_2^*)^{n}\,\check{Z}_\mu\right)
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h2.y)}) \\
+   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
+&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Y}_\mu
+   + i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Z}_\mu
+   \quad (\because \check{Z}_\mu, \check{Y}_\mu, i \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(2K_2^*)\check{Y}_\mu + i\sinh(2K_2^*)\check{Z}_\mu
    \quad (\because \sinh, \cosh \text{ のテイラー展開}) \\
 &= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu

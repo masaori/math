@@ -606,3 +606,4 @@ import Ising2DLambda.ThermodynamicLimit.RealSetSupremumUnique
 import Ising2DLambda.NecSuf.ThermodynamicLimit.RealSetSupremumUnique
 import Ising2DLambda.ThermodynamicLimit.RealSetSupremumUniqueFromNecSuf
 import Ising2DLambda.ThermodynamicLimit.OpenRectangle
+import Ising2DLambda.ThermodynamicLimit.OpenRectangleGluing
