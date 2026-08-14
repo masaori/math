@@ -2147,7 +2147,8 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
         String.raw`\begin{aligned}
 Z_m Y_m
 &= \left(\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^z\right)
-   \left(\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^y\right) \\
+   \left(\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^y\right)
+   \quad (\because Z_m,\ Y_m \text{ の定義}) \\
 &= \left(\sigma_1^x\cdots\sigma_{m-1}^x\right)\left(\sigma_1^x\cdots\sigma_{m-1}^x\right)
    \sigma_m^z\sigma_m^y
    \quad (\because \sigma_m^z \text{ は } \sigma_j^x\ (j<m) \text{ と可換}) \\
@@ -2194,7 +2195,8 @@ S_2
         String.raw`\begin{aligned}
 Y_m Z_{m+1}
 &= \left(\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^y\right)
-   \left(\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^x\,\sigma_{m+1}^z\right) \\
+   \left(\sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^x\,\sigma_{m+1}^z\right)
+   \quad (\because Y_m,\ Z_{m+1} \text{ の定義}) \\
 &= \left(\sigma_1^x\cdots\sigma_{m-1}^x\right)^2\,
    \sigma_m^y\sigma_m^x\,\sigma_{m+1}^z
    \quad (\because \text{相異なる因子どうしは可換}) \\
@@ -2313,6 +2315,7 @@ S_1^{(\pm)}
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "iK_1H_1^{(±)} と iK_2^*H_2 が厳密に実対称（成分が実かつ転置不変）であることは、M=2,3,4,5 と両符号について数値的にも残差 0 で確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_01_real_symmetric.sage）。",
+        "2026-08-15 の式変形統一で、Step 1 の Z_mY_m の鎖と Step 2 の Y_mZ_{m+1} の鎖の先頭行（定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
       ],
     },
   },

@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 264 は、レビューで前 tick の「自由エネルギー密度の上からの評価」の Lean 三本
+（具体版・必要十分版・導出）が本文と一対一に揃っていることを確認し（修正無し）、そのあと
+「自由エネルギー密度の極限の存在」から完備性の適用一発で閉じる部分を
+「自由エネルギー密度の値集合の上限の存在」として切り出し、記述と SageMath まで進めた。二ブロック:
+`def_free_energy_density_value_set`（値集合 $\Psi_t=\{\psi_L(t)\mid L\in\mathbb{N},\,L\ge1\}$ の
+内包的定義。量化子を明示）と `claim_free_energy_density_supremum_exists`（$\Psi_t$ は空でなく
+（証人 $L=1$）、上に有界（上界 $M_t$ は上からの評価の右辺で $L$ に依らない）なので、宣言済みの
+完備性「上限の存在」により $\sup\Psi_t\in\mathbb{R}$ が存在する。**完備性を実際に使うのは本文で
+この一箇所が初**であり、realEscape にそれを書いた）。SageMath
+（`sagemath/check/free-energy-density-supremum/`）は非空性の証人を厳密に、上界性を ball の分離で
+厳密に、最小上界の性質は有限部分集合のモデルで検査し、完備性そのものは有限標本では検査できない
+ことを overview に明記した（合計 50 件）。**Lean は未着手**で、次 tick はこの二ブロックの Lean
+（具体版・必要十分版・導出）を進める。残る「自由エネルギー密度の極限の存在」は列が上限へ
+近づくことの証明で、道具（劣加法性・単調性など）は未定。式変形統一では姉妹側
+「$iH$ が実対称であること」（固有値章）の Step 1 の $Z_mY_m$ と Step 2 の $Y_mZ_{m+1}$ の鎖の
+先頭行に定義適用の行末根拠を補った。次の統一は同じ固有値章の残り（フェルミオン数演算子の積和の
+指数関数の因子分解の鎖の先頭行、`009_eigenvalues_of_V.ts` 1547 行付近）から続ける。
+
 2026-08-15 の tick 263 は、「自由エネルギー密度の上からの評価」の Lean 具体版
 `freeEnergyDensity_le_upperBound`、必要十分版 `scaled_map_upperBound_necSuf`、導出
 `freeEnergyDensity_le_upperBound_from_necSuf` を完成させ、四層を揃えた。具体版は本文の
