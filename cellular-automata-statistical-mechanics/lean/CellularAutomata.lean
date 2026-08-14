@@ -5,3 +5,4 @@ import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.RedundantNeighbor
 import CellularAutomata.TimeExpansionDependency
+import CellularAutomata.TransitiveClosureAntisymmetry

@@ -92,6 +92,15 @@ targets=(
   CellularAutomata.TimeExpansionDependency.globalFlip_iff_mem_supp_from_necessary_sufficient
   CellularAutomata.TimeExpansionDependency.card_eventSet_from_necessary_sufficient
   CellularAutomata.TimeExpansionDependency.time_strictly_increases_from_necessary_sufficient
+  CellularAutomata.TransitiveClosureAntisymmetry.path_time_strictly_increases
+  CellularAutomata.TransitiveClosureAntisymmetry.reachable_subset_event_product
+  CellularAutomata.TransitiveClosureAntisymmetry.reachable_finite
+  CellularAutomata.TransitiveClosureAntisymmetry.oneStep_subset_reachable
+  CellularAutomata.TransitiveClosureAntisymmetry.reachable_transitive
+  CellularAutomata.TransitiveClosureAntisymmetry.reachable_minimal
+  CellularAutomata.TransitiveClosureAntisymmetry.no_mutual_reachability
+  CellularAutomata.TransitiveClosureAntisymmetry.reachable_irreflexive
+  CellularAutomata.TransitiveClosureAntisymmetry.reflReachable_partial_order
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
