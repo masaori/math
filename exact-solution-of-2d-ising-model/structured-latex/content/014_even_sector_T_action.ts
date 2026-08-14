@@ -242,7 +242,8 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
 \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^2
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)} + \tfrac{i}{2}K_1H_1^{(+)}\right)
    \quad (\because \text{theorem\_exp\_product}) \\
-&= \exp\!\left(iK_1H_1^{(+)}\right) \\
+&= \exp\!\left(iK_1H_1^{(+)}\right)
+   \quad (\because \text{同類項 } \tfrac{i}{2}K_1H_1^{(+)} \text{ の加法}) \\
 &= V_1^{(+)}
    \quad (\because \text{def\_V1\_pm})
 \end{aligned}`,
