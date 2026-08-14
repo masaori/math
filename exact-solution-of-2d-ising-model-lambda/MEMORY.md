@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 270 は、レビューで前 tick の「開境界長方形の分配多項式」の五定義と
+SageMath（108 件）が一致していることを確認し（修正無し）、そのあと Lean 具体版
+`lean/Ising2DLambda/ThermodynamicLimit/OpenRectangle.lean` を完成させ、セクションを完了した。
+五定義（`OpenVertex`・`OpenEdgeH/V/OpenEdge` と端点写像 `openBoundary0/1`・`OpenConfig`・
+`openBrokenBondSet/openBrokenBondCount`・`openPartitionPolynomial`）を人手証明と 1 対 1 に写し
+（`Fin a × Fin b` が本文の「$i<a$ かつ $j<b$ の $(i,j)\in\mathbb{N}\times\mathbb{N}$」の直訳、
+向きの印を付けた直和は直和型 `⊕`、剰余類は使わない）、数え上げ補題 4 件
+（頂点数 $ab$・辺数 $a(b-1)+(a-1)b$・配位数 $2^{ab}$・破れボンド数の上界）を sorry 検査へ
+登録した（972 件、すべて sorryAx 非依存）。**定義ブロックには主張が無いので、必要十分版・導出は
+付けない**（周期境界の定義 4 件と同じ扱い。tick 3 の前例に従う）。式変形統一では姉妹側
+「$\check Z,\check Y$ についての $n$ 重交換子」（`evensectorT_002_claim_nesting_commutator`）の
+八つの帰納法の鎖へ、先頭行（定義と帰納法の仮定の代入）と最終行（スカラー倍の交換）の行末根拠を
+補い、二重等号の行を一行一等号へ開いた。次の本文は「開境界長方形の接合不等式」
+（横または縦に接ぐときの積との比較）、次の統一は同じ偶セクター章の後続から続ける。
+
 2026-08-15 の tick 269 は、レビューで前 tick の「上限の一意性」の本文・SageMath・Lean 三本が
 同じ論法を辿っていることを確認した（修正無し）。そのあと「自由エネルギー密度の極限の存在」を、
 開境界長方形の分配多項式・長方形の接合不等式・周期境界との差の境界評価・極限の導出へ割り直した。
