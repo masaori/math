@@ -37072,6 +37072,7 @@ Z_L(t)
     title: { text: "開境界長方形の頂点集合" },
     labels: ["def_open_rectangle_vertices"],
     habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.OpenVertex"],
     verification: ["sagemath/check/open-rectangle-partition-polynomial"],
     statement: [
       paragraph([
@@ -37100,6 +37101,13 @@ Z_L(t)
     title: { text: "開境界長方形の辺集合" },
     labels: ["def_open_rectangle_edges"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.OpenEdgeH",
+      "Ising2DLambda.ThermodynamicLimit.OpenEdgeV",
+      "Ising2DLambda.ThermodynamicLimit.OpenEdge",
+      "Ising2DLambda.ThermodynamicLimit.openBoundary0",
+      "Ising2DLambda.ThermodynamicLimit.openBoundary1",
+    ],
     verification: ["sagemath/check/open-rectangle-partition-polynomial"],
     statement: [
       paragraph([
@@ -37145,6 +37153,7 @@ Z_L(t)
     title: { text: "開境界長方形の配位" },
     labels: ["def_open_rectangle_configuration"],
     habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.OpenConfig"],
     verification: ["sagemath/check/open-rectangle-partition-polynomial"],
     statement: [
       paragraph([
@@ -37171,6 +37180,10 @@ Z_L(t)
     title: { text: "開境界長方形の破れボンド数" },
     labels: ["def_open_rectangle_broken_bond_count"],
     habitat: "N",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openBrokenBondSet",
+      "Ising2DLambda.ThermodynamicLimit.openBrokenBondCount",
+    ],
     verification: ["sagemath/check/open-rectangle-partition-polynomial"],
     statement: [
       paragraph([
@@ -37204,6 +37217,7 @@ Z_L(t)
     title: { text: "開境界長方形の分配多項式" },
     labels: ["def_open_rectangle_partition_polynomial"],
     habitat: "Z",
+    lean: ["Ising2DLambda.ThermodynamicLimit.openPartitionPolynomial"],
     verification: ["sagemath/check/open-rectangle-partition-polynomial"],
     statement: [
       paragraph([
@@ -37249,7 +37263,7 @@ x^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb{Z}[x]`),
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 開境界長方形の分配多項式の Lean 検証、長方形の接合不等式、" +
+          "「熱力学極限」の残り: 長方形の接合不等式、" +
             "周期境界との差の境界評価、それらによる自由エネルギー密度の極限の存在、零点密度。",
         ],
         [

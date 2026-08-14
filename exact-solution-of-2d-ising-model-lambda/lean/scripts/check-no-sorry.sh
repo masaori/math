@@ -1024,6 +1024,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.realSetSupremum_unique
   Ising2DLambda.NecSuf.ThermodynamicLimit.leastUpperBound_unique_necSuf
   Ising2DLambda.ThermodynamicLimit.realSetSupremum_unique_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.card_openVertex
+  Ising2DLambda.ThermodynamicLimit.card_openEdge
+  Ising2DLambda.ThermodynamicLimit.card_openConfig
+  Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_le
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
