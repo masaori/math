@@ -75,6 +75,9 @@ targets=(
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
   Ising3DCut.NecSuf.NullModel.one_le_card_fiber
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero_from_necSuf
+  Ising3DCut.NullModel.periodicMultiplicity_full_eq_zero
+  Ising3DCut.NecSuf.NullModel.no_odd_cycle_all_opposite
+  Ising3DCut.NullModel.periodicMultiplicity_full_eq_zero_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

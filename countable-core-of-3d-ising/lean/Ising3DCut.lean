@@ -25,3 +25,6 @@ import Ising3DCut.NullModel.MultiplicityPalindromeFromNecSuf
 import Ising3DCut.NullModel.PeriodicConstantUnbroken
 import Ising3DCut.NecSuf.NullModel.PeriodicConstantUnbroken
 import Ising3DCut.NullModel.PeriodicConstantUnbrokenFromNecSuf
+import Ising3DCut.NullModel.OddPeriodicCycle
+import Ising3DCut.NecSuf.NullModel.OddPeriodicCycle
+import Ising3DCut.NullModel.OddPeriodicCycleFromNecSuf
