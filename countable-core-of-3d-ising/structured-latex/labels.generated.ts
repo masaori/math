@@ -38,7 +38,9 @@ export const ALL_LABELS = [
   "def_reachable_set",
   "def_separating_set",
   "def_site_set",
+  "remark_demoted_positioning",
   "remark_escape_policy",
+  "remark_known_defects",
   "remark_not_claimed",
   "remark_open_problem_coverage",
 ] as const

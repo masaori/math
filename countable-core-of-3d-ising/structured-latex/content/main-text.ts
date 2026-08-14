@@ -17,6 +17,31 @@ import { defineBlocks, displayMath, list, math, paragraph, ref, todo } from "../
 
 export default defineBlocks([
   {
+    id: "positioning_remark_demoted_target",
+    kind: "remark",
+    title: { text: "この文書の位置づけ（降格した従属標的）" },
+    labels: ["remark_demoted_positioning"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        "この文書の以下の全章は、プロジェクトが当初本体に据えていた枠組み",
+        "「有限の証拠で臨界点の切断を定める」に属する。この枠組みは、",
+        "有限の証拠と模型を結ぶ定理（有限の箱ごとの主張の族から、許される唯一の脱出である",
+        "箱の大きさの極限を一回だけ使って無限体積の言明へ渡す定理。健全性の橋と呼ぶ）が",
+        "無いまま置かれているため、従属標的へ降格した。",
+        "橋が架かるまで、この文書の主張は証拠の存在で定義された有理数の集合についての主張であり、",
+        "模型の相転移と結びついていない。",
+      ]),
+      paragraph([
+        "プロジェクトの主標的は可算コアの同定（有限格子の可算データの上で、極限で効く部分と",
+        "極限で潰れる部分を分離すること）へ移した。既知の欠陥は低温側の証拠の章の冒頭の注記",
+        ref("remark_known_defects"),
+        " に列挙する。個々の定義と証明済みの主張はその範囲では正しいので、そのまま残す。",
+      ]),
+    ],
+  },
+
+  {
     id: "finite_box_heading",
     kind: "heading",
     level: 1,
@@ -1080,6 +1105,63 @@ a(e)+\frac12\varepsilon_{i(e)}
     level: 1,
     title: { text: "低温側の証拠" },
     labels: [],
+  },
+
+  {
+    id: "low_temperature_certificate_remark_known_defects",
+    kind: "remark",
+    title: { text: "この章の既知の欠陥（直すまで本体へ戻さない）" },
+    labels: ["remark_known_defects"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        "この章の枠組みには、",
+        ref("remark_demoted_positioning"),
+        " で述べた健全性の橋の不在に加えて、次の三つの欠陥があることが分かっている",
+        "（2026-08-13 の外部レビューによる。経緯は方針文書",
+        "「有限の証拠で臨界点の切断を定める」に記録してある）。",
+      ]),
+      list([
+        [
+          "観測点が箱の角にある。",
+          ref("def_box"),
+          " は箱を ",
+          math(String.raw`0\le u_i\le L-1`),
+          " と置き、観測点である原点 ",
+          math(String.raw`o=(0,0,0)`),
+          " は三つの座標方向すべてで箱の境界に接している。境界の影響が支配的で、",
+          "箱の内部の点についての量になっていない。箱を原点について対称に取り直すか、",
+          "観測点と境界の隔たりが箱とともに増える形へ直す必要がある。",
+        ],
+        [
+          "証拠の定義が有限の検査になっていない。",
+          ref("def_low_temperature_certificate"),
+          " の二つ目の条件は、すべての整数 ",
+          math(String.raw`L\ge1`),
+          " とすべての自然数 ",
+          math(String.raw`n`),
+          " にわたる主張（",
+          ref("claim_minimal_separating_growth"),
+          "。未証明）であり、有限個の演算で判定できない。数え上げの上界は具体的な定数を持つ",
+          "一度きりの定理として分離し、証拠の判定は有理数の不等式だけにする必要がある。",
+          "分離するまで、",
+          ref("def_low_temperature_rational_points"),
+          " の集合が空でないことも示せていない。",
+        ],
+        [
+          "上界が低温側を特徴づけていない。",
+          ref("claim_certificate_gives_uniform_bound"),
+          " の上界 ",
+          math(String.raw`\tfrac12`),
+          " は、証拠の付かない有理数の側でも同じ値が上界になりうる形であり、",
+          "低温側だけを切り出せていない。有理数の隔たり ",
+          math(String.raw`\delta>0`),
+          " を伴う ",
+          math(String.raw`\tfrac12-\delta`),
+          " 以下の形の上界が要る。",
+        ],
+      ]),
+    ],
   },
 
   {
