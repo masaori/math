@@ -337,14 +337,23 @@ x^\top W x
         math(String.raw`(V_2)_{\iota(\mu),\iota(\mu')} = \exp\!\left(\sum_{m}K_2\,\mu(m)\mu'(m)\right)`),
         " であり、指数は実数なので値は正である。",
       ]),
-      paragraph([
-        "Step 3。行列の積の定義と Step 1 の対角性より、和のうち残るのは 1 項だけで",
-      ]),
+      paragraph(["Step 3。"]),
       displayMath(
-        String.raw`W_{\iota(\mu),\iota(\mu')}
-= \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}
-  \left(V_2\right)_{\iota(\mu),\iota(\mu')}
-  \left(V_1^{1/2}\right)_{\iota(\mu'),\iota(\mu')}`,
+        String.raw`\begin{aligned}
+W_{\iota(\mu),\iota(\mu')}
+&= \left(V_1^{1/2}\,V_2\,V_1^{1/2}\right)_{\iota(\mu),\iota(\mu')}
+   \quad (\because W = V_1^{1/2}V_2V_1^{1/2}) \\
+&= \sum_{j=1}^{2^M}\sum_{k=1}^{2^M}
+   \left(V_1^{1/2}\right)_{\iota(\mu),j}\left(V_2\right)_{j,k}\left(V_1^{1/2}\right)_{k,\iota(\mu')}
+   \quad (\because \text{行列の積の定義}) \\
+&= \sum_{k=1}^{2^M}
+   \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}\left(V_2\right)_{\iota(\mu),k}\left(V_1^{1/2}\right)_{k,\iota(\mu')}
+   \quad (\because \text{Step 1 の対角性で } j\neq\iota(\mu)\ \text{の項は } 0) \\
+&= \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}
+   \left(V_2\right)_{\iota(\mu),\iota(\mu')}
+   \left(V_1^{1/2}\right)_{\iota(\mu'),\iota(\mu')}
+   \quad (\because \text{Step 1 の対角性で } k\neq\iota(\mu')\ \text{の項は } 0)
+\end{aligned}`,
       ),
       paragraph([
         "3 つの因子はいずれも正の実数なので、積も正である。",
