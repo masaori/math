@@ -936,6 +936,25 @@ targets=(
   Ising2DLambda.FisherZero.quadraticPositiveCone_mul_mem
   Ising2DLambda.NecSuf.FisherZero.positive_cone_mul_closed_necSuf
   Ising2DLambda.FisherZero.quadraticPositiveCone_mul_mem_from_necSuf
+  Ising2DLambda.FisherZero.selfDualRootPlus_mem
+  Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf
+  Ising2DLambda.FisherZero.selfDualRootPlus_mem_from_necSuf
+  Ising2DLambda.FisherZero.selfDualRootPlus_representation
+  Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf
+  Ising2DLambda.FisherZero.selfDualRootPlus_representation_from_necSuf
+  Ising2DLambda.FisherZero.selfDualRootMinus_mem
+  Ising2DLambda.FisherZero.selfDualRootMinus_mem_from_necSuf
+  Ising2DLambda.FisherZero.selfDualRootMinus_representation
+  Ising2DLambda.FisherZero.selfDualRootMinus_representation_from_necSuf
+  Ising2DLambda.FisherZero.selfDualRootPlus_mem_positiveCone
+  Ising2DLambda.NecSuf.FisherZero.positive_of_representation_necSuf
+  Ising2DLambda.FisherZero.selfDualRootPlus_mem_positiveCone_from_necSuf
+  Ising2DLambda.FisherZero.selfDualRootMinus_not_mem_positiveCone
+  Ising2DLambda.NecSuf.FisherZero.not_positive_of_representation_necSuf
+  Ising2DLambda.FisherZero.selfDualRootMinus_not_mem_positiveCone_from_necSuf
+  Ising2DLambda.FisherZero.selfDualPositiveRoot_unique
+  Ising2DLambda.NecSuf.FisherZero.positive_root_unique_necSuf
+  Ising2DLambda.FisherZero.selfDualPositiveRoot_unique_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

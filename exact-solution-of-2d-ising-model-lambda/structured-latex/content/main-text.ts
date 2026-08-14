@@ -33188,6 +33188,11 @@ A\cdot A
     labels: ["claim_self_dual_root_plus_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualRootPlus_mem",
+      "Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf",
+      "Ising2DLambda.FisherZero.selfDualRootPlus_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33240,6 +33245,11 @@ A\cdot A
     labels: ["claim_self_dual_root_plus_representation"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualRootPlus_representation",
+      "Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf",
+      "Ising2DLambda.FisherZero.selfDualRootPlus_representation_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33282,6 +33292,11 @@ A\cdot A
     labels: ["claim_self_dual_root_minus_mem"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualRootMinus_mem",
+      "Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf",
+      "Ising2DLambda.FisherZero.selfDualRootMinus_mem_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33334,6 +33349,11 @@ A\cdot A
     labels: ["claim_self_dual_root_minus_representation"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualRootMinus_representation",
+      "Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf",
+      "Ising2DLambda.FisherZero.selfDualRootMinus_representation_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33376,6 +33396,11 @@ A\cdot A
     labels: ["claim_self_dual_root_plus_positive"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualRootPlus_mem_positiveCone",
+      "Ising2DLambda.NecSuf.FisherZero.positive_of_representation_necSuf",
+      "Ising2DLambda.FisherZero.selfDualRootPlus_mem_positiveCone_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33442,6 +33467,11 @@ a\cdot a
     labels: ["claim_self_dual_root_minus_not_positive"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualRootMinus_not_mem_positiveCone",
+      "Ising2DLambda.NecSuf.FisherZero.not_positive_of_representation_necSuf",
+      "Ising2DLambda.FisherZero.selfDualRootMinus_not_mem_positiveCone_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33498,6 +33528,11 @@ a\cdot a
     labels: ["claim_self_dual_positive_root_unique"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: [
+      "Ising2DLambda.FisherZero.selfDualPositiveRoot_unique",
+      "Ising2DLambda.NecSuf.FisherZero.positive_root_unique_necSuf",
+      "Ising2DLambda.FisherZero.selfDualPositiveRoot_unique_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),
@@ -33560,6 +33595,7 @@ a\cdot a
     labels: ["def_critical_point"],
     habitat: "Qbar",
     verification: ["sagemath/check/self-dual-root-positive"],
+    lean: ["Ising2DLambda.FisherZero.criticalPoint"],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`),

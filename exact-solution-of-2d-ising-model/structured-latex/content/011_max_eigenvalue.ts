@@ -186,9 +186,16 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
         " も実対称。",
         ref("iH_is_real_symmetric"),
         " の Step 1 より ",
-        math(String.raw`S_2 := iK_2^*H_2 = K_2^*\sum_{m=1}^{M}\sigma_m^x`),
-        " も実対称である。",
+        math(String.raw`S_2`),
+        " も実対称である。その表示は",
       ]),
+      displayMath(String.raw`\begin{aligned}
+S_2
+&=iK_2^*H_2
+  &&\bigl(\because\ S_2\ \text{の定義}\bigr)\\
+&=K_2^*\sum_{m=1}^{M}\sigma_m^x
+  &&\bigl(\because\ \text{実対称性の主張の Step 1}\bigr)
+\end{aligned}`),
       paragraph([
         "Step 2（指数関数）。",
         ref("def_hermitian_positive_definite"),
@@ -220,7 +227,17 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
         math(String.raw`B^* = B`),
         "。よって",
       ]),
-      displayMath(String.raw`W = B\,V_2\,B = (2s_2)^{M/2}\,B^{*}A\,B`),
+      displayMath(String.raw`\begin{aligned}
+W
+&=B\,V_2\,B
+  &&\bigl(\because\ W=B V_2 B\ \text{の定義}\bigr)\\
+&=B\bigl((2s_2)^{M/2}A\bigr)B
+  &&\bigl(\because\ V_2=(2s_2)^{M/2}A\bigr)\\
+&=(2s_2)^{M/2}B A B
+  &&\bigl(\because\ \text{スカラー倍と行列積の結合則}\bigr)\\
+&=(2s_2)^{M/2}B^{*}A B
+  &&\bigl(\because\ B^*=B\bigr)
+\end{aligned}`),
       paragraph([
         ref("exp_hermitian_is_positive_definite"),
         " (2) より ",
@@ -231,16 +248,35 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
         math(String.raw`(2s_2)^{M/2} > 0`),
         " なので同 (3) より ",
         math(String.raw`W`),
-        " は正定値である。実対称性は実対称行列の積・転置の計算から従う（",
-        math(String.raw`W^\top = B^\top V_2^\top B^\top = BV_2B = W`),
-        "）。",
+        " は正定値である。実対称性は次の転置の計算から従う。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+W^\top
+&=(B V_2 B)^\top
+  &&\bigl(\because\ W=B V_2 B\ \text{の定義}\bigr)\\
+&=B^\top V_2^\top B^\top
+  &&\bigl(\because\ \text{転置の積の法則}\ (ABC)^\top=C^\top B^\top A^\top\bigr)\\
+&=B V_2 B
+  &&\bigl(\because\ B^\top=B,\ V_2^\top=V_2\bigr)\\
+&=W
+  &&\bigl(\because\ W=B V_2 B\ \text{の定義}\bigr)
+\end{aligned}`),
       paragraph([
         "可逆性：",
         math(String.raw`Wx = 0`),
-        " なら ",
-        math(String.raw`x^\top Wx = 0`),
-        " なので正定値性より ",
+        " と仮定すると、次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^\top W x
+&=x^\top(Wx)
+  &&\bigl(\because\ \text{行列積の結合則}\bigr)\\
+&=x^\top 0
+  &&\bigl(\because\ Wx=0\bigr)\\
+&=0
+  &&\bigl(\because\ \text{零ベクトルとの積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "正定値性より ",
         math(String.raw`x = 0`),
         "。よって ",
         math(String.raw`W`),
