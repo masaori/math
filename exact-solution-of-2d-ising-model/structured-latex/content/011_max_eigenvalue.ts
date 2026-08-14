@@ -1156,8 +1156,23 @@ x^\top Wx
         " のとき",
       ]),
       displayMath(
-        String.raw`x^\top Wx \leq c_+\|x_+\|^2 + c_-\|x_-\|^2
-\leq \max(c_+,c_-)\left(\|x_+\|^2+\|x_-\|^2\right) = \max(c_+,c_-)`,
+        String.raw`\begin{aligned}
+x^\top Wx
+&= x_+^\top Wx_+ + x_-^\top Wx_-
+  \quad (\because \text{上の交叉項の消去})\\
+&\leq c_+\|x_+\|^2 + x_-^\top Wx_-
+  \quad (\because x_+^\top Wx_+ \leq c_+\|x_+\|^2 \text{ を第一項へ適用する})\\
+&\leq c_+\|x_+\|^2 + c_-\|x_-\|^2
+  \quad (\because x_-^\top Wx_- \leq c_-\|x_-\|^2 \text{ を第二項へ適用する})\\
+&\leq \max(c_+,c_-)\|x_+\|^2 + \max(c_+,c_-)\|x_-\|^2
+  \quad (\because c_\pm \leq \max(c_+,c_-) \text{ と } \|x_\pm\|^2 \geq 0 \text{ の積の単調性})\\
+&= \max(c_+,c_-)\left(\|x_+\|^2+\|x_-\|^2\right)
+  \quad (\because \text{分配則})\\
+&= \max(c_+,c_-)\,\|x\|^2
+  \quad (\because \|x\|^2 = \|x_+\|^2 + \|x_-\|^2 \text{ を上で示した})\\
+&= \max(c_+,c_-)
+  \quad (\because \|x\| = 1)
+\end{aligned}`,
       ),
       paragraph([
         "上限を取って ",
