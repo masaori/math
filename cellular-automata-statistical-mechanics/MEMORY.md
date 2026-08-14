@@ -95,6 +95,20 @@ $\operatorname{supp}(f\circ\rho^T_S)=\operatorname{supp}(f)$（$T$ の部分集�
 未解決参照 0）、既存 SageMath 3 本、対応検査、Lean build・sorry 検査を全て通した。
 **この章の現在地は構造化記述まで。次 tick はレビュー後にこの章の SageMath 検算を作る。**
 
+## 自動ループ tick: 冗長近傍からの独立性の SageMath 検算（2026-08-15）
+
+前 tick の構造化記述をレビューした。3 つの claim の数学的内容に反例はなかったが、制限・延長・
+冗長拡大の計算で複数等号を一行へまとめた箇所が「一ステップ一定理」に違反していたため、各等号と
+根拠を分離した。`sagemath/check/redundant-neighbor-independence/` に、追加元の一点反転が制限で消える
+こと、$\rho^T_S\circ\iota^T_S$ が恒等写像であること、追加元への非依存、元の添字への依存の移送、
+本質的依存台の一致を別々に検査する 5 本を追加した。$|T|\le3$ の全包含 $S\subseteq T$、全局所
+真理値表、必要な全入力で厳密に検査し全て PASS。一般の有限集合に対する証明ではなく、人手証明の
+有限範囲での裏取りである。浮動小数点と $\mathbb{R}/\mathbb{C}$ 脱出はない。
+
+構造化テキスト check・PDF、既存を含む SageMath 8 本、検算対応、Lean build、sorry 検査を全て
+通した。**この章の現在地は SageMath まで。次 tick はレビュー後に、人手証明と同じ対象・仮定・
+順序の Lean 具体版だけを作る。**
+
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。

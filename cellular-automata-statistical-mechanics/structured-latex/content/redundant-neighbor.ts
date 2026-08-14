@@ -144,11 +144,15 @@ x(u) & (u\in S)\\
         math(String.raw`x\in A^{S}`),
         " と ",
         math(String.raw`u\in S`),
-        " について ",
-        math(String.raw`(\rho^{T}_{S}(\iota^{T}_{S}\,x))(u)=(\iota^{T}_{S}\,x)(u)=x(u)`),
-        "（前段が ",
-        ref("def_restriction_map"),
-        "、後段が上の場合分けの上段）なので、写像の外延性より ",
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\rho^{T}_{S}(\iota^{T}_{S}\,x))(u)
+&=(\iota^{T}_{S}\,x)(u)\qquad(\because\ \blkref{def_restriction_map})\\
+&=x(u)\qquad(\because\ \text{上の場合分けの上段})
+\end{aligned}`),
+      paragraph([
+        "である。写像の外延性より ",
         math(String.raw`\rho^{T}_{S}\circ\iota^{T}_{S}`),
         " は ",
         math(String.raw`A^{S}`),
@@ -163,6 +167,7 @@ x(u) & (u\in S)\\
     title: { text: "冗長拡大は足した元に本質的に依存しない" },
     labels: ["claim_no_dependency_on_redundant_element"],
     habitat: "finite",
+    verification: ["sagemath/check/redundant-neighbor-independence"],
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -213,7 +218,12 @@ x(u) & (u\in S)\\
         "、したがって",
       ]),
       displayMath(
-        String.raw`(f\circ\rho^{T}_{S})(\varphi_w y)=f\bigl(\rho^{T}_{S}(\varphi_w y)\bigr)=f\bigl(\rho^{T}_{S}\,y\bigr)=(f\circ\rho^{T}_{S})(y)\qquad(\because\ \blkref{def_redundant_extension})`,
+        String.raw`\begin{aligned}
+(f\circ\rho^{T}_{S})(\varphi_w y)
+&=f\bigl(\rho^{T}_{S}(\varphi_w y)\bigr)\qquad(\because\ \blkref{def_redundant_extension})\\
+&=f\bigl(\rho^{T}_{S}\,y\bigr)\qquad(\because\ \rho^{T}_{S}(\varphi_w y)=\rho^{T}_{S}\,y)\\
+&=(f\circ\rho^{T}_{S})(y)\qquad(\because\ \blkref{def_redundant_extension})
+\end{aligned}`,
       ),
       paragraph([
         "である。よって ",
@@ -239,6 +249,7 @@ x(u) & (u\in S)\\
     title: { text: "もとの元への本質的依存は冗長拡大で変わらない" },
     labels: ["claim_dependency_transfer"],
     habitat: "finite",
+    verification: ["sagemath/check/redundant-neighbor-independence"],
     statement: [
       paragraph([
         "局所真理値表 ",
@@ -284,28 +295,51 @@ x(u) & (u\in S)\\
         math(String.raw`u\in T\setminus\{w\}`),
         " について、",
         math(String.raw`u\in S\setminus\{w\}`),
-        " の場合は ",
-        math(String.raw`y(u)=x(u)=x'(u)=y'(u)`),
-        "（外側 2 つの等号が ",
-        ref("def_base_value_extension"),
-        " の場合分けの上段、中央が上の一致）、",
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y(u)
+&=x(u)\qquad(\because\ \blkref{def_base_value_extension}\ \text{の場合分けの上段})\\
+&=x'(u)\qquad(\because\ \text{上の一致})\\
+&=y'(u)\qquad(\because\ \blkref{def_base_value_extension}\ \text{の場合分けの上段})
+\end{aligned}`),
+      paragraph([
+        "であり、",
         math(String.raw`u\in T\setminus S`),
-        " の場合は ",
-        math(String.raw`y(u)=0=y'(u)`),
-        "（",
-        ref("def_base_value_extension"),
-        " の場合分けの下段）であり、いずれの場合も ",
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y(u)
+&=0\qquad(\because\ \blkref{def_base_value_extension}\ \text{の場合分けの下段})\\
+&=y'(u)\qquad(\because\ \blkref{def_base_value_extension}\ \text{の場合分けの下段})
+\end{aligned}`),
+      paragraph([
+        "である。いずれの場合も ",
         math(String.raw`y(u)=y'(u)`),
         " である。また",
       ]),
       displayMath(
-        String.raw`(f\circ\rho^{T}_{S})(y)=f\bigl(\rho^{T}_{S}(\iota^{T}_{S}\,x)\bigr)=f(x)\qquad(\because\ \blkref{def_base_value_extension}\ \text{の後段（}\rho^{T}_{S}\circ\iota^{T}_{S}\ \text{は恒等写像）})`,
+        String.raw`\begin{aligned}
+(f\circ\rho^{T}_{S})(y)
+&=f\bigl(\rho^{T}_{S}(\iota^{T}_{S}\,x)\bigr)\qquad(\because\ \blkref{def_redundant_extension})\\
+&=f(x)\qquad(\because\ \blkref{def_base_value_extension}\ \text{の後段})
+\end{aligned}`,
       ),
       paragraph([
-        "であり、同様に ",
-        math(String.raw`(f\circ\rho^{T}_{S})(y')=f(x')`),
-        " なので ",
-        math(String.raw`(f\circ\rho^{T}_{S})(y)=f(x)\neq f(x')=(f\circ\rho^{T}_{S})(y')`),
+        "である。同じ二つの定義を ",
+        math(String.raw`y'=\iota^{T}_{S}\,x'`),
+        " に適用すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(f\circ\rho^{T}_{S})(y')
+&=f\bigl(\rho^{T}_{S}(\iota^{T}_{S}\,x')\bigr)\qquad(\because\ \blkref{def_redundant_extension})\\
+&=f(x')\qquad(\because\ \blkref{def_base_value_extension}\ \text{の後段})
+\end{aligned}`),
+      paragraph([
+        "である。仮定 ",
+        math(String.raw`f(x)\neq f(x')`),
+        " と上の二つの等式より ",
+        math(String.raw`(f\circ\rho^{T}_{S})(y)\neq(f\circ\rho^{T}_{S})(y')`),
         " である。よって ",
         math(String.raw`(y,y')`),
         " が ",
@@ -341,14 +375,30 @@ x(u) & (u\in S)\\
         " なので",
       ]),
       displayMath(
-        String.raw`x(u)=y(u)=y'(u)=x'(u)\qquad(\because\ \text{外側 2 つは}\ \blkref{def_restriction_map}\text{、中央は上の一致})`,
+        String.raw`\begin{aligned}
+x(u)
+&=y(u)\qquad(\because\ \blkref{def_restriction_map})\\
+&=y'(u)\qquad(\because\ \text{上の一致})\\
+&=x'(u)\qquad(\because\ \blkref{def_restriction_map})
+\end{aligned}`,
       ),
       paragraph([
-        "である。また ",
-        math(String.raw`f(x)=(f\circ\rho^{T}_{S})(y)\neq(f\circ\rho^{T}_{S})(y')=f(x')`),
-        "（",
+        "である。また、",
         ref("def_redundant_extension"),
-        "）である。よって ",
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f(x)
+&=(f\circ\rho^{T}_{S})(y)\qquad(\because\ x=\rho^{T}_{S}\,y)\\
+f(x')
+&=(f\circ\rho^{T}_{S})(y')\qquad(\because\ x'=\rho^{T}_{S}\,y')
+\end{aligned}`),
+      paragraph([
+        "である。仮定 ",
+        math(String.raw`(f\circ\rho^{T}_{S})(y)\neq(f\circ\rho^{T}_{S})(y')`),
+        " と上の二つの等式より ",
+        math(String.raw`f(x)\neq f(x')`),
+        " である。よって ",
         math(String.raw`(x,x')`),
         " が ",
         ref("def_essential_dependency"),
@@ -367,6 +417,7 @@ x(u) & (u\in S)\\
     title: { text: "本質的依存台は冗長拡大で変わらない" },
     labels: ["claim_support_invariance"],
     habitat: "finite",
+    verification: ["sagemath/check/redundant-neighbor-independence"],
     statement: [
       paragraph([
         "局所真理値表 ",

@@ -9,6 +9,7 @@
 |---|---|---|
 | [`clifford_matrix_tower/`](clifford_matrix_tower/) | $\mathrm{Cl}_{2n}(\mathbb{C})\cong M_{2^n}(\mathbb{C})$（Jordan–Wigner 生成元、$n=1,2,3$） | **合致**。$\mathbb{R}$ 脱出なし |
 | [`essential-dependency-support/`](essential-dependency-support/) | 本質的依存と一点反転検査の同値、および依存台の有限走査 | 実行結果は各 `overview.md` を正本とする |
+| [`redundant-neighbor-independence/`](redundant-neighbor-independence/) | 冗長拡大による追加元への非依存、依存の移送、本質的依存台の不変性 | 実行結果は各 `overview.md` を正本とする |
 
 ## 予定されている検算（未着手）
 
