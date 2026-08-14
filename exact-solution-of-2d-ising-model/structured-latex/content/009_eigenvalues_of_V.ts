@@ -601,10 +601,22 @@ n_\mu^2
       ]),
       displayMath(
         String.raw`\begin{aligned}
-{[\psi_\mu^\dagger, \psi_\nu^\dagger]_+} &= 0, &
-{[\psi_\mu^\dagger, \psi_{-\nu}]_+} &= \delta^M_{\mu-\nu,0}\,I = 0, \\
-{[\psi_{-\mu}, \psi_\nu^\dagger]_+} &= \delta^M_{-\mu+\nu,0}\,I = 0, &
-{[\psi_{-\mu}, \psi_{-\nu}]_+} &= 0
+{[\psi_\mu^\dagger, \psi_\nu^\dagger]_+}
+&= 0
+   \quad (\because \text{反交換関係の第 1 式}) \\
+{[\psi_\mu^\dagger, \psi_{-\nu}]_+}
+&= \delta^M_{\mu-\nu,0}\,I
+   \quad (\because \text{反交換関係の第 2 式}) \\
+&= 0
+   \quad (\because \delta^M_{\mu-\nu,0}=0) \\
+{[\psi_{-\mu}, \psi_\nu^\dagger]_+}
+&= \delta^M_{-\mu+\nu,0}\,I
+   \quad (\because \text{反交換関係の第 2 式と反交換子の対称性}) \\
+&= 0
+   \quad (\because \delta^M_{-\mu+\nu,0}=0) \\
+{[\psi_{-\mu}, \psi_{-\nu}]_+}
+&= 0
+   \quad (\because \text{反交換関係の第 3 式})
 \end{aligned}`,
       ),
       paragraph([
@@ -674,7 +686,12 @@ n_\mu n_\nu
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-15 の式変形統一で、Step 1 の四つの反交換関係を根拠なしの並記から、一行一関係・行末根拠へ開いた。内容は変えていない。",
+      ],
+    },
   },
 
   {

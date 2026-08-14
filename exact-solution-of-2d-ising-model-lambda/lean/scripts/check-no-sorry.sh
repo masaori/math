@@ -1010,6 +1010,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.realLogarithm_naturalPower
   Ising2DLambda.NecSuf.ThermodynamicLimit.naturalPower_map_necSuf
   Ising2DLambda.ThermodynamicLimit.realLogarithm_naturalPower_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_le_upperBound
+  Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_map_upperBound_necSuf
+  Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_le_upperBound_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

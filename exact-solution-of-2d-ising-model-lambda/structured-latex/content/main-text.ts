@@ -36330,6 +36330,11 @@ Z_L(t)
       "「実対数の導入」に挙げた二つの性質（乗法を加法へ移す・狭義単調）、および本文で証明済みの" +
       "分配多項式の値の正値性・上からの評価・実対数の自然数冪だけであり、完備性・極限は使わない。",
     verification: ["sagemath/check/free-energy-density-upper-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_le_upperBound",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_map_upperBound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_le_upperBound_from_necSuf",
+    ],
     statement: [
       paragraph([
         "各 ",
