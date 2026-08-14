@@ -2840,9 +2840,12 @@ T_{V_2}(\hat{Y}_\mu)
       displayMath(
         String.raw`\begin{aligned}
 T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
-&= (V_1^{(\pm)})^{1/2}\cdot\hat{Z}_\mu^{(-)}\cdot(V_1^{(\pm)})^{-1/2} \\
-&= \left(\exp(i K_1 H_1^{(\pm)})\right)^{1/2}\cdot\hat{Z}_\mu^{(-)}\cdot\left(\exp(i K_1 H_1^{(\pm)})\right)^{-1/2} \\
-&= \exp\!\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\cdot\hat{Z}_\mu^{(-)}\cdot\exp\!\left(-\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\right) \\
+&= (V_1^{(\pm)})^{1/2}\cdot\hat{Z}_\mu^{(-)}\cdot(V_1^{(\pm)})^{-1/2}
+   \quad (\because \text{共役写像 }T\text{ の定義}) \\
+&= \left(\exp(i K_1 H_1^{(\pm)})\right)^{1/2}\cdot\hat{Z}_\mu^{(-)}\cdot\left(\exp(i K_1 H_1^{(\pm)})\right)^{-1/2}
+   \quad (\because V_1^{(\pm)}\text{ の指数表示}) \\
+&= \exp\!\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\cdot\hat{Z}_\mu^{(-)}\cdot\exp\!\left(-\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\right)
+   \quad (\because \text{指数行列の平方根と逆元}) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\dots,\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n\text{ times}}
    \quad (\because \text{exp 共役の級数展開}) \\
@@ -2850,6 +2853,7 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
    \quad (\because \text{テイラー係数の抽出}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}\cosh(K_1) \\ i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\end{pmatrix}
+   \quad (\because \text{行ベクトルと列ベクトルの積の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -2863,9 +2867,12 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
       displayMath(
         String.raw`\begin{aligned}
 T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
-&= (V_1^{(\pm)})^{1/2}\cdot\hat{Y}_\mu\cdot(V_1^{(\pm)})^{-1/2} \\
-&= \left(\exp(i K_1 H_1^{(\pm)})\right)^{1/2}\cdot\hat{Y}_\mu\cdot\left(\exp(i K_1 H_1^{(\pm)})\right)^{-1/2} \\
-&= \exp\!\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\cdot\hat{Y}_\mu\cdot\exp\!\left(-\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\right) \\
+&= (V_1^{(\pm)})^{1/2}\cdot\hat{Y}_\mu\cdot(V_1^{(\pm)})^{-1/2}
+   \quad (\because \text{共役写像 }T\text{ の定義}) \\
+&= \left(\exp(i K_1 H_1^{(\pm)})\right)^{1/2}\cdot\hat{Y}_\mu\cdot\left(\exp(i K_1 H_1^{(\pm)})\right)^{-1/2}
+   \quad (\because V_1^{(\pm)}\text{ の指数表示}) \\
+&= \exp\!\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\cdot\hat{Y}_\mu\cdot\exp\!\left(-\left(\tfrac{1}{2}i K_1 H_1^{(\pm)}\right)\right)
+   \quad (\because \text{指数行列の平方根と逆元}) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\dots,\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n\text{ times}}
    \quad (\because \text{exp 共役の級数展開}) \\
@@ -2873,6 +2880,7 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
    \quad (\because \text{テイラー係数の抽出 (h1.y)}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}-i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \quad (\because \text{行ベクトルと列ベクトルの積の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -2893,8 +2901,10 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
       displayMath(
         String.raw`\begin{aligned}
 T_{V_2}(\hat{Z}_\mu^{(-)})
-&= V_2\cdot\hat{Z}_\mu^{(-)}\cdot V_2^{-1} \\
-&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Z}_\mu^{(-)}\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1} \\
+&= V_2\cdot\hat{Z}_\mu^{(-)}\cdot V_2^{-1}
+   \quad (\because \text{共役写像 }T\text{ の定義}) \\
+&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Z}_\mu^{(-)}\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1}
+   \quad (\because V_2\text{ の指数表示}) \\
 &= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot
    \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n\text{ times}}
@@ -2903,6 +2913,7 @@ T_{V_2}(\hat{Z}_\mu^{(-)})
    \quad (\because \text{テイラー係数の抽出}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}\cosh(2K_2^*) \\ -i\sinh(2K_2^*)\end{pmatrix}
+   \quad (\because \text{行ベクトルと列ベクトルの積の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -2916,8 +2927,10 @@ T_{V_2}(\hat{Z}_\mu^{(-)})
       displayMath(
         String.raw`\begin{aligned}
 T_{V_2}(\hat{Y}_\mu)
-&= V_2\cdot\hat{Y}_\mu\cdot V_2^{-1} \\
-&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Y}_\mu\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1} \\
+&= V_2\cdot\hat{Y}_\mu\cdot V_2^{-1}
+   \quad (\because \text{共役写像 }T\text{ の定義}) \\
+&= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Y}_\mu\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1}
+   \quad (\because V_2\text{ の指数表示}) \\
 &= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot
    \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Y}_\mu\right]\dots\right]}_{n\text{ times}}
@@ -2926,6 +2939,7 @@ T_{V_2}(\hat{Y}_\mu)
    \quad (\because \text{テイラー係数の抽出 (h2.y)}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}
+   \quad (\because \text{行ベクトルと列ベクトルの積の定義})
 \end{aligned}`,
       ),
       paragraph([
