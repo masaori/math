@@ -4,7 +4,8 @@
 辺の有限型を有限二部後続系の辺、二つの端点写像を `endpoint0` / `endpoint1`、
 二色塗り分けを系の `color`、値の反転を整数 ±1 の符号反転に取る。
 具体版で使った符号反転の三性質（対合、反転後の不一致と反転前の一致の同値の両向き）だけを
-必要十分版へ渡す。後続写像とその単射性は渡さない（必要十分版が要求しないため）。
+必要十分版へ渡す。反対側の不一致同値はそこで対称性から導く。
+後続写像とその単射性は渡さない（必要十分版が要求しないため）。
 
 住処: 有限型、`Finset`、`Nat`、`Bool`、整数 ±1 のみ。ℝ / ℂ は現れない。
 -/
@@ -24,6 +25,6 @@ theorem multiplicity_palindrome_from_necSuf (S : BipartiteSuccessorSystem V I)
   exact NecSuf.StructuralCore.multiplicity_palindrome
     (endpoint0 S) (endpoint1 S) S.color negSpin
     (fun e => S.color_diff e.1.2 e.1.1 e.2)
-    negSpin_negSpin negSpin_ne_iff_eq ne_negSpin_iff_eq h
+    negSpin_negSpin negSpin_ne_iff_eq h
 
 end Ising3DCut.StructuralCore

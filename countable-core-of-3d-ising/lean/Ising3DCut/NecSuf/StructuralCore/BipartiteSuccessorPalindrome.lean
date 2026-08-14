@@ -10,8 +10,10 @@
   端点写像 `endpoint0, endpoint1 : E → V`           破れの定義が両端の値を参照するため。
   `color (endpoint0 e) ≠ color (endpoint1 e)`       各辺でちょうど一方の端点だけを反転させるため。
   `flip (flip x) = x`                               色反転を対合にするため。
-  `flip x ≠ y ↔ x = y` と `x ≠ flip y ↔ x = y`      反転した側の端点がどちらでも、
-                                                    反転後の不一致を反転前の一致へ戻すため。
+  `flip x ≠ y ↔ x = y`                               反転後の不一致を反転前の一致へ戻すため。
+
+反対側の同値 `x ≠ flip y ↔ x = y` は、上の同値の `x` と `y` を入れ替え、
+不等号と等号の対称性を使って導くので仮定しない。
 
 具体版が持っていた次の構造は仮定しない: 方向の添字集合 `I`、始点の部分集合 `A_i`、
 後続写像 `succ_i` とその単射性、値が整数 ±1 であること。
@@ -47,7 +49,6 @@ lemma colorFlip_colorFlip (hflip_flip : ∀ x, flip (flip x) = x) (σ : V → W)
 lemma colorFlip_reverses_edge
     (hcolor : ∀ e, color (endpoint0 e) ≠ color (endpoint1 e))
     (hflip_ne : ∀ x y : W, flip x ≠ y ↔ x = y)
-    (hne_flip : ∀ x y : W, x ≠ flip y ↔ x = y)
     (σ : V → W) (e : E) :
     colorFlip color flip σ (endpoint0 e) ≠ colorFlip color flip σ (endpoint1 e) ↔
       σ (endpoint0 e) = σ (endpoint1 e) := by
@@ -62,6 +63,9 @@ lemma colorFlip_reverses_edge
       cases h : color (endpoint1 e)
       · exact False.elim (hcolor e (h₀'.trans h.symm))
       · exact rfl
+    have hne_flip : ∀ x y : W, x ≠ flip y ↔ x = y := by
+      intro x y
+      simpa [ne_comm, eq_comm] using hflip_ne y x
     simp [colorFlip, h₀', h₁, hne_flip]
 
 /-- 破れている辺の有限集合。 -/
@@ -75,24 +79,22 @@ def brokenCount (σ : V → W) : ℕ := (brokenSet endpoint0 endpoint1 σ).card
 lemma brokenSet_colorFlip
     (hcolor : ∀ e, color (endpoint0 e) ≠ color (endpoint1 e))
     (hflip_ne : ∀ x y : W, flip x ≠ y ↔ x = y)
-    (hne_flip : ∀ x y : W, x ≠ flip y ↔ x = y)
     (σ : V → W) :
     brokenSet endpoint0 endpoint1 (colorFlip color flip σ) =
       Finset.univ \ brokenSet endpoint0 endpoint1 σ := by
   ext e
   simp [brokenSet,
-    colorFlip_reverses_edge endpoint0 endpoint1 color flip hcolor hflip_ne hne_flip]
+    colorFlip_reverses_edge endpoint0 endpoint1 color flip hcolor hflip_ne]
 
 /-- 具体版の第四段: 色反転で破れ数は補数になる。 -/
 lemma brokenCount_colorFlip
     (hcolor : ∀ e, color (endpoint0 e) ≠ color (endpoint1 e))
     (hflip_ne : ∀ x y : W, flip x ≠ y ↔ x = y)
-    (hne_flip : ∀ x y : W, x ≠ flip y ↔ x = y)
     (σ : V → W) :
     brokenCount endpoint0 endpoint1 (colorFlip color flip σ) =
       Fintype.card E - brokenCount endpoint0 endpoint1 σ := by
   rw [brokenCount,
-    brokenSet_colorFlip endpoint0 endpoint1 color flip hcolor hflip_ne hne_flip,
+    brokenSet_colorFlip endpoint0 endpoint1 color flip hcolor hflip_ne,
     Finset.card_sdiff, Finset.inter_univ, Finset.card_univ, brokenCount]
 
 /-- 破れ数が `m` の配位の有限集合。 -/
@@ -113,19 +115,18 @@ def levelSetEquiv
     (hcolor : ∀ e, color (endpoint0 e) ≠ color (endpoint1 e))
     (hflip_flip : ∀ x, flip (flip x) = x)
     (hflip_ne : ∀ x y : W, flip x ≠ y ↔ x = y)
-    (hne_flip : ∀ x y : W, x ≠ flip y ↔ x = y)
     {m : ℕ} (h : m ≤ Fintype.card E) :
     LevelSet (W := W) endpoint0 endpoint1 m ≃
       LevelSet (W := W) endpoint0 endpoint1 (Fintype.card E - m) where
   toFun σ := ⟨colorFlip color flip σ.1, by
     apply Finset.mem_filter.mpr
     exact ⟨Finset.mem_univ _, by
-      rw [brokenCount_colorFlip endpoint0 endpoint1 color flip hcolor hflip_ne hne_flip,
+      rw [brokenCount_colorFlip endpoint0 endpoint1 color flip hcolor hflip_ne,
         (Finset.mem_filter.mp σ.2).2]⟩⟩
   invFun τ := ⟨colorFlip color flip τ.1, by
     apply Finset.mem_filter.mpr
     exact ⟨Finset.mem_univ _, by
-      rw [brokenCount_colorFlip endpoint0 endpoint1 color flip hcolor hflip_ne hne_flip,
+      rw [brokenCount_colorFlip endpoint0 endpoint1 color flip hcolor hflip_ne,
         (Finset.mem_filter.mp τ.2).2, Nat.sub_sub_self h]⟩⟩
   left_inv σ := Subtype.ext (colorFlip_colorFlip color flip hflip_flip σ.1)
   right_inv τ := Subtype.ext (colorFlip_colorFlip color flip hflip_flip τ.1)
@@ -135,11 +136,10 @@ theorem multiplicity_palindrome
     (hcolor : ∀ e, color (endpoint0 e) ≠ color (endpoint1 e))
     (hflip_flip : ∀ x, flip (flip x) = x)
     (hflip_ne : ∀ x y : W, flip x ≠ y ↔ x = y)
-    (hne_flip : ∀ x y : W, x ≠ flip y ↔ x = y)
     {m : ℕ} (h : m ≤ Fintype.card E) :
     multiplicity (W := W) endpoint0 endpoint1 m =
       multiplicity (W := W) endpoint0 endpoint1 (Fintype.card E - m) := by
   exact Fintype.card_congr
-    (levelSetEquiv endpoint0 endpoint1 color flip hcolor hflip_flip hflip_ne hne_flip h)
+    (levelSetEquiv endpoint0 endpoint1 color flip hcolor hflip_flip hflip_ne h)
 
 end Ising3DCut.NecSuf.StructuralCore
