@@ -21,6 +21,8 @@ import Ising3DCut.NecSuf.NullModel.BrokenComplement
 import Ising3DCut.NullModel.BrokenComplementFromNecSuf
 import Ising3DCut.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.PartitionValueAtOne
+import Ising3DCut.NecSuf.NullModel.PartitionValueAtOne
+import Ising3DCut.NullModel.PartitionValueAtOneFromNecSuf
 import Ising3DCut.NecSuf.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.MultiplicityPalindromeFromNecSuf
 import Ising3DCut.NullModel.PeriodicConstantUnbroken
