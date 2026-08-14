@@ -650,12 +650,17 @@ q(t_0)
         math(String.raw`e_1,\dots,e_d`),
         " を標準基底とする。",
         math(String.raw`W`),
-        " は実対称なので ",
+        " は実対称なので、その冪 ",
         math(String.raw`W^n`),
-        " も実対称であり、",
-        math(String.raw`\mathrm{tr}(W^n) = \sum_{k=1}^{d} e_k^\top W^n e_k`),
-        " である。",
+        " も実対称である。標準基底を用いるトレースの表示は、次の一続きの等式で得られる。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}(W^n)
+&=\sum_{k=1}^{d}(W^n)_{kk}
+&&\bigl(\because\ \text{トレースの定義}\bigr)\\
+&=\sum_{k=1}^{d} e_k^\top W^n e_k
+&&\bigl(\because\ \text{標準基底 }e_k\text{ による対角成分の表示 }(W^n)_{kk}=e_k^\top W^n e_k\bigr)
+\end{aligned}`),
       paragraph([
         "Step 1（上からの評価）。",
         math(String.raw`n = 2a`),

@@ -554,3 +554,6 @@ import Ising2DLambda.FisherZero.SelfDualPositiveRootFromNecSuf
 import Ising2DLambda.FisherZero.KwDualPreservesUnitInterval
 import Ising2DLambda.NecSuf.FisherZero.KwDualPreservesUnitInterval
 import Ising2DLambda.FisherZero.KwDualPreservesUnitIntervalFromNecSuf
+import Ising2DLambda.FisherZero.SectorValueDuality
+import Ising2DLambda.NecSuf.FisherZero.SectorValueDuality
+import Ising2DLambda.FisherZero.SectorValueDualityFromNecSuf

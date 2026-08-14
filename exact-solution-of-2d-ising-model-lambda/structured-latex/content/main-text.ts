@@ -33883,6 +33883,11 @@ a\cdot a
     labels: ["claim_sector_value_duality"],
     habitat: "Q",
     verification: ["sagemath/check/sector-value-duality"],
+    lean: [
+      "Ising2DLambda.FisherZero.sectorValueDuality",
+      "Ising2DLambda.NecSuf.FisherZero.sector_value_duality_necSuf",
+      "Ising2DLambda.FisherZero.sectorValueDuality_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`L\ge1`),
