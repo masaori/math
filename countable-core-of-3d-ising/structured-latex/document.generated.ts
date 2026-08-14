@@ -19,12 +19,14 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_main_text from './content/main-text.ts'
+import blocks_structural_core from './content/structural-core.ts'
 
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_main_text,
+  ...typeof blocks_structural_core,
 ]
 
 /** 全ノート。 */
