@@ -19,12 +19,14 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
+import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_essential_dependency,
+  ...typeof blocks_redundant_neighbor,
 ]
 
 /** 全ノート。 */

@@ -81,6 +81,20 @@ $|S|2^{|S|}$ 以下だった。浮動小数点と $\mathbb{R}/\mathbb{C}$ 脱出
 検算対応、Lean build、sorry 検査を全て通した。**本質的依存台の有限決定は四層が揃い `done`。**
 次 tick は前層をレビューしてから、「冗長近傍からの独立性」の構造化記述だけを進める。
 
+## 自動ループ tick: 冗長近傍からの独立性の構造化記述（2026-08-15）
+
+前 tick の Lean 必要十分版と具体版からの導出をレビューし、修正を要する誤りは見つからなかった。
+台帳先頭の未完了対象「冗長近傍からの独立性」の構造化記述を
+`structured-latex/content/redundant-neighbor.ts` に書いた。同一視を使わず、制限写像
+$\rho^T_S:A^T\to A^S$ と基準値延長写像 $\iota^T_S:A^S\to A^T$（$\rho\circ\iota$ が恒等）の
+2 本の写像だけで $A^S$ と $A^T$ を行き来する。冗長拡大は合成 $(T,\,f\circ\rho^T_S)$ として定義した。
+claim は 3 つ: 足した元 $w\in T\setminus S$ には本質的に依存しない（一点反転が制限で消えることによる）、
+$w\in S$ への本質的依存は拡大の前後で同値（延長・制限で証人を移す）、よって
+$\operatorname{supp}(f\circ\rho^T_S)=\operatorname{supp}(f)$（$T$ の部分集合としての等号）。
+全ブロック habitat "finite"、$\mathbb{R}/\mathbb{C}$ なし。構造化テキスト check・PDF（5 ページ・
+未解決参照 0）、既存 SageMath 3 本、対応検査、Lean build・sorry 検査を全て通した。
+**この章の現在地は構造化記述まで。次 tick はレビュー後にこの章の SageMath 検算を作る。**
+
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。

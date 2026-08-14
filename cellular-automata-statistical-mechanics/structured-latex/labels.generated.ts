@@ -6,14 +6,20 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_dependency_transfer",
   "claim_flip_test_equivalence",
+  "claim_no_dependency_on_redundant_element",
   "claim_support_finite_decidability",
+  "claim_support_invariance",
+  "def_base_value_extension",
   "def_cardinality_notation",
   "def_essential_dependency",
   "def_essential_dependency_support",
   "def_flip_map",
   "def_local_truth_table",
   "def_negation_map",
+  "def_redundant_extension",
+  "def_restriction_map",
   "def_state_set",
 ] as const
 
