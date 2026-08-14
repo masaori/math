@@ -33644,6 +33644,7 @@ a\cdot a
     labels: ["def_unit_interval_rationals"],
     habitat: "Q",
     verification: ["sagemath/check/kw-dual-preserves-unit-interval"],
+    lean: ["Ising2DLambda.FisherZero.unitIntervalRationals"],
     statement: [
       paragraph(["有理数の集合を"]),
       displayMath(
@@ -33687,6 +33688,11 @@ a\cdot a
     labels: ["claim_kw_dual_preserves_unit_interval"],
     habitat: "Q",
     verification: ["sagemath/check/kw-dual-preserves-unit-interval"],
+    lean: [
+      "Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval",
+      "Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf",
+      "Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`q\in\mathbb{Q}_{(0,1)}`),

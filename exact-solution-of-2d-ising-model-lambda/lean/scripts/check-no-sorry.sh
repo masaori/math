@@ -955,6 +955,9 @@ targets=(
   Ising2DLambda.FisherZero.selfDualPositiveRoot_unique
   Ising2DLambda.NecSuf.FisherZero.positive_root_unique_necSuf
   Ising2DLambda.FisherZero.selfDualPositiveRoot_unique_from_necSuf
+  Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
+  Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
+  Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

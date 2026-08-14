@@ -551,3 +551,6 @@ import Ising2DLambda.FisherZero.QuadraticPositiveConeMulClosedFromNecSuf
 import Ising2DLambda.FisherZero.SelfDualPositiveRoot
 import Ising2DLambda.NecSuf.FisherZero.SelfDualPositiveRoot
 import Ising2DLambda.FisherZero.SelfDualPositiveRootFromNecSuf
+import Ising2DLambda.FisherZero.KwDualPreservesUnitInterval
+import Ising2DLambda.NecSuf.FisherZero.KwDualPreservesUnitInterval
+import Ising2DLambda.FisherZero.KwDualPreservesUnitIntervalFromNecSuf
