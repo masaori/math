@@ -6,13 +6,18 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_adjacent_parity",
   "claim_certificate_gives_uniform_bound",
   "claim_dual_face_four_vertices",
   "claim_edge_boundary_is_separating",
   "claim_finite_geometric_sum",
+  "claim_free_broken_complement",
+  "claim_free_palindrome",
   "claim_minimal_separating_growth",
   "claim_minimal_separating_is_edge_boundary",
   "claim_negative_origin_has_separating_subset",
+  "claim_odd_flip_involution",
+  "claim_odd_flip_reverses_edges",
   "claim_oriented_edge_data",
   "claim_partition_value_at_least_one",
   "claim_peierls_bound",
@@ -26,6 +31,8 @@ export const ALL_LABELS = [
   "def_dual_face_adjacency",
   "def_dual_face_vertex_set",
   "def_edge_boundary",
+  "def_free_broken_count",
+  "def_free_multiplicity",
   "def_inner_edges",
   "def_low_temperature_certificate",
   "def_low_temperature_rational_points",
@@ -33,6 +40,8 @@ export const ALL_LABELS = [
   "def_minimal_separating_set",
   "def_negative_origin_polynomial",
   "def_negative_origin_ratio",
+  "def_odd_flip",
+  "def_odd_sites",
   "def_partition_polynomial",
   "def_path",
   "def_reachable_set",
@@ -42,6 +51,7 @@ export const ALL_LABELS = [
   "remark_escape_policy",
   "remark_known_defects",
   "remark_not_claimed",
+  "remark_null_model_positioning",
   "remark_open_problem_coverage",
 ] as const
 
