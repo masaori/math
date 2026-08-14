@@ -1133,8 +1133,19 @@ x_+^\top x_-
         " なので、同じ直交性から交叉項が消えて",
       ]),
       displayMath(
-        String.raw`x^\top Wx = (x_++x_-)^\top W(x_++x_-)
-= x_+^\top Wx_+ + x_-^\top Wx_-`,
+        String.raw`\begin{aligned}
+x^\top Wx
+&=(x_++x_-)^\top W(x_++x_-)
+  \quad (\because x=x_++x_- \text{ を左右へ代入する})\\
+&=(x_++x_-)^\top(Wx_++Wx_-)
+  \quad (\because \text{行列の作用の分配則})\\
+&=x_+^\top Wx_+ + x_+^\top Wx_- + x_-^\top Wx_+ + x_-^\top Wx_-
+  \quad (\because \text{転置と内積の分配則})\\
+&=x_+^\top Wx_+ + 0 + 0 + x_-^\top Wx_-
+  \quad (\because x_+,Wx_+\in\mathcal F^{(+)}\text{ と }x_-,Wx_-\in\mathcal F^{(-)}\text{ の直交性})\\
+&=x_+^\top Wx_+ + x_-^\top Wx_-
+  \quad (\because \text{零は加法単位元})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`c_\pm := c_\pm(M)`),

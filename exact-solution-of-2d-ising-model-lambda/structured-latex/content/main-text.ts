@@ -32832,6 +32832,11 @@ B&=-(c\cdot b'+b\cdot c')
     labels: ["claim_quadratic_positive_mul_mixed_signs"],
     habitat: "Qbar",
     verification: ["sagemath/check/quadratic-positive-mul-mixed-signs"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_mixedSigns",
+      "Ising2DLambda.NecSuf.FisherZero.positive_mul_mixedSigns_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositive_mul_of_mixedSigns_from_necSuf",
+    ],
     statement: [
       paragraph([
         math(String.raw`s\in\overline{\mathbb{Q}}`), " を ",
