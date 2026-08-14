@@ -33877,6 +33877,140 @@ a\cdot a
   },
 
   {
+    id: "fisher_zero_claim_sector_value_duality",
+    kind: "claim",
+    title: { text: "セクター多項式の値の双対関係" },
+    labels: ["claim_sector_value_duality"],
+    habitat: "Q",
+    verification: ["sagemath/check/sector-value-duality"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`a,b\in\{0,1\}`),
+        "、",
+        math(String.raw`q\in\mathbb{Q}_{(0,1)}`),
+        "（",
+        ref("def_unit_interval_rationals"),
+        "）とする。",
+        ref("claim_kw_dual_preserves_unit_interval"),
+        " により ",
+        math(String.raw`\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}`),
+        " であるから、",
+        math(String.raw`\mathbb{Q}`),
+        " の元 ",
+        math(String.raw`\mathrm{KW}(q)`),
+        " を整数係数多項式へ代入できる。このとき ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で",
+      ]),
+      displayMath(
+        String.raw`H^{a,b}_L(q)=(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`H^{a,b}_L`),
+        " は ",
+        ref("def_high_temperature_sector_polynomial"),
+        "、",
+        math(String.raw`G^{a,b}_L`),
+        " は ",
+        ref("def_sector_generating_polynomial"),
+        "。丸括弧は多項式への代入である）。高温展開のセクター多項式の ",
+        math(String.raw`q`),
+        " での値は、双対な点 ",
+        math(String.raw`\mathrm{KW}(q)`),
+        " でのセクター生成多項式の値の ",
+        math(String.raw`(1+q)^{2L^2}`),
+        " 倍である。次のセクションでこの等式を四つのセクターについて束ね、",
+        "双対な点どうしの自由エントロピーの関係を導く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("def_unit_interval_rationals"),
+        " より ",
+        math(String.raw`0<q`),
+        " かつ ",
+        math(String.raw`q<1`),
+        " であり、",
+        ref("claim_kw_dual_preserves_unit_interval"),
+        " の準備のとおり ",
+        math(String.raw`1+q\ne0`),
+        " であって ",
+        math(String.raw`\mathrm{KW}(q)`),
+        " が定義され、その値は ",
+        math(String.raw`\mathbb{Q}`),
+        " の元である。まず等式 ",
+        math(String.raw`(1+q)\cdot\mathrm{KW}(q)=1-q`),
+        " を、体 ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）の中の式変形で確かめる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(1+q)\cdot\mathrm{KW}(q)
+&=(1+q)\cdot\bigl((1-q)\cdot(1+q)^{-1}\bigr)
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=(1-q)\cdot\bigl((1+q)\cdot(1+q)^{-1}\bigr)
+&&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
+&=(1-q)\cdot1
+&&\bigl(\because\ \text{積の逆元の定義}\ (1+q)\cdot(1+q)^{-1}=1\bigr)\\
+&=1-q
+&&\bigl(\because\ 1\ \text{は積の単位元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "両辺はいずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元であり、",
+        math(String.raw`\mathbb{Q}`),
+        " は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体である（",
+        ref("def_algebraic_numbers"),
+        "）から、この等式は ",
+        math(String.raw`\mathbb{Q}`),
+        " の等式でもある。また任意の ",
+        math(String.raw`A\in\mathcal{E}^{a,b}_L`),
+        " について ",
+        math(String.raw`A\subseteq E_L`),
+        " かつ ",
+        math(String.raw`|E_L|=2L^2`),
+        " なので（",
+        ref("def_torus_homology_sector"),
+        "）、指数 ",
+        math(String.raw`2L^2-|A|`),
+        " と ",
+        math(String.raw`|A|`),
+        " はいずれも自然数である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+H^{a,b}_L(q)
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2-|A|}\cdot(1-q)^{|A|}
+&&\bigl(\because\ \blkref{def_high_temperature_sector_polynomial}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2-|A|}\cdot\bigl((1+q)\cdot\mathrm{KW}(q)\bigr)^{|A|}
+&&\bigl(\because\ \text{準備の等式}\ 1-q=(1+q)\cdot\mathrm{KW}(q)\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2-|A|}\cdot(1+q)^{|A|}\cdot\mathrm{KW}(q)^{|A|}
+&&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2}\cdot\mathrm{KW}(q)^{|A|}
+&&\bigl(\because\ \text{冪の指数法則}\ (2L^2-|A|)+|A|=2L^2\bigr)\\
+&=(1+q)^{2L^2}\cdot\sum_{A\in\mathcal{E}^{a,b}_L}\mathrm{KW}(q)^{|A|}
+&&\bigl(\because\ \text{分配則による共通因子の括り出し}\bigr)\\
+&=(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
+&&\bigl(\because\ \blkref{def_sector_generating_polynomial}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。全過程は有理数の四則と有限和の中で閉じ",
+        "（準備の等式の確認だけが部分体を経由した ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の等式）、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

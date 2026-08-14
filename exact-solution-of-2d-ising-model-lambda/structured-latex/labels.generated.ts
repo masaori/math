@@ -211,6 +211,7 @@ export const ALL_LABELS = [
   "claim_second_linear_monic",
   "claim_second_monic_add_lower",
   "claim_second_monic_prod",
+  "claim_sector_value_duality",
   "claim_self_dual_positive_root_unique",
   "claim_self_dual_quadratic_roots",
   "claim_self_dual_quadratic_roots_distinct",
