@@ -35258,6 +35258,11 @@ w\cdot w
       "正の実数 t を分配多項式へ代入した値 Z_L(t) ∈ ℝ の正値性を述べるため。" +
       "代入そのものが実数体への脱出である（README「形式変数のまま進む」）。" +
       "使う性質は「実数体への脱出の宣言」に挙げた順序体の性質だけであり、完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_pos",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_pos_by_separating_term_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_pos_from_necSuf",
+    ],
     verification: ["sagemath/check/partition-value-positive-at-positive-real"],
     statement: [
       paragraph([

@@ -989,6 +989,9 @@ targets=(
   Ising2DLambda.FisherZero.distanceSquaredToPositiveRational_ne_zero
   Ising2DLambda.NecSuf.FisherZero.distance_ne_zero_of_zero_implies_equal_necSuf
   Ising2DLambda.FisherZero.distanceSquaredToPositiveRational_ne_zero_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_pos
+  Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_pos_by_separating_term_necSuf
+  Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_pos_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
