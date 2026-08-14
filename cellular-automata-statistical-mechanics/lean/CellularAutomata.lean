@@ -3,3 +3,4 @@ import CellularAutomata.EssentialDependency
 import CellularAutomata.NecSuf.EssentialDependency
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.RedundantNeighbor
+import CellularAutomata.TimeExpansionDependency

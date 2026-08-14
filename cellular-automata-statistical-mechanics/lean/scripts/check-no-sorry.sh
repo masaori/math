@@ -73,6 +73,16 @@ targets=(
   CellularAutomata.NecSuf.RedundantNeighbor.no_essentialDep_on_added_element
   CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_transfer
   CellularAutomata.NecSuf.RedundantNeighbor.essentialDep_extendRule_iff
+  CellularAutomata.TimeExpansionDependency.globalMap_eq_extendRule
+  CellularAutomata.TimeExpansionDependency.globalFlip_iff_mem_supp
+  CellularAutomata.TimeExpansionDependency.mem_timeInterval
+  CellularAutomata.TimeExpansionDependency.card_timeInterval
+  CellularAutomata.TimeExpansionDependency.card_eventSet
+  CellularAutomata.TimeExpansionDependency.mem_oneStepDep
+  CellularAutomata.TimeExpansionDependency.mem_supp_map_imp_mem_neighborhood
+  CellularAutomata.TimeExpansionDependency.oneStepDep_subset
+  CellularAutomata.TimeExpansionDependency.card_scan_pairs_local
+  CellularAutomata.TimeExpansionDependency.time_strictly_increases
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
