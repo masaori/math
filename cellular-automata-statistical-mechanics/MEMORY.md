@@ -138,6 +138,22 @@ $\operatorname{supp}(f\circ\rho^T_S)=\operatorname{supp}(f)$（$T$ の部分集�
 sorry 検査を全て通した。**「冗長近傍からの独立性」は四層が揃い `done`。次 tick はレビュー後に
 「時間展開上の直接依存」の構造化記述だけを進める。**
 
+## 自動ループ tick: 時間展開上の直接依存の構造化記述（2026-08-15）
+
+前 tick の Lean 必要十分版と導出をレビューし、仮定の限定・証明手順の一致・特殊化の明示を確認、
+修正を要する誤りは見つからなかった。台帳先頭の未完了対象「時間展開上の直接依存」の構造化記述を
+`structured-latex/content/time-expansion-dependency.ts` に書いた。有限舞台 $(V,N)$・有限舞台上の
+2 値 CA・大域写像 $F$（各セルの値写像が冗長拡大 $f_v\circ\rho^V_{N(v)}$ に等しいことを定義内で
+明示）・時間区間 $[0,\tau]\subset\mathbb{N}$・イベント集合 $E_\tau=[0,\tau]\times V$・
+一段依存関係 $D_\tau$（$t=s+1$ かつ $u\in\operatorname{supp}(f_v)$）を定義した。claim は 4 つ:
+大域写像の一点反転による値の変化 ⟺ $u\in\operatorname{supp}(f_v)$（前二章の一点反転同値と
+依存台不変性の合成。依存条件に $N(v)$ でなく $\operatorname{supp}(f_v)$ を採る根拠）、
+$|E_\tau|=(\tau+1)\cdot|V|$、$D_\tau$ の有限性と所属の有限決定可能性、一段依存での時刻の厳密増加
+（次対象「推移閉包の反対称性」の入力）。時間は $\mathbb{N}$ の大小比較と後者だけを使い、
+$\mathbb{R}/\mathbb{C}$ 脱出なし。構造化テキスト check・PDF（7 ページ・未解決参照 0）、
+SageMath 8 本、対応検査、Lean build、sorry 検査を全て通した。
+**この章の現在地は構造化記述まで。次 tick はレビュー後にこの章の SageMath 検算を作る。**
+
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。

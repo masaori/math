@@ -7,20 +7,30 @@
 
 export const ALL_LABELS = [
   "claim_dependency_transfer",
+  "claim_event_set_cardinality",
   "claim_flip_test_equivalence",
+  "claim_global_flip_characterization",
   "claim_no_dependency_on_redundant_element",
+  "claim_one_step_dependency_finite_decidability",
   "claim_support_finite_decidability",
   "claim_support_invariance",
+  "claim_time_strictly_increases",
   "def_base_value_extension",
   "def_cardinality_notation",
   "def_essential_dependency",
   "def_essential_dependency_support",
+  "def_event_set",
+  "def_finite_ca",
+  "def_finite_stage",
   "def_flip_map",
+  "def_global_map",
   "def_local_truth_table",
   "def_negation_map",
+  "def_one_step_dependency",
   "def_redundant_extension",
   "def_restriction_map",
   "def_state_set",
+  "def_time_interval",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
