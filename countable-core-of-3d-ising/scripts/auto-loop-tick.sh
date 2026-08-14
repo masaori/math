@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # 自動ループの 1 tick を、独立したエージェントセッションとして走らせる。
 #
-# launchd（com.masaori.ising-3d-cut-auto-loop）から 30 分ごとに呼ばれる。
+# launchd（com.masaori.ising-3d-cut-auto-loop）から 15 分ごとに呼ばれる。
+# ただし**実際に走る間隔はこのスクリプトが決める**（下の「発火間隔の自動調整」を見よ）。
+# 打ち切り・異常終了が続くときは間隔を伸ばし、1 tick の持ち時間も一緒に伸ばす。
 # 手順の正本は docs/tasks/auto-loop-runbook.md、状態の正本は docs/tasks/auto-loop-state.md。
 # このスクリプトは「起動・多重起動の防止・作業場の用意・ログ」だけを担当し、
 # 作業内容の判断は一切しない。
@@ -10,7 +12,7 @@
 #
 # **2 次元側のループ（com.masaori.ising-lambda-auto-loop）とは別の作業ツリーで動く。**
 # 同じ作業ツリーを共有すると、片方が編集している間もう片方が「汚れている」で見送るため、
-# 30 分間隔のこちらはほぼ毎回見送られる（あちらの tick は 45 分走る）。
+# 短い間隔のこちらはほぼ毎回見送られる（あちらの tick は 45 分走る）。
 # そこでこのループは専用の git worktree を持ち、そこで作業して origin/main へ push する。
 set -euo pipefail
 
@@ -38,10 +40,29 @@ LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 
-# 1 tick の上限。次の発火（30 分後）に食い込ませないため 25 分で打ち切る。
-TICK_TIMEOUT_SECONDS=1500
+# --- 発火間隔の自動調整 ------------------------------------------------------
+# launchd は 15 分ごとに呼ぶが、**実際に走る間隔はここで決める**。
+# 打ち切り・異常終了（=中断）が 2 回続いたら、階段を 1 段上げて間隔を伸ばす。
+# 中断が続くのは 1 tick の持ち時間が足りていない兆候なので、間隔と一緒に持ち時間も伸ばす。
+# 正常終了したら 1 段下げる（いきなり最短へ戻さないのは、境界で伸縮を繰り返さないため）。
+INTERVAL_LADDER=(15 30 45 60)
+INTERVAL_MARK="$LOG_DIR/interval-minutes"
+INTERRUPTION_MARK="$LOG_DIR/consecutive-interruptions"
+NEXT_START_MARK="$LOG_DIR/next-earliest-start"
+# 中断が何回続いたら間隔を伸ばすか。1 回の中断は機械の一時的な事情でも起きるため 2 回とする。
+INTERRUPTIONS_TO_BACK_OFF=2
+# 作業場の用意・PDF 生成・公開・通知のために、間隔から必ず差し引く分。
+TICK_OVERHEAD_SECONDS=180
 
 mkdir -p "$LOG_DIR"
+
+interval_minutes="$(cat "$INTERVAL_MARK" 2>/dev/null || echo "${INTERVAL_LADDER[0]}")"
+case "$interval_minutes" in
+  15|30|45|60) : ;;
+  *) interval_minutes="${INTERVAL_LADDER[0]}" ;;
+esac
+# 1 tick の上限。次の発火に食い込ませないため、間隔から用意と後片付けの分を引く。
+TICK_TIMEOUT_SECONDS=$(( interval_minutes * 60 - TICK_OVERHEAD_SECONDS ))
 
 log() {
   printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"
@@ -74,6 +95,17 @@ for cli in claude codex; do
     exit 1
   fi
 done
+
+# 間隔を伸ばしている間は、launchd の発火を見送る（launchd 側の設定は 15 分ごとに固定）。
+TICK_START_EPOCH="$(date +%s)"
+next_earliest="$(cat "$NEXT_START_MARK" 2>/dev/null || echo 0)"
+case "$next_earliest" in
+  ''|*[!0-9]*) next_earliest=0 ;;
+esac
+if [ "$TICK_START_EPOCH" -lt "$next_earliest" ]; then
+  log "SKIP: 間隔を ${interval_minutes} 分へ伸ばしている（次に走れるのは $(date -r "$next_earliest" '+%H:%M' 2>/dev/null) 以降）"
+  exit 0
+fi
 
 # 多重起動の防止。mkdir は失敗が原子的なのでロックに使える。
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
@@ -188,9 +220,12 @@ ensure_lake_packages() {
 ensure_lake_packages
 
 # --- 締切 --------------------------------------------------------------------
-# まとめに入る締切は強制終了の 5 分前に置く。時間を見積もらせるのではなく時計を見させる。
-SOFT_DEADLINE="$(date -v+$(( (TICK_TIMEOUT_SECONDS - 300) / 60 ))M '+%H:%M' 2>/dev/null \
-  || date -d "+$(( (TICK_TIMEOUT_SECONDS - 300) / 60 )) minutes" '+%H:%M')"
+# まとめに入る締切は強制終了より前に置く。時間を見積もらせるのではなく時計を見させる。
+# 持ち時間は間隔によって変わるので、まとめの猶予も持ち時間の 3 分の 1（上限 5 分）とする。
+SOFT_MARGIN_SECONDS=$(( TICK_TIMEOUT_SECONDS / 3 ))
+[ "$SOFT_MARGIN_SECONDS" -gt 300 ] && SOFT_MARGIN_SECONDS=300
+SOFT_DEADLINE="$(date -v+$(( (TICK_TIMEOUT_SECONDS - SOFT_MARGIN_SECONDS) / 60 ))M '+%H:%M' 2>/dev/null \
+  || date -d "+$(( (TICK_TIMEOUT_SECONDS - SOFT_MARGIN_SECONDS) / 60 )) minutes" '+%H:%M')"
 HARD_DEADLINE="$(date -v+$(( TICK_TIMEOUT_SECONDS / 60 ))M '+%H:%M' 2>/dev/null \
   || date -d "+$(( TICK_TIMEOUT_SECONDS / 60 )) minutes" '+%H:%M')"
 
@@ -250,7 +285,7 @@ if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
   fi
 fi
 
-log "=== tick 開始（${agent} / 作業ツリー ${LOOP_WORKTREE} / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
+log "=== tick 開始（${agent} / 間隔 ${interval_minutes} 分 / 作業ツリー ${LOOP_WORKTREE} / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 
 set +e
 # MCP サーバは 1 つも起動しない（tick の作業に不要で、残ると機械が詰まる）。
@@ -293,15 +328,56 @@ record_leftover() {  # 失敗した tick が残したものを目印へ書く（
   fi
 }
 
+# 間隔の階段を上げ下げする。中断（打ち切り・異常終了）が続いたら伸ばし、正常終了で 1 段戻す。
+adjust_interval() {
+  local interrupted="$1"   # 1 なら中断
+  local count=0 idx=0 i new_interval="$interval_minutes"
+  count="$(cat "$INTERRUPTION_MARK" 2>/dev/null || echo 0)"
+  case "$count" in ''|*[!0-9]*) count=0 ;; esac
+  for i in "${!INTERVAL_LADDER[@]}"; do
+    [ "${INTERVAL_LADDER[$i]}" = "$interval_minutes" ] && idx="$i"
+  done
+
+  if [ "$interrupted" = "1" ]; then
+    count=$(( count + 1 ))
+    if [ "$count" -ge "$INTERRUPTIONS_TO_BACK_OFF" ]; then
+      count=0
+      if [ "$idx" -lt $(( ${#INTERVAL_LADDER[@]} - 1 )) ]; then
+        new_interval="${INTERVAL_LADDER[$(( idx + 1 ))]}"
+        log "    中断が ${INTERRUPTIONS_TO_BACK_OFF} 回続いた。間隔を ${interval_minutes} 分から ${new_interval} 分へ伸ばす（1 tick の持ち時間も伸びる）"
+      else
+        log "    中断が続いているが、間隔はすでに階段の最長（${interval_minutes} 分）である"
+      fi
+    else
+      log "    中断が ${count} 回目（${INTERRUPTIONS_TO_BACK_OFF} 回続いたら間隔を伸ばす）"
+    fi
+  else
+    count=0
+    if [ "$idx" -gt 0 ]; then
+      new_interval="${INTERVAL_LADDER[$(( idx - 1 ))]}"
+      log "    正常終了したので間隔を ${interval_minutes} 分から ${new_interval} 分へ戻す"
+    fi
+  fi
+
+  printf '%s\n' "$count" > "$INTERRUPTION_MARK"
+  printf '%s\n' "$new_interval" > "$INTERVAL_MARK"
+  # 次に走れる時刻。launchd の発火（毎時 0/15/30/45 分）との数秒のずれで 1 回分余計に
+  # 見送られないよう、2 分だけ手前に置く。
+  printf '%s\n' "$(( TICK_START_EPOCH + new_interval * 60 - 120 ))" > "$NEXT_START_MARK"
+}
+
 if [ "$status" -eq 124 ] || [ "$status" -eq 137 ]; then
   log "=== tick 打ち切り（${TICK_TIMEOUT_SECONDS} 秒を超えた。exit ${status}）"
   record_leftover "打ち切り (exit $status)"
+  adjust_interval 1
 elif [ "$status" -ne 0 ]; then
   log "=== tick 異常終了 (exit $status)"
   record_leftover "異常終了 (exit $status)"
+  adjust_interval 1
 else
   log "=== tick 正常終了"
   record_leftover "正常終了したが未コミットの成果が残った"
+  adjust_interval 0
 fi
 
 # 人間が開いたまま進み具合を見られるように、PDF をメインの作業ツリー側の固定パスへ置く。
