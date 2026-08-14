@@ -4,6 +4,26 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 232 は、レビューで前 tick の「正錐と乗法の両立」の Lean 三本を本文と
+突き合わせ、修正不要と確認した。そのあと「正の根の特定 $x_c=\sqrt2-1$」を記述と SageMath
+まで進めた。八ブロック: 根 $-1+s$ の所属（`claim_self_dual_root_plus_mem`）と表示 $(-1,1)$
+（`claim_self_dual_root_plus_representation`）、根 $-1-s$ の所属
+（`claim_self_dual_root_minus_mem`）と表示 $(-1,-1)$
+（`claim_self_dual_root_minus_representation`）、$-1+s\in P_s$（第三条件 $-1<0$、$0<1$、
+$1<2$。`claim_self_dual_root_plus_positive`）、$-1-s\notin P_s$（三条件すべて破れる。
+`claim_self_dual_root_minus_not_positive`）、正の根の一意性
+（`claim_self_dual_positive_root_unique`。自己双対方程式の根で $P_s$ に属するものは $-1+s$
+に限る）、臨界点の定義 $x_c:=-1+s$（`def_critical_point`。実数の順序は使わず、$\sqrt2-1$ は
+流儀の照合としてのみ言及）。SageMath（`sagemath/check/self-dual-root-positive/`）は
+$s\cdot s=2$ の 2 つの $s$ の両方で全段（所属の鎖・表示・三条件の判定・一意性・自己双対方程式）
+を厳密検査して通過した。本文末尾「この先に書くこと」から済んだ Fisher 零点の項目を消した。
+**Lean は未着手**で、次 tick はこの八ブロックの Lean（具体版・必要十分版・導出）を完成させる。
+式変形統一では姉妹側「$Z=\mathrm{tr}(W^n)$」（`011_max_eigenvalue.ts` の
+`maxeig_002_claim_Z_equals_trace_of_W`）の証明にあった二つの根拠なし連鎖（$W^n$ の括り直しと
+トレースの巡回性の三等号）を、結合法則・冪の定義・$V_1=BB$・巡回性・$W=BV_2B$ を行末根拠に
+した七段の一続きの鎖へ開いた。次の式変形統一は同ファイルを先頭から機械走査した次の根拠なしの
+計算（散文内の等号を含む）から続ける。
+
 2026-08-14 の tick 231 は、レビューで前 tick の「正錐と乗法の両立」の本文と SageMath を
 突き合わせ、積の表示、可換則による転送、九通りの符号場合の網羅が一致するため修正不要と確認した。
 そのあと Lean 具体版 `quadraticPositiveCone_mul_mem`、必要十分版

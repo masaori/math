@@ -122,34 +122,31 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
         ref("def_symmetrized_transfer_matrix"),
         " より ",
         math(String.raw`BB = V_1`),
-        " である。行列の積の結合法則で括り直すと",
-      ]),
-      displayMath(
-        String.raw`W^{n} = (B V_2 B)^{n}
-= B\,\underbrace{(V_2\,BB)(V_2\,BB)\cdots(V_2\,BB)}_{n-1\ \text{個}}\,V_2\,B
-= B\,\left(V_2 V_1\right)^{n-1}V_2\,B`,
-      ),
-      paragraph([
-        ref("trace_basic_properties"),
-        " (2) の巡回性を ",
-        math(String.raw`A = B\left(V_2V_1\right)^{n-1}V_2`),
         "、",
-        math(String.raw`B = B`),
-        " に適用して右端の ",
-        math(String.raw`B`),
-        " を左へ回すと",
+        math(String.raw`W = BV_2B`),
+        " である。トレースの巡回性は ",
+        ref("trace_basic_properties"),
+        " (2) のものである。次の等式鎖を得る。",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}(W^{n})
-= \mathrm{tr}\!\left(B\,B\left(V_2V_1\right)^{n-1}V_2\right)
-= \mathrm{tr}\!\left(V_1\left(V_2V_1\right)^{n-1}V_2\right)
-= \mathrm{tr}\!\left((V_1V_2)^{n}\right)`,
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left((V_1V_2)^{n}\right)
+&= \mathrm{tr}\!\left(V_1\,\underbrace{(V_2\,V_1)(V_2\,V_1)\cdots(V_2\,V_1)}_{n-1\ \text{個}}\,V_2\right)
+   \quad (\because \text{行列の積の結合法則で括り直す}) \\
+&= \mathrm{tr}\!\left(V_1\left(V_2V_1\right)^{n-1}V_2\right)
+   \quad (\because \text{冪の定義}) \\
+&= \mathrm{tr}\!\left(B\,B\left(V_2V_1\right)^{n-1}V_2\right)
+   \quad (\because V_1 = BB) \\
+&= \mathrm{tr}\!\left(B\left(V_2V_1\right)^{n-1}V_2\,B\right)
+   \quad (\because \text{巡回性 } \mathrm{tr}(AB)=\mathrm{tr}(BA)\ \text{を}\ A=B,\ B=B(V_2V_1)^{n-1}V_2\ \text{に適用}) \\
+&= \mathrm{tr}\!\left(B\,\underbrace{(V_2\,BB)(V_2\,BB)\cdots(V_2\,BB)}_{n-1\ \text{個}}\,V_2\,B\right)
+   \quad (\because V_1 = BB\ \text{と冪の定義}) \\
+&= \mathrm{tr}\!\left((B V_2 B)^{n}\right)
+   \quad (\because \text{行列の積の結合法則で括り直す}) \\
+&= \mathrm{tr}\!\left(W^{n}\right)
+   \quad (\because W = BV_2B)
+\end{aligned}`,
       ),
-      paragraph([
-        "最後の等号は ",
-        math(String.raw`V_1(V_2V_1)^{n-1}V_2 = (V_1V_2)^{n}`),
-        "（結合法則で括り直すだけ）による。",
-      ]),
     ],
     conversion: { status: "added" },
   },

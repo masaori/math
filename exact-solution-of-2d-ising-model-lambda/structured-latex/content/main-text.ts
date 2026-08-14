@@ -33182,6 +33182,426 @@ A\cdot A
   },
 
   {
+    id: "fisher_zero_claim_self_dual_root_plus_mem",
+    kind: "claim",
+    title: { text: "根 −1+s の所属" },
+    labels: ["claim_self_dual_root_plus_mem"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+        math(String.raw`-1+s`),
+        "（", math(String.raw`(-1)+s`),
+        " を表す。", ref("claim_self_dual_quadratic_roots"),
+        " と同じ記法）は ",
+        math(String.raw`Q_s`),
+        "（", ref("def_quadratic_field_set"), "）に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（", ref("def_algebraic_numbers"),
+        "）から、", math(String.raw`-1\in\mathbb{Q}`),
+        "、", math(String.raw`1\in\mathbb{Q}`),
+        " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の元でもある。次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-1+s
+&=(-1)+s
+&&\bigl(\because\ \text{記法}\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&=(-1)+1\cdot s
+&&\bigl(\because\ \text{単位元との積}\ 1\cdot s=s\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`-1\in\mathbb{Q}`),
+        "、", math(String.raw`1\in\mathbb{Q}`),
+        " なので、組 ", math(String.raw`(-1,1)`),
+        " が ", ref("def_quadratic_field_set"),
+        " の存在条件の証人になり、",
+        math(String.raw`-1+s\in Q_s`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`), " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_root_plus_representation",
+    kind: "claim",
+    title: { text: "根 −1+s の表示" },
+    labels: ["claim_self_dual_root_plus_representation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+        ref("claim_self_dual_root_plus_mem"),
+        " により ", math(String.raw`-1+s\in Q_s`),
+        " であり、",
+        math(String.raw`\mathrm{rep}_s(-1+s)=(-1,1)`),
+        "（", ref("def_quadratic_representation_map"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_self_dual_root_plus_mem"),
+        " の証明の鎖により ",
+        math(String.raw`-1+s=(-1)+1\cdot s`),
+        " である。",
+        math(String.raw`\mathrm{rep}_s(-1+s)`),
+        " は ", math(String.raw`-1+s`),
+        " を表す唯一の組である（",
+        ref("def_quadratic_representation_map"),
+        "）。表示 ", math(String.raw`(-1,1)`),
+        " に ", ref("claim_quadratic_representation_unique"),
+        " を適用して ",
+        math(String.raw`\mathrm{rep}_s(-1+s)=(-1,1)`),
+        " を得る。全過程は体 ",
+        math(String.raw`\mathbb{Q}`), " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_root_minus_mem",
+    kind: "claim",
+    title: { text: "根 −1−s の所属" },
+    labels: ["claim_self_dual_root_minus_mem"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+        math(String.raw`-1-s`),
+        "（", math(String.raw`(-1)+(-s)`),
+        " を表す。", ref("claim_self_dual_quadratic_roots"),
+        " と同じ記法）は ",
+        math(String.raw`Q_s`),
+        "（", ref("def_quadratic_field_set"), "）に属する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
+        " は部分体である（", ref("def_algebraic_numbers"),
+        "）から、", math(String.raw`-1\in\mathbb{Q}`),
+        " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の元でもある。次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-1-s
+&=(-1)+(-s)
+&&\bigl(\because\ \text{記法}\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&=(-1)+\bigl(-(1\cdot s)\bigr)
+&&\bigl(\because\ \text{単位元との積}\ 1\cdot s=s\bigr)\\
+&=(-1)+(-1)\cdot s
+&&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`-1\in\mathbb{Q}`),
+        " なので、組 ", math(String.raw`(-1,-1)`),
+        " が ", ref("def_quadratic_field_set"),
+        " の存在条件の証人になり、",
+        math(String.raw`-1-s\in Q_s`),
+        " である。全過程は体 ",
+        math(String.raw`\mathbb{Q}`), " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_root_minus_representation",
+    kind: "claim",
+    title: { text: "根 −1−s の表示" },
+    labels: ["claim_self_dual_root_minus_representation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+        ref("claim_self_dual_root_minus_mem"),
+        " により ", math(String.raw`-1-s\in Q_s`),
+        " であり、",
+        math(String.raw`\mathrm{rep}_s(-1-s)=(-1,-1)`),
+        "（", ref("def_quadratic_representation_map"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_self_dual_root_minus_mem"),
+        " の証明の鎖により ",
+        math(String.raw`-1-s=(-1)+(-1)\cdot s`),
+        " である。",
+        math(String.raw`\mathrm{rep}_s(-1-s)`),
+        " は ", math(String.raw`-1-s`),
+        " を表す唯一の組である（",
+        ref("def_quadratic_representation_map"),
+        "）。表示 ", math(String.raw`(-1,-1)`),
+        " に ", ref("claim_quadratic_representation_unique"),
+        " を適用して ",
+        math(String.raw`\mathrm{rep}_s(-1-s)=(-1,-1)`),
+        " を得る。全過程は体 ",
+        math(String.raw`\mathbb{Q}`), " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_root_plus_positive",
+    kind: "claim",
+    title: { text: "根 −1+s は正である" },
+    labels: ["claim_self_dual_root_plus_positive"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+        ref("claim_self_dual_root_plus_mem"),
+        " により ", math(String.raw`-1+s\in Q_s`),
+        " であり、",
+        math(String.raw`-1+s\in P_s`),
+        "（", ref("def_quadratic_positive_cone"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`(a,b):=\mathrm{rep}_s(-1+s)=(-1,1)`),
+        " と置く（", ref("claim_self_dual_root_plus_representation"),
+        "）。", ref("def_quadratic_positive_cone"),
+        " の第三の条件（",
+        math(String.raw`a<0`), " かつ ",
+        math(String.raw`0<b`), " かつ ",
+        math(String.raw`a\cdot a<2\cdot b\cdot b`),
+        "）を確かめる。不等号はすべて有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序である。",
+        math(String.raw`a=-1<0`),
+        "、",
+        math(String.raw`0<1=b`),
+        " である。第三の不等式の両辺は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a\cdot a
+&=(-1)\cdot(-1)
+&&\bigl(\because\ a=-1\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb{Q}\ \text{の符号規則}\ (-u)\cdot(-v)=u\cdot v\ \text{と単位元との積}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+2\cdot(b\cdot b)
+&=2\cdot(1\cdot1)
+&&\bigl(\because\ b=1\bigr)\\
+&=2
+&&\bigl(\because\ \text{単位元との積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`1<2`),
+        "（", math(String.raw`\mathbb{Q}`),
+        " の順序）だから ",
+        math(String.raw`a\cdot a<2\cdot b\cdot b`),
+        " である。三つの比較がすべて成り立つので第三の条件が満たされ、",
+        ref("def_quadratic_positive_cone"),
+        " により ",
+        math(String.raw`-1+s\in P_s`),
+        " である。全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_root_minus_not_positive",
+    kind: "claim",
+    title: { text: "根 −1−s は正でない" },
+    labels: ["claim_self_dual_root_minus_not_positive"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+        ref("claim_self_dual_root_minus_mem"),
+        " により ", math(String.raw`-1-s\in Q_s`),
+        " であり、",
+        math(String.raw`-1-s\notin P_s`),
+        "（", ref("def_quadratic_positive_cone"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`(a,b):=\mathrm{rep}_s(-1-s)=(-1,-1)`),
+        " と置く（", ref("claim_self_dual_root_minus_representation"),
+        "）。", ref("def_quadratic_positive_cone"),
+        " の三つの条件を順に確かめる。不等号はすべて有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序である。",
+      ]),
+      list([
+        [
+          "第一の条件は ", math(String.raw`0\le a`),
+          " を要求するが、", math(String.raw`a=-1<0`),
+          " なので満たされない。",
+        ],
+        [
+          "第二の条件は ", math(String.raw`0<a`),
+          " を要求するが、", math(String.raw`a=-1<0`),
+          " なので満たされない。",
+        ],
+        [
+          "第三の条件は ", math(String.raw`0<b`),
+          " を要求するが、", math(String.raw`b=-1<0`),
+          " なので満たされない。",
+        ],
+      ]),
+      paragraph([
+        ref("def_quadratic_positive_cone"),
+        " により、正であることは三つの条件の少なくとも一つが成り立つことである。",
+        "三つとも満たされないので ",
+        math(String.raw`-1-s\notin P_s`),
+        " である。全過程は有理数の順序の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_claim_self_dual_positive_root_unique",
+    kind: "claim",
+    title: { text: "自己双対方程式の正の根は −1+s に限る" },
+    labels: ["claim_self_dual_positive_root_unique"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        " について、",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        "（", ref("claim_self_dual_quadratic_roots"),
+        " と同じ記法）かつ ",
+        math(String.raw`\xi\in P_s`),
+        "（", ref("def_quadratic_positive_cone"),
+        "）ならば、",
+        math(String.raw`\xi=-1+s`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " と仮定すると、",
+        ref("claim_self_dual_quadratic_roots"),
+        " により ",
+        math(String.raw`\xi=-1+s`),
+        " または ",
+        math(String.raw`\xi=-1-s`),
+        " である。二つの場合は別々の仮定なので場合分けする。",
+      ]),
+      list([
+        [
+          math(String.raw`\xi=-1+s`),
+          " の場合。示すべき等式そのものである。",
+        ],
+        [
+          math(String.raw`\xi=-1-s`),
+          " の場合。仮定 ",
+          math(String.raw`\xi\in P_s`),
+          " から ",
+          math(String.raw`-1-s\in P_s`),
+          " が従うが、これは ",
+          ref("claim_self_dual_root_minus_not_positive"),
+          " の ",
+          math(String.raw`-1-s\notin P_s`),
+          " と矛盾する。したがってこの場合は起きない。",
+        ],
+      ]),
+      paragraph([
+        "いずれの場合も ",
+        math(String.raw`\xi=-1+s`),
+        " である。全過程は代数的数の等式と有理数の順序の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "fisher_zero_definition_critical_point",
+    kind: "definition",
+    title: { text: "臨界点" },
+    labels: ["def_critical_point"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/self-dual-root-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+      ]),
+      displayMath(String.raw`x_c:=-1+s\in\overline{\mathbb{Q}}`),
+      paragraph([
+        "と定め、これを臨界点と呼ぶ。",
+        ref("claim_self_dual_root_plus_positive"),
+        " により ",
+        math(String.raw`x_c\in P_s`),
+        " であり、",
+        ref("claim_self_dual_positive_root_unique"),
+        " により、自己双対方程式 ",
+        math(String.raw`\xi^2+2\xi-1=0`),
+        " の根であって正錐 ",
+        math(String.raw`P_s`),
+        "（", ref("def_quadratic_positive_cone"),
+        "）に属するものは ",
+        math(String.raw`x_c`),
+        " に限る。すなわち ",
+        math(String.raw`x_c`),
+        " は、根 ",
+        math(String.raw`s`),
+        " の選択と正錐だけで指定される。根を ",
+        math(String.raw`-s`),
+        " に取り替えた場合の対応は ",
+        ref("remark_positive_cone_sign_choice"),
+        " のとおりで、",
+        math(String.raw`x_c`),
+        " の指定は同じ形で保たれる。実数の平方根記号を使う流儀ではこの元は ",
+        math(String.raw`\sqrt2-1`),
+        " と書かれるが、本文ではその記号を使わず、",
+        math(String.raw`s`),
+        " と正錐で指定する（実数体の順序は使っていない）。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -33208,13 +33628,6 @@ A\cdot A
           math(String.raw`q^{*}`),
           " での値の関係を書く（双対変換を定義したあとでないと書けないので、",
           "自己双対点のあとに置く）。",
-        ],
-        [
-          todo("未着手"),
-          "「Fisher 零点」: 自己双対点 ",
-          math(String.raw`x_c=\sqrt2-1`),
-          " を出す。自己双対方程式の根を求め、正の根を特定する",
-          "（2 つの根は体の自己同型で移り合うので、正の根の特定には実代数的数の順序が要る）。",
         ],
         [
           todo("未着手"),
