@@ -1007,6 +1007,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_le_upperBound
   Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_le_uniform_bound_necSuf
   Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_le_upperBound_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_naturalPower
+  Ising2DLambda.NecSuf.ThermodynamicLimit.naturalPower_map_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_naturalPower_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

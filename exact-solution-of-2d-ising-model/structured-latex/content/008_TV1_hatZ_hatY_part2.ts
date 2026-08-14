@@ -5566,13 +5566,43 @@ e^{i\theta_M}
         math(String.raw`x = 2K_2`),
         " に適用して",
       ]),
-      displayMath(String.raw`c_1 > s_1 > 0, \qquad c_2 > s_2 > 0`),
+      displayMath(
+        String.raw`\begin{aligned}
+c_1
+&= \cosh 2K_1
+&& (\because\ \text{記号の定義})\\
+&> \sinh 2K_1
+&& (\because\ 2K_1>0\ \text{における}\ \cosh x>\sinh x)\\
+&= s_1
+&& (\because\ \text{記号の定義})\\
+&> 0
+&& (\because\ 2K_1>0\ \text{における}\ \sinh x>0)\\[3pt]
+c_2
+&= \cosh 2K_2
+&& (\because\ \text{記号の定義})\\
+&> \sinh 2K_2
+&& (\because\ 2K_2>0\ \text{における}\ \cosh x>\sinh x)\\
+&= s_2
+&& (\because\ \text{記号の定義})\\
+&> 0
+&& (\because\ 2K_2>0\ \text{における}\ \sinh x>0)
+\end{aligned}`,
+      ),
       paragraph([
         "特に ",
         math(String.raw`c_1, s_1, c_2, s_2 \in \mathbb{R}_{>0}`),
         "。また同 (2) より",
       ]),
-      displayMath(String.raw`c_1^2 = 1 + s_1^2, \qquad c_2^2 = 1 + s_2^2`),
+      displayMath(
+        String.raw`\begin{aligned}
+c_1^2
+&= 1+s_1^2
+&& (\because\ \cosh^2 x-\sinh^2 x=1\ \text{を}\ x=2K_1\ \text{へ適用})\\
+c_2^2
+&= 1+s_2^2
+&& (\because\ \cosh^2 x-\sinh^2 x=1\ \text{を}\ x=2K_2\ \text{へ適用})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 1: ",
         math(String.raw`(\Rightarrow)`),
@@ -5692,8 +5722,15 @@ c_1^2
         " をとれば第 1 条件は自動的に満たされるから",
       ]),
       displayMath(
-        String.raw`\gamma_2(\theta_M) = 0 \iff c_1 = s_1 c_2 \iff s_1 s_2 = 1
-\iff \sinh 2K_1 \sinh 2K_2 = 1`,
+        String.raw`\begin{aligned}
+\gamma_2(\theta_M)=0
+&\iff c_1=s_1c_2
+&& (\because\ \mu=M\ \text{では第 1 条件}\ \mu=\pm M\ \text{が成り立つ})\\
+&\iff s_1s_2=1
+&& (\because\ \text{Step 1 と Step 2})\\
+&\iff \sinh 2K_1\sinh 2K_2=1
+&& (\because\ s_1=\sinh 2K_1,\ s_2=\sinh 2K_2)
+\end{aligned}`,
       ),
       paragraph([
         "（2 番目の同値が Step 1, Step 2 で示したもの、3 番目は ",
@@ -5743,6 +5780,7 @@ c_1^2
         "2026-08-13 の式変形統一で、Step 1 の積み重ねた等式列（根拠なし・最終行に等号 2 つ）を、" +
           "2 乗の代入の鎖と s_1^2 を引く鎖の二本の一行一等号の鎖へ分け、Step 2 の鎖の各行へ行末根拠を付けた。" +
           "内容は変えていない。",
+        "2026-08-15 の式変形統一で、Step 0 の正値性と双曲線恒等式、および Step 3 の臨界条件への同値鎖を、一行一関係と行末根拠を持つ整列式へ開いた。内容は変えていない。",
       ],
     },
   },

@@ -36187,6 +36187,11 @@ Z_L(t)
       "実対数の値 log_ℝ(u^n) ∈ ℝ について述べるため。使う性質は「実数体への脱出の宣言」に挙げた" +
       "順序体の性質と ι_{ℚ→ℝ}、「実対数の導入」の乗法を加法へ移す性質、および本文で証明済みの" +
       "実対数の 1 における値だけであり、狭義単調性・完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.realLogarithm_naturalPower",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.naturalPower_map_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.realLogarithm_naturalPower_from_necSuf",
+    ],
     verification: ["sagemath/check/real-log-natural-power"],
     statement: [
       paragraph([
