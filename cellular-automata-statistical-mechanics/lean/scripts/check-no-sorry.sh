@@ -57,6 +57,10 @@ targets=(
   CellularAutomata.EssentialDependency.essentialDep_iff_flip
   CellularAutomata.EssentialDependency.mem_supp_iff
   CellularAutomata.EssentialDependency.card_scan_pairs
+  CellularAutomata.EssentialDependency.essentialDep_iff_flip_from_necessary_sufficient
+  CellularAutomata.EssentialDependency.card_scan_pairs_from_necessary_sufficient
+  CellularAutomata.NecSuf.EssentialDependency.essentialDep_iff_flip
+  CellularAutomata.NecSuf.EssentialDependency.card_scan_pairs
 )
 
 tmpfile="$(mktemp /tmp/check-axioms-XXXXXX.lean)"

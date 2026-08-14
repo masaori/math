@@ -33,6 +33,7 @@ import Mathlib.Data.Fintype.Pi
 import Mathlib.Data.Fintype.Prod
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.Data.Finset.Filter
+import CellularAutomata.NecSuf.EssentialDependency
 
 namespace CellularAutomata.EssentialDependency
 
@@ -123,8 +124,8 @@ w ∈ supp(f) は、有限集合 A^S の元 x を走る有限個の条件 f(x) �
 決定できる」という、人手証明がまさに根拠に挙げる初等的事実である。
 -/
 instance (f : (S → State) → State) (w : S) : Decidable (EssentialDep f w) :=
-  decidable_of_iff (∃ x : S → State, f x ≠ f (flip w x))
-    (essentialDep_iff_flip f w).symm
+  CellularAutomata.NecSuf.EssentialDependency.essentialDepDecidable
+    nu ne_iff_eq_nu f w
 
 /-- 本質的依存台 supp(f)（`def_essential_dependency_support`）。S が有限なので有限集合である。 -/
 def supp (f : (S → State) → State) : Finset S :=
@@ -143,5 +144,23 @@ theorem mem_supp_iff (f : (S → State) → State) (w : S) :
 theorem card_scan_pairs :
     Fintype.card (S × (S → State)) = Fintype.card S * 2 ^ Fintype.card S := by
   rw [Fintype.card_prod, Fintype.card_fun, card_state]
+
+omit [Fintype S] in
+/-- 具体版の同値定理が、必要十分版を状態型 `State` と `nu` に特殊化して得られること。 -/
+theorem essentialDep_iff_flip_from_necessary_sufficient
+    (f : (S → State) → State) (w : S) :
+    EssentialDep f w ↔ ∃ x : S → State, f x ≠ f (flip w x) := by
+  have hflip : flip w = CellularAutomata.NecSuf.EssentialDependency.flip nu w := by
+    funext x u
+    simp [CellularAutomata.EssentialDependency.flip,
+      CellularAutomata.NecSuf.EssentialDependency.flip]
+  rw [hflip]
+  exact CellularAutomata.NecSuf.EssentialDependency.essentialDep_iff_flip
+    nu ne_iff_eq_nu f w
+
+/-- 具体版の走査組数が、必要十分版の一般の状態型に対する個数式の特殊化で得られること。 -/
+theorem card_scan_pairs_from_necessary_sufficient :
+    Fintype.card (S × (S → State)) = Fintype.card S * 2 ^ Fintype.card S := by
+  rw [CellularAutomata.NecSuf.EssentialDependency.card_scan_pairs, card_state]
 
 end CellularAutomata.EssentialDependency
