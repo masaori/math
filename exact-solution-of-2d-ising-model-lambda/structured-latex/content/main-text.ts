@@ -33055,6 +33055,128 @@ A\cdot A
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_cone_mul_closed",
+    kind: "claim",
+    title: { text: "正錐と乗法の両立" },
+    labels: ["claim_quadratic_positive_cone_mul_closed"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/quadratic-positive-cone-mul-closed"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " を ", math(String.raw`s\cdot s=2`), " を満たす元とする。任意の ",
+        math(String.raw`\xi,\eta\in P_s`), "（",
+        ref("def_quadratic_positive_cone"),
+        "）について、", math(String.raw`\xi\cdot\eta\in P_s`),
+        " である。ここで積は ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`), "、",
+        math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+        " と置く（", ref("def_quadratic_representation_map"), "）。",
+        math(String.raw`\xi\in P_s`), " の定義（",
+        ref("def_quadratic_positive_cone"),
+        "）により、", math(String.raw`(a,b)`),
+        " は非負係数条件・負の第二係数条件・負の第一係数条件の少なくとも一つを満たす。",
+        math(String.raw`\eta\in P_s`), " により ", math(String.raw`(a',b')`),
+        " も同様である。したがって条件の組み合わせは九通りであり、",
+        "以下でそのすべてを尽くす。",
+      ]),
+      paragraph([
+        "先に、", math(String.raw`\xi`), " と ", math(String.raw`\eta`),
+        " の役割を入れ替える転送を準備する。表示は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(\xi\cdot\eta)
+&=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')
+  &&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr)\\
+&=(a'\cdot a+2\cdot(b'\cdot b),\ a'\cdot b+b'\cdot a)
+  &&\bigl(\because\ \mathbb{Q}\ \text{の乗法の可換則と加法の可換則を各成分に適用する}\bigr)\\
+&=\mathrm{rep}_s(\eta\cdot\xi)
+  &&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr)
+\end{aligned}`),
+      paragraph([
+        "と等しく、正錐への所属は表示だけで判定される（",
+        ref("def_quadratic_positive_cone"),
+        "）から、", math(String.raw`\eta\cdot\xi\in P_s`), " ならば ",
+        math(String.raw`\xi\cdot\eta\in P_s`),
+        " である。これを以下で「転送」と呼ぶ。",
+      ]),
+      list([
+        [
+          math(String.raw`(a,b)`), " と ", math(String.raw`(a',b')`),
+          " がともに非負係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_nonnegative"),
+          " により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`),
+          " が負の第二係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_nonnegative_negative_second"),
+          " により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`),
+          " が負の第一係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_nonnegative_negative_first"),
+          " により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`),
+          " が非負係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_nonnegative_negative_second"),
+          " を ", math(String.raw`\eta`), " と ", math(String.raw`\xi`),
+          " へこの順に適用して ", math(String.raw`\eta\cdot\xi\in P_s`),
+          " を得て、転送により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " と ", math(String.raw`(a',b')`),
+          " がともに負の第二係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_negative_second_negative_second"),
+          " により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`),
+          " が負の第一係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_mixed_signs"),
+          " により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`),
+          " が非負係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_nonnegative_negative_first"),
+          " を ", math(String.raw`\eta`), " と ", math(String.raw`\xi`),
+          " へこの順に適用して ", math(String.raw`\eta\cdot\xi\in P_s`),
+          " を得て、転送により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`),
+          " が負の第二係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_mixed_signs"),
+          " を ", math(String.raw`\eta`), " と ", math(String.raw`\xi`),
+          " へこの順に適用して ", math(String.raw`\eta\cdot\xi\in P_s`),
+          " を得て、転送により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+        [
+          math(String.raw`(a,b)`), " と ", math(String.raw`(a',b')`),
+          " がともに負の第一係数条件を満たす場合。",
+          ref("claim_quadratic_positive_mul_negative_first_negative_first"),
+          " により ", math(String.raw`\xi\cdot\eta\in P_s`), " である。",
+        ],
+      ]),
+      paragraph([
+        "九通りの場合を尽くして、いずれの場合も ",
+        math(String.raw`\xi\cdot\eta\in P_s`),
+        " である。全過程は有理数の四則と順序、および代数的数の積だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
