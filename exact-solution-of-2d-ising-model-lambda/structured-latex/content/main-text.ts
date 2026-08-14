@@ -35186,6 +35186,167 @@ w\cdot w
   },
 
   {
+    id: "thermodynamic_limit_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "熱力学極限" },
+    labels: [],
+  },
+
+  {
+    id: "thermodynamic_limit_remark_real_field_escape",
+    kind: "remark",
+    title: { text: "実数体への脱出の宣言" },
+    labels: ["remark_real_field_escape"],
+    habitat: "R",
+    realEscape:
+      "この章は熱力学極限（自由エネルギー密度・零点密度）を扱う。これらは実数の量なので、" +
+      "この章の各ブロックは実数体 ℝ を使う。ここまでの本文に ℝ は一度も現れていない。" +
+      "どの性質を使うかはブロックごとに realEscape へ書く。このブロック自身は ℝ の導入の宣言である。",
+    statement: [
+      paragraph([
+        "この章から実数体 ",
+        math(String.raw`\mathbb{R}`),
+        " を使う。ここまでの本文はすべて可算な対象（",
+        math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda`),
+        "、",
+        math(String.raw`\mathbb{Z}[x]`),
+        "、",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        "）の中で閉じており、実数体は一度も現れていない。この章で初めて脱出する。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " の構成はここでは行わず、次の性質を既知の数学として引く。第一に、",
+        math(String.raw`\mathbb{R}`),
+        " は順序体である（四則が定義され、順序 ",
+        math(String.raw`<_{\mathbb{R}}`),
+        " が加法・乗法と両立する。とくに ",
+        math(String.raw`0<_{\mathbb{R}}1`),
+        "、正の元どうしの和と積は正、正の元の逆元は正）。第二に、",
+        math(String.raw`\mathbb{Q}`),
+        " から ",
+        math(String.raw`\mathbb{R}`),
+        " への体準同型で、",
+        math(String.raw`\mathbb{Q}`),
+        " の通常の順序を ",
+        math(String.raw`<_{\mathbb{R}}`),
+        " へ移す単射が存在する。この単射を ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}:\mathbb{Q}\to\mathbb{R}`),
+        " と書き、同一視はしない（有理数を ",
+        math(String.raw`\mathbb{R}`),
+        " の元として使うときは必ず ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " を通す）。",
+      ]),
+      paragraph([
+        "この章のこの先のブロックが使ってよいのはここに挙げた性質だけである。",
+        "完備性（上限の存在）・数列の極限・実対数は、この宣言には含めていない。",
+        "使うブロックが現れた時点で、そのブロックの realEscape に理由を書いて追加する",
+        "（不要な構造を先回りして持ち込まないため）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_partition_value_positive",
+    kind: "claim",
+    title: { text: "正の実数での分配多項式の値は正である" },
+    labels: ["claim_partition_value_positive_at_positive_real"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t を分配多項式へ代入した値 Z_L(t) ∈ ℝ の正値性を述べるため。" +
+      "代入そのものが実数体への脱出である（README「形式変数のまま進む」）。" +
+      "使う性質は「実数体への脱出の宣言」に挙げた順序体の性質だけであり、完備性・極限は使わない。",
+    verification: ["sagemath/check/partition-value-positive-at-positive-real"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る。代入の結果 ",
+        math(String.raw`Z_L(t)\in\mathbb{R}`),
+        "（",
+        ref("def_partition_polynomial"),
+        " の代入の約束を可換環 ",
+        math(String.raw`\mathbb{R}`),
+        " に対して使う）について、",
+        math(String.raw`0<_{\mathbb{R}}Z_L(t)`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 2 つ置く。第一に、",
+        math(String.raw`\sigma_{+}:V_L\to\{+1,-1\}`),
+        " を、すべての頂点 ",
+        math(String.raw`v\in V_L`),
+        " に ",
+        math(String.raw`+1`),
+        " を割り当てる定数写像とする。写像なので ",
+        math(String.raw`\sigma_{+}\in\Sigma_L`),
+        " である（",
+        ref("def_configuration"),
+        "）。",
+      ]),
+      paragraph([
+        "第二に、任意の ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " について ",
+        math(String.raw`0<_{\mathbb{R}}t^{\,b(\sigma)}`),
+        " を、指数 ",
+        math(String.raw`b(\sigma)\in\mathbb{N}`),
+        "（",
+        ref("def_broken_bond_count"),
+        "）についての帰納法で示す。指数が ",
+        math(String.raw`0`),
+        " のとき ",
+        math(String.raw`t^{0}=1`),
+        " であり ",
+        math(String.raw`0<_{\mathbb{R}}1`),
+        "（実数体への脱出の宣言に挙げた順序体の性質、",
+        ref("remark_real_field_escape"),
+        "）。指数が ",
+        math(String.raw`k`),
+        " で成り立つとき、",
+        math(String.raw`t^{k+1}=t^{k}\cdot t`),
+        " は正の元どうしの積なので正である（同、",
+        ref("remark_real_field_escape"),
+        "）。",
+      ]),
+      paragraph(["本体の式変形は次の一続きである。"]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(t)
+&=\sum_{\sigma\in\Sigma_L}t^{\,b(\sigma)}
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_partition_polynomial})\\
+&=t^{\,b(\sigma_{+})}+\sum_{\sigma\in\Sigma_L\setminus\{\sigma_{+}\}}t^{\,b(\sigma)}
+&&(\because\ \sigma_{+}\in\Sigma_L\text{ なので有限和から 1 項を分離できる})\\
+&\ge_{\mathbb{R}}t^{\,b(\sigma_{+})}+0
+&&(\because\ \text{残りの和は正の項の有限和なので }0\le_{\mathbb{R}}\text{（準備の第二と、正の元どうしの和は正）})\\
+&=t^{\,b(\sigma_{+})}
+&&(\because\ \text{加法単位元})\\
+&>_{\mathbb{R}}0
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`u\ge_{\mathbb{R}}v`),
+        " は ",
+        math(String.raw`v<_{\mathbb{R}}u`),
+        " または ",
+        math(String.raw`v=u`),
+        " の略記である。以上より ",
+        math(String.raw`0<_{\mathbb{R}}Z_L(t)`),
+        " である。使った実数体の性質は、実数体への脱出の宣言（",
+        ref("remark_real_field_escape"),
+        "）に挙げた順序体の性質だけであり、完備性・極限・実対数は使っていない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -35201,8 +35362,10 @@ w\cdot w
       ]),
       list([
         [
-          todo("未着手"),
-          "「熱力学極限」: 自由エネルギー密度と零点密度を扱う。ここが実数体への脱出である。",
+          todo("続きから"),
+          "「熱力学極限」の残り: 実対数の導入と有限系の実自由エネルギー ",
+          math(String.raw`\log Z_L(t)`),
+          "、自由エネルギー密度の極限（完備性を使う箇所を宣言する）、零点密度。",
         ],
         [
           todo("未着手"),
