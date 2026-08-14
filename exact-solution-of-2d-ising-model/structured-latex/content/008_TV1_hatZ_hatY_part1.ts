@@ -2894,9 +2894,17 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
       ]),
       paragraph([
         math(String.raw`T_{V_2}(\hat{Z}_\mu^{(-)})`),
-        " について、",
-        math(String.raw`(2s_2)^{M/2}`),
-        " のスカラーは共役で打ち消し合う。",
+        " について。準備として 2 つ置く。第一に、スカラー ",
+        math(String.raw`(2s_2)^{M/2} \in \mathbb{C}^{\times}`),
+        " は ",
+        ref("scalar_identity_commutes"),
+        " により ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の任意の元と可換である。第二に、",
+        math(String.raw`(2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1`),
+        " である（",
+        math(String.raw`\mathbb{C}^{\times}`),
+        " の逆元の定義）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2905,8 +2913,13 @@ T_{V_2}(\hat{Z}_\mu^{(-)})
    \quad (\because \text{共役写像 }T\text{ の定義}) \\
 &= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Z}_\mu^{(-)}\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1}
    \quad (\because V_2\text{ の指数表示}) \\
-&= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot
-   \sum_{n=0}^{\infty}\frac{1}{n!}
+&= (2s_2)^{M/2}\cdot\exp(i K_2^* H_2)\cdot\hat{Z}_\mu^{(-)}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot\exp(i K_2^* H_2)^{-1}
+   \quad (\because \text{スカラー倍の行列の逆元 }(cA)^{-1}=c^{-1}A^{-1}) \\
+&= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot\exp(i K_2^* H_2)\cdot\hat{Z}_\mu^{(-)}\cdot\exp(i K_2^* H_2)^{-1}
+   \quad (\because \text{スカラーは任意の元と可換（準備の第一）}) \\
+&= \exp(i K_2^* H_2)\cdot\hat{Z}_\mu^{(-)}\cdot\exp(i K_2^* H_2)^{-1}
+   \quad (\because \text{スカラーとその逆元の積は }1\text{（準備の第二）}) \\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n\text{ times}}
    \quad (\because \text{exp 共役の級数展開}) \\
 &= \cosh(2K_2^*)\hat{Z}_\mu^{(-)} - i\sinh(2K_2^*)\hat{Y}_\mu
@@ -2931,8 +2944,13 @@ T_{V_2}(\hat{Y}_\mu)
    \quad (\because \text{共役写像 }T\text{ の定義}) \\
 &= \left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)\cdot\hat{Y}_\mu\cdot\left((2s_2)^{M/2}\exp(i K_2^* H_2)\right)^{-1}
    \quad (\because V_2\text{ の指数表示}) \\
-&= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot
-   \sum_{n=0}^{\infty}\frac{1}{n!}
+&= (2s_2)^{M/2}\cdot\exp(i K_2^* H_2)\cdot\hat{Y}_\mu\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot\exp(i K_2^* H_2)^{-1}
+   \quad (\because \text{スカラー倍の行列の逆元 }(cA)^{-1}=c^{-1}A^{-1}) \\
+&= (2s_2)^{M/2}\cdot\left((2s_2)^{M/2}\right)^{-1}\cdot\exp(i K_2^* H_2)\cdot\hat{Y}_\mu\cdot\exp(i K_2^* H_2)^{-1}
+   \quad (\because \text{スカラーは任意の元と可換（準備の第一）}) \\
+&= \exp(i K_2^* H_2)\cdot\hat{Y}_\mu\cdot\exp(i K_2^* H_2)^{-1}
+   \quad (\because \text{スカラーとその逆元の積は }1\text{（準備の第二）}) \\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\hat{Y}_\mu\right]\dots\right]}_{n\text{ times}}
    \quad (\because \text{exp 共役の級数展開}) \\
 &= i\sinh(2K_2^*)\hat{Z}_\mu^{(-)} + \cosh(2K_2^*)\hat{Y}_\mu
@@ -2943,15 +2961,7 @@ T_{V_2}(\hat{Y}_\mu)
 \end{aligned}`,
       ),
       paragraph([
-        "スカラー ",
-        math(String.raw`(2s_2)^{M/2} \in \mathbb{C}^{\times}`),
-        " は ",
-        ref("scalar_identity_commutes"),
-        " により ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " の任意の元と可換なので前へ出せて、",
-        math(String.raw`(2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1`),
-        " により消える。以上 4 式が statement と一致する。",
+        "以上 4 式が statement と一致する。",
       ]),
     ],
     conversion: {
