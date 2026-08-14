@@ -329,6 +329,7 @@ export const ALL_LABELS = [
   "def_quadratic_positive_cone",
   "def_quadratic_representation_map",
   "def_rational_log",
+  "def_real_closed_subfield",
   "def_residue_addition_notation",
   "def_residue_maps",
   "def_root_of_unity_mul_map",
