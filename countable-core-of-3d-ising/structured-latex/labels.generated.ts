@@ -11,6 +11,9 @@ export const ALL_LABELS = [
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
   "claim_palindrome",
+  "claim_periodic_constant_unbroken",
+  "claim_periodic_no_all_broken",
+  "claim_periodic_not_palindrome",
   "def_box",
   "def_broken_count",
   "def_configuration",
@@ -19,7 +22,12 @@ export const ALL_LABELS = [
   "def_multiplicity",
   "def_odd_flip",
   "def_odd_sites",
+  "def_periodic_broken_count",
+  "def_periodic_edge_set",
+  "def_periodic_endpoint_maps",
+  "def_periodic_multiplicity",
   "remark_null_model_positioning",
+  "remark_odd_period_positioning",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

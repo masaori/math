@@ -617,4 +617,375 @@ m_L(T\sigma)
       ]),
     ],
   },
+
+  {
+    id: "odd_period_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "帰無モデル: 奇数周期では回文でない" },
+    labels: [],
+  },
+
+  {
+    id: "odd_period_remark_positioning",
+    kind: "remark",
+    title: { text: "この章の位置づけ（別の族であること）" },
+    labels: ["remark_odd_period_positioning"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        "この章では、辺を周期的に巻く族（周期境界の族）を定義する。",
+        "前章の族（",
+        ref("def_edge_set"),
+        " の辺だけを使う族）とは**別の族**であり、量にはすべて上付きの ",
+        math(String.raw`\mathrm{per}`),
+        " を付けて区別する。族を混ぜて比べない（",
+        ref("remark_null_model_positioning"),
+        "）。",
+      ]),
+      paragraph([
+        "この章の結論は否定的な主張である。前章の回文性（",
+        ref("claim_palindrome"),
+        "）は二部性（辺の両端で座標和の偶奇が異なること。",
+        ref("claim_edge_endpoints_parity"),
+        "）から従ったが、周期が奇数のときは周期境界の族で回文性そのものが崩れる。",
+        "回文性が箱の構造に強制された性質であって、族に依らない普遍的な性質ではないことを、",
+        "反例で確定させる。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_definition_edge_set",
+    kind: "definition",
+    title: { text: "周期辺の集合" },
+    labels: ["def_periodic_edge_set"],
+    habitat: "N",
+    statement: [
+      paragraph(["有限集合"]),
+      displayMath(
+        String.raw`E^{\mathrm{per}}_L=\{\,(a,i)\ :\ a\in V_L,\ i\in\{1,2,3\}\,\}`,
+      ),
+      paragraph([
+        "を周期辺の集合と呼ぶ（",
+        ref("def_box"),
+        "）。前章の ",
+        math(String.raw`E_L`),
+        " と違い、始点の第 ",
+        math(String.raw`i`),
+        " 成分に条件を置かない。",
+        math(String.raw`\#E^{\mathrm{per}}_L=3\cdot L\cdot L\cdot L`),
+        " である（方向が ",
+        math(String.raw`3`),
+        " 通り、始点が ",
+        math(String.raw`\#V_L=L\cdot L\cdot L`),
+        " 通り）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_definition_endpoint_maps",
+    kind: "definition",
+    title: { text: "周期端点写像" },
+    labels: ["def_periodic_endpoint_maps"],
+    habitat: "Z",
+    statement: [
+      paragraph(["二つの写像を"]),
+      displayMath(
+        String.raw`\partial^{\mathrm{per}}_0:E^{\mathrm{per}}_L\to V_L,\qquad \partial^{\mathrm{per}}_0(a,i)=a`,
+      ),
+      displayMath(
+        String.raw`\partial^{\mathrm{per}}_1:E^{\mathrm{per}}_L\to V_L,\qquad
+\partial^{\mathrm{per}}_1(a,i)=\begin{cases}a+\varepsilon_i&(a_i\le L-2)\\ a-(L-1)\,\varepsilon_i&(a_i=L-1)\end{cases}`,
+      ),
+      paragraph([
+        "と定め、周期端点写像と呼ぶ。ここで ",
+        math(String.raw`a+\varepsilon_i`),
+        "、",
+        math(String.raw`a-(L-1)\,\varepsilon_i`),
+        " は成分ごとの整数の和・差であり、",
+        math(String.raw`\varepsilon_i`),
+        " は前章と同じ三つ組である（",
+        ref("def_endpoint_maps"),
+        "）。",
+      ]),
+      paragraph([
+        math(String.raw`\partial^{\mathrm{per}}_1`),
+        " の値が ",
+        math(String.raw`V_L`),
+        " に属することは次から従う。",
+        math(String.raw`a_i\le L-2`),
+        " の場合は第 ",
+        math(String.raw`i`),
+        " 成分が ",
+        math(String.raw`a_i+1\le L-1`),
+        " かつ ",
+        math(String.raw`0\le a_i+1`),
+        " である。",
+        math(String.raw`a_i=L-1`),
+        " の場合は第 ",
+        math(String.raw`i`),
+        " 成分が ",
+        math(String.raw`(L-1)-(L-1)=0`),
+        " である。どちらの場合も他の二成分は変わらない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_definition_broken_count",
+    kind: "definition",
+    title: { text: "周期族の破れ数" },
+    labels: ["def_periodic_broken_count"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "配位 ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        "（",
+        ref("def_configuration"),
+        "。点の集合は前章と同じ ",
+        math(String.raw`V_L`),
+        " なので配位の集合も同じ）に対し",
+      ]),
+      displayMath(
+        String.raw`D^{\mathrm{per}}_L(\sigma)=\{\,e\in E^{\mathrm{per}}_L\ :\ \sigma(\partial^{\mathrm{per}}_0 e)\ne\sigma(\partial^{\mathrm{per}}_1 e)\,\},\qquad
+m^{\mathrm{per}}_L(\sigma)=\#D^{\mathrm{per}}_L(\sigma)\in\mathbb{N}`,
+      ),
+      paragraph([
+        "と置く。数える範囲は ",
+        math(String.raw`E^{\mathrm{per}}_L`),
+        " だけである（",
+        ref("def_periodic_edge_set"),
+        "）。両端の値は周期端点写像で取り出す（",
+        ref("def_periodic_endpoint_maps"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_definition_multiplicity",
+    kind: "definition",
+    title: { text: "周期族の多重度" },
+    labels: ["def_periodic_multiplicity"],
+    habitat: "N",
+    statement: [
+      paragraph(["自然数 ", math(String.raw`m`), " に対し"]),
+      displayMath(
+        String.raw`\Omega^{\mathrm{per}}_L(m)=\#\{\,\sigma\in\Sigma_L\ :\ m^{\mathrm{per}}_L(\sigma)=m\,\}\ \in\ \mathbb{N}`,
+      ),
+      paragraph([
+        "と置き、周期族の多重度と呼ぶ（",
+        ref("def_periodic_broken_count"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_claim_constant_unbroken",
+    kind: "claim",
+    title: { text: "定数配位は周期辺を破らない" },
+    labels: ["claim_periodic_constant_unbroken"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        math(String.raw`\Omega^{\mathrm{per}}_L(0)\ge1`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "すべての点 ",
+        math(String.raw`a\in V_L`),
+        " で ",
+        math(String.raw`\sigma^{+}(a)=+1`),
+        " と定めた配位 ",
+        math(String.raw`\sigma^{+}\in\Sigma_L`),
+        " を取る（",
+        ref("def_configuration"),
+        "）。すべての辺 ",
+        math(String.raw`e\in E^{\mathrm{per}}_L`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\sigma^{+}(\partial^{\mathrm{per}}_0 e)=+1=\sigma^{+}(\partial^{\mathrm{per}}_1 e)\qquad(\because\ \sigma^{+}\ \text{の定義})`,
+      ),
+      paragraph([
+        "なので、破れの条件 ",
+        math(String.raw`\sigma^{+}(\partial^{\mathrm{per}}_0 e)\ne\sigma^{+}(\partial^{\mathrm{per}}_1 e)`),
+        " を満たす辺は無く ",
+        math(String.raw`D^{\mathrm{per}}_L(\sigma^{+})=\emptyset`),
+        "、よって ",
+        math(String.raw`m^{\mathrm{per}}_L(\sigma^{+})=0`),
+        " である（",
+        ref("def_periodic_broken_count"),
+        "）。したがって ",
+        math(String.raw`\Omega^{\mathrm{per}}_L(0)`),
+        " が数える集合は ",
+        math(String.raw`\sigma^{+}`),
+        " を含むので、元の個数は ",
+        math(String.raw`1`),
+        " 以上である（",
+        ref("def_periodic_multiplicity"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_claim_no_all_broken",
+    kind: "claim",
+    title: { text: "奇数周期ではすべての周期辺を破る配位は無い" },
+    labels: ["claim_periodic_no_all_broken"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        math(String.raw`L`),
+        " が奇数ならば ",
+        math(String.raw`\Omega^{\mathrm{per}}_L(\#E^{\mathrm{per}}_L)=0`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "背理法で示す。",
+        math(String.raw`m^{\mathrm{per}}_L(\sigma)=\#E^{\mathrm{per}}_L`),
+        " を満たす配位 ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " があったと仮定する。",
+        math(String.raw`D^{\mathrm{per}}_L(\sigma)`),
+        " は ",
+        math(String.raw`E^{\mathrm{per}}_L`),
+        " の部分集合で元の個数が全体と等しいので ",
+        math(String.raw`D^{\mathrm{per}}_L(\sigma)=E^{\mathrm{per}}_L`),
+        "、すなわちすべての辺 ",
+        math(String.raw`e\in E^{\mathrm{per}}_L`),
+        " で ",
+        math(String.raw`\sigma(\partial^{\mathrm{per}}_0 e)\ne\sigma(\partial^{\mathrm{per}}_1 e)`),
+        " である（",
+        ref("def_periodic_broken_count"),
+        "）。",
+      ]),
+      paragraph([
+        "準備として二つ置く。第一に、値が ",
+        math(String.raw`\{+1,-1\}`),
+        " に属する二数 ",
+        math(String.raw`u,v`),
+        " について、",
+        math(String.raw`u\ne v`),
+        " と ",
+        math(String.raw`u\cdot v=-1`),
+        " は同値である（値の全場合 ",
+        math(String.raw`(+1,+1),(+1,-1),(-1,+1),(-1,-1)`),
+        " で積は ",
+        math(String.raw`+1,-1,-1,+1`),
+        "）。第二に、各 ",
+        math(String.raw`k\in I_L`),
+        " に対して点 ",
+        math(String.raw`v_k=(k,0,0)\in V_L`),
+        " と辺 ",
+        math(String.raw`e_k=(v_k,1)\in E^{\mathrm{per}}_L`),
+        " を置く（",
+        ref("def_periodic_edge_set"),
+        "）。周期端点写像の定義（",
+        ref("def_periodic_endpoint_maps"),
+        "）から、",
+        math(String.raw`k\le L-2`),
+        " のとき ",
+        math(String.raw`\partial^{\mathrm{per}}_1 e_k=v_{k+1}`),
+        "、",
+        math(String.raw`k=L-1`),
+        " のとき ",
+        math(String.raw`\partial^{\mathrm{per}}_1 e_{L-1}=v_0`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+-1&=(-1)^{L}
+&&(\because\ L\ \text{は奇数})\\
+&=\prod_{k=0}^{L-1}(-1)
+&&(\because\ \text{同じ数}\ L\ \text{個の積})\\
+&=\prod_{k=0}^{L-1}\sigma(v_k)\cdot\sigma(\partial^{\mathrm{per}}_1 e_k)
+&&(\because\ \text{各}\ e_k\ \text{は破れているので、準備の第一を各}\ k\ \text{へ適用})\\
+&=\Bigl(\prod_{k=0}^{L-1}\sigma(v_k)\Bigr)\cdot\Bigl(\prod_{k=0}^{L-1}\sigma(\partial^{\mathrm{per}}_1 e_k)\Bigr)
+&&(\because\ \text{整数の積の交換法則と結合法則})\\
+&=\Bigl(\prod_{k=0}^{L-1}\sigma(v_k)\Bigr)\cdot\Bigl(\Bigl(\prod_{k=0}^{L-2}\sigma(v_{k+1})\Bigr)\cdot\sigma(v_0)\Bigr)
+&&(\because\ \text{準備の第二で端点を書き換え、最後の因子を分けた})\\
+&=\Bigl(\prod_{k=0}^{L-1}\sigma(v_k)\Bigr)\cdot\Bigl(\Bigl(\prod_{k=1}^{L-1}\sigma(v_{k})\Bigr)\cdot\sigma(v_0)\Bigr)
+&&(\because\ \text{添字の置き換え}\ k+1\mapsto k)\\
+&=\Bigl(\prod_{k=0}^{L-1}\sigma(v_k)\Bigr)\cdot\Bigl(\prod_{k=0}^{L-1}\sigma(v_{k})\Bigr)
+&&(\because\ \text{整数の積の交換法則})\\
+&=\Bigl(\prod_{k=0}^{L-1}\sigma(v_k)\Bigr)^{2}
+&&(\because\ \text{同じ数の二個の積})
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後の量は整数の二乗なので ",
+        math(String.raw`0`),
+        " 以上であり、",
+        math(String.raw`-1`),
+        " と等しくなれない（各 ",
+        math(String.raw`\sigma(v_k)`),
+        " は整数 ",
+        math(String.raw`+1`),
+        " または ",
+        math(String.raw`-1`),
+        " で、その積も整数である）。矛盾したので、仮定した配位は存在しない。",
+        "したがって ",
+        math(String.raw`\Omega^{\mathrm{per}}_L(\#E^{\mathrm{per}}_L)`),
+        " が数える集合は空で、元の個数は ",
+        math(String.raw`0`),
+        " である（",
+        ref("def_periodic_multiplicity"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "odd_period_claim_not_palindrome",
+    kind: "claim",
+    title: { text: "奇数周期では多重度は回文でない" },
+    labels: ["claim_periodic_not_palindrome"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        math(String.raw`L`),
+        " が奇数ならば",
+      ]),
+      displayMath(
+        String.raw`\Omega^{\mathrm{per}}_L(0)\ne\Omega^{\mathrm{per}}_L(\#E^{\mathrm{per}}_L-0)`,
+      ),
+      paragraph([
+        "が成り立つ。すなわち、前章の回文性（",
+        ref("claim_palindrome"),
+        "）と同じ形の等式 ",
+        math(String.raw`\Omega^{\mathrm{per}}_L(m)=\Omega^{\mathrm{per}}_L(\#E^{\mathrm{per}}_L-m)`),
+        " は、周期族では ",
+        math(String.raw`m=0`),
+        " ですでに成り立たない。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\Omega^{\mathrm{per}}_L(0)&\ge1
+&&(\because\ \blkref{claim_periodic_constant_unbroken})\\
+\Omega^{\mathrm{per}}_L(\#E^{\mathrm{per}}_L-0)&=\Omega^{\mathrm{per}}_L(\#E^{\mathrm{per}}_L)
+&&(\because\ \#E^{\mathrm{per}}_L-0=\#E^{\mathrm{per}}_L)\\
+&=0
+&&(\because\ L\ \text{は奇数。}\blkref{claim_periodic_no_all_broken})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`1`),
+        " 以上の自然数と ",
+        math(String.raw`0`),
+        " は等しくないので、二つの多重度は異なる。",
+      ]),
+    ],
+  },
 ]);
