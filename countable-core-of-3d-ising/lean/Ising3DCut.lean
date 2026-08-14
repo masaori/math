@@ -10,3 +10,6 @@ import されないまま置かれ、`lake build` も未証明の検査も通っ
 import Ising3DCut.NullModel.EdgeEndpointParity
 import Ising3DCut.NecSuf.NullModel.EdgeEndpointParity
 import Ising3DCut.NullModel.EdgeEndpointParityFromNecSuf
+import Ising3DCut.NullModel.OddFlipInvolution
+import Ising3DCut.NecSuf.NullModel.OddFlipInvolution
+import Ising3DCut.NullModel.OddFlipInvolutionFromNecSuf

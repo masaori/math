@@ -57,6 +57,12 @@ targets=(
   Ising3DCut.NullModel.edge_endpoints_parity_differ
   Ising3DCut.NecSuf.NullModel.endpoint_colors_differ_iff_not
   Ising3DCut.NullModel.edge_endpoints_parity_differ_from_necSuf
+  Ising3DCut.NullModel.oddFlip_oddFlip
+  Ising3DCut.NullModel.oddFlip_bijective
+  Ising3DCut.NecSuf.NullModel.flipOn_flipOn
+  Ising3DCut.NecSuf.NullModel.flipOn_bijective
+  Ising3DCut.NullModel.oddFlip_oddFlip_from_necSuf
+  Ising3DCut.NullModel.oddFlip_bijective_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
