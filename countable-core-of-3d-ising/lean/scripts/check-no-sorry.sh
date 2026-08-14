@@ -76,6 +76,7 @@ targets=(
   Ising3DCut.NullModel.partitionPolynomial_coeff_nonnegative
   Ising3DCut.NecSuf.NullModel.levelPolynomial_coeff_nonnegative
   Ising3DCut.NullModel.partitionPolynomial_coeff_nonnegative_from_necSuf
+  Ising3DCut.NullModel.partitionPolynomial_support_endpoints
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
