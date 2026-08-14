@@ -895,7 +895,7 @@ Z_m Y_m
 \quad (\because \sigma^x\sigma^x = I,\ \sigma^z\sigma^y = -i\,\sigma^x \text{（Step 0）}) \\
 &= (-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^x}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
-&= -i\,\sigma_m^x
+&= -i\,\sigma_m^x \quad (\because \text{Step 1 の } \sigma_m^x \text{ の表示})
 \end{aligned}`,
       ),
       paragraph([
