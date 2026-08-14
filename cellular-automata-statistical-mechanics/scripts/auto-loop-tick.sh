@@ -1,0 +1,259 @@
+#!/usr/bin/env bash
+# cellular-automata-statistical-mechanics の研究を 1 tick 進める。
+# launchd から 30 分ごとに、専用 worktree 上で呼ばれる。
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+PROJECT_NAME="cellular-automata-statistical-mechanics"
+LOOP_WORKTREE="$HOME/git/masaori/math-cellular-automata-loop"
+LOOP_BRANCH="cellular-automata-loop"
+
+GIT_COMMON_DIR="$(git -C "$SCRIPT_DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
+if [ -n "$GIT_COMMON_DIR" ]; then
+  MAIN_REPO_DIR="$(cd "$(dirname "$GIT_COMMON_DIR")" && pwd -P)"
+else
+  MAIN_REPO_DIR="$HOME/git/masaori/math"
+fi
+
+LOG_DIR="$HOME/Library/Logs/cellular-automata-auto-loop"
+LOG_FILE="$LOG_DIR/auto-loop.log"
+LOCK_DIR="$LOG_DIR/auto-loop.lock"
+LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
+TICK_TIMEOUT_SECONDS=1620
+
+mkdir -p "$LOG_DIR"
+log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
+
+PATH="$HOME/.agent-shims:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+[ -d "$HOME/.local/share/mise/shims" ] && PATH="$HOME/.local/share/mise/shims:$PATH"
+if [ -d "$HOME/.nvm/versions/node" ]; then
+  nvm_default="$(cat "$HOME/.nvm/alias/default" 2>/dev/null || true)"
+  nvm_bin=""
+  if [ -n "$nvm_default" ]; then
+    nvm_bin="$(find "$HOME/.nvm/versions/node" -mindepth 1 -maxdepth 1 -type d \
+      -name "v${nvm_default#v}*" -print | sort -V | tail -1)"
+  fi
+  if [ -z "$nvm_bin" ]; then
+    nvm_bin="$(find "$HOME/.nvm/versions/node" -mindepth 1 -maxdepth 1 -type d \
+      -name 'v*' -print | sort -V | tail -1)"
+  fi
+  [ -n "$nvm_bin" ] && PATH="$nvm_bin/bin:$PATH"
+fi
+[ -d "$HOME/.elan/bin" ] && PATH="$HOME/.elan/bin:$PATH"
+export PATH
+
+for cli in claude codex timeout git; do
+  if ! command -v "$cli" >/dev/null 2>&1; then
+    log "SKIP: 必要なコマンドが PATH に無い: $cli"
+    exit 1
+  fi
+done
+
+# trap から呼ばれるため、静的解析には通常の関数呼び出しとして見えない。
+# shellcheck disable=SC2329
+cleanup_lock() {
+  rm -f "$LOCK_DIR/pid"
+  rmdir "$LOCK_DIR" 2>/dev/null || true
+}
+
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  stale_pid="$(cat "$LOCK_DIR/pid" 2>/dev/null || true)"
+  lock_age="$(( $(date +%s) - $(stat -f %m "$LOCK_DIR" 2>/dev/null || echo 0) ))"
+  if [ -n "$stale_pid" ] && kill -0 "$stale_pid" 2>/dev/null && [ "$lock_age" -lt 2100 ]; then
+    log "SKIP: 前の tick (pid $stale_pid) がまだ走っている"
+    exit 0
+  fi
+  rm -f "$LOCK_DIR/pid"
+  if ! rmdir "$LOCK_DIR" 2>/dev/null; then
+    log "SKIP: 古いロックに未知の内容があり、安全に除去できない: $LOCK_DIR"
+    exit 1
+  fi
+  mkdir "$LOCK_DIR"
+  log "WARN: 死んだロックを除去した (pid ${stale_pid:-unknown})"
+fi
+printf '%s\n' "$$" > "$LOCK_DIR/pid"
+trap cleanup_lock EXIT
+
+probe_start="$(date +%s)"
+timeout 30 git -C "$MAIN_REPO_DIR" status --porcelain >/dev/null 2>&1 || true
+probe_elapsed=$(( $(date +%s) - probe_start ))
+if [ "$probe_elapsed" -ge 20 ]; then
+  log "SKIP: 機械が応答しない（git status に ${probe_elapsed} 秒）"
+  exit 0
+fi
+
+git -C "$MAIN_REPO_DIR" fetch --quiet origin || {
+  log "SKIP: origin の取得に失敗した"
+  exit 1
+}
+
+if [ ! -e "$LOOP_WORKTREE/.git" ]; then
+  log "専用 worktree を作る: $LOOP_WORKTREE"
+  mkdir -p "$(dirname "$LOOP_WORKTREE")"
+  git -C "$MAIN_REPO_DIR" worktree add -B "$LOOP_BRANCH" "$LOOP_WORKTREE" origin/main >> "$LOG_FILE" 2>&1
+fi
+
+cd "$LOOP_WORKTREE"
+
+if [ -z "$(git status --porcelain)" ]; then
+  rm -f "$LEFTOVER_MARK"
+  if ! git merge --ff-only origin/main >> "$LOG_FILE" 2>&1; then
+    log "SKIP: 専用ブランチを origin/main へ fast-forward できない"
+    exit 1
+  fi
+elif [ -f "$LEFTOVER_MARK" ]; then
+  log "前 tick の未コミット成果を引き継ぐ（$(cat "$LEFTOVER_MARK")）"
+else
+  log "SKIP: 専用 worktree に由来不明の未コミット変更がある"
+  exit 1
+fi
+
+ensure_node_modules() {
+  local rel="$1"
+  local dst="$LOOP_WORKTREE/$rel/node_modules"
+  local src="$MAIN_REPO_DIR/$rel/node_modules"
+  local lock="$rel/pnpm-lock.yaml"
+  [ -f "$LOOP_WORKTREE/$lock" ] || return 0
+  [ -d "$dst" ] && return 0
+  if [ -d "$src" ] && cmp -s "$MAIN_REPO_DIR/$lock" "$LOOP_WORKTREE/$lock"; then
+    cp -Rc "$src" "$dst"
+    log "依存を clone copy で持ち込んだ: $rel"
+  else
+    (cd "$LOOP_WORKTREE/$rel" && pnpm install --frozen-lockfile) >> "$LOG_FILE" 2>&1
+    log "依存を lockfile から用意した: $rel"
+  fi
+}
+
+ensure_node_modules "structured-latex"
+ensure_node_modules "$PROJECT_NAME/structured-latex"
+
+ensure_lean_packages() {
+  local lean_dir="$LOOP_WORKTREE/$PROJECT_NAME/lean"
+  local manifest="$lean_dir/lake-manifest.json"
+  local dst="$lean_dir/.lake/packages"
+  [ -f "$manifest" ] || return 0
+  [ -d "$dst/mathlib/.lake/build" ] && return 0
+  [ -e "$dst" ] && return 0
+
+  local candidate candidate_manifest
+  for candidate in \
+    "$MAIN_REPO_DIR/$PROJECT_NAME/lean/.lake/packages" \
+    "$MAIN_REPO_DIR/countable-core-of-3d-ising/lean/.lake/packages" \
+    "$MAIN_REPO_DIR/exact-solution-of-2d-ising-model-lambda/lean/.lake/packages"; do
+    candidate_manifest="$(dirname "$(dirname "$candidate")")/lake-manifest.json"
+    if [ -d "$candidate/mathlib/.lake/build" ] && cmp -s "$candidate_manifest" "$manifest"; then
+      mkdir -p "$(dirname "$dst")"
+      cp -Rc "$candidate" "$dst"
+      log "Lean 依存を clone copy で持ち込んだ: $candidate"
+      return 0
+    fi
+  done
+  log "WARN: 一致する取得済み Lean 依存が無い。必要なら tick 内で lake update する"
+}
+
+ensure_lean_packages
+
+SOFT_DEADLINE="$(date -v+22M '+%H:%M' 2>/dev/null || date -d '+22 minutes' '+%H:%M')"
+HARD_DEADLINE="$(date -v+27M '+%H:%M' 2>/dev/null || date -d '+27 minutes' '+%H:%M')"
+
+PROMPT=$(cat <<'EOF'
+[[AI_AGENT_MESSAGE]]
+cellular-automata-statistical-mechanics の自動ループを 1 tick 進める。
+
+最初に次を全て読む。
+- docs/context/ の全ファイル
+- cellular-automata-statistical-mechanics/README.md
+- cellular-automata-statistical-mechanics/docs/マニフェスト.md
+- cellular-automata-statistical-mechanics/MEMORY.md
+- cellular-automata-statistical-mechanics/docs/tasks/auto-loop-runbook.md
+- cellular-automata-statistical-mechanics/docs/tasks/auto-loop-state.md
+- cellular-automata-statistical-mechanics/docs/2値セルオートマトンの定義と呼び名.md
+- 今回の対象に直接関係する survey / ideas / structured-latex のファイル
+
+runbook の通り、前 tick のレビューを先に行い、台帳先頭の未完了対象の次の一層だけを進める。
+構造化記述、厳密な SageMath 検証、Lean 具体版、Lean 必要十分版と導出を混同せず、実態どおりに記録する。
+
+研究方向を守る。既存の量子論・場の量子論・相対論を CA へ実装しない。物理的意味を局所規則へ
+入れず、有限舞台と有限真理値表から内在的に生じる数学構造を先に抽出する。ヒルベルト空間、
+作用素代数、多様体、因果集合を目標仕様として先取りしない。非可算構造は説明のための理想化された
+近似でありうるという前提に立つが、数学的な近似を主張する場合は比較写像と誤差または収束概念を定義する。
+CA 自体も正解として先取りせず、反例と非対応を成果として保存する。
+
+検証を通し、台帳と MEMORY を更新し、commit、origin/main への push、fetch 後の ancestry 確認まで行う。
+実質的な前進または修正があった場合だけ、最後に slack-notification skill で一度通知する。
+
+この tick は @HARD@ に強制終了される。@SOFT@ を過ぎたら新規着手を止め、現在の成果を検証し、
+台帳・MEMORY・commit・push・ancestry 確認を完了させる。時間を予測せず、date の実測で判断する。
+EOF
+)
+PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
+PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
+
+AGENT_MARK="$LOG_DIR/last-agent"
+BLOCKED_MARK="$LOG_DIR/claude-blocked-until"
+last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
+if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
+
+if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
+  blocked_until="$(cat "$BLOCKED_MARK" 2>/dev/null || echo 0)"
+  if [ "$(date +%s)" -lt "${blocked_until:-0}" ]; then
+    agent="codex"
+    log "Claude は使用上限の記録中なので Codex で回す"
+  else
+    rm -f "$BLOCKED_MARK"
+  fi
+fi
+
+log "=== tick 開始（${agent} / 30 分間隔 / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
+printf '%s\n' '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
+
+set +e
+if [ "$agent" = "claude" ]; then
+  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
+    --model claude-fable-5 --effort medium \
+    --dangerously-skip-permissions --strict-mcp-config \
+    --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+else
+  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
+    -m gpt-5.6-sol -c model_reasoning_effort=medium \
+    --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+fi
+status=$?
+set -e
+printf '%s\n' "$agent" > "$AGENT_MARK"
+
+if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
+  recent_output="$(tail -8 "$LOG_FILE")"
+  case "$recent_output" in
+    *"weekly limit"*) printf '%s\n' "$(( $(date +%s) + 86400 ))" > "$BLOCKED_MARK" ;;
+    *"session limit"*|*"spend limit"*) printf '%s\n' "$(( $(date +%s) + 10800 ))" > "$BLOCKED_MARK" ;;
+  esac
+fi
+
+dirty_count="$(git status --porcelain | wc -l | tr -d ' ')"
+if [ "$dirty_count" != "0" ]; then
+  printf '%s に exit %s で終了し、%s ファイルが未コミットで残った\n' \
+    "$(date '+%Y-%m-%d %H:%M:%S')" "$status" "$dirty_count" > "$LEFTOVER_MARK"
+else
+  rm -f "$LEFTOVER_MARK"
+fi
+
+case "$status" in
+  0) log "=== tick 正常終了（未コミット ${dirty_count} ファイル）" ;;
+  124|137) log "=== tick 打ち切り（${TICK_TIMEOUT_SECONDS} 秒、exit ${status}、未コミット ${dirty_count} ファイル）" ;;
+  *) log "=== tick 異常終了（exit ${status}、未コミット ${dirty_count} ファイル）" ;;
+esac
+
+if [ "$status" -eq 0 ] && [ "$dirty_count" = "0" ]; then
+  git rev-parse HEAD > "$LOG_DIR/last-success-commit"
+fi
+
+loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
+main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"
+if [ -f "$loop_pdf" ] && [ -d "$MAIN_REPO_DIR/$PROJECT_NAME" ]; then
+  mkdir -p "$main_pdf_dir"
+  cp "$loop_pdf" "$main_pdf_dir/document.pdf"
+  log "PDF を共有チェックアウト側へ更新した"
+fi
+
+exit "$status"

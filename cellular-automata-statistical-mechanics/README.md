@@ -94,6 +94,10 @@
 
 **件数ではなく、「可算側で厳密に述べ直され、機械にかけられ、既存研究と差分がある」ことで評価する。**
 
+30 分ごとの継続作業は
+[`docs/tasks/auto-loop-runbook.md`](docs/tasks/auto-loop-runbook.md) と
+[`docs/tasks/auto-loop-state.md`](docs/tasks/auto-loop-state.md) を正本として進める。
+
 ## 現段階での見取り図
 
 既存研究は**互いにほとんど交流のない独立した経路**として存在する。

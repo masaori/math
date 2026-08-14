@@ -1,0 +1,122 @@
+# 自動ループ Runbook（30 分ごと）
+
+このファイルは、30 分ごとに独立したエージェントが読み、研究を一層だけ前進させる手順の正本である。
+進捗は [auto-loop-state.md](auto-loop-state.md) に残す。研究姿勢は
+[マニフェスト](../マニフェスト.md) を最優先する。
+
+## 1 tick の境界
+
+1. 前 tick の成果を先にレビューする。誤りを見つけた場合は新規作業より修正を優先する。
+2. 台帳の先頭にある未完了対象について、次の一層だけを進める。
+   「構造化記述 → SageMath → Lean 具体版 → Lean 必要十分版と具体版の導出」の順とする。
+3. 一層を検証し、台帳と MEMORY を更新し、`origin/main` への包含を確認して止まる。
+4. 調査が必要な対象は、先に一次文献の確認を一層として行う。確認していない既知性を推測しない。
+
+## 着手前に読むもの
+
+- `docs/context/` の全ファイル
+- このプロジェクトの `README.md`、`docs/マニフェスト.md`、`MEMORY.md`
+- この runbook と `auto-loop-state.md`
+- `docs/2値セルオートマトンの定義と呼び名.md`
+- 今回の対象を定める survey / ideas / structured-latex の該当箇所
+
+## 研究方向の制約
+
+- 量子、場、粒子、時空、エネルギー等の物理的意味を局所規則へ入れない。
+- ヒルベルト空間、作用素代数、多様体、因果集合等の既存構造を目標仕様として先に置かない。
+- 有限舞台、有限状態集合、有限真理値表から内在的に定義できる集合・写像・関係・演算を先に抽出する。
+- 既存理論との比較は第二段階で行い、比較写像、保存される構造、失われる情報を明記する。
+- 実数・複素数、完備化、無限積、全配位空間を使う場合は、その行で脱出点と目的を明記する。
+- CA 側に既存物理との対応物がない構造を捨てない。反例と否定結果も台帳に残す。
+
+## 命題を昇格させる四層
+
+### 構造化記述
+
+- 証明の正本は `structured-latex/content/` に置く。
+- 一ブロック一主張、一行一変形、各行末に根拠を書く。
+- すべての記号の所属と、有限・高々可算・非可算のどれかを宣言する。
+- 人手証明は現在の CA の具体的対象に固定し、既製の一般論へ丸投げしない。
+
+### SageMath
+
+- `sagemath/check/<対象名>/check.sage` と `overview.md` を対にする。
+- 浮動小数点を使わず、有限集合、`ZZ`、`QQ`、有限体、厳密多項式環で検証する。
+- 本文の証明の各段を別々に検査し、最終式だけの一致で済ませない。
+- 全数列挙の範囲と、そこから一般の場合を結論できないことを記録する。
+
+### Lean 具体版
+
+- 人手証明と同じ対象、同じ仮定、同じ順序で形式化する。
+- `sorry`、`admit`、未証明公理を使わない。
+- 人手証明に無い強い既製定理だけで結論へ飛ばない。
+
+### Lean 必要十分版と導出
+
+- 具体版の証明で実際に使った構造だけを残した定理を書く。
+- 状態が二値であること、舞台がグラフであること、時間が自然数であること等を落とせるか一つずつ検査する。
+- 具体版が抽象版の特殊化であることを別の定理で導出する。
+
+`done` は四層が揃い、相互の主張が一致した場合だけ付ける。
+
+## 1 tick の実行手順
+
+1. remote default branch を取得し、専用 worktree が最新であることを確認する。
+2. 前 tick の変更を本文・SageMath・Lean・台帳の間で突き合わせる。
+3. 修正があれば検証して先にコミット・push する。
+4. 台帳の先頭の未完了対象について、足りない一層だけを作る。
+5. 下の検証を通す。検証を主張に合わせて弱めない。
+6. `auto-loop-state.md` の現在地と対象表、`MEMORY.md` を更新する。
+7. commit し、remote が進んでいれば取り込んでから `HEAD:main` へ push する。
+8. fetch 後、成果コミットが remote default branch の祖先であることを確認する。
+9. 実質的な前進または修正があった tick だけ、`slack-notification` skill で一度通知する。
+
+## 検証
+
+存在する層について、少なくとも次を行う。
+
+```sh
+(cd cellular-automata-statistical-mechanics/structured-latex && pnpm run check)
+(cd cellular-automata-statistical-mechanics/structured-latex && pnpm run build:pdf)
+sage cellular-automata-statistical-mechanics/sagemath/check/<対象名>/check.sage
+node cellular-automata-statistical-mechanics/sagemath/tools/verify-check-linkage.ts
+(cd cellular-automata-statistical-mechanics/lean && lake build && bash scripts/check-no-sorry.sh)
+```
+
+初回に検証基盤を作る場合は、リポジトリ内の既存 structured-latex / SageMath / Lean 基盤を参照し、
+語彙を複製せず共通の構造化テキストシステムを利用する。
+
+## 最初の探索列
+
+最初は物理的な名前を使わず、局所真理値表から生じる依存関係だけを調べる。
+
+- 局所規則の本質的依存台を有限の存在量化で定義し、真理値表から決定できることを示す。
+- 冗長な近傍を足しても本質的依存台が変わらないことを示す。
+- 有限時間展開上の直接依存関係と、その推移閉包を定義する。
+- 時間座標が厳密に増えることだけから、推移閉包が反対称であることを示す。
+- 到達可能なセルの有限性と有限伝播境界を示す。
+- ここまでで得た順序・凸部分集合・非比較関係をカタログ化した後にだけ、既存の因果構造と比較する。
+
+## 止まってよい場合
+
+- マニフェストまたは `docs/context/` の変更が必要になった。
+- 既存理論を目標仕様に採るか否かで結果が変わり、一次情報だけでは決められない。
+- 未許可の不可逆操作、課金、秘密情報、ユーザー固有の価値判断が必要になった。
+
+検証失敗、依存不足、remote の前進、仮説の反例は停止理由ではない。直すか、否定結果として記録する。
+
+## 起動
+
+- launchd ラベル: `com.masaori.cellular-automata-auto-loop`
+- 定義: `~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist`
+- 発火: 毎時 12 分と 42 分
+- 専用 worktree: `~/git/masaori/math-cellular-automata-loop`
+- ログ: `~/Library/Logs/cellular-automata-auto-loop/auto-loop.log`
+- エージェント: Claude と Codex を tick ごとに交互に使う
+
+```sh
+bash ~/.local/bin/cellular-automata-loop-launcher.sh
+launchctl kickstart -k gui/$(id -u)/com.masaori.cellular-automata-auto-loop
+launchctl bootout gui/$(id -u)/com.masaori.cellular-automata-auto-loop
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist
+```
