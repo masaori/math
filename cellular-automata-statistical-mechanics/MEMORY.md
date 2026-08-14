@@ -24,6 +24,17 @@ Lean 具体版・Lean 必要十分版と導出のうち一層だけを進め、`
 有限時間展開上の直接依存、到達可能性の反対称性、有限伝播境界を順に扱い、その後で初めて既存の
 因果構造と比較する。
 
+## 自動ループ tick: 構造化証明基盤の初期化と本質的依存台の記述（2026-08-14）
+
+`structured-latex/` を初期化した（システムはリポジトリ直下を利用、`schema.ts`・tools は
+`exact-solution-of-2d-ising-model-lambda` の流儀を流用。住処 `habitat`/`realEscape` を型で強制。
+Lean 未着手のため lean 連携検査は未設置）。最初の構造化記述
+`structured-latex/content/essential-dependency.ts` に、局所真理値表の本質的依存台の定義と
+「本質的依存 ⟺ 一点反転検査」の同値、有限決定可能性（高々 $|S|\cdot 2^{|S|}$ 回の比較）を
+証明つきで書いた。`pnpm run check`・`pnpm run build:pdf` 通過。**SageMath・Lean は未着手**
+（状況は `docs/tasks/auto-loop-state.md` が正本）。用語上の判断: 近傍 $N(v)$ は順序のない
+集合なので「座標」でなく「近傍の元」と呼ぶ（番号付けがある舞台に限り「座標」を許す）。
+
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。

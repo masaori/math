@@ -1,0 +1,32 @@
+{
+  "name": "@cellular-automata-statistical-mechanics/structured-latex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "2値セルオートマトンの局所規則から内在的に生じる数学構造の証明本体（構造化テキスト）。入力言語はリポジトリ直下 structured-latex/ のシステムを使い、量の住処（可算/非可算）と ℝ 脱出の宣言をプロジェクト固有メタデータとして足す。",
+  "scripts": {
+    "gen": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project .",
+    "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate": "node tools/validate-content.ts",
+    "test:types": "node tools/negative-type-test.ts",
+    "test:runtime": "node tools/schema-runtime-test.ts",
+    "build:tex": "node tools/build-latex.ts",
+    "build:html": "node tools/build-html.ts",
+    "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
+    "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:no-notes && npm run test:types && npm run test:runtime"
+  },
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.8",
+    "@types/node": "^22.10.2",
+    "katex": "^0.18.4",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
