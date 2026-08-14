@@ -4,6 +4,27 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 234 は、レビューで前 tick の「正の根の特定」の Lean 三本を本文の
+八ブロックと突き合わせ、修正不要と確認した。そのあとセクション
+「一般の $q$ での $\Phi_L(q)$ の性質」を「双対変換は零と一の間の有理数を保つ」と
+「双対な点どうしの $\Phi_L$ の値の関係」の二片へ割り直し（論法が別のため）、最初の一片を
+記述と SageMath まで進めた。二ブロック: 集合
+$\mathbb{Q}_{(0,1)}:=\{r\in\mathbb{Q}:0<r<1\}$ の定義（`def_unit_interval_rationals`。
+$\mathbb{Q}_{(0,1)}\subseteq\mathbb{Q}_{>0}$ なので元での $\Phi_L$ が確定する）と、
+$q\in\mathbb{Q}_{(0,1)}$ ならば $1+q\ne0$ で $\mathrm{KW}(q)$ が定義され
+$\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}$ となる主張
+（`claim_kw_dual_preserves_unit_interval`）。証明は $\mathbb{Q}$ の四則と順序だけで、
+$t:=(1+q)^{-1}\in\mathbb{Q}$ が $\overline{\mathbb{Q}}$ の逆元と一致すること（逆元の一意性）を
+経由し、$\mathrm{KW}(q)=(1-q)\cdot t\in\mathbb{Q}$、$0<(1-q)\cdot t$、
+$(1-q)\cdot t<(1+q)\cdot t=1$ の三鎖で閉じた。SageMath
+（`sagemath/check/kw-dual-preserves-unit-interval/`）は分母 40 までの全既約分数 489 点で
+準備と三鎖の全段を厳密検査して通過した。**Lean は未着手**で、次 tick はこの二ブロックの
+Lean（具体版・必要十分版・導出）を完成させる。次の本文は残りの一片
+「双対な点どうしの $\Phi_L$ の値の関係」（四境界条件の混合の双対恒等式
+`claim_mixed_boundary_duality_identity` を $q$ で評価して $\Phi_L(q)$ と
+$\Phi_L(\mathrm{KW}(q))$ を結ぶ）。次の式変形統一は姉妹側 `011_max_eigenvalue.ts` を
+先頭から機械走査した次の根拠なしの計算から続ける。
+
 2026-08-14 の tick 233 は、「正の根の特定 $x_c=\sqrt2-1$」の Lean 具体版・必要十分版・導出を
 完成させ、四層すべてを満たした。レビューでは前 tick の八ブロックと SageMath の二根の所属・
 表示、正錐三条件、一意性を突き合わせて修正不要と確認した。具体版は本文と同じ表示の構成、
