@@ -1735,6 +1735,7 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
 &= \frac{1}{M}\cdot Z_j\cdot M
    \quad (\because \text{antiperiodic\_exp\_sum}) \\
 &= Z_j
+   \quad (\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
 \end{aligned}`,
       ),
       paragraph([math(String.raw`Y_j`), " についても同じ計算である。"]),
@@ -1756,7 +1757,12 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
         " をすべて含み、したがって全体に一致する。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-15 の式変形統一で、復元式の鎖の最終行へスカラー 1/M と M の相殺という行末根拠を補った。内容は変えていない。",
+      ],
+    },
   },
 
   {

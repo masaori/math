@@ -35696,6 +35696,7 @@ Z_L(t)
     title: { text: "実数の部分集合の上界" },
     labels: ["def_real_set_upper_bound"],
     habitat: "R",
+    lean: ["Ising2DLambda.ThermodynamicLimit.IsRealSetUpperBound"],
     realEscape:
       "実数の部分集合と順序 ≤_ℝ についての述語（上界であること）を定義するため。" +
       "使うのは「実数体への脱出の宣言」に挙げた順序体の性質と略記 ≤_ℝ だけであり、" +
@@ -35730,6 +35731,7 @@ Z_L(t)
     title: { text: "実数の部分集合の上限（最小上界）" },
     labels: ["def_real_set_supremum"],
     habitat: "R",
+    lean: ["Ising2DLambda.ThermodynamicLimit.IsRealSetSupremum"],
     realEscape:
       "実数の部分集合についての述語（上限であること）を定義するため。" +
       "使うのは「実数体への脱出の宣言」に挙げた順序体の性質と、直前で定義した上界だけであり、" +
@@ -36843,6 +36845,11 @@ Z_L(t)
       "ほかに使うのは順序体の性質、上界と上限の定義、および値集合の定義だけである。" +
       "完備性はこのブロックでは使わない（上限 u の存在は仮定に置く）。",
     verification: ["sagemath/check/free-energy-density-supremum-approximation"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_supremum_approximation",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_supremum_approximation_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_supremum_approximation_from_necSuf",
+    ],
     statement: [
       paragraph([
         "正の実数 ",

@@ -1016,6 +1016,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.freeEnergyDensityValueSet_has_supremum
   Ising2DLambda.NecSuf.ThermodynamicLimit.indexedValueSet_has_supremum_necSuf
   Ising2DLambda.ThermodynamicLimit.freeEnergyDensityValueSet_has_supremum_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.IsRealSetUpperBound
+  Ising2DLambda.ThermodynamicLimit.IsRealSetSupremum
+  Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_supremum_approximation
+  Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_supremum_approximation_necSuf
+  Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_supremum_approximation_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
