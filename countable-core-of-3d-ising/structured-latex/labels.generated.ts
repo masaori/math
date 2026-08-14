@@ -8,6 +8,7 @@
 export const ALL_LABELS = [
   "claim_broken_complement",
   "claim_edge_endpoints_parity",
+  "claim_even_multiplicity",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
   "claim_palindrome",
@@ -24,6 +25,7 @@ export const ALL_LABELS = [
   "def_configuration",
   "def_edge_set",
   "def_endpoint_maps",
+  "def_global_spin_flip",
   "def_multiplicity",
   "def_odd_flip",
   "def_odd_sites",

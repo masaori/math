@@ -275,4 +275,158 @@ m_L(T\sigma^-)
       ]),
     ],
   },
+
+  {
+    id: "global_spin_flip_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "帰無モデル: 全スピン反転による多重度の偶数性" },
+    labels: [],
+  },
+
+  {
+    id: "global_spin_flip_definition",
+    kind: "definition",
+    title: { text: "全スピン反転" },
+    labels: ["def_global_spin_flip"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "配位 ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " に対して、配位 ",
+        math(String.raw`F\sigma\in\Sigma_L`),
+        " を各点 ",
+        math(String.raw`a\in V_L`),
+        " で",
+      ]),
+      displayMath(String.raw`(F\sigma)(a)=-\sigma(a)`),
+      paragraph([
+        "と定める。値 ",
+        math(String.raw`\sigma(a)`),
+        " は整数 ",
+        math(String.raw`+1`),
+        " または ",
+        math(String.raw`-1`),
+        " なので、",
+        math(String.raw`-\sigma(a)`),
+        " も同じ二元集合に属する。",
+      ]),
+    ],
+  },
+
+  {
+    id: "global_spin_flip_claim_even_multiplicity",
+    kind: "claim",
+    title: { text: "各破れ数の多重度は偶数である" },
+    labels: ["claim_even_multiplicity"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "すべての自然数 ",
+        math(String.raw`m\in\{0,1,\ldots,\#E_L\}`),
+        " に対して、ある自然数 ",
+        math(String.raw`k_m\in\mathbb N`),
+        " が存在して",
+      ]),
+      displayMath(String.raw`\Omega_L(m)=2k_m`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "まず、全スピン反転（",
+        ref("def_global_spin_flip"),
+        "）を二回適用すると、各点 ",
+        math(String.raw`a\in V_L`),
+        " で",
+      ]),
+      displayMath(
+        String.raw`(F(F\sigma))(a)=-(-\sigma(a))=\sigma(a)
+\qquad(\because\ \blkref{def_global_spin_flip}\ \text{を二回適用})`,
+      ),
+      paragraph([
+        "となる。したがって ",
+        math(String.raw`F(F\sigma)=\sigma`),
+        " であり、",
+        math(String.raw`F:\Sigma_L\to\Sigma_L`),
+        " は対合である。",
+      ]),
+      paragraph([
+        "次に、辺 ",
+        math(String.raw`e\in E_L`),
+        " を任意に取る。両端の二つの値をともに符号反転しても、等しいか異なるかは変わらない。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+D_L(F\sigma)
+&=\{\,e\in E_L:(F\sigma)(\partial_0e)\ne(F\sigma)(\partial_1e)\,\}
+&&(\because\ \blkref{def_broken_count})\\
+&=\{\,e\in E_L:-\sigma(\partial_0e)\ne-\sigma(\partial_1e)\,\}
+&&(\because\ \blkref{def_global_spin_flip})\\
+&=\{\,e\in E_L:\sigma(\partial_0e)\ne\sigma(\partial_1e)\,\}
+&&(\because\ \text{整数の等式の両辺を }-1\text{ 倍しても同値})\\
+&=D_L(\sigma)
+&&(\because\ \blkref{def_broken_count})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+m_L(F\sigma)
+&=\#D_L(F\sigma)
+&&(\because\ \blkref{def_broken_count})\\
+&=\#D_L(\sigma)
+&&(\because\ \text{前段の集合の等式})\\
+&=m_L(\sigma)
+&&(\because\ \blkref{def_broken_count})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。ゆえに ",
+        math(String.raw`S_m=\{\,\sigma\in\Sigma_L:m_L(\sigma)=m\,\}`),
+        " と置くと、",
+        math(String.raw`F`),
+        " は有限集合 ",
+        math(String.raw`S_m`),
+        " 上の対合を定める。",
+      ]),
+      paragraph([
+        "この対合に不動点は無い。実際、点 ",
+        math(String.raw`a_0=(0,0,0)\in V_L`),
+        " において ",
+        math(String.raw`\sigma(a_0)\in\{+1,-1\}`),
+        " なので ",
+        math(String.raw`-\sigma(a_0)\ne\sigma(a_0)`),
+        " である。したがって ",
+        math(String.raw`F\sigma\ne\sigma`),
+        " である。",
+      ]),
+      paragraph([
+        "各 ",
+        math(String.raw`\sigma\in S_m`),
+        " に対する二元集合 ",
+        math(String.raw`\{\sigma,F\sigma\}`),
+        " を集めた有限集合を ",
+        math(String.raw`\mathcal P_m`),
+        " と置く。二つの二元集合が元を共有すれば、共有する元が元の配位かその反転かで場合分けし、",
+        math(String.raw`F(F\sigma)=\sigma`),
+        " を使うと二つの集合は等しい。したがって、異なる二元集合は互いに交わらない。不動点が無いので各集合の元は二つであり、これらを合わせると ",
+        math(String.raw`S_m`),
+        " になる。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Omega_L(m)
+&=\#S_m
+&&(\because\ \blkref{def_multiplicity})\\
+&=2\cdot\#\mathcal P_m
+&&(\because\ S_m\ \text{は互いに交わらない二元集合の合併})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`k_m=\#\mathcal P_m\in\mathbb N`),
+        " と取れば主張を得る。",
+      ]),
+    ],
+  },
 ]);
