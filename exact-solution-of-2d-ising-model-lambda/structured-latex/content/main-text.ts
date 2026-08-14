@@ -35496,6 +35496,8 @@ Z_L(t)
     statement: [
       paragraph([
         "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
         math(String.raw`L\ge1`),
         " と、各 ",
         math(String.raw`t\in\mathbb{R}`),
@@ -35570,6 +35572,8 @@ Z_L(t)
     statement: [
       paragraph([
         "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
         math(String.raw`L\ge1`),
         " と、各 ",
         math(String.raw`t\in\mathbb{R}`),
