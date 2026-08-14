@@ -4,6 +4,26 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 248 は、レビューで前 tick の「零点と有理点の距離の二乗」の Lean 三本
+（具体版・必要十分版・導出）を本文と突き合わせ、修正不要と確認した。そのあとセクション
+「詰め寄りの述語の定式化」を記述と SageMath まで進めた。三ブロック:
+`def_zero_pinching_predicate`（$\varepsilon\in\mathbb{Q}_{>0}$ に対し、ある $L\ge1$、
+$\xi\in\mathcal{F}_L$、$q\in\mathbb{Q}_{>0}$ が存在して
+$\mathrm{dsq}(\xi,q)<_R\varepsilon\cdot\varepsilon$。距離そのものでなく平方どうしを比べる
+理由——非負元の平方根の存在をまだ主張していない——を本文に明記）、
+`claim_distance_positive_on_fisher_zeros`（$\xi\in\mathcal{F}_L$、$q\in\mathbb{Q}_{>0}$ なら
+$\mathrm{dsq}(\xi,q)\ne0$。零性同値 `claim_distance_squared_zero_iff_equal` と
+`claim_positive_rational_not_fisher_zero` からの背理法）、
+`def_phase_transition_countable_statement`（全称 $\varepsilon$ の言明の定式化。まだ主張しない）。
+本文末尾「この先に書くこと」から済んだ「零点の詰め寄り」の項目を消した。SageMath
+（`sagemath/check/zero-pinching-predicate/`）は $L\in\{1,2\}$ の全 Fisher 零点 × 正の有理点
+6 点 × $\varepsilon$ 5 点で述語の決定可能性 240 件・非零性 48 組を厳密検査し、$\varepsilon$
+ごとの証人の有無を記録した（$L=3$ は次数 12 の exactify が資源上限で終わらないため除外。
+overview に注記。実測: 素の probe が 300 秒でも終わらなかった）。**Lean は未着手**で、
+次 tick はこの三ブロックの Lean（具体版・必要十分版・導出）を進める。次の本文は
+「熱力学極限」章の最初のセクション（`realEscape` を具体的に書く）。
+次の式変形統一は姉妹側「トレース冪の挟み撃ち」の残存圧縮の確認から続ける。
+
 2026-08-14 の tick 247 は、レビューで前 tick の「零点と有理点の距離の二乗」の本文と
 SageMath を突き合わせ、定義域・値域、一意表示、零性同値の二方向、有限標本検査の範囲が
 対応しているため修正不要と確認した。そのあと Lean 具体版
