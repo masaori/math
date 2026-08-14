@@ -1,17 +1,17 @@
-# SageMath Check: 自由境界の多重度の回文性（帰無モデル）
+# SageMath Check: 多重度の回文性（帰無モデル）
 
-**対象ラベル**: `claim_free_palindrome`
+**対象ラベル**: `claim_palindrome`
 
 本文の証明の各段を、小さい箱の全数列挙で一段ずつ確かめる。すべて `ZZ` と有限集合の
 列挙による厳密計算であり、浮動小数点は使わない。
 
 | 確かめた段 | 本文のラベル | 方法 |
 | --- | --- | --- |
-| 隣接する二点の座標和の偶奇が異なる | `claim_adjacent_parity` | $L=1,\dots,4$ の全内部辺 |
+| 辺の両端の座標和の偶奇が異なる | `claim_edge_endpoints_parity` | $L=1,\dots,4$ の全辺 |
 | 奇数側反転が対合（$T(T\sigma)=\sigma$） | `claim_odd_flip_involution` | $L=1,2$ の全配位 |
-| 各内部辺の破れの反転（$(T\sigma)(u)\ne(T\sigma)(v)\Leftrightarrow\sigma(u)=\sigma(v)$） | `claim_odd_flip_reverses_edges` | $L=2$ の全配位 × 全 12 辺 |
-| 破れ数の補数（$m(T\sigma)=\#E_L-m(\sigma)$） | `claim_free_broken_complement` | $L=2$ の全配位 |
-| 多重度の回文性（$\Omega^{\mathrm{free}}_L(m)=\Omega^{\mathrm{free}}_L(\#E_L-m)$） | `claim_free_palindrome` | 下記 |
+| 各辺の破れの反転（$(T\sigma)(u)\ne(T\sigma)(v)\Leftrightarrow\sigma(u)=\sigma(v)$） | `claim_odd_flip_reverses_edges` | $L=2$ の全配位 × 全 12 辺 |
+| 破れ数の補数（$m(T\sigma)=\#E_L-m(\sigma)$） | `claim_broken_complement` | $L=2$ の全配位 |
+| 多重度の回文性（$\Omega^{\mathrm{free}}_L(m)=\Omega^{\mathrm{free}}_L(\#E_L-m)$） | `claim_palindrome` | 下記 |
 
 回文性そのものは三通りで確認した。
 

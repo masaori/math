@@ -1,4 +1,4 @@
-# 自由境界の多重度の回文性（帰無モデル）の検証。
+# 多重度の回文性（帰無モデル）の検証。
 # 本文の証明の各段を、小さい箱の全数列挙で一段ずつ確かめる。
 # 厳密計算（ZZ と有限集合の列挙）だけを使い、浮動小数点を使わない。
 
@@ -49,7 +49,7 @@ def odd_flip(configuration):
 
 
 def free_broken_count(configuration, edges):
-    # def_free_broken_count: 両端の値が異なる内部辺の本数
+    # def_broken_count: 両端の値が異なる辺の本数
     return ZZ(
         sum(
             1
@@ -60,11 +60,11 @@ def free_broken_count(configuration, edges):
 
 
 def check_adjacent_parity(max_side):
-    # claim_adjacent_parity: 内部辺の両端の座標和の偶奇は異なる
+    # claim_edge_endpoints_parity: 辺の両端の座標和の偶奇は異なる
     for box_side in range(1, max_side + 1):
         for (u, v) in inner_edges(box_side):
             assert coordinate_sum(u) % 2 != coordinate_sum(v) % 2
-    print("claim_adjacent_parity: L=1..%d の全内部辺で偶奇が異なることを確認" % max_side)
+    print("claim_edge_endpoints_parity: L=1..%d の全辺で偶奇が異なることを確認" % max_side)
 
 
 def check_involution(box_side):
@@ -76,7 +76,7 @@ def check_involution(box_side):
 
 
 def check_edge_reversal(box_side):
-    # claim_odd_flip_reverses_edges: (Tσ)(u)≠(Tσ)(v) ⟺ σ(u)=σ(v)（全数列挙 × 全内部辺）
+    # claim_odd_flip_reverses_edges: (Tσ)(u)≠(Tσ)(v) ⟺ σ(u)=σ(v)（全数列挙 × 全辺）
     edges = inner_edges(box_side)
     for configuration in all_configurations(box_side):
         flipped = odd_flip(configuration)
@@ -87,7 +87,7 @@ def check_edge_reversal(box_side):
 
 
 def check_broken_complement(box_side):
-    # claim_free_broken_complement: m(Tσ) = #E_L − m(σ)（全数列挙）
+    # claim_broken_complement: m(Tσ) = #E_L − m(σ)（全数列挙）
     edges = inner_edges(box_side)
     edge_count = ZZ(len(edges))
     for configuration in all_configurations(box_side):
@@ -95,11 +95,11 @@ def check_broken_complement(box_side):
             free_broken_count(odd_flip(configuration), edges)
             == edge_count - free_broken_count(configuration, edges)
         )
-    print("claim_free_broken_complement: L=%d で m(Tσ)=#E−m(σ) を全配位で確認" % box_side)
+    print("claim_broken_complement: L=%d で m(Tσ)=#E−m(σ) を全配位で確認" % box_side)
 
 
 def multiplicities_by_enumeration(box_side):
-    # def_free_multiplicity: Ω^free_L(m) を全数列挙で数える
+    # def_multiplicity: Ω^free_L(m) を全数列挙で数える
     edges = inner_edges(box_side)
     multiplicity = {}
     for configuration in all_configurations(box_side):
@@ -109,13 +109,13 @@ def multiplicities_by_enumeration(box_side):
 
 
 def check_palindrome(multiplicity, edge_count, label):
-    # claim_free_palindrome: Ω(m)=Ω(#E−m)
+    # claim_palindrome: Ω(m)=Ω(#E−m)
     for m in range(edge_count + 1):
         left = multiplicity.get(ZZ(m), ZZ(0))
         right = multiplicity.get(edge_count - ZZ(m), ZZ(0))
         assert left == right, (label, m, left, right)
     total = sum(multiplicity.values())
-    print("claim_free_palindrome: %s（#E=%d、配位総数 %d）で回文性を確認"
+    print("claim_palindrome: %s（#E=%d、配位総数 %d）で回文性を確認"
           % (label, edge_count, total))
     return total
 
