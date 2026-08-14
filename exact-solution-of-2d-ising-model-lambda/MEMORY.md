@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-14 時点）
 
+2026-08-14 の tick 252 は、レビューで前 tick の「正の実数での分配多項式の値は正である」の
+Lean 三本（具体版・必要十分版・導出）を本文と突き合わせ、修正不要と確認した。そのあと
+「熱力学極限」章のセクション「実対数と有限系の実自由エントロピー」を記述と SageMath まで
+進めた。三ブロック: `remark_real_logarithm`（実対数 $\log_{\mathbb{R}}:\mathbb{R}_{>0}\to
+\mathbb{R}$ を既知の数学として引く。使う性質は「乗法を加法へ移す」「狭義単調」の二つに限り、
+構成・連続性・全射性・微分可能性は使わない。$\Lambda$ 側の $\log$ とは別の写像で同一視せず、
+関係は必要になる箇所で $\Lambda\to\mathbb{R}$ の写像を定義してから述べる）、
+`claim_real_log_one`（$\log_{\mathbb{R}}(1)=0$。加法性と順序体の性質だけからの六段の鎖）、
+`def_finite_real_free_entropy`（$\varphi_L(t):=\log_{\mathbb{R}}(Z_L(t))$。well-defined 性は
+`claim_partition_value_positive_at_positive_real` から。$\Phi_L$ とは別の写像と明記）。
+呼称は $\Lambda$ 側 $\Phi_L$ の「自由エントロピー」に揃え「実自由エントロピー」とした
+（台帳の旧名は「実自由エネルギー」）。SageMath（`sagemath/check/finite-real-free-entropy/`）は
+実対数に触れる検査だけ RealBallField(256) を使い（不等式は ball の分離で厳密、等式は差の
+ball が 0 を含む整合検査にとどまる。理由は overview に記録）、可算側（$Z_L(t)$ の値・正値性、
+$\log(1)=0$ の記号計算）は厳密に検査した（合計 98 件）。**Lean は未着手**で、次 tick は
+この三ブロックの Lean（具体版・必要十分版・導出）を進める。次の本文は
+「自由エネルギー密度の極限」（完備性を使う箇所を宣言する）。
+
 2026-08-14 の tick 251 は、レビューで前 tick の「実数体への脱出の宣言」と「正の実数での
 分配多項式の値は正である」の本文・SageMath を突き合わせ、修正不要と確認した。そのあと
 同セクションの Lean 具体版 `partitionPolynomial_eval_real_pos`、必要十分版

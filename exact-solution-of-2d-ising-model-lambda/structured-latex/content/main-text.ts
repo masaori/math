@@ -35352,6 +35352,199 @@ Z_L(t)
   },
 
   {
+    id: "thermodynamic_limit_remark_real_logarithm",
+    kind: "remark",
+    title: { text: "実対数の導入" },
+    labels: ["remark_real_logarithm"],
+    habitat: "R",
+    realEscape:
+      "実対数 log_ℝ: ℝ_{>0} → ℝ を導入するため。「実数体への脱出の宣言」が予告したとおり、" +
+      "使うブロックが現れた時点での追加である。使う性質は本文に列挙した二つ" +
+      "（乗法を加法へ移すこと・狭義単調であること）に限り、級数・積分による構成、連続性、" +
+      "微分可能性、全射性は使わない。",
+    statement: [
+      paragraph([
+        "この章では、正の実数の集合を",
+      ]),
+      displayMath(String.raw`\mathbb{R}_{>0}:=\{\,u\in\mathbb{R}:0<_{\mathbb{R}}u\,\}`),
+      paragraph([
+        "と書く（この記号の初出はここである）。そのうえで、実対数と呼ばれる写像",
+      ]),
+      displayMath(String.raw`\log_{\mathbb{R}}:\mathbb{R}_{>0}\to\mathbb{R}`),
+      paragraph([
+        "を既知の数学として引く。構成（級数・積分）はここでは行わない。",
+        "この文書が使う性質は次の二つだけである。",
+      ]),
+      list([
+        [
+          "（乗法を加法へ移す）任意の ",
+          math(String.raw`u\in\mathbb{R}_{>0}`),
+          " と任意の ",
+          math(String.raw`v\in\mathbb{R}_{>0}`),
+          " について ",
+          math(
+            String.raw`\log_{\mathbb{R}}(u\cdot v)=\log_{\mathbb{R}}(u)+\log_{\mathbb{R}}(v)`,
+          ),
+          "。",
+        ],
+        [
+          "（狭義単調）任意の ",
+          math(String.raw`u\in\mathbb{R}_{>0}`),
+          " と任意の ",
+          math(String.raw`v\in\mathbb{R}_{>0}`),
+          " について、",
+          math(String.raw`u<_{\mathbb{R}}v`),
+          " ならば ",
+          math(String.raw`\log_{\mathbb{R}}(u)<_{\mathbb{R}}\log_{\mathbb{R}}(v)`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        "ここに挙げなかった性質（連続性・全射性・微分可能性・級数表示）は使わない。",
+        "使う必要が生じたブロックが現れた時点で、そのブロックの realEscape に理由を書いて追加する。",
+      ]),
+      paragraph([
+        "写像 ",
+        math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
+        "（",
+        ref("def_rational_log"),
+        "）と ",
+        math(String.raw`\log_{\mathbb{R}}`),
+        " は別の写像であり、同一視しない（定義域も値域も異なる）。両者の関係は、",
+        "この文書ではまだ主張しない。必要になる箇所で、",
+        math(String.raw`\Lambda`),
+        " から ",
+        math(String.raw`\mathbb{R}`),
+        " への写像を定義してから述べる。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_real_log_one",
+    kind: "claim",
+    title: { text: "実対数の 1 における値" },
+    labels: ["claim_real_log_one"],
+    habitat: "R",
+    realEscape:
+      "実対数の値 log_ℝ(1) ∈ ℝ について述べるため。使う性質は「実数体への脱出の宣言」に挙げた" +
+      "順序体の性質（加法群の性質を含む）と「実対数の導入」の乗法を加法へ移す性質だけである。",
+    verification: ["sagemath/check/finite-real-free-entropy"],
+    statement: [
+      paragraph([
+        math(String.raw`\log_{\mathbb{R}}(1)=0`),
+        " である。左辺が確定すること: ",
+        math(String.raw`0<_{\mathbb{R}}1`),
+        "（",
+        ref("remark_real_field_escape"),
+        " に挙げた順序体の性質）なので ",
+        math(String.raw`1\in\mathbb{R}_{>0}`),
+        " であり、",
+        math(String.raw`\log_{\mathbb{R}}`),
+        " の定義域（",
+        ref("remark_real_logarithm"),
+        "）に入っている。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}(1)
+&=\log_{\mathbb{R}}(1)+0
+&&(\because\ \text{加法単位元})\\
+&=\log_{\mathbb{R}}(1)+\bigl(\log_{\mathbb{R}}(1)+(-\log_{\mathbb{R}}(1))\bigr)
+&&(\because\ \text{加法逆元})\\
+&=\bigl(\log_{\mathbb{R}}(1)+\log_{\mathbb{R}}(1)\bigr)+(-\log_{\mathbb{R}}(1))
+&&(\because\ \text{加法の結合則})\\
+&=\log_{\mathbb{R}}(1\cdot 1)+(-\log_{\mathbb{R}}(1))
+&&(\because\ \text{乗法を加法へ移す性質 }\blkref{remark_real_logarithm})\\
+&=\log_{\mathbb{R}}(1)+(-\log_{\mathbb{R}}(1))
+&&(\because\ \text{乗法単位元 }1\cdot 1=1)\\
+&=0
+&&(\because\ \text{加法逆元})
+\end{aligned}`),
+      paragraph([
+        "使った実数体の性質は、実数体への脱出の宣言（",
+        ref("remark_real_field_escape"),
+        "）に挙げた順序体の性質だけである。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_finite_real_free_entropy",
+    kind: "definition",
+    title: { text: "有限系の実自由エントロピー" },
+    labels: ["def_finite_real_free_entropy"],
+    habitat: "R",
+    realEscape:
+      "実対数を分配多項式の実数値へ適用した量 log_ℝ(Z_L(t)) ∈ ℝ を定義するため。" +
+      "使う性質は「実数体への脱出の宣言」と「実対数の導入」に挙げたものだけであり、" +
+      "完備性・極限は使わない。",
+    verification: ["sagemath/check/finite-real-free-entropy"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\ge1`),
+        " と、各 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " に対し、有限系の実自由エントロピーを",
+      ]),
+      displayMath(
+        String.raw`\varphi_L(t):=\log_{\mathbb{R}}\bigl(Z_L(t)\bigr)\ \in\ \mathbb{R}`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`Z_L(t)`),
+        " は ",
+        ref("def_partition_polynomial"),
+        " の代入の約束を可換環 ",
+        math(String.raw`\mathbb{R}`),
+        " に対して使ったもの）。右辺が確定すること: ",
+        ref("claim_partition_value_positive_at_positive_real"),
+        " により ",
+        math(String.raw`0<_{\mathbb{R}}Z_L(t)`),
+        "、すなわち ",
+        math(String.raw`Z_L(t)\in\mathbb{R}_{>0}`),
+        " なので、",
+        math(String.raw`\log_{\mathbb{R}}`),
+        " の定義域（",
+        ref("remark_real_logarithm"),
+        "）に入っている。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi_L`),
+        " は ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " から ",
+        math(String.raw`\mathbb{R}`),
+        " への写像であり、",
+        math(String.raw`\varphi_L(t)`),
+        " はその値である。",
+        math(String.raw`\varphi_L`),
+        " と ",
+        math(String.raw`\varphi_L(t)`),
+        " を同じ記号で書くことはしない。",
+      ]),
+      paragraph([
+        "写像 ",
+        math(String.raw`\Phi_L:\mathbb{Q}_{>0}\to\Lambda`),
+        "（",
+        ref("def_finite_free_entropy"),
+        "）と ",
+        math(String.raw`\varphi_L`),
+        " は別の写像であり、同一視しない（定義域も値域も異なる）。両者の関係は、",
+        "この文書ではまだ主張しない。必要になる箇所で、",
+        math(String.raw`\Lambda`),
+        " から ",
+        math(String.raw`\mathbb{R}`),
+        " への写像を定義してから述べる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -35368,9 +35561,7 @@ Z_L(t)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 実対数の導入と有限系の実自由エネルギー ",
-          math(String.raw`\log Z_L(t)`),
-          "、自由エネルギー密度の極限（完備性を使う箇所を宣言する）、零点密度。",
+          "「熱力学極限」の残り: 自由エネルギー密度の極限（完備性を使う箇所を宣言する）、零点密度。",
         ],
         [
           todo("未着手"),
