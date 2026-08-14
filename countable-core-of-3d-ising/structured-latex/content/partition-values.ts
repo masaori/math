@@ -87,4 +87,63 @@ Z_L(1)
       paragraph(["となる。"]),
     ],
   },
+
+  {
+    id: "partition_coefficients_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "帰無モデル: 分配多項式の係数の非負性" },
+    labels: [],
+  },
+
+  {
+    id: "partition_coefficients_claim_nonnegative",
+    kind: "claim",
+    title: { text: "分配多項式の各係数は非負である" },
+    labels: ["claim_partition_coefficients_nonnegative"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "自然数 ",
+        math(String.raw`m\in\{0,1,\ldots,\#E_L\}`),
+        " に対し、",
+      ]),
+      displayMath(
+        String.raw`[X^m]Z_L(X)=\Omega_L(m)\in\mathbb N\subset\mathbb Z`,
+      ),
+      paragraph([
+        "が成り立つ。したがって、整係数多項式 ",
+        math(String.raw`Z_L(X)`),
+        " の各係数は非負である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`[X^m]P(X)`),
+        " は整係数多項式 ",
+        math(String.raw`P(X)`),
+        " の ",
+        math(String.raw`X^m`),
+        " の係数を表す。また、",
+        math(String.raw`\delta_{r,m}`),
+        " は ",
+        math(String.raw`r=m`),
+        " のとき 1、そうでないとき 0 である。すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[X^m]Z_L(X)
+&=[X^m]\sum_{r=0}^{\#E_L}\Omega_L(r)X^r
+&&(\because\ \blkref{def_partition_polynomial})\\
+&=\sum_{r=0}^{\#E_L}\Omega_L(r)\delta_{r,m}
+&&(\because\ \text{係数を取る写像の有限和に対する加法性})\\
+&=\Omega_L(m)
+&&(\because\ 0\le m\le\#E_L)\\
+&\in\mathbb N
+&&(\because\ \blkref{def_multiplicity})
+\end{aligned}`,
+      ),
+      paragraph(["となる。"]),
+    ],
+  },
 ]);

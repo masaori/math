@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
   "claim_palindrome",
+  "claim_partition_coefficients_nonnegative",
   "claim_partition_value_at_one",
   "claim_periodic_constant_unbroken",
   "claim_periodic_no_all_broken",
