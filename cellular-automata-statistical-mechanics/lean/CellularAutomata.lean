@@ -3,6 +3,7 @@ import CellularAutomata.EssentialDependency
 import CellularAutomata.NecSuf.EssentialDependency
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.TimeExpansionDependency
+import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
 import CellularAutomata.RedundantNeighbor
 import CellularAutomata.TimeExpansionDependency
 import CellularAutomata.TransitiveClosureAntisymmetry

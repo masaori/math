@@ -34,6 +34,7 @@
 （ℕ の大小比較の推移性・非反射性、有限集合の直積と部分集合の有限性）に限る。
 -/
 import CellularAutomata.TimeExpansionDependency
+import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
 
 namespace CellularAutomata.TransitiveClosureAntisymmetry
 
@@ -262,5 +263,133 @@ theorem reflReachable_partial_order (τ : ℕ) :
         exact Or.inr hab'
       · -- (a,b) ∈ C_τ かつ (b,c) ∈ C_τ: `claim_reachability_transitive`
         exact Or.inr (reachable_transitive N f τ a b c hab' hbc')
+
+private abbrev EventSetAsSet (τ : ℕ) : Set (ℕ × V) :=
+  ↑(eventSet (V := V) τ)
+
+private abbrev OneStepAsSet (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
+  ↑(oneStepDep N f τ)
+
+/-- 具体版の依存経路は、必要十分版をイベント集合と一段依存関係へ特殊化したものである。 -/
+theorem isDepPath_iff_necessary_sufficient (τ n : ℕ) (p : ℕ → ℕ × V) :
+    IsDepPath N f τ n p ↔
+      CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.IsDepPath
+        (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) n p := by
+  constructor
+  · rintro ⟨hn, hmem, hstep⟩
+    exact ⟨hn, hmem, hstep⟩
+  · rintro ⟨hn, hmem, hstep⟩
+    exact ⟨hn, hmem, hstep⟩
+
+/-- 具体版の到達可能関係は、必要十分版の到達可能関係の特殊化である。 -/
+theorem reachable_iff_necessary_sufficient (τ : ℕ) (a b : ℕ × V) :
+    (a, b) ∈ Reachable N f τ ↔
+      (a, b) ∈ CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.Reachable
+        (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) := by
+  constructor
+  · rintro ⟨n, p, hpath, hp0, hpn⟩
+    exact ⟨n, p, (isDepPath_iff_necessary_sufficient N f τ n p).mp hpath, hp0, hpn⟩
+  · rintro ⟨n, p, hpath, hp0, hpn⟩
+    exact ⟨n, p, (isDepPath_iff_necessary_sufficient N f τ n p).mpr hpath, hp0, hpn⟩
+
+/-- 具体版の反射的到達可能関係も必要十分版の特殊化である。 -/
+theorem reflReachable_iff_necessary_sufficient (τ : ℕ) (a b : ℕ × V) :
+    (a, b) ∈ ReflReachable N f τ ↔
+      (a, b) ∈ CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.ReflReachable
+        (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) := by
+  constructor
+  · rintro ⟨ha, hb, heq | hab⟩
+    · exact ⟨ha, hb, Or.inl heq⟩
+    · exact ⟨ha, hb, Or.inr ((reachable_iff_necessary_sufficient N f τ a b).mp hab)⟩
+  · rintro ⟨ha, hb, heq | hab⟩
+    · exact ⟨ha, hb, Or.inl heq⟩
+    · exact ⟨ha, hb, Or.inr ((reachable_iff_necessary_sufficient N f τ a b).mpr hab)⟩
+
+/-- 具体版の経路上の時刻増加が、必要十分版を時刻射影と自然数の大小へ
+    特殊化して得られること。 -/
+theorem path_time_strictly_increases_from_necessary_sufficient
+    (τ n : ℕ) (p : ℕ → ℕ × V) (hpath : IsDepPath N f τ n p) :
+    (p 0).1 < (p n).1 := by
+  exact CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.path_time_strictly_increases
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) Prod.fst (· < ·)
+    (fun _ _ _ => Nat.lt_trans)
+    (fun a b h => time_strictly_increases N f τ a.1 b.1 a.2 b.2 h)
+    n p ((isDepPath_iff_necessary_sufficient N f τ n p).mp hpath)
+
+/-- 具体版の到達可能関係の有限性が、必要十分版で有限なイベント集合へ
+    特殊化して得られること。 -/
+theorem reachable_finite_from_necessary_sufficient (τ : ℕ) :
+    (Reachable N f τ).Finite := by
+  have h := CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.reachable_finite
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) (Finset.finite_toSet _)
+  apply h.subset
+  rintro ⟨a, b⟩ hab
+  exact (reachable_iff_necessary_sufficient N f τ a b).mp hab
+
+/-- 具体版の一段依存の包含が、必要十分版の長さ 1 の経路から得られること。 -/
+theorem oneStep_subset_reachable_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V)
+    (h : (a, b) ∈ oneStepDep N f τ) : (a, b) ∈ Reachable N f τ := by
+  apply (reachable_iff_necessary_sufficient N f τ a b).mpr
+  exact CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.oneStep_subset_reachable
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ)
+    (fun _ hD => Finset.mem_product.mp (oneStepDep_subset N f τ hD)) h
+
+/-- 具体版の到達可能関係の推移性が、必要十分版の経路連結から得られること。 -/
+theorem reachable_transitive_from_necessary_sufficient (τ : ℕ) (a b c : ℕ × V)
+    (hab : (a, b) ∈ Reachable N f τ) (hbc : (b, c) ∈ Reachable N f τ) :
+    (a, c) ∈ Reachable N f τ := by
+  apply (reachable_iff_necessary_sufficient N f τ a c).mpr
+  exact CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.reachable_transitive
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) a b c
+    ((reachable_iff_necessary_sufficient N f τ a b).mp hab)
+    ((reachable_iff_necessary_sufficient N f τ b c).mp hbc)
+
+/-- 具体版の推移閉包の最小性が、必要十分版の経路長の帰納法から得られること。 -/
+theorem reachable_minimal_from_necessary_sufficient
+    (τ : ℕ) (R : Set ((ℕ × V) × (ℕ × V)))
+    (_hRE : R ⊆ ↑(eventSet (V := V) τ ×ˢ eventSet (V := V) τ))
+    (hRtrans : ∀ x y z : ℕ × V, (x, y) ∈ R → (y, z) ∈ R → (x, z) ∈ R)
+    (hDR : ∀ ab ∈ oneStepDep N f τ, ab ∈ R) : Reachable N f τ ⊆ R := by
+  intro ab hab
+  exact CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.reachable_minimal
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) R hRtrans
+    (fun _ h => hDR _ h)
+    ((reachable_iff_necessary_sufficient N f τ ab.1 ab.2).mp hab)
+
+/-- 具体版の相互到達の不存在が、必要十分版の時刻増加から得られること。 -/
+theorem no_mutual_reachability_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V)
+    (hab : (a, b) ∈ Reachable N f τ) (hba : (b, a) ∈ Reachable N f τ) : False := by
+  exact CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.no_mutual_reachability
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) Prod.fst (· < ·)
+    (fun _ _ _ => Nat.lt_trans) Nat.lt_irrefl
+    (fun x y h => time_strictly_increases N f τ x.1 y.1 x.2 y.2 h) a b
+    ((reachable_iff_necessary_sufficient N f τ a b).mp hab)
+    ((reachable_iff_necessary_sufficient N f τ b a).mp hba)
+
+/-- 具体版の自己到達の不存在が、必要十分版の特殊化から得られること。 -/
+theorem reachable_irreflexive_from_necessary_sufficient (τ : ℕ) (a : ℕ × V)
+    (h : (a, a) ∈ Reachable N f τ) : False :=
+  no_mutual_reachability_from_necessary_sufficient N f τ a a h h
+
+/-- 具体版の反射的到達可能関係の部分順序性が、必要十分版の特殊化から得られること。 -/
+theorem reflReachable_partial_order_from_necessary_sufficient (τ : ℕ) :
+    IsPartialOrderOn (eventSet (V := V) τ) (ReflReachable N f τ) := by
+  have h := CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.reflReachable_partial_order
+    (EventSetAsSet (V := V) τ) (OneStepAsSet N f τ) Prod.fst (· < ·)
+    (fun _ _ _ => Nat.lt_trans) Nat.lt_irrefl
+    (fun x y h => time_strictly_increases N f τ x.1 y.1 x.2 y.2 h)
+  rcases h with ⟨hrefl, hanti, htrans⟩
+  refine ⟨?_, ?_, ?_⟩
+  · intro a ha
+    exact (reflReachable_iff_necessary_sufficient N f τ a a).mpr (hrefl a ha)
+  · intro a b hab hba
+    exact hanti a b
+      ((reflReachable_iff_necessary_sufficient N f τ a b).mp hab)
+      ((reflReachable_iff_necessary_sufficient N f τ b a).mp hba)
+  · intro a b c hab hbc
+    exact (reflReachable_iff_necessary_sufficient N f τ a c).mpr
+      (htrans a b c
+        ((reflReachable_iff_necessary_sufficient N f τ a b).mp hab)
+        ((reflReachable_iff_necessary_sufficient N f τ b c).mp hbc))
 
 end CellularAutomata.TransitiveClosureAntisymmetry
