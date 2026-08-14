@@ -1034,6 +1034,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.splitSecondBottom_glueSecond
   Ising2DLambda.ThermodynamicLimit.splitSecondTop_glueSecond
   Ising2DLambda.ThermodynamicLimit.glueSecond_splitSecond
+  Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_eq_oriented
+  Ising2DLambda.ThermodynamicLimit.openSeamBrokenCountFirst_le
+  Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_glueFirst
+  Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_transpose
+  Ising2DLambda.ThermodynamicLimit.openSeamBrokenCountSecond_le
+  Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_glueSecond
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

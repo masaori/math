@@ -1833,9 +1833,13 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         " において収束し、(2) より",
       ]),
       displayMath(
-        String.raw`\exp(X)\,Y\,\exp(-X)
-= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
-= \exp\!\left(\mathrm{ad}_X\right)(Y)`,
+        String.raw`\begin{aligned}
+\exp(X)\,Y\,\exp(-X)
+&= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
+&&\left(\because\ \text{「行列の exp による共役と交換子級数」(2)}\right) \\
+&= \exp\!\left(\mathrm{ad}_X\right)(Y)
+&&\left(\because\ \text{行列への線型写像 }\mathrm{ad}_X\text{ の exp の定義}\right)
+\end{aligned}`,
       ),
       paragraph([
         "Step 2: ",
@@ -1844,15 +1848,27 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         math(String.raw`\mathrm{ad}_X^{0}(Y)=Y`),
         "、",
         math(String.raw`\mathrm{ad}_X^{m+1}(Y)=[X,\mathrm{ad}_X^{m}(Y)]`),
-        " より、",
-        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
-        " について ",
-        math(String.raw`\mathrm{ad}_X^{m}(Y)=\underbrace{[X,[X,\dots,[X,Y]\dots]]}_{m}`),
-        "（",
+        " を出発点にすると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}_X^{0}(Y)
+&= Y
+&&\left(\because\ \mathrm{ad}_X\text{ の反復の定義}\right), \\
+\mathrm{ad}_X^{m+1}(Y)
+&= [X,\mathrm{ad}_X^{m}(Y)]
+&&\left(\because\ \mathrm{ad}_X\text{ の反復の定義}\right), \\
+\mathrm{ad}_X^{m}(Y)
+&= \underbrace{[X,[X,\dots,[X,Y]\dots]]}_{m}
+&&\left(\because\ m\in\mathbb{Z}_{\ge 0}\text{ について上の二式を反復}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後の式では ",
         math(String.raw`m=0`),
-        " のときは ",
+        " のとき括弧なしで ",
         math(String.raw`Y`),
-        "）であるから、Step 1 の中辺は主張の最右辺に一致する。",
+        " と読む。したがって Step 1 の中辺は主張の最右辺に一致する。",
       ]),
       paragraph([
         "Step 3: ",
@@ -1864,7 +1880,13 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         " であるから",
       ]),
       displayMath(
-        String.raw`\mathrm{Ad}_{\exp(X)}(Y)=\exp(X)\,Y\,\exp(X)^{-1}=\exp(X)\,Y\,\exp(-X)`,
+        String.raw`\begin{aligned}
+\mathrm{Ad}_{\exp(X)}(Y)
+&= \exp(X)\,Y\,\exp(X)^{-1}
+&&\left(\because\ \mathrm{Ad}_{g}(Y)=gYg^{-1}\text{ の定義}\right) \\
+&= \exp(X)\,Y\,\exp(-X)
+&&\left(\because\ \exp(X)^{-1}=\exp(-X)\right)
+\end{aligned}`,
       ),
       paragraph([
         "以上より主張のすべての等号が成り立つ。なお、本証明で非可算集合 ",
@@ -1886,6 +1908,7 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
           "labels: matrix_exp_conjugation（005 で Lie 群論に依存せず完全証明済み）から" +
           "完全な証明へ書き換えた。statement 側にも X, Y の所属集合（Mat(d,C)）と" +
           "記号の定義元を明示した。",
+        "級数展開・反復交換子・共役写像の三つの計算を、一続きの式変形と行末の根拠へ揃えた（2026-08-15）。参照先と証明内容は変えていない。",
       ],
     },
   },
