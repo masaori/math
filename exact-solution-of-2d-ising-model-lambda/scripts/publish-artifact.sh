@@ -38,9 +38,21 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
 
 commit="$(git -C "$REPO_DIR" rev-parse --short HEAD)"
 agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
+NOTIFIED="$LOG_DIR/last-notified-commit"
+notified="$(cat "$NOTIFIED" 2>/dev/null || true)"
+
+# 同じリポジトリで別プロジェクト（3 次元 Ising 側）のループも push しているため、
+# 版が変わっただけでは論文は変わらない。**このプロジェクトの中身が動いていなければ何もしない**
+# （実測 2026-08-14: 姉妹側の push で公開と通知が余分に走り、Slack が 2 通ずつ届いていた）。
+if [ -n "$notified" ] && git -C "$REPO_DIR" cat-file -e "$notified^{commit}" 2>/dev/null; then
+  if [ -z "$(git -C "$REPO_DIR" diff --name-only "$notified" HEAD -- "$PROJECT_DIR" 2>/dev/null)" ]; then
+    exit 0
+  fi
+fi
 
 # その tick が何をしたか。コミットの件名は短すぎて中身が分からないので、台帳の
-# 「現在地」の先頭（＝直近の tick の記録）を本文にする。
+# 「現在地」の先頭（＝直近の tick の記録）を本文にする。**太字で囲われた要点だけ**を採る
+# （それ以降は実装の詳細で、Slack では長すぎる。ユーザー指示 2026-08-14）。
 summary="$(python3 - "$PROJECT_DIR/docs/tasks/auto-loop-state.md" <<'PYEOF'
 import re, sys
 
@@ -58,7 +70,15 @@ for line in lines:
         body.append(line[2:].strip())
     elif line.strip():
         body.append(line.strip())
-text = " ".join(body).replace("**", "")
+text = " ".join(body)
+
+# 太字で囲われた要点だけを採る（囲いが無ければ全体）。日付と tick 番号は Slack では不要。
+bold = re.search(r"\*\*(.+?)\*\*", text, re.S)
+if bold:
+    text = bold.group(1)
+text = re.sub(r"\s+", " ", text.replace("**", "")).strip()
+text = re.sub(r"^\d{4}-\d{2}-\d{2}\s*の?\s*tick\s*\d+\s*は、?", "", text)
+
 # **短く切る。** 人間が Slack で読むのは「その tick が何をしたか」の 1〜2 文だけであり、
 # 台帳の記述をそのまま流すと読まれない（2026-08-14 のユーザー指摘）。
 print(text if len(text) <= 240 else text[:240] + "…")
