@@ -992,6 +992,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_pos
   Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_pos_by_separating_term_necSuf
   Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_real_pos_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_mul
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_strictMono
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.map_one_eq_zero_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

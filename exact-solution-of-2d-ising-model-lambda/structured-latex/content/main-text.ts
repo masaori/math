@@ -35362,6 +35362,10 @@ Z_L(t)
       "使うブロックが現れた時点での追加である。使う性質は本文に列挙した二つ" +
       "（乗法を加法へ移すこと・狭義単調であること）に限り、級数・積分による構成、連続性、" +
       "微分可能性、全射性は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.realLogarithm_mul",
+      "Ising2DLambda.ThermodynamicLimit.realLogarithm_strictMono",
+    ],
     statement: [
       paragraph([
         "この章では、正の実数の集合を",
@@ -35429,6 +35433,11 @@ Z_L(t)
     realEscape:
       "実対数の値 log_ℝ(1) ∈ ℝ について述べるため。使う性質は「実数体への脱出の宣言」に挙げた" +
       "順序体の性質（加法群の性質を含む）と「実対数の導入」の乗法を加法へ移す性質だけである。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.realLogarithm_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.map_one_eq_zero_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.realLogarithm_one_from_necSuf",
+    ],
     verification: ["sagemath/check/finite-real-free-entropy"],
     statement: [
       paragraph([
@@ -35480,6 +35489,7 @@ Z_L(t)
       "実対数を分配多項式の実数値へ適用した量 log_ℝ(Z_L(t)) ∈ ℝ を定義するため。" +
       "使う性質は「実数体への脱出の宣言」と「実対数の導入」に挙げたものだけであり、" +
       "完備性・極限は使わない。",
+    lean: ["Ising2DLambda.ThermodynamicLimit.finiteRealFreeEntropy"],
     verification: ["sagemath/check/finite-real-free-entropy"],
     statement: [
       paragraph([

@@ -2476,8 +2476,9 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
         " と読み替えることで、",
       ]),
       displayMath(
-        String.raw`\sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) = M\,\delta^M_{(m-j,\,0)} \quad (\because \text{exp\_sum})`,
+        String.raw`\sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) = M\,\delta^M_{(m-j,\,0)} \quad (\because \text{指数和の直交性})`,
       ),
+      paragraph(["この等式で ", ref("exp_sum"), " を適用した。"]),
       paragraph([
         "が成り立つ。さらに ",
         math(String.raw`m, j \in \{1,\dots,M\}`),
@@ -2493,14 +2494,15 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
       ]),
       displayMath(
         String.raw`\sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right)
-= \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because \text{exp\_sum})`,
+= \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because \text{指数和の直交性と }|m-j|<M)`,
       ),
+      paragraph(["この等式でも ", ref("exp_sum"), " を適用した。"]),
       paragraph(["が成り立つ（以下この等式を ", math(String.raw`(\ast)`), " と呼ぶ）。"]),
       paragraph(["Step 1: ", math(String.raw`\hat{Y}`), " からの復元。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\mu=1}^M \hat{Y}_\mu \exp\!\left(i m\frac{2\pi\mu}{M}\right)
-&= \sum_{\mu=1}^M \left(\sum_{j=1}^M Y_j \exp\!\left(-i j\frac{2\pi\mu}{M}\right)\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \hat{Y}_\mu,\hat{Z}_\mu^{(-)} \text{ の定義}) \\
+&= \sum_{\mu=1}^M \left(\sum_{j=1}^M Y_j \exp\!\left(-i j\frac{2\pi\mu}{M}\right)\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \hat{Y}_\mu \text{ の定義}) \\
 &= \sum_{\mu=1}^M \sum_{j=1}^M Y_j \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right) \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M Y_j \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) \quad (\because \text{有限二重和の順序交換}) \\
 &= \sum_{j=1}^M Y_j \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because (\ast)) \\
@@ -2508,11 +2510,12 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
 &= M Y_m \quad (\because \mathbb{C} \text{ の積の可換性})
 \end{aligned}`,
       ),
+      paragraph(["この式変形の先頭で ", ref("def_hatZ_hatY"), " を適用した。"]),
       paragraph(["Step 2: ", math(String.raw`\hat{Z}^{(-)}`), " からの復元。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{M}\right)
-&= \sum_{\mu=1}^M \left(\sum_{j=1}^M Z_j \exp\!\left(-i j\frac{2\pi\mu}{M}\right)\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \hat{Y}_\mu,\hat{Z}_\mu^{(-)} \text{ の定義}) \\
+&= \sum_{\mu=1}^M \left(\sum_{j=1}^M Z_j \exp\!\left(-i j\frac{2\pi\mu}{M}\right)\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \hat{Z}_\mu^{(-)} \text{ の定義}) \\
 &= \sum_{\mu=1}^M \sum_{j=1}^M Z_j \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right) \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M Z_j \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right) \quad (\because \text{有限二重和の順序交換}) \\
 &= \sum_{j=1}^M Z_j \begin{cases} M & (j=m) \\ 0 & (j\neq m) \end{cases} \quad (\because (\ast)) \\
@@ -2520,6 +2523,7 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
 &= M Z_m \quad (\because \mathbb{C} \text{ の積の可換性})
 \end{aligned}`,
       ),
+      paragraph(["この式変形の先頭で ", ref("def_hatZ_hatY"), " を適用した。"]),
       paragraph([
         "Step 3: 復元式。",
         math(String.raw`M \geq 1`),
