@@ -64,7 +64,7 @@ def check_predicate_well_defined():
 
 
 def check_distance_positive():
-    # claim_distance_positive_on_fisher_zeros: L=1,2,3 の全 Fisher 零点と
+    # claim_distance_positive_on_fisher_zeros: L=1,2 の全 Fisher 零点と
     # 正の有理点サンプルの全対で dsq(ξ,q) ≠ 0 であること。
     count = 0
     for L in L_RANGE:
@@ -77,7 +77,7 @@ def check_distance_positive():
 
 def check_pinch_instances():
     # def_phase_transition_countable_statement の言明の各 ε 段のモデル検査:
-    # サンプルの ε それぞれについて、L ∈ {1,2,3} と ξ ∈ F_L と q の標本の中に
+    # サンプルの ε それぞれについて、L ∈ {1,2} と ξ ∈ F_L と q の標本の中に
     # dsq(ξ,q) <_R ε·ε の証人が実際にあるか（真偽の記録。無くても失敗にしない。
     # 言明そのものの証明は本文の今後のセクションが担う）。
     for eps in EPS_SAMPLES:
