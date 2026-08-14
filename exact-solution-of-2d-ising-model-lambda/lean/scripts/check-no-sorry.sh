@@ -1028,6 +1028,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.card_openEdge
   Ising2DLambda.ThermodynamicLimit.card_openConfig
   Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_le
+  Ising2DLambda.ThermodynamicLimit.splitFirstLeft_glueFirst
+  Ising2DLambda.ThermodynamicLimit.splitFirstRight_glueFirst
+  Ising2DLambda.ThermodynamicLimit.glueFirst_splitFirst
+  Ising2DLambda.ThermodynamicLimit.splitSecondBottom_glueSecond
+  Ising2DLambda.ThermodynamicLimit.splitSecondTop_glueSecond
+  Ising2DLambda.ThermodynamicLimit.glueSecond_splitSecond
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

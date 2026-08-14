@@ -4,6 +4,20 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 272 は、レビューで前 tick の「開境界長方形の接合不等式」の本文と SageMath
+（80 組）が一致していることを確認し（修正無し）、そのあと同セクションの Lean を論法ごとに
+「接合の全単射」「破れボンド数の接合面分解」「実数評価の上下評価」の三つへ割り直し、先頭の
+「接合の全単射」の Lean 具体版 `lean/Ising2DLambda/ThermodynamicLimit/OpenRectangleGluing.lean`
+を完成させた。第一の座標方向の制限 `openConfigSplitFirstLeft/Right`（$\rho_L,\rho_R$）と接合
+`openConfigGlueFirst`（$\rho_{\sigma,\tau}$）、第二の座標方向の対応物を人手証明と 1 対 1 に写し、
+「二つの構成を順に行うと各頂点で元の値に戻る」を戻りの等式六補題
+（`splitFirstLeft_glueFirst` 等）として示し、全単射 `openConfigGlueEquivFirst/Second` を得た
+（sorry 検査 978 件、すべて非依存）。**claim 本体の Lean は未了**なので本文ブロックへの `lean`
+宣言はまだ付けない。次 tick は「破れボンド数の接合面分解」の Lean（接合後の辺集合の三分割と
+個数の加法）を進める。式変形統一では姉妹側「$\check Z,\check Y$ についてのテイラー係数の抽出」
+の (h1.y)(h2.z)(h2.y) の三鎖を、(h1.z) と同じ粒度（場合分け形の行と「和の外へ出す」行を持つ
+一行一等号）へ開いた。
+
 2026-08-15 の tick 271 は、レビューで前 tick の「開境界長方形の分配多項式」の五定義について、
 本文・SageMath・Lean 具体版の頂点条件、向き付き辺と端点写像、配位、破れボンド数、分配多項式、
 数え上げ補題 4 件が一致し、入口 import と sorry 非依存検査も揃っていることを確認した（修正無し）。
