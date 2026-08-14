@@ -52,6 +52,21 @@ $|S|2^{|S|}$ 以下だった。浮動小数点と $\mathbb{R}/\mathbb{C}$ 脱出
 混同しない。**現在地は SageMath まで。Lean 具体版・Lean 必要十分版と導出は未着手。**
 次 tick は前層をレビューした後、人手証明と同じ対象・仮定・順序の Lean 具体版だけを作る。
 
+## 自動ループ tick: 本質的依存台の Lean 具体版（2026-08-15）
+
+前 tick の SageMath 検算と構造化記述を突き合わせ、誤りは見つからなかった。`lean/` を初期化し
+（lib 名 `CellularAutomata`、toolchain・mathlib は既存プロジェクトと同じ v4.32.1、依存は
+`exact-solution-of-2d-ising-model-lambda` の `.lake` を clone copy で持ち込む運用。README に明記）、
+`lean/CellularAutomata/EssentialDependency.lean` に人手証明と 1 対 1 の具体版を書いた。
+状態集合は演算を入れない 2 元帰納型（`Bool`・`Fin 2` の既成演算を流用しない）、ν は値の場合分け、
+「本質的依存 ⟺ 一点反転検査」は人手証明の両方向をそのまま写した。有限決定可能性は
+決定可能性インスタンス＋`mem_supp_iff` と、走査する組 (w,x) の総数 $|S|\cdot2^{|S|}$
+（`card_scan_pairs`）として形式化した。**比較回数のコストモデル自体は形式化していない**
+（ファイル冒頭に範囲を明記）。`lake build`・`check-no-sorry.sh`（4 定理とも sorryAx 非依存）・
+構造化テキスト check・build:pdf・SageMath 3 本・対応検査を全て通した。
+**現在地は Lean 具体版まで。次 tick は Lean 必要十分版と導出**（同値だけなら `Fintype S` が
+不要なことが具体版の `omit` から既に見えている。これが必要十分版の最初の検査項目になる）。
+
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。
