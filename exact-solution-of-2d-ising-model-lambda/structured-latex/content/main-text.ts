@@ -34420,9 +34420,19 @@ L^2\,\ell_2+\Phi_L(q)
         " も可算である）。",
       ]),
       paragraph([
-        "また ",
-        math(String.raw`\omega^{4}=(\omega\cdot\omega)\cdot(\omega\cdot\omega)=(-1)\cdot(-1)=1`),
-        " なので ",
+        "また、冪の定義と第 3 条件から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\omega^{4}
+&=(\omega\cdot\omega)\cdot(\omega\cdot\omega)
+&&(\because\ \text{冪の定義})\\
+&=(-1)\cdot(-1)
+&&(\because\ \omega\cdot\omega=-1)\\
+&=1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の乗法})
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
         math(String.raw`\omega\in\mu_{4}`),
         "（",
         ref("def_root_of_unity_set"),

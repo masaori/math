@@ -1,7 +1,7 @@
 # 対象ラベル: def_real_closed_subfield
 # QQ・AA・QQbar の厳密計算だけを使う。浮動小数点を使わない。
 # モデル: R = AA（実代数的数体）、ω = QQbar(I)。定義の 4 条件がこのモデルで
-# 成り立つことを検査する（存在の witness の提示）。
+# 各条件に対応する計算を有限標本で検査する。普遍量化された 4 条件そのものの証明ではない。
 #
 # 範囲の注記（黙って狭めない）: QQbar の等号判定は exactify（PARI の nfinit）を
 # 経由し、次数の高い代数的数どうしでは既定 1GB のスタックを超える・または
@@ -106,4 +106,4 @@ check_condition_subfield()
 check_condition_square_trichotomy()
 check_condition_imaginary_unit()
 check_condition_unique_representation()
-print("def_real_closed_subfield: すべて通過", flush=True)
+print("def_real_closed_subfield: 4 条件に対応する有限標本検査がすべて通過", flush=True)
