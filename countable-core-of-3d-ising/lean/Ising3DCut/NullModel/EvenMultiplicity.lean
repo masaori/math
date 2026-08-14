@@ -12,12 +12,14 @@
 
 住処: `Fin`、`Nat`、整数 ±1、有限型のみ。ℝ / ℂ は現れない。
 -/
-import Mathlib.GroupTheory.Perm.Cycle.Type
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Ising3DCut.NullModel.MultiplicityPalindrome
 
 namespace Ising3DCut.NullModel
 
 noncomputable section
+
+local instance levelSetDecidableEq {L m : ℕ} : DecidableEq (LevelSet L m) := Classical.decEq _
 
 /-- 全スピン反転 F。 -/
 def globalFlip {L : ℕ} (σ : Config L) : Config L := fun a => negSpin (σ a)
@@ -74,21 +76,75 @@ def levelSetGlobalFlip {L m : ℕ} : Equiv.Perm (LevelSet L m) where
   left_inv σ := Subtype.ext (globalFlip_globalFlip σ.1)
   right_inv σ := Subtype.ext (globalFlip_globalFlip σ.1)
 
+/-- 水準集合の元 `σ` が属する二元軌道 `{σ, Fσ}`。 -/
+noncomputable def globalFlipOrbit {L m : ℕ} (σ : LevelSet L m) : Finset (LevelSet L m) :=
+  open Classical in {σ, levelSetGlobalFlip σ}
+
+/-- 二元軌道の族。重複する軌道は `Finset.image` が一つにまとめる。 -/
+noncomputable def globalFlipOrbits {L m : ℕ} : Finset (Finset (LevelSet L m)) :=
+  open Classical in Finset.univ.image globalFlipOrbit
+
+/-- 同じ二元軌道に属する二点から作った軌道は一致する。 -/
+lemma globalFlipOrbit_eq_of_mem {L m : ℕ} {σ τ : LevelSet L m}
+    (hτ : τ ∈ globalFlipOrbit σ) : globalFlipOrbit τ = globalFlipOrbit σ := by
+  classical
+  simp only [globalFlipOrbit, Finset.mem_insert, Finset.mem_singleton] at hτ
+  rcases hτ with rfl | rfl
+  · rfl
+  · simp only [globalFlipOrbit]
+    rw [show levelSetGlobalFlip (levelSetGlobalFlip σ) = σ from
+      (levelSetGlobalFlip (L := L) (m := m)).left_inv σ]
+    exact Finset.pair_comm _ _
+
+/-- 相異なる二元軌道は互いに素である。 -/
+lemma globalFlipOrbits_pairwise_disjoint {L m : ℕ} :
+    ∀ O ∈ globalFlipOrbits (L := L) (m := m),
+      ∀ O' ∈ globalFlipOrbits (L := L) (m := m), O ≠ O' → Disjoint O O' := by
+  classical
+  intro O hO O' hO' hne
+  simp only [globalFlipOrbits, Finset.mem_image] at hO hO'
+  obtain ⟨σ, _, rfl⟩ := hO
+  obtain ⟨τ, _, rfl⟩ := hO'
+  rw [Finset.disjoint_left]
+  intro ρ hρ hρ'
+  apply hne
+  exact (globalFlipOrbit_eq_of_mem hρ).symm.trans (globalFlipOrbit_eq_of_mem hρ')
+
+/-- 二元軌道の合併は水準集合全体である。 -/
+lemma globalFlipOrbits_biUnion {L m : ℕ} :
+    (globalFlipOrbits (L := L) (m := m)).biUnion (fun O => O) = Finset.univ := by
+  classical
+  apply Finset.eq_univ_of_forall
+  intro σ
+  rw [Finset.mem_biUnion]
+  exact ⟨globalFlipOrbit σ, Finset.mem_image.mpr ⟨σ, Finset.mem_univ _, rfl⟩,
+    Finset.mem_insert_self _ _⟩
+
+/-- 不動点が無いとき、各軌道はちょうど二元からなる。 -/
+lemma globalFlipOrbit_card {L m : ℕ} (hL : 2 ≤ L) (σ : LevelSet L m) :
+    (globalFlipOrbit σ).card = 2 := by
+  classical
+  rw [globalFlipOrbit, Finset.card_pair]
+  intro h
+  have hval := congrArg Subtype.val h
+  exact globalFlip_ne_self hL σ.1 hval.symm
+
 /-- `claim_even_multiplicity` の具体版。Ω_L(m) = 2 k_m。 -/
 theorem multiplicity_even {L m : ℕ} (hL : 2 ≤ L) :
     ∃ k : ℕ, multiplicity L m = 2 * k := by
-  have hpow : (levelSetGlobalFlip (L := L) (m := m)) ^ (2 : ℕ) ^ (1 : ℕ) = 1 := by
-    ext σ
-    simp only [pow_one, pow_two, Equiv.Perm.mul_apply, one_apply]
-    exact (levelSetGlobalFlip (L := L) (m := m)).left_inv σ
-  have hdiv : 2 ∣ Fintype.card (LevelSet L m) := by
-    by_contra hnot
-    obtain ⟨σ, hfixed⟩ := Equiv.Perm.exists_fixed_point_of_prime
-      (p := 2) (n := 1) hnot hpow
-    have hval := congrArg Subtype.val hfixed
-    exact globalFlip_ne_self hL σ.1 hval
-  rcases hdiv with ⟨k, hk⟩
-  exact ⟨k, by simpa [multiplicity, Nat.mul_comm] using hk⟩
+  classical
+  refine ⟨(globalFlipOrbits (L := L) (m := m)).card, ?_⟩
+  rw [multiplicity, ← Finset.card_univ, ← globalFlipOrbits_biUnion,
+    Finset.card_biUnion globalFlipOrbits_pairwise_disjoint]
+  rw [show ∑ O ∈ globalFlipOrbits (L := L) (m := m), O.card =
+      ∑ _O ∈ globalFlipOrbits (L := L) (m := m), 2 by
+    apply Finset.sum_congr rfl
+    intro O hO
+    simp only [globalFlipOrbits, Finset.mem_image] at hO
+    obtain ⟨σ, _, rfl⟩ := hO
+    exact globalFlipOrbit_card hL σ]
+  rw [Finset.sum_const]
+  simp [Nat.mul_comm]
 
 end
 
