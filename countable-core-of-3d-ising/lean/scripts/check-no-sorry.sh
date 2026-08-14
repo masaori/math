@@ -70,6 +70,7 @@ targets=(
   Ising3DCut.NecSuf.NullModel.card_filter_of_iff_not
   Ising3DCut.NullModel.brokenCount_oddFlip_from_necSuf
   Ising3DCut.NullModel.multiplicity_palindrome
+  Ising3DCut.NullModel.partitionPolynomial_value_at_one
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
