@@ -26,6 +26,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "依存経路に沿って時刻はちょうど 1 ずつ増える" },
     labels: ["claim_path_time_increment_exact"],
+    verification: ["sagemath/check/finite-propagation-boundary"],
     habitat: "N",
     statement: [
       paragraph([
@@ -186,6 +187,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
     kind: "claim",
     title: { text: "伝播球は有限であり個数は再帰的に抑えられる" },
     labels: ["claim_propagation_ball_finite"],
+    verification: ["sagemath/check/finite-propagation-boundary"],
     habitat: "N",
     statement: [
       paragraph([
@@ -268,6 +270,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
     kind: "claim",
     title: { text: "依存経路の始点セルは伝播球に属する" },
     labels: ["claim_start_cell_in_propagation_ball"],
+    verification: ["sagemath/check/finite-propagation-boundary"],
     habitat: "finite",
     statement: [
       paragraph([
@@ -418,6 +421,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
     kind: "claim",
     title: { text: "依存元集合は伝播球の有限合併に含まれる" },
     labels: ["claim_finite_propagation_boundary"],
+    verification: ["sagemath/check/finite-propagation-boundary"],
     habitat: "N",
     statement: [
       paragraph([

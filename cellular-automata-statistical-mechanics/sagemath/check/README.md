@@ -11,6 +11,7 @@
 | [`essential-dependency-support/`](essential-dependency-support/) | 本質的依存と一点反転検査の同値、および依存台の有限走査 | 実行結果は各 `overview.md` を正本とする |
 | [`redundant-neighbor-independence/`](redundant-neighbor-independence/) | 冗長拡大による追加元への非依存、依存の移送、本質的依存台の不変性 | 実行結果は各 `overview.md` を正本とする |
 | [`time-expansion-dependency/`](time-expansion-dependency/) | 大域写像の一点反転、イベント集合、一段依存関係、時刻増加 | 実行結果は各 `overview.md` を正本とする |
+| [`finite-propagation-boundary/`](finite-propagation-boundary/) | 経路の時刻差、伝播球、依存元集合の有限伝播境界 | 実行結果は各 `overview.md` を正本とする |
 
 ## 予定されている検算（未着手）
 
