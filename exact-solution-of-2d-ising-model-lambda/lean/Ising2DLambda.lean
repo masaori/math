@@ -557,3 +557,6 @@ import Ising2DLambda.FisherZero.KwDualPreservesUnitIntervalFromNecSuf
 import Ising2DLambda.FisherZero.SectorValueDuality
 import Ising2DLambda.NecSuf.FisherZero.SectorValueDuality
 import Ising2DLambda.FisherZero.SectorValueDualityFromNecSuf
+import Ising2DLambda.FisherZero.FreeEntropyDualRelation
+import Ising2DLambda.NecSuf.FisherZero.FreeEntropyDualRelation
+import Ising2DLambda.FisherZero.FreeEntropyDualRelationFromNecSuf

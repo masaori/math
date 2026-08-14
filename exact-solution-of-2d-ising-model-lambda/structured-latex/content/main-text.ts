@@ -34021,6 +34021,11 @@ H^{a,b}_L(q)
     title: { text: "分配多項式の値の双対分解" },
     labels: ["claim_partition_value_dual_factorization"],
     habitat: "Q",
+    lean: [
+      "Ising2DLambda.FisherZero.partitionValueDualFactorization",
+      "Ising2DLambda.NecSuf.FisherZero.partition_value_dual_factorization_necSuf",
+      "Ising2DLambda.FisherZero.partitionValueDualFactorization_from_necSuf",
+    ],
     verification: ["sagemath/check/free-entropy-dual-relation"],
     statement: [
       paragraph([
@@ -34106,6 +34111,11 @@ H^{a,b}_L(q)
     title: { text: "双対な点どうしの自由エントロピーの関係" },
     labels: ["claim_free_entropy_dual_relation"],
     habitat: "Lambda",
+    lean: [
+      "Ising2DLambda.FisherZero.freeEntropyDualRelation",
+      "Ising2DLambda.NecSuf.FisherZero.free_entropy_dual_relation_necSuf",
+      "Ising2DLambda.FisherZero.freeEntropyDualRelation_from_necSuf",
+    ],
     verification: ["sagemath/check/free-entropy-dual-relation"],
     statement: [
       paragraph([

@@ -961,6 +961,12 @@ targets=(
   Ising2DLambda.FisherZero.sectorValueDuality
   Ising2DLambda.NecSuf.FisherZero.sector_value_duality_necSuf
   Ising2DLambda.FisherZero.sectorValueDuality_from_necSuf
+  Ising2DLambda.FisherZero.partitionValueDualFactorization
+  Ising2DLambda.NecSuf.FisherZero.partition_value_dual_factorization_necSuf
+  Ising2DLambda.FisherZero.partitionValueDualFactorization_from_necSuf
+  Ising2DLambda.FisherZero.freeEntropyDualRelation
+  Ising2DLambda.NecSuf.FisherZero.free_entropy_dual_relation_necSuf
+  Ising2DLambda.FisherZero.freeEntropyDualRelation_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
