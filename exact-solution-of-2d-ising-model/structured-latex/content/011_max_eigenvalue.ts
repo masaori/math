@@ -567,37 +567,44 @@ q(t_0)
         math(String.raw`x \in \mathbb{R}^{2^M}`),
         " を取り、",
         math(String.raw`y := Wx`),
-        " とおく。",
-        math(String.raw`W`),
-        " は対称なので",
+        " とおく。まず",
       ]),
-      displayMath(
-        String.raw`\|Wx\|^2 = (Wx)^\top(Wx) = y^\top (W x)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\|Wx\|^2
+&=(Wx)^\top(Wx)
+&&\bigl(\because\ \text{ノルムの定義}\ \|v\|^2=v^\top v\bigr)\\
+&=y^\top(Wx)
+&&\bigl(\because\ y=Wx\ \text{の置き換え（左因子）}\bigr)
+\end{aligned}`),
       paragraph([
+        "である。",
         math(String.raw`W`),
-        " は正定値、とくに半正定値なので ",
+        " は実対称かつ正定値、とくに半正定値である（",
+        ref("W_is_real_symmetric_positive_definite"),
+        "）から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|Wx\|^4
+&=\left(\|Wx\|^2\right)^2
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=\left(y^\top Wx\right)^2
+&&\bigl(\because\ \text{上の式変形}\bigr)\\
+&\leq\left(x^\top Wx\right)\left(y^\top Wy\right)
+&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz を}\ P=W\ \text{に適用}\bigr)\\
+&\leq\left(c\|x\|^2\right)\left(y^\top Wy\right)
+&&\bigl(\because\ \text{レイリー上限の評価}\ x^\top Wx\leq c\|x\|^2\ \text{と}\ 0\leq y^\top Wy\ \text{（半正定値性）}\bigr)\\
+&\leq\left(c\|x\|^2\right)\left(c\|y\|^2\right)
+&&\bigl(\because\ \text{レイリー上限の評価}\ y^\top Wy\leq c\|y\|^2\ \text{と}\ 0\leq c\|x\|^2\bigr)\\
+&=c^2\|x\|^2\|Wx\|^2
+&&\bigl(\because\ y=Wx\ \text{と}\ \mathbb{R}\ \text{の乗法の可換則・結合則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（半正定値の Cauchy--Schwarz は ",
         ref("psd_cauchy_schwarz"),
-        " を ",
-        math(String.raw`P = W`),
-        " に適用して",
-      ]),
-      displayMath(
-        String.raw`\left(\|Wx\|^2\right)^2 = \left(y^\top Wx\right)^2
-\leq \left(x^\top Wx\right)\left(y^\top Wy\right)`,
-      ),
-      paragraph([
+        "、レイリー上限の評価は ",
         ref("def_rayleigh_sup"),
-        " より ",
-        math(String.raw`x^\top Wx \leq c\|x\|^2`),
-        "、",
-        math(String.raw`y^\top Wy \leq c\|y\|^2 = c\|Wx\|^2`),
-        " なので",
+        "）。",
       ]),
-      displayMath(
-        String.raw`\|Wx\|^4 \leq c\|x\|^2 \cdot c\,\|Wx\|^2
-= c^2\|x\|^2\|Wx\|^2`,
-      ),
       paragraph([
         math(String.raw`\|Wx\| = 0`),
         " なら主張は明らか。",
