@@ -82,6 +82,8 @@ targets=(
   Ising3DCut.NecSuf.NullModel.ne_of_one_le_of_eq_zero
   Ising3DCut.NullModel.periodicMultiplicity_not_palindrome_from_necSuf
   Ising3DCut.StructuralCore.multiplicity_palindrome
+  Ising3DCut.NecSuf.StructuralCore.multiplicity_palindrome
+  Ising3DCut.StructuralCore.multiplicity_palindrome_from_necSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
