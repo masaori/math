@@ -6,19 +6,19 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
-  "claim_adjacent_parity",
-  "claim_free_broken_complement",
-  "claim_free_palindrome",
+  "claim_broken_complement",
+  "claim_edge_endpoints_parity",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
+  "claim_palindrome",
   "def_box",
+  "def_broken_count",
   "def_configuration",
-  "def_free_broken_count",
-  "def_free_multiplicity",
-  "def_inner_edges",
+  "def_edge_set",
+  "def_endpoint_maps",
+  "def_multiplicity",
   "def_odd_flip",
   "def_odd_sites",
-  "def_site_set",
   "remark_null_model_positioning",
 ] as const
 
