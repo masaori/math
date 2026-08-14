@@ -37247,6 +37247,242 @@ x^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb{Z}[x]`),
   },
 
   {
+    id: "thermodynamic_limit_def_open_rectangle_partition_value",
+    kind: "definition",
+    title: { text: "開境界長方形の分配多項式の正の実数での値" },
+    labels: ["def_open_rectangle_partition_value"],
+    habitat: "R",
+    realEscape:
+      "整係数多項式 Z^{op}_{a,b}(x) を正の実数 t で評価し、接合前後の値を実数の順序で比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質と、多項式の有限和の評価だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-rectangle-gluing-inequality"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を取る。開境界長方形の分配多項式（",
+        ref("def_open_rectangle_partition_polynomial"),
+        "）を実数で評価した値を",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(t)
+:=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\ \in\ \mathbb{R}`),
+      paragraph([
+        "と書く。この丸括弧は多項式そのものではなく、実数 ",
+        math(String.raw`t`),
+        " での評価だけを表す。和は有限であり、各項は正なので ",
+        math(String.raw`0<_{\mathbb{R}}Z^{\mathrm{op}}_{a,b}(t)`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_rectangle_gluing_inequality",
+    kind: "claim",
+    title: { text: "開境界長方形の接合不等式" },
+    labels: ["claim_open_rectangle_gluing_inequality"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した開境界分配多項式を実数の順序で比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限和・有限積だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-rectangle-gluing-inequality"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b,c\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        "、",
+        math(String.raw`c\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る（開境界分配多項式の値は ",
+        ref("def_open_rectangle_partition_value"),
+        "）。第一の座標の向きに接ぐと、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<_{\mathbb{R}}t\le_{\mathbb{R}}1:&
+t^b Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{c,b}(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a+c,b}(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{c,b}(t),\\[2mm]
+1\le_{\mathbb{R}}t:&
+Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{c,b}(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a+c,b}(t)
+\le_{\mathbb{R}} t^b Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{c,b}(t).
+\end{array}`),
+      paragraph(["第二の座標の向きに接ぐと、同様に次が成り立つ。"]),
+      displayMath(String.raw`\begin{array}{ll}
+0<_{\mathbb{R}}t\le_{\mathbb{R}}1:&
+t^a Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{a,c}(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a,b+c}(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{a,c}(t),\\[2mm]
+1\le_{\mathbb{R}}t:&
+Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{a,c}(t)
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a,b+c}(t)
+\le_{\mathbb{R}} t^a Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{a,c}(t).
+\end{array}`),
+    ],
+    proof: [
+      paragraph([
+        "第一の座標の向きの接合を示す。任意の配位 ",
+        math(String.raw`\rho\in\Sigma^{\mathrm{op}}_{a+c,b}`),
+        " に対し、左側と右側への制限をそれぞれ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathrm L}(i,j)&:=\rho(i,j)
+&&\bigl(0\le i<a,\ 0\le j<b\bigr),\\
+\rho_{\mathrm R}(i,j)&:=\rho(a+i,j)
+&&\bigl(0\le i<c,\ 0\le j<b\bigr)
+\end{aligned}`),
+      paragraph([
+        "と定める。逆に ",
+        math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`),
+        " と ",
+        math(String.raw`\tau\in\Sigma^{\mathrm{op}}_{c,b}`),
+        " から、",
+      ]),
+      displayMath(String.raw`\rho_{\sigma,\tau}(i,j):=
+\begin{cases}
+\sigma(i,j),&0\le i<a,\\
+\tau(i-a,j),&a\le i<a+c
+\end{cases}`),
+      paragraph([
+        "で配位 ",
+        math(String.raw`\rho_{\sigma,\tau}\in\Sigma^{\mathrm{op}}_{a+c,b}`),
+        " がただ一つ定まる。二つの構成を順に行うと各頂点で元の値に戻るので、これは全単射",
+      ]),
+      displayMath(String.raw`\Sigma^{\mathrm{op}}_{a+c,b}
+\longleftrightarrow
+\Sigma^{\mathrm{op}}_{a,b}\times\Sigma^{\mathrm{op}}_{c,b}`),
+      paragraph([
+        "である。接合面で破れる辺の本数を、各 ",
+        math(String.raw`(\sigma,\tau)`),
+        " に対して",
+      ]),
+      displayMath(String.raw`s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)
+:=\bigl|\{j\in\mathbb{N}\mid 0\le j<b\ \text{かつ}\
+\sigma(a-1,j)\ne\tau(0,j)\}\bigr|\ \in\ \mathbb{N}`),
+      paragraph([
+        "と定める。候補となる接合辺は ",
+        math(String.raw`j=0,\ldots,b-1`),
+        " の ",
+        math(String.raw`b`),
+        " 本なので、",
+      ]),
+      displayMath(String.raw`0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b`),
+      paragraph([
+        "である。接合後の辺集合は、左側の辺、右側の辺を第一座標に ",
+        math(String.raw`a`),
+        " だけ平行移動した辺、および接合面の ",
+        math(String.raw`b`),
+        " 本の辺の互いに交わらない和である（辺集合と端点写像は ",
+        ref("def_open_rectangle_edges"),
+        "）。したがって破れボンド集合もこの三つへ互いに交わらず分かれ、",
+      ]),
+      displayMath(String.raw`b^{\mathrm{op}}_{a+c,b}(\rho_{\sigma,\tau})
+=b^{\mathrm{op}}_{a,b}(\sigma)
++b^{\mathrm{op}}_{c,b}(\tau)
++s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)`),
+      paragraph([
+        "である（破れボンド数は ",
+        ref("def_open_rectangle_broken_bond_count"),
+        "）。よって全単射とこの分解から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a+c,b}(t)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+  \sum_{\tau\in\Sigma^{\mathrm{op}}_{c,b}}
+  t^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)+s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}
+&&\bigl(\because\ \text{上の全単射と破れボンド数の分解}\bigr)\\
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+  \sum_{\tau\in\Sigma^{\mathrm{op}}_{c,b}}
+  t^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+  t^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}
+&&\bigl(\because\ t^{m+n}=t^m t^n\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " の場合、",
+        math(String.raw`0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b`),
+        " に対する自然数冪の順序から",
+      ]),
+      displayMath(String.raw`t^b\le_{\mathbb{R}}t^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le_{\mathbb{R}}1`),
+      paragraph([
+        "である。各 ",
+        math(String.raw`t^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}`),
+        " は正なので、この不等式を項ごとに掛けて有限和を取る。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t^b\!\sum_{\sigma}\sum_{\tau}
+t^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+&\le_{\mathbb{R}} Z^{\mathrm{op}}_{a+c,b}(t)
+&&\bigl(\because\ \text{項ごとの下からの評価の有限和}\bigr)\\
+&\le_{\mathbb{R}}\sum_{\sigma}\sum_{\tau}
+t^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+&&\bigl(\because\ \text{項ごとの上からの評価の有限和}\bigr)
+\end{aligned}`),
+      paragraph(["ここで有限和の分配則と冪の指数法則により、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\sigma}\sum_{\tau}
+t^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+&=\sum_{\sigma}\sum_{\tau}
+t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}t^{\,b^{\mathrm{op}}_{c,b}(\tau)}
+&&\bigl(\because\ t^{m+n}=t^m t^n\bigr)\\
+&=\left(\sum_{\sigma}t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\right)
+  \left(\sum_{\tau}t^{\,b^{\mathrm{op}}_{c,b}(\tau)}\right)
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&=Z^{\mathrm{op}}_{a,b}(t)Z^{\mathrm{op}}_{c,b}(t)
+&&\bigl(\because\ \blkref{def_open_rectangle_partition_value}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、第一の場合の二つの不等式を得る。",
+        math(String.raw`1\le_{\mathbb{R}}t`),
+        " の場合は自然数冪の順序が",
+      ]),
+      displayMath(String.raw`1\le_{\mathbb{R}}t^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le_{\mathbb{R}}t^b`),
+      paragraph([
+        "となる。同じ項ごとの乗法、有限和、上の積への分解を順に適用すると、第二の場合の二つの不等式を得る。",
+      ]),
+      paragraph([
+        "第二の座標の向きでは、下側と上側への制限を ",
+        math(String.raw`\rho_{\mathrm B}(i,j):=\rho(i,j)`),
+        "、",
+        math(String.raw`\rho_{\mathrm T}(i,j):=\rho(i,b+j)`),
+        " とし、接合面の破れ辺数を",
+      ]),
+      displayMath(String.raw`s^{\updownarrow}_{b,c;a}(\sigma,\tau)
+:=\bigl|\{i\in\mathbb{N}\mid 0\le i<a\ \text{かつ}\
+\sigma(i,b-1)\ne\tau(i,0)\}\bigr|`),
+      paragraph([
+        "と定める。候補となる接合辺は ",
+        math(String.raw`a`),
+        " 本なので ",
+        math(String.raw`0\le s^{\updownarrow}_{b,c;a}(\sigma,\tau)\le a`),
+        " であり、第一の座標の向きの証明で ",
+        math(String.raw`a,c`),
+        " を第二座標の長さへ、",
+        math(String.raw`b`),
+        " を接合面の長さ ",
+        math(String.raw`a`),
+        " へ置き換えた同じ全単射・破れボンド数の分解・項ごとの評価により、第二の座標の向きの二場合も従う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

@@ -838,17 +838,32 @@ i (2K_2^*)^n\,\check{Z}_\mu & (n \text{ 奇数}) \\
         math(String.raw`\mathbb{C}`),
         " 線型性より、任意の ",
         math(String.raw`W`),
-        " について ",
-        math(String.raw`\mathrm{ad}_{\alpha X}(W) = [\alpha X, W] = \alpha[X, W] = \alpha\,\mathrm{ad}_X(W)`),
-        " であるから、線型写像として ",
-        math(String.raw`\mathrm{ad}_{\alpha X} = \alpha\,\mathrm{ad}_X`),
-        "、よって ",
-        math(String.raw`\mathrm{ad}_{\alpha X}^{\,n} = \alpha^{n}\,\mathrm{ad}_X^{\,n}`),
-        "（",
-        math(String.raw`\mathrm{ad}_X`),
-        " は ",
-        math(String.raw`\mathbb{C}`),
-        " 線型なのでスカラー倍と可換であり、合成の各段からスカラーを前へ出せる）。",
+        " について次の一続きが成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ad}_{\alpha X}(W)
+&=[\alpha X,W]
+&&\bigl(\because\ \mathrm{ad}\text{ の定義}\bigr)\\
+&=\alpha[X,W]
+&&\bigl(\because\ \text{交換子の第 1 引数についての }\mathbb{C}\text{ 線型性}\bigr)\\
+&=\alpha\,\mathrm{ad}_X(W)
+&&\bigl(\because\ \mathrm{ad}\text{ の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        "任意の ",
+        math(String.raw`W`),
+        " で成り立つので、線型写像として ",
+        math(String.raw`\mathrm{ad}_{\alpha X}=\alpha\,\mathrm{ad}_X`),
+        " である。したがって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ad}_{\alpha X}^{\,n}
+&=(\alpha\,\mathrm{ad}_X)^n
+&&\bigl(\because\ \mathrm{ad}_{\alpha X}=\alpha\,\mathrm{ad}_X\bigr)\\
+&=\alpha^n\,\mathrm{ad}_X^{\,n}
+&&\bigl(\because\ \mathrm{ad}_X\text{ は }\mathbb{C}\text{ 線型であり、合成の各段からスカラーを前へ出せる}\bigr)
+\end{aligned}`),
+      paragraph([
         math(String.raw`n = 0`),
         " のときは両辺とも恒等写像で ",
         math(String.raw`\alpha^0 = 1`),
@@ -868,14 +883,25 @@ i\,(-1)^{(n-1)/2} & (n \text{ 奇数}) \\
       paragraph([
         "が成り立つ。実際 ",
         math(String.raw`i^2 = -1`),
-        " より、",
-        math(String.raw`n`),
-        " が偶数なら ",
-        math(String.raw`i^n = (i^2)^{n/2} = (-1)^{n/2}`),
-        "、奇数なら ",
-        math(String.raw`i^n = i\,(i^2)^{(n-1)/2} = i\,(-1)^{(n-1)/2}`),
-        " である（いずれの指数も整数）。",
+        " を使う。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+i^n
+&=(i^2)^{n/2}
+&&\bigl(\because\ n\text{ が偶数なら }n=2(n/2)\bigr)\\
+&=(-1)^{n/2}
+&&\bigl(\because\ i^2=-1\bigr)
+\end{aligned}
+\qquad(n\text{ が偶数})`),
+      displayMath(String.raw`\begin{aligned}
+i^n
+&=i\,(i^2)^{(n-1)/2}
+&&\bigl(\because\ n\text{ が奇数なら }n=1+2((n-1)/2)\bigr)\\
+&=i\,(-1)^{(n-1)/2}
+&&\bigl(\because\ i^2=-1\bigr)
+\end{aligned}
+\qquad(n\text{ が奇数})`),
+      paragraph(["いずれの指数も整数である。"]),
       paragraph([
         "(h1.z) について、補題 1 を ",
         math(String.raw`\alpha = \tfrac{i}{2}`),
