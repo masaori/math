@@ -5,6 +5,8 @@ import されていないファイルはビルドも検査もされない（2 �
 import されないまま置かれ、`lake build` も未証明の検査も通ってしまった実例がある）。
 `scripts/` にある検査スクリプトが「入口から import されていない .lean が無いこと」を確かめる。
 
-まだ形式化した主張が無いので import は空である。最初の形式化を入れる tick が、
-ここへ 1 行足すことから始める。
 -/
+
+import Ising3DCut.NullModel.EdgeEndpointParity
+import Ising3DCut.NecSuf.NullModel.EdgeEndpointParity
+import Ising3DCut.NullModel.EdgeEndpointParityFromNecSuf
