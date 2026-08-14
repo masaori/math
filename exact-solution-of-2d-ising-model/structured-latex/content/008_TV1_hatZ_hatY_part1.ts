@@ -1962,10 +1962,22 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
         math(String.raw`g h_1 = h_1 g = I`),
         "、",
         math(String.raw`g h_2 = h_2 g = I`),
-        " を満たすとする。行列の積の結合律より",
+        " を満たすとする。",
       ]),
       displayMath(
-        String.raw`h_1 = h_1 I = h_1 (g h_2) = (h_1 g) h_2 = I h_2 = h_2`,
+        String.raw`\begin{aligned}
+h_1
+&= h_1 I
+&&(\because\ \text{単位行列との積})\\
+&= h_1 (g h_2)
+&&(\because\ g h_2 = I\ \text{の代入})\\
+&= (h_1 g) h_2
+&&(\because\ \text{行列の積の結合律})\\
+&= I h_2
+&&(\because\ h_1 g = I\ \text{の代入})\\
+&= h_2
+&&(\because\ \text{単位行列との積})
+\end{aligned}`,
       ),
       paragraph(["であるから、逆元はただ 1 つである。"]),
       paragraph([
@@ -1980,12 +1992,32 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
       paragraph([
         "(ii) ",
         math(String.raw`h := g_2^{-1}g_1^{-1}`),
-        " とおくと、結合律より",
+        " とおくと、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(g_1g_2)h &= g_1 g_2 g_2^{-1} g_1^{-1} = g_1 I g_1^{-1} = g_1g_1^{-1} = I, \\
-h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
+(g_1g_2)h
+&= g_1 g_2 g_2^{-1} g_1^{-1}
+&&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入と行列の積の結合律})\\
+&= g_1 I g_1^{-1}
+&&(\because\ g_2 g_2^{-1} = I)\\
+&= g_1g_1^{-1}
+&&(\because\ \text{単位行列との積})\\
+&= I
+&&(\because\ g_1 g_1^{-1} = I)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+h(g_1g_2)
+&= g_2^{-1} g_1^{-1} g_1 g_2
+&&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入と行列の積の結合律})\\
+&= g_2^{-1} I g_2
+&&(\because\ g_1^{-1} g_1 = I)\\
+&= g_2^{-1}g_2
+&&(\because\ \text{単位行列との積})\\
+&= I
+&&(\because\ g_2^{-1} g_2 = I)
 \end{aligned}`,
       ),
       paragraph([
@@ -2008,14 +2040,29 @@ h(g_1g_2) &= g_2^{-1} g_1^{-1} g_1 g_2 = g_2^{-1} I g_2 = g_2^{-1}g_2 = I
         math(String.raw`(g^{-1})^{-1} = g`),
         "。",
       ]),
+      paragraph(["(iv) 次の 2 つの一続きの変形による。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(cI)(c^{-1}I)
+&= (cc^{-1})I
+&&(\because\ \text{スカラー倍の単位行列は積と可換（スカラー倍と単位行列の積の整理）})\\
+&= I
+&&(\because\ c\,c^{-1} = 1\ \text{と単位行列のスカラー }1\text{ 倍})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+(c^{-1}I)(cI)
+&= (c^{-1}c)I
+&&(\because\ \text{スカラー倍の単位行列は積と可換（スカラー倍と単位行列の積の整理）})\\
+&= I
+&&(\because\ c^{-1}c = 1\ \text{と単位行列のスカラー }1\text{ 倍})
+\end{aligned}`,
+      ),
       paragraph([
-        "(iv) ",
+        "（スカラー倍と単位行列の積の整理は ",
         ref("scalar_identity_commutes"),
-        " より ",
-        math(String.raw`(cI)(c^{-1}I) = (cc^{-1})I = I`),
-        " かつ ",
-        math(String.raw`(c^{-1}I)(cI) = (c^{-1}c)I = I`),
-        " であるから ",
+        " による。）であるから ",
         math(String.raw`cI \in R^\times`),
         " であり、逆元の一意性より ",
         math(String.raw`(cI)^{-1} = c^{-1}I`),
