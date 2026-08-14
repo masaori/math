@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 268 は、レビューで前 tick の「上限への任意近接」の Lean 三本が本文と一対一に
+揃っていることを確認し（修正無し）、そのあと「上限の一意性（記法 $\sup$ の正当化）」を
+記述・SageMath・Lean 具体版・必要十分版まで一 tick で完成させ、四層を揃えた（反対称性一本の
+小セクションのため一気に進めた）。一ブロック `claim_real_set_supremum_unique`（$u_1,u_2$ が
+ともに $S$ の上限なら $u_1=u_2$。両向きの $\le_{\mathbb{R}}$ を最小性の適用で取り、略記の展開と
+三分律の場合の除外で閉じる。完備性は使わない。これで `claim_free_energy_density_supremum_exists`
+の記法 $\sup\Psi_t$ が正当化された）。SageMath（`sagemath/check/real-set-supremum-uniqueness`）は
+$\mathbb{Q}$ の厳密比較のみで 74 件（上限の述語の量化は有限モデルでは周囲集合への制限であることを
+overview に明記）。Lean は具体版 `realSetSupremum_unique`、必要十分版
+`leastUpperBound_unique_necSuf`（実数を外し半順序だけを残した。`lt_or_eq_of_le` が反対称性を
+要するため `PartialOrder` が下限で、具体版が使った三分律の全体＝線形順序は不要と判明）、導出
+`realSetSupremum_unique_from_necSuf`。本文の「この先に書くこと」とセクション表から当該項目を
+消した。式変形統一では姉妹側「$H_1^{(+)},H_2$ を $\check Z,\check Y$ で表す」の二つの鎖
+（$H_2$ の鎖と $H_1^{(+)}$ の鎖）に欠けていたスカラー $1/M$ と $M$ の相殺の行末根拠を補った。
+次の本文は「自由エネルギー密度の極限の存在」（残るは $\varepsilon$ を固定したときある $N$ 以降の
+すべての $L$ で近づくことの証明。道具は未定。列 $\psi_L(t)$ は $L$ について単調とは限らないので、
+劣加法性や部分列の議論を検討する）。次の統一は同じ偶セクター章の後続から続ける。
+
 2026-08-15 の tick 267 は、レビューで前 tick の上界・最小上界の二定義と「上限への任意近接」の
 本文・SageMath が一致していることを確認し（修正無し）、そのあと Lean 具体版
 `freeEnergyDensity_supremum_approximation`、必要十分版

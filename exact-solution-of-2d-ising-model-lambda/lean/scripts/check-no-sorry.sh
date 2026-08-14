@@ -1021,6 +1021,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_supremum_approximation
   Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_supremum_approximation_necSuf
   Ising2DLambda.ThermodynamicLimit.freeEnergyDensity_supremum_approximation_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.realSetSupremum_unique
+  Ising2DLambda.NecSuf.ThermodynamicLimit.leastUpperBound_unique_necSuf
+  Ising2DLambda.ThermodynamicLimit.realSetSupremum_unique_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

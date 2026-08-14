@@ -185,6 +185,7 @@ export const ALL_LABELS = [
   "claim_real_algebraic_order_trichotomy",
   "claim_real_log_natural_power",
   "claim_real_log_one",
+  "claim_real_set_supremum_unique",
   "claim_restriction_family_gluing",
   "claim_root_factor_quotient_value_ne_zero",
   "claim_root_of_unity_card",

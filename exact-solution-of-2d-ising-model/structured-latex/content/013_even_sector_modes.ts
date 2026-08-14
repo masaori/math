@@ -1871,7 +1871,8 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
 &= \frac{1}{M}\sum_{j=1}^{M} Z_jY_j\cdot M
    \quad (\because \text{antiperiodic\_exp\_sum}) \\
-&= \sum_{j=1}^{M} Z_jY_j \\
+&= \sum_{j=1}^{M} Z_jY_j
+   \quad (\because \text{スカラー } \tfrac{1}{M} \text{ と } M \text{ の相殺}) \\
 &= H_2
    \quad (\because \text{def\_transfer\_matrix\_symbols})
 \end{aligned}`,
@@ -1970,6 +1971,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 &= \frac{1}{M}\left(\sum_{j=1}^{M-1} Y_jZ_{j+1}\cdot M + Y_MZ_1\cdot(-M)\right)
    \quad (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\
 &= \sum_{j=1}^{M-1} Y_jZ_{j+1} - Y_MZ_1
+   \quad (\because \text{スカラー } \tfrac{1}{M} \text{ の分配と } \tfrac{1}{M}\cdot M = 1,\ \tfrac{1}{M}\cdot(-M) = -1 \text{ の相殺})
 \end{aligned}`,
       ),
       paragraph([
