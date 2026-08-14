@@ -152,6 +152,18 @@ box_multiplicity, box_edge_count = check_proof_steps(box_as_system(2), "整数�
 # 校正: 箱 L=2 の多重度は自由境界の検証（free-boundary-palindrome）と同じ値になるはず。
 assert box_edge_count == 12
 assert sum(box_multiplicity.values()) == 256
+assert box_multiplicity == {
+    ZZ(0): ZZ(2),
+    ZZ(3): ZZ(16),
+    ZZ(4): ZZ(30),
+    ZZ(5): ZZ(48),
+    ZZ(6): ZZ(64),
+    ZZ(7): ZZ(48),
+    ZZ(8): ZZ(30),
+    ZZ(9): ZZ(16),
+    ZZ(12): ZZ(2),
+}
+print("整数の箱 L=2 の多重度が自由境界の検証と係数ごとに一致することを確認")
 
 check_proof_steps(star_system, "星（単射でない succ_1。観察の確認）")
 
