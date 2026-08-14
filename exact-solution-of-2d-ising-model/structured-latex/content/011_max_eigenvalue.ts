@@ -954,24 +954,42 @@ x^\top A x
         math(String.raw`A = W^n`),
         " と単位ベクトル ",
         math(String.raw`x`),
-        " に適用すると ",
-        math(String.raw`m_n \leq \mathrm{tr}(W^n)`),
-        "。",
+        " に適用すると",
       ]),
-      paragraph(["以上を合わせると、任意の単位ベクトル ", math(String.raw`x`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+m_n
+&=x^\top W^nx
+&&\bigl(\because\ m_n=x^\top W^nx\ \text{の定義}\bigr)\\
+&\leq\|x\|^2\,\mathrm{tr}(W^n)
+&&\bigl(\because\ \text{上の評価を半正定値行列}\ A=W^n\ \text{へ適用}\bigr)\\
+&=\mathrm{tr}(W^n)
+&&\bigl(\because\ \|x\|=1\ \text{（}x\text{ は単位ベクトル）}\bigr)
+\end{aligned}`),
+      paragraph(["である。以上を合わせると、任意の単位ベクトル ", math(String.raw`x`), " について"]),
       displayMath(String.raw`\left(x^\top Wx\right)^{n} \leq m_n \leq \mathrm{tr}(W^n)`),
       paragraph([
-        "左辺の ",
+        "である。左辺の ",
         math(String.raw`x`),
-        " についての上限を取る。",
-        math(String.raw`t \mapsto t^n`),
-        " は ",
-        math(String.raw`\mathbb{R}_{>0}`),
-        " 上で単調増加なので ",
-        math(String.raw`\sup_{\|x\|=1}(x^\top Wx)^n = \left(\sup_{\|x\|=1}x^\top Wx\right)^n = c^n`),
-        " であり、",
+        " についての上限を取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c^{n}
+&=\left(\sup_{\|x\|=1}x^\top Wx\right)^{n}
+&&\bigl(\because\ c\ \text{の定義}\bigr)\\
+&=\sup_{\|x\|=1}\left(x^\top Wx\right)^{n}
+&&\bigl(\because\ t\mapsto t^n\ \text{は}\ \mathbb{R}_{>0}\ \text{上で単調増加なので、上限と可換}\bigr)\\
+&\leq\mathrm{tr}(W^n)
+&&\bigl(\because\ \text{各単位ベクトル}\ x\ \text{で}\ (x^\top Wx)^n\leq\mathrm{tr}(W^n)\ \text{（上の鎖）なので}\\
+&&&\quad\mathrm{tr}(W^n)\ \text{は上界であり、上限は最小の上界}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
         math(String.raw`c^n \leq \mathrm{tr}(W^n)`),
-        " を得る。",
+        " を得る（",
+        math(String.raw`c`),
+        " の定義は ",
+        ref("def_rayleigh_sup"),
+        "）。",
       ]),
     ],
     conversion: {
@@ -981,6 +999,7 @@ x^\top A x
         "2026-08-14 の式変形統一で、Step 2 の対数凸性を任意の k へ移す奇数・偶数の場合分けを、それぞれ四段の一続きの不等式鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、Step 3 冒頭の比の単調性（三段）と望遠鏡積からの下からの評価（四段）を、それぞれ一続きの根拠付きの鎖へ開いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、半正定値行列の二次形式をトレースで上から評価する計算を、成分表示・二つの Cauchy--Schwarz・有限和の分配則を行末根拠にした八段の一続きの鎖へ開いた。内容は変えていない。",
+        "2026-08-14 の式変形統一で、トレース評価の A = W^n への適用（三段）と、単位ベクトル上の上限を取って c^n ≤ tr(W^n) を得る圧縮（三段）を、それぞれ行末根拠付きの鎖へ開いた。内容は変えていない。",
       ],
     },
   },
