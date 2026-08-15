@@ -41,6 +41,7 @@
 人手証明の主張が置く部分集合条件（K ⊆ E_τ 等）は、証明で使わない場合も
 主張どおり仮定に置き、使わないことを引数名の下線で明示する。
 -/
+import CellularAutomata.NecSuf.DependencyOrderSubstructures
 import CellularAutomata.TransitiveClosureAntisymmetry
 
 namespace CellularAutomata.DependencyOrderSubstructures
@@ -222,5 +223,110 @@ theorem down_set_boundary_outgoing (τ : ℕ) (J : Finset (ℕ × V))
   · -- B ⊆ ∂J: 選言の前者がそのまま成り立つ
     rintro ⟨haJ, b, hbE, hbJ, hout⟩
     exact ⟨haJ, b, hbE, hbJ, Or.inl hout⟩
+
+private abbrev EventSetAsSetDOS (τ : ℕ) : Set (ℕ × V) :=
+  ↑(eventSet (V := V) τ)
+
+private abbrev ReflReachableAsSetDOS (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
+  ReflReachable N f τ
+
+private abbrev OneStepAsSetDOS (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
+  ↑(oneStepDep N f τ)
+
+/-- 具体版の下方集合の順序凸性は、必要十分版で集合と関係だけを使う定理の特殊化である。 -/
+theorem down_set_order_convex_from_necessary_sufficient (τ : ℕ) (J : Finset (ℕ × V))
+    (_hJE : J ⊆ eventSet (V := V) τ) (hJ : IsDownSet N f τ J) :
+    IsOrderConvex N f τ J := by
+  exact CellularAutomata.NecSuf.DependencyOrderSubstructures.down_set_order_convex
+    (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ) ↑J hJ
+
+/-- 具体版の上方集合の順序凸性は、必要十分版の特殊化である。 -/
+theorem up_set_order_convex_from_necessary_sufficient (τ : ℕ) (U : Finset (ℕ × V))
+    (_hUE : U ⊆ eventSet (V := V) τ) (hU : IsUpSet N f τ U) :
+    IsOrderConvex N f τ U := by
+  exact CellularAutomata.NecSuf.DependencyOrderSubstructures.up_set_order_convex
+    (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ) ↑U hU
+
+/-- 具体版の順序凸部分集合の共通部分は、必要十分版の特殊化である。 -/
+theorem order_convex_intersection_from_necessary_sufficient
+    (τ : ℕ) (K₁ K₂ : Finset (ℕ × V))
+    (_hK₁E : K₁ ⊆ eventSet (V := V) τ) (_hK₂E : K₂ ⊆ eventSet (V := V) τ)
+    (h₁ : IsOrderConvex N f τ K₁) (h₂ : IsOrderConvex N f τ K₂) :
+    IsOrderConvex N f τ (K₁ ∩ K₂) := by
+  simpa only [IsOrderConvex,
+    CellularAutomata.NecSuf.DependencyOrderSubstructures.IsOrderConvex,
+    Finset.mem_inter, Finset.mem_coe, Set.mem_inter_iff] using
+    (CellularAutomata.NecSuf.DependencyOrderSubstructures.order_convex_intersection
+      (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ) ↑K₁ ↑K₂ h₁ h₂)
+
+/-- 具体版の非比較関係の対称性は、必要十分版の特殊化である。 -/
+theorem incomparable_symm_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V) :
+    (a, b) ∈ Incomparable N f τ ↔ (b, a) ∈ Incomparable N f τ := by
+  exact CellularAutomata.NecSuf.DependencyOrderSubstructures.incomparable_symm
+    (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ) a b
+
+/-- 具体版の反鎖の順序凸性は、必要十分版へ反射的到達可能関係の
+    反対称性と推移性だけを代入した特殊化である。 -/
+theorem antichain_order_convex_from_necessary_sufficient
+    (τ : ℕ) (K : Finset (ℕ × V)) (_hKE : K ⊆ eventSet (V := V) τ)
+    (hK : IsAntichainOn N f τ K) : IsOrderConvex N f τ K := by
+  have hpo := reflReachable_partial_order N f τ
+  exact CellularAutomata.NecSuf.DependencyOrderSubstructures.antichain_order_convex
+    (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ)
+    hpo.2.1 hpo.2.2 ↑K hK
+
+/-- 具体版の時刻切片は、必要十分版へ自然数時刻と反射的到達可能関係を代入した特殊化である。 -/
+theorem time_slice_antichain_from_necessary_sufficient (τ t : ℕ) :
+    IsAntichainOn N f τ (timeSlice (V := V) τ t) := by
+  have hinc : ∀ a b : ℕ × V, (a, b) ∈ ReflReachable N f τ →
+      a = b ∨ a.1 < b.1 := by
+    rintro a b ⟨-, -, heq | hreach⟩
+    · exact Or.inl heq
+    · obtain ⟨n, p, hpath, hp0, hpn⟩ := hreach
+      right
+      have h := path_time_strictly_increases N f τ n p hpath
+      simpa [hp0, hpn] using h
+  simpa only [IsAntichainOn, Incomparable, timeSlice, Finset.mem_filter,
+    CellularAutomata.NecSuf.DependencyOrderSubstructures.IsAntichainOn,
+    CellularAutomata.NecSuf.DependencyOrderSubstructures.Incomparable,
+    CellularAutomata.NecSuf.DependencyOrderSubstructures.timeSlice, Set.mem_setOf_eq,
+    Finset.mem_coe] using
+    (CellularAutomata.NecSuf.DependencyOrderSubstructures.time_slice_antichain
+      (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ)
+      Prod.fst Nat.lt Nat.lt_irrefl hinc t)
+
+/-- 具体版の一段境界の有限性は、必要十分版で K の有限性だけから得られる。 -/
+theorem oneStepBoundary_finite_from_necessary_sufficient (τ : ℕ) (K : Finset (ℕ × V)) :
+    (oneStepBoundary N f τ K).Finite := by
+  exact CellularAutomata.NecSuf.DependencyOrderSubstructures.oneStepBoundary_finite
+    (EventSetAsSetDOS (V := V) τ) (OneStepAsSetDOS N f τ) ↑K (Finset.finite_toSet K)
+
+/-- 具体版の「下方集合には外から入る一段依存がない」は、必要十分版へ
+    D_τ ⊆ ⪯_τ だけを代入した特殊化である。 -/
+theorem down_set_no_incoming_edge_from_necessary_sufficient
+    (τ : ℕ) (J : Finset (ℕ × V)) (_hJE : J ⊆ eventSet (V := V) τ)
+    (hJ : IsDownSet N f τ J) (a b : ℕ × V) (ha : a ∈ J)
+    (hbE : b ∈ eventSet (V := V) τ) (hbJ : b ∉ J)
+    (hD : (b, a) ∈ oneStepDep N f τ) : False := by
+  apply CellularAutomata.NecSuf.DependencyOrderSubstructures.down_set_no_incoming_edge
+    (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ)
+    (OneStepAsSetDOS N f τ) _ ↑J hJ a b ha hbE hbJ hD
+  intro ab hab
+  have hE := Finset.mem_product.mp (oneStepDep_subset N f τ hab)
+  exact ⟨hE.1, hE.2, Or.inr (oneStep_subset_reachable N f τ ab.1 ab.2 hab)⟩
+
+/-- 具体版の下方集合の境界等式は、必要十分版の特殊化である。 -/
+theorem down_set_boundary_outgoing_from_necessary_sufficient
+    (τ : ℕ) (J : Finset (ℕ × V)) (_hJE : J ⊆ eventSet (V := V) τ)
+    (hJ : IsDownSet N f τ J) :
+    oneStepBoundary N f τ J =
+      { a | a ∈ J ∧ ∃ b, b ∈ eventSet (V := V) τ ∧ b ∉ J ∧
+          (a, b) ∈ oneStepDep N f τ } := by
+  apply CellularAutomata.NecSuf.DependencyOrderSubstructures.down_set_boundary_outgoing
+    (EventSetAsSetDOS (V := V) τ) (ReflReachableAsSetDOS N f τ)
+    (OneStepAsSetDOS N f τ) _ ↑J hJ
+  intro ab hab
+  have hE := Finset.mem_product.mp (oneStepDep_subset N f τ hab)
+  exact ⟨hE.1, hE.2, Or.inr (oneStep_subset_reachable N f τ ab.1 ab.2 hab)⟩
 
 end CellularAutomata.DependencyOrderSubstructures

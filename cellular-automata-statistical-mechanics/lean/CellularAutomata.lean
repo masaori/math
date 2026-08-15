@@ -3,6 +3,7 @@ import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
 import CellularAutomata.NecSuf.EssentialDependency
+import CellularAutomata.NecSuf.DependencyOrderSubstructures
 import CellularAutomata.NecSuf.FinitePropagationBoundary
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.TimeExpansionDependency
