@@ -24,6 +24,7 @@ import blocks_dependency_order_substructures from './content/dependency-order-su
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
+import blocks_minimal_preperiod_period from './content/minimal-preperiod-period.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
 import blocks_transitive_closure_antisymmetry from './content/transitive-closure-antisymmetry.ts'
@@ -38,6 +39,7 @@ export type AllBlocks = [
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_global_map_iteration,
+  ...typeof blocks_minimal_preperiod_period,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_time_expansion_dependency,
   ...typeof blocks_transitive_closure_antisymmetry,
