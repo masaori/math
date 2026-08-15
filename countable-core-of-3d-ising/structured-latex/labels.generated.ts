@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_boundary_response_outer_box_stability",
   "claim_boundary_response_specialization_homomorphism",
   "claim_broken_complement",
   "claim_discriminant_does_not_determine_polynomial",
