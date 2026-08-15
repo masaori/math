@@ -53,6 +53,7 @@ export const ALL_LABELS = [
   "claim_log_additive",
   "claim_log_order_group_add_monotone",
   "claim_log_order_group_linear_order",
+  "claim_log_order_group_positive_multiple_invariant",
   "claim_log_power",
   "claim_low_temperature_polynomial_identity",
   "claim_low_temperature_trivial_sector_expression",

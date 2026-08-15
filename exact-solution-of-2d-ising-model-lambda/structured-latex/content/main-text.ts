@@ -2074,6 +2074,132 @@ q
   },
 
   {
+    id: "free_entropy_claim_log_order_group_positive_multiple_invariant",
+    kind: "claim",
+    title: { text: "対数順序群の順序は正整数倍で変わらない" },
+    labels: ["claim_log_order_group_positive_multiple_invariant"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/log-order-group-positive-multiple-invariant"],
+    lean: [
+      "Ising2DLambda.FreeEntropy.rationalOfLog_natSmul",
+      "Ising2DLambda.FreeEntropy.logOrderLE_natSmul_iff",
+      "Ising2DLambda.NecSuf.FreeEntropy.pullback_multiple_iff_necSuf",
+      "Ising2DLambda.FreeEntropy.logOrderLE_natSmul_iff_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`N\in\mathbb{N}`),
+        "、",
+        math(String.raw`N\ge1`),
+        " と任意の ",
+        math(String.raw`\lambda,\mu\in\Lambda`),
+        " について",
+      ]),
+      displayMath(String.raw`\lambda\le_{\Lambda}\mu
+\quad\Longleftrightarrow\quad
+N\lambda\le_{\Lambda}N\mu`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`N\lambda`),
+        " は ",
+        ref("def_log_order_group"),
+        " の整数倍で、",
+        math(String.raw`N`),
+        " を ",
+        math(String.raw`\mathbb{Z}`),
+        " の元として読んだもの）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "先に、任意の ",
+        math(String.raw`N\in\mathbb{N}`),
+        "（",
+        math(String.raw`N=0`),
+        " も含む）と ",
+        math(String.raw`\lambda\in\Lambda`),
+        " について",
+      ]),
+      displayMath(String.raw`\operatorname{rat}_{\Lambda}(N\lambda)
+=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N}`),
+      paragraph([
+        "を ",
+        math(String.raw`N`),
+        " についての帰納法で示す。",
+        math(String.raw`N=0`),
+        " のときは、",
+        ref("def_log_order_group"),
+        " の整数倍の定義から各素数で ",
+        math(String.raw`(0\lambda)(p)=0\cdot\lambda(p)=0`),
+        " なので ",
+        math(String.raw`0\lambda`),
+        " は零写像であり、その台は空だから ",
+        ref("def_rational_of_log"),
+        " の積は空積 ",
+        math(String.raw`1`),
+        " になる。右辺も ",
+        math(String.raw`(\operatorname{rat}_{\Lambda}(\lambda))^{0}=1`),
+        " なので一致する。",
+        math(String.raw`N`),
+        " で成り立つとして ",
+        math(String.raw`N+1`),
+        " のときは",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}((N+1)\lambda)
+&=\operatorname{rat}_{\Lambda}(N\lambda+\lambda)
+&&(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義と }\mathbb{Z}\text{ の分配則})\\
+&=\operatorname{rat}_{\Lambda}(N\lambda)\operatorname{rat}_{\Lambda}(\lambda)
+&&(\because\ \blkref{claim_rational_of_log_additive})\\
+&=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N}\operatorname{rat}_{\Lambda}(\lambda)
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N+1}
+&&(\because\ \mathbb{Q}\text{ の冪の定義})
+\end{aligned}`),
+      paragraph([
+        "である。これで補助等式が示せた。",
+        "主張は同値の鎖で示す。",
+        ref("def_rational_of_log"),
+        " により ",
+        math(String.raw`0<\operatorname{rat}_{\Lambda}(\lambda)`),
+        "、",
+        math(String.raw`0<\operatorname{rat}_{\Lambda}(\mu)`),
+        " であることに注意して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N\lambda\le_{\Lambda}N\mu
+&\iff\operatorname{rat}_{\Lambda}(N\lambda)\le\operatorname{rat}_{\Lambda}(N\mu)
+&&(\because\ \blkref{def_log_order_group_order})\\
+&\iff\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N}
+  \le\bigl(\operatorname{rat}_{\Lambda}(\mu)\bigr)^{N}
+&&(\because\ \text{上の補助等式を両辺へ})\\
+&\iff\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)
+&&(\because\ N\ge1\text{ のとき }\mathbb{Q}_{>0}\text{ 上で }a\mapsto a^{N}\text{ は狭義単調増加})\\
+&\iff\lambda\le_{\Lambda}\mu
+&&(\because\ \blkref{def_log_order_group_order})
+\end{aligned}`),
+      paragraph([
+        "である。三段目の根拠は、",
+        math(String.raw`0<a<b`),
+        " なら ",
+        math(String.raw`\mathbb{Q}`),
+        " の乗法単調性を ",
+        math(String.raw`N`),
+        " 回使って ",
+        math(String.raw`a^{N}<b^{N}`),
+        " となること（狭義単調増加）と、狭義単調増加な写像は順序を反映すること（",
+        math(String.raw`a^{N}\le b^{N}`),
+        " かつ ",
+        math(String.raw`b<a`),
+        " なら ",
+        math(String.raw`b^{N}<a^{N}`),
+        " で矛盾）から従う。ここで使った比較はすべて有理数の比較である。",
+      ]),
+    ],
+  },
+
+  {
     id: "free_entropy_claim_free_entropy_at_one",
     kind: "claim",
     title: { text: "すべての配位を等しく数える点での自由エントロピー" },

@@ -4,6 +4,22 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 302 は、前 tick の「対数順序群の順序の加法単調性」の四層を突き合わせて修正不要と確認した。
+そのあと、次のセクション「有理係数の対数順序群の順序の定義と共通分母からの独立性」が前提とする
+「$\Lambda$ の順序の正整数倍不変性」が本文に無かったので、これを独立のセクション
+「対数順序群の順序は正整数倍で変わらない」として割り出し、四層まで完成させた。
+`claim_log_order_group_positive_multiple_invariant`（章「有限系の自由エントロピー」、加法単調性の直後）で、
+補助等式 $\operatorname{rat}_{\Lambda}(N\lambda)=(\operatorname{rat}_{\Lambda}(\lambda))^{N}$（$N\ge0$ の帰納法。
+$N=0$ は空積）を示し、$\lambda\le_\Lambda\mu\iff N\lambda\le_\Lambda N\mu$（$N\ge1$）を正の有理数上の
+$N$ 乗の狭義単調性へ落とした。SageMath `log-order-group-positive-multiple-invariant`（125 ベクトル、$N\le4$、
+冪等式 625 件・同値 62500 件、`ZZ`/`QQ`）。Lean 具体版 `FreeEntropy/LogOrderGroupPositiveMultipleInvariant.lean`
+（`rationalOfLog_natSmul`、`logOrderLE_natSmul_iff`。整数倍は `(N:ℤ) • l` を `natCast_zsmul` で ℕ 倍へ戻し
+`pow_le_pow_iff_left₀`）、必要十分版 `NecSuf/FreeEntropy/LogOrderGroupPositiveMultipleInvariant.lean` の
+`pullback_multiple_iff_necSuf`、導出版（sorry 検査 1100 件）。次は
+「有理係数の対数順序群の順序の定義と共通分母からの独立性」（$N\cdot\lambda=\iota(\lambda_N)$ で
+$\lambda\le\mu:\iff\lambda_N\le_\Lambda\mu_N$ と定め、別の共通分母 $N'$ でも同じ判定になることを
+$N'\lambda_N=N\lambda_{N'}$ と今回の正整数倍不変性で示す）。
+
 2026-08-15 の tick 301 は、前 tick の「対数順序群の順序」の四層を突き合わせて修正不要と確認した。
 そのあと「対数順序群の順序の加法単調性」を四層まで完成させた。
 `claim_rational_of_log_additive` で対数の加法性と正の有理数上での単射性から

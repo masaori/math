@@ -10227,3 +10227,10 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
   本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 - レビュー: tick 296 は前 tick が台帳の割り直しと姉妹側の根拠補強だけだったため、その差分の
   実在ラベル参照と行列加法の可換則を確認し、修正不要とした。
+
+
+## tick 297（2026-08-15）の記録（台帳から移動）
+
+- 現在地: 「有理係数の対数順序群の順序」を二つの論法へ割り、先頭の「有限系の密度の分母消去」を四層で閉じた。
+- 前進の記録: 「$\Lambda\otimes\mathbb{Q}$ の順序」を分母を払う係数計算と、共通分母から順序を定義して線形順序性を示す論法へ二分割。`claim_scaled_free_entropy_denominator_clearing` を四層で閉じた（SageMath 384 件、Lean `scaledFreeEntropy_clear_denominator`・`two_scaled_denominators_cancel_necSuf`・導出版）。式変形統一では姉妹側 `evensectorT_006_claim_linearity_of_T` が規則どおりであることを確認。
+- レビュー記録: 前 tick の有理係数の対数順序群の本文・SageMath・Lean・入口 import・sorry 検査登録を突き合わせ、修正無し。
