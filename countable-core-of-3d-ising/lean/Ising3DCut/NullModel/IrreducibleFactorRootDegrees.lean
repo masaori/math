@@ -83,4 +83,28 @@ theorem irreducible_rootMultiplicity_le_one
   exact Multiset.nodup_iff_count_le_one.mp
     (Polynomial.nodup_roots (Polynomial.Separable.map hP.separable)) x
 
+/--
+代数段の第三歩（後半）: 既約因子 `P` の零点 `x` は `P` 自身では重複度 `1` であり、
+`P ^ e` では積を一つずつ増やすたびに重複度が `1` ずつ増えるので、重複度は指数 `e` に等しい。
+-/
+theorem irreducible_rootMultiplicity_pow_eq_exponent
+    {K L : Type} [Field K] [CharZero K] [Field L] [Algebra K L] [DecidableEq L]
+    (P : Polynomial K) (hP : Irreducible P) (x : L)
+    (hx : Polynomial.IsRoot (Polynomial.map (algebraMap K L) P) x) (e : ℕ) :
+    Polynomial.rootMultiplicity x ((Polynomial.map (algebraMap K L) P) ^ e) = e := by
+  let Q := Polynomial.map (algebraMap K L) P
+  have hQ : Q ≠ 0 := Polynomial.map_ne_zero hP.ne_zero
+  have hQMultiplicityPos : 0 < Polynomial.rootMultiplicity x Q :=
+    (Polynomial.rootMultiplicity_pos hQ).2 hx
+  have hQMultiplicity : Polynomial.rootMultiplicity x Q = 1 :=
+    Nat.le_antisymm
+      (irreducible_rootMultiplicity_le_one P hP x)
+      hQMultiplicityPos
+  induction e with
+  | zero => simp
+  | succ e ih =>
+      rw [pow_succ]
+      rw [Polynomial.rootMultiplicity_mul (mul_ne_zero (pow_ne_zero e hQ) hQ)]
+      rw [ih, hQMultiplicity]
+
 end Ising3DCut.NullModel

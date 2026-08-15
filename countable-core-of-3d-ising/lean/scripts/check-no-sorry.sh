@@ -101,6 +101,7 @@ targets=(
   Ising3DCut.NullModel.minpoly_natDegree_eq_of_irreducible_monic
   Ising3DCut.NullModel.irreducible_rootSet_card_eq_natDegree
   Ising3DCut.NullModel.irreducible_rootMultiplicity_le_one
+  Ising3DCut.NullModel.irreducible_rootMultiplicity_pow_eq_exponent
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
