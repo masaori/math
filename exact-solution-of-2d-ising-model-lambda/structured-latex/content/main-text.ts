@@ -38234,24 +38234,26 @@ t^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{\,b^{\mathrm{op}}_{L,L}(\tau)}
         math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
         " とする。",
         ref("claim_open_square_block_tiling"),
-        " の下からの評価へ実対数の狭義単調性を適用し、等号の場合も合わせると、",
+        " の下からの評価へ実対数の狭義単調性（",
+        ref("remark_real_logarithm"),
+        "）を適用し、等号の場合も合わせると、",
       ]),
       displayMath(String.raw`\log_{\mathbb{R}}\!\left(
 t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k
 \right)\le_{\mathbb{R}}\log_{\mathbb{R}}(Q)
-\quad\bigl(\because\ \blkref{claim_open_square_block_tiling}\ \text{と実対数の単調性}\bigr)`),
+\quad\bigl(\because\ \blkref{claim_open_square_block_tiling}\ \text{と実対数の狭義単調性（}\blkref{remark_real_logarithm}\text{）。等号なら両辺の対数も等しい}\bigr)`),
       paragraph(["である。左辺を一行ずつ開くと、"]),
       displayMath(String.raw`\begin{aligned}
 &\log_{\mathbb{R}}\!\left(t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k\right)\\
 &=\log_{\mathbb{R}}\!\left(t^{(k-1)(ka)}\right)
  +\log_{\mathbb{R}}\!\left(\left(t^{(k-1)a}P^k\right)^k\right)
-&&\bigl(\because\ \text{実対数の乗法加法性}\bigr)\\
+&&\bigl(\because\ \text{乗法を加法へ移す性質（}\blkref{remark_real_logarithm}\text{）}\bigr)\\
 &=\iota\!\left((k-1)(ka)\right)\log_{\mathbb{R}}(t)
  +\iota(k)\log_{\mathbb{R}}\!\left(t^{(k-1)a}P^k\right)
 &&\bigl(\because\ \blkref{claim_real_log_natural_power}\bigr)\\
 &=\iota\!\left((k-1)(ka)\right)\log_{\mathbb{R}}(t)
  +\iota(k)\left(\log_{\mathbb{R}}\!\left(t^{(k-1)a}\right)+\log_{\mathbb{R}}(P^k)\right)
-&&\bigl(\because\ \text{実対数の乗法加法性}\bigr)\\
+&&\bigl(\because\ \text{乗法を加法へ移す性質（}\blkref{remark_real_logarithm}\text{）}\bigr)\\
 &=\iota\!\left((k-1)(ka)\right)\log_{\mathbb{R}}(t)
  +\iota(k)\left(\iota\!\left((k-1)a\right)\log_{\mathbb{R}}(t)
  +\iota(k)\log_{\mathbb{R}}(P)\right)
@@ -38287,7 +38289,7 @@ t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k
       displayMath(String.raw`\begin{aligned}
 \log_{\mathbb{R}}(Q)
 &\le_{\mathbb{R}}\log_{\mathbb{R}}\!\left((P^k)^k\right)
-&&\bigl(\because\ \blkref{claim_open_square_block_tiling}\ \text{と実対数の単調性}\bigr)\\
+&&\bigl(\because\ \blkref{claim_open_square_block_tiling}\ \text{と実対数の狭義単調性（}\blkref{remark_real_logarithm}\text{）。等号なら両辺の対数も等しい}\bigr)\\
 &=\iota(k^2)\log_{\mathbb{R}}(P)
 &&\bigl(\because\ \blkref{claim_real_log_natural_power}\ \text{を二回適用}\bigr)
 \end{aligned}`),
