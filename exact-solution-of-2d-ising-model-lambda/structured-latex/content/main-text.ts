@@ -35453,6 +35453,78 @@ w\cdot w
   },
 
   {
+    id: "thermodynamic_limit_claim_scaled_free_entropy_denominator_clearing",
+    kind: "claim",
+    title: { text: "有限系の密度の分母は整数倍で払える" },
+    labels: ["claim_scaled_free_entropy_denominator_clearing"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/scaled-free-entropy-denominator-clearing"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.two_scaled_denominators_cancel_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L,M\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`M\ge1`),
+        " とし、",
+        math(String.raw`\lambda,\mu\in\Lambda`),
+        " とする。",
+        ref("def_rational_log_order_group"),
+        " の有理数倍について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\right)
+&=M^2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda),\\
+L^2M^2\cdot\left(\frac{1}{M^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)\right)
+&=L^2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。したがって二つの有限系の密度を比較するとき、両方へ同じ正の整数 ",
+        math(String.raw`L^2M^2`),
+        " を掛ければ、有理係数の分母を払って ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(M^2\lambda)`),
+        " と ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(L^2\mu)`),
+        " の比較へ移せる。ここでは順序をまだ定義せず、分母が消える等式だけを主張する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一の等式は次の一続きの計算で得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\right)
+&=\left(L^2M^2\cdot\frac{1}{L^2}\right)\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=M^2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)
+&&(\because\ L\ge1\text{ なので }L^2\ne0\text{、}\mathbb{Q}\text{ の約分})
+\end{aligned}`),
+      paragraph([
+        "第二の等式も ",
+        math(String.raw`L`),
+        " と ",
+        math(String.raw`M`),
+        "、および ",
+        math(String.raw`\lambda`),
+        " と ",
+        math(String.raw`\mu`),
+        " を入れ替えた同じ二段の計算で得る。さらに ",
+        ref("claim_rational_log_order_group_embedding"),
+        " の加法保存と、非負整数倍が反復加法であることから、右辺はそれぞれ ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(M^2\lambda)`),
+        " と ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(L^2\mu)`),
+        " に等しい。すべて有理数の四則と有限台写像の演算であり、実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },
