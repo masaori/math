@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 280 は、レビューで前 tick の「開境界長方形を第一座標方向へ反復接合した値の評価」の
+本文と SageMath（40 組）を突き合わせ、一致を確認した（修正無し）。そのあと同セクションの Lean を
+完成させ、セクションを閉じた。具体版
+`lean/Ising2DLambda/ThermodynamicLimit/OpenRectangleIteratedGluingFirst.lean` は、反復回数 $k$ の
+帰納法を人手証明と同じ順（$k=1$ の底の等号鎖、$kb=b+(k-1)b$、冪の指数法則、帰納法の仮定と
+正数の乗法、一辺 $ka$ と $a$ への接合不等式、$(k+1)a=ka+a$）で辿った。必要十分版
+`iterated_glue_pow_bounds_necSuf` は格子・配位・実数を外し、一段の上下評価
+$\mathrm{low}\cdot(P_k z)\le P_{k+1}\le\mathrm{high}\cdot(P_k z)$ と底 $P_1=z$ から
+$\mathrm{low}^{k-1}z^k\le P_k\le\mathrm{high}^{k-1}z^k$ を出す帰納法だけを残した
+（**積の可換性は不要と判明**し `Semiring` + `PartialOrder` + `IsOrderedRing` で通る。
+一回の接合の必要十分版は `CommSemiring` を要するのと対照的）。導出二定理は low/high へ
+$t^b$ と $1$ を代入して二場合を復元した。本文の `claim_open_rectangle_iterated_gluing_first` へ
+`lean` 宣言を付けた（sorry 検査 1014 件、すべて非依存）。次の本文は
+「開境界長方形を第二座標方向へ反復接合した値の評価」（第一座標方向と同じ帰納法を座標交換で移す。
+接合不等式の第二方向 `openPartitionValue_glueSecond_bounds_*` が既にあるので、同じ形の帰納法で
+閉じるはず）。式変形統一では姉妹側「なぜ (−) セクターだけを使うか」（`013_even_sector_modes`）の
+証明中、根拠なしで終わる四つの鎖の末尾行へ行末根拠を付けた。
+
 2026-08-15 の tick 279 は、レビューで前 tick の「周期境界と開境界の境界評価」の実数評価について、
 本文・SageMath・Lean 三本を突き合わせた。数学内容と四層の対応は揃っていたが、SageMath の概要だけが
 Lean 未了と記したままだったため、完成済みという実態へ訂正し、前進前に main へ反映した。そのあと
