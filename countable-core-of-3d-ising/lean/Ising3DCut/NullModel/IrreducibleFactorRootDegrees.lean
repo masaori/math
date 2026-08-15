@@ -107,4 +107,15 @@ theorem irreducible_rootMultiplicity_pow_eq_exponent
       rw [Polynomial.rootMultiplicity_mul (mul_ne_zero (pow_ne_zero e hQ) hQ)]
       rw [ih, hQMultiplicity]
 
+/--
+代数段の第四歩: モニックで既約な二つの因子 `P` と `Q` が共通の零点 `x` を持てば、
+`x` の最小多項式が `P` にも `Q` にも等しいので `P = Q` である。
+対偶として、相異なるモニック既約因子は零点を共有しない（本文の「因子間で零点を共有しない」の段）。
+-/
+theorem irreducible_monic_eq_of_common_root {K L : Type} [Field K] [Field L] [Algebra K L]
+    (P Q : K[X]) (hP : Irreducible P) (hPm : P.Monic) (hQ : Irreducible Q) (hQm : Q.Monic)
+    (x : L) (hxP : aeval x P = 0) (hxQ : aeval x Q = 0) : P = Q := by
+  exact (minpoly.eq_of_irreducible_of_monic hP hxP hPm).trans
+    (minpoly.eq_of_irreducible_of_monic hQ hxQ hQm).symm
+
 end Ising3DCut.NullModel
