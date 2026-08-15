@@ -343,4 +343,61 @@ v_0=v,\qquad v_r=w,\qquad
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_oriented_closed_surface_cellulation",
+    kind: "definition",
+    title: { text: "向き付けられた閉曲面セル分割を判定する有限述語" },
+    labels: ["def_oriented_closed_surface_cellulation"],
+    habitat: "finite",
+    verification: ["sagemath/check/oriented-closed-surface-cellulation"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の入力である有限グラフ ",
+        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        "、セル集合入力 ",
+        math(String.raw`\mathcal C_{\mathrm{cell}}=(V_{\mathrm{cell}},E_{\mathrm{cell}},F_{\mathrm{cell}})`),
+        "、向き付き境界語の族 ",
+        math(String.raw`\bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}`),
+        " に対し、向き付けられた閉曲面セル分割述語 ",
+        math(String.raw`\operatorname{OrientedClosedSurfaceCellulation}`),
+        " を真偽値集合 ",
+        math(String.raw`\{\mathrm{false},\mathrm{true}\}`),
+        " に値を取る次の条件として定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\operatorname{OrientedClosedSurfaceCellulation}
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\Longleftrightarrow\\
+&\quad
+\operatorname{OppositeEdgeTwice}
+\left(
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\ \land\\
+&\quad
+\operatorname{VertexLinksAreCycles}
+\left(
+  G,
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\ \land\\
+&\quad
+\operatorname{ConnectedOneSkeleton}(G).
+\end{aligned}`),
+      paragraph([
+        "三つの条件はそれぞれ ",
+        ref("def_finite_cellulation_opposite_edge_occurrences"),
+        "、",
+        ref("def_finite_cellulation_vertex_links_are_cycles"),
+        "、",
+        ref("def_finite_cellulation_connected_one_skeleton"),
+        " で定めた有限述語である。第一条件が面境界の向きを全辺で整合させ、第二条件が各頂点の近傍を一つの円周にし、第三条件がセル分割全体を一つの連結成分にする。この連言は有限集合の列挙、自然数と整数の等号、真偽値演算だけで判定でき、実数・複素数・極限・積分を用いない。",
+      ]),
+    ],
+  },
 ]);

@@ -23,6 +23,7 @@ export const ALL_LABELS = [
   "def_formal_edge_weight_sum",
   "def_ising_partition_polynomial",
   "def_mod_two_boundary_parity",
+  "def_oriented_closed_surface_cellulation",
   "def_spin_configuration_set",
   "theorem_formal_high_temperature_expansion",
 ] as const
