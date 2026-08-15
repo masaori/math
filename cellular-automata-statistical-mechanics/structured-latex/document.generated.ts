@@ -18,6 +18,7 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
+import blocks_causal_structure_comparison from './content/causal-structure-comparison.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
@@ -29,6 +30,7 @@ import blocks_transitive_closure_antisymmetry from './content/transitive-closure
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
+  ...typeof blocks_causal_structure_comparison,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_propagation_boundary,

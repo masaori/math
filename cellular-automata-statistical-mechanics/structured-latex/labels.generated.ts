@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_antichain_order_convex",
+  "claim_covering_subset_one_step",
   "claim_dependency_transfer",
   "claim_down_set_boundary_outgoing",
   "claim_down_set_no_incoming_edge",
@@ -18,8 +19,12 @@ export const ALL_LABELS = [
   "claim_no_dependency_on_redundant_element",
   "claim_no_mutual_reachability",
   "claim_one_step_dependency_finite_decidability",
+  "claim_one_step_equals_covering",
+  "claim_one_step_subset_covering",
   "claim_one_step_subset_reachability",
   "claim_order_convex_intersection",
+  "claim_order_interval_finite",
+  "claim_order_iso_not_time_preserving",
   "claim_path_time_increment_exact",
   "claim_path_time_strictly_increases",
   "claim_propagation_ball_finite",
@@ -36,6 +41,7 @@ export const ALL_LABELS = [
   "def_antichain",
   "def_base_value_extension",
   "def_cardinality_notation",
+  "def_covering_relation",
   "def_dependency_path",
   "def_dependency_source_set",
   "def_down_set",
@@ -52,6 +58,7 @@ export const ALL_LABELS = [
   "def_one_step_boundary",
   "def_one_step_dependency",
   "def_order_convex_subset",
+  "def_order_interval",
   "def_partial_order",
   "def_propagation_ball",
   "def_reachability",
@@ -62,6 +69,7 @@ export const ALL_LABELS = [
   "def_time_interval",
   "def_time_slice",
   "def_up_set",
+  "remark_causal_comparison_scope",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
