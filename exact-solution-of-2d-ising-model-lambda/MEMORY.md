@@ -4,6 +4,26 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 316 は、前 tick の「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
+完成させた。開境界長方形の頂点・辺・配位・破れボンド数・分配多項式の五つの定義（`def_open_rectangle_vertices`・`def_open_rectangle_edges`・
+`def_open_rectangle_configuration`・`def_open_rectangle_broken_bond_count`・`def_open_rectangle_partition_polynomial`。住処 N/Z）を
+`claim_finite_free_entropy_density_upper_bound` の直後・`remark_real_field_escape` の直前へ移し（中身は変えない）、その直後に
+`def_open_rectangle_partition_value_at_positive_rational`（$Z^{\mathrm{op}}_{a,b}(q):=(\sum_\sigma x^{b^{\mathrm{op}}_{a,b}(\sigma)})(q)=\sum_\sigma q^{b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb Q$、
+住処 Q）と `claim_open_rectangle_value_at_rational_is_positive`（$Z^{\mathrm{op}}_{a,b}(q)\in\mathbb Q_{>0}$、住処 Q。準備は各項 $0<q^{b^{\mathrm{op}}_{a,b}(\sigma)}$ と
+$|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\ge1$、鎖は二段。周期境界の `claim_value_at_rational_is_positive` と同じ論法）を置いた。$\mathbb R$ 版
+`def_open_rectangle_partition_value` は併存（撤去のセクションで消す）。`def_open_rectangle_constant_plus_configuration`・
+`claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N）はまだ $\mathbb R$ 側の値の下界の直前にあり、開境界正方形の密度の非負性のセクションで移す。
+SageMath `open-rectangle-partition-value-at-positive-rational`（長方形 10 形・正の有理点 9 点、43446 件、`ZZ`/`QQ`）。Lean 具体版
+`ThermodynamicLimit/OpenRectanglePartitionValueRational.lean`（`openPartitionValueRat`・`openPartitionValueRat_eq_sum`・`openPartitionValueRat_pos`。
+`Polynomial.aeval` のため `Mathlib.Algebra.Polynomial.AlgebraMap` を import する）、必要十分版は周期境界の `NecSuf/FreeEntropy/ValuePositive.lean` の
+`sum_pow_pos` を共有、導出版 `OpenRectanglePartitionValueRationalFromNecSuf.lean`。sorry 検査 1169 件。
+次は「接合不等式（$\mathbb Q$ 版）」（`claim_open_rectangle_gluing_inequality` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック。住処 Q、
+`claim_open_rectangle_value_at_rational_is_positive` の直後・実数体脱出の宣言の直前。四つの不等式（第一・第二方向 × $0<q\le1$・$1\le q$）を
+一つのブロックに置いている $\mathbb R$ 版に揃えるか、方向ごとに割るかを着手前に決める（$\mathbb R$ 版は 1 ブロック）。Lean は
+`OpenRectangleGluingInequality.lean` の帰納法（`pow_le_one_by_induction` 等）と `openPartitionValue_glueFirst_eq` を ℚ へ移す。
+必要十分版 `sum_pow_glue_bounds_necSuf` は共有できる見込み。着手前に確かめる）。
+
 2026-08-16 の tick 315 は、前 tick の「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_finite_free_entropy_density_upper_bound`（`claim_partition_value_upper_bound_at_positive_rational` の直後、`remark_real_field_escape` の直前、
@@ -3474,9 +3494,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」（`claim_finite_free_entropy_density_upper_bound`）の
-  本文・SageMath `finite-free-entropy-density-upper-bound`・Lean（`FiniteFreeEntropyDensityUpperBound.lean` 系統）を突き合わせる。
-- **次に進めるセクションは「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「開矩形の可算な定義群の移動と正の有理点での値（$\mathbb Q$ 版）」（`def_open_rectangle_partition_value_at_positive_rational`・
+  `claim_open_rectangle_value_at_rational_is_positive`）の本文・SageMath `open-rectangle-partition-value-at-positive-rational`・
+  Lean（`OpenRectanglePartitionValueRational.lean` 系統）を突き合わせる。移した五つの定義の中身が変わっていないことも見る。
+- **次に進めるセクションは「接合不等式（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。

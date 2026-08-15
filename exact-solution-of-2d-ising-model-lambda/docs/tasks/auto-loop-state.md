@@ -7,6 +7,14 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 316 は、「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」を
+  本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** 開境界長方形の頂点・辺・配位・破れボンド数・分配多項式の
+  五つの定義（住処 N/Z、中身は変えない）を実数体脱出の宣言の前へ移し、その直後に $Z^{\mathrm{op}}_{a,b}(q):=(\sum_\sigma x^{b^{\mathrm{op}}_{a,b}(\sigma)})(q)
+  =\sum_\sigma q^{b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb Q$（`def_open_rectangle_partition_value_at_positive_rational`、住処 Q）と
+  $Z^{\mathrm{op}}_{a,b}(q)\in\mathbb Q_{>0}$（`claim_open_rectangle_value_at_rational_is_positive`、住処 Q。各項の正値性と
+  $|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\ge1$ から、周期境界の正値性と同じ論法）を置いた。実数体は現れない。レビューでは前 tick の
+  $\Lambda_{\mathbb Q}$ 版上界の四層が一致し修正無し。次は「接合不等式（$\mathbb Q$ 版）」。
+
 - **2026-08-16 の tick 315 は、「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・
   必要十分版・導出版）まで完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$
   （`claim_finite_free_entropy_density_upper_bound`、正の有理点での上からの評価の直後・実数体脱出の宣言の直前、住処 Lambda）。準備は
@@ -36,14 +44,7 @@
   の五段（冪の指数 0・$b(\sigma_+)=0$・加えた和は 0 以上・1 項を戻す・代入は環準同型）で、実数も実対数も使わない。
   レビューでは前 tick の順序の移送の四層が一致し修正無し。次は「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」。
 
-- **2026-08-16 の tick 311 は、「有理数倍と埋め込みを通した順序の移送」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
-  完成させた。** $L\ge1$、$\lambda,\mu\in\Lambda$ に対し $\frac{1}{L^2}\cdot\iota(\lambda)\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\mu)
-  \iff\lambda\le_\Lambda\mu$（`claim_scaled_embedding_order_transfer`、密度の定義の直後・実数体脱出の宣言の直前）。準備で $N=L^2$ が
-  $\frac{1}{L^2}\cdot\iota(\lambda)$ の共通分母で証人が $\lambda$ 自身であること（三段の鎖: 結合則・約分・$1\cdot\lambda=\lambda$）を示し、
-  → は順序の定義の言い換え（すべての共通分母で）を $N=L^2$ で読み、← は定義（ある共通分母で）に $N=L^2$ と証人を入れて閉じた。
-  レビューでは前 tick の密度の定義の四層が一致し修正無し。次は「正の有理点での分配多項式の値は 1 以上」。
-
-（これより古い 268 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 269 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -57,13 +58,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 39 セクション
+- 熱力学極限: 40 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する | todo | `def_open_rectangle_*`（住処 N/Z）を宣言より前へ移す（中身は変えない）。$Z^{\mathrm{op}}_{a,b}(q)\in\mathbb Q_{>0}$ の定義と正値性 |
 | 熱力学極限 | 接合不等式（$\mathbb Q$ 版） | todo | `claim_open_rectangle_gluing_inequality` を $q\in\mathbb Q$ で新設（順序体の性質だけなので論法は同じ。Lean は ℚ へ） |
 | 熱力学極限 | 反復接合の第一（$\mathbb Q$ 版） | todo | 帰納法 1 本 |
 | 熱力学極限 | 反復接合の第二（$\mathbb Q$ 版） | todo | 帰納法 1 本 |
@@ -87,6 +87,20 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 316）: `def_open_rectangle_vertices`・`def_open_rectangle_edges`・`def_open_rectangle_configuration`・
+  `def_open_rectangle_broken_bond_count`・`def_open_rectangle_partition_polynomial` を `claim_finite_free_entropy_density_upper_bound` の直後
+  （`remark_real_field_escape` の直前）へ移した（中身は変えない。参照先はすべて前の章なので参照は壊れない）。その直後に
+  `def_open_rectangle_partition_value_at_positive_rational`（$\mathbb Z[x]$ の分配多項式への $q$ の代入。代入は環準同型なので
+  $\sum_\sigma q^{b^{\mathrm{op}}_{a,b}(\sigma)}$）と `claim_open_rectangle_value_at_rational_is_positive`（各項 $0<q^{b^{\mathrm{op}}_{a,b}(\sigma)}$、
+  $|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\ge1$、正の有理数を 1 個以上足したものは正）を置いた。$\mathbb R$ 版
+  `def_open_rectangle_partition_value` は併存（撤去のセクションで消す）。`def_open_rectangle_constant_plus_configuration` と
+  `claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N）は $\mathbb R$ 側の値の下界の直前に残してある（開境界正方形の密度の
+  非負性のセクションで移す）。SageMath `open-rectangle-partition-value-at-positive-rational`（長方形 10 形・正の有理点 9 点、43446 件、
+  `ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenRectanglePartitionValueRational.lean`（`openPartitionValueRat`・
+  `openPartitionValueRat_eq_sum`・`openPartitionValueRat_pos`）、必要十分版は周期境界の `NecSuf/FreeEntropy/ValuePositive.lean` の
+  `sum_pow_pos` を共有（有限で空でない添字型と順序半環の正の元の冪の和だけ。開境界・長方形の形・多項式は本質でない）、導出版
+  `OpenRectanglePartitionValueRationalFromNecSuf.lean`。sorry 検査 1169 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 315）: `claim_finite_free_entropy_density_upper_bound` を `claim_partition_value_upper_bound_at_positive_rational` の直後
   （`remark_real_field_escape` の直前）に置き四層で閉じた。準備の第一は `claim_value_at_rational_is_positive`・
@@ -133,17 +147,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   `NecSuf/ThermodynamicLimit/PartitionValueGeOneRational.lean` の `one_le_sum_pow_of_exponent_zero_necSuf`（有限添字型に指数 0 の項が
   一つ選べることと順序半環の正の元だけ。格子・配位・有理数体は本質でない）、導出版。sorry 検査 1150 件。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 311）: `claim_scaled_embedding_order_transfer` を `def_finite_free_entropy_density` の直後に置き四層で閉じた。準備は
-  $L^2\cdot(\frac{1}{L^2}\cdot\iota(\lambda))=(L^2\cdot\frac{1}{L^2})\cdot\iota(\lambda)=1\cdot\iota(\lambda)=\iota(\lambda)$ の三段
-  （有理数倍の結合則・$\mathbb Q$ の約分・$1\cdot\lambda=\lambda$）で $L^2$ が共通分母・証人 $\lambda$。両向きは順序の定義の ∀ 形と ∃ 形。
-  SageMath `scaled-embedding-order-transfer`（素数 $2,3,5$・係数 4 種の 64 ベクトル、$L\in\{1,2,3\}$、鎖 192 件・共通分母 192 件・
-  同値 12288 件・証人の比較の一致 12288 件、`ZZ`/`QQ`。素数 4 個・$L\le6$ の規模は決定手続きの指数が大きく 10 分で終わらなかったので縮めた）。
-  Lean 具体版 `ThermodynamicLimit/ScaledEmbeddingOrderTransfer.lean`（`commonDenominator_scaled_toRational`、
-  `rationalLogOrderLE_scaled_toRational_iff`）、必要十分版 `NecSuf/ThermodynamicLimit/ScaledEmbeddingOrderTransfer.lean` の
-  `indexedLE_iff_of_common_good_index_necSuf`（独立性と、二元に共通の良い添字とそこでの証人が与えられていることだけ。有理数倍・埋め込みは
-  本質でない）、導出版。sorry 検査 1147 件。式変形統一は一時停止中のため実施せず。
-
-（これより古い 279 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 280 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -162,6 +166,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 316）: 前 tick の「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせ、準備三つ・$\Lambda$ の五段と $\Lambda_{\mathbb Q}$ の八段の鎖・対象ラベル・入口 import・sorry 検査への
+  登録が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 - 2026-08-16（tick 315）: 前 tick の「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版
   （$\mathbb R$ 版と共有）・導出版を突き合わせ、準備四つ・五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
@@ -178,11 +186,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   突き合わせ、三段の鎖・∀ 形と ∃ 形の両向き・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
 
-- 2026-08-16（tick 311）: 前 tick の「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の本文・SageMath・Lean 具体版を
-  突き合わせ、右辺の確定・各素数での値の三段の鎖・具体例・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
-  台帳のセクション表も食い違いなし。修正は無い。
-
-（これより古い 300 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 301 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

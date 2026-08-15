@@ -38291,6 +38291,322 @@ Z_L(q)
     ],
   },
   {
+    id: "thermodynamic_limit_def_open_rectangle_vertices",
+    kind: "definition",
+    title: { text: "開境界長方形の頂点集合" },
+    labels: ["def_open_rectangle_vertices"],
+    habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.OpenVertex"],
+    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " とする。開境界の ",
+        math(String.raw`a\times b`),
+        " 長方形の頂点集合を",
+      ]),
+      displayMath(String.raw`V^{\mathrm{op}}_{a,b}
+:=\{(i,j)\in\mathbb{N}\times\mathbb{N}\mid i<a\ \text{かつ}\ j<b\}`),
+      paragraph([
+        "と定める。周期境界の頂点集合 ",
+        ref("def_lattice"),
+        " と異なり、剰余類は使わない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_open_rectangle_edges",
+    kind: "definition",
+    title: { text: "開境界長方形の辺集合" },
+    labels: ["def_open_rectangle_edges"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.OpenEdgeH",
+      "Ising2DLambda.ThermodynamicLimit.OpenEdgeV",
+      "Ising2DLambda.ThermodynamicLimit.OpenEdge",
+      "Ising2DLambda.ThermodynamicLimit.openBoundary0",
+      "Ising2DLambda.ThermodynamicLimit.openBoundary1",
+    ],
+    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " とする。横向き辺と縦向き辺の番号を、それぞれ",
+      ]),
+      displayMath(String.raw`E^{\mathrm{op}}_{a,b,\mathrm h}
+:=\{(i,j)\in\mathbb{N}\times\mathbb{N}\mid i<a\ \text{かつ}\ j+1<b\}`),
+      displayMath(String.raw`E^{\mathrm{op}}_{a,b,\mathrm v}
+:=\{(i,j)\in\mathbb{N}\times\mathbb{N}\mid i+1<a\ \text{かつ}\ j<b\}`),
+      paragraph([
+        "と定める。辺の番号の集合は向きの印を付けた直和",
+      ]),
+      displayMath(String.raw`E^{\mathrm{op}}_{a,b}
+:=(\{\mathrm h\}\times E^{\mathrm{op}}_{a,b,\mathrm h})
+\cup(\{\mathrm v\}\times E^{\mathrm{op}}_{a,b,\mathrm v})`),
+      paragraph([
+        "である。端点写像 ",
+        math(String.raw`\partial^{\mathrm{op}}_0,\partial^{\mathrm{op}}_1:E^{\mathrm{op}}_{a,b}\to V^{\mathrm{op}}_{a,b}`),
+        " は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\partial^{\mathrm{op}}_0(\mathrm h,i,j)&=(i,j),
+&\partial^{\mathrm{op}}_1(\mathrm h,i,j)&=(i,j+1),\\
+\partial^{\mathrm{op}}_0(\mathrm v,i,j)&=(i,j),
+&\partial^{\mathrm{op}}_1(\mathrm v,i,j)&=(i+1,j)
+\end{aligned}`),
+      paragraph([
+        "と定める（頂点集合は ",
+        ref("def_open_rectangle_vertices"),
+        "）。したがって反対側の境界へ戻る辺は無い。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_open_rectangle_configuration",
+    kind: "definition",
+    title: { text: "開境界長方形の配位" },
+    labels: ["def_open_rectangle_configuration"],
+    habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.OpenConfig"],
+    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " とする。開境界長方形の配位の集合を",
+      ]),
+      displayMath(String.raw`\Sigma^{\mathrm{op}}_{a,b}
+:=\{\sigma\mid \sigma:V^{\mathrm{op}}_{a,b}\to\{+1,-1\}\}`),
+      paragraph([
+        "と定める（頂点集合は ",
+        ref("def_open_rectangle_vertices"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_open_rectangle_broken_bond_count",
+    kind: "definition",
+    title: { text: "開境界長方形の破れボンド数" },
+    labels: ["def_open_rectangle_broken_bond_count"],
+    habitat: "N",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openBrokenBondSet",
+      "Ising2DLambda.ThermodynamicLimit.openBrokenBondCount",
+    ],
+    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        "、",
+        math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`),
+        " とする。破れた辺の番号の集合とその個数を",
+      ]),
+      displayMath(String.raw`B^{\mathrm{op}}_{a,b}(\sigma)
+:=\{e\in E^{\mathrm{op}}_{a,b}\mid
+\sigma(\partial^{\mathrm{op}}_0(e))\ne\sigma(\partial^{\mathrm{op}}_1(e))\}`),
+      displayMath(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)
+:=\bigl|B^{\mathrm{op}}_{a,b}(\sigma)\bigr|\in\mathbb{N}`),
+      paragraph([
+        "と定める（配位と辺は ",
+        ref("def_open_rectangle_configuration"),
+        "、",
+        ref("def_open_rectangle_edges"),
+        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_open_rectangle_partition_polynomial",
+    kind: "definition",
+    title: { text: "開境界長方形の分配多項式" },
+    labels: ["def_open_rectangle_partition_polynomial"],
+    habitat: "Z",
+    lean: ["Ising2DLambda.ThermodynamicLimit.openPartitionPolynomial"],
+    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " とする。開境界長方形の分配多項式を",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(x)
+:=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+x^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb{Z}[x]`),
+      paragraph([
+        "と定める（配位と破れボンド数は ",
+        ref("def_open_rectangle_broken_bond_count"),
+        "）。これは有限和なので ",
+        math(String.raw`\mathbb{Z}[x]`),
+        " の元として閉じており、",
+        "実数・複素数は現れない。周期境界の ",
+        math(String.raw`Z_L(x)`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）と比較するときだけ、境界を横切る辺の寄与を別に数える。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_open_rectangle_partition_value_at_positive_rational",
+    kind: "definition",
+    title: { text: "開境界長方形の分配多項式の正の有理点での値" },
+    labels: ["def_open_rectangle_partition_value_at_positive_rational"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_eq_sum",
+    ],
+    verification: ["sagemath/check/open-rectangle-partition-value-at-positive-rational"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を取る。開境界長方形の分配多項式（",
+        ref("def_open_rectangle_partition_polynomial"),
+        "）へ ",
+        math(String.raw`q`),
+        " を代入した値を",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(q)
+:=\Bigl(\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}x^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\Bigr)(q)
+=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\ \in\ \mathbb{Q}`),
+      paragraph([
+        "と書く。代入は ",
+        ref("def_partition_polynomial"),
+        " の約束どおり、可換環 ",
+        math(String.raw`\mathbb{Q}`),
+        " とその元 ",
+        math(String.raw`q`),
+        " についての評価であり、二つ目の等号は代入が環準同型なので和と冪を保つことによる。",
+        "この丸括弧は多項式そのものではなく、有理数 ",
+        math(String.raw`q`),
+        " での評価だけを表す（",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}`),
+        " と ",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}(q)`),
+        " は別の対象である）。和は有限であり、各項は有理数 ",
+        math(String.raw`q`),
+        " の自然数冪なので、右辺は ",
+        math(String.raw`\mathbb{Q}`),
+        " の元として確定する。実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_rectangle_value_at_rational_is_positive",
+    kind: "claim",
+    title: { text: "開境界長方形の分配多項式の正の有理点での値は正の有理数である" },
+    labels: ["claim_open_rectangle_value_at_rational_is_positive"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_pos",
+      "Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_pos_from_necSuf",
+    ],
+    verification: ["sagemath/check/open-rectangle-partition-value-at-positive-rational"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " と各 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " について、",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        " の値は",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(q)\in\mathbb{Q}_{>0}`),
+      paragraph([
+        "を満たす。すなわち ",
+        math(String.raw`0<Z^{\mathrm{op}}_{a,b}(q)`),
+        "（",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、各 ",
+        math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`),
+        " について ",
+        math(String.raw`q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}>0`),
+        " である。実際 ",
+        math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)\in\mathbb{N}`),
+        " であり（",
+        ref("def_open_rectangle_broken_bond_count"),
+        "）、正の有理数を ",
+        math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)`),
+        " 個掛けたものは正である（",
+        math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)=0`),
+        " のときは空積で ",
+        math(String.raw`q^{0}=1>0`),
+        "）。また ",
+        math(String.raw`|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\ge1`),
+        " なので（",
+        ref("def_open_rectangle_configuration"),
+        " の配位は ",
+        math(String.raw`ab`),
+        " 個の頂点（",
+        ref("def_open_rectangle_vertices"),
+        "）のそれぞれに ",
+        math(String.raw`+1,-1`),
+        " のどちらかを割り当てる写像）、下の和は少なくとも 1 個の項を持つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a,b}(q)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ \blkref{def_open_rectangle_partition_value_at_positive_rational})\\
+&\in\mathbb{Q}_{>0}
+&&(\because\ \text{正の有理数を 1 個以上足したものは正})
+\end{aligned}`),
+      paragraph([
+        "以上は有理数の四則と有限和だけからなり、実数体は現れない。",
+        "周期境界の ",
+        ref("claim_value_at_rational_is_positive"),
+        " と同じ論法である。正の実数での値 ",
+        ref("def_open_rectangle_partition_value"),
+        " とその正値性はこの主張の実数側の像であり、旧経路の撤去まで併存させる。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },
@@ -40157,186 +40473,6 @@ Z_L(t)
         " と両立しない。よって前者は起こらず、",
         math(String.raw`u_1=u_2`),
         " である。",
-      ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_def_open_rectangle_vertices",
-    kind: "definition",
-    title: { text: "開境界長方形の頂点集合" },
-    labels: ["def_open_rectangle_vertices"],
-    habitat: "N",
-    lean: ["Ising2DLambda.ThermodynamicLimit.OpenVertex"],
-    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
-    statement: [
-      paragraph([
-        math(String.raw`a,b\in\mathbb{N}`),
-        "、",
-        math(String.raw`a\ge1`),
-        "、",
-        math(String.raw`b\ge1`),
-        " とする。開境界の ",
-        math(String.raw`a\times b`),
-        " 長方形の頂点集合を",
-      ]),
-      displayMath(String.raw`V^{\mathrm{op}}_{a,b}
-:=\{(i,j)\in\mathbb{N}\times\mathbb{N}\mid i<a\ \text{かつ}\ j<b\}`),
-      paragraph([
-        "と定める。周期境界の頂点集合 ",
-        ref("def_lattice"),
-        " と異なり、剰余類は使わない。",
-      ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_def_open_rectangle_edges",
-    kind: "definition",
-    title: { text: "開境界長方形の辺集合" },
-    labels: ["def_open_rectangle_edges"],
-    habitat: "N",
-    lean: [
-      "Ising2DLambda.ThermodynamicLimit.OpenEdgeH",
-      "Ising2DLambda.ThermodynamicLimit.OpenEdgeV",
-      "Ising2DLambda.ThermodynamicLimit.OpenEdge",
-      "Ising2DLambda.ThermodynamicLimit.openBoundary0",
-      "Ising2DLambda.ThermodynamicLimit.openBoundary1",
-    ],
-    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
-    statement: [
-      paragraph([
-        math(String.raw`a,b\in\mathbb{N}`),
-        "、",
-        math(String.raw`a\ge1`),
-        "、",
-        math(String.raw`b\ge1`),
-        " とする。横向き辺と縦向き辺の番号を、それぞれ",
-      ]),
-      displayMath(String.raw`E^{\mathrm{op}}_{a,b,\mathrm h}
-:=\{(i,j)\in\mathbb{N}\times\mathbb{N}\mid i<a\ \text{かつ}\ j+1<b\}`),
-      displayMath(String.raw`E^{\mathrm{op}}_{a,b,\mathrm v}
-:=\{(i,j)\in\mathbb{N}\times\mathbb{N}\mid i+1<a\ \text{かつ}\ j<b\}`),
-      paragraph([
-        "と定める。辺の番号の集合は向きの印を付けた直和",
-      ]),
-      displayMath(String.raw`E^{\mathrm{op}}_{a,b}
-:=(\{\mathrm h\}\times E^{\mathrm{op}}_{a,b,\mathrm h})
-\cup(\{\mathrm v\}\times E^{\mathrm{op}}_{a,b,\mathrm v})`),
-      paragraph([
-        "である。端点写像 ",
-        math(String.raw`\partial^{\mathrm{op}}_0,\partial^{\mathrm{op}}_1:E^{\mathrm{op}}_{a,b}\to V^{\mathrm{op}}_{a,b}`),
-        " は",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\partial^{\mathrm{op}}_0(\mathrm h,i,j)&=(i,j),
-&\partial^{\mathrm{op}}_1(\mathrm h,i,j)&=(i,j+1),\\
-\partial^{\mathrm{op}}_0(\mathrm v,i,j)&=(i,j),
-&\partial^{\mathrm{op}}_1(\mathrm v,i,j)&=(i+1,j)
-\end{aligned}`),
-      paragraph([
-        "と定める（頂点集合は ",
-        ref("def_open_rectangle_vertices"),
-        "）。したがって反対側の境界へ戻る辺は無い。",
-      ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_def_open_rectangle_configuration",
-    kind: "definition",
-    title: { text: "開境界長方形の配位" },
-    labels: ["def_open_rectangle_configuration"],
-    habitat: "N",
-    lean: ["Ising2DLambda.ThermodynamicLimit.OpenConfig"],
-    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
-    statement: [
-      paragraph([
-        math(String.raw`a,b\in\mathbb{N}`),
-        "、",
-        math(String.raw`a\ge1`),
-        "、",
-        math(String.raw`b\ge1`),
-        " とする。開境界長方形の配位の集合を",
-      ]),
-      displayMath(String.raw`\Sigma^{\mathrm{op}}_{a,b}
-:=\{\sigma\mid \sigma:V^{\mathrm{op}}_{a,b}\to\{+1,-1\}\}`),
-      paragraph([
-        "と定める（頂点集合は ",
-        ref("def_open_rectangle_vertices"),
-        "）。",
-      ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_def_open_rectangle_broken_bond_count",
-    kind: "definition",
-    title: { text: "開境界長方形の破れボンド数" },
-    labels: ["def_open_rectangle_broken_bond_count"],
-    habitat: "N",
-    lean: [
-      "Ising2DLambda.ThermodynamicLimit.openBrokenBondSet",
-      "Ising2DLambda.ThermodynamicLimit.openBrokenBondCount",
-    ],
-    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
-    statement: [
-      paragraph([
-        math(String.raw`a,b\in\mathbb{N}`),
-        "、",
-        math(String.raw`a\ge1`),
-        "、",
-        math(String.raw`b\ge1`),
-        "、",
-        math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`),
-        " とする。破れた辺の番号の集合とその個数を",
-      ]),
-      displayMath(String.raw`B^{\mathrm{op}}_{a,b}(\sigma)
-:=\{e\in E^{\mathrm{op}}_{a,b}\mid
-\sigma(\partial^{\mathrm{op}}_0(e))\ne\sigma(\partial^{\mathrm{op}}_1(e))\}`),
-      displayMath(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)
-:=\bigl|B^{\mathrm{op}}_{a,b}(\sigma)\bigr|\in\mathbb{N}`),
-      paragraph([
-        "と定める（配位と辺は ",
-        ref("def_open_rectangle_configuration"),
-        "、",
-        ref("def_open_rectangle_edges"),
-        "）。",
-      ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_def_open_rectangle_partition_polynomial",
-    kind: "definition",
-    title: { text: "開境界長方形の分配多項式" },
-    labels: ["def_open_rectangle_partition_polynomial"],
-    habitat: "Z",
-    lean: ["Ising2DLambda.ThermodynamicLimit.openPartitionPolynomial"],
-    verification: ["sagemath/check/open-rectangle-partition-polynomial"],
-    statement: [
-      paragraph([
-        math(String.raw`a,b\in\mathbb{N}`),
-        "、",
-        math(String.raw`a\ge1`),
-        "、",
-        math(String.raw`b\ge1`),
-        " とする。開境界長方形の分配多項式を",
-      ]),
-      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(x)
-:=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
-x^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb{Z}[x]`),
-      paragraph([
-        "と定める（配位と破れボンド数は ",
-        ref("def_open_rectangle_broken_bond_count"),
-        "）。これは有限和なので ",
-        math(String.raw`\mathbb{Z}[x]`),
-        " の元として閉じており、",
-        "実数・複素数は現れない。周期境界の ",
-        math(String.raw`Z_L(x)`),
-        "（",
-        ref("def_partition_polynomial"),
-        "）と比較するときだけ、境界を横切る辺の寄与を別に数える。",
       ]),
     ],
   },

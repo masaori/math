@@ -10623,3 +10623,33 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-16（tick 310）: 前 tick の「正の有理数の対数は順序を保ちかつ反映する」の本文・SageMath・Lean 具体版・必要十分版・
   導出版を突き合わせ、補助等式（全射性を $\lambda:=\log q$ へ・単射性）・二段の同値・対象ラベル・入口 import・sorry 検査への登録が
   一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+## tick 316 で台帳から移した記録（tick 311）
+
+### 現在地
+
+- **2026-08-16 の tick 311 は、「有理数倍と埋め込みを通した順序の移送」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
+  完成させた。** $L\ge1$、$\lambda,\mu\in\Lambda$ に対し $\frac{1}{L^2}\cdot\iota(\lambda)\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\mu)
+  \iff\lambda\le_\Lambda\mu$（`claim_scaled_embedding_order_transfer`、密度の定義の直後・実数体脱出の宣言の直前）。準備で $N=L^2$ が
+  $\frac{1}{L^2}\cdot\iota(\lambda)$ の共通分母で証人が $\lambda$ 自身であること（三段の鎖: 結合則・約分・$1\cdot\lambda=\lambda$）を示し、
+  → は順序の定義の言い換え（すべての共通分母で）を $N=L^2$ で読み、← は定義（ある共通分母で）に $N=L^2$ と証人を入れて閉じた。
+  レビューでは前 tick の密度の定義の四層が一致し修正無し。次は「正の有理点での分配多項式の値は 1 以上」。
+
+### 前進の記録
+
+- 2026-08-16（tick 311）: `claim_scaled_embedding_order_transfer` を `def_finite_free_entropy_density` の直後に置き四層で閉じた。準備は
+  $L^2\cdot(\frac{1}{L^2}\cdot\iota(\lambda))=(L^2\cdot\frac{1}{L^2})\cdot\iota(\lambda)=1\cdot\iota(\lambda)=\iota(\lambda)$ の三段
+  （有理数倍の結合則・$\mathbb Q$ の約分・$1\cdot\lambda=\lambda$）で $L^2$ が共通分母・証人 $\lambda$。両向きは順序の定義の ∀ 形と ∃ 形。
+  SageMath `scaled-embedding-order-transfer`（素数 $2,3,5$・係数 4 種の 64 ベクトル、$L\in\{1,2,3\}$、鎖 192 件・共通分母 192 件・
+  同値 12288 件・証人の比較の一致 12288 件、`ZZ`/`QQ`。素数 4 個・$L\le6$ の規模は決定手続きの指数が大きく 10 分で終わらなかったので縮めた）。
+  Lean 具体版 `ThermodynamicLimit/ScaledEmbeddingOrderTransfer.lean`（`commonDenominator_scaled_toRational`、
+  `rationalLogOrderLE_scaled_toRational_iff`）、必要十分版 `NecSuf/ThermodynamicLimit/ScaledEmbeddingOrderTransfer.lean` の
+  `indexedLE_iff_of_common_good_index_necSuf`（独立性と、二元に共通の良い添字とそこでの証人が与えられていることだけ。有理数倍・埋め込みは
+  本質でない）、導出版。sorry 検査 1147 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 311）: 前 tick の「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の本文・SageMath・Lean 具体版を
+  突き合わせ、右辺の確定・各素数での値の三段の鎖・具体例・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
+  台帳のセクション表も食い違いなし。修正は無い。
+
