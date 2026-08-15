@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_broken_complement",
+  "claim_discriminant_does_not_determine_polynomial",
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
   "claim_galois_hyperoctahedral_bound",

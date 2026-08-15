@@ -857,4 +857,80 @@ X^{\#E_L}Z_L(X^{-1})
       ]),
     ],
   },
+
+  {
+    id: "discriminant_data_loss_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "判別式で潰れる多項式の情報" },
+    labels: [],
+  },
+
+  {
+    id: "discriminant_data_loss_claim_quadratic_counterexample",
+    kind: "claim",
+    title: { text: "判別式だけでは多項式を決めない" },
+    labels: ["claim_discriminant_does_not_determine_polynomial"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "整係数多項式の判別式を与えても、もとの多項式は一意に決まらない。",
+        "この反例では二つの多項式がともに重複因子を持たないので、多項式自身の判別式と square-free 部分の判別式は一致する。",
+      ]),
+    ],
+    proof: [
+      paragraph(["相異なる二つの整係数多項式"]),
+      displayMath(String.raw`A(X)=X^2-X,\qquad B(X)=X^2+X\qquad\in\mathbb Z[X]`),
+      paragraph([
+        "を取る。一次係数はそれぞれ ",
+        math(String.raw`-1`),
+        " と ",
+        math(String.raw`1`),
+        " なので、",
+        math(String.raw`A(X)\ne B(X)`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+A(X)&=X(X-1)
+&&(\because\ \text{分配法則})\\
+B(X)&=X(X+1)
+&&(\because\ \text{分配法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "各積の二つの一次因子は相異なるので、",
+        math(String.raw`A(X)`),
+        " と ",
+        math(String.raw`B(X)`),
+        " はともに重複因子を持たない。したがって、それぞれの square-free 部分は多項式自身である。",
+      ]),
+      paragraph([
+        "二次式 ",
+        math(String.raw`aX^2+bX+c`),
+        " の判別式を整数 ",
+        math(String.raw`b^2-4ac`),
+        " として計算すると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\operatorname{disc}(A)&=(-1)^2-4\cdot1\cdot0
+&&(\because\ A(X)=1\cdot X^2+(-1)\cdot X+0)\\
+&=1
+&&(\because\ \text{整数の四則演算})\\
+\operatorname{disc}(B)&=1^2-4\cdot1\cdot0
+&&(\because\ B(X)=1\cdot X^2+1\cdot X+0)\\
+&=1
+&&(\because\ \text{整数の四則演算})
+\end{aligned}`,
+      ),
+      paragraph([
+        "相異なる ",
+        math(String.raw`A(X)`),
+        " と ",
+        math(String.raw`B(X)`),
+        " が同じ判別式を持つため、判別式だけでは多項式を決めない。",
+      ]),
+    ],
+  },
 ]);
