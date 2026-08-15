@@ -2,7 +2,26 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-15 時点）
+## 現在の到達点（2026-08-16 時点）
+
+2026-08-16 の tick 303 は、前 tick の「対数順序群の順序は正整数倍で変わらない」の四層を突き合わせて修正不要と
+確認し、本文末尾「この先に書くこと」に残っていた済みの「加法単調性」を消して先に push した。そのあと
+「有理係数の対数順序群の順序の定義と共通分母からの独立性」を、共通分母の定義と独立性／共通分母の存在／
+順序の定義の三つへ割り、先頭を四層まで完成させた。`def_common_denominator`（章「熱力学極限」、分母消去の直後）で
+$N\ge1$ が $\lambda\in\Lambda_{\mathbb Q}$ の共通分母であることを「$\lambda_N\in\Lambda$ で
+$N\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda_N)$」と定め（一意性は $\iota$ の単射性）、
+`claim_common_denominator_order_independent` で $N,N'$ がともに $\lambda,\mu$ の共通分母なら
+$\lambda_N\le_\Lambda\mu_N\iff\lambda_{N'}\le_\Lambda\mu_{N'}$ を、$\iota(N'\lambda_N)=\iota(N\lambda_{N'})$
+の七段の鎖と単射性で $N'\lambda_N=N\lambda_{N'}$ を出し、順序の正整数倍不変性を $N'$・$N$ の順に使って示した。
+SageMath `common-denominator-order-independent`（343 ベクトル、$N,N'\le12$、証人 1786 件、交差等式・同値 2082724 件、
+`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/CommonDenominator.lean`（`IsCommonDenominator`、
+`commonDenominator_unique`、`commonDenominator_cross_smul`、`commonDenominator_order_independent`）、必要十分版
+`NecSuf/ThermodynamicLimit/CommonDenominator.lean` の `cross_multiple_order_independent_necSuf`、導出版
+（sorry 検査 1105 件）。次は「有理係数の対数順序群の元の共通分母の存在」（非零値の分母の積 $N$ について
+$N\lambda(p)$ が整数になることを、Lean では `Rat.mul_den_eq_num` と `Nat.div_mul_cancel` で示し、証人 $\lambda_N$ を
+`Finsupp.mapRange`（`fun q => ((N:ℚ)*q).num`）などで与える）。
+
+## 到達点（2026-08-15 時点）
 
 2026-08-15 の tick 302 は、前 tick の「対数順序群の順序の加法単調性」の四層を突き合わせて修正不要と確認した。
 そのあと、次のセクション「有理係数の対数順序群の順序の定義と共通分母からの独立性」が前提とする
@@ -3240,15 +3259,13 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「正の有理数の対数は単射である」の本文（`claim_rational_log_injective`）・SageMath
-  `rational-log-injective`・Lean（`RationalLogInjective.lean` 三系統）を突き合わせる。とくに Lean が既約表示
-  `q.num.natAbs / q.den` を取っているのに対し本文は任意の表示 $a/b$ で書いていることが、主張の強さとして
-  一致しているか（本文の主張は表示に依らないので問題ないはずだが確認する）を見る。
-- **次に進めるセクションは「正の有理数の対数は全射である」**（状態台帳のセクション表の先頭行）。
-- **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
-  姉妹側 `014_even_sector_T_action` の「$T_{V_1},T_{V_2}$ の $\check Z,\check Y$ への作用」は $T_{V_1}$・
-  $T_{V_2}$ とも開いた（統一済み）。次は同ファイルの次のブロック（`evensectorT_006_claim_linearity_of_T` は
-  確認済み）以降で、圧縮された行や根拠の無い行を探す。
+- **レビュー**: 「有理係数の対数順序群の元の共通分母」（`def_common_denominator`）と「共通分母を通した順序の判定は
+  共通分母の取り方によらない」（`claim_common_denominator_order_independent`）の本文・SageMath
+  `common-denominator-order-independent`・Lean（`CommonDenominator.lean` 三系統）を突き合わせる。
+- **次に進めるセクションは「有理係数の対数順序群の元の共通分母の存在」**（状態台帳のセクション表の先頭行）。
+- **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
+  後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
+  到達点は台帳の表にある。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
 ## 前の tick の記録（1 つ前）
