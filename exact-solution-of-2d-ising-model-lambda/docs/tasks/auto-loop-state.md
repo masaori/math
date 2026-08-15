@@ -15,6 +15,8 @@
   「順序を反転する対合と上限の存在」だけを残した（順序の反射律・推移律も不要）。レビューでは
   下限の証明の係数表記を主張の $\iota_{\mathbb{Q}\to\mathbb{R}}(2)$ へ揃え、SageMath 概要の
   対象ラベル宣言が検査の正規表現に合っていなかった（対応検査が落ちていた）ので直した。**
+  式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」の (h2.y) の第二帰納段階で、圧縮されていた
+  スカラー整理と冪の指数法則を二行へ分けた（残りは (h2.z) の二つの帰納段階の同じ箇所）。
   次は「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」。
 
 - **2026-08-15 の tick 289 は、「開境界密度の下からの評価と下限の存在」を本文と SageMath まで
@@ -86,7 +88,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   具体版 `openFreeEnergyDensityValueSet_has_infimum_of_le_one` を人手証明と 1 対 1 に実装した。
   必要十分版 `scaled_map_lowerBound_necSuf`（下界の写像・尺度の合成・係数の相殺のみ）と
   `indexedValueSet_has_infimum_necSuf`（証人・一様下界・順序反転対合・上限の存在のみ）、導出版二本。
-  sorry 検査 1049 件。本文へ `lean` 宣言を付け、SageMath 概要へ Lean の状態を書いた。
+  sorry 検査 1049 件。本文へ `lean` 宣言を付け、SageMath 概要へ Lean の状態を書いた。式変形統一では
+  姉妹側 (h2.y) の第二帰納段階の最後を、スカラー整理と冪の指数法則の二行へ開いた。
 
 - 2026-08-15（tick 289）: `claim_open_free_energy_density_lower_bound_le_one` と
   `claim_open_free_energy_density_infimum_exists_le_one` を記述した。値の下界と冪の比較を可算側で

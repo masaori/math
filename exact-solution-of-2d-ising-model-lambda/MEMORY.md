@@ -20,6 +20,8 @@ Lean を完成させ、セクションを閉じた。具体版 `ThermodynamicLim
 `claim_open_free_energy_density_supremum_approximation_multiples_one_le` と対称。下限 $v$ と
 $\varepsilon$ に対し $v+\varepsilon$ が下界でないことから一辺 $a$ を取り、ブロック敷き詰め評価の対数化の
 $\psi^{\mathrm{op}}_{ka}\le\psi^{\mathrm{op}}_a$ と下界性で $v\le\psi^{\mathrm{op}}_{ka}<v+\varepsilon$）。
+式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」の (h2.y) の第二帰納段階を二行へ開いた
+（残りは (h2.z) の二つの帰納段階の同じ箇所）。
 
 2026-08-15 の tick 289 は、レビューで前 tick の「倍数の辺での上限への任意近接（$1\le t$）」の
 有限モデル上界判定を、ball 差の下端判定から分配関数の整数冪による厳密比較へ修正し、前進前に

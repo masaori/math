@@ -772,8 +772,10 @@ F_{n+1}
    \quad (\because \text{交換子の双線型性}) \\
 &= K_2^*\cdot(-1)^{(n-1)/2}(2K_2^*)^n\cdot\left(-2\,\check{Y}_\mu\right)
    \quad (\because \text{(C)}) \\
+&= (-1)^{(n-1)/2}(-1)(2K_2^*)^n(2K_2^*)\check{Y}_\mu
+   \quad (\because \text{スカラー倍の交換と結合。} K_2^*\cdot(-2) = (-1)(2K_2^*)) \\
 &= (-1)^{(n-1)/2+1}(2K_2^*)^{n+1}\check{Y}_\mu
-   \quad (\because \text{スカラー倍の交換と } K_2^*\cdot(2K_2^*)^n\cdot(-2) = (-1)(2K_2^*)^{n+1}) \\
+   \quad (\because \text{冪の指数法則を } (-1) \text{ と } 2K_2^* \text{ の両方へ適用}) \\
 &= (-1)^{(n+1)/2}(2K_2^*)^{n+1}\check{Y}_\mu
    \quad \left(\because \tfrac{n-1}{2}+1 = \tfrac{n+1}{2}\right)
 \end{aligned}`,
