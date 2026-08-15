@@ -64,3 +64,4 @@ import Ising3DCut.NullModel.PeriodicNotPalindromeFromNecSuf
 import Ising3DCut.StructuralCore.BipartiteSuccessorPalindrome
 import Ising3DCut.NecSuf.StructuralCore.BipartiteSuccessorPalindrome
 import Ising3DCut.StructuralCore.BipartiteSuccessorPalindromeFromNecSuf
+import Ising3DCut.StructuralCore.PeriodicSuccessorNotPalindrome

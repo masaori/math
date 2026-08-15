@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 292 は、レビューで前 tick の「倍数の辺での下限への任意近接（$0<t\le1$）」の
+本文・SageMath・Lean が一致することを確認し、本文末尾「この先に書くこと」に残っていた済んだ項目を消して
+push した。そのあと「倍数でない辺への拡張」を六つのセクション（開境界長方形の値は 1 以上／値の配位数による
+上からの評価／開境界正方形と部分正方形の値の比較／その対数化／開境界密度の極限 $0<t\le1$／同 $1\le t$）へ
+割り直し、先頭の「開境界長方形の値は 1 以上である」を四層まで完成させた。開境界の全て正の定数配位
+$\tau_{+}$（`def_open_rectangle_constant_plus_configuration`）、その破れボンド数が零
+（`claim_open_rectangle_constant_plus_breaks_no_bond`）、正の実数 $t$ で $1\le Z^{\mathrm{op}}_{a,b}(t)$
+（`claim_open_rectangle_value_at_least_one`。一項の分離）。SageMath `open-rectangle-value-at-least-one` は
+56 件を `QQ` で厳密に。Lean は `ThermodynamicLimit/OpenRectangleValueAtLeastOne.lean`（`openAllPlusConfig`、
+`openAllPlusConfig_openBrokenBondCount_eq_zero`、`one_le_openPartitionValue`）、必要十分版
+`one_le_sum_pow_by_separating_zero_exponent_term_necSuf`、導出版（sorry 検査 1056 件）。次の本文は
+「開境界長方形の値の配位数による上からの評価」（$0<t\le1$: 各項 $t^{b}\le1$ で $Z\le2^{ab}$。$1\le t$: 辺数
+$2ab-a-b\le2ab$ から各項 $\le t^{2ab}$ で $Z\le2^{ab}t^{2ab}$。Lean の型は `openPartitionValue a b t` と
+`card_openConfig`・`openBrokenBondCount_le` で書ける）。
+
 2026-08-15 の tick 291 は、レビューで前 tick の「開境界密度の下からの評価と下限の存在」の本文・
 SageMath・Lean 具体版・必要十分版・導出版が一致していることを確認した（修正無し）。そのあと
 「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」を四層まで完成させた。下限 $v$ と
@@ -3078,14 +3093,14 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「ブロック敷き詰め評価の対数化」の本文・SageMath・Lean（具体版・必要十分版・導出版）を
-  突き合わせる。特に補正項の有理数係数 $2(k-1)/(ka)$ の Lean 側の表現（$k-1$ は ℕ の減法）が
-  本文と一致しているか。
-- **次に進めるセクションは「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「開境界長方形の値は 1 以上である」の本文・SageMath・Lean（具体版・必要十分版・導出版）を
+  突き合わせる。
+- **次に進めるセクションは「開境界長方形の値の配位数による上からの評価」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
-  姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の「$\check Z$ の $n$ 重交換子」の
-  帰納段階以降から、根拠なし・複数関係の計算を機械走査で特定する。
-- **push の直前に `lake build` を回す。**
+  姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の「$\check Z,\check Y$ についての
+  $\cosh,\sinh$ の展開係数への変換」は (h1.z) の鎖の圧縮行（商と積の冪の展開と $2^{-n}2^n=1$）を開いた。
+  残りは同じブロックの (h1.y)・(h2.z)・(h2.y) の鎖の同じ箇所（`(i/2)^n(2K)^n = ...` / `i^n` 側は補題 2 の前）。
+- **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
 ## 前の tick の記録（1 つ前）
 
