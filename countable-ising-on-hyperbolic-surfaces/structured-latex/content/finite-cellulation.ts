@@ -400,4 +400,66 @@ v_0=v,\qquad v_r=w,\qquad
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_regular_type",
+    kind: "definition",
+    title: { text: "有限セル分割の正則型" },
+    labels: ["def_finite_cellulation_regular_type"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-cellulation-regular-type"],
+    statement: [
+      paragraph([
+        ref("def_oriented_closed_surface_cellulation"),
+        " を満たす有限セル分割と、正整数 ",
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        " に対し、そのセル分割が正則型 ",
+        math(String.raw`\{p,q\}`),
+        " であることを表す述語 ",
+        math(String.raw`\operatorname{RegularType}_{p,q}`),
+        " を次の条件として定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\operatorname{RegularType}_{p,q}
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\Longleftrightarrow\\
+&\quad
+\operatorname{OrientedClosedSurfaceCellulation}
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\ \land\\
+&\quad
+n_f=p
+\qquad\left(\text{任意の }f\in F_{\mathrm{cell}}\text{ に対して}\right)
+\ \land\\
+&\quad
+\lvert C_v\rvert=q
+\qquad\left(\text{任意の }v\in V_{\mathrm{cell}}\text{ に対して}\right).
+\end{aligned}`),
+      paragraph([
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の ",
+        math(String.raw`n_f\in\mathbb N_{>0}`),
+        " は面 ",
+        math(String.raw`f`),
+        " の向き付き境界語に現れる辺の出現位置の個数であり、",
+        ref("def_finite_cellulation_vertex_links_are_cycles"),
+        " の有限集合 ",
+        math(String.raw`C_v`),
+        " は頂点 ",
+        math(String.raw`v`),
+        " に接する角の出現位置の集合である。したがって第一の元数条件は全ての面が ",
+        math(String.raw`p`),
+        " 個の辺出現を持つこと、第二の元数条件は全ての頂点に ",
+        math(String.raw`q`),
+        " 個の角出現が接することを表す。面や辺が境界語の中で反復する場合も、相異なる面や辺の個数へ置き換えず、有限の出現位置を数える。この述語は有限集合の元数と自然数の等号だけで判定でき、実数・複素数・極限・積分を用いない。",
+      ]),
+    ],
+  },
 ]);
