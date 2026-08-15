@@ -71,3 +71,5 @@ import Ising3DCut.NullModel.RootDataDeterminePolynomial
 import Ising3DCut.NecSuf.NullModel.RootDataDeterminePolynomial
 import Ising3DCut.NullModel.RootDataDeterminePolynomialFromNecSuf
 import Ising3DCut.BoundaryResponsePolynomial
+import Ising3DCut.NecSuf.BoundaryResponsePolynomial
+import Ising3DCut.BoundaryResponsePolynomialFromNecSuf

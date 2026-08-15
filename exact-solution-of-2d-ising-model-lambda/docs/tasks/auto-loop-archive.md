@@ -3,6 +3,42 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-15（tick 298）の記録
+
+### 現在地
+
+- **2026-08-15 の tick 298 は、「有理係数の対数順序群の順序の定義と線形順序性」を、対数写像
+  $\log:\mathbb{Q}_{>0}\to\Lambda$ の単射性・全射性、$\Lambda$ の順序、$\Lambda_{\mathbb{Q}}$ の順序の
+  定義と共通分母からの独立性、その線形順序性と加法単調性の五つへ割り、先頭の「正の有理数の対数は
+  単射である」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** $\log q=\log q'$
+  を各素数で読んで $v_p(ab')=v_p(a'b)$ を出し、有限積表示から $ab'=a'b$、有理数の約分で $q=q'$。
+  レビューでは前 tick の分母消去の末尾（整数倍と $\iota$ の交換）が散文だけで検証対応が無かったので、
+  五段の式変形と Lean・SageMath を足して先に push した。式変形統一では姉妹側「$T_{V_1}$ の
+  $\check Z,\check Y$ への作用」で定義の代入と $\exp(X)^{-1}=\exp(-X)$ が一行だったのを二行へ分けた。
+  次は「正の有理数の対数は全射である」。
+
+### 前進の記録
+
+- 2026-08-15（tick 298）: **割り直し**: 「有理係数の対数順序群の順序の定義と線形順序性」は、本文に
+  $\Lambda$ の順序がまだ無く（対数順序群の定義は「順序は必要な箇所で定める」と明記）、$\log$ の全単射性も
+  未記述だったので、$\log$ の単射性／全射性／$\Lambda$ の順序／$\Lambda_{\mathbb{Q}}$ の順序の定義と共通分母
+  独立性／線形順序性と加法単調性の五つへ割った（各々一つの論法）。先頭 `claim_rational_log_injective` を
+  章「有限系の自由エントロピー」の「対数の冪の法則」の直後に置き四層で閉じた。SageMath
+  `rational-log-injective` は 6561 件を `ZZ`/`QQ` で厳密に。Lean 具体版
+  `FreeEntropy/RationalLogInjective.lean`（`primeExponent_cross_eq`・`nat_eq_of_primeExponent_eq`・
+  `logRat_injective_of_pos`）、必要十分版 `cross_mul_eq_of_pointwise_sub_eq_necSuf`（可換群値の
+  加法的写像の族が数を分離することだけ。素数・素因数分解・$\mathbb{Z}$ 値は不要）、導出版。sorry 検査 1078 件。
+  式変形統一では姉妹側 `evensectorT_005_claim_T_actions` の $T_{V_1}$ 二本の鎖で定義の代入と
+  $\exp(X)^{-1}=\exp(-X)$ を二行へ分けた。
+
+### レビュー記録
+
+- 2026-08-15（tick 298）: 前 tick の「有限系の密度の分母は整数倍で払える」で、末尾の
+  $M^2\cdot\iota(\lambda)=\iota(M^2\lambda)$ を「加法保存と反復加法」という散文で済ませていて、
+  SageMath にも Lean にも対応が無かった。各素数での値の等号として五段の式変形へ書き直し
+  （有理数倍の定義→$\iota$ の定義→分母 1 の積→$\Lambda$ の整数倍の定義→$\iota$ の定義）、
+  Lean `toRational_intSmul` と SageMath の交換の検査（768 件）を足した。
+
 ## 2026-08-15（tick 295）の記録
 
 ### 現在地

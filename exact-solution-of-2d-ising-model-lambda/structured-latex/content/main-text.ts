@@ -36280,6 +36280,170 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
   },
 
   {
+    id: "thermodynamic_limit_def_common_denominator",
+    kind: "definition",
+    title: { text: "有理係数の対数順序群の元の共通分母" },
+    labels: ["def_common_denominator"],
+    habitat: "Lambda",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.IsCommonDenominator",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_unique",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`\lambda\in\Lambda_{\mathbb{Q}}`),
+        "（",
+        ref("def_rational_log_order_group"),
+        "）と ",
+        math(String.raw`N\in\mathbb{N}`),
+        "、",
+        math(String.raw`N\ge1`),
+        " について、",
+        math(String.raw`N`),
+        " が ",
+        math(String.raw`\lambda`),
+        " の共通分母であるとは、",
+        math(String.raw`\lambda_N\in\Lambda`),
+        "（",
+        ref("def_log_order_group"),
+        "）で",
+      ]),
+      displayMath(String.raw`N\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)`),
+      paragraph([
+        "を満たすものが存在することをいう（左辺は ",
+        ref("def_rational_log_order_group"),
+        " の有理数倍で、",
+        math(String.raw`N`),
+        " を分母 ",
+        math(String.raw`1`),
+        " の有理数として読む）。",
+        "このような ",
+        math(String.raw`\lambda_N`),
+        " は存在すれば一つしかない。実際 ",
+        math(String.raw`\lambda_N,\lambda_N'\in\Lambda`),
+        " がともに上の等式を満たせば ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)=N\cdot\lambda
+=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N')`),
+        " であり、",
+        ref("claim_rational_log_order_group_embedding"),
+        " の単射性から ",
+        math(String.raw`\lambda_N=\lambda_N'`),
+        " である。以後、",
+        math(String.raw`N`),
+        " が ",
+        math(String.raw`\lambda`),
+        " の共通分母であるとき、この一意な元を ",
+        math(String.raw`\lambda_N`),
+        " と書く（",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の元に正整数を下付きに添えた記号はこの意味に限る）。",
+      ]),
+      paragraph([
+        "共通分母がすべての ",
+        math(String.raw`\lambda\in\Lambda_{\mathbb{Q}}`),
+        " に存在すること（値の分母の積が共通分母になること）は次のセクションで示す。",
+        "ここでは定義と一意性だけを述べる。実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_common_denominator_order_independent",
+    kind: "claim",
+    title: { text: "共通分母を通した順序の判定は共通分母の取り方によらない" },
+    labels: ["claim_common_denominator_order_independent"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/common-denominator-order-independent"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_cross_smul",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_order_independent",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.cross_multiple_order_independent_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_order_independent_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`\lambda,\mu\in\Lambda_{\mathbb{Q}}`),
+        " とし、",
+        math(String.raw`N,N'\in\mathbb{N}`),
+        "、",
+        math(String.raw`N\ge1`),
+        "、",
+        math(String.raw`N'\ge1`),
+        " がともに ",
+        math(String.raw`\lambda`),
+        " と ",
+        math(String.raw`\mu`),
+        " の両方の共通分母である（",
+        ref("def_common_denominator"),
+        "）とする。このとき",
+      ]),
+      displayMath(String.raw`\lambda_N\le_{\Lambda}\mu_N
+\quad\Longleftrightarrow\quad
+\lambda_{N'}\le_{\Lambda}\mu_{N'}`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\le_{\Lambda}`),
+        " は ",
+        ref("def_log_order_group_order"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "先に、",
+        math(String.raw`\lambda`),
+        " について ",
+        math(String.raw`N'\lambda_N=N\lambda_{N'}`),
+        "（両辺は ",
+        ref("def_log_order_group"),
+        " の整数倍）を示す。",
+        ref("claim_rational_log_order_group_embedding"),
+        " の単射性により、両辺を ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " で送った先が等しいことを示せばよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N'\lambda_N)
+&=N'\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
+&&(\because\ \blkref{claim_scaled_free_entropy_denominator_clearing}\text{ の }n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu))\\
+&=N'\cdot(N\cdot\lambda)
+&&(\because\ N\text{ は }\lambda\text{ の共通分母。}\blkref{def_common_denominator})\\
+&=(N'N)\cdot\lambda
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=(NN')\cdot\lambda
+&&(\because\ \mathbb{Q}\text{ の積の可換性})\\
+&=N\cdot(N'\cdot\lambda)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=N\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_{N'})
+&&(\because\ N'\text{ は }\lambda\text{ の共通分母。}\blkref{def_common_denominator})\\
+&=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N\lambda_{N'})
+&&(\because\ \blkref{claim_scaled_free_entropy_denominator_clearing}\text{ の }n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu))
+\end{aligned}`),
+      paragraph([
+        "同じ計算を ",
+        math(String.raw`\mu`),
+        " に施して ",
+        math(String.raw`N'\mu_N=N\mu_{N'}`),
+        " を得る。主張は同値の鎖で示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_N\le_{\Lambda}\mu_N
+&\iff N'\lambda_N\le_{\Lambda}N'\mu_N
+&&(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{、}N'\ge1)\\
+&\iff N\lambda_{N'}\le_{\Lambda}N\mu_{N'}
+&&(\because\ N'\lambda_N=N\lambda_{N'},\ N'\mu_N=N\mu_{N'}\text{（上の準備）})\\
+&\iff \lambda_{N'}\le_{\Lambda}\mu_{N'}
+&&(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{、}N\ge1)
+\end{aligned}`),
+      paragraph([
+        "使ったのは有理数倍の結合則、整数倍と ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " の交換、その単射性、および対数順序群の順序の正整数倍不変性だけである。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },
