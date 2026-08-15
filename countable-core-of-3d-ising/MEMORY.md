@@ -4,7 +4,11 @@
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) も読む。
 
-## 直近（2026-08-16 07:45 tick）
+## 直近（2026-08-16 08:00 tick）
+
+レビューのみ（07:45 tick と同内容）（検査 71 ブロック・SageMath 対応 17 件・sorry 検査 99 件・立場違反語走査・PDF 19 ページに不備なし）。開始が遅く「境界応答多項式は外箱に依存しない」の記述は未着手。次の tick はその記述を行う。
+
+## 07:45 tick
 
 レビューのみ（07:30 tick と同内容）（検査 71 ブロック・SageMath 対応 17 件・sorry 検査 99 件・立場違反語走査・PDF 19 ページに不備なし）。開始が遅く「境界応答多項式は外箱に依存しない」の記述は未着手。次の tick はその記述を行う。
 
