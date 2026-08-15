@@ -2,7 +2,7 @@
 人手証明「有理係数の対数順序群の順序は線形順序である」（`claim_rational_log_order_group_linear_order`）の具体版。
 
 四つとも、`λ, μ, ν` の三つに共通の共通分母 `N := N_λ N_μ N_ν`（`claim_common_denominator_multiple` を
-二度）を取り、順序の定義を「すべての両方の共通分母で」の形（`rationalLogOrderLE_iff_forall`）で読んで
+各元について一度ずつ、計三度）を取り、順序の定義を「すべての両方の共通分母で」の形（`rationalLogOrderLE_iff_forall`）で読んで
 `Λ` の順序の同じ名前の性質（`claim_log_order_group_linear_order`）へ落とす。反対称律だけは、
 `λ_N = μ_N` から `N·λ = ι(λ_N) = ι(μ_N) = N·μ` を経て `N⁻¹` 倍で `λ = μ` へ戻す一段を要する。
 住処は ℕ・ℤ・ℚ・Λ・Λ_ℚ のみで、ℝ / ℂ は現れない。
