@@ -391,6 +391,7 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
 &= \sum_{\mu=1}^{M} e^{i\frac{2\pi\mu k}{M}}\,e^{-i\frac{\pi k}{M}}
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= e^{-i\frac{\pi k}{M}}\sum_{\mu=1}^{M} e^{\frac{2\pi i \mu k}{M}}
+   \quad (\because \text{有限和から }\mu\text{ に依らない因子をくくり出す（分配律）})
 \end{aligned}`,
       ),
       paragraph([
@@ -422,7 +423,8 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
 e^{-i\frac{\pi k}{M}}
 &= e^{-i\frac{\pi l M}{M}}
    \quad (\because k = lM) \\
-&= e^{-i\pi l} \\
+&= e^{-i\pi l}
+   \quad (\because M\ge 2\text{ なので }M\ne0\text{、分数の約分}) \\
 &= \cos(\pi l) - i\sin(\pi l)
    \quad (\because \text{euler\_formula\_cos\_sin}) \\
 &= (-1)^{l}

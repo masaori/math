@@ -37642,6 +37642,143 @@ Z^{\mathrm{op}}_{(k+1)a,b}(t)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_rectangle_iterated_gluing_second",
+    kind: "claim",
+    title: { text: "開境界長方形を第二座標方向へ反復接合した値の評価" },
+    labels: ["claim_open_rectangle_iterated_gluing_second"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した開境界分配多項式を、実数の順序で比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限積だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-rectangle-iterated-gluing-second"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る。開境界長方形を第二座標方向へ同じ大きさで ",
+        math(String.raw`k`),
+        " 個接ぐと、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<_{\mathbb{R}}t\le_{\mathbb{R}}1:&
+t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a,kb}(t)
+\le_{\mathbb{R}}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k,\\[2mm]
+1\le_{\mathbb{R}}t:&
+\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{a,kb}(t)
+\le_{\mathbb{R}}t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k.
+\end{array}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+        math(String.raw`k=1`),
+        " のときは",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t^{(1-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^1
+&=t^0\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^1
+&&\bigl(\because (1-1)a=0\bigr)\\
+&=1\cdot\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^1
+&&\bigl(\because t^0=1\bigr)\\
+&=\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^1
+&&\bigl(\because\ \text{積の単位元}\bigr)\\
+&=Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because u^1=u\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、二場合の左右の評価はいずれも等号で成り立つ。",
+        math(String.raw`k\ge1`),
+        " で主張が成り立つと仮定する。まず ",
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " とする。接合不等式（",
+        ref("claim_open_rectangle_gluing_inequality"),
+        "）を第二座標の長さが ",
+        math(String.raw`kb`),
+        " と ",
+        math(String.raw`b`),
+        " の二長方形へ適用し、帰納法の仮定を掛けると、下からの評価は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t^{((k+1)-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&=t^{ka}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because (k+1)-1=k\bigr)\\
+&=t^{a+(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because ka=a+(k-1)a\bigr)\\
+&=t^a t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=t^a t^{(k-1)a}\!\left(\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k
+  Z^{\mathrm{op}}_{a,b}(t)\right)
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=t^a\!\left(t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k\right)
+  Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \text{実数の積の結合則}\bigr)\\
+&\le_{\mathbb{R}}t^a Z^{\mathrm{op}}_{a,kb}(t)Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,(k+1)b}(t)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality}\bigr)
+\end{aligned}`),
+      paragraph(["となり、上からの評価は"]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a,(k+1)b}(t)
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,kb}(t)Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality}\bigr)\\
+&\le_{\mathbb{R}}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^kZ^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&=\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となる。次に ",
+        math(String.raw`1\le_{\mathbb{R}}t`),
+        " とする。同じ接合不等式と帰納法の仮定により、下からの評価は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&=\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^kZ^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,kb}(t)Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,(k+1)b}(t)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality}\bigr)
+\end{aligned}`),
+      paragraph(["となり、上からの評価は"]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a,(k+1)b}(t)
+&\le_{\mathbb{R}}t^a Z^{\mathrm{op}}_{a,kb}(t)Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality}\bigr)\\
+&\le_{\mathbb{R}}t^a\!\left(t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k\right)
+  Z^{\mathrm{op}}_{a,b}(t)
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&=t^a t^{(k-1)a}\!\left(\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^k
+  Z^{\mathrm{op}}_{a,b}(t)\right)
+&&\bigl(\because\ \text{実数の積の結合則}\bigr)\\
+&=t^a t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=t^{a+(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=t^{ka}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because a+(k-1)a=ka\bigr)\\
+&=t^{((k+1)-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(t)\bigr)^{k+1}
+&&\bigl(\because k=(k+1)-1\bigr)
+\end{aligned}`),
+      paragraph(["したがって帰納法により、任意の ", math(String.raw`k\ge1`), " で主張が成り立つ。"]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_claim_periodic_open_boundary_comparison",
     kind: "claim",
     title: { text: "周期境界と開境界の境界評価" },
