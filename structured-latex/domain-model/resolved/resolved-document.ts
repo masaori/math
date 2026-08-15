@@ -49,7 +49,7 @@ export type ResolvedRef = {
  *
  * **本文から消さずに残す**ための種別である。`resolveTolerantly` だけが作り、
  * `resolve`（厳格）は 1 件でもあれば文書自体を返さないので、出版物の出力器はこれを受け取らない。
- * 執筆中の画面は、これを「壊れている箇所」として明示的に描画する（live-preview の要件 F-9）。
+ * 執筆支援画面は、これを「壊れている箇所」として明示的に描画する。
  */
 export type UnresolvedRef = {
   type: 'unresolvedRef'

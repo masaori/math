@@ -235,7 +235,7 @@ const { desktopHtml, mobileHtml } = renderChapterNavigation(toc);
 const html = `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2値セルオートマトンの内在構造 — 局所規則から生じる数学の抽出</title>
+<title>2次元 Ising 模型の厳密解</title>
 <style>${katexCss()}</style>
 <style>
 :root { color-scheme: light dark; --fg:#1a1a1a; --bg:#fff; --muted:#666; --line:#dcdcdc; --panel:#f7f7f7; --accent:#9b3e28; }
@@ -267,7 +267,7 @@ ${mobileHtml}
 <div class="page-layout">
 ${desktopHtml}
 <main class="document">
-<h1>2値セルオートマトンの内在構造 — 局所規則から生じる数学の抽出</h1>
+<h1>2次元 Ising 模型の厳密解</h1>
 <p class="version">${escapeHtml(versionLine())}</p>
 ${body.join("\n")}
 <script>${readFileSync(join(katexDist, "katex.min.js"), "utf8")}</script>

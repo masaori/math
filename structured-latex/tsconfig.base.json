@@ -1,6 +1,5 @@
 {
-  // 型検査の水準の**正本**。このシステム自身（tsconfig.json）と、その上に載るモジュール
-  // （live-preview/backend, live-preview/frontend）と、システムを使う各プロジェクトの
+  // 型検査の水準の**正本**。このシステム自身（tsconfig.json）と、システムを使う各プロジェクトの
   // 構造化テキスト（<project>/structured-latex/tsconfig.json）が、すべてこれを継承する。
   // 水準を 1 か所に置くのは、同じ strict の宣言を複数箇所で二重管理しないためである。
   //
@@ -23,7 +22,7 @@
     // （Node 22.18+ の型ストリップでそのまま実行するため）。それを読む側にも同じ許可が要る。
     "allowImportingTsExtensions": true,
     // 上の許可は `noEmit` かこれのどちらかが無いと使えない。emit する利用者
-    // （live-preview/backend は dist を出す）が `.ts` を含むシステムを import できるように、
+    // 将来の emit を行う利用者も `.ts` を含むシステムを import できるように、
     // 「emit 時は `.ts` → `.js` へ書き換える」こちらを既定にしておく。
     // noEmit の利用者（システム自身・各プロジェクトの構造化テキスト）では単に働かない。
     "rewriteRelativeImportExtensions": true

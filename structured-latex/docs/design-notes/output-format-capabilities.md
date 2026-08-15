@@ -21,8 +21,7 @@ LaTeX にできて Web にできないこと（採番・改ページ）と、そ
 
 正本のモデルは新規に発明しない。先行 2 実装の入力契約を一般化する（`structured-latex-renderer/README.md`
 「関連する既存実装」、`docs/milestones.md` M2）。一次情報は次のとおり
-（**執筆当時の場所**を残す。リアルタイムプレビューはその後システム内へ吸収され、
-`realtime-web-preview/` は現存しない。現在地を各項に併記する）。
+（**執筆当時の場所**を残す。旧Webビューアはその後廃止され、現在は git 履歴にだけ残る）。
 
 - 正本のスキーマ（意味ノードの閉じた集合）:
   `exact-solution-of-2d-ising-model/structured-latex/schema.ts`、
@@ -34,10 +33,9 @@ LaTeX にできて Web にできないこと（採番・改ページ）と、そ
 - Web レンダラの実装:
   当時の `realtime-web-preview/frontend/src/pages/document-view/ui/nodes.tsx`、`.../ref-resolver.ts`、
   ノート配置 `realtime-web-preview/domain-model/src/block.ts` の `placeNotes`
-  → 描画は `structured-latex/live-preview/frontend/src/pages/document-view/ui/nodes.tsx` へ移設。
+  → 現在のWeb描画は各論文の `structured-latex/tools/build-html.ts`。
   参照解決とノート配置は**ビューアから消え**、`structured-latex/domain-model/resolved/resolve.ts` に一本化。
-- Web 要件: 当時の `realtime-web-preview/docs/requirements.md`
-  → 現在は `structured-latex/live-preview/docs/requirements.md`。
+- Web 要件: 当時の `realtime-web-preview/docs/requirements.md`（現在は git 履歴のみ）。
 
 **媒体は 2 種類に分かれる**。この軸が能力差の大半を説明する。
 

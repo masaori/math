@@ -14,17 +14,16 @@
 そこで既に決まっている事柄を §1 に列挙したうえで、その上に載せている。
 
 > **旧パスの読み替え。** 上記の `realtime-web-preview/`（リポジトリ直下の独立アプリ）は、
-> その後システム内のモジュール `structured-latex/live-preview/` へ吸収され、**現存しない**。
+> その後一度システム内へ吸収されたが、2026-08-15 に廃止・削除された。
 > 本ドキュメントで `realtime-web-preview/...` と書かれているものは、
-> **当時そこにあった**という歴史の記録である（無かったことにはしない）。現在の対応先は次のとおり。
+> **当時そこにあった**という歴史の記録である（無かったことにはしない）。残した機能の対応先は次のとおり。
 >
 > | 当時の場所 | 現在 |
 > |---|---|
-> | `realtime-web-preview/backend/`, `frontend/` | `structured-latex/live-preview/backend/`, `frontend/` |
-> | `realtime-web-preview/docs/` | `structured-latex/live-preview/docs/` |
+> | `realtime-web-preview/backend/`, `frontend/`, `docs/` | 廃止。必要な履歴は git に残る |
 > | `realtime-web-preview/domain-model/src/block.ts`（言語の 3 度目の定義。撤去直前は `structured-text.ts` に改名されていた） | 廃止。`structured-latex/domain-model/structured-text/` に一本化 |
 > | `realtime-web-preview/domain-model/src/note-placement.ts`, `frontend/src/pages/document-view/ui/ref-resolver.ts`（独自の解決） | 廃止。`structured-latex/domain-model/resolved/resolve.ts` の `resolveTolerantly` に一本化（**F9 は解消済み**） |
-> | `realtime-web-preview/domain-model/src/api-contract.ts` | `structured-latex/domain-model/api-contract/live-preview.ts` |
+> | `realtime-web-preview/domain-model/src/api-contract.ts` | 専用アプリとともに廃止。公開サイト契約は `structured-latex/domain-model/api-contract/live-site.ts` |
 
 個別の設計判断の詳細な根拠は `docs/design-notes/` に分けてある。
 本ドキュメントには結論と、モデルに効く部分だけを書く。
@@ -74,14 +73,14 @@
 | F7 | 生成は**検査つきで落ちる**: 未解決参照ゼロ、ラベル重複なし、フォントに無い文字ゼロ、版面外へ出た行ゼロ。1 件でもあれば生成を中止する | `structured-latex/tools/build-latex.ts` |
 | F8 | 同じ土台のスキーマが 2 プロジェクトで**複製**され、片方だけがブロックのメタデータを増やした（`habitat` / `realEscape` / `verification` / `lean`）。共有できるのはスキーマとツールだけで、生成物は各プロジェクトの `content/` に強く結びつく | `integrable-lattice/structured-latex/README.md`、同 `schema.ts` |
 | F9 | **ラベル → ブロックの解決ロジックが 2 度、独立に実装されている。** LaTeX 生成器の `labelOwner` と、Web ビューアの `buildLabelIndex` / `ref-resolver.ts`<br>→ **解消済み**（プレビューをシステムへ吸収した時点）。Web 側の解決は削除し、`domain-model/resolved/resolve.ts` の `resolveTolerantly` 1 つに一本化した。LaTeX 生成器を寄せるのは M3 で残っている | 当時: `structured-latex/tools/build-latex.ts`、`realtime-web-preview/domain-model/src/block.ts`、`realtime-web-preview/frontend/src/pages/document-view/ui/ref-resolver.ts`<br>現在: `structured-latex/domain-model/resolved/resolve.ts` |
-| F10 | 既存のリアルタイム機構は `fs.watch` → SSE で `reload` を push → クライアントが**全文書を再取得**。差分は送らない（現在も同じ方式） | 当時: `realtime-web-preview/docs/architecture.md` §5、`backend/src/entrypoint/handlers/events-handler.ts`、`frontend/src/pages/document-view/fetch/use-document.ts`<br>現在: `structured-latex/live-preview/docs/architecture.md`、同 `backend/src/entrypoint/handlers/events-handler.ts`、`frontend/src/pages/document-view/fetch/use-document.ts` |
-| F11 | プレビューは「所有 entity を永続化しない」ため repository を持たず gateway だけで構成されている（現在も同じ） | 当時: `realtime-web-preview/docs/architecture.md` §1, §5<br>現在: `structured-latex/live-preview/docs/architecture.md` |
+| F10 | 旧Webビューアのリアルタイム機構は `fs.watch` → SSE で `reload` を push → クライアントが**全文書を再取得**し、差分は送らなかった | 当時: `realtime-web-preview/docs/architecture.md` §5、`backend/src/entrypoint/handlers/events-handler.ts`、`frontend/src/pages/document-view/fetch/use-document.ts`（現在は git 履歴のみ） |
+| F11 | 旧Webビューアは「所有 entity を永続化しない」ため repository を持たず gateway だけで構成されていた | 当時: `realtime-web-preview/docs/architecture.md` §1, §5（現在は git 履歴のみ） |
 
 F9 は本プロジェクトの存在理由そのものである。**同じ解決ロジックが出力形式の数だけ増える**のを止めることが、
 エントロピー最小化（[programming-philosophy.md](./programming-philosophy.md)）の具体的な適用先になる。
 
-> **F9 の現況**（2026-08-01）: Web 側の重複は消えた。プレビューをシステムへ吸収した際に
-> ビューア独自の解決を削除し、`domain-model/resolved/resolve.ts` 1 つへ寄せた
+> **F9 の現況**（2026-08-15）: Web 側の重複は消えた。旧ビューア独自の解決を削除し、
+> `domain-model/resolved/resolve.ts` 1 つへ寄せた
 > （厳格な `resolve` と寛容な `resolveTolerantly` が同じ実装を通る）。
 > **残っているのは LaTeX 側**で、各プロジェクトの `structured-latex/tools/build-latex.ts` が
 > いまも自前の `labelOwner` を持つ。これを解決済み文書へ寄せるのは M3 の作業である。
@@ -104,7 +103,7 @@ F8 は「スキーマをそのまま共有すると足りない」ことの一�
 | **参照用ノート** Note | 文書本体ではない補足。ラベルで本文に紐づく。**出版物には載らない** | `notes/*.ts` の `Note` |
 | **版** Revision | ある時点の文書全体の確定スナップショット。単調増加する番号を持つ | （先行実装に対応物なし。本プロジェクトで導入） |
 | **解決済み文書** ResolvedDocument | 採番・参照・ノート配置を解決し終えた、**出力形式に中立**な中間表現 | （F9 が 2 度書いたものを 1 つにしたもの） |
-| **出力ターゲット** RenderTarget | 純粋 LaTeX / PDF / Web / 書籍形式 | `build-latex.ts` の出力、`live-preview` の画面 |
+| **出力ターゲット** RenderTarget | 純粋 LaTeX / PDF / Web / 書籍形式 | `build-latex.ts`、`build-html.ts` の出力 |
 | **テーマ** Theme | 解決済み文書を出力へ写すときの体裁の宣言。**利用者が差し替える** | `build-latex.ts` のプリアンブル等がハードコードしている部分 |
 | **成果物** Artifact | ある版・あるターゲット・あるテーマから生成された出力 | `build/document.tex`, `build/document.pdf` |
 | **購読** Subscription | 公開サイトを閲覧中のクライアント 1 接続 | SSE 接続 |
@@ -750,7 +749,7 @@ M5（Web 生成）と M7（ホスティング）で決める。正本側の契�
 |---|---|---|
 | **著者** | 構造化テキスト（正本）を書く | 意味。ブロック・ノード・ラベル・ノート、およびプロジェクト固有メタデータの**宣言** |
 | **組み込み開発者** | レンダラーを自分の文書に組み込み、体裁を決める | 体裁。テーマ・レイアウト・採番方針 |
-| **閲覧者** | 公開サイトを読む | 何も開かない（read-only。`live-preview/docs/requirements.md` §3.2 が編集を out of scope と定めている前提を踏襲する） |
+| **閲覧者** | 公開サイトを読む | 何も開かない（静的HTMLは read-only） |
 
 「デザインとレイアウトは利用者側でカスタマイズできる」（`README.md`）の利用者は**組み込み開発者**である。
 
@@ -876,14 +875,13 @@ F8 のメタデータ（`habitat` / `realEscape` / `verification` / `lean`）は
 **文書順の正本はブロック配列の並びである**（F1）。ブロック自身は「自分がどこに入るか」を持っていない。
 したがってブロック単体を送っても挿入位置が決まらず、削除・並べ替えも表現できない。
 ブロック単位にするには、正本に順序フィールド（`order`）を持たせるしかないが、
-それは F1 を書き換えることであり、先行実装 2 つと `live-preview` の前提を同時に壊す。採らない。
+それは F1 を書き換えることであり、先行実装 2 つの前提を同時に壊す。採らない。
 
 ### 9.3 なぜ文書全体ではないか
 
 要件が「構造化テキストを**部分的に**アップロードする」（`README.md`）だからである。
-また `live-preview` の現行方式（全体を読み直す、F10）は、
-ローカル 1 プロセス・単一閲覧者・LAN という前提の下でだけ成り立っている
-（`live-preview/docs/requirements.md` §1, §7）。クラウド公開・複数閲覧者では前提が変わる。
+また旧Webビューアの方式（全体を読み直す、F10）は、ローカル 1 プロセス・単一閲覧者・LAN
+という前提の下でだけ成り立っていた。クラウド公開・複数閲覧者では前提が変わる。
 
 ### 9.4 なぜセグメントか
 
@@ -928,11 +926,11 @@ F8 のメタデータ（`habitat` / `realEscape` / `verification` / `lean`）は
 - 差分を push すると、閲覧者ごとに現在版が違うため、欠落したイベントを回復するには
   差分の履歴をサーバが保持しなければならない。保持すべき状態が増える＝エントロピーが増える。
   無効化通知なら、サーバが持つのは「最新版番号」と「版ごとのセグメント別ハッシュ」だけで済む。
-- 通知の形は `live-preview` の SSE `reload`（F10）と同型であり、既に動いている方式を保つ。
+- 通知の形は旧Webビューアの SSE `reload`（F10）と同型である。
 - 閲覧者は常に「ある版の文書全体」を見る。**版をまたいで混ざった状態を持たない**ので、
   収束の判定が「自分の版 < 通知された版なら取り直す」だけで済む。
 
-**取得の粒度はモデルの決定事項ではない。** 既定は文書全体の再取得（`live-preview` と同じ）
+**取得の粒度はモデルの決定事項ではない。** 既定は文書全体の再取得（旧Webビューアと同じ）
 とする。マニフェストがセグメント別の内容ハッシュを持つので、
 「変わったセグメントだけ取る」差分 pull へ後から移せるが、これは帯域の最適化であって
 更新の単位（§9.1）も収束の保証（§9.6）も変えない。差分 pull にしても

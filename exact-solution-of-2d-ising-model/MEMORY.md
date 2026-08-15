@@ -1,5 +1,12 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-08-15: 構造化LaTeXから直接生成する静的HTMLを追加
+
+`structured-latex/tools/build-html.ts` と `build:html` を追加し、本文の正本 `content/` だけから
+自己完結HTMLを生成できるようにした。既定UIはシステム側の `renderers/html/` を使い、PCでは
+現在位置を示す追従型の章ツリー、モバイルでは最上位章だけの追従型横タブを表示する。
+参照用 `notes/` は出版HTMLへ混入しない。
+
 ## 2026-08-11: 式変形の書き方の統一
 
 2026-08-15 の ising-lambda tick 272 は、`014_even_sector_T_action` の

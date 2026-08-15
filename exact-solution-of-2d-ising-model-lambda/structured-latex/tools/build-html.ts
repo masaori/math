@@ -23,6 +23,11 @@ import { spawnSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 
+import {
+  CHAPTER_NAVIGATION_CSS,
+  CHAPTER_NAVIGATION_SCRIPT,
+  renderChapterNavigation,
+} from "../../../structured-latex/renderers/html/chapter-navigation.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
@@ -225,12 +230,7 @@ function katexCss(): string {
   }).replace(/,\s*;/g, ";");
 }
 
-const tocHtml = toc
-  .map(
-    (entry) =>
-      `<li class="toc${entry.level}"><a href="#${entry.id}">${entry.number === "" ? "" : `${entry.number}　`}${entry.title}</a></li>`,
-  )
-  .join("");
+const { desktopHtml, mobileHtml } = renderChapterNavigation(toc);
 
 const html = `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8">
@@ -238,20 +238,15 @@ const html = `<!doctype html>
 <title>2次元 Ising 模型の厳密解 — Λ と Fisher 零点の立場から</title>
 <style>${katexCss()}</style>
 <style>
-:root { color-scheme: light dark; --fg:#1a1a1a; --bg:#fff; --muted:#666; --line:#dcdcdc; --panel:#f7f7f7; }
-@media (prefers-color-scheme: dark) { :root { --fg:#e6e6e6; --bg:#151515; --muted:#9a9a9a; --line:#333; --panel:#1e1e1e; } }
-body { margin:0 auto; padding:32px 20px 96px; max-width:860px; background:var(--bg); color:var(--fg);
+:root { color-scheme: light dark; --fg:#1a1a1a; --bg:#fff; --muted:#666; --line:#dcdcdc; --panel:#f7f7f7; --accent:#9b3e28; }
+@media (prefers-color-scheme: dark) { :root { --fg:#e6e6e6; --bg:#151515; --muted:#9a9a9a; --line:#333; --panel:#1e1e1e; --accent:#e58d72; } }
+body { margin:0; background:var(--bg); color:var(--fg);
   font-family:-apple-system,"Hiragino Mincho ProN","Noto Serif JP",serif; line-height:1.9; }
 h1 { font-size:1.6rem; line-height:1.5; margin:0 0 6px; }
 .version { color:var(--muted); font-size:.85rem; margin:0 0 32px; }
 h2,h3,h4,h5,h6 { line-height:1.5; margin:44px 0 12px; }
 h2 { font-size:1.3rem; border-bottom:1px solid var(--line); padding-bottom:6px; }
 h3 { font-size:1.1rem; } h4,h5,h6 { font-size:1rem; }
-nav { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 18px; margin-bottom:40px; }
-nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
-nav li { margin:2px 0; } nav a { color:var(--fg); text-decoration:none; }
-nav a:hover { text-decoration:underline; }
-.toc1 { font-weight:600; margin-top:10px; } .toc2 { padding-left:1em; } .toc3 { padding-left:2.2em; color:var(--muted); }
 .block { margin:22px 0; }
 .block .head { font-weight:600; }
 .definition .head, .claim .head, .theorem .head, .remark .head, .note .head { color:var(--fg); }
@@ -266,10 +261,14 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .todo { color:#b26a00; }
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
+${CHAPTER_NAVIGATION_CSS}
 </style></head><body>
+${mobileHtml}
+<div class="page-layout">
+${desktopHtml}
+<main class="document">
 <h1>2次元 Ising 模型の厳密解 — <span class="math" data-tex="\\Lambda"></span> と Fisher 零点の立場から</h1>
 <p class="version">${escapeHtml(versionLine())}</p>
-<nav><ul>${tocHtml}</ul></nav>
 ${body.join("\n")}
 <script>${readFileSync(join(katexDist, "katex.min.js"), "utf8")}</script>
 <script>
@@ -310,9 +309,11 @@ ${body.join("\n")}
   window.addEventListener("hashchange", function () { renderAround(location.hash.slice(1)); });
   if (location.hash !== "") { renderAround(location.hash.slice(1)); }
 })();
+${CHAPTER_NAVIGATION_SCRIPT}
 </script>
 <footer>証明の正本はリポジトリの <code>structured-latex/content/</code> であり、このページはそこから生成している。
 自動ループが前進するたびに作り直す。</footer>
+</main></div>
 </body></html>
 `;
 

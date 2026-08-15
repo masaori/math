@@ -7,8 +7,8 @@ on:
     paths:
       - 'exact-solution-of-2d-ising-model/structured-latex/**'
       - 'exact-solution-of-2d-ising-model/sagemath/**'
-      # 入力言語の正本・生成器・共有コンパイラ設定（tsconfig.base.json）・
-      # ライブプレビューは、すべてシステム側にある（証明はこれを使う側）。
+      # 入力言語の正本・生成器・共有HTMLレンダラーはシステム側にある
+      # （証明はこれを使う側）。
       - 'structured-latex/**'
       - '.github/workflows/structured-latex-check.yml'
   pull_request:
@@ -39,29 +39,3 @@ jobs:
       - name: verify check linkage (sagemath ↔ proof)
         working-directory: exact-solution-of-2d-ising-model
         run: node sagemath/tools/verify-check-linkage.ts
-
-  # システムの上に載るライブプレビュー。ここが壊れたら CI で気づけるようにする。
-  # （型検査だけでなくビルドも回す: backend は dist を出し、frontend は Vite で束ねるため、
-  #  型が通ってもモジュール解決やバンドルで落ちる経路が別に残る。）
-  live-preview:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: structured-latex/live-preview
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          # システムの .ts を型ストリップで直接読むため 22.18 以上が要る。
-          node-version: '22'
-      # プレビューはシステムの .ts を直接読むので、システム側の依存（zod）も要る。
-      - name: Install system dependencies (structured-latex)
-        working-directory: structured-latex
-        run: pnpm install --frozen-lockfile
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm build

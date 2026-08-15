@@ -14,8 +14,6 @@
     // （`.ts` 拡張子つき import の許可は base 側にある。）
     "noEmit": true
   },
-  // live-preview はこのシステムの上に載るモジュールで、自分の tsconfig（と workspace）を持つ。
-  // ここから検査するとブラウザ向けの lib / bundler 解決まで抱え込むことになるため含めない。
-  "include": ["domain-model", "codegen", "examples", "tools"],
-  "exclude": ["node_modules", "tools/.tmp", "live-preview"]
+  "include": ["domain-model", "codegen", "examples", "renderers", "tools"],
+  "exclude": ["node_modules", "tools/.tmp"]
 }

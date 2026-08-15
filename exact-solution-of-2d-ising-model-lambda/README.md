@@ -205,9 +205,8 @@ node sagemath/tools/verify-check-linkage.ts   # 検証 ↔ 証明の対応
 (cd lean && lake build && bash scripts/check-no-sorry.sh)
 ```
 
-閲覧（リポジトリ直下のビューアをこのプロジェクトへ向ける）:
+閲覧用HTML（このプロジェクトの `content/` から直接生成）:
 
 ```sh
-(cd structured-latex/live-preview && \
-  LIVE_PREVIEW_SOURCE_DIR=../../exact-solution-of-2d-ising-model-lambda/structured-latex/content pnpm start)
+(cd structured-latex && npm run build:html)
 ```

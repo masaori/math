@@ -1,6 +1,0 @@
-# live-preview は structured-latex システムの上に載るモジュールで、独立した pnpm workspace を持つ。
-# システム本体（../）は workspace のメンバーではなく、各パッケージが `link:../..` で参照する
-# 外部の依存として扱う（依存方向: システム ← live-preview を保つため）。
-packages:
-  - 'backend'
-  - 'frontend'

@@ -145,9 +145,7 @@ export type {
   UnresolvedRef,
 } from './resolved/resolved-document.ts'
 
-// --- L2: 配信と受け入れの契約 ------------------------------------------------
-// 公開サイト（アップロードして版を配信する）と、ローカルのライブプレビュー（FS を読むだけ）は
-// 別の契約である。統合しない理由は api-contract/live-preview.ts の冒頭に表で書いてある。
+// --- L2: 公開サイトの配信と受け入れの契約 ------------------------------------
 export type {
   DocumentManifest,
   GetFragmentError,
@@ -165,24 +163,3 @@ export type {
 export {
   parseGetLocalizedManifestInput,
 } from './api-contract/live-site.ts'
-
-export {
-  PREVIEW_RELOAD_EVENT,
-  createLivePreviewRuntimeSchema,
-  errorResponseSchema,
-  localizedErrorResponseSchema,
-  localizedLoadDocumentErrorSchema,
-  loadDocumentErrorSchema,
-  parseDocumentResponse,
-  parseLoadLocalizedDocumentInput,
-  parseLocalizedDocumentResponse,
-  validationIssueSchema,
-  type DocumentResponseBody,
-  type ErrorResponseBody,
-  type LoadLocalizedDocumentError,
-  type LoadLocalizedDocumentInput,
-  type LoadDocumentError,
-  type LoadDocumentErrorCode,
-  type LocalizedDocumentResponseBody,
-  type LocalizedErrorResponseBody,
-} from './api-contract/live-preview.ts'
