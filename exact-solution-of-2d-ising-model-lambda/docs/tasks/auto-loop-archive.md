@@ -10473,3 +10473,34 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 現在地: 「有理係数の対数順序群の順序」を二つの論法へ割り、先頭の「有限系の密度の分母消去」を四層で閉じた。
 - 前進の記録: 「$\Lambda\otimes\mathbb{Q}$ の順序」を分母を払う係数計算と、共通分母から順序を定義して線形順序性を示す論法へ二分割。`claim_scaled_free_entropy_denominator_clearing` を四層で閉じた（SageMath 384 件、Lean `scaledFreeEntropy_clear_denominator`・`two_scaled_denominators_cancel_necSuf`・導出版）。式変形統一では姉妹側 `evensectorT_006_claim_linearity_of_T` が規則どおりであることを確認。
 - レビュー記録: 前 tick の有理係数の対数順序群の本文・SageMath・Lean・入口 import・sorry 検査登録を突き合わせ、修正無し。
+
+## tick 311 で台帳から移した記録（tick 306）
+
+### 現在地
+
+- **2026-08-16 の tick 306 は、「有理係数の対数順序群の順序の定義」を本文・SageMath・Lean（具体版・
+  必要十分版・導出版）まで完成させた。** $\lambda\le_{\Lambda_{\mathbb Q}}\mu$ を「両方の共通分母 $N\ge1$ で
+  $\lambda_N\le_\Lambda\mu_N$ となるものが在る」と定め（`def_rational_log_order_group_order`）、これが「すべての両方の
+  共通分母で成り立つ」と一致すること（→ は独立性、← は $N_\lambda N_\mu$ の存在）と、判定が
+  $N_\mu\lambda_{N_\lambda}\le_\Lambda N_\lambda\mu_{N_\mu}$ の一度の比較で決まる（決定可能）ことを示した。
+  レビューでは前 tick の四層が一致し、本文末尾「この先に書くこと」の済んだ「共通分母の正整数倍」を消して先に push した。
+  次は「有理係数の対数順序群の順序の線形順序性と加法単調性」。
+
+### 前進の記録
+
+- 2026-08-16（tick 306）: `def_rational_log_order_group_order` を `claim_common_denominator_order_independent` の直後に置き
+  四層で閉じた。定義は「ある両方の共通分母 $N\ge1$ で $\lambda_N\le_\Lambda\mu_N$」、言い換え「すべての両方の共通分母で」との
+  同値（→ 独立性、← $N_\lambda N_\mu$）、決定手続き $N_\mu\lambda_{N_\lambda}\le_\Lambda N_\lambda\mu_{N_\mu}$。
+  `def_rational_log_order_group` 末尾の順序の予告を新定義への参照へ直した。SageMath `rational-log-order-group-order` は
+  素数 $2,3,5$・係数 8 種の 512 ベクトルの全 262144 組で、両方の共通分母 $N\le24$ の全てで判定が一致すること（1439022 件）と
+  決定手続きとの一致を `ZZ`/`QQ` で厳密に。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupOrder.lean`
+  （`rationalLogOrderLE`、`rationalLogOrderLE_iff_forall`、`rationalLogOrderLE_iff_canonical`、`DecidableRel`）、必要十分版
+  `exists_iff_forall_of_independent_necSuf`（良い添字の存在と、良い添字間での真偽の一致だけ。順序も共通分母も本質でない）、
+  導出版。sorry 検査 1118 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 306）: 前 tick の「共通分母の正整数倍は共通分母である」「二元は共通の共通分母を持つ」の本文・SageMath・
+  Lean 具体版・必要十分版・導出版を突き合わせ、三段の鎖・二度の適用と積の可換性・対象ラベル・入口 import・sorry 検査への
+  登録が一致した。後者は「$N_\lambda N_\mu$ が両方の共通分母である」という一つの存在主張なので 1 ブロック 1 主張に反しない。
+  本文末尾「この先に書くこと」に済んだ「共通分母の正整数倍が共通分母であること」が残っていたので消した。

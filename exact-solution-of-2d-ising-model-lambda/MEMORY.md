@@ -4,6 +4,22 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 311 は、前 tick の「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の四層を突き合わせて一致を確認し
+（修正無し）、「有理数倍と埋め込みを通した順序の移送」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_scaled_embedding_order_transfer`（`def_finite_free_entropy_density` の直後、`remark_real_field_escape` の直前）で、$L\ge1$、
+$\lambda,\mu\in\Lambda$ に対し $\frac{1}{L^2}\cdot\iota(\lambda)\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\mu)\iff\lambda\le_\Lambda\mu$。
+準備で $L^2\cdot(\frac{1}{L^2}\cdot\iota(\lambda))=(L^2\cdot\frac{1}{L^2})\cdot\iota(\lambda)=1\cdot\iota(\lambda)=\iota(\lambda)$ の三段
+（有理数倍の結合則・$\mathbb Q$ の約分・$1\cdot\lambda=\lambda$）で $N=L^2$ が共通分母・証人 $\lambda$ 自身であることを示し、→ は
+`def_rational_log_order_group_order` の言い換え（すべての共通分母で）を $N=L^2$ で読み、← は定義（ある共通分母で）に $N=L^2$ と証人を入れた。
+SageMath `scaled-embedding-order-transfer`（素数 $2,3,5$・係数 4 種の 64 ベクトル、$L\in\{1,2,3\}$、鎖 192 件・共通分母 192 件・同値 12288 件・
+証人の比較の一致 12288 件、`ZZ`/`QQ`。素数 4 個・$L\le6$ では決定手続き $N_\mu\lambda_{N_\lambda}$ の指数が大きく 10 分で終わらなかったので縮めた）。
+Lean 具体版 `ThermodynamicLimit/ScaledEmbeddingOrderTransfer.lean`（`commonDenominator_scaled_toRational`、`rationalLogOrderLE_scaled_toRational_iff`）、
+必要十分版 `NecSuf/ThermodynamicLimit/ScaledEmbeddingOrderTransfer.lean` の `indexedLE_iff_of_common_good_index_necSuf`（独立性と、二元に共通の
+良い添字とそこでの証人が与えられていることだけ）、導出版（sorry 検査 1147 件）。次は「正の有理点での分配多項式の値は 1 以上」
+（`claim_free_energy_density_nonnegative` の中身を $q\in\mathbb Q_{>0}$ で新ブロックに: $Z_L(q)=\sum_\sigma q^{b(\sigma)}\ge q^{b(\sigma_+)}=q^0=1$、
+他の項は非負。住処 Q、実数体脱出の宣言より前に置く。Lean は ℝ 版の証明を ℚ へ移す。次々は $\Lambda_{\mathbb Q}$ 版の非負性で、
+`claim_rational_log_order_iff`（$1\le q'$ から $\log1=0\le_\Lambda\log q'$）と本 tick の順序の移送で $0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$）。
+
 2026-08-16 の tick 310 は、前 tick の「正の有理数の対数は順序を保ちかつ反映する」の四層を突き合わせて一致を確認し（修正無し）、
 「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean 具体版まで完成させた。
 `def_finite_free_entropy_density`（`claim_rational_log_order_group_add_monotone` の直後、`remark_real_field_escape` の直前）で
@@ -3381,10 +3397,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「正の有理数の対数は順序を保ちかつ反映する」（`claim_rational_log_order_iff`）の本文・SageMath
-  `rational-log-order-iff`・Lean（`RationalLogOrderIff.lean` 三系統）を突き合わせる。
-- **次に進めるセクションは「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」**（状態台帳のセクション表の先頭行）。
-  以降 15 件は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
+- **レビュー**: 「有理数倍と埋め込みを通した順序の移送」（`claim_scaled_embedding_order_transfer`）の本文・SageMath
+  `scaled-embedding-order-transfer`・Lean（`ScaledEmbeddingOrderTransfer.lean` 三系統）を突き合わせる。
+- **次に進めるセクションは「正の有理点での分配多項式の値は 1 以上」**（状態台帳のセクション表の先頭行）。
+  以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
   到達点は台帳の表にある。

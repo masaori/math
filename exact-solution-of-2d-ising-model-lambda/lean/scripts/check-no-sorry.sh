@@ -1199,6 +1199,10 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.two_scaled_denominators_cancel_necSuf
   Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator_from_necSuf
   Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_apply
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_scaled_toRational
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaled_toRational_iff
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_iff_of_common_good_index_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaled_toRational_iff_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -253,6 +253,7 @@ export const ALL_LABELS = [
   "claim_row_shift_iterate_distinct_below_period",
   "claim_rows_bijection",
   "claim_same_broken_edges_equal_or_global_reversal",
+  "claim_scaled_embedding_order_transfer",
   "claim_scaled_free_entropy_denominator_clearing",
   "claim_second_const_degree_zero",
   "claim_second_degree_prod",
