@@ -46,6 +46,9 @@ import Ising2DLambda.FreeEntropy.RationalLogSurjectiveFromNecSuf
 import Ising2DLambda.FreeEntropy.LogOrderGroupOrder
 import Ising2DLambda.NecSuf.FreeEntropy.LogOrderGroupOrder
 import Ising2DLambda.FreeEntropy.LogOrderGroupOrderFromNecSuf
+import Ising2DLambda.FreeEntropy.LogOrderGroupAddMonotone
+import Ising2DLambda.NecSuf.FreeEntropy.LogOrderGroupAddMonotone
+import Ising2DLambda.FreeEntropy.LogOrderGroupAddMonotoneFromNecSuf
 import Ising2DLambda.FreeEntropy.ValuePositive
 import Ising2DLambda.NecSuf.FreeEntropy.ValuePositive
 import Ising2DLambda.FreeEntropy.ValuePositiveFromNecSuf

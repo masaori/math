@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 301 は、前 tick の「対数順序群の順序」の四層を突き合わせて修正不要と確認した。
+そのあと「対数順序群の順序の加法単調性」を四層まで完成させた。
+`claim_rational_of_log_additive` で対数の加法性と正の有理数上での単射性から
+$\operatorname{rat}_{\Lambda}(\lambda+\nu)=\operatorname{rat}_{\Lambda}(\lambda)
+\operatorname{rat}_{\Lambda}(\nu)$ を示し、`claim_log_order_group_add_monotone` で正の有理数を
+右から掛ける単調性へ落とした。SageMath `log-order-group-add-monotone` は 125 ベクトルについて
+15625 加法対・984375 単調性三つ組を `ZZ`/`QQ` で厳密に検査した。Lean は具体版
+`FreeEntropy/LogOrderGroupAddMonotone.lean`、必要十分版
+`NecSuf/FreeEntropy/LogOrderGroupAddMonotone.lean`、導出版を持つ。次は
+「有理係数の対数順序群の順序の定義と共通分母からの独立性」。
+
 2026-08-15 の tick 300 は、前 tick の「正の有理数の対数は全射である」の本文・SageMath・Lean（具体版・
 必要十分版・導出版）を突き合わせて修正不要と確認した。そのあと「対数順序群の順序」を、$\mathbb Q$ の順序を
 全単射 $\operatorname{rat}_\Lambda$ で引き戻す論法（定義と線形順序性）と、$\operatorname{rat}_\Lambda$ が積を

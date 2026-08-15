@@ -1968,6 +1968,112 @@ q
   },
 
   {
+    id: "free_entropy_claim_rational_of_log_additive",
+    kind: "claim",
+    title: { text: "有限台指数ベクトルの和は正の有理数の積へ移る" },
+    labels: ["claim_rational_of_log_additive"],
+    habitat: "Q",
+    verification: ["sagemath/check/log-order-group-add-monotone"],
+    lean: [
+      "Ising2DLambda.FreeEntropy.rationalOfLog_add",
+      "Ising2DLambda.NecSuf.FreeEntropy.inverse_add_to_mul_necSuf",
+      "Ising2DLambda.FreeEntropy.rationalOfLog_add_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\lambda,\nu\in\Lambda`),
+        " について",
+      ]),
+      displayMath(String.raw`\operatorname{rat}_{\Lambda}(\lambda+\nu)
+=\operatorname{rat}_{\Lambda}(\lambda)\operatorname{rat}_{\Lambda}(\nu)
+\ \in\ \mathbb Q_{>0}`),
+      paragraph(["が成り立つ。実数体は現れない。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        ref("def_rational_of_log"),
+        " により正の有理数である。対数を取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(\operatorname{rat}_{\Lambda}(\lambda+\nu)\bigr)
+&=\lambda+\nu
+&&(\because\ \blkref{claim_rational_log_surjective})\\
+&=\log\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)
+  +\log\bigl(\operatorname{rat}_{\Lambda}(\nu)\bigr)
+&&(\because\ \blkref{claim_rational_log_surjective}\text{ を二回})\\
+&=\log\bigl(
+  \operatorname{rat}_{\Lambda}(\lambda)
+  \operatorname{rat}_{\Lambda}(\nu)
+\bigr)
+&&(\because\ \blkref{claim_log_additive})
+\end{aligned}`),
+      paragraph([
+        ref("claim_rational_log_injective"),
+        " をこの二つの正の有理数へ適用すると、主張の等式を得る。",
+      ]),
+    ],
+  },
+
+  {
+    id: "free_entropy_claim_log_order_group_add_monotone",
+    kind: "claim",
+    title: { text: "対数順序群の順序は加法について単調である" },
+    labels: ["claim_log_order_group_add_monotone"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/log-order-group-add-monotone"],
+    lean: [
+      "Ising2DLambda.FreeEntropy.logOrderLE_add_right",
+      "Ising2DLambda.NecSuf.FreeEntropy.pullback_add_right_mono_necSuf",
+      "Ising2DLambda.FreeEntropy.logOrderLE_add_right_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\lambda,\mu,\nu\in\Lambda`),
+        " について",
+      ]),
+      displayMath(String.raw`\lambda\le_{\Lambda}\mu
+\quad\Longrightarrow\quad
+\lambda+\nu\le_{\Lambda}\mu+\nu`),
+      paragraph(["が成り立つ。実数体は現れない。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\lambda\le_{\Lambda}\mu`),
+        " とする。",
+        ref("def_log_order_group_order"),
+        " により ",
+        math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le
+\operatorname{rat}_{\Lambda}(\mu)`),
+        " である。さらに ",
+        ref("def_rational_of_log"),
+        " により ",
+        math(String.raw`0<\operatorname{rat}_{\Lambda}(\nu)`),
+        " なので、正の有理数を右から掛ける単調性から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}(\lambda+\nu)
+&=\operatorname{rat}_{\Lambda}(\lambda)\operatorname{rat}_{\Lambda}(\nu)
+&&(\because\ \blkref{claim_rational_of_log_additive})\\
+&\le\operatorname{rat}_{\Lambda}(\mu)\operatorname{rat}_{\Lambda}(\nu)
+&&(\because\ \operatorname{rat}_{\Lambda}(\lambda)\le
+  \operatorname{rat}_{\Lambda}(\mu),\ 0<\operatorname{rat}_{\Lambda}(\nu))\\
+&=\operatorname{rat}_{\Lambda}(\mu+\nu)
+&&(\because\ \blkref{claim_rational_of_log_additive})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("def_log_order_group_order"),
+        " により、これは ",
+        math(String.raw`\lambda+\nu\le_{\Lambda}\mu+\nu`),
+        " を意味する。",
+      ]),
+    ],
+  },
+
+  {
     id: "free_entropy_claim_free_entropy_at_one",
     kind: "claim",
     title: { text: "すべての配位を等しく数える点での自由エントロピー" },
