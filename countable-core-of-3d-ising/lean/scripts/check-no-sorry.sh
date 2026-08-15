@@ -151,6 +151,8 @@ targets=(
   Ising3DCut.boundarySpecialization_add_fromNecSuf
   Ising3DCut.boundarySpecialization_mul_fromNecSuf
   Ising3DCut.boundarySpecialization_one_fromNecSuf
+  Ising3DCut.NecSuf.boundaryResponsePolynomial_outer_box_stability
+  Ising3DCut.boundaryResponsePolynomial_outer_box_stability_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

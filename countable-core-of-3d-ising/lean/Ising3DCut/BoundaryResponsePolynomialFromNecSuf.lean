@@ -51,4 +51,16 @@ theorem boundarySpecialization_one_fromNecSuf (active : Finset Edge) :
     boundarySpecialization active (1 : MvPolynomial Edge ℤ) = 1 :=
   NecSuf.boundarySpecialization_one active
 
+/-- 外箱の拡大に対する安定性を必要十分版から導く。 -/
+theorem boundaryResponsePolynomial_outer_box_stability_fromNecSuf
+    {Outer : Type*} [Fintype Outer]
+    (broken : Configuration → Finset Edge)
+    (broken' : Configuration × Outer → Finset Edge) (active : Finset Edge)
+    (h : ∀ σ : Configuration, ∀ τ : Outer,
+      boundarySpecialization active (∏ e ∈ broken' (σ, τ), X e) =
+        boundarySpecialization active (∏ e ∈ broken σ, X e)) :
+    boundaryResponsePolynomial broken' active =
+      (Fintype.card Outer) • boundaryResponsePolynomial broken active :=
+  NecSuf.boundaryResponsePolynomial_outer_box_stability broken broken' active h
+
 end Ising3DCut

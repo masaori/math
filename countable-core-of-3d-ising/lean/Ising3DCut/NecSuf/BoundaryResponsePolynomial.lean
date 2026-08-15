@@ -71,4 +71,23 @@ lemma boundaryResponsePolynomial_eq_specialization
     boundaryResponsePolynomial (R := R) broken active =
       boundarySpecialization active (multivariatePartitionPolynomial broken) := rfl
 
+/-- 外箱の拡大に対する安定性（必要十分版）。係数環は可換半環 `R`、辺型の有限性は不要。
+広い外箱の配位を元の外箱上の配位 `σ` と外側の値 `τ` の組で表し、各配位の破れ辺の代入像が
+`σ` だけで決まるなら、境界応答多項式は外側の配位数倍になる。 -/
+theorem boundaryResponsePolynomial_outer_box_stability
+    {Outer : Type*} [Fintype Outer]
+    (broken : Configuration → Finset Edge)
+    (broken' : Configuration × Outer → Finset Edge) (active : Finset Edge)
+    (h : ∀ σ : Configuration, ∀ τ : Outer,
+      boundarySpecialization (R := R) active (∏ e ∈ broken' (σ, τ), X e) =
+        boundarySpecialization (R := R) active (∏ e ∈ broken σ, X e)) :
+    boundaryResponsePolynomial (R := R) broken' active =
+      (Fintype.card Outer) • boundaryResponsePolynomial (R := R) broken active := by
+  unfold boundaryResponsePolynomial multivariatePartitionPolynomial
+  rw [map_sum, map_sum, Fintype.sum_prod_type]
+  simp_rw [h]
+  rw [Finset.smul_sum]
+  refine Finset.sum_congr rfl fun σ _ ↦ ?_
+  simp [Finset.sum_const, Finset.card_univ]
+
 end Ising3DCut.NecSuf
