@@ -25,6 +25,7 @@ import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
+import blocks_local_rule_representation from './content/local-rule-representation.ts'
 import blocks_minimal_preperiod_period from './content/minimal-preperiod-period.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
@@ -43,6 +44,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
+  ...typeof blocks_local_rule_representation,
   ...typeof blocks_minimal_preperiod_period,
   ...typeof blocks_periodic_point_count,
   ...typeof blocks_redundant_neighbor,

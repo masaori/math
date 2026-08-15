@@ -1194,3 +1194,17 @@ $(F^{-1})_v$ は写像型 $S\to A$ であることだけを使い、依存の一
 追加した。sorry 検査へ 12 定理を追加し、構造化テキスト check・PDF、SageMath 4 本、対応検査、Lean build、sorry 検査を
 全て通した。**「逆写像の局所性」は四層が揃い done。** 次 tick はレビュー後に次の対象を台帳へ立てる（候補: 逆写像を
 「別の近傍 $N'$ をもつ 2 値 CA」として書くための最小近傍の定義と有限決定）。
+
+## 自動ループ tick: 依存台による局所規則の表現の構造化記述（2026-08-16）
+
+前 tick の「逆写像の局所性」の Lean 必要十分版と導出 7 本をレビューし、Lean build と sorry 検査を再実行した。
+修正を要する不一致は見つからなかった。次の対象「依存台による局所規則の表現」を台帳へ立て、
+`content/local-rule-representation.ts` に構造化記述を書いた。写像 $g:A^V\to A$ が $S\subseteq V$ 上の局所規則で
+表せる（$g=h\circ\rho^V_S$ なる $h:A^S\to A$ がある）ことを定義し、表せるなら $\operatorname{supp}(g)\subseteq S$
+（前章の依存台不変性）、$\operatorname{supp}(g)\subseteq S$ なら $g=(g\circ\iota^V_S)\circ\rho^V_S$（$V\setminus S$ 上の
+非零座標数についての有限帰納法。一点反転と非依存で 1 座標ずつ基準値へ戻す）、$\operatorname{supp}(g)$ が表せる添字集合の
+最小元、単射な大域写像の逆写像が近傍 $N'$ の 2 値 CA として書ける $\iff$ 全 $v$ で $\operatorname{supp}((F^{-1})_v)\subseteq N'(v)$、
+最小近傍 $N^\ast(v)=\operatorname{supp}((F^{-1})_v)$ の有限決定を claim として証明した。$N^\ast$ を順写像の近傍で抑える
+ことは主張しない。構造化テキスト check・PDF（28 ページ）、対応検査、Lean build、sorry 検査を通した。
+**現在地は構造化記述まで。次 tick はレビュー後に SageMath 検算（表現可能性 $\iff$ 依存台の包含の小規模全数検査と、
+逆写像の最小近傍の反例・可逆例での分離）を作る。**
