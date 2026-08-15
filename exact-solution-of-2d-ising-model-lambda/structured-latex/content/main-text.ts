@@ -1479,6 +1479,114 @@ Z_L(q)
       ]),
     ],
   },
+  {
+    id: "free_entropy_claim_rational_log_injective",
+    kind: "claim",
+    title: { text: "正の有理数の対数は単射である" },
+    labels: ["claim_rational_log_injective"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/rational-log-injective"],
+    lean: [
+      "Ising2DLambda.FreeEntropy.logRat_injective_of_pos",
+      "Ising2DLambda.NecSuf.FreeEntropy.cross_mul_eq_of_pointwise_sub_eq_necSuf",
+      "Ising2DLambda.FreeEntropy.logRat_injective_of_pos_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`q,q'\in\mathbb{Q}_{>0}`),
+        " とする。",
+        ref("def_rational_log"),
+        " の対数について ",
+        math(String.raw`\log q=\log q'`),
+        "（",
+        ref("def_log_order_group"),
+        " の ",
+        math(String.raw`\Lambda`),
+        " の元としての等号）ならば ",
+        math(String.raw`q=q'`),
+        " である。すなわち写像 ",
+        math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
+        " は単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "1 以上の整数 ",
+        math(String.raw`a,b,a',b'`),
+        " を取って ",
+        math(String.raw`q=a/b`),
+        "、",
+        math(String.raw`q'=a'/b'`),
+        " と書く（",
+        ref("def_rational_log"),
+        "）。任意の素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " について、次の一続きの計算で ",
+        math(String.raw`v_p(ab')=v_p(a'b)`),
+        " を得る（",
+        math(String.raw`v_p`),
+        " は ",
+        ref("def_prime_exponent"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+v_p(ab')
+&=v_p(a)+v_p(b')
+&&(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性})\\
+&=\bigl(w_p(q)+v_p(b)\bigr)+v_p(b')
+&&(\because\ \blkref{def_rational_log}\text{ の }w_p(q)=v_p(a)-v_p(b)\text{ を移項})\\
+&=\bigl(w_p(q')+v_p(b)\bigr)+v_p(b')
+&&(\because\ \log q=\log q'\text{ を素数 }p\text{ で読むと }w_p(q)=w_p(q')\text{。}\blkref{def_rational_log})\\
+&=\bigl(v_p(a')-v_p(b')+v_p(b)\bigr)+v_p(b')
+&&(\because\ \blkref{def_rational_log}\text{ の }w_p(q')=v_p(a')-v_p(b'))\\
+&=v_p(a')+v_p(b)
+&&(\because\ \mathbb{Z}\text{ の加法の結合則・可換則と }-v_p(b')+v_p(b')=0)\\
+&=v_p(a'b)
+&&(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性})
+\end{aligned}`),
+      paragraph([
+        "この等式はすべての素数 ",
+        math(String.raw`p`),
+        " で成り立つので、",
+        math(String.raw`ab'`),
+        " と ",
+        math(String.raw`a'b`),
+        " の有限積表示は一致する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+ab'
+&=\prod_{p:\ v_p(ab')\ne0}p^{\,v_p(ab')}
+&&(\because\ \blkref{def_prime_exponent}\text{ の有限積表示})\\
+&=\prod_{p:\ v_p(a'b)\ne0}p^{\,v_p(a'b)}
+&&(\because\ \text{上で示した }v_p(ab')=v_p(a'b)\text{（すべての }p\text{）})\\
+&=a'b
+&&(\because\ \blkref{def_prime_exponent}\text{ の有限積表示})
+\end{aligned}`),
+      paragraph([
+        "最後に ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q
+&=\frac{a}{b}
+&&(\because\ q\text{ の表示})\\
+&=\frac{ab'}{bb'}
+&&(\because\ b'\ge1\text{ なので }b'\ne0\text{、}\mathbb{Q}\text{ の約分の逆})\\
+&=\frac{a'b}{bb'}
+&&(\because\ ab'=a'b)\\
+&=\frac{a'}{b'}
+&&(\because\ b\ge1\text{ なので }b\ne0\text{、}\mathbb{Q}\text{ の約分})\\
+&=q'
+&&(\because\ q'\text{ の表示})
+\end{aligned}`),
+      paragraph([
+        "以上は 1 以上の整数の指数の加法性と有限積表示、および有理数の四則だけからなり、",
+        "実数体は現れない。",
+      ]),
+    ],
+  },
+
 
   {
     id: "free_entropy_claim_free_entropy_at_one",

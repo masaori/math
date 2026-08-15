@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 298 は、レビューで前 tick の分母消去の末尾（$M^2\cdot\iota(\lambda)=\iota(M^2\lambda)$）が
+散文だけで SageMath にも Lean にも対応が無かったのを、各素数での値の五段の式変形と Lean `toRational_intSmul`・
+SageMath の交換検査（768 件）へ直して push した。そのあと「有理係数の対数順序群の順序の定義と線形順序性」を、
+本文に $\Lambda$ の順序も $\log$ の全単射性も未記述であることから、$\log$ の単射性／全射性／$\Lambda$ の順序／
+$\Lambda_{\mathbb{Q}}$ の順序の定義と共通分母独立性／線形順序性と加法単調性の五つへ割り、先頭の
+「正の有理数の対数は単射である」（`claim_rational_log_injective`。章「有限系の自由エントロピー」の
+「対数の冪の法則」の直後）を四層まで完成させた。証明は $\log q=\log q'$ を素数 $p$ で読み、$w_p$ の移項と
+指数の加法性で $v_p(ab')=v_p(a'b)$、有限積表示で $ab'=a'b$、$\mathbb{Q}$ の約分で $q=q'$。SageMath
+`rational-log-injective` は 6561 件を `ZZ`/`QQ` で厳密に。Lean は具体版
+`FreeEntropy/RationalLogInjective.lean`（`primeExponent_cross_eq`、`nat_eq_of_primeExponent_eq`（有限積表示＝
+`Nat.eq_of_factorization_eq`）、`logRat_injective_of_pos`）、必要十分版
+`NecSuf/FreeEntropy/RationalLogInjective.lean` の `cross_mul_eq_of_pointwise_sub_eq_necSuf`（可換群値の
+加法的写像の族が数を分離することだけを仮定。素数・素因数分解・$\mathbb{Z}$ 値は本質でない）、導出版
+（sorry 検査 1078 件）。式変形統一では姉妹側「$T_{V_1}$ の $\check Z,\check Y$ への作用」で定義の代入と
+$\exp(X)^{-1}=\exp(-X)$ を二行へ分けた。次の本文は「正の有理数の対数は全射である」（$\lambda\in\Lambda$ から
+$q_\lambda$ を有限積で作って $\log q_\lambda=\lambda$。Lean は `logRat` が既約表示 `num/den` を使うので、
+構成した分子・分母が互いに素であることか、`rationalExponent_well_defined` 経由で表示に依らないことを使う）。
+
 2026-08-15 の tick 297 は、前 tick の有理係数の対数順序群の本文・SageMath・Lean 三系統と姉妹側の
 式変形差分をレビューし、修正不要と確認した。そのあと「$\Lambda\otimes\mathbb{Q}$ の順序」を、
 有限系密度の分母消去と一般の順序の定義・線形順序性へ割り、先頭を四層まで完成させた。
@@ -3165,15 +3183,15 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「$\Lambda\otimes\mathbb{Q}$ の具体的構成」の本文（`def_rational_log_order_group`・
-  `claim_rational_log_order_group_embedding`）・SageMath・Lean（具体版・必要十分版・導出版）を突き合わせる。
-  とくに、有理数倍の四つの法則を定義ブロックの中で「素数ごとに読む」と述べて済ませていることが規律上許されるか
-  （主張として分けるべきか）を見る。
-- **次に進めるセクションは「$\Lambda\otimes\mathbb{Q}$ の順序」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「正の有理数の対数は単射である」の本文（`claim_rational_log_injective`）・SageMath
+  `rational-log-injective`・Lean（`RationalLogInjective.lean` 三系統）を突き合わせる。とくに Lean が既約表示
+  `q.num.natAbs / q.den` を取っているのに対し本文は任意の表示 $a/b$ で書いていることが、主張の強さとして
+  一致しているか（本文の主張は表示に依らないので問題ないはずだが確認する）を見る。
+- **次に進めるセクションは「正の有理数の対数は全射である」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
-  姉妹側 `014_even_sector_T_action` の「$T_{V_1},T_{V_2}$ の $\check Z,\check Y$ への作用」は $T_{V_2}$ 二本を
-  開いた。次は同ブロックの $T_{V_1}$ 二本の鎖（`def_V_plus_and_T_V_plus と matrix_exp_conjugation (3)` を一行で
-  引いている箇所）以降で、圧縮された行や根拠の無い行を探す。
+  姉妹側 `014_even_sector_T_action` の「$T_{V_1},T_{V_2}$ の $\check Z,\check Y$ への作用」は $T_{V_1}$・
+  $T_{V_2}$ とも開いた（統一済み）。次は同ファイルの次のブロック（`evensectorT_006_claim_linearity_of_T` は
+  確認済み）以降で、圧縮された行や根拠の無い行を探す。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
 ## 前の tick の記録（1 つ前）

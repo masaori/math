@@ -1415,9 +1415,11 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
 &= \left(V_1^{(+)}\right)^{1/2}\,\check{Z}_\mu\,\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
    \quad (\because \text{def\_T\_g}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
+   \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
+   \quad \left(\because \text{def\_V\_plus\_and\_T\_V\_plus}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
+&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
    \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad \left(\because \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right),\
-   \exp(X)^{-1} = \exp(-X)\right) \\
+   \quad \left(\because \text{matrix\_exp\_conjugation (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
@@ -1441,8 +1443,11 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
 &= \left(V_1^{(+)}\right)^{1/2}\,\check{Y}_\mu\,\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
    \quad (\because \text{def\_T\_g}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
+   \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
+   \quad \left(\because \text{def\_V\_plus\_and\_T\_V\_plus}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
+&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
    \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad \left(\because \text{def\_V\_plus\_and\_T\_V\_plus と matrix\_exp\_conjugation (3)}\right) \\
+   \quad \left(\because \text{matrix\_exp\_conjugation (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\

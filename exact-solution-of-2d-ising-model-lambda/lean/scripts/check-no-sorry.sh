@@ -61,6 +61,12 @@ targets=(
   Ising2DLambda.FreeEntropy.rationalExponent_well_defined
   Ising2DLambda.FreeEntropy.rationalExponent_well_defined_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sub_eq_sub_of_mul_eq_mul
+  Ising2DLambda.FreeEntropy.primeExponent_cross_eq
+  Ising2DLambda.FreeEntropy.nat_eq_of_primeExponent_eq
+  Ising2DLambda.FreeEntropy.logRat_injective_of_pos
+  Ising2DLambda.NecSuf.FreeEntropy.cross_image_eq_of_sub_eq_necSuf
+  Ising2DLambda.NecSuf.FreeEntropy.cross_mul_eq_of_pointwise_sub_eq_necSuf
+  Ising2DLambda.FreeEntropy.logRat_injective_of_pos_from_necSuf
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos

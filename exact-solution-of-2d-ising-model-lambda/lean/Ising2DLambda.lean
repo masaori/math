@@ -37,6 +37,9 @@ import Ising2DLambda.FreeEntropy.Basic
 import Ising2DLambda.FreeEntropy.RationalExponent
 import Ising2DLambda.NecSuf.FreeEntropy.RationalExponent
 import Ising2DLambda.FreeEntropy.RationalExponentFromNecSuf
+import Ising2DLambda.FreeEntropy.RationalLogInjective
+import Ising2DLambda.NecSuf.FreeEntropy.RationalLogInjective
+import Ising2DLambda.FreeEntropy.RationalLogInjectiveFromNecSuf
 import Ising2DLambda.FreeEntropy.ValuePositive
 import Ising2DLambda.NecSuf.FreeEntropy.ValuePositive
 import Ising2DLambda.FreeEntropy.ValuePositiveFromNecSuf
