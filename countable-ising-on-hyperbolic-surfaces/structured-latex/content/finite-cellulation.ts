@@ -1,4 +1,4 @@
-import { defineBlocks, displayMath, math, paragraph } from "../schema.ts";
+import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -36,6 +36,59 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`V_{\mathrm{cell}}\cap E_{\mathrm{cell}}=\varnothing,\qquad E_{\mathrm{cell}}\cap F_{\mathrm{cell}}=\varnothing,\qquad F_{\mathrm{cell}}\cap V_{\mathrm{cell}}=\varnothing`),
       paragraph(["を要求し、頂点、辺、面の元を互いに同一視しない。"]),
+    ],
+  },
+  {
+    id: "finite_cellulation_definition_face_boundary_word",
+    kind: "definition",
+    title: { text: "面の向き付き境界語" },
+    labels: ["def_finite_cellulation_face_boundary_word"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフ ",
+        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        " と ",
+        ref("def_finite_cellulation_cell_sets"),
+        " のセル集合入力 ",
+        math(String.raw`\mathcal C_{\mathrm{cell}}=(V_{\mathrm{cell}},E_{\mathrm{cell}},F_{\mathrm{cell}})`),
+        " が ",
+        math(String.raw`V_{\mathrm{cell}}=V`),
+        " および ",
+        math(String.raw`E_{\mathrm{cell}}=E`),
+        " を満たすとする。各面 ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " の向き付き境界語を、正整数 ",
+        math(String.raw`n_f\in\mathbb N_{>0}`),
+        " と有限列",
+      ]),
+      displayMath(String.raw`\partial_{\mathrm{word}}f:=\bigl((e_{f,i},\varepsilon_{f,i})\bigr)_{i=0}^{n_f-1}\in\bigl(E_{\mathrm{cell}}\times\{-1,+1\}\bigr)^{n_f}`),
+      paragraph([
+        "の組として定める。ここで各 ",
+        math(String.raw`i\in\{0,1,\ldots,n_f-1\}`),
+        " に対し ",
+        math(String.raw`e_{f,i}\in E_{\mathrm{cell}}`),
+        " および ",
+        math(String.raw`\varepsilon_{f,i}\in\{-1,+1\}`),
+        " であり、添字を巡回的に ",
+        math(String.raw`e_{f,n_f}:=e_{f,0}`),
+        "、",
+        math(String.raw`\varepsilon_{f,n_f}:=\varepsilon_{f,0}`),
+        " と延長して、接続条件",
+      ]),
+      displayMath(String.raw`\partial_{(1+\varepsilon_{f,i})/2}(e_{f,i})=\partial_{(1-\varepsilon_{f,i+1})/2}(e_{f,i+1})\qquad\bigl(i\in\{0,1,\ldots,n_f-1\}\bigr)`),
+      paragraph([
+        "を要求する。符号 ",
+        math(String.raw`+1`),
+        " は辺を ",
+        math(String.raw`\partial_0(e)`),
+        " から ",
+        math(String.raw`\partial_1(e)`),
+        " へ進む向き、符号 ",
+        math(String.raw`-1`),
+        " は逆向きを表す。したがって接続条件は、各向き付き辺の終点が次の向き付き辺の始点に等しく、最後の終点が最初の始点に等しいことを述べる。",
+      ]),
     ],
   },
 ]);
