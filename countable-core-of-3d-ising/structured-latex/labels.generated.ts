@@ -21,6 +21,7 @@ export const ALL_LABELS = [
   "claim_periodic_not_palindrome",
   "claim_rational_values_determine_partition_polynomial",
   "claim_same_partition_different_pair_data",
+  "claim_splitting_degree_galois_group_do_not_determine_polynomial",
   "claim_structural_palindrome",
   "def_bipartite_successor_system",
   "def_box",
