@@ -91,4 +91,67 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_opposite_edge_occurrences",
+    kind: "definition",
+    title: { text: "辺の逆向き二回出現" },
+    labels: ["def_finite_cellulation_opposite_edge_occurrences"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-cellulation-opposite-edge-occurrences"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の向き付き境界語の族 ",
+        math(String.raw`\bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}`),
+        " に対し、辺の逆向き二回出現述語 ",
+        math(String.raw`\operatorname{OppositeEdgeTwice}`),
+        " を真偽値集合 ",
+        math(String.raw`\{\mathrm{false},\mathrm{true}\}`),
+        " に値を取る次の条件として定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\operatorname{OppositeEdgeTwice}
+\left(
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\Longleftrightarrow \\
+&\qquad
+\text{任意の }e\in E_{\mathrm{cell}}\text{ に対して}
+\begin{cases}
+\left|
+  \left\{
+    (f,i)\ \middle|\
+    \begin{array}{l}
+    f\in F_{\mathrm{cell}},\quad i\in\mathbb N,\quad 0\le i<n_f,\\
+    e_{f,i}=e
+    \end{array}
+  \right\}
+\right|=2,\\[8pt]
+\displaystyle
+\sum_{\substack{
+  f\in F_{\mathrm{cell}},\ 0\le i<n_f\\
+  e_{f,i}=e
+}}
+\varepsilon_{f,i}=0.
+\end{cases}
+\end{aligned}`),
+      paragraph([
+        "出現位置 ",
+        math(String.raw`(f,i)`),
+        " の集合は有限集合、その元の個数は ",
+        math(String.raw`\mathbb N`),
+        "、符号和は ",
+        math(String.raw`\mathbb Z`),
+        " に属する。各符号は ",
+        math(String.raw`\{-1,+1\}`),
+        " に属するため、二つの出現の符号和が ",
+        math(String.raw`0`),
+        " であることは、一方が ",
+        math(String.raw`+1`),
+        "、他方が ",
+        math(String.raw`-1`),
+        " であることと同値である。二つの出現位置は異なるが、二つの面は同じでもよい。この述語は有限列の走査、整数の加法、有限整数の等号だけで判定できる。",
+      ]),
+    ],
+  },
 ]);
