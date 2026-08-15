@@ -37,4 +37,37 @@ theorem factorizationType_determines_rootDegrees
   rw [Fintype.card_congr e, Fintype.card_sigma]
   simp [hcard, Nat.mul_comm]
 
+/--
+各因子の零点多重集合を指数回反復して結合した多重集合では、次数 `n` の出現回数が
+次数 `n` の因子ごとの `指数 × 零点数` の有限和になる。
+-/
+theorem count_rootDegree_in_repeatedRootMultiset
+    {J A : Type} [Fintype J] [DecidableEq A]
+    (roots : J → Multiset A) (degree exponent : J → ℕ)
+    (rootDegree : A → ℕ)
+    (hcard : ∀ j, (roots j).card = degree j)
+    (hdeg : ∀ j x, x ∈ roots j → rootDegree x = degree j)
+    (n : ℕ) :
+    Multiset.count n
+      ((Finset.univ.val.bind fun j => exponent j • roots j).map rootDegree) =
+      ∑ j : J, if degree j = n then exponent j * degree j else 0 := by
+  classical
+  rw [Multiset.map_bind, Multiset.count_bind]
+  simp only [Multiset.map_nsmul, Multiset.count_nsmul]
+  apply Finset.sum_congr rfl
+  intro j _
+  rw [Multiset.count_map]
+  by_cases h : degree j = n
+  · simp only [h, if_true]
+    rw [Multiset.filter_eq_self.2]
+    · rw [hcard]
+      simp [h]
+    · intro x hx
+      exact h.symm.trans (hdeg j x hx).symm
+  · simp only [h, if_false]
+    rw [Multiset.filter_eq_nil.2]
+    · simp
+    · intro x hx hnx
+      exact h ((hdeg j x hx).symm.trans hnx.symm)
+
 end Ising3DCut.NecSuf.NullModel

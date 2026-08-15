@@ -108,6 +108,8 @@ targets=(
   Ising3DCut.NullModel.irreducibleFactorProduct_count_rootMinimalPolynomialDegree
   Ising3DCut.NecSuf.NullModel.factorizationType_determines_rootDegrees
   Ising3DCut.NullModel.irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees_from_necSuf
+  Ising3DCut.NecSuf.NullModel.count_rootDegree_in_repeatedRootMultiset
+  Ising3DCut.NullModel.irreducibleFactorProduct_count_rootMinimalPolynomialDegree_from_necSuf
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
