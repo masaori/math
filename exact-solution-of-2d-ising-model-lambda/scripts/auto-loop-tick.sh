@@ -149,16 +149,12 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
 5. tick の最後に PDF を作り直す（cd structured-latex && npm run build:pdf）。
    本文を変えなかった tick でも必ず行う。人間が開いたまま進み具合を見るため。
 6. 1 セクション進めたら止まる。
-7. **最後に、Slack へ完了報告を 1 通だけ送る**（`slack-notification` skill を使う。1 tick 1 通。
-   公開処理の側からは送らないので、送らなければ誰にも届かない）。手順は次のとおり。
-   a. `bash exact-solution-of-2d-ising-model-lambda/scripts/publish-artifact.sh` を自分で実行する
-      （論文の HTML を公開する。この tick でこのプロジェクトを触っていなければ何もせず終わる）。
-   b. `exact-solution-of-2d-ising-model-lambda/logs/publish-artifact.log` の末尾の
-      「OK: 公開した（版 …）→ <URL>」から URL を読む（**URL を決め打ちしない**。
-      公開先の持ち主が変わって決め打ちの URL が 404 になった実例がある）。
-      その行が今回の版でなければ（＝公開が走っていなければ）URL は添えなくてよい。
-   c. 本文は「何をしたか」を 1〜2 文で具体的に書き、末尾に URL を置く。長く書かない。
-      台帳の文章をそのまま貼らない（読まれない）。
+7. **Slack へ通知しない**（slack-notification skill も curl も使わない）。公開も通知も、
+   この tick スクリプトが最後に自分で行う。**通知は 1 tick 1 通**で、そこには前進・
+   コミットなし・打ち切り・異常終了のどれかが入る（エージェント側からは、打ち切られた
+   ことも異常終了したことも報告できない。だからスクリプト側に置いてある）。
+   通知の本文は台帳の「現在地」の先頭項目なので、そこに何をしたかを 1〜2 文で簡潔に書く。
+   例外は、人間の判断を待って止まるときだけである（そのときは skill で論点を報告する）。
 
 締切について。この tick は @HARD@ に強制終了される（書きかけでも落ちる）。
 そこで @SOFT@ を「まとめに入る締切」とする。作業の区切りごとに `date` で現在時刻を
@@ -210,6 +206,8 @@ echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 # （実測 2026-08-10 06:05: "ENAMETOOLONG: name too long" で 2 秒で落ちた）。
 # codex も `-` を渡すと標準入力から読む。モデルと推論の強さはユーザー指定
 # （Claude は Fable 5 の medium、Codex は Sol の medium）。
+head_before="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-')"
+
 if [ "$agent" = "claude" ]; then
   printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
     --model claude-fable-5 --effort medium \
@@ -272,9 +270,62 @@ else
   record_leftover "正常終了したが未コミットの成果が残った"
 fi
 
-# 毎 tick の成果を HTML で公開する（ユーザー指示）。tick 自身が最後に呼んで URL を Slack へ
-# 添えるので、ここでの呼び出しは取りこぼしの保険である（既に公開済みなら中で何もせず終わる）。
-# 失敗しても tick の結果は変えない。
+# 毎 tick の成果を HTML で公開する（ユーザー指示）。このプロジェクトの中身が動いていなければ
+# 中で何もせず終わる。失敗しても tick の結果は変えない。
 bash "$PROJECT_DIR/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 || log "    アーティファクトの公開に失敗した"
+
+# --- Slack への報告（1 tick 1 通。ここに一本化してある） ----------------------
+# **通知はこの 1 箇所だけで行う**（2026-08-15 のユーザー指示）。公開スクリプトも、
+# tick の中のエージェントも送らない。エージェント側に置くと、打ち切られた tick と
+# 異常終了した tick が報告されない（報告を書く前に殺されるため）。
+tick_summary="$(python3 - "$PROJECT_DIR/docs/tasks/auto-loop-state.md" <<'PYEOF' 2>/dev/null || true
+import re, sys
+
+text = open(sys.argv[1], encoding="utf-8").read()
+section = re.search(r"^## 現在地\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+if section is None:
+    raise SystemExit(0)
+
+lines, body = section.group(1).strip().split("\n"), []
+for line in lines:
+    if line.startswith("- ") and body:
+        break
+    if line.startswith("- "):
+        body.append(line[2:].strip())
+    elif line.strip():
+        body.append(line.strip())
+text = " ".join(body).replace("**", "")
+# 人間が Slack で読むのは「その tick が何をしたか」の 1〜2 文だけである。
+print(text if len(text) <= 240 else text[:240] + "…")
+PYEOF
+)"
+tick_commit="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-')"
+[ -z "$tick_summary" ] && tick_summary="$(git -C "$REPO_DIR" log -1 --format='%s' 2>/dev/null || true)"
+# 公開スクリプトが最後に公開した版と URL。今回の版でなければ URL は添えない
+# （このプロジェクトを触っていない tick では公開が走らない）。
+published_url="$(cut -f2 "$LOG_DIR/last-published" 2>/dev/null || true)"
+published_commit="$(cut -f1 "$LOG_DIR/last-published" 2>/dev/null || true)"
+[ "$published_commit" = "$tick_commit" ] || published_url=""
+
+# 「前進した」と言えるのは、このプロジェクトを触るコミットが増えたときだけである
+# （HEAD が動いただけでは、3 次元側のループのコミットを取り込んだ可能性がある）。
+own_commits="$(git -C "$REPO_DIR" rev-list --count "$head_before..HEAD" -- "$(basename "$PROJECT_DIR")" 2>/dev/null || echo 0)"
+case "$status" in
+  0)   if [ "${own_commits:-0}" -gt 0 ]; then
+         tick_outcome="前進（${own_commits} コミット）"
+       else
+         tick_outcome="コミットなし（何も残していない）"
+       fi ;;
+  124|137) tick_outcome="打ち切り（持ち時間 $(( TICK_TIMEOUT_SECONDS / 60 )) 分を超えた）" ;;
+  *)   tick_outcome="異常終了 (exit $status)" ;;
+esac
+
+tick_message="$(printf '2次元 Ising 模型（Λ の立場）（%s / %s / 版 %s）\n%s\n%s' \
+  "$agent" "$tick_outcome" "$tick_commit" "$tick_summary" "$published_url")"
+curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
+  -H "Content-Type: application/json" \
+  --data "$(jq -n --arg message "$tick_message" --arg repository "$(basename "$REPO_DIR")" \
+    '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1 \
+  || log "    Slack への通知に失敗した"
 
 exit "$status"

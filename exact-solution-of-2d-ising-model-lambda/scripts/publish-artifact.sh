@@ -82,4 +82,5 @@ log "OK: 公開した（版 ${commit}）→ $url"
 printf '%s' "$commit" > "$PUBLISHED"
 
 # **Slack へはここから送らない**（ユーザー指示 2026-08-15）。通知は tick 側に一本化した。
-# tick は自分で完了報告を書き、この行の URL を添える。ここから送ると 1 tick で 2 通になる。
+# 通知に要る公開結果（版と URL）はここで渡す。tick はログを読まずにこの 1 行を見る。
+printf '%s\t%s\n' "$commit" "$url" > "$LOG_DIR/last-published"
