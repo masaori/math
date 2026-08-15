@@ -9,6 +9,26 @@ export default defineBlocks([
     labels: [],
   },
   {
+    id: "finite_graph_definition_endpoint_labels",
+    kind: "definition",
+    title: { text: "辺端ラベル集合" },
+    labels: ["def_edge_endpoint_label_set"],
+    habitat: "finite",
+    statement: [
+      paragraph(["二つの形式的ラベルからなる有限集合を"]),
+      displayMath(String.raw`\mathsf{End}:=\{\mathsf{source},\mathsf{target}\}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`\mathsf{source}`),
+        " と ",
+        math(String.raw`\mathsf{target}`),
+        " は辺の二つの端を区別するラベルであり、整数 ",
+        math(String.raw`0,1\in\mathbb Z`),
+        " ではない。この集合には加法、減法、乗法、大小関係を入れない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_definition_input",
     kind: "definition",
     title: { text: "有限グラフの入力" },
@@ -20,15 +40,108 @@ export default defineBlocks([
         math(String.raw`V`),
         "、有限集合 ",
         math(String.raw`E`),
-        "、二つの写像 ",
-        math(String.raw`\partial_0,\partial_1:E\to V`),
+        "、",
+        ref("def_edge_endpoint_label_set"),
+        " の辺端ラベルを入力に取る写像 ",
+        math(String.raw`\partial_G:E\times\mathsf{End}\to V`),
         " の組 ",
-        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        math(String.raw`G=(V,E,\partial_G)`),
         " と定める。任意の ",
         math(String.raw`e\in E`),
         " について ",
-        math(String.raw`\partial_0(e)\ne\partial_1(e)`),
+        math(String.raw`\partial_G(e,\mathsf{source})\ne\partial_G(e,\mathsf{target})`),
         " を仮定する。異なる辺が同じ二頂点を結ぶことは許す。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_graph_definition_spin_labels",
+    kind: "definition",
+    title: { text: "スピンラベル集合" },
+    labels: ["def_spin_label_set"],
+    habitat: "finite",
+    statement: [
+      paragraph(["二つの形式的ラベルからなる有限集合を"]),
+      displayMath(String.raw`\mathsf{Spin}:=\{\mathsf{up},\mathsf{down}\}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`\mathsf{up}`),
+        " と ",
+        math(String.raw`\mathsf{down}`),
+        " はスピン状態を区別するラベルであり、それ自体には整数の演算を入れない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_graph_definition_spin_integer_realization",
+    kind: "definition",
+    title: { text: "スピンラベルの整数実現" },
+    labels: ["def_spin_integer_realization"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        ref("def_spin_label_set"),
+        " のスピンラベルを整数係数の式で使うための写像を",
+      ]),
+      displayMath(String.raw`\kappa:\mathsf{Spin}\to\{-1,+1\}\subset\mathbb Z,\qquad
+\kappa(\mathsf{up})=+1,\qquad \kappa(\mathsf{down})=-1`),
+      paragraph([
+        "と定める。右辺の ",
+        math(String.raw`-1,+1`),
+        " は整数である。以後、スピンラベルを整数として演算するときは必ず ",
+        math(String.raw`\kappa`),
+        " を明記する。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_graph_definition_spin_reversal",
+    kind: "definition",
+    title: { text: "スピンラベルの反転写像" },
+    labels: ["def_spin_label_reversal"],
+    habitat: "finite",
+    statement: [
+      paragraph(["スピンラベルを反転する写像を"]),
+      displayMath(String.raw`\nu:\mathsf{Spin}\to\mathsf{Spin},\qquad
+\nu(\mathsf{up})=\mathsf{down},\qquad
+\nu(\mathsf{down})=\mathsf{up}`),
+      paragraph(["と定める。これは形式的ラベル上の写像であり、整数の加法逆元ではない。"]),
+    ],
+  },
+  {
+    id: "finite_graph_claim_spin_reversal_integer_realization",
+    kind: "claim",
+    title: { text: "スピン反転と整数実現の整合性" },
+    labels: ["claim_spin_reversal_integer_realization"],
+    habitat: "Z",
+    statement: [
+      displayMath(String.raw`\kappa(\nu(a))=-\kappa(a)\in\mathbb Z\qquad(a\in\mathsf{Spin}).`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\kappa(\nu(\mathsf{up}))
+&=\kappa(\mathsf{down})
+&&\bigl(\because\ \text{スピンラベルの反転写像の定義}\bigr)\\
+&=-1
+&&\bigl(\because\ \text{スピンラベルの整数実現の定義}\bigr)\\
+&=-\kappa(\mathsf{up})
+&&\bigl(\because\ \kappa(\mathsf{up})=+1\bigr),\\[4pt]
+\kappa(\nu(\mathsf{down}))
+&=\kappa(\mathsf{up})
+&&\bigl(\because\ \text{スピンラベルの反転写像の定義}\bigr)\\
+&=+1
+&&\bigl(\because\ \text{スピンラベルの整数実現の定義}\bigr)\\
+&=-\kappa(\mathsf{down})
+&&\bigl(\because\ \kappa(\mathsf{down})=-1\bigr).
+\end{aligned}`),
+      paragraph([
+        "二つの場合が ",
+        ref("def_spin_label_set"),
+        " の全ての元を尽くすので結論を得る。用いた写像は ",
+        ref("def_spin_label_reversal"),
+        " と ",
+        ref("def_spin_integer_realization"),
+        " で定めた。",
       ]),
     ],
   },
@@ -44,7 +157,7 @@ export default defineBlocks([
         math(String.raw`G`),
         " のスピン配位集合を",
       ]),
-      displayMath(String.raw`\mathcal S_G:=\{\sigma\mid \sigma:V\to\{-1,+1\}\ \text{は写像}\}`),
+      displayMath(String.raw`\mathcal S_G:=\{\sigma\mid \sigma:V\to\mathsf{Spin}\ \text{は写像}\}`),
       paragraph([
         "と定める。",
         math(String.raw`\mathcal S_G`),
@@ -55,6 +168,85 @@ export default defineBlocks([
         " は有限集合 ",
         math(String.raw`X`),
         " の元の個数を表す。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_graph_definition_single_vertex_spin_flip",
+    kind: "definition",
+    title: { text: "一頂点での配位反転写像" },
+    labels: ["def_single_vertex_spin_flip"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "配位 ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " と頂点 ",
+        math(String.raw`w\in V`),
+        " に対し、配位 ",
+        math(String.raw`T_w(\sigma)\in\mathcal S_G`),
+        " を",
+      ]),
+      displayMath(String.raw`T_w(\sigma)(v):=
+\begin{cases}
+\nu(\sigma(v)) & (v=w),\\
+\sigma(v) & (v\ne w)
+\end{cases}
+\qquad(v\in V)`),
+      paragraph([
+        "と定める。スピンラベルの反転には ",
+        ref("def_spin_label_reversal"),
+        " の写像 ",
+        math(String.raw`\nu`),
+        " を用いる。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_graph_claim_single_vertex_spin_flip_involution",
+    kind: "claim",
+    title: { text: "一頂点での配位反転は不動点を持たない対合である" },
+    labels: ["claim_single_vertex_spin_flip_involution"],
+    habitat: "finite",
+    statement: [
+      displayMath(String.raw`T_w(T_w(\sigma))=\sigma,\qquad T_w(\sigma)\ne\sigma
+\qquad(\sigma\in\mathcal S_G,\ w\in V).`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_spin_label_reversal"),
+        " の二つの定義値から、任意の ",
+        math(String.raw`a\in\mathsf{Spin}`),
+        " に対して ",
+        math(String.raw`\nu(\nu(a))=a`),
+        " および ",
+        math(String.raw`\nu(a)\ne a`),
+        " が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_w(T_w(\sigma))(w)
+&=\nu(T_w(\sigma)(w))
+&&\bigl(\because\ \text{一頂点での配位反転写像の定義}\bigr)\\
+&=\nu(\nu(\sigma(w)))
+&&\bigl(\because\ \text{一頂点での配位反転写像の定義}\bigr)\\
+&=\sigma(w)
+&&\bigl(\because\ \nu(\nu(a))=a\bigr),\\[4pt]
+T_w(T_w(\sigma))(v)
+&=T_w(\sigma)(v)
+&&\bigl(\because\ v\ne w\text{ と一頂点での配位反転写像の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ v\ne w\text{ と一頂点での配位反転写像の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "第二の計算は任意の ",
+        math(String.raw`v\in V\setminus\{w\}`),
+        " に対して成り立つので、二つの配位は全頂点で等しく、",
+        math(String.raw`T_w(T_w(\sigma))=\sigma`),
+        " である。また ",
+        math(String.raw`T_w(\sigma)(w)=\nu(\sigma(w))\ne\sigma(w)`),
+        " なので ",
+        math(String.raw`T_w(\sigma)\ne\sigma`),
+        " である。",
       ]),
     ],
   },
@@ -70,7 +262,7 @@ export default defineBlocks([
         math(String.raw`\sigma\in\mathcal S_G`),
         " の破れ辺集合と破れ辺数を",
       ]),
-      displayMath(String.raw`B_G(\sigma):=\{e\in E\mid \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\},\qquad b_G(\sigma):=|B_G(\sigma)|\in\mathbb N`),
+      displayMath(String.raw`B_G(\sigma):=\left\{e\in E\ \middle|\ \sigma\!\left(\partial_G(e,\mathsf{source})\right)\ne\sigma\!\left(\partial_G(e,\mathsf{target})\right)\right\},\qquad b_G(\sigma):=|B_G(\sigma)|\in\mathbb N`),
       paragraph(["と定める。端点写像と配位は ", ref("def_finite_graph_input"), " と ", ref("def_spin_configuration_set"), " で定めた。"]),
     ],
   },
@@ -157,8 +349,14 @@ Z_G(1)
     habitat: "Z",
     statement: [
       paragraph(["各 ", math(String.raw`\sigma\in\mathcal S_G`), " と ", math(String.raw`e\in E`), " に対し"]),
-      displayMath(String.raw`s_G(\sigma,e):=\sigma(\partial_0(e))\sigma(\partial_1(e))\in\{-1,+1\}`),
-      paragraph(["と定める。"]),
+      displayMath(String.raw`s_G(\sigma,e):=\kappa\!\left(\sigma\!\left(\partial_G(e,\mathsf{source})\right)\right)\kappa\!\left(\sigma\!\left(\partial_G(e,\mathsf{target})\right)\right)\in\{-1,+1\}\subset\mathbb Z`),
+      paragraph([
+        "と定める。スピンラベルから整数への移行には ",
+        ref("def_spin_integer_realization"),
+        " の写像 ",
+        math(String.raw`\kappa`),
+        " だけを用いる。",
+      ]),
     ],
   },
   {
@@ -181,7 +379,7 @@ Z_G(1)
     habitat: "F2",
     statement: [
       paragraph(["辺部分集合 ", math(String.raw`A\subseteq E`), " と頂点 ", math(String.raw`w\in V`), " に対し"]),
-      displayMath(String.raw`\partial_G(A)(w):=\left|\{e\in A\mid \partial_0(e)=w\ \text{または}\ \partial_1(e)=w\}\right|\bmod 2\in\mathbb F_2`),
+      displayMath(String.raw`\beta_G(A)(w):=\left|\left\{(e,a)\in A\times\mathsf{End}\ \middle|\ \partial_G(e,a)=w\right\}\right|\bmod 2\in\mathbb F_2`),
       paragraph(["と定める。各辺の二端点は異なるので、一つの辺を同じ頂点で二重に数えない。"]),
     ],
   },
@@ -192,7 +390,7 @@ Z_G(1)
     labels: ["def_even_edge_subset"],
     habitat: "finite",
     statement: [
-      displayMath(String.raw`\mathcal Z_1(G):=\{A\subseteq E\mid \partial_G(A)(w)=0\ \text{for every }w\in V\}`),
+      displayMath(String.raw`\mathcal Z_1(G):=\{A\subseteq E\mid \beta_G(A)(w)=0\ \text{for every }w\in V\}`),
       paragraph(["と定める。これは有限集合である。境界偶奇は ", ref("def_mod_two_boundary_parity"), " で定めた。"]),
     ],
   },
@@ -238,11 +436,23 @@ H_G(u,v)
         math(String.raw`1`),
         " である頂点 ",
         math(String.raw`w`),
-        " が存在する。配位の ",
-        math(String.raw`w`),
-        " での値だけを反転する写像は ",
+        " が存在する。",
+        ref("def_single_vertex_spin_flip"),
+        " の写像 ",
+        math(String.raw`T_w`),
+        " は ",
         math(String.raw`\mathcal S_G`),
-        " 上の不動点を持たない対合であり、対になった二項の積の符号が逆になるので、内側の和は ",
+        " 上の不動点を持たない対合であることは ",
+        ref("claim_single_vertex_spin_flip_involution"),
+        " で示した。境界偶奇が ",
+        math(String.raw`1`),
+        " なので、",
+        ref("claim_spin_reversal_integer_realization"),
+        " により ",
+        math(String.raw`\sigma`),
+        " と ",
+        math(String.raw`T_w(\sigma)`),
+        " に対応する積の整数符号は逆になる。したがって内側の和は ",
         math(String.raw`0`),
         " である。",
       ]),
@@ -267,4 +477,3 @@ H_G(u,v)
     ],
   },
 ]);
-

@@ -1,27 +1,73 @@
 # SageMath: 向き付けられた閉曲面セル分割を判定する有限述語の正例・負例
 # 対象ラベル: def_oriented_closed_surface_cellulation
 # 対象: structured-latex/content/finite-cellulation.ts の「向き付けられた閉曲面セル分割を判定する有限述語」
-# 帰属: 有限集合、NN、ZZ、真偽値だけを用いる。
+# 帰属: 辺端・向き・角での役割・位置の各有限ラベル集合、NN、真偽値だけを用いる。
+
+SOURCE = "source"
+TARGET = "target"
+END_LABELS = (SOURCE, TARGET)
+
+FORWARD = "forward"
+REVERSE = "reverse"
+INITIAL_END = {FORWARD: SOURCE, REVERSE: TARGET}
+TERMINAL_END = {FORWARD: TARGET, REVERSE: SOURCE}
+REVERSED_ORIENTATION = {FORWARD: REVERSE, REVERSE: FORWARD}
+
+ARRIVING = "arriving"
+DEPARTING = "departing"
+CORNER_SIDE_LABELS = (ARRIVING, DEPARTING)
+
+
+def cyclic_word(entries):
+    positions = []
+    edge_at = {}
+    orientation_at = {}
+    successor = {}
+    first_position = None
+    previous_position = None
+    for position, edge, orientation in entries:
+        if first_position is None:
+            first_position = position
+        if previous_position is not None:
+            successor[previous_position] = position
+        positions.append(position)
+        edge_at[position] = edge
+        orientation_at[position] = orientation
+        previous_position = position
+    assert first_position is not None
+    successor[previous_position] = first_position
+    return {
+        "positions": tuple(positions),
+        "successor": successor,
+        "edge_at": edge_at,
+        "orientation_at": orientation_at,
+    }
 
 
 def opposite_edge_twice(edges, boundary_words):
     for edge in edges:
         orientations = []
         for word in boundary_words.values():
-            orientations.extend(orientation for current_edge, orientation in word if current_edge == edge)
+            for position in word["positions"]:
+                if word["edge_at"][position] == edge:
+                    orientations.append(word["orientation_at"][position])
         if len(orientations) != 2:
             return False
-        if sum(ZZ(orientation) for orientation in orientations) != 0:
+        first_orientation, second_orientation = orientations
+        if second_orientation != REVERSED_ORIENTATION[first_orientation]:
             return False
     return True
 
 
-def edge_end(edge, orientation, terminal):
-    if terminal:
-        endpoint_index = (1 + orientation) // 2
-    else:
-        endpoint_index = (1 - orientation) // 2
-    return (edge, endpoint_index)
+def corner_edge_end(word, position, corner_side):
+    if corner_side == ARRIVING:
+        edge = word["edge_at"][position]
+        orientation = word["orientation_at"][position]
+        return (edge, TERMINAL_END[orientation])
+    successor_position = word["successor"][position]
+    edge = word["edge_at"][successor_position]
+    orientation = word["orientation_at"][successor_position]
+    return (edge, INITIAL_END[orientation])
 
 
 def vertex_links_are_cycles(vertices, edges, endpoints, boundary_words):
@@ -31,17 +77,21 @@ def vertex_links_are_cycles(vertices, edges, endpoints, boundary_words):
     corners_by_vertex = {vertex: [] for vertex in vertices}
     corner_ends = {}
     for face, word in boundary_words.items():
-        for index, (edge, orientation) in enumerate(word):
-            next_edge, next_orientation = word[(index + 1) % len(word)]
-            incoming_end = edge_end(edge, orientation, terminal=True)
-            outgoing_end = edge_end(next_edge, next_orientation, terminal=False)
-            incoming_vertex = endpoints[edge][incoming_end[1]]
-            outgoing_vertex = endpoints[next_edge][outgoing_end[1]]
-            if incoming_vertex != outgoing_vertex:
+        for position in word["positions"]:
+            arriving_end = corner_edge_end(word, position, ARRIVING)
+            departing_end = corner_edge_end(word, position, DEPARTING)
+            arriving_edge, arriving_label = arriving_end
+            departing_edge, departing_label = departing_end
+            arriving_vertex = endpoints[arriving_edge][arriving_label]
+            departing_vertex = endpoints[departing_edge][departing_label]
+            if arriving_vertex != departing_vertex:
                 return False
-            corner = (face, index)
-            corners_by_vertex[incoming_vertex].append(corner)
-            corner_ends[corner] = (incoming_end, outgoing_end)
+            corner = (face, position)
+            corners_by_vertex[arriving_vertex].append(corner)
+            corner_ends[corner] = {
+                ARRIVING: arriving_end,
+                DEPARTING: departing_end,
+            }
 
     for vertex in vertices:
         corners = corners_by_vertex[vertex]
@@ -49,21 +99,29 @@ def vertex_links_are_cycles(vertices, edges, endpoints, boundary_words):
             return False
 
         incident_ends = [
-            (edge, endpoint_index)
+            (edge, end_label)
             for edge in edges
-            for endpoint_index in (0, 1)
-            if endpoints[edge][endpoint_index] == vertex
+            for end_label in END_LABELS
+            if endpoints[edge][end_label] == vertex
         ]
         for current_end in incident_ends:
-            if sum(current_end == end for corner in corners for end in corner_ends[corner]) != 2:
+            multiplicity = sum(
+                current_end == corner_ends[corner][corner_side]
+                for corner in corners
+                for corner_side in CORNER_SIDE_LABELS
+            )
+            if multiplicity != 2:
                 return False
 
-        reached = {corners[0]}
-        frontier = [corners[0]]
+        initial_corner = next(iter(corners))
+        reached = {initial_corner}
+        frontier = [initial_corner]
         while frontier:
             current = frontier.pop()
+            current_ends = set(corner_ends[current].values())
             for candidate in corners:
-                if candidate not in reached and set(corner_ends[current]).intersection(corner_ends[candidate]):
+                candidate_ends = set(corner_ends[candidate].values())
+                if candidate not in reached and current_ends.intersection(candidate_ends):
                     reached.add(candidate)
                     frontier.append(candidate)
         if len(reached) != len(corners):
@@ -73,18 +131,20 @@ def vertex_links_are_cycles(vertices, edges, endpoints, boundary_words):
 
 
 def connected_one_skeleton(vertices, edges, endpoints):
-    reached = {vertices[0]}
-    frontier = [vertices[0]]
+    initial_vertex = next(iter(vertices))
+    reached = {initial_vertex}
+    frontier = [initial_vertex]
     while frontier:
         current = frontier.pop()
         for edge in edges:
-            endpoint_zero, endpoint_one = endpoints[edge]
-            if endpoint_zero == current and endpoint_one not in reached:
-                reached.add(endpoint_one)
-                frontier.append(endpoint_one)
-            if endpoint_one == current and endpoint_zero not in reached:
-                reached.add(endpoint_zero)
-                frontier.append(endpoint_zero)
+            source_vertex = endpoints[edge][SOURCE]
+            target_vertex = endpoints[edge][TARGET]
+            if source_vertex == current and target_vertex not in reached:
+                reached.add(target_vertex)
+                frontier.append(target_vertex)
+            if target_vertex == current and source_vertex not in reached:
+                reached.add(source_vertex)
+                frontier.append(source_vertex)
     return reached == set(vertices)
 
 
@@ -100,13 +160,13 @@ def oriented_closed_surface_cellulation(vertices, edges, endpoints, boundary_wor
 sphere_vertices = ("A", "B", "C")
 sphere_edges = ("a", "b", "c")
 sphere_endpoints = {
-    "a": ("A", "B"),
-    "b": ("B", "C"),
-    "c": ("C", "A"),
+    "a": {SOURCE: "A", TARGET: "B"},
+    "b": {SOURCE: "B", TARGET: "C"},
+    "c": {SOURCE: "C", TARGET: "A"},
 }
 sphere_boundary_words = {
-    "north": (("a", 1), ("b", 1), ("c", 1)),
-    "south": (("c", -1), ("b", -1), ("a", -1)),
+    "north": cyclic_word((("north-a", "a", FORWARD), ("north-b", "b", FORWARD), ("north-c", "c", FORWARD))),
+    "south": cyclic_word((("south-c", "c", REVERSE), ("south-b", "b", REVERSE), ("south-a", "a", REVERSE))),
 }
 assert oriented_closed_surface_cellulation(
     sphere_vertices,
@@ -117,8 +177,8 @@ assert oriented_closed_surface_cellulation(
 
 # 同方向の二面は、辺の逆向き二回出現条件を満たさない。
 same_orientation = {
-    "north": (("a", 1), ("b", 1), ("c", 1)),
-    "south": (("a", 1), ("b", 1), ("c", 1)),
+    "north": cyclic_word((("north-a", "a", FORWARD), ("north-b", "b", FORWARD), ("north-c", "c", FORWARD))),
+    "south": cyclic_word((("south-a", "a", FORWARD), ("south-b", "b", FORWARD), ("south-c", "c", FORWARD))),
 }
 assert not oriented_closed_surface_cellulation(
     sphere_vertices,
@@ -131,18 +191,18 @@ assert not oriented_closed_surface_cellulation(
 pinched_vertices = ("A", "B", "C", "D", "E")
 pinched_edges = ("a", "b", "c", "d", "e", "f")
 pinched_endpoints = {
-    "a": ("A", "B"),
-    "b": ("B", "C"),
-    "c": ("C", "A"),
-    "d": ("A", "D"),
-    "e": ("D", "E"),
-    "f": ("E", "A"),
+    "a": {SOURCE: "A", TARGET: "B"},
+    "b": {SOURCE: "B", TARGET: "C"},
+    "c": {SOURCE: "C", TARGET: "A"},
+    "d": {SOURCE: "A", TARGET: "D"},
+    "e": {SOURCE: "D", TARGET: "E"},
+    "f": {SOURCE: "E", TARGET: "A"},
 }
 pinched_boundary_words = {
-    "north_left": (("a", 1), ("b", 1), ("c", 1)),
-    "south_left": (("c", -1), ("b", -1), ("a", -1)),
-    "north_right": (("d", 1), ("e", 1), ("f", 1)),
-    "south_right": (("f", -1), ("e", -1), ("d", -1)),
+    "north_left": cyclic_word((("north-left-a", "a", FORWARD), ("north-left-b", "b", FORWARD), ("north-left-c", "c", FORWARD))),
+    "south_left": cyclic_word((("south-left-c", "c", REVERSE), ("south-left-b", "b", REVERSE), ("south-left-a", "a", REVERSE))),
+    "north_right": cyclic_word((("north-right-d", "d", FORWARD), ("north-right-e", "e", FORWARD), ("north-right-f", "f", FORWARD))),
+    "south_right": cyclic_word((("south-right-f", "f", REVERSE), ("south-right-e", "e", REVERSE), ("south-right-d", "d", REVERSE))),
 }
 assert not oriented_closed_surface_cellulation(
     pinched_vertices,
@@ -155,18 +215,18 @@ assert not oriented_closed_surface_cellulation(
 disconnected_vertices = ("A", "B", "C", "D", "E", "F")
 disconnected_edges = ("a", "b", "c", "d", "e", "f")
 disconnected_endpoints = {
-    "a": ("A", "B"),
-    "b": ("B", "C"),
-    "c": ("C", "A"),
-    "d": ("D", "E"),
-    "e": ("E", "F"),
-    "f": ("F", "D"),
+    "a": {SOURCE: "A", TARGET: "B"},
+    "b": {SOURCE: "B", TARGET: "C"},
+    "c": {SOURCE: "C", TARGET: "A"},
+    "d": {SOURCE: "D", TARGET: "E"},
+    "e": {SOURCE: "E", TARGET: "F"},
+    "f": {SOURCE: "F", TARGET: "D"},
 }
 disconnected_boundary_words = {
-    "north_left": (("a", 1), ("b", 1), ("c", 1)),
-    "south_left": (("c", -1), ("b", -1), ("a", -1)),
-    "north_right": (("d", 1), ("e", 1), ("f", 1)),
-    "south_right": (("f", -1), ("e", -1), ("d", -1)),
+    "north_left": cyclic_word((("north-left-a", "a", FORWARD), ("north-left-b", "b", FORWARD), ("north-left-c", "c", FORWARD))),
+    "south_left": cyclic_word((("south-left-c", "c", REVERSE), ("south-left-b", "b", REVERSE), ("south-left-a", "a", REVERSE))),
+    "north_right": cyclic_word((("north-right-d", "d", FORWARD), ("north-right-e", "e", FORWARD), ("north-right-f", "f", FORWARD))),
+    "south_right": cyclic_word((("south-right-f", "f", REVERSE), ("south-right-e", "e", REVERSE), ("south-right-d", "d", REVERSE))),
 }
 assert opposite_edge_twice(disconnected_edges, disconnected_boundary_words)
 assert vertex_links_are_cycles(

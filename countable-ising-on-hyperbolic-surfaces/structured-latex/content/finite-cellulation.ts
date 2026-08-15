@@ -39,6 +39,109 @@ export default defineBlocks([
     ],
   },
   {
+    id: "finite_cellulation_definition_orientation_labels",
+    kind: "definition",
+    title: { text: "境界辺の向きラベル集合" },
+    labels: ["def_finite_cellulation_orientation_label_set"],
+    habitat: "finite",
+    statement: [
+      paragraph(["面境界における辺の進み方を表す形式的ラベルの有限集合を"]),
+      displayMath(String.raw`\mathsf{Ori}:=\{\mathsf{forward},\mathsf{reverse}\}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`\mathsf{forward}`),
+        " と ",
+        math(String.raw`\mathsf{reverse}`),
+        " は向きを区別するラベルであり、整数 ",
+        math(String.raw`+1,-1\in\mathbb Z`),
+        " ではない。この集合には整数の演算を入れない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_cellulation_definition_orientation_endpoint_selectors",
+    kind: "definition",
+    title: { text: "向きラベルから辺端ラベルを選ぶ写像" },
+    labels: ["def_finite_cellulation_orientation_endpoint_selectors"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_orientation_label_set"),
+        " の向きラベルから、進行の始点と終点に当たる ",
+        ref("def_edge_endpoint_label_set"),
+        " の辺端ラベルを選ぶ二つの写像を",
+      ]),
+      displayMath(String.raw`\iota,\tau:\mathsf{Ori}\to\mathsf{End}`),
+      paragraph(["とし、その値を"]),
+      displayMath(String.raw`\begin{array}{c|cc}
+\omega & \iota(\omega) & \tau(\omega)\\ \hline
+\mathsf{forward} & \mathsf{source} & \mathsf{target}\\
+\mathsf{reverse} & \mathsf{target} & \mathsf{source}
+\end{array}`),
+      paragraph([
+        "で定める。",
+        math(String.raw`\iota(\omega)`),
+        " は向き ",
+        math(String.raw`\omega\in\mathsf{Ori}`),
+        " で辺を進むときの始点ラベル、",
+        math(String.raw`\tau(\omega)`),
+        " は終点ラベルである。異なるラベル集合の間の移行は、この二写像だけを通して行う。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_cellulation_definition_orientation_reversal",
+    kind: "definition",
+    title: { text: "向きラベルの反転写像" },
+    labels: ["def_finite_cellulation_orientation_reversal"],
+    habitat: "finite",
+    statement: [
+      paragraph(["向きラベルを反転する写像を"]),
+      displayMath(String.raw`\rho:\mathsf{Ori}\to\mathsf{Ori},\qquad
+\rho(\mathsf{forward})=\mathsf{reverse},\qquad
+\rho(\mathsf{reverse})=\mathsf{forward}`),
+      paragraph([
+        "と定める。これは形式的ラベル上の写像であり、整数の加法逆元を用いない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_cellulation_definition_cyclic_position_system",
+    kind: "definition",
+    title: { text: "面境界の巡回位置系" },
+    labels: ["def_finite_cellulation_cyclic_position_system"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "各面 ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " に対し、空でない有限集合 ",
+        math(String.raw`P_f`),
+        " と全単射 ",
+        math(String.raw`s_f:P_f\to P_f`),
+        " の組 ",
+        math(String.raw`\mathcal P_f=(P_f,s_f)`),
+        " を巡回位置系と呼ぶ。ただし",
+      ]),
+      displayMath(String.raw`\text{任意の }i,j\in P_f\text{ に対して、ある }r\in\mathbb N\text{ が存在して }s_f^{\circ r}(i)=j`),
+      paragraph([
+        "を要求する。ここで ",
+        math(String.raw`s_f^{\circ r}`),
+        " は写像 ",
+        math(String.raw`s_f`),
+        " の ",
+        math(String.raw`r`),
+        " 回合成であり、",
+        math(String.raw`s_f^{\circ 0}=\operatorname{id}_{P_f}`),
+        " とする。位置は有限集合 ",
+        math(String.raw`P_f`),
+        " の元であり、整数添字ではない。次位置は整数加算ではなく写像 ",
+        math(String.raw`s_f`),
+        " で選ぶ。",
+      ]),
+    ],
+  },
+  {
     id: "finite_cellulation_definition_face_boundary_word",
     kind: "definition",
     title: { text: "面の向き付き境界語" },
@@ -48,7 +151,7 @@ export default defineBlocks([
       paragraph([
         ref("def_finite_graph_input"),
         " の有限グラフ ",
-        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        math(String.raw`G=(V,E,\partial_G)`),
         " と ",
         ref("def_finite_cellulation_cell_sets"),
         " のセル集合入力 ",
@@ -57,37 +160,37 @@ export default defineBlocks([
         math(String.raw`V_{\mathrm{cell}}=V`),
         " および ",
         math(String.raw`E_{\mathrm{cell}}=E`),
-        " を満たすとする。各面 ",
+        " を満たすとし、各面には ",
+        ref("def_finite_cellulation_cyclic_position_system"),
+        " の巡回位置系 ",
+        math(String.raw`\mathcal P_f=(P_f,s_f)`),
+        " が与えられているとする。各面 ",
         math(String.raw`f\in F_{\mathrm{cell}}`),
-        " の向き付き境界語を、正整数 ",
-        math(String.raw`n_f\in\mathbb N_{>0}`),
-        " と有限列",
+        " の向き付き境界語を写像",
       ]),
-      displayMath(String.raw`\partial_{\mathrm{word}}f:=\bigl((e_{f,i},\varepsilon_{f,i})\bigr)_{i=0}^{n_f-1}\in\bigl(E_{\mathrm{cell}}\times\{-1,+1\}\bigr)^{n_f}`),
+      displayMath(String.raw`\partial_{\mathrm{word}}f:P_f\to E_{\mathrm{cell}}\times\mathsf{Ori},\qquad
+\partial_{\mathrm{word}}f(i)=\bigl(e_{f,i},\omega_{f,i}\bigr)`),
       paragraph([
-        "の組として定める。ここで各 ",
-        math(String.raw`i\in\{0,1,\ldots,n_f-1\}`),
+        "として定める。ここで各 ",
+        math(String.raw`i\in P_f`),
         " に対し ",
         math(String.raw`e_{f,i}\in E_{\mathrm{cell}}`),
         " および ",
-        math(String.raw`\varepsilon_{f,i}\in\{-1,+1\}`),
-        " であり、添字を巡回的に ",
-        math(String.raw`e_{f,n_f}:=e_{f,0}`),
-        "、",
-        math(String.raw`\varepsilon_{f,n_f}:=\varepsilon_{f,0}`),
-        " と延長して、接続条件",
+        math(String.raw`\omega_{f,i}\in\mathsf{Ori}`),
+        " であり、接続条件",
       ]),
-      displayMath(String.raw`\partial_{(1+\varepsilon_{f,i})/2}(e_{f,i})=\partial_{(1-\varepsilon_{f,i+1})/2}(e_{f,i+1})\qquad\bigl(i\in\{0,1,\ldots,n_f-1\}\bigr)`),
+      displayMath(String.raw`\partial_G\!\left(e_{f,i},\tau(\omega_{f,i})\right)
+=
+\partial_G\!\left(e_{f,s_f(i)},\iota(\omega_{f,s_f(i)})\right)
+\qquad(i\in P_f)`),
       paragraph([
-        "を要求する。符号 ",
-        math(String.raw`+1`),
-        " は辺を ",
-        math(String.raw`\partial_0(e)`),
-        " から ",
-        math(String.raw`\partial_1(e)`),
-        " へ進む向き、符号 ",
-        math(String.raw`-1`),
-        " は逆向きを表す。したがって接続条件は、各向き付き辺の終点が次の向き付き辺の始点に等しく、最後の終点が最初の始点に等しいことを述べる。",
+        "を要求する。端点の選択には ",
+        ref("def_finite_cellulation_orientation_endpoint_selectors"),
+        " の写像 ",
+        math(String.raw`\iota,\tau`),
+        " を用い、次位置の選択には ",
+        math(String.raw`s_f`),
+        " を用いる。したがって接続条件は、各向き付き辺の終点が次の向き付き辺の始点に等しいことを、ラベルへの整数演算なしに述べる。",
       ]),
     ],
   },
@@ -122,35 +225,66 @@ export default defineBlocks([
   \left\{
     (f,i)\ \middle|\
     \begin{array}{l}
-    f\in F_{\mathrm{cell}},\quad i\in\mathbb N,\quad 0\le i<n_f,\\
+    f\in F_{\mathrm{cell}},\quad i\in P_f,\\
     e_{f,i}=e
     \end{array}
   \right\}
 \right|=2,\\[8pt]
-\displaystyle
-\sum_{\substack{
-  f\in F_{\mathrm{cell}},\ 0\le i<n_f\\
-  e_{f,i}=e
-}}
-\varepsilon_{f,i}=0.
+\text{その相異なる二つの出現位置を }(f,i),(g,j)\text{ と書けば}\\[4pt]
+\qquad \omega_{g,j}=\rho(\omega_{f,i}).
 \end{cases}
 \end{aligned}`),
       paragraph([
         "出現位置 ",
         math(String.raw`(f,i)`),
-        " の集合は有限集合、その元の個数は ",
-        math(String.raw`\mathbb N`),
-        "、符号和は ",
-        math(String.raw`\mathbb Z`),
-        " に属する。各符号は ",
-        math(String.raw`\{-1,+1\}`),
-        " に属するため、二つの出現の符号和が ",
-        math(String.raw`0`),
-        " であることは、一方が ",
-        math(String.raw`+1`),
-        "、他方が ",
-        math(String.raw`-1`),
-        " であることと同値である。二つの出現位置は異なるが、二つの面は同じでもよい。この述語は有限列の走査、整数の加法、有限整数の等号だけで判定できる。",
+        " は有限集合 ",
+        math(String.raw`\{(f,i)\mid f\in F_{\mathrm{cell}},\ i\in P_f\}`),
+        " の元である。二つの出現位置は異なるが、二つの面は同じでもよい。向きの比較には ",
+        ref("def_finite_cellulation_orientation_reversal"),
+        " の反転写像 ",
+        math(String.raw`\rho`),
+        " だけを用いる。この述語は有限集合の列挙、元数、ラベルの等号だけで判定できる。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_cellulation_definition_corner_side_labels",
+    kind: "definition",
+    title: { text: "角に接する辺端の役割ラベル集合" },
+    labels: ["def_finite_cellulation_corner_side_label_set"],
+    habitat: "finite",
+    statement: [
+      paragraph(["一つの角へ到着する辺端と、その角から出発する辺端を区別する形式的ラベル集合を"]),
+      displayMath(String.raw`\mathsf{CornerSide}:=\{\mathsf{arriving},\mathsf{departing}\}`),
+      paragraph([
+        "と定める。この二つは整数や符号ではなく、角に対する辺端の役割だけを表すラベルである。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_cellulation_definition_corner_edge_end_map",
+    kind: "definition",
+    title: { text: "角から辺端を選ぶ写像" },
+    labels: ["def_finite_cellulation_corner_edge_end_map"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " と ",
+        math(String.raw`i\in P_f`),
+        " に対し、角に接する辺端を選ぶ写像 ",
+        math(String.raw`h_{f,i}:\mathsf{CornerSide}\to E_{\mathrm{cell}}\times\mathsf{End}`),
+        " を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h_{f,i}(\mathsf{arriving})
+&:=\bigl(e_{f,i},\tau(\omega_{f,i})\bigr),\\
+h_{f,i}(\mathsf{departing})
+&:=\bigl(e_{f,s_f(i)},\iota(\omega_{f,s_f(i)})\bigr)
+\end{aligned}`),
+      paragraph([
+        "と定める。面境界語の接続条件により、二つの辺端は同じ頂点へ写る。",
       ]),
     ],
   },
@@ -163,33 +297,8 @@ export default defineBlocks([
     verification: ["sagemath/check/finite-cellulation-vertex-links-are-cycles"],
     statement: [
       paragraph([
-        ref("def_finite_cellulation_face_boundary_word"),
-        " の各出現位置 ",
-        math(String.raw`(f,i)`),
-        " に対し、その角を挟む二つの辺端を",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-h^-_{f,i}
-&:=
-\left(
-  e_{f,i},
-  \frac{1+\varepsilon_{f,i}}{2}
-\right)
-\in E_{\mathrm{cell}}\times\{0,1\},\\
-h^+_{f,i}
-&:=
-\left(
-  e_{f,i+1},
-  \frac{1-\varepsilon_{f,i+1}}{2}
-\right)
-\in E_{\mathrm{cell}}\times\{0,1\}
-\end{aligned}`),
-      paragraph([
-        "と書く。ここで添字 ",
-        math(String.raw`i+1`),
-        " は ",
-        math(String.raw`n_f`),
-        " を法として巡回的に読む。接続条件により、両辺端の頂点は等しい。各 ",
+        ref("def_finite_cellulation_corner_edge_end_map"),
+        " の辺端選択写像に対し、各 ",
         math(String.raw`v\in V_{\mathrm{cell}}`),
         " における角位置の有限集合を",
       ]),
@@ -197,8 +306,8 @@ h^+_{f,i}
 \left\{
   (f,i)\ \middle|\
   \begin{array}{l}
-  f\in F_{\mathrm{cell}},\quad i\in\mathbb N,\quad 0\le i<n_f,\\
-  \partial_{(1+\varepsilon_{f,i})/2}(e_{f,i})=v
+  f\in F_{\mathrm{cell}},\quad i\in P_f,\\
+  \partial_G\!\left(h_{f,i}(\mathsf{arriving})\right)=v
   \end{array}
 \right\}`),
       paragraph([
@@ -227,25 +336,25 @@ h^+_{f,i}
 C_v\ne\varnothing,\\[4pt]
 \left|
   \left\{
-    ((f,i),s)\in C_v\times\{-,+\}\ \middle|\
-    h^s_{f,i}=h
+    ((f,i),\alpha)\in C_v\times\mathsf{CornerSide}\ \middle|\
+    h_{f,i}(\alpha)=h
   \right\}
 \right|=2
 \quad
 \left(
   \text{任意の }h\in
   \left\{
-    (e,\delta)\in E_{\mathrm{cell}}\times\{0,1\}
+    (e,\xi)\in E_{\mathrm{cell}}\times\mathsf{End}
     \ \middle|\
-    \partial_\delta(e)=v
+    \partial_G(e,\xi)=v
   \right\}
   \text{ に対して}
 \right),\\[12pt]
 \text{任意の }c,c'\in C_v\text{ に対して、ある }r\in\mathbb N\text{ と}\\
 \qquad c_j=(f_j,i_j)\in C_v\quad(0\le j\le r)\text{ が存在し、}\\
 \qquad c_0=c,\quad c_r=c',\quad
-\{h^-_{f_j,i_j},h^+_{f_j,i_j}\}\cap
-\{h^-_{f_{j+1},i_{j+1}},h^+_{f_{j+1},i_{j+1}}\}\ne\varnothing\\
+\{h_{f_j,i_j}(\alpha)\mid \alpha\in\mathsf{CornerSide}\}\cap
+\{h_{f_{j+1},i_{j+1}}(\alpha)\mid \alpha\in\mathsf{CornerSide}\}\ne\varnothing\\
 \qquad\left(j\in\mathbb N,\ 0\le j<r\right).
 \end{cases}
 \end{aligned}`),
@@ -255,7 +364,7 @@ C_v\ne\varnothing,\\[4pt]
         math(String.raw`r`),
         " と各元の個数は ",
         math(String.raw`\mathbb N`),
-        " に属する。第二条件は各辺端に二つの角が接すること、第三条件は全ての角が辺端の共有によって一つにつながることを表す。この述語は有限集合の列挙と等号だけで判定できる。",
+        " に属する。第二条件は各辺端に二つの角が接すること、第三条件は全ての角が辺端の共有によって一つにつながることを表す。辺端と角での役割は別々の形式的ラベル集合に属し、その間の選択は明示した写像だけを通す。この述語は有限集合の列挙と等号だけで判定できる。",
       ]),
     ],
   },
@@ -270,7 +379,7 @@ C_v\ne\varnothing,\\[4pt]
       paragraph([
         ref("def_finite_graph_input"),
         " の有限グラフ ",
-        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        math(String.raw`G=(V,E,\partial_G)`),
         " に対し、一次骨格連結述語 ",
         math(String.raw`\operatorname{ConnectedOneSkeleton}`),
         " を真偽値集合 ",
@@ -287,7 +396,7 @@ v_j\in V\quad(0\le j\le r),\qquad
 e_j\in E\quad(1\le j\le r)\text{ が存在し、}\\
 &\quad
 v_0=v,\qquad v_r=w,\qquad
-\{\partial_0(e_j),\partial_1(e_j)\}=\{v_{j-1},v_j\}
+\{\partial_G(e_j,\mathsf{source}),\partial_G(e_j,\mathsf{target})\}=\{v_{j-1},v_j\}
 \quad(1\le j\le r).
 \end{aligned}`),
       paragraph([
@@ -354,7 +463,7 @@ v_0=v,\qquad v_r=w,\qquad
       paragraph([
         ref("def_finite_cellulation_face_boundary_word"),
         " の入力である有限グラフ ",
-        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        math(String.raw`G=(V,E,\partial_G)`),
         "、セル集合入力 ",
         math(String.raw`\mathcal C_{\mathrm{cell}}=(V_{\mathrm{cell}},E_{\mathrm{cell}},F_{\mathrm{cell}})`),
         "、向き付き境界語の族 ",
@@ -396,7 +505,7 @@ v_0=v,\qquad v_r=w,\qquad
         ref("def_finite_cellulation_vertex_links_are_cycles"),
         "、",
         ref("def_finite_cellulation_connected_one_skeleton"),
-        " で定めた有限述語である。第一条件が面境界の向きを全辺で整合させ、第二条件が各頂点の近傍を一つの円周にし、第三条件がセル分割全体を一つの連結成分にする。この連言は有限集合の列挙、自然数と整数の等号、真偽値演算だけで判定でき、実数・複素数・極限・積分を用いない。",
+        " で定めた有限述語である。第一条件が面境界の向きを全辺で整合させ、第二条件が各頂点の近傍を一つの円周にし、第三条件がセル分割全体を一つの連結成分にする。この連言は有限集合の列挙、元数、形式的ラベルの等号、真偽値演算だけで判定でき、整数環上の符号演算、実数・複素数・極限・積分を用いない。",
       ]),
     ],
   },
@@ -435,7 +544,7 @@ v_0=v,\qquad v_r=w,\qquad
 \right)
 \ \land\\
 &\quad
-n_f=p
+\lvert P_f\rvert=p
 \qquad\left(\text{任意の }f\in F_{\mathrm{cell}}\text{ に対して}\right)
 \ \land\\
 &\quad
@@ -444,11 +553,11 @@ n_f=p
 \end{aligned}`),
       paragraph([
         ref("def_finite_cellulation_face_boundary_word"),
-        " の ",
-        math(String.raw`n_f\in\mathbb N_{>0}`),
+        " の有限集合 ",
+        math(String.raw`P_f`),
         " は面 ",
         math(String.raw`f`),
-        " の向き付き境界語に現れる辺の出現位置の個数であり、",
+        " の向き付き境界語に現れる辺の出現位置の集合であり、",
         ref("def_finite_cellulation_vertex_links_are_cycles"),
         " の有限集合 ",
         math(String.raw`C_v`),

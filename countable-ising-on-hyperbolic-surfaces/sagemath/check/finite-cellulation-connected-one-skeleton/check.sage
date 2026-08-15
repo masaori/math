@@ -1,22 +1,28 @@
 # SageMath: 一次骨格の連結性を判定する有限述語の正例・負例
 # 対象ラベル: def_finite_cellulation_connected_one_skeleton
 # 対象: structured-latex/content/finite-cellulation.ts の「一次骨格の連結性を判定する有限述語」
-# 帰属: 有限集合、NN、真偽値だけを用いる。
+# 帰属: 端点ラベルの有限集合、頂点・辺の有限集合、真偽値だけを用いる。
+
+SOURCE = "source"
+TARGET = "target"
+END_LABELS = (SOURCE, TARGET)
 
 
 def connected_one_skeleton(vertices, edges, endpoints):
-    reached = {vertices[0]}
-    frontier = [vertices[0]]
+    initial_vertex = next(iter(vertices))
+    reached = {initial_vertex}
+    frontier = [initial_vertex]
     while frontier:
         current = frontier.pop()
         for edge in edges:
-            endpoint_zero, endpoint_one = endpoints[edge]
-            if endpoint_zero == current and endpoint_one not in reached:
-                reached.add(endpoint_one)
-                frontier.append(endpoint_one)
-            if endpoint_one == current and endpoint_zero not in reached:
-                reached.add(endpoint_zero)
-                frontier.append(endpoint_zero)
+            source_vertex = endpoints[edge][SOURCE]
+            target_vertex = endpoints[edge][TARGET]
+            if source_vertex == current and target_vertex not in reached:
+                reached.add(target_vertex)
+                frontier.append(target_vertex)
+            if target_vertex == current and source_vertex not in reached:
+                reached.add(source_vertex)
+                frontier.append(source_vertex)
     return reached == set(vertices)
 
 
@@ -24,9 +30,9 @@ def connected_one_skeleton(vertices, edges, endpoints):
 sphere_vertices = ("A", "B", "C")
 sphere_edges = ("a", "b", "c")
 sphere_endpoints = {
-    "a": ("A", "B"),
-    "b": ("B", "C"),
-    "c": ("C", "A"),
+    "a": {SOURCE: "A", TARGET: "B"},
+    "b": {SOURCE: "B", TARGET: "C"},
+    "c": {SOURCE: "C", TARGET: "A"},
 }
 assert connected_one_skeleton(sphere_vertices, sphere_edges, sphere_endpoints)
 
@@ -34,12 +40,12 @@ assert connected_one_skeleton(sphere_vertices, sphere_edges, sphere_endpoints)
 disconnected_vertices = ("A", "B", "C", "D", "E", "F")
 disconnected_edges = ("a", "b", "c", "d", "e", "f")
 disconnected_endpoints = {
-    "a": ("A", "B"),
-    "b": ("B", "C"),
-    "c": ("C", "A"),
-    "d": ("D", "E"),
-    "e": ("E", "F"),
-    "f": ("F", "D"),
+    "a": {SOURCE: "A", TARGET: "B"},
+    "b": {SOURCE: "B", TARGET: "C"},
+    "c": {SOURCE: "C", TARGET: "A"},
+    "d": {SOURCE: "D", TARGET: "E"},
+    "e": {SOURCE: "E", TARGET: "F"},
+    "f": {SOURCE: "F", TARGET: "D"},
 }
 assert not connected_one_skeleton(
     disconnected_vertices,
