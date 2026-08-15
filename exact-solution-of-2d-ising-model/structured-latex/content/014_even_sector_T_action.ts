@@ -467,12 +467,18 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/
       paragraph([
         "基底段階（",
         math(String.raw`n = 0`),
-        "、偶数）：",
-        math(String.raw`C_0 = \check{Z}_\mu`),
-        " であり、偶数側の右辺は ",
-        math(String.raw`(-1)^{0}(2K_1)^{0}\check{Z}_\mu = \check{Z}_\mu`),
-        " で一致する。",
+        "、偶数）では、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+C_0
+&= \check{Z}_\mu
+   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&= (-1)^0(2K_1)^0\check{Z}_\mu
+   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_1)^0=1)
+\end{aligned}`,
+      ),
+      paragraph(["となり、偶数側の右辺と一致する。"]),
       paragraph([
         "帰納段階 1（",
         math(String.raw`n`),

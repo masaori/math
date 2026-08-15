@@ -38174,6 +38174,138 @@ t^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{\,b^{\mathrm{op}}_{L,L}(\tau)}
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_block_tiling_logarithm",
+    kind: "claim",
+    title: { text: "ブロック敷き詰め評価の対数化" },
+    labels: ["claim_open_square_block_tiling_logarithm"],
+    habitat: "R",
+    realEscape:
+      "開境界正方形のブロック敷き詰め評価へ実対数の狭義単調性・乗法加法性・自然数冪の法則を適用し、" +
+      "自由エネルギー密度の実数順序での上下評価を得るため。完備性・極限は使わない。",
+    verification: ["sagemath/check/open-square-block-tiling-logarithm"],
+    statement: [
+      paragraph([
+        math(String.raw`a,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る。補正項を",
+      ]),
+      displayMath(String.raw`\delta_{a,k}(t):=
+\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{2(k-1)}{ka}\right)
+\cdot\log_{\mathbb{R}}(t)\ \in\ \mathbb{R}`),
+      paragraph(["と定める。このとき、"]),
+      displayMath(String.raw`\begin{array}{ll}
+0<_{\mathbb{R}}t\le_{\mathbb{R}}1:&
+\delta_{a,k}(t)+\psi^{\mathrm{op}}_a(t)
+\le_{\mathbb{R}}\psi^{\mathrm{op}}_{ka}(t)
+\le_{\mathbb{R}}\psi^{\mathrm{op}}_a(t),\\[2mm]
+1\le_{\mathbb{R}}t:&
+\psi^{\mathrm{op}}_a(t)
+\le_{\mathbb{R}}\psi^{\mathrm{op}}_{ka}(t)
+\le_{\mathbb{R}}\delta_{a,k}(t)+\psi^{\mathrm{op}}_a(t)
+\end{array}`),
+      paragraph([
+        "が成り立つ。分母 ",
+        math(String.raw`ka`),
+        " は ",
+        math(String.raw`a,k\ge1`),
+        " により零でないので、補正項の有理数係数は確定する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "略記 ",
+        math(String.raw`P:=Z^{\mathrm{op}}_{a,a}(t)`),
+        "、",
+        math(String.raw`Q:=Z^{\mathrm{op}}_{ka,ka}(t)`),
+        " を置く。",
+        ref("def_open_rectangle_partition_value"),
+        " により ",
+        math(String.raw`0<_{\mathbb{R}}P`),
+        " かつ ",
+        math(String.raw`0<_{\mathbb{R}}Q`),
+        " である。まず ",
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " とする。",
+        ref("claim_open_square_block_tiling"),
+        " の下からの評価へ実対数の狭義単調性を適用し、等号の場合も合わせると、",
+      ]),
+      displayMath(String.raw`\log_{\mathbb{R}}\!\left(
+t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k
+\right)\le_{\mathbb{R}}\log_{\mathbb{R}}(Q)
+\quad\bigl(\because\ \blkref{claim_open_square_block_tiling}\ \text{と実対数の単調性}\bigr)`),
+      paragraph(["である。左辺を一行ずつ開くと、"]),
+      displayMath(String.raw`\begin{aligned}
+&\log_{\mathbb{R}}\!\left(t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k\right)\\
+&=\log_{\mathbb{R}}\!\left(t^{(k-1)(ka)}\right)
+ +\log_{\mathbb{R}}\!\left(\left(t^{(k-1)a}P^k\right)^k\right)
+&&\bigl(\because\ \text{実対数の乗法加法性}\bigr)\\
+&=\iota\!\left((k-1)(ka)\right)\log_{\mathbb{R}}(t)
+ +\iota(k)\log_{\mathbb{R}}\!\left(t^{(k-1)a}P^k\right)
+&&\bigl(\because\ \blkref{claim_real_log_natural_power}\bigr)\\
+&=\iota\!\left((k-1)(ka)\right)\log_{\mathbb{R}}(t)
+ +\iota(k)\left(\log_{\mathbb{R}}\!\left(t^{(k-1)a}\right)+\log_{\mathbb{R}}(P^k)\right)
+&&\bigl(\because\ \text{実対数の乗法加法性}\bigr)\\
+&=\iota\!\left((k-1)(ka)\right)\log_{\mathbb{R}}(t)
+ +\iota(k)\left(\iota\!\left((k-1)a\right)\log_{\mathbb{R}}(t)
+ +\iota(k)\log_{\mathbb{R}}(P)\right)
+&&\bigl(\because\ \blkref{claim_real_log_natural_power}\bigr)\\
+&=\iota\!\left(2(k-1)ka\right)\log_{\mathbb{R}}(t)
+ +\iota(k^2)\log_{\mathbb{R}}(P)
+&&\bigl(\because\ \text{分配則と自然数の等式}\bigr).
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\iota`),
+        " は自然数を有理数へ移し、さらに ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " で実数へ移す合成を表す。上の不等式へ正の有理数 ",
+        math(String.raw`1/(ka)^2`),
+        " を実数へ移した係数を掛け、",
+        ref("def_open_square_free_energy_density"),
+        " で書き戻すと、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{(ka)^2}\right)
+ \left(\iota\!\left(2(k-1)ka\right)\log_{\mathbb{R}}(t)
+ +\iota(k^2)\log_{\mathbb{R}}(P)\right)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{2(k-1)}{ka}\right)
+ \log_{\mathbb{R}}(t)
+ +\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{a^2}\right)
+ \log_{\mathbb{R}}(P)
+&&\bigl(\because\ \text{有理数の約分と体準同型性}\bigr)\\
+&=\delta_{a,k}(t)+\psi^{\mathrm{op}}_a(t)
+&&\bigl(\because\ \text{二つの定義}\bigr)
+\end{aligned}`),
+      paragraph(["となるので、第一の場合の下からの評価を得る。同じ場合の上からの評価は、"]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}(Q)
+&\le_{\mathbb{R}}\log_{\mathbb{R}}\!\left((P^k)^k\right)
+&&\bigl(\because\ \blkref{claim_open_square_block_tiling}\ \text{と実対数の単調性}\bigr)\\
+&=\iota(k^2)\log_{\mathbb{R}}(P)
+&&\bigl(\because\ \blkref{claim_real_log_natural_power}\ \text{を二回適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "へ同じ正の係数を掛け、",
+        math(String.raw`\iota(1/(ka)^2)\iota(k^2)=\iota(1/a^2)`),
+        " と ",
+        ref("def_open_square_free_energy_density"),
+        " を使って得る。",
+        math(String.raw`1\le_{\mathbb{R}}t`),
+        " の場合は ",
+        ref("claim_open_square_block_tiling"),
+        " の二つの不等式の向きだけが入れ替わる。実対数の単調性、上の二つの等式列、正の係数の乗法を同じ順で適用すると、第二の場合の二つの評価を得る。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
