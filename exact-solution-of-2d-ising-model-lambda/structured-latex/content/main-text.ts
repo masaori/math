@@ -38747,6 +38747,119 @@ u-\varepsilon
   },
 
   {
+    id: "thermodynamic_limit_def_open_rectangle_constant_plus_configuration",
+    kind: "definition",
+    title: { text: "開境界長方形の全て正の定数配位" },
+    labels: ["def_open_rectangle_constant_plus_configuration"],
+    habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.openAllPlusConfig"],
+    verification: ["sagemath/check/open-rectangle-value-at-least-one"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
+        " とする。", math(String.raw`\tau_{+}:V^{\mathrm{op}}_{a,b}\to\{+1,-1\}`),
+        " を、すべての頂点 ", math(String.raw`v\in V^{\mathrm{op}}_{a,b}`), " に ",
+        math(String.raw`+1`), " を割り当てる定数写像とする（頂点集合は ",
+        ref("def_open_rectangle_vertices"), "）。写像なので ",
+        math(String.raw`\tau_{+}\in\Sigma^{\mathrm{op}}_{a,b}`), " である（",
+        ref("def_open_rectangle_configuration"), "）。",
+      ]),
+      paragraph([
+        "周期境界の全て正の定数配位 ", math(String.raw`\sigma_{+}`), "（",
+        ref("def_constant_plus_configuration"),
+        "）とは定義域が異なるので、別の記号 ", math(String.raw`\tau_{+}`),
+        " を使う。この定義は有限集合の上の写像だけで書けており、実数体を使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_rectangle_constant_plus_breaks_no_bond",
+    kind: "claim",
+    title: { text: "開境界長方形の全て正の定数配位の破れボンド数は零である" },
+    labels: ["claim_open_rectangle_constant_plus_breaks_no_bond"],
+    habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.openAllPlusConfig_openBrokenBondCount_eq_zero"],
+    verification: ["sagemath/check/open-rectangle-value-at-least-one"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
+        " とする。", math(String.raw`b^{\mathrm{op}}_{a,b}(\tau_{+})=0`), " である（",
+        math(String.raw`\tau_{+}`), " は ", ref("def_open_rectangle_constant_plus_configuration"),
+        "、", math(String.raw`b^{\mathrm{op}}_{a,b}`), " は ",
+        ref("def_open_rectangle_broken_bond_count"), "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+b^{\mathrm{op}}_{a,b}(\tau_{+})
+&=\bigl|\bigl\{\,e\in E^{\mathrm{op}}_{a,b} \;\bigm|\; \tau_{+}(\partial^{\mathrm{op}}_0(e))\ne\tau_{+}(\partial^{\mathrm{op}}_1(e))\,\bigr\}\bigr|
+&&(\because\ \blkref{def_open_rectangle_broken_bond_count})\\
+&=\bigl|\bigl\{\,e\in E^{\mathrm{op}}_{a,b} \;\bigm|\; +1\ne+1\,\bigr\}\bigr|
+&&(\because\ \text{任意の }v\in V^{\mathrm{op}}_{a,b}\text{ で }\tau_{+}(v)=+1\text{。}\blkref{def_open_rectangle_constant_plus_configuration})\\
+&=|\varnothing|
+&&(\because\ +1=+1\text{ なので条件を満たす辺の番号は存在しない})\\
+&=0
+&&(\because\ \text{空集合の元の個数})
+\end{aligned}`),
+      paragraph(["この証明は有限集合の数え上げだけで書けており、実数体を使っていない。"]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_rectangle_value_at_least_one",
+    kind: "claim",
+    title: { text: "開境界長方形の値は 1 以上である" },
+    labels: ["claim_open_rectangle_value_at_least_one"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した開境界分配多項式の値を実数の順序で 1 と比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質と、有限和の一項の分離だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-rectangle-value-at-least-one"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.one_le_openPartitionValue",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.one_le_sum_pow_by_separating_zero_exponent_term_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.one_le_openPartitionValue_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
+        " と、正の実数 ", math(String.raw`t\in\mathbb{R}`), "、", math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`1\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,b}(t)`),
+      paragraph([
+        "である（", math(String.raw`Z^{\mathrm{op}}_{a,b}(t)`), " は ",
+        ref("def_open_rectangle_partition_value"), "）。右辺の下界 ",
+        math(String.raw`1`), " は ", math(String.raw`a`), "、", math(String.raw`b`), "、",
+        math(String.raw`t`), " のいずれにも依らない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "各配位 ", math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`), " について ",
+        math(String.raw`0<_{\mathbb{R}}t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}`),
+        " である（正の元の自然数冪は正。", ref("claim_partition_value_positive_at_positive_real"),
+        " の証明の準備と同じ帰納法）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=t^{0}
+&&(\because\ \text{冪の指数 }0\text{ の約束 }t^{0}=1)\\
+&=t^{\,b^{\mathrm{op}}_{a,b}(\tau_{+})}
+&&(\because\ b^{\mathrm{op}}_{a,b}(\tau_{+})=0\text{。}\blkref{claim_open_rectangle_constant_plus_breaks_no_bond})\\
+&\le_{\mathbb{R}}t^{\,b^{\mathrm{op}}_{a,b}(\tau_{+})}+\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}\setminus\{\tau_{+}\}}t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ \text{加えた和は正の項の有限和なので }0\le_{\mathbb{R}}\text{（上の準備と、正の元どうしの和は正。}\blkref{remark_real_field_escape}\text{）})\\
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ \tau_{+}\in\Sigma^{\mathrm{op}}_{a,b}\text{（}\blkref{def_open_rectangle_constant_plus_configuration}\text{）なので分離した 1 項を有限和へ戻せる})\\
+&=Z^{\mathrm{op}}_{a,b}(t)
+&&(\because\ \blkref{def_open_rectangle_partition_value})
+\end{aligned}`),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

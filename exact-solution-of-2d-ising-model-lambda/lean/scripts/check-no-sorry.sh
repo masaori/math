@@ -1108,6 +1108,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_infimum_approximation_multiples_of_le_one
   Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_infimum_approximation_multiples_necSuf
   Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_infimum_approximation_multiples_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openAllPlusConfig_openBrokenBondCount_eq_zero
+  Ising2DLambda.ThermodynamicLimit.one_le_openPartitionValue
+  Ising2DLambda.NecSuf.ThermodynamicLimit.one_le_sum_pow_by_separating_zero_exponent_term_necSuf
+  Ising2DLambda.ThermodynamicLimit.one_le_openPartitionValue_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
