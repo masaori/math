@@ -59,4 +59,20 @@ theorem toRational_injective (l m : LogOrderGroup) (h : toRational l = toRationa
       _ = ((m p : ℤ) : ℚ) := toRational_apply m p
   exact Int.cast_injective hp
 
+/-- `claim_scaled_free_entropy_denominator_clearing` の末尾:
+整数倍と `ι` は交換する（`n·ι(ν) = ι(nν)`）。各素数での値の等号として示す。 -/
+theorem toRational_intSmul (n : ℤ) (l : LogOrderGroup) :
+    ((n : ℚ)) • toRational l = toRational (n • l) := by
+  ext p
+  calc
+    ((n : ℚ) • toRational l) p = (n : ℚ) * toRational l p := Finsupp.smul_apply _ _ _
+    -- ι の定義
+    _ = (n : ℚ) * ((l p : ℤ) : ℚ) := by rw [toRational_apply]
+    -- 分母 1 の有理数の積は整数の積
+    _ = ((n * l p : ℤ) : ℚ) := (Int.cast_mul _ _).symm
+    -- Λ の整数倍の定義
+    _ = (((n • l) p : ℤ) : ℚ) := by rw [Finsupp.smul_apply, smul_eq_mul]
+    -- ι の定義
+    _ = toRational (n • l) p := (toRational_apply _ _).symm
+
 end Ising2DLambda.ThermodynamicLimit

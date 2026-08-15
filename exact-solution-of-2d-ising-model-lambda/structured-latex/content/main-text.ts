@@ -35461,6 +35461,7 @@ w\cdot w
     verification: ["sagemath/check/scaled-free-entropy-denominator-clearing"],
     lean: [
       "Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator",
+      "Ising2DLambda.ThermodynamicLimit.toRational_intSmul",
       "Ising2DLambda.NecSuf.ThermodynamicLimit.two_scaled_denominators_cancel_necSuf",
       "Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator_from_necSuf",
     ],
@@ -35513,13 +35514,48 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
         math(String.raw`\lambda`),
         " と ",
         math(String.raw`\mu`),
-        " を入れ替えた同じ二段の計算で得る。さらに ",
-        ref("claim_rational_log_order_group_embedding"),
-        " の加法保存と、非負整数倍が反復加法であることから、右辺はそれぞれ ",
+        " を入れ替えた同じ二段の計算で得る。",
+      ]),
+      paragraph([
+        "右辺が ",
         math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(M^2\lambda)`),
+        " に等しいことは、任意の ",
+        math(String.raw`n\in\mathbb{Z}`),
+        "、",
+        math(String.raw`\nu\in\Lambda`),
+        " について ",
+        math(String.raw`n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu)`),
+        "（左辺の ",
+        math(String.raw`n`),
+        " は分母 ",
+        math(String.raw`1`),
+        " の有理数として読む）を、各素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " での値の等号として示せばよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
+&=n\,\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義})\\
+&=n\,\bigl(\nu(p)/1\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&=(n\cdot\nu(p))/1
+&&(\because\ \text{分母 }1\text{ の有理数の積は整数の積})\\
+&=(n\nu)(p)/1
+&&(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "これを ",
+        math(String.raw`n=M^2`),
+        "、",
+        math(String.raw`\nu=\lambda`),
         " と ",
-        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(L^2\mu)`),
-        " に等しい。すべて有理数の四則と有限台写像の演算であり、実数体は現れない。",
+        math(String.raw`n=L^2`),
+        "、",
+        math(String.raw`\nu=\mu`),
+        " に適用する。すべて有理数の四則と有限台写像の演算であり、実数体は現れない。",
       ]),
     ],
   },

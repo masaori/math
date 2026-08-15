@@ -22,6 +22,10 @@ for L, M, lam, mu in product([1, 2, 3, 5], [1, 2, 4], samples, samples):
     right_density = smul(QQ(1) / M**2, mu)
     assert smul(common, left_density) == smul(M**2, lam)
     assert smul(common, right_density) == smul(L**2, mu)
-    count += 2
+    # 整数倍と ι の交換: n·ι(ν) = ι(nν)（Λ 側は ZZ の積、Λ_Q 側は QQ の積）
+    for n, nu in [(M**2, lam), (L**2, mu)]:
+        z_side = {p: ZZ(n) * ZZ(a) for p, a in nu.items() if ZZ(n) * ZZ(a) != 0}
+        assert smul(n, nu) == {p: QQ(a) for p, a in z_side.items()}
+    count += 4
 
 print("PASS: scaled-free-entropy-denominator-clearing (%d checks)" % count)
