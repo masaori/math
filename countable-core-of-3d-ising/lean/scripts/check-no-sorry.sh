@@ -92,6 +92,8 @@ targets=(
   Ising3DCut.NecSuf.NullModel.same_partition_different_pairData
   Ising3DCut.NullModel.same_partition_different_pairData_from_necSuf
   Ising3DCut.NullModel.splittingDegree_galoisGroup_do_not_determine_polynomial
+  Ising3DCut.NullModel.distinctRoots_do_not_determine_polynomial_from_necSuf
+  Ising3DCut.NullModel.eq_of_roots_and_leadingCoeff_eq_from_necSuf
   Ising3DCut.NecSuf.NullModel.splittingDegree_galoisGroup_do_not_determine_polynomial
   Ising3DCut.NullModel.splittingDegree_galoisGroup_do_not_determine_polynomial_from_necSuf
   Ising3DCut.NullModel.discriminant_does_not_determine_polynomial

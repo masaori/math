@@ -68,3 +68,5 @@ import Ising3DCut.StructuralCore.PeriodicSuccessorNotPalindrome
 import Ising3DCut.NecSuf.StructuralCore.PeriodicSuccessorNotPalindrome
 import Ising3DCut.StructuralCore.PeriodicSuccessorNotPalindromeFromNecSuf
 import Ising3DCut.NullModel.RootDataDeterminePolynomial
+import Ising3DCut.NecSuf.NullModel.RootDataDeterminePolynomial
+import Ising3DCut.NullModel.RootDataDeterminePolynomialFromNecSuf
