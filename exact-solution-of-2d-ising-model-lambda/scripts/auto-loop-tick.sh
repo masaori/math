@@ -301,11 +301,18 @@ PYEOF
 )"
 tick_commit="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-')"
 [ -z "$tick_summary" ] && tick_summary="$(git -C "$REPO_DIR" log -1 --format='%s' 2>/dev/null || true)"
-# 公開スクリプトが最後に公開した版と URL。今回の版でなければ URL は添えない
-# （このプロジェクトを触っていない tick では公開が走らない）。
+# 公開スクリプトが最後に公開した版と URL。**URL は必ず添える**（ユーザー指示 2026-08-15）。
+# このプロジェクトを触っていない tick では公開が走らないが、公開先の URL は同じままなので、
+# その場合も最後に公開した版の URL を渡す（読む人はいつでも論文を開けるほうがよい）。
 published_url="$(cut -f2 "$LOG_DIR/last-published" 2>/dev/null || true)"
 published_commit="$(cut -f1 "$LOG_DIR/last-published" 2>/dev/null || true)"
-[ "$published_commit" = "$tick_commit" ] || published_url=""
+if [ -z "$published_url" ]; then
+  # まだ一度も公開していない（記録が無い）ときだけ、ログの最後の成功行から拾う。
+  published_url="$(grep -o 'https://[^ ]*/artifacts/math/ising-lambda/' "$LOG_DIR/publish-artifact.log" 2>/dev/null | tail -1)"
+fi
+if [ -n "$published_url" ] && [ "$published_commit" != "$tick_commit" ]; then
+  published_url="$published_url （公開されているのは版 ${published_commit:--} の内容）"
+fi
 
 # 「前進した」と言えるのは、このプロジェクトを触るコミットが増えたときだけである
 # （HEAD が動いただけでは、3 次元側のループのコミットを取り込んだ可能性がある）。
