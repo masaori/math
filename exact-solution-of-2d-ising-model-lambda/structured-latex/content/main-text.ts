@@ -36343,8 +36343,194 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
       paragraph([
         "共通分母がすべての ",
         math(String.raw`\lambda\in\Lambda_{\mathbb{Q}}`),
-        " に存在すること（値の分母の積が共通分母になること）は次のセクションで示す。",
+        " に存在すること（値の分母の積が共通分母になること）は次の主張で示す。",
         "ここでは定義と一意性だけを述べる。実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_common_denominator_exists",
+    kind: "claim",
+    title: { text: "有理係数の対数順序群の元は共通分母を持つ" },
+    labels: ["claim_common_denominator_exists"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/common-denominator-exists"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.denominatorProduct",
+      "Ising2DLambda.ThermodynamicLimit.denominatorProduct_pos",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominatorWitness",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_exists",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.denominator_product_clears_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_exists_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`\lambda\in\Lambda_{\mathbb{Q}}`),
+        "（",
+        ref("def_rational_log_order_group"),
+        "）とし、",
+        math(String.raw`\lambda(p)\ne0`),
+        " となる素数の集合を ",
+        math(String.raw`S_{\lambda}:=\{p\in\mathcal{P}:\lambda(p)\ne0\}`),
+        " と書く（",
+        ref("def_rational_log_order_group"),
+        " により有限集合）。有理数 ",
+        math(String.raw`r\in\mathbb{Q}`),
+        " の既約分数表示を ",
+        math(String.raw`r=\operatorname{num}(r)/\operatorname{den}(r)`),
+        "（",
+        math(String.raw`\operatorname{num}(r)\in\mathbb{Z}`),
+        "、",
+        math(String.raw`\operatorname{den}(r)\in\mathbb{N}`),
+        "、",
+        math(String.raw`\operatorname{den}(r)\ge1`),
+        "、両者は互いに素）と書く。この表示は一意であり、",
+        math(String.raw`\operatorname{den}(r)\cdot r=\operatorname{num}(r)`),
+        " である（",
+        math(String.raw`\operatorname{den}(r)`),
+        " は分母 ",
+        math(String.raw`1`),
+        " の有理数として読む）。正の整数",
+      ]),
+      displayMath(String.raw`N_{\lambda}:=\prod_{p\in S_{\lambda}}\operatorname{den}\bigl(\lambda(p)\bigr)\ \in\ \mathbb{N}`),
+      paragraph([
+        "（",
+        math(String.raw`S_{\lambda}=\varnothing`),
+        " なら空積で ",
+        math(String.raw`N_{\lambda}=1`),
+        "）について、",
+        math(String.raw`N_{\lambda}\ge1`),
+        " であり、",
+        math(String.raw`N_{\lambda}`),
+        " は ",
+        math(String.raw`\lambda`),
+        " の共通分母（",
+        ref("def_common_denominator"),
+        "）である。その証人 ",
+        math(String.raw`\lambda_{N_{\lambda}}\in\Lambda`),
+        " は、各素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " で",
+      ]),
+      displayMath(String.raw`\lambda_{N_{\lambda}}(p)=\begin{cases}
+\bigl(N_{\lambda}/\operatorname{den}(\lambda(p))\bigr)\cdot\operatorname{num}\bigl(\lambda(p)\bigr)&(p\in S_{\lambda})\\
+0&(p\notin S_{\lambda})
+\end{cases}`),
+      paragraph([
+        "で与えられる（",
+        math(String.raw`p\in S_{\lambda}`),
+        " のとき ",
+        math(String.raw`\operatorname{den}(\lambda(p))`),
+        " は積 ",
+        math(String.raw`N_{\lambda}`),
+        " の因子なので、",
+        math(String.raw`N_{\lambda}/\operatorname{den}(\lambda(p))`),
+        " は ",
+        math(String.raw`\mathbb{N}`),
+        " の中の割り切れる商である）。したがって ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " のすべての元は共通分母を持つ。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "各 ",
+        math(String.raw`p\in S_{\lambda}`),
+        " について ",
+        math(String.raw`\operatorname{den}(\lambda(p))\ge1`),
+        " なので、有限個の ",
+        math(String.raw`1`),
+        " 以上の整数の積として ",
+        math(String.raw`N_{\lambda}\ge1`),
+        " である（空積は ",
+        math(String.raw`1`),
+        "）。写像 ",
+        math(String.raw`\nu:\mathcal{P}\to\mathbb{Z}`),
+        " を主張の場合分けの右辺で定める。",
+        math(String.raw`p\in S_{\lambda}`),
+        " のとき ",
+        math(String.raw`\operatorname{den}(\lambda(p))`),
+        " は積 ",
+        math(String.raw`N_{\lambda}`),
+        " の因子の一つなので ",
+        math(String.raw`N_{\lambda}/\operatorname{den}(\lambda(p))\in\mathbb{N}`),
+        " であり、右辺は整数である。",
+        math(String.raw`\nu(p)\ne0`),
+        " となる ",
+        math(String.raw`p`),
+        " は ",
+        math(String.raw`S_{\lambda}`),
+        " に含まれるので有限個であり、",
+        math(String.raw`\nu\in\Lambda`),
+        " である（",
+        ref("def_log_order_group"),
+        "）。",
+        ref("def_common_denominator"),
+        " により、示すべきことは ",
+        math(String.raw`N_{\lambda}\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)`),
+        " である。写像の等号なので、各素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " での値の等号を示す。",
+        math(String.raw`p\in S_{\lambda}`),
+        " のとき、",
+        math(String.raw`d:=\operatorname{den}(\lambda(p))`),
+        "、",
+        math(String.raw`a:=\operatorname{num}(\lambda(p))`),
+        " と略記して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(N_{\lambda}\cdot\lambda\bigr)(p)
+&=N_{\lambda}\,\lambda(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義})\\
+&=\bigl((N_{\lambda}/d)\cdot d\bigr)\,\lambda(p)
+&&(\because\ d\text{ は }N_{\lambda}\text{ の因子。}\mathbb{N}\text{ の割り切れる商の定義})\\
+&=(N_{\lambda}/d)\,\bigl(d\,\lambda(p)\bigr)
+&&(\because\ \mathbb{Q}\text{ の積の結合則})\\
+&=(N_{\lambda}/d)\,a
+&&(\because\ \text{既約分数表示 }d\cdot\lambda(p)=a)\\
+&=\bigl((N_{\lambda}/d)\cdot a\bigr)/1
+&&(\because\ \text{分母 }1\text{ の有理数の積は整数の積})\\
+&=\nu(p)/1
+&&(\because\ \nu\text{ の定義、}p\in S_{\lambda})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p\notin S_{\lambda}`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(N_{\lambda}\cdot\lambda\bigr)(p)
+&=N_{\lambda}\,\lambda(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義})\\
+&=N_{\lambda}\cdot0
+&&(\because\ p\notin S_{\lambda}\text{ の定義})\\
+&=0
+&&(\because\ \mathbb{Q}\text{ の }0\text{ との積})\\
+&=\nu(p)/1
+&&(\because\ \nu\text{ の定義、}p\notin S_{\lambda})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`N_{\lambda}\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)`),
+        " であり、",
+        math(String.raw`N_{\lambda}`),
+        " は ",
+        math(String.raw`\lambda`),
+        " の共通分母、",
+        math(String.raw`\nu`),
+        " がその証人 ",
+        math(String.raw`\lambda_{N_{\lambda}}`),
+        " である（",
+        ref("def_common_denominator"),
+        " の一意性により、証人はこの ",
+        math(String.raw`\nu`),
+        " に限る）。使ったのは有限積、",
+        math(String.raw`\mathbb{N}`),
+        " の割り切れる商、既約分数表示、有理数の四則だけである。",
       ]),
     ],
   },
