@@ -3,6 +3,35 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 304）の記録
+- **2026-08-16 の tick 304 は、「有理係数の対数順序群の元の共通分母の存在」を本文・SageMath・Lean（具体版・
+  必要十分版・導出版）まで完成させた。** $\lambda\in\Lambda_{\mathbb Q}$ の非零値の既約分母の積
+  $N_\lambda$ が $1$ 以上で $\lambda$ の共通分母になること、証人が各素数で $(N_\lambda/\operatorname{den})\cdot
+  \operatorname{num}$（台の外は $0$）であることを、$p\in S_\lambda$ の七段の鎖と $p\notin S_\lambda$ の五段の鎖で示した。
+  レビューでは前 tick の共通分母の定義と独立性の四層が一致し、`def_rational_log_order_group` 末尾の順序の予告
+  （「次の定義で正の有理数の比較から」）を「共通分母を通して $\Lambda$ の順序から」へ直して先に push した。
+  順序の定義が二元の共通の共通分母を要るので「共通分母の正整数倍は共通分母である」を次のセクションとして足した。
+
+
+
+- 2026-08-16（tick 304）: `claim_common_denominator_exists` を `def_common_denominator` の直後に置き四層で閉じた。
+  有理数の既約分数表示 $\operatorname{num}/\operatorname{den}$ と、$N_\lambda:=\prod_{p\in S_\lambda}\operatorname{den}(\lambda(p))$
+  （空積 $1$）を導入し、証人 $\nu(p)=(N_\lambda/\operatorname{den})\cdot\operatorname{num}$ で $N_\lambda\cdot\lambda=\iota(\nu)$ を
+  各素数で示した。SageMath `common-denominator-exists` は素数 $2,3,5,7$・係数 10 種の 10000 ベクトル（零写像を含む）で
+  鎖の各段と等式を `ZZ`/`QQ` で厳密に。Lean 具体版 `ThermodynamicLimit/CommonDenominatorExists.lean`
+  （`denominatorProduct`、`denominatorProduct_pos`、`den_dvd_denominatorProduct`、`commonDenominatorWitness`、
+  `commonDenominator_exists`。`Nat.div_mul_cancel`・`Rat.mul_den_eq_num`）、必要十分版 `denominator_product_clears_necSuf`
+  （可換半環の値、有限集合の外で $0$、各点の分母・分子の等式、$\mathbb N$ 倍を保つ写像だけ。有理数・素数・既約性は本質でない）、
+  導出版。sorry 検査 1110 件。**割り直し**: 順序の定義が二元の共通の共通分母を要るので、「共通分母の正整数倍は
+  共通分母である」（一つの短い鎖）を順序の定義の前に足した。式変形統一は一時停止中のため実施せず。
+
+
+
+- 2026-08-16（tick 304）: 前 tick の「共通分母の定義と順序判定の共通分母独立性」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせ、七段の鎖・同値の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。
+  `def_rational_log_order_group` 末尾の「順序は次の定義で正の有理数の比較から移す」が現在の構成（共通分母を通して
+  $\Lambda$ の順序から移す）と食い違っていたので、その旨へ書き直した。
+
 ## 2026-08-16（tick 303）の記録
 
 ### 現在地

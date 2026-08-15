@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 309 は、前 tick の「有理係数の対数順序群の順序は加法について単調である」の四層を突き合わせて一致を確認し
+（修正無し）、「有限系の実自由エントロピーを畳む」を着手前に対象ブロック（$\mathbb R$ 版約 40 件）を列挙して 16 のセクションへ割った。
+割り方の方針: $\mathbb R$ 版のブロックをその場で書き換えると下流の $\mathbb R$ ブロックが参照を失うので、$\mathbb Q$／$\Lambda_{\mathbb Q}$
+版を「実数体への脱出の宣言」より前に新設して併存させ、$\mathbb R$ 版は「旧実数値経路を撤去する」で消す。先頭「正の有理数の対数は
+順序を保ちかつ反映する」を四層まで完成させた。`claim_rational_log_order_iff`（章「有限系の自由エントロピー」、
+`claim_log_order_group_positive_multiple_invariant` の直後）で、補助等式 $\operatorname{rat}_\Lambda(\log q)=q$ を
+`claim_rational_log_surjective`（$\lambda:=\log q$）と `claim_rational_log_injective` で示し、
+$\log q\le_\Lambda\log q'\iff\operatorname{rat}_\Lambda(\log q)\le\operatorname{rat}_\Lambda(\log q')\iff q\le q'$ の二段で閉じた。
+SageMath `rational-log-order-iff`（素数 $2,3,5,7$・指数 5 種の正の有理数 625 個、恒等式 625 件、同値 390625 件、`ZZ`/`QQ`）。
+Lean 具体版 `FreeEntropy/RationalLogOrderIff.lean`（`rationalOfLog_logRat`、`logRat_le_iff`）、必要十分版
+`NecSuf/FreeEntropy/RationalLogOrderIff.lean` の `pullback_order_iff_of_left_inverse_necSuf`（`f∘g=id`、`g` の像が述語を満たすこと、
+述語上の `f` の単射性、関係が `g` を通した引き戻しであることだけ）、導出版（sorry 検査 1142 件）。次は「有限系の自由エントロピー密度
+（$\Lambda_{\mathbb Q}$ 値）の定義」（$\Psi_L(q):=\frac{1}{L^2}\cdot\iota(\Phi_L(q))$。加法単調性の直後・実数体脱出の宣言の前に置く。
+Lean は `RationalLogOrderGroup` の `(1/L^2 : ℚ) • toRational (freeEntropy L q)` の形の定義と、SageMath は具体値の一致）。
+
 2026-08-16 の tick 308 は、前 tick の「有理係数の対数順序群の順序は線形順序である」の四層を突き合わせて一致を確認し、Lean 具体版の
 ヘッダコメントの「`claim_common_denominator_multiple` を二度」を本文・実装どおり「各元について一度ずつ、計三度」へ直して先に push した。
 そのあと「有理係数の対数順序群の順序の加法単調性」を四層まで完成させた。`claim_rational_log_order_group_add_monotone`
@@ -3349,12 +3364,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の順序」（`def_rational_log_order_group_order`）の本文・SageMath
-  `rational-log-order-group-order`・Lean（`RationalLogOrderGroupOrder.lean` 三系統）を突き合わせる。とくに定義ブロックの中に
-  「∃ 形と ∀ 形の同値」と「決定手続き」を置いたことが「正しさに必要ならそれは注記ではない」に照らして妥当か、
-  三段の散文の証明が一ステップ一定理に足りているかを見る。
-- **次に進めるセクションは「有理係数の対数順序群の順序の線形順序性と加法単調性」**（状態台帳のセクション表の先頭行）。
-  論法が二つ（順序律と加法単調性）なら着手前に割る。
+- **レビュー**: 「正の有理数の対数は順序を保ちかつ反映する」（`claim_rational_log_order_iff`）の本文・SageMath
+  `rational-log-order-iff`・Lean（`RationalLogOrderIff.lean` 三系統）を突き合わせる。
+- **次に進めるセクションは「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」**（状態台帳のセクション表の先頭行）。
+  以降 15 件は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
   到達点は台帳の表にある。

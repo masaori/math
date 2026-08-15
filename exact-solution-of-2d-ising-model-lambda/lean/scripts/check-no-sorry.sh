@@ -89,6 +89,11 @@ targets=(
   Ising2DLambda.FreeEntropy.logOrderLE_natSmul_iff
   Ising2DLambda.NecSuf.FreeEntropy.pullback_multiple_iff_necSuf
   Ising2DLambda.FreeEntropy.logOrderLE_natSmul_iff_from_necSuf
+  Ising2DLambda.FreeEntropy.rationalOfLog_logRat
+  Ising2DLambda.FreeEntropy.logRat_le_iff
+  Ising2DLambda.NecSuf.FreeEntropy.left_inverse_on_pred_necSuf
+  Ising2DLambda.NecSuf.FreeEntropy.pullback_order_iff_of_left_inverse_necSuf
+  Ising2DLambda.FreeEntropy.logRat_le_iff_from_necSuf
   Ising2DLambda.ThermodynamicLimit.commonDenominator_unique
   Ising2DLambda.ThermodynamicLimit.commonDenominator_cross_smul
   Ising2DLambda.ThermodynamicLimit.commonDenominator_order_independent
