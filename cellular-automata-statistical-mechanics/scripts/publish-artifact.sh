@@ -43,7 +43,7 @@ fi
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   lock_pid="$(cat "$LOCK_DIR/pid" 2>/dev/null || true)"
   if [ -n "$lock_pid" ] && kill -0 "$lock_pid" 2>/dev/null; then
-    log "SKIP: 論文の公開処理がすでに走っている（pid $lock_pid）"
+    log "SKIP: 論文の公開処理がすでに走っている（pid ${lock_pid}）"
     exit 0
   fi
   rm -f "$LOCK_DIR/pid"
@@ -65,7 +65,7 @@ project_commit="$(git -C "$REPO_DIR" log -1 --format=%H -- "$PROJECT_NAME")"
 short_commit="$(printf '%.8s' "$project_commit")"
 notified_mark="$LOG_DIR/last-notified-project-commit"
 if [ "$(cat "$notified_mark" 2>/dev/null || true)" = "$project_commit" ]; then
-  log "SKIP: 同じ論文版は公開・通知済み（版 $short_commit）"
+  log "SKIP: 同じ論文版は公開・通知済み（版 ${short_commit}）"
   exit 0
 fi
 
@@ -98,7 +98,7 @@ PYEOF
 [ -n "$summary" ] || summary="$(git -C "$REPO_DIR" log -1 --format='%s' -- "$PROJECT_NAME")"
 
 if ! (cd "$PROJECT_DIR/structured-latex" && pnpm run --silent build:html >> "$LOG_FILE" 2>&1); then
-  log "NG: 論文 HTML の生成に失敗した（版 $short_commit）"
+  log "NG: 論文 HTML の生成に失敗した（版 ${short_commit}）"
   exit 1
 fi
 
@@ -108,13 +108,13 @@ cp "$HTML" "$STAGE/index.html"
 publish_output=""
 if ! publish_output="$($PUBLISHER --src "$STAGE" --repo math --path "$SLUG" 2>&1)"; then
   printf '%s\n' "$publish_output" >> "$LOG_FILE"
-  log "NG: 論文の公開に失敗した（版 $short_commit）"
+  log "NG: 論文の公開に失敗した（版 ${short_commit}）"
   exit 1
 fi
 printf '%s\n' "$publish_output" >> "$LOG_FILE"
 url="$(printf '%s\n' "$publish_output" | grep -Eo 'https://[^ ]+/artifacts/math/'"$SLUG"'/' | tail -1 || true)"
 if [ "$url" != "$EXPECTED_URL" ]; then
-  log "NG: 公開スクリプトが期待した URL を返さなかった（版 $short_commit）"
+  log "NG: 公開スクリプトが期待した URL を返さなかった（版 ${short_commit}）"
   exit 1
 fi
 
@@ -127,10 +127,10 @@ for _attempt in $(seq 1 30); do
   sleep 10
 done
 if [ "$published" -ne 1 ]; then
-  log "NG: 公開 URL が 200 を返さない（版 $short_commit・$url）"
+  log "NG: 公開 URL が 200 を返さない（版 ${short_commit}・${url}）"
   exit 1
 fi
-log "OK: 論文を公開した（版 $short_commit）→ $url"
+log "OK: 論文を公開した（版 ${short_commit}）→ ${url}"
 
 title="$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "$HTML" | head -1)"
 [ -n "$title" ] || title="2値セルオートマトンの内在構造"
@@ -151,10 +151,10 @@ slack_response="$(curl --fail -sS -X POST "$WEBHOOK_URL" \
     '{message: $message, repository: $repository}')")"
 printf '%s\n' "$slack_response" >> "$LOG_FILE"
 if ! printf '%s' "$slack_response" | jq -e '.ok == true' >/dev/null; then
-  log "NG: Slack が成功応答を返さなかった（版 $short_commit）"
+  log "NG: Slack が成功応答を返さなかった（版 ${short_commit}）"
   exit 1
 fi
 
 printf '%s' "$project_commit" > "$notified_mark"
-log "OK: 公開 URL を Slack へ通知した（版 $short_commit）"
+log "OK: 公開 URL を Slack へ通知した（版 ${short_commit}）"
 printf '%s\n' "$url"
