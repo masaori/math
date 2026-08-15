@@ -10741,3 +10741,39 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-16（tick 312）: 前 tick の「有理数倍と埋め込みを通した順序の移送」の本文・SageMath・Lean 具体版・必要十分版・導出版を
   突き合わせ、三段の鎖・∀ 形と ∃ 形の両向き・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
+
+## 2026-08-16 tick 320 で台帳から移したもの
+
+### 現在地
+
+- **2026-08-16 の tick 315 は、「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・
+  必要十分版・導出版）まで完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$
+  （`claim_finite_free_entropy_density_upper_bound`、正の有理点での上からの評価の直後・実数体脱出の宣言の直前、住処 Lambda）。準備は
+  $Z_L(q)\le2^{L^2}(1+q)^{2L^2}$・$\log2=\ell_2$（各素数での四段）・$n\cdot\iota(\nu)=\iota(n\nu)$（分母払いの証明の補助等式）。$\Lambda$ の鎖は
+  五段（定義・対数の順序保存・加法性・冪を二項へ・$\log2=\ell_2$）、$\Lambda_{\mathbb Q}$ の鎖は八段（定義・順序の移送・$\iota$ の加法性・分配則・
+  準備の第三・結合則・約分・$1\cdot\lambda=\lambda$）で、実数も実対数も使わない。レビューでは前 tick の $\mathbb Q$ 版上界の四層が一致し修正無し。
+  次は「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」。
+
+
+### 前進の記録
+
+- 2026-08-16（tick 315）: `claim_finite_free_entropy_density_upper_bound` を `claim_partition_value_upper_bound_at_positive_rational` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。準備の第一は `claim_value_at_rational_is_positive`・
+  `claim_partition_value_upper_bound_at_positive_rational`、第二は $\log2=\ell_2$（`def_rational_log`・`def_prime_exponent`・`def_log_order_group` の
+  四段）、第三は `claim_scaled_free_entropy_denominator_clearing` の証明末尾の $n\cdot\iota(\nu)=\iota(n\nu)$。$\Lambda$ の鎖は
+  `claim_rational_log_order_iff`・`claim_log_additive`・`claim_log_power`、$\Lambda_{\mathbb Q}$ の鎖は `claim_scaled_embedding_order_transfer` の ←・
+  `claim_rational_log_order_group_embedding`・`def_rational_log_order_group` の分配則・結合則・$1\cdot\lambda=\lambda$。SageMath
+  `finite-free-entropy-density-upper-bound`（$L\le3$・正の有理点 9 点、141 件、`ZZ`/`QQ`。決定手続きと $N=L^2$ での証人の比較の一致も見る）。Lean 具体版
+  `ThermodynamicLimit/FiniteFreeEntropyDensityUpperBound.lean`（`logRat_upperBound_eq`・`logOrderLE_freeEntropy_upperBound`・
+  `scaled_toRational_upperBound_eq`・`rationalLogOrderLE_scaledFreeEntropy_upperBound`。`logRat_two`・`toRational_intSmul` を再利用）、必要十分版
+  `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityUpperBound.lean` の `upperBound_transport_through_two_monotone_maps_necSuf`（順序を保つ二写像と
+  二つの等式だけ。対数・有理数倍・埋め込みは本質でない。導出版では第一の写像の定義域を正の有理数の部分型に取る）、導出版。sorry 検査 1166 件。
+  式変形統一は一時停止中のため実施せず。
+
+
+### レビュー記録
+
+- 2026-08-16（tick 315）: 前 tick の「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版
+  （$\mathbb R$ 版と共有）・導出版を突き合わせ、準備四つ・五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
+  台帳のセクション表も食い違いなし。修正は無い。
+

@@ -39116,6 +39116,148 @@ Z^{\mathrm{op}}_{a,(k+1)b}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_block_tiling_rational",
+    kind: "claim",
+    title: { text: "開境界正方形のブロック敷き詰め評価（正の有理点）" },
+    labels: ["claim_open_square_block_tiling_rational"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_squareBlockTiling_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_squareBlockTiling_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.two_direction_pow_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_squareBlockTiling_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_squareBlockTiling_bounds_of_one_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/open-square-block-tiling-rational"],
+    statement: [
+      paragraph([
+        math(String.raw`a,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る（開境界分配多項式の正の有理点での値は ",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。以下の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）。一辺 ",
+        math(String.raw`ka`),
+        " の開境界正方形を、一辺 ",
+        math(String.raw`a`),
+        " の正方形ブロック ",
+        math(String.raw`k^2`),
+        " 個で敷き詰めると、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+q^{(k-1)(ka)}\!\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+\le Z^{\mathrm{op}}_{ka,ka}(q)
+\le\left(\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k,\\[2mm]
+1\le q:&
+\left(\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+\le Z^{\mathrm{op}}_{ka,ka}(q)
+\le q^{(k-1)(ka)}\!\left(q^{(k-1)a}
+\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k.
+\end{array}`),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q)`),
+        "、",
+        math(String.raw`Z^{\mathrm{op}}_{ka,a}(q)`),
+        " は正の有理数（",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）であり、正の有理数の自然数冪と正の有理数どうしの積は正である。また、",
+        math(String.raw`0<u\le v`),
+        " なる有理数 ",
+        math(String.raw`u,v\in\mathbb{Q}`),
+        " と ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について ",
+        math(String.raw`u^n\le v^n`),
+        " が成り立つ（",
+        math(String.raw`n`),
+        " についての帰納法。",
+        math(String.raw`n=0`),
+        " では両辺 ",
+        math(String.raw`1`),
+        "、帰納段は ",
+        math(String.raw`u^{n+1}=u^n\cdot u\le v^n\cdot u\le v^n\cdot v=v^{n+1}`),
+        "。正の元を掛けても順序が保たれることを二度使う。正の有理点での分配多項式の値の上からの評価 ",
+        ref("claim_partition_value_upper_bound_at_positive_rational"),
+        " の準備の第二と同じ）。",
+      ]),
+      paragraph([
+        math(String.raw`0<q\le1`),
+        " とする。第一座標方向の反復接合評価（",
+        ref("claim_open_rectangle_iterated_gluing_first_rational"),
+        "）を ",
+        math(String.raw`b=a`),
+        " として適用すると、",
+      ]),
+      displayMath(String.raw`q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k
+\le Z^{\mathrm{op}}_{ka,a}(q)
+\le\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k
+\quad\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_first_rational}\bigr)`),
+      paragraph(["である。準備により、正の有理数の自然数冪は底の順序を保つので、"]),
+      displayMath(String.raw`\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+\le\bigl(Z^{\mathrm{op}}_{ka,a}(q)\bigr)^k
+\le\left(\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+\quad\bigl(\because\ \text{準備（自然数冪についての帰納法）。底は正}\bigr)`),
+      paragraph([
+        "を得る。第二座標方向の反復接合評価（",
+        ref("claim_open_rectangle_iterated_gluing_second_rational"),
+        "）を第一座標の長さ ",
+        math(String.raw`ka`),
+        "、第二座標の長さ ",
+        math(String.raw`a`),
+        " の長方形へ適用し、この二つの不等式を順に代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q^{(k-1)(ka)}\!\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+&\le q^{(k-1)(ka)}\bigl(Z^{\mathrm{op}}_{ka,a}(q)\bigr)^k
+&&\bigl(\because\ \text{上の下からの評価と正数 }q^{(k-1)(ka)}\text{ の乗法}\bigr)\\
+&\le Z^{\mathrm{op}}_{ka,ka}(q)
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second_rational}\bigr)\\
+&\le\bigl(Z^{\mathrm{op}}_{ka,a}(q)\bigr)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second_rational}\bigr)\\
+&\le\left(\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+&&\bigl(\because\ \text{上の上からの評価}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となる。",
+        math(String.raw`1\le q`),
+        " の場合は、二つの反復接合評価の向きがともに反転する。同じ順に第一座標方向、",
+        "次いで第二座標方向へ適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+&\le\bigl(Z^{\mathrm{op}}_{ka,a}(q)\bigr)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_first_rational}\ \text{と準備（自然数冪は底の順序を保つ）}\bigr)\\
+&\le Z^{\mathrm{op}}_{ka,ka}(q)
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second_rational}\bigr)\\
+&\le q^{(k-1)(ka)}\bigl(Z^{\mathrm{op}}_{ka,a}(q)\bigr)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second_rational}\bigr)\\
+&\le q^{(k-1)(ka)}\!\left(q^{(k-1)a}
+  \bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_first_rational}\ \text{と準備、正数 }q^{(k-1)(ka)}\text{ の乗法}\bigr)
+\end{aligned}`),
+      paragraph([
+        "を得る。以上で使ったのは、有理数の四則と順序（正の元を掛けても順序が保たれること）、正の有理数の自然数冪、および二方向の反復接合評価（正の有理点）だけであり、実数体は現れない。正の実数でのブロック敷き詰め評価 ",
+        ref("claim_open_square_block_tiling"),
+        " はこの主張の実数側の像であり、旧経路の撤去まで併存させる。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },

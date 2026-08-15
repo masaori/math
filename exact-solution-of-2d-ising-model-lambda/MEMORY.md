@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 320 は、前 tick の「反復接合の第二（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「正方形のブロック敷き詰め（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_square_block_tiling_rational`（`claim_open_rectangle_iterated_gluing_second_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
+$a,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{(k-1)(ka)}(q^{(k-1)a}Z^{\mathrm{op}}_{a,a}(q)^k)^k\le Z^{\mathrm{op}}_{ka,ka}(q)\le(Z^{\mathrm{op}}_{a,a}(q)^k)^k$、
+$1\le q$: $(Z^{\mathrm{op}}_{a,a}(q)^k)^k\le Z^{\mathrm{op}}_{ka,ka}(q)\le q^{(k-1)(ka)}(q^{(k-1)a}Z^{\mathrm{op}}_{a,a}(q)^k)^k$。証明は $\mathbb R$ 版 `claim_open_square_block_tiling` と同じ合成
+（第一座標方向の反復接合（$\mathbb Q$ 版）を $b=a$ で → 準備「$0<u\le v\Rightarrow u^n\le v^n$」（`claim_partition_value_upper_bound_at_positive_rational` の準備の第二）で両辺を $k$ 乗 →
+第二座標方向の反復接合（$\mathbb Q$ 版）を第一座標の長さ $ka$ で → 正数 $q^{(k-1)(ka)}$ の乗法と推移律）で、`remark_real_field_escape` を引かない。二場合は $\mathbb R$ 版に揃えて 1 ブロック。
+$\mathbb R$ 版は併存（撤去のセクションで消す）。SageMath `open-square-block-tiling-rational`（形 5 通り × 正の有理点 9 点、45 組。$\mathbb Z[x]$ への代入と配位和の一致・鎖の各段・二場合の上下評価。`ZZ`/`QQ`）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareBlockTilingRational.lean`（`openPartitionValueRat_squareBlockTiling_bounds_of_le_one`／`_of_one_le`。
+$\mathbb R$ 版 `OpenSquareBlockTiling.lean` から `t`→`q`、`ℝ`→`ℚ`、`openPartitionValue`→`openPartitionValueRat`、`pow_le_pow_of_pos_of_le_by_induction`→`_rat` の機械的な置換に `open NecSuf.ThermodynamicLimit` を足して通った）、
+必要十分版は `NecSuf/ThermodynamicLimit/OpenSquareBlockTiling.lean` の `two_direction_pow_bounds_necSuf` をそのまま共有（可換半環と順序だけ）、
+導出版 `OpenSquareBlockTilingRationalFromNecSuf.lean`。sorry 検査 1194 件。
+次は「周期境界と開境界の比較（$\mathbb Q$ 版）」（`claim_periodic_open_boundary_comparison` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック。
+$0<q\le1$: $q^{2L}Z^{\mathrm{op}}_{L,L}(q)\le Z_L(q)\le Z^{\mathrm{op}}_{L,L}(q)$、$1\le q$: その逆向き。住処 Q、`claim_open_square_block_tiling_rational` の直後・実数体脱出の宣言の直前。
+周期境界の値は $Z_L(q)$（`def_partition_polynomial` の多項式への代入。正値性は `claim_value_at_rational_is_positive`）、開境界の値は `def_open_rectangle_partition_value_at_positive_rational` を引く。
+Lean は `PeriodicOpenComparisonInequality.lean` を ℚ へ移し、必要十分版 `sum_pow_reindex_bounds_necSuf` を共有できる見込み。着手前に $\mathbb R$ 版の本文とその Lean を読み、
+周期境界側の $\mathbb Q$ 値の定義ラベルを確かめること）。
+
 2026-08-16 の tick 319 は、前 tick の「反復接合の第一（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「反復接合の第二（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_rectangle_iterated_gluing_second_rational`（`claim_open_rectangle_iterated_gluing_first_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
@@ -3550,10 +3568,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「反復接合の第一（$\mathbb Q$ 版）」（`claim_open_rectangle_iterated_gluing_first_rational`）の本文・SageMath
-  `open-rectangle-iterated-gluing-first-rational`・Lean（`OpenRectangleIteratedGluingFirstRational.lean` 系統）を突き合わせる。$\mathbb R$ 版から
+- **レビュー**: 「正方形のブロック敷き詰め（$\mathbb Q$ 版）」（`claim_open_square_block_tiling_rational`）の本文・SageMath
+  `open-square-block-tiling-rational`・Lean（`OpenSquareBlockTilingRational.lean` 系統）を突き合わせる。$\mathbb R$ 版から
   機械的に置き換えたので、$t$ の残りや $\le_{\mathbb R}$ の残りが無いことも見る。
-- **次に進めるセクションは「反復接合の第二（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
+- **次に進めるセクションは「周期境界と開境界の比較（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
