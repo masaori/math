@@ -326,6 +326,18 @@ targets=(
   CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPreperiod_add_minPeriod_le
   CellularAutomata.NecSuf.MinimalPreperiodPeriod.minimal_pair_mem_scan
   CellularAutomata.NecSuf.MinimalPreperiodPeriod.scan_pair_has_minimal_bounds
+  CellularAutomata.InverseMapLocality.exists_unique_preimage
+  CellularAutomata.InverseMapLocality.globalMap_inverseMap
+  CellularAutomata.InverseMapLocality.inverseMap_globalMap
+  CellularAutomata.InverseMapLocality.mem_inverseSupp_iff
+  CellularAutomata.InverseMapLocality.card_inverse_scan_pairs
+  CellularAutomata.InverseMapLocality.counterexample_injective
+  CellularAutomata.InverseMapLocality.counterexample_witness
+  CellularAutomata.InverseMapLocality.compl_neighborhood_subset_inverseSupp
+  CellularAutomata.InverseMapLocality.compl_neighborhood_nonempty
+  CellularAutomata.InverseMapLocality.inverseSupp_not_subset_neighborhood
+  CellularAutomata.InverseMapLocality.forwardSupp_subset_neighborhood
+  CellularAutomata.InverseMapLocality.inverseSupp_not_subset_forwardSupp
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"

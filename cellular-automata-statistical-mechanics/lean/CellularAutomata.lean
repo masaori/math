@@ -5,6 +5,7 @@ import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
 import CellularAutomata.GlobalMapIteration
+import CellularAutomata.InverseMapLocality
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.EssentialDependency
 import CellularAutomata.NecSuf.CausalStructureComparison
