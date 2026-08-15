@@ -38824,6 +38824,152 @@ q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}q^{\,b^{\mathrm{op}}_{c,b}(\tau)}
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_rectangle_iterated_gluing_first_rational",
+    kind: "claim",
+    title: { text: "開境界長方形を第一座標方向へ反復接合した値の評価（正の有理点）" },
+    labels: ["claim_open_rectangle_iterated_gluing_first_rational"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_iteratedGlueFirst_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_iteratedGlueFirst_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.iterated_glue_pow_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_iteratedGlueFirst_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_iteratedGlueFirst_bounds_of_one_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/open-rectangle-iterated-gluing-first-rational"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る（開境界分配多項式の正の有理点での値は ",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。以下の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）。開境界長方形を第一座標方向へ同じ大きさで ",
+        math(String.raw`k`),
+        " 個接ぐと、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k
+\le Z^{\mathrm{op}}_{ka,b}(q)
+\le\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k,\\[2mm]
+1\le q:&
+\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k
+\le Z^{\mathrm{op}}_{ka,b}(q)
+\le q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k.
+\end{array}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+        math(String.raw`k=1`),
+        " のときは",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q^{(1-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^1
+&=q^0\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^1
+&&\bigl(\because (1-1)b=0\bigr)\\
+&=1\cdot\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^1
+&&\bigl(\because q^0=1\bigr)\\
+&=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^1
+&&\bigl(\because\ \text{積の単位元}\bigr)\\
+&=Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because u^1=u\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、二場合の左右の評価はいずれも等号で成り立つ。",
+        math(String.raw`k\ge1`),
+        " で主張が成り立つと仮定する。まず ",
+        math(String.raw`0<q\le1`),
+        " とする。接合不等式（",
+        ref("claim_open_rectangle_gluing_inequality_rational"),
+        "）を一辺が ",
+        math(String.raw`ka`),
+        " と ",
+        math(String.raw`a`),
+        " の二長方形へ適用し、帰納法の仮定を掛けると、下からの評価は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q^{((k+1)-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&=q^{kb}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because (k+1)-1=k\bigr)\\
+&=q^{b+(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because kb=b+(k-1)b\bigr)\\
+&=q^b q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=q^b q^{(k-1)b}\!\left(\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k
+  Z^{\mathrm{op}}_{a,b}(q)\right)
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=q^b\!\left(q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k\right)
+  Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \text{有理数の積の結合則}\bigr)\\
+&\le q^b Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&\le Z^{\mathrm{op}}_{(k+1)a,b}(q)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)
+\end{aligned}`),
+      paragraph(["となり、上からの評価は"]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{(k+1)a,b}(q)
+&\le Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)\\
+&\le\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^kZ^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となる。次に ",
+        math(String.raw`1\le q`),
+        " とする。同じ接合不等式と帰納法の仮定により、下からの評価は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^kZ^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&\le Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&\le Z^{\mathrm{op}}_{(k+1)a,b}(q)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)
+\end{aligned}`),
+      paragraph(["となり、上からの評価は"]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{(k+1)a,b}(q)
+&\le q^b Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)\\
+&\le q^b\!\left(q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k\right)
+  Z^{\mathrm{op}}_{a,b}(q)
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&=q^b q^{(k-1)b}\!\left(\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k
+  Z^{\mathrm{op}}_{a,b}(q)\right)
+&&\bigl(\because\ \text{有理数の積の結合則}\bigr)\\
+&=q^b q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=q^{b+(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
+&=q^{kb}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because b+(k-1)b=kb\bigr)\\
+&=q^{((k+1)-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
+&&\bigl(\because k=(k+1)-1\bigr)
+\end{aligned}`),
+      paragraph(["となる。したがって帰納法により、任意の ", math(String.raw`k\ge1`), " で主張が成り立つ。以上で使ったのは、有理数の四則と順序（正の元を掛けても順序が保たれること）、正の有理数の自然数冪、有限積、および接合不等式（正の有理点）だけであり、実数体は現れない。正の実数での反復接合の評価 ", ref("claim_open_rectangle_iterated_gluing_first"), " はこの主張の実数側の像であり、旧経路の撤去まで併存させる。"]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },

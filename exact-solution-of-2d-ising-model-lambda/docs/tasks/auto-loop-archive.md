@@ -3,6 +3,37 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 313）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 313 は、「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・
+  導出版）まで完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$（`claim_finite_free_entropy_density_nonnegative`、
+  値 1 以上の直後・実数体脱出の宣言の直前、住処 Lambda）。準備は $1\le Z_L(q)$・$\log1=0$・$\frac{1}{L^2}\cdot\iota(0)=0$（各素数での五段の鎖）、
+  $\Lambda$ の鎖 $0=\log1\le_\Lambda\log Z_L(q)=\Phi_L(q)$（対数の順序保存）と $\Lambda_{\mathbb Q}$ の鎖 $0=\frac{1}{L^2}\cdot\iota(0)
+  \le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\Phi_L(q))=\Psi_L(q)$（順序の移送）の二本で、実数も実対数も使わない。レビューでは前 tick の
+  値 1 以上の四層が一致し修正無し。次は「正の有理点での分配多項式の値の上界（$\mathbb Q$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 313）: `claim_finite_free_entropy_density_nonnegative` を `claim_partition_value_ge_one_at_positive_rational` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。準備の第一は `claim_value_at_rational_is_positive`・
+  `claim_partition_value_ge_one_at_positive_rational`、第二は `claim_log_power` の $k=0$（$\log1=0$）、第三は $\frac{1}{L^2}\cdot\iota(0)=0$ の
+  各素数での五段の鎖（有理数倍の定義・$\iota$ の定義・$\Lambda$ の零写像・$\mathbb Q$ の積・$\Lambda_{\mathbb Q}$ の零写像）。$\Lambda$ の鎖は
+  `claim_rational_log_order_iff` を $q:=1$、$q':=Z_L(q)$ で、$\Lambda_{\mathbb Q}$ の鎖は `claim_scaled_embedding_order_transfer` の ← を
+  $\lambda:=0$、$\mu:=\Phi_L(q)$ で読む。SageMath `finite-free-entropy-density-nonnegative`（$L\le3$・正の有理点 9 点、準備 16 件・鎖の各行と主張
+  81 件、`ZZ`/`QQ`。$N=L^2$ での証人の比較と決定手続きの一致も見る）。Lean 具体版 `ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean`
+  （`scaled_toRational_zero`・`logOrderLE_zero_freeEntropy`・`rationalLogOrderLE_zero_scaledFreeEntropy`）、必要十分版
+  `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean` の `le_base_transport_of_monotone_necSuf`（述語上で順序を**保つ**写像と
+  基点が基点へ移ることだけ。引いた二主張は同値だが使うのは一方向のみ。対数・有理数倍・埋め込みは本質でない）、導出版は必要十分版を二度
+  （$\mathbb Q_{>0}\to\Lambda$、$\Lambda\to\Lambda_{\mathbb Q}$）特殊化。sorry 検査 1155 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 313）: 前 tick の「正の有理点での分配多項式の値は 1 以上である」の本文・SageMath・Lean 具体版・必要十分版・導出版を
+  突き合わせ、五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と台帳のセクション表も
+  食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 305）の記録
 - **2026-08-16 の tick 305 は、「共通分母の正整数倍は共通分母である」を本文・SageMath・Lean（具体版・
   必要十分版・導出版）まで完成させた。** $N$ が $\lambda\in\Lambda_{\mathbb Q}$ の共通分母（証人 $\lambda_N$）で

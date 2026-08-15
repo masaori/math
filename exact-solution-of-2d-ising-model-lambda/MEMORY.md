@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 318 は、前 tick の「接合不等式（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「反復接合の第一（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_rectangle_iterated_gluing_first_rational`（`claim_open_rectangle_gluing_inequality_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
+$a,b,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{(k-1)b}Z^{\mathrm{op}}_{a,b}(q)^k\le Z^{\mathrm{op}}_{ka,b}(q)\le Z^{\mathrm{op}}_{a,b}(q)^k$、
+$1\le q$: $Z^{\mathrm{op}}_{a,b}(q)^k\le Z^{\mathrm{op}}_{ka,b}(q)\le q^{(k-1)b}Z^{\mathrm{op}}_{a,b}(q)^k$。証明は $\mathbb R$ 版 `claim_open_rectangle_iterated_gluing_first` と同じ
+帰納法 1 本（$k=1$ の底は等号の鎖、帰納段は $kb=b+(k-1)b$・冪の指数法則・積の結合則・帰納法の仮定と正数の乗法・一辺 $ka$ と $a$ の二長方形への
+接合不等式（$\mathbb Q$ 版））で、`remark_real_field_escape` を引かない。二場合は $\mathbb R$ 版に揃えて 1 ブロック。$\mathbb R$ 版は併存（撤去のセクションで消す）。
+SageMath `open-rectangle-iterated-gluing-first-rational`（形 14 通り × 正の有理点 9 点、126 組。$\mathbb Z[x]$ への代入と配位和の一致・二場合の上下評価・帰納段の各段。`ZZ`/`QQ`）。
+Lean 具体版 `ThermodynamicLimit/OpenRectangleIteratedGluingFirstRational.lean`（`openPartitionValueRat_iteratedGlueFirst_bounds_of_le_one`／`_of_one_le`。
+$\mathbb R$ 版の帰納法を ℚ で書き直し、`OpenRectangleGluingInequalityRational.lean` の接合不等式と NecSuf の `pow_pos_by_induction`（`open NecSuf.ThermodynamicLimit` が要る）を引く）、
+必要十分版は $\mathbb R$ 版の `NecSuf/ThermodynamicLimit/OpenRectangleIteratedGluingFirst.lean` の `iterated_glue_pow_bounds_necSuf` をそのまま共有（半環と順序だけ。新規の仮定は無い）、
+導出版 `OpenRectangleIteratedGluingFirstRationalFromNecSuf.lean`。sorry 検査 1186 件。
+次は「反復接合の第二（$\mathbb Q$ 版）」（`claim_open_rectangle_iterated_gluing_second` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック。住処 Q、
+`claim_open_rectangle_iterated_gluing_first_rational` の直後・実数体脱出の宣言の直前。帰納法 1 本、二場合を 1 ブロック（$\mathbb R$ 版に揃える）。Lean は
+`OpenRectangleIteratedGluingSecond.lean` の帰納法を ℚ へ移し、必要十分版 `iterated_glue_pow_bounds_necSuf` を共有する（第一と同じ手順で書ける）。
+第一（$\mathbb Q$ 版）の Lean は $\mathbb R$ 版から `t`→`q`、`ℝ`→`ℚ`、`openPartitionValue`→`openPartitionValueRat`、`_pos`→`Rat_pos` の機械的な置換で通った）。
+
 2026-08-16 の tick 317 は、前 tick の「開矩形の可算な定義群の移動と正の有理点での値（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「接合不等式（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_rectangle_gluing_inequality_rational`（`claim_open_rectangle_value_at_rational_is_positive` の直後、`remark_real_field_escape` の直前、
@@ -3516,10 +3533,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「接合不等式（$\mathbb Q$ 版）」（`claim_open_rectangle_gluing_inequality_rational`）の本文・SageMath
-  `open-rectangle-gluing-inequality-rational`・Lean（`OpenRectangleGluingInequalityRational.lean` 系統）を突き合わせる。$\mathbb R$ 版から
+- **レビュー**: 「反復接合の第一（$\mathbb Q$ 版）」（`claim_open_rectangle_iterated_gluing_first_rational`）の本文・SageMath
+  `open-rectangle-iterated-gluing-first-rational`・Lean（`OpenRectangleIteratedGluingFirstRational.lean` 系統）を突き合わせる。$\mathbb R$ 版から
   機械的に置き換えたので、$t$ の残りや $\le_{\mathbb R}$ の残りが無いことも見る。
-- **次に進めるセクションは「反復接合の第一（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
+- **次に進めるセクションは「反復接合の第二（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
