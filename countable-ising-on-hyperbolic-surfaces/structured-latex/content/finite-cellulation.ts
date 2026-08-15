@@ -308,4 +308,39 @@ v_0=v,\qquad v_r=w,\qquad
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_euler_characteristic",
+    kind: "definition",
+    title: { text: "有限セル分割の Euler 標数" },
+    labels: ["def_finite_cellulation_euler_characteristic"],
+    habitat: "Z",
+    verification: ["sagemath/check/finite-cellulation-euler-characteristic"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_cell_sets"),
+        " のセル集合入力 ",
+        math(String.raw`\mathcal C_{\mathrm{cell}}=(V_{\mathrm{cell}},E_{\mathrm{cell}},F_{\mathrm{cell}})`),
+        " に対し、その Euler 標数を",
+      ]),
+      displayMath(String.raw`\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)
+:=
+\iota_{\mathbb N,\mathbb Z}\!\left(\lvert V_{\mathrm{cell}}\rvert\right)
+-
+\iota_{\mathbb N,\mathbb Z}\!\left(\lvert E_{\mathrm{cell}}\rvert\right)
++
+\iota_{\mathbb N,\mathbb Z}\!\left(\lvert F_{\mathrm{cell}}\rvert\right)
+\in\mathbb Z`),
+      paragraph([
+        "と定める。ここで有限集合 ",
+        math(String.raw`A`),
+        " に対して ",
+        math(String.raw`\lvert A\rvert\in\mathbb N`),
+        " は元の個数を表し、",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " は ",
+        math(String.raw`n\mapsto n`),
+        " で与えられる標準単射である。したがって減法を含む右辺は整数として定まり、実数・複素数・極限・積分を用いない。",
+      ]),
+    ],
+  },
 ]);
