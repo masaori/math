@@ -712,12 +712,18 @@ E_{n+1}
         math(String.raw`F_{n+1} = [K_2^* H_2,\, F_n]`),
         "。基底段階（",
         math(String.raw`n=0`),
-        "、偶数）は ",
-        math(String.raw`F_0 = \check{Y}_\mu`),
-        " と ",
-        math(String.raw`(-1)^{0}(2K_2^*)^{0}\check{Y}_\mu = \check{Y}_\mu`),
-        " の一致による。",
+        "、偶数）では、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+F_0
+&= \check{Y}_\mu
+   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&= (-1)^0(2K_2^*)^0\check{Y}_\mu
+   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_2^*)^0=1)
+\end{aligned}`,
+      ),
+      paragraph(["となり、偶数側の右辺と一致する。"]),
       paragraph([
         "帰納段階 1（",
         math(String.raw`n`),
