@@ -47,6 +47,7 @@ import Ising3DCut.NullModel.SplittingDegreeGaloisGroupCounterexampleFromNecSuf
 import Ising3DCut.NullModel.DiscriminantCounterexample
 import Ising3DCut.NecSuf.NullModel.DiscriminantCounterexample
 import Ising3DCut.NullModel.DiscriminantCounterexampleFromNecSuf
+import Ising3DCut.NullModel.IrreducibleFactorRootDegrees
 import Ising3DCut.NecSuf.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.MultiplicityPalindromeFromNecSuf
 import Ising3DCut.NullModel.PeriodicConstantUnbroken
