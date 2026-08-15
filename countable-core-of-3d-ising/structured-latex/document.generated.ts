@@ -20,6 +20,7 @@ import type {
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_main_text from './content/main-text.ts'
 import blocks_partition_values from './content/partition-values.ts'
+import blocks_periodic_structural_core from './content/periodic-structural-core.ts'
 import blocks_structural_core from './content/structural-core.ts'
 
 
@@ -28,6 +29,7 @@ import blocks_structural_core from './content/structural-core.ts'
 export type AllBlocks = [
   ...typeof blocks_main_text,
   ...typeof blocks_partition_values,
+  ...typeof blocks_periodic_structural_core,
   ...typeof blocks_structural_core,
 ]
 
