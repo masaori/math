@@ -124,6 +124,7 @@ targets=(
   Ising3DCut.StructuralCore.multiplicity_palindrome
   Ising3DCut.NecSuf.StructuralCore.multiplicity_palindrome
   Ising3DCut.StructuralCore.multiplicity_palindrome_from_necSuf
+  Ising3DCut.StructuralCore.periodicStructuralMultiplicity_not_palindrome
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
