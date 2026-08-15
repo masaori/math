@@ -38607,6 +38607,223 @@ Z^{\mathrm{op}}_{a,b}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_rectangle_gluing_inequality_rational",
+    kind: "claim",
+    title: { text: "開境界長方形の接合不等式（正の有理点）" },
+    labels: ["claim_open_rectangle_gluing_inequality_rational"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueFirst_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueFirst_bounds_of_one_le",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueSecond_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueSecond_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_glue_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueFirst_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueFirst_bounds_of_one_le_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueSecond_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_glueSecond_bounds_of_one_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/open-rectangle-gluing-inequality-rational"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b,c\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        "、",
+        math(String.raw`c\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る（開境界分配多項式の正の有理点での値は ",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。以下の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）。第一の座標の向きに接ぐと、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+q^b Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)
+\le Z^{\mathrm{op}}_{a+c,b}(q)
+\le Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q),\\[2mm]
+1\le q:&
+Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)
+\le Z^{\mathrm{op}}_{a+c,b}(q)
+\le q^b Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q).
+\end{array}`),
+      paragraph(["第二の座標の向きに接ぐと、同様に次が成り立つ。"]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+q^a Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{a,c}(q)
+\le Z^{\mathrm{op}}_{a,b+c}(q)
+\le Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{a,c}(q),\\[2mm]
+1\le q:&
+Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{a,c}(q)
+\le Z^{\mathrm{op}}_{a,b+c}(q)
+\le q^a Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{a,c}(q).
+\end{array}`),
+    ],
+    proof: [
+      paragraph([
+        "第一の座標の向きの接合を示す。任意の配位 ",
+        math(String.raw`\rho\in\Sigma^{\mathrm{op}}_{a+c,b}`),
+        " に対し、左側と右側への制限をそれぞれ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathrm L}(i,j)&:=\rho(i,j)
+&&\bigl(0\le i<a,\ 0\le j<b\bigr),\\
+\rho_{\mathrm R}(i,j)&:=\rho(a+i,j)
+&&\bigl(0\le i<c,\ 0\le j<b\bigr)
+\end{aligned}`),
+      paragraph([
+        "と定める。逆に ",
+        math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`),
+        " と ",
+        math(String.raw`\tau\in\Sigma^{\mathrm{op}}_{c,b}`),
+        " から、",
+      ]),
+      displayMath(String.raw`\rho_{\sigma,\tau}(i,j):=
+\begin{cases}
+\sigma(i,j),&0\le i<a,\\
+\tau(i-a,j),&a\le i<a+c
+\end{cases}`),
+      paragraph([
+        "で配位 ",
+        math(String.raw`\rho_{\sigma,\tau}\in\Sigma^{\mathrm{op}}_{a+c,b}`),
+        " がただ一つ定まる。二つの構成を順に行うと各頂点で元の値に戻るので、これは全単射",
+      ]),
+      displayMath(String.raw`\Sigma^{\mathrm{op}}_{a+c,b}
+\longleftrightarrow
+\Sigma^{\mathrm{op}}_{a,b}\times\Sigma^{\mathrm{op}}_{c,b}`),
+      paragraph([
+        "である。接合面で破れる辺の本数を、各 ",
+        math(String.raw`(\sigma,\tau)`),
+        " に対して",
+      ]),
+      displayMath(String.raw`s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)
+:=\bigl|\{j\in\mathbb{N}\mid 0\le j<b\ \text{かつ}\
+\sigma(a-1,j)\ne\tau(0,j)\}\bigr|\ \in\ \mathbb{N}`),
+      paragraph([
+        "と定める。候補となる接合辺は ",
+        math(String.raw`j=0,\ldots,b-1`),
+        " の ",
+        math(String.raw`b`),
+        " 本なので、",
+      ]),
+      displayMath(String.raw`0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b`),
+      paragraph([
+        "である。接合後の辺集合は、左側の辺、右側の辺を第一座標に ",
+        math(String.raw`a`),
+        " だけ平行移動した辺、および接合面の ",
+        math(String.raw`b`),
+        " 本の辺の互いに交わらない和である（辺集合と端点写像は ",
+        ref("def_open_rectangle_edges"),
+        "）。したがって破れボンド集合もこの三つへ互いに交わらず分かれ、",
+      ]),
+      displayMath(String.raw`b^{\mathrm{op}}_{a+c,b}(\rho_{\sigma,\tau})
+=b^{\mathrm{op}}_{a,b}(\sigma)
++b^{\mathrm{op}}_{c,b}(\tau)
++s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)`),
+      paragraph([
+        "である（破れボンド数は ",
+        ref("def_open_rectangle_broken_bond_count"),
+        "）。よって全単射とこの分解から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a+c,b}(q)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+  \sum_{\tau\in\Sigma^{\mathrm{op}}_{c,b}}
+  q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)+s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}
+&&\bigl(\because\ \text{上の全単射と破れボンド数の分解}\bigr)\\
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}
+  \sum_{\tau\in\Sigma^{\mathrm{op}}_{c,b}}
+  q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+  q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}
+&&\bigl(\because\ q^{m+n}=q^m q^n\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<q\le1`),
+        " の場合、",
+        math(String.raw`0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b`),
+        " に対する自然数冪の順序から",
+      ]),
+      displayMath(String.raw`q^b\le q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le1`),
+      paragraph([
+        "である。各 ",
+        math(String.raw`q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}`),
+        " は正なので、この不等式を項ごとに掛けて有限和を取る。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q^b\!\sum_{\sigma}\sum_{\tau}
+q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+&\le Z^{\mathrm{op}}_{a+c,b}(q)
+&&\bigl(\because\ \text{項ごとの下からの評価の有限和}\bigr)\\
+&\le\sum_{\sigma}\sum_{\tau}
+q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+&&\bigl(\because\ \text{項ごとの上からの評価の有限和}\bigr)
+\end{aligned}`),
+      paragraph(["ここで有限和の分配則と冪の指数法則により、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\sigma}\sum_{\tau}
+q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}
+&=\sum_{\sigma}\sum_{\tau}
+q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}q^{\,b^{\mathrm{op}}_{c,b}(\tau)}
+&&\bigl(\because\ q^{m+n}=q^m q^n\bigr)\\
+&=\left(\sum_{\sigma}q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}\right)
+  \left(\sum_{\tau}q^{\,b^{\mathrm{op}}_{c,b}(\tau)}\right)
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&=Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)
+&&\bigl(\because\ \blkref{def_open_rectangle_partition_value_at_positive_rational}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、第一の場合の二つの不等式を得る。",
+        math(String.raw`1\le q`),
+        " の場合は自然数冪の順序が",
+      ]),
+      displayMath(String.raw`1\le q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le q^b`),
+      paragraph([
+        "となる。同じ項ごとの乗法、有限和、上の積への分解を順に適用すると、第二の場合の二つの不等式を得る。",
+      ]),
+      paragraph([
+        "第二の座標の向きでは、下側と上側への制限を ",
+        math(String.raw`\rho_{\mathrm B}(i,j):=\rho(i,j)`),
+        "、",
+        math(String.raw`\rho_{\mathrm T}(i,j):=\rho(i,b+j)`),
+        " とし、接合面の破れ辺数を",
+      ]),
+      displayMath(String.raw`s^{\updownarrow}_{b,c;a}(\sigma,\tau)
+:=\bigl|\{i\in\mathbb{N}\mid 0\le i<a\ \text{かつ}\
+\sigma(i,b-1)\ne\tau(i,0)\}\bigr|`),
+      paragraph([
+        "と定める。候補となる接合辺は ",
+        math(String.raw`a`),
+        " 本なので ",
+        math(String.raw`0\le s^{\updownarrow}_{b,c;a}(\sigma,\tau)\le a`),
+        " であり、第一の座標の向きの証明で ",
+        math(String.raw`a,c`),
+        " を第二座標の長さへ、",
+        math(String.raw`b`),
+        " を接合面の長さ ",
+        math(String.raw`a`),
+        " へ置き換えた同じ全単射・破れボンド数の分解・項ごとの評価により、第二の座標の向きの二場合も従う。",
+      ]),
+      paragraph([
+        "以上で使ったのは、有理数の四則と順序（正の元を掛けても順序が保たれること）、正の有理数の自然数冪の順序、",
+        "有限和・有限積だけであり、実数体は現れない。各項 ",
+        math(String.raw`q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}`),
+        " が正であることは ",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " の準備と同じ理由による。正の実数での接合不等式 ",
+        ref("claim_open_rectangle_gluing_inequality"),
+        " はこの主張の実数側の像であり、旧経路の撤去まで併存させる。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },

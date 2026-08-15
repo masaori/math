@@ -77,6 +77,7 @@ export const ALL_LABELS = [
   "claim_open_free_energy_density_upper_bound",
   "claim_open_rectangle_constant_plus_breaks_no_bond",
   "claim_open_rectangle_gluing_inequality",
+  "claim_open_rectangle_gluing_inequality_rational",
   "claim_open_rectangle_iterated_gluing_first",
   "claim_open_rectangle_iterated_gluing_second",
   "claim_open_rectangle_value_at_least_one",

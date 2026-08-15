@@ -10653,3 +10653,29 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
   突き合わせ、右辺の確定・各素数での値の三段の鎖・具体例・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
 
+## tick 317 で台帳から移した記録（tick 312）
+
+### 現在地
+
+- **2026-08-16 の tick 312 は、「正の有理点での分配多項式の値は 1 以上」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
+  完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $1\le Z_L(q)$（`claim_partition_value_ge_one_at_positive_rational`、順序の移送の直後・
+  実数体脱出の宣言の直前、住処 Q）。$1=q^0=q^{b(\sigma_+)}\le q^{b(\sigma_+)}+\sum_{\sigma\ne\sigma_+}q^{b(\sigma)}=\sum_\sigma q^{b(\sigma)}=Z_L(q)$
+  の五段（冪の指数 0・$b(\sigma_+)=0$・加えた和は 0 以上・1 項を戻す・代入は環準同型）で、実数も実対数も使わない。
+  レビューでは前 tick の順序の移送の四層が一致し修正無し。次は「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 312）: `claim_partition_value_ge_one_at_positive_rational` を `claim_scaled_embedding_order_transfer` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。準備は各項 $0<q^{b(\sigma)}$（`claim_value_at_rational_is_positive` の準備と同じ）と
+  $\sigma_+\in\Sigma_L$。五段の鎖は `claim_free_energy_density_nonnegative` の準備の第二を $q\in\mathbb Q$ で述べ直したもの（$\mathbb R$ 版は併存、
+  撤去のセクションで消す）。SageMath `partition-value-ge-one-at-positive-rational`（$L\le4$・正の有理点 9 点、各項の正値性 594594 件・鎖の各行と
+  $1\le Z_L(q)$ 252 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/PartitionValueGeOneRational.lean`（`one_le_partitionPolynomial_eval_rat`。
+  `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`・`eval_partitionPolynomial` を再利用）、必要十分版
+  `NecSuf/ThermodynamicLimit/PartitionValueGeOneRational.lean` の `one_le_sum_pow_of_exponent_zero_necSuf`（有限添字型に指数 0 の項が
+  一つ選べることと順序半環の正の元だけ。格子・配位・有理数体は本質でない）、導出版。sorry 検査 1150 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 312）: 前 tick の「有理数倍と埋め込みを通した順序の移送」の本文・SageMath・Lean 具体版・必要十分版・導出版を
+  突き合わせ、三段の鎖・∀ 形と ∃ 形の両向き・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
+  台帳のセクション表も食い違いなし。修正は無い。

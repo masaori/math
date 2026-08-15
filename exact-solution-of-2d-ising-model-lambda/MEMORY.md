@@ -4,6 +4,28 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 317 は、前 tick の「開矩形の可算な定義群の移動と正の有理点での値（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「接合不等式（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_rectangle_gluing_inequality_rational`（`claim_open_rectangle_value_at_rational_is_positive` の直後、`remark_real_field_escape` の直前、
+住処 Q）で、$a,b,c\ge1$、$q\in\mathbb Q_{>0}$ に対し、第一の座標方向 $0<q\le1$: $q^bZ^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\le Z^{\mathrm{op}}_{a+c,b}(q)
+\le Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)$、$1\le q$: $Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\le Z^{\mathrm{op}}_{a+c,b}(q)\le q^bZ^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)$、
+第二の座標方向は $b$ を $a$ に置いた同形。証明は $\mathbb R$ 版 `claim_open_rectangle_gluing_inequality` と同じ（制限と接合の全単射
+$\Sigma^{\mathrm{op}}_{a+c,b}\leftrightarrow\Sigma^{\mathrm{op}}_{a,b}\times\Sigma^{\mathrm{op}}_{c,b}$、破れボンド数の三項分解 $b^{\mathrm{op}}_{a+c,b}(\rho_{\sigma,\tau})
+=b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)+s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)$、$0\le s\le b$、接合面因子の自然数冪の順序 $q^b\le q^s\le1$／
+$1\le q^s\le q^b$、項ごとの評価の有限和、有限和の分配則）を $\mathbb Q$ の順序体の性質だけで述べ、`remark_real_field_escape` を引かない。四つの不等式は
+$\mathbb R$ 版に揃えて 1 ブロック（下流の反復接合が「第一座標方向の接合の下側」のように引くため）。$\mathbb R$ 版は併存（撤去のセクションで消す）。
+SageMath `open-rectangle-gluing-inequality-rational`（$a,b,c\in\{1,2,3\}$ で接合後の頂点数 12 以下の 23 形 × 正の有理点 9 点、414 組。$\mathbb Z[x]$ への代入と
+配位和の一致・全単射・三項分解・接合面因子の順序・四つの不等式。`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenRectangleGluingInequalityRational.lean`
+（`pow_le_one_by_induction_rat`・`pow_le_pow_of_le_one_of_exp_le_by_induction_rat`・`openPartitionValueRat_glueFirst_eq`・`openPartitionValueRat_mul_eq_double_sum`・
+`openPartitionValueRat_glueSecond_eq`・`openPartitionValueRat_glueFirst_bounds_of_le_one`／`_of_one_le`・`openPartitionValueRat_glueSecond_bounds_of_le_one`／`_of_one_le`。
+`OpenRectangleGluing.lean` の全単射・三項分解・接合面本数の上界と、`PartitionValueUpperBoundRational.lean` の `one_le_pow_by_induction_rat`・
+`pow_le_pow_of_one_le_of_exp_le_by_induction_rat`・NecSuf の `pow_pos_by_induction` を再利用。指数 0 の底の場合は `rw [pow_zero]`）、必要十分版は $\mathbb R$ 版の
+`NecSuf/ThermodynamicLimit/OpenRectangleGluingInequality.lean` の `sum_pow_glue_bounds_necSuf` をそのまま共有（可換半環と `IsOrderedRing` だけ。有理数体・実数体は
+本質でない）、導出版 `OpenRectangleGluingInequalityRationalFromNecSuf.lean`。sorry 検査 1182 件。
+次は「反復接合の第一（$\mathbb Q$ 版）」（`claim_open_rectangle_iterated_gluing_first` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック。住処 Q、
+`claim_open_rectangle_gluing_inequality_rational` の直後・実数体脱出の宣言の直前。帰納法 1 本、二場合を 1 ブロック（$\mathbb R$ 版に揃える）。Lean は
+`OpenRectangleIteratedGluingFirst.lean` の帰納法を ℚ へ移し、必要十分版 `iterated_glue_pow_bounds_necSuf` は共有できる見込み。着手前に確かめる）。
+
 2026-08-16 の tick 316 は、前 tick の「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
 完成させた。開境界長方形の頂点・辺・配位・破れボンド数・分配多項式の五つの定義（`def_open_rectangle_vertices`・`def_open_rectangle_edges`・
@@ -3494,10 +3516,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「開矩形の可算な定義群の移動と正の有理点での値（$\mathbb Q$ 版）」（`def_open_rectangle_partition_value_at_positive_rational`・
-  `claim_open_rectangle_value_at_rational_is_positive`）の本文・SageMath `open-rectangle-partition-value-at-positive-rational`・
-  Lean（`OpenRectanglePartitionValueRational.lean` 系統）を突き合わせる。移した五つの定義の中身が変わっていないことも見る。
-- **次に進めるセクションは「接合不等式（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「接合不等式（$\mathbb Q$ 版）」（`claim_open_rectangle_gluing_inequality_rational`）の本文・SageMath
+  `open-rectangle-gluing-inequality-rational`・Lean（`OpenRectangleGluingInequalityRational.lean` 系統）を突き合わせる。$\mathbb R$ 版から
+  機械的に置き換えたので、$t$ の残りや $\le_{\mathbb R}$ の残りが無いことも見る。
+- **次に進めるセクションは「反復接合の第一（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
