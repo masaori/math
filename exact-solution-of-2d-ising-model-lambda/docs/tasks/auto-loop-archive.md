@@ -10564,3 +10564,34 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
   導出版を突き合わせ、三元の共通の共通分母・∀ 形での読み替え・反対称律の七段の鎖・対象ラベル・入口 import・sorry 検査への登録が
   一致した。Lean 具体版のヘッダコメントだけが「`claim_common_denominator_multiple` を二度」と書いており、本文と実装
   （各元について一度ずつ、計三度）と食い違っていたので直した。
+
+## tick 314 で台帳から移した記録（tick 309）
+
+### 現在地
+
+- **2026-08-16 の tick 309 は、「有限系の実自由エントロピーを畳む」を着手前に対象ブロックを列挙して 16 のセクションへ割り、
+  その先頭「正の有理数の対数は順序を保ちかつ反映する」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  補助等式 $\operatorname{rat}_\Lambda(\log q)=q$ を全射性の主張（$\lambda:=\log q$）と単射性で示し、
+  $\log q\le_\Lambda\log q'\iff\operatorname{rat}_\Lambda(\log q)\le\operatorname{rat}_\Lambda(\log q')\iff q\le q'$ の二段で閉じた
+  （`claim_rational_log_order_iff`、章「有限系の自由エントロピー」の末尾）。これが有理点での分配多項式の値の不等式を $\Lambda$ の
+  順序へ移す橋になる。割り方は「$\mathbb R$ 版のブロックをその場で書き換えず、$\mathbb Q$／$\Lambda_{\mathbb Q}$ 版を実数体脱出の
+  宣言より前に新設し、$\mathbb R$ 版は『旧実数値経路を撤去する』で消す」。レビューでは前 tick の加法単調性の四層が一致し修正無し。
+  次は「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」。
+
+### 前進の記録
+
+- 2026-08-16（tick 309）: **割り直し**: 「有限系の実自由エントロピーを畳む」は $\mathbb R$ 版ブロック約 40 件の書き換えを含み論法が多数
+  なので、$\mathbb Q$／$\Lambda_{\mathbb Q}$ 版を新設する 16 のセクション（この tick で済ませた先頭を含む）へ割った（表のとおり。$\mathbb R$ 版はその場で書き換えず、
+  下流の $\mathbb R$ ブロックが参照を失わないよう併存させ、「旧実数値経路を撤去する」で消す）。先頭として
+  `claim_rational_log_order_iff` を `claim_log_order_group_positive_multiple_invariant` の直後に置き四層で閉じた。
+  補助等式 $\operatorname{rat}_\Lambda(\log q)=q$（`claim_rational_log_surjective` を $\lambda:=\log q$ へ、`claim_rational_log_injective`）、
+  主張は順序の定義と補助等式の二段。SageMath `rational-log-order-iff`（素数 $2,3,5,7$・指数 5 種の正の有理数 625 個、恒等式 625 件、
+  同値 390625 件、`ZZ`/`QQ`）。Lean 具体版 `FreeEntropy/RationalLogOrderIff.lean`（`rationalOfLog_logRat`、`logRat_le_iff`）、
+  必要十分版 `NecSuf/FreeEntropy/RationalLogOrderIff.lean` の `pullback_order_iff_of_left_inverse_necSuf`（`f∘g=id`、`g` の像が
+  述語を満たすこと、述語上の `f` の単射性、関係が `g` を通した引き戻しであることだけ。対数・素数・有理数は本質でない）、導出版。
+  sorry 検査 1142 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 309）: 前 tick の「有理係数の対数順序群の順序は加法について単調である」の本文・SageMath・Lean 具体版・必要十分版・
+  導出版を突き合わせ、四段の鎖・∀ 形での読み替え・対象ラベル・入口 import・sorry 検査への登録が一致した。修正は無い。

@@ -4,6 +4,26 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 314 は、前 tick の「有限系の自由エントロピー密度は非負である」の四層を突き合わせて一致を確認し（修正無し）、
+「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_partition_value_upper_bound_at_positive_rational`（`claim_finite_free_entropy_density_nonnegative` の直後、`remark_real_field_escape` の直前、
+住処 Q）で、$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $Z_L(q)\le2^{L^2}\cdot(1+q)^{2L^2}$。$\mathbb R$ 版 `claim_partition_value_upper_bound` の準備四つ
+（冪の正値性・底の単調性・指数の単調性・定数の有限和。いずれも指数についての帰納法）と五段の鎖（代入は環準同型・底を $1+q$ へ・指数を $2L^2$ へ
+（`def_broken_bond_count` の $b(\sigma)\le2L^2$）・定数の有限和・`def_configuration` の $|\Sigma_L|=2^{L^2}$）を $\mathbb Q$ で述べ直し、
+`remark_real_field_escape` も $\iota_{\mathbb Q\to\mathbb R}$ も引かない。上界の底は $\mathbb R$ 版と同じ $1+q$（$q\le1$／$1\le q$ の場合分けを避ける）。
+$\mathbb R$ 版は併存（撤去のセクションで消す）。SageMath `partition-value-upper-bound-at-positive-rational`（$L\le4$・正の有理点 9 点、
+準備 1251 件・鎖の各行と主張 332 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/PartitionValueUpperBoundRational.lean`
+（`pow_le_pow_of_pos_of_le_by_induction_rat`・`one_le_pow_by_induction_rat`・`pow_le_pow_of_one_le_of_exp_le_by_induction_rat`・
+`partitionPolynomial_eval_rat_le_upperBound`。ℝ 版の帰納法を ℚ で書き直した。指数 0 の底の場合は ℝ 版の `le_rfl` が ℚ では通らず `rw [pow_zero]` にした）、
+必要十分版は ℝ 版の `NecSuf/ThermodynamicLimit/PartitionValueUpperBound.lean` の `sum_pow_le_uniform_bound_necSuf` を共有（順序付き加法モノイドかつ
+モノイドで足り、有理数体・実数体は本質でない）、導出版 `PartitionValueUpperBoundRationalFromNecSuf.lean`（sorry 検査 1160 件）。
+次は「有限系の自由エントロピー密度の上界（$\Lambda_{\mathbb Q}$ 版）」（台帳の備考を $\max(1,q)$ から本 tick に揃えて $1+q$ へ書き換えた:
+$Z_L(q)\le2^{L^2}(1+q)^{2L^2}$ を `claim_rational_log_order_iff` で $\Lambda$ へ移し、`claim_log_power`・対数の加法性で
+$\Phi_L(q)\le_\Lambda L^2\ell_2+2L^2\log(1+q)$、`claim_scaled_embedding_order_transfer` と有理数倍で
+$\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$。$\ell_2=\log2$ の定義ブロックと、$\Lambda_{\mathbb Q}$ での
+$\frac{1}{L^2}\cdot\iota(L^2\lambda)=\iota(\lambda)$（有理数倍と $\iota$ の整数倍の交換）が要る見込み。既存ブロックに有るかを着手前に確かめる。Lean は `logRat_le_iff`・
+`rationalLogOrderLE_scaled_toRational_iff`・`logRat_mul`・`logRat_pow` の有無を先に確かめる）。
+
 2026-08-16 の tick 313 は、前 tick の「正の有理点での分配多項式の値は 1 以上」の四層を突き合わせて一致を確認し（修正無し）、
 「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_finite_free_entropy_density_nonnegative`（`claim_partition_value_ge_one_at_positive_rational` の直後、`remark_real_field_escape` の直前、
@@ -3432,9 +3452,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有限系の自由エントロピー密度は非負である」（`claim_finite_free_entropy_density_nonnegative`）の本文・SageMath
-  `finite-free-entropy-density-nonnegative`・Lean（`FiniteFreeEntropyDensityNonnegative.lean` 三系統）を突き合わせる。
-- **次に進めるセクションは「正の有理点での分配多項式の値の上界（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」（`claim_partition_value_upper_bound_at_positive_rational`）の
+  本文・SageMath `partition-value-upper-bound-at-positive-rational`・Lean（`PartitionValueUpperBoundRational.lean` 系統、必要十分版は ℝ 版と共有）を突き合わせる。
+- **次に進めるセクションは「有限系の自由エントロピー密度の上界（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
