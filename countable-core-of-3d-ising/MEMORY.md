@@ -18,6 +18,9 @@
 土台の定義（格子点・隣接・箱・内部辺・配位）は共通なので本文に残した。
 **本文は主標的だけで構成する。**
 
+2026-08-15 に「既約分解の型が決める零点の最小多項式次数」の Lean 必要十分版（`NecSuf/NullModel/IrreducibleFactorRootDegrees.lean`）と
+導出（`NullModel/IrreducibleFactorRootDegreesFromNecSuf.lean`）を追加し四層が揃った（no-sorry 66 件、status done）。
+
 2026-08-15 のレビュー tick で結合定理を本文と照合し不備なしを確認した。結合定理は零点を因子ごとの対として
 数えるため零点非共有の補題を使わない（積の零点集合との同一視だけが使う）。必要十分版でもこの区別を保つ。
 
