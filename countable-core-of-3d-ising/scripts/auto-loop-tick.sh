@@ -428,7 +428,7 @@ notify_slack() {
 tick_title="$(sed -n '1s/^#\{1,\} *//p' "$LOOP_WORKTREE/$PROJECT_NAME/README.md" 2>/dev/null || true)"
 [ -z "$tick_title" ] && tick_title="3 次元 Ising（可算側）"
 
-# その tick が何をしたか。台帳の「現在地」の先頭項目を使う（長いときは文の切れ目で閉じる）。
+# その tick が何をしたか。台帳の「現在地」の先頭項目をそのまま使う。
 tick_summary="$(python3 - "$LOOP_WORKTREE/$PROJECT_NAME/docs/tasks/auto-loop-state.md" <<'PYEOF' 2>/dev/null || true
 import re, sys
 
@@ -446,13 +446,8 @@ for line in lines:
     elif line.strip():
         body.append(line.strip())
 text = " ".join(body).replace("**", "")
-# **文の途中で切らない**（ユーザー指摘 2026-08-15）。上限を超えるときは、
-# 上限内の最後の句点までで閉じる（句点が無いときだけ、やむなく字数で切る）。
-LIMIT = 1800
-if len(text) > LIMIT:
-    head = text[:LIMIT]
-    stop = head.rfind("。")
-    text = head[: stop + 1] if stop >= 0 else head + "…"
+# **字数で切らない**（ユーザー指示 2026-08-15）。「簡潔に書く」のは台帳を書く側の規律であって、
+# 送る側が機械的に打ち切る理由にはならない（切ると文が途中で終わって読めなくなる）。
 print(text)
 PYEOF
 )"

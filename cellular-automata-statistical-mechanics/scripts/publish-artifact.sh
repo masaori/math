@@ -92,12 +92,7 @@ if current:
 
 if entries:
     value = re.sub(r"\s+", " ", entries[-1].replace("**", "")).strip()
-    # **文の途中で切らない**（ユーザー指摘 2026-08-15）。上限内の最後の句点で閉じる。
-    LIMIT = 1800
-    if len(value) > LIMIT:
-        head = value[:LIMIT]
-        stop = head.rfind("。")
-        value = head[: stop + 1] if stop >= 0 else head + "…"
+    # **字数で切らない**（ユーザー指示 2026-08-15）。簡潔に書くのは台帳を書く側の規律である。
     print(value)
 PYEOF
 )"
