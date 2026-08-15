@@ -47,9 +47,7 @@ theorem factorizationType_determines_rootMinimalPolynomialDegrees
   rw [Fintype.card_congr e, Fintype.card_sigma]
   simp [Nat.mul_comm]
 
-end Ising3DCut.NullModel
 
-namespace Ising3DCut.NullModel
 
 open Polynomial
 
@@ -71,5 +69,18 @@ theorem irreducible_rootSet_card_eq_natDegree
     [Algebra K L] [FaithfulSMul K L] (P : K[X]) (hP : Irreducible P) :
     Fintype.card (P.rootSet L) = P.natDegree := by
   exact card_rootSet_eq_natDegree hP.separable (IsAlgClosed.splits _)
+
+
+/--
+代数段の第三歩（前半）: 標数 `0` の体上の既約多項式を代数閉体へ移すと、各零点の
+代数的重複度は高々 `1` である（分離的なので根の多重集合に重複が無い）。
+-/
+theorem irreducible_rootMultiplicity_le_one
+    {K L : Type} [Field K] [CharZero K] [Field L] [Algebra K L] [DecidableEq L]
+    (P : Polynomial K) (hP : Irreducible P) (x : L) :
+    Polynomial.rootMultiplicity x (Polynomial.map (algebraMap K L) P) ≤ 1 := by
+  rw [← Polynomial.count_roots]
+  exact Multiset.nodup_iff_count_le_one.mp
+    (Polynomial.nodup_roots (Polynomial.Separable.map hP.separable)) x
 
 end Ising3DCut.NullModel
