@@ -154,4 +154,109 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_vertex_links_are_cycles",
+    kind: "definition",
+    title: { text: "頂点リンクが一つの巡回列であるための有限述語" },
+    labels: ["def_finite_cellulation_vertex_links_are_cycles"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-cellulation-vertex-links-are-cycles"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の各出現位置 ",
+        math(String.raw`(f,i)`),
+        " に対し、その角を挟む二つの辺端を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h^-_{f,i}
+&:=
+\left(
+  e_{f,i},
+  \frac{1+\varepsilon_{f,i}}{2}
+\right)
+\in E_{\mathrm{cell}}\times\{0,1\},\\
+h^+_{f,i}
+&:=
+\left(
+  e_{f,i+1},
+  \frac{1-\varepsilon_{f,i+1}}{2}
+\right)
+\in E_{\mathrm{cell}}\times\{0,1\}
+\end{aligned}`),
+      paragraph([
+        "と書く。ここで添字 ",
+        math(String.raw`i+1`),
+        " は ",
+        math(String.raw`n_f`),
+        " を法として巡回的に読む。接続条件により、両辺端の頂点は等しい。各 ",
+        math(String.raw`v\in V_{\mathrm{cell}}`),
+        " における角位置の有限集合を",
+      ]),
+      displayMath(String.raw`C_v:=
+\left\{
+  (f,i)\ \middle|\
+  \begin{array}{l}
+  f\in F_{\mathrm{cell}},\quad i\in\mathbb N,\quad 0\le i<n_f,\\
+  \partial_{(1+\varepsilon_{f,i})/2}(e_{f,i})=v
+  \end{array}
+\right\}`),
+      paragraph([
+        "と書く。頂点リンク単巡回述語 ",
+        math(String.raw`\operatorname{VertexLinksAreCycles}`),
+        " を、",
+        ref("def_finite_cellulation_opposite_edge_occurrences"),
+        " と次の有限条件の連言として定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\operatorname{VertexLinksAreCycles}
+\left(
+  G,
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\Longleftrightarrow\\
+&\quad
+\operatorname{OppositeEdgeTwice}
+\left(
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\ \land\\
+&\quad
+\text{任意の }v\in V_{\mathrm{cell}}\text{ に対して}
+\begin{cases}
+C_v\ne\varnothing,\\[4pt]
+\left|
+  \left\{
+    ((f,i),s)\in C_v\times\{-,+\}\ \middle|\
+    h^s_{f,i}=h
+  \right\}
+\right|=2
+\quad
+\left(
+  \text{任意の }h\in
+  \left\{
+    (e,\delta)\in E_{\mathrm{cell}}\times\{0,1\}
+    \ \middle|\
+    \partial_\delta(e)=v
+  \right\}
+  \text{ に対して}
+\right),\\[12pt]
+\text{任意の }c,c'\in C_v\text{ に対して、ある }r\in\mathbb N\text{ と}\\
+\qquad c_j=(f_j,i_j)\in C_v\quad(0\le j\le r)\text{ が存在し、}\\
+\qquad c_0=c,\quad c_r=c',\quad
+\{h^-_{f_j,i_j},h^+_{f_j,i_j}\}\cap
+\{h^-_{f_{j+1},i_{j+1}},h^+_{f_{j+1},i_{j+1}}\}\ne\varnothing\\
+\qquad\left(j\in\mathbb N,\ 0\le j<r\right).
+\end{cases}
+\end{aligned}`),
+      paragraph([
+        math(String.raw`C_v`),
+        "、辺端の集合、および角位置の列は有限集合に属し、",
+        math(String.raw`r`),
+        " と各元の個数は ",
+        math(String.raw`\mathbb N`),
+        " に属する。第二条件は各辺端に二つの角が接すること、第三条件は全ての角が辺端の共有によって一つにつながることを表す。この述語は有限集合の列挙と等号だけで判定できる。",
+      ]),
+    ],
+  },
 ]);

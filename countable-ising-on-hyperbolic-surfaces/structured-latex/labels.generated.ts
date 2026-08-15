@@ -16,6 +16,7 @@ export const ALL_LABELS = [
   "def_finite_cellulation_cell_sets",
   "def_finite_cellulation_face_boundary_word",
   "def_finite_cellulation_opposite_edge_occurrences",
+  "def_finite_cellulation_vertex_links_are_cycles",
   "def_finite_graph_input",
   "def_formal_edge_weight_sum",
   "def_ising_partition_polynomial",
