@@ -90,7 +90,7 @@ export default defineBlocks([
         " について主張が成り立つと仮定する。",
         math(String.raw`p`),
         " の ",
-        math(String.raw`[0,n-1]`),
+        math(String.raw`[0,n-1]_{\mathbb{N}}`),
         " への制限は長さ ",
         math(String.raw`n-1`),
         " の依存経路なので（",
@@ -342,7 +342,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
         " である。",
         math(String.raw`p`),
         " の ",
-        math(String.raw`[0,n-1]`),
+        math(String.raw`[0,n-1]_{\mathbb{N}}`),
         " への制限は、",
         math(String.raw`p(0)=(s,u)`),
         " から ",
@@ -430,7 +430,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
         " について、",
       ]),
       displayMath(
-        String.raw`P_\tau(t,v)\ \subseteq\ \bigcup_{n\in[1,t]}\bigl(\{t-n\}\times B_n(v)\bigr)`,
+        String.raw`P_\tau(t,v)\ \subseteq\ \bigcup_{n\in[1,t]_{\mathbb{N}}}\bigl(\{t-n\}\times B_n(v)\bigr)`,
       ),
       paragraph([
         "が成り立つ（",
@@ -442,7 +442,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
         " は ",
         ref("def_propagation_ball"),
         "、",
-        math(String.raw`[1,t]:=\{n\in\mathbb{N}\mid 1\leq n\leq t\}`),
+        math(String.raw`[1,t]_{\mathbb{N}}:=\{n\in\mathbb{N}\mid 1\leq n\leq t\}`),
         "、",
         math(String.raw`t-n`),
         " は ",
@@ -452,13 +452,13 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
         " の減法）。したがって",
       ]),
       displayMath(
-        String.raw`|P_\tau(t,v)|\ \leq\ \sum_{n\in[1,t]}|B_n(v)|`,
+        String.raw`|P_\tau(t,v)|\ \leq\ \sum_{n\in[1,t]_{\mathbb{N}}}|B_n(v)|`,
       ),
       paragraph([
         "であり、特に ",
         math(String.raw`t=0`),
         " のとき ",
-        math(String.raw`[1,0]`),
+        math(String.raw`[1,0]_{\mathbb{N}}`),
         " は空なので ",
         math(String.raw`P_\tau(0,v)=\emptyset`),
         " である。右辺の上界は時刻ごとの伝播球の個数だけで書かれ、舞台全体の大きさ ",
@@ -499,7 +499,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
         "）より ",
         math(String.raw`n\geq1`),
         " なので ",
-        math(String.raw`n\in[1,t]`),
+        math(String.raw`n\in[1,t]_{\mathbb{N}}`),
         " である。",
         math(String.raw`t=s+n`),
         " を ",
@@ -523,14 +523,14 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
       paragraph(["個数の上界は次の比較で得られる。"]),
       displayMath(String.raw`\begin{aligned}
 |P_\tau(t,v)|
-&\leq\Bigl|\bigcup_{n\in[1,t]}\bigl(\{t-n\}\times B_n(v)\bigr)\Bigr|\qquad(\because\ \text{部分集合の個数は全体の個数以下。上の包含})\\
-&\leq\sum_{n\in[1,t]}\bigl|\{t-n\}\times B_n(v)\bigr|\qquad(\because\ \text{有限個の有限集合の合併の個数は個数の和以下})\\
-&=\sum_{n\in[1,t]}|B_n(v)|\qquad(\because\ \text{一元集合との直積の個数は個数に等しい（積の法則）})
+&\leq\Bigl|\bigcup_{n\in[1,t]_{\mathbb{N}}}\bigl(\{t-n\}\times B_n(v)\bigr)\Bigr|\qquad(\because\ \text{部分集合の個数は全体の個数以下。上の包含})\\
+&\leq\sum_{n\in[1,t]_{\mathbb{N}}}\bigl|\{t-n\}\times B_n(v)\bigr|\qquad(\because\ \text{有限個の有限集合の合併の個数は個数の和以下})\\
+&=\sum_{n\in[1,t]_{\mathbb{N}}}|B_n(v)|\qquad(\because\ \text{一元集合との直積の個数は個数に等しい（積の法則）})
 \end{aligned}`),
       paragraph([
         math(String.raw`t=0`),
         " のときは ",
-        math(String.raw`[1,0]=\emptyset`),
+        math(String.raw`[1,0]_{\mathbb{N}}=\emptyset`),
         " なので合併は空集合であり、上の包含より ",
         math(String.raw`P_\tau(0,v)\subseteq\emptyset`),
         "、すなわち ",

@@ -24,7 +24,7 @@
                                                 イベントの集合）と `dependencySourceSet_finite`
                                                 （有限集合 E_τ の部分集合ゆえ有限、という定義中の注記）
   claim_finite_propagation_boundary              `propagationBoundary`（右辺の合併
-                                                ⋃_{n∈[1,t]} {t−n} × B_n(v) の有限集合）、
+                                                ⋃_{n∈[1,t]_ℕ} {t−n} × B_n(v) の有限集合）、
                                                 `dependencySourceSet_subset_boundary`（包含）、
                                                 `card_dependencySourceSet_le`（個数上界。
                                                 部分集合・合併の個数の和・一元集合との直積の順）、
@@ -76,7 +76,7 @@ theorem oneStep_source_mem_suppV (τ : ℕ) (a b : ℕ × V)
 /-- `claim_path_time_increment_exact` の具体版。依存経路の終点の時刻は始点の時刻と
     経路長の和に等しい（前章 `path_time_strictly_increases` の不等式 s < t の等式への精密化）。
     人手証明と同じく経路長 n についての帰納法で示す。基底（n = 1）は一段依存の条件 t = s+1、
-    帰納段は [0,n-1] への制限に帰納法の仮定、最後の一段に t = s+1、そして ℕ の加法の結合則。 -/
+    帰納段は [0,n-1]_ℕ への制限に帰納法の仮定、最後の一段に t = s+1、そして ℕ の加法の結合則。 -/
 theorem path_time_increment_exact (τ n : ℕ) (p : ℕ → ℕ × V)
     (hpath : IsDepPath N f τ n p) : (p n).1 = (p 0).1 + n := by
   obtain ⟨hn, -, hstep⟩ := hpath
@@ -87,7 +87,7 @@ theorem path_time_increment_exact (τ n : ℕ) (p : ℕ → ℕ × V)
     · -- 基底（n = 1）: (p(0), p(1)) ∈ D_τ の条件 t = s+1
       subst hm
       exact oneStep_time_succ N f τ (p 0) (p 1) (hstep 0 Nat.one_pos)
-    · -- 帰納段（n ≥ 2）: [0,m] への制限は長さ m の依存経路
+    · -- 帰納段（n ≥ 2）: [0,m]_ℕ への制限は長さ m の依存経路
       have h1 : 1 ≤ m := Nat.one_le_iff_ne_zero.mpr hm
       have h0m : (p m).1 = (p 0).1 + m :=
         ih h1 (fun i hi => hstep i (Nat.lt_succ_of_lt hi))
@@ -140,7 +140,7 @@ theorem card_propagationBall_succ_le (n : ℕ) (hn : 1 ≤ n) (v : V) :
 /-- `claim_start_cell_in_propagation_ball` の具体版。依存経路の始点のセルは、
     終点のセルの深さ n（= 経路長）の伝播球に属する。人手証明と同じく経路長 n についての
     帰納法で示す。基底（n = 1）は一段依存の条件 u ∈ supp(f_v) と B_1(v) = supp(f_v)、
-    帰納段は [0,n-1] への制限に帰納法の仮定、最後の一段に u ∈ supp(f_v)、
+    帰納段は [0,n-1]_ℕ への制限に帰納法の仮定、最後の一段に u ∈ supp(f_v)、
     そして合併が各被合併集合を含むこと。 -/
 theorem start_cell_in_propagationBall (τ n : ℕ) (p : ℕ → ℕ × V)
     (hpath : IsDepPath N f τ n p) : (p 0).2 ∈ propagationBall N f n (p n).2 := by
@@ -172,15 +172,15 @@ theorem dependencySourceSet_finite (τ t : ℕ) (v : V) :
   Set.Finite.subset (Finset.finite_toSet (eventSet τ))
     (fun _ ha => Finset.mem_coe.mpr ha.1)
 
-/-- `claim_finite_propagation_boundary` の右辺の合併 ⋃_{n∈[1,t]}({t−n} × B_n(v))。
-    有限集合 [1,t] で添字づけられた有限集合の合併なので `Finset` である。 -/
+/-- `claim_finite_propagation_boundary` の右辺の合併 ⋃_{n∈[1,t]_ℕ}({t−n} × B_n(v))。
+    有限集合 [1,t]_ℕ で添字づけられた有限集合の合併なので `Finset` である。 -/
 def propagationBoundary (t : ℕ) (v : V) : Finset (ℕ × V) :=
   (Finset.Icc 1 t).biUnion (fun n => {t - n} ×ˢ propagationBall N f n v)
 
 /-- `claim_finite_propagation_boundary` の包含の具体版。
-    P_τ(t,v) ⊆ ⋃_{n∈[1,t]}({t−n} × B_n(v))。人手証明と同じ順:
+    P_τ(t,v) ⊆ ⋃_{n∈[1,t]_ℕ}({t−n} × B_n(v))。人手証明と同じ順:
     到達可能性から依存経路を取り、`claim_path_time_increment_exact` で t = s+n、
-    s ≥ 0 と n ≥ 1 から n ∈ [1,t]、s = t−n（n ≤ t の下での ℕ の減法）、
+    s ≥ 0 と n ≥ 1 から n ∈ [1,t]_ℕ、s = t−n（n ≤ t の下での ℕ の減法）、
     `claim_start_cell_in_propagation_ball` で u ∈ B_n(v)。 -/
 theorem dependencySourceSet_subset_boundary (τ t : ℕ) (v : V) :
     dependencySourceSet N f τ t v ⊆ ↑(propagationBoundary N f t v) := by
@@ -208,7 +208,7 @@ theorem dependencySourceSet_subset_boundary (τ t : ℕ) (v : V) :
   omega
 
 /-- `claim_finite_propagation_boundary` の個数上界の具体版。
-    |P_τ(t,v)| ≤ Σ_{n∈[1,t]} |B_n(v)|。人手証明と同じ順:
+    |P_τ(t,v)| ≤ Σ_{n∈[1,t]_ℕ} |B_n(v)|。人手証明と同じ順:
     部分集合の個数は全体の個数以下（上の包含）、有限個の有限集合の合併の個数は個数の和以下、
     一元集合との直積の個数は個数に等しい（積の法則）。
     右辺は |V| にも τ にも依存しない（人手証明の statement の注記）。 -/
@@ -226,7 +226,7 @@ theorem card_dependencySourceSet_le (τ t : ℕ) (v : V) :
         refine Finset.sum_congr rfl fun n _ => ?_
         rw [Finset.card_product, Finset.card_singleton, one_mul]
 
-/-- `claim_finite_propagation_boundary` の特例の具体版。t = 0 のとき [1,0] は空なので
+/-- `claim_finite_propagation_boundary` の特例の具体版。t = 0 のとき [1,0]_ℕ は空なので
     合併は空集合であり、包含より P_τ(0,v) = ∅。 -/
 theorem dependencySourceSet_zero_empty (τ : ℕ) (v : V) :
     dependencySourceSet N f τ 0 v = ∅ := by

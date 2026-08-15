@@ -239,7 +239,7 @@ export default defineBlocks([
         math(String.raw`\tau\in\mathbb{N}`),
         " に対し、",
       ]),
-      displayMath(String.raw`[0,\tau]:=\{\,t\in\mathbb{N}\mid t\leq\tau\,\}=\{0,1,\dots,\tau\}`),
+      displayMath(String.raw`[0,\tau]_{\mathbb{N}}:=\{\,t\in\mathbb{N}\mid t\leq\tau\,\}=\{0,1,\dots,\tau\}`),
       paragraph([
         "を",
         "時間区間",
@@ -251,9 +251,9 @@ export default defineBlocks([
         math(String.raw`\mathbb{N}`),
         " の構造は、大小比較と後者 ",
         math(String.raw`t\mapsto t+1`),
-        " だけである。この記法 ",
-        math(String.raw`[0,\tau]`),
-        " を実数の区間の意味では使わない。",
+        " だけである。添字 ",
+        math(String.raw`\mathbb{N}`),
+        " は区間の母集合を表す。実数区間と同形の無添字記法は使わない。",
       ]),
     ],
   },
@@ -274,7 +274,7 @@ export default defineBlocks([
         math(String.raw`\tau\in\mathbb{N}`),
         " に対し、直積集合",
       ]),
-      displayMath(String.raw`E_\tau:=[0,\tau]\times V=\{\,(t,v)\mid t\in[0,\tau],\ v\in V\,\}`),
+      displayMath(String.raw`E_\tau:=[0,\tau]_{\mathbb{N}}\times V=\{\,(t,v)\mid t\in[0,\tau]_{\mathbb{N}},\ v\in V\,\}`),
       paragraph([
         "を",
         "イベント集合",
@@ -283,7 +283,7 @@ export default defineBlocks([
         " を",
         "イベント",
         "と呼ぶ（",
-        math(String.raw`[0,\tau]`),
+        math(String.raw`[0,\tau]_{\mathbb{N}}`),
         " は ",
         ref("def_time_interval"),
         "）。第 1 成分 ",
@@ -319,12 +319,12 @@ export default defineBlocks([
     proof: [
       displayMath(String.raw`\begin{aligned}
 |E_\tau|
-&=|[0,\tau]\times V|\qquad(\because\ \blkref{def_event_set})\\
-&=|[0,\tau]|\cdot|V|\qquad(\because\ \text{有限集合の直積の元の個数は個数の積（積の法則）})\\
-&=(\tau+1)\cdot|V|\qquad(\because\ [0,\tau]=\{0,1,\dots,\tau\}\ \text{の元は}\ \tau+1\ \text{個。}\blkref{def_time_interval})
+&=|[0,\tau]_{\mathbb{N}}\times V|\qquad(\because\ \blkref{def_event_set})\\
+&=|[0,\tau]_{\mathbb{N}}|\cdot|V|\qquad(\because\ \text{有限集合の直積の元の個数は個数の積（積の法則）})\\
+&=(\tau+1)\cdot|V|\qquad(\because\ [0,\tau]_{\mathbb{N}}=\{0,1,\dots,\tau\}\ \text{の元は}\ \tau+1\ \text{個。}\blkref{def_time_interval})
 \end{aligned}`),
       paragraph([
-        math(String.raw`[0,\tau]`),
+        math(String.raw`[0,\tau]_{\mathbb{N}}`),
         " と ",
         math(String.raw`V`),
         " はいずれも有限集合（",

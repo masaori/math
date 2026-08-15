@@ -13,8 +13,8 @@
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
 | `check_global_flip_characterization.sage` | 大域写像の一点反転による変化と局所規則の本質的依存台への所属が同値 | PASS | 1,012 個の同値を確認 |
-| `check_time_interval_cardinality.sage` | $[0,\tau]=\{0,\ldots,\tau\}$ と $|[0,\tau]|=\tau+1$ | PASS | $0\leq\tau\leq20$ の 21 区間で一致 |
-| `check_event_set_cardinality.sage` | $|E_\tau|=|[0,\tau]|\,|V|=(\tau+1)|V|$ | PASS | 64 個の $(\tau,|V|)$ で一致 |
+| `check_time_interval_cardinality.sage` | $[0,\tau]_{\mathbb{N}}=\{0,\ldots,\tau\}$ と $|[0,\tau]_{\mathbb{N}}|=\tau+1$ | PASS | $0\leq\tau\leq20$ の 21 区間で一致 |
+| `check_event_set_cardinality.sage` | $|E_\tau|=|[0,\tau]_{\mathbb{N}}|\,|V|=(\tau+1)|V|$ | PASS | 64 個の $(\tau,|V|)$ で一致 |
 | `check_one_step_membership.sage` | $D_\tau\subseteq E_\tau^2$ と、その所属条件 | PASS | 1,408 関係・89,160 組の所属を確認 |
 | `check_support_scan_bound.sage` | 依存台走査の結果と比較回数上界 $|N(v)|2^{|N(v)|}$ | PASS | 278 真理値表で一致・上界内 |
 | `check_time_strictly_increases.sage` | $t=s+1$ ならば $s<t$ | PASS | 210 個の一段時刻対で確認 |

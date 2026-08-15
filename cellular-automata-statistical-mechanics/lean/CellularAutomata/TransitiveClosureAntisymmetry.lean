@@ -48,10 +48,10 @@ variable {V : Type} [Fintype V] [DecidableEq V]
 variable (N : V → Finset V)
 variable (f : (v : V) → (↥(N v) → State) → State)
 
-/-- 依存経路（`def_dependency_path`）。n ≥ 1 と写像 p:[0,n] → E_τ であって、
-    すべての i ∈ [0,n-1] で (p(i), p(i+1)) ∈ D_τ を満たすもの。
-    写像は ℕ 上の写像で表し、使う範囲 [0,n] の所属条件を `mem_eventSet` が持つ
-    （定義域 [0,n] と E_τ はいずれも有限集合である）。 -/
+/-- 依存経路（`def_dependency_path`）。n ≥ 1 と写像 p:[0,n]_ℕ → E_τ であって、
+    すべての i ∈ [0,n-1]_ℕ で (p(i), p(i+1)) ∈ D_τ を満たすもの。
+    写像は ℕ 上の写像で表し、使う範囲 [0,n]_ℕ の所属条件を `mem_eventSet` が持つ
+    （定義域 [0,n]_ℕ と E_τ はいずれも有限集合である）。 -/
 structure IsDepPath (τ n : ℕ) (p : ℕ → ℕ × V) : Prop where
   one_le : 1 ≤ n
   mem_eventSet : ∀ i ≤ n, p i ∈ eventSet τ
@@ -59,7 +59,7 @@ structure IsDepPath (τ n : ℕ) (p : ℕ → ℕ × V) : Prop where
 
 /-- `claim_path_time_strictly_increases` の具体版。依存経路の始点の時刻は終点の時刻より
     小さい。人手証明と同じく経路長 n についての帰納法で示す。基底（n = 1）は前章
-    `time_strictly_increases`、帰納段は [0,n-1] への制限（p 自身と長さ n-1）に帰納法の
+    `time_strictly_increases`、帰納段は [0,n-1]_ℕ への制限（p 自身と長さ n-1）に帰納法の
     仮定を使い、最後の一段に `time_strictly_increases`、そして ℕ の大小比較の推移性。 -/
 theorem path_time_strictly_increases (τ n : ℕ) (p : ℕ → ℕ × V)
     (hpath : IsDepPath N f τ n p) : (p 0).1 < (p n).1 := by
@@ -72,7 +72,7 @@ theorem path_time_strictly_increases (τ n : ℕ) (p : ℕ → ℕ × V)
       subst hm
       exact time_strictly_increases N f τ (p 0).1 (p 1).1 (p 0).2 (p 1).2
         (hstep 0 Nat.one_pos)
-    · -- 帰納段（n ≥ 2）: [0,m] への制限は長さ m の依存経路
+    · -- 帰納段（n ≥ 2）: [0,m]_ℕ への制限は長さ m の依存経路
       have h1 : 1 ≤ m := Nat.one_le_iff_ne_zero.mpr hm
       have h0m : (p 0).1 < (p m).1 :=
         ih h1 (fun i hi => hstep i (Nat.lt_succ_of_lt hi))

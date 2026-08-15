@@ -11,9 +11,9 @@
                                                 `globalMap_eq_extendRule`（値写像が冗長拡大に等しいこと）
   claim_global_flip_characterization             `globalFlip_iff_mem_supp`
                                                 （前二章の同値と依存台不変性の合成。人手証明と同じ順）
-  時間区間 [0,τ]（`def_time_interval`）          `timeInterval`（{t ∈ ℕ | t ≤ τ}。`mem_timeInterval`）と
-                                                `card_timeInterval`（|[0,τ]| = τ+1）
-  イベント集合 E_τ（`def_event_set`）            `eventSet`（[0,τ] × V の直積）
+  時間区間 [0,τ]_ℕ（`def_time_interval`）        `timeInterval`（{t ∈ ℕ | t ≤ τ}。`mem_timeInterval`）と
+                                                `card_timeInterval`（|[0,τ]_ℕ| = τ+1）
+  イベント集合 E_τ（`def_event_set`）            `eventSet`（[0,τ]_ℕ × V の直積）
   claim_event_set_cardinality                    `card_eventSet`（|E_τ| = (τ+1)·|V|。直積の積の法則）
   一段依存関係 D_τ（`def_one_step_dependency`）  `oneStepDep`（E_τ × E_τ を条件で filter した有限集合）、
                                                 `mem_oneStepDep`（所属 ⟺ t = s+1 かつ u ∈ supp(f_v)）、
@@ -89,25 +89,25 @@ theorem globalFlip_iff_mem_supp (u v : V) :
   -- `claim_support_invariance` を S = N(v)、T = V に適用すると supp(f_v∘ρ) = supp(f_v) の像。
   rw [supp_extendRule (N v) (f v)]
 
-/-- 時間区間 [0,τ] = {t ∈ ℕ | t ≤ τ}（`def_time_interval`）。 -/
+/-- 時間区間 [0,τ]_ℕ = {t ∈ ℕ | t ≤ τ}（`def_time_interval`）。 -/
 def timeInterval (τ : ℕ) : Finset ℕ :=
   Finset.range (τ + 1)
 
-/-- [0,τ] の所属は ℕ の大小比較 t ≤ τ である（`def_time_interval` の所属条件）。 -/
+/-- [0,τ]_ℕ の所属は ℕ の大小比較 t ≤ τ である（`def_time_interval` の所属条件）。 -/
 theorem mem_timeInterval (τ t : ℕ) : t ∈ timeInterval τ ↔ t ≤ τ := by
   simp [timeInterval, Nat.lt_succ_iff]
 
-/-- [0,τ] = {0,1,…,τ} の元は τ+1 個（`claim_event_set_cardinality` の証明の最終行の根拠）。 -/
+/-- [0,τ]_ℕ = {0,1,…,τ} の元は τ+1 個（`claim_event_set_cardinality` の証明の最終行の根拠）。 -/
 theorem card_timeInterval (τ : ℕ) : (timeInterval τ).card = τ + 1 :=
   Finset.card_range (τ + 1)
 
-/-- イベント集合 E_τ := [0,τ] × V（`def_event_set`）。直積の有限集合である。 -/
+/-- イベント集合 E_τ := [0,τ]_ℕ × V（`def_event_set`）。直積の有限集合である。 -/
 def eventSet (τ : ℕ) : Finset (ℕ × V) :=
   timeInterval τ ×ˢ (Finset.univ : Finset V)
 
 omit [DecidableEq V] in
-/-- `claim_event_set_cardinality` の具体版。|E_τ| = |[0,τ] × V| = |[0,τ]|·|V| = (τ+1)·|V|。
-    人手証明と同じ順: イベント集合の定義、直積の積の法則、|[0,τ]| = τ+1。 -/
+/-- `claim_event_set_cardinality` の具体版。|E_τ| = |[0,τ]_ℕ × V| = |[0,τ]_ℕ|·|V| = (τ+1)·|V|。
+    人手証明と同じ順: イベント集合の定義、直積の積の法則、|[0,τ]_ℕ| = τ+1。 -/
 theorem card_eventSet (τ : ℕ) :
     (eventSet (V := V) τ).card = (τ + 1) * Fintype.card V := by
   rw [eventSet, Finset.card_product, card_timeInterval, Finset.card_univ]
@@ -190,7 +190,7 @@ theorem globalFlip_iff_mem_supp_from_necessary_sufficient (u v : V) :
 
 omit [DecidableEq V] in
 /-- イベント集合の個数公式が、必要十分版の有限集合の直積公式に
-    `I = [0,τ]` を代入して得られること。 -/
+    `I = [0,τ]_ℕ` を代入して得られること。 -/
 theorem card_eventSet_from_necessary_sufficient (τ : ℕ) :
     (eventSet (V := V) τ).card = (τ + 1) * Fintype.card V := by
   calc

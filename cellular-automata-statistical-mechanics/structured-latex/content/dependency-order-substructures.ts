@@ -414,7 +414,7 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        math(String.raw`t\in[0,\tau]`),
+        math(String.raw`t\in[0,\tau]_{\mathbb{N}}`),
         "（",
         ref("def_time_interval"),
         "）に対し、集合",
@@ -447,7 +447,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         "任意の ",
-        math(String.raw`t\in[0,\tau]`),
+        math(String.raw`t\in[0,\tau]_{\mathbb{N}}`),
         " について、時刻切片 ",
         math(String.raw`E_\tau^{(t)}`),
         "（",

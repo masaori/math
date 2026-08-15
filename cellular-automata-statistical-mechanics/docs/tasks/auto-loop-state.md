@@ -95,7 +95,7 @@
   誤りは見つからなかった。対象「時間展開上の直接依存」の構造化記述を
   `content/time-expansion-dependency.ts` に書いた: 有限舞台 (V,N)、有限舞台上の 2 値 CA、
   大域写像 F（各セルの値写像が冗長拡大 f_v∘ρ^V_{N(v)} に等しいことを定義内で明示）、時間区間
-  [0,τ]⊂ℕ、イベント集合 E_τ=[0,τ]×V、一段依存関係 D_τ（t=s+1 かつ u∈supp(f_v)）の定義と、
+  [0,τ]_ℕ、イベント集合 E_τ=[0,τ]_ℕ×V、一段依存関係 D_τ（t=s+1 かつ u∈supp(f_v)）の定義と、
   4 つの claim（証明つき）: 大域写像の u での一点反転による値の変化 ⟺ u∈supp(f_v)（前二章の
   一点反転同値と依存台不変性の合成。依存関係の定義に N(v) でなく supp(f_v) を採る根拠）、
   |E_τ|=(τ+1)·|V|、D_τ の有限性と所属の有限決定可能性（ℕ の等号 1 回＋高々 |N(v)|·2^{|N(v)|} 回の
@@ -146,7 +146,7 @@
   `omit [DecidableEq V]` を追加）。修正後に Lean build・sorry 検査を通した。
   台帳先頭の未完了対象「依存の推移閉包の反対称性」の構造化記述を
   `content/transitive-closure-antisymmetry.ts` に書いた: 依存経路（長さ n≥1 の写像
-  p:[0,n]→E_τ で隣接対が D_τ に入るもの）、到達可能関係 C_τ（依存経路の存在。有限集合）、
+  p:[0,n]_ℕ→E_τ で隣接対が D_τ に入るもの）、到達可能関係 C_τ（依存経路の存在。有限集合）、
   反射的到達可能関係 ⪯_τ（等号または C_τ）、部分順序（反射・反対称・推移の 3 条件）の定義と、
   5 つの claim（証明つき）: 依存経路に沿った時刻の厳密増加（経路長についての帰納法。前章の
   claim_time_strictly_increases と ℕ の推移性だけを使う）、D_τ ⊆ C_τ（長さ 1 の経路）、
@@ -203,8 +203,8 @@
   $B_{n+1}(v)=\bigcup_{u\in\operatorname{supp}(f_v)}B_n(u)$ の再帰的定義、伝播球の有限性と
   個数の再帰的上界 $|B_{n+1}(v)|\leq\sum_{u\in\operatorname{supp}(f_v)}|B_n(u)|$、依存経路の
   始点セルが伝播球に属すること（帰納法）、依存元集合 $P_\tau(t,v)=\{a\mid(a,(t,v))\in C_\tau\}$ の
-  定義と、有限伝播境界 $P_\tau(t,v)\subseteq\bigcup_{n\in[1,t]}(\{t-n\}\times B_n(v))$、
-  個数上界 $|P_\tau(t,v)|\leq\sum_{n\in[1,t]}|B_n(v)|$（$|V|$ にも $\tau$ にも依存しない）、
+  定義と、有限伝播境界 $P_\tau(t,v)\subseteq\bigcup_{n\in[1,t]_{\mathbb{N}}}(\{t-n\}\times B_n(v))$、
+  個数上界 $|P_\tau(t,v)|\leq\sum_{n\in[1,t]_{\mathbb{N}}}|B_n(v)|$（$|V|$ にも $\tau$ にも依存しない）、
   特例 $P_\tau(0,v)=\emptyset$。時間・個数のブロックは habitat "N"、残りは "finite"、ℝ/ℂ なし。
   構造化テキスト check・build:pdf（11 ページ、未解決参照 0）、SageMath 20 本、対応検査、
   Lean build、sorry 検査を全て通した。この章の SageMath・Lean は未着手。

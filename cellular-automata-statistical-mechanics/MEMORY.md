@@ -13,6 +13,13 @@ CA へ移植するのではなく、有限規則から内在的な数学構造�
 研究上の前提と、数学的な近似主張には対象・比較写像・誤差または収束概念が要る、という証明上の
 規律を分離した。CA 自体も正解として先取りせず、非対応・反例を成果として保存する。
 
+## 区間記法は母集合を添字で明示する（2026-08-15）
+
+自然数区間を実数区間と同じ無添字の $[a,b]$ で書くと、定義後に断りを置いても読者を
+ミスリードする。構造化論文では $[a,b]_{\mathbb{N}}$ のように母集合を必ず添字で示す。
+既存の自然数区間表記を本文・検算概要・Lean 注釈・台帳で統一し、構造化本文の無添字区間を
+`tools/validate-content.ts` が拒むようにした。
+
 ## 30 分自動ループの開始（2026-08-14）
 
 `docs/tasks/auto-loop-runbook.md` と `auto-loop-state.md` を正本に、毎時 12 分・42 分に独立した
@@ -144,7 +151,7 @@ sorry 検査を全て通した。**「冗長近傍からの独立性」は四層
 修正を要する誤りは見つからなかった。台帳先頭の未完了対象「時間展開上の直接依存」の構造化記述を
 `structured-latex/content/time-expansion-dependency.ts` に書いた。有限舞台 $(V,N)$・有限舞台上の
 2 値 CA・大域写像 $F$（各セルの値写像が冗長拡大 $f_v\circ\rho^V_{N(v)}$ に等しいことを定義内で
-明示）・時間区間 $[0,\tau]\subset\mathbb{N}$・イベント集合 $E_\tau=[0,\tau]\times V$・
+明示）・時間区間 $[0,\tau]_{\mathbb{N}}$・イベント集合 $E_\tau=[0,\tau]_{\mathbb{N}}\times V$・
 一段依存関係 $D_\tau$（$t=s+1$ かつ $u\in\operatorname{supp}(f_v)$）を定義した。claim は 4 つ:
 大域写像の一点反転による値の変化 ⟺ $u\in\operatorname{supp}(f_v)$（前二章の一点反転同値と
 依存台不変性の合成。依存条件に $N(v)$ でなく $\operatorname{supp}(f_v)$ を採る根拠）、
@@ -205,7 +212,7 @@ $E_\tau\times E_\tau$ の部分集合性、依存台走査の組数 $|N(v)|\cdot
 
 台帳先頭の未完了対象「依存の推移閉包の反対称性」の構造化記述を
 `structured-latex/content/transitive-closure-antisymmetry.ts` に書いた。依存経路
-（長さ $n\geq1$ の写像 $p:[0,n]\to E_\tau$ で隣接対が $D_\tau$ に入るもの）、到達可能関係
+（長さ $n\geq1$ の写像 $p:[0,n]_{\mathbb{N}}\to E_\tau$ で隣接対が $D_\tau$ に入るもの）、到達可能関係
 $C_\tau$（依存経路の存在）、反射的到達可能関係 $\preceq_\tau$、部分順序の定義と、claim 5 つ:
 経路に沿った時刻の厳密増加（帰納法）、$D_\tau\subseteq C_\tau$、$C_\tau$ の推移性（経路の連結）、
 $C_\tau$ が $D_\tau$ を含む最小の推移的関係であること（「推移閉包」の名の根拠）、相互到達の不存在
@@ -284,8 +291,8 @@ SageMath 検算と構造化記述の対応をレビュー後、人手証明と�
 依存経路に沿って時刻がちょうど 1 ずつ増える（$t=s+n$。前章の $s<t$ の等式への精密化）、
 伝播球（$B_1(v)=\operatorname{supp}(f_v)$、$B_{n+1}(v)=\bigcup_{u\in\operatorname{supp}(f_v)}B_n(u)$）の
 有限性と個数の再帰的上界、依存経路の始点セルが伝播球に属すること、依存元集合
-$P_\tau(t,v)$ が伝播球の有限合併 $\bigcup_{n\in[1,t]}(\{t-n\}\times B_n(v))$ に含まれること
-（個数上界 $\sum_{n\in[1,t]}|B_n(v)|$ は $|V|$ にも $\tau$ にも依存しない。$P_\tau(0,v)=\emptyset$）。
+$P_\tau(t,v)$ が伝播球の有限合併 $\bigcup_{n\in[1,t]_{\mathbb{N}}}(\{t-n\}\times B_n(v))$ に含まれること
+（個数上界 $\sum_{n\in[1,t]_{\mathbb{N}}}|B_n(v)|$ は $|V|$ にも $\tau$ にも依存しない。$P_\tau(0,v)=\emptyset$）。
 時間・個数は habitat "N"、残りは "finite"、$\mathbb{R}/\mathbb{C}$ 脱出なし。構造化テキスト
 check・PDF（11 ページ・未解決参照 0）、SageMath 20 本、対応検査、Lean build、sorry 検査を
 全て通した。**この章の現在地は構造化記述まで。次 tick はレビュー後にこの章の SageMath 検算を作る。**

@@ -12,6 +12,7 @@
  *       2. `verification` が指す SageMath 検証ディレクトリの実在（型システムは fs を読めない）
  *       3. 未変換の Typst 記法の混入
  *       4. 生成済みラベル一覧と content の実状の一致
+ *       5. 角括弧の区間記法が母集合の添字を持つこと
  *
  * 使い方: node structured-latex/tools/validate-content.ts
  */
@@ -173,6 +174,7 @@ function bodyNodesOf(block: ConvertedBlock): readonly (readonly Node[])[] {
  *   1. 住処と realEscape の対応（型を迂回した値のための保険）
  *   2. 可算な住処を宣言したブロックの数式に ℝ/ℂ の記号が現れていないこと
  *   3. `verification` が指す SageMath 検証ディレクトリの実在
+ *   4. 角括弧の区間記法が `_{\mathbb{N}}` 等の母集合を明示すること
  *
  * 2 が本プロジェクトの核である。「可算で閉じている」という宣言が本当かを、
  * 宣言した本人の言葉ではなく数式の字面で検査する。
@@ -184,10 +186,20 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
     projectIssues.push(`${file}: ${issue}`);
   }
 
+  const math: string[] = [];
+  for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, math);
+  const ambiguousInterval = math.find((value) =>
+    /\[[^\]\n,]+,[^\]\n]+\](?!_\{\\mathbb\{(?:N|Z|Q|R|C)\}\})/.test(value),
+  );
+  if (ambiguousInterval !== undefined) {
+    projectIssues.push(
+      `${file}:${block.id} の角括弧区間に母集合の添字が無い: ${ambiguousInterval}\n` +
+        "    → 自然数区間なら [a,b]_{\\mathbb{N}} のように、記号だけで母集合が分かる形にする。",
+    );
+  }
+
   const habitat: unknown = block.habitat;
   if (typeof habitat === "string" && HABITAT_VALUES.countable.has(habitat) && habitat !== "none") {
-    const math: string[] = [];
-    for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, math);
     // ℝ/ℂ そのものを指す記号だけを見る。可算側のブロックがこれらを数式に書いているなら、
     // 住処の宣言か証明のどちらかが誤っている。
     // 「ℝ を使わない」と本文で述べる文脈は地の文（text ノード）に書けるので、
