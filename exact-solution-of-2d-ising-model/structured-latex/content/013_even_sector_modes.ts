@@ -524,7 +524,12 @@ e^{-iM\tilde\theta_\mu}
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \left(\cos(2\pi\mu) - i\sin(2\pi\mu)\right)\left(\cos\pi + i\sin\pi\right)
    \quad (\because \text{euler\_formula\_cos\_sin}\ \text{を 2 箇所へ同時適用}) \\
-&= 1\cdot(-1) = -1
+&= \left(1 - i\cdot 0\right)\left(-1 + i\cdot 0\right)
+   \quad (\because \cos(2\pi\mu)=1,\ \sin(2\pi\mu)=0,\ \cos\pi=-1,\ \sin\pi=0\ (\mu\in\mathbb{Z})) \\
+&= 1\cdot(-1)
+   \quad (\because i\cdot 0 = 0\ \text{と加法の単位元}) \\
+&= -1
+   \quad (\because \text{積の単位元})
 \end{aligned}`,
       ),
       paragraph([

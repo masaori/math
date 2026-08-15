@@ -18,7 +18,10 @@ $t\in\{1/3,1/2,1,2,3\}$ の全組について、本文の二場合の上下評�
 
 有限標本検査は任意の正の実数 $t$、任意の長方形、任意の反復回数についての証明ではない。
 本文は、一回の第二座標方向の接合不等式を反復回数について帰納的に適用して一般の場合を証明する。
-Lean の具体版・必要十分版・導出版は未着手である。
+Lean は具体版 `openPartitionValue_iteratedGlueSecond_bounds_of_le_one` / `_of_one_le`
+（`lean/Ising2DLambda/ThermodynamicLimit/OpenRectangleIteratedGluingSecond.lean`）、
+必要十分版 `iterated_glue_pow_bounds_necSuf`（接ぐ向きに依らないので第一座標方向と同じ定理を使う）、
+導出版 `..._from_necSuf` が揃い、`lake build` と sorry 非依存検査を通っている（2026-08-15）。
 
 ## 実行方法
 

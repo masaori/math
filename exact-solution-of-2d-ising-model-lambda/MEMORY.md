@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 282 は、レビューで前 tick の「開境界長方形を第二座標方向へ反復接合した値の評価」の
+本文と SageMath（40 組）と第二座標方向の一回の接合不等式の Lean を突き合わせ、一致を確認した
+（修正無し）。そのあと同セクションの Lean を完成させ、セクションを閉じた。具体版
+`lean/Ising2DLambda/ThermodynamicLimit/OpenRectangleIteratedGluingSecond.lean` は、第一座標方向と
+同じ帰納法を接合面の長さ $a$・接ぐ辺を第二座標に入れ替えて人手証明と同じ順で辿った
+（$k=1$ の底の等号鎖、$ka=a+(k-1)a$、冪の指数法則、帰納法の仮定と正数の乗法、第二座標の長さ
+$kb$ と $b$ への接合不等式、$(k+1)b=kb+b$）。必要十分版は接ぐ向きに依らない
+`iterated_glue_pow_bounds_necSuf` をそのまま使い（新しい必要十分版ファイルは作らない）、導出二定理
+`OpenRectangleIteratedGluingSecondFromNecSuf.lean` は low/high へ $t^a$ と $1$ を代入して二場合を
+復元した。本文の `claim_open_rectangle_iterated_gluing_second` へ `lean` 宣言を付け、SageMath 概要の
+「Lean 未着手」を実態へ直した（sorry 検査 1018 件、すべて非依存）。次の本文は
+「開境界正方形のブロック敷き詰め評価」（二方向の反復接合を組み合わせ、一辺 $L=ka$ の正方形を
+$a\times a$ ブロック $k^2$ 個の値で挟む。第一座標方向の反復で $Z^{op}_{ka,a}$ を $Z^{op}_{a,a}$ の冪で
+挟み、続けて第二座標方向の反復で $Z^{op}_{ka,ka}$ を $Z^{op}_{ka,a}$ の冪で挟む順が自然）。
+式変形統一では姉妹側「半整数運動量のモード」（`013_even_sector_modes`）の反周期性の証明末尾の
+二等号の行を一行一等号と行末根拠へ開いた。
+
 2026-08-15 の tick 281 は、レビューで前 tick の第一座標方向の反復接合評価について、本文・
 SageMath・Lean 具体版・必要十分版・導出版が一致することを確認した（修正無し）。そのあと
 「開境界長方形を第二座標方向へ反復接合した値の評価」を本文と SageMath まで進めた。
