@@ -12,6 +12,7 @@ export const ALL_LABELS = [
   "claim_down_set_boundary_outgoing",
   "claim_down_set_no_incoming_edge",
   "claim_down_set_order_convex",
+  "claim_event_order_locally_finite",
   "claim_event_set_cardinality",
   "claim_finite_propagation_boundary",
   "claim_flip_test_equivalence",
@@ -54,6 +55,7 @@ export const ALL_LABELS = [
   "def_global_map",
   "def_incomparability",
   "def_local_truth_table",
+  "def_locally_finite_partial_order",
   "def_negation_map",
   "def_one_step_boundary",
   "def_one_step_dependency",
@@ -70,6 +72,8 @@ export const ALL_LABELS = [
   "def_time_slice",
   "def_up_set",
   "remark_causal_comparison_scope",
+  "remark_causal_set_not_claimed",
+  "remark_causal_set_source",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
