@@ -2,8 +2,7 @@
 
 ## 対象
 
-- **対象ラベル**: `claim_open_free_energy_density_lower_bound_le_one`
-- **対象ラベル**: `claim_open_free_energy_density_infimum_exists_le_one`
+**対象ラベル**: `claim_open_free_energy_density_lower_bound_le_one`, `claim_open_free_energy_density_infimum_exists_le_one`, `def_real_set_lower_bound`, `def_real_set_infimum`
 
 - 実行日: 2026-08-15
 - 状態: PASS（56 件）
@@ -18,6 +17,12 @@
 ## 範囲
 
 無限集合へ下限を与える実数の完備性は有限標本では検査できない。本文では値集合の符号を反転し、既に宣言した「空でなく上に有界な実数集合は上限を持つ」という形だけを使って下限を構成する。
+
+## Lean
+
+具体版 `lean/Ising2DLambda/ThermodynamicLimit/OpenFreeEnergyDensityLowerBound.lean`・
+`OpenFreeEnergyDensityInfimum.lean`、必要十分版 `NecSuf/ThermodynamicLimit/` の同名二本
+（2026-08-15、`lake build` と sorry 検査 1049 件通過）。
 
 ## 実行方法
 

@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 290 は、レビューで前 tick の「開境界密度の下からの評価と下限の存在」の下限の証明の
+係数表記を主張の $\iota_{\mathbb{Q}\to\mathbb{R}}(2)$ へ揃え、SageMath 概要の「対象ラベル」が箇条書き形式で
+対応検査 `verify-check-linkage.ts` の正規表現（`**対象ラベル**: \`...\`` を行頭に置く一行形式）に合わず
+検査が落ちていたのを直して push した（**overview.md の対象ラベルは一行形式で書く**）。そのあと同セクションの
+Lean を完成させ、セクションを閉じた。具体版 `ThermodynamicLimit/OpenFreeEnergyDensityLowerBound.lean`
+（辺数 `openSquareEdgeCount`、$2t^{E_L}\le Z^{\mathrm{op}}$ と $t^{2L^2}\le2t^{E_L}$、
+`openSquareFreeEnergyDensity_lowerBound_of_le_one`）と `OpenFreeEnergyDensityInfimum.lean`
+（値集合を符号反転して上限の存在を適用し戻す `openFreeEnergyDensityValueSet_has_infimum_of_le_one`）。
+必要十分版 `NecSuf/ThermodynamicLimit/OpenFreeEnergyDensityLowerBound.lean` の
+`scaled_map_lowerBound_necSuf`（下界を写像で運ぶ・尺度の合成・係数の相殺のみ）と
+`NecSuf/ThermodynamicLimit/OpenFreeEnergyDensityInfimum.lean` の `indexedValueSet_has_infimum_necSuf`
+（証人・一様下界・順序を反転する対合・上限の存在のみ。順序の反射律・推移律も不要）。sorry 検査 1049 件。
+次の本文は「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」（$1\le t$ の上限版
+`claim_open_free_energy_density_supremum_approximation_multiples_one_le` と対称。下限 $v$ と
+$\varepsilon$ に対し $v+\varepsilon$ が下界でないことから一辺 $a$ を取り、ブロック敷き詰め評価の対数化の
+$\psi^{\mathrm{op}}_{ka}\le\psi^{\mathrm{op}}_a$ と下界性で $v\le\psi^{\mathrm{op}}_{ka}<v+\varepsilon$）。
+
 2026-08-15 の tick 289 は、レビューで前 tick の「倍数の辺での上限への任意近接（$1\le t$）」の
 有限モデル上界判定を、ball 差の下端判定から分配関数の整数冪による厳密比較へ修正し、前進前に
 push した。そのあと「開境界密度の下からの評価と下限の存在」を本文と SageMath まで進めた。
@@ -3049,7 +3066,7 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 - **レビュー**: 「ブロック敷き詰め評価の対数化」の本文・SageMath・Lean（具体版・必要十分版・導出版）を
   突き合わせる。特に補正項の有理数係数 $2(k-1)/(ka)$ の Lean 側の表現（$k-1$ は ℕ の減法）が
   本文と一致しているか。
-- **次に進めるセクションは「開境界密度の上からの評価と値集合の上限の存在」**（状態台帳のセクション表の先頭行）。
+- **次に進めるセクションは「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
   姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の「$\check Z$ の $n$ 重交換子」の
   帰納段階以降から、根拠なし・複数関係の計算を機械走査で特定する。

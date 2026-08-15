@@ -38500,6 +38500,13 @@ Z^{\mathrm{op}}_{L,L}(t)
       "零と一の間の実数 t における開境界自由エネルギー密度を実対数と実数順序で一様に下から評価するため。" +
       "完備性・極限は使わない。",
     verification: ["sagemath/check/open-free-energy-density-infimum"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.two_mul_pow_edgeCount_le_openPartitionValue",
+      "Ising2DLambda.ThermodynamicLimit.pow_twoSquare_le_two_mul_pow_edgeCount",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_lowerBound_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_map_lowerBound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_lowerBound_of_le_one_from_necSuf",
+    ],
     statement: [
       paragraph([
         "各 ", math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
@@ -38561,6 +38568,11 @@ Z^{\mathrm{op}}_{L,L}(t)
     realEscape:
       "空でなく下に有界な開境界密度の値集合の符号を反転し、実数の完備性による上限の存在を適用して下限を得るため。",
     verification: ["sagemath/check/open-free-energy-density-infimum"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_infimum_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.indexedValueSet_has_infimum_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_infimum_of_le_one_from_necSuf",
+    ],
     statement: [
       paragraph([
         "各実数 ", math(String.raw`t`), "、", math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),

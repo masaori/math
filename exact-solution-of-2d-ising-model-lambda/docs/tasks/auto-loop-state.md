@@ -7,6 +7,16 @@
 
 ## 現在地
 
+- **2026-08-15 の tick 290 は、「開境界密度の下からの評価と下限の存在」の Lean（具体版・必要十分版・
+  導出版）を完成させ、本文へ `lean` 宣言を付けてセクションを閉じた。具体版は人手証明と同じ順
+  （$2t^{E_L}\le2^{L^2}t^{E_L}=\sum_\tau t^{E_L}\le Z^{\mathrm{op}}_{L,L}(t)$、
+  $t^{2L^2}\le t^{E_L}\le2t^{E_L}$、対数側の係数の合成と単調性）を辿り、下限は値集合を符号反転して
+  上限の存在を適用し戻した。必要十分版は「下界を写像で運び尺度係数を合成・相殺する」ことと
+  「順序を反転する対合と上限の存在」だけを残した（順序の反射律・推移律も不要）。レビューでは
+  下限の証明の係数表記を主張の $\iota_{\mathbb{Q}\to\mathbb{R}}(2)$ へ揃え、SageMath 概要の
+  対象ラベル宣言が検査の正規表現に合っていなかった（対応検査が落ちていた）ので直した。**
+  次は「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」。
+
 - **2026-08-15 の tick 289 は、「開境界密度の下からの評価と下限の存在」を本文と SageMath まで
   進めた。$0<t\le1$ で $2t^{2L(L-1)}\le Z^{\mathrm{op}}_{L,L}(t)$ と
   $t^{2L^2}\le2t^{2L(L-1)}$ を経て $2\log_{\mathbb R}t\le\psi^{\mathrm{op}}_L(t)$ を得た。値集合の
@@ -39,15 +49,7 @@
   (h1.y) の基底段階を、(h1.z) と同じ二段の等号鎖と行末根拠へ開いた。次は「開境界密度の上からの
   評価と値集合の上限の存在」。
 
-- **2026-08-15 の tick 285 は、「ブロック敷き詰め評価の対数化」を本文と SageMath まで進めた。
-  一辺 $ka$ の開境界密度を一辺 $a$ の開境界密度と
-  $\delta_{a,k}(t)=\iota(2(k-1)/(ka))\log_{\mathbb{R}}t$ で二場合に挟み、係数の約分を可算側で
-  明示した。レビューでは前 tick の密度の定義が本文・SageMath・Lean で一致し、修正は無い。**
-  SageMath は正の有理点 7 点と $(a,k)$ 5 組の上下評価 35 件を ball 算術で、係数の約分 10 件を
-  有理数として厳密検査した。Lean は未着手である。式変形統一では姉妹側「$\check Z$ の
-  $n$ 重交換子」の基底段階を、一続きの等号と行末根拠へ開いた。次は同じセクションの Lean。
-
-（これより古い 244 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 245 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -61,13 +63,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 5 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 21 セクション
+- 熱力学極限: 22 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 開境界密度の下からの評価と下限の存在 | 記述と SageMath まで | $0<t\le1$ 用。本文と 56 件の検査は完了。Lean 具体版・必要十分版・導出版は未着手 |
 | 熱力学極限 | 倍数の辺での下限への任意近接（$0<t\le1$ の場合） | todo | 下限に近い一辺 $a$ を取り、対数化した評価の $\psi^{\mathrm{op}}_{ka}\le\psi^{\mathrm{op}}_a$ で倍数列を下限の近くへ押し込む（$1\le t$ の上限版と対称） |
 | 熱力学極限 | 倍数でない辺への拡張 | todo | $ka\le L<(k+1)a$ の正方形を接合不等式で挟み、極限の言明を閉じる |
 | 熱力学極限 | 周期境界自由エネルギー密度への移送 | todo | 周期境界と開境界の境界評価から導く |
@@ -78,6 +79,14 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-15（tick 290）: `OpenFreeEnergyDensityLowerBound.lean` に辺数 `openSquareEdgeCount`、
+  値の二段の評価 `two_mul_pow_edgeCount_le_openPartitionValue`・`pow_twoSquare_le_two_mul_pow_edgeCount`、
+  具体版 `openSquareFreeEnergyDensity_lowerBound_of_le_one` を、`OpenFreeEnergyDensityInfimum.lean` に
+  具体版 `openFreeEnergyDensityValueSet_has_infimum_of_le_one` を人手証明と 1 対 1 に実装した。
+  必要十分版 `scaled_map_lowerBound_necSuf`（下界の写像・尺度の合成・係数の相殺のみ）と
+  `indexedValueSet_has_infimum_necSuf`（証人・一様下界・順序反転対合・上限の存在のみ）、導出版二本。
+  sorry 検査 1049 件。本文へ `lean` 宣言を付け、SageMath 概要へ Lean の状態を書いた。
 
 - 2026-08-15（tick 289）: `claim_open_free_energy_density_lower_bound_le_one` と
   `claim_open_free_energy_density_infimum_exists_le_one` を記述した。値の下界と冪の比較を可算側で
@@ -116,13 +125,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   （`014_even_sector_T_action`）の (h1.y) の基底段階 $D_0$ を、散文中の行内等式から
   恒等写像と零乗を根拠にした二段の等号鎖へ開いた（(h1.z) の $C_0$ と同じ形）。
 
-- 2026-08-15（tick 285）: `claim_open_square_block_tiling_logarithm` を記述し、ブロック評価へ
-  実対数の単調性・乗法加法性・自然数冪の法則を適用した。下側の因子の指数
-  $2(k-1)ka$ を $(ka)^2$ で割り、補正係数 $2(k-1)/(ka)$ を得た。SageMath は上下評価
-  35 件と有理係数の約分 10 件を検査した。Lean は未着手。式変形統一では姉妹側
-  「$\check Z$ の $n$ 重交換子」の $n=0$ の基底を、恒等写像と零乗を根拠にした二段の鎖へ開いた。
-
-（これより古い 255 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 256 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -140,6 +143,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+
+- 2026-08-15（tick 290）: 前 tick の「開境界密度の下からの評価と下限の存在」の本文・SageMath を
+  突き合わせた。数学内容は一致した。下限の存在の証明が主張の $\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log t$
+  に対し裸の $2\log t$ と書いていたので揃え、下界の定義へのラベル参照を足した。SageMath 概要の
+  「対象ラベル」が箇条書き形式で、対応検査 `verify-check-linkage.ts` の正規表現に合わず検査が
+  落ちていたので一行形式へ直した（対象に下界・下限の定義二つも加えた）。
 
 - 2026-08-15（tick 289）: 前 tick の「倍数の辺での上限への任意近接（$1\le t$）」の本文・
   SageMath・Lean 具体版・必要十分版・導出版を突き合わせた。三段の論法は一致していたが、有限モデルの
@@ -163,11 +172,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   `\blkref{remark_real_logarithm}` が無く、既存の証明の書き方（性質名＋ラベル参照）と食い違って
   いたので付けた（散文側にも参照を足した）。
 
-- 2026-08-15（tick 285）: 前 tick の「開境界正方形の自由エネルギー密度」の本文・SageMath・
-  Lean 定義を突き合わせた。有理数 $1/L^2$ を実数へ移してから実対数へ掛ける形、開境界値の
-  正値性による定義域、周期境界の密度との記号の区別が一致し、修正は無い。
-
-（これより古い 276 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 277 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

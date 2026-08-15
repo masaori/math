@@ -1096,6 +1096,15 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_supremum_approximation_multiples_of_one_le
   Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_supremum_approximation_multiples_necSuf
   Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_supremum_approximation_multiples_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.two_mul_pow_edgeCount_le_openPartitionValue
+  Ising2DLambda.ThermodynamicLimit.pow_twoSquare_le_two_mul_pow_edgeCount
+  Ising2DLambda.ThermodynamicLimit.pow_twoSquare_le_openPartitionValue
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_lowerBound_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_map_lowerBound_necSuf
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_lowerBound_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_infimum_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedValueSet_has_infimum_necSuf
+  Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_infimum_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
