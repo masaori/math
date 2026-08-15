@@ -1050,6 +1050,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueFirst_bounds_of_one_le_from_necSuf
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_le_one_from_necSuf
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_glueSecond_bounds_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.periodicVertexToOpen_openVertexToPeriodic
+  Ising2DLambda.ThermodynamicLimit.openVertexToPeriodic_periodicVertexToOpen
+  Ising2DLambda.ThermodynamicLimit.periodicOpenVertexEquiv
+  Ising2DLambda.ThermodynamicLimit.periodicConfigToOpen_openConfigToPeriodic
+  Ising2DLambda.ThermodynamicLimit.openConfigToPeriodic_periodicConfigToOpen
+  Ising2DLambda.ThermodynamicLimit.periodicOpenConfigEquiv
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
