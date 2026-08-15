@@ -964,10 +964,15 @@ i^n
 \end{cases}
    \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h1.z)}) \\
 &= \begin{cases}
+i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad \left(\because \text{冪の指数法則を商 }\left(\tfrac{i}{2}\right)^{n}=i^{n}2^{-n}\text{ と積 }(2K_1)^n=2^{n}K_1^n\text{ の両方へ適用し、スカラーを並べ替えた}\right) \\
+&= \begin{cases}
 i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad \left(\because \left(\tfrac{i}{2}\right)^{n}(2K_1)^n = i^{n}2^{-n}2^{n}K_1^n\right) \\
+   \quad \left(\because 2^{-n}2^{n} = 2^{0} = 1\right) \\
 &= \begin{cases}
 i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
