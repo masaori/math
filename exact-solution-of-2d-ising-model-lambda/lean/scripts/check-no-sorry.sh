@@ -73,6 +73,12 @@ targets=(
   Ising2DLambda.NecSuf.FreeEntropy.log_realize_necSuf
   Ising2DLambda.FreeEntropy.logRat_rationalOfLog_from_necSuf
   Ising2DLambda.FreeEntropy.logRat_surjective_from_necSuf
+  Ising2DLambda.FreeEntropy.logOrderLE_refl
+  Ising2DLambda.FreeEntropy.logOrderLE_trans
+  Ising2DLambda.FreeEntropy.logOrderLE_antisymm
+  Ising2DLambda.FreeEntropy.logOrderLE_total
+  Ising2DLambda.NecSuf.FreeEntropy.pullback_linear_order_necSuf
+  Ising2DLambda.FreeEntropy.logOrderLE_linear_order_from_necSuf
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos

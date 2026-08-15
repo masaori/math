@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 300 は、前 tick の「正の有理数の対数は全射である」の本文・SageMath・Lean（具体版・
+必要十分版・導出版）を突き合わせて修正不要と確認した。そのあと「対数順序群の順序」を、$\mathbb Q$ の順序を
+全単射 $\operatorname{rat}_\Lambda$ で引き戻す論法（定義と線形順序性）と、$\operatorname{rat}_\Lambda$ が積を
+保つことから出す加法単調性の論法へ割り、先頭を四層まで完成させた。`def_log_order_group_order` で
+$\lambda\le_\Lambda\mu:\iff\operatorname{rat}_\Lambda(\lambda)\le\operatorname{rat}_\Lambda(\mu)$（有理数の
+比較。決定可能）を定め、`claim_log_order_group_linear_order` で反射・推移・全順序性を $\mathbb Q$ の同名の性質へ
+落とし、反対称律だけ $\lambda=\log(\operatorname{rat}_\Lambda\lambda)=\log(\operatorname{rat}_\Lambda\mu)=\mu$
+で $\Lambda$ の等号へ戻した。`def_log_order_group` の「順序はまだ定めない」の段落を新定義への参照へ直した。
+SageMath `log-order-group-linear-order` は素数 $2,3,5$・係数 $-2..2$ の 125 ベクトルの全対・全三つ組を `QQ` で
+厳密に。Lean は具体版 `FreeEntropy/LogOrderGroupOrder.lean`（`logOrderLE`、`DecidableRel`、
+`logOrderLE_refl/trans/antisymm/total`）、必要十分版 `NecSuf/FreeEntropy/LogOrderGroupOrder.lean` の
+`pullback_linear_order_necSuf`（線形順序 $Y$ への写像 $f$ と左逆写像 $g$ だけ。反対称律にだけ $g$ を使う）、
+導出版 `logOrderLE_linear_order_from_necSuf`（sorry 検査 1090 件）。次の本文は「対数順序群の順序の加法単調性」
+（$\operatorname{rat}_\Lambda(\lambda+\nu)=\operatorname{rat}_\Lambda(\lambda)\operatorname{rat}_\Lambda(\nu)$ を
+対数の加法性と単射性から出し、正の有理数を掛ける単調性へ落とす。Lean は `logRat_mul` と
+`logRat_injective_of_pos` で `rationalOfLog_add` を作れば `mul_le_mul_of_nonneg_right` で閉じる）。
+
 2026-08-15 の tick 299 は、前 tick の「正の有理数の対数は単射である」の本文・SageMath・Lean
 （具体版・必要十分版・導出版）を突き合わせて修正不要と確認した。そのあと「正の有理数の対数は全射である」を
 四層まで完成させた。`def_rational_of_log` で有限台指数ベクトル $\lambda\in\Lambda$ から
