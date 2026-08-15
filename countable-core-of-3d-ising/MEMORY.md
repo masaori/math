@@ -4,11 +4,11 @@
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) も読む。
 
-## 直近（2026-08-16 04:15 tick）
+## 直近（2026-08-16 04:30 tick）
 
-「外箱の拡大に対する境界応答多項式の安定性」の Lean 具体版を形式化（`lake build`・sorry 検査 97 件 OK）。
-レビュー（検査 71 ブロック・SageMath 対応 17 件・立場違反語なし・PDF 19 ページ）に不備なし。次は
-同セクションの Lean 必要十分版と導出。詳細は台帳「現在地」先頭。
+レビューのみ（検査 71 ブロック・SageMath 対応 17 件・sorry 検査 97 件 OK・立場違反語なし・PDF 19 ページ、
+不備なし）。開始が遅く「外箱の拡大に対する境界応答多項式の安定性」の Lean 必要十分版には未着手。
+前 tick（04:15）で同セクションの Lean 具体版を形式化済み。次は Lean 必要十分版と導出。詳細は台帳「現在地」先頭。
 
 ## ゴール設定（2026-08-14 に確定）
 
