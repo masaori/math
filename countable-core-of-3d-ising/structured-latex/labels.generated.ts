@@ -8,6 +8,7 @@
 export const ALL_LABELS = [
   "claim_broken_complement",
   "claim_discriminant_does_not_determine_polynomial",
+  "claim_distinct_roots_do_not_determine_polynomial",
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
   "claim_factorization_type_determines_root_minimal_degrees",
@@ -23,6 +24,7 @@ export const ALL_LABELS = [
   "claim_periodic_not_palindrome",
   "claim_periodic_successor_not_palindrome",
   "claim_rational_values_determine_partition_polynomial",
+  "claim_roots_leading_coefficient_multiplicities_determine_polynomial",
   "claim_same_partition_different_pair_data",
   "claim_splitting_degree_galois_group_do_not_determine_polynomial",
   "claim_structural_palindrome",

@@ -1026,4 +1026,142 @@ B(X)&=X(X+1)
       ]),
     ],
   },
+
+  {
+    id: "polynomial_root_data_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "零点と係数データによる多項式の決定" },
+    labels: [],
+  },
+
+  {
+    id: "polynomial_root_data_claim_distinct_roots_insufficient",
+    kind: "claim",
+    title: { text: "相異なる零点だけでは多項式を決めない" },
+    labels: ["claim_distinct_roots_do_not_determine_polynomial"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([
+        "相異なる零点の有限集合だけから、非零の代数的数係数多項式は一意に決まらない。",
+        "最高次係数を落とす反例と、零点の代数的重複度を落とす反例がそれぞれ存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph(["最高次係数を落とす反例として、二つの多項式"]),
+      displayMath(String.raw`A(X)=X-1,\qquad B(X)=2X-2\quad\in\overline{\mathbb Q}[X]`),
+      paragraph(["を取る。係数を比較すると"]),
+      displayMath(
+        String.raw`[X]A(X)=1\ne2=[X]B(X)
+\qquad(\because\ \text{一次係数の比較})`,
+      ),
+      paragraph(["なので、", math(String.raw`A(X)\ne B(X)`), " である。一方、"]),
+      displayMath(
+        String.raw`A(1)=0,\qquad B(1)=0
+\qquad(\because\ \text{代入による有限な四則演算})`,
+      ),
+      paragraph([
+        math(String.raw`A`),
+        " と ",
+        math(String.raw`B`),
+        " はともに次数 ",
+        math(String.raw`1`),
+        " なので、相異なる零点の集合はどちらも ",
+        math(String.raw`\{1\}`),
+        " である。",
+      ]),
+      paragraph(["零点の代数的重複度を落とす反例として、二つの多項式"]),
+      displayMath(String.raw`C(X)=X-1,\qquad D(X)=(X-1)^2\quad\in\overline{\mathbb Q}[X]`),
+      paragraph(["を取る。次数を比較すると"]),
+      displayMath(
+        String.raw`\deg C=1\ne2=\deg D
+\qquad(\because\ \text{非零多項式の積の次数})`,
+      ),
+      paragraph(["なので、", math(String.raw`C(X)\ne D(X)`), " である。一方、"]),
+      displayMath(
+        String.raw`C(1)=0,\qquad D(1)=0
+\qquad(\because\ \text{代入による有限な四則演算})`,
+      ),
+      paragraph([
+        math(String.raw`C`),
+        " の次数は ",
+        math(String.raw`1`),
+        "、",
+        math(String.raw`D`),
+        " は一次因子 ",
+        math(String.raw`X-1`),
+        " の有限積なので、相異なる零点の集合はどちらも ",
+        math(String.raw`\{1\}`),
+        " である。以上の二つの有限な反例から主張が従う。",
+      ]),
+    ],
+  },
+
+  {
+    id: "polynomial_root_data_claim_leading_coefficient_and_multiplicities_determine",
+    kind: "claim",
+    title: { text: "最高次係数と重複度を加えれば多項式が決まる" },
+    labels: ["claim_roots_leading_coefficient_multiplicities_determine_polynomial"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([
+        "非定数多項式 ",
+        math(String.raw`F(X)\in\overline{\mathbb Q}[X]`),
+        " の相異なる零点の有限集合を ",
+        math(String.raw`R`),
+        "、零点 ",
+        math(String.raw`r\in R`),
+        " の正の代数的重複度を ",
+        math(String.raw`\mu(r)\in\mathbb N`),
+        "、最高次係数を ",
+        math(String.raw`c\in\overline{\mathbb Q}\setminus\{0\}`),
+        " とする。この有限データは ",
+        math(String.raw`F`),
+        " を一意に決め、具体的には",
+      ]),
+      displayMath(String.raw`F(X)=c\prod_{r\in R}(X-r)^{\mu(r)}`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\overline{\mathbb Q}`),
+        " は代数的閉体なので、非定数多項式を一次因子へ有限回分解できる。",
+        "相異なる零点を一度ずつ ",
+        math(String.raw`R`),
+        " に集め、各一次因子の出現回数を ",
+        math(String.raw`\mu(r)`),
+        " とすると、零点と代数的重複度の定義から、ある非零係数 ",
+        math(String.raw`d\in\overline{\mathbb Q}\setminus\{0\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`F(X)=d\prod_{r\in R}(X-r)^{\mu(r)}
+\qquad(\because\ \overline{\mathbb Q}[X]\ \text{における有限な一次因子分解})`,
+      ),
+      paragraph([
+        "各因子 ",
+        math(String.raw`(X-r)^{\mu(r)}`),
+        " の最高次係数は ",
+        math(String.raw`1`),
+        " なので、その有限積の最高次係数も ",
+        math(String.raw`1`),
+        " である。したがって右辺の最高次係数は ",
+        math(String.raw`d`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`d=c
+\qquad(\because\ F\ \text{の最高次係数は}\ c)`,
+      ),
+      paragraph([
+        "これを直前の有限積表示へ代入すると主張の表示を得る。右辺は ",
+        math(String.raw`R`),
+        "、",
+        math(String.raw`\mu`),
+        "、",
+        math(String.raw`c`),
+        " だけで定まるので、同じ三つの有限データを持つ二つの多項式は等しい。",
+      ]),
+    ],
+  },
 ]);
