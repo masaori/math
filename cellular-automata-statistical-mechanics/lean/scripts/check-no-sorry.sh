@@ -244,6 +244,27 @@ targets=(
   CellularAutomata.MinimalPreperiodPeriod.period_multiples
   CellularAutomata.MinimalPreperiodPeriod.period_descends_to_minPreperiod
   CellularAutomata.MinimalPreperiodPeriod.minPreperiod_add_minPeriod_le
+  CellularAutomata.MinimalPreperiodPeriod.minimal_pair_mem_scan
+  CellularAutomata.MinimalPreperiodPeriod.scan_pair_has_minimal_bounds
+  CellularAutomata.MinimalPreperiodPeriod.isPeriodicityPair_iff_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.isPreperiod_iff_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.minPreperiod_eq_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.minPeriod_eq_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.period_multiples_from_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.minimal_scan_range_from_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.minPreperiod_add_minPeriod_le_from_necessary_sufficient
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.exists_periodicityPair
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.isPeriodicityPair_iff_collision
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.exists_preperiod
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPreperiod_spec
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPreperiod_le
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPeriod_spec
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPeriod_le
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.period_multiples
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.period_descends_to_minPreperiod
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPreperiod_add_minPeriod_le
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.minimal_pair_mem_scan
+  CellularAutomata.NecSuf.MinimalPreperiodPeriod.scan_pair_has_minimal_bounds
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
