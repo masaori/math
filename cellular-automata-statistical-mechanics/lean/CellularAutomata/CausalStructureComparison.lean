@@ -7,6 +7,7 @@
 物理的因果、グラフ、多様体、R / C は使わない。
 -/
 import CellularAutomata.DependencyOrderSubstructures
+import CellularAutomata.NecSuf.CausalStructureComparison
 
 namespace CellularAutomata.CausalStructureComparison
 
@@ -156,5 +157,99 @@ theorem exists_order_equiv_not_time_preserving :
   · refine ⟨e₀, ?_, ?_⟩
     · simp [e₀, eventSet, timeInterval]
     · simp [σ, e₀, e₁]
+
+/-! ## 必要十分版からの導出
+
+以下は、上の具体版の定義・定理が必要十分版（`NecSuf.CausalStructureComparison`）を
+イベント集合・一段依存関係・到達可能関係・時刻射影・自然数の大小へ特殊化したものであることの導出。 -/
+
+/-- 具体版の順序区間は、必要十分版をイベント集合と反射的到達可能関係へ特殊化したものである。 -/
+theorem orderInterval_eq_necessary_sufficient (τ : ℕ) (a b : ℕ × V) :
+    orderInterval N f τ a b =
+      CellularAutomata.NecSuf.CausalStructureComparison.orderInterval
+        (↑(eventSet (V := V) τ)) (ReflReachable N f τ) a b := rfl
+
+/-- 区間の有限性が、必要十分版へ有限なイベント集合を渡して得られること。 -/
+theorem orderInterval_finite_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V) :
+    (orderInterval N f τ a b).Finite := by
+  rw [orderInterval_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.CausalStructureComparison.orderInterval_finite _ _
+    (Finset.finite_toSet _) a b
+
+/-- 区間の個数上界が、必要十分版の |X| による上界と |E_τ| = (τ+1)|V| から得られること。 -/
+theorem orderInterval_ncard_le_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V) :
+    (orderInterval N f τ a b).ncard ≤ (τ + 1) * Fintype.card V := by
+  rw [orderInterval_eq_necessary_sufficient]
+  calc
+    (CellularAutomata.NecSuf.CausalStructureComparison.orderInterval
+        (↑(eventSet (V := V) τ)) (ReflReachable N f τ) a b).ncard
+        ≤ (↑(eventSet (V := V) τ) : Set (ℕ × V)).ncard :=
+      CellularAutomata.NecSuf.CausalStructureComparison.orderInterval_ncard_le _ _
+        (Finset.finite_toSet _) a b
+    _ = (eventSet (V := V) τ).card := Set.ncard_coe_finset _
+    _ = (τ + 1) * Fintype.card V := card_eventSet τ
+
+/-- 具体版の被覆関係は、必要十分版をイベント集合と到達可能関係へ特殊化したものである。 -/
+theorem covering_eq_necessary_sufficient (τ : ℕ) :
+    Covering N f τ =
+      CellularAutomata.NecSuf.CausalStructureComparison.Covering
+        (↑(eventSet (V := V) τ)) (Reachable N f τ) := rfl
+
+/-- 具体版の到達可能関係（集合として）は必要十分版の到達可能関係に等しい。 -/
+theorem reachable_eq_necessary_sufficient (τ : ℕ) :
+    Reachable N f τ =
+      CellularAutomata.NecSuf.TransitiveClosureAntisymmetry.Reachable
+        (↑(eventSet (V := V) τ)) (↑(oneStepDep N f τ)) := by
+  ext ⟨a, b⟩
+  exact reachable_iff_necessary_sufficient N f τ a b
+
+/-- 一段依存 ⊆ 被覆が、必要十分版へ時刻射影・自然数の大小・時刻差 1 の隣接性を渡して
+    得られること。 -/
+theorem oneStep_subset_covering_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V)
+    (hab : (a, b) ∈ oneStepDep N f τ) : (a, b) ∈ Covering N f τ := by
+  rw [covering_eq_necessary_sufficient]
+  refine CellularAutomata.NecSuf.CausalStructureComparison.oneStep_subset_covering
+    (↑(eventSet (V := V) τ)) (↑(oneStepDep N f τ)) (Reachable N f τ) Prod.fst (· < ·)
+    (fun _ h => oneStep_subset_reachable N f τ _ _ h) ?_ ?_ a b hab
+  · rintro x y ⟨n, p, hpath, hp0, hpn⟩
+    have h := path_time_strictly_increases N f τ n p hpath
+    simpa [hp0, hpn] using h
+  · intro x y hxy t hxt hty
+    have hsucc : y.1 = x.1 + 1 :=
+      (mem_oneStepDep N f τ x.1 y.1 x.2 y.2).mp hxy |>.2.1
+    omega
+
+/-- 被覆 ⊆ 一段依存が、必要十分版の特殊化として得られること。 -/
+theorem covering_subset_oneStep_from_necessary_sufficient (τ : ℕ) (a b : ℕ × V)
+    (hab : (a, b) ∈ Covering N f τ) : (a, b) ∈ oneStepDep N f τ := by
+  rw [covering_eq_necessary_sufficient, reachable_eq_necessary_sufficient] at hab
+  exact CellularAutomata.NecSuf.CausalStructureComparison.covering_subset_oneStep
+    (↑(eventSet (V := V) τ)) (↑(oneStepDep N f τ)) a b hab
+
+/-- 時刻を保存しない順序同型の反例が、必要十分版へ「一段依存が空」と
+    「時刻の異なる二イベント (0,()) と (1,())」を渡して得られること。 -/
+theorem exists_order_equiv_not_time_preserving_from_necessary_sufficient :
+    let N : Unit → Finset Unit := fun _ => {()}
+    let f : (v : Unit) → (↥(N v) → State) → State := fun _ _ => State.zero
+    ∃ σ : Equiv.Perm (ℕ × Unit),
+      (∀ a b, a ∈ eventSet (V := Unit) 1 → b ∈ eventSet (V := Unit) 1 →
+        ((a, b) ∈ ReflReachable N f 1 ↔
+          (σ a, σ b) ∈ ReflReachable N f 1)) ∧
+      (∃ a, a ∈ eventSet (V := Unit) 1 ∧ (σ a).1 ≠ a.1) := by
+  dsimp
+  let N : Unit → Finset Unit := fun _ => {()}
+  let f : (v : Unit) → (↥(N v) → State) → State := fun _ _ => State.zero
+  have hD : (↑(oneStepDep N f 1) : Set ((ℕ × Unit) × (ℕ × Unit))) = ∅ := by
+    ext ab
+    simp [oneStepDep, N, f, EssentialDependency.supp,
+      EssentialDependency.EssentialDep]
+  obtain ⟨σ, hσ, a, ha, hta⟩ :=
+    CellularAutomata.NecSuf.CausalStructureComparison.exists_order_equiv_not_time_preserving
+      (↑(eventSet (V := Unit) 1)) (↑(oneStepDep N f 1)) Prod.fst hD (0, ()) (1, ())
+      (by simp [eventSet, timeInterval]) (by simp [eventSet, timeInterval]) (by simp)
+  refine ⟨σ, ?_, a, ha, hta⟩
+  intro x y hx hy
+  rw [reflReachable_iff_necessary_sufficient, reflReachable_iff_necessary_sufficient]
+  exact hσ x y hx hy
 
 end CellularAutomata.CausalStructureComparison
