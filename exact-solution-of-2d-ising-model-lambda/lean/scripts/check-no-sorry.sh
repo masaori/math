@@ -1216,6 +1216,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.pow_le_pow_of_one_le_of_exp_le_by_induction_rat
   Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_rat_le_upperBound
   Ising2DLambda.ThermodynamicLimit.partitionPolynomial_eval_rat_le_upperBound_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.logRat_upperBound_eq
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_freeEntropy_upperBound
+  Ising2DLambda.ThermodynamicLimit.scaled_toRational_upperBound_eq
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaledFreeEntropy_upperBound
+  Ising2DLambda.NecSuf.ThermodynamicLimit.upperBound_transport_through_two_monotone_maps_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaledFreeEntropy_upperBound_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -4,6 +4,28 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 315 は、前 tick の「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_finite_free_entropy_density_upper_bound`（`claim_partition_value_upper_bound_at_positive_rational` の直後、`remark_real_field_escape` の直前、
+住処 Lambda）で、$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$。準備は第一
+$Z_L(q)\in\mathbb Q_{>0}$・$Z_L(q)\le2^{L^2}(1+q)^{2L^2}$（`claim_value_at_rational_is_positive`・`claim_partition_value_upper_bound_at_positive_rational`）、
+第二 $\log2=\ell_2$（各素数での四段: `def_rational_log`・$2=2/1$・$v_p(1)=0$・生成元の定義）、第三 $n\cdot\iota(\nu)=\iota(n\nu)$
+（`claim_scaled_free_entropy_denominator_clearing` の証明末尾の補助等式を引く）。$\Lambda$ の鎖は $\Phi_L(q)=\log Z_L(q)\le_\Lambda\log(2^{L^2}(1+q)^{2L^2})
+=\log2^{L^2}+\log(1+q)^{2L^2}=L^2\log2+2L^2\log(1+q)=L^2\ell_2+2L^2\log(1+q)$（`claim_rational_log_order_iff`・`claim_log_additive`・`claim_log_power` を
+二項へ同時適用・準備の第二）、$\Lambda_{\mathbb Q}$ の鎖は $\Psi_L(q)=\frac{1}{L^2}\cdot\iota(\Phi_L(q))\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(L^2\ell_2+2L^2\log(1+q))$
+（`claim_scaled_embedding_order_transfer` の ←）から $\iota$ の加法性（`claim_rational_log_order_group_embedding`）・分配則・準備の第三・結合則・約分・
+$1\cdot\lambda=\lambda$ の六段で右辺へ。$\mathbb R$ 版 `claim_free_energy_density_upper_bound` は併存（撤去のセクションで消す）。SageMath
+`finite-free-entropy-density-upper-bound`（$L\le3$・正の有理点 9 点、141 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/FiniteFreeEntropyDensityUpperBound.lean`
+（`logRat_upperBound_eq`・`logOrderLE_freeEntropy_upperBound`・`scaled_toRational_upperBound_eq`・`rationalLogOrderLE_scaledFreeEntropy_upperBound`。
+`logRat_two`（`AtOne.lean`）・`toRational_intSmul`・`natCast_zsmul`・`smul_add`・`smul_smul` を使う。約分は `push_cast; field_simp` に $(L:\mathbb Q)\ne0$ を渡す）、
+必要十分版 `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityUpperBound.lean` の `upperBound_transport_through_two_monotone_maps_necSuf`（順序を保つ二つの
+写像 `ell`・`emb` と、上界の像を目標形へ・目標形の像を最終形へ移す二つの等式だけ。対数・有理数倍・埋め込みは本質でない）、導出版
+`FiniteFreeEntropyDensityUpperBoundFromNecSuf.lean`（第一の写像の定義域は正の有理数の部分型 `{r : ℚ // 0 < r}`。sorry 検査 1166 件）。
+次は「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」（`def_open_rectangle_*` を `remark_real_field_escape` より
+前へ移す。中身は変えない。$Z^{\mathrm{op}}_{a,b}(q)\in\mathbb Q_{>0}$ の定義と正値性。着手前に `def_open_rectangle_*` の一覧と、実数側の
+`def_open_rectangle_partition_value` 相当の既存ブロックとの参照関係を確かめること。定義 1・主張 1 なら割らずに進めてよいが、移動するブロックが多ければ
+移動だけで 1 セクションに割る）。
+
 2026-08-16 の tick 314 は、前 tick の「有限系の自由エントロピー密度は非負である」の四層を突き合わせて一致を確認し（修正無し）、
 「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_partition_value_upper_bound_at_positive_rational`（`claim_finite_free_entropy_density_nonnegative` の直後、`remark_real_field_escape` の直前、
@@ -3452,9 +3474,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」（`claim_partition_value_upper_bound_at_positive_rational`）の
-  本文・SageMath `partition-value-upper-bound-at-positive-rational`・Lean（`PartitionValueUpperBoundRational.lean` 系統、必要十分版は ℝ 版と共有）を突き合わせる。
-- **次に進めるセクションは「有限系の自由エントロピー密度の上界（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」（`claim_finite_free_entropy_density_upper_bound`）の
+  本文・SageMath `finite-free-entropy-density-upper-bound`・Lean（`FiniteFreeEntropyDensityUpperBound.lean` 系統）を突き合わせる。
+- **次に進めるセクションは「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。

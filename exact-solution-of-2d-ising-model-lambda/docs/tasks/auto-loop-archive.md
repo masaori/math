@@ -10595,3 +10595,31 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-16（tick 309）: 前 tick の「有理係数の対数順序群の順序は加法について単調である」の本文・SageMath・Lean 具体版・必要十分版・
   導出版を突き合わせ、四段の鎖・∀ 形での読み替え・対象ラベル・入口 import・sorry 検査への登録が一致した。修正は無い。
+
+## tick 315 で台帳から移した記録（tick 310）
+
+### 現在地
+
+- **2026-08-16 の tick 310 は、「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean 具体版まで
+  完成させた。** $\Psi_L(q):=\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\Phi_L(q))\in\Lambda_{\mathbb Q}$
+  （$L\ge1$、$q\in\mathbb Q_{>0}$）を加法単調性の直後・実数体脱出の宣言の前に置き（`def_finite_free_entropy_density`）、右辺の確定
+  （$1/L^2\in\mathbb Q$、$Z_L(q)\in\mathbb Q_{>0}$）と各素数での値 $\Psi_L(q)(p)=\Phi_L(q)(p)/L^2$ の三段の鎖、具体例
+  $\Psi_2(1/2)(353)=1/4$・$\Psi_2(1/2)(2)=-7/4$ を書いた。実数値の $\psi_L$ とは記号を分けて併存させる（撤去のセクションで一本化）。
+  定義ブロックなので必要十分版は置かない（`def_finite_free_entropy` と同じ）。レビューでは前 tick の順序の保存・反映の四層が
+  一致し修正無し。次は「有理数倍と埋め込みを通した順序の移送」。
+
+### 前進の記録
+
+- 2026-08-16（tick 310）: `def_finite_free_entropy_density` を `claim_rational_log_order_group_add_monotone` の直後（実数体脱出の
+  宣言の直前）に置いた。$\Psi_L(q):=\frac{1}{L^2}\cdot\iota(\Phi_L(q))$、右辺の確定、各素数での値の三段の鎖（有理数倍の定義・$\iota$ の
+  定義・$\mathbb Q$ の積）、$\Psi_L$ と $\Psi_L(q)$ の区別、$\psi_L$ との記号の分離、具体例 $L=2$・$q=1/2$。
+  `def_rational_log_order_group` 末尾の「密度の住処」に新定義への参照を足した。SageMath `finite-free-entropy-density`
+  （$L\in\{1,2,3\}$・正の有理点 7 点で確定・鎖の各段・台の一致・具体例、72 検査、`ZZ`/`QQ`）。Lean 具体版は既存の
+  `ThermodynamicLimit/RationalLogOrderGroup.lean` の `scaledFreeEntropy`（docstring を新定義へ）と新補題 `scaledFreeEntropy_apply`
+  （三段の鎖と 1 対 1）。定義ブロックのため必要十分版・導出版は無し。sorry 検査 1143 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 310）: 前 tick の「正の有理数の対数は順序を保ちかつ反映する」の本文・SageMath・Lean 具体版・必要十分版・
+  導出版を突き合わせ、補助等式（全射性を $\lambda:=\log q$ へ・単射性）・二段の同値・対象ラベル・入口 import・sorry 検査への登録が
+  一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
