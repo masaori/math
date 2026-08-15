@@ -1,4 +1,5 @@
 -- 入口。すべての .lean をここから import する（import 漏れはビルドも検査もされない）。
+import CellularAutomata.CausalStructureComparison
 import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
