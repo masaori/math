@@ -105,6 +105,7 @@ targets=(
   Ising3DCut.NullModel.irreducible_monic_eq_of_common_root
   Ising3DCut.NullModel.irreducibleFactorProduct_roots_eq_bind
   Ising3DCut.NullModel.irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees
+  Ising3DCut.NullModel.irreducibleFactorProduct_count_rootMinimalPolynomialDegree
   Ising3DCut.NecSuf.NullModel.factorizationType_determines_rootDegrees
   Ising3DCut.NullModel.irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees_from_necSuf
   Ising3DCut.NecSuf.NullModel.card_fiber_complement

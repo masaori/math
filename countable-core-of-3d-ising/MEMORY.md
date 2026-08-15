@@ -438,3 +438,7 @@ launchd は 15 分ごと（毎時 0/15/30/45 分）に呼び、**実際に走る
 （`~/git/masaori/math-ising-3d-cut-loop`）で作業して `origin/main` へ push する。
 起動は `~/.local/bin/ising-3d-cut-loop-launcher.sh`（リポジトリ外）、ログは
 `~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log`。詳細は runbook の「起動の仕組み」。
+2026-08-15 に「既約分解の型が決める零点の最小多項式次数」の Lean 具体版で、有限積そのものの
+零点多重集合へ最小多項式次数を写し、次数ごとの出現回数が既約因子の `指数 × 次数` の有限和に
+一致する最終定理を追加した。前 tick の零点結合補題が本文の個数公式へ接続され、status は
+`Lean 具体版まで`。次の tick は必要十分版がこの追加段も同じ手順で抽象化しているかを確認する。

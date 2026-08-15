@@ -10,6 +10,8 @@
 住処: 有限型と自然数だけであり、非可算な量は現れない。
 -/
 import Mathlib
+import Mathlib.Data.Multiset.Bind
+import Mathlib.Data.Multiset.Filter
 
 namespace Ising3DCut.NullModel
 
@@ -184,5 +186,56 @@ theorem irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees
   rw [Fintype.card_congr restrictedEquiv]
   exact factorizationType_determines_rootMinimalPolynomialDegrees
     (fun j => (P j).natDegree) exponent n
+
+/--
+本文の主張そのものの結合。有限積の零点の多重集合へ最小多項式次数を写したとき、
+次数 `n` の出現回数は、次数 `n` の既約因子ごとの `指数 × 次数` の有限和になる。
+上の有限積の零点結合補題を使うので、因子ごとのタグ付き零点だけでなく、積多項式
+そのものの零点を代数的重複度込みで数えている。
+-/
+theorem irreducibleFactorProduct_count_rootMinimalPolynomialDegree
+    {J K L : Type} [Fintype J] [DecidableEq J]
+    [Field K] [CharZero K] [Field L] [IsAlgClosed L]
+    [Algebra K L] [FaithfulSMul K L] [DecidableEq L]
+    (P : J → K[X]) (exponent : J → ℕ)
+    (hIrreducible : ∀ j, Irreducible (P j)) (hMonic : ∀ j, (P j).Monic)
+    (n : ℕ) :
+    Multiset.count n
+      ((∏ j : J, (Polynomial.map (algebraMap K L) (P j)) ^ exponent j).roots.map
+        fun x ↦ (minpoly K x).natDegree) =
+      ∑ j : J, if (P j).natDegree = n then exponent j * (P j).natDegree else 0 := by
+  classical
+  rw [irreducibleFactorProduct_roots_eq_bind P exponent hIrreducible]
+  rw [Multiset.map_bind, Multiset.count_bind]
+  simp only [Multiset.map_nsmul, Multiset.count_nsmul]
+  apply Finset.sum_congr rfl
+  intro j _
+  have hDegree : ∀ x ∈ (Polynomial.map (algebraMap K L) (P j)).roots,
+      (minpoly K x).natDegree = (P j).natDegree := by
+    intro x hx
+    have hxRoot : Polynomial.IsRoot (Polynomial.map (algebraMap K L) (P j)) x :=
+      (Polynomial.mem_roots (Polynomial.map_ne_zero (hIrreducible j).ne_zero)).mp hx
+    exact minpoly_natDegree_eq_of_irreducible_monic
+      (P j) (hIrreducible j) (hMonic j) x
+      (by simpa [Polynomial.IsRoot] using hxRoot)
+  rw [Multiset.count_map]
+  by_cases h : (P j).natDegree = n
+  · simp only [h, if_true]
+    have hFilter :
+        Multiset.filter (fun x ↦ n = (minpoly K x).natDegree)
+          (Polynomial.map (algebraMap K L) (P j)).roots =
+          (Polynomial.map (algebraMap K L) (P j)).roots :=
+      Multiset.filter_eq_self.2 fun x hx ↦ h.symm.trans (hDegree x hx).symm
+    rw [hFilter]
+    rw [← (IsAlgClosed.splits (Polynomial.map (algebraMap K L) (P j))).natDegree_eq_card_roots]
+    simp [h]
+  · simp only [h, if_false]
+    have hFilter :
+        Multiset.filter (fun x ↦ n = (minpoly K x).natDegree)
+          (Polynomial.map (algebraMap K L) (P j)).roots = 0 :=
+      Multiset.filter_eq_nil.2 fun x hx hnx ↦
+        h ((hDegree x hx).symm.trans hnx.symm)
+    rw [hFilter]
+    simp
 
 end Ising3DCut.NullModel
