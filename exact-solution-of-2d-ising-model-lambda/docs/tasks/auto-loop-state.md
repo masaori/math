@@ -7,6 +7,14 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 310 は、「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean 具体版まで
+  完成させた。** $\Psi_L(q):=\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\Phi_L(q))\in\Lambda_{\mathbb Q}$
+  （$L\ge1$、$q\in\mathbb Q_{>0}$）を加法単調性の直後・実数体脱出の宣言の前に置き（`def_finite_free_entropy_density`）、右辺の確定
+  （$1/L^2\in\mathbb Q$、$Z_L(q)\in\mathbb Q_{>0}$）と各素数での値 $\Psi_L(q)(p)=\Phi_L(q)(p)/L^2$ の三段の鎖、具体例
+  $\Psi_2(1/2)(353)=1/4$・$\Psi_2(1/2)(2)=-7/4$ を書いた。実数値の $\psi_L$ とは記号を分けて併存させる（撤去のセクションで一本化）。
+  定義ブロックなので必要十分版は置かない（`def_finite_free_entropy` と同じ）。レビューでは前 tick の順序の保存・反映の四層が
+  一致し修正無し。次は「有理数倍と埋め込みを通した順序の移送」。
+
 - **2026-08-16 の tick 309 は、「有限系の実自由エントロピーを畳む」を着手前に対象ブロックを列挙して 16 のセクションへ割り、
   その先頭「正の有理数の対数は順序を保ちかつ反映する」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
   補助等式 $\operatorname{rat}_\Lambda(\log q)=q$ を全射性の主張（$\lambda:=\log q$）と単射性で示し、
@@ -38,14 +46,7 @@
   レビューでは前 tick の四層が一致し、本文末尾「この先に書くこと」の済んだ「共通分母の正整数倍」を消して先に push した。
   次は「有理係数の対数順序群の順序の線形順序性と加法単調性」。
 
-- **2026-08-16 の tick 305 は、「共通分母の正整数倍は共通分母である」を本文・SageMath・Lean（具体版・
-  必要十分版・導出版）まで完成させた。** $N$ が $\lambda\in\Lambda_{\mathbb Q}$ の共通分母（証人 $\lambda_N$）で
-  $k\ge1$ なら $kN$ も共通分母で証人は $k\lambda_N$（三段の鎖）、したがって二元 $\lambda,\mu$ には共通の共通分母
-  $N_\lambda N_\mu$ がある（`claim_common_common_denominator_exists`）ことを示した。レビューでは前 tick の共通分母の
-  存在の四層が一致し、本文末尾「この先に書くこと」の済んだ項目を消して先に push した。次は「有理係数の対数順序群の
-  順序の定義」。
-
-（これより古い 262 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 263 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -59,13 +60,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 33 セクション
+- 熱力学極限: 34 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義 | todo | $\Psi_L(q):=\frac{1}{L^2}\cdot\iota(\Phi_L(q))\in\Lambda_{\mathbb Q}$（$q\in\mathbb Q_{>0}$）。加法単調性の直後・実数体脱出の宣言の前に置く。$\psi_L$（ℝ 値）とは別の写像として併存させ、撤去のセクションで一本化する |
 | 熱力学極限 | 有理数倍と埋め込みを通した順序の移送 | todo | $L\ge1$、$\lambda,\mu\in\Lambda$ に対し $\frac{1}{L^2}\cdot\iota(\lambda)\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\mu)\iff\lambda\le_\Lambda\mu$（共通分母 $L^2$、証人 $\lambda,\mu$、判定の独立性） |
 | 熱力学極限 | 正の有理点での分配多項式の値は 1 以上 | todo | 定数配位の項が $q^0=1$、他の項は非負（`claim_free_energy_density_nonnegative` の中身を $\mathbb Q$ で。住処 Q） |
 | 熱力学極限 | 有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版） | todo | $\log1=0$（`claim_free_entropy_at_one` の中身）と対数の順序保存で $0\le_\Lambda\Phi_L(q)$、順序の移送で $0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$ |
@@ -95,6 +95,14 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 310）: `def_finite_free_entropy_density` を `claim_rational_log_order_group_add_monotone` の直後（実数体脱出の
+  宣言の直前）に置いた。$\Psi_L(q):=\frac{1}{L^2}\cdot\iota(\Phi_L(q))$、右辺の確定、各素数での値の三段の鎖（有理数倍の定義・$\iota$ の
+  定義・$\mathbb Q$ の積）、$\Psi_L$ と $\Psi_L(q)$ の区別、$\psi_L$ との記号の分離、具体例 $L=2$・$q=1/2$。
+  `def_rational_log_order_group` 末尾の「密度の住処」に新定義への参照を足した。SageMath `finite-free-entropy-density`
+  （$L\in\{1,2,3\}$・正の有理点 7 点で確定・鎖の各段・台の一致・具体例、72 検査、`ZZ`/`QQ`）。Lean 具体版は既存の
+  `ThermodynamicLimit/RationalLogOrderGroup.lean` の `scaledFreeEntropy`（docstring を新定義へ）と新補題 `scaledFreeEntropy_apply`
+  （三段の鎖と 1 対 1）。定義ブロックのため必要十分版・導出版は無し。sorry 検査 1143 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 309）: **割り直し**: 「有限系の実自由エントロピーを畳む」は $\mathbb R$ 版ブロック約 40 件の書き換えを含み論法が多数
   なので、$\mathbb Q$／$\Lambda_{\mathbb Q}$ 版を新設する 16 のセクション（この tick で済ませた先頭を含む）へ割った（表のとおり。$\mathbb R$ 版はその場で書き換えず、
@@ -137,16 +145,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   `exists_iff_forall_of_independent_necSuf`（良い添字の存在と、良い添字間での真偽の一致だけ。順序も共通分母も本質でない）、
   導出版。sorry 検査 1118 件。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 305）: `claim_common_denominator_multiple` と `claim_common_common_denominator_exists` を
-  `claim_common_denominator_exists` の直後に置き四層で閉じた。前者は $(kN)\cdot\lambda=k\cdot(N\cdot\lambda)
-  =k\cdot\iota(\lambda_N)=\iota(k\lambda_N)$ の三段、後者は前者を $k=N_\mu$・$k=N_\lambda$ で二度使い $\mathbb N$ の
-  積の可換性で閉じる。SageMath `common-denominator-multiple` は素数 $2,3,5$・係数 8 種の 512 ベクトルで $N\le12$ の
-  共通分母と $k\le4$ の組 8836 件（鎖の各段と一意性）、二元 262144 組を `ZZ`/`QQ` で厳密に。Lean 具体版
-  `ThermodynamicLimit/CommonDenominatorMultiple.lean`（`commonDenominator_mul`、`commonCommonDenominator_exists`）、
-  必要十分版 `multiple_clears_necSuf`（倍の結合則、積を保つ写像、倍と $\iota$ の交換だけ。有理数・整数・有限台は
-  本質でない）、導出版。sorry 検査 1114 件。式変形統一は一時停止中のため実施せず。
-
-（これより古い 273 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 274 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -165,6 +164,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 310）: 前 tick の「正の有理数の対数は順序を保ちかつ反映する」の本文・SageMath・Lean 具体版・必要十分版・
+  導出版を突き合わせ、補助等式（全射性を $\lambda:=\log q$ へ・単射性）・二段の同値・対象ラベル・入口 import・sorry 検査への登録が
+  一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 - 2026-08-16（tick 309）: 前 tick の「有理係数の対数順序群の順序は加法について単調である」の本文・SageMath・Lean 具体版・必要十分版・
   導出版を突き合わせ、四段の鎖・∀ 形での読み替え・対象ラベル・入口 import・sorry 検査への登録が一致した。修正は無い。
 
@@ -182,13 +185,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   登録が一致した。後者は「$N_\lambda N_\mu$ が両方の共通分母である」という一つの存在主張なので 1 ブロック 1 主張に反しない。
   本文末尾「この先に書くこと」に済んだ「共通分母の正整数倍が共通分母であること」が残っていたので消した。
 
-- 2026-08-16（tick 305）: 前 tick の「有理係数の対数順序群の元は共通分母を持つ」の本文・SageMath・Lean 具体版・
-  必要十分版・導出版を突き合わせ、七段・五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。
-  既約分数表示 $\operatorname{num}/\operatorname{den}$ は本文で初出であり、対数の定義の $a/b$ 表示と衝突しない。
-  本文末尾「この先に書くこと」に済んだ「共通分母の存在」が残っていたので消し、「共通分母の正整数倍が共通分母で
-  あること」へ揃えた。
-
-（これより古い 294 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 295 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

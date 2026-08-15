@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 310 は、前 tick の「正の有理数の対数は順序を保ちかつ反映する」の四層を突き合わせて一致を確認し（修正無し）、
+「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean 具体版まで完成させた。
+`def_finite_free_entropy_density`（`claim_rational_log_order_group_add_monotone` の直後、`remark_real_field_escape` の直前）で
+$\Psi_L(q):=\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\Phi_L(q))\in\Lambda_{\mathbb Q}$（$L\ge1$、$q\in\mathbb Q_{>0}$）
+を定め、右辺の確定（$1/L^2\in\mathbb Q$、`claim_value_at_rational_is_positive` で $Z_L(q)\in\mathbb Q_{>0}$）、各素数での値
+$\Psi_L(q)(p)=\Phi_L(q)(p)/L^2$ の三段の鎖（有理数倍の定義・$\iota$ の定義・$\mathbb Q$ の積）、$\Psi_L$ と $\Psi_L(q)$ の区別、
+実数値の $\psi_L$（`def_free_energy_density`）とは記号を分けて併存させること、具体例 $\Psi_2(1/2)(353)=1/4$・$\Psi_2(1/2)(2)=-7/4$ を
+書いた。`def_rational_log_order_group` 末尾の「密度の住処」へ新定義への参照を足した。SageMath `finite-free-entropy-density`
+（$L\in\{1,2,3\}$・正の有理点 7 点、72 検査、`ZZ`/`QQ`）。Lean 具体版は既存の `ThermodynamicLimit/RationalLogOrderGroup.lean` の
+`scaledFreeEntropy`（docstring を新定義へ書き換え）と新補題 `scaledFreeEntropy_apply`（三段の鎖と 1 対 1。sorry 検査へ登録、1143 件）。
+定義ブロックのため必要十分版・導出版は置かない（`def_finite_free_entropy` と同じ）。次は「有理数倍と埋め込みを通した順序の移送」
+（$L\ge1$、$\lambda,\mu\in\Lambda$ に対し $\frac{1}{L^2}\cdot\iota(\lambda)\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\mu)\iff\lambda\le_\Lambda\mu$。
+$L^2$ が両方の共通分母で証人が $\lambda,\mu$ であること（$L^2\cdot(\frac{1}{L^2}\cdot\iota(\lambda))=1\cdot\iota(\lambda)=\iota(\lambda)$、
+有理数倍の結合則と $1\cdot\lambda=\lambda$）を示し、`def_rational_log_order_group_order` の言い換え（すべての両方の共通分母で）で
+両向きを閉じる。Lean は `IsCommonDenominator (L^2) ((1/L^2)•toRational λ) λ` を `smul_smul` で示し、`rationalLogOrderLE_iff_forall` と
+`rationalLogOrderLE` の ∃ 形で両向き。必要十分版は「良い添字 $N$ で `Rep N x = a`、`Rep N y = b` なら `indexedLE x y ↔ le a b`」の形）。
+
 2026-08-16 の tick 309 は、前 tick の「有理係数の対数順序群の順序は加法について単調である」の四層を突き合わせて一致を確認し
 （修正無し）、「有限系の実自由エントロピーを畳む」を着手前に対象ブロック（$\mathbb R$ 版約 40 件）を列挙して 16 のセクションへ割った。
 割り方の方針: $\mathbb R$ 版のブロックをその場で書き換えると下流の $\mathbb R$ ブロックが参照を失うので、$\mathbb Q$／$\Lambda_{\mathbb Q}$

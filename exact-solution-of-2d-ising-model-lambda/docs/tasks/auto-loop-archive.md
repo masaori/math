@@ -3,6 +3,34 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 305）の記録
+- **2026-08-16 の tick 305 は、「共通分母の正整数倍は共通分母である」を本文・SageMath・Lean（具体版・
+  必要十分版・導出版）まで完成させた。** $N$ が $\lambda\in\Lambda_{\mathbb Q}$ の共通分母（証人 $\lambda_N$）で
+  $k\ge1$ なら $kN$ も共通分母で証人は $k\lambda_N$（三段の鎖）、したがって二元 $\lambda,\mu$ には共通の共通分母
+  $N_\lambda N_\mu$ がある（`claim_common_common_denominator_exists`）ことを示した。レビューでは前 tick の共通分母の
+  存在の四層が一致し、本文末尾「この先に書くこと」の済んだ項目を消して先に push した。次は「有理係数の対数順序群の
+  順序の定義」。
+
+
+
+- 2026-08-16（tick 305）: `claim_common_denominator_multiple` と `claim_common_common_denominator_exists` を
+  `claim_common_denominator_exists` の直後に置き四層で閉じた。前者は $(kN)\cdot\lambda=k\cdot(N\cdot\lambda)
+  =k\cdot\iota(\lambda_N)=\iota(k\lambda_N)$ の三段、後者は前者を $k=N_\mu$・$k=N_\lambda$ で二度使い $\mathbb N$ の
+  積の可換性で閉じる。SageMath `common-denominator-multiple` は素数 $2,3,5$・係数 8 種の 512 ベクトルで $N\le12$ の
+  共通分母と $k\le4$ の組 8836 件（鎖の各段と一意性）、二元 262144 組を `ZZ`/`QQ` で厳密に。Lean 具体版
+  `ThermodynamicLimit/CommonDenominatorMultiple.lean`（`commonDenominator_mul`、`commonCommonDenominator_exists`）、
+  必要十分版 `multiple_clears_necSuf`（倍の結合則、積を保つ写像、倍と $\iota$ の交換だけ。有理数・整数・有限台は
+  本質でない）、導出版。sorry 検査 1114 件。式変形統一は一時停止中のため実施せず。
+
+
+
+- 2026-08-16（tick 305）: 前 tick の「有理係数の対数順序群の元は共通分母を持つ」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせ、七段・五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。
+  既約分数表示 $\operatorname{num}/\operatorname{den}$ は本文で初出であり、対数の定義の $a/b$ 表示と衝突しない。
+  本文末尾「この先に書くこと」に済んだ「共通分母の存在」が残っていたので消し、「共通分母の正整数倍が共通分母で
+  あること」へ揃えた。
+
+
 ## 2026-08-16（tick 304）の記録
 - **2026-08-16 の tick 304 は、「有理係数の対数順序群の元の共通分母の存在」を本文・SageMath・Lean（具体版・
   必要十分版・導出版）まで完成させた。** $\lambda\in\Lambda_{\mathbb Q}$ の非零値の既約分母の積

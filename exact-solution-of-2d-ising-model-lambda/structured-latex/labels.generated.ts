@@ -321,6 +321,7 @@ export const ALL_LABELS = [
   "def_even_edge_subset",
   "def_even_subgraph_polynomial",
   "def_finite_free_entropy",
+  "def_finite_free_entropy_density",
   "def_finite_lattice_fisher_zeros",
   "def_finite_real_free_entropy",
   "def_free_energy_density",

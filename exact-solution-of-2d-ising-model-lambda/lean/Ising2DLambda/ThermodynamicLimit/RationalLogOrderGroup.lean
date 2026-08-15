@@ -27,9 +27,23 @@ theorem toRational_apply (l : LogOrderGroup) (p : Nat.Primes) :
     toRational l p = ((l p : ℤ) : ℚ) := by
   simp [toRational]
 
-/-- `def_rational_log_order_group` の密度の住処: `(1/L^2)·ι(Φ_L(q)) ∈ Λ_ℚ`。 -/
+/-- `def_finite_free_entropy_density`。有限系の自由エントロピー密度
+`Ψ_L(q) := (1/L^2)·ι(Φ_L(q)) ∈ Λ_ℚ`（`def_rational_log_order_group` が住処として予告した量）。 -/
 noncomputable def scaledFreeEntropy (L : ℕ) [NeZero L] (q : ℚ) : RationalLogOrderGroup :=
   ((1 : ℚ) / ((L : ℚ) ^ 2)) • toRational (freeEntropy L q)
+
+/-- `def_finite_free_entropy_density` の各素数での値: `Ψ_L(q)(p) = Φ_L(q)(p) / L^2`。
+人手証明の三段の鎖（有理数倍の定義・`ι` の定義・`ℚ` の積）と 1 対 1 に対応する。 -/
+theorem scaledFreeEntropy_apply (L : ℕ) [NeZero L] (q : ℚ) (p : Nat.Primes) :
+    scaledFreeEntropy L q p = ((freeEntropy L q p : ℤ) : ℚ) / ((L : ℚ) ^ 2) := by
+  calc
+    scaledFreeEntropy L q p
+        = ((1 : ℚ) / ((L : ℚ) ^ 2)) * toRational (freeEntropy L q) p :=
+          Finsupp.smul_apply _ _ _                     -- 有理数倍の定義
+    _ = ((1 : ℚ) / ((L : ℚ) ^ 2)) * ((freeEntropy L q p : ℤ) : ℚ) := by
+          rw [toRational_apply]                        -- ι の定義
+    _ = ((freeEntropy L q p : ℤ) : ℚ) / ((L : ℚ) ^ 2) := by
+          rw [one_div, mul_comm, div_eq_mul_inv]       -- ℚ の積
 
 /-- `claim_rational_log_order_group_embedding` の加法の部分。 -/
 theorem toRational_add (l m : LogOrderGroup) :
