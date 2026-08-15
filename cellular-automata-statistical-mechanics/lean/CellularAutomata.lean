@@ -16,6 +16,7 @@ import CellularAutomata.NecSuf.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
+import CellularAutomata.PeriodicPointCount
 import CellularAutomata.RedundantNeighbor
 import CellularAutomata.TimeExpansionDependency
 import CellularAutomata.TransitiveClosureAntisymmetry

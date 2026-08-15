@@ -1059,3 +1059,14 @@ $y\in\mathrm{Per}(F)\iff\mu(y)=0$、$y\in\mathrm{Fix}_n(F)\iff(\mu(y)=0$ かつ 
 有限決定は 51,234 回の等号検査で一致した。一般の場合の証明ではなく、有限範囲の厳密な裏取りである。
 浮動小数点と $\mathbb{R}/\mathbb{C}$ 脱出はない。**現在地は SageMath まで。次 tick は検算と
 構造化記述の対応をレビュー後、人手証明と同じ対象・仮定・順序の Lean 具体版を作る。**
+
+## 自動ループ tick: 周期点の個数の Lean 具体版（2026-08-15）
+
+前 tick の SageMath 4 本と構造化記述の対応をレビューし、修正を要する不一致は見つからなかった。
+`lean/CellularAutomata/PeriodicPointCount.lean` に、$\mathrm{Fix}_n(F)$（全配位の filter）と
+$Z_n(F)$（その個数）、周期点、周期点 ⟺ $\mu(y)=0$、$y\in\mathrm{Fix}_n\iff(\mu(y)=0$ かつ
+$\pi(y)\mid n)$（除法の原理と最小周期の最小性）、$Z_n$ の最小周期ごとの個数分解（fiber 分け）、
+所属の決定可能性と全配位走査を人手証明と同じ順序で形式化した。`lake build`、sorry 検査
+（9 定理登録）、構造化テキスト check、SageMath 4 本、対応検査を通した。
+**現在地は Lean 具体版まで。次 tick は具体版をレビュー後、Lean 必要十分版（型 $X$ 上の自己写像と
+有限性だけ）と具体版の導出を作る。**
