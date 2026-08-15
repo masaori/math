@@ -4,6 +4,19 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 297 は、前 tick の有理係数の対数順序群の本文・SageMath・Lean 三系統と姉妹側の
+式変形差分をレビューし、修正不要と確認した。そのあと「$\Lambda\otimes\mathbb{Q}$ の順序」を、
+有限系密度の分母消去と一般の順序の定義・線形順序性へ割り、先頭を四層まで完成させた。
+`claim_scaled_free_entropy_denominator_clearing` は、$L^{-2}\iota(\lambda)$ と
+$M^{-2}\iota(\mu)$ へ共通の正整数 $L^2M^2$ を掛けると $M^2\iota(\lambda)$ と
+$L^2\iota(\mu)$ になる二段の係数計算であり、実数を使わない。SageMath
+`scaled-free-entropy-denominator-clearing` は 384 件を `QQ` で厳密に検査した。Lean は具体版
+`ThermodynamicLimit/ScaledFreeEntropyDenominator.lean`、体上の加群の係数計算だけを残した必要十分版
+`two_scaled_denominators_cancel_necSuf`、導出版を持つ。式変形統一では姉妹側「$T_g$ の複素線型性」が
+既に一続きの三段と行末根拠を備えることを確認し、変更不要とした。次の本文は
+「有理係数の対数順序群の順序の定義と線形順序性」（一般の有限台有理係数へ共通分母を掛け、
+$\Lambda$ に戻して正の有理数の比較から順序を定め、共通分母からの独立性と順序公理を示す）。
+
 2026-08-15 の tick 296 は、レビューで前 tick（台帳の割り直しと姉妹側の根拠補強のみ）に修正が無いことを確認した。
 そのあと「$\Lambda\otimes\mathbb{Q}$ の具体的構成」を四層まで完成させた。有理係数の対数順序群 $\Lambda_{\mathbb{Q}}$ を
 素数から $\mathbb{Q}$ への有限台の写像全体として定め（テンソル積の一般論も有限表示の同値類も使わない。$\Lambda$ の定義の

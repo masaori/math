@@ -1124,6 +1124,9 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.pointwise_lift_add_and_injective_necSuf
   Ising2DLambda.ThermodynamicLimit.toRational_add_from_necSuf
   Ising2DLambda.ThermodynamicLimit.toRational_injective_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator
+  Ising2DLambda.NecSuf.ThermodynamicLimit.two_scaled_denominators_cancel_necSuf
+  Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
