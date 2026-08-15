@@ -118,6 +118,25 @@ theorem irreducible_monic_eq_of_common_root {K L : Type} [Field K] [Field L] [Al
   exact (minpoly.eq_of_irreducible_of_monic hP hxP hPm).trans
     (minpoly.eq_of_irreducible_of_monic hQ hxQ hQm).symm
 
+/--
+代数段から有限数え上げ段への結合の第一歩: 既約因子の冪の有限積について、積多項式の
+零点の多重集合は、各因子の零点の多重集合をその指数だけ反復して結合したものに等しい。
+したがって、右辺は因子ごとのタグ付き零点ではなく、積多項式そのものの零点を
+代数的重複度込みで列挙している。
+-/
+theorem irreducibleFactorProduct_roots_eq_bind
+    {J K L : Type} [Fintype J] [DecidableEq J]
+    [Field K] [Field L] [Algebra K L]
+    (P : J → K[X]) (exponent : J → ℕ)
+    (hIrreducible : ∀ j, Irreducible (P j)) :
+    (∏ j : J, (Polynomial.map (algebraMap K L) (P j)) ^ exponent j).roots =
+      Finset.univ.val.bind fun j =>
+        exponent j • (Polynomial.map (algebraMap K L) (P j)).roots := by
+  rw [Polynomial.roots_prod]
+  · simp only [Polynomial.roots_pow]
+  · exact Finset.prod_ne_zero_iff.mpr fun j _ =>
+      pow_ne_zero _ (Polynomial.map_ne_zero (hIrreducible j).ne_zero)
+
 /-- 既約因子の実際の零点を、因子指数だけ反復した有限型。 -/
 abbrev RepeatedPolynomialRoot {J K : Type} [Field K]
     (L : Type) [Field L] [Algebra K L] (P : J → K[X]) (exponent : J → ℕ) :=

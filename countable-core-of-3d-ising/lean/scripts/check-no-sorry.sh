@@ -103,6 +103,7 @@ targets=(
   Ising3DCut.NullModel.irreducible_rootMultiplicity_le_one
   Ising3DCut.NullModel.irreducible_rootMultiplicity_pow_eq_exponent
   Ising3DCut.NullModel.irreducible_monic_eq_of_common_root
+  Ising3DCut.NullModel.irreducibleFactorProduct_roots_eq_bind
   Ising3DCut.NullModel.irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees
   Ising3DCut.NecSuf.NullModel.factorizationType_determines_rootDegrees
   Ising3DCut.NullModel.irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees_from_necSuf
