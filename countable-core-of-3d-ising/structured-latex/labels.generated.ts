@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_boundary_response_specialization_homomorphism",
   "claim_broken_complement",
   "claim_discriminant_does_not_determine_polynomial",
   "claim_distinct_roots_do_not_determine_polynomial",
@@ -29,6 +30,7 @@ export const ALL_LABELS = [
   "claim_splitting_degree_galois_group_do_not_determine_polynomial",
   "claim_structural_palindrome",
   "def_bipartite_successor_system",
+  "def_boundary_response_polynomial",
   "def_box",
   "def_broken_count",
   "def_configuration",

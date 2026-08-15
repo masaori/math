@@ -1196,4 +1196,100 @@ B(X)&=X(X+1)
       ]),
     ],
   },
+
+  {
+    id: "boundary_response_measurement_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "箱の包含に沿う測定量の選び直し" },
+    labels: [],
+  },
+
+  {
+    id: "boundary_response_measurement_definition",
+    kind: "definition",
+    title: { text: "境界応答多項式" },
+    labels: ["def_boundary_response_polynomial"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "自由境界の二つの箱の点集合が ",
+        math(String.raw`V_{L'}\subset V_L`),
+        " を満たすとする。大きい箱の辺のうち少なくとも一方の端点が ",
+        math(String.raw`V_{L'}`),
+        " に属する辺の有限集合を ",
+        math(String.raw`A_{L,L'}`),
+        " とする。辺ごとに不定元を持つ多変数分配多項式を",
+      ]),
+      displayMath(
+        String.raw`\mathcal Z_L((X_e)_{e\in E_L})
+=\sum_{\sigma:V_L\to\{-1,1\}}\prod_{\substack{e\in E_L\\
+\sigma(\operatorname{src}_L(e))\ne\sigma(\operatorname{dst}_L(e))}}X_e
+\ \in\ \mathbb Z[(X_e)_{e\in E_L}]`,
+      ),
+      paragraph([
+        "と定める。さらに、各 ",
+        math(String.raw`e\in A_{L,L'}`),
+        " の変数は保ち、各 ",
+        math(String.raw`e\in E_L\setminus A_{L,L'}`),
+        " の変数を ",
+        math(String.raw`1`),
+        " に置く代入写像を ",
+        math(String.raw`\rho_{L,L'}`),
+        " とする。有限な代入で得る整係数多項式",
+      ]),
+      displayMath(
+        String.raw`R_{L,L'}((X_e)_{e\in A_{L,L'}})
+=\rho_{L,L'}\bigl(\mathcal Z_L((X_e)_{e\in E_L})\bigr)
+\ \in\ \mathbb Z[(X_e)_{e\in A_{L,L'}}]`,
+      ),
+      paragraph([
+        "を包含 ",
+        math(String.raw`V_{L'}\subset V_L`),
+        " の境界応答多項式と呼ぶ。これは内箱の内部辺に加え、内箱と外側を結ぶ辺の変数を保持する。",
+        "この有限な整係数多項式の族を、箱の大きさの極限で残る部分と潰れる部分を問う次の測定量に選ぶ。",
+      ]),
+    ],
+  },
+
+  {
+    id: "boundary_response_measurement_claim_specialization_homomorphism",
+    kind: "claim",
+    title: { text: "境界応答を作る代入は環準同型である" },
+    labels: ["claim_boundary_response_specialization_homomorphism"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "代入写像 ",
+        math(String.raw`\rho_{L,L'}:\mathbb Z[(X_e)_{e\in E_L}]\to\mathbb Z[(X_e)_{e\in A_{L,L'}}]`),
+        " は整係数多項式環の環準同型である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "各不定元の像を、",
+        math(String.raw`e\in A_{L,L'}`),
+        " なら同名の不定元 ",
+        math(String.raw`X_e`),
+        "、",
+        math(String.raw`e\in E_L\setminus A_{L,L'}`),
+        " なら整数 ",
+        math(String.raw`1`),
+        " と指定する。",
+      ]),
+      displayMath(
+        String.raw`\rho_{L,L'}(X_e)=
+\begin{cases}
+X_e,&e\in A_{L,L'},\\
+1,&e\in E_L\setminus A_{L,L'}.
+\end{cases}`,
+      ),
+      paragraph([
+        "有限個の不定元を持つ多項式環の代入の普遍性により、この指定を保つ環準同型が一意に存在する。",
+        "したがって ",
+        math(String.raw`\rho_{L,L'}`),
+        " は環準同型である。",
+      ]),
+    ],
+  },
 ]);
