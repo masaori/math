@@ -71,6 +71,8 @@ export const ALL_LABELS = [
   "claim_open_rectangle_iterated_gluing_first",
   "claim_open_rectangle_iterated_gluing_second",
   "claim_open_rectangle_value_at_least_one",
+  "claim_open_rectangle_value_upper_bound_le_one",
+  "claim_open_rectangle_value_upper_bound_one_le",
   "claim_open_square_block_tiling",
   "claim_open_square_block_tiling_logarithm",
   "claim_orbit_bijection_id_or_shift",

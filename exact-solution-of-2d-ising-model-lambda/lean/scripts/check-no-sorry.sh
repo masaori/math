@@ -1112,6 +1112,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.one_le_openPartitionValue
   Ising2DLambda.NecSuf.ThermodynamicLimit.one_le_sum_pow_by_separating_zero_exponent_term_necSuf
   Ising2DLambda.ThermodynamicLimit.one_le_openPartitionValue_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_of_le_one
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_mul_power_of_one_le
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_mul_power_of_one_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
