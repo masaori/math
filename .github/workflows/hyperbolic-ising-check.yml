@@ -1,0 +1,38 @@
+name: hyperbolic Ising countable check
+
+on:
+  push:
+    paths:
+      - 'countable-ising-on-hyperbolic-surfaces/**'
+      - 'structured-latex/**'
+      - '.github/workflows/hyperbolic-ising-check.yml'
+  pull_request:
+    paths:
+      - 'countable-ising-on-hyperbolic-surfaces/**'
+      - 'structured-latex/**'
+      - '.github/workflows/hyperbolic-ising-check.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install structured-text system dependencies
+        working-directory: structured-latex
+        run: pnpm install --frozen-lockfile
+      - name: Install project dependencies
+        working-directory: countable-ising-on-hyperbolic-surfaces/structured-latex
+        run: pnpm install --frozen-lockfile
+      - name: Validate structured text
+        working-directory: countable-ising-on-hyperbolic-surfaces/structured-latex
+        run: npm run check
+      - name: Verify SageMath linkage
+        working-directory: countable-ising-on-hyperbolic-surfaces
+        run: node sagemath/tools/verify-check-linkage.ts
+

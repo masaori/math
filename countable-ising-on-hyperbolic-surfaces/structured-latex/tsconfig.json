@@ -1,0 +1,21 @@
+{
+  "extends": "../../structured-latex/tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": [
+    "schema.ts",
+    "labels.generated.ts",
+    "document.generated.ts",
+    "content",
+    "notes",
+    "tools"
+  ],
+  "exclude": ["node_modules", "build"]
+}
+

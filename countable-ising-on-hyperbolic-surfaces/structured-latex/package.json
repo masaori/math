@@ -1,0 +1,27 @@
+{
+  "name": "@hyperbolic-ising-countable/structured-latex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "有限双曲曲面上の Ising 模型を、有限セル複体・整係数多項式・F_2 ホモロジー・有限 Fourier 変換として記述する構造化本文。",
+  "scripts": {
+    "gen": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project .",
+    "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate": "node tools/validate-content.ts",
+    "build:tex": "node tools/build-latex.ts",
+    "build:pdf": "node tools/build-latex.ts --pdf",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run build:tex"
+  },
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
+
