@@ -53,6 +53,15 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.DependencyOrderSubstructures.down_set_order_convex
+  CellularAutomata.DependencyOrderSubstructures.up_set_order_convex
+  CellularAutomata.DependencyOrderSubstructures.order_convex_intersection
+  CellularAutomata.DependencyOrderSubstructures.incomparable_symm
+  CellularAutomata.DependencyOrderSubstructures.antichain_order_convex
+  CellularAutomata.DependencyOrderSubstructures.time_slice_antichain
+  CellularAutomata.DependencyOrderSubstructures.oneStepBoundary_finite
+  CellularAutomata.DependencyOrderSubstructures.down_set_no_incoming_edge
+  CellularAutomata.DependencyOrderSubstructures.down_set_boundary_outgoing
   CellularAutomata.EssentialDependency.ne_iff_eq_nu
   CellularAutomata.EssentialDependency.essentialDep_iff_flip
   CellularAutomata.EssentialDependency.mem_supp_iff
