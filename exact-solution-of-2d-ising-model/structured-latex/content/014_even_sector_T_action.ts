@@ -1216,7 +1216,11 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
         String.raw`\sinh x = \sum_{\substack{n \geq 1 \\ n \text{ 奇数}}} \frac{x^n}{n!}, \qquad
 \cosh x = \sum_{\substack{n \geq 0 \\ n \text{ 偶数}}} \frac{x^n}{n!}`,
       ),
-      paragraph(["を用いる。(h1.z) について、"]),
+      paragraph([
+        "を用いる。(h1.z) について、",
+        ref("cosh_sinh_coefficient_conversion_for_check"),
+        " の (h1.z) を用いる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
@@ -1225,7 +1229,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
 i\,K_1^{n}\,e^{-i\tilde\theta}\,\check{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h1.z)}) \\
+   \quad (\because \text{展開係数への変換 (h1.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Z}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\tilde\theta}\,\check{Y}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1255,7 +1259,11 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
         math(String.raw`n`),
         " に依らないので和の外へ出した。",
       ]),
-      paragraph(["(h1.y) について、"]),
+      paragraph([
+        "(h1.y) について、",
+        ref("cosh_sinh_coefficient_conversion_for_check"),
+        " の (h1.y) を用いる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
@@ -1264,7 +1272,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 -i\,K_1^{n}\,e^{i\tilde\theta}\,\check{Z}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h1.y)}) \\
+   \quad (\because \text{展開係数への変換 (h1.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Y}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\tilde\theta}\,\check{Z}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1274,9 +1282,14 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 &= \cosh(K_1)\check{Y}_\mu - i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu
    \quad (\because \sinh, \cosh \text{ のテイラー展開}) \\
 &= -i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
+   \quad (\because \text{行列加法の可換則})
 \end{aligned}`,
       ),
-      paragraph(["(h2.z) について、"]),
+      paragraph([
+        "(h2.z) について、",
+        ref("cosh_sinh_coefficient_conversion_for_check"),
+        " の (h2.z) を用いる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
@@ -1285,7 +1298,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 -i\,(2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 奇数}) \\
 (2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h2.z)}) \\
+   \quad (\because \text{展開係数への変換 (h2.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Z}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\check{Y}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1296,7 +1309,11 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
    \quad (\because \sinh, \cosh \text{ のテイラー展開})
 \end{aligned}`,
       ),
-      paragraph(["(h2.y) について、"]),
+      paragraph([
+        "(h2.y) について、",
+        ref("cosh_sinh_coefficient_conversion_for_check"),
+        " の (h2.y) を用いる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 (\text{左辺})
@@ -1305,7 +1322,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
 (2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{cosh\_sinh\_coefficient\_conversion\_for\_check (h2.y)}) \\
+   \quad (\because \text{展開係数への変換 (h2.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Y}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,(2K_2^*)^{n}\,\check{Z}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1315,6 +1332,7 @@ i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
 &= \cosh(2K_2^*)\check{Y}_\mu + i\sinh(2K_2^*)\check{Z}_\mu
    \quad (\because \sinh, \cosh \text{ のテイラー展開}) \\
 &= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu
+   \quad (\because \text{行列加法の可換則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1326,6 +1344,7 @@ i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
       notes: [
         "008 章の extract_taylor_coefficient_of_Z_Y と同一形。sinh/cosh のテイラー展開は 008 章の TV1_hatZ_hatY_004_claim_sinh_cosh_taylor がラベルを持たないため、ここでは式を再掲して使った。",
         "級数を 40 次で打ち切った数値検証を M=2,3,4,5・μ=1..M・5 組の (K1,K2) で実施し、残差 1e-13 以下（sagemath/check/047_claim_even_sector_T_action/check_02_taylor_sums.sage）。",
+        "4 式の係数変換の適用を各式鎖の直前から実在ラベルで参照し、(h1.y)・(h2.y) の終端の項の交換へ行列加法の可換則を明記した（2026-08-15）。",
       ],
     },
   },
