@@ -453,9 +453,21 @@ PYEOF
 
 tick_commit="$(git -C "$LOOP_WORKTREE" rev-parse --short HEAD 2>/dev/null || echo '-')"
 [ -z "$tick_summary" ] && tick_summary="$(git -C "$LOOP_WORKTREE" log -1 --format='%s' 2>/dev/null || true)"
+# **公開 URL は必ず添える**（ユーザー指示 2026-08-15）。公開が走らなかった tick でも、
+# 人は通知から論文を開くので、URL が無い通知は用を成さない。今回の版でなければ、
+# 前回公開した版のものであることを添えて出す（黙って古い URL を出さないため）。
 published_url="$(cut -f2 "$LOG_DIR/last-published" 2>/dev/null || true)"
 published_commit="$(cut -f1 "$LOG_DIR/last-published" 2>/dev/null || true)"
-[ "$published_commit" = "$tick_commit" ] || published_url=""
+if [ -z "$published_url" ]; then
+  # 受け渡しファイルがまだ無い場合は、公開ログの最後の成功行から拾う。URL は決め打ちしない。
+  published_url="$(grep 'OK: 公開した' "$LOG_DIR/publish-artifact.log" 2>/dev/null | tail -1 | sed 's/.*→ //')"
+  published_commit=""
+fi
+if [ -z "$published_url" ]; then
+  published_url="（未公開。公開ログに成功の記録が無い）"
+elif [ "$published_commit" != "$tick_commit" ]; then
+  published_url="$published_url （公開は版 ${published_commit:-不明} のもの）"
+fi
 
 # 「前進した」と言えるのは、このプロジェクトを触るコミットが増えたときだけである。
 # 単に HEAD が動いただけでは、他プロジェクトのループのコミットを取り込んだ可能性がある。
