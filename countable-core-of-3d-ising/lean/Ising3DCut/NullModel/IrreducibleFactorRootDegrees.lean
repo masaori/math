@@ -62,4 +62,14 @@ theorem minpoly_natDegree_eq_of_irreducible_monic {K L : Type} [Field K] [Field 
     (minpoly K x).natDegree = P.natDegree := by
   rw [minpoly.eq_of_irreducible_of_monic hP hx hm]
 
+/--
+代数段の第二歩: 標数 `0` の体上の既約多項式は分離的である。代数閉体へ移すと分裂し、
+重根が無いので、相異なる零点の個数は多項式の次数に一致する。
+-/
+theorem irreducible_rootSet_card_eq_natDegree
+    {K L : Type} [Field K] [CharZero K] [Field L] [IsAlgClosed L]
+    [Algebra K L] [FaithfulSMul K L] (P : K[X]) (hP : Irreducible P) :
+    Fintype.card (P.rootSet L) = P.natDegree := by
+  exact card_rootSet_eq_natDegree hP.separable (IsAlgClosed.splits _)
+
 end Ising3DCut.NullModel
