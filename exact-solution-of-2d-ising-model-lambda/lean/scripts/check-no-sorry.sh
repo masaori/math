@@ -1203,6 +1203,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaled_toRational_iff
   Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_iff_of_common_good_index_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaled_toRational_iff_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.one_le_partitionPolynomial_eval_rat
+  Ising2DLambda.NecSuf.ThermodynamicLimit.one_le_sum_pow_of_exponent_zero_necSuf
+  Ising2DLambda.ThermodynamicLimit.one_le_partitionPolynomial_eval_rat_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

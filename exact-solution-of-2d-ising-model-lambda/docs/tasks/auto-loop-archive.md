@@ -10504,3 +10504,34 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
   Lean 具体版・必要十分版・導出版を突き合わせ、三段の鎖・二度の適用と積の可換性・対象ラベル・入口 import・sorry 検査への
   登録が一致した。後者は「$N_\lambda N_\mu$ が両方の共通分母である」という一つの存在主張なので 1 ブロック 1 主張に反しない。
   本文末尾「この先に書くこと」に済んだ「共通分母の正整数倍が共通分母であること」が残っていたので消した。
+
+## tick 312 で台帳から移した記録（tick 307）
+
+### 現在地
+
+- **2026-08-16 の tick 307 は、「有理係数の対数順序群の順序の線形順序性と加法単調性」を線形順序性と加法単調性へ割り、
+  「有理係数の対数順序群の順序は線形順序である」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ を取り、順序の定義の言い換え（すべての両方の共通分母で）で
+  証人の比較へ移して $\Lambda$ の線形順序性へ落とした（`claim_rational_log_order_group_linear_order`）。反対称律は
+  $\lambda_N=\mu_N$ から $N^{-1}\cdot(N\cdot\lambda)$ の七段の鎖で $\lambda=\mu$ へ戻した。レビューでは前 tick の順序の
+  定義の四層が一致し修正無し。次は「有理係数の対数順序群の順序の加法単調性」。
+
+### 前進の記録
+
+- 2026-08-16（tick 307）: 「線形順序性と加法単調性」は論法が二つ（順序の性質を $\Lambda$ へ落とす／和の証人を作る）なので
+  線形順序性と加法単調性へ割った。`claim_rational_log_order_group_linear_order` を `def_rational_log_order_group_order` の直後に置き
+  四層で閉じた。準備で $N:=N_\lambda N_\mu N_\nu$ が三元すべての共通分母であること（`claim_common_denominator_multiple` を三度）を
+  述べ、四性質を `claim_log_order_group_linear_order` へ落とした。反対称律は $N^{-1}$ 倍の七段の鎖。SageMath
+  `rational-log-order-group-linear-order`（素数 $2,3,5$、係数 6 種、216 ベクトル、二元 46656 組、三元 5062176 組、証人一致 1610 件、
+  代表 12 本の三つ組 1728 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupLinearOrder.lean`
+  （`commonDenominator_three_exists`、`eq_of_commonDenominator_witness_eq`、`rationalLogOrderLE_refl/trans/antisymm/total`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupLinearOrder.lean`（`indexedLE` と四つの `indexedLE_*_necSuf`。
+  各性質が使う仮定だけを取る: 反射律は元自身の良い添字と証人の存在と `le` の反射律、推移律は三元の共通添字・独立性・推移律、
+  反対称律は二元の共通添字・独立性・反対称律・証人一致→元一致、全順序性は二元の共通添字と全順序性）、導出版
+  （`rationalLogOrderLE_eq_indexedLE` は `rfl`。sorry 検査 1133 件）。
+
+### レビュー記録
+
+- 2026-08-16（tick 307）: 前 tick の「有理係数の対数順序群の順序」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、
+  ∃ 形と ∀ 形の同値・決定手続き・対象ラベル・入口 import・sorry 検査への登録が一致した。`DecidableRel` が `noncomputable` なのは
+  `Λ` の順序の判定と同じ（`Finsupp` 由来）で先例どおり。修正は無い。

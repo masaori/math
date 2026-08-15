@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 312 は、前 tick の「有理数倍と埋め込みを通した順序の移送」の四層を突き合わせて一致を確認し（修正無し）、
+「正の有理点での分配多項式の値は 1 以上」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_partition_value_ge_one_at_positive_rational`（`claim_scaled_embedding_order_transfer` の直後、`remark_real_field_escape` の直前、住処 Q）で、
+$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $1\le Z_L(q)$ を、準備（各項 $0<q^{b(\sigma)}$、$\sigma_+\in\Sigma_L$）のあと
+$1=q^0=q^{b(\sigma_+)}\le q^{b(\sigma_+)}+\sum_{\sigma\ne\sigma_+}q^{b(\sigma)}=\sum_\sigma q^{b(\sigma)}=Z_L(q)$ の五段（冪の指数 0 の約束・
+`claim_constant_plus_breaks_no_bond`・加えた和は 0 以上・`def_constant_plus_configuration` で 1 項を戻す・`def_partition_polynomial` の代入は環準同型）で
+閉じた。$\mathbb R$ 版 `claim_free_energy_density_nonnegative` の準備の第二の $\mathbb Q$ 版であり、$\mathbb R$ 版は併存（撤去のセクションで消す。
+新ブロックからは $\mathbb R$ 版を参照しない）。SageMath `partition-value-ge-one-at-positive-rational`（$L\le4$・正の有理点 9 点、各項の正値性
+594594 件、鎖の各行と $1\le Z_L(q)$ 252 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/PartitionValueGeOneRational.lean`
+（`one_le_partitionPolynomial_eval_rat`。`allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`・`eval_partitionPolynomial`（ℚ 版）を再利用、
+各項の正値性は `claim_value_at_rational_is_positive` の具体版と同じ `pow_pos`）、必要十分版 `NecSuf/ThermodynamicLimit/PartitionValueGeOneRational.lean`
+の `one_le_sum_pow_of_exponent_zero_necSuf`（有限添字型に指数 0 の項が一つ選べることと順序半環の正の元だけ）、導出版（sorry 検査 1150 件）。
+次は「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」（$0=\log1\le_\Lambda\log Z_L(q)=\Phi_L(q)$ を
+`claim_rational_log_order_iff`（$1\le Z_L(q)$ から $\log1\le_\Lambda\log Z_L(q)$）と `claim_free_entropy_at_one` の中身の $\log1=0$ で示し、
+`claim_scaled_embedding_order_transfer` を $\lambda=0$、$\mu=\Phi_L(q)$ で読んで $\frac{1}{L^2}\cdot\iota(0)=0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$。
+$\iota(0)=0$ と有理数倍の $r\cdot0=0$ が要る。Lean は `logRat_le_iff`・`rationalLogOrderLE_scaled_toRational_iff`・`smul_zero`・`map_zero`）。
+
 2026-08-16 の tick 311 は、前 tick の「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の四層を突き合わせて一致を確認し
 （修正無し）、「有理数倍と埋め込みを通した順序の移送」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_scaled_embedding_order_transfer`（`def_finite_free_entropy_density` の直後、`remark_real_field_escape` の直前）で、$L\ge1$、
@@ -3397,9 +3414,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理数倍と埋め込みを通した順序の移送」（`claim_scaled_embedding_order_transfer`）の本文・SageMath
-  `scaled-embedding-order-transfer`・Lean（`ScaledEmbeddingOrderTransfer.lean` 三系統）を突き合わせる。
-- **次に進めるセクションは「正の有理点での分配多項式の値は 1 以上」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「正の有理点での分配多項式の値は 1 以上」（`claim_partition_value_ge_one_at_positive_rational`）の本文・SageMath
+  `partition-value-ge-one-at-positive-rational`・Lean（`PartitionValueGeOneRational.lean` 三系統）を突き合わせる。
+- **次に進めるセクションは「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行）。
   以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。

@@ -37654,6 +37654,99 @@ L^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\
     ],
   },
   {
+    id: "thermodynamic_limit_claim_partition_value_ge_one_at_positive_rational",
+    kind: "claim",
+    title: { text: "正の有理点での分配多項式の値は 1 以上である" },
+    labels: ["claim_partition_value_ge_one_at_positive_rational"],
+    habitat: "Q",
+    verification: ["sagemath/check/partition-value-ge-one-at-positive-rational"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.one_le_partitionPolynomial_eval_rat",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.one_le_sum_pow_of_exponent_zero_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.one_le_partitionPolynomial_eval_rat_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、各 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " に対し、",
+        ref("def_partition_polynomial"),
+        " の分配多項式へ ",
+        math(String.raw`q`),
+        " を代入した値は",
+      ]),
+      displayMath(String.raw`1\le Z_L(q)`),
+      paragraph([
+        "を満たす。ここで ",
+        math(String.raw`\le`),
+        " は有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序であり、代入は ",
+        ref("def_partition_polynomial"),
+        " の約束どおり可換環 ",
+        math(String.raw`\mathbb{Q}`),
+        " とその元 ",
+        math(String.raw`q`),
+        " についての評価である（",
+        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+        " であることは ",
+        ref("claim_value_at_rational_is_positive"),
+        "）。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、各 ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " について ",
+        math(String.raw`0<q^{\,b(\sigma)}`),
+        " である（",
+        math(String.raw`b(\sigma)\in\mathbb{N}`),
+        " は ",
+        ref("def_broken_bond_count"),
+        "。正の有理数を ",
+        math(String.raw`b(\sigma)`),
+        " 個掛けたものは正であり、",
+        math(String.raw`b(\sigma)=0`),
+        " のときは空積で ",
+        math(String.raw`q^{0}=1>0`),
+        "）。これは ",
+        ref("claim_value_at_rational_is_positive"),
+        " の証明の準備と同じ事実である。また ",
+        math(String.raw`\sigma_{+}\in\Sigma_L`),
+        "（",
+        ref("def_constant_plus_configuration"),
+        "）なので、有限和 ",
+        math(String.raw`\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}`),
+        " から ",
+        math(String.raw`\sigma_{+}`),
+        " の項 1 個を分離できる。主張の左辺 ",
+        math(String.raw`1`),
+        " から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&=q^{0}
+&&(\because\ \text{冪の指数 }0\text{ の約束 }q^{0}=1)\\
+&=q^{\,b(\sigma_{+})}
+&&(\because\ b(\sigma_{+})=0\text{。}\blkref{claim_constant_plus_breaks_no_bond})\\
+&\le q^{\,b(\sigma_{+})}+\sum_{\sigma\in\Sigma_L\setminus\{\sigma_{+}\}}q^{\,b(\sigma)}
+&&(\because\ \text{加えた和は正の有理数の有限和なので }0\le\text{（準備。}\mathbb{Q}\text{ の順序は加法と両立する）})\\
+&=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
+&&(\because\ \sigma_{+}\in\Sigma_L\text{（}\blkref{def_constant_plus_configuration}\text{）なので分離した 1 項を有限和へ戻せる})\\
+&=Z_L(q)
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_partition_polynomial})
+\end{aligned}`),
+      paragraph([
+        "以上は有理数の四則と順序、および有限和だけからなり、実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },

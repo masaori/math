@@ -7,6 +7,12 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 312 は、「正の有理点での分配多項式の値は 1 以上」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
+  完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $1\le Z_L(q)$（`claim_partition_value_ge_one_at_positive_rational`、順序の移送の直後・
+  実数体脱出の宣言の直前、住処 Q）。$1=q^0=q^{b(\sigma_+)}\le q^{b(\sigma_+)}+\sum_{\sigma\ne\sigma_+}q^{b(\sigma)}=\sum_\sigma q^{b(\sigma)}=Z_L(q)$
+  の五段（冪の指数 0・$b(\sigma_+)=0$・加えた和は 0 以上・1 項を戻す・代入は環準同型）で、実数も実対数も使わない。
+  レビューでは前 tick の順序の移送の四層が一致し修正無し。次は「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」。
+
 - **2026-08-16 の tick 311 は、「有理数倍と埋め込みを通した順序の移送」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
   完成させた。** $L\ge1$、$\lambda,\mu\in\Lambda$ に対し $\frac{1}{L^2}\cdot\iota(\lambda)\le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\mu)
   \iff\lambda\le_\Lambda\mu$（`claim_scaled_embedding_order_transfer`、密度の定義の直後・実数体脱出の宣言の直前）。準備で $N=L^2$ が
@@ -38,14 +44,7 @@
   （`claim_rational_log_order_group_add_monotone`）。レビューでは前 tick の線形順序性の四層が一致し、Lean 具体版ヘッダの
   「二度」を「各元について一度ずつ、計三度」へ直して先に push した。次は「有限系の実自由エントロピーを畳む」。
 
-- **2026-08-16 の tick 307 は、「有理係数の対数順序群の順序の線形順序性と加法単調性」を線形順序性と加法単調性へ割り、
-  「有理係数の対数順序群の順序は線形順序である」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
-  三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ を取り、順序の定義の言い換え（すべての両方の共通分母で）で
-  証人の比較へ移して $\Lambda$ の線形順序性へ落とした（`claim_rational_log_order_group_linear_order`）。反対称律は
-  $\lambda_N=\mu_N$ から $N^{-1}\cdot(N\cdot\lambda)$ の七段の鎖で $\lambda=\mu$ へ戻した。レビューでは前 tick の順序の
-  定義の四層が一致し修正無し。次は「有理係数の対数順序群の順序の加法単調性」。
-
-（これより古い 264 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 265 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -59,13 +58,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 35 セクション
+- 熱力学極限: 36 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 正の有理点での分配多項式の値は 1 以上 | todo | 定数配位の項が $q^0=1$、他の項は非負（`claim_free_energy_density_nonnegative` の中身を $\mathbb Q$ で。住処 Q） |
 | 熱力学極限 | 有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版） | todo | $\log1=0$（`claim_free_entropy_at_one` の中身）と対数の順序保存で $0\le_\Lambda\Phi_L(q)$、順序の移送で $0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$ |
 | 熱力学極限 | 正の有理点での分配多項式の値の上界（$\mathbb Q$ 版） | todo | `claim_partition_value_upper_bound` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック（住処 Q。Lean は ℝ 版を ℚ へ移す） |
 | 熱力学極限 | 有限系の自由エントロピー密度の上界（$\Lambda_{\mathbb Q}$ 版） | todo | $\Phi_L(q)\le_\Lambda L^2\ell_2+2L^2\log\max(1,q)$（対数の加法性・冪・順序保存）から $\Psi_L(q)\le\ell_2+2\log\max(1,q)$。実対数の冪の法則は使わない |
@@ -93,6 +91,15 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 312）: `claim_partition_value_ge_one_at_positive_rational` を `claim_scaled_embedding_order_transfer` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。準備は各項 $0<q^{b(\sigma)}$（`claim_value_at_rational_is_positive` の準備と同じ）と
+  $\sigma_+\in\Sigma_L$。五段の鎖は `claim_free_energy_density_nonnegative` の準備の第二を $q\in\mathbb Q$ で述べ直したもの（$\mathbb R$ 版は併存、
+  撤去のセクションで消す）。SageMath `partition-value-ge-one-at-positive-rational`（$L\le4$・正の有理点 9 点、各項の正値性 594594 件・鎖の各行と
+  $1\le Z_L(q)$ 252 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/PartitionValueGeOneRational.lean`（`one_le_partitionPolynomial_eval_rat`。
+  `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`・`eval_partitionPolynomial` を再利用）、必要十分版
+  `NecSuf/ThermodynamicLimit/PartitionValueGeOneRational.lean` の `one_le_sum_pow_of_exponent_zero_necSuf`（有限添字型に指数 0 の項が
+  一つ選べることと順序半環の正の元だけ。格子・配位・有理数体は本質でない）、導出版。sorry 検査 1150 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 311）: `claim_scaled_embedding_order_transfer` を `def_finite_free_entropy_density` の直後に置き四層で閉じた。準備は
   $L^2\cdot(\frac{1}{L^2}\cdot\iota(\lambda))=(L^2\cdot\frac{1}{L^2})\cdot\iota(\lambda)=1\cdot\iota(\lambda)=\iota(\lambda)$ の三段
@@ -132,18 +139,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   の `indexedLE_add_right_necSuf`（三元の共通の良い添字、独立性、同じ添字で `Rep` が加法を保つこと、`le` の加法単調性だけ。
   加法の結合則・可換則は使わない）、導出版。sorry 検査 1137 件。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 307）: 「線形順序性と加法単調性」は論法が二つ（順序の性質を $\Lambda$ へ落とす／和の証人を作る）なので
-  線形順序性と加法単調性へ割った。`claim_rational_log_order_group_linear_order` を `def_rational_log_order_group_order` の直後に置き
-  四層で閉じた。準備で $N:=N_\lambda N_\mu N_\nu$ が三元すべての共通分母であること（`claim_common_denominator_multiple` を三度）を
-  述べ、四性質を `claim_log_order_group_linear_order` へ落とした。反対称律は $N^{-1}$ 倍の七段の鎖。SageMath
-  `rational-log-order-group-linear-order`（素数 $2,3,5$、係数 6 種、216 ベクトル、二元 46656 組、三元 5062176 組、証人一致 1610 件、
-  代表 12 本の三つ組 1728 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupLinearOrder.lean`
-  （`commonDenominator_three_exists`、`eq_of_commonDenominator_witness_eq`、`rationalLogOrderLE_refl/trans/antisymm/total`）、
-  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupLinearOrder.lean`（`indexedLE` と四つの `indexedLE_*_necSuf`。
-  各性質が使う仮定だけを取る: 反射律は元自身の良い添字と証人の存在と `le` の反射律、推移律は三元の共通添字・独立性・推移律、
-  反対称律は二元の共通添字・独立性・反対称律・証人一致→元一致、全順序性は二元の共通添字と全順序性）、導出版
-  （`rationalLogOrderLE_eq_indexedLE` は `rfl`。sorry 検査 1133 件）。
-（これより古い 275 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 276 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -162,6 +158,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 312）: 前 tick の「有理数倍と埋め込みを通した順序の移送」の本文・SageMath・Lean 具体版・必要十分版・導出版を
+  突き合わせ、三段の鎖・∀ 形と ∃ 形の両向き・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
+  台帳のセクション表も食い違いなし。修正は無い。
+
 - 2026-08-16（tick 311）: 前 tick の「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の本文・SageMath・Lean 具体版を
   突き合わせ、右辺の確定・各素数での値の三段の鎖・具体例・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
@@ -178,11 +178,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   一致した。Lean 具体版のヘッダコメントだけが「`claim_common_denominator_multiple` を二度」と書いており、本文と実装
   （各元について一度ずつ、計三度）と食い違っていたので直した。
 
-- 2026-08-16（tick 307）: 前 tick の「有理係数の対数順序群の順序」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、
-  ∃ 形と ∀ 形の同値・決定手続き・対象ラベル・入口 import・sorry 検査への登録が一致した。`DecidableRel` が `noncomputable` なのは
-  `Λ` の順序の判定と同じ（`Finsupp` 由来）で先例どおり。修正は無い。
-
-（これより古い 296 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 297 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 
