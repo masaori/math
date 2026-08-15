@@ -322,7 +322,7 @@ esac
 
 tick_message="$(printf '2次元 Ising 模型（Λ の立場）（%s / %s / 版 %s）\n%s\n%s' \
   "$agent" "$tick_outcome" "$tick_commit" "$tick_summary" "$published_url")"
-curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
+curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
   -H "Content-Type: application/json" \
   --data "$(jq -n --arg message "$tick_message" --arg repository "$(basename "$REPO_DIR")" \
     '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1 \

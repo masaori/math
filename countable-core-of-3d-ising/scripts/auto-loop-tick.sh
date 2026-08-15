@@ -413,7 +413,7 @@ notify_slack() {
   else
     repository="math"
   fi
-  curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
+  curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
     -H "Content-Type: application/json" \
     --data "$(jq -n --arg message "$message" --arg repository "$repository" \
       '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1 \

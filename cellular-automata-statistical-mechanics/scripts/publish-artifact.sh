@@ -16,7 +16,7 @@ SLUG="cellular-automata-statistical-mechanics"
 STAGE="$HOME/.artifact-uploads/math/$SLUG"
 EXPECTED_URL="https://hexagonal-computation.github.io/artifacts/math/$SLUG/"
 PUBLISHER="/Users/masaori/git/masaori/artifacts/publish.py"
-WEBHOOK_URL="https://hooks.slack.com/triggers/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"
+WEBHOOK_URL="https://hooks.slack.com/triggers/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"
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }

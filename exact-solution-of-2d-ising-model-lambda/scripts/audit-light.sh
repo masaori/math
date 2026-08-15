@@ -18,7 +18,7 @@ LOG_FILE="$LOG_DIR/audit.log"
 LOCK_DIR="$LOG_DIR/audit-light.lock"
 WORKTREE="$LOG_DIR/audit-light-worktree"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
-WEBHOOK_URL='https://hooks.slack.com/triggers/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'
+WEBHOOK_URL='https://hooks.slack.com/triggers/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'
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s [light] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
