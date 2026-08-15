@@ -38453,6 +38453,142 @@ Z^{\mathrm{op}}_{L,L}(t)
   },
 
   {
+    id: "thermodynamic_limit_def_real_set_lower_bound",
+    kind: "definition",
+    title: { text: "実数集合の下界" },
+    labels: ["def_real_set_lower_bound"],
+    habitat: "R",
+    realEscape: "開境界自由エネルギー密度の値集合を下から抑える実数を定義するため。完備性は使わない。",
+    verification: ["sagemath/check/open-free-energy-density-infimum"],
+    statement: [
+      paragraph([
+        math(String.raw`S\subseteq\mathbb{R}`), " と ", math(String.raw`m\in\mathbb{R}`),
+        " に対し、全ての ", math(String.raw`y\in S`), " について ",
+        math(String.raw`m\le_{\mathbb{R}}y`), " が成り立つとき、", math(String.raw`m`),
+        " を ", math(String.raw`S`), " の下界と呼ぶ。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_real_set_infimum",
+    kind: "definition",
+    title: { text: "実数集合の下限" },
+    labels: ["def_real_set_infimum"],
+    habitat: "R",
+    realEscape: "実数の順序で最大下界を定義するため。完備性と下限の存在はまだ使わない。",
+    verification: ["sagemath/check/open-free-energy-density-infimum"],
+    statement: [
+      paragraph([
+        math(String.raw`S\subseteq\mathbb{R}`), " と ", math(String.raw`v\in\mathbb{R}`),
+        " に対し、", math(String.raw`v`), " が ", math(String.raw`S`), " の下界（",
+        ref("def_real_set_lower_bound"), "）であり、任意の下界 ", math(String.raw`m\in\mathbb{R}`),
+        " について ", math(String.raw`m\le_{\mathbb{R}}v`), " が成り立つとき、",
+        math(String.raw`v`), " を ", math(String.raw`S`), " の下限と呼ぶ。",
+      ]),
+      paragraph(["この定義は述語であり、存在も一意性もまだ主張しない。"]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_free_energy_density_lower_bound_le_one",
+    kind: "claim",
+    title: { text: "開境界密度の下からの評価（t が 1 以下の場合）" },
+    labels: ["claim_open_free_energy_density_lower_bound_le_one"],
+    habitat: "R",
+    realEscape:
+      "零と一の間の実数 t における開境界自由エネルギー密度を実対数と実数順序で一様に下から評価するため。" +
+      "完備性・極限は使わない。",
+    verification: ["sagemath/check/open-free-energy-density-infimum"],
+    statement: [
+      paragraph([
+        "各 ", math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
+        " と、各実数 ", math(String.raw`t\in\mathbb{R}`), "、",
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`), " に対し、",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}(2)\cdot\log_{\mathbb{R}}(t)
+\le_{\mathbb{R}}\psi^{\mathrm{op}}_L(t)`),
+      paragraph(["である。左辺は ", math(String.raw`L`), " に依らない。"]),
+    ],
+    proof: [
+      paragraph([
+        "開境界正方形の辺数を ", math(String.raw`E_L:=2L(L-1)`), " と置く。任意の配位 ",
+        math(String.raw`\tau`), " について ", math(String.raw`b^{\mathrm{op}}_{L,L}(\tau)\le E_L`),
+        " である（", ref("def_open_rectangle_broken_bond_count"), "）。",
+        math(String.raw`0<t\le1`), " なので、冪の指数が大きいほど値は小さくなる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2t^{E_L}
+&\le_{\mathbb{R}}2^{L^2}t^{E_L}
+&&\bigl(\because\ L\ge1\text{ なので }2\le2^{L^2}\text{、かつ }0<t^{E_L}\bigr)\\
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{E_L}
+&&\bigl(\because\ |\Sigma^{\mathrm{op}}_{L,L}|=2^{L^2}\text{（}\blkref{def_open_rectangle_configuration}\text{）}\bigr)\\
+&\le_{\mathbb{R}}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{b^{\mathrm{op}}_{L,L}(\tau)}
+&&\bigl(\because\ b^{\mathrm{op}}_{L,L}(\tau)\le E_L\text{ と }0<t\le1\bigr)\\
+&=Z^{\mathrm{op}}_{L,L}(t)
+&&\bigl(\because\ \blkref{def_open_rectangle_partition_value}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`2L^2\ge E_L`), " と ", math(String.raw`0<t\le1`),
+        " から ", math(String.raw`t^{2L^2}\le t^{E_L}\le2t^{E_L}`),
+        " である。したがって ", math(String.raw`t^{2L^2}\le Z^{\mathrm{op}}_{L,L}(t)`),
+        " である。両辺へ実対数の単調性（", ref("remark_real_logarithm"),
+        "）を適用し、正の係数を掛ける。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log_{\mathbb{R}}(t)
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)
+  \iota_{\mathbb{Q}\to\mathbb{R}}(2L^2)\log_{\mathbb{R}}(t)
+&&\bigl(\because\ \tfrac{1}{L^2}(2L^2)=2\text{（}\mathbb{Q}\text{）}\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)
+  \log_{\mathbb{R}}\!\left(t^{2L^2}\right)
+&&\bigl(\because\ \blkref{claim_real_log_natural_power}\bigr)\\
+&\le_{\mathbb{R}}\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\frac{1}{L^2}\right)
+  \log_{\mathbb{R}}\!\left(Z^{\mathrm{op}}_{L,L}(t)\right)
+&&\bigl(\because\ t^{2L^2}\le Z^{\mathrm{op}}_{L,L}(t)\text{、実対数の単調性、正数の乗法}\bigr)\\
+&=\psi^{\mathrm{op}}_L(t)
+&&\bigl(\because\ \blkref{def_open_square_free_energy_density}\bigr).
+\end{aligned}`),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_free_energy_density_infimum_exists_le_one",
+    kind: "claim",
+    title: { text: "開境界自由エネルギー密度の値集合の下限の存在（t が 1 以下の場合）" },
+    labels: ["claim_open_free_energy_density_infimum_exists_le_one"],
+    habitat: "R",
+    realEscape:
+      "空でなく下に有界な開境界密度の値集合の符号を反転し、実数の完備性による上限の存在を適用して下限を得るため。",
+    verification: ["sagemath/check/open-free-energy-density-infimum"],
+    statement: [
+      paragraph([
+        "各実数 ", math(String.raw`t`), "、", math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " に対し、集合 ", math(String.raw`\Psi^{\mathrm{op}}_t`), "（",
+        ref("def_open_free_energy_density_value_set"), "）は下限 ",
+        math(String.raw`\inf\Psi^{\mathrm{op}}_t\in\mathbb{R}`), "（",
+        ref("def_real_set_infimum"), "）を持つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "集合は ", math(String.raw`\psi^{\mathrm{op}}_1(t)`), " を含むので空でない。下からの評価（",
+        ref("claim_open_free_energy_density_lower_bound_le_one"), "）により、実数 ",
+        math(String.raw`2\log_{\mathbb{R}}(t)`), " は全ての元以下なので下界である。",
+      ]),
+      paragraph([
+        math(String.raw`-\Psi^{\mathrm{op}}_t:=\{-y\mid y\in\Psi^{\mathrm{op}}_t\}`),
+        " と置く。この集合は空でなく、", math(String.raw`-2\log_{\mathbb{R}}(t)`),
+        " を上界に持つ。実数の完備性による上限の存在（", ref("remark_real_completeness_escape"),
+        "）を適用し、その上限を ", math(String.raw`u`), " とする。符号反転は順序を逆にするので、",
+        math(String.raw`-u`), " は ", math(String.raw`\Psi^{\mathrm{op}}_t`),
+        " の下界であり、任意の下界以上である。したがって ", math(String.raw`-u`),
+        " は定義（", ref("def_real_set_infimum"), "）の意味で下限である。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_claim_open_free_energy_density_supremum_approximation_multiples_one_le",
     kind: "claim",
     title: { text: "倍数の辺での上限への任意近接（t が 1 以上の場合）" },
@@ -38543,7 +38679,7 @@ u-\varepsilon
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 開境界自由エネルギー密度の極限（t が 1 以下の場合の下からの評価と下限の存在、倍数の辺での下限への任意近接、倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
+          "「熱力学極限」の残り: 開境界自由エネルギー密度の極限（倍数の辺での下限への任意近接、倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
         ],
         [
           todo("未着手"),
