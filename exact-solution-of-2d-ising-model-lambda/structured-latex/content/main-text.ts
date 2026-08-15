@@ -38574,11 +38574,12 @@ Z^{\mathrm{op}}_{L,L}(t)
       paragraph([
         "集合は ", math(String.raw`\psi^{\mathrm{op}}_1(t)`), " を含むので空でない。下からの評価（",
         ref("claim_open_free_energy_density_lower_bound_le_one"), "）により、実数 ",
-        math(String.raw`2\log_{\mathbb{R}}(t)`), " は全ての元以下なので下界である。",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log_{\mathbb{R}}(t)`), " は全ての元以下なので下界（",
+        ref("def_real_set_lower_bound"), "）である。",
       ]),
       paragraph([
         math(String.raw`-\Psi^{\mathrm{op}}_t:=\{-y\mid y\in\Psi^{\mathrm{op}}_t\}`),
-        " と置く。この集合は空でなく、", math(String.raw`-2\log_{\mathbb{R}}(t)`),
+        " と置く。この集合は空でなく、", math(String.raw`-\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log_{\mathbb{R}}(t)`),
         " を上界に持つ。実数の完備性による上限の存在（", ref("remark_real_completeness_escape"),
         "）を適用し、その上限を ", math(String.raw`u`), " とする。符号反転は順序を逆にするので、",
         math(String.raw`-u`), " は ", math(String.raw`\Psi^{\mathrm{op}}_t`),
