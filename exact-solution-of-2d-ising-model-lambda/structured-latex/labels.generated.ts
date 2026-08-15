@@ -320,6 +320,7 @@ export const ALL_LABELS = [
   "def_open_rectangle_partition_polynomial",
   "def_open_rectangle_partition_value",
   "def_open_rectangle_vertices",
+  "def_open_square_free_energy_density",
   "def_orbit_bijection_set",
   "def_orbit_family_on_subset",
   "def_orbit_gluing",

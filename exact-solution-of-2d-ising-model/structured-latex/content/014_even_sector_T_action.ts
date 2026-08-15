@@ -422,11 +422,25 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/
 \qquad (\alpha, \beta \in \mathbb{C},\ X, W \in \mathrm{Mat}(2^M,\mathbb{C}))`,
       ),
       paragraph([
-        "だけである（後者は ",
-        math(String.raw`[\alpha X, \beta W] = (\alpha X)(\beta W) - (\beta W)(\alpha X) = \alpha\beta(XW - WX)`),
-        " による。スカラー倍が積と可換なことは ",
+        "だけである。後者は、スカラー倍が積と可換なこと（",
         ref("scalar_identity_commutes"),
-        " による）。また ",
+        "）を使って次のように得られる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[\alpha X, \beta W]
+&= (\alpha X)(\beta W) - (\beta W)(\alpha X)
+   \quad (\because \text{交換子の定義}) \\
+&= \alpha\beta\,XW - \alpha\beta\,WX
+   \quad (\because \text{スカラー倍が積と可換であること}) \\
+&= \alpha\beta\,(XW - WX)
+   \quad (\because \text{分配則}) \\
+&= \alpha\beta\,[X, W]
+   \quad (\because \text{交換子の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "また ",
         math(String.raw`e^{-i\tilde\theta}e^{i\tilde\theta} = 1`),
         " を使う。各主張の右辺は ",
         math(String.raw`n`),
