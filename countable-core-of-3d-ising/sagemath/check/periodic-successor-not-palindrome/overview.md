@@ -14,7 +14,7 @@
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
 | `check_constant_configuration.sage` | 定数配位の破れ数が 0 で、下端多重度が正である | PASS | 軌道長 1・3・5、二方向で確認 |
-| `check_odd_orbit_product.sage` | 全軌道辺が破れる仮定から有限積が $(-1)^L=-1$ になる | PASS | 軌道長 1・3・5 の全配位で確認 |
+| `check_odd_orbit_product.sage` | $(-1)^L=-1$ を `ZZ` で確認し、全軌道辺が破れる配位が 0 個であることを全配位で確認（前件だけで assert すると空虚に通るため） | PASS | 軌道長 1・3・5 の全配位で確認 |
 | `check_orbit_product_square.sage` | 同じ有限積が頂点値の有限積の二乗で 1 になる | PASS | 軌道長 1・3・5 の全配位で確認 |
 | `check_endpoint_multiplicities.sage` | 奇数軌道で $\Omega_E(0)\ne\Omega_E(\#E)$ になる | PASS | 軌道長 1・3・5、二方向で確認 |
 
