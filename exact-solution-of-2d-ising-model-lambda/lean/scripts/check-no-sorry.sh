@@ -94,6 +94,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.commonDenominator_order_independent
   Ising2DLambda.NecSuf.ThermodynamicLimit.cross_multiple_order_independent_necSuf
   Ising2DLambda.ThermodynamicLimit.commonDenominator_order_independent_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.denominatorProduct_pos
+  Ising2DLambda.ThermodynamicLimit.den_dvd_denominatorProduct
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_exists
+  Ising2DLambda.NecSuf.ThermodynamicLimit.denominator_product_clears_necSuf
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_exists_from_necSuf
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos

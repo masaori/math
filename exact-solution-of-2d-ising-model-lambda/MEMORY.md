@@ -4,6 +4,22 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 304 は、前 tick の「共通分母の定義と順序判定の共通分母独立性」の四層を突き合わせて一致を確認し、
+`def_rational_log_order_group` 末尾の順序の予告（「次の定義で正の有理数の比較から移す」）を「共通分母を通して
+$\Lambda$ の順序から移す」へ直して先に push した。そのあと「有理係数の対数順序群の元の共通分母の存在」を四層まで
+完成させた。`claim_common_denominator_exists`（`def_common_denominator` の直後）で、有理数の既約分数表示
+$\operatorname{num}(r)/\operatorname{den}(r)$ と非零値の素数の集合 $S_\lambda$ を導入し、$N_\lambda:=\prod_{p\in S_\lambda}
+\operatorname{den}(\lambda(p))$（空積 $1$）が $1$ 以上で $\lambda$ の共通分母、証人が
+$\nu(p)=(N_\lambda/\operatorname{den}(\lambda(p)))\cdot\operatorname{num}(\lambda(p))$（$p\in S_\lambda$）、$0$（それ以外）で
+あることを、$p\in S_\lambda$ の七段・$p\notin S_\lambda$ の五段の鎖で示した。SageMath `common-denominator-exists`
+（素数 $2,3,5,7$、係数 10 種、10000 ベクトル、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/CommonDenominatorExists.lean`
+（`denominatorProduct`、`denominatorProduct_pos`、`den_dvd_denominatorProduct`、`commonDenominatorWitness`、
+`commonDenominator_exists`）、必要十分版 `NecSuf/ThermodynamicLimit/CommonDenominatorExists.lean` の
+`denominator_product_clears_necSuf`（可換半環の値・有限集合の外で $0$・各点の分母分子の等式・$\mathbb N$ 倍を保つ写像だけ）、
+導出版（sorry 検査 1110 件）。順序の定義には二元の共通の共通分母が要るので、次は「共通分母の正整数倍は共通分母である」
+（$N$ が $\lambda$ の共通分母、$k\ge1$ なら $kN$ も共通分母で証人は $k\lambda_N$。Lean は `IsCommonDenominator` を
+`smul_smul` と `toRational_intSmul` で書き換えるだけ）。その次が「有理係数の対数順序群の順序の定義」。
+
 2026-08-16 の tick 303 は、前 tick の「対数順序群の順序は正整数倍で変わらない」の四層を突き合わせて修正不要と
 確認し、本文末尾「この先に書くこと」に残っていた済みの「加法単調性」を消して先に push した。そのあと
 「有理係数の対数順序群の順序の定義と共通分母からの独立性」を、共通分母の定義と独立性／共通分母の存在／
@@ -3259,10 +3275,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の元の共通分母」（`def_common_denominator`）と「共通分母を通した順序の判定は
-  共通分母の取り方によらない」（`claim_common_denominator_order_independent`）の本文・SageMath
-  `common-denominator-order-independent`・Lean（`CommonDenominator.lean` 三系統）を突き合わせる。
-- **次に進めるセクションは「有理係数の対数順序群の元の共通分母の存在」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「有理係数の対数順序群の元は共通分母を持つ」（`claim_common_denominator_exists`）の本文・SageMath
+  `common-denominator-exists`・Lean（`CommonDenominatorExists.lean` 三系統）を突き合わせる。とくに既約分数表示の
+  導入が本文の他の箇所（`claim_rational_log_injective` の既約表示）と記法で衝突していないかを見る。
+- **次に進めるセクションは「共通分母の正整数倍は共通分母である」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
   到達点は台帳の表にある。
