@@ -4,9 +4,9 @@
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) も読む。
 
-## 直近（2026-08-16 03:45 tick）
+## 直近（2026-08-16 04:00 tick）
 
-レビューのみ（検査 71 ブロック・SageMath 対応 17 件・立場違反語なし・外箱安定性の証明の読み直し）。次は
+レビューのみ（検査 71 ブロック・SageMath 対応 17 件・立場違反語なし・PDF 19 ページ）。次は
 「外箱の拡大に対する境界応答多項式の安定性」の Lean 具体版。詳細は台帳「現在地」先頭。
 
 ## ゴール設定（2026-08-14 に確定）
