@@ -38929,7 +38929,10 @@ Z^{\mathrm{op}}_{a,b}(t)
       paragraph([
         "各 ", math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`), " について ",
         math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)\le2ab`), " である。実際、",
-        ref("def_open_rectangle_broken_bond_count"), " により破れボンド数は辺数以下であり、",
+        ref("def_open_rectangle_broken_bond_count"), " により破れボンド数は辺数以下であり、辺数は ",
+        math(String.raw`|E^{\mathrm{op}}_{a,b}|=a(b-1)+(a-1)b=2ab-a-b`), "（",
+        ref("def_open_rectangle_edges"), "。横向き辺が ", math(String.raw`a(b-1)`),
+        " 本、縦向き辺が ", math(String.raw`(a-1)b`), " 本）で、",
         math(String.raw`2ab-a-b\le2ab`), " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
