@@ -37747,6 +37747,143 @@ L^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\
     ],
   },
   {
+    id: "thermodynamic_limit_claim_finite_free_entropy_density_nonnegative",
+    kind: "claim",
+    title: { text: "有限系の自由エントロピー密度は非負である" },
+    labels: ["claim_finite_free_entropy_density_nonnegative"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/finite-free-entropy-density-nonnegative"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.scaled_toRational_zero",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_zero_freeEntropy",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_scaledFreeEntropy",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.le_base_transport_of_monotone_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_scaledFreeEntropy_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、各 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " に対し、",
+        ref("def_finite_free_entropy_density"),
+        " の有限系の自由エントロピー密度は",
+      ]),
+      displayMath(String.raw`0\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi_L(q)`),
+      paragraph([
+        "を満たす。ここで左辺の ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の単位元（零写像。",
+        ref("def_rational_log_order_group"),
+        "）、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。第一に、",
+        ref("claim_value_at_rational_is_positive"),
+        " により ",
+        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+        " であり、",
+        ref("claim_partition_value_ge_one_at_positive_rational"),
+        " により ",
+        math(String.raw`1\le Z_L(q)`),
+        " である（",
+        math(String.raw`\le`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序。",
+        math(String.raw`1\in\mathbb{Q}_{>0}`),
+        "）。第二に、",
+        ref("claim_log_power"),
+        " の ",
+        math(String.raw`k=0`),
+        " の場合により ",
+        math(String.raw`\log 1=0`),
+        " である（右辺の ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\Lambda`),
+        " の単位元）。第三に、",
+        math(String.raw`\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)=0`),
+        "（右辺は ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の単位元）である。写像の等号は各素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " での値の等号なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)\Bigr)(p)
+&=\frac{1}{L^2}\,\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義})\\
+&=\frac{1}{L^2}\,\bigl(0(p)/1\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&=\frac{1}{L^2}\,\bigl(0/1\bigr)
+&&(\because\ \Lambda\text{ の単位元は零写像なので }0(p)=0\text{。}\blkref{def_log_order_group})\\
+&=0
+&&(\because\ \mathbb{Q}\text{ の積。}0\text{ 倍は }0)\\
+&=0(p)
+&&(\because\ \Lambda_{\mathbb{Q}}\text{ の単位元は零写像。}\blkref{def_rational_log_order_group})
+\end{aligned}`),
+      paragraph([
+        "であり、両辺は ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の元として等しい。",
+      ]),
+      paragraph([
+        "まず ",
+        math(String.raw`\Lambda`),
+        " の中で ",
+        math(String.raw`0\le_{\Lambda}\Phi_L(q)`),
+        " を、左辺の ",
+        math(String.raw`0`),
+        " から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\log 1
+&&(\because\ \text{準備の第二})\\
+&\le_{\Lambda}\log Z_L(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ を }q:=1\text{、}q':=Z_L(q)\text{ で読み、準備の第一 }1\le Z_L(q)\text{ を移す})\\
+&=\Phi_L(q)
+&&(\because\ \blkref{def_finite_free_entropy})
+\end{aligned}`),
+      paragraph([
+        "次に ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の中で、主張の左辺 ",
+        math(String.raw`0`),
+        " から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)
+&&(\because\ \text{準備の第三})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\bigl(\Phi_L(q)\bigr)
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ の右辺から左辺の向きを }\lambda:=0\text{、}\mu:=\Phi_L(q)\text{ で読み、上の }0\le_{\Lambda}\Phi_L(q)\text{ を移す})\\
+&=\Psi_L(q)
+&&(\because\ \blkref{def_finite_free_entropy_density})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、正の有理点での分配多項式の値の下界、",
+        math(String.raw`\log 1=0`),
+        "、対数が順序を保つこと、有理数倍と ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " が単位元を単位元へ移すこと、および有理数倍と埋め込みを通した順序の移送だけであり、",
+        "比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },

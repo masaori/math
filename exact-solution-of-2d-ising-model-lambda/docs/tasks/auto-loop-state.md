@@ -7,6 +7,13 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 313 は、「有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・
+  導出版）まで完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$（`claim_finite_free_entropy_density_nonnegative`、
+  値 1 以上の直後・実数体脱出の宣言の直前、住処 Lambda）。準備は $1\le Z_L(q)$・$\log1=0$・$\frac{1}{L^2}\cdot\iota(0)=0$（各素数での五段の鎖）、
+  $\Lambda$ の鎖 $0=\log1\le_\Lambda\log Z_L(q)=\Phi_L(q)$（対数の順序保存）と $\Lambda_{\mathbb Q}$ の鎖 $0=\frac{1}{L^2}\cdot\iota(0)
+  \le_{\Lambda_{\mathbb Q}}\frac{1}{L^2}\cdot\iota(\Phi_L(q))=\Psi_L(q)$（順序の移送）の二本で、実数も実対数も使わない。レビューでは前 tick の
+  値 1 以上の四層が一致し修正無し。次は「正の有理点での分配多項式の値の上界（$\mathbb Q$ 版）」。
+
 - **2026-08-16 の tick 312 は、「正の有理点での分配多項式の値は 1 以上」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで
   完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $1\le Z_L(q)$（`claim_partition_value_ge_one_at_positive_rational`、順序の移送の直後・
   実数体脱出の宣言の直前、住処 Q）。$1=q^0=q^{b(\sigma_+)}\le q^{b(\sigma_+)}+\sum_{\sigma\ne\sigma_+}q^{b(\sigma)}=\sum_\sigma q^{b(\sigma)}=Z_L(q)$
@@ -37,14 +44,7 @@
   宣言より前に新設し、$\mathbb R$ 版は『旧実数値経路を撤去する』で消す」。レビューでは前 tick の加法単調性の四層が一致し修正無し。
   次は「有限系の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」。
 
-- **2026-08-16 の tick 308 は、「有理係数の対数順序群の順序の加法単調性」を本文・SageMath・Lean（具体版・必要十分版・導出版）
-  まで完成させた。** 三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ で $N\cdot(\lambda+\nu)=N\cdot\lambda+N\cdot\nu
-  =\iota(\lambda_N)+N\cdot\nu=\iota(\lambda_N)+\iota(\nu_N)=\iota(\lambda_N+\nu_N)$ の四段（有理数倍の分配則・$\iota$ の加法性）で
-  $N$ が $\lambda+\nu$ の共通分母（証人 $\lambda_N+\nu_N$）であることを示し、仮定を $N$ で読んで $\Lambda$ の加法単調性へ落とした
-  （`claim_rational_log_order_group_add_monotone`）。レビューでは前 tick の線形順序性の四層が一致し、Lean 具体版ヘッダの
-  「二度」を「各元について一度ずつ、計三度」へ直して先に push した。次は「有限系の実自由エントロピーを畳む」。
-
-（これより古い 265 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 266 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -58,13 +58,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 36 セクション
+- 熱力学極限: 37 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 有限系の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版） | todo | $\log1=0$（`claim_free_entropy_at_one` の中身）と対数の順序保存で $0\le_\Lambda\Phi_L(q)$、順序の移送で $0\le_{\Lambda_{\mathbb Q}}\Psi_L(q)$ |
 | 熱力学極限 | 正の有理点での分配多項式の値の上界（$\mathbb Q$ 版） | todo | `claim_partition_value_upper_bound` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック（住処 Q。Lean は ℝ 版を ℚ へ移す） |
 | 熱力学極限 | 有限系の自由エントロピー密度の上界（$\Lambda_{\mathbb Q}$ 版） | todo | $\Phi_L(q)\le_\Lambda L^2\ell_2+2L^2\log\max(1,q)$（対数の加法性・冪・順序保存）から $\Psi_L(q)\le\ell_2+2\log\max(1,q)$。実対数の冪の法則は使わない |
 | 熱力学極限 | 開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する | todo | `def_open_rectangle_*`（住処 N/Z）を宣言より前へ移す（中身は変えない）。$Z^{\mathrm{op}}_{a,b}(q)\in\mathbb Q_{>0}$ の定義と正値性 |
@@ -91,6 +90,18 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 313）: `claim_finite_free_entropy_density_nonnegative` を `claim_partition_value_ge_one_at_positive_rational` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。準備の第一は `claim_value_at_rational_is_positive`・
+  `claim_partition_value_ge_one_at_positive_rational`、第二は `claim_log_power` の $k=0$（$\log1=0$）、第三は $\frac{1}{L^2}\cdot\iota(0)=0$ の
+  各素数での五段の鎖（有理数倍の定義・$\iota$ の定義・$\Lambda$ の零写像・$\mathbb Q$ の積・$\Lambda_{\mathbb Q}$ の零写像）。$\Lambda$ の鎖は
+  `claim_rational_log_order_iff` を $q:=1$、$q':=Z_L(q)$ で、$\Lambda_{\mathbb Q}$ の鎖は `claim_scaled_embedding_order_transfer` の ← を
+  $\lambda:=0$、$\mu:=\Phi_L(q)$ で読む。SageMath `finite-free-entropy-density-nonnegative`（$L\le3$・正の有理点 9 点、準備 16 件・鎖の各行と主張
+  81 件、`ZZ`/`QQ`。$N=L^2$ での証人の比較と決定手続きの一致も見る）。Lean 具体版 `ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean`
+  （`scaled_toRational_zero`・`logOrderLE_zero_freeEntropy`・`rationalLogOrderLE_zero_scaledFreeEntropy`）、必要十分版
+  `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean` の `le_base_transport_of_monotone_necSuf`（述語上で順序を**保つ**写像と
+  基点が基点へ移ることだけ。引いた二主張は同値だが使うのは一方向のみ。対数・有理数倍・埋め込みは本質でない）、導出版は必要十分版を二度
+  （$\mathbb Q_{>0}\to\Lambda$、$\Lambda\to\Lambda_{\mathbb Q}$）特殊化。sorry 検査 1155 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 312）: `claim_partition_value_ge_one_at_positive_rational` を `claim_scaled_embedding_order_transfer` の直後
   （`remark_real_field_escape` の直前）に置き四層で閉じた。準備は各項 $0<q^{b(\sigma)}$（`claim_value_at_rational_is_positive` の準備と同じ）と
@@ -130,16 +141,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   述語を満たすこと、述語上の `f` の単射性、関係が `g` を通した引き戻しであることだけ。対数・素数・有理数は本質でない）、導出版。
   sorry 検査 1142 件。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 308）: `claim_rational_log_order_group_add_monotone` を `claim_rational_log_order_group_linear_order` の直後に置き
-  四層で閉じた。準備は線形順序性と同じ三元の共通の共通分母 $N$。$N$ が $\lambda+\nu$ の共通分母で証人が $\lambda_N+\nu_N$ であること
-  （四段の鎖）を示してから、定義の言い換えで $\lambda_N\le_\Lambda\mu_N$ を得て `claim_log_order_group_add_monotone` を $\nu_N$ で適用。
-  SageMath `rational-log-order-group-add-monotone`（素数 $2,3,5$、係数 5 種、125 ベクトル、$\lambda\le\mu$ の組 7875 件と全 $\nu$ の
-  三元 984375 件、鎖の段ごとの検査 196875 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`
-  （`commonDenominator_add`、`rationalLogOrderLE_add_right`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`
-  の `indexedLE_add_right_necSuf`（三元の共通の良い添字、独立性、同じ添字で `Rep` が加法を保つこと、`le` の加法単調性だけ。
-  加法の結合則・可換則は使わない）、導出版。sorry 検査 1137 件。式変形統一は一時停止中のため実施せず。
-
-（これより古い 276 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 277 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -158,6 +160,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 313）: 前 tick の「正の有理点での分配多項式の値は 1 以上である」の本文・SageMath・Lean 具体版・必要十分版・導出版を
+  突き合わせ、五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と台帳のセクション表も
+  食い違いなし。修正は無い。
+
 - 2026-08-16（tick 312）: 前 tick の「有理数倍と埋め込みを通した順序の移送」の本文・SageMath・Lean 具体版・必要十分版・導出版を
   突き合わせ、三段の鎖・∀ 形と ∃ 形の両向き・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
@@ -173,12 +179,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 2026-08-16（tick 309）: 前 tick の「有理係数の対数順序群の順序は加法について単調である」の本文・SageMath・Lean 具体版・必要十分版・
   導出版を突き合わせ、四段の鎖・∀ 形での読み替え・対象ラベル・入口 import・sorry 検査への登録が一致した。修正は無い。
 
-- 2026-08-16（tick 308）: 前 tick の「有理係数の対数順序群の順序は線形順序である」の本文・SageMath・Lean 具体版・必要十分版・
-  導出版を突き合わせ、三元の共通の共通分母・∀ 形での読み替え・反対称律の七段の鎖・対象ラベル・入口 import・sorry 検査への登録が
-  一致した。Lean 具体版のヘッダコメントだけが「`claim_common_denominator_multiple` を二度」と書いており、本文と実装
-  （各元について一度ずつ、計三度）と食い違っていたので直した。
-
-（これより古い 297 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 298 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

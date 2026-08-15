@@ -10535,3 +10535,32 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-16（tick 307）: 前 tick の「有理係数の対数順序群の順序」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、
   ∃ 形と ∀ 形の同値・決定手続き・対象ラベル・入口 import・sorry 検査への登録が一致した。`DecidableRel` が `noncomputable` なのは
   `Λ` の順序の判定と同じ（`Finsupp` 由来）で先例どおり。修正は無い。
+
+## tick 313 で台帳から移した記録（tick 308）
+
+### 現在地
+
+- **2026-08-16 の tick 308 は、「有理係数の対数順序群の順序の加法単調性」を本文・SageMath・Lean（具体版・必要十分版・導出版）
+  まで完成させた。** 三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ で $N\cdot(\lambda+\nu)=N\cdot\lambda+N\cdot\nu
+  =\iota(\lambda_N)+N\cdot\nu=\iota(\lambda_N)+\iota(\nu_N)=\iota(\lambda_N+\nu_N)$ の四段（有理数倍の分配則・$\iota$ の加法性）で
+  $N$ が $\lambda+\nu$ の共通分母（証人 $\lambda_N+\nu_N$）であることを示し、仮定を $N$ で読んで $\Lambda$ の加法単調性へ落とした
+  （`claim_rational_log_order_group_add_monotone`）。レビューでは前 tick の線形順序性の四層が一致し、Lean 具体版ヘッダの
+  「二度」を「各元について一度ずつ、計三度」へ直して先に push した。次は「有限系の実自由エントロピーを畳む」。
+
+### 前進の記録
+
+- 2026-08-16（tick 308）: `claim_rational_log_order_group_add_monotone` を `claim_rational_log_order_group_linear_order` の直後に置き
+  四層で閉じた。準備は線形順序性と同じ三元の共通の共通分母 $N$。$N$ が $\lambda+\nu$ の共通分母で証人が $\lambda_N+\nu_N$ であること
+  （四段の鎖）を示してから、定義の言い換えで $\lambda_N\le_\Lambda\mu_N$ を得て `claim_log_order_group_add_monotone` を $\nu_N$ で適用。
+  SageMath `rational-log-order-group-add-monotone`（素数 $2,3,5$、係数 5 種、125 ベクトル、$\lambda\le\mu$ の組 7875 件と全 $\nu$ の
+  三元 984375 件、鎖の段ごとの検査 196875 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`
+  （`commonDenominator_add`、`rationalLogOrderLE_add_right`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`
+  の `indexedLE_add_right_necSuf`（三元の共通の良い添字、独立性、同じ添字で `Rep` が加法を保つこと、`le` の加法単調性だけ。
+  加法の結合則・可換則は使わない）、導出版。sorry 検査 1137 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 308）: 前 tick の「有理係数の対数順序群の順序は線形順序である」の本文・SageMath・Lean 具体版・必要十分版・
+  導出版を突き合わせ、三元の共通の共通分母・∀ 形での読み替え・反対称律の七段の鎖・対象ラベル・入口 import・sorry 検査への登録が
+  一致した。Lean 具体版のヘッダコメントだけが「`claim_common_denominator_multiple` を二度」と書いており、本文と実装
+  （各元について一度ずつ、計三度）と食い違っていたので直した。

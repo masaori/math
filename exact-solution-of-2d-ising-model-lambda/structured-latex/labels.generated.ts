@@ -34,6 +34,7 @@ export const ALL_LABELS = [
   "claim_dual_edge_map_bijective",
   "claim_edge_row_partition",
   "claim_even_subgraph_spin_sum",
+  "claim_finite_free_entropy_density_nonnegative",
   "claim_first_root_of_unity_set",
   "claim_fisher_zero_algebraicity",
   "claim_fixed_or_shift_preserves_orbit",
