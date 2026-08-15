@@ -1587,6 +1587,193 @@ q
     ],
   },
 
+  {
+    id: "free_entropy_definition_rational_of_log",
+    kind: "definition",
+    title: { text: "有限台指数ベクトルが定める正の有理数" },
+    labels: ["def_rational_of_log"],
+    habitat: "Q",
+    lean: ["Ising2DLambda.FreeEntropy.rationalOfLog"],
+    statement: [
+      paragraph([
+        math(String.raw`\lambda\in\Lambda`),
+        " とする。",
+        ref("def_log_order_group"),
+        " により台 ",
+        math(String.raw`\operatorname{supp}(\lambda):=\{p\in\mathcal P:\lambda(p)\ne0\}`),
+        " は有限である。写像 ",
+        math(String.raw`\operatorname{rat}_{\Lambda}:\Lambda\to\mathbb Q_{>0}`),
+        " を",
+      ]),
+      displayMath(String.raw`\operatorname{rat}_{\Lambda}(\lambda)
+:=\prod_{p\in\operatorname{supp}(\lambda)}p^{\,\lambda(p)}\ \in\ \mathbb Q_{>0}`),
+      paragraph([
+        "で定める。指数 ",
+        math(String.raw`\lambda(p)\in\mathbb Z`),
+        " が負なら、",
+        math(String.raw`p^{\,\lambda(p)}`),
+        " は ",
+        math(String.raw`\mathbb Q`),
+        " の中の逆数の冪を表す。有限個の正の有理数の積なので値は正であり、実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "free_entropy_claim_rational_log_surjective",
+    kind: "claim",
+    title: { text: "正の有理数の対数は全射である" },
+    labels: ["claim_rational_log_surjective"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/rational-log-surjective"],
+    lean: [
+      "Ising2DLambda.FreeEntropy.logRat_rationalOfLog",
+      "Ising2DLambda.NecSuf.FreeEntropy.log_realize_necSuf",
+      "Ising2DLambda.FreeEntropy.logRat_rationalOfLog_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\lambda\in\Lambda`),
+        " について",
+      ]),
+      displayMath(String.raw`\log\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)=\lambda`),
+      paragraph([
+        "が成り立つ。したがって ",
+        ref("def_rational_log"),
+        " の写像 ",
+        math(String.raw`\log:\mathbb Q_{>0}\to\Lambda`),
+        " は全射である。",
+        ref("claim_rational_log_injective"),
+        " と合わせると全単射であり、",
+        math(String.raw`\operatorname{rat}_{\Lambda}`),
+        " はその逆写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず素数 ",
+        math(String.raw`p\in\mathcal P`),
+        " について、",
+        ref("def_prime_exponent"),
+        " の有限積表示を ",
+        math(String.raw`p=p^1`),
+        " へ適用すると、任意の ",
+        math(String.raw`r\in\mathcal P`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\log p)(r)
+&=v_r(p)-v_r(1)
+&&(\because\ \blkref{def_rational_log}\text{ を表示 }p=p/1\text{ へ適用})\\
+&=v_r(p)
+&&(\because\ v_r(1)=0\text{。}\blkref{def_prime_exponent})\\
+&=\begin{cases}1,&r=p,\\0,&r\ne p,\end{cases}
+&&(\because\ p=p^1\text{ は素数 }p\text{ の有限積表示。}\blkref{def_prime_exponent})\\
+&=\ell_p(r)
+&&(\because\ \blkref{def_log_order_group}\text{ の生成元 }\ell_p\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "ゆえに ",
+        math(String.raw`\log p=\ell_p`),
+        " である。次に任意の ",
+        math(String.raw`z\in\mathbb Z`),
+        " について ",
+        math(String.raw`\log(p^z)=z\ell_p`),
+        " を示す。",
+        math(String.raw`z=n\ge0`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log(p^z)
+&=\log(p^n)
+&&(\because\ z=n)\\
+&=n\log p
+&&(\because\ \blkref{claim_log_power})\\
+&=n\ell_p
+&&(\because\ \log p=\ell_p)\\
+&=z\ell_p
+&&(\because\ z=n)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`z=-(n+1)<0`),
+        " なら、まず正の有理数 ",
+        math(String.raw`p^{n+1}`),
+        " とその逆数へ ",
+        ref("claim_log_additive"),
+        " を適用して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\log 1
+&&(\because\ \blkref{claim_log_power}\text{ の }k=0)\\
+&=\log\bigl(p^{n+1}(p^{n+1})^{-1}\bigr)
+&&(\because\ p^{n+1}(p^{n+1})^{-1}=1)\\
+&=\log(p^{n+1})+\log\bigl((p^{n+1})^{-1}\bigr)
+&&(\because\ \blkref{claim_log_additive})
+\end{aligned}`),
+      paragraph(["を得る。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+\log(p^z)
+&=\log\bigl((p^{n+1})^{-1}\bigr)
+&&(\because\ z=-(n+1)\text{ と整数冪の定義})\\
+&=-\log(p^{n+1})
+&&(\because\ \text{直前の等式を }\Lambda\text{ の加法群で移項})\\
+&=-(n+1)\log p
+&&(\because\ \blkref{claim_log_power})\\
+&=-(n+1)\ell_p
+&&(\because\ \log p=\ell_p)\\
+&=z\ell_p
+&&(\because\ z=-(n+1))
+\end{aligned}`),
+      paragraph([
+        "最後に有限台の大きさについて帰納する。零写像 ",
+        math(String.raw`0\in\Lambda`),
+        " では ",
+        math(String.raw`\operatorname{rat}_{\Lambda}(0)=1`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(\operatorname{rat}_{\Lambda}(0)\bigr)
+&=\log1
+&&(\because\ \blkref{def_rational_of_log}\text{ の空積})\\
+&=0
+&&(\because\ \blkref{claim_log_power}\text{ の }k=0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`p\notin\operatorname{supp}(\mu)`),
+        "、",
+        math(String.raw`z\in\mathbb Z\setminus\{0\}`),
+        " とし、",
+        math(String.raw`\log(\operatorname{rat}_{\Lambda}(\mu))=\mu`),
+        " を帰納法の仮定とする。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(\operatorname{rat}_{\Lambda}(z\ell_p+\mu)\bigr)
+&=\log\bigl(p^z\operatorname{rat}_{\Lambda}(\mu)\bigr)
+&&(\because\ \blkref{def_rational_of_log}\text{、}p\notin\operatorname{supp}(\mu))\\
+&=\log(p^z)+\log\bigl(\operatorname{rat}_{\Lambda}(\mu)\bigr)
+&&(\because\ \blkref{claim_log_additive})\\
+&=z\ell_p+\log\bigl(\operatorname{rat}_{\Lambda}(\mu)\bigr)
+&&(\because\ \log(p^z)=z\ell_p)\\
+&=z\ell_p+\mu
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "となる。すべての ",
+        math(String.raw`\lambda\in\Lambda`),
+        " は有限個の非零座標を一つずつ加えて得られるので、主張が従う。全過程は有限積と ",
+        math(String.raw`\mathbb Z`),
+        "・",
+        math(String.raw`\mathbb Q`),
+        "・",
+        math(String.raw`\Lambda`),
+        " の演算だけからなり、実数体は現れない。",
+      ]),
+    ],
+  },
+
 
   {
     id: "free_entropy_claim_free_entropy_at_one",

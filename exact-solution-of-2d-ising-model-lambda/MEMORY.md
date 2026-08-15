@@ -4,6 +4,19 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 299 は、前 tick の「正の有理数の対数は単射である」の本文・SageMath・Lean
+（具体版・必要十分版・導出版）を突き合わせて修正不要と確認した。そのあと「正の有理数の対数は全射である」を
+四層まで完成させた。`def_rational_of_log` で有限台指数ベクトル $\lambda\in\Lambda$ から
+$\operatorname{rat}_{\Lambda}(\lambda)=\prod_{p\in\operatorname{supp}(\lambda)}p^{\lambda(p)}\in\mathbb Q_{>0}$
+を作り、`claim_rational_log_surjective` で素数自身・整数冪・有限積の順に
+$\log(\operatorname{rat}_{\Lambda}(\lambda))=\lambda$ を示した。単射性と合わせて対数は全単射であり、
+$\operatorname{rat}_{\Lambda}$ が逆写像となる。SageMath `rational-log-surjective` は素数 $2,3,5,7$ と
+係数 $-3,-1,0,1,2$ の全 625 ベクトルを `ZZ`/`QQ` で厳密に検査した。Lean は具体版
+`FreeEntropy/RationalLogSurjective.lean`、必要十分版 `log_realize_necSuf`（線形順序体の正の生成元、
+対数の単位元・積・逆元・生成元規則だけ）、導出版を持つ。式変形統一では姉妹側
+`evensectorT_008_claim_product_action` の二本の鎖が既に一行一操作・行末根拠の形なので変更不要とした。
+次の本文は「対数順序群の順序」。
+
 2026-08-15 の tick 298 は、レビューで前 tick の分母消去の末尾（$M^2\cdot\iota(\lambda)=\iota(M^2\lambda)$）が
 散文だけで SageMath にも Lean にも対応が無かったのを、各素数での値の五段の式変形と Lean `toRational_intSmul`・
 SageMath の交換検査（768 件）へ直して push した。そのあと「有理係数の対数順序群の順序の定義と線形順序性」を、
