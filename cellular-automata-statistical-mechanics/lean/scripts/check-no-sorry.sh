@@ -53,6 +53,14 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.NecSuf.GlobalMapIteration.iterate_zero
+  CellularAutomata.NecSuf.GlobalMapIteration.iterate_succ
+  CellularAutomata.NecSuf.GlobalMapIteration.orbit_collision
+  CellularAutomata.NecSuf.GlobalMapIteration.collision_shift
+  CellularAutomata.NecSuf.GlobalMapIteration.eventual_periodicity
+  CellularAutomata.NecSuf.GlobalMapIteration.mem_scanPairs
+  CellularAutomata.NecSuf.GlobalMapIteration.card_scanPairs_two_mul
+  CellularAutomata.NecSuf.GlobalMapIteration.exists_collision_in_scanPairs
   CellularAutomata.GlobalMapIteration.card_config
   CellularAutomata.GlobalMapIteration.orbit_collision
   CellularAutomata.GlobalMapIteration.collision_shift
@@ -61,6 +69,15 @@ targets=(
   CellularAutomata.GlobalMapIteration.card_scanPairs_two_mul
   CellularAutomata.GlobalMapIteration.exists_collision_in_scanPairs
   CellularAutomata.GlobalMapIteration.config_eq_iff
+  CellularAutomata.GlobalMapIteration.iterate_eq_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.orbit_eq_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.orbit_collision_from_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.collision_shift_from_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.eventual_periodicity_from_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.scanPairs_eq_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.mem_scanPairs_from_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.card_scanPairs_two_mul_from_necessary_sufficient
+  CellularAutomata.GlobalMapIteration.exists_collision_in_scanPairs_from_necessary_sufficient
   CellularAutomata.CausalSetPrimaryLiterature.literatureInterval_finite_of_finset
   CellularAutomata.CausalSetPrimaryLiterature.literatureInterval_eq_orderInterval
   CellularAutomata.CausalSetPrimaryLiterature.eventOrder_locally_finite

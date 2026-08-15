@@ -10,6 +10,7 @@ import CellularAutomata.NecSuf.CausalStructureComparison
 import CellularAutomata.NecSuf.CausalSetPrimaryLiterature
 import CellularAutomata.NecSuf.DependencyOrderSubstructures
 import CellularAutomata.NecSuf.FinitePropagationBoundary
+import CellularAutomata.NecSuf.GlobalMapIteration
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry

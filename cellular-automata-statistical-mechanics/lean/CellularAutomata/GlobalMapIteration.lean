@@ -23,6 +23,7 @@
 import Mathlib.Data.Fintype.Pigeonhole
 import Mathlib.Algebra.BigOperators.Intervals
 import CellularAutomata.TimeExpansionDependency
+import CellularAutomata.NecSuf.GlobalMapIteration
 
 namespace CellularAutomata.GlobalMapIteration
 
@@ -120,5 +121,88 @@ theorem config_eq_iff (z z' : V → State) : z = z' ↔ ∀ v : V, z v = z' v :=
 instance (y : V → State) (M : ℕ) :
     Decidable (∃ x ∈ scanPairs M, iterate N f x.2 y = iterate N f x.1 y) :=
   Finset.decidableExistsAndFinset
+
+/-! ## 必要十分版からの導出
+
+以下は、上の具体版の定義・定理が、必要十分版
+(`NecSuf.GlobalMapIteration`) を配位集合 `V → State` とその大域写像へ
+特殊化したものであることの導出。 -/
+
+omit [Fintype V] [DecidableEq V] in
+theorem iterate_eq_necessary_sufficient (n : ℕ) (y : V → State) :
+    iterate N f n y =
+      CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f) n y := by
+  induction n with
+  | zero => rfl
+  | succ n ih => simp only [iterate_succ,
+      CellularAutomata.NecSuf.GlobalMapIteration.iterate_succ, ih]
+
+omit [Fintype V] [DecidableEq V] in
+theorem orbit_eq_necessary_sufficient (y : V → State) :
+    orbit N f y =
+      CellularAutomata.NecSuf.GlobalMapIteration.orbit (globalMap N f) y := by
+  ext z
+  simp only [orbit, CellularAutomata.NecSuf.GlobalMapIteration.orbit, Set.mem_setOf_eq]
+  constructor
+  · rintro ⟨n, hn⟩
+    exact ⟨n, (iterate_eq_necessary_sufficient N f n y).symm.trans hn⟩
+  · rintro ⟨n, hn⟩
+    exact ⟨n, (iterate_eq_necessary_sufficient N f n y).trans hn⟩
+
+/-- 具体版の衝突は、有限型上の自己写像の衝突定理と
+    |A^V| = 2^{|V|} から導かれる。 -/
+theorem orbit_collision_from_necessary_sufficient (y : V → State) :
+    ∃ i j : ℕ, i < j ∧ j ≤ 2 ^ Fintype.card V ∧
+      iterate N f i y = iterate N f j y := by
+  obtain ⟨i, j, hij, hj, heq⟩ :=
+    CellularAutomata.NecSuf.GlobalMapIteration.orbit_collision (globalMap N f) y
+  refine ⟨i, j, hij, ?_, ?_⟩
+  · rw [card_config (V := V)] at hj
+    exact hj
+  · simpa only [iterate_eq_necessary_sufficient] using heq
+
+omit [Fintype V] [DecidableEq V] in
+theorem collision_shift_from_necessary_sufficient (y : V → State) {i j : ℕ}
+    (h : iterate N f i y = iterate N f j y) (k : ℕ) :
+    iterate N f (i + k) y = iterate N f (j + k) y := by
+  rw [iterate_eq_necessary_sufficient N f i y,
+    iterate_eq_necessary_sufficient N f j y] at h
+  have hs := CellularAutomata.NecSuf.GlobalMapIteration.collision_shift
+    (globalMap N f) y h k
+  simpa only [iterate_eq_necessary_sufficient] using hs
+
+/-- 具体版の最終周期性は、有限型上の自己写像の定理と
+    |A^V| = 2^{|V|} から導かれる。 -/
+theorem eventual_periodicity_from_necessary_sufficient (y : V → State) :
+    ∃ i p : ℕ, 1 ≤ p ∧ i + p ≤ 2 ^ Fintype.card V ∧
+      ∀ n : ℕ, i ≤ n → iterate N f (n + p) y = iterate N f n y := by
+  obtain ⟨i, p, hp, hip, hperiod⟩ :=
+    CellularAutomata.NecSuf.GlobalMapIteration.eventual_periodicity (globalMap N f) y
+  refine ⟨i, p, hp, ?_, ?_⟩
+  · rw [card_config (V := V)] at hip
+    exact hip
+  · intro n hn
+    have h := hperiod n hn
+    simpa only [iterate_eq_necessary_sufficient] using h
+
+theorem scanPairs_eq_necessary_sufficient (M : ℕ) :
+    scanPairs M = CellularAutomata.NecSuf.GlobalMapIteration.scanPairs M := rfl
+
+theorem mem_scanPairs_from_necessary_sufficient (M i j : ℕ) :
+    (⟨j, i⟩ : Σ _ : ℕ, ℕ) ∈ scanPairs M ↔ i < j ∧ j ≤ M := by
+  exact CellularAutomata.NecSuf.GlobalMapIteration.mem_scanPairs M i j
+
+theorem card_scanPairs_two_mul_from_necessary_sufficient (M : ℕ) :
+    (scanPairs M).card * 2 = (M + 1) * M := by
+  exact CellularAutomata.NecSuf.GlobalMapIteration.card_scanPairs_two_mul M
+
+/-- 具体版の衝突候補の存在は、有限配位集合上の自己写像への特殊化である。 -/
+theorem exists_collision_in_scanPairs_from_necessary_sufficient (y : V → State) :
+    ∃ x ∈ scanPairs (2 ^ Fintype.card V),
+      iterate N f x.2 y = iterate N f x.1 y := by
+  have h := CellularAutomata.NecSuf.GlobalMapIteration.exists_collision_in_scanPairs
+    (globalMap N f) y
+  rw [card_config] at h
+  simpa only [scanPairs_eq_necessary_sufficient, iterate_eq_necessary_sufficient] using h
 
 end CellularAutomata.GlobalMapIteration
