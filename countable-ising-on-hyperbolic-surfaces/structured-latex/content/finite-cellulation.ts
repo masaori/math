@@ -462,4 +462,56 @@ n_f=p
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_hyperbolic_regular_type",
+    kind: "definition",
+    title: { text: "正則型の双曲型判定" },
+    labels: ["def_finite_cellulation_hyperbolic_regular_type"],
+    habitat: "Q",
+    verification: ["sagemath/check/finite-cellulation-hyperbolic-regular-type"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_regular_type"),
+        " の正則型述語と、正整数 ",
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        " に対し、そのセル分割が双曲型の正則型 ",
+        math(String.raw`\{p,q\}`),
+        " であることを表す述語 ",
+        math(String.raw`\operatorname{HyperbolicRegularType}_{p,q}`),
+        " を次の条件として定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\operatorname{HyperbolicRegularType}_{p,q}
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\Longleftrightarrow\\
+&\quad
+\operatorname{RegularType}_{p,q}
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+\ \land\\
+&\quad
+\frac{1}{\iota_{\mathbb N,\mathbb Q}(p)}
++
+\frac{1}{\iota_{\mathbb N,\mathbb Q}(q)}
+<
+\frac{1}{2}.
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`),
+        " は ",
+        math(String.raw`n\mapsto n/1`),
+        " で与えられる標準単射である。したがって三つの分母は ",
+        math(String.raw`\mathbb Q_{>0}`),
+        " に属し、不等式は有理数の加法、逆数、順序比較だけで判定できる。双曲関数、実数、複素数、極限、積分は用いない。",
+      ]),
+    ],
+  },
 ]);

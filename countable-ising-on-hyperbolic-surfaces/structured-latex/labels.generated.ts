@@ -17,6 +17,7 @@ export const ALL_LABELS = [
   "def_finite_cellulation_connected_one_skeleton",
   "def_finite_cellulation_euler_characteristic",
   "def_finite_cellulation_face_boundary_word",
+  "def_finite_cellulation_hyperbolic_regular_type",
   "def_finite_cellulation_opposite_edge_occurrences",
   "def_finite_cellulation_regular_type",
   "def_finite_cellulation_vertex_links_are_cycles",
