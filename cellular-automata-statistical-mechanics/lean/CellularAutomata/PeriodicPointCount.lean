@@ -22,6 +22,7 @@
                                               `fixedPointCount_eq_card_filter_univ`, `card_univ_config`
 -/
 import CellularAutomata.MinimalPreperiodPeriod
+import CellularAutomata.NecSuf.PeriodicPointCount
 
 namespace CellularAutomata.PeriodicPointCount
 
@@ -191,5 +192,85 @@ theorem fixedPointCount_eq_card_filter_univ (n : ℕ) :
 /-- 走査する配位の総数は |A^V| = 2^{|V|}。 -/
 theorem card_univ_config : (Finset.univ : Finset (V → State)).card = 2 ^ Fintype.card V := by
   rw [Finset.card_univ, card_config]
+
+/-! ## 必要十分版からの導出 -/
+
+theorem fixedPoints_eq_necessary_sufficient (n : ℕ) :
+    fixedPoints N f n =
+      CellularAutomata.NecSuf.PeriodicPointCount.fixedPoints (globalMap N f) n := by
+  classical
+  ext y
+  simp only [mem_fixedPoints,
+    CellularAutomata.NecSuf.PeriodicPointCount.mem_fixedPoints,
+    CellularAutomata.GlobalMapIteration.iterate_eq_necessary_sufficient]
+
+theorem fixedPointCount_eq_necessary_sufficient (n : ℕ) :
+    fixedPointCount N f n =
+      CellularAutomata.NecSuf.PeriodicPointCount.fixedPointCount (globalMap N f) n := by
+  unfold fixedPointCount CellularAutomata.NecSuf.PeriodicPointCount.fixedPointCount
+  rw [fixedPoints_eq_necessary_sufficient N f n]
+
+omit [Fintype V] [DecidableEq V] in
+theorem isPeriodicPoint_iff_necessary_sufficient (y : V → State) :
+    IsPeriodicPoint N f y ↔
+      CellularAutomata.NecSuf.PeriodicPointCount.IsPeriodicPoint (globalMap N f) y := by
+  simp only [IsPeriodicPoint, CellularAutomata.NecSuf.PeriodicPointCount.IsPeriodicPoint,
+    CellularAutomata.GlobalMapIteration.iterate_eq_necessary_sufficient]
+
+theorem isPeriodicPoint_iff_minPreperiod_zero_from_necessary_sufficient (y : V → State) :
+    IsPeriodicPoint N f y ↔ minPreperiod N f y = 0 := by
+  rw [isPeriodicPoint_iff_necessary_sufficient N f y,
+    CellularAutomata.NecSuf.PeriodicPointCount.isPeriodicPoint_iff_minPreperiod_zero,
+    ← CellularAutomata.MinimalPreperiodPeriod.minPreperiod_eq_necessary_sufficient N f y]
+
+theorem mem_fixedPoints_iff_minPeriod_dvd_from_necessary_sufficient
+    (n : ℕ) (hn : 1 ≤ n) (y : V → State) :
+    y ∈ fixedPoints N f n ↔
+      (minPreperiod N f y = 0 ∧ ∃ k : ℕ, n = k * minPeriod N f y) := by
+  rw [fixedPoints_eq_necessary_sufficient N f n,
+    CellularAutomata.NecSuf.PeriodicPointCount.mem_fixedPoints_iff_minPeriod_dvd
+      (globalMap N f) n hn y,
+    ← CellularAutomata.MinimalPreperiodPeriod.minPreperiod_eq_necessary_sufficient N f y,
+    ← CellularAutomata.MinimalPreperiodPeriod.minPeriod_eq_necessary_sufficient N f y]
+
+theorem divisorSet_eq_necessary_sufficient (n : ℕ) :
+    divisorSet n = CellularAutomata.NecSuf.PeriodicPointCount.divisorSet n := rfl
+
+theorem minPeriodClass_eq_necessary_sufficient (d : ℕ) :
+    minPeriodClass N f d =
+      CellularAutomata.NecSuf.PeriodicPointCount.minPeriodClass (globalMap N f) d := by
+  classical
+  ext y
+  simp only [minPeriodClass, CellularAutomata.NecSuf.PeriodicPointCount.minPeriodClass,
+    Finset.mem_filter, Finset.mem_univ, true_and]
+  rw [CellularAutomata.MinimalPreperiodPeriod.minPreperiod_eq_necessary_sufficient N f y,
+    CellularAutomata.MinimalPreperiodPeriod.minPeriod_eq_necessary_sufficient N f y]
+
+theorem fixedPointCount_eq_sum_minPeriodClass_from_necessary_sufficient
+    (n : ℕ) (hn : 1 ≤ n) :
+    fixedPointCount N f n = ∑ d ∈ divisorSet n, (minPeriodClass N f d).card := by
+  rw [fixedPointCount_eq_necessary_sufficient N f n,
+    divisorSet_eq_necessary_sufficient n]
+  calc
+    CellularAutomata.NecSuf.PeriodicPointCount.fixedPointCount (globalMap N f) n =
+        ∑ d ∈ CellularAutomata.NecSuf.PeriodicPointCount.divisorSet n,
+          (CellularAutomata.NecSuf.PeriodicPointCount.minPeriodClass (globalMap N f) d).card :=
+      CellularAutomata.NecSuf.PeriodicPointCount.fixedPointCount_eq_sum_minPeriodClass
+        (globalMap N f) n hn
+    _ = ∑ d ∈ CellularAutomata.NecSuf.PeriodicPointCount.divisorSet n,
+          (minPeriodClass N f d).card := by
+      apply Finset.sum_congr rfl
+      intro d _
+      rw [minPeriodClass_eq_necessary_sufficient N f d]
+
+theorem fixedPointCount_eq_card_filter_univ_from_necessary_sufficient (n : ℕ) :
+    fixedPointCount N f n =
+      (Finset.univ.filter (fun y : V → State => iterate N f n y = y)).card := by
+  rw [fixedPointCount_eq_necessary_sufficient N f n,
+    CellularAutomata.NecSuf.PeriodicPointCount.fixedPointCount_eq_card_filter_univ]
+  congr 1
+  ext y
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and,
+    CellularAutomata.GlobalMapIteration.iterate_eq_necessary_sufficient]
 
 end CellularAutomata.PeriodicPointCount
