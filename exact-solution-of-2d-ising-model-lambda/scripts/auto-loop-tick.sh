@@ -173,7 +173,8 @@ PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 # 同じモデルの癖がそのまま証明の癖になるのを避けるため。直前に使ったほうを記録し、
 # その反対を選ぶ（実際に起動した回だけ記録するので、見送られた回で偏らない）。
 AGENT_MARK="$LOG_DIR/last-agent"
-BLOCKED_MARK="$LOG_DIR/claude-blocked-until"   # 使用量上限で claude が使えない期限（epoch 秒）
+BLOCKED_MARK="$LOG_DIR/claude-blocked-until"
+CODEX_BLOCKED_MARK="$LOG_DIR/codex-blocked-until"   # 使用量上限で claude が使えない期限（epoch 秒）
 last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
 if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
 
@@ -187,6 +188,22 @@ if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
     agent="codex"
   else
     rm -f "$BLOCKED_MARK"
+  fi
+fi
+
+# codex 側も同じ扱いにする（実測 2026-08-15 23:35: codex の使用量上限に当たり、
+# 検知の仕組みが無かったため tick が 1 秒で異常終了した。復帰は 5 日後だった）。
+if [ "$agent" = "codex" ] && [ -f "$CODEX_BLOCKED_MARK" ]; then
+  codex_blocked_until="$(cat "$CODEX_BLOCKED_MARK" 2>/dev/null || echo 0)"
+  if [ "$(date +%s)" -lt "${codex_blocked_until:-0}" ]; then
+    if [ -f "$BLOCKED_MARK" ] && [ "$(date +%s)" -lt "$(cat "$BLOCKED_MARK" 2>/dev/null || echo 0)" ]; then
+      log "codex も claude も使用量の上限中。claude で試す（早く復帰するのは claude 側）"
+    else
+      log "codex は使用量の上限中（$(date -r "$codex_blocked_until" '+%m-%d %H:%M' 2>/dev/null) まで）。claude で回す"
+    fi
+    agent="claude"
+  else
+    rm -f "$CODEX_BLOCKED_MARK"
   fi
 fi
 
@@ -237,6 +254,24 @@ if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
     # この文言を拾えていなかったため claude の回が 2 回とも空振りした。
     *"spend limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
                       log "    claude が支出の上限に達した。3 時間後まで codex だけで回す" ;;
+  esac
+fi
+
+# codex の使用量上限。文言に復帰時刻が入っているので、それを期限にする
+# （例: "try again at Aug 20th, 2026 12:35 PM"）。読めなければ 1 日後に試し直す。
+if [ "$agent" = "codex" ] && [ "$status" -ne 0 ]; then
+  case "$(tail -5 "$LOG_FILE")" in
+    *"usage limit"*)
+      resume="$(tail -5 "$LOG_FILE" | sed -n 's/.*try again at \([A-Z][a-z]*\) \([0-9]\{1,2\}\)[a-z]*, \([0-9]\{4\}\) \([0-9]\{1,2\}:[0-9]\{2\}\) \([AP]M\).*/\1 \2 \3 \4 \5/p' | tail -1)"
+      # 月名と AM/PM は英語ロケールでしか読めない（このマシンの既定は日本語）。
+      resume_epoch="$(LC_ALL=C date -j -f '%b %d %Y %I:%M %p' "$resume" +%s 2>/dev/null || true)"
+      if [ -n "$resume_epoch" ]; then
+        printf '%s' "$resume_epoch" > "$CODEX_BLOCKED_MARK"
+        log "    codex が使用量の上限に達した（復帰 $(date -r "$resume_epoch" '+%m-%d %H:%M')）。それまで claude だけで回す"
+      else
+        date -v+1d +%s > "$CODEX_BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 86400 )) > "$CODEX_BLOCKED_MARK"
+        log "    codex が使用量の上限に達した（復帰時刻を読めず）。1 日後まで claude だけで回す"
+      fi ;;
   esac
 fi
 
