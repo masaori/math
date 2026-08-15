@@ -31,6 +31,7 @@
 -/
 import Mathlib.Data.Fintype.Inv
 import CellularAutomata.ReversibilityFiniteDecidability
+import CellularAutomata.NecSuf.InverseMapLocality
 
 namespace CellularAutomata.InverseMapLocality
 
@@ -180,5 +181,60 @@ theorem inverseSupp_not_subset_forwardSupp (v : Cell) :
     ¬ inverseSupp Nbr fRule counterexample_injective v ⊆ forwardSupp Nbr fRule v := by
   intro hsub
   exact inverseSupp_not_subset_neighborhood v (hsub.trans (forwardSupp_subset_neighborhood v))
+
+/-! ### 必要十分版からの導出（反例は具体的対象なので対象外。一般部分だけを特殊化する） -/
+
+/-- 存在一意が、有限型上の単射自己写像についての必要十分版の特殊化で得られること。 -/
+theorem exists_unique_preimage_from_necessary_sufficient (hinj : Injective N f) (z : V → State) :
+    ∃! y : V → State, globalMap N f y = z :=
+  CellularAutomata.NecSuf.InverseMapLocality.exists_unique_preimage (globalMap N f)
+    ((injective_iff_necessary_sufficient N f).mp hinj) z
+
+/-- 具体版の逆写像が必要十分版の逆写像に一致すること（どちらも F y = z を満たす唯一の元）。 -/
+theorem inverseMap_eq_necessary_sufficient (hinj : Injective N f) :
+    inverseMap N f hinj =
+      CellularAutomata.NecSuf.InverseMapLocality.inverseMap (globalMap N f)
+        ((injective_iff_necessary_sufficient N f).mp hinj) := by
+  funext z
+  apply hinj
+  rw [globalMap_inverseMap N f hinj z]
+  exact (CellularAutomata.NecSuf.InverseMapLocality.map_inverseMap (globalMap N f) _ z).symm
+
+theorem globalMap_inverseMap_from_necessary_sufficient (hinj : Injective N f) (z : V → State) :
+    globalMap N f (inverseMap N f hinj z) = z := by
+  rw [inverseMap_eq_necessary_sufficient N f hinj]
+  exact CellularAutomata.NecSuf.InverseMapLocality.map_inverseMap (globalMap N f) _ z
+
+theorem inverseMap_globalMap_from_necessary_sufficient (hinj : Injective N f) (y : V → State) :
+    inverseMap N f hinj (globalMap N f y) = y := by
+  rw [inverseMap_eq_necessary_sufficient N f hinj]
+  exact CellularAutomata.NecSuf.InverseMapLocality.inverseMap_map (globalMap N f) _ y
+
+/-- 具体版の値写像が必要十分版の値写像に一致すること。 -/
+theorem inverseCellMap_eq_necessary_sufficient (hinj : Injective N f) (v : V) :
+    inverseCellMap N f hinj v =
+      CellularAutomata.NecSuf.InverseMapLocality.inverseCellMap (globalMap N f)
+        ((injective_iff_necessary_sufficient N f).mp hinj) v := by
+  funext z
+  simp only [inverseCellMap, CellularAutomata.NecSuf.InverseMapLocality.inverseCellMap,
+    inverseMap_eq_necessary_sufficient N f hinj]
+
+/-- supp((F^{-1})_v) の所属が一点反転検査と同値であることを、必要十分版の特殊化で得る。 -/
+theorem mem_inverseSupp_iff_flip_from_necessary_sufficient (hinj : Injective N f) (v u : V) :
+    u ∈ inverseSupp N f hinj v ↔
+      ∃ z : V → State, inverseCellMap N f hinj v z ≠ inverseCellMap N f hinj v (flip u z) := by
+  rw [mem_inverseSupp_iff]
+  have hflip : flip u = CellularAutomata.NecSuf.EssentialDependency.flip nu u := by
+    funext x w
+    simp [CellularAutomata.EssentialDependency.flip,
+      CellularAutomata.NecSuf.EssentialDependency.flip]
+  rw [hflip, inverseCellMap_eq_necessary_sufficient N f hinj v]
+  exact CellularAutomata.NecSuf.InverseMapLocality.essentialDep_inverseCellMap_iff_flip
+    (globalMap N f) nu ne_iff_eq_nu _ v u
+
+/-- 走査組数が必要十分版の |S|·|A|^{|S|} の特殊化で得られること。 -/
+theorem card_inverse_scan_pairs_from_necessary_sufficient :
+    Fintype.card (V × (V → State)) = Fintype.card V * 2 ^ Fintype.card V := by
+  rw [CellularAutomata.NecSuf.InverseMapLocality.card_inverse_scan_pairs, card_state]
 
 end CellularAutomata.InverseMapLocality

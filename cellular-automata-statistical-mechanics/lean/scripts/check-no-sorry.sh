@@ -338,6 +338,18 @@ targets=(
   CellularAutomata.InverseMapLocality.inverseSupp_not_subset_neighborhood
   CellularAutomata.InverseMapLocality.forwardSupp_subset_neighborhood
   CellularAutomata.InverseMapLocality.inverseSupp_not_subset_forwardSupp
+  CellularAutomata.InverseMapLocality.exists_unique_preimage_from_necessary_sufficient
+  CellularAutomata.InverseMapLocality.inverseMap_eq_necessary_sufficient
+  CellularAutomata.InverseMapLocality.globalMap_inverseMap_from_necessary_sufficient
+  CellularAutomata.InverseMapLocality.inverseMap_globalMap_from_necessary_sufficient
+  CellularAutomata.InverseMapLocality.inverseCellMap_eq_necessary_sufficient
+  CellularAutomata.InverseMapLocality.mem_inverseSupp_iff_flip_from_necessary_sufficient
+  CellularAutomata.InverseMapLocality.card_inverse_scan_pairs_from_necessary_sufficient
+  CellularAutomata.NecSuf.InverseMapLocality.exists_unique_preimage
+  CellularAutomata.NecSuf.InverseMapLocality.map_inverseMap
+  CellularAutomata.NecSuf.InverseMapLocality.inverseMap_map
+  CellularAutomata.NecSuf.InverseMapLocality.essentialDep_inverseCellMap_iff_flip
+  CellularAutomata.NecSuf.InverseMapLocality.card_inverse_scan_pairs
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
