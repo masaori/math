@@ -37543,26 +37543,64 @@ Z^{\mathrm{op}}_{L,L}(t)
     ],
     proof: [
       paragraph([
-        "各剰余類を ",
-        math(String.raw`0,1,\ldots,L-1`),
-        " の唯一の代表元で表すと、周期境界の頂点集合 ",
-        math(String.raw`V_L`),
-        " と開境界正方形の頂点集合 ",
-        math(String.raw`V^{\mathrm{op}}_{L,L}`),
-        " は一対一に対応する。したがって、頂点をこの対応で読み替えることにより配位にも全単射",
+        "頂点の対応に名前を与える。写像 ",
+        math(String.raw`v_L:V_L\to V^{\mathrm{op}}_{L,L}`),
+        " を",
       ]),
-      displayMath(String.raw`\Sigma_L\longleftrightarrow\Sigma^{\mathrm{op}}_{L,L}`),
+      displayMath(String.raw`v_L(i,j):=(s(i),\,s(j))`),
       paragraph([
-        "が定まる。以下では対応する二つの配位を同じ文字 ",
-        math(String.raw`\sigma`),
-        " で書く。周期境界にだけある、右端から左端へ戻る横向きの辺と、下端から上端へ戻る縦向きの辺のうち、破れているものの本数を",
+        "で定める（",
+        math(String.raw`s`),
+        " は ",
+        ref("def_residue_maps"),
+        "。",
+        math(String.raw`0\le s(i),s(j)\le L-1`),
+        " なので値は ",
+        math(String.raw`V^{\mathrm{op}}_{L,L}`),
+        " に入る）。",
+        math(String.raw`0\le p\le L-1`),
+        " の整数 ",
+        math(String.raw`p`),
+        " について ",
+        math(String.raw`s(\pi(p))=p`),
+        " であり（除法の原理の一意性）、任意の ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について ",
+        math(String.raw`\pi(s(y))=y`),
+        " なので（",
+        ref("def_residue_maps"),
+        "）、",
+        math(String.raw`(p,q)\mapsto(\pi(p),\pi(q))`),
+        " が ",
+        math(String.raw`v_L`),
+        " の逆写像である。ゆえに ",
+        math(String.raw`v_L`),
+        " は全単射である。次に、配位を読み替える写像 ",
+        math(String.raw`r_L:\Sigma^{\mathrm{op}}_{L,L}\to\Sigma_L`),
+        " を",
+      ]),
+      displayMath(String.raw`r_L(\tau):=\tau\circ v_L`),
+      paragraph([
+        "で定める（",
+        ref("def_configuration"),
+        "、",
+        ref("def_open_rectangle_configuration"),
+        "）。",
+        math(String.raw`v_L`),
+        " が全単射なので、",
+        math(String.raw`\tau'\mapsto\tau'\circ(v_L\text{ の逆写像})`),
+        " が逆写像を与え、",
+        math(String.raw`r_L`),
+        " も全単射である。周期境界にだけある、右端から左端へ戻る横向きの辺と、下端から上端へ戻る縦向きの辺のうち、",
+        math(String.raw`\tau\in\Sigma^{\mathrm{op}}_{L,L}`),
+        " のもとで破れているものの本数を",
       ]),
       displayMath(String.raw`\begin{aligned}
-s^{\mathrm{bd}}_L(\sigma)
+s^{\mathrm{bd}}_L(\tau)
 &:=\bigl|\{i\in\mathbb{N}\mid 0\le i<L\ \text{かつ}\
-\sigma(i,L-1)\ne\sigma(i,0)\}\bigr|\\
+\tau(i,L-1)\ne\tau(i,0)\}\bigr|\\
 &\quad+\bigl|\{j\in\mathbb{N}\mid 0\le j<L\ \text{かつ}\
-\sigma(L-1,j)\ne\sigma(0,j)\}\bigr|\ \in\ \mathbb{N}
+\tau(L-1,j)\ne\tau(0,j)\}\bigr|\ \in\ \mathbb{N}
 \end{aligned}`),
       paragraph([
         "と定める。候補は各向きに ",
@@ -37571,41 +37609,63 @@ s^{\mathrm{bd}}_L(\sigma)
         math(String.raw`2L`),
         " 本なので、",
       ]),
-      displayMath(String.raw`0\le s^{\mathrm{bd}}_L(\sigma)\le2L`),
+      displayMath(String.raw`0\le s^{\mathrm{bd}}_L(\tau)\le2L`),
       paragraph([
-        "である。周期境界の辺集合は、開境界正方形の内部辺と上の ",
+        "である。周期境界の辺を端点写像と ",
+        math(String.raw`v_L`),
+        " で読むと、横向きの辺 ",
+        math(String.raw`e`),
+        "（両端の列番号の代表が ",
+        math(String.raw`s(j)`),
+        " と ",
+        math(String.raw`s(j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)`),
+        "）は、",
+        math(String.raw`s(j)<L-1`),
+        " なら開境界の横向き辺に、",
+        math(String.raw`s(j)=L-1`),
+        " なら右端から左端へ戻る境界横断辺に対応し、縦向きの辺も行番号について同様である。",
+        "この対応で周期境界の辺集合は、開境界正方形の辺集合と上の ",
         math(String.raw`2L`),
-        " 本の境界横断辺との互いに交わらない和である。ゆえに、破れボンド数の定義（",
+        " 本の境界横断辺との互いに交わらない和に分かれ、辺 ",
+        math(String.raw`e`),
+        " が ",
+        math(String.raw`r_L(\tau)`),
+        " のもとで破れることと、対応する辺が ",
+        math(String.raw`\tau`),
+        " のもとで破れることは同値である。ゆえに、破れボンド数の定義（",
         ref("def_broken_bond_count"),
         "、",
         ref("def_open_rectangle_broken_bond_count"),
         "）から、",
       ]),
-      displayMath(String.raw`b(\sigma)
-=b^{\mathrm{op}}_{L,L}(\sigma)+s^{\mathrm{bd}}_L(\sigma)`),
-      paragraph(["を得る。したがって、配位の全単射とこの分解により、"]),
+      displayMath(String.raw`b(r_L(\tau))
+=b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)`),
+      paragraph(["を得る。したがって、"]),
       displayMath(String.raw`\begin{aligned}
 Z_L(t)
-&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{L,L}}
-t^{\,b^{\mathrm{op}}_{L,L}(\sigma)+s^{\mathrm{bd}}_L(\sigma)}
-&&\bigl(\because\ \text{上の配位の全単射と破れボンド数の分解}\bigr)\\
-&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{L,L}}
-t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}t^{\,s^{\mathrm{bd}}_L(\sigma)}
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
+t^{\,b(r_L(\tau))}
+&&\bigl(\because\ \text{全単射}\ r_L\ \text{に沿う和の並べ替え}\bigr)\\
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
+t^{\,b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)}
+&&\bigl(\because\ \text{上の破れボンド数の分解}\bigr)\\
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
+t^{\,b^{\mathrm{op}}_{L,L}(\tau)}t^{\,s^{\mathrm{bd}}_L(\tau)}
 &&\bigl(\because\ t^{m+n}=t^m t^n\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
         " の場合、自然数冪の順序と ",
-        math(String.raw`0\le s^{\mathrm{bd}}_L(\sigma)\le2L`),
+        math(String.raw`0\le s^{\mathrm{bd}}_L(\tau)\le2L`),
         " から、",
       ]),
-      displayMath(String.raw`t^{2L}\le_{\mathbb{R}}t^{\,s^{\mathrm{bd}}_L(\sigma)}\le_{\mathbb{R}}1`),
+      displayMath(String.raw`t^{2L}\le_{\mathbb{R}}t^{\,s^{\mathrm{bd}}_L(\tau)}\le_{\mathbb{R}}1`),
       paragraph(["である。各項へ掛けて有限和を取ると、"]),
       displayMath(String.raw`\begin{aligned}
-t^{2L}\sum_{\sigma}t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}
+t^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{\,b^{\mathrm{op}}_{L,L}(\tau)}
 &\le_{\mathbb{R}} Z_L(t)
 &&\bigl(\because\ \text{項ごとの下からの評価の有限和}\bigr)\\
-&\le_{\mathbb{R}}\sum_{\sigma}t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}
+&\le_{\mathbb{R}}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{\,b^{\mathrm{op}}_{L,L}(\tau)}
 &&\bigl(\because\ \text{項ごとの上からの評価の有限和}\bigr)\\
 &=Z^{\mathrm{op}}_{L,L}(t)
 &&\bigl(\because\ \blkref{def_open_rectangle_partition_value}\bigr)
@@ -37619,7 +37679,7 @@ t^{2L}\sum_{\sigma}t^{\,b^{\mathrm{op}}_{L,L}(\sigma)}
         math(String.raw`1\le_{\mathbb{R}}t`),
         " の場合は自然数冪の順序が",
       ]),
-      displayMath(String.raw`1\le_{\mathbb{R}}t^{\,s^{\mathrm{bd}}_L(\sigma)}\le_{\mathbb{R}}t^{2L}`),
+      displayMath(String.raw`1\le_{\mathbb{R}}t^{\,s^{\mathrm{bd}}_L(\tau)}\le_{\mathbb{R}}t^{2L}`),
       paragraph([
         "となる。同じ項ごとの乗法と有限和を順に適用し、",
         ref("def_open_rectangle_partition_value"),
