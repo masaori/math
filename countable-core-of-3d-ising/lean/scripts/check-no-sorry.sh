@@ -131,6 +131,12 @@ targets=(
   Ising3DCut.NullModel.distinctRoots_do_not_determine_multiplicity
   Ising3DCut.NullModel.eq_leadingCoeff_mul_prod_roots
   Ising3DCut.NullModel.eq_of_roots_and_leadingCoeff_eq
+  Ising3DCut.boundarySpecialization_X_of_mem
+  Ising3DCut.boundarySpecialization_X_of_not_mem
+  Ising3DCut.boundarySpecialization_add
+  Ising3DCut.boundarySpecialization_mul
+  Ising3DCut.boundarySpecialization_one
+  Ising3DCut.boundaryResponsePolynomial_eq_specialization
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
