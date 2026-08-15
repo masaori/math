@@ -137,6 +137,19 @@ targets=(
   Ising3DCut.boundarySpecialization_mul
   Ising3DCut.boundarySpecialization_one
   Ising3DCut.boundaryResponsePolynomial_eq_specialization
+  Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
+  Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
+  Ising3DCut.NecSuf.boundarySpecialization_add
+  Ising3DCut.NecSuf.boundarySpecialization_mul
+  Ising3DCut.NecSuf.boundarySpecialization_one
+  Ising3DCut.NecSuf.boundaryResponsePolynomial_eq_specialization
+  Ising3DCut.boundarySpecialization_eq_necSuf
+  Ising3DCut.boundaryResponsePolynomial_eq_necSuf
+  Ising3DCut.boundarySpecialization_X_of_mem_fromNecSuf
+  Ising3DCut.boundarySpecialization_X_of_not_mem_fromNecSuf
+  Ising3DCut.boundarySpecialization_add_fromNecSuf
+  Ising3DCut.boundarySpecialization_mul_fromNecSuf
+  Ising3DCut.boundarySpecialization_one_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
