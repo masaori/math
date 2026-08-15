@@ -322,6 +322,9 @@ esac
 
 tick_message="$(printf '2次元 Ising 模型（Λ の立場）（%s / %s / 版 %s）\n%s\n%s' \
   "$agent" "$tick_outcome" "$tick_commit" "$tick_summary" "$published_url")"
+# 送り先は **math リポジトリ専用**のもの（2026-08-15 に slack-notification skill が
+# リポジトリ別の送り先へ分かれた。正本は ~/.claude/skills/slack-notification/SKILL.md）。
+# この URL は秘密ではないので、伏せ字にせずこのまま置く。
 curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
   -H "Content-Type: application/json" \
   --data "$(jq -n --arg message "$tick_message" --arg repository "$(basename "$REPO_DIR")" \
