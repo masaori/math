@@ -10,7 +10,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "validate": "node tools/validate-content.ts",
     "build:tex": "node tools/build-latex.ts",
-    "build:html": "node tools/build-html.mjs",
+    "build:html": "node tools/build-html.ts",
     "build:pdf": "node tools/build-latex.ts --pdf",
     "check": "npm run check:generated && npm run typecheck && npm run validate && npm run build:tex && npm run build:html"
   },
@@ -18,8 +18,9 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "@types/katex": "^0.16.8",
     "@types/node": "^22.10.2",
-    "mathjax": "4.1.3",
+    "katex": "^0.18.4",
     "typescript": "^5.6.3"
   },
   "engines": {
