@@ -118,4 +118,52 @@ theorem irreducible_monic_eq_of_common_root {K L : Type} [Field K] [Field L] [Al
   exact (minpoly.eq_of_irreducible_of_monic hP hxP hPm).trans
     (minpoly.eq_of_irreducible_of_monic hQ hxQ hQm).symm
 
+/-- 既約因子の実際の零点を、因子指数だけ反復した有限型。 -/
+abbrev RepeatedPolynomialRoot {J K : Type} [Field K]
+    (L : Type) [Field L] [Algebra K L] (P : J → K[X]) (exponent : J → ℕ) :=
+  Σ r : (Σ j, (P j).rootSet L), Fin (exponent r.1)
+
+/-- 反復した実際の零点に、そのモニック最小多項式の次数を記録する。 -/
+noncomputable def repeatedPolynomialRootMinpolyDegree {J K L : Type} [Field K] [Field L] [Algebra K L]
+    {P : J → K[X]} {exponent : J → ℕ} (r : RepeatedPolynomialRoot L P exponent) : ℕ :=
+  (minpoly K (r.1.2 : L)).natDegree
+
+/--
+本文の主張そのものの具体版。モニック既約因子の実際の相異なる零点を因子指数だけ反復すると、
+最小多項式次数 `n` の零点数は、次数 `n` の因子ごとの `指数 × 次数` の有限和になる。
+-/
+theorem irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees
+    {J K L : Type} [Fintype J] [DecidableEq J]
+    [Field K] [CharZero K] [Field L] [IsAlgClosed L]
+    [Algebra K L] [FaithfulSMul K L]
+    (P : J → K[X]) (exponent : J → ℕ)
+    (hIrreducible : ∀ j, Irreducible (P j)) (hMonic : ∀ j, (P j).Monic)
+    (n : ℕ) :
+    Fintype.card {r : RepeatedPolynomialRoot L P exponent //
+      repeatedPolynomialRootMinpolyDegree r = n} =
+      ∑ j : {j : J // (P j).natDegree = n}, exponent j * (P j).natDegree := by
+  classical
+  let rootEquiv : ∀ j : J, (P j).rootSet L ≃ Fin (P j).natDegree := fun j =>
+    Fintype.equivFinOfCardEq (irreducible_rootSet_card_eq_natDegree (P j) (hIrreducible j))
+  let repeatedEquiv : RepeatedPolynomialRoot L P exponent ≃
+      RepeatedFactorRoot (fun j => (P j).natDegree) exponent :=
+    { toFun := fun r => ⟨⟨r.1.1, rootEquiv r.1.1 r.1.2⟩, r.2⟩
+      invFun := fun r => ⟨⟨r.1.1, (rootEquiv r.1.1).symm r.1.2⟩, r.2⟩
+      left_inv := by intro r; cases r; simp
+      right_inv := by intro r; cases r; simp }
+  let restrictedEquiv : {r : RepeatedPolynomialRoot L P exponent //
+      repeatedPolynomialRootMinpolyDegree r = n} ≃
+      {r : RepeatedFactorRoot (fun j => (P j).natDegree) exponent //
+        rootMinimalPolynomialDegree r = n} :=
+    Equiv.subtypeEquiv repeatedEquiv (by
+      intro r
+      change (minpoly K (r.1.2 : L)).natDegree = n ↔ (P r.1.1).natDegree = n
+      have hr : aeval (r.1.2 : L) (P r.1.1) = 0 :=
+        (Polynomial.mem_rootSet_of_ne (hIrreducible r.1.1).ne_zero).mp r.1.2.2
+      rw [minpoly_natDegree_eq_of_irreducible_monic
+        (P r.1.1) (hIrreducible r.1.1) (hMonic r.1.1) (r.1.2 : L) hr])
+  rw [Fintype.card_congr restrictedEquiv]
+  exact factorizationType_determines_rootMinimalPolynomialDegrees
+    (fun j => (P j).natDegree) exponent n
+
 end Ising3DCut.NullModel
