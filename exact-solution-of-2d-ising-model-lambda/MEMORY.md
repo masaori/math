@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 276 は、レビューで前 tick の「周期境界と開境界の境界評価」の証明に残っていた
+無名の同一視（配位の全単射に名前を付けず、周期境界と開境界の配位を同じ文字 $\sigma$ で使い回す
+書き方）を、頂点対応 $v_L(i,j)=(s(i),s(j))$ とその逆写像、配位の全単射
+$r_L(\tau)=\tau\circ v_L$ の定義へ書き直し、分解を $b(r_L(\tau))=b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)$、
+和の書き換えを「全単射 $r_L$ に沿う和の並べ替え」の行として明示して、前進前に main へ反映した
+（コミット `cf66b444`）。そのあと同セクションの Lean を論法ごとに「配位の全単射」
+「破れボンド数の分解」「実数評価の上下評価」の三つへ割り直し、先頭の「配位の全単射」の具体版
+`lean/Ising2DLambda/ThermodynamicLimit/PeriodicOpenComparison.lean` を完成させた。頂点対応
+`periodicVertexToOpen`（代表を取る写像は `ZMod.val`、自然な射影は `Nat.cast`）と逆写像、
+往復の等式二本、配位の読み替え `openConfigToPeriodic`（$r_L$）と逆写像、往復の等式二本、
+全単射 `periodicOpenVertexEquiv`・`periodicOpenConfigEquiv` を人手証明と 1 対 1 に写し、
+sorry 検査へ登録した（1000 件、すべて非依存）。**claim 本体の Lean は未了**なので本文の
+`lean` 宣言はまだ付けない。次 tick は「破れボンド数の分解」の Lean（周期境界の辺集合と
+開境界の辺＋境界横断辺 $2L$ 本の直和との全単射、$b(r_L(\tau))$ の分解）を進める。
+式変形統一では姉妹側「Frobenius 内積の性質」の場合 1 の $u=0_{\mathbb{C}}$ と Step 6 の
+$u+\overline{u}$ に残っていた行内の等号鎖を、一行一等号と行末根拠へ開いた。
+
 2026-08-15 の tick 275 は、レビューで前 tick の接合不等式の数学内容と四層の対応を確認し、
 SageMath 概要に残っていた「Lean は次 tick」という古い記述だけを、具体版・必要十分版・導出版が
 完成済みという実態へ訂正して前進前に main へ反映した。そのあと「周期境界と開境界の境界評価」を

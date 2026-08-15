@@ -475,9 +475,27 @@ export default defineBlocks([
         math(String.raw`\|B\|=0`),
         " のとき。(3) より ",
         math(String.raw`B=O`),
-        " であるから ",
-        math(String.raw`u=\sum_{i,j}\overline{a_{ij}}\cdot 0_{\mathbb{C}}=0_{\mathbb{C}}`),
-        " となり ",
+        " であるから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u
+&= \sum_{i,j}\overline{a_{ij}}\,b_{ij}
+   \quad (\because u \text{ の定義と (0)}) \\
+&= \sum_{i,j}\overline{a_{ij}}\cdot 0_{\mathbb{C}}
+   \quad (\because B=O \text{ なので各成分 } b_{ij}=0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}
+   \quad (\because 0_{\mathbb{C}} \text{ との積が } 0_{\mathbb{C}} \text{ であることと有限和})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり、",
+        math(String.raw`|0_{\mathbb{C}}|=0`),
+        "（",
+        ref("abs_basic_properties"),
+        "）と ",
+        math(String.raw`\|B\|=0`),
+        " から ",
         math(String.raw`|u|=0=\|A\|\,\|B\|`),
         "。",
       ]),
@@ -605,9 +623,21 @@ export default defineBlocks([
       paragraph([
         "ここで ",
         math(String.raw`u=(x,y)`),
-        " と書けば ",
-        math(String.raw`u+\overline{u}=(x,y)+(x,-y)=(2x,0)=\left(2\,\mathrm{Re}(u)\right)_{\mathbb{C}}`),
-        " であるから、",
+        " と書けば",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u+\overline{u}
+&= (x,y)+(x,-y)
+   \quad (\because u=(x,y) \text{ と複素共役の定義}) \\
+&= (2x,\ 0)
+   \quad (\because \mathbb{C} \text{ の加法の定義と } \mathbb{R} \text{ の計算}) \\
+&= \left(2\,\mathrm{Re}(u)\right)_{\mathbb{C}}
+   \quad (\because \mathrm{Re} \text{ の定義と } \mathbb{R}\to\mathbb{C} \text{ の包含写像})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、",
         math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
         " の単射性により実数の等式 ",
         math(String.raw`\|A+B\|^2=\|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2`),
