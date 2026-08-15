@@ -1119,6 +1119,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_square_subsquare_bounds_of_le_one
   Ising2DLambda.NecSuf.ThermodynamicLimit.split_twice_bounds_necSuf
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_square_subsquare_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.toRational_add
+  Ising2DLambda.ThermodynamicLimit.toRational_injective
+  Ising2DLambda.NecSuf.ThermodynamicLimit.pointwise_lift_add_and_injective_necSuf
+  Ising2DLambda.ThermodynamicLimit.toRational_add_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.toRational_injective_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -1477,9 +1477,14 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
 T_{V_2}(\check{Z}_\mu)
 &= V_2\,\check{Z}_\mu\,V_2^{-1}
    \quad (\because \text{def\_T\_g}) \\
+&= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
+   \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
+   \quad (\because \text{def\_transfer\_matrix\_symbols の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{def\_transfer\_matrix\_symbols と scalar\_identity\_commutes と直前の } V_2^{-1} \text{ の表示}) \\
+   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
+&= \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
+   \quad (\because (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Z}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
@@ -1492,8 +1497,14 @@ T_{V_2}(\check{Z}_\mu)
 T_{V_2}(\check{Y}_\mu)
 &= V_2\,\check{Y}_\mu\,V_2^{-1}
    \quad (\because \text{def\_T\_g}) \\
+&= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
+   \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
+   \quad (\because \text{def\_transfer\_matrix\_symbols の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
+&= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
+   \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
+   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
 &= \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{前因子 } (2s_2)^{M/2} \text{ の相殺（} \check{Z}_\mu \text{ の場合と同じ）}) \\
+   \quad (\because (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Y}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\

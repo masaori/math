@@ -4,6 +4,25 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 296 は、レビューで前 tick（台帳の割り直しと姉妹側の根拠補強のみ）に修正が無いことを確認した。
+そのあと「$\Lambda\otimes\mathbb{Q}$ の具体的構成」を四層まで完成させた。有理係数の対数順序群 $\Lambda_{\mathbb{Q}}$ を
+素数から $\mathbb{Q}$ への有限台の写像全体として定め（テンソル積の一般論も有限表示の同値類も使わない。$\Lambda$ の定義の
+値域を $\mathbb{Q}$ に替えただけの形にしたのは、同値類が要らず等号が素数ごとの有理数比較で直ちに決まるため）、素数ごとの
+加法・有理数倍・写像 $\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}$（整数値を分母 1 の有理数として読む）を置き、密度
+$\tfrac{1}{L^2}\cdot\iota(\Phi_L(q))\in\Lambda_{\mathbb{Q}}$ を住処として宣言した（`def_rational_log_order_group`）。
+$\iota$ が加法を保ち単射であることを各素数の値へ落とす 5 行の鎖で示した（`claim_rational_log_order_group_embedding`）。
+新ブロックは章「熱力学極限」の見出し直後、「実数体への脱出の宣言」の前に置いた。SageMath
+`rational-log-order-group-embedding` は 131 件を `ZZ`/`QQ` で厳密に。Lean は
+`ThermodynamicLimit/RationalLogOrderGroup.lean`（`RationalLogOrderGroup := Nat.Primes →₀ ℚ`、`toRational`
+（`Finsupp.mapRange` で整数を有理数へ）、`scaledFreeEntropy`、`toRational_add`、`toRational_injective`）、必要十分版
+`NecSuf/ThermodynamicLimit/RationalLogOrderGroup.lean` の `pointwise_lift_add_and_injective_necSuf`（添字型上の
+有限台写像へ値ごとの写像 $f$ を持ち上げるとき、加法保存には $f$ の加法保存だけ、単射には $f$ の単射だけ）、導出版
+（sorry 検査 1068 件）。本文末尾「この先に書くこと」へ実数脱出後ろ倒しの残り項目を足した。式変形統一では姉妹側
+「$T_{V_1},T_{V_2}$ の $\check Z,\check Y$ への作用」（`evensectorT_005_claim_T_actions`）の $T_{V_2}$ 二本の鎖で、
+前因子 $(2s_2)^{M/2}$ の代入・スカラーの移動・相殺が一行だったのを三行へ分けた。次の本文は
+「$\Lambda\otimes\mathbb{Q}$ の順序」（$w:\mathbb{Q}_{>0}\to\Lambda$ を通して正の有理数の比較から移す。
+$\tfrac{1}{L^2}\lambda$ と $\tfrac{1}{M^2}\mu$ の比較は整数倍で分母を払って $\Lambda$ の比較へ落とす）。
+
 2026-08-15 の tick 295 は、レビューで前 tick の「開境界正方形と部分正方形の値の比較
 （$0<t\le1$）」の本文・SageMath・Lean 具体版・必要十分版・導出版が一致することを確認した（修正無し）。
 そのあと、人間が決めた「実数体への脱出を極限の一点へ後ろ倒しする」設計変更を、依存順が明示された
@@ -3133,13 +3152,15 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「開境界正方形と部分正方形の値の比較（$0<t\le1$）」の本文・SageMath・Lean（具体版・必要十分版・
-  導出版）を突き合わせる。
-- **次に進めるセクションは「開境界正方形と部分正方形の値の比較（$1\le t$ の場合）」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「$\Lambda\otimes\mathbb{Q}$ の具体的構成」の本文（`def_rational_log_order_group`・
+  `claim_rational_log_order_group_embedding`）・SageMath・Lean（具体版・必要十分版・導出版）を突き合わせる。
+  とくに、有理数倍の四つの法則を定義ブロックの中で「素数ごとに読む」と述べて済ませていることが規律上許されるか
+  （主張として分けるべきか）を見る。
+- **次に進めるセクションは「$\Lambda\otimes\mathbb{Q}$ の順序」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
-  姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の「$\check Z,\check Y$ についての
-  $\cosh,\sinh$ の展開係数への変換」は統一済み（(h1.z)・(h1.y) を開き、(h2.z)・(h2.y) は元から規則どおり）。
-  次は同章の続き「$\check Z,\check Y$ についてのテイラー係数の抽出」以降で、圧縮された行や根拠の無い行を探す。
+  姉妹側 `014_even_sector_T_action` の「$T_{V_1},T_{V_2}$ の $\check Z,\check Y$ への作用」は $T_{V_2}$ 二本を
+  開いた。次は同ブロックの $T_{V_1}$ 二本の鎖（`def_V_plus_and_T_V_plus と matrix_exp_conjugation (3)` を一行で
+  引いている箇所）以降で、圧縮された行や根拠の無い行を探す。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
 ## 前の tick の記録（1 つ前）

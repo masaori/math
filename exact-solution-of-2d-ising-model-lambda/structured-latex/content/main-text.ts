@@ -35196,6 +35196,263 @@ w\cdot w
   },
 
   {
+    id: "thermodynamic_limit_def_rational_log_order_group",
+    kind: "definition",
+    title: { text: "有理係数の対数順序群" },
+    labels: ["def_rational_log_order_group"],
+    habitat: "Lambda",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.RationalLogOrderGroup",
+      "Ising2DLambda.ThermodynamicLimit.toRational",
+    ],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\lambda:\mathcal{P}\to\mathbb{Q}`),
+        " のうち、",
+        math(String.raw`\lambda(p)\ne0`),
+        " となる素数 ",
+        math(String.raw`p`),
+        " が有限個であるもの全体の集合を",
+      ]),
+      displayMath(
+        String.raw`\Lambda_{\mathbb{Q}}:=\bigl\{\,\lambda \;\bigm|\; \lambda\ \text{は}\ \mathcal{P}\ \text{から}\ \mathbb{Q}\ \text{への写像で、}\ \lambda(p)\ne0\ \text{となる}\ p\ \text{は有限個}\,\bigr\}`,
+      ),
+      paragraph([
+        "と書く（",
+        math(String.raw`\mathcal{P}`),
+        " は ",
+        ref("def_prime_exponent"),
+        " の素数全体の集合）。",
+        ref("def_log_order_group"),
+        " の ",
+        math(String.raw`\Lambda`),
+        " との違いは、値域が ",
+        math(String.raw`\mathbb{Z}`),
+        " ではなく ",
+        math(String.raw`\mathbb{Q}`),
+        " であることだけである。加法と逆元を素数ごとに",
+      ]),
+      displayMath(
+        String.raw`(\lambda+\mu)(p):=\lambda(p)+\mu(p),\qquad(-\lambda)(p):=-\lambda(p)\qquad(p\in\mathcal{P})`,
+      ),
+      paragraph([
+        "で定める（右辺の演算は ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で行う）。",
+        math(String.raw`\lambda+\mu`),
+        " が ",
+        math(String.raw`0`),
+        " と異なる値を取る素数は、",
+        math(String.raw`\lambda`),
+        " のそれと ",
+        math(String.raw`\mu`),
+        " のそれの合併に含まれるので有限個であり、",
+        math(String.raw`\lambda+\mu\in\Lambda_{\mathbb{Q}}`),
+        " である。零写像を単位元として ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " は加法についてアーベル群になる（結合則・可換則は素数ごとに ",
+        math(String.raw`\mathbb{Q}`),
+        " のそれである）。",
+      ]),
+      paragraph([
+        "有理数倍も素数ごとに定める。",
+        math(String.raw`r\in\mathbb{Q}`),
+        " と ",
+        math(String.raw`\lambda\in\Lambda_{\mathbb{Q}}`),
+        " に対し",
+      ]),
+      displayMath(String.raw`(r\cdot\lambda)(p):=r\,\lambda(p)\qquad(p\in\mathcal{P})`),
+      paragraph([
+        "とする（右辺の積は ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で行う）。",
+        math(String.raw`\lambda(p)=0`),
+        " なら ",
+        math(String.raw`(r\cdot\lambda)(p)=0`),
+        " なので、",
+        math(String.raw`0`),
+        " と異なる値を取る素数は増えず、",
+        math(String.raw`r\cdot\lambda\in\Lambda_{\mathbb{Q}}`),
+        " である。素数ごとに ",
+        math(String.raw`\mathbb{Q}`),
+        " の分配則と結合則を読むことで、",
+        math(String.raw`r,s\in\mathbb{Q}`),
+        "、",
+        math(String.raw`\lambda,\mu\in\Lambda_{\mathbb{Q}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`(r+s)\cdot\lambda=r\cdot\lambda+s\cdot\lambda,\qquad r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu,\qquad (rs)\cdot\lambda=r\cdot(s\cdot\lambda),\qquad 1\cdot\lambda=\lambda`,
+      ),
+      paragraph([
+        "が成り立つ。",
+      ]),
+      paragraph([
+        math(String.raw`\Lambda`),
+        " から ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " への写像 ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}:\Lambda\to\Lambda_{\mathbb{Q}}`),
+        " を、",
+        math(String.raw`\lambda\in\Lambda`),
+        " に対し",
+      ]),
+      displayMath(
+        String.raw`\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)(p):=\lambda(p)/1\ \in\ \mathbb{Q}\qquad(p\in\mathcal{P})`,
+      ),
+      paragraph([
+        "で定める（整数 ",
+        math(String.raw`\lambda(p)`),
+        " を分母 ",
+        math(String.raw`1`),
+        " の有理数として読む）。",
+        math(String.raw`0`),
+        " と異なる値を取る素数は ",
+        math(String.raw`\lambda`),
+        " のそれと同じなので有限個であり、右辺は ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の元である。",
+        math(String.raw`\Lambda`),
+        " の元を ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の元として使うときは必ずこの写像を通し、同一視はしない。",
+        "この写像が加法を保ち単射であることは次の主張で示す。",
+      ]),
+      paragraph([
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の 2 つの元 ",
+        math(String.raw`\lambda,\mu`),
+        " が等しいかどうかは、",
+        math(String.raw`\lambda(p)\ne0`),
+        " または ",
+        math(String.raw`\mu(p)\ne0`),
+        " となる有限個の素数 ",
+        math(String.raw`p`),
+        " について有理数 ",
+        math(String.raw`\lambda(p)`),
+        " と ",
+        math(String.raw`\mu(p)`),
+        " を比べれば決まる（それ以外の素数では両方とも ",
+        math(String.raw`0`),
+        " である）。有理数の等号は分子・分母の整数の比較で決まるので、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の等号は有限回の整数の比較で判定できる。",
+      ]),
+      paragraph([
+        "この集合は、",
+        math(String.raw`\Lambda`),
+        " の各元に有理数倍を許して得られるもの（通常 ",
+        math(String.raw`\Lambda\otimes_{\mathbb{Z}}\mathbb{Q}`),
+        " と書かれる）と同じ内容を持つが、本文ではテンソル積の一般論は使わず、上の具体的な定義だけを使う。",
+        "有限格子の自由エントロピー ",
+        math(String.raw`\Phi_L(q)\in\Lambda`),
+        "（",
+        ref("def_finite_free_entropy"),
+        "）を格子点の個数 ",
+        math(String.raw`L^2`),
+        " で割った量",
+      ]),
+      displayMath(
+        String.raw`\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\bigl(\Phi_L(q)\bigr)\ \in\ \Lambda_{\mathbb{Q}}`,
+      ),
+      paragraph([
+        "が、この章で扱う有限系の密度の住処である。ここまでに実数体は現れていない。",
+        "順序はここでは定めない（次の定義で、正の有理数の比較から移す）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_rational_log_order_group_embedding",
+    kind: "claim",
+    title: { text: "対数順序群から有理係数の対数順序群への写像は加法を保ち単射である" },
+    labels: ["claim_rational_log_order_group_embedding"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/rational-log-order-group-embedding"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.toRational_add",
+      "Ising2DLambda.ThermodynamicLimit.toRational_injective",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.pointwise_lift_add_and_injective_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.toRational_add_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.toRational_injective_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`\lambda,\mu\in\Lambda`),
+        " を任意に取る。",
+        ref("def_rational_log_order_group"),
+        " の写像 ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda+\mu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)+\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)`,
+      ),
+      paragraph([
+        "であり、また ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)`),
+        " ならば ",
+        math(String.raw`\lambda=\mu`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "写像の等号は各素数での値の等号なので、素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " を任意に取って値を比べる。加法について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda+\mu)\bigr)(p)
+&=(\lambda+\mu)(p)/1
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&=(\lambda(p)+\mu(p))/1
+&&(\because\ \blkref{def_log_order_group}\text{ の加法の定義})\\
+&=\lambda(p)/1+\mu(p)/1
+&&(\because\ \mathbb{Q}\text{ における分母 }1\text{ の有理数の加法})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)(p)+\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)+\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\Lambda_{\mathbb{Q}}\text{ の加法の定義})
+\end{aligned}`),
+      paragraph([
+        "単射性について、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)`),
+        " と仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda(p)/1
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)\bigr)(p)
+&&(\because\ \text{仮定})\\
+&=\mu(p)/1
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "分母 ",
+        math(String.raw`1`),
+        " の有理数 ",
+        math(String.raw`a/1,b/1`),
+        "（",
+        math(String.raw`a,b\in\mathbb{Z}`),
+        "）が等しいのは ",
+        math(String.raw`a\cdot1=b\cdot1`),
+        " すなわち ",
+        math(String.raw`a=b`),
+        " のときに限るので、",
+        math(String.raw`\lambda(p)=\mu(p)`),
+        " である。",
+        math(String.raw`p`),
+        " は任意だったので ",
+        math(String.raw`\lambda=\mu`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },
@@ -39047,7 +39304,7 @@ Z^{\mathrm{op}}_{L,L}(t)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 開境界自由エネルギー密度の極限（倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
+          "「熱力学極限」の残り: 有理係数の対数順序群の順序、有限系の密度を可算側へ畳むこと、極限の存在の Cauchy 性としての記述、切断による実数体への一度きりの脱出と旧実数値経路の撤去、開境界自由エネルギー密度の極限（倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
         ],
         [
           todo("未着手"),
