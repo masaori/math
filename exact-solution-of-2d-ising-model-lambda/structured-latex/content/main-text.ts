@@ -38950,6 +38950,87 @@ Z^{\mathrm{op}}_{a,b}(t)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_subsquare_comparison_le_one",
+    kind: "claim",
+    title: { text: "開境界正方形と部分正方形の値の比較（t は 1 以下）" },
+    labels: ["claim_open_square_subsquare_comparison_le_one"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した開境界分配多項式の値を実数の順序で比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限積だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-square-subsquare-comparison"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_square_subsquare_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.split_twice_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_square_subsquare_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,L\in\mathbb{N}`), "、", math(String.raw`1\le a<L`),
+        " と、正の実数 ", math(String.raw`t\in\mathbb{R}`), "、",
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`), " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`t^{a+L}Z^{\mathrm{op}}_{a,a}(t)
+\le_{\mathbb{R}}Z^{\mathrm{op}}_{L,L}(t)
+\le_{\mathbb{R}}2^{L^2-a^2}Z^{\mathrm{op}}_{a,a}(t)`),
+      paragraph([
+        "である（", math(String.raw`Z^{\mathrm{op}}_{a,b}(t)`), " は ",
+        ref("def_open_rectangle_partition_value"), "）。指数 ",
+        math(String.raw`L^2-a^2`), " は ", math(String.raw`a<L`), " なので自然数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c:=L-a\in\mathbb{N}`), " と置く。", math(String.raw`a<L`), " なので ",
+        math(String.raw`c\ge1`), " であり、", math(String.raw`L=a+c`), " である。",
+        "以下、現れる開境界長方形の値はすべて正である（",
+        ref("claim_open_rectangle_gluing_inequality"),
+        " の証明の準備「和は有限であり、各項は正」）。また ",
+        math(String.raw`ac+cL=c(a+L)=(L-a)(L+a)=L^2-a^2`), " である。",
+      ]),
+      paragraph(["下からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+t^{a+L}Z^{\mathrm{op}}_{a,a}(t)
+&=t^{L}\,t^{a}Z^{\mathrm{op}}_{a,a}(t)
+&&(\because\ \text{冪の指数法則 }t^{a+L}=t^{L}t^{a})\\
+&\le_{\mathbb{R}}t^{L}\,t^{a}Z^{\mathrm{op}}_{a,a}(t)Z^{\mathrm{op}}_{a,c}(t)
+&&(\because\ 1\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,c}(t)\text{（}\blkref{claim_open_rectangle_value_at_least_one}\text{）と }0<_{\mathbb{R}}t^{L}t^{a}Z^{\mathrm{op}}_{a,a}(t))\\
+&\le_{\mathbb{R}}t^{L}Z^{\mathrm{op}}_{a,a+c}(t)
+&&(\because\ \text{第二座標方向の接合の下側 }t^{a}Z^{\mathrm{op}}_{a,a}(t)Z^{\mathrm{op}}_{a,c}(t)\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,a+c}(t)\text{（}\blkref{claim_open_rectangle_gluing_inequality}\text{）に正の }t^{L}\text{ を掛ける})\\
+&=t^{L}Z^{\mathrm{op}}_{a,L}(t)
+&&(\because\ a+c=L)\\
+&\le_{\mathbb{R}}t^{L}Z^{\mathrm{op}}_{a,L}(t)Z^{\mathrm{op}}_{c,L}(t)
+&&(\because\ 1\le_{\mathbb{R}}Z^{\mathrm{op}}_{c,L}(t)\text{（}\blkref{claim_open_rectangle_value_at_least_one}\text{）と }0<_{\mathbb{R}}t^{L}Z^{\mathrm{op}}_{a,L}(t))\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a+c,L}(t)
+&&(\because\ \text{第一座標方向の接合の下側（}\blkref{claim_open_rectangle_gluing_inequality}\text{。}b=L\text{）})\\
+&=Z^{\mathrm{op}}_{L,L}(t)
+&&(\because\ a+c=L)
+\end{aligned}`),
+      paragraph(["上からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{L,L}(t)
+&=Z^{\mathrm{op}}_{a+c,L}(t)
+&&(\because\ L=a+c)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,L}(t)Z^{\mathrm{op}}_{c,L}(t)
+&&(\because\ \text{第一座標方向の接合の上側（}\blkref{claim_open_rectangle_gluing_inequality}\text{。}b=L\text{）})\\
+&=Z^{\mathrm{op}}_{a,a+c}(t)Z^{\mathrm{op}}_{c,L}(t)
+&&(\because\ L=a+c)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,a}(t)Z^{\mathrm{op}}_{a,c}(t)Z^{\mathrm{op}}_{c,L}(t)
+&&(\because\ \text{第二座標方向の接合の上側（}\blkref{claim_open_rectangle_gluing_inequality}\text{）に正の }Z^{\mathrm{op}}_{c,L}(t)\text{ を掛ける})\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,a}(t)\,2^{ac}\,Z^{\mathrm{op}}_{c,L}(t)
+&&(\because\ Z^{\mathrm{op}}_{a,c}(t)\le_{\mathbb{R}}2^{ac}\text{（}\blkref{claim_open_rectangle_value_upper_bound_le_one}\text{）に正の }Z^{\mathrm{op}}_{a,a}(t)Z^{\mathrm{op}}_{c,L}(t)\text{ を掛ける})\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{a,a}(t)\,2^{ac}\,2^{cL}
+&&(\because\ Z^{\mathrm{op}}_{c,L}(t)\le_{\mathbb{R}}2^{cL}\text{（}\blkref{claim_open_rectangle_value_upper_bound_le_one}\text{）に正の }Z^{\mathrm{op}}_{a,a}(t)2^{ac}\text{ を掛ける})\\
+&=2^{ac+cL}Z^{\mathrm{op}}_{a,a}(t)
+&&(\because\ \text{冪の指数法則と積の可換性})\\
+&=2^{L^2-a^2}Z^{\mathrm{op}}_{a,a}(t)
+&&(\because\ ac+cL=L^2-a^2\text{（上の準備）})
+\end{aligned}`),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

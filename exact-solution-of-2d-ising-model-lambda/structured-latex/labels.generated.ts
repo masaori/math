@@ -75,6 +75,7 @@ export const ALL_LABELS = [
   "claim_open_rectangle_value_upper_bound_one_le",
   "claim_open_square_block_tiling",
   "claim_open_square_block_tiling_logarithm",
+  "claim_open_square_subsquare_comparison_le_one",
   "claim_orbit_bijection_id_or_shift",
   "claim_orbit_factor_root",
   "claim_orbit_factor_zero",
