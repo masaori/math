@@ -7,6 +7,8 @@
 
 export const ALL_LABELS = [
   "claim_antichain_order_convex",
+  "claim_collision_finite_decidability",
+  "claim_collision_shift",
   "claim_covering_subset_one_step",
   "claim_dependency_transfer",
   "claim_down_set_boundary_outgoing",
@@ -14,6 +16,7 @@ export const ALL_LABELS = [
   "claim_down_set_order_convex",
   "claim_event_order_locally_finite",
   "claim_event_set_cardinality",
+  "claim_eventual_periodicity",
   "claim_finite_propagation_boundary",
   "claim_flip_test_equivalence",
   "claim_global_flip_characterization",
@@ -23,6 +26,7 @@ export const ALL_LABELS = [
   "claim_one_step_equals_covering",
   "claim_one_step_subset_covering",
   "claim_one_step_subset_reachability",
+  "claim_orbit_collision",
   "claim_order_convex_intersection",
   "claim_order_interval_finite",
   "claim_order_iso_not_time_preserving",
@@ -53,12 +57,14 @@ export const ALL_LABELS = [
   "def_finite_stage",
   "def_flip_map",
   "def_global_map",
+  "def_global_map_iterate",
   "def_incomparability",
   "def_local_truth_table",
   "def_locally_finite_partial_order",
   "def_negation_map",
   "def_one_step_boundary",
   "def_one_step_dependency",
+  "def_orbit",
   "def_order_convex_subset",
   "def_order_interval",
   "def_partial_order",
@@ -74,6 +80,7 @@ export const ALL_LABELS = [
   "remark_causal_comparison_scope",
   "remark_causal_set_not_claimed",
   "remark_causal_set_source",
+  "remark_iteration_not_claimed",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
