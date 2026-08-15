@@ -15,6 +15,7 @@ import CellularAutomata.NecSuf.GlobalMapIteration
 import CellularAutomata.NecSuf.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.NecSuf.RedundantNeighbor
+import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
 import CellularAutomata.PeriodicPointCount

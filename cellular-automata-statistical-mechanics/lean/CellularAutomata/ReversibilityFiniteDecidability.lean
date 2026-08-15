@@ -31,8 +31,10 @@
                                                    `instance : Decidable (Injective N f)`,
                                                    `injective_iff_forall_config_minPreperiod_zero`,
                                                    `card_univ_config`（前章）
+必要十分版（NecSuf.ReversibilityFiniteDecidability）からの導出は末尾の節にある。
 -/
 import CellularAutomata.PeriodicPointCount
+import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
 
 namespace CellularAutomata.ReversibilityFiniteDecidability
 
@@ -213,5 +215,65 @@ theorem injective_iff_forall_config_minPreperiod_zero :
   constructor
   · intro h y _; exact h y
   · intro h y; exact h y (Finset.mem_univ _)
+
+/-! ## 必要十分版からの導出 -/
+
+theorem image_eq_necessary_sufficient :
+    image N f =
+      CellularAutomata.NecSuf.ReversibilityFiniteDecidability.image (globalMap N f) := by
+  classical
+  ext z
+  simp only [mem_image, CellularAutomata.NecSuf.ReversibilityFiniteDecidability.mem_image]
+
+omit [Fintype V] [DecidableEq V] in
+theorem injective_iff_necessary_sufficient :
+    Injective N f ↔
+      CellularAutomata.NecSuf.ReversibilityFiniteDecidability.Injective (globalMap N f) :=
+  Iff.rfl
+
+theorem surjective_iff_necessary_sufficient :
+    Surjective N f ↔
+      CellularAutomata.NecSuf.ReversibilityFiniteDecidability.Surjective (globalMap N f) := by
+  unfold Surjective CellularAutomata.NecSuf.ReversibilityFiniteDecidability.Surjective
+  rw [image_eq_necessary_sufficient N f]
+
+theorem injective_iff_surjective_from_necessary_sufficient :
+    Injective N f ↔ Surjective N f := by
+  rw [injective_iff_necessary_sufficient N f, surjective_iff_necessary_sufficient N f]
+  exact CellularAutomata.NecSuf.ReversibilityFiniteDecidability.injective_iff_surjective
+    (globalMap N f)
+
+theorem injective_iff_forall_minPreperiod_zero_from_necessary_sufficient :
+    Injective N f ↔ ∀ y : V → State, minPreperiod N f y = 0 := by
+  rw [injective_iff_necessary_sufficient N f,
+    CellularAutomata.NecSuf.ReversibilityFiniteDecidability.injective_iff_forall_minPreperiod_zero]
+  simp only [CellularAutomata.MinimalPreperiodPeriod.minPreperiod_eq_necessary_sufficient]
+
+theorem injective_iff_forall_isPeriodicPoint_from_necessary_sufficient :
+    Injective N f ↔ ∀ y : V → State, IsPeriodicPoint N f y := by
+  rw [injective_iff_necessary_sufficient N f,
+    CellularAutomata.NecSuf.ReversibilityFiniteDecidability.injective_iff_forall_isPeriodicPoint]
+  simp only [CellularAutomata.PeriodicPointCount.isPeriodicPoint_iff_necessary_sufficient]
+
+theorem injective_iff_forall_pairs_from_necessary_sufficient :
+    Injective N f ↔
+      ∀ q ∈ (Finset.univ : Finset (V → State)) ×ˢ (Finset.univ : Finset (V → State)),
+        globalMap N f q.1 = globalMap N f q.2 → q.1 = q.2 :=
+  CellularAutomata.NecSuf.ReversibilityFiniteDecidability.injective_iff_forall_pairs
+    (globalMap N f)
+
+/-- 具体版の対数 2^{2|V|} は、必要十分版の |X|^2 に |A^V| = 2^{|V|} を代入した特殊化である。 -/
+theorem card_config_pairs_from_necessary_sufficient :
+    ((Finset.univ : Finset (V → State)) ×ˢ (Finset.univ : Finset (V → State))).card =
+      2 ^ (2 * Fintype.card V) := by
+  rw [CellularAutomata.NecSuf.ReversibilityFiniteDecidability.card_pairs, card_config,
+    ← pow_mul, Nat.mul_comm]
+
+theorem injective_iff_forall_config_minPreperiod_zero_from_necessary_sufficient :
+    Injective N f ↔
+      ∀ y ∈ (Finset.univ : Finset (V → State)), minPreperiod N f y = 0 := by
+  rw [injective_iff_necessary_sufficient N f,
+    CellularAutomata.NecSuf.ReversibilityFiniteDecidability.injective_iff_forall_elem_minPreperiod_zero]
+  simp only [CellularAutomata.MinimalPreperiodPeriod.minPreperiod_eq_necessary_sufficient]
 
 end CellularAutomata.ReversibilityFiniteDecidability
