@@ -232,6 +232,18 @@ targets=(
   CellularAutomata.FinitePropagationBoundary.dependencySourceSet_subset_boundary_from_necessary_sufficient
   CellularAutomata.FinitePropagationBoundary.card_dependencySourceSet_le_from_necessary_sufficient
   CellularAutomata.FinitePropagationBoundary.dependencySourceSet_zero_empty_from_necessary_sufficient
+  CellularAutomata.MinimalPreperiodPeriod.exists_periodicityPair
+  CellularAutomata.MinimalPreperiodPeriod.isPeriodicityPair_iff_collision
+  CellularAutomata.MinimalPreperiodPeriod.exists_preperiod
+  CellularAutomata.MinimalPreperiodPeriod.minPreperiod_spec
+  CellularAutomata.MinimalPreperiodPeriod.minPreperiod_le
+  CellularAutomata.MinimalPreperiodPeriod.exists_period_at_minPreperiod
+  CellularAutomata.MinimalPreperiodPeriod.minPeriod_spec
+  CellularAutomata.MinimalPreperiodPeriod.minPeriod_le
+  CellularAutomata.MinimalPreperiodPeriod.one_le_minPeriod
+  CellularAutomata.MinimalPreperiodPeriod.period_multiples
+  CellularAutomata.MinimalPreperiodPeriod.period_descends_to_minPreperiod
+  CellularAutomata.MinimalPreperiodPeriod.minPreperiod_add_minPeriod_le
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
