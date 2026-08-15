@@ -149,10 +149,16 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
 5. tick の最後に PDF を作り直す（cd structured-latex && npm run build:pdf）。
    本文を変えなかった tick でも必ず行う。人間が開いたまま進み具合を見るため。
 6. 1 セクション進めたら止まる。
-7. **Slack へ通知しない**（slack-notification skill も curl も使わない）。tick の完了報告は
-   このスクリプトが公開処理の中で 1 通だけ送る。自分でも送ると 1 tick で 2 通届く。
-   例外は、人間の判断を待って止まるときだけである。
-   通知の本文は台帳の「現在地」の先頭項目なので、そこに何をしたかを 1〜2 文で簡潔に書く。
+7. **最後に、Slack へ完了報告を 1 通だけ送る**（`slack-notification` skill を使う。1 tick 1 通。
+   公開処理の側からは送らないので、送らなければ誰にも届かない）。手順は次のとおり。
+   a. `bash exact-solution-of-2d-ising-model-lambda/scripts/publish-artifact.sh` を自分で実行する
+      （論文の HTML を公開する。この tick でこのプロジェクトを触っていなければ何もせず終わる）。
+   b. `exact-solution-of-2d-ising-model-lambda/logs/publish-artifact.log` の末尾の
+      「OK: 公開した（版 …）→ <URL>」から URL を読む（**URL を決め打ちしない**。
+      公開先の持ち主が変わって決め打ちの URL が 404 になった実例がある）。
+      その行が今回の版でなければ（＝公開が走っていなければ）URL は添えなくてよい。
+   c. 本文は「何をしたか」を 1〜2 文で具体的に書き、末尾に URL を置く。長く書かない。
+      台帳の文章をそのまま貼らない（読まれない）。
 
 締切について。この tick は @HARD@ に強制終了される（書きかけでも落ちる）。
 そこで @SOFT@ を「まとめに入る締切」とする。作業の区切りごとに `date` で現在時刻を
@@ -266,7 +272,9 @@ else
   record_leftover "正常終了したが未コミットの成果が残った"
 fi
 
-# 毎 tick の成果を HTML と PDF で公開する（ユーザー指示）。失敗しても tick の結果は変えない。
+# 毎 tick の成果を HTML で公開する（ユーザー指示）。tick 自身が最後に呼んで URL を Slack へ
+# 添えるので、ここでの呼び出しは取りこぼしの保険である（既に公開済みなら中で何もせず終わる）。
+# 失敗しても tick の結果は変えない。
 bash "$PROJECT_DIR/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 || log "    アーティファクトの公開に失敗した"
 
 exit "$status"
