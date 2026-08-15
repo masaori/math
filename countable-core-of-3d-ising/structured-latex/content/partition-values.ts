@@ -1224,7 +1224,7 @@ B(X)&=X(X+1)
       displayMath(
         String.raw`\mathcal Z_L((X_e)_{e\in E_L})
 =\sum_{\sigma:V_L\to\{-1,1\}}\prod_{\substack{e\in E_L\\
-\sigma(\operatorname{src}_L(e))\ne\sigma(\operatorname{dst}_L(e))}}X_e
+\sigma(\partial_0 e)\ne\sigma(\partial_1 e)}}X_e
 \ \in\ \mathbb Z[(X_e)_{e\in E_L}]`,
       ),
       paragraph([
