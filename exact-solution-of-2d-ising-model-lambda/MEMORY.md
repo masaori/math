@@ -4,6 +4,18 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 293 は、レビューで前 tick の「開境界長方形の値は 1 以上である」の本文・
+SageMath・Lean 具体版・必要十分版・導出版が一致することを確認した（修正無し）。そのあと
+「開境界長方形の値の配位数による上からの評価」を四層まで完成させた。$0<t\le1$ では各配位の項を
+$1$ で抑えて $Z^{\mathrm{op}}_{a,b}(t)\le2^{ab}$、$1\le t$ では
+$b^{\mathrm{op}}_{a,b}(\sigma)\le2ab$ から
+$Z^{\mathrm{op}}_{a,b}(t)\le2^{ab}t^{2ab}$ を得た。SageMath
+`open-rectangle-value-upper-bound` は 8 形状と二場合の有理点 64 組を `QQ` で厳密に検査した。
+Lean は `ThermodynamicLimit/OpenRectangleValueUpperBound.lean` の具体版二本と、既存の必要十分版
+`sum_pow_le_uniform_bound_necSuf` からの導出版二本を持つ。式変形統一では姉妹側
+「$\check Z,\check Y$ についての $\cosh,\sinh$ の展開係数への変換」の (h1.y) で、商と積の冪の展開と
+$2^{-n}2^n=1$ を二行へ分けた。次の本文は「開境界正方形と部分正方形の値の比較」。
+
 2026-08-15 の tick 292 は、レビューで前 tick の「倍数の辺での下限への任意近接（$0<t\le1$）」の
 本文・SageMath・Lean が一致することを確認し、本文末尾「この先に書くこと」に残っていた済んだ項目を消して
 push した。そのあと「倍数でない辺への拡張」を六つのセクション（開境界長方形の値は 1 以上／値の配位数による

@@ -38860,6 +38860,93 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
   },
 
   {
+    id: "thermodynamic_limit_claim_open_rectangle_value_upper_bound_le_one",
+    kind: "claim",
+    title: { text: "開境界長方形の値の配位数による上からの評価（t は 1 以下）" },
+    labels: ["claim_open_rectangle_value_upper_bound_le_one"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した有限和を実数の順序で比較するため。" +
+      "有限個の項の冪と和だけを使い、実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-rectangle-value-upper-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_le_uniform_bound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
+        " と、正の実数 ", math(String.raw`t\in\mathbb{R}`), "、",
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`), " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(t)\le_{\mathbb{R}}2^{ab}`),
+    ],
+    proof: [
+      paragraph([
+        "各 ", math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`), " について、",
+        math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)\in\mathbb{N}`), " であり、冪の単調性から ",
+        math(String.raw`t^{b^{\mathrm{op}}_{a,b}(\sigma)}\le_{\mathbb{R}}1`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a,b}(t)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ \blkref{def_open_rectangle_partition_value})\\
+&\le_{\mathbb{R}}\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}1
+&&(\because\ \text{各項について }t^{b^{\mathrm{op}}_{a,b}(\sigma)}\le_{\mathbb{R}}1)\\
+&=|\Sigma^{\mathrm{op}}_{a,b}|
+&&(\because\ \text{有限集合上の定数 }1\text{ の和})\\
+&=2^{ab}
+&&(\because\ \text{各 }ab\text{ 個の頂点でスピンを独立に二通り選ぶ。}\blkref{def_open_rectangle_configuration})
+\end{aligned}`),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_rectangle_value_upper_bound_one_le",
+    kind: "claim",
+    title: { text: "開境界長方形の値の配位数による上からの評価（t は 1 以上）" },
+    labels: ["claim_open_rectangle_value_upper_bound_one_le"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した有限和を実数の順序で比較するため。" +
+      "有限個の項の冪と和だけを使い、実対数・完備性・極限は使わない。",
+    verification: ["sagemath/check/open-rectangle-value-upper-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_mul_power_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_le_uniform_bound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_configurationCount_mul_power_of_one_le_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
+        " と、実数 ", math(String.raw`t\in\mathbb{R}`), "、", math(String.raw`1\le_{\mathbb{R}}t`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(t)\le_{\mathbb{R}}2^{ab}t^{2ab}`),
+    ],
+    proof: [
+      paragraph([
+        "各 ", math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`), " について ",
+        math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)\le2ab`), " である。実際、",
+        ref("def_open_rectangle_broken_bond_count"), " により破れボンド数は辺数以下であり、",
+        math(String.raw`2ab-a-b\le2ab`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a,b}(t)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ \blkref{def_open_rectangle_partition_value})\\
+&\le_{\mathbb{R}}\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}t^{2ab}
+&&(\because\ 1\le_{\mathbb{R}}t\text{ と }b^{\mathrm{op}}_{a,b}(\sigma)\le2ab\text{ による指数の単調性})\\
+&=|\Sigma^{\mathrm{op}}_{a,b}|t^{2ab}
+&&(\because\ \text{有限集合上の定数の和})\\
+&=2^{ab}t^{2ab}
+&&(\because\ \text{各 }ab\text{ 個の頂点でスピンを独立に二通り選ぶ。}\blkref{def_open_rectangle_configuration})
+\end{aligned}`),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
