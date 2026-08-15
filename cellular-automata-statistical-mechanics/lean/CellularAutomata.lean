@@ -6,6 +6,7 @@ import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
 import CellularAutomata.NecSuf.EssentialDependency
 import CellularAutomata.NecSuf.CausalStructureComparison
+import CellularAutomata.NecSuf.CausalSetPrimaryLiterature
 import CellularAutomata.NecSuf.DependencyOrderSubstructures
 import CellularAutomata.NecSuf.FinitePropagationBoundary
 import CellularAutomata.NecSuf.RedundantNeighbor

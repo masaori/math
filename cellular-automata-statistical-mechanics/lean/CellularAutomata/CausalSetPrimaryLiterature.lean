@@ -16,6 +16,7 @@
   claim_event_order_locally_finite（局所有限部分順序） `eventOrder_locally_finite`
 -/
 import CellularAutomata.CausalStructureComparison
+import CellularAutomata.NecSuf.CausalSetPrimaryLiterature
 
 namespace CellularAutomata.CausalSetPrimaryLiterature
 
@@ -72,5 +73,49 @@ theorem eventOrder_locally_finite (τ : ℕ) :
   intro a b
   rw [literatureInterval_eq_orderInterval N f τ a b]
   exact orderInterval_finite N f τ a b
+
+/-! ## 必要十分版からの導出
+
+以下は、上の具体版の定義・定理が必要十分版
+(`NecSuf.CausalSetPrimaryLiterature`) をイベント集合と反射的到達可能関係へ
+特殊化したものであることの導出。 -/
+
+omit [Fintype V] [DecidableEq V] in
+/-- 具体版の一次文献の区間は、必要十分版を有限イベント集合へ
+    特殊化したものである。 -/
+theorem literatureInterval_eq_necessary_sufficient (X : Finset (ℕ × V))
+    (R : Set ((ℕ × V) × (ℕ × V))) (x y : ℕ × V) :
+    literatureInterval X R x y =
+      CellularAutomata.NecSuf.CausalSetPrimaryLiterature.literatureInterval
+        (↑X : Set (ℕ × V)) R x y := rfl
+
+omit [Fintype V] [DecidableEq V] in
+/-- 有限集合上の区間の有限性が、必要十分版の「台集合の有限性だけ」
+    を使う定理から得られること。 -/
+theorem literatureInterval_finite_of_finset_from_necessary_sufficient
+    (X : Finset (ℕ × V)) (R : Set ((ℕ × V) × (ℕ × V))) (x y : ℕ × V) :
+    (literatureInterval X R x y).Finite := by
+  rw [literatureInterval_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.CausalSetPrimaryLiterature.literatureInterval_finite
+    (↑X : Set (ℕ × V)) R (Finset.finite_toSet X) x y
+
+omit [Fintype V] [DecidableEq V] in
+/-- 具体版の局所有限性述語は、必要十分版を有限集合の強制に
+    特殊化したものである。 -/
+theorem isLocallyFinitePartialOrderOn_iff_necessary_sufficient
+    (X : Finset (ℕ × V)) (R : Set ((ℕ × V) × (ℕ × V))) :
+    IsLocallyFinitePartialOrderOn X R ↔
+      CellularAutomata.NecSuf.CausalSetPrimaryLiterature.IsLocallyFinitePartialOrderOn
+        (↑X : Set (ℕ × V)) R := Iff.rfl
+
+/-- `(E_τ, ⪯_τ)` の局所有限部分順序性が、必要十分版へ
+    イベント集合の有限性と既証明の部分順序性を渡して得られること。 -/
+theorem eventOrder_locally_finite_from_necessary_sufficient (τ : ℕ) :
+    IsLocallyFinitePartialOrderOn (eventSet (V := V) τ) (ReflReachable N f τ) := by
+  apply (isLocallyFinitePartialOrderOn_iff_necessary_sufficient
+    (V := V) (eventSet (V := V) τ) (ReflReachable N f τ)).mpr
+  exact CellularAutomata.NecSuf.CausalSetPrimaryLiterature.locallyFinitePartialOrder_of_finite
+    (↑(eventSet (V := V) τ) : Set (ℕ × V)) (ReflReachable N f τ)
+    (Finset.finite_toSet _) (reflReachable_partial_order_from_necessary_sufficient N f τ)
 
 end CellularAutomata.CausalSetPrimaryLiterature
