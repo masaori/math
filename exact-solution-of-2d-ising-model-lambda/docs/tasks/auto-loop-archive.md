@@ -3,6 +3,41 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-15（tick 300）の記録
+
+### 現在地
+
+- **2026-08-15 の tick 300 は、「対数順序群の順序」を「定義と線形順序性」と「加法単調性」へ割り、
+  先頭を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** $\lambda\le_\Lambda\mu$ を
+  $\operatorname{rat}_\Lambda(\lambda)\le\operatorname{rat}_\Lambda(\mu)$（有理数の比較）で定め、反射・推移・
+  全順序性は $\mathbb Q$ の同名の性質へ落とし、反対称律だけ対数で $\Lambda$ の等号へ戻した。判定は有理数の比較なので
+  決定可能。レビューでは前 tick の全射性の四層を突き合わせて修正無し。式変形統一では姉妹側「$A(\theta)=B_1(\theta)B_2B_1(\theta)$」の
+  (1,2) 成分で、三つに切れていた鎖を補助等式を先に置いて一続きにした。次は「対数順序群の順序の加法単調性」。
+
+
+
+### 前進の記録
+
+- 2026-08-15（tick 300）: **割り直し**: 「対数順序群の順序」は、全単射 $\operatorname{rat}_\Lambda$ で
+  $\mathbb Q$ の順序を引き戻す論法と、$\operatorname{rat}_\Lambda$ が積を保つことから加法単調性を出す論法が
+  独立なので二つへ分けた。先頭の `def_log_order_group_order`・`claim_log_order_group_linear_order` を章
+  「有限系の自由エントロピー」の全射性の直後に置き四層で閉じた。`def_log_order_group` の「順序はまだ定めない」の
+  段落を新定義への参照へ直した。SageMath `log-order-group-linear-order` は 125 ベクトルの全対・全三つ組を `QQ` で
+  厳密に。Lean 具体版 `FreeEntropy/LogOrderGroupOrder.lean`（`logOrderLE`、決定可能性、`logOrderLE_refl/trans/
+  antisymm/total`）、必要十分版 `pullback_linear_order_necSuf`（線形順序への写像と左逆写像だけ）、導出版。
+  sorry 検査 1090 件。式変形統一では姉妹側 `evensectorT_009_claim_factorization_A_theta` の Step 4（$P_{12}$）で、
+  括弧内の補助等式を鎖の前へ出し、日本語で三つに切れていた鎖を一続きにし、補助等式の代入と $2ab=s_1$ を別行へ分けた。
+
+
+
+### レビュー記録
+
+- 2026-08-15（tick 300）: 前 tick の「正の有理数の対数は全射である」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせた。素数自身の対数、整数冪（正・負）、有限台の帰納が同じ順で対応し、
+  対象ラベル・入口 import・sorry 検査登録も揃っているため修正は無い。
+
+
+
 ## 2026-08-15（tick 299）の記録
 
 ### 現在地

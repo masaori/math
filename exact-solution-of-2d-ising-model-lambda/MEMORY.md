@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 305 は、前 tick の「有理係数の対数順序群の元は共通分母を持つ」の四層を突き合わせて一致を確認し
+（既約分数表示 $\operatorname{num}/\operatorname{den}$ は本文初出で、対数の定義の $a/b$ 表示と衝突しない）、本文末尾
+「この先に書くこと」の済んだ「共通分母の存在」を消して先に push した。そのあと「共通分母の正整数倍は共通分母である」を
+四層まで完成させた。`claim_common_denominator_multiple`（`claim_common_denominator_exists` の直後）で、$N$ が
+$\lambda\in\Lambda_{\mathbb Q}$ の共通分母（証人 $\lambda_N$）で $k\ge1$ なら $kN$ も共通分母で証人は $k\lambda_N$
+（$\lambda_{kN}=k\lambda_N$）を、$(kN)\cdot\lambda=k\cdot(N\cdot\lambda)=k\cdot\iota(\lambda_N)=\iota(k\lambda_N)$ の三段で
+示し、`claim_common_common_denominator_exists` で $N_\lambda N_\mu$ が $\lambda$ と $\mu$ の両方の共通分母であることを
+前者の二度の適用と $\mathbb N$ の積の可換性で示した。SageMath `common-denominator-multiple`（素数 $2,3,5$、係数 8 種、
+512 ベクトル、$N\le12$・$k\le4$ の組 8836 件、二元 262144 組、`ZZ`/`QQ`）。Lean 具体版
+`ThermodynamicLimit/CommonDenominatorMultiple.lean`（`commonDenominator_mul`、`commonCommonDenominator_exists`）、
+必要十分版 `NecSuf/ThermodynamicLimit/CommonDenominatorMultiple.lean` の `multiple_clears_necSuf`（倍の結合則・積を保つ
+写像・倍と $\iota$ の交換だけ）、導出版（sorry 検査 1114 件）。次は「有理係数の対数順序群の順序の定義」
+（$\lambda\le\mu:\iff$ 共通の共通分母 $N$ で $\lambda_N\le_\Lambda\mu_N$。well-defined 性は
+`claim_common_common_denominator_exists` と `claim_common_denominator_order_independent`。Lean は
+`∃ N lN mN, IsCommonDenominator N l lN ∧ IsCommonDenominator N m mN ∧ logOrderLE lN mN` の形か、
+$N_\lambda N_\mu$ を固定した定義にして独立性で言い換える）。
+
 2026-08-16 の tick 304 は、前 tick の「共通分母の定義と順序判定の共通分母独立性」の四層を突き合わせて一致を確認し、
 `def_rational_log_order_group` 末尾の順序の予告（「次の定義で正の有理数の比較から移す」）を「共通分母を通して
 $\Lambda$ の順序から移す」へ直して先に push した。そのあと「有理係数の対数順序群の元の共通分母の存在」を四層まで
@@ -3275,10 +3292,11 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の元は共通分母を持つ」（`claim_common_denominator_exists`）の本文・SageMath
-  `common-denominator-exists`・Lean（`CommonDenominatorExists.lean` 三系統）を突き合わせる。とくに既約分数表示の
-  導入が本文の他の箇所（`claim_rational_log_injective` の既約表示）と記法で衝突していないかを見る。
-- **次に進めるセクションは「共通分母の正整数倍は共通分母である」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「共通分母の正整数倍は共通分母である」（`claim_common_denominator_multiple`）と「二元は共通の共通分母を
+  持つ」（`claim_common_common_denominator_exists`）の本文・SageMath `common-denominator-multiple`・Lean
+  （`CommonDenominatorMultiple.lean` 三系統）を突き合わせる。とくに後者が「1 ブロック 1 主張」（$\lambda$ の共通分母
+  かつ $\mu$ の共通分母）に照らして一つの存在主張として妥当かを見る。
+- **次に進めるセクションは「有理係数の対数順序群の順序の定義」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
   到達点は台帳の表にある。
