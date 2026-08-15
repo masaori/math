@@ -12,6 +12,7 @@
 | [`redundant-neighbor-independence/`](redundant-neighbor-independence/) | 冗長拡大による追加元への非依存、依存の移送、本質的依存台の不変性 | 実行結果は各 `overview.md` を正本とする |
 | [`time-expansion-dependency/`](time-expansion-dependency/) | 大域写像の一点反転、イベント集合、一段依存関係、時刻増加 | 実行結果は各 `overview.md` を正本とする |
 | [`finite-propagation-boundary/`](finite-propagation-boundary/) | 経路の時刻差、伝播球、依存元集合の有限伝播境界 | 実行結果は各 `overview.md` を正本とする |
+| [`inverse-map-locality-exploration/`](inverse-map-locality-exploration/) | 探索（未昇格）: 単射な大域写像の逆写像の本質的依存台と順写像の依存台の比較 | **反例あり**（$L=5$ 規則 45 で逆写像の依存台が舞台全体）。詳細は `overview.md` |
 
 ## 予定されている検算（未着手）
 
