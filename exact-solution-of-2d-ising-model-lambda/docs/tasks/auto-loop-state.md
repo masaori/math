@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-15 の tick 291 は、「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」を本文・
+  SageMath・Lean（具体版・必要十分版・導出版）まで完成させ、セクションを閉じた。** 下限 $v$ と
+  $\varepsilon>0$ に対し、$v+\varepsilon$ が下界でないことから一辺 $a$ を取り、
+  $\psi^{\mathrm{op}}_{ka}\le\psi^{\mathrm{op}}_a$ と下界性で
+  $v\le\psi^{\mathrm{op}}_{ka}<v+\varepsilon$ を全ての $k\ge1$ について得た。レビューでは前 tick の
+  下界・下限の本文・SageMath・Lean 三本が一致し、修正は無い。式変形統一では姉妹側
+  「$\check Z,\check Y$ の $n$ 重交換子」の (h2.z) の二つの帰納段階で、スカラー整理と冪の指数法則を
+  別の行へ分けた。次は「倍数でない辺への拡張」。
+
 - **2026-08-15 の tick 290 は、「開境界密度の下からの評価と下限の存在」の Lean（具体版・必要十分版・
   導出版）を完成させ、本文へ `lean` 宣言を付けてセクションを閉じた。具体版は人手証明と同じ順
   （$2t^{E_L}\le2^{L^2}t^{E_L}=\sum_\tau t^{E_L}\le Z^{\mathrm{op}}_{L,L}(t)$、
@@ -40,18 +49,7 @@
   前 tick のブロック敷き詰め評価の本文・SageMath・Lean 三本が一致し、修正は無い。**
   一様上界から値集合の上限を得て、姉妹側の式変形を一件統一した。次は「倍数の辺での上限への任意近接」。
 
-- **2026-08-15 の tick 286 は、「ブロック敷き詰め評価の対数化」の Lean（具体版・必要十分版・
-  導出版）を完成させ、本文へ `lean` 宣言を付けてセクションを閉じた。レビューでは前 tick の証明で
-  実対数の乗法加法性・単調性の根拠にラベル参照が無かったので `\blkref{remark_real_logarithm}` を
-  付けて前進前に push した。**
-  具体版は人手証明と同じ順（ブロック評価→実対数の単調性→積と冪の対数の展開→正の係数の乗法→
-  有理数の約分）を辿り、必要十分版 `scaled_map_twoSided_bounds_necSuf` は順序を保つ写像・像の
-  二項分解・尺度係数の相殺だけを残した（$1\le t$ の場合は順序の向きを反転して同じ定理で得る）。
-  sorry 検査 1032 件、すべて非依存。式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」の
-  (h1.y) の基底段階を、(h1.z) と同じ二段の等号鎖と行末根拠へ開いた。次は「開境界密度の上からの
-  評価と値集合の上限の存在」。
-
-（これより古い 245 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 246 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -65,13 +63,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 5 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 22 セクション
+- 熱力学極限: 23 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 倍数の辺での下限への任意近接（$0<t\le1$ の場合） | todo | 下限に近い一辺 $a$ を取り、対数化した評価の $\psi^{\mathrm{op}}_{ka}\le\psi^{\mathrm{op}}_a$ で倍数列を下限の近くへ押し込む（$1\le t$ の上限版と対称） |
 | 熱力学極限 | 倍数でない辺への拡張 | todo | $ka\le L<(k+1)a$ の正方形を接合不等式で挟み、極限の言明を閉じる |
 | 熱力学極限 | 周期境界自由エネルギー密度への移送 | todo | 周期境界と開境界の境界評価から導く |
 | 熱力学極限 | 零点密度 | todo | |
@@ -81,6 +78,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-15（tick 291）: `claim_open_free_energy_density_infimum_approximation_multiples_le_one` を
+  記述した。SageMath は倍数列の単調性を有理数の整数冪で厳密に 16 件、有限モデルを 15 件検査した。
+  Lean 具体版は反例の一辺を取る三段を人手証明と同じ順で辿り、必要十分版
+  `rangeValue_infimum_approximation_multiples_necSuf` は線形順序・下限・倍数写像に沿う単調性だけを
+  残した。sorry 検査 1052 件。式変形統一では姉妹側 (h2.z) の二つの帰納段階を一ステップ一定理へ開いた。
 
 - 2026-08-15（tick 290）: `OpenFreeEnergyDensityLowerBound.lean` に辺数 `openSquareEdgeCount`、
   値の二段の評価 `two_mul_pow_edgeCount_le_openPartitionValue`・`pow_twoSquare_le_two_mul_pow_edgeCount`、
@@ -118,17 +121,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」の (h2.z) の基底 $E_0$ を、
   恒等写像と零乗を根拠にした二段の等号鎖へ開いた。
 
-- 2026-08-15（tick 286）: `OpenSquareBlockTilingLogarithm.lean` に補正項 `blockTilingCorrection`、
-  一辺 $ka$ の `squareSide`、下側・上側の対数の展開補題、係数の約分補題二本と、二場合の定理
-  `openSquareFreeEnergyDensity_blockTiling_bounds_of_le_one/of_one_le` を人手証明と 1 対 1 に
-  実装した。必要十分版 `scaled_map_twoSided_bounds_necSuf` は「順序を保つ写像・像の二項分解・
-  尺度作用の分配と係数の相殺」だけを仮定し（$A$ の加法の可換性も $K$ の乗法も不要）、導出版
-  二本で特殊化を示した。本文へ `lean` 宣言を付け、SageMath 概要の「Lean 未着手」を実態へ直した。
-  sorry 検査 1032 件。式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」
-  （`014_even_sector_T_action`）の (h1.y) の基底段階 $D_0$ を、散文中の行内等式から
-  恒等写像と零乗を根拠にした二段の等号鎖へ開いた（(h1.z) の $C_0$ と同じ形）。
-
-（これより古い 256 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 257 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -146,6 +139,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+
+- 2026-08-15（tick 291）: 前 tick の「開境界密度の下からの評価と下限の存在」の本文・SageMath・
+  Lean 具体版・必要十分版・導出版を突き合わせた。値の二段評価、対数側の係数相殺、値集合の符号反転に
+  よる下限構成、対象ラベルと sorry 検査への登録が一致しており、修正は無い。
 
 - 2026-08-15（tick 290）: 前 tick の「開境界密度の下からの評価と下限の存在」の本文・SageMath を
   突き合わせた。数学内容は一致した。下限の存在の証明が主張の $\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log t$
@@ -170,12 +167,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   具体版・必要十分版・導出版を突き合わせた。二場合の不等式の向き、補正係数、対数展開、
   有理係数の約分が一致しており、修正は無い。
 
-- 2026-08-15（tick 286）: 前 tick の「ブロック敷き詰め評価の対数化」の本文・SageMath を突き合わせた。
-  数学内容は一致したが、証明中で実対数の乗法加法性・狭義単調性を根拠に挙げた 4 箇所に
-  `\blkref{remark_real_logarithm}` が無く、既存の証明の書き方（性質名＋ラベル参照）と食い違って
-  いたので付けた（散文側にも参照を足した）。
-
-（これより古い 277 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 278 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 
