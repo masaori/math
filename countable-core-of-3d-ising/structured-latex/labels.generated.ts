@@ -10,6 +10,7 @@ export const ALL_LABELS = [
   "claim_discriminant_does_not_determine_polynomial",
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
+  "claim_factorization_type_determines_root_minimal_degrees",
   "claim_galois_hyperoctahedral_bound",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
