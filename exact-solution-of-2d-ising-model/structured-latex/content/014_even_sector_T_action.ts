@@ -636,12 +636,18 @@ D_{n+1}
         math(String.raw`e^{\pm i\tilde\theta}`),
         " が現れないので位相因子は出てこない。基底段階（",
         math(String.raw`n=0`),
-        "、偶数）は ",
-        math(String.raw`E_0 = \check{Z}_\mu`),
-        " と ",
-        math(String.raw`(-1)^{0}(2K_2^*)^{0}\check{Z}_\mu = \check{Z}_\mu`),
-        " の一致による。",
+        "、偶数）では、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+E_0
+&= \check{Z}_\mu
+   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&= (-1)^0(2K_2^*)^0\check{Z}_\mu
+   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_2^*)^0=1)
+\end{aligned}`,
+      ),
+      paragraph(["となり、偶数側の右辺と一致する。"]),
       paragraph([
         "帰納段階 1（",
         math(String.raw`n`),

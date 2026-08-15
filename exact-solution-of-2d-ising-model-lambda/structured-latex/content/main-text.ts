@@ -38315,6 +38315,144 @@ t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k
   },
 
   {
+    id: "thermodynamic_limit_claim_open_free_energy_density_upper_bound",
+    kind: "claim",
+    title: { text: "開境界密度の上からの評価" },
+    labels: ["claim_open_free_energy_density_upper_bound"],
+    habitat: "R",
+    realEscape:
+      "開境界自由エネルギー密度を実数の順序で一様に上から評価するため。" +
+      "実対数と順序体の性質を使うが、完備性・極限は使わない。",
+    verification: ["sagemath/check/open-free-energy-density-supremum"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_le_upperBound",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_le_upperBound",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_le_upperBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "各 ", math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
+        " と、各正の実数 ", math(String.raw`t\in\mathbb{R}`), "、",
+        math(String.raw`0<_{\mathbb{R}}t`), " に対し、",
+      ]),
+      displayMath(String.raw`\psi^{\mathrm{op}}_L(t)
+\le_{\mathbb{R}}
+\log_{\mathbb{R}}\!\bigl(\iota_{\mathbb{Q}\to\mathbb{R}}(2)\bigr)
++\iota_{\mathbb{Q}\to\mathbb{R}}(2)\cdot\log_{\mathbb{R}}(1+t)`),
+      paragraph([
+        "である。右辺は ", math(String.raw`L`), " に依らない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "開境界正方形の辺数は ",
+        math(String.raw`2L(L-1)\le 2L^2`),
+        " なので、任意の開境界配位 ", math(String.raw`\tau`), " について ",
+        math(String.raw`b^{\mathrm{op}}_{L,L}(\tau)\le2L^2`),
+        " である（", ref("def_open_rectangle_broken_bond_count"), "）。また配位数は ",
+        math(String.raw`2^{L^2}`), " である（", ref("def_open_rectangle_configuration"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{L,L}(t)
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{b^{\mathrm{op}}_{L,L}(\tau)}
+&&\bigl(\because\ \blkref{def_open_rectangle_partition_value}\bigr)\\
+&\le_{\mathbb{R}}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}(1+t)^{b^{\mathrm{op}}_{L,L}(\tau)}
+&&\bigl(\because\ 0<t\le 1+t\text{ と、正の底の自然数冪の単調性}\bigr)\\
+&\le_{\mathbb{R}}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}(1+t)^{2L^2}
+&&\bigl(\because\ 1\le 1+t\text{ と }b^{\mathrm{op}}_{L,L}(\tau)\le2L^2\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(2^{L^2}\right)(1+t)^{2L^2}
+&&\bigl(\because\ |\Sigma^{\mathrm{op}}_{L,L}|=2^{L^2}\bigr).
+\end{aligned}`),
+      paragraph([
+        "両辺は正なので、実対数の弱い単調性（", ref("remark_real_logarithm"),
+        "）を適用できる。正の係数 ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}(1/L^2)`),
+        " を掛けた後の式変形を、一行ずつ書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\psi^{\mathrm{op}}_L(t)
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\cdot\log_{\mathbb{R}}\!\left(Z^{\mathrm{op}}_{L,L}(t)\right)
+&&\bigl(\because\ \blkref{def_open_square_free_energy_density}\bigr)\\
+&\le_{\mathbb{R}}\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\cdot\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(2^{L^2}\right)(1+t)^{2L^2}\right)
+&&\bigl(\because\ \text{上の値の評価、実対数の単調性（}\blkref{remark_real_logarithm}\text{）、正の元を掛けることと順序の両立（}\blkref{remark_real_field_escape}\text{）}\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\cdot\left(\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(2^{L^2}\right)\right)+\log_{\mathbb{R}}\!\left((1+t)^{2L^2}\right)\right)
+&&\bigl(\because\ \text{実対数は乗法を加法へ移す（}\blkref{remark_real_logarithm}\text{）}\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\cdot\left(\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}(2)^{L^2}\right)+\log_{\mathbb{R}}\!\left((1+t)^{2L^2}\right)\right)
+&&\bigl(\because\ \iota_{\mathbb{Q}\to\mathbb{R}}\text{ は自然数冪を保つ（}\blkref{remark_real_field_escape}\text{）}\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\cdot\left(\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(L^2\right)\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}(2)\right)+\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(2L^2\right)\log_{\mathbb{R}}(1+t)\right)
+&&\bigl(\because\ \blkref{claim_real_log_natural_power}\text{ を二箇所へ適用}\bigr)\\
+&=\left(\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(L^2\right)\right)\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}(2)\right)
++\left(\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}\right)\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(2L^2\right)\right)\log_{\mathbb{R}}(1+t)
+&&\bigl(\because\ \text{分配則と乗法の結合則（}\blkref{remark_real_field_escape}\text{）}\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}L^2\right)\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}(2)\right)
++\iota_{\mathbb{Q}\to\mathbb{R}}\!\left(\tfrac{1}{L^2}2L^2\right)\log_{\mathbb{R}}(1+t)
+&&\bigl(\because\ \iota_{\mathbb{Q}\to\mathbb{R}}\text{ は乗法を保つ（}\blkref{remark_real_field_escape}\text{）}\bigr)\\
+&=\iota_{\mathbb{Q}\to\mathbb{R}}(1)\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}(2)\right)+\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log_{\mathbb{R}}(1+t)
+&&\bigl(\because\ \tfrac{1}{L^2}L^2=1\text{ と }\tfrac{1}{L^2}2L^2=2\text{（}\mathbb{Q}\text{）}\bigr)\\
+&=\log_{\mathbb{R}}\!\left(\iota_{\mathbb{Q}\to\mathbb{R}}(2)\right)+\iota_{\mathbb{Q}\to\mathbb{R}}(2)\log_{\mathbb{R}}(1+t)
+&&\bigl(\because\ \iota_{\mathbb{Q}\to\mathbb{R}}(1)=1\text{ と乗法単位元（}\blkref{remark_real_field_escape}\text{）}\bigr).
+\end{aligned}`),
+      paragraph(["以上で主張を得る。右辺には ", math(String.raw`L`), " が現れない。"]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_def_open_free_energy_density_value_set",
+    kind: "definition",
+    title: { text: "開境界自由エネルギー密度の値集合" },
+    labels: ["def_open_free_energy_density_value_set"],
+    habitat: "R",
+    realEscape: "開境界自由エネルギー密度の値を集めた実数の部分集合を定義するため。完備性はまだ使わない。",
+    verification: ["sagemath/check/open-free-energy-density-supremum"],
+    lean: ["Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet"],
+    statement: [
+      paragraph(["正の実数 ", math(String.raw`t`), " を固定し、"]),
+      displayMath(String.raw`\Psi^{\mathrm{op}}_t:=\bigl\{\,y\in\mathbb{R}\ \bigm|\ \text{ある }L\in\mathbb{N}\text{、}L\ge1\text{ が存在して }y=\psi^{\mathrm{op}}_L(t)\,\bigr\}`),
+      paragraph([
+        "と定める。", math(String.raw`\Psi^{\mathrm{op}}_t`),
+        " はこの集合だけを指す（", ref("def_open_square_free_energy_density"), "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_open_free_energy_density_supremum_exists",
+    kind: "claim",
+    title: { text: "開境界自由エネルギー密度の値集合の上限の存在" },
+    labels: ["claim_open_free_energy_density_supremum_exists"],
+    habitat: "R",
+    realEscape:
+      "開境界自由エネルギー密度の空でなく上に有界な値集合へ実数の完備性を適用するため。",
+    verification: ["sagemath/check/open-free-energy-density-supremum"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_supremum",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.indexedValueSet_has_supremum_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_supremum_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "各正の実数 ", math(String.raw`t`), " に対し、集合 ",
+        math(String.raw`\Psi^{\mathrm{op}}_t`), "（",
+        ref("def_open_free_energy_density_value_set"), "）は上限 ",
+        math(String.raw`\sup\Psi^{\mathrm{op}}_t\in\mathbb{R}`),
+        "（", ref("def_real_set_supremum"), "）を持つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "集合は ", math(String.raw`\psi^{\mathrm{op}}_1(t)`),
+        " を含むので空でない（", ref("def_open_free_energy_density_value_set"), "）。",
+        "また任意の元は、ある ", math(String.raw`L\ge1`), " に対する ",
+        math(String.raw`\psi^{\mathrm{op}}_L(t)`), " であり、開境界密度の上からの評価（",
+        ref("claim_open_free_energy_density_upper_bound"),
+        "）により同じ実数で上から抑えられる。したがって集合は上に有界である。",
+        "実数の完備性（", ref("remark_real_completeness_escape"),
+        "）をこの空でなく上に有界な集合へ一度適用すると、上限が存在する。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -38331,7 +38469,7 @@ t^{(k-1)(ka)}\left(t^{(k-1)a}P^k\right)^k
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 開境界自由エネルギー密度の極限（ブロック評価の対数化、上限の存在、上限への任意近接、倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
+          "「熱力学極限」の残り: 開境界自由エネルギー密度の極限（上限への任意近接、倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
         ],
         [
           todo("未着手"),
