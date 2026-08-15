@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 286 は、レビューで前 tick の「ブロック敷き詰め評価の対数化」の証明中、
+実対数の乗法加法性・狭義単調性の根拠 4 箇所に `\blkref{remark_real_logarithm}` が無かったので付けて
+push した。そのあと同セクションの Lean を完成させ、セクションを閉じた。具体版
+`lean/Ising2DLambda/ThermodynamicLimit/OpenSquareBlockTilingLogarithm.lean` は、補正項
+`blockTilingCorrection`（$\delta_{a,k}(t)$）と一辺 $ka$ の `squareSide` を置き、下側・上側の対数の
+展開補題、係数の約分補題二本（有理数の等式。`field_simp` で閉じる）、二場合の定理
+`openSquareFreeEnergyDensity_blockTiling_bounds_of_le_one/of_one_le` を人手証明と同じ順
+（ブロック評価→実対数の単調性→積と冪の対数の展開→正の係数の乗法→約分）で辿った。必要十分版
+`scaled_map_twoSided_bounds_necSuf` は順序を保つ写像・像の二項分解・尺度作用の分配と係数の相殺
+だけを仮定し（$A$ の加法の可換性も $K$ の乗法も不要）、$1\le t$ の場合は順序の向きを反転して
+同じ定理から導いた。本文へ `lean` 宣言を付け、SageMath 概要の「Lean 未着手」を実態へ直した。
+sorry 検査 1032 件、すべて非依存。次の本文は「開境界密度の上からの評価と値集合の上限の存在」
+（開境界の値の上界 → $\psi^{\mathrm{op}}_L(t)$ の $L$ に依らない上界 → 完備性で上限。周期境界側の
+`FreeEnergyDensityUpperBound.lean`・`FreeEnergyDensitySupremum.lean` と同じ形にできるはず。
+開境界の値の上界は `PartitionValueUpperBound` の開境界版が要るか、$Z^{\mathrm{op}}_{L,L}(t)\le
+Z_L(t)$ 型の比較で済むかを最初に確かめる）。
+
 2026-08-15 の tick 285 は、レビューで前 tick の「開境界正方形の自由エネルギー密度」の本文・
 SageMath・Lean 定義が一致することを確認した（修正無し）。そのあと「ブロック敷き詰め評価の
 対数化」`claim_open_square_block_tiling_logarithm` を本文と SageMath まで進めた。
@@ -2987,12 +3004,13 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「開境界正方形の自由エネルギー密度」の本文・SageMath・Lean 定義を突き合わせる。
-- **次に進めるセクションは「ブロック敷き詰め評価の対数化」**（状態台帳のセクション表の先頭行）。
-  ブロック敷き詰め評価へ実対数を適用し、単調性・積・冪の性質で $\psi^{\mathrm{op}}_{ka}(t)$ を挟む。
+- **レビュー**: 「ブロック敷き詰め評価の対数化」の本文・SageMath・Lean（具体版・必要十分版・導出版）を
+  突き合わせる。特に補正項の有理数係数 $2(k-1)/(ka)$ の Lean 側の表現（$k-1$ は ℕ の減法）が
+  本文と一致しているか。
+- **次に進めるセクションは「開境界密度の上からの評価と値集合の上限の存在」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
-  姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の三つめ以降の証明から、
-  根拠なし・複数関係の計算を機械走査で特定する。
+  姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の「$\check Z$ の $n$ 重交換子」の
+  帰納段階以降から、根拠なし・複数関係の計算を機械走査で特定する。
 - **push の直前に `lake build` を回す。**
 
 ## 前の tick の記録（1 つ前）

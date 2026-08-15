@@ -38182,6 +38182,13 @@ t^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}t^{\,b^{\mathrm{op}}_{L,L}(\tau)}
     realEscape:
       "開境界正方形のブロック敷き詰め評価へ実対数の狭義単調性・乗法加法性・自然数冪の法則を適用し、" +
       "自由エネルギー密度の実数順序での上下評価を得るため。完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_map_twoSided_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_one_le_from_necSuf",
+    ],
     verification: ["sagemath/check/open-square-block-tiling-logarithm"],
     statement: [
       paragraph([

@@ -26,7 +26,7 @@
 
 ## 範囲の注記
 
-有限標本検査であり、普遍量化された主張の証明ではない。Lean は未着手である。
+有限標本検査であり、普遍量化された主張の証明ではない。Lean は具体版・必要十分版・導出版まで完成した（`lean/Ising2DLambda/ThermodynamicLimit/OpenSquareBlockTilingLogarithm.lean` ほか。2026-08-15）。
 
 ## 実行方法
 

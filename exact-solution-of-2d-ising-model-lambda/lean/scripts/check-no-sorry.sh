@@ -1079,6 +1079,15 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.two_direction_pow_bounds_necSuf
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_le_one_from_necSuf
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_blockTiling_lower_expand
+  Ising2DLambda.ThermodynamicLimit.realLogarithm_blockTiling_upper_expand
+  Ising2DLambda.ThermodynamicLimit.blockTiling_coefficient_cancel_t
+  Ising2DLambda.ThermodynamicLimit.blockTiling_coefficient_cancel_P
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_le_one
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_one_le
+  Ising2DLambda.NecSuf.ThermodynamicLimit.scaled_map_twoSided_bounds_necSuf
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_blockTiling_bounds_of_one_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
