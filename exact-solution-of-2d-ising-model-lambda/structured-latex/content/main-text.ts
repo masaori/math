@@ -37507,6 +37507,13 @@ t^{\,b^{\mathrm{op}}_{a,b}(\sigma)}t^{\,b^{\mathrm{op}}_{c,b}(\tau)}
       "正の実数 t で評価した周期境界と開境界の分配多項式を、実数の順序で比較するため。" +
       "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限和だけであり、" +
       "実対数・完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_reindex_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_one_le_from_necSuf",
+    ],
     verification: ["sagemath/check/periodic-open-boundary-comparison"],
     statement: [
       paragraph([

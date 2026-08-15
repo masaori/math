@@ -1059,6 +1059,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.periodicOpenEdgeEquiv
   Ising2DLambda.ThermodynamicLimit.periodicBoundaryBrokenCount_le
   Ising2DLambda.ThermodynamicLimit.brokenBondCount_openConfigToPeriodic
+  Ising2DLambda.ThermodynamicLimit.partitionValue_eq_open_double_product
+  Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_le_one
+  Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_one_le
+  Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_reindex_bounds_necSuf
+  Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.partitionValue_periodicOpen_bounds_of_one_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

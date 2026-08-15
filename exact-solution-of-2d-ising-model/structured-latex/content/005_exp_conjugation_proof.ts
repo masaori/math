@@ -1408,9 +1408,21 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         math(String.raw`l`),
         " についての帰納法で示す。",
         math(String.raw`l=1`),
-        " のときは ",
-        math(String.raw`\|X^{1}\|=\|X\|=a=a^{1}`),
-        "。",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|X^{1}\right\|
+&= \|X\|
+   \quad (\because X^{1}=X\ \text{（行列の冪の定義）}) \\
+&= a
+   \quad (\because a \text{ の定義}) \\
+&= a^{1}
+   \quad (\because a^{1}=a\ \text{（指数法則）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
         math(String.raw`l`),
         " のとき ",
         math(String.raw`\|X^{l}\|\le a^{l}`),
