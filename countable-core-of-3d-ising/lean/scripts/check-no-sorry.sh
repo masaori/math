@@ -95,6 +95,8 @@ targets=(
   Ising3DCut.NecSuf.NullModel.splittingDegree_galoisGroup_do_not_determine_polynomial
   Ising3DCut.NullModel.splittingDegree_galoisGroup_do_not_determine_polynomial_from_necSuf
   Ising3DCut.NullModel.discriminant_does_not_determine_polynomial
+  Ising3DCut.NecSuf.NullModel.discriminant_does_not_determine_object
+  Ising3DCut.NullModel.discriminant_does_not_determine_polynomial_from_necSuf
   Ising3DCut.NecSuf.NullModel.card_fiber_complement
   Ising3DCut.NullModel.multiplicity_palindrome_from_necSuf
   Ising3DCut.NullModel.one_le_periodicMultiplicity_zero
