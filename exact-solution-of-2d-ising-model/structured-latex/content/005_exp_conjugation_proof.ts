@@ -1045,9 +1045,25 @@ u+\overline{u}
         math(String.raw`g^{-1}`),
         " は存在すれば一意である。実際 ",
         math(String.raw`h,h'`),
-        " がともに逆行列なら ",
-        math(String.raw`h=hI=h(gh')=(hg)h'=Ih'=h'`),
-        "。したがって右辺は ",
+        " がともに逆行列なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+h
+&=hI
+  \quad (\because \text{単位行列との右からの積}) \\
+&=h(gh')
+  \quad (\because gh'=I) \\
+&=(hg)h'
+  \quad (\because \text{行列積の結合律}) \\
+&=Ih'
+  \quad (\because hg=I) \\
+&=h'
+  \quad (\because \text{単位行列との左からの積})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。したがって右辺は ",
         math(String.raw`\mathrm{M}(n,\mathbb{C})`),
         " の積だけで一意に定まる）。",
       ]),

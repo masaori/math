@@ -1056,6 +1056,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.periodicConfigToOpen_openConfigToPeriodic
   Ising2DLambda.ThermodynamicLimit.openConfigToPeriodic_periodicConfigToOpen
   Ising2DLambda.ThermodynamicLimit.periodicOpenConfigEquiv
+  Ising2DLambda.ThermodynamicLimit.periodicOpenEdgeEquiv
+  Ising2DLambda.ThermodynamicLimit.periodicBoundaryBrokenCount_le
+  Ising2DLambda.ThermodynamicLimit.brokenBondCount_openConfigToPeriodic
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
