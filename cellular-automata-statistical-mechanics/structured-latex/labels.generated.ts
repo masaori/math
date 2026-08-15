@@ -6,7 +6,11 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_antichain_order_convex",
   "claim_dependency_transfer",
+  "claim_down_set_boundary_outgoing",
+  "claim_down_set_no_incoming_edge",
+  "claim_down_set_order_convex",
   "claim_event_set_cardinality",
   "claim_finite_propagation_boundary",
   "claim_flip_test_equivalence",
@@ -15,6 +19,7 @@ export const ALL_LABELS = [
   "claim_no_mutual_reachability",
   "claim_one_step_dependency_finite_decidability",
   "claim_one_step_subset_reachability",
+  "claim_order_convex_intersection",
   "claim_path_time_increment_exact",
   "claim_path_time_strictly_increases",
   "claim_propagation_ball_finite",
@@ -25,11 +30,15 @@ export const ALL_LABELS = [
   "claim_start_cell_in_propagation_ball",
   "claim_support_finite_decidability",
   "claim_support_invariance",
+  "claim_time_slice_antichain",
   "claim_time_strictly_increases",
+  "claim_up_set_order_convex",
+  "def_antichain",
   "def_base_value_extension",
   "def_cardinality_notation",
   "def_dependency_path",
   "def_dependency_source_set",
+  "def_down_set",
   "def_essential_dependency",
   "def_essential_dependency_support",
   "def_event_set",
@@ -37,9 +46,12 @@ export const ALL_LABELS = [
   "def_finite_stage",
   "def_flip_map",
   "def_global_map",
+  "def_incomparability",
   "def_local_truth_table",
   "def_negation_map",
+  "def_one_step_boundary",
   "def_one_step_dependency",
+  "def_order_convex_subset",
   "def_partial_order",
   "def_propagation_ball",
   "def_reachability",
@@ -48,6 +60,8 @@ export const ALL_LABELS = [
   "def_restriction_map",
   "def_state_set",
   "def_time_interval",
+  "def_time_slice",
+  "def_up_set",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

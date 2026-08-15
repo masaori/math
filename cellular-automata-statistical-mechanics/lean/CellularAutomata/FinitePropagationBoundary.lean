@@ -330,7 +330,7 @@ theorem card_dependencySourceSet_le_from_necessary_sufficient (τ t : ℕ) (v : 
       (EventSetAsSetFP (V := V) τ) (OneStepAsSetFP N f τ) (suppV N f)
       (fun a b hab => oneStep_time_succ N f τ a b hab)
       (fun a b hab => oneStep_source_mem_suppV N f τ a b hab)
-      (Finset.finite_toSet _) t v)
+      t v)
 
 /-- 具体版の時刻 0 での空性は必要十分版の特殊化である。 -/
 theorem dependencySourceSet_zero_empty_from_necessary_sufficient (τ : ℕ) (v : V) :

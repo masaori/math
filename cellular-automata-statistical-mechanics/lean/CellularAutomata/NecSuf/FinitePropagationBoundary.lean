@@ -136,12 +136,15 @@ theorem dependencySourceSet_subset_boundary
     ⟨n, Finset.mem_Icc.mpr ⟨hn1, hnt⟩, Finset.mem_product.mpr ⟨?_, hball⟩⟩)
   exact Finset.mem_singleton.mpr (by omega)
 
+/-- 個数上界に X の有限性は要らない。境界が `Finset` であること（部分集合の個数は
+    有限な上位集合の個数以下）だけで通る。X の有限性が要るのは
+    `dependencySourceSet_finite` の注記だけである。 -/
 theorem card_dependencySourceSet_le
     (X : Set (Nat × Cell)) (D : Set ((Nat × Cell) × (Nat × Cell)))
     (parents : Cell → Finset Cell)
     (step_time_succ : ∀ a b, (a, b) ∈ D → b.1 = a.1 + 1)
     (step_source_mem : ∀ a b, (a, b) ∈ D → a.2 ∈ parents b.2)
-    (_hX : X.Finite) (t : Nat) (v : Cell) :
+    (t : Nat) (v : Cell) :
     (dependencySourceSet X D (t, v)).ncard ≤
       ∑ n ∈ Finset.Icc 1 t, (propagationBall parents n v).card := by
   calc
