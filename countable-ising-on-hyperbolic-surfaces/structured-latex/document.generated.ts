@@ -18,12 +18,14 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
+import blocks_finite_cellulation from './content/finite-cellulation.ts'
 import blocks_main_text from './content/main-text.ts'
 
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
+  ...typeof blocks_finite_cellulation,
   ...typeof blocks_main_text,
 ]
 

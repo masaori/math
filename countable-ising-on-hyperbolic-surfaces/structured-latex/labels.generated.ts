@@ -13,6 +13,7 @@ export const ALL_LABELS = [
   "def_edge_spin_sign",
   "def_even_edge_subset",
   "def_even_subgraph_polynomial",
+  "def_finite_cellulation_cell_sets",
   "def_finite_graph_input",
   "def_formal_edge_weight_sum",
   "def_ising_partition_polynomial",
