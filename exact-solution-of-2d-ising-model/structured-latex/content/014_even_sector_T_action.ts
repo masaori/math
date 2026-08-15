@@ -241,20 +241,13 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
         String.raw`\begin{aligned}
 \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^2
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)} + \tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad (\because \text{theorem\_exp\_product}) \\
+   \quad (\because\ \text{可換な指数行列の積の定理}) \\
 &= \exp\!\left(iK_1H_1^{(+)}\right)
    \quad (\because \text{同類項 } \tfrac{i}{2}K_1H_1^{(+)} \text{ の加法}) \\
 &= V_1^{(+)}
-   \quad (\because \text{def\_V1\_pm})
+   \quad (\because\ V_1^{(+)}\ \text{の定義})
 \end{aligned}`,
       ),
-      paragraph([
-        "（最後の等号は ",
-        ref("def_V1_pm"),
-        " の ",
-        math(String.raw`V_1^{(+)} = \exp\!\left(iK_1H_1^{(+)}\right)`),
-        " による。）",
-      ]),
       paragraph([
         "(3) ",
         math(String.raw`g, h \in R^\times`),
@@ -278,9 +271,9 @@ T_g\!\left(T_h(X)\right)
 &= (gh)X\left(h^{-1}g^{-1}\right)
    \quad (\because \text{行列の積の結合律}) \\
 &= (gh)X(gh)^{-1}
-   \quad (\because \text{def\_invertible\_elements\_of\_R (ii)}\ ((gh)^{-1} = h^{-1}g^{-1})) \\
+   \quad (\because\ \text{可逆元の積の逆元}) \\
 &= T_{gh}(X)
-   \quad (\because \text{def\_T\_g})
+   \quad (\because\ \text{共役写像の定義})
 \end{aligned}`,
       ),
       paragraph([

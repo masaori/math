@@ -1074,6 +1074,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_iteratedGlueSecond_bounds_of_one_le
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_iteratedGlueSecond_bounds_of_le_one_from_necSuf
   Ising2DLambda.ThermodynamicLimit.openPartitionValue_iteratedGlueSecond_bounds_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_le_one
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_one_le
+  Ising2DLambda.NecSuf.ThermodynamicLimit.two_direction_pow_bounds_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_one_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

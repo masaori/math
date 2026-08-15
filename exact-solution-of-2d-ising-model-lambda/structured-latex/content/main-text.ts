@@ -37786,6 +37786,112 @@ Z^{\mathrm{op}}_{a,(k+1)b}(t)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_block_tiling",
+    kind: "claim",
+    title: { text: "開境界正方形のブロック敷き詰め評価" },
+    labels: ["claim_open_square_block_tiling"],
+    habitat: "R",
+    realEscape:
+      "正の実数 t で評価した開境界分配多項式を、実数の順序で比較するため。" +
+      "使うのは実数体への脱出の宣言に挙げた順序体の性質、自然数冪、有限積だけであり、" +
+      "実対数・完備性・極限は使わない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.two_direction_pow_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValue_squareBlockTiling_bounds_of_one_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/open-square-block-tiling"],
+    statement: [
+      paragraph([
+        math(String.raw`a,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、正の実数 ",
+        math(String.raw`t\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<_{\mathbb{R}}t`),
+        " を任意に取る。一辺 ",
+        math(String.raw`ka`),
+        " の開境界正方形を、一辺 ",
+        math(String.raw`a`),
+        " の正方形ブロック ",
+        math(String.raw`k^2`),
+        " 個で敷き詰めると、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<_{\mathbb{R}}t\le_{\mathbb{R}}1:&
+t^{(k-1)(ka)}\!\left(t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{ka,ka}(t)
+\le_{\mathbb{R}}\left(\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k,\\[2mm]
+1\le_{\mathbb{R}}t:&
+\left(\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+\le_{\mathbb{R}} Z^{\mathrm{op}}_{ka,ka}(t)
+\le_{\mathbb{R}}t^{(k-1)(ka)}\!\left(t^{(k-1)a}
+\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k.
+\end{array}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " とする。第一座標方向の反復接合評価（",
+        ref("claim_open_rectangle_iterated_gluing_first"),
+        "）を ",
+        math(String.raw`b=a`),
+        " として適用すると、",
+      ]),
+      displayMath(String.raw`t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k
+\le_{\mathbb{R}}Z^{\mathrm{op}}_{ka,a}(t)
+\le_{\mathbb{R}}\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k
+\quad\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_first}\bigr)`),
+      paragraph(["である。正数の自然数冪は順序を保つので、"]),
+      displayMath(String.raw`\left(t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+\le_{\mathbb{R}}\bigl(Z^{\mathrm{op}}_{ka,a}(t)\bigr)^k
+\le_{\mathbb{R}}\left(\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+\quad\bigl(\because\ \text{自然数冪についての帰納法}\bigr)`),
+      paragraph([
+        "を得る。第二座標方向の反復接合評価（",
+        ref("claim_open_rectangle_iterated_gluing_second"),
+        "）を第一座標の長さ ",
+        math(String.raw`ka`),
+        " の長方形へ適用し、この二つの不等式を順に代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t^{(k-1)(ka)}\!\left(t^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+&\le_{\mathbb{R}}t^{(k-1)(ka)}\bigl(Z^{\mathrm{op}}_{ka,a}(t)\bigr)^k
+&&\bigl(\because\ \text{上の下からの評価と正数の乗法}\bigr)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{ka,ka}(t)
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second}\bigr)\\
+&\le_{\mathbb{R}}\bigl(Z^{\mathrm{op}}_{ka,a}(t)\bigr)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second}\bigr)\\
+&\le_{\mathbb{R}}\left(\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+&&\bigl(\because\ \text{上の上からの評価}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となる。",
+        math(String.raw`1\le_{\mathbb{R}}t`),
+        " の場合は、二つの反復接合評価の向きがともに反転する。同じ順に第一座標方向、",
+        "次いで第二座標方向へ適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+&\le_{\mathbb{R}}\bigl(Z^{\mathrm{op}}_{ka,a}(t)\bigr)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_first}\ \text{と自然数冪の順序}\bigr)\\
+&\le_{\mathbb{R}}Z^{\mathrm{op}}_{ka,ka}(t)
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second}\bigr)\\
+&\le_{\mathbb{R}}t^{(k-1)(ka)}\bigl(Z^{\mathrm{op}}_{ka,a}(t)\bigr)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_second}\bigr)\\
+&\le_{\mathbb{R}}t^{(k-1)(ka)}\!\left(t^{(k-1)a}
+  \bigl(Z^{\mathrm{op}}_{a,a}(t)\bigr)^k\right)^k
+&&\bigl(\because\ \blkref{claim_open_rectangle_iterated_gluing_first}\ \text{と正数の乗法}\bigr)
+\end{aligned}`),
+      paragraph(["を得る。"])],
+  },
+
+  {
     id: "thermodynamic_limit_claim_periodic_open_boundary_comparison",
     kind: "claim",
     title: { text: "周期境界と開境界の境界評価" },
