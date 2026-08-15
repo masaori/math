@@ -3,6 +3,37 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 314）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 314 は、「正の有理点での分配多項式の値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・
+  必要十分版・導出版）まで完成させた。** $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $Z_L(q)\le2^{L^2}\cdot(1+q)^{2L^2}$
+  （`claim_partition_value_upper_bound_at_positive_rational`、密度の非負性の直後・実数体脱出の宣言の直前、住処 Q）。準備は $\mathbb R$ 版と同じ
+  四つ（冪の正値性・底の単調性・指数の単調性・定数の有限和。いずれも $\mathbb Q$ の四則と順序と帰納法だけ）、鎖は五段（代入は環準同型・底を
+  $1+q$ へ・指数を $2L^2$ へ・定数の有限和・$|\Sigma_L|=2^{L^2}$）。$\iota_{\mathbb Q\to\mathbb R}$ も実数体も現れない。必要十分版は $\mathbb R$ 版と
+  共有（係数の住処は順序付き加法モノイドかつモノイドで足りる）。レビューでは前 tick の密度の非負性の四層が一致し修正無し。次は
+  「有限系の自由エントロピー密度の上界（$\Lambda_{\mathbb Q}$ 版）」（上界の底は $\max(1,q)$ ではなく本 tick に揃えて $1+q$）。
+
+### 前進の記録
+
+- 2026-08-16（tick 314）: `claim_partition_value_upper_bound_at_positive_rational` を `claim_finite_free_entropy_density_nonnegative` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。$\mathbb R$ 版 `claim_partition_value_upper_bound` の準備四つと五段の鎖を $q\in\mathbb Q$ で
+  述べ直したもので、順序体の性質は $\mathbb Q$ のものとして使い `remark_real_field_escape` を引かない（$\mathbb R$ 版は併存、撤去のセクションで消す）。
+  上界の底は $\mathbb R$ 版と同じ $1+q$（場合分けを避ける）。次セクションの備考の $\max(1,q)$ はこれに揃えて $1+q$ へ書き換えた。SageMath
+  `partition-value-upper-bound-at-positive-rational`（$L\le4$・正の有理点 9 点、準備 1251 件・鎖の各行と主張 332 件、`ZZ`/`QQ`）。Lean 具体版
+  `ThermodynamicLimit/PartitionValueUpperBoundRational.lean`（`pow_le_pow_of_pos_of_le_by_induction_rat`・`one_le_pow_by_induction_rat`・
+  `pow_le_pow_of_one_le_of_exp_le_by_induction_rat`・`partitionPolynomial_eval_rat_le_upperBound`。$\mathbb R$ 版の帰納法を ℚ で書き直し、
+  `pow_pos_by_induction` は共通のものを使う）、必要十分版は $\mathbb R$ 版の `NecSuf/ThermodynamicLimit/PartitionValueUpperBound.lean` の
+  `sum_pow_le_uniform_bound_necSuf` をそのまま共有（新規の仮定は無い）、導出版 `PartitionValueUpperBoundRationalFromNecSuf.lean`。
+  sorry 検査 1160 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 314）: 前 tick の「有限系の自由エントロピー密度は非負である」の本文・SageMath・Lean 具体版・必要十分版・導出版を
+  突き合わせ、準備三つ・$\Lambda$ の鎖と $\Lambda_{\mathbb Q}$ の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
+  台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 313）の記録
 
 ### 現在地

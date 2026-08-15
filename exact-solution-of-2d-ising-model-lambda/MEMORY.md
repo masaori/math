@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 319 は、前 tick の「反復接合の第一（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「反復接合の第二（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_rectangle_iterated_gluing_second_rational`（`claim_open_rectangle_iterated_gluing_first_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
+$a,b,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{(k-1)a}Z^{\mathrm{op}}_{a,b}(q)^k\le Z^{\mathrm{op}}_{a,kb}(q)\le Z^{\mathrm{op}}_{a,b}(q)^k$、
+$1\le q$: $Z^{\mathrm{op}}_{a,b}(q)^k\le Z^{\mathrm{op}}_{a,kb}(q)\le q^{(k-1)a}Z^{\mathrm{op}}_{a,b}(q)^k$。証明は $\mathbb R$ 版 `claim_open_rectangle_iterated_gluing_second` と同じ
+帰納法 1 本（$k=1$ の底は等号の鎖、帰納段は $ka=a+(k-1)a$・冪の指数法則・積の結合則・帰納法の仮定と正数の乗法・第二座標の長さ $kb$ と $b$ の二長方形への
+接合不等式（$\mathbb Q$ 版））で、`remark_real_field_escape` を引かない。二場合は $\mathbb R$ 版に揃えて 1 ブロック。$\mathbb R$ 版は併存（撤去のセクションで消す）。
+SageMath `open-rectangle-iterated-gluing-second-rational`（形 14 通り × 正の有理点 9 点、126 組。$\mathbb Z[x]$ への代入と配位和の一致・二場合の上下評価・帰納段の各段。`ZZ`/`QQ`）。
+Lean 具体版 `ThermodynamicLimit/OpenRectangleIteratedGluingSecondRational.lean`（`openPartitionValueRat_iteratedGlueSecond_bounds_of_le_one`／`_of_one_le`。
+$\mathbb R$ 版 `OpenRectangleIteratedGluingSecond.lean` から `t`→`q`、`ℝ`→`ℚ`、`openPartitionValue`→`openPartitionValueRat` の機械的な置換に `open NecSuf.ThermodynamicLimit` を足して通った）、
+必要十分版は `NecSuf/ThermodynamicLimit/OpenRectangleIteratedGluingFirst.lean` の `iterated_glue_pow_bounds_necSuf` をそのまま共有（接ぐ向きにも体にも依らない）、
+導出版 `OpenRectangleIteratedGluingSecondRationalFromNecSuf.lean`。sorry 検査 1190 件。
+次は「正方形のブロック敷き詰め（$\mathbb Q$ 版）」（`claim_open_square_block_tiling` の $t\in\mathbb R$ を $q\in\mathbb Q$ に置いた新ブロック。住処 Q、
+`claim_open_rectangle_iterated_gluing_second_rational` の直後・実数体脱出の宣言の直前。第一・第二の反復接合（$\mathbb Q$ 版）の合成で、二場合を 1 ブロック（$\mathbb R$ 版に揃える）。
+Lean は `OpenSquareBlockTiling.lean` を ℚ へ移し、必要十分版 `two_direction_pow_bounds_necSuf` を共有できる見込み。着手前に $\mathbb R$ 版の本文とその Lean を読んで、
+引く反復接合のラベルを Q 版へ差し替えること）。
+
 2026-08-16 の tick 318 は、前 tick の「接合不等式（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「反復接合の第一（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_rectangle_iterated_gluing_first_rational`（`claim_open_rectangle_gluing_inequality_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
