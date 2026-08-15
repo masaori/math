@@ -23,6 +23,9 @@ export const ALL_LABELS = [
   "claim_fixed_point_count_finite_decidability",
   "claim_flip_test_equivalence",
   "claim_global_flip_characterization",
+  "claim_global_map_injective_iff_all_periodic",
+  "claim_global_map_injective_iff_surjective",
+  "claim_global_map_injectivity_finite_decidability",
   "claim_min_preperiod_period_bound",
   "claim_min_preperiod_period_finite_decidability",
   "claim_no_dependency_on_redundant_element",
@@ -67,6 +70,7 @@ export const ALL_LABELS = [
   "def_fixed_points_of_iterate",
   "def_flip_map",
   "def_global_map",
+  "def_global_map_injective_surjective",
   "def_global_map_iterate",
   "def_incomparability",
   "def_local_truth_table",
@@ -95,6 +99,7 @@ export const ALL_LABELS = [
   "remark_causal_set_not_claimed",
   "remark_causal_set_source",
   "remark_iteration_not_claimed",
+  "remark_reversibility_not_claimed",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
