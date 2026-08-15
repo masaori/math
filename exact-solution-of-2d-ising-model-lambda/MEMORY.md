@@ -14,7 +14,8 @@ $1\le Z_{c,L}$・第一座標方向の接合の下側、上側は接合の上側
 SageMath `open-square-subsquare-comparison` は 24 件を `QQ` で厳密に。Lean は
 `ThermodynamicLimit/OpenSquareSubsquareComparison.lean`（`openPartitionValue_square_subsquare_bounds_of_le_one`）、
 必要十分版 `split_twice_bounds_necSuf`（可換半環の順序・非負元の乗法単調性・二段の分割の下側上側・余りの下界 1 と
-一様上界だけ）、導出版（sorry 検査 1063 件）。式変形統一は締切のため進めていない。次の本文は
+一様上界だけ）、導出版（sorry 検査 1063 件）。式変形統一では姉妹側「$\cosh,\sinh$ の展開係数への変換」の
+(h2.z)・(h2.y) が $\alpha=i$ で圧縮行を持たず既に規則どおりであることを確認し、ブロックを統一済みとした。次の本文は
 「開境界正方形と部分正方形の値の比較（$1\le t$ の場合）」（予定:
 $Z_{a,a}\le Z_{L,L}\le2^{L^2-a^2}t^{a+L+2(L^2-a^2)}Z_{a,a}$。下側は接合の下側二回と $1\le Z$ 二回、
 上側は接合の上側 $t^L$・$t^a$ 付き二回と `openPartitionValue_le_configurationCount_mul_power_of_one_le` 二回。
@@ -3126,8 +3127,8 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 - **次に進めるセクションは「開境界正方形と部分正方形の値の比較（$1\le t$ の場合）」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）を毎 tick 1 件進める**。
   姉妹側「偶セクターの転送行列の共役作用」（`014_even_sector_T_action`）の「$\check Z,\check Y$ についての
-  $\cosh,\sinh$ の展開係数への変換」は (h1.z)・(h1.y) の鎖の圧縮行（商と積の冪の展開と $2^{-n}2^n=1$）を開いた。
-  残りは同じブロックの (h2.z)・(h2.y) の鎖の同じ箇所（`(i/2)^n(2K)^n = ...` / `i^n` 側は補題 2 の前）。
+  $\cosh,\sinh$ の展開係数への変換」は統一済み（(h1.z)・(h1.y) を開き、(h2.z)・(h2.y) は元から規則どおり）。
+  次は同章の続き「$\check Z,\check Y$ についてのテイラー係数の抽出」以降で、圧縮された行や根拠の無い行を探す。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
 ## 前の tick の記録（1 つ前）
