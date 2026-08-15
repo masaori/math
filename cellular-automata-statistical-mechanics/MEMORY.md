@@ -415,6 +415,16 @@ SageMath 30 本、対応検査、Lean build、sorry 検査を全て通した。*
 $\mathbb{R}/\mathbb{C}$ 脱出はない。**この章の現在地は SageMath まで。次 tick は検算と構造化記述の
 対応をレビュー後、人手証明と同じ対象・仮定・順序の Lean 具体版を作る。**
 
+## 自動ループ tick: 既存因果構造との比較の SageMath レビュー（2026-08-15、レビューのみ）
+
+前 tick の SageMath 5 本を再実行して構造化記述と突き合わせ、修正を要する不一致は
+見つからなかった（反例の構成、一般側の検査対象の広さとも記述どおり）。この tick は開始が
+13:12 で 13:39 に強制終了されるため、Lean 具体版を sorry なしで完了できないと判断し新規層に
+着手しなかった。**この章の現在地は SageMath まで。次 tick は Lean 具体版を作る。** 再利用先は
+`TransitiveClosureAntisymmetry.lean` の `Reachable`・`ReflReachable`・
+`path_time_strictly_increases`・`reachable_transitive`・`reachable_irreflexive`。
+区間 $I_\tau(a,b)$ と被覆関係 $\lessdot_\tau$ は新規定義になる。
+
 ## 論文アーティファクトと通知の一本化（2026-08-15）
 
 `scripts/publish-artifact.sh` が構造化証明から自己完結 HTML を生成し、
