@@ -11,7 +11,7 @@
 ## 検査内容
 
 - $t\in\{1,3/2,2,5\}$、$(a,k)\in\{(1,2),(1,3),(1,4),(2,2)\}$ の 16 組で $\psi^{\mathrm{op}}_a(t)\le\psi^{\mathrm{op}}_{ka}(t)$ を厳密検査する。
-- 一辺 $1$ から $4$ の有限値集合をモデルに、その最大値 $u$ と $\varepsilon\in\{1/10,1/100\}$ について、$u-\varepsilon<\psi^{\mathrm{op}}_a$ を満たす $a$ を取り、モデル内の倍数 $ka$ で $u-\varepsilon<\psi^{\mathrm{op}}_{ka}\le u$ を検査する（14 件）。
+- 一辺 $1$ から $4$ の有限値集合をモデルに、最大値 $u$ を分配関数の整数冪の厳密比較で特定する。$\varepsilon\in\{1/10,1/100\}$ について $u-\varepsilon<\psi^{\mathrm{op}}_a$ を ball の分離で確かめ、モデル内の倍数 $ka$ に対する $\psi^{\mathrm{op}}_{ka}\le u$ は再び整数冪の厳密比較で検査する（14 件）。
 
 ## 範囲
 
