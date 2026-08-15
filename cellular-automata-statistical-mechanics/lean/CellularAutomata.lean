@@ -19,5 +19,6 @@ import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
 import CellularAutomata.PeriodicPointCount
 import CellularAutomata.RedundantNeighbor
+import CellularAutomata.ReversibilityFiniteDecidability
 import CellularAutomata.TimeExpansionDependency
 import CellularAutomata.TransitiveClosureAntisymmetry
