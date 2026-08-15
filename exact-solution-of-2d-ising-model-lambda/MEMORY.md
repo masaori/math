@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 308 は、前 tick の「有理係数の対数順序群の順序は線形順序である」の四層を突き合わせて一致を確認し、Lean 具体版の
+ヘッダコメントの「`claim_common_denominator_multiple` を二度」を本文・実装どおり「各元について一度ずつ、計三度」へ直して先に push した。
+そのあと「有理係数の対数順序群の順序の加法単調性」を四層まで完成させた。`claim_rational_log_order_group_add_monotone`
+（`claim_rational_log_order_group_linear_order` の直後）で、三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ を取り、
+$N\cdot(\lambda+\nu)=N\cdot\lambda+N\cdot\nu=\iota(\lambda_N)+N\cdot\nu=\iota(\lambda_N)+\iota(\nu_N)=\iota(\lambda_N+\nu_N)$
+の四段（有理数倍の分配則・共通分母の定義二度・`claim_rational_log_order_group_embedding` の加法性）で $N$ が $\lambda+\nu$ の
+共通分母（証人 $\lambda_N+\nu_N$）であることを示し（$\mu+\nu$ も同じ）、仮定を定義の言い換えで $N$ において読んで
+$\lambda_N\le_\Lambda\mu_N$、`claim_log_order_group_add_monotone` を $\nu_N$ で適用して $\lambda_N+\nu_N\le_\Lambda\mu_N+\nu_N$、
+定義で $\lambda+\nu\le_{\Lambda_{\mathbb Q}}\mu+\nu$。本文末尾「この先に書くこと」から加法単調性を消した。SageMath
+`rational-log-order-group-add-monotone`（素数 $2,3,5$、係数 5 種、125 ベクトル、$\lambda\le\mu$ の組 7875 件と全 $\nu$ の三元
+984375 件で主張を、$\nu$ を 5 本に 1 本取った 196875 件で鎖の各段を、`ZZ`/`QQ`）。Lean 具体版
+`ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`（`commonDenominator_add`、`rationalLogOrderLE_add_right`）、必要十分版
+`NecSuf/ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean` の `indexedLE_add_right_necSuf`（三元の共通の良い添字、独立性、
+同じ添字で `Rep` が加法を保つこと、`le` の加法単調性だけ。加法の結合則・可換則は使わない）、導出版
+`RationalLogOrderGroupAddMonotoneFromNecSuf.lean`（sorry 検査 1137 件）。次は「有限系の実自由エントロピーを畳む」
+（$\varphi_L$（ℝ 値）と $\Phi_L$（$\Lambda$ 値）の二重持ちを解消し、有限系の主張・接合不等式・上下界を $\Phi_L$ 側へ寄せる。
+これは既存ブロックの書き換えを含むので、着手前に対象ブロックを列挙して「1 つの論法で閉じる」大きさに割ること）。
+
 2026-08-16 の tick 307 は、前 tick の「有理係数の対数順序群の順序」の四層を突き合わせて一致を確認し（`DecidableRel` の
 `noncomputable` は $\Lambda$ の順序の判定と同じ `Finsupp` 由来で先例どおり）、修正無し。「有理係数の対数順序群の順序の線形順序性と
 加法単調性」を、論法が二つ（順序の性質を $\Lambda$ へ落とす／和の証人を作る）なので線形順序性と加法単調性へ割り、前者

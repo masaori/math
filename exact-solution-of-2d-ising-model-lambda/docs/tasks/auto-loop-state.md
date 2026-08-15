@@ -7,6 +7,13 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 308 は、「有理係数の対数順序群の順序の加法単調性」を本文・SageMath・Lean（具体版・必要十分版・導出版）
+  まで完成させた。** 三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ で $N\cdot(\lambda+\nu)=N\cdot\lambda+N\cdot\nu
+  =\iota(\lambda_N)+N\cdot\nu=\iota(\lambda_N)+\iota(\nu_N)=\iota(\lambda_N+\nu_N)$ の四段（有理数倍の分配則・$\iota$ の加法性）で
+  $N$ が $\lambda+\nu$ の共通分母（証人 $\lambda_N+\nu_N$）であることを示し、仮定を $N$ で読んで $\Lambda$ の加法単調性へ落とした
+  （`claim_rational_log_order_group_add_monotone`）。レビューでは前 tick の線形順序性の四層が一致し、Lean 具体版ヘッダの
+  「二度」を「各元について一度ずつ、計三度」へ直して先に push した。次は「有限系の実自由エントロピーを畳む」。
+
 - **2026-08-16 の tick 307 は、「有理係数の対数順序群の順序の線形順序性と加法単調性」を線形順序性と加法単調性へ割り、
   「有理係数の対数順序群の順序は線形順序である」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
   三元の共通の共通分母 $N:=N_\lambda N_\mu N_\nu$ を取り、順序の定義の言い換え（すべての両方の共通分母で）で
@@ -37,16 +44,7 @@
   （「次の定義で正の有理数の比較から」）を「共通分母を通して $\Lambda$ の順序から」へ直して先に push した。
   順序の定義が二元の共通の共通分母を要るので「共通分母の正整数倍は共通分母である」を次のセクションとして足した。
 
-- **2026-08-16 の tick 303 は、「有理係数の対数順序群の順序の定義と共通分母からの独立性」を
-  「共通分母の定義と順序判定の共通分母からの独立性」「共通分母の存在」「順序の定義」へ割り、先頭を
-  本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** $N$ が $\lambda\in\Lambda_{\mathbb Q}$ の
-  共通分母であるとは $\lambda_N\in\Lambda$ で $N\cdot\lambda=\iota(\lambda_N)$ となるものが在ることと定め
-  （一意性は $\iota$ の単射性）、$N,N'$ がともに $\lambda,\mu$ の共通分母なら $\lambda_N\le_\Lambda\mu_N
-  \iff\lambda_{N'}\le_\Lambda\mu_{N'}$ を、$N'\lambda_N=N\lambda_{N'}$（七段の鎖と単射性）と順序の
-  正整数倍不変性で示した。レビューでは前 tick の正整数倍不変性の四層が一致し、本文末尾「この先に書くこと」に
-  残っていた済みの「加法単調性」を消して先に push した。次は「有理係数の対数順序群の元の共通分母の存在」。
-
-（これより古い 260 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 261 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -66,7 +64,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 有理係数の対数順序群の順序の加法単調性 | todo | $\lambda\le\mu\Rightarrow\lambda+\nu\le\mu+\nu$ を、三元の共通の共通分母 $N$ で $(\lambda+\nu)_N=\lambda_N+\nu_N$（$\iota$ の加法性・単射性）を示してから `claim_log_order_group_add_monotone` へ落とす |
 | 熱力学極限 | 有限系の実自由エントロピーを畳む | todo | $\varphi_L$（ℝ 値）と $\Phi_L$（$\Lambda$ 値）の二重持ちを解消し、有限系の主張・接合不等式・上下界を $\Phi_L$ 側へ寄せる |
 | 熱力学極限 | 極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる | todo | 完備性（上限の存在）を使わずに、可算側の主張として収束の速さつきで述べる。各段の比較は有理数の比較なので決定可能 |
 | 熱力学極限 | 切断による ℝ への一度きりの脱出 | todo | 「この有理数の列が定める切断として実数が存在する」だけを引く。章頭の「実数体への脱出の宣言」をここへ移し、完備性の宣言は不要になれば畳む |
@@ -83,6 +80,15 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 308）: `claim_rational_log_order_group_add_monotone` を `claim_rational_log_order_group_linear_order` の直後に置き
+  四層で閉じた。準備は線形順序性と同じ三元の共通の共通分母 $N$。$N$ が $\lambda+\nu$ の共通分母で証人が $\lambda_N+\nu_N$ であること
+  （四段の鎖）を示してから、定義の言い換えで $\lambda_N\le_\Lambda\mu_N$ を得て `claim_log_order_group_add_monotone` を $\nu_N$ で適用。
+  SageMath `rational-log-order-group-add-monotone`（素数 $2,3,5$、係数 5 種、125 ベクトル、$\lambda\le\mu$ の組 7875 件と全 $\nu$ の
+  三元 984375 件、鎖の段ごとの検査 196875 件、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`
+  （`commonDenominator_add`、`rationalLogOrderLE_add_right`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupAddMonotone.lean`
+  の `indexedLE_add_right_necSuf`（三元の共通の良い添字、独立性、同じ添字で `Rep` が加法を保つこと、`le` の加法単調性だけ。
+  加法の結合則・可換則は使わない）、導出版。sorry 検査 1137 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 307）: 「線形順序性と加法単調性」は論法が二つ（順序の性質を $\Lambda$ へ落とす／和の証人を作る）なので
   線形順序性と加法単調性へ割った。`claim_rational_log_order_group_linear_order` を `def_rational_log_order_group_order` の直後に置き
@@ -125,17 +131,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   導出版。sorry 検査 1110 件。**割り直し**: 順序の定義が二元の共通の共通分母を要るので、「共通分母の正整数倍は
   共通分母である」（一つの短い鎖）を順序の定義の前に足した。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 303）: **割り直し**: 「有理係数の対数順序群の順序の定義と共通分母からの独立性」は、
-  共通分母の定義と独立性（$\iota$ の単射性と正整数倍不変性）、共通分母の存在（分母の積）、順序の定義の
-  三つの論法を含むので三つへ割り、先頭を閉じた。`def_common_denominator`（一意性つき）と
-  `claim_common_denominator_order_independent` を章「熱力学極限」の分母消去の直後に置いた。SageMath
-  `common-denominator-order-independent` は係数 7 種・素数 3 つの 343 ベクトル、$N,N'\le12$ で証人 1786 件・
-  交差等式と同値 2082724 件を `ZZ`/`QQ` で厳密に。Lean 具体版 `ThermodynamicLimit/CommonDenominator.lean`
-  （`IsCommonDenominator`、`commonDenominator_unique`、`commonDenominator_cross_smul`、
-  `commonDenominator_order_independent`）、必要十分版 `cross_multiple_order_independent_necSuf`（単射で倍を保つ写像、
-  倍の可換性、順序の倍不変性だけ）、導出版。sorry 検査 1105 件。式変形統一は一時停止中のため実施せず。
-
-（これより古い 271 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 272 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -153,6 +149,11 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+
+- 2026-08-16（tick 308）: 前 tick の「有理係数の対数順序群の順序は線形順序である」の本文・SageMath・Lean 具体版・必要十分版・
+  導出版を突き合わせ、三元の共通の共通分母・∀ 形での読み替え・反対称律の七段の鎖・対象ラベル・入口 import・sorry 検査への登録が
+  一致した。Lean 具体版のヘッダコメントだけが「`claim_common_denominator_multiple` を二度」と書いており、本文と実装
+  （各元について一度ずつ、計三度）と食い違っていたので直した。
 
 - 2026-08-16（tick 307）: 前 tick の「有理係数の対数順序群の順序」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、
   ∃ 形と ∀ 形の同値・決定手続き・対象ラベル・入口 import・sorry 検査への登録が一致した。`DecidableRel` が `noncomputable` なのは
@@ -174,12 +175,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   `def_rational_log_order_group` 末尾の「順序は次の定義で正の有理数の比較から移す」が現在の構成（共通分母を通して
   $\Lambda$ の順序から移す）と食い違っていたので、その旨へ書き直した。
 
-- 2026-08-16（tick 303）: 前 tick の「対数順序群の順序は正整数倍で変わらない」の本文・SageMath・Lean 具体版・
-  必要十分版・導出版を突き合わせ、補助等式の帰納法、同値の鎖、対象ラベル、入口 import、sorry 検査への登録が
-  一致した。本文末尾「この先に書くこと」に済んだ「対数順序群の順序の加法単調性」が残っていたので消し、
-  残りの列挙を共通分母・順序の定義へ揃えた。
-
-（これより古い 292 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 293 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

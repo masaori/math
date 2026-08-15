@@ -3,6 +3,38 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 303）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 303 は、「有理係数の対数順序群の順序の定義と共通分母からの独立性」を
+  「共通分母の定義と順序判定の共通分母からの独立性」「共通分母の存在」「順序の定義」へ割り、先頭を
+  本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** $N$ が $\lambda\in\Lambda_{\mathbb Q}$ の
+  共通分母であるとは $\lambda_N\in\Lambda$ で $N\cdot\lambda=\iota(\lambda_N)$ となるものが在ることと定め
+  （一意性は $\iota$ の単射性）、$N,N'$ がともに $\lambda,\mu$ の共通分母なら $\lambda_N\le_\Lambda\mu_N
+  \iff\lambda_{N'}\le_\Lambda\mu_{N'}$ を、$N'\lambda_N=N\lambda_{N'}$（七段の鎖と単射性）と順序の
+  正整数倍不変性で示した。レビューでは前 tick の正整数倍不変性の四層が一致し、本文末尾「この先に書くこと」に
+  残っていた済みの「加法単調性」を消して先に push した。次は「有理係数の対数順序群の元の共通分母の存在」。
+
+### 前進の記録
+
+- 2026-08-16（tick 303）: **割り直し**: 「有理係数の対数順序群の順序の定義と共通分母からの独立性」は、
+  共通分母の定義と独立性（$\iota$ の単射性と正整数倍不変性）、共通分母の存在（分母の積）、順序の定義の
+  三つの論法を含むので三つへ割り、先頭を閉じた。`def_common_denominator`（一意性つき）と
+  `claim_common_denominator_order_independent` を章「熱力学極限」の分母消去の直後に置いた。SageMath
+  `common-denominator-order-independent` は係数 7 種・素数 3 つの 343 ベクトル、$N,N'\le12$ で証人 1786 件・
+  交差等式と同値 2082724 件を `ZZ`/`QQ` で厳密に。Lean 具体版 `ThermodynamicLimit/CommonDenominator.lean`
+  （`IsCommonDenominator`、`commonDenominator_unique`、`commonDenominator_cross_smul`、
+  `commonDenominator_order_independent`）、必要十分版 `cross_multiple_order_independent_necSuf`（単射で倍を保つ写像、
+  倍の可換性、順序の倍不変性だけ）、導出版。sorry 検査 1105 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 303）: 前 tick の「対数順序群の順序は正整数倍で変わらない」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせ、補助等式の帰納法、同値の鎖、対象ラベル、入口 import、sorry 検査への登録が
+  一致した。本文末尾「この先に書くこと」に済んだ「対数順序群の順序の加法単調性」が残っていたので消し、
+  残りの列挙を共通分母・順序の定義へ揃えた。
+
 ## 2026-08-15（tick 302）の記録
 
 ### 現在地

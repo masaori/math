@@ -204,6 +204,7 @@ export const ALL_LABELS = [
   "claim_quadratic_zero_representation",
   "claim_rational_exponent_well_defined",
   "claim_rational_log_injective",
+  "claim_rational_log_order_group_add_monotone",
   "claim_rational_log_order_group_embedding",
   "claim_rational_log_order_group_linear_order",
   "claim_rational_log_surjective",
