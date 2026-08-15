@@ -4,6 +4,11 @@
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) も読む。
 
+## 直近（2026-08-16 03:15 tick）
+
+レビューのみ（検査 71 ブロック・SageMath 対応 17 件・立場違反語なし）。次は
+「外箱の拡大に対する境界応答多項式の安定性」の Lean 具体版。詳細は台帳「現在地」先頭。
+
 ## ゴール設定（2026-08-14 に確定）
 
 **可算コアの同定**：有限格子の可算データの上で、極限で効く部分と極限で潰れる部分を分離する。
