@@ -4,6 +4,7 @@ import CellularAutomata.CausalStructureComparison
 import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
+import CellularAutomata.GlobalMapIteration
 import CellularAutomata.NecSuf.EssentialDependency
 import CellularAutomata.NecSuf.CausalStructureComparison
 import CellularAutomata.NecSuf.CausalSetPrimaryLiterature

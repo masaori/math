@@ -53,6 +53,14 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.GlobalMapIteration.card_config
+  CellularAutomata.GlobalMapIteration.orbit_collision
+  CellularAutomata.GlobalMapIteration.collision_shift
+  CellularAutomata.GlobalMapIteration.eventual_periodicity
+  CellularAutomata.GlobalMapIteration.mem_scanPairs
+  CellularAutomata.GlobalMapIteration.card_scanPairs_two_mul
+  CellularAutomata.GlobalMapIteration.exists_collision_in_scanPairs
+  CellularAutomata.GlobalMapIteration.config_eq_iff
   CellularAutomata.CausalSetPrimaryLiterature.literatureInterval_finite_of_finset
   CellularAutomata.CausalSetPrimaryLiterature.literatureInterval_eq_orderInterval
   CellularAutomata.CausalSetPrimaryLiterature.eventOrder_locally_finite
