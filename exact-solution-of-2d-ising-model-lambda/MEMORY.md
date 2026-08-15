@@ -4,6 +4,26 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 306 は、前 tick の「共通分母の正整数倍は共通分母である」「二元は共通の共通分母を持つ」の四層を
+突き合わせて一致を確認し（後者は $N_\lambda N_\mu$ が両方の共通分母であるという一つの存在主張なので 1 ブロック 1 主張に
+反しない）、本文末尾「この先に書くこと」の済んだ「共通分母の正整数倍」を消して先に push した。そのあと「有理係数の対数順序群の
+順序の定義」を四層まで完成させた。`def_rational_log_order_group_order`（`claim_common_denominator_order_independent` の直後）で
+$\lambda\le_{\Lambda_{\mathbb Q}}\mu$ を「$\lambda,\mu$ の両方の共通分母 $N\ge1$ で $\lambda_N\le_\Lambda\mu_N$
+となるものが在る」と定め、「すべての両方の共通分母で成り立つ」との同値（→ は `claim_common_denominator_order_independent`、
+← は `claim_common_common_denominator_exists`）と、決定手続き $\lambda\le_{\Lambda_{\mathbb Q}}\mu\iff
+N_\mu\lambda_{N_\lambda}\le_\Lambda N_\lambda\mu_{N_\mu}$（`claim_common_denominator_multiple` で $N_\lambda N_\mu$ の
+証人を書く）を定義の中に書いた。`def_rational_log_order_group` 末尾の順序の予告を新定義への参照へ直した。SageMath
+`rational-log-order-group-order`（素数 $2,3,5$、係数 8 種、512 ベクトルの全 262144 組、両方の共通分母 $N\le24$ で 1439022 件、
+`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupOrder.lean`（`rationalLogOrderLE`（∃ 形）、
+`rationalLogOrderLE_iff_forall`、`rationalLogOrderLE_iff_canonical`、`DecidableRel` は canonical 形経由）、必要十分版
+`NecSuf/ThermodynamicLimit/RationalLogOrderGroupOrder.lean` の `exists_iff_forall_of_independent_necSuf`（添字集合上の
+「良い添字」の存在と良い添字間の真偽一致だけ）、導出版（sorry 検査 1118 件）。次は「有理係数の対数順序群の順序の線形順序性と
+加法単調性」（反射・推移・反対称・全順序性と $\lambda\le\mu\Rightarrow\lambda+\nu\le\mu+\nu$。三元の推移律・加法単調性は
+$N_\lambda N_\mu N_\nu$ を三つの共通の共通分母に取り、`rationalLogOrderLE_iff_forall` で ∀ 形へ移してから
+`claim_log_order_group_linear_order`・`claim_log_order_group_add_monotone` へ落とす。反対称律は $\lambda_N=\mu_N$ から
+$N\cdot\lambda=N\cdot\mu$、$N^{-1}$ 倍で $\lambda=\mu$。加法では $(\lambda+\nu)_N=\lambda_N+\nu_N$ が要る
+（$\iota$ の加法性）。論法が二つなら線形順序性と加法単調性へ割る）。
+
 2026-08-16 の tick 305 は、前 tick の「有理係数の対数順序群の元は共通分母を持つ」の四層を突き合わせて一致を確認し
 （既約分数表示 $\operatorname{num}/\operatorname{den}$ は本文初出で、対数の定義の $a/b$ 表示と衝突しない）、本文末尾
 「この先に書くこと」の済んだ「共通分母の存在」を消して先に push した。そのあと「共通分母の正整数倍は共通分母である」を
@@ -3292,11 +3312,12 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「共通分母の正整数倍は共通分母である」（`claim_common_denominator_multiple`）と「二元は共通の共通分母を
-  持つ」（`claim_common_common_denominator_exists`）の本文・SageMath `common-denominator-multiple`・Lean
-  （`CommonDenominatorMultiple.lean` 三系統）を突き合わせる。とくに後者が「1 ブロック 1 主張」（$\lambda$ の共通分母
-  かつ $\mu$ の共通分母）に照らして一つの存在主張として妥当かを見る。
-- **次に進めるセクションは「有理係数の対数順序群の順序の定義」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「有理係数の対数順序群の順序」（`def_rational_log_order_group_order`）の本文・SageMath
+  `rational-log-order-group-order`・Lean（`RationalLogOrderGroupOrder.lean` 三系統）を突き合わせる。とくに定義ブロックの中に
+  「∃ 形と ∀ 形の同値」と「決定手続き」を置いたことが「正しさに必要ならそれは注記ではない」に照らして妥当か、
+  三段の散文の証明が一ステップ一定理に足りているかを見る。
+- **次に進めるセクションは「有理係数の対数順序群の順序の線形順序性と加法単調性」**（状態台帳のセクション表の先頭行）。
+  論法が二つ（順序律と加法単調性）なら着手前に割る。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
   到達点は台帳の表にある。
