@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# 論文そのものを HTML で公開し、tick の完了を Slack へ報告する（ユーザー指示）。
+# 論文そのものを HTML で公開する（ユーザー指示）。**Slack への通知はここではしない**
+# （tick 側 `auto-loop-tick.sh` に一本化した。公開結果は `logs/last-published` で渡す）。
 #
 # 公開するのは**論文**であって、進捗の報告ではない。`structured-latex/content/` から
 # `tools/build-html.ts` が 1 枚の HTML を作り、それをそのまま index.html として置く。
@@ -36,48 +37,6 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then exit 0; fi
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 commit="$(git -C "$REPO_DIR" rev-parse --short HEAD)"
-agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
-
-# 通知の見出しはプロジェクト README の表題から取る。**固定文字列にすると、ゴール設定が
-# 変わったときに古い名前を通知し続ける**（実測 2026-08-14: 降格した「臨界点の切断」を
-# 名乗り続けていた）。
-title="$(sed -n '1s/^#\{1,\} *//p' "$PROJECT_DIR/README.md")"
-[ -z "$title" ] && title="3 次元 Ising（可算側）"
-
-# リポジトリ名は共有チェックアウトの名前にする。**worktree 名を使うと通知先の分類が壊れる**
-# （このループは専用 worktree で走るので、素朴に basename を取ると worktree 名になる）。
-git_common_dir="$(git -C "$REPO_DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
-if [ -n "$git_common_dir" ]; then
-  repository="$(basename "$(dirname "$git_common_dir")")"
-else
-  repository="$(basename "$REPO_DIR")"
-fi
-
-# その tick が何をしたか。コミットの件名は短いので、台帳の「現在地」の先頭
-# （＝直近の tick の記録）を本文にする。
-summary="$(python3 - "$PROJECT_DIR/docs/tasks/auto-loop-state.md" <<'PYEOF'
-import re, sys
-
-text = open(sys.argv[1], encoding="utf-8").read()
-section = re.search(r"^## 現在地\n(.*?)(?=^## |\Z)", text, re.S | re.M)
-if section is None:
-    raise SystemExit(0)
-
-lines, body = section.group(1).strip().split("\n"), []
-for line in lines:
-    if line.startswith("- ") and body:
-        break
-    if line.startswith("- "):
-        body.append(line[2:].strip())
-    elif line.strip():
-        body.append(line.strip())
-text = " ".join(body).replace("**", "")
-# **短く切る。** 人間が Slack で読むのは「その tick が何をしたか」の 1〜2 文だけであり、
-# 台帳の記述をそのまま流すと読まれない（2026-08-14 のユーザー指摘）。
-print(text if len(text) <= 240 else text[:240] + "…")
-PYEOF
-)"
-[ -z "$summary" ] && summary="$(git -C "$REPO_DIR" log -1 --format='%s')"
 
 if ! (cd "$PROJECT_DIR/structured-latex" && npm run --silent build:html >> "$LOG_FILE" 2>&1); then
   log "NG: 論文 HTML の生成に失敗した（版 ${commit}）"
@@ -106,19 +65,8 @@ if ! curl -sfI "$url" >/dev/null 2>&1; then
 fi
 log "OK: 公開した（版 ${commit}）→ $url"
 
-# tick の完了を Slack へ報告する（ユーザー指示）。作業内容の概要と公開 URL を添える。
-# **同じ版で二度は送らない**（別経路から呼ばれても重複しないため）。
-NOTIFIED="$LOG_DIR/last-notified-commit"
-if [ "$(cat "$NOTIFIED" 2>/dev/null || true)" != "$commit" ]; then
-  message="${title}（${agent} / 版 ${commit}）
-${summary}
-${url}"
-  if curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
-      -H "Content-Type: application/json" \
-      --data "$(jq -n --arg message "$message" --arg repository "$repository" \
-        '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1; then
-    printf '%s' "$commit" > "$NOTIFIED"
-  else
-    log "NG: Slack への通知に失敗した（版 ${commit}）"
-  fi
-fi
+# **このスクリプトは Slack へ通知しない**（2026-08-15 のユーザー指示で tick 側へ一本化した）。
+# ここは公開だけを担い、通知に必要な公開結果（版と URL）を tick へ渡す。
+# 通知を tick 側に置くのは、tick だけが打ち切り・異常終了を知っているからでもある
+# （公開に至らなかった tick は、ここが呼ばれないので永遠に報告されなかった）。
+printf '%s\t%s\n' "$commit" "$url" > "$LOG_DIR/last-published"

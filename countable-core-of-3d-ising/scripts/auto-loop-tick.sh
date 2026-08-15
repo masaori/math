@@ -258,7 +258,7 @@ countable-core-of-3d-ising の自動ループを 1 tick 進める。
    本文を変えなかった tick でも必ず行う。
 7. 1 セクション進めたら止まる。
 8. **Slack へ通知しない**（slack-notification skill も curl も使わない）。tick の完了報告は
-   このスクリプトが公開処理の中で 1 通だけ送る。自分でも送ると 1 tick で 2 通届く。
+   この tick スクリプトが最後に 1 通だけ送る。自分でも送ると 1 tick で 2 通届く。
    例外は、立場を守れない等で人間の判断を待って止まるときだけである。
    通知の本文は台帳の「現在地」の先頭項目なので、そこに何をしたかを 1〜2 文で簡潔に書く。
 
@@ -290,6 +290,8 @@ if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
 fi
 
 log "=== tick 開始（${agent} / 間隔 ${interval_minutes} 分 / 作業ツリー ${LOOP_WORKTREE} / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
+
+head_before="$(git -C "$LOOP_WORKTREE" rev-parse --short HEAD 2>/dev/null || echo '-')"
 
 set +e
 # MCP サーバは 1 つも起動しない（tick の作業に不要で、残ると機械が詰まる）。
@@ -394,8 +396,81 @@ if [ "$status" -eq 0 ] && [ -z "$(git -C "$LOOP_WORKTREE" status --porcelain)" ]
   bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 \
     || log "    アーティファクトの公開に失敗した"
 else
-  log "    公開と通知を見送った（exit ${status}、未コミット $(git -C "$LOOP_WORKTREE" status --porcelain | wc -l | tr -d ' ') ファイル）"
+  log "    公開を見送った（exit ${status}、未コミット $(git -C "$LOOP_WORKTREE" status --porcelain | wc -l | tr -d ' ') ファイル）"
 fi
+
+# --- Slack への報告（1 tick 1 通。ここに一本化してある） ----------------------
+# **通知はこの 1 箇所だけで行う**（2026-08-15 のユーザー指示）。公開スクリプトも、
+# tick の中のエージェントも送らない。以前は公開スクリプトが送っていたため、
+# 公開まで到達しなかった tick（打ち切り・異常終了）が一度も報告されなかった。
+notify_slack() {
+  local message="$1"
+  local git_common_dir repository
+  # リポジトリ名は共有チェックアウトの名前にする（worktree 名だと通知先の分類が壊れる）。
+  git_common_dir="$(git -C "$LOOP_WORKTREE" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
+  if [ -n "$git_common_dir" ]; then
+    repository="$(basename "$(dirname "$git_common_dir")")"
+  else
+    repository="math"
+  fi
+  curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
+    -H "Content-Type: application/json" \
+    --data "$(jq -n --arg message "$message" --arg repository "$repository" \
+      '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1 \
+    || log "    Slack への通知に失敗した"
+}
+
+# 見出しは README の表題から取る。**固定文字列にすると、ゴール設定が変わったときに
+# 古い名前を通知し続ける**（実測 2026-08-14: 降格した「臨界点の切断」を名乗り続けていた）。
+tick_title="$(sed -n '1s/^#\{1,\} *//p' "$LOOP_WORKTREE/$PROJECT_NAME/README.md" 2>/dev/null || true)"
+[ -z "$tick_title" ] && tick_title="3 次元 Ising（可算側）"
+
+# その tick が何をしたか。台帳の「現在地」の先頭項目を使う（先頭 240 字で切る）。
+tick_summary="$(python3 - "$LOOP_WORKTREE/$PROJECT_NAME/docs/tasks/auto-loop-state.md" <<'PYEOF' 2>/dev/null || true
+import re, sys
+
+text = open(sys.argv[1], encoding="utf-8").read()
+section = re.search(r"^## 現在地\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+if section is None:
+    raise SystemExit(0)
+
+lines, body = section.group(1).strip().split("\n"), []
+for line in lines:
+    if line.startswith("- ") and body:
+        break
+    if line.startswith("- "):
+        body.append(line[2:].strip())
+    elif line.strip():
+        body.append(line.strip())
+text = " ".join(body).replace("**", "")
+# 人間が Slack で読むのは「その tick が何をしたか」の 1〜2 文だけである。
+print(text if len(text) <= 240 else text[:240] + "…")
+PYEOF
+)"
+
+tick_commit="$(git -C "$LOOP_WORKTREE" rev-parse --short HEAD 2>/dev/null || echo '-')"
+[ -z "$tick_summary" ] && tick_summary="$(git -C "$LOOP_WORKTREE" log -1 --format='%s' 2>/dev/null || true)"
+published_url="$(cut -f2 "$LOG_DIR/last-published" 2>/dev/null || true)"
+published_commit="$(cut -f1 "$LOG_DIR/last-published" 2>/dev/null || true)"
+[ "$published_commit" = "$tick_commit" ] || published_url=""
+
+# 「前進した」と言えるのは、このプロジェクトを触るコミットが増えたときだけである。
+# 単に HEAD が動いただけでは、他プロジェクトのループのコミットを取り込んだ可能性がある。
+own_commits="$(git -C "$LOOP_WORKTREE" rev-list --count "$head_before..HEAD" -- "$PROJECT_NAME" 2>/dev/null || echo 0)"
+
+case "$status" in
+  0)   if [ "${own_commits:-0}" -gt 0 ]; then
+         tick_outcome="前進（${own_commits} コミット）"
+       else
+         tick_outcome="コミットなし（何も残していない）"
+       fi ;;
+  124|137) tick_outcome="打ち切り（持ち時間 $(( TICK_TIMEOUT_SECONDS / 60 )) 分を超えた）" ;;
+  *)   tick_outcome="異常終了 (exit $status)" ;;
+esac
+
+# **前進しなかった tick も報告する。** 黙ると、止まっていることに誰も気づかない。
+notify_slack "$(printf '%s（%s / %s / 版 %s）\n%s\n%s' \
+  "$tick_title" "$agent" "$tick_outcome" "$tick_commit" "$tick_summary" "$published_url")"
 
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
 main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"
