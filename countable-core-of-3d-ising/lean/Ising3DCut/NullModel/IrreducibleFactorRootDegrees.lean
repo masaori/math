@@ -48,3 +48,18 @@ theorem factorizationType_determines_rootMinimalPolynomialDegrees
   simp [Nat.mul_comm]
 
 end Ising3DCut.NullModel
+
+namespace Ising3DCut.NullModel
+
+open Polynomial
+
+/--
+代数段の第一歩: モニックで既約な `P` の零点 `x` について、`x` の最小多項式は `P` 自身であり、
+したがって最小多項式の次数は `P` の次数に一致する（本文の「最小多項式の一意性」の段）。
+-/
+theorem minpoly_natDegree_eq_of_irreducible_monic {K L : Type} [Field K] [Field L] [Algebra K L]
+    (P : K[X]) (hP : Irreducible P) (hm : P.Monic) (x : L) (hx : aeval x P = 0) :
+    (minpoly K x).natDegree = P.natDegree := by
+  rw [minpoly.eq_of_irreducible_of_monic hP hx hm]
+
+end Ising3DCut.NullModel
