@@ -11,7 +11,8 @@
   先頭を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** $\lambda\le_\Lambda\mu$ を
   $\operatorname{rat}_\Lambda(\lambda)\le\operatorname{rat}_\Lambda(\mu)$（有理数の比較）で定め、反射・推移・
   全順序性は $\mathbb Q$ の同名の性質へ落とし、反対称律だけ対数で $\Lambda$ の等号へ戻した。判定は有理数の比較なので
-  決定可能。レビューでは前 tick の全射性の四層を突き合わせて修正無し。次は「対数順序群の順序の加法単調性」。
+  決定可能。レビューでは前 tick の全射性の四層を突き合わせて修正無し。式変形統一では姉妹側「$A(\theta)=B_1(\theta)B_2B_1(\theta)$」の
+  (1,2) 成分で、三つに切れていた鎖を補助等式を先に置いて一続きにした。次は「対数順序群の順序の加法単調性」。
 
 - **2026-08-15 の tick 299 は、「正の有理数の対数は全射である」を本文・SageMath・Lean（具体版・
   必要十分版・導出版）まで完成させた。** 有限台指数ベクトルから正の有理数を有限積で作り、
@@ -95,7 +96,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   段落を新定義への参照へ直した。SageMath `log-order-group-linear-order` は 125 ベクトルの全対・全三つ組を `QQ` で
   厳密に。Lean 具体版 `FreeEntropy/LogOrderGroupOrder.lean`（`logOrderLE`、決定可能性、`logOrderLE_refl/trans/
   antisymm/total`）、必要十分版 `pullback_linear_order_necSuf`（線形順序への写像と左逆写像だけ）、導出版。
-  sorry 検査 1090 件。
+  sorry 検査 1090 件。式変形統一では姉妹側 `evensectorT_009_claim_factorization_A_theta` の Step 4（$P_{12}$）で、
+  括弧内の補助等式を鎖の前へ出し、日本語で三つに切れていた鎖を一続きにし、補助等式の代入と $2ab=s_1$ を別行へ分けた。
 
 - 2026-08-15（tick 299）: `def_rational_of_log` で有限台積
   $\operatorname{rat}_{\Lambda}(\lambda)=\prod_{p\in\operatorname{supp}(\lambda)}p^{\lambda(p)}$ を定め、

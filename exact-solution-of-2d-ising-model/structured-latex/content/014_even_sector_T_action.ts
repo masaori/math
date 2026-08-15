@@ -1914,25 +1914,10 @@ P_{22}
         math(String.raw`A(\theta)`),
         " の (2,2) 成分に一致する（(1,1) 成分と同一の式）。",
       ]),
-      paragraph(["Step 4: ", math(String.raw`P`), " の (1,2) 成分。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-P_{12}
-&= a\, N_{12} + \left(-i e^{i\theta} b\right) N_{22}
-   \quad (\because \text{mat\_mult}) \\
-&= a\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\left(Ca - S b\, e^{i\theta}\right)
-   \quad (\because \text{Step 1 の } N_{12}, N_{22}) \\
-&= i\left[S a^2 - C ab\, e^{i\theta}\right]
-   + i\left[-C ab\, e^{i\theta} + S b^2 e^{2i\theta}\right]
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (e^{i\theta}e^{i\theta} = e^{2i\theta})) \\
-&= i\left[S\left(a^2 + b^2 e^{2i\theta}\right) - 2C ab\, e^{i\theta}\right]
-\end{aligned}`,
-      ),
       paragraph([
-        "ここで括弧内の第 1 項を ",
-        math(String.raw`e^{i\theta}`),
-        " でくくると、",
+        "Step 4: ",
+        math(String.raw`P`),
+        " の (1,2) 成分。準備として、補助的な等式",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1948,25 +1933,42 @@ a^2 + b^2 e^{2i\theta}
    \quad (\because a^2-b^2 = 1)
 \end{aligned}`,
       ),
-      paragraph(["また ", math(String.raw`2ab = s_1`), " なので、"]),
+      paragraph([
+        "を置く（",
+        ref("theorem_exp_product"),
+        "、",
+        ref("euler_formula_cos_sin"),
+        "）。また ",
+        math(String.raw`c_2^* = s_2^* c_2`),
+        " は ",
+        ref("duality_c2_star_eq_s2_star_c2"),
+        " による。これらを用いて",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 P_{12}
+&= a\, N_{12} + \left(-i e^{i\theta} b\right) N_{22}
+   \quad (\because \text{mat\_mult}) \\
+&= a\cdot i\left(Sa - C b\, e^{i\theta}\right)
+   + \left(-i e^{i\theta} b\right)\left(Ca - S b\, e^{i\theta}\right)
+   \quad (\because \text{Step 1 の } N_{12}, N_{22}) \\
+&= i\left[S a^2 - C ab\, e^{i\theta}\right]
+   + i\left[-C ab\, e^{i\theta} + S b^2 e^{2i\theta}\right]
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (e^{i\theta}e^{i\theta} = e^{2i\theta})) \\
+&= i\left[S\left(a^2 + b^2 e^{2i\theta}\right) - 2C ab\, e^{i\theta}\right] \\
+&= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - 2C ab\, e^{i\theta}\right]
+   \quad (\because \text{準備の補助的な等式}) \\
 &= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - C s_1 e^{i\theta}\right]
-   \quad (\because \text{直前の displayMath と倍角公式 } 2ab = s_1) \\
+   \quad (\because \text{倍角公式 } 2ab = s_1) \\
 &= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
    \quad (\because C := c_2^*,\ S := s_2^*) \\
 &= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
-   \quad (\because c_2^* = s_2^* c_2) \\
+   \quad (\because \text{duality\_c2\_star\_eq\_s2\_star\_c2}:\ c_2^* = s_2^* c_2) \\
 &= i e^{i\theta} s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
 \end{aligned}`,
       ),
       paragraph([
-        "ここで ",
-        math(String.raw`c_2^* = s_2^* c_2`),
-        " は ",
-        ref("duality_c2_star_eq_s2_star_c2"),
-        " による。得られた ",
+        "得られた ",
         math(String.raw`P_{12}`),
         " は ",
         ref("def_A_theta"),

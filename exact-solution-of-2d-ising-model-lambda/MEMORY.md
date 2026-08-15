@@ -19,7 +19,7 @@ SageMath `log-order-group-linear-order` は素数 $2,3,5$・係数 $-2..2$ の 1
 導出版 `logOrderLE_linear_order_from_necSuf`（sorry 検査 1090 件）。次の本文は「対数順序群の順序の加法単調性」
 （$\operatorname{rat}_\Lambda(\lambda+\nu)=\operatorname{rat}_\Lambda(\lambda)\operatorname{rat}_\Lambda(\nu)$ を
 対数の加法性と単射性から出し、正の有理数を掛ける単調性へ落とす。Lean は `logRat_mul` と
-`logRat_injective_of_pos` で `rationalOfLog_add` を作れば `mul_le_mul_of_nonneg_right` で閉じる）。
+`logRat_injective_of_pos` で `rationalOfLog_add` を作れば `mul_le_mul_of_nonneg_right` で閉じる）。式変形統一では姉妹側「$A(\theta)=B_1(\theta)B_2B_1(\theta)$」の Step 4（$P_{12}$）を、補助等式を前に出して一続きの鎖にした（次は同ブロックの Step 5（$P_{21}$）。「Step 4 と同じ計算」で圧縮されている）。
 
 2026-08-15 の tick 299 は、前 tick の「正の有理数の対数は単射である」の本文・SageMath・Lean
 （具体版・必要十分版・導出版）を突き合わせて修正不要と確認した。そのあと「正の有理数の対数は全射である」を
