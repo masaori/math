@@ -69,7 +69,9 @@
 6. `auto-loop-state.md` の現在地と対象表、`MEMORY.md` を更新する。
 7. commit し、remote が進んでいれば取り込んでから `HEAD:main` へ push する。
 8. fetch 後、成果コミットが remote default branch の祖先であることを確認する。
-9. 実質的な前進または修正があった tick だけ、`slack-notification` skill で一度通知する。
+9. 正常終了かつ worktree が clean の場合だけ、外側の `scripts/publish-artifact.sh` が論文 HTML を
+   `hexagonal-computation/artifacts` へ公開する。公開 URL が HTTP 200 を返した後、その URL を含む
+   Slack 通知を一度だけ送る。tick 内のエージェントは通知しない。
 
 ## 検証
 
@@ -113,6 +115,7 @@ node cellular-automata-statistical-mechanics/sagemath/tools/verify-check-linkage
 - 専用 worktree: `~/git/masaori/math-cellular-automata-loop`
 - ログ: `~/Library/Logs/cellular-automata-auto-loop/auto-loop.log`
 - エージェント: Claude と Codex を tick ごとに交互に使う
+- 論文公開・通知: `scripts/publish-artifact.sh`（同じ論文版は再通知しない）
 
 ```sh
 bash ~/.local/bin/cellular-automata-loop-launcher.sh

@@ -180,7 +180,7 @@ runbook の通り、前 tick のレビューを先に行い、台帳先頭の未
 CA 自体も正解として先取りせず、反例と非対応を成果として保存する。
 
 検証を通し、台帳と MEMORY を更新し、commit、origin/main への push、fetch 後の ancestry 確認まで行う。
-実質的な前進または修正があった場合だけ、最後に slack-notification skill で一度通知する。
+Slack 通知はこのエージェントから送らない。正常終了後に外側の処理が論文を公開し、公開 URL つきで一度だけ通知する。
 
 この tick は @HARD@ に強制終了される。@SOFT@ を過ぎたら新規着手を止め、現在の成果を検証し、
 台帳・MEMORY・commit・push・ancestry 確認を完了させる。時間を予測せず、date の実測で判断する。
@@ -244,16 +244,22 @@ case "$status" in
   *) log "=== tick 異常終了（exit ${status}、未コミット ${dirty_count} ファイル）" ;;
 esac
 
-if [ "$status" -eq 0 ] && [ "$dirty_count" = "0" ]; then
-  git rev-parse HEAD > "$LOG_DIR/last-success-commit"
-fi
-
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
 main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"
 if [ -f "$loop_pdf" ] && [ -d "$MAIN_REPO_DIR/$PROJECT_NAME" ]; then
   mkdir -p "$main_pdf_dir"
   cp "$loop_pdf" "$main_pdf_dir/document.pdf"
   log "PDF を共有チェックアウト側へ更新した"
+fi
+
+if [ "$status" -eq 0 ] && [ "$dirty_count" = "0" ]; then
+  if /bin/bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1; then
+    git rev-parse HEAD > "$LOG_DIR/last-success-commit"
+    log "論文公開・URL つき Slack 通知の処理を完了した"
+  else
+    log "NG: 論文の公開または URL つき Slack 通知に失敗した"
+    exit 1
+  fi
 fi
 
 exit "$status"

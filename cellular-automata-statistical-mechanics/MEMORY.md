@@ -340,6 +340,15 @@ claim は 6 つ: 下方集合と上方集合はそれぞれ順序凸、順序凸
 sorry 検査を全て通した。**この章の現在地は構造化記述まで。次 tick はレビュー後にこの章の
 SageMath 検算を作る。**
 
+## 論文アーティファクトと通知の一本化（2026-08-15）
+
+`scripts/publish-artifact.sh` が構造化証明から自己完結 HTML を生成し、
+`hexagonal-computation/artifacts` の `math/cellular-automata-statistical-mechanics` 配下へ公開する。
+公開 URL が HTTP 200 を返した場合だけ、直近の台帳記録と URL を Slack へ一度通知する。
+同じプロジェクト版は外部マーカーで再通知せず、別プロジェクトだけが進んだ場合も再公開しない。
+tick 内のエージェントは Slack を送らず、正常終了かつ clean のときに外側が公開・通知を担う。
+公開物は一時閲覧用であり、リポジトリ内から恒久リンクしない。
+
 ## 完了済み（2026-08-02, プロジェクト新設）
 
 - プロジェクト新設。ゴール設定を [README.md](README.md) に記述。
