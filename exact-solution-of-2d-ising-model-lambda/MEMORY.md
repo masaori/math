@@ -4,6 +4,28 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 288 は、レビューで前 tick の「開境界密度の上からの評価と値集合の上限の存在」の
+本文・SageMath・Lean が一致することを確認した。ただし前 tick の Lean 定理 5 件が sorry 検査の登録一覧
+（`lean/scripts/check-no-sorry.sh` の `targets`）に無かったので登録した（**Lean を書いたら登録一覧へも足す**）。
+そのあと「倍数の辺での上限への任意近接」を $1\le t$ の場合に限って四層まで完成させた
+（`claim_open_free_energy_density_supremum_approximation_multiples_one_le`）。上限 $u$ と
+$\varepsilon>0$ に対し、$u-\varepsilon$ が上界でないことから一辺 $a$ を取り、ブロック敷き詰め評価の
+対数化の $\psi^{\mathrm{op}}_a\le\psi^{\mathrm{op}}_{ka}$ と上界性で、すべての $k\ge1$ について
+$u-\varepsilon<\psi^{\mathrm{op}}_{ka}(t)\le u$ を得た。SageMath は単調性を有理数の指数側の不等式
+$Z_a^{(ka)^2}\le Z_{ka}^{a^2}$ として厳密に 16 件、有限モデルを ball 算術で 14 件検査した。Lean は
+`ThermodynamicLimit/OpenFreeEnergyDensitySupremumApproximationMultiples.lean`（具体版）、
+`NecSuf/ThermodynamicLimit/OpenFreeEnergyDensitySupremumApproximationMultiples.lean`
+（線形順序・上限・倍数写像に沿った単調性だけ）、`...FromNecSuf.lean`（導出）。
+**重要な発見（割り直し）**: $0<t\le1$ では開境界密度の上限は極限ではない。一辺 $1$ の開境界正方形は
+辺を持たないので $\psi^{\mathrm{op}}_1(t)=\log_{\mathbb R}2$ がすべての $L$ の値の上界であり、
+倍数列は $\psi^{\mathrm{op}}_{ka}\le\psi^{\mathrm{op}}_a$ と減少して**下限**へ向かう。
+そこで $0<t\le1$ 用に「開境界密度の下からの評価と下限の存在」
+（$Z^{\mathrm{op}}_{L,L}(t)\ge2t^{2L(L-1)}$ から $\psi^{\mathrm{op}}_L(t)\ge2\log_{\mathbb R}t$、
+完備性で $\inf$）と「倍数の辺での下限への任意近接（$0<t\le1$）」を台帳の先頭へ足した。
+「倍数でない辺への拡張」以降は、$1\le t$ は上限、$0<t\le1$ は下限を極限値として閉じる。
+式変形統一は締切のため今 tick は見送った（次 tick は姉妹側の続きから 1 件）。
+次の本文は「開境界密度の下からの評価と下限の存在」。
+
 2026-08-15 の tick 287 は、レビューで前 tick の「ブロック敷き詰め評価の対数化」の本文・
 SageMath・Lean 三本が一致することを確認した（修正無し）。そのあと「開境界密度の上からの評価と
 値集合の上限の存在」を四層まで完成させた。開境界の辺数 $2L(L-1)\le2L^2$ と配位数 $2^{L^2}$ から

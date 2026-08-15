@@ -60,6 +60,7 @@ export const ALL_LABELS = [
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
   "claim_one_s_linearly_independent",
+  "claim_open_free_energy_density_supremum_approximation_multiples_one_le",
   "claim_open_free_energy_density_supremum_exists",
   "claim_open_free_energy_density_upper_bound",
   "claim_open_rectangle_gluing_inequality",
