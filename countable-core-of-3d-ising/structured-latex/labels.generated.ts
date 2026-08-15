@@ -55,6 +55,7 @@ export const ALL_LABELS = [
   "def_structural_multiplicity",
   "remark_null_model_positioning",
   "remark_odd_period_positioning",
+  "remark_two_dimensional_prediction_filter",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

@@ -1164,4 +1164,35 @@ B(X)&=X(X+1)
       ]),
     ],
   },
+
+  {
+    id: "two_dimensional_prediction_filter_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "2 次元の有限式による測定候補の選別" },
+    labels: [],
+  },
+
+  {
+    id: "two_dimensional_prediction_filter_remark",
+    kind: "remark",
+    title: { text: "代数的不変量には測定前の予言が得られない" },
+    labels: ["remark_two_dimensional_prediction_filter"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([
+        "2 次元側で有限の式として得られているのは、整係数の分配多項式、代数的数からなるその零点、",
+        "四つの境界条件を混合する双対恒等式、および双対変換の固定点を定める二次方程式である。",
+        "最初の二つは有限グラフの定義から次元によらず得られ、後の二つは 2 次元の双対辺写像と境界条件の混合に依存する。",
+      ]),
+      paragraph([
+        "したがって、この有限式から 3 次元の自由境界族について、既約因子の次数と重複度、判別式、",
+        "分解体の次数と Galois 群、零点の最小多項式次数のいずれにも具体的な全称命題は導けない。",
+        "これら四つは測定前に何を検査するかを定められないため、次の厳密測定の候補から落とす。",
+        "零点・代数的重複度・最高次係数から多項式を復元できることは ",
+        ref("claim_roots_leading_coefficient_multiplicities_determine_polynomial"),
+        " の有限代数の一般則であり、2 次元の式が 3 次元について与える追加の予言ではない。",
+      ]),
+    ],
+  },
 ]);
