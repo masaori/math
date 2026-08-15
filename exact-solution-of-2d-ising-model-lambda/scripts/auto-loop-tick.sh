@@ -295,8 +295,14 @@ for line in lines:
     elif line.strip():
         body.append(line.strip())
 text = " ".join(body).replace("**", "")
-# 人間が Slack で読むのは「その tick が何をしたか」の 1〜2 文だけである。
-print(text if len(text) <= 240 else text[:240] + "…")
+# **文の途中で切らない**（ユーザー指摘 2026-08-15）。上限を超えるときは、
+# 上限内の最後の句点までで閉じる（句点が無いときだけ、やむなく字数で切る）。
+LIMIT = 1800
+if len(text) > LIMIT:
+    head = text[:LIMIT]
+    stop = head.rfind("。")
+    text = head[: stop + 1] if stop >= 0 else head + "…"
+print(text)
 PYEOF
 )"
 tick_commit="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-')"

@@ -92,7 +92,13 @@ if current:
 
 if entries:
     value = re.sub(r"\s+", " ", entries[-1].replace("**", "")).strip()
-    print(value if len(value) <= 240 else value[:240] + "…")
+    # **文の途中で切らない**（ユーザー指摘 2026-08-15）。上限内の最後の句点で閉じる。
+    LIMIT = 1800
+    if len(value) > LIMIT:
+        head = value[:LIMIT]
+        stop = head.rfind("。")
+        value = head[: stop + 1] if stop >= 0 else head + "…"
+    print(value)
 PYEOF
 )"
 [ -n "$summary" ] || summary="$(git -C "$REPO_DIR" log -1 --format='%s' -- "$PROJECT_NAME")"
