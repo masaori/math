@@ -71,7 +71,8 @@
 8. fetch 後、成果コミットが remote default branch の祖先であることを確認する。
 9. 正常終了かつ worktree が clean の場合だけ、外側の `scripts/publish-artifact.sh` が論文 HTML を
    `hexagonal-computation/artifacts` へ公開する。公開 URL が HTTP 200 を返した後、その URL を含む
-   Slack 通知を一度だけ送る。tick 内のエージェントは通知しない。
+   Slack 通知を一度だけ送る。公開アーティファクト URL のない完了通知は送信失敗として扱う。
+   tick 内のエージェントは通知しない。
 
 ## 検証
 

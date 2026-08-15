@@ -135,16 +135,17 @@ log "OK: 論文を公開した（版 ${short_commit}）→ ${url}"
 title="$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "$HTML" | head -1)"
 [ -n "$title" ] || title="2値セルオートマトンの内在構造"
 agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
-git_common_dir="$(git -C "$REPO_DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
-if [ -n "$git_common_dir" ]; then
-  repository="$(basename "$(dirname "$git_common_dir")")"
-else
-  repository="math"
-fi
 
 message="${title}（${agent} / 版 ${short_commit}）
 ${summary}
 ${url}"
+case "$message" in
+  *"$EXPECTED_URL"*) ;;
+  *)
+    log "NG: Slack 通知文に公開アーティファクト URL が無い（版 ${short_commit}）"
+    exit 1
+    ;;
+esac
 slack_response="$(curl --fail -sS -X POST "$WEBHOOK_URL" \
   -H 'Content-Type: application/json' \
   --data "$(jq -n --arg message "$message" --arg window "セルオートマトンと統計力学 公開" \

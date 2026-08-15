@@ -504,6 +504,7 @@ $(E_\tau,\preceq_\tau)$ は因果集合の数学的定義を満たし、$D_\tau$
 `scripts/publish-artifact.sh` が構造化証明から自己完結 HTML を生成し、
 `hexagonal-computation/artifacts` の `math/cellular-automata-statistical-mechanics` 配下へ公開する。
 公開 URL が HTTP 200 を返した場合だけ、直近の台帳記録と URL を Slack へ一度通知する。
+Slack の完了通知には公開アーティファクト URL を必ず含め、URL のない通知は送らない。
 同じプロジェクト版は外部マーカーで再通知せず、別プロジェクトだけが進んだ場合も再公開しない。
 tick 内のエージェントは Slack を送らず、正常終了かつ clean のときに外側が公開・通知を担う。
 公開物は一時閲覧用であり、リポジトリ内から恒久リンクしない。
