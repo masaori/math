@@ -4,6 +4,25 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 307 は、前 tick の「有理係数の対数順序群の順序」の四層を突き合わせて一致を確認し（`DecidableRel` の
+`noncomputable` は $\Lambda$ の順序の判定と同じ `Finsupp` 由来で先例どおり）、修正無し。「有理係数の対数順序群の順序の線形順序性と
+加法単調性」を、論法が二つ（順序の性質を $\Lambda$ へ落とす／和の証人を作る）なので線形順序性と加法単調性へ割り、前者
+「有理係数の対数順序群の順序は線形順序である」を四層まで完成させた。`claim_rational_log_order_group_linear_order`
+（`def_rational_log_order_group_order` の直後）で、準備として $N:=N_\lambda N_\mu N_\nu$ が三元すべての共通分母であること
+（`claim_common_denominator_multiple` を三度、$\mathbb N$ の積の可換性と結合則）を述べ、順序の定義の言い換え（すべての両方の
+共通分母で）で証人の比較へ移して、反射・推移・反対称・全順序性を `claim_log_order_group_linear_order` へ落とした。反対称律は
+$\lambda_N=\mu_N$ から $\lambda=(N^{-1}N)\lambda=N^{-1}(N\lambda)=N^{-1}\iota(\lambda_N)=N^{-1}\iota(\mu_N)=N^{-1}(N\mu)=\mu$
+の七段の鎖。SageMath `rational-log-order-group-linear-order`（素数 $2,3,5$、係数 6 種、216 ベクトル、二元 46656 組、三元
+5062176 組、証人一致 1610 件、代表 12 本の三つ組 1728 件、`ZZ`/`QQ`）。Lean 具体版
+`ThermodynamicLimit/RationalLogOrderGroupLinearOrder.lean`（`commonDenominator_three_exists`、
+`eq_of_commonDenominator_witness_eq`、`rationalLogOrderLE_refl/trans/antisymm/total`）、必要十分版
+`NecSuf/ThermodynamicLimit/RationalLogOrderGroupLinearOrder.lean`（添字付き関係 `indexedLE` と `indexedLE_refl/trans/antisymm/total_necSuf`。
+各性質が使う仮定だけを取る）、導出版（`rationalLogOrderLE_eq_indexedLE` は `rfl`。sorry 検査 1133 件）。次は
+「有理係数の対数順序群の順序の加法単調性」（$\lambda\le\mu\Rightarrow\lambda+\nu\le\mu+\nu$。三元の共通の共通分母 $N$ で
+$(\lambda+\nu)_N=\lambda_N+\nu_N$ を $N\cdot(\lambda+\nu)=N\lambda+N\nu=\iota(\lambda_N)+\iota(\nu_N)=\iota(\lambda_N+\nu_N)$
+（有理数倍の分配則・`claim_rational_log_order_group_embedding` の加法性）で示し、`claim_log_order_group_add_monotone` へ落とす。
+Lean は `commonDenominator_three_exists` と `toRational_add`、`smul_add`）。
+
 2026-08-16 の tick 306 は、前 tick の「共通分母の正整数倍は共通分母である」「二元は共通の共通分母を持つ」の四層を
 突き合わせて一致を確認し（後者は $N_\lambda N_\mu$ が両方の共通分母であるという一つの存在主張なので 1 ブロック 1 主張に
 反しない）、本文末尾「この先に書くこと」の済んだ「共通分母の正整数倍」を消して先に push した。そのあと「有理係数の対数順序群の

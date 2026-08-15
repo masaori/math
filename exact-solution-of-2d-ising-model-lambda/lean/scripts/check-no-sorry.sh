@@ -107,6 +107,21 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_iff_canonical
   Ising2DLambda.NecSuf.ThermodynamicLimit.exists_iff_forall_of_independent_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_iff_forall_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_three_exists
+  Ising2DLambda.ThermodynamicLimit.eq_of_commonDenominator_witness_eq
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_refl
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_trans
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_antisymm
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_total
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_refl_necSuf
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_trans_necSuf
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_antisymm_necSuf
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_total_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_eq_indexedLE
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_refl_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_trans_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_antisymm_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_total_from_necSuf
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos

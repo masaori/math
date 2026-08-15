@@ -3,6 +3,35 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-15（tick 302）の記録
+
+### 現在地
+
+- **2026-08-15 の tick 302 は、「有理係数の対数順序群の順序の定義と共通分母からの独立性」から
+  前提となる「対数順序群の順序は正整数倍で変わらない」を割り出し、本文・SageMath・Lean（具体版・
+  必要十分版・導出版）まで完成させた。** 補助等式 $\operatorname{rat}_{\Lambda}(N\lambda)
+  =(\operatorname{rat}_{\Lambda}(\lambda))^{N}$ を帰納法で示し、$\lambda\le_\Lambda\mu\iff
+  N\lambda\le_\Lambda N\mu$ を正の有理数上の $N$ 乗の狭義単調性へ落とした。レビューでは前 tick の
+  加法単調性の四層を突き合わせて修正無し。次は「有理係数の対数順序群の順序の定義と共通分母からの独立性」。
+
+### 前進の記録
+
+- 2026-08-15（tick 302）: **割り直し**: 「有理係数の対数順序群の順序の定義と共通分母からの独立性」の
+  備考が使う「$\Lambda$ の順序の正整数倍不変性」は本文に無く、それ自体が一つの論法（冪への移送と
+  $N$ 乗の単調性）なので、先に `claim_log_order_group_positive_multiple_invariant` として章
+  「有限系の自由エントロピー」の加法単調性の直後に置き四層で閉じた。SageMath
+  `log-order-group-positive-multiple-invariant` は 125 ベクトル・$N\le4$ で冪等式 625 件と同値 62500 件を
+  `ZZ`/`QQ` で厳密に。Lean 具体版 `FreeEntropy/LogOrderGroupPositiveMultipleInvariant.lean`
+  （`rationalOfLog_natSmul`、`logOrderLE_natSmul_iff`）、必要十分版 `pullback_multiple_iff_necSuf`
+  （倍を冪へ送る写像と、冪が像の上で順序を保ちかつ反映することだけ）、導出版。sorry 検査 1100 件。
+  式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-15（tick 302）: 前 tick の「対数順序群の順序の加法単調性」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせた。和を積へ移す補助主張、右乗法の単調性、対象ラベル、入口 import、
+  sorry 検査への登録が一致しているため修正は無い。
+
 ## 2026-08-15（tick 301）の記録
 
 ### 現在地
