@@ -4,6 +4,19 @@
 
 ## 現在の到達点（2026-08-15 時点）
 
+2026-08-15 の tick 291 は、レビューで前 tick の「開境界密度の下からの評価と下限の存在」の本文・
+SageMath・Lean 具体版・必要十分版・導出版が一致していることを確認した（修正無し）。そのあと
+「倍数の辺での下限への任意近接（$0<t\le1$ の場合）」を四層まで完成させた。下限 $v$ と
+$\varepsilon>0$ に対し、$v+\varepsilon$ が下界でないことから一辺 $a$ を取り、ブロック敷き詰め評価の
+$\psi^{\mathrm{op}}_{ka}(t)\le\psi^{\mathrm{op}}_a(t)$ と下界性を合わせて、全ての $k\ge1$ について
+$v\le\psi^{\mathrm{op}}_{ka}(t)<v+\varepsilon$ を得た。SageMath は倍数列の単調性 16 件を有理数の
+整数冪で厳密に、有限モデル 15 件を検査した。Lean は具体版
+`ThermodynamicLimit/OpenFreeEnergyDensityInfimumApproximationMultiples.lean`、必要十分版
+`rangeValue_infimum_approximation_multiples_necSuf`（線形順序・下限・倍数写像に沿う単調性だけ）、
+導出版を持つ（sorry 検査 1052 件）。式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」の
+(h2.z) の二つの帰納段階で、スカラー整理と冪の指数法則を別の行へ分けた。次の本文は
+「倍数でない辺への拡張」。
+
 2026-08-15 の tick 290 は、レビューで前 tick の「開境界密度の下からの評価と下限の存在」の下限の証明の
 係数表記を主張の $\iota_{\mathbb{Q}\to\mathbb{R}}(2)$ へ揃え、SageMath 概要の「対象ラベル」が箇条書き形式で
 対応検査 `verify-check-linkage.ts` の正規表現（`**対象ラベル**: \`...\`` を行頭に置く一行形式）に合わず

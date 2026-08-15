@@ -1105,6 +1105,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_infimum_of_le_one
   Ising2DLambda.NecSuf.ThermodynamicLimit.indexedValueSet_has_infimum_necSuf
   Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensityValueSet_has_infimum_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_infimum_approximation_multiples_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_infimum_approximation_multiples_necSuf
+  Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_infimum_approximation_multiples_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

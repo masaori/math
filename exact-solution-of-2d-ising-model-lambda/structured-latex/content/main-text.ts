@@ -38602,6 +38602,77 @@ Z^{\mathrm{op}}_{L,L}(t)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_free_energy_density_infimum_approximation_multiples_le_one",
+    kind: "claim",
+    title: { text: "倍数の辺での下限への任意近接（t が 1 以下の場合）" },
+    labels: ["claim_open_free_energy_density_infimum_approximation_multiples_le_one"],
+    habitat: "R",
+    realEscape:
+      "開境界自由エネルギー密度の値集合の下限へ、辺の倍数列に沿って任意に近づけることを実数の順序で述べるため。" +
+      "使うのは順序体の性質、三分律、下界と下限の定義、ブロック敷き詰め評価の対数化だけであり、" +
+      "完備性はこのブロックでは使わない（下限 v の存在は仮定に置く）。",
+    verification: ["sagemath/check/open-free-energy-density-infimum-approximation-multiples"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_infimum_approximation_multiples_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.rangeValue_infimum_approximation_multiples_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openFreeEnergyDensity_infimum_approximation_multiples_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "実数 ", math(String.raw`t\in\mathbb{R}`), "、", math(String.raw`0<_{\mathbb{R}}t\le_{\mathbb{R}}1`),
+        " を固定し、", math(String.raw`v\in\mathbb{R}`), " を値集合 ",
+        math(String.raw`\Psi^{\mathrm{op}}_t`), "（", ref("def_open_free_energy_density_value_set"),
+        "）の下限（", ref("def_real_set_infimum"), "）とする。このとき、任意の ",
+        math(String.raw`\varepsilon\in\mathbb{R}`), "、", math(String.raw`0<_{\mathbb{R}}\varepsilon`),
+        " に対し、ある ", math(String.raw`a\in\mathbb{N}`), "、", math(String.raw`a\ge1`),
+        " が存在して、すべての ", math(String.raw`k\in\mathbb{N}`), "、", math(String.raw`k\ge1`),
+        " について",
+      ]),
+      displayMath(String.raw`v\le_{\mathbb{R}}\psi^{\mathrm{op}}_{ka}(t)<_{\mathbb{R}}v+\varepsilon`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\psi^{\mathrm{op}}_{ka}(t)`), " は ",
+        ref("def_open_square_free_energy_density"), "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず ", math(String.raw`a`), " を取る。", math(String.raw`0<_{\mathbb{R}}\varepsilon`),
+        " の両辺へ ", math(String.raw`v`), " を加えると ", math(String.raw`v<_{\mathbb{R}}v+\varepsilon`),
+        " である（順序が加法と両立すること。", ref("remark_real_field_escape"), "）。もし ",
+        math(String.raw`v+\varepsilon`), " が ", math(String.raw`\Psi^{\mathrm{op}}_t`),
+        " の下界（", ref("def_real_set_lower_bound"), "）なら、下限の最大性（",
+        ref("def_real_set_infimum"), "）により ", math(String.raw`v+\varepsilon\le_{\mathbb{R}}v`),
+        " となり、", math(String.raw`v<_{\mathbb{R}}v+\varepsilon`),
+        " と合わせて三分律に反する。よって ", math(String.raw`v+\varepsilon`),
+        " は下界ではなく、ある ", math(String.raw`y\in\Psi^{\mathrm{op}}_t`), " が存在して ",
+        math(String.raw`v+\varepsilon\le_{\mathbb{R}}y`),
+        " は成り立たない（全称の否定は反例の存在。古典論理）。三分律により ",
+        math(String.raw`y<_{\mathbb{R}}v+\varepsilon`), " であり、値集合の定義（",
+        ref("def_open_free_energy_density_value_set"), "）により、ある ",
+        math(String.raw`a\in\mathbb{N}`), "、", math(String.raw`a\ge1`), " が存在して ",
+        math(String.raw`y=\psi^{\mathrm{op}}_a(t)`), " である。この ", math(String.raw`a`), " を取る。",
+      ]),
+      paragraph([
+        "次に ", math(String.raw`k\in\mathbb{N}`), "、", math(String.raw`k\ge1`),
+        " を任意に取る。", math(String.raw`\psi^{\mathrm{op}}_{ka}(t)\in\Psi^{\mathrm{op}}_t`),
+        " である（", ref("def_open_free_energy_density_value_set"), "。", math(String.raw`ka\ge1`), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+v
+&\le_{\mathbb{R}}\psi^{\mathrm{op}}_{ka}(t)
+&&\bigl(\because\ v\text{ は }\Psi^{\mathrm{op}}_t\text{ の下界（}\blkref{def_real_set_infimum}\text{）で }\psi^{\mathrm{op}}_{ka}(t)\in\Psi^{\mathrm{op}}_t\bigr)\\
+&\le_{\mathbb{R}}\psi^{\mathrm{op}}_a(t)
+&&\bigl(\because\ \blkref{claim_open_square_block_tiling_logarithm}\text{ の }0<_{\mathbb{R}}t\le_{\mathbb{R}}1\text{ の場合の第二の不等式}\bigr)\\
+&<_{\mathbb{R}}v+\varepsilon
+&&\bigl(\because\ \text{上の }a\text{ の取り方}\bigr).
+\end{aligned}`),
+      paragraph([
+        "順序の推移律（", ref("remark_real_field_escape"), "）により主張の二つの不等式を得る。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_claim_open_free_energy_density_supremum_approximation_multiples_one_le",
     kind: "claim",
     title: { text: "倍数の辺での上限への任意近接（t が 1 以上の場合）" },
