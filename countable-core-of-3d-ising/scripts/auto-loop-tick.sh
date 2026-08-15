@@ -418,8 +418,8 @@ notify_slack() {
   # この URL は秘密ではないので、伏せ字にせずこのまま置く。
   curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
     -H "Content-Type: application/json" \
-    --data "$(jq -n --arg message "$message" --arg repository "$repository" \
-      '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1 \
+    --data "$(jq -n --arg message "$message" --arg window "3次元 Ising の可算核 自動ループ" \
+      '{window: $window, message: $message}')" >> "$LOG_FILE" 2>&1 \
     || log "    Slack への通知に失敗した"
 }
 

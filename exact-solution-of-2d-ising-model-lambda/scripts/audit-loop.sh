@@ -152,7 +152,7 @@ message="$message"$'\n'"詳細: $PROJECT_NAME/logs/audit.log"
 
 log "監査で ${#problems[@]} 件の異常を検出したので通知する"
 curl -sS -X POST "$WEBHOOK_URL" -H "Content-Type: application/json" \
-  --data "$(jq -n --arg message "$message" --arg repository "$(basename "$REPO_DIR")" \
-    '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1
+  --data "$(jq -n --arg message "$message" --arg window "2次元 Ising（Λ の立場）監査" \
+    '{window: $window, message: $message}')" >> "$LOG_FILE" 2>&1
 
 exit 1

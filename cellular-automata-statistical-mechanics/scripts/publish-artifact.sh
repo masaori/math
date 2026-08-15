@@ -147,8 +147,8 @@ ${summary}
 ${url}"
 slack_response="$(curl --fail -sS -X POST "$WEBHOOK_URL" \
   -H 'Content-Type: application/json' \
-  --data "$(jq -n --arg message "$message" --arg repository "$repository" \
-    '{message: $message, repository: $repository}')")"
+  --data "$(jq -n --arg message "$message" --arg window "セルオートマトンと統計力学 公開" \
+    '{window: $window, message: $message}')")"
 printf '%s\n' "$slack_response" >> "$LOG_FILE"
 if ! printf '%s' "$slack_response" | jq -e '.ok == true' >/dev/null; then
   log "NG: Slack が成功応答を返さなかった（版 ${short_commit}）"

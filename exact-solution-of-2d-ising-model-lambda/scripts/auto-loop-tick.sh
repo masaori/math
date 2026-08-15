@@ -327,8 +327,8 @@ tick_message="$(printf '2次元 Ising 模型（Λ の立場）（%s / %s / 版 %
 # この URL は秘密ではないので、伏せ字にせずこのまま置く。
 curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
   -H "Content-Type: application/json" \
-  --data "$(jq -n --arg message "$tick_message" --arg repository "$(basename "$REPO_DIR")" \
-    '{message: $message, repository: $repository}')" >> "$LOG_FILE" 2>&1 \
+  --data "$(jq -n --arg message "$tick_message" --arg window "2次元 Ising（Λ の立場）自動ループ" \
+    '{window: $window, message: $message}')" >> "$LOG_FILE" 2>&1 \
   || log "    Slack への通知に失敗した"
 
 exit "$status"
