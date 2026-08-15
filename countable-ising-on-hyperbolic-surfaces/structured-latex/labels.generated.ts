@@ -14,6 +14,7 @@ export const ALL_LABELS = [
   "def_even_edge_subset",
   "def_even_subgraph_polynomial",
   "def_finite_cellulation_cell_sets",
+  "def_finite_cellulation_connected_one_skeleton",
   "def_finite_cellulation_face_boundary_word",
   "def_finite_cellulation_opposite_edge_occurrences",
   "def_finite_cellulation_vertex_links_are_cycles",

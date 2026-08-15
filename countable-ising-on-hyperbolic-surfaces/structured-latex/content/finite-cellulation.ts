@@ -259,4 +259,53 @@ C_v\ne\varnothing,\\[4pt]
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_definition_connected_one_skeleton",
+    kind: "definition",
+    title: { text: "一次骨格の連結性を判定する有限述語" },
+    labels: ["def_finite_cellulation_connected_one_skeleton"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-cellulation-connected-one-skeleton"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフ ",
+        math(String.raw`G=(V,E,\partial_0,\partial_1)`),
+        " に対し、一次骨格連結述語 ",
+        math(String.raw`\operatorname{ConnectedOneSkeleton}`),
+        " を真偽値集合 ",
+        math(String.raw`\{\mathrm{false},\mathrm{true}\}`),
+        " に値を取る次の条件として定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\operatorname{ConnectedOneSkeleton}(G)
+\Longleftrightarrow\\
+&\quad
+\text{任意の }v,w\in V\text{ に対して、ある }r\in\mathbb N\text{ と}\\
+&\quad
+v_j\in V\quad(0\le j\le r),\qquad
+e_j\in E\quad(1\le j\le r)\text{ が存在し、}\\
+&\quad
+v_0=v,\qquad v_r=w,\qquad
+\{\partial_0(e_j),\partial_1(e_j)\}=\{v_{j-1},v_j\}
+\quad(1\le j\le r).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " は ",
+        math(String.raw`\mathbb N`),
+        "、頂点列の各元は有限集合 ",
+        math(String.raw`V`),
+        "、辺列の各元は有限集合 ",
+        math(String.raw`E`),
+        " に属する。",
+        math(String.raw`v=w`),
+        " の場合は ",
+        math(String.raw`r=0`),
+        " の列を許す。この述語は一つの頂点から端点写像を通じて到達できる頂点を有限回列挙し、その集合が ",
+        math(String.raw`V`),
+        " に等しいかを有限集合の等号で比較して判定できる。",
+      ]),
+    ],
+  },
 ]);
