@@ -125,6 +125,10 @@ targets=(
   Ising3DCut.NecSuf.StructuralCore.multiplicity_palindrome
   Ising3DCut.StructuralCore.multiplicity_palindrome_from_necSuf
   Ising3DCut.StructuralCore.periodicStructuralMultiplicity_not_palindrome
+  Ising3DCut.NullModel.distinctRoots_do_not_determine_leadingCoefficient
+  Ising3DCut.NullModel.distinctRoots_do_not_determine_multiplicity
+  Ising3DCut.NullModel.eq_leadingCoeff_mul_prod_roots
+  Ising3DCut.NullModel.eq_of_roots_and_leadingCoeff_eq
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
