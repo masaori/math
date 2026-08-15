@@ -556,12 +556,18 @@ C_{n+1}
         math(String.raw`D_{n+1} = [K_1 H_1^{(+)},\, D_n]`),
         "。基底段階（",
         math(String.raw`n=0`),
-        "、偶数）は ",
-        math(String.raw`D_0 = \check{Y}_\mu`),
-        " と偶数側の右辺 ",
-        math(String.raw`(-1)^{0}(2K_1)^{0}\check{Y}_\mu = \check{Y}_\mu`),
-        " の一致による。",
+        "、偶数）では、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+D_0
+&= \check{Y}_\mu
+   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&= (-1)^0(2K_1)^0\check{Y}_\mu
+   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_1)^0=1)
+\end{aligned}`,
+      ),
+      paragraph(["となり、偶数側の右辺と一致する。"]),
       paragraph([
         "帰納段階 1（",
         math(String.raw`n`),

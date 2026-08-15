@@ -15,7 +15,8 @@ push した。そのあと同セクションの Lean を完成させ、セクシ
 `scaled_map_twoSided_bounds_necSuf` は順序を保つ写像・像の二項分解・尺度作用の分配と係数の相殺
 だけを仮定し（$A$ の加法の可換性も $K$ の乗法も不要）、$1\le t$ の場合は順序の向きを反転して
 同じ定理から導いた。本文へ `lean` 宣言を付け、SageMath 概要の「Lean 未着手」を実態へ直した。
-sorry 検査 1032 件、すべて非依存。次の本文は「開境界密度の上からの評価と値集合の上限の存在」
+sorry 検査 1032 件、すべて非依存。式変形統一では姉妹側「$\check Z,\check Y$ の $n$ 重交換子」の
+(h1.y) の基底段階 $D_0$ を (h1.z) と同じ二段の等号鎖へ開いた。次の本文は「開境界密度の上からの評価と値集合の上限の存在」
 （開境界の値の上界 → $\psi^{\mathrm{op}}_L(t)$ の $L$ に依らない上界 → 完備性で上限。周期境界側の
 `FreeEnergyDensityUpperBound.lean`・`FreeEnergyDensitySupremum.lean` と同じ形にできるはず。
 開境界の値の上界は `PartitionValueUpperBound` の開境界版が要るか、$Z^{\mathrm{op}}_{L,L}(t)\le
