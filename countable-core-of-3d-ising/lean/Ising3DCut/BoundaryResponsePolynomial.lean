@@ -343,6 +343,26 @@ theorem brokenMonomial_maps_to_monomial_under_outer_edges_to_one
   -- 像に入る辺の不定元の行き先
   exact Finset.prod_congr rfl fun e _ ↦ hin e
 
+/-- 増えた辺の変数を 1 に置いた境界応答多項式は配位ごとの元の外箱の破れ辺の単項式の有限和（人手証明
+`claim_full_boundary_response_outer_edges_to_one_is_sum_of_inner_monomials`）。前主張と同じ `ι`・`π` の下で、
+環準同型 `π` が有限和を保つこと（`map_sum`）と、各項へ前主張
+`brokenMonomial_maps_to_monomial_under_outer_edges_to_one` を項ごとに適用すること（`Finset.sum_congr`）の 1 論法。 -/
+theorem fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (ι : Edge → Edge'') (hι : Function.Injective ι)
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hin : ∀ e : Edge, π (X (ι e)) = X e)
+    (hout : ∀ e'' : Edge'', e'' ∉ Set.range ι → π (X e'') = 1) :
+    π (multivariatePartitionPolynomial broken'') =
+      ∑ σ : Configuration × Outer, ∏ e ∈ (broken'' σ).preimage ι hι.injOn, X e := by
+  unfold multivariatePartitionPolynomial
+  -- 環準同型は有限和を保つ
+  rw [map_sum]
+  -- 各項へ前主張を適用
+  exact Finset.sum_congr rfl fun σ _ ↦
+    brokenMonomial_maps_to_monomial_under_outer_edges_to_one ι hι π hin hout (broken'' σ)
+
 end
 
 end Ising3DCut
