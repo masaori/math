@@ -6,6 +6,7 @@ import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
 import CellularAutomata.GlobalMapIteration
 import CellularAutomata.InverseMapLocality
+import CellularAutomata.IterateMonoid
 import CellularAutomata.LocalRuleRepresentation
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.EssentialDependency

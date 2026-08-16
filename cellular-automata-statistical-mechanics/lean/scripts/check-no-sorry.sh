@@ -78,6 +78,23 @@ targets=(
   CellularAutomata.GlobalMapIteration.mem_scanPairs_from_necessary_sufficient
   CellularAutomata.GlobalMapIteration.card_scanPairs_two_mul_from_necessary_sufficient
   CellularAutomata.GlobalMapIteration.exists_collision_in_scanPairs_from_necessary_sufficient
+  CellularAutomata.IterateMonoid.iterateMap_comp_add
+  CellularAutomata.IterateMonoid.identity_mem_powerSet
+  CellularAutomata.IterateMonoid.comp_mem_powerSet
+  CellularAutomata.IterateMonoid.comp_comm_on_powerSet
+  CellularAutomata.IterateMonoid.comp_assoc_on_powerSet
+  CellularAutomata.IterateMonoid.identity_laws_on_powerSet
+  CellularAutomata.IterateMonoid.card_endofunctions
+  CellularAutomata.IterateMonoid.powerSet_finite
+  CellularAutomata.IterateMonoid.ncard_powerSet_le
+  CellularAutomata.IterateMonoid.finite_commutative_monoid_laws
+  CellularAutomata.IterateMonoid.iterateMap_collision
+  CellularAutomata.IterateMonoid.iterateMap_collision_shift
+  CellularAutomata.IterateMonoid.iterateMap_reduce_period
+  CellularAutomata.IterateMonoid.exists_representative_below_of_collision
+  CellularAutomata.IterateMonoid.mem_representatives_iff_powerSet
+  CellularAutomata.IterateMonoid.map_eq_iff_state_eq
+  CellularAutomata.IterateMonoid.representative_composition
   CellularAutomata.CausalSetPrimaryLiterature.literatureInterval_finite_of_finset
   CellularAutomata.CausalSetPrimaryLiterature.literatureInterval_eq_orderInterval
   CellularAutomata.CausalSetPrimaryLiterature.eventOrder_locally_finite
