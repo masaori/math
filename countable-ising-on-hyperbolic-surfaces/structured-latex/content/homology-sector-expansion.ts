@@ -222,4 +222,40 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "homology_sector_definition_first_cycle_space",
+    kind: "definition",
+    title: { text: "F_2 上の一次サイクル空間" },
+    labels: ["def_first_cycle_space_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/first-cycle-space-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_first_boundary_matrix_over_f2"),
+        " が定める有限線形写像 ",
+        math(String.raw`\partial_1:\mathbb F_2^{E_{\mathrm{cell}}}\to\mathbb F_2^{V_{\mathrm{cell}}}`),
+        " に対し、一次サイクル空間を",
+      ]),
+      displayMath(String.raw`\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+:=
+\left\{
+  c\in\mathbb F_2^{E_{\mathrm{cell}}}
+  \ \middle|\
+  \ \partial_1c=0_{\mathbb F_2^{V_{\mathrm{cell}}}}
+\right\}
+=\ker(\partial_1)
+\subseteq\mathbb F_2^{E_{\mathrm{cell}}}`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`c:E_{\mathrm{cell}}\to\mathbb F_2`),
+        " は辺ラベルごとの係数を与える写像であり、",
+        math(String.raw`\partial_1c`),
+        " は有限行列と係数列の積である。したがって ",
+        math(String.raw`\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " は有限な ",
+        math(String.raw`\mathbb F_2`),
+        " ベクトル空間である。辺部分集合とは同一視せず、辺部分集合から係数写像への写像は別の主張で定義する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
