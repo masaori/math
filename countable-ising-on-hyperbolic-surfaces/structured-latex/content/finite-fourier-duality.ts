@@ -587,4 +587,59 @@ A
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_primal_dual_cell_correspondence",
+    kind: "definition",
+    title: { text: "主セルと双対セルの対応データ" },
+    labels: ["def_primal_dual_cell_correspondence"],
+    habitat: "finite",
+    verification: ["sagemath/check/primal-dual-cell-correspondence"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_cell_sets"),
+        " のセル集合入力 ",
+        math(String.raw`\mathcal C_{\mathrm{cell}}=(V_{\mathrm{cell}},E_{\mathrm{cell}},F_{\mathrm{cell}})`),
+        " が ",
+        ref("def_oriented_closed_surface_cellulation"),
+        " の向き付けられた閉曲面セル分割述語を満たすとする。主セルのラベルとは異なる新しいラベルからなる、互いに素な三つの空でない有限集合 ",
+        math(String.raw`V_{\mathrm{cell}}^\ast`),
+        "、",
+        math(String.raw`E_{\mathrm{cell}}^\ast`),
+        "、",
+        math(String.raw`F_{\mathrm{cell}}^\ast`),
+        " と、三つの全単射",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+d_0:F_{\mathrm{cell}}
+&\longrightarrow V_{\mathrm{cell}}^\ast,\\
+d_1:E_{\mathrm{cell}}
+&\longrightarrow E_{\mathrm{cell}}^\ast,\\
+d_2:V_{\mathrm{cell}}
+&\longrightarrow F_{\mathrm{cell}}^\ast
+\end{aligned}`),
+      paragraph([
+        "の組を、",
+        math(String.raw`\mathcal C_{\mathrm{cell}}`),
+        " の主セルと双対セルの対応データと呼ぶ。双対頂点、双対辺、双対面の有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal C_{\mathrm{cell}}^\ast
+:=
+\bigl(V_{\mathrm{cell}}^\ast,E_{\mathrm{cell}}^\ast,F_{\mathrm{cell}}^\ast\bigr)`),
+      paragraph([
+        "と書く。面 ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " に対応する双対頂点は ",
+        math(String.raw`d_0(f)\in V_{\mathrm{cell}}^\ast`),
+        "、辺 ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " に対応する双対辺は ",
+        math(String.raw`d_1(e)\in E_{\mathrm{cell}}^\ast`),
+        "、頂点 ",
+        math(String.raw`v\in V_{\mathrm{cell}}`),
+        " に対応する双対面は ",
+        math(String.raw`d_2(v)\in F_{\mathrm{cell}}^\ast`),
+        " である。主セルと双対セルを同一視せず、両者の移行には三つの全単射だけを用いる。この定義はセルラベルの対応だけを定め、双対辺の端点写像と双対面の境界語は後続の別ブロックで定める。全ての対象は有限集合であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
