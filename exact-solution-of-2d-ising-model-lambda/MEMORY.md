@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 358 は、前 tick の「列が定める下組」と「下に閉じている」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「開境界正方形の密度の下組は空でない」を四層で閉じた。
+`def_open_square_density_lower_set`（`claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $A^{\mathrm{op}}(q):=A((\Psi^{\mathrm{op}}_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$（$q\in\mathbb Q_{>0}$）。上限の段が繰り返し引くので名前を置いた。
+`claim_open_square_density_lower_set_nonempty`: $q\in\mathbb Q_{>0}$ で $-\iota(\ell_2)\in A^{\mathrm{op}}(q)$（$q\le1$ は要らない。台帳の行名から外した）。証明は準備二つ（$0\le\iota(\ell_2)$ は `claim_rational_embedded_log_order_iff` を $(1,2)$ で読む既出の鎖、$\iota(\ell_2)\ne0$ は $\ell_2(2)=1\ne0$ と `claim_rational_log_order_group_embedding` の単射性）、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$、一続き三段（$\varepsilon$ の定義、逆元律、`claim_open_square_free_entropy_density_nonnegative`）。
+`remark_real_escape_plan` の脱出の項に $A^{\mathrm{op}}(q)$ と空でないことへの参照を足した。
+SageMath `check/open-square-density-lower-set-nonempty/`（$q$ 8 値、$L\le4$、一辺 4 は行ごとの動的計画法。141 検査、10 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`openSquareDensityLowerSet`、`mem_openSquareDensityLowerSet_iff`、`toRational_generator_two_ne_zero`（`Finsupp.zero_apply`・`zero_ne_one`・`toRational_injective`・`toRational_zero`）、`neg_toRational_generator_two_mem_openSquareDensityLowerSet`（`neg_add_cancel`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_zero_openScaledFreeEntropy`）、`openSquareDensityLowerSet_nonempty`），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`neg_mem_lowerSetOfSequence_of_nonneg_necSuf`。`[Add X] [Zero X] [Neg X]`、正の元 $\varepsilon$ とその逆元律 $-\varepsilon+\varepsilon=0$、列の非負だけ。`Nat.le_refl` には `Mathlib.Order.Basic` が要る）、導出版。sorry 検査 1339 件。
+次は「開境界正方形の密度の下組の元は密度の上からの評価以下」（$\mu\in A^{\mathrm{op}}(q)$ なら $\mu=\mu+0\le\mu+\varepsilon\le\Psi^{\mathrm{op}}_N(q)\le\iota(\ell_2)+2\iota(\log(1+q))$（`claim_open_square_free_entropy_density_upper_bound` を $L:=N$ で読む）。加法単調性（$0\le\varepsilon$ を左から足す形は `claim_rational_log_order_group_add_monotone` の向きに注意）・推移律）。
+
+（tick 357 の記録）
 2026-08-17 の tick 357 は、前 tick の「開境界正方形の密度の列は Cauchy 列である」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「切断による実数体への一度きりの脱出」を論法の数で五行（下組の定義と下閉性／下組は空でない／下組は上に有界／実現写像の順序保存（実対数）／上限として実数を取る（完備性））へ割り、その最初を四層で閉じた。
 `def_rational_log_order_group_sequence_lower_set`（`claim_open_square_density_sequence_cauchy_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $\Lambda_{\mathbb Q}$ の列 $(\lambda_L)_{L\ge1}$ が定める下組 $A:=\{\mu\mid\exists\varepsilon\,(0\le\varepsilon,\varepsilon\ne0)\,\exists N\ge1\,\forall L\ge N:\ \mu+\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L\}$。可算集合 $\Lambda_{\mathbb Q}$ の部分集合で、極限・完備性・実対数を参照しない。
@@ -4045,9 +4056,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の列が定める下組」（`def_rational_log_order_group_sequence_lower_set`）と「列が定める下組は下に閉じている」（`claim_rational_log_order_group_sequence_lower_set_downward_closed`）の本文・SageMath
-  `rational-log-order-group-sequence-lower-set`・Lean 具体版・必要十分版・導出版を突き合わせる。書き直した `remark_real_escape_plan` の脱出の項も読み直す。
-- **次に進めるセクションは「開境界正方形の密度の下組は空でない（$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順）。
+- **レビュー**: 「開境界正方形の密度の列が定める下組」（`def_open_square_density_lower_set`）と「開境界正方形の密度の下組は空でない」（`claim_open_square_density_lower_set_nonempty`）の本文・SageMath
+  `open-square-density-lower-set-nonempty`・Lean 具体版・必要十分版・導出版を突き合わせる。
+- **次に進めるセクションは「開境界正方形の密度の下組の元は密度の上からの評価以下」**（状態台帳のセクション表の先頭行。備考に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
