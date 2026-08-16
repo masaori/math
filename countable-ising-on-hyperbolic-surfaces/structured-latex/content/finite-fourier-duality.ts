@@ -1032,4 +1032,44 @@ c\!\left(d_1^{-1}(e^\ast)\right)
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_primal_cocycle_to_dual_cycle_transport",
+    kind: "definition",
+    title: { text: "主一次コサイクルから双対一次サイクルへの係数移送写像" },
+    labels: ["def_primal_cocycle_to_dual_cycle_transport"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-cocycle-to-dual-cycle-transport"],
+    statement: [
+      paragraph([
+        ref("def_primal_first_cocycle_space_over_f2"),
+        " の主一次コサイクル空間と、",
+        ref("theorem_primal_cocycle_transport_is_dual_cycle"),
+        " の双対一次サイクル空間を用いる。",
+        ref("def_primal_to_dual_edge_coefficient_transport"),
+        " の係数移送写像の始域を主一次コサイクル空間へ制限した写像を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1^{\mathrm{coc}}:
+\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+&\longrightarrow
+\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2),\\
+c
+&\longmapsto
+\mathsf D_1(c)
+\end{aligned}`),
+      paragraph([
+        "で定める。任意の ",
+        math(String.raw`c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " に対して ",
+        ref("theorem_primal_cocycle_transport_is_dual_cycle"),
+        " より ",
+        math(String.raw`\mathsf D_1(c)\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        " なので、この終域をもつ写像は well-defined である。主一次コサイクル空間と双対一次サイクル空間を同一視せず、両者の移行には ",
+        math(String.raw`\mathsf D_1^{\mathrm{coc}}`),
+        " だけを用いる。この定義は第一ホモロジー類への作用をまだ定めない。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
