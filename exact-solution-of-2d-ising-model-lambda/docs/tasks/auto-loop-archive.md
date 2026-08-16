@@ -3,6 +3,27 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 348 で台帳から移した記録（tick 343 分）
+
+### 現在地
+
+- **2026-08-16 の tick 343 は、台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を一つずつ主張にする代わりに、それらを一度に読める一行「埋め込んだ対数の順序は正の有理数の順序と一致する」（$q,q'\in\mathbb Q_{>0}$ について $q\le q'\iff\iota(\log q)\le_{\Lambda_{\mathbb Q}}\iota(\log q')$）として本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_embedded_log_order_iff`（`claim_rational_log_order_group_scalar_compare_nonpos` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は同値の四段の鎖 $q\le q'\iff\log q\le_\Lambda\log q'$（`claim_rational_log_order_iff`）$\iff\frac1{1^2}\cdot\iota(\log q)\le\frac1{1^2}\cdot\iota(\log q')$（`claim_scaled_embedding_order_transfer` の $L:=1$）$\iff1\cdot\iota(\log q)\le1\cdot\iota(\log q')\iff\iota(\log q)\le\iota(\log q')$。
+  三つの符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$）は $q':=1$、$q:=1,q':=2$、$q:=1,q':=1+q$ の読み方として statement に書き、誤差評価の準備で $\iota(\log1)=\iota(0)=0$・$\log2=\ell_2$ と合わせて一行ずつ引く（符号を別ブロックにすると「主張を一度読む」だけの中身の無いブロックになる）。
+  SageMath `check/rational-embedded-log-order-iff/`（正の有理数 30 点の全組 900、同値 900 件・鎖 900 件・符号の読み方 42 件、12 秒）。Lean 具体版 `ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`rationalLogOrderLE_toRational_logRat_iff`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`iff_comp_of_iff_of_scaled_iff_necSuf`。関係を移し合う写像 $f$ と、係数 $s$ を掛けた形で関係を移し合う写像 $e$、$s=1$ と `one_smul` だけ）、導出版。sorry 検査 1277 件。
+  次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（台帳の備考に手順）。
+
+### 前進の記録
+
+- 2026-08-16（tick 343）: 台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を束ねずに済む一行「埋め込んだ対数の順序は正の有理数の順序と一致する」へ書き換えて実行した（符号を別ブロックにすると主張を一度読むだけの中身の無いブロックになるため。三つの読み方は statement に書いた）。`claim_rational_embedded_log_order_iff` を `claim_rational_log_order_group_scalar_compare_nonpos` の直後に置いた。
+  証明は同値の四段の鎖（`claim_rational_log_order_iff`・`claim_scaled_embedding_order_transfer` の $L:=1$・$\frac1{1^2}=1$・$1\cdot\lambda=\lambda$）。SageMath `rational-embedded-log-order-iff`、Lean 具体版・必要十分版（関係を移し合う写像の合成。二段目は係数 $s$ を掛けた形で受けて $s=1$ に潰す）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1277 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 343）: 前 tick の「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」の本文（準備・四段の鎖）・SageMath overview（756 検査）・Lean 具体版（書き換え列が本文と 1 対 1）・必要十分版（非負の元の版と同じ二つの仮定）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価の下端が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16 tick 346 で台帳から移した記録（tick 341 分）
 
 ### 現在地

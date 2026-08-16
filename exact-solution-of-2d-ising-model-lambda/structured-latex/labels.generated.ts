@@ -78,6 +78,7 @@ export const ALL_LABELS = [
   "claim_open_square_block_tiling_rational",
   "claim_open_square_free_entropy_density_nonnegative",
   "claim_open_square_free_entropy_density_upper_bound",
+  "claim_open_square_large_side_density_upper_vs_base_side_le_one",
   "claim_open_square_multiple_side_density_vs_base_side_le_one",
   "claim_open_square_multiple_side_subsquare_density_error_bound",
   "claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one",

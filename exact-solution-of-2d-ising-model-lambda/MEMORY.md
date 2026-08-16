@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-16 時点）
+## 現在の到達点（2026-08-17 時点）
+
+2026-08-17 の tick 348 は、前 tick の「倍数でない辺の密度の基準辺の密度による下からの評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価」を上端と下端の二行へ割り、上端を四層で閉じた。`claim_open_square_large_side_density_upper_vs_base_side_le_one`（`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$a<L$、$a^2\le L$、$0<q\le1$ で
+$\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac2a\cdot\iota(\ell_2)+\frac4a\cdot\iota(\log(1+q))+\Psi^{\mathrm{op}}_a(q)$（辺 $L$ が $a$ の倍数かどうかを問わない一様な上端）。
+証明は準備 4 つ（自然数の除法 $L-1=ka+r$、$0\le r<a$ で $k$ を取る。$ka\le L-1<L$、$L=ka+r+1\le ka+a$、$a\le L-1<(k+1)a$ から $k\ge1$。$L-1$ を割るので倍数の場合分けが要らない／$\mathbb Q$ の係数比較 $\frac{2a}L\le\frac{2a}{a^2}=\frac2a$・$\frac{4a}L\le\frac4a$／符号 $0\le\iota(\ell_2)$・$0\le\iota(\log(1+q))$（`claim_rational_embedded_log_order_iff`）／`claim_rational_log_order_group_scalar_compare_nonneg` 2 件）と、
+`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` を第一の $k$ で読み、最初の二つの項を `claim_rational_log_order_group_add_monotone`（二番目は交換則で先頭へ寄せる）で置き換え、推移律でつなぐ本体三段。
+SageMath `check/open-square-large-side-density-upper-vs-base-side/`（$(a,L)=(1,2),(1,3)$ × 6 点、168 検査、11 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSideDensityUpperVsBaseSide.lean`（`exists_multiple_side_below_of_lt`（`Nat.div_add_mod`・`Nat.mod_lt`・`Nat.div_pos`・`Nat.div_mul_le_self`・omega）・`rationalLogOrderLE_openSquareLargeSideDensity_upper_vs_baseSide_of_le_one`（`div_le_div_of_nonneg_left`・`field_simp`、`rationalLogOrderLE_ratSmul_le_ratSmul_of_le`、`rationalLogOrderLE_add_right` と `add_comm`）。statement には `[NeZero L]` も要る（`openScaledFreeEntropy L` の型のため。$a<L$ から従うが型クラスは仮定で受ける）），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSideDensityUpperVsBaseSide.lean`（`upper_bound_enlarge_first_two_terms_necSuf`。`[AddCommMagma X]` と推移律・右加法単調性・交換則だけ。$\psi\le(A+B)+\Psi$、$A\le A'$、$B\le B'$ から $\psi\le(A'+B')+\Psi$）、導出版 `OpenSquareLargeSideDensityUpperVsBaseSideFromNecSuf.lean`。sorry 検査 1300 件。
+次は「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価（$0<q\le1$）」（台帳の備考に手順。同じ $k$ の取り方で下からの評価を読み、$\frac2L\iota(\log q)\ge\frac2a\iota(\log q)$（非正の係数比較）と $-\frac{2a}LC\ge-\frac2aC$ で $a$ だけの形へ。$E$ は上端・下端それぞれの実際の係数で書き Cauchy 性で足す）。
 
 2026-08-16 の tick 347 は、前 tick の「倍数でない辺の密度の基準辺の密度による上からの評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$）」を四層で閉じた。`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one`（`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で
