@@ -4,6 +4,18 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 340 は、前 tick の「倍数辺との平方の差の評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「非負有理数倍は有理係数の対数順序群の順序を保つ」を四層で閉じた。
+`claim_rational_log_order_group_nonneg_scalar_monotone`（`claim_square_difference_from_multiple_side_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $c\in\mathbb Q$、$0\le c$、$\lambda\le_{\Lambda_{\mathbb Q}}\mu$ なら $c\cdot\lambda\le_{\Lambda_{\mathbb Q}}c\cdot\mu$。
+証明: $u:=\operatorname{num}(c)\in\mathbb N$（$0\le c$ と `Rat.num_nonneg`）、$v:=\operatorname{den}(c)\ge1$、$vc=u$。仮定を「ある $N$」の形で読んで $\lambda_N\le_\Lambda\mu_N$ となる共通分母 $N$ を取り、
+六段の鎖 $(vN)\cdot(c\cdot\lambda)=((vN)c)\cdot\lambda=((vc)N)\cdot\lambda=(uN)\cdot\lambda=u\cdot(N\cdot\lambda)=u\cdot\iota(\lambda_N)=\iota(u\lambda_N)$ で $vN$ が $c\cdot\lambda$・$c\cdot\mu$ の共通分母（証人 $u\lambda_N$・$u\mu_N$）、
+$u\ge1$ は `claim_log_order_group_positive_multiple_invariant`、$u=0$ は零写像と `claim_log_order_group_linear_order` の反射律。
+SageMath `check/rational-log-order-group-nonneg-scalar-monotone/`（64 ベクトル（係数 $-1,0,\frac12,\frac23$）× $c\in\{0,1,2,\frac12,\frac74\}$、主張 10400 件・鎖 10400 件、7 秒。**125 ベクトル × 7 点は 2 分で終わらなかった**——add-monotone と同じ標本を使う検査は $\operatorname{rat}_\Lambda$ の冪が大きく遅いので、標本を縮めること）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupNonnegScalarMonotone.lean`（`commonDenominator_ratSmul`（`Rat.mul_den_eq_num`・`toRational_intSmul`）・`logOrderLE_natSmul_of_le`（`Nat.eq_zero_or_pos` で場合分け、`logOrderLE_natSmul_iff`）・`rationalLogOrderLE_ratSmul_of_nonneg`（`Rat.num_nonneg`・`Int.toNat_of_nonneg` で $u\in\mathbb N$ を取る））、
+必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupNonnegScalarMonotone.lean`（`indexedLE_scale_necSuf`。`indexedLE` 上で、添字への作用 `sI c`・元への作用 `sX c`・証人への作用 `sY c` が良さと `Rep` と `le` を保てば順序が移る。$c$ の非負性は `sY c` が `le` を保つ理由にだけ入るので仮定に現れない）、
+導出版 `RationalLogOrderGroupNonnegScalarMonotoneFromNecSuf.lean`。sorry 検査 1268 件。
+次は「係数の大小による有理数倍の比較」（$r\le s$、$0\le_{\Lambda_{\mathbb Q}}\nu$ なら $r\cdot\nu\le_{\Lambda_{\mathbb Q}}s\cdot\nu$。今回の主張を $c:=s-r$、$\lambda:=0$、$\mu:=\nu$ で読んで $0=(s-r)\cdot0\le(s-r)\cdot\nu$、`claim_rational_log_order_group_add_monotone` で $r\cdot\nu$ を足し、分配則 $(s-r)\cdot\nu+r\cdot\nu=s\cdot\nu$。台帳の備考）。
+
 2026-08-16 の tick 339 は、前 tick の「有理係数の対数順序群の Archimedes 性」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」を論法の数で四行へ割った（「非負有理数倍は有理係数の対数順序群の順序を保つ」→「係数の大小による有理数倍の比較」→
 「埋め込んだ対数の符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$）」→「誤差評価本体（$k\ge1$、$ka<L\le ka+a$）」。手順は台帳の備考。$L=ka$ は誤差評価に含めず Cauchy 性の側でブロック敷き詰め密度を直接使う）。

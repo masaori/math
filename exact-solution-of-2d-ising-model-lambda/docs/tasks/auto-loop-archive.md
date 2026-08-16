@@ -3,6 +3,36 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 335）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 335 は、「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書き、四層で閉じた。**
+  `claim_open_square_subsquare_comparison_density_le_one`（`claim_open_square_subsquare_comparison_log_le_one` の直後、住処 Lambda）で、$1\le a<L$、$0<q\le1$ に対し
+  $\frac{a+L}{L^2}\iota(\log q)+\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac{L^2-a^2}{L^2}\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\iota(\log(1+q))+\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)$。
+  $L$ が $a$ の倍数でなくてもよい。準備 4 つ（正値性と分母・$\frac1{L^2}\iota(\log Z^{\mathrm{op}}_{a,a})=\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a$ の三段・下端の像の六段・上端の像の六段）と、
+  `claim_scaled_embedding_order_transfer` で `claim_open_square_subsquare_comparison_log_le_one` を移す 3 段の鎖 2 本。
+  SageMath `check/open-square-subsquare-comparison-density/`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 6 点、396 検査、4 秒。$\le_{\Lambda_{\mathbb Q}}$ の決定手続きの共通分母を分母の積から最小公倍数へ変えた——積だと $\mathrm{rat}_\Lambda$ の冪の指数が巨大になり 10 分で終わらなかった）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonDensity.lean`、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `OpenSquareSubsquareComparisonDensityFromNecSuf.lean`。sorry 検査 1246 件。
+  本文末尾「この先に書くこと」の済んだ項目（密度の可算側への畳み込み・Cauchy 性の記述・倍数でない辺への拡張）を消した。
+  次は「密度の列の Cauchy 性」（Archimedes 型の補題「$\mu,\varepsilon>0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n$」が要る。着手時に論法の数で割ること）。
+
+### 前進の記録
+
+- 2026-08-16（tick 335）: 台帳の先頭行「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を実行した。
+  `claim_open_square_subsquare_comparison_density_le_one` を `claim_open_square_subsquare_comparison_log_le_one` の直後に置いた。証明は `claim_open_square_block_tiling_density` と同じ型
+  （準備: 正値性と分母・部分正方形の対数の像を $\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a$ へ整える三段・下端の像の六段・上端の像の六段、本体は `claim_scaled_embedding_order_transfer` を $L:=L$ で読む 3 段の鎖 2 本）。
+  上端は $\frac{L^2-a^2}{L^2}\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\iota(\log(1+q))$ と二つの係数で書いた（台帳の備考の括弧でくくる形より一段少ない）。
+  SageMath `open-square-subsquare-comparison-density`（`ZZ`/`QQ`・有限台辞書。一辺 4 以上は含めない。共通分母は最小公倍数）。Lean 具体版・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1246 件）。
+  式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 335）: 前 tick の「開境界正方形と部分正方形の比較の対数化（$\Lambda$ の鎖。$q$ は 1 以下）」の本文（準備 3 つ・4 段の鎖）・SageMath overview・
+  Lean 具体版（準備の等式 2 本と本体）・導出版（入口 import・sorry 検査への登録）を突き合わせ、根拠が一致した。本文の修正は無い。
+  本文末尾「この先に書くこと」に済んだ項目（「有限系の密度を可算側へ畳むこと」「極限の存在の Cauchy 性としての記述」、および今回済んだ「倍数でない辺への拡張」）が残っていたので、
+  残っている行だけ（Cauchy 性・切断と旧経路撤去・周期境界への移送・零点密度）に書き換えた（前進のコミットに同梱）。
+
 ## 2026-08-16（tick 334）の記録
 
 ### 現在地

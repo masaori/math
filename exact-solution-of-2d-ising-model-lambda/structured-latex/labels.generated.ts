@@ -208,6 +208,7 @@ export const ALL_LABELS = [
   "claim_rational_log_order_group_archimedean",
   "claim_rational_log_order_group_embedding",
   "claim_rational_log_order_group_linear_order",
+  "claim_rational_log_order_group_nonneg_scalar_monotone",
   "claim_rational_log_order_iff",
   "claim_rational_log_surjective",
   "claim_rational_of_log_additive",

@@ -1319,6 +1319,11 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.sq_le_sq_add_two_mul_of_between_necSuf
   Ising2DLambda.ThermodynamicLimit.sq_le_multiple_sq_add_two_mul_nat_from_necSuf
   Ising2DLambda.ThermodynamicLimit.sq_sub_multiple_sq_le_two_mul_nat_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_ratSmul
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_natSmul_of_le
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_ratSmul_of_nonneg
+  Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_scale_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_ratSmul_of_nonneg_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
