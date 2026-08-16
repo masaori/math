@@ -7,6 +7,7 @@
 その最小近傍と走査組数をこの順で形式化する。有限集合と自然数だけを使い、ℝ / ℂ は現れない。
 -/
 import CellularAutomata.InverseMapLocality
+import CellularAutomata.NecSuf.LocalRuleRepresentation
 
 namespace CellularAutomata.LocalRuleRepresentation
 
@@ -149,5 +150,74 @@ theorem inverseSupp_minimal (hinj : Injective N f) (N' : V → Finset V)
 theorem card_minimal_neighborhood_scan_pairs :
     Fintype.card (V × (V → State)) = Fintype.card V * 2 ^ Fintype.card V :=
   card_inverse_scan_pairs
+
+/-! ### 必要十分版からの導出（状態型を `State`、ν を `nu`、基準値を `zero` に特殊化する） -/
+
+omit [Fintype V] [DecidableEq V] in
+/-- 具体版の表現可能性は必要十分版の表現可能性そのもの（`State` への特殊化）。 -/
+theorem representable_iff_necessary_sufficient (S : Finset V) (g : (V → State) → State) :
+    Representable S g ↔
+      CellularAutomata.NecSuf.LocalRuleRepresentation.Representable S g :=
+  Iff.rfl
+
+/-- 表現可能 ⟹ supp(g) ⊆ S が、必要十分版の点ごとの非依存を有限型 V 上で集めて得られること。 -/
+theorem representable_implies_supp_subset_from_necessary_sufficient (S : Finset V)
+    (g : (V → State) → State) (hrep : Representable S g) : supp g ⊆ S := by
+  intro w hw
+  by_contra hwS
+  exact CellularAutomata.NecSuf.LocalRuleRepresentation.representable_implies_not_essentialDep_outside
+    nu ne_iff_eq_nu S g hrep w hwS ((mem_supp_iff g w).mp hw)
+
+/-- supp(g) ⊆ S ⟹ 基準値延長による表現が、必要十分版を基準値 `zero` に特殊化して得られること。 -/
+theorem supp_subset_implies_representable_from_necessary_sufficient (S : Finset V)
+    (g : (V → State) → State) (hsub : supp g ⊆ S) :
+    ∀ y, g y = (g ∘ baseExtend S) (restrict S y) :=
+  CellularAutomata.NecSuf.LocalRuleRepresentation.not_essentialDep_outside_implies_representation
+    State.zero S g (fun w hw hdep => hw (hsub ((mem_supp_iff g w).mpr hdep)))
+
+/-- 表現可能性 ⟺ supp(g) ⊆ S が必要十分版の同値の特殊化で得られること。 -/
+theorem representable_iff_supp_subset_from_necessary_sufficient (S : Finset V)
+    (g : (V → State) → State) : Representable S g ↔ supp g ⊆ S := by
+  rw [representable_iff_necessary_sufficient,
+    CellularAutomata.NecSuf.LocalRuleRepresentation.representable_iff_not_essentialDep_outside
+      nu ne_iff_eq_nu State.zero S g]
+  constructor
+  · intro hout w hw
+    by_contra hwS
+    exact hout w hwS ((mem_supp_iff g w).mp hw)
+  · intro hsub w hw hdep
+    exact hw (hsub ((mem_supp_iff g w).mpr hdep))
+
+/-- 逆写像が近傍 N' 上の局所規則で表せる同値が、必要十分版の特殊化で得られること
+    （具体版の大域写像・逆写像・値写像は前章の導出で必要十分版のものと一致する）。 -/
+theorem exists_inverse_ca_iff_support_subset_from_necessary_sufficient (hinj : Injective N f)
+    (N' : V → Finset V) :
+    (∃ f' : (v : V) → (↥(N' v) → State) → State,
+      globalMap N' f' = inverseMap N f hinj) ↔
+      ∀ v, inverseSupp N f hinj v ⊆ N' v := by
+  have hns := CellularAutomata.NecSuf.LocalRuleRepresentation.exists_inverse_ca_iff_not_essentialDep_outside
+    (globalMap N f) nu ne_iff_eq_nu State.zero
+    ((injective_iff_necessary_sufficient N f).mp hinj) N'
+  rw [← inverseMap_eq_necessary_sufficient N f hinj] at hns
+  have hgm : ∀ f' : (v : V) → (↥(N' v) → State) → State,
+      globalMap N' f' = CellularAutomata.NecSuf.TimeExpansionDependency.globalMap N' f' :=
+    fun _ => rfl
+  simp only [hgm]
+  rw [hns]
+  constructor
+  · intro hout v w hw
+    by_contra hwN
+    have hdep := (mem_inverseSupp_iff N f hinj v w).mp hw
+    rw [inverseCellMap_eq_necessary_sufficient N f hinj v] at hdep
+    exact hout v w hwN hdep
+  · intro hsub v w hwN hdep
+    rw [← inverseCellMap_eq_necessary_sufficient N f hinj v] at hdep
+    exact hwN (hsub v ((mem_inverseSupp_iff N f hinj v w).mpr hdep))
+
+/-- 走査組数が必要十分版の |V|·|A|^{|V|} の特殊化で得られること。 -/
+theorem card_minimal_neighborhood_scan_pairs_from_necessary_sufficient :
+    Fintype.card (V × (V → State)) = Fintype.card V * 2 ^ Fintype.card V := by
+  rw [CellularAutomata.NecSuf.LocalRuleRepresentation.card_minimal_neighborhood_scan_pairs,
+    card_state]
 
 end CellularAutomata.LocalRuleRepresentation
