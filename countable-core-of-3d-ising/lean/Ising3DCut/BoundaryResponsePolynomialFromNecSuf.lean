@@ -91,4 +91,21 @@ theorem fullBoundaryResponse_outer_edges_to_one_fromNecSuf
       (Fintype.card Outer) • multivariatePartitionPolynomial broken :=
   NecSuf.fullBoundaryResponse_outer_edges_to_one broken broken'' π h
 
+/-- 辺変数を 1 に置かない共通の外箱を経由した比較を必要十分版（`R := ℤ`）から導く。 -/
+theorem fullBoundaryResponse_common_outer_box_comparison_fromNecSuf
+    {Edge₁ Edge₂ Outer₁ Outer₂ : Type*} [Fintype Edge₁] [DecidableEq Edge₁]
+    [Fintype Edge₂] [DecidableEq Edge₂] [Fintype Outer₁] [Fintype Outer₂]
+    (broken : Configuration → Finset Edge)
+    (broken₁ : Configuration × Outer₁ → Finset Edge₁)
+    (broken₂ : Configuration × Outer₂ → Finset Edge₂)
+    (π₁ : MvPolynomial Edge₁ ℤ →+* MvPolynomial Edge ℤ)
+    (π₂ : MvPolynomial Edge₂ ℤ →+* MvPolynomial Edge ℤ)
+    (h₁ : ∀ σ : Configuration, ∀ τ : Outer₁,
+      π₁ (∏ e ∈ broken₁ (σ, τ), X e) = ∏ e ∈ broken σ, X e)
+    (h₂ : ∀ σ : Configuration, ∀ τ : Outer₂,
+      π₂ (∏ e ∈ broken₂ (σ, τ), X e) = ∏ e ∈ broken σ, X e) :
+    (Fintype.card (Configuration × Outer₂)) • π₁ (multivariatePartitionPolynomial broken₁) =
+      (Fintype.card (Configuration × Outer₁)) • π₂ (multivariatePartitionPolynomial broken₂) :=
+  NecSuf.fullBoundaryResponse_common_outer_box_comparison broken broken₁ broken₂ π₁ π₂ h₁ h₂
+
 end Ising3DCut

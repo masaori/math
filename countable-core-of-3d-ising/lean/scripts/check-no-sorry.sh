@@ -158,6 +158,10 @@ targets=(
   Ising3DCut.boundaryResponsePolynomial_outer_box_stability_fromNecSuf
   Ising3DCut.NecSuf.boundaryResponsePolynomial_outer_box_independence
   Ising3DCut.boundaryResponsePolynomial_outer_box_independence_fromNecSuf
+  Ising3DCut.NecSuf.fullBoundaryResponse_outer_edges_to_one
+  Ising3DCut.fullBoundaryResponse_outer_edges_to_one_fromNecSuf
+  Ising3DCut.NecSuf.fullBoundaryResponse_common_outer_box_comparison
+  Ising3DCut.fullBoundaryResponse_common_outer_box_comparison_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

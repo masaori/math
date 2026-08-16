@@ -130,4 +130,27 @@ theorem fullBoundaryResponse_outer_edges_to_one
   refine Finset.sum_congr rfl fun σ _ ↦ ?_
   simp [Finset.sum_const, Finset.card_univ]
 
+/-- 辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較（必要十分版）。係数環は可換半環 `R`、
+二つの外箱の辺型 `Edge₁`, `Edge₂` の有限性・可判定同値性は不要。増えた辺の変数を `1` に置く代入
+`π₁`, `π₂` が各配位の破れ辺の単項式を共通の外箱上の配位の単項式へ送るなら、外箱依存性の 2 回適用と
+配位数の積の可換性で `#(C × O₂) • π₁(Z̃₁) = #(C × O₁) • π₂(Z̃₂)`。 -/
+theorem fullBoundaryResponse_common_outer_box_comparison
+    {Edge₁ Edge₂ Outer₁ Outer₂ : Type*} [Fintype Outer₁] [Fintype Outer₂]
+    (broken : Configuration → Finset Edge)
+    (broken₁ : Configuration × Outer₁ → Finset Edge₁)
+    (broken₂ : Configuration × Outer₂ → Finset Edge₂)
+    (π₁ : MvPolynomial Edge₁ R →+* MvPolynomial Edge R)
+    (π₂ : MvPolynomial Edge₂ R →+* MvPolynomial Edge R)
+    (h₁ : ∀ σ : Configuration, ∀ τ : Outer₁,
+      π₁ (∏ e ∈ broken₁ (σ, τ), X e) = ∏ e ∈ broken σ, X e)
+    (h₂ : ∀ σ : Configuration, ∀ τ : Outer₂,
+      π₂ (∏ e ∈ broken₂ (σ, τ), X e) = ∏ e ∈ broken σ, X e) :
+    (Fintype.card (Configuration × Outer₂)) • π₁ (multivariatePartitionPolynomial (R := R) broken₁) =
+      (Fintype.card (Configuration × Outer₁)) • π₂ (multivariatePartitionPolynomial (R := R) broken₂) := by
+  rw [fullBoundaryResponse_outer_edges_to_one broken broken₁ π₁ h₁,
+    fullBoundaryResponse_outer_edges_to_one broken broken₂ π₂ h₂]
+  rw [Fintype.card_prod, Fintype.card_prod, smul_smul, smul_smul]
+  congr 1
+  ring
+
 end Ising3DCut.NecSuf
