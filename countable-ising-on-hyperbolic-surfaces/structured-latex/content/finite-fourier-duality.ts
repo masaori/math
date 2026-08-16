@@ -110,4 +110,172 @@ H^\vee
       ]),
     ],
   },
+  {
+    id: "finite_fourier_claim_integer_sign_character_multiplicativity",
+    kind: "claim",
+    title: { text: "整数符号実現の乗法性" },
+    labels: ["claim_integer_sign_character_multiplicativity"],
+    habitat: "Z",
+    verification: ["sagemath/check/integer-sign-character-multiplicativity"],
+    statement: [
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " と ",
+        ref("def_integer_sign_character_realization"),
+        " に対して、任意の ",
+        math(String.raw`\varphi\in H^\vee`),
+        " と任意の ",
+        math(String.raw`h,k\in H`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\in\mathbb Z.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=\varphi(h)\in\mathbb F_2`),
+        "、",
+        math(String.raw`b:=\varphi(k)\in\mathbb F_2`),
+        " と置く。",
+        math(String.raw`\mathbb F_2=\{0_{\mathbb F_2},1_{\mathbb F_2}\}`),
+        " なので、",
+        math(String.raw`(a,b)`),
+        " には四つの場合しかない。",
+      ]),
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " と ",
+        ref("def_integer_sign_character_realization"),
+        " より、",
+        math(String.raw`a=0_{\mathbb F_2}`),
+        " かつ ",
+        math(String.raw`b=0_{\mathbb F_2}`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(h+k)
+&=\varphi(h)+\varphi(k)
+\quad\bigl(\because\ \varphi\text{ の }\mathbb F_2\text{-線形性}\bigr)\\
+&=a+b
+\quad\bigl(\because\ a=\varphi(h),\ b=\varphi(k)\bigr)\\
+&=0_{\mathbb F_2}
+\quad\bigl(\because\ a=b=0_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+&=+1
+\quad\bigl(\because\ \varphi(h+k)=0_{\mathbb F_2}\text{ と整数符号実現の定義}\bigr)\\
+&=(+1)(+1)
+\quad\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr)\\
+&=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\quad\bigl(\because\ a=b=0_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " と ",
+        ref("def_integer_sign_character_realization"),
+        " より、",
+        math(String.raw`a=0_{\mathbb F_2}`),
+        " かつ ",
+        math(String.raw`b=1_{\mathbb F_2}`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(h+k)
+&=\varphi(h)+\varphi(k)
+\quad\bigl(\because\ \varphi\text{ の }\mathbb F_2\text{-線形性}\bigr)\\
+&=a+b
+\quad\bigl(\because\ a=\varphi(h),\ b=\varphi(k)\bigr)\\
+&=1_{\mathbb F_2}
+\quad\bigl(\because\ a=0_{\mathbb F_2},\ b=1_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+&=-1
+\quad\bigl(\because\ \varphi(h+k)=1_{\mathbb F_2}\text{ と整数符号実現の定義}\bigr)\\
+&=(+1)(-1)
+\quad\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr)\\
+&=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\quad\bigl(\because\ a=0_{\mathbb F_2},\ b=1_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " と ",
+        ref("def_integer_sign_character_realization"),
+        " より、",
+        math(String.raw`a=1_{\mathbb F_2}`),
+        " かつ ",
+        math(String.raw`b=0_{\mathbb F_2}`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(h+k)
+&=\varphi(h)+\varphi(k)
+\quad\bigl(\because\ \varphi\text{ の }\mathbb F_2\text{-線形性}\bigr)\\
+&=a+b
+\quad\bigl(\because\ a=\varphi(h),\ b=\varphi(k)\bigr)\\
+&=1_{\mathbb F_2}
+\quad\bigl(\because\ a=1_{\mathbb F_2},\ b=0_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+&=-1
+\quad\bigl(\because\ \varphi(h+k)=1_{\mathbb F_2}\text{ と整数符号実現の定義}\bigr)\\
+&=(-1)(+1)
+\quad\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr)\\
+&=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\quad\bigl(\because\ a=1_{\mathbb F_2},\ b=0_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " と ",
+        ref("def_integer_sign_character_realization"),
+        " より、",
+        math(String.raw`a=1_{\mathbb F_2}`),
+        " かつ ",
+        math(String.raw`b=1_{\mathbb F_2}`),
+        " の場合は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(h+k)
+&=\varphi(h)+\varphi(k)
+\quad\bigl(\because\ \varphi\text{ の }\mathbb F_2\text{-線形性}\bigr)\\
+&=a+b
+\quad\bigl(\because\ a=\varphi(h),\ b=\varphi(k)\bigr)\\
+&=0_{\mathbb F_2}
+\quad\bigl(\because\ a=b=1_{\mathbb F_2}\text{ と }1_{\mathbb F_2}+1_{\mathbb F_2}=0_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+&=+1
+\quad\bigl(\because\ \varphi(h+k)=0_{\mathbb F_2}\text{ と整数符号実現の定義}\bigr)\\
+&=(-1)(-1)
+\quad\bigl(\because\ \mathbb Z\text{ の整数積}\bigr)\\
+&=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\quad\bigl(\because\ a=b=1_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      paragraph([
+        "四つの場合で同じ整数等式を得たので、全ての ",
+        math(String.raw`\varphi\in H^\vee`),
+        " と ",
+        math(String.raw`h,k\in H`),
+        " について主張が成り立つ。全ての演算は有限集合、",
+        math(String.raw`\mathbb F_2`),
+        "、または ",
+        math(String.raw`\mathbb Z`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

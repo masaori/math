@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_even_edge_subset_maps_to_first_cycle",
+  "claim_integer_sign_character_multiplicativity",
   "claim_partition_polynomial_coefficient_expansion",
   "claim_partition_polynomial_value_at_one",
   "claim_single_vertex_spin_flip_involution",
