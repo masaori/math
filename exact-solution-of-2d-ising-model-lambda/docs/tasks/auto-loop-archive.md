@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 350 で台帳から移した記録（tick 345 分）
+
+### 現在地
+
+- **2026-08-16 の tick 345 は、台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で四行へ割り、その最初「倍数辺の密度と基準辺の密度の差の評価」（$a,k\ge1$、$0<q\le1$ で $\frac2a\iota(\log q)+\Psi^{\mathrm{op}}_a\le\Psi^{\mathrm{op}}_{ka}\le\Psi^{\mathrm{op}}_a$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_multiple_side_density_vs_base_side_le_one`（`claim_open_square_multiple_side_subsquare_density_error_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 3 つ（$\mathbb Q$ の係数比較 $\frac{2(k-1)}{ka}\le\frac{2k}{ka}=\frac2a$／符号 $\iota(\log q)\le0$（埋め込んだ対数の順序を $q':=1$ で読む）／非正の元の係数比較）と、加法単調性・推移律による左の二段。右はブロック敷き詰め密度の右そのもの。
+  SageMath `check/open-square-multiple-side-density-vs-base-side/`（$(a,k)$ 五組（$ka\le3$）× 6 点、270 検査、19 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareMultipleSideDensityVsBaseSide.lean`（`blockTiling_lower_coefficient_le_two_div`・`rationalLogOrderLE_openSquareMultipleSideDensity_vs_baseSide_of_le_one`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareMultipleSideDensityVsBaseSide.lean`（`twoSided_bounds_enlarge_lower_coefficient_necSuf`。推移律・右加法単調性だけ。上端に触れないので交換則も要らない）、導出版。sorry 検査 1288 件。
+  割り方: 「倍数辺の密度と基準辺の密度の差の評価」→「倍数でない辺の密度と基準辺の密度の差の評価」→「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価」→「密度の列の Cauchy 性」（手順は台帳の備考）。前 tick のレビューでは修正なし。次は「倍数でない辺の密度と基準辺の密度の差の評価（$0<q\le1$）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 345）: 台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」は、倍数辺の差の評価・倍数でない辺の差の評価・基準辺の平方以上での一様な差の評価・Cauchy 性本体の四つの論法を含むので四行へ割った（手順は台帳の備考）。その最初「倍数辺の密度と基準辺の密度の差の評価」を実行し、`claim_open_square_multiple_side_density_vs_base_side_le_one` を `claim_open_square_multiple_side_subsquare_density_error_bound` の直後に置いた。
+  証明はブロック敷き詰め密度の下端の係数 $\frac{2(k-1)}{ka}$ を $\frac2a$ へ大きくする（$\mathbb Q$ の係数比較・符号 $\iota(\log q)\le0$・非正の元の係数比較・加法単調性・推移律）。SageMath `open-square-multiple-side-density-vs-base-side`、Lean 具体版・必要十分版（推移律・右加法単調性だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1288 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 345）: 前 tick の「倍数辺の部分正方形による密度の挟み込みの誤差評価」の本文（準備 4 つ・左二段・右三段）・SageMath overview（342 検査）・Lean 具体版（`hc1`〜`hc3`・`hs1`〜`hs3`・`hm1`〜`hm3`・`hmid1`・`hmid2` が本文の準備の第二〜第四と本体に 1 対 1）・必要十分版（推移律・右加法単調性・交換則）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は係数を $L,k$ によらない形へ大きくする比較で Cauchy 性の非倍数辺の側が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 349 で台帳から移した記録（tick 344 分）
 
 ### 現在地
