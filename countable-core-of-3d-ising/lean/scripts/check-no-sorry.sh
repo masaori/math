@@ -241,6 +241,7 @@ targets=(
   Ising3DCut.fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials_fromNecSuf
   Ising3DCut.LimitQuantity.symmetrized_eq_of_palindrome_step
   Ising3DCut.LimitQuantity.symmetrized_padicValRat_reciprocal_invariant
+  Ising3DCut.LimitQuantity.eval_eq_pow_mul_eval_inv_of_reflect_eq
   Ising3DCut.LimitQuantity.padicValRat_of_pow_mul
 )
 
