@@ -4,6 +4,19 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 336 は、前 tick の「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行した。消したのは `claim_scaled_free_entropy_denominator_clearing`（「有限系の密度の分母は整数倍で払える」。
+$L^2M^2\cdot\frac1{L^2}\iota(\lambda)=M^2\iota(\lambda)$、$\mathbb Q$ の四則だけ）1 件。この本体はどこからも引かれておらず、7 箇所が引いていたのは証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけだったので、
+それを `claim_rational_embedding_commutes_with_integer_multiple`（「対数順序群から有理係数の対数順序群への写像は整数倍と交換する」。`claim_rational_log_order_group_embedding` の直後、住処 Lambda、各素数での値の五段の鎖）として残し、参照を付け替えた。
+**過去の MEMORY の記述にある「`claim_scaled_free_entropy_denominator_clearing` の末尾／準備の第三」は、いまはこの新ラベルを指す。**
+SageMath `check/rational-embedding-commutes-with-integer-multiple/`（旧 `scaled-free-entropy-denominator-clearing` を作り直し。$n\in\{-6,\dots,6\}$ × 有限台 5 組、247 検査）。
+Lean: `ThermodynamicLimit/ScaledFreeEntropyDenominator.lean`・`NecSuf/ThermodynamicLimit/ScaledFreeEntropyDenominator.lean`・`ScaledFreeEntropyDenominatorFromNecSuf.lean` を削除、
+`toRational_intSmul`（`RationalLogOrderGroup.lean`）はそのまま、必要十分版 `NecSuf.pointwise_lift_intSmul_necSuf`（`NecSuf/ThermodynamicLimit/RationalLogOrderGroup.lean`。`AddCommGroup` 上の `Finsupp.mapRange` は `zsmul` と交換する。
+`Mathlib.Data.Finsupp.SMulWithZero` の import が要る）と導出版 `toRational_intSmul_from_necSuf`（`RationalLogOrderGroupFromNecSuf.lean`。`Int.cast_smul_eq_zsmul` で有理数倍を `zsmul` へ）を追加。sorry 検査 1245 件。
+全 284 件の主張を題名で走査し、証明の短い順にも見たが他に体の四則だけのブロックは無かった（`claim_qbar_no_zero_divisors` は 10 箇所が引くので残す。所属・表示・well-defined 性を言う短い主張は残す）。
+以後は毎 tick のレビュー観点で見る。次は「密度の列の Cauchy 性」（着手時に論法の数で割ること。Archimedes 型の補題「$\mu,\varepsilon>0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$」が要る。
+挟み込みは倍数辺 `claim_open_square_block_tiling_density` と一般辺 `claim_open_square_subsquare_comparison_density_le_one`（$q\le1$ のみ）がある）。
+
 2026-08-16 の tick 335 は、前 tick の「開境界正方形と部分正方形の比較の対数化（$\Lambda$ の鎖。$q$ は 1 以下）」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を四層で閉じた。
 `claim_open_square_subsquare_comparison_density_le_one`（`claim_open_square_subsquare_comparison_log_le_one` の直後、住処 Lambda）: $1\le a<L$、$0<q\le1$ に対し

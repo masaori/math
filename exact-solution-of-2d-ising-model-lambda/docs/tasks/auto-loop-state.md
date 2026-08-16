@@ -7,6 +7,14 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 336 は、台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行し、「有限系の密度の分母は整数倍で払える」（$L^2M^2\cdot\frac1{L^2}\iota(\lambda)=M^2\iota(\lambda)$。$\mathbb Q$ の四則だけ）を本文から消した。**
+  この主張を引いていた 7 箇所はすべて証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけを使っていたので、その等式を
+  `claim_rational_embedding_commutes_with_integer_multiple`（「対数順序群から有理係数の対数順序群への写像は整数倍と交換する」。`claim_rational_log_order_group_embedding` の直後、住処 Lambda。各素数での値の五段の鎖）として残し、7 箇所の参照を付け替えた。
+  SageMath `check/rational-embedding-commutes-with-integer-multiple/`（旧 `scaled-free-entropy-denominator-clearing` を作り直し。$n\in\{-6,\dots,6\}$ × 有限台 5 組、247 検査）。
+  Lean は具体版 `scaledFreeEntropy_clear_denominator`・必要十分版 `two_scaled_denominators_cancel_necSuf`・導出版の 3 ファイルを削除し、残す `toRational_intSmul` に必要十分版 `NecSuf.pointwise_lift_intSmul_necSuf`（加法群上の有限台写像への値ごとの持ち上げは整数倍と交換する）と導出版 `toRational_intSmul_from_necSuf` を足した。sorry 検査 1245 件。
+  全 284 件の主張を題名で走査し、証明の短い順にも見たが、他に体の四則だけのブロックは無かった（`claim_qbar_no_zero_divisors` は 10 箇所が引くので残す。所属・表示・well-defined 性を言う短い主張は残す）。以後は毎 tick のレビュー観点で見る。
+  次は「密度の列の Cauchy 性」（着手時に論法の数で割ること。Archimedes 型の補題「$\mu,\varepsilon>0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n$」が要る）。
+
 - **2026-08-16 の tick 335 は、「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書き、四層で閉じた。**
   `claim_open_square_subsquare_comparison_density_le_one`（`claim_open_square_subsquare_comparison_log_le_one` の直後、住処 Lambda）で、$1\le a<L$、$0<q\le1$ に対し
   $\frac{a+L}{L^2}\iota(\log q)+\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac{L^2-a^2}{L^2}\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\iota(\log(1+q))+\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)$。
@@ -45,17 +53,7 @@
   Lean `ThermodynamicLimit/RationalLogOrderGroupCauchySequence.lean`（`IsCauchyRationalLogOrder`・`rationalLogOrderLE_neg_of_nonneg`・`isCauchyRationalLogOrder_const`。定義なので必要十分版は無し）。sorry 検査 1227 件。
   次は「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」。
 
-- **2026-08-16 の tick 331 は、「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させ、四層で閉じた。**
-  `claim_open_square_subsquare_comparison_rational_le_one`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後・`claim_open_square_free_entropy_density_upper_bound` の直前、住処 Q）で、
-  $1\le a<L$、$q\in\mathbb Q$、$0<q\le1$ に対し $q^{a+L}Z^{\mathrm{op}}_{a,a}(q)\le Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)$。
-  削除済みの実数値版（上界 $2^{L^2-a^2}$）と同じ論法だが、$\mathbb Q$ 側にある上からの評価は一様な $2^{ab}(1+q)^{2ab}$（`claim_open_rectangle_value_upper_bound_at_positive_rational`）なので上界に $(1+q)^{2(L^2-a^2)}$ が付く。
-  準備 3 つ（$c=L-a$・$ac+cL=L^2-a^2$・正値性）、下側 7 段（$1\le Z$ 二回と二方向の接合の下側）、上側 8 段（二方向の接合の上側と値の上からの評価二回）。
-  SageMath `check/open-square-subsquare-comparison-rational/`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 6 点、270 検査、4 秒）。
-  Lean 具体版 `OpenSquareSubsquareComparisonRational.lean`（`openPartitionValueRat_square_subsquare_bounds_of_le_one`）、必要十分版は実数版の `split_twice_bounds_necSuf` をそのまま共有
-  （可換半環の順序と非負元の乗法単調性だけなので $\mathbb Q$ でも通る。**旧実数値経路の Lean を片付けるときこの必要十分版は残すこと**）、導出版 `OpenSquareSubsquareComparisonRationalFromNecSuf.lean`。sorry 検査 1225 件。
-  次は「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」。
-
-（これより古い 288 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 289 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -70,12 +68,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
 - 熱力学極限: 56 セクション
+- 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 全章 | 何も言っていない主張の一掃（既存分） | todo | ユーザー指示 2026-08-16。体の四則から直ちに従うだけのブロック（分母が整数なので払える、移項、約分、両辺に同じものを掛ける等）を本文から消し、使っていた行の $(\because\ \dots)$ へ「$\mathbb{Q}$ の四則」等と書く。Lean と SageMath の対応物も一緒に消す。残すのは、値の所属集合・well-defined 性を言っているもの、可算性の根拠になるもの、後で繰り返し引くものだけ。毎 tick のレビューでも同じ観点で見る |
 | 熱力学極限 | 密度の列の Cauchy 性 | todo | $\bigl(\Psi_L(q)\bigr)_L$ の差を有理数で抑える。完備性も極限論も使わない |
 | 熱力学極限 | 切断による実数体への一度きりの脱出 | todo | Cauchy 列が定める $\mathbb{Q}$ 上の切断として自由エネルギー密度を取る。引くのは「切断は実数を定める」ことだけ |
 | 熱力学極限 | 削除した実数値経路の Lean の後片付け | todo | 2026-08-16 に本文から消した実数値経路（実対数・上限／下限による極限）の Lean ファイルが孤立して残っている。入口からの import と sorry 検査は通るが、対応する本文が無いので消す |
@@ -87,6 +85,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 336）: 台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行した。消したのは `claim_scaled_free_entropy_denominator_clearing`（「有限系の密度の分母は整数倍で払える」）1 件。
+  その本体（$L^2M^2$ を掛けて分母を払う二段）はどこからも引かれておらず、引かれていたのは証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけだったので、
+  補助等式を `claim_rational_embedding_commutes_with_integer_multiple` として独立させ（証明の内容は変えず五段の鎖をそのまま本体にした）、7 箇所の参照を付け替えた。
+  SageMath 検査を作り直し（`rational-embedding-commutes-with-integer-multiple`）、Lean の分母払いの 3 ファイルを削除、`toRational_intSmul` へ必要十分版と導出版を追加（sorry 検査 1246→1245 件）。
+  題名の全走査と証明の短い順の走査で他に該当は無し。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 335）: 台帳の先頭行「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を実行した。
   `claim_open_square_subsquare_comparison_density_le_one` を `claim_open_square_subsquare_comparison_log_le_one` の直後に置いた。証明は `claim_open_square_block_tiling_density` と同じ型
@@ -118,16 +122,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   SageMath `rational-log-order-group-cauchy-sequence`（`ZZ`/`QQ`・有限台辞書）、Lean 具体版（列は `ℕ → RationalLogOrderGroup` で $L=0$ の値は $N\ge1$ のため参照されない）。
   入口 import・sorry 検査へ 2 件登録（計 1227 件）。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 331）: `claim_open_square_subsquare_comparison_rational_le_one` を `claim_open_rectangle_value_upper_bound_at_positive_rational` の直後
-  （`claim_open_square_free_entropy_density_upper_bound` の直前）に置き四層で閉じた。git 履歴の実数値版 `claim_open_square_subsquare_comparison_le_one`（2026-08-15）の証明を
-  $\mathbb Q$ 版の道具（`claim_open_rectangle_gluing_inequality_rational`・`claim_open_rectangle_value_ge_one_at_positive_rational`・
-  `claim_open_rectangle_value_upper_bound_at_positive_rational`）で書き直した。上界の因子は $\mathbb Q$ 版の値の上からの評価が一様な $2^{ab}(1+q)^{2ab}$ なので
-  $2^{L^2-a^2}(1+q)^{2(L^2-a^2)}$（実数値版の $2^{L^2-a^2}$ より緩い。密度の極限へ渡すとき $L^2-a^2$ の項が $L^2$ に対して消える性質は変わらない）。
-  SageMath `open-square-subsquare-comparison-rational`（下側 7 段・上側 8 段を段ごとに。一辺 4 以上は含めない）。Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonRational.lean`
-  （実数版と同じ段。`open NecSuf.ThermodynamicLimit` が要る——`pow_pos_by_induction` がそこにある）、必要十分版は `split_twice_bounds_necSuf` を共有、
-  導出版 `OpenSquareSubsquareComparisonRationalFromNecSuf.lean`。入口 import・sorry 検査へ 2 件登録（計 1225 件）。式変形統一は一時停止中のため実施せず。
-
-（これより古い 298 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 299 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -146,6 +141,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 336）: 前 tick の「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」の本文（準備 4 つ・3 段の鎖 2 本）・SageMath overview・
+  Lean 具体版・導出版を突き合わせ、根拠が一致した。「何も言っていない主張」の観点では、この tick の前進そのものが該当ブロックの削除（下の前進の記録）。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。他の修正は無い。
+
 - 2026-08-16（tick 335）: 前 tick の「開境界正方形と部分正方形の比較の対数化（$\Lambda$ の鎖。$q$ は 1 以下）」の本文（準備 3 つ・4 段の鎖）・SageMath overview・
   Lean 具体版（準備の等式 2 本と本体）・導出版（入口 import・sorry 検査への登録）を突き合わせ、根拠が一致した。本文の修正は無い。
   本文末尾「この先に書くこと」に済んだ項目（「有限系の密度を可算側へ畳むこと」「極限の存在の Cauchy 性としての記述」、および今回済んだ「倍数でない辺への拡張」）が残っていたので、
@@ -161,13 +160,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   必要十分版（実数版と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、接合不等式の向きと $b:=a$／$b:=L$ の読み替えを含め根拠が一致した。
   本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
-- 2026-08-16（tick 331）: 前 tick の「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」の本文（準備 3 つと二場合の 3 段の鎖 2 本ずつ）・SageMath overview・
-  Lean 具体版・必要十分版（共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、根拠が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。
-  台帳の todo が指していた `claim_open_square_subsquare_comparison_le_one` は 2026-08-16 の実数値経路の削除で本文から消えており（Lean は孤立して残存）、
-  git 履歴（コミット c205c4ed）から原本を読んで $\mathbb Q$ 版を書いた。本文末尾の「開境界自由エネルギー密度の極限（倍数でない辺への拡張）」に対応する行がセクション表に無かったので、
-  「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb{Q}}$ 版。倍数でない辺への拡張）」を「密度の列の Cauchy 性」の直前へ足した。本文の修正は無い。
-
-（これより古い 319 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 320 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

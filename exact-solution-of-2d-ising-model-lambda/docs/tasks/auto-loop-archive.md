@@ -3,6 +3,39 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 331）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 331 は、「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させ、四層で閉じた。**
+  `claim_open_square_subsquare_comparison_rational_le_one`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後・`claim_open_square_free_entropy_density_upper_bound` の直前、住処 Q）で、
+  $1\le a<L$、$q\in\mathbb Q$、$0<q\le1$ に対し $q^{a+L}Z^{\mathrm{op}}_{a,a}(q)\le Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)$。
+  削除済みの実数値版（上界 $2^{L^2-a^2}$）と同じ論法だが、$\mathbb Q$ 側にある上からの評価は一様な $2^{ab}(1+q)^{2ab}$（`claim_open_rectangle_value_upper_bound_at_positive_rational`）なので上界に $(1+q)^{2(L^2-a^2)}$ が付く。
+  準備 3 つ（$c=L-a$・$ac+cL=L^2-a^2$・正値性）、下側 7 段（$1\le Z$ 二回と二方向の接合の下側）、上側 8 段（二方向の接合の上側と値の上からの評価二回）。
+  SageMath `check/open-square-subsquare-comparison-rational/`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 6 点、270 検査、4 秒）。
+  Lean 具体版 `OpenSquareSubsquareComparisonRational.lean`（`openPartitionValueRat_square_subsquare_bounds_of_le_one`）、必要十分版は実数版の `split_twice_bounds_necSuf` をそのまま共有
+  （可換半環の順序と非負元の乗法単調性だけなので $\mathbb Q$ でも通る。**旧実数値経路の Lean を片付けるときこの必要十分版は残すこと**）、導出版 `OpenSquareSubsquareComparisonRationalFromNecSuf.lean`。sorry 検査 1225 件。
+  次は「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」。
+
+### 前進の記録
+
+- 2026-08-16（tick 331）: `claim_open_square_subsquare_comparison_rational_le_one` を `claim_open_rectangle_value_upper_bound_at_positive_rational` の直後
+  （`claim_open_square_free_entropy_density_upper_bound` の直前）に置き四層で閉じた。git 履歴の実数値版 `claim_open_square_subsquare_comparison_le_one`（2026-08-15）の証明を
+  $\mathbb Q$ 版の道具（`claim_open_rectangle_gluing_inequality_rational`・`claim_open_rectangle_value_ge_one_at_positive_rational`・
+  `claim_open_rectangle_value_upper_bound_at_positive_rational`）で書き直した。上界の因子は $\mathbb Q$ 版の値の上からの評価が一様な $2^{ab}(1+q)^{2ab}$ なので
+  $2^{L^2-a^2}(1+q)^{2(L^2-a^2)}$（実数値版の $2^{L^2-a^2}$ より緩い。密度の極限へ渡すとき $L^2-a^2$ の項が $L^2$ に対して消える性質は変わらない）。
+  SageMath `open-square-subsquare-comparison-rational`（下側 7 段・上側 8 段を段ごとに。一辺 4 以上は含めない）。Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonRational.lean`
+  （実数版と同じ段。`open NecSuf.ThermodynamicLimit` が要る——`pow_pos_by_induction` がそこにある）、必要十分版は `split_twice_bounds_necSuf` を共有、
+  導出版 `OpenSquareSubsquareComparisonRationalFromNecSuf.lean`。入口 import・sorry 検査へ 2 件登録（計 1225 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 331）: 前 tick の「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」の本文（準備 3 つと二場合の 3 段の鎖 2 本ずつ）・SageMath overview・
+  Lean 具体版・必要十分版（共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、根拠が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。
+  台帳の todo が指していた `claim_open_square_subsquare_comparison_le_one` は 2026-08-16 の実数値経路の削除で本文から消えており（Lean は孤立して残存）、
+  git 履歴（コミット c205c4ed）から原本を読んで $\mathbb Q$ 版を書いた。本文末尾の「開境界自由エネルギー密度の極限（倍数でない辺への拡張）」に対応する行がセクション表に無かったので、
+  「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb{Q}}$ 版。倍数でない辺への拡張）」を「密度の列の Cauchy 性」の直前へ足した。本文の修正は無い。
+
 ## 2026-08-16（tick 330）の記録
 
 ### 現在地
