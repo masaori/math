@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16: 「真に依存する」主張の Lean 具体版の第一歩 `brokenMonomial_exponent_at_broken_edge` を追加（台帳「現在地」参照。sorry 検査の再実行は次 tick で確認）。
 - 2026-08-16 14:17: 「増えた辺の変数に真に依存する」を SageMath で検証（`sagemath/check/full-boundary-response-degree-exactly-one/` PASS。各辺 $e_0$ の一端だけ $-1$ の配位 $\tau$ が $e_0$ を破ること・破れ辺集合ごとの自然数係数が $1$ 以上・次数がちょうど $1$ を証明と同順に `ZZ` 上で確認。`記述と SageMath まで`。検証対応 22 件）。次は同主張の Lean 具体版（`lean/Ising3DCut/BoundaryResponsePolynomial.lean` に、一端反転の配位の単項式の係数が `≥ 1` で `degreeOf` が `1` 以上、`≤ 1` と合わせて `= 1` を人手証明と同順に）。
 - 2026-08-16 14:02: 「増えた辺の変数に真に依存する」を記述（`claim_full_boundary_response_degree_exactly_one`。$e_0$ の一端だけ $-1$ の配位 $\tau$ が $e_0$ を破り、破れ辺集合ごとにまとめた自然数係数が $1$ 以上で次数がちょうど $1$。`記述まで`。78 ブロック・相互参照 87 件）。次は同主張の SageMath 検証（小さい箱で $\tau$ の単項式の係数と各辺の次数を `ZZ` 上で確認）。
 - 2026-08-16 13:35: 「各辺変数についての次数は高々 1」の Lean 具体版 `fullBoundaryResponse_degreeOf_le_one`（`degreeOf_sum_le`・`degreeOf_prod_le`・`degreeOf_X` を人手証明と同順に。`lake build` 成功・sorry 検査 109 件 OK。`Lean 具体版まで`）。次は同主張の Lean 必要十分版（係数環を可換半環へ一般化・`Fintype` 除去）と具体版からの導出。

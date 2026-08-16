@@ -176,6 +176,23 @@ theorem fullBoundaryResponse_degreeOf_le_one
     _ ≤ 1 := by
         rw [Finset.sum_ite_eq]; split_ifs <;> simp
 
+/-- 辺変数を 1 に置かない境界応答多項式は各辺の変数に真に依存する（人手証明
+`claim_full_boundary_response_degree_exactly_one`）の第一歩。辺 `e₀` を破る配位 `τ` の単項式は
+指数 `∑ e ∈ broken τ, single e 1` の単項式（係数 1）であり、その `e₀` での指数は 1 である。 -/
+theorem brokenMonomial_exponent_at_broken_edge
+    (broken : Configuration → Finset Edge) (e₀ : Edge) (τ : Configuration)
+    (hτ : e₀ ∈ broken τ) :
+    (∏ e ∈ broken τ, (X e : MvPolynomial Edge ℤ)) =
+        monomial (∑ e ∈ broken τ, Finsupp.single e 1) 1 ∧
+      (∑ e ∈ broken τ, Finsupp.single e 1) e₀ = 1 := by
+  refine ⟨?_, ?_⟩
+  · -- 相異なる不定元の積は指数の和の単項式
+    rw [monomial_sum_index, C_1, one_mul]
+    rfl
+  · -- e₀ での指数は e₀ ∈ broken τ なら 1
+    rw [Finsupp.finsetSum_apply]
+    simp [Finsupp.single_apply, hτ]
+
 end
 
 end Ising3DCut
