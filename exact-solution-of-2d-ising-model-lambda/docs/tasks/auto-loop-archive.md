@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 357 で台帳から移した記録（tick 352 分）
+
+### 現在地
+
+- **2026-08-17 の tick 352 は、台帳の先頭行「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」（$a\ge1$、$a<L$、$a<M$、$a^2\le L$、$a^2\le M$、$0<q\le1$ で $-R\le\Psi^{\mathrm{op}}_L+(-\Psi^{\mathrm{op}}_M)$、$R:=U+(-D)+\frac2aC$ は差の上からの評価の右辺と同じ元）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_large_sides_density_difference_lower_le_one`（`claim_open_square_large_sides_density_difference_upper_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は、差の上からの評価を第一の辺 $M$・第二の辺 $L$ で読み（仮定が $L,M$ について対称で右辺 $R$ が $L,M$ によらないので読める）$\Psi_M+(-\Psi_L)\le R$、準備で $-(\Psi_M+(-\Psi_L))=\Psi_L+(-\Psi_M)$ を `def_rational_log_order_group` の等号の判定どおり素数ごとに六段（逆元の定義・加法の定義・逆元の定義・$\mathbb Q$ の四則 $-(u+(-v))=v+(-u)$・逆元の定義・加法の定義）で示し、本体は `claim_rational_log_order_group_neg_reverses_order` で $-R\le-(\Psi_M+(-\Psi_L))$、準備の結論で読み替えるだけ。有理数倍の係数には触れない。
+  SageMath `check/open-square-large-sides-density-difference-lower/`（$a=1$、$(L,M)\in\{2,3\}^2$ × 6 点、199 検査、11 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSidesDensityDifferenceLower.lean`（`neg_add_neg_eq_add_neg_swap`（`ext p` と `Finsupp.neg_apply`・`Finsupp.add_apply`・`ring` の六段 calc）、`rationalLogOrderLE_openSquareLargeSidesDensityDifference_lower_of_le_one`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSidesDensityDifferenceLower.lean`（`difference_lower_bound_from_swapped_upper_necSuf`。`[Add X] [Neg X]` と逆元の順序反転・準備の等式（仮定として受ける）だけ。推移律も加法単調性も群の公理も要らない）、導出版。sorry 検査 1313 件。
+  前 tick のレビューでは修正なし。次は「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」（$E$ を置き $R=\frac1aE$ を有理数倍の定義から素数ごとに読み、$0\le E$ を符号から示す）。
+
+### 前進の記録
+
+- 2026-08-17（tick 352）: 台帳の先頭行「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」を実行し、`claim_open_square_large_sides_density_difference_lower_le_one` を `claim_open_square_large_sides_density_difference_upper_le_one` の直後に置いた。
+  証明は差の上からの評価を辺を入れ替えて読み、逆元の順序反転で向きを返し、$-(\Psi_M+(-\Psi_L))=\Psi_L+(-\Psi_M)$ を素数ごとに読むだけ。SageMath `open-square-large-sides-density-difference-lower`、Lean 具体版・必要十分版（`Add`・`Neg`、逆元の順序反転と準備の等式だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1313 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 352）: 前 tick の「有理係数の対数順序群の逆元は順序を反転する」の本文（左辺三段・右辺四段）・SageMath overview（125 ベクトル）・Lean 具体版（`h'`・`hl`・`hr` が本文の加法単調性と左右の鎖に 1 対 1）・必要十分版（`AddCommMonoid`・`Neg`、右加法単調性・逆元律 1 本）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 順序の一般的な性質で、差の下からの評価と Cauchy 性が繰り返し引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 356 で台帳から移した記録（tick 351 分）
 
 ### 現在地
