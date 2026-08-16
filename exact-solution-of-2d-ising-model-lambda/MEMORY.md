@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 324 は、レビューで人間の実数値経路削除（コミット 30d11b8a）のあとに残っていたほころび 3 件を直し
+（`claim_open_rectangle_value_ge_one_at_positive_rational` 末尾の途切れた文、初出より後ろに置かれていた `def_constant_plus_configuration`・`claim_constant_plus_breaks_no_bond`
+を `claim_partition_value_ge_one_at_positive_rational` の直前へ移動、削除済み実数値主張を対象にしていた SageMath 検証 `free-energy-density-lower-bound`・`open-rectangle-value-at-least-one`
+の撤去と対応の付け替え）、「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_square_free_entropy_density_nonnegative`（`claim_open_rectangle_value_ge_one_at_positive_rational` の直後、`remark_real_escape_plan` の直前、住処 Lambda）で、
+$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。証明は周期境界の `claim_finite_free_entropy_density_nonnegative` と同じ
+（準備の第一は `claim_open_rectangle_value_at_rational_is_positive`・`claim_open_rectangle_value_ge_one_at_positive_rational` を $a=b=L$ で、第二は `claim_log_power` の $k=0$、
+第三は周期境界の証明の鎖をそのまま引く。$\Lambda$ の鎖は `claim_rational_log_order_iff`、$\Lambda_{\mathbb Q}$ の鎖は `claim_scaled_embedding_order_transfer`）。
+SageMath `open-square-free-entropy-density-nonnegative`（$L\in\{1,2,3\}$ × 正の有理点 9 点、97 検査、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEntropyDensityNonnegative.lean`
+（`logOrderLE_zero_logRat_openPartitionValueRat`・`rationalLogOrderLE_zero_openScaledFreeEntropy`。`scaled_toRational_zero` を共有）、必要十分版は `le_base_transport_of_monotone_necSuf` を共有、
+導出版 `OpenSquareFreeEntropyDensityNonnegativeFromNecSuf.lean`。sorry 検査 1204 件。
+次は「開境界正方形の値の上界（$\mathbb Q$ 版）」（$Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2}(1+q)^{2L^2}$。周期境界の `claim_partition_value_upper_bound_at_positive_rational` と同じ論法。
+辺数は $2L(L-1)\le2L^2$ なので、開境界では辺数そのものを $2L(L-1)$ とするか $2L^2$ で緩めるかを、周期境界の主張の形と後段の密度の上界（$\iota(\ell_2)+2\iota(\log(1+q))$）に合うよう決める。
+Lean は `PartitionValueUpperBoundRational.lean` を開境界へ移す。着手前に周期境界側の本文と Lean を読むこと）。
+
 2026-08-16 の tick 323 は、前 tick の「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の四層を突き合わせて一致を確認し（修正無し）、
 「開境界長方形の正の有理点での値は 1 以上である（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_rectangle_value_ge_one_at_positive_rational`（`def_open_square_free_entropy_density` の直後、`remark_real_field_escape` の直前、住処 Q）で、

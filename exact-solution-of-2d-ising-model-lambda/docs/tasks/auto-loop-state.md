@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 324 は、「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させ、あわせて人間の削除のあとに残っていたほころび 3 件を直した。**
+  `claim_open_square_free_entropy_density_nonnegative`（`claim_open_rectangle_value_ge_one_at_positive_rational` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。周期境界の `claim_finite_free_entropy_density_nonnegative` と同じ論法
+  （準備 3 つ: $1\le Z^{\mathrm{op}}_{L,L}(q)$・$\log1=0$・$\frac1{L^2}\iota(0)=0$、$\Lambda$ の鎖 $0=\log1\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)$、$\Lambda_{\mathbb Q}$ の鎖で `claim_scaled_embedding_order_transfer` により移送）。
+  SageMath 97 検査（`ZZ`/`QQ`・素因数分解）、Lean 具体版 `rationalLogOrderLE_zero_openScaledFreeEntropy`・必要十分版は `le_base_transport_of_monotone_necSuf` を共有・導出版、sorry 検査 1204 件。
+  レビューでは、削除で途切れた `claim_open_rectangle_value_ge_one_at_positive_rational` 末尾の文を直し、初出より後ろに置かれていた `def_constant_plus_configuration`・
+  `claim_constant_plus_breaks_no_bond` を `claim_partition_value_ge_one_at_positive_rational` の直前へ移し、削除済みの実数値主張を対象にしていた SageMath 検証 2 件
+  （`free-energy-density-lower-bound`・`open-rectangle-value-at-least-one`）を撤去して対応を `partition-value-ge-one-at-positive-rational` へ付け替えた。次は「開境界正方形の値の上界（$\mathbb Q$ 版）」。
+
 - **2026-08-16（人間の指示）: 「実数体への脱出の宣言」以降のブロックをすべて削除した。**
   可算側の経路と実数値の経路が併存していて、実数体が最初から要るように読めるためである。
   代わりに「実数体への脱出をどう行うか（方針。まだ書いていない）」という注記を 1 つ置き、
@@ -48,14 +57,7 @@
   $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。SageMath 45 組（`ZZ`/`QQ`。鎖の各段を検査）、Lean 具体版・必要十分版（$\mathbb R$ 版 `two_direction_pow_bounds_necSuf` と共有）・導出版、
   sorry 検査 1194 件。レビューでは前 tick の反復接合の第二（$\mathbb Q$ 版）の四層が一致し修正無し。次は「周期境界と開境界の比較（$\mathbb Q$ 版）」。
 
-- **2026-08-16 の tick 319 は、「反復接合の第二（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
-  `claim_open_rectangle_iterated_gluing_second_rational`（`claim_open_rectangle_iterated_gluing_first_rational` の直後・実数体脱出の宣言の直前、住処 Q）で、
-  $a,b,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{(k-1)a}Z^{\mathrm{op}}_{a,b}(q)^k\le Z^{\mathrm{op}}_{a,kb}(q)\le Z^{\mathrm{op}}_{a,b}(q)^k$、$1\le q$: その逆向き。
-  $\mathbb R$ 版と同じ帰納法 1 本（底は等号の鎖、帰納段は $ka=a+(k-1)a$・帰納法の仮定へ正数を掛ける・第二座標の長さ $kb$ と $b$ への接合不等式（$\mathbb Q$ 版））を
-  $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。SageMath 126 組（`ZZ`/`QQ`。帰納段も検査）、Lean 具体版・必要十分版（$\mathbb R$ 版・第一と共有）・導出版、
-  sorry 検査 1190 件。レビューでは前 tick の反復接合の第一（$\mathbb Q$ 版）の四層が一致し修正無し。次は「正方形のブロック敷き詰め（$\mathbb Q$ 版）」。
-
-（これより古い 275 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 276 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -69,13 +71,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 46 セクション
+- 熱力学極限: 47 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 開境界正方形の密度の非負性（$\Lambda_{\mathbb Q}$ 版） | todo | $0\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。`claim_finite_free_entropy_density_nonnegative` と同じ論法（`claim_open_rectangle_value_ge_one_at_positive_rational` の $1\le Z^{\mathrm{op}}_{L,L}(q)$ → `claim_log_power` の $k=0$・`claim_rational_log_order_iff`・`claim_scaled_embedding_order_transfer`）。`claim_open_rectangle_value_ge_one_at_positive_rational` の直後に置く。Lean は `FiniteFreeEntropyDensityNonnegative*.lean` を開境界へ移し、必要十分版 `le_base_transport_of_monotone_necSuf` を共有できる見込み |
 | 熱力学極限 | 開境界正方形の値の上界（$\mathbb Q$ 版） | todo | $Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2}(1+q)^{2L^2}$。`claim_partition_value_upper_bound_at_positive_rational` と同じ論法（辺数 $2L(L-1)\le2L^2$） |
 | 熱力学極限 | 開境界正方形の密度の上界（$\Lambda_{\mathbb Q}$ 版） | todo | $\Psi^{\mathrm{op}}_L(q)\le\iota(\ell_2)+2\cdot\iota(\log(1+q))$。`claim_finite_free_entropy_density_upper_bound` と同じ論法 |
 | 熱力学極限 | ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版） | todo | $\Psi^{\mathrm{op}}_{ka}$ を $\Psi^{\mathrm{op}}_a$ と $\ell_2$・$\log q$ の有理数倍で二場合に挟む |
@@ -93,6 +94,16 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 324）: `claim_open_square_free_entropy_density_nonnegative` を `claim_open_rectangle_value_ge_one_at_positive_rational` の直後
+  （`remark_real_escape_plan` の直前）に置き四層で閉じた。周期境界の `claim_finite_free_entropy_density_nonnegative` の証明を、$Z_L(q)$ を $Z^{\mathrm{op}}_{L,L}(q)$
+  （正値性は `claim_open_rectangle_value_at_rational_is_positive`、下界 1 は `claim_open_rectangle_value_ge_one_at_positive_rational`、いずれも $a=b=L$）に、
+  $\Phi_L(q)$ を `def_rational_log` の $\log Z^{\mathrm{op}}_{L,L}(q)$ に置き換えて述べ、準備の第三（$\frac1{L^2}\iota(0)=0$）は周期境界の証明の鎖をそのまま引いた。
+  SageMath `open-square-free-entropy-density-nonnegative`（$L\in\{1,2,3\}$ × 正の有理点 9 点、97 検査。周期境界の検査と同じ項目を開境界の値で。`ZZ`/`QQ`）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEntropyDensityNonnegative.lean`（`logOrderLE_zero_logRat_openPartitionValueRat`・
+  `rationalLogOrderLE_zero_openScaledFreeEntropy`。周期境界の `scaled_toRational_zero` を共有）、必要十分版は
+  `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean` の `le_base_transport_of_monotone_necSuf` をそのまま共有、導出版
+  `OpenSquareFreeEntropyDensityNonnegativeFromNecSuf.lean`。sorry 検査 1204 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 323）: `claim_open_rectangle_value_ge_one_at_positive_rational` を `def_open_square_free_entropy_density` の直後（`remark_real_field_escape` の直前）
   に置き四層で閉じた。$\mathbb R$ 版 `claim_open_rectangle_value_at_least_one` の鎖（$1=q^0=q^{b^{\mathrm{op}}_{a,b}(\tau_+)}\le q^{b^{\mathrm{op}}(\tau_+)}+\sum_{\sigma\ne\tau_+}
@@ -140,18 +151,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   合成を ℚ で書き直し、`pow_le_pow_of_pos_of_le_by_induction_rat` を引く）、必要十分版は `two_direction_pow_bounds_necSuf` をそのまま共有、導出版
   `OpenSquareBlockTilingRationalFromNecSuf.lean`。sorry 検査 1194 件。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 319）: `claim_open_rectangle_iterated_gluing_second_rational` を `claim_open_rectangle_iterated_gluing_first_rational` の直後
-  （`remark_real_field_escape` の直前）に置き四層で閉じた。$\mathbb R$ 版 `claim_open_rectangle_iterated_gluing_second` の帰納法（$k=1$ の底の等号の鎖、
-  帰納段の $ka=a+(k-1)a$・冪の指数法則・積の結合則・帰納法の仮定と正数の乗法・第二座標の長さ $kb$ と $b$ の二長方形への接合不等式）を
-  $q\in\mathbb Q_{>0}$ で述べ直し、接合不等式は `claim_open_rectangle_gluing_inequality_rational` を引く。`remark_real_field_escape` は引かない。
-  $\mathbb R$ 版は併存（撤去のセクションで消す）。SageMath `open-rectangle-iterated-gluing-second-rational`（形 14 通り × 正の有理点 9 点、126 組。
-  $\mathbb Z[x]$ への代入と配位和の一致・二場合の上下評価・帰納段の各段。`ZZ`/`QQ`）。Lean 具体版
-  `ThermodynamicLimit/OpenRectangleIteratedGluingSecondRational.lean`（`openPartitionValueRat_iteratedGlueSecond_bounds_of_le_one`／`_of_one_le`。
-  $\mathbb R$ 版の帰納法を ℚ で書き直し、`OpenRectangleGluingInequalityRational.lean` の第二方向の接合不等式を引く）、必要十分版は
-  `iterated_glue_pow_bounds_necSuf` をそのまま共有（接ぐ向きにも体にも依らない）、導出版 `OpenRectangleIteratedGluingSecondRationalFromNecSuf.lean`。
-  sorry 検査 1190 件。式変形統一は一時停止中のため実施せず。
-
-（これより古い 286 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 287 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -170,6 +170,14 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 324）: 前 tick の「開境界長方形の値の下界 1（$\mathbb Q$ 版）」と、その後の人間による実数値経路の削除（42 ブロック）のあとの本文・SageMath・Lean を突き合わせた。
+  直したもの 3 件。(1) `claim_open_rectangle_value_ge_one_at_positive_rational` の証明末尾の文が「周期境界の〔参照〕、」で途切れていた（削除の際に $\mathbb R$ 版への言及ごと
+  切れた）ので「と同じ論法である。」で結んだ。(2) `def_constant_plus_configuration`・`claim_constant_plus_breaks_no_bond` が初出（`claim_partition_value_ge_one_at_positive_rational`
+  の証明）より後ろ、開境界の値の下界の直後に置かれていたので初出の直前へ移し、説明文も合わせた。(3) SageMath `free-energy-density-lower-bound`（対象に削除済みの
+  `claim_free_energy_density_nonnegative` を含み ball 算術を使う）と `open-rectangle-value-at-least-one`（対象が削除済みの `claim_open_rectangle_value_at_least_one`）を撤去し、
+  全て正の定数配位 2 ブロックの検証を、既にそれらを検査している `partition-value-ge-one-at-positive-rational`（overview の対象へ追記）と
+  `open-rectangle-value-ge-one-at-positive-rational` へ付け替えた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。
+
 - 2026-08-16（tick 323）: 前 tick の「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
   Lean（`openScaledFreeEntropy`・`openScaledFreeEntropy_apply`、入口 import・sorry 検査への登録）を突き合わせ、右辺の確定・各素数での値の三段の鎖・写像と値の区別・
   具体例 $L=2$、$q=1/2$ が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
@@ -186,11 +194,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   導出版を突き合わせ、二場合の上下評価・帰納段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致し、本文に $t$ や $\le_{\mathbb R}$ の残りは無い。
   本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
-- 2026-08-16（tick 319）: 前 tick の「反復接合の第一（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版（$\mathbb R$ 版と共有）・
-  導出版を突き合わせ、二場合の上下評価・帰納段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致し、本文に $t$ や $\le_{\mathbb R}$ の残りは無い。
-  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-（これより古い 307 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 308 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 
