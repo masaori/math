@@ -143,4 +143,17 @@ theorem fullBoundaryResponse_eval_one_eq_card_configuration_fromNecSuf
       Fintype.card Configuration :=
   NecSuf.fullBoundaryResponse_eval_one_eq_card_configuration (R := ℤ) broken
 
+omit [Fintype Edge] [DecidableEq Edge] in
+/-- 増えた辺の変数を 1 に置いてから全変数を 1 に置いた値が配位の総数、を必要十分版（`R := ℤ`）から導く。
+具体版は環準同型 `π` を取るが、ℤ 上では環準同型は自動的に ℤ-代数準同型なので `π.toIntAlgHom` で渡す。 -/
+theorem fullBoundaryResponse_outer_edges_to_one_then_eval_one_fromNecSuf
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hπ : ∀ e : Edge'', (eval fun _ : Edge ↦ (1 : ℤ)) (π (X e)) = 1) :
+    (eval fun _ : Edge ↦ (1 : ℤ)) (π (multivariatePartitionPolynomial broken'')) =
+      Fintype.card (Configuration × Outer) :=
+  NecSuf.fullBoundaryResponse_outer_edges_to_one_then_eval_one (R := ℤ) broken''
+    π.toIntAlgHom hπ
+
 end Ising3DCut

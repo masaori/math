@@ -181,6 +181,9 @@ targets=(
   Ising3DCut.fullBoundaryResponse_totalDegree_eq_card_edge_fromNecSuf
   Ising3DCut.NecSuf.fullBoundaryResponse_eval_one_eq_card_configuration
   Ising3DCut.fullBoundaryResponse_eval_one_eq_card_configuration_fromNecSuf
+  Ising3DCut.NecSuf.eval_one_comp_outer_edges_to_one
+  Ising3DCut.NecSuf.fullBoundaryResponse_outer_edges_to_one_then_eval_one
+  Ising3DCut.fullBoundaryResponse_outer_edges_to_one_then_eval_one_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

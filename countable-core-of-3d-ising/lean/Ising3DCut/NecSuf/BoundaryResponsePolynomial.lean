@@ -303,4 +303,33 @@ theorem fullBoundaryResponse_eval_one_eq_card_configuration
   simp only [map_prod, eval_X, Finset.prod_const_one, Finset.sum_const, Finset.card_univ,
     nsmul_eq_mul, mul_one]
 
+/-- 増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい、の必要十分版
+（人手証明 `claim_full_boundary_response_outer_edges_to_one_then_value_at_one` の前半）。
+係数環は可換半環 `R` でよい。具体版は ℤ からの環準同型の一意性で定数項を処理したが、一般の `R` では
+それが使えないので、`π` を `R`-代数準同型（定数項を保つ環準同型）に取り、不定元だけを見る
+`MvPolynomial.algHom_ext` で閉じる。辺型の有限性・可判定性は不要。 -/
+theorem eval_one_comp_outer_edges_to_one
+    {Edge'' : Type*}
+    (π : MvPolynomial Edge'' R →ₐ[R] MvPolynomial Edge R)
+    (hπ : ∀ e : Edge'', (eval fun _ : Edge ↦ (1 : R)) (π (X e)) = 1) :
+    (aeval fun _ : Edge ↦ (1 : R)).comp π = (aeval fun _ : Edge'' ↦ (1 : R)) := by
+  refine MvPolynomial.algHom_ext (fun e ↦ ?_)
+  -- 不定元：両者とも 1
+  simp [aeval_eq_eval, hπ e]
+
+/-- 同上の後半：`ε_L (π (Z̃_{L''})) = #(Configuration × Outer)` の必要十分版。
+前半の代数準同型の等式と、全変数を 1 に置いた値が配位の総数であること。 -/
+theorem fullBoundaryResponse_outer_edges_to_one_then_eval_one
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (π : MvPolynomial Edge'' R →ₐ[R] MvPolynomial Edge R)
+    (hπ : ∀ e : Edge'', (eval fun _ : Edge ↦ (1 : R)) (π (X e)) = 1) :
+    (eval fun _ : Edge ↦ (1 : R)) (π (multivariatePartitionPolynomial (R := R) broken'')) =
+      (Fintype.card (Configuration × Outer) : R) := by
+  have h := AlgHom.congr_fun (eval_one_comp_outer_edges_to_one π hπ)
+    (multivariatePartitionPolynomial (R := R) broken'')
+  rw [AlgHom.comp_apply, aeval_eq_eval, aeval_eq_eval] at h
+  rw [h]
+  exact fullBoundaryResponse_eval_one_eq_card_configuration broken''
+
 end Ising3DCut.NecSuf
