@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 323 は、前 tick の「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の四層を突き合わせて一致を確認し（修正無し）、
+「開境界長方形の正の有理点での値は 1 以上である（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_rectangle_value_ge_one_at_positive_rational`（`def_open_square_free_entropy_density` の直後、`remark_real_field_escape` の直前、住処 Q）で、
+$a,b\ge1$、$q\in\mathbb Q_{>0}$ に対し $1\le Z^{\mathrm{op}}_{a,b}(q)$。証明は周期境界の `claim_partition_value_ge_one_at_positive_rational` と同じ五段の鎖
+（$1=q^0=q^{b^{\mathrm{op}}_{a,b}(\tau_+)}\le q^{b^{\mathrm{op}}(\tau_+)}+\sum_{\sigma\ne\tau_+}q^{b^{\mathrm{op}}(\sigma)}=\sum_\sigma q^{b^{\mathrm{op}}(\sigma)}=Z^{\mathrm{op}}_{a,b}(q)$）で、
+`remark_real_field_escape` を引かない。備考どおり `def_open_rectangle_constant_plus_configuration`・`claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N）を
+$\mathbb R$ 側 `claim_open_rectangle_value_at_least_one` の直前から新主張の直前（実数体脱出の前）へ移した（本文は変えず `verification` に新検査を追加）。$\mathbb R$ 版は併存（撤去のセクションで消す）。
+SageMath `open-rectangle-value-ge-one-at-positive-rational`（形 11 通り × 正の有理点 9 点、11472 検査。`ZZ`/`QQ`）。
+Lean: `openAllPlusConfig`・`openAllPlusConfig_openBrokenBondCount_eq_zero` を `OpenRectangleValueAtLeastOne.lean` から実数体に依らない
+`ThermodynamicLimit/OpenRectangleConstantPlusConfiguration.lean` へ切り出し（$\mathbb R$ 側と入口はそれを import）、具体版 `ThermodynamicLimit/OpenRectangleValueGeOneRational.lean`
+（`one_le_openPartitionValueRat`）、必要十分版は `NecSuf/ThermodynamicLimit/PartitionValueGeOneRational.lean` の `one_le_sum_pow_of_exponent_zero_necSuf` を共有、
+導出版 `OpenRectangleValueGeOneRationalFromNecSuf.lean`。sorry 検査 1201 件。
+セクション「値の下界 1（$\mathbb Q$ 版）と密度の非負性（$\Lambda_{\mathbb Q}$ 版）」は論法が 2 つなので割り、次は「開境界正方形の密度の非負性（$\Lambda_{\mathbb Q}$ 版）」
+（$0\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。`claim_finite_free_entropy_density_nonnegative` の論法（`claim_log_power` の $k=0$・`claim_rational_log_order_iff`・
+`claim_scaled_embedding_order_transfer`）で、$1\le Z_L(q)$ の代わりに `claim_open_rectangle_value_ge_one_at_positive_rational` を $a=b=L$ で引く。
+`claim_open_rectangle_value_ge_one_at_positive_rational` の直後に置く。Lean は `FiniteFreeEntropyDensityNonnegative*.lean` を開境界（`openScaledFreeEntropy`）へ移し、
+必要十分版 `le_base_transport_of_monotone_necSuf` を共有できる見込み。着手前に周期境界側の本文と Lean を読むこと）。
+
 2026-08-16 の tick 322 は、前 tick の「周期境界と開境界の比較（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean（定義と各素数での値の鎖）まで完成させた。
 `def_open_square_free_entropy_density`（`claim_periodic_open_boundary_comparison_rational` の直後、`remark_real_field_escape` の直前、住処 Lambda）で、

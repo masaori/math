@@ -84,6 +84,7 @@ export const ALL_LABELS = [
   "claim_open_rectangle_iterated_gluing_second_rational",
   "claim_open_rectangle_value_at_least_one",
   "claim_open_rectangle_value_at_rational_is_positive",
+  "claim_open_rectangle_value_ge_one_at_positive_rational",
   "claim_open_rectangle_value_upper_bound_le_one",
   "claim_open_rectangle_value_upper_bound_one_le",
   "claim_open_square_block_tiling",

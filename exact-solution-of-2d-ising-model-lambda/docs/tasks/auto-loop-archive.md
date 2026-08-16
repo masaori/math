@@ -3,6 +3,34 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 318）の記録
+
+### 現在地
+- **2026-08-16 の tick 318 は、「反復接合の第一（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  `claim_open_rectangle_iterated_gluing_first_rational`（`claim_open_rectangle_gluing_inequality_rational` の直後・実数体脱出の宣言の直前、住処 Q）で、
+  $a,b,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{(k-1)b}Z^{\mathrm{op}}_{a,b}(q)^k\le Z^{\mathrm{op}}_{ka,b}(q)\le Z^{\mathrm{op}}_{a,b}(q)^k$、$1\le q$: その逆向き。
+  $\mathbb R$ 版と同じ帰納法 1 本（底は等号の鎖、帰納段は $kb=b+(k-1)b$・帰納法の仮定へ正数を掛ける・一辺 $ka$ と $a$ への接合不等式（$\mathbb Q$ 版））を
+  $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。二場合は $\mathbb R$ 版に揃えて 1 ブロック。SageMath 126 組（`ZZ`/`QQ`。帰納段も検査）、
+  Lean 具体版・必要十分版（$\mathbb R$ 版と共有）・導出版、sorry 検査 1186 件。レビューでは前 tick の接合不等式（$\mathbb Q$ 版）の四層が一致し
+  修正無し。次は「反復接合の第二（$\mathbb Q$ 版）」。
+
+### 前進の記録
+- 2026-08-16（tick 318）: `claim_open_rectangle_iterated_gluing_first_rational` を `claim_open_rectangle_gluing_inequality_rational` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。$\mathbb R$ 版 `claim_open_rectangle_iterated_gluing_first` の帰納法（$k=1$ の底の
+  等号の鎖、帰納段の $kb=b+(k-1)b$・冪の指数法則・積の結合則・帰納法の仮定と正数の乗法・一辺 $ka$ と $a$ の二長方形への接合不等式）を
+  $q\in\mathbb Q_{>0}$ で述べ直し、接合不等式は `claim_open_rectangle_gluing_inequality_rational` を引く。`remark_real_field_escape` は引かない。
+  $\mathbb R$ 版は併存（撤去のセクションで消す）。SageMath `open-rectangle-iterated-gluing-first-rational`（形 14 通り × 正の有理点 9 点、126 組。
+  $\mathbb Z[x]$ への代入と配位和の一致・二場合の上下評価・帰納段の各段。`ZZ`/`QQ`）。Lean 具体版
+  `ThermodynamicLimit/OpenRectangleIteratedGluingFirstRational.lean`（`openPartitionValueRat_iteratedGlueFirst_bounds_of_le_one`／`_of_one_le`。
+  $\mathbb R$ 版の帰納法を ℚ で書き直し、`OpenRectangleGluingInequalityRational.lean` の接合不等式と NecSuf の `pow_pos_by_induction` を引く）、
+  必要十分版は $\mathbb R$ 版の `iterated_glue_pow_bounds_necSuf` をそのまま共有（半環と順序だけ。新規の仮定は無い）、導出版
+  `OpenRectangleIteratedGluingFirstRationalFromNecSuf.lean`。sorry 検査 1186 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+- 2026-08-16（tick 318）: 前 tick の「接合不等式（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版（$\mathbb R$ 版と共有）・
+  導出版を突き合わせ、四つの不等式・全単射と三項分解・接合面因子の順序・対象ラベル・入口 import・sorry 検査への登録が一致し、
+  本文に $t$ や $\le_{\mathbb R}$ の残りは無い。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 314）の記録
 
 ### 現在地

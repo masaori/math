@@ -1,32 +1,19 @@
 /-
-人手証明「開境界長方形の全て正の定数配位」「その破れボンド数は零である」
-「開境界長方形の値は 1 以上である」の具体版。
+人手証明「開境界長方形の値は 1 以上である」の具体版
+（全て正の定数配位 τ_+ とその破れボンド数が零であることは
+`OpenRectangleConstantPlusConfiguration.lean` に切り出した）。
 
 `1 = t^0 = t^{b(τ_+)} ≤ t^{b(τ_+)} + Σ_{σ≠τ_+} t^{b(σ)} = Σ_σ t^{b(σ)} = Z^op_{a,b}(t)`
 を人手証明と同じ順で辿る。
 -/
 import Ising2DLambda.ThermodynamicLimit.OpenRectangleGluingInequality
+import Ising2DLambda.ThermodynamicLimit.OpenRectangleConstantPlusConfiguration
 
 namespace Ising2DLambda.ThermodynamicLimit
 
 open Finset PartitionPolynomial
 
 variable (a b : ℕ)
-
-/-- `def_open_rectangle_constant_plus_configuration`。全ての頂点に +1 を割り当てる配位 τ_+。 -/
-def openAllPlusConfig : OpenConfig a b := fun _ => ⟨1, Or.inl rfl⟩
-
-/-- `claim_open_rectangle_constant_plus_breaks_no_bond`。定数配位では各辺の両端の値が等しい。 -/
-theorem openAllPlusConfig_openBrokenBondCount_eq_zero :
-    openBrokenBondCount a b (openAllPlusConfig a b) = 0 := by
-  unfold openBrokenBondCount openBrokenBondSet
-  have hfilter :
-      (univ.filter fun e : OpenEdge a b =>
-        openAllPlusConfig a b (openBoundary0 a b e) ≠
-          openAllPlusConfig a b (openBoundary1 a b e)) = ∅ := by
-    ext e
-    simp [openAllPlusConfig]
-  rw [hfilter, card_empty]
 
 /-- `claim_open_rectangle_value_at_least_one` の具体版。 -/
 theorem one_le_openPartitionValue {t : ℝ} (ht : 0 < t) :
