@@ -2549,4 +2549,102 @@ X_e,&e\in A_{L,L'},\\
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_coarse_graining_values_agree_implies_partition_values_agree",
+    kind: "claim",
+    title: { text: "粗視化の値の一致から自由境界の分配多項式の値の等式へ" },
+    labels: ["claim_coarse_graining_values_agree_implies_partition_values_agree"],
+    habitat: "Q",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について、各 ",
+        math(String.raw`e\in E_L`),
+        " で ",
+        math(String.raw`X_e\mapsto q`),
+        " と定める整係数の代入写像を ",
+        math(String.raw`\varepsilon_{L,q}\colon\mathbb Z[X_e:e\in E_L]\to\mathbb Q`),
+        " とする（多変数多項式環の普遍性により環準同型として一意に定まる）。この値 ",
+        math(String.raw`\varepsilon_{L,q}(\mathcal Z_L)\in\mathbb Q`),
+        " を、多変数分配多項式 ",
+        math(String.raw`\mathcal Z_L`),
+        "（",
+        ref("def_boundary_response_polynomial"),
+        "）の ",
+        math(String.raw`q`),
+        " での粗視化の値と呼ぶ。二つの正の有理数 ",
+        math(String.raw`q,q'\in\mathbb Q_{>0}`),
+        " について、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で粗視化の値の等式 ",
+        math(String.raw`\varepsilon_{L,q}(\mathcal Z_L)=\varepsilon_{L,q'}(\mathcal Z_L)`),
+        "（有理数の等式）が成り立つならば、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で自由境界の分配多項式（",
+        ref("def_partition_polynomial"),
+        "）の値の等式 ",
+        math(String.raw`Z_L(q)=Z_L(q')`),
+        "（有理数の等式）が成り立つ。すなわち ",
+        ref("claim_finite_box_equalities_transfer_to_limit_quantity"),
+        " の仮定が満たされる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "不定元 ",
+        math(String.raw`X`),
+        " を ",
+        math(String.raw`q`),
+        " へ置く整係数の代入写像を ",
+        math(String.raw`\mathrm{ev}_q\colon\mathbb Z[X]\to\mathbb Q`),
+        " とし、",
+        math(String.raw`\kappa_L\colon\mathbb Z[X_e:e\in E_L]\to\mathbb Z[X]`),
+        " を ",
+        ref("claim_all_edge_variables_to_one_indeterminate_gives_partition_polynomial"),
+        " の代入写像とする。合成 ",
+        math(String.raw`\mathrm{ev}_q\circ\kappa_L`),
+        " は環準同型であり、各不定元 ",
+        math(String.raw`X_e`),
+        " を ",
+        math(String.raw`\mathrm{ev}_q(\kappa_L(X_e))=\mathrm{ev}_q(X)=q`),
+        " へ送る。",
+        math(String.raw`\varepsilon_{L,q}`),
+        " も各 ",
+        math(String.raw`X_e`),
+        " を ",
+        math(String.raw`q`),
+        " へ送る環準同型なので、多変数多項式環の普遍性（不定元の行き先で環準同型が一意に定まること）により ",
+        math(String.raw`\varepsilon_{L,q}=\mathrm{ev}_q\circ\kappa_L`),
+        " である。任意の ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " を固定すると、次の一続きの式変形を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\mathrm{ev}_q\bigl(Z_L(X)\bigr)
+&&(\because\ \mathrm{ev}_q\ \text{の定義。多項式}\ Z_L(X)\ \text{の}\ q\ \text{での値})\\
+&=\mathrm{ev}_q\bigl(\kappa_L(\mathcal Z_L)\bigr)
+&&(\because\ \blkref{claim_all_edge_variables_to_one_indeterminate_gives_partition_polynomial})\\
+&=\varepsilon_{L,q}(\mathcal Z_L)
+&&(\because\ \varepsilon_{L,q}=\mathrm{ev}_q\circ\kappa_L)\\
+&=\varepsilon_{L,q'}(\mathcal Z_L)
+&&(\because\ \text{仮定の粗視化の値の等式})\\
+&=\mathrm{ev}_{q'}\bigl(\kappa_L(\mathcal Z_L)\bigr)
+&&(\because\ \varepsilon_{L,q'}=\mathrm{ev}_{q'}\circ\kappa_L\ \text{。上と同じ論法を}\ q'\ \text{で})\\
+&=\mathrm{ev}_{q'}\bigl(Z_L(X)\bigr)
+&&(\because\ \blkref{claim_all_edge_variables_to_one_indeterminate_gives_partition_polynomial})\\
+&=Z_L(q')
+&&(\because\ \mathrm{ev}_{q'}\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`L`),
+        " は任意だったので、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で ",
+        math(String.raw`Z_L(q)=Z_L(q')`),
+        " が成り立つ。すべての段は有理数の等式であり、実数も極限も用いない。",
+      ]),
+    ],
+  },
 ]);
