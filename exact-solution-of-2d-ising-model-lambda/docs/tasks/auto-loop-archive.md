@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 353 で台帳から移した記録（tick 348 分）
+
+### 現在地
+
+- **2026-08-17 の tick 348 は、台帳の先頭行「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価（$0<q\le1$）」を上端と下端の二行へ割り、その上端「基準辺の平方以上の辺の密度の基準辺の密度による一様な上からの評価」（$a\ge1$、$a<L$、$a^2\le L$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L\le\frac2a\iota(\ell_2)+\frac4a\iota(\log(1+q))+\Psi^{\mathrm{op}}_a$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_large_side_density_upper_vs_base_side_le_one`（`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 4 つ（自然数の除法 $L-1=ka+r$、$0\le r<a$ から $k\ge1$・$ka<L\le ka+a$（$L$ が $a$ の倍数かどうかで場合分けしない。$L-1$ を割るので常に $ka<L$）／$\mathbb Q$ の係数比較 $\frac{2a}L\le\frac{2a}{a^2}=\frac2a$・$\frac{4a}L\le\frac4a$（$a^2\le L$）／符号 $0\le\iota(\ell_2)$・$0\le\iota(\log(1+q))$／非負の元の係数比較 2 件）と、倍数でない辺の上からの評価を第一の $k$ で読み最初の二つの項を加法単調性で置き換える本体三段・推移律。
+  SageMath `check/open-square-large-side-density-upper-vs-base-side/`（$(a,L)=(1,2),(1,3)$ × 6 点、168 検査、11 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSideDensityUpperVsBaseSide.lean`（`exists_multiple_side_below_of_lt`・`rationalLogOrderLE_openSquareLargeSideDensity_upper_vs_baseSide_of_le_one`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSideDensityUpperVsBaseSide.lean`（`upper_bound_enlarge_first_two_terms_necSuf`。`[AddCommMagma X]` と推移律・右加法単調性・交換則だけ）、導出版。sorry 検査 1300 件。
+  割った理由: 上端は係数を大きくするだけだが、下端は非正の元の係数比較と逆元の項の比較・分配則を要する別の論法。$E$ の形も、上端・下端の係数を $\frac1a$ でくくれる $E:=4\iota(\ell_2)+8\iota(\log(1+q))-4\iota(\log q)$ ではなく上端・下端それぞれの実際の係数で書き、Cauchy 性で足すことにした（備考を更新）。前 tick のレビューでは修正なし。次は「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価（$0<q\le1$）」。
+
+### 前進の記録
+
+- 2026-08-17（tick 348）: 台帳の先頭行「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価（$0<q\le1$）」は上端（係数を $a$ だけの形へ大きくする）と下端（非正の元の係数比較・逆元の項の比較・分配則）で論法が違うので二行へ割った。その上端「基準辺の平方以上の辺の密度の基準辺の密度による一様な上からの評価」を実行し、`claim_open_square_large_side_density_upper_vs_base_side_le_one` を `claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one` の直後に置いた。
+  仮定は $a\ge1$・$a<L$・$a^2\le L$（$a=1$ で $L=1$ を除くため $a<L$ を置く。Cauchy 性では $a\ge2$ から出る）。証明は自然数の除法で $k$ を取って倍数でない辺の上からの評価を読み、係数比較・符号・非負の係数比較・加法単調性・推移律。SageMath `open-square-large-side-density-upper-vs-base-side`、Lean 具体版・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1300 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 348）: 前 tick の「倍数でない辺の密度の基準辺の密度による下からの評価」の本文（準備 3 つ・本体三つ）・SageMath overview（396 検査）・Lean 具体版（`hsum`・`hd0`・`hde`・`hC0`・`hm`・`hsplit`・`h1'`・`hshift`・`h3`〜`h5` が本文の準備第一〜第三と本体 (1)〜(3) に 1 対 1）・必要十分版（`AddCommMonoid`・`Neg`、推移律・右加法単調性・逆元）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は誤差評価の下端の項を基準辺の密度で置き換える比較で、一様な下からの評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 352 で台帳から移した記録（tick 347 分）
 
 ### 現在地

@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 353 は、前 tick の「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」を論法の数で二行（核の定義と $\frac1a$ 倍の等式／核は非負）へ割り、その最初を四層で閉じた。
+`def_open_square_density_difference_bound_core`: 核 $\Gamma(q):=\bigl(2\iota(\ell_2)+4\iota(\log(1+q))\bigr)+\bigl(-(4\iota(\log q))\bigr)+2\cdot\bigl(\iota(\ell_2)+2\iota(\log(1+q))\bigr)\in\Lambda_{\mathbb Q}$（$q>0$ だけで決まり、辺 $a,L,M$ によらない。$q\le1$ を要しない）。
+`claim_open_square_density_difference_bound_is_core_over_base_side`（いずれも `claim_open_square_large_sides_density_difference_lower_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$q>0$ で $\frac1a\cdot\Gamma(q)=R_a$（差の上からの評価の右辺・下からの評価の左辺の逆元の中身）。
+証明は準備 4 つ（$r\cdot(-\lambda)=-(r\cdot\lambda)$ を素数ごとに五段／$\frac1aX$・$\frac1a(-Y)$・$\frac1a(2C)$ を分配則・結合則（右から左へ）・$\mathbb Q$ の四則で）と本体（分配則二段で三つの項へ配り、準備で読み替える）。順序は使わない。
+$\pm\frac1a\Gamma(q)$ の形の上端・下端は上下の評価にこの等式を代入するだけなので独立の主張にせず、Cauchy 性の証明の中で読み替える（「何も言っていない主張」を増やさない判断）。
+SageMath `check/open-square-density-difference-bound-is-core-over-base-side/`（分配関数不要。$a\in\{1,2,3,5\}$ × 8 点（$q>1$ も含む）、692 検査、10 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareDensityDifferenceBoundCore.lean`（`openSquareDensityDifferenceBoundCore`、`ratSmul_neg_eq_neg_ratSmul`（`ext p`、`Finsupp.smul_apply`・`Finsupp.neg_apply`・`ring`・`smul_eq_mul` の五段 calc）、`one_div_smul_openSquareDensityDifferenceBoundCore`（`set` で略記、`smul_add`・`← mul_smul`・`ring` の `hq2`・`hq4`）），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityDifferenceBoundCore.lean`（`one_div_smul_core_eq_scaled_terms_necSuf`。`[Add X] [Neg X] [SMul ℚ X]` と分配則・結合則・逆元との入れ替えを仮定として受けるだけ。群の公理も順序も要らない。係数は $\mathbb Q$ のまま。`ring` のため `Mathlib.Tactic.Ring` と `Mathlib.Algebra.Field.Rat` を import）、導出版 `OpenSquareDensityDifferenceBoundCoreFromNecSuf.lean`。sorry 検査 1317 件。
+
+（tick 352 の記録）
 2026-08-17 の tick 352 は、前 tick の「有理係数の対数順序群の逆元は順序を反転する」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」を四層で閉じた。`claim_open_square_large_sides_density_difference_lower_le_one`（`claim_open_square_large_sides_density_difference_upper_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$a<L$、$a<M$、$a^2\le L$、$a^2\le M$、$0<q\le1$ で $-R\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)+(-\Psi^{\mathrm{op}}_M(q))$、$R:=U+(-D)+\frac2aC$（差の上からの評価の右辺と同じ元。辺 $L,M$ によらない）。
 証明は、差の上からの評価を第一の辺 $M$・第二の辺 $L$ で読み（仮定は $L,M$ について対称）$\Psi_M+(-\Psi_L)\le R$、準備で $-(\Psi_M+(-\Psi_L))=\Psi_L+(-\Psi_M)$ を `def_rational_log_order_group` の等号の判定どおり素数ごとに六段（逆元の定義・加法の定義・逆元の定義・$\mathbb Q$ の四則 $-(u+(-v))=v+(-u)$・逆元の定義・加法の定義）で示し、本体は `claim_rational_log_order_group_neg_reverses_order` で $-R\le-(\Psi_M+(-\Psi_L))$、準備の結論で読み替える。有理数倍の係数には触れない。
@@ -3993,9 +4004,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」（`claim_open_square_large_sides_density_difference_lower_le_one`）の本文（入れ替えた上端・準備六段・本体二段）・SageMath
-  `open-square-large-sides-density-difference-lower`・Lean 具体版・必要十分版・導出版を突き合わせる。
-- **次に進めるセクションは「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順）。
+- **レビュー**: 「開境界正方形の密度の差の評価の核」（`def_open_square_density_difference_bound_core`）と「差の一様な評価に現れる量は核の基準辺分の一倍である」（`claim_open_square_density_difference_bound_is_core_over_base_side`）の本文（準備 4 つ・本体）・SageMath
+  `open-square-density-difference-bound-is-core-over-base-side`・Lean 具体版・必要十分版・導出版を突き合わせる。
+- **次に進めるセクションは「核は非負である（$0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$、$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。

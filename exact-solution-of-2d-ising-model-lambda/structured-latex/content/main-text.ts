@@ -44278,6 +44278,261 @@ a
     ],
   },
   {
+    id: "thermodynamic_limit_def_open_square_density_difference_bound_core",
+    kind: "definition",
+    title: { text: "開境界正方形の密度の差の評価の核" },
+    labels: ["def_open_square_density_difference_bound_core"],
+    habitat: "Lambda",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openSquareDensityDifferenceBoundCore",
+    ],
+    statement: [
+      paragraph([
+        "各正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " に対し、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        "（",
+        ref("def_rational_log_order_group"),
+        "）の元",
+      ]),
+      displayMath(String.raw`\Gamma(q):=\bigl(2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+4\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\bigr)
++\Bigl(-\bigl(4\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\bigr)\Bigr)
++2\cdot\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\bigr)`),
+      paragraph([
+        "を、開境界正方形の密度の差の評価の核と呼ぶ。ここで ",
+        math(String.raw`\log q,\ \log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数（",
+        math(String.raw`q>0`),
+        "、",
+        math(String.raw`1+q>0`),
+        " なので定義されている）、",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`2\cdot`),
+        "、",
+        math(String.raw`4\cdot`),
+        " と加法・逆元 ",
+        math(String.raw`-\lambda`),
+        " は ",
+        ref("def_rational_log_order_group"),
+        " のものである。加法は左から順に結合する。",
+        math(String.raw`\Gamma(q)`),
+        " は ",
+        math(String.raw`q`),
+        " だけで決まり、格子の辺（基準辺 ",
+        math(String.raw`a`),
+        " や比べる辺 ",
+        math(String.raw`L,M`),
+        "）にはよらない。定義に順序は入らないので ",
+        math(String.raw`q\le1`),
+        " も要しない。",
+        ref("claim_open_square_large_sides_density_difference_upper_le_one"),
+        " と ",
+        ref("claim_open_square_large_sides_density_difference_lower_le_one"),
+        " の評価に現れる基準辺 ",
+        math(String.raw`a`),
+        " による量は、この元の ",
+        math(String.raw`\frac{1}{a}`),
+        " 倍である（次の主張）。後の Cauchy 性で、与えられた ",
+        math(String.raw`\varepsilon`),
+        " に対して基準辺 ",
+        math(String.raw`a`),
+        " を選ぶときに、この元を ",
+        ref("claim_rational_log_order_group_archimedean"),
+        " で ",
+        math(String.raw`\varepsilon`),
+        " の自然数倍と比べるために名前を与えておく。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
+    id: "thermodynamic_limit_claim_open_square_density_difference_bound_is_core_over_base_side",
+    kind: "claim",
+    title: { text: "差の一様な評価に現れる量は核の基準辺分の一倍である" },
+    labels: ["claim_open_square_density_difference_bound_is_core_over_base_side"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-density-difference-bound-is-core-over-base-side"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.ratSmul_neg_eq_neg_ratSmul",
+      "Ising2DLambda.ThermodynamicLimit.one_div_smul_openSquareDensityDifferenceBoundCore",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.one_div_smul_core_eq_scaled_terms_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.one_div_smul_openSquareDensityDifferenceBoundCore_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_density_difference_bound_core"),
+        " の核 ",
+        math(String.raw`\Gamma(q)`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\frac{1}{a}\cdot\Gamma(q)
+=\Bigl(\frac{2}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+\frac{4}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\Bigr)
++\Bigl(-\frac{4}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\Bigr)
++\frac{2}{a}\cdot\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\bigr)`),
+      paragraph([
+        "ここで有理数倍 ",
+        math(String.raw`\frac{1}{a}\cdot`),
+        "、",
+        math(String.raw`\frac{2}{a}\cdot`),
+        "、",
+        math(String.raw`\frac{4}{a}\cdot`),
+        "、",
+        math(String.raw`2\cdot`),
+        "（いずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元。",
+        math(String.raw`a\ge1`),
+        " なので分母 ",
+        math(String.raw`a\ne0`),
+        "）と加法・逆元は ",
+        ref("def_rational_log_order_group"),
+        " のものであり、右辺の加法は左から順に結合する。右辺は ",
+        ref("claim_open_square_large_sides_density_difference_upper_le_one"),
+        " の右辺、および ",
+        ref("claim_open_square_large_sides_density_difference_lower_le_one"),
+        " の左辺の逆元の中身と同じ元である。等号は ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の等号であり、",
+        math(String.raw`q\le1`),
+        " も辺 ",
+        math(String.raw`L,M`),
+        " も要しない。後の Cauchy 性で、差の両側の評価を ",
+        math(String.raw`\pm\frac{1}{a}\cdot\Gamma(q)`),
+        " の形で読み、基準辺 ",
+        math(String.raw`a`),
+        " を大きく取れば評価が小さくなることを有理数倍の係数だけで扱うために引く。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        "、",
+        math(String.raw`X:=2\cdot\iota(\ell_2)+4\cdot\iota(\log(1+q))`),
+        "、",
+        math(String.raw`Y:=4\cdot\iota(\log q)`),
+        "、",
+        math(String.raw`C:=\iota(\ell_2)+2\cdot\iota(\log(1+q))`),
+        "（いずれも ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の元）と略記する（この証明の中だけ）。",
+        ref("def_open_square_density_difference_bound_core"),
+        " により ",
+        math(String.raw`\Gamma(q)=\bigl(X+(-Y)\bigr)+2\cdot C`),
+        " である。準備として 4 つ置く。第一に、有理数倍と逆元の順序を入れ替える等式 ",
+        math(String.raw`r\cdot(-\lambda)=-(r\cdot\lambda)`),
+        "（",
+        math(String.raw`r\in\mathbb{Q}`),
+        "、",
+        math(String.raw`\lambda\in\Lambda_{\mathbb{Q}}`),
+        "）を、",
+        ref("def_rational_log_order_group"),
+        " の等号の判定のとおり素数ごとに示す。任意の素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(r\cdot(-\lambda)\bigr)(p)
+&=r\,(-\lambda)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍 }(r\cdot\lambda)(p)=r\,\lambda(p))\\
+&=r\,\bigl(-\lambda(p)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p))\\
+&=-\bigl(r\,\lambda(p)\bigr)
+&&(\because\ \mathbb{Q}\text{ の四則: }r(-u)=-(ru))\\
+&=-\bigl((r\cdot\lambda)(p)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍 }(r\cdot\lambda)(p)=r\,\lambda(p))\\
+&=\bigl(-(r\cdot\lambda)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p))
+\end{aligned}`),
+      paragraph([
+        "であり、すべての素数で値が一致するので ",
+        math(String.raw`r\cdot(-\lambda)=-(r\cdot\lambda)`),
+        " である（準備の第一）。第二に、第一の項を ",
+        math(String.raw`\frac{1}{a}`),
+        " 倍する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{a}\cdot X
+&=\frac{1}{a}\cdot\bigl(2\cdot\iota(\ell_2)+4\cdot\iota(\log(1+q))\bigr)
+&&(\because\ X\text{ の置き方})\\
+&=\frac{1}{a}\cdot\bigl(2\cdot\iota(\ell_2)\bigr)+\frac{1}{a}\cdot\bigl(4\cdot\iota(\log(1+q))\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
+&=\Bigl(\frac{1}{a}\cdot2\Bigr)\cdot\iota(\ell_2)+\Bigl(\frac{1}{a}\cdot4\Bigr)\cdot\iota(\log(1+q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を右から左へ、二つの項に同時に})\\
+&=\frac{2}{a}\cdot\iota(\ell_2)+\frac{4}{a}\cdot\iota(\log(1+q))
+&&(\because\ \mathbb{Q}\text{ の四則: }\tfrac{1}{a}\cdot2=\tfrac{2}{a}\text{、}\tfrac{1}{a}\cdot4=\tfrac{4}{a})
+\end{aligned}`),
+      paragraph([
+        "第三に、第二の項を ",
+        math(String.raw`\frac{1}{a}`),
+        " 倍する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{a}\cdot(-Y)
+&=-\Bigl(\frac{1}{a}\cdot Y\Bigr)
+&&(\because\ \text{準備の第一を }r:=\tfrac{1}{a}\text{、}\lambda:=Y\text{ で読む})\\
+&=-\Bigl(\frac{1}{a}\cdot\bigl(4\cdot\iota(\log q)\bigr)\Bigr)
+&&(\because\ Y\text{ の置き方})\\
+&=-\Bigl(\Bigl(\frac{1}{a}\cdot4\Bigr)\cdot\iota(\log q)\Bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を右から左へ})\\
+&=-\Bigl(\frac{4}{a}\cdot\iota(\log q)\Bigr)
+&&(\because\ \mathbb{Q}\text{ の四則: }\tfrac{1}{a}\cdot4=\tfrac{4}{a})
+\end{aligned}`),
+      paragraph([
+        "第四に、第三の項を ",
+        math(String.raw`\frac{1}{a}`),
+        " 倍する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{a}\cdot(2\cdot C)
+&=\Bigl(\frac{1}{a}\cdot2\Bigr)\cdot C
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を右から左へ})\\
+&=\frac{2}{a}\cdot C
+&&(\because\ \mathbb{Q}\text{ の四則: }\tfrac{1}{a}\cdot2=\tfrac{2}{a})
+\end{aligned}`),
+      paragraph([
+        "本体は、有理数倍を三つの項へ配ってから、準備の第二・第三・第四で各項を読み替えるだけである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{a}\cdot\Gamma(q)
+&=\frac{1}{a}\cdot\Bigl(\bigl(X+(-Y)\bigr)+2\cdot C\Bigr)
+&&(\because\ \blkref{def_open_square_density_difference_bound_core}\text{ と }X,Y,C\text{ の置き方})\\
+&=\frac{1}{a}\cdot\bigl(X+(-Y)\bigr)+\frac{1}{a}\cdot(2\cdot C)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
+&=\Bigl(\frac{1}{a}\cdot X+\frac{1}{a}\cdot(-Y)\Bigr)+\frac{1}{a}\cdot(2\cdot C)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
+&=\Bigl(\Bigl(\frac{2}{a}\cdot\iota(\ell_2)+\frac{4}{a}\cdot\iota(\log(1+q))\Bigr)+\frac{1}{a}\cdot(-Y)\Bigr)+\frac{1}{a}\cdot(2\cdot C)
+&&(\because\ \text{準備の第二})\\
+&=\Bigl(\Bigl(\frac{2}{a}\cdot\iota(\ell_2)+\frac{4}{a}\cdot\iota(\log(1+q))\Bigr)+\Bigl(-\frac{4}{a}\cdot\iota(\log q)\Bigr)\Bigr)+\frac{1}{a}\cdot(2\cdot C)
+&&(\because\ \text{準備の第三})\\
+&=\Bigl(\Bigl(\frac{2}{a}\cdot\iota(\ell_2)+\frac{4}{a}\cdot\iota(\log(1+q))\Bigr)+\Bigl(-\frac{4}{a}\cdot\iota(\log q)\Bigr)\Bigr)+\frac{2}{a}\cdot\bigl(\iota(\ell_2)+2\cdot\iota(\log(1+q))\bigr)
+&&(\because\ \text{準備の第四と }C\text{ の置き方})
+\end{aligned}`),
+      paragraph([
+        "最後の行は主張の右辺そのものである。使ったのは、核の定義、",
+        ref("def_rational_log_order_group"),
+        " の有理数倍の分配則と結合則、有理数倍と逆元の素数ごとの定義と等号の判定、",
+        math(String.raw`\mathbb{Q}`),
+        " の四則だけである。順序は使っていない。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },
