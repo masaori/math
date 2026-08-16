@@ -278,4 +278,171 @@ H^\vee
       ]),
     ],
   },
+  {
+    id: "finite_fourier_theorem_character_orthogonality",
+    kind: "theorem",
+    title: { text: "有限第一ホモロジー群上の文字直交関係" },
+    labels: ["theorem_finite_character_orthogonality"],
+    habitat: "Z",
+    verification: ["sagemath/check/finite-character-orthogonality"],
+    statement: [
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " と ",
+        ref("def_integer_sign_character_realization"),
+        " に対して、任意の ",
+        math(String.raw`h,k\in H`),
+        " について、有限な文字空間 ",
+        math(String.raw`H^\vee`),
+        " 上の整数和は",
+      ]),
+      displayMath(String.raw`\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+=
+\begin{cases}
+  |H^\vee|,&h=k,\\
+  0,&h\ne k
+\end{cases}
+\in\mathbb Z.`),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_integer_sign_character_multiplicativity"),
+        " より、任意の ",
+        math(String.raw`\varphi\in H^\vee`),
+        " について、",
+      ]),
+      displayMath(String.raw`\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+\quad\bigl(\because\ \text{整数符号実現の乗法性}\bigr).`),
+      paragraph([
+        math(String.raw`h=k`),
+        " の場合、",
+        math(String.raw`\mathbb F_2`),
+        " ベクトル空間の加法により ",
+        math(String.raw`h+k=0_H`),
+        " である。",
+        ref("def_f2_linear_character_space"),
+        " の線形性と ",
+        ref("def_integer_sign_character_realization"),
+        " の二場合より、任意の ",
+        math(String.raw`\varphi\in H^\vee`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+&=
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(0_H)
+\quad\bigl(\because\ h+k=0_H\bigr)\\
+&=+1
+\quad\bigl(\because\ \varphi(0_H)=0_{\mathbb F_2}\text{ と整数符号実現の定義}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+&=
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+\quad\bigl(\because\ \text{整数符号実現の乗法性}\bigr)\\
+&=
+\sum_{\varphi\in H^\vee}1
+\quad\bigl(\because\ h=k\text{ の場合の上の等式}\bigr)\\
+&=|H^\vee|
+\quad\bigl(\because\ H^\vee\text{ は有限集合}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`h\ne k`),
+        " の場合、",
+        math(String.raw`x:=h+k\in H`),
+        " と置くと ",
+        math(String.raw`x\ne0_H`),
+        " である。有限次元ベクトル空間の基底延長定理により、",
+        math(String.raw`x`),
+        " を含む ",
+        math(String.raw`H`),
+        " の基底を選ぶ。その基底上で ",
+        math(String.raw`x`),
+        " を ",
+        math(String.raw`1_{\mathbb F_2}`),
+        " へ送り、残りの基底元を ",
+        math(String.raw`0_{\mathbb F_2}`),
+        " へ送る線形写像を ",
+        math(String.raw`\psi\in H^\vee`),
+        " とする。このとき ",
+        math(String.raw`\psi(x)=1_{\mathbb F_2}`),
+        " である。写像 ",
+        math(String.raw`\tau_\psi:H^\vee\to H^\vee`),
+        " を ",
+        math(String.raw`\tau_\psi(\varphi):=\varphi+\psi`),
+        " で定める。",
+        math(String.raw`\psi+\psi=0_{H^\vee}`),
+        " なので ",
+        math(String.raw`\tau_\psi\circ\tau_\psi=\operatorname{id}_{H^\vee}`),
+        " であり、",
+        math(String.raw`\tau_\psi`),
+        " は全単射である。",
+      ]),
+      paragraph([
+        ref("def_integer_sign_character_realization"),
+        " の二場合を ",
+        math(String.raw`\varphi(x)\in\mathbb F_2`),
+        " に適用すると、任意の ",
+        math(String.raw`\varphi\in H^\vee`),
+        " について、",
+      ]),
+      displayMath(String.raw`\bigl(\operatorname{sgn}_H(\tau_\psi(\varphi))\bigr)(x)
+=
+-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(x)
+\quad\bigl(\because\ (\varphi+\psi)(x)=\varphi(x)+1_{\mathbb F_2}\bigr).`),
+      paragraph([
+        math(String.raw`S_x:=\sum_{\varphi\in H^\vee}(\operatorname{sgn}_H(\varphi))(x)\in\mathbb Z`),
+        " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_x
+&=
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\tau_\psi(\varphi))\bigr)(x)
+\quad\bigl(\because\ \tau_\psi\text{ は }H^\vee\text{ の全単射}\bigr)\\
+&=
+\sum_{\varphi\in H^\vee}
+-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(x)
+\quad\bigl(\because\ \tau_\psi\text{ による整数符号の反転}\bigr)\\
+&=-S_x
+\quad\bigl(\because\ \mathbb Z\text{ の有限和の分配律}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+2S_x
+&=0
+\quad\bigl(\because\ S_x=-S_x\bigr)\\
+S_x
+&=0
+\quad\bigl(\because\ \mathbb Z\text{ は零因子を持たず }2\ne0\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+&=
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h+k)
+\quad\bigl(\because\ \text{整数符号実現の乗法性}\bigr)\\
+&=S_x
+\quad\bigl(\because\ x=h+k\bigr)\\
+&=0
+\quad\bigl(\because\ h\ne k\text{ の場合の上の等式}\bigr).
+\end{aligned}`),
+      paragraph([
+        "二つの場合で主張を得た。全ての演算は有限集合、",
+        math(String.raw`\mathbb F_2`),
+        "、または ",
+        math(String.raw`\mathbb Z`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
