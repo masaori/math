@@ -57,6 +57,7 @@ export const ALL_LABELS = [
   "def_structural_color_flip",
   "def_structural_configuration",
   "def_structural_multiplicity",
+  "remark_boundary_response_only_outer_count_survives",
   "remark_null_model_positioning",
   "remark_odd_period_positioning",
   "remark_two_dimensional_prediction_filter",
