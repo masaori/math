@@ -49,7 +49,10 @@ cp "$HTML" "$STAGE/index.html"
 out="$(/Users/masaori/git/masaori/artifacts/publish.py --src "$STAGE" --repo math --path "$SLUG" 2>&1)"
 status=$?
 printf '%s\n' "$out" >> "$LOG_FILE"
-url="$(printf '%s\n' "$out" | grep -o 'https://[^ ]*/artifacts/math/'"$SLUG"'/' | tail -1)"
+# 公開先が GitHub Pages から Firebase Hosting へ移り、URL から /artifacts/ の階層が
+# 消えた。それを含む形で探していたため、公開は成功しているのに URL だけ取れず、毎回
+# 失敗として記録されていた（2026-08-16）。名前空間から下だけを頼りに探す。
+url="$(printf '%s\n' "$out" | grep -o 'https://[^ ]*/math/'"$SLUG"'/' | tail -1)"
 
 if [ "$status" -ne 0 ]; then
   log "NG: 公開に失敗した（版 ${commit}）"
