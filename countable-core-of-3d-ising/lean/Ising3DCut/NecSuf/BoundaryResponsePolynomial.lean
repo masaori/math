@@ -332,4 +332,32 @@ theorem fullBoundaryResponse_outer_edges_to_one_then_eval_one
   rw [h]
   exact fullBoundaryResponse_eval_one_eq_card_configuration broken''
 
+/-- 各配位の単項式は増えた辺の変数を 1 に置く代入で単項式に写る、の必要十分版
+（人手証明 `claim_full_boundary_response_monomial_maps_to_monomial_under_outer_edges_to_one`）。
+必要十分な抽象度は「可換モノイドの間のモノイド準同型」である：`Finset.prod_preimage` は
+可換モノイドで成り立ち、係数環・多項式環の構造は使わない。辺型の有限性・可判定性も不要。 -/
+theorem monoidHom_prod_eq_prod_preimage_of_outside_eq_one
+    {α β M N : Type*} [CommMonoid M] [CommMonoid N]
+    (ι : α → β) (hι : Function.Injective ι) (π : M →* N) (x : β → M) (y : α → N)
+    (hin : ∀ a : α, π (x (ι a)) = y a)
+    (hout : ∀ b : β, b ∉ Set.range ι → π (x b) = 1)
+    (B : Finset β) :
+    π (∏ b ∈ B, x b) = ∏ a ∈ B.preimage ι hι.injOn, y a := by
+  -- モノイド準同型は有限積を保つ
+  rw [map_prod]
+  -- 像に無い辺の因子は 1 なので、積は ι の逆像上の積に等しい
+  rw [← Finset.prod_preimage ι B hι.injOn (fun b ↦ π (x b)) (fun b _ hb ↦ hout b hb)]
+  -- 像に入る辺の行き先
+  exact Finset.prod_congr rfl fun a _ ↦ hin a
+
+/-- 同上を係数環 `R` の多項式環へ特殊化した形（`R` は可換半環でよい）。 -/
+theorem brokenMonomial_maps_to_monomial_under_outer_edges_to_one
+    {Edge'' : Type*} (ι : Edge → Edge'') (hι : Function.Injective ι)
+    (π : MvPolynomial Edge'' R →+* MvPolynomial Edge R)
+    (hin : ∀ e : Edge, π (X (ι e)) = X e)
+    (hout : ∀ e'' : Edge'', e'' ∉ Set.range ι → π (X e'') = 1)
+    (B : Finset Edge'') :
+    π (∏ e ∈ B, X e) = ∏ e ∈ B.preimage ι hι.injOn, X e :=
+  monoidHom_prod_eq_prod_preimage_of_outside_eq_one ι hι π.toMonoidHom X X hin hout B
+
 end Ising3DCut.NecSuf

@@ -156,4 +156,15 @@ theorem fullBoundaryResponse_outer_edges_to_one_then_eval_one_fromNecSuf
   NecSuf.fullBoundaryResponse_outer_edges_to_one_then_eval_one (R := ℤ) broken''
     π.toIntAlgHom hπ
 
+omit [Fintype Edge] [DecidableEq Edge] in
+/-- 各配位の単項式は増えた辺の変数を 1 に置く代入で単項式に写る、を必要十分版（`R := ℤ`）から導く。 -/
+theorem brokenMonomial_maps_to_monomial_under_outer_edges_to_one_fromNecSuf
+    {Edge'' : Type*} (ι : Edge → Edge'') (hι : Function.Injective ι)
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hin : ∀ e : Edge, π (X (ι e)) = X e)
+    (hout : ∀ e'' : Edge'', e'' ∉ Set.range ι → π (X e'') = 1)
+    (B : Finset Edge'') :
+    π (∏ e ∈ B, X e) = ∏ e ∈ B.preimage ι hι.injOn, X e :=
+  NecSuf.brokenMonomial_maps_to_monomial_under_outer_edges_to_one (R := ℤ) ι hι π hin hout B
+
 end Ising3DCut

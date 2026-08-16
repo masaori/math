@@ -185,6 +185,9 @@ targets=(
   Ising3DCut.NecSuf.eval_one_comp_outer_edges_to_one
   Ising3DCut.NecSuf.fullBoundaryResponse_outer_edges_to_one_then_eval_one
   Ising3DCut.fullBoundaryResponse_outer_edges_to_one_then_eval_one_fromNecSuf
+  Ising3DCut.NecSuf.monoidHom_prod_eq_prod_preimage_of_outside_eq_one
+  Ising3DCut.NecSuf.brokenMonomial_maps_to_monomial_under_outer_edges_to_one
+  Ising3DCut.brokenMonomial_maps_to_monomial_under_outer_edges_to_one_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
