@@ -27,6 +27,7 @@ import CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail
 import CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain
 import CellularAutomata.NecSuf.IterateMonoidStabilizationIndex
 import CellularAutomata.NecSuf.IterateMonoidMinimalPeriod
+import CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition
 import CellularAutomata.NecSuf.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.NecSuf.RedundantNeighbor

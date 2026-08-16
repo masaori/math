@@ -8,6 +8,7 @@ structured-latex/content/iterate-monoid-tail-cycle-decomposition.ts。
 有限集合と自然数だけを使い、無限極限、位相、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidMinimalPeriod
+import CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition
 
 namespace CellularAutomata.IterateMonoidTailCycleDecomposition
 
@@ -194,5 +195,69 @@ noncomputable instance (g : (V → State) → (V → State)) :
     Decidable (g ∈ powerSet N f) :=
   decidable_of_iff (g ∈ transientPart N f ∪ cyclePart N f)
     (mem_transientPart_union_cyclePart_iff_powerSet N f g)
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := V → State、F := globalMap N f、
+hex := 有限型からの衝突開始位置の存在 へ特殊化したものである。 -/
+
+/-- 過渡部は必要十分版の特殊化に一致する。 -/
+theorem transientPart_eq_necessary_sufficient :
+    transientPart N f =
+      CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.transientPart
+        (globalMap N f) (necSufHex N f) := by
+  ext g
+  simp only [transientPart,
+    CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.transientPart,
+    Finset.mem_image, Finset.mem_range, iterateMap_eq_necessary_sufficient,
+    minCollisionStart_eq_necessary_sufficient]
+
+/-- 巡回部は必要十分版の特殊化に一致する。 -/
+theorem cyclePart_eq_necessary_sufficient :
+    cyclePart N f =
+      CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.cyclePart
+        (globalMap N f) (necSufHex N f) := by
+  ext g
+  simp only [cyclePart,
+    CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.cyclePart,
+    Finset.mem_image, Finset.mem_range, iterateMap_eq_necessary_sufficient,
+    minCollisionStart_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient]
+
+theorem iterateMap_injective_before_minCollisionStart_from_necessary_sufficient {a b : ℕ}
+    (ha : a < minCollisionStart N f) (hb : b < minCollisionStart N f)
+    (h : iterateMap N f a = iterateMap N f b) : a = b := by
+  rw [minCollisionStart_eq_necessary_sufficient] at ha hb
+  simp only [iterateMap_eq_necessary_sufficient] at h
+  exact CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.iterateMap_injective_before_minCollisionStart (globalMap N f) (necSufHex N f) ha hb h
+
+theorem mem_tail_minCollisionStart_iff_mem_cyclePart_from_necessary_sufficient
+    (g : (V → State) → (V → State)) :
+    g ∈ tail N f (minCollisionStart N f) ↔ g ∈ cyclePart N f := by
+  rw [tail_eq_necessary_sufficient, minCollisionStart_eq_necessary_sufficient,
+    cyclePart_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.mem_tail_minCollisionStart_iff_mem_cyclePart (globalMap N f) (necSufHex N f) g
+
+theorem iterateMap_injective_in_cycle_from_necessary_sufficient {r s : ℕ}
+    (hr : r < minPositivePeriod N f) (hs : s < minPositivePeriod N f)
+    (h : iterateMap N f (minCollisionStart N f + r) =
+      iterateMap N f (minCollisionStart N f + s)) : r = s := by
+  rw [minPositivePeriod_eq_necessary_sufficient] at hr hs
+  simp only [iterateMap_eq_necessary_sufficient, minCollisionStart_eq_necessary_sufficient] at h
+  exact CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.iterateMap_injective_in_cycle (globalMap N f) (necSufHex N f) hr hs h
+
+theorem transient_cycle_partition_cardinality_from_necessary_sufficient :
+    Disjoint (transientPart N f) (cyclePart N f) ∧
+      (transientPart N f ∪ cyclePart N f).card =
+        minCollisionStart N f + minPositivePeriod N f := by
+  rw [transientPart_eq_necessary_sufficient, cyclePart_eq_necessary_sufficient,
+    minCollisionStart_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.transient_cycle_partition_cardinality (globalMap N f) (necSufHex N f)
+
+theorem mem_transientPart_union_cyclePart_iff_powerSet_from_necessary_sufficient
+    (g : (V → State) → (V → State)) :
+    g ∈ transientPart N f ∪ cyclePart N f ↔ g ∈ powerSet N f := by
+  rw [transientPart_eq_necessary_sufficient, cyclePart_eq_necessary_sufficient,
+    powerSet_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition.mem_transientPart_union_cyclePart_iff_powerSet (globalMap N f) (necSufHex N f) g
 
 end CellularAutomata.IterateMonoidTailCycleDecomposition
