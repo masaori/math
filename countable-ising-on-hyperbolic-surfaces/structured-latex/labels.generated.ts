@@ -51,6 +51,7 @@ export const ALL_LABELS = [
   "def_spin_label_set",
   "theorem_boundary_of_boundary_is_zero_over_f2",
   "theorem_formal_high_temperature_expansion",
+  "theorem_homology_class_polynomials_recombine",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

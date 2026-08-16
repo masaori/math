@@ -572,4 +572,58 @@ u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
       ]),
     ],
   },
+  {
+    id: "homology_sector_theorem_homology_class_polynomials_recombine",
+    kind: "theorem",
+    title: { text: "第一ホモロジー類別生成多項式の再結合" },
+    labels: ["theorem_homology_class_polynomials_recombine"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/homology-class-polynomials-recombine"],
+    statement: [
+      displayMath(String.raw`\sum_{h\in H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)}
+Q_{\mathcal C_{\mathrm{cell}},h}(u,v)
+=
+Q_G(u,v)
+\in\mathbb Z[u,v].`),
+    ],
+    proof: [
+      paragraph([ref("def_homology_class_generating_polynomial"), " より"]),
+      displayMath(String.raw`\sum_{h\in H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)}
+Q_{\mathcal C_{\mathrm{cell}},h}(u,v)
+=
+\sum_{h\in H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)}
+\sum_{A\in\eta_{\mathcal C_{\mathrm{cell}}}^{-1}(\{h\})}
+u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
+\quad\bigl(\because\ Q_{\mathcal C_{\mathrm{cell}},h}\text{ の定義}\bigr).`),
+      paragraph([
+        ref("def_even_edge_subset_homology_class_map"),
+        " の写像のファイバーは、その始域である有限集合 ",
+        math(String.raw`\mathcal Z_1(G)`),
+        " を重複なく分割する。したがって",
+      ]),
+      displayMath(String.raw`\sum_{h\in H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)}
+\sum_{A\in\eta_{\mathcal C_{\mathrm{cell}}}^{-1}(\{h\})}
+u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
+=
+\sum_{A\in\mathcal Z_1(G)}
+u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
+\quad\bigl(\because\ \eta_{\mathcal C_{\mathrm{cell}}}\text{ のファイバーによる有限和の分割}\bigr).`),
+      paragraph([
+        math(String.raw`E_{\mathrm{cell}}=E`),
+        " と ",
+        ref("def_even_subgraph_polynomial"),
+        " より",
+      ]),
+      displayMath(String.raw`\sum_{A\in\mathcal Z_1(G)}
+u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
+=
+Q_G(u,v)
+\quad\bigl(\because\ Q_G\text{ の定義}\bigr).`),
+      paragraph([
+        "全ての添字集合は有限であり、等式は ",
+        math(String.raw`\mathbb Z[u,v]`),
+        " の有限和だけからなる。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
