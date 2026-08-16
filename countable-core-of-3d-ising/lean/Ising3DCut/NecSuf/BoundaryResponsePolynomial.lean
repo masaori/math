@@ -280,3 +280,27 @@ theorem fullBoundaryResponse_totalDegree_eq_card_edge [Nontrivial R] [CharZero R
   rwa [hdeg] at hle
 
 end Ising3DCut.NecSuf
+
+namespace Ising3DCut.NecSuf
+
+open MvPolynomial
+
+variable {Configuration Edge R : Type*} [CommSemiring R]
+variable [Fintype Configuration]
+
+/-- 辺変数を 1 に置かない境界応答多項式の全変数を 1 に置いた値は配位の総数、の必要十分版
+（人手証明 `claim_full_boundary_response_value_at_one`）。
+係数環は可換半環 `R` でよく、辺型の有限性 `Fintype Edge` と `DecidableEq Edge` は不要
+（評価は有限和と有限積を保つだけで、辺を数えも比べもしない）。
+配位の有限性は有限和と結論の `#Configuration` のために残る。
+証明は具体版と同順（環準同型 `eval (fun _ ↦ 1)` が有限和・有限積を保ち各不定元を 1 へ写す）。 -/
+theorem fullBoundaryResponse_eval_one_eq_card_configuration
+    (broken : Configuration → Finset Edge) :
+    (eval fun _ : Edge ↦ (1 : R)) (multivariatePartitionPolynomial (R := R) broken) =
+      (Fintype.card Configuration : R) := by
+  unfold multivariatePartitionPolynomial
+  rw [map_sum]
+  simp only [map_prod, eval_X, Finset.prod_const_one, Finset.sum_const, Finset.card_univ,
+    nsmul_eq_mul, mul_one]
+
+end Ising3DCut.NecSuf

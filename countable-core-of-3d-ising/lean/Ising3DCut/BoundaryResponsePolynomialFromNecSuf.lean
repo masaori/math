@@ -135,4 +135,12 @@ theorem fullBoundaryResponse_totalDegree_eq_card_edge_fromNecSuf
     (multivariatePartitionPolynomial broken).totalDegree = Fintype.card Edge :=
   NecSuf.fullBoundaryResponse_totalDegree_eq_card_edge (R := ℤ) broken τ hτ
 
+omit [Fintype Edge] [DecidableEq Edge] in
+/-- 全変数を 1 に置いた値は配位の総数を必要十分版（`R := ℤ`）から導く。 -/
+theorem fullBoundaryResponse_eval_one_eq_card_configuration_fromNecSuf
+    (broken : Configuration → Finset Edge) :
+    (eval fun _ : Edge ↦ (1 : ℤ)) (multivariatePartitionPolynomial broken) =
+      Fintype.card Configuration :=
+  NecSuf.fullBoundaryResponse_eval_one_eq_card_configuration (R := ℤ) broken
+
 end Ising3DCut
