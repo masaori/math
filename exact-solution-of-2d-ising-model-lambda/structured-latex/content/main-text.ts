@@ -41472,6 +41472,355 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_rational_log_order_group_archimedean",
+    kind: "claim",
+    title: { text: "有理係数の対数順序群の Archimedes 性" },
+    labels: ["claim_rational_log_order_group_archimedean"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/rational-log-order-group-archimedean"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalOfLog_zero",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_zero",
+      "Ising2DLambda.ThermodynamicLimit.commonDenominator_natSmul",
+      "Ising2DLambda.ThermodynamicLimit.one_le_rationalOfLog_witness_of_nonneg",
+      "Ising2DLambda.ThermodynamicLimit.one_lt_rationalOfLog_witness_of_pos",
+      "Ising2DLambda.ThermodynamicLimit.rat_le_num_toNat",
+      "Ising2DLambda.ThermodynamicLimit.archimedeanMultiplier",
+      "Ising2DLambda.ThermodynamicLimit.le_archimedeanMultiplier_mul",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_natSmul_of_pos",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.archimedean_of_bernoulli_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_natSmul_of_pos_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`\mu,\varepsilon\in\Lambda_{\mathbb{Q}}`),
+        "（",
+        ref("def_rational_log_order_group"),
+        "）が ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\mu`),
+        "、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon`),
+        "、",
+        math(String.raw`\varepsilon\ne0`),
+        " を満たすとする（",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        "、",
+        math(String.raw`0`),
+        " は零写像）。このとき",
+      ]),
+      displayMath(String.raw`\mu\ \le_{\Lambda_{\mathbb{Q}}}\ n\cdot\varepsilon`),
+      paragraph([
+        "を満たす ",
+        math(String.raw`n\in\mathbb{N}`),
+        " が存在する。ここで ",
+        math(String.raw`n\cdot\varepsilon`),
+        " は ",
+        math(String.raw`n`),
+        " を分母 ",
+        math(String.raw`1`),
+        " の有理数として読んだ ",
+        ref("def_rational_log_order_group"),
+        " の有理数倍である。すなわち、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の正の元の自然数倍はどの非負の元をも追い越す。証明は ",
+        math(String.raw`n`),
+        " を有限回の整数の演算で明示的に与える。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備の第一（共通分母）。",
+        math(String.raw`N:=N_{\mu}N_{\varepsilon}\in\mathbb{N}`),
+        " と置く（",
+        ref("claim_common_denominator_exists"),
+        " の正の整数の積）。",
+        ref("claim_common_common_denominator_exists"),
+        " により ",
+        math(String.raw`N\ge1`),
+        " は ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`\varepsilon`),
+        " の両方の共通分母（",
+        ref("def_common_denominator"),
+        "）であり、その証人を ",
+        math(String.raw`\mu_N,\varepsilon_N\in\Lambda`),
+        " と書く。",
+        math(String.raw`N`),
+        " は零写像 ",
+        math(String.raw`0\in\Lambda_{\mathbb{Q}}`),
+        " の共通分母でもあり、その証人は零写像 ",
+        math(String.raw`0\in\Lambda`),
+        " である。実際、各素数 ",
+        math(String.raw`p`),
+        " で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(N\cdot0)(p)
+&=N\cdot0(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義})\\
+&=N\cdot0
+&&(\because\ \text{零写像の値})\\
+&=0
+&&(\because\ \mathbb{Q}\text{ の積。}0\text{ 倍は }0)\\
+&=0/1
+&&(\because\ \text{分母 }1\text{ の有理数})\\
+&=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義と零写像の値})
+\end{aligned}`),
+      paragraph([
+        "であるから ",
+        math(String.raw`N\cdot0=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)`),
+        " である。さらに、任意の ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について ",
+        math(String.raw`N`),
+        " は ",
+        math(String.raw`n\cdot\varepsilon`),
+        " の共通分母であり、その証人は ",
+        math(String.raw`n\varepsilon_N`),
+        "（",
+        ref("def_log_order_group"),
+        " の整数倍）である。実際",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N\cdot(n\cdot\varepsilon)
+&=(Nn)\cdot\varepsilon
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=(nN)\cdot\varepsilon
+&&(\because\ \mathbb{Q}\text{ の積の可換性})\\
+&=n\cdot(N\cdot\varepsilon)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\varepsilon_N)
+&&(\because\ N\text{ は }\varepsilon\text{ の共通分母で証人は }\varepsilon_N)\\
+&=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\varepsilon_N)
+&&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
+\end{aligned}`),
+      paragraph([
+        "である。以下 ",
+        ref("def_common_denominator"),
+        " の記法で ",
+        math(String.raw`0_N=0`),
+        "、",
+        math(String.raw`(n\cdot\varepsilon)_N=n\varepsilon_N`),
+        " と書く（証人の一意性）。",
+      ]),
+      paragraph([
+        "準備の第二（",
+        math(String.raw`\Lambda`),
+        " の証人の値）。",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\mu`),
+        " を ",
+        ref("def_rational_log_order_group_order"),
+        " の言い換え「両方の共通分母であるすべての正整数について証人が ",
+        math(String.raw`\le_{\Lambda}`),
+        " を満たす」で、両方の共通分母である ",
+        math(String.raw`N`),
+        " において読むと ",
+        math(String.raw`0\le_{\Lambda}\mu_N`),
+        " である。同様に ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon`),
+        " から ",
+        math(String.raw`0\le_{\Lambda}\varepsilon_N`),
+        " である。",
+        math(String.raw`\operatorname{rat}_{\Lambda}(0)=1`),
+        "（",
+        ref("def_rational_of_log"),
+        " の空積）なので、",
+        ref("def_log_order_group_order"),
+        " により",
+      ]),
+      displayMath(String.raw`1\le\operatorname{rat}_{\Lambda}(\mu_N),\qquad 1\le\operatorname{rat}_{\Lambda}(\varepsilon_N)`),
+      paragraph([
+        "である（",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）。",
+      ]),
+      paragraph([
+        "準備の第三（",
+        math(String.raw`\varepsilon_N`),
+        " は零写像でない）。",
+        math(String.raw`\varepsilon_N=0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon
+&=1\cdot\varepsilon
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda)\\
+&=\Bigl(\frac{1}{N}\cdot N\Bigr)\cdot\varepsilon
+&&(\because\ N\ge1\text{ なので }N\ne0\text{、}\mathbb{Q}\text{ の約分})\\
+&=\frac{1}{N}\cdot(N\cdot\varepsilon)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=\frac{1}{N}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\varepsilon_N)
+&&(\because\ N\text{ は }\varepsilon\text{ の共通分母で証人は }\varepsilon_N)\\
+&=\frac{1}{N}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)
+&&(\because\ \text{仮定 }\varepsilon_N=0)\\
+&=\frac{1}{N}\cdot(N\cdot0)
+&&(\because\ \text{準備の第一の }N\cdot0=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0))\\
+&=\Bigl(\frac{1}{N}\cdot N\Bigr)\cdot0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&=1\cdot0
+&&(\because\ \mathbb{Q}\text{ の約分})\\
+&=0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`\varepsilon\ne0`),
+        " に反する。よって ",
+        math(String.raw`\varepsilon_N\ne0`),
+        " である。次に ",
+        math(String.raw`\varepsilon_N\le_{\Lambda}0`),
+        " と仮定すると、準備の第二の ",
+        math(String.raw`0\le_{\Lambda}\varepsilon_N`),
+        " と合わせて ",
+        ref("claim_log_order_group_linear_order"),
+        " の反対称性から ",
+        math(String.raw`\varepsilon_N=0`),
+        " となり矛盾する。よって ",
+        math(String.raw`\varepsilon_N\le_{\Lambda}0`),
+        " ではなく、",
+        ref("def_log_order_group_order"),
+        " により ",
+        math(String.raw`\operatorname{rat}_{\Lambda}(\varepsilon_N)\le\operatorname{rat}_{\Lambda}(0)=1`),
+        " ではない。",
+        math(String.raw`\mathbb{Q}`),
+        " の順序は全順序なので ",
+        math(String.raw`1<\operatorname{rat}_{\Lambda}(\varepsilon_N)`),
+        " である。そこで",
+      ]),
+      displayMath(String.raw`h:=\operatorname{rat}_{\Lambda}(\varepsilon_N)-1\in\mathbb{Q},\qquad 0<h,\qquad
+A:=\operatorname{rat}_{\Lambda}(\mu_N)\in\mathbb{Q},\qquad 0\le A-1`),
+      paragraph([
+        "と置く（",
+        math(String.raw`0\le A-1`),
+        " は準備の第二の ",
+        math(String.raw`1\le A`),
+        " から。",
+        math(String.raw`\mathbb{Q}`),
+        " の四則）。",
+      ]),
+      paragraph([
+        "準備の第四（",
+        math(String.raw`n`),
+        " の選択）。",
+        math(String.raw`r:=(A-1)/h\in\mathbb{Q}`),
+        " と置く。",
+        math(String.raw`0\le A-1`),
+        " と ",
+        math(String.raw`0<h`),
+        " から ",
+        math(String.raw`0\le r`),
+        " である（",
+        math(String.raw`\mathbb{Q}`),
+        " の正の元による除法は順序を保つ）。",
+        ref("claim_common_denominator_exists"),
+        " の既約分数表示 ",
+        math(String.raw`r=\operatorname{num}(r)/\operatorname{den}(r)`),
+        " について、",
+        math(String.raw`\operatorname{den}(r)\ge1`),
+        " と ",
+        math(String.raw`0\le r`),
+        " から ",
+        math(String.raw`0\le\operatorname{num}(r)`),
+        " である（",
+        math(String.raw`\operatorname{num}(r)=\operatorname{den}(r)\cdot r`),
+        " は非負の積）。また ",
+        math(String.raw`0\le\operatorname{num}(r)`),
+        " と ",
+        math(String.raw`1\le\operatorname{den}(r)`),
+        " から ",
+        math(String.raw`\operatorname{num}(r)/\operatorname{den}(r)\le\operatorname{num}(r)/1=\operatorname{num}(r)`),
+        " である（",
+        math(String.raw`\mathbb{Q}`),
+        " の非負元を ",
+        math(String.raw`1`),
+        " 以上の元で割ると小さくなる）。そこで",
+      ]),
+      displayMath(String.raw`n:=\operatorname{num}(r)\in\mathbb{N}`),
+      paragraph([
+        "と置く。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A-1
+&=r\,h
+&&(\because\ r=(A-1)/h\text{ と }h\ne0\text{。}\mathbb{Q}\text{ の四則})\\
+&=\frac{\operatorname{num}(r)}{\operatorname{den}(r)}\,h
+&&(\because\ r\text{ の既約分数表示})\\
+&\le\operatorname{num}(r)\,h
+&&(\because\ \text{上の }\tfrac{\operatorname{num}(r)}{\operatorname{den}(r)}\le\operatorname{num}(r)\text{ に }0<h\text{ を掛ける。}\mathbb{Q}\text{ の非負元による乗法単調性})\\
+&=n\,h
+&&(\because\ n\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "本体。",
+        math(String.raw`\Lambda`),
+        " の証人の値の比較を鎖で示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}(\mu_N)
+&=A
+&&(\because\ A\text{ の定義})\\
+&=1+(A-1)
+&&(\because\ \mathbb{Q}\text{ の四則})\\
+&\le1+n\,h
+&&(\because\ \text{準備の第四。}\mathbb{Q}\text{ の加法単調性})\\
+&\le(1+h)^{n}
+&&(\because\ \blkref{claim_rational_bernoulli_inequality}\text{ を }h\text{（}0\le h\text{）と }n\text{ で読む})\\
+&=\bigl(\operatorname{rat}_{\Lambda}(\varepsilon_N)\bigr)^{n}
+&&(\because\ h\text{ の定義。}1+h=\operatorname{rat}_{\Lambda}(\varepsilon_N)\text{、}\mathbb{Q}\text{ の四則})\\
+&=\operatorname{rat}_{\Lambda}(n\varepsilon_N)
+&&(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{ の補助等式 }\operatorname{rat}_{\Lambda}(N\lambda)=(\operatorname{rat}_{\Lambda}(\lambda))^{N}\text{ を }N:=n\text{、}\lambda:=\varepsilon_N\text{ で読む})
+\end{aligned}`),
+      paragraph([
+        "であるから、",
+        ref("def_log_order_group_order"),
+        " により ",
+        math(String.raw`\mu_N\le_{\Lambda}n\varepsilon_N`),
+        " である。準備の第一により ",
+        math(String.raw`N\ge1`),
+        " は ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`n\cdot\varepsilon`),
+        " の両方の共通分母で、その証人がそれぞれ ",
+        math(String.raw`\mu_N`),
+        "、",
+        math(String.raw`n\varepsilon_N`),
+        " であり、これらは ",
+        math(String.raw`\mu_N\le_{\Lambda}n\varepsilon_N`),
+        " を満たす。よって ",
+        ref("def_rational_log_order_group_order"),
+        "（ある両方の共通分母で証人が ",
+        math(String.raw`\le_{\Lambda}`),
+        " を満たす）により ",
+        math(String.raw`\mu\le_{\Lambda_{\mathbb{Q}}}n\cdot\varepsilon`),
+        " である。",
+      ]),
+      paragraph([
+        "使ったのは、共通分母とその証人、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " が整数倍と交換すること、",
+        math(String.raw`\Lambda`),
+        " の順序の反対称性、有理数の Bernoulli 不等式、",
+        math(String.raw`\operatorname{rat}_{\Lambda}`),
+        " が正整数倍を冪へ移すこと、および ",
+        math(String.raw`\mathbb{Q}`),
+        " の四則と順序だけであり、実数体は現れない。",
+        math(String.raw`n`),
+        " は ",
+        math(String.raw`\mu,\varepsilon`),
+        " から有限回の整数の演算で定まる。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

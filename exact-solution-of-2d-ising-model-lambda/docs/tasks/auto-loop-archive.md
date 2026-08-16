@@ -3,6 +3,35 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 333）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 333 は、「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書き、四層で閉じた。**
+  台帳の先頭行「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」は、密度 $\Psi^{\mathrm{op}}$ が正方形にしか定義されておらず「$\Psi$ どうしの不等式」は長方形の接合では書けない
+  （正方形どうしの $\Psi$ の不等式は既に `claim_open_square_block_tiling_density` が担う）ので、接合不等式そのものの対数化に割り直して実行した。
+  `claim_open_rectangle_gluing_inequality_log`（`claim_open_rectangle_gluing_inequality_rational` の直後、住処 Lambda）で、二つの座標の向き × 二場合の四つ:
+  $0<q\le1$: $b\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)\le_\Lambda\log Z^{\mathrm{op}}_{a+c,b}(q)\le_\Lambda\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)$、$1\le q$: 反転、第二の座標の向きは $b\to a$ 等。
+  準備 2 つ（正値性・下端の対数を開く三段と上端の一段）と、`claim_rational_log_order_iff` で接合不等式を移す 4 段の鎖 2 本。
+  SageMath `check/open-rectangle-gluing-inequality-log/`（形 10 通り × 有理点 9 点 × 二向き、1700 検査、10 秒）。
+  Lean 具体版 `ThermodynamicLimit/OpenRectangleGluingInequalityLog.lean`、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `OpenRectangleGluingInequalityLogFromNecSuf.lean`。sorry 検査 1237 件。
+  次は「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 333）: 台帳の先頭行「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」を「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」へ割り直して実行した
+  （$\Psi^{\mathrm{op}}$ は正方形にしか定義が無く、長方形の接合を $\Psi$ で書くには長方形の密度の定義が要る。正方形どうしの $\Psi$ の不等式は既に
+  `claim_open_square_block_tiling_density` が担い、倍数でない辺は次の行が担うので、この行の中身は接合不等式の $\Lambda$ 版に尽きる）。
+  `claim_open_rectangle_gluing_inequality_log` を `claim_open_rectangle_gluing_inequality_rational` の直後に置いた。証明は `claim_open_square_block_tiling_log` と同じ型
+  （準備 2 つ・`claim_rational_log_order_iff` で移す鎖）。第二の座標の向きは置き換えで同じ段（本文は置き換えの対応を書いた。Lean は四つとも別定理として書いた）。
+  SageMath `open-rectangle-gluing-inequality-log`（`ZZ`/`QQ`・有限台辞書。$4\times4$ を含む形は外した）。Lean 具体版・導出版を書き、入口 import・sorry 検査へ 10 件登録（計 1237 件）。
+  式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 333）: 前 tick の「有理係数の対数順序群の Cauchy 列」の本文（定義・$N$ の依存・極限の非主張）・SageMath overview・Lean（`IsCauchyRationalLogOrder`・定数列）を突き合わせ、一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 332）の記録
 
 ### 現在地

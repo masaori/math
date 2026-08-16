@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 338 は、前 tick の「有理数の Bernoulli 不等式」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「有理係数の対数順序群の Archimedes 性」を四層で閉じた。
+`claim_rational_log_order_group_archimedean`（`claim_rational_bernoulli_inequality` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $0\le_{\Lambda_{\mathbb Q}}\mu$、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\varepsilon\ne0$ に対し
+$\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$ が存在する。証明: 準備の第一（$N:=N_\mu N_\varepsilon$（`claim_common_common_denominator_exists`）が $0$ の共通分母（証人 $0$。各素数での五段）と
+$n\cdot\varepsilon$ の共通分母（証人 $n\varepsilon_N$。結合則・可換性・結合則・共通分母・`claim_rational_embedding_commutes_with_integer_multiple` の五段）でもあること）、
+準備の第二（順序の「すべての共通分母」形を $N$ で読んで $0\le_\Lambda\mu_N,\varepsilon_N$、$\operatorname{rat}_\Lambda(0)=1$ から $1\le\operatorname{rat}_\Lambda(\mu_N),\operatorname{rat}_\Lambda(\varepsilon_N)$）、
+準備の第三（$\varepsilon_N=0$ なら九段の鎖で $\varepsilon=0$ となり矛盾。`claim_log_order_group_linear_order` の反対称性で $\lnot(\varepsilon_N\le_\Lambda0)$、$\mathbb Q$ の全順序で $1<\operatorname{rat}_\Lambda(\varepsilon_N)$。$h:=\operatorname{rat}_\Lambda(\varepsilon_N)-1>0$、$A:=\operatorname{rat}_\Lambda(\mu_N)$）、
+準備の第四（$r:=(A-1)/h\ge0$、$n:=\operatorname{num}(r)\in\mathbb N$（`claim_common_denominator_exists` の $\operatorname{num}/\operatorname{den}$ 記法）、$r\le n$、$A-1=rh\le nh$ の四段）、
+本体（$\operatorname{rat}_\Lambda(\mu_N)=A=1+(A-1)\le1+nh\le(1+h)^n=\operatorname{rat}_\Lambda(\varepsilon_N)^n=\operatorname{rat}_\Lambda(n\varepsilon_N)$ の五段。Bernoulli と `claim_log_order_group_positive_multiple_invariant` の補助等式。$\mu_N\le_\Lambda n\varepsilon_N$、$N$ が両方の共通分母なので $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$）。
+SageMath `check/rational-log-order-group-archimedean/`（$\mu$ 7 点 × $\varepsilon$ 6 点 = 42 組。**$n=\operatorname{num}((A-1)/h)$ は $A=\operatorname{rat}_\Lambda(\mu_N)$ が指数関数的に大きく $N=N_\mu N_\varepsilon$ も積なので巨大になりやすい**——最初の標本では $n\sim10^{100}$ が出て $(1+h)^n$ が浮動小数点例外で落ちた。標本を小さくし、$n>20000$ の組は冪の検査を外して出力に記録する仕組みにした。今回は該当 0、$n$ の最大 5831。3 秒）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupArchimedean.lean`（`rationalOfLog_zero`・`commonDenominator_zero`・`commonDenominator_natSmul`・`one_le_rationalOfLog_witness_of_nonneg`・`one_lt_rationalOfLog_witness_of_pos`・
+`rat_le_num_toNat`（$r\le\operatorname{num}(r)$。`Rat.num_div_den`・`div_le_self`・`Int.toNat_of_nonneg`）・`archimedeanMultiplier`（`((A-1)/h).num.toNat`）・`le_archimedeanMultiplier_mul`・`rationalLogOrderLE_natSmul_of_pos`。
+本体は `commonCommonDenominator_exists` の証人を `generalize` で $\mu_N,\varepsilon_N,N$ に名付けてから鎖を書く——名付けないと `natCast_zsmul` が内側の $(N_\mu:\mathbb Z)\bullet$ まで書き換えて外れる。`add_le_add_left h 1` は右加法の形を返したので `linarith` を使った）、
+必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupArchimedean.lean`（`archimedean_of_bernoulli_necSuf`。`[Field K] [LinearOrder K] [IsStrictOrderedRing K]` と仮定 `hArch : ∀ r, 0 ≤ r → ∃ n : ℕ, r ≤ n` から $1\le A$、$1<B$ に対し $A\le B^n$。
+$\Lambda_{\mathbb Q}$・共通分母・$\operatorname{rat}_\Lambda$ は導出側に置く。hArch と体（除法）が削れない理由をコメントに書いた）、導出版 `RationalLogOrderGroupArchimedeanFromNecSuf.lean`（hArch を `rat_le_num_toNat` で与える）。sorry 検査 1258 件。
+次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（$ka\le L<(k+1)a$ のとき $L^2-(ka)^2\le2aL$。`claim_open_square_subsquare_comparison_density_le_one` を $a:=ka$ で読み、上端の係数 $\frac{L^2-(ka)^2}{L^2}\le\frac{2a}{L}$、下端の係数 $\frac{ka+L}{L^2}\le\frac2L$ で挟む形にする。$\Lambda_{\mathbb Q}$ の不等式で係数を大きくするには「$\iota(\log q)\le0$ のとき係数を大きくすると小さくなる」等の符号付きの単調性が要るので、着手時に何が要るかを先に見ること）。
+
 2026-08-16 の tick 337 は、前 tick が残した `claim_rational_embedding_commutes_with_integer_multiple` の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「密度の列の Cauchy 性」を論法の数で三行へ割った（「有理係数の対数順序群の Archimedes 性」→「倍数辺の部分正方形による密度の挟み込みの誤差評価」→「密度の列の Cauchy 性（$0<q\le1$）」。
 手順は台帳の備考に書いた。$1\le q$ は部分正方形比較の $1\le q$ 版が無いので行に含めていない）。そのうえで Archimedes 性が引く「有理数の Bernoulli 不等式」が本文に無かったので先に書き、四層で閉じた。
@@ -3829,10 +3846,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の Cauchy 列」（`def_rational_log_order_group_cauchy_sequence`）の本文・SageMath
-  `rational-log-order-group-cauchy-sequence`・Lean `RationalLogOrderGroupCauchySequence.lean` を突き合わせる。定義の量化の形（任意の $\varepsilon$・ある $N$・すべての $L,M$）と
-  Lean の `IsCauchyRationalLogOrder` が一致しているか、本文が極限の存在を主張していないかも見る。
-- **次に進めるセクションは「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「有理係数の対数順序群の Archimedes 性」（`claim_rational_log_order_group_archimedean`）の本文（準備 4 つ・本体の五段）・SageMath
+  `rational-log-order-group-archimedean`・Lean `RationalLogOrderGroupArchimedean.lean`（具体版）と必要十分版・導出版を突き合わせる。必要十分版の仮定 hArch のコメントが実態と合っているかも見る。
+- **次に進めるセクションは「倍数辺の部分正方形による密度の挟み込みの誤差評価」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。

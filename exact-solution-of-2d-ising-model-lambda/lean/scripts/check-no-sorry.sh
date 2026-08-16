@@ -1304,6 +1304,16 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_rat
   Ising2DLambda.NecSuf.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_necSuf
   Ising2DLambda.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_rat_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalOfLog_zero
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_zero
+  Ising2DLambda.ThermodynamicLimit.commonDenominator_natSmul
+  Ising2DLambda.ThermodynamicLimit.one_le_rationalOfLog_witness_of_nonneg
+  Ising2DLambda.ThermodynamicLimit.one_lt_rationalOfLog_witness_of_pos
+  Ising2DLambda.ThermodynamicLimit.rat_le_num_toNat
+  Ising2DLambda.ThermodynamicLimit.le_archimedeanMultiplier_mul
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_natSmul_of_pos
+  Ising2DLambda.NecSuf.ThermodynamicLimit.archimedean_of_bernoulli_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_natSmul_of_pos_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
