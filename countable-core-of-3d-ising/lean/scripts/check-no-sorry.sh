@@ -167,6 +167,10 @@ targets=(
   Ising3DCut.allEdgesToRational_eq_evalAtRational_comp_allEdgesToOneIndeterminate
   Ising3DCut.NullModel.allEdgesToRational_multivariatePartitionPolynomial_eq_eval
   Ising3DCut.NullModel.partitionPolynomial_eval_eq_of_allEdgesToRational_eq
+  Ising3DCut.NecSuf.apply_eq_of_eq_comp
+  Ising3DCut.NecSuf.values_eq_of_comp_values_eq
+  Ising3DCut.NullModel.allEdgesToRational_multivariatePartitionPolynomial_eq_eval_fromNecSuf
+  Ising3DCut.NullModel.partitionPolynomial_eval_eq_of_allEdgesToRational_eq_fromNecSuf
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add

@@ -83,3 +83,5 @@ import Ising3DCut.NecSuf.AllEdgeVariablesToOneIndeterminateComposed
 import Ising3DCut.AllEdgeVariablesToOneIndeterminateComposedFromNecSuf
 import Ising3DCut.CoarseGrainingValuesAgree
 import Ising3DCut.CoarseGrainingValuesAgreeStepTwo
+import Ising3DCut.NecSuf.CoarseGrainingValuesAgree
+import Ising3DCut.CoarseGrainingValuesAgreeFromNecSuf
