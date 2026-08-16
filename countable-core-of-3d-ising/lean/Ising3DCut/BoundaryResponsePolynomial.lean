@@ -323,6 +323,26 @@ theorem fullBoundaryResponse_outer_edges_to_one_then_eval_one
   simp only [map_prod, eval_X, Finset.prod_const_one, Finset.sum_const, Finset.card_univ,
     nsmul_eq_mul, mul_one]
 
+/-- 各配位の単項式は増えた辺の変数を 1 に置く代入で単項式に写る（人手証明
+`claim_full_boundary_response_monomial_maps_to_monomial_under_outer_edges_to_one`）。元の外箱の辺型 `Edge` を
+広い外箱の辺型 `Edge''` へ埋め込む単射 `ι` と、環準同型 `π`（`π_{L'',L}`）が `X (ι e)` を `X e` へ、
+`ι` の像に無い辺の不定元を `1` へ送るとき、破れ辺集合 `B : Finset Edge''` の単項式は
+`B` の `ι` による逆像（`B ∩ E_L`）上の単項式へ写る。環準同型が有限積を保つこと、`B` を `ι` の像に
+入る辺と入らない辺へ分けること（`Finset.prod_preimage`）、不定元の行き先の場合分けの 1 論法。 -/
+theorem brokenMonomial_maps_to_monomial_under_outer_edges_to_one
+    {Edge'' : Type*} (ι : Edge → Edge'') (hι : Function.Injective ι)
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hin : ∀ e : Edge, π (X (ι e)) = X e)
+    (hout : ∀ e'' : Edge'', e'' ∉ Set.range ι → π (X e'') = 1)
+    (B : Finset Edge'') :
+    π (∏ e ∈ B, X e) = ∏ e ∈ B.preimage ι hι.injOn, X e := by
+  -- 環準同型は有限積を保つ
+  rw [map_prod]
+  -- 像に無い辺の因子は 1 なので、積は ι の逆像上の積に等しい
+  rw [← Finset.prod_preimage ι B hι.injOn (fun e'' ↦ π (X e'')) (fun e'' _ he'' ↦ hout e'' he'')]
+  -- 像に入る辺の不定元の行き先
+  exact Finset.prod_congr rfl fun e _ ↦ hin e
+
 end
 
 end Ising3DCut
