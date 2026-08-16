@@ -316,4 +316,53 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "homology_sector_definition_first_homology_group",
+    kind: "definition",
+    title: { text: "F_2 上の第一ホモロジー群" },
+    labels: ["def_first_homology_group_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/first-homology-group-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_first_cycle_space_over_f2"),
+        " と ",
+        ref("def_face_boundary_space_over_f2"),
+        " に対し、第一ホモロジー群を、一次サイクルごとの面境界空間の剰余集合からなる有限商ベクトル空間",
+      ]),
+      displayMath(String.raw`H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+:=
+\left\{
+  \left\{
+    c+b
+    \ \middle|\
+    \ b\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+  \right\}
+  \ \middle|\
+  \ c\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right\}`),
+      paragraph([
+        "で定める。サイクルをその剰余集合へ送る商写像は、始域、終域、作用を明示すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+&\longrightarrow
+H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2),\\
+c
+&\longmapsto
+\left\{
+  c+b
+  \ \middle|\
+  \ b\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right\}
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで加法は有限ベクトル空間 ",
+        math(String.raw`\mathbb F_2^{E_{\mathrm{cell}}}`),
+        " の加法である。面境界空間が一次サイクル空間の部分空間であるため、各剰余集合は一次サイクル空間の部分集合であり、商の加法は剰余集合の代表の選択に依存しない。商写像の始域、終域、作用を明示したので、サイクルとそのホモロジー類を同一視しない。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
