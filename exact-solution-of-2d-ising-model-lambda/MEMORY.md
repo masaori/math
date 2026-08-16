@@ -4,6 +4,16 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 359 は、前 tick の「開境界正方形の密度の列が定める下組」と「下組は空でない」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を四層で閉じた。
+`claim_open_square_density_lower_set_le_upper_bound`（`claim_open_square_density_lower_set_nonempty` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $q\in\mathbb Q_{>0}$、$\mu\in A^{\mathrm{op}}(q)$ なら $\mu\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\iota(\log(1+q))$（$q\le1$ は要らない。台帳の行名から外した）。証明は所属の証人 $\varepsilon,N$ を取り $L:=N$ で読む一続き五段（$\mu=0+\mu\le\varepsilon+\mu=\mu+\varepsilon\le\Psi^{\mathrm{op}}_N(q)\le$ 上界。単位元・`claim_rational_log_order_group_add_monotone`（$\lambda:=0,\mu:=\varepsilon,\nu:=\mu$）・交換則・証人の性質・`claim_open_square_free_entropy_density_upper_bound`）と推移律。$\varepsilon\ne0$ は使わない。
+`remark_real_escape_plan` の脱出の項に「上に有界であること」への参照を足した。
+SageMath `check/open-square-density-lower-set-le-upper-bound/`（$q$ 8 値、$L\le4$。244 検査、4 秒。**順序の決定手続きの共通分母は分母の最小公倍数で取る**——分母の積で取ると $\Psi^{\mathrm{op}}_L(q)$ どうしの比較で指数が $16^{10}$ 程度になり $\mathrm{rat}_\Lambda$ が 5 分超で実行不能。`claim_common_denominator_multiple` により結果は変わらない。以後 $\Lambda_{\mathbb Q}$ の元どうしの比較を含む検証はこの形で書く）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet`。`rationalLogOrderLE_add_right`・`zero_add`・`add_comm`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`・`rationalLogOrderLE_trans`），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`le_bound_of_mem_lowerSetOfSequence_necSuf`。`[Add X] [Zero X]`、推移律・右加法単調性・単位元 $0+x=x$・交換則・列の項の上界だけ）、導出版。sorry 検査 1342 件。
+次は「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」（$\rho_{\mathbb R}(\mu):=\sum_p\mu(p)\log_{\mathbb R}p$。$\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow\rho_{\mathbb R}(\lambda)\le\rho_{\mathbb R}(\mu)$。共通分母 $N$ で $\mathrm{rat}_\Lambda$ の比較へ落とし、実対数の単調性と積の対数。住処 R、`realEscape` 必須。Lean は `Real.log` の単調性と `Real.log_mul`／`Real.log_pow` を使うことになる——脱出したブロックなので mathlib の実数の性質を引くのは可）。
+
+（tick 358 の記録）
 2026-08-17 の tick 358 は、前 tick の「列が定める下組」と「下に閉じている」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「開境界正方形の密度の下組は空でない」を四層で閉じた。
 `def_open_square_density_lower_set`（`claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $A^{\mathrm{op}}(q):=A((\Psi^{\mathrm{op}}_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$（$q\in\mathbb Q_{>0}$）。上限の段が繰り返し引くので名前を置いた。

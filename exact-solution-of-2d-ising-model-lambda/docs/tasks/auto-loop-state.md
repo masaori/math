@@ -7,6 +7,11 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 359 は、台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_density_lower_set_le_upper_bound`（`claim_open_square_density_lower_set_nonempty` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $q\in\mathbb Q_{>0}$、$\mu\in A^{\mathrm{op}}(q)$ なら $\mu\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\iota(\log(1+q))$（`claim_open_square_free_entropy_density_upper_bound` の右辺）。仮定は $q>0$ だけで $q\le1$ は要らない（台帳の行名の「$0<q\le1$」は外した）。証明は所属の証人 $\varepsilon,N$ を取り $L:=N$ で読む一続き五段（$\mu=0+\mu$（単位元）$\le\varepsilon+\mu$（`claim_rational_log_order_group_add_monotone` を $\lambda:=0,\mu:=\varepsilon,\nu:=\mu$ で）$=\mu+\varepsilon$（交換則）$\le\Psi^{\mathrm{op}}_N(q)$（証人の性質）$\le$ 上界（密度の上からの評価））と推移律。$\varepsilon\ne0$ は使わない。`remark_real_escape_plan` の脱出の項に「上に有界であること」への参照を足した。
+  SageMath `check/open-square-density-lower-set-le-upper-bound/`（$q$ 8 値、$L\le4$、$\mu$ は空でないことの証人とそれ以下の三つ、別の証人 $(\frac12\iota(\ell_2),2)$ の元。244 検査、4 秒。順序の決定手続きの共通分母を分母の積から最小公倍数へ変えた——積だと $\Psi^{\mathrm{op}}_L(q)$ どうしの比較で指数が $16^{10}$ 程度になり 5 分超で実行不能。`claim_common_denominator_multiple` により結果は変わらない）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet`。`rationalLogOrderLE_add_right`・`zero_add`・`add_comm`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`・`rationalLogOrderLE_trans`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`le_bound_of_mem_lowerSetOfSequence_necSuf`。`[Add X] [Zero X]`、推移律・右加法単調性・単位元 $0+x=x$・交換則・列の項の上界だけ。$\varepsilon\ne0$ も逆元も有理数倍も使わない）、導出版。sorry 検査 1342 件。前 tick のレビューでは修正なし。次は「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」。
+
+
 - **2026-08-17 の tick 358 は、台帳の先頭行「開境界正方形の密度の下組は空でない」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
   `def_open_square_density_lower_set`（$A^{\mathrm{op}}(q):=A((\Psi^{\mathrm{op}}_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$。後の段が繰り返し引くので名前を置いた）と `claim_open_square_density_lower_set_nonempty`（$-\iota(\ell_2)\in A^{\mathrm{op}}(q)$。いずれも `claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。仮定は $q\in\mathbb Q_{>0}$ だけで、$q\le1$ は要らない（密度の非負が $q>0$ で成り立つため。台帳の行名の「$0<q\le1$」は外した）。証明は準備二つ（$0\le\iota(\ell_2)$ は `claim_rational_embedded_log_order_iff` を $(1,2)$ で読む既出の鎖、$\iota(\ell_2)\ne0$ は $\ell_2(2)=1\ne0$ と `claim_rational_log_order_group_embedding` の単射性）と、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$ で一続き三段（$\varepsilon$ の定義、逆元律、`claim_open_square_free_entropy_density_nonnegative`）。`remark_real_escape_plan` の脱出の項に $A^{\mathrm{op}}(q)$ と空でないことへの参照を足した。
   SageMath `check/open-square-density-lower-set-nonempty/`（$q$ 8 値、$L\le4$。一辺 4 は行ごとの動的計画法で一辺 1〜3 の全列挙と一致を確認。141 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`openSquareDensityLowerSet`・`mem_…_iff`・`toRational_generator_two_ne_zero`・`neg_toRational_generator_two_mem_openSquareDensityLowerSet`・`openSquareDensityLowerSet_nonempty`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`neg_mem_lowerSetOfSequence_of_nonneg_necSuf`。`[Add X] [Zero X] [Neg X]`、正の元 $\varepsilon$ とその逆元律 $-\varepsilon+\varepsilon=0$ だけ、列の非負を仮定として受ける。推移律も加法単調性も使わない）、導出版。sorry 検査 1339 件。前 tick のレビューでは修正なし。次は「開境界正方形の密度の下組の元は密度の上からの評価以下」。
@@ -33,13 +38,6 @@
   割り方: 「Archimedes 性の倍率以上の自然数で割れば上界を超えない」（係数の鎖）→「密度の列の Cauchy 性」（Archimedes 性で $n$、$a:=n+2$、$N:=a^2$ を選ぶ存在の構成。上端・下端に核の等式とこの主張を代入し、下端は逆元の順序反転）。前 tick のレビューでは修正なし。次は「密度の列の Cauchy 性（$0<q\le1$）」本体。
 
 
-- **2026-08-17 の tick 354 は、台帳の先頭行「核は非負である（$0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$、$0<q\le1$）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `claim_open_square_density_difference_bound_core_nonneg_le_one`（`claim_open_square_density_difference_bound_is_core_over_base_side` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $0<q\le1$ で $0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$。証明は準備 4 つ（符号 $\iota(\log q)\le0$（ここだけ $q\le1$）・$0\le\iota(\ell_2)$・$0\le\iota(\log(1+q))$ を `claim_rational_embedded_log_order_iff` から／$0=2\cdot0\le2\iota(\ell_2)$、$0=4\cdot0\le4\iota(\log(1+q))=0+4\iota(\log(1+q))\le X$（非負有理数倍の順序保存・単位元・加法単調性）／$Y\le4\cdot0=0$、$0=-0\le-Y$（`claim_rational_log_order_group_neg_reverses_order`）／$0\le C$ の既出の一続きと $0=2\cdot0\le2C$）と、本体（$0=0+0\le X+0=0+X\le(-Y)+X=X+(-Y)=0+(X+(-Y))\le2C+(X+(-Y))=(X+(-Y))+2C=\Gamma(q)$。加法単調性を三度と交換則・単位元）。結合則も逆元律も使わない。
-  SageMath `check/open-square-density-difference-bound-core-nonneg/`（分配関数不要。$q\le1$ の 7 点で各段 38 検査、$q>1$ の 2 点で否定側（$\iota(\log q)\le0$ が落ちる）1 検査、計 268 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityDifferenceBoundCoreNonneg.lean`（`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCoreX`・`rationalLogOrderLE_zero_neg_openSquareDensityDifferenceBoundCoreY_of_le_one`・`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one`。既出の符号補題三つと `rationalLogOrderLE_zero_openSquareUpperBoundConstant` を引く），
-  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityDifferenceBoundCoreNonneg.lean`（`zero_le_core_of_signs_necSuf`。`[AddCommMonoid X] [Neg X] [SMul ℚ X]` と推移律・右加法単調性・非負有理数倍の順序保存・逆元の順序反転・$c\cdot0=0$・$-0=0$、三つの符号を仮定として受けるだけ。結合則・逆元律・順序の線形性は要らない）、導出版。sorry 検査 1322 件。
-  前 tick のレビューでは修正なし。次は「密度の列の Cauchy 性（$0<q\le1$）」（備考の手順どおり。論法が二つ以上なら着手時に割る）。
-
-
 ## セクション台帳
 
 **済んだ範囲**（章ごとの件数。個々の内訳は [auto-loop-archive.md](auto-loop-archive.md) と
@@ -52,14 +50,13 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 74 セクション
+- 熱力学極限: 75 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 開境界正方形の密度の下組の元は密度の上からの評価以下（$0<q\le1$） | todo | $\mu\in A$ なら $\mu=\mu+0\le\mu+\varepsilon\le\Psi^{\mathrm{op}}_L(q)\le$ 上界（`claim_open_square_free_entropy_density_upper_bound`。$L:=N$ で読む）。加法単調性・推移律 |
 | 熱力学極限 | 有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数） | todo | $\rho_{\mathbb R}(\mu):=\sum_p\mu(p)\log_{\mathbb R}p$。$\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow\rho_{\mathbb R}(\lambda)\le\rho_{\mathbb R}(\mu)$。共通分母 $N$ で $\mathrm{rat}_\Lambda$ の比較へ落とし、実対数の単調性と積の対数。住処 R、`realEscape` 必須 |
 | 熱力学極限 | 下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性） | todo | $f^{\mathrm{op}}(q):=\sup\rho_{\mathbb R}(A)$。空でない・上に有界（前二行と順序保存）から上限の存在。住処 R、`realEscape` 必須。定義したら `remark_real_escape_plan` の題名から「まだ書いていない」を外す |
 | 熱力学極限 | 削除した実数値経路の Lean の後片付け | todo | 2026-08-16 に本文から消した実数値経路（実対数・上限／下限による極限）の Lean ファイルが孤立して残っている。入口からの import と sorry 検査は通るが、対応する本文が無いので消す |
@@ -71,6 +68,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-17（tick 359）: 台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を実行し、`claim_open_square_density_lower_set_le_upper_bound` を `claim_open_square_density_lower_set_nonempty` の直後に置いた。行名の「$0<q\le1$」は、密度の上からの評価が $q>0$ で成り立ち $q\le1$ を使わないので外した。
+  証明は所属の証人を $L:=N$ で読む一続き五段（単位元・加法単調性・交換則・証人の性質・密度の上からの評価）と推移律だけ。SageMath `open-square-density-lower-set-le-upper-bound`（順序の決定手続きの共通分母は最小公倍数で取る）、Lean 具体版・必要十分版（`Add`・`Zero`、推移律・右加法単調性・単位元・交換則・列の上界だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1342 件）。式変形統一は一時停止中のため実施せず。
+
 
 - 2026-08-17（tick 358）: 台帳の先頭行「開境界正方形の密度の下組は空でない」を実行し、`def_open_square_density_lower_set` と `claim_open_square_density_lower_set_nonempty` を `claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後に置いた。行名の「$0<q\le1$」は、密度の非負が $q>0$ で成り立ち $q\le1$ を使わないので外した。
   証明は準備二つ（$\iota(\ell_2)$ の非負と非零）と、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$ での一続き三段だけ。SageMath `open-square-density-lower-set-nonempty`、Lean 具体版・必要十分版（`Add`・`Zero`・`Neg`、正の元一つとその逆元律、列の非負だけ）・導出版を書き、入口 import・sorry 検査へ 6 件登録（計 1339 件）。式変形統一は一時停止中のため実施せず。
@@ -88,11 +89,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   証明は準備（$\mathbb Q$ の順序 $0\le\frac1a$、$\frac na\le1$）と一続き五段だけ。SageMath `rational-log-order-group-div-ge-multiplier-le`、Lean 具体版・必要十分版（`Zero`・`SMul ℚ`、推移律・非負係数の作用の順序保存・非負の元の係数比較・結合則・単位を仮定として受けるだけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1325 件）。式変形統一は一時停止中のため実施せず。
 
 
-- 2026-08-17（tick 354）: 台帳の先頭行「核は非負である（$0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$、$0<q\le1$）」を実行し、`claim_open_square_density_difference_bound_core_nonneg_le_one` を `claim_open_square_density_difference_bound_is_core_over_base_side` の直後に置いた。
-  証明は三つの符号（$q\le1$ は $\iota(\log q)\le0$ にだけ要る）から非負有理数倍の順序保存・逆元の順序反転・加法単調性で三つの項の非負を作り、加法単調性で順に足し込むだけ。SageMath `open-square-density-difference-bound-core-nonneg`、Lean 具体版・必要十分版（`AddCommMonoid`・`Neg`・`SMul ℚ`、推移律・右加法単調性・非負有理数倍の順序保存・逆元の順序反転・$c\cdot0=0$・$-0=0$ と三つの符号だけ）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1322 件）。式変形統一は一時停止中のため実施せず。
-
-
-（これより古い 320 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 321 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -111,6 +108,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-17（tick 359）: 前 tick の「開境界正方形の密度の列が定める下組」の定義と「開境界正方形の密度の下組は空でない」の本文（準備二つ・一続き三段）・SageMath overview（141 検査）・Lean 具体版（`toRational_generator_two_ne_zero`・`neg_add_cancel`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_zero_openScaledFreeEntropy` が本文の準備第二と三段に 1 対 1）・必要十分版（`Add`・`Zero`・`Neg`、正の元一つとその逆元律・列の非負）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 空でないことは上限の存在の前提（値の属する側の証人）で残す。今 tick の「下組の元は上界以下」は下組が上に有界であること（上限の存在のもう一つの前提）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
 - 2026-08-17（tick 358）: 前 tick の「有理係数の対数順序群の列が定める下組」の定義と「列が定める下組は下に閉じている」の本文（証人の引き継ぎ・二段）・SageMath overview（125 ベクトル、77 件）・Lean 具体版（`rationalLogOrderSequenceLowerSet`・`mem_…_iff`・`mem_…_of_le` の `rationalLogOrderLE_add_right`・`rationalLogOrderLE_trans` が本文の二段に 1 対 1）・必要十分版（`Add`・`Zero`、推移律・右加法単調性）・導出版（`rfl`）を突き合わせ、根拠が一致した。書き直した `remark_real_escape_plan` の脱出の項も読み直した（$\Lambda_{\mathbb Q}$ の切断の言葉。実対数と完備性の二つの理由）。
   「何も言っていない主張」の観点: 下組の定義は切断の下側に名前を与えるもの、下閉性は値の属する側を言うので残す。今 tick の $A^{\mathrm{op}}(q)$ の定義は上限の段が繰り返し引く名前で、空でないことは上限の存在の前提（値の属する側の証人）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
@@ -127,11 +128,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   「何も言っていない主張」の観点: 核の非負は Archimedes 性の前提 $0\le\mu$ そのもので、値の属する側を言っているので残す。今 tick の「Archimedes 性の倍率以上の自然数で割れば上界を超えない」は係数の鎖であり、Cauchy 性が上端・下端の両方で引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
 
-- 2026-08-17（tick 354）: 前 tick の「開境界正方形の密度の差の評価の核」の定義と「差の一様な評価に現れる量は核の基準辺分の一倍である」の本文（準備 4 つ・本体五段）・SageMath overview（692 検査）・Lean 具体版（`ratSmul_neg_eq_neg_ratSmul` の五段 calc・`hX`・`hY`・`hC`・本体の calc が本文の準備第一〜第四と本体に 1 対 1）・必要十分版（`Add`・`Neg`・`SMul ℚ`、分配則・結合則・逆元との入れ替え）・導出版を突き合わせ、根拠が一致した。
-  「何も言っていない主張」の観点: 核の定義は Cauchy 性で Archimedes 性の $\mu$ に置く名前で、$\frac1a$ 倍の等式は上端・下端の両方が引くので残す。今 tick の「核は非負である」も Archimedes 性を読む前提（$0\le\mu$）で、値の属する側（非負）を言っているので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-
-（これより古い 341 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 342 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

@@ -1395,6 +1395,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openSquareDensityLowerSet_nonempty
   Ising2DLambda.NecSuf.ThermodynamicLimit.neg_mem_lowerSetOfSequence_of_nonneg_necSuf
   Ising2DLambda.ThermodynamicLimit.neg_toRational_generator_two_mem_openSquareDensityLowerSet_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet
+  Ising2DLambda.NecSuf.ThermodynamicLimit.le_bound_of_mem_lowerSetOfSequence_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
