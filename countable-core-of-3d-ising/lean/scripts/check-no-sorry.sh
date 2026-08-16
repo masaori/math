@@ -141,6 +141,7 @@ targets=(
   Ising3DCut.boundaryResponsePolynomial_outer_box_independence
   Ising3DCut.fullBoundaryResponse_outer_edges_to_one
   Ising3DCut.fullBoundaryResponse_common_outer_box_comparison
+  Ising3DCut.fullBoundaryResponse_degreeOf_le_one
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add

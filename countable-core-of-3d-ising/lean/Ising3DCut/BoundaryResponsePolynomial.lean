@@ -159,6 +159,23 @@ theorem fullBoundaryResponse_common_outer_box_comparison
   congr 1
   ring
 
+/-- 辺変数を 1 に置かない境界応答多項式の各辺変数についての次数は高々 1（人手証明
+`claim_full_boundary_response_degree_at_most_one`）。各配位の単項式は破れ辺の有限集合上の相異なる
+不定元の積なので各変数の指数は高々 1 であり、有限和の次数は各項の次数の最大値以下である。 -/
+theorem fullBoundaryResponse_degreeOf_le_one
+    (broken : Configuration → Finset Edge) (e₀ : Edge) :
+    degreeOf e₀ (multivariatePartitionPolynomial broken) ≤ 1 := by
+  unfold multivariatePartitionPolynomial
+  -- 有限和の次数は各項の次数の最大値以下
+  refine (degreeOf_sum_le e₀ _ _).trans (Finset.sup_le fun σ _ ↦ ?_)
+  -- 相異なる不定元の積の次数は高々 1
+  refine (degreeOf_prod_le e₀ _ _).trans ?_
+  calc ∑ e ∈ broken σ, degreeOf e₀ (X e : MvPolynomial Edge ℤ)
+      = ∑ e ∈ broken σ, if e₀ = e then 1 else 0 := by
+        exact Finset.sum_congr rfl fun e _ ↦ degreeOf_X e₀ e
+    _ ≤ 1 := by
+        rw [Finset.sum_ite_eq]; split_ifs <;> simp
+
 end
 
 end Ising3DCut
