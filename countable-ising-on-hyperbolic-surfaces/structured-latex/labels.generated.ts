@@ -16,6 +16,7 @@ export const ALL_LABELS = [
   "def_edge_spin_sign",
   "def_even_edge_subset",
   "def_even_subgraph_polynomial",
+  "def_face_boundary_space_over_f2",
   "def_finite_cellulation_cell_sets",
   "def_finite_cellulation_connected_one_skeleton",
   "def_finite_cellulation_corner_edge_end_map",

@@ -258,4 +258,62 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "homology_sector_definition_face_boundary_space",
+    kind: "definition",
+    title: { text: "F_2 上の面境界空間" },
+    labels: ["def_face_boundary_space_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/face-boundary-space-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_second_boundary_matrix_over_f2"),
+        " が定める有限線形写像 ",
+        math(String.raw`\partial_2:\mathbb F_2^{F_{\mathrm{cell}}}\to\mathbb F_2^{E_{\mathrm{cell}}}`),
+        " に対し、面境界空間を",
+      ]),
+      displayMath(String.raw`\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+:=
+\operatorname{im}(\partial_2)
+=
+\left\{
+  \partial_2b
+  \ \middle|\
+  \ b\in\mathbb F_2^{F_{\mathrm{cell}}}
+\right\}`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`b:F_{\mathrm{cell}}\to\mathbb F_2`),
+        " は面ラベルごとの係数を与える写像であり、",
+        math(String.raw`\partial_2b:E_{\mathrm{cell}}\to\mathbb F_2`),
+        " は有限行列と係数列の積である。",
+        ref("theorem_boundary_of_boundary_is_zero_over_f2"),
+        " により、任意の ",
+        math(String.raw`b\in\mathbb F_2^{F_{\mathrm{cell}}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\partial_1(\partial_2b)
+&=(\partial_1\partial_2)b
+\quad\bigl(\because\ \text{有限線形写像の合成の結合則}\bigr)\\
+&=0_{\mathbb F_2^{V_{\mathrm{cell}}}}
+\quad\bigl(\because\ \text{二つの境界写像の積は零行列である}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
+        ref("def_first_cycle_space_over_f2"),
+        " の部分空間として",
+      ]),
+      displayMath(String.raw`\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\subseteq
+\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\subseteq
+\mathbb F_2^{E_{\mathrm{cell}}}`),
+      paragraph([
+        "が成り立つ。面部分集合とは同一視せず、面部分集合から面係数写像への写像は別の主張で定義する。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
