@@ -118,9 +118,20 @@ node cellular-automata-statistical-mechanics/sagemath/tools/verify-check-linkage
 - エージェント: Claude と Codex を tick ごとに交互に使う
 - 論文公開・通知: `scripts/publish-artifact.sh`（同じ論文版は再通知しない）
 
+### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
+
+**`launchctl`（`bootstrap` / `bootout` / `kickstart`）と `~/Library/LaunchAgents/` の編集を、
+この tick から行ってはならない。** 設置・頻度変更・一時停止・再開は、tmux セッション
+`local-pc-management` のウィンドウ `tick窓口` へ依頼する（`launchd-tick-loop` skill と
+`communicate-with-agent-session` skill に従う）。**頻度そのものは柔軟に変えてよい。固定するのは経路である。**
+あるべき頻度の宣言は `local-pc-management/agent-sessions/config/tick-schedules.json` にあり、
+実体との食い違いは日次の監査が検出して宣言側へ戻す（＝実体だけ書き換えても翌朝消える）。
+
+**読み取りだけの調査は自由。** 次はそのまま使ってよい。
+
 ```sh
-bash ~/.local/bin/cellular-automata-loop-launcher.sh
-launchctl kickstart -k gui/$(id -u)/com.masaori.cellular-automata-auto-loop
-launchctl bootout gui/$(id -u)/com.masaori.cellular-automata-auto-loop
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist
+bash ~/.local/bin/cellular-automata-loop-launcher.sh              # 手で 1 tick 回す（launchd を触らない）
+launchctl print "gui/$(id -u)/com.masaori.cellular-automata-auto-loop" | grep -E 'state =|last exit|calendar'
+tail -50 ~/Library/Logs/cellular-automata-auto-loop/auto-loop.log           # 見送り／打ち切り／異常終了の区別
+python3 ~/git/masaori/local-pc-management/agent-sessions/audit-tick-schedules.py  # 宣言との食い違い
 ```

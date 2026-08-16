@@ -307,9 +307,20 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 片方でしか起きない失敗（例: 特定の CLI の引数の扱い）を切り分けるときはここを見る。
 | ログ | `logs/auto-loop.log`（git 管理外） |
 
+### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
+
+**`launchctl`（`bootstrap` / `bootout` / `kickstart`）と `~/Library/LaunchAgents/` の編集を、
+この tick から行ってはならない。** 設置・頻度変更・一時停止・再開は、tmux セッション
+`local-pc-management` のウィンドウ `tick窓口` へ依頼する（`launchd-tick-loop` skill と
+`communicate-with-agent-session` skill に従う）。**頻度そのものは柔軟に変えてよい。固定するのは経路である。**
+あるべき頻度の宣言は `local-pc-management/agent-sessions/config/tick-schedules.json` にあり、
+実体との食い違いは日次の監査が検出して宣言側へ戻す（＝実体だけ書き換えても翌朝消える）。
+
+**読み取りだけの調査は自由。** 次はそのまま使ってよい。
+
 ```sh
-bash scripts/auto-loop-tick.sh                                   # 手で 1 tick 回す
-launchctl kickstart -k gui/$(id -u)/com.masaori.ising-lambda-auto-loop   # 次の発火を待たず起動する
-launchctl bootout gui/$(id -u)/com.masaori.ising-lambda-auto-loop        # 止める
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist  # 再開する
+bash scripts/auto-loop-tick.sh                                   # 手で 1 tick 回す（launchd を触らない）
+launchctl print "gui/$(id -u)/com.masaori.ising-lambda-auto-loop" | grep -E 'state =|last exit|calendar'
+tail -50 logs/auto-loop.log           # 見送り／打ち切り／異常終了の区別
+python3 ~/git/masaori/local-pc-management/agent-sessions/audit-tick-schedules.py  # 宣言との食い違い
 ```

@@ -202,11 +202,22 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 | 使うエージェント | **Claude と Codex を 1 tick ごとに交互**（2 次元側と同じ運用）。Claude は `claude-fable-5` の effort medium、Codex は `gpt-5.6-sol` の reasoning medium。直前に使ったほうを `logs/last-agent` に記録し、その反対を選ぶ |
 | ログ | `~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log`（リポジトリ外。作業ツリーを合わせ直しても消えないため） |
 
+### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
+
+**`launchctl`（`bootstrap` / `bootout` / `kickstart`）と `~/Library/LaunchAgents/` の編集を、
+この tick から行ってはならない。** 設置・頻度変更・一時停止・再開は、tmux セッション
+`local-pc-management` のウィンドウ `tick窓口` へ依頼する（`launchd-tick-loop` skill と
+`communicate-with-agent-session` skill に従う）。**頻度そのものは柔軟に変えてよい。固定するのは経路である。**
+あるべき頻度の宣言は `local-pc-management/agent-sessions/config/tick-schedules.json` にあり、
+実体との食い違いは日次の監査が検出して宣言側へ戻す（＝実体だけ書き換えても翌朝消える）。
+
+**読み取りだけの調査は自由。** 次はそのまま使ってよい。
+
 ```sh
-bash ~/.local/bin/ising-3d-cut-loop-launcher.sh                       # 手で 1 tick 回す
-launchctl kickstart -k gui/$(id -u)/com.masaori.ising-3d-cut-auto-loop # 次の発火を待たず起動する
-launchctl bootout gui/$(id -u)/com.masaori.ising-3d-cut-auto-loop      # 止める
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist
+bash ~/.local/bin/ising-3d-cut-loop-launcher.sh                        # 手で 1 tick 回す（launchd を触らない）
+launchctl print "gui/$(id -u)/com.masaori.ising-3d-cut-auto-loop" | grep -E 'state =|last exit|calendar'
+tail -50 ~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log           # 見送り／打ち切り／異常終了の区別
+python3 ~/git/masaori/local-pc-management/agent-sessions/audit-tick-schedules.py  # 宣言との食い違い
 ```
 
 **2 次元側のループ（`com.masaori.ising-lambda-auto-loop`。毎時 5 分と 35 分）とは別の作業ツリーで走る。**
