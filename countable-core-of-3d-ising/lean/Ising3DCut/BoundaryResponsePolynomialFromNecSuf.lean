@@ -127,4 +127,12 @@ theorem fullBoundaryResponse_totalDegree_le_card_edge_fromNecSuf
     (multivariatePartitionPolynomial broken).totalDegree ≤ Fintype.card Edge :=
   NecSuf.fullBoundaryResponse_totalDegree_le_card_edge (R := ℤ) broken
 
+
+/-- 全次数は辺の総数にちょうど等しいを必要十分版（`R := ℤ`）から導く。 -/
+theorem fullBoundaryResponse_totalDegree_eq_card_edge_fromNecSuf
+    (broken : Configuration → Finset Edge) (τ : Configuration)
+    (hτ : broken τ = Finset.univ) :
+    (multivariatePartitionPolynomial broken).totalDegree = Fintype.card Edge :=
+  NecSuf.fullBoundaryResponse_totalDegree_eq_card_edge (R := ℤ) broken τ hτ
+
 end Ising3DCut

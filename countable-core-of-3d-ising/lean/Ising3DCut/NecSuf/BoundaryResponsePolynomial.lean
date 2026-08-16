@@ -237,3 +237,46 @@ theorem fullBoundaryResponse_totalDegree_le_card_edge [Nontrivial R]
     _ ≤ Fintype.card Edge := Finset.card_le_univ _
 
 end Ising3DCut.NecSuf
+
+namespace Ising3DCut.NecSuf
+
+open MvPolynomial
+
+variable {Configuration Edge R : Type*} [CommSemiring R]
+variable [Fintype Configuration] [Fintype Edge] [DecidableEq Edge]
+
+/-- 辺変数を 1 に置かない境界応答多項式の全次数は辺の総数にちょうど等しい、の必要十分版
+（人手証明 `claim_full_boundary_response_total_degree_is_edge_count` の後半）。
+係数環は可換半環 `R` でよい。全辺を破る配位 `τ` の単項式の係数は同じ破れ辺集合をもつ配位の個数
+（1 以上の自然数）なので、それが `R` で 0 にならないことを与える `CharZero R` を置く
+（`Nontrivial R` は `totalDegree_X` のため。`ℤ` は両方満たす）。
+証明は具体版と同順（係数が非零で support に属し、その指数の和 `#Edge` は全次数以下、上界と合わせて等号）。 -/
+theorem fullBoundaryResponse_totalDegree_eq_card_edge [Nontrivial R] [CharZero R]
+    (broken : Configuration → Finset Edge) (τ : Configuration)
+    (hτ : broken τ = Finset.univ) :
+    (multivariatePartitionPolynomial (R := R) broken).totalDegree = Fintype.card Edge := by
+  refine le_antisymm (fullBoundaryResponse_totalDegree_le_card_edge broken) ?_
+  have hmono : ∀ σ : Configuration, (∏ e ∈ broken σ, (X e : MvPolynomial Edge R)) =
+      monomial (∑ e ∈ broken σ, Finsupp.single e 1) 1 := fun σ ↦ by
+    rw [monomial_sum_index, C_1, one_mul]; rfl
+  -- τ の単項式の係数は同じ破れ辺集合をもつ配位の個数で、0 でない
+  have hcoeff : coeff (∑ e ∈ broken τ, Finsupp.single e 1)
+      (multivariatePartitionPolynomial (R := R) broken) ≠ 0 := by
+    unfold multivariatePartitionPolynomial
+    rw [coeff_sum]
+    simp_rw [hmono, coeff_monomial]
+    rw [Finset.sum_boole]
+    refine Nat.cast_ne_zero.mpr (Finset.card_ne_zero.mpr ⟨τ, ?_⟩)
+    simp
+  have hsupp : (∑ e ∈ broken τ, Finsupp.single e 1) ∈
+      (multivariatePartitionPolynomial (R := R) broken).support := by
+    rw [mem_support_iff]; exact hcoeff
+  -- support の元の指数の和は全次数以下
+  have hle := le_totalDegree hsupp
+  -- 全ての辺を破る配位の指数の和は #Edge
+  have hdeg : ((∑ e ∈ broken τ, Finsupp.single e 1).sum fun _ n ↦ n) = Fintype.card Edge := by
+    rw [hτ, ← Finsupp.sum_finset_sum_index (fun _ ↦ rfl) (fun _ _ _ ↦ rfl)]
+    simp [Finsupp.sum_single_index]
+  rwa [hdeg] at hle
+
+end Ising3DCut.NecSuf
