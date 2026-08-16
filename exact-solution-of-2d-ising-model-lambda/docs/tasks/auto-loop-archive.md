@@ -10777,3 +10777,36 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
   （$\mathbb R$ 版と共有）・導出版を突き合わせ、準備四つ・五段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。本文末尾「この先に書くこと」と
   台帳のセクション表も食い違いなし。修正は無い。
 
+## 2026-08-16 tick 321 で台帳から移したもの
+
+### 現在地
+
+- **2026-08-16 の tick 316 は、「開矩形の可算な定義群を実数体脱出の前へ移し、正の有理点での値（$\mathbb Q$ 版）を定義する」を
+  本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。** 開境界長方形の頂点・辺・配位・破れボンド数・分配多項式の
+  五つの定義（住処 N/Z、中身は変えない）を実数体脱出の宣言の前へ移し、その直後に $Z^{\mathrm{op}}_{a,b}(q):=(\sum_\sigma x^{b^{\mathrm{op}}_{a,b}(\sigma)})(q)
+  =\sum_\sigma q^{b^{\mathrm{op}}_{a,b}(\sigma)}\in\mathbb Q$（`def_open_rectangle_partition_value_at_positive_rational`、住処 Q）と
+  $Z^{\mathrm{op}}_{a,b}(q)\in\mathbb Q_{>0}$（`claim_open_rectangle_value_at_rational_is_positive`、住処 Q。各項の正値性と
+  $|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\ge1$ から、周期境界の正値性と同じ論法）を置いた。実数体は現れない。レビューでは前 tick の
+  $\Lambda_{\mathbb Q}$ 版上界の四層が一致し修正無し。次は「接合不等式（$\mathbb Q$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 316）: `def_open_rectangle_vertices`・`def_open_rectangle_edges`・`def_open_rectangle_configuration`・
+  `def_open_rectangle_broken_bond_count`・`def_open_rectangle_partition_polynomial` を `claim_finite_free_entropy_density_upper_bound` の直後
+  （`remark_real_field_escape` の直前）へ移した（中身は変えない。参照先はすべて前の章なので参照は壊れない）。その直後に
+  `def_open_rectangle_partition_value_at_positive_rational`（$\mathbb Z[x]$ の分配多項式への $q$ の代入。代入は環準同型なので
+  $\sum_\sigma q^{b^{\mathrm{op}}_{a,b}(\sigma)}$）と `claim_open_rectangle_value_at_rational_is_positive`（各項 $0<q^{b^{\mathrm{op}}_{a,b}(\sigma)}$、
+  $|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\ge1$、正の有理数を 1 個以上足したものは正）を置いた。$\mathbb R$ 版
+  `def_open_rectangle_partition_value` は併存（撤去のセクションで消す）。`def_open_rectangle_constant_plus_configuration` と
+  `claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N）は $\mathbb R$ 側の値の下界の直前に残してある（開境界正方形の密度の
+  非負性のセクションで移す）。SageMath `open-rectangle-partition-value-at-positive-rational`（長方形 10 形・正の有理点 9 点、43446 件、
+  `ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenRectanglePartitionValueRational.lean`（`openPartitionValueRat`・
+  `openPartitionValueRat_eq_sum`・`openPartitionValueRat_pos`）、必要十分版は周期境界の `NecSuf/FreeEntropy/ValuePositive.lean` の
+  `sum_pow_pos` を共有（有限で空でない添字型と順序半環の正の元の冪の和だけ。開境界・長方形の形・多項式は本質でない）、導出版
+  `OpenRectanglePartitionValueRationalFromNecSuf.lean`。sorry 検査 1169 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 316）: 前 tick の「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath・Lean 具体版・
+  必要十分版・導出版を突き合わせ、準備三つ・$\Lambda$ の五段と $\Lambda_{\mathbb Q}$ の八段の鎖・対象ラベル・入口 import・sorry 検査への
+  登録が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。

@@ -4,6 +4,25 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 321 は、前 tick の「正方形のブロック敷き詰め（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「周期境界と開境界の比較（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_periodic_open_boundary_comparison_rational`（`claim_open_square_block_tiling_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
+$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{2L}Z^{\mathrm{op}}_{L,L}(q)\le Z_L(q)\le Z^{\mathrm{op}}_{L,L}(q)$、$1\le q$: $Z^{\mathrm{op}}_{L,L}(q)\le Z_L(q)\le q^{2L}Z^{\mathrm{op}}_{L,L}(q)$。
+周期境界の値は `def_partition_polynomial` の多項式への代入 $Z_L(q)$（正値性と「代入は和へ配れる」は `claim_value_at_rational_is_positive`）、開境界の値は
+`def_open_rectangle_partition_value_at_positive_rational`。証明は $\mathbb R$ 版 `claim_periodic_open_boundary_comparison` と同じ論法（頂点の全単射 $v_L$・配位の読み替え $r_L$・
+境界横断辺の破れ本数 $s^{\mathrm{bd}}_L\le2L$・分解 $b(r_L(\tau))=b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)$・境界因子の自然数冪の順序・項ごとの評価の有限和と分配則）で、
+`remark_real_field_escape` を引かない。二場合は 1 ブロック。$\mathbb R$ 版は併存（撤去のセクションで消す）。
+SageMath `periodic-open-boundary-comparison-rational`（$L\in\{1,2,3\}$ × 正の有理点 9 点、27 組。`ZZ`/`QQ`）。
+Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonInequalityRational.lean`（`partitionValueRat_eq_open_double_product`・`partitionValueRat_periodicOpen_bounds_of_le_one`／`_of_one_le`。
+$\mathbb R$ 版 `PeriodicOpenComparisonInequality.lean` から `t`→`q`、`ℝ`→`ℚ`、`openPartitionValue`→`openPartitionValueRat`、`eval_partitionPolynomial_real`→`FreeEntropy.eval_partitionPolynomial`
+（`import Ising2DLambda.FreeEntropy.ValuePositive` が要る）、冪の補題→`_rat`（`OpenRectangleGluingInequalityRational.lean`・`PartitionValueUpperBoundRational.lean`）の置換に
+`open NecSuf.ThermodynamicLimit` を足して通った。全単射・分解は `PeriodicOpenComparison.lean` を共有）、必要十分版は `NecSuf/ThermodynamicLimit/PeriodicOpenComparisonInequality.lean` の
+`sum_pow_reindex_bounds_necSuf` をそのまま共有、導出版 `PeriodicOpenComparisonInequalityRationalFromNecSuf.lean`。sorry 検査 1198 件。
+次は「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義と非負性・上界」（$\Psi^{\mathrm{op}}_L(q):=\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))\in\Lambda_{\mathbb Q}$。
+周期境界側の $\Lambda_{\mathbb Q}$ 値密度の定義ブロックとその非負性・上界の書き方（`claim_finite_free_entropy_density_upper_bound` とその周辺）に揃える。備考どおり定義 1・主張 2 なら
+割る。着手前に周期境界側の定義ラベルと $\iota$・$\log$ のラベル、開境界の値の下界 1（`def_open_rectangle_constant_plus_configuration`・
+`claim_open_rectangle_constant_plus_breaks_no_bond` は $\mathbb R$ 側の値の下界の直前にある。移すか引くかを決める）を確かめること）。
+
 2026-08-16 の tick 320 は、前 tick の「反復接合の第二（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「正方形のブロック敷き詰め（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_square_block_tiling_rational`（`claim_open_rectangle_iterated_gluing_second_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、

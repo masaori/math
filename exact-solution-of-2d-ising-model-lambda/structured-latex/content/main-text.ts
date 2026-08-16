@@ -39258,6 +39258,227 @@ q^{(k-1)(ka)}\!\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
   },
 
   {
+    id: "thermodynamic_limit_claim_periodic_open_boundary_comparison_rational",
+    kind: "claim",
+    title: { text: "周期境界と開境界の境界評価（正の有理点）" },
+    labels: ["claim_periodic_open_boundary_comparison_rational"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_reindex_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_one_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/periodic-open-boundary-comparison-rational"],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る（以下の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）。周期境界の分配多項式 ",
+        math(String.raw`Z_L`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）へ ",
+        math(String.raw`q`),
+        " を代入した値 ",
+        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+        "（",
+        ref("claim_value_at_rational_is_positive"),
+        "）と、一辺が ",
+        math(String.raw`L`),
+        " の開境界正方形の正の有理点での値 ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)`),
+        "（",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "）の間に、",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+q^{2L}Z^{\mathrm{op}}_{L,L}(q)
+\le Z_L(q)
+\le Z^{\mathrm{op}}_{L,L}(q),\\[2mm]
+1\le q:&
+Z^{\mathrm{op}}_{L,L}(q)
+\le Z_L(q)
+\le q^{2L}Z^{\mathrm{op}}_{L,L}(q)
+\end{array}`),
+      paragraph(["が成り立つ。ここで丸括弧は有理数 ", math(String.raw`q`), " での評価を表す。"]),
+    ],
+    proof: [
+      paragraph([
+        "頂点の対応に名前を与える。写像 ",
+        math(String.raw`v_L:V_L\to V^{\mathrm{op}}_{L,L}`),
+        " を",
+      ]),
+      displayMath(String.raw`v_L(i,j):=(s(i),\,s(j))`),
+      paragraph([
+        "で定める（",
+        math(String.raw`s`),
+        " は ",
+        ref("def_residue_maps"),
+        "。",
+        math(String.raw`0\le s(i),s(j)\le L-1`),
+        " なので値は ",
+        math(String.raw`V^{\mathrm{op}}_{L,L}`),
+        "（",
+        ref("def_open_rectangle_vertices"),
+        "）に入る）。",
+        math(String.raw`0\le p\le L-1`),
+        " の整数 ",
+        math(String.raw`p`),
+        " について ",
+        math(String.raw`s(\pi(p))=p`),
+        " であり（除法の原理の一意性）、任意の ",
+        math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+        " について ",
+        math(String.raw`\pi(s(y))=y`),
+        " なので（",
+        ref("def_residue_maps"),
+        "）、",
+        math(String.raw`(p,p')\mapsto(\pi(p),\pi(p'))`),
+        " が ",
+        math(String.raw`v_L`),
+        " の逆写像である。ゆえに ",
+        math(String.raw`v_L`),
+        " は全単射である。次に、配位を読み替える写像 ",
+        math(String.raw`r_L:\Sigma^{\mathrm{op}}_{L,L}\to\Sigma_L`),
+        " を",
+      ]),
+      displayMath(String.raw`r_L(\tau):=\tau\circ v_L`),
+      paragraph([
+        "で定める（",
+        ref("def_configuration"),
+        "、",
+        ref("def_open_rectangle_configuration"),
+        "）。",
+        math(String.raw`v_L`),
+        " が全単射なので、",
+        math(String.raw`\tau'\mapsto\tau'\circ(v_L\text{ の逆写像})`),
+        " が逆写像を与え、",
+        math(String.raw`r_L`),
+        " も全単射である。周期境界にだけある、右端から左端へ戻る横向きの辺と、下端から上端へ戻る縦向きの辺のうち、",
+        math(String.raw`\tau\in\Sigma^{\mathrm{op}}_{L,L}`),
+        " のもとで破れているものの本数を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s^{\mathrm{bd}}_L(\tau)
+&:=\bigl|\{i\in\mathbb{N}\mid 0\le i<L\ \text{かつ}\
+\tau(i,L-1)\ne\tau(i,0)\}\bigr|\\
+&\quad+\bigl|\{j\in\mathbb{N}\mid 0\le j<L\ \text{かつ}\
+\tau(L-1,j)\ne\tau(0,j)\}\bigr|\ \in\ \mathbb{N}
+\end{aligned}`),
+      paragraph([
+        "と定める。候補は各向きに ",
+        math(String.raw`L`),
+        " 本ずつ、合計 ",
+        math(String.raw`2L`),
+        " 本なので、",
+      ]),
+      displayMath(String.raw`0\le s^{\mathrm{bd}}_L(\tau)\le2L`),
+      paragraph([
+        "である。周期境界の辺を端点写像と ",
+        math(String.raw`v_L`),
+        " で読むと、横向きの辺 ",
+        math(String.raw`e`),
+        "（両端の列番号の代表が ",
+        math(String.raw`s(j)`),
+        " と ",
+        math(String.raw`s(j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)`),
+        "）は、",
+        math(String.raw`s(j)<L-1`),
+        " なら開境界の横向き辺に、",
+        math(String.raw`s(j)=L-1`),
+        " なら右端から左端へ戻る境界横断辺に対応し、縦向きの辺も行番号について同様である（開境界の辺集合と端点写像は ",
+        ref("def_open_rectangle_edges"),
+        "）。この対応で周期境界の辺集合は、開境界正方形の辺集合と上の ",
+        math(String.raw`2L`),
+        " 本の境界横断辺との互いに交わらない和に分かれ、辺 ",
+        math(String.raw`e`),
+        " が ",
+        math(String.raw`r_L(\tau)`),
+        " のもとで破れることと、対応する辺が ",
+        math(String.raw`\tau`),
+        " のもとで破れることは同値である。ゆえに、破れボンド数の定義（",
+        ref("def_broken_bond_count"),
+        "、",
+        ref("def_open_rectangle_broken_bond_count"),
+        "）から、",
+      ]),
+      displayMath(String.raw`b(r_L(\tau))
+=b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)`),
+      paragraph(["を得る。したがって、"]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
+&&\bigl(\because\ \blkref{def_partition_polynomial}\text{ への代入。代入は環準同型なので和と積を保つ（}\blkref{claim_value_at_rational_is_positive}\text{ の第二段）}\bigr)\\
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
+q^{\,b(r_L(\tau))}
+&&\bigl(\because\ \text{全単射}\ r_L\ \text{に沿う和の並べ替え}\bigr)\\
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
+q^{\,b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)}
+&&\bigl(\because\ \text{上の破れボンド数の分解}\bigr)\\
+&=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
+q^{\,b^{\mathrm{op}}_{L,L}(\tau)}q^{\,s^{\mathrm{bd}}_L(\tau)}
+&&\bigl(\because\ q^{m+n}=q^m q^n\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<q\le1`),
+        " の場合、自然数冪の順序と ",
+        math(String.raw`0\le s^{\mathrm{bd}}_L(\tau)\le2L`),
+        " から、",
+      ]),
+      displayMath(String.raw`q^{2L}\le q^{\,s^{\mathrm{bd}}_L(\tau)}\le1`),
+      paragraph([
+        "である。各 ",
+        math(String.raw`q^{\,b^{\mathrm{op}}_{L,L}(\tau)}`),
+        " は正なので（",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " の準備）、この不等式を項ごとに掛けて有限和を取ると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
+&\le Z_L(q)
+&&\bigl(\because\ \text{項ごとの下からの評価の有限和と有限和の分配則}\bigr)\\
+&\le\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
+&&\bigl(\because\ \text{項ごとの上からの評価の有限和}\bigr)\\
+&=Z^{\mathrm{op}}_{L,L}(q)
+&&\bigl(\because\ \blkref{def_open_rectangle_partition_value_at_positive_rational}\bigr)
+\end{aligned}`),
+      paragraph([
+        "を得る。第一行左辺の和も ",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        " により ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)`),
+        " なので、第一の場合の二つの不等式が従う。",
+        math(String.raw`1\le q`),
+        " の場合は自然数冪の順序が",
+      ]),
+      displayMath(String.raw`1\le q^{\,s^{\mathrm{bd}}_L(\tau)}\le q^{2L}`),
+      paragraph([
+        "となる。同じ項ごとの乗法と有限和を順に適用し、",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        " で和を書き戻すと、第二の場合の二つの不等式を得る。",
+      ]),
+      paragraph([
+        "以上で使ったのは、有限集合の間の全単射、破れボンド数の分解（",
+        math(String.raw`\mathbb{N}`),
+        " の計算）、有理数の四則と順序（正の元を掛けても順序が保たれること）、正の有理数の自然数冪、有限和だけであり、実数体は現れない。正の実数での境界評価 ",
+        ref("claim_periodic_open_boundary_comparison"),
+        " はこの主張の実数側の像であり、旧経路の撤去まで併存させる。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_field_escape",
     kind: "remark",
     title: { text: "実数体への脱出の宣言" },

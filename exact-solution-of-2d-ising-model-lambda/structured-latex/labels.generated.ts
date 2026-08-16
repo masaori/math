@@ -125,6 +125,7 @@ export const ALL_LABELS = [
   "claim_partition_value_upper_bound",
   "claim_partition_value_upper_bound_at_positive_rational",
   "claim_periodic_open_boundary_comparison",
+  "claim_periodic_open_boundary_comparison_rational",
   "claim_permutation_moves_two",
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
