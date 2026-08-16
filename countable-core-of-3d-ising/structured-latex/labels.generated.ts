@@ -16,6 +16,7 @@ export const ALL_LABELS = [
   "claim_even_multiplicity",
   "claim_factorization_type_determines_root_minimal_degrees",
   "claim_full_boundary_response_common_outer_box_comparison",
+  "claim_full_boundary_response_degree_at_most_one",
   "claim_full_boundary_response_outer_edges_to_one",
   "claim_galois_hyperoctahedral_bound",
   "claim_odd_flip_involution",
