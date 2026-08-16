@@ -15,6 +15,7 @@ export const ALL_LABELS = [
   "def_broken_edge_multiplicity",
   "def_broken_edge_set",
   "def_dual_edge_endpoint_map",
+  "def_dual_face_boundary_word",
   "def_edge_endpoint_label_set",
   "def_edge_spin_sign",
   "def_edge_subset_coefficient_map_over_f2",

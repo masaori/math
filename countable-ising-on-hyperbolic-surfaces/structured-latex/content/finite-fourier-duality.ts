@@ -710,4 +710,100 @@ E_{\mathrm{cell}}^\ast\times\mathsf{End}
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_dual_face_boundary_word",
+    kind: "definition",
+    title: { text: "双対面の向き付き境界語" },
+    labels: ["def_dual_face_boundary_word"],
+    habitat: "finite",
+    verification: ["sagemath/check/dual-face-boundary-word"],
+    statement: [
+      paragraph([
+        ref("def_dual_edge_endpoint_map"),
+        " の双対辺端点写像を固定する。各主頂点 ",
+        math(String.raw`v\in V_{\mathrm{cell}}`),
+        " に対し、",
+        ref("def_finite_cellulation_vertex_links_are_cycles"),
+        " の角位置集合 ",
+        math(String.raw`C_v`),
+        " を、対応する双対面 ",
+        math(String.raw`d_2(v)\in F_{\mathrm{cell}}^\ast`),
+        " の境界位置集合として用いる。角位置 ",
+        math(String.raw`c=(f,i)\in C_v`),
+        " の出発側の辺端を",
+      ]),
+      displayMath(String.raw`h_c^{\mathsf{departing}}
+:=
+h_{f,i}(\mathsf{departing})
+=
+\bigl(e_{f,s_f(i)},\iota(\omega_{f,s_f(i)})\bigr)
+\in E_{\mathrm{cell}}\times\mathsf{End}`),
+      paragraph([
+        "と書く。頂点リンク単巡回述語の辺端二回出現条件と辺の逆向き二回出現条件により、",
+        math(String.raw`h_c^{\mathsf{departing}}`),
+        " を到着側としてもつ角位置 ",
+        math(String.raw`c'=(g,j)\in C_v`),
+        " がただ一つ存在する。この角位置を ",
+        math(String.raw`s_v^\ast(c):=c'`),
+        " と定める。すなわち、",
+      ]),
+      displayMath(String.raw`h_{g,j}(\mathsf{arriving})
+=
+h_{f,i}(\mathsf{departing})
+\qquad
+\bigl(s_v^\ast(f,i)=(g,j)\bigr)`),
+      paragraph([
+        "である。各辺端には到着側と出発側が一つずつ現れるので、",
+        math(String.raw`s_v^\ast:C_v\to C_v`),
+        " は全単射である。さらに頂点リンク単巡回述語の連結条件により、任意の ",
+        math(String.raw`c,c'\in C_v`),
+        " に対して、ある ",
+        math(String.raw`r\in\mathbb N`),
+        " が存在して ",
+        math(String.raw`(s_v^\ast)^{\circ r}(c)=c'`),
+        " となる。したがって ",
+        math(String.raw`\mathcal P_{d_2(v)}^\ast:=(C_v,s_v^\ast)`),
+        " は有限な巡回位置系である。双対面 ",
+        math(String.raw`d_2(v)`),
+        " の向き付き境界語を、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\partial_{\mathrm{word}}^\ast d_2(v):C_v
+&\longrightarrow E_{\mathrm{cell}}^\ast\times\mathsf{Ori},\\
+(f,i)
+&\longmapsto
+\bigl(
+  d_1(e_{f,s_f(i)}),
+  \omega_{f,s_f(i)}
+\bigr)
+\end{aligned}`),
+      paragraph([
+        "で定める。",
+        math(String.raw`s_v^\ast(f,i)=(g,j)`),
+        " なら、同じ主辺の二つの面境界出現は逆向きであり、",
+        ref("def_dual_edge_endpoint_map"),
+        " の端点定義から双対境界の接続条件",
+      ]),
+      displayMath(String.raw`\partial_G^\ast\!\left(
+  d_1(e_{f,s_f(i)}),
+  \tau(\omega_{f,s_f(i)})
+\right)
+=
+\partial_G^\ast\!\left(
+  d_1(e_{g,s_g(j)}),
+  \iota(\omega_{g,s_g(j)})
+\right)`),
+      paragraph([
+        "が成り立つ。主頂点、角位置、主辺、双対辺、主面、双対頂点を同一視せず、移行には ",
+        math(String.raw`h_{f,i}`),
+        "、",
+        math(String.raw`s_v^\ast`),
+        "、",
+        math(String.raw`d_0,d_1,d_2`),
+        "、",
+        math(String.raw`\iota,\tau`),
+        " だけを用いる。全ての対象は有限集合であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
