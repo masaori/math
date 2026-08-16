@@ -10,6 +10,7 @@ import CellularAutomata.IterateMonoid
 import CellularAutomata.IterateMonoidIdempotents
 import CellularAutomata.IterateMonoidPrincipalIdealTail
 import CellularAutomata.IterateMonoidPrincipalIdealChain
+import CellularAutomata.IterateMonoidStabilizationIndex
 import CellularAutomata.LocalRuleRepresentation
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.EssentialDependency
