@@ -38,7 +38,10 @@
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) も読む。
 
-## 直近（2026-08-16 09:00 tick）
+## 直近（2026-08-16 18:45 tick）
+- 「増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい」の Lean 具体版（`eval_one_comp_outer_edges_to_one`・`fullBoundaryResponse_outer_edges_to_one_then_eval_one`、sorry 検査 127 件）。次は Lean 必要十分版（係数環一般化。ℤ の一意性が使えないので `C` の像の一致を仮定に置く見込み）。
+
+## 09:00 tick
 
 レビューのみ（08:45 tick と同内容）（検査 71 ブロック・SageMath 対応 17 件・sorry 検査 99 件・立場違反語走査・PDF に不備なし）。開始が遅く「境界応答多項式は外箱に依存しない」の記述は未着手。次の tick はその記述を行う。
 

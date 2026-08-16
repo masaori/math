@@ -287,6 +287,42 @@ theorem fullBoundaryResponse_eval_one_eq_card_configuration
   simp only [map_prod, eval_X, Finset.prod_const_one, Finset.sum_const, Finset.card_univ,
     nsmul_eq_mul, mul_one]
 
+/-- 増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい（人手証明
+`claim_full_boundary_response_outer_edges_to_one_then_value_at_one` の前半）。広い外箱の辺型 `Edge''` から
+元の外箱の辺型 `Edge` への環準同型 `π`（`π_{L'',L}`）が各不定元 `X e` を全変数を 1 に置くと `1` になる元へ送るなら、
+環準同型として `ε_L ∘ π = ε_{L''}`（両者が各不定元で `1` をとること、および ℤ からの環準同型の一意性と
+多変数多項式環の普遍性 `MvPolynomial.ringHom_ext`）。 -/
+theorem eval_one_comp_outer_edges_to_one
+    {Edge'' : Type*}
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hπ : ∀ e : Edge'', (eval fun _ : Edge ↦ (1 : ℤ)) (π (X e)) = 1) :
+    (eval fun _ : Edge ↦ (1 : ℤ)).comp π = eval fun _ : Edge'' ↦ (1 : ℤ) := by
+  refine MvPolynomial.ringHom_ext (fun r ↦ ?_) (fun e ↦ ?_)
+  · -- 定数項：ℤ からの環準同型は一意
+    exact RingHom.congr_fun
+      (RingHom.ext_int (((eval fun _ : Edge ↦ (1 : ℤ)).comp π).comp C)
+        ((eval fun _ : Edge'' ↦ (1 : ℤ)).comp C)) r
+  · -- 不定元：両者とも 1
+    simp [hπ e]
+
+/-- 同上の後半：`ε_L (π (Z̃_{L''})) = #(Configuration × Outer)`（人手証明では `2^{#V_{L''}}`）。
+前半の環準同型の等式と、全変数を 1 に置いた値が配位の総数であること。 -/
+theorem fullBoundaryResponse_outer_edges_to_one_then_eval_one
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hπ : ∀ e : Edge'', (eval fun _ : Edge ↦ (1 : ℤ)) (π (X e)) = 1) :
+    (eval fun _ : Edge ↦ (1 : ℤ)) (π (multivariatePartitionPolynomial broken'')) =
+      Fintype.card (Configuration × Outer) := by
+  have h := RingHom.congr_fun (eval_one_comp_outer_edges_to_one π hπ)
+    (multivariatePartitionPolynomial broken'')
+  rw [RingHom.comp_apply] at h
+  rw [h]
+  unfold multivariatePartitionPolynomial
+  rw [map_sum]
+  simp only [map_prod, eval_X, Finset.prod_const_one, Finset.sum_const, Finset.card_univ,
+    nsmul_eq_mul, mul_one]
+
 end
 
 end Ising3DCut
