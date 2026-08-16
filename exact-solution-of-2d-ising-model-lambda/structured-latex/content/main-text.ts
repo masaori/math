@@ -40284,6 +40284,168 @@ Z^{\mathrm{op}}_{a,b}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_block_tiling_log",
+    kind: "claim",
+    title: { text: "開境界正方形のブロック敷き詰め評価の対数化（Λ の鎖）" },
+    labels: ["claim_open_square_block_tiling_log"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-block-tiling-log"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.logRat_blockTilingLowerValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logRat_blockTilingUpperValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_one_le",
+    ],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`a,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、各 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " に対し、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+2k(k-1)a\,\log q+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{ka,ka}(q)
+\ \le_{\Lambda}\ k^2\,\log Z^{\mathrm{op}}_{a,a}(q),\\[2mm]
+1\le q:&
+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{ka,ka}(q)
+\ \le_{\Lambda}\ 2k(k-1)a\,\log q+k^2\,\log Z^{\mathrm{op}}_{a,a}(q).
+\end{array}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q),\ Z^{\mathrm{op}}_{ka,ka}(q)\in\mathbb{Q}_{>0}`),
+        " は開境界分配多項式の正の有理点での値（",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。正値性は ",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）、",
+        math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、整数倍 ",
+        math(String.raw`2k(k-1)a\,\cdot`),
+        " と ",
+        math(String.raw`k^2\,\cdot`),
+        " と加法は ",
+        ref("def_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda}`),
+        " は ",
+        ref("def_log_order_group_order"),
+        " の順序である。",
+        ref("claim_open_square_block_tiling_rational"),
+        " の二場合の上下評価の両辺の対数を取ったものであり、実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。第一に、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`a:=a`),
+        "、",
+        math(String.raw`b:=a`),
+        " と ",
+        math(String.raw`a:=ka`),
+        "、",
+        math(String.raw`b:=ka`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q),\ Z^{\mathrm{op}}_{ka,ka}(q)\in\mathbb{Q}_{>0}`),
+        " である。また ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " なので、正の有理数の自然数冪と正の有理数どうしの積は正であることから、",
+        math(String.raw`q^{(k-1)(ka)}\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k`),
+        " と ",
+        math(String.raw`\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k`),
+        " はいずれも ",
+        math(String.raw`\mathbb{Q}_{>0}`),
+        " の元であり、対数 ",
+        ref("def_rational_log"),
+        " を施せる。",
+      ]),
+      paragraph([
+        "第二に、下からの評価の側の値の対数を、",
+        math(String.raw`\Lambda`),
+        " の中で開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\Bigl(q^{(k-1)(ka)}\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&=\log\bigl(q^{(k-1)(ka)}\bigr)+\log\Bigl(\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&=(k-1)(ka)\,\log q+k\,\log\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=(k-1)(ka)\text{ と }k:=k\text{ で二項へ同時適用。整数倍は }\blkref{def_log_order_group})\\
+&=(k-1)(ka)\,\log q+k\,\bigl(\log\bigl(q^{(k-1)a}\bigr)+\log\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)\bigr)
+&&(\because\ \blkref{claim_log_additive})\\
+&=(k-1)(ka)\,\log q+k\,\bigl((k-1)a\,\log q+k\,\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=(k-1)a\text{ と }k:=k\text{ で二項へ同時適用})\\
+&=(k-1)(ka)\,\log q+k(k-1)a\,\log q+k\cdot k\,\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{def_log_order_group}\text{ の整数倍は素数ごとの }\mathbb{Z}\text{ の積なので、分配則 }n(\lambda+\mu)=n\lambda+n\mu\text{ と結合則 }n(m\lambda)=(nm)\lambda)\\
+&=2k(k-1)a\,\log q+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{同じ元の整数倍の和 }n\lambda+m\lambda=(n+m)\lambda\text{（素数ごとの }\mathbb{Z}\text{ の分配則）と整数の計算 }(k-1)(ka)+k(k-1)a=2k(k-1)a\text{、}k\cdot k=k^2)
+\end{aligned}`),
+      paragraph([
+        "第三に、上からの評価の側の値の対数を、同じく ",
+        math(String.raw`\Lambda`),
+        " の中で開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\Bigl(\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&=k\,\log\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)
+&&(\because\ \blkref{claim_log_power})\\
+&=k\,\bigl(k\,\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ \blkref{claim_log_power})\\
+&=k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{def_log_order_group}\text{ の整数倍の結合則 }n(m\lambda)=(nm)\lambda\text{ と }k\cdot k=k^2)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<q\le1`),
+        " とする。主張の左の元から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2k(k-1)a\,\log q+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+&=\log\Bigl(q^{(k-1)(ka)}\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&&(\because\ \text{準備の第二を右辺から左辺の向きで読む})\\
+&\le_{\Lambda}\log Z^{\mathrm{op}}_{ka,ka}(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_square_block_tiling_rational}\text{ の }0<q\le1\text{ の下からの評価を移す})\\
+&\le_{\Lambda}\log\Bigl(\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_square_block_tiling_rational}\text{ の }0<q\le1\text{ の上からの評価を移す})\\
+&=k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{準備の第三})
+\end{aligned}`),
+      paragraph([
+        "この鎖の第二行までが主張の左の不等式、第三行から第四行までが主張の右の不等式である。",
+        math(String.raw`1\le q`),
+        " の場合は、",
+        ref("claim_open_square_block_tiling_rational"),
+        " の二つの評価の向きがともに反転するので、主張の左の元から始める同じ形の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+&=\log\Bigl(\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&&(\because\ \text{準備の第三を右辺から左辺の向きで読む})\\
+&\le_{\Lambda}\log Z^{\mathrm{op}}_{ka,ka}(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_square_block_tiling_rational}\text{ の }1\le q\text{ の下からの評価を移す})\\
+&\le_{\Lambda}\log\Bigl(q^{(k-1)(ka)}\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_square_block_tiling_rational}\text{ の }1\le q\text{ の上からの評価を移す})\\
+&=2k(k-1)a\,\log q+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、開境界正方形のブロック敷き詰め評価（正の有理点）、対数が順序を保ちかつ反映すること、対数の加法性と冪の法則、および ",
+        ref("def_log_order_group"),
+        " の整数倍の素数ごとの計算だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

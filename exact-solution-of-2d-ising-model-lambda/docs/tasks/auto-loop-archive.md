@@ -3,6 +3,32 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 322）の記録
+
+### 現在地
+- **2026-08-16 の tick 322 は、「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean（定義と各素数での値の鎖）まで完成させた。**
+  `def_open_square_free_entropy_density`（`claim_periodic_open_boundary_comparison_rational` の直後・実数体脱出の宣言の直前、住処 Lambda）で、
+  $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi^{\mathrm{op}}_L(q):=\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\log Z^{\mathrm{op}}_{L,L}(q))\in\Lambda_{\mathbb Q}$。
+  周期境界側 `def_finite_free_entropy_density` と同じ形（右辺の確定・各素数での値の三段の鎖・写像と値の区別・$\psi^{\mathrm{op}}_L$ との区別・具体例 $L=2$、$q=1/2$:
+  $Z^{\mathrm{op}}_{2,2}(1/2)=41/8$、$\Psi^{\mathrm{op}}_2(1/2)=\frac14\cdot\iota(\ell_{41}-3\ell_2)$）。SageMath 178 検査（`ZZ`/`QQ`・素因数分解）、Lean `openScaledFreeEntropy`・
+  `openScaledFreeEntropy_apply`（`ThermodynamicLimit/OpenSquareFreeEntropyDensity.lean`）、sorry 検査 1199 件。備考どおり定義 1・主張 2 の塊を割り、
+  「値の下界 1（$\mathbb Q$ 版）と密度の非負性」「値の上界（$\mathbb Q$ 版）」「密度の上界（$\Lambda_{\mathbb Q}$ 版）」を次に並べた。前 tick の周期境界と開境界の比較（$\mathbb Q$ 版）のレビューに不一致なし。
+
+### 前進の記録
+- 2026-08-16（tick 322）: `def_open_square_free_entropy_density` を `claim_periodic_open_boundary_comparison_rational` の直後（`remark_real_field_escape` の直前）
+  に置き、記述・SageMath・Lean（定義）で閉じた。周期境界の `def_finite_free_entropy_density` と同じ形で、$\Phi_L(q)$ の代わりに `def_rational_log` の対数
+  $\log Z^{\mathrm{op}}_{L,L}(q)$ を直接置く（$\Phi^{\mathrm{op}}$ のような新記号は導入しない）。値は `def_open_rectangle_partition_value_at_positive_rational`、
+  正値性は `claim_open_rectangle_value_at_rational_is_positive` を引く。SageMath `open-square-free-entropy-density`（$L\in\{1,2,3\}$ × 正の有理点 9 点、178 検査。
+  代入と配位和の一致・正値性・三段の鎖・台の一致・具体例）。Lean `ThermodynamicLimit/OpenSquareFreeEntropyDensity.lean`（`openScaledFreeEntropy`（`[NeZero L]`）・
+  `openScaledFreeEntropy_apply`。`scaledFreeEntropy` と同じ三段の calc）。定義なので必要十分版・導出版は無い。sorry 検査 1199 件。
+  セクション「定義と非負性・上界」は論法が複数（定義・下界 1 と非負性・値の上界・密度の上界）なので、備考どおり 4 つに割り、残り 3 行を表の先頭に並べた。
+  式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+- 2026-08-16（tick 322）: 前 tick の「周期境界と開境界の比較（$\mathbb Q$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・Lean 具体版・
+  必要十分版（$\mathbb R$ 版と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、二場合の上下評価・全単射と分解・境界因子の順序・鎖の各行の根拠が
+  一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 321）の記録
 
 ### 現在地

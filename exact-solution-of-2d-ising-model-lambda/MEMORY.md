@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 327 は、前 tick の「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」を論法の数で「$\Lambda$ の鎖」と「密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」へ割り、
+前半「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」を本文・SageMath・Lean 具体版まで進めた（必要十分版・導出版は次 tick）。
+`claim_open_square_block_tiling_log`（`claim_open_square_free_entropy_density_upper_bound` の直後、`remark_real_escape_plan` の直前、住処 Lambda）で、
+$a,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $2k(k-1)a\log q+k^2\log Z^{\mathrm{op}}_{a,a}(q)\le_\Lambda\log Z^{\mathrm{op}}_{ka,ka}(q)\le_\Lambda k^2\log Z^{\mathrm{op}}_{a,a}(q)$、
+$1\le q$: その反転。証明は準備 3 つ（値と両側の評価の値の正値性・下からの評価の側の値の対数を開く六段（`claim_log_additive`・`claim_log_power`・整数倍の分配則と結合則・
+$n\lambda+m\lambda=(n+m)\lambda$ と $(k-1)(ka)+k(k-1)a=2k(k-1)a$）・上からの評価の側の三段）と、二場合とも `claim_rational_log_order_iff` で
+`claim_open_square_block_tiling_rational` の評価を移す 4 段の鎖。SageMath `open-square-block-tiling-log`（形 $(a,k)$ 5 通り × 正の有理点 9 点、650 検査、`ZZ`/`QQ`・有限台辞書）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareBlockTilingLog.lean`（`logRat_blockTilingLowerValue_eq`・`logRat_blockTilingUpperValue_eq`・
+`logOrderLE_openSquareBlockTilingLog_bounds_of_le_one`／`_of_one_le`。係数の整理は `generalize k - 1 = m; ring` と `smul_add`・`smul_smul`・`add_smul`）。sorry 検査 1214 件。
+次はこのセクションの必要十分版・導出版（順序埋め込みを通した二側の移送と対数の準同型性。`NecSuf/FreeEntropy` の既存補題に共有候補が無いか先に確かめる）、
+そのあと「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」（$\frac{1}{(ka)^2}\cdot\iota$ で移送し
+$\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)$ と $\Psi^{\mathrm{op}}_a(q)$ で挟む。$\frac{2k(k-1)a}{k^2a^2}=\frac{2(k-1)}{ka}$ の約分と
+`claim_scaled_embedding_order_transfer`・`claim_scaled_free_entropy_denominator_clearing` の準備の第三を使う見込み）。
+
 2026-08-16 の tick 326 は、前 tick の「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_square_free_entropy_density_upper_bound`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後、`remark_real_escape_plan` の直前、住処 Lambda）で、
