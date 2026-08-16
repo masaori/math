@@ -193,6 +193,27 @@ theorem brokenMonomial_exponent_at_broken_edge
     rw [Finsupp.finsetSum_apply]
     simp [Finsupp.single_apply, hτ]
 
+/-- 同じ主張の第二歩。辺 `e₀` を破る配位 `τ` の単項式の、辺変数を 1 に置かない境界応答多項式に
+おける係数は 1 以上である（同じ破れ辺集合をもつ配位の個数であり、`τ` 自身が数えられる）。 -/
+theorem fullBoundaryResponse_one_le_coeff_brokenMonomial
+    (broken : Configuration → Finset Edge) (τ : Configuration) :
+    1 ≤ coeff (∑ e ∈ broken τ, Finsupp.single e 1) (multivariatePartitionPolynomial broken) := by
+  unfold multivariatePartitionPolynomial
+  rw [coeff_sum]
+  have hmono : ∀ σ : Configuration, (∏ e ∈ broken σ, (X e : MvPolynomial Edge ℤ)) =
+      monomial (∑ e ∈ broken σ, Finsupp.single e 1) 1 := fun σ ↦ by
+    rw [monomial_sum_index, C_1, one_mul]; rfl
+  simp_rw [hmono, coeff_monomial]
+  -- τ の項は 1、他の項は 0 以上
+  calc (1 : ℤ)
+      = if (∑ e ∈ broken τ, Finsupp.single e 1) = (∑ e ∈ broken τ, Finsupp.single e 1)
+          then 1 else 0 := by simp
+    _ ≤ ∑ σ, if (∑ e ∈ broken σ, Finsupp.single e 1) = (∑ e ∈ broken τ, Finsupp.single e 1)
+          then 1 else 0 :=
+        Finset.single_le_sum (f := fun σ ↦ if (∑ e ∈ broken σ, Finsupp.single e 1) =
+            (∑ e ∈ broken τ, Finsupp.single e 1) then (1 : ℤ) else 0)
+          (fun σ _ ↦ by split_ifs <;> simp) (Finset.mem_univ τ)
+
 end
 
 end Ising3DCut
