@@ -48,6 +48,7 @@ export const ALL_LABELS = [
   "def_boundary_response_polynomial",
   "def_box",
   "def_broken_count",
+  "def_coarse_graining_sufficient_and_not_necessary_for_limit_quantity",
   "def_configuration",
   "def_edge_set",
   "def_endpoint_maps",
