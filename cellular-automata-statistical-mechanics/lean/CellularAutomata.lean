@@ -16,6 +16,7 @@ import CellularAutomata.IterateMonoidTailCycleDecomposition
 import CellularAutomata.IterateMonoidCycleIdempotent
 import CellularAutomata.IterateMonoidCyclicGroup
 import CellularAutomata.IterateMonoidStableImage
+import CellularAutomata.IterateMonoidStablePartition
 import CellularAutomata.LocalRuleRepresentation
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.EssentialDependency
