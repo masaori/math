@@ -37337,6 +37337,85 @@ N\cdot(\lambda+\nu)
   },
 
   {
+    id: "thermodynamic_limit_claim_rational_log_order_group_neg_reverses_order",
+    kind: "claim",
+    title: { text: "有理係数の対数順序群の逆元は順序を反転する" },
+    labels: ["claim_rational_log_order_group_neg_reverses_order"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/rational-log-order-group-neg-reverses-order"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_neg_le_neg",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.neg_le_neg_of_le_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_neg_le_neg_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\lambda,\mu\in\Lambda_{\mathbb{Q}}`),
+        " について",
+      ]),
+      displayMath(String.raw`\lambda\le_{\Lambda_{\mathbb{Q}}}\mu
+\quad\Longrightarrow\quad
+-\mu\le_{\Lambda_{\mathbb{Q}}}-\lambda`),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の関係、",
+        math(String.raw`-\lambda`),
+        " は ",
+        ref("def_rational_log_order_group"),
+        " の加法の逆元である。",
+        ref("claim_rational_log_order_group_add_monotone"),
+        " で両辺に同じ元を足すだけで得られ、順序の定義の中身（共通分母）には触れない。後の差の下からの評価と Cauchy 性で繰り返し引く。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_rational_log_order_group_add_monotone"),
+        " で仮定 ",
+        math(String.raw`\lambda\le_{\Lambda_{\mathbb{Q}}}\mu`),
+        " の両辺に ",
+        math(String.raw`\nu:=(-\lambda)+(-\mu)`),
+        " を足すと ",
+        math(String.raw`\lambda+\bigl((-\lambda)+(-\mu)\bigr)\le_{\Lambda_{\mathbb{Q}}}\mu+\bigl((-\lambda)+(-\mu)\bigr)`),
+        " である。その左辺と右辺をそれぞれ整える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda+\bigl((-\lambda)+(-\mu)\bigr)
+&=\bigl(\lambda+(-\lambda)\bigr)+(-\mu)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の結合則})\\
+&=0+(-\mu)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }\lambda+(-\lambda)=0)\\
+&=-\mu
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\mu+\bigl((-\lambda)+(-\mu)\bigr)
+&=\mu+\bigl((-\mu)+(-\lambda)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
+&=\bigl(\mu+(-\mu)\bigr)+(-\lambda)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の結合則})\\
+&=0+(-\lambda)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }\mu+(-\mu)=0)\\
+&=-\lambda
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})
+\end{aligned}`),
+      paragraph([
+        "左辺が ",
+        math(String.raw`-\mu`),
+        "、右辺が ",
+        math(String.raw`-\lambda`),
+        " に等しいので、上の不等式は ",
+        math(String.raw`-\mu\le_{\Lambda_{\mathbb{Q}}}-\lambda`),
+        " である。使ったのは、加法単調性、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の加法の結合則・交換則・逆元・単位元だけであり、順序の定義の中身にも有理数倍にも触れない。実数体は現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_def_finite_free_entropy_density",
     kind: "definition",
     title: { text: "有限系の自由エントロピー密度" },

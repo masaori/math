@@ -131,6 +131,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_add_right
   Ising2DLambda.NecSuf.ThermodynamicLimit.indexedLE_add_right_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_add_right_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_neg_le_neg
+  Ising2DLambda.NecSuf.ThermodynamicLimit.neg_le_neg_of_le_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_neg_le_neg_from_necSuf
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos
   Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf
   Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos

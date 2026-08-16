@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 351 で台帳から移した記録（tick 346 分）
+
+### 現在地
+
+- **2026-08-16 の tick 346 は、台帳の先頭行「倍数でない辺の密度と基準辺の密度の差の評価」を上端と下端の二行へ割り、その上端「倍数でない辺の密度の基準辺の密度による上からの評価」（$a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L\le\frac{2a}L\iota(\ell_2)+\frac{4a}L\iota(\log(1+q))+\Psi^{\mathrm{op}}_a$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one`（`claim_open_square_multiple_side_density_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 3 つ（$\mathbb Q$ の係数比較 $\frac{(ka)^2}{L^2}\le1$／符号 $0\le\Psi^{\mathrm{op}}_{ka}$（`claim_open_square_free_entropy_density_nonnegative` を $L:=ka$ で読む）／非負の元の係数比較 $\frac{(ka)^2}{L^2}\Psi_{ka}\le1\cdot\Psi_{ka}=\Psi_{ka}\le\Psi_a$（`claim_open_square_multiple_side_density_vs_base_side_le_one` の右へ推移律））と、誤差評価の右・加法単調性（交換則で末尾の項を先頭へ寄せる）・推移律の本体二段。
+  SageMath `check/open-square-non-multiple-side-density-upper-vs-base-side/`（$(a,k,L)$ 三組（$L\le3$）× 6 点、180 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareNonMultipleSideDensityUpperVsBaseSide.lean`（`multipleSide_square_ratio_le_one`・`rationalLogOrderLE_openSquareNonMultipleSideDensity_upper_vs_baseSide_of_le_one`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareNonMultipleSideDensityUpperVsBaseSide.lean`（`upper_bound_enlarge_last_term_necSuf`。`[AddCommMagma X]` と推移律・右加法単調性・交換則だけ）、導出版。sorry 検査 1292 件。
+  割った理由: 上端は非負の係数比較で $\Psi_{ka}$ の項を $\Psi_a$ へ置き換えるだけだが、下端は $\frac{(ka)^2}{L^2}\Psi_{ka}$ を $\Psi_{ka}$ と誤差 $\frac{L^2-(ka)^2}{L^2}\Psi_{ka}$ に分けて上からの評価 $C$ で押さえ、逆元を足して移項する別の論法なので、二行に分けた。前 tick のレビューでは修正なし。次は「倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 346）: 台帳の先頭行「倍数でない辺の密度と基準辺の密度の差の評価（$0<q\le1$）」は上端（非負の係数比較で $\Psi_{ka}$ の項を $\Psi_a$ へ置き換える）と下端（$\frac{(ka)^2}{L^2}\Psi_{ka}$ を $\Psi_{ka}$ と誤差に分けて上からの評価で押さえ、逆元を足して移項する）で論法が違うので二行へ割った。その上端「倍数でない辺の密度の基準辺の密度による上からの評価」を実行し、`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` を `claim_open_square_multiple_side_density_vs_base_side_le_one` の直後に置いた。
+  証明は $\frac{(ka)^2}{L^2}\le1$・密度の非負性・非負の係数比較・倍数辺の差の評価の右・誤差評価の右・加法単調性（交換則）・推移律。SageMath `open-square-non-multiple-side-density-upper-vs-base-side`、Lean 具体版・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1292 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 346）: 前 tick の「倍数辺の密度と基準辺の密度の差の評価」の本文（準備 3 つ・左二段・右）・SageMath overview（270 検査）・Lean 具体版（`blockTiling_lower_coefficient_le_two_div`・`rationalLogOrderLE_toRational_logRat_nonpos_of_le_one`・`rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos`・`rationalLogOrderLE_add_right`・`rationalLogOrderLE_trans` が本文の準備第一〜第三と本体に 1 対 1）・必要十分版（推移律・右加法単調性）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は下端の係数を $k$ によらない形へ大きくする比較で Cauchy 性の倍数辺の側が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 350 で台帳から移した記録（tick 345 分）
 
 ### 現在地

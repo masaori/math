@@ -4,6 +4,15 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 351 は、前 tick の「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「有理係数の対数順序群の逆元は順序を反転する」を四層で閉じた。`claim_rational_log_order_group_neg_reverses_order`（`claim_rational_log_order_group_add_monotone` の直後・`def_finite_free_entropy_density` の直前、住処 Lambda。$\Lambda_{\mathbb Q}$ の順序の一般的な性質なので密度の評価の列ではなく順序の性質の並びに置いた）: 任意の $\lambda,\mu\in\Lambda_{\mathbb Q}$ で $\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow-\mu\le_{\Lambda_{\mathbb Q}}-\lambda$。
+証明は `claim_rational_log_order_group_add_monotone` で両辺に $\nu:=(-\lambda)+(-\mu)$ を足し、左辺 $\lambda+((-\lambda)+(-\mu))=(\lambda+(-\lambda))+(-\mu)=0+(-\mu)=-\mu$（結合則・逆元・単位元）、右辺 $\mu+((-\lambda)+(-\mu))=\mu+((-\mu)+(-\lambda))=(\mu+(-\mu))+(-\lambda)=0+(-\lambda)=-\lambda$（交換則・結合則・逆元・単位元）。順序の定義の中身（共通分母）にも有理数倍にも触れない。
+SageMath `check/rational-log-order-group-neg-reverses-order/`（素数 $2,3,5$ の係数 5 通りの 125 ベクトル。$\lambda\le\mu$ の組 7875 件で主張と左右の鎖、満たさない組 7750 件で否定側。10 秒）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupNegReversesOrder.lean`（`rationalLogOrderLE_neg_le_neg`。`rationalLogOrderLE_add_right h (-l + -m)`、`← add_assoc`・`add_neg_cancel`・`zero_add`、右辺は先に `add_comm (-l) (-m)`）、
+必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupNegReversesOrder.lean`（`neg_le_neg_of_le_necSuf`。`[AddCommMonoid X] [Neg X]` と右加法単調性・逆元律 $x+(-x)=0$ の 1 本だけ。$(-x)+x=0$ も推移律も要らない）、導出版 `RationalLogOrderGroupNegReversesOrderFromNecSuf.lean`。sorry 検査 1309 件。
+Cauchy 列の定義の隣にある `rationalLogOrderLE_neg_of_nonneg`（$0\le\varepsilon\Rightarrow-\varepsilon\le0$）はこの一般形の特殊化だが、そのまま残してある（本文の対応物が Cauchy 列の定義の中の補助なので）。
+次は「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」（差の上端を辺 $M,L$ を入れ替えて読み、逆元の順序反転で $-R_a\le-(\Psi_M+(-\Psi_L))$、そして $-(\Psi_M+(-\Psi_L))=\Psi_L+(-\Psi_M)$ を `def_rational_log_order_group` の逆元を素数ごとに読んで示す）。
+
 2026-08-17 の tick 350 は、前 tick の「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で五行へ割った（「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」→「有理係数の対数順序群の逆元は順序を反転する」→「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」→「差の両側の評価を $\frac1a$ 倍の形へまとめる」→「密度の列の Cauchy 性」。手順は台帳の備考）。
 そのうえで最初の行を四層で閉じた。`claim_open_square_large_sides_density_difference_upper_le_one`（`claim_open_square_large_side_density_lower_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$a<L$、$a<M$、$a^2\le L$、$a^2\le M$、$0<q\le1$ で
@@ -3976,9 +3985,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」（`claim_open_square_large_sides_density_difference_upper_le_one`）の本文（準備 1 つ・本体六段）・SageMath
-  `open-square-large-sides-density-difference-upper`・Lean 具体版・必要十分版・導出版を突き合わせる。
-- **次に進めるセクションは「有理係数の対数順序群の逆元は順序を反転する」**（状態台帳のセクション表の先頭行。備考に手順）。
+- **レビュー**: 「有理係数の対数順序群の逆元は順序を反転する」（`claim_rational_log_order_group_neg_reverses_order`）の本文（左辺三段・右辺四段）・SageMath
+  `rational-log-order-group-neg-reverses-order`・Lean 具体版・必要十分版・導出版を突き合わせる。
+- **次に進めるセクションは「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
