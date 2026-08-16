@@ -121,4 +121,10 @@ theorem fullBoundaryResponse_degreeOf_eq_one_fromNecSuf
     degreeOf e₀ (multivariatePartitionPolynomial broken) = 1 :=
   NecSuf.fullBoundaryResponse_degreeOf_eq_one (R := ℤ) broken e₀ τ hτ
 
+/-- 全次数は辺の総数以下を必要十分版（`R := ℤ`）から導く。 -/
+theorem fullBoundaryResponse_totalDegree_le_card_edge_fromNecSuf
+    (broken : Configuration → Finset Edge) :
+    (multivariatePartitionPolynomial broken).totalDegree ≤ Fintype.card Edge :=
+  NecSuf.fullBoundaryResponse_totalDegree_le_card_edge (R := ℤ) broken
+
 end Ising3DCut

@@ -211,3 +211,29 @@ theorem fullBoundaryResponse_degreeOf_eq_one [Nontrivial R] [CharZero R]
   rwa [hexp] at hle
 
 end Ising3DCut.NecSuf
+
+namespace Ising3DCut.NecSuf
+
+open MvPolynomial
+
+variable {Configuration Edge R : Type*} [CommSemiring R]
+variable [Fintype Configuration] [Fintype Edge] [DecidableEq Edge]
+
+/-- 辺変数を 1 に置かない境界応答多項式の全次数は辺の総数以下、の必要十分版
+（人手証明 `claim_full_boundary_response_total_degree_is_edge_count` の前半）。
+係数環は可換半環 `R` でよい。辺型の有限性 `Fintype Edge` は結論の `#Edge` を書くために残る。
+`Nontrivial R` は mathlib の `totalDegree_X`（`X e` の全次数が 1）が要求するので置く（`ℤ` は満たす）。
+証明は具体版と同順（有限和の全次数は各項の最大値以下、相異なる不定元の積の全次数は
+破れ辺の個数、それは辺の総数以下）。 -/
+theorem fullBoundaryResponse_totalDegree_le_card_edge [Nontrivial R]
+    (broken : Configuration → Finset Edge) :
+    (multivariatePartitionPolynomial (R := R) broken).totalDegree ≤ Fintype.card Edge := by
+  unfold multivariatePartitionPolynomial
+  refine (totalDegree_finsetSum _ _).trans (Finset.sup_le fun σ _ ↦ ?_)
+  refine (totalDegree_finsetProd _ _).trans ?_
+  calc ∑ e ∈ broken σ, (X e : MvPolynomial Edge R).totalDegree
+      = ∑ e ∈ broken σ, 1 := Finset.sum_congr rfl fun e _ ↦ totalDegree_X e
+    _ = (broken σ).card := by simp
+    _ ≤ Fintype.card Edge := Finset.card_le_univ _
+
+end Ising3DCut.NecSuf

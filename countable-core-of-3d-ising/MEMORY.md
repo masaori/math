@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 16:48: 「全次数は辺の総数に等しい」の Lean 必要十分版を割り、前半 `NecSuf.fullBoundaryResponse_totalDegree_le_card_edge`（可換半環 `R`・`Nontrivial R` は `totalDegree_X` が要求・`Fintype Edge` は結論の $\#E_L$ のため残る）と導出 `_fromNecSuf`（`Lean 必要十分版の途中`。sorry 検査 120 件 OK）。次は後半（全次数 $=\#E_L$ の必要十分版。係数非零に `CharZero R`）と導出。
 - 2026-08-16 16:17: 「全次数は辺の総数に等しい」の Lean 具体版の後半 `fullBoundaryResponse_totalDegree_eq_card_edge`（全辺を破る配位を仮定に取り、その単項式が台に属し `le_totalDegree` で下界。`Lean 具体版まで`。sorry 検査 118 件 OK）。次は同主張の Lean 必要十分版（可換半環・`Nontrivial R`、`Fintype Edge` は結論に残るか要検討）と具体版からの導出。
 - 2026-08-16 15:47: 「全次数は辺の総数に等しい」を SageMath 検証（`sagemath/check/full-boundary-response-total-degree-is-edge-count/`、PASS。$\Omega_L(12)=2$、全次数 12。`記述と SageMath まで`。検証対応 23 件）。次は同主張の Lean 具体版（`MvPolynomial.totalDegree`、単項式の全次数 ≤ #E_L と全辺単項式の係数 ≥ 2）。
 - 2026-08-16 15:34: 主標的の todo が無かったので「全次数は辺の総数に等しい」を台帳へ置き記述（`claim_full_boundary_response_total_degree_is_edge_count`。単項式の全次数 $\#B(\sigma)\le\#E_L$ と $\prod_{e\in E_L}X_e$ の係数 $\Omega_L(\#E_L)\ge2$。`記述まで`。79 ブロック・相互参照 94 件）。次は同主張の SageMath 検証（小さい箱で各単項式の全次数と全辺単項式の係数を `ZZ` 上で確認）。
