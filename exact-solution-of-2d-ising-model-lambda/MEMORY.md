@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 345 は、前 tick の「倍数辺の部分正方形による密度の挟み込みの誤差評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で四行へ割った（「倍数辺の密度と基準辺の密度の差の評価」→「倍数でない辺の密度と基準辺の密度の差の評価」→「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価」→「密度の列の Cauchy 性」。手順は台帳の備考）。
+そのうえで最初の行を四層で閉じた。`claim_open_square_multiple_side_density_vs_base_side_le_one`（`claim_open_square_multiple_side_subsquare_density_error_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$0<q\le1$ で
+$\frac2a\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_a(q)$。
+証明は準備 3 つ（$\mathbb Q$ の係数比較 $\frac{2(k-1)}{ka}\le\frac{2k}{ka}=\frac2a$／符号 $\iota(\log q)\le0$（`claim_rational_embedded_log_order_iff` を $q':=1$ で読み $\log1=0$・$\iota(0)=0$）／`claim_rational_log_order_group_scalar_compare_nonpos`）と、
+`claim_rational_log_order_group_add_monotone`・推移律による左の二段。右は `claim_open_square_block_tiling_density` の右そのもの。
+SageMath `check/open-square-multiple-side-density-vs-base-side/`（$(a,k)=(1,1),(1,2),(1,3),(2,1),(3,1)$ × 6 点、270 検査、19 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareMultipleSideDensityVsBaseSide.lean`（`blockTiling_lower_coefficient_le_two_div`（`Nat.sub_le`・`div_le_div_of_nonneg_right`・`field_simp`）・`rationalLogOrderLE_openSquareMultipleSideDensity_vs_baseSide_of_le_one`。符号は誤差評価の補助定理 `rationalLogOrderLE_toRational_logRat_nonpos_of_le_one` を再利用）、
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareMultipleSideDensityVsBaseSide.lean`（`twoSided_bounds_enlarge_lower_coefficient_necSuf`。`[Add X]` と推移律・右加法単調性だけ。上端に触れないので交換則も要らない）、導出版 `OpenSquareMultipleSideDensityVsBaseSideFromNecSuf.lean`。sorry 検査 1288 件。
+次は「倍数でない辺の密度と基準辺の密度の差の評価（$0<q\le1$）」（台帳の備考に手順。上端は $\frac{(ka)^2}{L^2}\Psi_{ka}\le\Psi_{ka}\le\Psi_a$、下端は $\Psi_{ka}-\frac{L^2-(ka)^2}{L^2}\Psi_{ka}$ と上からの評価 $C$ で $\frac{2a}LC$ に押さえる。論法が二つ以上なら着手時に割る）。
+
 2026-08-16 の tick 344 は、前 tick の「埋め込んだ対数の順序は正の有理数の順序と一致する」の四層を突き合わせて一致を確認し（statement の読み方の例で主張自身の変数 $q$ を再利用していた箇所を $p$ に改めた。別コミット）、
 台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」を四層で閉じた。
 `claim_open_square_multiple_side_subsquare_density_error_bound`（`claim_rational_embedded_log_order_iff` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で
@@ -3914,9 +3925,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「倍数辺との平方の差の評価」（`claim_square_difference_from_multiple_side_bound`）の本文（七段の鎖）・SageMath
-  `square-difference-from-multiple-side-bound`・Lean 具体版・必要十分版・導出版を突き合わせる。
-- **次に進めるセクションは「非負有理数倍は有理係数の対数順序群の順序を保つ」**（状態台帳のセクション表の先頭行。$u=0$ の場合分けが要る）。
+- **レビュー**: 「倍数辺の密度と基準辺の密度の差の評価」（`claim_open_square_multiple_side_density_vs_base_side_le_one`）の本文（準備 3 つ・左の二段）・SageMath
+  `open-square-multiple-side-density-vs-base-side`・Lean 具体版・必要十分版・導出版を突き合わせる。
+- **次に進めるセクションは「倍数でない辺の密度と基準辺の密度の差の評価（$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順。論法が二つ以上なら着手時に割る）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。

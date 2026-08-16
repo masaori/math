@@ -3,6 +3,28 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16 tick 345 で台帳から移した記録（tick 340 分）
+
+### 現在地
+
+- **2026-08-16 の tick 340 は、台帳の先頭行「非負有理数倍は有理係数の対数順序群の順序を保つ」（$c\in\mathbb Q$、$0\le c$、$\lambda\le_{\Lambda_{\mathbb Q}}\mu$ なら $c\cdot\lambda\le_{\Lambda_{\mathbb Q}}c\cdot\mu$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_nonneg_scalar_monotone`（`claim_square_difference_from_multiple_side_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は $u:=\operatorname{num}(c)\in\mathbb N$、$v:=\operatorname{den}(c)\ge1$ を置き、仮定を「ある $N$」の形で読んで $\lambda_N\le_\Lambda\mu_N$ となる共通分母 $N$ を取り、
+  六段の鎖 $(vN)\cdot(c\cdot\lambda)=((vN)c)\cdot\lambda=((vc)N)\cdot\lambda=(uN)\cdot\lambda=u\cdot(N\cdot\lambda)=u\cdot\iota(\lambda_N)=\iota(u\lambda_N)$ で $vN$ が $c\cdot\lambda$・$c\cdot\mu$ の共通分母（証人 $u\lambda_N$・$u\mu_N$）であることを示し、$u\ge1$ は `claim_log_order_group_positive_multiple_invariant`、$u=0$ は零写像と反射律で証人の順序を得る。
+  SageMath `check/rational-log-order-group-nonneg-scalar-monotone/`（64 ベクトル × 係数 5 点、主張 10400 件・鎖 10400 件。125 ベクトル × 7 点は 2 分で終わらず縮めた）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupNonnegScalarMonotone.lean`（`commonDenominator_ratSmul`・`logOrderLE_natSmul_of_le`・`rationalLogOrderLE_ratSmul_of_nonneg`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupNonnegScalarMonotone.lean`（`indexedLE_scale_necSuf`。添字・元・証人それぞれへの作用が `Rep` と `le` を保てばよい。$c$ の非負性は証人側の作用が順序を保つ理由にだけ入る）、導出版。sorry 検査 1268 件。
+  次は「係数の大小による有理数倍の比較」（台帳の備考に手順）。
+
+### 前進の記録
+
+- 2026-08-16（tick 340）: 台帳の先頭行「非負有理数倍は有理係数の対数順序群の順序を保つ」を実行した。`claim_rational_log_order_group_nonneg_scalar_monotone` を `claim_square_difference_from_multiple_side_bound` の直後に置いた。
+  証明は台帳の備考のとおり（既約分数表示 $c=u/v$、共通分母 $vN$ と証人 $u\lambda_N$・$u\mu_N$ の六段の鎖、$u\ge1$ と $u=0$ の場合分け）。
+  SageMath `rational-log-order-group-nonneg-scalar-monotone`（標本は 64 ベクトル × 5 点に縮めた）、Lean 具体版・必要十分版（添字・元・証人への作用が `Rep` と `le` を保てば順序が移る）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1268 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 340）: 前 tick の「倍数辺との平方の差の評価」の本文（七段の鎖と $\mathbb N$ の引き算）・SageMath overview（2816 検査）・Lean 具体版・必要十分版（順序可換半環。倍数の形を使わない理由のコメント）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は乗法単調性を三度使う不等式で誤差評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16 tick 344 で台帳から移した記録（tick 339 分）
 
 ### 現在地

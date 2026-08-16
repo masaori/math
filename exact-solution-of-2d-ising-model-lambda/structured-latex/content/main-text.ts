@@ -42706,6 +42706,165 @@ q\le q'
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_multiple_side_density_vs_base_side_le_one",
+    kind: "claim",
+    title: { text: "倍数辺の密度と基準辺の密度の差の評価（q は 1 以下）" },
+    labels: ["claim_open_square_multiple_side_density_vs_base_side_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-multiple-side-density-vs-base-side"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareMultipleSideDensity_vs_baseSide_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_enlarge_lower_coefficient_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareMultipleSideDensity_vs_baseSide_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,k\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\frac{2}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)+\Psi^{\mathrm{op}}_{a}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_{ka}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_{a}(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log q\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{2}{a}\cdot`),
+        "（",
+        math(String.raw`\frac{2}{a}\in\mathbb{Q}`),
+        "。",
+        math(String.raw`a\ge1`),
+        " なので分母 ",
+        math(String.raw`a\ne0`),
+        "）と加法は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。",
+        ref("claim_open_square_block_tiling_density"),
+        " の ",
+        math(String.raw`0<q\le1`),
+        " の場合の下端の係数 ",
+        math(String.raw`\frac{2(k-1)}{ka}`),
+        " を ",
+        math(String.raw`k`),
+        " によらない形 ",
+        math(String.raw`\frac{2}{a}`),
+        " へ大きくしたものであり、後の Cauchy 性で、辺 ",
+        math(String.raw`a`),
+        " の倍数の辺の密度と辺 ",
+        math(String.raw`a`),
+        " の密度の差を ",
+        math(String.raw`\frac{1}{a}`),
+        " の定数倍で押さえるために引く。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記する（この証明の中だけ）。第一に、係数の ",
+        math(String.raw`\mathbb{Q}`),
+        " における比較を作る。",
+        math(String.raw`k\ge1`),
+        "、",
+        math(String.raw`a\ge1`),
+        " なので ",
+        math(String.raw`ka\ge1`),
+        "（",
+        math(String.raw`\mathbb{N}`),
+        " の乗法単調性）であり、分母 ",
+        math(String.raw`ka\ne0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2(k-1)}{ka}
+&\le\frac{2k}{ka}
+&&(\because\ k-1\le k\text{（}\mathbb{N}\text{ の順序。}k\ge1\text{ なので }k-1\in\mathbb{N}\text{）に正数 }\tfrac{2}{ka}\text{ を掛ける（}\mathbb{Q}\text{ の順序）})\\
+&=\frac{2}{a}
+&&(\because\ k\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "第二に、埋め込んだ対数の符号を ",
+        ref("claim_rational_embedded_log_order_iff"),
+        " から取る。",
+        math(String.raw`\log1=0`),
+        "（",
+        ref("claim_log_power"),
+        " の ",
+        math(String.raw`k=0`),
+        "）と ",
+        math(String.raw`\iota(0)=0`),
+        "（",
+        ref("claim_rational_log_order_group_embedding"),
+        "。",
+        math(String.raw`\iota`),
+        " は加法を保つので単位元を単位元へ移す）を使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(\log q)
+&\le_{\Lambda_{\mathbb{Q}}}\iota(\log1)
+&&(\because\ \blkref{claim_rational_embedded_log_order_iff}\text{ を }q':=1\text{ で読み、仮定 }q\le1\text{ を移す})\\
+&=\iota(0)
+&&(\because\ \log1=0)\\
+&=0
+&&(\because\ \iota(0)=0)
+\end{aligned}`),
+      paragraph([
+        "第三に、第一の係数の比較と第二の符号から、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の比較を作る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2}{a}\cdot\iota(\log q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2(k-1)}{ka}\cdot\iota(\log q)
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{2(k-1)}{ka}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\log q)\text{ で読む。}r\le s\text{ は第一、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第二})
+\end{aligned}`),
+      paragraph([
+        "主張の左の不等式を、その左辺から始める次の一続きで示す。二つの ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律でつなぐ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2}{a}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_{a}(q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\nu:=\Psi^{\mathrm{op}}_{a}(q)\text{ で読み、第三の比較を移す})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \blkref{claim_open_square_block_tiling_density}\text{ の }0<q\le1\text{ の場合の左の不等式})
+\end{aligned}`),
+      paragraph([
+        "主張の右の不等式 ",
+        math(String.raw`\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{a}(q)`),
+        " は ",
+        ref("claim_open_square_block_tiling_density"),
+        " の ",
+        math(String.raw`0<q\le1`),
+        " の場合の右の不等式そのものである。",
+        "使ったのは、ブロック敷き詰め評価による密度の挟み込み、",
+        math(String.raw`\mathbb{Q}`),
+        " の順序と四則、埋め込んだ対数の順序、非正の元の有理数倍の係数の大小による比較、加法単調性、推移律だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },
