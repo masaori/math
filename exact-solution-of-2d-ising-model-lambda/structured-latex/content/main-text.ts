@@ -41381,6 +41381,97 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_rational_bernoulli_inequality",
+    kind: "claim",
+    title: { text: "有理数の Bernoulli 不等式" },
+    labels: ["claim_rational_bernoulli_inequality"],
+    habitat: "Q",
+    verification: ["sagemath/check/rational-bernoulli-inequality"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_rat",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_rat_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`h\in\mathbb{Q}`),
+        "、",
+        math(String.raw`0\le h`),
+        "、",
+        math(String.raw`n\in\mathbb{N}`),
+        "（",
+        math(String.raw`n=0`),
+        " も含む）とする。",
+        math(String.raw`\mathbb{Q}`),
+        " の順序について",
+      ]),
+      displayMath(String.raw`1+nh\le(1+h)^{n}`),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`nh`),
+        " は ",
+        math(String.raw`n`),
+        " を分母 ",
+        math(String.raw`1`),
+        " の有理数として読んだ ",
+        math(String.raw`\mathbb{Q}`),
+        " の積、",
+        math(String.raw`(1+h)^{n}`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の冪（",
+        math(String.raw`n=0`),
+        " のとき ",
+        math(String.raw`1`),
+        "）である。両辺とも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元であり、実数体は現れない。",
+        "この不等式は、",
+        ref("def_rational_log_order_group_cauchy_sequence"),
+        " の Cauchy 性を示すときに、有理係数の対数順序群の正の元の整数倍がどの元をも追い越すこと（Archimedes 性）を導くために引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n=0`),
+        " のときは、左辺は ",
+        math(String.raw`1+0\cdot h=1`),
+        "、右辺は ",
+        math(String.raw`(1+h)^{0}=1`),
+        "（",
+        math(String.raw`\mathbb{Q}`),
+        " の冪の定義）なので、",
+        math(String.raw`1\le1`),
+        " として成り立つ。",
+        math(String.raw`n`),
+        " で成り立つ、すなわち ",
+        math(String.raw`1+nh\le(1+h)^{n}`),
+        " を帰納法の仮定とする。",
+        math(String.raw`n+1`),
+        " のときは",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1+(n+1)h
+&\le1+(n+1)h+n\,h^{2}
+&&(\because\ 0\le n\text{ と }0\le h^{2}\text{ から }0\le n\,h^{2}\text{。}\mathbb{Q}\text{ の加法単調性})\\
+&=(1+nh)(1+h)
+&&(\because\ \mathbb{Q}\text{ の分配則})\\
+&\le(1+h)^{n}(1+h)
+&&(\because\ \text{帰納法の仮定と }0\le1+h\text{。}\mathbb{Q}\text{ の非負元による乗法単調性})\\
+&=(1+h)^{n+1}
+&&(\because\ \mathbb{Q}\text{ の冪の定義})
+\end{aligned}`),
+      paragraph([
+        "である。使ったのは ",
+        math(String.raw`\mathbb{Q}`),
+        " の四則と順序（加法単調性・非負元による乗法単調性・平方の非負性）だけであり、実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

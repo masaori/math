@@ -3,6 +3,36 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 332）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 332 は、「有理係数の対数順序群の Cauchy 列」の定義を本文・SageMath・Lean まで書き、台帳の「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」を閉じた。**
+  `def_rational_log_order_group_cauchy_sequence`（`claim_open_square_block_tiling_density` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $\Lambda_{\mathbb Q}$ の元の列 $(\lambda_L)_{L\ge1}$ が Cauchy 列であるとは、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$ かつ $\varepsilon\ne0$ なる任意の $\varepsilon\in\Lambda_{\mathbb Q}$ に対し
+  ある $N\ge1$ があって $N\le L,M$ なるすべての $L,M$ で $-\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L-\lambda_M\le_{\Lambda_{\mathbb Q}}\varepsilon$ が成り立つこと、と定めた
+  （$\varepsilon$ は $\Lambda_{\mathbb Q}$ の元のまま。単位 $\iota(\ell_2)$ の有理数倍に限定しない。$N$ は $\varepsilon$ に依存してよく、Cauchy 性を主張する証明では $\varepsilon\mapsto N$ の手続きを明示する、と本文に書いた。
+  極限が $\Lambda_{\mathbb Q}$ に存在することは主張せず、極限に名前を与える段は `remark_real_escape_plan` の脱出に置く）。
+  SageMath `check/rational-log-order-group-cauchy-sequence/`（決定手続きの一致 21051 回、定数列、$(1/L)\iota(\ell_2)$ の $N$ の探索と窓 40 での検査、$L\iota(\ell_2)$ が破ること。6 秒）。
+  Lean `ThermodynamicLimit/RationalLogOrderGroupCauchySequence.lean`（`IsCauchyRationalLogOrder`・`rationalLogOrderLE_neg_of_nonneg`・`isCauchyRationalLogOrder_const`。定義なので必要十分版は無し）。sorry 検査 1227 件。
+  次は「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 332）: `def_rational_log_order_group_cauchy_sequence` を `claim_open_square_block_tiling_density` の直後（`remark_real_escape_plan` の直前）に置いた。
+  台帳の行「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」は「述べる」だけの行なので定義ブロック 1 つとして実行した（Cauchy 性の証明は後続の行「密度の列の Cauchy 性」）。
+  $\varepsilon$ の範囲は $\Lambda_{\mathbb Q}$ の正の元全体にした（単位 $\iota(\ell_2)$ の有理数倍に限る形も考えたが、それは切断の段で単位を選ぶときに決めればよく、定義に単位を埋め込む理由が無い。
+  どちらの形でも Cauchy 性の証明には「$\mu,\varepsilon>0$ に対し $\mu\le n\cdot\varepsilon$ となる $n$」の形の補題（$\mathbb Q$ の Bernoulli 不等式で示せる）が要る——後続の行で用意すること）。
+  厳密な順序 $<_{\Lambda_{\mathbb Q}}$ は本文に定義が無いので「$0\le\varepsilon$ かつ $\varepsilon\ne0$」と書いた。
+  SageMath `rational-log-order-group-cauchy-sequence`（`ZZ`/`QQ`・有限台辞書）、Lean 具体版（列は `ℕ → RationalLogOrderGroup` で $L=0$ の値は $N\ge1$ のため参照されない）。
+  入口 import・sorry 検査へ 2 件登録（計 1227 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 332）: 前 tick の「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」の本文（準備 3 つ・下側 7 段・上側 8 段）・SageMath overview・Lean 具体版（人手証明との対応表）・
+  必要十分版（実数版と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、接合不等式の向きと $b:=a$／$b:=L$ の読み替えを含め根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 331）の記録
 
 ### 現在地

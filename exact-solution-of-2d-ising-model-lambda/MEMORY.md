@@ -4,6 +4,16 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 337 は、前 tick が残した `claim_rational_embedding_commutes_with_integer_multiple` の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「密度の列の Cauchy 性」を論法の数で三行へ割った（「有理係数の対数順序群の Archimedes 性」→「倍数辺の部分正方形による密度の挟み込みの誤差評価」→「密度の列の Cauchy 性（$0<q\le1$）」。
+手順は台帳の備考に書いた。$1\le q$ は部分正方形比較の $1\le q$ 版が無いので行に含めていない）。そのうえで Archimedes 性が引く「有理数の Bernoulli 不等式」が本文に無かったので先に書き、四層で閉じた。
+`claim_rational_bernoulli_inequality`（`def_rational_log_order_group_cauchy_sequence` の直後・`remark_real_escape_plan` の直前、住処 Q）: $h\in\mathbb Q$、$0\le h$、$n\in\mathbb N$ に対し $1+nh\le(1+h)^n$。
+$n$ の帰納法 1 本（$n\to n+1$: $0\le nh^2$ を足す・分配則・帰納法の仮定に $0\le1+h$ を掛ける・冪の定義）。SageMath `check/rational-bernoulli-inequality/`（$h$ 9 点 × $n\le40$、1845 検査）。
+Lean 具体版 `ThermodynamicLimit/RationalBernoulliInequality.lean`（`one_add_nsmul_le_one_add_pow_rat`。`linarith`・`positivity`・`push_cast; ring`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalBernoulliInequality.lean`
+（`one_add_nsmul_le_one_add_pow_necSuf`。`[CommSemiring K] [PartialOrder K] [IsOrderedRing K]`。`Nat.cast_nonneg` に `Mathlib.Data.Nat.Cast.Order.Basic` の import が要る）、導出版 `RationalBernoulliInequalityFromNecSuf.lean`。sorry 検査 1248 件。
+次は「有理係数の対数順序群の Archimedes 性」（$0\le\mu$、$0\le\varepsilon\ne0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$。共通分母 $N$ で `def_rational_log_order_group_order` の判定に落とし、$\mathrm{rat}_\Lambda(n\cdot\varepsilon_N)=\mathrm{rat}_\Lambda(\varepsilon_N)^n$（`claim_log_order_group_positive_multiple_invariant` の補助等式）で冪にし、
+Bernoulli を $h:=\mathrm{rat}_\Lambda(\varepsilon_N)-1$ で引く。$\varepsilon\ne0$ から $h>0$ を言うところで `claim_log_order_group_linear_order` の反対称性か $\mathrm{rat}_\Lambda$ の単射性が要る。$n$ は $(\mathrm{rat}_\Lambda(\mu_N)-1)/h$ の分子の絶対値など明示的に取る）。
+
 2026-08-16 の tick 336 は、前 tick の「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行した。消したのは `claim_scaled_free_entropy_denominator_clearing`（「有限系の密度の分母は整数倍で払える」。
 $L^2M^2\cdot\frac1{L^2}\iota(\lambda)=M^2\iota(\lambda)$、$\mathbb Q$ の四則だけ）1 件。この本体はどこからも引かれておらず、7 箇所が引いていたのは証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけだったので、

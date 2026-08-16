@@ -7,6 +7,11 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 337 は、台帳の先頭行「密度の列の Cauchy 性」を論法の数で三行（有理係数の対数順序群の Archimedes 性・倍数辺の部分正方形による密度の挟み込みの誤差評価・密度の列の Cauchy 性（$0<q\le1$））へ割り、その前に要る「有理数の Bernoulli 不等式」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_bernoulli_inequality`（`def_rational_log_order_group_cauchy_sequence` の直後・`remark_real_escape_plan` の直前、住処 Q）で、$h\in\mathbb Q$、$0\le h$、$n\in\mathbb N$ に対し $1+nh\le(1+h)^n$。$n$ の帰納法 1 本（$n\to n+1$ は $0\le nh^2$ を足す・分配則・帰納法の仮定に $0\le1+h$ を掛ける・冪の定義の四段）。
+  SageMath `check/rational-bernoulli-inequality/`（$h$ 9 点 × $n\in\{0,\dots,40\}$、1845 検査）。Lean 具体版 `ThermodynamicLimit/RationalBernoulliInequality.lean`（`one_add_nsmul_le_one_add_pow_rat`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalBernoulliInequality.lean`（`one_add_nsmul_le_one_add_pow_necSuf`。順序可換半環。体は要らない）、導出版 `RationalBernoulliInequalityFromNecSuf.lean`。sorry 検査 1248 件。
+  次は「有理係数の対数順序群の Archimedes 性」（備考に手順を書いた）。
+
 - **2026-08-16 の tick 336 は、台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行し、「有限系の密度の分母は整数倍で払える」（$L^2M^2\cdot\frac1{L^2}\iota(\lambda)=M^2\iota(\lambda)$。$\mathbb Q$ の四則だけ）を本文から消した。**
   この主張を引いていた 7 箇所はすべて証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけを使っていたので、その等式を
   `claim_rational_embedding_commutes_with_integer_multiple`（「対数順序群から有理係数の対数順序群への写像は整数倍と交換する」。`claim_rational_log_order_group_embedding` の直後、住処 Lambda。各素数での値の五段の鎖）として残し、7 箇所の参照を付け替えた。
@@ -43,17 +48,7 @@
   Lean 具体版 `ThermodynamicLimit/OpenRectangleGluingInequalityLog.lean`、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `OpenRectangleGluingInequalityLogFromNecSuf.lean`。sorry 検査 1237 件。
   次は「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」。
 
-- **2026-08-16 の tick 332 は、「有理係数の対数順序群の Cauchy 列」の定義を本文・SageMath・Lean まで書き、台帳の「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」を閉じた。**
-  `def_rational_log_order_group_cauchy_sequence`（`claim_open_square_block_tiling_density` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
-  $\Lambda_{\mathbb Q}$ の元の列 $(\lambda_L)_{L\ge1}$ が Cauchy 列であるとは、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$ かつ $\varepsilon\ne0$ なる任意の $\varepsilon\in\Lambda_{\mathbb Q}$ に対し
-  ある $N\ge1$ があって $N\le L,M$ なるすべての $L,M$ で $-\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L-\lambda_M\le_{\Lambda_{\mathbb Q}}\varepsilon$ が成り立つこと、と定めた
-  （$\varepsilon$ は $\Lambda_{\mathbb Q}$ の元のまま。単位 $\iota(\ell_2)$ の有理数倍に限定しない。$N$ は $\varepsilon$ に依存してよく、Cauchy 性を主張する証明では $\varepsilon\mapsto N$ の手続きを明示する、と本文に書いた。
-  極限が $\Lambda_{\mathbb Q}$ に存在することは主張せず、極限に名前を与える段は `remark_real_escape_plan` の脱出に置く）。
-  SageMath `check/rational-log-order-group-cauchy-sequence/`（決定手続きの一致 21051 回、定数列、$(1/L)\iota(\ell_2)$ の $N$ の探索と窓 40 での検査、$L\iota(\ell_2)$ が破ること。6 秒）。
-  Lean `ThermodynamicLimit/RationalLogOrderGroupCauchySequence.lean`（`IsCauchyRationalLogOrder`・`rationalLogOrderLE_neg_of_nonneg`・`isCauchyRationalLogOrder_const`。定義なので必要十分版は無し）。sorry 検査 1227 件。
-  次は「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」。
-
-（これより古い 289 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 290 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -67,14 +62,16 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 56 セクション
+- 熱力学極限: 57 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 密度の列の Cauchy 性 | todo | $\bigl(\Psi_L(q)\bigr)_L$ の差を有理数で抑える。完備性も極限論も使わない |
+| 熱力学極限 | 有理係数の対数順序群の Archimedes 性 | todo | $0\le_{\Lambda_{\mathbb Q}}\mu$、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\varepsilon\ne0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$ が存在する。共通分母 $N$ で $\mathrm{rat}_\Lambda(\mu_N)\le\mathrm{rat}_\Lambda(\varepsilon_N)^n$ に落とし、`claim_rational_bernoulli_inequality` を $h:=\mathrm{rat}_\Lambda(\varepsilon_N)-1>0$ で引く。$n$ は $\mathbb Q$ の分子から明示的に取る |
+| 熱力学極限 | 倍数辺の部分正方形による密度の挟み込みの誤差評価 | todo | $ka\le L<(k+1)a$ のとき $L^2-(ka)^2\le2aL$（$\mathbb N$）。`claim_open_square_subsquare_comparison_density_le_one` を $a:=ka$ で読み、上端の係数 $\frac{L^2-(ka)^2}{L^2}\le\frac{2a}{L}$、下端の係数 $\frac{ka+L}{L^2}\le\frac2L$ で $\Psi^{\mathrm{op}}_L$ と $\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}$ を挟む形にする |
+| 熱力学極限 | 密度の列の Cauchy 性（$0<q\le1$） | todo | $\bigl(\Psi^{\mathrm{op}}_L(q)\bigr)_L$ が `def_rational_log_order_group_cauchy_sequence` の Cauchy 列であること。$\varepsilon\mapsto N$ を明示する（Archimedes 性で $a$ と $N$ を取る）。完備性も極限論も使わない。$1\le q$ は部分正方形比較の $1\le q$ 版が無いので後回し（必要なら行を足す） |
 | 熱力学極限 | 切断による実数体への一度きりの脱出 | todo | Cauchy 列が定める $\mathbb{Q}$ 上の切断として自由エネルギー密度を取る。引くのは「切断は実数を定める」ことだけ |
 | 熱力学極限 | 削除した実数値経路の Lean の後片付け | todo | 2026-08-16 に本文から消した実数値経路（実対数・上限／下限による極限）の Lean ファイルが孤立して残っている。入口からの import と sorry 検査は通るが、対応する本文が無いので消す |
 | 熱力学極限 | 周期境界自由エネルギー密度への移送 | todo | 周期境界と開境界の境界評価から導く |
@@ -85,6 +82,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 337）: 台帳の先頭行「密度の列の Cauchy 性」は Archimedes 性の補題・倍数辺の誤差評価・Cauchy 性本体の三つの論法を含むので三行へ割り、さらに Archimedes 性が引く「有理数の Bernoulli 不等式」を先に書いた
+  （本文に無かった。$\mathbb Q$ の四則だけの主張ではなく、$n$ の帰納法で示す不等式であり、後の Archimedes 性が引く）。`claim_rational_bernoulli_inequality` を `def_rational_log_order_group_cauchy_sequence` の直後に置いた。
+  SageMath `rational-bernoulli-inequality`、Lean 具体版・必要十分版・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1248 件）。Cauchy 性の行は $0<q\le1$ に限った（$1\le q$ の部分正方形比較が無い）。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 336）: 台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行した。消したのは `claim_scaled_free_entropy_denominator_clearing`（「有限系の密度の分母は整数倍で払える」）1 件。
   その本体（$L^2M^2$ を掛けて分母を払う二段）はどこからも引かれておらず、引かれていたのは証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけだったので、
@@ -114,15 +115,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   SageMath `open-rectangle-gluing-inequality-log`（`ZZ`/`QQ`・有限台辞書。$4\times4$ を含む形は外した）。Lean 具体版・導出版を書き、入口 import・sorry 検査へ 10 件登録（計 1237 件）。
   式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 332）: `def_rational_log_order_group_cauchy_sequence` を `claim_open_square_block_tiling_density` の直後（`remark_real_escape_plan` の直前）に置いた。
-  台帳の行「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」は「述べる」だけの行なので定義ブロック 1 つとして実行した（Cauchy 性の証明は後続の行「密度の列の Cauchy 性」）。
-  $\varepsilon$ の範囲は $\Lambda_{\mathbb Q}$ の正の元全体にした（単位 $\iota(\ell_2)$ の有理数倍に限る形も考えたが、それは切断の段で単位を選ぶときに決めればよく、定義に単位を埋め込む理由が無い。
-  どちらの形でも Cauchy 性の証明には「$\mu,\varepsilon>0$ に対し $\mu\le n\cdot\varepsilon$ となる $n$」の形の補題（$\mathbb Q$ の Bernoulli 不等式で示せる）が要る——後続の行で用意すること）。
-  厳密な順序 $<_{\Lambda_{\mathbb Q}}$ は本文に定義が無いので「$0\le\varepsilon$ かつ $\varepsilon\ne0$」と書いた。
-  SageMath `rational-log-order-group-cauchy-sequence`（`ZZ`/`QQ`・有限台辞書）、Lean 具体版（列は `ℕ → RationalLogOrderGroup` で $L=0$ の値は $N\ge1$ のため参照されない）。
-  入口 import・sorry 検査へ 2 件登録（計 1227 件）。式変形統一は一時停止中のため実施せず。
-
-（これより古い 299 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 300 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -141,6 +134,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 337）: 前 tick の「何も言っていない主張の一掃」で残した `claim_rational_embedding_commutes_with_integer_multiple` の本文（五段の鎖）・SageMath overview・Lean `toRational_intSmul` を突き合わせ、根拠が一致した。
+  この主張は写像 $\iota$ が整数倍と交換することを言い 7 箇所が引くので残す（体の四則だけではない）。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 - 2026-08-16（tick 336）: 前 tick の「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」の本文（準備 4 つ・3 段の鎖 2 本）・SageMath overview・
   Lean 具体版・導出版を突き合わせ、根拠が一致した。「何も言っていない主張」の観点では、この tick の前進そのものが該当ブロックの削除（下の前進の記録）。
   本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。他の修正は無い。
@@ -156,11 +152,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 2026-08-16（tick 333）: 前 tick の「有理係数の対数順序群の Cauchy 列」の本文（定義・$N$ の依存・極限の非主張）・SageMath overview・Lean（`IsCauchyRationalLogOrder`・定数列）を突き合わせ、一致した。
   本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
-- 2026-08-16（tick 332）: 前 tick の「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」の本文（準備 3 つ・下側 7 段・上側 8 段）・SageMath overview・Lean 具体版（人手証明との対応表）・
-  必要十分版（実数版と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、接合不等式の向きと $b:=a$／$b:=L$ の読み替えを含め根拠が一致した。
-  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-（これより古い 320 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 321 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

@@ -1301,6 +1301,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.scaled_subsquareUpperForm_eq
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareSubsquareDensity_bounds_of_le_one
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareSubsquareDensity_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_rat
+  Ising2DLambda.NecSuf.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_necSuf
+  Ising2DLambda.ThermodynamicLimit.one_add_nsmul_le_one_add_pow_rat_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
