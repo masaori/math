@@ -72,6 +72,7 @@ export const ALL_LABELS = [
   "claim_open_rectangle_value_at_rational_is_positive",
   "claim_open_rectangle_value_ge_one_at_positive_rational",
   "claim_open_rectangle_value_upper_bound_at_positive_rational",
+  "claim_open_square_block_tiling_density",
   "claim_open_square_block_tiling_log",
   "claim_open_square_block_tiling_rational",
   "claim_open_square_free_entropy_density_nonnegative",

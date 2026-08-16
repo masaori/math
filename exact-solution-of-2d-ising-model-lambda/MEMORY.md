@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 330 は、前 tick の SageMath 下書きを決めてあった骨格と突き合わせて一致を確認し（修正は見出しの書き換えのみ）、
+「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_square_block_tiling_density`（`claim_open_square_block_tiling_log` の直後、`remark_real_escape_plan` の直前、住処 Lambda）で、
+$a,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_a(q)$、$1\le q$: 反転。
+証明は準備 3 つ（第一: 正値性・$(ka)^2\ne0$・$n\cdot\iota(\nu)=\iota(n\nu)$（`claim_scaled_free_entropy_denominator_clearing` の末尾）。第二: 上側の四段
+（$n\cdot\iota(\nu)=\iota(n\nu)$ 逆向き・結合則・約分 $\frac{k^2}{k^2a^2}=\frac1{a^2}$・`def_open_square_free_entropy_density`）。第三: 下側の六段
+（`claim_rational_log_order_group_embedding` の加法・分配則・$n\cdot\iota(\nu)=\iota(n\nu)$ 逆向き・結合則・約分 $\frac{2k(k-1)a}{k^2a^2}=\frac{2(k-1)}{ka}$・第二））、
+本体は二場合とも左右の不等式を 3 段の鎖 2 本ずつ（準備の等式・`claim_scaled_embedding_order_transfer` を $L:=ka$ で読んで `claim_open_square_block_tiling_log` を移す・定義）。
+SageMath `open-square-block-tiling-density`（前 tick の `drafts/` から移動。形 $(a,k)\in\{(1,1),(1,2),(1,3),(2,1)\}$ × 正の有理点 9 点、556 検査、10 秒。$4\times4$ は 10 分超のため外したまま。`drafts/` は空になったので消えた）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareBlockTilingDensity.lean`（`scaled_blockTilingUpperForm_eq`・`scaled_blockTilingLowerForm_eq`・
+`rationalLogOrderLE_openSquareBlockTilingDensity_bounds_of_le_one`／`_of_one_le`。`NeZero (k*a)` は mathlib の `NeZero.mul` 実例で `[NeZero a] [NeZero k]` から自動。
+`natCast_zsmul` の逆向き書き換えは項が二つあると狙いを外すので `have e : … := by rw [← natCast_zsmul, ← toRational_intSmul]` で一項ずつ。約分は `congr; push_cast; field_simp`（`ring` 不要）。
+$k-1$ は自然数のまま、係数は $\frac{2\cdot((k-1:\mathbb N):\mathbb Q)}{k\cdot a}$）、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を `ell := λ ↦ (1/(ka)²)·ι(λ)` で共有、
+導出版 `OpenSquareBlockTilingDensityFromNecSuf.lean`。sorry 検査 1223 件。PDF の題名に ℚ（組めない文字）を使って落ちたので題名は「Λ_Q 版」にした（本文の数式は `\Lambda_{\mathbb Q}` でよい）。
+次は「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」（`claim_open_square_subsquare_comparison_le_one` を $q\in\mathbb Q$ で。着手前にその本文と Lean `OpenSquareSubsquareComparison.lean`、
+および `claim_open_square_block_tiling_rational` の $\mathbb Q$ 版の書き方を読むこと）。
+
 2026-08-16 の tick 329 は、前 tick の Lean 必要十分版・導出版のレビュー（一致、修正無し）のあと、「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」に着手したが、
 SageMath 検査で $4\times4$ の形を含めた実行が 10 分を超えて（二度）締切に当たり、SageMath の下書き `sagemath/drafts/open-square-block-tiling-density.check.sage`
 （形 $(a,k)\in\{(1,1),(1,2),(1,3),(2,1)\}$ × 正の有理点 9 点、556 検査 PASS）だけを残して止めた。本文・Lean は未着手、セクション表は todo のまま。

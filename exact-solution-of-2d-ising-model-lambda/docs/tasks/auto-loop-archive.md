@@ -3,6 +3,36 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 325）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 325 は、「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  `claim_open_rectangle_value_upper_bound_at_positive_rational`（`claim_open_square_free_entropy_density_nonnegative` の直後・`remark_real_escape_plan` の直前、住処 Q）で、
+  $a,b\ge1$、$q\in\mathbb Q_{>0}$ に対し $Z^{\mathrm{op}}_{a,b}(q)\le2^{ab}(1+q)^{2ab}$（$a=b=L$ で $2^{L^2}(1+q)^{2L^2}$）。周期境界の `claim_partition_value_upper_bound_at_positive_rational`
+  と同じ論法（準備の第一〜第四はそのまま引き、第五として $b^{\mathrm{op}}_{a,b}(\sigma)\le|E^{\mathrm{op}}_{a,b}|=a(b-1)+(a-1)b\le2ab$ を $\mathbb N$ の鎖で置く）。
+  SageMath 36777 検査（形 11 通り × 正の有理点 9 点、`ZZ`/`QQ`）、Lean 具体版 `openBrokenBondCount_le_two_mul`・`openPartitionValueRat_le_upperBound`・必要十分版は
+  `sum_pow_le_uniform_bound_necSuf` を共有・導出版、sorry 検査 1207 件。前 tick の密度の非負性のレビューに不一致なし。台帳の名前は「正方形」だったが長方形一般で書いた
+  （正方形はその $a=b=L$ の場合。次の密度の上界はそこだけを使う）。次は「開境界正方形の密度の上界（$\Lambda_{\mathbb Q}$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 325）: `claim_open_rectangle_value_upper_bound_at_positive_rational` を `claim_open_square_free_entropy_density_nonnegative` の直後
+  （`remark_real_escape_plan` の直前）に置き四層で閉じた。周期境界の `claim_partition_value_upper_bound_at_positive_rational` の証明を開境界へ移し、準備の第一〜第四
+  （冪の正値性・底の単調性・指数の単調性・定数の有限和）は格子の形に依らないのでそのまま引き、第五として $b^{\mathrm{op}}_{a,b}(\sigma)=|B^{\mathrm{op}}|\le|E^{\mathrm{op}}|
+  =|E_{\mathrm h}|+|E_{\mathrm v}|=a(b-1)+(a-1)b\le ab+ab=2ab$ を $\mathbb N$ の一続きで置いた。本体は五段（代入は環準同型・底を $1+q$ へ・指数を $2ab$ へ・定数の有限和・
+  $|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}$）。SageMath `open-rectangle-value-upper-bound-at-positive-rational`（形 11 通り × 正の有理点 9 点、36777 検査。準備の第五の鎖と
+  本体の各行。`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenRectangleValueUpperBoundRational.lean`（`openBrokenBondCount_le_two_mul`・`openPartitionValueRat_le_upperBound`。
+  周期境界版の補題 `pow_le_pow_of_pos_of_le_by_induction_rat`・`pow_le_pow_of_one_le_of_exp_le_by_induction_rat` を共有）、必要十分版は
+  `NecSuf/ThermodynamicLimit/PartitionValueUpperBound.lean` の `sum_pow_le_uniform_bound_necSuf` をそのまま共有、導出版 `OpenRectangleValueUpperBoundRationalFromNecSuf.lean`。
+  sorry 検査 1207 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 325）: 前 tick の「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
+  Lean 具体版・必要十分版（周期境界と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、準備 3 つ・$\Lambda$ の鎖・$\Lambda_{\mathbb Q}$ の鎖の根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 323 と人間の削除指示）の記録
 
 ### 現在地
