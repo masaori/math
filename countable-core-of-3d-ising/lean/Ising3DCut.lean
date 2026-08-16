@@ -95,3 +95,4 @@ import Ising3DCut.LimitQuantity.PositiveRealRootUnique
 import Ising3DCut.LimitQuantity.LimitQuantityDeterminedBySequence
 import Ising3DCut.LimitQuantity.LimitQuantityDeterminedBySequenceAbstract
 import Ising3DCut.LimitQuantity.FiniteBoxEqualitiesTransfer
+import Ising3DCut.LimitQuantity.FiniteBoxEqualitiesTransferAbstract
