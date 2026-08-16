@@ -3,6 +3,38 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 326）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 326 は、「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  `claim_open_square_free_entropy_density_upper_bound`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$（右辺は周期境界と同じ）。周期境界の `claim_finite_free_entropy_density_upper_bound`
+  と同じ論法（準備 3 つ: 値の正値性と上界を $a=b=L$ で・$\log2=\ell_2$ は周期境界の準備を引く・$n\cdot\iota(\nu)=\iota(n\nu)$。$\Lambda$ の鎖 4 段、$\Lambda_{\mathbb Q}$ の鎖 8 段）。
+  SageMath 141 検査（$L\in\{1,2,3\}$ × 正の有理点 9 点、`ZZ`/`QQ`・素因数分解）、Lean 具体版 `logOrderLE_logRat_openPartitionValueRat_upperBound`・
+  `rationalLogOrderLE_openScaledFreeEntropy_upperBound`（周期境界の `logRat_upperBound_eq`・`scaled_toRational_upperBound_eq` を共有）、必要十分版は
+  `upperBound_transport_through_two_monotone_maps_necSuf` を共有・導出版、sorry 検査 1210 件。前 tick の開境界長方形の値の上界（$\mathbb Q$ 版）のレビューに不一致なし。
+  次は「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 326）: `claim_open_square_free_entropy_density_upper_bound` を `claim_open_rectangle_value_upper_bound_at_positive_rational` の直後
+  （`remark_real_escape_plan` の直前）に置き四層で閉じた。周期境界の `claim_finite_free_entropy_density_upper_bound` の証明を、$Z_L(q)$ を $Z^{\mathrm{op}}_{L,L}(q)$
+  （正値性は `claim_open_rectangle_value_at_rational_is_positive`、上界は `claim_open_rectangle_value_upper_bound_at_positive_rational`、いずれも $a=b=L$）に、
+  $\Phi_L(q)$ を `def_rational_log` の $\log Z^{\mathrm{op}}_{L,L}(q)$ に置き換えて述べ、準備の第二（$\log2=\ell_2$）と第三は周期境界の証明の鎖をそのまま引いた。
+  SageMath `open-square-free-entropy-density-upper-bound`（$L\in\{1,2,3\}$ × 正の有理点 9 点、141 検査。周期境界の検査と同じ項目を開境界の値で。`ZZ`/`QQ`）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEntropyDensityUpperBound.lean`（`logOrderLE_logRat_openPartitionValueRat_upperBound`・
+  `rationalLogOrderLE_openScaledFreeEntropy_upperBound`。周期境界の `logRat_upperBound_eq`・`scaled_toRational_upperBound_eq` を共有。開境界の上界の指数 $2(L\cdot L)$ を
+  $2L^2$ へ `simpa [sq]` で読み替える）、必要十分版は `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityUpperBound.lean` の
+  `upperBound_transport_through_two_monotone_maps_necSuf` をそのまま共有、導出版 `OpenSquareFreeEntropyDensityUpperBoundFromNecSuf.lean`。
+  sorry 検査 1210 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 326）: 前 tick の「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
+  Lean 具体版・必要十分版（周期境界と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、準備の第五の $\mathbb N$ の鎖と本体の五段の根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 325）の記録
 
 ### 現在地

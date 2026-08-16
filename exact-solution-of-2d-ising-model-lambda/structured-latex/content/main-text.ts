@@ -40103,6 +40103,120 @@ Z^{\mathrm{op}}_{a,b}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_subsquare_comparison_rational_le_one",
+    kind: "claim",
+    title: { text: "開境界正方形と部分正方形の値の比較（正の有理点。q は 1 以下）" },
+    labels: ["claim_open_square_subsquare_comparison_rational_le_one"],
+    habitat: "Q",
+    verification: ["sagemath/check/open-square-subsquare-comparison-rational"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_square_subsquare_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.split_twice_bounds_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_square_subsquare_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,L\in\mathbb{N}`),
+        "、",
+        math(String.raw`1\le a<L`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る（開境界分配多項式の正の有理点での値は ",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。以下の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序）。このとき",
+      ]),
+      displayMath(String.raw`q^{a+L}\,Z^{\mathrm{op}}_{a,a}(q)
+\le Z^{\mathrm{op}}_{L,L}(q)
+\le 2^{L^2-a^2}\,(1+q)^{2(L^2-a^2)}\,Z^{\mathrm{op}}_{a,a}(q)`),
+      paragraph([
+        "である。指数 ",
+        math(String.raw`L^2-a^2`),
+        " は ",
+        math(String.raw`a<L`),
+        " なので自然数である。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。第一に、",
+        math(String.raw`c:=L-a\in\mathbb{N}`),
+        " と置く。",
+        math(String.raw`a<L`),
+        " なので ",
+        math(String.raw`c\ge1`),
+        " であり、",
+        math(String.raw`L=a+c`),
+        " である。第二に、",
+        math(String.raw`ac+cL=c(a+L)=(L-a)(L+a)=L^2-a^2`),
+        " である（",
+        math(String.raw`\mathbb{N}`),
+        " の分配則と ",
+        math(String.raw`c=L-a`),
+        "）。第三に、以下に現れる開境界長方形の値 ",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q),\ Z^{\mathrm{op}}_{a,c}(q),\ Z^{\mathrm{op}}_{a,L}(q),\ Z^{\mathrm{op}}_{c,L}(q),\ Z^{\mathrm{op}}_{L,L}(q)`),
+        " はすべて正の有理数であり（",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）、正の有理数の自然数冪 ",
+        math(String.raw`q^{a},\ q^{L},\ 2^{ac},\ (1+q)^{2ac}`),
+        " も正である。正の元を掛けても ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序は保たれる。",
+      ]),
+      paragraph(["下からの評価を、主張の左辺から始める次の一続きで示す。"]),
+      displayMath(String.raw`\begin{aligned}
+q^{a+L}\,Z^{\mathrm{op}}_{a,a}(q)
+&=q^{L}\,q^{a}\,Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{冪の指数法則 }q^{a+L}=q^{L}q^{a})\\
+&\le q^{L}\,q^{a}\,Z^{\mathrm{op}}_{a,a}(q)\,Z^{\mathrm{op}}_{a,c}(q)
+&&(\because\ 1\le Z^{\mathrm{op}}_{a,c}(q)\text{（}\blkref{claim_open_rectangle_value_ge_one_at_positive_rational}\text{）に正の }q^{L}q^{a}Z^{\mathrm{op}}_{a,a}(q)\text{ を掛ける})\\
+&\le q^{L}\,Z^{\mathrm{op}}_{a,a+c}(q)
+&&(\because\ \text{第二座標方向の接合の }0<q\le1\text{ の下側 }q^{a}Z^{\mathrm{op}}_{a,a}(q)Z^{\mathrm{op}}_{a,c}(q)\le Z^{\mathrm{op}}_{a,a+c}(q)\text{（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=a\text{）に正の }q^{L}\text{ を掛ける})\\
+&=q^{L}\,Z^{\mathrm{op}}_{a,L}(q)
+&&(\because\ \text{準備の第一 }a+c=L)\\
+&\le q^{L}\,Z^{\mathrm{op}}_{a,L}(q)\,Z^{\mathrm{op}}_{c,L}(q)
+&&(\because\ 1\le Z^{\mathrm{op}}_{c,L}(q)\text{（}\blkref{claim_open_rectangle_value_ge_one_at_positive_rational}\text{）に正の }q^{L}Z^{\mathrm{op}}_{a,L}(q)\text{ を掛ける})\\
+&\le Z^{\mathrm{op}}_{a+c,L}(q)
+&&(\because\ \text{第一座標方向の接合の }0<q\le1\text{ の下側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=L\text{）})\\
+&=Z^{\mathrm{op}}_{L,L}(q)
+&&(\because\ \text{準備の第一 }a+c=L)
+\end{aligned}`),
+      paragraph(["上からの評価を、主張の中央の量から始める次の一続きで示す。"]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{L,L}(q)
+&=Z^{\mathrm{op}}_{a+c,L}(q)
+&&(\because\ \text{準備の第一 }L=a+c)\\
+&\le Z^{\mathrm{op}}_{a,L}(q)\,Z^{\mathrm{op}}_{c,L}(q)
+&&(\because\ \text{第一座標方向の接合の }0<q\le1\text{ の上側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=L\text{）})\\
+&=Z^{\mathrm{op}}_{a,a+c}(q)\,Z^{\mathrm{op}}_{c,L}(q)
+&&(\because\ \text{準備の第一 }L=a+c)\\
+&\le Z^{\mathrm{op}}_{a,a}(q)\,Z^{\mathrm{op}}_{a,c}(q)\,Z^{\mathrm{op}}_{c,L}(q)
+&&(\because\ \text{第二座標方向の接合の }0<q\le1\text{ の上側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=a\text{）に正の }Z^{\mathrm{op}}_{c,L}(q)\text{ を掛ける})\\
+&\le Z^{\mathrm{op}}_{a,a}(q)\,2^{ac}(1+q)^{2ac}\,Z^{\mathrm{op}}_{c,L}(q)
+&&(\because\ Z^{\mathrm{op}}_{a,c}(q)\le2^{ac}(1+q)^{2ac}\text{（}\blkref{claim_open_rectangle_value_upper_bound_at_positive_rational}\text{）に正の }Z^{\mathrm{op}}_{a,a}(q)Z^{\mathrm{op}}_{c,L}(q)\text{ を掛ける})\\
+&\le Z^{\mathrm{op}}_{a,a}(q)\,2^{ac}(1+q)^{2ac}\,2^{cL}(1+q)^{2cL}
+&&(\because\ Z^{\mathrm{op}}_{c,L}(q)\le2^{cL}(1+q)^{2cL}\text{（}\blkref{claim_open_rectangle_value_upper_bound_at_positive_rational}\text{）に正の }Z^{\mathrm{op}}_{a,a}(q)2^{ac}(1+q)^{2ac}\text{ を掛ける})\\
+&=2^{ac+cL}(1+q)^{2(ac+cL)}\,Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{冪の指数法則と積の可換性})\\
+&=2^{L^2-a^2}(1+q)^{2(L^2-a^2)}\,Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{準備の第二 }ac+cL=L^2-a^2)
+\end{aligned}`),
+      paragraph([
+        "使ったのは、有理数の四則と順序（正の元を掛けても順序が保たれること）、正の有理数の自然数冪、二方向の接合不等式・値が ",
+        math(String.raw`1`),
+        " 以上であること・値の上からの評価（いずれも正の有理点）だけであり、実数体は現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_claim_open_square_free_entropy_density_upper_bound",
     kind: "claim",
     title: { text: "開境界正方形の自由エントロピー密度の上からの評価" },

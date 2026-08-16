@@ -4,6 +4,24 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 331 は、前 tick の「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+台帳の todo が指していた `claim_open_square_subsquare_comparison_le_one` は 2026-08-16 の実数値経路の削除で本文から消えていた（Lean `OpenSquareSubsquareComparison.lean` は孤立して残存）ので、
+git 履歴（コミット c205c4ed）の原本を読み、$\mathbb Q$ 版の道具で書き直した。
+`claim_open_square_subsquare_comparison_rational_le_one`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後、`claim_open_square_free_entropy_density_upper_bound` の直前、住処 Q）で、
+$1\le a<L$、$q\in\mathbb Q$、$0<q\le1$ に対し $q^{a+L}Z^{\mathrm{op}}_{a,a}(q)\le Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)$。
+上界に $(1+q)^{2(L^2-a^2)}$ が付くのは、$\mathbb Q$ 側の値の上からの評価が一様な $2^{ab}(1+q)^{2ab}$（`claim_open_rectangle_value_upper_bound_at_positive_rational`）しか無いため
+（実数値版は $q\le1$ 専用の $2^{ab}$ を持っていた）。密度へ渡すとき $L^2-a^2$ の項が $L^2$ に対して消える性質は変わらない。
+準備 3 つ（$c:=L-a$・$ac+cL=L^2-a^2$・正値性）、下側 7 段（冪の指数法則・$1\le Z^{\mathrm{op}}_{a,c}$・第二座標方向の接合の下側・$a+c=L$・$1\le Z^{\mathrm{op}}_{c,L}$・第一座標方向の接合の下側・$a+c=L$）、
+上側 8 段（$L=a+c$・第一座標方向の接合の上側・$L=a+c$・第二座標方向の接合の上側・値の上からの評価二回・冪の指数法則・準備の第二）。
+SageMath `open-square-subsquare-comparison-rational`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 $\{1/10,1/3,1/2,2/3,9/10,1\}$、270 検査、4 秒。一辺 4 以上は含めない）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonRational.lean`（`openPartitionValueRat_square_subsquare_bounds_of_le_one`。実数版と同じ段。`open NecSuf.ThermodynamicLimit` が要る）、
+必要十分版は実数版の `NecSuf/ThermodynamicLimit/OpenSquareSubsquareComparison.lean` の `split_twice_bounds_necSuf` をそのまま共有（`CommSemiring`＋順序だけなので $\mathbb Q$ でも通る。
+**旧実数値経路の Lean を片付けるとき、この必要十分版は $\mathbb Q$ 版が使うので残すこと**）、導出版 `OpenSquareSubsquareComparisonRationalFromNecSuf.lean`。sorry 検査 1225 件。
+セクション表に、本文末尾「開境界自由エネルギー密度の極限（倍数でない辺への拡張）」に対応する行「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を
+「密度の列の Cauchy 性」の直前へ足した。次は「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」（着手前に台帳の後続 3 行との依存関係——接合不等式の $\Lambda_{\mathbb Q}$ 版・
+部分正方形の挟み込みの $\Lambda_{\mathbb Q}$ 版・Cauchy 性の証明——を読み、「述べる」だけの行なら定義ブロック 1 つの大きさに割ること）。
+
 2026-08-16 の tick 330 は、前 tick の SageMath 下書きを決めてあった骨格と突き合わせて一致を確認し（修正は見出しの書き換えのみ）、
 「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_square_block_tiling_density`（`claim_open_square_block_tiling_log` の直後、`remark_real_escape_plan` の直前、住処 Lambda）で、
