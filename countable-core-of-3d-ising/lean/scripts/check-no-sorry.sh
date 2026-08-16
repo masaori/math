@@ -193,6 +193,8 @@ targets=(
   Ising3DCut.LimitQuantity.finiteBoxValueSeq_eq_of_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_finiteBox_eq
   Ising3DCut.LimitQuantity.limitQuantity_eq_of_finiteBox_eq
+  Ising3DCut.LimitQuantity.partitionValueCoarseGraining_eq_of_prime_exponents_eq
+  Ising3DCut.LimitQuantity.limitQuantity_eq_of_partitionValueCoarseGraining_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_family_eq
   Ising3DCut.LimitQuantity.limitQuantity_eq_of_family_eq
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
