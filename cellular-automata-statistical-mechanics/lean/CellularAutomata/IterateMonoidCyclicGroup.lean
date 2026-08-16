@@ -7,6 +7,7 @@
 R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidCycleIdempotent
+import CellularAutomata.NecSuf.IterateMonoidCyclicGroup
 
 namespace CellularAutomata.IterateMonoidCyclicGroup
 
@@ -41,6 +42,15 @@ theorem cyclePart_comp_closed
   refine ⟨minCollisionStart N f + a + b, ?_⟩
   congr 1
   omega
+
+/-- 巡回部の合成は可換である（反復回数の加法則と自然数の加法の可換律だけを使う）。 -/
+theorem cyclePart_comp_comm
+    {G H : (V → State) → (V → State)}
+    (hG : G ∈ cyclePart N f) (hH : H ∈ cyclePart N f) :
+    G ∘ H = H ∘ G := by
+  rcases Finset.mem_image.mp hG with ⟨a, _, rfl⟩
+  rcases Finset.mem_image.mp hH with ⟨b, _, rfl⟩
+  rw [iterateMap_comp_add, iterateMap_comp_add, Nat.add_comm]
 
 /-- `E_F` は巡回部上の左単位元である。 -/
 theorem cycleIdempotent_comp_eq
@@ -210,5 +220,78 @@ noncomputable def cycleInverseTable : Finset
 /-- 巡回部への所属、合成、単位元・生成元の等号は有限型上で決定可能である。 -/
 noncomputable instance (G : (V → State) → (V → State)) :
     Decidable (G ∈ cyclePart N f) := Finset.decidableMem G (cyclePart N f)
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := V → State、F := globalMap N f へ特殊化したものである。 -/
+
+section Derivation
+
+/-- `K_F` は必要十分版の特殊化に一致する。 -/
+theorem cycleSuccessor_eq_necessary_sufficient :
+    cycleSuccessor N f = CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cycleSuccessor (globalMap N f) (necSufHex N f) := by
+  rw [cycleSuccessor, CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cycleSuccessor, minStablePeriodMultiple_eq_necessary_sufficient,
+    iterateMap_eq_necessary_sufficient]
+
+/-- 群冪は必要十分版の特殊化に一致する。 -/
+theorem cyclePower_eq_necessary_sufficient (r : ℕ) :
+    cyclePower N f r = CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePower (globalMap N f) (necSufHex N f) r := by
+  induction r with
+  | zero =>
+      simp only [cyclePower, CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePower]
+      exact cycleIdempotent_eq_necessary_sufficient N f
+  | succ r ih =>
+      simp only [cyclePower, CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePower]
+      rw [ih, cycleSuccessor_eq_necessary_sufficient]
+
+theorem cyclePart_comp_closed_from_necessary_sufficient
+    {G H : (V → State) → (V → State)}
+    (hG : G ∈ cyclePart N f) (hH : H ∈ cyclePart N f) :
+    G ∘ H ∈ cyclePart N f := by
+  rw [cyclePart_eq_necessary_sufficient] at hG hH ⊢
+  exact CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePart_comp_closed (globalMap N f) (necSufHex N f) hG hH
+
+theorem cyclePart_comp_comm_from_necessary_sufficient
+    {G H : (V → State) → (V → State)}
+    (hG : G ∈ cyclePart N f) (hH : H ∈ cyclePart N f) :
+    G ∘ H = H ∘ G := by
+  rw [cyclePart_eq_necessary_sufficient] at hG hH
+  exact CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePart_comp_comm
+    (globalMap N f) (necSufHex N f) hG hH
+
+theorem cycleIdempotent_two_sided_unit_from_necessary_sufficient
+    {G : (V → State) → (V → State)} (hG : G ∈ cyclePart N f) :
+    cycleIdempotent N f ∘ G = G ∧ G ∘ cycleIdempotent N f = G := by
+  rw [cyclePart_eq_necessary_sufficient] at hG
+  rw [cycleIdempotent_eq_necessary_sufficient]
+  exact ⟨CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cycleIdempotent_comp_eq (globalMap N f) (necSufHex N f) hG,
+    CellularAutomata.NecSuf.IterateMonoidCyclicGroup.comp_cycleIdempotent_eq (globalMap N f) (necSufHex N f) hG⟩
+
+theorem inverse_candidate_two_sided_from_necessary_sufficient (n : ℕ) :
+    iterateMap N f n ∘ iterateMap N f
+        (minStablePeriodMultiple N f + n * (minPositivePeriod N f - 1)) =
+      cycleIdempotent N f ∧
+    iterateMap N f
+        (minStablePeriodMultiple N f + n * (minPositivePeriod N f - 1)) ∘
+      iterateMap N f n = cycleIdempotent N f := by
+  rw [iterateMap_eq_necessary_sufficient, iterateMap_eq_necessary_sufficient,
+    minStablePeriodMultiple_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient,
+    cycleIdempotent_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidCyclicGroup.inverse_candidate_two_sided (globalMap N f) (necSufHex N f) n
+
+theorem cyclePower_range_eq_cyclePart_from_necessary_sufficient :
+    (Finset.range (minPositivePeriod N f)).image (cyclePower N f) = cyclePart N f := by
+  rw [cyclePart_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient]
+  have hfun : cyclePower N f = CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePower (globalMap N f) (necSufHex N f) :=
+    funext (cyclePower_eq_necessary_sufficient N f)
+  rw [hfun]
+  exact CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePower_range_eq_cyclePart (globalMap N f) (necSufHex N f)
+
+theorem cyclePart_card_eq_minPositivePeriod_from_necessary_sufficient :
+    (cyclePart N f).card = minPositivePeriod N f := by
+  rw [cyclePart_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidCyclicGroup.cyclePart_card_eq_minPositivePeriod (globalMap N f) (necSufHex N f)
+
+end Derivation
 
 end CellularAutomata.IterateMonoidCyclicGroup
