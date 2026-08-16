@@ -62,6 +62,7 @@ export const ALL_LABELS = [
   "theorem_finite_fourier_inverse_transform",
   "theorem_formal_high_temperature_expansion",
   "theorem_homology_class_polynomials_recombine",
+  "theorem_primal_cocycle_transport_is_dual_cycle",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

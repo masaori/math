@@ -904,4 +904,132 @@ c\!\left(d_1^{-1}(e^\ast)\right)
       ]),
     ],
   },
+  {
+    id: "finite_fourier_theorem_primal_cocycle_transport_is_dual_cycle",
+    kind: "theorem",
+    title: { text: "主一次コサイクルの係数移送は双対一次サイクルである" },
+    labels: ["theorem_primal_cocycle_transport_is_dual_cycle"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-cocycle-transport-is-dual-cycle"],
+    statement: [
+      paragraph([
+        ref("def_dual_edge_endpoint_map"),
+        " の双対辺端点写像に対し、",
+        ref("def_first_boundary_matrix_over_f2"),
+        " と同じ端点出現数の式で双対一次境界行列を",
+      ]),
+      displayMath(String.raw`\partial_1^\ast
+:=
+\left[
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^\ast(e^\ast,a)=v^\ast
+  }}1_{\mathbb F_2}
+\right]_{v^\ast\in V_{\mathrm{cell}}^\ast,\ e^\ast\in E_{\mathrm{cell}}^\ast}
+\in
+\operatorname{Mat}_{V_{\mathrm{cell}}^\ast\times E_{\mathrm{cell}}^\ast}(\mathbb F_2)`),
+      paragraph([
+        "と書く。同じ双対頂点を二端にもつ双対辺では、その列の当該成分は ",
+        math(String.raw`1_{\mathbb F_2}+1_{\mathbb F_2}=0_{\mathbb F_2}`),
+        " である。双対一次サイクル空間を ",
+        math(String.raw`\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\ker(\partial_1^\ast)`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\mathsf D_1\!\left(
+  \operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right)
+\subseteq
+\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2).`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " と ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " を固定する。",
+        ref("def_dual_edge_endpoint_map"),
+        " の双対辺端点写像、",
+        ref("def_finite_cellulation_opposite_edge_occurrences"),
+        " と ",
+        ref("def_finite_cellulation_orientation_reversal"),
+        " による各主辺の正向き出現と逆向き出現の一意性、および ",
+        ref("def_primal_dual_cell_correspondence"),
+        " の全単射 ",
+        math(String.raw`d_0:F_{\mathrm{cell}}\to V_{\mathrm{cell}}^\ast`),
+        " の単射性から、任意の ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\partial_1^\ast)_{d_0(f),d_1(e)}
+&=
+\sum_{\substack{
+  a\in\mathsf{End}\\
+  \partial_G^\ast(d_1(e),a)=d_0(f)
+}}1_{\mathbb F_2}
+\quad\bigl(\because\ \partial_1^\ast\text{ の定義}\bigr)\\
+&=
+\sum_{\substack{
+  i\in P_f\\
+  e_{f,i}=e
+}}1_{\mathbb F_2}
+\quad\bigl(\because\ \text{二つの向き別出現と双対辺端点の対応}\bigr)
+\end{aligned}`),
+      paragraph([ref("def_second_boundary_matrix_over_f2"), " より"]),
+      displayMath(String.raw`(\partial_1^\ast)_{d_0(f),d_1(e)}
+=
+(\partial_2)_{e,f}.`),
+      paragraph([
+        ref("def_primal_to_dual_edge_coefficient_transport"),
+        " と、",
+        ref("def_primal_dual_cell_correspondence"),
+        " の全単射 ",
+        math(String.raw`d_1:E_{\mathrm{cell}}\to E_{\mathrm{cell}}^\ast`),
+        " による有限和の添字の付け替えから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\partial_1^\ast\mathsf D_1(c)\bigr)(d_0(f))
+&=
+\sum_{e^\ast\in E_{\mathrm{cell}}^\ast}
+(\partial_1^\ast)_{d_0(f),e^\ast}\mathsf D_1(c)(e^\ast)
+\quad\bigl(\because\ \text{有限行列と係数写像の積}\bigr)\\
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_1^\ast)_{d_0(f),d_1(e)}\mathsf D_1(c)(d_1(e))
+\quad\bigl(\because\ d_1\text{ は全単射}\bigr)\\
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_1^\ast)_{d_0(f),d_1(e)}c(e)
+\quad\bigl(\because\ \mathsf D_1(c)(d_1(e))=c(e)\bigr).
+\end{aligned}`),
+      paragraph([ref("def_second_boundary_matrix_over_f2"), " と上で得た成分ごとの等式より"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_1^\ast)_{d_0(f),d_1(e)}c(e)
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_2)_{e,f}c(e)
+\quad\bigl(\because\ (\partial_1^\ast)_{d_0(f),d_1(e)}=(\partial_2)_{e,f}\bigr).
+\end{aligned}`),
+      paragraph([ref("def_primal_first_cocycle_space_over_f2"), " より"]),
+      displayMath(String.raw`\sum_{e\in E_{\mathrm{cell}}}
+(\partial_2)_{e,f}c(e)
+=
+0_{\mathbb F_2}.`),
+      paragraph([
+        "全単射 ",
+        math(String.raw`d_0:F_{\mathrm{cell}}\to V_{\mathrm{cell}}^\ast`),
+        " により、全ての ",
+        math(String.raw`v^\ast\in V_{\mathrm{cell}}^\ast`),
+        " で ",
+        math(String.raw`(\partial_1^\ast\mathsf D_1(c))(v^\ast)=0_{\mathbb F_2}`),
+        " である。したがって ",
+        math(String.raw`\mathsf D_1(c)\in\ker(\partial_1^\ast)`),
+        " であり、主張を得る。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
