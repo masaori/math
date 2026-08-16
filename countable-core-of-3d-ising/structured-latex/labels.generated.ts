@@ -35,6 +35,7 @@ export const ALL_LABELS = [
   "claim_partition_coefficients_nonnegative",
   "claim_partition_support_endpoints",
   "claim_partition_value_at_one",
+  "claim_partition_value_coarse_graining_is_sufficient_for_limit_quantity",
   "claim_periodic_constant_unbroken",
   "claim_periodic_no_all_broken",
   "claim_periodic_not_palindrome",

@@ -78,6 +78,7 @@ export const ALL_LABELS = [
   "claim_open_square_block_tiling_rational",
   "claim_open_square_density_difference_bound_core_nonneg_le_one",
   "claim_open_square_density_difference_bound_is_core_over_base_side",
+  "claim_open_square_density_lower_set_le_upper_bound",
   "claim_open_square_density_lower_set_nonempty",
   "claim_open_square_density_sequence_cauchy_le_one",
   "claim_open_square_free_entropy_density_nonnegative",
