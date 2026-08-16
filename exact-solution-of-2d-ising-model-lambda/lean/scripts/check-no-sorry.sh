@@ -1402,6 +1402,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.realLog_lt_realLog
   Ising2DLambda.ThermodynamicLimit.realLog_le_realLog
   Ising2DLambda.ThermodynamicLimit.realizeRational_eq_sum_support
+  Ising2DLambda.ThermodynamicLimit.realizeRational_smul
+  Ising2DLambda.NecSuf.ThermodynamicLimit.realizeWith_smul_necSuf
+  Ising2DLambda.ThermodynamicLimit.realizeRational_smul_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

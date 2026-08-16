@@ -45768,7 +45768,106 @@ Y
         math(String.raw`\rho_{\mathbb{R}}(\mu)`),
         " だけが実数である。",
         math(String.raw`\rho_{\mathbb{R}}`),
-        " が加法・有理数倍・順序をどう保つかは続く主張で示す。",
+        " が有理数倍と順序をどう保つかは続く主張で示す（加法については、この先の議論が使わないので述べない）。",
+      ]),
+    ],
+  },
+  {
+    id: "thermodynamic_limit_claim_rational_log_order_group_realization_smul",
+    kind: "claim",
+    title: { text: "実現写像は有理数倍と可換である（実数体への脱出: 実対数）" },
+    labels: ["claim_rational_log_order_group_realization_smul"],
+    habitat: "R",
+    realEscape:
+      "実対数。実現写像 ρ_ℝ の値（実数）どうしの等式であり、証明は ℝ の乗法の結合則と分配則を有限和へ用いる。可算側の Λ_ℚ とその有理数倍は変わらない。",
+    verification: ["sagemath/check/rational-log-order-group-realization-smul"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_smul",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.realizeWith_smul_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_smul_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`r\in\mathbb{Q}`),
+        " と任意の ",
+        math(String.raw`\mu\in\Lambda_{\mathbb{Q}}`),
+        " について、",
+        ref("def_rational_log_order_group"),
+        " の有理数倍 ",
+        math(String.raw`r\cdot\mu\in\Lambda_{\mathbb{Q}}`),
+        " と ",
+        ref("def_rational_log_order_group_realization"),
+        " の実現写像 ",
+        math(String.raw`\rho_{\mathbb{R}}`),
+        " について",
+      ]),
+      displayMath(String.raw`\rho_{\mathbb{R}}(r\cdot\mu)=\iota_{\mathbb{Q}\to\mathbb{R}}(r)\cdot\rho_{\mathbb{R}}(\mu)`),
+      paragraph([
+        "が成り立つ。左辺・右辺はともに実数（",
+        ref("def_real_logarithm"),
+        "）で、右辺の積は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法である。この主張は、後で順序の保存を示すとき、共通分母 ",
+        math(String.raw`N`),
+        " を掛けて得た不等式を ",
+        math(String.raw`N`),
+        " で割り戻すために使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " と略記する。",
+        ref("def_rational_log_order_group"),
+        " により、",
+        math(String.raw`\mu(p)=0`),
+        " なら ",
+        math(String.raw`(r\cdot\mu)(p)=r\,\mu(p)=r\cdot0=0`),
+        "（",
+        math(String.raw`\mathbb{Q}`),
+        " の乗法）なので、",
+        math(String.raw`\operatorname{supp}(r\cdot\mu)\subset\operatorname{supp}(\mu)`),
+        " である。したがって ",
+        math(String.raw`\operatorname{supp}(\mu)`),
+        " は ",
+        math(String.raw`r\cdot\mu`),
+        " の台を含む有限集合であり、",
+        ref("def_rational_log_order_group_realization"),
+        " の末尾に述べたとおり、",
+        math(String.raw`\rho_{\mathbb{R}}(r\cdot\mu)`),
+        " の和は ",
+        math(String.raw`\operatorname{supp}(\mu)`),
+        " に渡って取っても同じ値になる。一続きである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathbb{R}}(r\cdot\mu)
+&=\sum_{p\in\operatorname{supp}(r\cdot\mu)}\iota\bigl((r\cdot\mu)(p)\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group_realization})\\
+&=\sum_{p\in\operatorname{supp}(\mu)}\iota\bigl((r\cdot\mu)(p)\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \operatorname{supp}(r\cdot\mu)\subset\operatorname{supp}(\mu)\text{。台を含む有限集合に渡る和は同じ値（}\blkref{def_rational_log_order_group_realization}\text{）})\\
+&=\sum_{p\in\operatorname{supp}(\mu)}\iota\bigl(r\,\mu(p)\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義 }(r\cdot\mu)(p)=r\,\mu(p))\\
+&=\sum_{p\in\operatorname{supp}(\mu)}\bigl(\iota(r)\cdot\iota(\mu(p))\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \iota\text{ は乗法を保つ（}\blkref{def_real_logarithm}\text{）})\\
+&=\sum_{p\in\operatorname{supp}(\mu)}\iota(r)\cdot\Bigl(\iota(\mu(p))\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)\Bigr)
+&&(\because\ \mathbb{R}\text{ の乗法の結合則})\\
+&=\iota(r)\cdot\sum_{p\in\operatorname{supp}(\mu)}\iota(\mu(p))\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \mathbb{R}\text{ の分配則を有限和へ（項数についての帰納法）})\\
+&=\iota(r)\cdot\rho_{\mathbb{R}}(\mu)
+&&(\because\ \blkref{def_rational_log_order_group_realization})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、実現写像の定義（台を含む有限集合に渡る和で同じ値になること）、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の有理数倍の定義、",
+        math(String.raw`\iota`),
+        " が乗法を保つこと、",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の結合則と分配則だけである。実対数については何も使わない（",
+        math(String.raw`\log_{\mathbb{R}}(\iota(p))`),
+        " は各項の重みとして現れるだけである）。",
       ]),
     ],
   },
@@ -45780,10 +45879,12 @@ Y
     habitat: "Lambda",
     statement: [
       paragraph([
-        "直前の二つの定義（",
+        "直前の二つの定義と一つの主張（",
         ref("def_real_logarithm"),
         "、",
         ref("def_rational_log_order_group_realization"),
+        "、",
+        ref("claim_rational_log_order_group_realization_smul"),
         "）を除き、ここまでの本文はすべて可算な対象（",
         math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\Lambda_{\mathbb{Q}}`),
         "、",
@@ -45842,7 +45943,9 @@ Y
           ref("def_real_logarithm"),
           "、",
           ref("def_rational_log_order_group_realization"),
-          " で定めた。順序を保つことはこれから示す）、下組の実現像の上限（完備性）として実数 ",
+          " で定めた。有理数倍と可換であることは ",
+          ref("claim_rational_log_order_group_realization_smul"),
+          " で示した。順序を保つことはこれから示す）、下組の実現像の上限（完備性）として実数 ",
           math(String.raw`f(q)`),
           " を一つ取る。引くのは「有界な実数集合は上限を持つ」ことと実対数の単調性だけで、それ以外の理由で実数体を呼ばない。",
           "脱出したことは、そのブロックの住処と脱出理由に書く。",

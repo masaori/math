@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 361 は、前 tick の二定義（実数体と実対数／実現写像）の本文と Lean を突き合わせて一致を確認し（修正 1 件: `def_rational_log_order_group_realization` 末尾の「加法・有理数倍・順序をどう保つかは続く主張で示す」の「加法」は示す予定が無いので「有理数倍と順序」に直した）、
+台帳の先頭行「実現写像は有理数倍と可換（実数体への脱出: 実対数）」を四層で閉じた。
+`claim_rational_log_order_group_realization_smul`（`def_rational_log_order_group_realization` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape`「実対数（$\rho_{\mathbb R}$ の値どうしの等式。$\mathbb R$ の結合則と分配則）」）: $r\in\mathbb Q$、$\mu\in\Lambda_{\mathbb Q}$ で $\rho_{\mathbb R}(r\cdot\mu)=\iota_{\mathbb Q\to\mathbb R}(r)\cdot\rho_{\mathbb R}(\mu)$。証明は準備一つ（$\operatorname{supp}(r\mu)\subset\operatorname{supp}\mu$）と一続き六段（定義／台を含む有限集合に渡る和は同じ値／有理数倍の定義／$\iota$ の乗法保存／$\mathbb R$ の結合則／分配則を有限和へ／定義）。実対数の性質は使わない。
+SageMath `check/rational-log-order-group-realization-smul/`（**$\ell_p$ を $\mathbb Q$ 上の多項式環の不定元として記号のまま持ち、実対数の値は計算しない**。以後、実対数の性質を使わない $\rho_{\mathbb R}$ の等式はこの形で厳密に検算できる。18235 検査、1 秒未満）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupRealizationSmul.lean`（`realizeRational_smul`。`Finsupp.support_smul`・`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupRealizationSmul.lean`（`realizeWith ι w μ := Σ_{p∈supp μ} ι(μ p)·w p`、`realizeWith_smul_necSuf`。`[MulZeroClass K] [NonUnitalSemiring R]`、$\iota$ の乗法保存と $\iota(0)=0$ を仮定として受け、重み $w$ は任意。単位元・逆元・順序・実対数を使わない）、導出版（`realizeRational_eq_realizeWith` は `rfl`）。sorry 検査 1349 件。
+次は「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」（$\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。台の大きさの帰納法、積の対数（`def_real_logarithm`）、整数冪の対数 $\log_{\mathbb R}(u^k)=k\log_{\mathbb R}(u)$（$k\in\mathbb Z$。先に別ブロックで置くなら「整数冪の実対数」として割る）。Lean は `Real.log_prod`・`Real.log_zpow`。SageMath は実対数の性質（積→和・冪→倍）を使うので $\ell_p$ を記号のまま持つ形では書けない——$\mathrm{rat}_\Lambda(\lambda)$ の素因数分解の指数と $\lambda$ の値の一致（可算側）を検査し、実対数の段は Lean に任せる旨を overview に書く）。
+
+（tick 360 の記録）
 2026-08-17 の tick 360 は、前 tick の「開境界正方形の密度の下組の元は密度の上からの評価以下」の四層を突き合わせて一致を確認し（本文の修正無し。台帳から外れていた tick 354 の記録を保管庫へ復元した）、
 台帳の先頭行「実現写像は順序を保つ」を四行へ割り（定義／有理数倍との可換／$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数／順序の保存）、その最初「実数体と実対数、および実現写像 $\rho_{\mathbb R}$ の定義」を本文・Lean まで書いた。
 `def_real_logarithm`（**本文で初めての住処 R**。$\iota_{\mathbb Q\to\mathbb R}$ に名前を置く、$\mathbb R_{>0}$、$\log_{\mathbb R}$。使う性質は乗法を加法へ移すことと狭義単調の二つだけと宣言。`realEscape`「実対数」）と `def_rational_log_order_group_realization`（$\rho_{\mathbb R}(\mu):=\sum_{p\in\operatorname{supp}\mu}\iota_{\mathbb Q\to\mathbb R}(\mu(p))\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(p))$。台を含む任意の有限集合に渡る和で同じ値）。いずれも `claim_open_square_density_lower_set_le_upper_bound` の直後・`remark_real_escape_plan` の直前。`remark_real_escape_plan` の冒頭と脱出の項を合わせて直した。
