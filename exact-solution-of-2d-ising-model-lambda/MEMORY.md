@@ -4,6 +4,15 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 354 は、前 tick の「開境界正方形の密度の差の評価の核」と「差の一様な評価に現れる量は核の基準辺分の一倍である」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「核は非負である（$0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$、$0<q\le1$）」を四層で閉じた。`claim_open_square_density_difference_bound_core_nonneg_le_one`（`claim_open_square_density_difference_bound_is_core_over_base_side` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $0<q\le1$ で $0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$。仮定 $q\le1$ は $\iota(\log q)\le0$ にだけ要る。
+証明は準備 4 つ（符号三つを `claim_rational_embedded_log_order_iff` から／$0=2\cdot0\le2\iota(\ell_2)$、$0=4\cdot0\le4\iota(\log(1+q))=0+4\iota(\log(1+q))\le X$／$Y\le4\cdot0=0$、$0=-0\le-Y$（`claim_rational_log_order_group_neg_reverses_order`）／$0\le C$ の既出の一続きと $0=2\cdot0\le2C$）と本体（$0=0+0\le X+0=0+X\le(-Y)+X=X+(-Y)=0+(X+(-Y))\le2C+(X+(-Y))=(X+(-Y))+2C=\Gamma(q)$。加法単調性三度・交換則・単位元）。結合則も逆元律も使わない。
+SageMath `check/open-square-density-difference-bound-core-nonneg/`（分配関数不要。$q\le1$ の 7 点で各段 38 検査、$q>1$ の 2 点で否定側 1 検査、計 268 検査、10 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareDensityDifferenceBoundCoreNonneg.lean`（`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCoreX`・`rationalLogOrderLE_zero_neg_openSquareDensityDifferenceBoundCoreY_of_le_one`・`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one`。既出の符号補題 `rationalLogOrderLE_toRational_logRat_nonpos_of_le_one`・`rationalLogOrderLE_zero_toRational_generator_two`・`rationalLogOrderLE_zero_toRational_logRat_one_add`・`rationalLogOrderLE_zero_openSquareUpperBoundConstant` を引く。`smul_zero`・`neg_zero`・`add_zero (0)`・`zero_add`・`add_comm`），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityDifferenceBoundCoreNonneg.lean`（`zero_le_core_of_signs_necSuf`。`[AddCommMonoid X] [Neg X] [SMul ℚ X]` と推移律・右加法単調性・非負有理数倍の順序保存・逆元の順序反転・$c\cdot0=0$・$-0=0$（型クラスからは出ないので仮定）、三つの符号を仮定として受けるだけ。結合則・逆元律・順序の線形性は要らない。`norm_num` のため `Mathlib.Tactic.NormNum` を import）、導出版 `OpenSquareDensityDifferenceBoundCoreNonnegFromNecSuf.lean`。sorry 検査 1322 件。
+次は「密度の列の Cauchy 性（$0<q\le1$）」（台帳の備考の手順どおり。論法が二つ以上なら着手時に割る）。
+
+（tick 353 の記録）
 2026-08-17 の tick 353 は、前 tick の「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」を論法の数で二行（核の定義と $\frac1a$ 倍の等式／核は非負）へ割り、その最初を四層で閉じた。
 `def_open_square_density_difference_bound_core`: 核 $\Gamma(q):=\bigl(2\iota(\ell_2)+4\iota(\log(1+q))\bigr)+\bigl(-(4\iota(\log q))\bigr)+2\cdot\bigl(\iota(\ell_2)+2\iota(\log(1+q))\bigr)\in\Lambda_{\mathbb Q}$（$q>0$ だけで決まり、辺 $a,L,M$ によらない。$q\le1$ を要しない）。

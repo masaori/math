@@ -44533,6 +44533,224 @@ a
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_density_difference_bound_core_nonneg_le_one",
+    kind: "claim",
+    title: { text: "核は非負である" },
+    labels: ["claim_open_square_density_difference_bound_core_nonneg_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-density-difference-bound-core-nonneg"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCoreX",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_neg_openSquareDensityDifferenceBoundCoreY_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.zero_le_core_of_signs_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " が ",
+        math(String.raw`q\le1`),
+        " を満たすとする。このとき ",
+        ref("def_open_square_density_difference_bound_core"),
+        " の核 ",
+        math(String.raw`\Gamma(q)`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\Gamma(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        "（",
+        ref("def_rational_log_order_group"),
+        "）の零写像、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の関係である。仮定 ",
+        math(String.raw`q\le1`),
+        " は ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}0`),
+        " のためにだけ要る。後の Cauchy 性で、与えられた ",
+        math(String.raw`\varepsilon`),
+        " に対して ",
+        ref("claim_rational_log_order_group_archimedean"),
+        " を ",
+        math(String.raw`\mu:=\Gamma(q)`),
+        " で読むための前提として引く。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        "、",
+        math(String.raw`X:=2\cdot\iota(\ell_2)+4\cdot\iota(\log(1+q))`),
+        "、",
+        math(String.raw`Y:=4\cdot\iota(\log q)`),
+        "、",
+        math(String.raw`C:=\iota(\ell_2)+2\cdot\iota(\log(1+q))`),
+        "（いずれも ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の元）と略記する（この証明の中だけ）。",
+        ref("def_open_square_density_difference_bound_core"),
+        " により ",
+        math(String.raw`\Gamma(q)=\bigl(X+(-Y)\bigr)+2\cdot C`),
+        " である。以下に現れる複数の ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律でつなぐ。準備として 4 つ置く。第一に、符号を三つ作る。",
+        math(String.raw`\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0`),
+        " は ",
+        ref("claim_rational_embedded_log_order_iff"),
+        " を ",
+        math(String.raw`q':=1`),
+        " で読み、",
+        math(String.raw`\log1=0`),
+        "（",
+        ref("claim_log_power"),
+        " の ",
+        math(String.raw`k=0`),
+        "）、",
+        math(String.raw`\iota(0)=0`),
+        "（",
+        math(String.raw`\iota`),
+        " は準同型）と合わせて得る（ここで仮定 ",
+        math(String.raw`q\le1`),
+        " を使う）。",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)`),
+        " と ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\iota(\log(1+q))`),
+        " は ",
+        ref("claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one"),
+        " の証明の準備の第二と同じく、",
+        ref("claim_rational_embedded_log_order_iff"),
+        " を ",
+        math(String.raw`q:=1,\ q':=2`),
+        " と ",
+        math(String.raw`q:=1,\ q':=1+p`),
+        "（",
+        math(String.raw`p`),
+        " は主張の ",
+        math(String.raw`q`),
+        "）で読み、",
+        math(String.raw`\log1=0`),
+        "、",
+        math(String.raw`\iota(0)=0`),
+        "、",
+        math(String.raw`\log2=\ell_2`),
+        " と合わせて得る。第二に、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}X`),
+        " を作る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=2\cdot0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=\iota(\ell_2)\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)\text{ は第一})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&=4\cdot0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }4\text{ を掛ける})\\
+&\le_{\Lambda_{\mathbb{Q}}}4\cdot\iota(\log(1+q))
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=4\text{、}\lambda:=0\text{、}\mu:=\iota(\log(1+q))\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}\iota(\log(1+q))\text{ は第一})\\
+&=0+4\cdot\iota(\log(1+q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
+&\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)+4\cdot\iota(\log(1+q))
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=2\cdot\iota(\ell_2)\text{、}\nu:=4\cdot\iota(\log(1+q))\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)\text{ は直前の一続き})\\
+&=X
+&&(\because\ X\text{ の置き方})
+\end{aligned}`),
+      paragraph([
+        "第三に、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}-Y`),
+        " を作る。まず ",
+        math(String.raw`Y\le_{\Lambda_{\mathbb{Q}}}0`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Y
+&=4\cdot\iota(\log q)
+&&(\because\ Y\text{ の置き方})\\
+&\le_{\Lambda_{\mathbb{Q}}}4\cdot0
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=4\text{、}\lambda:=\iota(\log q)\text{、}\mu:=0\text{ で読む。}\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0\text{ は第一})\\
+&=0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }4\text{ を掛ける})
+\end{aligned}`),
+      paragraph([
+        "そのうえで",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=-0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p)\text{ を }\lambda:=0\text{ で読む。各素数で }-0=0\text{（}\mathbb{Q}\text{ の四則）})\\
+&\le_{\Lambda_{\mathbb{Q}}}-Y
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=Y\text{、}\mu:=0\text{ で読む。}Y\le_{\Lambda_{\mathbb{Q}}}0\text{ は直前の一続き})
+\end{aligned}`),
+      paragraph([
+        "第四に、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}2\cdot C`),
+        " を作る。",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}C`),
+        " は ",
+        ref("claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one"),
+        " の証明の準備の第二の一続き（",
+        math(String.raw`0=2\cdot0\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\log(1+q))=0+2\cdot\iota(\log(1+q))\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)+2\cdot\iota(\log(1+q))=C`),
+        "。有理数倍・",
+        ref("claim_rational_log_order_group_nonneg_scalar_monotone"),
+        "・加法の単位元・",
+        ref("claim_rational_log_order_group_add_monotone"),
+        "）のとおりであり、そのうえで",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=2\cdot0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&\le_{\Lambda_{\mathbb{Q}}}2\cdot C
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=C\text{ で読む})
+\end{aligned}`),
+      paragraph([
+        "本体は、三つの非負の項を加法単調性で順に足し込むだけである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=0+0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
+&\le_{\Lambda_{\mathbb{Q}}}X+0
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=X\text{、}\nu:=0\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}X\text{ は準備の第二})\\
+&=0+X
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
+&\le_{\Lambda_{\mathbb{Q}}}(-Y)+X
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=-Y\text{、}\nu:=X\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}-Y\text{ は準備の第三})\\
+&=X+(-Y)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
+&=0+\bigl(X+(-Y)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
+&\le_{\Lambda_{\mathbb{Q}}}2\cdot C+\bigl(X+(-Y)\bigr)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=2\cdot C\text{、}\nu:=X+(-Y)\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}2\cdot C\text{ は準備の第四})\\
+&=\bigl(X+(-Y)\bigr)+2\cdot C
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
+&=\Gamma(q)
+&&(\because\ \blkref{def_open_square_density_difference_bound_core}\text{ と }X,Y,C\text{ の置き方})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、核の定義、埋め込んだ対数の符号（",
+        ref("claim_rational_embedded_log_order_iff"),
+        "）、非負有理数倍の順序保存、加法単調性、逆元の順序反転、",
+        ref("def_rational_log_order_group"),
+        " の有理数倍・逆元・加法の単位元・交換則、",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律だけである。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

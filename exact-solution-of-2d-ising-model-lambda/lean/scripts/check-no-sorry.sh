@@ -1373,6 +1373,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.one_div_smul_openSquareDensityDifferenceBoundCore
   Ising2DLambda.NecSuf.ThermodynamicLimit.one_div_smul_core_eq_scaled_terms_necSuf
   Ising2DLambda.ThermodynamicLimit.one_div_smul_openSquareDensityDifferenceBoundCore_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCoreX
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_neg_openSquareDensityDifferenceBoundCoreY_of_le_one
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.zero_le_core_of_signs_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

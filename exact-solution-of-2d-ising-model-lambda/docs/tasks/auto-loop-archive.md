@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 354 で台帳から移した記録（tick 349 分）
+
+### 現在地
+
+- **2026-08-17 の tick 349 は、台帳の先頭行「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価（$0<q\le1$）」（$a\ge1$、$a<L$、$a^2\le L$、$0<q\le1$ で $\frac4a\iota(\log q)+\Psi^{\mathrm{op}}_a+\bigl(-\frac2a(\iota(\ell_2)+2\iota(\log(1+q)))\bigr)\le\Psi^{\mathrm{op}}_L$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_large_side_density_lower_vs_base_side_le_one`（`claim_open_square_large_side_density_upper_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 4 つ（自然数の除法で $k\ge1$・$ka<L\le ka+a$（上端と同じ）／$\mathbb Q$ の係数比較 $\frac2L\le\frac2a$（$a<L$）・$-\frac2a\le-\frac{2a}{a^2}\le-\frac{2a}L$（$a^2\le L$、$-1$ 倍で反転）／符号 $\iota(\log q)\le0$・$0\le C:=\iota(\ell_2)+2\iota(\log(1+q))$／非正の元の係数比較 $\frac2a\iota(\log q)\le\frac2L\iota(\log q)$ と、$C$ を負の係数のまま非負の元の係数比較で比べて逆元の形へ戻す $-(\frac2aC)=(-\frac2a)C\le(-\frac{2a}L)C=-(\frac{2a}LC)$（逆元と有理数倍を素数ごとに読む））と、本体（分配則 $\frac4a=\frac2a+\frac2a$ で第一の項を割り、第一の項と末尾の項を加法単調性で置き換え、倍数でない辺の下からの評価を第一の $k$ で読み、推移律）。
+  SageMath `check/open-square-large-side-density-lower-vs-base-side/`（$(a,L)=(1,2),(1,3)$ × 6 点、288 検査、11 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSideDensityLowerVsBaseSide.lean`（`rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_one`。`neg_le_neg`・`neg_smul`・`← add_smul`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSideDensityLowerVsBaseSide.lean`（`lower_bound_shrink_first_and_last_terms_necSuf`。`[AddCommMagma X]` と推移律・右加法単調性・交換則だけ。分割 $D=x'+y$ は等式で受ける）、導出版。sorry 検査 1303 件。
+  前 tick のレビューでは修正なし。次は「密度の列の Cauchy 性（$0<q\le1$）」（上端・下端の一様な評価から。論法が二つ以上なら着手時に割る）。
+
+### 前進の記録
+
+- 2026-08-17（tick 349）: 台帳の先頭行「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価（$0<q\le1$）」を実行し、`claim_open_square_large_side_density_lower_vs_base_side_le_one` を `claim_open_square_large_side_density_upper_vs_base_side_le_one` の直後に置いた。
+  証明は台帳の備考のとおり（自然数の除法で $k$ を取り、$\frac2L\le\frac2a$・$-\frac2a\le-\frac{2a}L$ の係数比較、$\iota(\log q)\le0$・$0\le C$ の符号、非正の元の係数比較と負の係数のままの非負の元の係数比較、分配則で $\frac4a$ を割り、加法単調性・推移律で倍数でない辺の下からの評価へつなぐ）。逆元の順序反転は本文に無いので、$(-r)\cdot C=-(r\cdot C)$ を定義から素数ごとに読んで負の係数のまま比べた。SageMath `open-square-large-side-density-lower-vs-base-side`、Lean 具体版・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1303 件）。Cauchy 性の備考の $E$ を上端・下端の実際の係数の形へ書き直した。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 349）: 前 tick の「基準辺の平方以上の辺の密度の基準辺の密度による一様な上からの評価」の本文（準備 4 つ・本体三段）・SageMath overview（168 検査）・Lean 具体版（`exists_multiple_side_below_of_lt`・`hc2`・`hc4`・`hs2`・`hs3`・`hA`・`hB`・`h1`・`h2` が本文の準備第一〜第四と本体に 1 対 1）・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は上端の係数を辺 $L$ によらない形へ大きくする比較で Cauchy 性が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 353 で台帳から移した記録（tick 348 分）
 
 ### 現在地
