@@ -9,6 +9,7 @@ import CellularAutomata.InverseMapLocality
 import CellularAutomata.IterateMonoid
 import CellularAutomata.IterateMonoidIdempotents
 import CellularAutomata.IterateMonoidPrincipalIdealTail
+import CellularAutomata.IterateMonoidPrincipalIdealChain
 import CellularAutomata.LocalRuleRepresentation
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.EssentialDependency

@@ -53,6 +53,18 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.IterateMonoidPrincipalIdealChain.generatedIdeal_iterateMap_eq_tail
+  CellularAutomata.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_refl
+  CellularAutomata.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_symm
+  CellularAutomata.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_trans
+  CellularAutomata.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_equivalence_relation
+  CellularAutomata.IterateMonoidPrincipalIdealChain.generatedIdeal_antitone
+  CellularAutomata.IterateMonoidPrincipalIdealChain.generatedIdeals_comparable
+  CellularAutomata.IterateMonoidPrincipalIdealChain.mem_finiteGeneratedIdeal_iff
+  CellularAutomata.IterateMonoidPrincipalIdealChain.finiteGeneratedIdeal_mem_chain
+  CellularAutomata.IterateMonoidPrincipalIdealChain.finiteGeneratedIdeal_eq_iff_equivalent
+  CellularAutomata.IterateMonoidPrincipalIdealChain.finiteGeneratedIdealChain_comparable
+  CellularAutomata.IterateMonoidPrincipalIdealChain.generatedIdeal_finite_chain_decidable
   CellularAutomata.NecSuf.GlobalMapIteration.iterate_zero
   CellularAutomata.NecSuf.GlobalMapIteration.iterate_succ
   CellularAutomata.NecSuf.GlobalMapIteration.orbit_collision
