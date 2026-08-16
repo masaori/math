@@ -32,7 +32,12 @@
 `logOrderLE_openSquareBlockTilingLog_bounds_of_le_one`／`_of_one_le`（本体の二場合）
 （`lean/Ising2DLambda/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`。
 `claim_open_square_block_tiling_rational` の Lean と `logRat_le_iff`・`logRat_mul`・`logRat_pow` から組む）。
-必要十分版・導出版は未着手（次の tick）。
+必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`
+（`lean/Ising2DLambda/NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`。
+二側の評価を順序を保つ写像 1 本で運び、両端の像を等式で整えるだけの形。順序の反映も
+`A` の加法も `K` の乗法も仮定しない。二場合は `lower`・`upper` の入れ替えで同じ定理から得る）、
+導出版 `logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf`／`_of_one_le_from_necSuf`
+（`OpenSquareBlockTilingLogFromNecSuf.lean`。`K` を正の有理数の部分型に取り `ell := logRat` で特殊化）。
 
 ## 実行方法
 

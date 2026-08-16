@@ -4,6 +4,20 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 328 は、前 tick の「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の本文・SageMath・Lean 具体版を突き合わせて一致を確認し（修正無し）、
+残っていた Lean 必要十分版・導出版を書いてセクションを四層で完成させた。
+必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）: 具体版が実際に使うのは
+(1) 二側の評価を写像が順序を保って運ぶこと（`logRat_le_iff` は同値だが使うのは → の一方向だけ）、(2) 下側・上側の値の像が目標の形に等しいこと（準備の第二・第三は等式一つに畳む）だけで、
+像の側の加法も値の側の乗法も仮定に残らない。既存の `scaled_map_twoSided_bounds_necSuf`（尺度作用込みの密度版）・`upperBound_transport_through_two_monotone_maps_necSuf`
+（写像二段の片側版）は形が合わないので新設した。導出版 `OpenSquareBlockTilingLogFromNecSuf.lean`
+（`logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf`／`_of_one_le_from_necSuf`。値の側を正の有理数の部分型に取り、
+二場合は lower・upper と両端の等式の入れ替えで同じ必要十分版を引く。`open NecSuf.ThermodynamicLimit` が要る——`pow_pos_by_induction` がそこにある）。
+入口 import・sorry 検査 3 件追加（計 1217 件）。本文の `lean:` 欄と SageMath overview へ追記。
+次は「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」（$\Lambda$ の鎖の両辺を $\frac{1}{(ka)^2}\cdot\iota$ で移送（`claim_scaled_embedding_order_transfer`）し、
+$\Psi^{\mathrm{op}}_{ka}(q)$ を $\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)$ と $\Psi^{\mathrm{op}}_a(q)$ で二場合に挟む。
+$\frac{2k(k-1)a}{k^2a^2}=\frac{2(k-1)}{ka}$ の約分と `claim_scaled_free_entropy_denominator_clearing` の準備の第三を使う見込み。
+着手前に `claim_open_square_free_entropy_density_upper_bound` の $\Lambda_{\mathbb Q}$ の鎖 8 段の書き方と Lean `OpenSquareFreeEntropyDensityUpperBound.lean` を読むこと）。
+
 2026-08-16 の tick 327 は、前 tick の「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」を論法の数で「$\Lambda$ の鎖」と「密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」へ割り、
 前半「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」を本文・SageMath・Lean 具体版まで進めた（必要十分版・導出版は次 tick）。

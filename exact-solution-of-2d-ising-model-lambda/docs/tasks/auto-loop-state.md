@@ -7,6 +7,13 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 328 は、「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の残り（Lean 必要十分版・導出版）を書き、セクションを四層で完成させた。**
+  必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）は、二側の評価を順序を保つ写像 1 本で運び、
+  両端の像を等式で目標の形へ整えるだけの形（順序の反映も像の側の加法も値の側の乗法も仮定しない。二場合は lower・upper と両端の等式の入れ替えで同じ定理から得る）。
+  導出版 `OpenSquareBlockTilingLogFromNecSuf.lean` は値の側を正の有理数の部分型に取り `ell := logRat`・`logRat_le_iff` の → で特殊化。
+  lake build・sorry 検査 1217 件 OK。前 tick の $\Lambda$ の鎖（本文・SageMath・Lean 具体版）のレビューに不一致なし。
+  次は「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」。
+
 - **2026-08-16 の tick 327 は、「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」を本文・SageMath・Lean 具体版まで進めた（必要十分版・導出版は次 tick）。**
   台帳の「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」は論法が 2 つ（$\Lambda$ の中で両側の対数を開く計算と、$\Lambda_{\mathbb Q}$ への順序移送・有理数倍の約分）なので割り、前半を実行した。
   `claim_open_square_block_tiling_log`（`claim_open_square_free_entropy_density_upper_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
@@ -43,24 +50,7 @@
   `claim_constant_plus_breaks_no_bond` を `claim_partition_value_ge_one_at_positive_rational` の直前へ移し、削除済みの実数値主張を対象にしていた SageMath 検証 2 件
   （`free-energy-density-lower-bound`・`open-rectangle-value-at-least-one`）を撤去して対応を `partition-value-ge-one-at-positive-rational` へ付け替えた。次は「開境界正方形の値の上界（$\mathbb Q$ 版）」。
 
-- **2026-08-16（人間の指示）: 「実数体への脱出の宣言」以降のブロックをすべて削除した。**
-  可算側の経路と実数値の経路が併存していて、実数体が最初から要るように読めるためである。
-  代わりに「実数体への脱出をどう行うか（方針。まだ書いていない）」という注記を 1 つ置き、
-  有限系は $\Lambda_{\mathbb{Q}}$、極限の存在は Cauchy 性、脱出は切断の一点だけ、と方針を書いた。
-  消したのは本文 42 ブロックと、対応する SageMath 検証 22 件。Lean は孤立したまま残っており、
-  後片付けをセクション表へ足した。削除した内容は git の履歴に残っている。
-
-- **2026-08-16 の tick 323 は、「開境界長方形の正の有理点での値は 1 以上である（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
-  `claim_open_rectangle_value_ge_one_at_positive_rational`（`def_open_square_free_entropy_density` の直後・実数体脱出の宣言の直前、住処 Q）で、
-  $a,b\ge1$、$q\in\mathbb Q_{>0}$ に対し $1\le Z^{\mathrm{op}}_{a,b}(q)$。周期境界の `claim_partition_value_ge_one_at_positive_rational` と同じ五段の鎖
-  （$1=q^0=q^{b^{\mathrm{op}}(\tau_+)}\le$ 一項分離 $=$ 有限和 $=Z^{\mathrm{op}}_{a,b}(q)$）を $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。
-  備考どおり `def_open_rectangle_constant_plus_configuration`・`claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N）を実数体脱出の前へ移した
-  （$\mathbb R$ 版 `claim_open_rectangle_value_at_least_one` は併存）。SageMath 11472 検査（形 11 通り × 正の有理点 9 点、`ZZ`/`QQ`）、Lean 具体版
-  `one_le_openPartitionValueRat`・必要十分版は周期境界の `one_le_sum_pow_of_exponent_zero_necSuf` を共有・導出版、sorry 検査 1201 件
-  （$\tau_+$ の Lean 定義は実数体に依らない `OpenRectangleConstantPlusConfiguration.lean` へ切り出した）。セクション「値の下界 1 と密度の非負性」は
-  論法が 2 つなので割り、「密度の非負性（$\Lambda_{\mathbb Q}$ 版）」を次に置いた。前 tick の開境界正方形の自由エントロピー密度の定義のレビューに不一致なし。
-
-（これより古い 279 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 281 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -74,13 +64,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 49 セクション
+- 熱力学極限: 50 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | ブロック敷き詰めの対数化（$\Lambda$ の鎖） | 記述・SageMath・Lean 具体版まで | 残りは必要十分版・導出版だけ（`claim_open_square_block_tiling_log`。順序埋め込みを通した二側の移送と対数の準同型性で組む） |
 | 熱力学極限 | ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版） | todo | $\Lambda$ の鎖の両辺を $\frac{1}{(ka)^2}\cdot\iota$ で移送（`claim_scaled_embedding_order_transfer`）し、$\Psi^{\mathrm{op}}_{ka}(q)$ を $\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)$ と $\Psi^{\mathrm{op}}_a(q)$ で二場合に挟む |
 | 熱力学極限 | 部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版） | todo | `claim_open_square_subsquare_comparison_le_one` を $q\in\mathbb Q$ で |
 | 熱力学極限 | 極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる | todo | 完備性（上限の存在）を使わずに、可算側の主張として収束の速さつきで述べる。各段の比較は有理数の比較なので決定可能 |
@@ -96,6 +85,15 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 328）: セクション「ブロック敷き詰めの対数化（$\Lambda$ の鎖）」の残りの Lean 必要十分版・導出版を書き、四層で閉じた。
+  必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）: 具体版の証明が実際に使うのは
+  (1) 二側の評価を写像が順序を保って運ぶこと（`logRat_le_iff` は同値だが使うのは → の一方向だけ）、(2) 下側・上側の値の像が目標の形に等しいこと
+  （準備の第二の六段・第三の三段は等式一つに畳む。展開の内部は具体版の補題）だけであり、像の側の加法も値の側の乗法も仮定に残らない。
+  既存の共有候補（`scaled_map_twoSided_bounds_necSuf` は尺度作用込みの密度版、`upperBound_transport_through_two_monotone_maps_necSuf` は写像二段の片側版）は
+  形が合わないので新設した。導出版 `OpenSquareBlockTilingLogFromNecSuf.lean`（`logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf`／`_of_one_le_from_necSuf`。
+  値の側を正の有理数の部分型に取り、二場合は lower・upper と両端の等式の入れ替えで同じ必要十分版を引く）。入口 import・sorry 検査へ 3 件登録（計 1217 件）。
+  本文の `lean:` 欄と SageMath overview へ必要十分版・導出版を追記。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 327）: セクション「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」は論法が 2 つ（$\Lambda$ の対数の計算と $\Lambda_{\mathbb Q}$ への移送）なので
   「$\Lambda$ の鎖」と「密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」へ割り、前半の `claim_open_square_block_tiling_log` を
@@ -139,20 +137,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean` の `le_base_transport_of_monotone_necSuf` をそのまま共有、導出版
   `OpenSquareFreeEntropyDensityNonnegativeFromNecSuf.lean`。sorry 検査 1204 件。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 323）: `claim_open_rectangle_value_ge_one_at_positive_rational` を `def_open_square_free_entropy_density` の直後（`remark_real_field_escape` の直前）
-  に置き四層で閉じた。$\mathbb R$ 版 `claim_open_rectangle_value_at_least_one` の鎖（$1=q^0=q^{b^{\mathrm{op}}_{a,b}(\tau_+)}\le q^{b^{\mathrm{op}}(\tau_+)}+\sum_{\sigma\ne\tau_+}
-  =\sum_\sigma=Z^{\mathrm{op}}_{a,b}(q)$）を $q\in\mathbb Q_{>0}$ で述べ直し、周期境界の `claim_partition_value_ge_one_at_positive_rational` と同じ文言に揃えた。
-  `remark_real_field_escape` は引かない。備考どおり `def_open_rectangle_constant_plus_configuration`・`claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N）を
-  $\mathbb R$ 側の値の下界の直前から実数体脱出の宣言の前（新主張の直前）へ移した（本文は変えず、`verification` に新しい検査を足した）。$\mathbb R$ 版は併存（撤去のセクションで消す）。
-  SageMath `open-rectangle-value-ge-one-at-positive-rational`（形 11 通り × 正の有理点 9 点、11472 検査。$\tau_+$ の所属と破れ数 0・各項の正値性・鎖の各行・
-  $\mathbb Z[x]$ への代入と配位和の一致・$1\le$・$q=1$ で $2^{ab}$。`ZZ`/`QQ`）。Lean: `openAllPlusConfig` とその破れ数 0 の補題を `OpenRectangleValueAtLeastOne.lean`
-  から実数体に依らない `ThermodynamicLimit/OpenRectangleConstantPlusConfiguration.lean` へ切り出し（$\mathbb R$ 側はそれを import）、具体版
-  `ThermodynamicLimit/OpenRectangleValueGeOneRational.lean`（`one_le_openPartitionValueRat`。周期境界版と同じ五段の calc）、必要十分版は
-  `NecSuf/ThermodynamicLimit/PartitionValueGeOneRational.lean` の `one_le_sum_pow_of_exponent_zero_necSuf` をそのまま共有、導出版
-  `OpenRectangleValueGeOneRationalFromNecSuf.lean`。sorry 検査 1201 件。セクション「値の下界 1（$\mathbb Q$ 版）と密度の非負性（$\Lambda_{\mathbb Q}$ 版）」は
-  論法が 2 つ（一項分離と、対数の順序移送）なので割り、残り「密度の非負性」を表の先頭に置いた。式変形統一は一時停止中のため実施せず。
-
-（これより古い 290 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 291 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -170,6 +155,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+
+- 2026-08-16（tick 328）: 前 tick の「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の本文・SageMath（overview の対象ラベル・実行日・帰属・650 検査）・
+  Lean 具体版（入口 import・sorry 検査への登録）を突き合わせ、準備 3 つ（正値性・第二の六段・第三の三段）と二場合の 4 段の鎖の根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
 - 2026-08-16（tick 327）: 前 tick の「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
   Lean 具体版・必要十分版（周期境界と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、準備 3 つ・$\Lambda$ の鎖 4 段・$\Lambda_{\mathbb Q}$ の鎖 8 段の根拠が一致した。
@@ -191,11 +180,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   全て正の定数配位 2 ブロックの検証を、既にそれらを検査している `partition-value-ge-one-at-positive-rational`（overview の対象へ追記）と
   `open-rectangle-value-ge-one-at-positive-rational` へ付け替えた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。
 
-- 2026-08-16（tick 323）: 前 tick の「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
-  Lean（`openScaledFreeEntropy`・`openScaledFreeEntropy_apply`、入口 import・sorry 検査への登録）を突き合わせ、右辺の確定・各素数での値の三段の鎖・写像と値の区別・
-  具体例 $L=2$、$q=1/2$ が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-（これより古い 311 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 312 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

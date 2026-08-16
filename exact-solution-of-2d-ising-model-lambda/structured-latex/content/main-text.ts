@@ -40295,6 +40295,8 @@ Z^{\mathrm{op}}_{a,b}(q)
       "Ising2DLambda.ThermodynamicLimit.logRat_blockTilingUpperValue_eq",
       "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_le_one",
       "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_one_le",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_one_le_from_necSuf",
     ],
     statement: [
       paragraph([
