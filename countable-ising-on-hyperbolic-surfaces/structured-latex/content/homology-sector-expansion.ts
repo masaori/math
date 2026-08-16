@@ -259,6 +259,51 @@ export default defineBlocks([
     ],
   },
   {
+    id: "homology_sector_definition_edge_subset_coefficient_map",
+    kind: "definition",
+    title: { text: "辺部分集合から F_2 辺係数写像への変換" },
+    labels: ["def_edge_subset_coefficient_map_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/edge-subset-coefficient-map-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_cell_sets"),
+        " の有限辺集合 ",
+        math(String.raw`E_{\mathrm{cell}}`),
+        " の冪集合を ",
+        math(String.raw`\mathcal P(E_{\mathrm{cell}})`),
+        " と書く。辺部分集合から辺係数写像への変換を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_{E_{\mathrm{cell}}}:
+\mathcal P(E_{\mathrm{cell}})
+&\longrightarrow
+\mathbb F_2^{E_{\mathrm{cell}}},\\
+A
+&\longmapsto
+\chi_{E_{\mathrm{cell}}}(A),\\
+\chi_{E_{\mathrm{cell}}}(A)(e)
+&:=
+\begin{cases}
+1_{\mathbb F_2} & (e\in A),\\
+0_{\mathbb F_2} & (e\notin A)
+\end{cases}
+\qquad(e\in E_{\mathrm{cell}})
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`A\in\mathcal P(E_{\mathrm{cell}})`),
+        " は辺ラベルの部分集合であり、",
+        math(String.raw`\chi_{E_{\mathrm{cell}}}(A):E_{\mathrm{cell}}\to\mathbb F_2`),
+        " は辺ラベルごとの係数を与える写像である。したがって辺部分集合と辺係数写像を同一視せず、両者の移行には必ず ",
+        math(String.raw`\chi_{E_{\mathrm{cell}}}`),
+        " を用いる。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "homology_sector_definition_face_boundary_space",
     kind: "definition",
     title: { text: "F_2 上の面境界空間" },

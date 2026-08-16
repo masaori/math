@@ -14,6 +14,7 @@ export const ALL_LABELS = [
   "def_broken_edge_set",
   "def_edge_endpoint_label_set",
   "def_edge_spin_sign",
+  "def_edge_subset_coefficient_map_over_f2",
   "def_even_edge_subset",
   "def_even_subgraph_polynomial",
   "def_face_boundary_space_over_f2",
