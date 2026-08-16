@@ -1421,6 +1421,11 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.le_of_smul_le_smul_necSuf
   Ising2DLambda.NecSuf.ThermodynamicLimit.realize_monotone_of_common_denominator_necSuf
   Ising2DLambda.ThermodynamicLimit.realizeRational_le_of_rationalLogOrderLE_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openSquareRealizedLowerSet_nonempty
+  Ising2DLambda.ThermodynamicLimit.realizeRational_le_realizeRational_upperBound_of_mem_openSquareDensityLowerSet
+  Ising2DLambda.ThermodynamicLimit.openSquareRealizedLowerSet_bddAbove
+  Ising2DLambda.ThermodynamicLimit.realizeRational_le_openSquareFreeEnergyDensitySup
+  Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensitySup_le_of_forall_le
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -11912,3 +11912,24 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-16（tick 342）: 前 tick の「非負の元の有理数倍は係数の大小で比較できる」の本文（準備・四段の鎖）・SageMath overview（1064 検査）・Lean 具体版（`sub_nonneg`・`smul_zero`・`rationalLogOrderLE_add_right`・`zero_add`・`← add_smul`・`sub_add_cancel` が本文と 1 対 1）・必要十分版（二つの仮定だけ）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+## tick 360〜361 の記録（2026-08-17 に台帳から移した）
+
+### 現在地
+
+- **2026-08-17 の tick 360 は、台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」を論法の数で四行へ割り、その最初「実数体と実対数、および実現写像 $\rho_{\mathbb R}$ の定義（実数体への脱出: 実対数）」を本文・Lean まで書いた（定義のみ。SageMath 検証は定義には置かない）。**
+  `def_real_logarithm`（本文で初めて住処 R を宣言。$\mathbb R$ は $\mathbb Q$ を部分体として含む順序体、包含 $\iota_{\mathbb Q\to\mathbb R}$ に名前を置いて有理数を実数として読むときは必ず通す、$\mathbb R_{>0}$、実対数 $\log_{\mathbb R}:\mathbb R_{>0}\to\mathbb R$。使う性質は乗法を加法へ移すことと狭義単調（したがって $u\le v\Rightarrow\log u\le\log v$）の二つだけと宣言。級数・微分・完備性は使わない。`realEscape` は「実対数」）と `def_rational_log_order_group_realization`（$\rho_{\mathbb R}(\mu):=\sum_{p\in\operatorname{supp}\mu}\iota_{\mathbb Q\to\mathbb R}(\mu(p))\cdot\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(p))$。$\mu(p)=0$ の項が $0$ なので台を含む任意の有限集合に渡る和で同じ値。`realEscape` は「実対数」）。いずれも `claim_open_square_density_lower_set_le_upper_bound` の直後・`remark_real_escape_plan` の直前。`remark_real_escape_plan` の冒頭「ここまで実数体は現れていない」を「直前の二つの定義を除き」に直し、脱出の項に両定義への参照を足した。
+  Lean `ThermodynamicLimit/RationalLogOrderGroupRealization.lean`（`PositiveReal`・`realLog`・`realLog_mul`（`Real.log_mul`）・`realLog_lt_realLog`（`Real.log_lt_log`）・`realLog_le_realLog`・`primePositiveReal`・`realizeRational`（`Finsupp.sum`）・`realizeRational_eq_sum_support`（`rfl`）。定義ブロックなので必要十分版は無い）。入口 import・sorry 検査へ 4 件登録（計 1346 件）。check 450 ブロック・PDF 243 ページ通過。
+  割り方: 「実対数と実現写像の定義」→「実現写像は有理数倍と可換（$\rho_{\mathbb R}(r\cdot\mu)=\iota_{\mathbb Q\to\mathbb R}(r)\rho_{\mathbb R}(\mu)$。$\mathbb R$ の分配則を有限和へ）」→「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数（$\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。台の大きさについての帰納法、積の対数と整数冪の対数）」→「実現写像は順序を保つ（共通分母 $N$ で $\lambda_N\le_\Lambda\mu_N$、$\mathrm{rat}_\Lambda$ の比較、実対数の単調性、前二行、$N>0$ で割る）」。
+  レビュー: 前 tick が台帳から外した tick 354 の記録が保管庫へ移されていなかったので復元した（本文の修正は無い）。次は「実現写像は有理数倍と可換」。
+
+
+### 前進の記録
+
+- 2026-08-17（tick 361）: 台帳の先頭行「実現写像は有理数倍と可換（実数体への脱出: 実対数）」を実行し、`claim_rational_log_order_group_realization_smul` を `def_rational_log_order_group_realization` の直後に置いた。
+  証明は台の包含の準備一つと一続き六段（定義・台を含む有限集合の和・有理数倍の定義・$\iota$ の乗法保存・結合則・分配則・定義）だけ。SageMath `rational-log-order-group-realization-smul`（$\ell_p$ を記号のまま多項式環で比較）、Lean 具体版・必要十分版（`MulZeroClass`・`NonUnitalSemiring`、$\iota$ の乗法保存と $\iota(0)=0$、重みは任意）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1349 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 361）: 前 tick の「実数体と実対数」「有理係数の対数順序群の実現写像」の二定義の本文・Lean（`PositiveReal`・`realLog`・`realLog_mul`・`realLog_lt_realLog`・`realLog_le_realLog`・`primePositiveReal`・`realizeRational`・`realizeRational_eq_sum_support`）を突き合わせ、宣言した性質（乗法を加法へ・狭義単調）と定義の形（台に渡る和）が一致した。
+  「何も言っていない主張」の観点: 二定義は実数体への脱出の位置と理由を宣言するもので残す。今 tick の有理数倍との可換性は $\rho_{\mathbb R}$ という写像の性質（台の付け替えを含む）で、順序保存の証明が $N$ で割り戻すために引くので残す。**修正 1 件**: `def_rational_log_order_group_realization` の末尾が「加法・有理数倍・順序をどう保つかは続く主張で示す」と加法を約束していたが、台帳のどの行も加法を示さない（順序保存は共通分母と有理数倍だけで閉じる）ので「有理数倍と順序」に直し、加法は述べない旨を添えた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。
