@@ -3,6 +3,32 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 336）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 336 は、台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行し、「有限系の密度の分母は整数倍で払える」（$L^2M^2\cdot\frac1{L^2}\iota(\lambda)=M^2\iota(\lambda)$。$\mathbb Q$ の四則だけ）を本文から消した。**
+  この主張を引いていた 7 箇所はすべて証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけを使っていたので、その等式を
+  `claim_rational_embedding_commutes_with_integer_multiple`（「対数順序群から有理係数の対数順序群への写像は整数倍と交換する」。`claim_rational_log_order_group_embedding` の直後、住処 Lambda。各素数での値の五段の鎖）として残し、7 箇所の参照を付け替えた。
+  SageMath `check/rational-embedding-commutes-with-integer-multiple/`（旧 `scaled-free-entropy-denominator-clearing` を作り直し。$n\in\{-6,\dots,6\}$ × 有限台 5 組、247 検査）。
+  Lean は具体版 `scaledFreeEntropy_clear_denominator`・必要十分版 `two_scaled_denominators_cancel_necSuf`・導出版の 3 ファイルを削除し、残す `toRational_intSmul` に必要十分版 `NecSuf.pointwise_lift_intSmul_necSuf`（加法群上の有限台写像への値ごとの持ち上げは整数倍と交換する）と導出版 `toRational_intSmul_from_necSuf` を足した。sorry 検査 1245 件。
+  全 284 件の主張を題名で走査し、証明の短い順にも見たが、他に体の四則だけのブロックは無かった（`claim_qbar_no_zero_divisors` は 10 箇所が引くので残す。所属・表示・well-defined 性を言う短い主張は残す）。以後は毎 tick のレビュー観点で見る。
+  次は「密度の列の Cauchy 性」（着手時に論法の数で割ること。Archimedes 型の補題「$\mu,\varepsilon>0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n$」が要る）。
+
+### 前進の記録
+
+- 2026-08-16（tick 336）: 台帳の先頭行「何も言っていない主張の一掃（既存分）」を実行した。消したのは `claim_scaled_free_entropy_denominator_clearing`（「有限系の密度の分母は整数倍で払える」）1 件。
+  その本体（$L^2M^2$ を掛けて分母を払う二段）はどこからも引かれておらず、引かれていたのは証明末尾の補助等式 $n\cdot\iota(\nu)=\iota(n\nu)$ だけだったので、
+  補助等式を `claim_rational_embedding_commutes_with_integer_multiple` として独立させ（証明の内容は変えず五段の鎖をそのまま本体にした）、7 箇所の参照を付け替えた。
+  SageMath 検査を作り直し（`rational-embedding-commutes-with-integer-multiple`）、Lean の分母払いの 3 ファイルを削除、`toRational_intSmul` へ必要十分版と導出版を追加（sorry 検査 1246→1245 件）。
+  題名の全走査と証明の短い順の走査で他に該当は無し。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 336）: 前 tick の「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」の本文（準備 4 つ・3 段の鎖 2 本）・SageMath overview・
+  Lean 具体版・導出版を突き合わせ、根拠が一致した。「何も言っていない主張」の観点では、この tick の前進そのものが該当ブロックの削除（下の前進の記録）。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。他の修正は無い。
+
 ## 2026-08-16（tick 335）の記録
 
 ### 現在地

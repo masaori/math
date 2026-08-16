@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 341 は、前 tick の「非負有理数倍は有理係数の対数順序群の順序を保つ」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「係数の大小による有理数倍の比較」を非負の元と非正の元の二行へ割り、非負の元の行を四層で閉じた。
+`claim_rational_log_order_group_scalar_compare_nonneg`（「非負の元の有理数倍は係数の大小で比較できる」。`claim_rational_log_order_group_nonneg_scalar_monotone` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $r,s\in\mathbb Q$、$r\le s$、$0\le_{\Lambda_{\mathbb Q}}\nu$ なら $r\cdot\nu\le_{\Lambda_{\mathbb Q}}s\cdot\nu$。
+証明: $c:=s-r\ge0$、`claim_rational_log_order_group_nonneg_scalar_monotone`（$\lambda:=0$、$\mu:=\nu$）で $c\cdot0\le c\cdot\nu$、$c\cdot0=0$、`claim_rational_log_order_group_add_monotone`（$\lambda:=0$、$\mu:=c\cdot\nu$、$\nu:=r\cdot\nu$）で $0+r\cdot\nu\le c\cdot\nu+r\cdot\nu$、
+四段の鎖 $r\cdot\nu=0+r\cdot\nu\le c\cdot\nu+r\cdot\nu=(c+r)\cdot\nu=s\cdot\nu$（零写像は単位元・分配則・$\mathbb Q$ の四則）。
+SageMath `check/rational-log-order-group-scalar-compare-nonneg/`（64 ベクトルのうち $0\le\nu$ の 38 本 × $r\le s$ の 28 組、主張 1064 件・鎖 1064 件、10 秒）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonneg.lean`（`rationalLogOrderLE_ratSmul_le_ratSmul_of_le`。`sub_nonneg`・`smul_zero`・`rationalLogOrderLE_add_right`・`zero_add`・`← add_smul`・`sub_add_cancel`）、
+必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonneg.lean`（`smul_le_smul_of_le_of_nonneg_necSuf`。`[Ring K] [PartialOrder K] [IsOrderedAddMonoid K] [AddCommGroup X] [Module K X]` と関係 `le : X → X → Prop`、仮定は「非負係数の作用が `le` を保つ」「右加法が `le` を保つ」の二つだけ。
+`le` の推移律・反射律も体も要らない）、導出版 `RationalLogOrderGroupScalarCompareNonnegFromNecSuf.lean`。sorry 検査 1271 件。
+次は「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」（$\nu\le0$ なら $s\cdot\nu\le r\cdot\nu$。同じ型で `claim_rational_log_order_group_nonneg_scalar_monotone` を $\lambda:=\nu$、$\mu:=0$ で読む。台帳の備考）。
+
 2026-08-16 の tick 340 は、前 tick の「倍数辺との平方の差の評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「非負有理数倍は有理係数の対数順序群の順序を保つ」を四層で閉じた。
 `claim_rational_log_order_group_nonneg_scalar_monotone`（`claim_square_difference_from_multiple_side_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $c\in\mathbb Q$、$0\le c$、$\lambda\le_{\Lambda_{\mathbb Q}}\mu$ なら $c\cdot\lambda\le_{\Lambda_{\mathbb Q}}c\cdot\mu$。
