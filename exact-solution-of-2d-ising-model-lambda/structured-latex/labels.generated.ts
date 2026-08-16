@@ -66,6 +66,7 @@ export const ALL_LABELS = [
   "claim_non_orbit_preserving_term_zero",
   "claim_one_s_linearly_independent",
   "claim_open_rectangle_constant_plus_breaks_no_bond",
+  "claim_open_rectangle_gluing_inequality_log",
   "claim_open_rectangle_gluing_inequality_rational",
   "claim_open_rectangle_iterated_gluing_first_rational",
   "claim_open_rectangle_iterated_gluing_second_rational",

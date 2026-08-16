@@ -3,6 +3,31 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 328）の記録
+
+### 現在地
+- **2026-08-16 の tick 328 は、「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の残り（Lean 必要十分版・導出版）を書き、セクションを四層で完成させた。**
+  必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）は、二側の評価を順序を保つ写像 1 本で運び、
+  両端の像を等式で目標の形へ整えるだけの形（順序の反映も像の側の加法も値の側の乗法も仮定しない。二場合は lower・upper と両端の等式の入れ替えで同じ定理から得る）。
+  導出版 `OpenSquareBlockTilingLogFromNecSuf.lean` は値の側を正の有理数の部分型に取り `ell := logRat`・`logRat_le_iff` の → で特殊化。
+  lake build・sorry 検査 1217 件 OK。前 tick の $\Lambda$ の鎖（本文・SageMath・Lean 具体版）のレビューに不一致なし。
+  次は「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」。
+
+### 前進の記録
+- 2026-08-16（tick 328）: セクション「ブロック敷き詰めの対数化（$\Lambda$ の鎖）」の残りの Lean 必要十分版・導出版を書き、四層で閉じた。
+  必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）: 具体版の証明が実際に使うのは
+  (1) 二側の評価を写像が順序を保って運ぶこと（`logRat_le_iff` は同値だが使うのは → の一方向だけ）、(2) 下側・上側の値の像が目標の形に等しいこと
+  （準備の第二の六段・第三の三段は等式一つに畳む。展開の内部は具体版の補題）だけであり、像の側の加法も値の側の乗法も仮定に残らない。
+  既存の共有候補（`scaled_map_twoSided_bounds_necSuf` は尺度作用込みの密度版、`upperBound_transport_through_two_monotone_maps_necSuf` は写像二段の片側版）は
+  形が合わないので新設した。導出版 `OpenSquareBlockTilingLogFromNecSuf.lean`（`logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf`／`_of_one_le_from_necSuf`。
+  値の側を正の有理数の部分型に取り、二場合は lower・upper と両端の等式の入れ替えで同じ必要十分版を引く）。入口 import・sorry 検査へ 3 件登録（計 1217 件）。
+  本文の `lean:` 欄と SageMath overview へ必要十分版・導出版を追記。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+- 2026-08-16（tick 328）: 前 tick の「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の本文・SageMath（overview の対象ラベル・実行日・帰属・650 検査）・
+  Lean 具体版（入口 import・sorry 検査への登録）を突き合わせ、準備 3 つ（正値性・第二の六段・第三の三段）と二場合の 4 段の鎖の根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 327）の記録
 
 ### 現在地

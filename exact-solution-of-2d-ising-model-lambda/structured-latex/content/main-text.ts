@@ -38891,6 +38891,183 @@ q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}q^{\,b^{\mathrm{op}}_{c,b}(\tau)}
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_rectangle_gluing_inequality_log",
+    kind: "claim",
+    title: { text: "開境界長方形の接合不等式の対数化（Λ の鎖）" },
+    labels: ["claim_open_rectangle_gluing_inequality_log"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-rectangle-gluing-inequality-log"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.logRat_gluingLowerValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logRat_gluingUpperValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueFirstLog_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueFirstLog_bounds_of_one_le",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueSecondLog_bounds_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueSecondLog_bounds_of_one_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueFirstLog_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueFirstLog_bounds_of_one_le_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueSecondLog_bounds_of_le_one_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueSecondLog_bounds_of_one_le_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,b,c\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        "、",
+        math(String.raw`c\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " を任意に取る。第一の座標の向きに接ぐと、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+b\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{a+c,b}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q),\\[2mm]
+1\le q:&
+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{a+c,b}(q)
+\ \le_{\Lambda}\ b\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q).
+\end{array}`),
+      paragraph(["第二の座標の向きに接ぐと、同様に次が成り立つ。"]),
+      displayMath(String.raw`\begin{array}{ll}
+0<q\le1:&
+a\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{a,c}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{a,b+c}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{a,c}(q),\\[2mm]
+1\le q:&
+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{a,c}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{a,b+c}(q)
+\ \le_{\Lambda}\ a\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{a,c}(q).
+\end{array}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}(q),\ Z^{\mathrm{op}}_{c,b}(q),\ Z^{\mathrm{op}}_{a,c}(q),\ Z^{\mathrm{op}}_{a+c,b}(q),\ Z^{\mathrm{op}}_{a,b+c}(q)\in\mathbb{Q}_{>0}`),
+        " は開境界分配多項式の正の有理点での値（",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。正値性は ",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）、",
+        math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、整数倍 ",
+        math(String.raw`b\,\cdot`),
+        "、",
+        math(String.raw`a\,\cdot`),
+        " と加法は ",
+        ref("def_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda}`),
+        " は ",
+        ref("def_log_order_group_order"),
+        " の順序である。",
+        ref("claim_open_rectangle_gluing_inequality_rational"),
+        " の四つの評価の両辺の対数を取ったものであり、実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一の座標の向きを示す。準備として 2 つ置く。第一に、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`(a,b):=(a,b)`),
+        "、",
+        math(String.raw`(a,b):=(c,b)`),
+        "、",
+        math(String.raw`(a,b):=(a+c,b)`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}(q),\ Z^{\mathrm{op}}_{c,b}(q),\ Z^{\mathrm{op}}_{a+c,b}(q)\in\mathbb{Q}_{>0}`),
+        " である。また ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " なので、正の有理数の自然数冪と正の有理数どうしの積は正であることから、",
+        math(String.raw`q^{b}Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)`),
+        " と ",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)`),
+        " はいずれも ",
+        math(String.raw`\mathbb{Q}_{>0}`),
+        " の元であり、対数 ",
+        ref("def_rational_log"),
+        " を施せる。第二に、",
+        ref("claim_open_rectangle_gluing_inequality_rational"),
+        " の第一の座標の向きの二つの評価の両端の値の対数を、",
+        math(String.raw`\Lambda`),
+        " の中で開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(q^{b}Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&=\log\bigl(q^{b}\bigr)+\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&=b\,\log q+\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=b\text{ で。整数倍は }\blkref{def_log_order_group})\\
+&=b\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+&&(\because\ \blkref{claim_log_additive})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&=\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+&&(\because\ \blkref{claim_log_additive})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0<q\le1`),
+        " とする。主張の左の元から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+&=\log\bigl(q^{b}Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&&(\because\ \text{準備の第二の前半を右辺から左辺の向きで読む})\\
+&\le_{\Lambda}\log Z^{\mathrm{op}}_{a+c,b}(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_rectangle_gluing_inequality_rational}\text{ の第一の座標の向き・}0<q\le1\text{ の下からの評価を移す})\\
+&\le_{\Lambda}\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_rectangle_gluing_inequality_rational}\text{ の第一の座標の向き・}0<q\le1\text{ の上からの評価を移す})\\
+&=\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+&&(\because\ \text{準備の第二の後半})
+\end{aligned}`),
+      paragraph([
+        "この鎖の第二行までが主張の左の不等式、第三行から第四行までが主張の右の不等式である。",
+        math(String.raw`1\le q`),
+        " の場合は、",
+        ref("claim_open_rectangle_gluing_inequality_rational"),
+        " の二つの評価の向きがともに反転するので、主張の左の元から始める同じ形の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+&=\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&&(\because\ \text{準備の第二の後半を右辺から左辺の向きで読む})\\
+&\le_{\Lambda}\log Z^{\mathrm{op}}_{a+c,b}(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_rectangle_gluing_inequality_rational}\text{ の第一の座標の向き・}1\le q\text{ の下からの評価を移す})\\
+&\le_{\Lambda}\log\bigl(q^{b}Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_rectangle_gluing_inequality_rational}\text{ の第一の座標の向き・}1\le q\text{ の上からの評価を移す})\\
+&=b\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
+&&(\because\ \text{準備の第二の前半})
+\end{aligned}`),
+      paragraph([
+        "第二の座標の向きは、上の準備と二本の鎖で ",
+        math(String.raw`Z^{\mathrm{op}}_{c,b}(q)`),
+        " を ",
+        math(String.raw`Z^{\mathrm{op}}_{a,c}(q)`),
+        " へ、",
+        math(String.raw`Z^{\mathrm{op}}_{a+c,b}(q)`),
+        " を ",
+        math(String.raw`Z^{\mathrm{op}}_{a,b+c}(q)`),
+        " へ、指数と整数倍の ",
+        math(String.raw`b`),
+        " を ",
+        math(String.raw`a`),
+        " へ置き換え、",
+        ref("claim_open_rectangle_gluing_inequality_rational"),
+        " の第二の座標の向きの評価を移すことで、段ごとに同じ根拠で従う。",
+      ]),
+      paragraph([
+        "使ったのは、開境界長方形の接合不等式（正の有理点）、対数が順序を保ちかつ反映すること、対数の加法性と冪の法則だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_claim_open_rectangle_iterated_gluing_first_rational",
     kind: "claim",
     title: { text: "開境界長方形を第一座標方向へ反復接合した値の評価（正の有理点）" },

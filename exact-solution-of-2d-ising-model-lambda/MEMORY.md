@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 333 は、前 tick の「有理係数の対数順序群の Cauchy 列」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」を「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」へ割り直して四層で閉じた
+（$\Psi^{\mathrm{op}}$ は正方形にしか定義が無く、長方形の接合を $\Psi$ どうしで書くことはできない。正方形どうしの $\Psi$ の不等式は既に `claim_open_square_block_tiling_density` が担う）。
+`claim_open_rectangle_gluing_inequality_log`（`claim_open_rectangle_gluing_inequality_rational` の直後、住処 Lambda）:
+$0<q\le1$: $b\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)\le_\Lambda\log Z^{\mathrm{op}}_{a+c,b}(q)\le_\Lambda\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)$、$1\le q$: 反転、
+第二の座標の向きは $b\to a$、$Z^{\mathrm{op}}_{c,b}\to Z^{\mathrm{op}}_{a,c}$、$Z^{\mathrm{op}}_{a+c,b}\to Z^{\mathrm{op}}_{a,b+c}$。証明は `claim_open_square_block_tiling_log` と同じ型
+（準備: 正値性・下端の対数を開く三段（`claim_log_additive`・`claim_log_power`・`claim_log_additive`）と上端の一段、本体は `claim_rational_log_order_iff` で接合不等式を移す 4 段の鎖 2 本）。
+SageMath `open-rectangle-gluing-inequality-log`（形 10 通り × 有理点 9 点 × 二向き、1700 検査、10 秒。`ZZ`/`QQ`・有限台辞書。$4\times4$ を含む形は外す）。
+Lean 具体版 `ThermodynamicLimit/OpenRectangleGluingInequalityLog.lean`（`logRat_gluingLowerValue_eq`（$n$・$Z_1$・$Z_2$ で一般に）・`logRat_gluingUpperValue_eq`・
+`logOrderLE_openRectangleGlueFirstLog_bounds_of_le_one`／`_of_one_le`・`…GlueSecondLog…` の 4 本。`openPartitionValueRat_glueFirst_bounds_of_le_one` は `variable (a b c : ℕ)` で `a b c` 明示引数）、
+必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有（新設せず）、導出版 `OpenRectangleGluingInequalityLogFromNecSuf.lean`。sorry 検査 1237 件。
+次は「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」（`claim_open_square_subsquare_comparison_rational_le_one` の両辺の対数を取り（$\Lambda$ の鎖。
+上界の対数は $(L^2-a^2)\log 2+2(L^2-a^2)\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)$）、$\frac1{L^2}\iota$ で移して $\Psi^{\mathrm{op}}_L$ を挟む。$\Lambda$ の鎖と $\Lambda_{\mathbb Q}$ の挟み込みで
+論法が二つあるので、着手時に二つのセクションへ割ること。必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` が両方で共有できる見込み）。
+
 2026-08-16 の tick 332 は、前 tick の「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」を定義ブロック 1 つとして実行した（「述べる」だけの行なので）。
 `def_rational_log_order_group_cauchy_sequence`（`claim_open_square_block_tiling_density` の直後、`remark_real_escape_plan` の直前、住処 Lambda）:
