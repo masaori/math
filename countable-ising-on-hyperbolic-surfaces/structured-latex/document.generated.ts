@@ -19,6 +19,7 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_finite_cellulation from './content/finite-cellulation.ts'
+import blocks_finite_fourier_duality from './content/finite-fourier-duality.ts'
 import blocks_homology_sector_expansion from './content/homology-sector-expansion.ts'
 import blocks_main_text from './content/main-text.ts'
 
@@ -27,6 +28,7 @@ import blocks_main_text from './content/main-text.ts'
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
   ...typeof blocks_finite_cellulation,
+  ...typeof blocks_finite_fourier_duality,
   ...typeof blocks_homology_sector_expansion,
   ...typeof blocks_main_text,
 ]

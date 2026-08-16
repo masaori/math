@@ -19,6 +19,7 @@ export const ALL_LABELS = [
   "def_even_edge_subset",
   "def_even_edge_subset_homology_class_map",
   "def_even_subgraph_polynomial",
+  "def_f2_linear_character_space",
   "def_face_boundary_space_over_f2",
   "def_finite_cellulation_cell_sets",
   "def_finite_cellulation_connected_one_skeleton",
