@@ -534,4 +534,42 @@ A
       ]),
     ],
   },
+  {
+    id: "homology_sector_definition_homology_class_generating_polynomial",
+    kind: "definition",
+    title: { text: "第一ホモロジー類別の高温生成多項式" },
+    labels: ["def_homology_class_generating_polynomial"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/homology-class-generating-polynomial"],
+    statement: [
+      paragraph([
+        ref("def_even_edge_subset_homology_class_map"),
+        " の第一ホモロジー類写像に対し、任意の ",
+        math(String.raw`h\in H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " と独立な不定元 ",
+        math(String.raw`u,v`),
+        " について、第一ホモロジー類 ",
+        math(String.raw`h`),
+        " の高温生成多項式を",
+      ]),
+      displayMath(String.raw`Q_{\mathcal C_{\mathrm{cell}},h}(u,v)
+:=
+\sum_{A\in\eta_{\mathcal C_{\mathrm{cell}}}^{-1}(\{h\})}
+u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
+\in\mathbb Z[u,v]`),
+      paragraph([
+        "で定める。和の添字集合は、有限集合 ",
+        math(String.raw`\mathcal Z_1(G)`),
+        " から有限商集合 ",
+        math(String.raw`H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " への写像 ",
+        math(String.raw`\eta_{\mathcal C_{\mathrm{cell}}}`),
+        " による ",
+        math(String.raw`\{h\}`),
+        " の逆像である。添字には商集合の元 ",
+        math(String.raw`h`),
+        " 自体を用い、その剰余集合から代表サイクルを選ばないため、この定義は代表の選択に依存しない。各ファイバーと辺集合は有限なので、係数は整数であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

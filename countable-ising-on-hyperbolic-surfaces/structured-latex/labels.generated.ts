@@ -39,6 +39,7 @@ export const ALL_LABELS = [
   "def_first_cycle_space_over_f2",
   "def_first_homology_group_over_f2",
   "def_formal_edge_weight_sum",
+  "def_homology_class_generating_polynomial",
   "def_ising_partition_polynomial",
   "def_mod_two_boundary_parity",
   "def_oriented_closed_surface_cellulation",
