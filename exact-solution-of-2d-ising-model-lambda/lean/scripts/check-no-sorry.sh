@@ -1398,6 +1398,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet
   Ising2DLambda.NecSuf.ThermodynamicLimit.le_bound_of_mem_lowerSetOfSequence_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLog_mul
+  Ising2DLambda.ThermodynamicLimit.realLog_lt_realLog
+  Ising2DLambda.ThermodynamicLimit.realLog_le_realLog
+  Ising2DLambda.ThermodynamicLimit.realizeRational_eq_sum_support
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

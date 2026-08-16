@@ -3,6 +3,58 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 360 で台帳から移した記録（tick 355 分）
+
+### 現在地
+
+- **2026-08-17 の tick 355 は、台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で二行へ割り、その最初「Archimedes 性の倍率以上の自然数で割れば上界を超えない」（$0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$、$a\ge1$、$n\le a$ で $\frac1a\cdot\mu\le_{\Lambda_{\mathbb Q}}\varepsilon$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_div_ge_multiplier_le`（`claim_rational_log_order_group_scalar_compare_nonpos` の直後・`claim_rational_embedded_log_order_iff` の直前、住処 Lambda。$\Lambda_{\mathbb Q}$ の順序と有理数倍の一般的な性質なので、密度の評価の列ではなく係数比較の並びに置いた）。$0\le\mu$ は要らない。証明は準備（$0\le\frac1a$、$\frac na\le1$。$\mathbb Q$ の順序）と本体一続き五段（$\frac1a\mu\le\frac1a(n\varepsilon)$（`claim_rational_log_order_group_nonneg_scalar_monotone`）$=(\frac1a n)\varepsilon$（有理数倍の結合則を右から左）$=\frac na\varepsilon$（$\mathbb Q$ の四則）$\le1\cdot\varepsilon$（`claim_rational_log_order_group_scalar_compare_nonneg`）$=\varepsilon$（$1\cdot\lambda=\lambda$））。加法にも逆元にも触れない。
+  SageMath `check/rational-log-order-group-div-ge-multiplier-le/`（素数 $2,3,5$ の 64 ベクトル、$n\le3$、$a\le5$。仮定を満たす 28491 組で主張と五段、$n\le a$ を外すと落ちる例 878 組。数秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupDivGeMultiplierLe.lean`（`rationalLogOrderLE_inv_natSmul_le_of_le_natSmul`。`one_div_pos`・`div_le_one`・`← mul_smul`・`ring`・`one_smul`・`rationalLogOrderLE_trans`），
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupDivGeMultiplierLe.lean`（`inv_smul_le_of_le_smul_necSuf`。`[Zero X] [SMul ℚ X]` と推移律・非負係数の作用の順序保存・非負の元の係数比較・作用の結合則・単位を仮定として受けるだけ。加法も群の公理も順序の線形性も要らない。係数は $\mathbb Q$ のまま）、導出版。sorry 検査 1325 件。
+  割り方: 「Archimedes 性の倍率以上の自然数で割れば上界を超えない」（係数の鎖）→「密度の列の Cauchy 性」（Archimedes 性で $n$、$a:=n+2$、$N:=a^2$ を選ぶ存在の構成。上端・下端に核の等式とこの主張を代入し、下端は逆元の順序反転）。前 tick のレビューでは修正なし。次は「密度の列の Cauchy 性（$0<q\le1$）」本体。
+
+### 前進の記録
+
+- 2026-08-17（tick 355）: 台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」は、Archimedes 性で選んだ倍率以上の自然数で割ると $\varepsilon$ 以下になる係数の鎖（非負有理数倍の順序保存・結合則・係数比較）と、$N$ を選んで上端・下端をつなぐ存在の構成の二つの論法を含むので二行へ割った。その最初「Archimedes 性の倍率以上の自然数で割れば上界を超えない」を実行し、`claim_rational_log_order_group_div_ge_multiplier_le` を `claim_rational_log_order_group_scalar_compare_nonpos` の直後（係数比較の並び）に置いた。
+  証明は準備（$\mathbb Q$ の順序 $0\le\frac1a$、$\frac na\le1$）と一続き五段だけ。SageMath `rational-log-order-group-div-ge-multiplier-le`、Lean 具体版・必要十分版（`Zero`・`SMul ℚ`、推移律・非負係数の作用の順序保存・非負の元の係数比較・結合則・単位を仮定として受けるだけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1325 件）。式変形統一は一時停止中のため実施せず。
+
+
+（これより古い 321 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+
+### レビュー記録
+
+- 2026-08-17（tick 355）: 前 tick の「核は非負である」の本文（準備 4 つ・本体九段）・SageMath overview（268 検査）・Lean 具体版（`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCoreX`・`…CoreY_of_le_one`・`…Core_of_le_one` が本文の準備第二〜第四と本体に 1 対 1）・必要十分版（`AddCommMonoid`・`Neg`・`SMul ℚ`、推移律・右加法単調性・非負有理数倍の順序保存・逆元の順序反転・$c\cdot0=0$・$-0=0$）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 核の非負は Archimedes 性の前提 $0\le\mu$ そのもので、値の属する側を言っているので残す。今 tick の「Archimedes 性の倍率以上の自然数で割れば上界を超えない」は係数の鎖であり、Cauchy 性が上端・下端の両方で引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
+（これより古い 342 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+
+## 2026-08-17 tick 360 で台帳から移した記録（tick 354 分。tick 359 が台帳から外したが保管庫へ移していなかったので、ここで復元した）
+
+### 現在地
+
+- **2026-08-17 の tick 354 は、台帳の先頭行「核は非負である（$0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$、$0<q\le1$）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_density_difference_bound_core_nonneg_le_one`（`claim_open_square_density_difference_bound_is_core_over_base_side` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $0<q\le1$ で $0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$。証明は準備 4 つ（符号 $\iota(\log q)\le0$（ここだけ $q\le1$）・$0\le\iota(\ell_2)$・$0\le\iota(\log(1+q))$ を `claim_rational_embedded_log_order_iff` から／$0=2\cdot0\le2\iota(\ell_2)$、$0=4\cdot0\le4\iota(\log(1+q))=0+4\iota(\log(1+q))\le X$（非負有理数倍の順序保存・単位元・加法単調性）／$Y\le4\cdot0=0$、$0=-0\le-Y$（`claim_rational_log_order_group_neg_reverses_order`）／$0\le C$ の既出の一続きと $0=2\cdot0\le2C$）と、本体（$0=0+0\le X+0=0+X\le(-Y)+X=X+(-Y)=0+(X+(-Y))\le2C+(X+(-Y))=(X+(-Y))+2C=\Gamma(q)$。加法単調性を三度と交換則・単位元）。結合則も逆元律も使わない。
+  SageMath `check/open-square-density-difference-bound-core-nonneg/`（分配関数不要。$q\le1$ の 7 点で各段 38 検査、$q>1$ の 2 点で否定側（$\iota(\log q)\le0$ が落ちる）1 検査、計 268 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityDifferenceBoundCoreNonneg.lean`（`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCoreX`・`rationalLogOrderLE_zero_neg_openSquareDensityDifferenceBoundCoreY_of_le_one`・`rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one`。既出の符号補題三つと `rationalLogOrderLE_zero_openSquareUpperBoundConstant` を引く），
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityDifferenceBoundCoreNonneg.lean`（`zero_le_core_of_signs_necSuf`。`[AddCommMonoid X] [Neg X] [SMul ℚ X]` と推移律・右加法単調性・非負有理数倍の順序保存・逆元の順序反転・$c\cdot0=0$・$-0=0$、三つの符号を仮定として受けるだけ。結合則・逆元律・順序の線形性は要らない）、導出版。sorry 検査 1322 件。
+  前 tick のレビューでは修正なし。次は「密度の列の Cauchy 性（$0<q\le1$）」（備考の手順どおり。論法が二つ以上なら着手時に割る）。
+
+### 前進の記録
+
+- 2026-08-17（tick 354）: 台帳の先頭行「核は非負である（$0\le_{\Lambda_{\mathbb Q}}\Gamma(q)$、$0<q\le1$）」を実行し、`claim_open_square_density_difference_bound_core_nonneg_le_one` を `claim_open_square_density_difference_bound_is_core_over_base_side` の直後に置いた。
+  証明は三つの符号（$q\le1$ は $\iota(\log q)\le0$ にだけ要る）から非負有理数倍の順序保存・逆元の順序反転・加法単調性で三つの項の非負を作り、加法単調性で順に足し込むだけ。SageMath `open-square-density-difference-bound-core-nonneg`、Lean 具体版・必要十分版（`AddCommMonoid`・`Neg`・`SMul ℚ`、推移律・右加法単調性・非負有理数倍の順序保存・逆元の順序反転・$c\cdot0=0$・$-0=0$ と三つの符号だけ）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1322 件）。式変形統一は一時停止中のため実施せず。
+
+
+（これより古い 320 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+
+### レビュー記録
+
+- 2026-08-17（tick 354）: 前 tick の「開境界正方形の密度の差の評価の核」の定義と「差の一様な評価に現れる量は核の基準辺分の一倍である」の本文（準備 4 つ・本体五段）・SageMath overview（692 検査）・Lean 具体版（`ratSmul_neg_eq_neg_ratSmul` の五段 calc・`hX`・`hY`・`hC`・本体の calc が本文の準備第一〜第四と本体に 1 対 1）・必要十分版（`Add`・`Neg`・`SMul ℚ`、分配則・結合則・逆元との入れ替え）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 核の定義は Cauchy 性で Archimedes 性の $\mu$ に置く名前で、$\frac1a$ 倍の等式は上端・下端の両方が引くので残す。今 tick の「核は非負である」も Archimedes 性を読む前提（$0\le\mu$）で、値の属する側（非負）を言っているので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
+（これより古い 341 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+
 ## 2026-08-17 tick 358 で台帳から移した記録（tick 353 分）
 
 ### 現在地

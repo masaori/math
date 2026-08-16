@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 360 は、前 tick の「開境界正方形の密度の下組の元は密度の上からの評価以下」の四層を突き合わせて一致を確認し（本文の修正無し。台帳から外れていた tick 354 の記録を保管庫へ復元した）、
+台帳の先頭行「実現写像は順序を保つ」を四行へ割り（定義／有理数倍との可換／$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数／順序の保存）、その最初「実数体と実対数、および実現写像 $\rho_{\mathbb R}$ の定義」を本文・Lean まで書いた。
+`def_real_logarithm`（**本文で初めての住処 R**。$\iota_{\mathbb Q\to\mathbb R}$ に名前を置く、$\mathbb R_{>0}$、$\log_{\mathbb R}$。使う性質は乗法を加法へ移すことと狭義単調の二つだけと宣言。`realEscape`「実対数」）と `def_rational_log_order_group_realization`（$\rho_{\mathbb R}(\mu):=\sum_{p\in\operatorname{supp}\mu}\iota_{\mathbb Q\to\mathbb R}(\mu(p))\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(p))$。台を含む任意の有限集合に渡る和で同じ値）。いずれも `claim_open_square_density_lower_set_le_upper_bound` の直後・`remark_real_escape_plan` の直前。`remark_real_escape_plan` の冒頭と脱出の項を合わせて直した。
+Lean `ThermodynamicLimit/RationalLogOrderGroupRealization.lean`（`PositiveReal`・`realLog`・`realLog_mul`・`realLog_lt_realLog`・`realLog_le_realLog`・`primePositiveReal`・`realizeRational`・`realizeRational_eq_sum_support`。脱出したブロックなので mathlib の `Real.log_mul`・`Real.log_lt_log` を引く。**旧実数値経路の `StrictlyPositiveReal`・`realLogarithm`（`FiniteRealFreeEntropy.lean`、削除予定）と名前を分けてある**）。sorry 検査 1346 件。定義ブロックなので SageMath 検証と必要十分版は無い。
+次は「実現写像は有理数倍と可換」（$\rho_{\mathbb R}(r\cdot\mu)=\iota_{\mathbb Q\to\mathbb R}(r)\rho_{\mathbb R}(\mu)$。$\operatorname{supp}(r\mu)\subset\operatorname{supp}\mu$ で和を揃え、$\iota_{\mathbb Q\to\mathbb R}$ の乗法保存、$\mathbb R$ の分配則を有限和へ。Lean は `Finsupp.sum_smul_index'`（$h(p,0)=0$ が要る）と `Finset.mul_sum`。SageMath は $\log p$ を記号のまま持って展開比較すれば厳密に検算できる）。
+
+（tick 359 の記録）
 2026-08-17 の tick 359 は、前 tick の「開境界正方形の密度の列が定める下組」と「下組は空でない」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を四層で閉じた。
 `claim_open_square_density_lower_set_le_upper_bound`（`claim_open_square_density_lower_set_nonempty` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $q\in\mathbb Q_{>0}$、$\mu\in A^{\mathrm{op}}(q)$ なら $\mu\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\iota(\log(1+q))$（$q\le1$ は要らない。台帳の行名から外した）。証明は所属の証人 $\varepsilon,N$ を取り $L:=N$ で読む一続き五段（$\mu=0+\mu\le\varepsilon+\mu=\mu+\varepsilon\le\Psi^{\mathrm{op}}_N(q)\le$ 上界。単位元・`claim_rational_log_order_group_add_monotone`（$\lambda:=0,\mu:=\varepsilon,\nu:=\mu$）・交換則・証人の性質・`claim_open_square_free_entropy_density_upper_bound`）と推移律。$\varepsilon\ne0$ は使わない。
@@ -4066,9 +4073,8 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「開境界正方形の密度の列が定める下組」（`def_open_square_density_lower_set`）と「開境界正方形の密度の下組は空でない」（`claim_open_square_density_lower_set_nonempty`）の本文・SageMath
-  `open-square-density-lower-set-nonempty`・Lean 具体版・必要十分版・導出版を突き合わせる。
-- **次に進めるセクションは「開境界正方形の密度の下組の元は密度の上からの評価以下」**（状態台帳のセクション表の先頭行。備考に手順）。
+- **レビュー**: 「実数体と実対数」（`def_real_logarithm`）と「有理係数の対数順序群の実現写像」（`def_rational_log_order_group_realization`）の本文と Lean `RationalLogOrderGroupRealization.lean` を突き合わせる（定義なので SageMath は無い）。
+- **次に進めるセクションは「実現写像は有理数倍と可換」**（状態台帳のセクション表の先頭行。備考に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
