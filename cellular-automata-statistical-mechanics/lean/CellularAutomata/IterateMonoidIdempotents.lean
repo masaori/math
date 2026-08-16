@@ -7,6 +7,7 @@
 人手証明と同じ順序で形式化する。有限集合と自然数だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoid
+import CellularAutomata.NecSuf.IterateMonoidIdempotents
 
 namespace CellularAutomata.IterateMonoidIdempotents
 
@@ -157,5 +158,89 @@ theorem constant_ca_idempotent_uniqueness_fails :
   · intro hEq
     have hw := congrFun (congrFun hEq (fun _ => State.one)) ()
     cases hw
+
+/-! ## 必要十分版からの導出
+具体版は必要十分版を X := V → State、F := globalMap N f へ特殊化したものである。 -/
+
+omit [Fintype V] [DecidableEq V] in
+theorem idempotents_eq_necessary_sufficient :
+    idempotents N f =
+      CellularAutomata.NecSuf.IterateMonoidIdempotents.idempotents (globalMap N f) := by
+  ext g
+  simp only [idempotents, CellularAutomata.NecSuf.IterateMonoidIdempotents.idempotents,
+    Set.mem_setOf_eq, powerSet_eq_necessary_sufficient]
+
+omit [Fintype V] [DecidableEq V] in
+theorem isIdempotentExponent_iff_necessary_sufficient (e : ℕ) :
+    IsIdempotentExponent N f e ↔
+      CellularAutomata.NecSuf.IterateMonoidIdempotents.IsIdempotentExponent (globalMap N f) e := by
+  unfold IsIdempotentExponent CellularAutomata.NecSuf.IterateMonoidIdempotents.IsIdempotentExponent
+  rw [idempotents_eq_necessary_sufficient, iterateMap_eq_necessary_sufficient]
+
+omit [Fintype V] [DecidableEq V] in
+theorem collision_gives_eventual_period_from_necessary_sufficient {i j n : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j) (hn : i ≤ n) :
+    iterateMap N f (n + (j - i)) = iterateMap N f n := by
+  simp only [iterateMap_eq_necessary_sufficient] at h ⊢
+  exact CellularAutomata.NecSuf.IterateMonoidIdempotents.collision_gives_eventual_period
+    (globalMap N f) hij h hn
+
+omit [Fintype V] [DecidableEq V] in
+theorem collision_period_multiple_from_necessary_sufficient {i j n : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j) (hn : i ≤ n) (q : ℕ) :
+    iterateMap N f (n + q * (j - i)) = iterateMap N f n := by
+  simp only [iterateMap_eq_necessary_sufficient] at h ⊢
+  exact CellularAutomata.NecSuf.IterateMonoidIdempotents.collision_period_multiple
+    (globalMap N f) hij h hn q
+
+/-- 正の冪等指数の存在は、有限型 V → State 上の自己写像への特殊化で得られる。
+    必要十分版では有限性は衝突を得るためにだけ使われる。 -/
+theorem positive_idempotent_iterate_exists_from_necessary_sufficient :
+    ∃ e : ℕ, 0 < e ∧ IsIdempotentExponent N f e := by
+  obtain ⟨e, he, hidem⟩ :=
+    CellularAutomata.NecSuf.IterateMonoidIdempotents.positive_idempotent_iterate_exists
+      (globalMap N f)
+  exact ⟨e, he, (isIdempotentExponent_iff_necessary_sufficient N f e).mpr hidem⟩
+
+theorem idempotentRepresentatives_eq_necessary_sufficient (j : ℕ) :
+    idempotentRepresentatives N f j =
+      CellularAutomata.NecSuf.IterateMonoidIdempotents.idempotentRepresentatives
+        (globalMap N f) j := by
+  ext g
+  simp only [idempotentRepresentatives,
+    CellularAutomata.NecSuf.IterateMonoidIdempotents.idempotentRepresentatives,
+    Finset.mem_filter, representatives_eq_necessary_sufficient]
+
+theorem mem_idempotentRepresentatives_iff_from_necessary_sufficient {i j : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j)
+    (g : (V → State) → (V → State)) :
+    g ∈ idempotentRepresentatives N f j ↔ g ∈ idempotents N f := by
+  rw [idempotentRepresentatives_eq_necessary_sufficient, idempotents_eq_necessary_sufficient]
+  simp only [iterateMap_eq_necessary_sufficient] at h
+  exact CellularAutomata.NecSuf.IterateMonoidIdempotents.mem_idempotentRepresentatives_iff
+    (globalMap N f) hij h g
+
+/-- 恒等 CA の反例は、恒等写像に関する必要十分版の反例の特殊化である。 -/
+theorem identity_ca_no_nonidentity_idempotent_from_necessary_sufficient
+    (g : (Unit → State) → (Unit → State))
+    (hg : g ∈ idempotents oneCellNeighborhood identityLocalRule) : g = id := by
+  rw [idempotents_eq_necessary_sufficient, identity_globalMap] at hg
+  exact CellularAutomata.NecSuf.IterateMonoidIdempotents.id_no_nonidentity_idempotent g hg
+
+/-- 定値規則の反例は、零配位への定値写像と、相異なる二点（零配位と一配位）に関する
+    必要十分版の反例の特殊化である。 -/
+theorem constant_ca_idempotent_uniqueness_fails_from_necessary_sufficient :
+    ∃ g h : (Unit → State) → (Unit → State),
+      g ∈ idempotents oneCellNeighborhood constantZeroLocalRule ∧
+      h ∈ idempotents oneCellNeighborhood constantZeroLocalRule ∧ g ≠ h := by
+  have hF : globalMap oneCellNeighborhood constantZeroLocalRule =
+      fun _ : Unit → State => (fun _ : Unit => State.zero) := by
+    funext y
+    exact constantZero_globalMap y
+  rw [idempotents_eq_necessary_sufficient, hF]
+  have hab : (fun _ : Unit => State.zero) ≠ (fun _ : Unit => State.one) := by
+    intro hEq
+    cases congrFun hEq ()
+  exact CellularAutomata.NecSuf.IterateMonoidIdempotents.const_idempotent_uniqueness_fails hab
 
 end CellularAutomata.IterateMonoidIdempotents
