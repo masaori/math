@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 15:19: 「真に依存する」主張の Lean 必要十分版 `NecSuf.fullBoundaryResponse_degreeOf_eq_one`（可換半環 `R`・`Nontrivial R`・`CharZero R`・`Fintype Edge` 除去。`CharZero` は配位の個数が `R` で 0 でないために必要）と導出 `fullBoundaryResponse_degreeOf_eq_one_fromNecSuf`（`done`。sorry 検査 116 件 OK。前 tick の未登録 2 本も登録）。次は主標的の次セクション（todo が無ければ次の小主張を割って台帳へ書き先頭を記述する）。
 - 2026-08-16 15:00: 「真に依存する」主張の Lean 具体版を閉じた（`fullBoundaryResponse_degreeOf_eq_one`：係数 1 以上で support に属する $\tau$ の単項式の $e_0$ 指数 1 が `monomial_le_degreeOf` で次数以下、`≤ 1` と合わせて `= 1`。`lake build` 成功・sorry 検査 112 件 OK。`Lean 具体版まで`）。次は同主張の Lean 必要十分版（可換半環・`Nontrivial R`・`Fintype Edge` 除去）と具体版からの導出。
 - 2026-08-16: 「真に依存する」主張の Lean 具体版の第一歩 `brokenMonomial_exponent_at_broken_edge` を追加（台帳「現在地」参照。sorry 検査の再実行は次 tick で確認）。
 - 2026-08-16 14:17: 「増えた辺の変数に真に依存する」を SageMath で検証（`sagemath/check/full-boundary-response-degree-exactly-one/` PASS。各辺 $e_0$ の一端だけ $-1$ の配位 $\tau$ が $e_0$ を破ること・破れ辺集合ごとの自然数係数が $1$ 以上・次数がちょうど $1$ を証明と同順に `ZZ` 上で確認。`記述と SageMath まで`。検証対応 22 件）。次は同主張の Lean 具体版（`lean/Ising3DCut/BoundaryResponsePolynomial.lean` に、一端反転の配位の単項式の係数が `≥ 1` で `degreeOf` が `1` 以上、`≤ 1` と合わせて `= 1` を人手証明と同順に）。

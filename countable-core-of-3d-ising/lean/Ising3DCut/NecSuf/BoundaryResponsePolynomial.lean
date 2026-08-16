@@ -171,3 +171,43 @@ theorem fullBoundaryResponse_degreeOf_le_one [Nontrivial R]
         rw [Finset.sum_ite_eq]; split_ifs <;> simp
 
 end Ising3DCut.NecSuf
+
+namespace Ising3DCut.NecSuf
+
+open MvPolynomial
+
+variable {Configuration Edge R : Type*} [CommSemiring R]
+variable [Fintype Configuration] [DecidableEq Edge]
+
+/-- 辺変数を 1 に置かない境界応答多項式は各辺の変数に真に依存する、の必要十分版。
+係数環は可換半環 `R` でよく辺型の有限性は不要。具体版が `1 ≤ 係数`（`ℤ` の順序）で使っていた性質は
+「同じ破れ辺集合をもつ配位の個数（1 以上の自然数）が `R` で 0 にならない」ことだけなので、
+それを与える `CharZero R` を置く（`Nontrivial R` は `degreeOf_X` のため。`ℤ` は両方満たす）。
+証明手順は具体版と同順（単項式の指数と係数、support への所属、支持の指数は次数以下、高々 1 と合わせて等号）。 -/
+theorem fullBoundaryResponse_degreeOf_eq_one [Nontrivial R] [CharZero R]
+    (broken : Configuration → Finset Edge) (e₀ : Edge) (τ : Configuration)
+    (hτ : e₀ ∈ broken τ) :
+    degreeOf e₀ (multivariatePartitionPolynomial (R := R) broken) = 1 := by
+  refine le_antisymm (fullBoundaryResponse_degreeOf_le_one broken e₀) ?_
+  have hmono : ∀ σ : Configuration, (∏ e ∈ broken σ, (X e : MvPolynomial Edge R)) =
+      monomial (∑ e ∈ broken σ, Finsupp.single e 1) 1 := fun σ ↦ by
+    rw [monomial_sum_index, C_1, one_mul]; rfl
+  -- τ の単項式の係数は同じ破れ辺集合をもつ配位の個数で、0 でない
+  have hcoeff : coeff (∑ e ∈ broken τ, Finsupp.single e 1)
+      (multivariatePartitionPolynomial (R := R) broken) ≠ 0 := by
+    unfold multivariatePartitionPolynomial
+    rw [coeff_sum]
+    simp_rw [hmono, coeff_monomial]
+    rw [Finset.sum_boole]
+    refine Nat.cast_ne_zero.mpr (Finset.card_ne_zero.mpr ⟨τ, ?_⟩)
+    simp
+  have hsupp : (∑ e ∈ broken τ, Finsupp.single e 1) ∈
+      (multivariatePartitionPolynomial (R := R) broken).support := by
+    rw [mem_support_iff]; exact hcoeff
+  -- e₀ での指数は 1 で、support の元の指数は次数以下
+  have hle := monomial_le_degreeOf e₀ hsupp
+  have hexp : (∑ e ∈ broken τ, Finsupp.single e 1) e₀ = 1 := by
+    rw [Finsupp.finsetSum_apply]; simp [Finsupp.single_apply, hτ]
+  rwa [hexp] at hle
+
+end Ising3DCut.NecSuf

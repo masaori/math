@@ -114,4 +114,11 @@ theorem fullBoundaryResponse_degreeOf_le_one_fromNecSuf
     degreeOf e₀ (multivariatePartitionPolynomial broken) ≤ 1 :=
   NecSuf.fullBoundaryResponse_degreeOf_le_one (R := ℤ) broken e₀
 
+/-- 各辺の変数への真の依存（次数ちょうど 1）を必要十分版（`R := ℤ`。`CharZero ℤ`）から導く。 -/
+theorem fullBoundaryResponse_degreeOf_eq_one_fromNecSuf
+    (broken : Configuration → Finset Edge) (e₀ : Edge) (τ : Configuration)
+    (hτ : e₀ ∈ broken τ) :
+    degreeOf e₀ (multivariatePartitionPolynomial broken) = 1 :=
+  NecSuf.fullBoundaryResponse_degreeOf_eq_one (R := ℤ) broken e₀ τ hτ
+
 end Ising3DCut
