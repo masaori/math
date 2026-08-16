@@ -20,6 +20,7 @@ export const ALL_LABELS = [
   "claim_full_boundary_response_degree_exactly_one",
   "claim_full_boundary_response_outer_edges_to_one",
   "claim_full_boundary_response_total_degree_is_edge_count",
+  "claim_full_boundary_response_value_at_one",
   "claim_galois_hyperoctahedral_bound",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
