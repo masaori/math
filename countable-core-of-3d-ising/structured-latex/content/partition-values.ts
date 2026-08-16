@@ -2485,4 +2485,68 @@ X_e,&e\in A_{L,L'},\\
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_claim_all_edge_variables_to_one_indeterminate_gives_partition_polynomial",
+    kind: "claim",
+    title: { text: "多変数分配多項式の全辺変数を一つの不定元へ置くと自由境界の分配多項式になる" },
+    labels: ["claim_all_edge_variables_to_one_indeterminate_gives_partition_polynomial"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "不定元 ",
+        math(String.raw`X`),
+        " を取り、各 ",
+        math(String.raw`e\in E_L`),
+        " について ",
+        math(String.raw`X_e\mapsto X`),
+        " と定める整係数の代入写像を ",
+        math(String.raw`\kappa_L\colon\mathbb Z[X_e:e\in E_L]\to\mathbb Z[X]`),
+        " とする（多変数多項式環の普遍性により環準同型として一意に定まる）。このとき、辺ごとに不定元を持つ多変数分配多項式 ",
+        math(String.raw`\mathcal Z_L`),
+        "（",
+        ref("def_boundary_response_polynomial"),
+        "）と自由境界の分配多項式 ",
+        math(String.raw`Z_L(X)`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）について、整係数多項式の等式",
+      ]),
+      displayMath(String.raw`\kappa_L\bigl(\mathcal Z_L((X_e)_{e\in E_L})\bigr)=Z_L(X)\ \in\ \mathbb Z[X]`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "各配位 ",
+        math(String.raw`\sigma\in\Sigma_L`),
+        " について、破れ辺の集合 ",
+        math(String.raw`B(\sigma)`),
+        " の元の個数は破れ辺の個数 ",
+        math(String.raw`m_L(\sigma)`),
+        "（",
+        ref("def_broken_count"),
+        "）に等しい。",
+        math(String.raw`\kappa_L`),
+        " は環準同型なので有限和と有限積を保ち、次の一続きの式変形を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa_L\bigl(\mathcal Z_L((X_e)_{e\in E_L})\bigr)
+&=\kappa_L\Bigl(\sum_{\sigma\in\Sigma_L}\prod_{e\in B(\sigma)}X_e\Bigr)
+&&(\because\ \blkref{def_boundary_response_polynomial}\ \text{の}\ \mathcal Z_L\ \text{の定義})\\
+&=\sum_{\sigma\in\Sigma_L}\prod_{e\in B(\sigma)}\kappa_L(X_e)
+&&(\because\ \kappa_L\ \text{は環準同型で有限和・有限積を保つ})\\
+&=\sum_{\sigma\in\Sigma_L}\prod_{e\in B(\sigma)}X
+&&(\because\ \kappa_L(X_e)=X)\\
+&=\sum_{\sigma\in\Sigma_L}X^{m_L(\sigma)}
+&&(\because\ \#B(\sigma)=m_L(\sigma))\\
+&=\sum_{m=0}^{\#E_L}\Omega_L(m)X^m
+&&(\because\ \blkref{def_multiplicity}\ \text{により、}\ m_L(\sigma)=m\ \text{となる配位の個数が}\ \Omega_L(m))\\
+&=Z_L(X)
+&&(\because\ \blkref{def_partition_polynomial})
+\end{aligned}`),
+      paragraph([
+        "すべての段は整係数多項式環の中の等式であり、実数も極限も用いない。",
+      ]),
+    ],
+  },
 ]);
