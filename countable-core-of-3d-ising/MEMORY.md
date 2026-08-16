@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 13:20: 「各辺変数についての次数は高々 1」を SageMath で検証（`sagemath/check/full-boundary-response-degree-at-most-one/` PASS。単項式ごとの指数・有限和の全指数列挙・全 12 辺の次数を証明と同順に `ZZ` 上で確認。`記述と SageMath まで`。検証対応 21 件）。次は同主張の Lean 具体版（`lean/Ising3DCut/` に `MvPolynomial` の `degreeOf` で各配位の単項式の指数と有限和の次数評価を人手証明と 1 対 1 に）。
 - 2026-08-16 13:05: 「真に依存する」を 2 つに割り、先頭「各辺変数についての次数は高々 1」を記述（`claim_full_boundary_response_degree_at_most_one`。単項式が $B(\sigma)$ 上の相異なる不定元の積であることと有限和の次数の最大値評価。`記述まで`。77 ブロック・相互参照 84 件）。次は同主張の SageMath 検証（小さい箱で各単項式の指数と次数を `ZZ` 上で列挙）。
 - 2026-08-16 12:53: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」の Lean 必要十分版 `NecSuf.fullBoundaryResponse_common_outer_box_comparison`（可換半環、二外箱の辺型の有限性・可判定同値性不要）と導出 `fullBoundaryResponse_common_outer_box_comparison_fromNecSuf`（`done`。lake build 成功・sorry 検査 108 件 OK。前 tick の書きかけ差分を検証してコミット）。次は台帳の次の todo「辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する」の記述。
 - 2026-08-16 12:18: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」の Lean 具体版 `fullBoundaryResponse_common_outer_box_comparison`（外箱依存性の 2 回適用と配位数の積の可換性。`Lean 具体版まで`。lake build 成功・sorry 検査 104 件 OK）。次は同セクションの Lean 必要十分版と具体版からの導出。
