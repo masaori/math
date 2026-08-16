@@ -445,4 +445,146 @@ S_x
       ]),
     ],
   },
+  {
+    id: "finite_fourier_theorem_inverse_transform",
+    kind: "theorem",
+    title: { text: "有限第一ホモロジー群上の Fourier 逆変換" },
+    labels: ["theorem_finite_fourier_inverse_transform"],
+    habitat: "QPolynomial",
+    verification: ["sagemath/check/finite-fourier-inverse-transform"],
+    statement: [
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " の有限第一ホモロジー群 ",
+        math(String.raw`H`),
+        " と文字空間 ",
+        math(String.raw`H^\vee`),
+        " に対し、独立な不定元 ",
+        math(String.raw`u,v`),
+        " を取る。任意の多項式族 ",
+        math(String.raw`A=(A_k)_{k\in H}\in\bigl(\mathbb Z[u,v]\bigr)^H`),
+        " の有限 Fourier 変換を、始域と終域を明示した写像",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal F_H:\bigl(\mathbb Z[u,v]\bigr)^H
+&\longrightarrow
+\bigl(\mathbb Z[u,v]\bigr)^{H^\vee},\\
+A
+&\longmapsto
+\widehat A:=\mathcal F_H(A),\\
+\widehat A_{\varphi}
+&:=
+\sum_{k\in H}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)A_k
+\in\mathbb Z[u,v]
+\qquad(\varphi\in H^\vee)
+\end{aligned}`),
+      paragraph([
+        "で定める。また、",
+        math(String.raw`\jmath:\mathbb Z[u,v]\to\mathbb Q[u,v]`),
+        " を整数係数を有理係数へ送る係数ごとの標準単射、",
+        math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`),
+        " を ",
+        math(String.raw`n\mapsto n/1`),
+        " で与えられる標準単射とする。このとき、任意の ",
+        math(String.raw`h\in H`),
+        " について",
+      ]),
+      displayMath(String.raw`\jmath(A_h)
+=
+\frac{1}{\iota_{\mathbb N,\mathbb Q}(|H^\vee|)}
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\jmath\!\left(\widehat A_{\varphi}\right)
+\in\mathbb Q[u,v].`),
+    ],
+    proof: [
+      paragraph([
+        "零写像 ",
+        math(String.raw`0_{H^\vee}:H\to\mathbb F_2`),
+        " は ",
+        math(String.raw`H^\vee`),
+        " の元なので、",
+        math(String.raw`|H^\vee|\in\mathbb N_{>0}`),
+        " である。したがって ",
+        math(String.raw`n:=\iota_{\mathbb N,\mathbb Q}(|H^\vee|)\in\mathbb Q_{>0}`),
+        " と置けば、",
+        math(String.raw`n^{-1}\in\mathbb Q`),
+        " が定まる。任意の ",
+        math(String.raw`h\in H`),
+        " を固定する。",
+      ]),
+      paragraph(["有限 Fourier 変換の定義より"]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{n}
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\jmath\!\left(\widehat A_{\varphi}\right)
+&=
+\frac{1}{n}
+\sum_{\varphi\in H^\vee}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\jmath\!\left(
+  \sum_{k\in H}
+  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)A_k
+\right)
+\quad\bigl(\because\ \widehat A_{\varphi}\text{ の定義}\bigr)\\
+&=
+\frac{1}{n}
+\sum_{\varphi\in H^\vee}
+\sum_{k\in H}
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\jmath(A_k)
+\quad\bigl(\because\ \jmath\text{ は環準同型}\bigr)\\
+&=
+\frac{1}{n}
+\sum_{k\in H}
+\left(
+  \sum_{\varphi\in H^\vee}
+  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\right)
+\jmath(A_k)
+\quad\bigl(\because\ H,H^\vee\text{ 上の有限和の交換}\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_finite_character_orthogonality"), " より"]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{n}
+\sum_{k\in H}
+\left(
+  \sum_{\varphi\in H^\vee}
+  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\right)
+\jmath(A_k)
+&=
+\frac{1}{n}
+\left(
+  n\jmath(A_h)
+  +
+  \sum_{\substack{k\in H\\k\ne h}}
+  0\jmath(A_k)
+\right)
+\quad\bigl(\because\ \text{文字直交関係}\bigr)\\
+&=
+\frac{1}{n}n\jmath(A_h)
+\quad\bigl(\because\ \mathbb Q[u,v]\text{ の零元と有限和}\bigr)\\
+&=
+\jmath(A_h)
+\quad\bigl(\because\ n\in\mathbb Q_{>0}\text{ と }n^{-1}n=1\bigr).
+\end{aligned}`),
+      paragraph([
+        "これで任意の ",
+        math(String.raw`h\in H`),
+        " に対する逆変換を得た。分母を取る最後の操作だけが整数係数多項式環 ",
+        math(String.raw`\mathbb Z[u,v]`),
+        " から有理係数多項式環 ",
+        math(String.raw`\mathbb Q[u,v]`),
+        " への標準単射 ",
+        math(String.raw`\jmath`),
+        " を必要とする。全ての和は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
