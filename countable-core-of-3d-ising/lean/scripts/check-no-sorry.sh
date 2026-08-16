@@ -157,6 +157,10 @@ targets=(
   Ising3DCut.allEdgesToOneIndeterminate_multivariatePartitionPolynomial
   Ising3DCut.NullModel.sum_X_pow_brokenCount_eq_partitionPolynomial
   Ising3DCut.NullModel.allEdgesToOneIndeterminate_multivariatePartitionPolynomial_eq_partitionPolynomial
+  Ising3DCut.NecSuf.allEdgesToOneIndeterminate_X
+  Ising3DCut.NecSuf.allEdgesToOneIndeterminate_brokenMonomial
+  Ising3DCut.NecSuf.allEdgesToOneIndeterminate_multivariatePartitionPolynomial
+  Ising3DCut.allEdgesToOneIndeterminate_multivariatePartitionPolynomial_fromNecSuf
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add
