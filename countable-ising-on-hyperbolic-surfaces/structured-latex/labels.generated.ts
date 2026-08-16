@@ -41,6 +41,7 @@ export const ALL_LABELS = [
   "def_first_homology_group_over_f2",
   "def_formal_edge_weight_sum",
   "def_homology_class_generating_polynomial",
+  "def_integer_sign_character_realization",
   "def_ising_partition_polynomial",
   "def_mod_two_boundary_parity",
   "def_oriented_closed_surface_cellulation",
