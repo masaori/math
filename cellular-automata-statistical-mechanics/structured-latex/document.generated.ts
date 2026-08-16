@@ -32,6 +32,7 @@ import blocks_iterate_monoid_minimal_period from './content/iterate-monoid-minim
 import blocks_iterate_monoid_principal_ideal_tail from './content/iterate-monoid-principal-ideal-tail.ts'
 import blocks_iterate_monoid_stabilization_index from './content/iterate-monoid-stabilization-index.ts'
 import blocks_iterate_monoid_stable_image from './content/iterate-monoid-stable-image.ts'
+import blocks_iterate_monoid_stable_partition from './content/iterate-monoid-stable-partition.ts'
 import blocks_iterate_monoid_tail_cycle_decomposition from './content/iterate-monoid-tail-cycle-decomposition.ts'
 import blocks_iterate_monoid_tail_equivalence from './content/iterate-monoid-tail-equivalence.ts'
 import blocks_iterate_monoid from './content/iterate-monoid.ts'
@@ -61,6 +62,7 @@ export type AllBlocks = [
   ...typeof blocks_iterate_monoid_principal_ideal_tail,
   ...typeof blocks_iterate_monoid_stabilization_index,
   ...typeof blocks_iterate_monoid_stable_image,
+  ...typeof blocks_iterate_monoid_stable_partition,
   ...typeof blocks_iterate_monoid_tail_cycle_decomposition,
   ...typeof blocks_iterate_monoid_tail_equivalence,
   ...typeof blocks_iterate_monoid,
