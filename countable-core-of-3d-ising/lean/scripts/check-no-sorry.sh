@@ -173,6 +173,7 @@ targets=(
   Ising3DCut.NullModel.partitionPolynomial_eval_eq_of_allEdgesToRational_eq_fromNecSuf
   Ising3DCut.LimitQuantity.nat_eq_of_prime_exponents_eq
   Ising3DCut.LimitQuantity.rat_eq_of_prime_exponents_eq
+  Ising3DCut.LimitQuantity.partitionPolynomial_evalAtRational_pos
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add
