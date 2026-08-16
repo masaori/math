@@ -488,4 +488,50 @@ c
       ]),
     ],
   },
+  {
+    id: "homology_sector_definition_even_edge_subset_homology_class_map",
+    kind: "definition",
+    title: { text: "偶辺部分集合の第一ホモロジー類写像" },
+    labels: ["def_even_edge_subset_homology_class_map"],
+    habitat: "F2",
+    verification: ["sagemath/check/even-edge-subset-homology-class-map"],
+    statement: [
+      paragraph([
+        ref("def_first_homology_group_over_f2"),
+        " で定めた商写像を ",
+        math(String.raw`\pi_1:\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)\to H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " と書く。",
+        ref("claim_even_edge_subset_maps_to_first_cycle"),
+        " により、",
+        ref("def_edge_subset_coefficient_map_over_f2"),
+        " の写像は偶辺部分集合上で一次サイクル空間に値を取る。偶辺部分集合の第一ホモロジー類写像を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\eta_{\mathcal C_{\mathrm{cell}}}:
+\mathcal Z_1(G)
+&\longrightarrow
+H_1(\mathcal C_{\mathrm{cell}};\mathbb F_2),\\
+A
+&\longmapsto
+\pi_1\!\left(\chi_{E_{\mathrm{cell}}}(A)\right)\\
+&=
+\left\{
+  \chi_{E_{\mathrm{cell}}}(A)+b
+  \ \middle|\
+  \ b\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right\}
+\end{aligned}`),
+      paragraph([
+        "で定める。すなわち ",
+        math(String.raw`\eta_{\mathcal C_{\mathrm{cell}}}`),
+        " は、辺部分集合を辺係数写像へ送る写像の ",
+        math(String.raw`\mathcal Z_1(G)`),
+        " への制限と商写像 ",
+        math(String.raw`\pi_1`),
+        " の合成である。辺部分集合、辺係数写像、一次サイクル、剰余集合を同一視せず、二つの明示した写像だけを通る。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
