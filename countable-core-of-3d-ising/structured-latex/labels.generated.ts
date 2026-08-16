@@ -15,6 +15,7 @@ export const ALL_LABELS = [
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
   "claim_factorization_type_determines_root_minimal_degrees",
+  "claim_full_boundary_response_outer_edges_to_one",
   "claim_galois_hyperoctahedral_bound",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
