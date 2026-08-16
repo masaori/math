@@ -46057,6 +46057,212 @@ Y
     ],
   },
   {
+    id: "thermodynamic_limit_claim_log_order_group_realization_real_log",
+    kind: "claim",
+    title: { text: "対数順序群の元の実現は対応する正の有理数の実対数である（実数体への脱出: 実対数）" },
+    labels: ["claim_log_order_group_realization_real_log"],
+    habitat: "R",
+    realEscape:
+      "実対数。実現写像 ρ_ℝ の値と log_ℝ の値（実数）どうしの等式であり、証明は log_ℝ が乗法を加法へ移すこと（およびそれから出した整数冪の実対数）と、ι_ℚ→ℝ が乗法・逆数を保つことだけを使う。狭義単調性・級数・微分・完備性は使わない。",
+    verification: ["sagemath/check/log-order-group-realization-real-log"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.realLog_prod",
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_toRational",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.map_prod_necSuf",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.realize_int_prod_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_toRational_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\lambda\in\Lambda`),
+        "（",
+        ref("def_log_order_group"),
+        "）について、",
+        ref("def_rational_log_order_group"),
+        " の写像 ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        "、",
+        ref("def_rational_log_order_group_realization"),
+        " の実現写像 ",
+        math(String.raw`\rho_{\mathbb{R}}`),
+        "、",
+        ref("def_rational_of_log"),
+        " の写像 ",
+        math(String.raw`\operatorname{rat}_{\Lambda}:\Lambda\to\mathbb{Q}_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\rho_{\mathbb{R}}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)
+=\log_{\mathbb{R}}\Bigl(\iota_{\mathbb{Q}\to\mathbb{R}}\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)\Bigr)`),
+      paragraph([
+        "が成り立つ。右辺の実対数が定まること: ",
+        math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\in\mathbb{Q}_{>0}`),
+        " なので、",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " が順序を保ち単射であること（",
+        ref("def_real_logarithm"),
+        "）により ",
+        math(String.raw`0<\iota_{\mathbb{Q}\to\mathbb{R}}(\operatorname{rat}_{\Lambda}(\lambda))`),
+        "、すなわち ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}(\operatorname{rat}_{\Lambda}(\lambda))\in\mathbb{R}_{>0}`),
+        " である。この主張は、可算側の ",
+        math(String.raw`\Lambda`),
+        " の元（有限系の自由エントロピー ",
+        math(String.raw`\Phi_L(q)`),
+        " など）の実現が、対応する正の有理数 ",
+        math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)`),
+        " の実対数にほかならないことを言う。次に順序の保存を示すとき、",
+        math(String.raw`\Lambda`),
+        " の順序（正の有理数の比較）を実対数の単調性へ移すために使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " と略記する。準備を三つ置く。第一に、",
+        ref("def_rational_log_order_group"),
+        " により ",
+        math(String.raw`\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)(p)=\lambda(p)/1`),
+        " であり、",
+        math(String.raw`\lambda(p)/1=0\iff\lambda(p)=0`),
+        "（分母 ",
+        math(String.raw`1`),
+        " の有理数が ",
+        math(String.raw`0`),
+        " であることと整数が ",
+        math(String.raw`0`),
+        " であることは同値）なので、",
+        math(String.raw`\operatorname{supp}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)=\operatorname{supp}(\lambda)`),
+        " である。第二に、",
+        math(String.raw`\iota`),
+        " は ",
+        math(String.raw`\iota(1)=1`),
+        " かつ乗法を保つ（",
+        ref("def_real_logarithm"),
+        "）ので、有限集合 ",
+        math(String.raw`S`),
+        " と ",
+        math(String.raw`a:S\to\mathbb{Q}`),
+        " について ",
+        math(String.raw`\iota\bigl(\prod_{p\in S}a(p)\bigr)=\prod_{p\in S}\iota(a(p))`),
+        "（",
+        math(String.raw`S`),
+        " の元の個数についての帰納法。空積は ",
+        math(String.raw`1`),
+        "）、また ",
+        math(String.raw`v\in\mathbb{Q}_{>0}`),
+        " について ",
+        math(String.raw`\iota(v)\cdot\iota(v^{-1})=\iota(v\cdot v^{-1})=\iota(1)=1`),
+        " なので ",
+        math(String.raw`\iota(v^{-1})=\iota(v)^{-1}`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の逆元の一意性）であり、したがって ",
+        math(String.raw`k\in\mathbb{Z}`),
+        " について ",
+        math(String.raw`\iota(v^{k})=\iota(v)^{k}`),
+        "（",
+        math(String.raw`k\ge0`),
+        " は自然数冪の帰納法、",
+        math(String.raw`k<0`),
+        " は逆数と合わせる）。第三に、有限積の実対数は実対数の和である。すなわち有限集合 ",
+        math(String.raw`S`),
+        " と ",
+        math(String.raw`u:S\to\mathbb{R}_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\log_{\mathbb{R}}\Bigl(\prod_{p\in S}u(p)\Bigr)=\sum_{p\in S}\log_{\mathbb{R}}\bigl(u(p)\bigr)`),
+      paragraph([
+        "を ",
+        math(String.raw`S`),
+        " の元の個数についての帰納法で示す。",
+        math(String.raw`S=\varnothing`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}\Bigl(\prod_{p\in\varnothing}u(p)\Bigr)
+&=\log_{\mathbb{R}}(1)
+&&(\because\ \text{空積は }1)\\
+&=\log_{\mathbb{R}}(1^{0})
+&&(\because\ 1^{0}=1\text{。整数冪の定義})\\
+&=\iota(0)\cdot\log_{\mathbb{R}}(1)
+&&(\because\ \blkref{claim_real_logarithm_int_power}\text{ を }u:=1\text{、}k:=0\text{ で})\\
+&=0
+&&(\because\ \iota(0)=0\text{、}0\cdot t=0\text{。}\mathbb{R}\text{ の乗法})\\
+&=\sum_{p\in\varnothing}\log_{\mathbb{R}}\bigl(u(p)\bigr)
+&&(\because\ \text{空和は }0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`p_0\notin S`),
+        " とし、",
+        math(String.raw`S`),
+        " について成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}\Bigl(\prod_{p\in S\cup\{p_0\}}u(p)\Bigr)
+&=\log_{\mathbb{R}}\Bigl(u(p_0)\cdot\prod_{p\in S}u(p)\Bigr)
+&&(\because\ p_0\notin S\text{。有限積の定義})\\
+&=\log_{\mathbb{R}}\bigl(u(p_0)\bigr)+\log_{\mathbb{R}}\Bigl(\prod_{p\in S}u(p)\Bigr)
+&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm}\text{。}\textstyle\prod_{p\in S}u(p)\in\mathbb{R}_{>0})\\
+&=\log_{\mathbb{R}}\bigl(u(p_0)\bigr)+\sum_{p\in S}\log_{\mathbb{R}}\bigl(u(p)\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=\sum_{p\in S\cup\{p_0\}}\log_{\mathbb{R}}\bigl(u(p)\bigr)
+&&(\because\ p_0\notin S\text{。有限和の定義})
+\end{aligned}`),
+      paragraph([
+        "となる。以上を準備として、主張は一続きである。各行で ",
+        math(String.raw`p`),
+        " は ",
+        math(String.raw`\operatorname{supp}(\lambda)`),
+        " を走り、",
+        math(String.raw`\iota(p)\in\mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`p^{\lambda(p)}\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`\iota\bigl(p^{\lambda(p)}\bigr)\in\mathbb{R}_{>0}`),
+        " である（",
+        math(String.raw`0<p`),
+        "、正の有理数の整数冪は正、",
+        math(String.raw`\iota`),
+        " は順序を保ち単射）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathbb{R}}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)
+&=\sum_{p\in\operatorname{supp}(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda))}\iota\Bigl(\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)(p)\Bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group_realization})\\
+&=\sum_{p\in\operatorname{supp}(\lambda)}\iota\Bigl(\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\bigr)(p)\Bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \text{準備の第一 }\operatorname{supp}(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda))=\operatorname{supp}(\lambda))\\
+&=\sum_{p\in\operatorname{supp}(\lambda)}\iota\bigl(\lambda(p)/1\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&=\sum_{p\in\operatorname{supp}(\lambda)}\log_{\mathbb{R}}\Bigl(\iota(p)^{\lambda(p)}\Bigr)
+&&(\because\ \blkref{claim_real_logarithm_int_power}\text{ を }u:=\iota(p)\text{、}k:=\lambda(p)\text{ で})\\
+&=\sum_{p\in\operatorname{supp}(\lambda)}\log_{\mathbb{R}}\Bigl(\iota\bigl(p^{\lambda(p)}\bigr)\Bigr)
+&&(\because\ \text{準備の第二 }\iota(v^{k})=\iota(v)^{k}\text{ を }v:=p\text{、}k:=\lambda(p)\text{ で})\\
+&=\log_{\mathbb{R}}\Bigl(\prod_{p\in\operatorname{supp}(\lambda)}\iota\bigl(p^{\lambda(p)}\bigr)\Bigr)
+&&(\because\ \text{準備の第三（有限積の実対数は和）を }S:=\operatorname{supp}(\lambda)\text{、}u(p):=\iota(p^{\lambda(p)})\text{ で})\\
+&=\log_{\mathbb{R}}\Bigl(\iota\Bigl(\prod_{p\in\operatorname{supp}(\lambda)}p^{\lambda(p)}\Bigr)\Bigr)
+&&(\because\ \text{準備の第二 }\iota\text{ は有限積を保つ})\\
+&=\log_{\mathbb{R}}\Bigl(\iota\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)\Bigr)
+&&(\because\ \blkref{def_rational_of_log})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、実現写像と ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        "、",
+        math(String.raw`\operatorname{rat}_{\Lambda}`),
+        " の定義、整数冪の実対数（",
+        ref("claim_real_logarithm_int_power"),
+        "）、",
+        math(String.raw`\log_{\mathbb{R}}`),
+        " が乗法を加法へ移すこと、",
+        math(String.raw`\iota`),
+        " が乗法・逆数・有限積を保つことだけである。狭義単調性は使わない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },
@@ -46064,7 +46270,7 @@ Y
     habitat: "Lambda",
     statement: [
       paragraph([
-        "直前の二つの定義と二つの主張（",
+        "直前の二つの定義と三つの主張（",
         ref("def_real_logarithm"),
         "、",
         ref("def_rational_log_order_group_realization"),
@@ -46072,6 +46278,8 @@ Y
         ref("claim_rational_log_order_group_realization_smul"),
         "、",
         ref("claim_real_logarithm_int_power"),
+        "、",
+        ref("claim_log_order_group_realization_real_log"),
         "）を除き、ここまでの本文はすべて可算な対象（",
         math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\Lambda_{\mathbb{Q}}`),
         "、",
@@ -46134,6 +46342,12 @@ Y
           ref("claim_rational_log_order_group_realization_smul"),
           " で、整数冪の実対数が整数倍であることは ",
           ref("claim_real_logarithm_int_power"),
+          " で、",
+          math(String.raw`\Lambda`),
+          " の元の実現が ",
+          math(String.raw`\operatorname{rat}_{\Lambda}`),
+          " の実対数であることは ",
+          ref("claim_log_order_group_realization_real_log"),
           " で示した。順序を保つことはこれから示す）、下組の実現像の上限（完備性）として実数 ",
           math(String.raw`f(q)`),
           " を一つ取る。引くのは「有界な実数集合は上限を持つ」ことと実対数の単調性だけで、それ以外の理由で実数体を呼ばない。",

@@ -7,6 +7,11 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 363 は、台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_log_order_group_realization_real_log`（`claim_real_logarithm_int_power` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\rho_{\mathbb R}$ と $\log_{\mathbb R}$ の値どうしの等式。乗法を加法へ移すことと $\iota$ が乗法・逆数を保つことだけ）」）: $\lambda\in\Lambda$ で $\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。証明は準備三つ（台の一致、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和（元の個数の帰納法。空集合は `claim_real_logarithm_int_power` を $k:=0$ で））と一続き八段（定義・台の一致・$\iota_{\Lambda\to\Lambda_{\mathbb Q}}$ の定義・整数冪の実対数・$\iota$ が整数冪を保つ・有限積の実対数は和・$\iota$ が有限積を保つ・$\mathrm{rat}_\Lambda$ の定義）。狭義単調性は使わない。`remark_real_escape_plan` の冒頭と脱出の項に参照を足した。
+  SageMath `check/log-order-group-realization-real-log/`（$\ell_p$ を記号のまま持つ模型。10724 検査、4 秒）。Lean 具体版 `ThermodynamicLimit/LogOrderGroupRealizationRealLog.lean`（`realLog_prod`（`Finset.induction_on` と `realLog_mul`。`Real.log_prod` は使わない）・`realizeRational_toRational`（`Finsupp.support_mapRange_of_injective`・`toRational_apply`・`realLog_zpow`・`Rat.cast_zpow`・`realLog_prod`・`Rat.cast_prod`・`rfl` が八段に対応））、必要十分版 `NecSuf/ThermodynamicLimit/LogOrderGroupRealizationRealLog.lean`（`map_prod_necSuf`・`realize_int_prod_necSuf`。`[CommGroup G] [AddCommGroup A]`、乗法を加法へ移す写像だけ。可換性は有限積・有限和を作るために要る。$\iota_{\mathbb Q\to\mathbb R}$ の読み替えは導出版に置く）、導出版（`positive_val_prod`・`Positive.coe_zpow`・`Rat.cast_zpow`・`Rat.cast_prod`）。sorry 検査 1360 件。check 453 ブロック・PDF 246 ページ通過。
+  レビュー: 前 tick の「整数冪の実対数は整数倍」の本文（準備・帰納法・逆数・符号の場合分け）と Lean 具体版（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`）・必要十分版（`Group`・`AddGroup`）を突き合わせて一致。修正なし。次は「有理係数の対数順序群の実現写像は順序を保つ」。
+
 - **2026-08-17 の tick 362 は、台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」が二つの帰納法（整数冪の実対数、台の大きさ）を含むので二行へ割り、その最初「整数冪の実対数は整数倍である（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
   `claim_real_logarithm_int_power`（`claim_rational_log_order_group_realization_smul` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\log_{\mathbb R}$ の値どうしの等式。乗法を加法へ移すことと $\mathbb R$ の加法群の移項だけ）」）: $u\in\mathbb R_{>0}$、$k\in\mathbb Z$ で $\log_{\mathbb R}(u^k)=\iota_{\mathbb Q\to\mathbb R}(k)\cdot\log_{\mathbb R}(u)$。証明は準備 $\log_{\mathbb R}(1)=0$（$1=1\cdot1$・乗法を加法へ・移項）、自然数冪の帰納法（$n=0$ 三段、$n\to n+1$ 五段）、逆数 $\log_{\mathbb R}(v^{-1})=-\log_{\mathbb R}(v)$（三段・移項）、$k<0$ の六段。狭義単調性は使わない。`remark_real_escape_plan` の冒頭と脱出の項に参照を足した。
   SageMath `check/real-logarithm-int-power/`（$\ell_p$ を記号のまま持ち、正の有理数 $u=\prod p^{e_p}\mapsto\sum e_p\ell_p$ を「乗法を加法へ移す写像」の模型として各段を検査。1246 検査、3 秒。実数体そのものの上の等式は Lean が担う旨を overview に明記）。Lean 具体版 `ThermodynamicLimit/RealLogarithmIntPower.lean`（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`。`realLog_mul` だけを使い `Real.log_pow`・`Real.log_zpow` は使わない）、必要十分版 `NecSuf/ThermodynamicLimit/RealLogarithmIntPower.lean`（`map_zpow_necSuf`。`[Group G] [AddGroup A]`、写像が乗法を加法へ移すことだけ。可換性・順序・完備性・狭義単調を使わない。`MonoidHom.map_zpow` は使わない）、導出版（`G:={t:\mathbb R\mid 0<t}` の mathlib の群構造。`Positive.coe_zpow` は `rfl`）。sorry 検査 1355 件。check 452 ブロック・PDF 245 ページ通過。
@@ -31,12 +36,6 @@
   SageMath `check/open-square-density-lower-set-le-upper-bound/`（$q$ 8 値、$L\le4$、$\mu$ は空でないことの証人とそれ以下の三つ、別の証人 $(\frac12\iota(\ell_2),2)$ の元。244 検査、4 秒。順序の決定手続きの共通分母を分母の積から最小公倍数へ変えた——積だと $\Psi^{\mathrm{op}}_L(q)$ どうしの比較で指数が $16^{10}$ 程度になり 5 分超で実行不能。`claim_common_denominator_multiple` により結果は変わらない）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet`。`rationalLogOrderLE_add_right`・`zero_add`・`add_comm`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`・`rationalLogOrderLE_trans`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`le_bound_of_mem_lowerSetOfSequence_necSuf`。`[Add X] [Zero X]`、推移律・右加法単調性・単位元 $0+x=x$・交換則・列の項の上界だけ。$\varepsilon\ne0$ も逆元も有理数倍も使わない）、導出版。sorry 検査 1342 件。前 tick のレビューでは修正なし。次は「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」。
 
 
-- **2026-08-17 の tick 358 は、台帳の先頭行「開境界正方形の密度の下組は空でない」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `def_open_square_density_lower_set`（$A^{\mathrm{op}}(q):=A((\Psi^{\mathrm{op}}_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$。後の段が繰り返し引くので名前を置いた）と `claim_open_square_density_lower_set_nonempty`（$-\iota(\ell_2)\in A^{\mathrm{op}}(q)$。いずれも `claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。仮定は $q\in\mathbb Q_{>0}$ だけで、$q\le1$ は要らない（密度の非負が $q>0$ で成り立つため。台帳の行名の「$0<q\le1$」は外した）。証明は準備二つ（$0\le\iota(\ell_2)$ は `claim_rational_embedded_log_order_iff` を $(1,2)$ で読む既出の鎖、$\iota(\ell_2)\ne0$ は $\ell_2(2)=1\ne0$ と `claim_rational_log_order_group_embedding` の単射性）と、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$ で一続き三段（$\varepsilon$ の定義、逆元律、`claim_open_square_free_entropy_density_nonnegative`）。`remark_real_escape_plan` の脱出の項に $A^{\mathrm{op}}(q)$ と空でないことへの参照を足した。
-  SageMath `check/open-square-density-lower-set-nonempty/`（$q$ 8 値、$L\le4$。一辺 4 は行ごとの動的計画法で一辺 1〜3 の全列挙と一致を確認。141 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`openSquareDensityLowerSet`・`mem_…_iff`・`toRational_generator_two_ne_zero`・`neg_toRational_generator_two_mem_openSquareDensityLowerSet`・`openSquareDensityLowerSet_nonempty`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`neg_mem_lowerSetOfSequence_of_nonneg_necSuf`。`[Add X] [Zero X] [Neg X]`、正の元 $\varepsilon$ とその逆元律 $-\varepsilon+\varepsilon=0$ だけ、列の非負を仮定として受ける。推移律も加法単調性も使わない）、導出版。sorry 検査 1339 件。前 tick のレビューでは修正なし。次は「開境界正方形の密度の下組の元は密度の上からの評価以下」。
-
-
-
 ## セクション台帳
 
 **済んだ範囲**（章ごとの件数。個々の内訳は [auto-loop-archive.md](auto-loop-archive.md) と
@@ -49,14 +48,13 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 76 セクション
+- 熱力学極限: 77 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数） | todo | $\lambda\in\Lambda$ で $\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。整数冪の実対数（`claim_real_logarithm_int_power`、済）で $\iota(\lambda(p))\log_{\mathbb R}(\iota p)=\log_{\mathbb R}(\iota(p)^{\lambda(p)})$ とし、有限積の実対数は和（乗法を加法へ移すことの台の大きさの帰納法）、$\iota$ が積と整数冪を保つこと、`def_rational_of_log`。一続きの鎖で書く。Lean は `Finset.prod` に渡る `realLog_mul` の帰納法（`Real.log_prod` は使わない）。SageMath は $\ell_p$ を記号のまま持つ模型で各段を検査。住処 R |
 | 熱力学極限 | 有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数） | todo | $\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow\rho_{\mathbb R}(\lambda)\le\rho_{\mathbb R}(\mu)$。共通分母 $N$ で $\lambda_N\le_\Lambda\mu_N$、$\mathrm{rat}_\Lambda(\lambda_N)\le\mathrm{rat}_\Lambda(\mu_N)$（$\mathbb Q$）、$\iota_{\mathbb Q\to\mathbb R}$ の順序保存、実対数の単調性、前二行で $N\rho_{\mathbb R}(\lambda)\le N\rho_{\mathbb R}(\mu)$、$N>0$ で割る。住処 R |
 | 熱力学極限 | 下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性） | todo | $f^{\mathrm{op}}(q):=\sup\rho_{\mathbb R}(A)$。空でない・上に有界（前二行と順序保存）から上限の存在。住処 R、`realEscape` 必須。定義したら `remark_real_escape_plan` の題名から「まだ書いていない」を外す |
 | 熱力学極限 | 削除した実数値経路の Lean の後片付け | todo | 2026-08-16 に本文から消した実数値経路（実対数・上限／下限による極限）の Lean ファイルが孤立して残っている。入口からの import と sorry 検査は通るが、対応する本文が無いので消す |
@@ -69,6 +67,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## 前進の記録
 
+- 2026-08-17（tick 363）: 台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を実行し、`claim_log_order_group_realization_real_log` を `claim_real_logarithm_int_power` の直後に置いた。
+  証明は準備三つ（台の一致、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和）と一続き八段だけ。SageMath `log-order-group-realization-real-log`（$\ell_p$ を記号のまま持つ模型）、Lean 具体版・必要十分版（`CommGroup`・`AddCommGroup`、乗法を加法へ移す写像だけ）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1360 件）。式変形統一は一時停止中のため実施せず。
+
 - 2026-08-17（tick 362）: 台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」は、整数冪の実対数（$k$ の帰納法と符号の場合分け）と、$\Lambda$ の元の台の大きさの帰納法の二つの論法を含むので二行へ割った。その最初「整数冪の実対数は整数倍である」を実行し、`claim_real_logarithm_int_power` を `claim_rational_log_order_group_realization_smul` の直後に置いた。
   証明は準備（$\log_{\mathbb R}(1)=0$）・自然数冪の帰納法・逆数・符号の場合分けだけ。SageMath `real-logarithm-int-power`（$\ell_p$ を記号のまま持つ模型）、Lean 具体版・必要十分版（`Group`・`AddGroup`、乗法を加法へ移す写像だけ）・導出版を書き、入口 import・sorry 検査へ 6 件登録（計 1355 件）。式変形統一は一時停止中のため実施せず。
 
@@ -79,15 +80,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 - 2026-08-17（tick 360）: 台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ」は、実対数と実現写像の定義、有理数倍との可換性（分配則）、$\Lambda$ の元の実現が $\mathrm{rat}_\Lambda$ の実対数であること（帰納法）、順序の保存（共通分母と単調性）の四つの論法を含むので四行へ割った。その最初「実数体と実対数、および実現写像の定義」を実行し、`def_real_logarithm` と `def_rational_log_order_group_realization` を `claim_open_square_density_lower_set_le_upper_bound` の直後に置いた（本文で初めての住処 R。脱出理由は実対数）。
   Lean `ThermodynamicLimit/RationalLogOrderGroupRealization.lean` を書き、入口 import・sorry 検査へ 4 件登録（計 1346 件）。定義ブロックなので SageMath 検証と必要十分版は無い。`remark_real_escape_plan` の冒頭と脱出の項を両定義に合わせて直した。式変形統一は一時停止中のため実施せず。
-
-
-- 2026-08-17（tick 359）: 台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を実行し、`claim_open_square_density_lower_set_le_upper_bound` を `claim_open_square_density_lower_set_nonempty` の直後に置いた。行名の「$0<q\le1$」は、密度の上からの評価が $q>0$ で成り立ち $q\le1$ を使わないので外した。
-  証明は所属の証人を $L:=N$ で読む一続き五段（単位元・加法単調性・交換則・証人の性質・密度の上からの評価）と推移律だけ。SageMath `open-square-density-lower-set-le-upper-bound`（順序の決定手続きの共通分母は最小公倍数で取る）、Lean 具体版・必要十分版（`Add`・`Zero`、推移律・右加法単調性・単位元・交換則・列の上界だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1342 件）。式変形統一は一時停止中のため実施せず。
-
-
-- 2026-08-17（tick 358）: 台帳の先頭行「開境界正方形の密度の下組は空でない」を実行し、`def_open_square_density_lower_set` と `claim_open_square_density_lower_set_nonempty` を `claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後に置いた。行名の「$0<q\le1$」は、密度の非負が $q>0$ で成り立ち $q\le1$ を使わないので外した。
-  証明は準備二つ（$\iota(\ell_2)$ の非負と非零）と、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$ での一続き三段だけ。SageMath `open-square-density-lower-set-nonempty`、Lean 具体版・必要十分版（`Add`・`Zero`・`Neg`、正の元一つとその逆元律、列の非負だけ）・導出版を書き、入口 import・sorry 検査へ 6 件登録（計 1339 件）。式変形統一は一時停止中のため実施せず。
-
 
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
@@ -107,6 +99,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-17（tick 363）: 前 tick の「整数冪の実対数は整数倍」の本文（準備 $\log_{\mathbb R}(1)=0$・自然数冪の帰納法・逆数・$k<0$ の六段）・SageMath overview（1246 検査）・Lean 具体版（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow` が本文の四つの部分に 1 対 1。`realLog_mul` だけを使う）・必要十分版（`Group`・`AddGroup`、乗法を加法へ移す写像だけ）・導出版（`Positive` の群構造）を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 整数冪の実対数は今 tick の主張が各素数について引く形で残す。今 tick の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」は可算側の量（正の有理数）と実数側の量（実現）を結ぶ等式で、順序保存が $\Lambda$ の順序を実対数の単調性へ移すために引くので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
+
 - 2026-08-17（tick 362）: 前 tick の「実現写像は有理数倍と可換」の本文（台の包含の準備と一続き六段）・SageMath overview（18235 検査）・Lean 具体版（`realizeRational_eq_sum_support`・`Finsupp.support_smul`＋`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）・必要十分版（`MulZeroClass`・`NonUnitalSemiring`、$\iota$ の乗法保存と $\iota(0)=0$）・導出版（`rfl`）を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 有理数倍との可換性は順序保存の証明が $N$ で割り戻すために引く写像の性質で残す。今 tick の整数冪の実対数は、次の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」が各素数について引く形で、乗法を加法へ移すことだけから帰納法で出す実対数の性質（$\mathbb R$ の四則から直ちには従わない）なので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
 
@@ -117,15 +112,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 - 2026-08-17（tick 360）: 前 tick の「開境界正方形の密度の下組の元は密度の上からの評価以下」の本文（証人を $L:=N$ で読む一続き五段）・SageMath overview（244 検査）・Lean 具体版（`rationalLogOrderLE_add_right`・`zero_add`・`add_comm`・`hN N (le_refl N)`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`・`rationalLogOrderLE_trans` が五段に 1 対 1）・必要十分版（`Add`・`Zero`、推移律・右加法単調性・単位元・交換則・列の上界）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 上に有界であることは上限の存在の前提で残す。今 tick の二つは定義であり、実数体への脱出の位置と理由を宣言する（住処 R を持つ最初のブロック）。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。**台帳の整理の不備を 1 件直した**: 前 tick が「現在地」「前進の記録」「レビュー記録」から tick 354 分を外したが保管庫へ移していなかったので、git の履歴から取り出して保管庫へ復元した。本文の修正は無い。
-
-
-- 2026-08-17（tick 359）: 前 tick の「開境界正方形の密度の列が定める下組」の定義と「開境界正方形の密度の下組は空でない」の本文（準備二つ・一続き三段）・SageMath overview（141 検査）・Lean 具体版（`toRational_generator_two_ne_zero`・`neg_add_cancel`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_zero_openScaledFreeEntropy` が本文の準備第二と三段に 1 対 1）・必要十分版（`Add`・`Zero`・`Neg`、正の元一つとその逆元律・列の非負）・導出版を突き合わせ、根拠が一致した。
-  「何も言っていない主張」の観点: 空でないことは上限の存在の前提（値の属する側の証人）で残す。今 tick の「下組の元は上界以下」は下組が上に有界であること（上限の存在のもう一つの前提）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-
-- 2026-08-17（tick 358）: 前 tick の「有理係数の対数順序群の列が定める下組」の定義と「列が定める下組は下に閉じている」の本文（証人の引き継ぎ・二段）・SageMath overview（125 ベクトル、77 件）・Lean 具体版（`rationalLogOrderSequenceLowerSet`・`mem_…_iff`・`mem_…_of_le` の `rationalLogOrderLE_add_right`・`rationalLogOrderLE_trans` が本文の二段に 1 対 1）・必要十分版（`Add`・`Zero`、推移律・右加法単調性）・導出版（`rfl`）を突き合わせ、根拠が一致した。書き直した `remark_real_escape_plan` の脱出の項も読み直した（$\Lambda_{\mathbb Q}$ の切断の言葉。実対数と完備性の二つの理由）。
-  「何も言っていない主張」の観点: 下組の定義は切断の下側に名前を与えるもの、下閉性は値の属する側を言うので残す。今 tick の $A^{\mathrm{op}}(q)$ の定義は上限の段が繰り返し引く名前で、空でないことは上限の存在の前提（値の属する側の証人）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
 
 
 ## 判断待ち（人間に問うべき論点）

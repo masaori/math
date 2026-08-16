@@ -3,6 +3,32 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 363 で台帳から移した記録（tick 358 分）
+
+### 現在地
+
+- **2026-08-17 の tick 358 は、台帳の先頭行「開境界正方形の密度の下組は空でない」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `def_open_square_density_lower_set`（$A^{\mathrm{op}}(q):=A((\Psi^{\mathrm{op}}_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$。後の段が繰り返し引くので名前を置いた）と `claim_open_square_density_lower_set_nonempty`（$-\iota(\ell_2)\in A^{\mathrm{op}}(q)$。いずれも `claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。仮定は $q\in\mathbb Q_{>0}$ だけで、$q\le1$ は要らない（密度の非負が $q>0$ で成り立つため。台帳の行名の「$0<q\le1$」は外した）。証明は準備二つ（$0\le\iota(\ell_2)$ は `claim_rational_embedded_log_order_iff` を $(1,2)$ で読む既出の鎖、$\iota(\ell_2)\ne0$ は $\ell_2(2)=1\ne0$ と `claim_rational_log_order_group_embedding` の単射性）と、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$ で一続き三段（$\varepsilon$ の定義、逆元律、`claim_open_square_free_entropy_density_nonnegative`）。`remark_real_escape_plan` の脱出の項に $A^{\mathrm{op}}(q)$ と空でないことへの参照を足した。
+  SageMath `check/open-square-density-lower-set-nonempty/`（$q$ 8 値、$L\le4$。一辺 4 は行ごとの動的計画法で一辺 1〜3 の全列挙と一致を確認。141 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`openSquareDensityLowerSet`・`mem_…_iff`・`toRational_generator_two_ne_zero`・`neg_toRational_generator_two_mem_openSquareDensityLowerSet`・`openSquareDensityLowerSet_nonempty`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetNonempty.lean`（`neg_mem_lowerSetOfSequence_of_nonneg_necSuf`。`[Add X] [Zero X] [Neg X]`、正の元 $\varepsilon$ とその逆元律 $-\varepsilon+\varepsilon=0$ だけ、列の非負を仮定として受ける。推移律も加法単調性も使わない）、導出版。sorry 検査 1339 件。前 tick のレビューでは修正なし。次は「開境界正方形の密度の下組の元は密度の上からの評価以下」。
+
+### 前進の記録
+
+- 2026-08-17（tick 359）: 台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を実行し、`claim_open_square_density_lower_set_le_upper_bound` を `claim_open_square_density_lower_set_nonempty` の直後に置いた。行名の「$0<q\le1$」は、密度の上からの評価が $q>0$ で成り立ち $q\le1$ を使わないので外した。
+  証明は所属の証人を $L:=N$ で読む一続き五段（単位元・加法単調性・交換則・証人の性質・密度の上からの評価）と推移律だけ。SageMath `open-square-density-lower-set-le-upper-bound`（順序の決定手続きの共通分母は最小公倍数で取る）、Lean 具体版・必要十分版（`Add`・`Zero`、推移律・右加法単調性・単位元・交換則・列の上界だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1342 件）。式変形統一は一時停止中のため実施せず。
+
+
+- 2026-08-17（tick 358）: 台帳の先頭行「開境界正方形の密度の下組は空でない」を実行し、`def_open_square_density_lower_set` と `claim_open_square_density_lower_set_nonempty` を `claim_rational_log_order_group_sequence_lower_set_downward_closed` の直後に置いた。行名の「$0<q\le1$」は、密度の非負が $q>0$ で成り立ち $q\le1$ を使わないので外した。
+  証明は準備二つ（$\iota(\ell_2)$ の非負と非零）と、証人 $\varepsilon:=\iota(\ell_2)$、$N:=1$ での一続き三段だけ。SageMath `open-square-density-lower-set-nonempty`、Lean 具体版・必要十分版（`Add`・`Zero`・`Neg`、正の元一つとその逆元律、列の非負だけ）・導出版を書き、入口 import・sorry 検査へ 6 件登録（計 1339 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 359）: 前 tick の「開境界正方形の密度の列が定める下組」の定義と「開境界正方形の密度の下組は空でない」の本文（準備二つ・一続き三段）・SageMath overview（141 検査）・Lean 具体版（`toRational_generator_two_ne_zero`・`neg_add_cancel`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_zero_openScaledFreeEntropy` が本文の準備第二と三段に 1 対 1）・必要十分版（`Add`・`Zero`・`Neg`、正の元一つとその逆元律・列の非負）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 空でないことは上限の存在の前提（値の属する側の証人）で残す。今 tick の「下組の元は上界以下」は下組が上に有界であること（上限の存在のもう一つの前提）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
+- 2026-08-17（tick 358）: 前 tick の「有理係数の対数順序群の列が定める下組」の定義と「列が定める下組は下に閉じている」の本文（証人の引き継ぎ・二段）・SageMath overview（125 ベクトル、77 件）・Lean 具体版（`rationalLogOrderSequenceLowerSet`・`mem_…_iff`・`mem_…_of_le` の `rationalLogOrderLE_add_right`・`rationalLogOrderLE_trans` が本文の二段に 1 対 1）・必要十分版（`Add`・`Zero`、推移律・右加法単調性）・導出版（`rfl`）を突き合わせ、根拠が一致した。書き直した `remark_real_escape_plan` の脱出の項も読み直した（$\Lambda_{\mathbb Q}$ の切断の言葉。実対数と完備性の二つの理由）。
+  「何も言っていない主張」の観点: 下組の定義は切断の下側に名前を与えるもの、下閉性は値の属する側を言うので残す。今 tick の $A^{\mathrm{op}}(q)$ の定義は上限の段が繰り返し引く名前で、空でないことは上限の存在の前提（値の属する側の証人）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 362 で台帳から移した記録（tick 357 分）
 
 ### 現在地
