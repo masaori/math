@@ -13,6 +13,7 @@
 | [`time-expansion-dependency/`](time-expansion-dependency/) | 大域写像の一点反転、イベント集合、一段依存関係、時刻増加 | 実行結果は各 `overview.md` を正本とする |
 | [`finite-propagation-boundary/`](finite-propagation-boundary/) | 経路の時刻差、伝播球、依存元集合の有限伝播境界 | 実行結果は各 `overview.md` を正本とする |
 | [`local-rule-representation/`](local-rule-representation/) | 局所規則で表せること $\iff$ 本質的依存台の包含、依存台の最小性、単射な大域写像の逆写像の最小近傍 | 実行結果は各 `overview.md` を正本とする |
+| [`iterate-monoid/`](iterate-monoid/) | 反復回数の加法と写像合成の一致、反復写像の衝突と有限代表集合、反復写像がなす有限可換モノイド、その真理値表からの有限決定 | 実行結果は各 `overview.md` を正本とする |
 | [`inverse-map-locality-exploration/`](inverse-map-locality-exploration/) | 探索（未昇格）: 単射な大域写像の逆写像の本質的依存台と順写像の依存台の比較 | **反例あり**（$L=5$ 規則 45 で逆写像の依存台が舞台全体）。詳細は `overview.md` |
 
 ## 予定されている検算（未着手）
