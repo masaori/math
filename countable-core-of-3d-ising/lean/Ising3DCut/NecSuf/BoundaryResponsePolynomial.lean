@@ -360,4 +360,20 @@ theorem brokenMonomial_maps_to_monomial_under_outer_edges_to_one
     π (∏ e ∈ B, X e) = ∏ e ∈ B.preimage ι hι.injOn, X e :=
   monoidHom_prod_eq_prod_preimage_of_outside_eq_one ι hι π.toMonoidHom X X hin hout B
 
+/-- 増えた辺の変数を 1 に置いた境界応答多項式は配位ごとの元の外箱の破れ辺の単項式の有限和、の必要十分版。
+係数環は可換半環 `R`、辺型に有限性・可判定性は不要（環準同型が有限和を保つことと前主張の項ごとの適用だけ）。 -/
+theorem fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (ι : Edge → Edge'') (hι : Function.Injective ι)
+    (π : MvPolynomial Edge'' R →+* MvPolynomial Edge R)
+    (hin : ∀ e : Edge, π (X (ι e)) = X e)
+    (hout : ∀ e'' : Edge'', e'' ∉ Set.range ι → π (X e'') = 1) :
+    π (multivariatePartitionPolynomial (R := R) broken'') =
+      ∑ σ : Configuration × Outer, ∏ e ∈ (broken'' σ).preimage ι hι.injOn, X e := by
+  unfold multivariatePartitionPolynomial
+  rw [map_sum]
+  exact Finset.sum_congr rfl fun σ _ ↦
+    brokenMonomial_maps_to_monomial_under_outer_edges_to_one ι hι π hin hout (broken'' σ)
+
 end Ising3DCut.NecSuf

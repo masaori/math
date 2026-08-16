@@ -167,4 +167,18 @@ theorem brokenMonomial_maps_to_monomial_under_outer_edges_to_one_fromNecSuf
     π (∏ e ∈ B, X e) = ∏ e ∈ B.preimage ι hι.injOn, X e :=
   NecSuf.brokenMonomial_maps_to_monomial_under_outer_edges_to_one (R := ℤ) ι hι π hin hout B
 
+omit [Fintype Edge] [DecidableEq Edge] in
+/-- 増えた辺の変数を 1 に置いた境界応答多項式は配位ごとの元の外箱の破れ辺の単項式の有限和、を必要十分版（`R := ℤ`）から導く。 -/
+theorem fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials_fromNecSuf
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (ι : Edge → Edge'') (hι : Function.Injective ι)
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (hin : ∀ e : Edge, π (X (ι e)) = X e)
+    (hout : ∀ e'' : Edge'', e'' ∉ Set.range ι → π (X e'') = 1) :
+    π (multivariatePartitionPolynomial broken'') =
+      ∑ σ : Configuration × Outer, ∏ e ∈ (broken'' σ).preimage ι hι.injOn, X e :=
+  NecSuf.fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials (R := ℤ)
+    broken'' ι hι π hin hout
+
 end Ising3DCut
