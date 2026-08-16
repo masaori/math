@@ -88,3 +88,4 @@ import Ising3DCut.CoarseGrainingValuesAgreeFromNecSuf
 import Ising3DCut.LimitQuantity.PrimeExponentDataDeterminesNat
 import Ising3DCut.LimitQuantity.PrimeExponentDataDeterminesRat
 import Ising3DCut.LimitQuantity.PartitionValuePositive
+import Ising3DCut.LimitQuantity.PartitionValuesAgreeFromSequence
