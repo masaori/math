@@ -25,6 +25,7 @@ export const ALL_LABELS = [
   "claim_full_boundary_response_total_degree_is_edge_count",
   "claim_full_boundary_response_value_at_one",
   "claim_galois_hyperoctahedral_bound",
+  "claim_limit_quantity_depends_only_on_finite_box_sequence",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
   "claim_palindrome",
