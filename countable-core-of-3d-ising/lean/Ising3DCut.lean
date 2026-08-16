@@ -85,3 +85,4 @@ import Ising3DCut.CoarseGrainingValuesAgree
 import Ising3DCut.CoarseGrainingValuesAgreeStepTwo
 import Ising3DCut.NecSuf.CoarseGrainingValuesAgree
 import Ising3DCut.CoarseGrainingValuesAgreeFromNecSuf
+import Ising3DCut.LimitQuantity.PrimeExponentDataDeterminesNat
