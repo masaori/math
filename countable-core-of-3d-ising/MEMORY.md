@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 09:17: 「境界応答多項式は外箱に依存しない」を記述（`記述まで`）。次は同セクションの SageMath 検証。測定量選び直しは新セクション「内箱と外箱の間の辺変数を 1 に置かない測定量への選び直し」（todo）へ割った。
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
