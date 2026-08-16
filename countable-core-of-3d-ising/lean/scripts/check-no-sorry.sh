@@ -147,6 +147,7 @@ targets=(
   Ising3DCut.fullBoundaryResponse_degreeOf_eq_one
   Ising3DCut.fullBoundaryResponse_totalDegree_le_card_edge
   Ising3DCut.fullBoundaryResponse_totalDegree_eq_card_edge
+  Ising3DCut.fullBoundaryResponse_eval_one_eq_card_configuration
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add

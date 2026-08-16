@@ -273,6 +273,20 @@ theorem fullBoundaryResponse_totalDegree_eq_card_edge
     simp [Finsupp.sum_single_index]
   rwa [hdeg] at hle
 
+/-- 辺変数を 1 に置かない境界応答多項式の全変数を 1 に置いた値は配位の総数（人手証明
+`claim_full_boundary_response_value_at_one`）。全ての辺変数を `1` に置く環準同型 `ε_L`（`eval fun _ ↦ 1`）は
+有限和と有限積を保ち、各配位の単項式 `∏ e ∈ broken σ, X e` を `1` へ写すので、像は配位の個数
+`#Configuration` に等しい（人手証明では `2^{#V_L}`）。 -/
+theorem fullBoundaryResponse_eval_one_eq_card_configuration
+    (broken : Configuration → Finset Edge) :
+    (eval fun _ : Edge ↦ (1 : ℤ)) (multivariatePartitionPolynomial broken) =
+      Fintype.card Configuration := by
+  unfold multivariatePartitionPolynomial
+  -- 環準同型による有限和・有限積の分配、各不定元は 1 へ
+  rw [map_sum]
+  simp only [map_prod, eval_X, Finset.prod_const_one, Finset.sum_const, Finset.card_univ,
+    nsmul_eq_mul, mul_one]
+
 end
 
 end Ising3DCut
