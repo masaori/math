@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 356 で台帳から移した記録（tick 351 分）
+
+### 現在地
+
+- **2026-08-17 の tick 351 は、台帳の先頭行「有理係数の対数順序群の逆元は順序を反転する」（任意の $\lambda,\mu\in\Lambda_{\mathbb Q}$ で $\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow-\mu\le_{\Lambda_{\mathbb Q}}-\lambda$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_neg_reverses_order`（`claim_rational_log_order_group_add_monotone` の直後・`def_finite_free_entropy_density` の直前、住処 Lambda。$\Lambda_{\mathbb Q}$ の順序の一般的な性質なので、密度の評価の列ではなく順序の性質の並びに置いた）。証明は `claim_rational_log_order_group_add_monotone` で両辺に $\nu:=(-\lambda)+(-\mu)$ を足し、左辺を結合則・逆元・単位元の三段で $-\mu$ に、右辺を交換則・結合則・逆元・単位元の四段で $-\lambda$ に整えるだけ。順序の定義の中身（共通分母）にも有理数倍にも触れない。
+  SageMath `check/rational-log-order-group-neg-reverses-order/`（素数 $2,3,5$ の係数 5 通りの 125 ベクトル、$\lambda\le\mu$ の組 7875 件で主張と左右の鎖、満たさない組 7750 件で否定側、10 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupNegReversesOrder.lean`（`rationalLogOrderLE_neg_le_neg`。`← add_assoc`・`add_neg_cancel`・`zero_add`、右辺は先に `add_comm (-l) (-m)`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupNegReversesOrder.lean`（`neg_le_neg_of_le_necSuf`。`[AddCommMonoid X] [Neg X]` と右加法単調性・逆元律 $x+(-x)=0$ の 1 本だけ。$(-x)+x=0$ も推移律も要らない。交換則は右辺で $-\lambda,-\mu$ の順を入れ替える一箇所で要る）、導出版。sorry 検査 1309 件。
+  前 tick のレビューでは修正なし。次は「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」（差の上端を辺 $M,L$ を入れ替えて読み、この順序反転で $-R_a\le-(\Psi_M+(-\Psi_L))$、そして $-(\Psi_M+(-\Psi_L))=\Psi_L+(-\Psi_M)$ を素数ごとに読む）。
+
+### 前進の記録
+
+- 2026-08-17（tick 351）: 台帳の先頭行「有理係数の対数順序群の逆元は順序を反転する」を実行し、`claim_rational_log_order_group_neg_reverses_order` を `claim_rational_log_order_group_add_monotone` の直後（順序の性質の並び）に置いた。
+  証明は加法単調性で両辺に $(-\lambda)+(-\mu)$ を足し、結合則・交換則・逆元・単位元で両辺を整えるだけ。SageMath `rational-log-order-group-neg-reverses-order`、Lean 具体版・必要十分版（`AddCommMonoid`・`Neg`、右加法単調性・逆元律 $x+(-x)=0$ だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1309 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 351）: 前 tick の「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」の本文（準備一段・本体六段）・SageMath overview（360 検査）・Lean 具体版（`hup`・`hlow`・`hprep'`・`hre`・`hprep`・`h1`〜`h5` が本文の準備と本体に 1 対 1）・必要十分版（`AddCommMonoid`・`Neg`、推移律・右加法単調性・二つの逆元律）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は上端と下端を一つの差の評価にまとめたもので、Cauchy 性が両側から引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 355 で台帳から移した記録（tick 350 分）
 
 ### 現在地

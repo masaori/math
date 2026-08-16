@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 356 は、前 tick の「Archimedes 性の倍率以上の自然数で割れば上界を超えない」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を四層で閉じた。
+`claim_open_square_density_sequence_cauchy_le_one`（`claim_open_square_density_difference_bound_core_nonneg_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $0<q\le1$ で、列 $(\Psi^{\mathrm{op}}_L(q))_{L\ge1}$ は `def_rational_log_order_group_cauchy_sequence` の Cauchy 列。
+証明は準備の第一（`claim_open_square_density_difference_bound_core_nonneg_le_one` で $0\le\Gamma(q)$、`claim_rational_log_order_group_archimedean` を $\mu:=\Gamma(q)$ で読んで $\Gamma(q)\le n\varepsilon$ の $n$、$a:=n+2$、$N:=a^2$。$\mathbb N$ の事実 $a\ge1$、$n\le a$、$a<a^2$、$N\ge1$）、第二（$N\le L,M$ から $a<L,M$、$a^2\le L,M$）、第三（`claim_rational_log_order_group_div_ge_multiplier_le` で $\frac1a\Gamma(q)\le\varepsilon$）と、上端一続き三段（`claim_open_square_large_sides_density_difference_upper_le_one` で $\le R_a$、`claim_open_square_density_difference_bound_is_core_over_base_side` を右から左で $=\frac1a\Gamma(q)$、準備の第三で $\le\varepsilon$）・下端一続き三段（`claim_rational_log_order_group_neg_reverses_order` で $-\varepsilon\le-\frac1a\Gamma(q)$、核の等式で $=-R_a$、`claim_open_square_large_sides_density_difference_lower_le_one`）。推移律は `claim_rational_log_order_group_linear_order`。完備性も極限の値も実対数も使わない。
+あわせて `remark_real_escape_plan` の「Cauchy であることを示す」の項をこの主張への参照に書き換え、本文末尾「この先に書くこと」から Cauchy 性を消した。
+SageMath `check/open-square-density-sequence-cauchy/`（$q\in\{1,\frac12,\frac23\}$、$n=1$・$a=3$・$N=9$ になる $\varepsilon$、$L,M\in\{9,10\}$。105 検査、35 秒。核が正なので $a\ge3$、$N\ge9$ が避けられず、一辺 9 以上の分配関数の値は行ごとの動的計画法（行配位 $2^L$ 通り）で計算して一辺 2, 3 で全列挙と一致を確認。$Z^{\mathrm{op}}_{L,L}(q)$ の素因数分解は間に合わないので $\Lambda_{\mathbb Q}$ の元を「正の有理数の対数の有理数係数の形式和」で持ち、順序は共通分母を掛けて $\mathrm{rat}_\Lambda$（積）で比べる。Sage の前処理は `^` を冪へ変えるので排他的論理和は `operator.xor` で書く）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareDensitySequenceCauchy.lean`（`openSquareDensitySequence`（$L=0$ では $0$。`IsCauchyRationalLogOrder` は `ℕ →` を受け、定義は $N\ge1$ 以上しか見ない）、`openSquareDensitySequence_of_ne_zero`、`isCauchyRationalLogOrder_openSquareDensitySequence_of_le_one`。`set a := n+2`、`omega`・`nlinarith`、`rw [← hcore] at hup hlow`、`sub_eq_add_neg`），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensitySequenceCauchy.lean`（`cauchy_of_uniform_difference_bounds_necSuf`。`[Zero X] [Neg X] [SMul ℚ X]` と推移律・逆元の順序反転、差 `d L M`・核 `Γ`・評価 `R a` について核の等式・差の上下の一様な評価・核の Archimedes 性・倍率以上で割る評価を仮定として受けるだけ。加法も群の公理も順序の線形性も要らない）、導出版 `OpenSquareDensitySequenceCauchyFromNecSuf.lean`（`open FreeEntropy` が要る）。sorry 検査 1329 件。
+次は「切断による実数体への一度きりの脱出」（Cauchy 列が定める $\mathbb Q$ 上の切断として自由エネルギー密度を取る。引くのは「切断は実数を定める」ことだけ。住処 R、`realEscape` を書く）。
+
+（tick 355 の記録）
 2026-08-17 の tick 355 は、前 tick の「核は非負である」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で二行（係数の鎖／存在の構成）へ割り、その最初「Archimedes 性の倍率以上の自然数で割れば上界を超えない」を四層で閉じた。
 `claim_rational_log_order_group_div_ge_multiplier_le`（`claim_rational_log_order_group_scalar_compare_nonpos` の直後・`claim_rational_embedded_log_order_iff` の直前、住処 Lambda）: $\mu,\varepsilon\in\Lambda_{\mathbb Q}$、$n,a\in\mathbb N$ が $0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$、$a\ge1$、$n\le a$ を満たせば $\frac1a\cdot\mu\le_{\Lambda_{\mathbb Q}}\varepsilon$。$0\le\mu$ は要らない。

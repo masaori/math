@@ -1381,6 +1381,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one
   Ising2DLambda.NecSuf.ThermodynamicLimit.zero_le_core_of_signs_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_openSquareDensityDifferenceBoundCore_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openSquareDensitySequence_of_ne_zero
+  Ising2DLambda.ThermodynamicLimit.isCauchyRationalLogOrder_openSquareDensitySequence_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.cauchy_of_uniform_difference_bounds_necSuf
+  Ising2DLambda.ThermodynamicLimit.isCauchyRationalLogOrder_openSquareDensitySequence_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
