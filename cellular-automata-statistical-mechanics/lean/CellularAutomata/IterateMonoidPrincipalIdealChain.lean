@@ -8,6 +8,7 @@
 既存半群論の分類定理、無限極限、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidPrincipalIdealTail
+import CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain
 
 namespace CellularAutomata.IterateMonoidPrincipalIdealChain
 
@@ -178,5 +179,99 @@ theorem generatedIdeal_finite_chain_decidable :
     fun G H => finiteGeneratedIdeal_eq_iff_equivalent N f hij h G H,
     fun _ hI _ hJ =>
     finiteGeneratedIdealChain_comparable N f hij h hI hJ⟩
+
+/-! ## 必要十分版からの導出
+具体版は必要十分版を X := V → State、F := globalMap N f へ特殊化したものである。 -/
+
+omit [Fintype V] [DecidableEq V] in
+theorem generatedIdeal_eq_necessary_sufficient (G : (V → State) → (V → State)) :
+    generatedIdeal N f G =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.generatedIdeal
+        (globalMap N f) G := by
+  ext K
+  simp only [generatedIdeal,
+    CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.generatedIdeal,
+    Set.mem_setOf_eq, powerSet_eq_necessary_sufficient]
+
+omit [Fintype V] [DecidableEq V] in
+theorem principalIdealEquivalent_iff_necessary_sufficient
+    (G H : (V → State) → (V → State)) :
+    PrincipalIdealEquivalent N f G H ↔
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.PrincipalIdealEquivalent
+        (globalMap N f) G H := by
+  simp only [PrincipalIdealEquivalent,
+    CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.PrincipalIdealEquivalent,
+    generatedIdeal_eq_necessary_sufficient]
+
+omit [Fintype V] [DecidableEq V] in
+theorem principalIdealEquivalent_equivalence_relation_from_necessary_sufficient :
+    Equivalence (PrincipalIdealEquivalent N f) := by
+  constructor
+  · intro G
+    exact (principalIdealEquivalent_iff_necessary_sufficient N f G G).mpr
+      (CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_refl
+        (globalMap N f))
+  · intro G H h
+    apply (principalIdealEquivalent_iff_necessary_sufficient N f H G).mpr
+    exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_symm
+      (globalMap N f) ((principalIdealEquivalent_iff_necessary_sufficient N f G H).mp h)
+  · intro G H K hGH hHK
+    apply (principalIdealEquivalent_iff_necessary_sufficient N f G K).mpr
+    exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.principalIdealEquivalent_trans
+      (globalMap N f)
+      ((principalIdealEquivalent_iff_necessary_sufficient N f G H).mp hGH)
+      ((principalIdealEquivalent_iff_necessary_sufficient N f H K).mp hHK)
+
+omit [Fintype V] [DecidableEq V] in
+theorem generatedIdeal_antitone_from_necessary_sufficient {m n : ℕ} (hmn : m ≤ n) :
+    generatedIdeal N f (iterateMap N f n) ⊆ generatedIdeal N f (iterateMap N f m) := by
+  simp only [generatedIdeal_eq_necessary_sufficient, iterateMap_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.generatedIdeal_antitone
+    (globalMap N f) hmn
+
+omit [Fintype V] [DecidableEq V] in
+theorem generatedIdeals_comparable_from_necessary_sufficient
+    {G H : (V → State) → (V → State)} (hG : G ∈ powerSet N f) (hH : H ∈ powerSet N f) :
+    generatedIdeal N f G ⊆ generatedIdeal N f H ∨
+      generatedIdeal N f H ⊆ generatedIdeal N f G := by
+  simp only [generatedIdeal_eq_necessary_sufficient]
+  rw [powerSet_eq_necessary_sufficient] at hG hH
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.generatedIdeals_comparable
+    (globalMap N f) hG hH
+
+theorem finiteGeneratedIdeal_eq_necessary_sufficient (j : ℕ)
+    (G : (V → State) → (V → State)) :
+    finiteGeneratedIdeal N f j G =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.finiteGeneratedIdeal
+        (globalMap N f) j G := by
+  ext K
+  simp only [finiteGeneratedIdeal,
+    CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.finiteGeneratedIdeal,
+    Finset.mem_image, representatives_eq_necessary_sufficient]
+
+theorem finiteGeneratedIdealChain_eq_necessary_sufficient (j : ℕ) :
+    finiteGeneratedIdealChain N f j =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.finiteGeneratedIdealChain
+        (globalMap N f) j := by
+  ext I
+  simp only [finiteGeneratedIdealChain,
+    CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.finiteGeneratedIdealChain,
+    Finset.mem_image, representatives_eq_necessary_sufficient,
+    finiteGeneratedIdeal_eq_necessary_sufficient]
+
+theorem generatedIdeal_finite_chain_decidable_from_necessary_sufficient :
+    ∃ i j : ℕ, i < j ∧ iterateMap N f i = iterateMap N f j ∧
+      (∀ G ∈ powerSet N f,
+        finiteGeneratedIdeal N f j G ∈ finiteGeneratedIdealChain N f j) ∧
+      (∀ G H, finiteGeneratedIdeal N f j G = finiteGeneratedIdeal N f j H ↔
+        PrincipalIdealEquivalent N f G H) ∧
+      (∀ I ∈ finiteGeneratedIdealChain N f j,
+        ∀ J ∈ finiteGeneratedIdealChain N f j, I ⊆ J ∨ J ⊆ I) := by
+  simpa only [iterateMap_eq_necessary_sufficient, powerSet_eq_necessary_sufficient,
+    finiteGeneratedIdeal_eq_necessary_sufficient,
+    finiteGeneratedIdealChain_eq_necessary_sufficient,
+    principalIdealEquivalent_iff_necessary_sufficient] using
+    (CellularAutomata.NecSuf.IterateMonoidPrincipalIdealChain.generatedIdeal_finite_chain_decidable
+      (globalMap N f))
 
 end CellularAutomata.IterateMonoidPrincipalIdealChain
