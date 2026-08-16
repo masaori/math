@@ -853,4 +853,55 @@ c\!\left(d_1^{-1}(e^\ast)\right)
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_primal_first_cocycle_space",
+    kind: "definition",
+    title: { text: "主セルの F_2 上の一次コサイクル空間" },
+    labels: ["def_primal_first_cocycle_space_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-first-cocycle-space-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_second_boundary_matrix_over_f2"),
+        " の二次境界行列 ",
+        math(String.raw`\partial_2\in\operatorname{Mat}_{E_{\mathrm{cell}}\times F_{\mathrm{cell}}}(\mathbb F_2)`),
+        " に対し、主セルの一次コサイクル空間を",
+      ]),
+      displayMath(String.raw`\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+:=
+\left\{
+  c\in\mathbb F_2^{E_{\mathrm{cell}}}
+  \ \middle|\
+  \ \sum_{e\in E_{\mathrm{cell}}}
+  (\partial_2)_{e,f}c(e)
+  =0_{\mathbb F_2}
+  \text{ for every }f\in F_{\mathrm{cell}}
+\right\}
+\subseteq
+\mathbb F_2^{E_{\mathrm{cell}}}`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`c:E_{\mathrm{cell}}\to\mathbb F_2`),
+        " は主辺ラベルごとの係数写像であり、各 ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " に対する有限和は、面 ",
+        math(String.raw`f`),
+        " の二次境界の係数と ",
+        math(String.raw`c`),
+        " の対応する主辺係数との積を全主辺にわたって加えた値である。この条件は有限行列 ",
+        math(String.raw`\partial_2`),
+        " の転置が定める線形写像 ",
+        math(String.raw`\mathbb F_2^{E_{\mathrm{cell}}}\to\mathbb F_2^{F_{\mathrm{cell}}}`),
+        " で零へ写ることを成分ごとに書いたものである。したがって ",
+        math(String.raw`\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " は有限な ",
+        math(String.raw`\mathbb F_2`),
+        " ベクトル空間である。一次サイクル空間とは同一視せず、",
+        ref("def_primal_to_dual_edge_coefficient_transport"),
+        " による双対一次サイクル空間への移送は後続の別ブロックで扱う。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
