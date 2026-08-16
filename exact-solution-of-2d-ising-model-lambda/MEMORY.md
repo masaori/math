@@ -4,6 +4,18 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 334 は、前 tick の「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を $\Lambda$ の鎖と $\Lambda_{\mathbb Q}$ の挟み込みの二行へ割り、前半を四層で閉じた。
+`claim_open_square_subsquare_comparison_log_le_one`（`claim_open_square_subsquare_comparison_rational_le_one` の直後、住処 Lambda）: $1\le a<L$、$0<q\le1$ に対し
+$(a+L)\log q+\log Z^{\mathrm{op}}_{a,a}(q)\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)\le_\Lambda(L^2-a^2)\ell_2+2(L^2-a^2)\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)$。
+証明は `claim_open_rectangle_gluing_inequality_log` と同じ型（準備: 正値性・$\log2=\ell_2$（`claim_finite_free_entropy_density_upper_bound` の準備の第二を引く）・
+下端の対数を開く二段（`claim_log_additive`・`claim_log_power`）と上端の対数を開く四段（`claim_log_additive`×2・`claim_log_power` 二項同時・$\log2=\ell_2$）、本体は `claim_rational_log_order_iff` で移す 4 段の鎖 1 本）。
+SageMath `open-square-subsquare-comparison-log`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 6 点、216 検査。`ZZ`/`QQ`・有限台辞書）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonLog.lean`（`logRat_subsquareLowerValue_eq`・`logRat_subsquareUpperValue_eq`・`logOrderLE_openSquareSubsquareLog_bounds_of_le_one`。
+上端の四段は `logRat_upperBound_eq` と同じ手順で $Z$ の因子を末尾に持つ）、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `OpenSquareSubsquareComparisonLogFromNecSuf.lean`。sorry 検査 1241 件。
+次は後半「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」（台帳の備考に挟む形を書いた。$\frac1{L^2}\iota(\log Z^{\mathrm{op}}_{a,a}(q))=\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)$ の約分と
+`claim_scaled_embedding_order_transfer` の移送、書き方は `claim_open_square_block_tiling_density`）。
+
 2026-08-16 の tick 333 は、前 tick の「有理係数の対数順序群の Cauchy 列」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」を「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」へ割り直して四層で閉じた
 （$\Psi^{\mathrm{op}}$ は正方形にしか定義が無く、長方形の接合を $\Psi$ どうしで書くことはできない。正方形どうしの $\Psi$ の不等式は既に `claim_open_square_block_tiling_density` が担う）。

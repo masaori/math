@@ -3,6 +3,33 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 329）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 329 は、「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」の SageMath 検査の下書きまでで締切に当たり、本文・Lean は未着手のまま止めた（コミットは下書きと台帳のみ）。**
+  証明の骨格は決めた: 準備 3 つ（正値性と $(ka)^2\ne0$・上からの評価の側 $\frac1{(ka)^2}\iota(k^2\log Z^{\mathrm{op}}_{a,a}(q))=\Psi^{\mathrm{op}}_a(q)$ の四段・
+  下からの評価の側 $\frac1{(ka)^2}\iota(2k(k-1)a\log q+k^2\log Z^{\mathrm{op}}_{a,a}(q))=\frac{2(k-1)}{ka}\iota(\log q)+\Psi^{\mathrm{op}}_a(q)$ の六段）と、
+  二場合とも左右の不等式を 3 段の鎖 2 本ずつ（準備の等式・`claim_scaled_embedding_order_transfer` を $L:=ka$ で読んで `claim_open_square_block_tiling_log` を移す・`def_open_square_free_entropy_density`）。
+  Lean の必要十分版は前 tick の `twoSided_bounds_transport_through_monotone_map_necSuf` を `ell := λ ↦ (1/(ka)^2)·ι(λ)` で共有できる見込み。
+  SageMath の下書き `sagemath/drafts/open-square-block-tiling-density.check.sage`（形 4 通り × 正の有理点 9 点、556 検査 PASS）は、対象ラベルの本文が無いので
+  `check/` に置かず `drafts/` に置いた（検証↔証明の対応検査に掛からないため）。**形 $(a,k)=(2,2)$（$4\times4$）を含めると 10 分を超えた**ので外した
+  （前 tick の `open-square-block-tiling-log` も同じ形を含む——所要時間を次 tick で確かめること）。次 tick はこのセクションの本文・Lean を書き、下書きを `check/` へ移す。
+
+### 前進の記録
+
+- 2026-08-16（tick 329）: セクション「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」は SageMath の下書き（`sagemath/drafts/`、556 検査 PASS）まで。
+  本文・Lean は未着手（締切 14:10 で打ち切り。SageMath の $4\times4$ を含む形が 10 分超で二度走らせたことが原因）。セクション表は todo のまま。
+  次 tick: 本文ブロック `claim_open_square_block_tiling_density`（`claim_open_square_block_tiling_log` の直後・`remark_real_escape_plan` の直前、住処 Lambda）を
+  下書きの冒頭に書いた鎖のとおりに書き、下書きを `check/open-square-block-tiling-density/` へ移して overview を付け、Lean 具体版（`OpenSquareBlockTilingDensity.lean`。
+  準備の等式 2 本と `rationalLogOrderLE_scaled_toRational_iff (k*a)` の ←）・必要十分版は共有・導出版を書く。
+
+### レビュー記録
+
+- 2026-08-16（tick 329）: 前 tick の「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の必要十分版・導出版（入口 import・sorry 検査への登録・overview の記載）を
+  本文の `lean:` 欄と突き合わせ、仮定の説明（順序の移送 1 本と両端の等式のみ）が Lean の実体と一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
 ## 2026-08-16（tick 328）の記録
 
 ### 現在地

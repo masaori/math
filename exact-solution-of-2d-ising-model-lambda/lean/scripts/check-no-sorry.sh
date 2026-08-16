@@ -1293,6 +1293,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueFirstLog_bounds_of_one_le_from_necSuf
   Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueSecondLog_bounds_of_le_one_from_necSuf
   Ising2DLambda.ThermodynamicLimit.logOrderLE_openRectangleGlueSecondLog_bounds_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.logRat_subsquareLowerValue_eq
+  Ising2DLambda.ThermodynamicLimit.logRat_subsquareUpperValue_eq
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareSubsquareLog_bounds_of_le_one
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareSubsquareLog_bounds_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

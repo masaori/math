@@ -40394,6 +40394,146 @@ Z^{\mathrm{op}}_{L,L}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_subsquare_comparison_log_le_one",
+    kind: "claim",
+    title: { text: "開境界正方形と部分正方形の比較の対数化（Λ の鎖。q は 1 以下）" },
+    labels: ["claim_open_square_subsquare_comparison_log_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-subsquare-comparison-log"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.logRat_subsquareLowerValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logRat_subsquareUpperValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareSubsquareLog_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareSubsquareLog_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,L\in\mathbb{N}`),
+        "、",
+        math(String.raw`1\le a<L`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`(a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{L,L}(q)
+\ \le_{\Lambda}\ (L^2-a^2)\,\ell_2+2(L^2-a^2)\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q),\ Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " は開境界分配多項式の正の有理点での値（",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。正値性は ",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）、",
+        math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\ell_2`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元、整数倍 ",
+        math(String.raw`(a+L)\,\cdot`),
+        "、",
+        math(String.raw`(L^2-a^2)\,\cdot`),
+        "、",
+        math(String.raw`2(L^2-a^2)\,\cdot`),
+        " と加法は ",
+        ref("def_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda}`),
+        " は ",
+        ref("def_log_order_group_order"),
+        " の順序である。指数 ",
+        math(String.raw`L^2-a^2`),
+        " は ",
+        math(String.raw`a<L`),
+        " なので自然数である。",
+        ref("claim_open_square_subsquare_comparison_rational_le_one"),
+        " の両辺の対数を取ったものであり、実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。第一に、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`(a,b):=(a,a)`),
+        "、",
+        math(String.raw`(a,b):=(L,L)`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q),\ Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " である。また ",
+        math(String.raw`q,\ 2,\ 1+q\in\mathbb{Q}_{>0}`),
+        " なので、正の有理数の自然数冪と正の有理数どうしの積は正であることから、",
+        math(String.raw`q^{a+L}Z^{\mathrm{op}}_{a,a}(q)`),
+        " と ",
+        math(String.raw`2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)`),
+        " はいずれも ",
+        math(String.raw`\mathbb{Q}_{>0}`),
+        " の元であり、対数 ",
+        ref("def_rational_log"),
+        " を施せる。第二に、",
+        math(String.raw`\log2=\ell_2`),
+        " である。これは ",
+        ref("claim_finite_free_entropy_density_upper_bound"),
+        " の証明の準備の第二で、各素数での値の四段の鎖として示してあり、",
+        math(String.raw`a`),
+        "、",
+        math(String.raw`L`),
+        "、",
+        math(String.raw`q`),
+        " のいずれにも依らないので、そのまま使う。第三に、",
+        ref("claim_open_square_subsquare_comparison_rational_le_one"),
+        " の両端の値の対数を、",
+        math(String.raw`\Lambda`),
+        " の中で開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(q^{a+L}Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&=\log\bigl(q^{a+L}\bigr)+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&=(a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=a+L\text{ で。整数倍は }\blkref{def_log_order_group})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&=\log\bigl(2^{L^2-a^2}(1+q)^{2(L^2-a^2)}\bigr)+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{claim_log_additive}\text{。両因子は }\mathbb{Q}_{>0}\text{ の元})\\
+&=\log\bigl(2^{L^2-a^2}\bigr)+\log\bigl((1+q)^{2(L^2-a^2)}\bigr)+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{claim_log_additive}\text{。}2^{L^2-a^2},\ (1+q)^{2(L^2-a^2)}\in\mathbb{Q}_{>0})\\
+&=(L^2-a^2)\,\log2+2(L^2-a^2)\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=L^2-a^2\text{ と }k:=2(L^2-a^2)\text{ で二項へ同時適用。整数倍は }\blkref{def_log_order_group})\\
+&=(L^2-a^2)\,\ell_2+2(L^2-a^2)\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      paragraph([
+        "主張の左の元から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)
+&=\log\bigl(q^{a+L}Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ \text{準備の第三の前半を右辺から左辺の向きで読む})\\
+&\le_{\Lambda}\log Z^{\mathrm{op}}_{L,L}(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_square_subsquare_comparison_rational_le_one}\text{ の下からの評価を移す})\\
+&\le_{\Lambda}\log\bigl(2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_open_square_subsquare_comparison_rational_le_one}\text{ の上からの評価を移す})\\
+&=(L^2-a^2)\,\ell_2+2(L^2-a^2)\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)
+&&(\because\ \text{準備の第三の後半})
+\end{aligned}`),
+      paragraph([
+        "この鎖の第二行までが主張の左の不等式、第三行から第四行までが主張の右の不等式である。",
+        "使ったのは、開境界正方形と部分正方形の値の比較（正の有理点）、対数が順序を保ちかつ反映すること、対数の加法性と冪の法則、",
+        math(String.raw`\log2=\ell_2`),
+        " だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_claim_open_square_free_entropy_density_upper_bound",
     kind: "claim",
     title: { text: "開境界正方形の自由エントロピー密度の上からの評価" },
