@@ -4,6 +4,16 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 347 は、前 tick の「倍数でない辺の密度の基準辺の密度による上からの評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$）」を四層で閉じた。`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one`（`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で
+$\frac2L\cdot\iota(\log q)+\frac2a\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)+\bigl(-\frac{2a}L\cdot(\iota(\ell_2)+2\cdot\iota(\log(1+q)))\bigr)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$（左辺の加法は左から結合。$-$ は $\Lambda_{\mathbb Q}$ の逆元）。
+証明は準備 3 つ（$\mathbb Q$ の係数 $\frac{(ka)^2}{L^2}+\frac{L^2-(ka)^2}{L^2}=1$・$0\le\frac{L^2-(ka)^2}{L^2}\le\frac{2a}L$（`claim_square_difference_from_multiple_side_bound`）／符号 $0\le C:=\iota(\ell_2)+2\iota(\log(1+q))$（`claim_rational_embedded_log_order_iff`・`claim_rational_log_order_group_nonneg_scalar_monotone`（$c:=2$、$\lambda:=0$）・`claim_rational_log_order_group_add_monotone`）／$\frac{L^2-(ka)^2}{L^2}\Psi_{ka}\le\frac{L^2-(ka)^2}{L^2}C\le\frac{2a}LC$（`claim_open_square_free_entropy_density_upper_bound` を $L:=ka$ で読む・非負有理数倍の順序保存・`claim_rational_log_order_group_scalar_compare_nonneg`））と、
+本体三つ（$\Psi_{ka}=1\cdot\Psi_{ka}=(\frac{(ka)^2}{L^2}+\frac{L^2-(ka)^2}{L^2})\Psi_{ka}$ を分配則で割って加法単調性／$-\frac{2a}LC$ を足して結合則・逆元・単位元で $\Psi_{ka}+(-\frac{2a}LC)\le\frac{(ka)^2}{L^2}\Psi_{ka}$／主張の左辺を結合則で組み直し、`claim_open_square_multiple_side_density_vs_base_side_le_one` の左に $-\frac{2a}LC$ と $\frac2L\iota(\log q)$ を足したもの・上に $\frac2L\iota(\log q)$ を足したもの・`claim_open_square_multiple_side_subsquare_density_error_bound` の左へ推移律）。
+SageMath `check/open-square-non-multiple-side-density-lower-vs-base-side/`（$(a,k,L)=(1,1,2),(2,1,3),(1,2,3)$ × 6 点、396 検査、10 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareNonMultipleSideDensityLowerVsBaseSide.lean`（`rationalLogOrderLE_zero_openSquareUpperBoundConstant`（$0\le C$）・`rationalLogOrderLE_openSquareNonMultipleSideDensity_lower_vs_baseSide_of_le_one`。`set` で $C,\Psi,c,d,e$ を置く。$c+d=1$ は `Nat.cast_sub`・`← add_div`・`div_eq_one_iff_eq`・`ring`。分割は `one_smul`・`add_smul` の calc、移項は `add_assoc`・`add_neg_cancel`・`add_zero`、最後に `← add_assoc` 二回で左辺を平らにする）、
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareNonMultipleSideDensityLowerVsBaseSide.lean`（`lower_bound_split_and_shift_necSuf`。`[AddCommMonoid X] [Neg X]` と推移律・右加法単調性・逆元 $x+(-x)=0$ だけ。減法・整数倍を使わないので `AddCommGroup` は要らない。$\psi=x+y$、$y\le z$、$\mathrm{base}\le\psi$、$w+x\le\mathrm{big}$ から $w+(\mathrm{base}+(-z))\le\mathrm{big}$）、導出版 `OpenSquareNonMultipleSideDensityLowerVsBaseSideFromNecSuf.lean`。sorry 検査 1296 件。
+次は「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価（$0<q\le1$）」（台帳の備考に手順。$k:=\lfloor L/a\rfloor$ で $L=ka$ と $ka<L$ に場合分けし、$L\ge a^2$ から係数を $a$ だけの形へ大きくする。$E:=4\iota(\ell_2)+8\iota(\log(1+q))-4\iota(\log q)$。論法が二つ以上なら着手時に割る）。
+
 2026-08-16 の tick 346 は、前 tick の「倍数辺の密度と基準辺の密度の差の評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「倍数でない辺の密度と基準辺の密度の差の評価」を上端と下端の二行へ割った（上端は非負の係数比較で $\Psi_{ka}$ の項を $\Psi_a$ へ置き換えるだけ、下端は $\frac{(ka)^2}{L^2}\Psi_{ka}$ を $\Psi_{ka}$ と誤差に分けて上からの評価で押さえ逆元を足して移項する別の論法）。
 そのうえで上端を四層で閉じた。`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one`（`claim_open_square_multiple_side_density_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で

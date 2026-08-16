@@ -11531,3 +11531,25 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-16（tick 337）: 前 tick の「何も言っていない主張の一掃」で残した `claim_rational_embedding_commutes_with_integer_multiple` の本文（五段の鎖）・SageMath overview・Lean `toRational_intSmul` を突き合わせ、根拠が一致した。
   この主張は写像 $\iota$ が整数倍と交換することを言い 7 箇所が引くので残す（体の四則だけではない）。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
+## 2026-08-16 tick 347 で台帳から移したもの
+
+### 現在地
+
+- **2026-08-16 の tick 342 は、台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」（$r\le s$（$\mathbb Q$）、$\nu\le_{\Lambda_{\mathbb Q}}0$ なら $s\cdot\nu\le_{\Lambda_{\mathbb Q}}r\cdot\nu$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_scalar_compare_nonpos`（`claim_rational_log_order_group_scalar_compare_nonneg` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は非負の元の版と同じ道具で、$c:=s-r\ge0$ を置き、非負有理数倍の順序保存を $\lambda:=\nu$、$\mu:=0$ で読んで $c\cdot\nu\le c\cdot0=0$、加法単調性で $r\cdot\nu$ を足し、
+  四段の鎖 $s\cdot\nu=(c+r)\cdot\nu=c\cdot\nu+r\cdot\nu\le0+r\cdot\nu=r\cdot\nu$。
+  SageMath `check/rational-log-order-group-scalar-compare-nonpos/`（非正ベクトル 27 本 × 係数の組 28、主張 756 件・鎖 756 件、13 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonpos.lean`（`rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonpos.lean`（`smul_le_smul_of_le_of_nonpos_necSuf`。仮定は非負の元の版と同一で一つも増えない。(1) を読む向きだけが違う）、導出版。sorry 検査 1274 件。
+  次は「埋め込んだ対数の符号」（着手時に既出か確認。台帳の備考）。
+
+### 前進の記録
+
+- 2026-08-16（tick 342）: 台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」を実行した。`claim_rational_log_order_group_scalar_compare_nonpos` を `claim_rational_log_order_group_scalar_compare_nonneg` の直後に置いた。
+  証明は台帳の備考のとおり（$c:=s-r$、非負有理数倍の順序保存を $\lambda:=\nu$、$\mu:=0$ で読む・$c\cdot0=0$・加法単調性・分配則の四段の鎖）。SageMath `rational-log-order-group-scalar-compare-nonpos`、Lean 具体版・必要十分版（非負の元の版と同じ仮定）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1274 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 342）: 前 tick の「非負の元の有理数倍は係数の大小で比較できる」の本文（準備・四段の鎖）・SageMath overview（1064 検査）・Lean 具体版（`sub_nonneg`・`smul_zero`・`rationalLogOrderLE_add_right`・`zero_add`・`← add_smul`・`sub_add_cancel` が本文と 1 対 1）・必要十分版（二つの仮定だけ）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。

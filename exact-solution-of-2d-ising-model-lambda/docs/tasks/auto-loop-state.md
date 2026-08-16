@@ -7,6 +7,12 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 347 は、台帳の先頭行「倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$）」（$a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\frac2L\iota(\log q)+\frac2a\iota(\log q)+\Psi^{\mathrm{op}}_a+\bigl(-\frac{2a}L\cdot(\iota(\ell_2)+2\iota(\log(1+q)))\bigr)\le\Psi^{\mathrm{op}}_L$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one`（`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 3 つ（$\mathbb Q$ の係数 $\frac{(ka)^2}{L^2}+\frac{L^2-(ka)^2}{L^2}=1$・$0\le\frac{L^2-(ka)^2}{L^2}\le\frac{2a}L$（倍数辺との平方の差）／符号 $0\le C:=\iota(\ell_2)+2\iota(\log(1+q))$（埋め込んだ対数の順序・非負有理数倍・加法単調性）／$\frac{L^2-(ka)^2}{L^2}\Psi_{ka}\le\frac{L^2-(ka)^2}{L^2}C\le\frac{2a}LC$（上からの評価を $L:=ka$ で読む・非負有理数倍の順序保存・非負の元の係数比較））と、本体三つ（分配則で $\Psi_{ka}$ を割って加法単調性／$-\frac{2a}LC$ を足して結合則・逆元・単位元／倍数辺の差の評価の左と誤差評価の左へ加法単調性・推移律）。
+  SageMath `check/open-square-non-multiple-side-density-lower-vs-base-side/`（$(a,k,L)$ 三組（$L\le3$）× 6 点、396 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareNonMultipleSideDensityLowerVsBaseSide.lean`（`rationalLogOrderLE_zero_openSquareUpperBoundConstant`・`rationalLogOrderLE_openSquareNonMultipleSideDensity_lower_vs_baseSide_of_le_one`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareNonMultipleSideDensityLowerVsBaseSide.lean`（`lower_bound_split_and_shift_necSuf`。`[AddCommMonoid X] [Neg X]` と推移律・右加法単調性・逆元 $x+(-x)=0$ だけ。`AddCommGroup` は要らない）、導出版。sorry 検査 1296 件。
+  前 tick のレビューでは修正なし。次は「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価（$0<q\le1$）」（場合分けの本体。台帳の備考）。
+
 - **2026-08-16 の tick 346 は、台帳の先頭行「倍数でない辺の密度と基準辺の密度の差の評価」を上端と下端の二行へ割り、その上端「倍数でない辺の密度の基準辺の密度による上からの評価」（$a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L\le\frac{2a}L\iota(\ell_2)+\frac{4a}L\iota(\log(1+q))+\Psi^{\mathrm{op}}_a$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
   `claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one`（`claim_open_square_multiple_side_density_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 3 つ（$\mathbb Q$ の係数比較 $\frac{(ka)^2}{L^2}\le1$／符号 $0\le\Psi^{\mathrm{op}}_{ka}$（`claim_open_square_free_entropy_density_nonnegative` を $L:=ka$ で読む）／非負の元の係数比較 $\frac{(ka)^2}{L^2}\Psi_{ka}\le1\cdot\Psi_{ka}=\Psi_{ka}\le\Psi_a$（`claim_open_square_multiple_side_density_vs_base_side_le_one` の右へ推移律））と、誤差評価の右・加法単調性（交換則で末尾の項を先頭へ寄せる）・推移律の本体二段。
   SageMath `check/open-square-non-multiple-side-density-upper-vs-base-side/`（$(a,k,L)$ 三組（$L\le3$）× 6 点、180 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareNonMultipleSideDensityUpperVsBaseSide.lean`（`multipleSide_square_ratio_le_one`・`rationalLogOrderLE_openSquareNonMultipleSideDensity_upper_vs_baseSide_of_le_one`）、
@@ -30,13 +36,7 @@
   SageMath `check/rational-embedded-log-order-iff/`（正の有理数 30 点の全組 900、同値 900 件・鎖 900 件・符号の読み方 42 件、12 秒）。Lean 具体版 `ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`rationalLogOrderLE_toRational_logRat_iff`）、
   必要十分版 `NecSuf/ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`iff_comp_of_iff_of_scaled_iff_necSuf`。関係を移し合う写像 $f$ と、係数 $s$ を掛けた形で関係を移し合う写像 $e$、$s=1$ と `one_smul` だけ）、導出版。sorry 検査 1277 件。
   次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（台帳の備考に手順）。
-- **2026-08-16 の tick 342 は、台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」（$r\le s$（$\mathbb Q$）、$\nu\le_{\Lambda_{\mathbb Q}}0$ なら $s\cdot\nu\le_{\Lambda_{\mathbb Q}}r\cdot\nu$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `claim_rational_log_order_group_scalar_compare_nonpos`（`claim_rational_log_order_group_scalar_compare_nonneg` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は非負の元の版と同じ道具で、$c:=s-r\ge0$ を置き、非負有理数倍の順序保存を $\lambda:=\nu$、$\mu:=0$ で読んで $c\cdot\nu\le c\cdot0=0$、加法単調性で $r\cdot\nu$ を足し、
-  四段の鎖 $s\cdot\nu=(c+r)\cdot\nu=c\cdot\nu+r\cdot\nu\le0+r\cdot\nu=r\cdot\nu$。
-  SageMath `check/rational-log-order-group-scalar-compare-nonpos/`（非正ベクトル 27 本 × 係数の組 28、主張 756 件・鎖 756 件、13 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonpos.lean`（`rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos`）、
-  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonpos.lean`（`smul_le_smul_of_le_of_nonpos_necSuf`。仮定は非負の元の版と同一で一つも増えない。(1) を読む向きだけが違う）、導出版。sorry 検査 1274 件。
-  次は「埋め込んだ対数の符号」（着手時に既出か確認。台帳の備考）。
-（これより古い 298 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 299 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -50,14 +50,13 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 65 セクション
+- 熱力学極限: 66 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$） | todo | $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\frac2L\iota(\log q)+\frac2a\iota(\log q)-\frac{2a}L\bigl(\iota(\ell_2)+2\iota(\log(1+q))\bigr)+\Psi^{\mathrm{op}}_a\le\Psi^{\mathrm{op}}_L$（$-$ は $\Lambda_{\mathbb Q}$ の加法逆元を足すこと）。`claim_open_square_multiple_side_subsquare_density_error_bound` の左の $\frac{(ka)^2}{L^2}\Psi_{ka}$ を下から押さえる: $\Psi_{ka}=\frac{(ka)^2}{L^2}\Psi_{ka}+\frac{L^2-(ka)^2}{L^2}\Psi_{ka}$（分配則。$\frac{(ka)^2}{L^2}+\frac{L^2-(ka)^2}{L^2}=1$）、$\frac{L^2-(ka)^2}{L^2}\Psi_{ka}\le\frac{L^2-(ka)^2}{L^2}C\le\frac{2a}LC$（$C:=\iota(\ell_2)+2\iota(\log(1+q))$。`claim_open_square_free_entropy_density_upper_bound`・`claim_rational_log_order_group_nonneg_scalar_monotone`・非負の係数比較（$0\le C$ は埋め込んだ対数の順序）・`claim_square_difference_from_multiple_side_bound`）、加法単調性で $\Psi_{ka}\le\frac{(ka)^2}{L^2}\Psi_{ka}+\frac{2a}LC$、両辺に $-\frac{2a}LC$ を足す（加法単調性）、`claim_open_square_multiple_side_density_vs_base_side_le_one` の左 $\frac2a\iota(\log q)+\Psi_a\le\Psi_{ka}$ と推移律、最後に $\frac2L\iota(\log q)$ を足して誤差評価の左へ推移律。上端は済（`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one`） |
 | 熱力学極限 | 基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価（$0<q\le1$） | todo | $a\ge1$、$L\ge a^2$、$0<q\le1$ で $-\frac1a E\le\Psi^{\mathrm{op}}_L-\Psi^{\mathrm{op}}_a\le\frac1a E$、$E:=4\iota(\ell_2)+8\iota(\log(1+q))-4\iota(\log q)$（$0\le E$、$a,L$ によらない）。$k:=\lfloor L/a\rfloor$（$\mathbb N$ の除法。$ka\le L<(k+1)a$）で場合分け: $L=ka$ は「倍数辺の密度と基準辺の密度の差の評価」、$ka<L$ は上端・下端の二行を使い、$L\ge a^2$ から $\frac2L\le\frac2a$・$\frac{2a}L\le\frac2a$・$\frac{4a}L\le\frac4a$（$\mathbb Q$）で係数を $a$ だけの形に大きくする |
 | 熱力学極限 | 密度の列の Cauchy 性（$0<q\le1$） | todo | $\bigl(\Psi^{\mathrm{op}}_L(q)\bigr)_L$ が `def_rational_log_order_group_cauchy_sequence` の Cauchy 列であること。$\varepsilon$ に対し `claim_rational_log_order_group_archimedean` で $2E\le n\cdot\varepsilon$ となる $n$ を取り、$a:=n+1$、$N:=a^2$。$L,M\ge N$ で $\Psi_L-\Psi_M=(\Psi_L-\Psi_a)-(\Psi_M-\Psi_a)$ を前行で挟み $-\frac2aE\le\Psi_L-\Psi_M\le\frac2aE$、$\frac2aE\le\varepsilon$。完備性も極限論も使わない。$1\le q$ は部分正方形比較の $1\le q$ 版が無いので後回し（必要なら行を足す） |
 | 熱力学極限 | 切断による実数体への一度きりの脱出 | todo | Cauchy 列が定める $\mathbb{Q}$ 上の切断として自由エネルギー密度を取る。引くのは「切断は実数を定める」ことだけ |
@@ -71,6 +70,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## 前進の記録
 
+- 2026-08-16（tick 347）: 台帳の先頭行「倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$）」を実行し、`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one` を `claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` の直後に置いた。
+  証明は台帳の備考のとおり（$\Psi_{ka}$ を分配則で $\frac{(ka)^2}{L^2}\Psi_{ka}+\frac{L^2-(ka)^2}{L^2}\Psi_{ka}$ に割り、誤差を上からの評価 $C$ と倍数辺との平方の差で $\frac{2a}LC$ に押さえ、$-\frac{2a}LC$ を足して移項、倍数辺の差の評価の左と誤差評価の左へ推移律）。SageMath `open-square-non-multiple-side-density-lower-vs-base-side`、Lean 具体版・必要十分版（`AddCommMonoid`・`Neg`、推移律・右加法単調性・逆元 $x+(-x)=0$ だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1296 件）。式変形統一は一時停止中のため実施せず。
+
 - 2026-08-16（tick 346）: 台帳の先頭行「倍数でない辺の密度と基準辺の密度の差の評価（$0<q\le1$）」は上端（非負の係数比較で $\Psi_{ka}$ の項を $\Psi_a$ へ置き換える）と下端（$\frac{(ka)^2}{L^2}\Psi_{ka}$ を $\Psi_{ka}$ と誤差に分けて上からの評価で押さえ、逆元を足して移項する）で論法が違うので二行へ割った。その上端「倍数でない辺の密度の基準辺の密度による上からの評価」を実行し、`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one` を `claim_open_square_multiple_side_density_vs_base_side_le_one` の直後に置いた。
   証明は $\frac{(ka)^2}{L^2}\le1$・密度の非負性・非負の係数比較・倍数辺の差の評価の右・誤差評価の右・加法単調性（交換則）・推移律。SageMath `open-square-non-multiple-side-density-upper-vs-base-side`、Lean 具体版・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1292 件）。式変形統一は一時停止中のため実施せず。
 
@@ -81,9 +83,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   証明は台帳の備考のとおり（部分正方形比較を $a:=ka$ で読み、係数を倍数辺との平方の差と $ka+L\le2L$ で大きくし、符号は埋め込んだ対数の順序から、係数比較（非負・非正）と加法単調性・推移律でつなぐ）。SageMath `open-square-multiple-side-subsquare-density-error-bound`、Lean 具体版・必要十分版（推移律・右加法単調性・交換則だけ）・導出版を書き、入口 import・sorry 検査へ 7 件登録（計 1284 件）。式変形統一は一時停止中のため実施せず。
 - 2026-08-16（tick 343）: 台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を束ねずに済む一行「埋め込んだ対数の順序は正の有理数の順序と一致する」へ書き換えて実行した（符号を別ブロックにすると主張を一度読むだけの中身の無いブロックになるため。三つの読み方は statement に書いた）。`claim_rational_embedded_log_order_iff` を `claim_rational_log_order_group_scalar_compare_nonpos` の直後に置いた。
   証明は同値の四段の鎖（`claim_rational_log_order_iff`・`claim_scaled_embedding_order_transfer` の $L:=1$・$\frac1{1^2}=1$・$1\cdot\lambda=\lambda$）。SageMath `rational-embedded-log-order-iff`、Lean 具体版・必要十分版（関係を移し合う写像の合成。二段目は係数 $s$ を掛けた形で受けて $s=1$ に潰す）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1277 件）。式変形統一は一時停止中のため実施せず。
-- 2026-08-16（tick 342）: 台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」を実行した。`claim_rational_log_order_group_scalar_compare_nonpos` を `claim_rational_log_order_group_scalar_compare_nonneg` の直後に置いた。
-  証明は台帳の備考のとおり（$c:=s-r$、非負有理数倍の順序保存を $\lambda:=\nu$、$\mu:=0$ で読む・$c\cdot0=0$・加法単調性・分配則の四段の鎖）。SageMath `rational-log-order-group-scalar-compare-nonpos`、Lean 具体版・必要十分版（非負の元の版と同じ仮定）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1274 件）。式変形統一は一時停止中のため実施せず。
-（これより古い 308 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 309 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -102,6 +102,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 347）: 前 tick の「倍数でない辺の密度の基準辺の密度による上からの評価」の本文（準備 3 つ・本体二段）・SageMath overview（180 検査）・Lean 具体版（`multipleSide_square_ratio_le_one`・`rationalLogOrderLE_zero_openScaledFreeEntropy`・`rationalLogOrderLE_ratSmul_le_ratSmul_of_le`・`one_smul`・`rationalLogOrderLE_add_right`（`add_comm` で寄せる）・`rationalLogOrderLE_trans` が本文の準備第一〜第三と本体に 1 対 1）・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は誤差評価の上端の項を基準辺の密度で置き換える比較で、Cauchy 性の一様な差の評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 - 2026-08-16（tick 346）: 前 tick の「倍数辺の密度と基準辺の密度の差の評価」の本文（準備 3 つ・左二段・右）・SageMath overview（270 検査）・Lean 具体版（`blockTiling_lower_coefficient_le_two_div`・`rationalLogOrderLE_toRational_logRat_nonpos_of_le_one`・`rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos`・`rationalLogOrderLE_add_right`・`rationalLogOrderLE_trans` が本文の準備第一〜第三と本体に 1 対 1）・必要十分版（推移律・右加法単調性）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: この主張は下端の係数を $k$ によらない形へ大きくする比較で Cauchy 性の倍数辺の側が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
@@ -112,9 +115,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   修正 1 件: statement の読み方の例「$q:=1,\ q':=1+q$」が主張自身の変数 $q$ を代入先と代入する値の両方に使っていた（1 記号 1 意味に反する）ので、読む側の有理数を $p$ と書いて「$q:=1,\ q':=1+p$」へ改めた。「何も言っていない主張」の観点: 順序を移し合う同値で誤差評価が三度引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。
 - 2026-08-16（tick 343）: 前 tick の「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」の本文（準備・四段の鎖）・SageMath overview（756 検査）・Lean 具体版（書き換え列が本文と 1 対 1）・必要十分版（非負の元の版と同じ二つの仮定）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価の下端が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-- 2026-08-16（tick 342）: 前 tick の「非負の元の有理数倍は係数の大小で比較できる」の本文（準備・四段の鎖）・SageMath overview（1064 検査）・Lean 具体版（`sub_nonneg`・`smul_zero`・`rationalLogOrderLE_add_right`・`zero_add`・`← add_smul`・`sub_add_cancel` が本文と 1 対 1）・必要十分版（二つの仮定だけ）・導出版を突き合わせ、根拠が一致した。
-  「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-（これより古い 329 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 330 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 
