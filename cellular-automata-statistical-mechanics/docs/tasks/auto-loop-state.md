@@ -263,8 +263,8 @@
   SageMath 24 本、対応検査、Lean build、sorry 検査を全て通した。この章の SageMath・Lean は
   未着手。次 tick は本章の SageMath 検算を作る。
 
-- 2026-08-15（運用変更）: 構造化証明から自己完結 HTML を生成し、`hexagonal-computation/artifacts` へ
-  公開する処理を追加した。以後は正常終了かつ clean な tick だけ、公開 URL の HTTP 200 を確認してから
+- 2026-08-15（運用変更、2026-08-16 配信先更新）: 構造化証明から自己完結 HTML を生成し、
+  `hexagonal-computation/artifacts` の Firebase Hosting へ公開する処理を追加した。以後は正常終了かつ clean な tick だけ、公開 URL の HTTP 200 を確認してから
   URL つき Slack 通知を一度送る。tick 内のエージェントによる旧通知は廃止し、同じ論文版の重複通知も
   外部マーカーで防ぐ。公開物は一時閲覧用であり、リポジトリ文書から恒久リンクしない。
 

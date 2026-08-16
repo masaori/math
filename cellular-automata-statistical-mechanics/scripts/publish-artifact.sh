@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 構造化証明から論文 HTML を生成・公開し、公開 URL を Slack へ一度だけ通知する。
 #
-# GitHub Pages 上の成果物は、その場で読むための一時公開物であり、恒久リンクには使わない。
+# Firebase Hosting 上の成果物は、その場で読むための一時公開物であり、恒久リンクには使わない。
 # 定期実行では対話セッションを前提にできないため、並行公開対応済みの publish.py を使う。
 set -euo pipefail
 
@@ -71,34 +71,9 @@ if [ "$(cat "$notified_mark" 2>/dev/null || true)" = "$project_commit" ]; then
   exit 0
 fi
 
-summary="$(python3 - "$PROJECT_DIR/docs/tasks/auto-loop-state.md" <<'PYEOF'
-import re
-import sys
-
-text = open(sys.argv[1], encoding="utf-8").read()
-section = re.search(r"^## 現在地\n(.*?)(?=^## |\Z)", text, re.S | re.M)
-if section is None:
-    raise SystemExit(0)
-
-entries = []
-current = []
-for line in section.group(1).strip().splitlines():
-    if line.startswith("- "):
-        if current:
-            entries.append(" ".join(current))
-        current = [line[2:].strip()]
-    elif line.strip() and current:
-        current.append(line.strip())
-if current:
-    entries.append(" ".join(current))
-
-if entries:
-    value = re.sub(r"\s+", " ", entries[-1].replace("**", "")).strip()
-    # **字数で切らない**（ユーザー指示 2026-08-15）。簡潔に書くのは台帳を書く側の規律である。
-    print(value)
-PYEOF
-)"
-[ -n "$summary" ] || summary="$(git -C "$REPO_DIR" log -1 --format='%s' -- "$PROJECT_NAME")"
+summary="$(git -C "$REPO_DIR" log -1 --format='%s' -- "$PROJECT_NAME")"
+summary="$(printf '%s' "$summary" | sed -E 's/^[^:]+:[[:space:]]*//; s/（.*$//; s/[[:space:]]+$//')"
+summary="「${summary}」を完了しました。"
 
 if ! (cd "$PROJECT_DIR/structured-latex" && pnpm run --silent build:html >> "$LOG_FILE" 2>&1); then
   log "NG: 論文 HTML の生成に失敗した（版 ${short_commit}）"
@@ -136,10 +111,6 @@ if [ "$published" -ne 1 ]; then
   exit 1
 fi
 log "OK: 論文を公開した（版 ${short_commit}）→ ${url}"
-
-title="$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "$HTML" | head -1)"
-[ -n "$title" ] || title="2値セルオートマトンの内在構造"
-agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
 
 # **一文だけ送る**（ユーザー指示 2026-08-16）。表題・エージェント名・版は書かない。
 message="${summary}
