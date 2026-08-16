@@ -27,6 +27,7 @@ import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
 import blocks_iterate_monoid_idempotents from './content/iterate-monoid-idempotents.ts'
 import blocks_iterate_monoid_principal_ideal_tail from './content/iterate-monoid-principal-ideal-tail.ts'
+import blocks_iterate_monoid_stabilization_index from './content/iterate-monoid-stabilization-index.ts'
 import blocks_iterate_monoid_tail_equivalence from './content/iterate-monoid-tail-equivalence.ts'
 import blocks_iterate_monoid from './content/iterate-monoid.ts'
 import blocks_local_rule_representation from './content/local-rule-representation.ts'
@@ -50,6 +51,7 @@ export type AllBlocks = [
   ...typeof blocks_inverse_map_locality,
   ...typeof blocks_iterate_monoid_idempotents,
   ...typeof blocks_iterate_monoid_principal_ideal_tail,
+  ...typeof blocks_iterate_monoid_stabilization_index,
   ...typeof blocks_iterate_monoid_tail_equivalence,
   ...typeof blocks_iterate_monoid,
   ...typeof blocks_local_rule_representation,
