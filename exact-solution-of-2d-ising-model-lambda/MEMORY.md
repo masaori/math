@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 326 は、前 tick の「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_square_free_entropy_density_upper_bound`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後、`remark_real_escape_plan` の直前、住処 Lambda）で、
+$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$（右辺は周期境界の `claim_finite_free_entropy_density_upper_bound` と同じ）。
+証明は周期境界と同じ論法（準備の第一は `claim_open_rectangle_value_at_rational_is_positive`・`claim_open_rectangle_value_upper_bound_at_positive_rational` を $a=b=L$ で、
+第二 $\log2=\ell_2$ と第三 $n\cdot\iota(\nu)=\iota(n\nu)$ は周期境界側の証明の鎖を引く。$\Lambda$ の鎖は `claim_rational_log_order_iff`・`claim_log_additive`・`claim_log_power`、
+$\Lambda_{\mathbb Q}$ の鎖は `claim_scaled_embedding_order_transfer`・`claim_rational_log_order_group_embedding`・有理数倍の分配則・結合則・約分）。
+SageMath `open-square-free-entropy-density-upper-bound`（$L\in\{1,2,3\}$ × 正の有理点 9 点、141 検査、`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEntropyDensityUpperBound.lean`
+（`logOrderLE_logRat_openPartitionValueRat_upperBound`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`。周期境界の `logRat_upperBound_eq`・`scaled_toRational_upperBound_eq` を共有。
+`openPartitionValueRat_le_upperBound L L` の指数 `2 * (L * L)` は `simpa [sq]` で `2 * L ^ 2` へ）、必要十分版は `upperBound_transport_through_two_monotone_maps_necSuf` を共有、
+導出版 `OpenSquareFreeEntropyDensityUpperBoundFromNecSuf.lean`。sorry 検査 1210 件。
+次は「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」（`claim_open_square_block_tiling_rational` の二場合の上下評価の両辺の対数を取り、
+$\Psi^{\mathrm{op}}_{ka}(q)$ を $\Psi^{\mathrm{op}}_a(q)$ と $\iota(\log q)$ の有理数倍で二場合に挟む。$0<q\le1$ では $\log q\le_\Lambda0$ なので向きに注意。
+$k^2a^2$ で割る段は `claim_scaled_embedding_order_transfer` と有理数倍の分配則・結合則。着手前に `claim_open_square_block_tiling_rational` の本文と Lean
+`OpenSquareBlockTilingRational.lean`、および周期境界側で対数化した既存ブロック（`claim_finite_free_entropy_density_upper_bound` の $\Lambda$ の鎖の書き方）を読み、
+二場合を 1 ブロックにするか割るかを論法の数で決めること。二場合で論法が同じなら 1 ブロック）。
+
 2026-08-16 の tick 325 は、前 tick の「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_open_rectangle_value_upper_bound_at_positive_rational`（`claim_open_square_free_entropy_density_nonnegative` の直後、`remark_real_escape_plan` の直前、住処 Q）で、

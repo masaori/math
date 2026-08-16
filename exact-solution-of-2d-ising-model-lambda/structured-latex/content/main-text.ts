@@ -40103,6 +40103,187 @@ Z^{\mathrm{op}}_{a,b}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_open_square_free_entropy_density_upper_bound",
+    kind: "claim",
+    title: { text: "開境界正方形の自由エントロピー密度の上からの評価" },
+    labels: ["claim_open_square_free_entropy_density_upper_bound"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-free-entropy-density-upper-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_logRat_openPartitionValueRat_upperBound",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openScaledFreeEntropy_upperBound",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.upperBound_transport_through_two_monotone_maps_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openScaledFreeEntropy_upperBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、各 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " に対し、",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度は",
+      ]),
+      displayMath(
+        String.raw`\Psi^{\mathrm{op}}_L(q)\ \le_{\Lambda_{\mathbb{Q}}}\ \iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\bigl(\log(1+q)\bigr)`,
+      ),
+      paragraph([
+        "を満たす。ここで ",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " に対応する生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数（",
+        math(String.raw`0<q`),
+        " と ",
+        math(String.raw`0<1`),
+        " から ",
+        math(String.raw`1+q\in\mathbb{Q}_{>0}`),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と右辺の有理数倍 ",
+        math(String.raw`2\cdot`),
+        "（",
+        math(String.raw`2\in\mathbb{Q}`),
+        "）と加法は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。右辺は周期境界の ",
+        ref("claim_finite_free_entropy_density_upper_bound"),
+        " の右辺と同じであり、",
+        math(String.raw`L`),
+        " に依らず ",
+        math(String.raw`q`),
+        " だけで決まる。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。第一に、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`a:=L`),
+        "、",
+        math(String.raw`b:=L`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " であり、",
+        ref("claim_open_rectangle_value_upper_bound_at_positive_rational"),
+        " を同じく ",
+        math(String.raw`a:=L`),
+        "、",
+        math(String.raw`b:=L`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2}\cdot(1+q)^{2L^2}`),
+        " である（",
+        math(String.raw`\le`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序。右辺は正の有理数どうしの積なので ",
+        math(String.raw`\mathbb{Q}_{>0}`),
+        " の元）。第二に、",
+        math(String.raw`\log2=\ell_2`),
+        " である。これは ",
+        ref("claim_finite_free_entropy_density_upper_bound"),
+        " の証明の準備の第二で、各素数での値の四段の鎖として示してあり、",
+        math(String.raw`L`),
+        " にも ",
+        math(String.raw`q`),
+        " にも依らないので、そのまま使う。第三に、任意の ",
+        math(String.raw`n\in\mathbb{Z}`),
+        "、",
+        math(String.raw`\nu\in\Lambda`),
+        " について ",
+        math(String.raw`n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu)`),
+        "（左辺の ",
+        math(String.raw`n`),
+        " は分母 ",
+        math(String.raw`1`),
+        " の有理数として読む有理数倍、右辺の ",
+        math(String.raw`n\nu`),
+        " は ",
+        ref("def_log_order_group"),
+        " の整数倍）である。これは ",
+        ref("claim_scaled_free_entropy_denominator_clearing"),
+        " の証明の末尾で、各素数での値の五段の鎖として示してある。",
+      ]),
+      paragraph([
+        "まず ",
+        math(String.raw`\Lambda`),
+        " の中で、",
+        math(String.raw`\log Z^{\mathrm{op}}_{L,L}(q)`),
+        " から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log Z^{\mathrm{op}}_{L,L}(q)
+&\le_{\Lambda}\log\bigl(2^{L^2}\cdot(1+q)^{2L^2}\bigr)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ を }q:=Z^{\mathrm{op}}_{L,L}(q)\text{、}q':=2^{L^2}\cdot(1+q)^{2L^2}\text{ で読み、準備の第一を移す})\\
+&=\log\bigl(2^{L^2}\bigr)+\log\bigl((1+q)^{2L^2}\bigr)
+&&(\because\ \blkref{claim_log_additive}\text{。}2^{L^2},\ (1+q)^{2L^2}\in\mathbb{Q}_{>0})\\
+&=L^2\,\log2+2L^2\,\log(1+q)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=L^2\text{ と }k:=2L^2\text{ で二項へ同時適用。整数倍は }\blkref{def_log_order_group})\\
+&=L^2\,\ell_2+2L^2\,\log(1+q)
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      paragraph([
+        "次に ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の中で、主張の左辺 ",
+        math(String.raw`\Psi^{\mathrm{op}}_L(q)`),
+        " から始める次の一続きで示す。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記する（この証明の中だけ）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{\mathrm{op}}_L(q)
+&=\frac{1}{L^2}\cdot\iota\bigl(\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&&(\because\ \blkref{def_open_square_free_entropy_density})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota\bigl(L^2\,\ell_2+2L^2\,\log(1+q)\bigr)
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ の右辺から左辺の向きを }\lambda:=\log Z^{\mathrm{op}}_{L,L}(q)\text{、}\mu:=L^2\ell_2+2L^2\log(1+q)\text{ で読み、上の }\Lambda\text{ の比較を移す})\\
+&=\frac{1}{L^2}\cdot\bigl(\iota(L^2\,\ell_2)+\iota(2L^2\,\log(1+q))\bigr)
+&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&=\frac{1}{L^2}\cdot\iota(L^2\,\ell_2)+\frac{1}{L^2}\cdot\iota(2L^2\,\log(1+q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
+&=\frac{1}{L^2}\cdot\bigl(L^2\cdot\iota(\ell_2)\bigr)+\frac{1}{L^2}\cdot\bigl(2L^2\cdot\iota(\log(1+q))\bigr)
+&&(\because\ \text{準備の第三を }n:=L^2,\ \nu:=\ell_2\text{ と }n:=2L^2,\ \nu:=\log(1+q)\text{ で二項へ同時適用})\\
+&=\Bigl(\frac{1}{L^2}\cdot L^2\Bigr)\cdot\iota(\ell_2)+\Bigl(\frac{1}{L^2}\cdot2L^2\Bigr)\cdot\iota(\log(1+q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則 }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を二項へ同時適用})\\
+&=1\cdot\iota(\ell_2)+2\cdot\iota(\log(1+q))
+&&(\because\ L\ge1\text{ なので }L^2\ne0\text{、}\mathbb{Q}\text{ の約分を二項へ同時適用})\\
+&=\iota(\ell_2)+2\cdot\iota(\log(1+q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda)
+\end{aligned}`),
+      paragraph([
+        "使ったのは、開境界正方形の正の有理点での値の上からの評価、対数が順序を保つこと、対数の加法性と冪、",
+        math(String.raw`\log2=\ell_2`),
+        "、有理数倍と埋め込みを通した順序の移送、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " が加法と整数倍を保つこと、および有理数倍の分配則・結合則だけであり、比較はすべて有理数の比較である。",
+        "周期境界の ",
+        ref("claim_finite_free_entropy_density_upper_bound"),
+        " と同じ論法であり、違いは ",
+        math(String.raw`\Phi_L(q)=\log Z_L(q)`),
+        " の代わりに ",
+        ref("def_rational_log"),
+        " の対数 ",
+        math(String.raw`\log Z^{\mathrm{op}}_{L,L}(q)`),
+        " を直接置き、値の上界を開境界のものへ替えた点だけである。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

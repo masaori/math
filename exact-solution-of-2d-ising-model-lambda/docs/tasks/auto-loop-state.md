@@ -7,6 +7,15 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 326 は、「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  `claim_open_square_free_entropy_density_upper_bound`（`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$（右辺は周期境界と同じ）。周期境界の `claim_finite_free_entropy_density_upper_bound`
+  と同じ論法（準備 3 つ: 値の正値性と上界を $a=b=L$ で・$\log2=\ell_2$ は周期境界の準備を引く・$n\cdot\iota(\nu)=\iota(n\nu)$。$\Lambda$ の鎖 4 段、$\Lambda_{\mathbb Q}$ の鎖 8 段）。
+  SageMath 141 検査（$L\in\{1,2,3\}$ × 正の有理点 9 点、`ZZ`/`QQ`・素因数分解）、Lean 具体版 `logOrderLE_logRat_openPartitionValueRat_upperBound`・
+  `rationalLogOrderLE_openScaledFreeEntropy_upperBound`（周期境界の `logRat_upperBound_eq`・`scaled_toRational_upperBound_eq` を共有）、必要十分版は
+  `upperBound_transport_through_two_monotone_maps_necSuf` を共有・導出版、sorry 検査 1210 件。前 tick の開境界長方形の値の上界（$\mathbb Q$ 版）のレビューに不一致なし。
+  次は「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」。
+
 - **2026-08-16 の tick 325 は、「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
   `claim_open_rectangle_value_upper_bound_at_positive_rational`（`claim_open_square_free_entropy_density_nonnegative` の直後・`remark_real_escape_plan` の直前、住処 Q）で、
   $a,b\ge1$、$q\in\mathbb Q_{>0}$ に対し $Z^{\mathrm{op}}_{a,b}(q)\le2^{ab}(1+q)^{2ab}$（$a=b=L$ で $2^{L^2}(1+q)^{2L^2}$）。周期境界の `claim_partition_value_upper_bound_at_positive_rational`
@@ -49,16 +58,7 @@
   `openScaledFreeEntropy_apply`（`ThermodynamicLimit/OpenSquareFreeEntropyDensity.lean`）、sorry 検査 1199 件。備考どおり定義 1・主張 2 の塊を割り、
   「値の下界 1（$\mathbb Q$ 版）と密度の非負性」「値の上界（$\mathbb Q$ 版）」「密度の上界（$\Lambda_{\mathbb Q}$ 版）」を次に並べた。前 tick の周期境界と開境界の比較（$\mathbb Q$ 版）のレビューに不一致なし。
 
-- **2026-08-16 の tick 321 は、「周期境界と開境界の比較（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
-  `claim_periodic_open_boundary_comparison_rational`（`claim_open_square_block_tiling_rational` の直後・実数体脱出の宣言の直前、住処 Q）で、
-  $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{2L}Z^{\mathrm{op}}_{L,L}(q)\le Z_L(q)\le Z^{\mathrm{op}}_{L,L}(q)$、$1\le q$: その逆向き。
-  周期境界の値は分配多項式への代入 $Z_L(q)$（正値性は `claim_value_at_rational_is_positive`）、開境界の値は `def_open_rectangle_partition_value_at_positive_rational`。
-  $\mathbb R$ 版と同じ論法（頂点の全単射 $v_L$・配位の読み替え $r_L$・境界横断辺の破れ本数 $s^{\mathrm{bd}}_L\le2L$・破れボンド数の分解・境界因子の自然数冪の順序・項ごとの評価の有限和）を
-  $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。SageMath 27 組（`ZZ`/`QQ`。分解・代入と配位和の一致・鎖・二場合の上下評価）、Lean 具体版・必要十分版（$\mathbb R$ 版
-  `sum_pow_reindex_bounds_necSuf` と共有）・導出版、sorry 検査 1198 件。レビューでは前 tick のブロック敷き詰め（$\mathbb Q$ 版）の四層が一致し修正無し。
-  次は「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義と非負性・上界」。
-
-（これより古い 277 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 278 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -72,13 +72,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 48 セクション
+- 熱力学極限: 49 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 開境界正方形の密度の上界（$\Lambda_{\mathbb Q}$ 版） | todo | $\Psi^{\mathrm{op}}_L(q)\le\iota(\ell_2)+2\cdot\iota(\log(1+q))$。`claim_finite_free_entropy_density_upper_bound` と同じ論法 |
 | 熱力学極限 | ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版） | todo | $\Psi^{\mathrm{op}}_{ka}$ を $\Psi^{\mathrm{op}}_a$ と $\ell_2$・$\log q$ の有理数倍で二場合に挟む |
 | 熱力学極限 | 部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版） | todo | `claim_open_square_subsquare_comparison_le_one` を $q\in\mathbb Q$ で |
 | 熱力学極限 | 極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる | todo | 完備性（上限の存在）を使わずに、可算側の主張として収束の速さつきで述べる。各段の比較は有理数の比較なので決定可能 |
@@ -94,6 +93,17 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 326）: `claim_open_square_free_entropy_density_upper_bound` を `claim_open_rectangle_value_upper_bound_at_positive_rational` の直後
+  （`remark_real_escape_plan` の直前）に置き四層で閉じた。周期境界の `claim_finite_free_entropy_density_upper_bound` の証明を、$Z_L(q)$ を $Z^{\mathrm{op}}_{L,L}(q)$
+  （正値性は `claim_open_rectangle_value_at_rational_is_positive`、上界は `claim_open_rectangle_value_upper_bound_at_positive_rational`、いずれも $a=b=L$）に、
+  $\Phi_L(q)$ を `def_rational_log` の $\log Z^{\mathrm{op}}_{L,L}(q)$ に置き換えて述べ、準備の第二（$\log2=\ell_2$）と第三は周期境界の証明の鎖をそのまま引いた。
+  SageMath `open-square-free-entropy-density-upper-bound`（$L\in\{1,2,3\}$ × 正の有理点 9 点、141 検査。周期境界の検査と同じ項目を開境界の値で。`ZZ`/`QQ`）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEntropyDensityUpperBound.lean`（`logOrderLE_logRat_openPartitionValueRat_upperBound`・
+  `rationalLogOrderLE_openScaledFreeEntropy_upperBound`。周期境界の `logRat_upperBound_eq`・`scaled_toRational_upperBound_eq` を共有。開境界の上界の指数 $2(L\cdot L)$ を
+  $2L^2$ へ `simpa [sq]` で読み替える）、必要十分版は `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityUpperBound.lean` の
+  `upperBound_transport_through_two_monotone_maps_necSuf` をそのまま共有、導出版 `OpenSquareFreeEntropyDensityUpperBoundFromNecSuf.lean`。
+  sorry 検査 1210 件。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 325）: `claim_open_rectangle_value_upper_bound_at_positive_rational` を `claim_open_square_free_entropy_density_nonnegative` の直後
   （`remark_real_escape_plan` の直前）に置き四層で閉じた。周期境界の `claim_partition_value_upper_bound_at_positive_rational` の証明を開境界へ移し、準備の第一〜第四
@@ -137,20 +147,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   セクション「定義と非負性・上界」は論法が複数（定義・下界 1 と非負性・値の上界・密度の上界）なので、備考どおり 4 つに割り、残り 3 行を表の先頭に並べた。
   式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 321）: `claim_periodic_open_boundary_comparison_rational` を `claim_open_square_block_tiling_rational` の直後
-  （`remark_real_field_escape` の直前）に置き四層で閉じた。$\mathbb R$ 版 `claim_periodic_open_boundary_comparison` の証明（頂点の全単射
-  $v_L(i,j)=(s(i),s(j))$、配位の読み替え $r_L(\tau)=\tau\circ v_L$、境界横断辺の破れ本数 $s^{\mathrm{bd}}_L(\tau)\in\mathbb N$ と $0\le s^{\mathrm{bd}}_L\le2L$、
-  分解 $b(r_L(\tau))=b^{\mathrm{op}}_{L,L}(\tau)+s^{\mathrm{bd}}_L(\tau)$、$q^{m+n}=q^mq^n$、境界因子の自然数冪の順序、項ごとの評価の有限和と分配則）を
-  $q\in\mathbb Q_{>0}$ で述べ直し、周期境界の値は `def_partition_polynomial` への代入（和へ配る段は `claim_value_at_rational_is_positive` の第二段）、
-  各項の正値性は `claim_open_rectangle_value_at_rational_is_positive` の準備を引く。`remark_real_field_escape` は引かない。$\mathbb R$ 版は併存
-  （撤去のセクションで消す）。SageMath `periodic-open-boundary-comparison-rational`（$L\in\{1,2,3\}$ × 正の有理点 9 点、27 組。分解・$\mathbb Z[x]$ への
-  代入と配位和の一致・鎖・境界因子の順序・二場合の上下評価。`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonInequalityRational.lean`
-  （`partitionValueRat_eq_open_double_product`・`partitionValueRat_periodicOpen_bounds_of_le_one`／`_of_one_le`。$\mathbb R$ 版から `t`→`q`、`ℝ`→`ℚ`、
-  `openPartitionValue`→`openPartitionValueRat`、`eval_partitionPolynomial_real`→`FreeEntropy.eval_partitionPolynomial`、冪の補題→`_rat` の置換で通った。
-  全単射・分解は `PeriodicOpenComparison.lean` を共有）、必要十分版は `sum_pow_reindex_bounds_necSuf` をそのまま共有、導出版
-  `PeriodicOpenComparisonInequalityRationalFromNecSuf.lean`。sorry 検査 1198 件。式変形統一は一時停止中のため実施せず。
-
-（これより古い 288 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 289 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -168,6 +165,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+
+- 2026-08-16（tick 326）: 前 tick の「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
+  Lean 具体版・必要十分版（周期境界と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、準備の第五の $\mathbb N$ の鎖と本体の五段の根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
 - 2026-08-16（tick 325）: 前 tick の「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
   Lean 具体版・必要十分版（周期境界と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、準備 3 つ・$\Lambda$ の鎖・$\Lambda_{\mathbb Q}$ の鎖の根拠が一致した。
@@ -189,11 +190,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   必要十分版（$\mathbb R$ 版と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、二場合の上下評価・全単射と分解・境界因子の順序・鎖の各行の根拠が
   一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
-- 2026-08-16（tick 321）: 前 tick の「正方形のブロック敷き詰め（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版（$\mathbb R$ 版と共有）・
-  導出版を突き合わせ、二場合の上下評価・鎖の各段（第一座標方向の反復接合・$k$ 乗・第二座標方向の反復接合・正数の乗法）・対象ラベル・入口 import・
-  sorry 検査への登録が一致し、本文に $t$ や $\le_{\mathbb R}$ の残りは無い。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-（これより古い 309 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 310 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

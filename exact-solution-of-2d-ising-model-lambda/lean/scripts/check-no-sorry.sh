@@ -1263,6 +1263,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_le_two_mul
   Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_le_upperBound
   Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_le_upperBound_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_logRat_openPartitionValueRat_upperBound
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openScaledFreeEntropy_upperBound
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openScaledFreeEntropy_upperBound_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

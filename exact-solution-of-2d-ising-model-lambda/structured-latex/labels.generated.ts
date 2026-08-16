@@ -74,6 +74,7 @@ export const ALL_LABELS = [
   "claim_open_rectangle_value_upper_bound_at_positive_rational",
   "claim_open_square_block_tiling_rational",
   "claim_open_square_free_entropy_density_nonnegative",
+  "claim_open_square_free_entropy_density_upper_bound",
   "claim_orbit_bijection_id_or_shift",
   "claim_orbit_factor_root",
   "claim_orbit_factor_zero",
