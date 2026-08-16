@@ -43549,6 +43549,299 @@ a
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_large_side_density_lower_vs_base_side_le_one",
+    kind: "claim",
+    title: { text: "基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価（q は 1 以下）" },
+    labels: ["claim_open_square_large_side_density_lower_vs_base_side_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-large-side-density-lower-vs-base-side"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.lower_bound_shrink_first_and_last_terms_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,L\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`a<L`),
+        "、",
+        math(String.raw`a^2\le L`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\frac{4}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)+\Psi^{\mathrm{op}}_{a}(q)+\Bigl(-\frac{2}{a}\cdot\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\bigr)\Bigr)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_{L}(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log q,\ \log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{4}{a}\cdot`),
+        "、",
+        math(String.raw`\frac{2}{a}\cdot`),
+        "、",
+        math(String.raw`2\cdot`),
+        "（いずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元。",
+        math(String.raw`a\ge1`),
+        " なので分母 ",
+        math(String.raw`a\ne0`),
+        "）と加法・逆元 ",
+        math(String.raw`-\lambda`),
+        " は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。左辺の加法は左から順に結合する。",
+        ref("claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one"),
+        " の左辺の係数 ",
+        math(String.raw`\frac{2}{L}`),
+        "、",
+        math(String.raw`\frac{2a}{L}`),
+        " を、辺 ",
+        math(String.raw`L`),
+        " によらない ",
+        math(String.raw`\frac{2}{a}`),
+        " へ置き換えて左辺を小さくしたものであり、辺 ",
+        math(String.raw`L`),
+        " が辺 ",
+        math(String.raw`a`),
+        " の倍数かどうかも問わない。",
+        ref("claim_open_square_large_side_density_upper_vs_base_side_le_one"),
+        " と合わせて、後の Cauchy 性で、辺 ",
+        math(String.raw`a^2`),
+        " 以上のすべての辺の密度と辺 ",
+        math(String.raw`a`),
+        " の密度の差を、辺 ",
+        math(String.raw`a`),
+        " だけで決まる量で両側から押さえるために引く。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 4 つ置く。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        "、",
+        math(String.raw`C:=\iota(\ell_2)+2\cdot\iota(\log(1+q))\in\Lambda_{\mathbb{Q}}`),
+        " と略記する（この証明の中だけ）。第一に、辺 ",
+        math(String.raw`L`),
+        " を辺 ",
+        math(String.raw`a`),
+        " の倍数で下から挟む。",
+        ref("claim_open_square_large_side_density_upper_vs_base_side_le_one"),
+        " の証明の準備の第一と同じく、",
+        math(String.raw`a<L`),
+        " から ",
+        math(String.raw`L-1\in\mathbb{N}`),
+        " であり、",
+        math(String.raw`a\ge1`),
+        " なので自然数の除法により ",
+        math(String.raw`L-1=ka+r`),
+        " かつ ",
+        math(String.raw`0\le r<a`),
+        " を満たす ",
+        math(String.raw`k,r\in\mathbb{N}`),
+        " が取れる。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+ka
+&\le ka+r
+&&(\because\ 0\le r\text{。}\mathbb{N}\text{ の加法単調性})\\
+&=L-1
+&&(\because\ \text{除法の等式})\\
+&<L
+&&(\because\ \mathbb{N}\text{ の順序})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+L
+&=ka+r+1
+&&(\because\ \text{除法の等式}L-1=ka+r\text{ の両辺に }1\text{ を足す})\\
+&\le ka+(a-1)+1
+&&(\because\ r<a\text{ から }r\le a-1\text{（}\mathbb{N}\text{ の順序）。}\mathbb{N}\text{ の加法単調性})\\
+&=ka+a
+&&(\because\ a\ge1\text{。}\mathbb{N}\text{ の加法})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a
+&\le L-1
+&&(\because\ a<L\text{。}\mathbb{N}\text{ の順序})\\
+&=ka+r
+&&(\because\ \text{除法の等式})\\
+&<ka+a
+&&(\because\ r<a\text{。}\mathbb{N}\text{ の加法単調性})\\
+&=(k+1)a
+&&(\because\ \mathbb{N}\text{ の分配則})
+\end{aligned}`),
+      paragraph([
+        "最後の一続きから ",
+        math(String.raw`1\cdot a<(k+1)\cdot a`),
+        " であり、",
+        math(String.raw`a\ge1`),
+        " なので ",
+        math(String.raw`k\ge1`),
+        "（",
+        math(String.raw`\mathbb{N}`),
+        " の乗法の順序。正の数を掛けた大小はもとの大小と同値）。以上で ",
+        math(String.raw`k\ge1`),
+        "、",
+        math(String.raw`ka<L\le ka+a`),
+        " が揃った。第二に、係数を ",
+        math(String.raw`\mathbb{Q}`),
+        " の中で比べる。",
+        math(String.raw`a\ge1`),
+        " なので ",
+        math(String.raw`a\ne0`),
+        "、",
+        math(String.raw`a^2\ne0`),
+        "、",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`L\ne0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2}{L}
+&\le\frac{2}{a}
+&&(\because\ a<L\text{ と }2>0\text{。}\mathbb{Q}\text{ の順序。正の分子の分数は分母が大きいほど小さい})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\frac{2}{a}
+&\le-\frac{2a}{a^2}
+&&(\because\ \tfrac{2a}{a^2}=\tfrac{2}{a}\text{（}a\ne0\text{ による約分。}\mathbb{Q}\text{ の四則）。}\mathbb{Q}\text{ の順序の反射律})\\
+&\le-\frac{2a}{L}
+&&(\because\ \tfrac{2a}{L}\le\tfrac{2a}{a^2}\text{（}a^2\le L\text{ と }2a>0\text{。正の分子の分数は分母が大きいほど小さい）を }-1\text{ 倍する。}\mathbb{Q}\text{ の順序は }-1\text{ 倍で反転する})
+\end{aligned}`),
+      paragraph([
+        "第三に、符号 ",
+        math(String.raw`\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0`),
+        " と ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}C`),
+        " を作る。前者は ",
+        ref("claim_rational_embedded_log_order_iff"),
+        " を ",
+        math(String.raw`q':=1`),
+        " で読み、",
+        math(String.raw`\log1=0`),
+        "（",
+        ref("claim_log_power"),
+        " の ",
+        math(String.raw`k=0`),
+        "）、",
+        math(String.raw`\iota(0)=0`),
+        "（",
+        math(String.raw`\iota`),
+        " は準同型）と合わせて得る。後者は ",
+        ref("claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one"),
+        " の証明の準備の第二と同じく、",
+        ref("claim_rational_embedded_log_order_iff"),
+        " を ",
+        math(String.raw`q:=1,\ q':=2`),
+        " と ",
+        math(String.raw`q:=1,\ q':=1+p`),
+        "（",
+        math(String.raw`p`),
+        " は主張の ",
+        math(String.raw`q`),
+        "）で読んで ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)`),
+        "、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\iota(\log(1+q))`),
+        " を得たうえで、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=2\cdot0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\log(1+q))
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=\iota(\log(1+q))\text{ で読む})\\
+&=0+2\cdot\iota(\log(1+q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
+&\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)+2\cdot\iota(\log(1+q))
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=\iota(\ell_2)\text{、}\nu:=2\cdot\iota(\log(1+q))\text{ で読む})\\
+&=C
+&&(\because\ C\text{ の置き方})
+\end{aligned}`),
+      paragraph([
+        "二つの ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律でつなぐ。第四に、有理数倍を係数の大小で比べる。非正の元 ",
+        math(String.raw`\iota(\log q)`),
+        " では向きが逆になり、非負の元 ",
+        math(String.raw`C`),
+        " では負の係数のまま比べてから逆元の形へ戻す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2}{a}\cdot\iota(\log q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2}{L}\cdot\iota(\log q)
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{2}{L}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\log q)\text{ で読む。}r\le s\text{ は第二、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第三})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\Bigl(\frac{2}{a}\cdot C\Bigr)
+&=\Bigl(-\frac{2}{a}\Bigr)\cdot C
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と有理数倍を素数ごとに読む。}-(r\,C(p))=(-r)\,C(p)\text{ は }\mathbb{Q}\text{ の四則})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Bigl(-\frac{2a}{L}\Bigr)\cdot C
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=-\tfrac{2}{a}\text{、}s:=-\tfrac{2a}{L}\text{、}\nu:=C\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})\\
+&=-\Bigl(\frac{2a}{L}\cdot C\Bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と有理数倍を素数ごとに読む。}(-r)\,C(p)=-(r\,C(p))\text{ は }\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "本体は、主張の左辺の第一の項を分配則で二つに割り、割った前の項を第四の前者で、末尾の項を第四の後者で置き換えたうえで、第一で取った ",
+        math(String.raw`k`),
+        " について ",
+        ref("claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one"),
+        " を辺 ",
+        math(String.raw`a,\ ka,\ L`),
+        " と ",
+        math(String.raw`q`),
+        " で読む。加法単調性を末尾の項へ当てるときは、",
+        ref("def_rational_log_order_group"),
+        " の加法の交換則で当てる項を先頭へ寄せてから読む。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{4}{a}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_{a}(q)+\Bigl(-\frac{2}{a}\cdot C\Bigr)
+&=\Bigl(\frac{2}{a}\cdot\iota(\log q)+\frac{2}{a}\cdot\iota(\log q)\Bigr)+\Psi^{\mathrm{op}}_{a}(q)+\Bigl(-\frac{2}{a}\cdot C\Bigr)
+&&(\because\ \tfrac{4}{a}=\tfrac{2}{a}+\tfrac{2}{a}\text{（}\mathbb{Q}\text{ の四則）と }\blkref{def_rational_log_order_group}\text{ の分配則 }(r+s)\cdot\lambda=r\cdot\lambda+s\cdot\lambda)\\
+&\le_{\Lambda_{\mathbb{Q}}}\Bigl(\frac{2}{L}\cdot\iota(\log q)+\frac{2}{a}\cdot\iota(\log q)\Bigr)+\Psi^{\mathrm{op}}_{a}(q)+\Bigl(-\frac{2}{a}\cdot C\Bigr)
+&&(\because\ \text{第四の前者に }\blkref{claim_rational_log_order_group_add_monotone}\text{ で }\nu:=\tfrac{2}{a}\cdot\iota(\log q)\text{ を足し、さらに }\nu:=\Psi^{\mathrm{op}}_{a}(q)\text{、}\nu:=-\tfrac{2}{a}\cdot C\text{ を順に足す})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Bigl(\frac{2}{L}\cdot\iota(\log q)+\frac{2}{a}\cdot\iota(\log q)\Bigr)+\Psi^{\mathrm{op}}_{a}(q)+\Bigl(-\frac{2a}{L}\cdot C\Bigr)
+&&(\because\ \text{第四の後者に }\blkref{claim_rational_log_order_group_add_monotone}\text{ で }\nu:=\bigl(\tfrac{2}{L}\cdot\iota(\log q)+\tfrac{2}{a}\cdot\iota(\log q)\bigr)+\Psi^{\mathrm{op}}_{a}(q)\text{ を足す（交換則で先頭へ寄せる）})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{L}(q)
+&&(\because\ \blkref{claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one}\text{ を第一の }k\text{（}k\ge1\text{、}ka<L\le ka+a\text{）で読む})
+\end{aligned}`),
+      paragraph([
+        "最初の等号は置き換えであり、三つの ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律でつなぐ。使ったのは、自然数の除法と順序、",
+        math(String.raw`\mathbb{Q}`),
+        " の順序と四則、埋め込んだ対数の順序、非負有理数倍の順序保存、非正の元と非負の元の有理数倍の係数の大小による比較、倍数でない辺の密度の基準辺の密度による下からの評価、分配則、加法単調性、交換則、推移律だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

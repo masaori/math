@@ -4,6 +4,16 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 349 は、前 tick の「基準辺の平方以上の辺の密度の基準辺の密度による一様な上からの評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価（$0<q\le1$）」を四層で閉じた。`claim_open_square_large_side_density_lower_vs_base_side_le_one`（`claim_open_square_large_side_density_upper_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$a<L$、$a^2\le L$、$0<q\le1$ で
+$\frac4a\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)+\bigl(-\frac2a\cdot(\iota(\ell_2)+2\cdot\iota(\log(1+q)))\bigr)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$（左辺の加法は左から結合。辺 $L$ が $a$ の倍数かどうかを問わない一様な下端）。
+証明は準備 4 つ（自然数の除法で $k\ge1$・$ka<L\le ka+a$（上端の第一と同じ手順を書き直した）／$\mathbb Q$ の係数比較 $\frac2L\le\frac2a$（$a<L$）・$-\frac2a\le-\frac{2a}{a^2}\le-\frac{2a}L$（$a^2\le L$。$\mathbb Q$ の順序は $-1$ 倍で反転）／符号 $\iota(\log q)\le0$（`claim_rational_embedded_log_order_iff` を $q':=1$ で）・$0\le C:=\iota(\ell_2)+2\iota(\log(1+q))$（非倍数辺の下端の第二と同じ四段）／`claim_rational_log_order_group_scalar_compare_nonpos`（$r:=\frac2L$、$s:=\frac2a$、$\nu:=\iota(\log q)$）と、**$C$ を負の係数のまま `claim_rational_log_order_group_scalar_compare_nonneg`（$r:=-\frac2a$、$s:=-\frac{2a}L$）で比べ、$-(r\cdot C)=(-r)\cdot C$ を `def_rational_log_order_group` の逆元と有理数倍を素数ごとに読んで逆元の形へ戻す**（逆元の順序反転の主張は本文に無いので置かずに済ませた））と、
+本体（$\frac4a=\frac2a+\frac2a$ と分配則で第一の項を割る等号／第四の前者に `claim_rational_log_order_group_add_monotone` で $\frac2a\iota(\log q)$・$\Psi_a$・$-\frac2aC$ を順に足す／第四の後者に先頭三項を足す（交換則で寄せる）／`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one` を第一の $k$ で読む／推移律）。
+SageMath `check/open-square-large-side-density-lower-vs-base-side/`（$(a,L)=(1,2),(1,3)$ × 6 点、288 検査、11 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSideDensityLowerVsBaseSide.lean`（`rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_one`。`exists_multiple_side_below_of_lt` を再利用、`div_le_div_of_nonneg_left`・`neg_le_neg`・`rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos`・`rationalLogOrderLE_ratSmul_le_ratSmul_of_le` に `neg_smul` を二度、`hsplit` は `← add_smul; congr 1; ring`。statement に `[NeZero L]` が要るのは上端と同じ），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSideDensityLowerVsBaseSide.lean`（`lower_bound_shrink_first_and_last_terms_necSuf`。`[AddCommMagma X]` と推移律・右加法単調性・交換則だけ。$((x+y)+\Psi)+w\le\psi$、$x'\le x$、$w'\le w$、$D=x'+y$ から $(D+\Psi)+w'\le\psi$。分割は等式で受けるので分配則も係数も要らない）、導出版 `OpenSquareLargeSideDensityLowerVsBaseSideFromNecSuf.lean`。sorry 検査 1303 件。
+次は「密度の列の Cauchy 性（$0<q\le1$）」（台帳の備考に手順。上端 $\Psi_L\le U_a+\Psi_a$ と下端 $\frac4a\iota(\log q)+\Psi_a+(-\frac2aC)\le\Psi_L$ から $\Psi_L+(-\Psi_M)$ を $\pm\frac1aE$ で挟み、Archimedes 性で $a$ を選ぶ。論法が二つ以上（差の挟み込みと Cauchy 性本体）なら着手時に割る）。
+
 2026-08-17 の tick 348 は、前 tick の「倍数でない辺の密度の基準辺の密度による下からの評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価」を上端と下端の二行へ割り、上端を四層で閉じた。`claim_open_square_large_side_density_upper_vs_base_side_le_one`（`claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$a<L$、$a^2\le L$、$0<q\le1$ で
 $\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac2a\cdot\iota(\ell_2)+\frac4a\cdot\iota(\log(1+q))+\Psi^{\mathrm{op}}_a(q)$（辺 $L$ が $a$ の倍数かどうかを問わない一様な上端）。

@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 349 で台帳から移した記録（tick 344 分）
+
+### 現在地
+
+- **2026-08-16 の tick 344 は、台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」（$k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\frac2L\iota(\log q)+\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}\le\Psi^{\mathrm{op}}_L\le\frac{2a}L\iota(\ell_2)+\frac{4a}L\iota(\log(1+q))+\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_multiple_side_subsquare_density_error_bound`（`claim_rational_embedded_log_order_iff` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 4 つ（部分正方形比較を $a:=ka$ で読む／$\mathbb Q$ の係数比較 $\frac{ka+L}{L^2}\le\frac2L$・$\frac{L^2-(ka)^2}{L^2}\le\frac{2a}L$（倍数辺との平方の差）・$\frac{2(L^2-(ka)^2)}{L^2}\le\frac{4a}L$／符号 $\iota(\log q)\le0$・$0\le\iota(\ell_2)$・$0\le\iota(\log(1+q))$（埋め込んだ対数の順序を $q':=1$、$(1,2)$、$(1,1+q)$ で読み $\log1=0$・$\iota(0)=0$・$\log2=\ell_2$）／係数の大小による有理数倍の比較（非正 1 件・非負 2 件））と、加法単調性・推移律による本体（左二段・右三段）。
+  SageMath `check/open-square-multiple-side-subsquare-density-error-bound/`（形の三組 $(a,k,L)=(1,1,2),(2,1,3),(1,2,3)$ × 6 点、342 検査、11 秒。一辺 4 以上は配位和が長いので含めない）。Lean 具体版 `ThermodynamicLimit/OpenSquareMultipleSideSubsquareDensityErrorBound.lean`（`rationalLogOrderLE_openSquareMultipleSideSubsquareDensity_error_bounds_of_le_one`。補助に `toRational_zero` と符号の三つ）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareMultipleSideSubsquareDensityErrorBound.lean`（`twoSided_bounds_enlarge_coefficients_necSuf`。関係の推移律・右加法の単調性・加法の交換則だけ。結合則も係数も要らない）、導出版。sorry 検査 1284 件。
+  レビューでは前 tick の statement の読み方の例に主張自身の変数 $q$ を再利用していた箇所を $p$ に改めた（先に別コミットで push 済み）。次は「密度の列の Cauchy 性（$0<q\le1$）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 344）: 台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」を実行した。`claim_open_square_multiple_side_subsquare_density_error_bound` を `claim_rational_embedded_log_order_iff` の直後に置いた。
+  証明は台帳の備考のとおり（部分正方形比較を $a:=ka$ で読み、係数を倍数辺との平方の差と $ka+L\le2L$ で大きくし、符号は埋め込んだ対数の順序から、係数比較（非負・非正）と加法単調性・推移律でつなぐ）。SageMath `open-square-multiple-side-subsquare-density-error-bound`、Lean 具体版・必要十分版（推移律・右加法単調性・交換則だけ）・導出版を書き、入口 import・sorry 検査へ 7 件登録（計 1284 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 344）: 前 tick の「埋め込んだ対数の順序は正の有理数の順序と一致する」の本文（同値の四段の鎖）・SageMath overview（900+900+42 検査）・Lean 具体版（`Nat.cast_one, one_pow, div_one, one_smul` と `logRat_le_iff` の合成が本文と 1 対 1）・必要十分版・導出版を突き合わせ、根拠が一致した。
+  修正 1 件: statement の読み方の例「$q:=1,\ q':=1+q$」が主張自身の変数 $q$ を代入先と代入する値の両方に使っていた（1 記号 1 意味に反する）ので、読む側の有理数を $p$ と書いて「$q:=1,\ q':=1+p$」へ改めた。「何も言っていない主張」の観点: 順序を移し合う同値で誤差評価が三度引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。
+
 ## 2026-08-17 tick 348 で台帳から移した記録（tick 343 分）
 
 ### 現在地

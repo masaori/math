@@ -1356,6 +1356,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSideDensity_upper_vs_baseSide_of_le_one
   Ising2DLambda.NecSuf.ThermodynamicLimit.upper_bound_enlarge_first_two_terms_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSideDensity_upper_vs_baseSide_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.lower_bound_shrink_first_and_last_terms_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
