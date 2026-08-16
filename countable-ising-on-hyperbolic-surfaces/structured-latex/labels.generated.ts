@@ -49,6 +49,7 @@ export const ALL_LABELS = [
   "def_mod_two_boundary_parity",
   "def_oriented_closed_surface_cellulation",
   "def_primal_dual_cell_correspondence",
+  "def_primal_to_dual_edge_coefficient_transport",
   "def_second_boundary_matrix_over_f2",
   "def_single_vertex_spin_flip",
   "def_spin_configuration_set",

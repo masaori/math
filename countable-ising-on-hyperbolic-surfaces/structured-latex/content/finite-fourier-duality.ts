@@ -806,4 +806,51 @@ h_{f,i}(\mathsf{departing})
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_primal_to_dual_edge_coefficient_transport",
+    kind: "definition",
+    title: { text: "主辺係数から双対辺係数への移送写像" },
+    labels: ["def_primal_to_dual_edge_coefficient_transport"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-to-dual-edge-coefficient-transport"],
+    statement: [
+      paragraph([
+        ref("def_primal_dual_cell_correspondence"),
+        " の主辺から双対辺への全単射 ",
+        math(String.raw`d_1:E_{\mathrm{cell}}\to E_{\mathrm{cell}}^\ast`),
+        " を固定する。主辺係数から双対辺係数への移送写像を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1:
+\mathbb F_2^{E_{\mathrm{cell}}}
+&\longrightarrow
+\mathbb F_2^{E_{\mathrm{cell}}^\ast},\\
+c
+&\longmapsto
+\mathsf D_1(c),\\
+\mathsf D_1(c)(e^\ast)
+&:=
+c\!\left(d_1^{-1}(e^\ast)\right)
+\qquad
+\left(e^\ast\in E_{\mathrm{cell}}^\ast\right)
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`c:E_{\mathrm{cell}}\to\mathbb F_2`),
+        " は主辺ラベルごとの係数写像であり、",
+        math(String.raw`\mathsf D_1(c):E_{\mathrm{cell}}^\ast\to\mathbb F_2`),
+        " は双対辺ラベルごとの係数写像である。",
+        math(String.raw`d_1`),
+        " は全単射なので、任意の ",
+        math(String.raw`e^\ast\in E_{\mathrm{cell}}^\ast`),
+        " に対する ",
+        math(String.raw`d_1^{-1}(e^\ast)\in E_{\mathrm{cell}}`),
+        " は一意に定まる。主辺係数空間と双対辺係数空間を同一視せず、両者の移行には ",
+        math(String.raw`\mathsf D_1`),
+        " だけを用いる。この定義は係数の移送だけを定め、一次サイクル空間への制限と第一ホモロジー類への作用は後続の別ブロックで扱う。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
