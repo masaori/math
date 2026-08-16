@@ -15,6 +15,7 @@ export const ALL_LABELS = [
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
   "claim_factorization_type_determines_root_minimal_degrees",
+  "claim_finite_box_equalities_transfer_to_limit_quantity",
   "claim_full_boundary_response_common_outer_box_comparison",
   "claim_full_boundary_response_degree_at_most_one",
   "claim_full_boundary_response_degree_exactly_one",
