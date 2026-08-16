@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 10:32: 「内箱と外箱の間の辺変数を 1 に置かない測定量の定義」を記述（`def_full_boundary_response_polynomial`。定義のみで done。74 ブロック・相互参照 72 件）。外箱依存性は新セクション「辺変数を 1 に置かない境界応答多項式の外箱依存性」（todo）へ割った。次はその記述。
 - 2026-08-16 10:17: 「内箱と外箱の間の辺変数を 1 に置かない測定量への選び直し」を割り、先頭「境界応答多項式は外箱の点の数え上げしか外箱から受け取らない（明記）」を注意書き（remark、`remark_boundary_response_only_outer_count_survives`）として記述（done。数学的主張でないので SageMath/Lean 対象なし。73 ブロック・相互参照 70 件）。次は新セクション「内箱と外箱の間の辺変数を 1 に置かない測定量の定義」（todo）の記述。
 - 2026-08-16 10:02: 「境界応答多項式は外箱に依存しない」の Lean 必要十分版 `NecSuf.boundaryResponsePolynomial_outer_box_independence` と導出 `_fromNecSuf`（`done`。sorry 検査 102 件）。次は台帳の次の todo「内箱と外箱の間の辺変数を 1 に置かない測定量への選び直し」（最小の外箱の定義を含む）の記述。
 - 2026-08-16 09:48: 「境界応答多項式は外箱に依存しない」の Lean 具体版 `boundaryResponsePolynomial_outer_box_independence`（安定性の二度適用と配位数の積。`Lean 具体版まで`。sorry 検査 100 件）。次は同セクションの Lean 必要十分版（`NecSuf/BoundaryResponsePolynomial.lean` に可換半環版）と `FromNecSuf` での導出。

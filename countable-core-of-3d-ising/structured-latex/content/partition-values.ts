@@ -1524,4 +1524,44 @@ X_e,&e\in A_{L,L'},\\
       ]),
     ],
   },
+
+  {
+    id: "boundary_response_measurement_definition_full_variables",
+    kind: "definition",
+    title: { text: "辺変数を 1 に置かない境界応答多項式" },
+    labels: ["def_full_boundary_response_polynomial"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "自由境界の二つの箱の点集合が ",
+        math(String.raw`V_{L'}\subset V_L`),
+        " を満たすとし、",
+        ref("def_boundary_response_polynomial"),
+        " の多変数分配多項式 ",
+        math(String.raw`\mathcal Z_L((X_e)_{e\in E_L})\in\mathbb Z[(X_e)_{e\in E_L}]`),
+        " と辺の有限集合 ",
+        math(String.raw`A_{L,L'}\subset E_L`),
+        " をとる。どの辺の変数も 1 に置かず、変数の集合を ",
+        math(String.raw`A_{L,L'}`),
+        " とその補集合 ",
+        math(String.raw`E_L\setminus A_{L,L'}`),
+        " に分けて書いた整係数多項式",
+      ]),
+      displayMath(
+        String.raw`\widetilde R_{L,L'}\bigl((X_e)_{e\in A_{L,L'}},(X_e)_{e\in E_L\setminus A_{L,L'}}\bigr)
+=\mathcal Z_L((X_e)_{e\in E_L})
+\ \in\ \mathbb Z[(X_e)_{e\in E_L}]`,
+      ),
+      paragraph([
+        "を包含 ",
+        math(String.raw`V_{L'}\subset V_L`),
+        " の、辺変数を 1 に置かない境界応答多項式と呼ぶ。",
+        "定義に用いる代入は変数を動かさない恒等写像であり、環準同型である。",
+        "内箱と外箱の間の辺の変数を保持するので、",
+        ref("remark_boundary_response_only_outer_count_survives"),
+        " で述べた、外側の点が数え上げの因子にしか現れない事情は生じない。",
+        "この多項式が有限の箱の比較で外箱にどう依存するかは、次の項で扱う。",
+      ]),
+    ],
+  },
 ]);

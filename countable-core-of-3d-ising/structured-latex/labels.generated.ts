@@ -38,6 +38,7 @@ export const ALL_LABELS = [
   "def_configuration",
   "def_edge_set",
   "def_endpoint_maps",
+  "def_full_boundary_response_polynomial",
   "def_global_spin_flip",
   "def_multiplicity",
   "def_nonfixed_reciprocal_roots",
