@@ -7,6 +7,11 @@
 [docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md](../../../docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md)。
 
 ## 現在地
+- 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の各辺変数についての次数は高々 1」の Lean 必要十分版と具体版からの導出を形式化した（status `Lean 具体版まで` → `done`）。
+  係数環を可換半環 `R` に一般化し `Fintype Edge` を外した `NecSuf.fullBoundaryResponse_degreeOf_le_one`（mathlib の `degreeOf_X` が要求する `Nontrivial R` だけ置く）と、
+  `R := ℤ` への特殊化 `fullBoundaryResponse_degreeOf_le_one_fromNecSuf` を置いた（`lake build` 成功、sorry 検査 109 件 OK）。
+  この tick は開始が締切の 8 分前だったので、レビューは前 tick の Lean の build・sorry 検査の再実行にとどめた（不一致なし）。四層が揃ったので次の tick は残りの
+  「辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する」（次数がちょうど 1、todo）を記述する。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の各辺変数についての次数は高々 1」の Lean 具体版を形式化した（status `記述と SageMath まで` → `Lean 具体版まで`）。
   `MvPolynomial.degreeOf` で、有限和の次数が各項の次数の上限以下であること、相異なる不定元の積の次数が各不定元の次数の和以下であること、`degreeOf e₀ (X e)` が `e₀ = e` なら 1・他は 0 であることを人手証明と同順に示す
   `fullBoundaryResponse_degreeOf_le_one` を `lean/Ising3DCut/BoundaryResponsePolynomial.lean` に置いた（`lake build` 成功、sorry 検査 109 件 OK）。
@@ -609,7 +614,7 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
 | 内箱と外箱の間の辺変数を 1 に置かない測定量の定義 | どの辺の変数も 1 に置かず、変数集合を $A_{L,L'}$ とその補集合に分けて書いた多変数分配多項式 $\widetilde R_{L,L'}=\mathcal Z_L$ を定義した（代入は恒等写像なので環準同型）。有限の箱の比較にとどめる | done（定義のみ。数学的主張を含まないので SageMath / Lean の対象が無い） |
 | 辺変数を 1 に置かない境界応答多項式の外箱依存性 | 外箱を広げて増えた辺の変数だけを 1 に置く代入 $\pi_{L'',L}$ で $\pi_{L'',L}(\widetilde R_{L'',L'})=2^{\#V_{L''}-\#V_L}\widetilde R_{L,L'}$（配位の有限和の分割 1 論法）。**2026-08-16 に記述、SageMath 検証**（`claim_full_boundary_response_outer_edges_to_one`、`sagemath/check/full-boundary-response-outer-edges-to-one/`）、**Lean 具体版**（`fullBoundaryResponse_outer_edges_to_one`）、**Lean 必要十分版と導出**（`NecSuf.fullBoundaryResponse_outer_edges_to_one`、`fullBoundaryResponse_outer_edges_to_one_fromNecSuf`） | done |
 | 辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較 | 四つの箱 $V_{L'}\subset V_{L_0}\subset V_{L_1},V_{L_2}$（$V_{L_1}$ と $V_{L_2}$ の包含関係は仮定しない）で、増えた辺の変数を 1 に置く代入を経由して $2^{\#V_{L_2}}\,\pi_{L_1,L_0}(\widetilde R_{L_1,L'})=2^{\#V_{L_1}}\,\pi_{L_2,L_0}(\widetilde R_{L_2,L'})$ が成り立つことを、上の主張を 2 回適用する 1 論法で示す（辺変数を 1 に置く版の外箱非依存性の対応物。近傍の条件は要らない）。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の安定性・非依存性」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_common_outer_box_comparison`）、**SageMath 検証**（`sagemath/check/full-boundary-response-common-outer-box-comparison/`）、**Lean 具体版**（`fullBoundaryResponse_common_outer_box_comparison`）、**Lean 必要十分版と導出**（`NecSuf.fullBoundaryResponse_common_outer_box_comparison` / `_fromNecSuf`） | done |
-| 辺変数を 1 に置かない境界応答多項式の各辺変数についての次数は高々 1 | 任意の $e_0\in E_L$ について、$\widetilde R_{L,L'}$ の $X_{e_0}$ についての次数が高々 1 であること（各配位の単項式が相異なる不定元の集合上の積であること、有限和の次数が各項の次数の最大値以下であること）を示す。真の依存（次数がちょうど 1）の上半分。**2026-08-16 に「増えた辺の変数に真に依存する」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_degree_at_most_one`）**2026-08-16 に SageMath 検証**（`sagemath/check/full-boundary-response-degree-at-most-one/` PASS）**2026-08-16 に Lean 具体版**（`fullBoundaryResponse_degreeOf_le_one`） | Lean 具体版まで |
+| 辺変数を 1 に置かない境界応答多項式の各辺変数についての次数は高々 1 | 任意の $e_0\in E_L$ について、$\widetilde R_{L,L'}$ の $X_{e_0}$ についての次数が高々 1 であること（各配位の単項式が相異なる不定元の集合上の積であること、有限和の次数が各項の次数の最大値以下であること）を示す。真の依存（次数がちょうど 1）の上半分。**2026-08-16 に「増えた辺の変数に真に依存する」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_degree_at_most_one`）**2026-08-16 に SageMath 検証**（`sagemath/check/full-boundary-response-degree-at-most-one/` PASS）**2026-08-16 に Lean 具体版**（`fullBoundaryResponse_degreeOf_le_one`）**2026-08-16 に Lean 必要十分版**（`NecSuf.fullBoundaryResponse_degreeOf_le_one`・`fullBoundaryResponse_degreeOf_le_one_fromNecSuf`） | done |
 | 辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する | $V_{L'}\subset V_L\subset V_{L''}$ と $e\in E_{L''}\setminus E_L$ に対し、$\widetilde R_{L'',L'}$ の $X_e$ についての次数がちょうど 1 であること（$e$ の一端だけを反転した配位が $e$ を破ること、および係数が非負の数え上げであること。高々 1 は上の主張）を示す。ゆえに $\pi_{L'',L}$ は $\widetilde R_{L'',L'}$ の情報を実際に落としており、辺変数を 1 に置く版で起きた「外側の点の数え上げしか残らない」潰れは起きない。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の安定性・非依存性」から割り出した** | todo |
 
 ### 従属標的（本体にしない。降格済み。**本文からは退避済み**）

@@ -17,6 +17,7 @@
 住処: 有限型上の多変数多項式環（可換半環係数）。ℝ / ℂ は現れない。
 -/
 import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Algebra.MvPolynomial.Degrees
 
 namespace Ising3DCut.NecSuf
 
@@ -152,5 +153,21 @@ theorem fullBoundaryResponse_common_outer_box_comparison
   rw [Fintype.card_prod, Fintype.card_prod, smul_smul, smul_smul]
   congr 1
   ring
+
+/-- 辺変数を 1 に置かない境界応答多項式の各辺変数についての次数は高々 1 の必要十分版。
+係数環は可換半環 `R` でよく、辺型の有限性は不要。`Nontrivial R` は mathlib の `degreeOf_X`
+（`X e` の `e₀` についての次数が `e₀ = e` なら 1・他は 0）が要求するので置く（`ℤ` は満たす）。
+証明は具体版と同順（有限和の次数は各項の上限以下、相異なる不定元の積の次数は各不定元の次数の和以下）。 -/
+theorem fullBoundaryResponse_degreeOf_le_one [Nontrivial R]
+    (broken : Configuration → Finset Edge) (e₀ : Edge) :
+    degreeOf e₀ (multivariatePartitionPolynomial (R := R) broken) ≤ 1 := by
+  unfold multivariatePartitionPolynomial
+  refine (degreeOf_sum_le e₀ _ _).trans (Finset.sup_le fun σ _ ↦ ?_)
+  refine (degreeOf_prod_le e₀ _ _).trans ?_
+  calc ∑ e ∈ broken σ, degreeOf e₀ (X e : MvPolynomial Edge R)
+      = ∑ e ∈ broken σ, if e₀ = e then 1 else 0 := by
+        exact Finset.sum_congr rfl fun e _ ↦ degreeOf_X e₀ e
+    _ ≤ 1 := by
+        rw [Finset.sum_ite_eq]; split_ifs <;> simp
 
 end Ising3DCut.NecSuf

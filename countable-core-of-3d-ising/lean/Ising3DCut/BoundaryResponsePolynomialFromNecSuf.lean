@@ -108,4 +108,10 @@ theorem fullBoundaryResponse_common_outer_box_comparison_fromNecSuf
       (Fintype.card (Configuration × Outer₁)) • π₂ (multivariatePartitionPolynomial broken₂) :=
   NecSuf.fullBoundaryResponse_common_outer_box_comparison broken broken₁ broken₂ π₁ π₂ h₁ h₂
 
+/-- 各辺変数についての次数は高々 1 を必要十分版（`R := ℤ`）から導く。 -/
+theorem fullBoundaryResponse_degreeOf_le_one_fromNecSuf
+    (broken : Configuration → Finset Edge) (e₀ : Edge) :
+    degreeOf e₀ (multivariatePartitionPolynomial broken) ≤ 1 :=
+  NecSuf.fullBoundaryResponse_degreeOf_le_one (R := ℤ) broken e₀
+
 end Ising3DCut
