@@ -246,6 +246,12 @@ countable-core-of-3d-ising の自動ループを 1 tick 進める。
 2. そのあと、台帳の todo の先頭セクションを 1 つだけ進める。2 つ以上進めない。
    時間のかかる処理は前面で実行し、終わるまで待つ。裏で走らせたまま tick を終えると
    その処理は道連れに終了し、成果が残らない。
+   **「締切に収まらないから着手しない」と決めて、レビューだけで tick を終えることを禁止する。**
+   所要時間の見積もりはできない（できると思っているのは錯覚である）。実測 2026-08-16 に、
+   この見積もりを理由に着手しない tick が 4 時間続き、その間 1 行も前進しなかった。
+   セクションが大きいと思うなら、**その場で小さく割って、割った先頭だけを完成させる**
+   （割った結果は台帳へ書く）。まず着手し、まとめ締切を過ぎたらそこまでの成果を検証して
+   コミットする。書きかけでも、検証を通してコミットしてあれば次の tick が続きから進める。
 3. このプロジェクトの立場を厳守する。許される非可算への脱出は箱の大きさの極限だけである。
    上限・下限・積分・微分・無限和・級数・指数関数・実対数・逆温度の記号を使わない。
    相・臨界温度・自発磁化などの無限体積の語を主張に使わない。
@@ -371,7 +377,11 @@ record_leftover() {  # 失敗した tick が残したものを目印へ書く（
 
 # 間隔の階段を上げ下げする。中断（打ち切り・異常終了）が続いたら伸ばし、正常終了で 1 段戻す。
 adjust_interval() {
-  local interrupted="$1"   # 1 なら中断
+  # 1 なら「進まなかった」。中断（打ち切り・異常終了）だけでなく、**正常終了したのに
+  # 証明・検証・形式化が 1 件も増えなかった tick も含める**（2026-08-16 に判明した実害:
+  # 「持ち時間では収まらない」と判断してレビューだけで終える tick が 05:03 から 4 時間続き、
+  # そのすべてが正常終了だったため、中断だけを見る階段は一度も上がらなかった）。
+  local interrupted="$1"
   local count=0 idx=0 i new_interval="$interval_minutes"
   count="$(cat "$INTERRUPTION_MARK" 2>/dev/null || echo 0)"
   case "$count" in ''|*[!0-9]*) count=0 ;; esac
@@ -385,12 +395,12 @@ adjust_interval() {
       count=0
       if [ "$idx" -lt $(( ${#INTERVAL_LADDER[@]} - 1 )) ]; then
         new_interval="${INTERVAL_LADDER[$(( idx + 1 ))]}"
-        log "    中断が ${INTERRUPTIONS_TO_BACK_OFF} 回続いた。間隔を ${interval_minutes} 分から ${new_interval} 分へ伸ばす（1 tick の持ち時間も伸びる）"
+        log "    進まない tick が ${INTERRUPTIONS_TO_BACK_OFF} 回続いた。間隔を ${interval_minutes} 分から ${new_interval} 分へ伸ばす（1 tick の持ち時間も伸びる）"
       else
-        log "    中断が続いているが、間隔はすでに階段の最長（${interval_minutes} 分）である"
+        log "    進まない tick が続いているが、間隔はすでに階段の最長（${interval_minutes} 分）である"
       fi
     else
-      log "    中断が ${count} 回目（${INTERRUPTIONS_TO_BACK_OFF} 回続いたら間隔を伸ばす）"
+      log "    進まない tick が ${count} 回目（${INTERRUPTIONS_TO_BACK_OFF} 回続いたら間隔を伸ばす）"
     fi
   else
     count=0
@@ -418,7 +428,17 @@ elif [ "$status" -ne 0 ]; then
 else
   log "=== tick 正常終了"
   record_leftover "正常終了したが未コミットの成果が残った"
-  adjust_interval 0
+  # **正常終了でも、証明・検証・形式化が増えていなければ「進まなかった」として扱う。**
+  # 台帳と MEMORY だけを更新した tick（レビューのみの tick）はここに落ちる。
+  substantive_commits="$(git -C "$LOOP_WORKTREE" rev-list --count "$head_before..HEAD" -- \
+    "$PROJECT_NAME/structured-latex/content" "$PROJECT_NAME/lean" "$PROJECT_NAME/sagemath" \
+    2>/dev/null || echo 0)"
+  if [ "${substantive_commits:-0}" -gt 0 ]; then
+    adjust_interval 0
+  else
+    log "    本文・Lean・SageMath が 1 件も増えていない（レビューのみ）。進まなかった扱いにする"
+    adjust_interval 1
+  fi
 fi
 
 # 人間が開いたまま進み具合を見られるように、PDF をメインの作業ツリー側の固定パスへ置く。
@@ -509,9 +529,17 @@ fi
 # 単に HEAD が動いただけでは、他プロジェクトのループのコミットを取り込んだ可能性がある。
 own_commits="$(git -C "$LOOP_WORKTREE" rev-list --count "$head_before..HEAD" -- "$PROJECT_NAME" 2>/dev/null || echo 0)"
 
+# 通知でも「前進」と「レビューのみ」を書き分ける。台帳と MEMORY だけを直した tick を
+# 「前進」と報告すると、止まっていることが通知から分からない（実測 2026-08-16）。
+notify_substantive="$(git -C "$LOOP_WORKTREE" rev-list --count "$head_before..HEAD" -- \
+  "$PROJECT_NAME/structured-latex/content" "$PROJECT_NAME/lean" "$PROJECT_NAME/sagemath" \
+  2>/dev/null || echo 0)"
+
 case "$status" in
-  0)   if [ "${own_commits:-0}" -gt 0 ]; then
-         tick_outcome="前進（${own_commits} コミット）"
+  0)   if [ "${notify_substantive:-0}" -gt 0 ]; then
+         tick_outcome="前進（${notify_substantive} コミット）"
+       elif [ "${own_commits:-0}" -gt 0 ]; then
+         tick_outcome="レビューのみ（本文・Lean・SageMath は増えていない）"
        else
          tick_outcome="コミットなし（何も残していない）"
        fi ;;
