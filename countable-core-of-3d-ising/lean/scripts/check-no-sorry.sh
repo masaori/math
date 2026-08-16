@@ -244,6 +244,7 @@ targets=(
   Ising3DCut.LimitQuantity.eval_eq_pow_mul_eval_inv_of_reflect_eq
   Ising3DCut.LimitQuantity.padicValRat_of_pow_mul
   Ising3DCut.LimitQuantity.ne_eval_inv_of_strictMonoOn
+  Ising3DCut.LimitQuantity.strictMono_sum_of_nonneg_coeff
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
