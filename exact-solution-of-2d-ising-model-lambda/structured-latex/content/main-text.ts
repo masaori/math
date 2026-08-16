@@ -40534,6 +40534,234 @@ Z^{\mathrm{op}}_{L,L}(q)
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_subsquare_comparison_density_le_one",
+    kind: "claim",
+    title: { text: "開境界正方形と部分正方形の比較による密度の挟み込み（Λ_Q 版。q は 1 以下）" },
+    labels: ["claim_open_square_subsquare_comparison_density_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-subsquare-comparison-density"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.scaled_subsquareBlockDensity_eq",
+      "Ising2DLambda.ThermodynamicLimit.scaled_subsquareLowerForm_eq",
+      "Ising2DLambda.ThermodynamicLimit.scaled_subsquareUpperForm_eq",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareSubsquareDensity_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareSubsquareDensity_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,L\in\mathbb{N}`),
+        "、",
+        math(String.raw`1\le a<L`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\frac{a+L}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)+\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_{L}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \frac{L^2-a^2}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+\frac{2(L^2-a^2)}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))+\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log q,\ \log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{a+L}{L^2}\cdot`),
+        "、",
+        math(String.raw`\frac{a^2}{L^2}\cdot`),
+        "、",
+        math(String.raw`\frac{L^2-a^2}{L^2}\cdot`),
+        "、",
+        math(String.raw`\frac{2(L^2-a^2)}{L^2}\cdot`),
+        "（いずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元。",
+        math(String.raw`L\ge1`),
+        " なので分母 ",
+        math(String.raw`L^2\ne0`),
+        "。分子の ",
+        math(String.raw`L^2-a^2`),
+        " は ",
+        math(String.raw`a<L`),
+        " なので自然数）と加法は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。",
+        ref("claim_open_square_subsquare_comparison_log_le_one"),
+        " の ",
+        math(String.raw`\Lambda`),
+        " の評価の三つの元を ",
+        math(String.raw`\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " で ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " へ移したものであり、",
+        ref("claim_open_square_block_tiling_density"),
+        " と違って ",
+        math(String.raw`L`),
+        " が ",
+        math(String.raw`a`),
+        " の倍数でなくてもよい。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 4 つ置く。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記する（この証明の中だけ）。第一に、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`(a,b):=(a,a)`),
+        "、",
+        math(String.raw`(a,b):=(L,L)`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{a,a}(q),\ Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " であり、対数 ",
+        ref("def_rational_log"),
+        " を施せる。また ",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`a^2\ne0`),
+        "、",
+        math(String.raw`L^2\ne0`),
+        " であり、",
+        math(String.raw`\frac{1}{a^2},\ \frac{1}{L^2},\ \frac{a^2}{L^2},\ \frac{a+L}{L^2},\ \frac{L^2-a^2}{L^2},\ \frac{2(L^2-a^2)}{L^2}\in\mathbb{Q}`),
+        " が定まる。加えて、任意の ",
+        math(String.raw`n\in\mathbb{Z}`),
+        "、",
+        math(String.raw`\nu\in\Lambda`),
+        " について ",
+        math(String.raw`n\cdot\iota(\nu)=\iota(n\nu)`),
+        "（左辺は分母 ",
+        math(String.raw`1`),
+        " の有理数 ",
+        math(String.raw`n`),
+        " による有理数倍、右辺の ",
+        math(String.raw`n\nu`),
+        " は ",
+        ref("def_log_order_group"),
+        " の整数倍）である。これは ",
+        ref("claim_scaled_free_entropy_denominator_clearing"),
+        " の証明の末尾で、各素数での値の五段の鎖として示してある。",
+      ]),
+      paragraph([
+        "第二に、部分正方形の値の対数を ",
+        math(String.raw`\frac{1}{L^2}\cdot\iota`),
+        " で移した先を、",
+        math(String.raw`\Psi^{\mathrm{op}}_{a}(q)`),
+        " の有理数倍として整える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{L^2}\cdot\iota\bigl(\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&=\Bigl(\frac{a^2}{L^2}\cdot\frac{1}{a^2}\Bigr)\cdot\iota\bigl(\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ a^2\ne0\text{ による }\mathbb{Q}\text{ の約分 }\tfrac{a^2}{L^2}\cdot\tfrac{1}{a^2}=\tfrac{1}{L^2}\text{ を右辺から左辺の向きで読む})\\
+&=\frac{a^2}{L^2}\cdot\Bigl(\frac{1}{a^2}\cdot\iota\bigl(\log Z^{\mathrm{op}}_{a,a}(q)\bigr)\Bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則 }(rs)\cdot\lambda=r\cdot(s\cdot\lambda))\\
+&=\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \blkref{def_open_square_free_entropy_density}\text{ を }L:=a\text{ で読む})
+\end{aligned}`),
+      paragraph([
+        "第三に、",
+        ref("claim_open_square_subsquare_comparison_log_le_one"),
+        " の下からの評価の側の元を ",
+        math(String.raw`\frac{1}{L^2}\cdot\iota`),
+        " で移した先を、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の中で整える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{L^2}\cdot\iota\bigl((a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&=\frac{1}{L^2}\cdot\bigl(\iota((a+L)\,\log q)+\iota(\log Z^{\mathrm{op}}_{a,a}(q))\bigr)
+&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&=\frac{1}{L^2}\cdot\iota((a+L)\,\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
+&=\frac{1}{L^2}\cdot\bigl((a+L)\cdot\iota(\log q)\bigr)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \text{準備の第一の }n\cdot\iota(\nu)=\iota(n\nu)\text{ を }n:=a+L,\ \nu:=\log q\text{ で右辺から左辺の向きに読む})\\
+&=\Bigl(\frac{1}{L^2}\cdot(a+L)\Bigr)\cdot\iota(\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則 }(rs)\cdot\lambda=r\cdot(s\cdot\lambda))\\
+&=\frac{a+L}{L^2}\cdot\iota(\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \mathbb{Q}\text{ の積 }\tfrac{1}{L^2}\cdot(a+L)=\tfrac{a+L}{L^2})\\
+&=\frac{a+L}{L^2}\cdot\iota(\log q)+\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      paragraph([
+        "第四に、",
+        ref("claim_open_square_subsquare_comparison_log_le_one"),
+        " の上からの評価の側の元を同じく ",
+        math(String.raw`\frac{1}{L^2}\cdot\iota`),
+        " で移した先を、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の中で整える。以下 ",
+        math(String.raw`n:=L^2-a^2\in\mathbb{N}`),
+        " と略記する（この証明の中だけ）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{L^2}\cdot\iota\bigl(n\,\ell_2+2n\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&=\frac{1}{L^2}\cdot\bigl(\iota(n\,\ell_2)+\iota(2n\,\log(1+q))+\iota(\log Z^{\mathrm{op}}_{a,a}(q))\bigr)
+&&(\because\ \iota\text{ は加法を保つ（}\blkref{claim_rational_log_order_group_embedding}\text{）。三項の和へ二回適用})\\
+&=\frac{1}{L^2}\cdot\iota(n\,\ell_2)+\frac{1}{L^2}\cdot\iota(2n\,\log(1+q))+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則。三項の和へ二回適用})\\
+&=\frac{1}{L^2}\cdot\bigl(n\cdot\iota(\ell_2)\bigr)+\frac{1}{L^2}\cdot\bigl(2n\cdot\iota(\log(1+q))\bigr)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \text{準備の第一の }n\cdot\iota(\nu)=\iota(n\nu)\text{ を }(n,\nu):=(n,\ell_2)\text{ と }(2n,\log(1+q))\text{ で二項へ同時に右辺から左辺の向きに読む})\\
+&=\Bigl(\frac{1}{L^2}\cdot n\Bigr)\cdot\iota(\ell_2)+\Bigl(\frac{1}{L^2}\cdot2n\Bigr)\cdot\iota(\log(1+q))+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則を二項へ同時適用})\\
+&=\frac{L^2-a^2}{L^2}\cdot\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\cdot\iota(\log(1+q))+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
+&&(\because\ \mathbb{Q}\text{ の積 }\tfrac{1}{L^2}\cdot n=\tfrac{L^2-a^2}{L^2},\ \tfrac{1}{L^2}\cdot2n=\tfrac{2(L^2-a^2)}{L^2}\text{ と }n=L^2-a^2)\\
+&=\frac{L^2-a^2}{L^2}\cdot\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\cdot\iota(\log(1+q))+\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      paragraph([
+        "主張の左の不等式を、その左辺から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{a+L}{L^2}\cdot\iota(\log q)+\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)
+&=\frac{1}{L^2}\cdot\iota\bigl((a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ \text{準備の第三を右辺から左辺の向きで読む})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota\bigl(\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ を }L:=L\text{、}\lambda:=(a+L)\log q+\log Z^{\mathrm{op}}_{a,a}(q)\text{、}\mu:=\log Z^{\mathrm{op}}_{L,L}(q)\text{ で右辺から左辺の向きに読み、}\blkref{claim_open_square_subsquare_comparison_log_le_one}\text{ の左の不等式を移す})\\
+&=\Psi^{\mathrm{op}}_{L}(q)
+&&(\because\ \blkref{def_open_square_free_entropy_density})
+\end{aligned}`),
+      paragraph([
+        "主張の右の不等式を、その左辺から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{\mathrm{op}}_{L}(q)
+&=\frac{1}{L^2}\cdot\iota\bigl(\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&&(\because\ \blkref{def_open_square_free_entropy_density})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota\bigl(n\,\ell_2+2n\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ を }L:=L\text{、}\lambda:=\log Z^{\mathrm{op}}_{L,L}(q)\text{、}\mu:=n\ell_2+2n\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)\text{ で右辺から左辺の向きに読み、}\blkref{claim_open_square_subsquare_comparison_log_le_one}\text{ の右の不等式を移す})\\
+&=\frac{L^2-a^2}{L^2}\cdot\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\cdot\iota(\log(1+q))+\frac{a^2}{L^2}\cdot\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \text{準備の第四})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、部分正方形との比較の対数化（",
+        math(String.raw`\Lambda`),
+        " の鎖）、有理数倍と埋め込みを通した順序の移送、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " が加法と整数倍を保つこと、有理数倍の分配則・結合則、",
+        math(String.raw`\mathbb{Q}`),
+        " の約分と積、および密度の定義だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_claim_open_square_free_entropy_density_upper_bound",
     kind: "claim",
     title: { text: "開境界正方形の自由エントロピー密度の上からの評価" },
@@ -41291,7 +41519,7 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 有限系の密度を可算側へ畳むこと、極限の存在の Cauchy 性としての記述、切断による実数体への一度きりの脱出と旧実数値経路の撤去、開境界自由エネルギー密度の極限（倍数でない辺への拡張）、周期境界自由エネルギー密度への移送、零点密度。",
+          "「熱力学極限」の残り: 開境界自由エントロピー密度の列の Cauchy 性（有理数で差を抑える）、切断による実数体への一度きりの脱出と旧実数値経路の撤去、周期境界自由エネルギー密度への移送、零点密度。",
         ],
         [
           todo("未着手"),

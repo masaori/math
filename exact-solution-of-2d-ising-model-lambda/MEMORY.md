@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 335 は、前 tick の「開境界正方形と部分正方形の比較の対数化（$\Lambda$ の鎖。$q$ は 1 以下）」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を四層で閉じた。
+`claim_open_square_subsquare_comparison_density_le_one`（`claim_open_square_subsquare_comparison_log_le_one` の直後、住処 Lambda）: $1\le a<L$、$0<q\le1$ に対し
+$\frac{a+L}{L^2}\iota(\log q)+\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac{L^2-a^2}{L^2}\iota(\ell_2)+\frac{2(L^2-a^2)}{L^2}\iota(\log(1+q))+\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a(q)$
+（$L$ は $a$ の倍数でなくてよい）。証明は `claim_open_square_block_tiling_density` と同じ型（準備 4 つ: 正値性と分母・$\frac1{L^2}\iota(\log Z^{\mathrm{op}}_{a,a})=\frac{a^2}{L^2}\Psi^{\mathrm{op}}_a$ の三段
+（$\mathbb Q$ の約分の逆向き・結合則・定義）・下端の像の六段・上端の像の六段（加法性二回・分配則二回・$n\cdot\iota(\nu)=\iota(n\nu)$ 二項同時・結合則二項同時・$\mathbb Q$ の積・準備の第二）、
+本体は `claim_scaled_embedding_order_transfer` を $L:=L$ で読み `claim_open_square_subsquare_comparison_log_le_one` を移す 3 段の鎖 2 本）。
+SageMath `open-square-subsquare-comparison-density`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 6 点、396 検査、4 秒。`ZZ`/`QQ`・有限台辞書。
+**$\le_{\Lambda_{\mathbb Q}}$ の決定手続きの共通分母は分母の最小公倍数にした**——他の検査が使う「分母の積」だと台の素数が十数個のとき $\mathrm{rat}_\Lambda$ の冪の指数が $10^{14}$ 級になり 10 分で終わらなかった。
+今後 $\Lambda_{\mathbb Q}$ の比較を検査するときは最小公倍数を使うこと。定義は「ある共通分母で」と「すべての共通分母で」が同値なのでどちらでも正しい）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonDensity.lean`（`scaled_subsquareBlockDensity_eq`・`scaled_subsquareLowerForm_eq`・`scaled_subsquareUpperForm_eq`・
+`rationalLogOrderLE_openSquareSubsquareDensity_bounds_of_le_one`。`[NeZero a] [NeZero L] (haL : a < L)`。$L^2-a^2$ は自然数の引き算のまま。約分は `field_simp`、係数の整形は `push_cast; ring`）、
+必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `OpenSquareSubsquareComparisonDensityFromNecSuf.lean`。sorry 検査 1246 件。
+本文末尾「この先に書くこと」から済んだ項目を消した。runbook のレビュー観点に「何も言っていない主張を置いていないか」（ユーザー指示 2026-08-16）が加わった——次 tick からこの観点で既存ブロックを見ること。
+台帳の先頭行はユーザーが足した「何も言っていない主張の一掃（既存分）」（全章。体の四則だけのブロックを消し、Lean・SageMath の対応物も片付ける）で、その次が「密度の列の Cauchy 性」（着手時に論法の数で割る。Archimedes 型の補題「$\mu,\varepsilon>0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$」が要る。
+挟み込みは倍数辺 `claim_open_square_block_tiling_density` と一般辺 `claim_open_square_subsquare_comparison_density_le_one`（$q\le1$ のみ。$1\le q$ の部分正方形比較は未作成）がある）。
+
 2026-08-16 の tick 334 は、前 tick の「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を $\Lambda$ の鎖と $\Lambda_{\mathbb Q}$ の挟み込みの二行へ割り、前半を四層で閉じた。
 `claim_open_square_subsquare_comparison_log_le_one`（`claim_open_square_subsquare_comparison_rational_le_one` の直後、住処 Lambda）: $1\le a<L$、$0<q\le1$ に対し

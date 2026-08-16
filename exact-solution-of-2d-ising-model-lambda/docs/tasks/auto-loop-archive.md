@@ -3,6 +3,37 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 330）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 330 は、「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させ、四層で閉じた。**
+  `claim_open_square_block_tiling_density`（`claim_open_square_block_tiling_log` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $a,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_a(q)$、$1\le q$: その反転。
+  証明は準備 3 つ（正値性と $(ka)^2\ne0$ と $n\cdot\iota(\nu)=\iota(n\nu)$・上からの評価の側の四段・下からの評価の側の六段）と、二場合とも左右の不等式を 3 段の鎖 2 本ずつ
+  （準備の等式・`claim_scaled_embedding_order_transfer` を $L:=ka$ で読んで `claim_open_square_block_tiling_log` を移す・`def_open_square_free_entropy_density`）。
+  SageMath は前 tick の下書きを `check/open-square-block-tiling-density/` へ移して overview を付けた（556 検査 PASS、所要 10 秒。$4\times4$ を含む形は外したまま）。
+  Lean 具体版 `OpenSquareBlockTilingDensity.lean`（`scaled_blockTilingUpperForm_eq`・`scaled_blockTilingLowerForm_eq`・
+  `rationalLogOrderLE_openSquareBlockTilingDensity_bounds_of_le_one`／`_of_one_le`）、必要十分版は前々 tick の `twoSided_bounds_transport_through_monotone_map_necSuf` を
+  `ell := λ ↦ (1/(ka)²)·ι(λ)` で共有、導出版 `OpenSquareBlockTilingDensityFromNecSuf.lean`。sorry 検査 1223 件。PDF の題名に組めない文字 ℚ があったので「Λ_Q 版」へ直した。
+  次は「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 330）: `claim_open_square_block_tiling_density` を `claim_open_square_block_tiling_log` の直後（`remark_real_escape_plan` の直前）に置き四層で閉じた。
+  準備 3 つ（第一: 正値性・$(ka)^2\ne0$・`claim_scaled_free_entropy_denominator_clearing` の末尾の $n\cdot\iota(\nu)=\iota(n\nu)$。第二: 上からの評価の側の四段
+  （$n\cdot\iota(\nu)=\iota(n\nu)$ 逆向き・結合則・約分 $\frac{k^2}{k^2a^2}=\frac1{a^2}$・定義）。第三: 下からの評価の側の六段（`claim_rational_log_order_group_embedding` の加法・分配則・
+  $n\cdot\iota(\nu)=\iota(n\nu)$ 逆向き・結合則・約分 $\frac{2k(k-1)a}{k^2a^2}=\frac{2(k-1)}{ka}$・第二））。本体は二場合とも左右の不等式を 3 段の鎖 2 本ずつ。
+  SageMath `open-square-block-tiling-density`（前 tick の下書きを移動。形 $(a,k)\in\{(1,1),(1,2),(1,3),(2,1)\}$ × 正の有理点 9 点、556 検査、10 秒。`ZZ`/`QQ`・有限台辞書）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareBlockTilingDensity.lean`（`NeZero (k*a)` は mathlib の `NeZero.mul` 実例で `[NeZero a] [NeZero k]` から。約分は `push_cast; field_simp`。
+  $k-1$ は自然数のまま、係数は $\frac{2\cdot((k-1:\mathbb N):\mathbb Q)}{k\cdot a}$）、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、
+  導出版 `OpenSquareBlockTilingDensityFromNecSuf.lean`。入口 import・sorry 検査へ 6 件登録（計 1223 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 330）: 前 tick の SageMath 下書き `sagemath/drafts/open-square-block-tiling-density.check.sage` を、決めてあった証明の骨格（準備 3 つと二場合の鎖）と突き合わせ、
+  段の並びと根拠が一致した。下書きの見出し（「まだ check/ に置かない」）は移動に伴い対象ラベル宣言へ書き換えた。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。他に修正は無い。
+
 ## 2026-08-16（tick 329）の記録
 
 ### 現在地
