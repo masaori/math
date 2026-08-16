@@ -250,6 +250,29 @@ theorem fullBoundaryResponse_totalDegree_le_card_edge
     _ = (broken σ).card := by simp
     _ ≤ Fintype.card Edge := Finset.card_le_univ _
 
+/-- 辺変数を 1 に置かない境界応答多項式の全次数は辺の総数に等しい（人手証明
+`claim_full_boundary_response_total_degree_is_edge_count`）。全ての辺を破る配位 `τ` があれば、
+その単項式 `∏ e, X e` の係数は 1 以上（`fullBoundaryResponse_one_le_coeff_brokenMonomial`）で
+指数の和は `#Edge` なので全次数は `#Edge` 以上、高々 `#Edge` と合わせてちょうど `#Edge` である
+（人手証明では係数が `Ω_L(#E_L) ≥ 2` だが、下界には非零で足りる）。 -/
+theorem fullBoundaryResponse_totalDegree_eq_card_edge
+    (broken : Configuration → Finset Edge) (τ : Configuration)
+    (hτ : broken τ = Finset.univ) :
+    (multivariatePartitionPolynomial broken).totalDegree = Fintype.card Edge := by
+  refine le_antisymm (fullBoundaryResponse_totalDegree_le_card_edge broken) ?_
+  -- τ の単項式の指数 m は support に属する（係数が 1 以上なので非零）
+  have hcoeff := fullBoundaryResponse_one_le_coeff_brokenMonomial broken τ
+  have hsupp : (∑ e ∈ broken τ, Finsupp.single e 1) ∈
+      (multivariatePartitionPolynomial broken).support := by
+    rw [mem_support_iff]; exact ne_of_gt (lt_of_lt_of_le zero_lt_one hcoeff)
+  -- support の元の指数の和は全次数以下
+  have hle := le_totalDegree hsupp
+  -- 全ての辺を破る配位の指数の和は #Edge
+  have hdeg : ((∑ e ∈ broken τ, Finsupp.single e 1).sum fun _ n ↦ n) = Fintype.card Edge := by
+    rw [hτ, ← Finsupp.sum_finset_sum_index (fun _ ↦ rfl) (fun _ _ _ ↦ rfl)]
+    simp [Finsupp.sum_single_index]
+  rwa [hdeg] at hle
+
 end
 
 end Ising3DCut
