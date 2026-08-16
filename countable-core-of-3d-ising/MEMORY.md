@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 12:18: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」の Lean 具体版 `fullBoundaryResponse_common_outer_box_comparison`（外箱依存性の 2 回適用と配位数の積の可換性。`Lean 具体版まで`。lake build 成功・sorry 検査 104 件 OK）。次は同セクションの Lean 必要十分版と具体版からの導出。
 - 2026-08-16 12:02: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」を SageMath で検証（`sagemath/check/full-boundary-response-common-outer-box-comparison/` PASS。互いに含まない二外箱 $3\times2\times2$・$2\times3\times2$ で外箱依存性の 2 回適用と 2 冪の積を証明と同順に確認。`記述と SageMath まで`。検証対応 20 件）。次は同セクションの Lean 具体版（`lean/Ising3DCut/` に `fullBoundaryResponse_outer_edges_to_one` を 2 回使う形で置く）。
 - 2026-08-16 11:48: 主標的の todo が尽きたので「$\widetilde R$ の安定性・非依存性」を 2 セクション（共通の外箱を経由した比較／増えた辺の変数への真の依存）に割り、先頭「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」を記述（`claim_full_boundary_response_common_outer_box_comparison`。外箱依存性の 2 回適用。`記述まで`。76 ブロック・相互参照 83 件）。次は同セクションの SageMath 検証（外箱依存性の検証と同じ箱に第二の外箱を加える）。
 - 2026-08-16 11:33: 「辺変数を 1 に置かない境界応答多項式の外箱依存性」の Lean 必要十分版 `NecSuf.fullBoundaryResponse_outer_edges_to_one`（可換半環、辺型の有限性不要）と導出 `fullBoundaryResponse_outer_edges_to_one_fromNecSuf`（`done`。sorry 検査 103 件）。次は主標的の次セクション（todo が無ければ $\widetilde R$ の安定性・非依存性に相当する主張を分割して台帳へ書き、先頭を記述する）。

@@ -7,6 +7,11 @@
 [docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md](../../../docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md)。
 
 ## 現在地
+- 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」の Lean 具体版を形式化した（status `記述と SageMath まで` → `Lean 具体版まで`）。
+  外箱依存性の定理 `fullBoundaryResponse_outer_edges_to_one` を二つの外箱（辺型 `Edge₁`,`Edge₂`・外側の点の型 `Outer₁`,`Outer₂`、包含は仮定しない）へ 2 回適用し、
+  配位数の積の可換性で $\#(C\times O_2)\cdot\pi_1(\widetilde R_1)=\#(C\times O_1)\cdot\pi_2(\widetilde R_2)$ を示す
+  `fullBoundaryResponse_common_outer_box_comparison` を `lean/Ising3DCut/BoundaryResponsePolynomial.lean` に置いた（`lake build` 成功、sorry 検査 104 件 OK）。
+  この tick は開始が締切の 8 分前だったので、レビューは Lean の build・sorry 検査の再実行にとどめた（不一致なし）。次の tick は同セクションの Lean 必要十分版（係数環の一般化・`Fintype` 除去）と具体版からの導出を行う。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」を SageMath で検証した（status `記述まで` → `記述と SageMath まで`）。
   内箱 1 点・共通の外箱 $\{0,1\}^3$・互いに含まない二つの外箱（$3\times2\times2$ と $2\times3\times2$）で、外箱依存性の 2 回適用と 2 冪の積を
   証明と同順に `ZZ` 上の有限和で確認した（`sagemath/check/full-boundary-response-common-outer-box-comparison/`、PASS。検証対応 20 件、
@@ -586,7 +591,7 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
 | 境界応答多項式は外箱の点の数え上げしか外箱から受け取らない（明記） | 安定性と外箱非依存性から、境界応答多項式が外箱から受け取る違いは外側の点の数え上げの因子 $2^{\#V_L}$ に尽き、内箱と外箱の間の辺変数を 1 に置いたことがその原因であることを本文の注意として明記する。有限の箱の比較にとどめる。**2026-08-16 に「内箱と外箱の間の辺変数を 1 に置かない測定量への選び直し」から割り出した** | done（注意書き。数学的主張ではないので SageMath / Lean の対象が無い） |
 | 内箱と外箱の間の辺変数を 1 に置かない測定量の定義 | どの辺の変数も 1 に置かず、変数集合を $A_{L,L'}$ とその補集合に分けて書いた多変数分配多項式 $\widetilde R_{L,L'}=\mathcal Z_L$ を定義した（代入は恒等写像なので環準同型）。有限の箱の比較にとどめる | done（定義のみ。数学的主張を含まないので SageMath / Lean の対象が無い） |
 | 辺変数を 1 に置かない境界応答多項式の外箱依存性 | 外箱を広げて増えた辺の変数だけを 1 に置く代入 $\pi_{L'',L}$ で $\pi_{L'',L}(\widetilde R_{L'',L'})=2^{\#V_{L''}-\#V_L}\widetilde R_{L,L'}$（配位の有限和の分割 1 論法）。**2026-08-16 に記述、SageMath 検証**（`claim_full_boundary_response_outer_edges_to_one`、`sagemath/check/full-boundary-response-outer-edges-to-one/`）、**Lean 具体版**（`fullBoundaryResponse_outer_edges_to_one`）、**Lean 必要十分版と導出**（`NecSuf.fullBoundaryResponse_outer_edges_to_one`、`fullBoundaryResponse_outer_edges_to_one_fromNecSuf`） | done |
-| 辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較 | 四つの箱 $V_{L'}\subset V_{L_0}\subset V_{L_1},V_{L_2}$（$V_{L_1}$ と $V_{L_2}$ の包含関係は仮定しない）で、増えた辺の変数を 1 に置く代入を経由して $2^{\#V_{L_2}}\,\pi_{L_1,L_0}(\widetilde R_{L_1,L'})=2^{\#V_{L_1}}\,\pi_{L_2,L_0}(\widetilde R_{L_2,L'})$ が成り立つことを、上の主張を 2 回適用する 1 論法で示す（辺変数を 1 に置く版の外箱非依存性の対応物。近傍の条件は要らない）。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の安定性・非依存性」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_common_outer_box_comparison`）、**SageMath 検証**（`sagemath/check/full-boundary-response-common-outer-box-comparison/`） | 記述と SageMath まで |
+| 辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較 | 四つの箱 $V_{L'}\subset V_{L_0}\subset V_{L_1},V_{L_2}$（$V_{L_1}$ と $V_{L_2}$ の包含関係は仮定しない）で、増えた辺の変数を 1 に置く代入を経由して $2^{\#V_{L_2}}\,\pi_{L_1,L_0}(\widetilde R_{L_1,L'})=2^{\#V_{L_1}}\,\pi_{L_2,L_0}(\widetilde R_{L_2,L'})$ が成り立つことを、上の主張を 2 回適用する 1 論法で示す（辺変数を 1 に置く版の外箱非依存性の対応物。近傍の条件は要らない）。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の安定性・非依存性」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_common_outer_box_comparison`）、**SageMath 検証**（`sagemath/check/full-boundary-response-common-outer-box-comparison/`）、**Lean 具体版**（`fullBoundaryResponse_common_outer_box_comparison`） | Lean 具体版まで |
 | 辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する | $V_{L'}\subset V_L\subset V_{L''}$ と $e\in E_{L''}\setminus E_L$ に対し、$\widetilde R_{L'',L'}$ の $X_e$ についての次数がちょうど 1 であること（$e$ の一端だけを反転した配位が $e$ を破ること、および係数が非負の数え上げであること）を示す。ゆえに $\pi_{L'',L}$ は $\widetilde R_{L'',L'}$ の情報を実際に落としており、辺変数を 1 に置く版で起きた「外側の点の数え上げしか残らない」潰れは起きない。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の安定性・非依存性」から割り出した** | todo |
 
 ### 従属標的（本体にしない。降格済み。**本文からは退避済み**）
@@ -795,6 +800,7 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
   これで「箱の定義から整数の算術を落とせるか」の四層が揃い、完了した。
 
 ## レビュー記録（新しい 5 件まで）
+- 2026-08-16: 前 tick の SageMath 検証を Lean の `lake build`・sorry 検査の再実行でレビュー（締切のため最小）。不一致なし。
 - 2026-08-16: 前 tick の「共通の外箱を経由した比較」の記述を禁止記号・無限体積語の走査と `npm run check`（76 ブロック・相互参照 83 件）の再実行でレビュー。不一致なし。
 - 2026-08-16: 前 tick の SageMath 検証・記述を Lean の `lake build`・sorry 検査の再実行でレビュー（締切のため最小）。不一致なし。
 - 2026-08-16: 前 tick の注意書きを `npm run check`（73 ブロック・相互参照 70 件）の再実行でレビュー。不一致なし。
