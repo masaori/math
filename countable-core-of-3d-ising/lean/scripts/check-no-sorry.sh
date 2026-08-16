@@ -248,6 +248,7 @@ targets=(
   Ising3DCut.LimitQuantity.eval_strictMono_of_nonneg_coeff
   Ising3DCut.LimitQuantity.eval_ne_eval_inv_of_nonneg_coeff
   Ising3DCut.LimitQuantity.symmetrized_padicValRat_eval_reciprocal_invariant
+  Ising3DCut.LimitQuantity.reflect_eq_of_coeff_palindrome
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
