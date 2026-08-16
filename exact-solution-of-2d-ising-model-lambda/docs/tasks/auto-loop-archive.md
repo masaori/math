@@ -3,6 +3,28 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 358 で台帳から移した記録（tick 353 分）
+
+### 現在地
+
+- **2026-08-17 の tick 353 は、台帳の先頭行「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」を論法の数で二行へ割り、その最初「差の一様な評価に現れる量は核の基準辺分の一倍である」——核 $\Gamma(q):=\bigl(2\iota(\ell_2)+4\iota(\log(1+q))\bigr)+\bigl(-(4\iota(\log q))\bigr)+2\cdot\bigl(\iota(\ell_2)+2\iota(\log(1+q))\bigr)\in\Lambda_{\mathbb Q}$ の定義と、$a\ge1$、$q>0$ で $\frac1a\cdot\Gamma(q)=R_a$（差の上からの評価の右辺・下からの評価の左辺の逆元の中身）——を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `def_open_square_density_difference_bound_core` と `claim_open_square_density_difference_bound_is_core_over_base_side`（`claim_open_square_large_sides_density_difference_lower_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は準備 4 つ（$r\cdot(-\lambda)=-(r\cdot\lambda)$ を `def_rational_log_order_group` の等号の判定どおり素数ごとに五段（有理数倍の定義・逆元の定義・$\mathbb Q$ の四則 $r(-u)=-(ru)$・有理数倍の定義・逆元の定義）／$\frac1a X=\frac2a\iota(\ell_2)+\frac4a\iota(\log(1+q))$（分配則・結合則を右から左へ二箇所同時・$\mathbb Q$ の四則）／$\frac1a(-Y)=-(\frac4a\iota(\log q))$（第一・結合則・$\mathbb Q$ の四則）／$\frac1a(2C)=\frac2aC$（結合則・$\mathbb Q$ の四則））と、本体（分配則二段で三つの項へ配り、第二・第三・第四で読み替える）。順序は使わない。$q\le1$ も要しないので主張は $q>0$ で述べた。
+  SageMath `check/open-square-density-difference-bound-is-core-over-base-side/`（分配関数不要。$a\in\{1,2,3,5\}$ × 8 点（$q>1$ も含む）、692 検査、10 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityDifferenceBoundCore.lean`（`openSquareDensityDifferenceBoundCore`、`ratSmul_neg_eq_neg_ratSmul`（`ext p` の五段 calc）、`one_div_smul_openSquareDensityDifferenceBoundCore`（`set` で略記、`smul_add`・`← mul_smul`・`ring`）），
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityDifferenceBoundCore.lean`（`one_div_smul_core_eq_scaled_terms_necSuf`。`[Add X] [Neg X] [SMul ℚ X]` と分配則・結合則・逆元との入れ替えの三つを仮定として受けるだけ。群の公理も順序も要らない。係数は $\mathbb Q$ のまま）、導出版。sorry 検査 1317 件。
+  割り方: 「核の定義と $\frac1a$ 倍の等式」→「核は非負である」（符号 $0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$、$\iota(\log q)\le0$ から）。$\pm\frac1a\Gamma(q)$ の形の上端・下端は上下の評価にこの等式を代入するだけなので独立の主張にはせず、Cauchy 性の証明の中で読み替える（「何も言っていない主張」を増やさない）。前 tick のレビューでは修正なし。次は「核は非負である」。
+
+（これより古い 309 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+
+### 前進の記録
+
+- 2026-08-17（tick 353）: 台帳の先頭行「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」は、核 $\Gamma(q)$ の $\frac1a$ 倍が評価の右辺に等しいこと（有理数倍の分配則・結合則）と、核が非負であること（符号と加法単調性）の二つの論法を含むので二行へ割った。$\pm\frac1a\Gamma(q)$ の形の上端・下端そのものは代入だけなので行にせず、Cauchy 性の中で読み替える。その最初「差の一様な評価に現れる量は核の基準辺分の一倍である」を実行し、`def_open_square_density_difference_bound_core` と `claim_open_square_density_difference_bound_is_core_over_base_side` を `claim_open_square_large_sides_density_difference_lower_le_one` の直後に置いた。
+  証明は $r\cdot(-\lambda)=-(r\cdot\lambda)$ を素数ごとに読み、分配則・結合則・$\mathbb Q$ の四則で三つの項を $\frac1a$ 倍するだけ。SageMath `open-square-density-difference-bound-is-core-over-base-side`、Lean 具体版・必要十分版（`Add`・`Neg`・`SMul ℚ`、分配則・結合則・逆元との入れ替えを仮定として受けるだけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1317 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 353）: 前 tick の「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」の本文（入れ替えた上端・準備六段・本体二段）・SageMath overview（199 検査）・Lean 具体版（`hswap`・`neg_add_neg_eq_add_neg_swap`・`rationalLogOrderLE_neg_le_neg`・`rwa` が本文の入れ替えた上端・準備・本体に 1 対 1）・必要十分版（`Add`・`Neg`、逆元の順序反転・準備の等式）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 差の下端は Cauchy 性が上端と対で引く評価なので残す。今 tick で置いた $\frac1a\cdot\Gamma(q)=R_a$ は有理数倍の分配則だけの等式だが、核に名前を与えて Archimedes 性で $a$ を選ぶ土台になり、Cauchy 性が上端・下端の両方で引くので残す（同じ理由で $\pm\frac1a\Gamma(q)$ の形の上端・下端は独立の主張にしなかった）。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 357 で台帳から移した記録（tick 352 分）
 
 ### 現在地
