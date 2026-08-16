@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 362 は、前 tick の「実現写像は有理数倍と可換」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」を二行へ割り（整数冪の実対数／台の大きさの帰納法）、その最初「整数冪の実対数は整数倍である（実数体への脱出: 実対数）」を四層で閉じた。
+`claim_real_logarithm_int_power`（`claim_rational_log_order_group_realization_smul` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape`「実対数（乗法を加法へ移すことと $\mathbb R$ の加法群の移項だけ）」）: $u\in\mathbb R_{>0}$、$k\in\mathbb Z$ で $\log_{\mathbb R}(u^k)=\iota_{\mathbb Q\to\mathbb R}(k)\cdot\log_{\mathbb R}(u)$。証明は準備 $\log_{\mathbb R}(1)=0$、自然数冪の帰納法、逆数 $\log_{\mathbb R}(v^{-1})=-\log_{\mathbb R}(v)$、$k<0$ の六段。狭義単調性は使わない。
+SageMath `check/real-logarithm-int-power/`（$\ell_p$ を記号のまま持ち、正の有理数 $u=\prod p^{e_p}\mapsto\sum e_p\ell_p$ を「乗法を加法へ移す写像」の模型として各段を検査。1246 検査、3 秒。**実対数の性質のうち「乗法を加法へ」だけを使う等式はこの模型で厳密に検算できる**。実数体そのものの上の等式は Lean が担う）。
+Lean 具体版 `ThermodynamicLimit/RealLogarithmIntPower.lean`（`realLog_val_mul`（`realLog ⟨t,h⟩ = Real.log t` は定義そのもの）・`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`。`realLog_mul` だけを使い、`Real.log_pow`・`Real.log_zpow`・`Real.log_inv`・`Real.log_one` は使わない）、必要十分版 `NecSuf/ThermodynamicLimit/RealLogarithmIntPower.lean`（`map_one_necSuf`・`map_pow_necSuf`・`map_inv_necSuf`・`map_zpow_necSuf`。`[Group G] [AddGroup A]`、写像が乗法を加法へ移すことだけ。`MonoidHom.map_zpow` は使わない）、導出版 `RealLogarithmIntPowerFromNecSuf.lean`（$G:=\{t:\mathbb R\mid 0<t\}$ に mathlib の `Positive` の群構造（`Mathlib.Algebra.Order.Positive.Field`）。`PositiveReal` は `def` だがこの型そのもので defeq。`Positive.coe_zpow` は `rfl`、`zsmul_eq_mul`・`Rat.cast_intCast`）。sorry 検査 1355 件。
+次は「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」（$\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。一続きの鎖: 定義（$\iota_{\Lambda\to\Lambda_{\mathbb Q}}$ の台は $\lambda$ の台）→ 各項を `claim_real_logarithm_int_power` で $\log_{\mathbb R}(\iota(p)^{\lambda(p)})$ に → 有限積の実対数は和（乗法を加法へ移すことの、台の大きさの帰納法。準備として置く）→ $\iota$ が積と整数冪を保つ → `def_rational_of_log`。Lean は `Finset.prod` に渡る `realLog_mul` の帰納法（`Finset.induction_on`。`Real.log_prod` は使わない）と `Rat.cast_prod`・`Rat.cast_zpow`。SageMath は模型で各段）。
+
+（tick 361 の記録）
 2026-08-17 の tick 361 は、前 tick の二定義（実数体と実対数／実現写像）の本文と Lean を突き合わせて一致を確認し（修正 1 件: `def_rational_log_order_group_realization` 末尾の「加法・有理数倍・順序をどう保つかは続く主張で示す」の「加法」は示す予定が無いので「有理数倍と順序」に直した）、
 台帳の先頭行「実現写像は有理数倍と可換（実数体への脱出: 実対数）」を四層で閉じた。
 `claim_rational_log_order_group_realization_smul`（`def_rational_log_order_group_realization` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape`「実対数（$\rho_{\mathbb R}$ の値どうしの等式。$\mathbb R$ の結合則と分配則）」）: $r\in\mathbb Q$、$\mu\in\Lambda_{\mathbb Q}$ で $\rho_{\mathbb R}(r\cdot\mu)=\iota_{\mathbb Q\to\mathbb R}(r)\cdot\rho_{\mathbb R}(\mu)$。証明は準備一つ（$\operatorname{supp}(r\mu)\subset\operatorname{supp}\mu$）と一続き六段（定義／台を含む有限集合に渡る和は同じ値／有理数倍の定義／$\iota$ の乗法保存／$\mathbb R$ の結合則／分配則を有限和へ／定義）。実対数の性質は使わない。

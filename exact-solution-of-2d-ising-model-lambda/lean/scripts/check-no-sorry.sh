@@ -1405,6 +1405,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.realizeRational_smul
   Ising2DLambda.NecSuf.ThermodynamicLimit.realizeWith_smul_necSuf
   Ising2DLambda.ThermodynamicLimit.realizeRational_smul_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLog_one
+  Ising2DLambda.ThermodynamicLimit.realLog_pow
+  Ising2DLambda.ThermodynamicLimit.realLog_inv
+  Ising2DLambda.ThermodynamicLimit.realLog_zpow
+  Ising2DLambda.NecSuf.ThermodynamicLimit.map_zpow_necSuf
+  Ising2DLambda.ThermodynamicLimit.realLog_zpow_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

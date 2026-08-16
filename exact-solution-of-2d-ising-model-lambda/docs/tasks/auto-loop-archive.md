@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 362 で台帳から移した記録（tick 357 分）
+
+### 現在地
+
+- **2026-08-17 の tick 357 は、台帳の先頭行「切断による実数体への一度きりの脱出」を論法の数で五行へ割り、その最初「列が定める下組（$\Lambda_{\mathbb Q}$ の中）と下に閉じていること」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `def_rational_log_order_group_sequence_lower_set`（$\Lambda_{\mathbb Q}$ の列 $(\lambda_L)_{L\ge1}$ が定める下組 $A:=\{\mu\in\Lambda_{\mathbb Q}\mid\exists\varepsilon\,(0\le\varepsilon,\ \varepsilon\ne0)\ \exists N\ge1\ \forall L\ge N:\ \mu+\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L\}$。可算集合の部分集合。極限も完備性も実対数も参照しない）と `claim_rational_log_order_group_sequence_lower_set_downward_closed`（$\mu\in A$、$\mu'\le\mu\Rightarrow\mu'\in A$。いずれも `claim_open_square_density_sequence_cauchy_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は $\mu$ の証人 $\varepsilon,N$ をそのまま引き継ぎ、$\mu'+\varepsilon\le\mu+\varepsilon$（`claim_rational_log_order_group_add_monotone`）$\le\lambda_L$（証人の性質）、推移律の二段だけ。
+  あわせて `remark_real_escape_plan` の脱出の項を「$\mathbb Q$ 上の切断」から「$\Lambda_{\mathbb Q}$ の下組とその補集合の組（$\Lambda_{\mathbb Q}$ の切断）を素数の実対数で実現し、下組の実現像の上限として実数を取る」に書き直した（$\Lambda_{\mathbb Q}\not\subset\mathbb Q$ なので $\mathbb Q$ の切断は直接には作れない。脱出の位置は変わらない。理由は「実対数」と「完備性（上限の存在）」の二つになる）。
+  SageMath `check/rational-log-order-group-sequence-lower-set/`（列 $\iota(\ell_2)+\frac1L\iota(\ell_3)$、所属する例・しない例、$\mu'\le\mu$ の 77 件で二段と所属、$L\le40$。4 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupSequenceLowerSet.lean`（`rationalLogOrderSequenceLowerSet`・`mem_…_iff`・`mem_…_of_le`），必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupSequenceLowerSet.lean`（`lowerSetOfSequence`・`mem_lowerSetOfSequence_of_le_necSuf`。`[Add X] [Zero X]` と推移律・右加法単調性だけ。`Zero` は $0\le\varepsilon$ を述べる名前としてだけ要る）、導出版（下組の一致は `rfl`）。sorry 検査 1333 件。
+  割り方: 「下組と下に閉じていること」→「開境界正方形の密度の下組は空でない」→「開境界正方形の密度の下組の元は密度の上からの評価以下」→「有理係数の対数順序群の実現写像は順序を保つ（脱出: 実対数）」→「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（脱出: 完備性）」。前 tick のレビューでは修正なし。次は「開境界正方形の密度の下組は空でない」。
+
+### 前進の記録
+
+- 2026-08-17（tick 357）: 台帳の先頭行「切断による実数体への一度きりの脱出」は、下組の定義とその下閉性（$\Lambda_{\mathbb Q}$ の中）、下組が空でないこと、下組が上に有界なこと、実現写像の順序保存（実対数）、上限として実数を取ること（完備性）の五つの論法を含むので五行へ割った。その最初「列が定める下組と下に閉じていること」を実行し、`def_rational_log_order_group_sequence_lower_set` と `claim_rational_log_order_group_sequence_lower_set_downward_closed` を `claim_open_square_density_sequence_cauchy_le_one` の直後に置いた。
+  証明は証人 $\varepsilon,N$ を引き継ぎ、加法単調性と推移律の二段だけ。SageMath `rational-log-order-group-sequence-lower-set`、Lean 具体版・必要十分版（`Add`・`Zero`、推移律・右加法単調性だけ）・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1333 件）。`remark_real_escape_plan` の脱出の項を $\Lambda_{\mathbb Q}$ の切断の言葉に書き直した。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 357）: 前 tick の「開境界正方形の密度の列は Cauchy 列である」の本文（準備三つ・上端三段・下端三段）・SageMath overview（105 検査）・Lean 具体版（`hcore0`・`hn`・`a`・`hdiv`・`hcore`・`hup`・`hlow`・`rationalLogOrderLE_neg_le_neg`・`rationalLogOrderLE_trans` が本文の準備と上端・下端に 1 対 1）・必要十分版（`Zero`・`Neg`・`SMul ℚ`、推移律・逆元の順序反転と核の等式・差の上下の評価・Archimedes 性・割る評価）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: Cauchy 性は $\varepsilon$ から $N$ を与える存在の構成そのもので残す。今 tick の下組の定義は切断の下側に名前を与えるもの、下閉性は下組が切断の下組であること（値の属する側）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 361 で台帳から移した記録（tick 356 分）
 
 ### 現在地

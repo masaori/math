@@ -45872,6 +45872,191 @@ Y
     ],
   },
   {
+    id: "thermodynamic_limit_claim_real_logarithm_int_power",
+    kind: "claim",
+    title: { text: "整数冪の実対数は整数倍である（実数体への脱出: 実対数）" },
+    labels: ["claim_real_logarithm_int_power"],
+    habitat: "R",
+    realEscape:
+      "実対数。log_ℝ の値（実数）どうしの等式であり、証明は log_ℝ が乗法を加法へ移すことと ℝ の加法群の移項だけを使う。狭義単調性・級数・微分・完備性は使わない。",
+    verification: ["sagemath/check/real-logarithm-int-power"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.realLog_one",
+      "Ising2DLambda.ThermodynamicLimit.realLog_pow",
+      "Ising2DLambda.ThermodynamicLimit.realLog_inv",
+      "Ising2DLambda.ThermodynamicLimit.realLog_zpow",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.map_zpow_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.realLog_zpow_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`u\in\mathbb{R}_{>0}`),
+        "（",
+        ref("def_real_logarithm"),
+        "）と ",
+        math(String.raw`k\in\mathbb{Z}`),
+        " について、",
+        math(String.raw`\mathbb{R}`),
+        " の整数冪 ",
+        math(String.raw`u^{k}\in\mathbb{R}_{>0}`),
+        "（",
+        math(String.raw`u^{0}:=1`),
+        "、",
+        math(String.raw`u^{n+1}:=u^{n}\cdot u`),
+        "、",
+        math(String.raw`u^{-(n+1)}:=(u^{n+1})^{-1}`),
+        "。",
+        math(String.raw`n\in\mathbb{N}`),
+        "。正の実数の積と逆数は正）について",
+      ]),
+      displayMath(String.raw`\log_{\mathbb{R}}\bigl(u^{k}\bigr)=\iota_{\mathbb{Q}\to\mathbb{R}}(k)\cdot\log_{\mathbb{R}}(u)`),
+      paragraph([
+        "が成り立つ。ここで整数 ",
+        math(String.raw`k`),
+        " は分母 ",
+        math(String.raw`1`),
+        " の有理数として ",
+        math(String.raw`\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " に渡し、右辺の積は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法である。この主張は、次に ",
+        math(String.raw`\Lambda`),
+        " の元の実現 ",
+        math(String.raw`\rho_{\mathbb{R}}(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda))`),
+        " を ",
+        math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)`),
+        "（",
+        ref("def_rational_of_log"),
+        "）の実対数として書くとき、素数冪 ",
+        math(String.raw`p^{\lambda(p)}`),
+        " の実対数を係数 ",
+        math(String.raw`\lambda(p)`),
+        " の側へ移すために使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " と略記する。実対数について使うのは ",
+        ref("def_real_logarithm"),
+        " の「乗法を加法へ移す」だけである。まず ",
+        math(String.raw`\log_{\mathbb{R}}(1)=0`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}(1)
+&=\log_{\mathbb{R}}(1\cdot1)
+&&(\because\ 1\cdot1=1\text{。}\mathbb{R}\text{ の乗法の単位元})\\
+&=\log_{\mathbb{R}}(1)+\log_{\mathbb{R}}(1)
+&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})
+\end{aligned}`),
+      paragraph([
+        "両辺から ",
+        math(String.raw`\log_{\mathbb{R}}(1)`),
+        " を引いて（",
+        math(String.raw`\mathbb{R}`),
+        " の加法群の移項）",
+        math(String.raw`0=\log_{\mathbb{R}}(1)`),
+        " を得る。次に ",
+        math(String.raw`n\in\mathbb{N}`),
+        " について ",
+        math(String.raw`\log_{\mathbb{R}}(u^{n})=\iota(n)\cdot\log_{\mathbb{R}}(u)`),
+        " を ",
+        math(String.raw`n`),
+        " の帰納法で示す。",
+        math(String.raw`n=0`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}(u^{0})
+&=\log_{\mathbb{R}}(1)
+&&(\because\ u^{0}=1)\\
+&=0
+&&(\because\ \text{上で示した }\log_{\mathbb{R}}(1)=0)\\
+&=\iota(0)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \iota(0)=0\text{、}0\cdot t=0\text{。}\mathbb{R}\text{ の乗法})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\log_{\mathbb{R}}(u^{n})=\iota(n)\cdot\log_{\mathbb{R}}(u)`),
+        " を帰納法の仮定とすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}(u^{n+1})
+&=\log_{\mathbb{R}}(u^{n}\cdot u)
+&&(\because\ u^{n+1}=u^{n}\cdot u)\\
+&=\log_{\mathbb{R}}(u^{n})+\log_{\mathbb{R}}(u)
+&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})\\
+&=\iota(n)\cdot\log_{\mathbb{R}}(u)+\log_{\mathbb{R}}(u)
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(\iota(n)+1\bigr)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \mathbb{R}\text{ の分配則と }1\cdot t=t)\\
+&=\iota(n+1)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \iota\text{ は加法を保ち }\iota(1)=1\text{。}\blkref{def_real_logarithm})
+\end{aligned}`),
+      paragraph([
+        "となる。次に任意の ",
+        math(String.raw`v\in\mathbb{R}_{>0}`),
+        " について ",
+        math(String.raw`\log_{\mathbb{R}}(v^{-1})=-\log_{\mathbb{R}}(v)`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\log_{\mathbb{R}}(1)
+&&(\because\ \text{上で示した }\log_{\mathbb{R}}(1)=0)\\
+&=\log_{\mathbb{R}}(v\cdot v^{-1})
+&&(\because\ v\cdot v^{-1}=1\text{。}\mathbb{R}\text{ の逆元})\\
+&=\log_{\mathbb{R}}(v)+\log_{\mathbb{R}}(v^{-1})
+&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})
+\end{aligned}`),
+      paragraph([
+        "両辺から ",
+        math(String.raw`\log_{\mathbb{R}}(v)`),
+        " を引いて（",
+        math(String.raw`\mathbb{R}`),
+        " の加法群の移項）",
+        math(String.raw`-\log_{\mathbb{R}}(v)=\log_{\mathbb{R}}(v^{-1})`),
+        " を得る。最後に主張を ",
+        math(String.raw`k`),
+        " の符号で分ける。",
+        math(String.raw`k=n\ge0`),
+        " なら ",
+        math(String.raw`u^{k}=u^{n}`),
+        " で、上の帰納法そのものである。",
+        math(String.raw`k=-(n+1)<0`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\mathbb{R}}(u^{k})
+&=\log_{\mathbb{R}}\bigl((u^{n+1})^{-1}\bigr)
+&&(\because\ k=-(n+1)\text{ と整数冪の定義})\\
+&=-\log_{\mathbb{R}}(u^{n+1})
+&&(\because\ \text{上で示した }\log_{\mathbb{R}}(v^{-1})=-\log_{\mathbb{R}}(v)\text{ を }v:=u^{n+1}\text{ で})\\
+&=-\bigl(\iota(n+1)\cdot\log_{\mathbb{R}}(u)\bigr)
+&&(\because\ \text{上の帰納法を }n+1\text{ で})\\
+&=\bigl(-\iota(n+1)\bigr)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \mathbb{R}\text{ の }-(st)=(-s)t)\\
+&=\iota\bigl(-(n+1)\bigr)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \iota\text{ は加法を保つので }\iota(-r)=-\iota(r)\text{。}\blkref{def_real_logarithm})\\
+&=\iota(k)\cdot\log_{\mathbb{R}}(u)
+&&(\because\ k=-(n+1))
+\end{aligned}`),
+      paragraph([
+        "となる。使ったのは、",
+        math(String.raw`\log_{\mathbb{R}}`),
+        " が乗法を加法へ移すこと、",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " が乗法について群であること（単位元・逆元・整数冪の定義）、",
+        math(String.raw`\mathbb{R}`),
+        " が加法群であること（移項）、",
+        math(String.raw`\iota`),
+        " が加法を保つことだけである。狭義単調性は使わない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },
@@ -45879,12 +46064,14 @@ Y
     habitat: "Lambda",
     statement: [
       paragraph([
-        "直前の二つの定義と一つの主張（",
+        "直前の二つの定義と二つの主張（",
         ref("def_real_logarithm"),
         "、",
         ref("def_rational_log_order_group_realization"),
         "、",
         ref("claim_rational_log_order_group_realization_smul"),
+        "、",
+        ref("claim_real_logarithm_int_power"),
         "）を除き、ここまでの本文はすべて可算な対象（",
         math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\Lambda_{\mathbb{Q}}`),
         "、",
@@ -45945,6 +46132,8 @@ Y
           ref("def_rational_log_order_group_realization"),
           " で定めた。有理数倍と可換であることは ",
           ref("claim_rational_log_order_group_realization_smul"),
+          " で、整数冪の実対数が整数倍であることは ",
+          ref("claim_real_logarithm_int_power"),
           " で示した。順序を保つことはこれから示す）、下組の実現像の上限（完備性）として実数 ",
           math(String.raw`f(q)`),
           " を一つ取る。引くのは「有界な実数集合は上限を持つ」ことと実対数の単調性だけで、それ以外の理由で実数体を呼ばない。",
