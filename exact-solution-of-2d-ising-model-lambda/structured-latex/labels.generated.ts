@@ -201,6 +201,7 @@ export const ALL_LABELS = [
   "claim_quadratic_zero_mem",
   "claim_quadratic_zero_representation",
   "claim_rational_bernoulli_inequality",
+  "claim_rational_embedded_log_order_iff",
   "claim_rational_embedding_commutes_with_integer_multiple",
   "claim_rational_exponent_well_defined",
   "claim_rational_log_injective",

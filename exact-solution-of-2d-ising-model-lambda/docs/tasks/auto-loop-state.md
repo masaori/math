@@ -7,6 +7,13 @@
 
 ## 現在地
 
+- **2026-08-16 の tick 343 は、台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を一つずつ主張にする代わりに、それらを一度に読める一行「埋め込んだ対数の順序は正の有理数の順序と一致する」（$q,q'\in\mathbb Q_{>0}$ について $q\le q'\iff\iota(\log q)\le_{\Lambda_{\mathbb Q}}\iota(\log q')$）として本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_embedded_log_order_iff`（`claim_rational_log_order_group_scalar_compare_nonpos` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は同値の四段の鎖 $q\le q'\iff\log q\le_\Lambda\log q'$（`claim_rational_log_order_iff`）$\iff\frac1{1^2}\cdot\iota(\log q)\le\frac1{1^2}\cdot\iota(\log q')$（`claim_scaled_embedding_order_transfer` の $L:=1$）$\iff1\cdot\iota(\log q)\le1\cdot\iota(\log q')\iff\iota(\log q)\le\iota(\log q')$。
+  三つの符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$）は $q':=1$、$q:=1,q':=2$、$q:=1,q':=1+q$ の読み方として statement に書き、誤差評価の準備で $\iota(\log1)=\iota(0)=0$・$\log2=\ell_2$ と合わせて一行ずつ引く（符号を別ブロックにすると「主張を一度読む」だけの中身の無いブロックになる）。
+  SageMath `check/rational-embedded-log-order-iff/`（正の有理数 30 点の全組 900、同値 900 件・鎖 900 件・符号の読み方 42 件、12 秒）。Lean 具体版 `ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`rationalLogOrderLE_toRational_logRat_iff`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`iff_comp_of_iff_of_scaled_iff_necSuf`。関係を移し合う写像 $f$ と、係数 $s$ を掛けた形で関係を移し合う写像 $e$、$s=1$ と `one_smul` だけ）、導出版。sorry 検査 1277 件。
+  次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（台帳の備考に手順）。
+
 - **2026-08-16 の tick 342 は、台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」（$r\le s$（$\mathbb Q$）、$\nu\le_{\Lambda_{\mathbb Q}}0$ なら $s\cdot\nu\le_{\Lambda_{\mathbb Q}}r\cdot\nu$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
   `claim_rational_log_order_group_scalar_compare_nonpos`（`claim_rational_log_order_group_scalar_compare_nonneg` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は非負の元の版と同じ道具で、$c:=s-r\ge0$ を置き、非負有理数倍の順序保存を $\lambda:=\nu$、$\mu:=0$ で読んで $c\cdot\nu\le c\cdot0=0$、加法単調性で $r\cdot\nu$ を足し、
   四段の鎖 $s\cdot\nu=(c+r)\cdot\nu=c\cdot\nu+r\cdot\nu\le0+r\cdot\nu=r\cdot\nu$。
@@ -34,15 +41,7 @@
   割った四行は「非負有理数倍は順序を保つ」→「係数の大小による有理数倍の比較」→「埋め込んだ対数の符号」→「誤差評価本体（$ka<L\le ka+a$）」。$L=ka$ の場合は誤差評価に含めず、Cauchy 性の側でブロック敷き詰め密度を直接使う（備考に書いた）。締切（20:10）が近かったため最小の一行だけを閉じた。
   次は「非負有理数倍は有理係数の対数順序群の順序を保つ」。
 
-- **2026-08-16 の tick 338 は、台帳の先頭行「有理係数の対数順序群の Archimedes 性」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `claim_rational_log_order_group_archimedean`（`claim_rational_bernoulli_inequality` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、$0\le_{\Lambda_{\mathbb Q}}\mu$、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\varepsilon\ne0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$ が存在する。
-  準備 4 つ（$N:=N_\mu N_\varepsilon$ が $0$・$n\cdot\varepsilon$ の共通分母でもあること（五段の鎖 2 本）・証人の値 $1\le\operatorname{rat}_\Lambda(\mu_N),\operatorname{rat}_\Lambda(\varepsilon_N)$・$\varepsilon_N\ne0$（九段の鎖で矛盾）と反対称性から $1<\operatorname{rat}_\Lambda(\varepsilon_N)$・$n:=\operatorname{num}((A-1)/h)$ と $A-1\le nh$ の四段）と、
-  本体の五段の鎖 $\operatorname{rat}_\Lambda(\mu_N)=A=1+(A-1)\le1+nh\le(1+h)^n=\operatorname{rat}_\Lambda(\varepsilon_N)^n=\operatorname{rat}_\Lambda(n\varepsilon_N)$。$n$ は有限回の整数の演算で明示。
-  SageMath `check/rational-log-order-group-archimedean/`（$\mu$ 7 点 × $\varepsilon$ 6 点、42 組。$n=\operatorname{num}((A-1)/h)$ は $A$ が指数関数的に大きいため巨大になりやすく、最初の標本では $(1+h)^n$ が桁あふれした。標本を小さくし、$n>20000$ の組は冪の検査を外して記録する仕組みにした——今回は該当 0、$n$ の最大 5831）。
-  Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupArchimedean.lean`（`rationalLogOrderLE_natSmul_of_pos` ほか 8 本）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupArchimedean.lean`（`archimedean_of_bernoulli_necSuf`。順序体＋「非負元は自然数で追い越せる」仮定から $1\le A$、$1<B$ に対し $A\le B^n$。仮定が削れない理由をコメントに書いた）、導出版 `RationalLogOrderGroupArchimedeanFromNecSuf.lean`。sorry 検査 1258 件。
-  次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（備考に手順を書いてある）。
-
-（これより古い 295 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 296 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## セクション台帳
 
@@ -56,15 +55,14 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 62 セクション
+- 熱力学極限: 63 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 埋め込んだ対数の符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$） | todo | `claim_rational_log_order_preserves_and_reflects`（$\log q\le_\Lambda\log1=0$、$0=\log1\le_\Lambda\log(1+q)$、$0\le_\Lambda\ell_2=\log2$）を `claim_scaled_embedding_order_transfer` の $L:=1$ で $\Lambda_{\mathbb Q}$ へ移す。既にどこかで示していれば書かない（着手時に確認） |
-| 熱力学極限 | 倍数辺の部分正方形による密度の挟み込みの誤差評価 | todo | $k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\frac2L\iota(\log q)+\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}\le\Psi^{\mathrm{op}}_L\le\frac{2a}L\iota(\ell_2)+\frac{4a}L\iota(\log(1+q))+\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}$。`claim_open_square_subsquare_comparison_density_le_one` を $a:=ka$ で読み（$ka<L$ が要る。$L=ka$ は Cauchy 性の側で `claim_open_square_block_tiling_density` を直接使う）、係数を `claim_square_difference_from_multiple_side_bound`（$\frac{L^2-(ka)^2}{L^2}\le\frac{2a}L$）と $ka+L\le2L$（$\frac{ka+L}{L^2}\le\frac2L$）で大きくする（上の三行を引く） |
+| 熱力学極限 | 倍数辺の部分正方形による密度の挟み込みの誤差評価 | todo | $k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で $\frac2L\iota(\log q)+\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}\le\Psi^{\mathrm{op}}_L\le\frac{2a}L\iota(\ell_2)+\frac{4a}L\iota(\log(1+q))+\frac{(ka)^2}{L^2}\Psi^{\mathrm{op}}_{ka}$。`claim_open_square_subsquare_comparison_density_le_one` を $a:=ka$ で読み（$ka<L$ が要る。$L=ka$ は Cauchy 性の側で `claim_open_square_block_tiling_density` を直接使う）、係数を `claim_square_difference_from_multiple_side_bound`（$\frac{L^2-(ka)^2}{L^2}\le\frac{2a}L$）と $ka+L\le2L$（$\frac{ka+L}{L^2}\le\frac2L$）で大きくする（非負有理数倍の順序保存・係数の大小による比較（非負・非正）・埋め込んだ対数の順序の各行を引く。符号は `claim_rational_embedded_log_order_iff` を $q':=1$、$q:=1,q':=2$、$q:=1,q':=1+q$ で読み、$\iota(\log1)=\iota(0)=0$・$\log2=\ell_2$ を添える） |
 | 熱力学極限 | 密度の列の Cauchy 性（$0<q\le1$） | todo | $\bigl(\Psi^{\mathrm{op}}_L(q)\bigr)_L$ が `def_rational_log_order_group_cauchy_sequence` の Cauchy 列であること。$\varepsilon\mapsto N$ を明示する（Archimedes 性で $a$ と $N$ を取る）。完備性も極限論も使わない。$1\le q$ は部分正方形比較の $1\le q$ 版が無いので後回し（必要なら行を足す） |
 | 熱力学極限 | 切断による実数体への一度きりの脱出 | todo | Cauchy 列が定める $\mathbb{Q}$ 上の切断として自由エネルギー密度を取る。引くのは「切断は実数を定める」ことだけ |
 | 熱力学極限 | 削除した実数値経路の Lean の後片付け | todo | 2026-08-16 に本文から消した実数値経路（実対数・上限／下限による極限）の Lean ファイルが孤立して残っている。入口からの import と sorry 検査は通るが、対応する本文が無いので消す |
@@ -76,6 +74,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+
+- 2026-08-16（tick 343）: 台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を束ねずに済む一行「埋め込んだ対数の順序は正の有理数の順序と一致する」へ書き換えて実行した（符号を別ブロックにすると主張を一度読むだけの中身の無いブロックになるため。三つの読み方は statement に書いた）。`claim_rational_embedded_log_order_iff` を `claim_rational_log_order_group_scalar_compare_nonpos` の直後に置いた。
+  証明は同値の四段の鎖（`claim_rational_log_order_iff`・`claim_scaled_embedding_order_transfer` の $L:=1$・$\frac1{1^2}=1$・$1\cdot\lambda=\lambda$）。SageMath `rational-embedded-log-order-iff`、Lean 具体版・必要十分版（関係を移し合う写像の合成。二段目は係数 $s$ を掛けた形で受けて $s=1$ に潰す）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1277 件）。式変形統一は一時停止中のため実施せず。
 
 - 2026-08-16（tick 342）: 台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」を実行した。`claim_rational_log_order_group_scalar_compare_nonpos` を `claim_rational_log_order_group_scalar_compare_nonneg` の直後に置いた。
   証明は台帳の備考のとおり（$c:=s-r$、非負有理数倍の順序保存を $\lambda:=\nu$、$\mu:=0$ で読む・$c\cdot0=0$・加法単調性・分配則の四段の鎖）。SageMath `rational-log-order-group-scalar-compare-nonpos`、Lean 具体版・必要十分版（非負の元の版と同じ仮定）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1274 件）。式変形統一は一時停止中のため実施せず。
@@ -92,11 +93,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   （`claim_square_difference_from_multiple_side_bound`。`claim_rational_log_order_group_archimedean` の直後。$\mathbb N$ の四則だけではなく $ka\le L\le ka+a$ から乗法単調性を三度使う七段の鎖であり、後の誤差評価が引く）。
   SageMath `square-difference-from-multiple-side-bound`、Lean 具体版・必要十分版（順序可換半環。倍数の形は使わない）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1263 件）。式変形統一は一時停止中のため実施せず。
 
-- 2026-08-16（tick 338）: 台帳の先頭行「有理係数の対数順序群の Archimedes 性」を実行した。`claim_rational_log_order_group_archimedean` を `claim_rational_bernoulli_inequality` の直後に置いた。
-  共通分母は `claim_common_common_denominator_exists` の $N_\mu N_\varepsilon$、$\varepsilon_N\ne0$ から $1<\operatorname{rat}_\Lambda(\varepsilon_N)$ は `claim_log_order_group_linear_order` の反対称性と $\mathbb Q$ の全順序、$n$ は $(A-1)/h$ の既約分数の分子（`claim_common_denominator_exists` の $\operatorname{num}$ 記法）。
-  SageMath `rational-log-order-group-archimedean`、Lean 具体版・必要十分版・導出版を書き、入口 import・sorry 検査へ 10 件登録（計 1258 件）。式変形統一は一時停止中のため実施せず。
-
-（これより古い 305 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 306 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -115,6 +112,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 ## レビュー記録
 
+- 2026-08-16（tick 343）: 前 tick の「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」の本文（準備・四段の鎖）・SageMath overview（756 検査）・Lean 具体版（書き換え列が本文と 1 対 1）・必要十分版（非負の元の版と同じ二つの仮定）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価の下端が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 - 2026-08-16（tick 342）: 前 tick の「非負の元の有理数倍は係数の大小で比較できる」の本文（準備・四段の鎖）・SageMath overview（1064 検査）・Lean 具体版（`sub_nonneg`・`smul_zero`・`rationalLogOrderLE_add_right`・`zero_add`・`← add_smul`・`sub_add_cancel` が本文と 1 対 1）・必要十分版（二つの仮定だけ）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: この主張は非負有理数倍の順序保存と加法単調性を組み合わせる比較で誤差評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
@@ -127,10 +127,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 2026-08-16（tick 339）: 前 tick の「有理係数の対数順序群の Archimedes 性」の本文（準備 4 つ・本体の五段）・SageMath overview・Lean 具体版・必要十分版（hArch と体が削れない理由のコメント）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: Archimedes 性は $n$ を明示的に構成する主張で Cauchy 性が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
 
-- 2026-08-16（tick 338）: 前 tick の「有理数の Bernoulli 不等式」の本文（帰納法。$n\to n+1$ の四段）・SageMath overview・Lean 具体版（`one_add_nsmul_le_one_add_pow_rat`）・必要十分版（順序可換半環）・導出版を突き合わせ、根拠が一致した。
-  「何も言っていない主張」の観点: この主張は $n$ の帰納法で示す不等式で Archimedes 性が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
-
-（これより古い 326 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
+（これより古い 327 件は [auto-loop-archive.md](auto-loop-archive.md) へ移した。）
 
 ## 判断待ち（人間に問うべき論点）
 

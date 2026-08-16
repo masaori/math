@@ -3,6 +3,29 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16 tick 343 で台帳から移した記録（tick 338 分）
+
+### 現在地
+
+- **2026-08-16 の tick 338 は、台帳の先頭行「有理係数の対数順序群の Archimedes 性」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_archimedean`（`claim_rational_bernoulli_inequality` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、$0\le_{\Lambda_{\mathbb Q}}\mu$、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\varepsilon\ne0$ に対し $\mu\le_{\Lambda_{\mathbb Q}}n\cdot\varepsilon$ となる $n\in\mathbb N$ が存在する。
+  準備 4 つ（$N:=N_\mu N_\varepsilon$ が $0$・$n\cdot\varepsilon$ の共通分母でもあること（五段の鎖 2 本）・証人の値 $1\le\operatorname{rat}_\Lambda(\mu_N),\operatorname{rat}_\Lambda(\varepsilon_N)$・$\varepsilon_N\ne0$（九段の鎖で矛盾）と反対称性から $1<\operatorname{rat}_\Lambda(\varepsilon_N)$・$n:=\operatorname{num}((A-1)/h)$ と $A-1\le nh$ の四段）と、
+  本体の五段の鎖 $\operatorname{rat}_\Lambda(\mu_N)=A=1+(A-1)\le1+nh\le(1+h)^n=\operatorname{rat}_\Lambda(\varepsilon_N)^n=\operatorname{rat}_\Lambda(n\varepsilon_N)$。$n$ は有限回の整数の演算で明示。
+  SageMath `check/rational-log-order-group-archimedean/`（$\mu$ 7 点 × $\varepsilon$ 6 点、42 組。$n=\operatorname{num}((A-1)/h)$ は $A$ が指数関数的に大きいため巨大になりやすく、最初の標本では $(1+h)^n$ が桁あふれした。標本を小さくし、$n>20000$ の組は冪の検査を外して記録する仕組みにした——今回は該当 0、$n$ の最大 5831）。
+  Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupArchimedean.lean`（`rationalLogOrderLE_natSmul_of_pos` ほか 8 本）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupArchimedean.lean`（`archimedean_of_bernoulli_necSuf`。順序体＋「非負元は自然数で追い越せる」仮定から $1\le A$、$1<B$ に対し $A\le B^n$。仮定が削れない理由をコメントに書いた）、導出版 `RationalLogOrderGroupArchimedeanFromNecSuf.lean`。sorry 検査 1258 件。
+  次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（備考に手順を書いてある）。
+
+### 前進の記録
+
+- 2026-08-16（tick 338）: 台帳の先頭行「有理係数の対数順序群の Archimedes 性」を実行した。`claim_rational_log_order_group_archimedean` を `claim_rational_bernoulli_inequality` の直後に置いた。
+  共通分母は `claim_common_common_denominator_exists` の $N_\mu N_\varepsilon$、$\varepsilon_N\ne0$ から $1<\operatorname{rat}_\Lambda(\varepsilon_N)$ は `claim_log_order_group_linear_order` の反対称性と $\mathbb Q$ の全順序、$n$ は $(A-1)/h$ の既約分数の分子（`claim_common_denominator_exists` の $\operatorname{num}$ 記法）。
+  SageMath `rational-log-order-group-archimedean`、Lean 具体版・必要十分版・導出版を書き、入口 import・sorry 検査へ 10 件登録（計 1258 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 338）: 前 tick の「有理数の Bernoulli 不等式」の本文（帰納法。$n\to n+1$ の四段）・SageMath overview・Lean 具体版（`one_add_nsmul_le_one_add_pow_rat`）・必要十分版（順序可換半環）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は $n$ の帰納法で示す不等式で Archimedes 性が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 336）の記録
 
 ### 現在地

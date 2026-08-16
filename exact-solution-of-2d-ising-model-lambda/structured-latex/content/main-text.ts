@@ -42348,6 +42348,102 @@ s\cdot\nu
     ],
   },
   {
+    id: "thermodynamic_limit_claim_rational_embedded_log_order_iff",
+    kind: "claim",
+    title: { text: "埋め込んだ対数の順序は正の有理数の順序と一致する" },
+    labels: ["claim_rational_embedded_log_order_iff"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/rational-embedded-log-order-iff"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_toRational_logRat_iff",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.iff_comp_of_iff_of_scaled_iff_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_toRational_logRat_iff_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`q,q'\in\mathbb{Q}_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`q\le q'
+\quad\Longleftrightarrow\quad
+\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')`),
+      paragraph([
+        "が成り立つ。左辺の ",
+        math(String.raw`\le`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序、",
+        math(String.raw`\log`),
+        " は ",
+        ref("def_rational_log"),
+        " の写像、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group"),
+        " の埋め込み、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の関係である。実数体は現れない。",
+        "後の密度の挟み込みの誤差評価では、この主張を ",
+        math(String.raw`q':=1`),
+        "（",
+        math(String.raw`q\le1`),
+        " なら ",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log1)=0`),
+        "）、",
+        math(String.raw`q:=1,\ q':=2`),
+        "（",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)`),
+        "。",
+        math(String.raw`\log2=\ell_2`),
+        "）、",
+        math(String.raw`q:=1,\ q':=1+q`),
+        "（",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))`),
+        "）で読み、埋め込んだ対数の符号を得るために引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "同値の鎖で示す。二段目は ",
+        ref("claim_scaled_embedding_order_transfer"),
+        " を ",
+        math(String.raw`L:=1`),
+        "、",
+        math(String.raw`\lambda:=\log q`),
+        "、",
+        math(String.raw`\mu:=\log q'`),
+        " で読んだものである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q\le q'
+&\iff\log q\le_{\Lambda}\log q'
+&&(\because\ \blkref{claim_rational_log_order_iff})\\
+&\iff\frac{1}{1^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}\frac{1}{1^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ を }L:=1\text{ で})\\
+&\iff1\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}1\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')
+&&(\because\ \tfrac{1}{1^2}=1\text{。}\mathbb{Q}\text{ の四則})\\
+&\iff\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda\text{ を両辺へ})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、",
+        math(String.raw`\log`),
+        " が ",
+        math(String.raw`\mathbb{Q}_{>0}`),
+        " の順序と ",
+        math(String.raw`\Lambda`),
+        " の順序を移し合うこと、有理数倍と埋め込みを通した順序の移送、",
+        math(String.raw`\mathbb{Q}`),
+        " の四則、",
+        math(String.raw`1\cdot\lambda=\lambda`),
+        " だけである。比較はすべて有理数の比較に落ちる。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

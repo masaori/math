@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 343 は、前 tick の「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を束ねずに済む一行「埋め込んだ対数の順序は正の有理数の順序と一致する」へ書き換えて四層で閉じた。
+`claim_rational_embedded_log_order_iff`（`claim_rational_log_order_group_scalar_compare_nonpos` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $q,q'\in\mathbb Q_{>0}$ について $q\le q'\iff\iota(\log q)\le_{\Lambda_{\mathbb Q}}\iota(\log q')$。
+証明は同値の四段の鎖（`claim_rational_log_order_iff`・`claim_scaled_embedding_order_transfer` の $L:=1$・$\frac1{1^2}=1$・$1\cdot\lambda=\lambda$）。三つの符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$）は
+$q':=1$、$q:=1,q':=2$、$q:=1,q':=1+q$ の読み方として statement に書いた。誤差評価の準備で $\iota(\log1)=\iota(0)=0$（$\iota$ は準同型）・$\log2=\ell_2$（Lean `logRat_two`）と合わせて一行ずつ引く。
+SageMath `check/rational-embedded-log-order-iff/`（正の有理数 30 点の全組 900、同値 900 件・鎖 900 件・符号の読み方 42 件、12 秒）。
+Lean 具体版 `ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`rationalLogOrderLE_toRational_logRat_iff`。`rationalLogOrderLE_scaled_toRational_iff 1` を `Nat.cast_one, one_pow, div_one, one_smul` で潰し `logRat_le_iff` と `trans`）、
+必要十分版 `NecSuf/ThermodynamicLimit/RationalEmbeddedLogOrderIff.lean`（`iff_comp_of_iff_of_scaled_iff_necSuf`。関係を移し合う $f$、係数 $s$ を掛けた形で移し合う $e$、$s=1$、`[Monoid M] [MulAction M C]` の `one_smul` だけ）、
+導出版 `RationalEmbeddedLogOrderIffFromNecSuf.lean`（正の有理数を部分型 `{x : ℚ // 0 < x}` で受ける。`rationalLogOrderLE_scaled_toRational_iff` は `Λ_ℚ ↔ Λ` の向きなので `.symm` が要る）。sorry 検査 1277 件。
+次は「倍数辺の部分正方形による密度の挟み込みの誤差評価」（台帳の備考に手順）。
+
 2026-08-16 の tick 342 は、前 tick の「非負の元の有理数倍は係数の大小で比較できる」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」を四層で閉じた。
 `claim_rational_log_order_group_scalar_compare_nonpos`（`claim_rational_log_order_group_scalar_compare_nonneg` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $r,s\in\mathbb Q$、$r\le s$、$\nu\le_{\Lambda_{\mathbb Q}}0$ なら $s\cdot\nu\le_{\Lambda_{\mathbb Q}}r\cdot\nu$。
