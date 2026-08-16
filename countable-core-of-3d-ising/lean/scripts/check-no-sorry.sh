@@ -145,6 +145,7 @@ targets=(
   Ising3DCut.brokenMonomial_exponent_at_broken_edge
   Ising3DCut.fullBoundaryResponse_one_le_coeff_brokenMonomial
   Ising3DCut.fullBoundaryResponse_degreeOf_eq_one
+  Ising3DCut.fullBoundaryResponse_totalDegree_le_card_edge
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add

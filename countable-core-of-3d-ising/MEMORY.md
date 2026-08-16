@@ -397,6 +397,8 @@ mathlib は 2 次元側と同じ v4.32.1 に固定して `lake build` と検査�
 
 ## 次回やること
 
+- （2026-08-16 16:00 の tick）「全次数は辺の総数に等しい」の Lean 具体版の前半（全次数 ≤ #E、`fullBoundaryResponse_totalDegree_le_card_edge`）を形式化。次は後半（全辺の単項式の係数 ≥ 2 から全次数 = #E）を示して Lean 具体版を閉じる。
+
 - （2026-08-16 15:00 の tick）「真に依存する」の Lean 具体版を閉じた（`fullBoundaryResponse_degreeOf_eq_one`）。次は同主張の Lean 必要十分版と具体版からの導出。
 
 - （2026-08-16 14:45 の tick）「真に依存する」の Lean 具体版の第二歩（$\tau$ の単項式の係数が 1 以上、`fullBoundaryResponse_one_le_coeff_brokenMonomial`）を形式化。次はこれと `degreeOf_le_one` から次数ちょうど 1 を示して Lean 具体版を閉じる。
