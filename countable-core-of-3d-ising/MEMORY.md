@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 14:02: 「増えた辺の変数に真に依存する」を記述（`claim_full_boundary_response_degree_exactly_one`。$e_0$ の一端だけ $-1$ の配位 $\tau$ が $e_0$ を破り、破れ辺集合ごとにまとめた自然数係数が $1$ 以上で次数がちょうど $1$。`記述まで`。78 ブロック・相互参照 87 件）。次は同主張の SageMath 検証（小さい箱で $\tau$ の単項式の係数と各辺の次数を `ZZ` 上で確認）。
 - 2026-08-16 13:35: 「各辺変数についての次数は高々 1」の Lean 具体版 `fullBoundaryResponse_degreeOf_le_one`（`degreeOf_sum_le`・`degreeOf_prod_le`・`degreeOf_X` を人手証明と同順に。`lake build` 成功・sorry 検査 109 件 OK。`Lean 具体版まで`）。次は同主張の Lean 必要十分版（係数環を可換半環へ一般化・`Fintype` 除去）と具体版からの導出。
 - 2026-08-16 13:47: 「各辺変数についての次数は高々 1」の Lean 必要十分版 `NecSuf.fullBoundaryResponse_degreeOf_le_one`（可換半環 `R`・`Nontrivial R`・`Fintype Edge` 除去）と `R := ℤ` からの導出 `fullBoundaryResponse_degreeOf_le_one_fromNecSuf`（`lake build` 成功・sorry 検査 109 件 OK。`done`）。次は残りの「増えた辺の変数に真に依存する」（次数がちょうど 1。$e$ の一端反転の配位と非負係数）を記述する。
 - 2026-08-16 13:20: 「各辺変数についての次数は高々 1」を SageMath で検証（`sagemath/check/full-boundary-response-degree-at-most-one/` PASS。単項式ごとの指数・有限和の全指数列挙・全 12 辺の次数を証明と同順に `ZZ` 上で確認。`記述と SageMath まで`。検証対応 21 件）。次は同主張の Lean 具体版（`lean/Ising3DCut/` に `MvPolynomial` の `degreeOf` で各配位の単項式の指数と有限和の次数評価を人手証明と 1 対 1 に）。
