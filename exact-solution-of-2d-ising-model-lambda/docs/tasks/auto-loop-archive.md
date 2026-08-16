@@ -3,6 +3,24 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 364 で台帳から移した記録（tick 359 分。前進・レビューは tick 360 分）
+
+### 現在地
+
+- **2026-08-17 の tick 359 は、台帳の先頭行「開境界正方形の密度の下組の元は密度の上からの評価以下」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_density_lower_set_le_upper_bound`（`claim_open_square_density_lower_set_nonempty` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $q\in\mathbb Q_{>0}$、$\mu\in A^{\mathrm{op}}(q)$ なら $\mu\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\iota(\log(1+q))$（`claim_open_square_free_entropy_density_upper_bound` の右辺）。仮定は $q>0$ だけで $q\le1$ は要らない（台帳の行名の「$0<q\le1$」は外した）。証明は所属の証人 $\varepsilon,N$ を取り $L:=N$ で読む一続き五段（$\mu=0+\mu$（単位元）$\le\varepsilon+\mu$（`claim_rational_log_order_group_add_monotone` を $\lambda:=0,\mu:=\varepsilon,\nu:=\mu$ で）$=\mu+\varepsilon$（交換則）$\le\Psi^{\mathrm{op}}_N(q)$（証人の性質）$\le$ 上界（密度の上からの評価））と推移律。$\varepsilon\ne0$ は使わない。`remark_real_escape_plan` の脱出の項に「上に有界であること」への参照を足した。
+  SageMath `check/open-square-density-lower-set-le-upper-bound/`（$q$ 8 値、$L\le4$、$\mu$ は空でないことの証人とそれ以下の三つ、別の証人 $(\frac12\iota(\ell_2),2)$ の元。244 検査、4 秒。順序の決定手続きの共通分母を分母の積から最小公倍数へ変えた——積だと $\Psi^{\mathrm{op}}_L(q)$ どうしの比較で指数が $16^{10}$ 程度になり 5 分超で実行不能。`claim_common_denominator_multiple` により結果は変わらない）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`rationalLogOrderLE_upperBound_of_mem_openSquareDensityLowerSet`。`rationalLogOrderLE_add_right`・`zero_add`・`add_comm`・`openSquareDensitySequence_of_ne_zero`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`・`rationalLogOrderLE_trans`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetLeUpperBound.lean`（`le_bound_of_mem_lowerSetOfSequence_necSuf`。`[Add X] [Zero X]`、推移律・右加法単調性・単位元 $0+x=x$・交換則・列の項の上界だけ。$\varepsilon\ne0$ も逆元も有理数倍も使わない）、導出版。sorry 検査 1342 件。前 tick のレビューでは修正なし。次は「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」。
+
+### 前進の記録
+
+- 2026-08-17（tick 360）: 台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ」は、実対数と実現写像の定義、有理数倍との可換性（分配則）、$\Lambda$ の元の実現が $\mathrm{rat}_\Lambda$ の実対数であること（帰納法）、順序の保存（共通分母と単調性）の四つの論法を含むので四行へ割った。その最初「実数体と実対数、および実現写像の定義」を実行し、`def_real_logarithm` と `def_rational_log_order_group_realization` を `claim_open_square_density_lower_set_le_upper_bound` の直後に置いた（本文で初めての住処 R。脱出理由は実対数）。
+  Lean `ThermodynamicLimit/RationalLogOrderGroupRealization.lean` を書き、入口 import・sorry 検査へ 4 件登録（計 1346 件）。定義ブロックなので SageMath 検証と必要十分版は無い。`remark_real_escape_plan` の冒頭と脱出の項を両定義に合わせて直した。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 360）: 前 tick の「開境界正方形の密度の下組の元は密度の上からの評価以下」の本文（証人を $L:=N$ で読む一続き五段）・SageMath overview（244 検査）・Lean 具体版（`rationalLogOrderLE_add_right`・`zero_add`・`add_comm`・`hN N (le_refl N)`・`rationalLogOrderLE_openScaledFreeEntropy_upperBound`・`rationalLogOrderLE_trans` が五段に 1 対 1）・必要十分版（`Add`・`Zero`、推移律・右加法単調性・単位元・交換則・列の上界）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 上に有界であることは上限の存在の前提で残す。今 tick の二つは定義であり、実数体への脱出の位置と理由を宣言する（住処 R を持つ最初のブロック）。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。**台帳の整理の不備を 1 件直した**: 前 tick が「現在地」「前進の記録」「レビュー記録」から tick 354 分を外したが保管庫へ移していなかったので、git の履歴から取り出して保管庫へ復元した。本文の修正は無い。
+
 ## 2026-08-17 tick 363 で台帳から移した記録（tick 358 分）
 
 ### 現在地

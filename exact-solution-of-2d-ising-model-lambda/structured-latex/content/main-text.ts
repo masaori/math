@@ -46263,6 +46263,168 @@ Y
     ],
   },
   {
+    id: "thermodynamic_limit_claim_rational_log_order_group_realization_monotone",
+    kind: "claim",
+    title: { text: "有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）" },
+    labels: ["claim_rational_log_order_group_realization_monotone"],
+    habitat: "R",
+    realEscape:
+      "実対数。実現写像 ρ_ℝ の値（実数）どうしの不等式であり、証明は ι_ℚ→ℝ が順序を保つこと、log_ℝ の単調性、および ℝ が順序体であること（正の元を掛けても順序が保たれる）だけを使う。完備性・級数・微分は使わない。",
+    verification: ["sagemath/check/rational-log-order-group-realization-monotone"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.natCast_real_pos",
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_le_of_rationalLogOrderLE",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.le_of_smul_le_smul_necSuf",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.realize_monotone_of_common_denominator_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_le_of_rationalLogOrderLE_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\lambda,\mu\in\Lambda_{\mathbb{Q}}`),
+        "（",
+        ref("def_rational_log_order_group"),
+        "）について、",
+        ref("def_rational_log_order_group_order"),
+        " の順序 ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " と ",
+        ref("def_rational_log_order_group_realization"),
+        " の実現写像 ",
+        math(String.raw`\rho_{\mathbb{R}}`),
+        " について",
+      ]),
+      displayMath(String.raw`\lambda\le_{\Lambda_{\mathbb{Q}}}\mu
+\quad\Longrightarrow\quad
+\rho_{\mathbb{R}}(\lambda)\le\rho_{\mathbb{R}}(\mu)`),
+      paragraph([
+        "が成り立つ。右辺の ",
+        math(String.raw`\le`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序（",
+        ref("def_real_logarithm"),
+        "）である。この主張は、可算側で決定可能な順序 ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " が実現の側でも保たれることを言う。次に、下組の実現像が上に有界であることを示し、その上限として実数を取るときに使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\mathbb{Q}\to\mathbb{R}}`),
+        " と略記する。",
+        math(String.raw`\lambda\le_{\Lambda_{\mathbb{Q}}}\mu`),
+        " とする。",
+        ref("def_rational_log_order_group_order"),
+        " により、",
+        math(String.raw`\lambda`),
+        " と ",
+        math(String.raw`\mu`),
+        " の両方の共通分母である ",
+        math(String.raw`N\in\mathbb{N}`),
+        "、",
+        math(String.raw`N\ge1`),
+        " で ",
+        math(String.raw`\lambda_N\le_{\Lambda}\mu_N`),
+        " を満たすものが存在する。これを一つ取って固定する（",
+        math(String.raw`\lambda_N,\mu_N\in\Lambda`),
+        " は ",
+        ref("def_common_denominator"),
+        " の一意な証人で、",
+        math(String.raw`N\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)`),
+        "、",
+        math(String.raw`N\cdot\mu=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)`),
+        "）。準備を一つ置く。",
+        math(String.raw`0<N`),
+        "（",
+        math(String.raw`\mathbb{Q}`),
+        " の順序。",
+        math(String.raw`N\ge1`),
+        "）と ",
+        math(String.raw`\iota`),
+        " が順序を保ち単射であること（",
+        ref("def_real_logarithm"),
+        "）から ",
+        math(String.raw`0=\iota(0)\le\iota(N)`),
+        " かつ ",
+        math(String.raw`\iota(N)\ne\iota(0)=0`),
+        "、すなわち ",
+        math(String.raw`0<\iota(N)`),
+        " である。したがって ",
+        math(String.raw`\iota(N)^{-1}\in\mathbb{R}`),
+        " が定まり、",
+        math(String.raw`0<\iota(N)^{-1}`),
+        " である（順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " で正の元の逆元は正）。",
+      ]),
+      paragraph([
+        "まず、実数の不等式 ",
+        math(String.raw`\iota(N)\cdot\rho_{\mathbb{R}}(\lambda)\le\iota(N)\cdot\rho_{\mathbb{R}}(\mu)`),
+        " を、",
+        math(String.raw`\lambda_N\le_{\Lambda}\mu_N`),
+        " から含意の鎖で導く。各行の ",
+        math(String.raw`\le`),
+        " は、一行目が ",
+        math(String.raw`\Lambda`),
+        " の順序、二行目が ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序、三行目以降が ",
+        math(String.raw`\mathbb{R}`),
+        " の順序である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\lambda_N\le_{\Lambda}\mu_N\\
+\Longrightarrow\ &\operatorname{rat}_{\Lambda}(\lambda_N)\le\operatorname{rat}_{\Lambda}(\mu_N)
+&&(\because\ \blkref{def_log_order_group_order})\\
+\Longrightarrow\ &\iota\bigl(\operatorname{rat}_{\Lambda}(\lambda_N)\bigr)\le\iota\bigl(\operatorname{rat}_{\Lambda}(\mu_N)\bigr)
+&&(\because\ \iota\text{ は順序を保つ。}\blkref{def_real_logarithm})\\
+\Longrightarrow\ &\log_{\mathbb{R}}\Bigl(\iota\bigl(\operatorname{rat}_{\Lambda}(\lambda_N)\bigr)\Bigr)\le\log_{\mathbb{R}}\Bigl(\iota\bigl(\operatorname{rat}_{\Lambda}(\mu_N)\bigr)\Bigr)
+&&(\because\ u\le v\Rightarrow\log_{\mathbb{R}}(u)\le\log_{\mathbb{R}}(v)\text{。}\blkref{def_real_logarithm}\text{。両辺は }\mathbb{R}_{>0}\text{ の元（}\blkref{claim_log_order_group_realization_real_log}\text{）})\\
+\Longrightarrow\ &\rho_{\mathbb{R}}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)\bigr)\le\rho_{\mathbb{R}}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)\bigr)
+&&(\because\ \blkref{claim_log_order_group_realization_real_log}\text{ を }\lambda_N\text{ と }\mu_N\text{ で（両辺を右から左へ書き換える）})\\
+\Longrightarrow\ &\rho_{\mathbb{R}}(N\cdot\lambda)\le\rho_{\mathbb{R}}(N\cdot\mu)
+&&(\because\ N\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N),\ N\cdot\mu=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)\text{。}\blkref{def_common_denominator})\\
+\Longrightarrow\ &\iota(N)\cdot\rho_{\mathbb{R}}(\lambda)\le\iota(N)\cdot\rho_{\mathbb{R}}(\mu)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul}\text{ を }r:=N\text{ で（両辺を書き換える）})
+\end{aligned}`),
+      paragraph([
+        "最後に ",
+        math(String.raw`\iota(N)`),
+        " を外す。一続きである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathbb{R}}(\lambda)
+&=\iota(N)^{-1}\cdot\bigl(\iota(N)\cdot\rho_{\mathbb{R}}(\lambda)\bigr)
+&&(\because\ \mathbb{R}\text{ の乗法の結合則、}\iota(N)^{-1}\iota(N)=1\text{、}1\cdot t=t)\\
+&\le\iota(N)^{-1}\cdot\bigl(\iota(N)\cdot\rho_{\mathbb{R}}(\mu)\bigr)
+&&(\because\ \text{上で導いた不等式に、正の元 }\iota(N)^{-1}\text{ を左から掛ける。順序体 }\mathbb{R}\text{ では正の元を掛けても順序が保たれる})\\
+&=\rho_{\mathbb{R}}(\mu)
+&&(\because\ \mathbb{R}\text{ の乗法の結合則、}\iota(N)^{-1}\iota(N)=1\text{、}1\cdot t=t)
+\end{aligned}`),
+      paragraph([
+        "使ったのは、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の順序と共通分母の定義、",
+        math(String.raw`\Lambda`),
+        " の順序の定義（正の有理数の比較）、",
+        math(String.raw`\iota`),
+        " が順序を保ち単射であること、実対数の単調性、",
+        math(String.raw`\Lambda`),
+        " の元の実現が ",
+        math(String.raw`\operatorname{rat}_{\Lambda}`),
+        " の実対数であること（",
+        ref("claim_log_order_group_realization_real_log"),
+        "）、実現写像が有理数倍と可換であること（",
+        ref("claim_rational_log_order_group_realization_smul"),
+        "）、および順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " で正の元を掛けても順序が保たれることだけである。完備性は使わない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },
@@ -46270,7 +46432,7 @@ Y
     habitat: "Lambda",
     statement: [
       paragraph([
-        "直前の二つの定義と三つの主張（",
+        "直前の二つの定義と四つの主張（",
         ref("def_real_logarithm"),
         "、",
         ref("def_rational_log_order_group_realization"),
@@ -46280,6 +46442,8 @@ Y
         ref("claim_real_logarithm_int_power"),
         "、",
         ref("claim_log_order_group_realization_real_log"),
+        "、",
+        ref("claim_rational_log_order_group_realization_monotone"),
         "）を除き、ここまでの本文はすべて可算な対象（",
         math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\Lambda_{\mathbb{Q}}`),
         "、",
@@ -46348,7 +46512,9 @@ Y
           math(String.raw`\operatorname{rat}_{\Lambda}`),
           " の実対数であることは ",
           ref("claim_log_order_group_realization_real_log"),
-          " で示した。順序を保つことはこれから示す）、下組の実現像の上限（完備性）として実数 ",
+          " で、順序を保つことは ",
+          ref("claim_rational_log_order_group_realization_monotone"),
+          " で示した）、下組の実現像の上限（完備性）として実数 ",
           math(String.raw`f(q)`),
           " を一つ取る。引くのは「有界な実数集合は上限を持つ」ことと実対数の単調性だけで、それ以外の理由で実数体を呼ばない。",
           "脱出したことは、そのブロックの住処と脱出理由に書く。",

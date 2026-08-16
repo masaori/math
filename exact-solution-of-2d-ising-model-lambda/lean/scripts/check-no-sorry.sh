@@ -1416,6 +1416,11 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.map_prod_necSuf
   Ising2DLambda.NecSuf.ThermodynamicLimit.realize_int_prod_necSuf
   Ising2DLambda.ThermodynamicLimit.realizeRational_toRational_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.natCast_real_pos
+  Ising2DLambda.ThermodynamicLimit.realizeRational_le_of_rationalLogOrderLE
+  Ising2DLambda.NecSuf.ThermodynamicLimit.le_of_smul_le_smul_necSuf
+  Ising2DLambda.NecSuf.ThermodynamicLimit.realize_monotone_of_common_denominator_necSuf
+  Ising2DLambda.ThermodynamicLimit.realizeRational_le_of_rationalLogOrderLE_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

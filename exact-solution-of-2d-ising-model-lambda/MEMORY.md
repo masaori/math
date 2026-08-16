@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 364 は、前 tick の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」を四層で閉じた。
+`claim_rational_log_order_group_realization_monotone`（`claim_log_order_group_realization_real_log` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape`「実対数（$\rho_{\mathbb R}$ の値どうしの不等式。$\iota$ の順序保存、$\log_{\mathbb R}$ の単調性、$\mathbb R$ が順序体であることだけ）」）: $\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow\rho_{\mathbb R}(\lambda)\le\rho_{\mathbb R}(\mu)$。証明は `def_rational_log_order_group_order` の証人 $N\ge1,\lambda_N,\mu_N$ を取り、準備一つ（$0<\iota(N)$、$0<\iota(N)^{-1}$）、含意の鎖六段（`def_log_order_group_order`・$\iota$ の順序保存・実対数の単調性・`claim_log_order_group_realization_real_log`・`def_common_denominator`・`claim_rational_log_order_group_realization_smul` を $r:=N$ で）、最後の一続き三段（$\rho(\lambda)=\iota(N)^{-1}(\iota(N)\rho(\lambda))\le\iota(N)^{-1}(\iota(N)\rho(\mu))=\rho(\mu)$）。完備性は使わない。`remark_real_escape_plan` の冒頭（二定義と四主張）と脱出の項を直した。
+SageMath `check/rational-log-order-group-realization-monotone/`（**可算側の段は `ZZ`/`QQ` の厳密計算、実数側の段は区間演算 `RealBallField(256)`**。素数の実対数は超越数なので記号模型では単調性を検算できず、丸めを区間で包む厳密な包含で不等式を判定する。区間が重なれば FAIL。以後、実対数の単調性を使う不等式の検証はこの形で書く。218 標本、順序対 23871 組、286452 検査、14 秒）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupRealizationMonotone.lean`（`natCast_real_pos`・`realizeRational_le_of_rationalLogOrderLE`。`obtain` で証人を取り、`Rat.cast_le`・`realLog_le_realLog`・`realizeRational_toRational`・`IsCommonDenominator` の `unfold`＋`rw`・`realizeRational_smul`・`inv_pos`・`inv_mul_cancel₀`・`mul_le_mul_of_nonneg_left`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupRealizationMonotone.lean`（`le_of_smul_le_smul_necSuf`（`[Field R] [LinearOrder R] [IsStrictOrderedRing R]`）・`realize_monotone_of_common_denominator_necSuf`（$X,L,Q_0,P$ は構造なし・$Q_0$ の `Preorder` だけ。`rat`・`le_L`・`ι`・`val`・`lg`・`pr`・`emb`・`ρ`・`smul`・`c` とその性質を仮定として受け、順序の証人 $N,\lambda_N,\mu_N$ も仮定で受ける））、導出版 `RationalLogOrderGroupRealizationMonotoneFromNecSuf.lean`（`obtain` で `∃` を剥がして渡す。`logOrderLE` は `rationalOfLog` の比較そのものなので `fun _ _ hab => hab`）。sorry 検査 1365 件。check 454 ブロック・PDF 247 ページ通過。
+次は「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」（$f^{\mathrm{op}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))$。$\rho_{\mathbb R}(A^{\mathrm{op}}(q))\subset\mathbb R$ が空でない（`claim_open_square_density_lower_set_nonempty` の証人 $-\iota(\ell_2)$ の像）・上に有界（`claim_open_square_density_lower_set_le_upper_bound` と今 tick の順序保存で $\rho_{\mathbb R}(\iota(\ell_2)+2\iota(\log(1+q)))$ が上界）ことから、実数の完備性（上に有界な空でない部分集合は上限を持つ）で上限を取る。住処 R、`realEscape` は「完備性」。上界であることの主張は独立ブロックにして良い（上限の存在の前提で、後で繰り返し引く）。定義したら `remark_real_escape_plan` の題名から「まだ書いていない」を外し、本文の記述も合わせる。Lean は `Real.sSup`／`csSup_le`・`le_csSup`（`BddAbove`・`Set.Nonempty`）。SageMath は定義には置かない）。
+
+（tick 363 の記録）
 2026-08-17 の tick 363 は、前 tick の「整数冪の実対数は整数倍」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を四層で閉じた。
 `claim_log_order_group_realization_real_log`（`claim_real_logarithm_int_power` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape`「実対数（$\rho_{\mathbb R}$ と $\log_{\mathbb R}$ の値どうしの等式。乗法を加法へ移すことと $\iota$ が乗法・逆数を保つことだけ）」）: $\lambda\in\Lambda$ で $\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。証明は準備三つ（$\operatorname{supp}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\operatorname{supp}(\lambda)$、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和（元の個数の帰納法。空集合は `claim_real_logarithm_int_power` を $u:=1,k:=0$ で $\log_{\mathbb R}(1)=0$））と一続き八段（定義・台の一致・$\iota_{\Lambda\to\Lambda_{\mathbb Q}}$ の定義・整数冪の実対数・$\iota$ が整数冪を保つ・有限積の実対数は和・$\iota$ が有限積を保つ・$\mathrm{rat}_\Lambda$ の定義）。狭義単調性は使わない。
@@ -4097,10 +4105,10 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「実数体と実対数」（`def_real_logarithm`）と「有理係数の対数順序群の実現写像」（`def_rational_log_order_group_realization`）の本文と Lean `RationalLogOrderGroupRealization.lean` を突き合わせる（定義なので SageMath は無い）。
-- **次に進めるセクションは「実現写像は有理数倍と可換」**（状態台帳のセクション表の先頭行。備考に手順）。
+- **レビュー**: 「有理係数の対数順序群の実現写像は順序を保つ」（`claim_rational_log_order_group_realization_monotone`）の本文（証人・準備一つ・含意の鎖六段・最後の三段）と Lean `RationalLogOrderGroupRealizationMonotone.lean`・NecSuf・FromNecSuf、SageMath `rational-log-order-group-realization-monotone`（区間演算の使い方が overview の理由と合っているか）を突き合わせる。
+- **次に進めるセクションは「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
-  後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
+  後ろ倒しを先に直せ」）。台帳の「下組の実現像の上限として…定める」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
