@@ -87,6 +87,30 @@ theorem boundaryResponsePolynomial_outer_box_stability
   refine Finset.sum_congr rfl fun σ _ ↦ ?_
   simp [Finset.sum_const, Finset.card_univ]
 
+/-- 境界応答多項式は外箱に依存しない。共通の外箱上の配位 `σ` に外側の値 `τ₁`／`τ₂` を添えた
+二つの外箱について、安定性を二度適用し、外側の配位数（自然数冪に当たる）を掛け合わせて
+`#(V_{L₂}) • R_{L₁} = #(V_{L₁}) • R_{L₂}` を得る（配位数は `Configuration × Outer` の個数）。 -/
+theorem boundaryResponsePolynomial_outer_box_independence
+    {Outer₁ Outer₂ : Type*} [Fintype Outer₁] [Fintype Outer₂]
+    (broken : Configuration → Finset Edge)
+    (broken₁ : Configuration × Outer₁ → Finset Edge)
+    (broken₂ : Configuration × Outer₂ → Finset Edge) (active : Finset Edge)
+    (h₁ : ∀ σ : Configuration, ∀ τ : Outer₁,
+      boundarySpecialization active (∏ e ∈ broken₁ (σ, τ), X e) =
+        boundarySpecialization active (∏ e ∈ broken σ, X e))
+    (h₂ : ∀ σ : Configuration, ∀ τ : Outer₂,
+      boundarySpecialization active (∏ e ∈ broken₂ (σ, τ), X e) =
+        boundarySpecialization active (∏ e ∈ broken σ, X e)) :
+    (Fintype.card (Configuration × Outer₂)) • boundaryResponsePolynomial broken₁ active =
+      (Fintype.card (Configuration × Outer₁)) • boundaryResponsePolynomial broken₂ active := by
+  -- 安定性の一度目（外箱 L₁）と二度目（外箱 L₂）
+  rw [boundaryResponsePolynomial_outer_box_stability broken broken₁ active h₁,
+    boundaryResponsePolynomial_outer_box_stability broken broken₂ active h₂]
+  -- 配位数の積 #C · #O₂ · #O₁ = #C · #O₁ · #O₂
+  rw [Fintype.card_prod, Fintype.card_prod, smul_smul, smul_smul]
+  congr 1
+  ring
+
 end
 
 end Ising3DCut
