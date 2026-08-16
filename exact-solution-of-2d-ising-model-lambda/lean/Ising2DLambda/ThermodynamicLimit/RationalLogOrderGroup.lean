@@ -73,8 +73,9 @@ theorem toRational_injective (l m : LogOrderGroup) (h : toRational l = toRationa
       _ = ((m p : ℤ) : ℚ) := toRational_apply m p
   exact Int.cast_injective hp
 
-/-- `claim_scaled_free_entropy_denominator_clearing` の末尾:
-整数倍と `ι` は交換する（`n·ι(ν) = ι(nν)`）。各素数での値の等号として示す。 -/
+/-- 人手証明「対数順序群から有理係数の対数順序群への写像は整数倍と交換する」
+（`claim_rational_embedding_commutes_with_integer_multiple`）の具体版:
+`n·ι(ν) = ι(nν)`。各素数での値の等号として五段で示す。 -/
 theorem toRational_intSmul (n : ℤ) (l : LogOrderGroup) :
     ((n : ℚ)) • toRational l = toRational (n • l) := by
   ext p

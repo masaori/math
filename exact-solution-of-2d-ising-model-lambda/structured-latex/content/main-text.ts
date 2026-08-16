@@ -36282,85 +36282,44 @@ w\cdot w
   },
 
   {
-    id: "thermodynamic_limit_claim_scaled_free_entropy_denominator_clearing",
+    id: "thermodynamic_limit_claim_rational_embedding_commutes_with_integer_multiple",
     kind: "claim",
-    title: { text: "有限系の密度の分母は整数倍で払える" },
-    labels: ["claim_scaled_free_entropy_denominator_clearing"],
+    title: { text: "対数順序群から有理係数の対数順序群への写像は整数倍と交換する" },
+    labels: ["claim_rational_embedding_commutes_with_integer_multiple"],
     habitat: "Lambda",
-    verification: ["sagemath/check/scaled-free-entropy-denominator-clearing"],
+    verification: ["sagemath/check/rational-embedding-commutes-with-integer-multiple"],
     lean: [
-      "Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator",
       "Ising2DLambda.ThermodynamicLimit.toRational_intSmul",
-      "Ising2DLambda.NecSuf.ThermodynamicLimit.two_scaled_denominators_cancel_necSuf",
-      "Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator_from_necSuf",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.pointwise_lift_intSmul_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.toRational_intSmul_from_necSuf",
     ],
     statement: [
       paragraph([
-        math(String.raw`L,M\in\mathbb{N}`),
+        math(String.raw`n\in\mathbb{Z}`),
         "、",
-        math(String.raw`L\ge1`),
-        "、",
-        math(String.raw`M\ge1`),
-        " とし、",
-        math(String.raw`\lambda,\mu\in\Lambda`),
+        math(String.raw`\nu\in\Lambda`),
         " とする。",
         ref("def_rational_log_order_group"),
-        " の有理数倍について",
+        " の有理数倍（左辺の ",
+        math(String.raw`n`),
+        " は分母 ",
+        math(String.raw`1`),
+        " の有理数として読む）と ",
+        ref("def_log_order_group"),
+        " の整数倍について",
       ]),
-      displayMath(String.raw`\begin{aligned}
-L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\right)
-&=M^2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda),\\
-L^2M^2\cdot\left(\frac{1}{M^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)\right)
-&=L^2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu)
-\end{aligned}`),
+      displayMath(String.raw`n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu)`),
       paragraph([
-        "が成り立つ。したがって二つの有限系の密度を比較するとき、両方へ同じ正の整数 ",
-        math(String.raw`L^2M^2`),
-        " を掛ければ、有理係数の分母を払って ",
-        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(M^2\lambda)`),
-        " と ",
-        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(L^2\mu)`),
-        " の比較へ移せる。ここでは順序をまだ定義せず、分母が消える等式だけを主張する。",
+        "が成り立つ。",
       ]),
     ],
     proof: [
       paragraph([
-        "第一の等式は次の一続きの計算で得る。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\right)
-&=\left(L^2M^2\cdot\frac{1}{L^2}\right)\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
-&=M^2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)
-&&(\because\ L\ge1\text{ なので }L^2\ne0\text{、}\mathbb{Q}\text{ の約分})
-\end{aligned}`),
-      paragraph([
-        "第二の等式も ",
-        math(String.raw`L`),
-        " と ",
-        math(String.raw`M`),
-        "、および ",
-        math(String.raw`\lambda`),
-        " と ",
-        math(String.raw`\mu`),
-        " を入れ替えた同じ二段の計算で得る。",
-      ]),
-      paragraph([
-        "右辺が ",
-        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(M^2\lambda)`),
-        " に等しいことは、任意の ",
-        math(String.raw`n\in\mathbb{Z}`),
-        "、",
-        math(String.raw`\nu\in\Lambda`),
-        " について ",
-        math(String.raw`n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu)`),
-        "（左辺の ",
-        math(String.raw`n`),
-        " は分母 ",
-        math(String.raw`1`),
-        " の有理数として読む）を、各素数 ",
+        "両辺は ",
+        math(String.raw`\mathcal{P}`),
+        " 上の有限台写像なので、各素数 ",
         math(String.raw`p\in\mathcal{P}`),
-        " での値の等号として示せばよい。",
+        " での値の等号として示す。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \bigl(n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
@@ -36376,15 +36335,7 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})
 \end{aligned}`),
       paragraph([
-        "これを ",
-        math(String.raw`n=M^2`),
-        "、",
-        math(String.raw`\nu=\lambda`),
-        " と ",
-        math(String.raw`n=L^2`),
-        "、",
-        math(String.raw`\nu=\mu`),
-        " に適用する。すべて有理数の四則と有限台写像の演算であり、実数体は現れない。",
+        "すべて整数と有理数の四則と有限台写像の演算であり、実数体は現れない。",
       ]),
     ],
   },
@@ -36717,7 +36668,7 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
 &=k\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
 &&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{。}\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(k\lambda_N)
-&&(\because\ \blkref{claim_scaled_free_entropy_denominator_clearing}\text{ の }n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu))
+&&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
 \end{aligned}`),
       paragraph([
         "よって ",
@@ -36877,7 +36828,7 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
       displayMath(String.raw`\begin{aligned}
 \iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N'\lambda_N)
 &=N'\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
-&&(\because\ \blkref{claim_scaled_free_entropy_denominator_clearing}\text{ の }n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu))\\
+&&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})\\
 &=N'\cdot(N\cdot\lambda)
 &&(\because\ N\text{ は }\lambda\text{ の共通分母。}\blkref{def_common_denominator})\\
 &=(N'N)\cdot\lambda
@@ -36889,7 +36840,7 @@ L^2M^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambd
 &=N\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_{N'})
 &&(\because\ N'\text{ は }\lambda\text{ の共通分母。}\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N\lambda_{N'})
-&&(\because\ \blkref{claim_scaled_free_entropy_denominator_clearing}\text{ の }n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu))
+&&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
 \end{aligned}`),
       paragraph([
         "同じ計算を ",
@@ -38300,8 +38251,8 @@ Z_L(q)
         " は ",
         ref("def_log_order_group"),
         " の整数倍）である。これは ",
-        ref("claim_scaled_free_entropy_denominator_clearing"),
-        " の証明の末尾で、各素数での値の五段の鎖として示してある。",
+        ref("claim_rational_embedding_commutes_with_integer_multiple"),
+        " である。",
       ]),
       paragraph([
         "まず ",
@@ -40657,8 +40608,8 @@ Z^{\mathrm{op}}_{L,L}(q)
         " は ",
         ref("def_log_order_group"),
         " の整数倍）である。これは ",
-        ref("claim_scaled_free_entropy_denominator_clearing"),
-        " の証明の末尾で、各素数での値の五段の鎖として示してある。",
+        ref("claim_rational_embedding_commutes_with_integer_multiple"),
+        " である。",
       ]),
       paragraph([
         "第二に、部分正方形の値の対数を ",
@@ -40874,8 +40825,8 @@ Z^{\mathrm{op}}_{L,L}(q)
         " は ",
         ref("def_log_order_group"),
         " の整数倍）である。これは ",
-        ref("claim_scaled_free_entropy_denominator_clearing"),
-        " の証明の末尾で、各素数での値の五段の鎖として示してある。",
+        ref("claim_rational_embedding_commutes_with_integer_multiple"),
+        " である。",
       ]),
       paragraph([
         "まず ",
@@ -41231,8 +41182,8 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
         " は ",
         ref("def_log_order_group"),
         " の整数倍）である。これは ",
-        ref("claim_scaled_free_entropy_denominator_clearing"),
-        " の証明の末尾で、各素数での値の五段の鎖として示してある。",
+        ref("claim_rational_embedding_commutes_with_integer_multiple"),
+        " である。",
       ]),
       paragraph([
         "第二に、上からの評価の側の元を ",

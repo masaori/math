@@ -1198,10 +1198,9 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.pointwise_lift_add_and_injective_necSuf
   Ising2DLambda.ThermodynamicLimit.toRational_add_from_necSuf
   Ising2DLambda.ThermodynamicLimit.toRational_injective_from_necSuf
-  Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator
   Ising2DLambda.ThermodynamicLimit.toRational_intSmul
-  Ising2DLambda.NecSuf.ThermodynamicLimit.two_scaled_denominators_cancel_necSuf
-  Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_clear_denominator_from_necSuf
+  Ising2DLambda.NecSuf.ThermodynamicLimit.pointwise_lift_intSmul_necSuf
+  Ising2DLambda.ThermodynamicLimit.toRational_intSmul_from_necSuf
   Ising2DLambda.ThermodynamicLimit.scaledFreeEntropy_apply
   Ising2DLambda.ThermodynamicLimit.commonDenominator_scaled_toRational
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_scaled_toRational_iff

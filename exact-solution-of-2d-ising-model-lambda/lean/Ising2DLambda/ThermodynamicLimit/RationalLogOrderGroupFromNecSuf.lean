@@ -28,4 +28,13 @@ theorem toRational_injective_from_necSuf (l m : LogOrderGroup)
     (h : toRational l = toRational m) : l = m :=
   lift_spec.2 l m h
 
+/-- 具体版（整数倍との交換 `n·ι(ν) = ι(nν)`）を必要十分版から導いたもの。
+係数 `(n : ℚ)` の有理数倍は整数 `n` の `zsmul` と一致する（`Int.cast_smul_eq_zsmul`）。 -/
+theorem toRational_intSmul_from_necSuf (n : ℤ) (l : LogOrderGroup) :
+    ((n : ℚ)) • toRational l = toRational (n • l) := by
+  rw [Int.cast_smul_eq_zsmul]
+  exact NecSuf.ThermodynamicLimit.pointwise_lift_intSmul_necSuf
+    (fun m : ℤ => (m : ℚ)) (by simp)
+    (fun k a => by simp [zsmul_eq_mul]) n l
+
 end Ising2DLambda.ThermodynamicLimit
