@@ -4,6 +4,23 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 325 は、前 tick の「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「開境界長方形の正の有理点での値の上からの評価（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
+`claim_open_rectangle_value_upper_bound_at_positive_rational`（`claim_open_square_free_entropy_density_nonnegative` の直後、`remark_real_escape_plan` の直前、住処 Q）で、
+$a,b\ge1$、$q\in\mathbb Q_{>0}$ に対し $Z^{\mathrm{op}}_{a,b}(q)\le2^{ab}(1+q)^{2ab}$（$a=b=L$ で $2^{L^2}(1+q)^{2L^2}$。台帳の名前は「正方形」だったが長方形一般で書いた）。
+証明は周期境界の `claim_partition_value_upper_bound_at_positive_rational` と同じ論法（準備の第一〜第四はその証明の準備を格子の形に依らないのでそのまま引き、
+第五として $b^{\mathrm{op}}_{a,b}(\sigma)=|B^{\mathrm{op}}|\le|E^{\mathrm{op}}|=|E_{\mathrm h}|+|E_{\mathrm v}|=a(b-1)+(a-1)b\le ab+ab=2ab$ を $\mathbb N$ の一続きで置く。
+本体は五段: 代入は環準同型・底を $1+q$ へ・指数を $2ab$ へ・定数の有限和・$|\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}$）。
+SageMath `open-rectangle-value-upper-bound-at-positive-rational`（形 11 通り × 正の有理点 9 点、36777 検査、`ZZ`/`QQ`）。Lean 具体版
+`ThermodynamicLimit/OpenRectangleValueUpperBoundRational.lean`（`openBrokenBondCount_le_two_mul`・`openPartitionValueRat_le_upperBound`。周期境界版の
+`pow_le_pow_of_pos_of_le_by_induction_rat`・`pow_le_pow_of_one_le_of_exp_le_by_induction_rat` を共有）、必要十分版は `sum_pow_le_uniform_bound_necSuf` を共有、
+導出版 `OpenRectangleValueUpperBoundRationalFromNecSuf.lean`。sorry 検査 1207 件。
+次は「開境界正方形の密度の上界（$\Lambda_{\mathbb Q}$ 版）」（$\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\iota(\ell_2)+2\cdot\iota(\log(1+q))$。周期境界の
+`claim_finite_free_entropy_density_upper_bound` と同じ論法で、$Z_L(q)\le2^{L^2}(1+q)^{2L^2}$ の代わりに `claim_open_rectangle_value_upper_bound_at_positive_rational` を
+$a=b=L$ で引く。`claim_open_square_free_entropy_density_nonnegative` の直後・`claim_open_rectangle_value_upper_bound_at_positive_rational` の直後に置く。
+Lean は `FiniteFreeEntropyDensityUpperBound*.lean` を開境界（`openScaledFreeEntropy`・`openPartitionValueRat_le_upperBound`）へ移す。必要十分版は共有できる見込み。
+着手前に周期境界側の本文と Lean を読むこと）。
+
 2026-08-16 の tick 324 は、レビューで人間の実数値経路削除（コミット 30d11b8a）のあとに残っていたほころび 3 件を直し
 （`claim_open_rectangle_value_ge_one_at_positive_rational` 末尾の途切れた文、初出より後ろに置かれていた `def_constant_plus_configuration`・`claim_constant_plus_breaks_no_bond`
 を `claim_partition_value_ge_one_at_positive_rational` の直前へ移動、削除済み実数値主張を対象にしていた SageMath 検証 `free-energy-density-lower-bound`・`open-rectangle-value-at-least-one`

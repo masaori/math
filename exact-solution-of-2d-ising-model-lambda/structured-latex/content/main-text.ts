@@ -39975,6 +39975,134 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
   },
 
   {
+    id: "thermodynamic_limit_claim_open_rectangle_value_upper_bound_at_positive_rational",
+    kind: "claim",
+    title: { text: "開境界長方形の正の有理点での値の上からの評価" },
+    labels: ["claim_open_rectangle_value_upper_bound_at_positive_rational"],
+    habitat: "Q",
+    verification: ["sagemath/check/open-rectangle-value-upper-bound-at-positive-rational"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.openBrokenBondCount_le_two_mul",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_le_upperBound",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sum_pow_le_uniform_bound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openPartitionValueRat_le_upperBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`a,b\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`b\ge1`),
+        " と、各 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " に対し、",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        " の値は",
+      ]),
+      displayMath(String.raw`Z^{\mathrm{op}}_{a,b}(q)\le 2^{ab}\cdot(1+q)^{2ab}`),
+      paragraph([
+        "を満たす。ここで ",
+        math(String.raw`\le`),
+        " は有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序、",
+        math(String.raw`2^{ab}\in\mathbb{N}\subset\mathbb{Q}`),
+        " と ",
+        math(String.raw`(1+q)^{2ab}\in\mathbb{Q}_{>0}`),
+        " は ",
+        math(String.raw`\mathbb{Q}`),
+        " の中の冪である（",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}(q)\in\mathbb{Q}_{>0}`),
+        " であることは ",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）。特に ",
+        math(String.raw`a:=L`),
+        "、",
+        math(String.raw`b:=L`),
+        " と読めば ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)\le2^{L^2}\cdot(1+q)^{2L^2}`),
+        " であり、周期境界の ",
+        ref("claim_partition_value_upper_bound_at_positive_rational"),
+        " と同じ形の上界になる。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 5 つ置く。第一から第四は ",
+        ref("claim_partition_value_upper_bound_at_positive_rational"),
+        " の証明の準備の第一から第四（正の有理数の自然数冪は正、底の単調性 ",
+        math(String.raw`0<u\le v\Rightarrow u^{k}\le v^{k}`),
+        "、指数の単調性 ",
+        math(String.raw`1\le w,\ m\le n\Rightarrow w^{m}\le w^{n}`),
+        "、定数の有限和 ",
+        math(String.raw`\sum_{s\in S}c=|S|\cdot c`),
+        "）そのものであり、有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の四則と順序だけで示されていて格子の形に依らないので、そのまま使う。",
+      ]),
+      paragraph([
+        "第五に、各 ",
+        math(String.raw`\sigma\in\Sigma^{\mathrm{op}}_{a,b}`),
+        " について ",
+        math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)\le2ab`),
+        " である（",
+        math(String.raw`\le`),
+        " は ",
+        math(String.raw`\mathbb{N}`),
+        " の順序）。これは ",
+        math(String.raw`\mathbb{N}`),
+        " の中の次の一続きによる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b^{\mathrm{op}}_{a,b}(\sigma)
+&=\bigl|B^{\mathrm{op}}_{a,b}(\sigma)\bigr|
+&&(\because\ \blkref{def_open_rectangle_broken_bond_count})\\
+&\le\bigl|E^{\mathrm{op}}_{a,b}\bigr|
+&&(\because\ B^{\mathrm{op}}_{a,b}(\sigma)\subseteq E^{\mathrm{op}}_{a,b}\text{（}\blkref{def_open_rectangle_broken_bond_count}\text{）。部分集合の元の個数は全体の元の個数以下})\\
+&=\bigl|E^{\mathrm{op}}_{a,b,\mathrm h}\bigr|+\bigl|E^{\mathrm{op}}_{a,b,\mathrm v}\bigr|
+&&(\because\ E^{\mathrm{op}}_{a,b}\text{ は向きの印 }\mathrm h,\mathrm v\text{ が異なる 2 つの集合の直和。}\blkref{def_open_rectangle_edges})\\
+&=a\cdot(b-1)+(a-1)\cdot b
+&&(\because\ E^{\mathrm{op}}_{a,b,\mathrm h}=\{0,\dots,a-1\}\times\{0,\dots,b-2\}\text{、}E^{\mathrm{op}}_{a,b,\mathrm v}=\{0,\dots,a-2\}\times\{0,\dots,b-1\}\text{ の直積の元の個数。}a,b\ge1\text{ なので }a-1,b-1\in\mathbb{N})\\
+&\le a\cdot b+a\cdot b
+&&(\because\ b-1\le b\text{、}a-1\le a\text{ と、}\mathbb{N}\text{ の乗法・加法は順序と両立する})\\
+&=2ab
+&&(\because\ \mathbb{N}\text{ の計算})
+\end{aligned}`),
+      paragraph([
+        "本体の式変形は、主張の左辺 ",
+        math(String.raw`Z^{\mathrm{op}}_{a,b}(q)`),
+        " から始める次の一続きである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z^{\mathrm{op}}_{a,b}(q)
+&=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_open_rectangle_partition_value_at_positive_rational})\\
+&\le\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}(1+q)^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
+&&(\because\ 0<q\text{ と }q\le1+q\text{（}0<1\text{ を }q\text{ へ足す）と準備の第二を各項へ同時適用。有限和は各項の比較と両立する})\\
+&\le\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}(1+q)^{2ab}
+&&(\because\ \text{各 }\sigma\text{ で }b^{\mathrm{op}}_{a,b}(\sigma)\le2ab\text{（準備の第五）と }1\le1+q\text{（}0<q\text{ を }1\text{ へ足す）と準備の第三を各項へ同時適用。同上})\\
+&=\bigl|\Sigma^{\mathrm{op}}_{a,b}\bigr|\cdot(1+q)^{2ab}
+&&(\because\ \sigma\text{ に依らない同じ元の有限和。準備の第四})\\
+&=2^{ab}\cdot(1+q)^{2ab}
+&&(\because\ |\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\text{。}ab\text{ 個の頂点（}\blkref{def_open_rectangle_vertices}\text{）のそれぞれに }+1,-1\text{ のどちらかを割り当てる写像の個数。}\blkref{def_open_rectangle_configuration})
+\end{aligned}`),
+      paragraph([
+        "以上は有理数の四則と順序、有限和、および ",
+        math(String.raw`\mathbb{N}`),
+        " の計算だけからなり、実数体も実対数も現れない。周期境界の ",
+        ref("claim_partition_value_upper_bound_at_positive_rational"),
+        " と同じ論法であり、違いは破れボンド数の上界を辺数 ",
+        math(String.raw`a(b-1)+(a-1)b`),
+        " から ",
+        math(String.raw`2ab`),
+        " へ緩めて周期境界と同じ形に揃えた点だけである。",
+      ]),
+    ],
+  },
+
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

@@ -10905,3 +10905,33 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-16（tick 317）: 前 tick の「開矩形の可算な定義群の移動と正の有理点での値（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・
   必要十分版（周期境界と共有）・導出版を突き合わせ、定義の二つの等号・準備二つ・二段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。
   本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+## 2026-08-16 tick 325 で台帳から移したもの
+
+### 現在地（tick 320）
+
+- **2026-08-16 の tick 320 は、「正方形のブロック敷き詰め（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  `claim_open_square_block_tiling_rational`（`claim_open_rectangle_iterated_gluing_second_rational` の直後・実数体脱出の宣言の直前、住処 Q）で、
+  $a,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $q^{(k-1)(ka)}(q^{(k-1)a}Z^{\mathrm{op}}_{a,a}(q)^k)^k\le Z^{\mathrm{op}}_{ka,ka}(q)\le(Z^{\mathrm{op}}_{a,a}(q)^k)^k$、$1\le q$: その逆向き。
+  $\mathbb R$ 版と同じ合成（第一座標方向の反復接合（$\mathbb Q$ 版、$b=a$）→ 準備「正の底の自然数冪は順序を保つ」で両辺を $k$ 乗 → 第二座標方向の反復接合（$\mathbb Q$ 版、第一座標の長さ $ka$）→ 正数の乗法と推移律）を
+  $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。SageMath 45 組（`ZZ`/`QQ`。鎖の各段を検査）、Lean 具体版・必要十分版（$\mathbb R$ 版 `two_direction_pow_bounds_necSuf` と共有）・導出版、
+  sorry 検査 1194 件。レビューでは前 tick の反復接合の第二（$\mathbb Q$ 版）の四層が一致し修正無し。次は「周期境界と開境界の比較（$\mathbb Q$ 版）」。
+
+### 前進の記録（tick 320）
+
+- 2026-08-16（tick 320）: `claim_open_square_block_tiling_rational` を `claim_open_rectangle_iterated_gluing_second_rational` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。$\mathbb R$ 版 `claim_open_square_block_tiling` の合成（第一座標方向の反復接合を $b=a$ で、
+  両辺の $k$ 乗、第二座標方向の反復接合を第一座標の長さ $ka$ で、正数 $q^{(k-1)(ka)}$ の乗法と推移律）を $q\in\mathbb Q_{>0}$ で述べ直し、
+  反復接合は `claim_open_rectangle_iterated_gluing_first_rational`・`claim_open_rectangle_iterated_gluing_second_rational` を引く。
+  「正の底の自然数冪は順序を保つ」は準備として置き `claim_partition_value_upper_bound_at_positive_rational` の準備の第二を引く。
+  `remark_real_field_escape` は引かない。$\mathbb R$ 版は併存（撤去のセクションで消す）。SageMath `open-square-block-tiling-rational`
+  （形 5 通り × 正の有理点 9 点、45 組。$\mathbb Z[x]$ への代入と配位和の一致・鎖の各段・二場合の上下評価。`ZZ`/`QQ`）。Lean 具体版
+  `ThermodynamicLimit/OpenSquareBlockTilingRational.lean`（`openPartitionValueRat_squareBlockTiling_bounds_of_le_one`／`_of_one_le`。$\mathbb R$ 版の
+  合成を ℚ で書き直し、`pow_le_pow_of_pos_of_le_by_induction_rat` を引く）、必要十分版は `two_direction_pow_bounds_necSuf` をそのまま共有、導出版
+  `OpenSquareBlockTilingRationalFromNecSuf.lean`。sorry 検査 1194 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録（tick 320）
+
+- 2026-08-16（tick 320）: 前 tick の「反復接合の第二（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版（$\mathbb R$ 版・第一と共有）・
+  導出版を突き合わせ、二場合の上下評価・帰納段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致し、本文に $t$ や $\le_{\mathbb R}$ の残りは無い。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
