@@ -6,6 +6,7 @@
 人手証明と同じ順序で形式化する。有限集合と自然数だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidCyclicGroup
+import CellularAutomata.NecSuf.IterateMonoidStableImage
 
 namespace CellularAutomata.IterateMonoidStableImage
 
@@ -151,5 +152,96 @@ noncomputable def stableRestrictedTables : Finset
 
 /-- 安定像と三つの制限写像は有限型上の有限走査で決定可能である。 -/
 noncomputable instance : Fintype (stableImage N f) := Fintype.ofFinite _
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := V → State、F := globalMap N f、
+hex := 有限型からの衝突開始位置の存在 へ特殊化したものである。 -/
+
+section Derivation
+
+/-- 安定像は必要十分版の特殊化に一致する。 -/
+theorem stableImage_eq_necessary_sufficient :
+    stableImage N f =
+      CellularAutomata.NecSuf.IterateMonoidStableImage.stableImage
+        (globalMap N f) (necSufHex N f) := by
+  rw [stableImage, CellularAutomata.NecSuf.IterateMonoidStableImage.stableImage,
+    cycleIdempotent_eq_necessary_sufficient]
+
+/-- `R_F` は必要十分版の特殊化に一致する。 -/
+theorem stableInverse_eq_necessary_sufficient :
+    stableInverse N f =
+      CellularAutomata.NecSuf.IterateMonoidStableImage.stableInverse
+        (globalMap N f) (necSufHex N f) := by
+  rw [stableInverse, CellularAutomata.NecSuf.IterateMonoidStableImage.stableInverse,
+    minStablePeriodMultiple_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient,
+    iterateMap_eq_necessary_sufficient]
+
+theorem cycleIdempotent_retracts_stableImage_from_necessary_sufficient
+    {z : V → State} (hz : z ∈ stableImage N f) :
+    cycleIdempotent N f z = z := by
+  rw [stableImage_eq_necessary_sufficient] at hz
+  rw [cycleIdempotent_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableImage.cycleIdempotent_retracts_stableImage
+    (globalMap N f) (necSufHex N f) hz
+
+theorem stable_power_image_eq_from_necessary_sufficient (n : ℕ)
+    (hn : minCollisionStart N f ≤ n) :
+    Set.range (iterateMap N f n) = stableImage N f := by
+  rw [minCollisionStart_eq_necessary_sufficient] at hn
+  rw [iterateMap_eq_necessary_sufficient, stableImage_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableImage.stable_power_image_eq
+    (globalMap N f) (necSufHex N f) n hn
+
+theorem stableInverse_two_sided_from_necessary_sufficient :
+    globalMap N f ∘ stableInverse N f = cycleIdempotent N f ∧
+      stableInverse N f ∘ globalMap N f = cycleIdempotent N f := by
+  rw [stableInverse_eq_necessary_sufficient, cycleIdempotent_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableImage.stableInverse_two_sided
+    (globalMap N f) (necSufHex N f)
+
+theorem globalMap_maps_stableImage_from_necessary_sufficient
+    {z : V → State} (hz : z ∈ stableImage N f) :
+    globalMap N f z ∈ stableImage N f := by
+  rw [stableImage_eq_necessary_sufficient] at hz ⊢
+  exact CellularAutomata.NecSuf.IterateMonoidStableImage.globalMap_maps_stableImage
+    (globalMap N f) (necSufHex N f) hz
+
+theorem stableInverse_maps_stableImage_from_necessary_sufficient
+    {z : V → State} (hz : z ∈ stableImage N f) :
+    stableInverse N f z ∈ stableImage N f := by
+  rw [stableImage_eq_necessary_sufficient] at hz ⊢
+  rw [stableInverse_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableImage.stableInverse_maps_stableImage
+    (globalMap N f) (necSufHex N f) hz
+
+/-- 制限写像の全単射性は必要十分版の特殊化から得られる（部分型を安定像の等号で移送する）。 -/
+theorem stableStep_bijective_from_necessary_sufficient :
+    Function.Bijective (stableStep N f) := by
+  have hset := Set.ext_iff.mp (stableImage_eq_necessary_sufficient N f)
+  constructor
+  · intro z w hzw
+    apply Subtype.ext
+    have h1 := congrArg Subtype.val hzw
+    change globalMap N f z.1 = globalMap N f w.1 at h1
+    have hz := (hset z.1).mp z.2
+    have hw := (hset w.1).mp w.2
+    have hinj := (CellularAutomata.NecSuf.IterateMonoidStableImage.stableStep_bijective
+      (globalMap N f) (necSufHex N f)).1
+    have := hinj (a₁ := ⟨z.1, hz⟩) (a₂ := ⟨w.1, hw⟩) (Subtype.ext h1)
+    have h2 : z.1 = w.1 := by
+      have h3 := congrArg Subtype.val this
+      exact h3
+    exact h2
+  · intro w
+    have hw := (hset w.1).mp w.2
+    obtain ⟨z, hz⟩ := (CellularAutomata.NecSuf.IterateMonoidStableImage.stableStep_bijective
+      (globalMap N f) (necSufHex N f)).2 ⟨w.1, hw⟩
+    have hz1 := (hset z.1).mpr z.2
+    refine ⟨⟨z.1, hz1⟩, Subtype.ext ?_⟩
+    have h2 : globalMap N f z.1 = w.1 := Subtype.ext_iff.mp hz
+    exact h2
+
+end Derivation
 
 end CellularAutomata.IterateMonoidStableImage
