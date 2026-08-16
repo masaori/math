@@ -9,6 +9,7 @@ structured-latex/content/iterate-monoid-cycle-idempotent.ts。
 -/
 import CellularAutomata.IterateMonoidTailCycleDecomposition
 import Mathlib.Data.Nat.ModEq
+import CellularAutomata.NecSuf.IterateMonoidCycleIdempotent
 
 namespace CellularAutomata.IterateMonoidCycleIdempotent
 
@@ -170,5 +171,56 @@ theorem cycle_idempotent_unique
 /-- e_F の所属は決定可能で、自然数の整列性により有限走査で得られる。 -/
 noncomputable instance (n : ℕ) : Decidable (IsStablePeriodMultiple N f n) :=
   instDecidableAnd
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := V → State、F := globalMap N f、
+hex := 有限型からの衝突開始位置の存在 へ特殊化したものである。 -/
+
+/-- D_F への所属は必要十分版の特殊化に一致する。 -/
+theorem isStablePeriodMultiple_eq_necessary_sufficient (n : ℕ) :
+    IsStablePeriodMultiple N f n ↔
+      CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.IsStablePeriodMultiple
+        (globalMap N f) (necSufHex N f) n := by
+  simp only [IsStablePeriodMultiple,
+    CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.IsStablePeriodMultiple,
+    minCollisionStart_eq_necessary_sufficient, minPositivePeriod_eq_necessary_sufficient]
+
+/-- e_F は必要十分版の特殊化に一致する（両側の最小性）。 -/
+theorem minStablePeriodMultiple_eq_necessary_sufficient :
+    minStablePeriodMultiple N f =
+      CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.minStablePeriodMultiple
+        (globalMap N f) (necSufHex N f) := by
+  apply Nat.le_antisymm
+  · exact minStablePeriodMultiple_le N f
+      ((isStablePeriodMultiple_eq_necessary_sufficient N f _).mpr
+        (CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.minStablePeriodMultiple_spec _ _))
+  · exact CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.minStablePeriodMultiple_le _ _
+      ((isStablePeriodMultiple_eq_necessary_sufficient N f _).mp
+        (minStablePeriodMultiple_spec N f))
+
+/-- E_F は必要十分版の特殊化に一致する。 -/
+theorem cycleIdempotent_eq_necessary_sufficient :
+    cycleIdempotent N f =
+      CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent
+        (globalMap N f) (necSufHex N f) := by
+  rw [cycleIdempotent, CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent,
+    minStablePeriodMultiple_eq_necessary_sufficient, iterateMap_eq_necessary_sufficient]
+
+theorem cycleIdempotent_mem_and_idempotent_from_necessary_sufficient :
+    cycleIdempotent N f ∈ cyclePart N f ∧
+      cycleIdempotent N f ∘ cycleIdempotent N f = cycleIdempotent N f := by
+  rw [cycleIdempotent_eq_necessary_sufficient, cyclePart_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent_mem_and_idempotent
+    (globalMap N f) (necSufHex N f)
+
+theorem cycle_idempotent_unique_from_necessary_sufficient
+    (g : (V → State) → (V → State))
+    (hgCycle : g ∈ cyclePart N f) (hgIdem : g ∘ g = g) :
+    g = cycleIdempotent N f := by
+  rw [cyclePart_eq_necessary_sufficient] at hgCycle
+  rw [cycleIdempotent_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycle_idempotent_unique
+    (globalMap N f) (necSufHex N f) g hgCycle hgIdem
 
 end CellularAutomata.IterateMonoidCycleIdempotent
