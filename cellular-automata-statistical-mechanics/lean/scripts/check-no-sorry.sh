@@ -53,6 +53,12 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.IterateMonoidMinimalPeriod.exists_positivePeriod
+  CellularAutomata.IterateMonoidMinimalPeriod.minPositivePeriod_spec
+  CellularAutomata.IterateMonoidMinimalPeriod.minPositivePeriod_le
+  CellularAutomata.IterateMonoidMinimalPeriod.minPositivePeriod_pos
+  CellularAutomata.IterateMonoidMinimalPeriod.period_propagates_after_collision_start
+  CellularAutomata.IterateMonoidMinimalPeriod.minPositivePeriod_dvd
   CellularAutomata.IterateMonoidStabilizationIndex.exists_collision_start
   CellularAutomata.IterateMonoidStabilizationIndex.minCollisionStart_spec
   CellularAutomata.IterateMonoidStabilizationIndex.minCollisionStart_le
