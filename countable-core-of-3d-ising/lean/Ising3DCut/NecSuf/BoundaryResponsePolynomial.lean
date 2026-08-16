@@ -111,4 +111,23 @@ theorem boundaryResponsePolynomial_outer_box_independence
   congr 1
   ring
 
+/-- 辺変数を 1 に置かない境界応答多項式の外箱依存性（必要十分版）。係数環は可換半環 `R`、
+辺型の有限性は不要（`DecidableEq Edge''` も不要）。環準同型 `π`（外箱を広げて増えた辺の変数だけを `1` に置く代入）が
+各配位の破れ辺の単項式を元の外箱上の配位の単項式へ送るなら、`π (Z̃_{L''}) = #(外側の配位) • Z̃_L`。 -/
+theorem fullBoundaryResponse_outer_edges_to_one
+    {Edge'' Outer : Type*} [Fintype Outer]
+    (broken : Configuration → Finset Edge)
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (π : MvPolynomial Edge'' R →+* MvPolynomial Edge R)
+    (h : ∀ σ : Configuration, ∀ τ : Outer,
+      π (∏ e ∈ broken'' (σ, τ), X e) = ∏ e ∈ broken σ, X e) :
+    π (multivariatePartitionPolynomial (R := R) broken'') =
+      (Fintype.card Outer) • multivariatePartitionPolynomial (R := R) broken := by
+  unfold multivariatePartitionPolynomial
+  rw [map_sum, Fintype.sum_prod_type]
+  simp_rw [h]
+  rw [Finset.smul_sum]
+  refine Finset.sum_congr rfl fun σ _ ↦ ?_
+  simp [Finset.sum_const, Finset.card_univ]
+
 end Ising3DCut.NecSuf
