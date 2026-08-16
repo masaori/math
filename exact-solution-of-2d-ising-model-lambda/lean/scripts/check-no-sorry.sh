@@ -1270,6 +1270,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.logRat_blockTilingUpperValue_eq
   Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_le_one
   Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_one_le
+  Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.logOrderLE_openSquareBlockTilingLog_bounds_of_one_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
