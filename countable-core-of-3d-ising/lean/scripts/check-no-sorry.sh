@@ -176,6 +176,9 @@ targets=(
   Ising3DCut.LimitQuantity.partitionPolynomial_evalAtRational_pos
   Ising3DCut.LimitQuantity.partitionPolynomial_evalAtRational_eq_of_prime_exponent_sequence_eq
   Ising3DCut.LimitQuantity.card_site
+  Ising3DCut.LimitQuantity.tendsto_iff_of_pointwise_eq
+  Ising3DCut.LimitQuantity.limit_unique
+  Ising3DCut.LimitQuantity.limit_eq_of_pointwise_eq
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add
