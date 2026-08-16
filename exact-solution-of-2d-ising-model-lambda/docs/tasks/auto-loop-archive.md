@@ -3,6 +3,32 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 334）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 334 は、台帳の先頭行「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を二つに割り、前半「開境界正方形と部分正方形の比較の対数化（$\Lambda$ の鎖。$q$ は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書き、四層で閉じた。**
+  `claim_open_square_subsquare_comparison_log_le_one`（`claim_open_square_subsquare_comparison_rational_le_one` の直後、住処 Lambda）で、$1\le a<L$、$0<q\le1$ に対し
+  $(a+L)\log q+\log Z^{\mathrm{op}}_{a,a}(q)\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)\le_\Lambda(L^2-a^2)\ell_2+2(L^2-a^2)\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)$。
+  準備 3 つ（正値性・$\log2=\ell_2$・下端の対数を開く二段と上端の対数を開く四段）と、`claim_rational_log_order_iff` で値の比較を移す 4 段の鎖 1 本。
+  SageMath `check/open-square-subsquare-comparison-log/`（形 $(a,L)\in\{(1,2),(1,3),(2,3)\}$ × 有理点 6 点、216 検査）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareSubsquareComparisonLog.lean`、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `OpenSquareSubsquareComparisonLogFromNecSuf.lean`。sorry 検査 1241 件。
+  次は後半「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 334）: 台帳の先頭行「部分正方形との比較の対数化と密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」を、$\Lambda$ の鎖と $\Lambda_{\mathbb Q}$ の挟み込みで論法が二つあるので
+  「開境界正方形と部分正方形の比較の対数化（$\Lambda$ の鎖。$q$ は 1 以下）」と「部分正方形との比較による密度の挟み込み（$\Lambda_{\mathbb Q}$ 版。倍数でない辺への拡張）」の二行へ割り、前半を実行した。
+  `claim_open_square_subsquare_comparison_log_le_one` を `claim_open_square_subsquare_comparison_rational_le_one` の直後に置いた。証明は `claim_open_rectangle_gluing_inequality_log` と同じ型
+  （準備: 正値性・$\log2=\ell_2$（`claim_finite_free_entropy_density_upper_bound` の準備を引く）・両端の対数を開く二段と四段、本体は `claim_rational_log_order_iff` で移す 4 段の鎖 1 本）。
+  SageMath `open-square-subsquare-comparison-log`（`ZZ`/`QQ`・有限台辞書。一辺 4 以上は含めない）。Lean 具体版・導出版を書き、入口 import・sorry 検査へ 4 件登録（計 1241 件）。
+  式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 334）: 前 tick の「開境界長方形の接合不等式の対数化（$\Lambda$ の鎖）」の本文（準備 2 つ・第一の座標の向きの鎖 2 本・第二の座標の向きの置き換え）・SageMath overview・
+  Lean 具体版（準備の等式 2 本と 4 定理）・導出版（入口 import・sorry 検査への登録）を突き合わせ、根拠が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 333）の記録
 
 ### 現在地

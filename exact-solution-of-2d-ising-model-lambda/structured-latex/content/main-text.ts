@@ -41821,6 +41821,109 @@ A-1
   },
 
   {
+    id: "thermodynamic_limit_claim_square_difference_from_multiple_side_bound",
+    kind: "claim",
+    title: { text: "倍数辺との平方の差の評価" },
+    labels: ["claim_square_difference_from_multiple_side_bound"],
+    habitat: "N",
+    verification: ["sagemath/check/square-difference-from-multiple-side-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.sq_le_multiple_sq_add_two_mul_nat",
+      "Ising2DLambda.ThermodynamicLimit.sq_sub_multiple_sq_le_two_mul_nat",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.sq_le_sq_add_two_mul_of_between_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.sq_le_multiple_sq_add_two_mul_nat_from_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.sq_sub_multiple_sq_le_two_mul_nat_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,k,L\in\mathbb{N}`),
+        " が ",
+        math(String.raw`ka\le L\le ka+a`),
+        " を満たすとする。このとき ",
+        math(String.raw`(ka)^2\le L^2`),
+        " であり（",
+        math(String.raw`\mathbb{N}`),
+        " の乗法単調性）、",
+        math(String.raw`L^2-(ka)^2\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`L^2-(ka)^2\ \le\ 2aL`),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`-`),
+        " は ",
+        math(String.raw`\mathbb{N}`),
+        " の引き算（引かれる数が引く数以上のときに定まる差）である。",
+        "後の密度の挟み込みで、",
+        math(String.raw`L`),
+        " を ",
+        math(String.raw`a`),
+        " の倍数 ",
+        math(String.raw`ka`),
+        " と次の倍数 ",
+        math(String.raw`(k+1)a`),
+        " の間に取ったとき、",
+        ref("claim_open_square_subsquare_comparison_density_le_one"),
+        " の上端の係数の分子 ",
+        math(String.raw`L^2-(ka)^2`),
+        " を ",
+        math(String.raw`2aL`),
+        " で抑えるために引く。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "主張の左辺に ",
+        math(String.raw`(ka)^2`),
+        " を足した ",
+        math(String.raw`L^2`),
+        " から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^2
+&=L\cdot L
+&&(\because\ \text{冪の定義})\\
+&\le(ka+a)\cdot L
+&&(\because\ L\le ka+a\text{ の両辺に }L\text{ を掛ける。}\mathbb{N}\text{ の乗法単調性})\\
+&=ka\cdot L+a\cdot L
+&&(\because\ \text{分配則})\\
+&\le ka\cdot(ka+a)+a\cdot L
+&&(\because\ L\le ka+a\text{ の両辺に }ka\text{ を掛ける。}\mathbb{N}\text{ の乗法単調性})\\
+&=(ka)^2+a\cdot ka+a\cdot L
+&&(\because\ \text{分配則・積の可換性・冪の定義})\\
+&\le(ka)^2+a\cdot L+a\cdot L
+&&(\because\ ka\le L\text{ の両辺に }a\text{ を掛ける。}\mathbb{N}\text{ の乗法単調性})\\
+&=(ka)^2+2aL
+&&(\because\ \mathbb{N}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "であるから ",
+        math(String.raw`L^2\le(ka)^2+2aL`),
+        " であり、両辺から ",
+        math(String.raw`(ka)^2\le L^2`),
+        " を引いて ",
+        math(String.raw`L^2-(ka)^2\le2aL`),
+        " である（",
+        math(String.raw`\mathbb{N}`),
+        " の引き算。",
+        math(String.raw`x-y\le z\iff x\le z+y`),
+        "（",
+        math(String.raw`y\le x`),
+        " のとき））。使ったのは ",
+        math(String.raw`\mathbb{N}`),
+        " の乗法単調性・分配則・可換性と引き算だけである。",
+        math(String.raw`k`),
+        " と ",
+        math(String.raw`a`),
+        " の積の形（倍数であること）は使っておらず、",
+        math(String.raw`b:=ka`),
+        " について ",
+        math(String.raw`b\le L\le b+a`),
+        " だけを使っている。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

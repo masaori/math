@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 339 は、前 tick の「有理係数の対数順序群の Archimedes 性」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」を論法の数で四行へ割った（「非負有理数倍は有理係数の対数順序群の順序を保つ」→「係数の大小による有理数倍の比較」→
+「埋め込んだ対数の符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$）」→「誤差評価本体（$k\ge1$、$ka<L\le ka+a$）」。手順は台帳の備考。$L=ka$ は誤差評価に含めず Cauchy 性の側でブロック敷き詰め密度を直接使う）。
+そのうえで誤差評価が引く $\mathbb N$ の不等式「倍数辺との平方の差の評価」を四層で閉じた。
+`claim_square_difference_from_multiple_side_bound`（`claim_rational_log_order_group_archimedean` の直後・`remark_real_escape_plan` の直前、住処 N）: $a,k,L\in\mathbb N$、$ka\le L\le ka+a$ なら $L^2-(ka)^2\le2aL$。
+証明は七段の鎖 $L^2=L\cdot L\le(ka+a)L=kaL+aL\le ka(ka+a)+aL=(ka)^2+a\cdot ka+aL\le(ka)^2+aL+aL=(ka)^2+2aL$（乗法単調性を三度）と $\mathbb N$ の引き算。
+SageMath `check/square-difference-from-multiple-side-bound/`（$a,k\le8$ の全組、2816 検査）。Lean 具体版 `ThermodynamicLimit/SquareDifferenceFromMultipleSideBound.lean`（`sq_le_multiple_sq_add_two_mul_nat`・`sq_sub_multiple_sq_le_two_mul_nat`）、
+必要十分版 `NecSuf/ThermodynamicLimit/SquareDifferenceFromMultipleSideBound.lean`（`sq_le_sq_add_two_mul_of_between_necSuf`。`[CommSemiring K] [PartialOrder K] [IsOrderedRing K]`、$0\le a,b,L$、$b\le L\le b+a$。$k$ と $a$ の積の形は使わない。
+この Mathlib では `add_le_add_right h c` が `c + _ ≤ c + _` の向きになっており、`add_le_add … (le_refl _)` で書いた）、導出版 `SquareDifferenceFromMultipleSideBoundFromNecSuf.lean`。sorry 検査 1263 件。
+次は「非負有理数倍は有理係数の対数順序群の順序を保つ」（台帳の備考に手順）。
+
 2026-08-16 の tick 338 は、前 tick の「有理数の Bernoulli 不等式」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「有理係数の対数順序群の Archimedes 性」を四層で閉じた。
 `claim_rational_log_order_group_archimedean`（`claim_rational_bernoulli_inequality` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $0\le_{\Lambda_{\mathbb Q}}\mu$、$0\le_{\Lambda_{\mathbb Q}}\varepsilon$、$\varepsilon\ne0$ に対し
@@ -3846,9 +3857,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の Archimedes 性」（`claim_rational_log_order_group_archimedean`）の本文（準備 4 つ・本体の五段）・SageMath
-  `rational-log-order-group-archimedean`・Lean `RationalLogOrderGroupArchimedean.lean`（具体版）と必要十分版・導出版を突き合わせる。必要十分版の仮定 hArch のコメントが実態と合っているかも見る。
-- **次に進めるセクションは「倍数辺の部分正方形による密度の挟み込みの誤差評価」**（状態台帳のセクション表の先頭行）。
+- **レビュー**: 「倍数辺との平方の差の評価」（`claim_square_difference_from_multiple_side_bound`）の本文（七段の鎖）・SageMath
+  `square-difference-from-multiple-side-bound`・Lean 具体版・必要十分版・導出版を突き合わせる。
+- **次に進めるセクションは「非負有理数倍は有理係数の対数順序群の順序を保つ」**（状態台帳のセクション表の先頭行。$u=0$ の場合分けが要る）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
