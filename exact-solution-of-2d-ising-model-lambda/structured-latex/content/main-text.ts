@@ -44107,6 +44107,177 @@ a
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_large_sides_density_difference_lower_le_one",
+    kind: "claim",
+    title: { text: "基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（q は 1 以下）" },
+    labels: ["claim_open_square_large_sides_density_difference_lower_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-large-sides-density-difference-lower"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.neg_add_neg_eq_add_neg_swap",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSidesDensityDifference_lower_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.difference_lower_bound_from_swapped_upper_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareLargeSidesDensityDifference_lower_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,L,M\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`a<L`),
+        "、",
+        math(String.raw`a<M`),
+        "、",
+        math(String.raw`a^2\le L`),
+        "、",
+        math(String.raw`a^2\le M`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度について次が成り立つ。",
+      ]),
+      displayMath(String.raw`-\Bigl(\Bigl(\frac{2}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+\frac{4}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\Bigr)
++\Bigl(-\frac{4}{a}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\Bigr)
++\frac{2}{a}\cdot\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+2\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))\bigr)\Bigr)
+\ \le_{\Lambda_{\mathbb{Q}}}\ 
+\Psi^{\mathrm{op}}_{L}(q)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)\bigr)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log q,\ \log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{2}{a}\cdot`),
+        "、",
+        math(String.raw`\frac{4}{a}\cdot`),
+        "、",
+        math(String.raw`2\cdot`),
+        "（いずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元。",
+        math(String.raw`a\ge1`),
+        " なので分母 ",
+        math(String.raw`a\ne0`),
+        "）と加法・逆元 ",
+        math(String.raw`-\lambda`),
+        " は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。左辺の外側の逆元の中の加法は左から順に結合し、その中身は ",
+        ref("claim_open_square_large_sides_density_difference_upper_le_one"),
+        " の右辺と同じ元である。左辺は辺 ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`q`),
+        " だけで決まり、辺 ",
+        math(String.raw`L,M`),
+        " によらない。",
+        ref("claim_open_square_large_sides_density_difference_upper_le_one"),
+        " を辺 ",
+        math(String.raw`L`),
+        " と ",
+        math(String.raw`M`),
+        " を入れ替えて読み、",
+        ref("claim_rational_log_order_group_neg_reverses_order"),
+        " で両辺の逆元を取って向きを反転させたものである。上からの評価と合わせて、後の Cauchy 性で差を両側から押さえるために引く。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        "、",
+        math(String.raw`R:=\Bigl(\frac{2}{a}\cdot\iota(\ell_2)+\frac{4}{a}\cdot\iota(\log(1+q))\Bigr)+\Bigl(-\frac{4}{a}\cdot\iota(\log q)\Bigr)+\frac{2}{a}\cdot\bigl(\iota(\ell_2)+2\cdot\iota(\log(1+q))\bigr)\in\Lambda_{\mathbb{Q}}`),
+        " と略記する（この証明の中だけ）。主張は ",
+        math(String.raw`-R\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{L}(q)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)\bigr)`),
+        " である。仮定は辺 ",
+        math(String.raw`L`),
+        " と ",
+        math(String.raw`M`),
+        " について対称（",
+        math(String.raw`a<L`),
+        "、",
+        math(String.raw`a<M`),
+        "、",
+        math(String.raw`a^2\le L`),
+        "、",
+        math(String.raw`a^2\le M`),
+        "）なので、",
+        ref("claim_open_square_large_sides_density_difference_upper_le_one"),
+        " を辺 ",
+        math(String.raw`a`),
+        "、第一の辺を ",
+        math(String.raw`M`),
+        "、第二の辺を ",
+        math(String.raw`L`),
+        " として読むことができ、その右辺は ",
+        math(String.raw`R`),
+        " そのもの（辺 ",
+        math(String.raw`L,M`),
+        " によらない）であるから ",
+        math(String.raw`\Psi^{\mathrm{op}}_{M}(q)+\bigl(-\Psi^{\mathrm{op}}_{L}(q)\bigr)\le_{\Lambda_{\mathbb{Q}}}R`),
+        " を得る（入れ替えた上端）。準備として、この左辺の逆元が主張の右辺に等しいことを、",
+        ref("def_rational_log_order_group"),
+        " の等号の判定のとおり素数ごとに示す。任意の素数 ",
+        math(String.raw`p\in\mathcal{P}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(-\bigl(\Psi^{\mathrm{op}}_{M}(q)+(-\Psi^{\mathrm{op}}_{L}(q))\bigr)\Bigr)(p)
+&=-\Bigl(\bigl(\Psi^{\mathrm{op}}_{M}(q)+(-\Psi^{\mathrm{op}}_{L}(q))\bigr)(p)\Bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p))\\
+&=-\Bigl(\Psi^{\mathrm{op}}_{M}(q)(p)+\bigl(-\Psi^{\mathrm{op}}_{L}(q)\bigr)(p)\Bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法 }(\lambda+\mu)(p)=\lambda(p)+\mu(p))\\
+&=-\Bigl(\Psi^{\mathrm{op}}_{M}(q)(p)+\bigl(-\Psi^{\mathrm{op}}_{L}(q)(p)\bigr)\Bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p))\\
+&=\Psi^{\mathrm{op}}_{L}(q)(p)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)(p)\bigr)
+&&(\because\ \mathbb{Q}\text{ の四則: }-(u+(-v))=v+(-u))\\
+&=\Psi^{\mathrm{op}}_{L}(q)(p)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)\bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p))\\
+&=\Bigl(\Psi^{\mathrm{op}}_{L}(q)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)\bigr)\Bigr)(p)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法 }(\lambda+\mu)(p)=\lambda(p)+\mu(p))
+\end{aligned}`),
+      paragraph([
+        "であり、すべての素数で値が一致するので ",
+        math(String.raw`-\bigl(\Psi^{\mathrm{op}}_{M}(q)+(-\Psi^{\mathrm{op}}_{L}(q))\bigr)=\Psi^{\mathrm{op}}_{L}(q)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)\bigr)`),
+        " である（準備の結論）。本体は、入れ替えた上端の両辺の逆元を取り、左辺は ",
+        math(String.raw`R`),
+        " の置き方、右辺は準備の結論で読み替えるだけである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-R
+&\le_{\Lambda_{\mathbb{Q}}}-\bigl(\Psi^{\mathrm{op}}_{M}(q)+(-\Psi^{\mathrm{op}}_{L}(q))\bigr)
+&&(\because\ \text{入れ替えた上端に }\blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\Psi^{\mathrm{op}}_{M}(q)+(-\Psi^{\mathrm{op}}_{L}(q))\text{、}\mu:=R\text{ で読む})\\
+&=\Psi^{\mathrm{op}}_{L}(q)+\bigl(-\Psi^{\mathrm{op}}_{M}(q)\bigr)
+&&(\because\ \text{準備の結論})
+\end{aligned}`),
+      paragraph([
+        "最後の行は主張の右辺、最初の ",
+        math(String.raw`-R`),
+        " は主張の左辺そのものである。使ったのは、差の上からの評価（辺を入れ替えて読む）、逆元による順序の反転、",
+        ref("def_rational_log_order_group"),
+        " の加法と逆元の素数ごとの定義と等号の判定、",
+        math(String.raw`\mathbb{Q}`),
+        " の四則だけである。有理数倍の係数には触れていない。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 352 は、前 tick の「有理係数の対数順序群の逆元は順序を反転する」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」を四層で閉じた。`claim_open_square_large_sides_density_difference_lower_le_one`（`claim_open_square_large_sides_density_difference_upper_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a\ge1$、$a<L$、$a<M$、$a^2\le L$、$a^2\le M$、$0<q\le1$ で $-R\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)+(-\Psi^{\mathrm{op}}_M(q))$、$R:=U+(-D)+\frac2aC$（差の上からの評価の右辺と同じ元。辺 $L,M$ によらない）。
+証明は、差の上からの評価を第一の辺 $M$・第二の辺 $L$ で読み（仮定は $L,M$ について対称）$\Psi_M+(-\Psi_L)\le R$、準備で $-(\Psi_M+(-\Psi_L))=\Psi_L+(-\Psi_M)$ を `def_rational_log_order_group` の等号の判定どおり素数ごとに六段（逆元の定義・加法の定義・逆元の定義・$\mathbb Q$ の四則 $-(u+(-v))=v+(-u)$・逆元の定義・加法の定義）で示し、本体は `claim_rational_log_order_group_neg_reverses_order` で $-R\le-(\Psi_M+(-\Psi_L))$、準備の結論で読み替える。有理数倍の係数には触れない。
+SageMath `check/open-square-large-sides-density-difference-lower/`（$a=1$、$(L,M)\in\{2,3\}^2$ × 6 点、199 検査。素数ごとの六段は台の素数の個数だけ検査数が増える。11 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSidesDensityDifferenceLower.lean`（`neg_add_neg_eq_add_neg_swap`: `ext p` と `Finsupp.neg_apply`・`Finsupp.add_apply`・`ring` の六段 calc。`rationalLogOrderLE_openSquareLargeSidesDensityDifference_lower_of_le_one`: 差の上からの評価を `a M L` で読み `rationalLogOrderLE_neg_le_neg`、`rwa`）、
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSidesDensityDifferenceLower.lean`（`difference_lower_bound_from_swapped_upper_necSuf`。`[Add X] [Neg X]` と逆元の順序反転・準備の等式（仮定として受ける）だけ。推移律・加法単調性・群の公理は要らない）、導出版 `OpenSquareLargeSidesDensityDifferenceLowerFromNecSuf.lean`。sorry 検査 1313 件。
+
+（tick 351 の記録）
 2026-08-17 の tick 351 は、前 tick の「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「有理係数の対数順序群の逆元は順序を反転する」を四層で閉じた。`claim_rational_log_order_group_neg_reverses_order`（`claim_rational_log_order_group_add_monotone` の直後・`def_finite_free_entropy_density` の直前、住処 Lambda。$\Lambda_{\mathbb Q}$ の順序の一般的な性質なので密度の評価の列ではなく順序の性質の並びに置いた）: 任意の $\lambda,\mu\in\Lambda_{\mathbb Q}$ で $\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow-\mu\le_{\Lambda_{\mathbb Q}}-\lambda$。
 証明は `claim_rational_log_order_group_add_monotone` で両辺に $\nu:=(-\lambda)+(-\mu)$ を足し、左辺 $\lambda+((-\lambda)+(-\mu))=(\lambda+(-\lambda))+(-\mu)=0+(-\mu)=-\mu$（結合則・逆元・単位元）、右辺 $\mu+((-\lambda)+(-\mu))=\mu+((-\mu)+(-\lambda))=(\mu+(-\mu))+(-\lambda)=0+(-\lambda)=-\lambda$（交換則・結合則・逆元・単位元）。順序の定義の中身（共通分母）にも有理数倍にも触れない。
@@ -3985,9 +3993,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の逆元は順序を反転する」（`claim_rational_log_order_group_neg_reverses_order`）の本文（左辺三段・右辺四段）・SageMath
-  `rational-log-order-group-neg-reverses-order`・Lean 具体版・必要十分版・導出版を突き合わせる。
-- **次に進めるセクションは「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価（$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順）。
+- **レビュー**: 「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」（`claim_open_square_large_sides_density_difference_lower_le_one`）の本文（入れ替えた上端・準備六段・本体二段）・SageMath
+  `open-square-large-sides-density-difference-lower`・Lean 具体版・必要十分版・導出版を突き合わせる。
+- **次に進めるセクションは「差の両側の評価を $\frac1a$ 倍の形へまとめる（$0<q\le1$）」**（状態台帳のセクション表の先頭行。備考に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
