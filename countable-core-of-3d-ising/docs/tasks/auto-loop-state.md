@@ -7,6 +7,8 @@
 [docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md](../../../docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md)。
 
 ## 現在地
+- 2026-08-16: 主標的表に todo が無かったので、$\widetilde R$ の単項式構造の次の小主張として「増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい」（$\varepsilon_L\circ\pi_{L'',L}=\varepsilon_{L''}$、したがって $\varepsilon_L(\pi_{L'',L}(\widetilde R_{L'',L'}))=2^{\#V_{L''}}$）を台帳へ置き、記述した（status `todo` → `記述まで`。`claim_full_boundary_response_outer_edges_to_one_then_value_at_one`：多変数多項式環の普遍性により不定元での値の一致から環準同型の等式を得る 1 論法。`npm run check` 81 ブロック・相互参照 100 件すべて解決、PDF 22 ページ）。
+  この tick は開始が締切の 8 分前だったので、レビューは前 tick の Lean の `lake build`・sorry 検査の再実行にとどめた（125 件 OK、不一致なし）。次の tick はこの主張の SageMath 検証（内箱 1 点・外箱二つで $\varepsilon_L\circ\pi_{L'',L}$ と $\varepsilon_{L''}$ を不定元ごとと $\widetilde R_{L'',L'}$ で `ZZ` 上比較）。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の全変数を 1 に置いた値は配位の総数」の Lean 必要十分版と具体版からの導出を形式化した（status `Lean 具体版まで` → `done`。`NecSuf.fullBoundaryResponse_eval_one_eq_card_configuration`：係数環を可換半環 `R` に一般化し、評価は辺を数えも比べもしないので `Fintype Edge`・`DecidableEq Edge` を外す。`R := ℤ` への特殊化 `fullBoundaryResponse_eval_one_eq_card_configuration_fromNecSuf`。`lake build` 成功、sorry 検査 125 件 OK）。
   この tick は開始が締切の 8 分前だったので、レビューは前 tick の Lean の `lake build`・sorry 検査の再実行にとどめた（不一致なし）。四層が揃ったので次の tick は主標的の次のセクションを台帳から選び記述する（主標的表に todo が無ければ、$\widetilde R$ の単項式構造の次の小主張——例えば $\pi_{L'',L}$ と $\varepsilon_L$ の合成が $\varepsilon_{L''}$ になること——を割って台帳へ書き先頭を進める）。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の全変数を 1 に置いた値は配位の総数」の Lean 具体版を形式化した（status `記述と SageMath まで` → `Lean 具体版まで`。`fullBoundaryResponse_eval_one_eq_card_configuration`：全不定元を 1 に置く評価 `eval (fun _ ↦ 1)` が有限和・有限積を保ち各不定元を 1 へ写すので像は配位の個数 `#Configuration`。`lake build` 成功、sorry 検査 123 件 OK）。
@@ -653,6 +655,7 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
 | 辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する | $V_{L'}\subset V_L\subset V_{L''}$ と $e\in E_{L''}\setminus E_L$ に対し、$\widetilde R_{L'',L'}$ の $X_e$ についての次数がちょうど 1 であること（$e$ の一端だけを反転した配位が $e$ を破ること、および係数が非負の数え上げであること。高々 1 は上の主張）を示す。ゆえに $\pi_{L'',L}$ は $\widetilde R_{L'',L'}$ の情報を実際に落としており、辺変数を 1 に置く版で起きた「外側の点の数え上げしか残らない」潰れは起きない。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の安定性・非依存性」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_degree_exactly_one`）**2026-08-16 に SageMath 検証**（`sagemath/check/full-boundary-response-degree-exactly-one/` PASS）**2026-08-16 に Lean 具体版の第一歩**（`brokenMonomial_exponent_at_broken_edge`：$e_0$ を破る配位 $\tau$ の単項式が指数 $\sum_{e\in B(\tau)}\delta_e$ の単項式で $e_0$ での指数が 1。第二歩 `fullBoundaryResponse_one_le_coeff_brokenMonomial`：その単項式の $\widetilde R$ での係数が 1 以上。**Lean 具体版を閉じた** `fullBoundaryResponse_degreeOf_eq_one`：次数がちょうど 1）**2026-08-16 に Lean 必要十分版と導出**（`NecSuf.fullBoundaryResponse_degreeOf_eq_one`（可換半環・`CharZero R`・`Fintype Edge` 除去）・`fullBoundaryResponse_degreeOf_eq_one_fromNecSuf`） | done |
 | 辺変数を 1 に置かない境界応答多項式の全次数は辺の総数に等しい | $\widetilde R_{L,L'}$ に現れる各単項式の全次数が高々 $\#E_L$ であり、単項式 $\prod_{e\in E_L}X_e$ が係数 $\Omega_L(\#E_L)\ge2$（台の両端の主張。二部性による全辺破れ配位）で現れることから全次数がちょうど $\#E_L$ であることを示す（有限和の単項式の全次数評価 1 論法）。$\widetilde R$ が全辺の変数を同時に含む単項式を持つことの明記。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の単項式構造」から割り出した** **2026-08-16 に記述**（`claim_full_boundary_response_total_degree_is_edge_count`）**2026-08-16 に SageMath 検証**（`sagemath/check/full-boundary-response-total-degree-is-edge-count/`、PASS）**2026-08-16 に Lean 具体版（前半 `fullBoundaryResponse_totalDegree_le_card_edge`、後半 `fullBoundaryResponse_totalDegree_eq_card_edge`。後半は全辺を破る配位の存在を仮定に取り、その単項式の係数 $\ge1$ から下界を得る）** **2026-08-16 に Lean 必要十分版（前半 `NecSuf.fullBoundaryResponse_totalDegree_le_card_edge`、後半 `NecSuf.fullBoundaryResponse_totalDegree_eq_card_edge`（`CharZero R`）、各 `_fromNecSuf` 導出）** | done |
 | 辺変数を 1 に置かない境界応答多項式の全変数を 1 に置いた値は配位の総数 | 全ての辺変数 $X_e$（$e\in E_L$）を 1 に置く環準同型 $\varepsilon_L$ で $\varepsilon_L(\widetilde R_{L,L'})=2^{\#V_L}$ を示す（各配位の単項式が 1 へ写り、有限和が配位の個数になる 1 論法。「分配多項式の 1 での値」の多変数版であり、$\pi_{L'',L}$ と $\varepsilon_L$ の合成が $\varepsilon_{L''}$ になることの前段）。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の単項式構造」から割り出した（主標的表に todo が無かったため）** **2026-08-16 に記述**（`claim_full_boundary_response_value_at_one`。環準同型 $\varepsilon_L$ が有限和と有限積を保ち各単項式が 1 へ写る 1 論法） **2026-08-16 に SageMath 検証**（`sagemath/check/full-boundary-response-value-at-one/`、内箱 1 点・外箱 $\{0,1\}^3$ で $\varepsilon_L(\widetilde R_{L,L'})=256=2^8$、PASS） **2026-08-16 に Lean 具体版**（`fullBoundaryResponse_eval_one_eq_card_configuration`。`eval (fun _ ↦ 1)` が有限和・有限積を保ち各不定元を 1 へ写すので像は `#Configuration`） **2026-08-16 に Lean 必要十分版**（`NecSuf.fullBoundaryResponse_eval_one_eq_card_configuration`。係数環を可換半環 `R` に一般化し `Fintype Edge`・`DecidableEq Edge` を外す。`R := ℤ` への特殊化 `fullBoundaryResponse_eval_one_eq_card_configuration_fromNecSuf`） | done |
+| 増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい | $V_{L'}\subset V_L\subset V_{L''}$ で、環準同型として $\varepsilon_L\circ\pi_{L'',L}=\varepsilon_{L''}$（両者が全ての不定元で 1 をとることと多変数多項式環の普遍性）、したがって $\varepsilon_L(\pi_{L'',L}(\widetilde R_{L'',L'}))=2^{\#V_{L''}}$ を示す。外箱依存性の主張と全変数を 1 に置いた値の主張の整合の明記。有限の箱の比較にとどめる。**2026-08-16 に「$\widetilde R$ の単項式構造」から割り出した（主標的表に todo が無かったため）** **2026-08-16 に記述**（`claim_full_boundary_response_outer_edges_to_one_then_value_at_one`） | 記述まで |
 
 ### 従属標的（本体にしない。降格済み。**本文からは退避済み**）
 
@@ -671,36 +674,18 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
 | 健全性の橋 | 有限の証拠から、箱の大きさの極限を 1 回だけ使って無限体積の言明へ渡す定理を自作する。**これが架かるまで従属標的は本体へ戻さない** | todo |
 
 ## 前進の記録（新しい 5 件まで）
+- 2026-08-16: 「増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい」を記述した（環準同型の等式 $\varepsilon_L\circ\pi_{L'',L}=\varepsilon_{L''}$。status `記述まで`）。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する」の Lean 必要十分版と導出を形式化した（可換半環・`CharZero R`。status `done`）。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式は増えた辺の変数に真に依存する」の Lean 具体版を閉じた（`fullBoundaryResponse_degreeOf_eq_one`。status `Lean 具体版まで`）。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」を SageMath で検証した（互いに含まない二外箱で外箱依存性の 2 回適用と 2 冪の積。status `記述と SageMath まで`）。
 - 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の共通の外箱を経由した比較」を記述した（外箱依存性の 2 回適用。status `記述まで`）。
-- 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の外箱依存性」の Lean 必要十分版と導出を形式化した（可換半環へ一般化。status `done`）。
-- 2026-08-16: 「辺変数を 1 に置かない境界応答多項式の外箱依存性」の Lean 具体版を形式化した（環準同型による有限和の分配。status `Lean 具体版まで`）。
 
 ## レビュー記録（新しい 5 件まで）
+- 2026-08-16: 前 tick の Lean（`NecSuf.fullBoundaryResponse_eval_one_eq_card_configuration` と導出）の `lake build`・sorry 検査 125 件を再実行、不一致なし。
 - 2026-08-16: 前 tick の Lean 具体版を `lake build`・sorry 検査の再実行でレビュー。前々 tick の必要十分版 2 本（次数高々 1）が sorry 検査に未登録だったので `scripts/check-no-sorry.sh` へ登録した（116 件 OK）。
 - 2026-08-16: 前 tick の SageMath 検証を Lean の `lake build`・sorry 検査の再実行でレビュー（締切のため最小）。不一致なし。
 - 2026-08-16: 前 tick の「共通の外箱を経由した比較」の記述を禁止記号・無限体積語の走査と `npm run check`（76 ブロック・相互参照 83 件）の再実行でレビュー。不一致なし。
 - 2026-08-16: 前 tick の SageMath 検証・記述を Lean の `lake build`・sorry 検査の再実行でレビュー（締切のため最小）。不一致なし。
-- 2026-08-16: 前 tick の注意書きを `npm run check`（73 ブロック・相互参照 70 件）の再実行でレビュー。不一致なし。
-- 2026-08-16: 「境界応答多項式は外箱に依存しない」の SageMath 検証をレビュー（再実行 PASS、検証対応 18 件、check 72 ブロック）。不一致なし。
-- 2026-08-16: 「境界応答多項式は外箱に依存しない」の記述をレビュー（禁止記号・無限体積語の走査、安定性の参照 2 箇所、2 冪の積の段）。不一致なし。
-
-- 2026-08-16: `npm run check`（71 ブロック・相互参照 66 件）、検証対応 17 件、立場違反語走査を再実行し不備なしを確認した（修正なし）。
-- 2026-08-16: `npm run check`（70 ブロック・相互参照 66 件）を再実行し不備なしを確認した（修正なし）。
-- 2026-08-16: `npm run check`（70 ブロック・相互参照 66 件）、検証対応 16 件、Lean 具体版の
-  境界応答多項式が本文と同順であることを再確認した（不備なし。修正なし）。
-- 2026-08-15（レビューのみの tick）: 検査・検証対応・Lean 未証明依存検査・立場違反語の走査・PDF 生成を
-  再実行し、不備が無いことを確認した（修正なし）。
-- 2026-08-15（レビューのみの tick）: 検査・検証対応・Lean 未証明依存検査・立場違反語の走査を
-  再実行し、境界応答多項式の Lean 具体版が本文と同順であることを確認した（不備なし。修正なし）。
-- 2026-08-15: 境界応答多項式の本文と SageMath 四検査を再照合し、端点写像、有限代入、
-  環準同型、禁止された脱出、未証明依存に不備が無いことを確認した（修正なし）。
-- 2026-08-15: 直前の境界応答多項式の本文を、端点写像・有限代入・環準同型の各段まで再照合した。
-  記号の濫用、禁止された脱出、未証明の依存は無く、追加の修正は無かった。
-- 2026-08-15: 「測定量の選び直し」の境界応答多項式の定義で、辺の端点を未宣言の記法 `src`/`dst` で
-  書いていたのを、本文で宣言済みの $\partial_0,\partial_1$ に統一した（記号の濫用の修正）。
 
 ## 引き継ぎ（未解決のものだけ）
 
