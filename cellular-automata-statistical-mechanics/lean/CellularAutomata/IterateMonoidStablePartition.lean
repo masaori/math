@@ -8,6 +8,7 @@
 -/
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import CellularAutomata.IterateMonoidStableImage
+import CellularAutomata.NecSuf.IterateMonoidStablePartition
 
 namespace CellularAutomata.IterateMonoidStablePartition
 
@@ -146,5 +147,82 @@ theorem stableFiberTable_card_pos (q : stableImage N f) :
 noncomputable instance (q : stableImage N f) :
     DecidablePred (· ∈ stableFiber N f q) := fun y =>
   inferInstanceAs (Decidable (cycleIdempotent N f y = q.1))
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := V → State、E := cycleIdempotent N f（冪等性は前章の
+`cycleIdempotent_mem_and_idempotent`）へ特殊化したものである。安定像は
+`Set.range (cycleIdempotent N f)` として一致し、部分型は定義から同じ型になる。 -/
+
+section Derivation
+
+/-- 前章の E_F は冪等であり、必要十分版の仮定を満たす。 -/
+theorem cycleIdempotent_pointwise_idempotent (y : V → State) :
+    cycleIdempotent N f (cycleIdempotent N f y) = cycleIdempotent N f y :=
+  congrFun (cycleIdempotent_mem_and_idempotent N f).2 y
+
+/-- 安定像は必要十分版の像に一致する。 -/
+theorem stableImage_eq_necessary_sufficient_partition :
+    stableImage N f =
+      CellularAutomata.NecSuf.IterateMonoidStablePartition.stableImage
+        (cycleIdempotent N f) := rfl
+
+/-- 安定ファイバーは必要十分版の特殊化に一致する。 -/
+theorem stableFiber_eq_necessary_sufficient (q : stableImage N f) :
+    stableFiber N f q =
+      CellularAutomata.NecSuf.IterateMonoidStablePartition.stableFiber
+        (cycleIdempotent N f) q := rfl
+
+theorem representative_mem_stableFiber_from_necessary_sufficient (q : stableImage N f) :
+    q.1 ∈ stableFiber N f q :=
+  CellularAutomata.NecSuf.IterateMonoidStablePartition.representative_mem_stableFiber
+    (cycleIdempotent N f) (cycleIdempotent_pointwise_idempotent N f) q
+
+theorem existsUnique_stableFiber_from_necessary_sufficient (y : V → State) :
+    ∃! q : stableImage N f, y ∈ stableFiber N f q :=
+  CellularAutomata.NecSuf.IterateMonoidStablePartition.existsUnique_stableFiber
+    (cycleIdempotent N f) y
+
+theorem distinct_stableFibers_disjoint_from_necessary_sufficient
+    {q r : stableImage N f} (hqr : q ≠ r) :
+    stableFiber N f q ∩ stableFiber N f r = ∅ :=
+  CellularAutomata.NecSuf.IterateMonoidStablePartition.distinct_stableFibers_disjoint
+    (cycleIdempotent N f) hqr
+
+/-- 有限走査表は必要十分版の特殊化に一致する。 -/
+theorem stableFiberTable_eq_necessary_sufficient (q : stableImage N f) :
+    stableFiberTable N f q =
+      CellularAutomata.NecSuf.IterateMonoidStablePartition.stableFiberTable
+        (cycleIdempotent N f) q := by
+  ext y
+  rw [mem_stableFiberTable_iff,
+    CellularAutomata.NecSuf.IterateMonoidStablePartition.mem_stableFiberTable_iff]
+  exact Iff.rfl
+
+/-- 個数分解は必要十分版の `Fintype.card X` の段に `card_config` を継いで得られる。 -/
+theorem stableFiber_cardinality_decomposition_from_necessary_sufficient :
+    (∑ q : stableImage N f, (stableFiberTable N f q).card) =
+      2 ^ Fintype.card V := by
+  classical
+  calc
+    (∑ q : stableImage N f, (stableFiberTable N f q).card) =
+        ∑ q : stableImage N f,
+          (CellularAutomata.NecSuf.IterateMonoidStablePartition.stableFiberTable
+            (cycleIdempotent N f) q).card := by
+          apply Finset.sum_congr rfl
+          intro q _
+          rw [stableFiberTable_eq_necessary_sufficient]
+    _ = Fintype.card (V → State) := by
+      exact CellularAutomata.NecSuf.IterateMonoidStablePartition.sum_card_stableFiberTable_eq_card
+        (cycleIdempotent N f)
+    _ = 2 ^ Fintype.card V := card_config
+
+theorem stableFiberTable_card_pos_from_necessary_sufficient (q : stableImage N f) :
+    0 < (stableFiberTable N f q).card := by
+  rw [stableFiberTable_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStablePartition.stableFiberTable_card_pos
+    (cycleIdempotent N f) (cycleIdempotent_pointwise_idempotent N f) q
+
+end Derivation
 
 end CellularAutomata.IterateMonoidStablePartition
