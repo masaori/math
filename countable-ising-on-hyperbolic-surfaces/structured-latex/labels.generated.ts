@@ -42,6 +42,7 @@ export const ALL_LABELS = [
   "def_spin_integer_realization",
   "def_spin_label_reversal",
   "def_spin_label_set",
+  "theorem_boundary_of_boundary_is_zero_over_f2",
   "theorem_formal_high_temperature_expansion",
 ] as const
 

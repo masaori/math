@@ -107,4 +107,119 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "homology_sector_theorem_boundary_of_boundary_is_zero",
+    kind: "theorem",
+    title: { text: "二つの境界写像の積は零行列である" },
+    labels: ["theorem_boundary_of_boundary_is_zero_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/boundary-of-boundary-is-zero-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の面境界語から定めた ",
+        ref("def_first_boundary_matrix_over_f2"),
+        " と ",
+        ref("def_second_boundary_matrix_over_f2"),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\partial_1\partial_2
+=0_{V_{\mathrm{cell}}\times F_{\mathrm{cell}}}
+\in
+\operatorname{Mat}_{V_{\mathrm{cell}}\times F_{\mathrm{cell}}}(\mathbb F_2).`),
+    ],
+    proof: [
+      paragraph([
+        "命題 ",
+        math(String.raw`Q`),
+        " に対し、",
+        math(String.raw`\mathbf 1[Q]\in\mathbb F_2`),
+        " を ",
+        math(String.raw`Q`),
+        " が真なら ",
+        math(String.raw`1_{\mathbb F_2}`),
+        "、偽なら ",
+        math(String.raw`0_{\mathbb F_2}`),
+        " と定める。任意の ",
+        math(String.raw`w\in V_{\mathrm{cell}}`),
+        " と ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " を固定する。一次・二次境界写像の定義と有限行列の積から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\partial_1\partial_2)_{w,f}
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G(e,a)=w
+  }}1_{\mathbb F_2}
+\right)
+\left(
+  \sum_{\substack{
+    i\in P_f\\
+    e_{f,i}=e
+  }}1_{\mathbb F_2}
+\right)
+&&\bigl(\because\ \text{有限行列の積と二つの境界写像の定義}\bigr)\\
+&=
+\sum_{i\in P_f}
+\sum_{\substack{
+  a\in\mathsf{End}\\
+  \partial_G(e_{f,i},a)=w
+}}1_{\mathbb F_2}
+&&\bigl(\because\ \text{有限和の分配則と添字の付け替え}\bigr)\\
+&=
+\sum_{i\in P_f}
+\left(
+  \mathbf 1\!\left[\partial_G(e_{f,i},\iota(\omega_{f,i}))=w\right]
+  +
+  \mathbf 1\!\left[\partial_G(e_{f,i},\tau(\omega_{f,i}))=w\right]
+\right)
+&&\bigl(\because\ \{\iota(\omega),\tau(\omega)\}=\mathsf{End}\bigr)\\
+&=
+\sum_{i\in P_f}
+\mathbf 1\!\left[
+  \partial_G(e_{f,s_f(i)},\iota(\omega_{f,s_f(i)}))=w
+\right]
++
+\sum_{i\in P_f}
+\mathbf 1\!\left[
+  \partial_G(e_{f,i},\iota(\omega_{f,i}))=w
+\right]
+&&\bigl(\because\ \text{面境界語の接続条件}\bigr)\\
+&=
+\sum_{i\in P_f}
+\mathbf 1\!\left[
+  \partial_G(e_{f,i},\iota(\omega_{f,i}))=w
+\right]
++
+\sum_{i\in P_f}
+\mathbf 1\!\left[
+  \partial_G(e_{f,i},\iota(\omega_{f,i}))=w
+\right]
+&&\bigl(\because\ s_f:P_f\to P_f\text{ は全単射}\bigr)\\
+&=0_{\mathbb F_2}
+&&\bigl(\because\ 1_{\mathbb F_2}+1_{\mathbb F_2}=0_{\mathbb F_2}\bigr).
+\end{aligned}`),
+      paragraph([
+        "最初の等号では ",
+        ref("def_first_boundary_matrix_over_f2"),
+        " と ",
+        ref("def_second_boundary_matrix_over_f2"),
+        " を用いた。第三の等号では ",
+        ref("def_finite_cellulation_orientation_endpoint_selectors"),
+        "、第四の等号では ",
+        ref("def_finite_cellulation_face_boundary_word"),
+        " を用いた。任意の ",
+        math(String.raw`(w,f)\in V_{\mathrm{cell}}\times F_{\mathrm{cell}}`),
+        " 成分が ",
+        math(String.raw`0_{\mathbb F_2}`),
+        " なので、主張の零行列との等式が成り立つ。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
