@@ -10810,3 +10810,37 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-16（tick 316）: 前 tick の「有限系の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath・Lean 具体版・
   必要十分版・導出版を突き合わせ、準備三つ・$\Lambda$ の五段と $\Lambda_{\mathbb Q}$ の八段の鎖・対象ラベル・入口 import・sorry 検査への
   登録が一致した。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+## 2026-08-16 tick 322 で台帳から移したもの
+
+### 現在地
+
+- **2026-08-16 の tick 317 は、「接合不等式（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。**
+  `claim_open_rectangle_gluing_inequality_rational`（`claim_open_rectangle_value_at_rational_is_positive` の直後・実数体脱出の宣言の直前、住処 Q）で、
+  $a,b,c\ge1$、$q\in\mathbb Q_{>0}$ に対し第一・第二の座標方向 × $0<q\le1$・$1\le q$ の四つの不等式（例: $q^bZ^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)
+  \le Z^{\mathrm{op}}_{a+c,b}(q)\le Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)$）。$\mathbb R$ 版と同じ論法（接合の全単射・破れボンド数の三項分解・
+  接合面因子の自然数冪の順序・項ごとの評価の有限和・有限和の分配則）を $\mathbb Q$ の順序体の性質だけで述べ、実数体は現れない。$\mathbb R$ 版に
+  揃えて 1 ブロックに置いた。SageMath 414 組（`ZZ`/`QQ`）、Lean 具体版・必要十分版（$\mathbb R$ 版と共有）・導出版、sorry 検査 1182 件。
+  レビューでは前 tick の開矩形の値（$\mathbb Q$ 版）の四層が一致し修正無し。次は「反復接合の第一（$\mathbb Q$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 317）: `claim_open_rectangle_gluing_inequality_rational` を `claim_open_rectangle_value_at_rational_is_positive` の直後
+  （`remark_real_field_escape` の直前）に置き四層で閉じた。$\mathbb R$ 版 `claim_open_rectangle_gluing_inequality` の証明（接合の全単射・
+  破れボンド数の三項分解・接合面因子 $q^s$ の自然数冪の順序 $q^b\le q^s\le1$／$1\le q^s\le q^b$・項ごとの評価の有限和・有限和の分配則）を
+  $q\in\mathbb Q_{>0}$ で述べ直し、値は `def_open_rectangle_partition_value_at_positive_rational`、各項の正値性は
+  `claim_open_rectangle_value_at_rational_is_positive` の準備を引く。`remark_real_field_escape` は引かない。四つの不等式は $\mathbb R$ 版に
+  揃えて 1 ブロック（下流の反復接合が「第一座標方向の接合の下側」のように引くため）。$\mathbb R$ 版は併存（撤去のセクションで消す）。
+  SageMath `open-rectangle-gluing-inequality-rational`（形 23 通り × 正の有理点 9 点、414 組。$\mathbb Z[x]$ への代入と配位和の一致・全単射・
+  三項分解・接合面因子の順序・四つの不等式。`ZZ`/`QQ`）。Lean 具体版 `ThermodynamicLimit/OpenRectangleGluingInequalityRational.lean`
+  （`pow_le_one_by_induction_rat`・`pow_le_pow_of_le_one_of_exp_le_by_induction_rat`・`openPartitionValueRat_glueFirst_eq`・
+  `openPartitionValueRat_mul_eq_double_sum`・`openPartitionValueRat_glueSecond_eq`・四つの `openPartitionValueRat_glue*_bounds_of_*`。
+  $\mathbb R$ 版の帰納法を ℚ で書き直し、指数 0 の底の場合は `rw [pow_zero]`）、必要十分版は $\mathbb R$ 版の `sum_pow_glue_bounds_necSuf` を
+  そのまま共有（可換半環と順序だけ。有理数体・実数体は本質でない）、導出版 `OpenRectangleGluingInequalityRationalFromNecSuf.lean`。
+  sorry 検査 1182 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 317）: 前 tick の「開矩形の可算な定義群の移動と正の有理点での値（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・
+  必要十分版（周期境界と共有）・導出版を突き合わせ、定義の二つの等号・準備二つ・二段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。

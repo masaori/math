@@ -1254,6 +1254,7 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_one_le
   Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_le_one_from_necSuf
   Ising2DLambda.ThermodynamicLimit.partitionValueRat_periodicOpen_bounds_of_one_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.openScaledFreeEntropy_apply
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

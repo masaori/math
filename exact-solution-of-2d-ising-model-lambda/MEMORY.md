@@ -4,6 +4,22 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 322 は、前 tick の「周期境界と開境界の比較（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+「開境界正方形の自由エントロピー密度（$\Lambda_{\mathbb Q}$ 値）の定義」を本文・SageMath・Lean（定義と各素数での値の鎖）まで完成させた。
+`def_open_square_free_entropy_density`（`claim_periodic_open_boundary_comparison_rational` の直後、`remark_real_field_escape` の直前、住処 Lambda）で、
+$L\ge1$、$q\in\mathbb Q_{>0}$ に対し $\Psi^{\mathrm{op}}_L(q):=\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\log Z^{\mathrm{op}}_{L,L}(q))\in\Lambda_{\mathbb Q}$
+（周期境界の `def_finite_free_entropy_density` と同じ形。$\Phi^{\mathrm{op}}$ のような新記号は置かず `def_rational_log` の対数を直接使う。値は
+`def_open_rectangle_partition_value_at_positive_rational`、正値性は `claim_open_rectangle_value_at_rational_is_positive`。各素数での値の三段の鎖、写像と値の区別、
+$\Psi_L$・$\psi^{\mathrm{op}}_L$ との区別、具体例 $L=2$、$q=1/2$: $Z^{\mathrm{op}}_{2,2}=2+12x^2+2x^4$、$Z^{\mathrm{op}}_{2,2}(1/2)=41/8$、$\Psi^{\mathrm{op}}_2(1/2)=\frac14\cdot\iota(\ell_{41}-3\ell_2)$）。
+SageMath `open-square-free-entropy-density`（$L\in\{1,2,3\}$ × 正の有理点 9 点、178 検査、`ZZ`/`QQ`・素因数分解）。Lean `ThermodynamicLimit/OpenSquareFreeEntropyDensity.lean`
+（`openScaledFreeEntropy`（`[NeZero L]`）・`openScaledFreeEntropy_apply`。`RationalLogOrderGroup.lean` の `scaledFreeEntropy` と同じ三段の calc）。定義なので必要十分版・導出版は無い。sorry 検査 1199 件。
+セクション「定義と非負性・上界」は割り、次は「開境界正方形の値の下界 1（$\mathbb Q$ 版）と密度の非負性（$\Lambda_{\mathbb Q}$ 版）」（`def_open_rectangle_constant_plus_configuration`・
+`claim_open_rectangle_constant_plus_breaks_no_bond`（住処 N。$\mathbb R$ 側 `claim_open_rectangle_value_at_least_one` の直前にある）を `def_open_square_free_entropy_density` の直後へ移し、
+$1\le Z^{\mathrm{op}}_{a,b}(q)$ を `claim_partition_value_ge_one_at_positive_rational` と同じ論法で、$0\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$ を
+`claim_finite_free_entropy_density_nonnegative` と同じ論法（`claim_log_power` の $k=0$・`claim_rational_log_order_iff`・`claim_scaled_embedding_order_transfer`）で書く。主張 2 なので
+着手時に「値の下界 1（$\mathbb Q$ 版）」と「密度の非負性」へ割ってよい。Lean は `PartitionValueGeOne*.lean`・`FiniteFreeEntropyDensityNonnegative*.lean` を開境界へ移す。
+必要十分版 `one_le_sum_pow_of_exponent_zero_necSuf`・`le_base_transport_of_monotone_necSuf` は共有できる見込み。着手前に確かめる）。
+
 2026-08-16 の tick 321 は、前 tick の「正方形のブロック敷き詰め（$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「周期境界と開境界の比較（$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 `claim_periodic_open_boundary_comparison_rational`（`claim_open_square_block_tiling_rational` の直後、`remark_real_field_escape` の直前、住処 Q）で、
@@ -3587,11 +3603,11 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「正方形のブロック敷き詰め（$\mathbb Q$ 版）」（`claim_open_square_block_tiling_rational`）の本文・SageMath
-  `open-square-block-tiling-rational`・Lean（`OpenSquareBlockTilingRational.lean` 系統）を突き合わせる。$\mathbb R$ 版から
-  機械的に置き換えたので、$t$ の残りや $\le_{\mathbb R}$ の残りが無いことも見る。
-- **次に進めるセクションは「周期境界と開境界の比較（$\mathbb Q$ 版）」**（状態台帳のセクション表の先頭行）。
-  以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
+- **レビュー**: 「開境界正方形の自由エントロピー密度」（`def_open_square_free_entropy_density`）の本文・SageMath
+  `open-square-free-entropy-density`・Lean `OpenSquareFreeEntropyDensity.lean` を突き合わせる。周期境界側の定義と形が揃っているか、
+  引くラベル（値・正値性・対数・$\iota$）が正しいかも見る。
+- **次に進めるセクションは「開境界正方形の値の下界 1（$\mathbb Q$ 版）と密度の非負性（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行。
+  主張 2 なので着手時に割ってよい）。以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
   後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
   到達点は台帳の表にある。
