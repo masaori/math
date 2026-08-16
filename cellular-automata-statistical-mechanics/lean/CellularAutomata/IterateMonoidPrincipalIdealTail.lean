@@ -8,6 +8,7 @@
 有限集合と自然数だけを使い、無限反復の極限、位相、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidIdempotents
+import CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail
 
 namespace CellularAutomata.IterateMonoidPrincipalIdealTail
 
@@ -145,5 +146,89 @@ theorem tail_finite_decidability {i j : ℕ} (hij : i < j)
   rw [← mem_finiteTail_iff_tail N f hij h,
     ← mem_finiteTail_iff_tail N f hij h]
   exact Finset.ext_iff.mp hn'.2 g
+
+/-! ## 必要十分版からの導出
+具体版は必要十分版を X := V → State、F := globalMap N f へ特殊化したものである。 -/
+
+omit [Fintype V] [DecidableEq V] in
+theorem tail_eq_necessary_sufficient (n : ℕ) :
+    tail N f n =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.tail (globalMap N f) n := by
+  ext g
+  simp only [tail, CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.tail,
+    Set.mem_setOf_eq, iterateMap_eq_necessary_sufficient]
+
+omit [Fintype V] [DecidableEq V] in
+theorem tail_eq_principal_ideal_from_necessary_sufficient (n : ℕ) :
+    tail N f n = {h | ∃ g, g ∈ powerSet N f ∧ iterateMap N f n ∘ g = h} := by
+  rw [tail_eq_necessary_sufficient, powerSet_eq_necessary_sufficient,
+    iterateMap_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.tail_eq_principal_ideal
+    (globalMap N f) n
+
+omit [Fintype V] [DecidableEq V] in
+theorem tail_absorbs_composition_from_necessary_sufficient (n : ℕ)
+    {g h : (V → State) → (V → State)}
+    (hg : g ∈ powerSet N f) (hh : h ∈ tail N f n) : g ∘ h ∈ tail N f n := by
+  rw [tail_eq_necessary_sufficient] at hh ⊢
+  rw [powerSet_eq_necessary_sufficient] at hg
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.tail_absorbs_composition
+    (globalMap N f) n hg hh
+
+omit [Fintype V] [DecidableEq V] in
+theorem tails_descend_from_necessary_sufficient (n : ℕ) : tail N f (n + 1) ⊆ tail N f n := by
+  rw [tail_eq_necessary_sufficient, tail_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.tails_descend (globalMap N f) n
+
+omit [Fintype V] [DecidableEq V] in
+theorem collision_stabilizes_tails_from_necessary_sufficient {i j : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j) {n : ℕ} (hin : i ≤ n) :
+    tail N f n = tail N f i := by
+  rw [tail_eq_necessary_sufficient, tail_eq_necessary_sufficient]
+  simp only [iterateMap_eq_necessary_sufficient] at h
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.collision_stabilizes_tails
+    (globalMap N f) hij h hin
+
+/-- 有限舞台では、有限型 V → State 上の自己写像への特殊化により、
+    ある位置以後で後尾集合が安定する。 -/
+theorem exists_stabilization_index_from_necessary_sufficient :
+    ∃ i : ℕ, ∀ n : ℕ, i ≤ n → tail N f n = tail N f i := by
+  obtain ⟨i, hi⟩ :=
+    CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.exists_stabilization_index
+      (globalMap N f)
+  refine ⟨i, fun n hin => ?_⟩
+  rw [tail_eq_necessary_sufficient, tail_eq_necessary_sufficient]
+  exact hi n hin
+
+theorem finiteTail_eq_necessary_sufficient (j n : ℕ) :
+    finiteTail N f j n =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.finiteTail (globalMap N f) j n := by
+  ext g
+  simp only [finiteTail, CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.finiteTail,
+    Finset.mem_image, representatives_eq_necessary_sufficient, iterateMap_eq_necessary_sufficient]
+
+theorem mem_finiteTail_iff_tail_from_necessary_sufficient {i j : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j)
+    (n : ℕ) (g : (V → State) → (V → State)) :
+    g ∈ finiteTail N f j n ↔ g ∈ tail N f n := by
+  rw [finiteTail_eq_necessary_sufficient, tail_eq_necessary_sufficient]
+  simp only [iterateMap_eq_necessary_sufficient] at h
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.mem_finiteTail_iff_tail
+    (globalMap N f) hij h n g
+
+theorem stableIndices_eq_necessary_sufficient (i j : ℕ) :
+    stableIndices N f i j =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.stableIndices (globalMap N f) i j := by
+  ext n
+  simp only [stableIndices, CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.stableIndices,
+    Finset.mem_filter, finiteTail_eq_necessary_sufficient]
+
+theorem tail_finite_decidability_from_necessary_sufficient {i j : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j) :
+    ∃ n ≤ i, tail N f n = tail N f (n + 1) := by
+  simp only [tail_eq_necessary_sufficient]
+  simp only [iterateMap_eq_necessary_sufficient] at h
+  exact CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.tail_finite_decidability
+    (globalMap N f) hij h
 
 end CellularAutomata.IterateMonoidPrincipalIdealTail
