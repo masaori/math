@@ -1072,4 +1072,219 @@ c
       ]),
     ],
   },
+  {
+    id: "finite_fourier_theorem_primal_coboundary_transport_is_dual_boundary",
+    kind: "theorem",
+    title: { text: "主一次余境界の係数移送は双対面境界空間である" },
+    labels: ["theorem_primal_coboundary_transport_is_dual_boundary"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-coboundary-transport-is-dual-boundary"],
+    statement: [
+      paragraph([
+        ref("def_first_boundary_matrix_over_f2"),
+        " の主一次境界行列に対し、主一次余境界空間を",
+      ]),
+      displayMath(String.raw`\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+:=
+\operatorname{im}(\partial_1^{\mathsf T})
+=
+\left\{
+  \partial_1^{\mathsf T}a
+  \ \middle|\
+  \ a\in\mathbb F_2^{V_{\mathrm{cell}}}
+\right\}
+\subseteq
+\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+      paragraph([
+        "と書く。包含は ",
+        ref("theorem_boundary_of_boundary_is_zero_over_f2"),
+        " の転置から従う。",
+        ref("def_dual_face_boundary_word"),
+        " の双対面境界語に対し、双対二次境界行列を",
+      ]),
+      displayMath(String.raw`\partial_2^\ast
+:=
+\left[
+  \sum_{\substack{
+    c\in C_v\\
+    \partial_{\mathrm{word}}^\ast d_2(v)(c)
+    =(e^\ast,\omega)\text{ for some }\omega\in\mathsf{Ori}
+  }}1_{\mathbb F_2}
+\right]_{
+  e^\ast\in E_{\mathrm{cell}}^\ast,
+  \ d_2(v)\in F_{\mathrm{cell}}^\ast
+}
+\in
+\operatorname{Mat}_{E_{\mathrm{cell}}^\ast\times F_{\mathrm{cell}}^\ast}(\mathbb F_2)`),
+      paragraph([
+        "と定め、双対面境界空間を ",
+        math(String.raw`\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\operatorname{im}(\partial_2^\ast)`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\mathsf D_1\!\left(
+  \operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right)
+=
+\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2).`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in\mathbb F_2^{V_{\mathrm{cell}}}`),
+        " に対して、",
+        ref("theorem_boundary_of_boundary_is_zero_over_f2"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\partial_2^{\mathsf T}\!\left(\partial_1^{\mathsf T}a\right)
+&=
+(\partial_1\partial_2)^{\mathsf T}a
+\quad\bigl(\because\ \text{有限行列の積の転置}\bigr)\\
+&=
+0_{\mathbb F_2^{F_{\mathrm{cell}}}}
+\quad\bigl(\because\ \partial_1\partial_2\text{ は零行列}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_primal_first_cocycle_space_over_f2"),
+        " より、主一次余境界空間は主一次コサイクル空間に含まれる。次に、",
+        ref("def_primal_dual_cell_correspondence"),
+        " の全単射 ",
+        math(String.raw`d_2:V_{\mathrm{cell}}\to F_{\mathrm{cell}}^\ast`),
+        " に沿う係数移送を、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_2^\vee:
+\mathbb F_2^{V_{\mathrm{cell}}}
+&\longrightarrow
+\mathbb F_2^{F_{\mathrm{cell}}^\ast},\\
+a
+&\longmapsto
+\mathsf D_2^\vee(a),\\
+\mathsf D_2^\vee(a)(f^\ast)
+&:=
+a\!\left(d_2^{-1}(f^\ast)\right)
+\end{aligned}`),
+      paragraph([
+        "と書く。",
+        ref("def_dual_face_boundary_word"),
+        "、",
+        ref("def_finite_cellulation_opposite_edge_occurrences"),
+        "、",
+        ref("def_finite_cellulation_vertex_links_are_cycles"),
+        "、",
+        ref("def_first_boundary_matrix_over_f2"),
+        " により、任意の ",
+        math(String.raw`v\in V_{\mathrm{cell}}`),
+        " と ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\partial_2^\ast)_{d_1(e),d_2(v)}
+&=
+\sum_{\substack{
+  c\in C_v\\
+  \partial_{\mathrm{word}}^\ast d_2(v)(c)
+  =(d_1(e),\omega)\text{ for some }\omega\in\mathsf{Ori}
+}}1_{\mathbb F_2}
+\quad\bigl(\because\ \partial_2^\ast\text{ の定義}\bigr)\\
+&=
+\sum_{\substack{
+  a_0\in\mathsf{End}\\
+  \partial_G(e,a_0)=v
+}}1_{\mathbb F_2}
+\quad\bigl(\because\ \text{角の出発辺端と双対面境界語の対応}\bigr)\\
+&=
+(\partial_1)_{v,e}
+\quad\bigl(\because\ \partial_1\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_primal_to_dual_edge_coefficient_transport"),
+        " と全単射 ",
+        math(String.raw`d_2`),
+        " による有限和の添字の付け替えから、任意の ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1\!\left(\partial_1^{\mathsf T}a\right)(d_1(e))
+&=
+(\partial_1^{\mathsf T}a)(e)
+\quad\bigl(\because\ \mathsf D_1\text{ の定義}\bigr)\\
+&=
+\sum_{v\in V_{\mathrm{cell}}}(\partial_1)_{v,e}a(v)
+\quad\bigl(\because\ \text{転置行列と係数写像の積}\bigr)\\
+&=
+\sum_{v\in V_{\mathrm{cell}}}
+(\partial_2^\ast)_{d_1(e),d_2(v)}
+\mathsf D_2^\vee(a)(d_2(v))
+\quad\bigl(\because\ (\partial_2^\ast)_{d_1(e),d_2(v)}=(\partial_1)_{v,e}\bigr)\\
+&=
+\sum_{f^\ast\in F_{\mathrm{cell}}^\ast}
+(\partial_2^\ast)_{d_1(e),f^\ast}
+\mathsf D_2^\vee(a)(f^\ast)
+\quad\bigl(\because\ d_2\text{ は全単射}\bigr)\\
+&=
+\left(\partial_2^\ast\mathsf D_2^\vee(a)\right)(d_1(e))
+\quad\bigl(\because\ \text{有限行列と係数写像の積}\bigr).
+\end{aligned}`),
+      paragraph([
+        "全単射 ",
+        math(String.raw`d_1:E_{\mathrm{cell}}\to E_{\mathrm{cell}}^\ast`),
+        " により、",
+        math(String.raw`\mathsf D_1(\partial_1^{\mathsf T}a)=\partial_2^\ast\mathsf D_2^\vee(a)`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\mathsf D_1\!\left(
+  \operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right)
+\subseteq
+\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+\quad\bigl(\because\ \text{像の定義}\bigr).`),
+      paragraph([
+        "逆に、任意の ",
+        math(String.raw`b^\ast\in\mathbb F_2^{F_{\mathrm{cell}}^\ast}`),
+        " に対し ",
+        math(String.raw`a(v):=b^\ast(d_2(v))`),
+        " と定める。任意の ",
+        math(String.raw`f^\ast\in F_{\mathrm{cell}}^\ast`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_2^\vee(a)(f^\ast)
+&=
+a\!\left(d_2^{-1}(f^\ast)\right)
+\quad\bigl(\because\ \mathsf D_2^\vee\text{ の定義}\bigr)\\
+&=
+b^\ast\!\left(d_2(d_2^{-1}(f^\ast))\right)
+\quad\bigl(\because\ a(v)=b^\ast(d_2(v))\bigr)\\
+&=
+b^\ast(f^\ast)
+\quad\bigl(\because\ d_2\text{ は全単射}\bigr).
+\end{aligned}`),
+      paragraph(["したがって"]),
+      displayMath(String.raw`\begin{aligned}
+\partial_2^\ast b^\ast
+&=
+\partial_2^\ast\mathsf D_2^\vee(a)
+\quad\bigl(\because\ \mathsf D_2^\vee(a)=b^\ast\bigr)\\
+&=
+\mathsf D_1\!\left(\partial_1^{\mathsf T}a\right)
+\quad\bigl(\because\ \text{上で得た係数移送の等式}\bigr).
+\end{aligned}`),
+      paragraph([
+        "ゆえに双対面境界空間は移送後の主一次余境界空間に含まれる。二つの包含から主張の等式を得る。主頂点係数、主辺係数、双対面係数、双対辺係数を同一視せず、移行には ",
+        math(String.raw`\partial_1^{\mathsf T}`),
+        "、",
+        math(String.raw`\mathsf D_2^\vee`),
+        "、",
+        math(String.raw`\mathsf D_1`),
+        "、",
+        math(String.raw`\partial_2^\ast`),
+        " だけを用いる。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
