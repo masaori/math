@@ -3,6 +3,26 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 355 で台帳から移した記録（tick 350 分）
+
+### 現在地
+
+- **2026-08-17 の tick 350 は、台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で四行へ割り、その最初「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」（$a\ge1$、$a<L$、$a<M$、$a^2\le L$、$a^2\le M$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L+(-\Psi^{\mathrm{op}}_M)\le U+(-D)+\frac2aC$、$U:=\frac2a\iota(\ell_2)+\frac4a\iota(\log(1+q))$、$D:=\frac4a\iota(\log q)$、$C:=\iota(\ell_2)+2\iota(\log(1+q))$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_large_sides_density_difference_upper_le_one`（`claim_open_square_large_side_density_lower_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は、上端（辺 $a,L$）$\Psi_L\le U+\Psi_a$ と下端（辺 $a,M$）$(D+\Psi_a)+(-\frac2aC)\le\Psi_M$ を読み、準備で下端の両辺に $(-D)+\frac2aC$ を足して左辺を結合則・交換則・逆元・単位元で $\Psi_a$ に戻し（$\Psi_a\le\Psi_M+((-D)+\frac2aC)$）、本体で上端に $-\Psi_M$ を足し、並べ替え、準備の結論に $(-\Psi_M)+U$ を足し、並べ替え・逆元・単位元で $U+(-D)+\frac2aC$ に着く。有理数倍の係数には触れない。
+  SageMath `check/open-square-large-sides-density-difference-upper/`（$a=1$、$(L,M)\in\{2,3\}^2$ × 6 点、360 検査、11 秒）。Lean 具体版 `ThermodynamicLimit/OpenSquareLargeSidesDensityDifferenceUpper.lean`（`rationalLogOrderLE_openSquareLargeSidesDensityDifference_upper_of_le_one`。並べ替えは `simp only [add_assoc, add_comm, add_left_comm]`、`add_neg_cancel`・`neg_add_cancel`・`add_zero`・`zero_add`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareLargeSidesDensityDifferenceUpper.lean`（`difference_upper_bound_from_upper_and_lower_necSuf`。`[AddCommMonoid X] [Neg X]` と推移律・右加法単調性・二つの逆元律 $x+(-x)=0$・$(-x)+x=0$ だけ。減法・整数倍・順序の線形性は要らない）、導出版。sorry 検査 1306 件。
+  割り方: 「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」→「有理係数の対数順序群の逆元は順序を反転する」→「基準辺の平方以上の二つの辺の密度の差の一様な下からの評価」→「差の両側の評価を $\frac1a$ 倍の形へまとめる」→「密度の列の Cauchy 性」（手順は台帳の備考）。前 tick のレビューでは修正なし。次は「有理係数の対数順序群の逆元は順序を反転する」。
+
+### 前進の記録
+
+- 2026-08-17（tick 350）: 台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」は、差の上端（加法単調性と群の並べ替え）・逆元の順序反転・差の下端（入れ替えと反転）・$\frac1a$ 倍の形への整理（分配則）・Cauchy 性本体（Archimedes 性で $a$ を選ぶ）の五つの論法を含むので五行へ割った（手順は台帳の備考）。その最初「基準辺の平方以上の二つの辺の密度の差の一様な上からの評価」を実行し、`claim_open_square_large_sides_density_difference_upper_le_one` を `claim_open_square_large_side_density_lower_vs_base_side_le_one` の直後に置いた。
+  証明は上端（辺 $a,L$）と下端（辺 $a,M$）を加法単調性でつなぎ、群の結合則・交換則・逆元・単位元で並べ替えるだけ（係数には触れない）。SageMath `open-square-large-sides-density-difference-upper`、Lean 具体版・必要十分版（`AddCommMonoid`・`Neg`、推移律・右加法単調性・二つの逆元律だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1306 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 350）: 前 tick の「基準辺の平方以上の辺の密度の基準辺の密度による一様な下からの評価」の本文（準備 4 つ・本体四段）・SageMath overview（288 検査）・Lean 具体版（`exists_multiple_side_below_of_lt`・`hcL`・`hc2`・`hneg`・`hv0`・`hC0`・`hA`・`hB`・`hsplit`・`h1`・`h2'` が本文の準備第一〜第四と本体に 1 対 1）・必要十分版（`AddCommMagma`、推移律・右加法単調性・交換則）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は下端の係数を辺 $L$ によらない形へ小さくする比較で差の評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 354 で台帳から移した記録（tick 349 分）
 
 ### 現在地

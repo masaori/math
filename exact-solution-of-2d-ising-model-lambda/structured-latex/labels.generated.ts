@@ -217,6 +217,7 @@ export const ALL_LABELS = [
   "claim_rational_log_injective",
   "claim_rational_log_order_group_add_monotone",
   "claim_rational_log_order_group_archimedean",
+  "claim_rational_log_order_group_div_ge_multiplier_le",
   "claim_rational_log_order_group_embedding",
   "claim_rational_log_order_group_linear_order",
   "claim_rational_log_order_group_neg_reverses_order",
