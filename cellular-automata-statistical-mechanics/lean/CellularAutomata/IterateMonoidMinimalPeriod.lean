@@ -7,6 +7,7 @@
 人手証明と同じ順序で形式化する。有限集合と自然数だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStabilizationIndex
+import CellularAutomata.NecSuf.IterateMonoidMinimalPeriod
 
 namespace CellularAutomata.IterateMonoidMinimalPeriod
 
@@ -110,5 +111,70 @@ theorem minPositivePeriod_dvd {p : ℕ} (hp : IsPositivePeriod N f p) :
     （`claim_iterate_monoid_minimal_period_finite_decidability`）。 -/
 noncomputable instance (p : ℕ) : Decidable (IsPositivePeriod N f p) :=
   instDecidableAnd
+
+end CellularAutomata.IterateMonoidMinimalPeriod
+
+/-! ## 必要十分版からの導出
+
+具体版の各主張が、大域写像 `globalMap N f` に必要十分版を特殊化したものとして得られることを示す。
+必要十分版の衝突開始位置の存在証明には有限型上の `exists_collision_start` を渡す。 -/
+
+namespace CellularAutomata.IterateMonoidMinimalPeriod
+
+open CellularAutomata.EssentialDependency
+open CellularAutomata.TimeExpansionDependency
+open CellularAutomata.IterateMonoid
+open CellularAutomata.IterateMonoidStabilizationIndex
+
+variable {V : Type} [Fintype V] [DecidableEq V]
+variable (N : V → Finset V)
+variable (f : (v : V) → (↥(N v) → State) → State)
+
+/-- 必要十分版へ渡す衝突開始位置の存在（有限型から）。 -/
+noncomputable abbrev necSufHex : ∃ n : ℕ,
+    CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.IsCollisionStart (globalMap N f) n :=
+  CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.exists_collision_start (globalMap N f)
+
+/-- 正周期の述語は必要十分版の特殊化に一致する。 -/
+theorem isPositivePeriod_eq_necessary_sufficient (p : ℕ) :
+    IsPositivePeriod N f p ↔
+      CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.IsPositivePeriod (globalMap N f)
+        (necSufHex N f) p := by
+  simp only [IsPositivePeriod,
+    CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.IsPositivePeriod,
+    iterateMap_eq_necessary_sufficient, minCollisionStart_eq_necessary_sufficient]
+
+theorem exists_positivePeriod_from_necessary_sufficient : ∃ p : ℕ, IsPositivePeriod N f p := by
+  obtain ⟨p, hp⟩ := CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.exists_positivePeriod
+    (globalMap N f) (necSufHex N f)
+  exact ⟨p, (isPositivePeriod_eq_necessary_sufficient N f p).mpr hp⟩
+
+/-- 具体版の最小正周期は必要十分版の最小正周期に等しい（両方向の最小性）。 -/
+theorem minPositivePeriod_eq_necessary_sufficient :
+    minPositivePeriod N f =
+      CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.minPositivePeriod (globalMap N f)
+        (necSufHex N f) := by
+  apply Nat.le_antisymm
+  · exact minPositivePeriod_le N f ((isPositivePeriod_eq_necessary_sufficient N f _).mpr
+      (CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.minPositivePeriod_spec _ _))
+  · exact CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.minPositivePeriod_le _ _
+      ((isPositivePeriod_eq_necessary_sufficient N f _).mp (minPositivePeriod_spec N f))
+
+theorem period_propagates_after_collision_start_from_necessary_sufficient {p n : ℕ}
+    (hp : 0 < p ∧ iterateMap N f (minCollisionStart N f) =
+      iterateMap N f (minCollisionStart N f + p))
+    (hn : minCollisionStart N f ≤ n) :
+    iterateMap N f n = iterateMap N f (n + p) := by
+  rw [iterateMap_eq_necessary_sufficient, iterateMap_eq_necessary_sufficient]
+  rw [minCollisionStart_eq_necessary_sufficient] at hn
+  have hp' := (isPositivePeriod_eq_necessary_sufficient N f p).mp hp
+  exact CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.period_propagates_after_collision_start
+    (globalMap N f) (necSufHex N f) hp' hn
+
+theorem minPositivePeriod_dvd_from_necessary_sufficient {p : ℕ} (hp : IsPositivePeriod N f p) :
+    minPositivePeriod N f ∣ p := by
+  rw [minPositivePeriod_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidMinimalPeriod.minPositivePeriod_dvd
+    (globalMap N f) (necSufHex N f) ((isPositivePeriod_eq_necessary_sufficient N f p).mp hp)
 
 end CellularAutomata.IterateMonoidMinimalPeriod
