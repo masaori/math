@@ -137,8 +137,8 @@ title="$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "$HTML" | head -1)"
 [ -n "$title" ] || title="2値セルオートマトンの内在構造"
 agent="$(cat "$LOG_DIR/last-agent" 2>/dev/null || echo '-')"
 
-message="${title}（${agent} / 版 ${short_commit}）
-${summary}
+# **一文だけ送る**（ユーザー指示 2026-08-16）。表題・エージェント名・版は書かない。
+message="${summary}
 ${url}"
 case "$message" in
   *"$EXPECTED_URL"*) ;;

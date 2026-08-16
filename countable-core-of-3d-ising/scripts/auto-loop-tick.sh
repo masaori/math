@@ -550,9 +550,14 @@ case "$status" in
   *)   tick_outcome="異常終了 (exit $status)" ;;
 esac
 
-# **前進しなかった tick も報告する。** 黙ると、止まっていることに誰も気づかない。
-notify_slack "$(printf '%s（%s / %s / 版 %s）\n%s\n%s' \
-  "$tick_title" "$agent" "$tick_outcome" "$tick_commit" "$tick_summary" "$published_url")"
+# **一文だけ送る**（ユーザー指示 2026-08-16）。何をしたかが一読で分かる一文と公開 URL だけ。
+# 表題・エージェント名・版は書かない。前進しなかった tick も報告する（黙ると止まっていることに
+# 誰も気づかない）が、そのときは「何をしなかったか」自体が伝えるべき一文になる。
+case "$tick_outcome" in
+  前進*) tick_line="$tick_summary" ;;
+  *)     tick_line="$tick_outcome" ;;
+esac
+notify_slack "$(printf '%s\n%s' "$tick_line" "$published_url")"
 
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
 main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"

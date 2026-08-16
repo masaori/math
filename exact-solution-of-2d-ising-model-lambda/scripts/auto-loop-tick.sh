@@ -366,8 +366,14 @@ case "$status" in
   *)   tick_outcome="異常終了 (exit $status)" ;;
 esac
 
-tick_message="$(printf '2次元 Ising 模型（Λ の立場）（%s / %s / 版 %s）\n%s\n%s' \
-  "$agent" "$tick_outcome" "$tick_commit" "$tick_summary" "$published_url")"
+# **一文だけ送る**（ユーザー指示 2026-08-16）。何をしたかが一読で分かる一文と、公開物がある
+# ときだけその絶対 URL。エージェント名・版・結果の内訳は書かない（前進しなかったときだけ、
+# その事実自体が伝えるべき一文になる）。
+case "$tick_outcome" in
+  前進*) tick_line="$tick_summary" ;;
+  *)     tick_line="$tick_outcome" ;;
+esac
+tick_message="$(printf '%s\n%s' "$tick_line" "$published_url")"
 # 送り先は **math リポジトリ専用**のもの（2026-08-15 に slack-notification skill が
 # リポジトリ別の送り先へ分かれた。正本は ~/.claude/skills/slack-notification/SKILL.md）。
 # この URL は秘密ではないので、伏せ字にせずこのまま置く。
