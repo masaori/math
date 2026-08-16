@@ -4,6 +4,21 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 332 は、前 tick の「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「極限の存在を $\Lambda\otimes\mathbb{Q}$ の Cauchy 性として述べる」を定義ブロック 1 つとして実行した（「述べる」だけの行なので）。
+`def_rational_log_order_group_cauchy_sequence`（`claim_open_square_block_tiling_density` の直後、`remark_real_escape_plan` の直前、住処 Lambda）:
+$\Lambda_{\mathbb Q}$ の元の列 $(\lambda_L)_{L\ge1}$（写像 $\{L\in\mathbb N\mid L\ge1\}\to\Lambda_{\mathbb Q}$）が Cauchy 列であるとは、
+$0\le_{\Lambda_{\mathbb Q}}\varepsilon$ かつ $\varepsilon\ne0$ なる任意の $\varepsilon\in\Lambda_{\mathbb Q}$ に対し、ある $N\ge1$ があって $N\le L,M$ なるすべての $L,M$ で
+$-\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L-\lambda_M\le_{\Lambda_{\mathbb Q}}\varepsilon$ が成り立つこと。$\varepsilon$ は $\Lambda_{\mathbb Q}$ の正の元全体（単位 $\iota(\ell_2)$ の有理数倍に限らない）、
+厳密順序 $<_{\Lambda_{\mathbb Q}}$ は本文に無いので「$0\le\varepsilon$ かつ $\varepsilon\ne0$」で書いた。$N$ は $\varepsilon$ に依存してよく、Cauchy 性を主張する証明では $\varepsilon\mapsto N$ を明示する、
+極限が $\Lambda_{\mathbb Q}$ に存在することは主張しない、と本文に書いた。
+SageMath `rational-log-order-group-cauchy-sequence`（決定手続きの一致 21051 回、定数列、$(1/L)\iota(\ell_2)$ の $N$ 探索と窓 40、$L\iota(\ell_2)$ が破ること。6 秒）。
+Lean `ThermodynamicLimit/RationalLogOrderGroupCauchySequence.lean`（`IsCauchyRationalLogOrder`（列は `ℕ → RationalLogOrderGroup`、$L=0$ の値は $N\ge1$ のため参照されない）・
+`rationalLogOrderLE_neg_of_nonneg`・`isCauchyRationalLogOrder_const`。定義なので必要十分版は無し）。sorry 検査 1227 件。
+次は「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」（周期境界の値の接合不等式（有理点）があるか先に確かめ、無ければ開境界の
+`claim_open_rectangle_gluing_inequality_rational` の対数化として書く。着手前に台帳の備考と `claim_open_square_block_tiling_density` の書き方を読むこと。
+なお後続の「密度の列の Cauchy 性」では「$\mu,\varepsilon>0$ に対し $\mu\le_{\Lambda_{\mathbb Q}} n\cdot\varepsilon$ となる $n\in\mathbb N$ が存在する」（Archimedes 型。$\mathbb Q$ の Bernoulli 不等式）の補題が要る）。
+
 2026-08-16 の tick 331 は、前 tick の「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」の四層を突き合わせて一致を確認し（修正無し）、
 「部分正方形との比較（$0<q\le1$。$\mathbb Q$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させた。
 台帳の todo が指していた `claim_open_square_subsquare_comparison_le_one` は 2026-08-16 の実数値経路の削除で本文から消えていた（Lean `OpenSquareSubsquareComparison.lean` は孤立して残存）ので、
@@ -3747,13 +3762,12 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「開境界正方形の自由エントロピー密度」（`def_open_square_free_entropy_density`）の本文・SageMath
-  `open-square-free-entropy-density`・Lean `OpenSquareFreeEntropyDensity.lean` を突き合わせる。周期境界側の定義と形が揃っているか、
-  引くラベル（値・正値性・対数・$\iota$）が正しいかも見る。
-- **次に進めるセクションは「開境界正方形の値の下界 1（$\mathbb Q$ 版）と密度の非負性（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行。
-  主張 2 なので着手時に割ってよい）。以降は $\mathbb Q$／$\Lambda_{\mathbb Q}$ 版の新設で、$\mathbb R$ 版は撤去のセクションまで併存させる。
+- **レビュー**: 「有理係数の対数順序群の Cauchy 列」（`def_rational_log_order_group_cauchy_sequence`）の本文・SageMath
+  `rational-log-order-group-cauchy-sequence`・Lean `RationalLogOrderGroupCauchySequence.lean` を突き合わせる。定義の量化の形（任意の $\varepsilon$・ある $N$・すべての $L,M$）と
+  Lean の `IsCauchyRationalLogOrder` が一致しているか、本文が極限の存在を主張していないかも見る。
+- **次に進めるセクションは「有限系の密度の接合不等式（$\Lambda_{\mathbb Q}$ 版）」**（状態台帳のセクション表の先頭行）。
 - **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
-  後ろ倒しを先に直せ」）。台帳の「切断による ℝ への一度きりの脱出」「旧実数値経路を撤去する」が済むまで進めない。
+  後ろ倒しを先に直せ」）。台帳の「切断による実数体への一度きりの脱出」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
   到達点は台帳の表にある。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 

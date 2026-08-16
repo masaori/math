@@ -384,6 +384,7 @@ export const ALL_LABELS = [
   "def_quadratic_representation_map",
   "def_rational_log",
   "def_rational_log_order_group",
+  "def_rational_log_order_group_cauchy_sequence",
   "def_rational_log_order_group_order",
   "def_rational_of_log",
   "def_real_algebraic_nonstrict_order",

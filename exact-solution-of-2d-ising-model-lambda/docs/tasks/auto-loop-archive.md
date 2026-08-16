@@ -3,6 +3,39 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16（tick 327）の記録
+
+### 現在地
+
+- **2026-08-16 の tick 327 は、「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」を本文・SageMath・Lean 具体版まで進めた（必要十分版・導出版は次 tick）。**
+  台帳の「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」は論法が 2 つ（$\Lambda$ の中で両側の対数を開く計算と、$\Lambda_{\mathbb Q}$ への順序移送・有理数倍の約分）なので割り、前半を実行した。
+  `claim_open_square_block_tiling_log`（`claim_open_square_free_entropy_density_upper_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $a,k\ge1$、$q\in\mathbb Q_{>0}$ に対し $0<q\le1$: $2k(k-1)a\log q+k^2\log Z^{\mathrm{op}}_{a,a}(q)\le_\Lambda\log Z^{\mathrm{op}}_{ka,ka}(q)\le_\Lambda k^2\log Z^{\mathrm{op}}_{a,a}(q)$、$1\le q$: その反転。
+  証明は準備 3 つ（値と両側の評価の値の正値性・下からの評価の側の対数を開く六段・上からの評価の側の三段）と、`claim_rational_log_order_iff` で
+  `claim_open_square_block_tiling_rational` の二場合を移す各 4 段の鎖。SageMath 650 検査（形 5 通り × 正の有理点 9 点、`ZZ`/`QQ`・素因数分解・有限台辞書）、
+  Lean 具体版 `OpenSquareBlockTilingLog.lean`（`logRat_blockTilingLowerValue_eq`・`logRat_blockTilingUpperValue_eq`・
+  `logOrderLE_openSquareBlockTilingLog_bounds_of_le_one`／`_of_one_le`）、sorry 検査 1214 件。前 tick の密度の上界のレビューに不一致なし。
+  次はこのセクションの必要十分版・導出版を書き、そのあと「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」。
+
+### 前進の記録
+
+- 2026-08-16（tick 327）: セクション「ブロック敷き詰めの対数化（$\Lambda_{\mathbb Q}$ 版）」は論法が 2 つ（$\Lambda$ の対数の計算と $\Lambda_{\mathbb Q}$ への移送）なので
+  「$\Lambda$ の鎖」と「密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」へ割り、前半の `claim_open_square_block_tiling_log` を
+  `claim_open_square_free_entropy_density_upper_bound` の直後（`remark_real_escape_plan` の直前）に置いた。準備 3 つ
+  （正値性・下からの評価の側の値の対数を開く六段: `claim_log_additive`・`claim_log_power`・整数倍の分配則と結合則・$n\lambda+m\lambda=(n+m)\lambda$ と
+  $(k-1)(ka)+k(k-1)a=2k(k-1)a$・上からの評価の側の三段）、本体は二場合とも準備の等式と `claim_rational_log_order_iff` による移送の 4 段の鎖。
+  SageMath `open-square-block-tiling-log`（形 $(a,k)\in\{(1,1),(1,2),(1,3),(2,1),(2,2)\}$ × 正の有理点 9 点、650 検査。準備の各段を $\Lambda$ の有限台辞書の等号で、
+  本体は $\operatorname{rat}_\Lambda$ を通した $\mathbb Q$ の比較と順序の移送。`ZZ`/`QQ`）。Lean 具体版
+  `ThermodynamicLimit/OpenSquareBlockTilingLog.lean`（`logRat_blockTilingLowerValue_eq`・`logRat_blockTilingUpperValue_eq`・
+  `logOrderLE_openSquareBlockTilingLog_bounds_of_le_one`／`_of_one_le`。`OpenSquareBlockTilingRational.lean` の二場合と `logRat_le_iff`・`logRat_mul`・`logRat_pow` から組む）。
+  必要十分版・導出版は未着手（セクション表に残した）。sorry 検査 1214 件。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 327）: 前 tick の「開境界正方形の自由エントロピー密度の上からの評価（$\Lambda_{\mathbb Q}$ 版）」の本文・SageMath（overview の対象ラベル・実行日・帰属）・
+  Lean 具体版・必要十分版（周期境界と共有）・導出版（入口 import・sorry 検査への登録）を突き合わせ、準備 3 つ・$\Lambda$ の鎖 4 段・$\Lambda_{\mathbb Q}$ の鎖 8 段の根拠が一致した。
+  本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16（tick 326）の記録
 
 ### 現在地
