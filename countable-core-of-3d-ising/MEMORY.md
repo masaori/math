@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 21:15: 開始が締切 8 分前。レビューは `npm run check` 再実行のみ（不一致なし）。本流の先頭「健全性の橋: 極限量を定義する」を三つに割り、先頭「極限量の入力となる有限箱の列を定義する」を記述（`def_finite_box_prime_exponent_sequence`、$S_q\colon L\mapsto(\#V_L,\lambda(Z_L(q)))$、可算側）。次は割った 2 番目「極限量を定義する（脱出はここだけ）」。
 - 2026-08-16 21:00: 開始が締切 8 分前。レビューは Lean `lake build`・sorry 検査の再実行のみ（不一致なし）。「増えた辺の変数を 1 に置いた境界応答多項式は配位ごとの元の外箱の破れ辺の単項式の有限和」の Lean 必要十分版（可換半環 $R$、辺型の有限性不要）と導出版を形式化し done。sorry 検査 137 件 OK。次は本流「健全性の橋: 極限量を定義する」（大きければ割って先頭のみ）。
 - 2026-08-16 20:45: 開始が締切 8 分前。レビューは Lean `lake build`・sorry 検査の再実行のみ（不一致なし）。「増えた辺の変数を 1 に置いた境界応答多項式は配位ごとの元の外箱の破れ辺の単項式の有限和」の Lean 具体版 `fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials`（`map_sum` と前主張の項ごとの適用。sorry 検査 135 件 OK、`Lean 具体版まで`）。次は Lean 必要十分版（可換半環 $R$ 上で NecSuf 版を項ごとに適用し $R:=\mathbb Z$ で具体版を導く）。
 - 2026-08-16 20:30: 開始が締切 8 分前。レビューは `npm run check` 再実行のみ（不一致なし）。「増えた辺の変数を 1 に置いた境界応答多項式は配位ごとの元の外箱の破れ辺の単項式の有限和」を SageMath 検証（`full-boundary-response-outer-edges-to-one-is-sum-of-inner-monomials`、4096 項 PASS、linkage 27 件。`記述と SageMath まで`）。次は同主張の Lean 具体版（`map_sum` と `brokenMonomial_maps_to_monomial_under_outer_edges_to_one` の項ごとの適用）。

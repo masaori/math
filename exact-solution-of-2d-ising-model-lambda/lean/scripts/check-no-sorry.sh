@@ -1327,6 +1327,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_ratSmul_le_ratSmul_of_le
   Ising2DLambda.NecSuf.ThermodynamicLimit.smul_le_smul_of_le_of_nonneg_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_ratSmul_le_ratSmul_of_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos
+  Ising2DLambda.NecSuf.ThermodynamicLimit.smul_le_smul_of_le_of_nonpos_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
