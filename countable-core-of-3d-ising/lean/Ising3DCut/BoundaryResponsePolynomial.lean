@@ -111,6 +111,27 @@ theorem boundaryResponsePolynomial_outer_box_independence
   congr 1
   ring
 
+/-- 辺変数を 1 に置かない境界応答多項式の外箱依存性。広い外箱の辺型 `Edge''` から元の外箱の辺型 `Edge`
+への環準同型 `π`（人手証明の代入 `π_{L'',L}`。外箱を広げて増えた辺の変数だけを `1` に置く）が、
+各配位の破れ辺の単項式を元の外箱上の配位 `σ` の破れ辺の単項式へ送るなら、
+`π (Z̃_{L''}) = #(外側の配位) • Z̃_L` が成り立つ（配位の有限和の分割 1 論法。安定性と同じ手順）。 -/
+theorem fullBoundaryResponse_outer_edges_to_one
+    {Edge'' Outer : Type*} [Fintype Edge''] [DecidableEq Edge''] [Fintype Outer]
+    (broken : Configuration → Finset Edge)
+    (broken'' : Configuration × Outer → Finset Edge'')
+    (π : MvPolynomial Edge'' ℤ →+* MvPolynomial Edge ℤ)
+    (h : ∀ σ : Configuration, ∀ τ : Outer,
+      π (∏ e ∈ broken'' (σ, τ), X e) = ∏ e ∈ broken σ, X e) :
+    π (multivariatePartitionPolynomial broken'') =
+      (Fintype.card Outer) • multivariatePartitionPolynomial broken := by
+  unfold multivariatePartitionPolynomial
+  -- 環準同型による有限和の分配と、積型上の有限和の分解
+  rw [map_sum, Fintype.sum_prod_type]
+  simp_rw [h]
+  rw [Finset.smul_sum]
+  refine Finset.sum_congr rfl fun σ _ ↦ ?_
+  simp [Finset.sum_const, Finset.card_univ]
+
 end
 
 end Ising3DCut

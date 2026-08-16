@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-16 11:17: 「辺変数を 1 に置かない境界応答多項式の外箱依存性」の Lean 具体版 `fullBoundaryResponse_outer_edges_to_one`（環準同型 π による有限和の分配。`Lean 具体版まで`。sorry 検査 103 件）。次は同セクションの Lean 必要十分版（`NecSuf/BoundaryResponsePolynomial.lean` に可換半環版）と `FromNecSuf` での導出。
 - 2026-08-16 11:02: 「辺変数を 1 に置かない境界応答多項式の外箱依存性」を SageMath で検証（`sagemath/check/full-boundary-response-outer-edges-to-one/` PASS。代入 $\pi_{L'',L}$ を `PolynomialRing.hom` で作り環準同型と $2^4$ 倍を `ZZ` 上で確認。`記述と SageMath まで`。検証対応 19 件）。次は同セクションの Lean 具体版（`lean/Ising3DCut/` に、辺型を分割した代入で外側辺を 1 に送る形で置く）。
 - 2026-08-16 10:47: 「辺変数を 1 に置かない境界応答多項式の外箱依存性」を記述（`claim_full_boundary_response_outer_edges_to_one`。外側の増分辺の変数だけ 1 に置く代入で $2^{\#V_{L''}-\#V_L}\widetilde R_{L,L'}$ に戻る。`記述まで`。75 ブロック・相互参照 78 件）。次は同セクションの SageMath 検証（`sagemath/check/` に安定性の検証と同じ箱で）。
 - 2026-08-16 10:32: 「内箱と外箱の間の辺変数を 1 に置かない測定量の定義」を記述（`def_full_boundary_response_polynomial`。定義のみで done。74 ブロック・相互参照 72 件）。外箱依存性は新セクション「辺変数を 1 に置かない境界応答多項式の外箱依存性」（todo）へ割った。次はその記述。
