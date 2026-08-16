@@ -152,6 +152,9 @@ targets=(
   Ising3DCut.fullBoundaryResponse_outer_edges_to_one_then_eval_one
   Ising3DCut.brokenMonomial_maps_to_monomial_under_outer_edges_to_one
   Ising3DCut.fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials
+  Ising3DCut.allEdgesToOneIndeterminate_X
+  Ising3DCut.allEdgesToOneIndeterminate_brokenMonomial
+  Ising3DCut.allEdgesToOneIndeterminate_multivariatePartitionPolynomial
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add
