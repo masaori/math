@@ -179,6 +179,10 @@ targets=(
   Ising3DCut.LimitQuantity.tendsto_iff_of_pointwise_eq
   Ising3DCut.LimitQuantity.limit_unique
   Ising3DCut.LimitQuantity.limit_eq_of_pointwise_eq
+  Ising3DCut.LimitQuantity.posRoot_pos
+  Ising3DCut.LimitQuantity.posRoot_pow
+  Ising3DCut.LimitQuantity.eq_posRoot_of_pow_eq
+  Ising3DCut.LimitQuantity.posRoot_congr
   Ising3DCut.NecSuf.boundarySpecialization_X_of_mem
   Ising3DCut.NecSuf.boundarySpecialization_X_of_not_mem
   Ising3DCut.NecSuf.boundarySpecialization_add
