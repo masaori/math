@@ -4,6 +4,11 @@
 
 **対象ラベル**: `claim_partition_value_ge_one_at_positive_rational`
 
+準備として次も検査する（$\sigma_+$ が配位の全列挙に含まれること、$b(\sigma_+)=0$）。
+
+- `def_constant_plus_configuration`
+- `claim_constant_plus_breaks_no_bond`
+
 - 実行日: 2026-08-16
 - 状態: PASS（$L\in\{1,2,3,4\}$、正の有理点 9 点。準備の各項の正値性 594594 件、式変形の各行と $1\le Z_L(q)$ 252 件、合計 594846 件）
 - 帰属: `ZZ`/`QQ` の厳密計算。浮動小数点・ball 算術は使わない（主張は $\mathbb Q$ で閉じている）。

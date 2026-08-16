@@ -37650,6 +37650,83 @@ L^2\cdot\left(\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda)\
     ],
   },
   {
+    id: "thermodynamic_limit_def_constant_plus_configuration",
+    kind: "definition",
+    title: { text: "全て正の定数配位" },
+    labels: ["def_constant_plus_configuration"],
+    habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.allPlusConfig"],
+    verification: ["sagemath/check/partition-value-ge-one-at-positive-rational"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " に対し、",
+        math(String.raw`\sigma_{+}:V_L\to\{+1,-1\}`),
+        " を、すべての頂点 ",
+        math(String.raw`v\in V_L`),
+        " に ",
+        math(String.raw`+1`),
+        " を割り当てる定数写像とする。写像なので ",
+        math(String.raw`\sigma_{+}\in\Sigma_L`),
+        " である（",
+        ref("def_configuration"),
+        "）。",
+      ]),
+      paragraph([
+        "直後の正の有理点での値の下界の証明がこの配位の項を分離するので、参照できるようここで定義として独立させる。",
+        "この定義は有限集合の上の写像だけで書けており、実数体を使っていない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_constant_plus_breaks_no_bond",
+    kind: "claim",
+    title: { text: "全て正の定数配位の破れボンド数は零である" },
+    labels: ["claim_constant_plus_breaks_no_bond"],
+    habitat: "N",
+    lean: ["Ising2DLambda.ThermodynamicLimit.allPlusConfig_brokenBondCount_eq_zero"],
+    verification: ["sagemath/check/partition-value-ge-one-at-positive-rational"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " に対し、",
+        math(String.raw`b(\sigma_{+})=0`),
+        " である（",
+        math(String.raw`\sigma_{+}`),
+        " は ",
+        ref("def_constant_plus_configuration"),
+        "、",
+        math(String.raw`b`),
+        " は ",
+        ref("def_broken_bond_count"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+b(\sigma_{+})
+&=\bigl|\bigl\{\,e\in E_L \;\bigm|\; \sigma_{+}(\partial_0(e))\ne\sigma_{+}(\partial_1(e))\,\bigr\}\bigr|
+&&(\because\ \text{破れボンド数の定義 }\blkref{def_broken_bond_count})\\
+&=\bigl|\bigl\{\,e\in E_L \;\bigm|\; +1\ne+1\,\bigr\}\bigr|
+&&(\because\ \text{任意の }v\in V_L\text{ で }\sigma_{+}(v)=+1\text{。}\blkref{def_constant_plus_configuration})\\
+&=|\varnothing|
+&&(\because\ +1=+1\text{ なので条件を満たす辺の番号は存在しない})\\
+&=0
+&&(\because\ \text{空集合の元の個数})
+\end{aligned}`),
+      paragraph([
+        "この証明は有限集合の数え上げだけで書けており、実数体を使っていない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_claim_partition_value_ge_one_at_positive_rational",
     kind: "claim",
     title: { text: "正の有理点での分配多項式の値は 1 以上である" },
@@ -39607,10 +39684,7 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
     labels: ["def_open_rectangle_constant_plus_configuration"],
     habitat: "N",
     lean: ["Ising2DLambda.ThermodynamicLimit.openAllPlusConfig"],
-    verification: [
-      "sagemath/check/open-rectangle-value-at-least-one",
-      "sagemath/check/open-rectangle-value-ge-one-at-positive-rational",
-    ],
+    verification: ["sagemath/check/open-rectangle-value-ge-one-at-positive-rational"],
     statement: [
       paragraph([
         math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
@@ -39637,10 +39711,7 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
     labels: ["claim_open_rectangle_constant_plus_breaks_no_bond"],
     habitat: "N",
     lean: ["Ising2DLambda.ThermodynamicLimit.openAllPlusConfig_openBrokenBondCount_eq_zero"],
-    verification: [
-      "sagemath/check/open-rectangle-value-at-least-one",
-      "sagemath/check/open-rectangle-value-ge-one-at-positive-rational",
-    ],
+    verification: ["sagemath/check/open-rectangle-value-ge-one-at-positive-rational"],
     statement: [
       paragraph([
         math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`a\ge1`), "、", math(String.raw`b\ge1`),
@@ -39759,85 +39830,7 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
       paragraph([
         "以上は有理数の四則と順序、および有限和だけからなり、実数体も実対数も現れない。周期境界の ",
         ref("claim_partition_value_ge_one_at_positive_rational"),
-              ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_def_constant_plus_configuration",
-    kind: "definition",
-    title: { text: "全て正の定数配位" },
-    labels: ["def_constant_plus_configuration"],
-    habitat: "N",
-    lean: ["Ising2DLambda.ThermodynamicLimit.allPlusConfig"],
-    verification: ["sagemath/check/free-energy-density-lower-bound"],
-    statement: [
-      paragraph([
-        "各 ",
-        math(String.raw`L\in\mathbb{N}`),
-        "、",
-        math(String.raw`L\ge1`),
-        " に対し、",
-        math(String.raw`\sigma_{+}:V_L\to\{+1,-1\}`),
-        " を、すべての頂点 ",
-        math(String.raw`v\in V_L`),
-        " に ",
-        math(String.raw`+1`),
-        " を割り当てる定数写像とする。写像なので ",
-        math(String.raw`\sigma_{+}\in\Sigma_L`),
-        " である（",
-        ref("def_configuration"),
-        "）。",
-      ]),
-      paragraph([
-        "これは、正の有理点での値の下界の証明の準備で置いた定数写像と同じものである。以後のブロックが参照できるよう、",
-        "ここで定義として独立させる。この定義は有限集合の上の写像だけで書けており、",
-        "実数体を使っていない。",
-      ]),
-    ],
-  },
-
-  {
-    id: "thermodynamic_limit_claim_constant_plus_breaks_no_bond",
-    kind: "claim",
-    title: { text: "全て正の定数配位の破れボンド数は零である" },
-    labels: ["claim_constant_plus_breaks_no_bond"],
-    habitat: "N",
-    lean: ["Ising2DLambda.ThermodynamicLimit.allPlusConfig_brokenBondCount_eq_zero"],
-    verification: ["sagemath/check/free-energy-density-lower-bound"],
-    statement: [
-      paragraph([
-        "各 ",
-        math(String.raw`L\in\mathbb{N}`),
-        "、",
-        math(String.raw`L\ge1`),
-        " に対し、",
-        math(String.raw`b(\sigma_{+})=0`),
-        " である（",
-        math(String.raw`\sigma_{+}`),
-        " は ",
-        ref("def_constant_plus_configuration"),
-        "、",
-        math(String.raw`b`),
-        " は ",
-        ref("def_broken_bond_count"),
-        "）。",
-      ]),
-    ],
-    proof: [
-      displayMath(String.raw`\begin{aligned}
-b(\sigma_{+})
-&=\bigl|\bigl\{\,e\in E_L \;\bigm|\; \sigma_{+}(\partial_0(e))\ne\sigma_{+}(\partial_1(e))\,\bigr\}\bigr|
-&&(\because\ \text{破れボンド数の定義 }\blkref{def_broken_bond_count})\\
-&=\bigl|\bigl\{\,e\in E_L \;\bigm|\; +1\ne+1\,\bigr\}\bigr|
-&&(\because\ \text{任意の }v\in V_L\text{ で }\sigma_{+}(v)=+1\text{。}\blkref{def_constant_plus_configuration})\\
-&=|\varnothing|
-&&(\because\ +1=+1\text{ なので条件を満たす辺の番号は存在しない})\\
-&=0
-&&(\because\ \text{空集合の元の個数})
-\end{aligned}`),
-      paragraph([
-        "この証明は有限集合の数え上げだけで書けており、実数体を使っていない。",
+        " と同じ論法である。",
       ]),
     ],
   },
