@@ -4,6 +4,16 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 342 は、前 tick の「非負の元の有理数倍は係数の大小で比較できる」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」を四層で閉じた。
+`claim_rational_log_order_group_scalar_compare_nonpos`（`claim_rational_log_order_group_scalar_compare_nonneg` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $r,s\in\mathbb Q$、$r\le s$、$\nu\le_{\Lambda_{\mathbb Q}}0$ なら $s\cdot\nu\le_{\Lambda_{\mathbb Q}}r\cdot\nu$。
+証明: $c:=s-r\ge0$、`claim_rational_log_order_group_nonneg_scalar_monotone`（$\lambda:=\nu$、$\mu:=0$）で $c\cdot\nu\le c\cdot0$、$c\cdot0=0$、`claim_rational_log_order_group_add_monotone`（$\lambda:=c\cdot\nu$、$\mu:=0$、$\nu:=r\cdot\nu$）で $c\cdot\nu+r\cdot\nu\le0+r\cdot\nu$、
+四段の鎖 $s\cdot\nu=(c+r)\cdot\nu=c\cdot\nu+r\cdot\nu\le0+r\cdot\nu=r\cdot\nu$（$\mathbb Q$ の四則・分配則・零写像は単位元）。
+SageMath `check/rational-log-order-group-scalar-compare-nonpos/`（64 ベクトルのうち $\nu\le0$ の 27 本 × $r\le s$ の 28 組、主張 756 件・鎖 756 件、13 秒）。
+Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonpos.lean`（`rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos`。非負の元の版と同じ書き換え列 `sub_nonneg`・`smul_zero`・`rationalLogOrderLE_add_right`・`zero_add`・`← add_smul`・`sub_add_cancel`）、
+必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonpos.lean`（`smul_le_smul_of_le_of_nonpos_necSuf`。仮定は `smul_le_smul_of_le_of_nonneg_necSuf` と同一。(1) を `λ:=ν`、`μ:=0` で読む向きだけが違う）、導出版 `RationalLogOrderGroupScalarCompareNonposFromNecSuf.lean`。sorry 検査 1274 件。
+次は「埋め込んだ対数の符号（$q\le1$ で $\iota(\log q)\le0$、$0\le\iota(\ell_2)$、$0\le\iota(\log(1+q))$）」（`claim_rational_log_order_preserves_and_reflects` を `claim_scaled_embedding_order_transfer` の $L:=1$ で移す。既出なら書かない。台帳の備考）。
+
 2026-08-16 の tick 341 は、前 tick の「非負有理数倍は有理係数の対数順序群の順序を保つ」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「係数の大小による有理数倍の比較」を非負の元と非正の元の二行へ割り、非負の元の行を四層で閉じた。
 `claim_rational_log_order_group_scalar_compare_nonneg`（「非負の元の有理数倍は係数の大小で比較できる」。`claim_rational_log_order_group_nonneg_scalar_monotone` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $r,s\in\mathbb Q$、$r\le s$、$0\le_{\Lambda_{\mathbb Q}}\nu$ なら $r\cdot\nu\le_{\Lambda_{\mathbb Q}}s\cdot\nu$。

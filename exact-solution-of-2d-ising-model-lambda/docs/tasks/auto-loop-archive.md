@@ -11424,3 +11424,22 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
   全て正の定数配位 2 ブロックの検証を、既にそれらを検査している `partition-value-ge-one-at-positive-rational`（overview の対象へ追記）と
   `open-rectangle-value-ge-one-at-positive-rational` へ付け替えた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。
 
+## 2026-08-16 tick 342 で台帳から移したもの
+
+### 現在地
+
+- **2026-08-16 の tick 337 は、台帳の先頭行「密度の列の Cauchy 性」を論法の数で三行（有理係数の対数順序群の Archimedes 性・倍数辺の部分正方形による密度の挟み込みの誤差評価・密度の列の Cauchy 性（$0<q\le1$））へ割り、その前に要る「有理数の Bernoulli 不等式」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_bernoulli_inequality`（`def_rational_log_order_group_cauchy_sequence` の直後・`remark_real_escape_plan` の直前、住処 Q）で、$h\in\mathbb Q$、$0\le h$、$n\in\mathbb N$ に対し $1+nh\le(1+h)^n$。$n$ の帰納法 1 本（$n\to n+1$ は $0\le nh^2$ を足す・分配則・帰納法の仮定に $0\le1+h$ を掛ける・冪の定義の四段）。
+  SageMath `check/rational-bernoulli-inequality/`（$h$ 9 点 × $n\in\{0,\dots,40\}$、1845 検査）。Lean 具体版 `ThermodynamicLimit/RationalBernoulliInequality.lean`（`one_add_nsmul_le_one_add_pow_rat`）、必要十分版 `NecSuf/ThermodynamicLimit/RationalBernoulliInequality.lean`（`one_add_nsmul_le_one_add_pow_necSuf`。順序可換半環。体は要らない）、導出版 `RationalBernoulliInequalityFromNecSuf.lean`。sorry 検査 1248 件。
+  次は「有理係数の対数順序群の Archimedes 性」（備考に手順を書いた）。
+
+### 前進の記録
+
+- 2026-08-16（tick 337）: 台帳の先頭行「密度の列の Cauchy 性」は Archimedes 性の補題・倍数辺の誤差評価・Cauchy 性本体の三つの論法を含むので三行へ割り、さらに Archimedes 性が引く「有理数の Bernoulli 不等式」を先に書いた
+  （本文に無かった。$\mathbb Q$ の四則だけの主張ではなく、$n$ の帰納法で示す不等式であり、後の Archimedes 性が引く）。`claim_rational_bernoulli_inequality` を `def_rational_log_order_group_cauchy_sequence` の直後に置いた。
+  SageMath `rational-bernoulli-inequality`、Lean 具体版・必要十分版・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1248 件）。Cauchy 性の行は $0<q\le1$ に限った（$1\le q$ の部分正方形比較が無い）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 337）: 前 tick の「何も言っていない主張の一掃」で残した `claim_rational_embedding_commutes_with_integer_multiple` の本文（五段の鎖）・SageMath overview・Lean `toRational_intSmul` を突き合わせ、根拠が一致した。
+  この主張は写像 $\iota$ が整数倍と交換することを言い 7 箇所が引くので残す（体の四則だけではない）。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
