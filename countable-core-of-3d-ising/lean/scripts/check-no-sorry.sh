@@ -239,6 +239,8 @@ targets=(
   Ising3DCut.brokenMonomial_maps_to_monomial_under_outer_edges_to_one_fromNecSuf
   Ising3DCut.NecSuf.fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials
   Ising3DCut.fullBoundaryResponse_outer_edges_to_one_is_sum_of_inner_monomials_fromNecSuf
+  Ising3DCut.LimitQuantity.symmetrized_eq_of_palindrome_step
+  Ising3DCut.LimitQuantity.symmetrized_padicValRat_reciprocal_invariant
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
