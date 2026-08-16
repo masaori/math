@@ -14,7 +14,9 @@ LOCK_DIR="$LOG_DIR/publish-artifact.lock"
 HTML="$PROJECT_DIR/structured-latex/build/document.html"
 SLUG="cellular-automata-statistical-mechanics"
 STAGE="$HOME/.artifact-uploads/math/$SLUG"
-EXPECTED_URL="https://hexagonal-computation.github.io/artifacts/math/$SLUG/"
+# 公開先は GitHub Pages から Firebase Hosting へ移った。旧 URL のままだと公開自体は
+# 成功しているのに照合だけが落ち、ティックが毎回失敗として記録される（2026-08-16）。
+EXPECTED_URL="https://hexcomp-artifacts.web.app/math/$SLUG/"
 PUBLISHER="/Users/masaori/git/masaori/artifacts/publish.py"
 WEBHOOK_URL="https://hooks.slack.com/triggers/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"
 
@@ -113,7 +115,9 @@ if ! publish_output="$($PUBLISHER --src "$STAGE" --repo math --path "$SLUG" 2>&1
   exit 1
 fi
 printf '%s\n' "$publish_output" >> "$LOG_FILE"
-url="$(printf '%s\n' "$publish_output" | grep -Eo 'https://[^ ]+/artifacts/math/'"$SLUG"'/' | tail -1 || true)"
+# 公開先の URL は EXPECTED_URL だけを正本とし、形を推測する正規表現を持たない
+# （旧公開先には /artifacts/ の階層があり、移設後はそれが無い。形を二重に持つと片方が腐る）。
+url="$(printf '%s\n' "$publish_output" | grep -Fo "$EXPECTED_URL" | tail -1 || true)"
 if [ "$url" != "$EXPECTED_URL" ]; then
   log "NG: 公開スクリプトが期待した URL を返さなかった（版 ${short_commit}）"
   exit 1
