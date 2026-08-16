@@ -2822,4 +2822,75 @@ Z_L(q)
       ]),
     ],
   },
+
+  {
+    id: "prediction_stream_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "測定量の事前予言: 2 次元での対応物" },
+    labels: [],
+  },
+
+  {
+    id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
+    kind: "definition",
+    title: { text: "2 次元の箱と境界応答多項式" },
+    labels: ["def_two_dimensional_boundary_response_polynomial"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "整数 ",
+        math(String.raw`L\ge2`),
+        " と ",
+        math(String.raw`I_L=\{0,1,\dots,L-1\}`),
+        " に対し、2 次元の箱を有限集合 ",
+        math(String.raw`V^{(2)}_L=I_L\times I_L`),
+        " と定め、辺の集合を始点と方向の組の有限集合",
+      ]),
+      displayMath(
+        String.raw`E^{(2)}_L=\{\,(a,i)\ :\ a\in V^{(2)}_L,\ i\in\{1,2\},\ a_i\le L-2\,\}`,
+      ),
+      paragraph([
+        "と定める（",
+        ref("def_edge_set"),
+        " と同じ形で、方向が 2 つになるだけである）。端点写像は ",
+        math(String.raw`\partial_0(a,i)=a`),
+        "、",
+        math(String.raw`\partial_1(a,i)=a+\mathbf e_i`),
+        " とする。二つの 2 次元の箱が ",
+        math(String.raw`V^{(2)}_{L'}\subset V^{(2)}_L`),
+        " を満たすとき、少なくとも一方の端点が ",
+        math(String.raw`V^{(2)}_{L'}`),
+        " に属する辺の有限集合を ",
+        math(String.raw`A^{(2)}_{L,L'}`),
+        " とし、辺ごとに不定元を持つ多変数分配多項式を",
+      ]),
+      displayMath(
+        String.raw`\mathcal Z^{(2)}_L((X_e)_{e\in E^{(2)}_L})
+=\sum_{\sigma:V^{(2)}_L\to\{-1,1\}}\prod_{\substack{e\in E^{(2)}_L\\
+\sigma(\partial_0 e)\ne\sigma(\partial_1 e)}}X_e
+\ \in\ \mathbb Z[(X_e)_{e\in E^{(2)}_L}]`,
+      ),
+      paragraph([
+        "と定める。各 ",
+        math(String.raw`e\in E^{(2)}_L\setminus A^{(2)}_{L,L'}`),
+        " の変数を ",
+        math(String.raw`1`),
+        " に置く代入写像を ",
+        math(String.raw`\rho^{(2)}_{L,L'}`),
+        " とし、",
+      ]),
+      displayMath(
+        String.raw`R^{(2)}_{L,L'}((X_e)_{e\in A^{(2)}_{L,L'}})
+=\rho^{(2)}_{L,L'}\bigl(\mathcal Z^{(2)}_L\bigr)
+\ \in\ \mathbb Z[(X_e)_{e\in A^{(2)}_{L,L'}}]`,
+      ),
+      paragraph([
+        "を 2 次元の境界応答多項式と呼ぶ。定義は ",
+        ref("def_boundary_response_polynomial"),
+        " と同じ手順（辺変数付きの分配多項式と、内箱に触れない辺の変数を 1 に置く代入）であり、",
+        "3 次元との違いは箱と辺の集合の次元だけである。有限の箱にとどめ、閉形式はここでは使わない。",
+      ]),
+    ],
+  },
 ]);
