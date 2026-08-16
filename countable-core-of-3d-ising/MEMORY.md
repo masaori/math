@@ -49,6 +49,7 @@
 自動ループで作業する場合は [docs/tasks/auto-loop-runbook.md](docs/tasks/auto-loop-runbook.md) と
 [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md) も読む。
 
+- 2026-08-16: 健全性の橋の 2 番目「極限量を定義する」を記述（`def_limit_quantity_from_finite_box_sequence`、habitat R、唯一の脱出。実対数の代わりに正の実数乗根の極限で書いた——要レビュー）。次は割った 3 番目。
 ## 直近（2026-08-16 18:45 tick）
 - 「増えた辺の変数を 1 に置いてから全変数を 1 に置くことは全変数を 1 に置くことに等しい」の Lean 具体版（`eval_one_comp_outer_edges_to_one`・`fullBoundaryResponse_outer_edges_to_one_then_eval_one`、sorry 検査 127 件）。次は Lean 必要十分版（係数環一般化。ℤ の一意性が使えないので `C` の像の一致を仮定に置く見込み）。
 

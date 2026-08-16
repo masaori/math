@@ -50,6 +50,7 @@ export const ALL_LABELS = [
   "def_finite_box_prime_exponent_sequence",
   "def_full_boundary_response_polynomial",
   "def_global_spin_flip",
+  "def_limit_quantity_from_finite_box_sequence",
   "def_multiplicity",
   "def_nonfixed_reciprocal_roots",
   "def_odd_flip",

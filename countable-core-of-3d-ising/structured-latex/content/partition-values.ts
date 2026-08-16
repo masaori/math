@@ -2318,4 +2318,51 @@ X_e,&e\in A_{L,L'},\\
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_definition_limit_quantity",
+    kind: "definition",
+    title: { text: "有限箱の列から定める極限量（箱の大きさの極限による唯一の脱出）" },
+    labels: ["def_limit_quantity_from_finite_box_sequence"],
+    habitat: "R",
+    realEscape:
+      "箱の大きさ L の極限を一度だけ取る。列 S_q の各項（点の個数と素指数データ）は可算側にあるが、各項から作る正の実数 Z_L(q)^{1/#V_L} と、その L→∞ の極限は ℝ に住む。本プロジェクトで許される脱出はこの定義の箇所だけであり、極限の存在は仮定として明示する（証明は別セクション）。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " を固定し、有限箱の列 ",
+        math(String.raw`S_q=(L\mapsto(\#V_L,\lambda(Z_L(q))))`),
+        "（",
+        ref("def_finite_box_prime_exponent_sequence"),
+        "）をとる。各 ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " について、素指数データ ",
+        math(String.raw`\lambda(Z_L(q))=(e_p(L))_p`),
+        " から正の有理数 ",
+        math(String.raw`Z_L(q)=\prod_p p^{e_p(L)}`),
+        " が復元される。この正の有理数の正の実数乗根",
+      ]),
+      displayMath(
+        String.raw`a_L(q):=Z_L(q)^{1/\#V_L}\in\mathbb R_{>0}`,
+      ),
+      paragraph([
+        "は、",
+        math(String.raw`S_q`),
+        " の第 ",
+        math(String.raw`L`),
+        " 項だけから決まる。極限",
+      ]),
+      displayMath(
+        String.raw`\alpha(q):=\lim_{L\to\infty}a_L(q)\in\mathbb R_{>0}`,
+      ),
+      paragraph([
+        "が存在するとき、これを有理点 ",
+        math(String.raw`q`),
+        " における極限量と呼ぶ。存在はここでは仮定であり、証明は別のセクションで与える。極限量は列 ",
+        math(String.raw`S_q`),
+        " だけの関数である（列が等しければ極限量も等しい）。",
+        "本文で箱の大きさの極限を使うのはこの定義だけである。",
+      ]),
+    ],
+  },
 ]);
