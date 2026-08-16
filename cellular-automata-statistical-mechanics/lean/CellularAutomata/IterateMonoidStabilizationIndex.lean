@@ -8,6 +8,7 @@
 有限集合と自然数だけを使い、無限極限、位相、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidPrincipalIdealTail
+import CellularAutomata.NecSuf.IterateMonoidStabilizationIndex
 
 namespace CellularAutomata.IterateMonoidStabilizationIndex
 
@@ -108,5 +109,79 @@ theorem firstStableIndex_eq_minCollisionStart {i j : ℕ} (hij : i < j)
         ← mem_finiteTail_iff_tail N f hij h]
       exact Finset.ext_iff.mp hfirst_eq g
     exact minCollisionStart_le N f ((tail_eq_succ_iff_collision_start N f _).mp htail)
+
+/-! ## 必要十分版からの導出
+具体版は必要十分版を X := V → State、F := globalMap N f へ特殊化したものである。 -/
+
+omit [Fintype V] [DecidableEq V] in
+theorem isCollisionStart_eq_necessary_sufficient (n : ℕ) :
+    IsCollisionStart N f n ↔
+      CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.IsCollisionStart (globalMap N f) n := by
+  simp only [IsCollisionStart,
+    CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.IsCollisionStart,
+    iterateMap_eq_necessary_sufficient]
+
+theorem exists_collision_start_from_necessary_sufficient : ∃ n : ℕ, IsCollisionStart N f n := by
+  obtain ⟨n, hn⟩ :=
+    CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.exists_collision_start (globalMap N f)
+  exact ⟨n, (isCollisionStart_eq_necessary_sufficient N f n).mpr hn⟩
+
+/-- 具体版の最小衝突開始位置は、有限型上の存在から得た必要十分版の最小衝突開始位置に等しい
+    （両方向の最小性で示す）。 -/
+theorem minCollisionStart_eq_necessary_sufficient :
+    minCollisionStart N f =
+      CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.minCollisionStart (globalMap N f)
+        (CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.exists_collision_start
+          (globalMap N f)) := by
+  apply Nat.le_antisymm
+  · exact minCollisionStart_le N f ((isCollisionStart_eq_necessary_sufficient N f _).mpr
+      (CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.minCollisionStart_spec _ _))
+  · exact CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.minCollisionStart_le _ _
+      ((isCollisionStart_eq_necessary_sufficient N f _).mp (minCollisionStart_spec N f))
+
+omit [Fintype V] [DecidableEq V] in
+theorem tail_eq_succ_iff_collision_start_from_necessary_sufficient (n : ℕ) :
+    tail N f n = tail N f (n + 1) ↔ IsCollisionStart N f n := by
+  rw [tail_eq_necessary_sufficient, tail_eq_necessary_sufficient,
+    isCollisionStart_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.tail_eq_succ_iff_collision_start
+    (globalMap N f) n
+
+theorem tails_strict_before_minCollisionStart_from_necessary_sufficient {n : ℕ}
+    (hn : n < minCollisionStart N f) :
+    tail N f (n + 1) ⊆ tail N f n ∧ tail N f (n + 1) ≠ tail N f n := by
+  rw [tail_eq_necessary_sufficient, tail_eq_necessary_sufficient]
+  rw [minCollisionStart_eq_necessary_sufficient] at hn
+  exact CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.tails_strict_before_minCollisionStart
+    (globalMap N f) _ hn
+
+theorem tails_stable_from_minCollisionStart_from_necessary_sufficient {n : ℕ}
+    (hn : minCollisionStart N f ≤ n) :
+    tail N f n = tail N f (minCollisionStart N f) := by
+  rw [tail_eq_necessary_sufficient, tail_eq_necessary_sufficient,
+    minCollisionStart_eq_necessary_sufficient]
+  rw [minCollisionStart_eq_necessary_sufficient] at hn
+  exact CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.tails_stable_from_minCollisionStart
+    (globalMap N f) _ hn
+
+/-- 有限走査した最初の安定位置と最小衝突開始位置の一致。必要十分版は衝突証人から作った
+    存在証明を使うが、最小値は存在証明の取り方に依らない（証明無関係）ので具体版の μ_F に一致する。 -/
+theorem firstStableIndex_eq_minCollisionStart_from_necessary_sufficient {i j : ℕ} (hij : i < j)
+    (h : iterateMap N f i = iterateMap N f j) :
+    firstStableIndex N f hij h = minCollisionStart N f := by
+  have h' : CellularAutomata.NecSuf.IterateMonoid.iterateMap (globalMap N f) i =
+      CellularAutomata.NecSuf.IterateMonoid.iterateMap (globalMap N f) j := by
+    simpa only [iterateMap_eq_necessary_sufficient] using h
+  have hfirst : firstStableIndex N f hij h =
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.firstStableIndex
+        (globalMap N f) hij h' := by
+    simp only [firstStableIndex,
+      CellularAutomata.NecSuf.IterateMonoidPrincipalIdealTail.firstStableIndex,
+      stableIndices_eq_necessary_sufficient]
+  rw [hfirst,
+    CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.firstStableIndex_eq_minCollisionStart
+      (globalMap N f) hij h',
+    minCollisionStart_eq_necessary_sufficient]
+  -- 二つの最小衝突開始位置は存在証明だけが異なり、証明無関係により同じ項である。
 
 end CellularAutomata.IterateMonoidStabilizationIndex
