@@ -642,4 +642,72 @@ d_2:V_{\mathrm{cell}}
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_dual_edge_endpoint_map",
+    kind: "definition",
+    title: { text: "双対辺の端点写像" },
+    labels: ["def_dual_edge_endpoint_map"],
+    habitat: "finite",
+    verification: ["sagemath/check/dual-edge-endpoint-map"],
+    statement: [
+      paragraph([
+        ref("def_primal_dual_cell_correspondence"),
+        " の主セルと双対セルの対応データを固定する。各主辺 ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " と各向きラベル ",
+        math(String.raw`\omega\in\mathsf{Ori}`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\mathcal O_e^\omega
+:=
+\left\{
+  (f,i)
+  \ \middle|\
+  \begin{array}{l}
+    f\in F_{\mathrm{cell}},\quad i\in P_f,\\
+    e_{f,i}=e,\quad \omega_{f,i}=\omega
+  \end{array}
+\right\}`),
+      paragraph([
+        "と置く。",
+        ref("def_finite_cellulation_opposite_edge_occurrences"),
+        " と ",
+        ref("def_finite_cellulation_orientation_reversal"),
+        " より、有限集合 ",
+        math(String.raw`\mathcal O_e^{\mathsf{forward}}`),
+        " と ",
+        math(String.raw`\mathcal O_e^{\mathsf{reverse}}`),
+        " はそれぞれちょうど一つの元をもつ。その元を",
+      ]),
+      displayMath(String.raw`(f_e^{\mathsf{forward}},i_e^{\mathsf{forward}})
+\in\mathcal O_e^{\mathsf{forward}},
+\qquad
+(f_e^{\mathsf{reverse}},i_e^{\mathsf{reverse}})
+\in\mathcal O_e^{\mathsf{reverse}}`),
+      paragraph([
+        "と書く。双対辺の端点写像を、",
+        ref("def_edge_endpoint_label_set"),
+        " の辺端ラベルを用いて",
+      ]),
+      displayMath(String.raw`\partial_G^\ast:
+E_{\mathrm{cell}}^\ast\times\mathsf{End}
+\longrightarrow V_{\mathrm{cell}}^\ast`),
+      paragraph(["および、任意の ", math(String.raw`e\in E_{\mathrm{cell}}`), " に対する二つの値"]),
+      displayMath(String.raw`\begin{aligned}
+\partial_G^\ast\bigl(d_1(e),\mathsf{source}\bigr)
+&:=d_0\bigl(f_e^{\mathsf{forward}}\bigr),\\
+\partial_G^\ast\bigl(d_1(e),\mathsf{target}\bigr)
+&:=d_0\bigl(f_e^{\mathsf{reverse}}\bigr)
+\end{aligned}`),
+      paragraph([
+        "で定める。",
+        math(String.raw`d_1:E_{\mathrm{cell}}\to E_{\mathrm{cell}}^\ast`),
+        " は全単射なので、上の二つの値は全ての双対辺に対して端点写像を一意に定める。二つの主辺出現が同じ主面に属する場合には ",
+        math(String.raw`f_e^{\mathsf{forward}}=f_e^{\mathsf{reverse}}`),
+        " となり、二つの双対端点も一致する。この定義だけから端点の相異なりは主張せず、双対辺集合を ",
+        ref("def_finite_graph_input"),
+        " の有限グラフ入力とするための条件は後続の別ブロックで扱う。全ての対象は有限集合であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
