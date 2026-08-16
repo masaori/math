@@ -75,3 +75,4 @@ import Ising3DCut.NecSuf.BoundaryResponsePolynomial
 import Ising3DCut.BoundaryResponsePolynomialFromNecSuf
 import Ising3DCut.AllEdgeVariablesToOneIndeterminate
 import Ising3DCut.AllEdgeVariablesToOneIndeterminateStepTwo
+import Ising3DCut.AllEdgeVariablesToOneIndeterminateComposed
