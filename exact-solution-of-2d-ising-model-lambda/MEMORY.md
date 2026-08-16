@@ -4,6 +4,19 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 329 は、前 tick の Lean 必要十分版・導出版のレビュー（一致、修正無し）のあと、「ブロック敷き詰めの密度の挟み込み（$\Lambda_{\mathbb Q}$ 版）」に着手したが、
+SageMath 検査で $4\times4$ の形を含めた実行が 10 分を超えて（二度）締切に当たり、SageMath の下書き `sagemath/drafts/open-square-block-tiling-density.check.sage`
+（形 $(a,k)\in\{(1,1),(1,2),(1,3),(2,1)\}$ × 正の有理点 9 点、556 検査 PASS）だけを残して止めた。本文・Lean は未着手、セクション表は todo のまま。
+決めた骨格: 主張は $a,k\ge1$、$q\in\mathbb Q_{>0}$ で $0<q\le1$: $\frac{2(k-1)}{ka}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_a(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_a(q)$、$1\le q$: 反転。
+準備 3 つ（正値性と $(ka)^2\ne0$・上側 $\frac1{(ka)^2}\iota(k^2\log Z^{\mathrm{op}}_{a,a}(q))=\Psi^{\mathrm{op}}_a(q)$ の四段: $n\iota(\nu)=\iota(n\nu)$ 逆向き・結合則・約分 $\frac{k^2}{k^2a^2}=\frac1{a^2}$・定義／
+下側の六段: $\iota$ 加法・分配則・$n\iota(\nu)=\iota(n\nu)$ 逆向き・結合則・約分 $\frac{2k(k-1)a}{k^2a^2}=\frac{2(k-1)}{ka}$・上側の準備）、
+本体は二場合とも左右の不等式を 3 段の鎖 2 本ずつ（準備の等式・`claim_scaled_embedding_order_transfer` を $L:=ka$ で読み `claim_open_square_block_tiling_log` を移す・`def_open_square_free_entropy_density`）。
+Lean: 具体版 `OpenSquareBlockTilingDensity.lean`（準備の等式 2 本は `toRational_intSmul`・`natCast_zsmul`・`smul_smul`・`field_simp`、本体は `rationalLogOrderLE_scaled_toRational_iff (k*a)` の ←。
+$k-1$ は自然数のまま扱い係数は $\frac{2\cdot((k-1:\mathbb N):\mathbb Q)}{k\cdot a}$ の形にする。`NeZero (k*a)` は `[NeZero a] [NeZero k]` から）、必要十分版は前 tick の
+`twoSided_bounds_transport_through_monotone_map_necSuf` を `ell := λ ↦ (1/(ka)^2)•ι(λ)`・`ellMono := (iff).mpr` で共有、導出版を書く。
+次 tick: 本文ブロック `claim_open_square_block_tiling_density` を `claim_open_square_block_tiling_log` の直後に書き、下書きを `check/open-square-block-tiling-density/` へ移して overview を付け、Lean を書く。
+`open-square-block-tiling-log` の SageMath 検査の所要時間も確かめる（同じ $4\times4$ を含む）。
+
 2026-08-16 の tick 328 は、前 tick の「開境界正方形のブロック敷き詰め評価の対数化（$\Lambda$ の鎖）」の本文・SageMath・Lean 具体版を突き合わせて一致を確認し（修正無し）、
 残っていた Lean 必要十分版・導出版を書いてセクションを四層で完成させた。
 必要十分版 `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）: 具体版が実際に使うのは

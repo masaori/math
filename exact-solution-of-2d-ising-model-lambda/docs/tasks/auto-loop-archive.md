@@ -11033,3 +11033,42 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-16（tick 320）: 前 tick の「反復接合の第二（$\mathbb Q$ 版）」の本文・SageMath・Lean 具体版・必要十分版（$\mathbb R$ 版・第一と共有）・
   導出版を突き合わせ、二場合の上下評価・帰納段の鎖・対象ラベル・入口 import・sorry 検査への登録が一致し、本文に $t$ や $\le_{\mathbb R}$ の残りは無い。
   本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
+
+## 2026-08-16 tick 324 の記録（台帳から移動）
+
+### 現在地
+
+- **2026-08-16 の tick 324 は、「開境界正方形の自由エントロピー密度は非負である（$\Lambda_{\mathbb Q}$ 版）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで完成させ、あわせて人間の削除のあとに残っていたほころび 3 件を直した。**
+  `claim_open_square_free_entropy_density_nonnegative`（`claim_open_rectangle_value_ge_one_at_positive_rational` の直後・`remark_real_escape_plan` の直前、住処 Lambda）で、
+  $L\ge1$、$q\in\mathbb Q_{>0}$ に対し $0\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。周期境界の `claim_finite_free_entropy_density_nonnegative` と同じ論法
+  （準備 3 つ: $1\le Z^{\mathrm{op}}_{L,L}(q)$・$\log1=0$・$\frac1{L^2}\iota(0)=0$、$\Lambda$ の鎖 $0=\log1\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)$、$\Lambda_{\mathbb Q}$ の鎖で `claim_scaled_embedding_order_transfer` により移送）。
+  SageMath 97 検査（`ZZ`/`QQ`・素因数分解）、Lean 具体版 `rationalLogOrderLE_zero_openScaledFreeEntropy`・必要十分版は `le_base_transport_of_monotone_necSuf` を共有・導出版、sorry 検査 1204 件。
+  レビューでは、削除で途切れた `claim_open_rectangle_value_ge_one_at_positive_rational` 末尾の文を直し、初出より後ろに置かれていた `def_constant_plus_configuration`・
+  `claim_constant_plus_breaks_no_bond` を `claim_partition_value_ge_one_at_positive_rational` の直前へ移し、削除済みの実数値主張を対象にしていた SageMath 検証 2 件
+  （`free-energy-density-lower-bound`・`open-rectangle-value-at-least-one`）を撤去して対応を `partition-value-ge-one-at-positive-rational` へ付け替えた。次は「開境界正方形の値の上界（$\mathbb Q$ 版）」。
+
+
+### 前進の記録
+
+- 2026-08-16（tick 324）: `claim_open_square_free_entropy_density_nonnegative` を `claim_open_rectangle_value_ge_one_at_positive_rational` の直後
+  （`remark_real_escape_plan` の直前）に置き四層で閉じた。周期境界の `claim_finite_free_entropy_density_nonnegative` の証明を、$Z_L(q)$ を $Z^{\mathrm{op}}_{L,L}(q)$
+  （正値性は `claim_open_rectangle_value_at_rational_is_positive`、下界 1 は `claim_open_rectangle_value_ge_one_at_positive_rational`、いずれも $a=b=L$）に、
+  $\Phi_L(q)$ を `def_rational_log` の $\log Z^{\mathrm{op}}_{L,L}(q)$ に置き換えて述べ、準備の第三（$\frac1{L^2}\iota(0)=0$）は周期境界の証明の鎖をそのまま引いた。
+  SageMath `open-square-free-entropy-density-nonnegative`（$L\in\{1,2,3\}$ × 正の有理点 9 点、97 検査。周期境界の検査と同じ項目を開境界の値で。`ZZ`/`QQ`）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEntropyDensityNonnegative.lean`（`logOrderLE_zero_logRat_openPartitionValueRat`・
+  `rationalLogOrderLE_zero_openScaledFreeEntropy`。周期境界の `scaled_toRational_zero` を共有）、必要十分版は
+  `NecSuf/ThermodynamicLimit/FiniteFreeEntropyDensityNonnegative.lean` の `le_base_transport_of_monotone_necSuf` をそのまま共有、導出版
+  `OpenSquareFreeEntropyDensityNonnegativeFromNecSuf.lean`。sorry 検査 1204 件。式変形統一は一時停止中のため実施せず。
+
+
+### レビュー記録
+
+- 2026-08-16（tick 324）: 前 tick の「開境界長方形の値の下界 1（$\mathbb Q$ 版）」と、その後の人間による実数値経路の削除（42 ブロック）のあとの本文・SageMath・Lean を突き合わせた。
+  直したもの 3 件。(1) `claim_open_rectangle_value_ge_one_at_positive_rational` の証明末尾の文が「周期境界の〔参照〕、」で途切れていた（削除の際に $\mathbb R$ 版への言及ごと
+  切れた）ので「と同じ論法である。」で結んだ。(2) `def_constant_plus_configuration`・`claim_constant_plus_breaks_no_bond` が初出（`claim_partition_value_ge_one_at_positive_rational`
+  の証明）より後ろ、開境界の値の下界の直後に置かれていたので初出の直前へ移し、説明文も合わせた。(3) SageMath `free-energy-density-lower-bound`（対象に削除済みの
+  `claim_free_energy_density_nonnegative` を含み ball 算術を使う）と `open-rectangle-value-at-least-one`（対象が削除済みの `claim_open_rectangle_value_at_least_one`）を撤去し、
+  全て正の定数配位 2 ブロックの検証を、既にそれらを検査している `partition-value-ge-one-at-positive-rational`（overview の対象へ追記）と
+  `open-rectangle-value-ge-one-at-positive-rational` へ付け替えた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。
+
