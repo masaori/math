@@ -304,6 +304,84 @@ A
     ],
   },
   {
+    id: "homology_sector_claim_even_edge_subset_maps_to_first_cycle",
+    kind: "claim",
+    title: { text: "偶辺部分集合の係数写像は一次サイクルである" },
+    labels: ["claim_even_edge_subset_maps_to_first_cycle"],
+    habitat: "F2",
+    verification: ["sagemath/check/even-edge-subset-maps-to-first-cycle"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフ ",
+        math(String.raw`G=(V,E,\partial_G)`),
+        " と ",
+        ref("def_finite_cellulation_cell_sets"),
+        " のセル集合入力が ",
+        math(String.raw`V_{\mathrm{cell}}=V`),
+        " および ",
+        math(String.raw`E_{\mathrm{cell}}=E`),
+        " を満たすとする。このとき、",
+      ]),
+      displayMath(String.raw`\chi_{E_{\mathrm{cell}}}\!\left(\mathcal Z_1(G)\right)
+\subseteq
+\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2).`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`A\in\mathcal Z_1(G)`),
+        " と ",
+        math(String.raw`w\in V_{\mathrm{cell}}=V`),
+        " を固定する。",
+        ref("def_first_boundary_matrix_over_f2"),
+        "、",
+        ref("def_edge_subset_coefficient_map_over_f2"),
+        "、",
+        ref("def_mod_two_boundary_parity"),
+        "、",
+        ref("def_even_edge_subset"),
+        " を順に用いると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\partial_1\chi_{E_{\mathrm{cell}}}(A)\right)(w)
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G(e,a)=w
+  }}1_{\mathbb F_2}
+\right)
+\chi_{E_{\mathrm{cell}}}(A)(e)
+&&\bigl(\because\ \text{一次境界写像と有限行列積の定義}\bigr)\\
+&=
+\sum_{\substack{
+  (e,a)\in A\times\mathsf{End}\\
+  \partial_G(e,a)=w
+}}1_{\mathbb F_2}
+&&\bigl(\because\ \text{係数写像の二場合と有限和の添字の付け替え}\bigr)\\
+&=\beta_G(A)(w)
+&&\bigl(\because\ \text{辺部分集合の境界偶奇の定義}\bigr)\\
+&=0_{\mathbb F_2}
+&&\bigl(\because\ A\in\mathcal Z_1(G)\bigr).
+\end{aligned}`),
+      paragraph([
+        "任意の ",
+        math(String.raw`w\in V_{\mathrm{cell}}`),
+        " で成分が零なので ",
+        math(String.raw`\partial_1\chi_{E_{\mathrm{cell}}}(A)=0_{\mathbb F_2^{V_{\mathrm{cell}}}}`),
+        " である。したがって ",
+        ref("def_first_cycle_space_over_f2"),
+        " により ",
+        math(String.raw`\chi_{E_{\mathrm{cell}}}(A)\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " である。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "homology_sector_definition_face_boundary_space",
     kind: "definition",
     title: { text: "F_2 上の面境界空間" },
