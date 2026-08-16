@@ -63,4 +63,20 @@ theorem boundaryResponsePolynomial_outer_box_stability_fromNecSuf
       (Fintype.card Outer) • boundaryResponsePolynomial broken active :=
   NecSuf.boundaryResponsePolynomial_outer_box_stability broken broken' active h
 
+/-- 外箱への非依存性を必要十分版（`R := ℤ`）から導く。 -/
+theorem boundaryResponsePolynomial_outer_box_independence_fromNecSuf
+    {Outer₁ Outer₂ : Type*} [Fintype Outer₁] [Fintype Outer₂]
+    (broken : Configuration → Finset Edge)
+    (broken₁ : Configuration × Outer₁ → Finset Edge)
+    (broken₂ : Configuration × Outer₂ → Finset Edge) (active : Finset Edge)
+    (h₁ : ∀ σ : Configuration, ∀ τ : Outer₁,
+      boundarySpecialization active (∏ e ∈ broken₁ (σ, τ), X e) =
+        boundarySpecialization active (∏ e ∈ broken σ, X e))
+    (h₂ : ∀ σ : Configuration, ∀ τ : Outer₂,
+      boundarySpecialization active (∏ e ∈ broken₂ (σ, τ), X e) =
+        boundarySpecialization active (∏ e ∈ broken σ, X e)) :
+    (Fintype.card (Configuration × Outer₂)) • boundaryResponsePolynomial broken₁ active =
+      (Fintype.card (Configuration × Outer₁)) • boundaryResponsePolynomial broken₂ active :=
+  NecSuf.boundaryResponsePolynomial_outer_box_independence broken broken₁ broken₂ active h₁ h₂
+
 end Ising3DCut
