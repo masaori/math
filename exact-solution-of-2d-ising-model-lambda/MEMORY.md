@@ -4,6 +4,17 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 346 は、前 tick の「倍数辺の密度と基準辺の密度の差の評価」の四層を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「倍数でない辺の密度と基準辺の密度の差の評価」を上端と下端の二行へ割った（上端は非負の係数比較で $\Psi_{ka}$ の項を $\Psi_a$ へ置き換えるだけ、下端は $\frac{(ka)^2}{L^2}\Psi_{ka}$ を $\Psi_{ka}$ と誤差に分けて上からの評価で押さえ逆元を足して移項する別の論法）。
+そのうえで上端を四層で閉じた。`claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one`（`claim_open_square_multiple_side_density_vs_base_side_le_one` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で
+$\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac{2a}L\cdot\iota(\ell_2)+\frac{4a}L\cdot\iota(\log(1+q))+\Psi^{\mathrm{op}}_a(q)$。
+証明は準備 3 つ（$\mathbb Q$ の係数比較 $\frac{(ka)^2}{L^2}\le\frac{L^2}{L^2}=1$（$\mathbb N$ の冪の単調性）／符号 $0\le\Psi^{\mathrm{op}}_{ka}$（`claim_open_square_free_entropy_density_nonnegative` を $L:=ka$ で読む）／`claim_rational_log_order_group_scalar_compare_nonneg`（$r:=\frac{(ka)^2}{L^2}$、$s:=1$）・$1\cdot\lambda=\lambda$・`claim_open_square_multiple_side_density_vs_base_side_le_one` の右へ推移律）と、
+`claim_open_square_multiple_side_subsquare_density_error_bound` の右・`claim_rational_log_order_group_add_monotone`（交換則で末尾の項を先頭へ寄せる）・推移律による本体二段。
+SageMath `check/open-square-non-multiple-side-density-upper-vs-base-side/`（$(a,k,L)=(1,1,2),(2,1,3),(1,2,3)$ × 6 点、180 検査、10 秒）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareNonMultipleSideDensityUpperVsBaseSide.lean`（`multipleSide_square_ratio_le_one`（`Nat.pow_le_pow_left`・`div_le_one`）・`rationalLogOrderLE_openSquareNonMultipleSideDensity_upper_vs_baseSide_of_le_one`（`one_smul` で $1\cdot\Psi$ を潰し、`rationalLogOrderLE_add_right` のあと `add_comm` で寄せる）），
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareNonMultipleSideDensityUpperVsBaseSide.lean`（`upper_bound_enlarge_last_term_necSuf`。`[AddCommMagma X]` と推移律・右加法単調性・交換則だけ。上端 $\psi\le B+C$ と $C\le C'$ から $\psi\le B+C'$）、導出版 `OpenSquareNonMultipleSideDensityUpperVsBaseSideFromNecSuf.lean`。sorry 検査 1292 件。
+次は「倍数でない辺の密度の基準辺の密度による下からの評価（$0<q\le1$）」（台帳の備考に手順。$\Psi_{ka}=\frac{(ka)^2}{L^2}\Psi_{ka}+\frac{L^2-(ka)^2}{L^2}\Psi_{ka}$、誤差を $\frac{2a}LC$ で押さえ、$-\frac{2a}LC$ を両辺に足す）。
+
 2026-08-16 の tick 345 は、前 tick の「倍数辺の部分正方形による密度の挟み込みの誤差評価」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「密度の列の Cauchy 性（$0<q\le1$）」を論法の数で四行へ割った（「倍数辺の密度と基準辺の密度の差の評価」→「倍数でない辺の密度と基準辺の密度の差の評価」→「基準辺の平方以上の辺の密度と基準辺の密度の一様な差の評価」→「密度の列の Cauchy 性」。手順は台帳の備考）。
 そのうえで最初の行を四層で閉じた。`claim_open_square_multiple_side_density_vs_base_side_le_one`（`claim_open_square_multiple_side_subsquare_density_error_bound` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$0<q\le1$ で

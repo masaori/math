@@ -3,6 +3,27 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16 tick 346 で台帳から移した記録（tick 341 分）
+
+### 現在地
+
+- **2026-08-16 の tick 341 は、台帳の先頭行「係数の大小による有理数倍の比較」を、非負の元についての一行「非負の元の有理数倍は係数の大小で比較できる」（$r\le s$（$\mathbb Q$）、$0\le_{\Lambda_{\mathbb Q}}\nu$ なら $r\cdot\nu\le_{\Lambda_{\mathbb Q}}s\cdot\nu$）として本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_scalar_compare_nonneg`（`claim_rational_log_order_group_nonneg_scalar_monotone` の直後・`remark_real_escape_plan` の直前、住処 Lambda）。証明は $c:=s-r\ge0$ を置き、非負有理数倍の順序保存を $\lambda:=0$、$\mu:=\nu$ で読んで $0=c\cdot0\le c\cdot\nu$、加法単調性で $r\cdot\nu$ を足し、
+  四段の鎖 $r\cdot\nu=0+r\cdot\nu\le c\cdot\nu+r\cdot\nu=(c+r)\cdot\nu=s\cdot\nu$。非正の元（$\nu\le0$ で向きが逆）は 1 ブロック 1 主張なので別行に切り出し、セクション表へ足した。
+  SageMath `check/rational-log-order-group-scalar-compare-nonneg/`（非負ベクトル 38 本 × 係数の組 28、主張 1064 件・鎖 1064 件、10 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonneg.lean`（`rationalLogOrderLE_ratSmul_le_ratSmul_of_le`）、
+  必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupScalarCompareNonneg.lean`（`smul_le_smul_of_le_of_nonneg_necSuf`。順序付き加法群の係数環 $K$ 上の加群 $X$ と関係 `le` について、非負係数の作用と右加法が `le` を保てばよい。`le` の推移律・反射律も体も要らない）、導出版。sorry 検査 1271 件。
+  次は「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」（台帳の備考に手順）。
+
+### 前進の記録
+
+- 2026-08-16（tick 341）: 台帳の先頭行「係数の大小による有理数倍の比較」は非負の元と非正の元で主張が二つあるので二行へ割り、非負の元の行 `claim_rational_log_order_group_scalar_compare_nonneg` を `claim_rational_log_order_group_nonneg_scalar_monotone` の直後に置いて四層で閉じた。
+  証明は台帳の備考のとおり（$c:=s-r$、非負有理数倍の順序保存・$c\cdot0=0$・加法単調性・分配則の四段の鎖）。SageMath `rational-log-order-group-scalar-compare-nonneg`、Lean 具体版・必要十分版（係数環の順序付き加法群性と加群の分配則・零への作用、`le` を保つ二つの仮定だけ）・導出版を書き、入口 import・sorry 検査へ 3 件登録（計 1271 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 341）: 前 tick の「非負有理数倍は有理係数の対数順序群の順序を保つ」の本文（準備・六段の鎖・$u$ の場合分け）・SageMath overview（10400 検査）・Lean 具体版（`commonDenominator_ratSmul` の六段が本文と 1 対 1）・必要十分版（$c$ の非負性が証人側の作用にだけ入る旨のコメント）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: この主張は共通分母と証人を構成する主張で誤差評価が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16 tick 345 で台帳から移した記録（tick 340 分）
 
 ### 現在地

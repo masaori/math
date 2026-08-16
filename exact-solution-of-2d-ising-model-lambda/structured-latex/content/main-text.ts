@@ -42865,6 +42865,165 @@ q\le q'
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one",
+    kind: "claim",
+    title: { text: "倍数でない辺の密度の基準辺の密度による上からの評価（q は 1 以下）" },
+    labels: ["claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-non-multiple-side-density-upper-vs-base-side"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareNonMultipleSideDensity_upper_vs_baseSide_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.upper_bound_enlarge_last_term_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareNonMultipleSideDensity_upper_vs_baseSide_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,k,L\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        "、",
+        math(String.raw`ka<L\le ka+a`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi^{\mathrm{op}}_{L}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \frac{2a}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+\frac{4a}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))+\Psi^{\mathrm{op}}_{a}(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{2a}{L}\cdot`),
+        "、",
+        math(String.raw`\frac{4a}{L}\cdot`),
+        "（いずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元。",
+        math(String.raw`L\ge1`),
+        " なので分母 ",
+        math(String.raw`L\ne0`),
+        "）と加法は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。",
+        ref("claim_open_square_multiple_side_subsquare_density_error_bound"),
+        " の上端に残る項 ",
+        math(String.raw`\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)`),
+        " を、基準辺の密度 ",
+        math(String.raw`\Psi^{\mathrm{op}}_{a}(q)`),
+        " で置き換えたものであり、後の Cauchy 性で、辺 ",
+        math(String.raw`a`),
+        " の倍数でない辺 ",
+        math(String.raw`L`),
+        " の密度と辺 ",
+        math(String.raw`a`),
+        " の密度の差を上から ",
+        math(String.raw`\frac{1}{L}`),
+        " の定数倍で押さえるために引く。下からの評価は次で別に示す。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 3 つ置く。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記する（この証明の中だけ）。第一に、係数の ",
+        math(String.raw`\mathbb{Q}`),
+        " における比較を作る。",
+        math(String.raw`k\ge1`),
+        "、",
+        math(String.raw`a\ge1`),
+        " なので ",
+        math(String.raw`ka\ge1`),
+        "（",
+        math(String.raw`\mathbb{N}`),
+        " の乗法単調性）であり、",
+        math(String.raw`L\ge1`),
+        " なので分母 ",
+        math(String.raw`L^2\ne0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{(ka)^2}{L^2}
+&\le\frac{L^2}{L^2}
+&&(\because\ ka<L\text{ から }(ka)^2\le L^2\text{（}\mathbb{N}\text{ の冪の単調性）。}L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
+&=1
+&&(\because\ L^2\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "第二に、辺 ",
+        math(String.raw`ka`),
+        " の密度の符号 ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{ka}(q)`),
+        " を、",
+        ref("claim_open_square_free_entropy_density_nonnegative"),
+        " を辺 ",
+        math(String.raw`ka`),
+        "（あちらの ",
+        math(String.raw`L`),
+        " を ",
+        math(String.raw`ka`),
+        " と読む。",
+        math(String.raw`ka\ge1`),
+        "）と ",
+        math(String.raw`q`),
+        " で読んで取る。第三に、第一の係数の比較と第二の符号から、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の比較を作り、",
+        ref("claim_open_square_multiple_side_density_vs_base_side_le_one"),
+        " の右へ ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律でつなぐ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&\le_{\Lambda_{\mathbb{Q}}}1\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{(ka)^2}{L^2}\text{、}s:=1\text{、}\nu:=\Psi^{\mathrm{op}}_{ka}(q)\text{ で読む。}r\le s\text{ は第一、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第二})\\
+&=\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ 1\cdot\lambda=\lambda\text{（}\blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }1\text{ を掛ける）})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \blkref{claim_open_square_multiple_side_density_vs_base_side_le_one}\text{ の右の不等式})
+\end{aligned}`),
+      paragraph([
+        "主張を、その左辺から始める次の一続きで示す。二つの ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は同じく推移律でつなぐ。加法単調性を末尾の項へ当てるとき、",
+        ref("def_rational_log_order_group"),
+        " の加法の交換則で当てる項を先頭へ寄せてから読む。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{\mathrm{op}}_{L}(q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot\iota(\ell_2)+\frac{4a}{L}\cdot\iota(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \blkref{claim_open_square_multiple_side_subsquare_density_error_bound}\text{ の右の不等式})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot\iota(\ell_2)+\frac{4a}{L}\cdot\iota(\log(1+q))+\Psi^{\mathrm{op}}_{a}(q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\nu:=\tfrac{2a}{L}\cdot\iota(\ell_2)+\tfrac{4a}{L}\cdot\iota(\log(1+q))\text{ で読み、第三の比較の両端 }\tfrac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{a}(q)\text{ を移す})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、倍数辺の部分正方形による誤差評価の右、",
+        math(String.raw`\mathbb{Q}`),
+        " の順序と四則、開境界正方形の密度の非負性、非負の元の有理数倍の係数の大小による比較、倍数辺の密度と基準辺の密度の差の評価の右、加法単調性、推移律だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },
