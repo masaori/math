@@ -214,6 +214,24 @@ theorem fullBoundaryResponse_one_le_coeff_brokenMonomial
             (∑ e ∈ broken τ, Finsupp.single e 1) then (1 : ℤ) else 0)
           (fun σ _ ↦ by split_ifs <;> simp) (Finset.mem_univ τ)
 
+/-- 辺変数を 1 に置かない境界応答多項式は各辺の変数に真に依存する（人手証明
+`claim_full_boundary_response_degree_exactly_one`）。辺 `e₀` を破る配位 `τ` があれば、
+`τ` の単項式の係数は 1 以上（第二歩）で `e₀` での指数は 1（第一歩）なので次数は 1 以上、
+高々 1（`fullBoundaryResponse_degreeOf_le_one`）と合わせてちょうど 1 である。 -/
+theorem fullBoundaryResponse_degreeOf_eq_one
+    (broken : Configuration → Finset Edge) (e₀ : Edge) (τ : Configuration)
+    (hτ : e₀ ∈ broken τ) :
+    degreeOf e₀ (multivariatePartitionPolynomial broken) = 1 := by
+  refine le_antisymm (fullBoundaryResponse_degreeOf_le_one broken e₀) ?_
+  -- τ の単項式の指数 m は support に属する（係数が 1 以上なので非零）
+  have hcoeff := fullBoundaryResponse_one_le_coeff_brokenMonomial broken τ
+  have hsupp : (∑ e ∈ broken τ, Finsupp.single e 1) ∈
+      (multivariatePartitionPolynomial broken).support := by
+    rw [mem_support_iff]; exact ne_of_gt (lt_of_lt_of_le zero_lt_one hcoeff)
+  -- support の元の e₀ での指数は次数以下
+  have hle := monomial_le_degreeOf e₀ hsupp
+  rwa [(brokenMonomial_exponent_at_broken_edge broken e₀ τ hτ).2] at hle
+
 end
 
 end Ising3DCut
