@@ -1333,6 +1333,13 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_toRational_logRat_iff
   Ising2DLambda.NecSuf.ThermodynamicLimit.iff_comp_of_iff_of_scaled_iff_necSuf
   Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_toRational_logRat_iff_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.toRational_zero
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_toRational_logRat_nonpos_of_le_one
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_toRational_generator_two
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_toRational_logRat_one_add
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareMultipleSideSubsquareDensity_error_bounds_of_le_one
+  Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_enlarge_coefficients_necSuf
+  Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareMultipleSideSubsquareDensity_error_bounds_of_le_one_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

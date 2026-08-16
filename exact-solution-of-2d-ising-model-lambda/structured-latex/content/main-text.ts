@@ -42446,6 +42446,266 @@ q\le q'
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_multiple_side_subsquare_density_error_bound",
+    kind: "claim",
+    title: { text: "倍数辺の部分正方形による密度の挟み込みの誤差評価（q は 1 以下）" },
+    labels: ["claim_open_square_multiple_side_subsquare_density_error_bound"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-multiple-side-subsquare-density-error-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareMultipleSideSubsquareDensity_error_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_enlarge_coefficients_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_openSquareMultipleSideSubsquareDensity_error_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,k,L\in\mathbb{N}`),
+        "、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        "、",
+        math(String.raw`ka<L\le ka+a`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき ",
+        ref("def_open_square_free_entropy_density"),
+        " の開境界正方形の自由エントロピー密度について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\frac{2}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_{L}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \frac{2a}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\ell_2)+\frac{4a}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log q,\ \log(1+q)\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\ell_2\in\Lambda`),
+        " は素数 ",
+        math(String.raw`2`),
+        " の生成元（",
+        ref("def_log_order_group"),
+        "）、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{2}{L}\cdot`),
+        "、",
+        math(String.raw`\frac{(ka)^2}{L^2}\cdot`),
+        "、",
+        math(String.raw`\frac{2a}{L}\cdot`),
+        "、",
+        math(String.raw`\frac{4a}{L}\cdot`),
+        "（いずれも ",
+        math(String.raw`\mathbb{Q}`),
+        " の元。",
+        math(String.raw`L\ge1`),
+        " なので分母 ",
+        math(String.raw`L,\ L^2\ne0`),
+        "）と加法は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。",
+        ref("claim_open_square_subsquare_comparison_density_le_one"),
+        " を部分正方形の辺 ",
+        math(String.raw`ka`),
+        " で読み、その係数を ",
+        math(String.raw`L`),
+        " と ",
+        math(String.raw`k`),
+        " によらない形 ",
+        math(String.raw`\frac{2}{L}`),
+        "、",
+        math(String.raw`\frac{2a}{L}`),
+        "、",
+        math(String.raw`\frac{4a}{L}`),
+        " へ大きくしたものであり、後の Cauchy 性で ",
+        math(String.raw`\Psi^{\mathrm{op}}_{L}(q)`),
+        " と ",
+        math(String.raw`\Psi^{\mathrm{op}}_{ka}(q)`),
+        " の差を ",
+        math(String.raw`\frac{1}{L}`),
+        " の定数倍で押さえるために引く。",
+        math(String.raw`L=ka`),
+        " の場合は含めない（そのときは ",
+        ref("claim_open_square_block_tiling_density"),
+        " を直接使う）。実数体も実対数も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 4 つ置く。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記する（この証明の中だけ）。第一に、",
+        math(String.raw`a\ge1`),
+        "、",
+        math(String.raw`k\ge1`),
+        " なので ",
+        math(String.raw`ka\ge1`),
+        "（",
+        math(String.raw`\mathbb{N}`),
+        " の乗法単調性）であり、",
+        math(String.raw`ka<L`),
+        " と合わせて ",
+        ref("claim_open_square_subsquare_comparison_density_le_one"),
+        " を部分正方形の辺 ",
+        math(String.raw`ka`),
+        "（あちらの ",
+        math(String.raw`a`),
+        " を ",
+        math(String.raw`ka`),
+        " と読む）と ",
+        math(String.raw`L`),
+        "、",
+        math(String.raw`q`),
+        " で読める。すなわち",
+      ]),
+      displayMath(String.raw`\frac{ka+L}{L^2}\cdot\iota(\log q)+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_{L}(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \frac{L^2-(ka)^2}{L^2}\cdot\iota(\ell_2)+\frac{2(L^2-(ka)^2)}{L^2}\cdot\iota(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)`),
+      paragraph([
+        "である。第二に、係数の ",
+        math(String.raw`\mathbb{Q}`),
+        " における三つの比較を作る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{ka+L}{L^2}
+&\le\frac{L+L}{L^2}
+&&(\because\ ka<L\text{ から }ka+L\le L+L\text{（}\mathbb{N}\text{ の加法単調性）。}L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
+&=\frac{2}{L}
+&&(\because\ L+L=2L\text{ と }L\ne0\text{ による約分 }\tfrac{2L}{L^2}=\tfrac{2}{L}\text{。}\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\frac{L^2-(ka)^2}{L^2}
+&\le\frac{2aL}{L^2}
+&&(\because\ \blkref{claim_square_difference_from_multiple_side_bound}\text{ を }ka\le L\le ka+a\text{ で読み、}L^2>0\text{ で割る})\\
+&=\frac{2a}{L}
+&&(\because\ L\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\frac{2(L^2-(ka)^2)}{L^2}
+&=2\cdot\frac{L^2-(ka)^2}{L^2}
+&&(\because\ \mathbb{Q}\text{ の四則})\\
+&\le2\cdot\frac{2a}{L}
+&&(\because\ \text{直前の比較に正数 }2\text{ を掛ける（}\mathbb{Q}\text{ の順序）})\\
+&=\frac{4a}{L}
+&&(\because\ \mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "第三に、埋め込んだ対数の三つの符号を ",
+        ref("claim_rational_embedded_log_order_iff"),
+        " から取る。",
+        math(String.raw`\log1=0`),
+        "（",
+        ref("claim_log_power"),
+        " の ",
+        math(String.raw`k=0`),
+        "）と ",
+        math(String.raw`\iota(0)=0`),
+        "（",
+        ref("claim_rational_log_order_group_embedding"),
+        "。",
+        math(String.raw`\iota`),
+        " は加法を保つので単位元を単位元へ移す）、",
+        math(String.raw`\log2=\ell_2`),
+        "（",
+        math(String.raw`2`),
+        " は素数。",
+        ref("def_rational_log"),
+        "）を使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(\log q)
+&\le_{\Lambda_{\mathbb{Q}}}\iota(\log1)
+&&(\because\ \blkref{claim_rational_embedded_log_order_iff}\text{ を }q':=1\text{ で読み、仮定 }q\le1\text{ を移す})\\
+&=\iota(0)
+&&(\because\ \log1=0)\\
+&=0
+&&(\because\ \iota(0)=0)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\iota(0)
+&&(\because\ \iota(0)=0\text{ を右辺から左辺の向きに読む})\\
+&=\iota(\log1)
+&&(\because\ \log1=0\text{ を右辺から左辺の向きに読む})\\
+&\le_{\Lambda_{\mathbb{Q}}}\iota(\log2)
+&&(\because\ \blkref{claim_rational_embedded_log_order_iff}\text{ を }(q,q'):=(1,2)\text{ で読み、}1\le2\text{ を移す})\\
+&=\iota(\ell_2)
+&&(\because\ \log2=\ell_2)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&=\iota(0)
+&&(\because\ \iota(0)=0\text{ を右辺から左辺の向きに読む})\\
+&=\iota(\log1)
+&&(\because\ \log1=0\text{ を右辺から左辺の向きに読む})\\
+&\le_{\Lambda_{\mathbb{Q}}}\iota(\log(1+q))
+&&(\because\ \blkref{claim_rational_embedded_log_order_iff}\text{ を }(q,q'):=(1,1+q)\text{ で読み、}0<q\text{ から }1\le1+q\text{（}\mathbb{Q}\text{ の順序）を移す})
+\end{aligned}`),
+      paragraph([
+        "第四に、第二の係数の比較と第三の符号から、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の三つの比較を作る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2}{L}\cdot\iota(\log q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{ka+L}{L^2}\cdot\iota(\log q)
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{ka+L}{L^2}\text{、}s:=\tfrac{2}{L}\text{、}\nu:=\iota(\log q)\text{ で読む。}r\le s\text{ は第二、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第三})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\frac{L^2-(ka)^2}{L^2}\cdot\iota(\ell_2)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot\iota(\ell_2)
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{L^2-(ka)^2}{L^2}\text{、}s:=\tfrac{2a}{L}\text{、}\nu:=\iota(\ell_2)\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\frac{2(L^2-(ka)^2)}{L^2}\cdot\iota(\log(1+q))
+&\le_{\Lambda_{\mathbb{Q}}}\frac{4a}{L}\cdot\iota(\log(1+q))
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{2(L^2-(ka)^2)}{L^2}\text{、}s:=\tfrac{4a}{L}\text{、}\nu:=\iota(\log(1+q))\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
+\end{aligned}`),
+      paragraph([
+        "主張の左の不等式を、その左辺から始める次の一続きで示す。二つの ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " の推移律でつなぐ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{2}{L}\cdot\iota(\log q)+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{ka+L}{L^2}\cdot\iota(\log q)+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\nu:=\tfrac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)\text{ で読み、第四の第一の比較を移す})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{L}(q)
+&&(\because\ \text{第一の左の不等式})
+\end{aligned}`),
+      paragraph([
+        "主張の右の不等式を、その左辺から始める次の一続きで示す。三つの ",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は同じく推移律でつなぐ。加法単調性を項の和へ当てるとき、",
+        ref("def_rational_log_order_group"),
+        " の加法の結合則と交換則で当てる項を先頭へ寄せてから読む。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{\mathrm{op}}_{L}(q)
+&\le_{\Lambda_{\mathbb{Q}}}\frac{L^2-(ka)^2}{L^2}\cdot\iota(\ell_2)+\frac{2(L^2-(ka)^2)}{L^2}\cdot\iota(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \text{第一の右の不等式})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot\iota(\ell_2)+\frac{2(L^2-(ka)^2)}{L^2}\cdot\iota(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\nu:=\tfrac{2(L^2-(ka)^2)}{L^2}\cdot\iota(\log(1+q))+\tfrac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)\text{ で読み、第四の第二の比較を移す})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot\iota(\ell_2)+\frac{4a}{L}\cdot\iota(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\nu:=\tfrac{2a}{L}\cdot\iota(\ell_2)+\tfrac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)\text{ で読み、第四の第三の比較を移す})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、部分正方形との比較による密度の挟み込み、倍数辺との平方の差の評価、",
+        math(String.raw`\mathbb{Q}`),
+        " の順序と四則、埋め込んだ対数の順序、係数の大小による有理数倍の比較（非負・非正）、加法単調性、推移律だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針。まだ書いていない）" },

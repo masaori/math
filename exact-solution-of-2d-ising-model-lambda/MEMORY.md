@@ -4,6 +4,19 @@
 
 ## 現在の到達点（2026-08-16 時点）
 
+2026-08-16 の tick 344 は、前 tick の「埋め込んだ対数の順序は正の有理数の順序と一致する」の四層を突き合わせて一致を確認し（statement の読み方の例で主張自身の変数 $q$ を再利用していた箇所を $p$ に改めた。別コミット）、
+台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」を四層で閉じた。
+`claim_open_square_multiple_side_subsquare_density_error_bound`（`claim_rational_embedded_log_order_iff` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $a,k\ge1$、$ka<L\le ka+a$、$0<q\le1$ で
+$\frac2L\cdot\iota(\log q)+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)\le_{\Lambda_{\mathbb Q}}\frac{2a}L\cdot\iota(\ell_2)+\frac{4a}L\cdot\iota(\log(1+q))+\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)$。
+証明は準備 4 つ（`claim_open_square_subsquare_comparison_density_le_one` を $a:=ka$ で読む／$\mathbb Q$ の係数比較 $\frac{ka+L}{L^2}\le\frac2L$・$\frac{L^2-(ka)^2}{L^2}\le\frac{2a}L$（`claim_square_difference_from_multiple_side_bound`）・$\frac{2(L^2-(ka)^2)}{L^2}\le\frac{4a}L$／
+符号 $\iota(\log q)\le0$・$0\le\iota(\ell_2)$・$0\le\iota(\log(1+q))$（`claim_rational_embedded_log_order_iff` を $q':=1$、$(1,2)$、$(1,1+q)$ で読み、$\log1=0$（`claim_log_power` の $k=0$）・$\iota(0)=0$・$\log2=\ell_2$）／
+`claim_rational_log_order_group_scalar_compare_nonpos`（1 件）・`_nonneg`（2 件））と、`claim_rational_log_order_group_add_monotone`・推移律による本体（左二段・右三段。第二項へ加法単調性を当てるときは交換則で先頭へ寄せる）。
+SageMath `check/open-square-multiple-side-subsquare-density-error-bound/`（形の三組 $(a,k,L)=(1,1,2),(2,1,3),(1,2,3)$ × 6 点、342 検査、11 秒。一辺 4 以上は配位和が 10 分を超えるので含めない）。
+Lean 具体版 `ThermodynamicLimit/OpenSquareMultipleSideSubsquareDensityErrorBound.lean`（`rationalLogOrderLE_openSquareMultipleSideSubsquareDensity_error_bounds_of_le_one`。補助 `toRational_zero`・`rationalLogOrderLE_toRational_logRat_nonpos_of_le_one`・`rationalLogOrderLE_zero_toRational_generator_two`・`rationalLogOrderLE_zero_toRational_logRat_one_add`。`NeZero (k*a)` は `NeZero k`・`NeZero a` から推論される）、
+必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareMultipleSideSubsquareDensityErrorBound.lean`（`twoSided_bounds_enlarge_coefficients_necSuf`。`AddCommMagma` と関係の推移律・右加法単調性だけ。結合則は `(B1+B2)+C` の形のまま二回右から足すので要らない）、
+導出版 `OpenSquareMultipleSideSubsquareDensityErrorBoundFromNecSuf.lean`（準備 4 つは具体版と同じで本体だけ委ねる）。sorry 検査 1284 件。
+次は「密度の列の Cauchy 性（$0<q\le1$）」（台帳の備考。$L=ka$ は `claim_open_square_block_tiling_density` を直接使い、$ka<L$ はこの誤差評価を使う）。
+
 2026-08-16 の tick 343 は、前 tick の「非正の元の有理数倍は係数の大小で比較できる（向きが逆）」の四層を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「埋め込んだ対数の符号」を、三つの符号を束ねずに済む一行「埋め込んだ対数の順序は正の有理数の順序と一致する」へ書き換えて四層で閉じた。
 `claim_rational_embedded_log_order_iff`（`claim_rational_log_order_group_scalar_compare_nonpos` の直後・`remark_real_escape_plan` の直前、住処 Lambda）: $q,q'\in\mathbb Q_{>0}$ について $q\le q'\iff\iota(\log q)\le_{\Lambda_{\mathbb Q}}\iota(\log q')$。

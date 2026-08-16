@@ -3,6 +3,28 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-16 tick 344 で台帳から移した記録（tick 339 分）
+
+### 現在地
+
+- **2026-08-16 の tick 339 は、台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」を論法の数で四行へ割り、その最初に要る「倍数辺との平方の差の評価」（$ka\le L\le ka+a$ なら $L^2-(ka)^2\le2aL$。$\mathbb N$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_square_difference_from_multiple_side_bound`（`claim_rational_log_order_group_archimedean` の直後・`remark_real_escape_plan` の直前、住処 N）。証明は七段の鎖 $L^2=L\cdot L\le(ka+a)L=kaL+aL\le ka(ka+a)+aL=(ka)^2+a\cdot ka+aL\le(ka)^2+aL+aL=(ka)^2+2aL$ と $\mathbb N$ の引き算。
+  SageMath `check/square-difference-from-multiple-side-bound/`（$a,k\le8$ の全組、2816 検査）。Lean 具体版 `ThermodynamicLimit/SquareDifferenceFromMultipleSideBound.lean`（`sq_le_multiple_sq_add_two_mul_nat`・`sq_sub_multiple_sq_le_two_mul_nat`）、必要十分版 `NecSuf/.../SquareDifferenceFromMultipleSideBound.lean`（`sq_le_sq_add_two_mul_of_between_necSuf`。順序可換半環。$k$ と $a$ の積の形は使わず $b\le L\le b+a$ だけ）、導出版。sorry 検査 1263 件。
+  割った四行は「非負有理数倍は順序を保つ」→「係数の大小による有理数倍の比較」→「埋め込んだ対数の符号」→「誤差評価本体（$ka<L\le ka+a$）」。$L=ka$ の場合は誤差評価に含めず、Cauchy 性の側でブロック敷き詰め密度を直接使う（備考に書いた）。締切（20:10）が近かったため最小の一行だけを閉じた。
+  次は「非負有理数倍は有理係数の対数順序群の順序を保つ」。
+
+### 前進の記録
+
+- 2026-08-16（tick 339）: 台帳の先頭行「倍数辺の部分正方形による密度の挟み込みの誤差評価」は、非負有理数倍の順序保存・係数の大小による比較・埋め込んだ対数の符号・誤差評価本体の四つの論法を含むので四行へ割った
+  （$L=ka$ は `claim_open_square_subsquare_comparison_density_le_one` の $a<L$ に当たらないので誤差評価から外し、Cauchy 性の側でブロック敷き詰め密度を直接使う）。そのうえで誤差評価が引く $\mathbb N$ の不等式「倍数辺との平方の差の評価」を先に書いた
+  （`claim_square_difference_from_multiple_side_bound`。`claim_rational_log_order_group_archimedean` の直後。$\mathbb N$ の四則だけではなく $ka\le L\le ka+a$ から乗法単調性を三度使う七段の鎖であり、後の誤差評価が引く）。
+  SageMath `square-difference-from-multiple-side-bound`、Lean 具体版・必要十分版（順序可換半環。倍数の形は使わない）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1263 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-16（tick 339）: 前 tick の「有理係数の対数順序群の Archimedes 性」の本文（準備 4 つ・本体の五段）・SageMath overview・Lean 具体版・必要十分版（hArch と体が削れない理由のコメント）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: Archimedes 性は $n$ を明示的に構成する主張で Cauchy 性が引くので残す。本文末尾「この先に書くこと」と台帳のセクション表も食い違いなし。修正は無い。
+
 ## 2026-08-16 tick 343 で台帳から移した記録（tick 338 分）
 
 ### 現在地
