@@ -193,4 +193,129 @@ Q_{\mathrm{coarse}}
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_induced_coset_cell_maps",
+    kind: "definition",
+    title: { text: "商の塔が誘導する剰余類セル写像" },
+    labels: ["def_quotient_tower_induced_coset_cell_maps"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-coset-cell-maps"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_role_generator_compatibility"),
+        " の役割生成元について整合する二段の有限商の塔と、",
+        ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"),
+        " の役割安定化部分群と剰余類セル集合の構成を取る。各形式的役割ラベル ",
+        math(String.raw`R\in\mathcal R=\{F,V,E\}`),
+        " について、両段の役割安定化部分群を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+H_R^{\mathrm{fine}}
+&:=
+\left\langle
+  r_R^{\mathrm{fine}}
+\right\rangle
+\leq Q_{\mathrm{fine}},\\
+H_R^{\mathrm{coarse}}
+&:=
+\left\langle
+  r_R^{\mathrm{coarse}}
+\right\rangle
+\leq Q_{\mathrm{coarse}}
+\end{aligned}`),
+      paragraph([
+        "で定める。役割生成元の整合性と ",
+        math(String.raw`\kappa`),
+        " の群準同型性により、各役割について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa\left(H_R^{\mathrm{fine}}\right)
+&=
+\kappa\left(
+  \left\langle
+    r_R^{\mathrm{fine}}
+  \right\rangle
+\right)\\
+&=
+\left\langle
+  \kappa\left(r_R^{\mathrm{fine}}\right)
+\right\rangle
+&&\bigl(\because\ \kappa\ \text{は群準同型}\bigr)\\
+&=
+\left\langle
+  r_R^{\mathrm{coarse}}
+\right\rangle
+&&\bigl(\because\ \text{役割生成元の整合性}\bigr)\\
+&=
+H_R^{\mathrm{coarse}}.
+\end{aligned}`),
+      paragraph([
+        "細段と粗段を同一視せず、段ラベルと役割ラベルを付けた有限剰余類セル集合を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal C_R^{\mathrm{fine}}
+&:=
+\{\mathtt{fine}\}\times\{R\}\times
+\left(Q_{\mathrm{fine}}/H_R^{\mathrm{fine}}\right),\\
+\mathcal C_R^{\mathrm{coarse}}
+&:=
+\{\mathtt{coarse}\}\times\{R\}\times
+\left(Q_{\mathrm{coarse}}/H_R^{\mathrm{coarse}}\right)
+\end{aligned}`),
+      paragraph([
+        "と定める。ここで各商は左剰余類集合である。段間全射群準同型が誘導する役割 ",
+        math(String.raw`R`),
+        " の剰余類セル写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_R:
+\mathcal C_R^{\mathrm{fine}}
+&\longrightarrow
+\mathcal C_R^{\mathrm{coarse}},\\
+\left(
+  \mathtt{fine},
+  R,
+  gH_R^{\mathrm{fine}}
+\right)
+&\longmapsto
+\left(
+  \mathtt{coarse},
+  R,
+  \kappa(g)H_R^{\mathrm{coarse}}
+\right)
+\qquad
+\left(g\in Q_{\mathrm{fine}}\right)
+\end{aligned}`),
+      paragraph([
+        "で定める。この作用が細段の左剰余類の代表元に依存しないことは、任意の ",
+        math(String.raw`g,h\in Q_{\mathrm{fine}}`),
+        " に対する次の含意で確定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+gH_R^{\mathrm{fine}}
+&=hH_R^{\mathrm{fine}}\\
+&\Longrightarrow
+h^{-1}g\in H_R^{\mathrm{fine}}\\
+&\Longrightarrow
+\kappa\left(h^{-1}g\right)
+\in
+\kappa\left(H_R^{\mathrm{fine}}\right)\\
+&\Longrightarrow
+\kappa(h)^{-1}\kappa(g)
+\in
+H_R^{\mathrm{coarse}}
+&&\bigl(\because\ \kappa\ \text{は群準同型かつ }\kappa(H_R^{\mathrm{fine}})=H_R^{\mathrm{coarse}}\bigr)\\
+&\Longrightarrow
+\kappa(g)H_R^{\mathrm{coarse}}
+=
+\kappa(h)H_R^{\mathrm{coarse}}.
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\kappa`),
+        " は全射なので、三つの ",
+        math(String.raw`\overline\kappa_R`),
+        " も全射である。これらは面、頂点、辺の各ラベル付き有限セルを対応する役割のセルへ送るだけであり、端点写像、面境界語、incidence、閉曲面性、正則性、向き付けを保存する被覆写像であることはまだ主張しない。全ての集合、群、部分群、商集合、写像は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
