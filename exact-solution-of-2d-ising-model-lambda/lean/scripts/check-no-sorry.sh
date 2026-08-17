@@ -1401,6 +1401,14 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDividesExponentLe
   Ising2DLambda.NecSuf.ThermodynamicLimit.poly_linear_factor_pow_divides_exponent_le_necSuf
   Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDividesExponentLe_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarPoly_support_nonempty_of_ne_zero
+  Ising2DLambda.ThermodynamicLimit.qbarPolyTopIndex_coeff_bound
+  Ising2DLambda.ThermodynamicLimit.mem_qbarRootMultiplicityExponentSet
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityExponentSet_nonempty
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_divides
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_ge_of_divides
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_le_of_coeff_bound
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_eq_rootMultiplicity
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

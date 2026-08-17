@@ -1340,17 +1340,19 @@ i (2K_2^*)^n \hat{Z}_\mu^{(-)} & (n \text{ 奇数}) \\
       paragraph([
         "であるから、線型写像として ",
         math(String.raw`\mathrm{ad}_{\alpha X} = \alpha\,\mathrm{ad}_X`),
-        " が成り立つ。よって ",
-        math(String.raw`\mathrm{ad}_{\alpha X}^{\,n} = (\alpha\,\mathrm{ad}_X)^n = \alpha^{n}\,\mathrm{ad}_X^{\,n}`),
-        "（",
-        math(String.raw`\mathrm{ad}_X`),
-        " は ",
-        math(String.raw`\mathbb{C}`),
-        " 線型なのでスカラー倍と可換であり、合成の各段からスカラーを前へ出せる）。",
-        math(String.raw`n = 0`),
-        " のときは両辺とも恒等写像で ",
-        math(String.raw`\alpha^0 = 1`),
-        " により成立する。",
+        " が成り立つ。よって、任意の ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ad}_{\alpha X}^{\,n}
+&= (\alpha\,\mathrm{ad}_X)^n
+&&(\because\ \text{上で示した}\ \mathrm{ad}_{\alpha X} = \alpha\,\mathrm{ad}_X)\\
+&= \alpha^{n}\,\mathrm{ad}_X^{\,n}
+&&(\because\ \mathrm{ad}_X\ \text{は}\ \mathbb{C}\ \text{線型なのでスカラー倍と可換であり、合成の各段からスカラーを前へ出せる。}\ n=0\ \text{のときは両辺とも恒等写像で}\ \alpha^{0}=1)
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。",
       ]),
       paragraph([
         "補題 2（虚数単位の冪）：",

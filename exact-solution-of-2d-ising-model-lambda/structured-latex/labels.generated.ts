@@ -426,6 +426,7 @@ export const ALL_LABELS = [
   "def_qbar_polynomial_evaluation",
   "def_qbar_polynomial_ring",
   "def_qbar_projector",
+  "def_qbar_root_multiplicity",
   "def_qbar_vector",
   "def_qbar_vector_add",
   "def_qbar_vector_smul",

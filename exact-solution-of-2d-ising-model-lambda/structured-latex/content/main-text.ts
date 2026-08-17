@@ -48893,6 +48893,86 @@ k
   },
 
   {
+    id: "thermodynamic_limit_def_qbar_root_multiplicity",
+    kind: "definition",
+    title: { text: "零でない代数的数係数多項式の根の重複度" },
+    labels: ["def_qbar_root_multiplicity"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityExponentSet",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityExponentSet_nonempty",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_divides",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_ge_of_divides",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_le_of_coeff_bound",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_eq_rootMultiplicity",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`), " で ",
+        math(String.raw`f\ne0`), " であるものと、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"), "）を取る。",
+        math(String.raw`(t-\widehat{w})^{k}\mid f`), "（", ref("def_qbar_linear_factor_power_divides"), "）を満たす ",
+        math(String.raw`k\in\mathbb{N}`), " の全体を",
+      ]),
+      displayMath(String.raw`\mathcal{K}_{w}(f):=\{\,k\in\mathbb{N}\mid (t-\widehat{w})^{k}\mid f\,\}`),
+      paragraph([
+        "と書く。この集合は次の理由で空でない有限集合であり、したがって最大元をもつ。",
+      ]),
+      list([
+        [
+          "空でないこと: ", math(String.raw`0\in\mathcal{K}_{w}(f)`), " である（",
+          ref("def_qbar_linear_factor_power_divides"), " の、", math(String.raw`k=0`),
+          " では任意の多項式を割り切るという読み取り）。",
+        ],
+        [
+          "有限であること: ", math(String.raw`\mathrm{ac}_i(f)\ne0`), " となる ",
+          math(String.raw`i\in\mathbb{N}`), " の集合は ", ref("def_qbar_polynomial_ring"),
+          " により有限で、", math(String.raw`f\ne0`),
+          " により空でない（すべての係数が零である多項式は零元だからである）ので、その最大元 ",
+          math(String.raw`n_f\in\mathbb{N}`), " が取れる。定め方から ",
+          math(String.raw`i>n_f`), " ならば ", math(String.raw`\mathrm{ac}_i(f)=0`), " である。",
+          "この ", math(String.raw`n_f`), " と ", math(String.raw`f\ne0`), " のもとで ",
+          ref("claim_qbar_linear_factor_pow_divides_exponent_le"), " を当てると、",
+          math(String.raw`k\in\mathcal{K}_{w}(f)`), " ならば ", math(String.raw`k\le n_f`),
+          " である。すなわち ", math(String.raw`\mathcal{K}_{w}(f)\subseteq\{0,1,\dots,n_f\}`),
+          " であり、有限集合の部分集合として有限である。",
+        ],
+      ]),
+      paragraph([
+        "空でない有限な ", math(String.raw`\mathbb{N}`), " の部分集合には最大元があるので、",
+        math(String.raw`w`), " の ", math(String.raw`f`), " における根の重複度を",
+      ]),
+      displayMath(String.raw`\mathrm{mult}_{w}(f):=\max\mathcal{K}_{w}(f)\in\mathbb{N}`),
+      paragraph([
+        "と定める（記号 ", math(String.raw`\mathrm{mult}`), " はこの意味にだけ使う。",
+        math(String.raw`f=0`), " に対しては定めない）。定義から次の三つが直ちに読める。",
+      ]),
+      list([
+        [
+          math(String.raw`(t-\widehat{w})^{\mathrm{mult}_{w}(f)}\mid f`), " である（最大元は集合の元である）。",
+        ],
+        [
+          math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`(t-\widehat{w})^{k}\mid f`),
+          " を満たすならば ", math(String.raw`k\le\mathrm{mult}_{w}(f)`), " である（最大元は集合のどの元以上でもある）。",
+        ],
+        [
+          math(String.raw`n\in\mathbb{N}`), " が ", math(String.raw`i>n`), " ならば ",
+          math(String.raw`\mathrm{ac}_i(f)=0`), " を満たすならば、",
+          math(String.raw`\mathrm{mult}_{w}(f)\le n`), " である（一つめの読み取りと ",
+          math(String.raw`f\ne0`), " のもとで ", ref("claim_qbar_linear_factor_pow_divides_exponent_le"),
+          " を ", math(String.raw`k:=\mathrm{mult}_{w}(f)`), " へ当てる。上界 ",
+          math(String.raw`n`), " は ", math(String.raw`n_f`), " に限らない）。",
+        ],
+      ]),
+      paragraph([
+        "現れるのは代数的数を係数とする多項式の整除と自然数の比較だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48909,7 +48989,7 @@ k
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
+          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
         ],
         [
           todo("未着手"),

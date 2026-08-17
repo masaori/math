@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 386 で台帳から移した記録（tick 381 分）
+
+### 現在地
+
+- **2026-08-17 の tick 381 は、台帳の先頭行「零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 R、脱出理由は完備性）。**
+  `def_fisher_zero_density_limsup_liminf`（`claim_fisher_zero_density_in_rational_disc_le_two` の直後・「この先に書くこと」の直前、住処 R）: $c,r$ を固定し、尾部の像 $T_N(c,r):=\{\iota_{\mathbb Q\to\mathbb R}(\nu_L(c,r))\mid N\le L\}\subset\mathbb R$（$N\ge1$）が空でなく（$L:=N$）上に有界（上界 $2$。含意の鎖: $\nu_L\le2$ と $\iota$ の順序保存）下に有界（下界 $0$）なので、完備性で $s_N:=\sup T_N$、$i_N:=\inf T_N$ が定まり $0\le s_N$、$i_N\le2$。集合 $\{s_N\mid N\ge1\}$ は空でなく下に有界、$\{i_N\mid N\ge1\}$ は空でなく上に有界なので、再び完備性で $\overline\nu(c,r):=\inf\{s_N\}$、$\underline\nu(c,r):=\sup\{i_N\}$。$\overline\nu=\underline\nu$（収束）は主張しない。本文末尾「この先に書くこと」の零点密度の内訳から「上極限・下極限による実数体への脱出」を消した。
+  Lean 具体版 `ThermodynamicLimit/FisherZeroDensityLimsupLiminf.lean`（`fisherZeroDensitySequence`（$L=0$ は $0$ で埋める。`periodicDensitySequence` と同じ形）・`_of_ne_zero`・`_nonneg`・`_le_two`・`fisherZeroDensityTail`・`_nonempty`・`_bddAbove`・`_bddBelow`・`fisherZeroDensityTailSup_nonneg`・`fisherZeroDensityTailInf_le_two`・`fisherZeroDensityTailSupSet`／`InfSet` とその `_nonempty`・`_bddBelow`／`_bddAbove`・`fisherZeroDensityLimsup`（`sInf`）・`fisherZeroDensityLiminf`（`sSup`）。`Rat.cast_le`・`le_csSup`・`csInf_le`）。sorry 検査 1333 件。check 471 ブロック・verify-check-linkage 260 件・PDF 256 ページ通過。
+  式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Step 6（三角不等式）の末尾で、散文「両辺とも非負なので平方の単調性により $\|A+B\|\le\|A\|+\|B\|$」を含意の鎖二段（$\|A+B\|^2\le(\|A\|+\|B\|)^2\Longrightarrow\|A+B\|\le\|A\|+\|B\|$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `def_fisher_zero_density_in_rational_disc`・`claim_fisher_zero_density_in_rational_disc_le_two` の本文（一続き四段）と Lean 具体版（`calc` 四段）を突き合わせて一致。修正なし。次は「零点密度: 重複度付きの個数への精密化（$\overline{\mathbb Q}[x]$ での根の重複度の定義から）」（着手前に論法で割る: 根の重複度の定義（$\overline{\mathbb Q}[t]$ で $(t-\xi)^k$ が割り切る最大の $k$）／重複度の和は次数以下／重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ と $N_L\le N^{\mathrm{mult}}_L\le2L^2$。Lean は `Polynomial.rootMultiplicity`）。
+
+### 前進の記録
+
+- 2026-08-17（tick 381）: 台帳の先頭行「零点密度: $(\nu_L(c,r))_{L\ge1}$ の上極限と下極限（実数体への脱出: 完備性）」を本文・Lean 具体版で閉じ、`def_fisher_zero_density_limsup_liminf` を `claim_fisher_zero_density_in_rational_disc_le_two` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1333 件。式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Step 6（三角不等式）の末尾で、散文「両辺とも非負なので平方の単調性により $\|A+B\|\le\|A\|+\|B\|$」を含意の鎖二段（$\|A+B\|^2\le(\|A\|+\|B\|)^2\Longrightarrow\|A+B\|\le\|A\|+\|B\|$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+
+### レビュー記録
+
+- 2026-08-17（tick 381）: 前 tick の「有理円板内の格子点数あたりの Fisher 零点数」の定義と「$2$ を超えない」の本文（一続き四段）と Lean 具体版（`calc` 四段）を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick は定義ブロックで、独立の主張ブロックは足していない。尾部の像が空でなく有界であること・$0\le s_N$・$i_N\le2$ は上限・下限が定まるための well-defined 性（住処の確定）なので定義の中に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Step 6（三角不等式）の末尾で、散文「両辺とも非負なので平方の単調性により $\|A+B\|\le\|A\|+\|B\|$」を含意の鎖二段（$\|A+B\|^2\le(\|A\|+\|B\|)^2\Longrightarrow\|A+B\|\le\|A\|+\|B\|$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+
 ## 2026-08-17 tick 385 で台帳から移した記録（tick 380 分）
 
 ### 現在地
