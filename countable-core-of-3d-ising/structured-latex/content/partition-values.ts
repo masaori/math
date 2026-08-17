@@ -3492,4 +3492,78 @@ a'_L(q)
       ]),
     ],
   },
+  {
+    id: "prediction_stream_claim_two_dimensional_boundary_response_even_subgraph_sum",
+    kind: "claim",
+    title: { text: "2 次元の境界応答多項式は偶部分グラフの有限和である" },
+    labels: ["claim_two_dimensional_boundary_response_even_subgraph_sum"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "整数 ",
+        math(String.raw`L\ge2`),
+        " と内箱 ",
+        math(String.raw`V^{(2)}_{L'}\subset V^{(2)}_L`),
+        " を固定し、",
+        math(String.raw`A:=A^{(2)}_{L,L'}`),
+        " と書く（",
+        ref("def_two_dimensional_boundary_response_polynomial"),
+        "）。部分集合 ",
+        math(String.raw`F\subseteq A`),
+        " が偶であるとは、各頂点に接続する ",
+        math(String.raw`F`),
+        " の辺の本数が偶数であることとする。このとき整数係数多項式の等式",
+      ]),
+      displayMath(
+        String.raw`2^{\#A}R^{(2)}_{L,L'}
+=2^{\#V^{(2)}_L}\sum_{\substack{F\subseteq A\\F\text{ は偶}}}
+\left(\prod_{e\in F}(1-X_e)\right)
+\left(\prod_{e\in A\setminus F}(1+X_e)\right)`,
+      ),
+      paragraph([
+        "が ",
+        math(String.raw`\mathbb Z[(X_e)_{e\in A}]`),
+        " で成り立つ。両辺に現れる和と積はすべて有限であり、非可算への脱出はない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "配位 ",
+        math(String.raw`\sigma:V^{(2)}_L\to\{-1,1\}`),
+        " と辺 ",
+        math(String.raw`e\in A`),
+        " に対し、端点のスピンが等しいときも異なるときも直接代入すれば",
+      ]),
+      displayMath(
+        String.raw`2X_e^{[\sigma(\partial_0e)\ne\sigma(\partial_1e)]}
+=(1+X_e)+\sigma(\partial_0e)\sigma(\partial_1e)(1-X_e)`,
+      ),
+      paragraph([
+        "である。この有限恒等式を ",
+        math(String.raw`e\in A`),
+        " について掛け、右辺を分配法則で展開すると、第二項を選ぶ辺の集合 ",
+        math(String.raw`F\subseteq A`),
+        " ごとの項になる。全配位で和を取ると、その項のスピン因子は",
+      ]),
+      displayMath(
+        String.raw`\sum_{\sigma:V^{(2)}_L\to\{-1,1\}}
+\prod_{e\in F}\sigma(\partial_0e)\sigma(\partial_1e)`,
+      ),
+      paragraph([
+        "である。ある頂点で ",
+        math(String.raw`F`),
+        " の接続本数が奇数なら、その頂点のスピンだけを反転する対合が各項の符号を反転するので、この有限和は ",
+        math(String.raw`0`),
+        " である。すべての頂点で接続本数が偶数なら各スピンの指数が偶数なので各項は ",
+        math(String.raw`1`),
+        " であり、配位が ",
+        math(String.raw`2^{\#V^{(2)}_L}`),
+        " 個あるから有限和は ",
+        math(String.raw`2^{\#V^{(2)}_L}`),
+        " である。したがって偶な ",
+        math(String.raw`F`),
+        " だけが残り、上の整数係数多項式の等式を得る。",
+      ]),
+    ],
+  },
 ]);

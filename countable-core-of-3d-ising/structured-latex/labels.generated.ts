@@ -49,6 +49,7 @@ export const ALL_LABELS = [
   "claim_splitting_degree_galois_group_do_not_determine_polynomial",
   "claim_structural_palindrome",
   "claim_symmetrized_prime_exponent_data_is_reciprocal_invariant",
+  "claim_two_dimensional_boundary_response_even_subgraph_sum",
   "def_bipartite_successor_system",
   "def_boundary_response_polynomial",
   "def_box",

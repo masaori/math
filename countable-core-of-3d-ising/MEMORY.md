@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 04:04: 本流の Lean 具体版を二段へ割り、先頭 `tendsto_tail_one`（収束する実数列の末尾を一つずらしても同じ極限へ収束）を追加した。並行では 2 次元境界応答多項式の偶部分グラフ有限和を整数多項式の等式として本文へ記述した。次 tick は本流をずらした自由族へ束ね、並行は偶部分グラフ和を SageMath で検証する。
 - 2026-08-18 03:31: check `discriminant-free-vs-periodic-differ` の対象ラベルを、ずらした自由族の反例の主張 `claim_shifted_free_family_discriminant_does_not_determine_limit_quantity` へ付け替えた（overview に旧主張も同じ計算で確かめている旨を併記）。check・linkage 通過、本文未変更。次 tick は末尾をずらした列の極限一致の段の Lean 具体版を割る。
 - 2026-08-18 03:08: ずらした自由族 $Z'_L:=Z_{L+1}$ が判別式は異なるが極限量は等しい反例になる主張を本文へ記述した。$\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z_4)$ と、末尾を一つずらした列の極限一致を結んだ。check・PDF・判別式の SageMath 検証・linkage は通過。次 tick は判別式 check の対象ラベルを新しい主張へ付け替える。
 - 2026-08-18 02:34: 開始が締切 8 分前。レビュー（`npm run check` 再実行）修正なし。本文未変更、PDF 再生成。todo 先頭を二つへ割った：先頭は「ずらした自由族 $Z'_L:=Z_{L+1}$ が判定枠の反例になる主張ブロックの記述（$L=3$ で $\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z_4)$、極限一致は末尾ずらしの初等論法）」、次に「check の対象ラベル付け替え」。次 tick は主張ブロック記述から。
