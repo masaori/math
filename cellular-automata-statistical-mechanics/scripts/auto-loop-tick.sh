@@ -24,8 +24,8 @@ TICK_TIMEOUT_SECONDS=1620
 # launchd は対話シェルのアカウント割り当てを継承しない。既定の Claude 資格情報へ
 # 暗黙に接続すると、別アカウントへの全体切り替えでこの tick の経路まで変わる。
 # 利用上限へ達していない Fable 5 のアカウントを、このプロセスだけへ明示的に割り当てる。
-CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0003"
-CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0003.token"
+CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0004"
+CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0004.token"
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
