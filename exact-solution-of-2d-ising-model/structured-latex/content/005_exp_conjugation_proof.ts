@@ -447,17 +447,25 @@ export default defineBlocks([
       paragraph([
         "最後の段で引いたのは ",
         ref("inclusion_rr_to_cc"),
-        " である。よって ",
+        " である。さらに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\langle A,A\rangle
+&= \left(\sum_{i,j}|a_{ij}|^2\right)_{\mathbb{C}}
+   \quad (\because \text{上の鎖}) \\
+&= \left(\|A\|^2\right)_{\mathbb{C}}
+   \quad (\because \|A\|^2=\sum_{i,j}|a_{ij}|^2\ \text{（ノルムの定義）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（ノルムの定義は ",
+        ref("def_matrix_norm"),
+        "）。よって ",
         math(String.raw`\langle A,A\rangle`),
         " は非負実数 ",
-        math(String.raw`\sum_{i,j}|a_{ij}|^2`),
+        math(String.raw`\|A\|^2`),
         " の像であり、",
-        ref("def_matrix_norm"),
-        " の定義から ",
-        math(String.raw`\sum_{i,j}|a_{ij}|^2=\|A\|^2`),
-        " すなわち ",
-        math(String.raw`\langle A,A\rangle=\left(\|A\|^2\right)_{\mathbb{C}}`),
-        "、および ",
         math(String.raw`\sqrt{\langle A,A\rangle}=\|A\|`),
         "。",
         math(String.raw`\langle A,A\rangle=0_{\mathbb{C}}\iff\|A\|=0\iff A=O`),
