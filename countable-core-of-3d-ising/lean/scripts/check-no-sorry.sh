@@ -268,6 +268,8 @@ targets=(
   Ising3DCut.LimitQuantity.one_le_natDegree_polyOfMultiplicity
   Ising3DCut.LimitQuantity.leadingCoeff_polyOfMultiplicity_pos
   Ising3DCut.LimitQuantity.eval_polyOfMultiplicity_ne_eval_inv
+  Ising3DCut.LimitQuantity.one_le_card_edge
+  Ising3DCut.LimitQuantity.nullModel_eval_polyOfMultiplicity_ne_eval_inv
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
