@@ -49274,6 +49274,58 @@ P_{n+1}\cdot a+Q_{n+1}\cdot b^{(n+1)+1}
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_coprime_divides_cofactor",
+    kind: "claim",
+    title: { text: "互いに素な一次因子の冪による整除は、もう一方の冪を落とした因子へ遺伝する" },
+    labels: ["claim_qbar_coprime_divides_cofactor"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-coprime-divides-cofactor"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarCoprimeDividesCofactor",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.coprime_divides_cofactor_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarCoprimeDividesCofactor_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`w,w'\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"),
+        "）が ", math(String.raw`w\ne w'`), " を満たすとし、", math(String.raw`k,m\in\mathbb{N}`),
+        "、", math(String.raw`g\in\overline{\mathbb{Q}}[t]`), "（", ref("def_qbar_polynomial_ring"),
+        "）を取る。このとき",
+      ]),
+      displayMath(String.raw`(t-\widehat{w'})^{m+1}\mid(t-\widehat{w})^{k+1}\cdot g\quad\Longrightarrow\quad(t-\widehat{w'})^{m+1}\mid g`),
+      paragraph([
+        "が成り立つ（整除の記号は ", ref("def_qbar_linear_factor_power_divides"), " の意味である）。",
+        "すなわち、割る側と互いに素な一次因子の冪は、割られる側から落としてよい。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=t-\widehat{w}`), "、", math(String.raw`b:=t-\widehat{w'}`),
+        " と置く。", ref("claim_qbar_linear_factor_powers_bezout"), " により、ある ",
+        math(String.raw`P,Q\in\overline{\mathbb{Q}}[t]`), " が存在して ",
+        math(String.raw`P\cdot a^{k+1}+Q\cdot b^{m+1}=1`), " が成り立つ。",
+        "また仮定 ", math(String.raw`b^{m+1}\mid a^{k+1}g`), " により、",
+        ref("def_qbar_linear_factor_power_divides"), " の定める通り、ある ",
+        math(String.raw`h\in\overline{\mathbb{Q}}[t]`), " が存在して ",
+        math(String.raw`a^{k+1}\cdot g=b^{m+1}\cdot h`), " が成り立つ。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
+&=(P\cdot a^{k+1}+Q\cdot b^{m+1})\cdot g&&(\because\ \blkref{claim_qbar_linear_factor_powers_bezout}\ \text{の等式を}\ 1\ \text{へ代入})\\
+&=P\cdot(a^{k+1}\cdot g)+Q\cdot(b^{m+1}\cdot g)&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則と積の結合則})\\
+&=P\cdot(b^{m+1}\cdot h)+Q\cdot(b^{m+1}\cdot g)&&(\because\ \text{仮定から得た}\ a^{k+1}g=b^{m+1}h)\\
+&=b^{m+1}\cdot(P\cdot h+Q\cdot g)&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則・結合則と分配則})
+\end{aligned}`),
+      paragraph([
+        "である。", math(String.raw`P\cdot h+Q\cdot g\in\overline{\mathbb{Q}}[t]`),
+        " なので、これは ", ref("def_qbar_linear_factor_power_divides"), " の意味で ",
+        math(String.raw`(t-\widehat{w'})^{m+1}\mid g`), " を与える。",
+        "使ったのは代数的数係数多項式の環の演算則と Bezout 恒等式だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

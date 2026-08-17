@@ -2694,14 +2694,22 @@ h(g_1g_2)
         math(String.raw`h \in R^\times`),
         " なら",
       ]),
-      displayMath(
-        String.raw`T_g(h)\,T_g(h^{-1}) = \left(g h g^{-1}\right)\left(g h^{-1} g^{-1}\right) = g h h^{-1} g^{-1} = g g^{-1} = I,`,
-      ),
-      displayMath(
-        String.raw`T_g(h^{-1})\,T_g(h) = \left(g h^{-1} g^{-1}\right)\left(g h g^{-1}\right) = g h^{-1} h g^{-1} = g g^{-1} = I`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+T_g(h)\,T_g(h^{-1})
+&= \left(g h g^{-1}\right)\left(g h^{-1} g^{-1}\right)&&(\because\ T_g\ \text{の定め方})\\
+&= g h \left(g^{-1} g\right) h^{-1} g^{-1}&&(\because\ \text{行列の積の結合律})\\
+&= g h h^{-1} g^{-1}&&(\because\ g^{-1}g = I\ \text{と積の単位元})\\
+&= g g^{-1} = I&&(\because\ h h^{-1} = I,\ g g^{-1} = I\ \text{と積の単位元})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+T_g(h^{-1})\,T_g(h)
+&= \left(g h^{-1} g^{-1}\right)\left(g h g^{-1}\right)&&(\because\ T_g\ \text{の定め方})\\
+&= g h^{-1} \left(g^{-1} g\right) h g^{-1}&&(\because\ \text{行列の積の結合律})\\
+&= g h^{-1} h g^{-1}&&(\because\ g^{-1}g = I\ \text{と積の単位元})\\
+&= g g^{-1} = I&&(\because\ h^{-1} h = I,\ g g^{-1} = I\ \text{と積の単位元})
+\end{aligned}`),
       paragraph([
-        "（行列の積の結合律を用いた）であるから、",
+        "であるから（可逆元の逆元の性質は def_invertible_elements_of_R による）、",
         ref("def_invertible_elements_of_R"),
         " の可逆性の定義より ",
         math(String.raw`T_g(h) \in R^\times`),

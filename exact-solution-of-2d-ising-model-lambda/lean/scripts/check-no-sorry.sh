@@ -1421,6 +1421,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowersBezout
   Ising2DLambda.NecSuf.ThermodynamicLimit.linear_factor_powers_bezout_necSuf
   Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowersBezout_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarCoprimeDividesCofactor
+  Ising2DLambda.NecSuf.ThermodynamicLimit.coprime_divides_cofactor_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarCoprimeDividesCofactor_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
