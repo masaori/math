@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 07:02: 本流の次の標的を、ゴール文書の未検討候補「Galois 群は極限量に効くか」から引き直した。判別式と同じずらした自由族 $Z'_L=Z_{L+1}$ を使えば極限一致は既存定理で済むため、次 tick は $Z_3,Z_4$ から Galois 群を厳密に決定できるかの照合から。レビュは `npm run check`（101 ブロック・168 参照）再実行で修正なし。
 - 2026-08-18 06:34: 本流「十分性と必要でないことの判定を極限量へ具体化する（定義）」を再点検して done へ閉じた（定義の判定述語は実例側セクションの Lean 四層で形式化済み。独立の `def` は参照されない複製になるため置かない）。レビューは `npm run check` 再実行で修正なし。本文未変更。本流のセクション表に未完了が無いので、次 tick はゴール文書「極限側で問う言明」（Galois 群は極限量に効くか）から標的を引き直す。並行は Kasteleyn–Fisher 表示の一次文献照合。
 - 2026-08-18 06:04: 本流「判別式が極限量に効かないことの判定」の Lean 必要十分版を閉じた。`TailShiftLimitAbstract.lean` で、添字写像が極限フィルタを保つこと・項ごとの一致・Hausdorff 空間での極限の一意性だけへ抽象化し、具体版を特殊化として導出した（lake build・sorry 検査 225 件）。並行では 2 次元偶部分グラフ和を $L'=1,L=2$ の全配位・全辺部分集合について SageMath で検証した（linkage 36 件）。レビュー修正なし。次 tick の本流はゴール文書へ戻って標的を引き直し、並行は Kasteleyn–Fisher 表示の一次文献照合。
 - 2026-08-18 05:33: 本流「判別式が極限量に効かないことの判定」の Lean 具体版を閉じた。末尾ずらしの一致補題と `tendsto_tail_one` を合成した `shiftedFreeFiniteBoxQuantitySeq_tendsto`・`shiftedFreeFiniteBoxQuantitySeq_limit_eq` を `TailShiftLimit.lean` に追加（lake build・sorry 検査 222 件通過、PDF 29 ページ）。レビュー修正なし。次 tick は同セクションの Lean 必要十分版を割る。
