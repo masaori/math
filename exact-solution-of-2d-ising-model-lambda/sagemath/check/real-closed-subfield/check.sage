@@ -102,8 +102,22 @@ def check_condition_unique_representation():
           % len(values), flush=True)
 
 
+def check_condition_sqrt_two_square():
+    # 第 5 条件: 固定した s（s·s = 2）がモデル R = AA の平方であること。
+    # 証人 w = 2^(1/4) ∈ AA を厳密に構成し、w ≠ 0 と s = w·w を検査する。
+    s = AA(2).sqrt()
+    assert s * s == AA(2)
+    w = AA(2).nth_root(4)
+    assert w in AA
+    assert w != AA(0)
+    assert w * w == s
+    print("第 5 条件（平方根との整合）: s = w·w（w = 2^(1/4) ≠ 0）を厳密検査",
+          flush=True)
+
+
 check_condition_subfield()
 check_condition_square_trichotomy()
 check_condition_imaginary_unit()
 check_condition_unique_representation()
-print("def_real_closed_subfield: 4 条件に対応する有限標本検査がすべて通過", flush=True)
+check_condition_sqrt_two_square()
+print("def_real_closed_subfield: 5 条件に対応する有限標本検査がすべて通過", flush=True)

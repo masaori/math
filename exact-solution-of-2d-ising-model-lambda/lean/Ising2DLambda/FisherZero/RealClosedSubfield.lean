@@ -29,6 +29,13 @@ structure RealClosedSubfieldData where
   unique_decomposition : ∀ xi : Qbar, ∃! ab : carrier × carrier,
     xi = (ab.1 : Qbar) + (ab.2 : Qbar) * omega
 
+/-- `def_real_closed_subfield` の第五条件（自己双対点の平方根 s との整合）まで含めたデータ。
+本文の五条件の組はこれに対応する。第一〜四条件だけを使う既存の定理は
+`toRealClosedSubfieldData` を通して弱い側のデータを受け取る。 -/
+structure RealClosedSubfieldSqrtTwoData (s : Qbar) extends RealClosedSubfieldData where
+  sqrtTwo_square : ∃ w : toRealClosedSubfieldData.carrier,
+    w ≠ 0 ∧ s = (w : Qbar) * (w : Qbar)
+
 /-- 本文どおり、固定した虚数単位は四乗すると一になる。 -/
 theorem realClosedOmega_pow_four (data : RealClosedSubfieldData) :
     data.omega ^ 4 = 1 := by

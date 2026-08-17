@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 418 は、セクション「臨界点を挟む有理等分区間」への着手時に、台帳の計画（$[0,1]$ の等分・正の有理端点 $q$）が現状の固定では証明不能であることを見つけ、最小修復を入れた。
+理由: $s$（$s\cdot s=2$ の根）と $(R,\omega)$（実閉部分体）は独立に固定されており、第 1〜4 条件だけでは $s$ と $-s$ のどちらが $R$ の平方かが組の選び方に依存する。したがって $0<_Rx_c$ や「正の有理数 $q$ で $(x_c-q)^2<_R\delta$」は選択依存の主張になり、「どれを固定したかに依存する主張は述べない」という定義自身の規約により述べられない（$s\mapsto-s$ で $x_c$ は共役根 $-1-s\approx-2.414$ に移る）。
+修復: `def_real_closed_subfield` の組の固定に第 5 条件「ある零元でない $w\in R$ で $s=w\cdot w$」を追加した。既存の主張は第 1〜4 条件しか使わないので全て無傷。存在は Artin–Schreier（$s$ を正とする順序体 $\mathbb{Q}(s)$ の実閉包を $\overline{\mathbb{Q}}$ 内に取る）で従来と同格の既知事実として引く。Lean は基底構造 `RealClosedSubfieldData` を変えず、拡張構造 `RealClosedSubfieldSqrtTwoData (s : Qbar)`（`FisherZero/RealClosedSubfield.lean`）を追加。SageMath `check/real-closed-subfield/` に第 5 条件の節（証人 $w=2^{1/4}\in$ `AA`）を追加して再実行・通過。
+セクションは「臨界点の正値性（$0<_Rx_c$）」「臨界点は一より小さい（$x_c<_R1$）」「臨界点を挟む有理等分区間」の 3 行へ割り直した。証明の道筋は台帳の備考欄に書いた（正値性: $s+1=w^2+1^2$ が平方 $v^2$、$(s-1)(s+1)=1$ から $x_c=(1/v)^2$。上界: $1-x_c=s\cdot x_c=(w/v)^2$）。sorry 検査 1439 件・check 508 ブロック・linkage 289 件・PDF 275 ページ通過。
+レビューは tick 417 の有理網幅を四層で突き合わせ、SageMath 再実行も通過、修正なし。この tick は締切（45 分枠の残りが少ない状態で発見が出た）ため、式変形統一の 1 件は実施していない（次 tick で 2 件やる必要はない。通常どおり 1 件でよい）。
+
 2026-08-18 の tick 417 は、「臨界点への有理近似」を有限等分の三論法（正の有理誤差より細い網幅／臨界点を挟む隣接区間／近似点の抽出）へ割り、その最初「正の有理数より平方が小さい有理網幅」を四層で閉じた（住処 Q、脱出なし）。
 `claim_positive_rational_mesh_width`: 任意の $\delta\in\mathbb Q_{>0}$ に対し、$1\le N$ かつ $h_N:=1/N>0$、$h_N^2<\delta$ を満たす $N\in\mathbb N$ が存在する。$\varepsilon:=\min\{\delta,1\}$ と置き、$\mathbb Q$ の Archimedes 性から $1/(n+1)<\varepsilon$ を取り、$h_N^2<h_N<\varepsilon\le\delta$ とした。この存在は四則だけでは出ず、次の有限等分が直接引くので内容がある。
 SageMath `check/positive-rational-mesh-width/`（正の有理数 6 個、`QQ` 厳密）。Lean 具体版 `CriticalExponent/PositiveRationalMeshWidth.lean`、必要十分版 `NecSuf/CriticalExponent/PositiveRationalMeshWidth.lean`（Archimedes 的な線型順序体まで。分子分母表示・代数的数・平方根・完備性を落とす）、導出版。sorry 検査 1439 件・check 508 ブロック・linkage 289 件・PDF 275 ページ通過。

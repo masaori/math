@@ -12603,3 +12603,14 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 ### レビュー記録
 
 - 2026-08-18（tick 412）: tick 411 の「零点と臨界点の距離の二乗の零性は一致と同値」の四層を突き合わせ、一致した。修正なし。先頭距離の正値性が直接引くため「何も言っていない主張」ではない。
+
+### 現在地（2026-08-18, tick 413。台帳から移動）
+- **2026-08-18 の tick 413 は、台帳の先頭行「先頭距離の正値性」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_leading_distance_positive`: $d_1(L)\in D_L$ の証人 $\xi\in\mathcal F_L$ を取り、$d_1(L)=0$ なら `claim_critical_distance_squared_zero_iff_equal` から $\xi=x_c$ となって `claim_critical_point_not_fisher_zero` に反する。さらに距離の二乗を `claim_real_closed_sum_of_two_squares_is_square` で $w^2$ と書き、非零性から $w\ne0$、`def_real_algebraic_strict_order` から $0<_Rd_1(L)$ を得た。
+  SageMath は $L=2$ の全 16 零点・$s^2=2$ の二根で距離と最小値の正値性を `QQbar`/`AA` で厳密確認。Lean 具体版・必要十分版・導出版。sorry 検査 1430 件・check 505 ブロック・verify-check-linkage 286 件・build:pdf 273 ページ通過。式変形統一は姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」の Step 4 結論を四段の鎖へ揃え、姉妹側 check・PDF 326 ページ通過。
+
+### 前進の記録（2026-08-18, tick 413。台帳から移動）
+- 2026-08-18（tick 413）: 台帳の先頭行「先頭距離の正値性」を実行し、`claim_leading_distance_positive` を先頭距離の定義の直後に置いた。Fisher 零点が臨界点でないことから非零性を出し、二平方和の平方表示と狭義順序の定義から $0<_Rd_1(L)$ を得た。SageMath 16 零点・2 先頭距離、Lean 具体版・必要十分版・導出版。sorry 検査 1430 件・check 505 ブロック・verify-check-linkage 286 件・PDF 273 ページ通過。
+
+### レビュー記録（2026-08-18, tick 413。台帳から移動）
+- 2026-08-18（tick 413）: tick 412 の「先頭距離の定義」の本文と Lean 具体版を突き合わせ、空でない有限集合 $D_L$ の最小元を一意に定める内容が一致した。修正なし。この定義は値の住処と well-defined 性を確定し、今 tick の正値性と後続の距離列が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
