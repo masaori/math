@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 05:33: 本流「判別式が極限量に効かないことの判定」の Lean 具体版を閉じた。末尾ずらしの一致補題と `tendsto_tail_one` を合成した `shiftedFreeFiniteBoxQuantitySeq_tendsto`・`shiftedFreeFiniteBoxQuantitySeq_limit_eq` を `TailShiftLimit.lean` に追加（lake build・sorry 検査 222 件通過、PDF 29 ページ）。レビュー修正なし。次 tick は同セクションの Lean 必要十分版を割る。
 - 2026-08-18 05:03: 本流の Lean 具体版で、ずらした自由族の有限箱量の列を定義し、元の有限箱量の列の末尾ずらしに項ごとに一致する補題を形式化した。着手前レビューは check・Lean build・未証明依存検査で修正なし。次 tick はこの等式と `tendsto_tail_one` を合成し、ずらした族の極限量の存在と一致を導く定理で Lean 具体版を閉じる。
 - 2026-08-18 04:31: 開始が締切 8 分前。レビュー（`npm run check` 再実行、101 ブロック・168 参照）修正なし。本文未変更、PDF 再生成。本流の Lean 具体版の束ねを二つへ割った：先頭は「ずらした自由族の有限箱量の列が元の列の末尾ずらしに項ごとに一致する補題」、次に「`tendsto_tail_one` との合成で $\alpha'(q)=\alpha(q)$ を導き Lean 具体版を閉じる定理」。次 tick は割った先頭から。
 - 2026-08-18 04:04: 本流の Lean 具体版を二段へ割り、先頭 `tendsto_tail_one`（収束する実数列の末尾を一つずらしても同じ極限へ収束）を追加した。並行では 2 次元境界応答多項式の偶部分グラフ有限和を整数多項式の等式として本文へ記述した。次 tick は本流をずらした自由族へ束ね、並行は偶部分グラフ和を SageMath で検証する。

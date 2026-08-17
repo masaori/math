@@ -30,4 +30,22 @@ theorem tendsto_tail_one (a : ℕ → ℝ) (ℓ : ℝ)
     (ha : Tendsto a atTop (𝓝 ℓ)) : Tendsto (fun n => a (n + 1)) atTop (𝓝 ℓ) := by
   exact ha.comp (tendsto_add_atTop_nat 1)
 
+/-- 元の有限箱量の列が極限量 `α` を持てば、ずらした自由族の有限箱量の列も
+同じ `α` へ収束する。項ごとの一致 `shiftedFreeFiniteBoxQuantitySeq_eq_tail` と
+`tendsto_tail_one` の合成だけで、脱出は仮定・結論の極限に限る。 -/
+theorem shiftedFreeFiniteBoxQuantitySeq_tendsto (q : ℚ) (N : ℕ → ℕ) (α : ℝ)
+    (h : Tendsto (rootSeq (finiteBoxValueSeq q) N) atTop (𝓝 α)) :
+    Tendsto (shiftedFreeFiniteBoxQuantitySeq q N) atTop (𝓝 α) := by
+  have htail := tendsto_tail_one (rootSeq (finiteBoxValueSeq q) N) α h
+  refine htail.congr ?_
+  intro n
+  exact (shiftedFreeFiniteBoxQuantitySeq_eq_tail q N n).symm
+
+/-- ずらした自由族の極限量 `α'` が存在すれば、それは元の族の極限量 `α` と一致する。 -/
+theorem shiftedFreeFiniteBoxQuantitySeq_limit_eq (q : ℚ) (N : ℕ → ℕ) (α α' : ℝ)
+    (h : Tendsto (rootSeq (finiteBoxValueSeq q) N) atTop (𝓝 α))
+    (h' : Tendsto (shiftedFreeFiniteBoxQuantitySeq q N) atTop (𝓝 α')) :
+    α' = α :=
+  tendsto_nhds_unique h' (shiftedFreeFiniteBoxQuantitySeq_tendsto q N α h)
+
 end Ising3DCut.LimitQuantity
