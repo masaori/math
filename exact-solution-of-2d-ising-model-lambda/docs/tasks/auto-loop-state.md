@@ -7,6 +7,12 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 375 は、台帳の先頭行「有理円板内の Fisher 零点の個数 $N_L(c,r)$」を論法で五行へ割り（整係数多項式の $\overline{\mathbb Q}[t]$ への持ち上げの定義／持ち上げの値と $\mathrm{Ev}^F$ の一致／$\mathcal F_L$ の有限部分集合の個数の上界（根の個数は次数以下）／$\mathcal F_L$ の有限性と $\lvert\mathcal F_L\rvert\le2L^2$（背理法）／$N_L(c,r)$ の定義）、その最初「整係数多項式の代数的数係数多項式への持ち上げ」を本文・Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_integer_polynomial_qbar_lift`（`def_rational_disc` の直後・「この先に書くこと」の直前、住処 Qbar）: $f=\sum_{m=0}^{n}a_mx^m\in\mathbb Z[x]$ に対し $\widehat f^{\,F}\in\overline{\mathbb Q}[t]$ を $\mathrm{ac}_k(\widehat f^{\,F}):=a_k$（$k\le n$）、$0$（$n<k$）で定める。`def_qbar_constant_embedding` の $\widehat{\ \cdot\ }$ とは定義域が違うので上付き $F$ で区別。理由: $\mathcal F_L$ の有限性を `claim_qbar_distinct_roots_card_bound`（$\overline{\mathbb Q}[t]$ の多項式について述べている）から出すには $Z_L\in\mathbb Z[x]$ をそこへ送る写像が本文に無かった（`def_qbar_polynomial_evaluation` は値だけを定めている）。
+  Lean 具体版 `ThermodynamicLimit/IntegerPolynomialQbarLift.lean`（`integerPolynomialQbarLift`（`Polynomial.map (Int.castRingHom Qbar)`）・`integerPolynomialQbarLift_coeff`）。sorry 検査 1302 件。check 464 ブロック・verify-check-linkage 256 件・PDF 253 ページ通過。
+  式変形統一: この tick は締切（14:10）を優先し見送った（次 tick で 1 件進める）。
+  レビュー: 前 tick の `def_rational_disc` の本文と Lean 具体版（`distanceSquaredToRationalPoint`・`rationalDisc`・`distanceSquaredToRationalPoint_real_axis`）を突き合わせて一致。修正なし。次は「持ち上げの値と $\mathrm{Ev}^F$ の一致: $\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$」（`def_qbar_poly_evaluation` の定義式（$\mathrm{aev}$ が係数と冪の有限和）と `def_qbar_polynomial_evaluation` の定義式を並べる一続き。Lean は `Polynomial.eval₂_map`／`eval_map` の形。SageMath は $Z_L$（$L\le3$）と数個の $\xi$ で厳密に）。
+
 - **2026-08-17 の tick 374 は、台帳の先頭行「零点密度」を論法で五行へ割り（円板の定義／円板内の零点の個数／格子点数あたりの零点数／上極限・下極限による実数体への脱出／重複度付きの個数）、その最初「有理点を中心とする有理半径の円板（$\overline{\mathbb Q}$ の部分集合）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
   `def_rational_disc`（`remark_real_escape_plan` の直後・「この先に書くこと」の直前、住処 Qbar）: $c=(c_1,c_2)\in\mathbb Q\times\mathbb Q$、$r\in\mathbb Q_{>0}$ に対し、$\xi=a+b\cdot\omega$（`def_real_closed_subfield` の第 4 条件）から $\mathrm{dsq}_2(\xi,c):=(a-c_1)\cdot(a-c_1)+(b-c_2)\cdot(b-c_2)\in R$、$D(c,r):=\{\xi\mid\mathrm{dsq}_2(\xi,c)<_R r\cdot r\}\subset\overline{\mathbb Q}$。実軸上の場合 $\mathrm{dsq}_2(\xi,(q,0))=\mathrm{dsq}(\xi,q)$（`def_distance_squared_to_rational` の一般化）。複素数体を呼ばずに零点の分布を数える器。
   Lean 具体版 `ThermodynamicLimit/RationalDisc.lean`（`distanceSquaredToRationalPoint`・`rationalDisc`・`distanceSquaredToRationalPoint_real_axis`）。sorry 検査 1301 件。check 463 ブロック・verify-check-linkage 256 件・PDF 252 ページ通過。
@@ -31,13 +37,6 @@
   式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 3（単射性）で、根拠なしの二つの式（$\nu(I)-\nu(J)$ の分解、残りの和の絶対値の評価）を、$\nu$ の定義から始まる一続き四段と、三角不等式・各項の評価・添字の置き換え・Step 2 の等比和・狭義不等号の一続き五段へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
   レビュー: 前 tick の `def_periodic_density_lower_set`・`claim_periodic_density_lower_set_subset_open_square_le_one` の本文（証人の引き継ぎ・一続き二段）と Lean 具体版（`periodicDensitySequence`・`mem_…_iff`・`h1`/`h2`・推移律）を突き合わせて一致。`remark_real_escape_plan` の冒頭「直前の三つの定義と四つの主張」は、その間に周期境界の下組の定義と主張が入って「直前」でなくなっていたので「実数体を扱う三つの定義と四つの主張」へ直した（散文のみ）。次は「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ は $f^{\mathrm{op}}(q)$ に等しい（q は 1 以下）」。
 
-- **2026-08-17 の tick 370 は、台帳の先頭行「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」を三行へ割り（下組の定義と一方の包含／逆の包含（Archimedes 性）／両包含から集合の等号と同じ実数）、その最初「周期境界の密度の列が定める下組と、その下組が開境界正方形の下組に含まれること（q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `def_periodic_density_lower_set`（`def_open_square_free_energy_density` の直後、住処 Lambda）: $A^{\mathrm{per}}(q):=A((\Psi_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$（`def_rational_log_order_group_sequence_lower_set` を周期境界の密度の列で読む。開境界正方形の $A^{\mathrm{op}}(q)$ と列だけが違う）。`claim_periodic_density_lower_set_subset_open_square_le_one`（その直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{per}}(q)\subset A^{\mathrm{op}}(q)$。証明は $\mu$ の所属の証人 $\varepsilon,N$ をそのまま使い、一続き二段（証人の性質・`claim_periodic_open_boundary_comparison_density_le_one` の右の不等式）と推移律。逆の包含は誤差 $\tfrac{2}{L}\iota(\log q)$ を Archimedes 性で吸収する必要があるので次行に置いた。
-  SageMath `check/periodic-density-lower-set-subset-open-square/`（$L\le3$、有理点 6 点、所属の証人 288 組、2016 検査、10 秒。`ZZ`/`QQ` の厳密計算）。Lean 具体版 `ThermodynamicLimit/PeriodicDensityLowerSet.lean`（`periodicDensitySequence`・`_of_ne_zero`・`periodicDensityLowerSet`・`mem_…_iff`・`periodicDensityLowerSet_subset_openSquareDensityLowerSet_of_le_one`）、必要十分版 `NecSuf/ThermodynamicLimit/PeriodicDensityLowerSetSubsetOpenSquare.lean`（`lowerSetOfSequence_subset_of_pointwise_le_necSuf`。使うのは推移律と $L\ge1$ での項ごとの比較だけ。下組は既存の `lowerSetOfSequence` を共有）、導出版 `PeriodicDensityLowerSetFromNecSuf.lean`。sorry 検査 1285 件。check 459 ブロック・verify-check-linkage 254 件・PDF 249 ページ通過。
-  式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 2（値域）で、散文中の帰納法の段 $\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1$ と根拠なしの一行 $0\le\sum(i_k-1)2^{M-k}\le\sum2^{M-k}=\sum_{t=0}^{M-1}2^t=2^M-1$ を、それぞれ一続き四段と行末根拠へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
-  レビュー: 前 tick の `claim_periodic_open_boundary_comparison_density_le_one` の本文（準備二つ・七段・鎖二本）と Lean 具体版（`scaled_periodicOpenLowerForm_eq` の `calc` 七段・`rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one`）を突き合わせて一致。Lean ファイル冒頭の注釈だけが「六段」と書いており「七段」へ直した（コメントのみ。先に別コミットで push 済み）。次は「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」。
-
-
 ## セクション台帳
 
 **済んだ範囲**（章ごとの件数。個々の内訳は [auto-loop-archive.md](auto-loop-archive.md) と
@@ -58,7 +57,10 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$（$\mathcal F_L$ の有限性は零でない多項式の根の個数が次数以下であることから） | todo | |
+| 熱力学極限 | 零点密度: 持ち上げの値と $\mathrm{Ev}^F$ の一致——$\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$（$f\in\mathbb Z[x]$、$\xi\in\overline{\mathbb Q}$） | todo | |
+| 熱力学極限 | 零点密度: 有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない（$\widehat{Z_L}^{\,F}\ne0$、$2L^2<k$ で $\mathrm{ac}_k=0$、`claim_qbar_distinct_roots_card_bound`） | todo | |
+| 熱力学極限 | 零点密度: $\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$（背理法。1 の冪根の場合と同じ形） | todo | |
+| 熱力学極限 | 零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$ | todo | |
 | 熱力学極限 | 零点密度: 格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界（$\deg Z_L\le2L^2$ から $\nu_L\le2$） | todo | |
 | 熱力学極限 | 零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない） | todo | |
 | 熱力学極限 | 零点密度: 重複度付きの個数への精密化（$\overline{\mathbb Q}[x]$ での根の重複度の定義から） | todo | |
@@ -68,11 +70,12 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 375）: 台帳の先頭行「有理円板内の Fisher 零点の個数」を五行へ割った（持ち上げの定義／持ち上げの値と $\mathrm{Ev}^F$ の一致／有限部分集合の個数の上界／$\mathcal F_L$ の有限性／$N_L(c,r)$ の定義。理由: $\mathcal F_L$ の有限性は本文に無く、`claim_qbar_distinct_roots_card_bound` は $\overline{\mathbb Q}[t]$ の多項式について述べているので $\mathbb Z[x]$ からの持ち上げの定義・値の一致・上界・背理法がそれぞれ別の論法になるため）。その最初「整係数多項式の代数的数係数多項式への持ち上げ」を本文・Lean 具体版で閉じ、`def_integer_polynomial_qbar_lift` を `def_rational_disc` の直後に置いた。sorry 検査 1302 件。式変形統一は締切のため見送り。
 - 2026-08-17（tick 374）: 台帳の先頭行「零点密度」を五行へ割った（円板の定義／円板内の零点の個数／格子点数あたりの零点数／上極限・下極限による実数体への脱出／重複度付きの個数。理由: 器の定義・有限集合の数え上げ・$\mathbb Q$ での正規化・完備性による脱出・$\overline{\mathbb Q}[x]$ の因数分解は別々の論法で、1 tick 1 論法にするため。重複度は相異なる零点の個数で器を閉じたあとの精密化として最後に置いた）。その最初「有理点を中心とする有理半径の円板」を本文・Lean 具体版で閉じ、`def_rational_disc` を `remark_real_escape_plan` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1301 件。式変形統一は締切のため見送り。
 - 2026-08-17（tick 373）: 台帳の先頭行「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ の定義と $f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」を本文・Lean 具体版まで書いて閉じ、`def_periodic_free_energy_density_le_one` を下組の等号の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1300 件。式変形統一: 姉妹側「指数関数の和とクロネッカーのデルタ」の根拠なし二行へ行末根拠（姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 372）: 台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度は $f^{\mathrm{op}}(q)$ に等しい」を二行へ割った（集合の等号／$f^{\mathrm{per}}(q)$ の定義と一致。理由: 集合の等号は両包含と外延性の一論法、定義は実数体への脱出を伴う別のブロックなので、1 tick 1 論法にするため）。その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を四層で閉じ、`claim_periodic_density_lower_set_eq_open_square_le_one` を逆の包含の直後に置いた。SageMath 4387 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1296 件。式変形統一: 姉妹側「中心化環はスカラー行列」の Step 3・Step 4 の鎖の第 1 段へ行末根拠を置いた（姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 371）: 台帳の先頭行「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」を四層で閉じ、`claim_open_square_density_lower_set_subset_periodic_le_one` を周期境界の下組の包含の直後に置いた。SageMath 662530 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1293 件。式変形統一: 姉妹側「クロネッカー積」定義内 Step 3（単射性）の二つの式を一続き四段・五段と行末根拠へ（姉妹側 check・PDF 323 ページ通過）。
-- 2026-08-17（tick 370）: 台帳の先頭行「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」を三行へ割った（下組の定義と一方の包含／逆の包含（Archimedes 性）／両包含から集合の等号と同じ実数。理由: 一方の包含は証人の引き継ぎと推移律だけ、逆の包含は Archimedes 性で誤差を吸収する別の論法、集合の等号と実数の一致はさらに別なので、1 tick 1 論法にするため）。その最初を四層で閉じ、`def_periodic_density_lower_set` と `claim_periodic_density_lower_set_subset_open_square_le_one` を `def_open_square_free_energy_density` の直後に置いた。SageMath 2016 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1285 件。式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 2（値域）で、散文中の帰納法の段 $\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1$ と根拠なしの一行 $0\le\sum(i_k-1)2^{M-k}\le\sum2^{M-k}=\sum_{t=0}^{M-1}2^t=2^M-1$ を、それぞれ一続き四段と行末根拠へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+
 
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
@@ -91,6 +94,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-17（tick 375）: 前 tick の「有理点を中心とする有理半径の円板」の本文（$\mathrm{dsq}_2$・$D(c,r)$・実軸上の特別な場合）と Lean 具体版を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の持ち上げの定義は、次の値の一致・上界・有限性がすべて引く器（後で引く形）であり、値がどの環に属するかを言っているので残す。本文末尾「この先に書くこと」の零点密度の内訳へ持ち上げ・値の一致・有限性を足し、台帳のセクション表（四行追加）と同じ tick で揃えた。
 - 2026-08-17（tick 374）: 前 tick の「周期境界の自由エネルギー密度の定義と $f^{\mathrm{op}}(q)$ との一致」の本文（実現像の等号三段・上限の等号三段）と Lean 具体版（`periodicRealizedLowerSet_eq_openSquare_of_le_one`・`periodicFreeEnergyDensity_eq_openSquare_of_le_one`）を突き合わせ、一致した。修正なし。
   「何も言っていない主張」の観点: 今 tick の円板の定義は、後の零点の個数・密度がすべて引く器（後で引く形）なので残す。$\mathrm{dsq}_2(\xi,(q,0))=\mathrm{dsq}(\xi,q)$ は独立ブロックにせず定義の中に置いた。本文末尾「この先に書くこと」の零点密度の内訳と台帳のセクション表（四行）を同じ tick で揃えた。
 - 2026-08-17（tick 373）: 前 tick の「周期境界の密度の下組と開境界正方形の密度の下組は等しい」の本文（両包含と外延性）と Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。
@@ -99,8 +104,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   「何も言っていない主張」の観点: 今 tick の集合の等号は、二つの包含から従うだけだが、次の $f^{\mathrm{per}}(q)$ の定義が「実現像の上限を取る対象が同じ集合である」ことの根拠として引く（後で引く形）ので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。
 - 2026-08-17（tick 371）: 前 tick の「周期境界の密度の列が定める下組」と「周期境界の密度の下組は開境界正方形の密度の下組に含まれる」の本文と Lean 具体版・必要十分版・導出版を突き合わせ、根拠が一致した。`remark_real_escape_plan` の冒頭の「直前の」が実態と合わなくなっていたので「実数体を扱う」へ直した（散文のみ）。
   「何も言っていない主張」の観点: 今 tick の包含は、前 tick の包含と合わせて集合の等号を与えるので残す。$0\cdot\lambda=0$・$-0=0$・$-(r\cdot(-\lambda))=r\cdot\lambda$・証人の半分の三性質・$\delta$ の符号は独立ブロックにせず、証明の準備と行末の $(\because\ \dots)$ に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。
-- 2026-08-17（tick 370）: 前 tick の「周期境界と開境界の密度の比較（Λ_ℚ 版）」の本文と Lean 具体版・導出版を突き合わせ、根拠が一致した。Lean ファイル冒頭の注釈の段数「六段」を本文どおり「七段」へ直した（コメントのみ）。
-  「何も言っていない主張」の観点: 今 tick の下組の定義は次の両包含と実数の一致が引くので残す。包含の主張は集合の包含についての主張で、次の逆包含と合わせて集合の等号を与えるので残す。$L\ge1$ の導出（$1\le N\le L$）は独立ブロックにせず証明の散文に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り二行を包む）。本文の修正は無い。
+
 
 
 ## 判断待ち（人間に問うべき論点）

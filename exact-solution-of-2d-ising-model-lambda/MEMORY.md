@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 375 は、前 tick の「有理点を中心とする有理半径の円板」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「有理円板内の Fisher 零点の個数 $N_L(c,r)$」を論法で五行へ割り（整係数多項式の $\overline{\mathbb Q}[t]$ への持ち上げの定義／持ち上げの値と $\mathrm{Ev}^F$ の一致／$\mathcal F_L$ の有限部分集合の個数の上界／$\mathcal F_L$ の有限性と $\lvert\mathcal F_L\rvert\le2L^2$／$N_L(c,r)$ の定義。理由: $\mathcal F_L$ の有限性は本文に無く、`claim_qbar_distinct_roots_card_bound` は $\overline{\mathbb Q}[t]$ の多項式について述べているので $\mathbb Z[x]$ からの持ち上げが先に要る）、その最初「整係数多項式の代数的数係数多項式への持ち上げ」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_integer_polynomial_qbar_lift`（`def_rational_disc` の直後、住処 Qbar、脱出なし）: $f=\sum_{m=0}^{n}a_mx^m\in\mathbb Z[x]$ に対し $\widehat f^{\,F}\in\overline{\mathbb Q}[t]$ を $\mathrm{ac}_k(\widehat f^{\,F}):=a_k$（$k\le n$）、$0$（$n<k$）で定める。Lean 具体版 `ThermodynamicLimit/IntegerPolynomialQbarLift.lean`（`integerPolynomialQbarLift`＝`Polynomial.map (Int.castRingHom Qbar)`・`integerPolynomialQbarLift_coeff`）。sorry 検査 1302 件。check 464 ブロック・verify-check-linkage 256 件・PDF 253 ページ通過。本文末尾「この先に書くこと」の零点密度の内訳と台帳のセクション表を揃えた。
+式変形統一: 締切のため見送り（次 tick で 1 件。姉妹側の残りは 004 のその他・005・008 系）。
+次は「持ち上げの値と $\mathrm{Ev}^F$ の一致: $\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$」: `def_qbar_poly_evaluation` の定義式（$\mathrm{aev}_\xi(g)$ は $\sum_k\mathrm{ac}_k(g)\xi^k$ の形か着手時に確認）と `def_qbar_polynomial_evaluation` の定義式を並べる一続きの式変形。Lean は `qbarPolyEval xi (integerPolynomialQbarLift f) = qbarPolynomialEval xi f`（`Polynomial.eval₂_map` か `eval_map`）。SageMath は $Z_L$（$L\le3$）と数個の $\xi\in\overline{\mathbb Q}$ で厳密に。
+
+（tick 374 の記録）
 2026-08-17 の tick 374 は、前 tick の「周期境界の自由エネルギー密度の定義と $f^{\mathrm{op}}(q)$ との一致」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度」を論法で五行へ割り（円板の定義／円板内の零点の個数／格子点数あたりの零点数／上極限・下極限による実数体への脱出／重複度付きの個数）、その最初「有理点を中心とする有理半径の円板（$\overline{\mathbb Q}$ の部分集合）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_rational_disc`（`remark_real_escape_plan` の直後、住処 Qbar、脱出なし）: $c=(c_1,c_2)\in\mathbb Q\times\mathbb Q$、$r\in\mathbb Q_{>0}$、$\xi=a+b\cdot\omega$ から $\mathrm{dsq}_2(\xi,c):=(a-c_1)\cdot(a-c_1)+(b-c_2)\cdot(b-c_2)\in R$、$D(c,r):=\{\xi\mid\mathrm{dsq}_2(\xi,c)<_R r\cdot r\}$。$\mathrm{dsq}_2(\xi,(q,0))=\mathrm{dsq}(\xi,q)$。Lean 具体版 `ThermodynamicLimit/RationalDisc.lean`（`distanceSquaredToRationalPoint`・`rationalDisc`・`distanceSquaredToRationalPoint_real_axis`）。sorry 検査 1301 件。check 463 ブロック・verify-check-linkage 256 件・PDF 252 ページ通過。本文末尾「この先に書くこと」の零点密度の項に内訳を書き、台帳のセクション表と揃えた。

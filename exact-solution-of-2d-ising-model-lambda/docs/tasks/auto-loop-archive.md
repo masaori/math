@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 375 で台帳から移した記録（tick 370 分）
+
+### 現在地
+
+- **2026-08-17 の tick 370 は、台帳の先頭行「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」を三行へ割り（下組の定義と一方の包含／逆の包含（Archimedes 性）／両包含から集合の等号と同じ実数）、その最初「周期境界の密度の列が定める下組と、その下組が開境界正方形の下組に含まれること（q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `def_periodic_density_lower_set`（`def_open_square_free_energy_density` の直後、住処 Lambda）: $A^{\mathrm{per}}(q):=A((\Psi_L(q))_{L\ge1})\subset\Lambda_{\mathbb Q}$（`def_rational_log_order_group_sequence_lower_set` を周期境界の密度の列で読む。開境界正方形の $A^{\mathrm{op}}(q)$ と列だけが違う）。`claim_periodic_density_lower_set_subset_open_square_le_one`（その直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{per}}(q)\subset A^{\mathrm{op}}(q)$。証明は $\mu$ の所属の証人 $\varepsilon,N$ をそのまま使い、一続き二段（証人の性質・`claim_periodic_open_boundary_comparison_density_le_one` の右の不等式）と推移律。逆の包含は誤差 $\tfrac{2}{L}\iota(\log q)$ を Archimedes 性で吸収する必要があるので次行に置いた。
+  SageMath `check/periodic-density-lower-set-subset-open-square/`（$L\le3$、有理点 6 点、所属の証人 288 組、2016 検査、10 秒。`ZZ`/`QQ` の厳密計算）。Lean 具体版 `ThermodynamicLimit/PeriodicDensityLowerSet.lean`（`periodicDensitySequence`・`_of_ne_zero`・`periodicDensityLowerSet`・`mem_…_iff`・`periodicDensityLowerSet_subset_openSquareDensityLowerSet_of_le_one`）、必要十分版 `NecSuf/ThermodynamicLimit/PeriodicDensityLowerSetSubsetOpenSquare.lean`（`lowerSetOfSequence_subset_of_pointwise_le_necSuf`。使うのは推移律と $L\ge1$ での項ごとの比較だけ。下組は既存の `lowerSetOfSequence` を共有）、導出版 `PeriodicDensityLowerSetFromNecSuf.lean`。sorry 検査 1285 件。check 459 ブロック・verify-check-linkage 254 件・PDF 249 ページ通過。
+  式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 2（値域）で、散文中の帰納法の段 $\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1$ と根拠なしの一行 $0\le\sum(i_k-1)2^{M-k}\le\sum2^{M-k}=\sum_{t=0}^{M-1}2^t=2^M-1$ を、それぞれ一続き四段と行末根拠へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_periodic_open_boundary_comparison_density_le_one` の本文（準備二つ・七段・鎖二本）と Lean 具体版（`scaled_periodicOpenLowerForm_eq` の `calc` 七段・`rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one`）を突き合わせて一致。Lean ファイル冒頭の注釈だけが「六段」と書いており「七段」へ直した（コメントのみ。先に別コミットで push 済み）。次は「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」。
+
+### 前進の記録
+
+- 2026-08-17（tick 370）: 台帳の先頭行「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」を三行へ割った（下組の定義と一方の包含／逆の包含（Archimedes 性）／両包含から集合の等号と同じ実数。理由: 一方の包含は証人の引き継ぎと推移律だけ、逆の包含は Archimedes 性で誤差を吸収する別の論法、集合の等号と実数の一致はさらに別なので、1 tick 1 論法にするため）。その最初を四層で閉じ、`def_periodic_density_lower_set` と `claim_periodic_density_lower_set_subset_open_square_le_one` を `def_open_square_free_energy_density` の直後に置いた。SageMath 2016 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1285 件。式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 2（値域）で、散文中の帰納法の段 $\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1$ と根拠なしの一行 $0\le\sum(i_k-1)2^{M-k}\le\sum2^{M-k}=\sum_{t=0}^{M-1}2^t=2^M-1$ を、それぞれ一続き四段と行末根拠へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+
+### レビュー記録
+
+- 2026-08-17（tick 370）: 前 tick の「周期境界と開境界の密度の比較（Λ_ℚ 版）」の本文と Lean 具体版・導出版を突き合わせ、根拠が一致した。Lean ファイル冒頭の注釈の段数「六段」を本文どおり「七段」へ直した（コメントのみ）。
+  「何も言っていない主張」の観点: 今 tick の下組の定義は次の両包含と実数の一致が引くので残す。包含の主張は集合の包含についての主張で、次の逆包含と合わせて集合の等号を与えるので残す。$L\ge1$ の導出（$1\le N\le L$）は独立ブロックにせず証明の散文に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り二行を包む）。本文の修正は無い。
+
 ## 2026-08-17 tick 374 で台帳から移した記録（tick 369 分）
 
 ### 現在地

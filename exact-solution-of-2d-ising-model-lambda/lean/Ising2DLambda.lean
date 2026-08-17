@@ -773,3 +773,4 @@ import Ising2DLambda.ThermodynamicLimit.RationalLogOrderGroupRealizationMonotone
 import Ising2DLambda.ThermodynamicLimit.OpenSquareFreeEnergyDensity
 import Ising2DLambda.ThermodynamicLimit.PeriodicFreeEnergyDensity
 import Ising2DLambda.ThermodynamicLimit.RationalDisc
+import Ising2DLambda.ThermodynamicLimit.IntegerPolynomialQbarLift

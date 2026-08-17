@@ -356,6 +356,7 @@ export const ALL_LABELS = [
   "def_high_temperature_sector_polynomial",
   "def_identity_matrix",
   "def_indeterminate_element",
+  "def_integer_polynomial_qbar_lift",
   "def_inter_row_broken_count",
   "def_intra_row_broken_count",
   "def_inversion_count",
