@@ -1223,12 +1223,18 @@ n_\nu Q_\epsilon
       ),
       paragraph([
         math(String.raw`Q_\epsilon`),
-        " は Step 1 より冪等なので、",
-        ref("trace_of_idempotent"),
-        " より ",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{im}\,Q_\epsilon = \mathrm{tr}(Q_\epsilon) = 2^{M-m}`),
-        "。",
+        " は Step 1 より冪等である。したがって",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\dim_{\mathbb{C}}\mathrm{im}\,Q_\epsilon
+&= \mathrm{tr}(Q_\epsilon)
+   \quad (\because \text{冪等行列のトレースは像の次元。} Q_\epsilon \text{ は Step 1 より冪等}) \\
+&= 2^{M-m}
+   \quad (\because \text{上で計算した } \mathrm{tr}(Q_\epsilon))
+\end{aligned}`,
+      ),
+      paragraph([ref("trace_of_idempotent"), " を引いた。"]),
       paragraph([
         "Step 5（(5) の証明）。(2) より任意の ",
         math(String.raw`x \in \mathbb{C}^{2^M}`),
@@ -1286,6 +1292,7 @@ n_\nu Q_\epsilon
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-08-17 の式変形統一で、Step 4 末尾の dim im Q_ε = tr(Q_ε) = 2^{M−m} を、一続きの等号と行末の根拠へ揃えた。内容は変えていない。",
       ],
     },
   },
