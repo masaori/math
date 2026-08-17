@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 370 は、前 tick の「周期境界と開境界の密度の比較（Λ_ℚ 版）」の本文と Lean を突き合わせて一致を確認し（Lean 冒頭注釈の「六段」を「七段」へ直しただけ）、
+台帳の先頭行「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」を三行へ割り（下組の定義と一方の包含／逆の包含（Archimedes 性）／両包含から集合の等号と同じ実数）、その最初を四層で閉じた。
+`def_periodic_density_lower_set`（`def_open_square_free_energy_density` の直後、住処 Lambda）: $A^{\mathrm{per}}(q):=A((\Psi_L(q))_{L\ge1})$。`claim_periodic_density_lower_set_subset_open_square_le_one`: $0<q\le1$ で $A^{\mathrm{per}}(q)\subset A^{\mathrm{op}}(q)$（証人 $\varepsilon,N$ の引き継ぎ、一続き二段: 証人の性質・`claim_periodic_open_boundary_comparison_density_le_one` の右、推移律）。
+SageMath `check/periodic-density-lower-set-subset-open-square/`（$L\le3$、有理点 6 点、証人 288 組、2016 検査）。Lean 具体版 `ThermodynamicLimit/PeriodicDensityLowerSet.lean`（`periodicDensitySequence`・`_of_ne_zero`・`periodicDensityLowerSet`・`mem_periodicDensityLowerSet_iff`・`periodicDensityLowerSet_subset_openSquareDensityLowerSet_of_le_one`）、必要十分版 `NecSuf/ThermodynamicLimit/PeriodicDensityLowerSetSubsetOpenSquare.lean`（`lowerSetOfSequence_subset_of_pointwise_le_necSuf`）、導出版 `PeriodicDensityLowerSetFromNecSuf.lean`。sorry 検査 1285 件。check 459 ブロック・verify-check-linkage 254 件・PDF 249 ページ通過。
+式変形統一: SISTER_PLACEHOLDER
+次は「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」: $\mu\in A^{\mathrm{op}}(q)$ の証人 $(\varepsilon,N)$ から $\varepsilon':=\tfrac12\cdot\varepsilon$（正・非零）を取り、$2\cdot(-\iota(\log q))\ge0$（$q\le1$ なので $\log q\le_\Lambda0$）に `claim_rational_log_order_group_archimedean` を当てて $2\cdot(-\iota(\log q))\le n\cdot\varepsilon'$ の $n$ を取り、`claim_rational_log_order_group_div_ge_multiplier_le` で $L\ge n$ なら $\tfrac1L\cdot(2\cdot(-\iota(\log q)))\le\varepsilon'$、すなわち $-\varepsilon'\le\tfrac{2}{L}\cdot\iota(\log q)$。$N':=\max(N,n)$ で $L\ge N'$ なら $\mu+\varepsilon'=\mu+\varepsilon-\varepsilon'\le\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\iota(\log q)\le\Psi_L(q)$（`claim_periodic_open_boundary_comparison_density_le_one` の左）。必要な補題（$\varepsilon'$ の正値性、$-\iota(\log q)\ge0$、加法単調性 `claim_rational_log_order_group_add_monotone`、負号の順序反転）が本文にあるか着手時に確認し、無ければ先に別行で置く。Lean は `openSquareDensityLowerSet` ⊆ `periodicDensityLowerSet` を同じファイルへ足すか新ファイル。
+
+（tick 369 の記録）
 2026-08-17 の tick 369 は、前 tick の「周期境界と開境界の境界評価の対数化」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」を四層で閉じた。
 `claim_periodic_open_boundary_comparison_density_le_one`（`def_open_square_free_entropy_density` の直後、住処 Lambda）: $L\ge1$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)\le_{\Lambda_{\mathbb Q}}\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。証明は準備二つ（正値性と $L\ne0$、下端の元の像を七段で整える）と一続き三段の鎖二本（`claim_scaled_embedding_order_transfer` で対数化の $\Lambda$ の比較を移す）。部分正方形の density 版と同じ形。

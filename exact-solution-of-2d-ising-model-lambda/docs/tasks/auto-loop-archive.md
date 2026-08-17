@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 370 で台帳から移した記録（tick 365 分）
+
+### 現在地
+
+- **2026-08-17 の tick 365 は、台帳の先頭行「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」を本文・Lean まで書いた（定義のみ。SageMath 検証は定義には置かない）。**
+  `def_open_square_free_energy_density`（`claim_rational_log_order_group_realization_monotone` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「完備性（下組の実現像 $\rho_{\mathbb R}(A^{\mathrm{op}}(q))\subset\mathbb R$ が空でなく上に有界で、その上限を取る一点。実対数について使うのは順序保存だけ）」）: $f^{\mathrm{op}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))\in\mathbb R$。well-defined 性は statement に書いた——空でない（`claim_open_square_density_lower_set_nonempty` の証人 $-\iota(\ell_2)$ の像）、上に有界（含意の鎖二段: `claim_open_square_density_lower_set_le_upper_bound` → `claim_rational_log_order_group_realization_monotone` で $b(q):=\rho_{\mathbb R}(\iota(\ell_2)+2\iota(\log(1+q)))$ が上界）。上限の特徴づけ（上界である・最小である）と $\rho_{\mathbb R}(-\iota(\ell_2))\le f^{\mathrm{op}}(q)\le b(q)$ を添え、列の各項の実現がこの値に近づくことは主張しない旨を明記。`remark_real_escape_plan` の題名から「まだ書いていない」を外し、冒頭を「三つの定義と四つの主張」に、脱出の項を「$f^{\mathrm{op}}(q)$ を一つ取る（定義への参照）」に直した。本文末尾「この先に書くこと」から「切断による実数体への一度きりの脱出と旧実数値経路の撤去」を外した（本文側は済み。Lean の後片付けはセクション表の次行）。
+  Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEnergyDensitySup.lean`（`openSquareRealizedLowerSet`・`openSquareRealizedLowerSet_nonempty`・`realizeRational_le_realizeRational_upperBound_of_mem_openSquareDensityLowerSet`・`openSquareRealizedLowerSet_bddAbove`・`openSquareFreeEnergyDensitySup`（`sSup`）・`realizeRational_le_openSquareFreeEnergyDensitySup`（`le_csSup`）・`openSquareFreeEnergyDensitySup_le_of_forall_le`（`csSup_le`）。定義ブロックなので必要十分版は無い）。**名前の末尾 `Sup` は、削除済み旧実数値経路のファイル `OpenSquareFreeEnergyDensity.lean`（同名の `openSquareFreeEnergyDensity` を持つ）と衝突しないために付けた。** 最初に同名で上書きしてしまい旧経路の依存ファイルが壊れたので、旧ファイルを復元して自分の側を改名した。次行「削除した実数値経路の Lean の後片付け」で旧経路を消したら `Sup` を外してよい。sorry 検査 1370 件。check 455 ブロック・PDF 247 ページ通過。
+  レビュー: 前 tick の「有理係数の対数順序群の実現写像は順序を保つ」の本文（証人・準備・含意の鎖六段・三段）と Lean 具体版（`h1`〜`h6`・`calc`）を突き合わせて一致。修正なし。次は「削除した実数値経路の Lean の後片付け」。
+
+### 前進の記録
+
+- 2026-08-17（tick 365）: 台帳の先頭行「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」を実行し、`def_open_square_free_energy_density` を `claim_rational_log_order_group_realization_monotone` の直後に置いた。
+  定義のみ（SageMath は置かない）。Lean 具体版 `OpenSquareFreeEnergyDensitySup.lean`（`sSup`・`le_csSup`・`csSup_le`。旧実数値経路の同名ファイルと衝突するので `Sup` を付けた）を書き、入口 import・sorry 検査へ 5 件登録（計 1370 件）。`remark_real_escape_plan` の題名から「まだ書いていない」を外した。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 365）: 前 tick の「有理係数の対数順序群の実現写像は順序を保つ」の本文（順序の証人・準備 $0<\iota(N)$・含意の鎖六段・最後の三段）・SageMath overview（286452 検査、実数側は区間演算）・Lean 具体版（`obtain`・`h1`〜`h6`・`calc` が本文と 1 対 1）・必要十分版（値の側だけ順序体、可算側の型は構造なし）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 順序保存は今 tick の定義が上界の存在のために引くので残す。今 tick の定義は、実数体の完備性を使う唯一の位置を宣言するもので、well-defined 性（空でない・上に有界）を独立ブロックにせず statement 内の含意の鎖に置いた。本文末尾「この先に書くこと」から済んだ項目（切断による脱出）を外し、台帳のセクション表と食い違いなし。本文の修正は無い。
+
 ## 2026-08-17 tick 369 で台帳から移した記録（tick 364 分）
 
 ### 現在地
