@@ -50,6 +50,8 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-18（tick 408）: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」（`004_transfer_matrix.ts`）の Step 3 で、散文「両辺に $-i$ を掛け」と単独の等式に分かれていた $\sigma_M^z\sigma_1^z=-i\,\varepsilon\,Y_MZ_1$ の導出を、$(-i)\cdot i=1$ を明示する一続き三段・各行の根拠つきへ揃えた（内容・参照は不変。tick 407 が Step 2 に施した形と同型）。姉妹側 check・PDF 325 ページ通過。
+
 - 2026-08-18（tick 407）: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」（`004_transfer_matrix.ts`）の Step 2 で、散文「両辺に $i$ を掛ける」と単独の等式に分かれていた $\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ の導出を、$i(-i)=1$ を明示する一続き三段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
 - 2026-08-18（tick 406）: 姉妹側「クロネッカー積上の Pauli 行列の積公式」（`004_transfer_matrix.ts`）の Step 1 で、一行に等号 3〜4 個と根拠 1 つで書かれていた $\sigma^x\sigma^x=I$ と $\sigma^y\sigma^z=i\sigma^x$ の二本の鎖を、各一続き（1 行 1 等号・行末根拠つき）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
@@ -57,8 +59,6 @@
 - 2026-08-18（tick 405）: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」（`004_transfer_matrix.ts`）の Step 1 で、一行に二つの等号を置いていた境界項 $\sigma_M^z\sigma_1^z$ の計算を、一続き二段へ分け、各行末にクロネッカー積の積の規則を明記した（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
 - 2026-08-18（tick 404）: 姉妹側「クリフォード群（正規化群）の定義」（`008_TV1_hatZ_hatY_part1.ts`）で、$\mathcal C_M$ が部分群であることの散文中の鎖 $(g_1g_2)\mathcal P_M(g_1g_2)^{-1}=g_1(g_2\mathcal P_Mg_2^{-1})g_1^{-1}=\mathcal P_M$ を一続き三段（行末根拠つき。積の逆元と結合則／$g_2\in\mathcal C_M$／$g_1\in\mathcal C_M$）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
-
-- 2026-08-18（tick 402）: 姉妹側のフェルミオン証明（`008_TV1_hatZ_hatY_part2.ts`）で、a) の係数の括弧を因数分解する三段の式を、一続きの式変形と行末根拠へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）

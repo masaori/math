@@ -7,6 +7,7 @@
 
 - tick 403 の現在地: 最小元の行の前提として欠けていた狭義順序の推移律を四層で閉じ、`claim_real_algebraic_order_transitive` を `claim_two_is_square_in_real_closed` の直後に置いた（本文の三分法は網羅性だけで、推移律は無かった。前 tick の MEMORY に「確認せよ」と書いた点を着手時に確認した結果である）。証明は $c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ の一続き三段のあと、`claim_real_closed_sum_of_two_squares_is_square` で平方に書き直し、証人の非零性を `claim_real_closed_sum_of_two_squares_zero` から出す。SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデル）、Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`・必要十分版（可換環で 2 性質を仮定に取る形）・導出版。sorry 検査 1394 件・check 494 ブロック・verify-check-linkage 277 件・build:pdf 268 ページ通過。
 - tick 402 のレビュー: tick 401 の「臨界点が実閉部分体の元であること」の本文・SageMath・Lean を突き合わせ、論法の一致を確認した。修正なし。tick 402 の初稿は 1 ブロック内の二定義と未使用の一致補題を削除した。
+- tick 402 の式変形統一: 姉妹側のフェルミオン証明（`008_TV1_hatZ_hatY_part2.ts`）で、a) の係数の括弧を因数分解する三段の式を、一続きの式変形と行末根拠へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
 ## 2026-08-18 tick 406 で台帳から移した記録（tick 401 の現在地・前進、tick 394 のレビュー）
 

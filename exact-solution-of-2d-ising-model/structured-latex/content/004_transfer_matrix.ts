@@ -872,14 +872,18 @@ Y_m Z_{m+1}
 \end{aligned}`,
       ),
       paragraph([
-        "両辺に ",
-        math(String.raw`-i`),
-        " を掛け ",
-        math(String.raw`(-i)\cdot i = 1`),
-        " を使うと",
+        "したがって",
       ]),
       displayMath(
-        String.raw`\sigma_M^z\sigma_1^z = -i\,\varepsilon\, Y_M Z_1`,
+        String.raw`\begin{aligned}
+\sigma_M^z\sigma_1^z
+&= \bigl((-i)\cdot i\bigr)\sigma_M^z\sigma_1^z
+&& (\because\ (-i)\cdot i=1\text{（複素数の四則）})\\
+&= (-i)\bigl(i\,\sigma_M^z\sigma_1^z\bigr)
+&& (\because\ \text{複素数倍の結合則})\\
+&= -i\,\varepsilon\, Y_M Z_1
+&& (\because\ \text{上の Step 3 の等式})
+\end{aligned}`,
       ),
       paragraph([
         "Step 4: ",
