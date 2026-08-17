@@ -106,6 +106,7 @@ b(\sigma)=\#D(\sigma)`,
   {
     id: "periodic_structural_core_claim_odd_orbit_not_palindrome",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "奇数軌道では多重度は回文でない" },
     labels: ["claim_periodic_successor_not_palindrome"],
     habitat: "N",

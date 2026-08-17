@@ -28,6 +28,13 @@ import {
   CHAPTER_NAVIGATION_SCRIPT,
   renderChapterNavigation,
 } from "../../../structured-latex/renderers/html/chapter-navigation.ts";
+import {
+  renderMainTheoremLead,
+  renderStandingAwareBlock,
+  THEOREM_STANDING_CSS,
+  type MainTheoremEntry,
+} from "../../../structured-latex/renderers/html/theorem-standing.ts";
+import { standingOf } from "../../../structured-latex/domain-model/index.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
@@ -73,6 +80,30 @@ for (const { blocks } of contentFiles) {
     const number = `${sectionNumber}.${counter}`;
     for (const label of block.labels) {
       byLabel.set(label, { kind: block.kind, number, blockId: block.id });
+    }
+  }
+}
+
+// --- 主定理（見出しの冒頭に列挙するもの）-------------------------------------
+//
+// 身分の宣言はシステム側の入力言語が持つ（宣言が無ければサブ定理）。ここでやるのは
+// 「どの見出しに属するか」を文書順から拾ってまとめることだけである。
+
+/** 見出しブロックの id → その見出しに属する（＝直前の見出しがそれである）主定理。 */
+const mainTheoremsByHeading = new Map<string, MainTheoremEntry[]>();
+{
+  let headingId = "";
+  for (const { blocks } of contentFiles) {
+    for (const block of blocks) {
+      if (block.kind === "heading") {
+        headingId = block.id;
+        continue;
+      }
+      if (block.kind === "figure") continue;
+      if (standingOf(block) !== "mainTheorem") continue;
+      const entries = mainTheoremsByHeading.get(headingId) ?? [];
+      entries.push({ anchor: `blk-${block.id}`, text: headLine(block) });
+      mainTheoremsByHeading.set(headingId, entries);
     }
   }
 }
@@ -139,24 +170,33 @@ function renderHeading(block: HeadingBlock): string {
   const tag = `h${Math.min(block.level + 1, 6)}`;
   const ids = block.labels.map((label) => `<span id="sec-${label}"></span>`).join("");
   const shown = number === "" ? title : `${number}　${title}`;
-  return `${ids}<${tag} id="sec-${anchor}" class="lv${block.level}">${shown}</${tag}>`;
+  const heading = `${ids}<${tag} id="sec-${anchor}" class="lv${block.level}">${shown}</${tag}>`;
+  // 見出しの冒頭に、その見出しに属する主定理を並べる。読み始める前に到達点が見えるようにする。
+  return heading + renderMainTheoremLead(mainTheoremsByHeading.get(block.id) ?? []);
 }
 
-function renderTheoremLike(block: TheoremLikeBlock): string {
+/** ブロックの見出し行（「定理 3.4（題名）」）。見出し冒頭の一覧とブロック本体で同じものを使う。 */
+function headLine(block: TheoremLikeBlock): string {
   const numbered = block.labels.map((l) => byLabel.get(l)).find((n) => n !== undefined);
   const number = numbered?.number ?? "";
   const title = renderTitle(block.title, block.id);
-  const head = `${HEADINGS[block.kind]} ${number}${title === "" ? "" : `（${title}）`}`;
+  return `${HEADINGS[block.kind]} ${number}${title === "" ? "" : `（${title}）`}`;
+}
+
+function renderTheoremLike(block: TheoremLikeBlock): string {
   const statement = renderNodes(block.statement, block.id);
   const proof =
     block.proof !== undefined && block.proof.length > 0
       ? `<div class="proof"><span class="proofhead">証明.</span> ${renderNodes(block.proof, block.id)}<span class="qed">□</span></div>`
       : "";
-  return (
-    `<section class="block ${block.kind}" id="blk-${block.id}">` +
-    `<div class="head">${head}</div>` +
-    `<div class="statement">${statement}</div>${proof}</section>`
-  );
+  // 主定理は従来どおりの表示、サブ定理は題名だけを見せて既定で閉じる（共有の既定 UI）。
+  return renderStandingAwareBlock({
+    standing: standingOf(block),
+    elementId: `blk-${block.id}`,
+    kind: block.kind,
+    headHtml: headLine(block),
+    bodyHtml: `<div class="statement">${statement}</div>${proof}`,
+  });
 }
 
 function renderTitle(title: { text?: string; tex?: string } | null | undefined, blockId: string): string {
@@ -262,6 +302,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
+${THEOREM_STANDING_CSS}
 </style></head><body>
 ${mobileHtml}
 <div class="page-layout">

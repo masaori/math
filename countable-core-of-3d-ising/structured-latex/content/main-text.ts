@@ -544,6 +544,7 @@ m_L(T\sigma)
   {
     id: "null_model_claim_palindrome",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "多重度は回文である" },
     labels: ["claim_palindrome"],
     habitat: "N",
@@ -948,6 +949,7 @@ m^{\mathrm{per}}_L(\sigma)=\#D^{\mathrm{per}}_L(\sigma)\in\mathbb{N}`,
   {
     id: "odd_period_claim_not_palindrome",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "奇数周期では多重度は回文でない" },
     labels: ["claim_periodic_not_palindrome"],
     habitat: "N",
