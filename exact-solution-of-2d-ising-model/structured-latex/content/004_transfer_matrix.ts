@@ -1307,9 +1307,20 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         math(String.raw`\sum_{I,J} c_{I,J}\Theta_{I,J} = 0`),
         " を満たすとすると、各 ",
         math(String.raw`K`),
-        " について ",
-        math(String.raw`0 = \sum_{I,J} c_{I,J}\delta_{J,K}f_I = \sum_{I} c_{I,K}f_I`),
-        " であり、",
+        " について次の鎖を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&=\left(\sum_{I,J\in\mathcal I}c_{I,J}\Theta_{I,J}\right)(f_K)
+&&(\because\ \sum_{I,J}c_{I,J}\Theta_{I,J}=0)\\
+&=\sum_{I,J\in\mathcal I}c_{I,J}\delta_{J,K}f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{と線型写像の和の値の定義})\\
+&=\sum_{I\in\mathcal I}c_{I,K}f_I
+&&(\because\ \delta_{J,K}\ \text{は}\ J=K\ \text{のときだけ}\ 1\ \text{で他は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`(f_I)`),
         " が基底だからすべての ",
         math(String.raw`I`),
