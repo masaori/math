@@ -1372,6 +1372,11 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finite_ncard_le_from_necSuf
   Ising2DLambda.ThermodynamicLimit.fisherZeroSet_inter_rationalDisc_finite
   Ising2DLambda.ThermodynamicLimit.fisherZeroCountInRationalDisc_le_ncard
+  Ising2DLambda.ThermodynamicLimit.lattice_size_sq_pos_rat
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_nonneg
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_le_two
+  Ising2DLambda.NecSuf.ThermodynamicLimit.div_le_two_of_le_of_le_two_mul_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_le_two_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
