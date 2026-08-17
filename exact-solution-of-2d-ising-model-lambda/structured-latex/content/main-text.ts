@@ -34296,6 +34296,84 @@ c\cdot\xi
   },
 
   {
+    id: "fisher_zero_claim_critical_partition_value_positive",
+    kind: "claim",
+    title: { text: "分配多項式の臨界点での値は正錐の元である" },
+    labels: ["claim_critical_partition_value_mem_positive_cone"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/critical-partition-value-positive-cone"],
+    lean: [
+      "Ising2DLambda.FisherZero.criticalPartitionValue_mem_positiveCone",
+      "Ising2DLambda.NecSuf.FisherZero.nonempty_sum_mem_positive_necSuf",
+      "Ising2DLambda.FisherZero.criticalPartitionValue_mem_positiveCone_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
+        " とする。", math(String.raw`s\in\overline{\mathbb{Q}}`),
+        " が ", math(String.raw`s\cdot s=2`), " を満たすとき、臨界点 ",
+        math(String.raw`x_c=-1+s`), "（", ref("def_critical_point"), "）での値は",
+      ]),
+      displayMath(String.raw`Z_L(x_c)=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^m\in P_s`),
+      paragraph([
+        "である。したがってこの値は ", math(String.raw`Q_s`),
+        " に属する。和は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の有限和であり、多項式とその値を区別して ", math(String.raw`Z_L(x_c)`),
+        " と書く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず正の項を一つ確保する。全て正の定数配位 ", math(String.raw`\sigma_+`),
+        "（", ref("def_constant_plus_configuration"), "）は ",
+        math(String.raw`b(\sigma_+)=0`), "（", ref("claim_constant_plus_breaks_no_bond"),
+        "）を満たすので、多重度の定義から",
+      ]),
+      displayMath(String.raw`1\le\Omega_L(0)\qquad(\because\ \blkref{def_multiplicity})`),
+      paragraph([
+        "である。また ", math(String.raw`x_c\in P_s`),
+        " は ", ref("claim_self_dual_root_plus_positive"), " が与える。よって",
+      ]),
+      displayMath(String.raw`\Omega_L(0)\,x_c^0\in P_s
+\qquad
+(\because\ x_c^0=1\in P_s\text{（}\blkref{claim_quadratic_positive_cone_pow_closed}\text{）、}
+\ 1\le\Omega_L(0)\text{、}\blkref{claim_quadratic_positive_cone_nat_mul})`),
+      paragraph([
+        math(String.raw`S_n:=\sum_{m=0}^{n}\Omega_L(m)\,x_c^m`),
+        " と置き、", math(String.raw`n`), " について帰納法を使う。出発点 ",
+        math(String.raw`S_0`), " は上で正錐に属する。", math(String.raw`S_n\in P_s`),
+        " と仮定する。", math(String.raw`x_c^{n+1}\in P_s`),
+        "（", ref("claim_quadratic_positive_cone_pow_closed"), "）なので、",
+        ref("claim_quadratic_positive_cone_nat_mul"), " により次項は零元または正錐の元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_{n+1}
+&=S_n+\Omega_L(n+1)\,x_c^{n+1}
+&&\bigl(\because\ \text{有限和の末項を分離}\bigr)\\
+&\in P_s
+&&\bigl(\because\ \Omega_L(n+1)=0\text{ なら }\overline{\mathbb Q}\text{ の四則、}
+\ 1\le\Omega_L(n+1)\text{ なら }\blkref{claim_quadratic_positive_cone_add_closed}\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`S_{2L^2}\in P_s`), " である。最後に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_L(x_c)
+&=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^m
+&&\bigl(\because\ \blkref{claim_coefficient_representation}\text{ への代入}\bigr)\\
+&=S_{2L^2}
+&&\bigl(\because\ S_n\text{ の定義}\bigr)\\
+&\in P_s
+&&\bigl(\because\ \text{上の帰納法}\bigr)
+\end{aligned}`),
+      paragraph([
+        "全過程は自然数の有限和、有理数の四則と順序、および代数的数の加法・乗法だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "fisher_zero_claim_self_dual_root_plus_mem",
     kind: "claim",
     title: { text: "根 −1+s の所属" },

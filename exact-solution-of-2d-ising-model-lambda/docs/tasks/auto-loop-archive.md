@@ -12490,6 +12490,27 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-17（tick 362）: 前 tick の「実現写像は有理数倍と可換」の本文（台の包含の準備と一続き六段）・SageMath overview（18235 検査）・Lean 具体版（`realizeRational_eq_sum_support`・`Finsupp.support_smul`＋`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）・必要十分版（`MulZeroClass`・`NonUnitalSemiring`、$\iota$ の乗法保存と $\iota(0)=0$）・導出版（`rfl`）を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 有理数倍との可換性は順序保存の証明が $N$ で割り戻すために引く写像の性質で残す。今 tick の整数冪の実対数は、次の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」が各素数について引く形で、乗法を加法へ移すことだけから帰納法で出す実対数の性質（$\mathbb R$ の四則から直ちには従わない）なので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
 
+## tick 409 で台帳から移した記録（tick 404）
+
+### 現在地
+
+- **2026-08-18 の tick 404 は、台帳の先頭行「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_real_algebraic_min_unique`（`claim_real_algebraic_order_transitive` の直後）: 空でない有限部分集合 $X\subset R$ に「$m\in X$ かつ任意の $y\in X$ について $y=m$ または $m<_Ry$」を満たす $m$ がちょうど 1 つ存在する。存在は $|X|$ の帰納法（三分法で新しい元 $x_1$ と古い最小元 $x_2$ を比べ、$x_1<_Rx_2$ の枝で tick 403 の推移律を使う）、一意性は三分法の排他性。骨組みは `claim_row_config_min_unique` と同じ。
+  SageMath `check/real-algebraic-min-unique/`（3 節。`AA` のモデルで、6 元の基底集合の空でない部分集合 63 個すべての一意性・証人 $\sqrt{y-m}$ の非零性・帰納法の一歩の場合分け）。Lean 具体版 `FisherZero/RealAlgebraicMinUnique.lean`、既存必要十分版、導出版。sorry 検査 1396 件・check 495 ブロック・verify-check-linkage 278 件・build:pdf 268 ページ通過。
+  運用: この tick の走行中（01:37〜01:41）、別の対話セッションが同じセクションを並行編集し、本文ブロックが一度失われたため書き直した。相手の重複 push は無かった。
+
+### 前進の記録
+
+- 2026-08-18（tick 404）: 台帳の先頭行「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じ、`claim_real_algebraic_min_unique` を推移律の直後に置いた。存在は $|X|$ の帰納法（三分法＋推移律）、一意性は三分法の排他性。必要十分版は行配位の最小元の `existsUnique_min` を再利用した。SageMath 3 節、Lean 具体版・導出版。sorry 検査 1396 件・check 495 ブロック・PDF 268 ページ通過。
+
+### 式変形の書き方の統一
+
+- 2026-08-18（tick 404）: 姉妹側「クリフォード群（正規化群）の定義」（`008_TV1_hatZ_hatY_part1.ts`）で、$\mathcal C_M$ が部分群であることの散文中の鎖 $(g_1g_2)\mathcal P_M(g_1g_2)^{-1}=g_1(g_2\mathcal P_Mg_2^{-1})g_1^{-1}=\mathcal P_M$ を一続き三段（行末根拠つき）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
+
+### レビュー記録
+
+- 2026-08-18（tick 404）: tick 403 の「実代数的数の狭義順序は推移的である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は最小元の存在の帰納法が直接引くため「何も言っていない主張」ではない。
+
 ## tick 407 で台帳から移した記録
 
 ### 現在地

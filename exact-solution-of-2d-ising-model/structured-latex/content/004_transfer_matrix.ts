@@ -914,12 +914,17 @@ Z_m Y_m
         math(String.raw`\varepsilon`),
         " の項に書かれている等式 ",
         math(String.raw`Z_m Y_m = -i\,\sigma_m^x`),
-        " の証明でもある。）両辺に ",
-        math(String.raw`i`),
-        " を掛けて",
+        " の証明でもある。）",
       ]),
-      displayMath(String.raw`\sigma_m^x = i\,Z_m Y_m
-\qquad(\because\ i(-i)=1)`),
+      displayMath(String.raw`\begin{aligned}
+\sigma_m^x
+&=\bigl(i\cdot(-i)\bigr)\sigma_m^x
+&& (\because\ i\cdot(-i)=1\text{（複素数の四則）})\\
+&=i\bigl((-i)\sigma_m^x\bigr)
+&& (\because\ \text{複素数倍の結合則})\\
+&=i\,Z_mY_m
+&& (\because\ \text{上の Step 4 の等式})
+\end{aligned}`),
       paragraph([
         "Step 5: ",
         math(String.raw`V_1`),
