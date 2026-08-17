@@ -21,6 +21,12 @@ LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 TICK_TIMEOUT_SECONDS=1620
 
+# launchd は対話シェルのアカウント割り当てを継承しない。既定の Claude 資格情報へ
+# 暗黙に接続すると、別アカウントへの全体切り替えでこの tick の経路まで変わる。
+# 作成時に使っていた Fable 5 のアカウントを、このプロセスだけへ明示的に割り当てる。
+CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0001"
+CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0001.token"
+
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
 
@@ -190,25 +196,32 @@ PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
 PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 
 AGENT_MARK="$LOG_DIR/last-agent"
-BLOCKED_MARK="$LOG_DIR/claude-blocked-until"
 last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
 if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
-
-if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
-  blocked_until="$(cat "$BLOCKED_MARK" 2>/dev/null || echo 0)"
-  if [ "$(date +%s)" -lt "${blocked_until:-0}" ]; then
-    agent="codex"
-    log "Claude は使用上限の記録中なので Codex で回す"
-  else
-    rm -f "$BLOCKED_MARK"
-  fi
-fi
 
 log "=== tick 開始（${agent} / 30 分間隔 / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 printf '%s\n' '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 
 run_claude() {  # $1 = モデル名
-  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
+  local oauth_token
+  if [ ! -d "$CLAUDE_TICK_CONFIG_DIR" ]; then
+    log "SKIP: Claude の設定ディレクトリが無い: $CLAUDE_TICK_CONFIG_DIR"
+    return 1
+  fi
+  if [ ! -r "$CLAUDE_TICK_TOKEN_FILE" ]; then
+    log "SKIP: Claude のアカウントトークンを読めない: $CLAUDE_TICK_TOKEN_FILE"
+    return 1
+  fi
+  oauth_token="$(<"$CLAUDE_TICK_TOKEN_FILE")"
+  if [ -z "$oauth_token" ]; then
+    log "SKIP: Claude のアカウントトークンが空: $CLAUDE_TICK_TOKEN_FILE"
+    return 1
+  fi
+
+  printf '%s' "$PROMPT" | \
+    CLAUDE_CONFIG_DIR="$CLAUDE_TICK_CONFIG_DIR" \
+    CLAUDE_CODE_OAUTH_TOKEN="$oauth_token" \
+    timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
     --model "$1" --effort medium \
     --dangerously-skip-permissions --strict-mcp-config \
     --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
@@ -233,14 +246,6 @@ else
 fi
 set -e
 printf '%s\n' "$agent" > "$AGENT_MARK"
-
-if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
-  recent_output="$(tail -8 "$LOG_FILE")"
-  case "$recent_output" in
-    *"weekly limit"*) printf '%s\n' "$(( $(date +%s) + 86400 ))" > "$BLOCKED_MARK" ;;
-    *"session limit"*|*"spend limit"*) printf '%s\n' "$(( $(date +%s) + 10800 ))" > "$BLOCKED_MARK" ;;
-  esac
-fi
 
 dirty_count="$(git status --porcelain | wc -l | tr -d ' ')"
 if [ "$dirty_count" != "0" ]; then

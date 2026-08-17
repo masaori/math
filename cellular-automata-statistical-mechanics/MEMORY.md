@@ -5,6 +5,14 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: Fable 5 のアカウント経路を固定（2026-08-17）
+
+launchd は対話シェルのアカウント割り当てを継承せず、既定資格情報が指す
+`coding-agent-0002` の Fable 5 利用上限で Claude 回が終了コード 1 になっていた。
+tick 本体から、作成時に使っていた `coding-agent-0001` の設定ディレクトリと長期トークンを
+Claude プロセスだけへ明示的に渡す経路へ戻した。`claude-fable-5` と effort medium は変更していない。
+Claude 上限時に別モデルまたは Codex へ差し替える処理は持たず、Claude と Codex の通常の交互実行だけを残す。
+
 ## 自動ループ tick: 安定ファイバーの層別完全逆像の構造化記述（2026-08-17 22:12）
 
 前 tick の「安定ファイバーの最小前周期層」の Lean 必要十分版と導出を全層でレビューした。キャッシュを
