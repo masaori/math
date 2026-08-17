@@ -710,11 +710,24 @@ u+\overline{u}
 \end{aligned}`,
       ),
       paragraph([
-        "となり、両辺とも非負なので平方の単調性（",
+        "となる。両辺とも非負実数（",
+        math(String.raw`0\le\|A+B\|`),
+        "、",
+        math(String.raw`0\le\|A\|+\|B\|`),
+        "。ノルムの非負性）なので、含意の鎖",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\|A+B\|^2\le\left(\|A\|+\|B\|\right)^2
+   &&(\because\ \text{上の鎖}) \\
+\Longrightarrow\ &\|A+B\|\le\|A\|+\|B\|
+   &&(\because\ \text{非負実数の平方の単調性（「ノルムの基本性質（非退化性・斉次性・三角不等式）」の証明 Step 0）を } u=\|A+B\|,\ v=\|A\|+\|B\| \text{ に当てた})
+\end{aligned}`,
+      ),
+      paragraph([
+        "により (5) が従う（Step 0 の補題は ",
         ref("matrix_norm_triangle_inequality"),
-        " の証明 Step 0）により ",
-        math(String.raw`\|A+B\|\le\|A\|+\|B\|`),
-        "。",
+        " の証明にある）。",
       ]),
     ],
     conversion: {

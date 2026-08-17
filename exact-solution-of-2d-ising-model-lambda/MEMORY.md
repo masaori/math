@@ -8,7 +8,7 @@
 台帳の先頭行「零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_fisher_zero_density_limsup_liminf`（`claim_fisher_zero_density_in_rational_disc_le_two` の直後、住処 R、脱出理由は完備性）: 尾部の像 $T_N(c,r):=\{\iota_{\mathbb Q\to\mathbb R}(\nu_L(c,r))\mid N\le L\}$ が空でなく $0$ 以上 $2$ 以下に収まる（$0\le\nu_L\le2$ と $\iota$ の順序保存）ので $s_N:=\sup T_N$、$i_N:=\inf T_N$、さらに $\{s_N\}$ は下に有界（$0\le s_N$）、$\{i_N\}$ は上に有界（$i_N\le2$）なので $\overline\nu(c,r):=\inf\{s_N\mid N\ge1\}$、$\underline\nu(c,r):=\sup\{i_N\mid N\ge1\}$。収束（$\overline\nu=\underline\nu$）は主張しない。本文末尾「この先に書くこと」から済んだ項目を消した。
 Lean 具体版 `ThermodynamicLimit/FisherZeroDensityLimsupLiminf.lean`（`fisherZeroDensitySequence`（$L=0$ は $0$ 埋め）・`fisherZeroDensityTail`・`_nonempty`/`_bddAbove`/`_bddBelow`・`fisherZeroDensityTailSup_nonneg`・`fisherZeroDensityTailInf_le_two`・`fisherZeroDensityTailSupSet`/`InfSet`・`fisherZeroDensityLimsup`（`sInf`）・`fisherZeroDensityLiminf`（`sSup`）。`Filter.limsup` は使わず自前の $\sup$/$\inf$ の重ねで書いた——本文の書き方と 1 対 1 にするため）。sorry 検査 1333 件。check 471 ブロック・verify-check-linkage 260 件・PDF 256 ページ通過。
-式変形統一: 台帳のレビュー記録の同 tick の行を参照。
+式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Step 6（三角不等式）の末尾で、散文「両辺とも非負なので平方の単調性により $\|A+B\|\le\|A\|+\|B\|$」を含意の鎖二段（$\|A+B\|^2\le(\|A\|+\|B\|)^2\Longrightarrow\|A+B\|\le\|A\|+\|B\|$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。 姉妹側の残りは 004 のその他・005 の Step 7 以降・008 系。
 次は「零点密度: 重複度付きの個数への精密化（$\overline{\mathbb Q}[x]$ での根の重複度の定義から）」: 着手前に論法で割る（根の重複度の定義／重複度の和は次数以下／重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ と $N_L\le N^{\mathrm{mult}}_L\le2L^2$）。Lean は `Polynomial.rootMultiplicity`・`Polynomial.card_roots'` 系を見て、具体版が mathlib へ丸投げにならない形を選ぶ。
 
 （tick 380 の記録）
