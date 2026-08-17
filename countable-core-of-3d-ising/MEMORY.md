@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 03:31: check `discriminant-free-vs-periodic-differ` の対象ラベルを、ずらした自由族の反例の主張 `claim_shifted_free_family_discriminant_does_not_determine_limit_quantity` へ付け替えた（overview に旧主張も同じ計算で確かめている旨を併記）。check・linkage 通過、本文未変更。次 tick は末尾をずらした列の極限一致の段の Lean 具体版を割る。
 - 2026-08-18 03:08: ずらした自由族 $Z'_L:=Z_{L+1}$ が判別式は異なるが極限量は等しい反例になる主張を本文へ記述した。$\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z_4)$ と、末尾を一つずらした列の極限一致を結んだ。check・PDF・判別式の SageMath 検証・linkage は通過。次 tick は判別式 check の対象ラベルを新しい主張へ付け替える。
 - 2026-08-18 02:34: 開始が締切 8 分前。レビュー（`npm run check` 再実行）修正なし。本文未変更、PDF 再生成。todo 先頭を二つへ割った：先頭は「ずらした自由族 $Z'_L:=Z_{L+1}$ が判定枠の反例になる主張ブロックの記述（$L=3$ で $\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z_4)$、極限一致は末尾ずらしの初等論法）」、次に「check の対象ラベル付け替え」。次 tick は主張ブロック記述から。
 - 2026-08-18 02:06: 並行ストリームの Pfaffian 候補を再導出し、台帳にあった「$R^{(2)}$ は $2^{\#V}$ 倍と単項式倍で Pfaffian」という係数形を棄却した。先頭を、辺ごとの有限恒等式から得る偶部分グラフ和 $R^{(2)}=2^{\#V-\#A}\sum_{F\,\mathrm{even}}\prod_{F}(1-X_e)\prod_{A\setminus F}(1+X_e)$ の本文証明へ差し替えた。Pfaffian はこの和へ後段で適用し、一次文献の定理と照合する。

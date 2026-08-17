@@ -1,7 +1,9 @@
 # SageMath Check: 自由族と周期族の判別式が異なる箱の辺がある
 
-**対象ラベル**: `claim_discriminant_free_vs_periodic_differ_at_L3`（判別式の列 $L\mapsto\mathrm{disc}(Z_L)$ の
-「潰れる候補」の判定に向けた有限計算。本文の主張ブロックに付いている）
+**対象ラベル**: `claim_shifted_free_family_discriminant_does_not_determine_limit_quantity`（ずらした自由族
+$Z'_L:=Z_{L+1}$ が判定枠の反例になる主張。この検証の $\mathrm{disc}(Z_3)=0$ と $\mathrm{disc}(Z_4)\ne0$ が
+その整数の不等号を与える。前半の $L=2,3$ の自由・周期比較は、同じ計算で
+`claim_discriminant_free_vs_periodic_differ_at_L3` も確かめている）
 
 自由境界の $Z_L$ と周期境界の $Z^{\mathrm{per}}_L:=\sum_m\Omega^{\mathrm{per}}_L(m)x^m$ を `ZZ[x]` で厳密に作り
 （$L=2$ は全配位の列挙、$L=2,3$ は層ごとの転送行列を整数点 $x=0,\dots,\#E$ で評価して $\mathbb Q$ 上で
