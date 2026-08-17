@@ -1427,6 +1427,8 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityLeQuotientSucc
   Ising2DLambda.NecSuf.ThermodynamicLimit.root_multiplicity_le_quotient_succ_necSuf
   Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityLeQuotientSucc_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarOtherRootMultiplicityLeQuotient
+  Ising2DLambda.ThermodynamicLimit.qbarOtherRootMultiplicityLeQuotient_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

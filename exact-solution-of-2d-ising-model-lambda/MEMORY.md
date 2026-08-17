@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 393 は、前 tick の「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせて一致を確認し（修正なし）、
+台帳の先頭行「零点密度: 他の点の重複度は商へ引き継がれる」を四層で閉じた。
+`claim_qbar_other_root_multiplicity_le_quotient`（`claim_qbar_root_multiplicity_le_quotient_succ` の直後、住処 Qbar、脱出なし）: $w\ne w'$、$f\ne0$、$f=(t-\widehat{w'})g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$。$M:=\mathrm{mult}_w(f)=M'+1$ の場合、読み取り 1 と仮定から $(t-\widehat w)^{M'+1}\mid(t-\widehat{w'})^{0+1}g$ を得て、`claim_qbar_coprime_divides_cofactor` を $k:=0,m:=M'$ で当て、読み取り 2 へ戻す。
+SageMath `check/qbar-other-root-multiplicity-le-quotient/`（相異なる $w,w'$ と $g$ の全組で整除の遺伝・不等式・実際の等号を `QQbar` で厳密検査）、Lean 具体版 `ThermodynamicLimit/QbarOtherRootMultiplicityLeQuotient.lean`、既存の必要十分版 `coprime_divides_cofactor_necSuf`（可換環のみ）からの導出版 `QbarOtherRootMultiplicityLeQuotientFromNecSuf.lean`。sorry 検査 1373 件、check 483 ブロック、verify-check-linkage 270 件、PDF 263 ページ通過。
+「何も言っていない主張」の観点では、前 tick の主張は次の重複度の和の帰納法が割り出した点へ使い、今 tick の主張は残りの各点へ繰り返し使うため残す。$g\ne0$、$M=0$ の場合、自然数の読み替えは証明内に置き、独立ブロックにしていない。
+式変形統一: 姉妹側「$T$ の（定数倍を除いた）単射性」（`008_TV1_hatZ_hatY_part1.ts`）の Step 3 順方向で、左から $g^{-1}$、右から $g'$ を掛ける二つの同値変形を各一続き二段（行末根拠つき）へ揃えた（内容は不変）。姉妹側 check（300 ブロック）・PDF 325 ページ通過。
+次は「零点密度: 有限集合上の重複度の和は係数の上界を超えない」（係数の上界 $n$ の帰納法。割り出した点には `claim_qbar_root_multiplicity_le_quotient_succ`、残りの各点には今 tick の `claim_qbar_other_root_multiplicity_le_quotient` を使う。Lean は `Finset.sum` の帰納法）。
+
 2026-08-17 の tick 392 は、前 tick の「互いに素な整除からの商への整除の遺伝」の本文と Lean 具体版・必要十分版を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 有限集合上の重複度の和は係数の上界を超えない」を三行へ割って（同じ点の重複度の減り方／他の点の重複度が商へ引き継がれること／和の上界）、その最初を四層で閉じた。
 `claim_qbar_root_multiplicity_le_quotient_succ`（`claim_qbar_coprime_divides_cofactor` の直後、住処 Qbar、脱出なし）: $f\ne0$、$f=(t-\widehat w)g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)+1$。証明は $M:=\mathrm{mult}_w(f)=0$ の場合を $\mathbb N$ の順序で済ませ、$M=M'+1$ のときは `def_qbar_root_multiplicity` の読み取り 1 で $f=(t-\widehat w)^{M'+1}h$ の証人 $h$ を取り、$(t-\widehat w)\left((t-\widehat w)^{M'}h\right)=(t-\widehat w)^{M'+1}h=f=(t-\widehat w)g$ の一続き三段を作ってから `claim_qbar_poly_linear_factor_cancellation` で一次因子を消去し（係数の上界は $(t-\widehat w)^{M'}h$ と $g$ の非零係数の番号の最大元の大きい方）、$(t-\widehat w)^{M'}\mid g$ から読み取り 2 で $M'\le\mathrm{mult}_w(g)$ を得る。

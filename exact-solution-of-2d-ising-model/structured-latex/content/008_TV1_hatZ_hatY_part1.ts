@@ -2821,11 +2821,13 @@ g\,u
         math(String.raw`g^{-1}`),
         " を掛けると",
       ]),
-      displayMath(
-        String.raw`g^{-1}\left(g h g^{-1}\right) = g^{-1}\left(g' h g'^{-1}\right)
-\quad\Longleftrightarrow\quad
-h g^{-1} = \left(g^{-1}g'\right) h g'^{-1}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+g^{-1}\left(g h g^{-1}\right) = g^{-1}\left(g' h g'^{-1}\right)
+&\iff \left(g^{-1}g\right)h g^{-1}=\left(g^{-1}g'\right)h g'^{-1}
+&&\left(\because\ R\ \text{の積の結合律}\right)\\
+&\iff h g^{-1}=\left(g^{-1}g'\right)h g'^{-1}
+&&\left(\because\ g^{-1}g=I\ \text{と積の単位元}\right)
+\end{aligned}`),
       paragraph([
         "を得る（左辺は結合律と ",
         math(String.raw`g^{-1}g = I`),
@@ -2833,11 +2835,13 @@ h g^{-1} = \left(g^{-1}g'\right) h g'^{-1}`,
         math(String.raw`g'`),
         " を掛けると",
       ]),
-      displayMath(
-        String.raw`h g^{-1} g' = \left(g^{-1}g'\right) h g'^{-1} g'
-\quad\Longleftrightarrow\quad
-h\,u = u\,h`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+h g^{-1} g'=\left(g^{-1}g'\right)h g'^{-1}g'
+&\iff h\left(g^{-1}g'\right)=\left(g^{-1}g'\right)h\left(g'^{-1}g'\right)
+&&\left(\because\ R\ \text{の積の結合律}\right)\\
+&\iff h\,u=u\,h
+&&\left(\because\ u=g^{-1}g',\ g'^{-1}g'=I\ \text{と積の単位元}\right)
+\end{aligned}`),
       paragraph([
         "を得る（右辺は結合律と ",
         math(String.raw`g'^{-1}g' = I`),

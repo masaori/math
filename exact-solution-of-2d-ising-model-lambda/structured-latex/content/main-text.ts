@@ -49406,6 +49406,66 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_other_root_multiplicity_le_quotient",
+    kind: "claim",
+    title: { text: "相異なる点の重複度は、一次因子を割り出した商へ引き継がれる" },
+    labels: ["claim_qbar_other_root_multiplicity_le_quotient"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-other-root-multiplicity-le-quotient"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarOtherRootMultiplicityLeQuotient",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.coprime_divides_cofactor_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarOtherRootMultiplicityLeQuotient_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`w,w'\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"),
+        "）が ", math(String.raw`w\ne w'`), " を満たし、",
+        math(String.raw`f,g\in\overline{\mathbb{Q}}[t]`), "（", ref("def_qbar_polynomial_ring"),
+        "）が ", math(String.raw`f\ne0`), " と ",
+        math(String.raw`f=(t-\widehat{w'})\cdot g`), " を満たすとする。このとき ",
+        math(String.raw`g\ne0`), " であり、",
+      ]),
+      displayMath(String.raw`\mathrm{mult}_{w}(f)\le\mathrm{mult}_{w}(g)`),
+      paragraph([
+        "が成り立つ（重複度は ", ref("def_qbar_root_multiplicity"), "）。",
+        "すなわち、", math(String.raw`w`), " と異なる点 ", math(String.raw`w'`),
+        " の一次因子を 1 つ割り出しても、", math(String.raw`w`), " における重複度は失われない。",
+        "これは有限集合上の重複度の和を商へ移すときに、残りの各点へ繰り返し使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず ", math(String.raw`g\ne0`), " である。実際 ", math(String.raw`g=0`),
+        " ならば ", math(String.raw`f=(t-\widehat{w'})\cdot0=0`),
+        "（", ref("def_qbar_polynomial_ring"), " の零元との積）となり、仮定 ",
+        math(String.raw`f\ne0`), " に反する。したがって ", math(String.raw`f,g`),
+        " の ", math(String.raw`w`), " における重複度はいずれも定まる（",
+        ref("def_qbar_root_multiplicity"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`M:=\mathrm{mult}_{w}(f)`), " と置く。",
+        math(String.raw`M=0`), " ならば主張は ", math(String.raw`\mathbb{N}`),
+        " の順序から成り立つ。以下 ", math(String.raw`M\ge1`), " とし、",
+        math(String.raw`M=M'+1`), "（", math(String.raw`M'\in\mathbb{N}`), "）と書く。",
+        ref("def_qbar_root_multiplicity"), " の一つめの読み取りにより ",
+        math(String.raw`(t-\widehat w)^{M'+1}\mid f`), " である。仮定の等式を代入すると",
+      ]),
+      displayMath(String.raw`(t-\widehat w)^{M'+1}\mid(t-\widehat{w'})^{0+1}\cdot g
+\qquad(\because\ f=(t-\widehat{w'})g\ \text{と}\ (t-\widehat{w'})^{0+1}=t-\widehat{w'})`),
+      paragraph([
+        "を得る。", ref("claim_qbar_coprime_divides_cofactor"), " を ",
+        math(String.raw`k:=0`), "、", math(String.raw`m:=M'`),
+        " として当てると ", math(String.raw`(t-\widehat w)^{M'+1}\mid g`), " である。よって ",
+        ref("def_qbar_root_multiplicity"), " の二つめの読み取りにより ",
+        math(String.raw`M'+1\le\mathrm{mult}_{w}(g)`), " であり、",
+        math(String.raw`M= M'+1`), " から主張を得る。",
+        "使ったのは代数的数係数多項式の整除と相異なる一次因子の Bezout 恒等式だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
