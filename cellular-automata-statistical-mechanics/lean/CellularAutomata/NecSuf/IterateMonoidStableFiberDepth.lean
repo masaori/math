@@ -164,8 +164,9 @@ theorem mem_stableFiberDepthLayerTable_iff
     (q : stableImage (cycleIdempotent F hex)) (k : ℕ) (y : X) :
     y ∈ stableFiberDepthLayerTable F hex q k ↔
       y ∈ stableFiberDepthLayer F hex q k := by
-  simp [stableFiberDepthLayerTable, depthLayerTable, stableFiberDepthLayer, depthLayer,
-    mem_stableFiberTable_iff]
+  simp only [stableFiberDepthLayerTable, depthLayerTable, Finset.mem_filter,
+    mem_stableFiberTable_iff, mem_stableFiber_iff, stableFiberDepthLayer, depthLayer,
+    Set.mem_setOf_eq]
 
 theorem stableFiberTable_card_eq_sum_depthLayerTable
     (q : stableImage (cycleIdempotent F hex)) :

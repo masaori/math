@@ -17,6 +17,7 @@ open CellularAutomata.EssentialDependency
 open CellularAutomata.TimeExpansionDependency
 open CellularAutomata.GlobalMapIteration
 open CellularAutomata.MinimalPreperiodPeriod
+open CellularAutomata.IterateMonoidCycleIdempotent
 open CellularAutomata.IterateMonoidStableImage
 open CellularAutomata.IterateMonoidStablePartition
 open CellularAutomata.IterateMonoidStableFiberDynamics
