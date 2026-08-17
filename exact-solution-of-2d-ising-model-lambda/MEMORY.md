@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 394 は、前 tick の「相異なる点の重複度は、一次因子を割り出した商へ引き継がれる」の四層を突き合わせて一致を確認し（修正なし）、
+「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた。
+`claim_qbar_finite_root_multiplicity_sum_le_coeff_bound`: $f\ne0$、$n<i\Rightarrow\mathrm{ac}_i(f)=0$ ならば、任意の有限集合 $s\subset\overline{\mathbb Q}$ について $\sum_{w\in s}\mathrm{mult}_w(f)\le n$。係数上界 $n$ の帰納法で、正の重複度を持つ一点の一次因子を割り出し、その点には `claim_qbar_root_multiplicity_le_quotient_succ`、残りには `claim_qbar_other_root_multiplicity_le_quotient` を当て、商へ帰納法を適用した。
+SageMath `check/qbar-finite-root-multiplicity-sum-le-coeff-bound/`、Lean 具体版 `QbarFiniteRootMultiplicitySumLeCoeffBound.lean`、有限和比較だけへ落とした必要十分版、導出版を追加した。
+「何も言っていない主張」の観点では、前 tick の $g\ne0$ は重複度の well-defined 性を担い、主不等式は今回の帰納法で反復利用されるため残した。
+式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 4 冒頭の同値の鎖を一続き二段・行末根拠つきへ揃えた。
+次は「零点密度: 重複度付きの個数 $N_L^{\mathrm{mult}}(c,r)$ の定義と $N_L\le N_L^{\mathrm{mult}}\le2L^2$」。定義と二つの不等式で論法が分かれるなら、着手時に分割する。
+
 2026-08-17 の tick 393 は、前 tick の「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせて一致を確認し（修正なし）、
 台帳の先頭行「零点密度: 他の点の重複度は商へ引き継がれる」を四層で閉じた。
 `claim_qbar_other_root_multiplicity_le_quotient`（`claim_qbar_root_multiplicity_le_quotient_succ` の直後、住処 Qbar、脱出なし）: $w\ne w'$、$f\ne0$、$f=(t-\widehat{w'})g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$。$M:=\mathrm{mult}_w(f)=M'+1$ の場合、読み取り 1 と仮定から $(t-\widehat w)^{M'+1}\mid(t-\widehat{w'})^{0+1}g$ を得て、`claim_qbar_coprime_divides_cofactor` を $k:=0,m:=M'$ で当て、読み取り 2 へ戻す。

@@ -2898,11 +2898,13 @@ g\left(u\,h\right)g'^{-1}
         math(String.raw`h \in R^\times`),
         " について合わせると",
       ]),
-      displayMath(
-        String.raw`T_g|_{R^\times} = T_{g'}|_{R^\times}
-\iff \forall h \in R^\times,\ u h = h u
-\iff u \in C(R^\times)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+T_g|_{R^\times}=T_{g'}|_{R^\times}
+&\iff \forall h\in R^\times,\ uh=hu
+&&\left(\because\ \text{Step 3 の同値をすべての}\ h\in R^\times\ \text{へ適用}\right)\\
+&\iff u\in C(R^\times)
+&&\left(\because\ u\in R^\times\ \text{と}\ C(R^\times)\ \text{の定義}\right)
+\end{aligned}`),
       paragraph([
         "（最後は ",
         math(String.raw`u \in R^\times`),

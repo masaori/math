@@ -6,6 +6,10 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-17 の tick 394 は、台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound`: $f\ne0$ かつ $n<i\Rightarrow\mathrm{ac}_i(f)=0$ ならば、任意の有限集合 $s\subset\overline{\mathbb Q}$ について $\sum_{w\in s}\mathrm{mult}_w(f)\le n$。係数上界 $n$ の帰納法で、正の重複度を持つ一点 $w_0$ の一次因子を割り出し、$w_0$ には `claim_qbar_root_multiplicity_le_quotient_succ`、残りの点には `claim_qbar_other_root_multiplicity_le_quotient` を当てた。
+  SageMath `check/qbar-finite-root-multiplicity-sum-le-coeff-bound/`、Lean 具体版・有限和比較だけへ落とした必要十分版・導出版を追加。check 484 ブロック、verify-check-linkage 271 件、sorry 検査 1376 件、PDF 264 ページ通過。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」の Step 4 冒頭の二つの同値を、一続き二段・行末根拠つきへ揃えた（内容は不変）。姉妹側 check 300 ブロック・PDF 325 ページ通過。
+  レビュー: 前 tick の `claim_qbar_other_root_multiplicity_le_quotient` の本文・SageMath・Lean 具体版・必要十分版からの導出版を突き合わせ、一致したので修正なし。「何も言っていない主張」の観点では、$g\ne0$ は重複度の well-defined 性を担い、主不等式は今 tick の帰納法が残りの各点へ繰り返し使うため、いずれも残す。
 - **2026-08-17 の tick 393 は、台帳の先頭行「零点密度: 他の点の重複度は商へ引き継がれる」を四層で閉じた（住処 Qbar、脱出なし）。**
   `claim_qbar_other_root_multiplicity_le_quotient`（`claim_qbar_root_multiplicity_le_quotient_succ` の直後・「この先に書くこと」の直前）: $w\ne w'$、$f\ne0$、$f=(t-\widehat{w'})g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$。$M:=\mathrm{mult}_w(f)=M'+1$ の場合、読み取り 1 と仮定から $(t-\widehat w)^{M'+1}\mid(t-\widehat{w'})^{0+1}g$ を得て、`claim_qbar_coprime_divides_cofactor` を $k:=0,m:=M'$ で当て、読み取り 2 へ戻した。
   SageMath `check/qbar-other-root-multiplicity-le-quotient/`（相異なる $w,w'$ と $g$ の全組で整除の遺伝・不等式・実際の等号を `QQbar` で厳密検査）、Lean 具体版 `QbarOtherRootMultiplicityLeQuotient.lean`、既存の必要十分版 `coprime_divides_cofactor_necSuf`（可換環のみ）からの導出版を追加。sorry 検査 1373 件、check 483 ブロック、verify-check-linkage 270 件、PDF 263 ページ通過。
@@ -56,7 +60,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 零点密度: 有限集合上の重複度の和は係数の上界を超えない（$\sum_{w\in s}\mathrm{mult}_w(f)\le n$） | todo | 係数の上界 $n$ の帰納法（`claim_qbar_distinct_roots_card_bound` と同じ形）。重複度が 1 以上の点 $w_0$ を取り、$f=(t-\widehat{w_0})g$ へ移って上の 2 つの補題で和を評価する。Lean は `Finset.sum` の帰納法 |
 | 熱力学極限 | 零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ と $N_L\le N^{\mathrm{mult}}_L\le2L^2$ | todo | 定義と挟み込み。論法が二つなら割る |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
@@ -64,6 +67,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 394）: 台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた。係数上界の帰納法で正の重複度を持つ一点の一次因子を割り出し、その点の重複度は高々 1 だけ減ること、他の各点の重複度は失われないこと、商の係数上界が 1 下がることを組み合わせた。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 4 冒頭の同値の鎖を揃えた。
 - 2026-08-17（tick 393）: 台帳の先頭行「零点密度: 他の点の重複度は商へ引き継がれる」を四層で閉じ、`claim_qbar_other_root_multiplicity_le_quotient` を `claim_qbar_root_multiplicity_le_quotient_succ` の直後に置いた。$w\ne w'$、$f=(t-\widehat{w'})g$ ならば $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$ を、重複度の読み取り 1 → `claim_qbar_coprime_divides_cofactor`（$k:=0$）→読み取り 2 で示した。SageMath・Lean 具体版・既存必要十分版からの導出版まで通過。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 3 順方向の二つの同値変形を一続きの鎖へ揃えた（内容は不変）。
 - 2026-08-17（tick 392）: 台帳の先頭行「零点密度: 有限集合上の重複度の和は係数の上界を超えない」を三行へ割った（同じ点の重複度の減り方／他の点の重複度が商へ引き継がれること／和の上界（係数の上界の帰納法）。理由: 帰納法の一歩で $f=(t-\widehat{w_0})g$ へ移るとき、$w_0$ の分の重複度と他の点の重複度をそれぞれ別の補題で評価する必要があるため）。その最初「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」を四層で閉じ、`claim_qbar_root_multiplicity_le_quotient_succ` を `claim_qbar_coprime_divides_cofactor` の直後に置いた。$f\ne0$、$f=(t-\widehat w)g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)+1$（読み取り 1 で証人を取り、一続き三段のあと一次因子を消去して読み取り 2）。SageMath（4 節。$w$ 5 種・$g$ 7 種）、Lean 具体版・必要十分版（整除の指数だけで述べ可換環のみ）・導出版、sorry 検査 1371 件。式変形統一: 姉妹側「$C(R^\times)$ の元はスカラー行列」の $Wx=\dots=xW$ を一続き三段（行末根拠つき）へ揃えた（内容は不変）。姉妹側 check・PDF 325 ページ通過。
 - 2026-08-17（tick 391）: 台帳の先頭行「零点密度: 互いに素な整除からの商への整除の遺伝（ユークリッドの補題型）」を四層で閉じ、`claim_qbar_coprime_divides_cofactor` を `claim_qbar_linear_factor_powers_bezout` の直後に置いた。$(t-\widehat{w'})^{m+1}\mid(t-\widehat w)^{k+1}g\Rightarrow(t-\widehat{w'})^{m+1}\mid g$（Bezout 恒等式へ $g$ を掛け、仮定の証人を代入する一続き五段。証人は $Ph+Qg$）。SageMath（4 節。相異なる組すべて・$k,m=0,1,2$・$g$ 5 種）、Lean 具体版・必要十分版（一次因子と冪を落として可換環のみ）・導出版、sorry 検査 1368 件。式変形統一: 姉妹側「$T_g$ が $R^\times$ を $R^\times$ へ写すこと」（`008_TV1_hatZ_hatY_part1.ts` の (ii) 冒頭）の二つの鎖を各一続き四段（行末根拠つき）へ揃えた（内容は不変）。姉妹側 check・PDF 325 ページ通過。
@@ -89,6 +93,7 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-17（tick 394）: 前 tick の「相異なる点の重複度は、一次因子を割り出した商へ引き継がれる」の本文・SageMath・Lean 具体版・必要十分版からの導出版を突き合わせ、一致した。修正なし。「何も言っていない主張」の観点では、$g\ne0$ は重複度の well-defined 性を担い、主不等式は今 tick の帰納法が残りの各点へ繰り返し使うため残す。
 - 2026-08-17（tick 393）: 前 tick の「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。
   「何も言っていない主張」の観点: 前 tick の主張は重複度の和の帰納法が割り出した点へ使い、今 tick の主張は同じ帰納法が残りの各点へ繰り返し使うので、いずれも独立した内容を持つ。$g\ne0$、$M=0$ の場合、$M'+1\le\mathrm{mult}_w(g)$ からの読み替えは証明内に置き、独立ブロックにしていない。
 - 2026-08-17（tick 390）: 前 tick の「Bezout 恒等式は、もう一方の元の冪についても構成できる（帰納法）」の本文（帰納法。出発点五段・一歩七段）と Lean 具体版（`qbarBezoutPowerPropagation`）・必要十分版（`bezout_power_propagation_necSuf`。可換環のみ）を突き合わせ、一致した。修正なし。

@@ -49483,6 +49483,81 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_finite_root_multiplicity_sum_le_coeff_bound",
+    kind: "claim",
+    title: { text: "有限集合上の根の重複度の和は係数の上界を超えない" },
+    labels: ["claim_qbar_finite_root_multiplicity_sum_le_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-finite-root-multiplicity-sum-le-coeff-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarFiniteRootMultiplicitySumLeCoeffBound",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.finset_sum_le_succ_of_distinguished_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarFiniteRootMultiplicitySumLeCoeffBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), "、", math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+        "、有限集合 ", math(String.raw`s\subset\overline{\mathbb{Q}}`), " を任意に取る。",
+        math(String.raw`f\ne0`), " であり、すべての ", math(String.raw`i\in\mathbb{N}`),
+        " について ", math(String.raw`n<i`), " ならば ",
+        math(String.raw`\mathrm{ac}_i(f)=0`), " であるとする。このとき",
+      ]),
+      displayMath(String.raw`\sum_{w\in s}\mathrm{mult}_{w}(f)\le n`),
+      paragraph([
+        "が成り立つ（重複度は ", ref("def_qbar_root_multiplicity"), "）。",
+        "集合 ", math(String.raw`s`), " の元がすべて根であるという仮定は要らない。根でない点の重複度は 0 である。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`n`), " について帰納法で示す。"]),
+      paragraph([
+        "出発点 ", math(String.raw`n=0`), " では、", ref("def_qbar_root_multiplicity"),
+        " の三つめの読み取りを各 ", math(String.raw`w\in s`), " に当てると ",
+        math(String.raw`\mathrm{mult}_{w}(f)\le0`), " である。重複度は自然数なので各項は 0 であり、和も 0 である。",
+      ]),
+      paragraph([
+        "次に係数の上界を ", math(String.raw`n+1`), " とする。すべての ", math(String.raw`w\in s`),
+        " で ", math(String.raw`\mathrm{mult}_{w}(f)=0`), " なら和は 0 なので結論は成り立つ。",
+        "そうでなければ、", math(String.raw`w_0\in s`), " で ",
+        math(String.raw`1\le\mathrm{mult}_{w_0}(f)`), " を満たすものを 1 つ取る。",
+        ref("claim_qbar_root_multiplicity_ge_one_iff_root"), " により ",
+        math(String.raw`\mathrm{aev}_{w_0}(f)=0`), " である。",
+      ]),
+      paragraph([
+        ref("claim_qbar_factor_theorem"), " により、ある ",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`), " があって ",
+        math(String.raw`f=(t-\widehat{w_0})g`), " である。", math(String.raw`f\ne0`),
+        " なので ", math(String.raw`g\ne0`), " である。さらに ",
+        ref("claim_qbar_factor_quotient_coeff_bound"), " により、", math(String.raw`n<i`),
+        " ならば ", math(String.raw`\mathrm{ac}_i(g)=0`), " である。よって帰納法の仮定から",
+      ]),
+      displayMath(String.raw`\sum_{w\in s}\mathrm{mult}_{w}(g)\le n`),
+      paragraph([
+        "を得る。一方、", ref("claim_qbar_root_multiplicity_le_quotient_succ"), " により",
+      ]),
+      displayMath(String.raw`\mathrm{mult}_{w_0}(f)\le\mathrm{mult}_{w_0}(g)+1`),
+      paragraph([
+        "である。また ", math(String.raw`w\in s\setminus\{w_0\}`), " ならば ",
+        math(String.raw`w\ne w_0`), " なので、", ref("claim_qbar_other_root_multiplicity_le_quotient"), " により",
+      ]),
+      displayMath(String.raw`\mathrm{mult}_{w}(f)\le\mathrm{mult}_{w}(g)`),
+      paragraph(["である。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{w\in s}\mathrm{mult}_{w}(f)
+&=\mathrm{mult}_{w_0}(f)+\sum_{w\in s\setminus\{w_0\}}\mathrm{mult}_{w}(f)
+&& (\because\ w_0\in s)\\
+&\le\mathrm{mult}_{w_0}(g)+1+\sum_{w\in s\setminus\{w_0\}}\mathrm{mult}_{w}(g)
+&& (\because\ \blkref{claim_qbar_root_multiplicity_le_quotient_succ}\ \text{と}\ \blkref{claim_qbar_other_root_multiplicity_le_quotient})\\
+&=\sum_{w\in s}\mathrm{mult}_{w}(g)+1
+&& (\because\ w_0\in s)\\
+&\le n+1
+&& (\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph(["である。これで帰納法が閉じた。議論は代数的数係数多項式と有限和の中で閉じ、実数体も複素数体も現れない。"]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

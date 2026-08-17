@@ -165,6 +165,7 @@ export const ALL_LABELS = [
   "claim_qbar_factor_quotient_coeff_bound",
   "claim_qbar_factor_quotient_other_root_zero",
   "claim_qbar_factor_theorem",
+  "claim_qbar_finite_root_multiplicity_sum_le_coeff_bound",
   "claim_qbar_geometric_telescope",
   "claim_qbar_identity_action",
   "claim_qbar_identity_matrix_unit",
