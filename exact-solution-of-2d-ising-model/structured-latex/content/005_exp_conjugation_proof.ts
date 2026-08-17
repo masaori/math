@@ -669,8 +669,24 @@ u+\overline{u}
    \quad (\because \mathrm{Re} \text{ の定義と } \mathbb{R}\to\mathbb{C} \text{ の包含写像})
 \end{aligned}`,
       ),
+      paragraph(["であるから、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\|A+B\|^2\right)_{\mathbb{C}}
+&= \left(\|A\|^2\right)_{\mathbb{C}}
+   + \left(u+\overline{u}\right)
+   + \left(\|B\|^2\right)_{\mathbb{C}}
+   \quad (\because \text{上の 3 段の鎖}) \\
+&= \left(\|A\|^2\right)_{\mathbb{C}}
+   + \left(2\,\mathrm{Re}(u)\right)_{\mathbb{C}}
+   + \left(\|B\|^2\right)_{\mathbb{C}}
+   \quad (\because u+\overline{u} \text{ の鎖}) \\
+&= \left(\|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2\right)_{\mathbb{C}}
+   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ は加法を保つ})
+\end{aligned}`,
+      ),
       paragraph([
-        "であるから、",
+        "であり、",
         math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
         " の単射性により実数の等式 ",
         math(String.raw`\|A+B\|^2=\|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2`),
