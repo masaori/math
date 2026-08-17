@@ -263,6 +263,10 @@ targets=(
   Ising3DCut.LimitQuantity.nullModel_symmetrized_real_seq_tendsto_iff
   Ising3DCut.LimitQuantity.nullModel_symmetrized_real_seq_limit_eq
   Ising3DCut.LimitQuantity.coeff_polyOfMultiplicity_nonneg
+  Ising3DCut.LimitQuantity.coeff_polyOfMultiplicity_of_gt
+  Ising3DCut.LimitQuantity.natDegree_polyOfMultiplicity
+  Ising3DCut.LimitQuantity.one_le_natDegree_polyOfMultiplicity
+  Ising3DCut.LimitQuantity.leadingCoeff_polyOfMultiplicity_pos
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
