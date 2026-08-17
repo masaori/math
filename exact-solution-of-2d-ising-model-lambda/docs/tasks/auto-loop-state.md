@@ -6,6 +6,10 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-17 の tick 397（launchd の即時起動で走った 23:28 の tick が使用量クレジット切れで異常終了したため、その残骸を人手のセッションが拾って完成させた）は、台帳の先頭行「零点密度の挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$」を四層で閉じた。これで章「熱力学極限」の todo は尽きた（住処 Qbar、脱出なし）。**
+  `claim_fisher_zero_count_le_mult_count`: $N_L(c,r)\le N^{\mathrm{mult}}_L(c,r)$（円板内の各零点で $\mathrm{aev}_\xi(\widehat{Z_L}^{\,F})=0$ から重複度が 1 以上、有限和の単調性）。`claim_fisher_zero_mult_count_le_edge_bound`（**主定理の印**）: $N^{\mathrm{mult}}_L(c,r)\le2L^2$（`claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てる。非零性と係数の上界は `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`）。
+  SageMath `check/fisher-zero-mult-count-squeeze/`（4 節。$L=1,2$、中心 3 × 半径 3 の有理円板 9 組。重複度は割り切る指数の最大元として計算し、密度の上界 2 も確認。`QQbar`・`AA` 厳密。通過）。Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountSqueeze.lean`（`one_le_fisherZeroMultiplicity`・`fisherZeroCount_le_fisherZeroMultCount`・`fisherZeroMultCount_le_edge_bound`・挟み込みそのもの）、必要十分版 `NecSuf/.../FisherZeroMultCountSqueeze.lean`（`card_le_sum_of_one_le_necSuf`。零点も重複度も落として「各点で 1 以上なら和は個数以上」だけにした）、導出版。`Finset.sum_const` は `ℕ` では `smul` になるので `Finset.card_eq_sum_ones` を使う。sorry 検査 1380 件・check 488 ブロック・verify-check-linkage 273 件・build:pdf 265 ページ通過。
+  運用: 23:28 の tick は専用アカウント（coding-agent-0001）で 3 分半ほど実際に作業してから「You're out of usage credits.」で落ちた（モデル単位の上限ではなくクレジット切れ）。**アカウント固定そのものは効いている**。残骸は目印どおり拾い、目印を消した。
 - **2026-08-17 の tick 396 は、台帳の先頭行「零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
   `def_fisher_zero_mult_count_in_rational_disc`（「この先に書くこと」の直前）: $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})\in\mathbb N$。和を取る集合が有限であることは `def_fisher_zero_count_in_rational_disc` で見たとおりで、各点の重複度が定まる根拠は前 tick の `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（持ち上げが零でない）。和を取る集合の元の個数はちょうど $N_L(c,r)$ であり、$N_L$ との違いは「各元を 1 と数えるか重複度と数えるか」だけである。
   Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountInRationalDisc.lean`（`fisherZeroMultCountIndex`（有限集合を `Finset` として読む）・`fisherZeroMultCountInRationalDisc`（`Finset.sum`）・`mem_fisherZeroMultCountIndex`・`fisherZeroMultCount_index_card`（`Set.ncard_eq_toFinset_card`。`ncard_eq_toFinset_card'` は `Fintype` を要求して通らない））。`Ising2DLambda.lean` に import 追加。lake build・sorry 検査 1376 件・check 486 ブロック・verify-check-linkage 272 件・build:pdf 264 ページ通過。
@@ -69,13 +73,13 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 零点密度: 挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$ | todo | 左は各項が 1 以上（`claim_qbar_root_multiplicity_ge_one_iff_root`）、右は `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てる |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 397）: 台帳の先頭行「零点密度の挟み込み」を四層で閉じ、章「熱力学極限」の todo が尽きた。$N_L\le N^{\mathrm{mult}}_L$（各項 1 以上と有限和の単調性）と $N^{\mathrm{mult}}_L\le2L^2$（重複度の和の上界。主定理の印）。SageMath 4 節（$L=1,2$・円板 9 組）、Lean 具体版・必要十分版（「各点で 1 以上なら和は個数以上」だけへ落とした）・導出版。sorry 検査 1380 件・check 488 ブロック・PDF 265 ページ通過。launchd 即時起動の tick がクレジット切れで残した書きかけを拾って完成させた。
 - 2026-08-17（tick 396）: 台帳の先頭行「重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロック）。和を取る有限集合は $\mathcal F_L\cap D(c,r)$、重複度が定まる根拠は前 tick の持ち上げの非零性。Lean は `Finset.sum` と `Set.ncard_eq_toFinset_card`。check 486 ブロック・PDF 264 ページ通過。併せて tick の Claude 実行をこのループ専用アカウントへ固定（モデルは claude-fable-5 のまま。共有アカウントの上限でループが止まっていたため）。
 - 2026-08-17（tick 395）: 台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げの非零性と係数の上界／$N^{\mathrm{mult}}_L$ の定義／挟み込み。理由: 重複度が定まる前提と和の上界の前提が、既存の証明の中に埋まっていて引けなかったため）、その最初 `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound` を四層で閉じた。既存 `claim_fisher_zero_finset_card_bound` の証明からその議論を持ち上げ、元の証明はこの主張を引く形へ直した。SageMath 3 節（$L=1,2,3$）、Lean は既存定理を引くので新規なし。check 485 ブロック・linkage 272 件・PDF 264 ページ通過。式変形統一: 姉妹側 $c_2^*=s_2^*c_2$ の一行の鎖を一続き四段（行末根拠つき）へ揃えた。姉妹側 check・PDF 325 ページ通過。
 - 2026-08-17（tick 394）: 台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた。係数上界の帰納法で正の重複度を持つ一点の一次因子を割り出し、その点の重複度は高々 1 だけ減ること、他の各点の重複度は失われないこと、商の係数上界が 1 下がることを組み合わせた。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 4 冒頭の同値の鎖を揃えた。

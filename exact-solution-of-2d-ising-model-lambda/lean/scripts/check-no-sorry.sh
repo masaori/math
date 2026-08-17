@@ -1432,6 +1432,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarFiniteRootMultiplicitySumLeCoeffBound
   Ising2DLambda.NecSuf.ThermodynamicLimit.finset_sum_le_succ_of_distinguished_necSuf
   Ising2DLambda.ThermodynamicLimit.qbarFiniteRootMultiplicitySumLeCoeffBound_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroCount_le_fisherZeroMultCount
+  Ising2DLambda.NecSuf.ThermodynamicLimit.card_le_sum_of_one_le_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroCount_le_fisherZeroMultCount_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroMultCount_le_edge_bound
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

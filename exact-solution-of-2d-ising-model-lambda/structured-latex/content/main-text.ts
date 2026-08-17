@@ -49656,6 +49656,127 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
   },
 
   {
+    id: "thermodynamic_limit_claim_fisher_zero_count_le_mult_count",
+    kind: "claim",
+    title: { text: "個数は重複度付きの個数を超えない" },
+    labels: ["claim_fisher_zero_count_le_mult_count"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-mult-count-squeeze"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroCount_le_fisherZeroMultCount",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.card_le_sum_of_one_le_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroCount_le_fisherZeroMultCount_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), "、", math(String.raw`c=(c_1,c_2)\in\mathbb{Q}\times\mathbb{Q}`),
+        "、", math(String.raw`r\in\mathbb{Q}_{>0}`), " とする。このとき",
+      ]),
+      displayMath(String.raw`N_{L}(c,r)\le N^{\mathrm{mult}}_{L}(c,r)`),
+      paragraph([
+        "が成り立つ（左辺は ", ref("def_fisher_zero_count_in_rational_disc"),
+        "、右辺は ", ref("def_fisher_zero_mult_count_in_rational_disc"),
+        "）。すなわち、円板内の零点を 1 個ずつ数えた個数は、重複度を込めて数えた個数を超えない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、和の各項が 1 以上であることを見る。",
+        math(String.raw`\xi\in\mathcal{F}_{L}\cap D(c,r)`), " を任意に取る。共通部分の定義から ",
+        math(String.raw`\xi\in\mathcal{F}_{L}`), " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)
+&=\mathrm{Ev}^{F}_{\xi}(Z_L)
+&&(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation})\\
+&=0
+&&(\because\ \xi\in\mathcal{F}_{L}\text{。}\ \blkref{def_finite_lattice_fisher_zeros})
+\end{aligned}`),
+      paragraph([
+        "である。", ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
+        " により ", math(String.raw`\widehat{Z_L}^{\,F}\ne0`), " なので、",
+        ref("claim_qbar_root_multiplicity_ge_one_iff_root"),
+        " の右から左への含意により",
+      ]),
+      displayMath(String.raw`1\le\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)`),
+      paragraph(["である。これで準備が済んだ。主張の左辺から始める。"]),
+      displayMath(String.raw`\begin{aligned}
+N_{L}(c,r)
+&=\bigl\lvert\mathcal{F}_{L}\cap D(c,r)\bigr\rvert
+&&(\because\ \blkref{def_fisher_zero_count_in_rational_disc})\\
+&=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}1
+&&(\because\ \text{有限集合の元の個数は各元を 1 と数えた有限和})\\
+&\le\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)
+&&(\because\ \text{準備の各項 }1\le\mathrm{mult}_{\xi}\text{ と有限和の単調性})\\
+&=N^{\mathrm{mult}}_{L}(c,r)
+&&(\because\ \blkref{def_fisher_zero_mult_count_in_rational_disc})
+\end{aligned}`),
+      paragraph([
+        "これで主張を得た。現れるのは代数的数の有限集合と自然数の有限和だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_fisher_zero_mult_count_le_edge_bound",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: { text: "重複度付きの個数は $2L^2$ を超えない（零点密度の挟み込み）" },
+    labels: ["claim_fisher_zero_mult_count_le_edge_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-mult-count-squeeze"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroMultCount_le_edge_bound",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), "、", math(String.raw`c=(c_1,c_2)\in\mathbb{Q}\times\mathbb{Q}`),
+        "、", math(String.raw`r\in\mathbb{Q}_{>0}`), " とする。このとき",
+      ]),
+      displayMath(String.raw`N^{\mathrm{mult}}_{L}(c,r)\le2L^{2}`),
+      paragraph([
+        "が成り立つ（左辺は ", ref("def_fisher_zero_mult_count_in_rational_disc"),
+        "、右辺は辺の本数 ", ref("def_lattice"), "）。",
+        ref("claim_fisher_zero_count_le_mult_count"), " と合わせると挟み込み",
+      ]),
+      displayMath(String.raw`N_{L}(c,r)\le N^{\mathrm{mult}}_{L}(c,r)\le2L^{2}`),
+      paragraph([
+        "を得る。したがって、格子点数 ", math(String.raw`L^{2}`),
+        " あたりの零点数は、1 個ずつ数えても重複度を込めて数えても同じ上界 ",
+        math(String.raw`2`), " を持つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_qbar_finite_root_multiplicity_sum_le_coeff_bound"),
+        " を、多項式 ", math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+        "（", ref("def_integer_polynomial_qbar_lift"), "）、有限集合 ",
+        math(String.raw`\mathcal{F}_{L}\cap D(c,r)`),
+        "（有限であることは ", ref("def_fisher_zero_count_in_rational_disc"),
+        " で見たとおり）、上界 ", math(String.raw`2L^{2}`),
+        " に当てるために、残る 2 つの仮定を確かめる。第 1 の ",
+        math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+        " と、第 2 の「", math(String.raw`2L^{2}<i`), " ならば ",
+        math(String.raw`\mathrm{ac}_i(\widehat{Z_L}^{\,F})=0`), "」は ",
+        ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
+        " が与える。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N^{\mathrm{mult}}_{L}(c,r)
+&=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)
+&&(\because\ \blkref{def_fisher_zero_mult_count_in_rational_disc})\\
+&\le2L^{2}
+&&(\because\ \blkref{claim_qbar_finite_root_multiplicity_sum_le_coeff_bound})
+\end{aligned}`),
+      paragraph([
+        "これで主張を得た。議論は代数的数係数多項式と自然数の有限和の中で閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

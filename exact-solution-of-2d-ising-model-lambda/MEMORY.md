@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 397 は、台帳の先頭行「零点密度の挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$」を四層で閉じた。**これで章「熱力学極限」の todo は尽き、残るのは最後の章「臨界指数を零点列で書く」だけである。**
+`claim_fisher_zero_count_le_mult_count`: 円板内の各零点は持ち上げの根なので重複度が 1 以上（`claim_qbar_root_multiplicity_ge_one_iff_root`）、有限和の単調性で $N_L\le N^{\mathrm{mult}}_L$。`claim_fisher_zero_mult_count_le_edge_bound`（**主定理の印を付けた**）: `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てて $N^{\mathrm{mult}}_L\le2L^2$。
+SageMath `check/fisher-zero-mult-count-squeeze/`（4 節。$L=1,2$、中心 3 × 半径 3 の円板 9 組。$L=3$ は `AA` の厳密比較が長すぎるので除く（既存の密度の検査と同じ範囲））。Lean 具体版・必要十分版・導出版。**`Finset.sum_const` は `ℕ` では `s.card • c` になるので、`s.card = ∑ 1` は `Finset.card_eq_sum_ones` を使う。** また導出版で `RealClosedSubfieldData` が別名前空間の同名型と衝突したので `open Ising2DLambda.FisherZero` が必要だった。sorry 検査 1380 件・check 488 ブロック・linkage 273 件・PDF 265 ページ通過。
+**この tick は launchd の即時起動（23:28）で走った tick が「You're out of usage credits.」で 3 分半後に落ち、書きかけの本文 1 ファイルを残したのを、目印どおり拾って完成させたものである。** モデル単位の上限ではなくクレジット切れなので、専用アカウント（coding-agent-0001）への固定自体は効いている（実際に作業が進んでいた）。クレジットの手当ては人間の判断事項で、local-pc-management へ事実を返信済み。
+
+（tick 396 の記録）
 2026-08-17 の tick 396 は、台帳の先頭行「零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。
 `def_fisher_zero_mult_count_in_rational_disc`: $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})\in\mathbb N$。有限集合であることは `def_fisher_zero_count_in_rational_disc`、各点の重複度が定まる根拠は `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`。和の添字集合の元の個数は $N_L(c,r)$ そのもの。
 Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountInRationalDisc.lean`。**`Set.ncard_eq_toFinset_card'` は `Fintype` インスタンスを要求して通らないので、`Set.Finite` を引数に取る `Set.ncard_eq_toFinset_card` を使う。** lake build・sorry 検査 1376 件・check 486 ブロック・linkage 272 件・PDF 264 ページ通過。
