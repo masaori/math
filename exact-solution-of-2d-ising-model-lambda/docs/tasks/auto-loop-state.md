@@ -7,6 +7,12 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 381 は、台帳の先頭行「零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 R、脱出理由は完備性）。**
+  `def_fisher_zero_density_limsup_liminf`（`claim_fisher_zero_density_in_rational_disc_le_two` の直後・「この先に書くこと」の直前、住処 R）: $c,r$ を固定し、尾部の像 $T_N(c,r):=\{\iota_{\mathbb Q\to\mathbb R}(\nu_L(c,r))\mid N\le L\}\subset\mathbb R$（$N\ge1$）が空でなく（$L:=N$）上に有界（上界 $2$。含意の鎖: $\nu_L\le2$ と $\iota$ の順序保存）下に有界（下界 $0$）なので、完備性で $s_N:=\sup T_N$、$i_N:=\inf T_N$ が定まり $0\le s_N$、$i_N\le2$。集合 $\{s_N\mid N\ge1\}$ は空でなく下に有界、$\{i_N\mid N\ge1\}$ は空でなく上に有界なので、再び完備性で $\overline\nu(c,r):=\inf\{s_N\}$、$\underline\nu(c,r):=\sup\{i_N\}$。$\overline\nu=\underline\nu$（収束）は主張しない。本文末尾「この先に書くこと」の零点密度の内訳から「上極限・下極限による実数体への脱出」を消した。
+  Lean 具体版 `ThermodynamicLimit/FisherZeroDensityLimsupLiminf.lean`（`fisherZeroDensitySequence`（$L=0$ は $0$ で埋める。`periodicDensitySequence` と同じ形）・`_of_ne_zero`・`_nonneg`・`_le_two`・`fisherZeroDensityTail`・`_nonempty`・`_bddAbove`・`_bddBelow`・`fisherZeroDensityTailSup_nonneg`・`fisherZeroDensityTailInf_le_two`・`fisherZeroDensityTailSupSet`／`InfSet` とその `_nonempty`・`_bddBelow`／`_bddAbove`・`fisherZeroDensityLimsup`（`sInf`）・`fisherZeroDensityLiminf`（`sSup`）。`Rat.cast_le`・`le_csSup`・`csInf_le`）。sorry 検査 1333 件。check 471 ブロック・verify-check-linkage 260 件・PDF 256 ページ通過。
+  式変形統一: 姉妹側 1 件（下の「レビュー記録」の同 tick の行に書く。着手できなければ「締切のため見送り」）。
+  レビュー: 前 tick の `def_fisher_zero_density_in_rational_disc`・`claim_fisher_zero_density_in_rational_disc_le_two` の本文（一続き四段）と Lean 具体版（`calc` 四段）を突き合わせて一致。修正なし。次は「零点密度: 重複度付きの個数への精密化（$\overline{\mathbb Q}[x]$ での根の重複度の定義から）」（着手前に論法で割る: 根の重複度の定義（$\overline{\mathbb Q}[t]$ で $(t-\xi)^k$ が割り切る最大の $k$）／重複度の和は次数以下／重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ と $N_L\le N^{\mathrm{mult}}_L\le2L^2$。Lean は `Polynomial.rootMultiplicity`）。
+
 - **2026-08-17 の tick 380 は、台帳の先頭行「零点密度: 格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界 $\nu_L\le2$」を、定義ブロックと主張ブロックの二つに分けて本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて閉じた（住処 Q、脱出なし）。**
   `def_fisher_zero_density_in_rational_disc`（`def_fisher_zero_count_in_rational_disc` の直後、住処 Q）: $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$（$L^2\ge1$ なので分母は $0$ でない。分子は自然数、分母は正なので $0\le\nu_L$——住処の確定として定義の中に置いた）。`claim_fisher_zero_density_in_rational_disc_le_two`（その直後・「この先に書くこと」の直前、住処 Q）: $\nu_L(c,r)\le2$。証明は一続き四段（定義／$N_L\le\lvert\mathcal F_L\rvert$ を正の分母で割る／$\lvert\mathcal F_L\rvert\le2L^2$ を正の分母で割る／約分）。上界は $L,c,r$ によらないので、列 $(\nu_L(c,r))_{L\ge1}$ は $0$ 以上 $2$ 以下——次の上極限・下極限が引く。本文末尾「この先に書くこと」の零点密度の内訳から「格子点数あたりの零点数」を消した。
   SageMath `check/fisher-zero-density-in-rational-disc-le-two/`（$L\le2$、有理円板 9 組、鎖の各段を `QQ` で厳密に。18 検査、5 秒。$L=3$ は根 12 個の `AA` 厳密比較が 100 秒で終わらないので除外）。Lean 具体版 `ThermodynamicLimit/FisherZeroDensityInRationalDisc.lean`（`fisherZeroDensityInRationalDisc`・`lattice_size_sq_pos_rat`・`_nonneg`・`_le_two`（`calc` 四段。`div_le_div_of_nonneg_right`・`mul_div_cancel_right₀`））、必要十分版 `NecSuf/ThermodynamicLimit/FisherZeroDensityInRationalDiscLeTwo.lean`（`div_le_two_of_le_of_le_two_mul_necSuf`。順序体（`Field`＋`LinearOrder`＋`IsStrictOrderedRing`）で $a\le b$、$b\le2d$、$0<d$ から $a/d\le2$。ℚ であることは使わない）、導出版 `FisherZeroDensityInRationalDiscLeTwoFromNecSuf.lean`。sorry 検査 1321 件。check 470 ブロック・verify-check-linkage 260 件・PDF 255 ページ通過。
@@ -36,11 +42,6 @@
 
 
 
-- **2026-08-17 の tick 376 は、台帳の先頭行「零点密度: 持ち上げの値と $\mathrm{Ev}^F$ の一致——$\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた（一続き三段。住処 Qbar、脱出なし）。**
-  `claim_integer_polynomial_qbar_lift_evaluation`（`def_integer_polynomial_qbar_lift` の直後・「この先に書くこと」の直前、住処 Qbar）: $f=\sum_{m=0}^{n}a_mx^m\in\mathbb Z[x]$、$\xi\in\overline{\mathbb Q}$ で $\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$。証明は準備（$n<k$ で $\mathrm{ac}_k(\widehat f^{\,F})=0$ なので `claim_qbar_evaluation_coefficient_sum` の仮定を満たす）と一続き三段（係数の有限和／$\mathrm{ac}_k(\widehat f^{\,F})=a_k$ を各項へ同時に／`def_qbar_polynomial_evaluation` の定義式）。帰結として $\xi$ が $\widehat f^{\,F}$ の根であることと $\mathrm{Ev}^F_\xi(f)=0$ は同じこと（次の上界の段で引く）。本文末尾「この先に書くこと」の零点密度の内訳から「持ち上げの値と $\mathrm{Ev}^F$ の一致」を消した。
-  SageMath `check/integer-polynomial-qbar-lift-evaluation/`（$Z_L$（$L\le3$）と小さな整係数多項式 5 個、$\xi$ 8 個、64 検査、Fisher 零点 20 個で両辺 0。`ZZ[x]`・`QQbar` の厳密計算）。Lean 具体版 `ThermodynamicLimit/IntegerPolynomialQbarLiftEvaluation.lean`（`integerPolynomialQbarLift_coeff_eq_zero_of_natDegree_lt`・`qbarPolyEval_integerPolynomialQbarLift`。`calc` 三段。第 3 段は `Polynomial.eval₂_eq_sum_range` による定義の展開）、必要十分版 `NecSuf/ThermodynamicLimit/IntegerPolynomialQbarLiftEvaluation.lean`（`lift_eval_eq_of_coeff_eq_necSuf`。仮定は二つの値がそれぞれ係数の有限和で書けることと係数の項ごとの一致だけ。構造は `AddCommMonoid`＋`Monoid`（有限和と冪）で、分配律・可換性・体は使わない）、導出版 `IntegerPolynomialQbarLiftEvaluationFromNecSuf.lean`。sorry 検査 1306 件。check 465 ブロック・verify-check-linkage 257 件・PDF 253 ページ通過。
-  式変形統一: 姉妹側「Frobenius 内積の性質」の Cauchy--Schwarz の場合 2（$\|B\|>0$）の末尾で、散文中の $0\le\|A-tB\|^2$ から $|u|^2\le(\|A\|\,\|B\|)^2$ までの鎖を、一続き二段（$0\le\|A-tB\|^2=\|A\|^2-|u|^2/\|B\|^2$）と一続き三段（$|u|^2=\tfrac{|u|^2}{\|B\|^2}\cdot\|B\|^2\le\|A\|^2\cdot\|B\|^2=(\|A\|\,\|B\|)^2$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
-  レビュー: 前 tick の `def_integer_polynomial_qbar_lift` の本文（$\mathrm{ac}_k$ の場合分けの定義式・記号 $\widehat{\ \cdot\ }^{\,F}$ の区別）と Lean 具体版（`integerPolynomialQbarLift`・`integerPolynomialQbarLift_coeff`）を突き合わせて一致。修正なし。次は「有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」（$\widehat{Z_L}^{\,F}\ne0$ は `claim_fisher_zero_algebraicity` の $Z_L\ne0$ と持ち上げの係数から。$2L^2<k$ で $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=0$ は $\deg Z_L\le2L^2$（`def_partition_polynomial` の和の範囲）から。$\mathcal F_L$ の有限部分集合 $S$ の各元は今 tick の主張で $\widehat{Z_L}^{\,F}$ の根なので `claim_qbar_distinct_roots_card_bound` で $|S|\le2L^2$。Lean は `Finset Qbar` で述べ、`qbarDistinctRootsCardBound` を当てる）。
 
 
 
@@ -57,7 +58,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 89 セクション
+- 熱力学極限: 90 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -65,7 +66,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない） | todo | |
 | 熱力学極限 | 零点密度: 重複度付きの個数への精密化（$\overline{\mathbb Q}[x]$ での根の重複度の定義から） | todo | |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
@@ -73,11 +73,11 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 381）: 台帳の先頭行「零点密度: $(\nu_L(c,r))_{L\ge1}$ の上極限と下極限（実数体への脱出: 完備性）」を本文・Lean 具体版で閉じ、`def_fisher_zero_density_limsup_liminf` を `claim_fisher_zero_density_in_rational_disc_le_two` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1333 件。式変形統一: 下のレビュー記録の同 tick の行を参照。
 - 2026-08-17（tick 380）: 台帳の先頭行「零点密度: 格子点数あたりの零点数 $\nu_L(c,r)$ と上界 $\nu_L\le2$」を定義ブロック `def_fisher_zero_density_in_rational_disc` と主張ブロック `claim_fisher_zero_density_in_rational_disc_le_two` に分けて四層で閉じ、`def_fisher_zero_count_in_rational_disc` の直後に置いた（一ブロック一主張のため二つにした。論法は一つ）。SageMath 18 検査（$L\le2$）、Lean 具体版・必要十分版（順序体）・導出版、sorry 検査 1321 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Cauchy--Schwarz 場合 2 の散文「$|u|^2/\|B\|^2\le\|A\|^2$（$\mathbb R$ の移項）」を一続き三段へ（姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 379）: 台帳の先頭行「零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r)$」を本文・Lean 具体版で閉じ、`def_fisher_zero_count_in_rational_disc` を `claim_fisher_zero_set_finite_card_bound` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1316 件。式変形統一: 姉妹側「転送行列」の `end` の構成の証明 Step 4 で、散文中の $(\sum_I\Theta_{I,I})(f_K)=\sum_I\delta_{I,K}f_I=f_K$ を一続き四段（行末根拠つき）へ揃えた（内容は不変。姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 378）: 台帳の先頭行「零点密度: $\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」を四層で閉じ、`claim_fisher_zero_set_finite_card_bound` を `claim_fisher_zero_finset_card_bound` の直後に置いた。SageMath（$L\le3$）、Lean 具体版・必要十分版（1 の冪根の場合と共有）・導出版、sorry 検査 1314 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Step 6 の実数の等式を不等式の鎖の第 1 段へ取り込み一続き四段へ（姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 377）: 台帳の先頭行「零点密度: 有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」を四層で閉じ、`claim_fisher_zero_finset_card_bound` を `claim_integer_polynomial_qbar_lift_evaluation` の直後に置いた。SageMath 117 組、Lean 具体版・必要十分版・導出版、sorry 検査 1312 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Step 6 の $\mathbb C$ 側の等式の組み立てを一続き三段へ（姉妹側 check・PDF 323 ページ通過）。
-- 2026-08-17（tick 376）: 台帳の先頭行「零点密度: 持ち上げの値と $\mathrm{Ev}^F$ の一致」を四層で閉じ、`claim_integer_polynomial_qbar_lift_evaluation` を `def_integer_polynomial_qbar_lift` の直後に置いた。SageMath 64 検査（Fisher 零点 20 個で両辺 0）、Lean 具体版・必要十分版・導出版、sorry 検査 1306 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Cauchy--Schwarz 場合 2 の末尾の散文の鎖を一続き二段＋三段へ（姉妹側 check・PDF 323 ページ通過）。
 
 
 
@@ -97,6 +97,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-17（tick 381）: 前 tick の「有理円板内の格子点数あたりの Fisher 零点数」の定義と「$2$ を超えない」の本文（一続き四段）と Lean 具体版（`calc` 四段）を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick は定義ブロックで、独立の主張ブロックは足していない。尾部の像が空でなく有界であること・$0\le s_N$・$i_N\le2$ は上限・下限が定まるための well-defined 性（住処の確定）なので定義の中に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。式変形統一: 【後で書く】
 - 2026-08-17（tick 380）: 前 tick の「有理円板内の有限格子の Fisher 零点の個数」の本文と Lean 具体版を突き合わせ、一致した。修正なし。
   「何も言っていない主張」の観点: 今 tick の上界 $\nu_L\le2$ は「正の数で割っても不等号が保たれる」だけで出るが、上界が $L,c,r$ によらないこと（列の有界性）が次の上極限・下極限の存在の根拠になり後で引く形なので、独立ブロックとして残す。$0<L^2$ と $0\le\nu_L$ は独立ブロックにせず、証明の冒頭と定義の中（住処の確定）に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
 - 2026-08-17（tick 379）: 前 tick の「有限格子の Fisher 零点の全体は有限集合であり元の個数は $2L^2$ を超えない」の本文（背理法の一続き二段・有限集合自身への適用）と Lean 具体版を突き合わせ、一致した。修正なし。
@@ -105,8 +107,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
   「何も言っていない主張」の観点: 今 tick の有限性と上界は、次の $N_L(c,r)\in\mathbb N$ と $\nu_L(c,r)\le2$ が引く（後で引く形。集合が有限であるという住処の確定でもある）ので残す。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
 - 2026-08-17（tick 377）: 前 tick の「持ち上げの値は整係数多項式の代数的数における値に一致する」の本文（準備・一続き三段）と Lean 具体版（`calc` 三段）・SageMath を突き合わせ、一致した。修正なし。
   「何も言っていない主張」の観点: 今 tick の上界は、`claim_qbar_distinct_roots_card_bound` の三つの仮定を $\widehat{Z_L}^{\,F}$ について確かめる主張であり、次の $\mathcal F_L$ の有限性と $N_L(c,r)\in\mathbb N$ が引く（後で引く形）ので残す。準備の $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$ は独立ブロックにせず証明の冒頭に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
-- 2026-08-17（tick 376）: 前 tick の「整係数多項式の代数的数係数多項式への持ち上げ」の本文（$\mathrm{ac}_k$ の場合分けの定義式・上付き $F$ の区別）と Lean 具体版（`integerPolynomialQbarLift`・`integerPolynomialQbarLift_coeff`）を突き合わせ、一致した。修正なし。
-  「何も言っていない主張」の観点: 今 tick の値の一致は、二つの別々に定義された評価写像（$\overline{\mathbb Q}[t]$ 上の $\mathrm{aev}$ と $\mathbb Z[x]$ 上の $\mathrm{Ev}^F$）が持ち上げを介して同じ値を返すことを言っており、次の上界の段と $\mathcal F_L$ の有限性が「$\xi\in\mathcal F_L$ ならば $\widehat{Z_L}^{\,F}$ の根」の形で引く（後で引く形）ので残す。準備の $n<k$ での係数の零は独立ブロックにせず証明の冒頭に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
 
 ## 判断待ち（人間に問うべき論点）
 

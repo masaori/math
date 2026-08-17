@@ -1377,6 +1377,18 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_le_two
   Ising2DLambda.NecSuf.ThermodynamicLimit.div_le_two_of_le_of_le_two_mul_necSuf
   Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_le_two_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensitySequence_of_ne_zero
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensitySequence_nonneg
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensitySequence_le_two
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTail_nonempty
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTail_bddAbove
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTail_bddBelow
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailSup_nonneg
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailInf_le_two
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailSupSet_nonempty
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailSupSet_bddBelow
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailInfSet_nonempty
+  Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailInfSet_bddAbove
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

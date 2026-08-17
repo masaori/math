@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 381 は、前 tick の「有理円板内の格子点数あたりの Fisher 零点数」の定義と「$2$ を超えない」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_fisher_zero_density_limsup_liminf`（`claim_fisher_zero_density_in_rational_disc_le_two` の直後、住処 R、脱出理由は完備性）: 尾部の像 $T_N(c,r):=\{\iota_{\mathbb Q\to\mathbb R}(\nu_L(c,r))\mid N\le L\}$ が空でなく $0$ 以上 $2$ 以下に収まる（$0\le\nu_L\le2$ と $\iota$ の順序保存）ので $s_N:=\sup T_N$、$i_N:=\inf T_N$、さらに $\{s_N\}$ は下に有界（$0\le s_N$）、$\{i_N\}$ は上に有界（$i_N\le2$）なので $\overline\nu(c,r):=\inf\{s_N\mid N\ge1\}$、$\underline\nu(c,r):=\sup\{i_N\mid N\ge1\}$。収束（$\overline\nu=\underline\nu$）は主張しない。本文末尾「この先に書くこと」から済んだ項目を消した。
+Lean 具体版 `ThermodynamicLimit/FisherZeroDensityLimsupLiminf.lean`（`fisherZeroDensitySequence`（$L=0$ は $0$ 埋め）・`fisherZeroDensityTail`・`_nonempty`/`_bddAbove`/`_bddBelow`・`fisherZeroDensityTailSup_nonneg`・`fisherZeroDensityTailInf_le_two`・`fisherZeroDensityTailSupSet`/`InfSet`・`fisherZeroDensityLimsup`（`sInf`）・`fisherZeroDensityLiminf`（`sSup`）。`Filter.limsup` は使わず自前の $\sup$/$\inf$ の重ねで書いた——本文の書き方と 1 対 1 にするため）。sorry 検査 1333 件。check 471 ブロック・verify-check-linkage 260 件・PDF 256 ページ通過。
+式変形統一: 台帳のレビュー記録の同 tick の行を参照。
+次は「零点密度: 重複度付きの個数への精密化（$\overline{\mathbb Q}[x]$ での根の重複度の定義から）」: 着手前に論法で割る（根の重複度の定義／重複度の和は次数以下／重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ と $N_L\le N^{\mathrm{mult}}_L\le2L^2$）。Lean は `Polynomial.rootMultiplicity`・`Polynomial.card_roots'` 系を見て、具体版が mathlib へ丸投げにならない形を選ぶ。
+
+（tick 380 の記録）
 2026-08-17 の tick 380 は、前 tick の「有理円板内の有限格子の Fisher 零点の個数」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界 $\nu_L\le2$」を定義ブロックと主張ブロックに分けて四層で閉じた。
 `def_fisher_zero_density_in_rational_disc`（`def_fisher_zero_count_in_rational_disc` の直後、住処 Q、脱出なし）: $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$（分母 $L^2\ge1$、$0\le\nu_L$ は住処の確定として定義の中）。`claim_fisher_zero_density_in_rational_disc_le_two`（その直後、住処 Q）: $\nu_L(c,r)\le2$（一続き四段: 定義／$N_L\le\lvert\mathcal F_L\rvert$ を正の分母で割る／$\lvert\mathcal F_L\rvert\le2L^2$ を正の分母で割る／約分。上界は $L,c,r$ によらない）。本文末尾「この先に書くこと」から済んだ項目を消した。
