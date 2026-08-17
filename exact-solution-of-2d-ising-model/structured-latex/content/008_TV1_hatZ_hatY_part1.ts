@@ -828,11 +828,24 @@ M & (\mu = M)
 \qquad (\alpha, \beta \in \mathbb{C},\ X, W \in \mathrm{Mat}(2^M,\mathbb{C}))`,
       ),
       paragraph([
-        "のみを用いる（後者は ",
-        math(String.raw`[\alpha X, \beta W] = (\alpha X)(\beta W) - (\beta W)(\alpha X) = \alpha\beta(XW - WX)`),
-        " による。スカラー倍が積と可換なことは ",
+        "のみを用いる。後者は次の一続きの計算による（スカラー倍が積と可換なことは ",
         ref("scalar_identity_commutes"),
         " による）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[\alpha X, \beta W]
+&= (\alpha X)(\beta W) - (\beta W)(\alpha X)
+&&(\because\ \text{交換子の定義})\\
+&= \alpha\beta\,(XW) - \beta\alpha\,(WX)
+&&(\because\ \text{スカラー倍が積と可換なこと})\\
+&= \alpha\beta\,(XW - WX)
+&&(\because\ \mathbb{C}\ \text{の積の可換則}\ \beta\alpha=\alpha\beta\ \text{と分配則})\\
+&= \alpha\beta\,[X, W]
+&&(\because\ \text{交換子の定義})
+\end{aligned}`,
+      ),
+      paragraph([
         "各主張の右辺は ",
         math(String.raw`n`),
         " の偶奇で場合分けされているので、帰納段階は「",

@@ -48714,6 +48714,97 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_linear_factor_pow_mul_leading_coeff",
+    kind: "claim",
+    title: { text: "一次因子の冪との積の先頭の係数は、もとの先頭の係数である" },
+    labels: ["claim_qbar_linear_factor_pow_mul_leading_coeff"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-linear-factor-pow-mul-leading-coeff"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulLeadingCoeff",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.poly_linear_factor_pow_mul_leading_coeff_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulLeadingCoeff_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`C\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`m\in\mathbb{N}`), " を、", math(String.raw`k>m`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(C)=0`),
+        " となるように取り、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）と ", math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{m+j}\bigl((t-\widehat{w})^{j}C\bigr)=\mathrm{ac}_{m}(C)`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "、冪は ",
+        ref("def_qbar_polynomial_ring"), " の約束）。すなわち一次因子を ",
+        math(String.raw`j`), " 回掛けても、番号 ", math(String.raw`m`),
+        " にあった係数は番号 ", math(String.raw`m+j`), " へそのまま移る。",
+        ref("claim_qbar_linear_factor_pow_mul_coeff_bound"),
+        " と合わせると、この番号より上の係数は零なので、",
+        math(String.raw`\mathrm{ac}_m(C)\ne0`), " ならこれが積の先頭の係数である。",
+        "これは、一次因子の冪で割り切れる零でない多項式について、",
+        "その冪の指数が係数の上界を超えないことを出すための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ", ref("def_qbar_polynomial_ring"), " の ",
+        math(String.raw`\mathrm{ac}_{k}`), " である。",
+        math(String.raw`j\in\mathbb{N}`), " について帰納法で示す。出発点 ",
+        math(String.raw`j=0`), " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+0}\bigl((t-\widehat{w})^{0}C\bigr)
+&=\mathrm{ac}_{m+0}(1\cdot C)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ (t-\widehat{w})^{0}=1)\\
+&=\mathrm{ac}_{m+0}(C)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
+&=\mathrm{ac}_{m}(C)
+&&(\because\ \mathbb{N}\ \text{の加法の単位元}\ m+0=m)
+\end{aligned}`),
+      paragraph([
+        "である。一歩を示す。ある ", math(String.raw`j\in\mathbb{N}`), " について ",
+        math(String.raw`\mathrm{ac}_{m+j}\bigl((t-\widehat{w})^{j}C\bigr)=\mathrm{ac}_{m}(C)`),
+        " と仮定する。", ref("claim_qbar_linear_factor_pow_mul_coeff_bound"),
+        " を同じ ", math(String.raw`C`), "、", math(String.raw`m`), "、",
+        math(String.raw`w`), "、", math(String.raw`j`), " へ当てると、",
+        math(String.raw`k>m+j`), " ならば ",
+        math(String.raw`\mathrm{ac}_k\bigl((t-\widehat{w})^{j}C\bigr)=0`),
+        " である。すなわち多項式 ", math(String.raw`(t-\widehat{w})^{j}C`),
+        " は係数の上界 ", math(String.raw`m+j`), " を持つ。また冪の約束から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(t-\widehat{w})^{j+1}C
+&=(t-\widehat{w})^{j}(t-\widehat{w})C
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ (t-\widehat{w})^{j+1}=(t-\widehat{w})^{j}(t-\widehat{w}))\\
+&=(t-\widehat{w})(t-\widehat{w})^{j}C
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則と結合則})
+\end{aligned}`),
+      paragraph([
+        "を得る。以上を使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+(j+1)}\bigl((t-\widehat{w})^{j+1}C\bigr)
+&=\mathrm{ac}_{(m+j)+1}\bigl((t-\widehat{w})^{j+1}C\bigr)
+&&(\because\ \mathbb{N}\ \text{の加法の結合則}\ m+(j+1)=(m+j)+1)\\
+&=\mathrm{ac}_{(m+j)+1}\bigl((t-\widehat{w})\,(t-\widehat{w})^{j}C\bigr)
+&&(\because\ \text{上で得た冪の等式})\\
+&=\mathrm{ac}_{m+j}\bigl((t-\widehat{w})^{j}C\bigr)
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_leading_coeff}\ \text{を}\ C\ \text{の位置に}\ (t-\widehat{w})^{j}C\text{、係数の上界}\ m+j\ \text{へ当てる})\\
+&=\mathrm{ac}_{m}(C)
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "を得る。これで帰納法が閉じた。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48730,7 +48821,7 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 一次因子の冪との積の先頭の係数はもとの先頭の係数／零でない多項式を割る一次因子の冪の指数は係数の上界を超えない／根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
+          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない／根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
         ],
         [
           todo("未着手"),

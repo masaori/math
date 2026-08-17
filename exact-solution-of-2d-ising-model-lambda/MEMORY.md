@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 384 は、前 tick の「一次因子の冪との積の係数は、上界と指数の和より上の番号で零である」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 一次因子の冪との積の先頭の係数はもとの先頭の係数」（$k>m\Rightarrow\mathrm{ac}_k(C)=0$ のもとで $\mathrm{ac}_{m+j}((t-\widehat w)^jC)=\mathrm{ac}_m(C)$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。
+`claim_qbar_linear_factor_pow_mul_leading_coeff`（`claim_qbar_linear_factor_pow_mul_coeff_bound` の直後、住処 Qbar、脱出なし）。$j$ の帰納法（出発点は $\mathrm{ac}_{m+0}((t-\widehat w)^0C)=\mathrm{ac}_{m+0}(1\cdot C)=\mathrm{ac}_{m+0}(C)=\mathrm{ac}_m(C)$ の一続き三段、一歩は前主張で $(t-\widehat w)^jC$ の上界 $m+j$ を得、冪の等式（二段）ののち $\mathrm{ac}_{m+(j+1)}=\mathrm{ac}_{(m+j)+1}$／冪の等式／`claim_qbar_poly_linear_factor_leading_coeff`／帰納法の仮定の一続き四段）。本文末尾「この先に書くこと」の内訳から済んだ項目を消した。
+SageMath `check/qbar-linear-factor-pow-mul-leading-coeff/`（$w$ 6 個・$C$ 5 個・上界 2 通り・$j\le5$、`QQbar` 厳密、通過）。Lean 具体版 `ThermodynamicLimit/QbarLinearFactorPowMulLeadingCoeff.lean`（`qbarLinearFactorPowMulLeadingCoeff`）、必要十分版 `NecSuf/ThermodynamicLimit/QbarLinearFactorPowMulLeadingCoeff.lean`（`poly_linear_factor_pow_mul_leading_coeff_necSuf`。可換環だけ）、導出版。sorry 検査 1342 件。check 474 ブロック・verify-check-linkage 262 件・PDF 258 ページ通過。
+式変形統一: 姉妹側「$H$ と $\hat Z$・$\hat Y$ の交換子の入れ子」（`008_TV1_hatZ_hatY_part1.ts`）の証明冒頭で、散文中の交換子の双線型性の二等号の鎖 $[\alpha X,\beta W]=(\alpha X)(\beta W)-(\beta W)(\alpha X)=\alpha\beta(XW-WX)$ を一続き四段（行末根拠つき。姉妹側の生成器は `\blkref` を持たないのでラベル参照は直前の散文に残す——`008_TV1_hatZ_hatY_part2.ts` の先例と同じ）へ揃えた（内容は不変）。姉妹側の check（300 ブロック）・PDF 324 ページ通過。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系。
+次は「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」（$f\ne0$、$k>n\Rightarrow\mathrm{ac}_k(f)=0$、$(t-\widehat w)^k\mid f$ ならば $k\le n$）。論法は背理法: $f=(t-\widehat w)^kg$、$f\ne0$ から $g\ne0$（$g=0$ なら $f=(t-\widehat w)^k\cdot0=0$）、$g\ne0$ の最高次の係数の位置 $m$（$\mathrm{ac}_m(g)\ne0$、$i>m\Rightarrow\mathrm{ac}_i(g)=0$。零でない多項式に最高次の位置があること——非零係数の番号の有限集合の最大元——が本文に無ければ先に置く。既存の `claim_qbar_distinct_roots_card_bound` 周辺で「最高次の位置」をどう扱ったかを確かめる）、`claim_qbar_linear_factor_pow_mul_leading_coeff` で $\mathrm{ac}_{m+k}(f)=\mathrm{ac}_m(g)\ne0$、$m+k>n$ なら係数の上界に反するので $m+k\le n$、$k\le m+k\le n$。Lean は `qbarLinearFactorPowMulLeadingCoeff` と係数の上界を使い `natDegree` は使わない（最高次の位置は `Nat.find` か `Finset.max'` で書く）。
+
+（tick 383 の記録）
 2026-08-17 の tick 383 は、前 tick の「代数的数係数多項式が一次因子の冪で割り切れること」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」を論法で三行へ割り（一次因子の冪との積の係数の上界（帰納法）／冪との積の先頭の係数はもとの先頭の係数（帰納法）／指数 $k\le n$（背理法））、その最初「一次因子の冪との積の係数は、上界と指数の和より上の番号で零である」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。
 `claim_qbar_linear_factor_pow_mul_coeff_bound`（`def_qbar_linear_factor_power_divides` の直後、住処 Qbar、脱出なし）: $k>m\Rightarrow\mathrm{ac}_k(C)=0$ のとき $k>m+j\Rightarrow\mathrm{ac}_k((t-\widehat w)^jC)=0$。$j$ の帰納法（出発点は $1\cdot C=C$ の一続き三段、一歩は冪の等式 $(t-\widehat w)^{j+1}C=(t-\widehat w)(t-\widehat w)^jC$ に `claim_qbar_poly_linear_factor_coeff_bound` を上界 $m+j$ で当てる）。本文末尾「この先に書くこと」の内訳へ「先頭の係数」を足した。

@@ -1395,6 +1395,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulCoeffBound
   Ising2DLambda.NecSuf.ThermodynamicLimit.poly_linear_factor_pow_mul_coeff_bound_necSuf
   Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulCoeffBound_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulLeadingCoeff
+  Ising2DLambda.NecSuf.ThermodynamicLimit.poly_linear_factor_pow_mul_leading_coeff_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulLeadingCoeff_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 384 で台帳から移した記録（tick 379 分）
+
+### 現在地
+
+- **2026-08-17 の tick 379 は、台帳の先頭行「零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_fisher_zero_count_in_rational_disc`（`claim_fisher_zero_set_finite_card_bound` の直後・「この先に書くこと」の直前、住処 Qbar）: $L\ge1$、$c\in\mathbb Q\times\mathbb Q$、$r\in\mathbb Q_{>0}$ で、$\mathcal F_L\cap D(c,r)$ は有限集合 $\mathcal F_L$（`claim_fisher_zero_set_finite_card_bound`）の部分集合なので有限集合、$N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$。定義の中に $N_L(c,r)\le\lvert\mathcal F_L\rvert$（有限集合の部分集合の元の個数は全体以下）を置いた（次の $\nu_L\le2$ が引く）。本文末尾「この先に書くこと」の零点密度の内訳から「$N_L(c,r)$」を消した。
+  Lean 具体版 `ThermodynamicLimit/FisherZeroCountInRationalDisc.lean`（`fisherZeroSet_inter_rationalDisc_finite`（`Set.Finite.subset`）・`fisherZeroCountInRationalDisc`（`Set.ncard`）・`fisherZeroCountInRationalDisc_le_ncard`（`Set.ncard_le_ncard`））。sorry 検査 1316 件。check 468 ブロック・verify-check-linkage 259 件・PDF 255 ページ通過。
+  式変形統一: 姉妹側「転送行列」（`004_transfer_matrix.ts`）の $\mathbf{end}$ の構成の証明 Step 4 で、散文中の $(\sum_I\Theta_{I,I})(f_K)=\sum_I\delta_{I,K}f_I=f_K$ を一続き四段（線型写像の和の値／$\Theta_{I,J}$ の定義／$\delta_{I,K}$／恒等写像の定義。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_fisher_zero_set_finite_card_bound` の本文（背理法の一続き二段・有限集合自身への適用）と Lean 具体版（`fisherZeroSet_finite_ncard_le` の `exists_subset_card_eq`・`omega`・`ncard_eq_toFinset_card`）を突き合わせて一致。修正なし。次は「格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界 $\nu_L\le2$」（$N_L\le\lvert\mathcal F_L\rvert\le2L^2$ を $L^2>0$ で割る一続き。Lean は `(fisherZeroCountInRationalDisc L data c r : ℚ) / (L^2 : ℚ)`）。
+
+### 前進の記録
+
+- 2026-08-17（tick 379）: 台帳の先頭行「零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r)$」を本文・Lean 具体版で閉じ、`def_fisher_zero_count_in_rational_disc` を `claim_fisher_zero_set_finite_card_bound` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1316 件。式変形統一: 姉妹側「転送行列」の `end` の構成の証明 Step 4 で、散文中の $(\sum_I\Theta_{I,I})(f_K)=\sum_I\delta_{I,K}f_I=f_K$ を一続き四段（行末根拠つき）へ揃えた（内容は不変。姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 379）: 前 tick の「有限格子の Fisher 零点の全体は有限集合であり元の個数は $2L^2$ を超えない」の本文（背理法の一続き二段・有限集合自身への適用）と Lean 具体版を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の定義は、$N_L(c,r)$ の住処 $\mathbb N$ の確定（有限性）と、次の $\nu_L\le2$ が引く $N_L\le\lvert\mathcal F_L\rvert$ を含む（後で引く形）ので残す。有限性の根拠（有限集合の部分集合は有限）は独立ブロックにせず定義の中に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
+
 ## 2026-08-17 tick 383 で台帳から移した記録（tick 378 分）
 
 ### 現在地
