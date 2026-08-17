@@ -36,6 +36,7 @@ import CellularAutomata.NecSuf.IterateMonoidCycleIdempotent
 import CellularAutomata.NecSuf.IterateMonoidCyclicGroup
 import CellularAutomata.NecSuf.IterateMonoidStableImage
 import CellularAutomata.NecSuf.IterateMonoidStablePartition
+import CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics
 import CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition
 import CellularAutomata.NecSuf.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.PeriodicPointCount

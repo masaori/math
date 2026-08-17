@@ -8,6 +8,7 @@
 -/
 import CellularAutomata.IterateMonoidStablePartition
 import CellularAutomata.IterateMonoidIdempotents
+import CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics
 
 namespace CellularAutomata.IterateMonoidStableFiberDynamics
 
@@ -202,5 +203,134 @@ theorem mem_stableFiberPreimageTable_iff (q : stableImage N f) (y : V → State)
   simp only [stableFiberPreimageTable, Finset.mem_filter, Finset.mem_univ, true_and]
   rw [mem_stableFiberTable_iff]
   exact globalMap_mem_stableFiber_index_iff N f q y
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := V → State、F := globalMap N f、E := E_F（hex := necSufHex N f）へ
+特殊化したものである。安定像・安定ファイバーは前二章の導出により必要十分版の像・ファイバーに一致し、
+添字写像の値は定義から `globalMap N f q.1` で一致する。反例は、必要十分版の
+「相異なる二点への定値写像」を X := Unit → State、a := zeroConfig、b := oneConfig へ特殊化して得る。 -/
+
+section Derivation
+
+/-- 可換性は必要十分版の反復層の特殊化である。 -/
+theorem cycleIdempotent_commutes_with_globalMap_from_necessary_sufficient (y : V → State) :
+    cycleIdempotent N f (globalMap N f y) =
+      globalMap N f (cycleIdempotent N f y) := by
+  rw [cycleIdempotent_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.cycleIdempotent_commutes
+    (globalMap N f) (necSufHex N f) y
+
+/-- 安定像の元は必要十分版の像に属する。 -/
+theorem stableImage_mem_necessary_sufficient (q : stableImage N f) :
+    q.1 ∈ CellularAutomata.NecSuf.IterateMonoidStablePartition.stableImage
+      (CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent
+        (globalMap N f) (necSufHex N f)) := by
+  obtain ⟨y, hy⟩ := q.2
+  refine ⟨y, ?_⟩
+  rw [← cycleIdempotent_eq_necessary_sufficient]
+  exact hy
+
+/-- 完全逆像の点ごとの同値は、必要十分版の一般層（可換性・像上の単射性）の特殊化である。 -/
+theorem globalMap_mem_stableFiber_index_iff_from_necessary_sufficient
+    (q : stableImage N f) (y : V → State) :
+    globalMap N f y ∈ stableFiber N f (stableIndexMap N f q) ↔
+      y ∈ stableFiber N f q := by
+  have hq := stableImage_mem_necessary_sufficient N f q
+  change cycleIdempotent N f (globalMap N f y) = globalMap N f q.1 ↔
+    cycleIdempotent N f y = q.1
+  rw [cycleIdempotent_eq_necessary_sufficient]
+  constructor
+  · intro h
+    exact CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.index_backward_pointwise
+      (globalMap N f) _
+      (CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.cycleIdempotent_commutes
+        (globalMap N f) (necSufHex N f))
+      (CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.globalMap_injOn_range_cycleIdempotent
+        (globalMap N f) (necSufHex N f)) hq h
+  · intro h
+    exact CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.index_forward_pointwise
+      (globalMap N f) _
+      (CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.cycleIdempotent_commutes
+        (globalMap N f) (necSufHex N f)) h
+
+theorem stableFiber_exact_preimage_from_necessary_sufficient (q : stableImage N f) :
+    globalMap N f ⁻¹' stableFiber N f (stableIndexMap N f q) =
+      stableFiber N f q := by
+  ext y
+  exact globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y
+
+theorem stableFiber_image_subset_from_necessary_sufficient (q : stableImage N f) :
+    globalMap N f '' stableFiber N f q ⊆
+      stableFiber N f (stableIndexMap N f q) := by
+  rintro z ⟨y, hy, rfl⟩
+  exact (globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y).2 hy
+
+/-- 完全逆像の有限走査表の正しさは、必要十分版の点ごとの同値から得られる。 -/
+theorem mem_stableFiberPreimageTable_iff_from_necessary_sufficient
+    (q : stableImage N f) (y : V → State) :
+    y ∈ stableFiberPreimageTable N f q ↔ y ∈ stableFiber N f q := by
+  classical
+  simp only [stableFiberPreimageTable, Finset.mem_filter, Finset.mem_univ, true_and]
+  rw [mem_stableFiberTable_iff]
+  exact globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y
+
+/-- 反例は必要十分版の「相異なる二点への定値写像」の特殊化である。 -/
+theorem constantZero_stableFiber_image_strict_from_necessary_sufficient :
+    ∃ q : stableImage oneCellNeighborhood constantZeroLocalRule,
+      globalMap oneCellNeighborhood constantZeroLocalRule ''
+          stableFiber oneCellNeighborhood constantZeroLocalRule q ⊂
+        stableFiber oneCellNeighborhood constantZeroLocalRule
+          (stableIndexMap oneCellNeighborhood constantZeroLocalRule q) := by
+  have hF : globalMap oneCellNeighborhood constantZeroLocalRule =
+      fun _ : Unit → State => zeroConfig := funext constantZero_globalMap
+  have hab : zeroConfig ≠ oneConfig := fun h => State.noConfusion (congrFun h ())
+  obtain ⟨q', hq'⟩ :=
+    CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.const_stableFiber_image_strict hab
+  have hE : cycleIdempotent oneCellNeighborhood constantZeroLocalRule =
+      CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent
+        (fun _ : Unit → State => zeroConfig)
+        (CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.const_hex (a := zeroConfig)) := by
+    rw [cycleIdempotent_eq_necessary_sufficient]
+    have key : ∀ (G : (Unit → State) → (Unit → State))
+        (hG : globalMap oneCellNeighborhood constantZeroLocalRule = G)
+        (hexG : ∃ n : ℕ,
+          CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.IsCollisionStart G n),
+        CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent
+            (globalMap oneCellNeighborhood constantZeroLocalRule)
+            (necSufHex oneCellNeighborhood constantZeroLocalRule) =
+          CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent G hexG := by
+      intro G hG hexG
+      subst hG
+      rfl
+    exact key _ hF _
+  let q : stableImage oneCellNeighborhood constantZeroLocalRule :=
+    ⟨q'.1, by
+      show q'.1 ∈ Set.range (cycleIdempotent oneCellNeighborhood constantZeroLocalRule)
+      rw [hE]
+      exact q'.2⟩
+  have h1 : stableFiber oneCellNeighborhood constantZeroLocalRule q =
+      CellularAutomata.NecSuf.IterateMonoidStablePartition.stableFiber _ q' := by
+    ext y
+    show cycleIdempotent oneCellNeighborhood constantZeroLocalRule y = q'.1 ↔
+      CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent
+        (fun _ : Unit → State => zeroConfig) _ y = q'.1
+    rw [hE]
+  have h2 : stableFiber oneCellNeighborhood constantZeroLocalRule
+      (stableIndexMap oneCellNeighborhood constantZeroLocalRule q) =
+      CellularAutomata.NecSuf.IterateMonoidStablePartition.stableFiber _
+        (CellularAutomata.NecSuf.IterateMonoidStableFiberDynamics.iterateStableIndexMap
+          (fun _ : Unit → State => zeroConfig) _ q') := by
+    ext y
+    show cycleIdempotent oneCellNeighborhood constantZeroLocalRule y =
+        globalMap oneCellNeighborhood constantZeroLocalRule q'.1 ↔
+      CellularAutomata.NecSuf.IterateMonoidCycleIdempotent.cycleIdempotent
+        (fun _ : Unit → State => zeroConfig) _ y = (fun _ : Unit → State => zeroConfig) q'.1
+    rw [hE, hF]
+  refine ⟨q, ?_⟩
+  rw [h1, h2, hF]
+  exact hq'
+
+end Derivation
 
 end CellularAutomata.IterateMonoidStableFiberDynamics
