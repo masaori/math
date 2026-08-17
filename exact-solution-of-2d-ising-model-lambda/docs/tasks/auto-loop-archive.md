@@ -3,6 +3,11 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 406 で台帳から移した記録（tick 401 の現在地・前進、tick 394 のレビュー）
+
+- tick 401 は「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じ、`claim_critical_point_mem_real_closed`（主定理の印）を `claim_two_is_square_in_real_closed` の直後に置いた。$s=a+b\omega$ の一意表示から $2ab=0$ を読み、$a=0$ の枝を $-2$ の非平方性で潰した。SageMath 5 節、Lean 具体版（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。sorry 検査 1390 件・check 492 ブロック・PDF 267 ページ通過。詳細は `MEMORY.md` の tick 401 の記録にある。
+- tick 394 のレビュー: 前 tick の「相異なる点の重複度は、一次因子を割り出した商へ引き継がれる」の本文・SageMath・Lean 具体版・必要十分版からの導出版を突き合わせ、一致した。修正なし。「何も言っていない主張」の観点では、$g\ne0$ は重複度の well-defined 性を担い、主不等式は帰納法が残りの各点へ繰り返し使うため残す。
+
 ## 2026-08-18 tick 405 で台帳から移した記録（tick 400）
 
 - tick 400 は「実閉部分体では二つの平方の和がまた平方である」と「$R$ では $2$ が平方であり $-2$ は平方でない」を四層で閉じた。$u^2=x+y\omega$ の一意表示と Gauss の恒等式から平方の和の閉性を出し、$x=y=1$ へ適用した。SageMath 4 節、Lean 具体版・必要十分版・導出版を通過した。詳細は `MEMORY.md` の tick 400 の記録にある。

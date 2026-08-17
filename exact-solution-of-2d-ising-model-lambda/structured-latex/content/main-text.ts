@@ -34031,6 +34031,98 @@ A\cdot A
   },
 
   {
+    id: "fisher_zero_claim_positive_rational_in_positive_cone",
+    kind: "claim",
+    title: { text: "正の有理数は正錐の元である" },
+    labels: ["claim_positive_rational_in_positive_cone"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/positive-rational-in-positive-cone"],
+    lean: [
+      "Ising2DLambda.FisherZero.positiveRational_mem_positiveCone",
+      "Ising2DLambda.NecSuf.FisherZero.positive_of_representation_necSuf",
+      "Ising2DLambda.FisherZero.positiveRational_mem_positiveCone_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "（", math(String.raw`\mathbb{Q}`),
+        " は ", ref("def_algebraic_numbers"),
+        " の第 1 条件により ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体なので、", math(String.raw`q`),
+        " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の元でもある）について、",
+        math(String.raw`q\in Q_s`),
+        "（", ref("def_quadratic_field_set"), "）であり、",
+        math(String.raw`q\in P_s`),
+        "（", ref("def_quadratic_positive_cone"), "）である。",
+      ]),
+      paragraph([
+        "この主張は、のちに分配多項式の臨界点での値を評価するとき、",
+        "自然数係数 ", math(String.raw`\Omega_L(m)\ge1`),
+        " を正錐の元として扱う根拠になる（正錐は積で閉じる。",
+        ref("claim_quadratic_positive_cone_mul_closed"), "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず所属を示す。",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q
+&=q+0
+&&(\because\ \text{加法単位元})\\
+&=q+0\cdot s
+&&(\because\ \text{零元の乗法})
+\end{aligned}`),
+      paragraph([
+        "であり、", math(String.raw`q\in\mathbb{Q}`),
+        "、", math(String.raw`0\in\mathbb{Q}`),
+        " なので、組 ", math(String.raw`(q,0)`),
+        " は ", ref("def_quadratic_field_set"),
+        " の存在条件の証人である。ゆえに ",
+        math(String.raw`q\in Q_s`), " である。表示の一意性（",
+        ref("claim_quadratic_representation_unique"),
+        "）により ",
+        math(String.raw`\mathrm{rep}_s(q)=(q,0)`),
+        "（", ref("def_quadratic_representation_map"), "）である。",
+      ]),
+      paragraph([
+        math(String.raw`(a,b):=(q,0)`),
+        " と置き、", ref("def_quadratic_positive_cone"),
+        " の第一の条件（",
+        math(String.raw`0\le a`),
+        " かつ ",
+        math(String.raw`0\le b`),
+        " かつ ",
+        math(String.raw`(a,b)\ne(0,0)`),
+        "）を確かめる。不等号はすべて有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序である。仮定 ",
+        math(String.raw`0<q`),
+        " から ", math(String.raw`0\le a=q`),
+        " である。", math(String.raw`b=0`),
+        " なので ", math(String.raw`0\le b`),
+        " である。", math(String.raw`q\ne0`),
+        "（", math(String.raw`0<q`),
+        " と ", math(String.raw`\mathbb{Q}`),
+        " の順序の非反射性）なので ",
+        math(String.raw`(a,b)=(q,0)\ne(0,0)`),
+        " である。三つの比較がすべて成り立つので第一の条件が満たされ、",
+        ref("def_quadratic_positive_cone"),
+        " により ", math(String.raw`q\in P_s`),
+        " である。全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "fisher_zero_claim_self_dual_root_plus_mem",
     kind: "claim",
     title: { text: "根 −1+s の所属" },

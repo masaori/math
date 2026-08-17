@@ -1028,6 +1028,10 @@ targets=(
   Ising2DLambda.FisherZero.selfDualPositiveRoot_unique
   Ising2DLambda.NecSuf.FisherZero.positive_root_unique_necSuf
   Ising2DLambda.FisherZero.selfDualPositiveRoot_unique_from_necSuf
+  Ising2DLambda.FisherZero.positiveRational_mem_quadraticFieldSet
+  Ising2DLambda.FisherZero.positiveRational_representation
+  Ising2DLambda.FisherZero.positiveRational_mem_positiveCone
+  Ising2DLambda.FisherZero.positiveRational_mem_positiveCone_from_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
   Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf

@@ -146,6 +146,7 @@ export const ALL_LABELS = [
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
   "claim_permutation_sign_values",
+  "claim_positive_rational_in_positive_cone",
   "claim_positive_rational_not_fisher_zero",
   "claim_power_sum_telescope",
   "claim_prod_orbit_decomposition",

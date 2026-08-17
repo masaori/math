@@ -4,6 +4,11 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 406 は、最終章の残り「先頭距離 $d_1(L)$ の定義と正値性」を論法単位の 5 行（正の有理数は正錐／正錐の元の冪は正錐／分配多項式の臨界点での値が正錐で $x_c\notin\mathcal F_L$／距離の二乗の零性は臨界点との一致と同値／最小元の定義と正値性）へ割り直し、その最初「正の有理数は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_positive_rational_in_positive_cone`（`claim_quadratic_positive_cone_mul_closed` の直後）: 任意の $q\in\mathbb Q_{>0}$ について $q\in Q_s$（証人 $(q,0)$）かつ $q\in P_s$（第一条件）。のちに $\Omega_L(m)\ge1$ 倍を「正の有理数×正錐の元」の積として `claim_quadratic_positive_cone_mul_closed` で処理するための土台である。
+SageMath `check/positive-rational-in-positive-cone/`（$s$ 2 通り × 正の有理数 6 個、非正 4 個は三条件のどれも満たさないこと。`QQ`/`QQbar` 厳密）。Lean 具体版 `FisherZero/PositiveRationalInPositiveCone.lean`（`positiveRational_mem_quadraticFieldSet`・`positiveRationalElement`・`positiveRational_representation`・`positiveRational_mem_positiveCone`）。**必要十分版は新設していない**——`NecSuf/FisherZero/SelfDualPositiveRoot.lean` の `positive_of_representation_necSuf`（表示と正条件だけを仮定に取る）が同一の議論を既に持つので、導出版 `PositiveRationalInPositiveConeFromNecSuf.lean` がそれを引く。sorry 検査 1403 件・check 497 ブロック・linkage 280 件・PDF 269 ページ通過。
+次は「正錐の元の冪は正錐の元である」（$1\in P_s$ は今 tick の主張を $q=1$ に当てる。$\xi^m\in P_s$ は `claim_quadratic_positive_cone_mul_closed` の帰納法。冪が $Q_s$ に留まることは `claim_quadratic_multiplication_mem` の帰納法。**Q_s の元の冪の表記と、$Q_s$ 上の冪が $\overline{\mathbb Q}$ の冪と一致することの扱いを着手時に確認すること**——本文の $\mathrm{Ev}^F$ は $\overline{\mathbb Q}$ の冪で書かれている）。
+
 2026-08-18 の tick 405 は、最終章 4 行目「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_fisher_zero_set_nonempty`: $(0,0)$ のスピンだけを反転した配位では最初の横辺が破れるため、$m:=b(\sigma_{\mathrm{flip}})\ge1$ かつ $\Omega_L(m)\ge1$。よって $Z_L$ の正次数係数は零でなく、係数を $\overline{\mathbb Q}$ へ送った多項式の次数も零でない。`def_algebraic_numbers` の代数閉性で根を取り、持ち上げの評価の一致から $\xi\in\mathcal F_L$ を得た。$L=1$ は $Z_1=2$ で $\mathcal F_1=\varnothing$。
 SageMath `check/fisher-zero-set-nonempty/`（$L=1$ の例外、$L=2,3$ の一スピン反転・正次数係数・`QQbar` の根）。Lean 具体版 `FisherZero/FisherZeroSetNonempty.lean`、必要十分版（正次数の非零係数と根の供給だけ）、導出版。sorry 検査 1399 件・check 496 ブロック・linkage 279 件・PDF 269 ページ通過。次は「先頭距離 $d_1(L)$ の定義と正値性」。
