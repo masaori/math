@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 408 は、台帳の先頭行「分配多項式の臨界点での値は正錐に入り、$x_c$ は Fisher 零点でない」を論法単位の 3 行（自然数倍の場合分け／有限和の帰納法／背理法）へ割り、その最初「正錐の元の自然数倍は零元または正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_quadratic_positive_cone_nat_mul`（`claim_quadratic_positive_cone_pow_closed` の直後）: $\xi\in P_s$ と $c\in\mathbb N$（鎖 $\mathbb N\subset\mathbb Q\subset\overline{\mathbb Q}$ で送る）について $c\cdot\xi\in Q_s$、$c=0$ ならば $c\cdot\xi$ は零元、$1\le c$ ならば $c\cdot\xi\in P_s$。零の場合は証人 $(0,0)$、正の場合は `claim_positive_rational_in_positive_cone` を $q=c$ へ当てて `claim_quadratic_multiplication_mem`・`claim_quadratic_positive_cone_mul_closed` で閉じる。
+SageMath `check/positive-cone-nat-mul/`（$s$ 2 通り × 正錐の代表 4 個 × $c\in\{0,1,2,3,5,7\}$ の 48 組。`QQ`/`QQbar` 厳密）。Lean 具体版 `FisherZero/PositiveConeNatMul.lean`（`quadraticNatMulElement`・`quadraticNatMulElement_coe`・`quadraticNatMulElement_zero_or_mem_positiveCone`）、必要十分版 `NecSuf/FisherZero/PositiveConeNatMul.lean`（`natIndexed_mul_zero_or_mem_necSuf`。自然数の場合分け・零吸収・正の添字の所属・閉性だけで、環も体も順序も使わない）、導出版 `PositiveConeNatMulFromNecSuf.lean`。sorry 検査 1411 件・check 499 ブロック・verify-check-linkage 282 件・build:pdf 270 ページ通過。
+次は「分配多項式の臨界点での値は正錐の元である」（有限和の帰納法。各項は今 tick の自然数倍、和は `claim_quadratic_positive_cone_add_closed`。**正の項の存在に $\Omega_L(0)\ge1$（全スピン一致の配位）を使うが、本文にその主張があるか着手時に確認すること**——無ければ証明内で示すか先に別行で置く。部分和が零元の場合の帰納法の述べ方（「零元または正錐の元」を保つ）に注意）。
+
+（tick 407 の記録）
 2026-08-18 の tick 407 は、最終章の残り「正錐の元の冪は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_quadratic_positive_cone_pow_closed`: $\xi\in P_s$ と $m\in\mathbb N$ ならば $\xi^m\in Q_s$ かつ $\xi^m\in P_s$。$m=0$ は tick 406 の $1\in P_s$、帰納段は `claim_quadratic_multiplication_mem` と `claim_quadratic_positive_cone_mul_closed` を引く。SageMath `check/positive-cone-pow/` は $s$ 2 通り・正錐の代表例 4 個・指数 $0$ から $9$ までの帰納段 72 件を `QQ`/`QQbar` で厳密確認した。Lean 具体版 `FisherZero/PositiveConePow.lean`、必要十分版 `NecSuf/FisherZero/PositiveConePow.lean`、導出版 `PositiveConePowFromNecSuf.lean`。sorry 検査 1407 件・check 498 ブロック・linkage 281 件・PDF 270 ページ通過。
 レビューでは tick 406 の正の有理数の正錐所属を四層で突き合わせ、修正なし。これは今 tick の基底と後続の自然数係数倍が直接引くため「何も言っていない主張」ではない。式変形統一は姉妹側 `004_transfer_matrix.ts` の Step 2 で、$\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ の導出を一続き三段・各行の根拠つきへ揃え、check・PDF 325 ページを通した。

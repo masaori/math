@@ -3,6 +3,11 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 408 で台帳から移した記録（tick 403 の現在地・前進、tick 402 のレビュー）
+
+- tick 403 の現在地: 最小元の行の前提として欠けていた狭義順序の推移律を四層で閉じ、`claim_real_algebraic_order_transitive` を `claim_two_is_square_in_real_closed` の直後に置いた（本文の三分法は網羅性だけで、推移律は無かった。前 tick の MEMORY に「確認せよ」と書いた点を着手時に確認した結果である）。証明は $c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ の一続き三段のあと、`claim_real_closed_sum_of_two_squares_is_square` で平方に書き直し、証人の非零性を `claim_real_closed_sum_of_two_squares_zero` から出す。SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデル）、Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`・必要十分版（可換環で 2 性質を仮定に取る形）・導出版。sorry 検査 1394 件・check 494 ブロック・verify-check-linkage 277 件・build:pdf 268 ページ通過。
+- tick 402 のレビュー: tick 401 の「臨界点が実閉部分体の元であること」の本文・SageMath・Lean を突き合わせ、論法の一致を確認した。修正なし。tick 402 の初稿は 1 ブロック内の二定義と未使用の一致補題を削除した。
+
 ## 2026-08-18 tick 406 で台帳から移した記録（tick 401 の現在地・前進、tick 394 のレビュー）
 
 - tick 401 は「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じ、`claim_critical_point_mem_real_closed`（主定理の印）を `claim_two_is_square_in_real_closed` の直後に置いた。$s=a+b\omega$ の一意表示から $2ab=0$ を読み、$a=0$ の枝を $-2$ の非平方性で潰した。SageMath 5 節、Lean 具体版（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。sorry 検査 1390 件・check 492 ブロック・PDF 267 ページ通過。詳細は `MEMORY.md` の tick 401 の記録にある。

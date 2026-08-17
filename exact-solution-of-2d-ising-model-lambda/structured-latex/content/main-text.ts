@@ -34198,6 +34198,104 @@ q
   },
 
   {
+    id: "fisher_zero_claim_positive_cone_nat_mul",
+    kind: "claim",
+    title: { text: "正錐の元の自然数倍は零元または正錐の元である" },
+    labels: ["claim_quadratic_positive_cone_nat_mul"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/positive-cone-nat-mul"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticNatMulElement_zero_or_mem_positiveCone",
+      "Ising2DLambda.NecSuf.FisherZero.natIndexed_mul_zero_or_mem_necSuf",
+      "Ising2DLambda.FisherZero.quadraticNatMulElement_zero_or_mem_positiveCone_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
+        math(String.raw`\xi\in P_s`),
+        "（", ref("def_quadratic_positive_cone"), "）と任意の ",
+        math(String.raw`c\in\mathbb{N}`),
+        " を取る。", math(String.raw`c`), " は鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), " の第 1 条件）で ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の元として扱う。このとき積 ",
+        math(String.raw`c\cdot\xi`),
+        "（", math(String.raw`\overline{\mathbb{Q}}`), " の乗法）は ",
+        math(String.raw`Q_s`),
+        "（", ref("def_quadratic_field_set"), "）に属する。さらに、",
+        math(String.raw`c=0`), " ならば ", math(String.raw`c\cdot\xi`),
+        " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の零元であり、", math(String.raw`1\le c`),
+        " ならば ", math(String.raw`c\cdot\xi\in P_s`), " である。",
+      ]),
+      paragraph([
+        "この主張は、分配多項式の臨界点での値 ",
+        math(String.raw`\sum_{m}\Omega_L(m)\,x_c^{m}`),
+        " の各項を評価するとき、多重度 ",
+        math(String.raw`\Omega_L(m)\in\mathbb{N}`),
+        " が零の項と正の項を分けて扱う根拠として繰り返し使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c=0`), " の場合と ",
+        math(String.raw`1\le c`),
+        " の場合に分ける（自然数の順序では他の場合はない）。",
+      ]),
+      paragraph([
+        math(String.raw`c=0`), " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c\cdot\xi
+&=0\cdot\xi
+&&\bigl(\because\ c=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、組 ", math(String.raw`(0,0)`),
+        " が ", ref("def_quadratic_field_set"),
+        " の存在条件の証人になる（",
+        math(String.raw`0=0+0\cdot s`),
+        "。", math(String.raw`\mathbb{Q}`), " と ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の四則）から ", math(String.raw`c\cdot\xi=0\in Q_s`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`1\le c`), " の場合。",
+        math(String.raw`\mathbb{Q}`), " の順序で ",
+        math(String.raw`0<1\le c`),
+        " なので、推移律により ",
+        math(String.raw`c\in\mathbb{Q}_{>0}`),
+        " である。", ref("claim_positive_rational_in_positive_cone"),
+        " を ", math(String.raw`q=c`), " へ適用して ",
+        math(String.raw`c\in Q_s`), " かつ ",
+        math(String.raw`c\in P_s`),
+        " を得る。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c\cdot\xi
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr),\\
+c\cdot\xi
+&\in P_s
+&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\text{ を }c\in P_s\text{ と }\xi\in P_s\text{ へ適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も ",
+        math(String.raw`c\cdot\xi\in Q_s`),
+        " が成り立つ。全過程は自然数の場合分け、有理数の四則と順序、",
+        "および代数的数の積だけで閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "fisher_zero_claim_self_dual_root_plus_mem",
     kind: "claim",
     title: { text: "根 −1+s の所属" },

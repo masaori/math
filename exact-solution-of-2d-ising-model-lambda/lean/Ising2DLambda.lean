@@ -574,6 +574,9 @@ import Ising2DLambda.FisherZero.PositiveRationalInPositiveConeFromNecSuf
 import Ising2DLambda.FisherZero.PositiveConePow
 import Ising2DLambda.NecSuf.FisherZero.PositiveConePow
 import Ising2DLambda.FisherZero.PositiveConePowFromNecSuf
+import Ising2DLambda.FisherZero.PositiveConeNatMul
+import Ising2DLambda.NecSuf.FisherZero.PositiveConeNatMul
+import Ising2DLambda.FisherZero.PositiveConeNatMulFromNecSuf
 import Ising2DLambda.FisherZero.KwDualPreservesUnitInterval
 import Ising2DLambda.NecSuf.FisherZero.KwDualPreservesUnitInterval
 import Ising2DLambda.FisherZero.KwDualPreservesUnitIntervalFromNecSuf
