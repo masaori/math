@@ -130,4 +130,55 @@ b_{G_Q}(\mathfrak F_Q(\sigma))
       ]),
     ],
   },
+  {
+    id: "arithmetic_invariants_definition_fixed_quotient_coefficient_valuation",
+    kind: "definition",
+    title: { text: "固定剰余類格子の係数付値" },
+    labels: ["def_fixed_quotient_coefficient_valuation"],
+    habitat: "Z",
+    verification: ["sagemath/check/fixed-quotient-coefficient-valuations"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_coefficient_support"),
+        " の有限支持 ",
+        math(String.raw`S_Q`),
+        " と、素数 ",
+        math(String.raw`p\in\mathbb N_{>1}`),
+        " を固定する。各 ",
+        math(String.raw`m\in S_Q`),
+        " に対する係数付値写像を",
+      ]),
+      displayMath(String.raw`\nu_{Q,p}:S_Q\longrightarrow\mathbb N,
+\qquad
+\nu_{Q,p}(m)\in\mathbb N\subset\mathbb Z`),
+      paragraph(["と定め、各値を"]),
+      displayMath(String.raw`\nu_{Q,p}(m):=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists r\in\mathbb N_{>0},\ \Omega_{G_Q}(m)=p^k r
+\right\}`),
+      paragraph([
+        "で定める。",
+        ref("theorem_fixed_quotient_coefficient_support"),
+        " より ",
+        math(String.raw`\Omega_{G_Q}(m)\in\mathbb N_{>0}`),
+        " なので、最大値を取る集合は ",
+        math(String.raw`k=0`),
+        " を含む。さらに、この集合に属する ",
+        math(String.raw`k`),
+        " は ",
+        math(String.raw`p^k\leq\Omega_{G_Q}(m)`),
+        " を満たし、",
+        math(String.raw`p\geq2`),
+        " なので、この集合は有限である。したがって ",
+        math(String.raw`\nu_{Q,p}(m)`),
+        " は一意に定まる。この値は ",
+        math(String.raw`\Omega_{G_Q}(m)`),
+        " を ",
+        math(String.raw`p`),
+        " で割り切れる間だけ反復して割った回数として、係数の完全因数分解を用いずに決定できる。全ての対象は自然数または整数に属し、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
