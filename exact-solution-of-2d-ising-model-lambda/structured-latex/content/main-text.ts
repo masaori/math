@@ -35840,6 +35840,73 @@ x\cdot x+y\cdot y
   },
 
   {
+    id: "zero_pinching_claim_real_algebraic_order_transitive",
+    kind: "claim",
+    title: { text: "実代数的数の狭義順序は推移的である" },
+    labels: ["claim_real_algebraic_order_transitive"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/real-algebraic-order-transitive"],
+    lean: [
+      "Ising2DLambda.FisherZero.realAlgebraicLt_trans",
+      "Ising2DLambda.NecSuf.FisherZero.lt_of_difference_trans_necSuf",
+      "Ising2DLambda.FisherZero.realAlgebraicLt_trans_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`a,b,c\in R`), "（", ref("def_real_closed_subfield"),
+        "）が ", math(String.raw`a<_{R}b`), " かつ ", math(String.raw`b<_{R}c`),
+        " を満たすならば ", math(String.raw`a<_{R}c`), " である（",
+        ref("def_real_algebraic_strict_order"), "）。",
+      ]),
+      paragraph([
+        ref("claim_real_algebraic_order_trichotomy"),
+        " は場合分けの網羅性だけを与えるので、推移律はそこからは出ない。",
+        "証明は ", ref("claim_real_closed_sum_of_two_squares_is_square"), " と ",
+        ref("claim_real_closed_sum_of_two_squares_zero"),
+        " の 2 つに帰着する。最小元の存在（有限集合の中で「どの元以下」を言う段）で引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_real_algebraic_strict_order"), " により、零でない ",
+        math(String.raw`u,v\in R`), " が存在して ",
+        math(String.raw`b-a=u\cdot u`), " かつ ", math(String.raw`c-b=v\cdot v`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c-a
+&=(c-b)+(b-a)
+&&(\because\ R\ \text{の加法（}b\ \text{が相殺する）})\\
+&=v\cdot v+u\cdot u
+&&(\because\ \text{上の 2 つの等式})\\
+&=u\cdot u+v\cdot v
+&&(\because\ R\ \text{の加法の可換則})
+\end{aligned}`),
+      paragraph([
+        "である。", ref("claim_real_closed_sum_of_two_squares_is_square"),
+        " を ", math(String.raw`x:=u`), "、", math(String.raw`y:=v`),
+        " に当てると、ある ", math(String.raw`w\in R`), " が存在して ",
+        math(String.raw`u\cdot u+v\cdot v=w\cdot w`), " である。",
+      ]),
+      paragraph([
+        math(String.raw`w\ne0`), " である。実際 ", math(String.raw`w=0`),
+        " ならば ", math(String.raw`u\cdot u+v\cdot v=0\cdot0=0`), " となり、",
+        ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
+        math(String.raw`u=0`), " となるが、", math(String.raw`u\ne0`), " に反する。",
+      ]),
+      paragraph([
+        "よって ", math(String.raw`c-a=w\cdot w`), " を満たす零でない ",
+        math(String.raw`w\in R`), " が取れたので、",
+        ref("def_real_algebraic_strict_order"), " により ",
+        math(String.raw`a<_{R}c`), " である。",
+        "使ったのは ", math(String.raw`R`),
+        " の加法と、平方の和が平方であること、平方の和が零なら両方が零であることだけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "zero_pinching_claim_critical_point_mem_real_closed",
     kind: "claim",
     standing: "mainTheorem",
