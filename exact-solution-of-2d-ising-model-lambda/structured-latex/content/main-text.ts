@@ -50924,6 +50924,74 @@ N^{\mathrm{mult}}_{L}(c,r)
   },
 
   {
+    id: "critical_exponent_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "臨界指数を零点列で書く" },
+    labels: [],
+  },
+
+  {
+    id: "critical_exponent_def_leading_distance",
+    kind: "definition",
+    title: { text: "先頭距離" },
+    labels: ["def_leading_distance"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.leadingDistanceFinset",
+      "Ising2DLambda.CriticalExponent.leadingDistance",
+      "Ising2DLambda.CriticalExponent.leadingDistance_isMin",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`2\le L`),
+        " とする。集合 ", math(String.raw`D_L`), " を",
+      ]),
+      displayMath(
+        String.raw`D_L:=\left\{\,y\in R\ \middle|\ \text{ある}\ \xi\in\mathcal{F}_{L}\ \text{が存在して}\ y=\mathrm{dsq}_{c}(\xi)\,\right\}`,
+      ),
+      paragraph([
+        "で定める（", math(String.raw`\mathcal{F}_{L}`), " は ",
+        ref("def_finite_lattice_fisher_zeros"), "、",
+        math(String.raw`\mathrm{dsq}_{c}`), " は ",
+        ref("def_distance_squared_to_critical_point"), "、",
+        math(String.raw`R`), " は ", ref("def_real_closed_subfield"), "）。",
+        math(String.raw`D_L`), " は ", math(String.raw`R`),
+        " の空でない有限部分集合である。空でないことは、",
+        ref("claim_fisher_zero_set_nonempty"), " により ",
+        math(String.raw`\mathcal{F}_{L}`), " の元 ", math(String.raw`\xi`),
+        " が取れ、", math(String.raw`\mathrm{dsq}_{c}(\xi)\in D_L`),
+        " となることによる。有限であることは、",
+        ref("claim_fisher_zero_set_finite_card_bound"), " により ",
+        math(String.raw`\mathcal{F}_{L}`), " が有限集合であり、",
+        math(String.raw`D_L`), " のどの元もある ", math(String.raw`\xi\in\mathcal{F}_{L}`),
+        " の値 ", math(String.raw`\mathrm{dsq}_{c}(\xi)`),
+        " なので、相異なる元の個数が ", math(String.raw`\mathcal{F}_{L}`),
+        " の元の個数を超えないことによる。",
+      ]),
+      paragraph([
+        "したがって ", ref("claim_real_algebraic_min_unique"), " を ",
+        math(String.raw`X:=D_L`), " へ当てると、",
+        math(String.raw`D_L`), " の最小元がちょうど 1 つ存在する。それを ",
+        math(String.raw`d_{1}(L)\in R`),
+        " と書き、格子の大きさ ", math(String.raw`L`),
+        " の先頭距離と呼ぶ。すなわち ", math(String.raw`d_{1}(L)`), " は",
+      ]),
+      displayMath(
+        String.raw`d_{1}(L)\in D_L\quad\text{かつ}\quad\text{任意の}\ y\in D_L\ \text{について}\ \bigl(y=d_{1}(L)\ \text{または}\ d_{1}(L)<_{R}y\bigr)`,
+      ),
+      paragraph([
+        "を満たすただ 1 つの ", math(String.raw`R`), " の元である（",
+        math(String.raw`<_{R}`), " は ", ref("def_real_algebraic_strict_order"), "）。",
+        "のちにこの値が零でないこと（正値性）を示し、列 ",
+        math(String.raw`\{d_{1}(L)\}_{L\ge2}`),
+        " を零点の詰め寄りの述語と結ぶ。全体は ", math(String.raw`R`),
+        " の中の定義であり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

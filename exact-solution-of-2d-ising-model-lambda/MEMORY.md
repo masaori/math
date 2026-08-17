@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 412 は、台帳の先頭行「先頭距離 $d_1(L)$ の定義と正値性」を論法単位の 2 行（定義の well-defined 性／正値性）へ割り、その最初「先頭距離 $d_1(L)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。
+最終章の見出し「臨界指数を零点列で書く」を熱力学極限章の後に立て、`def_leading_distance` をその先頭に置いた（well-defined 性が熱力学極限章の `claim_fisher_zero_set_finite_card_bound` を引くため、前方参照を作らない位置はここになる。零点の詰め寄り章の末尾に置くと有限性への前方参照が生じる）。$D_L:=\{y\in R\mid\exists\xi\in\mathcal F_L,\ y=\mathrm{dsq}_c(\xi)\}$ は空でなく（`claim_fisher_zero_set_nonempty`）有限（どの元もある $\xi$ の値なので元の個数は $\mathcal F_L$ を超えない）。`claim_real_algebraic_min_unique` を当てて最小元 $d_1(L)\in R$ を取った。
+Lean 具体版 `CriticalExponent/LeadingDistance.lean`（新ディレクトリ。`leadingDistanceFinset` は `(fisherZeroSet_finite_ncard_le L).1.image` の `Set.Finite.toFinset`、`leadingDistance` は `existsUnique_realAlgebraicMin` の `Classical.choose`、spec は `leadingDistance_isMin`・`leadingDistance_unique`）。sorry 検査 1427 件・check 504 ブロック・linkage 285 件・PDF 273 ページ通過。
+レビューでは tick 411 の零性同値を四層で突き合わせ、修正なし。式変形統一は姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」の Step 5 末尾で、散文中の二等号の鎖 $(\mathbf{end}(E_{I,J}))(f_K)=\Theta_{I,J}(f_K)=\delta_{J,K}f_I$ を一続き二段・各行の根拠つきへ揃えた（姉妹側 check・PDF 326 ページ通過）。
+次は「先頭距離の正値性」。$d_1(L)\in D_L$ の証人 $\xi\in\mathcal F_L$ を取り、$d_1(L)=\mathrm{dsq}_c(\xi)$。非零は `claim_critical_distance_squared_zero_iff_equal`（零なら $\xi=x_c$）と `claim_critical_point_not_fisher_zero`（$x_c\notin\mathcal F_L$）の背理法。正は `claim_real_closed_sum_of_two_squares_is_square`（$\mathrm{dsq}_c$ は二平方和なので平方 $w\cdot w$）＋非零から $w\ne0$＋三分法と順序の定義で $0<_Rd_1(L)$。**着手時に、順序 $<_R$ の定義（`def_real_algebraic_strict_order`）が「差が非零の平方」の形かを確認すること**（形が合えば場合分けなしで閉じる）。
+
 2026-08-18 の tick 411 は、台帳の先頭行「零点と臨界点の距離の二乗の零性は一致と同値」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_distance_squared_zero_iff_equal`: 一意表示 $\xi=a+b\omega$ と $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi)=0\iff\xi=x_c$ を有理点版と同じ背理法で示した。SageMath は二根・18 組を厳密確認。Lean 具体版、既存の必要十分核、導出版。sorry 検査 1424 件・check 502 ブロック・linkage 285 件・PDF 272 ページ通過。
 レビューでは tick 410 の臨界点の非零性を四層で突き合わせ、修正なし。有限格子での非零性を述べ、先頭距離の正値性が直接引くので「何も言っていない主張」ではない。式変形統一は姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」の Step 1 の線型独立性の三等号を一続き三段へ揃えた。

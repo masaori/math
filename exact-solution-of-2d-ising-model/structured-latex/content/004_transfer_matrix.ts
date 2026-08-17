@@ -1493,11 +1493,17 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &&(\because\ \delta_{J,K}=\prod_{m=1}^{M}\delta_{j_m,k_m})
 \end{aligned}`,
       ),
-      paragraph([
-        "であり、左辺は ",
-        math(String.raw`\left(\mathbf{end}(E_{I,J})\right)(f_K) = \Theta_{I,J}(f_K) = \delta_{J,K}f_I`),
-        " であるから一致する。",
-      ]),
+      paragraph(["であり、左辺は"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\mathbf{end}(E_{I,J})\right)(f_K)
+&= \Theta_{I,J}(f_K)
+&&(\because\ \mathbf{end}(E_{I,J})=\Theta_{I,J}\ \text{（}\mathbf{end}\ \text{の定義）})\\
+&= \delta_{J,K}f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）})
+\end{aligned}`,
+      ),
+      paragraph(["であるから一致する。"]),
     ],
     conversion: {
       status: "added",

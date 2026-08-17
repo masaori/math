@@ -399,6 +399,7 @@ export const ALL_LABELS = [
   "def_inversion_pairs",
   "def_kw_dual_transform",
   "def_lattice",
+  "def_leading_distance",
   "def_log_order_group",
   "def_log_order_group_order",
   "def_matrix_over_row_configs",

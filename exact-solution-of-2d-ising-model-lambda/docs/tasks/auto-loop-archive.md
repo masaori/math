@@ -3,6 +3,12 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 412 で台帳から移した記録（tick 407）
+
+- tick 407 の現在地・前進: 台帳の先頭行「正錐の元の冪は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。`claim_quadratic_positive_cone_pow_closed`: $\xi\in P_s$ と $m\in\mathbb N$ に対して $\xi^m\in Q_s$ かつ $\xi^m\in P_s$。$m=0$ は tick 406 の $1\in P_s$、帰納段は `claim_quadratic_multiplication_mem` と `claim_quadratic_positive_cone_mul_closed` を引いた。SageMath `check/positive-cone-pow/`（$s$ 2 通り × 正錐の代表例 4 個 × $m=0,\ldots,9$、帰納段 72 件。`QQ`/`QQbar` 厳密）。Lean 具体版・必要十分版・導出版。sorry 検査 1407 件・check 498 ブロック・verify-check-linkage 281 件・build:pdf 270 ページ通過。
+- tick 407 の式変形統一: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の Step 2 で、散文と単独の等式に分かれていた $\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ の導出を一続き三段・各行の根拠つきへ揃えた（内容不変）。姉妹側 check・PDF 325 ページ通過。
+- tick 407 のレビュー: tick 406 の「正の有理数は正錐の元である」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。
+
 ## 2026-08-18 tick 411 で台帳から移した記録（tick 406）
 
 - tick 406 の現在地・前進: 「先頭距離の定義と正値性」を論法単位の 5 行へ割り、その最初「正の有理数は正錐の元である」を四層で閉じた。`claim_positive_rational_in_positive_cone`、SageMath、Lean 具体版・既存必要十分版からの導出版。sorry 検査 1403 件・check 497 ブロック・PDF 269 ページ通過。
