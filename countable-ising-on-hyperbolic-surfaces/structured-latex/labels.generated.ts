@@ -48,6 +48,7 @@ export const ALL_LABELS = [
   "def_first_cycle_space_over_f2",
   "def_first_homology_group_over_f2",
   "def_fixed_quotient_coefficient_valuation",
+  "def_fixed_quotient_rational_evaluation_valuation",
   "def_formal_edge_weight_sum",
   "def_homology_class_generating_polynomial",
   "def_hyperbolic_triangle_permutation_quotient_input",

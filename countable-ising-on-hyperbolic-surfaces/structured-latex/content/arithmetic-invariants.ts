@@ -181,4 +181,70 @@ b_{G_Q}(\mathfrak F_Q(\sigma))
       ]),
     ],
   },
+  {
+    id: "arithmetic_invariants_definition_fixed_quotient_rational_evaluation_valuation",
+    kind: "definition",
+    title: { text: "固定剰余類格子の正有理評価値の付値" },
+    labels: ["def_fixed_quotient_rational_evaluation_valuation"],
+    habitat: "Z",
+    verification: ["sagemath/check/fixed-quotient-rational-evaluation-valuations"],
+    statement: [
+      paragraph([
+        "素数 ",
+        math(String.raw`p\in\mathbb N_{>1}`),
+        " を固定する。各 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " に対し、互いに素な ",
+        math(String.raw`a_q,b_q\in\mathbb N_{>0}`),
+        " を ",
+        math(String.raw`q=a_q/b_q`),
+        " により一意に選ぶ。",
+        ref("theorem_fixed_quotient_ising_partition_polynomial"),
+        " の次数が ",
+        math(String.raw`56`),
+        " であることを用いて、分母を払った評価整数を",
+      ]),
+      displayMath(String.raw`E_Q(q):=
+b_q^{56}Z_{G_Q}\!\left(\frac{a_q}{b_q}\right)
+=\sum_{m=0}^{56}\Omega_{G_Q}(m)a_q^m b_q^{56-m}
+\in\mathbb N_{>0}`),
+      paragraph([
+        "と置く。正値性は ",
+        ref("theorem_fixed_quotient_ising_partition_polynomial"),
+        " の非負係数と正の定数項から従う。正有理評価付値写像を",
+      ]),
+      displayMath(String.raw`\operatorname{val}^{\mathrm{eval}}_{Q,p}:
+\mathbb Q_{>0}\longrightarrow\mathbb Z`),
+      paragraph(["とし、その値を"]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{val}^{\mathrm{eval}}_{Q,p}(q)
+&:=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists r\in\mathbb N_{>0},\ E_Q(q)=p^k r
+\right\}\\
+&\quad{}-56
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists s\in\mathbb N_{>0},\ b_q=p^k s
+\right\}
+\in\mathbb Z
+\end{aligned}`),
+      paragraph([
+        "で定める。二つの最大値は、",
+        ref("def_fixed_quotient_coefficient_valuation"),
+        " と同じ有限性の議論により一意に定まる。また",
+      ]),
+      displayMath(String.raw`Z_{G_Q}(q)=\frac{E_Q(q)}{b_q^{56}}\in\mathbb Q_{>0}`),
+      paragraph([
+        "なので、この整数は非零有理数 ",
+        math(String.raw`Z_{G_Q}(q)`),
+        " の分子に現れる ",
+        math(String.raw`p`),
+        " の指数から分母に現れる指数を引いた値である。計算には整数の整除判定と反復除算だけを用い、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
