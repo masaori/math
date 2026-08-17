@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 414 は、台帳の先頭行「先頭距離の列と詰め寄りの述語の接続（可算な言明）」を論法単位の 5 行（上界の同値／順序の加法単調性／和の平方の評価／臨界点への有理近似／接続の完成）へ割り、その最初「先頭距離が上界未満であることと上界未満の零点の存在は同値」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_leading_distance_lt_iff_close_zero`: $L\ge2$、$t\in R$ について $d_1(L)<_Rt\iff\exists\xi\in\mathcal F_L,\ \mathrm{dsq}_c(\xi)<_Rt$。左向きは $d_1(L)\in D_L$ の証人 $\xi$ を取って書き換え、右向きは $\mathrm{dsq}_c(\xi)\in D_L$ と最小性の場合分け（等しい枝は書き換え、大きい枝は `claim_real_algebraic_order_transitive`）。のちに $t:=\varepsilon\cdot\varepsilon$（$\varepsilon\in\mathbb Q_{>0}$）と取り、`def_zero_pinching_predicate` と同じ形の $\mathbb Q$ 上の量化の言明へ結ぶための接続である。
+SageMath `check/leading-distance-lt-iff/`（$L=2$ × $s$ 2 根 × 上界 4 個の 8 組で両条件の真偽の一致。`AA` 厳密、浮動小数点なし）。Lean 具体版 `CriticalExponent/LeadingDistanceLtIff.lean`、必要十分版 `NecSuf/CriticalExponent/LeadingDistanceLtIff.lean`（`min_lt_iff_exists_lt_necSuf`。証人の存在・最小性・推移律だけを仮定し、体・三分法・有限集合・零元を落とす。**mathlib を import しないファイルでは `Type*` 記法が使えないので宇宙変数で書く**）、導出版。sorry 検査 1433 件・check 506 ブロック・linkage 287 件・PDF 274 ページ通過。
+割った理由: `def_zero_pinching_predicate` は正の有理点への距離で書かれており、$d_1(L)$（臨界点への距離）と結ぶには順序の加法単調性・$(u+v)^2\le2u^2+2v^2$ 型の評価・$\sqrt2$ の有理近似がまだ本文に無い。セクション表に 4 行を足した。
+次は「順序の加法単調性」。$b<_Rc$ ならば $a+b<_Ra+c$。差 $(a+c)-(a+b)=c-b$ が変わらないことから、$<_R$ の定義（差が非零の平方）で直ちに閉じる見込み。
+
 2026-08-18 の tick 413 は、台帳の先頭行「先頭距離の正値性」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_leading_distance_positive`: $d_1(L)\in D_L$ の証人 $\xi\in\mathcal F_L$ を取り、$d_1(L)=0$ なら距離の零性同値から $\xi=x_c$ となって $x_c\notin\mathcal F_L$ に反するため $d_1(L)\ne0$。距離の二乗を $R$ の二つの平方の和として書き、平方の和の閉性で $d_1(L)=w^2$、非零性から $w\ne0$、狭義順序の定義から $0<_Rd_1(L)$ を得た。
 SageMath `check/leading-distance-positive/`（$L=2$ の全 16 Fisher 零点 × $s^2=2$ の二根。各距離と最小値の正値性、平方表示の厳密標本。`QQbar`/`AA`、浮動小数点なし）。Lean 具体版 `CriticalExponent/LeadingDistancePositive.lean`、必要十分版 `NecSuf/CriticalExponent/LeadingDistancePositive.lean`（候補点・距離の零性・基準点の排除・平方表示・平方による狭義順序だけを仮定し、体・三分法・有限集合・最小性を落とす）、導出版。sorry 検査 1430 件・check 505 ブロック・linkage 286 件・PDF 273 ページ通過。

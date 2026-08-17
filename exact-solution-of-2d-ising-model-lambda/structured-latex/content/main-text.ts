@@ -51081,6 +51081,105 @@ d_{1}(L)-0
   },
 
   {
+    id: "critical_exponent_claim_leading_distance_lt_iff",
+    kind: "claim",
+    title: { text: "先頭距離が上界未満であることと上界未満の零点の存在は同値" },
+    labels: ["claim_leading_distance_lt_iff_close_zero"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.leadingDistance_lt_iff",
+      "Ising2DLambda.NecSuf.CriticalExponent.min_lt_iff_exists_lt_necSuf",
+      "Ising2DLambda.CriticalExponent.leadingDistance_lt_iff_from_necSuf",
+    ],
+    verification: ["sagemath/check/leading-distance-lt-iff"],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`2\le L`),
+        "、", math(String.raw`t\in R`),
+        " とする（", math(String.raw`R`), " は ", ref("def_real_closed_subfield"),
+        "）。このとき、次の 2 条件は同値である。",
+      ]),
+      list([
+        [
+          "第一条件: ", math(String.raw`d_{1}(L)<_{R}t`),
+          "（", math(String.raw`d_{1}(L)`), " は ", ref("def_leading_distance"),
+          "、", math(String.raw`<_{R}`), " は ", ref("def_real_algebraic_strict_order"), "）。",
+        ],
+        [
+          "第二条件: ある ", math(String.raw`\xi\in\mathcal{F}_{L}`),
+          "（", ref("def_finite_lattice_fisher_zeros"), "）が存在して ",
+          math(String.raw`\mathrm{dsq}_{c}(\xi)<_{R}t`),
+          "（", math(String.raw`\mathrm{dsq}_{c}`), " は ",
+          ref("def_distance_squared_to_critical_point"), "）。",
+        ],
+      ]),
+      paragraph([
+        "この主張は、先頭距離の列 ", math(String.raw`\{d_{1}(L)\}_{L\ge2}`),
+        " についての言明を、個々の零点の存在についての言明へ引き直す接続である。",
+        "のちに上界を ", math(String.raw`t:=\varepsilon\cdot\varepsilon`),
+        "（", math(String.raw`\varepsilon\in\mathbb{Q}_{>0}`),
+        "）と取り、", ref("def_zero_pinching_predicate"),
+        " と同じ形の、", math(String.raw`\mathbb{Q}`),
+        " 上の量化だけによる詰め寄りの言明へ結ぶときに引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一条件から第二条件を示す。", math(String.raw`d_{1}(L)<_{R}t`),
+        " と仮定する。", ref("def_leading_distance"), " により ",
+        math(String.raw`d_{1}(L)\in D_L`), " だから、ある ",
+        math(String.raw`\xi\in\mathcal{F}_{L}`), " が存在して ",
+        math(String.raw`d_{1}(L)=\mathrm{dsq}_{c}(\xi)`), " である。この ",
+        math(String.raw`\xi`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{dsq}_{c}(\xi)
+&=d_{1}(L)
+&&(\because\ \xi\ \text{の取り方})\\
+&<_{R}t
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "であり、第二条件が成り立つ。",
+      ]),
+      paragraph([
+        "第二条件から第一条件を示す。ある ", math(String.raw`\xi\in\mathcal{F}_{L}`),
+        " が ", math(String.raw`\mathrm{dsq}_{c}(\xi)<_{R}t`),
+        " を満たすとする。", ref("def_leading_distance"), " の集合 ",
+        math(String.raw`D_L`), " の定め方により ",
+        math(String.raw`\mathrm{dsq}_{c}(\xi)\in D_L`), " だから、",
+        math(String.raw`d_{1}(L)`), " の最小性（", ref("def_leading_distance"),
+        "）により、", math(String.raw`\mathrm{dsq}_{c}(\xi)=d_{1}(L)`),
+        " または ", math(String.raw`d_{1}(L)<_{R}\mathrm{dsq}_{c}(\xi)`),
+        " のいずれかが成り立つ。場合に分ける。",
+      ]),
+      paragraph([
+        "第一の場合（", math(String.raw`\mathrm{dsq}_{c}(\xi)=d_{1}(L)`), "）:",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+d_{1}(L)
+&=\mathrm{dsq}_{c}(\xi)
+&&(\because\ \text{この場合の仮定})\\
+&<_{R}t
+&&(\because\ \text{第二条件})
+\end{aligned}`),
+      paragraph([
+        "第二の場合（", math(String.raw`d_{1}(L)<_{R}\mathrm{dsq}_{c}(\xi)`),
+        "）: ", math(String.raw`d_{1}(L)<_{R}\mathrm{dsq}_{c}(\xi)`),
+        " かつ ", math(String.raw`\mathrm{dsq}_{c}(\xi)<_{R}t`),
+        " だから、", ref("claim_real_algebraic_order_transitive"),
+        " により ", math(String.raw`d_{1}(L)<_{R}t`), " である。",
+      ]),
+      paragraph([
+        "いずれの場合も第一条件が成り立つ。全過程は ",
+        math(String.raw`\overline{\mathbb{Q}}`), " とその部分体 ",
+        math(String.raw`R`),
+        " の中の議論で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

@@ -861,3 +861,6 @@ import Ising2DLambda.CriticalExponent.LeadingDistance
 import Ising2DLambda.CriticalExponent.LeadingDistancePositive
 import Ising2DLambda.NecSuf.CriticalExponent.LeadingDistancePositive
 import Ising2DLambda.CriticalExponent.LeadingDistancePositiveFromNecSuf
+import Ising2DLambda.CriticalExponent.LeadingDistanceLtIff
+import Ising2DLambda.NecSuf.CriticalExponent.LeadingDistanceLtIff
+import Ising2DLambda.CriticalExponent.LeadingDistanceLtIffFromNecSuf

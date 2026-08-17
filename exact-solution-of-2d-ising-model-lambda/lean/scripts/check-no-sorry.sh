@@ -1486,6 +1486,9 @@ targets=(
   Ising2DLambda.CriticalExponent.leadingDistance_positive
   Ising2DLambda.NecSuf.CriticalExponent.leadingDistance_positive_necSuf
   Ising2DLambda.CriticalExponent.leadingDistance_positive_from_necSuf
+  Ising2DLambda.CriticalExponent.leadingDistance_lt_iff
+  Ising2DLambda.NecSuf.CriticalExponent.min_lt_iff_exists_lt_necSuf
+  Ising2DLambda.CriticalExponent.leadingDistance_lt_iff_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
