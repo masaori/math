@@ -6,6 +6,10 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 403 は、台帳の先頭行「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」の前提として欠けていた狭義順序の推移律を四層で閉じた（住処 Qbar、脱出なし）。**
+  着手時の確認: `claim_real_algebraic_order_trichotomy` は「場合分けの網羅性だけを与える。順序が加法・乗法と両立することはここでは主張しない」と本文に明記されており、**推移律は本文にもなかった**（前 tick の MEMORY に確認せよと書いた点）。最小元の議論は推移律を要するので先に置いた。
+  `claim_real_algebraic_order_transitive`（`claim_two_is_square_in_real_closed` の直後）: $a<_Rb$ かつ $b<_Rc$ ならば $a<_Rc$。証明は $c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ の一続き三段のあと、tick 400 の `claim_real_closed_sum_of_two_squares_is_square` で $u\cdot u+v\cdot v=w\cdot w$ と書き直し、$w\ne0$ を tick 399 の `claim_real_closed_sum_of_two_squares_zero` から出す。**直近 2 tick の補題がそのまま効いた。**
+  SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデルで三つ組すべて・鎖の各段と証人の非零性・反射的でないことと非対称性。通過）。Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`（`realAlgebraicLt_trans`）、必要十分版（可換環で「平方の和が平方」「平方の和が零なら各項が零」の 2 つを仮定に取るだけの形）、導出版。sorry 検査 1394 件・check 494 ブロック・verify-check-linkage 277 件・build:pdf 268 ページ通過。
 - **2026-08-18 の tick 402 は、台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
   `def_distance_squared_to_critical_point`（`def_distance_squared_to_rational` の直後）: $\xi=a+b\omega$ の一意表示と、前 tick の `claim_critical_point_mem_real_closed` が与える $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi):=(a-x_c)(a-x_c)+b\cdot b\in R$ を直接定義した。初稿にあった一般写像 $\mathrm{dsq}_R$ と有理点一致補題は、1 ブロックで 2 つの定義を置くことになり、後続も使わないため削除した。
   Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`criticalPointRealClosed`（`Classical.choose`）とその値 `criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。lake build・sorry 検査 1391 件・check 493 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
@@ -50,7 +54,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | $R$ の空でない有限集合は最小元をちょうど 1 つ持つ | todo | 線型順序（`claim_real_algebraic_order_trichotomy`）と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み |
+| 臨界指数を零点列で書く | $R$ の空でない有限集合は最小元をちょうど 1 つ持つ | todo | 推移律は tick 403 で用意した（`claim_real_algebraic_order_transitive`）。三分法と推移律と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み |
 | 臨界指数を零点列で書く | $\mathcal F_L$ が空でないこと（$L\ge2$） | todo | 定数でないこと（1 スピンだけ反転した配位に破れボンドがあるので $\exists m\ge1,\ \Omega_L(m)\ge1$）と `def_algebraic_numbers` の代数閉性。$L=1$ は両辺とも自己ループで $Z_1$ が定数になるので除く（着手時に SageMath で確認してから書く） |
 | 臨界指数を零点列で書く | 先頭距離 $d_1(L)$ の定義と正値性 | todo | $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)\in R$。正値性は $x_c\notin\mathcal F_L$（係数が自然数で $x_c$ が正錐 $P_s$ の元なので値が正錐に入る。`claim_positive_rational_not_fisher_zero` と同じ論法） |
 | 臨界指数を零点列で書く | 先頭距離の列と詰め寄りの述語の接続（可算な言明） | todo | $\{d_1(L)\}_{L\ge2}$ と `def_zero_pinching_predicate` を結ぶ。量化は $\mathbb Q$ 上 |
@@ -60,6 +64,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 403）: 最小元の行の前提として欠けていた狭義順序の推移律を四層で閉じ、`claim_real_algebraic_order_transitive` を `claim_two_is_square_in_real_closed` の直後に置いた（本文の三分法は網羅性だけで、推移律は無かった）。直近 2 tick の 2 補題（平方の和が平方・平方の和が零なら各項が零）から出る。SageMath 3 節、Lean 具体版・必要十分版（2 性質を仮定に取る可換環の形）・導出版。sorry 検査 1394 件・check 494 ブロック・PDF 268 ページ通過。
 - 2026-08-18（tick 402）: 台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロック）。第 2 引数を $R$ の元へ広げた $\mathrm{dsq}_R$ を定義し、有理点の場合が既存の $\mathrm{dsq}$ と一致することを明記して、$\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。check 493 ブロック・PDF 267 ページ通過。
 - 2026-08-18（tick 401）: 台帳の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じ、`claim_critical_point_mem_real_closed`（主定理の印）を `claim_two_is_square_in_real_closed` の直後に置いた。$s=a+b\omega$ の一意表示から $2ab=0$ を読み、$a=0$ の枝を前 tick の $-2$ の非平方性で潰した。SageMath 5 節、Lean 具体版（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。sorry 検査 1390 件・check 492 ブロック・PDF 267 ページ通過。
 - 2026-08-18（tick 400）: 台帳の先頭行「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。前 tick が「唯一の未固めの論点」と記録した箇所。鍵は順序ではなく代数閉性で、$u\cdot u=x+y\omega$ の一意表示と Gauss の恒等式から平方の和が平方であることを出し、$x=y=1$ で $2$ の平方性を得た。SageMath 4 節、Lean 具体版・必要十分版（Gauss の恒等式のみ。可換環）・導出版。sorry 検査 1388 件・check 491 ブロック・PDF 266 ページ通過。

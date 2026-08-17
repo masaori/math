@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 403 は、最終章 3 行目「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」に着手する前に、**本文に無かった狭義順序の推移律**を四層で閉じた（前 tick の MEMORY で「着手時に確かめよ」と書いた点。確かめた結果、実際に無かった）。
+`claim_real_algebraic_order_transitive`: $a<_Rb$ かつ $b<_Rc$ ならば $a<_Rc$。$c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ と書き、tick 400 の「平方の和は平方」で $w\cdot w$ にし、$w\ne0$ を tick 399 の「平方の和が零なら両方零」から出す。**ここ 3 tick の補題が直列につながった形になっている。**
+SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデル）。Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`、必要十分版（可換環に 2 つの性質を仮定として渡す形。零点も虚数単位も落ちる）、導出版。sorry 検査 1394 件・check 494 ブロック・linkage 277 件・PDF 268 ページ通過。
+次は「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」（三分法＋推移律＋有限集合の帰納法。`claim_row_config_min_unique` と同じ骨組み）。Lean は `Finset.exists_min_image` 相当を自前の順序で回すか、`Finset.induction_on` で書く。**順序の加法単調性はまだ本文に無い**ので、最小元の議論で必要になったらそこも別行で足すこと。
+
+（tick 402 の記録）
 2026-08-18 の tick 402 は、最終章の 2 行目「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_distance_squared_to_critical_point`: $\xi=a+b\omega$ の一意表示と $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi):=(a-x_c)(a-x_c)+b\cdot b\in R$ を直接定義した。初稿の一般写像 $\mathrm{dsq}_R$ と有理点一致補題は、1 ブロック 1 定義に反し後続も使わないため削除した。
 Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`criticalPointRealClosed`（`Classical.choose` で $x_c$ を $R$ の元として取り出す）・`criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。sorry 検査 1391 件・check 493 ブロック・linkage 276 件・PDF 267 ページ通過。

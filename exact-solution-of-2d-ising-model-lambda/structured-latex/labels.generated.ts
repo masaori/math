@@ -261,6 +261,7 @@ export const ALL_LABELS = [
   "claim_rational_square_lt_implies_lt",
   "claim_rational_square_ne_double_square",
   "claim_rationals_are_real_algebraic",
+  "claim_real_algebraic_order_transitive",
   "claim_real_algebraic_order_trichotomy",
   "claim_real_closed_sum_of_two_squares_is_square",
   "claim_real_closed_sum_of_two_squares_zero",
