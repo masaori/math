@@ -24,6 +24,7 @@ import blocks_finite_fourier_duality from './content/finite-fourier-duality.ts'
 import blocks_finite_quotient_lattice from './content/finite-quotient-lattice.ts'
 import blocks_homology_sector_expansion from './content/homology-sector-expansion.ts'
 import blocks_main_text from './content/main-text.ts'
+import blocks_quotient_tower from './content/quotient-tower.ts'
 
 
 
@@ -35,6 +36,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_quotient_lattice,
   ...typeof blocks_homology_sector_expansion,
   ...typeof blocks_main_text,
+  ...typeof blocks_quotient_tower,
 ]
 
 /** 全ノート。 */
