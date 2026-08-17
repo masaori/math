@@ -3332,6 +3332,105 @@ Z_L(q)
     ],
   },
   {
+    id: "soundness_bridge_claim_shifted_free_family_discriminant_does_not_determine_limit_quantity",
+    kind: "claim",
+    title: { text: "ずらした自由族は判別式が極限量を決めないことの反例である" },
+    labels: ["claim_shifted_free_family_discriminant_does_not_determine_limit_quantity"],
+    habitat: "R",
+    realEscape:
+      "判別式の比較は整数係数多項式の有限計算である。ℝ に触れるのは、def_limit_quantity_from_finite_box_sequence で一度だけ取った箱の大きさの極限について、先頭項を除いた列も同じ値へ収束することを使う箇所だけであり、新たな脱出は行わない。",
+    statement: [
+      paragraph([
+        "自由境界の分配多項式の族 ",
+        math(String.raw`(Z_L)_{L\ge1}`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）に対し、ずらした自由族を ",
+        math(String.raw`Z'_L(X):=Z_{L+1}(X)\in\mathbb Z[X]`),
+        " と定める。同じ判別式の手続き ",
+        math(String.raw`\iota_L(P):=\mathrm{disc}(P)\in\mathbb Z`),
+        " を両族へ適用すると、",
+      ]),
+      displayMath(
+        String.raw`\iota_3(Z_3)=\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z_4)=\iota_3(Z'_3)`,
+      ),
+      paragraph([
+        "である。また、正の有理数 ",
+        math(String.raw`q\in\mathcal Q_\alpha`),
+        " に対して、ずらした族の有限箱量と極限量を",
+      ]),
+      displayMath(
+        String.raw`a'_L(q):=Z'_L(q)^{1/\#V_{L+1}}=a_{L+1}(q),\qquad
+\alpha'(q):=\lim_{L\to\infty}a'_L(q)`,
+      ),
+      paragraph([
+        "と定めると、",
+        math(String.raw`\alpha'(q)`),
+        " は存在して ",
+        math(String.raw`\alpha'(q)=\alpha(q)`),
+        " である。したがって判別式の列は、",
+        ref("def_constant_coarse_graining_from_q_independent_invariant"),
+        " の判定枠で極限量に効かない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "判別式の有限計算については、",
+        ref("claim_discriminant_free_vs_periodic_differ_at_L3"),
+        " の検証で ",
+        math(String.raw`\mathrm{disc}(Z_3)=0`),
+        " を得る。同じ有限計算を法 ",
+        math(String.raw`65537`),
+        " 上で ",
+        math(String.raw`Z_4`),
+        " に行うと、次数 ",
+        math(String.raw`144`),
+        " が保たれ、導多項式との最大公約式が ",
+        math(String.raw`1`),
+        " である。ゆえに整数係数多項式 ",
+        math(String.raw`Z_4`),
+        " は重根を持たず、",
+        math(String.raw`\mathrm{disc}(Z_4)\ne0`),
+        " である（SageMath 検証 discriminant-free-vs-periodic-differ）。したがって上の整数の不等号が成り立つ。",
+      ]),
+      paragraph([
+        "一方、定義から各 ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a'_L(q)
+&=Z'_L(q)^{1/\#V_{L+1}}
+&&(\because\ a'_L(q)\text{ の定義})\\
+&=Z_{L+1}(q)^{1/\#V_{L+1}}
+&&(\because\ Z'_L=Z_{L+1})\\
+&=a_{L+1}(q)
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`q\in\mathcal Q_\alpha`),
+        " なので実数列 ",
+        math(String.raw`(a_L(q))_{L\ge1}`),
+        " は ",
+        math(String.raw`\alpha(q)`),
+        " へ収束する。収束する列の先頭の有限個の項を除いても収束先は変わらないので、末尾を一つずらした列 ",
+        math(String.raw`(a_{L+1}(q))_{L\ge1}`),
+        " も ",
+        math(String.raw`\alpha(q)`),
+        " へ収束する。上の項ごとの等式により ",
+        math(String.raw`\alpha'(q)`),
+        " は存在し、",
+        math(String.raw`\alpha'(q)=\alpha(q)`),
+        " である。ここでは極限量の定義で既に取った箱の大きさの極限だけを使い、新たな ",
+        math(String.raw`\mathbb R`),
+        " への脱出は行っていない。判別式が異なり極限量が等しいので、",
+        ref("def_constant_coarse_graining_from_q_independent_invariant"),
+        " の反例条件を満たす。",
+      ]),
+    ],
+  },
+  {
     id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
     kind: "definition",
     title: { text: "2 次元の箱と境界応答多項式" },
