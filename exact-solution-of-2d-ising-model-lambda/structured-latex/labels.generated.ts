@@ -422,6 +422,7 @@ export const ALL_LABELS = [
   "def_quadratic_field_set",
   "def_quadratic_positive_cone",
   "def_quadratic_representation_map",
+  "def_rational_disc",
   "def_rational_log",
   "def_rational_log_order_group",
   "def_rational_log_order_group_cauchy_sequence",

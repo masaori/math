@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 374 は、前 tick の「周期境界の自由エネルギー密度の定義と $f^{\mathrm{op}}(q)$ との一致」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度」を論法で五行へ割り（円板の定義／円板内の零点の個数／格子点数あたりの零点数／上極限・下極限による実数体への脱出／重複度付きの個数）、その最初「有理点を中心とする有理半径の円板（$\overline{\mathbb Q}$ の部分集合）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_rational_disc`（`remark_real_escape_plan` の直後、住処 Qbar、脱出なし）: $c=(c_1,c_2)\in\mathbb Q\times\mathbb Q$、$r\in\mathbb Q_{>0}$、$\xi=a+b\cdot\omega$ から $\mathrm{dsq}_2(\xi,c):=(a-c_1)\cdot(a-c_1)+(b-c_2)\cdot(b-c_2)\in R$、$D(c,r):=\{\xi\mid\mathrm{dsq}_2(\xi,c)<_R r\cdot r\}$。$\mathrm{dsq}_2(\xi,(q,0))=\mathrm{dsq}(\xi,q)$。Lean 具体版 `ThermodynamicLimit/RationalDisc.lean`（`distanceSquaredToRationalPoint`・`rationalDisc`・`distanceSquaredToRationalPoint_real_axis`）。sorry 検査 1301 件。check 463 ブロック・verify-check-linkage 256 件・PDF 252 ページ通過。本文末尾「この先に書くこと」の零点密度の項に内訳を書き、台帳のセクション表と揃えた。
+式変形統一: 締切のため見送り（次 tick で 1 件。姉妹側の残りは 004 のその他・005・008 系）。
+次は「有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r):=|\mathcal F_L\cap D(c,r)|\in\mathbb N$」: $\mathcal F_L$ の有限性（零でない多項式の根の個数は次数以下）を本文のどのブロックから引くか（無ければ先に置く）を確かめてから着手する。Lean は `FisherZeroSet L` の `Set.Finite` を `Z_L\ne0`（`fisherZero_algebraicity` の準備）から出し、`Nat.card`／`Set.ncard` で個数にする。
+
+（tick 373 の記録）
 2026-08-17 の tick 373 は、前 tick の「周期境界の密度の下組と開境界正方形の密度の下組は等しい」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_periodic_free_energy_density_le_one`（`claim_periodic_density_lower_set_eq_open_square_le_one` の直後・`remark_real_escape_plan` の直前、住処 R、脱出理由は完備性の再利用）: $0<q\le1$ で $\rho_{\mathbb R}(A^{\mathrm{per}}(q))=\rho_{\mathbb R}(A^{\mathrm{op}}(q))$（一続き三段。下組の等号）、よって空でなく上に有界、$f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))\in\mathbb R$、$f^{\mathrm{per}}(q)=f^{\mathrm{op}}(q)$（一続き三段。同じ集合の上限）。`remark_real_escape_plan` の「三つの定義」を「四つ」へ直し、本文末尾「この先に書くこと」から「周期境界自由エネルギー密度への移送」を消した（残り: 零点密度／臨界指数）。
