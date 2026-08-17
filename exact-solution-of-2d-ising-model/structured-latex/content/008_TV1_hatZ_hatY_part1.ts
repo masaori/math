@@ -2216,17 +2216,37 @@ h(g_1g_2)
         math(String.raw`\mathcal{C}_M`),
         " は ",
         math(String.raw`R^\times`),
-        " の部分群である（",
+        " の部分群である。単位元については ",
+        math(String.raw`I\,\mathcal{P}_M\,I^{-1} = \mathcal{P}_M`),
+        " なので ",
         math(String.raw`I \in \mathcal{C}_M`),
-        "、",
-        math(String.raw`(g_1g_2)\mathcal{P}_M(g_1g_2)^{-1} = g_1(g_2\mathcal{P}_Mg_2^{-1})g_1^{-1} = \mathcal{P}_M`),
-        "、",
+        "。積については、",
+        math(String.raw`g_1, g_2 \in \mathcal{C}_M`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(g_1g_2)\,\mathcal{P}_M\,(g_1g_2)^{-1}
+&= g_1\left(g_2\,\mathcal{P}_M\,g_2^{-1}\right)g_1^{-1}
+&&(\because\ (g_1g_2)^{-1} = g_2^{-1}g_1^{-1}\ \text{と行列の積の結合則})\\
+&= g_1\,\mathcal{P}_M\,g_1^{-1}
+&&(\because\ g_2 \in \mathcal{C}_M)\\
+&= \mathcal{P}_M
+&&(\because\ g_1 \in \mathcal{C}_M)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`g_1g_2 \in \mathcal{C}_M`),
+        "。逆元については、",
         math(String.raw`g\mathcal{P}_Mg^{-1} = \mathcal{P}_M`),
-        " の両辺を ",
-        math(String.raw`g^{-1}\cdot g`),
+        " の両辺を左から ",
+        math(String.raw`g^{-1}`),
+        "、右から ",
+        math(String.raw`g`),
         " で挟んで ",
         math(String.raw`g^{-1}\mathcal{P}_Mg = \mathcal{P}_M`),
-        "）。",
+        " なので ",
+        math(String.raw`g^{-1} \in \mathcal{C}_M`),
+        " である。",
       ]),
       paragraph([
         "量子情報の文献で標準的なクリフォード群は、上の ",
