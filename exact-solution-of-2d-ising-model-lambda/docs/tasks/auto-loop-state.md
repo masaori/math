@@ -7,8 +7,8 @@
 
 ## 現在地
 - **2026-08-18 の tick 402 は、台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
-  `def_distance_squared_to_critical_point`（`def_distance_squared_to_rational` の直後）: まず第 2 引数を有理点から $R$ の元へ広げた $\mathrm{dsq}_R(\xi,r):=(a-r)(a-r)+b\cdot b$ を定め（有理点の場合は既存の $\mathrm{dsq}$ と一致することを明記）、前 tick の `claim_critical_point_mem_real_closed` で $x_c\in R$ なので $\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。既存の定義を複製せず拡張の形にしたので、$\mathrm{dsq}$ 側の性質（零性と一致の同値など）を読み替えて使える。
-  Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`distanceSquaredToRealClosed`・有理点の場合の一致 `..._eq_distanceSquaredToRational`（`rfl`）・`criticalPointRealClosed`（`Classical.choose`）とその値 `criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。lake build・sorry 検査 1392 件・check 493 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
+  `def_distance_squared_to_critical_point`（`def_distance_squared_to_rational` の直後）: $\xi=a+b\omega$ の一意表示と、前 tick の `claim_critical_point_mem_real_closed` が与える $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi):=(a-x_c)(a-x_c)+b\cdot b\in R$ を直接定義した。初稿にあった一般写像 $\mathrm{dsq}_R$ と有理点一致補題は、1 ブロックで 2 つの定義を置くことになり、後続も使わないため削除した。
+  Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`criticalPointRealClosed`（`Classical.choose`）とその値 `criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。lake build・sorry 検査 1391 件・check 493 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
 - **2026-08-18 の tick 401 は、台帳の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じた（住処 Qbar、脱出なし）。主定理の印を付けた。**
   `claim_critical_point_mem_real_closed`（`claim_two_is_square_in_real_closed` の直後）: $s\cdot s=2$ を満たす $s\in\overline{\mathbb Q}$ は $R$ の元であり、したがって $x_c=-1+s\in R$。証明は第 4 条件で $s=a+b\omega$ と一意表示し、展開と一意性から $a\cdot a-b\cdot b=2$、$2ab=0$ を読み、$b=0$ の枝は $s=a\in R$、$a=0$ の枝は $-2=b\cdot b$（$b\ne0$）となって前 tick の `claim_two_is_square_in_real_closed` の後半に反するので起きない。最後に部分体の加法で $-1+s\in R$。
   SageMath `check/critical-point-mem-real-closed/`（5 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`。2 根がどちらも `AA` の元であること・一意表示の 2 等式・$a=0$ の枝が起きないこと・$x_c$ が自己双対方程式の根であること・$-2$ の平方根は `AA` の外。通過）。Lean 具体版 `FisherZero/CriticalPointMemRealClosed.lean`（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。定義でなく主張だが、必要十分版は前 tick の Gauss の恒等式と三分法に尽きているので新しくは置かない。sorry 検査 1390 件・check 492 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
@@ -74,6 +74,8 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-18（tick 402）: 姉妹側のフェルミオン証明（`008_TV1_hatZ_hatY_part2.ts`）で、a) の係数の括弧を因数分解する三段の式を、一続きの式変形と行末根拠へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
+
 - 2026-08-18（tick 398）: 姉妹側「行列の内積とノルム」（`005_exp_conjugation_proof.ts` の Step 4）で、散文中に埋まっていた鎖 $\sum_{i,j}|a_{ij}|^2=\|A\|^2$ すなわち $\langle A,A\rangle=(\|A\|^2)_{\mathbb C}$ を、一続き二段（行末根拠つき。上の鎖／ノルムの定義）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系の以降の節。005 の `ad`・内積の同値の鎖（1183 行・463 行付近）は statement の記法注記なので対象外と確認した（対象は証明の散文中の鎖）。
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）
@@ -87,6 +89,7 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-18（tick 402）: tick 401 の「臨界点が実閉部分体の元であること」の本文・SageMath・Lean を突き合わせ、論法の一致を確認した。この主張は値の住処を確定し、今 tick の定義が直接引くため「何も言っていない主張」ではない。修正なし。今 tick の初稿は 1 ブロック内の二定義と未使用の一致補題を削除した。
 - 2026-08-18（tick 398）: tick 397 の「零点密度の挟み込み」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正 1 件: 本文末尾「この先に書くこと」に済んだ「零点密度の挟み込み」の項目が残っていたので消した（runbook「項目が済んだら消す」）。
 - 2026-08-17（tick 394）: 前 tick の「相異なる点の重複度は、一次因子を割り出した商へ引き継がれる」の本文・SageMath・Lean 具体版・必要十分版からの導出版を突き合わせ、一致した。修正なし。「何も言っていない主張」の観点では、$g\ne0$ は重複度の well-defined 性を担い、主不等式は今 tick の帰納法が残りの各点へ繰り返し使うため残す。
 - 2026-08-17（tick 393）: 前 tick の「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。

@@ -2869,10 +2869,19 @@ t_\mu&\neq0_{\mathbb{C}}
 \end{aligned}`),
       paragraph([
         "後述の a) の係数の括弧は ",
-        math(String.raw`-t_\mu t_\nu + \gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = t_\mu^2 - t_\mu t_\nu = t_\mu(t_\mu - t_\nu)`),
-        " であり（Step 0-2 より ",
-        math(String.raw`\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu) = \gamma_2(-\theta_\mu)\gamma_2(\theta_\mu) = t_\mu^2`),
-        "）、Step 0-3 の ",
+        "次の一続きの式変形により因数分解できる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-t_\mu t_\nu+\gamma_2(-\theta_\mu)\gamma_2(-\theta_\nu)
+&=-t_\mu t_\nu+\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)
+&& (\because\ \text{Step 0-2})\\
+&=t_\mu^2-t_\mu t_\nu
+&& (\because\ t_\mu^2=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))\\
+&=t_\mu(t_\mu-t_\nu)
+&& (\because\ \mathbb{C}\ \text{の分配則})
+\end{aligned}`),
+      paragraph([
+        "Step 0-3 の ",
         math(String.raw`t_\nu = t_\mu`),
         " によってのみ ",
         math(String.raw`0`),

@@ -5,8 +5,9 @@
 ## 現在の到達点（2026-08-18 時点）
 
 2026-08-18 の tick 402 は、最終章の 2 行目「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
-`def_distance_squared_to_critical_point`: 既存の $\mathrm{dsq}(\xi,q)$ を複製せず、**第 2 引数を有理点から $R$ の元へ広げた $\mathrm{dsq}_R(\xi,r):=(a-r)(a-r)+b\cdot b$ を定義し、有理点の場合に一致することを明記してから** $\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた（$x_c\in R$ は前 tick）。Lean では有理点の場合の一致が `rfl` で出る形に定義を揃えてある。
-Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`distanceSquaredToRealClosed`・`..._eq_distanceSquaredToRational`・`criticalPointRealClosed`（`Classical.choose` で $x_c$ を $R$ の元として取り出す）・`criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。sorry 検査 1392 件・check 493 ブロック・linkage 276 件・PDF 267 ページ通過。
+`def_distance_squared_to_critical_point`: $\xi=a+b\omega$ の一意表示と $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi):=(a-x_c)(a-x_c)+b\cdot b\in R$ を直接定義した。初稿の一般写像 $\mathrm{dsq}_R$ と有理点一致補題は、1 ブロック 1 定義に反し後続も使わないため削除した。
+Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`criticalPointRealClosed`（`Classical.choose` で $x_c$ を $R$ の元として取り出す）・`criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。sorry 検査 1391 件・check 493 ブロック・linkage 276 件・PDF 267 ページ通過。
+式変形統一は、姉妹側のフェルミオン証明で a) の係数を因数分解する三段の式を、一続きの式変形と行末根拠へ揃えた。
 次は最終章の 3 行目「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」（線型順序 `claim_real_algebraic_order_trichotomy` と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み）。**注意: 順序の推移性が本文で確立しているかを着手時に確かめること**（三分法だけでは最小元の議論に足りない可能性がある。無ければ推移性を先に別行で置く）。
 
 （tick 401 の記録）
