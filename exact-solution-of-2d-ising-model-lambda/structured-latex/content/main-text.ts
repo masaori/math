@@ -48973,6 +48973,102 @@ k
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_root_multiplicity_ge_one_iff_root",
+    kind: "claim",
+    title: { text: "根の重複度が 1 以上であることと、その点で値が零であることは同じである" },
+    labels: ["claim_qbar_root_multiplicity_ge_one_iff_root"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-root-multiplicity-ge-one-iff-root"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityGeOneIffRoot",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.poly_root_multiplicity_ge_one_iff_root_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityGeOneIffRoot_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`), " で ",
+        math(String.raw`f\ne0`), " であるものと、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"),
+        "）を取る。このとき次の二つは同値である。",
+      ]),
+      list([
+        [
+          math(String.raw`\mathrm{mult}_{w}(f)\ge1`), " である（",
+          ref("def_qbar_root_multiplicity"), "）。",
+        ],
+        [
+          math(String.raw`\mathrm{aev}_{w}(f)=0`), " である（",
+          ref("def_qbar_poly_evaluation"), "）。",
+        ],
+      ]),
+      paragraph([
+        "すなわち、重複度が ", math(String.raw`1`), " 以上である点はちょうど値が零になる点である。",
+        "この一致によって、あとで零点を重複度つきで数え直しても、数える点の集合そのものは変わらないことが言える。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "二つの含意を順に示す。まず ", math(String.raw`\mathrm{mult}_{w}(f)\ge1`),
+        " から ", math(String.raw`\mathrm{aev}_{w}(f)=0`), " を示す。",
+        math(String.raw`\mathrm{mult}_{w}(f)\ge1`), " なので ",
+        math(String.raw`m:=\mathrm{mult}_{w}(f)-1\in\mathbb{N}`), " が取れて ",
+        math(String.raw`\mathrm{mult}_{w}(f)=m+1`), " である。",
+        ref("def_qbar_root_multiplicity"), " の一つめの読み取りより ",
+        math(String.raw`(t-\widehat{w})^{m+1}\mid f`), " であり、",
+        ref("def_qbar_linear_factor_power_divides"), " により、ある ",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`), " が存在して ",
+        math(String.raw`f=(t-\widehat{w})^{m+1}\cdot g`), " である。この ",
+        math(String.raw`g`), " を一つ固定する。準備として、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(t-\widehat{w})
+&=\mathrm{aev}_{w}(t)-\mathrm{aev}_{w}(\widehat{w})
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w}\ \text{が和と加法の逆元を保つこと})\\
+&=w-w
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w}(t)=w\ \text{と}\ \mathrm{aev}_{w}(\widehat{w})=w)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})
+\end{aligned}`),
+      paragraph([
+        "である。これを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(f)
+&=\mathrm{aev}_{w}\bigl((t-\widehat{w})^{m+1}\cdot g\bigr)
+&&(\because\ g\ \text{の取り方})\\
+&=\mathrm{aev}_{w}\bigl((t-\widehat{w})^{m}\cdot(t-\widehat{w})\cdot g\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束})\\
+&=\mathrm{aev}_{w}\bigl((t-\widehat{w})^{m}\bigr)\cdot\mathrm{aev}_{w}(t-\widehat{w})\cdot\mathrm{aev}_{w}(g)
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w}\ \text{が積を保つことを二回})\\
+&=\mathrm{aev}_{w}\bigl((t-\widehat{w})^{m}\bigr)\cdot 0\cdot\mathrm{aev}_{w}(g)
+&&(\because\ \text{上の準備})\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積})
+\end{aligned}`),
+      paragraph([
+        "を得る。次に ", math(String.raw`\mathrm{aev}_{w}(f)=0`), " から ",
+        math(String.raw`\mathrm{mult}_{w}(f)\ge1`), " を示す。",
+        math(String.raw`\mathrm{ac}_i(f)\ne0`), " となる ", math(String.raw`i\in\mathbb{N}`),
+        " の集合は ", ref("def_qbar_polynomial_ring"), " により有限であり、",
+        math(String.raw`f\ne0`), " により空でないので（すべての係数が零である多項式は零元だからである）、",
+        "その最大元 ", math(String.raw`n_f\in\mathbb{N}`), " が取れる（",
+        ref("def_qbar_root_multiplicity"), " と同じ取り方である）。定め方から ",
+        math(String.raw`i>n_f`), " ならば ", math(String.raw`\mathrm{ac}_i(f)=0`), " である。",
+        "この上界 ", math(String.raw`n_f`), " と仮定 ", math(String.raw`\mathrm{aev}_{w}(f)=0`),
+        " のもとで ", ref("def_qbar_linear_factor_power_divides"),
+        " の二つめの読み取りを当てると ", math(String.raw`(t-\widehat{w})^{1}\mid f`), " である。",
+        "そこで ", ref("def_qbar_root_multiplicity"), " の二つめの読み取りを ",
+        math(String.raw`k:=1`), " へ当てて ", math(String.raw`1\le\mathrm{mult}_{w}(f)`), " を得る。",
+      ]),
+      paragraph([
+        "以上で二つの含意が示され、同値が得られた。この議論に現れるのは代数的数の四則と多項式の整除だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48989,7 +49085,7 @@ k
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
+          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
         ],
         [
           todo("未着手"),
