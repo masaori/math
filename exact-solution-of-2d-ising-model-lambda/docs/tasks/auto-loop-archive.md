@@ -4,6 +4,24 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 371 で台帳から移した記録（tick 366 分）
+
+### 現在地
+
+- **2026-08-17 の tick 366 は、台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行し、本文から引かれていない旧実数値経路の Lean ファイル 61 個を消して、新しい自由エネルギー密度の Lean ファイルの名前から `Sup` を外した。**
+  特定は機械的に行った: 本文の `lean:` に現れる名前を含むファイルを起点に import の閉包を取り、その外にあるファイルを列挙（65 個）。うち 55 個は 2026-08-16 に本文から消した実数値経路（`30d11b8a` で `lean:` から外れた 94 名）の宣言を含む。加えて、可算側の主張だけが引いていた `allPlusConfig`（`def_constant_plus_configuration`）と `allPlusConfig_brokenBondCount_eq_zero`（`claim_constant_plus_breaks_no_bond`）が実数値経路のファイル（`PartitionValuePositive.lean`・`FreeEnergyDensityLowerBound.lean`）に同居し、そこから `FreeEnergyDensity.lean`・`FiniteRealFreeEntropy.lean`（実対数・上限）を引きずっていたので、この二つを新ファイル `ThermodynamicLimit/ConstantPlusConfiguration.lean`（import は `PartitionPolynomial.Basic` だけ）へ切り出し、`PartitionValueGeOneRational.lean` の import を付け替えたうえで、それら 6 個（`FreeEnergyDensity` の具体版・必要十分版・導出版を含む）も消した。計 61 ファイル削除・1 ファイル新設（792 → 732）。入口 `Ising2DLambda.lean` の import と sorry 検査の登録（実在しなくなった 96 件）を外し、登録は 1274 件。`OpenSquareFreeEnergyDensitySup.lean` → `OpenSquareFreeEnergyDensity.lean`、`openSquareFreeEnergyDensitySup*` → `openSquareFreeEnergyDensity*` に改名し、本文 `def_open_square_free_energy_density` の `lean:` と sorry 検査の登録も合わせた。`lake build`・sorry 検査・check（Lean 対応先 1240 件実在）・verify-check-linkage（251 件）・PDF 247 ページ通過。
+  閉包の外に残った 8 ファイルは実数値経路ではない（章「零点の詰め寄り」の三定義 `def_distance_squared_to_rational`・`def_zero_pinching_predicate`・`def_phase_transition_countable_statement` に対応する Lean と、章「固有値の代数性」の導出版二つ `RowConfigOrderFromNecSuf`・`OrbitPermutationSignValuesFromNecSuf`）。本文のブロックが `lean:` を持たないだけなので消さず、配線する行をセクション表へ足した。
+  レビュー: 前 tick の `def_open_square_free_energy_density` の本文（空でない・上に有界の含意の鎖二段・完備性で上限・特徴づけ二つ）と Lean（`openSquareRealizedLowerSet_nonempty`・含意の鎖・`_bddAbove`・`sSup`・`le_csSup`・`csSup_le`）を突き合わせて一致。修正なし。次は「本文の lean: から引かれていない Lean の配線」。
+
+### 前進の記録
+
+- 2026-08-17（tick 366）: 台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行した。本文の `lean:` から辿れる import 閉包の外にある実数値経路の Lean 61 ファイルを削除し、可算側だけが使う `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero` を `ConstantPlusConfiguration.lean` へ切り出し、`OpenSquareFreeEnergyDensitySup` の `Sup` を外した。sorry 検査 1274 件。閉包の外に残った 8 ファイル（零点の詰め寄りの三定義と固有値の代数性の導出版二つ。実数値経路ではない）を配線する行をセクション表の先頭へ足した。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 366）: 前 tick の「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める」の本文（像の定義・空でない・上に有界の含意の鎖二段・完備性で上限・上界である／最小である・$\rho_{\mathbb R}(-\iota(\ell_2))\le f^{\mathrm{op}}(q)\le b(q)$）と Lean 具体版（`openSquareRealizedLowerSet`・`_nonempty`・`realizeRational_le_realizeRational_upperBound_of_mem_openSquareDensityLowerSet`（二段）・`_bddAbove`・`sSup`・`le_csSup`・`csSup_le`）を突き合わせ、一致した。
+  「何も言っていない主張」の観点: 定義ブロックの中の空でない・上に有界は独立ブロックにしておらず、値の住処（$\mathbb R$ の部分集合が上限を持つ前提）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
+
 ## 2026-08-17 tick 370 で台帳から移した記録（tick 365 分）
 
 ### 現在地

@@ -47050,6 +47050,359 @@ Y
     ],
   },
   {
+    id: "thermodynamic_limit_claim_open_square_density_lower_set_subset_periodic_le_one",
+    kind: "claim",
+    title: { text: "開境界正方形の密度の下組は周期境界の密度の下組に含まれる（Archimedes 性。q は 1 以下）" },
+    labels: ["claim_open_square_density_lower_set_subset_periodic_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/open-square-density-lower-set-subset-periodic"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.half_add_half_eq",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_half_of_nonneg",
+      "Ising2DLambda.ThermodynamicLimit.half_ne_zero_of_ne_zero",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_zero_neg_toRational_logRat_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_neg_le_scaled_toRational_logRat",
+      "Ising2DLambda.ThermodynamicLimit.openSquareDensityLowerSet_subset_periodicDensityLowerSet_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.lowerSetOfSequence_subset_of_eventually_le_add_error_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.openSquareDensityLowerSet_subset_periodicDensityLowerSet_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`A^{\mathrm{op}}(q)\ \subset\ A^{\mathrm{per}}(q)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`A^{\mathrm{op}}(q)`),
+        " は ",
+        ref("def_open_square_density_lower_set"),
+        "、",
+        math(String.raw`A^{\mathrm{per}}(q)`),
+        " は ",
+        ref("def_periodic_density_lower_set"),
+        "）。すなわち、任意の ",
+        math(String.raw`\mu\in\Lambda_{\mathbb{Q}}`),
+        " について ",
+        math(String.raw`\mu\in A^{\mathrm{op}}(q)`),
+        " ならば ",
+        math(String.raw`\mu\in A^{\mathrm{per}}(q)`),
+        " である。",
+        ref("claim_periodic_density_lower_set_subset_open_square_le_one"),
+        " と合わせて、二つの下組は等しい。証明は、",
+        math(String.raw`\mu`),
+        " の所属を与える証人 ",
+        math(String.raw`\varepsilon`),
+        "、",
+        math(String.raw`N`),
+        " から、証人の半分 ",
+        math(String.raw`\varepsilon':=\tfrac12\cdot\varepsilon`),
+        " と、",
+        ref("claim_periodic_open_boundary_comparison_density_le_one"),
+        " の左の不等式の誤差 ",
+        math(String.raw`\tfrac{2}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)`),
+        " が ",
+        math(String.raw`-\varepsilon'`),
+        " を下回らなくなる辺の下限を ",
+        ref("claim_rational_log_order_group_archimedean"),
+        " で取り、新しい証人 ",
+        math(String.raw`\varepsilon'`),
+        "、",
+        math(String.raw`N'`),
+        " を作る。実数体は現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mu\in A^{\mathrm{op}}(q)`),
+        " を任意に取る。",
+        ref("def_open_square_density_lower_set"),
+        " により、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon`),
+        "、",
+        math(String.raw`\varepsilon\ne0`),
+        " を満たす ",
+        math(String.raw`\varepsilon\in\Lambda_{\mathbb{Q}}`),
+        " と、",
+        math(String.raw`N\ge1`),
+        " を満たす ",
+        math(String.raw`N\in\mathbb{N}`),
+        " で、",
+        math(String.raw`N\le L`),
+        " を満たすすべての ",
+        math(String.raw`L\in\mathbb{N}`),
+        " について ",
+        math(String.raw`\mu+\varepsilon\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)`),
+        " となるものが取れる。この ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        math(String.raw`N`),
+        " を固定する。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記し（",
+        ref("def_rational_log_order_group"),
+        "）、有理数倍・加法・逆元は ",
+        ref("def_rational_log_order_group"),
+        " のもの、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " のもの、",
+        math(String.raw`0`),
+        " は零写像とする。",
+      ]),
+      paragraph([
+        "準備の第一（証人の半分）。",
+        math(String.raw`\varepsilon':=\tfrac12\cdot\varepsilon\in\Lambda_{\mathbb{Q}}`),
+        " と置く（",
+        math(String.raw`\tfrac12\in\mathbb{Q}`),
+        " の有理数倍）。三つを示す。まず ",
+        math(String.raw`\varepsilon'+\varepsilon'=\varepsilon`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon'+\varepsilon'
+&=\tfrac12\cdot\varepsilon+\tfrac12\cdot\varepsilon
+&&(\because\ \varepsilon'\text{ の定義})\\
+&=\bigl(\tfrac12+\tfrac12\bigr)\cdot\varepsilon
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の分配則 }(r+s)\cdot\lambda=r\cdot\lambda+s\cdot\lambda\text{ を右辺から左辺の向きに読む})\\
+&=1\cdot\varepsilon
+&&(\because\ \tfrac12+\tfrac12=1\text{。}\mathbb{Q}\text{ の四則})\\
+&=\varepsilon
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda)
+\end{aligned}`),
+      paragraph([
+        "次に ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon'`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=0\cdot\varepsilon
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍を素数ごとに読む: }(0\cdot\varepsilon)(p)=0\,\varepsilon(p)=0)\\
+&\le_{\Lambda_{\mathbb{Q}}}\tfrac12\cdot\varepsilon
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=0\text{、}s:=\tfrac12\text{、}\nu:=\varepsilon\text{ で読む。}0\le\tfrac12\text{ は }\mathbb{Q}\text{ の順序、}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は証人の性質})\\
+&=\varepsilon'
+&&(\because\ \varepsilon'\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "最後に ",
+        math(String.raw`\varepsilon'\ne0`),
+        " である。もし ",
+        math(String.raw`\varepsilon'=0`),
+        " なら、第一の等式から ",
+        math(String.raw`\varepsilon=\varepsilon'+\varepsilon'=0+0=0`),
+        "（零写像は加法の単位元）となり、証人の性質 ",
+        math(String.raw`\varepsilon\ne0`),
+        " に反する。",
+      ]),
+      paragraph([
+        "準備の第二（誤差の元の符号）。",
+        math(String.raw`\delta:=-\iota(\log q)\in\Lambda_{\mathbb{Q}}`),
+        " と置く（",
+        math(String.raw`\log`),
+        " は ",
+        ref("def_rational_log"),
+        " の写像、",
+        math(String.raw`-`),
+        " は加法の逆元）。",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\delta`),
+        " と ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}2\cdot\delta`),
+        " を示す。",
+        math(String.raw`\log1=0`),
+        "（",
+        ref("claim_log_power"),
+        " の ",
+        math(String.raw`k=0`),
+        "）と ",
+        math(String.raw`\iota(0)=0`),
+        "（",
+        ref("claim_rational_log_order_group_embedding"),
+        "。",
+        math(String.raw`\iota`),
+        " は加法を保つので単位元を単位元へ移す）を使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(\log q)
+&\le_{\Lambda_{\mathbb{Q}}}\iota(\log1)
+&&(\because\ \blkref{claim_rational_embedded_log_order_iff}\text{ を }q':=1\text{ で読み、仮定 }q\le1\text{ を移す})\\
+&=\iota(0)
+&&(\because\ \log1=0)\\
+&=0
+&&(\because\ \iota(0)=0)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&=-0
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元を素数ごとに読む: }(-0)(p)=-0=0)\\
+&\le_{\Lambda_{\mathbb{Q}}}-\iota(\log q)
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\iota(\log q)\text{、}\mu:=0\text{ で読む。}\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0\text{ は直前の一続き})\\
+&=\delta
+&&(\because\ \delta\text{ の定義})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&=0\cdot\delta
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍を素数ごとに読む: }(0\cdot\delta)(p)=0\,\delta(p)=0)\\
+&\le_{\Lambda_{\mathbb{Q}}}2\cdot\delta
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=0\text{、}s:=2\text{、}\nu:=\delta\text{ で読む。}0\le2\text{ は }\mathbb{Q}\text{ の順序、}0\le_{\Lambda_{\mathbb{Q}}}\delta\text{ は直前の一続き})
+\end{aligned}`),
+      paragraph([
+        "準備の第三（Archimedes 性と新しい辺の下限）。",
+        ref("claim_rational_log_order_group_archimedean"),
+        " を ",
+        math(String.raw`\mu:=2\cdot\delta`),
+        "、",
+        math(String.raw`\varepsilon:=\varepsilon'`),
+        " で読む。仮定 ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}2\cdot\delta`),
+        " は準備の第二、",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon'`),
+        "、",
+        math(String.raw`\varepsilon'\ne0`),
+        " は準備の第一で揃っているので、",
+        math(String.raw`2\cdot\delta\le_{\Lambda_{\mathbb{Q}}}n\cdot\varepsilon'`),
+        " を満たす ",
+        math(String.raw`n\in\mathbb{N}`),
+        " を一つ取る。",
+        math(String.raw`N':=N+n\in\mathbb{N}`),
+        " と置く。",
+        math(String.raw`\mathbb{N}`),
+        " の順序と四則の事実として、",
+        math(String.raw`N'\ge N\ge1`),
+        "、",
+        math(String.raw`N'\ge n`),
+        " である。",
+      ]),
+      paragraph([
+        "準備の第四（誤差は ",
+        math(String.raw`-\varepsilon'`),
+        " 以上）。",
+        math(String.raw`N'\le L`),
+        " を満たす ",
+        math(String.raw`L\in\mathbb{N}`),
+        " を任意に取る。",
+        math(String.raw`L\ge N'\ge1`),
+        "、",
+        math(String.raw`n\le N'\le L`),
+        "（",
+        math(String.raw`\mathbb{N}`),
+        " の順序の推移律）である。",
+        ref("claim_rational_log_order_group_div_ge_multiplier_le"),
+        " を ",
+        math(String.raw`\mu:=2\cdot\delta`),
+        "、",
+        math(String.raw`\varepsilon:=\varepsilon'`),
+        "、",
+        math(String.raw`n`),
+        "、",
+        math(String.raw`a:=L`),
+        " で読む。仮定 ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon'`),
+        " は準備の第一、",
+        math(String.raw`2\cdot\delta\le_{\Lambda_{\mathbb{Q}}}n\cdot\varepsilon'`),
+        " は準備の第三、",
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`n\le L`),
+        " は直前で揃っているので ",
+        math(String.raw`\tfrac1L\cdot(2\cdot\delta)\le_{\Lambda_{\mathbb{Q}}}\varepsilon'`),
+        " を得る。これを一続きで ",
+        math(String.raw`-\varepsilon'`),
+        " と誤差の比較へ整える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-\varepsilon'
+&\le_{\Lambda_{\mathbb{Q}}}-\bigl(\tfrac1L\cdot(2\cdot\delta)\bigr)
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\tfrac1L\cdot(2\cdot\delta)\text{、}\mu:=\varepsilon'\text{ で読む。}\tfrac1L\cdot(2\cdot\delta)\le_{\Lambda_{\mathbb{Q}}}\varepsilon'\text{ は直前})\\
+&=-\bigl(\bigl(\tfrac1L\cdot2\bigr)\cdot\delta\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を右辺から左辺の向きに読む})\\
+&=-\bigl(\tfrac{2}{L}\cdot\delta\bigr)
+&&(\because\ \tfrac1L\cdot2=\tfrac2L\text{。}\mathbb{Q}\text{ の四則})\\
+&=-\bigl(\tfrac{2}{L}\cdot(-\iota(\log q))\bigr)
+&&(\because\ \delta\text{ の定義})\\
+&=\tfrac{2}{L}\cdot\iota(\log q)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍と逆元を素数ごとに読む: }-\bigl(r\,(-\lambda(p))\bigr)=r\,\lambda(p)\text{。}\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mu\in A^{\mathrm{per}}(q)`),
+        " を示すには（",
+        ref("def_periodic_density_lower_set"),
+        "）、証人として ",
+        math(String.raw`\varepsilon'`),
+        "（準備の第一により ",
+        math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon'`),
+        "、",
+        math(String.raw`\varepsilon'\ne0`),
+        "）と ",
+        math(String.raw`N'`),
+        "（準備の第三により ",
+        math(String.raw`N'\ge1`),
+        "）を取り、",
+        math(String.raw`N'\le L`),
+        " を満たす任意の ",
+        math(String.raw`L\in\mathbb{N}`),
+        " で ",
+        math(String.raw`\mu+\varepsilon'\le_{\Lambda_{\mathbb{Q}}}\Psi_L(q)`),
+        " を示せばよい。そのような ",
+        math(String.raw`L`),
+        " を任意に取る。",
+        math(String.raw`L\ge N'\ge N`),
+        " かつ ",
+        math(String.raw`L\ge1`),
+        " なので、",
+        math(String.raw`\mu`),
+        " の証人の性質が ",
+        math(String.raw`L`),
+        " で使え、",
+        math(String.raw`\Psi_L(q)`),
+        " と ",
+        math(String.raw`\Psi^{\mathrm{op}}_L(q)`),
+        " が定まる。一続きである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu+\varepsilon'
+&=(\mu+\varepsilon')+0
+&&(\because\ \text{零写像は加法の単位元})\\
+&=(\mu+\varepsilon')+\bigl(\varepsilon'+(-\varepsilon')\bigr)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }\varepsilon'+(-\varepsilon')=0\text{ を右辺から左辺の向きに読む})\\
+&=\bigl((\mu+\varepsilon')+\varepsilon'\bigr)+(-\varepsilon')
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の結合則})\\
+&=\bigl(\mu+(\varepsilon'+\varepsilon')\bigr)+(-\varepsilon')
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の結合則})\\
+&=(\mu+\varepsilon)+(-\varepsilon')
+&&(\because\ \text{準備の第一 }\varepsilon'+\varepsilon'=\varepsilon)\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)+(-\varepsilon')
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=\mu+\varepsilon\text{、}\mu:=\Psi^{\mathrm{op}}_L(q)\text{、}\nu:=-\varepsilon'\text{ で読む。}\mu+\varepsilon\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)\text{ は証人の性質。}N\le L)\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=-\varepsilon'\text{、}\mu:=\tfrac{2}{L}\cdot\iota(\log q)\text{、}\nu:=\Psi^{\mathrm{op}}_L(q)\text{ で読み、両辺を加法の可換則で並べ替える。}-\varepsilon'\le_{\Lambda_{\mathbb{Q}}}\tfrac{2}{L}\cdot\iota(\log q)\text{ は準備の第四})\\
+&\le_{\Lambda_{\mathbb{Q}}}\Psi_L(q)
+&&(\because\ \blkref{claim_periodic_open_boundary_comparison_density_le_one}\text{ の左の不等式を }L:=L\text{、}q:=q\text{ で読む。}L\ge1\text{、}0<q\le1)
+\end{aligned}`),
+      paragraph([
+        "順序の推移律は ",
+        ref("claim_rational_log_order_group_linear_order"),
+        " による。",
+        math(String.raw`N'`),
+        " は ",
+        math(String.raw`\varepsilon`),
+        "、",
+        math(String.raw`N`),
+        "（と ",
+        math(String.raw`q`),
+        "）だけから決まり、",
+        math(String.raw`L`),
+        " によらない。使ったのは、二つの下組の定義、有理数倍の分配則・結合則、非負の元の係数の比較、埋め込んだ対数の順序、逆元の順序反転、Archimedes 性、倍率以上の自然数で割る評価、加法単調性、周期境界と開境界の密度の比較の左の不等式、推移律と ",
+        math(String.raw`\mathbb{N}`),
+        " の順序だけであり、実数の完備性も極限の値も実対数も使わない。実数体は現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針）" },
@@ -47057,7 +47410,7 @@ Y
     habitat: "Lambda",
     statement: [
       paragraph([
-        "直前の三つの定義と四つの主張（",
+        "実数体を扱う三つの定義と四つの主張（",
         ref("def_real_logarithm"),
         "、",
         ref("def_rational_log_order_group_realization"),

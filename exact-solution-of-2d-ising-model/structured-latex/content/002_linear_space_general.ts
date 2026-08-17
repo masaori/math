@@ -236,23 +236,40 @@ export default defineBlocks([
         " だから",
       ]),
       displayMath(
-        String.raw`\nu(I)-\nu(J)
-= \sum_{l=k}^{M}(i_l-j_l)2^{M-l}
-= 2^{M-k} + \sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}`,
+        String.raw`\begin{aligned}
+\nu(I)-\nu(J)
+&= \Bigl(1+\sum_{l=1}^{M}(i_l-1)2^{M-l}\Bigr)-\Bigl(1+\sum_{l=1}^{M}(j_l-1)2^{M-l}\Bigr)
+   \quad (\because \nu\text{ の定義}) \\
+&= \sum_{l=1}^{M}(i_l-j_l)2^{M-l}
+   \quad (\because \text{和の差を項ごとに取る。}(i_l-1)-(j_l-1)=i_l-j_l) \\
+&= \sum_{l=k}^{M}(i_l-j_l)2^{M-l}
+   \quad (\because l<k\text{ では }i_l=j_l\text{ で項が }0) \\
+&= 2^{M-k} + \sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}
+   \quad (\because l=k\text{ の項を分ける。}i_k-j_k=2-1=1)
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
         math(String.raw`i_l-j_l\in\{-1,0,1\}`),
-        " より",
+        " より次の一続きが成り立つ。",
       ]),
       displayMath(
-        String.raw`\left|\sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}\right|
-\le \sum_{l=k+1}^{M}2^{M-l}
-= \sum_{t=0}^{M-k-1}2^{t}
-= 2^{M-k}-1 < 2^{M-k}`,
+        String.raw`\begin{aligned}
+\left|\sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}\right|
+&\le \sum_{l=k+1}^{M}\left|i_l-j_l\right|2^{M-l}
+   \quad (\because \text{三角不等式と }2^{M-l}>0) \\
+&\le \sum_{l=k+1}^{M}2^{M-l}
+   \quad (\because \text{各項で }|i_l-j_l|\le 1\text{ かつ }2^{M-l}>0) \\
+&= \sum_{t=0}^{M-k-1}2^{t}
+   \quad (\because \text{添字の置き換え }t:=M-l) \\
+&= 2^{M-k}-1
+   \quad (\because \text{Step 2 の }\textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1\text{ を }n:=M-k\text{ で}) \\
+&< 2^{M-k}
+   \quad (\because 2^{M-k}-1<2^{M-k})
+\end{aligned}`,
       ),
       paragraph([
-        "（Step 2 の等比和を使った）。よって ",
+        "よって ",
         math(String.raw`\nu(I)-\nu(J)\neq 0`),
         " すなわち ",
         math(String.raw`\nu`),
@@ -271,6 +288,9 @@ export default defineBlocks([
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-08-17: 式変形の書き方の統一。Step 3（単射性）の二つの式（ν(I)−ν(J) の分解と、残りの和の絶対値の評価）を、" +
+          "1 行 1 等号の一続きの鎖と行末の (∵ …) へ揃えた（ν の定義から始め、和の差・l<k の項の消去・l=k の項の分離、" +
+          "三角不等式・各項の評価・添字の置き換え・Step 2 の等比和・最後の狭義不等号）。内容は不変で、段は増えており減った段は無い。",
         "2026-08-09: 式変形の書き方の統一。Step 0〜3 という番号での区切りを、" +
           "それぞれの中間目標の名前（多重添字の和を各サイトごとの和の積へ直すこと・" +
           "(1) の証明・(2) の証明・(3) の証明）へ変えた（リポジトリの規約「番号や記号で管理しない」）。" +
