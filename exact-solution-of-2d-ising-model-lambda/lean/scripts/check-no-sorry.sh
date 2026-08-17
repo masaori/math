@@ -1409,6 +1409,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_ge_of_divides
   Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_le_of_coeff_bound
   Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicity_eq_rootMultiplicity
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityGeOneIffRoot
+  Ising2DLambda.NecSuf.ThermodynamicLimit.poly_root_multiplicity_ge_one_iff_root_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityGeOneIffRoot_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

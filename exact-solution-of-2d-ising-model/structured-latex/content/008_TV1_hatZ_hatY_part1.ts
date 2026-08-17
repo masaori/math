@@ -2765,9 +2765,23 @@ h(g_1g_2)
         math(String.raw`g^{-1} \in R^\times`),
         " であり、同 (ii) より ",
         math(String.raw`u = g^{-1}g' \in R^\times`),
-        "。また同 (ii)(iii) より ",
-        math(String.raw`g\,u = g\left(g^{-1}g'\right) = \left(gg^{-1}\right)g' = g'`),
-        " である。",
+        "。また ",
+        math(String.raw`g\,u = g'`),
+        " である。実際、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g\,u
+&= g\left(g^{-1}g'\right)
+&&(\because\ u\ \text{の定め方})\\
+&= \left(gg^{-1}\right)g'
+&&(\because\ R\ \text{の積の結合則})\\
+&= I\,g'
+&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ gg^{-1}=I)\\
+&= g'
+&&(\because\ R\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "である。",
       ]),
       paragraph([
         "Step 3: 各 ",
