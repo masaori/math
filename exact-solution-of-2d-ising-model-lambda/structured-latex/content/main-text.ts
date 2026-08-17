@@ -48248,6 +48248,141 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_def_fisher_zero_density_in_rational_disc",
+    kind: "definition",
+    title: { text: "有理円板内の格子点数あたりの Fisher 零点数" },
+    labels: ["def_fisher_zero_density_in_rational_disc"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_nonneg",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`c=(c_1,c_2)\in\mathbb{Q}\times\mathbb{Q}`),
+        "、",
+        math(String.raw`r\in\mathbb{Q}_{>0}`),
+        " とする。円板 ",
+        math(String.raw`D(c,r)`),
+        " に入る有限格子の Fisher 零点の個数 ",
+        math(String.raw`N_{L}(c,r)\in\mathbb{N}`),
+        "（",
+        ref("def_fisher_zero_count_in_rational_disc"),
+        "）を、格子点数 ",
+        math(String.raw`L^{2}\in\mathbb{N}`),
+        "（",
+        ref("def_lattice"),
+        " の頂点の個数）で割った有理数を",
+      ]),
+      displayMath(String.raw`\nu_{L}(c,r):=\frac{N_{L}(c,r)}{L^{2}}\ \in\ \mathbb{Q}`),
+      paragraph([
+        "で定め、有理円板 ",
+        math(String.raw`D(c,r)`),
+        " 内の格子点数あたりの Fisher 零点数と呼ぶ。分母は ",
+        math(String.raw`L\ge1`),
+        " から ",
+        math(String.raw`L^{2}\ge1`),
+        " なので ",
+        math(String.raw`0`),
+        " でなく、商は ",
+        math(String.raw`\mathbb{Q}`),
+        " の元として定まる。分子は自然数、分母は正の自然数なので ",
+        math(String.raw`0\le\nu_{L}(c,r)`),
+        " である。この量は自然数の商であり、実数体も複素数体も現れない。",
+        "実数体が要るのは、この後で ",
+        math(String.raw`L`),
+        " を動かした列 ",
+        math(String.raw`(\nu_{L}(c,r))_{L\ge1}\subset\mathbb{Q}`),
+        " の上極限・下極限を取るときであり、そこで初めて脱出を宣言する。",
+      ]),
+    ],
+  },
+
+  {
+    id: "thermodynamic_limit_claim_fisher_zero_density_in_rational_disc_le_two",
+    kind: "claim",
+    title: { text: "有理円板内の格子点数あたりの Fisher 零点数は $2$ を超えない" },
+    labels: ["claim_fisher_zero_density_in_rational_disc_le_two"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_le_two",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.div_le_two_of_le_of_le_two_mul_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroDensityInRationalDisc_le_two_from_necSuf",
+    ],
+    verification: ["sagemath/check/fisher-zero-density-in-rational-disc-le-two"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        "、",
+        math(String.raw`c\in\mathbb{Q}\times\mathbb{Q}`),
+        "、",
+        math(String.raw`r\in\mathbb{Q}_{>0}`),
+        " とする。有理円板内の格子点数あたりの Fisher 零点数 ",
+        math(String.raw`\nu_{L}(c,r)\in\mathbb{Q}`),
+        "（",
+        ref("def_fisher_zero_density_in_rational_disc"),
+        "）について",
+      ]),
+      displayMath(String.raw`\nu_{L}(c,r)\le2`),
+      paragraph([
+        "が成り立つ。上界 ",
+        math(String.raw`2`),
+        " は ",
+        math(String.raw`L`),
+        "、",
+        math(String.raw`c`),
+        "、",
+        math(String.raw`r`),
+        " のいずれにもよらない。したがって、",
+        math(String.raw`c`),
+        " と ",
+        math(String.raw`r`),
+        " を固定して ",
+        math(String.raw`L`),
+        " を動かした列 ",
+        math(String.raw`(\nu_{L}(c,r))_{L\ge1}\subset\mathbb{Q}`),
+        " は ",
+        math(String.raw`0`),
+        " 以上 ",
+        math(String.raw`2`),
+        " 以下に収まる（下からの ",
+        math(String.raw`0`),
+        " は ",
+        ref("def_fisher_zero_density_in_rational_disc"),
+        "）。後の実数体への脱出（上極限・下極限）はこの有界性を引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        " から ",
+        math(String.raw`L^{2}\ge1`),
+        " なので、",
+        math(String.raw`\mathbb{Q}`),
+        " において ",
+        math(String.raw`0<L^{2}`),
+        " である。求める不等式は次の一続きの鎖から従う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{L}(c,r)
+&=\frac{N_{L}(c,r)}{L^{2}}
+&&(\because\ \blkref{def_fisher_zero_density_in_rational_disc})\\
+&\le\frac{\lvert\mathcal{F}_{L}\rvert}{L^{2}}
+&&(\because\ N_{L}(c,r)\le\lvert\mathcal{F}_{L}\rvert\ (\blkref{def_fisher_zero_count_in_rational_disc})\text{ を正の分母 }L^{2}\text{ で割る})\\
+&\le\frac{2L^{2}}{L^{2}}
+&&(\because\ \lvert\mathcal{F}_{L}\rvert\le2L^{2}\ (\blkref{claim_fisher_zero_set_finite_card_bound})\text{ を正の分母 }L^{2}\text{ で割る})\\
+&=2
+&&(\because\ L^{2}\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "この議論は自然数と有理数の大小だけで閉じており、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48264,9 +48399,9 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（格子点数あたりの零点数 ",
-          math(String.raw`\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb{Q}`),
-          "、その列の上極限・下極限による実数体への脱出、重複度付きの個数への精密化）。",
+          "「熱力学極限」の残り: 零点密度（列 ",
+          math(String.raw`(\nu_L(c,r))_{L\ge1}\subset\mathbb{Q}`),
+          " の上極限・下極限による実数体への脱出、重複度付きの個数への精密化）。",
         ],
         [
           todo("未着手"),

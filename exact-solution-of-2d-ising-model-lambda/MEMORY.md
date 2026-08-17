@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 380 は、前 tick の「有理円板内の有限格子の Fisher 零点の個数」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界 $\nu_L\le2$」を定義ブロックと主張ブロックに分けて四層で閉じた。
+`def_fisher_zero_density_in_rational_disc`（`def_fisher_zero_count_in_rational_disc` の直後、住処 Q、脱出なし）: $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$（分母 $L^2\ge1$、$0\le\nu_L$ は住処の確定として定義の中）。`claim_fisher_zero_density_in_rational_disc_le_two`（その直後、住処 Q）: $\nu_L(c,r)\le2$（一続き四段: 定義／$N_L\le\lvert\mathcal F_L\rvert$ を正の分母で割る／$\lvert\mathcal F_L\rvert\le2L^2$ を正の分母で割る／約分。上界は $L,c,r$ によらない）。本文末尾「この先に書くこと」から済んだ項目を消した。
+SageMath `check/fisher-zero-density-in-rational-disc-le-two/`（$L\le2$、円板 9 組、18 検査。$L=3$ は `AA` 厳密比較が長すぎて除外）。Lean 具体版 `ThermodynamicLimit/FisherZeroDensityInRationalDisc.lean`（`fisherZeroDensityInRationalDisc`・`lattice_size_sq_pos_rat`・`_nonneg`・`_le_two`）、必要十分版 `NecSuf/ThermodynamicLimit/FisherZeroDensityInRationalDiscLeTwo.lean`（`div_le_two_of_le_of_le_two_mul_necSuf`。順序体で $a\le b$、$b\le2d$、$0<d\Rightarrow a/d\le2$）、導出版 `FisherZeroDensityInRationalDiscLeTwoFromNecSuf.lean`。sorry 検査 1321 件。check 470 ブロック・verify-check-linkage 260 件・PDF 255 ページ通過。
+式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Cauchy--Schwarz 場合 2 の散文「$|u|^2/\|B\|^2\le\|A\|^2$（$\mathbb R$ の移項）」を一続き三段へ（姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 004 のその他・005 の残り（Step 6 の平方の単調性の散文、Step 7 以降）・008 系。
+次は「実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」: 有界性 $0\le\nu_L\le2$（今 tick）を引き、`def_open_square_free_energy_density`（住処 R、`realEscape` は完備性）と同じ書き方で $\overline\nu(c,r):=\inf_N\sup_{L\ge N}\nu_L$、$\underline\nu(c,r):=\sup_N\inf_{L\ge N}\nu_L$ を定義する（各 $\sup_{L\ge N}$ は上に有界な空でない実数の集合の上限）。Lean は `sSup`/`sInf` を重ねるか `Filter.limsup` かを着手時に決める（既存の `OpenSquareFreeEnergyDensitySup.lean` の形に揃えるのが第一候補）。定義ブロックなので必要十分版と SageMath は置かない見込みだが、上極限が下極限以上であること等の主張を足すなら別行に割る。
+
+（tick 379 の記録）
 2026-08-17 の tick 379 は、前 tick の「有限格子の Fisher 零点の全体は有限集合であり元の個数は $2L^2$ を超えない」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r)$」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_fisher_zero_count_in_rational_disc`（`claim_fisher_zero_set_finite_card_bound` の直後、住処 Qbar、脱出なし）: $\mathcal F_L\cap D(c,r)$ は有限集合 $\mathcal F_L$ の部分集合なので有限、$N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$、定義の中に $N_L(c,r)\le\lvert\mathcal F_L\rvert$ を置いた。本文末尾「この先に書くこと」から済んだ項目を消した。

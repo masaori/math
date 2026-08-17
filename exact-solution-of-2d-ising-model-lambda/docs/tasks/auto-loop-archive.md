@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 380 で台帳から移した記録（tick 375 分）
+
+### 現在地
+
+- **2026-08-17 の tick 375 は、台帳の先頭行「有理円板内の Fisher 零点の個数 $N_L(c,r)$」を論法で五行へ割り（整係数多項式の $\overline{\mathbb Q}[t]$ への持ち上げの定義／持ち上げの値と $\mathrm{Ev}^F$ の一致／$\mathcal F_L$ の有限部分集合の個数の上界（根の個数は次数以下）／$\mathcal F_L$ の有限性と $\lvert\mathcal F_L\rvert\le2L^2$（背理法）／$N_L(c,r)$ の定義）、その最初「整係数多項式の代数的数係数多項式への持ち上げ」を本文・Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_integer_polynomial_qbar_lift`（`def_rational_disc` の直後・「この先に書くこと」の直前、住処 Qbar）: $f=\sum_{m=0}^{n}a_mx^m\in\mathbb Z[x]$ に対し $\widehat f^{\,F}\in\overline{\mathbb Q}[t]$ を $\mathrm{ac}_k(\widehat f^{\,F}):=a_k$（$k\le n$）、$0$（$n<k$）で定める。`def_qbar_constant_embedding` の $\widehat{\ \cdot\ }$ とは定義域が違うので上付き $F$ で区別。理由: $\mathcal F_L$ の有限性を `claim_qbar_distinct_roots_card_bound`（$\overline{\mathbb Q}[t]$ の多項式について述べている）から出すには $Z_L\in\mathbb Z[x]$ をそこへ送る写像が本文に無かった（`def_qbar_polynomial_evaluation` は値だけを定めている）。
+  Lean 具体版 `ThermodynamicLimit/IntegerPolynomialQbarLift.lean`（`integerPolynomialQbarLift`（`Polynomial.map (Int.castRingHom Qbar)`）・`integerPolynomialQbarLift_coeff`）。sorry 検査 1302 件。check 464 ブロック・verify-check-linkage 256 件・PDF 253 ページ通過。
+  式変形統一: 姉妹側「Frobenius 内積の性質（Hermite 内積の公理と Cauchy--Schwarz の不等式）」の Cauchy--Schwarz の場合 1（$\|B\|=0$）で、散文中の $|u|=0=\|A\|\,\|B\|$ を一続き四段（$|u|=|0_{\mathbb C}|=0=\|A\|\cdot0=\|A\|\,\|B\|$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `def_rational_disc` の本文と Lean 具体版（`distanceSquaredToRationalPoint`・`rationalDisc`・`distanceSquaredToRationalPoint_real_axis`）を突き合わせて一致。修正なし。次は「持ち上げの値と $\mathrm{Ev}^F$ の一致: $\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$」（`def_qbar_poly_evaluation` の定義式（$\mathrm{aev}$ が係数と冪の有限和）と `def_qbar_polynomial_evaluation` の定義式を並べる一続き。Lean は `Polynomial.eval₂_map`／`eval_map` の形。SageMath は $Z_L$（$L\le3$）と数個の $\xi$ で厳密に）。
+
+### 前進の記録
+
+- 2026-08-17（tick 375）: 台帳の先頭行「有理円板内の Fisher 零点の個数」を五行へ割った（持ち上げの定義／持ち上げの値と $\mathrm{Ev}^F$ の一致／有限部分集合の個数の上界／$\mathcal F_L$ の有限性／$N_L(c,r)$ の定義。理由: $\mathcal F_L$ の有限性は本文に無く、`claim_qbar_distinct_roots_card_bound` は $\overline{\mathbb Q}[t]$ の多項式について述べているので $\mathbb Z[x]$ からの持ち上げの定義・値の一致・上界・背理法がそれぞれ別の論法になるため）。その最初「整係数多項式の代数的数係数多項式への持ち上げ」を本文・Lean 具体版で閉じ、`def_integer_polynomial_qbar_lift` を `def_rational_disc` の直後に置いた。sorry 検査 1302 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Cauchy--Schwarz 場合 1 の散文の鎖を一続き四段へ（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 375）: 前 tick の「有理点を中心とする有理半径の円板」の本文（$\mathrm{dsq}_2$・$D(c,r)$・実軸上の特別な場合）と Lean 具体版を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の持ち上げの定義は、次の値の一致・上界・有限性がすべて引く器（後で引く形）であり、値がどの環に属するかを言っているので残す。本文末尾「この先に書くこと」の零点密度の内訳へ持ち上げ・値の一致・有限性を足し、台帳のセクション表（四行追加）と同じ tick で揃えた。
+
 ## 2026-08-17 tick 379 で台帳から移した記録（tick 374 分）
 
 ### 現在地
