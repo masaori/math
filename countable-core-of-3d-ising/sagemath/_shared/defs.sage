@@ -125,3 +125,48 @@ def partition_polynomial_by_layer_transfer(box_side, edges, periodic):
     points = [(QQ(k), QQ(_layer_transfer_value(box_side, edges, k, periodic))) for k in range(len(edges) + 1)]
     interpolated = R.lagrange_polynomial(points)
     return PolynomialRing(ZZ, "x")(interpolated)
+
+
+def free_partition_value_by_fast_layer_transfer(box_side, point_value):
+    # 自由境界の層間行列 T[s,t]=x^Hamming(s,t) を密行列として作らず、
+    # Kronecker 積 [[1,x],[x,1]] の butterfly としてベクトルへ作用させる。
+    layer_site_count = box_side**2
+    state_count = 2**layer_site_count
+
+    def site_index(i, j):
+        return i * box_side + j
+
+    intra_edges = []
+    for i in range(box_side):
+        for j in range(box_side):
+            if i + 1 < box_side:
+                intra_edges.append((site_index(i, j), site_index(i + 1, j)))
+            if j + 1 < box_side:
+                intra_edges.append((site_index(i, j), site_index(i, j + 1)))
+
+    intra_weights = []
+    x_value = ZZ(point_value)
+    for state in range(state_count):
+        broken = sum(
+            1
+            for p, q in intra_edges
+            if ((state >> p) & 1) != ((state >> q) & 1)
+        )
+        intra_weights.append(x_value**broken)
+
+    values = list(intra_weights)
+    for _layer in range(1, box_side):
+        for bit in range(layer_site_count):
+            stride = 1 << bit
+            block = stride << 1
+            for start in range(0, state_count, block):
+                for offset in range(stride):
+                    left = start + offset
+                    right = left + stride
+                    a = values[left]
+                    b = values[right]
+                    values[left] = a + x_value * b
+                    values[right] = x_value * a + b
+        values = [value * weight for value, weight in zip(values, intra_weights)]
+
+    return sum(values)

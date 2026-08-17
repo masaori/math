@@ -30,4 +30,11 @@ assert d3 == 0 and not Z3.is_squarefree()
 assert d3p != 0 and Z3p.is_squarefree()
 assert d3 != d3p
 print("PASS: L=3: disc(Z_3)=0, disc(Z_3^per)!=0, differ")
+
+# 段 4: 自由境界の高速層転送核は密行列版から得た厳密多項式の値と一致する
+for box_side, polynomial in [(2, Z2), (3, Z3)]:
+    for point_value in [0, 1, 2]:
+        fast_value = free_partition_value_by_fast_layer_transfer(box_side, point_value)
+        assert fast_value == polynomial(point_value), (box_side, point_value, fast_value, polynomial(point_value))
+print("PASS: fast free-boundary layer transfer agrees at L=2,3 and x=0,1,2")
 print("ALL PASS")
