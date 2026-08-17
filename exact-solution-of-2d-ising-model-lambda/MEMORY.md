@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 415 は、台帳の先頭行「順序の加法単調性」を独立した主張にしないと確定し、todo から除いた。
+$b<_Rc$ ならば $a+b<_Ra+c$ という段は、差 $(a+c)-(a+b)=c-b$ が変わらないという $R$ の四則と `def_real_algebraic_strict_order` の定義を展開するだけであり、runbook が削除対象として明記する「両辺に同じものを足す」ブロックそのものである。本文・SageMath・Lean は追加せず、次の「和の平方の評価」の該当行末へ「$R$ の四則と狭義順序の定義」と書く。
+レビューは tick 414 の上界の同値を四層で突き合わせ、SageMath 8 組を再実行して一致を確認した。修正なし。この同値は先頭距離の最小性を零点の存在量化へ移す接続なので内容がある。
+式変形統一は姉妹側「$V_1$ の固有空間への制限」の Step 4 冒頭で、$G-G^{(\pm)}$ の一等号に束ねていた定義の代入・分配・共通項の相殺を一続き三段へ開いた（内容不変）。sorry 検査 1433 件・check 506 ブロック・linkage 287 件・PDF 274 ページ、および姉妹側 check 300 ブロック・PDF 326 ページ通過。
+次は「和の平方の評価」。$2u^2+2v^2-(u+v)^2=(u-v)^2$ を $R$ の四則で示し、$u=v$ なら等号、$u\ne v$ なら `def_real_algebraic_strict_order` を直接展開して狭義不等号を得る。加法単調性の独立主張は作らない。
+
 2026-08-18 の tick 414 は、台帳の先頭行「先頭距離の列と詰め寄りの述語の接続（可算な言明）」を論法単位の 5 行（上界の同値／順序の加法単調性／和の平方の評価／臨界点への有理近似／接続の完成）へ割り、その最初「先頭距離が上界未満であることと上界未満の零点の存在は同値」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_leading_distance_lt_iff_close_zero`: $L\ge2$、$t\in R$ について $d_1(L)<_Rt\iff\exists\xi\in\mathcal F_L,\ \mathrm{dsq}_c(\xi)<_Rt$。左向きは $d_1(L)\in D_L$ の証人 $\xi$ を取って書き換え、右向きは $\mathrm{dsq}_c(\xi)\in D_L$ と最小性の場合分け（等しい枝は書き換え、大きい枝は `claim_real_algebraic_order_transitive`）。のちに $t:=\varepsilon\cdot\varepsilon$（$\varepsilon\in\mathbb Q_{>0}$）と取り、`def_zero_pinching_predicate` と同じ形の $\mathbb Q$ 上の量化の言明へ結ぶための接続である。
 SageMath `check/leading-distance-lt-iff/`（$L=2$ × $s$ 2 根 × 上界 4 個の 8 組で両条件の真偽の一致。`AA` 厳密、浮動小数点なし）。Lean 具体版 `CriticalExponent/LeadingDistanceLtIff.lean`、必要十分版 `NecSuf/CriticalExponent/LeadingDistanceLtIff.lean`（`min_lt_iff_exists_lt_necSuf`。証人の存在・最小性・推移律だけを仮定し、体・三分法・有限集合・零元を落とす。**mathlib を import しないファイルでは `Type*` 記法が使えないので宇宙変数で書く**）、導出版。sorry 検査 1433 件・check 506 ブロック・linkage 287 件・PDF 274 ページ通過。

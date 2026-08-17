@@ -3,6 +3,12 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 415 で台帳から移した記録（tick 410）
+
+- tick 410 の現在地・前進: 「$x_c$ は Fisher 零点でない」を四層で閉じた。`claim_critical_point_not_fisher_zero` は臨界点での分配多項式の値が正錐に入ることと、零元の表示 $(0,0)$ が正錐の三条件を破ることから背理法で $x_c\notin\mathcal F_L$ を得る。SageMath 6 組、Lean 具体版・必要十分版・導出版。sorry 検査 1422 件・check 501 ブロック・verify-check-linkage 284 件・PDF 271 ページ通過。
+- tick 410 の式変形統一: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の Step 6 で、係数の書き換えと $V_2$ の等式を一続き三段・各行の根拠つきへ揃えた。
+- tick 410 のレビュー: tick 409 の「分配多項式の臨界点での値は正錐の元である」を四層で突き合わせ、一致した。この主張は tick 410 の非零性が直接引くため内容のない主張ではない。
+
 ## 2026-08-18 tick 413 で台帳から移した記録（tick 408）
 
 - tick 408 の現在地・前進: 「分配多項式の臨界点での値は正錐に入り、$x_c$ は Fisher 零点でない」を論法単位の 3 行へ割り、その最初「正錐の元の自然数倍は零元または正錐の元である」を四層で閉じた。`claim_quadratic_positive_cone_nat_mul`、SageMath 48 組、Lean 具体版・必要十分版・導出版。sorry 検査 1411 件・check 499 ブロック・verify-check-linkage 282 件・PDF 270 ページ通過。

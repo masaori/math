@@ -1896,9 +1896,19 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         " の中で",
       ]),
       displayMath(
-        String.raw`G - G^{(\pm)}
-= i K_1\left(-\varepsilon W \pm W\right)
-\quad (\because G, G^{(\pm)} \text{ の定義。} \textstyle\sum_{m=1}^{M-1} Y_mZ_{m+1} \text{ の項は打ち消し合う})`,
+        String.raw`\begin{aligned}
+G-G^{(\pm)}
+&=iK_1\left(\sum_{m=1}^{M-1}Y_mZ_{m+1}-\varepsilon W\right)
+  -iK_1\left(\sum_{m=1}^{M-1}Y_mZ_{m+1}\mp W\right)
+&&\left(\because\ G,G^{(\pm)}\ \text{の定義}\right)\\
+&=iK_1\left(
+  \left(\sum_{m=1}^{M-1}Y_mZ_{m+1}-\varepsilon W\right)
+  -\left(\sum_{m=1}^{M-1}Y_mZ_{m+1}\mp W\right)
+\right)
+&&\left(\because\ \text{スカラー倍の分配則}\right)\\
+&=iK_1\left(-\varepsilon W\pm W\right)
+&&\left(\because\ \mathrm{Mat}(2^M,\mathbb C)\ \text{の加法の四則}\right)
+\end{aligned}`,
       ),
       paragraph([
         "である。",
