@@ -256,6 +256,8 @@ targets=(
   Ising3DCut.LimitQuantity.natDegree_polyOfMultiplicity_le
   Ising3DCut.LimitQuantity.eval_polyOfMultiplicity_pos
   Ising3DCut.LimitQuantity.nullModel_symmetrized_padicValRat_reciprocal_invariant
+  Ising3DCut.NecSuf.symmetrized_padicValRat_reciprocal_invariant_of_palindrome
+  Ising3DCut.LimitQuantity.nullModel_symmetrized_padicValRat_reciprocal_invariant_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
