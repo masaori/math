@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 385 で台帳から移した記録（tick 380 分）
+
+### 現在地
+
+- **2026-08-17 の tick 380 は、台帳の先頭行「零点密度: 格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界 $\nu_L\le2$」を、定義ブロックと主張ブロックの二つに分けて本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて閉じた（住処 Q、脱出なし）。**
+  `def_fisher_zero_density_in_rational_disc`（`def_fisher_zero_count_in_rational_disc` の直後、住処 Q）: $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$（$L^2\ge1$ なので分母は $0$ でない。分子は自然数、分母は正なので $0\le\nu_L$——住処の確定として定義の中に置いた）。`claim_fisher_zero_density_in_rational_disc_le_two`（その直後・「この先に書くこと」の直前、住処 Q）: $\nu_L(c,r)\le2$。証明は一続き四段（定義／$N_L\le\lvert\mathcal F_L\rvert$ を正の分母で割る／$\lvert\mathcal F_L\rvert\le2L^2$ を正の分母で割る／約分）。上界は $L,c,r$ によらないので、列 $(\nu_L(c,r))_{L\ge1}$ は $0$ 以上 $2$ 以下——次の上極限・下極限が引く。本文末尾「この先に書くこと」の零点密度の内訳から「格子点数あたりの零点数」を消した。
+  SageMath `check/fisher-zero-density-in-rational-disc-le-two/`（$L\le2$、有理円板 9 組、鎖の各段を `QQ` で厳密に。18 検査、5 秒。$L=3$ は根 12 個の `AA` 厳密比較が 100 秒で終わらないので除外）。Lean 具体版 `ThermodynamicLimit/FisherZeroDensityInRationalDisc.lean`（`fisherZeroDensityInRationalDisc`・`lattice_size_sq_pos_rat`・`_nonneg`・`_le_two`（`calc` 四段。`div_le_div_of_nonneg_right`・`mul_div_cancel_right₀`））、必要十分版 `NecSuf/ThermodynamicLimit/FisherZeroDensityInRationalDiscLeTwo.lean`（`div_le_two_of_le_of_le_two_mul_necSuf`。順序体（`Field`＋`LinearOrder`＋`IsStrictOrderedRing`）で $a\le b$、$b\le2d$、$0<d$ から $a/d\le2$。ℚ であることは使わない）、導出版 `FisherZeroDensityInRationalDiscLeTwoFromNecSuf.lean`。sorry 検査 1321 件。check 470 ブロック・verify-check-linkage 260 件・PDF 255 ページ通過。
+  式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Cauchy--Schwarz の場合 2 で、散文中の「$|u|^2/\|B\|^2\le\|A\|^2$（$\mathbb R$ の移項）」を一続き三段（$|u|^2/\|B\|^2=\|A\|^2-(\|A\|^2-|u|^2/\|B\|^2)\le\|A\|^2-0=\|A\|^2$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `def_fisher_zero_count_in_rational_disc` の本文（有限性の根拠・$N_L\in\mathbb N$・$N_L\le\lvert\mathcal F_L\rvert$）と Lean 具体版（`fisherZeroSet_inter_rationalDisc_finite`・`fisherZeroCountInRationalDisc`・`_le_ncard`）を突き合わせて一致。修正なし。次は「実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」（$0\le\nu_L\le2$ の有界性を今 tick の定義と主張から引き、$\mathbb R$ の完備性で $\limsup$・$\liminf$ を定義する。`def_open_square_free_energy_density` の $\sup$ の書き方（住処 R、`realEscape` は完備性）に揃える。Lean は `Filter.limsup`／`liminf` か、$\sup_{L\ge N}$ の下限として自前で書くかを着手時に決める）。
+
+### 前進の記録
+
+- 2026-08-17（tick 380）: 台帳の先頭行「零点密度: 格子点数あたりの零点数 $\nu_L(c,r)$ と上界 $\nu_L\le2$」を定義ブロック `def_fisher_zero_density_in_rational_disc` と主張ブロック `claim_fisher_zero_density_in_rational_disc_le_two` に分けて四層で閉じ、`def_fisher_zero_count_in_rational_disc` の直後に置いた（一ブロック一主張のため二つにした。論法は一つ）。SageMath 18 検査（$L\le2$）、Lean 具体版・必要十分版（順序体）・導出版、sorry 検査 1321 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Cauchy--Schwarz 場合 2 の散文「$|u|^2/\|B\|^2\le\|A\|^2$（$\mathbb R$ の移項）」を一続き三段へ（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 380）: 前 tick の「有理円板内の有限格子の Fisher 零点の個数」の本文と Lean 具体版を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の上界 $\nu_L\le2$ は「正の数で割っても不等号が保たれる」だけで出るが、上界が $L,c,r$ によらないこと（列の有界性）が次の上極限・下極限の存在の根拠になり後で引く形なので、独立ブロックとして残す。$0<L^2$ と $0\le\nu_L$ は独立ブロックにせず、証明の冒頭と定義の中（住処の確定）に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
+
 ## 2026-08-17 tick 384 で台帳から移した記録（tick 379 分）
 
 ### 現在地

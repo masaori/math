@@ -165,6 +165,7 @@ export const ALL_LABELS = [
   "claim_qbar_geometric_telescope",
   "claim_qbar_identity_action",
   "claim_qbar_identity_matrix_unit",
+  "claim_qbar_linear_factor_pow_divides_exponent_le",
   "claim_qbar_linear_factor_pow_mul_coeff_bound",
   "claim_qbar_linear_factor_pow_mul_leading_coeff",
   "claim_qbar_matrix_eval_identity",

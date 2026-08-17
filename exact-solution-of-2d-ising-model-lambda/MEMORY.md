@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 385 は、前 tick の「一次因子の冪との積の先頭の係数はもとの先頭の係数」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」（$f\ne0$、$i>n\Rightarrow\mathrm{ac}_i(f)=0$、$(t-\widehat w)^k\mid f$ ならば $k\le n$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。
+`claim_qbar_linear_factor_pow_divides_exponent_le`（`claim_qbar_linear_factor_pow_mul_leading_coeff` の直後、住処 Qbar、脱出なし）。背理法: 整除の証人 $g$、$g\ne0$（$g=0$ なら $f=(t-\widehat w)^k\cdot0=0$）、非零係数の番号の集合 $S(g)$（有限・空でない）の最大元 $m$、鎖 $\mathrm{ac}_{m+k}(f)=\mathrm{ac}_{m+k}((t-\widehat w)^kg)=\mathrm{ac}_m(g)\ne0$、$m+k>n$ なら係数の仮定と矛盾、$k\le m+k\le n$。「最高次の位置」は独立ブロックにせず証明の準備に置いた（$g\ne0$ から $S(g)\ne\varnothing$、`def_qbar_polynomial_ring` から有限）。本文末尾「この先に書くこと」の内訳から済んだ項目を消した。
+SageMath `check/qbar-linear-factor-pow-divides-exponent-le/`（$w$ 6 個・$g$ 5 個・$k\le5$・上界 2 通り、`QQbar` 厳密、通過）。Lean 具体版 `ThermodynamicLimit/QbarLinearFactorPowDividesExponentLe.lean`（`qbarLinearFactorPowDividesExponentLe`。`g.support.max'`、`natDegree` 不使用）、必要十分版 `NecSuf/ThermodynamicLimit/QbarLinearFactorPowDividesExponentLe.lean`（`poly_linear_factor_pow_divides_exponent_le_necSuf`。可換環だけ）、導出版。sorry 検査 1345 件。check 475 ブロック・verify-check-linkage 263 件・PDF 258 ページ通過。
+式変形統一: 姉妹側「$H$ と $\hat Z$・$\hat Y$ の交換子の入れ子」（`008_TV1_hatZ_hatY_part1.ts`）の補題 1 で、散文中の $\mathrm{ad}_{\alpha X}(W)=[\alpha X,W]=\alpha[X,W]=\alpha\,\mathrm{ad}_X(W)$ を一続き三段（$\mathrm{ad}$ の定義／交換子の第 1 引数の $\mathbb C$ 線型性／$\mathrm{ad}$ の定義。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check（300 ブロック）・PDF 324 ページ通過。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系（補題 1 の続き $\mathrm{ad}_{\alpha X}^{\,n}=(\alpha\,\mathrm{ad}_X)^n=\alpha^n\mathrm{ad}_X^{\,n}$ の散文の鎖が次の候補）。
+次は「零点密度: 根の重複度 $\mathrm{mult}_w(f)$ の定義」（$f\ne0$ について、$(t-\widehat w)^k\mid f$ を満たす $k\in\mathbb N$ の最大元。集合は空でなく（`def_qbar_linear_factor_power_divides` の $k=0$）上に有界（`claim_qbar_linear_factor_pow_divides_exponent_le`。上界は $f$ の係数の上界 $n$——$f\ne0$ には係数の上界が常にあることを、定義の中で非零係数の番号の最大元として言う）ので最大元がある。定義ブロックなので必要十分版・SageMath は無し。Lean は `Nat.find` か `Finset.max'`（$\{k\le n\mid\dots\}$ の `Finset.filter`）で書き、mathlib の `Polynomial.rootMultiplicity` との一致は橋渡し一本を添える。定義から読めること: $\mathrm{mult}_w(f)\le n$、$(t-\widehat w)^{\mathrm{mult}_w(f)}\mid f$）。
+
+（tick 384 の記録）
 2026-08-17 の tick 384 は、前 tick の「一次因子の冪との積の係数は、上界と指数の和より上の番号で零である」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 一次因子の冪との積の先頭の係数はもとの先頭の係数」（$k>m\Rightarrow\mathrm{ac}_k(C)=0$ のもとで $\mathrm{ac}_{m+j}((t-\widehat w)^jC)=\mathrm{ac}_m(C)$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。
 `claim_qbar_linear_factor_pow_mul_leading_coeff`（`claim_qbar_linear_factor_pow_mul_coeff_bound` の直後、住処 Qbar、脱出なし）。$j$ の帰納法（出発点は $\mathrm{ac}_{m+0}((t-\widehat w)^0C)=\mathrm{ac}_{m+0}(1\cdot C)=\mathrm{ac}_{m+0}(C)=\mathrm{ac}_m(C)$ の一続き三段、一歩は前主張で $(t-\widehat w)^jC$ の上界 $m+j$ を得、冪の等式（二段）ののち $\mathrm{ac}_{m+(j+1)}=\mathrm{ac}_{(m+j)+1}$／冪の等式／`claim_qbar_poly_linear_factor_leading_coeff`／帰納法の仮定の一続き四段）。本文末尾「この先に書くこと」の内訳から済んだ項目を消した。

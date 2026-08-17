@@ -48805,6 +48805,94 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_linear_factor_pow_divides_exponent_le",
+    kind: "claim",
+    title: { text: "零でない多項式を割る一次因子の冪の指数は、係数の上界を超えない" },
+    labels: ["claim_qbar_linear_factor_pow_divides_exponent_le"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-linear-factor-pow-divides-exponent-le"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDividesExponentLe",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.poly_linear_factor_pow_divides_exponent_le_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDividesExponentLe_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), "、", ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`f\in\overline{\mathbb{Q}}[t]`), "、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"), "）、",
+        math(String.raw`k\in\mathbb{N}`), " が次を満たすとする。",
+      ]),
+      list([
+        [math(String.raw`f\ne0`), " である。"],
+        [math(String.raw`i\in\mathbb{N}`), " が ", math(String.raw`i>n`), " ならば ", math(String.raw`\mathrm{ac}_i(f)=0`), " である。"],
+        [math(String.raw`(t-\widehat{w})^{k}\mid f`), "（", ref("def_qbar_linear_factor_power_divides"), "）である。"],
+      ]),
+      paragraph([
+        "このとき ", math(String.raw`k\le n`), " である。すなわち、零でない多項式を割り切る一次因子の冪の指数は、",
+        "その多項式の係数の上界を超えない。これは、根の重複度（整除する指数の最大元）が定まるための上界である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ", ref("def_qbar_polynomial_ring"), " の ", math(String.raw`\mathrm{ac}_{i}`),
+        " である。まず準備を置く。",
+        ref("def_qbar_linear_factor_power_divides"), " により、ある ",
+        math(String.raw`g\in\overline{\mathbb{Q}}[t]`), " が存在して ",
+        math(String.raw`f=(t-\widehat{w})^{k}\cdot g`), " である。この ", math(String.raw`g`),
+        " を一つ固定する。", math(String.raw`g\ne0`), " である。実際、",
+        math(String.raw`g=0`), " ならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f
+&=(t-\widehat{w})^{k}\cdot g
+&&(\because\ g\ \text{の取り方})\\
+&=(t-\widehat{w})^{k}\cdot 0
+&&(\because\ g=0)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の零元との積})
+\end{aligned}`),
+      paragraph([
+        "となり、", math(String.raw`f\ne0`), " に反する。次に、",
+        math(String.raw`\mathrm{ac}_i(g)\ne0`), " となる ", math(String.raw`i\in\mathbb{N}`),
+        " の集合を ", math(String.raw`S(g)`), " と書く。", ref("def_qbar_polynomial_ring"),
+        " により ", math(String.raw`S(g)`), " は有限集合であり、",
+        math(String.raw`g\ne0`), " により空でない（すべての係数が零である多項式は零元だからである）。",
+        "空でない有限な ", math(String.raw`\mathbb{N}`), " の部分集合には最大元があるので、",
+        math(String.raw`m:=\max S(g)\in\mathbb{N}`), " と置く。定め方から ",
+        math(String.raw`\mathrm{ac}_m(g)\ne0`), " であり、",
+        math(String.raw`i>m`), " ならば ", math(String.raw`i\notin S(g)`), "、すなわち ",
+        math(String.raw`\mathrm{ac}_i(g)=0`), " である。以上の準備のもとで、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+k}(f)
+&=\mathrm{ac}_{m+k}\bigl((t-\widehat{w})^{k}\cdot g\bigr)
+&&(\because\ g\ \text{の取り方})\\
+&=\mathrm{ac}_{m}(g)
+&&(\because\ \blkref{claim_qbar_linear_factor_pow_mul_leading_coeff}\ \text{を}\ C:=g\text{、係数の上界}\ m\text{、}j:=k\ \text{へ当てる})\\
+&\ne0
+&&(\because\ m\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "である。ここで背理法を使う。もし ", math(String.raw`m+k>n`), " ならば、本主張の係数の仮定を ",
+        math(String.raw`i:=m+k`), " へ当てて ", math(String.raw`\mathrm{ac}_{m+k}(f)=0`),
+        " となり、上で得た ", math(String.raw`\mathrm{ac}_{m+k}(f)\ne0`), " に反する。よって ",
+        math(String.raw`m+k\le n`), " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+k
+&\le m+k
+&&(\because\ m\in\mathbb{N}\ \text{と}\ \mathbb{N}\ \text{の加法の単調性})\\
+&\le n
+&&(\because\ \text{上で得た}\ m+k\le n)
+\end{aligned}`),
+      paragraph([
+        "を得る。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48821,7 +48909,7 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない／根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
+          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
         ],
         [
           todo("未着手"),

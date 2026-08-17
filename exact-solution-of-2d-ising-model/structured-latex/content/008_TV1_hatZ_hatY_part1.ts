@@ -1324,13 +1324,21 @@ i (2K_2^*)^n \hat{Z}_\mu^{(-)} & (n \text{ 奇数}) \\
 = \alpha^{n}\,\underbrace{[X,\dots,[X, W]\dots]}_{n}`,
       ),
       paragraph([
-        "が成り立つ。実際、交換子の第 1 引数についての ",
-        math(String.raw`\mathbb{C}`),
-        " 線型性より、任意の ",
+        "が成り立つ。実際、任意の ",
         math(String.raw`W`),
-        " について ",
-        math(String.raw`\mathrm{ad}_{\alpha X}(W) = [\alpha X, W] = \alpha[X, W] = \alpha\,\mathrm{ad}_X(W)`),
-        " であるから、線型写像として ",
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ad}_{\alpha X}(W)
+&= [\alpha X, W]
+&&(\because\ \mathrm{ad}\ \text{の定義})\\
+&= \alpha[X, W]
+&&(\because\ \text{交換子の第 1 引数についての}\ \mathbb{C}\ \text{線型性})\\
+&= \alpha\,\mathrm{ad}_X(W)
+&&(\because\ \mathrm{ad}\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であるから、線型写像として ",
         math(String.raw`\mathrm{ad}_{\alpha X} = \alpha\,\mathrm{ad}_X`),
         " が成り立つ。よって ",
         math(String.raw`\mathrm{ad}_{\alpha X}^{\,n} = (\alpha\,\mathrm{ad}_X)^n = \alpha^{n}\,\mathrm{ad}_X^{\,n}`),
