@@ -7,7 +7,7 @@
 
 ## 現在地
 - **2026-08-18 の tick 418 は、台帳の計画（$[0,1]$ の等分と正の有理端点）が現状の固定では証明不能である（$0<_Rx_c$ が $s$ と $(R,\omega)$ の独立な選択に依存する）ことを見つけ、最小修復として `def_real_closed_subfield` の組の固定に第 5 条件「$s$ が $R$ の平方」を加えた。**
-  第 1〜4 条件だけでは $s$ と $-s$ のどちらが $R$ の平方かが組の選び方で変わり、$0<_Rx_c$ も「正の有理数 $q$ で $(x_c-q)^2<_R\delta$」も選択依存の主張になって述べられない（$s\mapsto-s$ で $x_c$ は共役根 $-1-s$ に移る）。既存の主張はすべて第 1〜4 条件しか使わないので影響しない。存在は Artin–Schreier（$s$ を正とする順序体 $\mathbb{Q}(s)$ の実閉包）で従来と同格の既知事実として引く。Lean は基底構造を変えず拡張構造 `RealClosedSubfieldSqrtTwoData` を追加、SageMath は `check/real-closed-subfield/` に第 5 条件（証人 $w=2^{1/4}$）の節を追加して再実行・通過。「臨界点を挟む有理等分区間」は、臨界点の正値性・上界を先に置く 3 行へ割り直した。sorry 検査 1439 件・check 508 ブロック・verify-check-linkage 289 件・build:pdf 通過。
+  第 1〜4 条件だけでは $s$ と $-s$ のどちらが $R$ の平方かが組の選び方で変わり、$0<_Rx_c$ も「正の有理数 $q$ で $(x_c-q)^2<_R\delta$」も選択依存の主張になって述べられない（$s\mapsto-s$ で $x_c$ は共役根 $-1-s$ に移る）。既存の主張はすべて第 1〜4 条件しか使わないので影響しない。存在は Artin–Schreier（$s$ を正とする順序体 $\mathbb{Q}(s)$ の実閉包）で従来と同格の既知事実として引く。Lean は基底構造を変えず拡張構造 `RealClosedSubfieldSqrtTwoData` を追加、SageMath は `check/real-closed-subfield/` に第 5 条件（証人 $w=2^{1/4}$）の節を追加して再実行・通過。「臨界点を挟む有理等分区間」は、臨界点の正値性・上界を先に置く 3 行へ割り直した。式変形統一は姉妹側「Pauli 行列の生成」の二つの鎖の先頭行へ根拠を足し、姉妹側 check 300 ブロック・PDF 327 ページ通過。sorry 検査 1439 件・check 508 ブロック・verify-check-linkage 289 件・build:pdf 275 ページ通過。
 - **2026-08-18 の tick 417 は、「臨界点への有理近似」を有限等分の三論法へ割り、その最初「正の有理数より平方が小さい有理網幅」を四層で閉じた（住処 Q、脱出なし）。**
   `claim_positive_rational_mesh_width`: 任意の $\delta\in\mathbb Q_{>0}$ に対し、$1\le N$ かつ $h_N:=1/N>0$、$h_N^2<\delta$ を満たす $N\in\mathbb N$ が存在する。$\varepsilon:=\min\{\delta,1\}$ と置き、$\mathbb Q$ の Archimedes 性から $1/(n+1)<\varepsilon$ を取って、$h_N^2<h_N<\varepsilon\le\delta$ とした。この存在は体の四則だけでは出ないため「何も言っていない主張」ではない。SageMath `check/positive-rational-mesh-width/`（正の有理数 6 個、`QQ` 厳密）。Lean 具体版・必要十分版（Archimedes 的な線型順序体まで）・導出版。sorry 検査 1439 件・check 508 ブロック・verify-check-linkage 289 件・build:pdf 275 ページ。式変形統一は姉妹側「$V_1$ の固有空間への制限」の Step 5 の帰納法の出発点を一続き四段へ開き、姉妹側 check 300 ブロック・PDF 327 ページ通過。
 - **2026-08-18 の tick 416 は、台帳の先頭行「和の平方の評価」を四層で閉じた（住処 Qbar、脱出なし）。**
@@ -44,6 +44,8 @@
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
+
+- 2026-08-18（tick 418）: 姉妹側「Pauli 行列の生成」（`004_transfer_matrix.ts` の $\sigma_k^a\sigma_k^b$・$\sigma_k^a\sigma_l^b$ の二つの鎖。同一証明ブロック）で、根拠の無かった先頭行（定義の代入）へ行末の $(\because\ \dots)$ を足した（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 327 ページ通過。
 
 - 2026-08-18（tick 417）: 姉妹側「$V_1$ の固有空間への制限」（`004_transfer_matrix.ts`）の Step 5 で、帰納法の出発点「$n=0$ は両辺 $f$」を、写像の零乗／恒等写像の定義／恒等写像の定義／写像の零乗、の一続き四段・各行根拠つきへ開いた（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 327 ページ通過。
 
