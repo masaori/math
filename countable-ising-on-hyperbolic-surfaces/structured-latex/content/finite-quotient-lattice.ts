@@ -1,4 +1,4 @@
-import { defineBlocks, displayMath, math, paragraph } from "../schema.ts";
+import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -90,6 +90,93 @@ g(\alpha)
       paragraph([
         math(String.raw`r_F,r_V,r_E`),
         " の添字は、後に面、頂点、辺の安定化部分群を作るための役割名である。この定義だけから剰余類をセルと同一視せず、生成されるセルデータの閉曲面性、正則性、向き付けも結論しない。それらは始域と終域を明示した剰余類写像を定義した後、既存の有限セル分割述語で別に検査する。全ての群と集合は有限であり、双曲平面の座標、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_quotient_lattice_definition_role_stabilizers_and_coset_cell_sets",
+    kind: "definition",
+    title: { text: "役割安定化部分群と剰余類セル集合" },
+    labels: ["def_finite_quotient_role_stabilizers_and_coset_cell_sets"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-quotient-coset-cell-sets"],
+    statement: [
+      paragraph([
+        ref("def_hyperbolic_triangle_permutation_quotient_input"),
+        " の双曲三角群の有限置換商入力 ",
+        math(String.raw`\mathcal Q_{p,q}=(\Omega,Q,r_F,r_V,r_E)`),
+        " に対し、面、頂点、辺の役割安定化部分群をそれぞれ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+H_F
+&:=
+\langle r_F\rangle
+\leq Q,\\
+H_V
+&:=
+\langle r_V\rangle
+\leq Q,\\
+H_E
+&:=
+\langle r_E\rangle
+\leq Q
+\end{aligned}`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`\langle r_R\rangle`),
+        " は ",
+        math(String.raw`r_R`),
+        " を含む最小の部分群であり、",
+        math(String.raw`R\in\{F,V,E\}`),
+        " は三つの役割を表す形式的ラベルである。各部分群に対する左剰余類集合を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q/H_F
+&:=
+\left\{
+  gH_F
+  \middle|
+  g\in Q
+\right\},\\
+Q/H_V
+&:=
+\left\{
+  gH_V
+  \middle|
+  g\in Q
+\right\},\\
+Q/H_E
+&:=
+\left\{
+  gH_E
+  \middle|
+  g\in Q
+\right\}
+\end{aligned}`),
+      paragraph([
+        "と定める。さらに、互いに異なる形式的ラベル ",
+        math(String.raw`\mathtt{face},\mathtt{vertex},\mathtt{edge}`),
+        " を用いて、面、頂点、辺のセルラベル集合をそれぞれ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal F_Q
+&:=
+\{\mathtt{face}\}\times(Q/H_F),\\
+\mathcal V_Q
+&:=
+\{\mathtt{vertex}\}\times(Q/H_V),\\
+\mathcal E_Q
+&:=
+\{\mathtt{edge}\}\times(Q/H_E)
+\end{aligned}`),
+      paragraph([
+        "と定める。各セルラベルの第二成分は剰余類そのものであり、代表元 ",
+        math(String.raw`g\in Q`),
+        " ではない。第一成分の形式的ラベルにより、三つのセルラベル集合を互いに同一視しない。また、置換台 ",
+        math(String.raw`\Omega`),
+        "、有限群 ",
+        math(String.raw`Q`),
+        "、剰余類セル集合も互いに同一視しない。この定義はセルラベルだけを与え、端点写像、面境界語、閉曲面性、正則性、向き付けを結論しない。全ての対象は有限集合であり、実数、複素数、極限、積分を用いない。",
       ]),
     ],
   },
