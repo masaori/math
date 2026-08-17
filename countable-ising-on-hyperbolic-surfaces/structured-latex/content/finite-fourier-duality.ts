@@ -1287,4 +1287,143 @@ b^\ast(f^\ast)
       ]),
     ],
   },
+  {
+    id: "finite_fourier_definition_primal_cohomology_to_dual_homology_transport",
+    kind: "definition",
+    title: { text: "主第一コホモロジーから双対第一ホモロジーへの誘導写像" },
+    labels: ["def_primal_cohomology_to_dual_homology_transport"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-cohomology-to-dual-homology-transport"],
+    statement: [
+      paragraph([
+        ref("def_primal_first_cocycle_space_over_f2"),
+        " の主一次コサイクル空間と、",
+        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
+        " の主一次余境界空間に対し、主第一コホモロジーを有限な剰余集合",
+      ]),
+      displayMath(String.raw`H^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+:=
+\left\{
+  \left\{
+    c+a
+    \ \middle|\
+    \ a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+  \right\}
+  \ \middle|\
+  \ c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right\}`),
+      paragraph([
+        "で定める。主一次余境界空間が主一次コサイクル空間に含まれることは、",
+        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
+        " で確かめてある。また、",
+        ref("theorem_primal_cocycle_transport_is_dual_cycle"),
+        " の双対一次サイクル空間と、",
+        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
+        " の双対面境界空間に対し、双対第一ホモロジーを有限な剰余集合",
+      ]),
+      displayMath(String.raw`H_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+:=
+\left\{
+  \left\{
+    z^\ast+b^\ast
+    \ \middle|\
+    \ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+  \right\}
+  \ \middle|\
+  \ z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+\right\}`),
+      paragraph([
+        "で定める。",
+        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
+        " と ",
+        ref("theorem_primal_cocycle_transport_is_dual_cycle"),
+        " により、双対面境界空間は双対一次サイクル空間に含まれる。",
+        ref("def_primal_cocycle_to_dual_cycle_transport"),
+        " の係数移送から誘導される写像を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\mathsf D}_1:
+H^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+&\longrightarrow
+H_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2),\\
+\left\{
+  c+a
+  \ \middle|\
+  \ a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right\}
+&\longmapsto
+\left\{
+  \mathsf D_1(c)+b^\ast
+  \ \middle|\
+  \ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+\right\}
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        "、",
+        math(String.raw`a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        "、",
+        math(String.raw`z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        "、",
+        math(String.raw`b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        " であり、加法はそれぞれの有限 ",
+        math(String.raw`\mathbb F_2`),
+        " ベクトル空間の加法である。",
+      ]),
+      paragraph([
+        "この作用が主コサイクルの代表の選択に依存しないことを確かめる。二つの主一次コサイクル ",
+        math(String.raw`c,c'\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " が同じ主第一コホモロジー類を表すとき、ある ",
+        math(String.raw`a_0\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " が存在して ",
+        math(String.raw`c'=c+a_0`),
+        " である。任意の ",
+        math(String.raw`e^\ast\in E_{\mathrm{cell}}^\ast`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1(c')(e^\ast)
+&=
+\mathsf D_1(c+a_0)(e^\ast)
+\quad\bigl(\because\ c'=c+a_0\bigr)\\
+&=
+(c+a_0)\!\left(d_1^{-1}(e^\ast)\right)
+\quad\bigl(\because\ \mathsf D_1\text{ の定義}\bigr)\\
+&=
+c\!\left(d_1^{-1}(e^\ast)\right)
++a_0\!\left(d_1^{-1}(e^\ast)\right)
+\quad\bigl(\because\ \mathbb F_2^{E_{\mathrm{cell}}}\text{ の成分ごとの加法}\bigr)\\
+&=
+\mathsf D_1(c)(e^\ast)+\mathsf D_1(a_0)(e^\ast)
+\quad\bigl(\because\ \mathsf D_1\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
+        " より ",
+        math(String.raw`\mathsf D_1(a_0)\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\left\{
+  \mathsf D_1(c')+b^\ast
+  \ \middle|\
+  \ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+\right\}
+=
+\left\{
+  \mathsf D_1(c)+b^\ast
+  \ \middle|\
+  \ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+\right\}.`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\overline{\mathsf D}_1`),
+        " は代表の選択に依存せず well-defined である。主一次コサイクル、主第一コホモロジー類、双対一次サイクル、双対第一ホモロジー類を同一視せず、移行には商集合と ",
+        math(String.raw`\overline{\mathsf D}_1`),
+        " だけを用いる。この定義は誘導写像が全単射であるとはまだ主張しない。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

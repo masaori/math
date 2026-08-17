@@ -49,6 +49,7 @@ export const ALL_LABELS = [
   "def_mod_two_boundary_parity",
   "def_oriented_closed_surface_cellulation",
   "def_primal_cocycle_to_dual_cycle_transport",
+  "def_primal_cohomology_to_dual_homology_transport",
   "def_primal_dual_cell_correspondence",
   "def_primal_first_cocycle_space_over_f2",
   "def_primal_to_dual_edge_coefficient_transport",
