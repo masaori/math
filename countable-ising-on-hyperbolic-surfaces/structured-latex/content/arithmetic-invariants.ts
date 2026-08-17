@@ -326,4 +326,83 @@ x+1\mid P_Q'(x).`),
       ]),
     ],
   },
+  {
+    id: "arithmetic_invariants_theorem_fixed_quotient_partition_polynomial_irreducible_factorization",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の分配多項式の既約分解" },
+    labels: ["theorem_fixed_quotient_partition_polynomial_irreducible_factorization"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/fixed-quotient-partition-polynomial-irreducible-factorization"],
+    statement: [
+      paragraph([ref("theorem_fixed_quotient_ising_partition_polynomial"), " の多項式は "]),
+      displayMath(String.raw`Z_{G_Q}(x)=2(x+1)^{12}Q_Q(x)\in\mathbb Z[x]`),
+      paragraph(["と既約分解される。ただし "]),
+      displayMath(String.raw`\begin{aligned}
+Q_Q(x)={}&63x^{44}-84x^{43}+882x^{42}-5292x^{41}+30261x^{40}-124376x^{39}\\
+&+396144x^{38}-1022928x^{37}+2256050x^{36}-4400568x^{35}+7781004x^{34}\\
+&-12653312x^{33}+19098240x^{32}-26919480x^{31}+35607568x^{30}-44375136x^{29}\\
+&+52275723x^{28}-58374540x^{27}+61934922x^{26}-62562108x^{25}+60269153x^{24}\\
+&-55450752x^{23}+48781656x^{22}-41071744x^{21}+33118029x^{20}-25586652x^{19}\\
+&+18944254x^{18}-13441092x^{17}+9135819x^{16}-5945016x^{15}+3700368x^{14}\\
+&-2200128x^{13}+1247330x^{12}-672672x^{11}+343980x^{10}-166088x^9+75294x^8\\
+&-31800x^7+12376x^6-4368x^5+1365x^4-364x^3+78x^2-12x+1
+\in\mathbb Z[x].
+\end{aligned}`),
+      paragraph([
+        "は原始的な次数 ",
+        math("44"),
+        " の既約多項式である。したがって非定数既約因子の重複度は ",
+        math("x+1"),
+        " が ",
+        math("12"),
+        "、",
+        math("Q_Q"),
+        " が ",
+        math("1"),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_fixed_quotient_ising_partition_polynomial"), " の表示された有限係数列を整数係数多項式として乗除算すると"]),
+      displayMath(String.raw`\begin{aligned}
+Z_{G_Q}(x)
+&=2(x+1)^{12}Q_Q(x)
+&&\bigl(\because\ \mathbb Z[x]\text{ 上の有限乗算による係数照合}\bigr),\\
+\deg Q_Q
+&=44
+&&\bigl(\because\ Q_Q\text{ の最高次係数と定数項の表示}\bigr),\\
+\gcd_{\mathbb Z}\{a\in\mathbb Z\mid a\text{ は }Q_Q\text{ の係数}\}
+&=1
+&&\bigl(\because\ Q_Q\text{ の定数項が }1\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\overline Q_Q\in\mathbb F_{191}[x]`),
+        " を ",
+        math(String.raw`Q_Q`),
+        " の係数を標準写像 ",
+        math(String.raw`\mathbb Z\to\mathbb F_{191}`),
+        " で移した多項式とする。",
+        math(String.raw`44=2^2\cdot11`),
+        " なので、有限体上の既約性判定に必要な有限剰余計算は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^{191^{44}}&\equiv x\pmod{\overline Q_Q},\\
+\gcd_{\mathbb F_{191}[x]}\!\left(\overline Q_Q,x^{191^{22}}-x\right)&=1,\\
+\gcd_{\mathbb F_{191}[x]}\!\left(\overline Q_Q,x^{191^4}-x\right)&=1.
+\end{aligned}`),
+      paragraph([
+        "を与える。有限体上の既約性判定より ",
+        math(String.raw`\overline Q_Q`),
+        " は ",
+        math(String.raw`\mathbb F_{191}[x]`),
+        " で既約である。したがって整数係数の原始多項式に対する Gauss の補題より ",
+        math(String.raw`Q_Q`),
+        " は ",
+        math(String.raw`\mathbb Z[x]`),
+        " で既約である。さらに ",
+        math(String.raw`x+1`),
+        " は一次式なので既約であり、表示された積が主張する重複度をもつ既約分解である。全ての計算は整数係数多項式と有限体上の有限演算であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
