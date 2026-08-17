@@ -9,8 +9,9 @@
 
 launchd は対話シェルのアカウント割り当てを継承せず、既定資格情報が指す
 `coding-agent-0002` の Fable 5 利用上限で Claude 回が終了コード 1 になっていた。
-tick 本体から、作成時に使っていた `coding-agent-0001` の設定ディレクトリと長期トークンを
-Claude プロセスだけへ明示的に渡す経路へ戻した。`claude-fable-5` と effort medium は変更していない。
+`coding-agent-0001` は短い probe には終了コード 0 を返したが、実際の tick prompt では同じ上限で
+終了コード 1 になった。実 prompt と同じ長さの入力が通る `coding-agent-0003` の設定ディレクトリと
+長期トークンを Claude プロセスだけへ明示的に渡した。`claude-fable-5` と effort medium は変更していない。
 Claude 上限時に別モデルまたは Codex へ差し替える処理は持たず、Claude と Codex の通常の交互実行だけを残す。
 
 ## 自動ループ tick: 安定ファイバーの層別完全逆像の構造化記述（2026-08-17 22:12）
