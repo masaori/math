@@ -1352,6 +1352,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.openSquareRealizedLowerSet_bddAbove
   Ising2DLambda.ThermodynamicLimit.realizeRational_le_openSquareFreeEnergyDensity
   Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_le_of_forall_le
+  Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_eq_openSquare_of_le_one
+  Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_nonempty_of_le_one
+  Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_bddAbove_of_le_one
+  Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity_eq_openSquare_of_le_one
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

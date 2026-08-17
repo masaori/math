@@ -395,6 +395,7 @@ export const ALL_LABELS = [
   "def_oriented_orbit_pairs",
   "def_partition_polynomial",
   "def_periodic_density_lower_set",
+  "def_periodic_free_energy_density_le_one",
   "def_permutation_sign",
   "def_phase_transition_countable_statement",
   "def_prime_exponent",

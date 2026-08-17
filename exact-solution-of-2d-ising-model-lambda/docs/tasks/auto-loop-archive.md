@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 373 で台帳から移した記録（tick 368 分）
+
+### 現在地
+
+- **2026-08-17 の tick 368 は、台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割り（境界評価の対数化／密度の比較／周期境界の密度の列は同じ下組・同じ実数へ）、その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書いて四層で閉じた。**
+  `claim_periodic_open_boundary_comparison_log_le_one`（`claim_periodic_open_boundary_comparison_rational` の直後・`def_open_square_free_entropy_density` の直前、住処 Lambda）: $L\ge1$、$0<q\le1$ で $2L\log q+\log Z^{\mathrm{op}}_{L,L}(q)\le_\Lambda\Phi_L(q)\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)$。証明は準備二つ（値の正値性、下端の値の対数を開く二段 `claim_log_additive`・`claim_log_power`）と一続き四段（準備の第二・`claim_rational_log_order_iff` で有理点の評価を移す・`def_finite_free_entropy`・移す）。上端は $\log Z^{\mathrm{op}}_{L,L}(q)$ そのもので開く操作は無い。
+  SageMath `check/periodic-open-boundary-comparison-log/`（$L\le3$、有理点 6 点、126 検査、3 秒。`ZZ`/`QQ` の厳密計算）。Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonLog.lean`（`logRat_periodicOpenLowerValue_eq`・`logOrderLE_periodicOpenLog_bounds_of_le_one`。`partitionPolynomial_eval_pos`・`openPartitionValueRat_pos`・`partitionValueRat_periodicOpen_bounds_of_le_one`・`logRat_le_iff`・`logRat_mul`・`logRat_pow` が本文の段に 1 対 1）、必要十分版は「開境界正方形のブロック敷き詰め評価の対数化」の `twoSided_bounds_transport_through_monotone_map_necSuf` を共有（新設しない。上端の等式は `rfl`）、導出版 `PeriodicOpenComparisonLogFromNecSuf.lean`。sorry 検査 1277 件。check 456 ブロック・verify-check-linkage 252 件・PDF 248 ページ通過。
+  式変形統一: 姉妹側「同時固有空間分解」（`eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`）の Step 4 末尾の $\dim\mathrm{im}\,Q_\epsilon=\mathrm{tr}(Q_\epsilon)=2^{M-m}$（散文内の二段）を一続きの等号と行末根拠へ揃えた（内容は不変。ラベル参照は直後に 1 つ置いた）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の姉妹側「冪等行列のトレースは像の次元」の書き換え差分を読み、四つの計算の根拠がすべて残り中身が不変であることを確認。前 tick に配線した `lean:` 28 件は check（`validate:lean`）で実在を確認。修正なし。次は「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」。
+
+### 前進の記録
+
+- 2026-08-17（tick 368）: 台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割った（境界評価の対数化／密度の比較／同じ下組・同じ実数へ。理由: 対数化・密度化・下組の一致は別々の論法で、1 tick 1 論法にするため）。その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を四層で閉じ、`claim_periodic_open_boundary_comparison_log_le_one` を有理点の評価の直後に置いた。SageMath 126 検査、Lean 具体版・導出版（必要十分版は既存を共有）、sorry 検査 1277 件。式変形統一は姉妹側「同時固有空間分解」の Step 4 末尾の二段を一続きの形へ。
+
+### レビュー記録
+
+- 2026-08-17（tick 368）: 前 tick の姉妹側「冪等行列のトレースは像の次元」の書き換え差分（Step 1 の二計算・Step 2・Step 3）を読み、根拠がすべて残り中身が不変であることを確認。前 tick に配線した `lean:` 28 件は check の `validate:lean` で実在を確認。
+  「何も言っていない主張」の観点: 今 tick の対数化は有理点の評価を $\Lambda$ の順序へ移す主張で、密度の比較が引くので残す。準備の正値性・対数を開く二段は独立ブロックにせず証明の中に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
+
 ## 2026-08-17 tick 372 で台帳から移した記録（tick 367 分）
 
 ### 現在地

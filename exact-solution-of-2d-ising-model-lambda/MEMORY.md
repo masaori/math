@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 373 は、前 tick の「周期境界の密度の下組と開境界正方形の密度の下組は等しい」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_periodic_free_energy_density_le_one`（`claim_periodic_density_lower_set_eq_open_square_le_one` の直後・`remark_real_escape_plan` の直前、住処 R、脱出理由は完備性の再利用）: $0<q\le1$ で $\rho_{\mathbb R}(A^{\mathrm{per}}(q))=\rho_{\mathbb R}(A^{\mathrm{op}}(q))$（一続き三段。下組の等号）、よって空でなく上に有界、$f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))\in\mathbb R$、$f^{\mathrm{per}}(q)=f^{\mathrm{op}}(q)$（一続き三段。同じ集合の上限）。`remark_real_escape_plan` の「三つの定義」を「四つ」へ直し、本文末尾「この先に書くこと」から「周期境界自由エネルギー密度への移送」を消した（残り: 零点密度／臨界指数）。
+Lean 具体版 `ThermodynamicLimit/PeriodicFreeEnergyDensity.lean`（`periodicRealizedLowerSet`・`periodicRealizedLowerSet_eq_openSquare_of_le_one`・`_nonempty_of_le_one`・`_bddAbove_of_le_one`・`periodicFreeEnergyDensity`（`sSup`）・`periodicFreeEnergyDensity_eq_openSquare_of_le_one`）。sorry 検査 1300 件。check 462 ブロック・verify-check-linkage 256 件・PDF 252 ページ通過。
+式変形統一: 姉妹側「指数関数の和とクロネッカーのデルタ」（`transfer_matrix_009_claim_exp_sum`）の根拠なし二行（$\sum(1+i\cdot0)=\sum1$、$r\cdot\frac{1-1}{1-r}=0$）へ行末根拠を置いた（姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 004 のその他・005・008 系（002 の 1318 行以降の行列ノルム系は 2026-08-10 に済）。
+次は「零点密度」: 着手前に論法で割る（何を可算側で述べ、どこで $\mathbb C$ へ脱出するかを先に決める。README の章立て「熱力学極限」の零点密度は $\mathbb R$ 脱出の章）。
+
+（tick 372 の記録）
 2026-08-17 の tick 372 は、前 tick の「開境界正方形の密度の下組は周期境界の密度の下組に含まれる（Archimedes 性）」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度は $f^{\mathrm{op}}(q)$ に等しい」を二行へ割り（集合の等号／$f^{\mathrm{per}}(q)$ の定義と一致）、その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を四層で閉じた。
 `claim_periodic_density_lower_set_eq_open_square_le_one`（`claim_open_square_density_lower_set_subset_periodic_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{per}}(q)=A^{\mathrm{op}}(q)$。証明は二つの包含と集合の外延性だけ。

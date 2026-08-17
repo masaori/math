@@ -2138,7 +2138,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
 &&(\because\ \text{オイラーの公式}) \\
 &= \sum_{j=1}^{M} \left(1 + i \cdot 0\right)
 &&(\because\ lj \in \mathbb{Z}\ \text{なので}\ \cos 2\pi lj = 1,\ \sin 2\pi lj = 0) \\
-&= \sum_{j=1}^{M} 1 \\
+&= \sum_{j=1}^{M} 1
+&&(\because\ 1 + i \cdot 0 = 1) \\
 &= M
 &&(\because\ \text{項数が}\ M\ \text{である}) \\
 &= M\,\delta^M_{(k,0)}
@@ -2173,7 +2174,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
 &&(\because\ r^{M} = \exp\!\left(2\pi i k\right)) \\
 &= r \cdot \frac{1 - 1}{1 - r}
 &&(\because\ k \in \mathbb{Z}\ \text{なので}\ \exp(2\pi i k) = 1) \\
-&= 0 \\
+&= 0
+&&(\because\ 1 - 1 = 0\ \text{であり、分子が}\ 0\ \text{の分数は}\ 0\ \text{である（}1 - r \neq 0\text{）}) \\
 &= M\,\delta^M_{(k,0)}
 &&(\because\ k \not\equiv 0 \pmod{M}\ \text{なので}\ \delta^M_{(k,0)} = 0\ \text{である})
 \end{aligned}`,

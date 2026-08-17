@@ -47484,6 +47484,94 @@ Y
     ],
   },
   {
+    id: "thermodynamic_limit_def_periodic_free_energy_density_le_one",
+    kind: "definition",
+    title: { text: "下組の実現像の上限としての周期境界の自由エネルギー密度と、開境界正方形のそれとの一致（実数体への脱出: 完備性。q は 1 以下）" },
+    labels: ["def_periodic_free_energy_density_le_one"],
+    habitat: "R",
+    realEscape:
+      "完備性（再利用）。可算側の下組 A^per(q) ⊂ Λ_ℚ を実現写像 ρ_ℝ で実数体へ送った像の上限（最小上界）を取るところで実数体の完備性を使う。像は claim_periodic_density_lower_set_eq_open_square_le_one により開境界正方形の像 ρ_ℝ(A^op(q)) と同じ集合なので、空でなく上に有界であることは def_open_square_free_energy_density で示した二つの性質をそのまま引く。新しい脱出理由は増えない。",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet",
+      "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_eq_openSquare_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_nonempty_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_bddAbove_of_le_one",
+      "Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity",
+      "Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity_eq_openSquare_of_le_one",
+    ],
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。",
+        ref("def_periodic_density_lower_set"),
+        " の下組 ",
+        math(String.raw`A^{\mathrm{per}}(q)\subset\Lambda_{\mathbb{Q}}`),
+        " を、",
+        ref("def_rational_log_order_group_realization"),
+        " の実現写像 ",
+        math(String.raw`\rho_{\mathbb{R}}`),
+        " で実数体へ送った像を",
+      ]),
+      displayMath(String.raw`\rho_{\mathbb{R}}\bigl(A^{\mathrm{per}}(q)\bigr):=\{\rho_{\mathbb{R}}(\mu)\in\mathbb{R}\mid\mu\in A^{\mathrm{per}}(q)\}\ \subset\ \mathbb{R}`),
+      paragraph([
+        "と書く。この集合は開境界正方形の像（",
+        ref("def_open_square_free_energy_density"),
+        "）と同じ集合である:",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathbb{R}}\bigl(A^{\mathrm{per}}(q)\bigr)
+&=\{\rho_{\mathbb{R}}(\mu)\in\mathbb{R}\mid\mu\in A^{\mathrm{per}}(q)\}
+&&(\because\ \text{上の定義})\\
+&=\{\rho_{\mathbb{R}}(\mu)\in\mathbb{R}\mid\mu\in A^{\mathrm{op}}(q)\}
+&&(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one}\text{ を }q:=q\text{ で読む。}0<q\le1)\\
+&=\rho_{\mathbb{R}}\bigl(A^{\mathrm{op}}(q)\bigr)
+&&(\because\ \blkref{def_open_square_free_energy_density}\text{ の像の定義})
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\rho_{\mathbb{R}}\bigl(A^{\mathrm{per}}(q)\bigr)`),
+        " は空でなく（",
+        math(String.raw`\rho_{\mathbb{R}}(-\iota(\ell_2))`),
+        " が属する）、上に有界である（",
+        math(String.raw`b(q)`),
+        " が一つの上界）。どちらも ",
+        ref("def_open_square_free_energy_density"),
+        " で ",
+        math(String.raw`\rho_{\mathbb{R}}(A^{\mathrm{op}}(q))`),
+        " について示した性質を、同じ集合について読み直しただけである。",
+        "実数体は完備なので、この空でなく上に有界な部分集合には上限（最小上界）がただ一つ存在する（ここで完備性を使う。脱出理由に書いた）。周期境界の自由エネルギー密度を",
+      ]),
+      displayMath(String.raw`f^{\mathrm{per}}(q):=\sup\rho_{\mathbb{R}}\bigl(A^{\mathrm{per}}(q)\bigr)\ \in\ \mathbb{R}`),
+      paragraph([
+        "と定める。上限を取る対象の集合が同じなので、その値は開境界正方形の自由エネルギー密度と同じ実数である:",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f^{\mathrm{per}}(q)
+&=\sup\rho_{\mathbb{R}}\bigl(A^{\mathrm{per}}(q)\bigr)
+&&(\because\ \text{上の定義})\\
+&=\sup\rho_{\mathbb{R}}\bigl(A^{\mathrm{op}}(q)\bigr)
+&&(\because\ \text{上で示した }\rho_{\mathbb{R}}(A^{\mathrm{per}}(q))=\rho_{\mathbb{R}}(A^{\mathrm{op}}(q))\text{。同じ集合の上限は同じ})\\
+&=f^{\mathrm{op}}(q)
+&&(\because\ \blkref{def_open_square_free_energy_density})
+\end{aligned}`),
+      paragraph([
+        "「自由エネルギー密度」の名の使い方は ",
+        ref("def_open_square_free_energy_density"),
+        " と同じである（",
+        ref("def_finite_free_entropy_density"),
+        " の周期境界の密度 ",
+        math(String.raw`\Psi_L(q)\in\Lambda_{\mathbb{Q}}`),
+        " の列が近づく先として置いた実数。符号や逆温度の因子は付けず、",
+        math(String.raw`x`),
+        " への代入も行っていない）。定義に使ったのは、下組が等しいこと（可算側の主張）、開境界正方形の像が空でなく上に有界であること、実数体の完備性だけである。",
+        "周期境界の自由エネルギー密度についての言明は、以後この等式で開境界正方形の側へ移して述べる。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_remark_real_escape_plan",
     kind: "remark",
     title: { text: "実数体への脱出をどう行うか（方針）" },
@@ -47491,7 +47579,7 @@ Y
     habitat: "Lambda",
     statement: [
       paragraph([
-        "実数体を扱う三つの定義と四つの主張（",
+        "実数体を扱う四つの定義と四つの主張（",
         ref("def_real_logarithm"),
         "、",
         ref("def_rational_log_order_group_realization"),
@@ -47505,6 +47593,8 @@ Y
         ref("claim_rational_log_order_group_realization_monotone"),
         "、",
         ref("def_open_square_free_energy_density"),
+        "、",
+        ref("def_periodic_free_energy_density_le_one"),
         "）を除き、ここまでの本文はすべて可算な対象（",
         math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\Lambda\subset\Lambda_{\mathbb{Q}}`),
         "、",
@@ -47515,6 +47605,8 @@ Y
         "熱力学極限は実数体を要するが、**要るのは極限の値に名前を与える一点だけ**である。",
         "以下はその段の書き方の方針であり、開境界正方形については ",
         ref("def_open_square_free_energy_density"),
+        " で、周期境界については（下組が等しいことを経て）",
+        ref("def_periodic_free_energy_density_le_one"),
         " で実行した。",
       ]),
       list([
@@ -47620,7 +47712,7 @@ Y
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 周期境界自由エネルギー密度への移送、零点密度。",
+          "「熱力学極限」の残り: 零点密度。",
         ],
         [
           todo("未着手"),
