@@ -33,6 +33,7 @@ import blocks_iterate_monoid_principal_ideal_tail from './content/iterate-monoid
 import blocks_iterate_monoid_stabilization_index from './content/iterate-monoid-stabilization-index.ts'
 import blocks_iterate_monoid_stable_fiber_depth from './content/iterate-monoid-stable-fiber-depth.ts'
 import blocks_iterate_monoid_stable_fiber_dynamics from './content/iterate-monoid-stable-fiber-dynamics.ts'
+import blocks_iterate_monoid_stable_fiber_layer_branching from './content/iterate-monoid-stable-fiber-layer-branching.ts'
 import blocks_iterate_monoid_stable_fiber_layer_preimage from './content/iterate-monoid-stable-fiber-layer-preimage.ts'
 import blocks_iterate_monoid_stable_fiber_predecessor_count from './content/iterate-monoid-stable-fiber-predecessor-count.ts'
 import blocks_iterate_monoid_stable_image from './content/iterate-monoid-stable-image.ts'
@@ -67,6 +68,7 @@ export type AllBlocks = [
   ...typeof blocks_iterate_monoid_stabilization_index,
   ...typeof blocks_iterate_monoid_stable_fiber_depth,
   ...typeof blocks_iterate_monoid_stable_fiber_dynamics,
+  ...typeof blocks_iterate_monoid_stable_fiber_layer_branching,
   ...typeof blocks_iterate_monoid_stable_fiber_layer_preimage,
   ...typeof blocks_iterate_monoid_stable_fiber_predecessor_count,
   ...typeof blocks_iterate_monoid_stable_image,
