@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 396 は、台帳の先頭行「零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。
+`def_fisher_zero_mult_count_in_rational_disc`: $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})\in\mathbb N$。有限集合であることは `def_fisher_zero_count_in_rational_disc`、各点の重複度が定まる根拠は `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`。和の添字集合の元の個数は $N_L(c,r)$ そのもの。
+Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountInRationalDisc.lean`。**`Set.ncard_eq_toFinset_card'` は `Fintype` インスタンスを要求して通らないので、`Set.Finite` を引数に取る `Set.ncard_eq_toFinset_card` を使う。** lake build・sorry 検査 1376 件・check 486 ブロック・linkage 272 件・PDF 264 ページ通過。
+次は最後の 1 行「零点密度の挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$」（左は各項が 1 以上＝`claim_qbar_root_multiplicity_ge_one_iff_root`、右は `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てる）。これで「熱力学極限」の章が閉じ、残るのは最後の章だけになる。
+**運用: tick の Claude 実行はこのループ専用アカウント（`~/.claude-coding-agent-0001` と `~/.config/agent-tokens/claude-coding-agent-0001.token`）へ固定した（コミット 2ca942c9）。** 既定の設定ディレクトリは全セッション共有なので、共有アカウントが Fable 5 のモデル単位の上限に達すると tick が exit 1 になる（実測 2026-08-17 23:05）。モデルは claude-fable-5 / effort medium のままで、他モデルや codex への差し替えはしない（フォールバック禁止）。資格情報が無ければ既定アカウントへ落ちずエラーで終える。
+
+（tick 395 の記録）
 2026-08-17 の tick 395 は、前 tick の「有限集合上の根の重複度の和は係数の上界を超えない」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割って（持ち上げた分配多項式が零でなく係数の上界が $2L^2$ であること／$N^{\mathrm{mult}}_L$ の定義／挟み込み）、その最初を四層で閉じた。
 `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（`claim_fisher_zero_finset_card_bound` の直前、住処 Qbar、脱出なし）: $L\ge1$ について (1) $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）・$=0$（$2L^2<k$）、(2) $\widehat{Z_L}^{\,F}\ne0$（背理法。係数がすべて零なら多重度の総和 $2^{L^2}$ が 0 になる）、(3) $2L^2<k$ で係数が零。

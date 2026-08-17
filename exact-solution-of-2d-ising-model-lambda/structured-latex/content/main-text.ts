@@ -49600,6 +49600,62 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
   },
 
   {
+    id: "thermodynamic_limit_def_fisher_zero_mult_count_in_rational_disc",
+    kind: "definition",
+    title: { text: "有理円板内の重複度付きの Fisher 零点の個数" },
+    labels: ["def_fisher_zero_mult_count_in_rational_disc"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroMultCountIndex",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroMultCountInRationalDisc",
+      "Ising2DLambda.ThermodynamicLimit.mem_fisherZeroMultCountIndex",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroMultCount_index_card",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`), "、", math(String.raw`c=(c_1,c_2)\in\mathbb{Q}\times\mathbb{Q}`),
+        "、", math(String.raw`r\in\mathbb{Q}_{>0}`), " とする。",
+        ref("def_fisher_zero_count_in_rational_disc"), " の個数 ",
+        math(String.raw`N_{L}(c,r)`),
+        " は零点を 1 個ずつ数えたものである。零点が重なっている度合いを込めて数えた個数を、",
+        "重複度（", ref("def_qbar_root_multiplicity"), "）の有限和で定める。",
+      ]),
+      paragraph([
+        "和を取る集合は ", math(String.raw`\mathcal{F}_{L}\cap D(c,r)`),
+        "（", ref("def_finite_lattice_fisher_zeros"), " と ", ref("def_rational_disc"),
+        "）であり、これは ", ref("def_fisher_zero_count_in_rational_disc"),
+        " で見たとおり有限集合である。各 ", math(String.raw`\xi`),
+        " の重複度が定まるのは、持ち上げ ",
+        math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+        "（", ref("def_integer_polynomial_qbar_lift"), "）が零でないこと（",
+        ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
+        "）による（", ref("def_qbar_root_multiplicity"),
+        " は零でない多項式についてしか重複度を定めない）。そこで",
+      ]),
+      displayMath(String.raw`N^{\mathrm{mult}}_{L}(c,r):=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)\ \in\ \mathbb{N}`),
+      paragraph([
+        "と定め、円板 ", math(String.raw`D(c,r)`),
+        " に入る重複度付きの Fisher 零点の個数と呼ぶ。有限個の自然数の和なので ",
+        math(String.raw`N^{\mathrm{mult}}_{L}(c,r)\in\mathbb{N}`),
+        " である。和を取る集合の元の個数はちょうど ",
+        math(String.raw`N_{L}(c,r)`), " であり（同じ集合を数えている）、",
+        math(String.raw`N_{L}(c,r)`), " と ",
+        math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`),
+        " は「各元を 1 と数えるか、その重複度と数えるか」だけが違う。",
+      ]),
+      paragraph([
+        "この定義に現れるのは代数的数と自然数の有限和だけであり、実数体も複素数体も現れない。",
+        "重複度を込めた個数を使う理由は、零点が重なっている場合に ",
+        math(String.raw`N_{L}(c,r)`),
+        " が零点の「量」を取りこぼすことである。次の主張で ",
+        math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`),
+        " を示し、格子点数で割った密度がどちらの数え方でも同じ上界 ",
+        math(String.raw`2`), " を持つことを言う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -49616,7 +49672,7 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
+          "「熱力学極限」の残り: 零点密度の挟み込み ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "。",
         ],
         [
           todo("未着手"),

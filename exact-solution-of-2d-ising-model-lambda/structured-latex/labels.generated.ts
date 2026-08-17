@@ -370,6 +370,7 @@ export const ALL_LABELS = [
   "def_fisher_zero_count_in_rational_disc",
   "def_fisher_zero_density_in_rational_disc",
   "def_fisher_zero_density_limsup_liminf",
+  "def_fisher_zero_mult_count_in_rational_disc",
   "def_global_spin_reversal",
   "def_high_temperature_polynomial",
   "def_high_temperature_sector_polynomial",

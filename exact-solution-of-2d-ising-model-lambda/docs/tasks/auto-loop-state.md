@@ -6,6 +6,10 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-17 の tick 396 は、台帳の先頭行「零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_fisher_zero_mult_count_in_rational_disc`（「この先に書くこと」の直前）: $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})\in\mathbb N$。和を取る集合が有限であることは `def_fisher_zero_count_in_rational_disc` で見たとおりで、各点の重複度が定まる根拠は前 tick の `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（持ち上げが零でない）。和を取る集合の元の個数はちょうど $N_L(c,r)$ であり、$N_L$ との違いは「各元を 1 と数えるか重複度と数えるか」だけである。
+  Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountInRationalDisc.lean`（`fisherZeroMultCountIndex`（有限集合を `Finset` として読む）・`fisherZeroMultCountInRationalDisc`（`Finset.sum`）・`mem_fisherZeroMultCountIndex`・`fisherZeroMultCount_index_card`（`Set.ncard_eq_toFinset_card`。`ncard_eq_toFinset_card'` は `Fintype` を要求して通らない））。`Ising2DLambda.lean` に import 追加。lake build・sorry 検査 1376 件・check 486 ブロック・verify-check-linkage 272 件・build:pdf 264 ページ通過。
+  併せて、tick の Claude 実行をこのループ専用アカウント（coding-agent-0001）へ固定した（コミット 2ca942c9）。共有の既定設定ディレクトリを使っていたため、共有アカウントが Fable 5 のモデル単位の上限に達した 23:05 の tick が exit 1 になっていた。モデル（claude-fable-5 / medium）も CLI も変えていない。資格情報が無ければ既定アカウントへ落ちずエラーで終える。
 - **2026-08-17 の tick 395 は、台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げた分配多項式が零でなく係数の上界が $2L^2$ であること／$N^{\mathrm{mult}}_L$ の定義／挟み込み）、その最初を四層で閉じた（住処 Qbar、脱出なし）。**
   `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（`claim_fisher_zero_finset_card_bound` の直前、住処 Qbar）: $L\ge1$ について、(1) $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）・$=0$（$2L^2<k$）、(2) $\widehat{Z_L}^{\,F}\ne0$、(3) $2L^2<k$ で係数が零。理由: 重複度 $\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ が定まるには持ち上げが零でないことが要り、和の上界には係数の上界が要る。どちらも `claim_fisher_zero_finset_card_bound` の証明の中に埋まっていて引けなかったので、独立の主張へ持ち上げ、元の証明はこの主張を引く形へ直した（議論の重複を作らない）。
   SageMath `check/partition-polynomial-qbar-lift-nonzero-coeff-bound/`（3 節。$L=1,2,3$。分配多項式は配位から作り、多重度の列は独立に数える。係数の総和が $2^{L^2}$ であることも確認。`QQbar` 厳密。通過）。Lean は既存の `integerPolynomialQbarLift_partitionPolynomial_ne_zero` と `..._coeff_eq_zero_of_lt` を引くので新規ファイルは無し。check 485 ブロック・verify-check-linkage 272 件・build:pdf 264 ページ通過。
@@ -65,7 +69,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ の定義 | todo | 持ち上げが零でないこと（`claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`）で重複度が定まる。有限和は `def_fisher_zero_count_in_rational_disc` と同じ有限集合の上 |
 | 熱力学極限 | 零点密度: 挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$ | todo | 左は各項が 1 以上（`claim_qbar_root_multiplicity_ge_one_iff_root`）、右は `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てる |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
@@ -73,6 +76,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 396）: 台帳の先頭行「重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロック）。和を取る有限集合は $\mathcal F_L\cap D(c,r)$、重複度が定まる根拠は前 tick の持ち上げの非零性。Lean は `Finset.sum` と `Set.ncard_eq_toFinset_card`。check 486 ブロック・PDF 264 ページ通過。併せて tick の Claude 実行をこのループ専用アカウントへ固定（モデルは claude-fable-5 のまま。共有アカウントの上限でループが止まっていたため）。
 - 2026-08-17（tick 395）: 台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げの非零性と係数の上界／$N^{\mathrm{mult}}_L$ の定義／挟み込み。理由: 重複度が定まる前提と和の上界の前提が、既存の証明の中に埋まっていて引けなかったため）、その最初 `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound` を四層で閉じた。既存 `claim_fisher_zero_finset_card_bound` の証明からその議論を持ち上げ、元の証明はこの主張を引く形へ直した。SageMath 3 節（$L=1,2,3$）、Lean は既存定理を引くので新規なし。check 485 ブロック・linkage 272 件・PDF 264 ページ通過。式変形統一: 姉妹側 $c_2^*=s_2^*c_2$ の一行の鎖を一続き四段（行末根拠つき）へ揃えた。姉妹側 check・PDF 325 ページ通過。
 - 2026-08-17（tick 394）: 台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた。係数上界の帰納法で正の重複度を持つ一点の一次因子を割り出し、その点の重複度は高々 1 だけ減ること、他の各点の重複度は失われないこと、商の係数上界が 1 下がることを組み合わせた。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 4 冒頭の同値の鎖を揃えた。
 - 2026-08-17（tick 393）: 台帳の先頭行「零点密度: 他の点の重複度は商へ引き継がれる」を四層で閉じ、`claim_qbar_other_root_multiplicity_le_quotient` を `claim_qbar_root_multiplicity_le_quotient_succ` の直後に置いた。$w\ne w'$、$f=(t-\widehat{w'})g$ ならば $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$ を、重複度の読み取り 1 → `claim_qbar_coprime_divides_cofactor`（$k:=0$）→読み取り 2 で示した。SageMath・Lean 具体版・既存必要十分版からの導出版まで通過。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 3 順方向の二つの同値変形を一続きの鎖へ揃えた（内容は不変）。
