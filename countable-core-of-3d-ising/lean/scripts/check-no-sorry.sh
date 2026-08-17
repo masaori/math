@@ -259,6 +259,7 @@ targets=(
   Ising3DCut.NecSuf.symmetrized_padicValRat_reciprocal_invariant_of_palindrome
   Ising3DCut.LimitQuantity.nullModel_symmetrized_padicValRat_reciprocal_invariant_fromNecSuf
   Ising3DCut.LimitQuantity.nullModel_symmetrized_value_reciprocal_invariant
+  Ising3DCut.LimitQuantity.nullModel_symmetrized_real_term_reciprocal_invariant
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
