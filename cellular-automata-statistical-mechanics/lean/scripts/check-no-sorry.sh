@@ -53,6 +53,14 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.IterateMonoidStableFiberDynamics.stableIndexMap_val
+  CellularAutomata.IterateMonoidStableFiberDynamics.stableIndexMap_bijective
+  CellularAutomata.IterateMonoidStableFiberDynamics.cycleIdempotent_commutes_with_globalMap
+  CellularAutomata.IterateMonoidStableFiberDynamics.globalMap_mem_stableFiber_index_iff
+  CellularAutomata.IterateMonoidStableFiberDynamics.stableFiber_exact_preimage
+  CellularAutomata.IterateMonoidStableFiberDynamics.stableFiber_image_subset
+  CellularAutomata.IterateMonoidStableFiberDynamics.constantZero_stableFiber_image_strict
+  CellularAutomata.IterateMonoidStableFiberDynamics.mem_stableFiberPreimageTable_iff
   CellularAutomata.IterateMonoidStablePartition.mem_stableFiber_iff
   CellularAutomata.IterateMonoidStablePartition.representative_mem_stableFiber
   CellularAutomata.IterateMonoidStablePartition.stableRepresentative_val
