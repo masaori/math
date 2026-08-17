@@ -207,18 +207,30 @@ fi
 log "=== tick 開始（${agent} / 30 分間隔 / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 printf '%s\n' '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 
-set +e
-if [ "$agent" = "claude" ]; then
+run_claude() {  # $1 = モデル名
   printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-    --model claude-fable-5 --effort medium \
+    --model "$1" --effort medium \
     --dangerously-skip-permissions --strict-mcp-config \
     --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+}
+
+set +e
+if [ "$agent" = "claude" ]; then
+  run_claude claude-fable-5
+  status=$?
+  # モデル単位の上限は、別モデルへ勝手に落とさずエラーとして扱う。何のモデルで何が
+  # 動いたのか分からなくなるため（人間の判断 2026-08-17）。
+  if [ "$status" -ne 0 ]; then
+    case "$(tail -5 "$LOG_FILE")" in
+      *"Switch to another model"*) log "    claude-fable-5 が利用上限。この tick はエラーで終える" ;;
+    esac
+  fi
 else
   printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
     -m gpt-5.6-sol -c model_reasoning_effort=medium \
     --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+  status=$?
 fi
-status=$?
 set -e
 printf '%s\n' "$agent" > "$AGENT_MARK"
 
