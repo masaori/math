@@ -129,6 +129,7 @@ export const ALL_LABELS = [
   "claim_orbit_transposition_composite_values",
   "claim_orbit_transposition_sign",
   "claim_oriented_orbit_pairs_cross_disjoint",
+  "claim_partition_polynomial_qbar_lift_nonzero_coeff_bound",
   "claim_partition_value_dual_factorization",
   "claim_partition_value_ge_one_at_positive_rational",
   "claim_partition_value_upper_bound_at_positive_rational",

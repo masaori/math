@@ -3412,13 +3412,14 @@ c_2^* = \cosh 2K_2^*
    \quad (\because c_2 = \cosh 2K_2\ \text{の定義})
 \end{aligned}`,
       ),
-      paragraph([
-        "この 2 式より ",
-        math(String.raw`c_2^* = \dfrac{c_2}{s_2} = c_2\cdot\dfrac{1}{s_2} = c_2\, s_2^* = s_2^*\, c_2`),
-        "（",
-        math(String.raw`\mathbb{R}`),
-        " の乗法の可換性による）。",
-      ]),
+      paragraph(["この 2 式より"]),
+      displayMath(String.raw`\begin{aligned}
+c_2^*
+&= \frac{c_2}{s_2}&&(\because\ \text{上の鎖})\\
+&= c_2\cdot\frac{1}{s_2}&&(\because\ \mathbb{R}\ \text{の除法は逆数との積}\ (s_2\ne0\ \text{は準備で確認済み}))\\
+&= c_2\, s_2^*&&(\because\ \text{もう一方の鎖の}\ s_2^* = \tfrac{1}{s_2})\\
+&= s_2^*\, c_2&&(\because\ \mathbb{R}\ \text{の乗法の可換性})
+\end{aligned}`),
     ],
     conversion: {
       status: "added",

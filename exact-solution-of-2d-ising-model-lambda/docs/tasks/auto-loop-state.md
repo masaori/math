@@ -6,6 +6,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-17 の tick 395 は、台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げた分配多項式が零でなく係数の上界が $2L^2$ であること／$N^{\mathrm{mult}}_L$ の定義／挟み込み）、その最初を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（`claim_fisher_zero_finset_card_bound` の直前、住処 Qbar）: $L\ge1$ について、(1) $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）・$=0$（$2L^2<k$）、(2) $\widehat{Z_L}^{\,F}\ne0$、(3) $2L^2<k$ で係数が零。理由: 重複度 $\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ が定まるには持ち上げが零でないことが要り、和の上界には係数の上界が要る。どちらも `claim_fisher_zero_finset_card_bound` の証明の中に埋まっていて引けなかったので、独立の主張へ持ち上げ、元の証明はこの主張を引く形へ直した（議論の重複を作らない）。
+  SageMath `check/partition-polynomial-qbar-lift-nonzero-coeff-bound/`（3 節。$L=1,2,3$。分配多項式は配位から作り、多重度の列は独立に数える。係数の総和が $2^{L^2}$ であることも確認。`QQbar` 厳密。通過）。Lean は既存の `integerPolynomialQbarLift_partitionPolynomial_ne_zero` と `..._coeff_eq_zero_of_lt` を引くので新規ファイルは無し。check 485 ブロック・verify-check-linkage 272 件・build:pdf 264 ページ通過。
+  式変形統一: 姉妹側「$c_2^*=s_2^*c_2$」（`008_TV1_hatZ_hatY_part1.ts`）で、散文中の一行の鎖 $c_2^*=\frac{c_2}{s_2}=c_2\cdot\frac1{s_2}=c_2s_2^*=s_2^*c_2$ を一続き四段（行末根拠つき）へ揃えた（内容は不変）。姉妹側 check・PDF 325 ページ通過。
+  レビュー: 前 tick の `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` の本文（係数上界の帰納法）と Lean を突き合わせ、一致した。修正なし。
 - **2026-08-17 の tick 394 は、台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた（住処 Qbar、脱出なし）。**
   `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound`: $f\ne0$ かつ $n<i\Rightarrow\mathrm{ac}_i(f)=0$ ならば、任意の有限集合 $s\subset\overline{\mathbb Q}$ について $\sum_{w\in s}\mathrm{mult}_w(f)\le n$。係数上界 $n$ の帰納法で、正の重複度を持つ一点 $w_0$ の一次因子を割り出し、$w_0$ には `claim_qbar_root_multiplicity_le_quotient_succ`、残りの点には `claim_qbar_other_root_multiplicity_le_quotient` を当てた。
   SageMath `check/qbar-finite-root-multiplicity-sum-le-coeff-bound/`、Lean 具体版・有限和比較だけへ落とした必要十分版・導出版を追加。check 484 ブロック、verify-check-linkage 271 件、sorry 検査 1376 件、PDF 264 ページ通過。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」の Step 4 冒頭の二つの同値を、一続き二段・行末根拠つきへ揃えた（内容は不変）。姉妹側 check 300 ブロック・PDF 325 ページ通過。
@@ -60,13 +65,15 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ と $N_L\le N^{\mathrm{mult}}_L\le2L^2$ | todo | 定義と挟み込み。論法が二つなら割る |
+| 熱力学極限 | 零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ の定義 | todo | 持ち上げが零でないこと（`claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`）で重複度が定まる。有限和は `def_fisher_zero_count_in_rational_disc` と同じ有限集合の上 |
+| 熱力学極限 | 零点密度: 挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$ | todo | 左は各項が 1 以上（`claim_qbar_root_multiplicity_ge_one_iff_root`）、右は `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てる |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 395）: 台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げの非零性と係数の上界／$N^{\mathrm{mult}}_L$ の定義／挟み込み。理由: 重複度が定まる前提と和の上界の前提が、既存の証明の中に埋まっていて引けなかったため）、その最初 `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound` を四層で閉じた。既存 `claim_fisher_zero_finset_card_bound` の証明からその議論を持ち上げ、元の証明はこの主張を引く形へ直した。SageMath 3 節（$L=1,2,3$）、Lean は既存定理を引くので新規なし。check 485 ブロック・linkage 272 件・PDF 264 ページ通過。式変形統一: 姉妹側 $c_2^*=s_2^*c_2$ の一行の鎖を一続き四段（行末根拠つき）へ揃えた。姉妹側 check・PDF 325 ページ通過。
 - 2026-08-17（tick 394）: 台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた。係数上界の帰納法で正の重複度を持つ一点の一次因子を割り出し、その点の重複度は高々 1 だけ減ること、他の各点の重複度は失われないこと、商の係数上界が 1 下がることを組み合わせた。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 4 冒頭の同値の鎖を揃えた。
 - 2026-08-17（tick 393）: 台帳の先頭行「零点密度: 他の点の重複度は商へ引き継がれる」を四層で閉じ、`claim_qbar_other_root_multiplicity_le_quotient` を `claim_qbar_root_multiplicity_le_quotient_succ` の直後に置いた。$w\ne w'$、$f=(t-\widehat{w'})g$ ならば $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$ を、重複度の読み取り 1 → `claim_qbar_coprime_divides_cofactor`（$k:=0$）→読み取り 2 で示した。SageMath・Lean 具体版・既存必要十分版からの導出版まで通過。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 3 順方向の二つの同値変形を一続きの鎖へ揃えた（内容は不変）。
 - 2026-08-17（tick 392）: 台帳の先頭行「零点密度: 有限集合上の重複度の和は係数の上界を超えない」を三行へ割った（同じ点の重複度の減り方／他の点の重複度が商へ引き継がれること／和の上界（係数の上界の帰納法）。理由: 帰納法の一歩で $f=(t-\widehat{w_0})g$ へ移るとき、$w_0$ の分の重複度と他の点の重複度をそれぞれ別の補題で評価する必要があるため）。その最初「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」を四層で閉じ、`claim_qbar_root_multiplicity_le_quotient_succ` を `claim_qbar_coprime_divides_cofactor` の直後に置いた。$f\ne0$、$f=(t-\widehat w)g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)+1$（読み取り 1 で証人を取り、一続き三段のあと一次因子を消去して読み取り 2）。SageMath（4 節。$w$ 5 種・$g$ 7 種）、Lean 具体版・必要十分版（整除の指数だけで述べ可換環のみ）・導出版、sorry 検査 1371 件。式変形統一: 姉妹側「$C(R^\times)$ の元はスカラー行列」の $Wx=\dots=xW$ を一続き三段（行末根拠つき）へ揃えた（内容は不変）。姉妹側 check・PDF 325 ページ通過。
