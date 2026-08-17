@@ -251,6 +251,9 @@ targets=(
   Ising3DCut.LimitQuantity.reflect_eq_of_coeff_palindrome
   Ising3DCut.LimitQuantity.coeff_polyOfMultiplicity_of_le
   Ising3DCut.LimitQuantity.reflect_polyOfMultiplicity_eq
+  Ising3DCut.LimitQuantity.reflect_nullModel_poly_eq
+  Ising3DCut.LimitQuantity.reflect_structuralCore_poly_eq
+  Ising3DCut.LimitQuantity.natDegree_polyOfMultiplicity_le
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
