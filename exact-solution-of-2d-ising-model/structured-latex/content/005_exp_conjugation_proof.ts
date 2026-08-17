@@ -489,15 +489,27 @@ u
 \end{aligned}`,
       ),
       paragraph([
-        "となり、",
-        math(String.raw`|0_{\mathbb{C}}|=0`),
+        "となる。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|u|
+&= |0_{\mathbb{C}}|
+   \quad (\because \text{上の鎖 } u=0_{\mathbb{C}}) \\
+&= 0
+   \quad (\because \text{絶対値の基本性質}) \\
+&= \|A\|\cdot 0
+   \quad (\because \text{実数の } 0 \text{ との積は } 0) \\
+&= \|A\|\,\|B\|
+   \quad (\because \|B\|=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`|u|=\|A\|\,\|B\|`),
         "（",
         ref("abs_basic_properties"),
-        "）と ",
-        math(String.raw`\|B\|=0`),
-        " から ",
-        math(String.raw`|u|=0=\|A\|\,\|B\|`),
-        "。",
+        "）を得る。",
       ]),
       paragraph([
         "場合 2: ",
