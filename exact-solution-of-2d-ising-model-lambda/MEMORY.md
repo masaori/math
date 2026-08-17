@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 379 は、前 tick の「有限格子の Fisher 零点の全体は有限集合であり元の個数は $2L^2$ を超えない」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r)$」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_fisher_zero_count_in_rational_disc`（`claim_fisher_zero_set_finite_card_bound` の直後、住処 Qbar、脱出なし）: $\mathcal F_L\cap D(c,r)$ は有限集合 $\mathcal F_L$ の部分集合なので有限、$N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$、定義の中に $N_L(c,r)\le\lvert\mathcal F_L\rvert$ を置いた。本文末尾「この先に書くこと」から済んだ項目を消した。
+Lean 具体版 `ThermodynamicLimit/FisherZeroCountInRationalDisc.lean`（`fisherZeroSet_inter_rationalDisc_finite`・`fisherZeroCountInRationalDisc`・`fisherZeroCountInRationalDisc_le_ncard`）。sorry 検査 1316 件。check 468 ブロック・verify-check-linkage 259 件・PDF 255 ページ通過。
+式変形統一: 姉妹側「転送行列」（`004_transfer_matrix.ts`）の $\mathbf{end}$ の構成の証明 Step 4 の散文の鎖 $(\sum_I\Theta_{I,I})(f_K)=\sum_I\delta_{I,K}f_I=f_K$ を一続き四段へ（姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 004 のその他・005 の残り（Frobenius Step 5 の「$\mathbb R$ の移項」の散文等）・008 系。
+次は「格子点数あたりの零点数 $\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb Q$ と上界 $\nu_L\le2$」: 定義と、$N_L\le\lvert\mathcal F_L\rvert\le2L^2$（`def_fisher_zero_count_in_rational_disc`・`claim_fisher_zero_set_finite_card_bound`）を $L^2>0$ で割る一続きの不等式。住処 Q。Lean は `(fisherZeroCountInRationalDisc L data c r : ℚ) / ((L : ℚ)^2)` と `div_le_iff`。定義と上界で論法が二つなら割る。
+
+（tick 378 の記録）
 2026-08-17 の tick 378 は、前 tick の「有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」の本文と Lean・SageMath を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: $\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」を四層で閉じた。
 `claim_fisher_zero_set_finite_card_bound`（`claim_fisher_zero_finset_card_bound` の直後、住処 Qbar、脱出なし）: $L\ge1$ で $\mathcal F_L$ は有限集合、$\lvert\mathcal F_L\rvert\le2L^2$。証明は背理法（無限なら $\lvert S\rvert=2L^2+1$ の有限部分集合があり `claim_fisher_zero_finset_card_bound` と一続き二段で矛盾）と、有限になった $\mathcal F_L$ 自身へ同じ主張を当てる（`claim_root_of_unity_finite_card_bound` と同じ形）。本文末尾「この先に書くこと」から「$\mathcal F_L$ の有限性」を消した。

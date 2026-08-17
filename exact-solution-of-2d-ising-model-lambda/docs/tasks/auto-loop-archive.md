@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 379 で台帳から移した記録（tick 374 分）
+
+### 現在地
+
+- **2026-08-17 の tick 374 は、台帳の先頭行「零点密度」を論法で五行へ割り（円板の定義／円板内の零点の個数／格子点数あたりの零点数／上極限・下極限による実数体への脱出／重複度付きの個数）、その最初「有理点を中心とする有理半径の円板（$\overline{\mathbb Q}$ の部分集合）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_rational_disc`（`remark_real_escape_plan` の直後・「この先に書くこと」の直前、住処 Qbar）: $c=(c_1,c_2)\in\mathbb Q\times\mathbb Q$、$r\in\mathbb Q_{>0}$ に対し、$\xi=a+b\cdot\omega$（`def_real_closed_subfield` の第 4 条件）から $\mathrm{dsq}_2(\xi,c):=(a-c_1)\cdot(a-c_1)+(b-c_2)\cdot(b-c_2)\in R$、$D(c,r):=\{\xi\mid\mathrm{dsq}_2(\xi,c)<_R r\cdot r\}\subset\overline{\mathbb Q}$。実軸上の場合 $\mathrm{dsq}_2(\xi,(q,0))=\mathrm{dsq}(\xi,q)$（`def_distance_squared_to_rational` の一般化）。複素数体を呼ばずに零点の分布を数える器。
+  Lean 具体版 `ThermodynamicLimit/RationalDisc.lean`（`distanceSquaredToRationalPoint`・`rationalDisc`・`distanceSquaredToRationalPoint_real_axis`）。sorry 検査 1301 件。check 463 ブロック・verify-check-linkage 256 件・PDF 252 ページ通過。
+  式変形統一: この tick は締切（13:40）を優先し見送った（次 tick で 1 件進める）。
+  レビュー: 前 tick の `def_periodic_free_energy_density_le_one` の本文と Lean 具体版を突き合わせて一致。修正なし。次は「有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r)\in\mathbb N$」（$\mathcal F_L$ の有限性——零でない多項式の根の個数は次数以下——を本文でどう引くかを先に確かめる。Lean は `FisherZeroSet` の有限性を `Z_L\ne0` から出す）。
+
+### 前進の記録
+
+- 2026-08-17（tick 374）: 台帳の先頭行「零点密度」を五行へ割った（円板の定義／円板内の零点の個数／格子点数あたりの零点数／上極限・下極限による実数体への脱出／重複度付きの個数。理由: 器の定義・有限集合の数え上げ・$\mathbb Q$ での正規化・完備性による脱出・$\overline{\mathbb Q}[x]$ の因数分解は別々の論法で、1 tick 1 論法にするため。重複度は相異なる零点の個数で器を閉じたあとの精密化として最後に置いた）。その最初「有理点を中心とする有理半径の円板」を本文・Lean 具体版で閉じ、`def_rational_disc` を `remark_real_escape_plan` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1301 件。式変形統一は締切のため見送り。
+
+### レビュー記録
+
+- 2026-08-17（tick 374）: 前 tick の「周期境界の自由エネルギー密度の定義と $f^{\mathrm{op}}(q)$ との一致」の本文（実現像の等号三段・上限の等号三段）と Lean 具体版（`periodicRealizedLowerSet_eq_openSquare_of_le_one`・`periodicFreeEnergyDensity_eq_openSquare_of_le_one`）を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の円板の定義は、後の零点の個数・密度がすべて引く器（後で引く形）なので残す。$\mathrm{dsq}_2(\xi,(q,0))=\mathrm{dsq}(\xi,q)$ は独立ブロックにせず定義の中に置いた。本文末尾「この先に書くこと」の零点密度の内訳と台帳のセクション表（四行）を同じ tick で揃えた。
+
 ## 2026-08-17 tick 378 で台帳から移した記録（tick 373 分）
 
 ### 現在地

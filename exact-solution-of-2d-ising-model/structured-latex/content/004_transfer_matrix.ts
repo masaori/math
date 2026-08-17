@@ -1411,9 +1411,23 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       paragraph([
         "であり、各 ",
         math(String.raw`K\in\mathcal{I}`),
-        " について ",
-        math(String.raw`\left(\sum_{I}\Theta_{I,I}\right)(f_K) = \sum_{I}\delta_{I,K}f_I = f_K`),
-        " だから ",
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sum_{I\in\mathcal{I}}\Theta_{I,I}\right)(f_K)
+&= \sum_{I\in\mathcal{I}}\Theta_{I,I}(f_K)
+&&(\because\ \text{線型写像の和の値の定義})\\
+&= \sum_{I\in\mathcal{I}}\delta_{I,K}f_I
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）を}\ J=I\ \text{に取ること})\\
+&= f_K
+&&(\because\ \delta_{I,K}\ \text{は}\ I=K\ \text{のときだけ}\ 1\ \text{で他は}\ 0)\\
+&= \mathrm{id}_{\mathcal{F}}(f_K)
+&&(\because\ \text{恒等写像の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、基底上で一致する線型写像は等しいから ",
         math(String.raw`\sum_{I}\Theta_{I,I} = \mathrm{id}_{\mathcal{F}}`),
         "。よって ",
         math(String.raw`\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) = \mathrm{id}_{\mathcal{F}}`),

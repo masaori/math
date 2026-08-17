@@ -354,6 +354,7 @@ export const ALL_LABELS = [
   "def_finite_free_entropy",
   "def_finite_free_entropy_density",
   "def_finite_lattice_fisher_zeros",
+  "def_fisher_zero_count_in_rational_disc",
   "def_global_spin_reversal",
   "def_high_temperature_polynomial",
   "def_high_temperature_sector_polynomial",
