@@ -2,6 +2,13 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
+    id: "arithmetic_invariants_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "固定剰余類格子の算術的不変量" },
+    labels: [],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_coefficient_support",
     kind: "theorem",
     title: { text: "固定剰余類格子の係数列の支持と偶数性" },

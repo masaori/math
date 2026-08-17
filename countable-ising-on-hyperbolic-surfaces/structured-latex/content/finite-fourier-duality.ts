@@ -2,6 +2,13 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
+    id: "finite_fourier_duality_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "有限 Fourier 双対と主・双対セル対応" },
+    labels: [],
+  },
+  {
     id: "finite_fourier_definition_f2_linear_character_space",
     kind: "definition",
     title: { text: "有限第一ホモロジー群の F_2 値文字空間" },

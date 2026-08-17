@@ -2,6 +2,13 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
+    id: "homology_sector_expansion_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "セル鎖複体とホモロジー類別生成多項式" },
+    labels: [],
+  },
+  {
     id: "homology_sector_definition_first_boundary_matrix",
     kind: "definition",
     title: { text: "F_2 上の一次境界写像" },
