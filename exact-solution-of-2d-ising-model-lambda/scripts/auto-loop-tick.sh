@@ -231,17 +231,34 @@ echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 # （Claude は Fable 5 の medium、Codex は Sol の medium）。
 head_before="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-')"
 
-if [ "$agent" = "claude" ]; then
+run_claude() {  # $1 = モデル名
   printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-    --model claude-fable-5 --effort medium \
+    --model "$1" --effort medium \
     --dangerously-skip-permissions --strict-mcp-config \
     --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+}
+
+if [ "$agent" = "claude" ]; then
+  run_claude claude-fable-5
+  status=$?
+  # モデル単位の上限。アカウント全体ではなくそのモデルだけが尽きているので、
+  # 期限を置いて待つのではなく別のモデルへ落ちればループは回り続ける。文言自体が
+  # "Switch to another model" と言っている（実測 2026-08-17 19:36: Fable 5 の上限で
+  # tick が 90 秒で異常終了し、codex も上限中だったためループが両側で塞がった）。
+  if [ "$status" -ne 0 ]; then
+    case "$(tail -5 "$LOG_FILE")" in
+      *"Switch to another model"*)
+        log "    claude の既定モデルが上限に達した。claude-sonnet-5 でやり直す"
+        run_claude claude-sonnet-5
+        status=$? ;;
+    esac
+  fi
 else
   printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
     -m gpt-5.6-sol -c model_reasoning_effort=medium \
     --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+  status=$?
 fi
-status=$?
 set -e
 printf '%s\n' "$agent" > "$AGENT_MARK"
 
