@@ -262,6 +262,7 @@ targets=(
   Ising3DCut.LimitQuantity.nullModel_symmetrized_real_term_reciprocal_invariant
   Ising3DCut.LimitQuantity.nullModel_symmetrized_real_seq_tendsto_iff
   Ising3DCut.LimitQuantity.nullModel_symmetrized_real_seq_limit_eq
+  Ising3DCut.LimitQuantity.coeff_polyOfMultiplicity_nonneg
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
