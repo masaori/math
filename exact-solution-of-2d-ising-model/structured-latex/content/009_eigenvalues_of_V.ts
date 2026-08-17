@@ -3204,13 +3204,21 @@ B
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
         " なので ",
         math(String.raw`(2s_2)^{M/2} \in \mathbb{R}_{>0}`),
-        " であり、Step 3 の ",
-        math(String.raw`c^2 = (2s_2)^M = \left((2s_2)^{M/2}\right)^2`),
-        " と合わせると",
+        " である。次の一続きで",
       ]),
       displayMath(
-        String.raw`\left(c - (2s_2)^{M/2}\right)\left(c + (2s_2)^{M/2}\right) = 0`,
+        String.raw`\begin{aligned}
+\left(c - (2s_2)^{M/2}\right)\left(c + (2s_2)^{M/2}\right)
+&=c^2-\left((2s_2)^{M/2}\right)^2
+   \quad (\because \text{和と差の積}) \\
+&=c^2-(2s_2)^{M}
+   \quad (\because \text{指数法則}\ \left((2s_2)^{M/2}\right)^2=(2s_2)^{M}) \\
+&=(2s_2)^{M}-(2s_2)^{M}
+   \quad (\because \text{Step 3 の}\ c^2=(2s_2)^{M}) \\
+&=0
+\end{aligned}`,
       ),
+      paragraph(["である。"]),
       paragraph([
         math(String.raw`c > 0`),
         " かつ ",

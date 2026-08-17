@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 369 は、前 tick の「周期境界と開境界の境界評価の対数化」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」を四層で閉じた。
+`claim_periodic_open_boundary_comparison_density_le_one`（`def_open_square_free_entropy_density` の直後、住処 Lambda）: $L\ge1$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)\le_{\Lambda_{\mathbb Q}}\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。証明は準備二つ（正値性と $L\ne0$、下端の元の像を七段で整える）と一続き三段の鎖二本（`claim_scaled_embedding_order_transfer` で対数化の $\Lambda$ の比較を移す）。部分正方形の density 版と同じ形。
+SageMath `check/periodic-open-boundary-comparison-density/`（$L\le3$、有理点 6 点、252 検査）。Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonDensity.lean`（`scaled_periodicOpenLowerForm_eq`・`rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one`）、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有、導出版 `PeriodicOpenComparisonDensityFromNecSuf.lean`。sorry 検査 1280 件。check 457 ブロック・verify-check-linkage 253 件・PDF 249 ページ通過。
+式変形統一: 姉妹側「定数 $c$ の値」（`eigenvalues_of_V_017_claim_constant_c_value`）の Step 4 の因数分解の一行を一続き四段へ（姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 009 の 3200 行以降（`c^2` の別表示 3281 行付近など）と 002・004・005・008 系。
+次は「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」。着手前に論法で割ること: (a) $\tfrac{2}{L}\cdot\iota(\log q)$ が Archimedes 性（`claim_rational_log_order_group_archimedean`）で任意の正の有理係数の元より小さくできること、(b) 周期境界の密度の列が定める下組（$A^{\mathrm{op}}(q)$ の周期境界版の定義が要る）が $A^{\mathrm{op}}(q)$ を含むこと（右の不等式）、(c) 逆の包含（左の不等式と (a)）、(d) 下組が一致すれば上限も一致すること。定義が 1 つ、両包含が 1 組、上限の一致が 1 つなので少なくとも三行へ割る。
+
+（tick 368 の記録）
 2026-08-17 の tick 368 は、前 tick の姉妹側の書き換え差分と `lean:` 配線を確認し（修正無し）、
 台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割り（境界評価の対数化／密度の比較／周期境界の密度の列は同じ下組・同じ実数へ）、その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を四層で閉じた。
 `claim_periodic_open_boundary_comparison_log_le_one`（`claim_periodic_open_boundary_comparison_rational` の直後・`def_open_square_free_entropy_density` の直前、住処 Lambda）: $L\ge1$、$0<q\le1$ で $2L\log q+\log Z^{\mathrm{op}}_{L,L}(q)\le_\Lambda\Phi_L(q)\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)$。証明は準備二つ（値の正値性、下端の値の対数を開く二段）と一続き四段（`claim_rational_log_order_iff` で有理点の評価を移す、`def_finite_free_entropy`）。上端は開く操作なし。
