@@ -271,6 +271,7 @@ targets=(
   Ising3DCut.LimitQuantity.one_le_card_edge
   Ising3DCut.LimitQuantity.nullModel_eval_polyOfMultiplicity_ne_eval_inv
   Ising3DCut.LimitQuantity.nullModel_symmetrized_no_coarsening
+  Ising3DCut.LimitQuantity.symmetrized_no_coarsening_abstract
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
