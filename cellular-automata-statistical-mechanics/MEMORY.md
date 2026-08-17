@@ -1797,3 +1797,13 @@ $\operatorname{Pre}_F(z)$ と一段前像数 $d_F(z)$、異なる配位の前像
 分解、保存式 $|B_F(q)|=\sum_{z\in B_F(\sigma_F(q))}d_F(z)$、局所真理値表からの有限決定を記述した。
 有限集合・自然数・写像の等号だけで閉じ、$\mathbb R/\mathbb C$ 脱出はない。
 **現在地は構造化記述まで。次 tick はレビュー後、SageMath 検算を作る。**
+
+## 自動ループ tick: 安定ファイバー間の分岐個数の SageMath 検算（2026-08-17 14:12）
+
+前 tick の構造化記述（一段前像集合 $\operatorname{Pre}_F(z)$、一段前像数 $d_F(z)$、非交差、完全逆像の
+前像集合への分解、保存式 $|B_F(q)|=\sum_{z\in B_F(\sigma_F(q))}d_F(z)$、有限決定）をレビューし、修正を要する
+誤りは見つからなかった。`sagemath/check/iterate-monoid-stable-fiber-branching/` に非交差、完全逆像の所属同値の
+各段、保存式の 4 等号、全組走査と有限加算を分離した 4 本を追加し、769 写像で全て PASS。有限範囲の裏取りであり
+一般証明ではない。$\mathbb R/\mathbb C$ 脱出なし。構造化テキスト check・PDF（47 ページ）、検算対応 27 件、
+Lean build・sorry 検査を通した。**現在地は SageMath まで。次 tick はレビュー後、人手証明と同じ対象・仮定・順序の
+Lean 具体版だけを作る。**
