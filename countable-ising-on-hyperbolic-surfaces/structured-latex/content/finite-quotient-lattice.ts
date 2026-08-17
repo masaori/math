@@ -413,4 +413,73 @@ s_f^Q\left(\mathtt{position},a\right)
       ]),
     ],
   },
+  {
+    id: "finite_quotient_lattice_definition_oriented_coset_face_boundary_word",
+    kind: "definition",
+    title: { text: "剰余類面の向き付き境界語" },
+    labels: ["def_finite_quotient_oriented_coset_face_boundary_word"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-quotient-oriented-face-boundary-word"],
+    statement: [
+      paragraph([
+        ref("def_finite_quotient_oriented_coset_edge_endpoint_data"),
+        " の代表元選択写像 ",
+        math(String.raw`\eta_E\in\operatorname{Rep}_E(Q)`),
+        " と端点写像、および ",
+        ref("def_finite_quotient_face_cyclic_position_system"),
+        " の巡回位置系に対し、各剰余類面 ",
+        math(String.raw`f=(\mathtt{face},C_F)\in\mathcal F_Q`),
+        " の向き付き境界語を写像",
+      ]),
+      displayMath(String.raw`\partial_{\mathrm{word}}^{Q,\eta_E}f:
+P_f^Q\longrightarrow\mathcal E_Q\times\mathsf{Ori}`),
+      paragraph([
+        "であって、各 ",
+        math(String.raw`a\in C_F`),
+        " と辺剰余類 ",
+        math(String.raw`C_E(a):=aH_E\in Q/H_E`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\partial_{\mathrm{word}}^{Q,\eta_E}f
+\left(\mathtt{position},a\right)
+:=
+\begin{cases}
+\left(
+  (\mathtt{edge},C_E(a)),
+  \mathsf{reverse}
+\right),
+&\eta_E(C_E(a))=a,\\[6pt]
+\left(
+  (\mathtt{edge},C_E(a)),
+  \mathsf{forward}
+\right),
+&\eta_E(C_E(a))=ar_E
+\end{cases}`),
+      paragraph([
+        "を満たす写像と定める。",
+        math(String.raw`H_E=\langle r_E\rangle=\{\operatorname{id}_{\Omega},r_E\}`),
+        " であり、",
+        math(String.raw`\eta_E(C_E(a))\in C_E(a)=\{a,ar_E\}`),
+        " なので二場合のちょうど一方が成立し、この写像は well-defined である。",
+        ref("def_finite_cellulation_orientation_endpoint_selectors"),
+        " の端点選択写像を用いると、どちらの場合も位置 ",
+        math(String.raw`(\mathtt{position},a)`),
+        " の向き付き辺は頂点 ",
+        math(String.raw`(\mathtt{vertex},ar_EH_V)`),
+        " から頂点 ",
+        math(String.raw`(\mathtt{vertex},aH_V)`),
+        " へ進む。さらに三角群関係 ",
+        math(String.raw`r_F\circ r_V\circ r_E=\operatorname{id}_{\Omega}`),
+        " から ",
+        math(String.raw`r_EH_V=r_F^{-1}H_V`),
+        " が従うので、次位置 ",
+        math(String.raw`s_f^Q(\mathtt{position},a)=(\mathtt{position},ar_F)`),
+        " の始点は ",
+        math(String.raw`(\mathtt{vertex},ar_Fr_EH_V)=(\mathtt{vertex},aH_V)`),
+        " である。したがって ",
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の端点接続条件を満たす。辺の向きは代表元選択写像に依存するが、各位置で実際に進む二頂点と辺剰余類は変わらない。閉曲面性、正則性、向き付けはこの定義から結論せず、生成後の有限セル分割述語で検査する。全ての対象と量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
