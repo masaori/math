@@ -231,8 +231,28 @@ echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 # （Claude は Fable 5 の medium、Codex は Sol の medium）。
 head_before="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-')"
 
+# このループ専用の Claude アカウント。**既定の設定ディレクトリ（= 全セッション共有）を
+# 使うと、共有アカウントがモデル単位の上限に達した瞬間にこのループも止まる**
+# （実測 2026-08-17 23:05: 共有側が Fable 5 の上限に達し、tick が exit 1）。
+# 設定ディレクトリだけでは分かれない（rc が全シェルへ claude-current.token を
+# CLAUDE_CODE_OAUTH_TOKEN として輸出しており、長期トークンが資格情報より優先される）ので、
+# そのアカウント専用の長期トークンも一緒に渡す。割り当ての仕組みは local-pc-management の
+# agent-sessions/docs/session-scoped-accounts.md が正本。
+# **モデルは claude-fable-5 のままで、他のモデルや他の CLI へ切り替えることはしない。**
+CLAUDE_ACCOUNT_CONFIG_DIR="${CLAUDE_ACCOUNT_CONFIG_DIR:-$HOME/.claude-coding-agent-0001}"
+CLAUDE_ACCOUNT_TOKEN_FILE="${CLAUDE_ACCOUNT_TOKEN_FILE:-$HOME/.config/agent-tokens/claude-coding-agent-0001.token}"
+
 run_claude() {  # $1 = モデル名
-  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
+  # 資格情報が無ければ黙って既定アカウントへ落ちない。落ちると、どのアカウントで
+  # 何が動いたのか分からなくなるうえ、共有アカウントの枠を食う。エラーで終える。
+  if [ ! -d "$CLAUDE_ACCOUNT_CONFIG_DIR" ] || [ ! -s "$CLAUDE_ACCOUNT_TOKEN_FILE" ]; then
+    log "    このループ専用の Claude アカウントの設定が無い（設定ディレクトリまたはトークン）。エラーで終える"
+    return 1
+  fi
+  # トークンは環境変数で渡す（引数に置くと ps から見える）。ログへは出さない。
+  printf '%s' "$PROMPT" | CLAUDE_CONFIG_DIR="$CLAUDE_ACCOUNT_CONFIG_DIR" \
+    CLAUDE_CODE_OAUTH_TOKEN="$(cat "$CLAUDE_ACCOUNT_TOKEN_FILE")" \
+    timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
     --model "$1" --effort medium \
     --dangerously-skip-permissions --strict-mcp-config \
     --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
