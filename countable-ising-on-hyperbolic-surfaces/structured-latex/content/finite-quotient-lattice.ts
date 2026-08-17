@@ -332,4 +332,85 @@ Q/H_E
       ]),
     ],
   },
+  {
+    id: "finite_quotient_lattice_definition_face_cyclic_position_system",
+    kind: "definition",
+    title: { text: "剰余類面の巡回位置系" },
+    labels: ["def_finite_quotient_face_cyclic_position_system"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-quotient-face-cyclic-position-system"],
+    statement: [
+      paragraph([
+        ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"),
+        " の面セル集合と ",
+        ref("def_finite_cellulation_cyclic_position_system"),
+        " の巡回位置系に対し、各剰余類面 ",
+        math(String.raw`f=(\mathtt{face},C_F)\in\mathcal F_Q`),
+        " の形式的位置集合を",
+      ]),
+      displayMath(String.raw`P_f^Q:=\{\mathtt{position}\}\times C_F`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`\mathtt{position}`),
+        " は面セル、頂点セル、辺セルの役割ラベルと異なる形式的ラベルである。次位置写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s_f^Q:P_f^Q&\longrightarrow P_f^Q,\\
+s_f^Q\left(\mathtt{position},a\right)
+&:=
+\left(
+  \mathtt{position},
+  ar_F
+\right)
+\qquad(a\in C_F)
+\end{aligned}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`C_F=gH_F`),
+        "、",
+        math(String.raw`H_F=\langle r_F\rangle`),
+        " なので、",
+        math(String.raw`a\in C_F`),
+        " なら ",
+        math(String.raw`ar_F\in C_F`),
+        " であり、この写像は well-defined である。さらに ",
+        ref("def_hyperbolic_triangle_permutation_quotient_input"),
+        " の位数条件により ",
+        math(String.raw`r_F`),
+        " の位数は ",
+        math(String.raw`p\in\mathbb N_{>0}`),
+        " であるから、逆写像と反復はそれぞれ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(s_f^Q\right)^{-1}
+\left(\mathtt{position},a\right)
+&=
+\left(
+  \mathtt{position},
+  ar_F^{p-1}
+\right),\\
+\left(s_f^Q\right)^{\circ m}
+\left(\mathtt{position},a\right)
+&=
+\left(
+  \mathtt{position},
+  ar_F^m
+\right)
+\qquad(m\in\mathbb N)
+\end{aligned}`),
+      paragraph([
+        "である。任意の ",
+        math(String.raw`a,b\in C_F`),
+        " に対して、左剰余類と巡回部分群の定義から、ある ",
+        math(String.raw`m\in\mathbb N`),
+        " が存在して ",
+        math(String.raw`b=ar_F^m`),
+        " となる。したがって ",
+        math(String.raw`s_f^Q`),
+        " は全単射であり、",
+        math(String.raw`\mathcal P_f^Q=(P_f^Q,s_f^Q)`),
+        " は一つの巡回列をなす有限な巡回位置系である。位置は整数添字でも群元そのものでもなく、形式的ラベルと剰余類の元の順序対である。定義は面剰余類の代表元選択に依存せず、面境界に置く辺と向きは後続の別ブロックで定める。全ての対象と量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

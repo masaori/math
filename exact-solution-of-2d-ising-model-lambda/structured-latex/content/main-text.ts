@@ -48105,6 +48105,89 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_fisher_zero_set_finite_card_bound",
+    kind: "claim",
+    title: { text: "有限格子の Fisher 零点の全体は有限集合であり元の個数は $2L^2$ を超えない" },
+    labels: ["claim_fisher_zero_set_finite_card_bound"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finite_ncard_le",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finite_ncard_le_of_finset_card_le_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finite_ncard_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/fisher-zero-set-finite-card-bound"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        " とする。有限格子の Fisher 零点の全体 ",
+        math(String.raw`\mathcal{F}_{L}\subset\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_finite_lattice_fisher_zeros"),
+        "）は有限集合であり、",
+      ]),
+      displayMath(String.raw`\lvert\mathcal{F}_{L}\rvert\le2L^{2}`),
+      paragraph([
+        "である（",
+        math(String.raw`\lvert\mathcal{F}_{L}\rvert\in\mathbb{N}`),
+        " は有限集合 ",
+        math(String.raw`\mathcal{F}_{L}`),
+        " の元の個数）。この主張により、以後 ",
+        math(String.raw`\mathcal{F}_{L}`),
+        " の部分集合の元の個数を自然数として数えることができる。現れるのは代数的数と有限集合の数え上げだけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず有限性を背理法で示す（",
+        ref("claim_root_of_unity_finite_card_bound"),
+        " と同じ形）。",
+        math(String.raw`\mathcal{F}_{L}`),
+        " が無限集合であると仮定する。無限集合から任意の有限個数の相異なる元を取れるので、",
+        math(String.raw`\mathcal{F}_{L}`),
+        " の有限部分集合 ",
+        math(String.raw`S`),
+        " で",
+      ]),
+      displayMath(String.raw`\lvert S\rvert=2L^{2}+1`),
+      paragraph([
+        "を満たすものがある。一方、",
+        ref("claim_fisher_zero_finset_card_bound"),
+        " をこの ",
+        math(String.raw`S`),
+        " に当てると ",
+        math(String.raw`\lvert S\rvert\le2L^{2}`),
+        " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2L^{2}+1
+&=\lvert S\rvert
+&&(\because\ \lvert S\rvert=2L^{2}+1)\\
+&\le2L^{2}
+&&(\because\ \blkref{claim_fisher_zero_finset_card_bound})
+\end{aligned}`),
+      paragraph([
+        "となるが、自然数について ",
+        math(String.raw`2L^{2}<2L^{2}+1`),
+        " なので矛盾する。ゆえに ",
+        math(String.raw`\mathcal{F}_{L}`),
+        " は有限集合である。",
+      ]),
+      paragraph([
+        "有限集合になった ",
+        math(String.raw`\mathcal{F}_{L}`),
+        " 自身を有限部分集合として ",
+        ref("claim_fisher_zero_finset_card_bound"),
+        " に当てると、",
+      ]),
+      displayMath(String.raw`\lvert\mathcal{F}_{L}\rvert\le2L^{2}`),
+      paragraph([
+        "を得る。この議論に実数体も複素数体も現れず、代数的数の集合と自然数の大小だけで閉じている。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48121,9 +48204,7 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（",
-          math(String.raw`\mathcal{F}_L`),
-          " の有限性、有理円板内の Fisher 零点の個数 ",
+          "「熱力学極限」の残り: 零点密度（有理円板内の Fisher 零点の個数 ",
           math(String.raw`N_L(c,r)\in\mathbb{N}`),
           "、格子点数あたりの零点数 ",
           math(String.raw`\nu_L(c,r):=N_L(c,r)/L^2\in\mathbb{Q}`),

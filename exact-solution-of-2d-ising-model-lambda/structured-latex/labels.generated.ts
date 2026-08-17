@@ -39,6 +39,7 @@ export const ALL_LABELS = [
   "claim_first_root_of_unity_set",
   "claim_fisher_zero_algebraicity",
   "claim_fisher_zero_finset_card_bound",
+  "claim_fisher_zero_set_finite_card_bound",
   "claim_fixed_or_shift_preserves_orbit",
   "claim_free_entropy_at_one",
   "claim_free_entropy_dual_relation",

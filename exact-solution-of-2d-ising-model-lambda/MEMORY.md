@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 378 は、前 tick の「有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」の本文と Lean・SageMath を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: $\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」を四層で閉じた。
+`claim_fisher_zero_set_finite_card_bound`（`claim_fisher_zero_finset_card_bound` の直後、住処 Qbar、脱出なし）: $L\ge1$ で $\mathcal F_L$ は有限集合、$\lvert\mathcal F_L\rvert\le2L^2$。証明は背理法（無限なら $\lvert S\rvert=2L^2+1$ の有限部分集合があり `claim_fisher_zero_finset_card_bound` と一続き二段で矛盾）と、有限になった $\mathcal F_L$ 自身へ同じ主張を当てる（`claim_root_of_unity_finite_card_bound` と同じ形）。本文末尾「この先に書くこと」から「$\mathcal F_L$ の有限性」を消した。
+SageMath `check/fisher-zero-set-finite-card-bound/`（$L\le3$、$\lvert\mathcal F_L\rvert=0,8,12$、12 秒）。Lean 具体版 `ThermodynamicLimit/FisherZeroSetFiniteCardBound.lean`（`fisherZeroSet_finite_ncard_le`。`Set.Finite`・`Set.ncard`）、必要十分版は `NecSuf/AlgebraicEigenvalue/RootOfUnityFiniteCardBound.lean` の `finite_ncard_le_of_finset_card_le_necSuf` を共有、導出版 `FisherZeroSetFiniteCardBoundFromNecSuf.lean`。sorry 検査 1314 件。check 467 ブロック・verify-check-linkage 259 件・PDF 254 ページ通過。
+式変形統一: 姉妹側「Frobenius 内積の性質」（`005_exp_conjugation_proof.ts`）の Step 6 で、散文の実数の等式 $\|A+B\|^2=\|A\|^2+2\mathrm{Re}(u)+\|B\|^2$ を不等式の鎖の第 1 段へ取り込み一続き四段へ（姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 004 のその他・005 の Step 7 以降・008 系。
+次は「有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$」: 定義ブロック（住処 N か Qbar。$\mathcal F_L\cap D(c,r)\subset\mathcal F_L$ は有限集合の部分集合なので有限、個数は $\lvert\mathcal F_L\rvert\le2L^2$ から $2L^2$ 以下）。Lean は `Set.ncard (FisherZeroSet L ∩ rationalDisc c r)` と `Set.Finite.subset`・`Set.ncard_le_ncard`。定義ブロックなので必要十分版と SageMath は置かないが、有限性の根拠が主張になるなら別行に割る。
+
+（tick 377 の記録）
 2026-08-17 の tick 377 は、前 tick の「持ち上げの値は整係数多項式の代数的数における値に一致する」の本文と Lean・SageMath を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」を四層で閉じた。
 `claim_fisher_zero_finset_card_bound`（`claim_integer_polynomial_qbar_lift_evaluation` の直後、住処 Qbar、脱出なし）: $L\ge1$、有限部分集合 $S\subset\mathcal F_L$ で $\lvert S\rvert\le2L^2$。証明は `claim_qbar_distinct_roots_card_bound` の三つの仮定を $\widehat{Z_L}^{\,F}$・$S$・$2L^2$ について順に確かめる形（準備: `claim_coefficient_representation` から $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）、$0$（$2L^2<k$）／第 1: 零なら $\Omega_L(m)=0$ の三段と `claim_coefficient_sum` の $2^{L^2}=0$ の三段で矛盾／第 2: 準備の下の場合／第 3: $\mathrm{aev}_w(\widehat{Z_L}^{\,F})=\mathrm{Ev}^F_w(Z_L)=0$ の二段）。本文末尾「この先に書くこと」から済んだ項目を消した。
