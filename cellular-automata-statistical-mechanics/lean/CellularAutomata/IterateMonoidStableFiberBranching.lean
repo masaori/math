@@ -9,6 +9,7 @@ structured-latex/content/iterate-monoid-stable-fiber-predecessor-count.ts。
 -/
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import CellularAutomata.IterateMonoidStableFiberDynamics
+import CellularAutomata.NecSuf.IterateMonoidStableFiberBranching
 
 namespace CellularAutomata.IterateMonoidStableFiberBranching
 
@@ -142,5 +143,60 @@ theorem mem_predecessorDataTable_iff
       P = predecessorTable N f z ∧ d = predecessorCount N f z := by
   classical
   simp [predecessorDataTable, eq_comm]
+
+/-! ## 必要十分版からの導出
+
+具体版は必要十分版を X := Y := V → State、F := globalMap N f へ特殊化したものである。
+非交差と完全逆像の分解は写像だけの一般層の特殊化、個数保存は
+A := B(q), T := B(σ q) と前章の完全逆像（具体版の同値）を代入した特殊化である。 -/
+
+section Derivation
+
+/-- 前像集合は必要十分版の前像集合に一致する。 -/
+theorem predecessorSet_eq_necessary_sufficient (z : V → State) :
+    predecessorSet N f z =
+      CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorSet
+        (globalMap N f) z := rfl
+
+/-- 前像表と一段前像数は必要十分版のものに一致する。 -/
+theorem predecessorTable_eq_necessary_sufficient (z : V → State) :
+    predecessorTable N f z =
+      CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorTable
+        (globalMap N f) z := rfl
+
+theorem predecessorCount_eq_necessary_sufficient (z : V → State) :
+    predecessorCount N f z =
+      CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorCount
+        (globalMap N f) z := rfl
+
+/-- 非交差は写像だけの一般層の特殊化である。 -/
+theorem distinct_predecessorSets_disjoint_from_necessary_sufficient
+    {z w : V → State} (hzw : z ≠ w) :
+    predecessorSet N f z ∩ predecessorSet N f w = ∅ :=
+  CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.distinct_predecessorSets_disjoint
+    (globalMap N f) hzw
+
+/-- 完全逆像の分解は写像だけの一般層の特殊化である。 -/
+theorem stableFiber_preimage_eq_iUnion_from_necessary_sufficient (q : stableImage N f) :
+    globalMap N f ⁻¹' stableFiber N f (stableIndexMap N f q) =
+      ⋃ z ∈ stableFiber N f (stableIndexMap N f q), predecessorSet N f z :=
+  CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.preimage_eq_iUnion
+    (globalMap N f) _
+
+/-- 元ファイバーと次のファイバーの関係。具体版の完全逆像の同値から得る。 -/
+theorem stableFiberTable_iff_next (q : stableImage N f) (y : V → State) :
+    y ∈ stableFiberTable N f q ↔
+      globalMap N f y ∈ stableFiberTable N f (stableIndexMap N f q) := by
+  rw [mem_stableFiberTable_iff, mem_stableFiberTable_iff]
+  exact (globalMap_mem_stableFiber_index_iff N f q y).symm
+
+/-- 個数保存は必要十分版の個数保存の特殊化である。 -/
+theorem predecessorCount_conservation_from_necessary_sufficient (q : stableImage N f) :
+    (stableFiberTable N f q).card =
+      ∑ z ∈ stableFiberTable N f (stableIndexMap N f q), predecessorCount N f z :=
+  CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorCount_conservation
+    (globalMap N f) _ _ (stableFiberTable_iff_next N f q)
+
+end Derivation
 
 end CellularAutomata.IterateMonoidStableFiberBranching
