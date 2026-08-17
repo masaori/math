@@ -7,7 +7,7 @@
   人手証明の段                                                このファイル
   準備の第一: L² ≠ 0（値の正値性は Λ の鎖の側で使う）           `[NeZero L]`
   準備の第二: (1/L²)·ι(2L·log q + log Z^op_{L,L}(q))
-              = Ψ^op_L(q) + (2/L)·ι(log q)（六段）              scaled_periodicOpenLowerForm_eq
+              = Ψ^op_L(q) + (2/L)·ι(log q)（七段）              scaled_periodicOpenLowerForm_eq
   本体（左右の不等式を 3 段の鎖 2 本）                          rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one
 準備の等式 → `rationalLogOrderLE_scaled_toRational_iff L` の ← で
 `claim_periodic_open_boundary_comparison_log_le_one` の Λ の比較を移す → 定義 `scaledFreeEntropy`・`openScaledFreeEntropy`。
