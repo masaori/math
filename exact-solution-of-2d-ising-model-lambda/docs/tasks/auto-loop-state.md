@@ -6,6 +6,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 400 は、台帳の先頭行「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。前 tick で「唯一の未固めの論点」と書いた箇所であり、これで最終章の $x_c\in R$ へ進める（住処 Qbar、脱出なし）。**
+  `claim_real_closed_sum_of_two_squares_is_square`（`claim_real_closed_sum_of_two_squares_zero` の直後）: 任意の $x,y\in R$ にある $c\in R$ が存在して $x\cdot x+y\cdot y=c\cdot c$。**証明の鍵は順序ではなく代数閉性である**——$\overline{\mathbb Q}$ の代数閉性で $u\cdot u=x+y\omega$ を満たす $u$ を取り、第 4 条件で $u=a+b\omega$ と一意表示すると $x=a\cdot a-b\cdot b$、$y=2ab$ が読め、Gauss の恒等式 $(a^2-b^2)^2+(2ab)^2=(a^2+b^2)^2$ から $c:=a\cdot a+b\cdot b$ が取れる。平方の集合が加法で閉じることを、順序の議論なしに出せた。
+  `claim_two_is_square_in_real_closed`: 上を $x:=1$、$y:=1$ に当てて $s\cdot s=2$（$2:=1+1$）を満たす零でない $s\in R$ を得る。三分法の第 2 の場合が成り立つので第 3 の場合（$-2$ が平方）は成り立たない。
+  SageMath `check/real-closed-sum-of-two-squares-is-square/`（4 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`、代数閉性は `QQbar` の平方根。恒等式・一意表示から読む成分・$2$ の平方性と $-2$ の非平方性・$R$ の外では $-2$ も平方になること。通過）。Lean 具体版 `FisherZero/RealClosedSumOfTwoSquaresIsSquare.lean`（`realClosed_sum_of_two_squares_is_square`・`two_is_square_in_realClosed`・`neg_two_not_square_in_realClosed`）、必要十分版（Gauss の恒等式そのもの。可換環だけを要求）、導出版。sorry 検査 1388 件・check 491 ブロック・verify-check-linkage 275 件・build:pdf 266 ページ通過。
+  Lean の注意: 部分体の数値リテラルは `↑(2 : ↥carrier)` が `push_cast` で `(2 : Qbar)` へ落ちないので、$2$ は `1 + 1` と書く（人手証明の $2:=1+1$ と同じ約束）。
 - **2026-08-18 の tick 399 は、章「臨界指数を零点列で書く」の先頭行「$x_c$ が実閉部分体 $R$ の元であること」の前提を固めるため、その手前に必要な補題「実閉部分体の二つの平方の和が零なら、両方が零である」を四層で閉じた（住処 Qbar、脱出なし）。**
   `claim_real_closed_sum_of_two_squares_zero`（`claim_real_algebraic_order_trichotomy` の直後）: $x,y\in R$、$x\cdot x+y\cdot y=0$ ならば $x=y=0$。証明は $(x+y\omega)(x-y\omega)=x\cdot x+y\cdot y=0$ の一続き五段（`def_real_closed_subfield` の第 3 条件 $\omega\cdot\omega=-1$ を使う）と、$\overline{\mathbb Q}$ が体で零因子を持たないこと、第 4 条件（一意表示）を $0=0+0\cdot\omega$ へ当てる二つの場合分け（組 $(x,y)$ と組 $(x,-y)$）。
   理由: $x_c\in R$ の証明は $s=a+b\omega$ と分解して $2ab=0$ を出したあと、$a=0$ の枝（$b\cdot b=-2$）を潰す必要がある。そこには「$R$ の平方の和についての事実」が要り、三分法（1 つの元についての言明）だけでは足りない。まずその土台をこの補題で置いた。
@@ -39,7 +44,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | $R$ では $2$ が平方である（$-2$ は平方でない） | todo | 今 tick の `claim_real_closed_sum_of_two_squares_zero`（平方の和が零なら両方零）を踏み台に、$-2=w\cdot w$ を仮定して矛盾を出す。$1=1\cdot1$ と三分法から $-1$ は平方でないことも使う。**ここが唯一の未固めの論点**（平方の集合が加法で閉じることを一般に示す必要があるか、$2$ に限れば済むかを着手時に見極める） |
 | 臨界指数を零点列で書く | $x_c$ が実閉部分体 $R$ の元であること | todo | 前行が済んでから。$s=a+b\omega$ と分解し、$s\cdot s=2$ の $\omega$ 成分から $2ab=0$、$a=0$ の枝を $R$ の平方の三分律（`def_real_closed_subfield` の第 2 条件）で潰して $s\in R$、部分体の加法で $x_c=-1+s\in R$。$2$ と $-2$ が両方 $R$ の平方になれないことの論証を先に固めてから着手する |
 | 臨界指数を零点列で書く | 臨界点への距離の二乗の定義 | todo | $\mathrm{dsq}_c(\xi):=(a-x_c)^2+b^2$（$\xi=a+b\omega$）を `def_distance_squared_to_rational` と同じ形で置く（有理点 $q$ を $R$ の元 $x_c$ へ広げるだけ。前行の $x_c\in R$ が前提） |
 | 臨界指数を零点列で書く | $R$ の空でない有限集合は最小元をちょうど 1 つ持つ | todo | 線型順序（`claim_real_algebraic_order_trichotomy`）と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み |
@@ -52,6 +56,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 400）: 台帳の先頭行「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。前 tick が「唯一の未固めの論点」と記録した箇所。鍵は順序ではなく代数閉性で、$u\cdot u=x+y\omega$ の一意表示と Gauss の恒等式から平方の和が平方であることを出し、$x=y=1$ で $2$ の平方性を得た。SageMath 4 節、Lean 具体版・必要十分版（Gauss の恒等式のみ。可換環）・導出版。sorry 検査 1388 件・check 491 ブロック・PDF 266 ページ通過。
 - 2026-08-18（tick 399）: 章「臨界指数を零点列で書く」の先頭行の前提として「実閉部分体の二つの平方の和が零なら両方が零である」を四層で閉じ、`claim_real_closed_sum_of_two_squares_zero` を三分法の直後に置いた（$(x+y\omega)(x-y\omega)$ の因数分解と一意表示。三分法だけでは和について何も言えないため）。SageMath 5 節（`AA` と `QQbar(I)` のモデル）、Lean 具体版・必要十分版（可換整域で因子が零まで）・導出版。sorry 検査 1383 件・check 489 ブロック・PDF 266 ページ通過。セクション表に「$R$ では $2$ が平方である」の行を $x_c\in R$ の前へ足した。
 - 2026-08-18（tick 398）: 最終章「臨界指数を零点列で書く」の唯一のセクションを論法単位の 7 行へ割り直した（$x_c\in R$／$\mathrm{dsq}_c$ の定義／$R$ の有限集合の最小元／$\mathcal F_L\ne\varnothing$（$L\ge2$）／$d_1(L)$ の定義と正値性／詰め寄りの述語との接続／スケーリングの読み（ℝ 脱出））。理由: 先頭距離の定義に独立の前置きが 4 つ要り、うち $x_c\in R$ は未確立だと着手時の確認で分かったため。数学ブロックは足していない。
 - 2026-08-17（tick 397）: 台帳の先頭行「零点密度の挟み込み」を四層で閉じ、章「熱力学極限」の todo が尽きた。$N_L\le N^{\mathrm{mult}}_L$（各項 1 以上と有限和の単調性）と $N^{\mathrm{mult}}_L\le2L^2$（重複度の和の上界。主定理の印）。SageMath 4 節（$L=1,2$・円板 9 組）、Lean 具体版・必要十分版（「各点で 1 以上なら和は個数以上」だけへ落とした）・導出版。sorry 検査 1380 件・check 488 ブロック・PDF 265 ページ通過。launchd 即時起動の tick がクレジット切れで残した書きかけを拾って完成させた。

@@ -1439,6 +1439,11 @@ targets=(
   Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero
   Ising2DLambda.NecSuf.FisherZero.sq_add_sq_eq_zero_factor_necSuf
   Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero_from_necSuf
+  Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square
+  Ising2DLambda.NecSuf.FisherZero.gauss_sum_of_two_squares_identity_necSuf
+  Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square_from_necSuf
+  Ising2DLambda.FisherZero.two_is_square_in_realClosed
+  Ising2DLambda.FisherZero.neg_two_not_square_in_realClosed
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

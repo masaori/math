@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 400 は、前 tick が「唯一の未固めの論点」と記録した「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。**最終章の $x_c\in R$ の前提はこれで揃った。**
+`claim_real_closed_sum_of_two_squares_is_square`: 任意の $x,y\in R$ について $x\cdot x+y\cdot y$ は $R$ の平方である。**鍵は順序ではなく $\overline{\mathbb Q}$ の代数閉性だった**——$u\cdot u=x+y\omega$ を満たす $u$ を取り、第 4 条件で $u=a+b\omega$ と一意表示すると $x=a\cdot a-b\cdot b$、$y=2ab$ が読め、Gauss の恒等式 $(a^2-b^2)^2+(2ab)^2=(a^2+b^2)^2$ で $c:=a\cdot a+b\cdot b$ が証人になる。三つの平方の和を扱う必要は無かった（前 tick の MEMORY に書いた懸念は、この道筋で回避できた）。
+`claim_two_is_square_in_real_closed`: 上を $x=y=1$ に当てて $s\cdot s=2$ の $s\in R$（零でない）を得、三分法の排他性で $-2$ が平方でないことを得る。
+SageMath `check/real-closed-sum-of-two-squares-is-square/`（4 節）。Lean 具体版・必要十分版（Gauss の恒等式だけ。可換環）・導出版。**Lean の注意: 部分体の数値リテラルは `↑(2 : ↥carrier)` が `push_cast` で落ちないので、$2$ は `1 + 1` と書く。** また `IsAlgClosed.exists_pow_nat_eq` の次数は名前付き引数 `(n := 2)` で渡す。sorry 検査 1388 件・check 491 ブロック・linkage 275 件・PDF 266 ページ通過。
+次は最終章の先頭行「$x_c$ が実閉部分体 $R$ の元であること」。$s=a+b\omega$ と分解して $s\cdot s=2$ の $\omega$ 成分から $2ab=0$、$a=0$ の枝は $b\cdot b=-2$ となり今 tick の `claim_two_is_square_in_real_closed` の後半で潰れる。$b=0$ の枝から $s=a\in R$、部分体の加法で $x_c=-1+s\in R$。
+
+（tick 399 の記録）
 2026-08-18 の tick 399 は、最終章の先頭行「$x_c$ が実閉部分体 $R$ の元であること」に着手する前に必要な補題を四層で閉じた。
 `claim_real_closed_sum_of_two_squares_zero`（`claim_real_algebraic_order_trichotomy` の直後、住処 Qbar、脱出なし）: $x,y\in R$ が $x\cdot x+y\cdot y=0$ を満たすなら $x=y=0$。証明は $(x+y\omega)(x-y\omega)=x\cdot x-y\cdot y\cdot(\omega\cdot\omega)=x\cdot x+y\cdot y=0$ の一続き五段と、$\overline{\mathbb Q}$ が体で零因子を持たないこと、第 4 条件（一意表示）を $0=0+0\cdot\omega$ へ当てる二つの場合分け（組 $(x,y)$ と組 $(x,-y)$。部分体なので $-y\in R$）。
 **なぜ要ったか**: $x_c=-1+s\in R$ は $s=a+b\omega$ と分解して $2ab=0$ を出したあと、$a=0$ の枝（$b\cdot b=-2$）を潰さねばならない。三分法は 1 つの元についての場合分けの網羅性しか与えず、和については何も言わないので、土台として先に置いた。

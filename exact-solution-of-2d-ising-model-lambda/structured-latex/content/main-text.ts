@@ -35690,6 +35690,156 @@ L^2\,\ell_2+\Phi_L(q)
   },
 
   {
+    id: "zero_pinching_claim_real_closed_sum_of_two_squares_is_square",
+    kind: "claim",
+    title: { text: "実閉部分体では二つの平方の和がまた平方である" },
+    labels: ["claim_real_closed_sum_of_two_squares_is_square"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/real-closed-sum-of-two-squares-is-square"],
+    lean: [
+      "Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square",
+      "Ising2DLambda.NecSuf.FisherZero.gauss_sum_of_two_squares_identity_necSuf",
+      "Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        "任意の ", math(String.raw`x,y\in R`), "（", ref("def_real_closed_subfield"),
+        "）について、ある ", math(String.raw`c\in R`), " が存在して",
+      ]),
+      displayMath(String.raw`x\cdot x+y\cdot y=c\cdot c`),
+      paragraph([
+        "が成り立つ。すなわち ", math(String.raw`R`),
+        " の平方の全体は和について閉じている。",
+        ref("claim_real_algebraic_order_trichotomy"),
+        " は 1 つの元についての場合分けしか与えないので、この事実はそこからは出ない。",
+        "使うのは ", math(String.raw`\overline{\mathbb{Q}}`),
+        " が代数閉であること（", ref("def_algebraic_numbers"),
+        " の第 2 条件）と一意表示（", ref("def_real_closed_subfield"),
+        " の第 4 条件）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\overline{\mathbb{Q}}`), " は代数閉なので（",
+        ref("def_algebraic_numbers"), " の第 2 条件を多項式 ",
+        math(String.raw`t^{2}-(x+y\cdot\omega)\in\overline{\mathbb{Q}}[t]`),
+        " へ当てる）、ある ", math(String.raw`u\in\overline{\mathbb{Q}}`), " が存在して ",
+        math(String.raw`u\cdot u=x+y\cdot\omega`), " である。",
+        ref("def_real_closed_subfield"), " の第 4 条件により ",
+        math(String.raw`u=a+b\cdot\omega`), " を満たす組 ",
+        math(String.raw`(a,b)\in R\times R`), " がちょうど 1 つ取れる。この ",
+        math(String.raw`(a,b)`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x+y\cdot\omega
+&=u\cdot u
+&&(\because\ u\ \text{の取り方})\\
+&=(a+b\cdot\omega)\cdot(a+b\cdot\omega)
+&&(\because\ \text{上の一意表示})\\
+&=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega+b\cdot b\cdot(\omega\cdot\omega)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則})\\
+&=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega
+&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件}\ \omega\cdot\omega=-1)
+\end{aligned}`),
+      paragraph([
+        "である。", math(String.raw`a\cdot a-b\cdot b`), " と ",
+        math(String.raw`2\cdot a\cdot b`), " はいずれも ", math(String.raw`R`),
+        " の元（部分体なので四則で閉じている）だから、",
+        ref("def_real_closed_subfield"),
+        " の第 4 条件の一意性を元 ", math(String.raw`x+y\cdot\omega`),
+        " へ当てて",
+      ]),
+      displayMath(String.raw`x=a\cdot a-b\cdot b,\qquad y=2\cdot a\cdot b`),
+      paragraph([
+        "を得る。そこで ", math(String.raw`c:=a\cdot a+b\cdot b\in R`),
+        " と置くと、次の恒等式が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x\cdot x+y\cdot y
+&=(a\cdot a-b\cdot b)\cdot(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot(2\cdot a\cdot b)
+&&(\because\ \text{上の 2 つの等式})\\
+&=a^{4}-2\cdot a\cdot a\cdot b\cdot b+b^{4}+4\cdot a\cdot a\cdot b\cdot b
+&&(\because\ R\ \text{の分配則と積の可換則（展開）})\\
+&=a^{4}+2\cdot a\cdot a\cdot b\cdot b+b^{4}
+&&(\because\ R\ \text{の加法（同じ項をまとめる）})\\
+&=(a\cdot a+b\cdot b)\cdot(a\cdot a+b\cdot b)
+&&(\because\ R\ \text{の分配則と積の可換則（因数分解）})\\
+&=c\cdot c
+&&(\because\ c\ \text{の定め方})
+\end{aligned}`),
+      paragraph([
+        "これで主張を得た。",
+        "議論は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の代数閉性と固定した組 ", math(String.raw`(R,\omega)`),
+        " の第 3・第 4 条件、および ", math(String.raw`R`),
+        " が体であることだけを使う。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "zero_pinching_claim_two_is_square_in_real_closed",
+    kind: "claim",
+    title: { text: "実閉部分体では $2$ が平方であり、$-2$ は平方でない" },
+    labels: ["claim_two_is_square_in_real_closed"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/real-closed-sum-of-two-squares-is-square"],
+    lean: [
+      "Ising2DLambda.FisherZero.two_is_square_in_realClosed",
+      "Ising2DLambda.FisherZero.neg_two_not_square_in_realClosed",
+    ],
+    statement: [
+      paragraph([
+        "ある零でない ", math(String.raw`s\in R`), "（", ref("def_real_closed_subfield"),
+        "）が存在して ", math(String.raw`s\cdot s=2`), " である（",
+        math(String.raw`2:=1+1`), "）。また、",
+        math(String.raw`-2=w\cdot w`), " を満たす零でない ",
+        math(String.raw`w\in R`), " は存在しない。",
+      ]),
+      paragraph([
+        "前半により、", ref("claim_sqrt_two_exists"), " の元 ",
+        math(String.raw`s`), " を ", math(String.raw`R`),
+        " の中に取れる。これが臨界点 ", math(String.raw`x_c=-1+s`), "（",
+        ref("def_critical_point"), "）が ", math(String.raw`R`),
+        " の元であることを言うための鍵である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_real_closed_sum_of_two_squares_is_square"), " を ",
+        math(String.raw`x:=1`), "、", math(String.raw`y:=1`),
+        " に当てると、ある ", math(String.raw`s\in R`), " が存在して",
+      ]),
+      displayMath(String.raw`s\cdot s=1\cdot1+1\cdot1=1+1=2`),
+      paragraph([
+        "である（", math(String.raw`1\in R`), " は部分体の単位元。",
+        math(String.raw`1\cdot1=1`), " は積の単位元）。",
+        math(String.raw`s\ne0`), " である。実際 ", math(String.raw`s=0`),
+        " ならば ", math(String.raw`2=0\cdot0=0`),
+        " となるが、", math(String.raw`\mathbb{Q}`), " の中で ",
+        math(String.raw`2\ne0`), " であり ", math(String.raw`\mathbb{Q}`),
+        " は ", math(String.raw`R`), " の部分体（",
+        ref("def_real_closed_subfield"), " の第 1 条件と ",
+        ref("def_algebraic_numbers"), " の第 1 条件）なので矛盾する。",
+      ]),
+      paragraph([
+        "後半は前半と ", ref("def_real_closed_subfield"),
+        " の第 2 条件（平方の三分法）から従う。元 ",
+        math(String.raw`z:=2\in R`), " について三分法の 3 つのうちちょうど 1 つが成り立つが、",
+        "前半により第 2 の場合（", math(String.raw`z=s\cdot s`),
+        "、", math(String.raw`s\ne0`), "）が成り立っている。したがって第 3 の場合（",
+        math(String.raw`-z=-2`), " が零でない元の平方であること）は成り立たない。",
+      ]),
+      paragraph([
+        "この 2 つで、", math(String.raw`s\cdot s=2`), " の根を ",
+        math(String.raw`R`), " の中に取れることと、",
+        math(String.raw`-2`), " 側の枝が起きないことが確定した。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "zero_pinching_def_distance_squared_to_rational",
     kind: "definition",
     title: { text: "零点と有理点の距離の二乗" },
