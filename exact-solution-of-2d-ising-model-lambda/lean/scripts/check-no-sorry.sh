@@ -1444,6 +1444,8 @@ targets=(
   Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square_from_necSuf
   Ising2DLambda.FisherZero.two_is_square_in_realClosed
   Ising2DLambda.FisherZero.neg_two_not_square_in_realClosed
+  Ising2DLambda.FisherZero.sqrtTwo_mem_realClosed
+  Ising2DLambda.FisherZero.criticalPoint_mem_realClosed
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

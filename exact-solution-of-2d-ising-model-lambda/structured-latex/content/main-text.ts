@@ -35840,6 +35840,81 @@ x\cdot x+y\cdot y
   },
 
   {
+    id: "zero_pinching_claim_critical_point_mem_real_closed",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: { text: "自己双対点の平方根と臨界点は実閉部分体の元である" },
+    labels: ["claim_critical_point_mem_real_closed"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/critical-point-mem-real-closed"],
+    lean: [
+      "Ising2DLambda.FisherZero.sqrtTwo_mem_realClosed",
+      "Ising2DLambda.FisherZero.criticalPoint_mem_realClosed",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`), " が ", math(String.raw`s\cdot s=2`),
+        " を満たすならば（", ref("claim_sqrt_two_exists"), "）、",
+        math(String.raw`s\in R`), " である（", ref("def_real_closed_subfield"), "）。",
+        "したがって臨界点 ", math(String.raw`x_c=-1+s`), "（", ref("def_critical_point"),
+        "）も ", math(String.raw`R`), " の元である。",
+      ]),
+      paragraph([
+        "この主張により、以後 ", math(String.raw`x_c`), " と ",
+        math(String.raw`R`), " の元との差や順序（", ref("def_real_algebraic_strict_order"),
+        "）を語れる。臨界点への距離の二乗を定めるのに必要な前提である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_real_closed_subfield"), " の第 4 条件により ",
+        math(String.raw`s=a+b\cdot\omega`), " を満たす組 ",
+        math(String.raw`(a,b)\in R\times R`), " がちょうど 1 つ取れる。",
+        ref("claim_real_closed_sum_of_two_squares_is_square"),
+        " の証明と同じ展開により",
+      ]),
+      displayMath(String.raw`2=s\cdot s=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega`),
+      paragraph([
+        "である。一方 ", math(String.raw`2=2+0\cdot\omega`), " であり、",
+        math(String.raw`2,0\in R`), " なので、第 4 条件の一意性から",
+      ]),
+      displayMath(String.raw`a\cdot a-b\cdot b=2,\qquad 2\cdot a\cdot b=0`),
+      paragraph([
+        "を得る。", math(String.raw`\overline{\mathbb{Q}}`), " の中で ",
+        math(String.raw`2\ne0`), " なので、第 2 の等式から ",
+        math(String.raw`a\cdot b=0`), " であり、体には零因子が無いので ",
+        math(String.raw`a=0`), " または ", math(String.raw`b=0`), " である。",
+      ]),
+      list([
+        [
+          math(String.raw`b=0`), " の場合。", math(String.raw`s=a+0\cdot\omega=a`),
+          " なので ", math(String.raw`s=a\in R`), " である。",
+        ],
+        [
+          math(String.raw`a=0`), " の場合。第 1 の等式は ",
+          math(String.raw`-(b\cdot b)=2`), " すなわち ", math(String.raw`-2=b\cdot b`),
+          " となる。ここで ", math(String.raw`b\ne0`), " である（",
+          math(String.raw`b=0`), " なら ", math(String.raw`-2=0`),
+          " となり ", math(String.raw`2\ne0`), " に反する）。",
+          "しかし ", ref("claim_two_is_square_in_real_closed"),
+          " の後半により、", math(String.raw`-2`), " を零でない ",
+          math(String.raw`R`), " の元の平方に書くことはできない。したがってこの場合は起きない。",
+        ],
+      ]),
+      paragraph([
+        "よって ", math(String.raw`s\in R`), " である。",
+        math(String.raw`R`), " は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体なので ", math(String.raw`-1\in R`),
+        " であり、加法で閉じているから ",
+        math(String.raw`x_c=-1+s\in R`), " である。",
+        "使ったのは固定した組 ", math(String.raw`(R,\omega)`),
+        " の第 1・第 3・第 4 条件と ", ref("claim_two_is_square_in_real_closed"),
+        " だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "zero_pinching_def_distance_squared_to_rational",
     kind: "definition",
     title: { text: "零点と有理点の距離の二乗" },

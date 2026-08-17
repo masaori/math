@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 401 は、最終章の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じた（主定理の印つき）。
+`claim_critical_point_mem_real_closed`: $s\cdot s=2$ なら $s\in R$、したがって $x_c=-1+s\in R$。第 4 条件で $s=a+b\omega$ と一意表示し、$a\cdot a-b\cdot b=2$ と $2ab=0$ を読み、$b=0$ の枝で $s=a\in R$、$a=0$ の枝は $-2=b\cdot b$（$b\ne0$）で前 tick の `claim_two_is_square_in_real_closed` の後半に反する。
+SageMath `check/critical-point-mem-real-closed/`（5 節）。Lean 具体版 `FisherZero/CriticalPointMemRealClosed.lean`。**Lean の注意: `linear_combination` の係数は目標と仮定の差の向きで決まる（`0 = ab + ab` から `ab = 0` を出すときは `-hcast / 2`）。** sorry 検査 1390 件・check 492 ブロック・linkage 276 件・PDF 267 ページ通過。
+次は最終章の 2 行目「臨界点への距離の二乗 $\mathrm{dsq}_c(\xi):=(a-x_c)^2+b^2$（$\xi=a+b\omega$）の定義」。`def_distance_squared_to_rational` と同じ形で、有理点 $q$ を $R$ の元 $x_c$ へ広げるだけである（前提の $x_c\in R$ は今 tick で揃った）。
+
+（tick 400 の記録）
 2026-08-18 の tick 400 は、前 tick が「唯一の未固めの論点」と記録した「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。**最終章の $x_c\in R$ の前提はこれで揃った。**
 `claim_real_closed_sum_of_two_squares_is_square`: 任意の $x,y\in R$ について $x\cdot x+y\cdot y$ は $R$ の平方である。**鍵は順序ではなく $\overline{\mathbb Q}$ の代数閉性だった**——$u\cdot u=x+y\omega$ を満たす $u$ を取り、第 4 条件で $u=a+b\omega$ と一意表示すると $x=a\cdot a-b\cdot b$、$y=2ab$ が読め、Gauss の恒等式 $(a^2-b^2)^2+(2ab)^2=(a^2+b^2)^2$ で $c:=a\cdot a+b\cdot b$ が証人になる。三つの平方の和を扱う必要は無かった（前 tick の MEMORY に書いた懸念は、この道筋で回避できた）。
 `claim_two_is_square_in_real_closed`: 上を $x=y=1$ に当てて $s\cdot s=2$ の $s\in R$（零でない）を得、三分法の排他性で $-2$ が平方でないことを得る。
