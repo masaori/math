@@ -14,9 +14,13 @@ export { assertNever, err, ok, type Result } from './result.ts'
 // --- L1: 入力言語 ------------------------------------------------------------
 export {
   BLOCK_KINDS,
+  DEFAULT_THEOREM_STANDING,
   HEADING_LEVELS,
+  STANDING_BEARING_KINDS,
   THEOREM_LIKE_KINDS,
+  THEOREM_STANDINGS,
   isHeadingBlock,
+  standingOf,
   type Block,
   type BlockKind,
   type FigureBlock,
@@ -26,8 +30,12 @@ export {
   type HeadingLevel,
   type Note,
   type Origin,
+  type StandingBearingBlock,
+  type StandingBearingKind,
   type TheoremLikeBlock,
   type TheoremLikeKind,
+  type TheoremStanding,
+  type UnrankedTheoremLikeBlock,
   type Title,
   type TitleContent,
 } from './structured-text/block.ts'

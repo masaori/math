@@ -14,8 +14,8 @@
 import { z } from 'zod'
 
 import { err, ok, type Result } from '../result.ts'
-import { HEADING_LEVELS, THEOREM_LIKE_KINDS } from './block.ts'
-import type { Block, Note } from './block.ts'
+import { HEADING_LEVELS, STANDING_BEARING_KINDS, THEOREM_LIKE_KINDS, THEOREM_STANDINGS } from './block.ts'
+import type { Block, Note, StandingBearingKind, TheoremLikeKind } from './block.ts'
 
 export type ValidationIssue = { path: string; message: string }
 
@@ -127,20 +127,43 @@ export const createRuntimeSchema = <
 }): RuntimeSchema<L, M> => {
   const metaShape = config?.blockMeta ?? ({} as MetaShape)
 
-  const theoremLikeObject = z.object({
+  const theoremLikeBaseShape = {
     ...blockBaseShape,
     ...metaShape,
-    kind: z.enum(THEOREM_LIKE_KINDS),
     title: titleContentSchema.nullish(),
     statement: z.array(nodeSchema),
     proof: z.array(nodeSchema).optional(),
+  }
+
+  // 身分（主定理 / サブ定理）を宣言できるのは主張型だけである。定義・注意・ノート側の
+  // スキーマでは `standing` を「値を持ってはならないキー」として明示的に宣言しておく。
+  // `.strict()` に任せると `passthrough`（語彙を所有しない読み手）で素通りしてしまう。
+  const standingBearingObject = z.object({
+    ...theoremLikeBaseShape,
+    kind: z.enum(STANDING_BEARING_KINDS),
+    standing: z.enum(THEOREM_STANDINGS).optional(),
+  })
+  const unrankedObject = z.object({
+    ...theoremLikeBaseShape,
+    kind: z.enum(
+      THEOREM_LIKE_KINDS.filter(
+        (kind): kind is Exclude<TheoremLikeKind, StandingBearingKind> =>
+          !STANDING_BEARING_KINDS.includes(kind as StandingBearingKind),
+      ) as unknown as [string, ...string[]],
+    ),
+    standing: z
+      .undefined({
+        invalid_type_error: `standing（主定理 / サブ定理の身分）を宣言できるのは ${STANDING_BEARING_KINDS.join(' / ')} だけである`,
+      })
+      .optional(),
   })
   // 見出しと図表はメタデータを持てない設計なので、常に strict のままにする。
   // 未知キーを通すのは「メタデータが載りうる定理型ブロック」だけである。
-  const theoremLikeSchema =
-    config?.unknownBlockMeta === 'passthrough'
-      ? theoremLikeObject.passthrough()
-      : theoremLikeObject.strict()
+  const relaxed = config?.unknownBlockMeta === 'passthrough'
+  const standingBearingSchema = relaxed
+    ? standingBearingObject.passthrough()
+    : standingBearingObject.strict()
+  const unrankedSchema = relaxed ? unrankedObject.passthrough() : unrankedObject.strict()
 
   const noteSchema = z
     .object({
@@ -166,7 +189,9 @@ export const createRuntimeSchema = <
         ? headingSchema.safeParse(value)
         : kind === 'figure'
           ? figureSchema.safeParse(value)
-          : theoremLikeSchema.safeParse(value)
+          : STANDING_BEARING_KINDS.includes(kind as StandingBearingKind)
+            ? standingBearingSchema.safeParse(value)
+            : unrankedSchema.safeParse(value)
     if (!parsed.success) return err(issuesOf(parsed.error, at))
     return ok(parsed.data as Block<L, M>)
   }

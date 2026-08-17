@@ -30,6 +30,17 @@
 
 ## 完了済み
 
+- **主定理 / サブ定理の区分を入力言語へ入れた**（2026-08-17）。
+  - `theorem` / `claim` にだけ `standing: 'mainTheorem' | 'subTheorem'` を宣言できる。宣言が
+    無ければサブ定理（`DEFAULT_THEOREM_STANDING`）。定義・注意・ノート・見出し・図表に書くと
+    型検査（`standing?: never`）と実行時検証（種別ごとに割ったスキーマ。`passthrough` でも効く）で落ちる。
+  - 身分は意味なので `ResolvedTheoremLike.standing` まで運び、プロジェクト固有メタデータ `meta`
+    には入れない。翻訳では変えられない（`localized-revision.ts` が構造として照合する）。
+  - HTML の既定UIは `renderers/html/theorem-standing.ts`。見出しの冒頭に主定理を列挙し、
+    サブ定理を `details` / `summary` で既定折りたたみにする（JavaScript 非依存）。
+    定義・注意は身分を持たないので折りたたまない。LaTeX / PDF の出力は変わらない。
+  - 最初の利用者は `exact-solution-of-2d-ising-model-lambda`（各章の到達点 17 件へ印を付けた）。
+
 - **ローカライズを第一級のドメイン概念として実装**（2026-08-01）。
   - 文書・ブロック ID・ラベル・数式・参照先・画像資産キーはロケール中立、題名・本文・参照表示・
     引用注記・画像代替文はロケール固有として分離した。`LocalizedRevisionSnapshot` は原文ロケール、

@@ -10,6 +10,7 @@ import type {
   BlockKind,
   HeadingLevel,
   Origin,
+  TheoremStanding,
   TitleContent,
 } from '../structured-text/block.ts'
 import type {
@@ -103,6 +104,12 @@ export type ResolvedTheoremLike = ResolvedProvenance & {
   statement: readonly ResolvedNode[]
   proof: readonly ResolvedNode[] | null
   anchor: string
+  /**
+   * 主張の身分（主定理 / サブ定理）。**正本で宣言が無ければサブ定理**として確定させる。
+   * 既定値の解釈を出力器ごとに書かせないため、ここで解決済みにしておく。
+   * 主張型でないブロック（定義・注意・ノート）は常にサブ定理側になる。
+   */
+  standing: TheoremStanding
   /**
    * プロジェクト固有メタデータ。テーマから**読めるが解釈されない**。
    * 出力器はこれを体裁の判断に使わない（§8.5 の「意味と体裁を混ぜない」）。

@@ -289,6 +289,30 @@ test('目次は見出しだけを文書順に並べたものになる', () => {
   )
 })
 
+test('身分は解決時に確定する（宣言が無ければサブ定理）', () => {
+  const main = {
+    id: 'c1',
+    kind: 'claim',
+    labels: [],
+    statement: [],
+    standing: 'mainTheorem',
+  } as const
+  const silent = { id: 'c2', kind: 'claim', labels: [], statement: [] } as const
+  const definition = { id: 'd1', kind: 'definition', labels: [], statement: [] } as const
+  const result = resolve(snapshot([{ key: '001', blocks: [main, silent, definition] }]), options)
+  assert.equal(result.success, true)
+  if (!result.success) return
+  assert.deepEqual(
+    result.data.blocks.map((block) =>
+      block.kind === 'heading' || block.kind === 'figure' ? null : block.standing,
+    ),
+    ['mainTheorem', 'subTheorem', 'subTheorem'],
+  )
+  // 身分は入力言語の第一級のフィールドなので、プロジェクト固有メタデータへ紛れ込まない。
+  const first = result.data.blocks[0]
+  assert.deepEqual(first?.kind === 'claim' ? first.meta : null, {})
+})
+
 test('プロジェクト固有メタデータは meta へそのまま運ばれる（解釈しない）', () => {
   const block = {
     id: 'c1',

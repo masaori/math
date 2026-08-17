@@ -179,6 +179,43 @@ test('語彙を所有しない読み手は、未知のメタデータを落と�
   )
 })
 
+test('身分（主定理 / サブ定理）は主張型だけが宣言できる', () => {
+  assert.equal(
+    schema.validateBlock(
+      { id: 'b1', kind: 'theorem', labels: [], statement: [], standing: 'mainTheorem' },
+      'fixture',
+    ).success,
+    true,
+  )
+  assert.equal(
+    schema.validateBlock(
+      { id: 'b1', kind: 'definition', labels: [], statement: [], standing: 'mainTheorem' },
+      'fixture',
+    ).success,
+    false,
+  )
+  // 語彙外の身分は拒否する（「重要」等の思いつきの値を入れさせない）。
+  assert.equal(
+    schema.validateBlock(
+      { id: 'b1', kind: 'claim', labels: [], statement: [], standing: 'important' },
+      'fixture',
+    ).success,
+    false,
+  )
+})
+
+test('身分の宣言できる種別は、語彙を所有しない読み手でも守られる', () => {
+  // 未知のメタデータは通すが、`standing` は語彙に属するキーなので判断できる。
+  const reader = createRuntimeSchema({ unknownBlockMeta: 'passthrough' })
+  assert.equal(
+    reader.validateBlock(
+      { id: 'b1', kind: 'note', labels: [], statement: [], standing: 'mainTheorem' },
+      'fixture',
+    ).success,
+    false,
+  )
+})
+
 test('エラーは 1 件目で止めずに全件返す', () => {
   const result = schema.validateBlocks(
     [
