@@ -71,6 +71,7 @@ export const ALL_LABELS = [
   "theorem_finite_character_orthogonality",
   "theorem_finite_fourier_inverse_transform",
   "theorem_fixed_quotient_coefficient_support",
+  "theorem_fixed_quotient_fisher_zero_multiplicity_data",
   "theorem_fixed_quotient_ising_partition_polynomial",
   "theorem_fixed_quotient_partition_polynomial_has_square_factor",
   "theorem_fixed_quotient_partition_polynomial_irreducible_factorization",

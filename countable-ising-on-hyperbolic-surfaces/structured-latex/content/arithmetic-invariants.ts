@@ -413,4 +413,102 @@ x^{191^{44}}&\equiv x\pmod{\overline Q_Q},\\
       ]),
     ],
   },
+  {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_multiplicity_data",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 零点の代数的重複度データ" },
+    labels: ["theorem_fixed_quotient_fisher_zero_multiplicity_data"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-zero-multiplicity-data"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"),
+        " の分配多項式を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で代数的閉包上へ移し、",
+      ]),
+      displayMath(String.raw`\overline P_Q(x):=\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}\!\left(Z_{G_Q}(x)\right)
+\in\overline{\mathbb Q}[x]`),
+      paragraph(["と置く。各 ", math(String.raw`\alpha\in\overline{\mathbb Q}`), " に対して零点重複度を"]),
+      displayMath(String.raw`\mu_Q(\alpha):=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  (x-\alpha)^k\mid\overline P_Q(x)
+  \text{ in }\overline{\mathbb Q}[x]
+\right\}
+\in\mathbb N`),
+      paragraph([
+        "で定める。集合は ",
+        math("k=0"),
+        " を含み、",
+        math(String.raw`\deg\overline P_Q=56`),
+        " により上に有界なので、この最大値は一意に存在する。このとき",
+      ]),
+      displayMath(String.raw`\mu_Q(\alpha)=
+\begin{cases}
+  12 & (\alpha=-1),\\
+  1 & (Q_Q(\alpha)=0),\\
+  0 & (\alpha\ne-1\text{ and }Q_Q(\alpha)\ne0).
+\end{cases}`),
+      paragraph([
+        "したがって Fisher 零点の台は相異なる ",
+        math("45"),
+        " 個の代数的数からなり、重複度の総和は ",
+        math("56"),
+        " である。このデータは ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " と代数的多項式の整除だけで定まり、複素平面への埋め込み、数値近似、距離、偏角を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"), " を標準単射で移すと"]),
+      displayMath(String.raw`\overline P_Q(x)
+=2(x+1)^{12}\overline Q_Q(x)
+\in\overline{\mathbb Q}[x],`),
+      paragraph([
+        "ただし ",
+        math(String.raw`\overline Q_Q`),
+        " は ",
+        math(String.raw`Q_Q`),
+        " の係数を ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " へ移した多項式である。",
+        ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"),
+        " より ",
+        math(String.raw`Q_Q\in\mathbb Q[x]`),
+        " は次数 ",
+        math("44"),
+        " の既約多項式である。標数零の体上の既約多項式は分離的なので、",
+      ]),
+      displayMath(String.raw`\left|\left\{\alpha\in\overline{\mathbb Q}\mid Q_Q(\alpha)=0\right\}\right|
+=44
+=\deg Q_Q.`),
+      paragraph([
+        math(String.raw`x+1`),
+        " と ",
+        math(String.raw`Q_Q`),
+        " は次数の異なる既約多項式なので互いに素であり、",
+      ]),
+      displayMath(String.raw`Q_Q(-1)\ne0
+\quad\bigl(\because\ \gcd_{\mathbb Q[x]}(x+1,Q_Q)=1\bigr).`),
+      paragraph(["よって積における各一次因子の指数を読むと"]),
+      displayMath(String.raw`\mu_Q(\alpha)=
+\begin{cases}
+  12 & (\alpha=-1),\\
+  1 & (Q_Q(\alpha)=0),\\
+  0 & (\alpha\ne-1\text{ and }Q_Q(\alpha)\ne0)
+\end{cases}
+\quad\bigl(\because\ \overline P_Q=2(x+1)^{12}\overline Q_Q\bigr).`),
+      displayMath(String.raw`\left|\left\{\alpha\in\overline{\mathbb Q}\mid\mu_Q(\alpha)>0\right\}\right|
+=1+44
+=45,`),
+      displayMath(String.raw`\sum_{\substack{\alpha\in\overline{\mathbb Q}\\\mu_Q(\alpha)>0}}\mu_Q(\alpha)
+=12+44
+=56.`),
+      paragraph([
+        "以上は有理係数多項式の既約分解、代数的閉包における有限個の根、標数零での分離性だけを用いる。数値近似と複素平面上の根分離は別の成果物で扱う。",
+      ]),
+    ],
+  },
 ]);
