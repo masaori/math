@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 374 で台帳から移した記録（tick 369 分）
+
+### 現在地
+
+- **2026-08-17 の tick 369 は、台帳の先頭行「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書いて四層で閉じた。**
+  `claim_periodic_open_boundary_comparison_density_le_one`（`def_open_square_free_entropy_density` の直後、住処 Lambda）: $L\ge1$、$0<q\le1$ で $\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)\le_{\Lambda_{\mathbb Q}}\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。証明は準備二つ（値の正値性と $L\ne0$、下端の元の像を七段で $\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)$ へ整える: $\iota$ の加法性・分配則・`claim_rational_embedding_commutes_with_integer_multiple`・結合則・$\mathbb Q$ の約分 $\tfrac{1}{L^2}\cdot2L=\tfrac2L$・密度の定義・加法の可換性）と一続き三段の鎖二本（`claim_scaled_embedding_order_transfer` で `claim_periodic_open_boundary_comparison_log_le_one` の $\Lambda$ の比較を移し、`def_finite_free_entropy_density`・`def_open_square_free_entropy_density` で閉じる）。部分正方形の density 版と同じ形。
+  SageMath `check/periodic-open-boundary-comparison-density/`（$L\le3$、有理点 6 点、252 検査、5 秒。`ZZ`/`QQ` の厳密計算。決定手続きと順序の移送の一致も各段で見る）。Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonDensity.lean`（`scaled_periodicOpenLowerForm_eq`（七段の `calc`）・`rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one`）、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf` を共有（新設しない。上端の等式は `rfl`）、導出版 `PeriodicOpenComparisonDensityFromNecSuf.lean`。sorry 検査 1280 件。check 457 ブロック・verify-check-linkage 253 件・PDF 249 ページ通過。
+  式変形統一: 姉妹側「定数 $c$ の値」（`eigenvalues_of_V_017_claim_constant_c_value`）の Step 4 で、散文の $c^2=(2s_2)^M=((2s_2)^{M/2})^2$ と根拠なしの一行 $(c-(2s_2)^{M/2})(c+(2s_2)^{M/2})=0$ を、和と差の積・指数法則・Step 3 の代入の一続き四段と行末根拠へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_periodic_open_boundary_comparison_log_le_one` の本文（準備二つ・一続き四段）と Lean 具体版（`logRat_periodicOpenLowerValue_eq`・`logOrderLE_periodicOpenLog_bounds_of_le_one`。`hZ`/`hZop`/`hlow`・`logRat_le_iff`・`unfold freeEntropy` が本文と 1 対 1）を突き合わせて一致。修正なし。次は「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」（着手前に論法で割る）。
+
+### 前進の記録
+
+- 2026-08-17（tick 369）: 台帳の先頭行「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」を四層で閉じ、`claim_periodic_open_boundary_comparison_density_le_one` を開境界正方形の密度の定義の直後に置いた。SageMath 252 検査、Lean 具体版・導出版（必要十分版は既存を共有）、sorry 検査 1280 件。式変形統一は姉妹側「定数 $c$ の値」の Step 4 の因数分解の一行を一続きの四段へ。
+
+### レビュー記録
+
+- 2026-08-17（tick 369）: 前 tick の「周期境界と開境界の境界評価の対数化」の本文（準備二つ・一続き四段）と Lean 具体版・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 今 tick の密度の比較は $\Lambda_{\mathbb Q}$ の順序についての主張で、次の下組の一致が引くので残す。準備の $\mathbb Q$ の約分・加法の可換性は独立ブロックにせず、行末の $(\because\ \dots)$ に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。本文の修正は無い。
+
 ## 2026-08-17 tick 373 で台帳から移した記録（tick 368 分）
 
 ### 現在地
