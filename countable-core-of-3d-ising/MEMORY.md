@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-17 09:30: 開始が締切 8 分前。レビュー修正なし。「対称化した列は $q\leftrightarrow1/q$ で不変である」の Lean 具体版を零モデル $Z_L$ で完成 `SymmetrizedReciprocalInvariantNullModel.lean`（`eval_polyOfMultiplicity_pos`・`nullModel_symmetrized_padicValRat_reciprocal_invariant`。sorry 検査 202 件。status `Lean 具体版まで`）。次は Lean 必要十分版（`NecSuf/` に一般の回文多項式版を置き零モデル版を導出）。
 - 2026-08-17 09:15: 開始が締切 8 分前。レビュー修正なし。「対称化した列は $q\leftrightarrow1/q$ で不変である」の $Z_L$ への特殊化 `SymmetrizedReciprocalInvariantSpecialized.lean`（零モデル・構造コアの分配多項式の `reflect` 不変と次数 $\le E$。sorry 検査 200 件）。次は束ね定理に渡して $Z_L(1/q)\neq0$ を足し `Lean 具体版まで` へ。
 - 2026-08-17 09:00: 開始が締切 8 分前。レビュー修正なし。「対称化した列は $q\leftrightarrow1/q$ で不変である」の橋渡し続き `SymmetrizedReciprocalInvariantPolyOfMultiplicity.lean`（`polyOfMultiplicity E Ω` の係数確定と、`Ω` の回文性から `reflect E f = f`。sorry 検査 197 件）。次は `Ω := multiplicity S` で特殊化し束ねて `Lean 具体版まで` へ。
 - 2026-08-17 08:45: 開始が締切 8 分前。レビュー修正なし。「対称化した列は $q\leftrightarrow1/q$ で不変である」の $Z_L$ 特殊化への橋渡し `SymmetrizedReciprocalInvariantReflectOfCoeff.lean`（`reflect_eq_of_coeff_palindrome`：係数の回文性から `reflect E f = f`。次数仮定不要。sorry 検査 195 件）。次は `multiplicity_palindrome` を係数の等式へ翻訳し $f=Z_L$ に特殊化して `Lean 具体版まで` へ。
