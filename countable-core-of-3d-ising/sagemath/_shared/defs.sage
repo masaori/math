@@ -170,3 +170,47 @@ def free_partition_value_by_fast_layer_transfer(box_side, point_value):
         values = [value * weight for value, weight in zip(values, intra_weights)]
 
     return sum(values)
+
+
+def free_partition_value_by_fast_layer_transfer_mod_prime(box_side, point_value, prime):
+    # 上の butterfly を素体上で一括計算する。各演算後に剰余を取り、numpy.int64 の範囲を保つ。
+    import numpy as np
+
+    layer_site_count = box_side**2
+    state_count = 2**layer_site_count
+    states = np.arange(state_count, dtype=np.int64)
+    broken = np.zeros(state_count, dtype=np.int64)
+
+    def site_index(i, j):
+        return i * box_side + j
+
+    for i in range(box_side):
+        for j in range(box_side):
+            if i + 1 < box_side:
+                p = site_index(i, j)
+                q = site_index(i + 1, j)
+                broken += ((states >> p) ^ (states >> q)) & 1
+            if j + 1 < box_side:
+                p = site_index(i, j)
+                q = site_index(i, j + 1)
+                broken += ((states >> p) ^ (states >> q)) & 1
+
+    modulus = int(prime)
+    x_value = int(point_value) % modulus
+    intra_weights = np.array(
+        [pow(x_value, int(exponent), modulus) for exponent in broken],
+        dtype=np.int64,
+    )
+
+    values = intra_weights.copy()
+    for _layer in range(1, box_side):
+        for bit in range(layer_site_count):
+            stride = 1 << bit
+            pairs = values.reshape((-1, 2, stride))
+            left = pairs[:, 0, :].copy()
+            right = pairs[:, 1, :].copy()
+            pairs[:, 0, :] = (left + x_value * right) % modulus
+            pairs[:, 1, :] = (x_value * left + right) % modulus
+        values = (values * intra_weights) % modulus
+
+    return int(values.sum(dtype=np.int64) % modulus)

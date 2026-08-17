@@ -14,11 +14,13 @@ Lagrange 補間）、判別式を比較する。共通定義は `sagemath/_share
 | $L=2$ で列挙と層転送が一致し $Z(1)=2^8$ | `ZZ[x]` の等式 | PASS |
 | $L=2$ では周期辺が各対に二重に付くので $Z^{\mathrm{per}}_2(x)=Z_2(x^2)$、判別式はどちらも $0$（一致する） | `ZZ[x]` の等式・`discriminant()`・`is_squarefree()` | PASS（**この検査で $L=2$ は判別式が一致することが分かり、主張は $L=3$ で立てる**） |
 | $L=3$ で $\mathrm{disc}(Z_3)=0$（$Z_3$ は square-free でない）、$\mathrm{disc}(Z^{\mathrm{per}}_3)\ne0$、ゆえに両者は異なる | `discriminant()`・`is_squarefree()` | PASS |
+| 法 $65537$ で $Z_4$ を 145 点から補間すると次数 144 を保ち square-free である。ゆえに $\mathrm{disc}(Z_4)\ne0$ が $\mathbb Z$ 上で従う | `check_z4_mod_prime.sage`、有限体上の Lagrange 補間・`gcd(Z_4,Z'_4)=1` | PASS |
 
 浮動小数点、実対数、指数関数、無限和、極限は使わない。所要は約 5 分（$L=3$ の判別式）。
 
 ```sh
 sage sagemath/check/discriminant-free-vs-periodic-differ/check.sage
+sage sagemath/check/discriminant-free-vs-periodic-differ/check_z4_mod_prime.sage
 ```
 
-**2026-08-17 実行: すべて通過。**
+**2026-08-18 実行: すべて通過。**
