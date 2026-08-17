@@ -257,4 +257,79 @@ Q/H_E
       ]),
     ],
   },
+  {
+    id: "finite_quotient_lattice_definition_oriented_coset_edge_endpoint_data",
+    kind: "definition",
+    title: { text: "向き付き剰余類辺の端点写像" },
+    labels: ["def_finite_quotient_oriented_coset_edge_endpoint_data"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-quotient-oriented-edge-endpoints"],
+    statement: [
+      paragraph([
+        ref("def_finite_quotient_coset_cell_incidence_relation"),
+        " の剰余類セル間 incidence と ",
+        ref("def_edge_endpoint_label_set"),
+        " の形式的辺端ラベル集合に対し、辺剰余類の向きを選ぶ代表元選択写像全体を",
+      ]),
+      displayMath(String.raw`\operatorname{Rep}_E(Q):=
+\left\{
+  \eta_E:Q/H_E\to Q
+  \middle|
+  \forall C_E\in Q/H_E\quad \eta_E(C_E)\in C_E
+\right\}`),
+      paragraph([
+        "と定める。全ての左剰余類 ",
+        math(String.raw`C_E\in Q/H_E`),
+        " は空でない有限集合なので、有限列挙により ",
+        math(String.raw`\operatorname{Rep}_E(Q)`),
+        " は空でない。各 ",
+        math(String.raw`\eta_E\in\operatorname{Rep}_E(Q)`),
+        " に対し、向き付き剰余類辺の端点写像を",
+      ]),
+      displayMath(String.raw`\partial_{Q,\eta_E}:
+\mathcal E_Q\times\mathsf{End}\longrightarrow\mathcal V_Q`),
+      paragraph(["であって、各 ", math(String.raw`C_E\in Q/H_E`), " に対して"]),
+      displayMath(String.raw`\begin{aligned}
+\partial_{Q,\eta_E}
+\left(
+  (\mathtt{edge},C_E),
+  \mathsf{source}
+\right)
+&:=
+\left(
+  \mathtt{vertex},
+  \eta_E(C_E)H_V
+\right),\\
+\partial_{Q,\eta_E}
+\left(
+  (\mathtt{edge},C_E),
+  \mathsf{target}
+\right)
+&:=
+\left(
+  \mathtt{vertex},
+  \eta_E(C_E)r_EH_V
+\right)
+\end{aligned}`),
+      paragraph([
+        "を満たす写像と定める。",
+        math(String.raw`\eta_E(C_E)\in C_E`),
+        " かつ ",
+        math(String.raw`r_E\in H_E`),
+        " なので ",
+        math(String.raw`\eta_E(C_E)r_E\in C_E`),
+        " である。したがって右辺の二頂点セルは、どちらも ",
+        math(String.raw`(\mathtt{edge},C_E)`),
+        " と ",
+        math(String.raw`\mathcal I_Q`),
+        " で incident である。代表元選択写像 ",
+        math(String.raw`\eta_E`),
+        " は辺の向きを選ぶ追加の有限データであり、剰余類そのものと同一視しない。別の選択に対する ",
+        math(String.raw`\mathsf{source}`),
+        " と ",
+        math(String.raw`\mathsf{target}`),
+        " の一致は要求しない。また、二端の相異性、面境界の巡回順序、閉曲面性、正則性、向き付けはこの定義から結論せず、生成後の有限セル分割述語で検査する。全ての対象と量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
