@@ -1436,6 +1436,9 @@ targets=(
   Ising2DLambda.NecSuf.ThermodynamicLimit.card_le_sum_of_one_le_necSuf
   Ising2DLambda.ThermodynamicLimit.fisherZeroCount_le_fisherZeroMultCount_from_necSuf
   Ising2DLambda.ThermodynamicLimit.fisherZeroMultCount_le_edge_bound
+  Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero
+  Ising2DLambda.NecSuf.FisherZero.sq_add_sq_eq_zero_factor_necSuf
+  Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

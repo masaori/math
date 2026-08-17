@@ -6,6 +6,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 399 は、章「臨界指数を零点列で書く」の先頭行「$x_c$ が実閉部分体 $R$ の元であること」の前提を固めるため、その手前に必要な補題「実閉部分体の二つの平方の和が零なら、両方が零である」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_real_closed_sum_of_two_squares_zero`（`claim_real_algebraic_order_trichotomy` の直後）: $x,y\in R$、$x\cdot x+y\cdot y=0$ ならば $x=y=0$。証明は $(x+y\omega)(x-y\omega)=x\cdot x+y\cdot y=0$ の一続き五段（`def_real_closed_subfield` の第 3 条件 $\omega\cdot\omega=-1$ を使う）と、$\overline{\mathbb Q}$ が体で零因子を持たないこと、第 4 条件（一意表示）を $0=0+0\cdot\omega$ へ当てる二つの場合分け（組 $(x,y)$ と組 $(x,-y)$）。
+  理由: $x_c\in R$ の証明は $s=a+b\omega$ と分解して $2ab=0$ を出したあと、$a=0$ の枝（$b\cdot b=-2$）を潰す必要がある。そこには「$R$ の平方の和についての事実」が要り、三分法（1 つの元についての言明）だけでは足りない。まずその土台をこの補題で置いた。
+  SageMath `check/real-closed-sum-of-two-squares-zero/`（5 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`。鎖の各段・結論・一意表示の使い方・$R$ の外では平方の和が零になりうること（仮定が本質であることの確認）。厳密。通過）。Lean 具体版 `FisherZero/RealClosedSumOfTwoSquaresZero.lean`（`zero_decomposition_unique`・`realClosed_sq_add_sq_eq_zero`）、必要十分版 `NecSuf/FisherZero/RealClosedSumOfTwoSquaresZero.lean`（`sq_add_sq_eq_zero_factor_necSuf`。部分体も一意表示も落とし、可換整域で「どちらかの因子が零」まで）、導出版。sorry 検査 1383 件・check 489 ブロック・verify-check-linkage 274 件・build:pdf 266 ページ通過。
+  台帳のセクション表に「$R$ では $2$ が平方である（$-2$ は平方でない）」の行を $x_c\in R$ の前へ足した。**ここが唯一の未固めの論点である。**
 - **2026-08-18 の tick 398 は、最終章「臨界指数を零点列で書く」の唯一のセクション「先頭零点の列と有限サイズスケーリング」を論法単位の 7 行へ割り直し、着工計画を確定した（前進は割り直しのみ。数学ブロックは足していない）。**
   内訳: $x_c$ が実閉部分体 $R$ の元であること／臨界点への距離の二乗 $\mathrm{dsq}_c$ の定義／$R$ の空でない有限集合の最小元／$\mathcal F_L$ が空でないこと（$L\ge2$）／先頭距離 $d_1(L)$ の定義と正値性／詰め寄りの述語との接続／有限サイズスケーリングの読み（ここだけ ℝ 脱出）。割った理由: 先頭距離 $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)$ の定義には「臨界点への距離」「最小元の存在」「零点集合の非空性」という独立の論法が前置きに要り、さらに着手時の確認で、距離の成分分解の前提になる $x_c\in R$ が本文にも Lean にも未確立だと分かったため（$s=a+b\omega$ の $\omega$ 成分と平方の三分律で示す計画を備考に書いた）。$L=1$ は辺が両方自己ループで $Z_1$ が定数になり $\mathcal F_1=\varnothing$ なので、非空性は $L\ge2$ に限る。
   レビュー: tick 397 の挟み込み（本文の定義 1 つ・主張 2 つ・SageMath `check/fisher-zero-mult-count-squeeze/`・Lean `FisherZeroMultCountSqueeze.lean`）を突き合わせ、一致した。修正 1 件 — 本文末尾「この先に書くこと」に済んだ「零点密度の挟み込み」の項目が残っていたので消した（check 488 ブロック通過を確認して先に push 済み）。
@@ -34,7 +39,8 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | $x_c$ が実閉部分体 $R$ の元であること | todo | 本文にも Lean にも未確立（2026-08-18 に確認）。$s=a+b\omega$ と分解し、$s\cdot s=2$ の $\omega$ 成分から $2ab=0$、$a=0$ の枝を $R$ の平方の三分律（`def_real_closed_subfield` の第 2 条件）で潰して $s\in R$、部分体の加法で $x_c=-1+s\in R$。$2$ と $-2$ が両方 $R$ の平方になれないことの論証を先に固めてから着手する |
+| 臨界指数を零点列で書く | $R$ では $2$ が平方である（$-2$ は平方でない） | todo | 今 tick の `claim_real_closed_sum_of_two_squares_zero`（平方の和が零なら両方零）を踏み台に、$-2=w\cdot w$ を仮定して矛盾を出す。$1=1\cdot1$ と三分法から $-1$ は平方でないことも使う。**ここが唯一の未固めの論点**（平方の集合が加法で閉じることを一般に示す必要があるか、$2$ に限れば済むかを着手時に見極める） |
+| 臨界指数を零点列で書く | $x_c$ が実閉部分体 $R$ の元であること | todo | 前行が済んでから。$s=a+b\omega$ と分解し、$s\cdot s=2$ の $\omega$ 成分から $2ab=0$、$a=0$ の枝を $R$ の平方の三分律（`def_real_closed_subfield` の第 2 条件）で潰して $s\in R$、部分体の加法で $x_c=-1+s\in R$。$2$ と $-2$ が両方 $R$ の平方になれないことの論証を先に固めてから着手する |
 | 臨界指数を零点列で書く | 臨界点への距離の二乗の定義 | todo | $\mathrm{dsq}_c(\xi):=(a-x_c)^2+b^2$（$\xi=a+b\omega$）を `def_distance_squared_to_rational` と同じ形で置く（有理点 $q$ を $R$ の元 $x_c$ へ広げるだけ。前行の $x_c\in R$ が前提） |
 | 臨界指数を零点列で書く | $R$ の空でない有限集合は最小元をちょうど 1 つ持つ | todo | 線型順序（`claim_real_algebraic_order_trichotomy`）と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み |
 | 臨界指数を零点列で書く | $\mathcal F_L$ が空でないこと（$L\ge2$） | todo | 定数でないこと（1 スピンだけ反転した配位に破れボンドがあるので $\exists m\ge1,\ \Omega_L(m)\ge1$）と `def_algebraic_numbers` の代数閉性。$L=1$ は両辺とも自己ループで $Z_1$ が定数になるので除く（着手時に SageMath で確認してから書く） |
@@ -46,6 +52,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 399）: 章「臨界指数を零点列で書く」の先頭行の前提として「実閉部分体の二つの平方の和が零なら両方が零である」を四層で閉じ、`claim_real_closed_sum_of_two_squares_zero` を三分法の直後に置いた（$(x+y\omega)(x-y\omega)$ の因数分解と一意表示。三分法だけでは和について何も言えないため）。SageMath 5 節（`AA` と `QQbar(I)` のモデル）、Lean 具体版・必要十分版（可換整域で因子が零まで）・導出版。sorry 検査 1383 件・check 489 ブロック・PDF 266 ページ通過。セクション表に「$R$ では $2$ が平方である」の行を $x_c\in R$ の前へ足した。
 - 2026-08-18（tick 398）: 最終章「臨界指数を零点列で書く」の唯一のセクションを論法単位の 7 行へ割り直した（$x_c\in R$／$\mathrm{dsq}_c$ の定義／$R$ の有限集合の最小元／$\mathcal F_L\ne\varnothing$（$L\ge2$）／$d_1(L)$ の定義と正値性／詰め寄りの述語との接続／スケーリングの読み（ℝ 脱出））。理由: 先頭距離の定義に独立の前置きが 4 つ要り、うち $x_c\in R$ は未確立だと着手時の確認で分かったため。数学ブロックは足していない。
 - 2026-08-17（tick 397）: 台帳の先頭行「零点密度の挟み込み」を四層で閉じ、章「熱力学極限」の todo が尽きた。$N_L\le N^{\mathrm{mult}}_L$（各項 1 以上と有限和の単調性）と $N^{\mathrm{mult}}_L\le2L^2$（重複度の和の上界。主定理の印）。SageMath 4 節（$L=1,2$・円板 9 組）、Lean 具体版・必要十分版（「各点で 1 以上なら和は個数以上」だけへ落とした）・導出版。sorry 検査 1380 件・check 488 ブロック・PDF 265 ページ通過。launchd 即時起動の tick がクレジット切れで残した書きかけを拾って完成させた。
 - 2026-08-17（tick 396）: 台帳の先頭行「重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロック）。和を取る有限集合は $\mathcal F_L\cap D(c,r)$、重複度が定まる根拠は前 tick の持ち上げの非零性。Lean は `Finset.sum` と `Set.ncard_eq_toFinset_card`。check 486 ブロック・PDF 264 ページ通過。併せて tick の Claude 実行をこのループ専用アカウントへ固定（モデルは claude-fable-5 のまま。共有アカウントの上限でループが止まっていたため）。

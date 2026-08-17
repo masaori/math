@@ -35604,6 +35604,92 @@ L^2\,\ell_2+\Phi_L(q)
   },
 
   {
+    id: "zero_pinching_claim_real_closed_sum_of_two_squares_zero",
+    kind: "claim",
+    title: { text: "実閉部分体の二つの平方の和が零なら、両方が零である" },
+    labels: ["claim_real_closed_sum_of_two_squares_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/real-closed-sum-of-two-squares-zero"],
+    lean: [
+      "Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero",
+      "Ising2DLambda.NecSuf.FisherZero.sq_add_sq_eq_zero_factor_necSuf",
+      "Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`x,y\in R`), "（", ref("def_real_closed_subfield"),
+        "）が ", math(String.raw`x\cdot x+y\cdot y=0`), " を満たすならば ",
+        math(String.raw`x=0`), " かつ ", math(String.raw`y=0`), " である。",
+      ]),
+      paragraph([
+        "言い換えると、", math(String.raw`R`),
+        " では零でない元の平方を足して零にすることはできない。",
+        "この事実は、", ref("claim_real_algebraic_order_trichotomy"),
+        " が与える場合分けの網羅性とは別の内容である（三分法は 1 つの元についての言明であり、",
+        "和については何も言わない）。以後、順序が加法と両立することを示す段や、",
+        math(String.raw`\mathbb{Q}`),
+        " の元の平方性を判定する段で引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_real_closed_subfield"), " の第 3 条件 ",
+        math(String.raw`\omega\cdot\omega=-1`), " により、",
+        math(String.raw`\overline{\mathbb{Q}}`), " の中で次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x+y\cdot\omega)\cdot(x-y\cdot\omega)
+&=x\cdot x-(y\cdot\omega)\cdot(y\cdot\omega)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則（差の積の展開）})\\
+&=x\cdot x-y\cdot y\cdot(\omega\cdot\omega)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則})\\
+&=x\cdot x-y\cdot y\cdot(-1)
+&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件})\\
+&=x\cdot x+y\cdot y
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元と積の単位元})\\
+&=0
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\overline{\mathbb{Q}}`), " は体なので零因子を持たない。よって ",
+        math(String.raw`x+y\cdot\omega=0`), " または ",
+        math(String.raw`x-y\cdot\omega=0`), " である。",
+      ]),
+      paragraph([
+        ref("def_real_closed_subfield"), " の第 4 条件を元 ",
+        math(String.raw`0\in\overline{\mathbb{Q}}`),
+        " へ適用する。", math(String.raw`0=0+0\cdot\omega`),
+        " であり（", math(String.raw`(0,0)\in R\times R`),
+        " は組として第 4 条件の等式を満たす）、そのような組はちょうど 1 つなので、",
+        math(String.raw`(a,b)\in R\times R`), " が ",
+        math(String.raw`0=a+b\cdot\omega`), " を満たせば ",
+        math(String.raw`a=0`), " かつ ", math(String.raw`b=0`), " である。",
+      ]),
+      list([
+        [
+          math(String.raw`x+y\cdot\omega=0`), " の場合。組 ",
+          math(String.raw`(x,y)`), " へ上を当てて ", math(String.raw`x=0`), "、",
+          math(String.raw`y=0`), " を得る。",
+        ],
+        [
+          math(String.raw`x-y\cdot\omega=0`), " の場合。",
+          math(String.raw`x-y\cdot\omega=x+(-y)\cdot\omega`),
+          " であり（", math(String.raw`R`), " は部分体なので ",
+          math(String.raw`-y\in R`), "）、組 ", math(String.raw`(x,-y)`),
+          " へ上を当てて ", math(String.raw`x=0`), "、",
+          math(String.raw`-y=0`), " すなわち ", math(String.raw`y=0`), " を得る。",
+        ],
+      ]),
+      paragraph([
+        "どちらの場合も ", math(String.raw`x=0`), " かつ ", math(String.raw`y=0`),
+        " である。使ったのは ", math(String.raw`\overline{\mathbb{Q}}`),
+        " が体であることと、固定した組 ", math(String.raw`(R,\omega)`),
+        " の第 3・第 4 条件だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "zero_pinching_def_distance_squared_to_rational",
     kind: "definition",
     title: { text: "零点と有理点の距離の二乗" },
