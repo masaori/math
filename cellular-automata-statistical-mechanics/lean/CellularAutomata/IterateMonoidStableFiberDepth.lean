@@ -9,6 +9,7 @@ structured-latex/content/iterate-monoid-stable-fiber-depth.ts。
 -/
 import CellularAutomata.IterateMonoidStableFiberDynamics
 import CellularAutomata.MinimalPreperiodPeriod
+import CellularAutomata.NecSuf.IterateMonoidStableFiberDepth
 
 namespace CellularAutomata.IterateMonoidStableFiberDepth
 
@@ -145,5 +146,66 @@ noncomputable def stableFiberDepthDataTable :
     (Finset.range (2 ^ Fintype.card V + 1)).image fun k =>
       (q, k, stableFiberDepthLayerTable N f q k,
         (stableFiberDepthLayerTable N f q k).card)
+
+/-! ## 必要十分版からの導出 -/
+
+theorem existsUnique_mem_stableFiberDepthLayer_from_necessary_sufficient
+    (q : stableImage N f) (y : V → State) (hy : y ∈ stableFiber N f q) :
+    ∃! k : ℕ, y ∈ stableFiberDepthLayer N f q k := by
+  change ∃! k : ℕ, y ∈
+    CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.depthLayer
+      (cycleIdempotent N f) (minPreperiod N f) q k
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.existsUnique_mem_depthLayer
+    (cycleIdempotent N f) (minPreperiod N f) q y hy
+
+theorem distinct_stableFiberDepthLayers_disjoint_from_necessary_sufficient
+    (q : stableImage N f) {k l : ℕ} (hkl : k ≠ l) :
+    stableFiberDepthLayer N f q k ∩ stableFiberDepthLayer N f q l = ∅ := by
+  change
+    CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.depthLayer
+        (cycleIdempotent N f) (minPreperiod N f) q k ∩
+      CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.depthLayer
+        (cycleIdempotent N f) (minPreperiod N f) q l = ∅
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.distinct_depthLayers_disjoint
+    (cycleIdempotent N f) (minPreperiod N f) q hkl
+
+theorem minPreperiod_globalMap_eq_sub_one_from_necessary_sufficient
+    (y : V → State) (hpos : 0 < minPreperiod N f y) :
+    minPreperiod N f (globalMap N f y) = minPreperiod N f y - 1 := by
+  have hpos' : 0 < CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPreperiod
+      (globalMap N f) y := by
+    rwa [← minPreperiod_eq_necessary_sufficient N f y]
+  have h := CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.minPreperiod_map_eq_sub_one
+    (globalMap N f) y hpos'
+  rw [← minPreperiod_eq_necessary_sufficient N f (globalMap N f y),
+    ← minPreperiod_eq_necessary_sufficient N f y] at h
+  exact h
+
+theorem globalMap_mem_next_depthLayer_from_necessary_sufficient
+    (q : stableImage N f) {k : ℕ} (hk : 0 < k) (y : V → State)
+    (hy : y ∈ stableFiberDepthLayer N f q k) :
+    globalMap N f y ∈ stableFiberDepthLayer N f (stableIndexMap N f q) (k - 1) := by
+  refine ⟨(globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y).2 hy.1, ?_⟩
+  rw [minPreperiod_globalMap_eq_sub_one_from_necessary_sufficient N f y
+    (hy.2.symm ▸ hk), hy.2]
+
+theorem globalMap_image_depthLayer_subset_from_necessary_sufficient
+    (q : stableImage N f) {k : ℕ} (hk : 0 < k) :
+    globalMap N f '' stableFiberDepthLayer N f q k ⊆
+      stableFiberDepthLayer N f (stableIndexMap N f q) (k - 1) := by
+  rintro z ⟨y, hy, rfl⟩
+  exact globalMap_mem_next_depthLayer_from_necessary_sufficient N f q hk y hy
+
+theorem stableFiberTable_card_eq_sum_depthLayerTable_from_necessary_sufficient
+    (q : stableImage N f) :
+    (stableFiberTable N f q).card =
+      ∑ k ∈ Finset.range (2 ^ Fintype.card V + 1),
+        (stableFiberDepthLayerTable N f q k).card := by
+  classical
+  apply CellularAutomata.NecSuf.IterateMonoidStableFiberDepth.card_eq_sum_depthLayerTable
+  intro y _hy
+  have hbound := minPreperiod_add_minPeriod_le_from_necessary_sufficient N f y
+  simp only [Finset.mem_range]
+  omega
 
 end CellularAutomata.IterateMonoidStableFiberDepth
