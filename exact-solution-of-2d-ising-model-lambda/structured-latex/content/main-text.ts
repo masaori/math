@@ -48632,6 +48632,88 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_linear_factor_pow_mul_coeff_bound",
+    kind: "claim",
+    title: { text: "一次因子の冪との積の係数は、上界と指数の和より上の番号で零である" },
+    labels: ["claim_qbar_linear_factor_pow_mul_coeff_bound"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-linear-factor-pow-mul-coeff-bound"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulCoeffBound",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.poly_linear_factor_pow_mul_coeff_bound_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowMulCoeffBound_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`C\in\overline{\mathbb{Q}}[t]`), " と ",
+        math(String.raw`m\in\mathbb{N}`), " を、", math(String.raw`k>m`),
+        " ならば ", math(String.raw`\mathrm{ac}_k(C)=0`),
+        " となるように取り、",
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
+        ref("def_algebraic_numbers"), "）と ", math(String.raw`j\in\mathbb{N}`),
+        " を任意に取る。このとき、", math(String.raw`k\in\mathbb{N}`), " が ",
+        math(String.raw`k>m+j`), " を満たすならば",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_{k}\bigl((t-\widehat{w})^{j}C\bigr)=0`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\widehat{\ \cdot\ }`), " は ",
+        ref("def_qbar_constant_embedding"), "、冪は ",
+        ref("def_qbar_polynomial_ring"), " の約束）。すなわち一次因子を ",
+        math(String.raw`j`), " 回掛けると、係数の尽きる番号は高々 ",
+        math(String.raw`j`), " だけ上がる。これは、一次因子の冪で割り切れる零でない多項式について、",
+        "その冪の指数が係数の上界を超えないことを出すための道具である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の係数はすべて ", ref("def_qbar_polynomial_ring"), " の ",
+        math(String.raw`\mathrm{ac}_{k}`), " である。",
+        math(String.raw`j\in\mathbb{N}`), " について帰納法で示す。出発点 ",
+        math(String.raw`j=0`), " では、任意の ", math(String.raw`k>m+0`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl((t-\widehat{w})^{0}C\bigr)
+&=\mathrm{ac}_k(1\cdot C)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ (t-\widehat{w})^{0}=1)\\
+&=\mathrm{ac}_k(C)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
+&=0
+&&(\because\ k>m\ \text{と本主張の係数の仮定})
+\end{aligned}`),
+      paragraph([
+        "である。一歩を示す。ある ", math(String.raw`j\in\mathbb{N}`), " について、",
+        math(String.raw`k>m+j`), " ならば ",
+        math(String.raw`\mathrm{ac}_k\bigl((t-\widehat{w})^{j}C\bigr)=0`),
+        " と仮定する。冪の約束から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(t-\widehat{w})^{j+1}C
+&=(t-\widehat{w})^{j}(t-\widehat{w})C
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ (t-\widehat{w})^{j+1}=(t-\widehat{w})^{j}(t-\widehat{w}))\\
+&=(t-\widehat{w})(t-\widehat{w})^{j}C
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則と結合則})
+\end{aligned}`),
+      paragraph([
+        "を得る。", ref("claim_qbar_poly_linear_factor_coeff_bound"), " を ",
+        math(String.raw`C`), " の位置に ", math(String.raw`(t-\widehat{w})^{j}C`),
+        "、係数の上界 ", math(String.raw`m+j`), "（帰納法の仮定がその係数の仮定である）、根 ",
+        math(String.raw`w`), " へ当てると、任意の ", math(String.raw`k>(m+j)+1=m+(j+1)`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl((t-\widehat{w})^{j+1}C\bigr)
+&=\mathrm{ac}_k\bigl((t-\widehat{w})\,(t-\widehat{w})^{j}C\bigr)
+&&(\because\ \text{上で得た冪の等式})\\
+&=0
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{と帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "を得る。これで帰納法が閉じた。この議論に実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -48648,7 +48730,7 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 一次因子の冪の指数は係数の上界を超えない／根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
+          "「熱力学極限」の残り: 零点密度（重複度付きの個数への精密化: 一次因子の冪との積の先頭の係数はもとの先頭の係数／零でない多項式を割る一次因子の冪の指数は係数の上界を超えない／根の重複度の定義／重複度が 1 以上であることと根であることの一致／有限集合上の重複度の和の上界／重複度付きの個数 ", math(String.raw`N^{\mathrm{mult}}_{L}(c,r)`), " と ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "）。",
         ],
         [
           todo("未着手"),

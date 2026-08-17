@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 383 は、前 tick の「代数的数係数多項式が一次因子の冪で割り切れること」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」を論法で三行へ割り（一次因子の冪との積の係数の上界（帰納法）／冪との積の先頭の係数はもとの先頭の係数（帰納法）／指数 $k\le n$（背理法））、その最初「一次因子の冪との積の係数は、上界と指数の和より上の番号で零である」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。
+`claim_qbar_linear_factor_pow_mul_coeff_bound`（`def_qbar_linear_factor_power_divides` の直後、住処 Qbar、脱出なし）: $k>m\Rightarrow\mathrm{ac}_k(C)=0$ のとき $k>m+j\Rightarrow\mathrm{ac}_k((t-\widehat w)^jC)=0$。$j$ の帰納法（出発点は $1\cdot C=C$ の一続き三段、一歩は冪の等式 $(t-\widehat w)^{j+1}C=(t-\widehat w)(t-\widehat w)^jC$ に `claim_qbar_poly_linear_factor_coeff_bound` を上界 $m+j$ で当てる）。本文末尾「この先に書くこと」の内訳へ「先頭の係数」を足した。
+SageMath `check/qbar-linear-factor-pow-mul-coeff-bound/`（$w$ 6 個・$C$ 5 個・$j\le5$、`QQbar` 厳密、通過）。Lean 具体版 `ThermodynamicLimit/QbarLinearFactorPowMulCoeffBound.lean`（`qbarLinearFactorPowMulCoeffBound`）、必要十分版 `NecSuf/ThermodynamicLimit/QbarLinearFactorPowMulCoeffBound.lean`（`poly_linear_factor_pow_mul_coeff_bound_necSuf`。可換環だけ）、導出版。sorry 検査 1339 件。check 473 ブロック・verify-check-linkage 261 件・PDF 257 ページ通過。
+式変形統一: 今 tick は締切（18:10 まとめ）のため見送り。次 tick は姉妹側 `005_exp_conjugation_proof.ts` の Step 3 以降の残りから拾う。
+次は「零点密度: 一次因子の冪との積の先頭の係数はもとの先頭の係数」（$\mathrm{ac}_{m+j}((t-\widehat w)^jC)=\mathrm{ac}_m(C)$。$j$ の帰納法で、一歩は今 tick の主張で $(t-\widehat w)^jC$ の上界 $m+j$ を得てから `claim_qbar_poly_linear_factor_leading_coeff` を当てる。Lean は `qbarPolyLinearFactorLeadingCoeff` と `qbarLinearFactorPowMulCoeffBound`）。そのあと「指数 $k\le n$」（背理法: $f=(t-\widehat w)^kg$、$f\ne0$ から $g\ne0$、$g$ の最高次の係数の位置 $m$（$\mathrm{ac}_m(g)\ne0$、$i>m\Rightarrow\mathrm{ac}_i(g)=0$。零でない多項式に最高次の位置があることは定義から——有限個の非零係数の最大元）、先頭の係数の主張で $\mathrm{ac}_{m+k}(f)=\mathrm{ac}_m(g)\ne0$、$m+k>n$ なら係数の上界に反する）。
+
+（tick 382 の記録）
 2026-08-17 の tick 382 は、前 tick の「格子点数あたりの Fisher 零点数の列の上極限と下極限」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 重複度付きの個数への精密化」を論法で六行へ割り（一次因子の冪による整除の定義／整除する指数の上界 $k\le n$／根の重複度の定義（最大元）／重複度 1 以上と根の一致／有限集合上の重複度の和の上界／$N^{\mathrm{mult}}_L(c,r)$ の定義と $N_L\le N^{\mathrm{mult}}_L\le2L^2$）、その最初「代数的数係数多項式が一次因子の冪で割り切れること」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_qbar_linear_factor_power_divides`（`def_fisher_zero_density_limsup_liminf` の直後、住処 Qbar、脱出なし）: $(t-\widehat w)^k\mid f$ :⇔ ある $g\in\overline{\mathbb Q}[t]$ で $f=(t-\widehat w)^k\cdot g$。定義の中に $k=0$ で常に割り切ること（整除する指数の集合が空でない。次の重複度の定義が引く）と、係数の上界 $n$ と $\mathrm{aev}_w(f)=0$ から $(t-\widehat w)^1\mid f$（因数定理の商が証人）を置いた。本文末尾「この先に書くこと」の内訳を残り五つへ書き換えた。

@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 383 で台帳から移した記録（tick 378 分）
+
+### 現在地
+
+- **2026-08-17 の tick 378 は、台帳の先頭行「零点密度: $\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」を本文・SageMath・Lean（具体版・必要十分版（1 の冪根の場合と共有）・導出版）まで書いて四層で閉じた（背理法。`claim_root_of_unity_finite_card_bound` と同じ形。住処 Qbar、脱出なし）。**
+  `claim_fisher_zero_set_finite_card_bound`（`claim_fisher_zero_finset_card_bound` の直後・「この先に書くこと」の直前、住処 Qbar）: $L\ge1$ で $\mathcal F_L$ は有限集合、$\lvert\mathcal F_L\rvert\le2L^2$。証明は背理法（無限なら $\lvert S\rvert=2L^2+1$ の有限部分集合 $S$ があり、`claim_fisher_zero_finset_card_bound` の $\lvert S\rvert\le2L^2$ と一続き二段で矛盾）と、有限になった $\mathcal F_L$ 自身を同じ主張に当てて上界。本文末尾「この先に書くこと」の零点密度の内訳から「$\mathcal F_L$ の有限性」を消した。
+  SageMath `check/fisher-zero-set-finite-card-bound/`（$L\le3$、$\lvert\mathcal F_L\rvert=0,8,12$ を `QQbar` の相異なる根として厳密に列挙、12 秒）。Lean 具体版 `ThermodynamicLimit/FisherZeroSetFiniteCardBound.lean`（`fisherZeroSet_finite_ncard_le`。`Set.Finite`・`Set.ncard`、`rootOfUnityFiniteCardLe` と同じ道具）、必要十分版は `NecSuf/AlgebraicEigenvalue/RootOfUnityFiniteCardBound.lean` の `finite_ncard_le_of_finset_card_le_necSuf` を共有（元の型に構造を要求しない）、導出版 `FisherZeroSetFiniteCardBoundFromNecSuf.lean`。sorry 検査 1314 件。check 467 ブロック・verify-check-linkage 259 件・PDF 254 ページ通過。
+  式変形統一: 姉妹側「Frobenius 内積の性質」の Step 6（三角不等式）で、散文に置かれていた「$\iota_{\mathbb R\to\mathbb C}$ の単射性により実数の等式 $\|A+B\|^2=\|A\|^2+2\mathrm{Re}(u)+\|B\|^2$」を、続く不等式の鎖の第 1 段（行末根拠つき）へ取り込み、鎖を $\|A+B\|^2$ から $(\|A\|+\|B\|)^2$ まで一続き四段にした（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_fisher_zero_finset_card_bound` の本文（準備・三つの仮定・一続きの鎖）と Lean 具体版（`partitionPolynomial_coeff`・`_ne_zero`・`_coeff_eq_zero_of_lt`・`fisherZeroSet_finset_card_le` の `hroot`）・SageMath を突き合わせて一致。修正なし。次は「有限格子の Fisher 零点の有理円板内の個数 $N_L(c,r):=\lvert\mathcal F_L\cap D(c,r)\rvert\in\mathbb N$」（定義ブロック。$\mathcal F_L\cap D(c,r)\subset\mathcal F_L$ は有限集合の部分集合なので有限で、個数は今 tick の主張から $2L^2$ 以下。Lean は `Set.ncard (FisherZeroSet L ∩ rationalDisc c r)` と `Set.Finite.subset`）。
+
+### 前進の記録
+
+- 2026-08-17（tick 378）: 台帳の先頭行「零点密度: $\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」を四層で閉じ、`claim_fisher_zero_set_finite_card_bound` を `claim_fisher_zero_finset_card_bound` の直後に置いた。SageMath（$L\le3$）、Lean 具体版・必要十分版（1 の冪根の場合と共有）・導出版、sorry 検査 1314 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Step 6 の実数の等式を不等式の鎖の第 1 段へ取り込み一続き四段へ（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 378）: 前 tick の「有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」の本文（準備・三つの仮定・一続きの鎖）と Lean 具体版・SageMath を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の有限性と上界は、次の $N_L(c,r)\in\mathbb N$ と $\nu_L(c,r)\le2$ が引く（後で引く形。集合が有限であるという住処の確定でもある）ので残す。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
+
 ## 2026-08-17 tick 382 で台帳から移した記録（tick 377 分）
 
 ### 現在地
