@@ -247,4 +247,83 @@ b_q^{56}Z_{G_Q}\!\left(\frac{a_q}{b_q}\right)
       ]),
     ],
   },
+  {
+    id: "arithmetic_invariants_theorem_fixed_quotient_partition_polynomial_has_square_factor",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の分配多項式の平方因子" },
+    labels: ["theorem_fixed_quotient_partition_polynomial_has_square_factor"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/fixed-quotient-partition-polynomial-square-factor"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_ising_partition_polynomial"),
+        " の多項式を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\mathbb Q[x]}:\mathbb Z[x]\hookrightarrow\mathbb Q[x]`),
+        " で有理係数多項式環へ移し、",
+      ]),
+      displayMath(String.raw`P_Q(x):=\iota_{\mathbb Z[x],\mathbb Q[x]}\!\left(Z_{G_Q}(x)\right)\in\mathbb Q[x]`),
+      paragraph(["と置く。形式微分を ", math(String.raw`P_Q'(x)\in\mathbb Q[x]`), " と書く。このとき"]),
+      displayMath(String.raw`\gcd_{\mathbb Q[x]}\!\left(P_Q(x),P_Q'(x)\right)\ne 1.`),
+      paragraph([
+        "したがって固定剰余類格子の Ising 分配多項式は平方因子を持ち、平方因子を持たない多項式ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_ising_partition_polynomial"),
+        " の係数を偶数次数と奇数次数に分けて整数として加えると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{0\le m\le56\\m\ \mathrm{even}}}\Omega_{G_Q}(m)
+&=8388608
+&&\bigl(\because\ \text{表示された有限係数列の加法}\bigr)\\
+&=\sum_{\substack{0\le m\le56\\m\ \mathrm{odd}}}\Omega_{G_Q}(m)
+&&\bigl(\because\ \text{表示された有限係数列の加法}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+P_Q(-1)
+&=\sum_{m=0}^{56}\Omega_{G_Q}(m)(-1)^m
+&&\bigl(\because\ P_Q\text{ の定義}\bigr)\\
+&=8388608-8388608
+&&\bigl(\because\ \text{偶数次数和と奇数次数和}\bigr)\\
+&=0.
+\end{aligned}`),
+      paragraph(["同じ係数列を形式微分し、次数を掛けた係数を偶奇別に加えると"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{1\le m\le56\\m\ \mathrm{odd}}}m\Omega_{G_Q}(m)
+&=352321536
+&&\bigl(\because\ \text{表示された有限係数列の乗法と加法}\bigr)\\
+&=\sum_{\substack{1\le m\le56\\m\ \mathrm{even}}}m\Omega_{G_Q}(m)
+&&\bigl(\because\ \text{表示された有限係数列の乗法と加法}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+P_Q'(-1)
+&=\sum_{m=1}^{56}m\Omega_{G_Q}(m)(-1)^{m-1}
+&&\bigl(\because\ \mathbb Q[x]\text{ の形式微分}\bigr)\\
+&=352321536-352321536
+&&\bigl(\because\ \text{奇数次数重み付き和と偶数次数重み付き和}\bigr)\\
+&=0.
+\end{aligned}`),
+      paragraph(["有理係数多項式の因数定理より"]),
+      displayMath(String.raw`x+1\mid P_Q(x),
+\qquad
+x+1\mid P_Q'(x).`),
+      displayMath(String.raw`\deg\!\left(\gcd_{\mathbb Q[x]}(P_Q,P_Q')\right)
+\ge\deg(x+1)
+=1.`),
+      paragraph([
+        "ゆえに最大公約多項式は ",
+        math(String.raw`1`),
+        " ではない。有理係数多項式の重根判定より ",
+        math(String.raw`(x+1)^2\mid P_Q(x)`),
+        " である。",
+        math(String.raw`x+1`),
+        " はモニックな整数係数多項式なので、Gauss の補題より ",
+        math(String.raw`(x+1)^2\mid Z_{G_Q}(x)`),
+        " が ",
+        math(String.raw`\mathbb Z[x]`),
+        " でも成り立つ。全ての計算は整数と有理係数多項式の有限演算であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
