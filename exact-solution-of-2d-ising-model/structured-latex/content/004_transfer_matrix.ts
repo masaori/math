@@ -1462,10 +1462,21 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       paragraph([
         "であり、基底上で一致する線型写像は等しいから ",
         math(String.raw`\sum_{I}\Theta_{I,I} = \mathrm{id}_{\mathcal{F}}`),
-        "。よって ",
-        math(String.raw`\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) = \mathrm{id}_{\mathcal{F}}`),
-        "。",
+        " である。したがって次の一続きの式変形を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&=\mathbf{end}\!\left(\sum_{I\in\mathcal I}E_{I,I}\right)
+&&(\because\ I_{\mathrm{Mat}(2^M,\mathbb C)}=\sum_{I\in\mathcal I}E_{I,I}\ \text{を上で示した})\\
+&=\sum_{I\in\mathcal I}\mathbf{end}(E_{I,I})
+&&(\because\ \mathbf{end}\ \text{の}\ \mathbb C\text{-線型性})\\
+&=\sum_{I\in\mathcal I}\Theta_{I,I}
+&&(\because\ \mathbf{end}(E_{I,I})=\Theta_{I,I}\ \text{（}\mathbf{end}\ \text{の定義）})\\
+&=\mathrm{id}_{\mathcal F}
+&&(\because\ \sum_{I\in\mathcal I}\Theta_{I,I}=\mathrm{id}_{\mathcal F}\ \text{を上で示した})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 5: (4)。両辺は ",
         math(String.raw`A_1,\dots,A_M,v_1,\dots,v_M`),

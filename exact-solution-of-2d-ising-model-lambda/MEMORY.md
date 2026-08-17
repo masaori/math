@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 413 は、台帳の先頭行「先頭距離の正値性」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_leading_distance_positive`: $d_1(L)\in D_L$ の証人 $\xi\in\mathcal F_L$ を取り、$d_1(L)=0$ なら距離の零性同値から $\xi=x_c$ となって $x_c\notin\mathcal F_L$ に反するため $d_1(L)\ne0$。距離の二乗を $R$ の二つの平方の和として書き、平方の和の閉性で $d_1(L)=w^2$、非零性から $w\ne0$、狭義順序の定義から $0<_Rd_1(L)$ を得た。
+SageMath `check/leading-distance-positive/`（$L=2$ の全 16 Fisher 零点 × $s^2=2$ の二根。各距離と最小値の正値性、平方表示の厳密標本。`QQbar`/`AA`、浮動小数点なし）。Lean 具体版 `CriticalExponent/LeadingDistancePositive.lean`、必要十分版 `NecSuf/CriticalExponent/LeadingDistancePositive.lean`（候補点・距離の零性・基準点の排除・平方表示・平方による狭義順序だけを仮定し、体・三分法・有限集合・最小性を落とす）、導出版。sorry 検査 1430 件・check 505 ブロック・linkage 286 件・PDF 273 ページ通過。
+レビューは tick 412 の先頭距離の定義を本文と Lean で突き合わせ、修正なし。式変形統一は姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」の Step 4 結論を一続き四段へ揃え、姉妹側 check・PDF 326 ページを通した。
+次は「先頭距離の列と詰め寄りの述語の接続（可算な言明）」。`def_zero_pinching_predicate` の量化と $d_1(L)$ の定義を突き合わせ、同値または必要な向きを $\mathbb Q$ 上の量化だけで述べる。
+
 2026-08-18 の tick 412 は、台帳の先頭行「先頭距離 $d_1(L)$ の定義と正値性」を論法単位の 2 行（定義の well-defined 性／正値性）へ割り、その最初「先頭距離 $d_1(L)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。
 最終章の見出し「臨界指数を零点列で書く」を熱力学極限章の後に立て、`def_leading_distance` をその先頭に置いた（well-defined 性が熱力学極限章の `claim_fisher_zero_set_finite_card_bound` を引くため、前方参照を作らない位置はここになる。零点の詰め寄り章の末尾に置くと有限性への前方参照が生じる）。$D_L:=\{y\in R\mid\exists\xi\in\mathcal F_L,\ y=\mathrm{dsq}_c(\xi)\}$ は空でなく（`claim_fisher_zero_set_nonempty`）有限（どの元もある $\xi$ の値なので元の個数は $\mathcal F_L$ を超えない）。`claim_real_algebraic_min_unique` を当てて最小元 $d_1(L)\in R$ を取った。
 Lean 具体版 `CriticalExponent/LeadingDistance.lean`（新ディレクトリ。`leadingDistanceFinset` は `(fisherZeroSet_finite_ncard_le L).1.image` の `Set.Finite.toFinset`、`leadingDistance` は `existsUnique_realAlgebraicMin` の `Classical.choose`、spec は `leadingDistance_isMin`・`leadingDistance_unique`）。sorry 検査 1427 件・check 504 ブロック・linkage 285 件・PDF 273 ページ通過。

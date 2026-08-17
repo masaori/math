@@ -50992,6 +50992,95 @@ N^{\mathrm{mult}}_{L}(c,r)
   },
 
   {
+    id: "critical_exponent_claim_leading_distance_positive",
+    kind: "claim",
+    title: { text: "先頭距離は正である" },
+    labels: ["claim_leading_distance_positive"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.leadingDistance_positive",
+      "Ising2DLambda.NecSuf.CriticalExponent.leadingDistance_positive_necSuf",
+      "Ising2DLambda.CriticalExponent.leadingDistance_positive_from_necSuf",
+    ],
+    verification: ["sagemath/check/leading-distance-positive"],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`2\le L`),
+        " とする。このとき、", ref("def_leading_distance"), " の先頭距離は",
+      ]),
+      displayMath(String.raw`0<_{R}d_{1}(L)`),
+      paragraph([
+        "を満たす。特に ", math(String.raw`d_{1}(L)\ne0`), " である。",
+        "これは有限格子の Fisher 零点が臨界点そのものには一致せず、",
+        "その距離の二乗が零でない平方として ", math(String.raw`R`),
+        " に残ることを述べる。後続の距離列と零点の詰め寄りの接続で引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_leading_distance"), " により ", math(String.raw`d_{1}(L)\in D_L`),
+        " だから、ある ", math(String.raw`\xi\in\mathcal{F}_{L}`),
+        " が存在して",
+      ]),
+      displayMath(String.raw`d_{1}(L)=\mathrm{dsq}_{c}(\xi)`),
+      paragraph([
+        "である。まず ", math(String.raw`d_{1}(L)\ne0`), " を背理法で示す。",
+        math(String.raw`d_{1}(L)=0`), " と仮定すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{dsq}_{c}(\xi)
+&=d_{1}(L)
+&&(\because\ \text{上の等式})\\
+&=0
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "となる。", ref("claim_critical_distance_squared_zero_iff_equal"),
+        " により ", math(String.raw`\xi=x_c`), " であるが、これは ",
+        math(String.raw`\xi\in\mathcal{F}_{L}`), " と ",
+        ref("claim_critical_point_not_fisher_zero"), " に矛盾する。ゆえに ",
+        math(String.raw`d_{1}(L)\ne0`), " である。",
+      ]),
+      paragraph([
+        "次に、", math(String.raw`\xi=a+b\cdot\omega`),
+        " を満たすちょうど 1 つの組 ", math(String.raw`(a,b)\in R\times R`),
+        " を取る（", ref("def_real_closed_subfield"), " の第 4 条件）。",
+        ref("claim_real_closed_sum_of_two_squares_is_square"), " を ",
+        math(String.raw`x:=a-x_c`), "、", math(String.raw`y:=b`),
+        " へ当てると、ある ", math(String.raw`w\in R`), " が存在して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+d_{1}(L)
+&=\mathrm{dsq}_{c}(\xi)
+&&(\because\ \xi\ \text{の取り方})\\
+&=(a-x_c)\cdot(a-x_c)+b\cdot b
+&&(\because\ \blkref{def_distance_squared_to_critical_point})\\
+&=w\cdot w
+&&(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`w=0`), " ならば上の等式から ", math(String.raw`d_{1}(L)=0`),
+        " となるので、すでに示した非零性に矛盾する。したがって ",
+        math(String.raw`w\ne0`), " である。最後に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+d_{1}(L)-0
+&=d_{1}(L)
+&&(\because\ R\text{ の四則})\\
+&=w\cdot w
+&&(\because\ \text{上の等式})
+\end{aligned}`),
+      paragraph([
+        "であり、", math(String.raw`w\in R`), " かつ ", math(String.raw`w\ne0`),
+        " だから、", ref("def_real_algebraic_strict_order"), " により ",
+        math(String.raw`0<_{R}d_{1}(L)`), " である。全過程は ",
+        math(String.raw`\overline{\mathbb{Q}}`), " とその部分体 ", math(String.raw`R`),
+        " の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

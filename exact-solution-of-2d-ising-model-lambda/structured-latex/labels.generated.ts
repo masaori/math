@@ -63,6 +63,7 @@ export const ALL_LABELS = [
   "claim_kw_dual_transform_domain",
   "claim_kw_dual_transform_involution",
   "claim_kw_self_dual_quadratic_equivalence",
+  "claim_leading_distance_positive",
   "claim_log_additive",
   "claim_log_order_group_add_monotone",
   "claim_log_order_group_linear_order",
