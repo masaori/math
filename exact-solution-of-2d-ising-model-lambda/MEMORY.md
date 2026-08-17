@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 372 は、前 tick の「開境界正方形の密度の下組は周期境界の密度の下組に含まれる（Archimedes 性）」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度は $f^{\mathrm{op}}(q)$ に等しい」を二行へ割り（集合の等号／$f^{\mathrm{per}}(q)$ の定義と一致）、その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を四層で閉じた。
+`claim_periodic_density_lower_set_eq_open_square_le_one`（`claim_open_square_density_lower_set_subset_periodic_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{per}}(q)=A^{\mathrm{op}}(q)$。証明は二つの包含と集合の外延性だけ。
+SageMath `check/periodic-density-lower-set-eq-open-square/`（$L\le3$、有理点 6 点、両向きの所属を証人で検査、4387 検査）。Lean 具体版 `ThermodynamicLimit/PeriodicDensityLowerSetEqOpenSquare.lean`（`periodicDensityLowerSet_eq_openSquareDensityLowerSet_of_le_one`）、必要十分版 `NecSuf/ThermodynamicLimit/PeriodicDensityLowerSetEqOpenSquare.lean`（`lowerSetOfSequence_eq_of_pointwise_le_and_eventually_le_add_error_necSuf`。仮定は二つの包含の必要十分版の和集合）、導出版 `PeriodicDensityLowerSetEqOpenSquareFromNecSuf.lean`。sorry 検査 1296 件。check 461 ブロック・verify-check-linkage 256 件・PDF 251 ページ通過。
+式変形統一: 姉妹側「中心化環はスカラー行列」（`linear_space_general_004_lemma_centralizer_is_scalar`）の Step 3 の二本の鎖と Step 4 の鎖の第 1 段（$W$ の展開）へ行末根拠を置いた（姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 002 の 1318 行以降（行列ノルム系は 2026-08-10 に済）・004・005・008 系。
+次は「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」: 定義ブロック（住処 R、`realEscape` は完備性の再利用）。`claim_periodic_density_lower_set_eq_open_square_le_one` により $\rho_{\mathbb R}(A^{\mathrm{per}}(q))=\rho_{\mathbb R}(A^{\mathrm{op}}(q))$ なので空でなく上に有界、上限は $f^{\mathrm{op}}(q)$ と同じ実数。`remark_real_escape_plan` の冒頭「実数体を扱う三つの定義」を「四つの定義」へ直し新定義を足す。Lean は `OpenSquareFreeEnergyDensitySup.lean` と同じ形（`periodicRealizedLowerSet`・`periodicRealizedLowerSet_eq_openSquare`・`periodicFreeEnergyDensity`（`sSup`）・`periodicFreeEnergyDensity_eq_openSquare`）。定義ブロックなので必要十分版なし、SageMath は置かない。
+
+（tick 371 の記録）
 2026-08-17 の tick 371 は、前 tick の「周期境界の密度の列が定める下組」と「周期境界の密度の下組は開境界正方形の密度の下組に含まれる」の本文と Lean を突き合わせて一致を確認し（`remark_real_escape_plan` の冒頭「直前の」を「実数体を扱う」へ直しただけ）、
 台帳の先頭行「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」を四層で閉じた。
 `claim_open_square_density_lower_set_subset_periodic_le_one`（`claim_periodic_density_lower_set_subset_open_square_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{op}}(q)\subset A^{\mathrm{per}}(q)$。証明は証人 $(\varepsilon,N)$ から、準備の第一（証人の半分 $\varepsilon':=\tfrac12\cdot\varepsilon$。$\varepsilon'+\varepsilon'=\varepsilon$・$0\le\varepsilon'$・$\varepsilon'\ne0$）、第二（$\delta:=-\iota(\log q)$、$0\le\delta$、$0\le2\cdot\delta$）、第三（`claim_rational_log_order_group_archimedean` の倍率 $n$、$N':=N+n$）、第四（`claim_rational_log_order_group_div_ge_multiplier_le` と一続き五段で $-\varepsilon'\le\tfrac2L\cdot\iota(\log q)$）、本体の一続き八段（加法群の等式五段・`claim_rational_log_order_group_add_monotone` 二回・`claim_periodic_open_boundary_comparison_density_le_one` の左）。
@@ -4159,8 +4167,8 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」（`claim_periodic_open_boundary_comparison_log_le_one`）の本文（準備二つ・一続き四段）と Lean `PeriodicOpenComparisonLog.lean`・FromNecSuf、SageMath `periodic-open-boundary-comparison-log` を突き合わせる。
-- **次に進めるセクションは「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
+- **レビュー**: 「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」（`claim_periodic_density_lower_set_eq_open_square_le_one`）の本文と Lean `PeriodicDensityLowerSetEqOpenSquare.lean`・NecSuf・FromNecSuf、SageMath `periodic-density-lower-set-eq-open-square` を突き合わせる。
+- **次に進めるセクションは「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ の定義と $f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は再開済み**（2026-08-17 tick 367〜）。毎 tick 1 件。到達点は台帳の表と保管庫にある。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 

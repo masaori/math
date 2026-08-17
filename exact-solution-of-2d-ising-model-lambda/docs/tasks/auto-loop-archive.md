@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 372 で台帳から移した記録（tick 367 分）
+
+### 現在地
+
+- **2026-08-17 の tick 367 は、台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行し、章「零点の詰め寄り」の五ブロックと章「固有値の代数性」の二主張の `lean:` へ、既にある Lean の宣言（計 28 件）を足した。**
+  対象は、tick 366 の閉包計算で本文の `lean:` から辿れなかった 8 ファイル。章「零点の詰め寄り」は `def_distance_squared_to_rational`（`realClosedComponents`・`_spec`・`distanceSquaredToRational`・必要十分版 `distanceSquaredOfPair`）、`claim_distance_squared_zero_iff_equal`（具体版・必要十分版・導出版）、`def_zero_pinching_predicate`（`PositiveRational`・`PositiveLatticeSize`・`fisherZeroSetAtPositiveSize`・`zeroPinchingPredicate`）、`claim_distance_positive_on_fisher_zeros`（具体版・必要十分版・導出版）、`def_phase_transition_countable_statement`（`phaseTransitionCountableStatement`）——台帳の行名は「三定義」だったが、同じファイルに載る二主張も `lean:` を持たなかったので併せて配線した。章「固有値の代数性」は `claim_row_config_order_linear` に導出版 `RowConfigOrderFromNecSuf.lean` の 5 宣言、`claim_orbit_permutation_sign_values` に必要十分版 `signOn_*`・`inversionCountOn_id` と導出版 `OrbitPermutationSignValuesFromNecSuf.lean` の 4 宣言を足した。中身の突き合わせ: 距離の二乗の定義 $(a-q)(a-q)+b\cdot b$、零性の同値（$w:=(a-q)b^{-1}$ で $w^2=-1$ の背理法）、詰め寄りの述語（$L\ge1$・$\xi\in\mathcal F_L$・$q\in\mathbb Q_{>0}$ の存在量化と $<_R$）、非零性（正の有理数は零点でない）、相転移の言明（$\forall\varepsilon$）が本文と Lean で一致。本文も Lean も直していない。Lean 対応先 1240 → 1268 件、import 閉包の外のファイルは 0 件。sorry 検査 1274 件（登録は既にあった）。`lake build`・check・verify-check-linkage 251 件・PDF 247 ページ通過。
+  式変形統一（再開後の 1 件目）: 姉妹側「冪等行列のトレースは像の次元」（`eigenvalues_of_V_003_claim_trace_of_idempotent`）の Step 1 の二計算・Step 2・Step 3 を一続きの等号と行末根拠へ揃えた（内容は不変。姉妹側の生成器は `\blkref` を持たないので根拠には題を書き、ラベル参照は散文に残した）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `ConstantPlusConfiguration.lean`（`allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`）と本文 `def_constant_plus_configuration`・`claim_constant_plus_breaks_no_bond` を突き合わせて一致。修正なし。次は「周期境界自由エネルギー密度への移送」。
+
+
+### 前進の記録
+
+- 2026-08-17（tick 367）: 台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行した。章「零点の詰め寄り」の五ブロック（三定義と二主張）と章「固有値の代数性」の二主張の `lean:` に、既存の Lean 宣言 28 件を足した（本文・Lean は不変。Lean 対応先 1268 件、閉包外 0 ファイル）。式変形統一を再開し、姉妹側「冪等行列のトレースは像の次元」を一続きの形へ書き換えた。
+
+### レビュー記録
+
+- 2026-08-17（tick 367）: 前 tick の切り出し `ThermodynamicLimit/ConstantPlusConfiguration.lean`（`allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`。import は `PartitionPolynomial.Basic` だけ）と本文 `def_constant_plus_configuration`（各頂点に $+1$ の定数写像）・`claim_constant_plus_breaks_no_bond`（破れボンド数 $0$）を突き合わせ、一致した。
+  「何も言っていない主張」の観点: 定数配位の破れボンド数が零であることは値の確定（$\mathbb N$ の元 $0$）で、正の有理点での値の下界が引くので残す。今 tick に配線した零点の詰め寄りの五ブロックは、住処 $R\subset\overline{\mathbb Q}$ の確定・零点でないことの根拠・後の言明が引く述語であり残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
+
 ## 2026-08-17 tick 371 で台帳から移した記録（tick 366 分）
 
 ### 現在地

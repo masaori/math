@@ -1218,7 +1218,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       displayMath(
         String.raw`\begin{aligned}
 W E_{KL}
-&= \left(\sum_{I,J} w_{IJ}E_{IJ}\right)E_{KL} \\
+&= \left(\sum_{I,J} w_{IJ}E_{IJ}\right)E_{KL} \quad (\because W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
 &= \sum_{I,J} w_{IJ}(E_{IJ}E_{KL}) \quad (\because \text{積の双線型性}) \\
 &= \sum_{I,J} w_{IJ}\delta_{JK}E_{IL} \quad (\because \text{Step 2 の積公式}) \\
 &= \sum_{I\in\{1,2\}^M} w_{IK}E_{IL} \quad (\because \delta_{JK} \text{ は } J=K \text{ でのみ非零})
@@ -1228,7 +1228,7 @@ W E_{KL}
       displayMath(
         String.raw`\begin{aligned}
 E_{KL} W
-&= E_{KL}\left(\sum_{I,J} w_{IJ}E_{IJ}\right) \\
+&= E_{KL}\left(\sum_{I,J} w_{IJ}E_{IJ}\right) \quad (\because W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
 &= \sum_{I,J} w_{IJ}(E_{KL}E_{IJ}) \quad (\because \text{積の双線型性}) \\
 &= \sum_{I,J} w_{IJ}\delta_{LI}E_{KJ} \quad (\because \text{Step 2 の積公式}) \\
 &= \sum_{J\in\{1,2\}^M} w_{LJ}E_{KJ} \quad (\because \delta_{LI} \text{ は } I=L \text{ でのみ非零})
@@ -1296,7 +1296,7 @@ E_{KL} W
       displayMath(
         String.raw`\begin{aligned}
 W
-&= \sum_{I,J\in\{1,2\}^M} w_{IJ}E_{IJ} \\
+&= \sum_{I,J\in\{1,2\}^M} w_{IJ}E_{IJ} \quad (\because \text{Step 3 の } W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
 &= \sum_{P\in\{1,2\}^M} w_{PP}E_{PP} \quad (\because \text{Step 3: 非対角係数は } 0) \\
 &= \sum_{P\in\{1,2\}^M} c\,E_{PP} \quad (\because \text{Step 3: 対角係数は共通の } c) \\
 &= c\sum_{P\in\{1,2\}^M} E_{PP} \quad (\because \text{和のスカラー倍}) \\
@@ -1311,6 +1311,9 @@ W
         "抽象テンソル積の記法を廃した。Mat(2,C)^{⊗M}（抽象テンソル冪）を <def_kronecker> の" +
           "クロネッカー積が住む具体的な空間 Mat(2^M,C) へ、I_{(Mat(2,C))^{⊗M}} を 2^M 次の" +
           "単位行列 I_{Mat(2^M,C)} へ置き換えた（README のゴール設定 2 節に従う）。",
+        "2026-08-17: 式変形の書き方の統一。Step 3 の二本の鎖の第 1 段（W E_{KL}・E_{KL} W を展開で書く行）と" +
+          "Step 4 の鎖の第 1 段（W の展開）に根拠が無かったので、行末に (∵ W の基底 𝓔 による展開) を置いた。" +
+          "段は増減せず、主張も証明の筋も変えていない。",
       ],
     },
   },

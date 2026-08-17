@@ -7,6 +7,12 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 372 は、台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ は $f^{\mathrm{op}}(q)$ に等しい（q は 1 以下）」を二行へ割り（集合の等号（両包含・外延性）／$f^{\mathrm{per}}(q)$ の定義と $f^{\mathrm{op}}(q)$ との一致）、その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_periodic_density_lower_set_eq_open_square_le_one`（`claim_open_square_density_lower_set_subset_periodic_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{per}}(q)=A^{\mathrm{op}}(q)$。証明は二つの包含（`claim_periodic_density_lower_set_subset_open_square_le_one`・`claim_open_square_density_lower_set_subset_periodic_le_one`）と集合の外延性だけ。
+  SageMath `check/periodic-density-lower-set-eq-open-square/`（$L\le3$、有理点 6 点、$A^{\mathrm{per}}$ の証人 2244 組・$A^{\mathrm{op}}$ の証人 3876 組（うち $N'\le3$ が 2137 組）、4387 検査、12 秒。`ZZ`/`QQ` の厳密計算）。Lean 具体版 `ThermodynamicLimit/PeriodicDensityLowerSetEqOpenSquare.lean`（`periodicDensityLowerSet_eq_openSquareDensityLowerSet_of_le_one`。`ext`＋両包含）、必要十分版 `NecSuf/ThermodynamicLimit/PeriodicDensityLowerSetEqOpenSquare.lean`（`lowerSetOfSequence_eq_of_pointwise_le_and_eventually_le_add_error_necSuf`。仮定は二つの包含の必要十分版の仮定の和集合。新しい構造は無い）、導出版 `PeriodicDensityLowerSetEqOpenSquareFromNecSuf.lean`。sorry 検査 1296 件。check 461 ブロック・verify-check-linkage 256 件・PDF 251 ページ通過。
+  式変形統一: 姉妹側「中心化環はスカラー行列」（`linear_space_general_004_lemma_centralizer_is_scalar`）の Step 3 の二本の鎖の第 1 段と Step 4 の鎖の第 1 段（$W$ の展開）に根拠が無かったので行末に $(\because\ W\text{ の基底 }\mathcal{E}\text{ による展開})$ を置いた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_open_square_density_lower_set_subset_periodic_le_one` の本文（準備四つ・一続き八段）と Lean 具体版（`half_add_half_eq`〜`openSquareDensityLowerSet_subset_periodicDensityLowerSet_of_le_one`）を突き合わせて一致。修正なし。次は「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」（定義ブロック、住処 R、脱出理由は完備性の再利用。下組が等しいので実現像も等しく、上限も同じ実数。`remark_real_escape_plan` の冒頭「三つの定義」を「四つの定義」へ直すこと。Lean は `OpenSquareFreeEnergyDensitySup.lean` と同じ形で `periodicRealizedLowerSet`・`periodicFreeEnergyDensity`・`periodicFreeEnergyDensity_eq_openSquare` を置く。SageMath は置かない）。
+
 - **2026-08-17 の tick 371 は、台帳の先頭行「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
   `claim_open_square_density_lower_set_subset_periodic_le_one`（`claim_periodic_density_lower_set_subset_open_square_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{op}}(q)\subset A^{\mathrm{per}}(q)$。証明は $\mu$ の証人 $(\varepsilon,N)$ から、準備の第一（証人の半分 $\varepsilon':=\tfrac12\cdot\varepsilon$。$\varepsilon'+\varepsilon'=\varepsilon$ の三段・$0=0\cdot\varepsilon\le\varepsilon'$・$\varepsilon'\ne0$）、第二（$\delta:=-\iota(\log q)$ の符号。`claim_rational_embedded_log_order_iff` を $q':=1$ で・`claim_rational_log_order_group_neg_reverses_order`・`claim_rational_log_order_group_scalar_compare_nonneg`）、第三（`claim_rational_log_order_group_archimedean` の倍率 $n$、$N':=N+n$）、第四（`claim_rational_log_order_group_div_ge_multiplier_le` で $\tfrac1L\cdot(2\cdot\delta)\le\varepsilon'$、一続き五段で $-\varepsilon'\le\tfrac2L\cdot\iota(\log q)$）、本体の一続き八段（加法群の等式五段・`claim_rational_log_order_group_add_monotone` 二回・`claim_periodic_open_boundary_comparison_density_le_one` の左）。有理数倍の $0\cdot\lambda=0$・$-0=0$・$-(r\cdot(-\lambda))=r\cdot\lambda$ は独立ブロックにせず、行末の $(\because\ \dots)$ に「素数ごとに読む」と書いた。
   SageMath `check/open-square-density-lower-set-subset-periodic/`（$L\le3$、有理点 6 点、証人 1632 組（密度を要する段が空でない 931 組）、662530 検査、10 秒。`ZZ`/`QQ` の厳密計算。Archimedes の倍率は最小の $n$ を有限探索）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetSubsetPeriodic.lean`（`half_add_half_eq`・`rationalLogOrderLE_zero_half_of_nonneg`・`half_ne_zero_of_ne_zero`・`rationalLogOrderLE_zero_neg_toRational_logRat_of_le_one`・`rationalLogOrderLE_neg_le_scaled_toRational_logRat`・`openSquareDensityLowerSet_subset_periodicDensityLowerSet_of_le_one`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetSubsetPeriodic.lean`（`lowerSetOfSequence_subset_of_eventually_le_add_error_necSuf`。仮定は `AddCommGroup`（八段の鎖の等式と七段目の並べ替え）・推移律・右加法単調性・証人の半分の存在・誤差列が正の元の逆元をやがて下回らないこと・$L\ge1$ での項ごとの比較。有理数倍と Archimedes 性は仮定の形にして具体版へ押し出した）、導出版 `OpenSquareDensityLowerSetSubsetPeriodicFromNecSuf.lean`。sorry 検査 1293 件。check 460 ブロック・verify-check-linkage 255 件・PDF 251 ページ通過。
@@ -31,11 +37,6 @@
   式変形統一: 姉妹側「同時固有空間分解」（`eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`）の Step 4 末尾の $\dim\mathrm{im}\,Q_\epsilon=\mathrm{tr}(Q_\epsilon)=2^{M-m}$（散文内の二段）を一続きの等号と行末根拠へ揃えた（内容は不変。ラベル参照は直後に 1 つ置いた）。姉妹側の check・PDF 323 ページ通過。
   レビュー: 前 tick の姉妹側「冪等行列のトレースは像の次元」の書き換え差分を読み、四つの計算の根拠がすべて残り中身が不変であることを確認。前 tick に配線した `lean:` 28 件は check（`validate:lean`）で実在を確認。修正なし。次は「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」。
 
-- **2026-08-17 の tick 367 は、台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行し、章「零点の詰め寄り」の五ブロックと章「固有値の代数性」の二主張の `lean:` へ、既にある Lean の宣言（計 28 件）を足した。**
-  対象は、tick 366 の閉包計算で本文の `lean:` から辿れなかった 8 ファイル。章「零点の詰め寄り」は `def_distance_squared_to_rational`（`realClosedComponents`・`_spec`・`distanceSquaredToRational`・必要十分版 `distanceSquaredOfPair`）、`claim_distance_squared_zero_iff_equal`（具体版・必要十分版・導出版）、`def_zero_pinching_predicate`（`PositiveRational`・`PositiveLatticeSize`・`fisherZeroSetAtPositiveSize`・`zeroPinchingPredicate`）、`claim_distance_positive_on_fisher_zeros`（具体版・必要十分版・導出版）、`def_phase_transition_countable_statement`（`phaseTransitionCountableStatement`）——台帳の行名は「三定義」だったが、同じファイルに載る二主張も `lean:` を持たなかったので併せて配線した。章「固有値の代数性」は `claim_row_config_order_linear` に導出版 `RowConfigOrderFromNecSuf.lean` の 5 宣言、`claim_orbit_permutation_sign_values` に必要十分版 `signOn_*`・`inversionCountOn_id` と導出版 `OrbitPermutationSignValuesFromNecSuf.lean` の 4 宣言を足した。中身の突き合わせ: 距離の二乗の定義 $(a-q)(a-q)+b\cdot b$、零性の同値（$w:=(a-q)b^{-1}$ で $w^2=-1$ の背理法）、詰め寄りの述語（$L\ge1$・$\xi\in\mathcal F_L$・$q\in\mathbb Q_{>0}$ の存在量化と $<_R$）、非零性（正の有理数は零点でない）、相転移の言明（$\forall\varepsilon$）が本文と Lean で一致。本文も Lean も直していない。Lean 対応先 1240 → 1268 件、import 閉包の外のファイルは 0 件。sorry 検査 1274 件（登録は既にあった）。`lake build`・check・verify-check-linkage 251 件・PDF 247 ページ通過。
-  式変形統一（再開後の 1 件目）: 姉妹側「冪等行列のトレースは像の次元」（`eigenvalues_of_V_003_claim_trace_of_idempotent`）の Step 1 の二計算・Step 2・Step 3 を一続きの等号と行末根拠へ揃えた（内容は不変。姉妹側の生成器は `\blkref` を持たないので根拠には題を書き、ラベル参照は散文に残した）。姉妹側の check・PDF 323 ページ通過。
-  レビュー: 前 tick の `ConstantPlusConfiguration.lean`（`allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`）と本文 `def_constant_plus_configuration`・`claim_constant_plus_breaks_no_bond` を突き合わせて一致。修正なし。次は「周期境界自由エネルギー密度への移送」。
-
 ## セクション台帳
 
 **済んだ範囲**（章ごとの件数。個々の内訳は [auto-loop-archive.md](auto-loop-archive.md) と
@@ -48,7 +49,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 84 セクション
+- 熱力学極限: 85 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -56,7 +57,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ は $f^{\mathrm{op}}(q)$ に等しい（q は 1 以下） | todo | 集合の等号は両包含から。定義は下組の一致により空でなく上に有界で well-defined、値は $f^{\mathrm{op}}(q)$ と同じ実数（住処 R、脱出理由は完備性の再利用） |
+| 熱力学極限 | 周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下） | todo | 定義ブロック（住処 R、脱出理由は完備性の再利用）。`claim_periodic_density_lower_set_eq_open_square_le_one` により $A^{\mathrm{per}}(q)=A^{\mathrm{op}}(q)$ なので実現像も等しく、空でなく上に有界で well-defined、上限は $f^{\mathrm{op}}(q)$ と同じ実数。`remark_real_escape_plan` の「三つの定義」を「四つ」へ |
 | 熱力学極限 | 零点密度 | todo | |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
@@ -64,11 +65,11 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 372）: 台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度は $f^{\mathrm{op}}(q)$ に等しい」を二行へ割った（集合の等号／$f^{\mathrm{per}}(q)$ の定義と一致。理由: 集合の等号は両包含と外延性の一論法、定義は実数体への脱出を伴う別のブロックなので、1 tick 1 論法にするため）。その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を四層で閉じ、`claim_periodic_density_lower_set_eq_open_square_le_one` を逆の包含の直後に置いた。SageMath 4387 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1296 件。式変形統一: 姉妹側「中心化環はスカラー行列」の Step 3・Step 4 の鎖の第 1 段へ行末根拠を置いた（姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 371）: 台帳の先頭行「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」を四層で閉じ、`claim_open_square_density_lower_set_subset_periodic_le_one` を周期境界の下組の包含の直後に置いた。SageMath 662530 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1293 件。式変形統一: 姉妹側「クロネッカー積」定義内 Step 3（単射性）の二つの式を一続き四段・五段と行末根拠へ（姉妹側 check・PDF 323 ページ通過）。
 - 2026-08-17（tick 370）: 台帳の先頭行「周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ」を三行へ割った（下組の定義と一方の包含／逆の包含（Archimedes 性）／両包含から集合の等号と同じ実数。理由: 一方の包含は証人の引き継ぎと推移律だけ、逆の包含は Archimedes 性で誤差を吸収する別の論法、集合の等号と実数の一致はさらに別なので、1 tick 1 論法にするため）。その最初を四層で閉じ、`def_periodic_density_lower_set` と `claim_periodic_density_lower_set_subset_open_square_le_one` を `def_open_square_free_energy_density` の直後に置いた。SageMath 2016 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1285 件。式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 2（値域）で、散文中の帰納法の段 $\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1$ と根拠なしの一行 $0\le\sum(i_k-1)2^{M-k}\le\sum2^{M-k}=\sum_{t=0}^{M-1}2^t=2^M-1$ を、それぞれ一続き四段と行末根拠へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
 - 2026-08-17（tick 369）: 台帳の先頭行「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」を四層で閉じ、`claim_periodic_open_boundary_comparison_density_le_one` を開境界正方形の密度の定義の直後に置いた。SageMath 252 検査、Lean 具体版・導出版（必要十分版は既存を共有）、sorry 検査 1280 件。式変形統一は姉妹側「定数 $c$ の値」の Step 4 の因数分解の一行を一続きの四段へ。
 - 2026-08-17（tick 368）: 台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割った（境界評価の対数化／密度の比較／同じ下組・同じ実数へ。理由: 対数化・密度化・下組の一致は別々の論法で、1 tick 1 論法にするため）。その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を四層で閉じ、`claim_periodic_open_boundary_comparison_log_le_one` を有理点の評価の直後に置いた。SageMath 126 検査、Lean 具体版・導出版（必要十分版は既存を共有）、sorry 検査 1277 件。式変形統一は姉妹側「同時固有空間分解」の Step 4 末尾の二段を一続きの形へ。
-- 2026-08-17（tick 367）: 台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行した。章「零点の詰め寄り」の五ブロック（三定義と二主張）と章「固有値の代数性」の二主張の `lean:` に、既存の Lean 宣言 28 件を足した（本文・Lean は不変。Lean 対応先 1268 件、閉包外 0 ファイル）。式変形統一を再開し、姉妹側「冪等行列のトレースは像の次元」を一続きの形へ書き換えた。
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -86,6 +87,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-17（tick 372）: 前 tick の「開境界正方形の密度の下組は周期境界の密度の下組に含まれる（Archimedes 性）」の本文（準備四つ・一続き八段）と Lean 具体版・必要十分版・導出版を突き合わせ、根拠が一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の集合の等号は、二つの包含から従うだけだが、次の $f^{\mathrm{per}}(q)$ の定義が「実現像の上限を取る対象が同じ集合である」ことの根拠として引く（後で引く形）ので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。
 - 2026-08-17（tick 371）: 前 tick の「周期境界の密度の列が定める下組」と「周期境界の密度の下組は開境界正方形の密度の下組に含まれる」の本文と Lean 具体版・必要十分版・導出版を突き合わせ、根拠が一致した。`remark_real_escape_plan` の冒頭の「直前の」が実態と合わなくなっていたので「実数体を扱う」へ直した（散文のみ）。
   「何も言っていない主張」の観点: 今 tick の包含は、前 tick の包含と合わせて集合の等号を与えるので残す。$0\cdot\lambda=0$・$-0=0$・$-(r\cdot(-\lambda))=r\cdot\lambda$・証人の半分の三性質・$\delta$ の符号は独立ブロックにせず、証明の準備と行末の $(\because\ \dots)$ に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。
 - 2026-08-17（tick 370）: 前 tick の「周期境界と開境界の密度の比較（Λ_ℚ 版）」の本文と Lean 具体版・導出版を突き合わせ、根拠が一致した。Lean ファイル冒頭の注釈の段数「六段」を本文どおり「七段」へ直した（コメントのみ）。
@@ -95,8 +98,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 2026-08-17（tick 368）: 前 tick の姉妹側「冪等行列のトレースは像の次元」の書き換え差分（Step 1 の二計算・Step 2・Step 3）を読み、根拠がすべて残り中身が不変であることを確認。前 tick に配線した `lean:` 28 件は check の `validate:lean` で実在を確認。
   「何も言っていない主張」の観点: 今 tick の対数化は有理点の評価を $\Lambda$ の順序へ移す主張で、密度の比較が引くので残す。準備の正値性・対数を開く二段は独立ブロックにせず証明の中に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
 
-- 2026-08-17（tick 367）: 前 tick の切り出し `ThermodynamicLimit/ConstantPlusConfiguration.lean`（`allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`。import は `PartitionPolynomial.Basic` だけ）と本文 `def_constant_plus_configuration`（各頂点に $+1$ の定数写像）・`claim_constant_plus_breaks_no_bond`（破れボンド数 $0$）を突き合わせ、一致した。
-  「何も言っていない主張」の観点: 定数配位の破れボンド数が零であることは値の確定（$\mathbb N$ の元 $0$）で、正の有理点での値の下界が引くので残す。今 tick に配線した零点の詰め寄りの五ブロックは、住処 $R\subset\overline{\mathbb Q}$ の確定・零点でないことの根拠・後の言明が引く述語であり残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
 
 ## 判断待ち（人間に問うべき論点）
 
