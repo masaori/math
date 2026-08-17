@@ -3,6 +3,12 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 416 で台帳から移した記録（tick 411）
+
+- tick 411 の現在地・前進: 「零点と臨界点の距離の二乗の零性は一致と同値」を四層で閉じた。`claim_critical_distance_squared_zero_iff_equal` は一意表示 $\xi=a+b\omega$ と $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi)=0\iff\xi=x_c$ を有理点版と同じ背理法で示す（$b\ne0$ なら $w=(a-x_c)b^{-1}$ が $w^2=-1$ で `claim_neg_one_not_square` に反し、$b=0$ なら零因子が無いことから $a=x_c$）。SageMath 18 組、Lean 具体版・既存の必要十分核 `distanceSquaredOfPair_eq_zero_iff_necSuf`・導出版。sorry 検査 1424 件・check 502 ブロック・verify-check-linkage 285 件・PDF 272 ページ通過。
+- tick 411 の式変形統一: 姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」の Step 1 で、線型独立性の三等号 $0=\sum c_{I,J}\delta_{J,K}f_I=\sum c_{I,K}f_I$ を、零写像の値・$\Theta_{I,J}$ の定義・Kronecker のデルタによる有限和の縮約の一続き三段へ揃えた（内容・参照は不変）。
+- tick 411 のレビュー: tick 410 の「臨界点は Fisher 零点でない」を四層で突き合わせ、一致した。修正なし。
+
 ## 2026-08-18 tick 415 で台帳から移した記録（tick 410）
 
 - tick 410 の現在地・前進: 「$x_c$ は Fisher 零点でない」を四層で閉じた。`claim_critical_point_not_fisher_zero` は臨界点での分配多項式の値が正錐に入ることと、零元の表示 $(0,0)$ が正錐の三条件を破ることから背理法で $x_c\notin\mathcal F_L$ を得る。SageMath 6 組、Lean 具体版・必要十分版・導出版。sorry 検査 1422 件・check 501 ブロック・verify-check-linkage 284 件・PDF 271 ページ通過。

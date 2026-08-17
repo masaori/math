@@ -1922,16 +1922,22 @@ G-G^{(\pm)}
       displayMath(
         String.raw`\begin{aligned}
 \left(\hat{G} - \hat{G}^{(\pm)}\right)f
+&= \left(\widehat{G-G^{(\pm)}}\right)f
+&&(\because\ \mathbf{end}\ \text{の線型性（差の像は像の差）})\\
+&= \left(\widehat{iK_1\left(-\varepsilon W\pm W\right)}\right)f
+&&(\because\ \text{上で示した}\ G-G^{(\pm)}\ \text{の表示})\\
+&= i K_1\left(-\widehat{\varepsilon W} \pm \hat{W}\right)f
+&&(\because\ \mathbf{end}\ \text{の線型性})\\
 &= i K_1\left(-\hat{\varepsilon}\!\left(\hat{W}f\right) \pm \hat{W}f\right)
-\quad (\because \mathbf{end} \text{ の線型性と } \widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}) \\
+&&(\because\ \widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}\ \text{（}\mathbf{end}\ \text{が積を保つこと）と写像の値の書き下し})\\
 &= i K_1\left(-(\pm\hat{W}f) \pm \hat{W}f\right)
-\quad (\because \hat{W}f\in\mathcal{F}^{(\pm)} \text{ より } \hat{\varepsilon}(\hat{W}f) = \pm\hat{W}f) \\
+&&(\because\ \hat{W}f\in\mathcal{F}^{(\pm)}\ \text{より}\ \hat{\varepsilon}(\hat{W}f) = \pm\hat{W}f\text{（Step 3）})\\
 &= i K_1\left(\mp\hat{W}f \pm \hat{W}f\right)
-\quad (\because -(\pm x) = \mp x) \\
+&&(\because\ -(\pm x) = \mp x)\\
 &= i K_1\cdot 0
-\quad (\because \mp x \pm x = 0 \text{（複号同順）}) \\
+&&(\because\ \mp x \pm x = 0 \text{（複号同順）})\\
 &= 0
-\quad (\because \text{零ベクトルのスカラー倍は零ベクトル})
+&&(\because\ \text{零ベクトルのスカラー倍は零ベクトル})
 \end{aligned}`,
       ),
       paragraph([

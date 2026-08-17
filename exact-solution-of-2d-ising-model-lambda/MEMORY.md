@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 416 は、台帳の先頭行「和の平方の評価」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_square_of_sum_le_twice_sum_of_squares`: 任意の $u,v\in R$ について $(u+v)\cdot(u+v)\le_R2\cdot(u\cdot u)+2\cdot(v\cdot v)$。差 $D=(2u^2+2v^2)-(u+v)^2$ を三段の式変形（展開・同類項・因数分解）で $(u-v)\cdot(u-v)$ へ変形し、$u=v$ なら差が零元で `def_real_algebraic_nonstrict_order` の等号の枝、$u\ne v$ なら $w:=u-v\ne0$ が平方の証人で狭義順序の枝。tick 415 の確定どおり加法単調性の独立主張は作っていない。
+SageMath `check/square-of-sum-le-twice-squares/`（`AA` の標本 7 個の全 49 組。浮動小数点なし）。Lean 具体版 `CriticalExponent/SquareOfSumLeTwiceSquares.lean`、必要十分版 `NecSuf/CriticalExponent/SquareOfSumLeTwiceSquares.lean`（`squareOfSum_le_twiceSumOfSquares_necSuf`。CommRing だけを仮定し、体・三分法・実閉性を落とす。恒等式が分配則・可換則・加法逆元を全部使うので CommRing より弱くできない）、導出版。sorry 検査 1436 件・check 507 ブロック・linkage 288 件・PDF 274 ページ通過。
+レビューは tick 415 の todo 除去の判断と姉妹側書き換えを突き合わせ、修正なし。式変形統一は姉妹側「$V_1$ の固有空間への制限」Step 4 後半の鎖を一続き八段へ開いた（内容不変。姉妹側 check 300 ブロック・PDF 326 ページ通過）。
+次は「臨界点への有理近似」（任意の $\delta\in\mathbb Q_{>0}$ にある $q\in\mathbb Q_{>0}$ で $(x_c-q)^2<_R\delta$）。着手時に論法を 1 つに固定する（Newton か区間分割か）。$x_c=-1+s$、$s\cdot s=2$ なので、$\sqrt2$ の有理近似 $p/q$ から $(s-p/q)\cdot(s+p/q)=2-p^2/q^2$ を使う道がある（$s+p/q$ の下からの評価が要る。順序の道具は三分法・推移律・`claim_square_of_sum_le_twice_sum_of_squares` まで揃っている。加法単調性が要る行は独立主張にせず行末根拠で書く——tick 415 の確定）。
+
 2026-08-18 の tick 415 は、台帳の先頭行「順序の加法単調性」を独立した主張にしないと確定し、todo から除いた。
 $b<_Rc$ ならば $a+b<_Ra+c$ という段は、差 $(a+c)-(a+b)=c-b$ が変わらないという $R$ の四則と `def_real_algebraic_strict_order` の定義を展開するだけであり、runbook が削除対象として明記する「両辺に同じものを足す」ブロックそのものである。本文・SageMath・Lean は追加せず、次の「和の平方の評価」の該当行末へ「$R$ の四則と狭義順序の定義」と書く。
 レビューは tick 414 の上界の同値を四層で突き合わせ、SageMath 8 組を再実行して一致を確認した。修正なし。この同値は先頭距離の最小性を零点の存在量化へ移す接続なので内容がある。

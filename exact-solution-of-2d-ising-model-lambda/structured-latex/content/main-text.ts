@@ -51180,6 +51180,92 @@ d_{1}(L)
   },
 
   {
+    id: "critical_exponent_claim_square_of_sum_le_twice_squares",
+    kind: "claim",
+    title: { text: "和の平方は平方和の二倍以下である" },
+    labels: ["claim_square_of_sum_le_twice_sum_of_squares"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.squareOfSum_le_twiceSumOfSquares",
+      "Ising2DLambda.NecSuf.CriticalExponent.squareOfSum_le_twiceSumOfSquares_necSuf",
+      "Ising2DLambda.CriticalExponent.squareOfSum_le_twiceSumOfSquares_from_necSuf",
+    ],
+    verification: ["sagemath/check/square-of-sum-le-twice-squares"],
+    statement: [
+      paragraph([
+        "任意の ", math(String.raw`u,v\in R`), "（", ref("def_real_closed_subfield"),
+        "）について",
+      ]),
+      displayMath(String.raw`(u+v)\cdot(u+v)\le_{R}2\cdot(u\cdot u)+2\cdot(v\cdot v)`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\le_{R}`), " は ",
+        ref("def_real_algebraic_nonstrict_order"), "、",
+        math(String.raw`2:=1+1`), "）。",
+      ]),
+      paragraph([
+        "のちに臨界点への距離（", ref("def_distance_squared_to_critical_point"),
+        "）と有理点への距離（", ref("def_distance_squared_to_rational"),
+        "）を結ぶとき、差を ",
+        math(String.raw`a-q=(a-x_c)+(x_c-q)`),
+        " と分けた上でこの評価を引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "差を ",
+        math(String.raw`D:=\left(2\cdot(u\cdot u)+2\cdot(v\cdot v)\right)-(u+v)\cdot(u+v)`),
+        " と置く。", math(String.raw`D\in R`), " である（",
+        ref("def_real_closed_subfield"),
+        " の第 1 条件。部分体は四則で閉じる）。この ", math(String.raw`D`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+D
+&=\left(2\cdot(u\cdot u)+2\cdot(v\cdot v)\right)-(u+v)\cdot(u+v)
+&&(\because\ D\ \text{の定め方})\\
+&=\left(2\cdot(u\cdot u)+2\cdot(v\cdot v)\right)-\left(u\cdot u+2\cdot(u\cdot v)+v\cdot v\right)
+&&(\because\ R\ \text{の分配則と積の可換則（展開）})\\
+&=u\cdot u-2\cdot(u\cdot v)+v\cdot v
+&&(\because\ R\ \text{の加法（同じ項をまとめる。}2:=1+1\text{）})\\
+&=(u-v)\cdot(u-v)
+&&(\because\ R\ \text{の分配則と積の可換則（因数分解）})
+\end{aligned}`),
+      paragraph([
+        "である。", math(String.raw`u=v`), " かどうかで場合に分ける。",
+      ]),
+      paragraph([
+        "第一の場合（", math(String.raw`u=v`), "）: ",
+        math(String.raw`u-v=0`), " だから、上の式変形により ",
+        math(String.raw`D=0\cdot0=0`), "（", math(String.raw`R`),
+        " の四則）。差 ", math(String.raw`D`), " が零元だから ",
+        math(String.raw`(u+v)\cdot(u+v)=2\cdot(u\cdot u)+2\cdot(v\cdot v)`),
+        "（", math(String.raw`R`), " の四則で移項）であり、",
+        ref("def_real_algebraic_nonstrict_order"),
+        " の等号の枝により主張が成り立つ。",
+      ]),
+      paragraph([
+        "第二の場合（", math(String.raw`u\ne v`), "）: ",
+        math(String.raw`w:=u-v\in R`), " と置くと ", math(String.raw`w\ne0`),
+        " である（", math(String.raw`w=0`), " ならば ", math(String.raw`R`),
+        " の四則で移項して ", math(String.raw`u=v`),
+        " となり、この場合の仮定に反する）。上の式変形により差 ",
+        math(String.raw`D`), " は零元でない ", math(String.raw`w`),
+        " の平方 ", math(String.raw`w\cdot w`), " だから、",
+        ref("def_real_algebraic_strict_order"), " により ",
+        math(String.raw`(u+v)\cdot(u+v)<_{R}2\cdot(u\cdot u)+2\cdot(v\cdot v)`),
+        " であり、", ref("def_real_algebraic_nonstrict_order"),
+        " の狭義順序の枝により主張が成り立つ。",
+      ]),
+      paragraph([
+        "いずれの場合も主張を得た。全過程は ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の部分体 ",
+        math(String.raw`R`),
+        " の中の議論で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
