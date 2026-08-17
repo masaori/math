@@ -6,6 +6,9 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 402 は、台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_distance_squared_to_critical_point`（`def_distance_squared_to_rational` の直後）: まず第 2 引数を有理点から $R$ の元へ広げた $\mathrm{dsq}_R(\xi,r):=(a-r)(a-r)+b\cdot b$ を定め（有理点の場合は既存の $\mathrm{dsq}$ と一致することを明記）、前 tick の `claim_critical_point_mem_real_closed` で $x_c\in R$ なので $\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。既存の定義を複製せず拡張の形にしたので、$\mathrm{dsq}$ 側の性質（零性と一致の同値など）を読み替えて使える。
+  Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`distanceSquaredToRealClosed`・有理点の場合の一致 `..._eq_distanceSquaredToRational`（`rfl`）・`criticalPointRealClosed`（`Classical.choose`）とその値 `criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。lake build・sorry 検査 1392 件・check 493 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
 - **2026-08-18 の tick 401 は、台帳の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じた（住処 Qbar、脱出なし）。主定理の印を付けた。**
   `claim_critical_point_mem_real_closed`（`claim_two_is_square_in_real_closed` の直後）: $s\cdot s=2$ を満たす $s\in\overline{\mathbb Q}$ は $R$ の元であり、したがって $x_c=-1+s\in R$。証明は第 4 条件で $s=a+b\omega$ と一意表示し、展開と一意性から $a\cdot a-b\cdot b=2$、$2ab=0$ を読み、$b=0$ の枝は $s=a\in R$、$a=0$ の枝は $-2=b\cdot b$（$b\ne0$）となって前 tick の `claim_two_is_square_in_real_closed` の後半に反するので起きない。最後に部分体の加法で $-1+s\in R$。
   SageMath `check/critical-point-mem-real-closed/`（5 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`。2 根がどちらも `AA` の元であること・一意表示の 2 等式・$a=0$ の枝が起きないこと・$x_c$ が自己双対方程式の根であること・$-2$ の平方根は `AA` の外。通過）。Lean 具体版 `FisherZero/CriticalPointMemRealClosed.lean`（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。定義でなく主張だが、必要十分版は前 tick の Gauss の恒等式と三分法に尽きているので新しくは置かない。sorry 検査 1390 件・check 492 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
@@ -47,7 +50,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | 臨界点への距離の二乗の定義 | todo | $\mathrm{dsq}_c(\xi):=(a-x_c)^2+b^2$（$\xi=a+b\omega$）を `def_distance_squared_to_rational` と同じ形で置く（有理点 $q$ を $R$ の元 $x_c$ へ広げるだけ。前行の $x_c\in R$ が前提） |
 | 臨界指数を零点列で書く | $R$ の空でない有限集合は最小元をちょうど 1 つ持つ | todo | 線型順序（`claim_real_algebraic_order_trichotomy`）と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み |
 | 臨界指数を零点列で書く | $\mathcal F_L$ が空でないこと（$L\ge2$） | todo | 定数でないこと（1 スピンだけ反転した配位に破れボンドがあるので $\exists m\ge1,\ \Omega_L(m)\ge1$）と `def_algebraic_numbers` の代数閉性。$L=1$ は両辺とも自己ループで $Z_1$ が定数になるので除く（着手時に SageMath で確認してから書く） |
 | 臨界指数を零点列で書く | 先頭距離 $d_1(L)$ の定義と正値性 | todo | $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)\in R$。正値性は $x_c\notin\mathcal F_L$（係数が自然数で $x_c$ が正錐 $P_s$ の元なので値が正錐に入る。`claim_positive_rational_not_fisher_zero` と同じ論法） |
@@ -58,6 +60,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 402）: 台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロック）。第 2 引数を $R$ の元へ広げた $\mathrm{dsq}_R$ を定義し、有理点の場合が既存の $\mathrm{dsq}$ と一致することを明記して、$\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。check 493 ブロック・PDF 267 ページ通過。
 - 2026-08-18（tick 401）: 台帳の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じ、`claim_critical_point_mem_real_closed`（主定理の印）を `claim_two_is_square_in_real_closed` の直後に置いた。$s=a+b\omega$ の一意表示から $2ab=0$ を読み、$a=0$ の枝を前 tick の $-2$ の非平方性で潰した。SageMath 5 節、Lean 具体版（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。sorry 検査 1390 件・check 492 ブロック・PDF 267 ページ通過。
 - 2026-08-18（tick 400）: 台帳の先頭行「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。前 tick が「唯一の未固めの論点」と記録した箇所。鍵は順序ではなく代数閉性で、$u\cdot u=x+y\omega$ の一意表示と Gauss の恒等式から平方の和が平方であることを出し、$x=y=1$ で $2$ の平方性を得た。SageMath 4 節、Lean 具体版・必要十分版（Gauss の恒等式のみ。可換環）・導出版。sorry 検査 1388 件・check 491 ブロック・PDF 266 ページ通過。
 - 2026-08-18（tick 399）: 章「臨界指数を零点列で書く」の先頭行の前提として「実閉部分体の二つの平方の和が零なら両方が零である」を四層で閉じ、`claim_real_closed_sum_of_two_squares_zero` を三分法の直後に置いた（$(x+y\omega)(x-y\omega)$ の因数分解と一意表示。三分法だけでは和について何も言えないため）。SageMath 5 節（`AA` と `QQbar(I)` のモデル）、Lean 具体版・必要十分版（可換整域で因子が零まで）・導出版。sorry 検査 1383 件・check 489 ブロック・PDF 266 ページ通過。セクション表に「$R$ では $2$ が平方である」の行を $x_c\in R$ の前へ足した。

@@ -1446,6 +1446,8 @@ targets=(
   Ising2DLambda.FisherZero.neg_two_not_square_in_realClosed
   Ising2DLambda.FisherZero.sqrtTwo_mem_realClosed
   Ising2DLambda.FisherZero.criticalPoint_mem_realClosed
+  Ising2DLambda.FisherZero.distanceSquaredToRealClosed_eq_distanceSquaredToRational
+  Ising2DLambda.FisherZero.criticalPointRealClosed_val
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

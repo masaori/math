@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 402 は、最終章の 2 行目「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_distance_squared_to_critical_point`: 既存の $\mathrm{dsq}(\xi,q)$ を複製せず、**第 2 引数を有理点から $R$ の元へ広げた $\mathrm{dsq}_R(\xi,r):=(a-r)(a-r)+b\cdot b$ を定義し、有理点の場合に一致することを明記してから** $\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた（$x_c\in R$ は前 tick）。Lean では有理点の場合の一致が `rfl` で出る形に定義を揃えてある。
+Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`distanceSquaredToRealClosed`・`..._eq_distanceSquaredToRational`・`criticalPointRealClosed`（`Classical.choose` で $x_c$ を $R$ の元として取り出す）・`criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。sorry 検査 1392 件・check 493 ブロック・linkage 276 件・PDF 267 ページ通過。
+次は最終章の 3 行目「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」（線型順序 `claim_real_algebraic_order_trichotomy` と有限集合の帰納法。先頭距離の well-defined 性に要る。`claim_row_config_min_unique` と同じ骨組み）。**注意: 順序の推移性が本文で確立しているかを着手時に確かめること**（三分法だけでは最小元の議論に足りない可能性がある。無ければ推移性を先に別行で置く）。
+
+（tick 401 の記録）
 2026-08-18 の tick 401 は、最終章の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じた（主定理の印つき）。
 `claim_critical_point_mem_real_closed`: $s\cdot s=2$ なら $s\in R$、したがって $x_c=-1+s\in R$。第 4 条件で $s=a+b\omega$ と一意表示し、$a\cdot a-b\cdot b=2$ と $2ab=0$ を読み、$b=0$ の枝で $s=a\in R$、$a=0$ の枝は $-2=b\cdot b$（$b\ne0$）で前 tick の `claim_two_is_square_in_real_closed` の後半に反する。
 SageMath `check/critical-point-mem-real-closed/`（5 節）。Lean 具体版 `FisherZero/CriticalPointMemRealClosed.lean`。**Lean の注意: `linear_combination` の係数は目標と仮定の差の向きで決まる（`0 = ab + ab` から `ab = 0` を出すときは `-hcast / 2`）。** sorry 検査 1390 件・check 492 ブロック・linkage 276 件・PDF 267 ページ通過。

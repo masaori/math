@@ -363,6 +363,7 @@ export const ALL_LABELS = [
   "def_cross_orbit_ordered_pairs",
   "def_cross_orbit_ordered_pairs_image",
   "def_determinant",
+  "def_distance_squared_to_critical_point",
   "def_distance_squared_to_rational",
   "def_dual_edge_map",
   "def_edge_numbering",
