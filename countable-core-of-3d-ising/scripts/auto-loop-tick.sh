@@ -39,6 +39,8 @@ LOG_DIR="$HOME/Library/Logs/ising-3d-cut-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
+CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0004"
+CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0004.token"
 
 # --- 発火間隔の自動調整 ------------------------------------------------------
 # launchd は 15 分ごとに呼ぶが、**実際に走る間隔はここで決める**。
@@ -332,16 +334,26 @@ set +e
 echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
 # プロンプトは標準入力から渡す（--mcp-config が可変長引数なので引数で続けると飲み込まれる）。
 if [ "$agent" = "claude" ]; then
-  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
+  if [ ! -d "$CLAUDE_TICK_CONFIG_DIR" ] || [ ! -s "$CLAUDE_TICK_TOKEN_FILE" ]; then
+    log "ERROR: claude の専用資格情報が無い"
+    status=1
+  else
+    oauth_token="$(cat "$CLAUDE_TICK_TOKEN_FILE")"
+    printf '%s' "$PROMPT" | CLAUDE_CONFIG_DIR="$CLAUDE_TICK_CONFIG_DIR" \
+      CLAUDE_CODE_OAUTH_TOKEN="$oauth_token" \
+      timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
     --model claude-fable-5 --effort medium \
     --dangerously-skip-permissions --strict-mcp-config \
     --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+    status=$?
+    unset oauth_token
+  fi
 else
   printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
     -m gpt-5.6-sol -c model_reasoning_effort=medium \
     --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+  status=$?
 fi
-status=$?
 set -e
 printf '%s\n' "$agent" > "$AGENT_MARK"
 
