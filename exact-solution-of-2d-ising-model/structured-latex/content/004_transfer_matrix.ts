@@ -1576,9 +1576,17 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         " (1)(2) より",
       ]),
       displayMath(
-        String.raw`\varepsilon^2 = (\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)
-= I_{\mathrm{Mat}(2^M,\mathbb{C})}
-\quad (\because \text{クロネッカー積の積の規則})`,
+        String.raw`\begin{aligned}
+\varepsilon^2
+&= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
+&&(\because\ \varepsilon=\sigma^x\boxtimes\cdots\boxtimes\sigma^x)\\
+&= (\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)
+&&(\because\ \text{クロネッカー積の積の規則})\\
+&= \underbrace{I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}}_{M}
+&&(\because\ \sigma^x\sigma^x=I_{\mathrm{Mat}(2,\mathbb{C})}\ \text{を各因子へ同時に適用})\\
+&= I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&&(\because\ \text{クロネッカー積の単位元の規則})
+\end{aligned}`,
       ),
       paragraph([
         "であるから、",

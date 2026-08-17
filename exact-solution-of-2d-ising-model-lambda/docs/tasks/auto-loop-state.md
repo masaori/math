@@ -48,6 +48,8 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-18（tick 414）: 姉妹側「$\varepsilon$ の固有空間」（`004_transfer_matrix.ts`）で、$\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb C)}$ の二等号を 1 つの根拠で束ねていた表示を、$\varepsilon$ の定義の代入／クロネッカー積の積の規則／$\sigma^x\sigma^x=I$ の各因子への適用／単位元の規則、の一続き四段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check・PDF 326 ページ通過。
+
 - 2026-08-18（tick 413）: 姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」（`004_transfer_matrix.ts`）の Step 4 結論で、散文に圧縮されていた $\mathbf{end}(I)=\mathrm{id}_{\mathcal F}$ を、単位行列の行列単位展開／$\mathbf{end}$ の線型性／$\mathbf{end}(E_{I,I})=\Theta_{I,I}$／基底上で示した恒等写像との一致、の一続き四段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check・PDF 326 ページ通過。
 
 - 2026-08-18（tick 412）: 姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」（`004_transfer_matrix.ts`）の Step 5 末尾で、散文中に圧縮されていた二等号の鎖 $(\mathbf{end}(E_{I,J}))(f_K)=\Theta_{I,J}(f_K)=\delta_{J,K}f_I$ を、一続き二段・各行の根拠つき（$\mathbf{end}$ の定義／$\Theta_{I,J}$ の定義）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 326 ページ通過。
