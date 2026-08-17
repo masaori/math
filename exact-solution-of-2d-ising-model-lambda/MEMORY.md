@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 366 は、前 tick の `def_open_square_free_energy_density` の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行した。
+特定は機械的に: 本文の `lean:` に現れる名前を含む Lean ファイルを起点に import の閉包を取り、外にあるファイル 65 個を列挙。55 個は 2026-08-16（`30d11b8a`）に本文から消えた実数値経路の宣言を含んでいた。可算側の主張だけが引く `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero` が実数値経路のファイル（`PartitionValuePositive.lean`・`FreeEnergyDensityLowerBound.lean`）に同居して `FreeEnergyDensity.lean`・`FiniteRealFreeEntropy.lean` を引きずっていたので、`ThermodynamicLimit/ConstantPlusConfiguration.lean`（import は `PartitionPolynomial.Basic` だけ）へ切り出し、`PartitionValueGeOneRational.lean` の import を付け替えて、それら 6 個も消した。**計 61 ファイル削除・1 ファイル新設（792 → 732）。** 入口 `Ising2DLambda.lean` の import と sorry 検査の登録（実在しなくなった 96 件）を外し、登録は 1274 件。`OpenSquareFreeEnergyDensitySup.lean` → `OpenSquareFreeEnergyDensity.lean`、`openSquareFreeEnergyDensitySup*` → `openSquareFreeEnergyDensity*` に改名し、本文の `lean:` と sorry 検査も合わせた。`lake build`・sorry 検査・check（Lean 対応先 1240 件実在）・verify-check-linkage（251 件）・PDF 247 ページ通過。
+閉包の外に残った 8 ファイル（`FisherZero/DistanceSquaredToRational.lean`・`ZeroPinchingPredicate.lean` とその NecSuf・FromNecSuf、`AlgebraicEigenvalue/RowConfigOrderFromNecSuf.lean`・`OrbitPermutationSignValuesFromNecSuf.lean`）は実数値経路ではなく、本文の対応ブロック（`def_distance_squared_to_rational`・`def_zero_pinching_predicate`・`def_phase_transition_countable_statement`、および `rowConfigLess_*`・`orbitPermSign_*` の主張）が `lean:` を持たない／導出版を挙げていないだけ。消さず、セクション表の先頭に「本文の lean: から引かれていない Lean の配線」を足した。
+runbook の並列ストリーム「式変形の書き方の統一」の一時停止を解除した（停止条件だった二セクションが済んだ）。次 tick から手順 8 を再開する。
+次は「本文の lean: から引かれていない Lean の配線」（上の 8 ファイルの宣言を対応ブロックの `lean:` へ足す。中身を突き合わせ、食い違えば本文か Lean を直す。閉包の計算は tick 366 の手順で再現できる: 本文の `"Ising2DLambda.…"` を全部集め、各 .lean の namespace＋宣言名と照合し、一致するファイルから import を辿る）。
+
+（tick 365 の記録）
 2026-08-17 の tick 365 は、前 tick の「有理係数の対数順序群の実現写像は順序を保つ」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」を本文・Lean まで書いた（定義のみ。SageMath は置かない）。
 `def_open_square_free_energy_density`（`claim_rational_log_order_group_realization_monotone` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape`「完備性」）: $f^{\mathrm{op}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))\in\mathbb R$。well-defined 性は statement 内: 空でない（`claim_open_square_density_lower_set_nonempty` の $-\iota(\ell_2)$ の像）・上に有界（含意の鎖二段 `claim_open_square_density_lower_set_le_upper_bound` → `claim_rational_log_order_group_realization_monotone`、上界 $b(q):=\rho_{\mathbb R}(\iota(\ell_2)+2\iota(\log(1+q)))$）。上限の特徴づけ二つ（上界・最小）を添え、列の各項の実現が近づくことは主張しない旨を明記。`remark_real_escape_plan` の題名から「まだ書いていない」を外し、冒頭「三つの定義と四つの主張」、脱出の項を定義への参照に。本文末尾「この先に書くこと」から済んだ項目を外した。

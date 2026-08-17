@@ -3,6 +3,15 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+
+## 2026-08-17 tick 366 で台帳から移した記録（tick 361 分。前進・レビューは tick 362 分）
+
+### 現在地
+- **2026-08-17 の tick 361 は、台帳の先頭行「実現写像は有理数倍と可換（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_realization_smul`（`def_rational_log_order_group_realization` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\rho_{\mathbb R}$ の値どうしの等式。$\mathbb R$ の結合則と分配則）」）: $r\in\mathbb Q$、$\mu\in\Lambda_{\mathbb Q}$ で $\rho_{\mathbb R}(r\cdot\mu)=\iota_{\mathbb Q\to\mathbb R}(r)\cdot\rho_{\mathbb R}(\mu)$。証明は準備一つ（$\mu(p)=0\Rightarrow(r\mu)(p)=0$ で $\operatorname{supp}(r\mu)\subset\operatorname{supp}\mu$）と一続き六段（定義／台を含む有限集合に渡る和は同じ値／有理数倍の定義／$\iota$ の乗法保存／$\mathbb R$ の結合則／分配則を有限和へ／定義）。実対数の性質は使わない。`remark_real_escape_plan` の冒頭と脱出の項にこの主張への参照を足した。
+  SageMath `check/rational-log-order-group-realization-smul/`（$\ell_p$ を $\mathbb Q$ 上の多項式環の不定元として記号のまま持ち、実対数の値は計算しない。344 標本 × 7 倍率、18235 検査、1 秒未満）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupRealizationSmul.lean`（`realizeRational_smul`。`Finsupp.support_smul`・`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupRealizationSmul.lean`（`realizeWith`・`realizeWith_smul_necSuf`。`[MulZeroClass K] [NonUnitalSemiring R]`、$\iota$ の乗法保存と $\iota(0)=0$ を仮定として受け、重み $w:P\to R$ は任意。単位元・逆元・順序・実対数を使わない）、導出版（$\rho_{\mathbb R}$ と `realizeWith` の一致は `rfl`）。sorry 検査 1349 件。check 451 ブロック・PDF 244 ページ通過。
+  レビュー: 前 tick の二定義と Lean を突き合わせて一致。`def_rational_log_order_group_realization` の末尾「加法・有理数倍・順序をどう保つかは続く主張で示す」の「加法」は台帳のどの行も示す予定が無い（順序保存の証明が加法を使わない）ので「有理数倍と順序」に直し、加法は述べない旨を添えた。次は「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」。
+
 ## 2026-08-17 tick 364 で台帳から移した記録（tick 359 分。前進・レビューは tick 360 分）
 
 ### 現在地

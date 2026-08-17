@@ -7,6 +7,11 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 366 は、台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行し、本文から引かれていない旧実数値経路の Lean ファイル 61 個を消して、新しい自由エネルギー密度の Lean ファイルの名前から `Sup` を外した。**
+  特定は機械的に行った: 本文の `lean:` に現れる名前を含むファイルを起点に import の閉包を取り、その外にあるファイルを列挙（65 個）。うち 55 個は 2026-08-16 に本文から消した実数値経路（`30d11b8a` で `lean:` から外れた 94 名）の宣言を含む。加えて、可算側の主張だけが引いていた `allPlusConfig`（`def_constant_plus_configuration`）と `allPlusConfig_brokenBondCount_eq_zero`（`claim_constant_plus_breaks_no_bond`）が実数値経路のファイル（`PartitionValuePositive.lean`・`FreeEnergyDensityLowerBound.lean`）に同居し、そこから `FreeEnergyDensity.lean`・`FiniteRealFreeEntropy.lean`（実対数・上限）を引きずっていたので、この二つを新ファイル `ThermodynamicLimit/ConstantPlusConfiguration.lean`（import は `PartitionPolynomial.Basic` だけ）へ切り出し、`PartitionValueGeOneRational.lean` の import を付け替えたうえで、それら 6 個（`FreeEnergyDensity` の具体版・必要十分版・導出版を含む）も消した。計 61 ファイル削除・1 ファイル新設（792 → 732）。入口 `Ising2DLambda.lean` の import と sorry 検査の登録（実在しなくなった 96 件）を外し、登録は 1274 件。`OpenSquareFreeEnergyDensitySup.lean` → `OpenSquareFreeEnergyDensity.lean`、`openSquareFreeEnergyDensitySup*` → `openSquareFreeEnergyDensity*` に改名し、本文 `def_open_square_free_energy_density` の `lean:` と sorry 検査の登録も合わせた。`lake build`・sorry 検査・check（Lean 対応先 1240 件実在）・verify-check-linkage（251 件）・PDF 247 ページ通過。
+  閉包の外に残った 8 ファイルは実数値経路ではない（章「零点の詰め寄り」の三定義 `def_distance_squared_to_rational`・`def_zero_pinching_predicate`・`def_phase_transition_countable_statement` に対応する Lean と、章「固有値の代数性」の導出版二つ `RowConfigOrderFromNecSuf`・`OrbitPermutationSignValuesFromNecSuf`）。本文のブロックが `lean:` を持たないだけなので消さず、配線する行をセクション表へ足した。
+  レビュー: 前 tick の `def_open_square_free_energy_density` の本文（空でない・上に有界の含意の鎖二段・完備性で上限・特徴づけ二つ）と Lean（`openSquareRealizedLowerSet_nonempty`・含意の鎖・`_bddAbove`・`sSup`・`le_csSup`・`csSup_le`）を突き合わせて一致。修正なし。次は「本文の lean: から引かれていない Lean の配線」。
+
 - **2026-08-17 の tick 365 は、台帳の先頭行「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」を本文・Lean まで書いた（定義のみ。SageMath 検証は定義には置かない）。**
   `def_open_square_free_energy_density`（`claim_rational_log_order_group_realization_monotone` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「完備性（下組の実現像 $\rho_{\mathbb R}(A^{\mathrm{op}}(q))\subset\mathbb R$ が空でなく上に有界で、その上限を取る一点。実対数について使うのは順序保存だけ）」）: $f^{\mathrm{op}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))\in\mathbb R$。well-defined 性は statement に書いた——空でない（`claim_open_square_density_lower_set_nonempty` の証人 $-\iota(\ell_2)$ の像）、上に有界（含意の鎖二段: `claim_open_square_density_lower_set_le_upper_bound` → `claim_rational_log_order_group_realization_monotone` で $b(q):=\rho_{\mathbb R}(\iota(\ell_2)+2\iota(\log(1+q)))$ が上界）。上限の特徴づけ（上界である・最小である）と $\rho_{\mathbb R}(-\iota(\ell_2))\le f^{\mathrm{op}}(q)\le b(q)$ を添え、列の各項の実現がこの値に近づくことは主張しない旨を明記。`remark_real_escape_plan` の題名から「まだ書いていない」を外し、冒頭を「三つの定義と四つの主張」に、脱出の項を「$f^{\mathrm{op}}(q)$ を一つ取る（定義への参照）」に直した。本文末尾「この先に書くこと」から「切断による実数体への一度きりの脱出と旧実数値経路の撤去」を外した（本文側は済み。Lean の後片付けはセクション表の次行）。
   Lean 具体版 `ThermodynamicLimit/OpenSquareFreeEnergyDensitySup.lean`（`openSquareRealizedLowerSet`・`openSquareRealizedLowerSet_nonempty`・`realizeRational_le_realizeRational_upperBound_of_mem_openSquareDensityLowerSet`・`openSquareRealizedLowerSet_bddAbove`・`openSquareFreeEnergyDensitySup`（`sSup`）・`realizeRational_le_openSquareFreeEnergyDensitySup`（`le_csSup`）・`openSquareFreeEnergyDensitySup_le_of_forall_le`（`csSup_le`）。定義ブロックなので必要十分版は無い）。**名前の末尾 `Sup` は、削除済み旧実数値経路のファイル `OpenSquareFreeEnergyDensity.lean`（同名の `openSquareFreeEnergyDensity` を持つ）と衝突しないために付けた。** 最初に同名で上書きしてしまい旧経路の依存ファイルが壊れたので、旧ファイルを復元して自分の側を改名した。次行「削除した実数値経路の Lean の後片付け」で旧経路を消したら `Sup` を外してよい。sorry 検査 1370 件。check 455 ブロック・PDF 247 ページ通過。
@@ -27,11 +32,6 @@
   SageMath `check/real-logarithm-int-power/`（$\ell_p$ を記号のまま持ち、正の有理数 $u=\prod p^{e_p}\mapsto\sum e_p\ell_p$ を「乗法を加法へ移す写像」の模型として各段を検査。1246 検査、3 秒。実数体そのものの上の等式は Lean が担う旨を overview に明記）。Lean 具体版 `ThermodynamicLimit/RealLogarithmIntPower.lean`（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`。`realLog_mul` だけを使い `Real.log_pow`・`Real.log_zpow` は使わない）、必要十分版 `NecSuf/ThermodynamicLimit/RealLogarithmIntPower.lean`（`map_zpow_necSuf`。`[Group G] [AddGroup A]`、写像が乗法を加法へ移すことだけ。可換性・順序・完備性・狭義単調を使わない。`MonoidHom.map_zpow` は使わない）、導出版（`G:={t:\mathbb R\mid 0<t}` の mathlib の群構造。`Positive.coe_zpow` は `rfl`）。sorry 検査 1355 件。check 452 ブロック・PDF 245 ページ通過。
   レビュー: 前 tick の「実現写像は有理数倍と可換」の本文（準備一つ・一続き六段）と Lean 具体版（`Finsupp.support_smul`・`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum`）を突き合わせて一致。修正なし。次は「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」。
 
-- **2026-08-17 の tick 361 は、台帳の先頭行「実現写像は有理数倍と可換（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `claim_rational_log_order_group_realization_smul`（`def_rational_log_order_group_realization` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\rho_{\mathbb R}$ の値どうしの等式。$\mathbb R$ の結合則と分配則）」）: $r\in\mathbb Q$、$\mu\in\Lambda_{\mathbb Q}$ で $\rho_{\mathbb R}(r\cdot\mu)=\iota_{\mathbb Q\to\mathbb R}(r)\cdot\rho_{\mathbb R}(\mu)$。証明は準備一つ（$\mu(p)=0\Rightarrow(r\mu)(p)=0$ で $\operatorname{supp}(r\mu)\subset\operatorname{supp}\mu$）と一続き六段（定義／台を含む有限集合に渡る和は同じ値／有理数倍の定義／$\iota$ の乗法保存／$\mathbb R$ の結合則／分配則を有限和へ／定義）。実対数の性質は使わない。`remark_real_escape_plan` の冒頭と脱出の項にこの主張への参照を足した。
-  SageMath `check/rational-log-order-group-realization-smul/`（$\ell_p$ を $\mathbb Q$ 上の多項式環の不定元として記号のまま持ち、実対数の値は計算しない。344 標本 × 7 倍率、18235 検査、1 秒未満）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupRealizationSmul.lean`（`realizeRational_smul`。`Finsupp.support_smul`・`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupRealizationSmul.lean`（`realizeWith`・`realizeWith_smul_necSuf`。`[MulZeroClass K] [NonUnitalSemiring R]`、$\iota$ の乗法保存と $\iota(0)=0$ を仮定として受け、重み $w:P\to R$ は任意。単位元・逆元・順序・実対数を使わない）、導出版（$\rho_{\mathbb R}$ と `realizeWith` の一致は `rfl`）。sorry 検査 1349 件。check 451 ブロック・PDF 244 ページ通過。
-  レビュー: 前 tick の二定義と Lean を突き合わせて一致。`def_rational_log_order_group_realization` の末尾「加法・有理数倍・順序をどう保つかは続く主張で示す」の「加法」は台帳のどの行も示す予定が無い（順序保存の証明が加法を使わない）ので「有理数倍と順序」に直し、加法は述べない旨を添えた。次は「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」。
-
 ## セクション台帳
 
 **済んだ範囲**（章ごとの件数。個々の内訳は [auto-loop-archive.md](auto-loop-archive.md) と
@@ -44,14 +44,14 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 79 セクション
+- 熱力学極限: 80 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 
 **残っているもの**（この順に進める。tick は先頭の 1 件だけを実行する）。
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 削除した実数値経路の Lean の後片付け | todo | 2026-08-16 に本文から消した実数値経路（実対数・上限／下限による極限）の Lean ファイルが孤立して残っている。入口からの import と sorry 検査は通るが、対応する本文が無いので消す。旧 `OpenSquareFreeEnergyDensity.lean`（`openSquareFreeEnergyDensity`）を消したら、新しい `OpenSquareFreeEnergyDensitySup.lean` の名前から `Sup` を外し、本文の `lean:` と sorry 検査の登録も合わせる |
+| 零点の詰め寄り・固有値の代数性 | 本文の lean: から引かれていない Lean の配線 | todo | 章「零点の詰め寄り」の三定義（`def_distance_squared_to_rational`・`def_zero_pinching_predicate`・`def_phase_transition_countable_statement`）は Lean（`FisherZero/DistanceSquaredToRational.lean`・`ZeroPinchingPredicate.lean` とその必要十分版・導出版）があるのに `lean:` を持たない。章「固有値の代数性」の導出版 `RowConfigOrderFromNecSuf.lean`・`OrbitPermutationSignValuesFromNecSuf.lean` は対応する主張の `lean:` に挙がっていない。中身を突き合わせて `lean:` へ足す（食い違えば本文か Lean を直す）。特定は tick 366 と同じ閉包の計算で再現できる |
 | 熱力学極限 | 周期境界自由エネルギー密度への移送 | todo | 周期境界と開境界の境界評価から導く |
 | 熱力学極限 | 零点密度 | todo | |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
@@ -60,6 +60,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 366）: 台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行した。本文の `lean:` から辿れる import 閉包の外にある実数値経路の Lean 61 ファイルを削除し、可算側だけが使う `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero` を `ConstantPlusConfiguration.lean` へ切り出し、`OpenSquareFreeEnergyDensitySup` の `Sup` を外した。sorry 検査 1274 件。閉包の外に残った 8 ファイル（零点の詰め寄りの三定義と固有値の代数性の導出版二つ。実数値経路ではない）を配線する行をセクション表の先頭へ足した。式変形統一は一時停止中のため実施せず。
+
 - 2026-08-17（tick 365）: 台帳の先頭行「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」を実行し、`def_open_square_free_energy_density` を `claim_rational_log_order_group_realization_monotone` の直後に置いた。
   定義のみ（SageMath は置かない）。Lean 具体版 `OpenSquareFreeEnergyDensitySup.lean`（`sSup`・`le_csSup`・`csSup_le`。旧実数値経路の同名ファイルと衝突するので `Sup` を付けた）を書き、入口 import・sorry 検査へ 5 件登録（計 1370 件）。`remark_real_escape_plan` の題名から「まだ書いていない」を外した。式変形統一は一時停止中のため実施せず。
 
@@ -88,6 +90,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-17（tick 366）: 前 tick の「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める」の本文（像の定義・空でない・上に有界の含意の鎖二段・完備性で上限・上界である／最小である・$\rho_{\mathbb R}(-\iota(\ell_2))\le f^{\mathrm{op}}(q)\le b(q)$）と Lean 具体版（`openSquareRealizedLowerSet`・`_nonempty`・`realizeRational_le_realizeRational_upperBound_of_mem_openSquareDensityLowerSet`（二段）・`_bddAbove`・`sSup`・`le_csSup`・`csSup_le`）を突き合わせ、一致した。
+  「何も言っていない主張」の観点: 定義ブロックの中の空でない・上に有界は独立ブロックにしておらず、値の住処（$\mathbb R$ の部分集合が上限を持つ前提）を言うので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
+
 - 2026-08-17（tick 365）: 前 tick の「有理係数の対数順序群の実現写像は順序を保つ」の本文（順序の証人・準備 $0<\iota(N)$・含意の鎖六段・最後の三段）・SageMath overview（286452 検査、実数側は区間演算）・Lean 具体版（`obtain`・`h1`〜`h6`・`calc` が本文と 1 対 1）・必要十分版（値の側だけ順序体、可算側の型は構造なし）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 順序保存は今 tick の定義が上界の存在のために引くので残す。今 tick の定義は、実数体の完備性を使う唯一の位置を宣言するもので、well-defined 性（空でない・上に有界）を独立ブロックにせず statement 内の含意の鎖に置いた。本文末尾「この先に書くこと」から済んだ項目（切断による脱出）を外し、台帳のセクション表と食い違いなし。本文の修正は無い。
 

@@ -12,7 +12,7 @@
 住処は ℕ・ℚ のみで、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.FreeEntropy.ValuePositive
-import Ising2DLambda.ThermodynamicLimit.FreeEnergyDensityLowerBound
+import Ising2DLambda.ThermodynamicLimit.ConstantPlusConfiguration
 
 namespace Ising2DLambda.ThermodynamicLimit
 

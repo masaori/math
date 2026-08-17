@@ -46437,9 +46437,9 @@ Y
       "Ising2DLambda.ThermodynamicLimit.openSquareRealizedLowerSet_nonempty",
       "Ising2DLambda.ThermodynamicLimit.realizeRational_le_realizeRational_upperBound_of_mem_openSquareDensityLowerSet",
       "Ising2DLambda.ThermodynamicLimit.openSquareRealizedLowerSet_bddAbove",
-      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensitySup",
-      "Ising2DLambda.ThermodynamicLimit.realizeRational_le_openSquareFreeEnergyDensitySup",
-      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensitySup_le_of_forall_le",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity",
+      "Ising2DLambda.ThermodynamicLimit.realizeRational_le_openSquareFreeEnergyDensity",
+      "Ising2DLambda.ThermodynamicLimit.openSquareFreeEnergyDensity_le_of_forall_le",
     ],
     statement: [
       paragraph([
