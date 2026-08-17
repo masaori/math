@@ -49215,6 +49215,65 @@ P_{n+1}\cdot a+Q_{n+1}\cdot b^{(n+1)+1}
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_linear_factor_powers_bezout",
+    kind: "claim",
+    title: { text: "一次因子の冪どうしが互いに素であること（Bezout 恒等式の伝播の二度適用）" },
+    labels: ["claim_qbar_linear_factor_powers_bezout"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-linear-factor-powers-bezout"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowersBezout",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.linear_factor_powers_bezout_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowersBezout_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`w,w'\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"),
+        "）が ", math(String.raw`w\ne w'`), " を満たすとする。このとき任意の ",
+        math(String.raw`k,m\in\mathbb{N}`), " について、ある ",
+        math(String.raw`P,Q\in\overline{\mathbb{Q}}[t]`), " が存在して",
+      ]),
+      displayMath(String.raw`P\cdot(t-\widehat{w})^{k+1}+Q\cdot(t-\widehat{w'})^{m+1}=1`),
+      paragraph([
+        "が成り立つ。すなわち ", math(String.raw`(t-\widehat{w})^{k+1}`), " と ",
+        math(String.raw`(t-\widehat{w'})^{m+1}`), " は Bezout 恒等式で結ばれ、特に互いに素である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u_{w,w'}:=\widehat{(w'-w)^{-1}}`), "、", math(String.raw`a:=t-\widehat{w}`),
+        "、", math(String.raw`b:=t-\widehat{w'}`), " と置くと、", ref("claim_qbar_distinct_linear_factors_bezout"),
+        " により", math(String.raw`u_{w,w'}\cdot a+(-u_{w,w'})\cdot b=u_{w,w'}\cdot a-u_{w,w'}\cdot b=1`),
+        "（体の分配則で符号を移しただけであり、", ref("claim_qbar_distinct_linear_factors_bezout"),
+        " が与える等式そのものである）。",
+      ]),
+      paragraph([
+        "この等式に ", ref("claim_qbar_bezout_power_propagation"), " を ", math(String.raw`n:=m`),
+        " で適用すると、ある ", math(String.raw`P_{1},Q_{1}\in\overline{\mathbb{Q}}[t]`), " が存在して",
+      ]),
+      displayMath(String.raw`P_{1}\cdot a+Q_{1}\cdot b^{m+1}=1`),
+      paragraph([
+        "が成り立つ。この等式は ", math(String.raw`\overline{\mathbb{Q}}[t]`), " の加法の可換則により",
+      ]),
+      displayMath(String.raw`Q_{1}\cdot b^{m+1}+P_{1}\cdot a=1`),
+      paragraph([
+        "とも書ける。これは、", math(String.raw`a':=b^{m+1}`), "、", math(String.raw`b':=a`), "、",
+        math(String.raw`p':=Q_{1}`), "、", math(String.raw`q':=P_{1}`), " と置いたときの",
+        math(String.raw`p'\cdot a'+q'\cdot b'=1`), " の形なので、再び ",
+        ref("claim_qbar_bezout_power_propagation"), " を ", math(String.raw`n:=k`), " で適用できる。",
+        "ある ", math(String.raw`P_{2},Q_{2}\in\overline{\mathbb{Q}}[t]`), " が存在して",
+      ]),
+      displayMath(String.raw`P_{2}\cdot b^{m+1}+Q_{2}\cdot a^{k+1}=1`),
+      paragraph([
+        "が成り立つ。加法の可換則で ", math(String.raw`Q_{2}\cdot a^{k+1}+P_{2}\cdot b^{m+1}=1`),
+        " と書き直し、", math(String.raw`P:=Q_{2}`), "、", math(String.raw`Q:=P_{2}`), " と置けば主張の等式を得る。",
+        "この議論に現れるのは代数的数の四則と ", ref("claim_qbar_bezout_power_propagation"), " の二度の適用だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

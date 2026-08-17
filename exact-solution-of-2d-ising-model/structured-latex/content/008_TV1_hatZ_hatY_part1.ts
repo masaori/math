@@ -2749,9 +2749,15 @@ h(g_1g_2)
         math(String.raw`g(x+y)g^{-1} = gxg^{-1} + gyg^{-1}`),
         "、分配法則）なので",
       ]),
-      displayMath(
-        String.raw`T_g(x) = T_g(x + tI) - T_g(tI) = T_{g'}(x + tI) - T_{g'}(tI) = T_{g'}(x)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+T_g(x)
+&= T_g(x + tI) - T_g(tI)
+&&(\because\ T_g\ \text{の}\ R\ \text{上の加法性})\\
+&= T_{g'}(x + tI) - T_{g'}(tI)
+&&(\because\ x+tI,\ tI\in R^\times\ \text{上で}\ T_g|_{R^\times}=T_{g'}|_{R^\times}\ \text{（仮定）})\\
+&= T_{g'}(x)
+&&(\because\ T_{g'}\ \text{の}\ R\ \text{上の加法性})
+\end{aligned}`),
       paragraph([
         "Step 2: ",
         math(String.raw`u := g^{-1}g'`),

@@ -3,6 +3,29 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-17 tick 390 で台帳から移した記録（tick 385・384・383・382 分）
+
+### 現在地
+
+- **2026-08-17 の tick 385 は、台帳の先頭行「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」（$f\ne0$、$i>n\Rightarrow\mathrm{ac}_i(f)=0$、$(t-\widehat w)^k\mid f$ ならば $k\le n$）を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_qbar_linear_factor_pow_divides_exponent_le`（`claim_qbar_linear_factor_pow_mul_leading_coeff` の直後・「この先に書くこと」の直前、住処 Qbar）。証明は背理法。準備: 整除の証人 $g$（$f=(t-\widehat w)^kg$）、$g\ne0$（$g=0$ なら $f=(t-\widehat w)^k\cdot0=0$ の一続き三段で $f\ne0$ に反する）、非零係数の番号の集合 $S(g)$ は有限（`def_qbar_polynomial_ring`）で空でない（$g\ne0$）ので最大元 $m$ を取る（$\mathrm{ac}_m(g)\ne0$、$i>m\Rightarrow\mathrm{ac}_i(g)=0$）。鎖 $\mathrm{ac}_{m+k}(f)=\mathrm{ac}_{m+k}((t-\widehat w)^kg)=\mathrm{ac}_m(g)\ne0$（`claim_qbar_linear_factor_pow_mul_leading_coeff` を $C:=g$、上界 $m$、$j:=k$ で）。$m+k>n$ なら係数の仮定で $\mathrm{ac}_{m+k}(f)=0$ となり矛盾、よって $m+k\le n$、$k\le m+k\le n$ の二段。本文末尾「この先に書くこと」の内訳から済んだ項目を消した。
+  SageMath `check/qbar-linear-factor-pow-divides-exponent-le/`（$w$ 6 個・$g$ 5 個・$k\le5$・上界 $n$ 2 通り、`QQbar` 厳密。通過）。Lean 具体版 `ThermodynamicLimit/QbarLinearFactorPowDividesExponentLe.lean`（`qbarLinearFactorPowDividesExponentLe`。`g.support.max'`（`natDegree` は使わない）、`Polynomial.support_eq_empty`・`mem_support_iff`・`Finset.le_max'`、`qbarLinearFactorPowMulLeadingCoeff`、`by_contra`）、必要十分版 `NecSuf/ThermodynamicLimit/QbarLinearFactorPowDividesExponentLe.lean`（`poly_linear_factor_pow_divides_exponent_le_necSuf`。可換環だけを要求。零因子の有無は使わない）、導出版 `QbarLinearFactorPowDividesExponentLeFromNecSuf.lean`。sorry 検査 1345 件。check 475 ブロック・verify-check-linkage 263 件・PDF 258 ページ通過。
+  式変形統一: 姉妹側「$H$ と $\hat Z$・$\hat Y$ の交換子の入れ子」（`008_TV1_hatZ_hatY_part1.ts`）の補題 1 で、散文中の $\mathrm{ad}_{\alpha X}(W)=[\alpha X,W]=\alpha[X,W]=\alpha\,\mathrm{ad}_X(W)$ の鎖を一続き三段（$\mathrm{ad}$ の定義／交換子の第 1 引数の $\mathbb C$ 線型性／$\mathrm{ad}$ の定義。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check（300 ブロック）・PDF 324 ページ通過。
+  レビュー: 前 tick の `claim_qbar_linear_factor_pow_mul_leading_coeff` の本文（出発点三段・冪の等式二段・一歩四段）と Lean 具体版（`calc` 三段・四段）を突き合わせて一致。修正なし。
+
+### 前進の記録
+
+- 2026-08-17（tick 385）: 台帳の先頭行「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」を四層で閉じ、`claim_qbar_linear_factor_pow_divides_exponent_le` を `claim_qbar_linear_factor_pow_mul_leading_coeff` の直後に置いた。背理法（整除の証人 $g\ne0$、非零係数の番号の最大元 $m$、`claim_qbar_linear_factor_pow_mul_leading_coeff` で $\mathrm{ac}_{m+k}(f)=\mathrm{ac}_m(g)\ne0$、$m+k\le n$、$k\le n$）。SageMath（$k\le5$、上界 2 通り）、Lean 具体版・必要十分版（可換環）・導出版、sorry 検査 1345 件。式変形統一: 姉妹側「$H$ と $\hat Z$・$\hat Y$ の交換子の入れ子」（`008_TV1_hatZ_hatY_part1.ts`）の補題 1 で、散文中の $\mathrm{ad}_{\alpha X}(W)=[\alpha X,W]=\alpha[X,W]=\alpha\,\mathrm{ad}_X(W)$ を一続き三段（行末根拠つき）へ揃えた（内容は不変）。姉妹側の check（300 ブロック）・PDF 324 ページ通過。
+- 2026-08-17（tick 384）: 台帳の先頭行「零点密度: 一次因子の冪との積の先頭の係数はもとの先頭の係数」を四層で閉じ、`claim_qbar_linear_factor_pow_mul_leading_coeff` を `claim_qbar_linear_factor_pow_mul_coeff_bound` の直後に置いた。$j$ の帰納法（一歩は前主張の上界 $m+j$・冪の等式・`claim_qbar_poly_linear_factor_leading_coeff`・帰納法の仮定の一続き四段）。SageMath（$j\le5$、上界 2 通り）、Lean 具体版・必要十分版（可換環）・導出版、sorry 検査 1342 件。式変形統一: 姉妹側「$H$ と $\hat Z$・$\hat Y$ の交換子の入れ子」（`008_TV1_hatZ_hatY_part1.ts`）の証明の冒頭で、散文中の交換子の双線型性の二等号の鎖 $[\alpha X,\beta W]=(\alpha X)(\beta W)-(\beta W)(\alpha X)=\alpha\beta(XW-WX)$ を一続き四段（行末根拠つき）へ揃えた（内容は不変）。姉妹側の check（300 ブロック）・PDF 324 ページ通過。
+- 2026-08-17（tick 383）: 台帳の先頭行「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」を三行へ割った（一次因子の冪との積の係数の上界／冪との積の先頭の係数／指数 $k\le n$）。その最初「一次因子の冪との積の係数は、上界と指数の和より上の番号で零である」を四層で閉じ、`claim_qbar_linear_factor_pow_mul_coeff_bound` を `def_qbar_linear_factor_power_divides` の直後に置いた。SageMath（$j\le5$）、Lean 具体版・必要十分版（可換環）・導出版、sorry 検査 1339 件。式変形統一: 姉妹側「$\hat T V_1$ と $\hat Z$・$\hat Y$」（`008_TV1_hatZ_hatY_part1.ts`）で、散文中の $i^n$ の値の二等号・三等号の鎖を一続きへ揃えた（内容は不変）。姉妹側の check（300 ブロック）・PDF 324 ページ通過。
+- 2026-08-17（tick 382）: 台帳の先頭行「零点密度: 重複度付きの個数への精密化」を六行へ割った（一次因子の冪による整除の定義／整除する指数の上界／根の重複度の定義／重複度 1 以上と根の一致／有限集合上の重複度の和の上界／$N^{\mathrm{mult}}_L(c,r)$ の定義と挟み込み）。その最初「代数的数係数多項式が一次因子の冪で割り切れること」を本文・Lean 具体版で閉じ、`def_qbar_linear_factor_power_divides` を `def_fisher_zero_density_limsup_liminf` の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1336 件。式変形統一: 姉妹側「$\exp(X)Y\exp(-X)=\exp(\mathrm{ad}_X)(Y)$ の証明」（`005_exp_conjugation_proof.ts`）Step 3 の散文中の $\frac1{m!}\binom mk$ の二等号の鎖を一続き二段（行末根拠つき）へ揃えた（内容は不変。姉妹側 check・PDF 324 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 384）: 前 tick の「一次因子の冪との積の先頭の係数はもとの先頭の係数」の本文（帰納法。出発点三段・冪の等式二段・一歩四段）と Lean 具体版（`induction j`、`calc` 三段・四段、`Nat.add_assoc`、`qbarLinearFactorPowMulCoeffBound`、`qbarPolyLinearFactorLeadingCoeff`）・必要十分版（可換環）を突き合わせ、一致した。修正なし。
+- 2026-08-17（tick 383）: 前 tick の「一次因子の冪との積の係数は、上界と指数の和より上の番号で零である」の本文と Lean 具体版・必要十分版を突き合わせ、一致した。修正なし。
+- 2026-08-17（tick 382）: 前 tick の「代数的数係数多項式が一次因子の冪で割り切れること」の本文と Lean 具体版を突き合わせ、一致した。修正なし。
+
 
 ## 2026-08-17 tick 389 で台帳から移した記録（tick 384・383・382 分）
 
