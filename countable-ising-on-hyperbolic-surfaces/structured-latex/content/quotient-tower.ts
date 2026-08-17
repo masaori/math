@@ -318,4 +318,154 @@ H_R^{\mathrm{coarse}}
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_coset_cell_incidence_forward_preservation",
+    kind: "theorem",
+    title: { text: "商の塔における剰余類セル incidence の順方向保存" },
+    labels: ["theorem_quotient_tower_coset_cell_incidence_forward_preservation"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-incidence-forward-preservation"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導剰余類セル写像を取る。役割対 ",
+        math(String.raw`(R,S)\in\{(F,V),(F,E),(V,E)\}`),
+        "、元 ",
+        math(String.raw`g,k\in Q_{\mathrm{fine}}`),
+        "、および細段セル",
+      ]),
+      displayMath(String.raw`c_R:=
+\left(
+  \mathtt{fine},
+  R,
+  gH_R^{\mathrm{fine}}
+\right)
+\in\mathcal C_R^{\mathrm{fine}},
+\qquad
+c_S:=
+\left(
+  \mathtt{fine},
+  S,
+  kH_S^{\mathrm{fine}}
+\right)
+\in\mathcal C_S^{\mathrm{fine}}`),
+      paragraph([
+        "に対して、細段での incidence は粗段での incidence を含意する。すなわち、",
+      ]),
+      displayMath(String.raw`(c_R,c_S)\in\mathcal I_{Q_{\mathrm{fine}}}
+\quad\Longrightarrow\quad
+\left(
+  \overline\kappa_R(c_R),
+  \overline\kappa_S(c_S)
+\right)
+\in\mathcal I_{Q_{\mathrm{coarse}}}.`),
+    ],
+    proof: [
+      paragraph([
+        "役割対 ",
+        math(String.raw`(R,S)\in\{(F,V),(F,E),(V,E)\}`),
+        " と細段で incident なセル ",
+        math(String.raw`c_R,c_S`),
+        " を固定する。",
+        ref("def_finite_quotient_coset_cell_incidence_relation"),
+        " の incidence の定義より、ある ",
+        math(String.raw`x\in Q_{\mathrm{fine}}`),
+        "、",
+        math(String.raw`h_R\in H_R^{\mathrm{fine}}`),
+        "、",
+        math(String.raw`h_S\in H_S^{\mathrm{fine}}`),
+        " が存在して",
+      ]),
+      displayMath(String.raw`x
+=
+gh_R
+=
+kh_S.`),
+      paragraph([
+        ref("def_two_stage_finite_quotient_tower_input"),
+        " の群準同型 ",
+        math(String.raw`\kappa`),
+        " より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(x)
+&=
+\kappa(gh_R)
+&&\bigl(\because\ x=gh_R\bigr)\\
+&=
+\kappa(g)\kappa(h_R)
+&&\bigl(\because\ \kappa\text{ は群準同型}\bigr)\\
+\kappa(x)
+&=
+\kappa(kh_S)
+&&\bigl(\because\ x=kh_S\bigr)\\
+&=
+\kappa(k)\kappa(h_S)
+&&\bigl(\because\ \kappa\text{ は群準同型}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の部分群像の等式より、",
+      ]),
+      displayMath(String.raw`\kappa(g)\kappa\left(H_R^{\mathrm{fine}}\right)
+=
+\kappa(g)H_R^{\mathrm{coarse}}.`),
+      paragraph([
+        math(String.raw`h_R\in H_R^{\mathrm{fine}}`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\kappa(g)\kappa(h_R)
+\in
+\kappa(g)H_R^{\mathrm{coarse}}.`),
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の部分群像の等式より、",
+      ]),
+      displayMath(String.raw`\kappa(k)\kappa\left(H_S^{\mathrm{fine}}\right)
+=
+\kappa(k)H_S^{\mathrm{coarse}}.`),
+      paragraph([
+        math(String.raw`h_S\in H_S^{\mathrm{fine}}`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\kappa(k)\kappa(h_S)
+\in
+\kappa(k)H_S^{\mathrm{coarse}}.`),
+      paragraph([
+        "以上の四つの等式と二つの所属関係により、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(x)
+&\in
+\kappa(g)H_R^{\mathrm{coarse}},\\
+\kappa(x)
+&\in
+\kappa(k)H_S^{\mathrm{coarse}}.
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\kappa(x)`),
+        " は二つの粗段剰余類の共通元であるから、",
+      ]),
+      displayMath(String.raw`\kappa(g)H_R^{\mathrm{coarse}}
+\cap
+\kappa(k)H_S^{\mathrm{coarse}}
+\ne\varnothing.`),
+      paragraph([
+        ref("def_finite_quotient_coset_cell_incidence_relation"),
+        " の incidence の定義と、",
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導写像の定義より、",
+      ]),
+      displayMath(String.raw`\left(
+  \overline\kappa_R(c_R),
+  \overline\kappa_S(c_S)
+\right)
+\in
+\mathcal I_{Q_{\mathrm{coarse}}}.`),
+      paragraph([
+        "全ての群、部分群、剰余類、写像、量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
