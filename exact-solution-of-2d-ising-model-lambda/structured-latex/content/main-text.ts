@@ -47846,6 +47846,100 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_integer_polynomial_qbar_lift_evaluation",
+    kind: "claim",
+    title: { text: "持ち上げの値は整係数多項式の代数的数における値に一致する" },
+    labels: ["claim_integer_polynomial_qbar_lift_evaluation"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_coeff_eq_zero_of_natDegree_lt",
+      "Ising2DLambda.ThermodynamicLimit.qbarPolyEval_integerPolynomialQbarLift",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.lift_eval_eq_of_coeff_eq_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarPolyEval_integerPolynomialQbarLift_from_necSuf",
+    ],
+    verification: ["sagemath/check/integer-polynomial-qbar-lift-evaluation"],
+    statement: [
+      paragraph([
+        math(String.raw`f=\sum_{m=0}^{n}a_m x^{m}\in\mathbb{Z}[x]`),
+        "（",
+        math(String.raw`n\in\mathbb{N}`),
+        "、",
+        math(String.raw`a_0,\dots,a_n\in\mathbb{Z}`),
+        "）と ",
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_algebraic_numbers"),
+        "）を任意に取る。このとき、",
+        math(String.raw`f`),
+        " の持ち上げ ",
+        math(String.raw`\widehat{f}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+        "（",
+        ref("def_integer_polynomial_qbar_lift"),
+        "）の ",
+        math(String.raw`\xi`),
+        " における値（",
+        ref("def_qbar_poly_evaluation"),
+        "）は、",
+        math(String.raw`f`),
+        " の ",
+        math(String.raw`\xi`),
+        " における値（",
+        ref("def_qbar_polynomial_evaluation"),
+        "）に一致する。",
+      ]),
+      displayMath(String.raw`\mathrm{aev}_{\xi}\bigl(\widehat{f}^{\,F}\bigr)=\mathrm{Ev}^{F}_{\xi}(f)`),
+      paragraph([
+        "両辺とも代数的数の有限和・有限積であり、実数体も複素数体も現れない。",
+        "とくに ",
+        math(String.raw`\xi`),
+        " が ",
+        math(String.raw`\widehat{f}^{\,F}`),
+        " の根であることと ",
+        math(String.raw`\mathrm{Ev}^{F}_{\xi}(f)=0`),
+        " とは同じことである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`n<k`),
+        " を満たすならば ",
+        math(String.raw`\mathrm{ac}_k(\widehat{f}^{\,F})=0`),
+        " である（",
+        ref("def_integer_polynomial_qbar_lift"),
+        " の定義式の下の場合）。したがって ",
+        math(String.raw`\widehat{f}^{\,F}`),
+        " と ",
+        math(String.raw`n`),
+        " は ",
+        ref("claim_qbar_evaluation_coefficient_sum"),
+        " の仮定を満たす。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{\xi}\bigl(\widehat{f}^{\,F}\bigr)
+&=\sum_{k=0}^{n}\mathrm{ac}_k\bigl(\widehat{f}^{\,F}\bigr)\cdot\xi^{\,k}
+&&(\because\ \blkref{claim_qbar_evaluation_coefficient_sum})\\
+&=\sum_{k=0}^{n}a_k\cdot\xi^{\,k}
+&&(\because\ \blkref{def_integer_polynomial_qbar_lift}\ \text{の定義式の上の場合}\ (k\le n)\ \text{を各項へ同時に当てる})\\
+&=\mathrm{Ev}^{F}_{\xi}(f)
+&&(\because\ \blkref{def_qbar_polynomial_evaluation}\ \text{の定義式})
+\end{aligned}`),
+      paragraph([
+        "最後の文は、",
+        math(String.raw`\xi`),
+        " が ",
+        math(String.raw`\widehat{f}^{\,F}`),
+        " の根であるとは ",
+        math(String.raw`\mathrm{aev}_{\xi}(\widehat{f}^{\,F})=0`),
+        " のことなので（",
+        ref("claim_qbar_distinct_roots_card_bound"),
+        " の仮定と同じ書き方）、いま示した等号から従う。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -47862,9 +47956,7 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（持ち上げの値と ",
-          math(String.raw`\mathrm{Ev}^{F}`),
-          " の一致、有限格子の Fisher 零点の有限部分集合の個数の上界と ",
+          "「熱力学極限」の残り: 零点密度（有限格子の Fisher 零点の有限部分集合の個数の上界と ",
           math(String.raw`\mathcal{F}_L`),
           " の有限性、有理円板内の Fisher 零点の個数 ",
           math(String.raw`N_L(c,r)\in\mathbb{N}`),

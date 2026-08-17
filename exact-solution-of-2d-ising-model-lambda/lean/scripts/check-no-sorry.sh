@@ -1358,6 +1358,10 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity_eq_openSquare_of_le_one
   Ising2DLambda.ThermodynamicLimit.distanceSquaredToRationalPoint_real_axis
   Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_coeff
+  Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_coeff_eq_zero_of_natDegree_lt
+  Ising2DLambda.ThermodynamicLimit.qbarPolyEval_integerPolynomialQbarLift
+  Ising2DLambda.NecSuf.ThermodynamicLimit.lift_eval_eq_of_coeff_eq_necSuf
+  Ising2DLambda.ThermodynamicLimit.qbarPolyEval_integerPolynomialQbarLift_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -598,17 +598,38 @@ u
         math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
         " は単射なので実数の等式 ",
         math(String.raw`\|A-tB\|^2=\|A\|^2-|u|^2/\|B\|^2`),
-        " を得る。左辺は ",
+        " を得る。これと ",
         ref("matrix_norm_triangle_inequality"),
-        " (1) より ",
-        math(String.raw`\ge 0`),
-        " であるから ",
+        " (1) から",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0 &\le \|A-tB\|^2
+   \quad (\because \text{ノルムの基本性質（非退化性・斉次性・三角不等式）の (1)}) \\
+  &= \|A\|^2-\frac{|u|^2}{\|B\|^2}
+   \quad (\because \text{直前の実数の等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
         math(String.raw`|u|^2/\|B\|^2\le\|A\|^2`),
-        "、両辺に ",
-        math(String.raw`\|B\|^2>0`),
-        " を掛けて ",
-        math(String.raw`|u|^2\le\|A\|^2\|B\|^2=\left(\|A\|\,\|B\|\right)^2`),
-        "。",
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の移項）。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|u|^2
+&= \frac{|u|^2}{\|B\|^2}\cdot\|B\|^2
+   \quad (\because \|B\|^2>0 \text{ と } \mathbb{R} \text{ の四則}) \\
+&\le \|A\|^2\cdot\|B\|^2
+   \quad (\because \text{直前の不等式の両辺に正の数 } \|B\|^2 \text{ を掛ける}) \\
+&= \left(\|A\|\,\|B\|\right)^2
+   \quad (\because \mathbb{R} \text{ の乗法の可換性と結合性})
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
         math(String.raw`|u|\ge 0`),
         " かつ ",
         math(String.raw`\|A\|\,\|B\|\ge 0`),

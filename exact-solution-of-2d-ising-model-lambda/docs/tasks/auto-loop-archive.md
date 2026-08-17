@@ -4,6 +4,26 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 376 で台帳から移した記録（tick 371 分）
+
+### 現在地
+
+- **2026-08-17 の tick 371 は、台帳の先頭行「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_open_square_density_lower_set_subset_periodic_le_one`（`claim_periodic_density_lower_set_subset_open_square_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{op}}(q)\subset A^{\mathrm{per}}(q)$。証明は $\mu$ の証人 $(\varepsilon,N)$ から、準備の第一（証人の半分 $\varepsilon':=\tfrac12\cdot\varepsilon$。$\varepsilon'+\varepsilon'=\varepsilon$ の三段・$0=0\cdot\varepsilon\le\varepsilon'$・$\varepsilon'\ne0$）、第二（$\delta:=-\iota(\log q)$ の符号。`claim_rational_embedded_log_order_iff` を $q':=1$ で・`claim_rational_log_order_group_neg_reverses_order`・`claim_rational_log_order_group_scalar_compare_nonneg`）、第三（`claim_rational_log_order_group_archimedean` の倍率 $n$、$N':=N+n$）、第四（`claim_rational_log_order_group_div_ge_multiplier_le` で $\tfrac1L\cdot(2\cdot\delta)\le\varepsilon'$、一続き五段で $-\varepsilon'\le\tfrac2L\cdot\iota(\log q)$）、本体の一続き八段（加法群の等式五段・`claim_rational_log_order_group_add_monotone` 二回・`claim_periodic_open_boundary_comparison_density_le_one` の左）。有理数倍の $0\cdot\lambda=0$・$-0=0$・$-(r\cdot(-\lambda))=r\cdot\lambda$ は独立ブロックにせず、行末の $(\because\ \dots)$ に「素数ごとに読む」と書いた。
+  SageMath `check/open-square-density-lower-set-subset-periodic/`（$L\le3$、有理点 6 点、証人 1632 組（密度を要する段が空でない 931 組）、662530 検査、10 秒。`ZZ`/`QQ` の厳密計算。Archimedes の倍率は最小の $n$ を有限探索）。Lean 具体版 `ThermodynamicLimit/OpenSquareDensityLowerSetSubsetPeriodic.lean`（`half_add_half_eq`・`rationalLogOrderLE_zero_half_of_nonneg`・`half_ne_zero_of_ne_zero`・`rationalLogOrderLE_zero_neg_toRational_logRat_of_le_one`・`rationalLogOrderLE_neg_le_scaled_toRational_logRat`・`openSquareDensityLowerSet_subset_periodicDensityLowerSet_of_le_one`）、必要十分版 `NecSuf/ThermodynamicLimit/OpenSquareDensityLowerSetSubsetPeriodic.lean`（`lowerSetOfSequence_subset_of_eventually_le_add_error_necSuf`。仮定は `AddCommGroup`（八段の鎖の等式と七段目の並べ替え）・推移律・右加法単調性・証人の半分の存在・誤差列が正の元の逆元をやがて下回らないこと・$L\ge1$ での項ごとの比較。有理数倍と Archimedes 性は仮定の形にして具体版へ押し出した）、導出版 `OpenSquareDensityLowerSetSubsetPeriodicFromNecSuf.lean`。sorry 検査 1293 件。check 460 ブロック・verify-check-linkage 255 件・PDF 251 ページ通過。
+  式変形統一: 姉妹側「クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）」（`linear_space_general_000_definition_kronecker_product`、`def_kronecker`）の定義内 Step 3（単射性）で、根拠なしの二つの式（$\nu(I)-\nu(J)$ の分解、残りの和の絶対値の評価）を、$\nu$ の定義から始まる一続き四段と、三角不等式・各項の評価・添字の置き換え・Step 2 の等比和・狭義不等号の一続き五段へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `def_periodic_density_lower_set`・`claim_periodic_density_lower_set_subset_open_square_le_one` の本文（証人の引き継ぎ・一続き二段）と Lean 具体版（`periodicDensitySequence`・`mem_…_iff`・`h1`/`h2`・推移律）を突き合わせて一致。`remark_real_escape_plan` の冒頭「直前の三つの定義と四つの主張」は、その間に周期境界の下組の定義と主張が入って「直前」でなくなっていたので「実数体を扱う三つの定義と四つの主張」へ直した（散文のみ）。次は「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ は $f^{\mathrm{op}}(q)$ に等しい（q は 1 以下）」。
+
+### 前進の記録
+
+- 2026-08-17（tick 371）: 台帳の先頭行「開境界正方形の密度の下組は周期境界の下組に含まれる（Archimedes 性。q は 1 以下）」を四層で閉じ、`claim_open_square_density_lower_set_subset_periodic_le_one` を周期境界の下組の包含の直後に置いた。SageMath 662530 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1293 件。式変形統一: 姉妹側「クロネッカー積」定義内 Step 3（単射性）の二つの式を一続き四段・五段と行末根拠へ（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 371）: 前 tick の「周期境界の密度の列が定める下組」と「周期境界の密度の下組は開境界正方形の密度の下組に含まれる」の本文と Lean 具体版・必要十分版・導出版を突き合わせ、根拠が一致した。`remark_real_escape_plan` の冒頭の「直前の」が実態と合わなくなっていたので「実数体を扱う」へ直した（散文のみ）。
+  「何も言っていない主張」の観点: 今 tick の包含は、前 tick の包含と合わせて集合の等号を与えるので残す。$0\cdot\lambda=0$・$-0=0$・$-(r\cdot(-\lambda))=r\cdot\lambda$・証人の半分の三性質・$\delta$ の符号は独立ブロックにせず、証明の準備と行末の $(\because\ \dots)$ に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。
+
+
 ## 2026-08-17 tick 375 で台帳から移した記録（tick 370 分）
 
 ### 現在地

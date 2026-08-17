@@ -45,6 +45,7 @@ export const ALL_LABELS = [
   "claim_gluing_restriction_family",
   "claim_high_temperature_polynomial_identity",
   "claim_high_temperature_sector_decomposition",
+  "claim_integer_polynomial_qbar_lift_evaluation",
   "claim_inter_row_shift_invariant",
   "claim_intra_row_shift_invariant",
   "claim_inversion_count_orbit_decomposition",
