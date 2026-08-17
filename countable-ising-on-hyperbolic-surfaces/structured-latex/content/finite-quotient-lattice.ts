@@ -180,4 +180,81 @@ Q/H_E
       ]),
     ],
   },
+  {
+    id: "finite_quotient_lattice_definition_coset_cell_incidence_relation",
+    kind: "definition",
+    title: { text: "剰余類セル間の incidence 関係" },
+    labels: ["def_finite_quotient_coset_cell_incidence_relation"],
+    habitat: "finite",
+    verification: ["sagemath/check/finite-quotient-coset-cell-incidence"],
+    statement: [
+      paragraph([
+        ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"),
+        " の三つの剰余類セル集合に対し、面・頂点、面・辺、頂点・辺の incidence を一つに集めた有限関係 ",
+        math(String.raw`\mathcal I_Q`),
+        " を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal I_Q
+&:=
+\left\{
+  \left(
+    (\mathtt{face},C_F),
+    (\mathtt{vertex},C_V)
+  \right)
+  \middle|
+  \begin{array}{c}
+  C_F\in Q/H_F,\ C_V\in Q/H_V,\\
+  C_F\cap C_V\ne\varnothing
+  \end{array}
+\right\}\\
+&\quad\cup
+\left\{
+  \left(
+    (\mathtt{face},C_F),
+    (\mathtt{edge},C_E)
+  \right)
+  \middle|
+  \begin{array}{c}
+  C_F\in Q/H_F,\ C_E\in Q/H_E,\\
+  C_F\cap C_E\ne\varnothing
+  \end{array}
+\right\}\\
+&\quad\cup
+\left\{
+  \left(
+    (\mathtt{vertex},C_V),
+    (\mathtt{edge},C_E)
+  \right)
+  \middle|
+  \begin{array}{c}
+  C_V\in Q/H_V,\ C_E\in Q/H_E,\\
+  C_V\cap C_E\ne\varnothing
+  \end{array}
+\right\}.
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`C_F,C_V,C_E`),
+        " はそれぞれ有限群 ",
+        math(String.raw`Q`),
+        " の部分集合である左剰余類そのものであり、代表元ではない。したがって incidence の真偽は有限集合の共通元の有無だけで決まり、代表元の選択に依存しない。実際、",
+        math(String.raw`R,S\in\{F,V,E\}`),
+        "、",
+        math(String.raw`g,k\in Q`),
+        " に対して",
+      ]),
+      displayMath(String.raw`gH_R\cap kH_S\ne\varnothing
+\quad\Longleftrightarrow\quad
+\exists h_R\in H_R\ \exists h_S\in H_S
+\quad gh_R=kh_S`),
+      paragraph([
+        "である。右辺で選ぶ ",
+        math(String.raw`g,k`),
+        " を同じ左剰余類の別の元へ替えても、左辺の二つの部分集合は変わらない。関係 ",
+        math(String.raw`\mathcal I_Q`),
+        " はセル間の incidence だけを与え、端点の役割、面境界の巡回順序、閉曲面性、正則性、向き付けを結論しない。全ての対象と量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
