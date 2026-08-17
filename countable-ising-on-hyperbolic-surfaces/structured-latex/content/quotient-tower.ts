@@ -468,4 +468,59 @@ kh_S.`),
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_oriented_edge_representative_selector_compatibility",
+    kind: "definition",
+    title: { text: "商の塔における向き付き辺代表元選択の整合性" },
+    labels: ["def_quotient_tower_oriented_edge_representative_selector_compatibility"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-oriented-edge-representative-selectors"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の辺セル写像と、",
+        ref("def_finite_quotient_oriented_coset_edge_endpoint_data"),
+        " の代表元選択写像全体を取る。細段と粗段を同一視せず、二つの有限写像",
+      ]),
+      displayMath(String.raw`\eta_E^{\mathrm{fine}}
+\in
+\operatorname{Rep}_E\left(Q_{\mathrm{fine}}\right),
+\qquad
+\eta_E^{\mathrm{coarse}}
+\in
+\operatorname{Rep}_E\left(Q_{\mathrm{coarse}}\right)`),
+      paragraph([
+        "をそれぞれ選ぶ。対 ",
+        math(String.raw`\left(\eta_E^{\mathrm{fine}},\eta_E^{\mathrm{coarse}}\right)`),
+        " が段間全射群準同型 ",
+        math(String.raw`\kappa`),
+        " と整合するとは、全ての細段辺剰余類 ",
+        math(String.raw`C_E\in Q_{\mathrm{fine}}/H_E^{\mathrm{fine}}`),
+        " と粗段辺剰余類 ",
+        math(String.raw`D_E\in Q_{\mathrm{coarse}}/H_E^{\mathrm{coarse}}`),
+        " に対して次の含意が成り立つことと定める。",
+      ]),
+      displayMath(String.raw`\overline\kappa_E
+\left(
+  \mathtt{fine},
+  E,
+  C_E
+\right)
+=
+\left(
+  \mathtt{coarse},
+  E,
+  D_E
+\right)
+\quad\Longrightarrow\quad
+\kappa\left(\eta_E^{\mathrm{fine}}(C_E)\right)
+=
+\eta_E^{\mathrm{coarse}}(D_E).`),
+      paragraph([
+        "左辺の等式は、細段辺セルの像である粗段辺セル ",
+        math(String.raw`D_E`),
+        " を代表元に依存せずに指定する。右辺は、そのセルを選んだ後で、細段の向きを指定する群元の像と粗段の向きを指定する群元とが一致することを要求する。したがって二段の代表元選択を名前だけで揃えず、始域と終域をもつ写像の可換条件として固定する。この定義だけから端点写像または面境界語の保存は結論しない。全ての群、剰余類、写像、量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
