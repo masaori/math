@@ -1343,23 +1343,43 @@ i\,(-1)^{(n-1)/2} & (n \text{ 奇数}) \\
 \end{cases}`,
       ),
       paragraph([
-        "が成り立つ。実際 ",
-        math(String.raw`i^2 = -1`),
-        " より、",
+        "が成り立つ。実際、",
         math(String.raw`n`),
-        " が偶数なら ",
-        math(String.raw`i^n = (i^2)^{n/2} = (-1)^{n/2}`),
-        "、",
-        math(String.raw`n`),
-        " が奇数なら ",
-        math(String.raw`i^n = i\cdot i^{n-1} = i\,(i^2)^{(n-1)/2} = i\,(-1)^{(n-1)/2}`),
-        " である（",
-        math(String.raw`n`),
-        " 奇数のとき ",
-        math(String.raw`(n-1)/2 \in \mathbb{Z}_{\geq 0}`),
-        "、偶数のとき ",
+        " が偶数のとき ",
         math(String.raw`n/2 \in \mathbb{Z}_{\geq 0}`),
-        " なので、いずれの指数も整数である）。",
+        "、奇数のとき ",
+        math(String.raw`(n-1)/2 \in \mathbb{Z}_{\geq 0}`),
+        " なので、以下の指数はいずれも整数である。",
+        math(String.raw`n`),
+        " が偶数なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+i^n
+&= (i^2)^{n/2}
+   \quad (\because \text{指数法則 } (i^2)^{n/2}=i^{2\cdot(n/2)}=i^{n}) \\
+&= (-1)^{n/2}
+   \quad (\because i^2=-1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`n`),
+        " が奇数なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+i^n
+&= i\cdot i^{n-1}
+   \quad (\because \text{指数法則 } i^{1+(n-1)}=i\cdot i^{n-1}) \\
+&= i\,(i^2)^{(n-1)/2}
+   \quad (\because \text{指数法則 } (i^2)^{(n-1)/2}=i^{2\cdot((n-1)/2)}=i^{n-1}) \\
+&= i\,(-1)^{(n-1)/2}
+   \quad (\because i^2=-1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
       ]),
       paragraph([
         "(h1.z) について、",
