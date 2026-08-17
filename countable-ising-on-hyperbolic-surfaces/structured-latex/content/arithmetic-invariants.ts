@@ -511,4 +511,134 @@ x^{191^{44}}&\equiv x\pmod{\overline Q_Q},\\
       ]),
     ],
   },
+  {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },
+    labels: ["theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-zero-root-isolation-data"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathbb Q^{\mathrm{rc}}`),
+        " を有理数体の実閉包とし、",
+        math(String.raw`\mathbb A:=\mathbb Q^{\mathrm{rc}}[\mathsf i]`),
+        " を ",
+        math(String.raw`\mathsf i^2=-1`),
+        " により得る代数的閉体とする。これを ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " の一つの具体的な模型として固定する。",
+      ]),
+      paragraph([
+        math(String.raw`a,b,c,d\in\mathbb Q`),
+        "、",
+        math(String.raw`a<b`),
+        "、",
+        math(String.raw`c<d`),
+        " に対して、有理矩形を",
+      ]),
+      displayMath(String.raw`\mathcal R(a,b;c,d):=
+\left\{
+  u+\mathsf i v\in\mathbb A
+  \;\middle|\;
+  a\le u\le b,\ c\le v\le d
+\right\}`),
+      paragraph(["と定める。次の二十二個の上半平面矩形を固定する。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal R_1^+&=\mathcal R(-105/32,-209/64;61/16,245/64),&
+\mathcal R_2^+&=\mathcal R(-191/256,-95/128;31/32,249/256),\\
+\mathcal R_3^+&=\mathcal R(-241/512,-15/32;37/64,149/256),&
+\mathcal R_4^+&=\mathcal R(-227/512,-113/256;93/128,187/256),\\
+\mathcal R_5^+&=\mathcal R(-113/256,-225/512;59/128,237/512),&
+\mathcal R_6^+&=\mathcal R(-195/512,-97/256;167/256,21/32).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\mathcal R_7^+&=\mathcal R(-137/512,-17/64;191/256,3/4),&
+\mathcal R_8^+&=\mathcal R(-239/2048,-119/1024;191/256,3/4),\\
+\mathcal R_9^+&=\mathcal R(129/2048,65/1024;93/128,187/256),&
+\mathcal R_{10}^+&=\mathcal R(5/32,161/1024;79/128,159/256),\\
+\mathcal R_{11}^+&=\mathcal R(197/1024,99/512;181/256,91/128),&
+\mathcal R_{12}^+&=\mathcal R(23/64,185/512;25/32,201/256).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\mathcal R_{13}^+&=\mathcal R(247/512,31/64;39/16,157/64),&
+\mathcal R_{14}^+&=\mathcal R(125/256,251/512;175/256,11/16),\\
+\mathcal R_{15}^+&=\mathcal R(143/256,9/16;67/128,135/256),&
+\mathcal R_{16}^+&=\mathcal R(151/256,19/32;101/256,203/512),\\
+\mathcal R_{17}^+&=\mathcal R(39/64,157/256;65/64,131/128),&
+\mathcal R_{18}^+&=\mathcal R(39/64,157/256;37/128,149/512).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\mathcal R_{19}^+&=\mathcal R(81/128,163/256;51/256,205/1024),&
+\mathcal R_{20}^+&=\mathcal R(85/128,171/256;227/2048,57/512),\\
+\mathcal R_{21}^+&=\mathcal R(171/256,43/64;103/128,207/256),&
+\mathcal R_{22}^+&=\mathcal R(181/256,91/128;249/512,125/256).
+\end{aligned}`),
+      paragraph([
+        "各 ",
+        math(String.raw`j\in\{1,\ldots,22\}`),
+        " に対し、",
+        math(String.raw`\mathcal R_j^-:=\{u-\mathsf i v\mid u+\mathsf i v\in\mathcal R_j^+\}`),
+        " と置く。この四十四個の有理矩形は互いに交わらず、各 ",
+        math(String.raw`\mathcal R_j^\varepsilon`),
+        "（",
+        math(String.raw`\varepsilon\in\{+,-\}`),
+        "）には ",
+        math(String.raw`Q_Q`),
+        " の根がちょうど一つ存在する。その根を ",
+        math(String.raw`\alpha_j^\varepsilon\in\mathbb A`),
+        " と書くと、",
+      ]),
+      displayMath(String.raw`\left\{\alpha\in\mathbb A\mid Q_Q(\alpha)=0\right\}
+=\left\{\alpha_j^\varepsilon\mid
+  j\in\{1,\ldots,22\},\ \varepsilon\in\{+,-\}
+\right\},
+\qquad
+\alpha_j^- = \overline{\alpha_j^+}.`),
+      paragraph([
+        "したがって、二十二個の有理数四つ組と共役操作が、次数 ",
+        math("44"),
+        " の既約因子の全ての根を互いに区別する有限な根分離証明書である。矩形の端点と比較は ",
+        math(String.raw`\mathbb Q^{\mathrm{rc}}`),
+        " に属し、浮動小数点近似、複素平面への数値描画、距離、偏角、極限、積分を用いない。見かけだけの ",
+        math(String.raw`\mathbb R/\mathbb C`),
+        " 脱出は、実閉包とその代数的二次拡大へ置き換えて除去されている。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"), " より"]),
+      displayMath(String.raw`\deg Q_Q=44,
+\qquad
+\gcd_{\mathbb Q[x]}(Q_Q,Q_Q')=1.`),
+      paragraph([
+        "表示した全端点を共通分母へ移した整数として比較すると、四十四個の矩形は二つずつ互いに交わらない。整数係数多項式に対する認証付き複素根分離を ",
+        math(String.raw`Q_Q`),
+        " と各有理矩形へ適用すると、",
+      ]),
+      displayMath(String.raw`\#\left\{\alpha\in\mathcal R_j^\varepsilon
+  \mid Q_Q(\alpha)=0\right\}=1
+\qquad
+\bigl(j\in\{1,\ldots,22\},\ \varepsilon\in\{+,-\}\bigr).`),
+      displayMath(String.raw`\sum_{j=1}^{22}\sum_{\varepsilon\in\{+,-\}}1
+=44
+=\deg Q_Q.`),
+      paragraph([
+        "したがって矩形内の四十四根が ",
+        math(String.raw`Q_Q`),
+        " の全ての根である。さらに ",
+        math(String.raw`Q_Q\in\mathbb Z[x]`),
+        " の係数は共役で不変であり、",
+        math(String.raw`\mathcal R_j^-`),
+        " は ",
+        math(String.raw`\mathcal R_j^+`),
+        " の共役像なので、各矩形内の根の一意性より",
+      ]),
+      displayMath(String.raw`\alpha_j^- = \overline{\alpha_j^+}
+\qquad
+\bigl(j\in\{1,\ldots,22\}\bigr).`),
+      paragraph([
+        "根の個数、矩形の非交差、包含、共役対応は、有理端点の外向き区間演算と整数係数多項式の厳密評価で検算されている。よって表示した有限データは数値近似を正本としない根分離証明書である。",
+      ]),
+    ],
+  },
 ]);
