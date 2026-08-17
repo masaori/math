@@ -4136,6 +4136,11 @@ Z_L
       "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans",
       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy",
       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans",
+      "Ising2DLambda.AlgebraicEigenvalue.rowIndexCover",
+      "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_iff_exists",
+      "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_eq_lexLess",
+      "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy_from_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans_from_necSuf",
     ],
     verification: ["sagemath/check/row-config-order"],
     statement: [
@@ -14039,6 +14044,14 @@ S(\tau')
       "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_one_or_neg_one",
       "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_mul_self",
       "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_id",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_eq_or",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_mul_self",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.inversionCountOn_id",
+      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.signOn_id",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_eq_one_or_neg_one_from_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_mul_self_from_necSuf",
+      "Ising2DLambda.AlgebraicEigenvalue.orbitPermSign_id_from_necSuf",
     ],
     verification: ["sagemath/check/orbit-permutation-sign-values"],
     statement: [
@@ -35582,6 +35595,12 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "零点と有理点の距離の二乗" },
     labels: ["def_distance_squared_to_rational"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.realClosedComponents",
+      "Ising2DLambda.FisherZero.realClosedComponents_spec",
+      "Ising2DLambda.FisherZero.distanceSquaredToRational",
+      "Ising2DLambda.NecSuf.FisherZero.distanceSquaredOfPair",
+    ],
     verification: ["sagemath/check/distance-squared-to-rational"],
     statement: [
       paragraph([
@@ -35648,6 +35667,11 @@ L^2\,\ell_2+\Phi_L(q)
     title: { text: "距離の二乗の零性は一致と同値である" },
     labels: ["claim_distance_squared_zero_iff_equal"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.distanceSquaredToRational_eq_zero_iff",
+      "Ising2DLambda.NecSuf.FisherZero.distanceSquaredOfPair_eq_zero_iff_necSuf",
+      "Ising2DLambda.FisherZero.distanceSquaredToRational_eq_zero_iff_from_necSuf",
+    ],
     verification: ["sagemath/check/distance-squared-to-rational"],
     statement: [
       paragraph([
@@ -35835,6 +35859,12 @@ w\cdot w
     title: { text: "詰め寄りの述語" },
     labels: ["def_zero_pinching_predicate"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.PositiveRational",
+      "Ising2DLambda.FisherZero.PositiveLatticeSize",
+      "Ising2DLambda.FisherZero.fisherZeroSetAtPositiveSize",
+      "Ising2DLambda.FisherZero.zeroPinchingPredicate",
+    ],
     verification: ["sagemath/check/zero-pinching-predicate"],
     statement: [
       paragraph([
@@ -35931,6 +35961,11 @@ w\cdot w
     title: { text: "零点と正の有理点の距離の二乗は零でない" },
     labels: ["claim_distance_positive_on_fisher_zeros"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.distanceSquaredToPositiveRational_ne_zero",
+      "Ising2DLambda.NecSuf.FisherZero.distance_ne_zero_of_zero_implies_equal_necSuf",
+      "Ising2DLambda.FisherZero.distanceSquaredToPositiveRational_ne_zero_from_necSuf",
+    ],
     verification: ["sagemath/check/zero-pinching-predicate"],
     statement: [
       paragraph([
@@ -35978,6 +36013,9 @@ w\cdot w
     title: { text: "相転移の可算な言明" },
     labels: ["def_phase_transition_countable_statement"],
     habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.phaseTransitionCountableStatement",
+    ],
     verification: ["sagemath/check/zero-pinching-predicate"],
     statement: [
       paragraph([

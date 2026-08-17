@@ -10139,7 +10139,7 @@ PDF（289 ページ・未解決参照 0 件）は通過。この証明ブロッ�
 | 007_hatZ_hatY_anticommutation | 1 | 0（第 1 式・第 2 式まで。第 3・第 4 式は原文自体が「同様」として省略） |
 | 008_TV1_hatZ_hatY_part1 | 14 | 4（「テイラー係数の抽出」まで。tick 108 で 4 式を完了） |
 | 008_TV1_hatZ_hatY_part2 | 25 | 1（最初の主張「gamma1 の偏角」を tick 113 で完了） |
-| 009_eigenvalues_of_V | 15 | 0 |
+| 009_eigenvalues_of_V | 15 | 5（005・006・010・014 は既に規則どおり。tick 367 で「冪等行列のトレースは像の次元」を完了） |
 | 010_transfer_matrix_bridge | 10 | 0 |
 | 011_max_eigenvalue | 8 | 0 |
 | 012_free_energy | 5 | 0 |
@@ -11942,3 +11942,25 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-17（tick 361）: 前 tick の「実数体と実対数」「有理係数の対数順序群の実現写像」の二定義の本文・Lean（`PositiveReal`・`realLog`・`realLog_mul`・`realLog_lt_realLog`・`realLog_le_realLog`・`primePositiveReal`・`realizeRational`・`realizeRational_eq_sum_support`）を突き合わせ、宣言した性質（乗法を加法へ・狭義単調）と定義の形（台に渡る和）が一致した。
   「何も言っていない主張」の観点: 二定義は実数体への脱出の位置と理由を宣言するもので残す。今 tick の有理数倍との可換性は $\rho_{\mathbb R}$ という写像の性質（台の付け替えを含む）で、順序保存の証明が $N$ で割り戻すために引くので残す。**修正 1 件**: `def_rational_log_order_group_realization` の末尾が「加法・有理数倍・順序をどう保つかは続く主張で示す」と加法を約束していたが、台帳のどの行も加法を示さない（順序保存は共通分母と有理数倍だけで閉じる）ので「有理数倍と順序」に直し、加法は述べない旨を添えた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。
+
+## tick 367 で台帳から移した記録（tick 362）
+
+### 現在地
+
+- **2026-08-17 の tick 362 は、台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」が二つの帰納法（整数冪の実対数、台の大きさ）を含むので二行へ割り、その最初「整数冪の実対数は整数倍である（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_real_logarithm_int_power`（`claim_rational_log_order_group_realization_smul` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\log_{\mathbb R}$ の値どうしの等式。乗法を加法へ移すことと $\mathbb R$ の加法群の移項だけ）」）: $u\in\mathbb R_{>0}$、$k\in\mathbb Z$ で $\log_{\mathbb R}(u^k)=\iota_{\mathbb Q\to\mathbb R}(k)\cdot\log_{\mathbb R}(u)$。証明は準備 $\log_{\mathbb R}(1)=0$（$1=1\cdot1$・乗法を加法へ・移項）、自然数冪の帰納法（$n=0$ 三段、$n\to n+1$ 五段）、逆数 $\log_{\mathbb R}(v^{-1})=-\log_{\mathbb R}(v)$（三段・移項）、$k<0$ の六段。狭義単調性は使わない。`remark_real_escape_plan` の冒頭と脱出の項に参照を足した。
+  SageMath `check/real-logarithm-int-power/`（$\ell_p$ を記号のまま持ち、正の有理数 $u=\prod p^{e_p}\mapsto\sum e_p\ell_p$ を「乗法を加法へ移す写像」の模型として各段を検査。1246 検査、3 秒。実数体そのものの上の等式は Lean が担う旨を overview に明記）。Lean 具体版 `ThermodynamicLimit/RealLogarithmIntPower.lean`（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`。`realLog_mul` だけを使い `Real.log_pow`・`Real.log_zpow` は使わない）、必要十分版 `NecSuf/ThermodynamicLimit/RealLogarithmIntPower.lean`（`map_zpow_necSuf`。`[Group G] [AddGroup A]`、写像が乗法を加法へ移すことだけ。可換性・順序・完備性・狭義単調を使わない。`MonoidHom.map_zpow` は使わない）、導出版（`G:={t:\mathbb R\mid 0<t}` の mathlib の群構造。`Positive.coe_zpow` は `rfl`）。sorry 検査 1355 件。check 452 ブロック・PDF 245 ページ通過。
+  レビュー: 前 tick の「実現写像は有理数倍と可換」の本文（準備一つ・一続き六段）と Lean 具体版（`Finsupp.support_smul`・`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum`）を突き合わせて一致。修正なし。次は「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」。
+
+
+### 前進の記録
+
+- 2026-08-17（tick 362）: 台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である」は、整数冪の実対数（$k$ の帰納法と符号の場合分け）と、$\Lambda$ の元の台の大きさの帰納法の二つの論法を含むので二行へ割った。その最初「整数冪の実対数は整数倍である」を実行し、`claim_real_logarithm_int_power` を `claim_rational_log_order_group_realization_smul` の直後に置いた。
+  証明は準備（$\log_{\mathbb R}(1)=0$）・自然数冪の帰納法・逆数・符号の場合分けだけ。SageMath `real-logarithm-int-power`（$\ell_p$ を記号のまま持つ模型）、Lean 具体版・必要十分版（`Group`・`AddGroup`、乗法を加法へ移す写像だけ）・導出版を書き、入口 import・sorry 検査へ 6 件登録（計 1355 件）。式変形統一は一時停止中のため実施せず。
+
+
+### レビュー記録
+
+- 2026-08-17（tick 362）: 前 tick の「実現写像は有理数倍と可換」の本文（台の包含の準備と一続き六段）・SageMath overview（18235 検査）・Lean 具体版（`realizeRational_eq_sum_support`・`Finsupp.support_smul`＋`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）・必要十分版（`MulZeroClass`・`NonUnitalSemiring`、$\iota$ の乗法保存と $\iota(0)=0$）・導出版（`rfl`）を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 有理数倍との可換性は順序保存の証明が $N$ で割り戻すために引く写像の性質で残す。今 tick の整数冪の実対数は、次の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」が各素数について引く形で、乗法を加法へ移すことだけから帰納法で出す実対数の性質（$\mathbb R$ の四則から直ちには従わない）なので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
+

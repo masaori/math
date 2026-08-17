@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 367 は、前 tick の切り出し `ConstantPlusConfiguration.lean` と本文を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行した。
+章「零点の詰め寄り」の五ブロック（`def_distance_squared_to_rational`・`claim_distance_squared_zero_iff_equal`・`def_zero_pinching_predicate`・`claim_distance_positive_on_fisher_zeros`・`def_phase_transition_countable_statement`。行名は「三定義」だったが二主張も `lean:` を欠いていた）と、章「固有値の代数性」の `claim_row_config_order_linear`（導出版 `RowConfigOrderFromNecSuf`）・`claim_orbit_permutation_sign_values`（必要十分版 `signOn_*` と導出版 `OrbitPermutationSignValuesFromNecSuf`）の `lean:` に、既存の Lean 宣言 28 件を足した。中身は本文と Lean で一致し、本文・Lean は変えていない。Lean 対応先 1240 → 1268 件、import 閉包の外は 0 ファイル。sorry 検査 1274 件（登録済みだった）。`lake build`・check・verify-check-linkage 251 件・PDF 247 ページ通過。
+式変形統一を再開し、姉妹側「冪等行列のトレースは像の次元」（`eigenvalues_of_V_003_claim_trace_of_idempotent`）を一続きの形へ書き換えた（姉妹側の生成器は `\blkref` を持たないので根拠には題を書く。姉妹側 check・PDF 323 ページ通過）。姉妹側の残りは 009 以降（`008 part2` の 024・025・031・045・040 も未了）。
+次は「周期境界自由エネルギー密度への移送」（周期境界と開境界の境界評価から導く）。
+
+（tick 366 の記録）
 2026-08-17 の tick 366 は、前 tick の `def_open_square_free_energy_density` の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行した。
 特定は機械的に: 本文の `lean:` に現れる名前を含む Lean ファイルを起点に import の閉包を取り、外にあるファイル 65 個を列挙。55 個は 2026-08-16（`30d11b8a`）に本文から消えた実数値経路の宣言を含んでいた。可算側の主張だけが引く `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero` が実数値経路のファイル（`PartitionValuePositive.lean`・`FreeEnergyDensityLowerBound.lean`）に同居して `FreeEnergyDensity.lean`・`FiniteRealFreeEntropy.lean` を引きずっていたので、`ThermodynamicLimit/ConstantPlusConfiguration.lean`（import は `PartitionPolynomial.Basic` だけ）へ切り出し、`PartitionValueGeOneRational.lean` の import を付け替えて、それら 6 個も消した。**計 61 ファイル削除・1 ファイル新設（792 → 732）。** 入口 `Ising2DLambda.lean` の import と sorry 検査の登録（実在しなくなった 96 件）を外し、登録は 1274 件。`OpenSquareFreeEnergyDensitySup.lean` → `OpenSquareFreeEnergyDensity.lean`、`openSquareFreeEnergyDensitySup*` → `openSquareFreeEnergyDensity*` に改名し、本文の `lean:` と sorry 検査も合わせた。`lake build`・sorry 検査・check（Lean 対応先 1240 件実在）・verify-check-linkage（251 件）・PDF 247 ページ通過。

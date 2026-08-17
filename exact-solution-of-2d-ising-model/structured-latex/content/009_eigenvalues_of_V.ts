@@ -211,26 +211,46 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
         math(String.raw`x \in \mathbb{C}^n`),
         " について ",
         math(String.raw`x = Qx + (x - Qx)`),
-        " と書ける。",
+        " と書け、",
         math(String.raw`Qx \in \mathrm{im}\,Q`),
-        " であり、",
-        math(String.raw`Q(x - Qx) = Qx - Q^2x = Qx - Qx = 0`),
-        " より ",
+        " である。",
         math(String.raw`x - Qx \in \ker Q`),
-        "。よって ",
-        math(String.raw`\mathbb{C}^n = \mathrm{im}\,Q + \ker Q`),
-        "。",
+        " は次の計算による。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+Q(x - Qx)
+&= Qx - Q^2x
+&&(\because\ \text{行列の積の分配則})\\
+&= Qx - Qx
+&&(\because\ Q^2 = Q)\\
+&= 0
+\end{aligned}`),
       paragraph([
-        "また ",
+        "よって ",
+        math(String.raw`\mathbb{C}^n = \mathrm{im}\,Q + \ker Q`),
+        "。また ",
         math(String.raw`y \in \mathrm{im}\,Q \cap \ker Q`),
         " とすると、",
         math(String.raw`y = Qx`),
         " なる ",
-        math(String.raw`x`),
-        " が取れて ",
-        math(String.raw`y = Qx = Q^2 x = Q(Qx) = Qy = 0`),
-        "。よって交わりは ",
+        math(String.raw`x \in \mathbb{C}^n`),
+        " が取れて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y
+&= Qx
+&&(\because\ x\ \text{の取り方})\\
+&= Q^2 x
+&&(\because\ Q = Q^2)\\
+&= Q(Qx)
+&&(\because\ \text{行列の積の結合則})\\
+&= Qy
+&&(\because\ Qx = y)\\
+&= 0
+&&(\because\ y \in \ker Q)
+\end{aligned}`),
+      paragraph([
+        "よって交わりは ",
         math(String.raw`\{0\}`),
         " であり、和は直和である。",
       ]),
@@ -255,13 +275,29 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
         math(String.raw`j \leq r`),
         " のとき ",
         math(String.raw`v_j = Qx_j`),
-        " と書けて ",
-        math(String.raw`Qv_j = Q^2x_j = Qx_j = v_j`),
-        "、",
+        " なる ",
+        math(String.raw`x_j \in \mathbb{C}^n`),
+        " が取れて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Qv_j
+&= Q(Qx_j)
+&&(\because\ v_j = Qx_j)\\
+&= Q^2x_j
+&&(\because\ \text{行列の積の結合則})\\
+&= Qx_j
+&&(\because\ Q^2 = Q)\\
+&= v_j
+&&(\because\ v_j = Qx_j)
+\end{aligned}`),
+      paragraph([
+        "であり、",
         math(String.raw`j > r`),
         " のとき ",
         math(String.raw`Qv_j = 0`),
-        "。よってこの基底に関する ",
+        "（",
+        math(String.raw`v_j \in \ker Q`),
+        "）。よってこの基底に関する ",
         math(String.raw`Q`),
         " の表現行列 ",
         math(String.raw`D`),
@@ -281,12 +317,24 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
         "（可逆）とすると ",
         math(String.raw`D = P^{-1} Q P`),
         " であり、",
-        ref("trace_basic_properties"),
-        " (4) より",
       ]),
-      displayMath(String.raw`\mathrm{tr}(Q) = \mathrm{tr}(P^{-1}QP) = \mathrm{tr}(D) = r`),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}(Q)
+&= \mathrm{tr}(P^{-1}QP)
+&&(\because\ \text{トレースの基本性質 (4)：相似変換でトレースは不変})\\
+&= \mathrm{tr}(D)
+&&(\because\ D = P^{-1}QP)\\
+&= r
+&&(\because\ D\ \text{の対角成分は}\ 1\ \text{が}\ r\ \text{個、}\ 0\ \text{が}\ n-r\ \text{個})
+\end{aligned}`),
+      paragraph([ref("trace_basic_properties"), " (4) を引いた。"]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-17 の式変形統一で、Step 1 の二つの計算（x−Qx∈ker Q、交わりが零）、Step 2 の Qv_j=v_j、Step 3 のトレースの計算を、一続きの等号と行末の根拠へ揃えた。内容は変えていない。",
+      ],
+    },
   },
 
   {
