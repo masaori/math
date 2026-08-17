@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 06:04: 本流「判別式が極限量に効かないことの判定」の Lean 必要十分版を閉じた。`TailShiftLimitAbstract.lean` で、添字写像が極限フィルタを保つこと・項ごとの一致・Hausdorff 空間での極限の一意性だけへ抽象化し、具体版を特殊化として導出した（lake build・sorry 検査 225 件）。並行では 2 次元偶部分グラフ和を $L'=1,L=2$ の全配位・全辺部分集合について SageMath で検証した（linkage 36 件）。レビュー修正なし。次 tick の本流はゴール文書へ戻って標的を引き直し、並行は Kasteleyn–Fisher 表示の一次文献照合。
 - 2026-08-18 05:33: 本流「判別式が極限量に効かないことの判定」の Lean 具体版を閉じた。末尾ずらしの一致補題と `tendsto_tail_one` を合成した `shiftedFreeFiniteBoxQuantitySeq_tendsto`・`shiftedFreeFiniteBoxQuantitySeq_limit_eq` を `TailShiftLimit.lean` に追加（lake build・sorry 検査 222 件通過、PDF 29 ページ）。レビュー修正なし。次 tick は同セクションの Lean 必要十分版を割る。
 - 2026-08-18 05:03: 本流の Lean 具体版で、ずらした自由族の有限箱量の列を定義し、元の有限箱量の列の末尾ずらしに項ごとに一致する補題を形式化した。着手前レビューは check・Lean build・未証明依存検査で修正なし。次 tick はこの等式と `tendsto_tail_one` を合成し、ずらした族の極限量の存在と一致を導く定理で Lean 具体版を閉じる。
 - 2026-08-18 04:31: 開始が締切 8 分前。レビュー（`npm run check` 再実行、101 ブロック・168 参照）修正なし。本文未変更、PDF 再生成。本流の Lean 具体版の束ねを二つへ割った：先頭は「ずらした自由族の有限箱量の列が元の列の末尾ずらしに項ごとに一致する補題」、次に「`tendsto_tail_one` との合成で $\alpha'(q)=\alpha(q)$ を導き Lean 具体版を閉じる定理」。次 tick は割った先頭から。

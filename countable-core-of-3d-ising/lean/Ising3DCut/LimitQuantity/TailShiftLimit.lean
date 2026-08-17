@@ -7,6 +7,7 @@ Lean 具体版・極限側の一段。
 **ここが唯一の ℝ への脱出（箱の大きさの極限）である。**
 -/
 import Ising3DCut.LimitQuantity.FiniteBoxEqualitiesTransfer
+import Ising3DCut.LimitQuantity.TailShiftLimitAbstract
 import Mathlib.Topology.Instances.Real.Lemmas
 
 namespace Ising3DCut.LimitQuantity
@@ -28,7 +29,7 @@ theorem shiftedFreeFiniteBoxQuantitySeq_eq_tail (q : ℚ) (N : ℕ → ℕ) :
 /-- 実数列が極限を持てば、先頭項を除いた列も同じ極限を持つ。 -/
 theorem tendsto_tail_one (a : ℕ → ℝ) (ℓ : ℝ)
     (ha : Tendsto a atTop (𝓝 ℓ)) : Tendsto (fun n => a (n + 1)) atTop (𝓝 ℓ) := by
-  exact ha.comp (tendsto_add_atTop_nat 1)
+  exact tendsto_shift atTop (fun n => n + 1) (tendsto_add_atTop_nat 1) a ℓ ha
 
 /-- 元の有限箱量の列が極限量 `α` を持てば、ずらした自由族の有限箱量の列も
 同じ `α` へ収束する。項ごとの一致 `shiftedFreeFiniteBoxQuantitySeq_eq_tail` と
@@ -36,16 +37,17 @@ theorem tendsto_tail_one (a : ℕ → ℝ) (ℓ : ℝ)
 theorem shiftedFreeFiniteBoxQuantitySeq_tendsto (q : ℚ) (N : ℕ → ℕ) (α : ℝ)
     (h : Tendsto (rootSeq (finiteBoxValueSeq q) N) atTop (𝓝 α)) :
     Tendsto (shiftedFreeFiniteBoxQuantitySeq q N) atTop (𝓝 α) := by
-  have htail := tendsto_tail_one (rootSeq (finiteBoxValueSeq q) N) α h
-  refine htail.congr ?_
-  intro n
-  exact (shiftedFreeFiniteBoxQuantitySeq_eq_tail q N n).symm
+  exact shiftedSequence_tendsto atTop (fun n => n + 1) (tendsto_add_atTop_nat 1)
+    (rootSeq (finiteBoxValueSeq q) N) (shiftedFreeFiniteBoxQuantitySeq q N)
+    (shiftedFreeFiniteBoxQuantitySeq_eq_tail q N) α h
 
 /-- ずらした自由族の極限量 `α'` が存在すれば、それは元の族の極限量 `α` と一致する。 -/
 theorem shiftedFreeFiniteBoxQuantitySeq_limit_eq (q : ℚ) (N : ℕ → ℕ) (α α' : ℝ)
     (h : Tendsto (rootSeq (finiteBoxValueSeq q) N) atTop (𝓝 α))
     (h' : Tendsto (shiftedFreeFiniteBoxQuantitySeq q N) atTop (𝓝 α')) :
-    α' = α :=
-  tendsto_nhds_unique h' (shiftedFreeFiniteBoxQuantitySeq_tendsto q N α h)
+    α' = α := by
+  exact shiftedSequence_limit_eq atTop (fun n => n + 1) (tendsto_add_atTop_nat 1)
+    (rootSeq (finiteBoxValueSeq q) N) (shiftedFreeFiniteBoxQuantitySeq q N)
+    (shiftedFreeFiniteBoxQuantitySeq_eq_tail q N) α α' h h'
 
 end Ising3DCut.LimitQuantity

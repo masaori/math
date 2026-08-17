@@ -179,6 +179,9 @@ targets=(
   Ising3DCut.LimitQuantity.tendsto_iff_of_pointwise_eq
   Ising3DCut.LimitQuantity.limit_unique
   Ising3DCut.LimitQuantity.limit_eq_of_pointwise_eq
+  Ising3DCut.LimitQuantity.tendsto_shift
+  Ising3DCut.LimitQuantity.shiftedSequence_tendsto
+  Ising3DCut.LimitQuantity.shiftedSequence_limit_eq
   Ising3DCut.LimitQuantity.posRoot_pos
   Ising3DCut.LimitQuantity.posRoot_pow
   Ising3DCut.LimitQuantity.eq_posRoot_of_pow_eq
