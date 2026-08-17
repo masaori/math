@@ -981,19 +981,27 @@ K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
+        "である。両辺は ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の同一の元であるから、",
+        math(String.raw`\exp`),
+        " の値も等しく、",
+        math(String.raw`V_2`),
+        " と ",
         math(String.raw`s_2 = \sinh 2K_2`),
-        " より係数は ",
-        math(String.raw`(2\sinh 2K_2)^{M/2} = (2s_2)^{M/2}`),
-        " であるから、",
+        " の定義（",
+        ref("def_transfer_matrix_symbols"),
+        "）を用いて",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 V_2
+&= (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right)
+\quad (\because\ V_2\ \text{の定義}) \\
+&= (2s_2)^{M/2}\exp\!\left(K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right)
+\quad (\because\ s_2 = \sinh 2K_2\ \text{の定義}) \\
 &= (2s_2)^{M/2}\exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\right)
-\quad (\because\ V_2\ \text{の定義、係数の書き換え、直前の指数の等式})
+\quad (\because\ \text{直前の指数の等式})
 \end{aligned}`,
       ),
       paragraph(["以上で 2 式が示された。"]),
