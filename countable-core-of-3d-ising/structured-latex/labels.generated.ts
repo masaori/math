@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_boundary_response_outer_box_stability",
   "claim_boundary_response_specialization_homomorphism",
   "claim_broken_complement",
+  "claim_coarse_graining_not_necessary_for_symmetrized_limit_quantity",
   "claim_coarse_graining_values_agree_implies_partition_values_agree",
   "claim_discriminant_does_not_determine_polynomial",
   "claim_distinct_roots_do_not_determine_polynomial",
