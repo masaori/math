@@ -47940,6 +47940,171 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "thermodynamic_limit_claim_fisher_zero_finset_card_bound",
+    kind: "claim",
+    title: { text: "有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない" },
+    labels: ["claim_fisher_zero_finset_card_bound"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_coeff",
+      "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_ne_zero",
+      "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.finset_card_le_of_subset_root_set_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le_from_necSuf",
+    ],
+    verification: ["sagemath/check/fisher-zero-finset-card-bound"],
+    statement: [
+      paragraph([
+        math(String.raw`L\ge1`),
+        " とし、有限格子の Fisher 零点の全体 ",
+        math(String.raw`\mathcal{F}_{L}\subset\overline{\mathbb{Q}}`),
+        "（",
+        ref("def_finite_lattice_fisher_zeros"),
+        "）の有限部分集合 ",
+        math(String.raw`S\subset\mathcal{F}_{L}`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`\lvert S\rvert\le2L^{2}`),
+      paragraph([
+        "である（",
+        math(String.raw`\lvert S\rvert\in\mathbb{N}`),
+        " は有限集合 ",
+        math(String.raw`S`),
+        " の元の個数）。上界 ",
+        math(String.raw`2L^{2}`),
+        " は辺の本数（",
+        ref("def_lattice"),
+        "）であり、分配多項式の次数の上界である。現れるのは代数的数と有限集合の数え上げだけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_qbar_distinct_roots_card_bound"),
+        " を、多項式 ",
+        math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+        "（",
+        ref("def_integer_polynomial_qbar_lift"),
+        "）、有限集合 ",
+        math(String.raw`S`),
+        "、上界 ",
+        math(String.raw`2L^{2}`),
+        " に当てるために、その 3 つの仮定を順に確かめる。準備として、",
+        ref("claim_coefficient_representation"),
+        " より ",
+        math(String.raw`Z_L=\sum_{m=0}^{2L^{2}}\Omega_L(m)\,x^{\,m}`),
+        " なので、",
+        ref("def_integer_polynomial_qbar_lift"),
+        " を ",
+        math(String.raw`n=2L^{2}`),
+        "、",
+        math(String.raw`a_m=\Omega_L(m)`),
+        " として読むと、任意の ",
+        math(String.raw`k\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`\mathrm{ac}_k\bigl(\widehat{Z_L}^{\,F}\bigr)=\begin{cases}\Omega_L(k)&(k\le2L^{2})\\ 0&(2L^{2}<k)\end{cases}`),
+      paragraph([
+        "である（",
+        math(String.raw`\Omega_L(k)\in\mathbb{N}`),
+        " は ",
+        ref("def_multiplicity"),
+        "。",
+        math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
+        " の鎖で送った元を同じ文字で書く）。",
+      ]),
+      paragraph([
+        "第 1 に ",
+        math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+        " である。もし ",
+        math(String.raw`\widehat{Z_L}^{\,F}=0`),
+        " ならば、",
+        math(String.raw`0\le m\le2L^{2}`),
+        " を満たす任意の ",
+        math(String.raw`m\in\mathbb{N}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_L(m)
+&=\mathrm{ac}_m\bigl(\widehat{Z_L}^{\,F}\bigr)
+&&(\because\ \text{上の準備の上の場合}\ (m\le2L^{2}))\\
+&=\mathrm{ac}_m(0)
+&&(\because\ \widehat{Z_L}^{\,F}=0)\\
+&=0
+&&(\because\ \blkref{def_qbar_polynomial_ring}\text{。零元はすべての係数が零の族})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\mathbb{N}\subset\overline{\mathbb{Q}}`),
+        " の鎖は包含なので ",
+        math(String.raw`\Omega_L(m)=0`),
+        " は ",
+        math(String.raw`\mathbb{N}`),
+        " の等式である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2^{L^{2}}
+&=\sum_{m=0}^{2L^{2}}\Omega_L(m)
+&&(\because\ \blkref{claim_coefficient_sum})\\
+&=\sum_{m=0}^{2L^{2}}0
+&&(\because\ \text{上の鎖を各項へ同時に当てる})\\
+&=0
+&&(\because\ \text{零元の有限和})
+\end{aligned}`),
+      paragraph([
+        "となるが、",
+        math(String.raw`2^{L^{2}}`),
+        " は正の自然数なので ",
+        math(String.raw`2^{L^{2}}\ne0`),
+        " であり、矛盾する。ゆえに ",
+        math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+        " である。",
+      ]),
+      paragraph([
+        "第 2 に、",
+        math(String.raw`k\in\mathbb{N}`),
+        " が ",
+        math(String.raw`2L^{2}<k`),
+        " を満たすならば、上の準備の下の場合より ",
+        math(String.raw`\mathrm{ac}_k(\widehat{Z_L}^{\,F})=0`),
+        " である。",
+      ]),
+      paragraph([
+        "第 3 に、",
+        math(String.raw`w\in S`),
+        " ならば ",
+        math(String.raw`\mathrm{aev}_{w}(\widehat{Z_L}^{\,F})=0`),
+        " である。",
+        math(String.raw`S\subset\mathcal{F}_{L}`),
+        " より ",
+        math(String.raw`w\in\mathcal{F}_{L}`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}\bigl(\widehat{Z_L}^{\,F}\bigr)
+&=\mathrm{Ev}^{F}_{w}(Z_L)
+&&(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation})\\
+&=0
+&&(\because\ w\in\mathcal{F}_{L}\text{。}\ \blkref{def_finite_lattice_fisher_zeros})
+\end{aligned}`),
+      paragraph([
+        "である。以上の 3 つにより ",
+        ref("claim_qbar_distinct_roots_card_bound"),
+        " を ",
+        math(String.raw`\widehat{Z_L}^{\,F}`),
+        "、",
+        math(String.raw`S`),
+        "、",
+        math(String.raw`2L^{2}`),
+        " に当てることができ、",
+        math(String.raw`\lvert S\rvert\le2L^{2}`),
+        " を得る。この議論に実数体も複素数体も現れず、代数的数と有限集合の中で閉じている。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
@@ -47956,7 +48121,7 @@ f^{\mathrm{per}}(q)
       list([
         [
           todo("続きから"),
-          "「熱力学極限」の残り: 零点密度（有限格子の Fisher 零点の有限部分集合の個数の上界と ",
+          "「熱力学極限」の残り: 零点密度（",
           math(String.raw`\mathcal{F}_L`),
           " の有限性、有理円板内の Fisher 零点の個数 ",
           math(String.raw`N_L(c,r)\in\mathbb{N}`),

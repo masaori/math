@@ -4,6 +4,26 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 377 で台帳から移した記録（tick 372 分）
+
+### 現在地
+
+- **2026-08-17 の tick 372 は、台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ は $f^{\mathrm{op}}(q)$ に等しい（q は 1 以下）」を二行へ割り（集合の等号（両包含・外延性）／$f^{\mathrm{per}}(q)$ の定義と $f^{\mathrm{op}}(q)$ との一致）、その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_periodic_density_lower_set_eq_open_square_le_one`（`claim_open_square_density_lower_set_subset_periodic_le_one` の直後、住処 Lambda）: $0<q\le1$ で $A^{\mathrm{per}}(q)=A^{\mathrm{op}}(q)$。証明は二つの包含（`claim_periodic_density_lower_set_subset_open_square_le_one`・`claim_open_square_density_lower_set_subset_periodic_le_one`）と集合の外延性だけ。
+  SageMath `check/periodic-density-lower-set-eq-open-square/`（$L\le3$、有理点 6 点、$A^{\mathrm{per}}$ の証人 2244 組・$A^{\mathrm{op}}$ の証人 3876 組（うち $N'\le3$ が 2137 組）、4387 検査、12 秒。`ZZ`/`QQ` の厳密計算）。Lean 具体版 `ThermodynamicLimit/PeriodicDensityLowerSetEqOpenSquare.lean`（`periodicDensityLowerSet_eq_openSquareDensityLowerSet_of_le_one`。`ext`＋両包含）、必要十分版 `NecSuf/ThermodynamicLimit/PeriodicDensityLowerSetEqOpenSquare.lean`（`lowerSetOfSequence_eq_of_pointwise_le_and_eventually_le_add_error_necSuf`。仮定は二つの包含の必要十分版の仮定の和集合。新しい構造は無い）、導出版 `PeriodicDensityLowerSetEqOpenSquareFromNecSuf.lean`。sorry 検査 1296 件。check 461 ブロック・verify-check-linkage 256 件・PDF 251 ページ通過。
+  式変形統一: 姉妹側「中心化環はスカラー行列」（`linear_space_general_004_lemma_centralizer_is_scalar`）の Step 3 の二本の鎖の第 1 段と Step 4 の鎖の第 1 段（$W$ の展開）に根拠が無かったので行末に $(\because\ W\text{ の基底 }\mathcal{E}\text{ による展開})$ を置いた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_open_square_density_lower_set_subset_periodic_le_one` の本文（準備四つ・一続き八段）と Lean 具体版（`half_add_half_eq`〜`openSquareDensityLowerSet_subset_periodicDensityLowerSet_of_le_one`）を突き合わせて一致。修正なし。次は「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」（定義ブロック、住処 R、脱出理由は完備性の再利用。下組が等しいので実現像も等しく、上限も同じ実数。`remark_real_escape_plan` の冒頭「三つの定義」を「四つの定義」へ直すこと。Lean は `OpenSquareFreeEnergyDensitySup.lean` と同じ形で `periodicRealizedLowerSet`・`periodicFreeEnergyDensity`・`periodicFreeEnergyDensity_eq_openSquare` を置く。SageMath は置かない）。
+
+### 前進の記録
+
+- 2026-08-17（tick 372）: 台帳の先頭行「周期境界の下組と開境界正方形の下組は等しく、周期境界の自由エネルギー密度は $f^{\mathrm{op}}(q)$ に等しい」を二行へ割った（集合の等号／$f^{\mathrm{per}}(q)$ の定義と一致。理由: 集合の等号は両包含と外延性の一論法、定義は実数体への脱出を伴う別のブロックなので、1 tick 1 論法にするため）。その最初「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」を四層で閉じ、`claim_periodic_density_lower_set_eq_open_square_le_one` を逆の包含の直後に置いた。SageMath 4387 検査、Lean 具体版・必要十分版・導出版、sorry 検査 1296 件。式変形統一: 姉妹側「中心化環はスカラー行列」の Step 3・Step 4 の鎖の第 1 段へ行末根拠を置いた（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 372）: 前 tick の「開境界正方形の密度の下組は周期境界の密度の下組に含まれる（Archimedes 性）」の本文（準備四つ・一続き八段）と Lean 具体版・必要十分版・導出版を突き合わせ、根拠が一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の集合の等号は、二つの包含から従うだけだが、次の $f^{\mathrm{per}}(q)$ の定義が「実現像の上限を取る対象が同じ集合である」ことの根拠として引く（後で引く形）ので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし（本文側の「周期境界自由エネルギー密度への移送」は表の残り一行を包む）。
+
+
 ## 2026-08-17 tick 376 で台帳から移した記録（tick 371 分）
 
 ### 現在地
@@ -12131,4 +12151,3 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-17（tick 362）: 前 tick の「実現写像は有理数倍と可換」の本文（台の包含の準備と一続き六段）・SageMath overview（18235 検査）・Lean 具体版（`realizeRational_eq_sum_support`・`Finsupp.support_smul`＋`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）・必要十分版（`MulZeroClass`・`NonUnitalSemiring`、$\iota$ の乗法保存と $\iota(0)=0$）・導出版（`rfl`）を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 有理数倍との可換性は順序保存の証明が $N$ で割り戻すために引く写像の性質で残す。今 tick の整数冪の実対数は、次の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」が各素数について引く形で、乗法を加法へ移すことだけから帰納法で出す実対数の性質（$\mathbb R$ の四則から直ちには従わない）なので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
-

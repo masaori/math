@@ -1362,6 +1362,12 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.qbarPolyEval_integerPolynomialQbarLift
   Ising2DLambda.NecSuf.ThermodynamicLimit.lift_eval_eq_of_coeff_eq_necSuf
   Ising2DLambda.ThermodynamicLimit.qbarPolyEval_integerPolynomialQbarLift_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.partitionPolynomial_coeff
+  Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_ne_zero
+  Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt
+  Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le
+  Ising2DLambda.NecSuf.ThermodynamicLimit.finset_card_le_of_subset_root_set_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 377 は、前 tick の「持ち上げの値は整係数多項式の代数的数における値に一致する」の本文と Lean・SageMath を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」を四層で閉じた。
+`claim_fisher_zero_finset_card_bound`（`claim_integer_polynomial_qbar_lift_evaluation` の直後、住処 Qbar、脱出なし）: $L\ge1$、有限部分集合 $S\subset\mathcal F_L$ で $\lvert S\rvert\le2L^2$。証明は `claim_qbar_distinct_roots_card_bound` の三つの仮定を $\widehat{Z_L}^{\,F}$・$S$・$2L^2$ について順に確かめる形（準備: `claim_coefficient_representation` から $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）、$0$（$2L^2<k$）／第 1: 零なら $\Omega_L(m)=0$ の三段と `claim_coefficient_sum` の $2^{L^2}=0$ の三段で矛盾／第 2: 準備の下の場合／第 3: $\mathrm{aev}_w(\widehat{Z_L}^{\,F})=\mathrm{Ev}^F_w(Z_L)=0$ の二段）。本文末尾「この先に書くこと」から済んだ項目を消した。
+SageMath `check/fisher-zero-finset-card-bound/`（$L\le3$、$\lvert\mathcal F_L\rvert=0,8,12$、部分集合 117 組、13 秒）。Lean 具体版 `ThermodynamicLimit/FisherZeroFinsetCardBound.lean`（`partitionPolynomial_coeff`・`integerPolynomialQbarLift_partitionPolynomial_ne_zero`・`integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt`・`fisherZeroSet_finset_card_le`）、必要十分版 `NecSuf/ThermodynamicLimit/FisherZeroFinsetCardBound.lean`（`finset_card_le_of_subset_root_set_necSuf`。零元・根・上界・個数の上界を述語と仮定で受け取り、構造は `AddCommMonoid` だけ）、導出版 `FisherZeroFinsetCardBoundFromNecSuf.lean`。sorry 検査 1312 件。check 466 ブロック・verify-check-linkage 258 件・PDF 254 ページ通過。
+式変形統一: 締切のため見送り（次 tick で姉妹側 004 のその他・005 の続き（Step 6 以降）・008 系から 1 件）。
+次は「$\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」: 背理法（`claim_root_of_unity_finite_card_bound` と同じ形——有限部分集合の個数がすべて $2L^2$ 以下なら集合は有限で個数も $2L^2$ 以下）。Lean は `rootOfUnityFiniteCardLe` と同じ道具（`Set.Finite`・`Set.ncard`）を使い、`fisherZeroSet_finset_card_le` を渡す。SageMath は $L\le3$ で $\lvert\mathcal F_L\rvert$ を直接数える。
+
+（tick 376 の記録）
 2026-08-17 の tick 376 は、前 tick の「整係数多項式の代数的数係数多項式への持ち上げ」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 持ち上げの値と $\mathrm{Ev}^F$ の一致——$\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$」を四層で閉じた。
 `claim_integer_polynomial_qbar_lift_evaluation`（`def_integer_polynomial_qbar_lift` の直後、住処 Qbar、脱出なし）: $f=\sum_{m=0}^{n}a_mx^m\in\mathbb Z[x]$、$\xi\in\overline{\mathbb Q}$ で $\mathrm{aev}_\xi(\widehat f^{\,F})=\mathrm{Ev}^F_\xi(f)$。証明は準備（$n<k$ で $\mathrm{ac}_k(\widehat f^{\,F})=0$）と一続き三段（`claim_qbar_evaluation_coefficient_sum`／$\mathrm{ac}_k(\widehat f^{\,F})=a_k$／`def_qbar_polynomial_evaluation` の定義式）。帰結: $\xi$ が $\widehat f^{\,F}$ の根であることと $\mathrm{Ev}^F_\xi(f)=0$ は同じこと。本文末尾「この先に書くこと」から済んだ項目を消した。
