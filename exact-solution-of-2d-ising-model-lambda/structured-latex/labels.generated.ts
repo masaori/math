@@ -413,6 +413,7 @@ export const ALL_LABELS = [
   "def_qbar_eigenvalue",
   "def_qbar_eigenvector",
   "def_qbar_identity_matrix",
+  "def_qbar_linear_factor_power_divides",
   "def_qbar_matrix",
   "def_qbar_matrix_action",
   "def_qbar_matrix_eval",

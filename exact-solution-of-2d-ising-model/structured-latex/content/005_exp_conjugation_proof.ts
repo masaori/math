@@ -1410,9 +1410,21 @@ Q_N
         ref("ad_binomial"),
         " より ",
         math(String.raw`\mathrm{ad}_X^{m}(Y)=\sum_{k=0}^{m}\binom{m}{k}X^{k}Y(-X)^{m-k}`),
-        " であり、",
-        math(String.raw`\dfrac{1}{m!}\binom{m}{k}=\dfrac{1}{m!}\cdot\dfrac{m!}{k!\,(m-k)!}=\dfrac{1}{k!\,(m-k)!}`),
-        " であるから",
+        " であり、各 ",
+        math(String.raw`0\le k\le m`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\dfrac{1}{m!}\binom{m}{k}
+&= \dfrac{1}{m!}\cdot\dfrac{m!}{k!\,(m-k)!}
+   \quad (\because \text{二項係数の定義}) \\
+&= \dfrac{1}{k!\,(m-k)!}
+   \quad (\because \text{約分（}m!\ne0\text{）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから",
       ]),
       displayMath(
         String.raw`\begin{aligned}

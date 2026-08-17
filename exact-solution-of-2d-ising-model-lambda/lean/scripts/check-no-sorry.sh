@@ -1389,6 +1389,9 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailSupSet_bddBelow
   Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailInfSet_nonempty
   Ising2DLambda.ThermodynamicLimit.fisherZeroDensityTailInfSet_bddAbove
+  Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDivides_zero
+  Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDivides_one_of_root
+  Ising2DLambda.ThermodynamicLimit.qbarLinearFactorPowDivides_iff_dvd
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -4,6 +4,14 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 382 は、前 tick の「格子点数あたりの Fisher 零点数の列の上極限と下極限」の本文と Lean を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 重複度付きの個数への精密化」を論法で六行へ割り（一次因子の冪による整除の定義／整除する指数の上界 $k\le n$／根の重複度の定義（最大元）／重複度 1 以上と根の一致／有限集合上の重複度の和の上界／$N^{\mathrm{mult}}_L(c,r)$ の定義と $N_L\le N^{\mathrm{mult}}_L\le2L^2$）、その最初「代数的数係数多項式が一次因子の冪で割り切れること」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
+`def_qbar_linear_factor_power_divides`（`def_fisher_zero_density_limsup_liminf` の直後、住処 Qbar、脱出なし）: $(t-\widehat w)^k\mid f$ :⇔ ある $g\in\overline{\mathbb Q}[t]$ で $f=(t-\widehat w)^k\cdot g$。定義の中に $k=0$ で常に割り切ること（整除する指数の集合が空でない。次の重複度の定義が引く）と、係数の上界 $n$ と $\mathrm{aev}_w(f)=0$ から $(t-\widehat w)^1\mid f$（因数定理の商が証人）を置いた。本文末尾「この先に書くこと」の内訳を残り五つへ書き換えた。
+Lean 具体版 `ThermodynamicLimit/QbarLinearFactorPowDivides.lean`（`qbarLinearFactorPowDivides`・`_zero`・`_one_of_root`・`_iff_dvd`（mathlib の `∣` との一致の橋渡し一本））。sorry 検査 1336 件。check 472 ブロック・verify-check-linkage 260 件・PDF 256 ページ通過。
+式変形統一: 姉妹側「$\exp(X)Y\exp(-X)=\exp(\mathrm{ad}_X)(Y)$ の証明」（`005_exp_conjugation_proof.ts`）Step 3 の散文中の $\frac1{m!}\binom mk=\frac1{m!}\cdot\frac{m!}{k!(m-k)!}=\frac1{k!(m-k)!}$ を一続き二段（行末根拠つき）へ（姉妹側 check・PDF 324 ページ通過）。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系。
+次は「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」（$f\ne0$、$k>n\Rightarrow\mathrm{ac}_k(f)=0$、$(t-\widehat w)^k\mid f$ ならば $k\le n$）。論法: $g\ne0$ の最高次の係数の位置 $m$（$\mathrm{ac}_m(g)\ne0$、$j>m\Rightarrow\mathrm{ac}_j(g)=0$）と $(t-\widehat w)^k$ の係数の形（$\mathrm{ac}_k=1$、$j>k\Rightarrow\mathrm{ac}_j=0$）から積の係数の定義式で $\mathrm{ac}_{k+m}(f)=\mathrm{ac}_m(g)\ne0$、よって $k+m\le n$。$(t-\widehat w)^k$ の係数の形が本文に無ければ、それを先に主張として置く（帰納法）ため一行増やす。Lean は係数で書き `natDegree` を使わない。
+
+（tick 381 の記録）
 2026-08-17 の tick 381 は、前 tick の「有理円板内の格子点数あたりの Fisher 零点数」の定義と「$2$ を超えない」の本文と Lean を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 実数体への脱出——$(\nu_L(c,r))_{L\ge1}\subset\mathbb Q$ の上極限と下極限（完備性。極限の存在は主張しない）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない）。
 `def_fisher_zero_density_limsup_liminf`（`claim_fisher_zero_density_in_rational_disc_le_two` の直後、住処 R、脱出理由は完備性）: 尾部の像 $T_N(c,r):=\{\iota_{\mathbb Q\to\mathbb R}(\nu_L(c,r))\mid N\le L\}$ が空でなく $0$ 以上 $2$ 以下に収まる（$0\le\nu_L\le2$ と $\iota$ の順序保存）ので $s_N:=\sup T_N$、$i_N:=\inf T_N$、さらに $\{s_N\}$ は下に有界（$0\le s_N$）、$\{i_N\}$ は上に有界（$i_N\le2$）なので $\overline\nu(c,r):=\inf\{s_N\mid N\ge1\}$、$\underline\nu(c,r):=\sup\{i_N\mid N\ge1\}$。収束（$\overline\nu=\underline\nu$）は主張しない。本文末尾「この先に書くこと」から済んだ項目を消した。
@@ -4237,8 +4245,8 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）」（`claim_periodic_density_lower_set_eq_open_square_le_one`）の本文と Lean `PeriodicDensityLowerSetEqOpenSquare.lean`・NecSuf・FromNecSuf、SageMath `periodic-density-lower-set-eq-open-square` を突き合わせる。
-- **次に進めるセクションは「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ の定義と $f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
+- **レビュー**: 「代数的数係数多項式が一次因子の冪で割り切れること」（`def_qbar_linear_factor_power_divides`）の本文と Lean `ThermodynamicLimit/QbarLinearFactorPowDivides.lean` を突き合わせる。
+- **次に進めるセクションは「零点密度: 零でない多項式を割る一次因子の冪の指数は係数の上界を超えない」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
 - **並列の作業ストリーム（式変形の書き方の統一）は再開済み**（2026-08-17 tick 367〜）。毎 tick 1 件。到達点は台帳の表と保管庫にある。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 

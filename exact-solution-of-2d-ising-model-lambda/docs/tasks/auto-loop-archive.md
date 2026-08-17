@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 382 で台帳から移した記録（tick 377 分）
+
+### 現在地
+
+- **2026-08-17 の tick 377 は、台帳の先頭行「零点密度: 有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた（`claim_qbar_distinct_roots_card_bound` の三つの仮定を順に確かめる形。住処 Qbar、脱出なし）。**
+  `claim_fisher_zero_finset_card_bound`（`claim_integer_polynomial_qbar_lift_evaluation` の直後・「この先に書くこと」の直前、住処 Qbar）: $L\ge1$、有限部分集合 $S\subset\mathcal F_L$ で $\lvert S\rvert\le2L^2$。証明は準備（`claim_coefficient_representation` から $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）、$0$（$2L^2<k$））、第 1 の仮定 $\widehat{Z_L}^{\,F}\ne0$（零なら $\Omega_L(m)=0$ の一続き三段、`claim_coefficient_sum` の $2^{L^2}=\sum\Omega_L(m)=0$ の一続き三段で矛盾）、第 2 の仮定（準備の下の場合）、第 3 の仮定（$w\in S\subset\mathcal F_L$ で $\mathrm{aev}_w(\widehat{Z_L}^{\,F})=\mathrm{Ev}^F_w(Z_L)=0$ の一続き二段）、`claim_qbar_distinct_roots_card_bound` を当てる。本文末尾「この先に書くこと」の零点密度の内訳から「有限部分集合の個数の上界」を消した。
+  SageMath `check/fisher-zero-finset-card-bound/`（$L\le3$、$\lvert\mathcal F_L\rvert=0,8,12$、準備の係数・第 1〜第 3 の仮定・部分集合 117 組。`ZZ[x]`・`QQbar` の厳密計算、13 秒）。Lean 具体版 `ThermodynamicLimit/FisherZeroFinsetCardBound.lean`（`partitionPolynomial_coeff`（`claim_coefficient_representation` を係数ごとに読む）・`integerPolynomialQbarLift_partitionPolynomial_ne_zero`・`integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt`・`fisherZeroSet_finset_card_le`（`qbarDistinctRootsCardLe` を当てる））、必要十分版 `NecSuf/ThermodynamicLimit/FisherZeroFinsetCardBound.lean`（`finset_card_le_of_subset_root_set_necSuf`。零元・根・上界は述語で受け取り、個数の上界も仮定として受け取る。構造は係数の有限和のための `AddCommMonoid` だけ）、導出版 `FisherZeroFinsetCardBoundFromNecSuf.lean`。sorry 検査 1312 件。check 466 ブロック・verify-check-linkage 258 件・PDF 254 ページ通過。
+  式変形統一: 姉妹側「Frobenius 内積の性質」の Step 6（三角不等式）で、散文中の「$\iota_{\mathbb R\to\mathbb C}$ の単射性により実数の等式 $\|A+B\|^2=\|A\|^2+2\mathrm{Re}(u)+\|B\|^2$」の手前にあった $\mathbb C$ 側の等式の組み立てを一続き三段（$(\|A+B\|^2)_{\mathbb C}=(\|A\|^2)_{\mathbb C}+(u+\overline u)+(\|B\|^2)_{\mathbb C}=(\|A\|^2)_{\mathbb C}+(2\mathrm{Re}(u))_{\mathbb C}+(\|B\|^2)_{\mathbb C}=(\|A\|^2+2\mathrm{Re}(u)+\|B\|^2)_{\mathbb C}$。行末根拠つき）へ揃えた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_integer_polynomial_qbar_lift_evaluation` の本文（準備・一続き三段）と Lean 具体版（`integerPolynomialQbarLift_coeff_eq_zero_of_natDegree_lt`・`qbarPolyEval_integerPolynomialQbarLift` の `calc` 三段）・SageMath を突き合わせて一致。修正なし。次は「$\mathcal F_L$ は有限集合で $\lvert\mathcal F_L\rvert\le2L^2$」（背理法。`claim_root_of_unity_finite_card_bound` と同じ形: 有限部分集合の個数がすべて $2L^2$ 以下なら集合は有限で個数も $2L^2$ 以下。Lean は `Set.Finite` と `Set.ncard`——`claim_root_of_unity_finite_card_bound` の Lean（`rootOfUnityFiniteCardLe`）を見て同じ道具を使う）。
+
+### 前進の記録
+
+- 2026-08-17（tick 377）: 台帳の先頭行「零点密度: 有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない」を四層で閉じ、`claim_fisher_zero_finset_card_bound` を `claim_integer_polynomial_qbar_lift_evaluation` の直後に置いた。SageMath 117 組、Lean 具体版・必要十分版・導出版、sorry 検査 1312 件。式変形統一: 姉妹側「Frobenius 内積の性質」の Step 6 の $\mathbb C$ 側の等式の組み立てを一続き三段へ（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+
+- 2026-08-17（tick 377）: 前 tick の「持ち上げの値は整係数多項式の代数的数における値に一致する」の本文（準備・一続き三段）と Lean 具体版（`calc` 三段）・SageMath を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の上界は、`claim_qbar_distinct_roots_card_bound` の三つの仮定を $\widehat{Z_L}^{\,F}$ について確かめる主張であり、次の $\mathcal F_L$ の有限性と $N_L(c,r)\in\mathbb N$ が引く（後で引く形）ので残す。準備の $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$ は独立ブロックにせず証明の冒頭に置いた。本文末尾「この先に書くこと」から済んだ項目を消し、台帳のセクション表（先頭行を消した）と揃えた。
+
 ## 2026-08-17 tick 380 で台帳から移した記録（tick 375 分）
 
 ### 現在地
