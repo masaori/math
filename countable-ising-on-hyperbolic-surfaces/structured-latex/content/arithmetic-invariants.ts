@@ -329,6 +329,7 @@ x+1\mid P_Q'(x).`),
   {
     id: "arithmetic_invariants_theorem_fixed_quotient_partition_polynomial_irreducible_factorization",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "固定剰余類格子の分配多項式の既約分解" },
     labels: ["theorem_fixed_quotient_partition_polynomial_irreducible_factorization"],
     habitat: "ZPolynomial",

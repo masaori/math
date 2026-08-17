@@ -293,6 +293,7 @@ T_w(T_w(\sigma))(v)
   {
     id: "finite_graph_claim_coefficient_expansion",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "多重度による係数表示" },
     labels: ["claim_partition_polynomial_coefficient_expansion"],
     habitat: "ZPolynomial",
@@ -408,6 +409,7 @@ Z_G(1)
   {
     id: "formal_high_temperature_theorem_expansion",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "形式的高温展開の有限和恒等式" },
     labels: ["theorem_formal_high_temperature_expansion"],
     habitat: "ZPolynomial",

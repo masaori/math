@@ -2,8 +2,14 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-17 時点）
+## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 398 は、最終章「臨界指数を零点列で書く」の唯一のセクション「先頭零点の列と有限サイズスケーリング」を論法単位の 7 行へ割り直し、着工計画を確定した（数学ブロックは足していない）。
+内訳と順序: $x_c$ が実閉部分体 $R$ の元であること／臨界点への距離の二乗 $\mathrm{dsq}_c$ の定義／$R$ の空でない有限集合の最小元／$\mathcal F_L$ が空でないこと（$L\ge2$）／先頭距離 $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)$ の定義と正値性／詰め寄りの述語との接続／有限サイズスケーリングの読み（ここだけ ℝ 脱出）。
+**着手時の確認で分かったこと（次の tick への引き継ぎ）**: (1) $x_c\in R$ は本文にも Lean にも未確立。$s=a+b\omega$ と分解し $s\cdot s=2$ の $\omega$ 成分から $2ab=0$、$a=0$ の枝（$b^2=-2$ の形）を $R$ の平方の三分律（`def_real_closed_subfield` の第 2 条件）で潰す計画だが、「$2$ と $-2$ が両方 $R$ の平方になれない」ことの論証を先に固めること。(2) $L=1$ の格子は辺 2 本が両方自己ループなので $Z_1$ は定数で $\mathcal F_1=\varnothing$。非空性は $L\ge2$ に限る（着手時に SageMath で確認してから書く）。(3) 一次情報は `docs/discussion/臨界指数をFisher零点列で書く/`（成果物は立場非依存の形「実軸最近接零点の列の増大率」で書く。厳密に言える範囲は「何が厳密で何が非厳密か」に従う）。
+レビュー: tick 397 の挟み込みの四層を突き合わせ、一致。修正 1 件（本文末尾「この先に書くこと」から済んだ挟み込みの項目を消した）。この tick は時計判断（00:30 のまとめ締切）により、式変形統一の 1 件を見送った（台帳の並列ストリームは次 tick が続きから拾う）。
+
+（tick 397 の記録）
 2026-08-17 の tick 397 は、台帳の先頭行「零点密度の挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$」を四層で閉じた。**これで章「熱力学極限」の todo は尽き、残るのは最後の章「臨界指数を零点列で書く」だけである。**
 `claim_fisher_zero_count_le_mult_count`: 円板内の各零点は持ち上げの根なので重複度が 1 以上（`claim_qbar_root_multiplicity_ge_one_iff_root`）、有限和の単調性で $N_L\le N^{\mathrm{mult}}_L$。`claim_fisher_zero_mult_count_le_edge_bound`（**主定理の印を付けた**）: `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てて $N^{\mathrm{mult}}_L\le2L^2$。
 SageMath `check/fisher-zero-mult-count-squeeze/`（4 節。$L=1,2$、中心 3 × 半径 3 の円板 9 組。$L=3$ は `AA` の厳密比較が長すぎるので除く（既存の密度の検査と同じ範囲））。Lean 具体版・必要十分版・導出版。**`Finset.sum_const` は `ℕ` では `s.card • c` になるので、`s.card = ∑ 1` は `Finset.card_eq_sum_ones` を使う。** また導出版で `RealClosedSubfieldData` が別名前空間の同名型と衝突したので `open Ising2DLambda.FisherZero` が必要だった。sorry 検査 1380 件・check 488 ブロック・linkage 273 件・PDF 265 ページ通過。

@@ -575,6 +575,7 @@ u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
   {
     id: "homology_sector_theorem_homology_class_polynomials_recombine",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "第一ホモロジー類別生成多項式の再結合" },
     labels: ["theorem_homology_class_polynomials_recombine"],
     habitat: "ZPolynomial",
