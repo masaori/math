@@ -53,6 +53,7 @@ export const ALL_LABELS = [
   "def_broken_count",
   "def_coarse_graining_sufficient_and_not_necessary_for_limit_quantity",
   "def_configuration",
+  "def_constant_coarse_graining_from_q_independent_invariant",
   "def_edge_set",
   "def_endpoint_maps",
   "def_finite_box_prime_exponent_sequence",
