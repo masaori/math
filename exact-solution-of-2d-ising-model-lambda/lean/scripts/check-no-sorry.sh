@@ -1368,6 +1368,8 @@ targets=(
   Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le
   Ising2DLambda.NecSuf.ThermodynamicLimit.finset_card_le_of_subset_root_set_necSuf
   Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le_from_necSuf
+  Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finite_ncard_le
+  Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finite_ncard_le_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

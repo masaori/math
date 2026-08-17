@@ -686,19 +686,17 @@ u+\overline{u}
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
-        math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
-        " の単射性により実数の等式 ",
-        math(String.raw`\|A+B\|^2=\|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2`),
-        " を得る。Step 0 の ",
+        "である。したがって、Step 0 の ",
         math(String.raw`\mathrm{Re}(u)\le|u|`),
-        " と Step 5 の (4) より",
+        " と Step 5 の (4) を使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \|A+B\|^2
+&= \|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2
+   \quad (\because \text{上の鎖と } \iota_{\mathbb{R}\to\mathbb{C}} \text{ の単射性}) \\
 &\le \|A\|^2+2|u|+\|B\|^2
-   \quad (\because \mathrm{Re}(u)\le |u|) \\
+   \quad (\because \text{Step 0 の } \mathrm{Re}(u)\le |u|) \\
 &\le \|A\|^2+2\|A\|\,\|B\|+\|B\|^2
    \quad (\because \text{Step 5 の Cauchy--Schwarz の不等式}) \\
 &= \left(\|A\|+\|B\|\right)^2

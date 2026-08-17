@@ -4,6 +4,23 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 378 で台帳から移した記録（tick 373 分）
+
+### 現在地
+- **2026-08-17 の tick 373 は、台帳の先頭行「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$ の定義と、$f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」を本文・Lean 具体版まで書いて閉じた（定義ブロックなので必要十分版と SageMath は置かない。実数体への脱出は完備性の再利用で、新しい脱出理由は増えない）。**
+  `def_periodic_free_energy_density_le_one`（`claim_periodic_density_lower_set_eq_open_square_le_one` の直後・`remark_real_escape_plan` の直前、住処 R）: $0<q\le1$ で $\rho_{\mathbb R}(A^{\mathrm{per}}(q))=\rho_{\mathbb R}(A^{\mathrm{op}}(q))$（一続き三段。下組の等号）、よって空でなく上に有界、$f^{\mathrm{per}}(q):=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))$、$f^{\mathrm{per}}(q)=f^{\mathrm{op}}(q)$（一続き三段。同じ集合の上限）。`remark_real_escape_plan` の「三つの定義」を「四つ」へ、本文末尾の「この先に書くこと」から「周期境界自由エネルギー密度への移送」を消した。
+  Lean 具体版 `ThermodynamicLimit/PeriodicFreeEnergyDensity.lean`（`periodicRealizedLowerSet`・`periodicRealizedLowerSet_eq_openSquare_of_le_one`・`_nonempty_of_le_one`・`_bddAbove_of_le_one`・`periodicFreeEnergyDensity`（`sSup`）・`periodicFreeEnergyDensity_eq_openSquare_of_le_one`）。sorry 検査 1300 件。check 462 ブロック・verify-check-linkage 256 件・PDF 252 ページ通過。
+  式変形統一: 姉妹側「指数関数の和とクロネッカーのデルタ」（`transfer_matrix_009_claim_exp_sum`）の場合 (a) の $\sum(1+i\cdot0)=\sum1$ と場合 (b) の $r\cdot\frac{1-1}{1-r}=0$ に根拠が無かったので行末に $(\because\ \dots)$ を置いた（内容は不変）。姉妹側の check・PDF 323 ページ通過。
+  レビュー: 前 tick の `claim_periodic_density_lower_set_eq_open_square_le_one` の本文（両包含・外延性）と Lean 具体版（`ext`＋二つの包含）を突き合わせて一致。修正なし。次は「零点密度」（着手前に論法で割る）。
+
+
+### 前進の記録
+- 2026-08-17（tick 373）: 台帳の先頭行「周期境界の自由エネルギー密度 $f^{\mathrm{per}}(q)$ の定義と $f^{\mathrm{op}}(q)$ との一致（q は 1 以下）」を本文・Lean 具体版まで書いて閉じ、`def_periodic_free_energy_density_le_one` を下組の等号の直後に置いた（定義ブロック。必要十分版・SageMath は無し）。sorry 検査 1300 件。式変形統一: 姉妹側「指数関数の和とクロネッカーのデルタ」の根拠なし二行へ行末根拠（姉妹側 check・PDF 323 ページ通過）。
+
+### レビュー記録
+- 2026-08-17（tick 373）: 前 tick の「周期境界の密度の下組と開境界正方形の密度の下組は等しい」の本文（両包含と外延性）と Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の定義ブロックは実数体への脱出点（上限を取る）そのものであり、$f^{\mathrm{per}}(q)=f^{\mathrm{op}}(q)$ は以後の周期境界についての言明を開境界正方形の側へ移す根拠として引く（後で引く形）ので残す。像の等号・上限の等号は独立ブロックにせず定義の中の一続きの式変形に置いた。本文末尾「この先に書くこと」（残り: 零点密度／臨界指数）と台帳のセクション表は食い違いなし。
+
 ## 2026-08-17 tick 377 で台帳から移した記録（tick 372 分）
 
 ### 現在地
