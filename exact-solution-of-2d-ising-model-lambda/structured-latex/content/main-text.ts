@@ -39786,6 +39786,116 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
     ],
   },
   {
+    id: "thermodynamic_limit_claim_periodic_open_boundary_comparison_log_le_one",
+    kind: "claim",
+    title: { text: "周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）" },
+    labels: ["claim_periodic_open_boundary_comparison_log_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/periodic-open-boundary-comparison-log"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.logRat_periodicOpenLowerValue_eq",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_periodicOpenLog_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.logOrderLE_periodicOpenLog_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき",
+      ]),
+      displayMath(String.raw`2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)
+\ \le_{\Lambda}\ \Phi_L(q)
+\ \le_{\Lambda}\ \log Z^{\mathrm{op}}_{L,L}(q)`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`\Phi_L(q)=\log Z_L(q)\in\Lambda`),
+        " は周期境界の有限系の自由エントロピー（",
+        ref("def_finite_free_entropy"),
+        "）、",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " は一辺 ",
+        math(String.raw`L`),
+        " の開境界正方形の分配多項式の正の有理点での値（",
+        ref("def_open_rectangle_partition_value_at_positive_rational"),
+        "。正値性は ",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        "）、",
+        math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、整数倍 ",
+        math(String.raw`2L\,\cdot`),
+        " と加法は ",
+        ref("def_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda}`),
+        " は ",
+        ref("def_log_order_group_order"),
+        " の順序である。",
+        ref("claim_periodic_open_boundary_comparison_rational"),
+        " の ",
+        math(String.raw`0<q\le1`),
+        " の場合の両辺の対数を取ったものであり、実数体も実対数も現れない。周期境界の密度の列を開境界正方形の密度の列と比べる段が引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 2 つ置く。第一に、",
+        ref("claim_value_at_rational_is_positive"),
+        " により ",
+        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+        "、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`(a,b):=(L,L)`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " である。また ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        " なので、正の有理数の自然数冪と正の有理数どうしの積は正であることから ",
+        math(String.raw`q^{2L}Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " であり、三つとも対数 ",
+        ref("def_rational_log"),
+        " を施せる。第二に、",
+        ref("claim_periodic_open_boundary_comparison_rational"),
+        " の下端の値の対数を、",
+        math(String.raw`\Lambda`),
+        " の中で開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log\bigl(q^{2L}Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&=\log\bigl(q^{2L}\bigr)+\log Z^{\mathrm{op}}_{L,L}(q)
+&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&=2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=2L\text{ で。整数倍は }\blkref{def_log_order_group})
+\end{aligned}`),
+      paragraph([
+        "主張の左の元から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)
+&=\log\bigl(q^{2L}Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&&(\because\ \text{準備の第二を右辺から左辺の向きで読む})\\
+&\le_{\Lambda}\log Z_L(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_periodic_open_boundary_comparison_rational}\text{ の }0<q\le1\text{ の場合の下からの評価を移す})\\
+&=\Phi_L(q)
+&&(\because\ \blkref{def_finite_free_entropy})\\
+&\le_{\Lambda}\log Z^{\mathrm{op}}_{L,L}(q)
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_periodic_open_boundary_comparison_rational}\text{ の }0<q\le1\text{ の場合の上からの評価を移す。}\Phi_L(q)=\log Z_L(q)\text{ は }\blkref{def_finite_free_entropy})
+\end{aligned}`),
+      paragraph([
+        "この鎖の第三行までが主張の左の不等式、第三行から第四行までが主張の右の不等式である。",
+        "使ったのは、周期境界と開境界の値の比較（正の有理点）、対数が順序を保ちかつ反映すること、対数の加法性と冪の法則だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_def_open_square_free_entropy_density",
     kind: "definition",
     title: { text: "開境界正方形の自由エントロピー密度" },

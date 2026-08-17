@@ -7,6 +7,11 @@
 
 ## 現在地
 
+- **2026-08-17 の tick 368 は、台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割り（境界評価の対数化／密度の比較／周期境界の密度の列は同じ下組・同じ実数へ）、その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を本文・SageMath・Lean（具体版・必要十分版は共有・導出版）まで書いて四層で閉じた。**
+  `claim_periodic_open_boundary_comparison_log_le_one`（`claim_periodic_open_boundary_comparison_rational` の直後・`def_open_square_free_entropy_density` の直前、住処 Lambda）: $L\ge1$、$0<q\le1$ で $2L\log q+\log Z^{\mathrm{op}}_{L,L}(q)\le_\Lambda\Phi_L(q)\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)$。証明は準備二つ（値の正値性、下端の値の対数を開く二段 `claim_log_additive`・`claim_log_power`）と一続き四段（準備の第二・`claim_rational_log_order_iff` で有理点の評価を移す・`def_finite_free_entropy`・移す）。上端は $\log Z^{\mathrm{op}}_{L,L}(q)$ そのもので開く操作は無い。
+  SageMath `check/periodic-open-boundary-comparison-log/`（$L\le3$、有理点 6 点、126 検査、3 秒。`ZZ`/`QQ` の厳密計算）。Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonLog.lean`（`logRat_periodicOpenLowerValue_eq`・`logOrderLE_periodicOpenLog_bounds_of_le_one`。`partitionPolynomial_eval_pos`・`openPartitionValueRat_pos`・`partitionValueRat_periodicOpen_bounds_of_le_one`・`logRat_le_iff`・`logRat_mul`・`logRat_pow` が本文の段に 1 対 1）、必要十分版は「開境界正方形のブロック敷き詰め評価の対数化」の `twoSided_bounds_transport_through_monotone_map_necSuf` を共有（新設しない。上端の等式は `rfl`）、導出版 `PeriodicOpenComparisonLogFromNecSuf.lean`。sorry 検査 1277 件。check 456 ブロック・verify-check-linkage 252 件・PDF 248 ページ通過。
+  レビュー: 前 tick の姉妹側「冪等行列のトレースは像の次元」の書き換え差分を読み、四つの計算の根拠がすべて残り中身が不変であることを確認。前 tick に配線した `lean:` 28 件は check（`validate:lean`）で実在を確認。修正なし。次は「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」。
+
 - **2026-08-17 の tick 367 は、台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行し、章「零点の詰め寄り」の五ブロックと章「固有値の代数性」の二主張の `lean:` へ、既にある Lean の宣言（計 28 件）を足した。**
   対象は、tick 366 の閉包計算で本文の `lean:` から辿れなかった 8 ファイル。章「零点の詰め寄り」は `def_distance_squared_to_rational`（`realClosedComponents`・`_spec`・`distanceSquaredToRational`・必要十分版 `distanceSquaredOfPair`）、`claim_distance_squared_zero_iff_equal`（具体版・必要十分版・導出版）、`def_zero_pinching_predicate`（`PositiveRational`・`PositiveLatticeSize`・`fisherZeroSetAtPositiveSize`・`zeroPinchingPredicate`）、`claim_distance_positive_on_fisher_zeros`（具体版・必要十分版・導出版）、`def_phase_transition_countable_statement`（`phaseTransitionCountableStatement`）——台帳の行名は「三定義」だったが、同じファイルに載る二主張も `lean:` を持たなかったので併せて配線した。章「固有値の代数性」は `claim_row_config_order_linear` に導出版 `RowConfigOrderFromNecSuf.lean` の 5 宣言、`claim_orbit_permutation_sign_values` に必要十分版 `signOn_*`・`inversionCountOn_id` と導出版 `OrbitPermutationSignValuesFromNecSuf.lean` の 4 宣言を足した。中身の突き合わせ: 距離の二乗の定義 $(a-q)(a-q)+b\cdot b$、零性の同値（$w:=(a-q)b^{-1}$ で $w^2=-1$ の背理法）、詰め寄りの述語（$L\ge1$・$\xi\in\mathcal F_L$・$q\in\mathbb Q_{>0}$ の存在量化と $<_R$）、非零性（正の有理数は零点でない）、相転移の言明（$\forall\varepsilon$）が本文と Lean で一致。本文も Lean も直していない。Lean 対応先 1240 → 1268 件、import 閉包の外のファイルは 0 件。sorry 検査 1274 件（登録は既にあった）。`lake build`・check・verify-check-linkage 251 件・PDF 247 ページ通過。
   式変形統一（再開後の 1 件目）: 姉妹側「冪等行列のトレースは像の次元」（`eigenvalues_of_V_003_claim_trace_of_idempotent`）の Step 1 の二計算・Step 2・Step 3 を一続きの等号と行末根拠へ揃えた（内容は不変。姉妹側の生成器は `\blkref` を持たないので根拠には題を書き、ラベル参照は散文に残した）。姉妹側の check・PDF 323 ページ通過。
@@ -27,11 +32,6 @@
   SageMath `check/rational-log-order-group-realization-monotone/`（可算側の段は `ZZ`/`QQ` の厳密計算、実数側の段は区間演算 `RealBallField(256)`——素数の実対数は超越数なので、丸めを区間で包む厳密な包含で不等式を判定し、区間が重なれば FAIL とする。理由は overview に記した。標本 218 個、順序対 23871 組、286452 検査、14 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupRealizationMonotone.lean`（`natCast_real_pos`・`realizeRational_le_of_rationalLogOrderLE`。`Rat.cast_le`・`realLog_le_realLog`・`realizeRational_toRational`・`IsCommonDenominator`・`realizeRational_smul`・`inv_pos`・`inv_mul_cancel₀`・`mul_le_mul_of_nonneg_left` が六段と三段に 1 対 1）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupRealizationMonotone.lean`（`le_of_smul_le_smul_necSuf`（順序体で正の元を外す三段）・`realize_monotone_of_common_denominator_necSuf`。値の側だけ `Field`＋`LinearOrder`＋`IsStrictOrderedRing`、$\Lambda_{\mathbb Q}$・$\Lambda$・$\mathbb Q$・$\mathbb R_{>0}$ に当たる型は代数構造なし（$\mathbb Q$ に当たる型の半順序だけ）、順序の証人を仮定として受ける）、導出版（`∃` を剥がして渡す）。sorry 検査 1365 件。check 454 ブロック・PDF 247 ページ通過。
   レビュー: 前 tick の「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数」の本文（準備三つ・一続き八段）と Lean 具体版（`realLog_prod`・`realizeRational_toRational` の八段）を突き合わせて一致。修正なし。次は「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」。
 
-- **2026-08-17 の tick 363 は、台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
-  `claim_log_order_group_realization_real_log`（`claim_real_logarithm_int_power` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\rho_{\mathbb R}$ と $\log_{\mathbb R}$ の値どうしの等式。乗法を加法へ移すことと $\iota$ が乗法・逆数を保つことだけ）」）: $\lambda\in\Lambda$ で $\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。証明は準備三つ（台の一致、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和（元の個数の帰納法。空集合は `claim_real_logarithm_int_power` を $k:=0$ で））と一続き八段（定義・台の一致・$\iota_{\Lambda\to\Lambda_{\mathbb Q}}$ の定義・整数冪の実対数・$\iota$ が整数冪を保つ・有限積の実対数は和・$\iota$ が有限積を保つ・$\mathrm{rat}_\Lambda$ の定義）。狭義単調性は使わない。`remark_real_escape_plan` の冒頭と脱出の項に参照を足した。
-  SageMath `check/log-order-group-realization-real-log/`（$\ell_p$ を記号のまま持つ模型。10724 検査、4 秒）。Lean 具体版 `ThermodynamicLimit/LogOrderGroupRealizationRealLog.lean`（`realLog_prod`（`Finset.induction_on` と `realLog_mul`。`Real.log_prod` は使わない）・`realizeRational_toRational`（`Finsupp.support_mapRange_of_injective`・`toRational_apply`・`realLog_zpow`・`Rat.cast_zpow`・`realLog_prod`・`Rat.cast_prod`・`rfl` が八段に対応））、必要十分版 `NecSuf/ThermodynamicLimit/LogOrderGroupRealizationRealLog.lean`（`map_prod_necSuf`・`realize_int_prod_necSuf`。`[CommGroup G] [AddCommGroup A]`、乗法を加法へ移す写像だけ。可換性は有限積・有限和を作るために要る。$\iota_{\mathbb Q\to\mathbb R}$ の読み替えは導出版に置く）、導出版（`positive_val_prod`・`Positive.coe_zpow`・`Rat.cast_zpow`・`Rat.cast_prod`）。sorry 検査 1360 件。check 453 ブロック・PDF 246 ページ通過。
-  レビュー: 前 tick の「整数冪の実対数は整数倍」の本文（準備・帰納法・逆数・符号の場合分け）と Lean 具体版（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`）・必要十分版（`Group`・`AddGroup`）を突き合わせて一致。修正なし。次は「有理係数の対数順序群の実現写像は順序を保つ」。
-
 ## セクション台帳
 
 **済んだ範囲**（章ごとの件数。個々の内訳は [auto-loop-archive.md](auto-loop-archive.md) と
@@ -44,7 +44,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 - 有限系の自由エントロピー: 11 セクション
 - 形式検証の土台: 1 セクション
 - 零点の詰め寄り: 5 セクション
-- 熱力学極限: 80 セクション
+- 熱力学極限: 81 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -52,7 +52,8 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 熱力学極限 | 周期境界自由エネルギー密度への移送 | todo | 周期境界と開境界の境界評価から導く |
+| 熱力学極限 | 周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下） | todo | 対数化の両辺を $L^2$ で割り $\Lambda_{\mathbb Q}$ へ: $\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\iota(\log q)\le\Psi_L(q)\le\Psi^{\mathrm{op}}_L(q)$。`claim_scaled_embedding_order_transfer` の使い方は部分正方形の density 版に倣う |
+| 熱力学極限 | 周期境界の密度の列は開境界正方形と同じ下組を定め、同じ実数 $f^{\mathrm{op}}(q)$ へ | todo | 密度の比較と $\tfrac{2}{L}\iota(\log q)$ が Archimedes 性で幾らでも小さくなること（`claim_rational_log_order_group_archimedean`）から、周期境界の密度の列が定める下組が $A^{\mathrm{op}}(q)$ と一致することを示す。論法が複数なら更に割る |
 | 熱力学極限 | 零点密度 | todo | |
 | 臨界指数を零点列で書く | 先頭零点の列と有限サイズスケーリング | todo | |
 
@@ -60,6 +61,7 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-17（tick 368）: 台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割った（境界評価の対数化／密度の比較／同じ下組・同じ実数へ。理由: 対数化・密度化・下組の一致は別々の論法で、1 tick 1 論法にするため）。その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を四層で閉じ、`claim_periodic_open_boundary_comparison_log_le_one` を有理点の評価の直後に置いた。SageMath 126 検査、Lean 具体版・導出版（必要十分版は既存を共有）、sorry 検査 1277 件。式変形統一は姉妹側 1 件（下記）。
 - 2026-08-17（tick 367）: 台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行した。章「零点の詰め寄り」の五ブロック（三定義と二主張）と章「固有値の代数性」の二主張の `lean:` に、既存の Lean 宣言 28 件を足した（本文・Lean は不変。Lean 対応先 1268 件、閉包外 0 ファイル）。式変形統一を再開し、姉妹側「冪等行列のトレースは像の次元」を一続きの形へ書き換えた。
 
 - 2026-08-17（tick 366）: 台帳の先頭行「削除した実数値経路の Lean の後片付け」を実行した。本文の `lean:` から辿れる import 閉包の外にある実数値経路の Lean 61 ファイルを削除し、可算側だけが使う `allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero` を `ConstantPlusConfiguration.lean` へ切り出し、`OpenSquareFreeEnergyDensitySup` の `Sup` を外した。sorry 検査 1274 件。閉包の外に残った 8 ファイル（零点の詰め寄りの三定義と固有値の代数性の導出版二つ。実数値経路ではない）を配線する行をセクション表の先頭へ足した。式変形統一は一時停止中のため実施せず。
@@ -69,9 +71,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 - 2026-08-17（tick 364）: 台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」を実行し、`claim_rational_log_order_group_realization_monotone` を `claim_log_order_group_realization_real_log` の直後に置いた。
   証明は順序の証人・準備一つ（$0<\iota(N)$）・含意の鎖六段・最後の三段だけ。SageMath `rational-log-order-group-realization-monotone`（可算側は厳密、実数側は区間演算 `RealBallField`。理由を overview に明記）、Lean 具体版・必要十分版（値の側だけ順序体、可算側の型は構造なし、順序の証人を仮定として受ける）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1365 件）。式変形統一は一時停止中のため実施せず。
-
-- 2026-08-17（tick 363）: 台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を実行し、`claim_log_order_group_realization_real_log` を `claim_real_logarithm_int_power` の直後に置いた。
-  証明は準備三つ（台の一致、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和）と一続き八段だけ。SageMath `log-order-group-realization-real-log`（$\ell_p$ を記号のまま持つ模型）、Lean 具体版・必要十分版（`CommGroup`・`AddCommGroup`、乗法を加法へ移す写像だけ）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1360 件）。式変形統一は一時停止中のため実施せず。
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -89,6 +88,9 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-17（tick 368）: 前 tick の姉妹側「冪等行列のトレースは像の次元」の書き換え差分（Step 1 の二計算・Step 2・Step 3）を読み、根拠がすべて残り中身が不変であることを確認。前 tick に配線した `lean:` 28 件は check の `validate:lean` で実在を確認。
+  「何も言っていない主張」の観点: 今 tick の対数化は有理点の評価を $\Lambda$ の順序へ移す主張で、密度の比較が引くので残す。準備の正値性・対数を開く二段は独立ブロックにせず証明の中に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
+
 - 2026-08-17（tick 367）: 前 tick の切り出し `ThermodynamicLimit/ConstantPlusConfiguration.lean`（`allPlusConfig`・`allPlusConfig_brokenBondCount_eq_zero`。import は `PartitionPolynomial.Basic` だけ）と本文 `def_constant_plus_configuration`（各頂点に $+1$ の定数写像）・`claim_constant_plus_breaks_no_bond`（破れボンド数 $0$）を突き合わせ、一致した。
   「何も言っていない主張」の観点: 定数配位の破れボンド数が零であることは値の確定（$\mathbb N$ の元 $0$）で、正の有理点での値の下界が引くので残す。今 tick に配線した零点の詰め寄りの五ブロックは、住処 $R\subset\overline{\mathbb Q}$ の確定・零点でないことの根拠・後の言明が引く述語であり残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。本文の修正は無い。
 
@@ -100,9 +102,6 @@ MEMORY.md にある。番号で呼ばないので、ここでは章と件数だ�
 
 - 2026-08-17（tick 364）: 前 tick の「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数」の本文（準備三つ・一続き八段）・SageMath overview（10724 検査）・Lean 具体版（`realLog_prod`（`Finset.induction_on`・`realLog_mul`）・`realizeRational_toRational` の八段が本文と 1 対 1。`Real.log_prod` は使わない）・必要十分版（`CommGroup`・`AddCommGroup`、乗法を加法へ移す写像だけ）・導出版を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 前 tick の主張は可算側の量と実数側の量を結ぶ等式で今 tick が引くので残す。今 tick の順序保存は、可算側で決定可能な順序が実現の側で保たれることを言い、上限の存在（下組の実現像が上に有界であること）が引くので残す。準備の $0<\iota(N)$ は独立ブロックにせず証明の中に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
-
-- 2026-08-17（tick 363）: 前 tick の「整数冪の実対数は整数倍」の本文（準備 $\log_{\mathbb R}(1)=0$・自然数冪の帰納法・逆数・$k<0$ の六段）・SageMath overview（1246 検査）・Lean 具体版（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow` が本文の四つの部分に 1 対 1。`realLog_mul` だけを使う）・必要十分版（`Group`・`AddGroup`、乗法を加法へ移す写像だけ）・導出版（`Positive` の群構造）を突き合わせ、根拠が一致した。
-  「何も言っていない主張」の観点: 整数冪の実対数は今 tick の主張が各素数について引く形で残す。今 tick の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」は可算側の量（正の有理数）と実数側の量（実現）を結ぶ等式で、順序保存が $\Lambda$ の順序を実対数の単調性へ移すために引くので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
 
 ## 判断待ち（人間に問うべき論点）
 

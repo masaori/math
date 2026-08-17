@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 368 は、前 tick の姉妹側の書き換え差分と `lean:` 配線を確認し（修正無し）、
+台帳の先頭行「周期境界自由エネルギー密度への移送」を三行へ割り（境界評価の対数化／密度の比較／周期境界の密度の列は同じ下組・同じ実数へ）、その最初「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」を四層で閉じた。
+`claim_periodic_open_boundary_comparison_log_le_one`（`claim_periodic_open_boundary_comparison_rational` の直後・`def_open_square_free_entropy_density` の直前、住処 Lambda）: $L\ge1$、$0<q\le1$ で $2L\log q+\log Z^{\mathrm{op}}_{L,L}(q)\le_\Lambda\Phi_L(q)\le_\Lambda\log Z^{\mathrm{op}}_{L,L}(q)$。証明は準備二つ（値の正値性、下端の値の対数を開く二段）と一続き四段（`claim_rational_log_order_iff` で有理点の評価を移す、`def_finite_free_entropy`）。上端は開く操作なし。
+SageMath `check/periodic-open-boundary-comparison-log/`（$L\le3$、有理点 6 点、126 検査）。Lean 具体版 `ThermodynamicLimit/PeriodicOpenComparisonLog.lean`（`logRat_periodicOpenLowerValue_eq`・`logOrderLE_periodicOpenLog_bounds_of_le_one`）、必要十分版は `twoSided_bounds_transport_through_monotone_map_necSuf`（`NecSuf/ThermodynamicLimit/OpenSquareBlockTilingLog.lean`）を共有、導出版 `PeriodicOpenComparisonLogFromNecSuf.lean`（上端の等式は `rfl`）。sorry 検査 1277 件。check 456 ブロック・verify-check-linkage 252 件・PDF 248 ページ通過。
+次は「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」（対数化の両辺を $L^2$ で割って $\Lambda_{\mathbb Q}$ へ: $\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\iota(\log q)\le_{\Lambda_{\mathbb Q}}\Psi_L(q)\le_{\Lambda_{\mathbb Q}}\Psi^{\mathrm{op}}_L(q)$。$\Psi_L$ は `def_finite_free_entropy_density`、$\Psi^{\mathrm{op}}_L$ は `def_open_square_free_entropy_density`。$\tfrac{1}{L^2}\iota(2L\log q)=\tfrac{2}{L}\iota(\log q)$ の整理は `claim_rational_embedding_commutes_with_integer_multiple` と有理数倍の結合。順序の移送は部分正方形の density 版 `claim_open_square_subsquare_comparison_density_le_one` の書き方（`claim_scaled_embedding_order_transfer`）に倣う）。
+
+（tick 367 の記録）
 2026-08-17 の tick 367 は、前 tick の切り出し `ConstantPlusConfiguration.lean` と本文を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「本文の lean: から引かれていない Lean の配線」を実行した。
 章「零点の詰め寄り」の五ブロック（`def_distance_squared_to_rational`・`claim_distance_squared_zero_iff_equal`・`def_zero_pinching_predicate`・`claim_distance_positive_on_fisher_zeros`・`def_phase_transition_countable_statement`。行名は「三定義」だったが二主張も `lean:` を欠いていた）と、章「固有値の代数性」の `claim_row_config_order_linear`（導出版 `RowConfigOrderFromNecSuf`）・`claim_orbit_permutation_sign_values`（必要十分版 `signOn_*` と導出版 `OrbitPermutationSignValuesFromNecSuf`）の `lean:` に、既存の Lean 宣言 28 件を足した。中身は本文と Lean で一致し、本文・Lean は変えていない。Lean 対応先 1240 → 1268 件、import 閉包の外は 0 ファイル。sorry 検査 1274 件（登録済みだった）。`lake build`・check・verify-check-linkage 251 件・PDF 247 ページ通過。
@@ -4127,11 +4134,9 @@ $H_{n}(z,w)$ は閉じた形の和ではなく約束（$H_{0}(z,w)=0$、$H_{n+1}
 
 ## 次回やること
 
-- **レビュー**: 「有理係数の対数順序群の実現写像は順序を保つ」（`claim_rational_log_order_group_realization_monotone`）の本文（証人・準備一つ・含意の鎖六段・最後の三段）と Lean `RationalLogOrderGroupRealizationMonotone.lean`・NecSuf・FromNecSuf、SageMath `rational-log-order-group-realization-monotone`（区間演算の使い方が overview の理由と合っているか）を突き合わせる。
-- **次に進めるセクションは「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
-- **並列の作業ストリーム（式変形の書き方の統一）は一時停止中**（2026-08-15〜。ユーザー指示「実数体への脱出の
-  後ろ倒しを先に直せ」）。台帳の「下組の実現像の上限として…定める」「削除した実数値経路の Lean の後片付け」が済むまで進めない。
-  到達点は台帳の表にある。
+- **レビュー**: 「周期境界と開境界の境界評価の対数化（Λ の鎖。q は 1 以下）」（`claim_periodic_open_boundary_comparison_log_le_one`）の本文（準備二つ・一続き四段）と Lean `PeriodicOpenComparisonLog.lean`・FromNecSuf、SageMath `periodic-open-boundary-comparison-log` を突き合わせる。
+- **次に進めるセクションは「周期境界と開境界の密度の比較（Λ_ℚ。q は 1 以下）」**（状態台帳のセクション表の先頭行。備考と上の「次は」に手順）。
+- **並列の作業ストリーム（式変形の書き方の統一）は再開済み**（2026-08-17 tick 367〜）。毎 tick 1 件。到達点は台帳の表と保管庫にある。
 - **push の直前に `lake build` を回す。Lean を書いたら `lean/scripts/check-no-sorry.sh` の登録一覧へも足す。**
 
 ## 前の tick の記録（1 つ前）

@@ -4,6 +4,22 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 368 で台帳から移した記録（tick 363 分）
+
+### 現在地
+- **2026-08-17 の tick 363 は、台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_log_order_group_realization_real_log`（`claim_real_logarithm_int_power` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\rho_{\mathbb R}$ と $\log_{\mathbb R}$ の値どうしの等式。乗法を加法へ移すことと $\iota$ が乗法・逆数を保つことだけ）」）: $\lambda\in\Lambda$ で $\rho_{\mathbb R}(\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\lambda))=\log_{\mathbb R}(\iota_{\mathbb Q\to\mathbb R}(\mathrm{rat}_\Lambda(\lambda)))$。証明は準備三つ（台の一致、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和（元の個数の帰納法。空集合は `claim_real_logarithm_int_power` を $k:=0$ で））と一続き八段（定義・台の一致・$\iota_{\Lambda\to\Lambda_{\mathbb Q}}$ の定義・整数冪の実対数・$\iota$ が整数冪を保つ・有限積の実対数は和・$\iota$ が有限積を保つ・$\mathrm{rat}_\Lambda$ の定義）。狭義単調性は使わない。`remark_real_escape_plan` の冒頭と脱出の項に参照を足した。
+  SageMath `check/log-order-group-realization-real-log/`（$\ell_p$ を記号のまま持つ模型。10724 検査、4 秒）。Lean 具体版 `ThermodynamicLimit/LogOrderGroupRealizationRealLog.lean`（`realLog_prod`（`Finset.induction_on` と `realLog_mul`。`Real.log_prod` は使わない）・`realizeRational_toRational`（`Finsupp.support_mapRange_of_injective`・`toRational_apply`・`realLog_zpow`・`Rat.cast_zpow`・`realLog_prod`・`Rat.cast_prod`・`rfl` が八段に対応））、必要十分版 `NecSuf/ThermodynamicLimit/LogOrderGroupRealizationRealLog.lean`（`map_prod_necSuf`・`realize_int_prod_necSuf`。`[CommGroup G] [AddCommGroup A]`、乗法を加法へ移す写像だけ。可換性は有限積・有限和を作るために要る。$\iota_{\mathbb Q\to\mathbb R}$ の読み替えは導出版に置く）、導出版（`positive_val_prod`・`Positive.coe_zpow`・`Rat.cast_zpow`・`Rat.cast_prod`）。sorry 検査 1360 件。check 453 ブロック・PDF 246 ページ通過。
+  レビュー: 前 tick の「整数冪の実対数は整数倍」の本文（準備・帰納法・逆数・符号の場合分け）と Lean 具体版（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow`）・必要十分版（`Group`・`AddGroup`）を突き合わせて一致。修正なし。次は「有理係数の対数順序群の実現写像は順序を保つ」。
+
+### 前進の記録
+- 2026-08-17（tick 363）: 台帳の先頭行「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数である（実数体への脱出: 実対数）」を実行し、`claim_log_order_group_realization_real_log` を `claim_real_logarithm_int_power` の直後に置いた。
+  証明は準備三つ（台の一致、$\iota$ が整数冪・有限積を保つ、有限積の実対数は和）と一続き八段だけ。SageMath `log-order-group-realization-real-log`（$\ell_p$ を記号のまま持つ模型）、Lean 具体版・必要十分版（`CommGroup`・`AddCommGroup`、乗法を加法へ移す写像だけ）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1360 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+- 2026-08-17（tick 363）: 前 tick の「整数冪の実対数は整数倍」の本文（準備 $\log_{\mathbb R}(1)=0$・自然数冪の帰納法・逆数・$k<0$ の六段）・SageMath overview（1246 検査）・Lean 具体版（`realLog_one`・`realLog_pow`・`realLog_inv`・`realLog_zpow` が本文の四つの部分に 1 対 1。`realLog_mul` だけを使う）・必要十分版（`Group`・`AddGroup`、乗法を加法へ移す写像だけ）・導出版（`Positive` の群構造）を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 整数冪の実対数は今 tick の主張が各素数について引く形で残す。今 tick の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」は可算側の量（正の有理数）と実数側の量（実現）を結ぶ等式で、順序保存が $\Lambda$ の順序を実対数の単調性へ移すために引くので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 366 で台帳から移した記録（tick 361 分。前進・レビューは tick 362 分）
 
 ### 現在地

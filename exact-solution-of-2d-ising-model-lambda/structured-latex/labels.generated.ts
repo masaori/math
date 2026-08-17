@@ -127,6 +127,7 @@ export const ALL_LABELS = [
   "claim_partition_value_dual_factorization",
   "claim_partition_value_ge_one_at_positive_rational",
   "claim_partition_value_upper_bound_at_positive_rational",
+  "claim_periodic_open_boundary_comparison_log_le_one",
   "claim_periodic_open_boundary_comparison_rational",
   "claim_permutation_moves_two",
   "claim_permutation_sign_mul",
