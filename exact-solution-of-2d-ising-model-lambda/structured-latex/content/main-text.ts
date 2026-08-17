@@ -36720,6 +36720,109 @@ c-a
   },
 
   {
+    id: "zero_pinching_claim_critical_distance_squared_zero_iff_equal",
+    kind: "claim",
+    title: { text: "臨界点への距離の二乗の零性は一致と同値である" },
+    labels: ["claim_critical_distance_squared_zero_iff_equal"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.FisherZero.distanceSquaredToCriticalPoint_eq_zero_iff",
+      "Ising2DLambda.NecSuf.FisherZero.distanceSquaredOfPair_eq_zero_iff_necSuf",
+      "Ising2DLambda.FisherZero.distanceSquaredToCriticalPoint_eq_zero_iff_from_necSuf",
+    ],
+    verification: ["sagemath/check/critical-distance-squared-zero-iff-equal"],
+    statement: [
+      paragraph([
+        math(String.raw`\overline{\mathbb{Q}}`), " の任意の元 ", math(String.raw`\xi`),
+        " について、", math(String.raw`\mathrm{dsq}_{c}(\xi)=0`), "（",
+        ref("def_distance_squared_to_critical_point"), "）と ", math(String.raw`\xi=x_c`),
+        " は同値である。右の等式は ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の中の等式であり、", math(String.raw`x_c\in R`), " は ",
+        ref("claim_critical_point_mem_real_closed"), " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。", math(String.raw`\xi=a+b\cdot\omega`),
+        " を満たすちょうど 1 つの組 ", math(String.raw`(a,b)\in R\times R`),
+        " を取る（", ref("def_real_closed_subfield"), " の第 4 条件）。",
+        math(String.raw`x_c\in R`), " である（", ref("claim_critical_point_mem_real_closed"),
+        "）。同値の 2 つの向きを別々に示す。",
+      ]),
+      paragraph([
+        "第 1 の向き（", math(String.raw`\xi=x_c`), " ならば ",
+        math(String.raw`\mathrm{dsq}_{c}(\xi)=0`), "）。",
+        math(String.raw`x_c=x_c+0\cdot\omega`),
+        " なので、表示の一意性から ", math(String.raw`a=x_c`), "、",
+        math(String.raw`b=0`), " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{dsq}_{c}(\xi)
+&=(x_c-x_c)\cdot(x_c-x_c)+0\cdot0
+&&(\because\ \blkref{def_distance_squared_to_critical_point}\text{、}a=x_c\text{、}b=0)\\
+&=0\cdot0+0\cdot0
+&&(\because\ R\text{ の四則})\\
+&=0
+&&(\because\ R\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "第 2 の向き（", math(String.raw`\mathrm{dsq}_{c}(\xi)=0`), " ならば ",
+        math(String.raw`\xi=x_c`), "）。まず ", math(String.raw`b=0`),
+        " を背理法で示す。", math(String.raw`b\ne0`), " と仮定し、",
+        math(String.raw`w:=(a-x_c)\cdot b^{-1}\in R`),
+        " と置く（", ref("def_real_closed_subfield"),
+        " の第 1 条件）。距離の二乗が零という仮定から ",
+        math(String.raw`(a-x_c)\cdot(a-x_c)=-(b\cdot b)`), " である。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w\cdot w
+&=\bigl((a-x_c)\cdot b^{-1}\bigr)\cdot\bigl((a-x_c)\cdot b^{-1}\bigr)
+&&(\because\ w\ \text{の定義})\\
+&=\bigl((a-x_c)\cdot(a-x_c)\bigr)\cdot\bigl(b^{-1}\cdot b^{-1}\bigr)
+&&(\because\ R\text{ の乗法の交換則と結合則})\\
+&=\bigl(-(b\cdot b)\bigr)\cdot\bigl(b^{-1}\cdot b^{-1}\bigr)
+&&(\because\ (a-x_c)\cdot(a-x_c)=-(b\cdot b))\\
+&=-\Bigl(\bigl(b\cdot b^{-1}\bigr)\cdot\bigl(b\cdot b^{-1}\bigr)\Bigr)
+&&(\because\ R\text{ の四則})\\
+&=-(1\cdot1)
+&&(\because\ b\ne0\text{ と乗法逆元の定義})\\
+&=-1
+&&(\because\ R\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`w=0`), " ならば上の等式から ", math(String.raw`0=-1`),
+        " となり、体の公理 ", math(String.raw`1\ne0`), " に矛盾するので ",
+        math(String.raw`w\ne0`), " である。これは ", ref("claim_neg_one_not_square"),
+        " に矛盾する。ゆえに ", math(String.raw`b=0`), " である。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=(a-x_c)\cdot(a-x_c)+0\cdot0
+&&(\because\ \blkref{def_distance_squared_to_critical_point}\text{、}b=0)\\
+&=(a-x_c)\cdot(a-x_c)
+&&(\because\ R\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "である。体 ", math(String.raw`R`), " は零因子を持たないので ",
+        math(String.raw`a-x_c=0`), "、すなわち ", math(String.raw`a=x_c`), " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi
+&=a+b\cdot\omega
+&&(\because\ \text{組 }(a,b)\text{ の取り方})\\
+&=x_c+0\cdot\omega
+&&(\because\ a=x_c\text{、}b=0)\\
+&=x_c
+&&(\because\ \overline{\mathbb Q}\text{ の四則})
+\end{aligned}`),
+      paragraph([
+        "全過程は ", math(String.raw`\overline{\mathbb{Q}}`), " とその部分体 ",
+        math(String.raw`R`), " の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "zero_pinching_claim_distance_squared_zero_iff_equal",
     kind: "claim",
     title: { text: "距離の二乗の零性は一致と同値である" },

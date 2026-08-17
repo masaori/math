@@ -4,6 +4,11 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 411 は、台帳の先頭行「零点と臨界点の距離の二乗の零性は一致と同値」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_critical_distance_squared_zero_iff_equal`: 一意表示 $\xi=a+b\omega$ と $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi)=0\iff\xi=x_c$ を有理点版と同じ背理法で示した。SageMath は二根・18 組を厳密確認。Lean 具体版、既存の必要十分核、導出版。sorry 検査 1424 件・check 502 ブロック・linkage 285 件・PDF 272 ページ通過。
+レビューでは tick 410 の臨界点の非零性を四層で突き合わせ、修正なし。有限格子での非零性を述べ、先頭距離の正値性が直接引くので「何も言っていない主張」ではない。式変形統一は姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」の Step 1 の線型独立性の三等号を一続き三段へ揃えた。
+次は「先頭距離 $d_1(L)$ の定義と正値性」。最小元は `claim_real_algebraic_min_unique`、零点集合の非空・有限は既存主張、正値性は tick 410 の $x_c\notin\mathcal F_L$ と今 tick の零性同値、二平方和が平方であること、$R$ の順序の定義を用いる。
+
 2026-08-18 の tick 410 は、台帳の先頭行「$x_c$ は Fisher 零点でない」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_point_not_fisher_zero`（`claim_critical_partition_value_mem_positive_cone` の直後）: 臨界点での評価値 $\xi=\sum_m\Omega_L(m)x_c^m$ が正錐 $P_s$ に入ること（tick 409）と、零元の表示 $(0,0)$ が正錐の三条件をすべて破ること（`claim_quadratic_zero_representation` で $\xi=0$ から $\mathrm{rep}_s(\xi)=(0,0)$）から、`def_finite_lattice_fisher_zeros` へ当てる背理法で $x_c\notin\mathcal F_L$。骨組みは `claim_positive_rational_not_fisher_zero` と同じ。
 SageMath `check/critical-point-not-fisher-zero/`（$L=1,2,3$ × $s$ 2 通りの 6 組。評価値の非零・`QQbar` の根一覧への不在・表示の正錐条件、$(0,0)$ の三条件の破れ。厳密計算）。Lean 具体版 `FisherZero/CriticalPointNotFisherZero.lean`（`criticalPoint_not_mem_fisherZero`。零元表示の補題は `QuadraticZeroNegation` の import が要る——`CriticalPartitionValuePositiveCone` からは推移的に届かない）、必要十分版 `NecSuf/FisherZero/CriticalPointNotFisherZero.lean`（`represented_positive_value_not_mem_zeroSet_necSuf`。値の一致・正条件・零表示の特徴づけ・零表示の非正・零点集合の定義だけを仮定に取り、体も多項式も順序も使わない）、導出版。sorry 検査 1422 件・check 501 ブロック・linkage 284 件・PDF 271 ページ通過。
