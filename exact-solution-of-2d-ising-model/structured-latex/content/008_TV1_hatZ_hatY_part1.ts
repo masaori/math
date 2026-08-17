@@ -3794,10 +3794,16 @@ P_{21}
    &&(\because \gamma_2\text{ の定義と }\cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)
 \end{aligned}`,
       ),
+      paragraph(["実際、"]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(-\theta)
+&= i e^{-i\theta} s_2^*\left(c_1\cos(-\theta) - i\sin(-\theta) - s_1 c_2\right)
+&& (\because\ \gamma_2\text{ の定義}) \\
+&= i e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+&& (\because\ \cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)
+\end{aligned}`),
       paragraph([
-        "実際、",
-        math(String.raw`\gamma_2(-\theta) = i e^{-i\theta} s_2^*(c_1\cos(-\theta) - i\sin(-\theta) - s_1 c_2) = i e^{-i\theta} s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2)`),
-        " であるから ",
+        "であるから ",
         math(String.raw`P_{21} = -\gamma_2(-\theta)`),
         " であり、これは ",
         ref("def_A_theta"),

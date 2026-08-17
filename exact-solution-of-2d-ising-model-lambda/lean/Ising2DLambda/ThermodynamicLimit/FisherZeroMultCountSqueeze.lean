@@ -60,12 +60,4 @@ theorem fisherZeroMultCount_le_edge_bound
     (integerPolynomialQbarLift_partitionPolynomial_ne_zero L)
     (integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt L)
 
-/-- 挟み込みそのもの。 -/
-theorem fisherZeroCount_le_mult_count_le_edge_bound
-    (data : RealClosedSubfieldData) (c : ℚ × ℚ) (r : {r : ℚ // 0 < r}) :
-    fisherZeroCountInRationalDisc L data c r ≤ fisherZeroMultCountInRationalDisc L data c r
-      ∧ fisherZeroMultCountInRationalDisc L data c r ≤ 2 * L ^ 2 :=
-  ⟨fisherZeroCount_le_fisherZeroMultCount L data c r,
-    fisherZeroMultCount_le_edge_bound L data c r⟩
-
 end Ising2DLambda.ThermodynamicLimit
