@@ -62,6 +62,7 @@ export const ALL_LABELS = [
   "def_primal_first_cocycle_space_over_f2",
   "def_primal_to_dual_edge_coefficient_transport",
   "def_quotient_tower_induced_coset_cell_maps",
+  "def_quotient_tower_induced_face_position_map",
   "def_quotient_tower_oriented_edge_representative_selector_compatibility",
   "def_quotient_tower_role_generator_compatibility",
   "def_second_boundary_matrix_over_f2",

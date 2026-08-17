@@ -679,4 +679,157 @@ kh_S.`),
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_induced_face_position_map",
+    kind: "definition",
+    title: { text: "商の塔が誘導する剰余類面の巡回位置写像" },
+    labels: ["def_quotient_tower_induced_face_position_map"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-face-position-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の面セル写像と、",
+        ref("def_finite_quotient_face_cyclic_position_system"),
+        " の剰余類面の巡回位置系を取る。細段面剰余類 ",
+        math(String.raw`C_F\in Q_{\mathrm{fine}}/H_F^{\mathrm{fine}}`),
+        " と粗段面剰余類 ",
+        math(String.raw`D_F\in Q_{\mathrm{coarse}}/H_F^{\mathrm{coarse}}`),
+        " が",
+      ]),
+      displayMath(String.raw`\overline\kappa_F
+\left(
+  \mathtt{fine},
+  F,
+  C_F
+\right)
+=
+\left(
+  \mathtt{coarse},
+  F,
+  D_F
+\right)`),
+      paragraph([
+        "を満たすとする。対応する細段面と粗段面をそれぞれ ",
+        math(String.raw`f_{\mathrm{fine}}`),
+        "、",
+        math(String.raw`f_{\mathrm{coarse}}`),
+        " と書く。段間の剰余類面位置写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{P,C_F}:
+P_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}
+&\longrightarrow
+P_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}},\\
+\overline\kappa_{P,C_F}
+\left(
+  \mathtt{position},
+  a
+\right)
+&:=
+\left(
+  \mathtt{position},
+  \kappa(a)
+\right)
+\qquad(a\in C_F)
+\end{aligned}`),
+      paragraph([
+        "で定める。この作用は粗段面の位置集合に入る。実際、",
+        math(String.raw`C_F=gH_F^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`a=gh`),
+        " を満たす ",
+        math(String.raw`g\in Q_{\mathrm{fine}}`),
+        "、",
+        math(String.raw`h\in H_F^{\mathrm{fine}}`),
+        " を取ると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(a)
+&=
+\kappa(gh)
+&&\bigl(\because\ a=gh\bigr)\\
+&=
+\kappa(g)\kappa(h)
+&&\bigl(\because\ \kappa\text{ は群準同型}\bigr)\\
+&\in
+\kappa(g)H_F^{\mathrm{coarse}}
+&&\bigl(\because\ \kappa(h)\in
+  \kappa(H_F^{\mathrm{fine}})=H_F^{\mathrm{coarse}}\bigr)\\
+&=
+D_F
+&&\bigl(\because\ \overline\kappa_F(C_F)=D_F\bigr).
+\end{aligned}`),
+      paragraph([
+        "さらに、この位置写像は細段と粗段の次位置写像と可換する。各 ",
+        math(String.raw`a\in C_F`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{P,C_F}
+\left(
+  s_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}
+  \left(
+    \mathtt{position},
+    a
+  \right)
+\right)
+&=
+\overline\kappa_{P,C_F}
+\left(
+  \mathtt{position},
+  ar_F^{\mathrm{fine}}
+\right)
+&&\bigl(\because\ \text{細段の次位置写像の定義}\bigr)\\
+&=
+\left(
+  \mathtt{position},
+  \kappa\left(ar_F^{\mathrm{fine}}\right)
+\right)
+&&\bigl(\because\ \overline\kappa_{P,C_F}\text{ の定義}\bigr)\\
+&=
+\left(
+  \mathtt{position},
+  \kappa(a)\kappa\left(r_F^{\mathrm{fine}}\right)
+\right)
+&&\bigl(\because\ \kappa\text{ は群準同型}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_role_generator_compatibility"),
+        " の面役割生成元の整合性より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(
+  \mathtt{position},
+  \kappa(a)\kappa\left(r_F^{\mathrm{fine}}\right)
+\right)
+&=
+\left(
+  \mathtt{position},
+  \kappa(a)r_F^{\mathrm{coarse}}
+\right)
+&&\bigl(\because\ \text{面役割生成元の整合性}\bigr)\\
+&=
+s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
+\left(
+  \mathtt{position},
+  \kappa(a)
+\right)
+&&\bigl(\because\ \text{粗段の次位置写像の定義}\bigr)\\
+&=
+s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
+\left(
+  \overline\kappa_{P,C_F}
+  \left(
+    \mathtt{position},
+    a
+  \right)
+\right)
+&&\bigl(\because\ \overline\kappa_{P,C_F}\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "位置写像は有限集合間の写像であり、粗段で複数の細段位置が同じ位置へ移ることを許す。この定義から向き付き面境界語、局所全単射性、被覆次数の保存は結論しない。全ての群、部分群、剰余類、位置集合、写像、量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
