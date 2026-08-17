@@ -168,17 +168,42 @@ export default defineBlocks([
         math(String.raw`0=2^0-1`),
         "、",
         math(String.raw`n`),
-        " で成り立てば ",
-        math(String.raw`\sum_{t=0}^{n}2^t=(2^n-1)+2^n=2^{n+1}-1`),
-        "）。各 ",
+        " で成り立てば次の一続きで ",
+        math(String.raw`n+1`),
+        " でも成り立つ）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{t=0}^{n}2^t
+&=\sum_{t=0}^{n-1}2^t+2^n
+   \quad (\because \text{有限和の最後の項を分ける}) \\
+&=(2^n-1)+2^n
+   \quad (\because \text{帰納法の仮定}\ \textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1) \\
+&=2\cdot 2^n-1
+   \quad (\because \text{加法の結合則と }2^n+2^n=2\cdot 2^n) \\
+&=2^{n+1}-1
+   \quad (\because \text{指数法則}\ 2\cdot 2^n=2^{n+1})
+\end{aligned}`,
+      ),
+      paragraph([
+        "各 ",
         math(String.raw`k`),
         " について ",
         math(String.raw`i_k-1\in\{0,1\}`),
         " であるから",
       ]),
       displayMath(
-        String.raw`0 \le \sum_{k=1}^{M}(i_k-1)2^{M-k} \le \sum_{k=1}^{M}2^{M-k}
-= \sum_{t=0}^{M-1}2^{t} = 2^{M}-1`,
+        String.raw`\begin{aligned}
+0
+&\le \sum_{k=1}^{M}(i_k-1)2^{M-k}
+   \quad (\because \text{各項は }0\le i_k-1\text{ と }2^{M-k}>0\text{ の積で非負}) \\
+&\le \sum_{k=1}^{M}2^{M-k}
+   \quad (\because \text{各項で }i_k-1\le 1\text{ かつ }2^{M-k}>0) \\
+&= \sum_{t=0}^{M-1}2^{t}
+   \quad (\because \text{添字の置き換え }t:=M-k) \\
+&= 2^{M}-1
+   \quad (\because \text{上の }\textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1\text{ を }n:=M\text{ で})
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
