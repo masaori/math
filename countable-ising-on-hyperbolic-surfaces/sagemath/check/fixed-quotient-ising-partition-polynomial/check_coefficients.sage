@@ -6,6 +6,7 @@ import operator
 import os
 
 check_directory = os.path.dirname(os.path.abspath(__file__))
+load(os.path.join(check_directory, "_prelude.sage"))
 load(
     os.path.join(
         check_directory,
@@ -55,15 +56,6 @@ for step in range(1, configuration_count):
 
     coefficient_by_broken_edge_count[broken_edge_count] += 1
     previous_configuration = configuration
-
-expected_coefficients = [
-    2, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 168, 0, 384, 112, 0,
-    672, 168, 2016, 1092, 1584, 3696, 2688, 9030, 7392, 13776, 23520,
-    21552, 46368, 67760, 100800, 142674, 194208, 339360, 458784, 530824,
-    696192, 938448, 1128848, 1150716, 1253280, 1541040, 1570464,
-    1338120, 1243872, 1213968, 984144, 662508, 461376, 329784, 183680,
-    75348, 27216, 8064, 1344, 126,
-] + [0] * 28
 
 assert coefficient_by_broken_edge_count == expected_coefficients
 assert sum(coefficient_by_broken_edge_count) == 2**24
