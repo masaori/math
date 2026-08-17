@@ -286,6 +286,49 @@ export default defineBlocks([
     }),
   },
   {
+    name: '主張型でないブロック（定義）が身分 standing を宣言する',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': blocksModule(
+        `  {
+    id: 'standing_on_definition',
+    kind: '${broken ? 'definition' : 'claim'}',
+    labels: [],
+    habitat: 'countable',
+    standing: 'mainTheorem',
+    statement: [],
+  },`,
+      ),
+    }),
+  },
+  {
+    name: '身分 standing が語彙に無い値',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': blocksModule(
+        theorem({
+          id: 'standing_value',
+          extra: `\n    standing: '${broken ? 'important' : 'mainTheorem'}',`,
+        }),
+      ),
+    }),
+  },
+  {
+    name: '見出しが身分 standing を宣言する',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': blocksModule(
+        `  {
+    id: 'standing_on_heading',
+    kind: 'heading',
+    level: 1,
+    labels: [],
+    title: { text: '章' },${broken ? "\n    standing: 'mainTheorem'," : ''}
+  },`,
+      ),
+    }),
+  },
+  {
     name: '図表ブロックが定理型のフィールドを持つ',
     expect: 'TS2322',
     files: (broken) => ({

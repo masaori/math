@@ -626,6 +626,7 @@ m
   {
     id: "partition_polynomial_claim_coefficient_representation",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "分配多項式の係数は多重度である" },
     labels: ["claim_coefficient_representation"],
     habitat: "Z",
@@ -2202,6 +2203,7 @@ N\lambda\le_{\Lambda}N\mu
   {
     id: "free_entropy_claim_rational_log_order_iff",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "正の有理数の対数は順序を保ちかつ反映する" },
     labels: ["claim_rational_log_order_iff"],
     habitat: "Lambda",
@@ -2306,6 +2308,7 @@ N\lambda\le_{\Lambda}N\mu
   {
     id: "free_entropy_claim_free_entropy_at_one",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "すべての配位を等しく数える点での自由エントロピー" },
     labels: ["claim_free_entropy_at_one"],
     habitat: "Lambda",
@@ -3859,6 +3862,7 @@ w_A(q)
   {
     id: "transfer_matrix_theorem_partition_polynomial_is_trace",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "分配多項式は転送行列の冪のトレースである" },
     labels: ["theorem_partition_polynomial_is_trace"],
     habitat: "Z",
@@ -7060,6 +7064,7 @@ T_{S(\tau),S(\tau')}
   {
     id: "algebraic_eigenvalue_theorem_shift_matrix_commutes",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "シフト行列と転送行列は可換である" },
     labels: ["theorem_shift_matrix_commutes"],
     habitat: "Z",
@@ -7699,6 +7704,7 @@ S'(\tau'')=S^{[k]}(\tau)
   {
     id: "algebraic_eigenvalue_theorem_shift_matrix_order",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "シフト行列の L 乗は単位行列である" },
     labels: ["theorem_shift_matrix_order"],
     habitat: "Z",
@@ -19183,6 +19189,7 @@ z^{n}
   {
     id: "algebraic_eigenvalue_claim_shift_char_root_of_unity",
     kind: "claim",
+    standing: "mainTheorem",
     title: {
       text: "シフト行列の特性多項式の値を 0 にする代数的数は 1 の $L$ 乗根である",
     },
@@ -27707,6 +27714,7 @@ n
   {
     id: "algebraic_eigenvalue_claim_qbar_eigenspaces_span",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "シフト行列の固有空間たちは列ベクトルの全体を張る" },
     labels: ["claim_qbar_eigenspaces_span"],
     habitat: "Qbar",
@@ -27822,6 +27830,7 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
   {
     id: "fisher_zero_claim_algebraicity",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "有限格子の Fisher 零点は代数的である" },
     labels: ["claim_fisher_zero_algebraicity"],
     habitat: "Qbar",
@@ -28293,6 +28302,7 @@ S_L(A)
   {
     id: "fisher_zero_claim_high_temperature_polynomial_identity",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "高温展開の多項式恒等式" },
     labels: ["claim_high_temperature_polynomial_identity"],
     habitat: "Z",
@@ -29064,6 +29074,7 @@ H_L
   {
     id: "fisher_zero_claim_mixed_boundary_duality_identity",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "四境界条件の混合の双対恒等式" },
     labels: ["claim_mixed_boundary_duality_identity"],
     habitat: "Z",
@@ -34362,6 +34373,7 @@ a\cdot a
   {
     id: "fisher_zero_claim_self_dual_positive_root_unique",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "自己双対方程式の正の根は −1+s に限る" },
     labels: ["claim_self_dual_positive_root_unique"],
     habitat: "Qbar",
@@ -34946,6 +34958,7 @@ H^{a,b}_L(q)
   {
     id: "fisher_zero_claim_free_entropy_dual_relation",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "双対な点どうしの自由エントロピーの関係" },
     labels: ["claim_free_entropy_dual_relation"],
     habitat: "Lambda",
@@ -35089,6 +35102,7 @@ L^2\,\ell_2+\Phi_L(q)
   {
     id: "zero_pinching_claim_positive_rational_not_fisher_zero",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "正の有理点は Fisher 零点でない" },
     labels: ["claim_positive_rational_not_fisher_zero"],
     habitat: "Qbar",
@@ -35958,6 +35972,7 @@ w\cdot w
   {
     id: "zero_pinching_claim_distance_positive_on_fisher_zeros",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "零点と正の有理点の距離の二乗は零でない" },
     labels: ["claim_distance_positive_on_fisher_zeros"],
     habitat: "Qbar",
@@ -45189,6 +45204,7 @@ Y
   {
     id: "thermodynamic_limit_claim_open_square_density_sequence_cauchy_le_one",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "開境界正方形の密度の列は Cauchy 列である（q は 1 以下）" },
     labels: ["claim_open_square_density_sequence_cauchy_le_one"],
     habitat: "Lambda",
@@ -47405,6 +47421,7 @@ Y
   {
     id: "thermodynamic_limit_claim_periodic_density_lower_set_eq_open_square_le_one",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "周期境界の密度の下組と開境界正方形の密度の下組は等しい（q は 1 以下）" },
     labels: ["claim_periodic_density_lower_set_eq_open_square_le_one"],
     habitat: "Lambda",

@@ -15,6 +15,7 @@
 import { z } from 'zod'
 
 import { err, ok, type Result } from '../result.ts'
+import { standingOf } from '../structured-text/block.ts'
 import type { Block, Note } from '../structured-text/block.ts'
 import { localeRuntimeSchema, type Locale } from '../structured-text/locale.ts'
 import type { Node } from '../structured-text/node.ts'
@@ -281,6 +282,9 @@ const theoremMetaOf = <L extends string, M>(block: Block<L, M>): Record<string, 
     statement: _statement,
     proof: _proof,
     origin: _origin,
+    // 身分は入力言語の第一級のフィールドなので、意味メタデータの袋には入れない
+    // （`localeSpecificMetaKeys` で翻訳ごとに変えてよい対象にはならない。下で個別に照合する）。
+    standing: _standing,
     ...meta
   } = block
   return meta as Record<string, unknown>
@@ -482,6 +486,16 @@ const comparePairedBlock = <L extends string, M>(
     translatedBlock.kind !== 'heading' &&
     translatedBlock.kind !== 'figure'
   ) {
+    // 身分は言語に依らない構造である。翻訳で主定理がサブ定理に変わることは訳の問題ではない。
+    if (standingOf(sourceBlock) !== standingOf(translatedBlock)) {
+      addDrift(
+        context.issues,
+        context.locale,
+        `${blockPath}.standing`,
+        standingOf(sourceBlock),
+        standingOf(translatedBlock),
+      )
+    }
     compareMeta(sourceBlock, translatedBlock, context, blockPath)
     compareNodes(
       sourceBlock.statement,

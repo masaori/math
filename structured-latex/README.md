@@ -47,7 +47,24 @@ structured-latex/
 
 依存方向は一方向で、逆流・循環は禁止（`npm run check:deps` が実際の import を読んで検査する）。
 各論文の `tools/build-html.ts` は `content/` から静的HTMLを生成し、既定UIを
-`renderers/html/` から利用する。
+`renderers/html/` から利用する。既定UIが持つのは、章ナビゲーション
+（`chapter-navigation.ts`）と、主定理・サブ定理の見せ方（`theorem-standing.ts`）である。
+
+## 主定理とサブ定理
+
+定理・主張のブロックは、その文書での**身分**を宣言できる。
+
+```typescript
+{ id: '…', kind: 'theorem', standing: 'mainTheorem', labels: […], statement: […] }
+```
+
+- 宣言できるのは `theorem` / `claim` だけである。定義・注意・ノート・見出し・図表に書くと、
+  型検査と実行時検証の両方で落ちる。
+- **宣言が無ければサブ定理**として扱う。主定理は印を付けたものだけである。
+- 身分は意味であって体裁ではない（[docs/domain-model.md](docs/domain-model.md) §7.2）。
+  見せ方は出力器が決める: HTML の既定UIは、各見出しの冒頭にその見出しに属する主定理を列挙し、
+  サブ定理のブロックを題名だけ見せて既定で閉じる（`details` / `summary` なので JavaScript に
+  依存しない）。定義・注意は身分を持たないので閉じない。LaTeX / PDF の出力は身分で変わらない。
 
 ## 使う側がやること
 

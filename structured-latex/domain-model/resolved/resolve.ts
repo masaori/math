@@ -20,6 +20,7 @@
  */
 
 import { err, ok, type Result } from '../result.ts'
+import { standingOf } from '../structured-text/block.ts'
 import type { Block, HeadingLevel, Note, Origin, TitleContent } from '../structured-text/block.ts'
 import type { Node } from '../structured-text/node.ts'
 import type { NumberingPolicy } from './numbering.ts'
@@ -291,9 +292,22 @@ export const resolveTolerantly = <L extends string, M>(
         origin,
       }
     }
-    const { id: _id, labels: _labels, kind, title, statement, proof, origin: _origin, ...meta } = block
+    const {
+      id: _id,
+      labels: _labels,
+      kind,
+      title,
+      statement,
+      proof,
+      origin: _origin,
+      // 身分は入力言語の第一級のフィールドであってプロジェクト固有メタデータではない。
+      // ここで取り出さないと `meta` の中へ紛れ込み、出力器から意味のある形で読めなくなる。
+      standing: _standing,
+      ...meta
+    } = block
     return {
       kind,
+      standing: standingOf(block),
       blockId: block.id,
       number,
       title: titleOf(title),

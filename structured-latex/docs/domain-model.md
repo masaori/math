@@ -306,13 +306,28 @@ type TitleContent = { text: string; tex?: string } | { text?: string; tex: strin
 /** 由来。先行実装の sourcePath / sourceOrdinal を一般化したもの。**任意**（下記の注記）。 */
 type Origin = { path: string; ordinal: number }
 
-type TheoremLikeBlock<L, M> = { id; labels: readonly L[]; origin?: Origin } & M & {
-  kind: TheoremLikeKind
+/** 主張の身分。宣言が無ければ subTheorem（既定はサブ定理。下記の注記）。 */
+type TheoremStanding = 'mainTheorem' | 'subTheorem'
+
+// 定理型は「身分を宣言できる主張型」と「宣言できないそれ以外」の共用体である。
+type TheoremLikeCommon<L, M> = { id; labels: readonly L[]; origin?: Origin } & M & {
   title?: TitleContent | null
   statement: readonly Node<L>[]
   proof?: readonly Node<L>[]
   level?: never; content?: never; caption?: never; notes?: never   // 他種別のフィールドは書けない
 }
+
+type StandingBearingBlock<L, M> = TheoremLikeCommon<L, M> & {
+  kind: 'theorem' | 'claim'
+  standing?: TheoremStanding
+}
+
+type UnrankedTheoremLikeBlock<L, M> = TheoremLikeCommon<L, M> & {
+  kind: 'definition' | 'remark' | 'note'
+  standing?: never                    // 定義・注意・ノートは到達点にも道具にもならない
+}
+
+type TheoremLikeBlock<L, M> = StandingBearingBlock<L, M> | UnrankedTheoremLikeBlock<L, M>
 
 type HeadingBlock<L> = { id; labels: readonly L[]; origin?: Origin } & {
   kind: 'heading'
@@ -341,6 +356,16 @@ type Note<L> = {
 「`habitat` は本文ブロックでは必須。見出しには書けない」と定めていることに合わせている。
 図表にも効かせていないのは、必要とする実例がまだ 1 件も無いためである
 （必要になれば `FigureBlock` にも `& M` を足せる。追加は加算で済む）。
+
+**身分（`standing`）は意味であって体裁ではない。** §7.2 の判定を当てると、これを落とした文書は
+「その章で何を示したのか」を主張しなくなる（見出しの階層を落とすのと同じ種類の損失であり、
+折りたたみ・強調といった見せ方の設定とは別物である）。したがってテーマ（§8.4）ではなく
+入力言語のフィールドとして持ち、解決済み文書（§5.5）まで運ぶ。プロジェクト固有メタデータ `M`
+でもない——どの文書にも「その章の到達点はどれか」は存在するからである。
+
+**宣言が無いときの既定はサブ定理**（`DEFAULT_THEOREM_STANDING`）である。全主張へ宣言を必須に
+すると、400 件規模の文書では分類の判断が一度に大量に発生し、判断の質を保てない。
+**印を付けたものだけが主定理**という形にすれば、付け忘れは「主定理でない」側へ倒れる。
 
 **由来（`origin`）を任意にしたのは M2 での変更である。** 先行 2 実装では必須だが、
 これは Typst 原本からの移行という一時的な事情に由来するものであって、入力言語の契約ではない
@@ -625,6 +650,8 @@ Web ビューア側も同じブロック列から独立に体裁を決めてい�
 | ラベルと参照の関係 | 意味 | どの主張を使ったかが変わる |
 | 参照が「定理 2.7」と出るか番号なしリンクで出るか | 体裁 | 指している先は同じ |
 | 見出しの階層（level） | 意味 | 論理構造が変わる |
+| 主張が主定理かサブ定理か | 意味 | どれがその章の到達点かが変わる |
+| サブ定理を閉じて出すか開いて出すか | 体裁 | どれが到達点かは変わらない |
 | level 1 を `\part` に写すか `\section` に写すか | 体裁 | 階層関係は同じ |
 | 定理番号が節ごとにリセットされるか通しか | 体裁 | どの主張かは変わらない（ただし採番結果は解決済み文書に固定する。§5.5） |
 | 改ページ・段組・フロートの配置 | 体裁 | 内容は変わらない |
