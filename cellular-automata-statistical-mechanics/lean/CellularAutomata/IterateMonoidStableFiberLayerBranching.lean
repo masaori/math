@@ -9,12 +9,16 @@ structured-latex/content/iterate-monoid-stable-fiber-layer-branching.ts。
 -/
 import CellularAutomata.IterateMonoidStableFiberBranching
 import CellularAutomata.IterateMonoidStableFiberLayerPreimage
+import CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching
 
 namespace CellularAutomata.IterateMonoidStableFiberLayerBranching
 
 open CellularAutomata.EssentialDependency
 open CellularAutomata.TimeExpansionDependency
+open CellularAutomata.GlobalMapIteration
+open CellularAutomata.MinimalPreperiodPeriod
 open CellularAutomata.IterateMonoidStableImage
+open CellularAutomata.IterateMonoidStablePartition
 open CellularAutomata.IterateMonoidStableFiberDynamics
 open CellularAutomata.IterateMonoidStableFiberBranching
 open CellularAutomata.IterateMonoidStableFiberDepth
@@ -135,5 +139,120 @@ theorem mem_depthLayerBranchingDataTable_iff
           predecessorCount N f z := by
   classical
   simp [depthLayerBranchingDataTable, eq_comm]
+
+/-! ## 必要十分版からの導出 -/
+
+/-- 層の有限走査表は必要十分版の層表の特殊化である。 -/
+theorem stableFiberDepthLayerTable_eq_necessary_sufficient
+    (q : stableImage N f) (k : ℕ) :
+    stableFiberDepthLayerTable N f q k =
+      CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.fiberDepthLayerTable
+        (stableFiber N f) (minPreperiod N f) q k := by
+  ext y
+  rw [mem_stableFiberDepthLayerTable_iff,
+    CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.mem_fiberDepthLayerTable_iff]
+  exact Iff.rfl
+
+/-- 層別分岐総和は必要十分版の総和の特殊化である。 -/
+theorem depthLayerBranchingTotal_eq_necessary_sufficient
+    (q : stableImage N f) (k : ℕ) :
+    ∑ z ∈ stableFiberDepthLayerTable N f (stableIndexMap N f q) k,
+        predecessorCount N f z =
+      ∑ z ∈ CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.fiberDepthLayerTable
+          (stableFiber N f) (minPreperiod N f) (stableIndexMap N f q) k,
+        CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorCount
+          (globalMap N f) z := by
+  rw [stableFiberDepthLayerTable_eq_necessary_sufficient]
+  exact Finset.sum_congr rfl fun z _hz => predecessorCount_eq_necessary_sufficient N f z
+
+theorem subsetPreimageTable_eq_subsetPredecessorUnionTable_from_necessary_sufficient
+    (T : Finset (V → State)) :
+    subsetPreimageTable N f T = subsetPredecessorUnionTable N f T := by
+  classical
+  have hAT : ∀ y, y ∈ subsetPreimageTable N f T ↔ globalMap N f y ∈ T := by
+    intro y
+    simp [subsetPreimageTable]
+  calc
+    subsetPreimageTable N f T =
+        CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorUnionTable
+          (globalMap N f) T :=
+      (CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorUnionTable_eq
+        (globalMap N f) (subsetPreimageTable N f T) T hAT).symm
+    _ = subsetPredecessorUnionTable N f T := by
+      unfold CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorUnionTable
+        subsetPredecessorUnionTable
+      apply Finset.biUnion_congr rfl
+      intro z _hz
+      exact (predecessorTable_eq_necessary_sufficient N f z).symm
+
+theorem predecessorTables_pairwiseDisjoint_from_necessary_sufficient
+    (T : Finset (V → State)) :
+    ((T : Finset (V → State)) : Set (V → State)).PairwiseDisjoint
+      (predecessorTable N f) := by
+  have hfun : predecessorTable N f =
+      CellularAutomata.NecSuf.IterateMonoidStableFiberBranching.predecessorTable
+        (globalMap N f) :=
+    funext fun z => predecessorTable_eq_necessary_sufficient N f z
+  rw [hfun]
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.predecessorTables_pairwiseDisjoint
+    (globalMap N f) T
+
+theorem positive_depthLayer_predecessorCount_from_necessary_sufficient
+    (q : stableImage N f) (k : ℕ) (hk : 0 < k) :
+    (stableFiberDepthLayerTable N f q (k + 1)).card =
+      ∑ z ∈ stableFiberDepthLayerTable N f (stableIndexMap N f q) k,
+        predecessorCount N f z := by
+  rw [stableFiberDepthLayerTable_eq_necessary_sufficient,
+    depthLayerBranchingTotal_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.positive_fiberDepthLayerTable_card
+    (globalMap N f) (stableFiber N f) (minPreperiod N f) (stableIndexMap N f)
+    (fun q y => globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y)
+    (fun y => minPreperiod_globalMap_eq_zero_from_necessary_sufficient N f y)
+    (fun y => minPreperiod_globalMap_eq_sub_one_from_necessary_sufficient N f y)
+    q k hk
+
+theorem zero_depthLayer_predecessorCount_from_necessary_sufficient
+    (q : stableImage N f) :
+    (stableFiberDepthLayerTable N f q 0).card +
+        (stableFiberDepthLayerTable N f q 1).card =
+      ∑ z ∈ stableFiberDepthLayerTable N f (stableIndexMap N f q) 0,
+        predecessorCount N f z := by
+  rw [stableFiberDepthLayerTable_eq_necessary_sufficient N f q 0,
+    stableFiberDepthLayerTable_eq_necessary_sufficient N f q 1,
+    depthLayerBranchingTotal_eq_necessary_sufficient]
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.zero_fiberDepthLayerTable_card
+    (globalMap N f) (stableFiber N f) (minPreperiod N f) (stableIndexMap N f)
+    (fun q y => globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y)
+    (fun y => minPreperiod_globalMap_eq_zero_from_necessary_sufficient N f y)
+    (fun y => minPreperiod_globalMap_eq_sub_one_from_necessary_sufficient N f y)
+    q
+
+theorem mem_depthLayerBranchingDataTable_iff_from_necessary_sufficient
+    (q : stableImage N f) (k layerCard branchingTotal : ℕ) :
+    (q, k, layerCard, branchingTotal) ∈ depthLayerBranchingDataTable N f ↔
+      k < 2 ^ Fintype.card V + 1 ∧
+      layerCard = (stableFiberDepthLayerTable N f q k).card ∧
+      branchingTotal =
+        ∑ z ∈ stableFiberDepthLayerTable N f (stableIndexMap N f q) k,
+          predecessorCount N f z := by
+  classical
+  have htable : depthLayerBranchingDataTable N f =
+      CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.layerBranchingDataTable
+        (globalMap N f) (stableFiber N f) (minPreperiod N f) (stableIndexMap N f)
+        (Finset.range (2 ^ Fintype.card V + 1)) := by
+    unfold depthLayerBranchingDataTable
+      CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.layerBranchingDataTable
+    apply Finset.biUnion_congr rfl
+    intro q _hq
+    apply Finset.image_congr
+    intro k _hk
+    dsimp only
+    rw [stableFiberDepthLayerTable_eq_necessary_sufficient,
+      depthLayerBranchingTotal_eq_necessary_sufficient]
+  rw [htable,
+    CellularAutomata.NecSuf.IterateMonoidStableFiberLayerBranching.mem_layerBranchingDataTable_iff,
+    Finset.mem_range,
+    ← depthLayerBranchingTotal_eq_necessary_sufficient,
+    ← stableFiberDepthLayerTable_eq_necessary_sufficient]
 
 end CellularAutomata.IterateMonoidStableFiberLayerBranching
