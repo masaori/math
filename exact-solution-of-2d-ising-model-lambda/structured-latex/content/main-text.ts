@@ -49792,10 +49792,6 @@ N^{\mathrm{mult}}_{L}(c,r)
       ]),
       list([
         [
-          todo("続きから"),
-          "「熱力学極限」の残り: 零点密度の挟み込み ", math(String.raw`N_{L}\le N^{\mathrm{mult}}_{L}\le2L^{2}`), "。",
-        ],
-        [
           todo("未着手"),
           "「臨界指数を零点列で書く」: 先頭零点の列 ",
           math(String.raw`\{x_1(L)\}_L\subset\overline{\mathbb{Q}}`),
