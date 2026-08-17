@@ -1492,6 +1492,9 @@ targets=(
   Ising2DLambda.CriticalExponent.squareOfSum_le_twiceSumOfSquares
   Ising2DLambda.NecSuf.CriticalExponent.squareOfSum_le_twiceSumOfSquares_necSuf
   Ising2DLambda.CriticalExponent.squareOfSum_le_twiceSumOfSquares_from_necSuf
+  Ising2DLambda.CriticalExponent.positiveRational_exists_meshWidth_square_lt
+  Ising2DLambda.NecSuf.CriticalExponent.exists_meshWidth_square_lt_necSuf
+  Ising2DLambda.CriticalExponent.positiveRational_exists_meshWidth_square_lt_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

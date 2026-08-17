@@ -1958,9 +1958,23 @@ G-G^{(\pm)}
         math(String.raw`n`),
         " についての帰納法で示す。",
         math(String.raw`n=0`),
-        " は両辺 ",
-        math(String.raw`f`),
-        " で成立。",
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\hat{G}^{\,0}f
+&= \mathrm{id}_{\mathcal F}(f)
+&&(\because\ \text{写像の零乗の定義})\\
+&= f
+&&(\because\ \text{恒等写像の定義})\\
+&= \mathrm{id}_{\mathcal F}(f)
+&&(\because\ \text{恒等写像の定義})\\
+&= \left(\hat{G}^{(\pm)}\right)^{0}f
+&&(\because\ \text{写像の零乗の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
         math(String.raw`n`),
         " で成立するとし ",
         math(String.raw`f\in\mathcal{F}^{(\pm)}`),

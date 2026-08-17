@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 417 は、「臨界点への有理近似」を有限等分の三論法（正の有理誤差より細い網幅／臨界点を挟む隣接区間／近似点の抽出）へ割り、その最初「正の有理数より平方が小さい有理網幅」を四層で閉じた（住処 Q、脱出なし）。
+`claim_positive_rational_mesh_width`: 任意の $\delta\in\mathbb Q_{>0}$ に対し、$1\le N$ かつ $h_N:=1/N>0$、$h_N^2<\delta$ を満たす $N\in\mathbb N$ が存在する。$\varepsilon:=\min\{\delta,1\}$ と置き、$\mathbb Q$ の Archimedes 性から $1/(n+1)<\varepsilon$ を取り、$h_N^2<h_N<\varepsilon\le\delta$ とした。この存在は四則だけでは出ず、次の有限等分が直接引くので内容がある。
+SageMath `check/positive-rational-mesh-width/`（正の有理数 6 個、`QQ` 厳密）。Lean 具体版 `CriticalExponent/PositiveRationalMeshWidth.lean`、必要十分版 `NecSuf/CriticalExponent/PositiveRationalMeshWidth.lean`（Archimedes 的な線型順序体まで。分子分母表示・代数的数・平方根・完備性を落とす）、導出版。sorry 検査 1439 件・check 508 ブロック・linkage 289 件・PDF 275 ページ通過。
+レビューは tick 416 の和の平方の評価を四層で突き合わせ、修正なし。式変形統一は姉妹側「$V_1$ の固有空間への制限」Step 5 の帰納法の出発点を一続き四段へ開いた（姉妹側 check 300 ブロック・PDF 327 ページ通過）。
+次は「臨界点を挟む有理等分区間」。今 tick で固定した有限等分を使い、$[0,1]$ を幅 $1/N$ に分け、$x_c$ と有理端点の三分法から隣り合う端点で挟む。その次に正の端点を近似点として平方誤差を今 tick の網幅で抑える。
+
 2026-08-18 の tick 416 は、台帳の先頭行「和の平方の評価」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_square_of_sum_le_twice_sum_of_squares`: 任意の $u,v\in R$ について $(u+v)\cdot(u+v)\le_R2\cdot(u\cdot u)+2\cdot(v\cdot v)$。差 $D=(2u^2+2v^2)-(u+v)^2$ を三段の式変形（展開・同類項・因数分解）で $(u-v)\cdot(u-v)$ へ変形し、$u=v$ なら差が零元で `def_real_algebraic_nonstrict_order` の等号の枝、$u\ne v$ なら $w:=u-v\ne0$ が平方の証人で狭義順序の枝。tick 415 の確定どおり加法単調性の独立主張は作っていない。
 SageMath `check/square-of-sum-le-twice-squares/`（`AA` の標本 7 個の全 49 組。浮動小数点なし）。Lean 具体版 `CriticalExponent/SquareOfSumLeTwiceSquares.lean`、必要十分版 `NecSuf/CriticalExponent/SquareOfSumLeTwiceSquares.lean`（`squareOfSum_le_twiceSumOfSquares_necSuf`。CommRing だけを仮定し、体・三分法・実閉性を落とす。恒等式が分配則・可換則・加法逆元を全部使うので CommRing より弱くできない）、導出版。sorry 検査 1436 件・check 507 ブロック・linkage 288 件・PDF 274 ページ通過。

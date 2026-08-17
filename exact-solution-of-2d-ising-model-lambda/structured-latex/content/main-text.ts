@@ -51266,6 +51266,62 @@ D
   },
 
   {
+    id: "critical_exponent_claim_positive_rational_mesh_width",
+    kind: "claim",
+    title: { text: "正の有理数より平方が小さい有理網幅" },
+    labels: ["claim_positive_rational_mesh_width"],
+    habitat: "Q",
+    lean: [
+      "Ising2DLambda.CriticalExponent.positiveRational_exists_meshWidth_square_lt",
+      "Ising2DLambda.NecSuf.CriticalExponent.exists_meshWidth_square_lt_necSuf",
+      "Ising2DLambda.CriticalExponent.positiveRational_exists_meshWidth_square_lt_from_necSuf",
+    ],
+    verification: ["sagemath/check/positive-rational-mesh-width"],
+    statement: [
+      paragraph([
+        "任意の ", math(String.raw`\delta\in\mathbb{Q}_{>0}`), " について、ある ",
+        math(String.raw`N\in\mathbb{N}`), " が存在して ", math(String.raw`1\le N`),
+        " であり、網幅 ", math(String.raw`h_N:=1/N\in\mathbb{Q}_{>0}`), " は",
+      ]),
+      displayMath(String.raw`h_N\cdot h_N<\delta`),
+      paragraph([
+        "を満たす。これは臨界点への有理近似を有限等分で構成するための網幅である。",
+        "値の存在は ", math(String.raw`\mathbb{Q}`),
+        " の Archimedes 性を使うので、体の四則だけから従う空の主張ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\varepsilon:=\min\{\delta,1\}\in\mathbb{Q}_{>0}`),
+        " と置く。", math(String.raw`\mathbb{Q}`),
+        " の Archimedes 性により、ある ", math(String.raw`n\in\mathbb{N}`), " が存在して",
+      ]),
+      displayMath(String.raw`\frac{1}{n+1}<\varepsilon`),
+      paragraph([
+        "となる。", math(String.raw`N:=n+1\in\mathbb{N}`), "、",
+        math(String.raw`h_N:=1/N\in\mathbb{Q}`), " と置く。",
+        math(String.raw`N\ge1`), " なので ", math(String.raw`0<h_N`),
+        " である。また ", math(String.raw`\varepsilon\le1`),
+        " なので ", math(String.raw`h_N<\varepsilon\le1`), " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h_N\cdot h_N
+&<h_N
+&&(\because\ 0<h_N<1\ \text{と}\ \mathbb{Q}\ \text{の積の単調性})\\
+&<\varepsilon
+&&(\because\ n\ \text{の取り方})\\
+&\le\delta
+&&(\because\ \varepsilon=\min\{\delta,1\})
+\end{aligned}`),
+      paragraph([
+        "である。よって ", math(String.raw`N`), " と ", math(String.raw`h_N`),
+        " は主張を満たす。全過程は ", math(String.raw`\mathbb{N}`), " と ",
+        math(String.raw`\mathbb{Q}`), " の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
