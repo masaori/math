@@ -249,6 +249,8 @@ targets=(
   Ising3DCut.LimitQuantity.eval_ne_eval_inv_of_nonneg_coeff
   Ising3DCut.LimitQuantity.symmetrized_padicValRat_eval_reciprocal_invariant
   Ising3DCut.LimitQuantity.reflect_eq_of_coeff_palindrome
+  Ising3DCut.LimitQuantity.coeff_polyOfMultiplicity_of_le
+  Ising3DCut.LimitQuantity.reflect_polyOfMultiplicity_eq
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
