@@ -239,8 +239,10 @@ head_before="$(git -C "$REPO_DIR" rev-parse --short HEAD 2>/dev/null || echo '-'
 # そのアカウント専用の長期トークンも一緒に渡す。割り当ての仕組みは local-pc-management の
 # agent-sessions/docs/session-scoped-accounts.md が正本。
 # **モデルは claude-fable-5 のままで、他のモデルや他の CLI へ切り替えることはしない。**
-CLAUDE_ACCOUNT_CONFIG_DIR="${CLAUDE_ACCOUNT_CONFIG_DIR:-$HOME/.claude-coding-agent-0001}"
-CLAUDE_ACCOUNT_TOKEN_FILE="${CLAUDE_ACCOUNT_TOKEN_FILE:-$HOME/.config/agent-tokens/claude-coding-agent-0001.token}"
+# 割り当ては coding-agent-0004（2026-08-17 23:50、local-pc-management の依頼）。0001 は使用量の
+# クレジットが尽きた（実測 23:32: 3 分 22 秒作業して "You're out of usage credits."）。
+CLAUDE_ACCOUNT_CONFIG_DIR="${CLAUDE_ACCOUNT_CONFIG_DIR:-$HOME/.claude-coding-agent-0004}"
+CLAUDE_ACCOUNT_TOKEN_FILE="${CLAUDE_ACCOUNT_TOKEN_FILE:-$HOME/.config/agent-tokens/claude-coding-agent-0004.token}"
 
 run_claude() {  # $1 = モデル名
   # 資格情報が無ければ黙って既定アカウントへ落ちない。落ちると、どのアカウントで
