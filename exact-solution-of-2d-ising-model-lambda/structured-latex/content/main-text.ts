@@ -49069,6 +49069,62 @@ k
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_distinct_linear_factors_bezout",
+    kind: "claim",
+    title: { text: "相異なる代数的数に対応する一次因子は互いに素である（明示的な Bezout 恒等式）" },
+    labels: ["claim_qbar_distinct_linear_factors_bezout"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-distinct-linear-factors-bezout"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarDistinctLinearFactorsBezout",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.distinct_linear_factors_bezout_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarDistinctLinearFactorsBezout_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`w,w'\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"),
+        "）が ", math(String.raw`w\ne w'`), " を満たすとする。このとき",
+      ]),
+      displayMath(String.raw`u_{w,w'}:=\widehat{(w'-w)^{-1}}\ \in\overline{\mathbb{Q}}[t]`),
+      paragraph([
+        "と置くと（", math(String.raw`w\ne w'`), " により ", math(String.raw`w'-w\ne0`),
+        " なので ", ref("def_algebraic_numbers"), " の体 ", math(String.raw`\overline{\mathbb{Q}}`),
+        " の中で逆元 ", math(String.raw`(w'-w)^{-1}`), " が取れ、", ref("def_qbar_constant_embedding"),
+        " により定数として送れる）、次が成り立つ。",
+      ]),
+      displayMath(String.raw`u_{w,w'}\cdot(t-\widehat{w})-u_{w,w'}\cdot(t-\widehat{w'})=1`),
+      paragraph([
+        "すなわち ", math(String.raw`t-\widehat{w}`), " と ", math(String.raw`t-\widehat{w'}`),
+        " は明示的な係数の組を持つ Bezout 恒等式で結ばれる。",
+      ]),
+    ],
+    proof: [
+      paragraph(["以下の計算はすべて ", math(String.raw`\overline{\mathbb{Q}}[t]`), " の中で行う。"]),
+      displayMath(String.raw`\begin{aligned}
+u_{w,w'}\cdot(t-\widehat{w})-u_{w,w'}\cdot(t-\widehat{w'})
+&=u_{w,w'}\cdot\bigl((t-\widehat{w})-(t-\widehat{w'})\bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&=u_{w,w'}\cdot(\widehat{w'}-\widehat{w})
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の加法の可換則・結合則で}\ t\ \text{が消える})\\
+&=u_{w,w'}\cdot\widehat{w'-w}
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{が和を保つことと加法の逆元の一意性})\\
+&=\widehat{(w'-w)^{-1}}\cdot\widehat{w'-w}
+&&(\because\ u_{w,w'}\ \text{の定め方})\\
+&=\widehat{(w'-w)^{-1}(w'-w)}
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{が積を保つこと})\\
+&=\widehat{1}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の体の逆元}\text{。}\ w'-w\ne0\ \text{より}\ (w'-w)^{-1}(w'-w)=1)\\
+&=1
+&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{1}=1)
+\end{aligned}`),
+      paragraph([
+        "以上で恒等式が示された。この議論に現れるのは代数的数の四則・体の逆元・多項式環の演算だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

@@ -2834,11 +2834,28 @@ h\,u = u\,h`,
         math(String.raw`g'^{-1}`),
         " を掛けて同じ変形を逆にたどればよい。実際",
       ]),
-      displayMath(
-        String.raw`g\left(h\,u\right)g'^{-1} = g h \left(g^{-1}g'\right) g'^{-1} = g h g^{-1},
-\qquad
-g\left(u\,h\right)g'^{-1} = g\left(g^{-1}g'\right) h\, g'^{-1} = g' h g'^{-1}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+g\left(h\,u\right)g'^{-1}
+&=g h\left(g^{-1}g'\right)g'^{-1}
+&&(\because\ u\ \text{の定め方})\\
+&=g h g^{-1}\left(g'g'^{-1}\right)
+&&(\because\ R\ \text{の積の結合則})\\
+&=g h g^{-1}\,I
+&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ g'g'^{-1}=I)\\
+&=g h g^{-1}
+&&(\because\ R\ \text{の積の単位元})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+g\left(u\,h\right)g'^{-1}
+&=g\left(g^{-1}g'\right)h\,g'^{-1}
+&&(\because\ u\ \text{の定め方})\\
+&=\left(gg^{-1}\right)g' h\,g'^{-1}
+&&(\because\ R\ \text{の積の結合則})\\
+&=I\,g' h\,g'^{-1}
+&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ gg^{-1}=I)\\
+&=g' h\,g'^{-1}
+&&(\because\ R\ \text{の積の単位元})
+\end{aligned}`),
       paragraph([
         "であるから、",
         math(String.raw`hu = uh`),
