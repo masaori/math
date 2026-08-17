@@ -2900,25 +2900,47 @@ g\left(u\,h\right)g'^{-1}
         math(String.raw`g^{-1}g' = cI`),
         " と ",
         math(String.raw`g' = cg`),
-        " が同値であることを見る。",
+        " が同値であることを見る。（",
+        math(String.raw`\Rightarrow`),
+        "）",
         math(String.raw`g^{-1}g' = cI`),
-        " の両辺に左から ",
-        math(String.raw`g`),
-        " を掛けると、Step 2 の ",
-        math(String.raw`g\left(g^{-1}g'\right) = g'`),
-        " と ",
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g'
+&= g\left(g^{-1}g'\right)
+&&(\because\ \text{Step 2 の}\ g\left(g^{-1}g'\right)=g')\\
+&= g(cI)
+&&(\because\ \text{仮定}\ g^{-1}g'=cI)\\
+&= c\,g
+&&(\because\ c\cdot I\ \text{は全行列と可換})
+\end{aligned}`),
+      paragraph([
+        "（最後の等号は ",
         ref("scalar_identity_commutes"),
-        " による ",
-        math(String.raw`g(cI) = c\,g`),
-        " より ",
+        " による）。以上で ",
         math(String.raw`g' = cg`),
-        "。逆に ",
+        " を得る。（",
+        math(String.raw`\Leftarrow`),
+        "）",
         math(String.raw`g' = cg`),
-        " なら ",
-        math(String.raw`g^{-1}g' = g^{-1}(cg) = c\left(g^{-1}g\right) = cI`),
-        "（再び ",
+        " を仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g^{-1}g'
+&= g^{-1}(cg)
+&&(\because\ \text{仮定}\ g'=cg)\\
+&= c\left(g^{-1}g\right)
+&&(\because\ c\cdot I\ \text{は全行列と可換})\\
+&= cI
+&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ g^{-1}g=I)
+\end{aligned}`),
+      paragraph([
+        "（2 段目の等号は ",
         ref("scalar_identity_commutes"),
-        "）。",
+        " による）。以上で ",
+        math(String.raw`g^{-1}g' = cI`),
+        " を得る。以上で同値が示された。",
       ]),
       paragraph([
         "Step 1 と Step 4 を合わせて (ii) を得る。",

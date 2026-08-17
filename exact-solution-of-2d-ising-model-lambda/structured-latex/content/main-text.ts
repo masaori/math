@@ -49125,6 +49125,96 @@ u_{w,w'}\cdot(t-\widehat{w})-u_{w,w'}\cdot(t-\widehat{w'})
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_bezout_power_propagation",
+    kind: "claim",
+    title: { text: "Bezout 恒等式は、もう一方の元の冪についても構成できる（帰納法）" },
+    labels: ["claim_qbar_bezout_power_propagation"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-bezout-power-propagation"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarBezoutPowerPropagation",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.bezout_power_propagation_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarBezoutPowerPropagation_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        ref("def_qbar_polynomial_ring"), " の元 ",
+        math(String.raw`a,b\in\overline{\mathbb{Q}}[t]`), " を取り、",
+        math(String.raw`p,q\in\overline{\mathbb{Q}}[t]`), " を",
+      ]),
+      displayMath(String.raw`p\cdot a+q\cdot b=1`),
+      paragraph([
+        "を満たすように取る（", ref("claim_qbar_distinct_linear_factors_bezout"),
+        " はこの形の組の具体例を与える）。このとき任意の ",
+        math(String.raw`n\in\mathbb{N}`), " について、ある ",
+        math(String.raw`P,Q\in\overline{\mathbb{Q}}[t]`), " が存在して",
+      ]),
+      displayMath(String.raw`P\cdot a+Q\cdot b^{n+1}=1`),
+      paragraph([
+        "が成り立つ（冪は ", ref("def_qbar_polynomial_ring"), " の約束による）。",
+        "すなわち、一方の元 ", math(String.raw`b`), " との Bezout 恒等式が一つ分かれば、",
+        math(String.raw`b`), " の任意の冪との Bezout 恒等式も構成できる。",
+        "この主張を ", math(String.raw`a:=t-\widehat{w}`), "、",
+        math(String.raw`b:=t-\widehat{w'}`), " と、次に ",
+        math(String.raw`a`), " と ", math(String.raw`b`), " を入れ替えて二度使うと、",
+        math(String.raw`(t-\widehat{w})^{k}`), " と ", math(String.raw`(t-\widehat{w'})^{m}`),
+        " が Bezout 恒等式で結ばれることが従う（次の主張）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n\in\mathbb{N}`), " についての帰納法で示す。出発点 ",
+        math(String.raw`n=0`), " では、", math(String.raw`P:=p`), "、",
+        math(String.raw`Q:=q`), " と置くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P\cdot a+Q\cdot b^{0+1}
+&=p\cdot a+q\cdot b^{1}
+&&(\because\ P,Q\ \text{の定め方})\\
+&=p\cdot a+q\cdot(b^{0}\cdot b)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ b^{1}=b^{0}b)\\
+&=p\cdot a+q\cdot(1\cdot b)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ b^{0}=1)\\
+&=p\cdot a+q\cdot b
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
+&=1
+&&(\because\ \text{仮定}\ p\cdot a+q\cdot b=1)
+\end{aligned}`),
+      paragraph([
+        "である。一歩を示す。ある ", math(String.raw`n\in\mathbb{N}`), " について、",
+        math(String.raw`P_{n},Q_{n}\in\overline{\mathbb{Q}}[t]`), " で ",
+        math(String.raw`P_{n}\cdot a+Q_{n}\cdot b^{n+1}=1`), " が成り立つと仮定する。",
+        math(String.raw`P_{n+1}:=P_{n}\,p\,a+Q_{n}\,p\,b^{n+1}+P_{n}\,q\,b`), "、",
+        math(String.raw`Q_{n+1}:=Q_{n}\,q`), " と置くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{n+1}\cdot a+Q_{n+1}\cdot b^{(n+1)+1}
+&=\bigl(P_{n}\,p\,a+Q_{n}\,p\,b^{n+1}+P_{n}\,q\,b\bigr)\,a+(Q_{n}\,q)\,b^{(n+1)+1}
+&&(\because\ P_{n+1},Q_{n+1}\ \text{の定め方})\\
+&=P_{n}\,p\,a^{2}+Q_{n}\,p\,a\,b^{n+1}+P_{n}\,q\,a\,b+Q_{n}\,q\,b^{(n+1)+1}
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則を二回})\\
+&=P_{n}\,p\,a^{2}+Q_{n}\,p\,a\,b^{n+1}+P_{n}\,q\,a\,b+Q_{n}\,q\,\bigl(b\cdot b^{n+1}\bigr)
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ b^{(n+1)+1}=b^{n+1}b\ \text{と積の可換則})\\
+&=p\,a\,(P_{n}\,a)+p\,a\,(Q_{n}\,b^{n+1})+q\,b\,(P_{n}\,a)+q\,b\,(Q_{n}\,b^{n+1})
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則・結合則で並べ替え})\\
+&=p\,a\,\bigl(P_{n}\,a+Q_{n}\,b^{n+1}\bigr)+q\,b\,\bigl(P_{n}\,a+Q_{n}\,b^{n+1}\bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&=(p\,a+q\,b)\cdot\bigl(P_{n}\,a+Q_{n}\,b^{n+1}\bigr)
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&=1\cdot1
+&&(\because\ \text{仮定}\ p\cdot a+q\cdot b=1\ \text{と帰納法の仮定}\ P_{n}\cdot a+Q_{n}\cdot b^{n+1}=1)\\
+&=1
+&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})
+\end{aligned}`),
+      paragraph([
+        "を得る。以上で帰納法が完了し、任意の ", math(String.raw`n\in\mathbb{N}`),
+        " について主張が成り立つ。この議論に現れるのは多項式環の四則と冪の約束だけであり、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
