@@ -3,6 +3,53 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 404 で台帳から移した記録（tick 399〜394 の現在地、tick 399〜394 の前進、tick 390・389 のレビュー）
+
+### 現在地
+
+- **2026-08-18 の tick 399 は、章「臨界指数を零点列で書く」の先頭行「$x_c$ が実閉部分体 $R$ の元であること」の前提を固めるため、その手前に必要な補題「実閉部分体の二つの平方の和が零なら、両方が零である」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_real_closed_sum_of_two_squares_zero`（`claim_real_algebraic_order_trichotomy` の直後）: $x,y\in R$、$x\cdot x+y\cdot y=0$ ならば $x=y=0$。証明は $(x+y\omega)(x-y\omega)=x\cdot x+y\cdot y=0$ の一続き五段（`def_real_closed_subfield` の第 3 条件 $\omega\cdot\omega=-1$ を使う）と、$\overline{\mathbb Q}$ が体で零因子を持たないこと、第 4 条件（一意表示）を $0=0+0\cdot\omega$ へ当てる二つの場合分け（組 $(x,y)$ と組 $(x,-y)$）。
+  理由: $x_c\in R$ の証明は $s=a+b\omega$ と分解して $2ab=0$ を出したあと、$a=0$ の枝（$b\cdot b=-2$）を潰す必要がある。そこには「$R$ の平方の和についての事実」が要り、三分法（1 つの元についての言明）だけでは足りない。まずその土台をこの補題で置いた。
+  SageMath `check/real-closed-sum-of-two-squares-zero/`（5 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`。鎖の各段・結論・一意表示の使い方・$R$ の外では平方の和が零になりうること（仮定が本質であることの確認）。厳密。通過）。Lean 具体版 `FisherZero/RealClosedSumOfTwoSquaresZero.lean`（`zero_decomposition_unique`・`realClosed_sq_add_sq_eq_zero`）、必要十分版 `NecSuf/FisherZero/RealClosedSumOfTwoSquaresZero.lean`（`sq_add_sq_eq_zero_factor_necSuf`。部分体も一意表示も落とし、可換整域で「どちらかの因子が零」まで）、導出版。sorry 検査 1383 件・check 489 ブロック・verify-check-linkage 274 件・build:pdf 266 ページ通過。
+  台帳のセクション表に「$R$ では $2$ が平方である（$-2$ は平方でない）」の行を $x_c\in R$ の前へ足した。**ここが唯一の未固めの論点である。**
+- **2026-08-18 の tick 398 は、最終章「臨界指数を零点列で書く」の唯一のセクション「先頭零点の列と有限サイズスケーリング」を論法単位の 7 行へ割り直し、着工計画を確定した（前進は割り直しのみ。数学ブロックは足していない）。**
+  内訳: $x_c$ が実閉部分体 $R$ の元であること／臨界点への距離の二乗 $\mathrm{dsq}_c$ の定義／$R$ の空でない有限集合の最小元／$\mathcal F_L$ が空でないこと（$L\ge2$）／先頭距離 $d_1(L)$ の定義と正値性／詰め寄りの述語との接続／有限サイズスケーリングの読み（ここだけ ℝ 脱出）。割った理由: 先頭距離 $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)$ の定義には「臨界点への距離」「最小元の存在」「零点集合の非空性」という独立の論法が前置きに要り、さらに着手時の確認で、距離の成分分解の前提になる $x_c\in R$ が本文にも Lean にも未確立だと分かったため（$s=a+b\omega$ の $\omega$ 成分と平方の三分律で示す計画を備考に書いた）。$L=1$ は辺が両方自己ループで $Z_1$ が定数になり $\mathcal F_1=\varnothing$ なので、非空性は $L\ge2$ に限る。
+  レビュー: tick 397 の挟み込み（本文の定義 1 つ・主張 2 つ・SageMath `check/fisher-zero-mult-count-squeeze/`・Lean `FisherZeroMultCountSqueeze.lean`）を突き合わせ、一致した。修正 1 件 — 本文末尾「この先に書くこと」に済んだ「零点密度の挟み込み」の項目が残っていたので消した（check 488 ブロック通過を確認して先に push 済み）。
+- **2026-08-17 の tick 397（launchd の即時起動で走った 23:28 の tick が使用量クレジット切れで異常終了したため、その残骸を人手のセッションが拾って完成させた）は、台帳の先頭行「零点密度の挟み込み $N_L\le N^{\mathrm{mult}}_L\le2L^2$」を四層で閉じた。これで章「熱力学極限」の todo は尽きた（住処 Qbar、脱出なし）。**
+  `claim_fisher_zero_count_le_mult_count`: $N_L(c,r)\le N^{\mathrm{mult}}_L(c,r)$（円板内の各零点で $\mathrm{aev}_\xi(\widehat{Z_L}^{\,F})=0$ から重複度が 1 以上、有限和の単調性）。`claim_fisher_zero_mult_count_le_edge_bound`（**主定理の印**）: $N^{\mathrm{mult}}_L(c,r)\le2L^2$（`claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` を $n:=2L^2$ で当てる。非零性と係数の上界は `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`）。
+  SageMath `check/fisher-zero-mult-count-squeeze/`（4 節。$L=1,2$、中心 3 × 半径 3 の有理円板 9 組。重複度は割り切る指数の最大元として計算し、密度の上界 2 も確認。`QQbar`・`AA` 厳密。通過）。Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountSqueeze.lean`（`one_le_fisherZeroMultiplicity`・`fisherZeroCount_le_fisherZeroMultCount`・`fisherZeroMultCount_le_edge_bound`）、必要十分版 `NecSuf/.../FisherZeroMultCountSqueeze.lean`（`card_le_sum_of_one_le_necSuf`。零点も重複度も落として「各点で 1 以上なら和は個数以上」だけにした）、導出版。`Finset.sum_const` は `ℕ` では `smul` になるので `Finset.card_eq_sum_ones` を使う。sorry 検査 1380 件・check 488 ブロック・verify-check-linkage 273 件・build:pdf 265 ページ通過。
+  レビュー: 本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致を確認した。「何も言っていない主張」の観点で、Lean にだけあった二つの不等式を論理積へ包む未参照定理を削除した。式変形統一は姉妹側「$B_1(\theta)B_2B_1(\theta)=A(\theta)$」の Step 5 で、散文内の $\gamma_2(-\theta)$ の二段の等式を一続きの鎖と行末根拠へ揃えた（内容は不変）。
+  運用: 23:28 の tick は専用アカウント（coding-agent-0001）で 3 分半ほど実際に作業してから「You're out of usage credits.」で落ちた（モデル単位の上限ではなくクレジット切れ）。**アカウント固定そのものは効いている**。残骸は目印どおり拾い、目印を消した。
+- **2026-08-17 の tick 396 は、台帳の先頭行「零点密度: 重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_fisher_zero_mult_count_in_rational_disc`（「この先に書くこと」の直前）: $N^{\mathrm{mult}}_L(c,r):=\sum_{\xi\in\mathcal F_L\cap D(c,r)}\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})\in\mathbb N$。和を取る集合が有限であることは `def_fisher_zero_count_in_rational_disc` で見たとおりで、各点の重複度が定まる根拠は前 tick の `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（持ち上げが零でない）。和を取る集合の元の個数はちょうど $N_L(c,r)$ であり、$N_L$ との違いは「各元を 1 と数えるか重複度と数えるか」だけである。
+  Lean 具体版 `ThermodynamicLimit/FisherZeroMultCountInRationalDisc.lean`（`fisherZeroMultCountIndex`（有限集合を `Finset` として読む）・`fisherZeroMultCountInRationalDisc`（`Finset.sum`）・`mem_fisherZeroMultCountIndex`・`fisherZeroMultCount_index_card`（`Set.ncard_eq_toFinset_card`。`ncard_eq_toFinset_card'` は `Fintype` を要求して通らない））。`Ising2DLambda.lean` に import 追加。lake build・sorry 検査 1376 件・check 486 ブロック・verify-check-linkage 272 件・build:pdf 264 ページ通過。
+  併せて、tick の Claude 実行をこのループ専用アカウント（coding-agent-0001）へ固定した（コミット 2ca942c9）。共有の既定設定ディレクトリを使っていたため、共有アカウントが Fable 5 のモデル単位の上限に達した 23:05 の tick が exit 1 になっていた。モデル（claude-fable-5 / medium）も CLI も変えていない。資格情報が無ければ既定アカウントへ落ちずエラーで終える。
+- **2026-08-17 の tick 395 は、台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げた分配多項式が零でなく係数の上界が $2L^2$ であること／$N^{\mathrm{mult}}_L$ の定義／挟み込み）、その最初を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`（`claim_fisher_zero_finset_card_bound` の直前、住処 Qbar）: $L\ge1$ について、(1) $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）・$=0$（$2L^2<k$）、(2) $\widehat{Z_L}^{\,F}\ne0$、(3) $2L^2<k$ で係数が零。理由: 重複度 $\mathrm{mult}_\xi(\widehat{Z_L}^{\,F})$ が定まるには持ち上げが零でないことが要り、和の上界には係数の上界が要る。どちらも `claim_fisher_zero_finset_card_bound` の証明の中に埋まっていて引けなかったので、独立の主張へ持ち上げ、元の証明はこの主張を引く形へ直した（議論の重複を作らない）。
+  SageMath `check/partition-polynomial-qbar-lift-nonzero-coeff-bound/`（3 節。$L=1,2,3$。分配多項式は配位から作り、多重度の列は独立に数える。係数の総和が $2^{L^2}$ であることも確認。`QQbar` 厳密。通過）。Lean は既存の `integerPolynomialQbarLift_partitionPolynomial_ne_zero` と `..._coeff_eq_zero_of_lt` を引くので新規ファイルは無し。check 485 ブロック・verify-check-linkage 272 件・build:pdf 264 ページ通過。
+  式変形統一: 姉妹側「$c_2^*=s_2^*c_2$」（`008_TV1_hatZ_hatY_part1.ts`）で、散文中の一行の鎖 $c_2^*=\frac{c_2}{s_2}=c_2\cdot\frac1{s_2}=c_2s_2^*=s_2^*c_2$ を一続き四段（行末根拠つき）へ揃えた（内容は不変）。姉妹側 check・PDF 325 ページ通過。
+  レビュー: 前 tick の `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound` の本文（係数上界の帰納法）と Lean を突き合わせ、一致した。修正なし。
+- **2026-08-17 の tick 394 は、台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_qbar_finite_root_multiplicity_sum_le_coeff_bound`: $f\ne0$ かつ $n<i\Rightarrow\mathrm{ac}_i(f)=0$ ならば、任意の有限集合 $s\subset\overline{\mathbb Q}$ について $\sum_{w\in s}\mathrm{mult}_w(f)\le n$。係数上界 $n$ の帰納法で、正の重複度を持つ一点 $w_0$ の一次因子を割り出し、$w_0$ には `claim_qbar_root_multiplicity_le_quotient_succ`、残りの点には `claim_qbar_other_root_multiplicity_le_quotient` を当てた。
+  SageMath `check/qbar-finite-root-multiplicity-sum-le-coeff-bound/`、Lean 具体版・有限和比較だけへ落とした必要十分版・導出版を追加。check 484 ブロック、verify-check-linkage 271 件、sorry 検査 1376 件、PDF 264 ページ通過。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」の Step 4 冒頭の二つの同値を、一続き二段・行末根拠つきへ揃えた（内容は不変）。姉妹側 check 300 ブロック・PDF 325 ページ通過。
+  レビュー: 前 tick の `claim_qbar_other_root_multiplicity_le_quotient` の本文・SageMath・Lean 具体版・必要十分版からの導出版を突き合わせ、一致したので修正なし。「何も言っていない主張」の観点では、$g\ne0$ は重複度の well-defined 性を担い、主不等式は今 tick の帰納法が残りの各点へ繰り返し使うため、いずれも残す。
+
+### 前進の記録
+
+- 2026-08-18（tick 399）: 章「臨界指数を零点列で書く」の先頭行の前提として「実閉部分体の二つの平方の和が零なら両方が零である」を四層で閉じ、`claim_real_closed_sum_of_two_squares_zero` を三分法の直後に置いた（$(x+y\omega)(x-y\omega)$ の因数分解と一意表示。三分法だけでは和について何も言えないため）。SageMath 5 節（`AA` と `QQbar(I)` のモデル）、Lean 具体版・必要十分版（可換整域で因子が零まで）・導出版。sorry 検査 1383 件・check 489 ブロック・PDF 266 ページ通過。セクション表に「$R$ では $2$ が平方である」の行を $x_c\in R$ の前へ足した。
+- 2026-08-18（tick 398）: 最終章「臨界指数を零点列で書く」の唯一のセクションを論法単位の 7 行へ割り直した（$x_c\in R$／$\mathrm{dsq}_c$ の定義／$R$ の有限集合の最小元／$\mathcal F_L\ne\varnothing$（$L\ge2$）／$d_1(L)$ の定義と正値性／詰め寄りの述語との接続／スケーリングの読み（ℝ 脱出））。理由: 先頭距離の定義に独立の前置きが 4 つ要り、うち $x_c\in R$ は未確立だと着手時の確認で分かったため。数学ブロックは足していない。
+- 2026-08-17（tick 397）: 台帳の先頭行「零点密度の挟み込み」を四層で閉じ、章「熱力学極限」の todo が尽きた。$N_L\le N^{\mathrm{mult}}_L$（各項 1 以上と有限和の単調性）と $N^{\mathrm{mult}}_L\le2L^2$（重複度の和の上界。主定理の印）。SageMath 4 節（$L=1,2$・円板 9 組）、Lean 具体版・必要十分版（「各点で 1 以上なら和は個数以上」だけへ落とした）・導出版。sorry 検査 1380 件・check 488 ブロック・PDF 265 ページ通過。launchd 即時起動の tick がクレジット切れで残した書きかけを拾って完成させた。
+- 2026-08-17（tick 396）: 台帳の先頭行「重複度付きの個数 $N^{\mathrm{mult}}_L(c,r)$ の定義」を本文と Lean 具体版で閉じた（定義ブロック）。和を取る有限集合は $\mathcal F_L\cap D(c,r)$、重複度が定まる根拠は前 tick の持ち上げの非零性。Lean は `Finset.sum` と `Set.ncard_eq_toFinset_card`。check 486 ブロック・PDF 264 ページ通過。併せて tick の Claude 実行をこのループ専用アカウントへ固定（モデルは claude-fable-5 のまま。共有アカウントの上限でループが止まっていたため）。
+- 2026-08-17（tick 395）: 台帳の先頭行「零点密度: 重複度付きの個数と挟み込み」を三行へ割り（持ち上げの非零性と係数の上界／$N^{\mathrm{mult}}_L$ の定義／挟み込み。理由: 重複度が定まる前提と和の上界の前提が、既存の証明の中に埋まっていて引けなかったため）、その最初 `claim_partition_polynomial_qbar_lift_nonzero_coeff_bound` を四層で閉じた。既存 `claim_fisher_zero_finset_card_bound` の証明からその議論を持ち上げ、元の証明はこの主張を引く形へ直した。SageMath 3 節（$L=1,2,3$）、Lean は既存定理を引くので新規なし。check 485 ブロック・linkage 272 件・PDF 264 ページ通過。式変形統一: 姉妹側 $c_2^*=s_2^*c_2$ の一行の鎖を一続き四段（行末根拠つき）へ揃えた。姉妹側 check・PDF 325 ページ通過。
+- 2026-08-17（tick 394）: 台帳の先頭行「零点密度: 有限集合上の根の重複度の和は係数の上界を超えない」を四層で閉じた。係数上界の帰納法で正の重複度を持つ一点の一次因子を割り出し、その点の重複度は高々 1 だけ減ること、他の各点の重複度は失われないこと、商の係数上界が 1 下がることを組み合わせた。式変形統一は姉妹側「$T$ の（定数倍を除いた）単射性」Step 4 冒頭の同値の鎖を揃えた。
+
+### レビュー記録
+
+- 2026-08-17（tick 390）: 前 tick の「Bezout 恒等式は、もう一方の元の冪についても構成できる（帰納法）」の本文（帰納法。出発点五段・一歩七段）と Lean 具体版（`qbarBezoutPowerPropagation`）・必要十分版（`bezout_power_propagation_necSuf`。可換環のみ）を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の主張（二度適用で $(t-\widehat w)^{k+1}$ と $(t-\widehat{w'})^{m+1}$ を結ぶ）は次の「互いに素な整除からの商への整除の遺伝」が直接引く構成的な結果であり、単なる言い換えではないので独立ブロックとして残す。入れ替えた組 $(a',b',p',q')$ の読み替えは証明中の一行に置き、独立ブロックにしなかった。
+- 2026-08-17（tick 389）: 前 tick の「相異なる代数的数に対応する一次因子は互いに素である（明示的な Bezout 恒等式）」の本文（一続き六段）と Lean 具体版（`qbarDistinctLinearFactorsBezout`）・必要十分版（`distinct_linear_factors_bezout_necSuf`。環の分配則 1 本）を突き合わせ、一致した。修正なし。
+  「何も言っていない主張」の観点: 今 tick の主張（Bezout 恒等式の冪への伝播）は、次の「一次因子の冪どうしが互いに素であること」が $a,b$ を入れ替えて二度引く形で使う一般補題であり、単独では何も新しい情報を持たない散文ではなく、構成的な帰納法そのものが主張の中身なので独立ブロックとして残す。$P_{n+1},Q_{n+1}$ の定め方は独立ブロックにせず証明中の一行に置いた。
+
 ## 2026-08-18 tick 398 で台帳から移した記録（tick 393〜386 分）
 
 ### 現在地

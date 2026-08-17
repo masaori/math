@@ -1450,6 +1450,8 @@ targets=(
   Ising2DLambda.FisherZero.realAlgebraicLt_trans
   Ising2DLambda.NecSuf.FisherZero.lt_of_difference_trans_necSuf
   Ising2DLambda.FisherZero.realAlgebraicLt_trans_from_necSuf
+  Ising2DLambda.FisherZero.existsUnique_realAlgebraicMin
+  Ising2DLambda.FisherZero.existsUnique_realAlgebraicMin_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

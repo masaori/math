@@ -4,6 +4,13 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 404 は、最終章 3 行目「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_real_algebraic_min_unique`（推移律の直後）: 空でない有限部分集合 $X\subset R$ に、$m\in X$ かつ任意の $y\in X$ について（$y=m$ または $m<_Ry$）を満たす $m$ がちょうど 1 つ。存在は $|X|$ の帰納法（三分法で新しい元と古い最小元を比べ、小さい枝で tick 403 の推移律）、一意性は三分法の排他性。骨組みは `claim_row_config_min_unique` と同一。
+SageMath `check/real-algebraic-min-unique/`（3 節。`AA` のモデルで 63 部分集合の一意性・証人の非零性・帰納法の一歩）。Lean 具体版 `FisherZero/RealAlgebraicMinUnique.lean`（`existsUnique_realAlgebraicMin`。`Finset.Nonempty.cons_induction`）。**必要十分版は新設していない**——行配位の最小元の `NecSuf.AlgebraicEigenvalue.existsUnique_min`（比較可能性・推移律・非対称性だけを仮定に取る）が同一の議論を既に持つので、導出版 `RealAlgebraicMinUniqueFromNecSuf.lean` がそれを引く（同じ議論を二箇所に置かない）。sorry 検査 1396 件・check 495 ブロック・linkage 278 件・PDF 268 ページ通過。
+次は「$\mathcal F_L$ が空でないこと（$L\ge2$）」（$Z_L$ が定数でないこと＝1 スピン反転の配位で $\exists m\ge1,\ \Omega_L(m)\ge1$、と `def_algebraic_numbers` の代数閉性。$L=1$ は $Z_1$ が定数で $\mathcal F_1=\varnothing$ なので除く。**着手時に SageMath で $L=1,2$ を確認してから書くこと**）。
+**運用（tick 404 で起きたこと）**: tick 走行中に別の対話セッション（tmux `math` の lambda 窓）が同じセクションを並行編集し、tick の本文ブロックが相手の撤回操作（`git checkout` 相当）で一度失われ、書き直しになった。相手は重複分を撤去して待機を宣言。**同じ作業ツリーで対話セッションと tick が並走すると本文の上書き事故が起きる**。tick 側はロックを持っているが、対話セッション側の書き込みは防げない。
+
+（tick 403 の記録）
 2026-08-18 の tick 403 は、最終章 3 行目「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」に着手する前に、**本文に無かった狭義順序の推移律**を四層で閉じた（前 tick の MEMORY で「着手時に確かめよ」と書いた点。確かめた結果、実際に無かった）。
 `claim_real_algebraic_order_transitive`: $a<_Rb$ かつ $b<_Rc$ ならば $a<_Rc$。$c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ と書き、tick 400 の「平方の和は平方」で $w\cdot w$ にし、$w\ne0$ を tick 399 の「平方の和が零なら両方零」から出す。**ここ 3 tick の補題が直列につながった形になっている。**
 SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデル）。Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`、必要十分版（可換環に 2 つの性質を仮定として渡す形。零点も虚数単位も落ちる）、導出版。sorry 検査 1394 件・check 494 ブロック・linkage 277 件・PDF 268 ページ通過。
