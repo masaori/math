@@ -12483,3 +12483,23 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-17（tick 362）: 前 tick の「実現写像は有理数倍と可換」の本文（台の包含の準備と一続き六段）・SageMath overview（18235 検査）・Lean 具体版（`realizeRational_eq_sum_support`・`Finsupp.support_smul`＋`Finset.sum_subset`・`Finsupp.smul_apply`・`Rat.cast_mul`・`mul_assoc`・`Finset.mul_sum` が六段に 1 対 1）・必要十分版（`MulZeroClass`・`NonUnitalSemiring`、$\iota$ の乗法保存と $\iota(0)=0$）・導出版（`rfl`）を突き合わせ、根拠が一致した。
   「何も言っていない主張」の観点: 有理数倍との可換性は順序保存の証明が $N$ で割り戻すために引く写像の性質で残す。今 tick の整数冪の実対数は、次の「$\Lambda$ の元の実現は $\mathrm{rat}_\Lambda$ の実対数」が各素数について引く形で、乗法を加法へ移すことだけから帰納法で出す実対数の性質（$\mathbb R$ の四則から直ちには従わない）なので残す。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
+
+## tick 407 で台帳から移した記録
+
+### 現在地
+
+- **2026-08-18 の tick 402 は、台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
+  `def_distance_squared_to_critical_point`（`def_distance_squared_to_rational` の直後）: $\xi=a+b\omega$ の一意表示と、前 tick の `claim_critical_point_mem_real_closed` が与える $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi):=(a-x_c)(a-x_c)+b\cdot b\in R$ を直接定義した。初稿にあった一般写像 $\mathrm{dsq}_R$ と有理点一致補題は、1 ブロックで 2 つの定義を置くことになり、後続も使わないため削除した。
+  Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`criticalPointRealClosed`（`Classical.choose`）とその値 `criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。lake build・sorry 検査 1391 件・check 493 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
+
+### 前進の記録
+
+- 2026-08-18（tick 402）: 台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロック）。第 2 引数を $R$ の元へ広げた $\mathrm{dsq}_R$ を定義し、有理点の場合が既存の $\mathrm{dsq}$ と一致することを明記して、$\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。check 493 ブロック・PDF 267 ページ通過。
+
+### 式変形の書き方の統一
+
+- 2026-08-18（tick 398）: 姉妹側「行列の内積とノルム」（`005_exp_conjugation_proof.ts` の Step 4）で、散文中に埋まっていた鎖 $\sum_{i,j}|a_{ij}|^2=\|A\|^2$ すなわち $\langle A,A\rangle=(\|A\|^2)_{\mathbb C}$ を、一続き二段（行末根拠つき。上の鎖／ノルムの定義）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系の以降の節。005 の `ad`・内積の同値の鎖（1183 行・463 行付近）は statement の記法注記なので対象外と確認した（対象は証明の散文中の鎖）。
+
+### レビュー記録
+
+- 2026-08-18（tick 398）: tick 397 の「零点密度の挟み込み」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正 1 件: 本文末尾「この先に書くこと」に済んだ「零点密度の挟み込み」の項目が残っていたので消した（runbook「項目が済んだら消す」）。

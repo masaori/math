@@ -34123,6 +34123,81 @@ q
   },
 
   {
+    id: "fisher_zero_claim_quadratic_positive_cone_pow_closed",
+    kind: "claim",
+    title: { text: "正錐の元の冪は正錐の元である" },
+    labels: ["claim_quadratic_positive_cone_pow_closed"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/positive-cone-pow"],
+    lean: [
+      "Ising2DLambda.FisherZero.quadraticPositiveCone_pow_mem",
+      "Ising2DLambda.NecSuf.FisherZero.iteratedPower_mem_necSuf",
+      "Ising2DLambda.FisherZero.quadraticPositiveCone_pow_mem_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
+        math(String.raw`\xi\in P_s`),
+        "（", ref("def_quadratic_positive_cone"), "）と任意の ",
+        math(String.raw`m\in\mathbb{N}`),
+        " について、", math(String.raw`\overline{\mathbb{Q}}`),
+        " の冪 ", math(String.raw`\xi^m`), " は ",
+        math(String.raw`Q_s`), " に属し、", math(String.raw`\xi^m\in P_s`),
+        " である。ここで ", math(String.raw`\xi^0:=1`),
+        "、", math(String.raw`\xi^{m+1}:=\xi^m\cdot\xi`),
+        " とする。",
+      ]),
+      paragraph([
+        "この主張は、分配多項式の臨界点での値を評価するとき、",
+        math(String.raw`x_c^m`),
+        " がすべて正錐に留まる根拠として繰り返し使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`), " について帰納法を使う。出発点 ",
+        math(String.raw`m=0`), " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi^0
+&=1
+&&\bigl(\because\ \text{冪の定義}\bigr)\\
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1\text{ へ適用}\bigr),
+\end{aligned}`),
+      paragraph([
+        "かつ同じ ", ref("claim_positive_rational_in_positive_cone"),
+        " により ", math(String.raw`1\in P_s`), " である。",
+      ]),
+      paragraph([
+        "次に、ある ", math(String.raw`m\in\mathbb{N}`), " について ",
+        math(String.raw`\xi^m\in Q_s`), " かつ ",
+        math(String.raw`\xi^m\in P_s`),
+        " と仮定する。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\xi^{m+1}
+&=\xi^m\cdot\xi
+&&\bigl(\because\ \text{冪の定義}\bigr)\\
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr),
+\end{aligned}`),
+      paragraph([
+        "さらに、帰納法の仮定 ", math(String.raw`\xi^m\in P_s`),
+        " と最初の仮定 ", math(String.raw`\xi\in P_s`), " に ",
+        ref("claim_quadratic_positive_cone_mul_closed"), " を適用して ",
+        math(String.raw`\xi^{m+1}=\xi^m\cdot\xi\in P_s`),
+        " を得る。したがって任意の ", math(String.raw`m\in\mathbb{N}`),
+        " について主張が成り立つ。全過程は自然数についての帰納法、有理数の四則と順序、",
+        "および代数的数の積だけで閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "fisher_zero_claim_self_dual_root_plus_mem",
     kind: "claim",
     title: { text: "根 −1+s の所属" },

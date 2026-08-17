@@ -4,6 +4,11 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 407 は、最終章の残り「正錐の元の冪は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_quadratic_positive_cone_pow_closed`: $\xi\in P_s$ と $m\in\mathbb N$ ならば $\xi^m\in Q_s$ かつ $\xi^m\in P_s$。$m=0$ は tick 406 の $1\in P_s$、帰納段は `claim_quadratic_multiplication_mem` と `claim_quadratic_positive_cone_mul_closed` を引く。SageMath `check/positive-cone-pow/` は $s$ 2 通り・正錐の代表例 4 個・指数 $0$ から $9$ までの帰納段 72 件を `QQ`/`QQbar` で厳密確認した。Lean 具体版 `FisherZero/PositiveConePow.lean`、必要十分版 `NecSuf/FisherZero/PositiveConePow.lean`、導出版 `PositiveConePowFromNecSuf.lean`。sorry 検査 1407 件・check 498 ブロック・linkage 281 件・PDF 270 ページ通過。
+レビューでは tick 406 の正の有理数の正錐所属を四層で突き合わせ、修正なし。これは今 tick の基底と後続の自然数係数倍が直接引くため「何も言っていない主張」ではない。式変形統一は姉妹側 `004_transfer_matrix.ts` の Step 2 で、$\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ の導出を一続き三段・各行の根拠つきへ揃え、check・PDF 325 ページを通した。
+次は「分配多項式の臨界点での値は正錐に入り、$x_c$ は Fisher 零点でない」。
+
 2026-08-18 の tick 406 は、最終章の残り「先頭距離 $d_1(L)$ の定義と正値性」を論法単位の 5 行（正の有理数は正錐／正錐の元の冪は正錐／分配多項式の臨界点での値が正錐で $x_c\notin\mathcal F_L$／距離の二乗の零性は臨界点との一致と同値／最小元の定義と正値性）へ割り直し、その最初「正の有理数は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_positive_rational_in_positive_cone`（`claim_quadratic_positive_cone_mul_closed` の直後）: 任意の $q\in\mathbb Q_{>0}$ について $q\in Q_s$（証人 $(q,0)$）かつ $q\in P_s$（第一条件）。のちに $\Omega_L(m)\ge1$ 倍を「正の有理数×正錐の元」の積として `claim_quadratic_positive_cone_mul_closed` で処理するための土台である。
 SageMath `check/positive-rational-in-positive-cone/`（$s$ 2 通り × 正の有理数 6 個、非正 4 個は三条件のどれも満たさないこと。`QQ`/`QQbar` 厳密）。Lean 具体版 `FisherZero/PositiveRationalInPositiveCone.lean`（`positiveRational_mem_quadraticFieldSet`・`positiveRationalElement`・`positiveRational_representation`・`positiveRational_mem_positiveCone`）。**必要十分版は新設していない**——`NecSuf/FisherZero/SelfDualPositiveRoot.lean` の `positive_of_representation_necSuf`（表示と正条件だけを仮定に取る）が同一の議論を既に持つので、導出版 `PositiveRationalInPositiveConeFromNecSuf.lean` がそれを引く。sorry 検査 1403 件・check 497 ブロック・linkage 280 件・PDF 269 ページ通過。

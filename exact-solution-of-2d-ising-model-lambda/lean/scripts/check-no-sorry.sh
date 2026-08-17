@@ -1032,6 +1032,10 @@ targets=(
   Ising2DLambda.FisherZero.positiveRational_representation
   Ising2DLambda.FisherZero.positiveRational_mem_positiveCone
   Ising2DLambda.FisherZero.positiveRational_mem_positiveCone_from_necSuf
+  Ising2DLambda.FisherZero.quadraticPowElement_coe
+  Ising2DLambda.FisherZero.quadraticPositiveCone_pow_mem
+  Ising2DLambda.NecSuf.FisherZero.iteratedPower_mem_necSuf
+  Ising2DLambda.FisherZero.quadraticPositiveCone_pow_mem_from_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
   Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf

@@ -824,15 +824,17 @@ Y_m Z_{m+1}
 &= -i\,\sigma_m^z\sigma_{m+1}^z \quad (\because \text{Step 1})
 \end{aligned}`,
       ),
-      paragraph([
-        "両辺に ",
-        math(String.raw`i \in \mathbb{C}`),
-        " を掛け ",
-        math(String.raw`i\cdot(-i) = 1`),
-        " を使うと",
-      ]),
       displayMath(
-        String.raw`\sigma_m^z\sigma_{m+1}^z = i\,Y_m Z_{m+1} \qquad (1\le m\le M-1)`,
+        String.raw`\begin{aligned}
+\sigma_m^z\sigma_{m+1}^z
+&= \bigl(i\cdot(-i)\bigr)\sigma_m^z\sigma_{m+1}^z
+&& (\because\ i\cdot(-i)=1\text{（複素数の四則）})\\
+&= i\bigl((-i)\sigma_m^z\sigma_{m+1}^z\bigr)
+&& (\because\ \text{複素数倍の結合則})\\
+&= i\,Y_m Z_{m+1}
+&& (\because\ \text{上の Step 2 の等式})
+\qquad (1\le m\le M-1)
+\end{aligned}`,
       ),
       paragraph([
         "Step 3: 境界項 ",

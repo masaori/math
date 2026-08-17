@@ -6,6 +6,9 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 407 は、台帳の先頭行「正錐の元の冪は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_quadratic_positive_cone_pow_closed`: $\xi\in P_s$ と $m\in\mathbb N$ に対して $\xi^m\in Q_s$ かつ $\xi^m\in P_s$。$m=0$ は tick 406 の $1\in P_s$、帰納段は `claim_quadratic_multiplication_mem` と `claim_quadratic_positive_cone_mul_closed` を引いた。
+  SageMath `check/positive-cone-pow/`（$s$ 2 通り × 正錐の代表例 4 個 × $m=0,\ldots,9$、帰納段 72 件。`QQ`/`QQbar` 厳密）。Lean 具体版・必要十分版・導出版。sorry 検査 1407 件・check 498 ブロック・verify-check-linkage 281 件・build:pdf 270 ページ通過。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の Step 2 で、散文と単独の等式に分かれていた $\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ の導出を一続き三段・各行の根拠つきへ揃えた（内容不変）。姉妹側 check・PDF 325 ページ通過。
 - **2026-08-18 の tick 406 は、台帳の先頭行「先頭距離 $d_1(L)$ の定義と正値性」を 5 行へ割り直し、その最初「正の有理数は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。**
   割り直しの理由: 先頭距離の正値性は $x_c\notin\mathcal F_L$ を経由し、それには「正錐の元での分配多項式の値が正錐に入る」機構（冪・自然数倍・有限和）が丸ごと欠けていた。論法単位（表示の確認／冪の帰納法／値の評価と非零／距離の零性の同値／最小元の定義）で 5 行にした。
   `claim_positive_rational_in_positive_cone`（`claim_quadratic_positive_cone_mul_closed` の直後）: 任意の $q\in\mathbb Q_{>0}$ について $q\in Q_s$ かつ $q\in P_s$。表示の証人は $(q,0)$、正錐の第一条件で閉じる。のちに $\Omega_L(m)\ge1$ 倍を正錐の乗法として扱う根拠になる。
@@ -20,9 +23,6 @@
   着手時の確認: `claim_real_algebraic_order_trichotomy` は「場合分けの網羅性だけを与える。順序が加法・乗法と両立することはここでは主張しない」と本文に明記されており、**推移律は本文にもなかった**（前 tick の MEMORY に確認せよと書いた点）。最小元の議論は推移律を要するので先に置いた。
   `claim_real_algebraic_order_transitive`（`claim_two_is_square_in_real_closed` の直後）: $a<_Rb$ かつ $b<_Rc$ ならば $a<_Rc$。証明は $c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ の一続き三段のあと、tick 400 の `claim_real_closed_sum_of_two_squares_is_square` で $u\cdot u+v\cdot v=w\cdot w$ と書き直し、$w\ne0$ を tick 399 の `claim_real_closed_sum_of_two_squares_zero` から出す。**直近 2 tick の補題がそのまま効いた。**
   SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデルで三つ組すべて・鎖の各段と証人の非零性・反射的でないことと非対称性。通過）。Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`（`realAlgebraicLt_trans`）、必要十分版（可換環で「平方の和が平方」「平方の和が零なら各項が零」の 2 つを仮定に取るだけの形）、導出版。sorry 検査 1394 件・check 494 ブロック・verify-check-linkage 277 件・build:pdf 268 ページ通過。
-- **2026-08-18 の tick 402 は、台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロックなので必要十分版と SageMath は置かない。住処 Qbar、脱出なし）。**
-  `def_distance_squared_to_critical_point`（`def_distance_squared_to_rational` の直後）: $\xi=a+b\omega$ の一意表示と、前 tick の `claim_critical_point_mem_real_closed` が与える $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi):=(a-x_c)(a-x_c)+b\cdot b\in R$ を直接定義した。初稿にあった一般写像 $\mathrm{dsq}_R$ と有理点一致補題は、1 ブロックで 2 つの定義を置くことになり、後続も使わないため削除した。
-  Lean 具体版 `FisherZero/DistanceSquaredToCriticalPoint.lean`（`criticalPointRealClosed`（`Classical.choose`）とその値 `criticalPointRealClosed_val`・`distanceSquaredToCriticalPoint`）。lake build・sorry 検査 1391 件・check 493 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -30,7 +30,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | 正錐の元の冪は正錐の元である | todo | $1\in P_s$（`claim_positive_rational_in_positive_cone` を $q=1$ に当てる）と、$\xi\in P_s\Rightarrow\xi^m\in P_s$（$m\in\mathbb N$。`claim_quadratic_positive_cone_mul_closed` の帰納法）。冪が $Q_s$ に留まることは `claim_quadratic_multiplication_mem` の帰納法 |
 | 臨界指数を零点列で書く | 分配多項式の臨界点での値は正錐に入り、$x_c$ は Fisher 零点でない | todo | $\Omega_L(m)\ge1$ の項は正の有理数×冪の積で正錐（mul_closed）、項の和は add_closed の帰納法。$0\notin P_s$（`claim_quadratic_zero_representation` の組 $(0,0)$ は三条件を満たさない）から値が非零、よって $x_c\notin\mathcal F_L$。論法が二つに割れるなら着手時に割る |
 | 臨界指数を零点列で書く | 零点と臨界点の距離の二乗の零性は一致と同値 | todo | `claim_distance_squared_zero_iff_equal` の $q\in\mathbb Q$ を $x_c\in R$ へ置き換えるだけ（証明は同じ骨組み。$q\in R$ の根拠が `claim_critical_point_mem_real_closed` に変わる） |
 | 臨界指数を零点列で書く | 先頭距離 $d_1(L)$ の定義と正値性 | todo | $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)\in R$（最小元は `claim_real_algebraic_min_unique`、非空は `claim_fisher_zero_set_nonempty`、有限は `claim_fisher_zero_set_finite_card_bound`）。正値性は非零（前 2 行）＋二平方和が平方（`claim_real_closed_sum_of_two_squares_is_square`）＋順序の定義 |
@@ -41,15 +40,17 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 407）: 台帳の先頭行「正錐の元の冪は正錐の元である」を実行し、`claim_quadratic_positive_cone_pow_closed` を正の有理数の正錐所属の直後に置いた。自然数の帰納法で、基底は $1\in Q_s\cap P_s$、帰納段は $Q_s$ の乗法閉性と正錐の乗法閉性を引く。SageMath 1 節、Lean 具体版・必要十分版・導出版。sorry 検査 1407 件・check 498 ブロック・verify-check-linkage 281 件・PDF 270 ページ通過。
 - 2026-08-18（tick 406）: 台帳の先頭行「先頭距離 $d_1(L)$ の定義と正値性」を論法単位の 5 行（正の有理数は正錐／冪は正錐／値が正錐で $x_c\notin\mathcal F_L$／距離の零性の同値／最小元の定義と正値性）へ割り直し、その最初「正の有理数は正錐の元である」を四層で閉じた。`claim_positive_rational_in_positive_cone` を `claim_quadratic_positive_cone_mul_closed` の直後に置いた。SageMath 1 節、Lean 具体版・導出版（必要十分版は既存 `positive_of_representation_necSuf` を再利用）。sorry 検査 1403 件・check 497 ブロック・PDF 269 ページ通過。
 - 2026-08-18（tick 405）: 台帳の先頭行「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた。一スピン反転から正次数の非零係数を作り、$\overline{\mathbb Q}$ の代数閉性で根を取った。SageMath は $L=1$ の例外と $L=2,3$ の正次数係数・根を厳密確認。Lean 具体版・必要十分版・導出版。sorry 検査 1399 件・check 496 ブロック・verify-check-linkage 279 件・PDF 269 ページ通過。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の境界項 $\sigma_M^z\sigma_1^z$ の二等号を、一続き二段・各行の根拠つきへ揃えた（内容不変）。
 - 2026-08-18（tick 404）: 台帳の先頭行「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じ、`claim_real_algebraic_min_unique` を推移律の直後に置いた。存在は $|X|$ の帰納法（三分法＋推移律）、一意性は三分法の排他性。必要十分版は行配位の最小元の `existsUnique_min` を再利用（同じ議論を二箇所に置かない）。SageMath 3 節、Lean 具体版・導出版。sorry 検査 1396 件・check 495 ブロック・PDF 268 ページ通過。
 - 2026-08-18（tick 403）: 最小元の行の前提として欠けていた狭義順序の推移律を四層で閉じ、`claim_real_algebraic_order_transitive` を `claim_two_is_square_in_real_closed` の直後に置いた（本文の三分法は網羅性だけで、推移律は無かった）。直近 2 tick の 2 補題（平方の和が平方・平方の和が零なら各項が零）から出る。SageMath 3 節、Lean 具体版・必要十分版（2 性質を仮定に取る可換環の形）・導出版。sorry 検査 1394 件・check 494 ブロック・PDF 268 ページ通過。
-- 2026-08-18（tick 402）: 台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロック）。第 2 引数を $R$ の元へ広げた $\mathrm{dsq}_R$ を定義し、有理点の場合が既存の $\mathrm{dsq}$ と一致することを明記して、$\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。check 493 ブロック・PDF 267 ページ通過。
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
+
+- 2026-08-18（tick 407）: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」（`004_transfer_matrix.ts`）の Step 2 で、散文「両辺に $i$ を掛ける」と単独の等式に分かれていた $\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ の導出を、$i(-i)=1$ を明示する一続き三段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
 - 2026-08-18（tick 406）: 姉妹側「クロネッカー積上の Pauli 行列の積公式」（`004_transfer_matrix.ts`）の Step 1 で、一行に等号 3〜4 個と根拠 1 つで書かれていた $\sigma^x\sigma^x=I$ と $\sigma^y\sigma^z=i\sigma^x$ の二本の鎖を、各一続き（1 行 1 等号・行末根拠つき）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
@@ -59,7 +60,6 @@
 
 - 2026-08-18（tick 402）: 姉妹側のフェルミオン証明（`008_TV1_hatZ_hatY_part2.ts`）で、a) の係数の括弧を因数分解する三段の式を、一続きの式変形と行末根拠へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
-- 2026-08-18（tick 398）: 姉妹側「行列の内積とノルム」（`005_exp_conjugation_proof.ts` の Step 4）で、散文中に埋まっていた鎖 $\sum_{i,j}|a_{ij}|^2=\|A\|^2$ すなわち $\langle A,A\rangle=(\|A\|^2)_{\mathbb C}$ を、一続き二段（行末根拠つき。上の鎖／ノルムの定義）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系の以降の節。005 の `ad`・内積の同値の鎖（1183 行・463 行付近）は statement の記法注記なので対象外と確認した（対象は証明の散文中の鎖）。
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）
 
@@ -72,11 +72,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-18（tick 407）: tick 406 の「正の有理数は正錐の元である」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。この主張は $q\in Q_s$ と $q\in P_s$ を確定し、今 tick の冪の基底 $1\in P_s$ と後続の自然数係数倍が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 406）: tick 405 の「$\mathcal F_L$ が空でないこと（$L\ge2$）」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は最小元の定義（先頭距離）の非空条件を担うため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 405）: tick 404 の「実閉部分体の空でない有限集合は最小元をちょうど 1 つ持つ」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。この主張は有限集合での最小元の存在・一意性を述べ、後続の先頭距離定義が直接引くため「何も言っていない主張」ではない。
 - 2026-08-18（tick 404）: tick 403 の「実代数的数の狭義順序は推移的である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は最小元の存在の帰納法が直接引くため「何も言っていない主張」ではない。
 - 2026-08-18（tick 402）: tick 401 の「臨界点が実閉部分体の元であること」の本文・SageMath・Lean を突き合わせ、論法の一致を確認した。この主張は値の住処を確定し、今 tick の定義が直接引くため「何も言っていない主張」ではない。修正なし。今 tick の初稿は 1 ブロック内の二定義と未使用の一致補題を削除した。
-- 2026-08-18（tick 398）: tick 397 の「零点密度の挟み込み」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正 1 件: 本文末尾「この先に書くこと」に済んだ「零点密度の挟み込み」の項目が残っていたので消した（runbook「項目が済んだら消す」）。
 ## 判断待ち（人間に問うべき論点）
 
 - **content のファイルを分けるときの文書順の決め方。** システムは `content/` のファイル名昇順を
