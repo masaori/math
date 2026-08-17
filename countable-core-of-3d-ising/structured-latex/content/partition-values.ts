@@ -47,6 +47,7 @@ export default defineBlocks([
   {
     id: "partition_values_claim_value_at_one",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "分配多項式の 1 での値は配位の個数である" },
     labels: ["claim_partition_value_at_one"],
     habitat: "N",
@@ -99,6 +100,7 @@ Z_L(1)
   {
     id: "partition_coefficients_claim_nonnegative",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "分配多項式の各係数は非負である" },
     labels: ["claim_partition_coefficients_nonnegative"],
     habitat: "Z",
@@ -158,6 +160,7 @@ Z_L(1)
   {
     id: "partition_support_endpoints_claim",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "分配多項式の台の両端は 0 と辺の本数である" },
     labels: ["claim_partition_support_endpoints"],
     habitat: "Z",
@@ -318,6 +321,7 @@ m_L(T\sigma^-)
   {
     id: "global_spin_flip_claim_even_multiplicity",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "各破れ数の多重度は偶数である" },
     labels: ["claim_even_multiplicity"],
     habitat: "N",
@@ -470,6 +474,7 @@ m_L(F\sigma)
   {
     id: "galois_bound_claim_hyperoctahedral",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "Galois 群は逆数対の置換群に埋め込まれる" },
     labels: ["claim_galois_hyperoctahedral_bound"],
     habitat: "Qbar",
@@ -623,6 +628,7 @@ X^{\#E_L}Z_L(X^{-1})
   {
     id: "rational_values_claim_determine_partition_polynomial",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "相異なる有理点の素指数データは分配多項式を一意に決める" },
     labels: ["claim_rational_values_determine_partition_polynomial"],
     habitat: "Lambda",
@@ -741,6 +747,7 @@ X^{\#E_L}Z_L(X^{-1})
   {
     id: "univariate_loss_claim_same_partition_different_pair_data",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "同じ分配多項式は異なる二点データを区別しない" },
     labels: ["claim_same_partition_different_pair_data"],
     habitat: "Z",
@@ -809,6 +816,7 @@ X^{\#E_L}Z_L(X^{-1})
   {
     id: "splitting_data_loss_claim_linear_counterexample",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "分解体の次数と Galois 群だけでは多項式を決めない" },
     labels: ["claim_splitting_degree_galois_group_do_not_determine_polynomial"],
     habitat: "Q",
@@ -869,6 +877,7 @@ X^{\#E_L}Z_L(X^{-1})
   {
     id: "discriminant_data_loss_claim_quadratic_counterexample",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "判別式だけでは多項式を決めない" },
     labels: ["claim_discriminant_does_not_determine_polynomial"],
     habitat: "Z",
@@ -945,6 +954,7 @@ B(X)&=X(X+1)
   {
     id: "irreducible_factor_degrees_claim_root_minimal_degrees",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "既約分解の型が零点の最小多項式次数を決める" },
     labels: ["claim_factorization_type_determines_root_minimal_degrees"],
     habitat: "Qbar",
@@ -1100,6 +1110,7 @@ B(X)&=X(X+1)
   {
     id: "polynomial_root_data_claim_leading_coefficient_and_multiplicities_determine",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "最高次係数と重複度を加えれば多項式が決まる" },
     labels: ["claim_roots_leading_coefficient_multiplicities_determine_polynomial"],
     habitat: "Qbar",
@@ -1406,6 +1417,7 @@ X_e,&e\in A_{L,L'},\\
   {
     id: "boundary_response_measurement_claim_outer_box_independence",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "境界応答多項式は外箱に依存しない" },
     labels: ["claim_boundary_response_outer_box_independence"],
     habitat: "Z",
@@ -2729,6 +2741,7 @@ Z_L(q)
   {
     id: "soundness_bridge_claim_partition_value_coarse_graining_is_sufficient_for_limit_quantity",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "分配多項式の値による粗視化は極限量に対して十分である" },
     labels: ["claim_partition_value_coarse_graining_is_sufficient_for_limit_quantity"],
     habitat: "R",
@@ -3034,6 +3047,7 @@ Z_L(q)
   {
     id: "soundness_bridge_claim_coarse_graining_not_necessary_for_symmetrized_limit_quantity",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "対称化した極限量に対して粗視化は必要でない" },
     labels: ["claim_coarse_graining_not_necessary_for_symmetrized_limit_quantity"],
     habitat: "R",

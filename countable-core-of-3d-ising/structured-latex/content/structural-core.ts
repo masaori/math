@@ -145,6 +145,7 @@ b(\sigma)=\#D(\sigma)`,
   {
     id: "structural_core_claim_palindrome",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "回文性に整数の算術は要らない" },
     labels: ["claim_structural_palindrome"],
     habitat: "N",

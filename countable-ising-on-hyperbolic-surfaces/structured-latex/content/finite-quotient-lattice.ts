@@ -485,6 +485,7 @@ P_f^Q\longrightarrow\mathcal E_Q\times\mathsf{Ori}`),
   {
     id: "finite_quotient_lattice_theorem_generated_cellulation_is_hyperbolic_regular",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "生成剰余類セルデータの有限検査" },
     labels: ["theorem_generated_quotient_cellulation_is_hyperbolic_regular"],
     habitat: "Q",
@@ -631,6 +632,7 @@ r_E
   {
     id: "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "固定剰余類格子の Ising 分配多項式" },
     labels: ["theorem_fixed_quotient_ising_partition_polynomial"],
     habitat: "ZPolynomial",

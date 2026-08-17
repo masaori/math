@@ -448,6 +448,7 @@ S_x
   {
     id: "finite_fourier_theorem_inverse_transform",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "有限第一ホモロジー群上の Fourier 逆変換" },
     labels: ["theorem_finite_fourier_inverse_transform"],
     habitat: "QPolynomial",
@@ -1433,6 +1434,7 @@ c\!\left(d_1^{-1}(e^\ast)\right)
   {
     id: "finite_fourier_theorem_primal_cohomology_dual_homology_transport_is_bijective",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "主第一コホモロジーから双対第一ホモロジーへの誘導写像は全単射である" },
     labels: ["theorem_primal_cohomology_dual_homology_transport_is_bijective"],
     habitat: "F2",
