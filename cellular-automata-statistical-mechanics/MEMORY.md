@@ -1807,3 +1807,12 @@ $\operatorname{Pre}_F(z)$ と一段前像数 $d_F(z)$、異なる配位の前像
 一般証明ではない。$\mathbb R/\mathbb C$ 脱出なし。構造化テキスト check・PDF（47 ページ）、検算対応 27 件、
 Lean build・sorry 検査を通した。**現在地は SageMath まで。次 tick はレビュー後、人手証明と同じ対象・仮定・順序の
 Lean 具体版だけを作る。**
+
+## 自動ループ tick: 安定ファイバー間の分岐個数の Lean 具体版（2026-08-17 15:12）
+
+前 tick の SageMath 4 本を再実行し、構造化記述との対応に修正を要する不一致は見つからなかった。
+`lean/CellularAutomata/IterateMonoidStableFiberBranching.lean` に、一段前像集合と有限走査表、
+異なる値の前像の非交差、完全逆像の有限合併への分解、保存式の 4 等号、全前像と個数の有限列挙を
+人手証明と同じ順で形式化した。有限集合・自然数・写像の等号だけで閉じ、$\mathbb R/\mathbb C$ 脱出はない。
+構造化テキスト check・PDF（47 ページ）、検算対応 27 件、SageMath 4 本、Lean build・sorry 検査を通した。
+**現在地は Lean 具体版まで。次 tick は全層との対応をレビュー後、Lean 必要十分版と具体版からの導出だけを作る。**

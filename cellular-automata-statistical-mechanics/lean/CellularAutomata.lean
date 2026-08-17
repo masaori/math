@@ -18,6 +18,7 @@ import CellularAutomata.IterateMonoidCyclicGroup
 import CellularAutomata.IterateMonoidStableImage
 import CellularAutomata.IterateMonoidStablePartition
 import CellularAutomata.IterateMonoidStableFiberDynamics
+import CellularAutomata.IterateMonoidStableFiberBranching
 import CellularAutomata.LocalRuleRepresentation
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.EssentialDependency
