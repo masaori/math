@@ -8,6 +8,7 @@ structured-latex/content/iterate-monoid-stable-fiber-layer-preimage.ts。
 R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
+import CellularAutomata.NecSuf.IterateMonoidStableFiberLayerPreimage
 
 namespace CellularAutomata.IterateMonoidStableFiberLayerPreimage
 
@@ -116,5 +117,41 @@ noncomputable def depthLayerPreimageDataTable :
     (Finset.range (2 ^ Fintype.card V + 1)).image fun k =>
       (q, k, stableFiberDepthLayerTable N f q k,
         depthLayerPreimageTable N f q k)
+
+/-! ## 必要十分版からの導出 -/
+
+theorem minPreperiod_globalMap_eq_zero_from_necessary_sufficient
+    (y : V → State) (hzero : minPreperiod N f y = 0) :
+    minPreperiod N f (globalMap N f y) = 0 := by
+  have hzero' : CellularAutomata.NecSuf.MinimalPreperiodPeriod.minPreperiod
+      (globalMap N f) y = 0 := by
+    rwa [← minPreperiod_eq_necessary_sufficient N f y]
+  have h := CellularAutomata.NecSuf.IterateMonoidStableFiberLayerPreimage.minPreperiod_map_eq_zero
+    (globalMap N f) y hzero'
+  rwa [← minPreperiod_eq_necessary_sufficient N f (globalMap N f y)] at h
+
+theorem positive_depthLayer_exact_preimage_from_necessary_sufficient
+    (q : stableImage N f) (k : ℕ) (hk : 0 < k) :
+    globalMap N f ⁻¹'
+        stableFiberDepthLayer N f (stableIndexMap N f q) k =
+      stableFiberDepthLayer N f q (k + 1) := by
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberLayerPreimage.positive_fiberDepthLayer_exact_preimage
+      (globalMap N f) (stableFiber N f) (minPreperiod N f) (stableIndexMap N f)
+      (fun q y => globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y)
+      (fun y => minPreperiod_globalMap_eq_zero_from_necessary_sufficient N f y)
+      (fun y => minPreperiod_globalMap_eq_sub_one_from_necessary_sufficient N f y)
+      q k hk
+
+theorem zero_depthLayer_exact_preimage_from_necessary_sufficient
+    (q : stableImage N f) :
+    globalMap N f ⁻¹'
+        stableFiberDepthLayer N f (stableIndexMap N f q) 0 =
+      stableFiberDepthLayer N f q 0 ∪ stableFiberDepthLayer N f q 1 := by
+  exact CellularAutomata.NecSuf.IterateMonoidStableFiberLayerPreimage.zero_fiberDepthLayer_exact_preimage
+      (globalMap N f) (stableFiber N f) (minPreperiod N f) (stableIndexMap N f)
+      (fun q y => globalMap_mem_stableFiber_index_iff_from_necessary_sufficient N f q y)
+      (fun y => minPreperiod_globalMap_eq_zero_from_necessary_sufficient N f y)
+      (fun y => minPreperiod_globalMap_eq_sub_one_from_necessary_sufficient N f y)
+      q
 
 end CellularAutomata.IterateMonoidStableFiberLayerPreimage
