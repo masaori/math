@@ -200,6 +200,7 @@ export const ALL_LABELS = [
   "claim_qbar_repeated_sum_factorization",
   "claim_qbar_repeated_sum_ne_zero",
   "claim_qbar_root_multiplicity_ge_one_iff_root",
+  "claim_qbar_root_multiplicity_le_quotient_succ",
   "claim_qbar_shift_transfer_commute",
   "claim_qbar_smul_eq_zero",
   "claim_qbar_smul_sum",

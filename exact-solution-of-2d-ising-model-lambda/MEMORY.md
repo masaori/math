@@ -4,6 +4,15 @@
 
 ## 現在の到達点（2026-08-17 時点）
 
+2026-08-17 の tick 392 は、前 tick の「互いに素な整除からの商への整除の遺伝」の本文と Lean 具体版・必要十分版を突き合わせて一致を確認し（修正無し）、
+台帳の先頭行「零点密度: 有限集合上の重複度の和は係数の上界を超えない」を三行へ割って（同じ点の重複度の減り方／他の点の重複度が商へ引き継がれること／和の上界）、その最初を四層で閉じた。
+`claim_qbar_root_multiplicity_le_quotient_succ`（`claim_qbar_coprime_divides_cofactor` の直後、住処 Qbar、脱出なし）: $f\ne0$、$f=(t-\widehat w)g$ ならば $g\ne0$ かつ $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)+1$。証明は $M:=\mathrm{mult}_w(f)=0$ の場合を $\mathbb N$ の順序で済ませ、$M=M'+1$ のときは `def_qbar_root_multiplicity` の読み取り 1 で $f=(t-\widehat w)^{M'+1}h$ の証人 $h$ を取り、$(t-\widehat w)\left((t-\widehat w)^{M'}h\right)=(t-\widehat w)^{M'+1}h=f=(t-\widehat w)g$ の一続き三段を作ってから `claim_qbar_poly_linear_factor_cancellation` で一次因子を消去し（係数の上界は $(t-\widehat w)^{M'}h$ と $g$ の非零係数の番号の最大元の大きい方）、$(t-\widehat w)^{M'}\mid g$ から読み取り 2 で $M'\le\mathrm{mult}_w(g)$ を得る。
+SageMath `check/qbar-root-multiplicity-le-quotient-succ/`（4 節: $g\ne0$ から $f\ne0$／結論の不等式／消去の段（$(t-\widehat w)^{M'}h=g$、整除、読み取り 2）／この上界が最良であること（実際には等号。本文は上界だけを主張）。$w$ は $0,\pm1,\tfrac23,\zeta_3,\sqrt2$、$g$ は重複度 2・3 の因子を含む 7 個、`QQbar` 厳密）。
+Lean 具体版 `ThermodynamicLimit/QbarRootMultiplicityLeQuotientSucc.lean`（`qbarRootMultiplicityLeQuotientSucc`。補助 `qbarQuotientNeZero`。`qbarPolyTopIndex_coeff_bound` を両者へ当て `max` を係数の上界にして `qbarPolyLinearFactorCancellation`）、必要十分版 `NecSuf/ThermodynamicLimit/QbarRootMultiplicityLeQuotientSucc.lean`（`root_multiplicity_le_quotient_succ_necSuf`。重複度を経由せず「$(X-Cw)^{M'+1}\mid(X-Cw)g\Rightarrow(X-Cw)^{M'}\mid g$」で述べ、`poly_linear_factor_cancellation_necSuf` と `natDegree` 由来の係数の上界で可換環のみを要求。**mathlib には monic による積の単射性（消去）の補題が無く、`Monic.mul_right_injective` は存在しない**ので、自前の消去補題を使うこと）、導出版 `QbarRootMultiplicityLeQuotientSuccFromNecSuf.lean`。`lean/Ising2DLambda.lean` の import と `lean/scripts/check-no-sorry.sh` の登録リストへ 3 件追加。sorry 検査 1371 件。check 482 ブロック・verify-check-linkage 269 件・build:pdf 263 ページ通過。
+次は「零点密度: 他の点の重複度は商へ引き継がれる」（$w\ne w'$、$f=(t-\widehat{w'})g$ ならば $\mathrm{mult}_w(f)\le\mathrm{mult}_w(g)$。`claim_qbar_coprime_divides_cofactor` を $k:=0$ で当てるだけ）、その次が和の上界（係数の上界 $n$ の帰納法。Lean は `Finset.sum` の帰納法）。
+式変形統一: 姉妹側「$C(R^\times)$ の元はスカラー行列」（`008_TV1_hatZ_hatY_part1.ts`）で、一行で書かれていた $Wx=W(x+tI)-W(tI)=(x+tI)W-(tI)W=xW$ を一続き三段（行列の積の分配律と二つの可換関係。行末根拠つき）へ揃えた（内容は不変）。姉妹側 check・PDF 325 ページ通過。姉妹側の残りは 004 のその他・005 の Step 3 以降の残り・008 系の以降の節。
+
+（tick 391 の記録）
 2026-08-17 の tick 391 は、前 tick の「一次因子の冪どうしが互いに素であること」の本文と Lean 具体版・必要十分版を突き合わせて一致を確認し（修正無し）、
 台帳の先頭行「零点密度: 互いに素な整除からの商への整除の遺伝（ユークリッドの補題型）」を四層で閉じた。
 `claim_qbar_coprime_divides_cofactor`（`claim_qbar_linear_factor_powers_bezout` の直後、住処 Qbar、脱出なし）: $w\ne w'\in\overline{\mathbb Q}$、$k,m\in\mathbb N$、$g\in\overline{\mathbb Q}[t]$ について $(t-\widehat{w'})^{m+1}\mid(t-\widehat w)^{k+1}g\Rightarrow(t-\widehat{w'})^{m+1}\mid g$。証明は $a:=t-\widehat w$、$b:=t-\widehat{w'}$ と置き、Bezout 恒等式 $Pa^{k+1}+Qb^{m+1}=1$（`claim_qbar_linear_factor_powers_bezout`）の両辺へ $g$ を掛け、仮定の整除の証人 $a^{k+1}g=b^{m+1}h$ を代入して $g=b^{m+1}(Ph+Qg)$ とする一続き五段（積の単位元／Bezout の等式を $1$ へ代入／分配則と結合則／仮定の代入／可換則・結合則と分配則）。整除の証人は $Ph+Qg$ である。

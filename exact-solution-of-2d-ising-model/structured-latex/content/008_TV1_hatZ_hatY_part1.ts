@@ -2650,9 +2650,12 @@ h(g_1g_2)
         math(String.raw`W(tI) = (tI)W`),
         " が常に成り立つ。両者を引くと",
       ]),
-      displayMath(
-        String.raw`Wx = W(x + tI) - W(tI) = (x+tI)W - (tI)W = xW`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+Wx
+&= W(x + tI) - W(tI)&&(\because\ \text{行列の積の分配律}\ W(x+tI)=Wx+W(tI))\\
+&= (x+tI)W - (tI)W&&(\because\ W(x+tI)=(x+tI)W\ \text{と}\ W(tI)=(tI)W)\\
+&= xW&&(\because\ \text{行列の積の分配律}\ (x+tI)W=xW+(tI)W)
+\end{aligned}`),
       paragraph([
         "を得る。",
         math(String.raw`x \in R`),

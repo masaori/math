@@ -49326,6 +49326,86 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
   },
 
   {
+    id: "thermodynamic_limit_claim_qbar_root_multiplicity_le_quotient_succ",
+    kind: "claim",
+    title: { text: "一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない" },
+    labels: ["claim_qbar_root_multiplicity_le_quotient_succ"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/qbar-root-multiplicity-le-quotient-succ"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityLeQuotientSucc",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.root_multiplicity_le_quotient_succ_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.qbarRootMultiplicityLeQuotientSucc_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`w\in\overline{\mathbb{Q}}`), "（", ref("def_algebraic_numbers"), "）、",
+        math(String.raw`f,g\in\overline{\mathbb{Q}}[t]`), "（", ref("def_qbar_polynomial_ring"),
+        "）が ", math(String.raw`f\ne0`), " と ", math(String.raw`f=(t-\widehat{w})\cdot g`),
+        " を満たすとする。このとき ", math(String.raw`g\ne0`), " であり、",
+      ]),
+      displayMath(String.raw`\mathrm{mult}_{w}(f)\le\mathrm{mult}_{w}(g)+1`),
+      paragraph([
+        "が成り立つ（重複度は ", ref("def_qbar_root_multiplicity"),
+        "）。すなわち、一次因子 ", math(String.raw`t-\widehat{w}`),
+        " を 1 つ割り出したとき、その点の重複度は 1 より多くは下がらない。",
+        "これは重複度の和の上界を係数の上界の帰納法で示すときに、",
+        "割り出した点の分の重複度を数え切るために使う。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず ", math(String.raw`g\ne0`), " である。実際 ", math(String.raw`g=0`),
+        " ならば ", math(String.raw`f=(t-\widehat{w})\cdot0=0`),
+        "（", ref("def_qbar_polynomial_ring"), " の零元との積）となり、仮定 ",
+        math(String.raw`f\ne0`), " に反する。したがって ", math(String.raw`f,g`),
+        " の重複度 ", math(String.raw`\mathrm{mult}_{w}(f)`), "、",
+        math(String.raw`\mathrm{mult}_{w}(g)`), " はいずれも定まる（",
+        ref("def_qbar_root_multiplicity"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`M:=\mathrm{mult}_{w}(f)`), " と置く。",
+        math(String.raw`M=0`), " のときは ", math(String.raw`0\le\mathrm{mult}_{w}(g)+1`),
+        " が ", math(String.raw`\mathbb{N}`), " の順序から成り立つので、以下 ",
+        math(String.raw`M\ge1`), " とし、", math(String.raw`M=M'+1`), "（",
+        math(String.raw`M'\in\mathbb{N}`), "）と書く。",
+        ref("def_qbar_root_multiplicity"), " の一つめの読み取りにより ",
+        math(String.raw`(t-\widehat{w})^{M'+1}\mid f`), " であり、",
+        ref("def_qbar_linear_factor_power_divides"), " により、ある ",
+        math(String.raw`h\in\overline{\mathbb{Q}}[t]`), " が存在して ",
+        math(String.raw`f=(t-\widehat{w})^{M'+1}\cdot h`), " が成り立つ。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(t-\widehat{w})\cdot\left((t-\widehat{w})^{M'}\cdot h\right)
+&=(t-\widehat{w})^{M'+1}\cdot h&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束と積の結合則・可換則})\\
+&=f&&(\because\ \text{上で取った}\ h\ \text{の定め方})\\
+&=(t-\widehat{w})\cdot g&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "である。", math(String.raw`(t-\widehat{w})^{M'}\cdot h`), " と ",
+        math(String.raw`g`), " はいずれも零でない（前者が零なら上の等式から ",
+        math(String.raw`f=0`), " となる）ので、",
+        ref("def_qbar_root_multiplicity"),
+        " で使ったのと同じく、非零係数の番号の最大元をそれぞれ取り、その大きい方を ",
+        math(String.raw`n`), " と置けば、", math(String.raw`k>n`), " なるすべての ",
+        math(String.raw`k`), " について両者の第 ", math(String.raw`k`),
+        " 係数は零である。よって ", ref("claim_qbar_poly_linear_factor_cancellation"),
+        " を ", math(String.raw`A:=(t-\widehat{w})^{M'}\cdot h`), "、",
+        math(String.raw`B:=g`), " として当てられ、",
+      ]),
+      displayMath(String.raw`(t-\widehat{w})^{M'}\cdot h=g`),
+      paragraph([
+        "を得る。これは ", ref("def_qbar_linear_factor_power_divides"), " の意味で ",
+        math(String.raw`(t-\widehat{w})^{M'}\mid g`), " を与えるので、",
+        ref("def_qbar_root_multiplicity"), " の二つめの読み取りにより ",
+        math(String.raw`M'\le\mathrm{mult}_{w}(g)`), " である。両辺へ 1 を足して ",
+        math(String.raw`M=M'+1\le\mathrm{mult}_{w}(g)+1`), " を得る。",
+        "使ったのは代数的数係数多項式の環の演算則と一次因子の消去だけであり、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
