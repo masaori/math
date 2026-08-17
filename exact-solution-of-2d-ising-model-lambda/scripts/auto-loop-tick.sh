@@ -241,16 +241,11 @@ run_claude() {  # $1 = モデル名
 if [ "$agent" = "claude" ]; then
   run_claude claude-fable-5
   status=$?
-  # モデル単位の上限。アカウント全体ではなくそのモデルだけが尽きているので、
-  # 期限を置いて待つのではなく別のモデルへ落ちればループは回り続ける。文言自体が
-  # "Switch to another model" と言っている（実測 2026-08-17 19:36: Fable 5 の上限で
-  # tick が 90 秒で異常終了し、codex も上限中だったためループが両側で塞がった）。
+  # モデル単位の上限は、別モデルへ勝手に落とさずエラーとして扱う。何のモデルで何が
+  # 動いたのか分からなくなるため（人間の判断 2026-08-17）。
   if [ "$status" -ne 0 ]; then
     case "$(tail -5 "$LOG_FILE")" in
-      *"Switch to another model"*)
-        log "    claude の既定モデルが上限に達した。claude-sonnet-5 でやり直す"
-        run_claude claude-sonnet-5
-        status=$? ;;
+      *"Switch to another model"*) log "    claude-fable-5 が利用上限。この tick はエラーで終える" ;;
     esac
   fi
 else
