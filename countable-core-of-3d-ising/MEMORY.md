@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-17 20:30: 開始時点で締切まで 8 分しかなくレビューのみ実施。`npm run check`（99 ブロック・163 参照）・`npm run build:pdf`（28 ページ）を再実行し前 tick から不一致なしを確認。修正・前進なし。次 tick は (b)（$\alpha(q)=\alpha^{\mathrm{per}}(q)$ を健全性の橋へ割れるか）または並行 (1)（Pfaffian 表示の候補命題を本文へ）。
 - 2026-08-17 19:30: 本流「潰れる候補: 判別式」の (a) を本文の主張 `claim_discriminant_free_vs_periodic_differ_at_L3`（$L=3$ で $\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z^{\mathrm{per}}_3)$、$L=2$ は一致）として閉じ、check `discriminant-free-vs-periodic-differ` の対象ラベルを付け替えた。check 99 ブロック・163 参照、PDF 28 ページ、linkage 35 件。次 tick は (b)（極限量の一致を健全性の橋の定理へ割れるか）。
 - 2026-08-17 19:00: 本流「潰れる候補: 判別式」の (a) の先頭を進めた。共通 sage 定義に箱の分配多項式（自由・周期、列挙版と層転送＋補間版）を追加し、check `discriminant-free-vs-periodic-differ` を置いた。**$L=2$ は $Z^{\mathrm{per}}_2(x)=Z_2(x^2)$ で判別式が一致（両方 $0$）**、$L=3$ は $\mathrm{disc}(Z_3)=0\ne\mathrm{disc}(Z^{\mathrm{per}}_3)$ で不一致（約 5 分）。本文未変更。次 tick は $L=3$ の不一致を主張ブロックとして本文へ書き、check の対象ラベルを付け替える。
 - 2026-08-17 18:30: 開始が締切 8 分前。レビュー（check・build:pdf 再実行）修正なし。本文は変えず、(a) を台帳でさらに割った：先頭は共通 sage 定義に自由・周期境界の小箱の分配多項式を返す関数を追加し $L=2,3$ で判別式の不一致を check で確認、次に本文の主張ブロック。次 tick はこの先頭から。
