@@ -523,4 +523,160 @@ kh_S.`),
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_oriented_edge_endpoint_map_preservation",
+    kind: "theorem",
+    title: { text: "商の塔における向き付き辺端点写像の保存" },
+    labels: ["theorem_quotient_tower_oriented_edge_endpoint_map_preservation"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-oriented-edge-endpoint-preservation"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        " の整合する代表元選択写像を取る。細段辺剰余類 ",
+        math(String.raw`C_E\in Q_{\mathrm{fine}}/H_E^{\mathrm{fine}}`),
+        " と粗段辺剰余類 ",
+        math(String.raw`D_E\in Q_{\mathrm{coarse}}/H_E^{\mathrm{coarse}}`),
+        " が",
+      ]),
+      displayMath(String.raw`\overline\kappa_E
+\left(
+  \mathtt{fine},
+  E,
+  C_E
+\right)
+=
+\left(
+  \mathtt{coarse},
+  E,
+  D_E
+\right)`),
+      paragraph([
+        "を満たすなら、細段の始点と終点を誘導頂点写像で送った結果は、対応する粗段辺の始点と終点にそれぞれ一致する。すなわち、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_V
+\left(
+  \mathtt{fine},
+  V,
+  \eta_E^{\mathrm{fine}}(C_E)H_V^{\mathrm{fine}}
+\right)
+&=
+\left(
+  \mathtt{coarse},
+  V,
+  \eta_E^{\mathrm{coarse}}(D_E)H_V^{\mathrm{coarse}}
+\right),\\
+\overline\kappa_V
+\left(
+  \mathtt{fine},
+  V,
+  \eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}H_V^{\mathrm{fine}}
+\right)
+&=
+\left(
+  \mathtt{coarse},
+  V,
+  \eta_E^{\mathrm{coarse}}(D_E)r_E^{\mathrm{coarse}}H_V^{\mathrm{coarse}}
+\right).
+\end{aligned}`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導頂点写像の定義より、始点側は",
+      ]),
+      displayMath(String.raw`\overline\kappa_V
+\left(
+  \mathtt{fine},
+  V,
+  \eta_E^{\mathrm{fine}}(C_E)H_V^{\mathrm{fine}}
+\right)
+=
+\left(
+  \mathtt{coarse},
+  V,
+  \kappa\left(\eta_E^{\mathrm{fine}}(C_E)\right)H_V^{\mathrm{coarse}}
+\right).`),
+      paragraph([
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        " の代表元選択の可換条件より、",
+      ]),
+      displayMath(String.raw`\kappa\left(\eta_E^{\mathrm{fine}}(C_E)\right)
+=
+\eta_E^{\mathrm{coarse}}(D_E).`),
+      paragraph(["この等式を始点側の右辺へ代入すると、"]),
+      displayMath(String.raw`\overline\kappa_V
+\left(
+  \mathtt{fine},
+  V,
+  \eta_E^{\mathrm{fine}}(C_E)H_V^{\mathrm{fine}}
+\right)
+=
+\left(
+  \mathtt{coarse},
+  V,
+  \eta_E^{\mathrm{coarse}}(D_E)H_V^{\mathrm{coarse}}
+\right).`),
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導頂点写像の定義より、終点側は",
+      ]),
+      displayMath(String.raw`\overline\kappa_V
+\left(
+  \mathtt{fine},
+  V,
+  \eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}H_V^{\mathrm{fine}}
+\right)
+=
+\left(
+  \mathtt{coarse},
+  V,
+  \kappa\left(\eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}\right)H_V^{\mathrm{coarse}}
+\right).`),
+      paragraph([
+        ref("def_two_stage_finite_quotient_tower_input"),
+        " の群準同型 ",
+        math(String.raw`\kappa`),
+        " より、",
+      ]),
+      displayMath(String.raw`\kappa\left(\eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}\right)
+=
+\kappa\left(\eta_E^{\mathrm{fine}}(C_E)\right)
+\kappa\left(r_E^{\mathrm{fine}}\right).`),
+      paragraph([
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        " の代表元選択の可換条件より、",
+      ]),
+      displayMath(String.raw`\kappa\left(\eta_E^{\mathrm{fine}}(C_E)\right)
+\kappa\left(r_E^{\mathrm{fine}}\right)
+=
+\eta_E^{\mathrm{coarse}}(D_E)
+\kappa\left(r_E^{\mathrm{fine}}\right).`),
+      paragraph([
+        ref("def_quotient_tower_role_generator_compatibility"),
+        " の辺役割生成元の整合性より、",
+      ]),
+      displayMath(String.raw`\eta_E^{\mathrm{coarse}}(D_E)
+\kappa\left(r_E^{\mathrm{fine}}\right)
+=
+\eta_E^{\mathrm{coarse}}(D_E)r_E^{\mathrm{coarse}}.`),
+      paragraph(["以上の三等式を終点側の右辺へ順に代入すると、"]),
+      displayMath(String.raw`\overline\kappa_V
+\left(
+  \mathtt{fine},
+  V,
+  \eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}H_V^{\mathrm{fine}}
+\right)
+=
+\left(
+  \mathtt{coarse},
+  V,
+  \eta_E^{\mathrm{coarse}}(D_E)r_E^{\mathrm{coarse}}H_V^{\mathrm{coarse}}
+\right).`),
+      paragraph([
+        "したがって始点と終点はそれぞれ保存される。全ての群、部分群、剰余類、写像、量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
