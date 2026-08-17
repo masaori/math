@@ -40033,6 +40033,176 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
     ],
   },
   {
+    id: "thermodynamic_limit_claim_periodic_open_boundary_comparison_density_le_one",
+    kind: "claim",
+    title: { text: "周期境界と開境界の密度の比較（Λ_Q 版。q は 1 以下）" },
+    labels: ["claim_periodic_open_boundary_comparison_density_le_one"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/periodic-open-boundary-comparison-density"],
+    lean: [
+      "Ising2DLambda.ThermodynamicLimit.scaled_periodicOpenLowerForm_eq",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one",
+      "Ising2DLambda.NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf",
+      "Ising2DLambda.ThermodynamicLimit.rationalLogOrderLE_periodicOpenDensity_bounds_of_le_one_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`),
+        "、",
+        math(String.raw`L\ge1`),
+        " と、正の有理数 ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`),
+        "、",
+        math(String.raw`0<q\le1`),
+        " を任意に取る。このとき、周期境界の有限系の自由エントロピー密度 ",
+        math(String.raw`\Psi_L(q)`),
+        "（",
+        ref("def_finite_free_entropy_density"),
+        "）と開境界正方形の自由エントロピー密度 ",
+        math(String.raw`\Psi^{\mathrm{op}}_L(q)`),
+        "（",
+        ref("def_open_square_free_entropy_density"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi^{\mathrm{op}}_L(q)+\frac{2}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi_L(q)
+\ \le_{\Lambda_{\mathbb{Q}}}\ \Psi^{\mathrm{op}}_L(q)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\log q\in\Lambda`),
+        " は ",
+        ref("def_rational_log"),
+        " の対数、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と有理数倍 ",
+        math(String.raw`\frac{2}{L}\cdot`),
+        "（",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`\frac{2}{L}\in\mathbb{Q}`),
+        " が定まる）と加法は ",
+        ref("def_rational_log_order_group"),
+        "、",
+        math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
+        " は ",
+        ref("def_rational_log_order_group_order"),
+        " の順序である。",
+        ref("claim_periodic_open_boundary_comparison_log_le_one"),
+        " の ",
+        math(String.raw`\Lambda`),
+        " の評価の三つの元を ",
+        math(String.raw`\frac{1}{L^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " で ",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " へ移したものである。両端はどちらも開境界正方形の密度で書けており、周期境界の密度は開境界正方形の密度から ",
+        math(String.raw`\frac{2}{L}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)`),
+        " だけ下がった元と開境界正方形の密度そのものとの間に挟まれる。実数体も実対数も現れない。周期境界の密度の列が開境界正方形の密度の列と同じ下組を定めることを示す段が引く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として 2 つ置く。以下 ",
+        math(String.raw`\iota:=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " と略記する（この証明の中だけ）。第一に、",
+        ref("claim_value_at_rational_is_positive"),
+        " により ",
+        math(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+        "、",
+        ref("claim_open_rectangle_value_at_rational_is_positive"),
+        " を ",
+        math(String.raw`(a,b):=(L,L)`),
+        " で読んで ",
+        math(String.raw`Z^{\mathrm{op}}_{L,L}(q)\in\mathbb{Q}_{>0}`),
+        " であり、対数 ",
+        ref("def_rational_log"),
+        " を施せる。また ",
+        math(String.raw`L\ge1`),
+        " なので ",
+        math(String.raw`L\ne0`),
+        "、",
+        math(String.raw`L^2\ne0`),
+        " であり、",
+        math(String.raw`\frac{1}{L^2},\ \frac{2}{L}\in\mathbb{Q}`),
+        " が定まる。加えて、任意の ",
+        math(String.raw`n\in\mathbb{Z}`),
+        "、",
+        math(String.raw`\nu\in\Lambda`),
+        " について ",
+        math(String.raw`n\cdot\iota(\nu)=\iota(n\nu)`),
+        "（左辺は分母 ",
+        math(String.raw`1`),
+        " の有理数 ",
+        math(String.raw`n`),
+        " による有理数倍、右辺の ",
+        math(String.raw`n\nu`),
+        " は ",
+        ref("def_log_order_group"),
+        " の整数倍）である。これは ",
+        ref("claim_rational_embedding_commutes_with_integer_multiple"),
+        " である。",
+      ]),
+      paragraph([
+        "第二に、",
+        ref("claim_periodic_open_boundary_comparison_log_le_one"),
+        " の下からの評価の側の元を ",
+        math(String.raw`\frac{1}{L^2}\cdot\iota`),
+        " で移した先を、",
+        math(String.raw`\Lambda_{\mathbb{Q}}`),
+        " の中で整える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{L^2}\cdot\iota\bigl(2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&=\frac{1}{L^2}\cdot\bigl(\iota(2L\,\log q)+\iota(\log Z^{\mathrm{op}}_{L,L}(q))\bigr)
+&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&=\frac{1}{L^2}\cdot\iota(2L\,\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
+&=\frac{1}{L^2}\cdot\bigl(2L\cdot\iota(\log q)\bigr)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))
+&&(\because\ \text{準備の第一の }n\cdot\iota(\nu)=\iota(n\nu)\text{ を }n:=2L,\ \nu:=\log q\text{ で右辺から左辺の向きに読む})\\
+&=\Bigl(\frac{1}{L^2}\cdot2L\Bigr)\cdot\iota(\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則 }(rs)\cdot\lambda=r\cdot(s\cdot\lambda))\\
+&=\frac{2}{L}\cdot\iota(\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))
+&&(\because\ L\ne0\text{ による }\mathbb{Q}\text{ の約分 }\tfrac{1}{L^2}\cdot2L=\tfrac{2}{L})\\
+&=\frac{2}{L}\cdot\iota(\log q)+\Psi^{\mathrm{op}}_L(q)
+&&(\because\ \blkref{def_open_square_free_entropy_density})\\
+&=\Psi^{\mathrm{op}}_L(q)+\frac{2}{L}\cdot\iota(\log q)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の可換性})
+\end{aligned}`),
+      paragraph([
+        "主張の左の不等式を、その左辺から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi^{\mathrm{op}}_L(q)+\frac{2}{L}\cdot\iota(\log q)
+&=\frac{1}{L^2}\cdot\iota\bigl(2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&&(\because\ \text{準備の第二を右辺から左辺の向きで読む})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota\bigl(\Phi_L(q)\bigr)
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ を }L:=L\text{、}\lambda:=2L\log q+\log Z^{\mathrm{op}}_{L,L}(q)\text{、}\mu:=\Phi_L(q)\text{ で右辺から左辺の向きに読み、}\blkref{claim_periodic_open_boundary_comparison_log_le_one}\text{ の左の不等式を移す})\\
+&=\Psi_L(q)
+&&(\because\ \blkref{def_finite_free_entropy_density})
+\end{aligned}`),
+      paragraph([
+        "主張の右の不等式を、その左辺から始める次の一続きで示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi_L(q)
+&=\frac{1}{L^2}\cdot\iota\bigl(\Phi_L(q)\bigr)
+&&(\because\ \blkref{def_finite_free_entropy_density})\\
+&\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota\bigl(\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
+&&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ を }L:=L\text{、}\lambda:=\Phi_L(q)\text{、}\mu:=\log Z^{\mathrm{op}}_{L,L}(q)\text{ で右辺から左辺の向きに読み、}\blkref{claim_periodic_open_boundary_comparison_log_le_one}\text{ の右の不等式を移す})\\
+&=\Psi^{\mathrm{op}}_L(q)
+&&(\because\ \blkref{def_open_square_free_entropy_density})
+\end{aligned}`),
+      paragraph([
+        "使ったのは、周期境界と開境界の境界評価の対数化（",
+        math(String.raw`\Lambda`),
+        " の鎖）、有理数倍と埋め込みを通した順序の移送、",
+        math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
+        " が加法と整数倍を保つこと、有理数倍の分配則・結合則、",
+        math(String.raw`\mathbb{Q}`),
+        " の約分、加法の可換性、および二つの密度の定義だけであり、比較はすべて有理数の比較である。実数体も実対数も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "thermodynamic_limit_def_open_rectangle_constant_plus_configuration",
     kind: "definition",
     title: { text: "開境界長方形の全て正の定数配位" },

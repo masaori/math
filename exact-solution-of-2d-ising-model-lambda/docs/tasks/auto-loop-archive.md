@@ -4,6 +4,25 @@
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
 
+## 2026-08-17 tick 369 で台帳から移した記録（tick 364 分）
+
+### 現在地
+
+- **2026-08-17 の tick 364 は、台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」を本文・SageMath・Lean（具体版・必要十分版・導出版）まで書いて四層で閉じた。**
+  `claim_rational_log_order_group_realization_monotone`（`claim_log_order_group_realization_real_log` の直後・`remark_real_escape_plan` の直前、住処 R、`realEscape` は「実対数（$\rho_{\mathbb R}$ の値どうしの不等式。$\iota_{\mathbb Q\to\mathbb R}$ の順序保存、$\log_{\mathbb R}$ の単調性、$\mathbb R$ が順序体であることだけ）」）: $\lambda,\mu\in\Lambda_{\mathbb Q}$ で $\lambda\le_{\Lambda_{\mathbb Q}}\mu\Rightarrow\rho_{\mathbb R}(\lambda)\le\rho_{\mathbb R}(\mu)$。証明は順序の定義から証人 $N\ge1,\lambda_N,\mu_N$ を取り、準備一つ（$0<\iota(N)$、$0<\iota(N)^{-1}$）、含意の鎖六段（$\Lambda$ の順序の定義・$\iota$ の順序保存・実対数の単調性・`claim_log_order_group_realization_real_log`・共通分母の定義・`claim_rational_log_order_group_realization_smul` を $r:=N$ で）、最後の一続き三段（$\rho(\lambda)=\iota(N)^{-1}(\iota(N)\rho(\lambda))\le\iota(N)^{-1}(\iota(N)\rho(\mu))=\rho(\mu)$。正の元を左から掛けても順序が保たれる）。完備性は使わない。`remark_real_escape_plan` の冒頭と脱出の項の「順序を保つことはこれから示す」をこの主張への参照に直した。
+  SageMath `check/rational-log-order-group-realization-monotone/`（可算側の段は `ZZ`/`QQ` の厳密計算、実数側の段は区間演算 `RealBallField(256)`——素数の実対数は超越数なので、丸めを区間で包む厳密な包含で不等式を判定し、区間が重なれば FAIL とする。理由は overview に記した。標本 218 個、順序対 23871 組、286452 検査、14 秒）。Lean 具体版 `ThermodynamicLimit/RationalLogOrderGroupRealizationMonotone.lean`（`natCast_real_pos`・`realizeRational_le_of_rationalLogOrderLE`。`Rat.cast_le`・`realLog_le_realLog`・`realizeRational_toRational`・`IsCommonDenominator`・`realizeRational_smul`・`inv_pos`・`inv_mul_cancel₀`・`mul_le_mul_of_nonneg_left` が六段と三段に 1 対 1）、必要十分版 `NecSuf/ThermodynamicLimit/RationalLogOrderGroupRealizationMonotone.lean`（`le_of_smul_le_smul_necSuf`（順序体で正の元を外す三段）・`realize_monotone_of_common_denominator_necSuf`。値の側だけ `Field`＋`LinearOrder`＋`IsStrictOrderedRing`、$\Lambda_{\mathbb Q}$・$\Lambda$・$\mathbb Q$・$\mathbb R_{>0}$ に当たる型は代数構造なし（$\mathbb Q$ に当たる型の半順序だけ）、順序の証人を仮定として受ける）、導出版（`∃` を剥がして渡す）。sorry 検査 1365 件。check 454 ブロック・PDF 247 ページ通過。
+  レビュー: 前 tick の「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数」の本文（準備三つ・一続き八段）と Lean 具体版（`realLog_prod`・`realizeRational_toRational` の八段）を突き合わせて一致。修正なし。次は「下組の実現像の上限として開境界正方形の自由エネルギー密度を定める（実数体への脱出: 完備性）」。
+
+### 前進の記録
+
+- 2026-08-17（tick 364）: 台帳の先頭行「有理係数の対数順序群の実現写像は順序を保つ（実数体への脱出: 実対数）」を実行し、`claim_rational_log_order_group_realization_monotone` を `claim_log_order_group_realization_real_log` の直後に置いた。
+  証明は順序の証人・準備一つ（$0<\iota(N)$）・含意の鎖六段・最後の三段だけ。SageMath `rational-log-order-group-realization-monotone`（可算側は厳密、実数側は区間演算 `RealBallField`。理由を overview に明記）、Lean 具体版・必要十分版（値の側だけ順序体、可算側の型は構造なし、順序の証人を仮定として受ける）・導出版を書き、入口 import・sorry 検査へ 5 件登録（計 1365 件）。式変形統一は一時停止中のため実施せず。
+
+### レビュー記録
+
+- 2026-08-17（tick 364）: 前 tick の「対数順序群の元の実現は $\mathrm{rat}_\Lambda$ の実対数」の本文（準備三つ・一続き八段）・SageMath overview（10724 検査）・Lean 具体版（`realLog_prod`（`Finset.induction_on`・`realLog_mul`）・`realizeRational_toRational` の八段が本文と 1 対 1。`Real.log_prod` は使わない）・必要十分版（`CommGroup`・`AddCommGroup`、乗法を加法へ移す写像だけ）・導出版を突き合わせ、根拠が一致した。
+  「何も言っていない主張」の観点: 前 tick の主張は可算側の量と実数側の量を結ぶ等式で今 tick が引くので残す。今 tick の順序保存は、可算側で決定可能な順序が実現の側で保たれることを言い、上限の存在（下組の実現像が上に有界であること）が引くので残す。準備の $0<\iota(N)$ は独立ブロックにせず証明の中に置いた。本文末尾「この先に書くこと」と台帳のセクション表は食い違いなし。修正は無い。
+
 ## 2026-08-17 tick 368 で台帳から移した記録（tick 363 分）
 
 ### 現在地
