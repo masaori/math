@@ -6,6 +6,8 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 405 は、台帳の先頭行「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_fisher_zero_set_nonempty`: $(0,0)$ のスピンだけを反転した配位で正の破れボンド数 $m$ と $\Omega_L(m)\ge1$ を得るため、$Z_L$ の正次数係数は零でない。係数を $\overline{\mathbb Q}$ へ送った多項式へ代数閉性を使って根を取った。$L=1$ は $Z_1=2$ で零点が無いことも SageMath で確認した。Lean 具体版・必要十分版・導出版。sorry 検査 1399 件・check 496 ブロック・verify-check-linkage 279 件・build:pdf 269 ページ通過。
 - **2026-08-18 の tick 404 は、台帳の先頭行「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じた（住処 Qbar、脱出なし）。**
   `claim_real_algebraic_min_unique`（`claim_real_algebraic_order_transitive` の直後）: 空でない有限部分集合 $X\subset R$ に「$m\in X$ かつ任意の $y\in X$ について $y=m$ または $m<_Ry$」を満たす $m$ がちょうど 1 つ存在する。存在は $|X|$ の帰納法（三分法で新しい元 $x_1$ と古い最小元 $x_2$ を比べ、$x_1<_Rx_2$ の枝で tick 403 の推移律を使う）、一意性は三分法の排他性。骨組みは `claim_row_config_min_unique` と同じ。
   SageMath `check/real-algebraic-min-unique/`（3 節。`AA` のモデルで、6 元の基底集合の空でない部分集合 63 個すべての一意性・証人 $\sqrt{y-m}$ の非零性・帰納法の一歩の場合分け。通過）。Lean 具体版 `FisherZero/RealAlgebraicMinUnique.lean`（`existsUnique_realAlgebraicMin`。`Finset.Nonempty.cons_induction` で人手証明と同じ帰納法）。必要十分版は新設せず、行配位の最小元のために書いた `NecSuf.AlgebraicEigenvalue.existsUnique_min`（比較可能性・推移律・非対称性だけを仮定に取る形）を引く（同じ議論を二箇所に置かない）。導出版 `RealAlgebraicMinUniqueFromNecSuf.lean`。sorry 検査 1396 件・check 495 ブロック・verify-check-linkage 278 件・build:pdf 268 ページ通過。
@@ -20,11 +22,6 @@
 - **2026-08-18 の tick 401 は、台帳の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じた（住処 Qbar、脱出なし）。主定理の印を付けた。**
   `claim_critical_point_mem_real_closed`（`claim_two_is_square_in_real_closed` の直後）: $s\cdot s=2$ を満たす $s\in\overline{\mathbb Q}$ は $R$ の元であり、したがって $x_c=-1+s\in R$。証明は第 4 条件で $s=a+b\omega$ と一意表示し、展開と一意性から $a\cdot a-b\cdot b=2$、$2ab=0$ を読み、$b=0$ の枝は $s=a\in R$、$a=0$ の枝は $-2=b\cdot b$（$b\ne0$）となって前 tick の `claim_two_is_square_in_real_closed` の後半に反するので起きない。最後に部分体の加法で $-1+s\in R$。
   SageMath `check/critical-point-mem-real-closed/`（5 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`。2 根がどちらも `AA` の元であること・一意表示の 2 等式・$a=0$ の枝が起きないこと・$x_c$ が自己双対方程式の根であること・$-2$ の平方根は `AA` の外。通過）。Lean 具体版 `FisherZero/CriticalPointMemRealClosed.lean`（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。定義でなく主張だが、必要十分版は前 tick の Gauss の恒等式と三分法に尽きているので新しくは置かない。sorry 検査 1390 件・check 492 ブロック・verify-check-linkage 276 件・build:pdf 267 ページ通過。
-- **2026-08-18 の tick 400 は、台帳の先頭行「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。前 tick で「唯一の未固めの論点」と書いた箇所であり、これで最終章の $x_c\in R$ へ進める（住処 Qbar、脱出なし）。**
-  `claim_real_closed_sum_of_two_squares_is_square`（`claim_real_closed_sum_of_two_squares_zero` の直後）: 任意の $x,y\in R$ にある $c\in R$ が存在して $x\cdot x+y\cdot y=c\cdot c$。**証明の鍵は順序ではなく代数閉性である**——$\overline{\mathbb Q}$ の代数閉性で $u\cdot u=x+y\omega$ を満たす $u$ を取り、第 4 条件で $u=a+b\omega$ と一意表示すると $x=a\cdot a-b\cdot b$、$y=2ab$ が読め、Gauss の恒等式 $(a^2-b^2)^2+(2ab)^2=(a^2+b^2)^2$ から $c:=a\cdot a+b\cdot b$ が取れる。平方の集合が加法で閉じることを、順序の議論なしに出せた。
-  `claim_two_is_square_in_real_closed`: 上を $x:=1$、$y:=1$ に当てて $s\cdot s=2$（$2:=1+1$）を満たす零でない $s\in R$ を得る。三分法の第 2 の場合が成り立つので第 3 の場合（$-2$ が平方）は成り立たない。
-  SageMath `check/real-closed-sum-of-two-squares-is-square/`（4 節。$R$ のモデルは `AA`、$\omega$ は `QQbar(I)`、代数閉性は `QQbar` の平方根。恒等式・一意表示から読む成分・$2$ の平方性と $-2$ の非平方性・$R$ の外では $-2$ も平方になること。通過）。Lean 具体版 `FisherZero/RealClosedSumOfTwoSquaresIsSquare.lean`（`realClosed_sum_of_two_squares_is_square`・`two_is_square_in_realClosed`・`neg_two_not_square_in_realClosed`）、必要十分版（Gauss の恒等式そのもの。可換環だけを要求）、導出版。sorry 検査 1388 件・check 491 ブロック・verify-check-linkage 275 件・build:pdf 266 ページ通過。
-  Lean の注意: 部分体の数値リテラルは `↑(2 : ↥carrier)` が `push_cast` で `(2 : Qbar)` へ落ちないので、$2$ は `1 + 1` と書く（人手証明の $2:=1+1$ と同じ約束）。
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -32,7 +29,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | $\mathcal F_L$ が空でないこと（$L\ge2$） | todo | 定数でないこと（1 スピンだけ反転した配位に破れボンドがあるので $\exists m\ge1,\ \Omega_L(m)\ge1$）と `def_algebraic_numbers` の代数閉性。$L=1$ は両辺とも自己ループで $Z_1$ が定数になるので除く（着手時に SageMath で確認してから書く） |
 | 臨界指数を零点列で書く | 先頭距離 $d_1(L)$ の定義と正値性 | todo | $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)\in R$。正値性は $x_c\notin\mathcal F_L$（係数が自然数で $x_c$ が正錐 $P_s$ の元なので値が正錐に入る。`claim_positive_rational_not_fisher_zero` と同じ論法） |
 | 臨界指数を零点列で書く | 先頭距離の列と詰め寄りの述語の接続（可算な言明） | todo | $\{d_1(L)\}_{L\ge2}$ と `def_zero_pinching_predicate` を結ぶ。量化は $\mathbb Q$ 上 |
 | 臨界指数を零点列で書く | 有限サイズスケーリングの読み（ℝ 脱出） | todo | 距離列の増大率と指数 $\nu$ の読み取り。実対数・極限を使うのでここだけ脱出を宣言する。厳密に言える範囲は討議ノート「何が厳密で何が非厳密か」に従って絞る |
@@ -41,15 +37,17 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 405）: 台帳の先頭行「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた。一スピン反転から正次数の非零係数を作り、$\overline{\mathbb Q}$ の代数閉性で根を取った。SageMath は $L=1$ の例外と $L=2,3$ の正次数係数・根を厳密確認。Lean 具体版・必要十分版・導出版。sorry 検査 1399 件・check 496 ブロック・verify-check-linkage 279 件・PDF 269 ページ通過。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の境界項 $\sigma_M^z\sigma_1^z$ の二等号を、一続き二段・各行の根拠つきへ揃えた（内容不変）。
 - 2026-08-18（tick 404）: 台帳の先頭行「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じ、`claim_real_algebraic_min_unique` を推移律の直後に置いた。存在は $|X|$ の帰納法（三分法＋推移律）、一意性は三分法の排他性。必要十分版は行配位の最小元の `existsUnique_min` を再利用（同じ議論を二箇所に置かない）。SageMath 3 節、Lean 具体版・導出版。sorry 検査 1396 件・check 495 ブロック・PDF 268 ページ通過。
 - 2026-08-18（tick 403）: 最小元の行の前提として欠けていた狭義順序の推移律を四層で閉じ、`claim_real_algebraic_order_transitive` を `claim_two_is_square_in_real_closed` の直後に置いた（本文の三分法は網羅性だけで、推移律は無かった）。直近 2 tick の 2 補題（平方の和が平方・平方の和が零なら各項が零）から出る。SageMath 3 節、Lean 具体版・必要十分版（2 性質を仮定に取る可換環の形）・導出版。sorry 検査 1394 件・check 494 ブロック・PDF 268 ページ通過。
 - 2026-08-18（tick 402）: 台帳の先頭行「臨界点への距離の二乗の定義」を本文と Lean 具体版で閉じた（定義ブロック）。第 2 引数を $R$ の元へ広げた $\mathrm{dsq}_R$ を定義し、有理点の場合が既存の $\mathrm{dsq}$ と一致することを明記して、$\mathrm{dsq}_c(\xi):=\mathrm{dsq}_R(\xi,x_c)$ と置いた。check 493 ブロック・PDF 267 ページ通過。
 - 2026-08-18（tick 401）: 台帳の先頭行「$x_c$ が実閉部分体 $R$ の元であること」を四層で閉じ、`claim_critical_point_mem_real_closed`（主定理の印）を `claim_two_is_square_in_real_closed` の直後に置いた。$s=a+b\omega$ の一意表示から $2ab=0$ を読み、$a=0$ の枝を前 tick の $-2$ の非平方性で潰した。SageMath 5 節、Lean 具体版（`sqrtTwo_mem_realClosed`・`criticalPoint_mem_realClosed`）。sorry 検査 1390 件・check 492 ブロック・PDF 267 ページ通過。
-- 2026-08-18（tick 400）: 台帳の先頭行「$R$ では $2$ が平方である（$-2$ は平方でない）」を四層で閉じた。前 tick が「唯一の未固めの論点」と記録した箇所。鍵は順序ではなく代数閉性で、$u\cdot u=x+y\omega$ の一意表示と Gauss の恒等式から平方の和が平方であることを出し、$x=y=1$ で $2$ の平方性を得た。SageMath 4 節、Lean 具体版・必要十分版（Gauss の恒等式のみ。可換環）・導出版。sorry 検査 1388 件・check 491 ブロック・PDF 266 ページ通過。
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
+
+- 2026-08-18（tick 405）: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」（`004_transfer_matrix.ts`）の Step 1 で、一行に二つの等号を置いていた境界項 $\sigma_M^z\sigma_1^z$ の計算を、一続き二段へ分け、各行末にクロネッカー積の積の規則を明記した（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
 - 2026-08-18（tick 404）: 姉妹側「クリフォード群（正規化群）の定義」（`008_TV1_hatZ_hatY_part1.ts`）で、$\mathcal C_M$ が部分群であることの散文中の鎖 $(g_1g_2)\mathcal P_M(g_1g_2)^{-1}=g_1(g_2\mathcal P_Mg_2^{-1})g_1^{-1}=\mathcal P_M$ を一続き三段（行末根拠つき。積の逆元と結合則／$g_2\in\mathcal C_M$／$g_1\in\mathcal C_M$）へ揃えた（内容・参照は不変）。姉妹側 check・PDF 325 ページ通過。
 
@@ -68,12 +66,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-18（tick 405）: tick 404 の「実閉部分体の空でない有限集合は最小元をちょうど 1 つ持つ」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。この主張は有限集合での最小元の存在・一意性を述べ、後続の先頭距離定義が直接引くため「何も言っていない主張」ではない。
 - 2026-08-18（tick 404）: tick 403 の「実代数的数の狭義順序は推移的である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は最小元の存在の帰納法が直接引くため「何も言っていない主張」ではない。
 - 2026-08-18（tick 402）: tick 401 の「臨界点が実閉部分体の元であること」の本文・SageMath・Lean を突き合わせ、論法の一致を確認した。この主張は値の住処を確定し、今 tick の定義が直接引くため「何も言っていない主張」ではない。修正なし。今 tick の初稿は 1 ブロック内の二定義と未使用の一致補題を削除した。
 - 2026-08-18（tick 398）: tick 397 の「零点密度の挟み込み」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正 1 件: 本文末尾「この先に書くこと」に済んだ「零点密度の挟み込み」の項目が残っていたので消した（runbook「項目が済んだら消す」）。
 - 2026-08-17（tick 394）: 前 tick の「相異なる点の重複度は、一次因子を割り出した商へ引き継がれる」の本文・SageMath・Lean 具体版・必要十分版からの導出版を突き合わせ、一致した。修正なし。「何も言っていない主張」の観点では、$g\ne0$ は重複度の well-defined 性を担い、主不等式は今 tick の帰納法が残りの各点へ繰り返し使うため残す。
-- 2026-08-17（tick 393）: 前 tick の「一次因子を 1 つ割り出すと、その点の重複度は 1 しか下がらない」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。
-  「何も言っていない主張」の観点: 前 tick の主張は重複度の和の帰納法が割り出した点へ使い、今 tick の主張は同じ帰納法が残りの各点へ繰り返し使うので、いずれも独立した内容を持つ。$g\ne0$、$M=0$ の場合、$M'+1\le\mathrm{mult}_w(g)$ からの読み替えは証明内に置き、独立ブロックにしていない。
 ## 判断待ち（人間に問うべき論点）
 
 - **content のファイルを分けるときの文書順の決め方。** システムは `content/` のファイル名昇順を

@@ -4,6 +4,11 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 405 は、最終章 4 行目「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_fisher_zero_set_nonempty`: $(0,0)$ のスピンだけを反転した配位では最初の横辺が破れるため、$m:=b(\sigma_{\mathrm{flip}})\ge1$ かつ $\Omega_L(m)\ge1$。よって $Z_L$ の正次数係数は零でなく、係数を $\overline{\mathbb Q}$ へ送った多項式の次数も零でない。`def_algebraic_numbers` の代数閉性で根を取り、持ち上げの評価の一致から $\xi\in\mathcal F_L$ を得た。$L=1$ は $Z_1=2$ で $\mathcal F_1=\varnothing$。
+SageMath `check/fisher-zero-set-nonempty/`（$L=1$ の例外、$L=2,3$ の一スピン反転・正次数係数・`QQbar` の根）。Lean 具体版 `FisherZero/FisherZeroSetNonempty.lean`、必要十分版（正次数の非零係数と根の供給だけ）、導出版。sorry 検査 1399 件・check 496 ブロック・linkage 279 件・PDF 269 ページ通過。次は「先頭距離 $d_1(L)$ の定義と正値性」。
+式変形統一は姉妹側 `004_transfer_matrix.ts` の境界項 $\sigma_M^z\sigma_1^z$ の二等号を一続き二段・各行の根拠つきへ揃え、check・PDF 325 ページを通した。
+
 2026-08-18 の tick 404 は、最終章 3 行目「$R$ の空でない有限集合は最小元をちょうど 1 つ持つ」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_real_algebraic_min_unique`（推移律の直後）: 空でない有限部分集合 $X\subset R$ に、$m\in X$ かつ任意の $y\in X$ について（$y=m$ または $m<_Ry$）を満たす $m$ がちょうど 1 つ。存在は $|X|$ の帰納法（三分法で新しい元と古い最小元を比べ、小さい枝で tick 403 の推移律）、一意性は三分法の排他性。骨組みは `claim_row_config_min_unique` と同一。
 SageMath `check/real-algebraic-min-unique/`（3 節。`AA` のモデルで 63 部分集合の一意性・証人の非零性・帰納法の一歩）。Lean 具体版 `FisherZero/RealAlgebraicMinUnique.lean`（`existsUnique_realAlgebraicMin`。`Finset.Nonempty.cons_induction`）。**必要十分版は新設していない**——行配位の最小元の `NecSuf.AlgebraicEigenvalue.existsUnique_min`（比較可能性・推移律・非対称性だけを仮定に取る）が同一の議論を既に持つので、導出版 `RealAlgebraicMinUniqueFromNecSuf.lean` がそれを引く（同じ議論を二箇所に置かない）。sorry 検査 1396 件・check 495 ブロック・linkage 278 件・PDF 268 ページ通過。

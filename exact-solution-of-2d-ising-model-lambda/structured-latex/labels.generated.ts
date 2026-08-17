@@ -44,6 +44,7 @@ export const ALL_LABELS = [
   "claim_fisher_zero_finset_card_bound",
   "claim_fisher_zero_mult_count_le_edge_bound",
   "claim_fisher_zero_set_finite_card_bound",
+  "claim_fisher_zero_set_nonempty",
   "claim_fixed_or_shift_preserves_orbit",
   "claim_free_entropy_at_one",
   "claim_free_entropy_dual_relation",

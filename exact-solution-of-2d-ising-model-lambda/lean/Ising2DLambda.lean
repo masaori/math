@@ -595,6 +595,9 @@ import Ising2DLambda.NecSuf.FisherZero.RealAlgebraicOrderTransitive
 import Ising2DLambda.FisherZero.RealAlgebraicOrderTransitiveFromNecSuf
 import Ising2DLambda.FisherZero.RealAlgebraicMinUnique
 import Ising2DLambda.FisherZero.RealAlgebraicMinUniqueFromNecSuf
+import Ising2DLambda.FisherZero.FisherZeroSetNonempty
+import Ising2DLambda.NecSuf.FisherZero.FisherZeroSetNonempty
+import Ising2DLambda.FisherZero.FisherZeroSetNonemptyFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.RealClosedSubfield
 import Ising2DLambda.FisherZero.RealClosedSubfieldFromNecSuf
 import Ising2DLambda.FisherZero.RealAlgebraicOrder

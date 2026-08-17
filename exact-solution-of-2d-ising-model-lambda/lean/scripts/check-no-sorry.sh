@@ -1452,6 +1452,9 @@ targets=(
   Ising2DLambda.FisherZero.realAlgebraicLt_trans_from_necSuf
   Ising2DLambda.FisherZero.existsUnique_realAlgebraicMin
   Ising2DLambda.FisherZero.existsUnique_realAlgebraicMin_from_necSuf
+  Ising2DLambda.FisherZero.fisherZeroSet_nonempty
+  Ising2DLambda.NecSuf.FisherZero.rootSet_nonempty_of_positive_coeff_necSuf
+  Ising2DLambda.FisherZero.fisherZeroSet_nonempty_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

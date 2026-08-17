@@ -793,10 +793,13 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
         " 因子は異なるので",
       ]),
       displayMath(
-        String.raw`\sigma_M^z\sigma_1^z
-= \overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{\sigma^z}^{M\text{th}}
-= \sigma_1^z\sigma_M^z
-\quad (\because \text{クロネッカー積の積の規則})`,
+        String.raw`\begin{aligned}
+\sigma_M^z\sigma_1^z
+&= \overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{\sigma^z}^{M\text{th}}
+&& (\because \text{クロネッカー積の積の規則})\\
+&= \sigma_1^z\sigma_M^z
+&& (\because \text{クロネッカー積の積の規則})
+\end{aligned}`,
       ),
       paragraph([
         "Step 2: ",

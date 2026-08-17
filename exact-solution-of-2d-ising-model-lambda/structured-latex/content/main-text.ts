@@ -36019,6 +36019,75 @@ c-a
   },
 
   {
+    id: "critical_exponent_claim_fisher_zero_set_nonempty",
+    kind: "claim",
+    title: { text: "二以上の有限格子の Fisher 零点集合は空でない" },
+    labels: ["claim_fisher_zero_set_nonempty"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-set-nonempty"],
+    lean: [
+      "Ising2DLambda.FisherZero.fisherZeroSet_nonempty",
+      "Ising2DLambda.NecSuf.FisherZero.rootSet_nonempty_of_positive_coeff_necSuf",
+      "Ising2DLambda.FisherZero.fisherZeroSet_nonempty_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge2`),
+        " を任意に取る。このとき有限格子の Fisher 零点集合 ",
+        math(String.raw`\mathcal{F}_{L}`), "（", ref("def_finite_lattice_fisher_zeros"),
+        "）は空でない。すなわち、ある ",
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`), " が存在して ",
+        math(String.raw`\mathrm{Ev}^{F}_{\xi}(Z_L)=0`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "頂点 ", math(String.raw`(0,0)\in V_L`), " のスピンだけを ",
+        math(String.raw`-1`), "、ほかのすべての頂点のスピンを ",
+        math(String.raw`+1`), " とする配位を ",
+        math(String.raw`\sigma_{\mathrm{flip}}\in\Sigma_L`), " と書く。",
+        math(String.raw`L\ge2`), " なので ", math(String.raw`(0,0)`), " と ",
+        math(String.raw`(0,1)`), " は ", math(String.raw`V_L=(\mathbb{Z}/L\mathbb{Z})^2`),
+        " の相異なる元である。横向きの最初の辺はこの二頂点を端点に持つ（",
+        ref("def_lattice"), "）ので、この辺は ", math(String.raw`\sigma_{\mathrm{flip}}`),
+        " で破れている。したがって",
+      ]),
+      displayMath(String.raw`m:=b(\sigma_{\mathrm{flip}})\ge1`),
+      paragraph([
+        "であり、この配位は破れボンド数が ", math(String.raw`m`), " である配位として数えられるので",
+      ]),
+      displayMath(String.raw`\Omega_L(m)\ge1\qquad(\because\ \blkref{def_multiplicity})`),
+      paragraph([
+        "である。よって ", ref("claim_coefficient_representation"), " により ",
+        math(String.raw`Z_L`), " の正次数 ", math(String.raw`m`), " の係数は零でない。",
+        ref("def_integer_polynomial_qbar_lift"), " で係数を ",
+        math(String.raw`\overline{\mathbb{Q}}`), " へ送った多項式 ",
+        math(String.raw`\widehat{Z_L}^{\,F}`), " でも同じ ", math(String.raw`m`),
+        " 次の係数は零でないから、その次数は零でない。",
+      ]),
+      paragraph([
+        ref("def_algebraic_numbers"), " の第 3 条件（代数閉性）により、次数が零でない ",
+        math(String.raw`\widehat{Z_L}^{\,F}`), " には根 ",
+        math(String.raw`\xi\in\overline{\mathbb{Q}}`), " が存在する。すなわち",
+      ]),
+      displayMath(String.raw`\mathrm{aev}_{\xi}\!\left(\widehat{Z_L}^{\,F}\right)=0`),
+      paragraph([
+        "である。", ref("claim_integer_polynomial_qbar_lift_evaluation"), " により左辺は ",
+        math(String.raw`\mathrm{Ev}^{F}_{\xi}(Z_L)`), " に等しい。したがって ",
+        ref("def_finite_lattice_fisher_zeros"), " より ",
+        math(String.raw`\xi\in\mathcal{F}_{L}`), " である。",
+      ]),
+      paragraph([
+        "仮定 ", math(String.raw`L\ge2`), " は必要である。", math(String.raw`L=1`),
+        " では二本の辺がともに自己ループなので、任意の配位の破れボンド数は零であり、",
+        math(String.raw`Z_1=2`), "、したがって ", math(String.raw`\mathcal{F}_1=\varnothing`),
+        " である。全過程は有限集合、自然数、整係数多項式と代数的数だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "zero_pinching_claim_critical_point_mem_real_closed",
     kind: "claim",
     standing: "mainTheorem",
