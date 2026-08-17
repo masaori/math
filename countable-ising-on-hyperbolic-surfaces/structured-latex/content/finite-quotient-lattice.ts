@@ -628,4 +628,77 @@ r_E
 =\mathrm{true}.`),
     ],
   },
+  {
+    id: "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Ising 分配多項式" },
+    labels: ["theorem_fixed_quotient_ising_partition_polynomial"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/fixed-quotient-ising-partition-polynomial"],
+    statement: [
+      paragraph([
+        ref("theorem_generated_quotient_cellulation_is_hyperbolic_regular"),
+        " で生成した有限グラフ ",
+        math(String.raw`G_Q`),
+        " の Ising 分配多項式は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_{G_Q}(x)
+&=2+48x^{7}+168x^{12}+384x^{14}+112x^{15}\\
+&\quad{}+672x^{17}+168x^{18}+2016x^{19}+1092x^{20}+1584x^{21}\\
+&\quad{}+3696x^{22}+2688x^{23}+9030x^{24}+7392x^{25}+13776x^{26}\\
+&\quad{}+23520x^{27}+21552x^{28}+46368x^{29}+67760x^{30}+100800x^{31}\\
+&\quad{}+142674x^{32}+194208x^{33}+339360x^{34}+458784x^{35}+530824x^{36}\\
+&\quad{}+696192x^{37}+938448x^{38}+1128848x^{39}+1150716x^{40}+1253280x^{41}\\
+&\quad{}+1541040x^{42}+1570464x^{43}+1338120x^{44}+1243872x^{45}+1213968x^{46}\\
+&\quad{}+984144x^{47}+662508x^{48}+461376x^{49}+329784x^{50}+183680x^{51}\\
+&\quad{}+75348x^{52}+27216x^{53}+8064x^{54}+1344x^{55}+126x^{56}
+\in\mathbb Z[x].
+\end{aligned}`),
+    ],
+    proof: [
+      paragraph([
+        "有限集合 ",
+        math(String.raw`\mathcal V_Q`),
+        " に一つの全順序を固定する。各配位 ",
+        math(String.raw`\sigma\in\mathcal S_{G_Q}`),
+        " を、その順序で並べた二十四成分のスピン列へ送る。この写像は ",
+        math(String.raw`\mathcal S_{G_Q}`),
+        " から二十四成分の二値列全体への全単射である。",
+      ]),
+      paragraph([ref("claim_partition_polynomial_coefficient_expansion"), " より"]),
+      displayMath(String.raw`\begin{aligned}
+Z_{G_Q}(x)
+&=\sum_{m=0}^{84}\Omega_{G_Q}(m)x^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&=2+48x^{7}+168x^{12}
+&&\bigl(\because\ \text{全二値列の有限計数}\bigr)\\
+&\quad{}+384x^{14}+112x^{15}+672x^{17}\\
+&\quad{}+168x^{18}+2016x^{19}+1092x^{20}\\
+&\quad{}+1584x^{21}+3696x^{22}+2688x^{23}\\
+&\quad{}+9030x^{24}+7392x^{25}+13776x^{26}\\
+&\quad{}+23520x^{27}+21552x^{28}+46368x^{29}\\
+&\quad{}+67760x^{30}+100800x^{31}+142674x^{32}\\
+&\quad{}+194208x^{33}+339360x^{34}+458784x^{35}\\
+&\quad{}+530824x^{36}+696192x^{37}+938448x^{38}\\
+&\quad{}+1128848x^{39}+1150716x^{40}+1253280x^{41}\\
+&\quad{}+1541040x^{42}+1570464x^{43}+1338120x^{44}\\
+&\quad{}+1243872x^{45}+1213968x^{46}+984144x^{47}\\
+&\quad{}+662508x^{48}+461376x^{49}+329784x^{50}\\
+&\quad{}+183680x^{51}+75348x^{52}+27216x^{53}\\
+&\quad{}+8064x^{54}+1344x^{55}+126x^{56}.
+\end{aligned}`),
+      paragraph([
+        "有限計数では、",
+        ref("def_finite_quotient_oriented_coset_edge_endpoint_data"),
+        " の端点写像から得る全八十四辺について、各二値列の相異なる端点値をもつ辺数を ",
+        ref("def_broken_edge_set"),
+        " に従って数えた。係数の総和は ",
+        math(String.raw`16777216=2^{24}`),
+        " である。全ての係数と指数は自然数であり、多項式は ",
+        math(String.raw`\mathbb Z[x]`),
+        " に属する。実数、複素数、極限、積分は用いない。",
+      ]),
+    ],
+  },
 ]);

@@ -68,6 +68,7 @@ export const ALL_LABELS = [
   "theorem_boundary_of_boundary_is_zero_over_f2",
   "theorem_finite_character_orthogonality",
   "theorem_finite_fourier_inverse_transform",
+  "theorem_fixed_quotient_ising_partition_polynomial",
   "theorem_formal_high_temperature_expansion",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
