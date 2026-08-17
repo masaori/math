@@ -66,6 +66,7 @@ export const ALL_LABELS = [
   "theorem_homology_class_polynomials_recombine",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
+  "theorem_primal_cohomology_dual_homology_transport_is_bijective",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

@@ -310,8 +310,26 @@ h_{f,i}(\mathsf{departing})
   \partial_G\!\left(h_{f,i}(\mathsf{arriving})\right)=v
   \end{array}
 \right\}`),
+      paragraph(["また、同じ頂点へ写る辺端の有限集合を"]),
+      displayMath(String.raw`H_v:=
+\left\{
+  (e,\xi)\in E_{\mathrm{cell}}\times\mathsf{End}
+  \ \middle|\
+  \ \partial_G(e,\xi)=v
+\right\}`),
       paragraph([
-        "と書く。頂点リンク単巡回述語 ",
+        "と書く。各 ",
+        math(String.raw`h\in H_v`),
+        " に接する角側の有限集合を",
+      ]),
+      displayMath(String.raw`I_v(h):=
+\left\{
+  ((f,i),\alpha)\in C_v\times\mathsf{CornerSide}
+  \ \middle|\
+  \ h_{f,i}(\alpha)=h
+\right\}`),
+      paragraph([
+        "と書く。角位置の有限集合と辺端の有限集合を同一視しない。頂点リンク単巡回述語 ",
         math(String.raw`\operatorname{VertexLinksAreCycles}`),
         " を、",
         ref("def_finite_cellulation_opposite_edge_occurrences"),
@@ -334,27 +352,18 @@ h_{f,i}(\mathsf{departing})
 \text{任意の }v\in V_{\mathrm{cell}}\text{ に対して}
 \begin{cases}
 C_v\ne\varnothing,\\[4pt]
-\left|
-  \left\{
-    ((f,i),\alpha)\in C_v\times\mathsf{CornerSide}\ \middle|\
-    h_{f,i}(\alpha)=h
-  \right\}
-\right|=2
+|I_v(h)|=2
 \quad
 \left(
-  \text{任意の }h\in
-  \left\{
-    (e,\xi)\in E_{\mathrm{cell}}\times\mathsf{End}
-    \ \middle|\
-    \partial_G(e,\xi)=v
-  \right\}
-  \text{ に対して}
+  \text{任意の }h\in H_v\text{ に対して}
 \right),\\[12pt]
 \text{任意の }c,c'\in C_v\text{ に対して、ある }r\in\mathbb N\text{ と}\\
 \qquad c_j=(f_j,i_j)\in C_v\quad(0\le j\le r)\text{ が存在し、}\\
-\qquad c_0=c,\quad c_r=c',\quad
-\{h_{f_j,i_j}(\alpha)\mid \alpha\in\mathsf{CornerSide}\}\cap
-\{h_{f_{j+1},i_{j+1}}(\alpha)\mid \alpha\in\mathsf{CornerSide}\}\ne\varnothing\\
+\qquad c_0=c,\quad c_r=c',\\
+\qquad \{h_{f_j,i_j}(\alpha)\mid \alpha\in\mathsf{CornerSide}\}\\
+\qquad \cap
+\{h_{f_{j+1},i_{j+1}}(\alpha)\mid \alpha\in\mathsf{CornerSide}\}
+\ne\varnothing\\
 \qquad\left(j\in\mathbb N,\ 0\le j<r\right).
 \end{cases}
 \end{aligned}`),

@@ -513,28 +513,32 @@ A
         " が定まる。任意の ",
         math(String.raw`h\in H`),
         " を固定する。",
+        ref("def_integer_sign_character_realization"),
+        " の整数符号を短く ",
+        math(String.raw`\varepsilon_\varphi(k):=\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)\in\{-1,+1\}`),
+        " と書く。",
       ]),
       paragraph(["有限 Fourier 変換の定義より"]),
       displayMath(String.raw`\begin{aligned}
 \frac{1}{n}
 \sum_{\varphi\in H^\vee}
-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\varepsilon_\varphi(h)
 \jmath\!\left(\widehat A_{\varphi}\right)
 &=
 \frac{1}{n}
 \sum_{\varphi\in H^\vee}
-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
+\varepsilon_\varphi(h)
 \jmath\!\left(
   \sum_{k\in H}
-  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)A_k
+  \varepsilon_\varphi(k)A_k
 \right)
 \quad\bigl(\because\ \widehat A_{\varphi}\text{ の定義}\bigr)\\
 &=
 \frac{1}{n}
 \sum_{\varphi\in H^\vee}
 \sum_{k\in H}
-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+\varepsilon_\varphi(h)
+\varepsilon_\varphi(k)
 \jmath(A_k)
 \quad\bigl(\because\ \jmath\text{ は環準同型}\bigr)\\
 &=
@@ -542,11 +546,11 @@ A
 \sum_{k\in H}
 \left(
   \sum_{\varphi\in H^\vee}
-  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
-  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+  \varepsilon_\varphi(h)
+  \varepsilon_\varphi(k)
 \right)
 \jmath(A_k)
-\quad\bigl(\because\ H,H^\vee\text{ 上の有限和の交換}\bigr).
+\quad\bigl(\because\ \text{有限和の交換}\bigr).
 \end{aligned}`),
       paragraph([ref("theorem_finite_character_orthogonality"), " より"]),
       displayMath(String.raw`\begin{aligned}
@@ -554,8 +558,8 @@ A
 \sum_{k\in H}
 \left(
   \sum_{\varphi\in H^\vee}
-  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(h)
-  \bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)
+  \varepsilon_\varphi(h)
+  \varepsilon_\varphi(k)
 \right)
 \jmath(A_k)
 &=
@@ -572,7 +576,7 @@ A
 \quad\bigl(\because\ \mathbb Q[u,v]\text{ の零元と有限和}\bigr)\\
 &=
 \jmath(A_h)
-\quad\bigl(\because\ n\in\mathbb Q_{>0}\text{ と }n^{-1}n=1\bigr).
+\quad\bigl(\because\ n^{-1}n=1\bigr).
 \end{aligned}`),
       paragraph([
         "これで任意の ",
@@ -1421,6 +1425,194 @@ c\!\left(d_1^{-1}(e^\ast)\right)
         " は代表の選択に依存せず well-defined である。主一次コサイクル、主第一コホモロジー類、双対一次サイクル、双対第一ホモロジー類を同一視せず、移行には商集合と ",
         math(String.raw`\overline{\mathsf D}_1`),
         " だけを用いる。この定義は誘導写像が全単射であるとはまだ主張しない。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_fourier_theorem_primal_cohomology_dual_homology_transport_is_bijective",
+    kind: "theorem",
+    title: { text: "主第一コホモロジーから双対第一ホモロジーへの誘導写像は全単射である" },
+    labels: ["theorem_primal_cohomology_dual_homology_transport_is_bijective"],
+    habitat: "F2",
+    verification: ["sagemath/check/primal-cohomology-dual-homology-transport-is-bijective"],
+    statement: [
+      paragraph([
+        ref("def_primal_cohomology_to_dual_homology_transport"),
+        " の誘導写像",
+      ]),
+      displayMath(String.raw`\overline{\mathsf D}_1:
+H^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\longrightarrow
+H_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+      paragraph(["は全単射である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_primal_dual_cell_correspondence"),
+        " の全単射 ",
+        math(String.raw`d_1:E_{\mathrm{cell}}\to E_{\mathrm{cell}}^\ast`),
+        " に沿う逆向きの係数移送を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1^{\leftarrow}:
+\mathbb F_2^{E_{\mathrm{cell}}^\ast}
+&\longrightarrow
+\mathbb F_2^{E_{\mathrm{cell}}},\\
+z^\ast
+&\longmapsto
+\mathsf D_1^{\leftarrow}(z^\ast),\\
+\mathsf D_1^{\leftarrow}(z^\ast)(e)
+&:=
+z^\ast(d_1(e))
+\qquad(e\in E_{\mathrm{cell}})
+\end{aligned}`),
+      paragraph([
+        "と定める。任意の ",
+        math(String.raw`z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        " と ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " に対し、",
+        ref("theorem_primal_cocycle_transport_is_dual_cycle"),
+        " の証明で得た境界行列成分の等式と、全単射 ",
+        math(String.raw`d_1`),
+        " による有限和の添字の付け替えから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\partial_2^{\mathsf T}\mathsf D_1^{\leftarrow}(z^\ast)\right)(f)
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_2)_{e,f}\mathsf D_1^{\leftarrow}(z^\ast)(e)
+\quad\bigl(\because\ \text{転置行列と係数写像の積}\bigr)\\
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_2)_{e,f}z^\ast(d_1(e))
+\quad\bigl(\because\ \mathsf D_1^{\leftarrow}\text{ の定義}\bigr)\\
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+(\partial_1^\ast)_{d_0(f),d_1(e)}z^\ast(d_1(e))
+\quad\bigl(\because\ (\partial_2)_{e,f}=(\partial_1^\ast)_{d_0(f),d_1(e)}\bigr)\\
+&=
+\sum_{e^\ast\in E_{\mathrm{cell}}^\ast}
+(\partial_1^\ast)_{d_0(f),e^\ast}z^\ast(e^\ast)
+\quad\bigl(\because\ d_1\text{ は全単射}\bigr)\\
+&=
+(\partial_1^\ast z^\ast)(d_0(f))
+\quad\bigl(\because\ \text{有限行列と係数写像の積}\bigr)\\
+&=
+0_{\mathbb F_2}
+\quad\bigl(\because\ z^\ast\in\ker(\partial_1^\ast)\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_primal_first_cocycle_space_over_f2"),
+        " より ",
+        math(String.raw`\mathsf D_1^{\leftarrow}(z^\ast)\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " である。次に、任意の ",
+        math(String.raw`b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        " を取る。",
+        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
+        " より、ある ",
+        math(String.raw`a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " が存在して ",
+        math(String.raw`b^\ast=\mathsf D_1(a)`),
+        " である。任意の ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1^{\leftarrow}(b^\ast)(e)
+&=
+\mathsf D_1^{\leftarrow}(\mathsf D_1(a))(e)
+\quad\bigl(\because\ b^\ast=\mathsf D_1(a)\bigr)\\
+&=
+\mathsf D_1(a)(d_1(e))
+\quad\bigl(\because\ \mathsf D_1^{\leftarrow}\text{ の定義}\bigr)\\
+&=
+a\!\left(d_1^{-1}(d_1(e))\right)
+\quad\bigl(\because\ \mathsf D_1\text{ の定義}\bigr)\\
+&=
+a(e)
+\quad\bigl(\because\ d_1\text{ は全単射}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\mathsf D_1^{\leftarrow}(b^\ast)=a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
+        " である。さらに、任意の ",
+        math(String.raw`z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        "、",
+        math(String.raw`b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`),
+        "、",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1^{\leftarrow}(z^\ast+b^\ast)(e)
+&=
+(z^\ast+b^\ast)(d_1(e))
+\quad\bigl(\because\ \mathsf D_1^{\leftarrow}\text{ の定義}\bigr)\\
+&=
+z^\ast(d_1(e))+b^\ast(d_1(e))
+\quad\bigl(\because\ \mathbb F_2^{E_{\mathrm{cell}}^\ast}\text{ の成分ごとの加法}\bigr)\\
+&=
+\mathsf D_1^{\leftarrow}(z^\ast)(e)
++\mathsf D_1^{\leftarrow}(b^\ast)(e)
+\quad\bigl(\because\ \mathsf D_1^{\leftarrow}\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "ゆえに逆向きの係数移送は双対第一ホモロジー類の代表の変更を主第一コホモロジー類の代表の変更へ移すので、商上の写像",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\mathsf D}_1^{\leftarrow}:
+H_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+&\longrightarrow
+H^1(\mathcal C_{\mathrm{cell}};\mathbb F_2),\\
+\left\{
+  z^\ast+b^\ast
+  \ \middle|\
+  \ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
+\right\}
+&\longmapsto
+\left\{
+  \mathsf D_1^{\leftarrow}(z^\ast)+a
+  \ \middle|\
+  \ a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
+\right\}
+\end{aligned}`),
+      paragraph(["は well-defined である。任意の ", math(String.raw`c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`), " と ", math(String.raw`e\in E_{\mathrm{cell}}`), " に対して"]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1^{\leftarrow}(\mathsf D_1(c))(e)
+&=
+\mathsf D_1(c)(d_1(e))
+\quad\bigl(\because\ \mathsf D_1^{\leftarrow}\text{ の定義}\bigr)\\
+&=
+c\!\left(d_1^{-1}(d_1(e))\right)
+\quad\bigl(\because\ \mathsf D_1\text{ の定義}\bigr)\\
+&=
+c(e)
+\quad\bigl(\because\ d_1\text{ は全単射}\bigr).
+\end{aligned}`),
+      paragraph(["また、任意の ", math(String.raw`z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)`), " と ", math(String.raw`e^\ast\in E_{\mathrm{cell}}^\ast`), " に対して"]),
+      displayMath(String.raw`\begin{aligned}
+\mathsf D_1(\mathsf D_1^{\leftarrow}(z^\ast))(e^\ast)
+&=
+\mathsf D_1^{\leftarrow}(z^\ast)(d_1^{-1}(e^\ast))
+\quad\bigl(\because\ \mathsf D_1\text{ の定義}\bigr)\\
+&=
+z^\ast\!\left(d_1(d_1^{-1}(e^\ast))\right)
+\quad\bigl(\because\ \mathsf D_1^{\leftarrow}\text{ の定義}\bigr)\\
+&=
+z^\ast(e^\ast)
+\quad\bigl(\because\ d_1\text{ は全単射}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって商上で ",
+        math(String.raw`\overline{\mathsf D}_1^{\leftarrow}\circ\overline{\mathsf D}_1`),
+        " と ",
+        math(String.raw`\overline{\mathsf D}_1\circ\overline{\mathsf D}_1^{\leftarrow}`),
+        " はそれぞれの恒等写像である。ゆえに ",
+        math(String.raw`\overline{\mathsf D}_1`),
+        " は全単射である。全ての対象は有限集合または ",
         math(String.raw`\mathbb F_2`),
         " 上にあり、実数、複素数、極限、積分を用いない。",
       ]),
