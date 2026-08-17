@@ -482,4 +482,150 @@ P_f^Q\longrightarrow\mathcal E_Q\times\mathsf{Ori}`),
       ]),
     ],
   },
+  {
+    id: "finite_quotient_lattice_theorem_generated_cellulation_is_hyperbolic_regular",
+    kind: "theorem",
+    title: { text: "生成剰余類セルデータの有限検査" },
+    labels: ["theorem_generated_quotient_cellulation_is_hyperbolic_regular"],
+    habitat: "Q",
+    verification: ["sagemath/check/generated-quotient-cellulation-finite-check"],
+    statement: [
+      paragraph([
+        "有限集合 ",
+        math(String.raw`\Omega:=\{1,2,3,4,5,6,7,8\}`),
+        " 上の置換を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r_F
+&:=
+(1\ 6\ 2)(3\ 8\ 4),\\
+r_V
+&:=
+(1\ 8\ 4\ 2\ 5\ 6\ 7),\\
+r_E
+&:=
+(1\ 4)(2\ 5)(3\ 8)(6\ 7)
+\end{aligned}`),
+      paragraph([
+        "とし、有限置換群 ",
+        math(String.raw`Q:=\langle r_F,r_V,r_E\rangle\leq\operatorname{Sym}(\Omega)`),
+        " を取る。各 ",
+        math(String.raw`g\in Q`),
+        " に対して ",
+        math(String.raw`\kappa(g):=(g(1),g(2),\ldots,g(8))\in\Omega^8`),
+        " と置き、",
+        math(String.raw`\Omega^8`),
+        " の辞書式順序に関する各辺剰余類の最小元を選ぶ代表元選択写像を ",
+        math(String.raw`\eta_E^{\min}\in\operatorname{Rep}_E(Q)`),
+        " とする。",
+      ]),
+      paragraph([
+        ref("def_hyperbolic_triangle_permutation_quotient_input"),
+        " の ",
+        math(String.raw`\mathcal Q_{3,7}`),
+        " と、",
+        ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"),
+        "、",
+        ref("def_finite_quotient_oriented_coset_edge_endpoint_data"),
+        "、",
+        ref("def_finite_quotient_oriented_coset_face_boundary_word"),
+        " によりこの入力から生成した有限グラフ、セル集合入力、向き付き境界語の族をそれぞれ ",
+        math(String.raw`G_Q`),
+        "、",
+        math(String.raw`\mathcal C_Q`),
+        "、",
+        math(String.raw`\bigl(\partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f\bigr)_{f\in\mathcal F_Q}`),
+        " と書く。このとき",
+      ]),
+      displayMath(String.raw`\operatorname{HyperbolicRegularType}_{3,7}
+\left(
+  G_Q,
+  \mathcal C_Q,
+  \left(
+    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
+  \right)_{f\in\mathcal F_Q}
+\right)
+=\mathrm{true}`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`3,7\in\mathbb N_{>0}`),
+        "、三つのセル集合、端点写像、位置集合、境界語は有限集合または有限集合間の写像であり、双曲型判定の不等式だけが ",
+        math(String.raw`\mathbb Q`),
+        " に属する。実数、複素数、極限、積分は用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "有限置換と全ての剰余類を列挙すると、",
+        math(String.raw`|Q|=168`),
+        "、",
+        math(String.raw`|\mathcal V_Q|=24`),
+        "、",
+        math(String.raw`|\mathcal E_Q|=84`),
+        "、",
+        math(String.raw`|\mathcal F_Q|=56`),
+        " である。各辺は全境界語に正逆一回ずつ現れ、各頂点の角は辺端の共有により一つの巡回列をなし、有限集合上の幅優先探索は一次骨格の全二十四頂点へ到達する。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{OppositeEdgeTwice}
+\left(
+  \left(
+    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
+  \right)_{f\in\mathcal F_Q}
+\right)
+&=\mathrm{true},\\
+\operatorname{VertexLinksAreCycles}
+\left(
+  G_Q,
+  \left(
+    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
+  \right)_{f\in\mathcal F_Q}
+\right)
+&=\mathrm{true},\\
+\operatorname{ConnectedOneSkeleton}(G_Q)
+&=\mathrm{true}.
+\end{aligned}`),
+      paragraph([ref("def_oriented_closed_surface_cellulation"), " より"]),
+      displayMath(String.raw`\operatorname{OrientedClosedSurfaceCellulation}
+\left(
+  G_Q,
+  \mathcal C_Q,
+  \left(
+    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
+  \right)_{f\in\mathcal F_Q}
+\right)
+=\mathrm{true}.`),
+      paragraph([
+        "さらに全五十六面の位置集合の元数は三であり、全二十四頂点に接する角位置の元数は七である。",
+        ref("def_finite_cellulation_regular_type"),
+        " より",
+      ]),
+      displayMath(String.raw`\operatorname{RegularType}_{3,7}
+\left(
+  G_Q,
+  \mathcal C_Q,
+  \left(
+    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
+  \right)_{f\in\mathcal F_Q}
+\right)
+=\mathrm{true}.`),
+      displayMath(String.raw`\begin{aligned}
+\frac13+\frac17
+&=\frac{10}{21},\\
+\frac{10}{21}
+&<\frac12
+\qquad(\because 20<21).
+\end{aligned}`),
+      paragraph([ref("def_finite_cellulation_hyperbolic_regular_type"), " より"]),
+      displayMath(String.raw`\operatorname{HyperbolicRegularType}_{3,7}
+\left(
+  G_Q,
+  \mathcal C_Q,
+  \left(
+    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
+  \right)_{f\in\mathcal F_Q}
+\right)
+=\mathrm{true}.`),
+    ],
+  },
 ]);
