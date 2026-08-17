@@ -2673,12 +2673,23 @@ Z_m
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
         " であるものとする。",
       ]),
-      paragraph(["Step 1: 単一サイトの Pauli 行列の積公式。成分計算により、"]),
+      paragraph(["Step 1: 単一サイトの Pauli 行列の積公式。"]),
       displayMath(
-        String.raw`\sigma^x\sigma^x = \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix} = \begin{pmatrix}1&0\\0&1\end{pmatrix} = I_{\mathrm{Mat}(2,\mathbb{C})} \quad (\because \text{行列の積の成分計算})`,
+        String.raw`\begin{aligned}
+\sigma^x\sigma^x
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \sigma^x \text{ の定義}) \\
+&= \begin{pmatrix}1&0\\0&1\end{pmatrix} \quad (\because \text{行列の積の成分計算}) \\
+&= I_{\mathrm{Mat}(2,\mathbb{C})} \quad (\because \text{単位行列の定義})
+\end{aligned}`,
       ),
       displayMath(
-        String.raw`\sigma^y\sigma^z = \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} = \begin{pmatrix}0&i\\i&0\end{pmatrix} = i\begin{pmatrix}0&1\\1&0\end{pmatrix} = i\,\sigma^x \quad (\because \text{行列の積の成分計算})`,
+        String.raw`\begin{aligned}
+\sigma^y\sigma^z
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \quad (\because \sigma^y,\ \sigma^z \text{ の定義}) \\
+&= \begin{pmatrix}0&i\\i&0\end{pmatrix} \quad (\because \text{行列の積の成分計算}) \\
+&= i\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \text{スカラー倍の成分計算}) \\
+&= i\,\sigma^x \quad (\because \sigma^x \text{ の定義})
+\end{aligned}`,
       ),
       paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す。"]),
       displayMath(
