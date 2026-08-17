@@ -260,6 +260,8 @@ targets=(
   Ising3DCut.LimitQuantity.nullModel_symmetrized_padicValRat_reciprocal_invariant_fromNecSuf
   Ising3DCut.LimitQuantity.nullModel_symmetrized_value_reciprocal_invariant
   Ising3DCut.LimitQuantity.nullModel_symmetrized_real_term_reciprocal_invariant
+  Ising3DCut.LimitQuantity.nullModel_symmetrized_real_seq_tendsto_iff
+  Ising3DCut.LimitQuantity.nullModel_symmetrized_real_seq_limit_eq
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
