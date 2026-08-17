@@ -610,13 +610,19 @@ u
    \quad (\because \text{直前の実数の等式})
 \end{aligned}`,
       ),
-      paragraph([
-        "であり、",
-        math(String.raw`|u|^2/\|B\|^2\le\|A\|^2`),
-        "（",
-        math(String.raw`\mathbb{R}`),
-        " の移項）。したがって",
-      ]),
+      paragraph(["である。これを移項して"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{|u|^2}{\|B\|^2}
+&= \|A\|^2-\left(\|A\|^2-\frac{|u|^2}{\|B\|^2}\right)
+   \quad (\because \mathbb{R} \text{ の四則}) \\
+&\le \|A\|^2-0
+   \quad (\because \text{直前の } 0\le\|A\|^2-|u|^2/\|B\|^2 \text{ と、} \mathbb{R} \text{ で引く数が大きいほど差は小さいこと}) \\
+&= \|A\|^2
+   \quad (\because \mathbb{R} \text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph(["を得る。したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 |u|^2
