@@ -24,6 +24,7 @@ export const ALL_LABELS = [
   "claim_constant_plus_breaks_no_bond",
   "claim_critical_partition_value_mem_positive_cone",
   "claim_critical_point_mem_real_closed",
+  "claim_critical_point_not_fisher_zero",
   "claim_cross_orbit_inversion_pairs_even",
   "claim_cross_orbit_inversion_pairs_union",
   "claim_cross_orbit_inversions_even",

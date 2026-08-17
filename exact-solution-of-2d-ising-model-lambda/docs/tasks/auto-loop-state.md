@@ -6,6 +6,9 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 410 は、台帳の先頭行「$x_c$ は Fisher 零点でない」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_critical_point_not_fisher_zero`（`claim_critical_partition_value_mem_positive_cone` の直後）: 臨界点での評価値 $\xi=\sum_m\Omega_L(m)x_c^m$ が正錐に入ること（前 tick）と、零元の表示 $(0,0)$ が正錐の三条件をすべて破ることから、`def_finite_lattice_fisher_zeros` へ当てる背理法で $x_c\notin\mathcal F_L$ を得た。骨組みは `claim_positive_rational_not_fisher_zero` と同じ。
+  SageMath `check/critical-point-not-fisher-zero/`（$L=1,2,3$ × $s$ 2 通りの 6 組で評価値の非零・根一覧への不在・表示の正錐条件、および $(0,0)$ の三条件の破れ。`QQ`/`QQbar` 厳密）。Lean 具体版 `FisherZero/CriticalPointNotFisherZero.lean`、必要十分版 `NecSuf/FisherZero/CriticalPointNotFisherZero.lean`（値の一致・正条件・零表示の特徴づけ・零表示の非正・零点集合の定義だけを仮定に取り、体も多項式も順序も使わない）、導出版。sorry 検査 1422 件・check 501 ブロック・verify-check-linkage 284 件・build:pdf 271 ページ通過。式変形統一は姉妹側を 1 件（下の並列ストリームの記録）。
 - **2026-08-18 の tick 409 は、台帳の先頭行「分配多項式の臨界点での値は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。**
   `claim_critical_partition_value_mem_positive_cone`: 全て正の配位から $1\le\Omega_L(0)$ を得て先頭項を正錐に置き、各後続項 $\Omega_L(m)x_c^m$ を零元または正錐の元へ分け、正錐の加法閉性による有限和の帰納法で $Z_L(x_c)\in P_s$ を示した。
   SageMath `check/critical-partition-value-positive-cone/`（$L=1,2,3$ と $s$ 2 通りの 6 組を `QQ`/`QQbar` で厳密確認）。Lean 具体版・必要十分版・導出版。sorry 検査 1419 件・check 500 ブロック・verify-check-linkage 283 件・build:pdf 271 ページ通過。式変形統一は姉妹側を 1 件（下の並列ストリームの記録）。
@@ -19,8 +22,6 @@
   割り直しの理由: 先頭距離の正値性は $x_c\notin\mathcal F_L$ を経由し、それには「正錐の元での分配多項式の値が正錐に入る」機構（冪・自然数倍・有限和）が丸ごと欠けていた。論法単位（表示の確認／冪の帰納法／値の評価と非零／距離の零性の同値／最小元の定義）で 5 行にした。
   `claim_positive_rational_in_positive_cone`（`claim_quadratic_positive_cone_mul_closed` の直後）: 任意の $q\in\mathbb Q_{>0}$ について $q\in Q_s$ かつ $q\in P_s$。表示の証人は $(q,0)$、正錐の第一条件で閉じる。のちに $\Omega_L(m)\ge1$ 倍を正錐の乗法として扱う根拠になる。
   SageMath `check/positive-rational-in-positive-cone/`（$s$ 2 通り × 正の有理数 6 個、非正 4 個の排除。`QQ`/`QQbar` 厳密）。Lean 具体版 `FisherZero/PositiveRationalInPositiveCone.lean`（`positiveRational_mem_positiveCone`）、必要十分版は既存の `positive_of_representation_necSuf` を引く（同じ議論を二箇所に置かない）、導出版 `PositiveRationalInPositiveConeFromNecSuf.lean`。sorry 検査 1403 件・check 497 ブロック・verify-check-linkage 280 件・build:pdf 269 ページ通過。
-- **2026-08-18 の tick 405 は、台帳の先頭行「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた（住処 Qbar、脱出なし）。**
-  `claim_fisher_zero_set_nonempty`: $(0,0)$ のスピンだけを反転した配位で正の破れボンド数 $m$ と $\Omega_L(m)\ge1$ を得るため、$Z_L$ の正次数係数は零でない。係数を $\overline{\mathbb Q}$ へ送った多項式へ代数閉性を使って根を取った。$L=1$ は $Z_1=2$ で零点が無いことも SageMath で確認した。Lean 具体版・必要十分版・導出版。sorry 検査 1399 件・check 496 ブロック・verify-check-linkage 279 件・build:pdf 269 ページ通過。
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -28,7 +29,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | $x_c$ は Fisher 零点でない | todo | 前行の値が $P_s$ に入ることと $0\notin P_s$（`claim_quadratic_zero_representation` の組 $(0,0)$ は三条件を満たさない）から値が非零。`def_finite_lattice_fisher_zeros` へ当てる背理法。骨組みは `claim_positive_rational_not_fisher_zero` と同じ |
 | 臨界指数を零点列で書く | 零点と臨界点の距離の二乗の零性は一致と同値 | todo | `claim_distance_squared_zero_iff_equal` の $q\in\mathbb Q$ を $x_c\in R$ へ置き換えるだけ（証明は同じ骨組み。$q\in R$ の根拠が `claim_critical_point_mem_real_closed` に変わる） |
 | 臨界指数を零点列で書く | 先頭距離 $d_1(L)$ の定義と正値性 | todo | $d_1(L):=\min_{\xi\in\mathcal F_L}\mathrm{dsq}_c(\xi)\in R$（最小元は `claim_real_algebraic_min_unique`、非空は `claim_fisher_zero_set_nonempty`、有限は `claim_fisher_zero_set_finite_card_bound`）。正値性は非零（前 2 行）＋二平方和が平方（`claim_real_closed_sum_of_two_squares_is_square`）＋順序の定義 |
 | 臨界指数を零点列で書く | 先頭距離の列と詰め寄りの述語の接続（可算な言明） | todo | $\{d_1(L)\}_{L\ge2}$ と `def_zero_pinching_predicate` を結ぶ。量化は $\mathbb Q$ 上 |
@@ -38,11 +38,11 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 410）: 台帳の先頭行「$x_c$ は Fisher 零点でない」を実行し、`claim_critical_point_not_fisher_zero` を臨界値の正錐所属の直後に置いた。評価値の正錐所属と零元表示 $(0,0)$ の三条件の破れから背理法。SageMath 6 組、Lean 具体版・必要十分版・導出版。sorry 検査 1422 件・check 501 ブロック・verify-check-linkage 284 件・PDF 271 ページ通過。
 - 2026-08-18（tick 409）: 台帳の先頭行「分配多項式の臨界点での値は正錐の元である」を実行し、`claim_critical_partition_value_mem_positive_cone` を係数表示の直後に置いた。全て正の配位による $\Omega_L(0)>0$、各係数項の零・正の場合分け、非空有限和の帰納法を用いた。SageMath 6 組、Lean 具体版・必要十分版・導出版。sorry 検査 1419 件・check 500 ブロック・verify-check-linkage 283 件・PDF 271 ページ通過。
 - 2026-08-18（tick 408）: 台帳の先頭行「分配多項式の臨界点での値は正錐に入り、$x_c$ は Fisher 零点でない」を論法単位の 3 行（自然数倍の場合分け／有限和の帰納法／背理法）へ割り、その最初「正錐の元の自然数倍は零元または正錐の元である」を四層で閉じた。`claim_quadratic_positive_cone_nat_mul` を冪の閉性の直後に置いた。SageMath 48 組、Lean 具体版・必要十分版・導出版。sorry 検査 1411 件・check 499 ブロック・verify-check-linkage 282 件・PDF 270 ページ通過。
 - 2026-08-18（tick 407）: 台帳の先頭行「正錐の元の冪は正錐の元である」を実行し、`claim_quadratic_positive_cone_pow_closed` を正の有理数の正錐所属の直後に置いた。自然数の帰納法で、基底は $1\in Q_s\cap P_s$、帰納段は $Q_s$ の乗法閉性と正錐の乗法閉性を引く。SageMath 1 節、Lean 具体版・必要十分版・導出版。sorry 検査 1407 件・check 498 ブロック・verify-check-linkage 281 件・PDF 270 ページ通過。
 - 2026-08-18（tick 406）: 台帳の先頭行「先頭距離 $d_1(L)$ の定義と正値性」を論法単位の 5 行（正の有理数は正錐／冪は正錐／値が正錐で $x_c\notin\mathcal F_L$／距離の零性の同値／最小元の定義と正値性）へ割り直し、その最初「正の有理数は正錐の元である」を四層で閉じた。`claim_positive_rational_in_positive_cone` を `claim_quadratic_positive_cone_mul_closed` の直後に置いた。SageMath 1 節、Lean 具体版・導出版（必要十分版は既存 `positive_of_representation_necSuf` を再利用）。sorry 検査 1403 件・check 497 ブロック・PDF 269 ページ通過。
-- 2026-08-18（tick 405）: 台帳の先頭行「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた。一スピン反転から正次数の非零係数を作り、$\overline{\mathbb Q}$ の代数閉性で根を取った。SageMath は $L=1$ の例外と $L=2,3$ の正次数係数・根を厳密確認。Lean 具体版・必要十分版・導出版。sorry 検査 1399 件・check 496 ブロック・verify-check-linkage 279 件・PDF 269 ページ通過。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の境界項 $\sigma_M^z\sigma_1^z$ の二等号を、一続き二段・各行の根拠つきへ揃えた（内容不変）。
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
@@ -71,11 +71,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-18（tick 410）: tick 409 の「分配多項式の臨界点での値は正錐の元である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は臨界点での値の非零性（今 tick の背理法）が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 409）: tick 408 の「正錐の元の自然数倍は零元または正錐の元である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は自然数係数倍の所属と零・正の場合分けを述べ、今 tick の各係数項と有限和の帰納法が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 408）: tick 407 の「正錐の元の冪は正錐の元である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は臨界点での値の各項の冪を担い、今 tick の自然数倍と後続の有限和の帰納法が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 407）: tick 406 の「正の有理数は正錐の元である」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。この主張は $q\in Q_s$ と $q\in P_s$ を確定し、今 tick の冪の基底 $1\in P_s$ と後続の自然数係数倍が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 406）: tick 405 の「$\mathcal F_L$ が空でないこと（$L\ge2$）」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は最小元の定義（先頭距離）の非空条件を担うため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
-- 2026-08-18（tick 405）: tick 404 の「実閉部分体の空でない有限集合は最小元をちょうど 1 つ持つ」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。この主張は有限集合での最小元の存在・一意性を述べ、後続の先頭距離定義が直接引くため「何も言っていない主張」ではない。
 ## 判断待ち（人間に問うべき論点）
 
 - **content のファイルを分けるときの文書順の決め方。** システムは `content/` のファイル名昇順を

@@ -3,6 +3,11 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 410 で台帳から移した記録（tick 405 の現在地・前進・レビュー）
+
+- tick 405 の現在地・前進: 台帳の先頭行「$\mathcal F_L$ が空でないこと（$L\ge2$）」を四層で閉じた（住処 Qbar、脱出なし）。`claim_fisher_zero_set_nonempty`: $(0,0)$ のスピンだけを反転した配位で正の破れボンド数 $m$ と $\Omega_L(m)\ge1$ を得るため、$Z_L$ の正次数係数は零でない。係数を $\overline{\mathbb Q}$ へ送った多項式へ代数閉性を使って根を取った。$L=1$ は $Z_1=2$ で零点が無いことも SageMath で確認した。SageMath は $L=1$ の例外と $L=2,3$ の正次数係数・根を厳密確認。Lean 具体版・必要十分版・導出版。sorry 検査 1399 件・check 496 ブロック・verify-check-linkage 279 件・build:pdf 269 ページ通過。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の境界項 $\sigma_M^z\sigma_1^z$ の二等号を、一続き二段・各行の根拠つきへ揃えた（内容不変）。
+- tick 405 のレビュー: tick 404 の「実閉部分体の空でない有限集合は最小元をちょうど 1 つ持つ」の本文・SageMath・Lean 具体版・既存必要十分版からの導出版を突き合わせ、一致した。修正なし。この主張は有限集合での最小元の存在・一意性を述べ、後続の先頭距離定義が直接引くため「何も言っていない主張」ではない。
+
 ## 2026-08-18 tick 408 で台帳から移した記録（tick 403 の現在地・前進、tick 402 のレビュー）
 
 - tick 403 の現在地: 最小元の行の前提として欠けていた狭義順序の推移律を四層で閉じ、`claim_real_algebraic_order_transitive` を `claim_two_is_square_in_real_closed` の直後に置いた（本文の三分法は網羅性だけで、推移律は無かった。前 tick の MEMORY に「確認せよ」と書いた点を着手時に確認した結果である）。証明は $c-a=(c-b)+(b-a)=u\cdot u+v\cdot v$ の一続き三段のあと、`claim_real_closed_sum_of_two_squares_is_square` で平方に書き直し、証人の非零性を `claim_real_closed_sum_of_two_squares_zero` から出す。SageMath `check/real-algebraic-order-transitive/`（3 節。`AA` のモデル）、Lean 具体版 `FisherZero/RealAlgebraicOrderTransitive.lean`・必要十分版（可換環で 2 性質を仮定に取る形）・導出版。sorry 検査 1394 件・check 494 ブロック・verify-check-linkage 277 件・build:pdf 268 ページ通過。

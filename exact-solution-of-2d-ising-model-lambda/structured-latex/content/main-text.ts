@@ -34374,6 +34374,110 @@ Z_L(x_c)
   },
 
   {
+    id: "fisher_zero_claim_critical_point_not_fisher_zero",
+    kind: "claim",
+    title: { text: "臨界点は Fisher 零点でない" },
+    labels: ["claim_critical_point_not_fisher_zero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/critical-point-not-fisher-zero"],
+    lean: [
+      "Ising2DLambda.FisherZero.criticalPoint_not_mem_fisherZero",
+      "Ising2DLambda.NecSuf.FisherZero.represented_positive_value_not_mem_zeroSet_necSuf",
+      "Ising2DLambda.FisherZero.criticalPoint_not_mem_fisherZero_from_necSuf",
+    ],
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
+        " とする。", math(String.raw`s\in\overline{\mathbb{Q}}`),
+        "（", ref("def_algebraic_numbers"), "）を ",
+        math(String.raw`s\cdot s=2`),
+        " を満たす元とし（", ref("claim_sqrt_two_exists"), "）、臨界点を ",
+        math(String.raw`x_c=-1+s`),
+        "（", ref("def_critical_point"), "）とする。このとき",
+      ]),
+      displayMath(String.raw`x_c\notin\mathcal{F}_{L}`),
+      paragraph([
+        "が成り立つ（", math(String.raw`\mathcal{F}_{L}`), " は ",
+        ref("def_finite_lattice_fisher_zeros"),
+        "）。すなわち、どの有限格子でも臨界点は分配多項式の根でない。",
+        "零点は臨界点へ詰め寄るだけであり、有限の ",
+        math(String.raw`L`),
+        " で臨界点に触れることはない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。値 ",
+        math(String.raw`\xi:=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^{m}\in\overline{\mathbb{Q}}`),
+        " と置く（有限和と冪は ",
+        math(String.raw`\overline{\mathbb{Q}}`),
+        " の演算）。次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}^{F}_{x_c}(Z_L)
+&=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^{m}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_evaluation}\text{、係数は }\blkref{claim_coefficient_representation}\bigr)\\
+&=\xi
+&&\bigl(\because\ \xi\ \text{の定義}\bigr)\\
+&\in P_s
+&&\bigl(\because\ \blkref{claim_critical_partition_value_mem_positive_cone}\bigr)
+\end{aligned}`),
+      paragraph([
+        "背理法を使う。",
+        math(String.raw`x_c\in\mathcal{F}_{L}`),
+        " と仮定すると、",
+        ref("def_finite_lattice_fisher_zeros"),
+        " により ",
+        math(String.raw`\mathrm{Ev}^{F}_{x_c}(Z_L)=0`),
+        " なので、準備の鎖から ",
+        math(String.raw`\xi=0`),
+        " である。",
+        math(String.raw`\xi\in P_s\subseteq Q_s`),
+        "（", ref("def_quadratic_positive_cone"),
+        "）だから、",
+        ref("claim_quadratic_zero_representation"),
+        " により ",
+        math(String.raw`(a,b):=\mathrm{rep}_s(\xi)=(0,0)`),
+        "（", ref("def_quadratic_representation_map"),
+        "）である。この組について ",
+        ref("def_quadratic_positive_cone"),
+        " の三つの条件を順に確かめる。不等号はすべて有理数体 ",
+        math(String.raw`\mathbb{Q}`),
+        " の順序である。",
+      ]),
+      list([
+        [
+          "第一の条件は ", math(String.raw`(a,b)\ne(0,0)`),
+          " を要求するが、", math(String.raw`(a,b)=(0,0)`),
+          " なので満たされない。",
+        ],
+        [
+          "第二の条件は ", math(String.raw`0<a`),
+          " を要求するが、", math(String.raw`a=0`),
+          " なので満たされない。",
+        ],
+        [
+          "第三の条件は ", math(String.raw`a<0`),
+          " を要求するが、", math(String.raw`a=0`),
+          " なので満たされない。",
+        ],
+      ]),
+      paragraph([
+        ref("def_quadratic_positive_cone"),
+        " により、正であることは三つの条件の少なくとも一つが成り立つことである。",
+        "三つとも満たされないので ",
+        math(String.raw`\xi\notin P_s`),
+        " となり、準備の ",
+        math(String.raw`\xi\in P_s`),
+        " と矛盾する。ゆえに仮定は成り立たず、",
+        math(String.raw`x_c\notin\mathcal{F}_{L}`),
+        " である。全過程は代数的数の有限和・冪と有理数の順序比較だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "fisher_zero_claim_self_dual_root_plus_mem",
     kind: "claim",
     title: { text: "根 −1+s の所属" },

@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 410 は、台帳の先頭行「$x_c$ は Fisher 零点でない」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_critical_point_not_fisher_zero`（`claim_critical_partition_value_mem_positive_cone` の直後）: 臨界点での評価値 $\xi=\sum_m\Omega_L(m)x_c^m$ が正錐 $P_s$ に入ること（tick 409）と、零元の表示 $(0,0)$ が正錐の三条件をすべて破ること（`claim_quadratic_zero_representation` で $\xi=0$ から $\mathrm{rep}_s(\xi)=(0,0)$）から、`def_finite_lattice_fisher_zeros` へ当てる背理法で $x_c\notin\mathcal F_L$。骨組みは `claim_positive_rational_not_fisher_zero` と同じ。
+SageMath `check/critical-point-not-fisher-zero/`（$L=1,2,3$ × $s$ 2 通りの 6 組。評価値の非零・`QQbar` の根一覧への不在・表示の正錐条件、$(0,0)$ の三条件の破れ。厳密計算）。Lean 具体版 `FisherZero/CriticalPointNotFisherZero.lean`（`criticalPoint_not_mem_fisherZero`。零元表示の補題は `QuadraticZeroNegation` の import が要る——`CriticalPartitionValuePositiveCone` からは推移的に届かない）、必要十分版 `NecSuf/FisherZero/CriticalPointNotFisherZero.lean`（`represented_positive_value_not_mem_zeroSet_necSuf`。値の一致・正条件・零表示の特徴づけ・零表示の非正・零点集合の定義だけを仮定に取り、体も多項式も順序も使わない）、導出版。sorry 検査 1422 件・check 501 ブロック・linkage 284 件・PDF 271 ページ通過。
+レビューでは tick 409 の臨界値の正錐所属を四層で突き合わせ、修正なし。式変形統一は姉妹側を 1 件（台帳の並列ストリームの記録）。
+次は「零点と臨界点の距離の二乗の零性は一致と同値」。`claim_distance_squared_zero_iff_equal` の $q\in\mathbb Q$ を $x_c\in R$ へ置き換えるだけで、$q\in R$ の根拠が `claim_critical_point_mem_real_closed` に変わる（証明は同じ骨組み）。
+
 2026-08-18 の tick 409 は、台帳の先頭行「分配多項式の臨界点での値は正錐の元である」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_partition_value_mem_positive_cone`: 全て正の配位から $1\le\Omega_L(0)$ を得て先頭項を正錐に置き、$x_c\in P_s$ の冪と自然数係数倍から各後続項を零元または正錐の元へ分け、正錐の加法閉性による非空有限和の帰納法で $Z_L(x_c)\in P_s$ を示した。SageMath `check/critical-partition-value-positive-cone/` は $L=1,2,3$ と $s$ の二根の 6 組を `QQ`/`QQbar` で厳密確認した。Lean は具体版 `FisherZero/CriticalPartitionValuePositiveCone.lean`、必要十分版 `NecSuf/FisherZero/CriticalPartitionValuePositiveCone.lean`（右零元・正錐の加法閉性・先頭項の正値・後続項の零／正だけを仮定）、導出版。sorry 検査 1419 件・check 500 ブロック・linkage 283 件・PDF 271 ページ通過。
 レビューでは tick 408 の自然数倍の主張を四層で突き合わせ、修正なし。この主張は今 tick の各係数項が直接引くため「何も言っていない主張」ではない。式変形統一は姉妹側 `004_transfer_matrix.ts` の Step 4 で、$\sigma_m^x=iZ_mY_m$ の導出を一続き三段・各行の根拠つきへ揃え、check・PDF 325 ページを通した。

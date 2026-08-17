@@ -1048,6 +1048,9 @@ targets=(
   Ising2DLambda.FisherZero.criticalPartitionValue_mem_positiveCone
   Ising2DLambda.NecSuf.FisherZero.nonempty_sum_mem_positive_necSuf
   Ising2DLambda.FisherZero.criticalPartitionValue_mem_positiveCone_from_necSuf
+  Ising2DLambda.FisherZero.criticalPoint_not_mem_fisherZero
+  Ising2DLambda.NecSuf.FisherZero.represented_positive_value_not_mem_zeroSet_necSuf
+  Ising2DLambda.FisherZero.criticalPoint_not_mem_fisherZero_from_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
   Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf
