@@ -2130,4 +2130,154 @@ b_0(C_E)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_first_homology_pushforward_additivity_over_f2",
+    kind: "theorem",
+    title: { text: "商の塔が誘導する第一ホモロジー押し出し写像の加法性" },
+    labels: ["theorem_quotient_tower_first_homology_pushforward_additivity_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-first-homology-pushforward-additivity-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_first_homology_pushforward_map_over_f2"),
+        " の第一ホモロジー押し出し写像に対し、任意の ",
+        math(String.raw`h,h'\in H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " について",
+      ]),
+      displayMath(String.raw`\overline\kappa_{H_1,!}(h+h')
+=
+\overline\kappa_{H_1,!}(h)
++
+\overline\kappa_{H_1,!}(h')
+\in
+H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)`),
+      paragraph([
+        "が成り立つ。ここで加法は、それぞれの有限 ",
+        math(String.raw`\mathbb F_2`),
+        " 商ベクトル空間の加法である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`h,h'\in H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " を任意に取る。",
+        ref("def_first_homology_group_over_f2"),
+        " の商写像を細段では ",
+        math(String.raw`\pi_1^{\mathrm{fine}}`),
+        "、粗段では ",
+        math(String.raw`\pi_1^{\mathrm{coarse}}`),
+        " と書く。商写像は全射なので、ある ",
+        math(String.raw`c,c'\in\operatorname{Cycle}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " が存在して ",
+        math(String.raw`h=\pi_1^{\mathrm{fine}}(c)`),
+        " および ",
+        math(String.raw`h'=\pi_1^{\mathrm{fine}}(c')`),
+        " となる。",
+      ]),
+      paragraph([
+        "まず、任意の粗段辺セル ",
+        math(String.raw`D_E\in\mathcal C_E^{\mathrm{coarse}}`),
+        " に対して辺係数押し出しの加法性を確かめる。",
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{E,!}(c+c')(D_E)
+&=
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+\left(
+  c(C_E)+c'(C_E)
+\right)
+&&\bigl(\because\ \text{辺係数押し出し写像の定義}\bigr)\\
+&=
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+c(C_E)
++
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+c'(C_E)
+&&\bigl(\because\ \mathbb F_2\text{ 上の有限和の分配律}\bigr)\\
+&=
+\overline\kappa_{E,!}(c)(D_E)
++
+\overline\kappa_{E,!}(c')(D_E)
+&&\bigl(\because\ \text{辺係数押し出し写像の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "任意の ",
+        math(String.raw`D_E\in\mathcal C_E^{\mathrm{coarse}}`),
+        " で成分が等しいので、",
+      ]),
+      displayMath(String.raw`\overline\kappa_{E,!}(c+c')
+=
+\overline\kappa_{E,!}(c)
++
+\overline\kappa_{E,!}(c')`),
+      paragraph([
+        "である。",
+        ref("def_quotient_tower_first_cycle_pushforward_map_over_f2"),
+        " により、細段一次サイクル上では ",
+        math(String.raw`\overline\kappa_{1,!}`),
+        " と ",
+        math(String.raw`\overline\kappa_{E,!}`),
+        " の作用が一致する。したがって、",
+        ref("def_quotient_tower_first_homology_pushforward_map_over_f2"),
+        " と商ベクトル空間の加法の定義より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{H_1,!}(h+h')
+&=
+\overline\kappa_{H_1,!}
+\left(
+  \pi_1^{\mathrm{fine}}(c+c')
+\right)
+&&\bigl(\because\ \text{商ベクトル空間の加法の定義}\bigr)\\
+&=
+\pi_1^{\mathrm{coarse}}
+\left(
+  \overline\kappa_{1,!}(c+c')
+\right)
+&&\bigl(\because\ \text{第一ホモロジー押し出し写像の定義}\bigr)\\
+&=
+\pi_1^{\mathrm{coarse}}
+\left(
+  \overline\kappa_{1,!}(c)
+  +
+  \overline\kappa_{1,!}(c')
+\right)
+&&\bigl(\because\ \text{辺係数押し出しの加法性}\bigr)\\
+&=
+\pi_1^{\mathrm{coarse}}
+\left(
+  \overline\kappa_{1,!}(c)
+\right)
++
+\pi_1^{\mathrm{coarse}}
+\left(
+  \overline\kappa_{1,!}(c')
+\right)
+&&\bigl(\because\ \text{商ベクトル空間の加法の定義}\bigr)\\
+&=
+\overline\kappa_{H_1,!}(h)
++
+\overline\kappa_{H_1,!}(h')
+&&\bigl(\because\ \text{第一ホモロジー押し出し写像の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "以上は任意の ",
+        math(String.raw`h,h'\in H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " に対して成り立つ。全ての対象と和は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
