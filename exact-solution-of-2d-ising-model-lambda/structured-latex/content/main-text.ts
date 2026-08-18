@@ -51733,6 +51733,114 @@ q
   },
 
   {
+    id: "critical_exponent_claim_critical_point_rational_approximation",
+    kind: "claim",
+    title: { text: "挟み込み区間から取る臨界点の有理近似" },
+    labels: ["claim_critical_point_rational_approximation"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.criticalPoint_exists_positiveRational_squareDiff_lt",
+      "Ising2DLambda.NecSuf.CriticalExponent.rational_approximation_square_lt_necSuf",
+      "Ising2DLambda.CriticalExponent.criticalPoint_exists_positiveRational_squareDiff_lt_from_necSuf",
+    ],
+    verification: ["sagemath/check/critical-point-rational-approximation"],
+    statement: [
+      paragraph([
+        math(String.raw`\delta\in\mathbb{Q}_{>0}`), " とする。固定済みの臨界点 ",
+        math(String.raw`x_c\in R`), " に対して、ある ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`), " が存在して",
+      ]),
+      displayMath(String.raw`(x_c-q)\cdot(x_c-q)<_R\delta`),
+      paragraph([
+        "が成り立つ。ここで有理数は ", ref("claim_rationals_are_real_algebraic"),
+        " により ", math(String.raw`R`), " の元として書き、", math(String.raw`<_R`),
+        " は ", ref("def_real_algebraic_strict_order"), " の順序である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_positive_rational_mesh_width"), " により、", math(String.raw`1\le N`),
+        " かつ ", math(String.raw`h:=1/N\in\mathbb{Q}_{>0}`), "、",
+        math(String.raw`h\cdot h<\delta`), " を満たす ", math(String.raw`N\in\mathbb{N}`),
+        " を取る。", ref("claim_critical_point_rational_partition_interval"),
+        " により、ある ", math(String.raw`k\in\mathbb{N}`), " が存在して",
+      ]),
+      displayMath(String.raw`k+1\le N,\qquad p:=\frac{k}{N}\le_Rx_c<_Rq:=\frac{k+1}{N}`),
+      paragraph([
+        "となる。", math(String.raw`k+1\ge1`), " と ", math(String.raw`N\ge1`),
+        " より ", math(String.raw`q\in\mathbb{Q}_{>0}`), " である。さらに ",
+        math(String.raw`q-p=1/N=h`), "（", math(String.raw`\mathbb{Q}`),
+        " の四則）である。狭義上界から零元でない ", math(String.raw`a\in R`),
+        " を、広義下界から ", math(String.raw`d\in R`), " を取って",
+      ]),
+      displayMath(String.raw`q-x_c=a\cdot a,\qquad x_c-p=d\cdot d`),
+      paragraph([
+        "と書ける。広義下界が等号の枝なら ", math(String.raw`d:=0`),
+        " とする。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h-a\cdot a
+&=(q-p)-(q-x_c)
+&&(\because\ h=q-p\ \text{と }q-x_c=a\cdot a)\\
+&=x_c-p
+&&(\because\ R\text{ の四則})\\
+&=d\cdot d
+&&(\because\ p\le_Rx_c\text{ の平方表示})
+\end{aligned}`),
+      paragraph([
+        "である。また ", ref("claim_positive_rational_positive_in_real_closed"),
+        " により、ある零元でない ", math(String.raw`e\in R`), " で ",
+        math(String.raw`h=e\cdot e`), " と書ける。",
+        ref("claim_real_closed_sum_of_two_squares_is_square"), " を ",
+        math(String.raw`e,a`), " に適用し、", math(String.raw`h+a\cdot a=v\cdot v`),
+        " となる ", math(String.raw`v\in R`), " を取る。", math(String.raw`v=0`),
+        " なら ", ref("claim_real_closed_sum_of_two_squares_zero"), " から ",
+        math(String.raw`e=0`), " となるので、", math(String.raw`v\ne0`), " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h\cdot h-(q-x_c)\cdot(q-x_c)
+&=h\cdot h-(a\cdot a)\cdot(a\cdot a)
+&&(\because\ q-x_c=a\cdot a)\\
+&=(h-a\cdot a)\cdot(h+a\cdot a)
+&&(\because\ R\text{ の分配則（平方差の因数分解）})\\
+&=(d\cdot d)\cdot(v\cdot v)
+&&(\because\ \text{上の二つの平方表示})\\
+&=(d\cdot v)\cdot(d\cdot v)
+&&(\because\ R\text{ の積の可換則と結合則})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`h\cdot h<\delta`), " は ", math(String.raw`\mathbb{Q}`),
+        " の狭義比較なので、", ref("claim_positive_rational_positive_in_real_closed"),
+        " を ", math(String.raw`\delta-h\cdot h\in\mathbb{Q}_{>0}`),
+        " に適用すると、ある零元でない ", math(String.raw`r\in R`), " で ",
+        math(String.raw`\delta-h\cdot h=r\cdot r`), " と書ける。",
+        ref("claim_real_closed_sum_of_two_squares_is_square"), " により、ある ",
+        math(String.raw`z\in R`), " で ",
+        math(String.raw`r\cdot r+(d\cdot v)\cdot(d\cdot v)=z\cdot z`),
+        " と書ける。この ", math(String.raw`z`), " は零元でない。実際、",
+        math(String.raw`z=0`), " なら ", ref("claim_real_closed_sum_of_two_squares_zero"),
+        " により ", math(String.raw`r=0`), " となるからである。最後に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta-(x_c-q)\cdot(x_c-q)
+&=(\delta-h\cdot h)+\bigl(h\cdot h-(q-x_c)\cdot(q-x_c)\bigr)
+&&(\because\ (x_c-q)^2=(q-x_c)^2\text{ と }R\text{ の四則})\\
+&=r\cdot r+(d\cdot v)\cdot(d\cdot v)
+&&(\because\ \text{上の二つの平方表示})\\
+&=z\cdot z
+&&(\because\ z\text{ の取り方})
+\end{aligned}`),
+      paragraph([
+        "を得る。", math(String.raw`z\ne0`), " なので ",
+        ref("def_real_algebraic_strict_order"), " により主張が成り立つ。全過程は ",
+        math(String.raw`\mathbb{N}`), "、", math(String.raw`\mathbb{Q}`), "、",
+        math(String.raw`\overline{\mathbb{Q}}`), " の部分体 ", math(String.raw`R`),
+        " の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

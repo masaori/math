@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 423 は、「挟み込み区間から臨界点への有理近似を取る」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_critical_point_rational_approximation`（正の有理数の正値性の直後）: 任意の $\delta\in\mathbb Q_{>0}$ に対し、正の有理数 $q$ が存在して $(x_c-q)^2<_R\delta$。`claim_positive_rational_mesh_width` で $h=1/N$、`claim_critical_point_rational_partition_interval` で $p=k/N\le_Rx_c<_Rq=(k+1)/N$ を取り、$q-p=h$ を使う。$q-x_c=a^2$、$x_c-p=d^2$（等号枝は $d=0$）、$h=e^2$ と書き、$h-a^2=d^2$、二平方和の平方表示で $h+a^2=v^2$、平方差 $h^2-a^4=(dv)^2$ を得る。さらに $\delta-h^2=r^2$ と二平方和から $\delta-(x_c-q)^2=z^2$、零性から $z\ne0$。平方の単調性は独立主張にせず、差の因数分解と二平方和の二性質を証明内で展開した。
+SageMath `check/critical-point-rational-approximation/`（`QQ`/`AA` 厳密、正の有理誤差 4 個）。Lean 具体版 `CriticalExponent/CriticalPointRationalApproximation.lean`、必要十分版 `NecSuf/CriticalExponent/CriticalPointRationalApproximation.lean`（体の四則、平方による比較、二平方和の平方表示と零性だけ）、導出版。sorry 検査 1454 件・check 513 ブロック・linkage 294 件・PDF 278 ページ通過。
+レビューは tick 422 の正の有理数の正値性を本文・SageMath（再実行）・Lean 三版で突き合わせ、修正なし。後続の有理比較の移送が直接引くため「何も言っていない主張」ではない。式変形統一は姉妹側「$n_\mu^2=n_\mu$」の (2) の散文による移項を一続き二段へ揃え、姉妹側 check 300 ブロック・PDF 326 ページを通した。
+次は「先頭距離の詰め寄りから述語 Pinch を導く（接続の完成）」。`claim_leading_distance_lt_iff_close_zero`、`claim_square_of_sum_le_twice_sum_of_squares`、今 tick の有理近似を合成し、`def_zero_pinching_predicate` の正の有理点と正の有理誤差の量化へ落とす。着手時に述語の正確な量化順序と距離の定義を本文・Lean で再確認し、複数の独立論法が含まれるなら先に分割する。
+
 2026-08-18 の tick 422 は、「挟み込み区間から臨界点への有理近似を取る」を論法単位の 2 行へ割り、その最初「正の有理数は実閉部分体で正である」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_positive_rational_positive_in_real_closed`（有理等分区間の直後）: 任意の $q\in\mathbb Q_{>0}$ について $0<_Rq$。帰納法で 1 以上の自然数を零元でない元の平方に表し（出発点 $1=1\cdot1$、帰納段は `claim_real_closed_sum_of_two_squares_is_square` で $n+1=c^2+1^2=e^2$、`claim_real_closed_sum_of_two_squares_zero` で $e\ne0$）、$q=a/b$ の分子分母に当てて $q=(c\cdot d^{-1})^2$、体は零因子を持たないので証人は非零。$\mathbb Q$ の狭義比較 $p<q$ を差 $q-p\in\mathbb Q_{>0}$ 経由で $<_R$ へ移す根拠になる（次セクションが引く）。
 SageMath `check/positive-rational-positive-in-real-closed/`（`AA` 厳密。帰納段 32 段・正の標本 6 個・非正の反例 3 個）。Lean 具体版 `CriticalExponent/PositiveRationalPositiveInRealClosed.lean`（`natSucc_eq_square`・`positiveRational_realAlgebraic_positive`）、必要十分版 `NecSuf/CriticalExponent/PositiveRationalPositiveInRealClosed.lean`（体と二平方和の二性質だけ。標数零の仮定は不要——標数 p では sumEqZero が偽になるので仮定自身が強さを担う）、導出版。sorry 検査 1451 件・check 512 ブロック・linkage 293 件・PDF 277 ページ通過。

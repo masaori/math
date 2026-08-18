@@ -1111,4 +1111,61 @@ c(C_E)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_vertex_coefficient_pushforward_over_f2",
+    kind: "definition",
+    title: { text: "商の塔が誘導する F_2 頂点係数押し出し写像" },
+    labels: ["def_quotient_tower_vertex_coefficient_pushforward_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-vertex-coefficient-pushforward-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の全射な誘導頂点セル写像 ",
+        math(String.raw`\overline\kappa_V:\mathcal C_V^{\mathrm{fine}}\to\mathcal C_V^{\mathrm{coarse}}`),
+        " を取る。",
+        ref("def_first_boundary_matrix_over_f2"),
+        " と同様に、有限頂点セル集合 ",
+        math(String.raw`S`),
+        " に対する ",
+        math(String.raw`\mathbb F_2^S`),
+        " は写像 ",
+        math(String.raw`S\to\mathbb F_2`),
+        " の有限ベクトル空間を表す。細段頂点係数写像を粗段頂点係数写像へ送る押し出し写像を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{V,!}:
+\mathbb F_2^{\mathcal C_V^{\mathrm{fine}}}
+&\longrightarrow
+\mathbb F_2^{\mathcal C_V^{\mathrm{coarse}}},\\
+b
+&\longmapsto
+\overline\kappa_{V,!}(b),\\
+\overline\kappa_{V,!}(b)(D_V)
+&:=
+\sum_{\substack{
+  C_V\in\mathcal C_V^{\mathrm{fine}}\\
+  \overline\kappa_V(C_V)=D_V
+}}
+b(C_V)
+\qquad
+\left(D_V\in\mathcal C_V^{\mathrm{coarse}}\right)
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`b:\mathcal C_V^{\mathrm{fine}}\to\mathbb F_2`),
+        " は細段頂点セルごとの係数写像であり、",
+        math(String.raw`\overline\kappa_{V,!}(b):\mathcal C_V^{\mathrm{coarse}}\to\mathbb F_2`),
+        " は粗段頂点セルごとの係数写像である。各成分の和は、粗段頂点セル ",
+        math(String.raw`D_V`),
+        " の有限ファイバー ",
+        math(String.raw`\overline\kappa_V^{-1}(D_V)`),
+        " に属する細段頂点セルの係数を ",
+        math(String.raw`\mathbb F_2`),
+        " で加えた値である。したがって複数の細段頂点セルが同じ粗段頂点セルへ移る場合、それらを同一視せず、係数だけを有限和でまとめる。この定義は頂点係数空間間の写像だけを定め、一次境界写像との可換性、一次サイクル空間への作用、局所全単射性、被覆次数は主張しない。全ての頂点セル集合、ファイバー、係数写像、和は有限または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

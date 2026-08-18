@@ -1507,6 +1507,9 @@ targets=(
   Ising2DLambda.CriticalExponent.positiveRational_realAlgebraic_positive
   Ising2DLambda.NecSuf.CriticalExponent.positiveRational_positive_necSuf
   Ising2DLambda.CriticalExponent.positiveRational_realAlgebraic_positive_from_necSuf
+  Ising2DLambda.CriticalExponent.criticalPoint_exists_positiveRational_squareDiff_lt
+  Ising2DLambda.NecSuf.CriticalExponent.rational_approximation_square_lt_necSuf
+  Ising2DLambda.CriticalExponent.criticalPoint_exists_positiveRational_squareDiff_lt_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
