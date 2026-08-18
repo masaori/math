@@ -11,6 +11,7 @@ structured-latex/content/iterate-monoid-stable-fiber-rooted-tree.ts。
 比較回数のコストモデル自体は既出章と同じく形式化しない。
 -/
 import CellularAutomata.IterateMonoidStableFiberLayerBranching
+import CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree
 
 namespace CellularAutomata.IterateMonoidStableFiberRootedTree
 
@@ -350,5 +351,100 @@ theorem mem_fiberTreeBranch_iff (q : stableImage N f) (y : V → State)
         e.2 = y := by
   classical
   rw [Finset.mem_filter, mem_fiberTreeEdgeTable_iff]
+
+/-! ## 必要十分版からの導出 -/
+
+namespace NecessarySufficientDerivation
+
+open CellularAutomata.NecSuf
+
+/-- 一周期写像の d 回反復は `F^{d λ_F}` に一致する。 -/
+theorem iterate_onePeriodMap (d : ℕ) (y : V → State) :
+    CellularAutomata.NecSuf.GlobalMapIteration.iterate (onePeriodMap N f) d y =
+      iterateMap N f (d * minPositivePeriod N f) y := by
+  induction d with
+  | zero => simp [CellularAutomata.NecSuf.GlobalMapIteration.iterate,
+      iterateMap, iterate_zero]
+  | succ d ih =>
+    calc
+      CellularAutomata.NecSuf.GlobalMapIteration.iterate (onePeriodMap N f) (d + 1) y =
+          onePeriodMap N f
+            (CellularAutomata.NecSuf.GlobalMapIteration.iterate (onePeriodMap N f) d y) := rfl
+      _ = onePeriodMap N f (iterateMap N f (d * minPositivePeriod N f) y) := by rw [ih]
+      _ = iterateMap N f ((d + 1) * minPositivePeriod N f) y :=
+        (congrFun (iterateMap_succ_mul_minPositivePeriod N f d) y).symm
+
+/-- 一周期写像による根到達は、必要十分版の「有限反復で根へ到達」の特殊化である。 -/
+theorem onePeriodMap_reaches_root_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q) :
+    ∃ d, CellularAutomata.NecSuf.GlobalMapIteration.iterate (onePeriodMap N f) d y = q.1 := by
+  refine ⟨rootReachExponent N f, ?_⟩
+  rw [iterate_onePeriodMap]
+  exact iterateMap_rootReachExponent_reaches_root N f q hy
+
+/-- ファイバー内の不動点一意性は必要十分版の特殊化である。 -/
+theorem onePeriodMap_unique_fixed_point_from_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q)
+    (hfix : onePeriodMap N f y = y) : y = q.1 := by
+  apply NecSuf.IterateMonoidStableFiberRootedTree.unique_fixed_point (onePeriodMap N f)
+    (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+    (fun q : stableImage N f => q.1)
+    (fun q z hz => onePeriodMap_reaches_root_necessary_sufficient N f q hz)
+    q y hy hfix
+
+/-- 具体版の深さは、必要十分版の最小根到達回数と一致する。 -/
+theorem fiberTreeDepth_eq_rootDepth (q : stableImage N f)
+    {y : V → State} (hy : y ∈ stableFiber N f q) :
+    fiberTreeDepth N f y =
+      NecSuf.IterateMonoidStableFiberRootedTree.rootDepth (onePeriodMap N f)
+        (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+        (fun q : stableImage N f => q.1)
+        (fun q z hz => onePeriodMap_reaches_root_necessary_sufficient N f q hz)
+        q y hy := by
+  apply Nat.le_antisymm
+  · apply fiberTreeDepth_le
+    have h := NecSuf.IterateMonoidStableFiberRootedTree.rootDepth_spec (onePeriodMap N f)
+      (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+      (fun q : stableImage N f => q.1)
+      (fun q z hz => onePeriodMap_reaches_root_necessary_sufficient N f q hz) q y hy
+    rw [iterate_onePeriodMap] at h
+    exact h.trans ((mem_stableFiber_iff N f q y).1 hy).symm
+  · apply NecSuf.IterateMonoidStableFiberRootedTree.rootDepth_le (onePeriodMap N f)
+      (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+      (fun q : stableImage N f => q.1)
+      (fun q z hz => onePeriodMap_reaches_root_necessary_sufficient N f q hz) q y hy
+    rw [iterate_onePeriodMap]
+    exact fiberTreeDepth_reaches_root N f q hy
+
+/-- 深さの一段減少は必要十分版の特殊化である。 -/
+theorem fiberTreeDepth_decrement_from_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q)
+    (hne : y ≠ q.1) :
+    1 ≤ fiberTreeDepth N f y ∧
+      fiberTreeDepth N f (onePeriodMap N f y) = fiberTreeDepth N f y - 1 := by
+  let B := fun q : stableImage N f => (stableFiber N f q : Set (V → State))
+  let root := fun q : stableImage N f => q.1
+  let reach : ∀ q : stableImage N f, ∀ z : V → State,
+      z ∈ stableFiber N f q →
+        ∃ d, CellularAutomata.NecSuf.GlobalMapIteration.iterate
+          (onePeriodMap N f) d z = q.1 :=
+    fun q _z hz => onePeriodMap_reaches_root_necessary_sufficient N f q hz
+  have h := NecSuf.IterateMonoidStableFiberRootedTree.rootDepth_decrement (onePeriodMap N f) B root
+    (fun q z hz => onePeriodMap_mem_stableFiber N f q hz)
+    (onePeriodMap_fixes_root N f) reach q y hy hne
+  have hyEq : fiberTreeDepth N f y =
+      NecSuf.IterateMonoidStableFiberRootedTree.rootDepth
+        (onePeriodMap N f) B root reach q y hy := by
+    simpa [B, root, reach] using fiberTreeDepth_eq_rootDepth N f q hy
+  have hRyEq : fiberTreeDepth N f (onePeriodMap N f y) =
+      NecSuf.IterateMonoidStableFiberRootedTree.rootDepth
+        (onePeriodMap N f) B root reach q (onePeriodMap N f y)
+          (onePeriodMap_mem_stableFiber N f q hy) := by
+    simpa [B, root, reach] using fiberTreeDepth_eq_rootDepth N f q
+      (onePeriodMap_mem_stableFiber N f q hy)
+  rw [hyEq, hRyEq]
+  exact h
+
+end NecessarySufficientDerivation
 
 end CellularAutomata.IterateMonoidStableFiberRootedTree
