@@ -9,6 +9,7 @@ structured-latex/content/iterate-monoid-root-depth-preperiod-correspondence.ts�
 有限走査を形式化する。有限集合・自然数・写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberRootedTree
+import CellularAutomata.NecSuf.IterateMonoidRootDepthPreperiodCorrespondence
 
 namespace CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence
 
@@ -183,5 +184,168 @@ theorem roundedPreperiod_le_rootReachExponent (y : V → State) :
     _ ≤ minStablePeriodMultiple N f := (minStablePeriodMultiple_spec N f).1
     _ = rootReachExponent N f * minPositivePeriod N f :=
       (rootReachExponent_mul_minPositivePeriod N f).symm
+
+/-! ## 必要十分版からの導出 -/
+
+namespace NecessarySufficientDerivation
+
+open CellularAutomata.NecSuf
+
+/-- 位置 `μ(y)` での `λ_F` 周期の衝突は、必要十分版の仮定 `hμcol` を満たす。 -/
+theorem mu_collision_necessary_sufficient (y : V → State) :
+    CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f)
+        (minPreperiod N f y + minPositivePeriod N f) y =
+      CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f)
+        (minPreperiod N f y) y := by
+  have h := (globalPeriod_at_minPreperiod N f y).2
+  simpa only [iterate_eq_necessary_sufficient] using h
+
+/-- 最小前周期の最小性は、必要十分版の仮定 `hμmin` を満たす。 -/
+theorem mu_minimal_necessary_sufficient (y : V → State) :
+    ∀ n p : ℕ, 1 ≤ p →
+      CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f) (n + p) y =
+        CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f) n y →
+      minPreperiod N f y ≤ n := by
+  intro n p hp hcol
+  have hcol' : iterate N f (n + p) y = iterate N f n y := by
+    simpa only [iterate_eq_necessary_sufficient] using hcol
+  exact minPreperiod_le N f y
+    ⟨p, (isPeriodicityPair_iff_collision N f y n p).2 ⟨hp, hcol'⟩⟩
+
+/-- 位置 `m_F λ_F` での根到達は、必要十分版の仮定 `hroot` を満たす。 -/
+theorem root_reach_necessary_sufficient (q : stableImage N f)
+    {y : V → State} (hy : y ∈ stableFiber N f q) :
+    CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f)
+        (rootReachExponent N f * minPositivePeriod N f) y = q.1 := by
+  have h : iterate N f (rootReachExponent N f * minPositivePeriod N f) y = q.1 :=
+    iterateMap_rootReachExponent_reaches_root N f q hy
+  simpa only [iterate_eq_necessary_sufficient] using h
+
+/-- `μ(y) ≤ m_F λ_F` は、必要十分版の仮定 `hμm` を満たす
+    （具体版と同じ鎖 `μ(y) ≤ μ_F ≤ e_F = m_F λ_F`）。 -/
+theorem mu_le_root_multiple (y : V → State) :
+    minPreperiod N f y ≤ rootReachExponent N f * minPositivePeriod N f :=
+  calc
+    minPreperiod N f y ≤ minCollisionStart N f := (globalPeriod_at_minPreperiod N f y).1
+    _ ≤ minStablePeriodMultiple N f := (minStablePeriodMultiple_spec N f).1
+    _ = rootReachExponent N f * minPositivePeriod N f :=
+      (rootReachExponent_mul_minPositivePeriod N f).symm
+
+/-- 具体版の切り上げ値は、必要十分版の切り上げ値に一致する。 -/
+theorem roundedPreperiod_eq_necessary_sufficient (y : V → State) :
+    roundedPreperiod N f y =
+      NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod
+        (minPreperiod N f y) (minPositivePeriod N f)
+        (exists_roundedPreperiod N f y) := by
+  apply Nat.le_antisymm
+  · exact roundedPreperiod_le N f y
+      (NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod_spec
+        (minPreperiod N f y) (minPositivePeriod N f) (exists_roundedPreperiod N f y))
+  · exact NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod_le
+      (minPreperiod N f y) (minPositivePeriod N f) (exists_roundedPreperiod N f y)
+      (roundedPreperiod_spec N f y)
+
+/-- 切り上げ位置での根到達は、必要十分版の特殊化である。 -/
+theorem roundedPreperiod_reaches_root_from_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q) :
+    iterateMap N f (roundedPreperiod N f y * minPositivePeriod N f) y = q.1 := by
+  have h := NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod_reaches_root
+    (globalMap N f) y q.1 (exists_roundedPreperiod N f y)
+    (mu_collision_necessary_sufficient N f y)
+    (root_reach_necessary_sufficient N f q hy)
+    (mu_le_root_multiple N f y)
+  rw [← roundedPreperiod_eq_necessary_sufficient N f y] at h
+  have h' : iterate N f (roundedPreperiod N f y * minPositivePeriod N f) y = q.1 := by
+    simpa only [iterate_eq_necessary_sufficient] using h
+  exact h'
+
+/-- 切り上げ位置より前の非到達は、必要十分版の特殊化である。 -/
+theorem before_roundedPreperiod_not_root_from_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q) {d : ℕ}
+    (hd : d < roundedPreperiod N f y) :
+    iterateMap N f (d * minPositivePeriod N f) y ≠ q.1 := by
+  have hd' : d <
+      NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod
+        (minPreperiod N f y) (minPositivePeriod N f)
+        (exists_roundedPreperiod N f y) := by
+    rw [← roundedPreperiod_eq_necessary_sufficient N f y]
+    exact hd
+  have h := NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.before_roundedPreperiod_not_root
+    (globalMap N f) y q.1 (exists_roundedPreperiod N f y)
+    (minPositivePeriod_pos N f)
+    (mu_minimal_necessary_sufficient N f y)
+    (root_reach_necessary_sufficient N f q hy)
+    (mu_le_root_multiple N f y) hd'
+  intro hroot
+  apply h
+  have hroot' : iterate N f (d * minPositivePeriod N f) y = q.1 := hroot
+  simpa only [iterate_eq_necessary_sufficient] using hroot'
+
+/-- 深さの定義の非空性は、必要十分版の `hexd` を満たす。 -/
+theorem exists_depth_necessary_sufficient (q : stableImage N f)
+    {y : V → State} (hy : y ∈ stableFiber N f q) :
+    ∃ d : ℕ, CellularAutomata.NecSuf.GlobalMapIteration.iterate (globalMap N f)
+      (d * minPositivePeriod N f) y = q.1 :=
+  ⟨rootReachExponent N f, root_reach_necessary_sufficient N f q hy⟩
+
+/-- 具体版の深さは、必要十分版の一周期単位の根への深さに一致する。 -/
+theorem fiberTreeDepth_eq_rootDepthByPeriod (q : stableImage N f)
+    {y : V → State} (hy : y ∈ stableFiber N f q) :
+    fiberTreeDepth N f y =
+      NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.rootDepthByPeriod
+        (globalMap N f) y q.1 (minPositivePeriod N f)
+        (exists_depth_necessary_sufficient N f q hy) := by
+  apply Nat.le_antisymm
+  · apply fiberTreeDepth_le
+    have h := NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.rootDepthByPeriod_spec
+      (globalMap N f) y q.1 (minPositivePeriod N f)
+      (exists_depth_necessary_sufficient N f q hy)
+    have h' : iterate N f
+        (NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.rootDepthByPeriod
+          (globalMap N f) y q.1 (minPositivePeriod N f)
+          (exists_depth_necessary_sufficient N f q hy) * minPositivePeriod N f) y = q.1 := by
+      simpa only [iterate_eq_necessary_sufficient] using h
+    exact h'.trans ((mem_stableFiber_iff N f q y).1 hy).symm
+  · apply NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.rootDepthByPeriod_le
+      (globalMap N f) y q.1 (minPositivePeriod N f)
+      (exists_depth_necessary_sufficient N f q hy)
+    have h : iterate N f (fiberTreeDepth N f y * minPositivePeriod N f) y = q.1 :=
+      fiberTreeDepth_reaches_root N f q hy
+    simpa only [iterate_eq_necessary_sufficient] using h
+
+/-- 深さと切り上げ値の一致は、必要十分版の特殊化である。 -/
+theorem fiberTreeDepth_eq_roundedPreperiod_from_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q) :
+    fiberTreeDepth N f y = roundedPreperiod N f y := by
+  rw [fiberTreeDepth_eq_rootDepthByPeriod N f q hy,
+    roundedPreperiod_eq_necessary_sufficient N f y]
+  exact NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.rootDepthByPeriod_eq_roundedPreperiod
+    (globalMap N f) y q.1 (exists_roundedPreperiod N f y)
+    (exists_depth_necessary_sufficient N f q hy)
+    (minPositivePeriod_pos N f)
+    (mu_collision_necessary_sufficient N f y)
+    (mu_minimal_necessary_sufficient N f y)
+    (root_reach_necessary_sufficient N f q hy)
+    (mu_le_root_multiple N f y)
+
+/-- 対応表は、必要十分版の有限走査表の特殊化である。 -/
+theorem correspondenceTable_eq_necessary_sufficient :
+    correspondenceTable N f =
+      NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.correspondenceTable
+        (minPreperiod N f) (roundedPreperiod N f) (fiberTreeDepth N f) := by
+  classical
+  ext e
+  simp [correspondenceTable,
+    NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.correspondenceTable]
+
+/-- 対応表の所属は、必要十分版の特殊化である。 -/
+theorem mem_correspondenceTable_from_necessary_sufficient (y : V → State) :
+    (y, minPreperiod N f y, roundedPreperiod N f y, fiberTreeDepth N f y) ∈
+      correspondenceTable N f := by
+  rw [correspondenceTable_eq_necessary_sufficient]
+  exact NecSuf.IterateMonoidRootDepthPreperiodCorrespondence.mem_correspondenceTable
+    (minPreperiod N f) (roundedPreperiod N f) (fiberTreeDepth N f) y
+
+end NecessarySufficientDerivation
 
 end CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence
