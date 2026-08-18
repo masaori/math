@@ -2280,4 +2280,103 @@ c'(C_E)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_f2_character_pullback_map",
+    kind: "definition",
+    title: { text: "商の塔が誘導する F_2 値文字の引き戻し写像" },
+    labels: ["def_quotient_tower_f2_character_pullback_map"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-f2-character-pullback-map"],
+    statement: [
+      paragraph([
+        ref("def_f2_linear_character_space"),
+        " により、細段と粗段の第一ホモロジー群の文字空間をそれぞれ ",
+        math(String.raw`H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)^\vee`),
+        " と ",
+        math(String.raw`H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)^\vee`),
+        " と書く。",
+        ref("def_quotient_tower_first_homology_pushforward_map_over_f2"),
+        " の第一ホモロジー押し出し写像との合成により、粗段文字を細段文字へ送る引き戻し写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{H_1}^{\ast}:
+H_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right)^\vee
+&\longrightarrow
+H_1
+\left(
+  \mathcal C^{\mathrm{fine}};\mathbb F_2
+\right)^\vee,\\
+\psi
+&\longmapsto
+\psi\circ\overline\kappa_{H_1,!}
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`\psi\in H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)^\vee`),
+        " であり、任意の ",
+        math(String.raw`h,h'\in H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " と ",
+        math(String.raw`a,b\in\mathbb F_2`),
+        " とする。",
+        ref("theorem_quotient_tower_first_homology_pushforward_additivity_over_f2"),
+        " と、スカラーが ",
+        math(String.raw`0_{\mathbb F_2}`),
+        " と ",
+        math(String.raw`1_{\mathbb F_2}`),
+        " の二つだけであることより、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(
+  \psi\circ\overline\kappa_{H_1,!}
+\right)
+(ah+bh')
+&=
+\psi
+\left(
+  \overline\kappa_{H_1,!}(ah+bh')
+\right)
+&&\bigl(\because\ \text{合成写像の定義}\bigr)\\
+&=
+\psi
+\left(
+  a\overline\kappa_{H_1,!}(h)
+  +
+  b\overline\kappa_{H_1,!}(h')
+\right)
+&&\bigl(\because\ \text{第一ホモロジー押し出し写像の加法性}\bigr)\\
+&=
+a\psi
+\left(
+  \overline\kappa_{H_1,!}(h)
+\right)
++
+b\psi
+\left(
+  \overline\kappa_{H_1,!}(h')
+\right)
+&&\bigl(\because\ \psi\text{ の }\mathbb F_2\text{ 線形性}\bigr)\\
+&=
+a
+\left(
+  \psi\circ\overline\kappa_{H_1,!}
+\right)(h)
++
+b
+\left(
+  \psi\circ\overline\kappa_{H_1,!}
+\right)(h')
+&&\bigl(\because\ \text{合成写像の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって合成写像は細段の ",
+        math(String.raw`\mathbb F_2`),
+        " 値文字であり、表示した写像の終域は正しい。この定義は文字の単射性または全射性を主張しない。全ての群、文字空間、写像は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
