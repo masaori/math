@@ -774,19 +774,26 @@ u
         math(String.raw`\Lambda > 0`),
         " なので ",
         math(String.raw`\log\Lambda`),
-        " が定まり、",
-        math(String.raw`\log(ab) = \log a + \log b`),
-        "、",
-        math(String.raw`\log(x^{r}) = r\log x`),
-        "、",
-        math(String.raw`\log(e^{y}) = y`),
-        " より",
+        " が定まり、一続きに",
       ]),
       displayMath(
-        String.raw`\log\Lambda^{(\delta)}_M
-= \frac{M}{2}\log\left(2\sinh 2K_2\right)
-+ \frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)`,
+        String.raw`\begin{aligned}
+\log\Lambda^{(\delta)}_M
+&=\log\left(\left(2\sinh 2K_2\right)^{M/2}
+\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)\right)\right)
+&&\left(\because\ \Lambda^{(\delta)}_M\text{ の定義}\right)\\
+&=\log\left(\left(2\sinh 2K_2\right)^{M/2}\right)
++\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)\right)\right)
+&&\left(\because\ \text{積の対数 }\log(ab)=\log a+\log b\right)\\
+&=\frac{M}{2}\log\left(2\sinh 2K_2\right)
++\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)\right)\right)
+&&\left(\because\ \text{冪の対数 }\log(x^{r})=r\log x\right)\\
+&=\frac{M}{2}\log\left(2\sinh 2K_2\right)
++ \frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
+&&\left(\because\ \log(e^{y})=y\right)
+\end{aligned}`,
       ),
+      paragraph(["を得る。"]),
       paragraph([
         "ここで集合 ",
         math(String.raw`\Theta_M^{(\delta)}`),
