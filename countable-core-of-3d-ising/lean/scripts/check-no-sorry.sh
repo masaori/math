@@ -57,6 +57,7 @@ targets=(
   Ising3DCut.LimitQuantity.card_dvd_card_group_of_pretransitive
   Ising3DCut.LimitQuantity.forty_dvd_card_galois_group_of_irreducible
   Ising3DCut.LimitQuantity.no_equiv_of_card_four_of_forty_dvd_card
+  Ising3DCut.LimitQuantity.galois_group_does_not_determine_limit_quantity
   Ising3DCut.NullModel.edge_endpoints_parity_differ
   Ising3DCut.NecSuf.NullModel.endpoint_colors_differ_iff_not
   Ising3DCut.NullModel.edge_endpoints_parity_differ_from_necSuf
