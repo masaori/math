@@ -54,6 +54,7 @@ export const ALL_LABELS = [
   "claim_structural_palindrome",
   "claim_symmetrized_prime_exponent_data_is_reciprocal_invariant",
   "claim_tail_agreement_is_equivalence_relation",
+  "claim_tail_agreement_is_sufficient_for_limit_quantity",
   "claim_two_dimensional_boundary_response_even_subgraph_sum",
   "def_bipartite_successor_system",
   "def_boundary_response_polynomial",
