@@ -1513,6 +1513,8 @@ targets=(
   Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate
   Ising2DLambda.NecSuf.CriticalExponent.pinch_bound_necSuf
   Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate_from_necSuf
+  Ising2DLambda.CriticalExponent.realizedLeadingDistance_pos
+  Ising2DLambda.CriticalExponent.latticeSizeRealLog_pos
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

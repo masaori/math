@@ -393,6 +393,7 @@ export const ALL_LABELS = [
   "def_finite_free_entropy",
   "def_finite_free_entropy_density",
   "def_finite_lattice_fisher_zeros",
+  "def_finite_size_scaling_reading",
   "def_fisher_zero_count_in_rational_disc",
   "def_fisher_zero_density_in_rational_disc",
   "def_fisher_zero_density_limsup_liminf",

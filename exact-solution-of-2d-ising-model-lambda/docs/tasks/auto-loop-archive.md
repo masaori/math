@@ -3,6 +3,12 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 426 で台帳から移した記録（tick 421）
+
+- tick 421 の現在地・前進: 台帳の先頭行「臨界点を挟む有理等分区間」を四層で閉じた（住処 Qbar、脱出なし）。`claim_critical_point_rational_partition_interval` を上界の直後に置いた。$S_N:=\{j\in\mathbb N\mid j<N+1,\ j/N<_Rx_c\text{ または }j/N=x_c\}$ の最大元 $k$ を取り、$0\in S_N$、$N\notin S_N$、$k+1\notin S_N$ から $k+1\le N$ と $k/N\le_Rx_c<_R(k+1)/N$ を得た。SageMath `check/critical-point-rational-partition-interval/`（`AA`/`QQ` 厳密）、Lean 具体版・必要十分版（有限候補・最大元・三分法だけ）・導出版。sorry 検査 1448 件・check 511 ブロック・verify-check-linkage 292 件・PDF 277 ページ通過。
+- tick 421 の式変形統一: 姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」（`004_transfer_matrix.ts`）の Step 2 で、順方向 $Y_mZ_{m+1}=-i\sigma_m^z\sigma_{m+1}^z$ と逆向き $\sigma_m^z\sigma_{m+1}^z=iY_mZ_{m+1}$ に分かれていた二つの表示を、一続きの式変形へ統合した（内容・根拠・参照は不変）。姉妹側 check 300 ブロック・PDF 326 ページ通過。
+- tick 421 のレビュー: tick 420 の「臨界点は一より小さい」を本文・SageMath・Lean で突き合わせた。主張と計算は一致し、後続の有理等分が上端 $N/N$ を候補から除くため直接引くので「何も言っていない主張」ではない。ただし Lean 具体版が本文の展開・$s^2=2$ の代入・整理という三段を一度の `ring` に畳んでいたため、本文と一対一の三段へ直し、前進前に commit `7e634bc8` を push した。
+
 ## 2026-08-18 tick 424 で台帳から移した記録（tick 419）
 
 - tick 419 の現在地・前進: 台帳の先頭行「臨界点の正値性」を四層で閉じた（住処 Qbar、脱出なし）。`claim_critical_point_positive`: 第 5 条件の $s=w^2$ と二平方和の平方表示 $s+1=w^2+1^2=v^2$ を用い、二平方和の零性から $v\ne0$、$(s-1)(s+1)=s^2-1=1$ から $x_c=s-1=(v^{-1})^2$ を得て $0<_Rx_c$ とした。SageMath `check/critical-point-positive/`（`AA` 厳密）、Lean 具体版・必要十分版（体の四則、平方和の平方表示と零性だけ）・導出版。sorry 検査 1457 件（実態は登録漏れで 1439 件。tick 420 で修正）・check 509 ブロック・verify-check-linkage 290 件・build:pdf 275 ページ通過。

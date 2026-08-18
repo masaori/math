@@ -889,9 +889,23 @@ n_\mu n_\nu
       paragraph([
         "まず ",
         math(String.raw`e_1=1`),
-        " の場合は ",
-        math(String.raw`R_{\mu_1}^{(1)}=n_{\mu_1}`),
-        " なので、上の計算から直ちに結論を得る。次に ",
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(R_{\mu_1}^{(1)}P\right)
+&= \mathrm{tr}\!\left(n_{\mu_1}P\right)
+   \quad (\because R_{\mu_1}^{(1)}=n_{\mu_1}) \\
+&= \frac{1}{2}\,\mathrm{tr}(P)
+   \quad (\because \text{直前に得た }\mathrm{tr}(n_{\mu_1}P)=\tfrac12\,\mathrm{tr}(P)) \\
+&= \frac{1}{2}\cdot 2^{M-(k-1)}
+   \quad (\because \text{帰納法の仮定}) \\
+&= 2^{M-k}
+   \quad (\because M-(k-1)=M-k+1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。次に ",
         math(String.raw`e_1=0`),
         " の場合は",
       ]),

@@ -4,6 +4,11 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 426 は、「有限サイズスケーリングの条件付き読み」を記述と Lean 定義で閉じた（住処 R、実対数・極限による脱出）。
+`def_finite_size_scaling_reading`（実現データの直後）: 実現データ $\rho_{R\to\mathbb R}$ を固定し、分子の正値性（先頭距離の正値性＋順序保存＋$\rho(0)=0$）と分母の正値性（$1<\iota(L)$・$\log_{\mathbb R}$ の狭義単調性・$\log_{\mathbb R}(1)=0$）を確かめて、読みの列 $a_\rho(L):=-\log_{\mathbb R}(\rho_{R\to\mathbb R}(d_1(L)))/(2\log_{\mathbb R}(\iota(L)))$ を定義（因子 2 は $d_1(L)$ が距離の二乗であることに対応）。「指数 $\nu\in\mathbb Q_{>0}$ を読める」は、任意の $\varepsilon\in\mathbb Q_{>0}$ にある $N\in\mathbb N$ で $2\le L$ かつ $N\le L$ の全 $L$ について $\iota(1/\nu)\pm\iota(\varepsilon)$ の両側評価。条件を満たす $\nu$ の存在・一意性・2 次元 Ising で $\nu=1$ は主張しない（討議ノート「何が厳密で何が非厳密か」が有限サイズスケーリング関係式自体を未証明としているため）。Lean 具体版 `CriticalExponent/FiniteSizeScalingReading.lean`（`realizedLeadingDistance_pos`・`latticeSizeRealLog_pos`・`scalingLogRatio`・`FiniteSizeScalingReads`）。定義なので SageMath・必要十分版は置かない。
+レビュで tick 425 の実現データの定義内の写像名の揺れ（$\rho$ と $\rho_{R\to\mathbb R}$）を統一し、前進前に commit `30847133` を push。式変形統一は姉妹側の数演算子の積のトレースの $e_1=1$ の場合の散文を一続き四段へ開いた。sorry 検査 1459 件・check 516 ブロック・linkage 295 件・PDF 280 ページ、姉妹側 check 300 ブロック・PDF 327 ページ通過。
+次は「検証水準の検算と再定式化水準の命題候補の観察」（台帳の先頭行）。SageMath で $d_1(L)$ を $L$ を増やして厳密計算し、読みの列の数値・先頭零点の最小多項式の次数や判別式の振る舞いを観察する。結果は notes 側へ置き、可算な命題の候補が立ったときだけ本文へ昇格する。着手時に討議ノート（`docs/discussion/臨界指数をFisher零点列で書く/2次元Isingでの検算計画.md`）を読むこと。
+
 2026-08-18 の tick 425 は、「有限サイズスケーリングの読み」を、実対数化に先立つ順序保存実現データと、実対数・極限を使う条件付き読解の二つへ割り、先頭だけを記述と Lean 定義で閉じた（住処 R）。
 `def_real_closed_realization`: 固定済みの実閉部分体 $R\subset\overline{\mathbb Q}$ から $\mathbb R$ への単位的環準同型 $\rho_{R\to\mathbb R}$ と、$a<_Rb\Rightarrow\rho(a)<\rho(b)$ を保持するデータを定めた。Lean `CriticalExponent/RealClosedRealization.lean` は `toRingHom : R →+* ℝ` と `map_lt` だけを持つ構造体で、存在も一意性も主張しない。これは討議ノート「何が厳密で何が非厳密か」が、有限サイズスケーリング関係式自体を未証明としているためである。
 レビュで tick 424 の `pinch_bound_necSuf` が、本文の中心の差の書き換えと分配・同類項整理を一度の `ring` に畳んでいたため二段へ直し、前進前に commit `1ef42d6c` を push した。姉妹側の式変形統一は「数演算子の積のトレース」の「上の計算」を直前の等式の明記へ直した。
