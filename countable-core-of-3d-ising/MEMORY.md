@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 16:04: 本流「分配多項式値は極限量に必要でない反例」の SageMath 層を閉じた。$Z_2(1)=2^8\ne2^{27}=Z'_2(1)$ と有限箱量が $2$ になる根拠の有限べき等式を `ZZ` 上で検証し、linkage 39 件を通過。並行では $L'=1,L=2$ の terminal lattice で Kasteleyn Pfaffian の分母消去後の多項式一致を厳密検証した。次 tick は本流の Lean 具体版、並行の全称予言命題の本文記述。
 - 2026-08-18 15:32: 本流の極限側の束ね `claim_shifted_free_family_partition_value_does_not_determine_limit_quantity` を記述し、「分配多項式値は極限量に必要でない」反例の主張が揃った（不変量 $\iota_L(P)=P(1)$ の $L=2$ での不一致＋末尾ずらしの極限一致の参照）。レビュー（`npm run check` 再実行）修正なし。check 105 ブロック・189 参照・linkage 38 件・PDF 31 ページ。次 tick はこの主張の SageMath 検証、並行は Kasteleyn 向き付けと分母消去後の Pfaffian 多項式一致。
 - 2026-08-18 15:13: 本流の有限側 `claim_shifted_free_family_partition_values_differ_but_finite_box_quantities_agree` を記述した。$q=1,L=2$ で分配多項式値は $2^8$ と $2^{27}$ で異なるが、全 $L\ge1$ の有限箱量は両族とも $2$。次は末尾ずらしの極限一致と束ねて「必要でない」の反例を閉じる。並行では $L'=1,L=2$ の terminal lattice を有限構成し、偶部分グラフ 2 個と完全マッチング 2 個の往復写像が全単射であることを SageMath で確認した。次は Kasteleyn 向き付けと分母消去後の Pfaffian 多項式一致。
 - 2026-08-18 15:06: 着手前レビューで、箱の定義だけが $L\ge2$ に限定されている一方、極限列・既存の $L=1$ 校正・台帳が $L\ge1$ を用いる不整合を確認した。$L=1$ は空の辺集合として全定義が成立するため、`def_box` の定義域を $L\ge1$ へ修正した。
