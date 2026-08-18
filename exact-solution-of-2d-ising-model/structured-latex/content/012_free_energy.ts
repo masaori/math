@@ -803,35 +803,58 @@ u
         math(String.raw`\mu \mapsto \dfrac{2\pi(\mu-\delta)}{M}`),
         " は ",
         math(String.raw`\{1,\dots,M\}`),
-        " 上**単射**である：実際 ",
+        " 上単射である。実際、",
+        math(String.raw`\mu,\nu\in\{1,\dots,M\}`),
+        " と ",
         math(String.raw`\mu \neq \nu`),
-        " なら ",
-        math(String.raw`\dfrac{2\pi(\mu-\delta)}{M} - \dfrac{2\pi(\nu-\delta)}{M}
-= \dfrac{2\pi(\mu-\nu)}{M} \neq 0`),
-        "（",
-        math(String.raw`2\pi/M > 0`),
-        " かつ ",
-        math(String.raw`\mu-\nu \neq 0`),
-        "）。よって ",
+        " を仮定すると、一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{2\pi(\mu-\delta)}{M}-\frac{2\pi(\nu-\delta)}{M}
+&=\frac{2\pi(\mu-\nu)}{M}
+&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
+&\ne0
+&&\left(\because\ \frac{2\pi}{M}>0\text{ かつ }\mu-\nu\ne0\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。よって ",
         math(String.raw`\Theta_M^{(\delta)}`),
         " はちょうど ",
         math(String.raw`M`),
-        " 個の元をもち、",
+        " 個の元をもち、一続きに",
       ]),
       displayMath(
-        String.raw`\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
-= \sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)`,
+        String.raw`\begin{aligned}
+\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
+&=\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
+&&\left(\because\ \mu\mapsto\frac{2\pi(\mu-\delta)}{M}\text{ は }\{1,\dots,M\}\text{ から }\Theta_M^{(\delta)}\text{ への全単射}\right)
+\end{aligned}`,
       ),
       paragraph([
-        "が成り立つ（重複がないので、集合についての和と添字についての和が同じ実数になる）。",
-        "したがって ",
+        "を得る。また、",
         math(String.raw`M > 0`),
-        " で割ると",
+        " なので、一続きに",
       ]),
       displayMath(
-        String.raw`\frac{1}{M}\log\Lambda^{(\delta)}_M
-= \frac{1}{2}\log\left(2\sinh 2K_2\right)
-+ \frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)`,
+        String.raw`\begin{aligned}
+\frac{1}{M}\log\Lambda^{(\delta)}_M
+&=\frac{1}{M}\left(
+  \frac{M}{2}\log\left(2\sinh 2K_2\right)
+  +\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
+\right)
+&&\left(\because\ \text{上で得た }\log\Lambda^{(\delta)}_M\text{ の表示を代入}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\frac{1}{2M}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
+&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\frac{1}{2M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
+&&\left(\because\ \text{上で得た添字の取り替え}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
+&&\left(\because\ \mathbb{R}\text{ の四則}\right)
+\end{aligned}`,
       ),
       paragraph([
         "第 1 項は ",
