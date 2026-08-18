@@ -15,6 +15,7 @@ Lean 具体版・束ね。
 -/
 import Ising3DCut.LimitQuantity.GaloisGroupOrderComparison
 import Ising3DCut.LimitQuantity.TailShiftLimit
+import Ising3DCut.LimitQuantity.GaloisGroupDoesNotDetermineLimitQuantityAbstract
 
 namespace Ising3DCut.LimitQuantity
 
@@ -36,8 +37,10 @@ theorem galois_group_does_not_determine_limit_quantity
     (h : Tendsto (rootSeq (finiteBoxValueSeq q) N) atTop (𝓝 α))
     (h' : Tendsto (shiftedFreeFiniteBoxQuantitySeq q N) atTop (𝓝 α')) :
     ¬ Nonempty (G₂ ≃ g.Gal) ∧ α' = α := by
-  refine ⟨?_, shiftedFreeFiniteBoxQuantitySeq_limit_eq q N α α' h h'⟩
-  exact no_equiv_of_card_four_of_forty_dvd_card h₂
-    (forty_dvd_card_galois_group_of_irreducible g hg hdegree)
+  exact finite_invariant_does_not_determine_limit_quantity
+    4 40 h₂ (forty_dvd_card_galois_group_of_irreducible g hg hdegree) (by decide)
+    atTop (fun n => n + 1) (tendsto_add_atTop_nat 1)
+    (rootSeq (finiteBoxValueSeq q) N) (shiftedFreeFiniteBoxQuantitySeq q N)
+    (shiftedFreeFiniteBoxQuantitySeq_eq_tail q N) α α' h h'
 
 end Ising3DCut.LimitQuantity
