@@ -12746,3 +12746,18 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 - 2026-08-18（tick 423）: 姉妹側「$n_\mu^2=n_\mu$」（`009_eigenvalues_of_V.ts`）の (2) で、反交換関係から $\psi_{-\mu}\psi_\mu^\dagger=I-n_\mu$ を散文の「移項」で済ませていた箇所を、一続き二段（反交換関係と行列の加法／数演算子の定義）の式変形と行末根拠へ揃えた（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 326 ページ通過。
 - 2026-08-18（tick 424）: tick 423 の「挟み込み区間から取る臨界点の有理近似」を本文・SageMath（再実行して通過）・Lean 具体版・必要十分版で突き合わせ、一致した。網幅・等分区間・平方差の因数分解・二平方和の合成が必要十分核 `rational_approximation_square_lt_necSuf` と一対一で、今 tick の接続が直接引くため「何も言っていない主張」ではない。修正なし。本文末尾とセクション表の食い違いなし。
+
+## tick 429 で台帳から移した記録（tick 424）
+
+### 現在地（tick 424）
+
+- **2026-08-18 の tick 424 は、「先頭距離の詰め寄りから述語 Pinch を導く（接続の完成）」を四層で閉じ、零点の詰め寄りの言明を先頭距離の列 $\{d_1(L)\}$ の詰め寄りへ帰着した（住処 Qbar、脱出なし）。**
+  `claim_leading_distance_pinching_implies_predicate`（主定理の印つき）: 「任意の $\eta\in\mathbb Q_{>0}$ にある $L\ge2$ で $d_1(L)<_R\eta$」という仮定から、任意の $\varepsilon\in\mathbb Q_{>0}$ で $\mathrm{Pinch}(\varepsilon)$。$\eta:=\varepsilon^2/4$ に仮定を当て、上界の同値で $\xi$ を、有理近似で $q$ を取り、和の平方の評価の差・二平方和の平方表示・$t\cdot t=2$ で $\varepsilon^2-\mathrm{dsq}(\xi,q)$ を零元でない平方 $z_3^2$ へ八段の鎖で変形した。SageMath は恒等式を `QQ` 記号で、合成を $L=2$ の実零点と `AA` で厳密検査。Lean 具体版・必要十分版（体と $1+1$ の平方表示・二平方和の二性質だけ。標数 2 の排除は sumEqZero 自身が担う）・導出版。レビューは tick 423 の有理近似を本文・SageMath（再実行）・Lean で突き合わせ、修正なし。sorry 検査 1457 件・check 514 ブロック・linkage 295 件・PDF 279 ページ通過。
+
+### 前進の記録（tick 424）
+
+- 2026-08-18（tick 424）: 台帳の先頭行「先頭距離の詰め寄りから述語 Pinch を導く（接続の完成）」を実行し、`claim_leading_distance_pinching_implies_predicate` を有理近似の直後に置いた（主定理の印つき）。$\eta:=\varepsilon^2/4$、上界の同値（$t:=\eta$）、有理近似（$\delta:=\eta$）、一意表示 $\xi=\alpha+\beta\omega$、証人 $c_1,c_2,g$、$t\cdot t=2$、二平方和の平方表示の三重適用（$z_1,z_2,z_3$）で $\varepsilon^2-\mathrm{dsq}(\xi,q)=z_3^2$、$z_3\ne0$。SageMath `check/leading-distance-pinch-connection/`（恒等式は `QQ` 記号、合成は $L=2$ の実零点 16 個と `AA`）。Lean 具体版・必要十分版・導出版を sorry 検査へ登録（1457 件）。check 514 ブロック・linkage 295 件・PDF 279 ページ通過。
+
+### 式変形の書き方の統一（tick 424）
+
+- 2026-08-18（tick 424）: 姉妹側「$\mathrm{tr}(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)})=2^{M-k}$」（`009_eigenvalues_of_V.ts`）の帰納段階の鎖の先頭行で、根拠が「定義」とだけ書かれどの定義かを名指ししていなかった箇所を、他の行と同じ「フェルミオン数演算子 $n_{\mu_1}$ の定義」へ揃えた（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 326 ページ通過。

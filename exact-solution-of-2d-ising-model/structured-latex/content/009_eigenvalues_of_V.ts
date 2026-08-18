@@ -1262,27 +1262,53 @@ Q_\epsilon
       paragraph([
         "Step 5（(5) の証明）。(2) より任意の ",
         math(String.raw`x \in \mathbb{C}^{2^M}`),
-        " は ",
-        math(String.raw`x = \sum_\epsilon Q_\epsilon x`),
-        " と書け、各項は ",
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x
+&= Ix
+   \quad (\because I\text{ は単位行列}) \\
+&= \left(\sum_\epsilon Q_\epsilon\right)x
+   \quad (\because \text{(2)}) \\
+&= \sum_\epsilon Q_\epsilon x
+   \quad (\because \text{行列作用の線型性})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、各 ", math(String.raw`Q_\epsilon x`), " は ",
         math(String.raw`\mathrm{im}\,Q_\epsilon`),
-        " に属するから和は全体を張る。直和であることを見るために ",
+        " に属するので、これらの像の和は全体を張る。直和であることを見るために ",
         math(String.raw`\sum_\epsilon y_\epsilon = 0`),
         "（",
         math(String.raw`y_\epsilon \in \mathrm{im}\,Q_\epsilon`),
-        "）とする。",
+        "）とする。各 ", math(String.raw`\epsilon`), " に対して ",
         math(String.raw`y_\epsilon = Q_\epsilon x_\epsilon`),
-        " と書くと (1) より ",
-        math(String.raw`Q_{\epsilon'} y_\epsilon = Q_{\epsilon'}Q_\epsilon x_\epsilon`),
-        " は ",
-        math(String.raw`\epsilon \neq \epsilon'`),
-        " のとき ",
-        math(String.raw`0`),
-        "、",
-        math(String.raw`\epsilon = \epsilon'`),
-        " のとき ",
-        math(String.raw`Q_\epsilon x_\epsilon = y_\epsilon`),
-        " である。よって各 ",
+        " となる ", math(String.raw`x_\epsilon\in\mathbb C^{2^M}`),
+        " を取る。(1) より、各 ",
+        math(String.raw`\epsilon,\epsilon'`), " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Q_{\epsilon'}y_\epsilon
+&= Q_{\epsilon'}Q_\epsilon x_\epsilon
+   \quad (\because y_\epsilon=Q_\epsilon x_\epsilon) \\
+&=
+\begin{cases}
+0, & \epsilon\ne\epsilon', \\
+Q_\epsilon x_\epsilon, & \epsilon=\epsilon'
+\end{cases}
+   \quad (\because \text{(1) の直交性と冪等性}) \\
+&=
+\begin{cases}
+0, & \epsilon\ne\epsilon', \\
+y_\epsilon, & \epsilon=\epsilon'
+\end{cases}
+   \quad (\because y_\epsilon=Q_\epsilon x_\epsilon)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。したがって各 ",
         math(String.raw`\epsilon'`),
         " について",
       ]),
