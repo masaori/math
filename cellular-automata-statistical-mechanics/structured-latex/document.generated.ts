@@ -25,6 +25,7 @@ import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
+import blocks_iterate_monoid_conjugacy_invariance from './content/iterate-monoid-conjugacy-invariance.ts'
 import blocks_iterate_monoid_cycle_idempotent from './content/iterate-monoid-cycle-idempotent.ts'
 import blocks_iterate_monoid_cyclic_group from './content/iterate-monoid-cyclic-group.ts'
 import blocks_iterate_monoid_idempotents from './content/iterate-monoid-idempotents.ts'
@@ -62,6 +63,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
+  ...typeof blocks_iterate_monoid_conjugacy_invariance,
   ...typeof blocks_iterate_monoid_cycle_idempotent,
   ...typeof blocks_iterate_monoid_cyclic_group,
   ...typeof blocks_iterate_monoid_idempotents,
