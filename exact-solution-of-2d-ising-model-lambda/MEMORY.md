@@ -7,7 +7,7 @@
 2026-08-18 の tick 419 は、「臨界点の正値性」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_point_positive`: 第 5 条件の $s=w^2$ と `claim_real_closed_sum_of_two_squares_is_square` から $s+1=w^2+1^2=v^2$、`claim_real_closed_sum_of_two_squares_zero` から $v\ne0$、$(s-1)(s+1)=s^2-1=1$ から $x_c=s-1=(v^{-1})^2$ を得て $0<_Rx_c$ とした。この主張は次の有理等分で零元を下側の候補に入れるために直接引くので「何も言っていない主張」ではない。
 SageMath `check/critical-point-positive/`（`AA` 厳密）、Lean 具体版 `CriticalExponent/CriticalPointPositive.lean`、必要十分版 `NecSuf/CriticalExponent/CriticalPointPositive.lean`（体の四則、平方和の平方表示と零性だけ）、導出版。sorry 検査 1457 件・check 509 ブロック・linkage 290 件・PDF 275 ページ通過。
-レビュは tick 418 の実閉部分体の第 5 条件を本文・SageMath・Lean で突き合わせ、修正なし。次は「臨界点は一より小さい」。$1-x_c=2-s=s^2-s=s(s-1)=s x_c$、$s=w^2$、$x_c=(v^{-1})^2$ から $1-x_c=(w/v)^2$、$w/v\ne0$ を使う。
+レビューは tick 418 の実閉部分体の第 5 条件を本文・SageMath・Lean で突き合わせ、修正なし。式変形統一は姉妹側「$Z_m,Y_m$ は線型独立」の Step 3 の二つのクロネッカー積表示に行末根拠を追加し、姉妹側 check 300 ブロック・PDF 327 ページを通した。次は「臨界点は一より小さい」。$1-x_c=2-s=s^2-s=s(s-1)=s x_c$、$s=w^2$、$x_c=(v^{-1})^2$ から $1-x_c=(w/v)^2$、$w/v\ne0$ を使う。
 
 2026-08-18 の tick 418 は、セクション「臨界点を挟む有理等分区間」への着手時に、台帳の計画（$[0,1]$ の等分・正の有理端点 $q$）が現状の固定では証明不能であることを見つけ、最小修復を入れた。
 理由: $s$（$s\cdot s=2$ の根）と $(R,\omega)$（実閉部分体）は独立に固定されており、第 1〜4 条件だけでは $s$ と $-s$ のどちらが $R$ の平方かが組の選び方に依存する。したがって $0<_Rx_c$ や「正の有理数 $q$ で $(x_c-q)^2<_R\delta$」は選択依存の主張になり、「どれを固定したかに依存する主張は述べない」という定義自身の規約により述べられない（$s\mapsto-s$ で $x_c$ は共役根 $-1-s\approx-2.414$ に移る）。
