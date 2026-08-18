@@ -51990,6 +51990,43 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
   },
 
   {
+    id: "critical_exponent_definition_real_closed_realization",
+    kind: "definition",
+    title: { text: "実閉部分体の順序を保つ実現（実数体への脱出）" },
+    labels: ["def_real_closed_realization"],
+    habitat: "R",
+    realEscape:
+      "実数値としての実現。固定した実閉部分体 R の元に実対数を適用する前に、R の四則と順序を保って ℝ へ送る写像をデータとして明示する。この定義は写像の値だけを ℝ に送り、R と先頭距離自体は可算側に残す。",
+    lean: ["Ising2DLambda.CriticalExponent.RealClosedRealization"],
+    statement: [
+      paragraph([
+        ref("def_real_closed_subfield"), " で固定した実閉部分体 ",
+        math(String.raw`R\subset\overline{\mathbb{Q}}`), " に対し、実現データとは、写像",
+      ]),
+      displayMath(String.raw`\rho_{R\to\mathbb{R}}:R\to\mathbb{R}`),
+      paragraph([
+        "と、次の条件の組である。",
+      ]),
+      list([
+        [
+          "四則と単位元を保つ。任意の ", math(String.raw`a,b\in R`), " に対し、",
+          math(String.raw`\rho(a+b)=\rho(a)+\rho(b)`), "、",
+          math(String.raw`\rho(a\cdot b)=\rho(a)\cdot\rho(b)`), "、",
+          math(String.raw`\rho(0)=0`), "、", math(String.raw`\rho(1)=1`), "。",
+        ],
+        [
+          "狭義順序を保つ。任意の ", math(String.raw`a,b\in R`), " に対し、",
+          math(String.raw`a<_{R}b\Rightarrow\rho_{R\to\mathbb{R}}(a)<\rho_{R\to\mathbb{R}}(b)`), "。",
+        ],
+      ]),
+      paragraph([
+        "このブロックは実現データの形だけを定め、固定済みの ", math(String.raw`R`),
+        " に対するその存在や一意性は主張しない。後続の有限サイズスケーリングの読みは、このデータを固定した条件の下でのみ述べる。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

@@ -482,6 +482,7 @@ export const ALL_LABELS = [
   "def_rational_of_log",
   "def_real_algebraic_nonstrict_order",
   "def_real_algebraic_strict_order",
+  "def_real_closed_realization",
   "def_real_closed_subfield",
   "def_real_logarithm",
   "def_residue_addition_notation",

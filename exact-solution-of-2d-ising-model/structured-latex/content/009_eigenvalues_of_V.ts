@@ -903,7 +903,7 @@ n_\mu n_\nu
 &= \mathrm{tr}(P)-\mathrm{tr}(n_{\mu_1}P)
    \quad (\because \text{分配法則とトレースの線型性}) \\
 &= \mathrm{tr}(P)-\frac{1}{2}\,\mathrm{tr}(P)
-   \quad (\because \text{上の計算}) \\
+   \quad (\because \text{直前に得た }\mathrm{tr}(n_{\mu_1}P)=\tfrac12\,\mathrm{tr}(P)) \\
 &= \frac{1}{2}\,\mathrm{tr}(P)
    \quad (\because \text{複素数の四則演算}) \\
 &= 2^{M-k}
