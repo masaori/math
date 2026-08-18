@@ -286,6 +286,8 @@ targets=(
   Ising3DCut.LimitQuantity.nullModel_symmetrized_no_coarsening
   Ising3DCut.LimitQuantity.symmetrized_no_coarsening_abstract
   Ising3DCut.LimitQuantity.factorization_type_does_not_determine_limit_quantity
+  Ising3DCut.LimitQuantity.value_invariant_does_not_determine_limit_quantity
+  Ising3DCut.LimitQuantity.factorization_type_does_not_determine_limit_quantity_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
