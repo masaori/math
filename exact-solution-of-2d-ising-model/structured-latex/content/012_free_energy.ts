@@ -265,25 +265,57 @@ export default defineBlocks([
         math(String.raw`\mathrm{arccosh}`),
         " の連続性）。",
         math(String.raw`y \geq 1`),
-        " について",
+        " とし、準備として",
       ]),
       displayMath(
-        String.raw`\mathrm{arccosh}(y) = \log\left(y + \sqrt{y^2-1}\right)`,
+        String.raw`u:=\log\left(y+\sqrt{y^2-1}\right)`,
       ),
       paragraph([
-        "である（右辺を ",
-        math(String.raw`u`),
-        " とおくと ",
-        math(String.raw`e^{u} = y+\sqrt{y^2-1}`),
-        "、",
-        math(String.raw`e^{-u} = \dfrac{1}{y+\sqrt{y^2-1}} = y-\sqrt{y^2-1}`),
-        "（分母の有理化）なので ",
-        math(String.raw`\cosh u = \dfrac{e^u+e^{-u}}{2} = y`),
-        "、かつ ",
-        math(String.raw`y \geq 1`),
-        " より ",
-        math(String.raw`u \geq 0`),
-        "）。",
+        "とおく。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^u
+&=y+\sqrt{y^2-1}
+&&\left(\because\ \log\text{ と }\exp\text{ は正の実数上で互いに逆写像}\right),\\
+e^{-u}
+&=\frac{1}{e^u}
+&&\left(\because\ e^{-u}=\frac{1}{e^u}\right)\\
+&=\frac{1}{y+\sqrt{y^2-1}}
+&&\left(\because\ \text{上の }e^u\text{ の表示}\right)\\
+&=y-\sqrt{y^2-1}
+&&\left(\because\ \text{分母の有理化と }y^2-(y^2-1)=1\right),\\
+\cosh u
+&=\frac{e^u+e^{-u}}{2}
+&&\left(\because\ \cosh\text{ の定義}\right)\\
+&=\frac{y+\sqrt{y^2-1}+y-\sqrt{y^2-1}}{2}
+&&\left(\because\ \text{上の }e^u,e^{-u}\text{ の表示}\right)\\
+&=y
+&&\left(\because\ \mathbb{R}\text{ の四則}\right).
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+u
+&=\log\left(y+\sqrt{y^2-1}\right)
+&&\left(\because\ u\text{ の定義}\right)\\
+&\geq\log 1
+&&\left(\because\ y\geq1,\ \sqrt{y^2-1}\geq0,\ \log\text{ の単調性}\right)\\
+&=0
+&&\left(\because\ \log 1=0\right).
+\end{aligned}`,
+      ),
+      paragraph(["したがって、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{arccosh}(y)
+&=u
+&&\left(\because\ \mathrm{arccosh}\text{ は }\cosh|_{[0,\infty)}\text{ の逆写像}\right)\\
+&=\log\left(y+\sqrt{y^2-1}\right)
+&&\left(\because\ u\text{ の定義}\right).
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`y \mapsto y^2-1`),
         " は連続で ",
         math(String.raw`[1,\infty)`),
@@ -313,7 +345,12 @@ export default defineBlocks([
         " の周期性から従う。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-18: 式変形の書き方を統一した。arccosh の表示を確かめる e^u・e^{-u}・cosh u の計算が散文中に連結されていたのを、準備と一続きの式変形へ開き、根拠を各行末の (∵ …) へ移した。連続性・周期性の論法と参照は変更していない。",
+      ],
+    },
   },
 
   {
