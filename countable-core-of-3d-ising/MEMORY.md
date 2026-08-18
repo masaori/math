@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-18 18:02: 本流の次標的を、有限箱量の列の有限接頭部を忘れた尾部同値類が極限量に対して十分であることへ定めた。ゴール文書の自由エネルギー密度についての最小性から引き直したもので、次は「ある添字以降で二列が項ごとに一致すれば極限量が一致する」を本文の一定理として記述する。着手前レビューは直前の分配多項式値反例の本文と Lean 必要十分版を照合し、`npm run check` を再実行して修正なし。並行の Pfaffian 予言の本文記述は次 tick へ残した。
 - 2026-08-18 17:39: 本流「分配多項式値は極限量に必要でない反例」の Lean 必要十分版を閉じ status `done`。既存の `value_invariant_does_not_determine_limit_quantity` が抽象形を担うと判断し、具体版を特殊化 `partition_value_does_not_determine_limit_quantity_fromNecSuf` として導出（build・sorry 検査 239 件通過）。レビュー（`npm run check` 再実行、105 ブロック・189 参照）修正なし、本文未変更、PDF 再生成。本流のセクション表に未完了が無いので、次 tick はゴール文書「極限側で問う言明」から標的を引き直す。並行は締切のため見送り。
 - 2026-08-18 17:05: 本流「分配多項式値は極限量に必要でない反例」の Lean 具体版を閉じた。`partition_value_does_not_determine_limit_quantity` が有限不変量の不一致、ずらした有限箱量と元の列の末尾との項別一致、末尾ずらしによる極限量の一致を束ねる（build・sorry 検査 238 件通過）。次 tick は Lean 必要十分版。並行は締切のため見送り。
 - 2026-08-18 16:35: 本流「分配多項式値は極限量に必要でない反例」の Lean 具体版の先頭、$\iota_2$ の不一致 $Z_2(1)=2^8\ne2^{27}=Z_3(1)$ を `PartitionValueInvariantDiffersAtTwo.lean` で形式化（build・sorry 検査 237 件通過）。次 tick は有限箱量の項別一致と末尾ずらし極限定理の束ねで Lean 具体版を閉じる。
