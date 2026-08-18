@@ -820,6 +820,12 @@ targets=(
   CellularAutomata.NecSuf.InverseMapLocality.inverseMap_map
   CellularAutomata.NecSuf.InverseMapLocality.essentialDep_inverseCellMap_iff_flip
   CellularAutomata.NecSuf.InverseMapLocality.card_inverse_scan_pairs
+  CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence.globalPeriod_at_minPreperiod
+  CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod_reaches_root
+  CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence.before_roundedPreperiod_not_root
+  CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence.fiberTreeDepth_eq_roundedPreperiod
+  CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence.mem_correspondenceTable
+  CellularAutomata.IterateMonoidRootDepthPreperiodCorrespondence.roundedPreperiod_le_rootReachExponent
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
