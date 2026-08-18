@@ -1445,4 +1445,113 @@ b(C_V)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_first_cycle_pushforward_over_f2",
+    kind: "theorem",
+    title: { text: "商の塔における一次サイクルの押し出し" },
+    labels: ["theorem_quotient_tower_first_cycle_pushforward_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-first-cycle-pushforward-over-f2"],
+    statement: [
+      paragraph([
+        "細段と粗段の有限セルデータへ ",
+        ref("def_first_cycle_space_over_f2"),
+        " をそれぞれ適用する。任意の細段辺係数写像 ",
+        math(String.raw`c\in\mathbb F_2^{\mathcal C_E^{\mathrm{fine}}}`),
+        " と ",
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の辺係数押し出しに対し、次の含意が成り立つ。すなわち、細段一次サイクルは粗段一次サイクルへ送られる。",
+      ]),
+      displayMath(String.raw`c\in\ker
+\left(
+  \partial_1^{\mathrm{fine}}
+\right)
+\quad\Longrightarrow\quad
+\overline\kappa_{E,!}(c)
+\in\ker
+\left(
+  \partial_1^{\mathrm{coarse}}
+\right).`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`c\in\ker\left(\partial_1^{\mathrm{fine}}\right)`),
+        " を固定する。",
+        ref("theorem_quotient_tower_first_boundary_pushforward_commutativity_over_f2"),
+        " より、",
+      ]),
+      displayMath(String.raw`\partial_1^{\mathrm{coarse}}
+\left(
+  \overline\kappa_{E,!}(c)
+\right)
+=
+\overline\kappa_{V,!}
+\left(
+  \partial_1^{\mathrm{fine}}(c)
+\right).`),
+      paragraph([
+        ref("def_first_cycle_space_over_f2"),
+        " と ",
+        math(String.raw`c\in\ker\left(\partial_1^{\mathrm{fine}}\right)`),
+        " より、",
+      ]),
+      displayMath(String.raw`\overline\kappa_{V,!}
+\left(
+  \partial_1^{\mathrm{fine}}(c)
+\right)
+=
+\overline\kappa_{V,!}
+\left(
+  0_{\mathbb F_2^{\mathcal C_V^{\mathrm{fine}}}}
+\right).`),
+      paragraph([
+        "任意の粗段頂点セル ",
+        math(String.raw`D_V\in\mathcal C_V^{\mathrm{coarse}}`),
+        " に対し、",
+        ref("def_quotient_tower_vertex_coefficient_pushforward_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(
+  \overline\kappa_{V,!}
+  \left(
+    0_{\mathbb F_2^{\mathcal C_V^{\mathrm{fine}}}}
+  \right)
+\right)(D_V)
+&=
+\sum_{\substack{
+  C_V\in\mathcal C_V^{\mathrm{fine}}\\
+  \overline\kappa_V(C_V)=D_V
+}}
+0_{\mathbb F_2}
+&&\bigl(\because\ \text{頂点係数押し出し写像の定義}\bigr)\\
+&=0_{\mathbb F_2}
+&&\bigl(\because\ \text{有限個の零元の和}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\overline\kappa_{V,!}\left(0_{\mathbb F_2^{\mathcal C_V^{\mathrm{fine}}}}\right)`),
+        " は粗段頂点係数空間の零元である。以上の等式と ",
+        ref("def_first_cycle_space_over_f2"),
+        " より、",
+      ]),
+      displayMath(String.raw`\overline\kappa_{E,!}(c)
+\in
+\ker
+\left(
+  \partial_1^{\mathrm{coarse}}
+\right)
+=
+\operatorname{Cycle}_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right).`),
+      paragraph([
+        "全てのセル集合、係数写像、核、ファイバー、和は有限または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
