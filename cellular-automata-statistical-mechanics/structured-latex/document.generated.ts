@@ -30,6 +30,7 @@ import blocks_iterate_monoid_cyclic_group from './content/iterate-monoid-cyclic-
 import blocks_iterate_monoid_idempotents from './content/iterate-monoid-idempotents.ts'
 import blocks_iterate_monoid_minimal_period from './content/iterate-monoid-minimal-period.ts'
 import blocks_iterate_monoid_principal_ideal_tail from './content/iterate-monoid-principal-ideal-tail.ts'
+import blocks_iterate_monoid_root_depth_preperiod_correspondence from './content/iterate-monoid-root-depth-preperiod-correspondence.ts'
 import blocks_iterate_monoid_stabilization_index from './content/iterate-monoid-stabilization-index.ts'
 import blocks_iterate_monoid_stable_fiber_depth from './content/iterate-monoid-stable-fiber-depth.ts'
 import blocks_iterate_monoid_stable_fiber_dynamics from './content/iterate-monoid-stable-fiber-dynamics.ts'
@@ -66,6 +67,7 @@ export type AllBlocks = [
   ...typeof blocks_iterate_monoid_idempotents,
   ...typeof blocks_iterate_monoid_minimal_period,
   ...typeof blocks_iterate_monoid_principal_ideal_tail,
+  ...typeof blocks_iterate_monoid_root_depth_preperiod_correspondence,
   ...typeof blocks_iterate_monoid_stabilization_index,
   ...typeof blocks_iterate_monoid_stable_fiber_depth,
   ...typeof blocks_iterate_monoid_stable_fiber_dynamics,
