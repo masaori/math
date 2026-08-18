@@ -576,33 +576,20 @@ u
         math(String.raw`\mu`),
         " を固定する。(R2) の定数の積分より ",
         math(String.raw`\int_{I_\mu} g\!\left(t^{(M)}_\mu\right)dt = \dfrac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)`),
-        " なので、積分の線型性と評価 ",
-        math(String.raw`\left|\int_{I}h\right| \leq |I|\sup_I|h|`),
-        " より",
+        " である。各区間での誤差を一続きに評価する。",
       ]),
       displayMath(
-        String.raw`\left|\int_{I_\mu} g(t)\,dt - \frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right|
-= \left|\int_{I_\mu}\left(g(t) - g\!\left(t^{(M)}_\mu\right)\right)dt\right|
-\leq \frac{2\pi}{M}\,\sup_{t \in I_\mu}\left|g(t) - g\!\left(t^{(M)}_\mu\right)\right|`,
-      ),
-      paragraph([
-        "Step 1 より ",
-        math(String.raw`t \in I_\mu`),
-        " と ",
-        math(String.raw`t^{(M)}_\mu`),
-        " はいずれも ",
-        math(String.raw`[0,2\pi]`),
-        " に属し距離が ",
-        math(String.raw`2\pi/M`),
-        " 以下なので、",
-        math(String.raw`\omega`),
-        " の定義より ",
-        math(String.raw`\left|g(t)-g\!\left(t^{(M)}_\mu\right)\right| \leq \omega\!\left(\frac{2\pi}{M}\right)`),
-        "。よって",
-      ]),
-      displayMath(
-        String.raw`\left|\int_{I_\mu} g(t)\,dt - \frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right|
-\leq \frac{2\pi}{M}\,\omega\!\left(\frac{2\pi}{M}\right)`,
+        String.raw`\begin{aligned}
+&\left|\int_{I_\mu}g(t)\,dt-\frac{2\pi}{M}g\!\left(t^{(M)}_\mu\right)\right|\\
+={}&\left|\int_{I_\mu}g(t)\,dt-\int_{I_\mu}g\!\left(t^{(M)}_\mu\right)dt\right|
+&&\left(\because\ \text{(R2) の定数の積分}\right)\\
+={}&\left|\int_{I_\mu}\left(g(t)-g\!\left(t^{(M)}_\mu\right)\right)dt\right|
+&&\left(\because\ \text{積分の線型性}\right)\\
+\leq{}&\frac{2\pi}{M}\sup_{t\in I_\mu}\left|g(t)-g\!\left(t^{(M)}_\mu\right)\right|
+&&\left(\because\ \left|\int_Ih\right|\leq |I|\sup_I|h|\right)\\
+\leq{}&\frac{2\pi}{M}\omega\!\left(\frac{2\pi}{M}\right)
+&&\left(\because\ \text{Step 1 と }\omega\text{ の定義}\right).
+\end{aligned}`,
       ),
       paragraph(["Step 3（総和）。三角不等式で ", math(String.raw`\mu`), " について足すと"]),
       displayMath(
