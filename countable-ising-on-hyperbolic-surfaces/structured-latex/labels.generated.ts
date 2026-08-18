@@ -64,6 +64,7 @@ export const ALL_LABELS = [
   "def_quotient_tower_edge_coefficient_pushforward_over_f2",
   "def_quotient_tower_face_coefficient_pushforward_over_f2",
   "def_quotient_tower_first_cycle_pushforward_map_over_f2",
+  "def_quotient_tower_first_homology_pushforward_map_over_f2",
   "def_quotient_tower_induced_coset_cell_maps",
   "def_quotient_tower_induced_face_position_map",
   "def_quotient_tower_oriented_edge_representative_selector_compatibility",

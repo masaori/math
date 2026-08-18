@@ -1985,4 +1985,149 @@ a(C_F)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_first_homology_pushforward_map_over_f2",
+    kind: "definition",
+    title: { text: "商の塔が誘導する第一ホモロジー押し出し写像" },
+    labels: ["def_quotient_tower_first_homology_pushforward_map_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-first-homology-pushforward-map-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_first_homology_group_over_f2"),
+        " により、細段と粗段の第一ホモロジー群をそれぞれ ",
+        math(String.raw`H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " と ",
+        math(String.raw`H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)`),
+        " と書く。",
+        ref("theorem_quotient_tower_face_boundary_space_pushforward_over_f2"),
+        " の仮定の下で、",
+        ref("def_quotient_tower_first_cycle_pushforward_map_over_f2"),
+        " の一次サイクル押し出し写像から誘導される写像を、始域、終域、作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{H_1,!}:
+H_1
+\left(
+  \mathcal C^{\mathrm{fine}};\mathbb F_2
+\right)
+&\longrightarrow
+H_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right),\\
+\left\{
+  c+b
+  \ \middle|\
+  \ b\in\operatorname{Boundary}_1
+  \left(
+    \mathcal C^{\mathrm{fine}};\mathbb F_2
+  \right)
+\right\}
+&\longmapsto
+\left\{
+  \overline\kappa_{1,!}(c)+d
+  \ \middle|\
+  \ d\in\operatorname{Boundary}_1
+  \left(
+    \mathcal C^{\mathrm{coarse}};\mathbb F_2
+  \right)
+\right\}
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`c\in\operatorname{Cycle}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        "、",
+        math(String.raw`b\in\operatorname{Boundary}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        "、",
+        math(String.raw`d\in\operatorname{Boundary}_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)`),
+        " であり、加法は対応する有限 ",
+        math(String.raw`\mathbb F_2`),
+        " 辺係数空間の成分ごとの加法である。",
+      ]),
+      paragraph([
+        "この作用が細段一次サイクルの代表の選択に依存しないことを確かめる。同じ細段第一ホモロジー類を表す ",
+        math(String.raw`c,c'\in\operatorname{Cycle}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " に対し、ある ",
+        math(String.raw`b_0\in\operatorname{Boundary}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " が存在して ",
+        math(String.raw`c'=c+b_0`),
+        " である。任意の粗段辺セル ",
+        math(String.raw`D_E\in\mathcal C_E^{\mathrm{coarse}}`),
+        " に対し、",
+        ref("def_quotient_tower_first_cycle_pushforward_map_over_f2"),
+        " と ",
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{1,!}(c')(D_E)
+&=
+\overline\kappa_{E,!}(c')(D_E)
+&&\bigl(\because\ \text{一次サイクル押し出し写像の定義}\bigr)\\
+&=
+\overline\kappa_{E,!}(c+b_0)(D_E)
+&&\bigl(\because\ c'=c+b_0\bigr)\\
+&=
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+\left(
+  c(C_E)+b_0(C_E)
+\right)
+&&\bigl(\because\ \text{辺係数押し出し写像の定義}\bigr)\\
+&=
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+c(C_E)
++
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+b_0(C_E)
+&&\bigl(\because\ \mathbb F_2\text{ 上の有限和の分配律}\bigr)\\
+&=
+\overline\kappa_{1,!}(c)(D_E)
++
+\overline\kappa_{E,!}(b_0)(D_E)
+&&\bigl(\because\ \text{二つの押し出し写像の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_quotient_tower_face_boundary_space_pushforward_over_f2"),
+        " より ",
+        math(String.raw`\overline\kappa_{E,!}(b_0)\in\operatorname{Boundary}_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\left\{
+  \overline\kappa_{1,!}(c')+d
+  \ \middle|\
+  \ d\in\operatorname{Boundary}_1
+  \left(
+    \mathcal C^{\mathrm{coarse}};\mathbb F_2
+  \right)
+\right\}
+=
+\left\{
+  \overline\kappa_{1,!}(c)+d
+  \ \middle|\
+  \ d\in\operatorname{Boundary}_1
+  \left(
+    \mathcal C^{\mathrm{coarse}};\mathbb F_2
+  \right)
+\right\}.`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\overline\kappa_{H_1,!}`),
+        " は代表の選択に依存せず well-defined である。細段一次サイクル、その第一ホモロジー類、粗段一次サイクル、その第一ホモロジー類を同一視せず、移行には二つの商集合と ",
+        math(String.raw`\overline\kappa_{H_1,!}`),
+        " だけを用いる。この定義は誘導写像の単射性、全射性、局所全単射性、被覆次数を主張しない。全ての対象は有限集合または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
