@@ -591,11 +591,21 @@ u
 &&\left(\because\ \text{Step 1 と }\omega\text{ の定義}\right).
 \end{aligned}`,
       ),
-      paragraph(["Step 3（総和）。三角不等式で ", math(String.raw`\mu`), " について足すと"]),
+      paragraph(["Step 3（総和）。全区間にわたる誤差を一続きに評価する。"]),
       displayMath(
-        String.raw`\left|\int_0^{2\pi} g(t)\,dt - \frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right)\right|
-\leq \sum_{\mu=1}^{M}\frac{2\pi}{M}\,\omega\!\left(\frac{2\pi}{M}\right)
-= 2\pi\,\omega\!\left(\frac{2\pi}{M}\right)`,
+        String.raw`\begin{aligned}
+&\left|\int_0^{2\pi} g(t)\,dt - \frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right)\right|\\
+={}&\left|\sum_{\mu=1}^{M}\int_{I_\mu}g(t)\,dt - \sum_{\mu=1}^{M}\frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right|
+&&\left(\because\ \text{Step 0 の区間加法性}\right)\\
+={}&\left|\sum_{\mu=1}^{M}\left(\int_{I_\mu}g(t)\,dt - \frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right)\right|
+&&\left(\because\ \text{和の差は差の和}\right)\\
+\leq{}&\sum_{\mu=1}^{M}\left|\int_{I_\mu}g(t)\,dt - \frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right|
+&&\left(\because\ \text{三角不等式}\right)\\
+\leq{}&\sum_{\mu=1}^{M}\frac{2\pi}{M}\,\omega\!\left(\frac{2\pi}{M}\right)
+&&\left(\because\ \text{Step 2 の評価}\right)\\
+={}&2\pi\,\omega\!\left(\frac{2\pi}{M}\right)
+&&\left(\because\ \mu\text{ に依らない同一の項の }M\text{ 個の和}\right).
+\end{aligned}`,
       ),
       paragraph([
         "両辺を ",
