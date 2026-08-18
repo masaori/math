@@ -51617,6 +51617,122 @@ s+1
   },
 
   {
+    id: "critical_exponent_claim_positive_rational_positive_in_real_closed",
+    kind: "claim",
+    title: { text: "正の有理数は実閉部分体で正である" },
+    labels: ["claim_positive_rational_positive_in_real_closed"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.positiveRational_realAlgebraic_positive",
+      "Ising2DLambda.NecSuf.CriticalExponent.positiveRational_positive_necSuf",
+      "Ising2DLambda.CriticalExponent.positiveRational_realAlgebraic_positive_from_necSuf",
+    ],
+    verification: ["sagemath/check/positive-rational-positive-in-real-closed"],
+    statement: [
+      paragraph([
+        "任意の ", math(String.raw`q\in\mathbb{Q}_{>0}`), "（",
+        ref("claim_rationals_are_real_algebraic"), " により ",
+        math(String.raw`R`), " の元でもある）について、",
+        math(String.raw`0<_{R}q`), " である。ここで ", math(String.raw`<_R`),
+        " は ", ref("def_real_algebraic_strict_order"), " の順序である。",
+      ]),
+      paragraph([
+        "この主張は、後のセクションで ", math(String.raw`\mathbb{Q}`),
+        " の狭義比較 ", math(String.raw`p<q`), " を差 ",
+        math(String.raw`q-p\in\mathbb{Q}_{>0}`), " を通して順序 ",
+        math(String.raw`<_R`),
+        " へ移すための根拠である。証明は零元でない平方の証人の構成に ",
+        ref("def_real_closed_subfield"),
+        " の実閉性（平方の和が平方であること）と自然数の帰納法を使うので、",
+        "体の四則だけから従う空の主張ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。正の有理数の定義により、", math(String.raw`q=a/b`), "、",
+        math(String.raw`a,b\in\mathbb{N}`), "、", math(String.raw`1\le a`),
+        "、", math(String.raw`1\le b`), " と表せる（正の有理数は正の整数の比である）。",
+        "自然数は鎖 ",
+        math(String.raw`\mathbb{N}\subset\mathbb{Q}\subseteq R`),
+        "（後半は ", ref("claim_rationals_are_real_algebraic"), "）により ",
+        math(String.raw`R`), " の元として扱う。",
+      ]),
+      paragraph([
+        "まず、任意の ", math(String.raw`n\in\mathbb{N}`), "、",
+        math(String.raw`1\le n`), " について、ある零元でない ",
+        math(String.raw`c\in R`), " が存在して ", math(String.raw`n=c\cdot c`),
+        " であることを、", math(String.raw`n`), " についての帰納法で示す。",
+      ]),
+      paragraph([
+        "出発点（", math(String.raw`n=1`), "）: ",
+        math(String.raw`1=1\cdot1`), "（積の単位元）であり、",
+        math(String.raw`1\ne0`), " である（", math(String.raw`\mathbb{Q}`),
+        " の中で ", math(String.raw`1\ne0`), " であり、",
+        math(String.raw`\mathbb{Q}`), " は ", math(String.raw`R`),
+        " の部分集合である）。証人は ", math(String.raw`c:=1`), " でよい。",
+      ]),
+      paragraph([
+        "帰納段: ", math(String.raw`n=c\cdot c`), "、",
+        math(String.raw`c\ne0`), " と仮定する。",
+        ref("claim_real_closed_sum_of_two_squares_is_square"), " を ",
+        math(String.raw`x:=c`), "、", math(String.raw`y:=1`),
+        " に当てると、ある ", math(String.raw`e\in R`), " が存在して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e\cdot e
+&=c\cdot c+1\cdot1
+&&(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\ \text{を }x:=c,\ y:=1\text{ に適用})\\
+&=n+1
+&&(\because\ \text{帰納法の仮定 }n=c\cdot c\text{ と積の単位元})
+\end{aligned}`),
+      paragraph([
+        "である。", math(String.raw`e=0`), " と仮定すると ",
+        ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
+        math(String.raw`c=0`), " かつ ", math(String.raw`1=0`),
+        " となり、出発点で述べた ", math(String.raw`1\ne0`),
+        " に反する。ゆえに ", math(String.raw`e\ne0`),
+        " であり、帰納段の証人は ", math(String.raw`e`), " でよい。",
+      ]),
+      paragraph([
+        "この帰納法を ", math(String.raw`a`), " と ", math(String.raw`b`),
+        " に当てて、零元でない ", math(String.raw`c,d\in R`), " で ",
+        math(String.raw`a=c\cdot c`), "、", math(String.raw`b=d\cdot d`),
+        " と表す。", math(String.raw`b\ne0`), " なので ",
+        math(String.raw`b^{-1}\in R`),
+        "（部分体は零元でない元の乗法逆元で閉じる。",
+        ref("def_real_closed_subfield"), " の第 1 条件）、同様に ",
+        math(String.raw`d^{-1}\in R`), " である。",
+        math(String.raw`w:=c\cdot d^{-1}\in R`), " と置くと ",
+        math(String.raw`w\ne0`),
+        " である（体は零因子を持たないので、零元でない元どうしの積は零元でない）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q
+&=a\cdot b^{-1}
+&&(\because\ \text{準備の表示 }q=a/b\text{。}\mathbb{Q}\text{ の除法の定義})\\
+&=(c\cdot c)\cdot(d\cdot d)^{-1}
+&&(\because\ \text{帰納法で得た表示 }a=c\cdot c,\ b=d\cdot d)\\
+&=(c\cdot c)\cdot(d^{-1}\cdot d^{-1})
+&&(\because\ \text{積の逆元は逆元の積。}R\text{ の四則})\\
+&=(c\cdot d^{-1})\cdot(c\cdot d^{-1})
+&&(\because\ R\text{ の積の可換律と結合律})\\
+&=w\cdot w
+&&(\because\ w\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`q-0=q=w\cdot w`), " かつ ",
+        math(String.raw`w\ne0`), " なので、",
+        ref("def_real_algebraic_strict_order"), " により ",
+        math(String.raw`0<_{R}q`), " である。全過程は ",
+        math(String.raw`\mathbb{N}`), "、", math(String.raw`\mathbb{Q}`),
+        "、", math(String.raw`\overline{\mathbb{Q}}`), " の部分体 ",
+        math(String.raw`R`),
+        " の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },

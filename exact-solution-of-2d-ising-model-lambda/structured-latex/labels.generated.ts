@@ -157,6 +157,7 @@ export const ALL_LABELS = [
   "claim_positive_rational_in_positive_cone",
   "claim_positive_rational_mesh_width",
   "claim_positive_rational_not_fisher_zero",
+  "claim_positive_rational_positive_in_real_closed",
   "claim_power_sum_telescope",
   "claim_prod_orbit_decomposition",
   "claim_prod_pair_eq_pow_card",

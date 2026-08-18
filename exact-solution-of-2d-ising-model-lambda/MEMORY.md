@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 422 は、「挟み込み区間から臨界点への有理近似を取る」を論法単位の 2 行へ割り、その最初「正の有理数は実閉部分体で正である」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_positive_rational_positive_in_real_closed`（有理等分区間の直後）: 任意の $q\in\mathbb Q_{>0}$ について $0<_Rq$。帰納法で 1 以上の自然数を零元でない元の平方に表し（出発点 $1=1\cdot1$、帰納段は `claim_real_closed_sum_of_two_squares_is_square` で $n+1=c^2+1^2=e^2$、`claim_real_closed_sum_of_two_squares_zero` で $e\ne0$）、$q=a/b$ の分子分母に当てて $q=(c\cdot d^{-1})^2$、体は零因子を持たないので証人は非零。$\mathbb Q$ の狭義比較 $p<q$ を差 $q-p\in\mathbb Q_{>0}$ 経由で $<_R$ へ移す根拠になる（次セクションが引く）。
+SageMath `check/positive-rational-positive-in-real-closed/`（`AA` 厳密。帰納段 32 段・正の標本 6 個・非正の反例 3 個）。Lean 具体版 `CriticalExponent/PositiveRationalPositiveInRealClosed.lean`（`natSucc_eq_square`・`positiveRational_realAlgebraic_positive`）、必要十分版 `NecSuf/CriticalExponent/PositiveRationalPositiveInRealClosed.lean`（体と二平方和の二性質だけ。標数零の仮定は不要——標数 p では sumEqZero が偽になるので仮定自身が強さを担う）、導出版。sorry 検査 1451 件・check 512 ブロック・linkage 293 件・PDF 277 ページ通過。
+レビューは tick 421 の有理等分区間を本文・SageMath（再実行）・Lean で突き合わせ、修正なし。
+次は「挟み込み区間から臨界点への有理近似を取る」（残り半分）。$\delta\in\mathbb Q_{>0}$ に網幅（tick 417）で $N$、等分区間（tick 421）で $k$ を取り、$q:=(k+1)/N\in\mathbb Q_{>0}$（$k+1\ge1$）。$x_c<_Rq$ から $0<_Rq-x_c$、$k/N\le_Rx_c$ から $q-x_c\le_Rq-k/N=1/N=h_N$（差の保存は行末根拠「$R$ の四則と順序の定義」で書く——tick 415 の確定）。平方の単調性は $b^2-a^2=(b-a)(b+a)$ の因数分解と、$0<_Ra$・$0<_Rb$（$h_N$ は正の有理数なので今 tick の主張）から $b+a$ が零元でない平方（二平方和の二性質）で出す（独立主張にしない）。最後に $h_N^2<\delta$（$\mathbb Q$）を今 tick の主張（$\delta-h_N^2\in\mathbb Q_{>0}$）で $<_R$ へ移し、$\le_R$ と $<_R$ の連結は等号の枝の書き換えと推移律で閉じる。
+
 2026-08-18 の tick 421 は、「臨界点を挟む有理等分区間」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_point_rational_partition_interval`: $N\ge1$ に対し、$S_N:=\{j\in\mathbb N\mid j<N+1,\ j/N<_Rx_c\text{ または }j/N=x_c\}$ を取る。正値性から $0\in S_N$、上界 $x_c<_R1=N/N$ と三分法から $N\notin S_N$。有限非空集合 $S_N$ の最大元 $k$ に対し $k+1\notin S_N$ なので、$k+1\le N$ かつ $k/N\le_Rx_c<_R(k+1)/N$。SageMath `check/critical-point-rational-partition-interval/`（`AA`/`QQ` 厳密）、Lean 具体版・必要十分版（有限候補・最大元・三分法だけ）・導出版。sorry 検査 1448 件・check 511 ブロック・linkage 292 件・PDF 277 ページ通過。
 レビューでは tick 420 の Lean 具体版が本文の展開・$s^2=2$ の代入・整理という三段を一度の `ring` に畳んでいたため、本文と一対一の三段へ直し、前進前に commit `7e634bc8` を push した。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の Step 2 の順方向と逆向きに分かれていた二つの表示を一つの式変形鎖へ統合し、姉妹側 check 300 ブロック・PDF 326 ページを通した。
