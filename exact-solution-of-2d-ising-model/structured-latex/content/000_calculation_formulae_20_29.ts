@@ -163,9 +163,17 @@ rr'
         math(String.raw`\theta+\theta'\sim_{\mathrm{angle}}\theta_1+\theta_1'`),
         "（",
         ref("angle_equivalence_class"),
-        "）。また ",
-        math(String.raw`rr'=r_1r_1'`),
-        " であるから、第 2 の選言により ",
+        "）。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+rr'
+&= r_1r'
+&&(\because\ r=r_1)\\
+&= r_1r_1'
+&&(\because\ r'=r_1')
+\end{aligned}`),
+      paragraph([
+        "であるから、第 2 の選言により ",
         math(String.raw`(rr',\theta+\theta')\sim(r_1r_1',\theta_1+\theta_1')`),
         "。以上より ",
         math(String.raw`\cdot`),
