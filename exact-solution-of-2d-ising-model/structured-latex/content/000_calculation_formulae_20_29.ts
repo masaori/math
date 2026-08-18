@@ -727,10 +727,18 @@ z\cdot w
 &&(\because\ 1_{\mathbb{C}}=(1,0))
 \end{aligned}`,
       ),
+      paragraph(["である。さらに"]),
+      displayMath(
+        String.raw`\begin{aligned}
+w\cdot z
+&= z\cdot w
+&&(\because\ \text{上で示した積の可換律})\\
+&= 1_{\mathbb{C}}
+&&(\because\ \text{上の計算})
+\end{aligned}`,
+      ),
       paragraph([
-        "である。上で示した積の可換律より ",
-        math(String.raw`w\cdot z=z\cdot w=1_{\mathbb{C}}`),
-        " である。また ",
+        "である。また ",
         math(String.raw`w=(0,0)`),
         " とすると ",
         ref("definition_of_cc"),
