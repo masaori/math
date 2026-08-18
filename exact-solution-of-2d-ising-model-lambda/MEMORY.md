@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 424 は、「先頭距離の詰め寄りから述語 Pinch を導く（接続の完成）」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_leading_distance_pinching_implies_predicate`（有理近似の直後。主定理の印つき）: 「任意の $\eta\in\mathbb Q_{>0}$ にある $L\ge2$ で $d_1(L)<_R\eta$」という仮定から、任意の $\varepsilon\in\mathbb Q_{>0}$ で $\mathrm{Pinch}(\varepsilon)$（`def_zero_pinching_predicate`）。これで零点の詰め寄りの言明（`def_phase_transition_countable_statement`）は先頭距離の列の詰め寄りへ帰着された。$\eta:=\varepsilon^2/4$ を取り、`claim_leading_distance_lt_iff_close_zero`（$t:=\eta$）で $\xi\in\mathcal F_L$、`claim_critical_point_rational_approximation`（$\delta:=\eta$）で $q\in\mathbb Q_{>0}$。一意表示 $\xi=\alpha+\beta\omega$、$u:=\alpha-x_c$、$v:=x_c-q$、証人 $c_1$（$\eta-\mathrm{dsq}_c$）・$c_2$（$\eta-v^2$）・$g$（`claim_square_of_sum_le_twice_sum_of_squares` の差。等号の枝は $g:=0$）・$t\cdot t=2$（`claim_two_is_square_in_real_closed`）を用意し、$\varepsilon^2-\mathrm{dsq}(\xi,q)=2c_1^2+2c_2^2+g^2+\beta^2=(tc_1)^2+(tc_2)^2+g^2+\beta^2=z_3^2$（二平方和の平方表示を三度、零性で $z_3\ne0$）の八段の鎖。
+SageMath `check/leading-distance-pinch-connection/`（恒等式の段は `QQ` 係数多項式環で記号的に、合成は $L=2$ の実際の Fisher 零点と $\varepsilon\in\{3,2,3/2\}$（仮定が実際に成り立つ標本）で `AA` 厳密）。Lean 具体版 `CriticalExponent/LeadingDistancePinchConnection.lean`（仮定は $\eta$ 上の量化で、`NeZero L` は存在量化の中に置く）、必要十分版 `NecSuf/CriticalExponent/LeadingDistancePinchConnection.lean`（`pinch_bound_necSuf`。体・$t\cdot t=1+1$・二平方和の二性質だけ。標数 2 の排除は sumEqZero が $1+1\ne0$ を強いる形で仮定自身が担う）、導出版。sorry 検査 1457 件・check 514 ブロック・linkage 295 件・PDF 279 ページ通過。
+レビューは tick 423 の有理近似を本文・SageMath（再実行）・Lean で突き合わせ、修正なし。
+次は台帳の先頭「有限サイズスケーリングの読み（ℝ 脱出）」。距離列の増大率と指数 $\nu$ の読み取り。実対数・極限を使うのでここだけ脱出を宣言する。厳密に言える範囲は討議ノート「何が厳密で何が非厳密か」に従って絞る。着手時に討議ノート（`docs/discussion/臨界指数をFisher零点列で書く/`）を読み、複数の独立論法が含まれるなら先に分割すること。
+
 2026-08-18 の tick 423 は、「挟み込み区間から臨界点への有理近似を取る」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_point_rational_approximation`（正の有理数の正値性の直後）: 任意の $\delta\in\mathbb Q_{>0}$ に対し、正の有理数 $q$ が存在して $(x_c-q)^2<_R\delta$。`claim_positive_rational_mesh_width` で $h=1/N$、`claim_critical_point_rational_partition_interval` で $p=k/N\le_Rx_c<_Rq=(k+1)/N$ を取り、$q-p=h$ を使う。$q-x_c=a^2$、$x_c-p=d^2$（等号枝は $d=0$）、$h=e^2$ と書き、$h-a^2=d^2$、二平方和の平方表示で $h+a^2=v^2$、平方差 $h^2-a^4=(dv)^2$ を得る。さらに $\delta-h^2=r^2$ と二平方和から $\delta-(x_c-q)^2=z^2$、零性から $z\ne0$。平方の単調性は独立主張にせず、差の因数分解と二平方和の二性質を証明内で展開した。
 SageMath `check/critical-point-rational-approximation/`（`QQ`/`AA` 厳密、正の有理誤差 4 個）。Lean 具体版 `CriticalExponent/CriticalPointRationalApproximation.lean`、必要十分版 `NecSuf/CriticalExponent/CriticalPointRationalApproximation.lean`（体の四則、平方による比較、二平方和の平方表示と零性だけ）、導出版。sorry 検査 1454 件・check 513 ブロック・linkage 294 件・PDF 278 ページ通過。

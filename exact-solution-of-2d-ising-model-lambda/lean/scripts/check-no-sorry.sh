@@ -1510,6 +1510,9 @@ targets=(
   Ising2DLambda.CriticalExponent.criticalPoint_exists_positiveRational_squareDiff_lt
   Ising2DLambda.NecSuf.CriticalExponent.rational_approximation_square_lt_necSuf
   Ising2DLambda.CriticalExponent.criticalPoint_exists_positiveRational_squareDiff_lt_from_necSuf
+  Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate
+  Ising2DLambda.NecSuf.CriticalExponent.pinch_bound_necSuf
+  Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

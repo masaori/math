@@ -51841,6 +51841,155 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
   },
 
   {
+    id: "critical_exponent_claim_leading_distance_pinching_implies_predicate",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: { text: "先頭距離の詰め寄りは詰め寄りの述語を導く" },
+    labels: ["claim_leading_distance_pinching_implies_predicate"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate",
+      "Ising2DLambda.NecSuf.CriticalExponent.pinch_bound_necSuf",
+      "Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate_from_necSuf",
+    ],
+    verification: ["sagemath/check/leading-distance-pinch-connection"],
+    statement: [
+      paragraph([
+        "次を仮定する。任意の ", math(String.raw`\eta\in\mathbb{Q}_{>0}`),
+        " に対し、ある ", math(String.raw`L\in\mathbb{N}`), "（",
+        math(String.raw`2\le L`), "）が存在して ",
+        math(String.raw`d_{1}(L)<_{R}\eta`),
+        " となる（", math(String.raw`d_{1}(L)`), " は ", ref("def_leading_distance"),
+        "、", math(String.raw`<_{R}`), " は ", ref("def_real_algebraic_strict_order"),
+        "。有理数は ", ref("claim_rationals_are_real_algebraic"),
+        " により ", math(String.raw`R`), " の元として書く）。",
+      ]),
+      paragraph([
+        "このとき、任意の ", math(String.raw`\varepsilon\in\mathbb{Q}_{>0}`),
+        " について ", math(String.raw`\mathrm{Pinch}(\varepsilon)`),
+        "（", ref("def_zero_pinching_predicate"), "）が成り立つ。",
+        "すなわち、零点の詰め寄りの言明（", ref("def_phase_transition_countable_statement"),
+        "）は、先頭距離の列 ", math(String.raw`\{d_{1}(L)\}_{L\ge2}`),
+        " が任意の正の有理数を下回ることへ帰着される。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\varepsilon\in\mathbb{Q}_{>0}`), " を取り、",
+        math(String.raw`\eta:=(\varepsilon\cdot\varepsilon)/4\in\mathbb{Q}`),
+        " と置く。", math(String.raw`\varepsilon`), " は零でない有理数だから ",
+        math(String.raw`\varepsilon\cdot\varepsilon\in\mathbb{Q}_{>0}`),
+        " であり、", math(String.raw`\eta\in\mathbb{Q}_{>0}`),
+        " である（", math(String.raw`\mathbb{Q}`), " の四則と順序）。",
+        "仮定を ", math(String.raw`\eta`), " に当て、",
+        math(String.raw`2\le L`), " かつ ", math(String.raw`d_{1}(L)<_{R}\eta`),
+        " を満たす ", math(String.raw`L\in\mathbb{N}`), " を取る。",
+        ref("claim_leading_distance_lt_iff_close_zero"), " を上界 ",
+        math(String.raw`t:=\eta\in R`),
+        " に当て、第一条件から第二条件により、ある ",
+        math(String.raw`\xi\in\mathcal{F}_{L}`),
+        "（", ref("def_finite_lattice_fisher_zeros"), "）で ",
+        math(String.raw`\mathrm{dsq}_{c}(\xi)<_{R}\eta`),
+        "（", ref("def_distance_squared_to_critical_point"), "）となるものを取る。",
+        ref("claim_critical_point_rational_approximation"), " を ",
+        math(String.raw`\delta:=\eta`), " に当て、",
+        math(String.raw`(x_c-q)\cdot(x_c-q)<_{R}\eta`), " を満たす ",
+        math(String.raw`q\in\mathbb{Q}_{>0}`), " を取る。",
+      ]),
+      paragraph([
+        math(String.raw`\xi=\alpha+\beta\cdot\omega`),
+        " を満たすちょうど 1 つの組 ",
+        math(String.raw`(\alpha,\beta)\in R\times R`),
+        "（", ref("def_real_closed_subfield"), " の第 4 条件）を取り、",
+        math(String.raw`u:=\alpha-x_c`), "、", math(String.raw`v:=x_c-q`),
+        " と置く。", math(String.raw`x_c\in R`), "（",
+        ref("claim_critical_point_mem_real_closed"), "）と ",
+        math(String.raw`q\in R`), "（", ref("claim_rationals_are_real_algebraic"),
+        "）から ", math(String.raw`u,v\in R`),
+        " である（部分体は四則で閉じる）。この表示で ",
+        math(String.raw`\mathrm{dsq}_{c}(\xi)=u\cdot u+\beta\cdot\beta`),
+        "（", ref("def_distance_squared_to_critical_point"), "）、",
+        math(String.raw`\mathrm{dsq}(\xi,q)=(\alpha-q)\cdot(\alpha-q)+\beta\cdot\beta`),
+        "（", ref("def_distance_squared_to_rational"), "）である。",
+      ]),
+      paragraph([
+        "証人を用意する。", ref("def_real_algebraic_strict_order"),
+        " により、零元でない ", math(String.raw`c_1\in R`), " で ",
+        math(String.raw`\eta-(u\cdot u+\beta\cdot\beta)=c_1\cdot c_1`),
+        "、零元でない ", math(String.raw`c_2\in R`), " で ",
+        math(String.raw`\eta-v\cdot v=c_2\cdot c_2`), " と書ける。",
+        ref("claim_square_of_sum_le_twice_sum_of_squares"), " を ",
+        math(String.raw`u,v`), " に当てると ",
+        math(String.raw`(u+v)\cdot(u+v)\le_{R}2\cdot(u\cdot u)+2\cdot(v\cdot v)`),
+        " であり、", ref("def_real_algebraic_nonstrict_order"),
+        " の二つの枝から、ある ", math(String.raw`g\in R`),
+        "（等号の枝では ", math(String.raw`g:=0`),
+        "、狭義順序の枝では ", ref("def_real_algebraic_strict_order"),
+        " の証人）で",
+      ]),
+      displayMath(String.raw`2\cdot(u\cdot u)+2\cdot(v\cdot v)-(u+v)\cdot(u+v)=g\cdot g`),
+      paragraph([
+        "と書ける。", ref("claim_two_is_square_in_real_closed"),
+        " により、零元でない ", math(String.raw`t\in R`), " で ",
+        math(String.raw`t\cdot t=2`), " と書ける。",
+        math(String.raw`t\cdot c_1`), " と ", math(String.raw`t\cdot c_2`),
+        " は零元でない（体は零因子を持たない）。",
+        ref("claim_real_closed_sum_of_two_squares_is_square"),
+        " を三度当てて、",
+      ]),
+      displayMath(String.raw`(t\cdot c_1)\cdot(t\cdot c_1)+(t\cdot c_2)\cdot(t\cdot c_2)=z_1\cdot z_1,\qquad
+z_1\cdot z_1+g\cdot g=z_2\cdot z_2,\qquad
+z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
+      paragraph([
+        "となる ", math(String.raw`z_1,z_2,z_3\in R`), " を取る。",
+        math(String.raw`z_1=0`), " なら ",
+        ref("claim_real_closed_sum_of_two_squares_zero"), " から ",
+        math(String.raw`t\cdot c_1=0`), " となり矛盾するので ",
+        math(String.raw`z_1\ne0`), "。同様に ",
+        math(String.raw`z_2=0`), " なら ", math(String.raw`z_1=0`),
+        "、", math(String.raw`z_3=0`), " なら ", math(String.raw`z_2=0`),
+        " となるので、", math(String.raw`z_2\ne0`), " かつ ",
+        math(String.raw`z_3\ne0`), " である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\cdot\varepsilon-\mathrm{dsq}(\xi,q)
+&=4\cdot\eta-\bigl((\alpha-q)\cdot(\alpha-q)+\beta\cdot\beta\bigr)
+&&(\because\ \varepsilon\cdot\varepsilon=4\cdot\eta\ (\mathbb{Q}\text{ の四則})\text{ と }\mathrm{dsq}(\xi,q)\text{ の表示})\\
+&=4\cdot\eta-\bigl((u+v)\cdot(u+v)+\beta\cdot\beta\bigr)
+&&(\because\ u+v=(\alpha-x_c)+(x_c-q)=\alpha-q\ (R\text{ の四則}))\\
+&=2\cdot\bigl(\eta-(u\cdot u+\beta\cdot\beta)\bigr)+2\cdot(\eta-v\cdot v)+\bigl(2\cdot(u\cdot u)+2\cdot(v\cdot v)-(u+v)\cdot(u+v)\bigr)+\beta\cdot\beta
+&&(\because\ R\text{ の分配則と同じ項をまとめる（}4=2+2\text{、}2:=1+1\text{）})\\
+&=2\cdot(c_1\cdot c_1)+2\cdot(c_2\cdot c_2)+g\cdot g+\beta\cdot\beta
+&&(\because\ c_1,c_2,g\text{ の取り方})\\
+&=(t\cdot c_1)\cdot(t\cdot c_1)+(t\cdot c_2)\cdot(t\cdot c_2)+g\cdot g+\beta\cdot\beta
+&&(\because\ t\cdot t=2\text{ と }R\text{ の積の可換則・結合則})\\
+&=z_1\cdot z_1+g\cdot g+\beta\cdot\beta
+&&(\because\ z_1\text{ の取り方})\\
+&=z_2\cdot z_2+\beta\cdot\beta
+&&(\because\ z_2\text{ の取り方})\\
+&=z_3\cdot z_3
+&&(\because\ z_3\text{ の取り方})
+\end{aligned}`),
+      paragraph([
+        "を得る。", math(String.raw`z_3\ne0`), " なので ",
+        ref("def_real_algebraic_strict_order"), " により ",
+        math(String.raw`\mathrm{dsq}(\xi,q)<_{R}\varepsilon\cdot\varepsilon`),
+        " である。", math(String.raw`2\le L`), " から ",
+        math(String.raw`1\le L`), " である（", math(String.raw`\mathbb{N}`),
+        " の順序）。したがって ", math(String.raw`L`), "、",
+        math(String.raw`\xi\in\mathcal{F}_{L}`), "、",
+        math(String.raw`q\in\mathbb{Q}_{>0}`), " が ",
+        ref("def_zero_pinching_predicate"),
+        " の存在量化の証人であり、", math(String.raw`\mathrm{Pinch}(\varepsilon)`),
+        " が成り立つ。全過程は ", math(String.raw`\mathbb{N}`), "、",
+        math(String.raw`\mathbb{Q}`), "、", math(String.raw`\overline{\mathbb{Q}}`),
+        " の部分体 ", math(String.raw`R`),
+        " の中で閉じ、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
