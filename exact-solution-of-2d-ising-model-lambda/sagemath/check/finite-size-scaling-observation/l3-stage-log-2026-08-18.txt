@@ -1,0 +1,31 @@
+[     0.0s] === run start 2026-08-18T14:36:39.496935
+[     0.0s] pari stack: 8 GiB (limit 16 GiB)
+[     0.0s] stage: partition polynomial built, degree 12
+[     0.1s] stage: roots isolated, count 12
+[     0.1s]   distance interval done for root 1 of 12
+[     0.1s]   distance interval done for root 2 of 12
+[     0.1s]   distance interval done for root 3 of 12
+[     0.1s]   distance interval done for root 4 of 12
+[     0.1s]   distance interval done for root 5 of 12
+[     0.1s]   distance interval done for root 6 of 12
+[     0.1s]   distance interval done for root 7 of 12
+[     0.1s]   distance interval done for root 8 of 12
+[     0.1s]   distance interval done for root 9 of 12
+[     0.1s]   distance interval done for root 10 of 12
+[     0.1s]   distance interval done for root 11 of 12
+[     0.1s]   distance interval done for root 12 of 12
+[     0.1s] stage: all distance intervals built
+[     0.1s] stage: candidate selected
+[     0.1s]   separation checked against root 1 of 12
+[     0.1s]   separation checked against root 2 of 12
+[     0.1s]   separation checked against root 3 of 12
+[     0.1s]   separation checked against root 4 of 12
+[     0.1s]   separation checked against root 5 of 12
+[     0.1s]   separation checked against root 6 of 12
+[     0.1s]   separation checked against root 7 of 12
+[     0.1s]   separation checked against root 8 of 12
+[     0.1s]   separation checked against root 9 of 12
+[     0.1s]   separation checked against root 10 of 12
+[     0.1s]   separation checked against root 11 of 12
+[     0.1s]   separation checked against root 12 of 12
+[     0.1s] stage: separation ok

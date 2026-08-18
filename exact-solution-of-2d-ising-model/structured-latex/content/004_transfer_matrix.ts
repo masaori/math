@@ -971,14 +971,21 @@ V_1
       paragraph([
         "Step 6: ",
         math(String.raw`V_2`),
-        " の表式。同様に、",
+        " の表式。",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_2`),
+        " の指数の中身を書き直すと、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
-&= K_2^*\sum_{m=1}^{M} i\,Z_m Y_m \quad (\because \text{Step 4}) \\
+&= K_2^*\sum_{m=1}^{M} \sigma_m^x
+\quad (\because\ \text{有限和を }\textstyle\sum\text{ 記法で書く}) \\
+&= K_2^*\sum_{m=1}^{M} i\,Z_m Y_m
+\quad (\because\ \text{Step 4 の直後に得た } \sigma_m^x = i\,Z_m Y_m \text{ を各項へ適用}) \\
 &= i K_2^*\left(Z_1Y_1 + Z_2Y_2 + \cdots + Z_MY_M\right)
-\quad (\because \text{スカラー倍の分配律})
+\quad (\because\ \text{スカラー倍の分配律と有限和を項ごとに書く})
 \end{aligned}`,
       ),
       paragraph([
