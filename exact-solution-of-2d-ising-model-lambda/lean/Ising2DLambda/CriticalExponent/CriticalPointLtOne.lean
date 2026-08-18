@@ -56,8 +56,8 @@ private theorem one_sub_criticalPoint_eq_square
     rw [← hsv]
     calc
       ((2 : base.carrier) - w * w) * (w * w + 1)
-          = (1 + 1) - (w * w) * (w * w) + w * w := by ring
-      _ = (1 + 1) - (1 + 1) + w * w := by rw [hsCarrier]
+          = 2 * (w * w) + 2 - (w * w) * (w * w) - w * w := by ring
+      _ = 2 * (w * w) + 2 - (1 + 1) - w * w := by rw [hsCarrier]
       _ = w * w := by ring
   refine ⟨w * v⁻¹, mul_ne_zero hw0 (inv_ne_zero hv0), ?_⟩
   change (1 : base.carrier) - xc = w * v⁻¹ * (w * v⁻¹)
