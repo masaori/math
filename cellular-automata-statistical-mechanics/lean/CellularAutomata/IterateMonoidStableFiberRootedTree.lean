@@ -445,6 +445,77 @@ theorem fiberTreeDepth_decrement_from_necessary_sufficient
   rw [hyEq, hRyEq]
   exact h
 
+/-- 深さの零特徴づけは必要十分版の特殊化である。 -/
+theorem fiberTreeDepth_eq_zero_iff_root_from_necessary_sufficient
+    (q : stableImage N f) {y : V → State} (hy : y ∈ stableFiber N f q) :
+    fiberTreeDepth N f y = 0 ↔ y = q.1 := by
+  rw [fiberTreeDepth_eq_rootDepth N f q hy]
+  exact NecSuf.IterateMonoidStableFiberRootedTree.rootDepth_eq_zero_iff_root
+    (onePeriodMap N f)
+    (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+    (fun q : stableImage N f => q.1)
+    (onePeriodMap_fixes_root N f)
+    (fun q z hz => onePeriodMap_reaches_root_necessary_sufficient N f q hz)
+    q y hy
+
+/-- 有向閉路の不存在は、必要十分版「階数が各辺で厳密に減る有向グラフには
+    閉路がない」の、階数を深さ `d_F` に取った特殊化である。 -/
+theorem fiberTree_no_cycle_from_necessary_sufficient (q : stableImage N f)
+    {n : ℕ} (hn : 0 < n) (p : ℕ → V → State) (hcycle : p n = p 0)
+    (hedge : ∀ i, i < n → (p i, p (i + 1)) ∈ fiberTreeEdgeTable N f q) :
+    False := by
+  apply NecSuf.IterateMonoidStableFiberRootedTree.no_cycle_of_rank
+    (fiberTreeDepth N f) hn p hcycle
+  intro i hi
+  obtain ⟨hmem, hne, hnext⟩ :=
+    (mem_fiberTreeEdgeTable_iff N f q (p i, p (i + 1))).1 (hedge i hi)
+  obtain ⟨hpos, hdec⟩ := fiberTreeDepth_decrement N f q hmem hne
+  have hpos' : 1 ≤ fiberTreeDepth N f (p i) := hpos
+  have hdec' : fiberTreeDepth N f (onePeriodMap N f (p i)) =
+      fiberTreeDepth N f (p i) - 1 := hdec
+  rw [show p (i + 1) = onePeriodMap N f (p i) from hnext, hdec']
+  omega
+
+/-- 必要十分版のファイバー表は具体版の安定ファイバー表に一致する。 -/
+theorem fiberTable_eq_stableFiberTable (q : stableImage N f) :
+    NecSuf.IterateMonoidStableFiberRootedTree.fiberTable
+      (fun q : stableImage N f => (stableFiber N f q : Set (V → State))) q =
+      stableFiberTable N f q := by
+  classical
+  ext y
+  simp [NecSuf.IterateMonoidStableFiberRootedTree.fiberTable,
+    mem_stableFiberTable_iff]
+
+/-- 必要十分版の辺表は具体版の根付き辺集合の表に一致する。 -/
+theorem edgeTable_eq_fiberTreeEdgeTable (q : stableImage N f) :
+    NecSuf.IterateMonoidStableFiberRootedTree.edgeTable (onePeriodMap N f)
+      (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+      (fun q : stableImage N f => q.1) q =
+      fiberTreeEdgeTable N f q := by
+  classical
+  ext e
+  rw [mem_fiberTreeEdgeTable_iff]
+  obtain ⟨a, b⟩ := e
+  simp only [NecSuf.IterateMonoidStableFiberRootedTree.edgeTable,
+    Finset.mem_image, Finset.mem_filter, Finset.mem_univ, true_and,
+    Prod.mk.injEq]
+  constructor
+  · rintro ⟨y, ⟨hymem, hyne⟩, rfl, rfl⟩
+    exact ⟨hymem, hyne, rfl⟩
+  · rintro ⟨hmem, hne, hb⟩
+    exact ⟨a, ⟨hmem, hne⟩, rfl, hb.symm⟩
+
+/-- 辺数の等式は必要十分版の特殊化である。 -/
+theorem fiberTreeEdgeTable_card_from_necessary_sufficient (q : stableImage N f) :
+    (fiberTreeEdgeTable N f q).card = (stableFiberTable N f q).card - 1 := by
+  rw [← edgeTable_eq_fiberTreeEdgeTable N f q,
+    ← fiberTable_eq_stableFiberTable N f q]
+  exact NecSuf.IterateMonoidStableFiberRootedTree.edgeTable_card
+    (onePeriodMap N f)
+    (fun q : stableImage N f => (stableFiber N f q : Set (V → State)))
+    (fun q : stableImage N f => q.1) q
+    (representative_mem_stableFiber N f q)
+
 end NecessarySufficientDerivation
 
 end CellularAutomata.IterateMonoidStableFiberRootedTree
