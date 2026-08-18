@@ -224,6 +224,7 @@ Q(x - Qx)
 &= Qx - Qx
 &&(\because\ Q^2 = Q)\\
 &= 0
+&&(\because\ \text{同じ項の差は零元（加法逆元）})
 \end{aligned}`),
       paragraph([
         "よって ",
