@@ -1,0 +1,74 @@
+[     0.0s] === run start 2026-08-18T15:40:02.597883
+[     1.9s] stage: partition polynomial built, degree 32
+[     2.0s] stage: ZZ[x] factorization, (degree, multiplicity) = [(0, 1), (32, 1)]
+[     2.0s] stage: roots isolated, count 32
+[     2.1s]   distance interval done for root 1 of 32
+[     2.1s]   distance interval done for root 2 of 32
+[     2.1s]   distance interval done for root 3 of 32
+[     2.1s]   distance interval done for root 4 of 32
+[     2.1s]   distance interval done for root 5 of 32
+[     2.1s]   distance interval done for root 6 of 32
+[     2.1s]   distance interval done for root 7 of 32
+[     2.1s]   distance interval done for root 8 of 32
+[     2.1s]   distance interval done for root 9 of 32
+[     2.1s]   distance interval done for root 10 of 32
+[     2.1s]   distance interval done for root 11 of 32
+[     2.1s]   distance interval done for root 12 of 32
+[     2.1s]   distance interval done for root 13 of 32
+[     2.1s]   distance interval done for root 14 of 32
+[     2.1s]   distance interval done for root 15 of 32
+[     2.1s]   distance interval done for root 16 of 32
+[     2.1s]   distance interval done for root 17 of 32
+[     2.1s]   distance interval done for root 18 of 32
+[     2.1s]   distance interval done for root 19 of 32
+[     2.1s]   distance interval done for root 20 of 32
+[     2.1s]   distance interval done for root 21 of 32
+[     2.1s]   distance interval done for root 22 of 32
+[     2.1s]   distance interval done for root 23 of 32
+[     2.1s]   distance interval done for root 24 of 32
+[     2.1s]   distance interval done for root 25 of 32
+[     2.1s]   distance interval done for root 26 of 32
+[     2.1s]   distance interval done for root 27 of 32
+[     2.1s]   distance interval done for root 28 of 32
+[     2.1s]   distance interval done for root 29 of 32
+[     2.1s]   distance interval done for root 30 of 32
+[     2.1s]   distance interval done for root 31 of 32
+[     2.1s]   distance interval done for root 32 of 32
+[     2.1s] stage: all distance intervals built
+[     2.1s] stage: candidate selected
+[     2.1s]   separation checked against root 1 of 32
+[     2.1s]   separation checked against root 2 of 32
+[     2.1s]   separation checked against root 3 of 32
+[     2.1s]   separation checked against root 4 of 32
+[     2.1s]   separation checked against root 5 of 32
+[     2.1s]   separation checked against root 6 of 32
+[     2.1s]   separation checked against root 7 of 32
+[     2.1s]   separation checked against root 8 of 32
+[     2.1s]   separation checked against root 9 of 32
+[     2.1s]   separation checked against root 10 of 32
+[     2.1s]   separation checked against root 11 of 32
+[     2.1s]   separation checked against root 12 of 32
+[     2.1s]   separation checked against root 13 of 32
+[     2.1s]   separation checked against root 14 of 32
+[     2.1s]   separation checked against root 15 of 32
+[     2.1s]   separation checked against root 16 of 32
+[     2.1s]   separation checked against root 17 of 32
+[     2.1s]   separation checked against root 18 of 32
+[     2.1s]   separation checked against root 19 of 32
+[     2.1s]   separation checked against root 20 of 32
+[     2.1s]   separation checked against root 21 of 32
+[     2.1s]   separation checked against root 22 of 32
+[     2.1s]   separation checked against root 23 of 32
+[     2.1s]   separation checked against root 24 of 32
+[     2.1s]   separation checked against root 25 of 32
+[     2.1s]   separation checked against root 26 of 32
+[     2.1s]   separation checked against root 27 of 32
+[     2.1s]   separation checked against root 28 of 32
+[     2.1s]   separation checked against root 29 of 32
+[     2.1s]   separation checked against root 30 of 32
+[     2.1s]   separation checked against root 31 of 32
+[     2.1s]   separation checked against root 32 of 32
+[     2.1s] stage: separation ok (candidate and its conjugate below all others)
+[     2.1s] d_1(4) interval = 0.035992729598767791571101530329123327473842061903869304133732827131987492448705?
+[     2.2s] a_rho(4) in RealBallField(128) = [1.1990376682431301030769390940323338272 +/- 6.01e-38]
+[     2.2s] === run complete
