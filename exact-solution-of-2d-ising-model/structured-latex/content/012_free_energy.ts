@@ -551,14 +551,35 @@ u
         math(String.raw`\delta \in [0,1]`),
         " より ",
         math(String.raw`0 \leq 1-\delta \leq 1`),
-        " なので、",
+        " である。",
         math(String.raw`2\pi/M > 0`),
-        " を掛けて ",
-        math(String.raw`2\pi(\mu-1)/M`),
-        " を足すと",
+        " を用いると、準備として",
       ]),
       displayMath(
-        String.raw`\frac{2\pi(\mu-1)}{M} \leq \frac{2\pi(\mu-\delta)}{M} \leq \frac{2\pi\mu}{M}`,
+        String.raw`\begin{aligned}
+0&\leq\frac{2\pi}{M}(1-\delta)
+&&\left(\because\ 0\leq1-\delta\text{ の両辺に正の }2\pi/M\text{ を掛ける}\right),\\
+\frac{2\pi}{M}(1-\delta)&\leq\frac{2\pi}{M}
+&&\left(\because\ 1-\delta\leq1\text{ の両辺に正の }2\pi/M\text{ を掛ける}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。これらを使い、代表点の両側を一続きに評価する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{2\pi(\mu-1)}{M}
+&=\frac{2\pi(\mu-1)}{M}+0
+&&\left(\because\ \mathbb{R}\text{ の加法単位元}\right)\\
+&\leq\frac{2\pi(\mu-1)}{M}+\frac{2\pi}{M}(1-\delta)
+&&\left(\because\ \text{準備の第一の不等式の両辺に }2\pi(\mu-1)/M\text{ を足す}\right)\\
+&=\frac{2\pi(\mu-\delta)}{M}
+&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
+&\leq\frac{2\pi(\mu-1)}{M}+\frac{2\pi}{M}
+&&\left(\because\ \text{準備の第二の不等式の両辺に }2\pi(\mu-1)/M\text{ を足す}\right)\\
+&=\frac{2\pi\mu}{M}
+&&\left(\because\ \mathbb{R}\text{ の四則}\right).
+\end{aligned}`,
       ),
       paragraph([
         "すなわち ",
