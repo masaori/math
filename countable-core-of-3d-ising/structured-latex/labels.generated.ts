@@ -86,6 +86,7 @@ export const ALL_LABELS = [
   "def_structural_configuration",
   "def_structural_multiplicity",
   "def_symmetrized_limit_quantity",
+  "def_tail_equivalence_of_finite_box_sequences",
   "def_two_dimensional_boundary_response_polynomial",
   "remark_boundary_response_only_outer_count_survives",
   "remark_null_model_positioning",
