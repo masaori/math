@@ -1890,4 +1890,99 @@ a(C_F)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_face_boundary_space_pushforward_over_f2",
+    kind: "theorem",
+    title: { text: "商の塔における面境界空間の押し出し" },
+    labels: ["theorem_quotient_tower_face_boundary_space_pushforward_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-face-boundary-space-pushforward-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_face_boundary_space_over_f2"),
+        " により、細段と粗段の面境界空間をそれぞれ ",
+        math(String.raw`\operatorname{Boundary}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " と ",
+        math(String.raw`\operatorname{Boundary}_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)`),
+        " と書く。",
+        ref("theorem_quotient_tower_second_boundary_pushforward_commutativity_over_f2"),
+        " の仮定の下で、",
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の辺係数押し出し写像は細段面境界空間を粗段面境界空間へ送る。すなわち",
+      ]),
+      displayMath(String.raw`\overline\kappa_{E,!}
+\left(
+  \operatorname{Boundary}_1
+  \left(
+    \mathcal C^{\mathrm{fine}};\mathbb F_2
+  \right)
+\right)
+\subseteq
+\operatorname{Boundary}_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right).`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`b\in\operatorname{Boundary}_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " を固定する。",
+        ref("def_face_boundary_space_over_f2"),
+        " より、ある細段面係数写像 ",
+        math(String.raw`a\in\mathbb F_2^{\mathcal C_F^{\mathrm{fine}}}`),
+        " が存在して、",
+      ]),
+      displayMath(String.raw`b
+=
+\partial_2^{\mathrm{fine}}(a).`),
+      paragraph([
+        ref("theorem_quotient_tower_second_boundary_pushforward_commutativity_over_f2"),
+        " をこの ",
+        math(String.raw`a`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{E,!}(b)
+&=
+\overline\kappa_{E,!}
+\left(
+  \partial_2^{\mathrm{fine}}(a)
+\right)
+&&\bigl(\because\ b=\partial_2^{\mathrm{fine}}(a)\bigr)\\
+&=
+\partial_2^{\mathrm{coarse}}
+\left(
+  \overline\kappa_{F,!}(a)
+\right)
+&&\bigl(\because\ \text{二次境界写像と押し出しの可換性}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_face_coefficient_pushforward_over_f2"),
+        " より ",
+        math(String.raw`\overline\kappa_{F,!}(a)\in\mathbb F_2^{\mathcal C_F^{\mathrm{coarse}}}`),
+        " である。したがって ",
+        ref("def_face_boundary_space_over_f2"),
+        " より、",
+      ]),
+      displayMath(String.raw`\overline\kappa_{E,!}(b)
+\in
+\operatorname{im}
+\left(
+  \partial_2^{\mathrm{coarse}}
+\right)
+=
+\operatorname{Boundary}_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right).`),
+      paragraph([
+        "任意の細段面境界 ",
+        math(String.raw`b`),
+        " で像の帰属を示したので、包含が成り立つ。全てのセル集合、係数写像、像、ファイバー、和は有限または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
