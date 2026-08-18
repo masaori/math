@@ -62,9 +62,12 @@ theorem pinch_bound_necSuf {K : Type*} [Field K]
   refine ⟨z3, hz30, ?_⟩
   -- 本文の式変形の鎖と 1 対 1。
   calc ((1 + 1) * (1 + 1)) * eta - ((alpha - q) * (alpha - q) + beta * beta)
-      -- 4·η − ((u+v)² + β²) への書き換え（u+v = α−q は K の四則）と、
-      -- 分配則で同じ項をまとめる二段を、恒等式として一度に検査する。
-      = (1 + 1) * (eta - ((alpha - xc) * (alpha - xc) + beta * beta))
+      -- 本文: u+v = (α−xc)+(xc−q) = α−q（K の四則）。
+      = ((1 + 1) * (1 + 1)) * eta
+          - ((((alpha - xc) + (xc - q)) * ((alpha - xc) + (xc - q))) + beta * beta) := by
+            ring
+    -- 本文: 分配則と同じ項の整理。直前の書き換えと一度の `ring` に畳まない。
+    _ = (1 + 1) * (eta - ((alpha - xc) * (alpha - xc) + beta * beta))
           + (1 + 1) * (eta - (xc - q) * (xc - q))
           + (((1 + 1) * ((alpha - xc) * (alpha - xc))
               + (1 + 1) * ((xc - q) * (xc - q)))
