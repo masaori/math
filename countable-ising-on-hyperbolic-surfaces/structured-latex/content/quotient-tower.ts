@@ -1653,4 +1653,241 @@ a(C_F)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_second_boundary_pushforward_commutativity_over_f2",
+    kind: "theorem",
+    title: { text: "商の塔における F_2 二次境界写像と押し出しの可換性" },
+    labels: ["theorem_quotient_tower_second_boundary_pushforward_commutativity_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-second-boundary-pushforward-commutativity-over-f2"],
+    statement: [
+      paragraph([
+        "細段と粗段の有限面セル集合をそれぞれ ",
+        math(String.raw`\mathcal C_F^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`\mathcal C_F^{\mathrm{coarse}}`),
+        "、有限辺セル集合をそれぞれ ",
+        math(String.raw`\mathcal C_E^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`\mathcal C_E^{\mathrm{coarse}}`),
+        " とする。二段の向き付き面境界語から ",
+        ref("def_second_boundary_matrix_over_f2"),
+        " により定まる二次境界写像を ",
+        math(String.raw`\partial_2^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`\partial_2^{\mathrm{coarse}}`),
+        " と書く。",
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導面セル写像と誘導辺セル写像を ",
+        math(String.raw`\overline\kappa_F`),
+        "、",
+        math(String.raw`\overline\kappa_E`),
+        " とする。さらに、各細段面 ",
+        math(String.raw`C_F\in\mathcal C_F^{\mathrm{fine}}`),
+        " と、その像である粗段面 ",
+        math(String.raw`D_F=\overline\kappa_F(C_F)`),
+        " に対し、",
+        ref("def_quotient_tower_induced_face_position_map"),
+        " の位置写像の各ファイバーの元数が奇数であると仮定する。すなわち、全ての ",
+        math(String.raw`j\in P_{D_F}^{\mathrm{coarse}}`),
+        " について",
+      ]),
+      displayMath(String.raw`\sum_{\substack{
+  i\in P_{C_F}^{\mathrm{fine}}\\
+  \overline\kappa_{P,C_F}(i)=j
+}}
+1_{\mathbb F_2}
+=
+1_{\mathbb F_2}.`),
+      paragraph([
+        ref("def_quotient_tower_face_coefficient_pushforward_over_f2"),
+        " と ",
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の押し出し写像に対し、次の二つの合成は等しい。",
+      ]),
+      displayMath(String.raw`\partial_2^{\mathrm{coarse}}
+\circ
+\overline\kappa_{F,!}
+=
+\overline\kappa_{E,!}
+\circ
+\partial_2^{\mathrm{fine}}
+:
+\mathbb F_2^{\mathcal C_F^{\mathrm{fine}}}
+\longrightarrow
+\mathbb F_2^{\mathcal C_E^{\mathrm{coarse}}}.`),
+    ],
+    proof: [
+      paragraph([
+        "任意の細段面係数写像 ",
+        math(String.raw`a\in\mathbb F_2^{\mathcal C_F^{\mathrm{fine}}}`),
+        " と粗段辺セル ",
+        math(String.raw`D_E\in\mathcal C_E^{\mathrm{coarse}}`),
+        " を固定する。",
+        ref("def_second_boundary_matrix_over_f2"),
+        " と ",
+        ref("def_quotient_tower_face_coefficient_pushforward_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(
+  \partial_2^{\mathrm{coarse}}
+  \left(
+    \overline\kappa_{F,!}(a)
+  \right)
+\right)(D_E)
+&=
+\sum_{D_F\in\mathcal C_F^{\mathrm{coarse}}}
+\left(
+  \sum_{\substack{
+    j\in P_{D_F}^{\mathrm{coarse}}\\
+    e_{D_F,j}=D_E
+  }}
+  1_{\mathbb F_2}
+\right)
+\left(
+  \sum_{\substack{
+    C_F\in\mathcal C_F^{\mathrm{fine}}\\
+    \overline\kappa_F(C_F)=D_F
+  }}
+  a(C_F)
+\right).
+\end{aligned}`),
+      paragraph(["有限和を誘導面セル写像のファイバーごとにまとめ直すと、"]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{D_F\in\mathcal C_F^{\mathrm{coarse}}}
+\left(
+  \sum_{\substack{
+    j\in P_{D_F}^{\mathrm{coarse}}\\
+    e_{D_F,j}=D_E
+  }}
+  1_{\mathbb F_2}
+\right)
+\left(
+  \sum_{\substack{
+    C_F\in\mathcal C_F^{\mathrm{fine}}\\
+    \overline\kappa_F(C_F)=D_F
+  }}
+  a(C_F)
+\right)\\
+&=
+\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    j\in P_{\overline\kappa_F(C_F)}^{\mathrm{coarse}}\\
+    e_{\overline\kappa_F(C_F),j}=D_E
+  }}
+  1_{\mathbb F_2}
+\right)a(C_F)
+\qquad
+\bigl(\because\ \text{有限和の添字付け替え}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_quotient_tower_oriented_face_boundary_word_preservation"),
+        " と位置写像の奇数ファイバー条件より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    j\in P_{\overline\kappa_F(C_F)}^{\mathrm{coarse}}\\
+    e_{\overline\kappa_F(C_F),j}=D_E
+  }}
+  1_{\mathbb F_2}
+\right)a(C_F)\\
+&=
+\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    i\in P_{C_F}^{\mathrm{fine}}\\
+    \overline\kappa_E(e_{C_F,i})=D_E
+  }}
+  1_{\mathbb F_2}
+\right)a(C_F)
+\qquad
+\bigl(\because\ \text{向き付き境界語の辺成分保存と奇数ファイバー条件}\bigr).
+\end{aligned}`),
+      paragraph(["有限和を誘導辺セル写像のファイバーごとにまとめ直すと、"]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    i\in P_{C_F}^{\mathrm{fine}}\\
+    \overline\kappa_E(e_{C_F,i})=D_E
+  }}
+  1_{\mathbb F_2}
+\right)a(C_F)\\
+&=
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    i\in P_{C_F}^{\mathrm{fine}}\\
+    e_{C_F,i}=C_E
+  }}
+  1_{\mathbb F_2}
+\right)a(C_F)
+\qquad
+\bigl(\because\ \text{有限集合のファイバー分割と有限和の交換}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_second_boundary_matrix_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    i\in P_{C_F}^{\mathrm{fine}}\\
+    e_{C_F,i}=C_E
+  }}
+  1_{\mathbb F_2}
+\right)a(C_F)\\
+&=
+\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+\left(
+  \partial_2^{\mathrm{fine}}(a)
+\right)(C_E).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{\substack{
+  C_E\in\mathcal C_E^{\mathrm{fine}}\\
+  \overline\kappa_E(C_E)=D_E
+}}
+\left(
+  \partial_2^{\mathrm{fine}}(a)
+\right)(C_E)\\
+&=
+\left(
+  \overline\kappa_{E,!}
+  \left(
+    \partial_2^{\mathrm{fine}}(a)
+  \right)
+\right)(D_E).
+\end{aligned}`),
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in\mathbb F_2^{\mathcal C_F^{\mathrm{fine}}}`),
+        " と ",
+        math(String.raw`D_E\in\mathcal C_E^{\mathrm{coarse}}`),
+        " で両成分が一致したので、二つの合成写像は等しい。奇数ファイバー条件を外すと、同じ粗段位置へ移る細段位置が偶数個の場合に右辺の係数が消えるため、この条件は境界語の点ごとの保存だけからは省けない。全てのセル集合、境界位置集合、ファイバー、係数写像、和は有限または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
