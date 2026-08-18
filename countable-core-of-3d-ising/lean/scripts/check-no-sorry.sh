@@ -292,6 +292,7 @@ targets=(
   Ising3DCut.LimitQuantity.partitionPolynomial_three_eval_one
   Ising3DCut.LimitQuantity.partitionValue_invariant_differs_at_two
   Ising3DCut.LimitQuantity.partition_value_does_not_determine_limit_quantity
+  Ising3DCut.LimitQuantity.partition_value_does_not_determine_limit_quantity_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
