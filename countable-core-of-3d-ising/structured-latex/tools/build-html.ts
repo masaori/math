@@ -252,6 +252,42 @@ function versionLine(): string {
   return `版 ${commit}${dirty}${at === "" ? "" : `・${at}`}`;
 }
 
+// --- 進捗の要約 --------------------------------------------------------------
+
+/**
+ * 論文の冒頭へ出す進捗の要約。正本は `docs/tasks/進捗の要約.md`（ユーザー指示、2026-08-18）。
+ *
+ * 読む人が最初に「どこまで済んで、いま何を試していて、次に何を試すのか」を掴めるようにする。
+ * **書式が外れていたら生成を失敗させる**（黙って空にすると、更新が止まったことに誰も気付けない）。
+ */
+function renderProgressSummary(): string {
+  const path = join(structuredLatexDir, "..", "docs", "tasks", "進捗の要約.md");
+  const lines = readFileSync(path, "utf8").split("\n");
+  let updated = "";
+  const groups: { label: string; items: string[] }[] = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (line === "" || line.startsWith("#") || line.startsWith("**") || line.startsWith("`")) continue;
+    if (line.startsWith("更新:")) { updated = line.slice("更新:".length).trim(); continue; }
+    if (line.startsWith("見出し:")) { groups.push({ label: line.slice("見出し:".length).trim(), items: [] }); continue; }
+    if (line.startsWith("- ")) {
+      const group = groups[groups.length - 1];
+      if (group === undefined) continue; // 書き方の説明の箇条書き（最初の「見出し:」より前）
+      group.items.push(line.slice(2).trim());
+      continue;
+    }
+    throw new Error(`進捗の要約.md に解釈できない行がある: ${JSON.stringify(raw)}`);
+  }
+  if (updated === "") throw new Error("進捗の要約.md に「更新: <日付>」の行が無い");
+  if (groups.length === 0) throw new Error("進捗の要約.md に「見出し: <文字列>」の組が無い");
+  const empty = groups.find((g) => g.items.length === 0);
+  if (empty !== undefined) throw new Error(`進捗の要約.md の「${empty.label}」に箇条書きが無い`);
+  const body = groups.map((g) =>
+    `<h3>${escapeHtml(g.label)}</h3><ul>${g.items.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ul>`,
+  ).join("");
+  return `<section class="progress"><p class="progress-head">進捗の要約（${escapeHtml(updated)} 現在）</p>${body}</section>`;
+}
+
 // --- 組み立て ----------------------------------------------------------------
 
 /** KaTeX の CSS。フォントは woff2 だけを data URI で埋め、それ以外の書式は捨てる。 */
@@ -300,6 +336,11 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .display { overflow-x:auto; overflow-y:hidden; padding:4px 0; }
 .todo { color:#b26a00; }
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
+.progress { margin:0 0 40px; padding:14px 18px; background:var(--panel); border:1px solid var(--line); border-radius:6px; }
+.progress .progress-head { margin:0 0 6px; font-weight:600; }
+.progress h3 { font-size:.95rem; margin:14px 0 4px; color:var(--muted); }
+.progress ul { margin:0; }
+.progress li { margin:.3em 0; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
 ${THEOREM_STANDING_CSS}
@@ -310,6 +351,7 @@ ${desktopHtml}
 <main class="document">
 <h1>3 次元 Ising 模型の可算コアを同定する</h1>
 <p class="version">${escapeHtml(versionLine())}</p>
+${renderProgressSummary()}
 ${body.join("\n")}
 <script>${readFileSync(join(katexDist, "katex.min.js"), "utf8")}</script>
 <script>
