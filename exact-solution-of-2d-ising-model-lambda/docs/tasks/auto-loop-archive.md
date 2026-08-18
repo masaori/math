@@ -12818,3 +12818,9 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 ### 式変形の書き方の統一（tick 427）
 
 - 2026-08-18（tick 427）: 姉妹側の可逆行列による共役の証明（`009_eigenvalues_of_V.ts`）で、$E\sigma_k^aE^{-1}$ の四場合を「同様に」と結果だけで済ませていた箇所を、偶数番目では全因子との可換性、奇数番目では第 $k$ 因子だけを残した後のパウリ行列の積として、一続きの式変形と行末根拠へ開いた（内容・参照は不変）。
+
+## tick 433 で台帳から移した記録（tick 428）
+
+### レビュー記録（tick 428）
+
+- 2026-08-18（tick 428）: tick 427 の「検証水準の検算」の観察ノート `note_def_finite_size_scaling_reading_exact_observation`・`sagemath/check/finite-size-scaling-observation/overview.md`・`check.sage` を突き合わせた。$Z_2$ の因数分解、先頭零点と $d_1(2)$ の最小多項式・次数・判別式、$a_\rho(2)$ の 128 bit ball、$L=3$ の打ち切りの記録が三者で一致し、実対数への脱出の断りも overview にある。修正なし。本文末尾とセクション表の食い違いなし。
