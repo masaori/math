@@ -4,6 +4,12 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 420 は、「臨界点は一より小さい」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_critical_point_lt_one`（正値性の直後）: 第 5 条件の $s=w^2$ と `claim_real_closed_sum_of_two_squares_is_square` から $s+1=w^2+1^2=v^2$、`claim_real_closed_sum_of_two_squares_zero` から $v\ne0$。$1-x_c=2-s=((2-s)(s+1))(v^{-1})^2=s\cdot(v^{-1})^2=(w\cdot v^{-1})^2$ と変形し、$u:=w\cdot v^{-1}\ne0$（体は零因子を持たない）から $x_c<_R1$。この上界は次の有理等分で上端の等分点が下側候補に入らないことの根拠になるので「何も言っていない主張」ではない。
+SageMath `check/critical-point-lt-one/`（`AA` 厳密）、Lean 具体版 `CriticalExponent/CriticalPointLtOne.lean`、必要十分版 `NecSuf/CriticalExponent/CriticalPointLtOne.lean`（体の四則、$w\ne0$、平方和の平方表示と零性だけ。$w\ne0$ は証人 $w v^{-1}$ の非零性に要るので落とせない）、導出版。
+レビューで、tick 419 の Lean 定理 3 件が `check-no-sorry.sh` の対象配列へ未登録（台帳の「sorry 検査 1457 件」は実態 1439 件と食い違い）と分かり、今 tick の 3 件と併せて登録した。sorry 検査 1445 件・check 510 ブロック・linkage 291 件・PDF 276 ページ通過。
+次は「臨界点を挟む有理等分区間」。$N\ge1$ に対し $k/N\le_Rx_c<_R(k+1)/N$ なる $k\in\mathbb N$（$k+1\le N$）の存在。集合 $\{k\le N:\ \iota(k/N)\le_Rx_c\}$ の最大元を取る。$0$ の所属は正値性（tick 419）、$N$ の非所属は今 tick の上界と推移律・三分法。有理数の $R$ への埋め込み $\iota$ の記号が本文で確立しているか着手時に確認すること。
+
 2026-08-18 の tick 419 は、「臨界点の正値性」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_point_positive`: 第 5 条件の $s=w^2$ と `claim_real_closed_sum_of_two_squares_is_square` から $s+1=w^2+1^2=v^2$、`claim_real_closed_sum_of_two_squares_zero` から $v\ne0$、$(s-1)(s+1)=s^2-1=1$ から $x_c=s-1=(v^{-1})^2$ を得て $0<_Rx_c$ とした。この主張は次の有理等分で零元を下側の候補に入れるために直接引くので「何も言っていない主張」ではない。
 SageMath `check/critical-point-positive/`（`AA` 厳密）、Lean 具体版 `CriticalExponent/CriticalPointPositive.lean`、必要十分版 `NecSuf/CriticalExponent/CriticalPointPositive.lean`（体の四則、平方和の平方表示と零性だけ）、導出版。sorry 検査 1457 件・check 509 ブロック・linkage 290 件・PDF 275 ページ通過。

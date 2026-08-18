@@ -51449,6 +51449,103 @@ x_c
   },
 
   {
+    id: "critical_exponent_claim_critical_point_lt_one",
+    kind: "claim",
+    title: { text: "臨界点は一より小さい" },
+    labels: ["claim_critical_point_lt_one"],
+    habitat: "Qbar",
+    lean: [
+      "Ising2DLambda.CriticalExponent.criticalPoint_lt_one",
+      "Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_lt_one_necSuf",
+      "Ising2DLambda.CriticalExponent.criticalPoint_lt_one_from_necSuf",
+    ],
+    verification: ["sagemath/check/critical-point-lt-one"],
+    statement: [
+      paragraph([
+        math(String.raw`s\in\overline{\mathbb{Q}}`), " は ",
+        math(String.raw`s\cdot s=2`), " を満たす固定済みの元とし（",
+        ref("claim_sqrt_two_exists"), "）、臨界点を ",
+        math(String.raw`x_c=-1+s\in R`), "（", ref("def_critical_point"), "、",
+        ref("claim_critical_point_mem_real_closed"), "）とする。このとき",
+      ]),
+      displayMath(String.raw`x_c<_{R}1`),
+      paragraph([
+        "である（", math(String.raw`<_{R}`), " は ",
+        ref("def_real_algebraic_strict_order"), "）。この上界は、のちに ",
+        math(String.raw`[0,1]`), " の有理等分点で臨界点を挟むとき、",
+        "上端の等分点が下側の候補集合に入らないことを保証する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_real_closed_subfield"), " の第 5 条件により、ある零元でない ",
+        math(String.raw`w\in R`), " が存在して ",
+        math(String.raw`s=w\cdot w`), " である。さらに ",
+        ref("claim_real_closed_sum_of_two_squares_is_square"), " を ",
+        math(String.raw`w,1\in R`), " へ適用すると、ある ",
+        math(String.raw`v\in R`), " が存在して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s+1
+&=w\cdot w+1\cdot1
+&&(\because\ \blkref{def_real_closed_subfield}\text{ の第 5 条件と }R\text{ の四則})\\
+&=v\cdot v
+&&(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square})
+\end{aligned}`),
+      paragraph([
+        "である。この ", math(String.raw`v`), " は零元でない。実際、",
+        math(String.raw`v=0`), " ならば上の等式から ",
+        math(String.raw`w\cdot w+1\cdot1=0`), " となる。すると ",
+        ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
+        math(String.raw`1=0`), " となり、", math(String.raw`R`),
+        " が体であることに反する。したがって ", math(String.raw`v^{-1}\in R`),
+        " が存在し、", math(String.raw`v^{-1}\ne0`), " である。",
+        math(String.raw`u:=w\cdot v^{-1}\in R`), " と置くと、",
+        math(String.raw`w\ne0`), " かつ ", math(String.raw`v^{-1}\ne0`),
+        " であり、体 ", math(String.raw`R`),
+        " は零因子を持たないから ", math(String.raw`u\ne0`), " である。",
+      ]),
+      paragraph([
+        math(String.raw`s\cdot s=2`), " と上の平方表示を使うと、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1-x_c
+&=1-(-1+s)
+&&(\because\ \blkref{def_critical_point})\\
+&=2-s
+&&(\because\ R\text{ の四則})\\
+&=(2-s)\cdot1
+&&(\because\ R\text{ の乗法単位元})\\
+&=(2-s)\cdot\bigl((s+1)\cdot(v^{-1}\cdot v^{-1})\bigr)
+&&(\because\ s+1=v\cdot v\text{、}v\ne0\text{ と }R\text{ の逆元})\\
+&=((2-s)\cdot(s+1))\cdot(v^{-1}\cdot v^{-1})
+&&(\because\ R\text{ の積の結合則})\\
+&=(2\cdot s+2-s\cdot s-s)\cdot(v^{-1}\cdot v^{-1})
+&&(\because\ R\text{ の分配則（展開）})\\
+&=(2\cdot s+2-2-s)\cdot(v^{-1}\cdot v^{-1})
+&&(\because\ s\cdot s=2)\\
+&=s\cdot(v^{-1}\cdot v^{-1})
+&&(\because\ R\text{ の加法})\\
+&=(w\cdot w)\cdot(v^{-1}\cdot v^{-1})
+&&(\because\ \blkref{def_real_closed_subfield}\text{ の第 5 条件})\\
+&=(w\cdot v^{-1})\cdot(w\cdot v^{-1})
+&&(\because\ R\text{ の積の可換則と結合則})\\
+&=u\cdot u
+&&(\because\ u\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "を得る。ゆえに差 ", math(String.raw`1-x_c`), " は零元でない ",
+        math(String.raw`u`), " の平方であるから、",
+        ref("def_real_algebraic_strict_order"), " により ",
+        math(String.raw`x_c<_{R}1`), " である。全過程は ",
+        math(String.raw`\overline{\mathbb{Q}}`), " の部分体 ",
+        math(String.raw`R`), " の四則と有限個の存在証人だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+
+  {
     id: "main_text_remark_planned_chapters",
     kind: "remark",
     title: { text: "この先に書くこと" },
