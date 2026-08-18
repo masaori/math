@@ -408,8 +408,16 @@ u
         String.raw`\begin{aligned}
 &c^{N} \leq Z \leq 2^{M}c^{N}
 &&\left(\because\ \text{分配関数の挟み込み}\right)\\
-\Longrightarrow\ &N\log c \leq \log Z \leq M\log 2 + N\log c
-&&\left(\because\ \log\text{ は }\mathbb{R}_{>0}\text{ 上で狭義単調増加、}\log(ab)=\log a+\log b,\ \log(c^{N})=N\log c,\ \log(2^{M})=M\log 2\right)\\
+\Longrightarrow\ &\log(c^{N}) \leq \log Z \leq \log(2^{M}c^{N})
+&&\left(\because\ \log\text{ は }\mathbb{R}_{>0}\text{ 上で狭義単調増加}\right)\\
+\Longrightarrow\ &N\log c \leq \log Z \leq \log(2^{M}c^{N})
+&&\left(\because\ \log(c^{N})=N\log c\right)\\
+\Longrightarrow\ &N\log c \leq \log Z \leq \log(2^{M})+\log(c^{N})
+&&\left(\because\ \log(ab)=\log a+\log b\right)\\
+\Longrightarrow\ &N\log c \leq \log Z \leq M\log 2+\log(c^{N})
+&&\left(\because\ \log(2^{M})=M\log 2\right)\\
+\Longrightarrow\ &N\log c \leq \log Z \leq M\log 2+N\log c
+&&\left(\because\ \log(c^{N})=N\log c\right)\\
 \Longrightarrow\ &\frac{1}{M}\log c \leq \frac{1}{MN}\log Z \leq \frac{1}{M}\log c + \frac{\log 2}{N}
 &&\left(\because\ \text{各辺を }MN>0\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
 \Longrightarrow\ &\left|\frac{1}{MN}\log Z - \frac{1}{M}\log c\right| \leq \frac{\log 2}{N}
