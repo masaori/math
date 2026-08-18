@@ -832,4 +832,226 @@ s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_oriented_face_boundary_word_preservation",
+    kind: "theorem",
+    title: { text: "商の塔における剰余類面の向き付き境界語の保存" },
+    labels: ["theorem_quotient_tower_oriented_face_boundary_word_preservation"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-oriented-face-boundary-word-preservation"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_induced_face_position_map"),
+        " の面位置写像と、",
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        " の整合する辺代表元選択写像、および ",
+        ref("def_finite_quotient_oriented_coset_face_boundary_word"),
+        " の二段の向き付き面境界語を取る。細段面剰余類 ",
+        math(String.raw`C_F\in Q_{\mathrm{fine}}/H_F^{\mathrm{fine}}`),
+        " の像を粗段面剰余類 ",
+        math(String.raw`D_F\in Q_{\mathrm{coarse}}/H_F^{\mathrm{coarse}}`),
+        " とし、対応する面を ",
+        math(String.raw`f_{\mathrm{fine}}`),
+        "、",
+        math(String.raw`f_{\mathrm{coarse}}`),
+        " と書く。辺セル成分へ ",
+        math(String.raw`\overline\kappa_E`),
+        " を作用させ、形式的向きラベルを変えない積写像を ",
+        math(String.raw`\overline\kappa_E\times\operatorname{id}_{\mathsf{Ori}}`),
+        " と書く。このとき、全ての細段面位置 ",
+        math(String.raw`(\mathtt{position},a)\in P_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\left(
+  \overline\kappa_E
+  \times
+  \operatorname{id}_{\mathsf{Ori}}
+\right)
+\left(
+  \partial_{\mathrm{word}}^{Q_{\mathrm{fine}},\eta_E^{\mathrm{fine}}}
+  f_{\mathrm{fine}}
+  \left(
+    \mathtt{position},
+    a
+  \right)
+\right)
+=
+\partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
+f_{\mathrm{coarse}}
+\left(
+  \overline\kappa_{P,C_F}
+  \left(
+    \mathtt{position},
+    a
+  \right)
+\right).`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a\in C_F`),
+        " を固定し、細段と粗段でこの位置に置かれる辺剰余類をそれぞれ",
+      ]),
+      displayMath(String.raw`C_E(a):=aH_E^{\mathrm{fine}},
+\qquad
+D_E\left(\kappa(a)\right):=
+\kappa(a)H_E^{\mathrm{coarse}}`),
+      paragraph([
+        "と書く。",
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導辺セル写像の定義より、",
+      ]),
+      displayMath(String.raw`\overline\kappa_E
+\left(
+  \mathtt{fine},
+  E,
+  C_E(a)
+\right)
+=
+\left(
+  \mathtt{coarse},
+  E,
+  D_E\left(\kappa(a)\right)
+\right).`),
+      paragraph([
+        ref("def_finite_quotient_oriented_coset_face_boundary_word"),
+        " の細段境界語の定義により、代表元選択には次の二場合のちょうど一方が成り立つ。まず ",
+        math(String.raw`\eta_E^{\mathrm{fine}}(C_E(a))=a`),
+        " の場合を取る。",
+      ]),
+      paragraph([
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        " の代表元選択の可換条件より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\eta_E^{\mathrm{coarse}}
+\left(
+  D_E\left(\kappa(a)\right)
+\right)
+&=
+\kappa\left(
+  \eta_E^{\mathrm{fine}}(C_E(a))
+\right)
+&&\bigl(\because\ \text{代表元選択の可換条件}\bigr)\\
+&=
+\kappa(a)
+&&\bigl(\because\ \eta_E^{\mathrm{fine}}(C_E(a))=a\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_finite_quotient_oriented_coset_face_boundary_word"),
+        " の二段の境界語の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\partial_{\mathrm{word}}^{Q_{\mathrm{fine}},\eta_E^{\mathrm{fine}}}
+f_{\mathrm{fine}}
+\left(
+  \mathtt{position},
+  a
+\right)
+&=
+\left(
+  (\mathtt{fine},E,C_E(a)),
+  \mathsf{reverse}
+\right)
+&&\bigl(\because\ \text{細段境界語の定義}\bigr),\\
+\partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
+f_{\mathrm{coarse}}
+\left(
+  \mathtt{position},
+  \kappa(a)
+\right)
+&=
+\left(
+  (\mathtt{coarse},E,D_E(\kappa(a))),
+  \mathsf{reverse}
+\right)
+&&\bigl(\because\ \text{粗段境界語の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "誘導辺セル写像の等式と、形式的向きラベル ",
+        math(String.raw`\mathsf{reverse}`),
+        " の一致より、主張の等式が成り立つ。次に ",
+        math(String.raw`\eta_E^{\mathrm{fine}}(C_E(a))=ar_E^{\mathrm{fine}}`),
+        " の場合を取る。",
+      ]),
+      paragraph([
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        " の代表元選択の可換条件、",
+        ref("def_two_stage_finite_quotient_tower_input"),
+        " の群準同型性、および ",
+        ref("def_quotient_tower_role_generator_compatibility"),
+        " の辺役割生成元の整合性より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\eta_E^{\mathrm{coarse}}
+\left(
+  D_E\left(\kappa(a)\right)
+\right)
+&=
+\kappa\left(
+  \eta_E^{\mathrm{fine}}(C_E(a))
+\right)
+&&\bigl(\because\ \text{代表元選択の可換条件}\bigr)\\
+&=
+\kappa\left(ar_E^{\mathrm{fine}}\right)
+&&\bigl(\because\ \eta_E^{\mathrm{fine}}(C_E(a))=ar_E^{\mathrm{fine}}\bigr)\\
+&=
+\kappa(a)\kappa\left(r_E^{\mathrm{fine}}\right)
+&&\bigl(\because\ \kappa\text{ は群準同型}\bigr)\\
+&=
+\kappa(a)r_E^{\mathrm{coarse}}
+&&\bigl(\because\ \text{辺役割生成元の整合性}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_finite_quotient_oriented_coset_face_boundary_word"),
+        " の二段の境界語の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\partial_{\mathrm{word}}^{Q_{\mathrm{fine}},\eta_E^{\mathrm{fine}}}
+f_{\mathrm{fine}}
+\left(
+  \mathtt{position},
+  a
+\right)
+&=
+\left(
+  (\mathtt{fine},E,C_E(a)),
+  \mathsf{forward}
+\right)
+&&\bigl(\because\ \text{細段境界語の定義}\bigr),\\
+\partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
+f_{\mathrm{coarse}}
+\left(
+  \mathtt{position},
+  \kappa(a)
+\right)
+&=
+\left(
+  (\mathtt{coarse},E,D_E(\kappa(a))),
+  \mathsf{forward}
+\right)
+&&\bigl(\because\ \text{粗段境界語の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "誘導辺セル写像の等式と、形式的向きラベル ",
+        math(String.raw`\mathsf{forward}`),
+        " の一致より、この場合にも主張の等式が成り立つ。最後に ",
+        ref("def_quotient_tower_induced_face_position_map"),
+        " の位置写像の定義より、",
+      ]),
+      displayMath(String.raw`\overline\kappa_{P,C_F}
+\left(
+  \mathtt{position},
+  a
+\right)
+=
+\left(
+  \mathtt{position},
+  \kappa(a)
+\right).`),
+      paragraph([
+        "したがって二場合のいずれでも向き付き面境界語は保存される。全ての群、部分群、剰余類、位置集合、辺セル、向きラベル、写像、量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
