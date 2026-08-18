@@ -1,0 +1,182 @@
+[     0.0s] === run start 2026-08-18T18:36:46.242434
+[     0.1s] stage: transfer matrix built, size 128
+[    17.5s] stage: partition polynomial built as Tr T^L (theorem_partition_polynomial_is_trace), degree 84
+[    17.5s] stage: sanity check passed, Z_7(1) = 2^49
+[    17.6s] stage: ZZ[x] factorization, (degree, multiplicity) = [(0, 1), (84, 1)]
+[    17.6s]   factor: degree 0 multiplicity 1 leading coefficient 2 constant term 2
+[    17.6s]   factor: degree 84 multiplicity 1 leading coefficient 23975 constant term 1
+[    17.7s] stage: roots isolated, count 84
+[    17.7s]   distance interval done for root 1 of 84
+[    17.7s]   distance interval done for root 2 of 84
+[    17.7s]   distance interval done for root 3 of 84
+[    17.7s]   distance interval done for root 4 of 84
+[    17.7s]   distance interval done for root 5 of 84
+[    17.7s]   distance interval done for root 6 of 84
+[    17.8s]   distance interval done for root 7 of 84
+[    17.8s]   distance interval done for root 8 of 84
+[    17.8s]   distance interval done for root 9 of 84
+[    17.8s]   distance interval done for root 10 of 84
+[    17.8s]   distance interval done for root 11 of 84
+[    17.8s]   distance interval done for root 12 of 84
+[    17.8s]   distance interval done for root 13 of 84
+[    17.8s]   distance interval done for root 14 of 84
+[    17.8s]   distance interval done for root 15 of 84
+[    17.8s]   distance interval done for root 16 of 84
+[    17.8s]   distance interval done for root 17 of 84
+[    17.8s]   distance interval done for root 18 of 84
+[    17.8s]   distance interval done for root 19 of 84
+[    17.8s]   distance interval done for root 20 of 84
+[    17.8s]   distance interval done for root 21 of 84
+[    17.8s]   distance interval done for root 22 of 84
+[    17.8s]   distance interval done for root 23 of 84
+[    17.8s]   distance interval done for root 24 of 84
+[    17.8s]   distance interval done for root 25 of 84
+[    17.8s]   distance interval done for root 26 of 84
+[    17.8s]   distance interval done for root 27 of 84
+[    17.8s]   distance interval done for root 28 of 84
+[    17.8s]   distance interval done for root 29 of 84
+[    17.8s]   distance interval done for root 30 of 84
+[    17.8s]   distance interval done for root 31 of 84
+[    17.8s]   distance interval done for root 32 of 84
+[    17.8s]   distance interval done for root 33 of 84
+[    17.8s]   distance interval done for root 34 of 84
+[    17.8s]   distance interval done for root 35 of 84
+[    17.8s]   distance interval done for root 36 of 84
+[    17.8s]   distance interval done for root 37 of 84
+[    17.8s]   distance interval done for root 38 of 84
+[    17.8s]   distance interval done for root 39 of 84
+[    17.8s]   distance interval done for root 40 of 84
+[    17.8s]   distance interval done for root 41 of 84
+[    17.8s]   distance interval done for root 42 of 84
+[    17.8s]   distance interval done for root 43 of 84
+[    17.8s]   distance interval done for root 44 of 84
+[    17.8s]   distance interval done for root 45 of 84
+[    17.8s]   distance interval done for root 46 of 84
+[    17.8s]   distance interval done for root 47 of 84
+[    17.9s]   distance interval done for root 48 of 84
+[    17.9s]   distance interval done for root 49 of 84
+[    17.9s]   distance interval done for root 50 of 84
+[    17.9s]   distance interval done for root 51 of 84
+[    17.9s]   distance interval done for root 52 of 84
+[    17.9s]   distance interval done for root 53 of 84
+[    17.9s]   distance interval done for root 54 of 84
+[    17.9s]   distance interval done for root 55 of 84
+[    17.9s]   distance interval done for root 56 of 84
+[    17.9s]   distance interval done for root 57 of 84
+[    17.9s]   distance interval done for root 58 of 84
+[    17.9s]   distance interval done for root 59 of 84
+[    17.9s]   distance interval done for root 60 of 84
+[    17.9s]   distance interval done for root 61 of 84
+[    17.9s]   distance interval done for root 62 of 84
+[    17.9s]   distance interval done for root 63 of 84
+[    17.9s]   distance interval done for root 64 of 84
+[    17.9s]   distance interval done for root 65 of 84
+[    17.9s]   distance interval done for root 66 of 84
+[    17.9s]   distance interval done for root 67 of 84
+[    17.9s]   distance interval done for root 68 of 84
+[    17.9s]   distance interval done for root 69 of 84
+[    17.9s]   distance interval done for root 70 of 84
+[    17.9s]   distance interval done for root 71 of 84
+[    17.9s]   distance interval done for root 72 of 84
+[    17.9s]   distance interval done for root 73 of 84
+[    17.9s]   distance interval done for root 74 of 84
+[    17.9s]   distance interval done for root 75 of 84
+[    17.9s]   distance interval done for root 76 of 84
+[    17.9s]   distance interval done for root 77 of 84
+[    17.9s]   distance interval done for root 78 of 84
+[    17.9s]   distance interval done for root 79 of 84
+[    17.9s]   distance interval done for root 80 of 84
+[    17.9s]   distance interval done for root 81 of 84
+[    17.9s]   distance interval done for root 82 of 84
+[    17.9s]   distance interval done for root 83 of 84
+[    17.9s]   distance interval done for root 84 of 84
+[    17.9s] stage: all distance intervals built
+[    17.9s] stage: candidate selected
+[    17.9s]   separation checked against root 1 of 84
+[    17.9s]   separation checked against root 2 of 84
+[    17.9s]   separation checked against root 3 of 84
+[    17.9s]   separation checked against root 4 of 84
+[    17.9s]   separation checked against root 5 of 84
+[    17.9s]   separation checked against root 6 of 84
+[    17.9s]   separation checked against root 7 of 84
+[    17.9s]   separation checked against root 8 of 84
+[    17.9s]   separation checked against root 9 of 84
+[    17.9s]   separation checked against root 10 of 84
+[    17.9s]   separation checked against root 11 of 84
+[    17.9s]   separation checked against root 12 of 84
+[    17.9s]   separation checked against root 13 of 84
+[    17.9s]   separation checked against root 14 of 84
+[    17.9s]   separation checked against root 15 of 84
+[    17.9s]   separation checked against root 16 of 84
+[    17.9s]   separation checked against root 17 of 84
+[    17.9s]   separation checked against root 18 of 84
+[    17.9s]   separation checked against root 19 of 84
+[    17.9s]   separation checked against root 20 of 84
+[    17.9s]   separation checked against root 21 of 84
+[    17.9s]   separation checked against root 22 of 84
+[    17.9s]   separation checked against root 23 of 84
+[    17.9s]   separation checked against root 24 of 84
+[    17.9s]   separation checked against root 25 of 84
+[    17.9s]   separation checked against root 26 of 84
+[    17.9s]   separation checked against root 27 of 84
+[    17.9s]   separation checked against root 28 of 84
+[    17.9s]   separation checked against root 29 of 84
+[    17.9s]   separation checked against root 30 of 84
+[    17.9s]   separation checked against root 31 of 84
+[    17.9s]   separation checked against root 32 of 84
+[    17.9s]   separation checked against root 33 of 84
+[    17.9s]   separation checked against root 34 of 84
+[    17.9s]   separation checked against root 35 of 84
+[    17.9s]   separation checked against root 36 of 84
+[    17.9s]   separation checked against root 37 of 84
+[    17.9s]   separation checked against root 38 of 84
+[    17.9s]   separation checked against root 39 of 84
+[    17.9s]   separation checked against root 40 of 84
+[    17.9s]   separation checked against root 41 of 84
+[    17.9s]   separation checked against root 42 of 84
+[    17.9s]   separation checked against root 43 of 84
+[    17.9s]   separation checked against root 44 of 84
+[    17.9s]   separation checked against root 45 of 84
+[    17.9s]   separation checked against root 46 of 84
+[    17.9s]   separation checked against root 47 of 84
+[    17.9s]   separation checked against root 48 of 84
+[    17.9s]   separation checked against root 49 of 84
+[    17.9s]   separation checked against root 50 of 84
+[    17.9s]   separation checked against root 51 of 84
+[    17.9s]   separation checked against root 52 of 84
+[    17.9s]   separation checked against root 53 of 84
+[    17.9s]   separation checked against root 54 of 84
+[    17.9s]   separation checked against root 55 of 84
+[    17.9s]   separation checked against root 56 of 84
+[    17.9s]   separation checked against root 57 of 84
+[    17.9s]   separation checked against root 58 of 84
+[    17.9s]   separation checked against root 59 of 84
+[    17.9s]   separation checked against root 60 of 84
+[    17.9s]   separation checked against root 61 of 84
+[    17.9s]   separation checked against root 62 of 84
+[    17.9s]   separation checked against root 63 of 84
+[    17.9s]   separation checked against root 64 of 84
+[    17.9s]   separation checked against root 65 of 84
+[    17.9s]   separation checked against root 66 of 84
+[    17.9s]   separation checked against root 67 of 84
+[    17.9s]   separation checked against root 68 of 84
+[    17.9s]   separation checked against root 69 of 84
+[    20.5s]   separation checked against root 70 of 84
+[    20.5s]   separation checked against root 71 of 84
+[    20.5s]   separation checked against root 72 of 84
+[    20.5s]   separation checked against root 73 of 84
+[    20.5s]   separation checked against root 74 of 84
+[    20.5s]   separation checked against root 75 of 84
+[    20.5s]   separation checked against root 76 of 84
+[    20.5s]   separation checked against root 77 of 84
+[    20.5s]   separation checked against root 78 of 84
+[    20.5s]   separation checked against root 79 of 84
+[    20.5s]   separation checked against root 80 of 84
+[    20.5s]   separation checked against root 81 of 84
+[    20.5s]   separation checked against root 82 of 84
+[    20.5s]   separation checked against root 83 of 84
+[    20.5s]   separation checked against root 84 of 84
+[    20.5s] stage: separation ok (candidate and its conjugate below all others)
+[    20.5s] d_1(7) interval = 0.0109112755790774324949355035582293681511675627682250302322784347123373933731563?
+[    20.5s] a_rho(7) in RealBallField(128) = [1.1608857094008213529568291075250056639 +/- 3.73e-38]
+[    20.5s] === run complete
