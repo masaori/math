@@ -402,36 +402,19 @@ u
       ]),
       paragraph([
         ref("partition_function_sandwich"),
-        " の ",
-        math(String.raw`c^{N} \leq Z \leq 2^{M}c^{N}`),
-        " に、",
-        math(String.raw`\mathbb{R}_{>0}`),
-        " 上で狭義単調増加な ",
-        math(String.raw`\log`),
-        " を施すと",
+        " の挟み込みから始めて、一続きに変形する。",
       ]),
       displayMath(
-        String.raw`N\log c \ \leq\ \log Z \ \leq\ M\log 2 + N\log c`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`\log(ab) = \log a + \log b`),
-        "、",
-        math(String.raw`\log(c^N) = N\log c`),
-        "、",
-        math(String.raw`\log 2^M = M\log 2`),
-        "）。各辺を ",
-        math(String.raw`MN > 0`),
-        " で割ると",
-      ]),
-      displayMath(
-        String.raw`\frac{1}{M}\log c \ \leq\ \frac{1}{MN}\log Z \ \leq\ \frac{1}{M}\log c + \frac{\log 2}{N}`,
-      ),
-      paragraph([
-        "したがって",
-      ]),
-      displayMath(
-        String.raw`\left|\frac{1}{MN}\log Z - \frac{1}{M}\log c\right| \leq \frac{\log 2}{N}`,
+        String.raw`\begin{aligned}
+&c^{N} \leq Z \leq 2^{M}c^{N}
+&&\left(\because\ \text{分配関数の挟み込み}\right)\\
+\Longrightarrow\ &N\log c \leq \log Z \leq M\log 2 + N\log c
+&&\left(\because\ \log\text{ は }\mathbb{R}_{>0}\text{ 上で狭義単調増加、}\log(ab)=\log a+\log b,\ \log(c^{N})=N\log c,\ \log(2^{M})=M\log 2\right)\\
+\Longrightarrow\ &\frac{1}{M}\log c \leq \frac{1}{MN}\log Z \leq \frac{1}{M}\log c + \frac{\log 2}{N}
+&&\left(\because\ \text{各辺を }MN>0\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
+\Longrightarrow\ &\left|\frac{1}{MN}\log Z - \frac{1}{M}\log c\right| \leq \frac{\log 2}{N}
+&&\left(\because\ \text{上下の評価が中心 }\tfrac1M\log c\text{ からの差を }\tfrac{\log 2}{N}\text{ で挟む。}\mathbb{R}\text{ の四則}\right).
+\end{aligned}`,
       ),
       paragraph([
         "右辺は ",
@@ -454,7 +437,12 @@ u
         " だけである。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-18: 式変形の書き方を統一した。挟み込みへの log の適用・MN による割り算・中心からの差の評価が散文で継がれた 3 つの表示に分かれていたのを、一続きの含意の鎖へまとめ、根拠を各行末の (∵ …) へ移した。極限の存在の論法と参照は変更していない。",
+      ],
+    },
   },
 
   {
