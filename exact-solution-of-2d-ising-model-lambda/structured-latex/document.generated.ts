@@ -19,6 +19,7 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_main_text from './content/main-text.ts'
+import notes_critical_exponent from './notes/critical-exponent.ts'
 import notes_free_entropy from './notes/free-entropy.ts'
 import notes_partition_polynomial from './notes/partition-polynomial.ts'
 
@@ -30,6 +31,7 @@ export type AllBlocks = [
 
 /** 全ノート。 */
 export type AllNotes = [
+  ...typeof notes_critical_exponent,
   ...typeof notes_free_entropy,
   ...typeof notes_partition_polynomial,
 ]

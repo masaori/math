@@ -2702,20 +2702,40 @@ F\sigma_k^z F^{-1}
 \end{aligned}`,
       ),
       paragraph([
-        "同様に ",
         math(String.raw`E`),
         " は奇数番目の因子にだけ ",
         math(String.raw`\sigma^x`),
-        " をもつので",
+        " をもつ。したがって ", math(String.raw`k`),
+        " が偶数なら全因子が ", math(String.raw`\sigma_k^a`),
+        " と可換であり、", math(String.raw`k`),
+        " が奇数なら第 ", math(String.raw`k`),
+        " 因子だけを計算すればよい。",
       ]),
       displayMath(
-        String.raw`E\sigma_k^a E^{-1} =
-\begin{cases}
-\sigma_k^a & (k \text{ 偶数、どの } a \text{ でも}) \\
-\sigma_k^x & (k \text{ 奇数},\ a = x) \\
--\sigma_k^y & (k \text{ 奇数},\ a = y) \\
--\sigma_k^z & (k \text{ 奇数},\ a = z)
-\end{cases}`,
+        String.raw`\begin{aligned}
+E\sigma_k^aE^{-1}
+&= \sigma_k^a
+&& (\because\ k\text{ が偶数なら }E\text{ の全因子と可換}),\\
+E\sigma_k^xE^{-1}
+&= \sigma_k^x\sigma_k^x\sigma_k^x
+&& (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= \sigma_k^x
+&& (\because\ \text{パウリ行列の積}),\\
+E\sigma_k^yE^{-1}
+&= \sigma_k^x\sigma_k^y\sigma_k^x
+&& (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= -\sigma_k^y\sigma_k^x\sigma_k^x
+&& (\because\ \text{パウリ行列の積})\\
+&= -\sigma_k^y
+&& (\because\ \text{パウリ行列の積}),\\
+E\sigma_k^zE^{-1}
+&= \sigma_k^x\sigma_k^z\sigma_k^x
+&& (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= -\sigma_k^z\sigma_k^x\sigma_k^x
+&& (\because\ \text{パウリ行列の積})\\
+&= -\sigma_k^z
+&& (\because\ \text{パウリ行列の積})
+\end{aligned}`,
       ),
       paragraph([
         "この 2 つを合成して（",
