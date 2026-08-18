@@ -1554,4 +1554,46 @@ b(C_V)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_first_cycle_pushforward_map_over_f2",
+    kind: "definition",
+    title: { text: "商の塔が誘導する一次サイクル押し出し写像" },
+    labels: ["def_quotient_tower_first_cycle_pushforward_map_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-first-cycle-pushforward-map-over-f2"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の辺係数押し出し写像を細段一次サイクル空間へ制限する。",
+        ref("theorem_quotient_tower_first_cycle_pushforward_over_f2"),
+        " により像は粗段一次サイクル空間に属するので、始域、終域、作用を明示した一次サイクル押し出し写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{1,!}:
+\operatorname{Cycle}_1
+\left(
+  \mathcal C^{\mathrm{fine}};\mathbb F_2
+\right)
+&\longrightarrow
+\operatorname{Cycle}_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right),\\
+c
+&\longmapsto
+\overline\kappa_{1,!}(c)
+:=
+\overline\kappa_{E,!}(c)
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで細段一次サイクル空間と粗段一次サイクル空間は、それぞれ有限辺係数空間の中で ",
+        ref("def_first_cycle_space_over_f2"),
+        " により定まる有限な ",
+        math(String.raw`\mathbb F_2`),
+        " ベクトル空間である。この定義は一次サイクル空間間の写像だけを定め、第一ホモロジーへの作用、局所全単射性、被覆次数は主張しない。全てのセル集合、係数写像、核、ファイバー、和は有限または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
