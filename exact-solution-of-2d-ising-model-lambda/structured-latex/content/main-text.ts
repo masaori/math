@@ -52010,9 +52010,9 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
       list([
         [
           "四則と単位元を保つ。任意の ", math(String.raw`a,b\in R`), " に対し、",
-          math(String.raw`\rho(a+b)=\rho(a)+\rho(b)`), "、",
-          math(String.raw`\rho(a\cdot b)=\rho(a)\cdot\rho(b)`), "、",
-          math(String.raw`\rho(0)=0`), "、", math(String.raw`\rho(1)=1`), "。",
+          math(String.raw`\rho_{R\to\mathbb{R}}(a+b)=\rho_{R\to\mathbb{R}}(a)+\rho_{R\to\mathbb{R}}(b)`), "、",
+          math(String.raw`\rho_{R\to\mathbb{R}}(a\cdot b)=\rho_{R\to\mathbb{R}}(a)\cdot\rho_{R\to\mathbb{R}}(b)`), "、",
+          math(String.raw`\rho_{R\to\mathbb{R}}(0)=0`), "、", math(String.raw`\rho_{R\to\mathbb{R}}(1)=1`), "。",
         ],
         [
           "狭義順序を保つ。任意の ", math(String.raw`a,b\in R`), " に対し、",
