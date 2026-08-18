@@ -1168,4 +1168,281 @@ b(C_V)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_first_boundary_pushforward_commutativity_over_f2",
+    kind: "theorem",
+    title: { text: "商の塔における F_2 一次境界写像と押し出しの可換性" },
+    labels: ["theorem_quotient_tower_first_boundary_pushforward_commutativity_over_f2"],
+    habitat: "F2",
+    verification: ["sagemath/check/two-stage-quotient-tower-first-boundary-pushforward-commutativity-over-f2"],
+    statement: [
+      paragraph([
+        "細段と粗段の有限頂点セル集合をそれぞれ ",
+        math(String.raw`\mathcal C_V^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`\mathcal C_V^{\mathrm{coarse}}`),
+        "、有限辺セル集合をそれぞれ ",
+        math(String.raw`\mathcal C_E^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`\mathcal C_E^{\mathrm{coarse}}`),
+        " とする。二段の辺端写像を",
+      ]),
+      displayMath(String.raw`\partial_G^{\mathrm{fine}}:
+\mathcal C_E^{\mathrm{fine}}\times\mathsf{End}
+\longrightarrow
+\mathcal C_V^{\mathrm{fine}},
+\qquad
+\partial_G^{\mathrm{coarse}}:
+\mathcal C_E^{\mathrm{coarse}}\times\mathsf{End}
+\longrightarrow
+\mathcal C_V^{\mathrm{coarse}}`),
+      paragraph([
+        "とし、これらから ",
+        ref("def_first_boundary_matrix_over_f2"),
+        " により定まる ",
+        math(String.raw`\mathbb F_2`),
+        " 上の一次境界写像を ",
+        math(String.raw`\partial_1^{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`\partial_1^{\mathrm{coarse}}`),
+        " と書く。",
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " の誘導セル写像を ",
+        math(String.raw`\overline\kappa_E`),
+        "、",
+        math(String.raw`\overline\kappa_V`),
+        " とする。",
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " と ",
+        ref("def_quotient_tower_vertex_coefficient_pushforward_over_f2"),
+        " の押し出し写像に対し、次の二つの合成は等しい。",
+      ]),
+      displayMath(String.raw`\partial_1^{\mathrm{coarse}}
+\circ
+\overline\kappa_{E,!}
+=
+\overline\kappa_{V,!}
+\circ
+\partial_1^{\mathrm{fine}}
+:
+\mathbb F_2^{\mathcal C_E^{\mathrm{fine}}}
+\longrightarrow
+\mathbb F_2^{\mathcal C_V^{\mathrm{coarse}}}.`),
+    ],
+    proof: [
+      paragraph([
+        "任意の細段辺係数写像 ",
+        math(String.raw`c\in\mathbb F_2^{\mathcal C_E^{\mathrm{fine}}}`),
+        " と粗段頂点セル ",
+        math(String.raw`D_V\in\mathcal C_V^{\mathrm{coarse}}`),
+        " を固定する。",
+        ref("def_first_boundary_matrix_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(
+  \partial_1^{\mathrm{coarse}}
+  \left(
+    \overline\kappa_{E,!}(c)
+  \right)
+\right)(D_V)
+&=
+\sum_{D_E\in\mathcal C_E^{\mathrm{coarse}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{coarse}}(D_E,a)=D_V
+  }}
+  1_{\mathbb F_2}
+\right)
+\left(
+  \overline\kappa_{E,!}(c)
+\right)(D_E).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_edge_coefficient_pushforward_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{D_E\in\mathcal C_E^{\mathrm{coarse}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{coarse}}(D_E,a)=D_V
+  }}
+  1_{\mathbb F_2}
+\right)
+\left(
+  \overline\kappa_{E,!}(c)
+\right)(D_E)\\
+&=
+\sum_{D_E\in\mathcal C_E^{\mathrm{coarse}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{coarse}}(D_E,a)=D_V
+  }}
+  1_{\mathbb F_2}
+\right)
+\left(
+  \sum_{\substack{
+    C_E\in\mathcal C_E^{\mathrm{fine}}\\
+    \overline\kappa_E(C_E)=D_E
+  }}
+  c(C_E)
+\right).
+\end{aligned}`),
+      paragraph(["有限和を誘導辺セル写像のファイバーごとにまとめ直すと、"]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{D_E\in\mathcal C_E^{\mathrm{coarse}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{coarse}}(D_E,a)=D_V
+  }}
+  1_{\mathbb F_2}
+\right)
+\left(
+  \sum_{\substack{
+    C_E\in\mathcal C_E^{\mathrm{fine}}\\
+    \overline\kappa_E(C_E)=D_E
+  }}
+  c(C_E)
+\right)\\
+&=
+\sum_{C_E\in\mathcal C_E^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{coarse}}
+    \left(
+      \overline\kappa_E(C_E),a
+    \right)
+    =D_V
+  }}
+  1_{\mathbb F_2}
+\right)c(C_E)
+\qquad
+\bigl(\because\ \text{有限和の添字付け替え}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_quotient_tower_oriented_edge_endpoint_map_preservation"),
+        " を二つの辺端ラベルに適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{C_E\in\mathcal C_E^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{coarse}}
+    \left(
+      \overline\kappa_E(C_E),a
+    \right)
+    =D_V
+  }}
+  1_{\mathbb F_2}
+\right)c(C_E)\\
+&=
+\sum_{C_E\in\mathcal C_E^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \overline\kappa_V
+    \left(
+      \partial_G^{\mathrm{fine}}(C_E,a)
+    \right)
+    =D_V
+  }}
+  1_{\mathbb F_2}
+\right)c(C_E)
+\qquad
+\bigl(\because\ \text{二つの辺端の保存}\bigr).
+\end{aligned}`),
+      paragraph(["辺端を、その細段頂点セルによる有限分割へ書き換えると、"]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{C_E\in\mathcal C_E^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \overline\kappa_V
+    \left(
+      \partial_G^{\mathrm{fine}}(C_E,a)
+    \right)
+    =D_V
+  }}
+  1_{\mathbb F_2}
+\right)c(C_E)\\
+&=
+\sum_{\substack{
+  C_V\in\mathcal C_V^{\mathrm{fine}}\\
+  \overline\kappa_V(C_V)=D_V
+}}
+\sum_{C_E\in\mathcal C_E^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{fine}}(C_E,a)=C_V
+  }}
+  1_{\mathbb F_2}
+\right)c(C_E)
+\qquad
+\bigl(\because\ \text{有限集合のファイバー分割と有限和の交換}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_first_boundary_matrix_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{\substack{
+  C_V\in\mathcal C_V^{\mathrm{fine}}\\
+  \overline\kappa_V(C_V)=D_V
+}}
+\sum_{C_E\in\mathcal C_E^{\mathrm{fine}}}
+\left(
+  \sum_{\substack{
+    a\in\mathsf{End}\\
+    \partial_G^{\mathrm{fine}}(C_E,a)=C_V
+  }}
+  1_{\mathbb F_2}
+\right)c(C_E)\\
+&=
+\sum_{\substack{
+  C_V\in\mathcal C_V^{\mathrm{fine}}\\
+  \overline\kappa_V(C_V)=D_V
+}}
+\left(
+  \partial_1^{\mathrm{fine}}(c)
+\right)(C_V).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_vertex_coefficient_pushforward_over_f2"),
+        " の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{\substack{
+  C_V\in\mathcal C_V^{\mathrm{fine}}\\
+  \overline\kappa_V(C_V)=D_V
+}}
+\left(
+  \partial_1^{\mathrm{fine}}(c)
+\right)(C_V)\\
+&=
+\left(
+  \overline\kappa_{V,!}
+  \left(
+    \partial_1^{\mathrm{fine}}(c)
+  \right)
+\right)(D_V).
+\end{aligned}`),
+      paragraph([
+        "任意の ",
+        math(String.raw`c\in\mathbb F_2^{\mathcal C_E^{\mathrm{fine}}}`),
+        " と ",
+        math(String.raw`D_V\in\mathcal C_V^{\mathrm{coarse}}`),
+        " で両成分が一致したので、二つの合成写像は等しい。全てのセル集合、辺端ラベル集合、ファイバー、係数写像、和は有限または ",
+        math(String.raw`\mathbb F_2`),
+        " 上にあり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
