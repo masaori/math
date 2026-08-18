@@ -3,6 +3,12 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-18 tick 421 で台帳から移した記録（tick 416）
+
+- tick 416 の現在地・前進: 「和の平方の評価」を四層で閉じた。`claim_square_of_sum_le_twice_sum_of_squares` は差 $(2u^2+2v^2)-(u+v)^2$ を三段で $(u-v)^2$ へ変形し、$u=v$／$u\ne v$ の二枝で広義順序へ落とした。SageMath 49 組、Lean 具体版・必要十分版（CommRing のみ）・導出版。sorry 検査 1436 件・check 507 ブロック・linkage 288 件・PDF 274 ページ通過。
+- tick 416 の式変形統一: 姉妹側「$V_1$ の固有空間への制限」の Step 4 後半で、一等号に束ねていた線型性・表示の代入・積の保存・評価を、一続き八段・各行根拠つきへ開いた（内容不変）。
+- tick 416 のレビュー: tick 415 の「順序の加法単調性」を todo から除く判断と姉妹側書き換えを突き合わせた。除去は runbook の削除対象「両辺に同じものを足す」に一致し、本文・SageMath・Lean に対応物が無いことも確認した。修正なし。
+
 ## 2026-08-18 tick 416 で台帳から移した記録（tick 411）
 
 - tick 411 の現在地・前進: 「零点と臨界点の距離の二乗の零性は一致と同値」を四層で閉じた。`claim_critical_distance_squared_zero_iff_equal` は一意表示 $\xi=a+b\omega$ と $x_c\in R$ を用い、$\mathrm{dsq}_c(\xi)=0\iff\xi=x_c$ を有理点版と同じ背理法で示す（$b\ne0$ なら $w=(a-x_c)b^{-1}$ が $w^2=-1$ で `claim_neg_one_not_square` に反し、$b=0$ なら零因子が無いことから $a=x_c$）。SageMath 18 組、Lean 具体版・既存の必要十分核 `distanceSquaredOfPair_eq_zero_iff_necSuf`・導出版。sorry 検査 1424 件・check 502 ブロック・verify-check-linkage 285 件・PDF 272 ページ通過。

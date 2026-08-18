@@ -826,11 +826,7 @@ Y_m Z_{m+1}
 \quad (\because \sigma^x\sigma^x = I,\ \sigma^y\sigma^x = -i\,\sigma^z \text{（Step 0）}) \\
 &= (-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
 \quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
-&= -i\,\sigma_m^z\sigma_{m+1}^z \quad (\because \text{Step 1})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
+&= -i\,\sigma_m^z\sigma_{m+1}^z \quad (\because \text{Step 1}) \\
 \sigma_m^z\sigma_{m+1}^z
 &= \bigl(i\cdot(-i)\bigr)\sigma_m^z\sigma_{m+1}^z
 && (\because\ i\cdot(-i)=1\text{（複素数の四則）})\\

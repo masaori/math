@@ -1501,6 +1501,9 @@ targets=(
   Ising2DLambda.CriticalExponent.criticalPoint_lt_one
   Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_lt_one_necSuf
   Ising2DLambda.CriticalExponent.criticalPoint_lt_one_from_necSuf
+  Ising2DLambda.CriticalExponent.criticalPoint_rationalPartitionInterval
+  Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_rationalPartitionInterval_necSuf
+  Ising2DLambda.CriticalExponent.criticalPoint_rationalPartitionInterval_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

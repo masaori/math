@@ -4,6 +4,11 @@
 
 ## 現在の到達点（2026-08-18 時点）
 
+2026-08-18 の tick 421 は、「臨界点を挟む有理等分区間」を四層で閉じた（住処 Qbar、脱出なし）。
+`claim_critical_point_rational_partition_interval`: $N\ge1$ に対し、$S_N:=\{j\in\mathbb N\mid j<N+1,\ j/N<_Rx_c\text{ または }j/N=x_c\}$ を取る。正値性から $0\in S_N$、上界 $x_c<_R1=N/N$ と三分法から $N\notin S_N$。有限非空集合 $S_N$ の最大元 $k$ に対し $k+1\notin S_N$ なので、$k+1\le N$ かつ $k/N\le_Rx_c<_R(k+1)/N$。SageMath `check/critical-point-rational-partition-interval/`（`AA`/`QQ` 厳密）、Lean 具体版・必要十分版（有限候補・最大元・三分法だけ）・導出版。sorry 検査 1448 件・check 511 ブロック・linkage 292 件・PDF 277 ページ通過。
+レビューでは tick 420 の Lean 具体版が本文の展開・$s^2=2$ の代入・整理という三段を一度の `ring` に畳んでいたため、本文と一対一の三段へ直し、前進前に commit `7e634bc8` を push した。式変形統一は姉妹側「$V_1,V_2$ を $Z,Y,\varepsilon$ で表す」の Step 2 の順方向と逆向きに分かれていた二つの表示を一つの式変形鎖へ統合し、姉妹側 check 300 ブロック・PDF 326 ページを通した。
+次は「挟み込み区間から臨界点への有理近似を取る」。tick 417 の $h_N^2<\delta$ と今 tick の $k/N\le_Rx_c<_R(k+1)/N$ を同じ $N$ に使い、正の有理端点を選んで平方誤差を $\delta$ 未満へ落とす。端点 $k/N$ が零元になりうるため、正の端点として上端 $(k+1)/N$ を使うこと。
+
 2026-08-18 の tick 420 は、「臨界点は一より小さい」を四層で閉じた（住処 Qbar、脱出なし）。
 `claim_critical_point_lt_one`（正値性の直後）: 第 5 条件の $s=w^2$ と `claim_real_closed_sum_of_two_squares_is_square` から $s+1=w^2+1^2=v^2$、`claim_real_closed_sum_of_two_squares_zero` から $v\ne0$。$1-x_c=2-s=((2-s)(s+1))(v^{-1})^2=s\cdot(v^{-1})^2=(w\cdot v^{-1})^2$ と変形し、$u:=w\cdot v^{-1}\ne0$（体は零因子を持たない）から $x_c<_R1$。この上界は次の有理等分で上端の等分点が下側候補に入らないことの根拠になるので「何も言っていない主張」ではない。
 SageMath `check/critical-point-lt-one/`（`AA` 厳密）、Lean 具体版 `CriticalExponent/CriticalPointLtOne.lean`、必要十分版 `NecSuf/CriticalExponent/CriticalPointLtOne.lean`（体の四則、$w\ne0$、平方和の平方表示と零性だけ。$w\ne0$ は証人 $w v^{-1}$ の非零性に要るので落とせない）、導出版。
