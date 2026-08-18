@@ -288,6 +288,9 @@ targets=(
   Ising3DCut.LimitQuantity.factorization_type_does_not_determine_limit_quantity
   Ising3DCut.LimitQuantity.value_invariant_does_not_determine_limit_quantity
   Ising3DCut.LimitQuantity.factorization_type_does_not_determine_limit_quantity_fromNecSuf
+  Ising3DCut.LimitQuantity.partitionPolynomial_two_eval_one
+  Ising3DCut.LimitQuantity.partitionPolynomial_three_eval_one
+  Ising3DCut.LimitQuantity.partitionValue_invariant_differs_at_two
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
