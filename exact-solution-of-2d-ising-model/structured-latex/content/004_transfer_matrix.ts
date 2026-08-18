@@ -754,11 +754,14 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
         String.raw`\begin{aligned}
 Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^z}^{m\text{th}}
-\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m} \\
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+\quad (\because \text{上の一般式と } Z_m \text{ の定義}) \\
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
-\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m} \\
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+\quad (\because \text{上の一般式と } Y_m \text{ の定義}) \\
 \varepsilon &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}
+\quad (\because \text{上の一般式（} r=M \text{）と } \varepsilon \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
