@@ -1191,9 +1191,21 @@ n_\nu Q_\epsilon
       paragraph([
         "Step 4（(4) の証明）。",
         math(String.raw`T := \{\mu \in \mathcal{I} \mid \epsilon_\mu = 1\}`),
-        " とおくと ",
-        math(String.raw`Q_\epsilon = \left(\prod_{\mu \in T} n_\mu\right)\prod_{\mu \in \mathcal{I}\setminus T}(I - n_\mu)`),
-        "。第 2 の積を分配法則で展開すると",
+        " とおくと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Q_\epsilon
+&= \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}
+   \quad (\because Q_\epsilon\text{ の定義}) \\
+&= \left(\prod_{\mu \in T} R_\mu^{(1)}\right)\prod_{\mu \in \mathcal{I}\setminus T} R_\mu^{(0)}
+   \quad (\because T\text{ の定義と因子の可換性}) \\
+&= \left(\prod_{\mu \in T} n_\mu\right)\prod_{\mu \in \mathcal{I}\setminus T}(I - n_\mu)
+   \quad (\because R_\mu^{(1)},\,R_\mu^{(0)}\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。第 2 の積を分配法則で展開すると",
       ]),
       displayMath(
         String.raw`\prod_{\mu \in \mathcal{I}\setminus T}(I - n_\mu)
