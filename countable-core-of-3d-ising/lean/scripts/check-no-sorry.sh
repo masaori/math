@@ -54,6 +54,7 @@ fi
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 #    具体版・必要十分版・両者をつなぐ導出の 3 本を、いずれも登録する。
 targets=(
+  Ising3DCut.LimitQuantity.no_equiv_of_card_four_of_forty_dvd_card
   Ising3DCut.NullModel.edge_endpoints_parity_differ
   Ising3DCut.NecSuf.NullModel.endpoint_colors_differ_iff_not
   Ising3DCut.NullModel.edge_endpoints_parity_differ_from_necSuf

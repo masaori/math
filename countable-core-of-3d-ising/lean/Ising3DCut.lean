@@ -93,6 +93,7 @@ import Ising3DCut.LimitQuantity.SiteCountIndependentOfQ
 import Ising3DCut.LimitQuantity.RealLimitOfEqualSequences
 import Ising3DCut.LimitQuantity.TailShiftLimitAbstract
 import Ising3DCut.LimitQuantity.TailShiftLimit
+import Ising3DCut.LimitQuantity.GaloisGroupOrderComparison
 import Ising3DCut.LimitQuantity.PositiveRealRootUnique
 import Ising3DCut.LimitQuantity.LimitQuantityDeterminedBySequence
 import Ising3DCut.LimitQuantity.LimitQuantityDeterminedBySequenceAbstract
