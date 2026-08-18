@@ -149,19 +149,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        ref("cosh_sinh_basic_properties"),
-        " の加法定理 ",
-        math(String.raw`\cosh(x-y) = \cosh x\cosh y - \sinh x\sinh y`),
-        " を ",
-        math(String.raw`x = 2K_1`),
-        "、",
-        math(String.raw`y = 2K_2^*`),
-        " に適用すると",
-      ]),
-      displayMath(
-        String.raw`\cosh\left(2K_1-2K_2^*\right) = c_1c_2^* - s_1s_2^*`,
-      ),
-      paragraph([
+        "準備として、",
         ref("def_transfer_matrix_symbols"),
         " より ",
         math(String.raw`K_1, K_2^* > 0`),
@@ -171,23 +159,31 @@ export default defineBlocks([
         math(String.raw`s_2^* = \sinh 2K_2^* > 0`),
         "、したがって ",
         math(String.raw`s_1s_2^* > 0`),
-        " である。また ",
-        math(String.raw`\cos\theta \leq 1`),
-        " なので",
+        " である。このとき",
       ]),
       displayMath(
-        String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta
-\geq c_1c_2^* - s_1s_2^* = \cosh\left(2K_1-2K_2^*\right)`,
+        String.raw`\begin{aligned}
+\gamma_1(\theta)
+&= c_1c_2^* - s_1s_2^*\cos\theta
+&&(\because\ \gamma_1(\theta)\ \text{の定義})\\
+&\geq c_1c_2^* - s_1s_2^*\cdot 1
+&&(\because\ \cos\theta\leq 1\ \text{と}\ s_1s_2^*>0\text{。負号つきの項なので向きが変わる})\\
+&= c_1c_2^* - s_1s_2^*
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
+&= \cosh\left(2K_1-2K_2^*\right)
+&&(\because\ \text{加法定理}\ \cosh(x-y)=\cosh x\cosh y-\sinh x\sinh y\ \text{を}\ x=2K_1,\ y=2K_2^*\ \text{に適用})\\
+&\geq 1
+&&(\because\ \cosh\ \text{は実数で}\ 1\ \text{以上})
+\end{aligned}`,
       ),
       paragraph([
+        "である（引いたブロックは ",
+        ref("def_A_theta"),
+        "、",
+        ref("def_transfer_matrix_symbols"),
+        "、",
         ref("cosh_sinh_basic_properties"),
-        " より ",
-        math(String.raw`\cosh x \geq 1`),
-        " がすべての実数 ",
-        math(String.raw`x`),
-        " で成り立つので、",
-        math(String.raw`\gamma_1(\theta) \geq 1`),
-        "。",
+        "）。",
         math(String.raw`\mathrm{arccosh}`),
         " は ",
         math(String.raw`[1,\infty)`),
@@ -200,7 +196,15 @@ export default defineBlocks([
         " に属する。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-18: 式変形の書き方を統一した。加法定理の適用と cosθ≤1 による評価が" +
+          "散文で継がれた 2 つの表示に分かれていたのを、γ_1(θ) から 1 までの一続きの鎖にし、" +
+          "根拠を行末の (∵ …) へ揃えた。引いていた根拠（加法定理・K_1,K_2^*>0・cosh≥1）は" +
+          "すべて行末と直後の参照に残した。段は増えており、減った段は無い。",
+      ],
+    },
   },
 
   {
