@@ -38,7 +38,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         "整数 ",
-        math(String.raw`L\ge2`),
+        math(String.raw`L\ge1`),
         " を固定する。整数の有限集合 ",
         math(String.raw`I_L=\{0,1,\dots,L-1\}`),
         " を使って",
