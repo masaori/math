@@ -6,6 +6,8 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-18 の tick 419 は、台帳の先頭行「臨界点の正値性」を四層で閉じた（住処 Qbar、脱出なし）。**
+  `claim_critical_point_positive`: 第 5 条件の $s=w^2$ と二平方和の平方表示 $s+1=w^2+1^2=v^2$ を用い、二平方和の零性から $v\ne0$、$(s-1)(s+1)=s^2-1=1$ から $x_c=s-1=(v^{-1})^2$ を得て $0<_Rx_c$ とした。SageMath `check/critical-point-positive/`（`AA` 厳密）、Lean 具体版・必要十分版（体の四則、平方和の平方表示と零性だけ）・導出版。式変形統一は姉妹側「$Z_m,Y_m$ は線型独立」の Step 3 の二つの表示に行末根拠を追加した。sorry 検査 1457 件・check 509 ブロック・verify-check-linkage 290 件・build:pdf 275 ページ、姉妹側 check 300 ブロック・PDF 327 ページ通過。
 - **2026-08-18 の tick 418 は、台帳の計画（$[0,1]$ の等分と正の有理端点）が現状の固定では証明不能である（$0<_Rx_c$ が $s$ と $(R,\omega)$ の独立な選択に依存する）ことを見つけ、最小修復として `def_real_closed_subfield` の組の固定に第 5 条件「$s$ が $R$ の平方」を加えた。**
   第 1〜4 条件だけでは $s$ と $-s$ のどちらが $R$ の平方かが組の選び方で変わり、$0<_Rx_c$ も「正の有理数 $q$ で $(x_c-q)^2<_R\delta$」も選択依存の主張になって述べられない（$s\mapsto-s$ で $x_c$ は共役根 $-1-s$ に移る）。既存の主張はすべて第 1〜4 条件しか使わないので影響しない。存在は Artin–Schreier（$s$ を正とする順序体 $\mathbb{Q}(s)$ の実閉包）で従来と同格の既知事実として引く。Lean は基底構造を変えず拡張構造 `RealClosedSubfieldSqrtTwoData` を追加、SageMath は `check/real-closed-subfield/` に第 5 条件（証人 $w=2^{1/4}$）の節を追加して再実行・通過。「臨界点を挟む有理等分区間」は、臨界点の正値性・上界を先に置く 3 行へ割り直した。式変形統一は姉妹側「Pauli 行列の生成」の二つの鎖の先頭行へ根拠を足し、姉妹側 check 300 ブロック・PDF 327 ページ通過。sorry 検査 1439 件・check 508 ブロック・verify-check-linkage 289 件・build:pdf 275 ページ通過。
 - **2026-08-18 の tick 417 は、「臨界点への有理近似」を有限等分の三論法へ割り、その最初「正の有理数より平方が小さい有理網幅」を四層で閉じた（住処 Q、脱出なし）。**
@@ -14,9 +16,6 @@
   `claim_square_of_sum_le_twice_sum_of_squares`: 任意の $u,v\in R$ について $(u+v)\cdot(u+v)\le_R2\cdot(u\cdot u)+2\cdot(v\cdot v)$。差 $D=(2u^2+2v^2)-(u+v)^2$ を三段の式変形（展開・同類項・因数分解）で $(u-v)\cdot(u-v)$ へ変形し、$u=v$ なら差が零元で `def_real_algebraic_nonstrict_order` の等号の枝、$u\ne v$ なら $w:=u-v\ne0$ が平方の証人で狭義順序の枝。前 tick の確定どおり加法単調性の独立主張は作っていない。SageMath `check/square-of-sum-le-twice-squares/`（`AA` の標本 7 個の全 49 組で式変形の各段と両枝を厳密確認）。Lean 具体版 `CriticalExponent/SquareOfSumLeTwiceSquares.lean`、必要十分版 `NecSuf/CriticalExponent/SquareOfSumLeTwiceSquares.lean`（`squareOfSum_le_twiceSumOfSquares_necSuf`。CommRing だけを仮定し、体・三分法・実閉性を落とす）、導出版。sorry 検査 1436 件・check 507 ブロック・verify-check-linkage 288 件・build:pdf 274 ページ、および姉妹側 check 300 ブロック・PDF 326 ページ通過。
 - **2026-08-18 の tick 415 は、台帳の先頭行「順序の加法単調性」を独立した主張にしないと確定し、todo から除いた。**
   $b<_Rc$ から $a+b<_Ra+c$ を得る段は、差 $(a+c)-(a+b)=c-b$ が変わらないという $R$ の四則と `def_real_algebraic_strict_order` の定義を展開するだけであり、runbook が削除対象として明記する「両辺に同じものを足す」ブロックそのものである。本文・SageMath・Lean は追加せず、後続「和の平方の評価」の該当行末へ「$R$ の四則と狭義順序の定義」と書く。式変形統一は姉妹側「$V_1$ の固有空間への制限」の Step 4 冒頭で、$G-G^{(\pm)}$ の一等号に束ねていた定義の代入・分配・共通項の相殺を一続き三段へ開いた。sorry 検査 1433 件・check 506 ブロック・verify-check-linkage 287 件・build:pdf 274 ページ、および姉妹側 check 300 ブロック・PDF 326 ページ通過。
-- **2026-08-18 の tick 414 は、台帳の先頭行「先頭距離の列と詰め寄りの述語の接続」を論法単位の 5 行へ割り、その最初「先頭距離が上界未満であることと上界未満の零点の存在は同値」を四層で閉じた（住処 Qbar、脱出なし）。**
-  `claim_leading_distance_lt_iff_close_zero`: $L\ge2$、$t\in R$ について $d_1(L)<_Rt\iff\exists\xi\in\mathcal F_L,\ \mathrm{dsq}_c(\xi)<_Rt$。左向きは $d_1(L)\in D_L$ の証人、右向きは最小性の場合分け（等しい枝は書き換え、大きい枝は `claim_real_algebraic_order_transitive`）。のちに $t:=\varepsilon\cdot\varepsilon$（$\varepsilon\in\mathbb Q_{>0}$）と取り、`def_zero_pinching_predicate` と同じ形の $\mathbb Q$ 上の量化の言明へ結ぶ接続である。
-  SageMath `check/leading-distance-lt-iff/`（$L=2$ × $s$ 2 根 × 上界 4 個の 8 組で真偽の一致。`AA` 厳密）。Lean 具体版 `CriticalExponent/LeadingDistanceLtIff.lean`、必要十分版 `NecSuf/CriticalExponent/LeadingDistanceLtIff.lean`（`min_lt_iff_exists_lt_necSuf`。証人の存在・最小性・推移律だけを仮定し、体・三分法・有限集合・零元を落とす）、導出版。sorry 検査 1433 件・check 506 ブロック・verify-check-linkage 287 件・build:pdf 274 ページ通過。
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 
@@ -24,7 +23,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 臨界指数を零点列で書く | 臨界点の正値性 | todo | $0<_Rx_c$。第 5 条件の $s=w\cdot w$ から $s+1=w\cdot w+1\cdot1$ を平方和の平方（`claim_real_closed_sum_of_two_squares_is_square`）で $v\cdot v$（$v\ne0$ は二平方和の零性）とし、$(s-1)(s+1)=s\cdot s-1=1$ から $x_c=s-1=(1/v)\cdot(1/v)$ |
 | 臨界指数を零点列で書く | 臨界点は一より小さい | todo | $x_c<_R1$。$1-x_c=2-s=s\cdot s-s=s\cdot(s-1)=s\cdot x_c$ が正の積（$s=w\cdot w$、$x_c=(1/v)^2$ から $(w/v)\cdot(w/v)$、$w/v\ne0$） |
 | 臨界指数を零点列で書く | 臨界点を挟む有理等分区間 | todo | $N\ge1$ に対し $k/N\le_Rx_c<_R(k+1)/N$ なる $k\in\mathbb{N}$、$k+1\le N$ の存在。集合 $\{k\le N:\ \iota(k/N)\le_Rx_c\}$ の最大元。$0$ の所属は正値性、$N$ の非所属は上界と推移律・三分法 |
 | 臨界指数を零点列で書く | 挟み込み区間から臨界点への有理近似を取る | todo | 正の有理端点を $q$ とし、区間幅の平方が $\delta$ 未満であることから $(x_c-q)^2<_R\delta$ を出す |
@@ -35,15 +33,17 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-18（tick 419）: 台帳の先頭行「臨界点の正値性」を実行し、`claim_critical_point_positive` を有理網幅の直後に置いた。第 5 条件、二平方和の平方表示と零性、$R$ の四則から $x_c=(v^{-1})^2$ を得た。SageMath `AA` 厳密検査、Lean 具体版・必要十分版・導出版。sorry 検査 1457 件・check 509 ブロック・verify-check-linkage 290 件・PDF 275 ページ通過。
 - 2026-08-18（tick 418）: セクション「臨界点を挟む有理等分区間」に着手したところ、$[0,1]$ の等分と正の有理端点という計画そのものが、$0<_Rx_c$ の選択依存性（$s\mapsto-s$ の取り替えで $x_c$ が共役根 $-1-s$ に移る一方、$(R,\omega)$ の固定は「どれを固定したかに依存する主張は述べない」を要求する）により証明不能と分かった。最小修復として `def_real_closed_subfield` に第 5 条件「零元でない $w\in R$ で $s=w\cdot w$」を追加（本文・Lean 拡張構造 `RealClosedSubfieldSqrtTwoData`・SageMath 第 5 条件節）。セクションを「臨界点の正値性」「臨界点は一より小さい」「臨界点を挟む有理等分区間」の 3 行へ割り直した。sorry 検査 1439 件・check 508 ブロック・verify-check-linkage 289 件・PDF 275 ページ通過。
 - 2026-08-18（tick 417）: 「臨界点への有理近似」を、有限等分の網幅／臨界点を挟む隣接区間／近似点の抽出の三論法へ割り、その最初「正の有理数より平方が小さい有理網幅」を実行した。`claim_positive_rational_mesh_width` を和の平方の評価の直後に置き、$\mathbb Q$ の Archimedes 性から $h_N^2<\delta$ を示した。SageMath 6 個、Lean 具体版・必要十分版（Archimedes 的な線型順序体）・導出版。sorry 検査 1439 件・check 508 ブロック・verify-check-linkage 289 件・PDF 275 ページ通過。
 - 2026-08-18（tick 416）: 台帳の先頭行「和の平方の評価」を実行し、`claim_square_of_sum_le_twice_sum_of_squares` を上界の同値の直後に置いた。差 $(2u^2+2v^2)-(u+v)^2$ を三段の式変形で $(u-v)\cdot(u-v)$ へ変形し、$u=v$／$u\ne v$ の場合分けで広義順序の二枝へ落とした。SageMath 49 組、Lean 具体版・必要十分版（CommRing のみ）・導出版。sorry 検査 1436 件・check 507 ブロック・verify-check-linkage 288 件・PDF 274 ページ通過。
 - 2026-08-18（tick 415）: 台帳の先頭行「順序の加法単調性」は、差 $(a+c)-(a+b)=c-b$ が変わらないという $R$ の四則と狭義順序の定義を展開するだけで、runbook が「何も言っていない主張」の例として明記する「両辺に同じものを足す」に一致するため、独立ブロック・SageMath・Lean を作らず todo から除いた。後続「和の平方の評価」の式変形内で行末根拠として使う。sorry 検査 1433 件・check 506 ブロック・verify-check-linkage 287 件・PDF 274 ページ通過。
-- 2026-08-18（tick 414）: 台帳の先頭行「先頭距離の列と詰め寄りの述語の接続（可算な言明）」を論法単位の 5 行（上界の同値／順序の加法単調性／和の平方の評価／臨界点への有理近似／接続の完成）へ割り、その最初「先頭距離が上界未満であることと上界未満の零点の存在は同値」を実行した。割った理由: 接続には順序の不等式評価と $\sqrt2$ の有理近似がまだ本文に無く、1 tick で閉じないため。`claim_leading_distance_lt_iff_close_zero` を先頭距離の正値性の直後に置いた。SageMath 8 組、Lean 具体版・必要十分版・導出版。sorry 検査 1433 件・check 506 ブロック・verify-check-linkage 287 件・PDF 274 ページ通過。
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
+
+- 2026-08-18（tick 419）: 姉妹側「$Z_m,Y_m$ は線型独立」（`004_transfer_matrix.ts`）の Step 3 で、帰納法から得た $Z_m,Y_m$ のクロネッカー積表示の二行に、それぞれ Step 3 の帰納法と $Z_m,Y_m$ の定義を行末根拠として追加した（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 327 ページ通過。
 
 - 2026-08-18（tick 418）: 姉妹側「Pauli 行列の生成」（`004_transfer_matrix.ts` の $\sigma_k^a\sigma_k^b$・$\sigma_k^a\sigma_l^b$ の二つの鎖。同一証明ブロック）で、根拠の無かった先頭行（定義の代入）へ行末の $(\because\ \dots)$ を足した（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 327 ページ通過。
 
@@ -52,12 +52,6 @@
 - 2026-08-18（tick 416）: 姉妹側「$V_1$ の固有空間への制限」（`004_transfer_matrix.ts`）の Step 4 後半で、一等号に束ねていた $\mathbf{end}$ の線型性・$G-G^{(\pm)}$ の表示の代入・積の保存（$\widehat{\varepsilon W}=\hat\varepsilon\circ\hat W$）・$f$ への評価を、一続きの鎖（全体で八段）・各行の根拠つきへ開いた（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 326 ページ通過。
 
 - 2026-08-18（tick 415）: 姉妹側「$V_1$ の固有空間への制限」（`004_transfer_matrix.ts`）の Step 4 冒頭で、一等号に束ねていた $G,G^{(\pm)}$ の定義の代入／スカラー倍の分配／共通の有限和の相殺を、一続き三段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 326 ページ通過。
-
-- 2026-08-18（tick 414）: 姉妹側「$\varepsilon$ の固有空間」（`004_transfer_matrix.ts`）で、$\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb C)}$ の二等号を 1 つの根拠で束ねていた表示を、$\varepsilon$ の定義の代入／クロネッカー積の積の規則／$\sigma^x\sigma^x=I$ の各因子への適用／単位元の規則、の一続き四段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check・PDF 326 ページ通過。
-
-- 2026-08-18（tick 413）: 姉妹側「$\mathbf{end}$ は単位的 $\mathbb C$-代数の同型」（`004_transfer_matrix.ts`）の Step 4 結論で、散文に圧縮されていた $\mathbf{end}(I)=\mathrm{id}_{\mathcal F}$ を、単位行列の行列単位展開／$\mathbf{end}$ の線型性／$\mathbf{end}(E_{I,I})=\Theta_{I,I}$／基底上で示した恒等写像との一致、の一続き四段・各行の根拠つきへ揃えた（内容・参照は不変）。姉妹側 check・PDF 326 ページ通過。
-
-
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）
 
@@ -70,11 +64,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-18（tick 419）: tick 418 の「実閉部分体の固定に第 5 条件を追加」を本文・SageMath・Lean 拡張構造で突き合わせ、一致した。SageMath も再実行して通過。この条件は固定した $s$ と順序の向きを整合させ、今 tick の正値性と次 tick の上界が直接引くため「何も言っていない主張」ではない。修正なし。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 418）: tick 417 の「正の有理数より平方が小さい有理網幅」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。SageMath 6 個も再実行して通過し、修正なし。この主張は $\mathbb{Q}$ の Archimedes 性を使う存在言明であり「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 417）: tick 416 の「和の平方は平方和の二倍以下である」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、三段の恒等式と $u=v$／$u\ne v$ の二枝が一致した。SageMath 49 組も再実行して通過し、修正なし。この主張は後続が距離の差を二項へ分けたあと直接引く平方評価であり、体の四則だけを独立させた「何も言っていない主張」ではない。姉妹側 Step 4 後半も内容・参照が不変の八段になっていた。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 416）: tick 415 の二つの出力（「順序の加法単調性」を todo から除く判断と、姉妹側 Step 4 冒頭の書き換え）を突き合わせた。除去の判断は runbook が削除対象として明記する「両辺に同じものを足す」に一致し、本文・SageMath・Lean に対応物が無いことも確認した。姉妹側の書き換えは内容・参照が不変で一続き三段・各行根拠つきになっている。修正なし。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 - 2026-08-18（tick 415）: tick 414 の「先頭距離が上界未満であることと上界未満の零点の存在は同値」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。SageMath 8 組も再実行して通過し、修正なし。この主張は先頭距離の最小性を個々の零点の存在量化へ接続し、後続の詰め寄りの接続が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
-- 2026-08-18（tick 414）: tick 413 の「先頭距離の正値性」の本文・SageMath・Lean 具体版・必要十分版・導出版を突き合わせ、一致した。修正なし。この主張は先頭距離の非零性と正値性を確定し、今 tick の上界の同値と後続の接続が直接引くため「何も言っていない主張」ではない。本文末尾「この先に書くこと」とセクション表の食い違いなし。
 ## 判断待ち（人間に問うべき論点）
 
 - **content のファイルを分けるときの文書順の決め方。** システムは `content/` のファイル名昇順を

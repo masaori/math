@@ -390,10 +390,12 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         String.raw`\begin{aligned}
 Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^z}^{m\text{th}}
-\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m} \\
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+\quad (\because \text{Step 3 の帰納法と }Z_m\text{ の定義}) \\
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+\quad (\because \text{Step 3 の帰納法と }Y_m\text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
