@@ -89,6 +89,7 @@ export const ALL_LABELS = [
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",
   "theorem_quotient_tower_coset_cell_incidence_forward_preservation",
   "theorem_quotient_tower_oriented_edge_endpoint_map_preservation",
+  "theorem_quotient_tower_oriented_face_boundary_word_preservation",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
