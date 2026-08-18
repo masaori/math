@@ -3656,6 +3656,118 @@ G'_2=\operatorname{Aut}_{\mathbb Q}(K'_2)=\operatorname{Aut}_{\mathbb Q}(K_3)`,
     ],
   },
   {
+    id: "soundness_bridge_claim_shifted_free_family_partition_values_differ_but_finite_box_quantities_agree",
+    kind: "claim",
+    title: { text: "ずらした自由族は分配多項式値が異なっても有限箱量が各箱で一致する" },
+    labels: ["claim_shifted_free_family_partition_values_differ_but_finite_box_quantities_agree"],
+    habitat: "R",
+    realEscape:
+      "有限箱量 a_L(1), a'_L(1) は def_limit_quantity_from_finite_box_sequence で箱の大きさの極限の入力として既に正の実数へ写した量である。本主張では極限を取らず、その q=1 での値を claim_partition_value_at_one から有限に計算するだけであり、新たな非可算への脱出は行わない。",
+    statement: [
+      paragraph([
+        "自由境界の分配多項式の族 ",
+        math(String.raw`(Z_L)_{L\ge1}`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）と、ずらした自由族 ",
+        math(String.raw`Z'_L(X):=Z_{L+1}(X)`),
+        " を取る。正の有理点 ",
+        math(String.raw`q=1`),
+        " では、有限箱 ",
+        math(String.raw`L=2`),
+        " の分配多項式値は",
+      ]),
+      displayMath(String.raw`Z_2(1)=2^8\ne2^{27}=Z'_2(1)`),
+      paragraph([
+        "である。一方、",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        " の有限箱量 ",
+        math(String.raw`a_L(1)`),
+        " と、",
+        ref("claim_shifted_free_family_discriminant_does_not_determine_limit_quantity"),
+        " で定めたずらした族の有限箱量 ",
+        math(String.raw`a'_L(1)`),
+        " は、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " について",
+      ]),
+      displayMath(String.raw`a_L(1)=2=a'_L(1)`),
+      paragraph(["を満たす。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_partition_value_at_one"),
+        " を ",
+        math(String.raw`L=2,3`),
+        " に適用する。",
+        ref("def_box"),
+        " の有限集合 ",
+        math(String.raw`V_L=I_L\times I_L\times I_L`),
+        " の元の個数は ",
+        math(String.raw`\#V_L=L^3`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_2(1)
+&=2^{\#V_2}
+&&(\because\ \blkref{claim_partition_value_at_one})\\
+&=2^8
+&&(\because\ \#V_2=2^3=8),\\[3pt]
+Z'_2(1)
+&=Z_3(1)
+&&(\because\ Z'_2=Z_{2+1})\\
+&=2^{\#V_3}
+&&(\because\ \blkref{claim_partition_value_at_one})\\
+&=2^{27}
+&&(\because\ \#V_3=3^3=27).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`8<27`),
+        " かつ自然数上で ",
+        math(String.raw`n\mapsto2^n`),
+        " は狭義単調なので、",
+        math(String.raw`2^8\ne2^{27}`),
+        " である。",
+      ]),
+      paragraph([
+        "次に任意の ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " を取る。",
+        ref("claim_partition_value_at_one"),
+        " と ",
+        math(String.raw`Z'_L=Z_{L+1}`),
+        " により、",
+      ]),
+      displayMath(String.raw`Z_L(1)=2^{\#V_L},\qquad Z'_L(1)=2^{\#V_{L+1}}.`),
+      paragraph([
+        math(String.raw`\#V_L>0`),
+        " および ",
+        math(String.raw`\#V_{L+1}>0`),
+        " なので、正の実数における正の整数乗根の一意性をそれぞれ一度適用すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a_L(1)
+&=\bigl(2^{\#V_L}\bigr)^{1/\#V_L}
+&&(\because\ Z_L(1)=2^{\#V_L})\\
+&=2
+&&(\because\ \text{正の }\#V_L\text{ 乗根の一意性}),\\[3pt]
+a'_L(1)
+&=\bigl(2^{\#V_{L+1}}\bigr)^{1/\#V_{L+1}}
+&&(\because\ Z'_L(1)=2^{\#V_{L+1}})\\
+&=2
+&&(\because\ \text{正の }\#V_{L+1}\text{ 乗根の一意性}).
+\end{aligned}`),
+      paragraph([
+        "したがって、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で ",
+        math(String.raw`a_L(1)=2=a'_L(1)`),
+        " である。",
+      ]),
+    ],
+  },
+
+  {
     id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
     kind: "definition",
     title: { text: "2 次元の箱と境界応答多項式" },
