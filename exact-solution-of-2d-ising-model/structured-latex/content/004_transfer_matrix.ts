@@ -891,7 +891,7 @@ Y_m Z_{m+1}
         math(String.raw`1\le m\le M`),
         " について ",
         math(String.raw`Z_m Y_m = -i\,\sigma_m^x`),
-        "。同様に因子ごとに計算すると、",
+        "。Step 1 の表示を用いて因子ごとに計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}

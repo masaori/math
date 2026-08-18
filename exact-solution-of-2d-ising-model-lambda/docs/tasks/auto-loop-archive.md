@@ -12786,3 +12786,16 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 ### レビュー記録（tick 426）
 
 - 2026-08-18（tick 426）: tick 425 の「実閉部分体の順序を保つ実現データ」を本文と Lean 構造体 `RealClosedRealization` で突き合わせた（定義なので SageMath は無い）。環準同型の四条件と `map_lt` が本文の二条件と一対一で一致。ただし定義ブロック内で写像名が宣言済みの $\rho_{R\to\mathbb R}$ と未宣言の略記 $\rho$ の 2 通りで揺れていたため、宣言どおりへ統一し、前進前に commit `30847133` を push した。本文末尾とセクション表の食い違いなし。
+
+### 現在地（tick 426）
+
+- **2026-08-18 の tick 426 は、「有限サイズスケーリングの条件付き読み」を記述と Lean 定義で閉じ、固定した実現データの下で読みの列 $a_\rho(L)$ と「指数 $\nu$ を読める」の ε–N 条件を定義した（住処 R、実対数・極限による脱出）。**
+  `def_finite_size_scaling_reading`: 分子は先頭距離の正値性と実現データの順序保存から $\rho_{R\to\mathbb R}(d_1(L))\in\mathbb R_{>0}$、分母は $1<\iota(L)$・$\log_{\mathbb R}$ の狭義単調性・$\log_{\mathbb R}(1)=0$ から正。$a_\rho(L):=-\log_{\mathbb R}(\rho_{R\to\mathbb R}(d_1(L)))/(2\log_{\mathbb R}(\iota(L)))$（因子 2 は $d_1(L)$ が距離の二乗であることに対応）。「読める」は任意の $\varepsilon\in\mathbb Q_{>0}$ にある $N$ で両側評価、量化は ℕ・ℚ 上。討議ノートの切り分けに従い、条件を満たす $\nu$ の存在・一意性・$\nu=1$ は主張しない。定義なので SageMath・必要十分版は置かず、Lean 具体版 `CriticalExponent/FiniteSizeScalingReading.lean`（正値性 2 定理を sorry 検査へ登録）。レビュで tick 425 の実現データの定義内の写像名の揺れ（$\rho$ と $\rho_{R\to\mathbb R}$）を統一して前進前に push。式変形統一は姉妹側の数演算子の積のトレースの $e_1=1$ の場合の散文を一続き四段へ開いた。sorry 検査 1459 件・check 516 ブロック・linkage 295 件・PDF 280 ページ、姉妹側 check・PDF 327 ページ通過。
+
+### 前進の記録（tick 426）
+
+- 2026-08-18（tick 426）: 台帳の先頭行「有限サイズスケーリングの条件付き読み」を実行し、`def_finite_size_scaling_reading` を実現データの直後に置いた。分子・分母の正値性を確かめて読みの列 $a_\rho(L)$ を定義し、「指数 $\nu\in\mathbb Q_{>0}$ を読める」を ε–N の両側評価（量化は ℕ・ℚ 上）として定めた。条件を満たす $\nu$ の存在・一意性・$\nu=1$ は主張しない。定義なので SageMath・必要十分版は置かず、Lean 具体版 `CriticalExponent/FiniteSizeScalingReading.lean`（`realizedLeadingDistance_pos`・`latticeSizeRealLog_pos`・`scalingLogRatio`・`FiniteSizeScalingReads`。正値性 2 定理を sorry 検査へ登録、1459 件）。本文末尾の項目とセクション表を、討議ノートの方針に沿う「検証水準の検算と再定式化水準の命題候補の観察」へ差し替えた。check 516 ブロック・linkage 295 件・PDF 280 ページ通過。
+
+### 式変形の書き方の統一（tick 426）
+
+- 2026-08-18（tick 426）: 姉妹側「$\mathrm{tr}(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)})=2^{M-k}$」（`009_eigenvalues_of_V.ts`）の帰納段階で、$e_1=1$ の場合が「上の計算から直ちに結論を得る」という散文だけだった箇所を、一続き四段（$R_{\mu_1}^{(1)}=n_{\mu_1}$／直前に得た等式／帰納法の仮定／指数の計算）の式変形と行末根拠へ開いた（内容・参照は不変）。姉妹側 check 300 ブロック・PDF 327 ページ通過。
