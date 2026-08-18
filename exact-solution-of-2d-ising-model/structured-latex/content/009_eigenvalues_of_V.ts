@@ -557,18 +557,14 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
         math(String.raw`\delta^M_{\mu+(-\mu),0} = 1`),
         " であり、",
       ]),
-      displayMath(
-        String.raw`\psi_\mu^\dagger\psi_{-\mu} + \psi_{-\mu}\psi_\mu^\dagger = I`,
-      ),
-      paragraph([
-        "左辺第 1 項は ",
-        ref("def_number_operator"),
-        " より ",
-        math(String.raw`n_\mu`),
-        " だから、移項して ",
-        math(String.raw`\psi_{-\mu}\psi_\mu^\dagger = I - n_\mu`),
-        "。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+\psi_{-\mu}\psi_\mu^\dagger
+&= I-\psi_\mu^\dagger\psi_{-\mu}
+&&\left(\because\ [\psi_\mu^\dagger,\psi_{-\mu}]_+=I\ \text{と行列の加法}\right)\\
+&= I-n_\mu
+&&\left(\because\ \text{フェルミオン数演算子 }n_\mu\text{ の定義}\right)
+\end{aligned}`),
+      paragraph([ref("anticommutator_of_psi"), " と ", ref("def_number_operator"), " を引いた。"]),
       paragraph(["(3) (1)(2) を使って"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -597,6 +593,7 @@ n_\mu^2
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "2026-08-15 の式変形統一で、(3) の鎖の先頭行（フェルミオン数演算子の定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
+        "2026-08-18 の式変形統一で、(2) の反交換関係からの移項を散文で済ませず、一続き二段の式変形と行末根拠へ揃えた。内容は変えていない。",
       ],
     },
   },
