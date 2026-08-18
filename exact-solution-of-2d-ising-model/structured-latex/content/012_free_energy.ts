@@ -280,7 +280,7 @@ e^u
 &&\left(\because\ \log\text{ と }\exp\text{ は正の実数上で互いに逆写像}\right),\\
 e^{-u}
 &=\frac{1}{e^u}
-&&\left(\because\ e^{-u}=\frac{1}{e^u}\right)\\
+&&\left(\because\ \text{指数法則 }e^{-u}\cdot e^{u}=e^{0}=1\right)\\
 &=\frac{1}{y+\sqrt{y^2-1}}
 &&\left(\because\ \text{上の }e^u\text{ の表示}\right)\\
 &=y-\sqrt{y^2-1}
