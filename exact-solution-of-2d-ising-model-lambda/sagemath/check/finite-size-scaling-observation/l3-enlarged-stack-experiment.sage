@@ -1,7 +1,8 @@
 # 対象ラベル: def_finite_size_scaling_reading
 # L=3 の切り分け実験: PARI スタックを 8 GiB（上限 16 GiB）へ拡張して
 # check.sage と同じ全根分離経路を再実行する。2026-08-18 の実行では
-# スタック超過は再発せず、540 秒の時間切れで打ち切られた（時間律速）。
+# 540 秒内にはスタック超過が再発せず、時間切れで打ち切られた。
+# 実行段階の出力は永続化されていないため、停止した段階は確定していない。
 # 実行例: timeout 540 sage l3-enlarged-stack-experiment.sage
 
 import os, time
