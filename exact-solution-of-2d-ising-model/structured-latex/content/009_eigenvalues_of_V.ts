@@ -856,7 +856,7 @@ n_\mu n_\nu
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(n_{\mu_1} P\right)
 &= \mathrm{tr}\!\left(\psi_{\mu_1}^\dagger \psi_{-\mu_1} P\right)
-   \quad (\because \text{定義}) \\
+   \quad (\because \text{フェルミオン数演算子 } n_{\mu_1} \text{ の定義}) \\
 &= \mathrm{tr}\!\left(\psi_{-\mu_1} P\, \psi_{\mu_1}^\dagger\right)
    \quad (\because \text{巡回性を } A = \psi_{\mu_1}^\dagger,\ B = \psi_{-\mu_1}P \text{ に適用}) \\
 &= \mathrm{tr}\!\left(P\, \psi_{-\mu_1}\psi_{\mu_1}^\dagger\right)
