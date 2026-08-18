@@ -1,0 +1,94 @@
+[     0.0s] === run start 2026-08-18T16:38:19.207942
+[     0.0s] stage: transfer matrix built, size 32
+[     0.1s] stage: partition polynomial built as Tr T^L (theorem_partition_polynomial_is_trace), degree 40
+[     0.1s] stage: sanity check passed, Z_5(1) = 2^25
+[     0.2s] stage: ZZ[x] factorization, (degree, multiplicity) = [(0, 1), (40, 1)]
+[     0.2s]   factor: degree 0 multiplicity 1 leading coefficient 2 constant term 2
+[     0.2s]   factor: degree 40 multiplicity 1 leading coefficient 1235 constant term 1
+[     0.2s] stage: roots isolated, count 40
+[     0.2s]   distance interval done for root 1 of 40
+[     0.2s]   distance interval done for root 2 of 40
+[     0.2s]   distance interval done for root 3 of 40
+[     0.2s]   distance interval done for root 4 of 40
+[     0.2s]   distance interval done for root 5 of 40
+[     0.2s]   distance interval done for root 6 of 40
+[     0.2s]   distance interval done for root 7 of 40
+[     0.2s]   distance interval done for root 8 of 40
+[     0.2s]   distance interval done for root 9 of 40
+[     0.2s]   distance interval done for root 10 of 40
+[     0.2s]   distance interval done for root 11 of 40
+[     0.2s]   distance interval done for root 12 of 40
+[     0.2s]   distance interval done for root 13 of 40
+[     0.2s]   distance interval done for root 14 of 40
+[     0.3s]   distance interval done for root 15 of 40
+[     0.3s]   distance interval done for root 16 of 40
+[     0.3s]   distance interval done for root 17 of 40
+[     0.3s]   distance interval done for root 18 of 40
+[     0.3s]   distance interval done for root 19 of 40
+[     0.3s]   distance interval done for root 20 of 40
+[     0.3s]   distance interval done for root 21 of 40
+[     0.3s]   distance interval done for root 22 of 40
+[     0.3s]   distance interval done for root 23 of 40
+[     0.3s]   distance interval done for root 24 of 40
+[     0.3s]   distance interval done for root 25 of 40
+[     0.3s]   distance interval done for root 26 of 40
+[     0.3s]   distance interval done for root 27 of 40
+[     0.3s]   distance interval done for root 28 of 40
+[     0.3s]   distance interval done for root 29 of 40
+[     0.3s]   distance interval done for root 30 of 40
+[     0.3s]   distance interval done for root 31 of 40
+[     0.3s]   distance interval done for root 32 of 40
+[     0.3s]   distance interval done for root 33 of 40
+[     0.3s]   distance interval done for root 34 of 40
+[     0.3s]   distance interval done for root 35 of 40
+[     0.3s]   distance interval done for root 36 of 40
+[     0.3s]   distance interval done for root 37 of 40
+[     0.3s]   distance interval done for root 38 of 40
+[     0.3s]   distance interval done for root 39 of 40
+[     0.3s]   distance interval done for root 40 of 40
+[     0.3s] stage: all distance intervals built
+[     0.3s] stage: candidate selected
+[     0.3s]   separation checked against root 1 of 40
+[     0.3s]   separation checked against root 2 of 40
+[     0.3s]   separation checked against root 3 of 40
+[     0.3s]   separation checked against root 4 of 40
+[     0.3s]   separation checked against root 5 of 40
+[     0.3s]   separation checked against root 6 of 40
+[     0.3s]   separation checked against root 7 of 40
+[     0.3s]   separation checked against root 8 of 40
+[     0.3s]   separation checked against root 9 of 40
+[     0.3s]   separation checked against root 10 of 40
+[     0.3s]   separation checked against root 11 of 40
+[     0.3s]   separation checked against root 12 of 40
+[     0.3s]   separation checked against root 13 of 40
+[     0.3s]   separation checked against root 14 of 40
+[     0.3s]   separation checked against root 15 of 40
+[     0.3s]   separation checked against root 16 of 40
+[     0.3s]   separation checked against root 17 of 40
+[     0.3s]   separation checked against root 18 of 40
+[     0.3s]   separation checked against root 19 of 40
+[     0.3s]   separation checked against root 20 of 40
+[     0.3s]   separation checked against root 21 of 40
+[     0.3s]   separation checked against root 22 of 40
+[     0.3s]   separation checked against root 23 of 40
+[     0.3s]   separation checked against root 24 of 40
+[     0.3s]   separation checked against root 25 of 40
+[     0.3s]   separation checked against root 26 of 40
+[     0.3s]   separation checked against root 27 of 40
+[     0.3s]   separation checked against root 28 of 40
+[     0.3s]   separation checked against root 29 of 40
+[     0.3s]   separation checked against root 30 of 40
+[     0.3s]   separation checked against root 31 of 40
+[     0.3s]   separation checked against root 32 of 40
+[     0.3s]   separation checked against root 33 of 40
+[     0.4s]   separation checked against root 34 of 40
+[     0.4s]   separation checked against root 35 of 40
+[     0.4s]   separation checked against root 36 of 40
+[     0.4s]   separation checked against root 37 of 40
+[     0.4s]   separation checked against root 38 of 40
+[     0.4s]   separation checked against root 39 of 40
+[     0.4s]   separation checked against root 40 of 40
+[     0.4s] stage: separation ok (candidate and its conjugate below all others)
+[     0.4s] d_1(5) interval = 0.022140460890394723530681465533185625408587325717576793861753009594908939430381?
+[     0.4s] a_rho(5) in RealBallField(128) = [1.1837513287681226866215545161094649747 +/- 5.37e-38]
+[     0.4s] === run complete
