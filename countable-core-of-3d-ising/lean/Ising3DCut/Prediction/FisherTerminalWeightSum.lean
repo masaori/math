@@ -1,4 +1,5 @@
 import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.Field.Basic
 
 namespace Ising3DCut.Prediction
 
@@ -38,5 +39,12 @@ theorem terminalMatching_clearedWeightSum_eq_evenSubgraph_weightSum
     (fun matching ↦ commonDenominator * matchingWeight matching)
     evenSubgraphWeight
     hClearedWeight
+
+/-- Fisher terminal graph の元の辺に置く重み `(1 + x) / (1 - x)` は、
+対応する分母 `1 - x` を掛けると整数係数の因子 `1 + x` へ戻る。 -/
+theorem fisherExternalEdgeWeight_cleared
+    {K : Type*} [Field K] (x : K) (hDenominator : 1 - x ≠ 0) :
+    (1 - x) * ((1 + x) / (1 - x)) = 1 + x := by
+  exact mul_div_cancel₀ (1 + x) hDenominator
 
 end Ising3DCut.Prediction
