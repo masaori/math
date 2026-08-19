@@ -2813,4 +2813,102 @@ m
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_two_stage_ising_coefficient_valuation_difference_finite_support",
+    kind: "theorem",
+    title: { text: "固定次数における二段 Ising 係数付値差の有限台" },
+    labels: ["theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-valuation-difference-finite-support"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_map"),
+        " の二段 Ising 係数付値差写像を用いる。次数 ",
+        math(String.raw`m\in\mathbb N`),
+        " を、",
+        math(String.raw`\widehat\Omega_{\mathrm{fine}}(m)>0`),
+        " かつ ",
+        math(String.raw`\widehat\Omega_{\mathrm{coarse}}(m)>0`),
+        " を満たすように固定する。この次数で付値差が非零となる素数の集合を",
+      ]),
+      displayMath(String.raw`\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)
+:=
+\left\{
+  p\in\mathbb N_{>1}
+  \,\middle|\,
+  \begin{array}{l}
+    p\text{ は素数},\\
+    \Delta\nu_{\mathcal T}(m,p)\ne 0
+  \end{array}
+\right\}`),
+      paragraph([
+        "で定める。このとき ",
+        math(String.raw`\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)`),
+        " は有限集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=\widehat\Omega_{\mathrm{fine}}(m)\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`b:=\widehat\Omega_{\mathrm{coarse}}(m)\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`N_m:=ab\in\mathbb N_{>0}`),
+        " と置く。",
+      ]),
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_pair_map"),
+        " と ",
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_map"),
+        " より、素数 ",
+        math(String.raw`p\in\mathbb N_{>1}`),
+        " が ",
+        math(String.raw`N_m`),
+        " を割らないなら、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p\nmid N_m
+&\Longrightarrow
+p\nmid a\ \text{かつ}\ p\nmid b
+\quad(\because p\mid a\ \text{または}\ p\mid b\ \text{ならば}\ p\mid ab),\\
+&\Longrightarrow
+\nu_{\mathrm{fine},p}(m)=0\ \text{かつ}\ \nu_{\mathrm{coarse},p}(m)=0
+\quad(\because p\nmid a,\ p\nmid b),\\
+&\Longrightarrow
+\Delta\nu_{\mathcal T}(m,p)=0
+\quad(\because 0-0=0)
+\end{aligned}`),
+      paragraph([
+        "したがって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)
+&\subseteq
+\left\{
+  p\in\mathbb N_{>1}
+  \,\middle|\,
+  p\text{ は素数かつ }p\mid N_m
+\right\}
+\quad(\because \text{上の含意の対偶}),\\
+\left\{
+  p\in\mathbb N_{>1}
+  \,\middle|\,
+  p\text{ は素数かつ }p\mid N_m
+\right\}
+&\subseteq
+\left\{
+  n\in\mathbb N
+  \,\middle|\,
+  2\le n\le N_m
+\right\}
+\quad(\because p\mid N_m\ \text{かつ}\ N_m>0)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\left\{n\in\mathbb N\mid 2\le n\le N_m\right\}`),
+        " は有限集合なので、その部分集合である ",
+        math(String.raw`\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)`),
+        " も有限集合である。全ての対象は自然数、整数、有限集合および指定素数付値だけで定まり、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
