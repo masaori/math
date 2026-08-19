@@ -2168,22 +2168,22 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         ref("def_B1_theta_B2"),
         " より ",
         math(String.raw`B_1(\tilde\theta)`),
-        " の第 1 列・第 2 列そのものである。よって 2 列を並べると",
-      ]),
-      displayMath(
-        String.raw`\left(T_{(V^{(+)})}(\check{Z}_\mu),\ T_{(V^{(+)})}(\check{Y}_\mu)\right)
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  B_1(\tilde\theta)\, B_2\, B_1(\tilde\theta)`,
-      ),
-      paragraph([
-        "最後に ",
+        " の第 1 列・第 2 列そのものである。2 列を並べ、",
         ref("factorization_of_A_theta_general"),
         " を ",
         math(String.raw`\theta = \tilde\theta_\mu \in \mathbb{R}`),
-        " として適用すると ",
-        math(String.raw`B_1(\tilde\theta_\mu) B_2 B_1(\tilde\theta_\mu) = A(\tilde\theta_\mu)`),
-        " であるから、statement を得る。",
+        " として適用すると、主張の左辺から一続きに",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(T_{(V^{(+)})}(\check{Z}_\mu),\ T_{(V^{(+)})}(\check{Y}_\mu)\right)
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   B_1(\tilde\theta)\, B_2\, B_1(\tilde\theta)
+   \quad (\because \text{(z), (y) の鎖と def\_B1\_theta\_B2}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} A(\tilde\theta_\mu)
+   \quad (\because \text{factorization\_of\_A\_theta\_general})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
@@ -2191,6 +2191,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         "008 章の T_V_hatZ_hatY の半整数運動量版。008 章はこのブロックの proof の中で B_1 B_2 B_1 = A(θ) の行列計算も行っていたが、ここではそれを factorization_of_A_theta_general として θ ∈ R 一般の独立した claim に分け、本ブロックは合成の計算だけを扱う形にした。",
         "M=2,3,4,5、μ=1..M、5 組の (K1,K2)（臨界点上・臨界点近傍を含む）について、V^{(+)} を行列指数関数から直接構成して (T(checkZ), T(checkY)) = (checkZ, checkY) A(θ~_μ) を数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_04_T_V_plus_and_factorization.sage の (3)）。",
         "同じ検証で γ_2(θ~_μ) ≠ 0 が全 μ で成り立つことも数値で確認した（最小 |γ_2| は 0.56 以上）。これは章 C′ の残りの段（A(θ~) の対角化）で臨界点の例外処理が不要になることを示唆する事実であり、本章では使っていない。",
+        "2026-08-19 の式変形統一で、(z), (y) の二本の鎖から得た二列を並べる等式と、B_1(θ~_μ) B_2 B_1(θ~_μ) = A(θ~_μ) の適用を、主張の左辺から始まる一続き二段の鎖と行末根拠へまとめた。内容・参照は変えていない。",
       ],
     },
   },
