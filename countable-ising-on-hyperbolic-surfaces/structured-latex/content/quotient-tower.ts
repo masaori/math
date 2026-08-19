@@ -2523,4 +2523,117 @@ A_h
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_fourier_pushforward_pullback_compatibility",
+    kind: "theorem",
+    title: { text: "商の塔における有限 Fourier 変換と押し出し・引き戻しの整合性" },
+    labels: ["theorem_quotient_tower_fourier_pushforward_pullback_compatibility"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/two-stage-quotient-tower-fourier-pushforward-pullback-compatibility"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_homology_polynomial_family_pushforward_map"),
+        " の多項式族押し出し写像と、",
+        ref("def_quotient_tower_f2_character_pullback_map"),
+        " の文字引き戻し写像を用いる。細段と粗段の第一ホモロジー群をそれぞれ ",
+        math(String.raw`H_{\mathrm{fine}}`),
+        " と ",
+        math(String.raw`H_{\mathrm{coarse}}`),
+        " と書く。独立な不定元 ",
+        math(String.raw`u,v`),
+        "、任意の多項式族 ",
+        math(String.raw`A\in\bigl(\mathbb Z[u,v]\bigr)^{H_{\mathrm{fine}}}`),
+        "、任意の粗段文字 ",
+        math(String.raw`\psi\in H_{\mathrm{coarse}}^\vee`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\left(
+  \mathcal F_{H_{\mathrm{coarse}}}
+  \left(
+    \overline\kappa_{\mathrm{poly},!}(A)
+  \right)
+\right)_{\psi}
+=
+\left(
+  \mathcal F_{H_{\mathrm{fine}}}(A)
+\right)_{\overline\kappa_{H_1}^{\ast}(\psi)}
+\in\mathbb Z[u,v]`),
+      paragraph([
+        "が成り立つ。左辺は第一ホモロジー類を押し出してから粗段で Fourier 変換した成分、右辺は粗段文字を引き戻してから細段で Fourier 変換した成分である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B:=\overline\kappa_{\mathrm{poly},!}(A)`),
+        " と置く。任意の ",
+        math(String.raw`k\in H_{\mathrm{coarse}}`),
+        " と ",
+        math(String.raw`h\in H_{\mathrm{fine}}`),
+        " に対し、整数符号を ",
+        math(String.raw`\varepsilon_{\psi}(k):=\bigl(\operatorname{sgn}_{H_{\mathrm{coarse}}}(\psi)\bigr)(k)\in\{-1,+1\}`),
+        " および ",
+        math(String.raw`\varepsilon_{\overline\kappa^{\ast}(\psi)}(h):=\bigl(\operatorname{sgn}_{H_{\mathrm{fine}}}(\overline\kappa_{H_1}^{\ast}(\psi))\bigr)(h)\in\{-1,+1\}`),
+        " と書く。",
+      ]),
+      paragraph([
+        ref("theorem_finite_fourier_inverse_transform"),
+        " に含まれる有限 Fourier 変換の定義と ",
+        ref("def_quotient_tower_homology_polynomial_family_pushforward_map"),
+        " より",
+      ]),
+      displayMath(String.raw`\left(
+  \mathcal F_{H_{\mathrm{coarse}}}(B)
+\right)_{\psi}
+=
+\sum_{k\in H_{\mathrm{coarse}}}
+\varepsilon_{\psi}(k)
+\sum_{h\in\overline\kappa_{H_1,!}^{-1}(\{k\})}
+A_h
+\quad\bigl(\because\ \text{有限 Fourier 変換と多項式族押し出しの定義}\bigr).`),
+      displayMath(String.raw`\sum_{k\in H_{\mathrm{coarse}}}
+\varepsilon_{\psi}(k)
+\sum_{h\in\overline\kappa_{H_1,!}^{-1}(\{k\})}
+A_h
+=
+\sum_{h\in H_{\mathrm{fine}}}
+\varepsilon_{\psi}
+\left(
+  \overline\kappa_{H_1,!}(h)
+\right)
+A_h
+\quad\bigl(\because\ \text{写像の全ファイバーによる有限添字集合の分割}\bigr).`),
+      paragraph([
+        ref("theorem_quotient_tower_integer_sign_character_evaluation_pullback_compatibility"),
+        " より",
+      ]),
+      displayMath(String.raw`\sum_{h\in H_{\mathrm{fine}}}
+\varepsilon_{\psi}
+\left(
+  \overline\kappa_{H_1,!}(h)
+\right)
+A_h
+=
+\sum_{h\in H_{\mathrm{fine}}}
+\varepsilon_{\overline\kappa^{\ast}(\psi)}(h)A_h
+\quad\bigl(\because\ \text{整数符号文字評価と引き戻しの整合性}\bigr).`),
+      paragraph([
+        ref("theorem_finite_fourier_inverse_transform"),
+        " に含まれる有限 Fourier 変換の定義より",
+      ]),
+      displayMath(String.raw`\sum_{h\in H_{\mathrm{fine}}}
+\varepsilon_{\overline\kappa^{\ast}(\psi)}(h)A_h
+=
+\left(
+  \mathcal F_{H_{\mathrm{fine}}}(A)
+\right)_{\overline\kappa_{H_1}^{\ast}(\psi)}
+\quad\bigl(\because\ \text{有限 Fourier 変換の定義}\bigr).`),
+      paragraph([
+        "以上の等式を順に用いて主張を得る。全ての添字集合は有限であり、係数は ",
+        math(String.raw`\mathbb Z`),
+        "、多項式は ",
+        math(String.raw`\mathbb Z[u,v]`),
+        " に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
