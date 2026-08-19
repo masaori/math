@@ -251,11 +251,11 @@ c_2 = \cosh 2K_2 > 0,\quad s_2^* = \sinh 2K_2^* > 0`,
         String.raw`\begin{aligned}
 \gamma_2(\theta) = 0_{\mathbb{C}}
 &\iff \left(i\,e^{i\theta}s_2^*\right)w(\theta) = 0_{\mathbb{C}}
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
+   \quad (\because \gamma_1,\gamma_2 \text{ の定義}) \\
 &\iff w(\theta) = 0_{\mathbb{C}}
-   \quad (\because i\,e^{i\theta}s_2^* \neq 0 \text{ と complex\_numbers\_form\_a\_field}) \\
+   \quad (\because i\,e^{i\theta}s_2^* \neq 0 \text{ と、体 } \mathbb{C} \text{ が零因子を持たないこと}) \\
 &\iff \begin{cases} \sin\theta = 0 \\ c_1\cos\theta = s_1c_2 \end{cases}
-   \quad (\because \text{definition\_of\_cc の成分表示})
+   \quad (\because \text{複素数の定義の成分表示（実部と虚部が共に } 0\text{）})
 \end{aligned}`,
       ),
       paragraph([
@@ -292,20 +292,17 @@ c_2 = \cosh 2K_2 > 0,\quad s_2^* = \sinh 2K_2^* > 0`,
 &\iff \exists k \in \mathbb{Z}:\ \tilde\theta_\mu = k\pi
    \quad (\because \sin t = 0 \iff \exists k \in \mathbb{Z}:\ t = k\pi) \\
 &\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\left(\mu-\frac12\right)}{M} = k\pi
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+   \quad (\because \tilde\theta_\mu \text{ の定義}) \\
+&\iff \exists k \in \mathbb{Z}:\ \frac{2\left(\mu-\frac12\right)}{M} = k
+   \quad (\because \text{両辺を } \pi > 0 \text{ で割る}) \\
 &\iff \exists k \in \mathbb{Z}:\ 2\left(\mu - \tfrac12\right) = kM
-   \quad (\because \text{両辺を } \pi \text{ で割って } M \text{ 倍する}) \\
+   \quad (\because \text{両辺を } M \neq 0 \text{ 倍する}) \\
 &\iff \exists k \in \mathbb{Z}:\ 2\mu - 1 = kM
+   \quad (\because \text{分配則 } 2\left(\mu-\tfrac12\right) = 2\mu - 1)
 \end{aligned}`,
       ),
       paragraph([
-        "（両辺を ",
-        math(String.raw`\pi`),
-        " で割って ",
-        math(String.raw`M`),
-        " 倍し、",
-        math(String.raw`2(\mu-\frac12) = 2\mu-1`),
-        " を使った）。ここが整数運動量との分かれ目である：**左辺 ",
+        "ここが整数運動量との分かれ目である：**左辺 ",
         math(String.raw`2\mu-1`),
         " は奇数**なので、",
         math(String.raw`kM`),
@@ -386,6 +383,9 @@ s_1c_2
           "臨界点ちょうどのとき |γ_2| ~ 1e-16（＝0）になる（sagemath/check/048_claim_A_theta_tilde/check_01）。",
         "sin θ~_μ = 0 となる (M, μ) は M が奇数のときの (2μ−1)/M が奇数の場合に限られ（μ ∈ {1,…,M} では k = 1 のみ）、" +
           "そこでは常に cos θ~_μ = −1 であることも M ≤ 40 の全探索で確認した（同 check_01 の (c)）。",
+        "2026-08-19 の式変形統一で、Step 1・Step 2 の鎖の行末根拠をラベル識別子の生文字列から人間可読な名前へ直し、" +
+          "Step 2 の「両辺を π で割って M 倍する」を一操作ずつの二行に分け、最終行（2(μ−1/2) = 2μ−1）に" +
+          "行末根拠を補って鎖の後の重複した散文根拠を外した。内容・参照は変えていない。",
       ],
     },
   },

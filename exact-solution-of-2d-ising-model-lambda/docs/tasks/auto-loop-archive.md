@@ -13138,3 +13138,22 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 ### レビュー記録（tick 452）
 
 - 2026-08-19（tick 452）: tick 451 のコミット `ac27ef15` を差分で突き合わせた。転送行列作用の結論の二段の鎖は、元の内容と `def_B1_theta_B2`・`factorization_of_A_theta_general` の参照を失わず、$\tilde\theta$ の表記は証明冒頭の略記宣言 $\tilde\theta:=\tilde\theta_\mu$ に従っていた。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの 1 項目のみ）とセクション表（todo 空）も一致している。修正なし。
+
+## tick 458 で台帳から移した記録（tick 453）
+
+### 現在地（tick 453）
+
+- **2026-08-19 の tick 453 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側の $\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ の証明で散文に置かれていた符号反転を主張の左辺から始まる式変形へ移した。**
+  前進前レビューでは tick 452 のコミット `436a335f` を差分で突き合わせ、$P_{21}$ の補助等式と六段の鎖が元の内容と `theorem_exp_product`・`euler_formula_cos_sin`・`duality_c2_star_eq_s2_star_c2` の参照を失っていないことを確認した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも well-defined 性・住処・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾（命題候補待ちの 1 項目のみ）とセクション表（todo 空）も一致している。修正なし。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ とその帰結」（`relation_of_gamma_2_theta_tilde`）で、補助的な共役計算のあと散文で行っていた符号反転を主張 (1) の左辺から始まる一段の鎖へ移し、補助計算と (5) の終端にも行末根拠を補った（内容・参照は不変）。Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ、姉妹側 SageMath 対象検算・check 300 ブロック・PDF 332 ページ通過。
+
+### 前進の記録（tick 453）
+
+- 2026-08-19（tick 453）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
+
+### 式変形の書き方の統一（tick 453）
+
+- 2026-08-19（tick 453）: 姉妹側の半整数運動量における $A(\tilde\theta)$ の対角化章（`015_A_theta_tilde_diagonalization.ts`）の「$\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ とその帰結」（`relation_of_gamma_2_theta_tilde`）で、補助的な共役計算のあと散文で行っていた両辺の符号反転を、主張 (1) の左辺から始まる一段の鎖へ移した。補助的な共役計算の因数 $-1$ の括り出しと、(5) の $\cos(\pi/2)=0,\sin(\pi/2)=1$ による終端にも行末根拠を補った。元の内容と `def_gamma1_gamma2_of_theta`・`definition_of_cc`・`euler_formula_cos_sin`・`relation_of_gamma_2` の参照は不変。姉妹側 SageMath 対象検算・check 300 ブロック・PDF 332 ページ通過。
+
+### レビュー記録（tick 453）
+
+- 2026-08-19（tick 453）: tick 452 のコミット `436a335f` を差分で突き合わせた。$P_{21}$ の補助等式と六段の鎖は、元の内容と `theorem_exp_product`・`euler_formula_cos_sin`・`duality_c2_star_eq_s2_star_c2` の参照を失っていなかった。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも well-defined 性・住処・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾（命題候補待ちの 1 項目のみ）とセクション表（todo 空）も一致している。修正なし。
