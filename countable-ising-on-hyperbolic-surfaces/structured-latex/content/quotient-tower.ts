@@ -3167,4 +3167,83 @@ v_p
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_two_stage_fisher_zero_multiplicity_pair_map",
+    kind: "definition",
+    title: { text: "商の塔に沿う二段 Fisher 零点重複度対写像" },
+    labels: ["def_quotient_tower_two_stage_fisher_zero_multiplicity_pair_map"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-multiplicity-pair-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_pair_map"),
+        " の二段係数から、同じ不定元 ",
+        math(String.raw`x`),
+        " をもつ二つの Ising 分配多項式を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{\mathrm{fine}}(x)
+&:=
+\sum_{m=0}^{|E_{\mathrm{fine}}|}
+\widehat\Omega_{\mathrm{fine}}(m)x^m
+\in\mathbb Z[x],\\
+P_{\mathrm{coarse}}(x)
+&:=
+\sum_{m=0}^{|E_{\mathrm{coarse}}|}
+\widehat\Omega_{\mathrm{coarse}}(m)x^m
+\in\mathbb Z[x]
+\end{aligned}`),
+      paragraph([
+        "と置く。標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " による像をそれぞれ ",
+        math(String.raw`\overline P_{\mathrm{fine}},\overline P_{\mathrm{coarse}}\in\overline{\mathbb Q}[x]`),
+        " と書き、二段の Fisher 零点台の和集合を",
+      ]),
+      displayMath(String.raw`\mathcal Z_{\mathcal T}
+:=
+\left\{
+  \alpha\in\overline{\mathbb Q}
+  \,\middle|\,
+  \overline P_{\mathrm{fine}}(\alpha)=0
+  \text{ または }
+  \overline P_{\mathrm{coarse}}(\alpha)=0
+\right\}`),
+      paragraph([
+        "と定める。各 ",
+        math(String.raw`\alpha\in\mathcal Z_{\mathcal T}`),
+        " に対し、細段と粗段の零点重複度を零延長した一つの写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu_{\mathcal T}:\mathcal Z_{\mathcal T}
+&\longrightarrow
+\mathbb N\times\mathbb N,\\
+\alpha
+&\longmapsto
+\left(
+  \mu_{\mathrm{fine}}(\alpha),
+  \mu_{\mathrm{coarse}}(\alpha)
+\right),\\
+\mu_{s}(\alpha)
+&:=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  (x-\alpha)^k\mid\overline P_s(x)
+  \text{ in }\overline{\mathbb Q}[x]
+\right\}
+\quad
+\left(s\in\{\mathrm{fine},\mathrm{coarse}\}\right)
+\end{aligned}`),
+      paragraph([
+        "で定める。各最大値の集合は ",
+        math(String.raw`k=0`),
+        " を含み、対応する多項式の次数で上に有界なので、二成分は一意な自然数として定まる。一方の段だけの零点では、他方の成分は整除可能な最大指数 ",
+        math("0"),
+        " となる。この写像は二段の零点を同一視せず、共通の代数的数における二つの重複度を順序付き対として記録する。全ての対象は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " と代数的多項式の有限整除で定まり、複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
