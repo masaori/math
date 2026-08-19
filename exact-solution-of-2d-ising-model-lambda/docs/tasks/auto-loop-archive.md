@@ -3,6 +3,10 @@
 [auto-loop-state.md](auto-loop-state.md) が長くなりすぎたので、古い記録をここへ移した。
 **進捗の正本は台帳のほうである。** ここは経緯を後から辿るためだけに置く。
 
+## 2026-08-19 tick 455 で台帳から移した記録（tick 450）
+
+- tick 450 のレビュー: tick 449 のコミット `57eb8cd3` を差分で突き合わせた。$H_2$・$H_1^{(+)}$ の二本の鎖は、準備の $\check Z_{M+1-\mu}$ の表示と `def_half_integer_modes`・`conjugate_index_of_check_Z_Y`・`theorem_exp_product`・`antiperiodic_exp_sum`・`def_transfer_matrix_symbols`・`def_V1_pm` の参照を失わず、一行一操作・行末根拠の形になっていた。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾と todo 表も一致し、修正なし。
+
 ## 2026-08-19 tick 454 で台帳から移した記録（tick 449）
 
 - tick 449 の現在地・前進・式変形統一: todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側 `013_even_sector_modes.ts` の「$H_1^{(+)},H_2$ を $\check Z,\check Y$ で表す」（`H1_H2_via_check_Z_Y`）で、$H_2$ と $H_1^{(+)}$ の導出が複数の displayMath と重複した散文に分断されていたのを、$\check Z_{M+1-\mu}$ の表示と二つの指数和の場合分けを準備に置き、それぞれ主張の右辺から $H_2$・$H_1^{(+)}$ へ至る一続きの鎖へまとめた（内容と `def_half_integer_modes`・`conjugate_index_of_check_Z_Y`・`theorem_exp_product`・`antiperiodic_exp_sum`・`def_transfer_matrix_symbols`・`def_V1_pm` の参照は不変）。

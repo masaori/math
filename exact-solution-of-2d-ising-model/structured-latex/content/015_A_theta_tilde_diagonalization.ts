@@ -1304,7 +1304,7 @@ s_1^2c_2^2(s_2^*)^2
         String.raw`\begin{aligned}
 \gamma_1(\theta)^2
 &= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + r^2\bigr)
-   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (2) の } \gamma_2(\theta)\gamma_2(-\theta) = -r^2 \text{ より } \gamma_2(\theta)\gamma_2(-\theta) + r^2 = 0_{\mathbb{C}}) \\
+   \quad (\because \text{上で引いた } \gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)} \text{ とその帰結 (2) より } \gamma_2(\theta)\gamma_2(-\theta) + r^2 = 0_{\mathbb{C}}) \\
 &= \bigl(\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)\bigr) + r^2
    \quad (\because \mathbb{C} \text{ の加法の結合律}) \\
 &= 1 + r^2
