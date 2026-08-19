@@ -910,6 +910,14 @@ targets=(
   CellularAutomata.IterateMonoidConjugacyNumericalProfile.counterexample_root_fixed_from_necessary_sufficient
   CellularAutomata.IterateMonoidConjugacyNumericalProfile.descendantTable_eq_necessary_sufficient
   CellularAutomata.IterateMonoidConjugacyNumericalProfile.counterexample_descendant_card_le_from_necessary_sufficient
+  CellularAutomata.RecursivePreimageTreeCode.mem_nonperiodicChildren_iff
+  CellularAutomata.RecursivePreimageTreeCode.child_minPreperiod_eq_add_one
+  CellularAutomata.RecursivePreimageTreeCode.minPreperiod_le_configuration_card_sub_one
+  CellularAutomata.RecursivePreimageTreeCode.codeAtDepth_zero
+  CellularAutomata.RecursivePreimageTreeCode.codeAtDepth_succ
+  CellularAutomata.RecursivePreimageTreeCode.isPeriodicPoint_iff
+  CellularAutomata.RecursivePreimageTreeCode.mem_nonperiodicChildren_iff_transport
+  CellularAutomata.RecursivePreimageTreeCode.image_nonperiodicChildren
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
