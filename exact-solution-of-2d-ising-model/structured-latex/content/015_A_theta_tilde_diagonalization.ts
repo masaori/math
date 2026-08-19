@@ -749,6 +749,21 @@ s_1c_2
         math(String.raw`\det(A(\theta) - \lambda I) = 0`),
         " と同値であり、",
       ]),
+      paragraph([
+        "準備として、因数分解の恒等式を確かめる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\lambda - (g_1+r))(\lambda - (g_1-r))
+&= \lambda^2 - (g_1-r)\lambda - (g_1+r)\lambda + (g_1+r)(g_1-r)
+   \quad (\because \text{分配則}) \\
+&= \lambda^2 - 2g_1\lambda + (g_1+r)(g_1-r)
+   \quad (\because \text{同類項の統合}) \\
+&= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
+   \quad (\because \text{分配則と同類項の統合}\ ((g_1+r)(g_1-r) = g_1^2 - r^2))
+\end{aligned}`,
+      ),
+      paragraph(["そこで"]),
       displayMath(
         String.raw`\begin{aligned}
 \det\left(A(\theta) - \lambda I\right)
@@ -756,15 +771,18 @@ s_1c_2
    \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
 &= (g_1-\lambda)(g_1-\lambda) - a\cdot(-b)
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
+&= (g_1-\lambda)(g_1-\lambda) + ab
+   \quad (\because \mathbb{C} \text{ の四則}\ (-a\cdot(-b) = ab)) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 + ab\right)
+   \quad (\because \text{分配則と同類項の統合}) \\
+&= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
+   \quad (\because \text{準備の略記}\ ab = -r^2) \\
+&= (\lambda - (g_1+r))(\lambda - (g_1-r))
+   \quad (\because \text{準備の因数分解の恒等式})
 \end{aligned}`,
       ),
       paragraph([
         "である。",
-        math(String.raw`ab = -r^2`),
-        " を代入すると ",
-        math(String.raw`\lambda^2 - 2g_1\lambda + (g_1^2 - r^2) = (\lambda - (g_1+r))(\lambda - (g_1-r))`),
-        " と因数分解できる（右辺を展開すれば左辺に一致する）。",
         math(String.raw`\mathbb{C}`),
         " は体（",
         ref("complex_numbers_form_a_field"),
@@ -810,7 +828,8 @@ s_1c_2
    \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (1)}\ (b = -\bar a)) \\
 &= \mp g_1 r - r^2
    \quad (\because \text{abs\_basic\_properties}\ (a\bar a = |a|^2 = r^2)) \\
-&= \left(g_1 \pm r\right)\left(\mp r\right) \\
+&= \left(g_1 \pm r\right)\left(\mp r\right)
+   \quad (\because \text{分配則}\ (\left(g_1 \pm r\right)\left(\mp r\right) = \mp g_1 r - r^2)) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_1
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_1 = \mp r)
 \end{aligned}`,
@@ -831,7 +850,8 @@ s_1c_2
    \quad (\because \text{def\_gamma1\_gamma2\_of\_theta と行列とベクトルの積の定義}) \\
 &= \bar a\left(\mp r\right) + g_1\left(-\bar a\right)
    \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (1)}\ (-b = \bar a) \text{ を 2 箇所へ同時適用}) \\
-&= \left(\mp r - g_1\right)\bar a \\
+&= \left(\mp r - g_1\right)\bar a
+   \quad (\because \text{分配則で } \bar a \text{ を括り出す}) \\
 &= \left(g_1 \pm r\right)\left(-\bar a\right)
    \quad (\because \mp r - g_1 = -(g_1 \pm r)) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_2
@@ -881,6 +901,8 @@ s_1c_2
           "半整数運動量では relation_of_gamma_2_theta_tilde (4)(5) で根号が |γ_2| と i|γ_2| に確定するので、" +
           "固有ベクトルは代入して確かめるだけで済む。得られる形は 008 章と同一である。",
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_03（特性方程式・固有ベクトル・Sage の固有値集合との一致、残差 ≤ 2e-12）。",
+        "2026-08-19 の式変形統一で、Step 1 の「右辺を展開すれば左辺に一致する」と散文に畳まれていた因数分解を、" +
+          "準備の恒等式の三段と行列式の鎖の六段へ開き、固有ベクトル成分の二本の鎖の根拠なしの行に行末根拠を補った。内容・参照は変えていない。",
       ],
     },
   },
