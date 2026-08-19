@@ -3407,4 +3407,115 @@ P_s(x)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_two_stage_fisher_zero_formal_divisor_stage_difference",
+    kind: "theorem",
+    title: { text: "二段 Fisher 零点形式的因子の段別差表示" },
+    labels: ["theorem_quotient_tower_two_stage_fisher_zero_formal_divisor_stage_difference"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-formal-divisor-stage-difference"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_pair_map"),
+        " の二段 Fisher 零点重複度と ",
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " の自然数から整数への標準単射、および ",
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_formal_divisor"),
+        " の形式的因子について、",
+      ]),
+      displayMath(String.raw`\operatorname{Div}_{\Delta\mu}(\mathcal T)
+=
+\sum_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_{\mathrm{fine}}(\alpha)=0
+}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)[\alpha]
+-
+\sum_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_{\mathrm{coarse}}(\alpha)=0
+}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)[\alpha]`),
+      paragraph([
+        "が ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " で添字付けた自由アーベル群 ",
+        math(String.raw`\bigoplus_{\alpha\in\overline{\mathbb Q}}\mathbb Z[\alpha]`),
+        " の等式として成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_formal_divisor"),
+        " より",
+      ]),
+      displayMath(String.raw`\operatorname{Div}_{\Delta\mu}(\mathcal T)
+=
+\sum_{\alpha\in\operatorname{Supp}_{\Delta\mu_{\mathcal T}}}
+\Delta\mu_{\mathcal T}(\alpha)[\alpha]
+\quad\bigl(\because\ \text{二段重複度差の形式的因子の定義}\bigr).`),
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " より、有限集合 ",
+        math(String.raw`\mathcal Z_{\mathcal T}`),
+        " 上で零係数を補うと",
+      ]),
+      displayMath(String.raw`\sum_{\alpha\in\operatorname{Supp}_{\Delta\mu_{\mathcal T}}}
+\Delta\mu_{\mathcal T}(\alpha)[\alpha]
+=
+\sum_{\alpha\in\mathcal Z_{\mathcal T}}
+\left(
+  \iota_{\mathbb N,\mathbb Z}
+  \left(
+    \mu_{\mathrm{fine}}(\alpha)
+  \right)
+  -
+  \iota_{\mathbb N,\mathbb Z}
+  \left(
+    \mu_{\mathrm{coarse}}(\alpha)
+  \right)
+\right)[\alpha]
+\quad\bigl(\because\ \text{台の外では重複度差が零である}\bigr).`),
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_pair_map"),
+        " の零延長された二つの重複度写像と、有限和における分配律より",
+      ]),
+      displayMath(String.raw`\sum_{\alpha\in\mathcal Z_{\mathcal T}}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+  -
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)[\alpha]
+=
+\sum_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_{\mathrm{fine}}(\alpha)=0
+}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)[\alpha]
+-
+\sum_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_{\mathrm{coarse}}(\alpha)=0
+}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)[\alpha]
+\quad\bigl(\because\ \text{各段の零点台外では対応する重複度が零である}\bigr).`),
+      paragraph([
+        "各零点台は有限であり、各重複度と重複度差は整数である。したがって全ての和は ",
+        math(String.raw`\bigoplus_{\alpha\in\overline{\mathbb Q}}\mathbb Z[\alpha]`),
+        " の有限和として定まる。複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
