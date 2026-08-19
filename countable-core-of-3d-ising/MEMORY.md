@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-19 14:05: 本流「零点集合は極限量に必要でない反例」の Lean 必要十分版を閉じ status `done`。既存の `value_invariant_does_not_determine_limit_quantity` が抽象形を担うと判断し、特殊化 `root_set_does_not_determine_limit_quantity_fromNecSuf`（値の型 `Finset ℕ`、添字写像は末尾ずらし）を導出。build・sorry 検査 247 件通過。本流のセクション表に未完了が無いので、次 tick はゴール文書から標的を引き直す。並行は締切のため見送り。
 - 2026-08-19 14:03: 開始が締切 8 分前。レビュー（`npm run check` 再実行、110 ブロック・209 参照）修正なし。本文未変更、PDF 再生成。本流「零点集合は極限量に必要でない反例」の Lean 必要十分版を二つへ割った：先頭は既存の `value_invariant_does_not_determine_limit_quantity` が抽象形を担うかの判断と特殊化 `root_set_does_not_determine_limit_quantity_fromNecSuf` の導出、次に `done` へ閉じる。次 tick は割った先頭から。並行は締切のため見送り。
 - 2026-08-19 13:04: 本流「零点集合は極限量に必要でない反例」の SageMath 層を閉じ status `記述と SageMath まで`。check `root-set-shifted-free-family-differs/` で $X^2+1\mid Z_2$・既約、$Z_3$ の既約因子次数 $\{1,40\}$、$\gcd(Z_3,X^2+1)=1$ を `QQ` 上で厳密判定（linkage 42 件）。レビュー（`npm run check` 再実行、110 ブロック・209 参照）修正なし。次 tick は Lean 具体版。並行は締切のため見送り。
 - 2026-08-19 12:32: 本流「零点の集合は極限量に必要でない反例」を本文へ記述した。$Z_2$ は最小多項式次数 2 の零点を持つ一方、$Z'_2=Z_3$ の零点の最小多項式次数は 1 または 40 なので零点集合は異なり、末尾ずらしにより極限量は一致する。レビュー修正なし。次 tick は SageMath 検証、並行は Pfaffian 予言の Lean 具体版。
