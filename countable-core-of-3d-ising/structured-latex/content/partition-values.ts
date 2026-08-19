@@ -4199,6 +4199,54 @@ x^{NM}&=(x^N)^M &&(\because\ \text{自然数べきの積})\\
   },
 
   {
+    id: "soundness_bridge_claim_pointwise_cross_power_equality_implies_root_sequence_equality",
+    kind: "claim",
+    title: { text: "各箱の交差べき等式は乗根列の項別一致を決める" },
+    labels: ["claim_pointwise_cross_power_equality_implies_root_sequence_equality"],
+    habitat: "R",
+    realEscape:
+      "各項の正の実数乗根は def_limit_quantity_from_finite_box_sequence で既に定義した有限箱量である。箱の大きさの極限は取らず、各添字で claim_cross_power_equality_implies_root_equality を適用するだけである。仮定は正有理数の有限回の積の等式の可算な族である。",
+    statement: [
+      paragraph([
+        "正の有理数列 ",
+        math(String.raw`A,B\colon\mathbb N_{\ge1}\to\mathbb Q_{>0}`),
+        " と正の自然数列 ",
+        math(String.raw`N,M\colon\mathbb N_{\ge1}\to\mathbb N_{\ge1}`),
+        " について、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で",
+      ]),
+      displayMath(String.raw`A(L)^{M(L)}=B(L)^{N(L)}`),
+      paragraph([
+        "が成り立つとする。このとき、対応する正の実数乗根の二列は項別に一致する。すなわち、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で",
+      ]),
+      displayMath(String.raw`A(L)^{1/N(L)}=B(L)^{1/M(L)}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " を取る。仮定から ",
+        math(String.raw`A(L)^{M(L)}=B(L)^{N(L)}`),
+        " である。ここで ",
+        math(String.raw`A(L),B(L)\in\mathbb Q_{>0}`),
+        " および ",
+        math(String.raw`N(L),M(L)\in\mathbb N_{\ge1}`),
+        " なので、",
+        ref("claim_cross_power_equality_implies_root_equality"),
+        " を適用して ",
+        math(String.raw`A(L)^{1/N(L)}=B(L)^{1/M(L)}`),
+        " を得る。",
+        math(String.raw`L`),
+        " は任意だったので、二列はすべての添字で項別に一致する。",
+      ]),
+    ],
+  },
+
+  {
     id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
     kind: "definition",
     title: { text: "2 次元の箱と境界応答多項式" },
