@@ -1278,6 +1278,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= -I\,Z_{m+1} - I\,Z_{m+1}
    \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_mY_m = I)) \\
 &= -2Z_{m+1}
+   \quad (\because \text{単位行列の性質 } I\,Z_{m+1} = Z_{m+1}\text{ と同類項をまとめる})
 \end{aligned}`,
       ),
       paragraph([
@@ -1298,7 +1299,10 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= -\left(-2Z_1\right)
    \quad (\because \text{直前の displayMath と同じ計算}\ (Y_m, Z_{m+1}) \to (Y_M, Z_1)) \\
-&= 2Z_1 = -2\left(-Z_1\right) \\
+&= 2Z_1
+   \quad (\because \text{スカラー倍の符号の整理 } -(-2Z_1) = 2Z_1) \\
+&= -2\left(-Z_1\right)
+   \quad (\because \text{スカラー倍の符号の整理 } 2Z_1 = -2(-Z_1)) \\
 &= -2\,Z_{M+1}^{\flat}
    \quad (\because Z_{M+1}^{\flat} := -Z_1)
 \end{aligned}`,
