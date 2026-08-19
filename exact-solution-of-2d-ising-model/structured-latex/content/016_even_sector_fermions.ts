@@ -372,10 +372,14 @@ e^{i(t+2k\pi)}
 \tilde\theta_{\mu+kM}
 &= \frac{2\pi\left(\mu+kM-\frac12\right)}{M}
    \quad (\because \tilde\theta \text{ の定義}) \\
-&= \frac{2\pi\left(\mu-\frac12\right)}{M} + \frac{2\pi kM}{M}
+&= \frac{2\pi\left(\mu-\frac12\right) + 2\pi kM}{M}
    \quad (\because \mathbb{R}\text{ の分配則}) \\
+&= \frac{2\pi\left(\mu-\frac12\right)}{M} + \frac{2\pi kM}{M}
+   \quad (\because \text{分数の和（分母 }M\neq0\text{）}) \\
+&= \tilde\theta_\mu + \frac{2\pi kM}{M}
+   \quad (\because \tilde\theta \text{ の定義}) \\
 &= \tilde\theta_\mu + 2k\pi
-   \quad (\because \tilde\theta \text{ の定義と }M\neq0\text{ による約分})
+   \quad (\because M\neq0\text{ による約分})
 \end{aligned}`,
       ),
       paragraph([
@@ -420,11 +424,13 @@ e^{i(t+2k\pi)}
 -\tilde\theta_{M+1-\mu}
 &= -(2\pi-\tilde\theta_\mu)
    \quad (\because \text{共役添字の運動量}) \\
+&= -2\pi+\tilde\theta_\mu
+   \quad (\because \mathbb{R}\text{ の分配則}) \\
 &= \tilde\theta_\mu+2(-1)\pi
-   \quad (\because \mathbb{R}\text{ の分配則}),\\[4pt]
+   \quad (\because \mathbb{R}\text{ の加法の可換則と }-2\pi=2(-1)\pi),\\[4pt]
 \gamma_2(-\tilde\theta_{M+1-\mu})
 &= \gamma_2(\tilde\theta_\mu+2(-1)\pi)
-   \quad (\because \text{上の負号を付けた等式}) \\
+   \quad (\because \text{上の等式}) \\
 &= \gamma_2(\tilde\theta_\mu)
    \quad (\because \text{本ブロック }(1)),\\[4pt]
 \gamma_1(\tilde\theta_{M+1-\mu})
