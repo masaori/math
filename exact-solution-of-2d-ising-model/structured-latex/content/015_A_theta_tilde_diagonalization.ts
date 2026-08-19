@@ -1377,57 +1377,75 @@ s_1^2c_2^2(s_2^*)^2
         math(String.raw`s_1, s_2^* > 0`),
         "）。また ",
         math(String.raw`\cos\tilde\theta_\mu \leq 1`),
-        " なので",
+        " である。",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の定義から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \gamma_1(\tilde\theta_\mu)
 &= c_1c_2^* - s_1s_2^*\cos\tilde\theta_\mu
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
+   \quad (\because \gamma_1 \text{ の定義}) \\
 &\geq c_1c_2^* - s_1s_2^*
    \quad (\because \cos\tilde\theta_\mu \leq 1 \text{ かつ } s_1s_2^* > 0) \\
-&> 0
-   \quad (\because c_1 > s_1 > 0,\ c_2^* > s_2^* > 0 \text{ より } c_1c_2^* > s_1s_2^*)
+&> s_1s_2^* - s_1s_2^*
+   \quad (\because c_1 > s_1 > 0,\ c_2^* > s_2^* > 0 \text{ より } c_1c_2^* > s_1s_2^*) \\
+&= 0
+   \quad (\because \mathbb{R} \text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の不等号は ",
-        math(String.raw`c_1c_2^* > s_1s_2^* > 0`),
-        " による。）",
-      ]),
-      paragraph([
         "Step 2（",
         math(String.raw`\gamma_1(\tilde\theta_\mu)^2 > 1`),
-        "）。",
+        "）。主張の左辺から",
         ref("det_A_theta_tilde"),
-        " より ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu)^2 = 1 + |\gamma_2(\tilde\theta_\mu)|^2`),
-        " であり、",
+        " と ",
         ref("gamma_2_theta_tilde_nonzero"),
-        " より ",
-        math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0`),
-        " すなわち ",
-        math(String.raw`|\gamma_2(\tilde\theta_\mu)|^2 > 0`),
-        "。よって ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu)^2 > 1`),
-        "（等号なし）。",
+        " を順に引くと",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_1(\tilde\theta_\mu)^2
+&= 1 + \left|\gamma_2(\tilde\theta_\mu)\right|^2
+   \quad (\because \det A(\tilde\theta_\mu)=1 \text{ と固有値の積}) \\
+&> 1 + 0
+   \quad (\because \gamma_2(\tilde\theta_\mu)\ne0 \text{ より } \left|\gamma_2(\tilde\theta_\mu)\right|^2>0) \\
+&= 1
+   \quad (\because \mathbb{R} \text{ の四則})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 3（結論）。",
         math(String.raw`t := \gamma_1(\tilde\theta_\mu) > 0`),
-        " が ",
-        math(String.raw`t^2 > 1`),
-        " を満たすとき ",
-        math(String.raw`t > 1`),
-        " である。実際 ",
+        " と置く。Step 2 より ",
+        math(String.raw`t^2>1`),
+        " である。一方、",
         math(String.raw`t \leq 1`),
-        " なら ",
-        math(String.raw`0 < t \leq 1`),
-        " より ",
-        math(String.raw`t^2 = t\cdot t \leq 1\cdot 1 = 1`),
-        " となり矛盾する。",
+        " と仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+t^2
+&= t\cdot t
+   \quad (\because \text{平方の定義}) \\
+&\leq 1\cdot t
+   \quad (\because t\leq1 \text{ の両辺に }0<t\text{ を掛ける}) \\
+&\leq 1\cdot1
+   \quad (\because t\leq1 \text{ の両辺に }0<1\text{ を掛ける}) \\
+&= 1
+   \quad (\because \mathbb{R} \text{ の乗法単位元})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり Step 2 の ",
+        math(String.raw`t^2>1`),
+        " と矛盾する。したがって ",
+        math(String.raw`t>1`),
+        "、すなわち ",
+        math(String.raw`\gamma_1(\tilde\theta_\mu)>1`),
+        " である。さらに ",
         math(String.raw`\gamma_1(\tilde\theta_\mu) \geq 1`),
-        " はその帰結である。",
+        " は狭義不等式から従う。",
       ]),
     ],
     conversion: {
@@ -1436,6 +1454,7 @@ s_1^2c_2^2(s_2^*)^2
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_04（16 組の (K_1,K_2)、M = 2..8 の全 μ で " +
           "min(γ_1(θ~_μ) − 1) ≥ 1.3e-2 > 0。臨界点ちょうどでも狭義に正）。同じ K で整数運動量 θ = 2π では " +
           "臨界点で γ_1 = 1 になる（check_05 の対比表）。",
+        "2026-08-19 の式変形統一で、Step 1 の正値性を一操作ずつの鎖へ分け、Step 2 の平方評価と Step 3 の背理法を主張の左辺から始まる鎖へ開いた。内容・参照は変えていない。",
       ],
     },
   },

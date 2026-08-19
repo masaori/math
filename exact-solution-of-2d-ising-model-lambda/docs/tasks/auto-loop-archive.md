@@ -5,6 +5,7 @@
 
 ## 2026-08-19 tick 455 で台帳から移した記録（tick 450）
 
+- tick 450 の現在地・前進・式変形統一: todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側 `013_even_sector_modes.ts` の「$H_1^{(+)},H_2$ と $\check Z,\check Y$ の交換関係」（`commutator_of_H_and_check_Z_Y`）で、境界項 $[-Y_MZ_1,Z_1]$・$[-Y_MZ_1,Y_M]$ の鎖が「直前の表示と同じ計算」の一行に畳まれていたのを、交換子の定義・行列積の結合法則・`anticommutator_of_Z_and_Y`・単位行列・同類項の統合による一操作ずつの行へ開いた（内容・参照は不変）。
 - tick 450 のレビュー: tick 449 のコミット `57eb8cd3` を差分で突き合わせた。$H_2$・$H_1^{(+)}$ の二本の鎖は、準備の $\check Z_{M+1-\mu}$ の表示と `def_half_integer_modes`・`conjugate_index_of_check_Z_Y`・`theorem_exp_product`・`antiperiodic_exp_sum`・`def_transfer_matrix_symbols`・`def_V1_pm` の参照を失わず、一行一操作・行末根拠の形になっていた。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾と todo 表も一致し、修正なし。
 
 ## 2026-08-19 tick 454 で台帳から移した記録（tick 449）
