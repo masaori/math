@@ -2716,7 +2716,7 @@ m
         ref("def_quotient_tower_two_stage_ising_coefficient_pair_map"),
         " の二段 Ising 係数対写像と、",
         ref("def_fixed_quotient_coefficient_valuation"),
-        " の正整数係数に対する指定素数付値を用いる。二段の係数がともに正である次数と素数の有限入力集合を",
+        " の正整数係数に対する指定素数付値を用いる。二段の係数がともに正である次数と素数からなる入力集合を",
       ]),
       displayMath(String.raw`D_{\mathcal T}
 :=
@@ -2764,9 +2764,52 @@ m
 \right\}
 \end{aligned}`),
       paragraph([
-        "で定める。定義域の正値条件により両係数は ",
+        "で定める。次数 ",
+        math(String.raw`m`),
+        " の候補は二つの有限辺集合の大きい方の濃度以下に限られるが、素数 ",
+        math(String.raw`p`),
+        " は全ての素数を走るので、定義域 ",
+        math(String.raw`D_{\mathcal T}`),
+        " は自然数対の可算部分集合であり、有限集合とは限らない。定義域の正値条件により両係数は ",
         math(String.raw`\mathbb N_{>0}`),
-        " に属するため、二つの最大値は正整数を指定素数で割り切れる間だけ反復除算した回数として一意に定まる。係数の一方が零である次数には整数付値を定義せず、零延長した係数対と付値対を同一視しない。この写像は二つの付値の等式、大小、差、被覆次数に関する関係を主張しない。全ての対象は有限集合、自然数、整数に属し、完全因数分解、実数、複素数、極限、積分を用いない。",
+        " に属するため、二つの最大値は正整数を指定素数で割り切れる間だけ反復除算した有限回数として一意に定まる。係数の一方が零である次数には整数付値を定義せず、零延長した係数対と付値対を同一視しない。この写像は二つの付値の等式、大小、差、被覆次数に関する関係を主張しない。各入力で扱うセル集合、スピン配位集合、係数および反復除算は有限であり、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
+    id: "quotient_tower_definition_two_stage_ising_coefficient_valuation_difference_map",
+    kind: "definition",
+    title: { text: "商の塔に沿う二段 Ising 係数付値差写像" },
+    labels: ["def_quotient_tower_two_stage_ising_coefficient_valuation_difference_map"],
+    habitat: "Z",
+    verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-valuation-difference-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_pair_map"),
+        " の定義域 ",
+        math(String.raw`D_{\mathcal T}`),
+        " と二段 Ising 係数付値対写像 ",
+        math(String.raw`\nu_{\mathcal T}`),
+        " を用いる。各 ",
+        math(String.raw`(m,p)\in D_{\mathcal T}`),
+        " に対し、細段成分から粗段成分を引く整数値写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Delta\nu_{\mathcal T}:D_{\mathcal T}
+&\longrightarrow
+\mathbb Z,\\
+(m,p)
+&\longmapsto
+\nu_{\mathrm{fine},p}(m)
+-
+\nu_{\mathrm{coarse},p}(m)
+\end{aligned}`),
+      paragraph([
+        "で定める。二つの付値はそれぞれ ",
+        math(String.raw`\mathbb N\subset\mathbb Z`),
+        " に属するので、差は一意な整数に属する。この写像の値域を ",
+        math(String.raw`\mathbb N`),
+        " に制限せず、値の正、零、負のいずれも定義から排除しない。したがって、この定義だけから付値の段間単調性、差の符号、被覆次数との関係は主張しない。全ての対象は有限係数の指定素数付値と整数の減法だけで定まり、完全因数分解、実数、複素数、極限、積分を用いない。",
       ]),
     ],
   },
