@@ -47,4 +47,21 @@ theorem fisherExternalEdgeWeight_cleared
     (1 - x) * ((1 + x) / (1 - x)) = 1 + x := by
   exact mul_div_cancel₀ (1 + x) hDenominator
 
+/-- 各外部辺の具体的な分母消去等式は、有限辺集合上の積へ束ねられる。 -/
+theorem fisherExternalEdgeWeights_cleared
+    {Edge K : Type*} [Field K] (edges : Finset Edge) (x : Edge → K)
+    (hDenominator : ∀ edge ∈ edges, 1 - x edge ≠ 0) :
+    (∏ edge ∈ edges, (1 - x edge)) *
+        (∏ edge ∈ edges, ((1 + x edge) / (1 - x edge))) =
+      ∏ edge ∈ edges, (1 + x edge) := by
+  calc
+    (∏ edge ∈ edges, (1 - x edge)) *
+        (∏ edge ∈ edges, ((1 + x edge) / (1 - x edge))) =
+      ∏ edge ∈ edges, ((1 - x edge) * ((1 + x edge) / (1 - x edge))) := by
+        rw [← Finset.prod_mul_distrib]
+    _ = ∏ edge ∈ edges, (1 + x edge) := by
+      apply Finset.prod_congr rfl
+      intro edge hedge
+      exact fisherExternalEdgeWeight_cleared (x edge) (hDenominator edge hedge)
+
 end Ising3DCut.Prediction
