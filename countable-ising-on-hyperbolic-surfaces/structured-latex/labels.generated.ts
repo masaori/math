@@ -98,6 +98,7 @@ export const ALL_LABELS = [
   "theorem_quotient_tower_first_boundary_pushforward_commutativity_over_f2",
   "theorem_quotient_tower_first_cycle_pushforward_over_f2",
   "theorem_quotient_tower_first_homology_pushforward_additivity_over_f2",
+  "theorem_quotient_tower_integer_sign_character_evaluation_pullback_compatibility",
   "theorem_quotient_tower_oriented_edge_endpoint_map_preservation",
   "theorem_quotient_tower_oriented_face_boundary_word_preservation",
   "theorem_quotient_tower_second_boundary_pushforward_commutativity_over_f2",

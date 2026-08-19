@@ -2379,4 +2379,89 @@ b
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_integer_sign_character_evaluation_pullback_compatibility",
+    kind: "theorem",
+    title: { text: "商の塔における整数符号文字評価と引き戻しの整合性" },
+    labels: ["theorem_quotient_tower_integer_sign_character_evaluation_pullback_compatibility"],
+    habitat: "Z",
+    verification: ["sagemath/check/two-stage-quotient-tower-integer-sign-character-evaluation-pullback-compatibility"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_f2_character_pullback_map"),
+        " の文字引き戻し写像と ",
+        ref("def_integer_sign_character_realization"),
+        " の整数符号実現を用いる。任意の粗段文字 ",
+        math(String.raw`\psi\in H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)^\vee`),
+        " と任意の細段第一ホモロジー類 ",
+        math(String.raw`h\in H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\left(
+  \operatorname{sgn}_{H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)}(\psi)
+\right)
+\left(
+  \overline\kappa_{H_1,!}(h)
+\right)
+=
+\left(
+  \operatorname{sgn}_{H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)}
+  \left(
+    \overline\kappa_{H_1}^{\ast}(\psi)
+  \right)
+\right)(h)
+\in\{-1,+1\}\subset\mathbb Z`),
+      paragraph([
+        "が成り立つ。すなわち、粗段文字を押し出し像で整数符号評価する経路と、文字を引き戻してから細段類で整数符号評価する経路は一致する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "左辺を粗段での整数符号実現の定義から展開する。",
+        ref("def_integer_sign_character_realization"),
+        "、",
+        ref("def_quotient_tower_f2_character_pullback_map"),
+        "、再び ",
+        ref("def_integer_sign_character_realization"),
+        " の順に用いると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(
+  \operatorname{sgn}_{H_1(\mathcal C^{\mathrm{coarse}};\mathbb F_2)}(\psi)
+\right)
+\left(
+  \overline\kappa_{H_1,!}(h)
+\right)
+&=
+\begin{cases}
+  +1,&\psi\left(\overline\kappa_{H_1,!}(h)\right)=0_{\mathbb F_2},\\
+  -1,&\psi\left(\overline\kappa_{H_1,!}(h)\right)=1_{\mathbb F_2}
+\end{cases}
+&&\bigl(\because\ \text{粗段での整数符号実現の定義}\bigr)\\
+&=
+\begin{cases}
+  +1,&\left(\overline\kappa_{H_1}^{\ast}(\psi)\right)(h)=0_{\mathbb F_2},\\
+  -1,&\left(\overline\kappa_{H_1}^{\ast}(\psi)\right)(h)=1_{\mathbb F_2}
+\end{cases}
+&&\bigl(\because\ \text{文字引き戻し写像の定義}\bigr)\\
+&=
+\left(
+  \operatorname{sgn}_{H_1(\mathcal C^{\mathrm{fine}};\mathbb F_2)}
+  \left(
+    \overline\kappa_{H_1}^{\ast}(\psi)
+  \right)
+\right)(h)
+&&\bigl(\because\ \text{細段での整数符号実現の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "各場合の値は整数 ",
+        math(String.raw`-1,+1\in\mathbb Z`),
+        " である。全ての第一ホモロジー群と文字空間は有限であり、評価は ",
+        math(String.raw`\mathbb F_2`),
+        " と ",
+        math(String.raw`\mathbb Z`),
+        " の有限演算だけを用いる。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
