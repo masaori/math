@@ -1424,37 +1424,19 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
         " の定義を使った。",
       ]),
       paragraph([
-        "Step 4（(B)）。Step 1 の第 4 式と線型性より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[H_1^{(+)},\ \check{Y}_\mu\right]
-&= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
-   \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Y_j\right]
-   \quad (\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2\,Z_{j+1}^{\flat}\right)
-   \quad (\because \text{Step 1 の第 4 式}) \\
-&= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,Z_{j+1}^{\flat} \\
-&= -2\sum_{l=2}^{M+1} e^{-i(l-1)\tilde\theta_\mu}\,Z_{l}^{\flat}
-   \quad (\because \text{有限和の添字の付け替え } l = j+1) \\
-&= -2\sum_{l=2}^{M+1} e^{i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Z_{l}^{\flat}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= -2\,e^{i\tilde\theta_\mu}\sum_{l=2}^{M+1} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
-\end{aligned}`,
-      ),
-      paragraph([
-        "（最初の等号は ",
+        "Step 4（(B)）。主計算に先立ち、添字を ",
+        math(String.raw`l := j+1`),
+        " と置き換える（",
+        math(String.raw`j = 1,\dots,M`),
+        " が ",
+        math(String.raw`l = 2,\dots,M+1`),
+        " に 1 対 1 で対応する）。また、",
         ref("def_half_integer_modes"),
-        "、指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用したものである。）ここでも ",
-        math(String.raw`l = M+1`),
-        " の項を ",
-        math(String.raw`l = 1`),
-        " の項に置き換えられる：",
+        " (1) の ",
+        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        " と ",
+        math(String.raw`Z_{M+1}^{\flat} = -Z_1`),
+        " より、境界の二項は一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1466,23 +1448,31 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= \left(-1\right)e^{-i\tilde\theta_\mu}\left(-Z_1\right)
    \quad (\because \text{def\_half\_integer\_modes (1)}) \\
 &= e^{-i\tilde\theta_\mu}\,Z_1
-= e^{-i\cdot 1\cdot\tilde\theta_\mu}\,Z_1^{\flat}
+   \quad (\because \mathbb{C}\text{ の四則}) \\
+&= e^{-i\cdot 1\cdot\tilde\theta_\mu}\,Z_1^{\flat}
+   \quad (\because Z_1^{\flat} := Z_1)
 \end{aligned}`,
       ),
       paragraph([
-        "（指数法則は ",
-        ref("theorem_exp_product"),
-        "、",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
-        " は ",
-        ref("def_half_integer_modes"),
-        " (1) による。）よって ",
-        math(String.raw`\sum_{l=2}^{M+1} = \sum_{l=1}^{M}`),
-        " であり",
+        "となる。この境界項の等式と Step 1 の第 4 式、交換子の線型性を使うと、主張の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Y}_\mu\right]
+&= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
+   \quad (\because \text{def\_half\_integer\_modes}) \\
+&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Y_j\right]
+   \quad (\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2\,Z_{j+1}^{\flat}\right)
+   \quad (\because \text{Step 1 の第 4 式}) \\
+&= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,Z_{j+1}^{\flat}
+   \quad (\because \text{スカラー倍を和の外へ出す}) \\
+&= -2\sum_{l=2}^{M+1} e^{-i(l-1)\tilde\theta_\mu}\,Z_{l}^{\flat}
+   \quad (\because \text{有限和の添字の付け替え } l = j+1) \\
+&= -2\sum_{l=2}^{M+1} e^{i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Z_{l}^{\flat}
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= -2\,e^{i\tilde\theta_\mu}\sum_{l=2}^{M+1} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
+   \quad (\because \text{分配則}) \\
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
    \quad (\because \text{直前の displayMath による } l=M+1 \text{ の項と } l=1 \text{ の項の入れ替え}) \\
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l
@@ -1492,11 +1482,13 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
+        "ここで指数法則は ",
+        ref("theorem_exp_product"),
+        " を ",
+        math(String.raw`n=1`),
+        " に適用し、最初と最後の等号は ",
         ref("def_half_integer_modes"),
-        " の ",
-        math(String.raw`\check{Z}_\mu`),
-        " の定義による。）",
+        " の定義を使った。",
       ]),
     ],
     conversion: {
