@@ -1357,7 +1357,37 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         "を得る。",
       ]),
       paragraph([
-        "Step 3（(A)）。Step 1 の第 3 式と線型性より",
+        "Step 3（(A)）。主計算に先立ち、添字を ",
+        math(String.raw`l := j-1`),
+        " と置き換える（",
+        math(String.raw`j = 1,\dots,M`),
+        " が ",
+        math(String.raw`l = 0,\dots,M-1`),
+        " に 1 対 1 で対応する）。また、",
+        ref("def_half_integer_modes"),
+        " (1) の ",
+        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        " と ",
+        math(String.raw`Y_0^{\flat} = -Y_M`),
+        " より、境界の二項は一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
+&= 1\cdot Y_0^{\flat}
+   \quad (\because e^0=1) \\
+&= 1\cdot\left(-Y_M\right)
+   \quad (\because Y_0^{\flat} := -Y_M) \\
+&= \left(-1\right)Y_M
+   \quad (\because \mathbb{C}\text{ の四則}) \\
+&= e^{-iM\tilde\theta_\mu}\,Y_M
+   \quad (\because \text{def\_half\_integer\_modes (1)}) \\
+&= e^{-iM\tilde\theta_\mu}\,Y_M^{\flat}
+   \quad (\because Y_M^{\flat} := Y_M\ (1 \leq M \leq M))
+\end{aligned}`,
+      ),
+      paragraph([
+        "となる。この境界項の等式と Step 1 の第 3 式、交換子の線型性を使うと、主張の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1369,74 +1399,13 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2\,Y_{j-1}^{\flat}
    \quad (\because \text{Step 1 の第 3 式}) \\
 &= 2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,Y_{j-1}^{\flat}
-\end{aligned}`,
-      ),
-      paragraph([
-        "（最初の等号は ",
-        ref("def_half_integer_modes"),
-        " による。）ここで ",
-        math(String.raw`l := j-1`),
-        " と置き換える（",
-        math(String.raw`j = 1,\dots,M`),
-        " が ",
-        math(String.raw`l = 0,\dots,M-1`),
-        " に 1 対 1 で対応する）。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[H_1^{(+)},\ \check{Z}_\mu\right]
-&= 2\sum_{l=0}^{M-1} e^{-i(l+1)\tilde\theta_\mu}\,Y_{l}^{\flat}
-   \quad (\because \text{有限和の添字の付け替え } l = j-1) \\
-&= 2\sum_{l=0}^{M-1} e^{-i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Y_{l}^{\flat}
+   \quad (\because \text{スカラー倍を和の外へ出す}) \\
+&= 2\sum_{l=0}^{M-1} e^{-i(l+1)\tilde\theta_\mu}\,Y_l^{\flat}
+   \quad (\because \text{有限和の添字の付け替え } l=j-1) \\
+&= 2\sum_{l=0}^{M-1} e^{-i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=0}^{M-1} e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
-\end{aligned}`,
-      ),
-      paragraph([
-        "（指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用したもの。）",
-      ]),
-      paragraph([
-        "ここで ",
-        math(String.raw`l = 0`),
-        " の項を ",
-        math(String.raw`l = M`),
-        " の項に置き換えられる。実際 ",
-        ref("def_half_integer_modes"),
-        " (1) の ",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
-        " と ",
-        math(String.raw`Y_0^{\flat} = -Y_M`),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
-&= 1\cdot Y_0^{\flat} \\
-&= 1\cdot\left(-Y_M\right)
-   \quad (\because Y_0^{\flat} := -Y_M) \\
-&= \left(-1\right)Y_M \\
-&= e^{-iM\tilde\theta_\mu}\,Y_M
-   \quad (\because \text{def\_half\_integer\_modes (1)}) \\
-&= e^{-iM\tilde\theta_\mu}\,Y_M^{\flat}
-   \quad (\because Y_M^{\flat} := Y_M\ (1 \leq M \leq M))
-\end{aligned}`,
-      ),
-      paragraph([
-        "よって ",
-        math(String.raw`\sum_{l=0}^{M-1} = \sum_{l=1}^{M}`),
-        "（",
-        math(String.raw`l=0`),
-        " の項を落として ",
-        math(String.raw`l=M`),
-        " の項を足す。両者は等しい）であり",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[H_1^{(+)},\ \check{Z}_\mu\right]
+   \quad (\because \text{分配則}) \\
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
    \quad (\because \text{直前の displayMath による } l=0 \text{ の項と } l=M \text{ の項の入れ替え}) \\
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l
@@ -1446,11 +1415,13 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
+        "ここで指数法則は ",
+        ref("theorem_exp_product"),
+        " を ",
+        math(String.raw`n=1`),
+        " に適用し、最初と最後の等号は ",
         ref("def_half_integer_modes"),
-        " の ",
-        math(String.raw`\check{Y}_\mu`),
-        " の定義による。）",
+        " の定義を使った。",
       ]),
       paragraph([
         "Step 4（(B)）。Step 1 の第 4 式と線型性より",
