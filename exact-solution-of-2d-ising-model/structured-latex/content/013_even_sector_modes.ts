@@ -1861,44 +1861,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \end{aligned}`,
       ),
       paragraph([
-        "（1 行目は ",
-        ref("def_half_integer_modes"),
-        " の定義、2 行目は ",
-        ref("conjugate_index_of_check_Z_Y"),
-        " (2) の ",
-        math(String.raw`e^{-ik\tilde\theta_{M+1-\mu}} = e^{ik\tilde\theta_\mu}`),
-        " による。）",
-      ]),
-      paragraph([math(String.raw`H_2`), " について、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
-&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
-   \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
-   \quad (\because \text{直前の displayMath と def\_half\_integer\_modes}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
-   e^{ik\tilde\theta_\mu}e^{-ij\tilde\theta_\mu}
-   \quad (\because \text{積を二重和へ分配}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
-   e^{i(k-j)\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= \frac{1}{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j
-   \sum_{\mu=1}^{M} e^{i(k-j)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（1 行目で ",
-        ref("def_half_integer_modes"),
-        " の ",
-        math(String.raw`\check{Y}_\mu`),
-        " の定義も使った。指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用したものである。）",
-      ]),
-      paragraph([
+        "次に ",
         math(String.raw`1 \leq j,k \leq M`),
         " より ",
         math(String.raw`|k-j| < M`),
@@ -1910,11 +1873,29 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         math(String.raw`M`),
         "、そうでないとき ",
         math(String.raw`0`),
-        "。よって",
+        " である。これと ",
+        ref("def_half_integer_modes"),
+        "、",
+        ref("theorem_exp_product"),
+        "、",
+        ref("def_transfer_matrix_symbols"),
+        " を順に使うと、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
+   \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
+   \quad (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と def\_half\_integer\_modes}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
+   e^{ik\tilde\theta_\mu}e^{-ij\tilde\theta_\mu}
+   \quad (\because \text{積を二重和へ分配}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
+   e^{i(k-j)\tilde\theta_\mu}
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= \frac{1}{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j
+   \sum_{\mu=1}^{M} e^{i(k-j)\tilde\theta_\mu}
+   \quad (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\sum_{j=1}^{M} Z_jY_j\cdot M
    \quad (\because \text{antiperiodic\_exp\_sum}) \\
 &= \sum_{j=1}^{M} Z_jY_j
@@ -1924,47 +1905,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`H_2 = \sum_{m=1}^{M} Z_mY_m`),
-        " による。）",
-      ]),
-      paragraph([
-        math(String.raw`H_1^{(+)}`),
-        " について、同様に展開すると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
-&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
-   \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
-   \quad (\because \text{def\_half\_integer\_modes と上の } \check{Z}_{M+1-\mu} \text{ の表示}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
-   e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
-   \quad (\because \text{積を二重和へ分配}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
-   e^{-i(j-k+1)\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= \frac{1}{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k
-   \sum_{\mu=1}^{M} e^{-i(j-k+1)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（1 行目は ",
-        ref("def_half_integer_modes"),
-        " の ",
-        math(String.raw`\check{Y}_\mu`),
-        " の定義と、上で用意した ",
-        math(String.raw`\check{Z}_{M+1-\mu}`),
-        " の表示による。指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用したものである。）",
-      ]),
-      paragraph([
+        "もう一方の式の準備として、",
         math(String.raw`1 \leq j,k \leq M`),
         " より ",
         math(String.raw`j-k+1`),
@@ -2010,27 +1951,44 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
           "。",
         ],
       ]),
-      paragraph(["したがって"]),
+      paragraph([
+        "したがって、",
+        ref("def_half_integer_modes"),
+        "、",
+        ref("theorem_exp_product"),
+        "、",
+        ref("def_V1_pm"),
+        " を順に使うと、",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
+   \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
+   \quad (\because \text{def\_half\_integer\_modes と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
+   e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
+   \quad (\because \text{積を二重和へ分配}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
+   e^{-i(j-k+1)\tilde\theta_\mu}
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= \frac{1}{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k
+   \sum_{\mu=1}^{M} e^{-i(j-k+1)\tilde\theta_\mu}
+   \quad (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\left(\sum_{j=1}^{M-1} Y_jZ_{j+1}\cdot M + Y_MZ_1\cdot(-M)\right)
    \quad (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\
 &= \sum_{j=1}^{M-1} Y_jZ_{j+1} - Y_MZ_1
-   \quad (\because \text{スカラー } \tfrac{1}{M} \text{ の分配と } \tfrac{1}{M}\cdot M = 1,\ \tfrac{1}{M}\cdot(-M) = -1 \text{ の相殺})
+   \quad (\because \text{スカラー } \tfrac{1}{M} \text{ の分配と } \tfrac{1}{M}\cdot M = 1,\ \tfrac{1}{M}\cdot(-M) = -1 \text{ の相殺}) \\
+&= H_1^{(+)}
+   \quad (\because \text{def\_V1\_pm})
 \end{aligned}`,
       ),
-      paragraph([
-        ref("def_V1_pm"),
-        " より右辺は ",
-        math(String.raw`H_1^{(+)}`),
-        " に等しい。",
-      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "境界項 -Y_M Z_1 の符号が、antiperiodic_exp_sum の l=1 の因子 (-1)^1 として自動的に出てくる。整数運動量版 H1_H2_via_hatZ_hatY で hat(Z)^{(±)} の第 1 項の符号が担っていた役割を、ここでは指数和の符号が担っている。",
+        "2026-08-19 の式変形統一で、H_2 と H_1^{(+)} の導出を分断していた説明・重複した参照を準備へ移し、それぞれ主張の右辺から H_2・H_1^{(+)} へ至る一続きの鎖へまとめた。内容・参照は変えていない。",
       ],
     },
   },
