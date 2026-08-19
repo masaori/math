@@ -1271,7 +1271,7 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
 &= \left[\check\psi_\mu^\dagger,\ \check\psi_{M+1-\nu}\right]_+
    \quad (\because \text{反交換子の対称性}) \\
 &= \delta_{M+1-\nu,\,M+1-\mu}\,I
-   \quad (\because \text{anticommutator\_of\_check\_psi}) \\
+   \quad (\because \check\psi\text{ の反交換関係}) \\
 &= \delta_{\mu,\,\nu}\,I
    \quad (\because M+1-\nu = M+1-\mu \iff \mu = \nu)
 \end{aligned}`,
@@ -1295,15 +1295,29 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
 &= \check\psi_\nu^\dagger\left(\check\psi_{M+1-\nu}\,\check\psi_\mu^\dagger\right)
    \quad (\because \text{行列の積の結合法則}) \\
 &= \check\psi_\nu^\dagger\left(\delta_{\mu,\nu}I - \check\psi_\mu^\dagger\,\check\psi_{M+1-\nu}\right)
-   \quad (\because \text{直前の displayMath}\ ([\check\psi_{M+1-\nu}, \check\psi_\mu^\dagger]_+ = \delta_{\mu,\nu}I)) \\
+   \quad (\because \text{直前の反交換子の等式}\ ([\check\psi_{M+1-\nu}, \check\psi_\mu^\dagger]_+ = \delta_{\mu,\nu}I)) \\
 &= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{M+1-\nu}
    \quad (\because \text{行列の積の分配法則と結合法則}) \\
 &= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
-   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu^\dagger]_+ = 0))
+   \quad (\because \check\psi\text{ の反交換関係}\ ([\check\psi_\nu^\dagger, \check\psi_\mu^\dagger]_+ = 0))
+\end{aligned}`,
+      ),
+      paragraph(["となる。よって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu},\ \check\psi_\mu^\dagger\right]
+&= \check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,\check\psi_\mu^\dagger
+   - \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
+   \quad (\because \text{交換子の定義}) \\
+&= \left(\delta_{\mu,\nu}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\right)
+   - \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
+   \quad (\because \text{直前の式変形}) \\
+&= \delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger
+   \quad (\because \text{同類項の統合})
 \end{aligned}`,
       ),
       paragraph([
-        "となり、第 2 項を右辺へ移して交換子の定義に戻すと上の式を得る。**",
+        "となり、上の式を得る。**",
         math(String.raw`\check{\mathcal{M}}`),
         " へ絞ったことで、合同式 ",
         math(String.raw`(1-\nu)+\mu \equiv 1 \pmod M`),
@@ -1331,20 +1345,30 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
 \left[\check{X},\ \check\psi_\mu^\dagger\right]
 &= \left[\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
    \left(\check\psi_\nu^\dagger\check\psi_{M+1-\nu} - \tfrac12 I\right),\ \check\psi_\mu^\dagger\right]
-   \quad (\because \text{def\_check\_Vprime}) \\
+   \quad (\because \check{X}\text{ の定義}) \\
 &= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)
    \left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu} - \tfrac12 I,\ \check\psi_\mu^\dagger\right]
    \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu^\dagger\right]
-   \quad (\because \text{scalar\_identity\_commutes より } \left[\tfrac12 I,\ \check\psi_\mu^\dagger\right] = 0) \\
+   \quad (\because \text{スカラー行列は任意の元と可換なので } \left[\tfrac12 I,\ \check\psi_\mu^\dagger\right] = 0) \\
 &= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)\,\delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger
    \quad (\because \text{Step 1}) \\
 &= \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger
-   \quad (\because \mu \in \check{\mathcal{M}} \text{ なので } \nu = \mu \text{ の項だけが残る}) \\
-\text{すなわち}\quad
+   \quad (\because \mu \in \check{\mathcal{M}} \text{ なので } \nu = \mu \text{ の項だけが残る})
+\end{aligned}`,
+      ),
+      paragraph(["である。移項すると"]),
+      displayMath(
+        String.raw`\begin{aligned}
 \check{X}\,\check\psi_\mu^\dagger
+&= \check\psi_\mu^\dagger\,\check{X} + \left[\check{X},\ \check\psi_\mu^\dagger\right]
+   \quad (\because \text{交換子の定義}) \\
+&= \check\psi_\mu^\dagger\,\check{X} + \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger
+   \quad (\because \text{直前の式変形}) \\
+&= \check\psi_\mu^\dagger\,\check{X} + \check\psi_\mu^\dagger\left(\gamma(\tilde\theta_\mu)I\right)
+   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換}) \\
 &= \check\psi_\mu^\dagger\left(\check{X} + \gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{交換子の定義と scalar\_identity\_commutes})
+   \quad (\because \text{行列の積の分配法則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1381,11 +1405,13 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         String.raw`\begin{aligned}
 \check{X}^{n+1}\check\psi_\mu^\dagger
 &= \check{X}\left(\check{X}^{n}\check\psi_\mu^\dagger\right)
- = \check{X}\,\check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
+   \quad (\because \text{冪の定義と行列の積の結合法則}) \\
+&= \check{X}\,\check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
    \quad (\because \text{帰納法の仮定}) \\
 &= \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
    \quad (\because \text{Step 2}) \\
 &= \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n+1}
+   \quad (\because \text{冪の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1420,7 +1446,16 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
 = \check\psi_\mu^\dagger\,\exp\!\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)`,
       ),
       paragraph([
-        "Step 5（結論）。",
+        "Step 5（結論）。準備として、",
+        math(String.raw`c \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\exp(cI) = e^{c}I
+\quad (\because \left(cI\right)^n = c^n I\ (n\in\mathbb{Z}_{\geq 0})\text{ と }\exp\text{ の級数定義})`,
+      ),
+      paragraph([
+        "である。",
         math(String.raw`\check{X}+\gamma(\tilde\theta_\mu)I`),
         " と ",
         math(String.raw`-\check{X}`),
@@ -1435,22 +1470,18 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
       displayMath(
         String.raw`\begin{aligned}
 T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
-&= \exp(\check{X})\,\check\psi_\mu^\dagger\,\exp(-\check{X}) \\
+&= \exp(\check{X})\,\check\psi_\mu^\dagger\,\exp(-\check{X})
+   \quad (\because \text{証明冒頭の } T_{(\check{V}')} \text{ の表示}) \\
 &= \check\psi_\mu^\dagger\,\exp\!\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)\exp(-\check{X})
    \quad (\because \text{Step 4}) \\
 &= \check\psi_\mu^\dagger\,\exp\!\left(\gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{theorem\_exp\_product}) \\
-&= \check\psi_\mu^\dagger\cdot e^{\gamma(\tilde\theta_\mu)}I
-   = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger
+   \quad (\because \text{可換な指数の積の法則}) \\
+&= \check\psi_\mu^\dagger\left(e^{\gamma(\tilde\theta_\mu)}I\right)
+   \quad (\because \text{準備の等式 } \exp(cI)=e^{c}I) \\
+&= e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger
+   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換})
 \end{aligned}`,
       ),
-      paragraph([
-        "（",
-        math(String.raw`\left(\gamma I\right)^n = \gamma^n I`),
-        " より ",
-        math(String.raw`\exp(\gamma I) = e^{\gamma}I`),
-        "。）",
-      ]),
       paragraph([
         "Step 1'（",
         math(String.raw`\check\psi_\mu`),
@@ -1474,20 +1505,29 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
 &= \check\psi_\nu^\dagger\left(\check\psi_{M+1-\nu}\,\check\psi_\mu\right)
    \quad (\because \text{行列の積の結合法則}) \\
 &= \check\psi_\nu^\dagger\left(-\check\psi_\mu\,\check\psi_{M+1-\nu}\right)
-   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_{M+1-\nu}, \check\psi_\mu]_+ = 0)) \\
+   \quad (\because \check\psi\text{ の反交換関係}\ ([\check\psi_{M+1-\nu}, \check\psi_\mu]_+ = 0)) \\
 &= -\left(\check\psi_\nu^\dagger\,\check\psi_\mu\right)\check\psi_{M+1-\nu}
    \quad (\because \text{行列の積の結合法則とスカラー倍}) \\
 &= -\left(\delta_{\mu,\,M+1-\nu}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{M+1-\nu}
-   \quad (\because \text{anticommutator\_of\_check\_psi}\ ([\check\psi_\nu^\dagger, \check\psi_\mu]_+ = \delta_{\mu,\,M+1-\nu}I)) \\
+   \quad (\because \check\psi\text{ の反交換関係}\ ([\check\psi_\nu^\dagger, \check\psi_\mu]_+ = \delta_{\mu,\,M+1-\nu}I)) \\
 &= -\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
    \quad (\because \text{行列の積の分配法則と結合法則})
 \end{aligned}`,
       ),
-      paragraph([
-        "すなわち ",
-        math(String.raw`\left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu\right] = -\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu}`),
-        "。",
-      ]),
+      paragraph(["となる。よって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu\right]
+&= \check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,\check\psi_\mu
+   - \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
+   \quad (\because \text{交換子の定義}) \\
+&= \left(-\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\right)
+   - \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
+   \quad (\because \text{直前の式変形}) \\
+&= -\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu}
+   \quad (\because \text{同類項の統合})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2'（",
         math(String.raw`[\check{X}, \check\psi_\mu] = -\gamma(\tilde\theta_\mu)\check\psi_\mu`),
@@ -1504,9 +1544,15 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{X},\ \check\psi_\mu\right]
+&= \left[\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
+   \left(\check\psi_\nu^\dagger\check\psi_{M+1-\nu} - \tfrac12 I\right),\ \check\psi_\mu\right]
+   \quad (\because \check{X}\text{ の定義}) \\
+&= \sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
+   \left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu} - \tfrac12 I,\ \check\psi_\mu\right]
+   \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
    \left[\check\psi_\nu^\dagger\check\psi_{M+1-\nu},\ \check\psi_\mu\right]
-   \quad (\because \text{def\_check\_Vprime、交換子の第 1 引数の線型性、scalar\_identity\_commutes}) \\
+   \quad (\because \text{スカラー行列は任意の元と可換なので } \left[\tfrac12 I,\ \check\psi_\mu\right] = 0) \\
 &= -\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)\,\delta_{\mu,\,M+1-\nu}\,\check\psi_{M+1-\nu}
    \quad (\because \text{Step 1'})
 \end{aligned}`,
@@ -1529,32 +1575,117 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
         math(String.raw`M+1-\nu = \mu`),
         " なので ",
         math(String.raw`\check\psi_{M+1-\nu} = \check\psi_\mu`),
-        "、また ",
+        " である（",
+        math(String.raw`\gamma`),
+        " の共役添字での不変性は ",
         ref("periodicity_of_check_fermi"),
-        " (3) より",
+        " (3)）。よって",
       ]),
       displayMath(
-        String.raw`\gamma(\tilde\theta_\nu) = \gamma(\tilde\theta_{M+1-\mu}) = \gamma(\tilde\theta_\mu)
-\quad (\because \text{periodicity\_of\_check\_fermi (3)})`,
+        String.raw`\begin{aligned}
+\left[\check{X},\ \check\psi_\mu\right]
+&= -\gamma(\tilde\theta_{M+1-\mu})\,\check\psi_\mu
+   \quad (\because \nu = M+1-\mu \text{ の項だけが残り、}\check\psi_{M+1-\nu} = \check\psi_\mu) \\
+&= -\gamma(\tilde\theta_\mu)\,\check\psi_\mu
+   \quad (\because \gamma\text{ の共役添字での不変性 (3)})
+\end{aligned}`,
+      ),
+      paragraph(["である。移項すると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{X}\,\check\psi_\mu
+&= \check\psi_\mu\,\check{X} + \left[\check{X},\ \check\psi_\mu\right]
+   \quad (\because \text{交換子の定義}) \\
+&= \check\psi_\mu\,\check{X} - \gamma(\tilde\theta_\mu)\,\check\psi_\mu
+   \quad (\because \text{直前の式変形}) \\
+&= \check\psi_\mu\,\check{X} - \check\psi_\mu\left(\gamma(\tilde\theta_\mu)I\right)
+   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換}) \\
+&= \check\psi_\mu\left(\check{X} - \gamma(\tilde\theta_\mu)I\right)
+   \quad (\because \text{行列の積の分配法則})
+\end{aligned}`,
       ),
       paragraph([
-        "である。よって ",
-        math(String.raw`\left[\check{X}, \check\psi_\mu\right] = -\gamma(\tilde\theta_\mu)\check\psi_\mu`),
-        "、すなわち ",
-        math(String.raw`\check{X}\check\psi_\mu = \check\psi_\mu\left(\check{X} - \gamma(\tilde\theta_\mu)I\right)`),
-        "。",
-      ]),
-      paragraph([
-        "Steps 3'〜5'（結論）。Step 3〜5 の議論で ",
-        math(String.raw`\gamma(\tilde\theta_\mu)`),
-        " を ",
-        math(String.raw`-\gamma(\tilde\theta_\mu)`),
-        " に置き換えるだけで同じ計算が通り、",
+        "Step 3'（帰納法）。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`\check{X}^n\,\check\psi_\mu = \check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^n`),
+        " が成り立つ。",
+        math(String.raw`n=0`),
+        " では両辺 ",
+        math(String.raw`\check\psi_\mu`),
+        " で一致し、",
       ]),
       displayMath(
-        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu\right)
-= \check\psi_\mu\,\exp\!\left(-\gamma(\tilde\theta_\mu)I\right)
-= e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu`,
+        String.raw`\begin{aligned}
+\check{X}^{n+1}\check\psi_\mu
+&= \check{X}\left(\check{X}^{n}\check\psi_\mu\right)
+   \quad (\because \text{冪の定義と行列の積の結合法則}) \\
+&= \check{X}\,\check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^{n}
+   \quad (\because \text{帰納法の仮定}) \\
+&= \check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^{n}
+   \quad (\because \text{Step 2'}) \\
+&= \check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^{n+1}
+   \quad (\because \text{冪の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 4'（指数関数へ）。Step 3' より各 ",
+        math(String.raw`N`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sum_{n=0}^{N}\frac{\check{X}^n}{n!}\right)\check\psi_\mu
+&= \sum_{n=0}^{N}\frac{\check{X}^n\check\psi_\mu}{n!}
+   \quad (\because \text{行列の積の分配法則}) \\
+&= \sum_{n=0}^{N}\frac{\check\psi_\mu
+   \left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^n}{n!}
+   \quad (\because \text{Step 3' を各項へ同時適用}) \\
+&= \check\psi_\mu\sum_{n=0}^{N}
+   \frac{\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^n}{n!}
+   \quad (\because \text{行列の積の分配法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        ref("exp_converges"),
+        " より両辺の部分和は ",
+        math(String.raw`N \to \infty`),
+        " で収束する。行列の積は連続（",
+        ref("matrix_multiplication_continuity"),
+        "）だから極限をとって",
+      ]),
+      displayMath(
+        String.raw`\exp(\check{X})\,\check\psi_\mu
+= \check\psi_\mu\,\exp\!\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)`,
+      ),
+      paragraph([
+        "Step 5'（結論）。",
+        math(String.raw`\check{X}-\gamma(\tilde\theta_\mu)I`),
+        " と ",
+        math(String.raw`-\check{X}`),
+        " は可換（",
+        ref("scalar_identity_commutes"),
+        " と ",
+        math(String.raw`\check{X}(-\check{X}) = (-\check{X})\check{X}`),
+        "）だから ",
+        ref("theorem_exp_product"),
+        " が使えて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(\check{V}')}\!\left(\check\psi_\mu\right)
+&= \exp(\check{X})\,\check\psi_\mu\,\exp(-\check{X})
+   \quad (\because \text{証明冒頭の } T_{(\check{V}')} \text{ の表示}) \\
+&= \check\psi_\mu\,\exp\!\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)\exp(-\check{X})
+   \quad (\because \text{Step 4'}) \\
+&= \check\psi_\mu\,\exp\!\left(-\gamma(\tilde\theta_\mu)I\right)
+   \quad (\because \text{可換な指数の積の法則}) \\
+&= \check\psi_\mu\left(e^{-\gamma(\tilde\theta_\mu)}I\right)
+   \quad (\because \text{準備の等式 } \exp(cI)=e^{c}I) \\
+&= e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu
+   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換})
+\end{aligned}`,
       ),
     ],
     conversion: {
@@ -1564,6 +1695,10 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
           "（a) μ ∈ {1..M}、b) μ = -k、c) μ = -M）は、添字を μ ∈ Z で扱い periodicity_of_check_fermi を先に" +
           "用意したことで不要になった。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_04（V̌' を行列指数関数から直接構成して共役を計算）。",
+        "2026-08-19 の式変形統一で、Step 1・1' の移項と交換子への回収の散文を鎖へ開き、Step 2 末尾に同居していた移項を独立の鎖へ分け、" +
+          "Step 2' の一行三操作を Step 2 と同形の一操作ずつへ分け、Step 3 の一行二等号と根拠の無い行を直し、" +
+          "Step 5 の exp(γI)=e^γ I の後置きの注記を準備の等式へ移し、Steps 3'〜5' の「置き換えるだけで同じ計算」を Step 3〜5 と同形の鎖へ開いた。" +
+          "機械識別子の行末根拠は人間可読な名前へ直した。内容と参照は変えていない。",
       ],
     },
   },

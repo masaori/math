@@ -6,6 +6,8 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-19 の tick 462 は、todo が空で命題候補も無いため前進せず、前回の鎖の後の重複した散文根拠を外してから、姉妹側の $T_{(\check V')}$ の $\check\psi$ への作用の証明の式変形を統一した。**
+  前進前レビューでは tick 461 のコミット `14daffcb` を差分で突き合わせ、「$V^{(+)}$ と $\check\psi$ の交換関係」で開かれた線型作用の三段と各列の鎖が元の内容・参照を保つことを確認した一方、Step 1 の鎖の直後の散文「各列に線型性を使った」が鎖の行末根拠と重複していたため、内容を担う部分（$G$ の成分が $A_0,B_0$ に依らない複素数で線型性の係数として使えること）だけを残し、コミット `1384ed81` を前進前に push した。「何も言っていない主張」の独立ブロックの削除対象は無く、本文末尾と todo 表も一致している。式変形統一では姉妹側 `016_even_sector_fermions.ts` の「$T_{(\check V')}$ の $\check\psi$ への作用」（`action_of_T_check_Vprime_on_check_psi`）で、Step 1・1' の散文に畳まれた交換子への回収（移項）を鎖へ開き、Step 2 の鎖の末尾に同居していた移項を独立の四段の鎖へ分け、Step 2' の一行三操作を Step 2 と同形へ分け、Step 3 の一行二等号と根拠の無い行を直し、Step 5 の後置き注記 $\exp(\gamma I)=e^\gamma I$ を準備の等式へ移し、Steps 3'〜5' の「置き換えるだけで同じ計算」を Step 3〜5 と同形の鎖へ開いた（内容・参照は不変）。姉妹側 SageMath 対象検算（check\_04 PASS）・check 300 ブロック・PDF 335 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件通過。
 - **2026-08-19 の tick 461 は、todo が空で命題候補も無いため前進せず、前回の反交換関係に残った二本の省略計算を修正してから、姉妹側の $V^{(+)}$ と $\check\psi$ の交換関係の式変形を統一した。**
   前進前レビューでは tick 460 のコミット `caba7430` を差分で突き合わせ、係数計算と反交換子の双線型性が元の内容・参照を保つことを確認した一方、第 3 式と第 2 式がなお「同じ計算」「同じ展開」に畳まれていたため、定義・双線型性・反交換関係・零行列項の消去・共通因子の括り出しを省略しない鎖へ開き、コミット `5820d151` を前進前に push した。「何も言っていない主張」の独立ブロックの削除対象は無く、本文末尾と todo 表も一致している。式変形統一では姉妹側 `016_even_sector_fermions.ts` の「$V^{(+)}$ と $\check\psi$ の交換関係」（`commutation_V_plus_check_psi`）で、行ベクトルへの線型作用の一行二等号を三段へ分け、転送行列作用の鎖の機械識別子を人間可読な根拠へ直し、末尾の二等号と固有値の指数表示への代入を各列の一続きの鎖へ開いた（内容・参照は不変）。姉妹側 SageMath 対象検算（check\_03 PASS）・check 300 ブロック・PDF 334 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件通過。
 - **2026-08-19 の tick 460 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、tick 459 の周期性の鎖に残った二操作一行を直してから、姉妹側の $\check\psi$ の反交換関係の証明の式変形を統一した。**
@@ -14,8 +16,6 @@
   前進前レビューでは tick 458 のコミット `17a03b59` を差分で突き合わせ、$\gamma_2(\tilde\theta_\mu)\neq0$ の等価変形が一行一操作・行末根拠つきで、元の内容と参照を失っていないことを確認した（本文の修正なし）。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・定義域・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表（空）も一致している。式変形統一では姉妹側 `016_even_sector_fermions.ts` の「$\gamma_1,\gamma_2$ の周期性と共役添字 $M+1-\mu$」（`periodicity_of_check_fermi`）で、機械識別子の根拠を人間可読な名前とラベル参照へ直し、分配則の行に根拠を補い、共役添字の二本の省略計算を左辺から始まる鎖へ開いた（内容・参照は不変）。姉妹側 SageMath 対象検算（check\_01 PASS）・check 300 ブロック・PDF 333 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ通過。
 - **2026-08-19 の tick 458 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側の $\gamma_2(\tilde\theta_\mu)\neq0$（例外なし）の証明で、鎖の行末根拠に残っていたラベル識別子の生文字列と二操作一行を一操作ずつの形へ直した。**
   前進前レビューでは tick 457 のコミット `193a0981`・`1f05046f` を差分で突き合わせ、固有ベクトルの第二成分の約分の二段の鎖、行列式の同類項の統合の四段の鎖、対角化の右乗の四段の鎖が、いずれも一行一操作・行末根拠つきで、元の内容と `eigenvector_of_A_theta_tilde`・`gamma_2_theta_tilde_nonzero`・`relation_of_gamma_2_theta_tilde`・`complex_numbers_form_a_field` の参照を失っていないことを確認した（本文の修正なし）。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）と todo 表（空）も一致している。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$\gamma_2(\tilde\theta_\mu)\neq0$（例外なし）」（`gamma_2_theta_tilde_nonzero`）で、Step 1・Step 2 の鎖の行末根拠をラベル識別子の生文字列（def\_gamma1\_gamma2\_of\_theta 等）から人間可読な名前へ直し、Step 2 の「両辺を π で割って M 倍する」を一操作ずつの二行に分け、最終行 $2(\mu-\frac12)=2\mu-1$ に行末根拠を補って鎖の後の重複した散文根拠を外した（内容・参照は不変）。姉妹側 SageMath 対象検算（check_01 PASS）・check 300 ブロック・PDF 333 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件通過。
-- **2026-08-19 の tick 457 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、前回の因数分解に残った一ステップ一定理違反を修正してから、姉妹側の $A(\tilde\theta_\mu)$ の対角化証明を一続きの鎖へ統一した。**
-  前進前レビューでは tick 456 のコミット `1784a3bf` を差分で突き合わせ、固有値と固有ベクトルの証明に追加された因数分解を確認したところ、分配則と同類項の統合を一つの等号へまとめた行が二箇所あったため中間行を補い、コミット `193a0981` を前進前に push した。元の恒等式と `def_gamma1_gamma2_of_theta`・`relation_of_gamma_2_theta_tilde`・`gamma_2_theta_tilde_nonzero`・`complex_numbers_form_a_field`・`abs_basic_properties` の参照は失っていない。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・非零性・定義域または後続の反復利用を担うため削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）と todo 表も一致している。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$A(\tilde\theta_\mu)$ の対角化」（`diagonalization_check_P_D`）で、固有ベクトルの第二成分の約分、行列式の同類項の統合、対角化の右乗を、それぞれ主張の左辺から始まる一続きの鎖と行末根拠へ開いた（内容・参照は不変）。姉妹側 SageMath 対象検算（check_03 PASS）・check 300 ブロック・PDF 333 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ通過。
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 - 検算（終結式による $d_1(3)$ の定義多項式の直接構成）: 1 セクション
@@ -35,15 +35,17 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-19（tick 462）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、レビュー修正一件と runbook の別枠である式変形統一一件を進めた。
 - 2026-08-19（tick 461）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、レビュー修正一件と runbook の別枠である式変形統一一件を進めた。
 - 2026-08-19（tick 460）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、レビュー修正一件と runbook の別枠である式変形統一一件を進めた。
 - 2026-08-19（tick 459）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
 - 2026-08-19（tick 458）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
-- 2026-08-19（tick 457）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、レビュー修正一件と runbook の別枠である式変形統一一件を進めた。
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
+
+- 2026-08-19（tick 462）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$T_{(\check V')}$ の $\check\psi$ への作用」（`action_of_T_check_Vprime_on_check_psi`）で、Step 1・1' で散文に畳まれていた交換子への回収（移項）を交換子の定義・直前の式変形・同類項の統合の鎖へ開き、Step 2 の鎖の末尾に同居していた移項 $\check X\check\psi_\mu^\dagger=\check\psi_\mu^\dagger(\check X+\gamma I)$ を独立の四段の鎖へ分け、Step 2' の一行三操作（定義・線型性・スカラー行列の消去）を Step 2 と同形の一操作ずつへ分け、Step 3 の一行二等号と根拠の無い行を直し、Step 5 の後置き注記 $\exp(\gamma I)=e^\gamma I$ を準備の等式へ移して鎖の行末根拠から引き、Steps 3'〜5' の「置き換えるだけで同じ計算」を Step 3〜5 と同形の鎖（帰納法・部分和・結論）へ開いた。機械識別子の行末根拠は人間可読な名前へ直した。元の内容と `anticommutator_of_check_psi`・`def_check_Vprime`・`scalar_identity_commutes`・`theorem_exp_product`・`periodicity_of_check_fermi`・`exp_converges`・`matrix_multiplication_continuity`・`def_check_index_set` の参照は不変。姉妹側 SageMath 対象検算（check\_04 PASS）・check 300 ブロック・PDF 335 ページ通過。
 
 - 2026-08-19（tick 461）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}$ と $\check\psi$ の交換関係」（`commutation_V_plus_check_psi`）で、行ベクトルへの線型作用の一行二等号を定義・二列への線型性・行ベクトル積の定義の三段へ分け、転送行列作用の鎖の機械識別子を人間可読な根拠へ直し、末尾の一行二等号と固有値の指数表示への代入を各列の一続きの鎖へ開いた。元の内容と `def_check_fermi`・`linearity_of_T_on_check_Z_Y`・`T_V_plus_check_Z_Y`・`diagonalization_check_P_D`・`lambda_eq_exp_gamma_theta_tilde` の参照は不変。姉妹側 SageMath 対象検算（check\_03 PASS）・check 300 ブロック・PDF 334 ページ通過。
 
@@ -52,9 +54,6 @@
 - 2026-08-19（tick 459）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$\gamma_1,\gamma_2$ の周期性と共役添字 $M+1-\mu$」（`periodicity_of_check_fermi`）で、Euler の公式・運動量・共役添字の根拠を機械識別子の生文字列から人間可読な名前とラベル参照へ直し、運動量の導出で根拠の無かった分配則の行を補った。また、「同じ計算」に省略していた $\gamma_2(-\tilde\theta_{M+1-\mu})=\gamma_2(\tilde\theta_\mu)$ と $\gamma_1(\tilde\theta_{M+1-\mu})=\gamma_1(\tilde\theta_\mu)$ の導出を、各結論の左辺から始まる鎖へ開いた。元の内容と `euler_formula_cos_sin`・`antiperiodic_exp_sum`・`conjugate_index_of_check_Z_Y`・`def_gamma1_gamma2_of_theta` の参照は不変。姉妹側 SageMath 対象検算（check\_01 PASS）。
 
 - 2026-08-19（tick 458）: 姉妹側の半整数運動量における $A(\tilde\theta)$ の対角化章（`015_A_theta_tilde_diagonalization.ts`）の「$\gamma_2(\tilde\theta_\mu)\neq0$（例外なし）」（`gamma_2_theta_tilde_nonzero`）で、Step 1・Step 2 の同値変形の鎖の行末根拠をラベル識別子の生文字列（def\_gamma1\_gamma2\_of\_theta・def\_half\_integer\_modes・definition\_of\_cc・complex\_numbers\_form\_a\_field）から人間可読な名前へ直し、Step 2 の「両辺を $\pi$ で割って $M$ 倍する」を「両辺を $\pi>0$ で割る」「両辺を $M\neq0$ 倍する」の二行に分け、最終行 $2(\mu-\frac12)=2\mu-1$ に行末根拠（分配則）を補って、鎖の直後で同じ根拠を繰り返していた散文を外した。元の内容と `def_gamma1_gamma2_of_theta`・`abs_basic_properties`・`euler_formula_cos_sin`・`complex_numbers_form_a_field`・`definition_of_cc`・`def_half_integer_modes`・`gamma_2_theta_is_0` の参照は不変。姉妹側 SageMath 対象検算（check_01 PASS）・check 300 ブロック・PDF 333 ページ通過。
-
-- 2026-08-19（tick 457）: 姉妹側の半整数運動量における $A(\tilde\theta)$ の対角化章（`015_A_theta_tilde_diagonalization.ts`）の「$A(\tilde\theta_\mu)$ の対角化」（`diagonalization_check_P_D`）で、固有ベクトルの第二成分 $cb=1/(2\sqrt M)$ の約分を二段の鎖へ、行列式の末尾にあった一行二等号を四段の鎖へ、散文で済ませていた $A\check P=\check P\check D$ の右からの $\check P^{-1}$ の乗算を四段の鎖へ開き、各行末に根拠を置いた。元の内容と `eigenvector_of_A_theta_tilde`・`gamma_2_theta_tilde_nonzero`・`relation_of_gamma_2_theta_tilde`・`complex_numbers_form_a_field` の参照は不変。姉妹側 SageMath 対象検算（check_03 PASS）・check 300 ブロック・PDF 333 ページ通過。
-
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）
 
@@ -67,11 +66,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-19（tick 462）: tick 461 のコミット `14daffcb` を差分で突き合わせ、「$V^{(+)}$ と $\check\psi$ の交換関係」で開かれた線型作用の三段と各列の鎖が元の内容・参照を失っていないことを確認した。一方、Step 1 の鎖の直後の散文「各列に線型性を使った」が鎖の行末根拠（線型性の 2 列への同時適用）と重複していたため、内容を担う部分（$G$ の成分が $A_0,B_0$ に依らない複素数で線型性の係数として使えること）だけを残す形へ直し、コミット `1384ed81` を前進前に push した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）と todo 表（空）も一致している。
 - 2026-08-19（tick 461）: tick 460 のコミット `caba7430` を差分で突き合わせ、「$\check\psi$ の反交換関係」で開かれた係数計算と反交換子の双線型性が元の内容・参照を失っていないことを確認した。一方、第 3 式と第 2 式の導出がなお「まったく同じ計算」「Step 2 と同じ展開」に畳まれていたため、定義、双線型性、四つの反交換関係、零行列項の消去、共通因子の括り出しを各行に明示した鎖へ開いた。対象 SageMath 検算・姉妹側 check・PDF を通した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・well-defined 性・共通分母の存在または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
 - 2026-08-19（tick 460）: tick 459 のコミット `d04c21f6` を差分で突き合わせ、「$\gamma_1,\gamma_2$ の周期性と共役添字」で開かれた鎖が元の内容と `conjugate_index_of_check_Z_Y`・`def_gamma1_gamma2_of_theta` の参照を失っていないことを確認したが、運動量の分配則の行に分数の分割が、共役添字の分配則の行に可換則の並べ替えが同居していた（二操作一行）ため、中間行を補って一操作ずつへ分け、コミット `5e977456` を前進前に push した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）と todo 表（空）も一致している。
 - 2026-08-19（tick 459）: tick 458 のコミット `17a03b59` を差分で突き合わせ、$\gamma_2(\tilde\theta_\mu)\neq0$ の等価変形は一行一操作・行末根拠つきで、元の内容と `def_gamma1_gamma2_of_theta`・`abs_basic_properties`・`euler_formula_cos_sin`・`complex_numbers_form_a_field`・`definition_of_cc`・`def_half_integer_modes`・`gamma_2_theta_is_0` の参照を失っていなかった（本文の修正なし）。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・定義域・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
 - 2026-08-19（tick 458）: tick 457 のコミット `193a0981`・`1f05046f` を差分で突き合わせ、固有ベクトルの第二成分の約分の二段の鎖・行列式の同類項の統合の四段の鎖・対角化の右乗の四段の鎖が、いずれも一行一操作・行末根拠つきで、元の内容と `eigenvector_of_A_theta_tilde`・`gamma_2_theta_tilde_nonzero`・`relation_of_gamma_2_theta_tilde`・`complex_numbers_form_a_field` の参照を失っていないことを確認した（本文の修正なし）。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）とセクション表（todo 空）も一致している。
-- 2026-08-19（tick 457）: tick 456 のコミット `1784a3bf` を差分で突き合わせ、固有値と固有ベクトルの因数分解に分配則と同類項の統合を同時適用した行が二箇所残っていることを見つけた。分配・可換則・同類項の統合・並べ替えを一操作ずつの中間行へ分け、コミット `193a0981` を前進前に push した。元の内容と参照は不変。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・非零性・定義域または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
 ## 判断待ち（人間に問うべき論点）
 
 - **content のファイルを分けるときの文書順の決め方。** システムは `content/` のファイル名昇順を
