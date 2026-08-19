@@ -9,7 +9,8 @@ Lean 必要十分版からの導出。
 `freeBoxTwoRootMinimalDegrees` と `shiftedFreeBoxTwoRootMinimalDegrees`、不一致を
 `rootMinimalDegreeSets_differ_at_two`、添字写像を末尾ずらしに取ればよい。
 結論の項別一致の連言肢は仮定に使った既存補題
-`shiftedFreeFiniteBoxQuantitySeq_eq_tail` を添えるだけである。ℝ への脱出は無い。
+`shiftedFreeFiniteBoxQuantitySeq_eq_tail` を添えるだけである。非可算への脱出は、二つの有限箱量列が
+それぞれ実数へ収束するという仮定 `h` と `h'` に現れる箱の大きさの極限だけである。
 -/
 import Ising3DCut.LimitQuantity.RootSetDoesNotDetermineLimitQuantity
 import Ising3DCut.LimitQuantity.FactorizationTypeDoesNotDetermineLimitQuantityAbstract
