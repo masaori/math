@@ -340,11 +340,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 e^{i(t+2k\pi)}
 &= \cos(t+2k\pi) + i\sin(t+2k\pi)
-   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+   \quad (\because \text{Euler の公式}) \\
 &= \cos t + i\sin t
    \quad (\because \cos, \sin \text{ の } 2\pi \text{ 周期性}) \\
 &= e^{it}
-   \quad (\because \text{euler\_formula\_cos\_sin})
+   \quad (\because \text{Euler の公式})
 \end{aligned}`,
       ),
       paragraph([
@@ -371,10 +371,11 @@ e^{i(t+2k\pi)}
         String.raw`\begin{aligned}
 \tilde\theta_{\mu+kM}
 &= \frac{2\pi\left(\mu+kM-\frac12\right)}{M}
-   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
-&= \frac{2\pi\left(\mu-\frac12\right)}{M} + \frac{2\pi kM}{M} \\
+   \quad (\because \tilde\theta \text{ の定義}) \\
+&= \frac{2\pi\left(\mu-\frac12\right)}{M} + \frac{2\pi kM}{M}
+   \quad (\because \mathbb{R}\text{ の分配則}) \\
 &= \tilde\theta_\mu + 2k\pi
-   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義})
+   \quad (\because \tilde\theta \text{ の定義と }M\neq0\text{ による約分})
 \end{aligned}`,
       ),
       paragraph([
@@ -409,25 +410,38 @@ e^{i(t+2k\pi)}
         String.raw`\begin{aligned}
 \gamma_2(\tilde\theta_{M+1-\mu})
 &= \gamma_2\!\left(\left(-\tilde\theta_\mu\right) + 2\pi\right)
-   \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (1)}) \\
+   \quad (\because \text{共役添字の運動量}) \\
 &= \gamma_2(-\tilde\theta_\mu)
    \quad (\because \text{本ブロックの (1)}\ (k=1))
 \end{aligned}`,
       ),
+      displayMath(
+        String.raw`\begin{aligned}
+-\tilde\theta_{M+1-\mu}
+&= -(2\pi-\tilde\theta_\mu)
+   \quad (\because \text{共役添字の運動量}) \\
+&= \tilde\theta_\mu+2(-1)\pi
+   \quad (\because \mathbb{R}\text{ の分配則}),\\[4pt]
+\gamma_2(-\tilde\theta_{M+1-\mu})
+&= \gamma_2(\tilde\theta_\mu+2(-1)\pi)
+   \quad (\because \text{上の負号を付けた等式}) \\
+&= \gamma_2(\tilde\theta_\mu)
+   \quad (\because \text{本ブロック }(1)),\\[4pt]
+\gamma_1(\tilde\theta_{M+1-\mu})
+&= \gamma_1((-\tilde\theta_\mu)+2\pi)
+   \quad (\because \text{共役添字の運動量}) \\
+&= \gamma_1(-\tilde\theta_\mu)
+   \quad (\because \text{本ブロック }(1)) \\
+&= \gamma_1(\tilde\theta_\mu)
+   \quad (\because \cos(-t)=\cos t\text{ と }\gamma_1\text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
-        "同様に ",
-        math(String.raw`-\tilde\theta_{M+1-\mu} = \tilde\theta_\mu - 2\pi`),
-        " なので (1) を ",
-        math(String.raw`\theta = \tilde\theta_\mu`),
+        "上の鎖では ",
+        ref("conjugate_index_of_check_Z_Y"),
         "、",
-        math(String.raw`k = -1`),
-        " として使い ",
-        math(String.raw`\gamma_2(-\tilde\theta_{M+1-\mu}) = \gamma_2(\tilde\theta_\mu)`),
-        "。",
-        math(String.raw`\gamma_1`),
-        " についても同じ計算で ",
-        math(String.raw`\gamma_1(\tilde\theta_{M+1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
-        " を得る。",
+        ref("def_gamma1_gamma2_of_theta"),
+        " を引いた。",
       ]),
       paragraph([
         ref("def_check_index_set"),
@@ -472,6 +486,8 @@ e^{i(t+2k\pi)}
           "ψ̌ を 𝓜̌ の外の添字で評価する箇所が本文から消えたため、その項目は不要になった。" +
           "γ_1, γ_2 は θ ∈ R の関数なので (2) だけは μ ∈ Z のまま残してある。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_01。",
+        "2026-08-19 の式変形統一で、周期性の鎖の機械識別子を人間可読な根拠へ直し、根拠の無かった分配則の行を補った。" +
+          "また、「同じ計算」に省略していた共役添字の二本の導出を、各結論の左辺から始まる鎖へ開いた。内容と参照は変えていない。",
       ],
     },
   },
