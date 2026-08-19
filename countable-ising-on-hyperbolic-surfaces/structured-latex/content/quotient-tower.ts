@@ -2464,4 +2464,63 @@ b
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_homology_polynomial_family_pushforward_map",
+    kind: "definition",
+    title: { text: "商の塔に沿うホモロジー類別多項式族の押し出し写像" },
+    labels: ["def_quotient_tower_homology_polynomial_family_pushforward_map"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/two-stage-quotient-tower-homology-polynomial-family-pushforward-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_first_homology_pushforward_map_over_f2"),
+        " の第一ホモロジー押し出し写像を固定する。細段と粗段の第一ホモロジー群をそれぞれ",
+      ]),
+      displayMath(String.raw`H_{\mathrm{fine}}
+:=
+H_1
+\left(
+  \mathcal C^{\mathrm{fine}};\mathbb F_2
+\right),
+\qquad
+H_{\mathrm{coarse}}
+:=
+H_1
+\left(
+  \mathcal C^{\mathrm{coarse}};\mathbb F_2
+\right)`),
+      paragraph([
+        "と書く。独立な不定元 ",
+        math(String.raw`u,v`),
+        " と、任意の整数係数多項式族 ",
+        math(String.raw`A=(A_h)_{h\in H_{\mathrm{fine}}}\in\bigl(\mathbb Z[u,v]\bigr)^{H_{\mathrm{fine}}}`),
+        " に対し、ホモロジー類別多項式族の押し出し写像を、始域、終域、各粗段成分の作用を明示して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline\kappa_{\mathrm{poly},!}:
+\bigl(\mathbb Z[u,v]\bigr)^{H_{\mathrm{fine}}}
+&\longrightarrow
+\bigl(\mathbb Z[u,v]\bigr)^{H_{\mathrm{coarse}}},\\
+A
+&\longmapsto
+\overline\kappa_{\mathrm{poly},!}(A),\\
+\left(
+  \overline\kappa_{\mathrm{poly},!}(A)
+\right)_k
+&:=
+\sum_{h\in
+  \overline\kappa_{H_1,!}^{-1}(\{k\})
+}
+A_h
+\in\mathbb Z[u,v]
+\qquad
+\left(k\in H_{\mathrm{coarse}}\right)
+\end{aligned}`),
+      paragraph([
+        "で定める。各ファイバーは有限集合である。空のファイバーにわたる和は ",
+        math(String.raw`\mathbb Z[u,v]`),
+        " の零多項式とするので、粗段の全ての第一ホモロジー類について成分が定まり、表示した終域は正しい。この定義は、特定のセル分割から得た高温生成多項式族がこの写像で互いに移ることも、第一ホモロジー押し出し写像の単射性または全射性も主張しない。全ての添字集合は有限であり、整数係数多項式の有限和だけを用いる。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
