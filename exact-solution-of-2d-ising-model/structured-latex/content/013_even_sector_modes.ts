@@ -557,7 +557,8 @@ e^{-iM\tilde\theta_\mu}
       displayMath(
         String.raw`\begin{aligned}
 e^{-ij\tilde\theta_{\mu+M}}
-&= e^{-ij\left(\tilde\theta_\mu + 2\pi\right)} \\
+&= e^{-ij\left(\tilde\theta_\mu + 2\pi\right)}
+   \quad (\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi) \\
 &= e^{-ij\tilde\theta_\mu}\,e^{-2\pi i j}
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= e^{-ij\tilde\theta_\mu}\left(\cos(2\pi j) - i\sin(2\pi j)\right)
@@ -571,17 +572,42 @@ e^{-ij\tilde\theta_{\mu+M}}
         ref("theorem_exp_product"),
         " と ",
         ref("euler_formula_cos_sin"),
-        " を使った。）係数がすべて一致するので ",
-        math(String.raw`\check{Z}_{\mu+M} = \check{Z}_\mu`),
-        "、",
-        math(String.raw`\check{Y}_{\mu+M} = \check{Y}_\mu`),
-        "。",
+        " を使った。）係数がすべて一致するので、一続きに",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Z}_{\mu+M}
+&=\sum_{j=1}^{M}Z_j e^{-ij\tilde\theta_{\mu+M}}
+&&\left(\because\ \check{Z}_{\mu+M}\text{ の定義}\right)\\
+&=\sum_{j=1}^{M}Z_j e^{-ij\tilde\theta_{\mu}}
+&&\left(\because\ \text{上で得た }e^{-ij\tilde\theta_{\mu+M}}=e^{-ij\tilde\theta_\mu}\text{ を全項へ同時適用}\right)\\
+&=\check{Z}_{\mu}
+&&\left(\because\ \check{Z}_{\mu}\text{ の定義}\right),\\[4pt]
+\check{Y}_{\mu+M}
+&=\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_{\mu+M}}
+&&\left(\because\ \check{Y}_{\mu+M}\text{ の定義}\right)\\
+&=\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_{\mu}}
+&&\left(\because\ \text{上で得た }e^{-ij\tilde\theta_{\mu+M}}=e^{-ij\tilde\theta_\mu}\text{ を全項へ同時適用}\right)\\
+&=\check{Y}_{\mu}
+&&\left(\because\ \check{Y}_{\mu}\text{ の定義}\right)
+\end{aligned}`,
+      ),
       paragraph([
-        "(3) ",
-        math(String.raw`\tilde\theta_{1-\mu} = \dfrac{2\pi\left(1-\mu-\frac12\right)}{M} = \dfrac{2\pi\left(\frac12-\mu\right)}{M} = -\dfrac{2\pi\left(\mu-\frac12\right)}{M} = -\tilde\theta_\mu`),
-        "。",
+        "(3) 共役添字について、一続きに",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\tilde\theta_{1-\mu}
+&=\frac{2\pi\left(1-\mu-\frac12\right)}{M}
+&&\left(\because\ \tilde\theta_{1-\mu}\text{ の定義}\right)\\
+&=\frac{2\pi\left(\frac12-\mu\right)}{M}
+&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
+&=-\frac{2\pi\left(\mu-\frac12\right)}{M}
+&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
+&=-\tilde\theta_\mu
+&&\left(\because\ \tilde\theta_\mu\text{ の定義}\right)
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
