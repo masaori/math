@@ -9,6 +9,7 @@ structured-latex/content/iterate-monoid-conjugacy-invariance.ts。
 有限集合・自然数・写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberRootedTree
+import CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance
 
 namespace CellularAutomata.IterateMonoidConjugacyInvariance
 
@@ -256,5 +257,107 @@ noncomputable def invariantData :
         Finset ((V → State) × (V → State))) :=
   (minCollisionStart NV fV, minPositivePeriod NV fV,
     stableImageTable NV fV, invariantRootedTreeFamily NV fV)
+
+/-! ## 必要十分版からの導出（前半）
+
+具体版は必要十分版を X := V → State、Y := W → State、F := globalMap NV fV、
+G := globalMap NW fW、h := 共役全単射へ特殊化したものである。
+反復の移送には h が単なる写像で足り、等号の保存は全射性・反映は単射性だけを使う。
+根付き辺・深さ・分岐個数の移送の導出（後半）は未収録である。 -/
+
+omit [Fintype V] [DecidableEq V] [Fintype W] [DecidableEq W] in
+/-- 反復の移送は必要十分版の特殊化として得られる。 -/
+theorem conjugate_iterate_from_necessary_sufficient (n : ℕ) (y : V → State) :
+    h (iterate NV fV n y) = iterate NW fW n (h y) := by
+  rw [iterate_eq_necessary_sufficient NV fV n y,
+    iterate_eq_necessary_sufficient NW fW n (h y)]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_iterateMap
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj n y
+
+omit [Fintype V] [DecidableEq V] [Fintype W] [DecidableEq W] in
+/-- 反復写像の等号の両側同値は必要十分版の特殊化として得られる。 -/
+theorem iterateMap_eq_iff_from_necessary_sufficient (m n : ℕ) :
+    iterateMap NV fV m = iterateMap NV fV n ↔
+      iterateMap NW fW m = iterateMap NW fW n := by
+  rw [iterateMap_eq_necessary_sufficient NV fV m,
+    iterateMap_eq_necessary_sufficient NV fV n,
+    iterateMap_eq_necessary_sufficient NW fW m,
+    iterateMap_eq_necessary_sufficient NW fW n]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.iterateMap_eq_iff
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective m n
+
+omit [Fintype V] [DecidableEq V] [Fintype W] [DecidableEq W] in
+/-- 衝突開始位置の両側同値は必要十分版の特殊化として得られる。 -/
+theorem isCollisionStart_iff_from_necessary_sufficient (n : ℕ) :
+    IsCollisionStart NV fV n ↔ IsCollisionStart NW fW n := by
+  rw [isCollisionStart_eq_necessary_sufficient NV fV n,
+    isCollisionStart_eq_necessary_sufficient NW fW n]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.isCollisionStart_iff
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective n
+
+/-- 最小衝突開始位置の保存は必要十分版の特殊化として得られる。 -/
+theorem minCollisionStart_eq_from_necessary_sufficient :
+    minCollisionStart NV fV = minCollisionStart NW fW := by
+  rw [minCollisionStart_eq_necessary_sufficient NV fV,
+    minCollisionStart_eq_necessary_sufficient NW fW]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.minCollisionStart_eq
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective
+    (CellularAutomata.NecSuf.IterateMonoidStabilizationIndex.exists_collision_start
+      (globalMap NV fV))
+
+/-- 最小正周期の保存は必要十分版の特殊化として得られる。 -/
+theorem minPositivePeriod_eq_from_necessary_sufficient :
+    minPositivePeriod NV fV = minPositivePeriod NW fW := by
+  rw [minPositivePeriod_eq_necessary_sufficient NV fV,
+    minPositivePeriod_eq_necessary_sufficient NW fW]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.minPositivePeriod_eq
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective (necSufHex NV fV)
+
+/-- 最小安定周期倍数指数の保存は必要十分版の特殊化として得られる。 -/
+theorem minStablePeriodMultiple_eq_from_necessary_sufficient :
+    minStablePeriodMultiple NV fV = minStablePeriodMultiple NW fW := by
+  rw [minStablePeriodMultiple_eq_necessary_sufficient NV fV,
+    minStablePeriodMultiple_eq_necessary_sufficient NW fW]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.minStablePeriodMultiple_eq
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective (necSufHex NV fV)
+
+/-- 巡回冪等元の移送は必要十分版の特殊化として得られる。 -/
+theorem conjugate_cycleIdempotent_from_necessary_sufficient (y : V → State) :
+    h (cycleIdempotent NV fV y) = cycleIdempotent NW fW (h y) := by
+  rw [cycleIdempotent_eq_necessary_sufficient NV fV,
+    cycleIdempotent_eq_necessary_sufficient NW fW]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_cycleIdempotent
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective (necSufHex NV fV) y
+
+/-- 安定像の所属の両側同値は必要十分版の移送定理の特殊化として得られる。
+    共役条件には具体版の巡回冪等元の移送を渡す。 -/
+theorem mem_stableImage_iff_from_necessary_sufficient (y : V → State) :
+    y ∈ stableImage NV fV ↔ h y ∈ stableImage NW fW :=
+  CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.StableFiberTransport.mem_stableImage_iff
+    (cycleIdempotent NV fV) (cycleIdempotent NW fW) ⇑h
+    (conjugate_cycleIdempotent NV fV NW fW h hconj) h.bijective y
+
+/-- 安定ファイバーの所属の両側同値は必要十分版の移送定理の特殊化として得られる。 -/
+theorem mem_stableFiber_iff_from_necessary_sufficient
+    (q : stableImage NV fV) (y : V → State) :
+    y ∈ stableFiber NV fV q ↔
+      h y ∈ stableFiber NW fW
+        ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩ :=
+  CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.StableFiberTransport.mem_stableFiber_iff_transport
+    (cycleIdempotent NV fV) (cycleIdempotent NW fW) ⇑h
+    (conjugate_cycleIdempotent NV fV NW fW h hconj) h.bijective q y
+    ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩ rfl
+
+/-- 一周期写像の移送は必要十分版の特殊化として得られる。 -/
+theorem conjugate_onePeriodMap_from_necessary_sufficient (y : V → State) :
+    h (onePeriodMap NV fV y) = onePeriodMap NW fW (h y) := by
+  show h (iterateMap NV fV (minPositivePeriod NV fV) y) =
+    iterateMap NW fW (minPositivePeriod NW fW) (h y)
+  rw [iterateMap_eq_necessary_sufficient NV fV,
+    iterateMap_eq_necessary_sufficient NW fW,
+    minPositivePeriod_eq_necessary_sufficient NV fV,
+    minPositivePeriod_eq_necessary_sufficient NW fW]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_onePeriodMap
+    (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective (necSufHex NV fV) y
 
 end CellularAutomata.IterateMonoidConjugacyInvariance
