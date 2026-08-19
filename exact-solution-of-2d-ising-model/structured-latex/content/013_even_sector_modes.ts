@@ -1321,8 +1321,10 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    \quad (\because \text{結合法則とスカラー倍}) \\
 &= -\left(-I\,Z_1 - I\,Z_1\right)
    \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_MY_M = I)) \\
+&= -\left(-Z_1 - Z_1\right)
+   \quad (\because \text{単位行列の性質 } I\,Z_1 = Z_1) \\
 &= -\left(-2Z_1\right)
-   \quad (\because \text{単位行列の性質 } I\,Z_1 = Z_1\text{ と同類項をまとめる}) \\
+   \quad (\because \text{同類項をまとめる}) \\
 &= 2Z_1
    \quad (\because \text{スカラー倍の符号の整理 } -(-2Z_1) = 2Z_1) \\
 &= -2\left(-Z_1\right)
