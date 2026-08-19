@@ -2704,4 +2704,70 @@ m
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_two_stage_ising_coefficient_valuation_pair_map",
+    kind: "definition",
+    title: { text: "商の塔に沿う二段 Ising 係数付値対写像" },
+    labels: ["def_quotient_tower_two_stage_ising_coefficient_valuation_pair_map"],
+    habitat: "Z",
+    verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-valuation-pair-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_pair_map"),
+        " の二段 Ising 係数対写像と、",
+        ref("def_fixed_quotient_coefficient_valuation"),
+        " の正整数係数に対する指定素数付値を用いる。二段の係数がともに正である次数と素数の有限入力集合を",
+      ]),
+      displayMath(String.raw`D_{\mathcal T}
+:=
+\left\{
+  (m,p)\in\mathbb N\times\mathbb N_{>1}
+  \,\middle|\,
+  \begin{array}{l}
+    p\text{ は素数},\\
+    \widehat\Omega_{\mathrm{fine}}(m)>0,\\
+    \widehat\Omega_{\mathrm{coarse}}(m)>0
+  \end{array}
+\right\}`),
+      paragraph([
+        "と定める。各 ",
+        math(String.raw`(m,p)\in D_{\mathcal T}`),
+        " に対し、二段 Ising 係数付値対写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{\mathcal T}:D_{\mathcal T}
+&\longrightarrow
+\mathbb N\times\mathbb N
+\subset
+\mathbb Z\times\mathbb Z,\\
+(m,p)
+&\longmapsto
+\left(
+  \nu_{\mathrm{fine},p}(m),
+  \nu_{\mathrm{coarse},p}(m)
+\right),\\
+\nu_{\mathrm{fine},p}(m)
+&:=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists r\in\mathbb N_{>0},\quad
+  \widehat\Omega_{\mathrm{fine}}(m)=p^k r
+\right\},\\
+\nu_{\mathrm{coarse},p}(m)
+&:=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists s\in\mathbb N_{>0},\quad
+  \widehat\Omega_{\mathrm{coarse}}(m)=p^k s
+\right\}
+\end{aligned}`),
+      paragraph([
+        "で定める。定義域の正値条件により両係数は ",
+        math(String.raw`\mathbb N_{>0}`),
+        " に属するため、二つの最大値は正整数を指定素数で割り切れる間だけ反復除算した回数として一意に定まる。係数の一方が零である次数には整数付値を定義せず、零延長した係数対と付値対を同一視しない。この写像は二つの付値の等式、大小、差、被覆次数に関する関係を主張しない。全ての対象は有限集合、自然数、整数に属し、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

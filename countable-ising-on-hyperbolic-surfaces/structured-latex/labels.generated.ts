@@ -72,6 +72,7 @@ export const ALL_LABELS = [
   "def_quotient_tower_oriented_edge_representative_selector_compatibility",
   "def_quotient_tower_role_generator_compatibility",
   "def_quotient_tower_two_stage_ising_coefficient_pair_map",
+  "def_quotient_tower_two_stage_ising_coefficient_valuation_pair_map",
   "def_quotient_tower_vertex_coefficient_pushforward_over_f2",
   "def_second_boundary_matrix_over_f2",
   "def_single_vertex_spin_flip",
