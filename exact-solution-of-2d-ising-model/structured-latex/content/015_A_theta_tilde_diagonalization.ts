@@ -1000,9 +1000,19 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         math(String.raw`v_{\pm,\mu} = c(\mp r,\ b)^{\mathsf{T}}`),
         " に上の ",
         math(String.raw`c`),
-        " を代入すると、第 2 成分は ",
-        math(String.raw`cb = \dfrac{1}{2\sqrt{M}}`),
-        " となり、",
+        " を代入すると、第 2 成分は次の鎖で定まる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+cb
+&= \frac{1}{2\sqrt{M}\,b}\,b
+   \quad (\because c\text{ の定義}) \\
+&= \frac{1}{2\sqrt{M}}
+   \quad (\because b\ne0\text{ と }\mathbb{C}\text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
         math(String.raw`v_{+,\mu}, v_{-,\mu}`),
         " はそれぞれ ",
         math(String.raw`\check{P}_\mu`),
@@ -1034,14 +1044,15 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
 &= \frac{-r}{4M\,b} - \frac{+r}{4M\,b}
    \quad \left(\because \left(2\sqrt{M}\right)^2 = 4M\right) \\
+&= \frac{-r}{4M\,b} + \frac{-r}{4M\,b}
+   \quad (\because -\tfrac{+r}{4M\,b}=\tfrac{-r}{4M\,b}\text{。}\mathbb{C}\text{ の四則}) \\
 &= 2\cdot\frac{-r}{4M\,b}
- = \frac{-r}{2M\,b}
+   \quad (\because \text{同類項の統合}) \\
+&= \frac{-r}{2M\,b}
+   \quad (\because 2M\ne0\text{ と }\mathbb{C}\text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`\left(2\sqrt{M}\right)^2 = 4M`),
-        " を使った。）",
         math(String.raw`r > 0`),
         "、",
         math(String.raw`2M \neq 0`),
@@ -1061,9 +1072,21 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
         " より ",
         math(String.raw`\check{P}_\mu^{-1}`),
         " が存在するので、Step 2 の両辺に右から掛けて ",
-        math(String.raw`A(\tilde\theta_\mu) = \check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}`),
-        "。",
+        "次の鎖を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+A(\tilde\theta_\mu)
+&= A(\tilde\theta_\mu)\left(\check{P}_\mu\check{P}_\mu^{-1}\right)
+   \quad (\because \check{P}_\mu\check{P}_\mu^{-1}=I\text{ と積の単位元}) \\
+&= \left(A(\tilde\theta_\mu)\check{P}_\mu\right)\check{P}_\mu^{-1}
+   \quad (\because \text{行列の積の結合則}) \\
+&= \left(\check{P}_\mu\check{D}_\mu\right)\check{P}_\mu^{-1}
+   \quad (\because \text{Step 2}) \\
+&= \check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}
+   \quad (\because \text{行列の積の結合則})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
@@ -1073,6 +1096,8 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
           "relation_of_gamma_2_theta_tilde (5) により半整数運動量では −|γ_2|/(2√M γ_2(−θ~)) に等しい。",
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_03（det の明示式との一致、|det| ≥ 6.25e-2、" +
           "A − P̌ Ď P̌^{-1} の残差 ≤ 3e-14）。",
+        "2026-08-19 の式変形統一で、固有ベクトルの第 2 成分の約分、行列式の同類項の統合、対角化の右乗を、" +
+          "それぞれ主張の左辺から始まる一続きの鎖と行末根拠へ開いた。内容・参照は変えていない。",
       ],
     },
   },
