@@ -3373,4 +3373,38 @@ P_s(x)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_two_stage_fisher_zero_multiplicity_difference_formal_divisor",
+    kind: "definition",
+    title: { text: "商の塔に沿う二段 Fisher 零点重複度差の形式的因子" },
+    labels: ["def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_formal_divisor"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-multiplicity-difference-formal-divisor"],
+    statement: [
+      paragraph([
+        ref("theorem_quotient_tower_two_stage_fisher_zero_multiplicity_difference_finite_support"),
+        " の有限台と ",
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " の整数値写像を用いる。記号 ",
+        math(String.raw`[\alpha]`),
+        " を各 ",
+        math(String.raw`\alpha\in\overline{\mathbb Q}`),
+        " に付随する形式的生成元とし、二段 Fisher 零点重複度差の形式的因子を",
+      ]),
+      displayMath(String.raw`\operatorname{Div}_{\Delta\mu}(\mathcal T)
+:=
+\sum_{\alpha\in\operatorname{Supp}_{\Delta\mu_{\mathcal T}}}
+\Delta\mu_{\mathcal T}(\alpha)[\alpha]
+\in
+\bigoplus_{\alpha\in\overline{\mathbb Q}}
+\mathbb Z[\alpha]`),
+      paragraph([
+        "で定める。右辺は有限台にわたる有限和であり、各係数 ",
+        math(String.raw`\Delta\mu_{\mathcal T}(\alpha)`),
+        " は整数である。したがって形式的因子は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " で添字付けた自由アーベル群の一意な元として定まる。共通零点で細段と粗段の重複度が等しい場合、その係数は零であり、有限台にも形式和にも現れない。複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
