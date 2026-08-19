@@ -210,6 +210,7 @@ targets=(
   Ising3DCut.LimitQuantity.rootSeq_tailAgreement_of_tailAgreement
   Ising3DCut.LimitQuantity.tailAgreement_limitQuantity_tendsto
   Ising3DCut.LimitQuantity.tailAgreement_limitQuantity_eq
+  Ising3DCut.Prediction.terminalMatching_weightSum_eq_evenSubgraph_weightSum
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq
   Ising3DCut.LimitQuantity.limitQuantity_eq_of_data_eq

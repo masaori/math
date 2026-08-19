@@ -138,3 +138,4 @@ import Ising3DCut.NecSuf.SymmetrizedReciprocalInvariant
 import Ising3DCut.LimitQuantity.SymmetrizedReciprocalInvariantNullModelFromNecSuf
 import Ising3DCut.LimitQuantity.PartitionValueDoesNotDetermineLimitQuantityFromNecSuf
 import Ising3DCut.Prediction.PfaffianConstantSign
+import Ising3DCut.Prediction.FisherTerminalWeightSum
