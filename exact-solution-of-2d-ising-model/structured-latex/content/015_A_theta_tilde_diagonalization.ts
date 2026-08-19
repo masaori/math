@@ -503,7 +503,8 @@ s_1c_2
 &= (-i)\,e^{-i\theta}\,s_2^*
    \bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
    \quad (\because c_1\cos\theta,\ \sin\theta,\ s_1c_2 \in \mathbb{R} \text{ と } \bar i = -i) \\
-&= -\Bigl(i\,e^{-i\theta}\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr) \\
+&= -\Bigl(i\,e^{-i\theta}\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr)
+   \quad (\because \text{複素数の四則}) \\
 &= -\gamma_2(-\theta)
    \quad (\because \text{上の } \gamma_2(-\theta) \text{ の表示})
 \end{aligned}`,
@@ -521,9 +522,17 @@ s_1c_2
         math(String.raw`\cos\theta, \sin\theta`),
         " が実数であることから従う。**",
         math(String.raw`\theta`),
-        " が実数であるという前提をここで使っている。**）両辺に ",
-        math(String.raw`-1`),
-        " を掛けて (1) を得る。これは ",
+        " が実数であるという前提をここで使っている。**）上の補助的な等式から、主張 (1) の左辺より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(-\theta)
+&= -\overline{\gamma_2(\theta)}
+   \quad (\because \overline{\gamma_2(\theta)}=-\gamma_2(-\theta)\text{ と複素数の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。これは ",
         ref("relation_of_gamma_2"),
         " と同じ計算であり、",
         math(String.raw`\theta`),
@@ -627,6 +636,7 @@ s_1c_2
 &= \left|\gamma_2(\theta)\right|\left(\cos\tfrac{\pi}{2} + i\sin\tfrac{\pi}{2}\right)
    \quad (\because \text{euler\_formula\_cos\_sin}) \\
 &= i\left|\gamma_2(\theta)\right|
+   \quad (\because \cos\tfrac{\pi}{2}=0,\ \sin\tfrac{\pi}{2}=1\text{ と複素数の四則})
 \end{aligned}`,
       ),
       paragraph([
@@ -647,6 +657,7 @@ s_1c_2
           "複素平方根の分枝の議論（008 章 eigenvector_of_A_theta が condition_of_commutativity_of_sqrt_and_product を" +
           "経由して行っていた部分）を追い出せる。",
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_02（M = 2..8 の全 μ、16 組の (K_1,K_2)、残差 ≤ 4e-15）。",
+        "2026-08-19 の式変形統一で、補助的な共役計算の末尾に複素数の四則という行末根拠を補い、散文で行っていた両辺の符号反転を主張 (1) の左辺から始まる一段の鎖へ移した。(5) の終端にも三角関数の特殊値と複素数の四則を行末根拠として明記した。内容・参照は変えていない。",
       ],
     },
   },
