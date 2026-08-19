@@ -605,13 +605,17 @@ e^{i(t+2k\pi)}
 a_\nu
 &= \gamma_2(\tilde\theta_{M+1-\mu})
    \quad (\because a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = M+1-\mu) \\
-&= \gamma_2(-\tilde\theta_\mu) = b_\mu
-   \quad (\because \text{periodicity\_of\_check\_fermi (3)}) \\
+&= \gamma_2(-\tilde\theta_\mu)
+   \quad (\because \gamma_1, \gamma_2 \text{ の周期性と共役添字 (3)}) \\
+&= b_\mu
+   \quad (\because b_\mu \text{ の略記}),\\[4pt]
 b_\nu
 &= \gamma_2(-\tilde\theta_{M+1-\mu})
    \quad (\because b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = M+1-\mu) \\
-&= \gamma_2(\tilde\theta_\mu) = a_\mu
-   \quad (\because \text{periodicity\_of\_check\_fermi (3)})
+&= \gamma_2(\tilde\theta_\mu)
+   \quad (\because \gamma_1, \gamma_2 \text{ の周期性と共役添字 (3)}) \\
+&= a_\mu
+   \quad (\because a_\mu \text{ の略記})
 \end{aligned}`,
       ),
       paragraph([
@@ -631,14 +635,15 @@ r_\nu
 &= |a_\nu|
    \quad (\because r_\nu := |a_\nu|) \\
 &= |b_\mu|
-   \quad (\because \text{直前の displayMath}\ (a_\nu = b_\mu)) \\
+   \quad (\because \text{上の } a_\nu = b_\mu) \\
 &= \left|-\overline{a_\mu}\right|
-   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (1)}\ (b_\mu = -\overline{a_\mu})) \\
+   \quad (\because \gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)}\text{ とその帰結 (1)}\ (b_\mu = -\overline{a_\mu})) \\
 &= \left|\overline{a_\mu}\right|
-   \quad (\because \text{abs\_basic\_properties}\ (|-z| = |z|)) \\
+   \quad (\because \text{絶対値の基本性質}\ (|-z| = |z|)) \\
 &= |a_\mu|
-   \quad (\because \text{abs\_basic\_properties}\ (|\bar z| = |z|)) \\
+   \quad (\because \text{絶対値の基本性質}\ (|\bar z| = |z|)) \\
 &= r_\mu
+   \quad (\because r_\mu := |a_\mu|)
 \end{aligned}`,
       ),
       paragraph([
@@ -652,10 +657,11 @@ r_\nu
         String.raw`\begin{aligned}
 b_\mu b_\nu
 &= b_\mu a_\mu
-   \quad (\because \text{上の displayMath}\ (b_\nu = a_\mu)) \\
-&= a_\mu b_\mu \\
+   \quad (\because \text{上の } b_\nu = a_\mu) \\
+&= a_\mu b_\mu
+   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
 &= -r^2
-   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (2)}) \\
+   \quad (\because \gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)}\text{ とその帰結 (2)}),\\[4pt]
 c_\mu c_\nu
 &= \frac{1}{2\sqrt{M}\,b_\mu}\cdot\frac{1}{2\sqrt{M}\,b_\nu}
    \quad (\because c_\mu := \tfrac{1}{2\sqrt{M}\,b_\mu}) \\
@@ -664,6 +670,7 @@ c_\mu c_\nu
 &= \frac{1}{4M\left(-r^2\right)}
    \quad (\because \text{上の } b_\mu b_\nu = -r^2) \\
 &= \frac{-1}{4Mr^2}
+   \quad (\because \text{負号を分子へ移す（}\mathbb{C}\text{ の四則）})
 \end{aligned}`,
       ),
       paragraph([
@@ -691,9 +698,23 @@ c_\mu c_\nu
         math(String.raw`[X,W]_+ := XW + WX`),
         " は両引数について ",
         math(String.raw`\mathbb{C}`),
-        " 双線型である。実際 ",
-        math(String.raw`[\alpha X, \beta W]_+ = (\alpha X)(\beta W) + (\beta W)(\alpha X) = \alpha\beta(XW + WX)`),
-        " であり、スカラー倍が行列の積と可換であることは ",
+        " 双線型である。実際",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[\alpha X, \beta W]_+
+&= (\alpha X)(\beta W) + (\beta W)(\alpha X)
+   \quad (\because \text{反交換子の定義}) \\
+&= \alpha\beta\,XW + \beta\alpha\,WX
+   \quad (\because \text{スカラー倍は行列の積と可換（2 箇所へ同時適用）}) \\
+&= \alpha\beta\,XW + \alpha\beta\,WX
+   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
+&= \alpha\beta\left(XW + WX\right)
+   \quad (\because \text{分配則による括り出し})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、スカラー倍が行列の積と可換であることは ",
         ref("scalar_identity_commutes"),
         " による。和についての加法性も行列の積の分配法則から従う。これを使って",
       ]),
@@ -702,7 +723,7 @@ c_\mu c_\nu
 \left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+
 &= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
    c_\nu\left(-r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \text{def\_check\_fermi}) \\
+   \quad (\because \check\psi_\mu, \check\psi_\mu^\dagger \text{ の定義}) \\
 &= c_\mu c_\nu\Bigl(
 \left(-r_\mu\right)\left(-r_\nu\right)\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 + \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
@@ -712,24 +733,33 @@ c_\mu c_\nu
 \Bigr)
    \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
 &= c_\mu c_\nu\Bigl(
-r_\mu r_\nu\cdot 2M\,\delta\,I
+\left(-r_\mu\right)\left(-r_\nu\right)\cdot 2M\,\delta\,I
 + \left(-r_\mu\right)b_\nu\cdot 0 \\
 &\qquad\qquad
 + b_\mu\left(-r_\nu\right)\cdot 0
 + b_\mu b_\nu\cdot 2M\,\delta\,I
 \Bigr)
-   \quad (\because \text{anticommutator\_of\_check\_Z\_Y を 4 箇所へ同時適用}) \\
+   \quad (\because \check{Z}, \check{Y} \text{ の反交換関係を 4 箇所へ同時適用}) \\
+&= c_\mu c_\nu\left(
+\left(-r_\mu\right)\left(-r_\nu\right)\cdot 2M\,\delta\,I
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\right)
+   \quad (\because 0 \text{ 行列の項の消去（2 箇所へ同時適用）}) \\
+&= c_\mu c_\nu\left(
+r_\mu r_\nu\cdot 2M\,\delta\,I
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\right)
+   \quad (\because \left(-x\right)\left(-y\right) = xy\ (\mathbb{R}\text{ の四則})) \\
 &= c_\mu c_\nu\left(r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
+   \quad (\because \text{分配則による } 2M\,\delta\,I \text{ の括り出し})
 \end{aligned}`,
       ),
       paragraph([
-        "（1 行目は ",
+        "上の鎖では ",
         ref("def_check_fermi"),
-        "、3 行目は ",
+        " と ",
         ref("anticommutator_of_check_Z_Y"),
-        " による。中間 2 項は ",
-        math(String.raw`[\check{Z},\check{Y}]_+ = 0`),
-        " で消える。）",
+        " を引いた。",
         math(String.raw`\delta = 0`),
         " なら全体が ",
         math(String.raw`0`),
@@ -795,8 +825,14 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
    \quad (\because \text{Step 1}\ (c_\mu c_\nu = \tfrac{-1}{4Mr^2})) \\
 &= \frac{-1}{4Mr^2}\left(-r^2 + \left(-r^2\right)\right)\cdot 2M\,I
    \quad (\because \text{Step 1}\ (r_\mu r_\nu = r^2,\ b_\mu b_\nu = -r^2),\ \delta = 1) \\
-&= \frac{-1}{4Mr^2}\cdot\left(-2r^2\right)\cdot 2M\,I \\
-&= \frac{4Mr^2}{4Mr^2}\,I = I
+&= \frac{-1}{4Mr^2}\cdot\left(-2r^2\right)\cdot 2M\,I
+   \quad (\because -r^2 + \left(-r^2\right) = -2r^2\text{（同類項の統合）}) \\
+&= \frac{\left(-1\right)\cdot\left(-2r^2\right)\cdot 2M}{4Mr^2}\,I
+   \quad (\because \text{分数の積（}\mathbb{R}\text{ の四則）}) \\
+&= \frac{4Mr^2}{4Mr^2}\,I
+   \quad (\because \left(-1\right)\left(-2r^2\right) = 2r^2 \text{ と乗法の可換則}) \\
+&= I
+   \quad (\because M \geq 2,\ r > 0 \text{ より } 4Mr^2 \neq 0 \text{ の約分})
 \end{aligned}`,
       ),
       paragraph([
@@ -811,6 +847,9 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
         "008 章の anticommutator_of_psi の半整数運動量版。008 章が Step 0（√ の分枝の一致）に費やしていた部分は、" +
           "係数が |γ_2|（非負実数）で書かれることにより絶対値の計算 1 行に置き換わった。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_02（M=2,3,4,5、μ,ν ∈ {1..M}（および負の μ）、5 組の (K1,K2)）。",
+        "2026-08-19 の式変形統一で、行末根拠の機械識別子と「直前の displayMath」という指し方を人間可読な名前へ直し、" +
+          "一行二等号（a_ν・b_ν の鎖と Step 4 の末尾）を一操作ずつに分け、根拠の無かった行（r_ν = r_μ、可換則、負号の移動、同類項の統合、約分）に行末根拠を補い、" +
+          "散文に畳まれていた反交換子の双線型性の計算を鎖へ開いた。内容と参照は変えていない。",
       ],
     },
   },
