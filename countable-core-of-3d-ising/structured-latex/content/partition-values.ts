@@ -4247,6 +4247,51 @@ x^{NM}&=(x^N)^M &&(\because\ \text{自然数べきの積})\\
   },
 
   {
+    id: "soundness_bridge_claim_cross_power_sequences_satisfy_limit_transfer_hypothesis",
+    kind: "claim",
+    title: { text: "交差べき等式は収束移送の項別一致仮定を与える" },
+    labels: ["claim_cross_power_sequences_satisfy_limit_transfer_hypothesis"],
+    habitat: "R",
+    realEscape:
+      "正の有理数列から作る正の実数乗根列の等式だけを扱い、箱の大きさの極限は取らない。各項の乗根は def_limit_quantity_from_finite_box_sequence で既に定義した有限箱量である。",
+    statement: [
+      paragraph([
+        ref("claim_pointwise_cross_power_equality_implies_root_sequence_equality"),
+        " の仮定のもとで、正の実数列 ",
+        math(String.raw`a,b\colon\mathbb N_{\ge1}\to\mathbb R_{>0}`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`a(L)=A(L)^{1/N(L)},\qquad b(L)=B(L)^{1/M(L)}`,
+      ),
+      paragraph([
+        "と定める。このとき、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で ",
+        math(String.raw`a(L)=b(L)`),
+        " が成り立つ。したがって、この二列は ",
+        ref("claim_pointwise_equal_positive_real_sequences_transfer_limit"),
+        " の項別一致の仮定を満たす。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " を取る。",
+        ref("claim_pointwise_cross_power_equality_implies_root_sequence_equality"),
+        " により ",
+        math(String.raw`A(L)^{1/N(L)}=B(L)^{1/M(L)}`),
+        " である。二列の定義を両辺へ一度代入して ",
+        math(String.raw`a(L)=b(L)`),
+        " を得る。",
+        math(String.raw`L`),
+        " は任意だったので、収束移送主張の項別一致の仮定が成り立つ。",
+      ]),
+    ],
+  },
+
+  {
     id: "soundness_bridge_claim_pointwise_root_sequence_equality_implies_tail_agreement",
     kind: "claim",
     title: { text: "乗根列の項別一致はずらし無しの尾部一致を与える" },

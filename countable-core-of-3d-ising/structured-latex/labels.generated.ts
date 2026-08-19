@@ -14,6 +14,7 @@ export const ALL_LABELS = [
   "claim_coarse_graining_not_necessary_for_symmetrized_limit_quantity",
   "claim_coarse_graining_values_agree_implies_partition_values_agree",
   "claim_cross_power_equality_implies_root_equality",
+  "claim_cross_power_sequences_satisfy_limit_transfer_hypothesis",
   "claim_discriminant_does_not_determine_polynomial",
   "claim_discriminant_free_vs_periodic_differ_at_L3",
   "claim_distinct_roots_do_not_determine_polynomial",
