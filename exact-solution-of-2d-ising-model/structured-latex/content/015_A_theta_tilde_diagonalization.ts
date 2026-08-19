@@ -1197,24 +1197,34 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
         " より",
       ]),
       displayMath(
-        String.raw`\gamma_1(\theta)^2 = c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2`,
+        String.raw`\begin{aligned}
+\gamma_1(\theta)^2
+&= \left(c_1c_2^* - s_1s_2^*u\right)^2
+   \quad (\because \text{直前の表示の代入}) \\
+&= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2
+   \quad (\because \mathbb{R} \text{ の分配則による展開})
+\end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta)\gamma_2(-\theta)
-&= -(s_2^*)^2\Bigl(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\Bigr) \\
+&= -(s_2^*)^2\Bigl(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\Bigr)
+   \quad (\because \text{Step 2 の最終式で } (c_1u - s_1c_2)^2 \text{ を分配則で展開}) \\
 &= -c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2(s_2^*)^2u - s_1^2c_2^2(s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+   \quad (\because \mathbb{R} \text{ の分配則})
 \end{aligned}`,
       ),
       paragraph(["Step 4: (iii) による ", math(String.raw`c_2`), " の消去。"]),
       displayMath(
         String.raw`\begin{aligned}
 2c_1s_1c_2(s_2^*)^2u
-&= 2c_1s_1\left(c_2s_2^*\right)s_2^*u \\
+&= 2c_1s_1\left(c_2s_2^*\right)s_2^*u
+   \quad (\because \mathbb{R} \text{ の積の結合律と可換律}) \\
 &= 2c_1s_1c_2^*s_2^*u
    \quad (\because \text{(iii)}\ (c_2s_2^* = c_2^*)) \\
 s_1^2c_2^2(s_2^*)^2
-&= s_1^2\left(c_2s_2^*\right)^2 \\
+&= s_1^2\left(c_2s_2^*\right)^2
+   \quad (\because \mathbb{R} \text{ の積の結合律と可換律}) \\
 &= s_1^2(c_2^*)^2
    \quad (\because \text{(iii)}\ (c_2s_2^* = c_2^*))
 \end{aligned}`,
@@ -1286,11 +1296,25 @@ s_1^2c_2^2(s_2^*)^2
 \end{aligned}`,
       ),
       paragraph([
-        "最後に、Step 5 と ",
-        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = -r^2`),
-        " から ",
+        "最後に、",
         math(String.raw`\gamma_1(\theta)^2 = 1 + r^2`),
-        " を得る。",
+        " を示す。主張の左辺より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_1(\theta)^2
+&= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + r^2\bigr)
+   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (2) の } \gamma_2(\theta)\gamma_2(-\theta) = -r^2 \text{ より } \gamma_2(\theta)\gamma_2(-\theta) + r^2 = 0_{\mathbb{C}}) \\
+&= \bigl(\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)\bigr) + r^2
+   \quad (\because \mathbb{C} \text{ の加法の結合律}) \\
+&= 1 + r^2
+   \quad (\because \text{Step 5})
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
+        math(String.raw`r = \left|\gamma_2(\theta)\right|`),
+        "（Step 6）なので、これが主張の最後の等式である。",
       ]),
     ],
     conversion: {
@@ -1299,6 +1323,8 @@ s_1^2c_2^2(s_2^*)^2
         "det_A_theta（008 章）の Step 0〜Step 6 と同じ計算である。θ_μ 固有の性質は使われておらず、" +
           "θ ∈ R の恒等式として成立することを本文で明示した。",
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_04（残差 ≤ 1.4e-12）。",
+        "2026-08-19 の式変形統一で、Step 3 の展開 2 式と Step 4 の鎖の先頭行に行末根拠を補い、" +
+          "散文で畳まれていた γ_1(θ)^2 = 1 + r^2 の導出を主張の左辺から始まる三段の鎖へ開いた。内容・参照は変えていない。",
       ],
     },
   },
