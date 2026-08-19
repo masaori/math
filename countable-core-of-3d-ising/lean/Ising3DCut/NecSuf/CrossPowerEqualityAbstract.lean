@@ -7,7 +7,7 @@
 単射性を供給するための具体構造にすぎないので、ここではモノイド `G` の元
 `x`, `y`（乗根にあたる）と `A`, `B`（箱値にあたる）について、
 `x ^ N = A`, `y ^ M = B`, 交差べき等式 `A ^ M = B ^ N`、および
-`N * M` 乗写像の単射性から `x = y` を導く。可換性も使わない。
+`x`, `y` における `N * M` 乗の単射性から `x = y` を導く。可換性も使わない。
 -/
 import Mathlib.Algebra.Group.Basic
 
@@ -19,10 +19,9 @@ theorem cross_power_equality_implies_root_equality_abstract
     {G : Type*} [Monoid G] (x y A B : G) (N M : ℕ)
     (hxN : x ^ N = A) (hyM : y ^ M = B)
     (hcross : A ^ M = B ^ N)
-    (hinj : Function.Injective fun g : G => g ^ (N * M)) :
+    (hinj : x ^ (N * M) = y ^ (N * M) → x = y) :
     x = y := by
   apply hinj
-  show x ^ (N * M) = y ^ (N * M)
   calc
     x ^ (N * M) = (x ^ N) ^ M := by rw [pow_mul]
     _ = A ^ M := by rw [hxN]
