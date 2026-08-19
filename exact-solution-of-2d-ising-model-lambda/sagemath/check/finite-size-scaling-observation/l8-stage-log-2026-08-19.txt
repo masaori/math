@@ -1,0 +1,270 @@
+[     0.0s] === run start 2026-08-19T10:36:51.164721
+[     0.2s] stage: transfer matrix built, size 256
+[   195.4s] stage: partition polynomial built as Tr T^L (theorem_partition_polynomial_is_trace), degree 128
+[   195.4s] stage: sanity check passed, Z_8(1) = 2^64
+[   195.4s] stage: ZZ[x] factorization, (degree, multiplicity) = [(0, 1), (128, 1)]
+[   195.4s]   factor: degree 0 multiplicity 1 leading coefficient 2 constant term 2
+[   195.4s]   factor: degree 128 multiplicity 1 leading coefficient 1 constant term 1
+[   195.8s] stage: roots isolated, count 128
+[   195.8s]   distance interval done for root 1 of 128
+[   195.8s]   distance interval done for root 2 of 128
+[   195.8s]   distance interval done for root 3 of 128
+[   195.8s]   distance interval done for root 4 of 128
+[   195.8s]   distance interval done for root 5 of 128
+[   195.8s]   distance interval done for root 6 of 128
+[   195.8s]   distance interval done for root 7 of 128
+[   195.8s]   distance interval done for root 8 of 128
+[   195.8s]   distance interval done for root 9 of 128
+[   195.8s]   distance interval done for root 10 of 128
+[   195.8s]   distance interval done for root 11 of 128
+[   195.8s]   distance interval done for root 12 of 128
+[   195.8s]   distance interval done for root 13 of 128
+[   195.8s]   distance interval done for root 14 of 128
+[   195.8s]   distance interval done for root 15 of 128
+[   195.8s]   distance interval done for root 16 of 128
+[   195.8s]   distance interval done for root 17 of 128
+[   195.8s]   distance interval done for root 18 of 128
+[   195.8s]   distance interval done for root 19 of 128
+[   195.9s]   distance interval done for root 20 of 128
+[   195.9s]   distance interval done for root 21 of 128
+[   195.9s]   distance interval done for root 22 of 128
+[   195.9s]   distance interval done for root 23 of 128
+[   195.9s]   distance interval done for root 24 of 128
+[   195.9s]   distance interval done for root 25 of 128
+[   195.9s]   distance interval done for root 26 of 128
+[   195.9s]   distance interval done for root 27 of 128
+[   195.9s]   distance interval done for root 28 of 128
+[   195.9s]   distance interval done for root 29 of 128
+[   195.9s]   distance interval done for root 30 of 128
+[   195.9s]   distance interval done for root 31 of 128
+[   195.9s]   distance interval done for root 32 of 128
+[   195.9s]   distance interval done for root 33 of 128
+[   195.9s]   distance interval done for root 34 of 128
+[   195.9s]   distance interval done for root 35 of 128
+[   195.9s]   distance interval done for root 36 of 128
+[   195.9s]   distance interval done for root 37 of 128
+[   195.9s]   distance interval done for root 38 of 128
+[   195.9s]   distance interval done for root 39 of 128
+[   195.9s]   distance interval done for root 40 of 128
+[   195.9s]   distance interval done for root 41 of 128
+[   195.9s]   distance interval done for root 42 of 128
+[   195.9s]   distance interval done for root 43 of 128
+[   195.9s]   distance interval done for root 44 of 128
+[   196.0s]   distance interval done for root 45 of 128
+[   196.0s]   distance interval done for root 46 of 128
+[   196.0s]   distance interval done for root 47 of 128
+[   196.0s]   distance interval done for root 48 of 128
+[   196.0s]   distance interval done for root 49 of 128
+[   196.0s]   distance interval done for root 50 of 128
+[   196.0s]   distance interval done for root 51 of 128
+[   196.0s]   distance interval done for root 52 of 128
+[   196.0s]   distance interval done for root 53 of 128
+[   196.0s]   distance interval done for root 54 of 128
+[   196.0s]   distance interval done for root 55 of 128
+[   196.0s]   distance interval done for root 56 of 128
+[   196.0s]   distance interval done for root 57 of 128
+[   196.0s]   distance interval done for root 58 of 128
+[   196.0s]   distance interval done for root 59 of 128
+[   196.0s]   distance interval done for root 60 of 128
+[   196.0s]   distance interval done for root 61 of 128
+[   196.0s]   distance interval done for root 62 of 128
+[   196.0s]   distance interval done for root 63 of 128
+[   196.0s]   distance interval done for root 64 of 128
+[   196.0s]   distance interval done for root 65 of 128
+[   196.0s]   distance interval done for root 66 of 128
+[   196.0s]   distance interval done for root 67 of 128
+[   196.0s]   distance interval done for root 68 of 128
+[   196.1s]   distance interval done for root 69 of 128
+[   196.1s]   distance interval done for root 70 of 128
+[   196.1s]   distance interval done for root 71 of 128
+[   196.1s]   distance interval done for root 72 of 128
+[   196.1s]   distance interval done for root 73 of 128
+[   196.1s]   distance interval done for root 74 of 128
+[   196.1s]   distance interval done for root 75 of 128
+[   196.1s]   distance interval done for root 76 of 128
+[   196.1s]   distance interval done for root 77 of 128
+[   196.1s]   distance interval done for root 78 of 128
+[   196.1s]   distance interval done for root 79 of 128
+[   196.1s]   distance interval done for root 80 of 128
+[   196.1s]   distance interval done for root 81 of 128
+[   196.1s]   distance interval done for root 82 of 128
+[   196.1s]   distance interval done for root 83 of 128
+[   196.1s]   distance interval done for root 84 of 128
+[   196.1s]   distance interval done for root 85 of 128
+[   196.1s]   distance interval done for root 86 of 128
+[   196.1s]   distance interval done for root 87 of 128
+[   196.1s]   distance interval done for root 88 of 128
+[   196.1s]   distance interval done for root 89 of 128
+[   196.1s]   distance interval done for root 90 of 128
+[   196.1s]   distance interval done for root 91 of 128
+[   196.2s]   distance interval done for root 92 of 128
+[   196.2s]   distance interval done for root 93 of 128
+[   196.2s]   distance interval done for root 94 of 128
+[   196.2s]   distance interval done for root 95 of 128
+[   196.2s]   distance interval done for root 96 of 128
+[   196.2s]   distance interval done for root 97 of 128
+[   196.2s]   distance interval done for root 98 of 128
+[   196.2s]   distance interval done for root 99 of 128
+[   196.2s]   distance interval done for root 100 of 128
+[   196.2s]   distance interval done for root 101 of 128
+[   196.2s]   distance interval done for root 102 of 128
+[   196.2s]   distance interval done for root 103 of 128
+[   196.2s]   distance interval done for root 104 of 128
+[   196.2s]   distance interval done for root 105 of 128
+[   196.2s]   distance interval done for root 106 of 128
+[   196.2s]   distance interval done for root 107 of 128
+[   196.2s]   distance interval done for root 108 of 128
+[   196.2s]   distance interval done for root 109 of 128
+[   196.2s]   distance interval done for root 110 of 128
+[   196.2s]   distance interval done for root 111 of 128
+[   196.2s]   distance interval done for root 112 of 128
+[   196.2s]   distance interval done for root 113 of 128
+[   196.2s]   distance interval done for root 114 of 128
+[   196.2s]   distance interval done for root 115 of 128
+[   196.2s]   distance interval done for root 116 of 128
+[   196.3s]   distance interval done for root 117 of 128
+[   196.3s]   distance interval done for root 118 of 128
+[   196.3s]   distance interval done for root 119 of 128
+[   196.3s]   distance interval done for root 120 of 128
+[   196.3s]   distance interval done for root 121 of 128
+[   196.3s]   distance interval done for root 122 of 128
+[   196.3s]   distance interval done for root 123 of 128
+[   196.3s]   distance interval done for root 124 of 128
+[   196.3s]   distance interval done for root 125 of 128
+[   196.3s]   distance interval done for root 126 of 128
+[   196.3s]   distance interval done for root 127 of 128
+[   196.3s]   distance interval done for root 128 of 128
+[   196.3s] stage: all distance intervals built
+[   196.3s] stage: candidate selected
+[   196.3s]   separation checked against root 1 of 128
+[   196.3s]   separation checked against root 2 of 128
+[   196.3s]   separation checked against root 3 of 128
+[   196.3s]   separation checked against root 4 of 128
+[   196.3s]   separation checked against root 5 of 128
+[   196.3s]   separation checked against root 6 of 128
+[   196.3s]   separation checked against root 7 of 128
+[   196.3s]   separation checked against root 8 of 128
+[   196.3s]   separation checked against root 9 of 128
+[   196.3s]   separation checked against root 10 of 128
+[   196.3s]   separation checked against root 11 of 128
+[   196.3s]   separation checked against root 12 of 128
+[   196.3s]   separation checked against root 13 of 128
+[   196.3s]   separation checked against root 14 of 128
+[   196.3s]   separation checked against root 15 of 128
+[   196.3s]   separation checked against root 16 of 128
+[   196.3s]   separation checked against root 17 of 128
+[   196.3s]   separation checked against root 18 of 128
+[   196.3s]   separation checked against root 19 of 128
+[   196.3s]   separation checked against root 20 of 128
+[   196.3s]   separation checked against root 21 of 128
+[   196.3s]   separation checked against root 22 of 128
+[   196.3s]   separation checked against root 23 of 128
+[   196.3s]   separation checked against root 24 of 128
+[   196.3s]   separation checked against root 25 of 128
+[   196.3s]   separation checked against root 26 of 128
+[   196.3s]   separation checked against root 27 of 128
+[   196.3s]   separation checked against root 28 of 128
+[   196.3s]   separation checked against root 29 of 128
+[   196.3s]   separation checked against root 30 of 128
+[   196.3s]   separation checked against root 31 of 128
+[   196.3s]   separation checked against root 32 of 128
+[   196.3s]   separation checked against root 33 of 128
+[   196.3s]   separation checked against root 34 of 128
+[   196.3s]   separation checked against root 35 of 128
+[   196.3s]   separation checked against root 36 of 128
+[   196.3s]   separation checked against root 37 of 128
+[   196.3s]   separation checked against root 38 of 128
+[   196.3s]   separation checked against root 39 of 128
+[   196.3s]   separation checked against root 40 of 128
+[   196.3s]   separation checked against root 41 of 128
+[   196.3s]   separation checked against root 42 of 128
+[   196.3s]   separation checked against root 43 of 128
+[   196.3s]   separation checked against root 44 of 128
+[   196.3s]   separation checked against root 45 of 128
+[   196.3s]   separation checked against root 46 of 128
+[   196.3s]   separation checked against root 47 of 128
+[   196.3s]   separation checked against root 48 of 128
+[   196.3s]   separation checked against root 49 of 128
+[   196.3s]   separation checked against root 50 of 128
+[   196.3s]   separation checked against root 51 of 128
+[   196.3s]   separation checked against root 52 of 128
+[   196.3s]   separation checked against root 53 of 128
+[   196.3s]   separation checked against root 54 of 128
+[   196.3s]   separation checked against root 55 of 128
+[   196.3s]   separation checked against root 56 of 128
+[   196.3s]   separation checked against root 57 of 128
+[   196.3s]   separation checked against root 58 of 128
+[   196.3s]   separation checked against root 59 of 128
+[   196.3s]   separation checked against root 60 of 128
+[   196.3s]   separation checked against root 61 of 128
+[   196.3s]   separation checked against root 62 of 128
+[   196.3s]   separation checked against root 63 of 128
+[   196.3s]   separation checked against root 64 of 128
+[   196.3s]   separation checked against root 65 of 128
+[   196.3s]   separation checked against root 66 of 128
+[   196.3s]   separation checked against root 67 of 128
+[   196.3s]   separation checked against root 68 of 128
+[   196.3s]   separation checked against root 69 of 128
+[   196.3s]   separation checked against root 70 of 128
+[   196.3s]   separation checked against root 71 of 128
+[   196.3s]   separation checked against root 72 of 128
+[   196.3s]   separation checked against root 73 of 128
+[   196.3s]   separation checked against root 74 of 128
+[   196.3s]   separation checked against root 75 of 128
+[   196.3s]   separation checked against root 76 of 128
+[   196.3s]   separation checked against root 77 of 128
+[   196.3s]   separation checked against root 78 of 128
+[   196.3s]   separation checked against root 79 of 128
+[   196.3s]   separation checked against root 80 of 128
+[   196.3s]   separation checked against root 81 of 128
+[   196.3s]   separation checked against root 82 of 128
+[   196.3s]   separation checked against root 83 of 128
+[   196.3s]   separation checked against root 84 of 128
+[   196.3s]   separation checked against root 85 of 128
+[   196.3s]   separation checked against root 86 of 128
+[   196.3s]   separation checked against root 87 of 128
+[   196.3s]   separation checked against root 88 of 128
+[   196.3s]   separation checked against root 89 of 128
+[   196.3s]   separation checked against root 90 of 128
+[   196.3s]   separation checked against root 91 of 128
+[   196.3s]   separation checked against root 92 of 128
+[   196.3s]   separation checked against root 93 of 128
+[   196.3s]   separation checked against root 94 of 128
+[   196.3s]   separation checked against root 95 of 128
+[   196.3s]   separation checked against root 96 of 128
+[   196.3s]   separation checked against root 97 of 128
+[   196.3s]   separation checked against root 98 of 128
+[   196.3s]   separation checked against root 99 of 128
+[   196.3s]   separation checked against root 100 of 128
+[   196.3s]   separation checked against root 101 of 128
+[   197.3s]   separation checked against root 102 of 128
+[   197.3s]   separation checked against root 103 of 128
+[   197.3s]   separation checked against root 104 of 128
+[   197.3s]   separation checked against root 105 of 128
+[   197.3s]   separation checked against root 106 of 128
+[   197.3s]   separation checked against root 107 of 128
+[   197.3s]   separation checked against root 108 of 128
+[   197.3s]   separation checked against root 109 of 128
+[   197.3s]   separation checked against root 110 of 128
+[   197.3s]   separation checked against root 111 of 128
+[   197.3s]   separation checked against root 112 of 128
+[   197.3s]   separation checked against root 113 of 128
+[   197.3s]   separation checked against root 114 of 128
+[   197.3s]   separation checked against root 115 of 128
+[   197.3s]   separation checked against root 116 of 128
+[   197.3s]   separation checked against root 117 of 128
+[   197.3s]   separation checked against root 118 of 128
+[   197.3s]   separation checked against root 119 of 128
+[   197.3s]   separation checked against root 120 of 128
+[   197.3s]   separation checked against root 121 of 128
+[   197.3s]   separation checked against root 122 of 128
+[   197.3s]   separation checked against root 123 of 128
+[   197.3s]   separation checked against root 124 of 128
+[   197.3s]   separation checked against root 125 of 128
+[   197.3s]   separation checked against root 126 of 128
+[   197.3s]   separation checked against root 127 of 128
+[   197.3s]   separation checked against root 128 of 128
+[   197.3s] stage: separation ok (candidate and its conjugate below all others)
+[   197.3s] d_1(8) interval = 0.008281518023677860219646096302557465213287186801981017430954353484280689562046?
+[   197.3s] a_rho(8) in RealBallField(128) = [1.1526481738273577077885463555473685476 +/- 4.16e-38]
+[   197.3s] === run complete

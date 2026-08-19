@@ -878,17 +878,34 @@ u
 \ \xrightarrow[M\to\infty]{}\ \frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
       ),
       paragraph([
-        "収束する実数列の定数倍・定数加算はそれぞれ収束するので",
+        "を得る。よって、一続きに",
       ]),
       displayMath(
-        String.raw`\lim_{M\to\infty}\frac{1}{M}\log\Lambda^{(\delta)}_M
-= \frac{1}{2}\log\left(2\sinh 2K_2\right)
-+ \frac{1}{2}\cdot\frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
+        String.raw`\begin{aligned}
+\lim_{M\to\infty}\frac{1}{M}\log\Lambda^{(\delta)}_M
+&=\lim_{M\to\infty}\left(
+  \frac{1}{2}\log\left(2\sinh 2K_2\right)
+  +\frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
+\right)
+&&\left(\because\ \text{上で得た }\frac{1}{M}\log\Lambda^{(\delta)}_M\text{ の表示を代入}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\lim_{M\to\infty}\left(\frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)\right)
+&&\left(\because\ \text{収束する実数列に定数を加えた列は収束し、極限に定数が加わる}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\frac{1}{2}\cdot\lim_{M\to\infty}\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
+&&\left(\because\ \text{収束する実数列の定数倍は収束し、極限が定数倍になる}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\frac{1}{2}\cdot\frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
+&&\left(\because\ \text{上の収束（等間隔点の平均は積分に収束する）}\right)\\
+&=\frac{1}{2}\log\left(2\sinh 2K_2\right)
++\frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
+&&\left(\because\ \mathbb{R}\text{ の四則 }\frac12\cdot\frac1{2\pi}=\frac1{4\pi}\right)
+\end{aligned}`,
       ),
       paragraph([
-        "であり、",
-        math(String.raw`\frac12\cdot\frac1{2\pi} = \frac1{4\pi}`),
-        " より主張の式を得る。",
+        "が成り立ち、主張の式を得る（第 2 行・第 3 行の極限法則が適用できるのは、第 4 行で引いた ",
+        ref("riemann_sum_to_integral"),
+        " の収束が第 2 項の収束を与えるからである）。",
         ref("riemann_sum_to_integral"),
         " の極限が ",
         math(String.raw`\delta`),
