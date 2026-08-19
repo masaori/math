@@ -1334,11 +1334,27 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         ref("def_half_integer_modes"),
         " の ",
         math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
-        " の定義による。）同様に Step 1 の第 2 式 ",
+        " の定義による。）Step 1 の第 2 式 ",
         math(String.raw`[H_2, Y_j] = 2Z_j`),
-        " から ",
-        math(String.raw`\left[H_2, \check{Y}_\mu\right] = 2\check{Z}_\mu`),
-        "。",
+        " からも、一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_2,\ \check{Y}_\mu\right]
+&= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
+   \quad (\because \text{def\_half\_integer\_modes}) \\
+&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Y_j\right]
+   \quad (\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2Z_j
+   \quad (\because \text{Step 1 の第 2 式}) \\
+&= 2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j
+   \quad (\because \text{スカラー倍を和の外へ出す}) \\
+&= 2\,\check{Z}_\mu
+   \quad (\because \text{def\_half\_integer\_modes})
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
       ]),
       paragraph([
         "Step 3（(A)）。Step 1 の第 3 式と線型性より",
